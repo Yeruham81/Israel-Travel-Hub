@@ -37,14 +37,14 @@ export function OnThisPage({ sections, sticky = true }: { sections: readonly (re
   );
 }
 
-export function GuideHeader({ crumbs, eyebrow, title, intro, image }: { crumbs: UiCrumb[]; eyebrow: string; title: string; intro: ReactNode; image?: { src: string; alt: string } }) {
+export function GuideHeader({ crumbs, eyebrow, title, intro, image, checkedAt = INFO_CHECK_DATE }: { crumbs: UiCrumb[]; eyebrow: string; title: string; intro: ReactNode; image?: { src: string; alt: string }; checkedAt?: string }) {
   return (
     <header className="mx-auto max-w-5xl px-4 pt-6">
       <Breadcrumbs items={crumbs} />
       <p className="eyebrow mt-6">{eyebrow}</p>
       <h1 className="mt-3 max-w-4xl text-4xl leading-[1.1] md:text-5xl">{title}</h1>
       <div className="mt-4 max-w-3xl text-lg leading-relaxed text-muted-foreground">{intro}</div>
-      <p className="mt-3 text-sm text-muted-foreground">Source facts checked {formatCheckDate(INFO_CHECK_DATE)} (page facts only, not live availability) · <Link to="/about/" className="underline">How we compare</Link></p>
+      <p className="mt-3 text-sm text-muted-foreground">Source facts checked {formatCheckDate(checkedAt)} (page facts only, not live availability) · <Link to="/about/" className="underline">How we compare</Link></p>
       {image && <img src={image.src} alt={image.alt} width={1600} height={900} className="mt-8 aspect-[21/9] w-full rounded-2xl object-cover" />}
     </header>
   );

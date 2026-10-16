@@ -1,6 +1,7 @@
 import { useState } from "react";
 import type { CityStayGuide, StayPreference } from "@/data/content";
-import { preferenceLabels } from "@/data/content";
+import { preferenceLabels, neighborhoodGuidesForCity } from "@/data/content";
+import { CityStayHub } from "@/components/CityStayHub";
 import { linksForPage } from "@/data/registry";
 import { type UiCrumb, Checklist, EndCta, FaqList, GuideHeader, OnThisPage, ProviderSection, RelatedLinks, Section, SourceList } from "@/components/Guide";
 
@@ -14,6 +15,11 @@ const sections = [
 ] as const;
 
 export function CityStayPage({ g }: { g: CityStayGuide }) {
+  const areas = neighborhoodGuidesForCity(g.id);
+  return areas.length ? <CityStayHub g={g} areas={areas} /> : <SimpleCityStayPage g={g} />;
+}
+
+function SimpleCityStayPage({ g }: { g: CityStayGuide }) {
   const [pref, setPref] = useState<StayPreference | null>(null);
   const prefs = Array.from(new Set(g.areas.flatMap((a) => a.suits)));
   const links = linksForPage(`stay-${g.id}`);

@@ -91,9 +91,30 @@ export interface RouteRecord {
 }
 
 export const INFO_CHECK_DATE: ISODate = "2026-10-16";
+export const JERUSALEM_STAY_REVIEW_DATE: ISODate = "2026-10-17";
 export const OWNER_BASE = "https://www.israel-taxi.com";
 
+const jerusalemHotelSources: SourceReference[] = [
+  ["herbert-samuel", "Herbert Samuel Jerusalem", "https://herbertsamuel.com/en/herbert-samuel-jerusalem-hotel/"],
+  ["arthur", "Arthur Hotel — Atlas Hotels", "https://www.atlas.co.il/en/our-hotels/hotels-in-jerusalem/arthur-hotel-jerusalem/"],
+  ["mamilla", "Mamilla Hotel", "https://www.mamillahotel.com/the-hotel/"],
+  ["king-david", "King David Jerusalem — Dan Hotels", "https://www.danhotels.com/jerusalemhotels/kingdavidjerusalemhotel"],
+  ["new-imperial", "New Imperial Hotel", "https://www.newimperial.com/"],
+  ["sephardic-house", "The Sephardic House", "https://www.thesephardichouse.com/"],
+  ["bezalel", "Bezalel Hotel — Atlas Hotels", "https://www.atlas.co.il/en/our-hotels/hotels-in-jerusalem/bezalel-hotel-jerusalem/"],
+  ["market-courtyard", "The Market Courtyard", "https://marketcourtyard.com/about/"],
+  ["american-colony", "The American Colony Hotel", "https://www.americancolony.com/"],
+  ["jerusalem-hotel", "Jerusalem Hotel", "https://jrshotel.com/about-us/"],
+  ["orient", "Orient Jerusalem — Isrotel", "https://www.isrotel.com/isrotel-hotels/jerusalem/orient/"],
+  ["rafael-residence", "Rafael Residence", "https://rafael-residence.com/about/"],
+].map(([id, name, url]): SourceReference => ({
+  id: `hotel-${id}-official`, title: `${name} — property information`, publisher: name!, url: url!,
+  checkedAt: JERUSALEM_STAY_REVIEW_DATE,
+  note: "Property identity, location and general accommodation style cross-checked with the hotel's own information. Room availability, rates, specific amenities and booking conditions must be reconfirmed for your dates.",
+}));
+
 export const sources: SourceReference[] = [
+  ...jerusalemHotelSources,
   {
     id: "iaa-directions",
     title: "Ben Gurion Airport – directions and transport",
@@ -155,8 +176,8 @@ export const sources: SourceReference[] = [
     title: "Where to stay in Jerusalem (existing guide)",
     publisher: "Israel-Taxi.com",
     url: `${OWNER_BASE}/travel-blog/where-to-stay-in-jerusalem/`,
-    checkedAt: INFO_CHECK_DATE,
-    note: "Background for area guidance. No property, price or availability claims are taken from it.",
+    checkedAt: JERUSALEM_STAY_REVIEW_DATE,
+    note: "Publisher's original six-area Jerusalem guide, used for neighborhood descriptions, practical advice, selected accommodation and existing Expedia affiliate links. Property identity and style also checked against hotel sources; live rates and availability are not displayed.",
   },
   {
     id: "owner-stay-telaviv",
@@ -280,11 +301,121 @@ export const partners: BookingPartner[] = [
   { id: "gettransfer", name: "GetTransfer.com", capability: "editorial_only", homepage: "https://gettransfer.com/en" },
   { id: "gett", name: "Gett", capability: "editorial_only", homepage: "https://www.gett.com/il/airport-en/" },
   { id: "booking", name: "Booking.com", capability: "editorial_only", homepage: "https://www.booking.com/" },
+  { id: "expedia", name: "Expedia", capability: "affiliate_link", homepage: "https://www.expedia.com/" },
   { id: "discovercars", name: "DiscoverCars", capability: "editorial_only", homepage: "https://www.discovercars.com/" },
 ];
 
-/** Affiliate URLs live separately; empty until a partner agreement provides tracking links. */
-export const affiliateConfig: Record<string, { trackingUrl: string } | undefined> = {};
+/** Existing publisher-owned tracking links copied exactly from the supplied Jerusalem guide. */
+export const affiliateConfig: Record<string, { trackingUrl: string } | undefined> = {
+  "hotels-jerusalem-expedia": { trackingUrl: "https://expedia.tpm.li/yNeL4j4v" },
+  "area-downtown-expedia": { trackingUrl: "https://expedia.tpm.li/2i5lfUjl" },
+  "area-mamilla-expedia": { trackingUrl: "https://expedia.tpm.li/UWWQ1gK3" },
+  "area-old-city-expedia": { trackingUrl: "https://expedia.tpm.li/mQved68D" },
+  "area-mahane-yehuda-expedia": { trackingUrl: "https://expedia.tpm.li/7P1ejkhT" },
+  "area-east-jerusalem-expedia": { trackingUrl: "https://expedia.tpm.li/7eDNY552" },
+  "area-german-colony-expedia": { trackingUrl: "https://expedia.tpm.li/3mkMeHGv" },
+  "hotel-herbert-samuel-expedia": { trackingUrl: "https://expedia.tpm.li/BYoR4PfJ" },
+  "hotel-arthur-expedia": { trackingUrl: "https://expedia.tpm.li/j0N17qRs" },
+  "hotel-mamilla-expedia": { trackingUrl: "https://expedia.tpm.li/3aaGDgYM" },
+  "hotel-king-david-expedia": { trackingUrl: "https://expedia.tpm.li/Gzpd0s0j" },
+  "hotel-new-imperial-expedia": { trackingUrl: "https://expedia.tpm.li/ks5sDJQZ" },
+  "hotel-sephardic-house-expedia": { trackingUrl: "https://expedia.tpm.li/JQXzomLv" },
+  "hotel-bezalel-expedia": { trackingUrl: "https://expedia.tpm.li/0SvFTesH" },
+  "hotel-market-courtyard-expedia": { trackingUrl: "https://expedia.tpm.li/dD75XniW" },
+  "hotel-american-colony-expedia": { trackingUrl: "https://expedia.tpm.li/I6gSEyzR" },
+  "hotel-jerusalem-hotel-expedia": { trackingUrl: "https://expedia.tpm.li/6um6SpEN" },
+  "hotel-orient-expedia": { trackingUrl: "https://expedia.tpm.li/LvbJzhBJ" },
+  "hotel-rafael-residence-expedia": { trackingUrl: "https://expedia.tpm.li/yNS1BZnA" },
+};
+
+export interface HotelRecommendation {
+  id: string;
+  cityId: "jerusalem";
+  areaId: string;
+  name: string;
+  style: string;
+  summary: string;
+  bestFor: string;
+  watch: string;
+  sourceId: string;
+}
+
+export const hotelRecommendations: HotelRecommendation[] = [
+  {
+    id: "herbert-samuel", cityId: "jerusalem", areaId: "downtown", name: "Herbert Samuel Jerusalem", style: "Upscale city hotel",
+    summary: "An upscale base around Shamai Street and Zion Square, close to Ben Yehuda and Jaffa Road. Consider it if you want a substantial hotel in the center rather than moving to the Mamilla luxury district.",
+    bestFor: "Couples and first-time visitors who want an upscale Downtown base.",
+    watch: "Confirm the entrance for your taxi, room orientation and which leisure facilities are included in your selected rate.", sourceId: "hotel-herbert-samuel-official",
+  },
+  {
+    id: "arthur", cityId: "jerusalem", areaId: "downtown", name: "Arthur Hotel", style: "Boutique hotel",
+    summary: "An Atlas boutique hotel on Dorot Rishonim Street beside the Ben Yehuda pedestrian area. Its period-inspired design and central setting suit travelers who prefer an intimate property and a neighborhood to explore on foot.",
+    bestFor: "Couples and independent visitors who value character and a central walking location.",
+    watch: "The pedestrian setting can mean a walk from the car. Ask about noise, parking arrangements and the specific room category.", sourceId: "hotel-arthur-official",
+  },
+  {
+    id: "mamilla", cityId: "jerusalem", areaId: "mamilla", name: "Mamilla Hotel", style: "Contemporary luxury",
+    summary: "A contemporary luxury hotel beside Mamilla Avenue and the approach to Jaffa Gate. It suits visitors who want to combine Old City sightseeing with a modern hotel setting rather than sleep inside the historic walls.",
+    bestFor: "Couples and short luxury stays focused on Jaffa Gate and the Old City.",
+    watch: "Book a view category explicitly if it matters. Confirm breakfast, wellness access and any extra charges for the room offer.", sourceId: "hotel-mamilla-official",
+  },
+  {
+    id: "king-david", cityId: "jerusalem", areaId: "mamilla", name: "King David Jerusalem", style: "Historic landmark luxury",
+    summary: "Dan Hotels' landmark on King David Street combines a historic grand-hotel atmosphere with an outlook toward the Old City. Consider it when the hotel itself is part of your Jerusalem experience, rather than simply a place to sleep.",
+    bestFor: "Travelers who enjoy historic hotels, traditional public spaces and a landmark setting.",
+    watch: "Room outlooks vary. Check the walk from the exact entrance and any seasonal restrictions on the facilities you plan to use.", sourceId: "hotel-king-david-official",
+  },
+  {
+    id: "new-imperial", cityId: "jerusalem", areaId: "old-city", name: "New Imperial Hotel", style: "Historic hotel by Jaffa Gate",
+    summary: "A historic property immediately inside Jaffa Gate, convenient for the Christian and Armenian quarters. It offers an Old City base while keeping the route out toward Mamilla more straightforward than a stay deeper in the market lanes.",
+    bestFor: "First-time Old City visitors and pilgrims prioritizing Jaffa Gate access.",
+    watch: "Ask about stairs, the floor of your room and help with luggage. A location near the gate does not guarantee step-free access.", sourceId: "hotel-new-imperial-official",
+  },
+  {
+    id: "sephardic-house", cityId: "jerusalem", areaId: "old-city", name: "The Sephardic House", style: "Jewish Quarter heritage stay",
+    summary: "A heritage hotel on Batei Mahase Street in the Jewish Quarter, close to the Hurva Synagogue and routes toward the Western Wall. Different wings and accommodation categories make the specific room choice important.",
+    bestFor: "Jewish heritage trips, pilgrimages and visitors spending substantial time in the Jewish Quarter.",
+    watch: "Confirm your wing, room category, arrival gate and the whole walking route with luggage. The surrounding streets may include steps.", sourceId: "hotel-sephardic-house-official",
+  },
+  {
+    id: "bezalel", cityId: "jerusalem", areaId: "mahane-yehuda", name: "Bezalel Hotel", style: "Design-focused boutique hotel",
+    summary: "An Atlas boutique hotel on Mesilat Yesharim Street in Nachlaot, with interiors focused on Israeli art and design. Its position lets you explore both the market and Downtown without choosing a room directly above the market's busiest lanes.",
+    bestFor: "Couples and solo travelers who want boutique design and a central neighborhood base.",
+    watch: "Check the walking route to the market, room orientation and parking arrangements; being nearby is different from staying inside the market.", sourceId: "hotel-bezalel-official",
+  },
+  {
+    id: "market-courtyard", cityId: "jerusalem", areaId: "mahane-yehuda", name: "The Market Courtyard", style: "Apartment-style accommodation",
+    summary: "Furnished apartments and suites around a Jerusalem-stone courtyard on HaCarmel Street, beside the market and Nachlaot. It is an alternative to a conventional hotel for travelers who want an independent base and space to settle in.",
+    bestFor: "Longer stays and travelers who prefer an apartment-style setting near the market.",
+    watch: "Confirm the exact unit, cooking equipment, stairs, access instructions and any cleaning charge. Market-facing units may have a different noise level.", sourceId: "hotel-market-courtyard-official",
+  },
+  {
+    id: "american-colony", cityId: "jerusalem", areaId: "east-jerusalem", name: "The American Colony Hotel", style: "Historic luxury hotel",
+    summary: "A historic hotel north of the Old City, known for its distinctive buildings, courtyards and Ottoman-inspired rooms. It offers a more enclosed hotel retreat than the busy commercial streets closer to Damascus Gate.",
+    bestFor: "Couples and luxury travelers who enjoy heritage buildings and a distinctive hotel atmosphere.",
+    watch: "Rooms differ between buildings and categories. Check the walk to your intended gate and any seasonal limitations on outdoor facilities.", sourceId: "hotel-american-colony-official",
+  },
+  {
+    id: "jerusalem-hotel", cityId: "jerusalem", areaId: "east-jerusalem", name: "Jerusalem Hotel", style: "Family-run Palestinian heritage hotel",
+    summary: "A family-run heritage property on Antar Ben Shaddad Street near Nablus Road and Damascus Gate. Arabesque interiors, antiques and a restaurant rooted in local Palestinian heritage make it a distinctive small-hotel option.",
+    bestFor: "Independent visitors and pilgrims who value local character and northern Old City access.",
+    watch: "Compare individual room layouts and accessibility, and ask about restaurant activity if you are sensitive to evening noise.", sourceId: "hotel-jerusalem-hotel-official",
+  },
+  {
+    id: "orient", cityId: "jerusalem", areaId: "german-colony", name: "Orient Jerusalem by Isrotel", style: "Full-service luxury hotel",
+    summary: "Isrotel's luxury hotel at the northern end of the German Colony combines a contemporary building with restored heritage buildings. Its location near Emek Refaim and the First Station area suits a hotel-focused stay with neighborhood walks.",
+    bestFor: "Couples and families looking for substantial hotel facilities in the German Colony.",
+    watch: "Confirm the room's building, pool opening dates and children's access. Ask for a current update on surrounding street works and the vehicle entrance.", sourceId: "hotel-orient-official",
+  },
+  {
+    id: "rafael-residence", cityId: "jerusalem", areaId: "german-colony", name: "Rafael Residence", style: "Suite-style aparthotel in Baka",
+    summary: "Suites on Bethlehem Road in Baka with separate living space and kitchen facilities described by the property. It is a practical alternative for visitors who want a residential base and more independence over a longer stay.",
+    bestFor: "Families and longer visits where living space and preparing some meals matter.",
+    watch: "Confirm the exact suite layout, kitchen equipment, parking and late check-in arrangements. Plan buses or taxis for some trips to central attractions.", sourceId: "hotel-rafael-residence-official",
+  },
+];
+
+export const hotelsForArea = (areaId: string) => hotelRecommendations.filter((hotel) => hotel.areaId === areaId);
 
 export const tlvToJerusalem: RouteRecord = {
   id: "tlv-jerusalem",
@@ -458,6 +589,39 @@ export interface ProviderLink {
 const moshe = { providerName: "Moshe Barak", relationship: "publisher_operator" as const, operatorId: "moshe-barak" };
 
 export const providerLinks: ProviderLink[] = [
+  ...hotelRecommendations.map((hotel): ProviderLink => {
+    const id = `hotel-${hotel.id}-expedia`;
+    const trackingUrl = affiliateConfig[id]?.trackingUrl;
+    const officialUrl = jerusalemHotelSources.find((source) => source.id === hotel.sourceId)!.url;
+    return {
+      id, pageIds: [`stay-area-${hotel.areaId}`], providerName: trackingUrl ? "Expedia" : hotel.name,
+      relationship: trackingUrl ? "booking_platform" : "official", ...(trackingUrl ? { partnerId: "expedia" } : {}), mode: "provider_redirect",
+      title: hotel.name, summary: hotel.summary, ctaLabel: trackingUrl ? "Check rooms on Expedia" : "Visit the hotel's website",
+      url: trackingUrl || officialUrl, isAffiliate: Boolean(trackingUrl), sourceId: hotel.sourceId,
+      confirm: ["Property name and location", "Dates and room category", "Total including taxes and fees", "Cancellation deadline"],
+    };
+  }),
+  ...([
+    ["jerusalem", "Jerusalem"],
+    ["downtown", "Downtown Jerusalem"],
+    ["mamilla", "Mamilla & King David Street"],
+    ["old-city", "Jerusalem's Old City"],
+    ["mahane-yehuda", "Mahane Yehuda & Nachlaot"],
+    ["east-jerusalem", "East Jerusalem"],
+    ["german-colony", "German Colony & Baka"],
+  ] as const).map(([areaId, name]): ProviderLink => {
+    const cityWide = areaId === "jerusalem";
+    const id = cityWide ? "hotels-jerusalem-expedia" : `area-${areaId}-expedia`;
+    const trackingUrl = affiliateConfig[id]?.trackingUrl;
+    return {
+      id, pageIds: [cityWide ? "stay-jerusalem" : `stay-area-${areaId}-browse`],
+      providerName: "Expedia", relationship: "booking_platform", partnerId: "expedia", mode: "provider_redirect",
+      title: `Browse more places to stay in ${name}`, summary: "Compare other accommodation options for your dates. Check the map on Expedia to confirm the property is in your preferred area.",
+      ctaLabel: "Browse hotels on Expedia", url: trackingUrl || "https://www.expedia.com/", isAffiliate: Boolean(trackingUrl), sourceId: "owner-stay-jerusalem",
+      reentryNote: "Enter your dates and guests on Expedia, then confirm the property and room before booking.",
+      confirm: ["Exact neighborhood and map location", "Total including taxes and fees", "Room type", "Cancellation conditions"],
+    };
+  }),
   // Ben Gurion → Tel Aviv (no published Tel Aviv rate is shown)
   {
     id: "tlv-ta-moshe", pageIds: ["tlv-telaviv"], ...moshe, mode: "provider_inquiry",

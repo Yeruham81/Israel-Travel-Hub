@@ -15,7 +15,7 @@ export const Route = createFileRoute("/hotels")({
 });
 
 const blurbs = {
-  jerusalem: "Old City atmosphere, walkable centre and Shabbat-aware planning.",
+  jerusalem: "Compare six areas with photos and maps, then explore detailed neighborhood guides and hotel picks.",
   telaviv: "Beachfront, Jaffa or the café streets of the city centre.",
   tiberias: "Lakefront town, hillside views or countryside stays around the Sea of Galilee.",
 } as const;
@@ -27,7 +27,7 @@ function Hotels() {
         crumbs={[{ name: "Home", to: "/" }, { name: "Accommodation", to: "/hotels/" }]}
         eyebrow="Accommodation"
         title="Where to stay in Israel"
-        intro="Start with the city, then choose an area that fits how you'll get around. Each guide ends with a link to compare current properties for your dates."
+        intro="Start with the city, then choose an area that fits how you'll get around. Jerusalem's neighborhood guides include hotel shortlists; each city guide also links to current accommodation options for your dates."
       />
       <section aria-labelledby="cities-h" className="mt-10">
         <h2 id="cities-h" className="text-3xl">Choose a city</h2>

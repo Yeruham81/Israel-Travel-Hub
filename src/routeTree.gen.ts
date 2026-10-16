@@ -20,6 +20,12 @@ import { Route as ShoreExcursionsRouteImport } from './routes/shore-excursions'
 import { Route as TicketsRouteImport } from './routes/tickets'
 import { Route as AttractionsIndexRouteImport } from './routes/attractions.index'
 import { Route as AttractionsCaesareaRouteImport } from './routes/attractions.caesarea'
+import { Route as JerusalemDowntownHotelsRouteImport } from './routes/jerusalem.downtown-hotels'
+import { Route as JerusalemEastJerusalemHotelsRouteImport } from './routes/jerusalem.east-jerusalem-hotels'
+import { Route as JerusalemGermanColonyBakaHotelsRouteImport } from './routes/jerusalem.german-colony-baka-hotels'
+import { Route as JerusalemMahaneYehudaNachlaotHotelsRouteImport } from './routes/jerusalem.mahane-yehuda-nachlaot-hotels'
+import { Route as JerusalemMamillaKingDavidHotelsRouteImport } from './routes/jerusalem.mamilla-king-david-hotels'
+import { Route as JerusalemOldCityHotelsRouteImport } from './routes/jerusalem.old-city-hotels'
 import { Route as ToursIndexRouteImport } from './routes/tours.index'
 import { Route as ToursBethlehemFromJerusalemRouteImport } from './routes/tours.bethlehem-from-jerusalem'
 import { Route as TransfersIndexRouteImport } from './routes/transfers.index'
@@ -84,6 +90,40 @@ const AttractionsIndexRoute = AttractionsIndexRouteImport.update({
 const AttractionsCaesareaRoute = AttractionsCaesareaRouteImport.update({
   id: '/attractions/caesarea',
   path: '/attractions/caesarea',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const JerusalemDowntownHotelsRoute = JerusalemDowntownHotelsRouteImport.update({
+  id: '/jerusalem/downtown-hotels',
+  path: '/jerusalem/downtown-hotels',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const JerusalemEastJerusalemHotelsRoute =
+  JerusalemEastJerusalemHotelsRouteImport.update({
+    id: '/jerusalem/east-jerusalem-hotels',
+    path: '/jerusalem/east-jerusalem-hotels',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const JerusalemGermanColonyBakaHotelsRoute =
+  JerusalemGermanColonyBakaHotelsRouteImport.update({
+    id: '/jerusalem/german-colony-baka-hotels',
+    path: '/jerusalem/german-colony-baka-hotels',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const JerusalemMahaneYehudaNachlaotHotelsRoute =
+  JerusalemMahaneYehudaNachlaotHotelsRouteImport.update({
+    id: '/jerusalem/mahane-yehuda-nachlaot-hotels',
+    path: '/jerusalem/mahane-yehuda-nachlaot-hotels',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const JerusalemMamillaKingDavidHotelsRoute =
+  JerusalemMamillaKingDavidHotelsRouteImport.update({
+    id: '/jerusalem/mamilla-king-david-hotels',
+    path: '/jerusalem/mamilla-king-david-hotels',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const JerusalemOldCityHotelsRoute = JerusalemOldCityHotelsRouteImport.update({
+  id: '/jerusalem/old-city-hotels',
+  path: '/jerusalem/old-city-hotels',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ToursIndexRoute = ToursIndexRouteImport.update({
@@ -155,6 +195,12 @@ export interface FileRoutesByFullPath {
   '/shore-excursions': typeof ShoreExcursionsRoute
   '/tickets': typeof TicketsRoute
   '/attractions/caesarea': typeof AttractionsCaesareaRoute
+  '/jerusalem/downtown-hotels': typeof JerusalemDowntownHotelsRoute
+  '/jerusalem/east-jerusalem-hotels': typeof JerusalemEastJerusalemHotelsRoute
+  '/jerusalem/german-colony-baka-hotels': typeof JerusalemGermanColonyBakaHotelsRoute
+  '/jerusalem/mahane-yehuda-nachlaot-hotels': typeof JerusalemMahaneYehudaNachlaotHotelsRoute
+  '/jerusalem/mamilla-king-david-hotels': typeof JerusalemMamillaKingDavidHotelsRoute
+  '/jerusalem/old-city-hotels': typeof JerusalemOldCityHotelsRoute
   '/tours/bethlehem-from-jerusalem': typeof ToursBethlehemFromJerusalemRoute
   '/transfers/ben-gurion-airport': typeof TransfersBenGurionAirportRoute
   '/travel-blog/ben-gurion-airport-to-jerusalem': typeof TravelBlogBenGurionAirportToJerusalemRoute
@@ -178,6 +224,12 @@ export interface FileRoutesByTo {
   '/shore-excursions': typeof ShoreExcursionsRoute
   '/tickets': typeof TicketsRoute
   '/attractions/caesarea': typeof AttractionsCaesareaRoute
+  '/jerusalem/downtown-hotels': typeof JerusalemDowntownHotelsRoute
+  '/jerusalem/east-jerusalem-hotels': typeof JerusalemEastJerusalemHotelsRoute
+  '/jerusalem/german-colony-baka-hotels': typeof JerusalemGermanColonyBakaHotelsRoute
+  '/jerusalem/mahane-yehuda-nachlaot-hotels': typeof JerusalemMahaneYehudaNachlaotHotelsRoute
+  '/jerusalem/mamilla-king-david-hotels': typeof JerusalemMamillaKingDavidHotelsRoute
+  '/jerusalem/old-city-hotels': typeof JerusalemOldCityHotelsRoute
   '/tours/bethlehem-from-jerusalem': typeof ToursBethlehemFromJerusalemRoute
   '/transfers/ben-gurion-airport': typeof TransfersBenGurionAirportRoute
   '/travel-blog/ben-gurion-airport-to-jerusalem': typeof TravelBlogBenGurionAirportToJerusalemRoute
@@ -202,6 +254,12 @@ export interface FileRoutesById {
   '/shore-excursions': typeof ShoreExcursionsRoute
   '/tickets': typeof TicketsRoute
   '/attractions/caesarea': typeof AttractionsCaesareaRoute
+  '/jerusalem/downtown-hotels': typeof JerusalemDowntownHotelsRoute
+  '/jerusalem/east-jerusalem-hotels': typeof JerusalemEastJerusalemHotelsRoute
+  '/jerusalem/german-colony-baka-hotels': typeof JerusalemGermanColonyBakaHotelsRoute
+  '/jerusalem/mahane-yehuda-nachlaot-hotels': typeof JerusalemMahaneYehudaNachlaotHotelsRoute
+  '/jerusalem/mamilla-king-david-hotels': typeof JerusalemMamillaKingDavidHotelsRoute
+  '/jerusalem/old-city-hotels': typeof JerusalemOldCityHotelsRoute
   '/tours/bethlehem-from-jerusalem': typeof ToursBethlehemFromJerusalemRoute
   '/transfers/ben-gurion-airport': typeof TransfersBenGurionAirportRoute
   '/travel-blog/ben-gurion-airport-to-jerusalem': typeof TravelBlogBenGurionAirportToJerusalemRoute
@@ -227,6 +285,12 @@ export interface FileRouteTypes {
     | '/shore-excursions'
     | '/tickets'
     | '/attractions/caesarea'
+    | '/jerusalem/downtown-hotels'
+    | '/jerusalem/east-jerusalem-hotels'
+    | '/jerusalem/german-colony-baka-hotels'
+    | '/jerusalem/mahane-yehuda-nachlaot-hotels'
+    | '/jerusalem/mamilla-king-david-hotels'
+    | '/jerusalem/old-city-hotels'
     | '/tours/bethlehem-from-jerusalem'
     | '/transfers/ben-gurion-airport'
     | '/travel-blog/ben-gurion-airport-to-jerusalem'
@@ -250,6 +314,12 @@ export interface FileRouteTypes {
     | '/shore-excursions'
     | '/tickets'
     | '/attractions/caesarea'
+    | '/jerusalem/downtown-hotels'
+    | '/jerusalem/east-jerusalem-hotels'
+    | '/jerusalem/german-colony-baka-hotels'
+    | '/jerusalem/mahane-yehuda-nachlaot-hotels'
+    | '/jerusalem/mamilla-king-david-hotels'
+    | '/jerusalem/old-city-hotels'
     | '/tours/bethlehem-from-jerusalem'
     | '/transfers/ben-gurion-airport'
     | '/travel-blog/ben-gurion-airport-to-jerusalem'
@@ -273,6 +343,12 @@ export interface FileRouteTypes {
     | '/shore-excursions'
     | '/tickets'
     | '/attractions/caesarea'
+    | '/jerusalem/downtown-hotels'
+    | '/jerusalem/east-jerusalem-hotels'
+    | '/jerusalem/german-colony-baka-hotels'
+    | '/jerusalem/mahane-yehuda-nachlaot-hotels'
+    | '/jerusalem/mamilla-king-david-hotels'
+    | '/jerusalem/old-city-hotels'
     | '/tours/bethlehem-from-jerusalem'
     | '/transfers/ben-gurion-airport'
     | '/travel-blog/ben-gurion-airport-to-jerusalem'
@@ -297,6 +373,12 @@ export interface RootRouteChildren {
   ShoreExcursionsRoute: typeof ShoreExcursionsRoute
   TicketsRoute: typeof TicketsRoute
   AttractionsCaesareaRoute: typeof AttractionsCaesareaRoute
+  JerusalemDowntownHotelsRoute: typeof JerusalemDowntownHotelsRoute
+  JerusalemEastJerusalemHotelsRoute: typeof JerusalemEastJerusalemHotelsRoute
+  JerusalemGermanColonyBakaHotelsRoute: typeof JerusalemGermanColonyBakaHotelsRoute
+  JerusalemMahaneYehudaNachlaotHotelsRoute: typeof JerusalemMahaneYehudaNachlaotHotelsRoute
+  JerusalemMamillaKingDavidHotelsRoute: typeof JerusalemMamillaKingDavidHotelsRoute
+  JerusalemOldCityHotelsRoute: typeof JerusalemOldCityHotelsRoute
   ToursBethlehemFromJerusalemRoute: typeof ToursBethlehemFromJerusalemRoute
   TransfersBenGurionAirportRoute: typeof TransfersBenGurionAirportRoute
   TravelBlogBenGurionAirportToJerusalemRoute: typeof TravelBlogBenGurionAirportToJerusalemRoute
@@ -389,6 +471,48 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AttractionsCaesareaRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/jerusalem/downtown-hotels': {
+      id: '/jerusalem/downtown-hotels'
+      path: '/jerusalem/downtown-hotels'
+      fullPath: '/jerusalem/downtown-hotels'
+      preLoaderRoute: typeof JerusalemDowntownHotelsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/jerusalem/east-jerusalem-hotels': {
+      id: '/jerusalem/east-jerusalem-hotels'
+      path: '/jerusalem/east-jerusalem-hotels'
+      fullPath: '/jerusalem/east-jerusalem-hotels'
+      preLoaderRoute: typeof JerusalemEastJerusalemHotelsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/jerusalem/german-colony-baka-hotels': {
+      id: '/jerusalem/german-colony-baka-hotels'
+      path: '/jerusalem/german-colony-baka-hotels'
+      fullPath: '/jerusalem/german-colony-baka-hotels'
+      preLoaderRoute: typeof JerusalemGermanColonyBakaHotelsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/jerusalem/mahane-yehuda-nachlaot-hotels': {
+      id: '/jerusalem/mahane-yehuda-nachlaot-hotels'
+      path: '/jerusalem/mahane-yehuda-nachlaot-hotels'
+      fullPath: '/jerusalem/mahane-yehuda-nachlaot-hotels'
+      preLoaderRoute: typeof JerusalemMahaneYehudaNachlaotHotelsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/jerusalem/mamilla-king-david-hotels': {
+      id: '/jerusalem/mamilla-king-david-hotels'
+      path: '/jerusalem/mamilla-king-david-hotels'
+      fullPath: '/jerusalem/mamilla-king-david-hotels'
+      preLoaderRoute: typeof JerusalemMamillaKingDavidHotelsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/jerusalem/old-city-hotels': {
+      id: '/jerusalem/old-city-hotels'
+      path: '/jerusalem/old-city-hotels'
+      fullPath: '/jerusalem/old-city-hotels'
+      preLoaderRoute: typeof JerusalemOldCityHotelsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/tours/': {
       id: '/tours/'
       path: '/tours'
@@ -473,6 +597,13 @@ const rootRouteChildren: RootRouteChildren = {
   ShoreExcursionsRoute: ShoreExcursionsRoute,
   TicketsRoute: TicketsRoute,
   AttractionsCaesareaRoute: AttractionsCaesareaRoute,
+  JerusalemDowntownHotelsRoute: JerusalemDowntownHotelsRoute,
+  JerusalemEastJerusalemHotelsRoute: JerusalemEastJerusalemHotelsRoute,
+  JerusalemGermanColonyBakaHotelsRoute: JerusalemGermanColonyBakaHotelsRoute,
+  JerusalemMahaneYehudaNachlaotHotelsRoute:
+    JerusalemMahaneYehudaNachlaotHotelsRoute,
+  JerusalemMamillaKingDavidHotelsRoute: JerusalemMamillaKingDavidHotelsRoute,
+  JerusalemOldCityHotelsRoute: JerusalemOldCityHotelsRoute,
   ToursBethlehemFromJerusalemRoute: ToursBethlehemFromJerusalemRoute,
   TransfersBenGurionAirportRoute: TransfersBenGurionAirportRoute,
   TravelBlogBenGurionAirportToJerusalemRoute:

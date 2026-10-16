@@ -3,7 +3,7 @@ import { createRouter, rootRouteId } from "@tanstack/react-router";
 import { describe, expect, it } from "vitest";
 import { routeTree } from "@/routeTree.gen";
 import { allNavGroups } from "@/data/nav";
-import { providerLinks, offers, sources, linksForPage } from "@/data/registry";
+import { providerLinks, offers, sources, linksForPage, affiliateConfig, partners } from "@/data/registry";
 import { isDisplayableLiveQuote, type LiveQuote } from "@/lib/booking";
 
 const router = createRouter({ routeTree, context: { queryClient: new QueryClient() }, trailingSlash: "always" });
@@ -21,12 +21,16 @@ describe("portal navigation", () => {
 });
 
 describe("booking honesty", () => {
-  it("no provider link is affiliate or live-quote, all https", () => {
+  it("only configured affiliate partners can have sponsored links; no referral claims live prices", () => {
     for (const l of providerLinks) {
-      expect(l.isAffiliate).toBe(false);
       expect(l.mode).not.toBe("live_quote");
       expect(l.url).toMatch(/^https:\/\//);
-      expect(l.url).not.toMatch(/[?&](aid|affiliate|ref|label)=/i);
+      if (l.isAffiliate) {
+        expect(affiliateConfig[l.id]?.trackingUrl, l.id).toBe(l.url);
+        expect(partners.find((partner) => partner.id === l.partnerId)?.capability, l.id).toBe("affiliate_link");
+      } else {
+        expect(l.url, l.id).not.toMatch(/[?&](aid|affiliate|ref|label)=|\.tpm\.li\//i);
+      }
     }
     expect(offers.every((o) => o.mode !== "live_quote")).toBe(true);
   });
