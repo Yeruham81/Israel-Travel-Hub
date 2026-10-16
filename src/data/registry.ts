@@ -150,6 +150,86 @@ export const sources: SourceReference[] = [
     checkedAt: null,
     note: "Local editorial context only; not used for regulated fares or availability.",
   },
+  {
+    id: "owner-stay-jerusalem",
+    title: "Where to stay in Jerusalem (existing guide)",
+    publisher: "Israel-Taxi.com",
+    url: `${OWNER_BASE}/travel-blog/where-to-stay-in-jerusalem/`,
+    checkedAt: INFO_CHECK_DATE,
+    note: "Background for area guidance. No property, price or availability claims are taken from it.",
+  },
+  {
+    id: "owner-stay-telaviv",
+    title: "Where to stay in Tel Aviv (existing guide)",
+    publisher: "Israel-Taxi.com",
+    url: `${OWNER_BASE}/travel-blog/where-to-stay-in-tel-aviv/`,
+    checkedAt: INFO_CHECK_DATE,
+    note: "Background for area guidance. No property, price or availability claims are taken from it.",
+  },
+  {
+    id: "owner-hotels-tiberias",
+    title: "Best hotels in Tiberias (existing guide)",
+    publisher: "Israel-Taxi.com",
+    url: `${OWNER_BASE}/travel-blog/best-hotels-in-tiberias/`,
+    checkedAt: INFO_CHECK_DATE,
+    note: "Background for area guidance. No property, price or availability claims are taken from it.",
+  },
+  {
+    id: "owner-bethlehem-guide",
+    title: "Jerusalem to Bethlehem (existing guide)",
+    publisher: "Israel-Taxi.com",
+    url: `${OWNER_BASE}/travel-blog/jerusalem-to-bethlehem/`,
+    checkedAt: null,
+    note: "Supporting background guide on the existing site.",
+  },
+  {
+    id: "beinharim-jlm-bethlehem",
+    title: "Jerusalem and Bethlehem tour",
+    publisher: "Bein Harim Tours",
+    url: "https://www.beinharimtours.com/jerusalem-and-bethlehem-tour/",
+    checkedAt: INFO_CHECK_DATE,
+    note: "Operator tour page. Itinerary combines Jerusalem and Bethlehem; pickup listed from several cities including Jerusalem. Price, dates and availability not checked.",
+  },
+  {
+    id: "owner-private-day-trips",
+    title: "Private day trips",
+    publisher: "Israel-Taxi.com (Moshe Barak)",
+    url: `${OWNER_BASE}/private-day-trips/`,
+    checkedAt: INFO_CHECK_DATE,
+    note: "Publisher's local operator page for private day trips. Itinerary and price by inquiry.",
+  },
+  {
+    id: "owner-private-driver",
+    title: "Private driver in Israel",
+    publisher: "Israel-Taxi.com (Moshe Barak)",
+    url: `${OWNER_BASE}/private-driver-in-israel/`,
+    checkedAt: INFO_CHECK_DATE,
+    note: "Publisher's local operator page for private driver hire.",
+  },
+  {
+    id: "inpa-masada",
+    title: "Masada National Park – reserve a visit",
+    publisher: "Israel Nature and Parks Authority",
+    url: "https://en.parks.org.il/reserve-park/masada-national-park/",
+    checkedAt: INFO_CHECK_DATE,
+    note: "Official visit reservations; describes cable car and hiking ascent options, museum reservation and separately listed west-side night-show options. Extreme weather can change access. Hours and prices not copied.",
+  },
+  {
+    id: "inpa-caesarea",
+    title: "Caesarea National Park – reserve a visit",
+    publisher: "Israel Nature and Parks Authority",
+    url: "https://en.parks.org.il/reserve-park/caesarea-national-park/",
+    checkedAt: INFO_CHECK_DATE,
+    note: "Official coastal archaeological park page with visitor information and visit reservation. Hours, admission and exhibit status not copied.",
+  },
+  {
+    id: "discovercars-israel",
+    title: "Car rental in Israel",
+    publisher: "DiscoverCars",
+    url: "https://www.discovercars.com/israel",
+    checkedAt: INFO_CHECK_DATE,
+    note: "Rental search with pickup, return and date controls on the provider's site. No prices, vehicles or terms were checked.",
+  },
 ];
 
 export const operators: Operator[] = [
@@ -159,12 +239,16 @@ export const operators: Operator[] = [
     kind: "local_operator",
     disclosure: "Operated by the publisher's local transport business.",
   },
+  { id: "bein-harim", name: "Bein Harim Tours", kind: "tour_operator" },
+  { id: "inpa", name: "Israel Nature and Parks Authority", kind: "official_site" },
 ];
 
 export const partners: BookingPartner[] = [
   { id: "intui", name: "Intui.travel", capability: "editorial_only", homepage: "https://en.intui.travel/" },
   { id: "gettransfer", name: "GetTransfer.com", capability: "editorial_only", homepage: "https://gettransfer.com/en" },
   { id: "gett", name: "Gett", capability: "editorial_only", homepage: "https://www.gett.com/il/airport-en/" },
+  { id: "booking", name: "Booking.com", capability: "editorial_only", homepage: "https://www.booking.com/" },
+  { id: "discovercars", name: "DiscoverCars", capability: "editorial_only", homepage: "https://www.discovercars.com/" },
 ];
 
 /** Affiliate URLs live separately; empty until a partner agreement provides tracking links. */
@@ -312,3 +396,115 @@ export const routeFaqs: { q: string; a: string }[] = [
     a: "Yes, Israel Railways serves the airport and Jerusalem. Schedules and fares change, so check the official Israel Railways site for your travel date and consider the extra step from the station to your accommodation.",
   },
 ];
+
+/* ------------------------------------------------------------------ */
+/* Generic provider referrals for hotels, tours, attractions, tickets,  */
+/* car rental and additional transfer routes.                           */
+/* ------------------------------------------------------------------ */
+
+export type Relationship = "publisher_operator" | "independent_operator" | "booking_platform" | "official";
+
+export interface ProviderLink {
+  id: string;
+  pageIds: string[];
+  providerName: string;
+  relationship: Relationship;
+  operatorId?: string;
+  partnerId?: string;
+  mode: Exclude<BookingMode, "live_quote">; // live quotes require a configured API (none yet)
+  title: string;
+  summary: string;
+  ctaLabel: string;
+  url: string;
+  isAffiliate: boolean;
+  /** Shown when the traveler must re-enter details on the provider's site. */
+  reentryNote?: string;
+  confirm: string[];
+  sourceId?: string;
+}
+
+const moshe = { providerName: "Moshe Barak", relationship: "publisher_operator" as const, operatorId: "moshe-barak" };
+
+export const providerLinks: ProviderLink[] = [
+  // Ben Gurion → Tel Aviv (no published Tel Aviv rate is shown)
+  {
+    id: "tlv-ta-moshe", pageIds: ["tlv-telaviv"], ...moshe, mode: "provider_inquiry",
+    title: "Private pre-booked transfer", summary: "Local driver business. Ask for a quote for your Tel Aviv or Jaffa address, party size and arrival time.",
+    ctaLabel: "Request a quote on Israel-Taxi.com", url: `${OWNER_BASE}/airport-transfers/`, isAffiliate: false,
+    reentryNote: "Your details are not passed on. Include flight time, passengers, luggage and address in your request.",
+    confirm: ["Final price and surcharges", "Vehicle size", "Meeting point and waiting time", "Child seats"], sourceId: "moshe-airport-transfers",
+  },
+  {
+    id: "tlv-ta-intui", pageIds: ["tlv-telaviv"], providerName: "Intui.travel", relationship: "booking_platform", partnerId: "intui", mode: "provider_redirect",
+    title: "Transfer booking platform", summary: "Ben Gurion airport transfer page. Choose Tel Aviv as your destination on their site to see current options.",
+    ctaLabel: "Check prices on Intui.travel", url: "https://en.intui.travel/tel-aviv-ben-gurion-international-airport-transfer/", isAffiliate: false,
+    reentryNote: "Enter your date, address and party on Intui.travel.", confirm: ["Final total", "Vehicle class", "Cancellation and delay policy"], sourceId: "intui-airport",
+  },
+  {
+    id: "tlv-ta-gettransfer", pageIds: ["tlv-telaviv"], providerName: "GetTransfer.com", relationship: "booking_platform", partnerId: "gettransfer", mode: "provider_redirect",
+    title: "Transfer marketplace", summary: "Enter Ben Gurion Airport and your Tel Aviv address to see whether drivers offer the trip.",
+    ctaLabel: "Check availability on GetTransfer", url: "https://gettransfer.com/en", isAffiliate: false,
+    reentryNote: "Enter your route and date on GetTransfer.", confirm: ["Final total", "Driver and vehicle details", "Cancellation policy"], sourceId: "gettransfer-home",
+  },
+  {
+    id: "tlv-ta-gett", pageIds: ["tlv-telaviv"], providerName: "Gett", relationship: "official", partnerId: "gett", mode: "official_info",
+    title: "Authorized airport taxi (on arrival)", summary: "Licensed metered taxis at the official ranks around the clock. No pre-booking needed.",
+    ctaLabel: "View official taxi instructions", url: "https://www.gett.com/il/airport-en/", isAffiliate: false,
+    confirm: ["Payment method", "Space for luggage"], sourceId: "gett-airport",
+  },
+  // Private transport (non-airport)
+  {
+    id: "private-driver-moshe", pageIds: ["transfers-hub", "tours-hub"], ...moshe, mode: "provider_inquiry",
+    title: "Private driver by the day", summary: "Hire a local driver for multi-stop days or intercity transfers. Itinerary and price agreed by inquiry.",
+    ctaLabel: "Request a quote on Israel-Taxi.com", url: `${OWNER_BASE}/private-driver-in-israel/`, isAffiliate: false,
+    reentryNote: "Nothing is sent from this page. Contact the operator on their site.", confirm: ["Hours included", "Entrance fees not included unless stated", "Guide vs driver only"], sourceId: "owner-private-driver",
+  },
+  {
+    id: "private-daytrips-moshe", pageIds: ["tours-hub", "bethlehem", "masada"], ...moshe, mode: "provider_inquiry",
+    title: "Private day trips", summary: "Private day trips with a local driver, planned around your own itinerary.",
+    ctaLabel: "Request a quote on Israel-Taxi.com", url: `${OWNER_BASE}/private-day-trips/`, isAffiliate: false,
+    reentryNote: "Nothing is sent from this page. Contact the operator on their site.", confirm: ["Exact itinerary and stops", "Whether a licensed guide is included", "Entrance fees", "Travel requirements for crossings"], sourceId: "owner-private-day-trips",
+  },
+  // Tours
+  {
+    id: "bethlehem-beinharim", pageIds: ["bethlehem", "tours-hub"], providerName: "Bein Harim Tours", relationship: "independent_operator", operatorId: "bein-harim", mode: "provider_redirect",
+    title: "Jerusalem and Bethlehem tour (combined itinerary)", summary: "A combined day covering sites in Jerusalem and Bethlehem — not a Bethlehem-only tour. The operator lists pickup from several cities, including Jerusalem.",
+    ctaLabel: "See dates and prices on Bein Harim", url: "https://www.beinharimtours.com/jerusalem-and-bethlehem-tour/", isAffiliate: false,
+    reentryNote: "Choose your date and pickup on the operator's site.", confirm: ["Departure date and pickup point", "Tour language", "Shared or private format", "Passport and current travel requirements", "Cancellation terms"], sourceId: "beinharim-jlm-bethlehem",
+  },
+  // Attractions & tickets (official)
+  {
+    id: "masada-inpa", pageIds: ["masada", "tickets-hub", "attractions-hub"], providerName: "Israel Nature and Parks Authority", relationship: "official", operatorId: "inpa", mode: "official_info",
+    title: "Masada National Park — official visit reservations", summary: "Reserve site entry and see current cable car, museum and night-show options on the official site.",
+    ctaLabel: "See visit options on the official site", url: "https://en.parks.org.il/reserve-park/masada-national-park/", isAffiliate: false,
+    reentryNote: "Select your date and visit type on the official site.", confirm: ["Today's opening hours and weather closures", "Cable car vs hiking access", "Museum and night-show booking", "Which side (east or west) you are arriving at"], sourceId: "inpa-masada",
+  },
+  {
+    id: "caesarea-inpa", pageIds: ["caesarea", "tickets-hub", "attractions-hub"], providerName: "Israel Nature and Parks Authority", relationship: "official", operatorId: "inpa", mode: "official_info",
+    title: "Caesarea National Park — official visit information", summary: "Current opening hours, admission options and visit reservation for the coastal archaeological park.",
+    ctaLabel: "See visit options on the official site", url: "https://en.parks.org.il/reserve-park/caesarea-national-park/", isAffiliate: false,
+    reentryNote: "Select your date on the official site.", confirm: ["Opening hours for your date", "Which exhibits are currently open", "Admission type"], sourceId: "inpa-caesarea",
+  },
+  // Hotels (regular city-browsing links; not fact sources, not verified inventory)
+  ...([
+    ["jerusalem", "Jerusalem", "https://www.booking.com/city/il/jerusalem.html"],
+    ["telaviv", "Tel Aviv", "https://www.booking.com/city/il/tel-aviv.html"],
+    ["tiberias", "Tiberias", "https://www.booking.com/city/il/tiberias.html"],
+  ] as const).map(([id, city, url]): ProviderLink => ({
+    id: `hotels-${id}-booking`, pageIds: [`stay-${id}`], providerName: "Booking.com", relationship: "booking_platform", partnerId: "booking", mode: "provider_redirect",
+    title: `Browse places to stay in ${city}`, summary: `Booking.com's ${city} city page. Enter your dates and guests there to see current properties and prices.`,
+    ctaLabel: "Check prices on Booking.com", url, isAffiliate: false,
+    reentryNote: "Dates and preferences chosen here are not passed on. Enter them on Booking.com.",
+    confirm: ["Total price incl. taxes and fees", "Cancellation deadline", "Exact location on the map", "Shabbat check-in arrangements if relevant", "Parking"],
+  })),
+  // Car rental
+  {
+    id: "cars-discovercars", pageIds: ["car-rental"], providerName: "DiscoverCars", relationship: "booking_platform", partnerId: "discovercars", mode: "provider_redirect",
+    title: "Compare rental cars in Israel", summary: "Rental search where you set pickup and return location and dates on their site.",
+    ctaLabel: "Check prices on DiscoverCars", url: "https://www.discovercars.com/israel", isAffiliate: false,
+    reentryNote: "Pickup location and dates chosen here are not passed on. Enter them on DiscoverCars.",
+    confirm: ["Insurance and excess for your specific offer", "Deposit and credit-card requirements", "Driver age and licence rules", "Areas the rental terms allow you to drive", "Cancellation terms"], sourceId: "discovercars-israel",
+  },
+];
+
+export const linksForPage = (pageId: string) => providerLinks.filter((l) => l.pageIds.includes(pageId));
