@@ -8,6 +8,8 @@ import {
 } from "@/data/registry";
 import { recordOutboundClick, relFor } from "@/lib/outbound";
 import { pageMeta, CANONICAL_ORIGIN } from "@/lib/site";
+import { israelNow } from "@/lib/israel-time";
+import { validate } from "@/lib/journey";
 
 const PATH = tlvToJerusalem.path;
 const H1 = "Ben Gurion Airport to Jerusalem: taxis & private transfers";
@@ -30,8 +32,7 @@ export const Route = createFileRoute("/travel-blog/ben-gurion-airport-to-jerusal
             "@type": "BreadcrumbList",
             itemListElement: [
               { "@type": "ListItem", position: 1, name: "Home", item: CANONICAL_ORIGIN + "/" },
-              { "@type": "ListItem", position: 2, name: "Transfers", item: CANONICAL_ORIGIN + PATH },
-              { "@type": "ListItem", position: 3, name: "Ben Gurion Airport to Jerusalem", item: CANONICAL_ORIGIN + PATH },
+              { "@type": "ListItem", position: 2, name: "Ben Gurion Airport to Jerusalem", item: CANONICAL_ORIGIN + PATH },
             ],
           }),
         },
@@ -67,25 +68,6 @@ type Mode = "all" | OfferCategory;
 
 function todayISO() {
   return israelNow().date;
-}
-
-/** Date/time inputs are Israel local landing time; compared against "now" in Asia/Jerusalem. */
-export function validate(date: string, time: string, pax: string, lug: string, at: Date = new Date()) {
-  const errors: Partial<Record<"date" | "time" | "pax" | "lug", string>> = {};
-  const p = Number(pax);
-  const l = Number(lug);
-  if (!Number.isInteger(p) || p < 1 || p > 16) errors.pax = "Enter between 1 and 16 passengers.";
-  if (lug.trim() === "" || !Number.isInteger(l) || l < 0 || l > 40) errors.lug = "Enter a luggage count between 0 and 40.";
-  if (time && !date) errors.date = "Add the arrival date for this time.";
-  if (date) {
-    const now = israelNow(at);
-    if (date < now.date) errors.date = "This date is in the past in Israel. Choose today or a later date.";
-    else if (date === now.date && time) {
-      const [h = 0, m = 0] = time.split(":").map(Number);
-      if (h * 60 + m < now.minutes) errors.time = "This time has already passed today in Israel.";
-    }
-  }
-  return errors;
 }
 
 function RoutePage() {
@@ -131,7 +113,6 @@ function RoutePage() {
           <nav aria-label="Breadcrumb" className="text-sm text-muted-foreground">
             <ol className="flex flex-wrap gap-1">
               <li><Link to="/" className="hover:text-primary">Home</Link> /</li>
-              <li>Transfers /</li>
               <li aria-current="page" className="text-foreground">Ben Gurion Airport to Jerusalem</li>
             </ol>
           </nav>
@@ -179,10 +160,10 @@ function RoutePage() {
                   <span className="text-sm font-medium">To</span>
                   <p className="field mt-1 bg-muted">Jerusalem</p>
                 </div>
-                <Field id="date" label="Arrival date (optional)" error={errors.date}>
+                <Field id="date" label="Arrival date, Israel time (optional)" error={errors.date}>
                   <input id="date" type="date" min={minDate} value={date} onChange={(e) => setDate(e.target.value)} className="field mt-1" aria-invalid={!!errors.date} aria-describedby={errors.date ? "date-err" : undefined} />
                 </Field>
-                <Field id="time" label="Landing time (optional)" error={errors.time}>
+                <Field id="time" label="Landing time, Israel local time (optional)" error={errors.time}>
                   <input id="time" type="time" value={time} onChange={(e) => setTime(e.target.value)} className="field mt-1" aria-invalid={!!errors.time} aria-describedby={errors.time ? "time-err" : undefined} />
                 </Field>
                 <Field id="pax" label="Passengers (1–16)" error={errors.pax}>
@@ -275,12 +256,12 @@ function RoutePage() {
                 <li>Confirm the vehicle type: four passengers with four large cases may not fit a standard sedan.</li>
               </ul>
               <h3 className="mt-8 text-xl">Getting to a precise Jerusalem address</h3>
-              <p>Old City gates, hotel side entrances and pedestrian streets can confuse drivers. Give the full street address and the nearest drivable point, and share a map pin with your driver. If staying inside the Old City walls, expect a short walk from the nearest gate.</p>
+              <p>Old City gates, hotel side entrances and pedestrian streets can confuse drivers. Give the full street address and the nearest drivable point, and share a map pin with your driver. Vehicle access varies, especially in and around the Old City, so confirm the nearest permitted drop-off point and any walking distance with your accommodation and transfer provider.</p>
             </section>
 
             <section id="train" className="mt-16 prose-guide">
               <h2 className="text-3xl">Train and other alternatives</h2>
-              <p>Israel Railways connects the airport with Jerusalem. It can be good value for light travelers, but you'll still need to reach your accommodation from the station, and services are limited on Shabbat and holidays. Check current timetables and fares on <ExtLink href="https://www.rail.co.il/">Israel Railways</ExtLink>. Our <ExtLink guide href={`${OWNER_BASE}/travel-blog/getting-around-israel/`}>getting around Israel</ExtLink> article covers buses and driving.</p>
+              <p>Israel Railways connects the airport with Jerusalem. It can be good value for light travelers, but you'll still need to reach your accommodation from the station. Check Israel Railways' current service for your exact travel date, including Shabbat and holidays, on <ExtLink href="https://www.rail.co.il/">Israel Railways</ExtLink>. Our <ExtLink guide href={`${OWNER_BASE}/travel-blog/getting-around-israel/`}>getting around Israel</ExtLink> article covers buses and driving. If you prefer a transfer instead, confirm availability and any night, weekend or holiday charges with the provider.</p>
             </section>
 
             <section id="faq" className="mt-16">
