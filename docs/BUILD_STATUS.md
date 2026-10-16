@@ -46,7 +46,7 @@ Replaces the earlier three-page scope with a full tourism-portal structure. Stil
 ### Booking modes (registry `BookingMode`)
 - `live_quote`: type + guard `isDisplayableLiveQuote` only. **No live API configured; no live prices shown anywhere.**
 - `provider_redirect` (regular links): Intui, GetTransfer, Booking.com city pages (Jerusalem/Tel Aviv/Tiberias), DiscoverCars, Bein Harim tour page.
-- `provider_inquiry`: Moshe Barak (airport transfers, private driver, private day trips) — disclosed as publisher's business.
+- `provider_inquiry`: Moshe Barak (airport transfers, private driver, private day trips) — disclosed as publisher's business. Relevance correction 16 Oct 2026: `private-daytrips-moshe` no longer lists the Bethlehem page (`pageIds` is `["tours-hub", "masada"]`) because the operator's general private-day-trips page does not verify a Bethlehem itinerary; the Bethlehem leaf's offer area and end CTA show only the verified Bein Harim combined tour, with Moshe's page retained as a source reference for generic private-tour planning advice.
 - `official_info`: Gett/IAA airport taxi, INPA Masada and Caesarea.
 - All links non-affiliate (`affiliateConfig` empty). Click logging is local-only, not bookings.
 
