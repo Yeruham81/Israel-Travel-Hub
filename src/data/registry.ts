@@ -467,7 +467,7 @@ export const providerLinks: ProviderLink[] = [
     reentryNote: "Choose your date and pickup on the operator's site.", confirm: ["Departure date and pickup point", "Tour language", "Shared or private format", "Passport and current travel requirements", "Cancellation terms"], sourceId: "beinharim-jlm-bethlehem",
   },
   {
-    id: "private-daytrips-moshe", pageIds: ["tours-hub", "bethlehem", "masada"], ...moshe, mode: "provider_inquiry",
+    id: "private-daytrips-moshe", pageIds: ["tours-hub", "masada"], ...moshe, mode: "provider_inquiry",
     title: "Private day trips", summary: "Private day trips with a local driver, planned around your own itinerary.",
     ctaLabel: "Request a quote on Israel-Taxi.com", url: `${OWNER_BASE}/private-day-trips/`, isAffiliate: false,
     reentryNote: "Nothing is sent from this page. Contact the operator on their site.", confirm: ["Exact itinerary and stops", "Whether a licensed guide is included", "Entrance fees", "Travel requirements for crossings"], sourceId: "owner-private-day-trips",
