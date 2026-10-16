@@ -122,8 +122,16 @@ function RootComponent() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
-      <Outlet />
+      <a href="#main" className="sr-only focus:not-sr-only focus:fixed focus:left-2 focus:top-2 focus:z-50 focus:rounded focus:bg-card focus:p-2">Skip to content</a>
+      <SiteHeader />
+      <div className="mx-auto flex max-w-[90rem]">
+        <SiteSidebar />
+        <div id="main" className="min-w-0 flex-1">
+          {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
+          <Outlet />
+        </div>
+      </div>
+      <SiteFooter />
     </QueryClientProvider>
   );
 }

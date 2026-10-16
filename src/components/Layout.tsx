@@ -1,6 +1,9 @@
-import { Link } from "@tanstack/react-router";
-import type { ReactNode } from "react";
+import { Link, useRouterState } from "@tanstack/react-router";
+import { useEffect, useState, type ReactNode } from "react";
+import { Compass } from "lucide-react";
+import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetDescription } from "@/components/ui/sheet";
 import { OWNER_BASE } from "@/data/registry";
+import { allNavGroups, serviceNav, hotelNav } from "@/data/nav";
 import { relFor } from "@/lib/outbound";
 
 export function ExtLink({ href, children, className, guide }: { href: string; children: ReactNode; className?: string; guide?: boolean }) {
@@ -25,70 +28,101 @@ export function Wordmark() {
   );
 }
 
-const nav = [
-  { label: "Transfers", to: "/travel-blog/ben-gurion-airport-to-jerusalem/" as const },
-  { label: "Tours", href: `${OWNER_BASE}/private-day-trips/` },
-  { label: "Hotels", href: "/#hotels" },
-  { label: "Car Rental", href: "/#car-rental" },
-  { label: "Destinations", href: "/#destinations" },
-];
+/** Global navigation shared by the desktop rail and the mobile drawer. */
+export function GlobalNav({ onNavigate }: { onNavigate?: () => void }) {
+  return (
+    <nav aria-label="Explore Israel" className="text-sm">
+      {allNavGroups.map((g) => (
+        <div key={g.title} className="mb-6">
+          <p className="mb-2 text-[0.7rem] font-semibold uppercase tracking-[0.14em] text-muted-foreground">{g.title}</p>
+          <ul className="space-y-0.5">
+            {g.items.map((i) => (
+              <li key={i.label}>
+                <Link
+                  to={i.to}
+                  onClick={onNavigate}
+                  activeOptions={{ exact: true }}
+                  activeProps={{ className: "bg-navy text-navy-foreground", "aria-current": "page" }}
+                  inactiveProps={{ className: "hover:bg-muted" }}
+                  className="block rounded-lg px-3 py-1.5 font-medium"
+                >
+                  {i.label}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </div>
+      ))}
+    </nav>
+  );
+}
+
+const headerNav = serviceNav.slice(1, 7);
 
 export function SiteHeader() {
+  const [open, setOpen] = useState(false);
+  const pathname = useRouterState({ select: (s) => s.location.pathname });
+  useEffect(() => setOpen(false), [pathname]);
   return (
     <header className="sticky top-0 z-40 border-b bg-background/95 backdrop-blur">
-      <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-3">
+      <div className="mx-auto flex max-w-[90rem] items-center justify-between gap-4 px-4 py-3">
         <Wordmark />
-        <nav aria-label="Main" className="hidden md:block">
-          <ul className="flex items-center gap-6 text-sm font-medium">
-            {nav.map((n) => (
-              <li key={n.label}>
-                {"to" in n ? (
-                  <Link to={n.to} className="hover:text-primary">{n.label}</Link>
-                ) : n.href.startsWith("http") ? (
-                  <a href={n.href} target="_blank" rel="noopener noreferrer" className="hover:text-primary">{n.label} <span aria-hidden>↗</span></a>
-                ) : (
-                  <a href={n.href} className="hover:text-primary">{n.label}</a>
-                )}
-              </li>
+        <nav aria-label="Services" className="hidden xl:block">
+          <ul className="flex items-center gap-5 text-sm font-medium">
+            {headerNav.map((n) => (
+              <li key={n.label}><Link to={n.to} className="hover:text-primary" activeProps={{ className: "text-primary" }}>{n.label}</Link></li>
             ))}
             <li><Link to="/about/" className="text-muted-foreground hover:text-primary">About</Link></li>
           </ul>
         </nav>
-        <details className="relative md:hidden">
-          <summary className="chip cursor-pointer list-none">Menu</summary>
-          <ul className="absolute right-0 mt-2 w-56 rounded-xl border bg-card p-2 text-sm shadow-lg">
-            {nav.map((n) => (
-              <li key={n.label}>
-                {"to" in n ? (
-                  <Link to={n.to} className="block rounded px-3 py-2 hover:bg-muted">{n.label}</Link>
-                ) : (
-                  <a href={n.href} {...(n.href.startsWith("http") ? { target: "_blank", rel: "noopener noreferrer" } : {})} className="block rounded px-3 py-2 hover:bg-muted">{n.label}</a>
-                )}
-              </li>
-            ))}
-            <li><Link to="/about/" className="block rounded px-3 py-2 hover:bg-muted">About & methodology</Link></li>
-          </ul>
-        </details>
+        <button type="button" onClick={() => setOpen(true)} className="btn btn-primary py-2 text-sm lg:hidden" aria-haspopup="dialog" aria-expanded={open}>
+          <Compass className="h-4 w-4" aria-hidden /> Explore Israel
+        </button>
+        <Sheet open={open} onOpenChange={setOpen}>
+          <SheetContent side="left" className="w-[85vw] max-w-sm overflow-y-auto">
+            <SheetHeader className="mb-4 text-left">
+              <SheetTitle className="font-serif text-2xl">Explore Israel</SheetTitle>
+              <SheetDescription>Services, popular hotel cities and trip shortcuts.</SheetDescription>
+            </SheetHeader>
+            <GlobalNav onNavigate={() => setOpen(false)} />
+          </SheetContent>
+        </Sheet>
       </div>
     </header>
+  );
+}
+
+export function SiteSidebar() {
+  return (
+    <aside className="hidden w-60 shrink-0 border-r lg:block">
+      <div className="sticky top-[57px] max-h-[calc(100vh-57px)] overflow-y-auto px-4 py-6">
+        <GlobalNav />
+      </div>
+    </aside>
   );
 }
 
 export function SiteFooter() {
   return (
     <footer className="mt-24 bg-navy text-navy-foreground">
-      <div className="mx-auto grid max-w-6xl gap-10 px-4 py-14 md:grid-cols-3">
+      <div className="mx-auto grid max-w-6xl gap-10 px-4 py-14 md:grid-cols-4">
         <div>
           <p className="font-serif text-2xl">Israel Taxi &amp; Travel</p>
           <p className="mt-3 text-sm opacity-80">Independent local guidance for international visitors planning travel in Israel.</p>
         </div>
         <div className="text-sm">
-          <p className="font-semibold">Guides</p>
+          <p className="font-semibold">Services</p>
           <ul className="mt-3 space-y-2 opacity-90">
+            {serviceNav.slice(1).map((n) => <li key={n.label}><Link to={n.to}>{n.label}</Link></li>)}
+          </ul>
+        </div>
+        <div className="text-sm">
+          <p className="font-semibold">Popular</p>
+          <ul className="mt-3 space-y-2 opacity-90">
+            {hotelNav.map((n) => <li key={n.label}><Link to={n.to}>{n.label}</Link></li>)}
             <li><Link to="/travel-blog/ben-gurion-airport-to-jerusalem/">Airport to Jerusalem</Link></li>
-            <li><ExtLink href={`${OWNER_BASE}/travel-blog/getting-around-israel/`}>Getting around Israel</ExtLink></li>
-            <li><ExtLink href={`${OWNER_BASE}/travel-blog/jerusalem-travel-guide/`}>Jerusalem travel guide</ExtLink></li>
-            <li><Link to="/about/">About &amp; comparison methodology</Link></li>
+            <li><ExtLink href={`${OWNER_BASE}/travel-blog/getting-around-israel/`}>Getting around Israel (existing guide)</ExtLink></li>
+            <li><Link to="/about/">About &amp; methodology</Link></li>
           </ul>
         </div>
         <div className="text-sm opacity-90">
