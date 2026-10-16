@@ -14,6 +14,9 @@ import hotelRoom from "@/assets/home/hotel-room.webp";
 import airportPickup from "@/assets/home/airport-pickup.webp";
 import guidedTour from "@/assets/home/guided-tour.webp";
 import roadTrip from "@/assets/home/road-trip.webp";
+import cruisePort from "@/assets/home/cruise-port.webp";
+import ashdodPort from "@/assets/home/ashdod-port.webp";
+import haifaPort from "@/assets/home/haifa-port.webp";
 import { pageMeta } from "@/lib/site";
 import { HeroCarousel, type HeroSlide } from "@/components/HeroCarousel";
 import hJer from "@/assets/home/hero-jerusalem.webp";
@@ -99,6 +102,16 @@ const services: Service[] = [
     hub: { label: "Explore tours", to: "/tours/" },
   },
   {
+    id: "shore-excursions", eyebrow: "Shore excursions", title: "Shore excursions",
+    text: "Arriving by cruise ship? Plan a day ashore around your all-aboard time, then choose a private driver, guide or port-specific tour.",
+    feature: { src: cruisePort, alt: "Illustrative cruise passengers walking along a harbour quay toward a waiting minivan (not a specific ship or operator)" },
+    cards: [
+      { label: "From Ashdod Port", text: "Jerusalem, Tel Aviv–Jaffa or the Dead Sea", to: "/ashdod-shore-excursions/", img: { src: ashdodPort, alt: "Aerial view of Ashdod Port" } },
+      { label: "From Haifa Port", text: "Akko, the Galilee or a long day to Jerusalem", to: "/haifa-shore-excursions/", img: { src: haifaPort, alt: "Haifa Port and Haifa Bay seen from Mount Carmel" } },
+    ],
+    hub: { label: "Explore shore excursions", to: "/shore-excursions/" },
+  },
+  {
     id: "attractions", eyebrow: "Attractions & experiences", title: "Attractions & experiences",
     text: "Desert fortresses, seaside ruins and holy places — what to expect and how long to allow.",
     feature: { src: caesareaDusk, alt: "Ancient ruins on the shore at Caesarea at dusk" },
@@ -178,7 +191,7 @@ function Home() {
             </div>
           </div>
         </HeroCarousel>
-        <nav aria-label="Services" className="relative -mt-6 mx-4 grid grid-cols-2 gap-2 rounded-2xl border bg-card p-3 shadow-lg sm:grid-cols-3 lg:grid-cols-6">
+        <nav aria-label="Services" className="relative -mt-6 mx-4 grid grid-cols-2 gap-2 rounded-2xl border bg-card p-3 shadow-lg sm:grid-cols-4 xl:grid-cols-7 [&>*:last-child]:col-span-2 sm:[&>*:last-child]:col-span-1">
           {services.map((s) => (
             <a key={s.id} href={`#${s.id}`} className="rounded-lg px-3 py-2 text-center text-sm font-semibold hover:bg-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring">{s.eyebrow.split(" &")[0]}</a>
           ))}

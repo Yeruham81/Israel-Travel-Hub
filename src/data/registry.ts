@@ -191,6 +191,38 @@ export const sources: SourceReference[] = [
     note: "Operator tour page. Itinerary combines Jerusalem and Bethlehem; pickup listed from several cities including Jerusalem. Price, dates and availability not checked.",
   },
   {
+    id: "owner-ashdod-shore",
+    title: "Ashdod shore excursions",
+    publisher: "Israel-Taxi.com (Moshe Barak)",
+    url: `${OWNER_BASE}/ashdod-shore-excursions/`,
+    checkedAt: INFO_CHECK_DATE,
+    note: "Publisher's car-and-driver page. Lists suggested Tel Aviv/Jaffa, classical Jerusalem and Masada/Dead Sea itineraries. Prices and guarantee wording on the page are not reproduced here.",
+  },
+  {
+    id: "owner-haifa-shore",
+    title: "Haifa shore excursions",
+    publisher: "Israel-Taxi.com (Moshe Barak)",
+    url: `${OWNER_BASE}/haifa-shore-excursions/`,
+    checkedAt: INFO_CHECK_DATE,
+    note: "Publisher's car-and-driver page. Lists suggested Akko/Rosh Hanikra, Tel Aviv/Jaffa, Nazareth/Sea of Galilee and classical Jerusalem itineraries. No numeric prices published.",
+  },
+  {
+    id: "beinharim-ashdod-jlm-bethlehem",
+    title: "Jerusalem and Bethlehem day tour from Ashdod Port",
+    publisher: "Bein Harim Tours",
+    url: "https://www.beinharimtours.com/jerusalem-and-bethlehem-day-tour-from-ashdod-port/",
+    checkedAt: INFO_CHECK_DATE,
+    note: "Operator product page for a combined Jerusalem and Bethlehem itinerary departing from Ashdod Port. Price, dates, inclusions and availability not checked.",
+  },
+  {
+    id: "beinharim-haifa-jlm-bethlehem",
+    title: "Ship-to-shore excursion: Haifa to Jerusalem and Bethlehem",
+    publisher: "Bein Harim Tours",
+    url: "https://www.beinharimtours.com/ship-to-shore-excursions-haifa-jerusalem-bethlehem/",
+    checkedAt: INFO_CHECK_DATE,
+    note: "Operator product page for a combined Jerusalem and Bethlehem itinerary departing from Haifa Port. Price, dates, inclusions and availability not checked.",
+  },
+  {
     id: "owner-private-day-trips",
     title: "Private day trips",
     publisher: "Israel-Taxi.com (Moshe Barak)",
@@ -471,6 +503,33 @@ export const providerLinks: ProviderLink[] = [
     title: "Private day trips", summary: "Private day trips with a local driver, planned around your own itinerary.",
     ctaLabel: "Request a quote on Israel-Taxi.com", url: `${OWNER_BASE}/private-day-trips/`, isAffiliate: false,
     reentryNote: "Nothing is sent from this page. Contact the operator on their site.", confirm: ["Exact itinerary and stops", "Whether a licensed guide is included", "Entrance fees", "Travel requirements for crossings"], sourceId: "owner-private-day-trips",
+  },
+  // Shore excursions (port-specific pages only)
+  {
+    id: "ashdod-shore-moshe", pageIds: ["shore-ashdod", "shore-hub"], ...moshe, mode: "provider_inquiry",
+    title: "Private car-and-driver shore excursion from Ashdod", summary: "Local driver business with suggested Tel Aviv/Jaffa, Jerusalem and Masada/Dead Sea days from Ashdod Port. Itinerary, price and timing agreed by inquiry.",
+    ctaLabel: "Request a quote on Israel-Taxi.com", url: `${OWNER_BASE}/ashdod-shore-excursions/`, isAffiliate: false,
+    reentryNote: "Nothing is sent from this page. Include ship name, date, disembarkation and all-aboard times and party size in your request.",
+    confirm: ["Price and what it covers", "Pickup point at the port", "Driver only or licensed guide", "Return timing for your all-aboard time", "Cancellation terms"], sourceId: "owner-ashdod-shore",
+  },
+  {
+    id: "ashdod-shore-beinharim", pageIds: ["shore-ashdod"], providerName: "Bein Harim Tours", relationship: "independent_operator", operatorId: "bein-harim", mode: "provider_redirect",
+    title: "Jerusalem and Bethlehem day tour from Ashdod Port", summary: "The operator's port-specific product combining Jerusalem and Bethlehem in one day from Ashdod.",
+    ctaLabel: "See dates and prices on Bein Harim", url: "https://www.beinharimtours.com/jerusalem-and-bethlehem-day-tour-from-ashdod-port/", isAffiliate: false,
+    reentryNote: "Choose your date on the operator's site.", confirm: ["Your ship's date and port-call times", "Meeting point at the port", "Shared or private format and inclusions", "Passport and travel requirements for Bethlehem", "Return arrangements and cancellation terms"], sourceId: "beinharim-ashdod-jlm-bethlehem",
+  },
+  {
+    id: "haifa-shore-moshe", pageIds: ["shore-haifa", "shore-hub"], ...moshe, mode: "provider_inquiry",
+    title: "Private car-and-driver shore excursion from Haifa", summary: "Local driver business with suggested Akko/Rosh Hanikra, Tel Aviv/Jaffa, Nazareth/Sea of Galilee and Jerusalem days from Haifa Port. Itinerary and price by inquiry.",
+    ctaLabel: "Request a quote on Israel-Taxi.com", url: `${OWNER_BASE}/haifa-shore-excursions/`, isAffiliate: false,
+    reentryNote: "Nothing is sent from this page. Include ship name, date, disembarkation and all-aboard times and party size in your request.",
+    confirm: ["Whether the itinerary fits your port-call time", "Pickup point at the port", "Driver only or licensed guide", "Entrance fees", "Cancellation terms"], sourceId: "owner-haifa-shore",
+  },
+  {
+    id: "haifa-shore-beinharim", pageIds: ["shore-haifa"], providerName: "Bein Harim Tours", relationship: "independent_operator", operatorId: "bein-harim", mode: "provider_redirect",
+    title: "Ship-to-shore: Haifa to Jerusalem and Bethlehem", summary: "The operator's Haifa-port product combining Jerusalem and Bethlehem in one long day.",
+    ctaLabel: "See dates and prices on Bein Harim", url: "https://www.beinharimtours.com/ship-to-shore-excursions-haifa-jerusalem-bethlehem/", isAffiliate: false,
+    reentryNote: "Choose your date on the operator's site.", confirm: ["Your ship's date and port-call times", "Meeting point at the port", "Shared or private format and inclusions", "Passport and travel requirements for Bethlehem", "Return arrangements and cancellation terms"], sourceId: "beinharim-haifa-jlm-bethlehem",
   },
   // Attractions & tickets (official)
   {

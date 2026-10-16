@@ -11,9 +11,12 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AboutRouteImport } from './routes/about'
+import { Route as AshdodShoreExcursionsRouteImport } from './routes/ashdod-shore-excursions'
 import { Route as CarRentalRouteImport } from './routes/car-rental'
 import { Route as DestinationsRouteImport } from './routes/destinations'
+import { Route as HaifaShoreExcursionsRouteImport } from './routes/haifa-shore-excursions'
 import { Route as HotelsRouteImport } from './routes/hotels'
+import { Route as ShoreExcursionsRouteImport } from './routes/shore-excursions'
 import { Route as TicketsRouteImport } from './routes/tickets'
 import { Route as AttractionsIndexRouteImport } from './routes/attractions.index'
 import { Route as AttractionsCaesareaRouteImport } from './routes/attractions.caesarea'
@@ -38,6 +41,11 @@ const AboutRoute = AboutRouteImport.update({
   path: '/about',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AshdodShoreExcursionsRoute = AshdodShoreExcursionsRouteImport.update({
+  id: '/ashdod-shore-excursions',
+  path: '/ashdod-shore-excursions',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const CarRentalRoute = CarRentalRouteImport.update({
   id: '/car-rental',
   path: '/car-rental',
@@ -48,9 +56,19 @@ const DestinationsRoute = DestinationsRouteImport.update({
   path: '/destinations',
   getParentRoute: () => rootRouteImport,
 } as any)
+const HaifaShoreExcursionsRoute = HaifaShoreExcursionsRouteImport.update({
+  id: '/haifa-shore-excursions',
+  path: '/haifa-shore-excursions',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const HotelsRoute = HotelsRouteImport.update({
   id: '/hotels',
   path: '/hotels',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ShoreExcursionsRoute = ShoreExcursionsRouteImport.update({
+  id: '/shore-excursions',
+  path: '/shore-excursions',
   getParentRoute: () => rootRouteImport,
 } as any)
 const TicketsRoute = TicketsRouteImport.update({
@@ -129,9 +147,12 @@ const TravelBlogWhereToStayInTelAvivRoute =
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/ashdod-shore-excursions': typeof AshdodShoreExcursionsRoute
   '/car-rental': typeof CarRentalRoute
   '/destinations': typeof DestinationsRoute
+  '/haifa-shore-excursions': typeof HaifaShoreExcursionsRoute
   '/hotels': typeof HotelsRoute
+  '/shore-excursions': typeof ShoreExcursionsRoute
   '/tickets': typeof TicketsRoute
   '/attractions/caesarea': typeof AttractionsCaesareaRoute
   '/tours/bethlehem-from-jerusalem': typeof ToursBethlehemFromJerusalemRoute
@@ -149,9 +170,12 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/ashdod-shore-excursions': typeof AshdodShoreExcursionsRoute
   '/car-rental': typeof CarRentalRoute
   '/destinations': typeof DestinationsRoute
+  '/haifa-shore-excursions': typeof HaifaShoreExcursionsRoute
   '/hotels': typeof HotelsRoute
+  '/shore-excursions': typeof ShoreExcursionsRoute
   '/tickets': typeof TicketsRoute
   '/attractions/caesarea': typeof AttractionsCaesareaRoute
   '/tours/bethlehem-from-jerusalem': typeof ToursBethlehemFromJerusalemRoute
@@ -170,9 +194,12 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/ashdod-shore-excursions': typeof AshdodShoreExcursionsRoute
   '/car-rental': typeof CarRentalRoute
   '/destinations': typeof DestinationsRoute
+  '/haifa-shore-excursions': typeof HaifaShoreExcursionsRoute
   '/hotels': typeof HotelsRoute
+  '/shore-excursions': typeof ShoreExcursionsRoute
   '/tickets': typeof TicketsRoute
   '/attractions/caesarea': typeof AttractionsCaesareaRoute
   '/tours/bethlehem-from-jerusalem': typeof ToursBethlehemFromJerusalemRoute
@@ -192,9 +219,12 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/about'
+    | '/ashdod-shore-excursions'
     | '/car-rental'
     | '/destinations'
+    | '/haifa-shore-excursions'
     | '/hotels'
+    | '/shore-excursions'
     | '/tickets'
     | '/attractions/caesarea'
     | '/tours/bethlehem-from-jerusalem'
@@ -212,9 +242,12 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/about'
+    | '/ashdod-shore-excursions'
     | '/car-rental'
     | '/destinations'
+    | '/haifa-shore-excursions'
     | '/hotels'
+    | '/shore-excursions'
     | '/tickets'
     | '/attractions/caesarea'
     | '/tours/bethlehem-from-jerusalem'
@@ -232,9 +265,12 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/about'
+    | '/ashdod-shore-excursions'
     | '/car-rental'
     | '/destinations'
+    | '/haifa-shore-excursions'
     | '/hotels'
+    | '/shore-excursions'
     | '/tickets'
     | '/attractions/caesarea'
     | '/tours/bethlehem-from-jerusalem'
@@ -253,9 +289,12 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRoute
+  AshdodShoreExcursionsRoute: typeof AshdodShoreExcursionsRoute
   CarRentalRoute: typeof CarRentalRoute
   DestinationsRoute: typeof DestinationsRoute
+  HaifaShoreExcursionsRoute: typeof HaifaShoreExcursionsRoute
   HotelsRoute: typeof HotelsRoute
+  ShoreExcursionsRoute: typeof ShoreExcursionsRoute
   TicketsRoute: typeof TicketsRoute
   AttractionsCaesareaRoute: typeof AttractionsCaesareaRoute
   ToursBethlehemFromJerusalemRoute: typeof ToursBethlehemFromJerusalemRoute
@@ -287,6 +326,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AboutRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/ashdod-shore-excursions': {
+      id: '/ashdod-shore-excursions'
+      path: '/ashdod-shore-excursions'
+      fullPath: '/ashdod-shore-excursions'
+      preLoaderRoute: typeof AshdodShoreExcursionsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/car-rental': {
       id: '/car-rental'
       path: '/car-rental'
@@ -301,11 +347,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DestinationsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/haifa-shore-excursions': {
+      id: '/haifa-shore-excursions'
+      path: '/haifa-shore-excursions'
+      fullPath: '/haifa-shore-excursions'
+      preLoaderRoute: typeof HaifaShoreExcursionsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/hotels': {
       id: '/hotels'
       path: '/hotels'
       fullPath: '/hotels'
       preLoaderRoute: typeof HotelsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/shore-excursions': {
+      id: '/shore-excursions'
+      path: '/shore-excursions'
+      fullPath: '/shore-excursions'
+      preLoaderRoute: typeof ShoreExcursionsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/tickets': {
@@ -405,9 +465,12 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
+  AshdodShoreExcursionsRoute: AshdodShoreExcursionsRoute,
   CarRentalRoute: CarRentalRoute,
   DestinationsRoute: DestinationsRoute,
+  HaifaShoreExcursionsRoute: HaifaShoreExcursionsRoute,
   HotelsRoute: HotelsRoute,
+  ShoreExcursionsRoute: ShoreExcursionsRoute,
   TicketsRoute: TicketsRoute,
   AttractionsCaesareaRoute: AttractionsCaesareaRoute,
   ToursBethlehemFromJerusalemRoute: ToursBethlehemFromJerusalemRoute,
