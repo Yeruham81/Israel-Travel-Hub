@@ -82,7 +82,7 @@ export function HeroCarousel({ slides, children }: { slides: HeroSlide[]; childr
       <div className="relative">{children}</div>
       <div className="relative flex flex-wrap items-center justify-between gap-3 px-6 pb-14 md:px-12 md:pb-16">
         <p className="min-w-0 text-sm font-medium text-navy-foreground/90" aria-live={autoplayOn ? "off" : "polite"}>
-          <span aria-hidden>📍 </span>{slides[index].caption}
+          {slides[index].caption}
         </p>
         <div className="flex shrink-0 items-center gap-2">
           <button type="button" className={btn} onClick={() => go(index - 1)} aria-label="Previous place">‹</button>
