@@ -12,6 +12,9 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as TravelBlogBenGurionAirportToJerusalemRouteImport } from './routes/travel-blog.ben-gurion-airport-to-jerusalem'
+import { Route as TravelBlogBestHotelsInTiberiasRouteImport } from './routes/travel-blog.best-hotels-in-tiberias'
+import { Route as TravelBlogWhereToStayInJerusalemRouteImport } from './routes/travel-blog.where-to-stay-in-jerusalem'
+import { Route as TravelBlogWhereToStayInTelAvivRouteImport } from './routes/travel-blog.where-to-stay-in-tel-aviv'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -29,36 +32,84 @@ const TravelBlogBenGurionAirportToJerusalemRoute =
     path: '/travel-blog/ben-gurion-airport-to-jerusalem',
     getParentRoute: () => rootRouteImport,
   } as any)
+const TravelBlogBestHotelsInTiberiasRoute =
+  TravelBlogBestHotelsInTiberiasRouteImport.update({
+    id: '/travel-blog/best-hotels-in-tiberias',
+    path: '/travel-blog/best-hotels-in-tiberias',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const TravelBlogWhereToStayInJerusalemRoute =
+  TravelBlogWhereToStayInJerusalemRouteImport.update({
+    id: '/travel-blog/where-to-stay-in-jerusalem',
+    path: '/travel-blog/where-to-stay-in-jerusalem',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const TravelBlogWhereToStayInTelAvivRoute =
+  TravelBlogWhereToStayInTelAvivRouteImport.update({
+    id: '/travel-blog/where-to-stay-in-tel-aviv',
+    path: '/travel-blog/where-to-stay-in-tel-aviv',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/travel-blog/ben-gurion-airport-to-jerusalem': typeof TravelBlogBenGurionAirportToJerusalemRoute
+  '/travel-blog/best-hotels-in-tiberias': typeof TravelBlogBestHotelsInTiberiasRoute
+  '/travel-blog/where-to-stay-in-jerusalem': typeof TravelBlogWhereToStayInJerusalemRoute
+  '/travel-blog/where-to-stay-in-tel-aviv': typeof TravelBlogWhereToStayInTelAvivRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/travel-blog/ben-gurion-airport-to-jerusalem': typeof TravelBlogBenGurionAirportToJerusalemRoute
+  '/travel-blog/best-hotels-in-tiberias': typeof TravelBlogBestHotelsInTiberiasRoute
+  '/travel-blog/where-to-stay-in-jerusalem': typeof TravelBlogWhereToStayInJerusalemRoute
+  '/travel-blog/where-to-stay-in-tel-aviv': typeof TravelBlogWhereToStayInTelAvivRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/travel-blog/ben-gurion-airport-to-jerusalem': typeof TravelBlogBenGurionAirportToJerusalemRoute
+  '/travel-blog/best-hotels-in-tiberias': typeof TravelBlogBestHotelsInTiberiasRoute
+  '/travel-blog/where-to-stay-in-jerusalem': typeof TravelBlogWhereToStayInJerusalemRoute
+  '/travel-blog/where-to-stay-in-tel-aviv': typeof TravelBlogWhereToStayInTelAvivRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/about' | '/travel-blog/ben-gurion-airport-to-jerusalem'
+  fullPaths:
+    | '/'
+    | '/about'
+    | '/travel-blog/ben-gurion-airport-to-jerusalem'
+    | '/travel-blog/best-hotels-in-tiberias'
+    | '/travel-blog/where-to-stay-in-jerusalem'
+    | '/travel-blog/where-to-stay-in-tel-aviv'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/about' | '/travel-blog/ben-gurion-airport-to-jerusalem'
+  to:
+    | '/'
+    | '/about'
+    | '/travel-blog/ben-gurion-airport-to-jerusalem'
+    | '/travel-blog/best-hotels-in-tiberias'
+    | '/travel-blog/where-to-stay-in-jerusalem'
+    | '/travel-blog/where-to-stay-in-tel-aviv'
   id:
-    '__root__' | '/' | '/about' | '/travel-blog/ben-gurion-airport-to-jerusalem'
+    | '__root__'
+    | '/'
+    | '/about'
+    | '/travel-blog/ben-gurion-airport-to-jerusalem'
+    | '/travel-blog/best-hotels-in-tiberias'
+    | '/travel-blog/where-to-stay-in-jerusalem'
+    | '/travel-blog/where-to-stay-in-tel-aviv'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRoute
   TravelBlogBenGurionAirportToJerusalemRoute: typeof TravelBlogBenGurionAirportToJerusalemRoute
+  TravelBlogBestHotelsInTiberiasRoute: typeof TravelBlogBestHotelsInTiberiasRoute
+  TravelBlogWhereToStayInJerusalemRoute: typeof TravelBlogWhereToStayInJerusalemRoute
+  TravelBlogWhereToStayInTelAvivRoute: typeof TravelBlogWhereToStayInTelAvivRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -84,6 +135,27 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof TravelBlogBenGurionAirportToJerusalemRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/travel-blog/best-hotels-in-tiberias': {
+      id: '/travel-blog/best-hotels-in-tiberias'
+      path: '/travel-blog/best-hotels-in-tiberias'
+      fullPath: '/travel-blog/best-hotels-in-tiberias'
+      preLoaderRoute: typeof TravelBlogBestHotelsInTiberiasRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/travel-blog/where-to-stay-in-jerusalem': {
+      id: '/travel-blog/where-to-stay-in-jerusalem'
+      path: '/travel-blog/where-to-stay-in-jerusalem'
+      fullPath: '/travel-blog/where-to-stay-in-jerusalem'
+      preLoaderRoute: typeof TravelBlogWhereToStayInJerusalemRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/travel-blog/where-to-stay-in-tel-aviv': {
+      id: '/travel-blog/where-to-stay-in-tel-aviv'
+      path: '/travel-blog/where-to-stay-in-tel-aviv'
+      fullPath: '/travel-blog/where-to-stay-in-tel-aviv'
+      preLoaderRoute: typeof TravelBlogWhereToStayInTelAvivRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -92,6 +164,9 @@ const rootRouteChildren: RootRouteChildren = {
   AboutRoute: AboutRoute,
   TravelBlogBenGurionAirportToJerusalemRoute:
     TravelBlogBenGurionAirportToJerusalemRoute,
+  TravelBlogBestHotelsInTiberiasRoute: TravelBlogBestHotelsInTiberiasRoute,
+  TravelBlogWhereToStayInJerusalemRoute: TravelBlogWhereToStayInJerusalemRoute,
+  TravelBlogWhereToStayInTelAvivRoute: TravelBlogWhereToStayInTelAvivRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
