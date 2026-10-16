@@ -4,6 +4,8 @@ export type HeroSlide = { src: string; srcSm: string; alt: string; caption: stri
 
 const INTERVAL = 6000;
 
+type Waiter = { resolve: () => void; reject: () => void };
+
 export function HeroCarousel({ slides, children }: { slides: HeroSlide[]; children: ReactNode }) {
   const [index, setIndex] = useState(0);
   const [playing, setPlaying] = useState(true); // user intent
@@ -12,9 +14,14 @@ export function HeroCarousel({ slides, children }: { slides: HeroSlide[]; childr
   const [hovered, setHovered] = useState(false);
   const [focused, setFocused] = useState(false);
   const [hidden, setHidden] = useState(false);
-  const [loaded, setLoaded] = useState<Set<number>>(() => new Set([0]));
-  const [tick, setTick] = useState(0); // resets timer on manual navigation
+  // Slides whose <img> has been requested (mounted, hidden until shown). Accumulates; cached photos stay mounted.
+  const [mounted, setMounted] = useState<Set<number>>(() => new Set([0]));
+  const [tick, setTick] = useState(0); // resets timer on navigation attempts
   const rootRef = useRef<HTMLDivElement>(null);
+  // Slides whose mounted <img> has actually loaded and decoded. Slide 0 is the server-rendered first frame.
+  const ready = useRef(new Set<number>([0]));
+  const waiters = useRef(new Map<number, Waiter[]>());
+  const requestId = useRef(0);
   const n = slides.length;
 
   useEffect(() => {
@@ -23,29 +30,58 @@ export function HeroCarousel({ slides, children }: { slides: HeroSlide[]; childr
     apply();
     mq.addEventListener("change", apply);
     const vis = () => setHidden(document.visibilityState === "hidden");
+    vis();
     document.addEventListener("visibilitychange", vis);
     return () => { mq.removeEventListener("change", apply); document.removeEventListener("visibilitychange", vis); };
   }, []);
 
+  /** Resolves once slide i's displayed image is loaded + decoded; rejects if it fails. */
+  const ensure = useCallback((i: number): Promise<void> => {
+    if (ready.current.has(i)) return Promise.resolve();
+    return new Promise<void>((resolve, reject) => {
+      const list = waiters.current.get(i) ?? [];
+      list.push({ resolve, reject });
+      waiters.current.set(i, list);
+      setMounted((prev) => (prev.has(i) ? prev : new Set(prev).add(i)));
+    });
+  }, []);
+
+  const onImgLoad = (i: number, img: HTMLImageElement) => {
+    (img.decode ? img.decode().catch(() => undefined) : Promise.resolve()).then(() => {
+      ready.current.add(i);
+      waiters.current.get(i)?.forEach((w) => w.resolve());
+      waiters.current.delete(i);
+    });
+  };
+  const onImgError = (i: number) => {
+    waiters.current.get(i)?.forEach((w) => w.reject());
+    waiters.current.delete(i);
+    if (i !== index) setMounted((prev) => { const s = new Set(prev); s.delete(i); return s; }); // allow a later retry
+  };
+
   const autoplayOn = playing && (!reduced || userChosePlay);
   const running = autoplayOn && !hovered && !focused && !hidden;
 
-  // Preload current + next so transitions never show an empty frame.
-  useEffect(() => {
-    setLoaded((prev) => {
-      const next = (index + 1) % n;
-      if (prev.has(index) && prev.has(next)) return prev;
-      const s = new Set(prev); s.add(index); s.add(next); return s;
-    });
-  }, [index, n]);
+  // Prefetch one slide ahead of the visible one.
+  useEffect(() => { ensure((index + 1) % n).catch(() => undefined); }, [index, n, ensure]);
+
+  /** Request a slide; the current photo/caption stay until the target is ready. Newest request wins. */
+  const go = useCallback((i: number) => {
+    const target = ((i % n) + n) % n;
+    const id = ++requestId.current;
+    setTick((t) => t + 1);
+    ensure(target).then(
+      () => { if (id === requestId.current) setIndex(target); },
+      () => { if (id === requestId.current) setTick((t) => t + 1); }, // keep current slide; re-arm timer
+    );
+  }, [n, ensure]);
 
   useEffect(() => {
     if (!running) return;
-    const t = window.setTimeout(() => setIndex((i) => (i + 1) % n), INTERVAL);
+    const t = window.setTimeout(() => go(index + 1), INTERVAL);
     return () => window.clearTimeout(t);
-  }, [running, index, tick, n]);
+  }, [running, index, tick, n, go]);
 
-  const go = useCallback((i: number) => { setIndex(((i % n) + n) % n); setTick((t) => t + 1); }, [n]);
   const togglePlay = () => {
     if (autoplayOn) setPlaying(false);
     else { setPlaying(true); if (reduced) setUserChosePlay(true); setTick((t) => t + 1); }
@@ -69,10 +105,10 @@ export function HeroCarousel({ slides, children }: { slides: HeroSlide[]; childr
       <div className="absolute inset-0">
         {slides.map((s, i) => (
           <div key={s.caption} role="group" aria-roledescription="slide" aria-label={`${i + 1} of ${n}: ${s.caption}`} aria-hidden={i !== index} className={`absolute inset-0 ${fade} ${i === index ? "opacity-100" : "opacity-0"}`}>
-            {loaded.has(i) && (
+            {(mounted.has(i) || i === index) && (
               <picture>
                 <source media="(max-width: 767px)" srcSet={s.srcSm} />
-                <img src={s.src} alt={s.alt} width={1920} height={872} fetchPriority={i === 0 ? "high" : "auto"} loading={i === 0 ? "eager" : "lazy"} decoding="async" className="h-full w-full object-cover" style={{ objectPosition: s.pos ?? "center" }} />
+                <img src={s.src} alt={s.alt} width={1920} height={872} fetchPriority={i === 0 ? "high" : "auto"} decoding="async" onLoad={(e) => onImgLoad(i, e.currentTarget)} onError={() => onImgError(i)} className="h-full w-full object-cover" style={{ objectPosition: s.pos ?? "center" }} />
               </picture>
             )}
           </div>
