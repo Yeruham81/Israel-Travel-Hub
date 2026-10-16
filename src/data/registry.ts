@@ -204,7 +204,7 @@ export const sources: SourceReference[] = [
     publisher: "Israel-Taxi.com (Moshe Barak)",
     url: `${OWNER_BASE}/haifa-shore-excursions/`,
     checkedAt: INFO_CHECK_DATE,
-    note: "Publisher's car-and-driver page. Lists suggested Akko/Rosh Hanikra, Tel Aviv/Jaffa, Nazareth/Sea of Galilee and classical Jerusalem itineraries. No numeric prices published.",
+    note: "Publisher's car-and-driver page. Lists suggested Akko/Rosh Hanikra, Tel Aviv/Jaffa, Nazareth/Sea of Galilee and classical Jerusalem itineraries. Its published price figures are not reproduced here; a current offer must be requested from the operator.",
   },
   {
     id: "beinharim-ashdod-jlm-bethlehem",
