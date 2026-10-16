@@ -159,7 +159,7 @@ function RoutePage() {
             <section id="quick-answer" aria-labelledby="qa-h">
               <h2 id="qa-h" className="text-3xl">Quick answer</h2>
               <div className="prose-guide">
-                <p>The drive from Ben Gurion Airport to Jerusalem is roughly 50–60 km by road, typically under an hour outside rush hour. You have two taxi-style choices: <strong>pre-book a private transfer</strong> with an agreed meeting point and quoted price, or <strong>take a licensed taxi on arrival</strong> from the official rank, which runs around the clock on a metered fare.</p>
+                <p>Travel time by road depends on traffic and time of day, so allow extra time at rush hour. You have two taxi-style choices: <strong>pre-book a private transfer</strong> with an agreed meeting point and quoted price, or <strong>take a licensed taxi on arrival</strong> from the official rank, which runs around the clock on a metered fare.</p>
                 <p><strong>Pre-booking suits</strong> late-night arrivals, families needing child seats, groups of five or more, travelers with lots of luggage, and anyone heading to a hard-to-find address.</p>
                 <p><strong>How to use this page:</strong> enter your passengers and luggage below, compare the options side by side, then confirm price and details on the provider's own site before paying.</p>
               </div>
