@@ -1,5 +1,4 @@
 import { createFileRoute, Link, type LinkProps } from "@tanstack/react-router";
-import hero from "@/assets/home/jerusalem-old-city-hero.webp";
 import jerusalem from "@/assets/home/jerusalem-old-city.webp";
 import telAviv from "@/assets/home/tel-aviv-coast.webp";
 import tiberias from "@/assets/home/tiberias-lake.webp";
@@ -16,6 +15,28 @@ import airportPickup from "@/assets/home/airport-pickup.webp";
 import guidedTour from "@/assets/home/guided-tour.webp";
 import roadTrip from "@/assets/home/road-trip.webp";
 import { pageMeta } from "@/lib/site";
+import { HeroCarousel, type HeroSlide } from "@/components/HeroCarousel";
+import hJer from "@/assets/home/hero-jerusalem.webp";
+import hJerSm from "@/assets/home/hero-jerusalem-sm.webp";
+import hTa from "@/assets/home/hero-tel-aviv.webp";
+import hTaSm from "@/assets/home/hero-tel-aviv-sm.webp";
+import hHf from "@/assets/home/hero-haifa.webp";
+import hHfSm from "@/assets/home/hero-haifa-sm.webp";
+import hMs from "@/assets/home/hero-masada.webp";
+import hMsSm from "@/assets/home/hero-masada-sm.webp";
+import hCs from "@/assets/home/hero-caesarea.webp";
+import hCsSm from "@/assets/home/hero-caesarea-sm.webp";
+import hGl from "@/assets/home/hero-galilee.webp";
+import hGlSm from "@/assets/home/hero-galilee-sm.webp";
+
+const heroSlides: HeroSlide[] = [
+  { src: hJer, srcSm: hJerSm, caption: "Jerusalem Old City from the Mount of Olives", alt: "Jerusalem's Old City and the Dome of the Rock seen from the Mount of Olives", pos: "55% center" },
+  { src: hTa, srcSm: hTaSm, caption: "Tel Aviv beach promenade", alt: "The seafront promenade beside the beach in Tel Aviv", pos: "40% center" },
+  { src: hHf, srcSm: hHfSm, caption: "Haifa Bay from the Carmel, Bahá'í Gardens below", alt: "Haifa and Haifa Bay seen from Mount Carmel above the Bahá'í Gardens", pos: "center" },
+  { src: hMs, srcSm: hMsSm, caption: "Masada above the Dead Sea", alt: "The Masada plateau from the air with the Dead Sea behind", pos: "center" },
+  { src: hCs, srcSm: hCsSm, caption: "Caesarea National Park on the coast", alt: "Ancient ruins on the shore at Caesarea at dusk", pos: "65% center" },
+  { src: hGl, srcSm: hGlSm, caption: "Tiberias and the Sea of Galilee", alt: "Tiberias on the hillside above the Sea of Galilee, seen from the water", pos: "center" },
+];
 import { photoCredits } from "@/data/photoCredits";
 
 export const Route = createFileRoute("/")({
@@ -46,7 +67,7 @@ const IMG = {
 
 const services: Service[] = [
   {
-    id: "accommodation", eyebrow: "Accommodation", title: "Where to stay, city by city",
+    id: "accommodation", eyebrow: "Accommodation", title: "Accommodation in Israel",
     text: "Area-by-area advice — Shabbat, hills, parking, beach access — before you compare properties for your dates.",
     feature: { src: hotelRoom, alt: "Illustrative bright hotel room with a made bed by the window (not a specific property)" },
     cards: [
@@ -57,7 +78,7 @@ const services: Service[] = [
     hub: { label: "Explore accommodation", to: "/hotels/" },
   },
   {
-    id: "transfers", eyebrow: "Transfers & private transport", title: "From the airport and between cities",
+    id: "transfers", eyebrow: "Transfers & private transport", title: "Airport transfers & private transport",
     text: "Where the licensed taxi rank is, when to pre-book, and how to compare transfer quotes like-for-like.",
     feature: { src: airportPickup, alt: "Illustrative driver loading luggage for arriving travellers" },
     cards: [
@@ -68,7 +89,7 @@ const services: Service[] = [
     hub: { label: "Explore transfers", to: "/transfers/" },
   },
   {
-    id: "tours", eyebrow: "Tours & day trips", title: "Shared tours or a private day",
+    id: "tours", eyebrow: "Tours & day trips", title: "Tours & day trips",
     text: "How to read an itinerary, what pickup and guide language mean in practice, and when a private driver fits better.",
     feature: { src: guidedTour, alt: "Illustrative small group on a guided walk through old stone streets" },
     cards: [
@@ -78,7 +99,7 @@ const services: Service[] = [
     hub: { label: "Explore tours", to: "/tours/" },
   },
   {
-    id: "attractions", eyebrow: "Attractions & experiences", title: "Sites worth planning around",
+    id: "attractions", eyebrow: "Attractions & experiences", title: "Attractions & experiences",
     text: "Desert fortresses, seaside ruins and holy places — what to expect and how long to allow.",
     feature: { src: caesareaDusk, alt: "Ancient ruins on the shore at Caesarea at dusk" },
     cards: [
@@ -89,7 +110,7 @@ const services: Service[] = [
     hub: { label: "Explore attractions", to: "/attractions/" },
   },
   {
-    id: "tickets", eyebrow: "Tickets & admission", title: "Entry tickets, not tours",
+    id: "tickets", eyebrow: "Tickets & admission", title: "Tickets & admission",
     text: "Admission options on official sites, kept separate from tours that include transport.",
     feature: { src: cableCarWide, alt: "Masada cable car above the desert cliffs" },
     cards: [
@@ -99,7 +120,7 @@ const services: Service[] = [
     hub: { label: "Explore tickets", to: "/tickets/" },
   },
   {
-    id: "car-rental", eyebrow: "Car rental", title: "Drive the countryside, skip the city traffic",
+    id: "car-rental", eyebrow: "Car rental", title: "Car rental",
     text: "Airport or city pickup, Shabbat office hours, tolls and parking — then compare on the provider's site.",
     feature: { src: roadTrip, alt: "Illustrative rental car on an open desert road at sunset" },
     cards: [
@@ -124,14 +145,28 @@ function PhotoCard({ c }: { c: Card }) {
   );
 }
 
+function CompactCard({ c }: { c: Card }) {
+  return (
+    <li>
+      <Link to={c.to} className="photo-card group grid grid-cols-[96px_minmax(0,1fr)] items-center gap-4 rounded-xl border bg-background p-2.5 pr-4 transition-colors hover:border-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring sm:grid-cols-[112px_minmax(0,1fr)]">
+        <span className="block overflow-hidden rounded-lg">
+          <img src={c.img.src} alt={c.img.alt} loading="lazy" decoding="async" width={224} height={160} className="aspect-[7/5] w-full object-cover transition-transform duration-500 group-hover:scale-105" />
+        </span>
+        <span className="min-w-0">
+          <h3 className="font-serif text-lg leading-tight group-hover:text-primary">{c.label}</h3>
+          <span className="mt-0.5 block text-sm text-muted-foreground">{c.text} <span aria-hidden>→</span></span>
+        </span>
+      </Link>
+    </li>
+  );
+}
+
 function Home() {
   return (
     <main>
       <section className="relative mx-auto max-w-6xl px-4 pt-6">
-        <div className="relative overflow-hidden rounded-3xl bg-navy">
-          <img src={hero} alt="Jerusalem's Old City and the Dome of the Rock seen from the Mount of Olives" width={1600} height={1066} fetchPriority="high" className="absolute inset-0 h-full w-full object-cover" />
-          <div className="absolute inset-0 bg-gradient-to-r from-navy/90 via-navy/60 to-navy/10" aria-hidden />
-          <div className="relative max-w-2xl px-6 py-16 text-navy-foreground md:px-12 md:py-24">
+        <HeroCarousel slides={heroSlides}>
+          <div className="max-w-2xl px-6 pb-6 pt-14 text-navy-foreground md:px-12 md:pt-20">
             <p className="text-xs font-semibold uppercase tracking-[0.14em] opacity-85">Plan your trip to Israel</p>
             <h1 className="mt-4 text-4xl leading-[1.08] md:text-6xl">Where to stay, how to get around, what to see.</h1>
             <p className="mt-5 max-w-xl text-lg leading-relaxed opacity-90">
@@ -142,8 +177,7 @@ function Home() {
               <Link to="/destinations/" className="btn border border-navy-foreground/60 text-navy-foreground hover:bg-navy-foreground/15">Browse destinations</Link>
             </div>
           </div>
-          <p className="absolute right-4 top-3 text-xs text-navy-foreground/85">Jerusalem Old City from the Mount of Olives</p>
-        </div>
+        </HeroCarousel>
         <nav aria-label="Services" className="relative -mt-6 mx-4 grid grid-cols-2 gap-2 rounded-2xl border bg-card p-3 shadow-lg sm:grid-cols-3 lg:grid-cols-6">
           {services.map((s) => (
             <a key={s.id} href={`#${s.id}`} className="rounded-lg px-3 py-2 text-center text-sm font-semibold hover:bg-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring">{s.eyebrow.split(" &")[0]}</a>
@@ -151,23 +185,22 @@ function Home() {
         </nav>
       </section>
 
-      <div className="mx-auto mt-14 max-w-6xl space-y-16 px-4">
+      <div className="mx-auto mt-14 max-w-6xl space-y-8 px-4">
         {services.map((s, i) => (
-          <section key={s.id} id={s.id} aria-labelledby={`${s.id}-h`} className="scroll-mt-6">
-            <div className={`grid gap-5 lg:grid-cols-[1.15fr_1fr] lg:items-stretch ${i % 2 ? "lg:[&>*:first-child]:order-2" : ""}`}>
-              <div className="relative min-h-[320px] overflow-hidden rounded-2xl bg-navy md:min-h-[420px]">
-                <img src={s.feature.src} alt={s.feature.alt} loading="lazy" decoding="async" width={1400} height={880} className="absolute inset-0 h-full w-full object-cover" />
-                <div className="absolute inset-0 bg-gradient-to-t from-navy/90 via-navy/40 to-transparent" aria-hidden />
-                <div className="absolute inset-x-0 bottom-0 p-6 text-navy-foreground md:p-8">
-                  <p className="text-xs font-semibold uppercase tracking-[0.14em] opacity-85">{s.eyebrow}</p>
-                  <h2 id={`${s.id}-h`} className="mt-2 text-3xl md:text-4xl">{s.title}</h2>
-                  <p className="mt-2 max-w-md opacity-90">{s.text}</p>
-                  <Link to={s.hub.to} className="btn btn-light mt-4">{s.hub.label} →</Link>
-                </div>
+          <section key={s.id} id={s.id} aria-labelledby={`${s.id}-h`} className={`scroll-mt-6 rounded-2xl border p-5 md:p-8 ${i % 2 ? "bg-accent/40" : "bg-card"}`}>
+            <header className="grid gap-4 border-b pb-5 md:grid-cols-[minmax(0,1fr)_auto] md:items-end">
+              <div className="min-w-0">
+                <p className="eyebrow">{String(i + 1).padStart(2, "0")} · {s.eyebrow}</p>
+                <h2 id={`${s.id}-h`} className="mt-2 text-3xl md:text-4xl">{s.title}</h2>
+                <p className="mt-2 max-w-2xl text-muted-foreground">{s.text}</p>
               </div>
-              <div className={`grid content-center gap-4 ${s.cards.length === 2 ? "sm:grid-cols-2 lg:grid-cols-1" : "sm:grid-cols-3 lg:grid-cols-2 lg:[&>*:first-child]:col-span-2"}`}>
-                {s.cards.map((c) => <PhotoCard key={c.label} c={c} />)}
-              </div>
+              <Link to={s.hub.to} className="btn btn-primary shrink-0 justify-self-start">{s.hub.label} →</Link>
+            </header>
+            <div className={`mt-6 grid gap-5 md:grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)] md:items-center ${i % 2 ? "md:[&>*:first-child]:order-2" : ""}`}>
+              <img src={s.feature.src} alt={s.feature.alt} loading="lazy" decoding="async" width={1400} height={880} className="aspect-[16/10] w-full rounded-xl object-cover md:max-h-[300px]" />
+              <ul className="grid gap-3" aria-label={`${s.eyebrow} choices`}>
+                {s.cards.map((c) => <CompactCard key={c.label} c={c} />)}
+              </ul>
             </div>
           </section>
         ))}
@@ -175,8 +208,8 @@ function Home() {
 
       <section aria-labelledby="dest-h" className="mx-auto mt-20 max-w-6xl px-4">
         <div className="rounded-2xl bg-navy p-6 text-navy-foreground md:p-8">
-          <p className="text-xs font-semibold uppercase tracking-[0.14em] opacity-80">Popular destinations</p>
-          <h2 id="dest-h" className="mt-2 text-3xl">Jerusalem, Tel Aviv and the Sea of Galilee</h2>
+          <p className="text-xs font-semibold uppercase tracking-[0.14em] opacity-80">Where to base yourself</p>
+          <h2 id="dest-h" className="mt-2 text-3xl">Popular destinations</h2>
           <div className="mt-6 grid gap-4 sm:grid-cols-3">
             <PhotoCard c={{ label: "Jerusalem", text: "Old City, Bethlehem & Masada trips", to: "/travel-blog/where-to-stay-in-jerusalem/", img: IMG.jerusalem }} />
             <PhotoCard c={{ label: "Tel Aviv & Jaffa", text: "Beaches, food and the coast", to: "/travel-blog/where-to-stay-in-tel-aviv/", img: IMG.telAviv }} />
