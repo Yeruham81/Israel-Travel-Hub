@@ -1,9 +1,10 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useMemo, useState } from "react";
 import roadImg from "@/assets/road-to-jerusalem.jpg";
-import { SiteHeader, SiteFooter, ExtLink } from "@/components/Layout";
+import { ExtLink } from "@/components/Layout";
+import { OnThisPage, RelatedLinks } from "@/components/Guide";
 import {
-  offers, routeFaqs, sources, getSource, formatCheckDate, INFO_CHECK_DATE, OWNER_BASE, tlvToJerusalem,
+  offers as allOffers, routeFaqs, getSource, formatCheckDate, INFO_CHECK_DATE, OWNER_BASE, tlvToJerusalem,
   type Offer, type OfferCategory,
 } from "@/data/registry";
 import { recordOutboundClick, relFor } from "@/lib/outbound";
@@ -12,6 +13,8 @@ import { israelNow } from "@/lib/israel-time";
 import { validate } from "@/lib/journey";
 
 const PATH = tlvToJerusalem.path;
+const offers = allOffers.filter((o) => o.routeId === tlvToJerusalem.id);
+const SOURCE_IDS = ["iaa-directions", "gett-airport", "moshe-airport-transfers", "intui-airport", "gettransfer-home", "israel-rail", "owner-route-guide"];
 const H1 = "Ben Gurion Airport to Jerusalem: taxis & private transfers";
 
 export const Route = createFileRoute("/travel-blog/ben-gurion-airport-to-jerusalem")({
@@ -32,7 +35,9 @@ export const Route = createFileRoute("/travel-blog/ben-gurion-airport-to-jerusal
             "@type": "BreadcrumbList",
             itemListElement: [
               { "@type": "ListItem", position: 1, name: "Home", item: CANONICAL_ORIGIN + "/" },
-              { "@type": "ListItem", position: 2, name: "Ben Gurion Airport to Jerusalem", item: CANONICAL_ORIGIN + PATH },
+              { "@type": "ListItem", position: 2, name: "Transfers", item: CANONICAL_ORIGIN + "/transfers/" },
+              { "@type": "ListItem", position: 3, name: "Ben Gurion Airport", item: CANONICAL_ORIGIN + "/transfers/ben-gurion-airport/" },
+              { "@type": "ListItem", position: 4, name: "Jerusalem", item: CANONICAL_ORIGIN + PATH },
             ],
           }),
         },
@@ -54,6 +59,7 @@ export const Route = createFileRoute("/travel-blog/ben-gurion-airport-to-jerusal
 
 const sections = [
   ["quick-answer", "Quick answer"],
+  ["journey-info", "Journey essentials"],
   ["plan", "Plan your journey"],
   ["options", "Booking options"],
   ["pricing", "Pricing & inclusions"],
@@ -107,34 +113,28 @@ function RoutePage() {
 
   return (
     <>
-      <SiteHeader />
       <main className="pb-24 lg:pb-0">
-        <div className="mx-auto max-w-6xl px-4 pt-6">
+        <div className="mx-auto max-w-5xl px-4 pt-6">
           <nav aria-label="Breadcrumb" className="text-sm text-muted-foreground">
             <ol className="flex flex-wrap gap-1">
               <li><Link to="/" className="hover:text-primary">Home</Link> /</li>
-              <li aria-current="page" className="text-foreground">Ben Gurion Airport to Jerusalem</li>
+              <li><Link to="/transfers/" className="hover:text-primary">Transfers</Link> /</li>
+              <li><Link to="/transfers/ben-gurion-airport/" className="hover:text-primary">Ben Gurion Airport</Link> /</li>
+              <li aria-current="page" className="text-foreground">Jerusalem</li>
             </ol>
           </nav>
         </div>
 
-        <header className="mx-auto max-w-6xl px-4 pt-6">
+        <header className="mx-auto max-w-5xl px-4 pt-6">
           <p className="eyebrow">Airport transfer guide · TLV → Jerusalem</p>
           <h1 className="mt-3 max-w-4xl text-4xl leading-[1.1] md:text-5xl">{H1}</h1>
           <p className="mt-4 text-sm text-muted-foreground">Source facts checked {formatCheckDate(INFO_CHECK_DATE)} · <Link to="/about/" className="underline">How we compare</Link></p>
           <img src={roadImg} alt="Road winding through the Judean hills towards Jerusalem at sunset" width={1600} height={912} className="mt-8 aspect-[21/9] w-full rounded-2xl object-cover" />
         </header>
 
-        {/* Mobile section nav */}
-        <nav aria-label="On this page" className="sticky top-[57px] z-30 mt-6 overflow-x-auto border-y bg-background/95 backdrop-blur lg:hidden">
-          <ul className="flex gap-2 px-4 py-2 text-sm whitespace-nowrap">
-            {sections.map(([id, label]) => (
-              <li key={id}><a href={`#${id}`} className="chip inline-block">{label}</a></li>
-            ))}
-          </ul>
-        </nav>
+        <OnThisPage sections={sections} />
 
-        <div className="mx-auto mt-10 grid max-w-6xl gap-12 px-4 lg:grid-cols-[1fr_17rem]">
+        <div className="mx-auto mt-10 max-w-5xl px-4">
           <article className="min-w-0">
             <section id="quick-answer" aria-labelledby="qa-h">
               <h2 id="qa-h" className="text-3xl">Quick answer</h2>
@@ -144,8 +144,20 @@ function RoutePage() {
                 <p><strong>How to use this page:</strong> enter your passengers and luggage below, compare the options side by side, then confirm price and details on the provider's own site before paying.</p>
               </div>
               <div className="mt-6 flex flex-wrap gap-3">
+                <a href="#journey-info" className="btn btn-outline">Read journey essentials</a>
                 <a href="#options" className="btn btn-primary">See booking options</a>
-                <a href="#plan" className="btn btn-outline">Plan my journey</a>
+              </div>
+            </section>
+
+            <section id="journey-info" aria-labelledby="ji-h" className="mt-14">
+              <h2 id="ji-h" className="text-3xl">Journey essentials before you book</h2>
+              <div className="mt-5 grid gap-4 sm:grid-cols-2">
+                <InfoBlock title="Pickup at the airport">Licensed taxis wait at Terminal 3, ground floor, Exit 03, and at Terminal 1 by the domestic arrivals exit (<ExtLink href={getSource("iaa-directions").url}>IAA</ExtLink>). A pre-booked driver meets you where <em>your confirmation</em> says, which may be elsewhere.</InfoBlock>
+                <InfoBlock title="Traffic and timing">The road climbs from the coastal plain into the Judean hills. Rush hours and the run-up to Shabbat or holidays can slow entry into Jerusalem, so leave slack before check-in times or onward plans. Passport control and baggage can also take a while.</InfoBlock>
+                <InfoBlock title="Luggage and child seats">State the exact number of suitcases and any strollers or oversized bags. Child seats are provider-specific: request them in writing. Four adults with four large cases may need a larger vehicle.</InfoBlock>
+                <InfoBlock title="Train: check your date">Israel Railways serves the airport and Jerusalem, but service changes on Shabbat, holidays and during works. Check <ExtLink href="https://www.rail.co.il/">rail.co.il</ExtLink> for your exact date before relying on it.</InfoBlock>
+                <InfoBlock title="What a quote should include">Final total in a stated currency, whether it is per vehicle or per person, waiting time after landing, night/weekend/holiday surcharges, vehicle type, and the cancellation and flight-delay policy.</InfoBlock>
+                <InfoBlock title="Jerusalem drop-off">Old City and pedestrian streets limit car access. Give a full address and confirm the nearest permitted drop-off point with your hotel and provider.</InfoBlock>
               </div>
             </section>
 
@@ -280,7 +292,7 @@ function RoutePage() {
               <h2 className="text-3xl">Sources</h2>
               <p className="mt-2 text-sm text-muted-foreground">Facts marked “checked” were reviewed on {formatCheckDate(INFO_CHECK_DATE)}. This date refers to the source facts listed here only; it does not mean every provider's current availability or vehicles were verified.</p>
               <ul className="mt-4 space-y-3">
-                {sources.map((s) => (
+                {SOURCE_IDS.map(getSource).map((s) => (
                   <li key={s.id} className="rounded-xl border bg-card p-4 text-sm">
                     <ExtLink href={s.url} className="font-semibold text-primary">{s.publisher}: {s.title}</ExtLink>
                     <p className="mt-1 text-muted-foreground">{s.note}</p>
@@ -290,15 +302,12 @@ function RoutePage() {
               </ul>
             </section>
 
-            <section className="mt-16">
-              <h2 className="text-3xl">Plan the rest of your trip</h2>
-              <ul className="mt-4 grid gap-3 sm:grid-cols-2">
-                <li><ExtLink guide href={`${OWNER_BASE}/travel-blog/where-to-stay-in-jerusalem/`} className="block rounded-xl border bg-card p-4 font-medium hover:border-primary">Where to stay in Jerusalem</ExtLink></li>
-                <li><ExtLink guide href={`${OWNER_BASE}/travel-blog/jerusalem-travel-guide/`} className="block rounded-xl border bg-card p-4 font-medium hover:border-primary">Jerusalem travel guide</ExtLink></li>
-                <li><ExtLink guide href={`${OWNER_BASE}/travel-blog/jerusalem-to-bethlehem/`} className="block rounded-xl border bg-card p-4 font-medium hover:border-primary">Jerusalem to Bethlehem</ExtLink></li>
-                <li><ExtLink guide href={`${OWNER_BASE}/private-day-trips/`} className="block rounded-xl border bg-card p-4 font-medium hover:border-primary">Private day trips</ExtLink></li>
-              </ul>
-            </section>
+            <RelatedLinks items={[
+              { label: "Hotels in Jerusalem", to: "/travel-blog/where-to-stay-in-jerusalem/", note: "Choose an area that suits your plans and drop-off" },
+              { label: "Bethlehem tours from Jerusalem", to: "/tours/bethlehem-from-jerusalem/", note: "How to compare combined and private tours" },
+              { label: "Masada visit & tickets", to: "/travel-blog/masada/", note: "A popular day trip from Jerusalem" },
+              { label: "Airport to Tel Aviv", to: "/travel-blog/ben-gurion-airport-to-tel-aviv/", note: "If you start or end your trip on the coast" },
+            ]} />
 
             <section className="mt-16 rounded-2xl bg-navy p-8 text-navy-foreground">
               <h2 className="text-3xl">Ready to book your ride?</h2>
@@ -309,22 +318,6 @@ function RoutePage() {
             </section>
           </article>
 
-          <aside className="hidden lg:block">
-            <div className="sticky top-24 space-y-6">
-              <nav aria-label="Contents" className="rounded-2xl border bg-card p-5">
-                <p className="eyebrow">Contents</p>
-                <ul className="mt-3 space-y-2 text-sm">
-                  {sections.map(([id, label]) => <li key={id}><a href={`#${id}`} className="hover:text-primary">{label}</a></li>)}
-                </ul>
-              </nav>
-              <div className="rounded-2xl bg-accent p-5 text-sm text-accent-foreground">
-                <p className="font-semibold">Your plan</p>
-                <p className="mt-1">{applied ? `${applied.pax} passengers · ${applied.lug} cases` : "Not set yet"}</p>
-                <p className="mt-1">Comparing: {compare.length}</p>
-                <a href={compare.length ? "#compare-table" : "#options"} className="btn btn-primary mt-4 w-full">Compare options</a>
-              </div>
-            </div>
-          </aside>
         </div>
       </main>
 
@@ -334,7 +327,6 @@ function RoutePage() {
           Compare options{compare.length ? ` (${compare.length})` : ""}
         </a>
       </div>
-      <SiteFooter />
     </>
   );
 }
@@ -345,6 +337,15 @@ function Field({ id, label, error, children }: { id: string; label: string; erro
       <label htmlFor={id} className="text-sm font-medium">{label}</label>
       {children}
       {error && <p id={`${id}-err`} className="mt-1 text-sm font-medium text-destructive">{error}</p>}
+    </div>
+  );
+}
+
+function InfoBlock({ title, children }: { title: string; children: React.ReactNode }) {
+  return (
+    <div className="rounded-xl border bg-card p-5">
+      <h3 className="font-serif text-lg">{title}</h3>
+      <p className="mt-2 text-sm leading-relaxed">{children}</p>
     </div>
   );
 }
