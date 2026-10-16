@@ -2,7 +2,7 @@ import { useState } from "react";
 import type { CityStayGuide, StayPreference } from "@/data/content";
 import { preferenceLabels } from "@/data/content";
 import { linksForPage } from "@/data/registry";
-import { Checklist, EndCta, FaqList, GuideHeader, OnThisPage, ProviderSection, RelatedLinks, Section, SourceList } from "@/components/Guide";
+import { type UiCrumb, Checklist, EndCta, FaqList, GuideHeader, OnThisPage, ProviderSection, RelatedLinks, Section, SourceList } from "@/components/Guide";
 
 const sections = [
   ["overview", "Overview"],
@@ -21,7 +21,7 @@ export function CityStayPage({ g }: { g: CityStayGuide }) {
   return (
     <main>
       <GuideHeader
-        crumbs={[{ name: "Home", to: "/" }, { name: "Accommodation", to: "/hotels/" }, { name: g.city, to: g.path as never }]}
+        crumbs={[{ name: "Home", to: "/" }, { name: "Accommodation", to: "/hotels/" }, { name: g.city, to: g.path as UiCrumb["to"] }]}
         eyebrow={`Accommodation · ${g.city}`}
         title={g.title}
         intro={g.intro}
