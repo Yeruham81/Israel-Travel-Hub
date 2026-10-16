@@ -4,17 +4,7 @@ export type HeroSlide = { src: string; srcSm: string; alt: string; caption: stri
 
 const INTERVAL = 6000;
 
-/** Fetch + decode the variant the <picture> would pick, so switching never shows an empty frame. */
-function loadSlide(s: HeroSlide): Promise<void> {
-  const url = window.matchMedia("(max-width: 767px)").matches ? s.srcSm : s.src;
-  return new Promise((resolve, reject) => {
-    const img = new Image();
-    img.decoding = "async";
-    img.onload = () => { (img.decode ? img.decode().catch(() => undefined) : Promise.resolve()).then(() => resolve()); };
-    img.onerror = () => reject(new Error("image failed"));
-    img.src = url;
-  });
-}
+type Waiter = { resolve: () => void; reject: () => void };
 
 export function HeroCarousel({ slides, children }: { slides: HeroSlide[]; children: ReactNode }) {
   const [index, setIndex] = useState(0);
@@ -24,14 +14,14 @@ export function HeroCarousel({ slides, children }: { slides: HeroSlide[]; childr
   const [hovered, setHovered] = useState(false);
   const [focused, setFocused] = useState(false);
   const [hidden, setHidden] = useState(false);
-  // Slides whose image has loaded and decoded (slide 0 is rendered by the browser directly).
-  const [ready, setReady] = useState<Set<number>>(() => new Set([0]));
+  // Slides whose <img> has been requested (mounted, hidden until shown). Accumulates; cached photos stay mounted.
+  const [mounted, setMounted] = useState<Set<number>>(() => new Set([0]));
   const [tick, setTick] = useState(0); // resets timer on navigation attempts
   const rootRef = useRef<HTMLDivElement>(null);
-  const readyRef = useRef(ready);
-  readyRef.current = ready;
+  // Slides whose mounted <img> has actually loaded and decoded. Slide 0 is the server-rendered first frame.
+  const ready = useRef(new Set<number>([0]));
+  const waiters = useRef(new Map<number, Waiter[]>());
   const requestId = useRef(0);
-  const inflight = useRef(new Map<number, Promise<void>>());
   const n = slides.length;
 
   useEffect(() => {
@@ -45,20 +35,29 @@ export function HeroCarousel({ slides, children }: { slides: HeroSlide[]; childr
     return () => { mq.removeEventListener("change", apply); document.removeEventListener("visibilitychange", vis); };
   }, []);
 
+  /** Resolves once slide i's displayed image is loaded + decoded; rejects if it fails. */
   const ensure = useCallback((i: number): Promise<void> => {
-    if (readyRef.current.has(i)) return Promise.resolve();
-    let p = inflight.current.get(i);
-    if (!p) {
-      const slide = slides[i];
-      if (!slide) return Promise.reject(new Error("no slide"));
-      p = loadSlide(slide).then(
-        () => { inflight.current.delete(i); setReady((prev) => (prev.has(i) ? prev : new Set(prev).add(i))); },
-        (e) => { inflight.current.delete(i); throw e; },
-      );
-      inflight.current.set(i, p);
-    }
-    return p;
-  }, [slides]);
+    if (ready.current.has(i)) return Promise.resolve();
+    return new Promise<void>((resolve, reject) => {
+      const list = waiters.current.get(i) ?? [];
+      list.push({ resolve, reject });
+      waiters.current.set(i, list);
+      setMounted((prev) => (prev.has(i) ? prev : new Set(prev).add(i)));
+    });
+  }, []);
+
+  const onImgLoad = (i: number, img: HTMLImageElement) => {
+    (img.decode ? img.decode().catch(() => undefined) : Promise.resolve()).then(() => {
+      ready.current.add(i);
+      waiters.current.get(i)?.forEach((w) => w.resolve());
+      waiters.current.delete(i);
+    });
+  };
+  const onImgError = (i: number) => {
+    waiters.current.get(i)?.forEach((w) => w.reject());
+    waiters.current.delete(i);
+    if (i !== index) setMounted((prev) => { const s = new Set(prev); s.delete(i); return s; }); // allow a later retry
+  };
 
   const autoplayOn = playing && (!reduced || userChosePlay);
   const running = autoplayOn && !hovered && !focused && !hidden;
@@ -106,10 +105,10 @@ export function HeroCarousel({ slides, children }: { slides: HeroSlide[]; childr
       <div className="absolute inset-0">
         {slides.map((s, i) => (
           <div key={s.caption} role="group" aria-roledescription="slide" aria-label={`${i + 1} of ${n}: ${s.caption}`} aria-hidden={i !== index} className={`absolute inset-0 ${fade} ${i === index ? "opacity-100" : "opacity-0"}`}>
-            {(ready.has(i) || i === index) && (
+            {(mounted.has(i) || i === index) && (
               <picture>
                 <source media="(max-width: 767px)" srcSet={s.srcSm} />
-                <img src={s.src} alt={s.alt} width={1920} height={872} fetchPriority={i === 0 ? "high" : "auto"} decoding="async" className="h-full w-full object-cover" style={{ objectPosition: s.pos ?? "center" }} />
+                <img src={s.src} alt={s.alt} width={1920} height={872} fetchPriority={i === 0 ? "high" : "auto"} decoding="async" onLoad={(e) => onImgLoad(i, e.currentTarget)} onError={() => onImgError(i)} className="h-full w-full object-cover" style={{ objectPosition: s.pos ?? "center" }} />
               </picture>
             )}
           </div>
