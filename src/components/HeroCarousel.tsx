@@ -109,7 +109,7 @@ export function HeroCarousel({ slides, children }: { slides: HeroSlide[]; childr
             {(ready.has(i) || i === index) && (
               <picture>
                 <source media="(max-width: 767px)" srcSet={s.srcSm} />
-                <img src={s.src} alt={s.alt} width={1920} height={872} fetchPriority={i === 0 ? "high" : "auto"} loading={i === 0 ? "eager" : "lazy"} decoding="async" className="h-full w-full object-cover" style={{ objectPosition: s.pos ?? "center" }} />
+                <img src={s.src} alt={s.alt} width={1920} height={872} fetchPriority={i === 0 ? "high" : "auto"} decoding="async" className="h-full w-full object-cover" style={{ objectPosition: s.pos ?? "center" }} />
               </picture>
             )}
           </div>
