@@ -291,7 +291,7 @@ export const routeFaqs: { q: string; a: string }[] = [
   },
   {
     q: "Can I travel on Shabbat or holidays?",
-    a: "Private transfers and licensed taxis can usually be arranged, but surcharges may apply and train services are limited. Check Israel Railways for current schedules and confirm any surcharge in your quote.",
+    a: "Check Israel Railways' current service for your exact date before relying on the train. For a transfer or taxi, confirm the provider's availability and any night, weekend or holiday charges for your arrival time.",
   },
   {
     q: "Is there a train instead?",

@@ -21,3 +21,10 @@
 ## Tests
 - `bunx vitest run` — routing, outbound URL, rel, FAQ and price-cap checks.
 - Browser checks: see handoff.
+
+## QA pass — 16 Oct 2026
+- Arrival date/time labeled as Israel local time; min date and past-time checks use `Intl.DateTimeFormat` with `Asia/Jerusalem` (`src/lib/israel-time.ts`, `src/lib/journey.ts`). Selected time is not converted.
+- Removed the unverified "rail limited on Shabbat/holidays" claim (FAQ + Train section); readers are told to check Israel Railways for their exact date and confirm provider availability and night/weekend/holiday charges.
+- Old City advice now says to confirm the nearest permitted drop-off and walking distance with accommodation/provider.
+- Breadcrumbs (visible + JSON-LD) are now Home > guide only.
+- Validation: `TZ=America/New_York bunx vitest run` 8/8 pass (incl. browser-today-but-past-in-Israel case); `tsgo` clean; Playwright with timezone America/New_York confirmed labels, Israel min date and 2-item breadcrumb.
