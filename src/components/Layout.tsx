@@ -57,7 +57,7 @@ export function GlobalNav({ onNavigate }: { onNavigate?: () => void }) {
   );
 }
 
-const headerNav = serviceNav.slice(1, 7);
+const headerNav = serviceDomains;
 
 export function SiteHeader() {
   const [open, setOpen] = useState(false);
