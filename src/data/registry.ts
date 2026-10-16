@@ -18,7 +18,7 @@ export interface SourceReference {
 export interface Operator {
   id: string;
   name: string;
-  kind: "local_operator" | "authorized_taxi_system";
+  kind: "local_operator" | "authorized_taxi_system" | "tour_operator" | "official_site";
   disclosure?: string;
 }
 
@@ -51,11 +51,21 @@ export interface IndicativePrice {
 
 export type OfferCategory = "prebooked" | "on_arrival";
 
+/**
+ * How a traveler continues with an offer.
+ * - live_quote: a configured API returned a price for the traveler's exact context (none configured yet).
+ * - provider_redirect: regular link to the provider's own site; traveler enters details there.
+ * - provider_inquiry: traveler requests a quote / contacts the provider on the provider's site.
+ * - official_info: official information / reservation page (e.g. national parks, airport authority).
+ */
+export type BookingMode = "live_quote" | "provider_redirect" | "provider_inquiry" | "official_info";
+
 export interface Offer {
   id: string;
   productId: string;
   routeId: string;
   category: OfferCategory;
+  mode: BookingMode;
   operatorId?: string;
   partnerId?: string;
   label: string;
@@ -181,6 +191,7 @@ export const offers: Offer[] = [
     id: "offer-moshe-tlv-jlm",
     productId: "moshe-private-transfer-tlv-jlm",
     routeId: "tlv-jerusalem",
+    mode: "provider_inquiry",
     category: "prebooked",
     operatorId: "moshe-barak",
     label: "Moshe Barak",
@@ -208,6 +219,7 @@ export const offers: Offer[] = [
     id: "offer-intui-tlv-jlm",
     productId: "intui-transfer-search-tlv",
     routeId: "tlv-jerusalem",
+    mode: "provider_redirect",
     category: "prebooked",
     partnerId: "intui",
     label: "Intui.travel",
@@ -226,6 +238,7 @@ export const offers: Offer[] = [
     id: "offer-gettransfer-tlv-jlm",
     productId: "gettransfer-search",
     routeId: "tlv-jerusalem",
+    mode: "provider_redirect",
     category: "prebooked",
     partnerId: "gettransfer",
     label: "GetTransfer.com",
@@ -244,6 +257,7 @@ export const offers: Offer[] = [
     id: "info-gett-airport",
     productId: "authorized-airport-taxi",
     routeId: "tlv-jerusalem",
+    mode: "official_info",
     category: "on_arrival",
     partnerId: "gett",
     label: "Authorized airport taxi (Gett)",
