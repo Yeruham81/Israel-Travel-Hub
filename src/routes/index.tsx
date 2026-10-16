@@ -141,7 +141,7 @@ function Home() {
               <Link to="/destinations/" className="btn border border-navy-foreground/60 text-navy-foreground hover:bg-navy-foreground/15">Browse destinations</Link>
             </div>
           </div>
-          <p className="absolute bottom-3 right-4 text-xs text-navy-foreground/80">Jerusalem, Old City</p>
+          <p className="absolute right-4 top-3 text-xs text-navy-foreground/85">Jerusalem, Old City</p>
         </div>
         <nav aria-label="Services" className="relative -mt-6 mx-4 grid grid-cols-2 gap-2 rounded-2xl border bg-card p-3 shadow-lg sm:grid-cols-3 lg:grid-cols-6">
           {services.map((s) => (
