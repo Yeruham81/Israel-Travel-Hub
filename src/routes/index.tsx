@@ -18,28 +18,6 @@ import cruisePort from "@/assets/home/cruise-port.webp";
 import ashdodPort from "@/assets/home/ashdod-port.webp";
 import haifaPort from "@/assets/home/haifa-port.webp";
 import { pageMeta } from "@/lib/site";
-import { HeroCarousel, type HeroSlide } from "@/components/HeroCarousel";
-import hJer from "@/assets/home/hero-jerusalem.webp";
-import hJerSm from "@/assets/home/hero-jerusalem-sm.webp";
-import hTa from "@/assets/home/hero-tel-aviv.webp";
-import hTaSm from "@/assets/home/hero-tel-aviv-sm.webp";
-import hHf from "@/assets/home/hero-haifa.webp";
-import hHfSm from "@/assets/home/hero-haifa-sm.webp";
-import hMs from "@/assets/home/hero-masada.webp";
-import hMsSm from "@/assets/home/hero-masada-sm.webp";
-import hCs from "@/assets/home/hero-caesarea.webp";
-import hCsSm from "@/assets/home/hero-caesarea-sm.webp";
-import hGl from "@/assets/home/hero-galilee.webp";
-import hGlSm from "@/assets/home/hero-galilee-sm.webp";
-
-const heroSlides: HeroSlide[] = [
-  { src: hJer, srcSm: hJerSm, caption: "Jerusalem Old City from the Mount of Olives", alt: "Jerusalem's Old City and the Dome of the Rock seen from the Mount of Olives", pos: "55% center" },
-  { src: hTa, srcSm: hTaSm, caption: "Tel Aviv beach promenade", alt: "The seafront promenade beside the beach in Tel Aviv", pos: "40% center" },
-  { src: hHf, srcSm: hHfSm, caption: "Haifa Bay from the Carmel, Bahá'í Gardens below", alt: "Haifa and Haifa Bay seen from Mount Carmel above the Bahá'í Gardens", pos: "center" },
-  { src: hMs, srcSm: hMsSm, caption: "Masada above the Dead Sea", alt: "The Masada plateau from the air with the Dead Sea behind", pos: "center" },
-  { src: hCs, srcSm: hCsSm, caption: "Caesarea National Park on the coast", alt: "Ancient ruins on the shore at Caesarea at dusk", pos: "65% center" },
-  { src: hGl, srcSm: hGlSm, caption: "Tiberias and the Sea of Galilee", alt: "Tiberias on the hillside above the Sea of Galilee, seen from the water", pos: "center" },
-];
 import { photoCredits } from "@/data/photoCredits";
 
 export const Route = createFileRoute("/")({
@@ -176,27 +154,14 @@ function CompactCard({ c }: { c: Card }) {
 
 function Home() {
   return (
-    <main>
-      <section className="relative mx-auto max-w-6xl px-4 pt-6">
-        <HeroCarousel slides={heroSlides}>
-          <div className="max-w-2xl px-6 pb-6 pt-14 text-navy-foreground md:px-12 md:pt-20">
-            <p className="text-xs font-semibold uppercase tracking-[0.14em] opacity-85">Plan your trip to Israel</p>
-            <h1 className="mt-4 text-4xl leading-[1.08] md:text-6xl">Where to stay, how to get around, what to see.</h1>
-            <p className="mt-5 max-w-xl text-lg leading-relaxed opacity-90">
-              Locally written guides for international visitors — useful information first, then clear links to book with hotels, transfer companies, tour operators and official sites.
-            </p>
-            <div className="mt-7 flex flex-wrap gap-3">
-              <Link to="/hotels/" className="btn btn-light">Find where to stay</Link>
-              <Link to="/destinations/" className="btn border border-navy-foreground/60 text-navy-foreground hover:bg-navy-foreground/15">Browse destinations</Link>
-            </div>
-          </div>
-        </HeroCarousel>
-        <nav aria-label="Services" className="relative -mt-6 mx-4 grid grid-cols-2 gap-2 rounded-2xl border bg-card p-3 shadow-lg sm:grid-cols-4 xl:grid-cols-7 [&>*:last-child]:col-span-2 sm:[&>*:last-child]:col-span-1">
+    <div>
+      <div className="mx-auto max-w-6xl px-4 pt-6">
+        <nav aria-label="Services" className="grid grid-cols-2 gap-2 rounded-2xl border bg-card p-3 shadow-lg sm:grid-cols-4 xl:grid-cols-7 [&>*:last-child]:col-span-2 sm:[&>*:last-child]:col-span-1">
           {services.map((s) => (
             <a key={s.id} href={`#${s.id}`} className="rounded-lg px-3 py-2 text-center text-sm font-semibold hover:bg-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring">{s.eyebrow.split(" &")[0]}</a>
           ))}
         </nav>
-      </section>
+      </div>
 
       <div className="mx-auto mt-14 max-w-6xl space-y-8 px-4">
         {services.map((s, i) => (
@@ -245,6 +210,6 @@ function Home() {
           ))}
         </ul>
       </details>
-    </main>
+    </div>
   );
 }

@@ -6,6 +6,7 @@ import {
   useRouter,
   HeadContent,
   Scripts,
+  useRouterState,
   type ErrorComponentProps,
 } from "@tanstack/react-router";
 import { useEffect, type ReactNode } from "react";
@@ -13,6 +14,7 @@ import { useEffect, type ReactNode } from "react";
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 import { SiteHeader, SiteFooter, SiteSidebar } from "@/components/Layout";
+import { HomeHero } from "@/components/HomeHero";
 
 function NotFoundComponent() {
   return (
@@ -120,18 +122,23 @@ function RootShell({ children }: { children: ReactNode }) {
 
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
+  const isHome = useRouterState({ select: (s) => s.matches.some((match) => match.routeId === "/") });
+  const Content = isHome ? "main" : "div";
 
   return (
     <QueryClientProvider client={queryClient}>
       <a href="#main" className="sr-only focus:not-sr-only focus:fixed focus:left-2 focus:top-2 focus:z-50 focus:rounded focus:bg-card focus:p-2">Skip to content</a>
       <SiteHeader />
-      <div className="mx-auto flex max-w-[90rem]">
-        <SiteSidebar />
-        <div id="main" className="min-w-0 flex-1">
-          {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
-          <Outlet />
+      <Content id="main">
+        {isHome && <HomeHero />}
+        <div className="mx-auto flex max-w-[90rem]">
+          <SiteSidebar />
+          <div className="min-w-0 flex-1">
+            {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
+            <Outlet />
+          </div>
         </div>
-      </div>
+      </Content>
       <SiteFooter />
     </QueryClientProvider>
   );

@@ -96,7 +96,7 @@ export function HeroCarousel({ slides, children }: { slides: HeroSlide[]; childr
       role="region"
       aria-roledescription="carousel"
       aria-label="Places in Israel"
-      className="relative overflow-hidden rounded-3xl bg-navy"
+      className="relative overflow-hidden bg-navy"
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
       onFocus={() => setFocused(true)}
@@ -115,8 +115,8 @@ export function HeroCarousel({ slides, children }: { slides: HeroSlide[]; childr
         ))}
       </div>
       <div className="absolute inset-0 bg-gradient-to-r from-navy/90 via-navy/60 to-navy/10 max-md:bg-gradient-to-t max-md:from-navy/95 max-md:via-navy/65 max-md:to-navy/25" aria-hidden />
-      <div className="relative">{children}</div>
-      <div className="relative flex flex-wrap items-center justify-between gap-3 px-6 pb-14 md:px-12 md:pb-16">
+      <div className="relative mx-auto max-w-[90rem]">{children}</div>
+      <div className="relative mx-auto flex max-w-[90rem] flex-wrap items-center justify-between gap-3 px-6 pb-14 md:px-12 md:pb-16">
         <p className="min-w-0 text-sm font-medium text-navy-foreground/90" aria-live={autoplayOn ? "off" : "polite"}>
           {slides[index]?.caption}
         </p>
