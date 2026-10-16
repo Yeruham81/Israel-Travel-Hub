@@ -1,5 +1,5 @@
 import { createFileRoute, Link, type LinkProps } from "@tanstack/react-router";
-import hero from "@/assets/jerusalem-hero.jpg";
+import hero from "@/assets/home/jerusalem-old-city-hero.webp";
 import jerusalem from "@/assets/home/jerusalem-old-city.webp";
 import telAviv from "@/assets/home/tel-aviv-coast.webp";
 import tiberias from "@/assets/home/tiberias-lake.webp";
@@ -11,7 +11,7 @@ import cableCarWide from "@/assets/home/masada-cable-car-wide.webp";
 import caesareaDusk from "@/assets/home/caesarea-dusk.webp";
 import caesareaAqueduct from "@/assets/home/caesarea-aqueduct.webp";
 import caesareaTheatre from "@/assets/home/caesarea-theatre.webp";
-import hotelPool from "@/assets/home/hotel-pool.webp";
+import hotelRoom from "@/assets/home/hotel-room.webp";
 import airportPickup from "@/assets/home/airport-pickup.webp";
 import guidedTour from "@/assets/home/guided-tour.webp";
 import roadTrip from "@/assets/home/road-trip.webp";
@@ -33,7 +33,7 @@ type Card = { label: string; text: string; to: LinkProps["to"]; img: Img };
 type Service = { id: string; eyebrow: string; title: string; text: string; feature: Img; cards: Card[]; hub: { label: string; to: LinkProps["to"] } };
 
 const IMG = {
-  jerusalem: { src: jerusalem, alt: "Jerusalem's Old City walls and rooftops" },
+  jerusalem: { src: jerusalem, alt: "Jerusalem's Old City and the Dome of the Rock seen from the Mount of Olives" },
   telAviv: { src: telAviv, alt: "Tel Aviv's beachfront skyline seen from Jaffa" },
   tiberias: { src: tiberias, alt: "Tiberias on the shore of the Sea of Galilee, seen from the water" },
   t3: { src: t3, alt: "Arrivals hall at Ben Gurion Airport Terminal 3" },
@@ -48,7 +48,7 @@ const services: Service[] = [
   {
     id: "accommodation", eyebrow: "Accommodation", title: "Where to stay, city by city",
     text: "Area-by-area advice — Shabbat, hills, parking, beach access — before you compare properties for your dates.",
-    feature: { src: hotelPool, alt: "Illustrative hotel rooftop pool at sunset (not a specific property)" },
+    feature: { src: hotelRoom, alt: "Illustrative bright hotel room with a made bed by the window (not a specific property)" },
     cards: [
       { label: "Jerusalem", text: "Old City, German Colony or city centre?", to: "/travel-blog/where-to-stay-in-jerusalem/", img: IMG.jerusalem },
       { label: "Tel Aviv", text: "Beachfront, Jaffa or the White City", to: "/travel-blog/where-to-stay-in-tel-aviv/", img: IMG.telAviv },
@@ -129,7 +129,7 @@ function Home() {
     <main>
       <section className="relative mx-auto max-w-6xl px-4 pt-6">
         <div className="relative overflow-hidden rounded-3xl bg-navy">
-          <img src={hero} alt="Jerusalem's Old City walls and rooftops in late-afternoon light" width={1600} height={1008} fetchPriority="high" className="absolute inset-0 h-full w-full object-cover" />
+          <img src={hero} alt="Jerusalem's Old City and the Dome of the Rock seen from the Mount of Olives" width={1600} height={1066} fetchPriority="high" className="absolute inset-0 h-full w-full object-cover" />
           <div className="absolute inset-0 bg-gradient-to-r from-navy/90 via-navy/60 to-navy/10" aria-hidden />
           <div className="relative max-w-2xl px-6 py-16 text-navy-foreground md:px-12 md:py-24">
             <p className="text-xs font-semibold uppercase tracking-[0.14em] opacity-85">Plan your trip to Israel</p>
@@ -142,7 +142,7 @@ function Home() {
               <Link to="/destinations/" className="btn border border-navy-foreground/60 text-navy-foreground hover:bg-navy-foreground/15">Browse destinations</Link>
             </div>
           </div>
-          <p className="absolute right-4 top-3 text-xs text-navy-foreground/85">Jerusalem, Old City</p>
+          <p className="absolute right-4 top-3 text-xs text-navy-foreground/85">Jerusalem Old City from the Mount of Olives</p>
         </div>
         <nav aria-label="Services" className="relative -mt-6 mx-4 grid grid-cols-2 gap-2 rounded-2xl border bg-card p-3 shadow-lg sm:grid-cols-3 lg:grid-cols-6">
           {services.map((s) => (
