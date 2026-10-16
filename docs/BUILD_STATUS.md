@@ -58,3 +58,22 @@ Replaces the earlier three-page scope with a full tourism-portal structure. Stil
 - `tsgo` type check clean; vitest 15/15 incl. new `portal.test.ts` (sidebar links resolve, hotel shortcuts, no affiliate/live-quote links, no ILS 550 on Tel Aviv, Bethlehem labeled combined, Booking.com not a fact source, live-quote guard).
 - Playwright desktop 1280px: all 18 routes 200 with noindex; all internal hrefs resolve; Home > Transfers > Ben Gurion > Jerusalem works; journey essentials render before #plan and #options; 6 passengers → "Request group quote"; comparison table works; sidebar active state; sidebar → Tiberias hotels (preference highlight works, Booking.com link) → Tours → Bethlehem (Bein Harim page); Tickets > Masada → parks.org.il; Car rental pickup toggle → DiscoverCars. No page errors.
 - Playwright mobile 390px: no horizontal overflow on any route; drawer opens with focus inside, Escape closes, closes after navigating.
+
+## Homepage visual redesign (16 Oct 2026)
+- Homepage rebuilt as photo-led portal: full-bleed Jerusalem hero with overlay CTAs and six-category quick nav; each of the six service sections has a large feature photo (text on gradient overlay + hub CTA) beside/above smaller photo cards that are full internal links; popular destinations are photo cards. Hover zoom disabled under prefers-reduced-motion. No provider data, prices, booking behaviour or routes changed.
+- Images stored in `src/assets/home/` as WebP (≤1200–1400px, ~100–230 KB each). Hero is the existing Jerusalem image (eager, high priority); all others lazy.
+- Named-place photos (Wikimedia Commons, location verified by file title/visual review):
+  - tel-aviv-coast — "PikiWiki Israel 58105 jaffa - old city.jpg", Ariel Manor, CC BY 2.5 (Tel Aviv shoreline seen from Jaffa)
+  - tiberias-lake — "Tiberias from the Sea of Galilee (5809646279).jpg", Ian Scott, CC BY-SA 2.0
+  - ben-gurion-t3 — "Ben Gurion Airport terminal 3 reception hall.jpg", GeorgeDement, CC BY-SA 2.0
+  - bethlehem-nativity — "Palestine, Bethlehem, Church of the Nativity or Birthplace of Jesus (Square).jpg", Britchi Mirela, CC BY-SA 4.0
+  - masada-dead-sea — "Israel-2013-Aerial 13-Masada.jpg", Godot13, CC BY-SA 4.0
+  - masada-cable-car — "Masada Cable Car 1438 (511094328).jpg", James Emery, CC BY 2.0
+  - masada-cable-car-wide — "Israel Aerial Ropeway Masada BW 1.jpg", Berthold Werner, public domain
+  - caesarea-dusk — "125342 caesarea national park PikiWiki Israel.jpg", Zeev Stein, CC BY 2.5
+  - caesarea-aqueduct — "125359 caesarea national park PikiWiki Israel.jpg", Zeev Stein, CC BY 2.5
+  - caesarea-theatre — "Caesarea maritima BW 4.JPG", Berthold Werner, public domain
+  - jerusalem-old-city — resized copy of existing project hero image
+- Generic category illustrations (AI-generated, alt text marks them illustrative, no named property/company): hotel-pool, airport-pickup, guided-tour, road-trip.
+- Pending: a visible photo-credits line/page for CC BY / BY-SA attribution should be added before launch.
+- Validation: browser at 1280px and 390px — 26/26 homepage images loaded (naturalWidth>0), horizontal overflow 0, all 16 internal homepage link targets returned 200; whole page scrolled and screenshots reviewed (screenshots/home-desktop-v2.png, home-mobile-v2.png). Noindex unchanged; nothing published.
