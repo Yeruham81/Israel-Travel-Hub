@@ -66,11 +66,11 @@ const sections = [
 type Mode = "all" | OfferCategory;
 
 function todayISO() {
-  const d = new Date();
-  return new Date(d.getTime() - d.getTimezoneOffset() * 60000).toISOString().slice(0, 10);
+  return israelNow().date;
 }
 
-function validate(date: string, time: string, pax: string, lug: string) {
+/** Date/time inputs are Israel local landing time; compared against "now" in Asia/Jerusalem. */
+export function validate(date: string, time: string, pax: string, lug: string, at: Date = new Date()) {
   const errors: Partial<Record<"date" | "time" | "pax" | "lug", string>> = {};
   const p = Number(pax);
   const l = Number(lug);
@@ -78,12 +78,11 @@ function validate(date: string, time: string, pax: string, lug: string) {
   if (lug.trim() === "" || !Number.isInteger(l) || l < 0 || l > 40) errors.lug = "Enter a luggage count between 0 and 40.";
   if (time && !date) errors.date = "Add the arrival date for this time.";
   if (date) {
-    const today = todayISO();
-    if (date < today) errors.date = "This date is in the past. Choose today or a later date.";
-    else if (date === today && time) {
+    const now = israelNow(at);
+    if (date < now.date) errors.date = "This date is in the past in Israel. Choose today or a later date.";
+    else if (date === now.date && time) {
       const [h = 0, m = 0] = time.split(":").map(Number);
-      const now = new Date();
-      if (h * 60 + m < now.getHours() * 60 + now.getMinutes()) errors.time = "This time has already passed today.";
+      if (h * 60 + m < now.minutes) errors.time = "This time has already passed today in Israel.";
     }
   }
   return errors;
