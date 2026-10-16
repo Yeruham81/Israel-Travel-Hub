@@ -152,10 +152,10 @@ function CompactCard({ c }: { c: Card }) {
         <span className="block overflow-hidden rounded-lg">
           <img src={c.img.src} alt={c.img.alt} loading="lazy" decoding="async" width={224} height={160} className="aspect-[7/5] w-full object-cover transition-transform duration-500 group-hover:scale-105" />
         </span>
-        <span className="min-w-0">
+        <div className="min-w-0">
           <h3 className="font-serif text-lg leading-tight group-hover:text-primary">{c.label}</h3>
           <span className="mt-0.5 block text-sm text-muted-foreground">{c.text} <span aria-hidden>→</span></span>
-        </span>
+        </div>
       </Link>
     </li>
   );
