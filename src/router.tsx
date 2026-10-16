@@ -10,6 +10,8 @@ export const getRouter = () => {
     context: { queryClient },
     scrollRestoration: true,
     defaultPreloadStaleTime: 0,
+    // Preserve the existing site's trailing-slash URL style.
+    trailingSlash: "always",
   });
 
   return router;
