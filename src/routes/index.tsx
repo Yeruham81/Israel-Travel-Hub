@@ -16,6 +16,7 @@ import airportPickup from "@/assets/home/airport-pickup.webp";
 import guidedTour from "@/assets/home/guided-tour.webp";
 import roadTrip from "@/assets/home/road-trip.webp";
 import { pageMeta } from "@/lib/site";
+import { photoCredits } from "@/data/photoCredits";
 
 export const Route = createFileRoute("/")({
   head: () =>
@@ -184,6 +185,20 @@ function Home() {
           <Link to="/destinations/" className="btn btn-light mt-6">Explore all destinations →</Link>
         </div>
       </section>
+      <details className="mx-auto mb-10 mt-10 max-w-6xl px-4 text-sm text-muted-foreground">
+        <summary className="inline-block cursor-pointer rounded px-1 font-medium hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring">Photo credits</summary>
+        <ul className="mt-3 space-y-1.5">
+          {photoCredits.map((c) => (
+            <li key={c.asset}>
+              {c.sourceUrl ? <a href={c.sourceUrl} target="_blank" rel="noopener noreferrer" className="underline hover:text-foreground">{c.subject}</a> : c.subject}
+              {c.author && <> by {c.author}</>}
+              {" — "}
+              {c.licenseUrl ? <a href={c.licenseUrl} target="_blank" rel="noopener noreferrer" className="underline hover:text-foreground">{c.license}</a> : c.license}
+              {". "}{c.changes}.
+            </li>
+          ))}
+        </ul>
+      </details>
     </main>
   );
 }
