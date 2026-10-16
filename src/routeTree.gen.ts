@@ -11,7 +11,22 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AboutRouteImport } from './routes/about'
+import { Route as CarRentalRouteImport } from './routes/car-rental'
+import { Route as DestinationsRouteImport } from './routes/destinations'
+import { Route as HotelsRouteImport } from './routes/hotels'
+import { Route as TicketsRouteImport } from './routes/tickets'
+import { Route as AttractionsIndexRouteImport } from './routes/attractions.index'
+import { Route as AttractionsCaesareaRouteImport } from './routes/attractions.caesarea'
+import { Route as ToursIndexRouteImport } from './routes/tours.index'
+import { Route as ToursBethlehemFromJerusalemRouteImport } from './routes/tours.bethlehem-from-jerusalem'
+import { Route as TransfersIndexRouteImport } from './routes/transfers.index'
+import { Route as TransfersBenGurionAirportRouteImport } from './routes/transfers.ben-gurion-airport'
 import { Route as TravelBlogBenGurionAirportToJerusalemRouteImport } from './routes/travel-blog.ben-gurion-airport-to-jerusalem'
+import { Route as TravelBlogBenGurionAirportToTelAvivRouteImport } from './routes/travel-blog.ben-gurion-airport-to-tel-aviv'
+import { Route as TravelBlogBestHotelsInTiberiasRouteImport } from './routes/travel-blog.best-hotels-in-tiberias'
+import { Route as TravelBlogMasadaRouteImport } from './routes/travel-blog.masada'
+import { Route as TravelBlogWhereToStayInJerusalemRouteImport } from './routes/travel-blog.where-to-stay-in-jerusalem'
+import { Route as TravelBlogWhereToStayInTelAvivRouteImport } from './routes/travel-blog.where-to-stay-in-tel-aviv'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -23,42 +38,237 @@ const AboutRoute = AboutRouteImport.update({
   path: '/about',
   getParentRoute: () => rootRouteImport,
 } as any)
+const CarRentalRoute = CarRentalRouteImport.update({
+  id: '/car-rental',
+  path: '/car-rental',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DestinationsRoute = DestinationsRouteImport.update({
+  id: '/destinations',
+  path: '/destinations',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const HotelsRoute = HotelsRouteImport.update({
+  id: '/hotels',
+  path: '/hotels',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TicketsRoute = TicketsRouteImport.update({
+  id: '/tickets',
+  path: '/tickets',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AttractionsIndexRoute = AttractionsIndexRouteImport.update({
+  id: '/attractions/',
+  path: '/attractions/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AttractionsCaesareaRoute = AttractionsCaesareaRouteImport.update({
+  id: '/attractions/caesarea',
+  path: '/attractions/caesarea',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ToursIndexRoute = ToursIndexRouteImport.update({
+  id: '/tours/',
+  path: '/tours/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ToursBethlehemFromJerusalemRoute =
+  ToursBethlehemFromJerusalemRouteImport.update({
+    id: '/tours/bethlehem-from-jerusalem',
+    path: '/tours/bethlehem-from-jerusalem',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const TransfersIndexRoute = TransfersIndexRouteImport.update({
+  id: '/transfers/',
+  path: '/transfers/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TransfersBenGurionAirportRoute =
+  TransfersBenGurionAirportRouteImport.update({
+    id: '/transfers/ben-gurion-airport',
+    path: '/transfers/ben-gurion-airport',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const TravelBlogBenGurionAirportToJerusalemRoute =
   TravelBlogBenGurionAirportToJerusalemRouteImport.update({
     id: '/travel-blog/ben-gurion-airport-to-jerusalem',
     path: '/travel-blog/ben-gurion-airport-to-jerusalem',
     getParentRoute: () => rootRouteImport,
   } as any)
+const TravelBlogBenGurionAirportToTelAvivRoute =
+  TravelBlogBenGurionAirportToTelAvivRouteImport.update({
+    id: '/travel-blog/ben-gurion-airport-to-tel-aviv',
+    path: '/travel-blog/ben-gurion-airport-to-tel-aviv',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const TravelBlogBestHotelsInTiberiasRoute =
+  TravelBlogBestHotelsInTiberiasRouteImport.update({
+    id: '/travel-blog/best-hotels-in-tiberias',
+    path: '/travel-blog/best-hotels-in-tiberias',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const TravelBlogMasadaRoute = TravelBlogMasadaRouteImport.update({
+  id: '/travel-blog/masada',
+  path: '/travel-blog/masada',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TravelBlogWhereToStayInJerusalemRoute =
+  TravelBlogWhereToStayInJerusalemRouteImport.update({
+    id: '/travel-blog/where-to-stay-in-jerusalem',
+    path: '/travel-blog/where-to-stay-in-jerusalem',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const TravelBlogWhereToStayInTelAvivRoute =
+  TravelBlogWhereToStayInTelAvivRouteImport.update({
+    id: '/travel-blog/where-to-stay-in-tel-aviv',
+    path: '/travel-blog/where-to-stay-in-tel-aviv',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/car-rental': typeof CarRentalRoute
+  '/destinations': typeof DestinationsRoute
+  '/hotels': typeof HotelsRoute
+  '/tickets': typeof TicketsRoute
+  '/attractions/caesarea': typeof AttractionsCaesareaRoute
+  '/tours/bethlehem-from-jerusalem': typeof ToursBethlehemFromJerusalemRoute
+  '/transfers/ben-gurion-airport': typeof TransfersBenGurionAirportRoute
   '/travel-blog/ben-gurion-airport-to-jerusalem': typeof TravelBlogBenGurionAirportToJerusalemRoute
+  '/travel-blog/ben-gurion-airport-to-tel-aviv': typeof TravelBlogBenGurionAirportToTelAvivRoute
+  '/travel-blog/best-hotels-in-tiberias': typeof TravelBlogBestHotelsInTiberiasRoute
+  '/travel-blog/masada': typeof TravelBlogMasadaRoute
+  '/travel-blog/where-to-stay-in-jerusalem': typeof TravelBlogWhereToStayInJerusalemRoute
+  '/travel-blog/where-to-stay-in-tel-aviv': typeof TravelBlogWhereToStayInTelAvivRoute
+  '/attractions/': typeof AttractionsIndexRoute
+  '/tours/': typeof ToursIndexRoute
+  '/transfers/': typeof TransfersIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/car-rental': typeof CarRentalRoute
+  '/destinations': typeof DestinationsRoute
+  '/hotels': typeof HotelsRoute
+  '/tickets': typeof TicketsRoute
+  '/attractions/caesarea': typeof AttractionsCaesareaRoute
+  '/tours/bethlehem-from-jerusalem': typeof ToursBethlehemFromJerusalemRoute
+  '/transfers/ben-gurion-airport': typeof TransfersBenGurionAirportRoute
   '/travel-blog/ben-gurion-airport-to-jerusalem': typeof TravelBlogBenGurionAirportToJerusalemRoute
+  '/travel-blog/ben-gurion-airport-to-tel-aviv': typeof TravelBlogBenGurionAirportToTelAvivRoute
+  '/travel-blog/best-hotels-in-tiberias': typeof TravelBlogBestHotelsInTiberiasRoute
+  '/travel-blog/masada': typeof TravelBlogMasadaRoute
+  '/travel-blog/where-to-stay-in-jerusalem': typeof TravelBlogWhereToStayInJerusalemRoute
+  '/travel-blog/where-to-stay-in-tel-aviv': typeof TravelBlogWhereToStayInTelAvivRoute
+  '/attractions': typeof AttractionsIndexRoute
+  '/tours': typeof ToursIndexRoute
+  '/transfers': typeof TransfersIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/car-rental': typeof CarRentalRoute
+  '/destinations': typeof DestinationsRoute
+  '/hotels': typeof HotelsRoute
+  '/tickets': typeof TicketsRoute
+  '/attractions/caesarea': typeof AttractionsCaesareaRoute
+  '/tours/bethlehem-from-jerusalem': typeof ToursBethlehemFromJerusalemRoute
+  '/transfers/ben-gurion-airport': typeof TransfersBenGurionAirportRoute
   '/travel-blog/ben-gurion-airport-to-jerusalem': typeof TravelBlogBenGurionAirportToJerusalemRoute
+  '/travel-blog/ben-gurion-airport-to-tel-aviv': typeof TravelBlogBenGurionAirportToTelAvivRoute
+  '/travel-blog/best-hotels-in-tiberias': typeof TravelBlogBestHotelsInTiberiasRoute
+  '/travel-blog/masada': typeof TravelBlogMasadaRoute
+  '/travel-blog/where-to-stay-in-jerusalem': typeof TravelBlogWhereToStayInJerusalemRoute
+  '/travel-blog/where-to-stay-in-tel-aviv': typeof TravelBlogWhereToStayInTelAvivRoute
+  '/attractions/': typeof AttractionsIndexRoute
+  '/tours/': typeof ToursIndexRoute
+  '/transfers/': typeof TransfersIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/about' | '/travel-blog/ben-gurion-airport-to-jerusalem'
+  fullPaths:
+    | '/'
+    | '/about'
+    | '/car-rental'
+    | '/destinations'
+    | '/hotels'
+    | '/tickets'
+    | '/attractions/caesarea'
+    | '/tours/bethlehem-from-jerusalem'
+    | '/transfers/ben-gurion-airport'
+    | '/travel-blog/ben-gurion-airport-to-jerusalem'
+    | '/travel-blog/ben-gurion-airport-to-tel-aviv'
+    | '/travel-blog/best-hotels-in-tiberias'
+    | '/travel-blog/masada'
+    | '/travel-blog/where-to-stay-in-jerusalem'
+    | '/travel-blog/where-to-stay-in-tel-aviv'
+    | '/attractions/'
+    | '/tours/'
+    | '/transfers/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/about' | '/travel-blog/ben-gurion-airport-to-jerusalem'
+  to:
+    | '/'
+    | '/about'
+    | '/car-rental'
+    | '/destinations'
+    | '/hotels'
+    | '/tickets'
+    | '/attractions/caesarea'
+    | '/tours/bethlehem-from-jerusalem'
+    | '/transfers/ben-gurion-airport'
+    | '/travel-blog/ben-gurion-airport-to-jerusalem'
+    | '/travel-blog/ben-gurion-airport-to-tel-aviv'
+    | '/travel-blog/best-hotels-in-tiberias'
+    | '/travel-blog/masada'
+    | '/travel-blog/where-to-stay-in-jerusalem'
+    | '/travel-blog/where-to-stay-in-tel-aviv'
+    | '/attractions'
+    | '/tours'
+    | '/transfers'
   id:
-    '__root__' | '/' | '/about' | '/travel-blog/ben-gurion-airport-to-jerusalem'
+    | '__root__'
+    | '/'
+    | '/about'
+    | '/car-rental'
+    | '/destinations'
+    | '/hotels'
+    | '/tickets'
+    | '/attractions/caesarea'
+    | '/tours/bethlehem-from-jerusalem'
+    | '/transfers/ben-gurion-airport'
+    | '/travel-blog/ben-gurion-airport-to-jerusalem'
+    | '/travel-blog/ben-gurion-airport-to-tel-aviv'
+    | '/travel-blog/best-hotels-in-tiberias'
+    | '/travel-blog/masada'
+    | '/travel-blog/where-to-stay-in-jerusalem'
+    | '/travel-blog/where-to-stay-in-tel-aviv'
+    | '/attractions/'
+    | '/tours/'
+    | '/transfers/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRoute
+  CarRentalRoute: typeof CarRentalRoute
+  DestinationsRoute: typeof DestinationsRoute
+  HotelsRoute: typeof HotelsRoute
+  TicketsRoute: typeof TicketsRoute
+  AttractionsCaesareaRoute: typeof AttractionsCaesareaRoute
+  ToursBethlehemFromJerusalemRoute: typeof ToursBethlehemFromJerusalemRoute
+  TransfersBenGurionAirportRoute: typeof TransfersBenGurionAirportRoute
   TravelBlogBenGurionAirportToJerusalemRoute: typeof TravelBlogBenGurionAirportToJerusalemRoute
+  TravelBlogBenGurionAirportToTelAvivRoute: typeof TravelBlogBenGurionAirportToTelAvivRoute
+  TravelBlogBestHotelsInTiberiasRoute: typeof TravelBlogBestHotelsInTiberiasRoute
+  TravelBlogMasadaRoute: typeof TravelBlogMasadaRoute
+  TravelBlogWhereToStayInJerusalemRoute: typeof TravelBlogWhereToStayInJerusalemRoute
+  TravelBlogWhereToStayInTelAvivRoute: typeof TravelBlogWhereToStayInTelAvivRoute
+  AttractionsIndexRoute: typeof AttractionsIndexRoute
+  ToursIndexRoute: typeof ToursIndexRoute
+  TransfersIndexRoute: typeof TransfersIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -77,11 +287,116 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AboutRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/car-rental': {
+      id: '/car-rental'
+      path: '/car-rental'
+      fullPath: '/car-rental'
+      preLoaderRoute: typeof CarRentalRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/destinations': {
+      id: '/destinations'
+      path: '/destinations'
+      fullPath: '/destinations'
+      preLoaderRoute: typeof DestinationsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/hotels': {
+      id: '/hotels'
+      path: '/hotels'
+      fullPath: '/hotels'
+      preLoaderRoute: typeof HotelsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/tickets': {
+      id: '/tickets'
+      path: '/tickets'
+      fullPath: '/tickets'
+      preLoaderRoute: typeof TicketsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/attractions/': {
+      id: '/attractions/'
+      path: '/attractions'
+      fullPath: '/attractions/'
+      preLoaderRoute: typeof AttractionsIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/attractions/caesarea': {
+      id: '/attractions/caesarea'
+      path: '/attractions/caesarea'
+      fullPath: '/attractions/caesarea'
+      preLoaderRoute: typeof AttractionsCaesareaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/tours/': {
+      id: '/tours/'
+      path: '/tours'
+      fullPath: '/tours/'
+      preLoaderRoute: typeof ToursIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/tours/bethlehem-from-jerusalem': {
+      id: '/tours/bethlehem-from-jerusalem'
+      path: '/tours/bethlehem-from-jerusalem'
+      fullPath: '/tours/bethlehem-from-jerusalem'
+      preLoaderRoute: typeof ToursBethlehemFromJerusalemRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/transfers/': {
+      id: '/transfers/'
+      path: '/transfers'
+      fullPath: '/transfers/'
+      preLoaderRoute: typeof TransfersIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/transfers/ben-gurion-airport': {
+      id: '/transfers/ben-gurion-airport'
+      path: '/transfers/ben-gurion-airport'
+      fullPath: '/transfers/ben-gurion-airport'
+      preLoaderRoute: typeof TransfersBenGurionAirportRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/travel-blog/ben-gurion-airport-to-jerusalem': {
       id: '/travel-blog/ben-gurion-airport-to-jerusalem'
       path: '/travel-blog/ben-gurion-airport-to-jerusalem'
       fullPath: '/travel-blog/ben-gurion-airport-to-jerusalem'
       preLoaderRoute: typeof TravelBlogBenGurionAirportToJerusalemRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/travel-blog/ben-gurion-airport-to-tel-aviv': {
+      id: '/travel-blog/ben-gurion-airport-to-tel-aviv'
+      path: '/travel-blog/ben-gurion-airport-to-tel-aviv'
+      fullPath: '/travel-blog/ben-gurion-airport-to-tel-aviv'
+      preLoaderRoute: typeof TravelBlogBenGurionAirportToTelAvivRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/travel-blog/best-hotels-in-tiberias': {
+      id: '/travel-blog/best-hotels-in-tiberias'
+      path: '/travel-blog/best-hotels-in-tiberias'
+      fullPath: '/travel-blog/best-hotels-in-tiberias'
+      preLoaderRoute: typeof TravelBlogBestHotelsInTiberiasRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/travel-blog/masada': {
+      id: '/travel-blog/masada'
+      path: '/travel-blog/masada'
+      fullPath: '/travel-blog/masada'
+      preLoaderRoute: typeof TravelBlogMasadaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/travel-blog/where-to-stay-in-jerusalem': {
+      id: '/travel-blog/where-to-stay-in-jerusalem'
+      path: '/travel-blog/where-to-stay-in-jerusalem'
+      fullPath: '/travel-blog/where-to-stay-in-jerusalem'
+      preLoaderRoute: typeof TravelBlogWhereToStayInJerusalemRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/travel-blog/where-to-stay-in-tel-aviv': {
+      id: '/travel-blog/where-to-stay-in-tel-aviv'
+      path: '/travel-blog/where-to-stay-in-tel-aviv'
+      fullPath: '/travel-blog/where-to-stay-in-tel-aviv'
+      preLoaderRoute: typeof TravelBlogWhereToStayInTelAvivRouteImport
       parentRoute: typeof rootRouteImport
     }
   }
@@ -90,8 +405,24 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
+  CarRentalRoute: CarRentalRoute,
+  DestinationsRoute: DestinationsRoute,
+  HotelsRoute: HotelsRoute,
+  TicketsRoute: TicketsRoute,
+  AttractionsCaesareaRoute: AttractionsCaesareaRoute,
+  ToursBethlehemFromJerusalemRoute: ToursBethlehemFromJerusalemRoute,
+  TransfersBenGurionAirportRoute: TransfersBenGurionAirportRoute,
   TravelBlogBenGurionAirportToJerusalemRoute:
     TravelBlogBenGurionAirportToJerusalemRoute,
+  TravelBlogBenGurionAirportToTelAvivRoute:
+    TravelBlogBenGurionAirportToTelAvivRoute,
+  TravelBlogBestHotelsInTiberiasRoute: TravelBlogBestHotelsInTiberiasRoute,
+  TravelBlogMasadaRoute: TravelBlogMasadaRoute,
+  TravelBlogWhereToStayInJerusalemRoute: TravelBlogWhereToStayInJerusalemRoute,
+  TravelBlogWhereToStayInTelAvivRoute: TravelBlogWhereToStayInTelAvivRoute,
+  AttractionsIndexRoute: AttractionsIndexRoute,
+  ToursIndexRoute: ToursIndexRoute,
+  TransfersIndexRoute: TransfersIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

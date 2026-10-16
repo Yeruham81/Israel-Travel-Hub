@@ -8,7 +8,20 @@ export const INDEXABLE = (import.meta.env["VITE_INDEXABLE"] as string | undefine
 
 export const SITE_NAME = "Israel Taxi & Travel";
 
-export function pageMeta(opts: { title: string; description: string; path: string; type?: string }) {
+export type Crumb = { name: string; path: string };
+
+export function breadcrumbLd(crumbs: Crumb[]) {
+  return {
+    type: "application/ld+json",
+    children: JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      itemListElement: crumbs.map((c, i) => ({ "@type": "ListItem", position: i + 1, name: c.name, item: CANONICAL_ORIGIN + c.path })),
+    }),
+  };
+}
+
+export function pageMeta(opts: { title: string; description: string; path: string; type?: string; crumbs?: Crumb[] }) {
   const url = CANONICAL_ORIGIN + opts.path;
   return {
     meta: [
@@ -22,5 +35,6 @@ export function pageMeta(opts: { title: string; description: string; path: strin
       { name: "twitter:card", content: "summary_large_image" },
     ],
     links: [{ rel: "canonical", href: url }],
+    scripts: opts.crumbs ? [breadcrumbLd(opts.crumbs)] : [],
   };
 }
