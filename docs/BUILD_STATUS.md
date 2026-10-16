@@ -28,3 +28,32 @@
 - Old City advice now says to confirm the nearest permitted drop-off and walking distance with accommodation/provider.
 - Breadcrumbs (visible + JSON-LD) are now Home > guide only.
 - Validation: `TZ=America/New_York bunx vitest run` 8/8 pass (incl. browser-today-but-past-in-Israel case); `tsgo` clean; Playwright with timezone America/New_York confirmed labels, Israel min date and 2-item breadcrumb.
+
+---
+
+## Portal expansion — 16 Oct 2026
+
+Replaces the earlier three-page scope with a full tourism-portal structure. Still unpublished, noindex, no APIs, no affiliate IDs.
+
+### Route inventory (18 pages, all SSR with own title/description/og/canonical + noindex)
+- Home `/`, About `/about/`
+- Hubs: `/hotels/`, `/transfers/`, `/transfers/ben-gurion-airport/`, `/tours/`, `/attractions/`, `/tickets/`, `/car-rental/`, `/destinations/`
+- Leaves: `/travel-blog/ben-gurion-airport-to-jerusalem/` (enhanced; breadcrumb Home > Transfers > Ben Gurion Airport > Jerusalem), `/travel-blog/ben-gurion-airport-to-tel-aviv/`, `/travel-blog/where-to-stay-in-jerusalem/`, `/travel-blog/where-to-stay-in-tel-aviv/`, `/travel-blog/best-hotels-in-tiberias/`, `/tours/bethlehem-from-jerusalem/`, `/travel-blog/masada/`, `/attractions/caesarea/`
+
+### Navigation
+- Global left rail on desktop (lg+) on every page; "Explore Israel" header button opens an accessible left drawer (Radix dialog: focus trap, Escape, closes on navigation) below lg. Local "On this page" chip bar is separate. Airport page no longer has a right column.
+
+### Booking modes (registry `BookingMode`)
+- `live_quote`: type + guard `isDisplayableLiveQuote` only. **No live API configured; no live prices shown anywhere.**
+- `provider_redirect` (regular links): Intui, GetTransfer, Booking.com city pages (Jerusalem/Tel Aviv/Tiberias), DiscoverCars, Bein Harim tour page.
+- `provider_inquiry`: Moshe Barak (airport transfers, private driver, private day trips) — disclosed as publisher's business.
+- `official_info`: Gett/IAA airport taxi, INPA Masada and Caesarea.
+- All links non-affiliate (`affiliateConfig` empty). Click logging is local-only, not bookings.
+
+### Still pending
+- Affiliate tracking links (Intui, GetTransfer, Booking.com, DiscoverCars), any live quote API credentials, database/CMS with protected editing, verified property lists, production domain/canonical at launch.
+
+### Validation performed
+- `tsgo` type check clean; vitest 15/15 incl. new `portal.test.ts` (sidebar links resolve, hotel shortcuts, no affiliate/live-quote links, no ILS 550 on Tel Aviv, Bethlehem labeled combined, Booking.com not a fact source, live-quote guard).
+- Playwright desktop 1280px: all 18 routes 200 with noindex; all internal hrefs resolve; Home > Transfers > Ben Gurion > Jerusalem works; journey essentials render before #plan and #options; 6 passengers → "Request group quote"; comparison table works; sidebar active state; sidebar → Tiberias hotels (preference highlight works, Booking.com link) → Tours → Bethlehem (Bein Harim page); Tickets > Masada → parks.org.il; Car rental pickup toggle → DiscoverCars. No page errors.
+- Playwright mobile 390px: no horizontal overflow on any route; drawer opens with focus inside, Escape closes, closes after navigating.

@@ -459,18 +459,18 @@ export const providerLinks: ProviderLink[] = [
     ctaLabel: "Request a quote on Israel-Taxi.com", url: `${OWNER_BASE}/private-driver-in-israel/`, isAffiliate: false,
     reentryNote: "Nothing is sent from this page. Contact the operator on their site.", confirm: ["Hours included", "Entrance fees not included unless stated", "Guide vs driver only"], sourceId: "owner-private-driver",
   },
-  {
-    id: "private-daytrips-moshe", pageIds: ["tours-hub", "bethlehem", "masada"], ...moshe, mode: "provider_inquiry",
-    title: "Private day trips", summary: "Private day trips with a local driver, planned around your own itinerary.",
-    ctaLabel: "Request a quote on Israel-Taxi.com", url: `${OWNER_BASE}/private-day-trips/`, isAffiliate: false,
-    reentryNote: "Nothing is sent from this page. Contact the operator on their site.", confirm: ["Exact itinerary and stops", "Whether a licensed guide is included", "Entrance fees", "Travel requirements for crossings"], sourceId: "owner-private-day-trips",
-  },
   // Tours
   {
     id: "bethlehem-beinharim", pageIds: ["bethlehem", "tours-hub"], providerName: "Bein Harim Tours", relationship: "independent_operator", operatorId: "bein-harim", mode: "provider_redirect",
     title: "Jerusalem and Bethlehem tour (combined itinerary)", summary: "A combined day covering sites in Jerusalem and Bethlehem — not a Bethlehem-only tour. The operator lists pickup from several cities, including Jerusalem.",
     ctaLabel: "See dates and prices on Bein Harim", url: "https://www.beinharimtours.com/jerusalem-and-bethlehem-tour/", isAffiliate: false,
     reentryNote: "Choose your date and pickup on the operator's site.", confirm: ["Departure date and pickup point", "Tour language", "Shared or private format", "Passport and current travel requirements", "Cancellation terms"], sourceId: "beinharim-jlm-bethlehem",
+  },
+  {
+    id: "private-daytrips-moshe", pageIds: ["tours-hub", "bethlehem", "masada"], ...moshe, mode: "provider_inquiry",
+    title: "Private day trips", summary: "Private day trips with a local driver, planned around your own itinerary.",
+    ctaLabel: "Request a quote on Israel-Taxi.com", url: `${OWNER_BASE}/private-day-trips/`, isAffiliate: false,
+    reentryNote: "Nothing is sent from this page. Contact the operator on their site.", confirm: ["Exact itinerary and stops", "Whether a licensed guide is included", "Entrance fees", "Travel requirements for crossings"], sourceId: "owner-private-day-trips",
   },
   // Attractions & tickets (official)
   {
