@@ -3,7 +3,7 @@ import { useEffect, useState, type ReactNode } from "react";
 import { Compass } from "lucide-react";
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetDescription } from "@/components/ui/sheet";
 import { OWNER_BASE } from "@/data/registry";
-import { allNavGroups, serviceNav, hotelNav } from "@/data/nav";
+import { allNavGroups, serviceNav, serviceDomains, hotelNav } from "@/data/nav";
 import { relFor } from "@/lib/outbound";
 
 export function ExtLink({ href, children, className, guide }: { href: string; children: ReactNode; className?: string; guide?: boolean }) {
@@ -67,8 +67,8 @@ export function SiteHeader() {
     <header className="sticky top-0 z-40 border-b bg-background/95 backdrop-blur">
       <div className="mx-auto flex max-w-[90rem] items-center justify-between gap-4 px-4 py-3">
         <Wordmark />
-        <nav aria-label="Services" className="hidden xl:block">
-          <ul className="flex items-center gap-5 text-sm font-medium">
+        <nav aria-label="Services" className="hidden 2xl:block">
+          <ul className="flex items-center gap-4 text-sm font-medium">
             {headerNav.map((n) => (
               <li key={n.label}><Link to={n.to} className="hover:text-primary" activeProps={{ className: "text-primary" }}>{n.label}</Link></li>
             ))}
