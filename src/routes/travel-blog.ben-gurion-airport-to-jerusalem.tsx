@@ -380,7 +380,7 @@ function Checklist({ title, items }: { title: string; items: string[] }) {
   );
 }
 
-export function priceText(o: Offer, party: number | null) {
+function priceText(o: Offer, party: number | null) {
   if (o.price && party && party > o.price.maxPartySize) return "Request group quote";
   return o.priceLabel;
 }
