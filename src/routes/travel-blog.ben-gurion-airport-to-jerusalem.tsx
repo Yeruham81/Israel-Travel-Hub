@@ -81,7 +81,7 @@ function validate(date: string, time: string, pax: string, lug: string) {
     const today = todayISO();
     if (date < today) errors.date = "This date is in the past. Choose today or a later date.";
     else if (date === today && time) {
-      const [h, m] = time.split(":").map(Number);
+      const [h = 0, m = 0] = time.split(":").map(Number);
       const now = new Date();
       if (h * 60 + m < now.getHours() * 60 + now.getMinutes()) errors.time = "This time has already passed today.";
     }
@@ -359,7 +359,7 @@ function RoutePage() {
   );
 }
 
-function Field({ id, label, error, children }: { id: string; label: string; error?: string; children: React.ReactNode }) {
+function Field({ id, label, error, children }: { id: string; label: string; error?: string | undefined; children: React.ReactNode }) {
   return (
     <div>
       <label htmlFor={id} className="text-sm font-medium">{label}</label>

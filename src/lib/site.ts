@@ -1,10 +1,10 @@
 /** Staging origin used for canonicals. Override with VITE_CANONICAL_ORIGIN at launch. */
 export const CANONICAL_ORIGIN: string =
-  (import.meta.env.VITE_CANONICAL_ORIGIN as string | undefined) ||
+  (import.meta.env["VITE_CANONICAL_ORIGIN"] as string | undefined) ||
   "https://id-preview--7cd7aae9-57c0-4ced-b1fa-2f0691483fee.lovable.app";
 
 /** Staging: keep every page out of search until launch is explicitly requested. */
-export const INDEXABLE = (import.meta.env.VITE_INDEXABLE as string | undefined) === "true";
+export const INDEXABLE = (import.meta.env["VITE_INDEXABLE"] as string | undefined) === "true";
 
 export const SITE_NAME = "Israel Taxi & Travel";
 
