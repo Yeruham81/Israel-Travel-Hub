@@ -129,7 +129,7 @@ function Home() {
     <main>
       <section className="relative mx-auto max-w-6xl px-4 pt-6">
         <div className="relative overflow-hidden rounded-3xl bg-navy">
-          <img src={hero} alt="Jerusalem's Old City and the Dome of the Rock seen from the Mount of Olives" width={1800} height={1200} fetchPriority="high" className="absolute inset-0 h-full w-full object-cover" />
+          <img src={hero} alt="Jerusalem's Old City and the Dome of the Rock seen from the Mount of Olives" width={1600} height={1066} fetchPriority="high" className="absolute inset-0 h-full w-full object-cover" />
           <div className="absolute inset-0 bg-gradient-to-r from-navy/90 via-navy/60 to-navy/10" aria-hidden />
           <div className="relative max-w-2xl px-6 py-16 text-navy-foreground md:px-12 md:py-24">
             <p className="text-xs font-semibold uppercase tracking-[0.14em] opacity-85">Plan your trip to Israel</p>
