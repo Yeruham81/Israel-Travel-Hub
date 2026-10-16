@@ -71,7 +71,7 @@ function todayISO() {
 }
 
 function validate(date: string, time: string, pax: string, lug: string) {
-  const errors: Record<string, string> = {};
+  const errors: Partial<Record<"date" | "time" | "pax" | "lug", string>> = {};
   const p = Number(pax);
   const l = Number(lug);
   if (!Number.isInteger(p) || p < 1 || p > 16) errors.pax = "Enter between 1 and 16 passengers.";
@@ -94,7 +94,7 @@ function RoutePage() {
   const [time, setTime] = useState("");
   const [pax, setPax] = useState("2");
   const [lug, setLug] = useState("2");
-  const [errors, setErrors] = useState<Record<string, string>>({});
+  const [errors, setErrors] = useState<Partial<Record<"date" | "time" | "pax" | "lug", string>>>({});
   const [applied, setApplied] = useState<{ date: string; time: string; pax: number; lug: number } | null>(null);
   const [mode, setMode] = useState<Mode>("all");
   const [compare, setCompare] = useState<string[]>([]);
