@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { ExtLink } from "@/components/Layout";
 import { HubCard, HubHeader, ProviderSection } from "@/components/Guide";
 import { linksForPage, OWNER_BASE } from "@/data/registry";
@@ -31,7 +31,7 @@ function Transfers() {
           <div className="flex h-full flex-col rounded-2xl border bg-card p-6">
             <p className="eyebrow">Private transport</p>
             <h3 className="mt-2 text-2xl">Intercity & day hire</h3>
-            <p className="mt-2 flex-1 text-muted-foreground">For multi-stop days, hotel-to-hotel transfers or sites poorly served by public transport, a private driver is often simpler than renting. Compare with <a href="/car-rental/" className="text-primary underline">car rental</a> if you're comfortable driving.</p>
+            <p className="mt-2 flex-1 text-muted-foreground">For multi-stop days, hotel-to-hotel transfers or sites poorly served by public transport, a private driver is often simpler than renting. Compare with <Link to="/car-rental/" className="text-primary underline">car rental</Link> if you're comfortable driving.</p>
             <p className="mt-3 text-sm"><ExtLink guide href={`${OWNER_BASE}/travel-blog/getting-around-israel/`} className="text-primary">Getting around Israel</ExtLink></p>
           </div>
         </div>

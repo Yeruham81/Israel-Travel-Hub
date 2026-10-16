@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { HubCard, HubHeader } from "@/components/Guide";
 import { pageMeta } from "@/lib/site";
 
@@ -29,7 +29,7 @@ function Tickets() {
         </div>
         <div className="rounded-2xl border bg-card p-6">
           <h2 className="text-2xl">Tour with transport</h2>
-          <p className="mt-2 text-muted-foreground">Transport and itinerary handled for you. Always check whether entrance fees are included. <a href="/tours/" className="text-primary underline">See tours</a>.</p>
+          <p className="mt-2 text-muted-foreground">Transport and itinerary handled for you. Always check whether entrance fees are included. <Link to="/tours/" className="text-primary underline">See tours</Link>.</p>
         </div>
       </section>
       <section aria-labelledby="sites-h" className="mt-14">

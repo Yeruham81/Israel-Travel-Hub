@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, type LinkProps } from "@tanstack/react-router";
 import { Checklist, HubCard, HubHeader, RelatedLinks } from "@/components/Guide";
 import { cityStayGuides } from "@/data/content";
 import { pageMeta } from "@/lib/site";
@@ -33,7 +33,7 @@ function Hotels() {
         <h2 id="cities-h" className="text-3xl">Choose a city</h2>
         <div className="mt-5 grid gap-4 md:grid-cols-3">
           {Object.values(cityStayGuides).map((g) => (
-            <HubCard key={g.id} to={g.path as never} eyebrow={g.city} title={`Hotels in ${g.city}`} text={blurbs[g.id]} cta={`Explore ${g.city} areas`} />
+            <HubCard key={g.id} to={g.path as LinkProps["to"]} eyebrow={g.city} title={`Hotels in ${g.city}`} text={blurbs[g.id]} cta={`Explore ${g.city} areas`} />
           ))}
         </div>
       </section>
