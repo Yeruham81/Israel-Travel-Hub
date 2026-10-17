@@ -2,7 +2,7 @@ import { QueryClient } from "@tanstack/react-query";
 import { createMemoryHistory, createRouter, RouterContextProvider } from "@tanstack/react-router";
 import { cleanup, fireEvent, render, screen, within } from "@testing-library/react";
 import { afterEach, describe, expect, it, vi } from "vitest";
-import { Route as AirportRoute } from "@/routes/transfers.ben-gurion-airport";
+import { Route as AirportRoute } from "@/routes/transfers.index";
 import { routeTree } from "@/routeTree.gen";
 import { airportTransferRates, affiliateConfig, linksForPage } from "@/data/registry";
 import { emptyTransferQuote, buildTransferQuoteDraft, validateTransferQuote } from "@/lib/transfer-quote";
@@ -10,7 +10,7 @@ import { readOutboundClicks } from "@/lib/outbound";
 
 afterEach(() => { cleanup(); localStorage.clear(); vi.restoreAllMocks(); });
 async function renderAirport() {
-  const router = createRouter({ routeTree, context: { queryClient: new QueryClient() }, history: createMemoryHistory({ initialEntries: ["/transfers/ben-gurion-airport/"] }), trailingSlash: "always" });
+  const router = createRouter({ routeTree, context: { queryClient: new QueryClient() }, history: createMemoryHistory({ initialEntries: ["/transfers/"] }), trailingSlash: "always" });
   await router.load();
   const Airport = AirportRoute.options.component!;
   return { ...render(<RouterContextProvider router={router}><Airport /></RouterContextProvider>), router };
@@ -60,7 +60,7 @@ describe("private Ben Gurion transfers", () => {
       expect(router.matchRoutes(path).at(-1)?.routeId.replace(/\/$/, "")).toBe(path.replace(/\/$/, ""));
     }
     const head = await AirportRoute.options.head?.({} as never);
-    expect(head).toMatchObject({ meta: expect.arrayContaining([{ name: "robots", content: "noindex,nofollow" }, { title: expect.stringContaining("Private transfers") }]), links: [{ rel: "canonical", href: expect.stringMatching(/\/transfers\/ben-gurion-airport\/$/) }] });
+    expect(head).toMatchObject({ meta: expect.arrayContaining([{ name: "robots", content: "noindex,nofollow" }, { title: expect.stringContaining("Airport transfers") }]), links: [{ rel: "canonical", href: expect.stringMatching(/\/transfers\/$/) }] });
   });
 
   it("selects the clicked destination in the form and handles groups and other addresses", async () => {

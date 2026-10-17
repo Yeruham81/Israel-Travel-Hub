@@ -71,7 +71,7 @@ const services: Service[] = [
     text: "Arrange your airport arrival, or plan intercity journeys and multi-stop days with a private driver.",
     feature: { src: airportPickup, alt: "Illustrative driver loading luggage for arriving travellers" },
     cards: [
-      { label: "Ben Gurion Airport", text: "Private pickups, destinations & starting prices", to: "/transfers/ben-gurion-airport/", img: IMG.t3 },
+      { label: "Airport transfers", text: "Ben Gurion pickups, destinations & starting prices", to: "/transfers/", img: IMG.t3 },
       { label: "Private driver", text: "Intercity journeys & a driver for the day", to: "/private-driver/", img: { src: roadTrip, alt: "Illustrative vehicle on an open desert road" } },
       { label: "Private transfer to Jerusalem", text: "Hotel drop-off advice & a personal quote", to: "/travel-blog/ben-gurion-airport-to-jerusalem/", img: IMG.jerusalem },
     ],

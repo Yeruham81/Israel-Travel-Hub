@@ -1,6 +1,12 @@
 import { airportTransferContact, airportTransferRates } from "@/data/registry";
 import { israelNow } from "@/lib/israel-time";
 
+/** Shared by the canonical page and its legacy redirect; only known destination IDs survive. */
+export function parseAirportTransferSearch(search: Record<string, unknown>): { destination?: string } {
+  const destination = search["destination"];
+  return typeof destination === "string" && (destination === "other" || airportTransferRates.some((rate) => rate.id === destination)) ? { destination } : {};
+}
+
 export type TransferQuoteFields = {
   name: string; email: string; phone: string; date: string; time: string; flight: string;
   destinationId: string; otherDestination: string; address: string; passengers: string;

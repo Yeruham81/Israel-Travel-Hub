@@ -39,7 +39,7 @@ describe("four dedicated airport transfer routes", () => {
     expect(metadata.meta).toEqual(expect.arrayContaining([{ title: guide.title }, { name: "description", content: guide.description }, { name: "robots", content: "noindex,nofollow" }]));
     expect(metadata.links).toEqual([{ rel: "canonical", href: expect.stringMatching(new RegExp(`${route.path}$`)) }]);
     const breadcrumb = JSON.parse(metadata.scripts[0]!.children);
-    expect(breadcrumb.itemListElement.map((item: { name: string }) => item.name)).toEqual(["Home", "Airport transfers", "Ben Gurion Airport", guide.city]);
+    expect(breadcrumb.itemListElement.map((item: { name: string }) => item.name)).toEqual(["Home", "Airport transfers", guide.city]);
 
     fireEvent.change(screen.getByLabelText("Full name *"), { target: { value: "Jamie Smith" } });
     fireEvent.change(screen.getByLabelText("Email address *"), { target: { value: "jamie+israel@example.com" } });

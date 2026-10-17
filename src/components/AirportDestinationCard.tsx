@@ -20,6 +20,6 @@ export function AirportDestinationCard({ id, destination, price, photo, onChoose
   const quoteClass = "mx-3 mb-3 block rounded-lg bg-secondary px-2 py-2 text-center text-sm font-semibold text-primary hover:bg-primary hover:text-primary-foreground focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary sm:mx-5 sm:mb-5";
   return <article className="flex h-full flex-col overflow-hidden rounded-2xl border bg-card" data-testid={testId} data-destination={id}>
     {route ? <Link to={route.path} className="flex flex-1 flex-col hover:bg-secondary/20 focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-primary">{details}</Link> : <div className="flex flex-1 flex-col">{details}</div>}
-    {onChoose ? <a href="#request-quote" onClick={() => onChoose(id)} className={quoteClass}>Request a quote</a> : route ? <Link to={route.path} hash="request-quote" className={quoteClass}>Request a quote</Link> : <Link to="/transfers/ben-gurion-airport/" search={{ destination: id }} hash="request-quote" className={quoteClass}>Request a quote</Link>}
+    {onChoose ? <a href="#request-quote" onClick={() => onChoose(id)} className={quoteClass}>Request a quote</a> : route ? <Link to={route.path} hash="request-quote" className={quoteClass}>Request a quote</Link> : <Link to="/transfers/" search={{ destination: id }} hash="request-quote" className={quoteClass}>Request a quote</Link>}
   </article>;
 }
