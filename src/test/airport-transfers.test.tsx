@@ -4,7 +4,7 @@ import { cleanup, fireEvent, render, screen, within } from "@testing-library/rea
 import { afterEach, describe, expect, it, vi } from "vitest";
 import { Route as AirportRoute } from "@/routes/transfers.index";
 import { routeTree } from "@/routeTree.gen";
-import { airportTransferRates, affiliateConfig, linksForPage } from "@/data/registry";
+import { airportTransferRates, affiliateConfig, linksForPage, partners } from "@/data/registry";
 import { emptyTransferQuote, buildTransferQuoteDraft, validateTransferQuote } from "@/lib/transfer-quote";
 import { readOutboundClicks } from "@/lib/outbound";
 
@@ -109,17 +109,25 @@ describe("private Ben Gurion transfers", () => {
     expect((screen.getByLabelText("Prepared quote request") as HTMLTextAreaElement).value).toContain("Ben Gurion to Tel Aviv");
   });
 
-  it("shows four working platform banners without invented affiliate attribution or transferring personal details", async () => {
+  it("shows four branded platform banners without invented affiliate attribution or transferring personal details", async () => {
     await renderAirport();
     const platforms = linksForPage("airport-private-transfers");
     const banners = screen.getAllByTestId("airport-platform-banner");
     expect(platforms.map((p) => p.providerName)).toEqual(["Kiwitaxi", "Welcome Pickups", "Intui.travel", "GetTransfer.com"]);
     for (const [index, platform] of platforms.entries()) {
+      const logo = partners.find((partner) => partner.id === platform.partnerId)!.logo!;
+      const image = within(banners[index]!).getByRole("img", { name: `${platform.providerName} logo` });
+      expect(image).toHaveAttribute("src", logo.src);
+      expect(image).toHaveAttribute("width", String(logo.width));
+      expect(image).toHaveAttribute("height", String(logo.height));
+      expect(image).toHaveAttribute("loading", "lazy");
+      expect(within(banners[index]!).getByRole("heading", { name: platform.providerName })).toBeVisible();
       expect(banners[index]).toHaveAttribute("href", platform.url);
       expect(banners[index]).toHaveAttribute("target", "_blank");
       expect(banners[index]).toHaveAttribute("rel", platform.isAffiliate ? "sponsored noopener noreferrer" : "noopener noreferrer");
       expect(platform.isAffiliate).toBe(Boolean(affiliateConfig[platform.id]?.trackingUrl));
     }
+    expect(new Set(banners.map((banner) => within(banner).getByRole("img").getAttribute("src"))).size).toBe(4);
     fireEvent.click(banners[0]!);
     expect(readOutboundClicks()).toEqual([expect.objectContaining({ pageId: "airport-private-transfers", productId: "airport-kiwitaxi", offerId: "airport-kiwitaxi" })]);
     expect(JSON.stringify(readOutboundClicks())).not.toContain("email");

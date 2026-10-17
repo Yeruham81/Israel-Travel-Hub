@@ -2,6 +2,10 @@
  * Typed content registry. Every record here is shaped like a future database row
  * so it can be swapped for DB-backed queries without changing page components.
  */
+import kiwitaxiLogo from "@/assets/providers/kiwitaxi.svg";
+import welcomePickupsLogo from "@/assets/providers/welcome-pickups.svg";
+import intuiLogo from "@/assets/providers/intui.webp";
+import gettransferLogo from "@/assets/providers/gettransfer.svg";
 
 export type ISODate = string; // YYYY-MM-DD
 
@@ -35,6 +39,13 @@ export interface BookingPartner {
   name: string;
   capability: PartnerCapability;
   homepage: string;
+  logo?: {
+    src: string;
+    width: number;
+    height: number;
+    sourceUrl: string;
+    checkedAt: ISODate;
+  };
 }
 
 export type PriceBasis = "per_vehicle" | "per_person" | "metered" | "unknown";
@@ -685,10 +696,14 @@ export const affiliateConfig: Record<string, { trackingUrl: string } | undefined
 
 export const partners: BookingPartner[] = [
   ...(["airalo", "saily", "yesim", "gigsky", "drimsim"] as const).map((id): BookingPartner => ({ id, name: ({ airalo: "Airalo", saily: "Saily", yesim: "Yesim", gigsky: "GigSky", drimsim: "Drimsim" })[id], capability: affiliateConfig[`esim-${id}`] ? "affiliate_link" : "editorial_only", homepage: travelGuideSources.find((source) => source.id === `guide-esim-${id}`)!.url })),
-  { id: "kiwitaxi", name: "Kiwitaxi", capability: affiliateConfig["airport-kiwitaxi"] ? "affiliate_link" : "editorial_only", homepage: "https://kiwitaxi.com/" },
-  { id: "welcome", name: "Welcome Pickups", capability: affiliateConfig["airport-welcome"] ? "affiliate_link" : "editorial_only", homepage: "https://www.welcomepickups.com/" },
-  { id: "intui", name: "Intui.travel", capability: affiliateConfig["airport-intui"] ? "affiliate_link" : "editorial_only", homepage: "https://en.intui.travel/" },
-  { id: "gettransfer", name: "GetTransfer.com", capability: affiliateConfig["airport-gettransfer"] ? "affiliate_link" : "editorial_only", homepage: "https://gettransfer.com/en" },
+  { id: "kiwitaxi", name: "Kiwitaxi", capability: affiliateConfig["airport-kiwitaxi"] ? "affiliate_link" : "editorial_only", homepage: "https://kiwitaxi.com/",
+    logo: { src: kiwitaxiLogo, width: 45, height: 40, sourceUrl: "https://ftcdn.kiwitaxi.com/app2/assets/icons/logo-dark.svg", checkedAt: "2026-10-17" } },
+  { id: "welcome", name: "Welcome Pickups", capability: affiliateConfig["airport-welcome"] ? "affiliate_link" : "editorial_only", homepage: "https://www.welcomepickups.com/",
+    logo: { src: welcomePickupsLogo, width: 195, height: 28, sourceUrl: "https://www.welcomepickups.com/", checkedAt: "2026-10-17" } },
+  { id: "intui", name: "Intui.travel", capability: affiliateConfig["airport-intui"] ? "affiliate_link" : "editorial_only", homepage: "https://en.intui.travel/",
+    logo: { src: intuiLogo, width: 890, height: 365, sourceUrl: "https://en.intui.travel/press/logos-banners-intui/", checkedAt: "2026-10-17" } },
+  { id: "gettransfer", name: "GetTransfer.com", capability: affiliateConfig["airport-gettransfer"] ? "affiliate_link" : "editorial_only", homepage: "https://gettransfer.com/en",
+    logo: { src: gettransferLogo, width: 200, height: 21, sourceUrl: "https://gettransfer.com/common/logo.svg?v=2026.1", checkedAt: "2026-10-17" } },
   { id: "gett", name: "Gett", capability: "editorial_only", homepage: "https://www.gett.com/il/airport-en/" },
   { id: "booking", name: "Booking.com", capability: "editorial_only", homepage: "https://www.booking.com/" },
   { id: "expedia", name: "Expedia", capability: "affiliate_link", homepage: "https://www.expedia.com/" },
