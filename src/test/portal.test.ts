@@ -2,21 +2,47 @@ import { QueryClient } from "@tanstack/react-query";
 import { createRouter, rootRouteId } from "@tanstack/react-router";
 import { describe, expect, it } from "vitest";
 import { routeTree } from "@/routeTree.gen";
-import { allNavGroups } from "@/data/nav";
-import { providerLinks, offers, sources, linksForPage, affiliateConfig, partners } from "@/data/registry";
+import { allNavGroups, hotelNav, serviceNav, utilityNav } from "@/data/nav";
+import { OWNER_BASE, providerLinks, offers, sources, linksForPage, affiliateConfig, partners } from "@/data/registry";
 import { isDisplayableLiveQuote, type LiveQuote } from "@/lib/booking";
 
 const router = createRouter({ routeTree, context: { queryClient: new QueryClient() }, trailingSlash: "always" });
 
 describe("portal navigation", () => {
-  it("every global sidebar link resolves to a real page", () => {
-    for (const g of allNavGroups) for (const i of g.items) {
-      expect(router.matchRoutes(String(i.to)).at(-1)?.routeId, String(i.to)).not.toBe(rootRouteId);
+  it("every internal sidebar link resolves to a real page and every service remains reachable", () => {
+    const internal = [...utilityNav, ...allNavGroups.flatMap((g) => g.items).filter((item) => "to" in item)];
+    for (const item of internal) {
+      const match = router.matchRoutes(String(item.to)).at(-1);
+      expect(match?.routeId, String(item.to)).toBeTruthy();
+      expect(match?.routeId, String(item.to)).not.toBe(rootRouteId);
     }
+    for (const item of serviceNav) expect(internal.some((link) => link.to === item.to), item.label).toBe(true);
+  });
+  it("organizes the sidebar by the requested topics before popular links", () => {
+    expect(allNavGroups.map((group) => group.title)).toEqual([
+      "Transportation", "Tours & Trips", "Accommodation", "Attractions", "Travel Guides & Tips", "Popular Links",
+    ]);
+    const popular = allNavGroups.find((group) => group.title === "Popular Links")!.items;
+    expect(popular).toEqual(expect.arrayContaining([
+      expect.objectContaining({ to: "/travel-blog/ben-gurion-airport-to-jerusalem/" }),
+      expect.objectContaining({ href: `${OWNER_BASE}/travel-blog/uber-in-israel/` }),
+      expect.objectContaining({ href: `${OWNER_BASE}/travel-blog/best-esim-for-israel/` }),
+      expect.objectContaining({ href: `${OWNER_BASE}/travel-blog/ben-gurion-airport-arrival-tips/` }),
+    ]));
   });
   it("sidebar includes one-click hotel guides for every destination covered", () => {
-    const hotels = allNavGroups.find((g) => g.title === "Popular hotels")!.items.map((i) => i.label);
-    expect(hotels).toEqual(["Hotels in Jerusalem", "Hotels in Tel Aviv", "Hotels in Tiberias", "Hotels in Haifa", "Dead Sea hotels"]);
+    const accommodation = allNavGroups.find((g) => g.title === "Accommodation")!.items;
+    expect(accommodation).toEqual(expect.arrayContaining(hotelNav));
+    expect(hotelNav.map((item) => item.label)).toEqual(["Hotels in Jerusalem", "Hotels in Tel Aviv", "Hotels in Tiberias", "Hotels in Haifa", "Dead Sea hotels"]);
+  });
+  it("external shortcuts use the verified existing publisher guides", () => {
+    const paths = new Set(allNavGroups.flatMap((group) => group.items).filter((item) => "href" in item).map((item) => item.href));
+    expect([...paths].sort()).toEqual([
+      `${OWNER_BASE}/travel-blog/ben-gurion-airport-arrival-tips/`,
+      `${OWNER_BASE}/travel-blog/best-esim-for-israel/`,
+      `${OWNER_BASE}/travel-blog/getting-around-israel/`,
+      `${OWNER_BASE}/travel-blog/uber-in-israel/`,
+    ].sort());
   });
 });
 
