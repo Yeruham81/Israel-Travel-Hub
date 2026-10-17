@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Baby, CarFront, Clock3, Handshake, Luggage, PlaneLanding } from "lucide-react";
 import { FaqList, HubHeader } from "@/components/Guide";
 import { TransferQuoteForm } from "@/components/TransferQuoteForm";
@@ -11,11 +11,15 @@ import { recordOutboundClick, relFor } from "@/lib/outbound";
 import { pageMeta } from "@/lib/site";
 
 export const Route = createFileRoute("/transfers/ben-gurion-airport")({
+  validateSearch: (search: Record<string, unknown>): { destination?: string } => {
+    const destination = search["destination"];
+    return typeof destination === "string" && (destination === "other" || airportDestinationCards.some((card) => card.id === destination)) ? { destination } : {};
+  },
   head: () => pageMeta({
     title: "Private transfers from Ben Gurion Airport: destinations & prices",
     description: "Pre-book a private transfer from Ben Gurion Airport to Tel Aviv, Jerusalem, Haifa, the Dead Sea and more. See starting prices and request a quote from Moshe Barak.",
     path: "/transfers/ben-gurion-airport/",
-    crumbs: [{ name: "Home", path: "/" }, { name: "Transfers", path: "/transfers/" }, { name: "Ben Gurion Airport", path: "/transfers/ben-gurion-airport/" }],
+    crumbs: [{ name: "Home", path: "/" }, { name: "Airport transfers", path: "/transfers/" }, { name: "Ben Gurion Airport", path: "/transfers/ben-gurion-airport/" }],
   }),
   component: Airport,
 });
@@ -41,7 +45,9 @@ const bannerStyles: Record<string, string> = {
 };
 
 function Airport() {
-  const [destinationId, setDestinationId] = useState("");
+  const { destination } = Route.useSearch();
+  const [destinationId, setDestinationId] = useState(destination ?? "");
+  useEffect(() => setDestinationId(destination ?? ""), [destination]);
   const source = getSource("moshe-airport-transfers");
   const platforms = linksForPage("airport-private-transfers");
   const choose = (id: string) => {
@@ -49,7 +55,7 @@ function Airport() {
     requestAnimationFrame(() => document.getElementById("request-quote")?.focus({ preventScroll: true }));
   };
   return <main className="mx-auto max-w-5xl px-4 pb-8">
-    <HubHeader crumbs={[{ name: "Home", to: "/" }, { name: "Transfers", to: "/transfers/" }, { name: "Ben Gurion Airport", to: "/transfers/ben-gurion-airport/" }]}
+    <HubHeader crumbs={[{ name: "Home", to: "/" }, { name: "Airport transfers", to: "/transfers/" }, { name: "Ben Gurion Airport", to: "/transfers/ben-gurion-airport/" }]}
       eyebrow="Private airport transfers · TLV" title="Transfers from Ben Gurion Airport"
       intro="Start your Israel trip with your ride arranged. Choose a destination, explore Moshe Barak's published starting prices and request a private airport pickup for your party." />
     <div className="mt-6 flex flex-wrap items-center gap-3 rounded-xl bg-secondary/60 px-4 py-3 text-sm"><span className="font-medium">Pre-booked pickup</span><span aria-hidden>·</span><span>Your own vehicle</span><span aria-hidden>·</span><span>Your agreed destination</span><a href="#request-quote" className="ml-auto font-semibold text-primary underline underline-offset-4">Request your quote</a></div>

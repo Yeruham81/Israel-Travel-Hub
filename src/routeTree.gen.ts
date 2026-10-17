@@ -16,6 +16,7 @@ import { Route as CarRentalRouteImport } from './routes/car-rental'
 import { Route as DestinationsRouteImport } from './routes/destinations'
 import { Route as HaifaShoreExcursionsRouteImport } from './routes/haifa-shore-excursions'
 import { Route as HotelsRouteImport } from './routes/hotels'
+import { Route as PrivateDriverRouteImport } from './routes/private-driver'
 import { Route as ShoreExcursionsRouteImport } from './routes/shore-excursions'
 import { Route as TicketsRouteImport } from './routes/tickets'
 import { Route as AttractionsIndexRouteImport } from './routes/attractions.index'
@@ -86,6 +87,11 @@ const HaifaShoreExcursionsRoute = HaifaShoreExcursionsRouteImport.update({
 const HotelsRoute = HotelsRouteImport.update({
   id: '/hotels',
   path: '/hotels',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PrivateDriverRoute = PrivateDriverRouteImport.update({
+  id: '/private-driver',
+  path: '/private-driver',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ShoreExcursionsRoute = ShoreExcursionsRouteImport.update({
@@ -294,6 +300,7 @@ export interface FileRoutesByFullPath {
   '/destinations': typeof DestinationsRoute
   '/haifa-shore-excursions': typeof HaifaShoreExcursionsRoute
   '/hotels': typeof HotelsRoute
+  '/private-driver': typeof PrivateDriverRoute
   '/shore-excursions': typeof ShoreExcursionsRoute
   '/tickets': typeof TicketsRoute
   '/attractions/caesarea': typeof AttractionsCaesareaRoute
@@ -339,6 +346,7 @@ export interface FileRoutesByTo {
   '/destinations': typeof DestinationsRoute
   '/haifa-shore-excursions': typeof HaifaShoreExcursionsRoute
   '/hotels': typeof HotelsRoute
+  '/private-driver': typeof PrivateDriverRoute
   '/shore-excursions': typeof ShoreExcursionsRoute
   '/tickets': typeof TicketsRoute
   '/attractions/caesarea': typeof AttractionsCaesareaRoute
@@ -385,6 +393,7 @@ export interface FileRoutesById {
   '/destinations': typeof DestinationsRoute
   '/haifa-shore-excursions': typeof HaifaShoreExcursionsRoute
   '/hotels': typeof HotelsRoute
+  '/private-driver': typeof PrivateDriverRoute
   '/shore-excursions': typeof ShoreExcursionsRoute
   '/tickets': typeof TicketsRoute
   '/attractions/caesarea': typeof AttractionsCaesareaRoute
@@ -432,6 +441,7 @@ export interface FileRouteTypes {
     | '/destinations'
     | '/haifa-shore-excursions'
     | '/hotels'
+    | '/private-driver'
     | '/shore-excursions'
     | '/tickets'
     | '/attractions/caesarea'
@@ -477,6 +487,7 @@ export interface FileRouteTypes {
     | '/destinations'
     | '/haifa-shore-excursions'
     | '/hotels'
+    | '/private-driver'
     | '/shore-excursions'
     | '/tickets'
     | '/attractions/caesarea'
@@ -522,6 +533,7 @@ export interface FileRouteTypes {
     | '/destinations'
     | '/haifa-shore-excursions'
     | '/hotels'
+    | '/private-driver'
     | '/shore-excursions'
     | '/tickets'
     | '/attractions/caesarea'
@@ -568,6 +580,7 @@ export interface RootRouteChildren {
   DestinationsRoute: typeof DestinationsRoute
   HaifaShoreExcursionsRoute: typeof HaifaShoreExcursionsRoute
   HotelsRoute: typeof HotelsRoute
+  PrivateDriverRoute: typeof PrivateDriverRoute
   ShoreExcursionsRoute: typeof ShoreExcursionsRoute
   TicketsRoute: typeof TicketsRoute
   AttractionsCaesareaRoute: typeof AttractionsCaesareaRoute
@@ -655,6 +668,13 @@ declare module '@tanstack/react-router' {
       path: '/hotels'
       fullPath: '/hotels'
       preLoaderRoute: typeof HotelsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/private-driver': {
+      id: '/private-driver'
+      path: '/private-driver'
+      fullPath: '/private-driver'
+      preLoaderRoute: typeof PrivateDriverRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/shore-excursions': {
@@ -920,6 +940,7 @@ const rootRouteChildren: RootRouteChildren = {
   DestinationsRoute: DestinationsRoute,
   HaifaShoreExcursionsRoute: HaifaShoreExcursionsRoute,
   HotelsRoute: HotelsRoute,
+  PrivateDriverRoute: PrivateDriverRoute,
   ShoreExcursionsRoute: ShoreExcursionsRoute,
   TicketsRoute: TicketsRoute,
   AttractionsCaesareaRoute: AttractionsCaesareaRoute,

@@ -804,7 +804,8 @@ export const deadSeaStayGuide: HotelStayDestination = {
   sourceIds: ["owner-hotels-deadsea", "ds-nevo-spa", "ds-noga-spa", "ds-herods-spa", "ds-ein-gedi-spa"],
   related: [
     { label: "Masada: plan your visit", to: "/travel-blog/masada/", note: "Tickets, cable car and practical visit information" },
-    { label: "Transfers & private transport", to: "/transfers/", note: "Plan your arrival and return journey" },
+    { label: "Airport transfers", to: "/transfers/", note: "Arrange your arrival from Ben Gurion Airport" },
+    { label: "Private driver", to: "/private-driver/", note: "Plan hotel transfers and multi-stop days" },
     { label: "Car rental in Israel", to: "/car-rental/" },
     { label: "All accommodation", to: "/hotels/" },
   ],
@@ -860,7 +861,8 @@ export const tiberiasStayGuide: HotelStayDestination = {
   sourceIds: ["owner-hotels-tiberias"],
   related: [
     { label: "Tours & day trips", to: "/tours/", note: "Plan outings around the Galilee" },
-    { label: "Transfers & private transport", to: "/transfers/", note: "Arrange the exact hotel and return journey" },
+    { label: "Airport transfers", to: "/transfers/", note: "Arrange your arrival from Ben Gurion Airport" },
+    { label: "Private driver", to: "/private-driver/", note: "Plan hotel transfers and journeys around the Galilee" },
     { label: "Car rental in Israel", to: "/car-rental/" },
     { label: "All accommodation", to: "/hotels/" },
   ],
@@ -1003,7 +1005,8 @@ export const haifaStayGuide: HotelStayDestination = {
   sourceIds: ["owner-hotels-haifa", "haifa-botanica-facilities", "haifa-dan-carmel-rooms"],
   related: [
     { label: "Shore excursions from Haifa Port", to: "/haifa-shore-excursions/", note: "Plan the day around your ship's schedule" },
-    { label: "Transfers & private transport", to: "/transfers/", note: "Arrange the exact hotel and arrival point" },
+    { label: "Airport transfers", to: "/transfers/", note: "Arrange your arrival from Ben Gurion Airport" },
+    { label: "Private driver", to: "/private-driver/", note: "Plan hotel transfers and intercity journeys" },
     { label: "Tours & day trips", to: "/tours/" },
     { label: "Car rental in Israel", to: "/car-rental/" },
     { label: "All accommodation", to: "/hotels/" },

@@ -35,7 +35,7 @@ export const Route = createFileRoute("/travel-blog/ben-gurion-airport-to-jerusal
             "@type": "BreadcrumbList",
             itemListElement: [
               { "@type": "ListItem", position: 1, name: "Home", item: CANONICAL_ORIGIN + "/" },
-              { "@type": "ListItem", position: 2, name: "Transfers", item: CANONICAL_ORIGIN + "/transfers/" },
+              { "@type": "ListItem", position: 2, name: "Airport transfers", item: CANONICAL_ORIGIN + "/transfers/" },
               { "@type": "ListItem", position: 3, name: "Ben Gurion Airport", item: CANONICAL_ORIGIN + "/transfers/ben-gurion-airport/" },
               { "@type": "ListItem", position: 4, name: "Jerusalem", item: CANONICAL_ORIGIN + PATH },
             ],
@@ -118,7 +118,7 @@ function RoutePage() {
           <nav aria-label="Breadcrumb" className="text-sm text-muted-foreground">
             <ol className="flex flex-wrap gap-1">
               <li><Link to="/" className="hover:text-primary">Home</Link> /</li>
-              <li><Link to="/transfers/" className="hover:text-primary">Transfers</Link> /</li>
+              <li><Link to="/transfers/" className="hover:text-primary">Airport transfers</Link> /</li>
               <li><Link to="/transfers/ben-gurion-airport/" className="hover:text-primary">Ben Gurion Airport</Link> /</li>
               <li aria-current="page" className="text-foreground">Jerusalem</li>
             </ol>

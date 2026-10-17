@@ -1280,7 +1280,7 @@ export const providerLinks: ProviderLink[] = [
   },
   // Private transport (non-airport)
   {
-    id: "private-driver-moshe", pageIds: ["transfers-hub", "tours-hub"], ...moshe, mode: "provider_inquiry",
+    id: "private-driver-moshe", pageIds: ["private-driver", "tours-hub"], ...moshe, mode: "provider_inquiry",
     title: "Private driver by the day", summary: "Hire a local driver for multi-stop days or intercity transfers. Itinerary and price agreed by inquiry.",
     ctaLabel: "Request a quote on Israel-Taxi.com", url: `${OWNER_BASE}/private-driver-in-israel/`, isAffiliate: false,
     reentryNote: "Nothing is sent from this page. Contact the operator on their site.", confirm: ["Hours included", "Entrance fees not included unless stated", "Guide vs driver only"], sourceId: "owner-private-driver",

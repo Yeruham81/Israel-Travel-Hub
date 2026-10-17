@@ -65,15 +65,15 @@ const services: Service[] = [
     hub: { label: "Explore accommodation", to: "/hotels/" },
   },
   {
-    id: "transfers", eyebrow: "Transfers & private transport", title: "Airport transfers & private transport",
-    text: "Where the licensed taxi rank is, when to pre-book, and how to compare transfer quotes like-for-like.",
+    id: "transfers", eyebrow: "Transportation", title: "Airport transfers & private drivers",
+    text: "Arrange your airport arrival, or plan intercity journeys and multi-stop days with a private driver.",
     feature: { src: airportPickup, alt: "Illustrative driver loading luggage for arriving travellers" },
     cards: [
-      { label: "Airport → Jerusalem", text: "Taxis, private transfers & the train", to: "/travel-blog/ben-gurion-airport-to-jerusalem/", img: IMG.jerusalem },
-      { label: "Airport → Tel Aviv", text: "Short ride to the coast", to: "/travel-blog/ben-gurion-airport-to-tel-aviv/", img: IMG.telAviv },
-      { label: "Ben Gurion Airport", text: "All airport transfer routes", to: "/transfers/ben-gurion-airport/", img: IMG.t3 },
+      { label: "Ben Gurion Airport", text: "Private pickups, destinations & starting prices", to: "/transfers/ben-gurion-airport/", img: IMG.t3 },
+      { label: "Private driver", text: "Intercity journeys & a driver for the day", to: "/private-driver/", img: { src: roadTrip, alt: "Illustrative vehicle on an open desert road" } },
+      { label: "Airport to Jerusalem guide", text: "Plan your arrival in Jerusalem", to: "/travel-blog/ben-gurion-airport-to-jerusalem/", img: IMG.jerusalem },
     ],
-    hub: { label: "Explore transfers", to: "/transfers/" },
+    hub: { label: "Explore airport transfers", to: "/transfers/" },
   },
   {
     id: "tours", eyebrow: "Tours & day trips", title: "Tours & day trips",

@@ -45,7 +45,7 @@ function Hotels() {
       <RelatedLinks title="Getting to your hotel" items={[
         { label: "Airport to Jerusalem", to: "/travel-blog/ben-gurion-airport-to-jerusalem/" },
         { label: "Airport to Tel Aviv", to: "/travel-blog/ben-gurion-airport-to-tel-aviv/" },
-        { label: "All transfers", to: "/transfers/" },
+        { label: "Airport transfers", to: "/transfers/" },
         { label: "Destinations", to: "/destinations/" },
       ]} />
     </main>

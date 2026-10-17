@@ -35,6 +35,10 @@ describe("shared sidebar navigation", () => {
     expect(links[0]).toHaveTextContent("Home");
     expect(links.at(-1)).toHaveTextContent("About");
     expect(nav.textContent).not.toMatch(/[↗→]/);
+    const transportation = within(nav).getByRole("region", { name: "Transportation" });
+    expect(within(transportation).getAllByRole("link").map((link) => [link.textContent, link.getAttribute("href")])).toEqual([
+      ["Airport transfers", "/transfers/"], ["Private driver", "/private-driver/"], ["Car rental", "/car-rental/"],
+    ]);
   });
 
   it("clearly identifies external guides and preserves their real destinations", async () => {
@@ -68,9 +72,9 @@ describe("shared sidebar navigation", () => {
     expect(within(nav).getAllByRole("region")).toHaveLength(6);
     expect(within(nav).getAllByRole("link")[0]).toHaveTextContent("Home");
     expect(within(nav).getAllByRole("link").at(-1)).toHaveTextContent("About");
-    fireEvent.click(within(nav).getByRole("link", { name: "Hotels in Haifa" }));
+    fireEvent.click(within(nav).getByRole("link", { name: "Private driver" }));
     await waitFor(() => expect(screen.queryByRole("dialog")).not.toBeInTheDocument());
-    await waitFor(() => expect(router.state.location.pathname).toBe("/travel-blog/best-hotels-in-haifa/"));
+    await waitFor(() => expect(router.state.location.pathname).toBe("/private-driver/"));
 
     fireEvent.click(trigger);
     dialog = await screen.findByRole("dialog");
@@ -78,7 +82,7 @@ describe("shared sidebar navigation", () => {
     const popular = within(nav).getByRole("region", { name: "Popular Links" });
     fireEvent.click(within(popular).getByRole("link", { name: /Choosing an eSIM for Israel/ }));
     await waitFor(() => expect(screen.queryByRole("dialog")).not.toBeInTheDocument());
-    expect(router.state.location.pathname).toBe("/travel-blog/best-hotels-in-haifa/");
+    expect(router.state.location.pathname).toBe("/private-driver/");
   });
 });
 

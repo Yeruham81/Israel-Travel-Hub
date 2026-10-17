@@ -16,7 +16,7 @@ export const Route = createFileRoute("/travel-blog/ben-gurion-airport-to-tel-avi
       type: "article",
       crumbs: [
         { name: "Home", path: "/" },
-        { name: "Transfers", path: "/transfers/" },
+        { name: "Airport transfers", path: "/transfers/" },
         { name: "Ben Gurion Airport", path: "/transfers/ben-gurion-airport/" },
         { name: "Tel Aviv", path: PATH },
       ],
@@ -47,7 +47,7 @@ function TelAvivRoute() {
   return (
     <main>
       <GuideHeader
-        crumbs={[{ name: "Home", to: "/" }, { name: "Transfers", to: "/transfers/" }, { name: "Ben Gurion Airport", to: "/transfers/ben-gurion-airport/" }, { name: "Tel Aviv", to: PATH }]}
+        crumbs={[{ name: "Home", to: "/" }, { name: "Airport transfers", to: "/transfers/" }, { name: "Ben Gurion Airport", to: "/transfers/ben-gurion-airport/" }, { name: "Tel Aviv", to: PATH }]}
         eyebrow="Airport transfer guide · TLV → Tel Aviv"
         title={TITLE}
         intro="Tel Aviv is the closest big city to Ben Gurion Airport. Your main choices are a licensed taxi from the official rank, a pre-booked private transfer, or the train plus a short last leg."

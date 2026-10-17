@@ -8,7 +8,8 @@ export type NavGroup = { title: string; items: SidebarNavItem[] };
 export const serviceNav: NavItem[] = [
   { label: "Home", to: "/" },
   { label: "Accommodation", to: "/hotels/" },
-  { label: "Transfers", to: "/transfers/" },
+  { label: "Airport transfers", to: "/transfers/" },
+  { label: "Private driver", to: "/private-driver/" },
   { label: "Tours & day trips", to: "/tours/" },
   { label: "Shore excursions", to: "/shore-excursions/" },
   { label: "Attractions", to: "/attractions/" },
@@ -17,7 +18,7 @@ export const serviceNav: NavItem[] = [
   { label: "Destinations", to: "/destinations/" },
 ];
 
-/** The seven service domains (no Home/Destinations) — used by the header. */
+/** Service domains (no Home/Destinations) — used by the header. */
 export const serviceDomains: NavItem[] = serviceNav.filter((n) => n.to !== "/" && n.to !== "/destinations/");
 
 export const hotelNav: NavItem[] = [
@@ -49,8 +50,8 @@ export const allNavGroups: NavGroup[] = [
   {
     title: "Transportation",
     items: [
-      { label: "Airport transfers", to: "/transfers/ben-gurion-airport/" },
-      { label: "Private transfers", to: "/transfers/" },
+      { label: "Airport transfers", to: "/transfers/" },
+      { label: "Private driver", to: "/private-driver/" },
       { label: "Car rental", to: "/car-rental/" },
     ],
   },
