@@ -90,7 +90,7 @@ describe("shore excursions", () => {
       expect(router.matchRoutes(href).at(-1)?.routeId).toBe(href.replace(/\/$/, ""));
     }
     expect(container.querySelector("a a")).toBeNull();
-    expect(container.querySelector("time")).toHaveAttribute("datetime", SHORE_EXCURSION_CHECK_DATE);
+    expect(container.querySelector(`header time[datetime="${SHORE_EXCURSION_CHECK_DATE}"]`)).toBeInTheDocument();
     const head = await route.options.head?.({} as never);
     expect(head).toMatchObject({ meta: expect.arrayContaining([{ title: expect.stringContaining(`${port.name} shore excursions`) }, { name: "robots", content: "noindex,nofollow" }]), links: [{ rel: "canonical", href: expect.stringContaining(port.path) }] });
     const schemas = (head?.scripts || []).map((script) => typeof script?.children === "string" ? JSON.parse(script.children) : null);

@@ -15,6 +15,7 @@ import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 import { SiteHeader, SiteFooter, SiteSidebar } from "@/components/Layout";
 import { HomeHero } from "@/components/HomeHero";
+import { CurrencyRatesProvider } from "@/components/CurrencyRates";
 
 function NotFoundComponent() {
   return (
@@ -127,6 +128,7 @@ function RootComponent() {
 
   return (
     <QueryClientProvider client={queryClient}>
+      <CurrencyRatesProvider>
       <a href="#main" className="sr-only focus:not-sr-only focus:fixed focus:left-2 focus:top-2 focus:z-50 focus:rounded focus:bg-card focus:p-2">Skip to content</a>
       <SiteHeader />
       <Content id="main">
@@ -140,6 +142,7 @@ function RootComponent() {
         </div>
       </Content>
       <SiteFooter />
+      </CurrencyRatesProvider>
     </QueryClientProvider>
   );
 }

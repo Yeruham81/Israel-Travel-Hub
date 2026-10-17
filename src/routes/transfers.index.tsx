@@ -5,6 +5,7 @@ import { StayPhotoCredits } from "@/components/StayGuideParts";
 import { airportDestinationCards, airportTransferPhotos } from "@/data/airportTransfers";
 import { AIRPORT_TRANSFER_CHECK_DATE, formatCheckDate, getSource } from "@/data/registry";
 import { pageMeta } from "@/lib/site";
+import { ExchangeRateNote, PriceDisplay } from "@/components/CurrencyRates";
 
 export const Route = createFileRoute("/transfers/")({
   head: () =>
@@ -51,12 +52,13 @@ function AirportTransfers() {
         <div className="mt-5 rounded-xl border bg-secondary/40 p-4 text-sm leading-relaxed" data-testid="airport-hub-rate-terms">
           <p><strong>Moshe Barak's published starting rates:</strong> {popular[0]!.price.conditions}</p>
           <p className="mt-2 text-muted-foreground">Prices are per vehicle. Larger groups need a separate quote. <a href={source.url} target="_blank" rel="noopener noreferrer" className="underline">Published operator rates<span className="sr-only"> (opens in a new tab)</span></a> checked {formatCheckDate(AIRPORT_TRANSFER_CHECK_DATE)}.</p>
+          <ExchangeRateNote className="mt-3" />
         </div>
       </section>
       <section aria-labelledby="more-h" className="mt-12">
         <h2 id="more-h" className="text-3xl">More destinations from Ben Gurion Airport</h2>
         <ul className="mt-5 grid gap-3 sm:grid-cols-2">
-          {more.map((card) => <li key={card.id}><Link to="/transfers/ben-gurion-airport/" search={{ destination: card.id }} hash="request-quote" className="flex h-full flex-wrap items-center justify-between gap-2 rounded-xl border bg-card p-4 hover:border-primary"><span className="font-medium">{card.destination}</span><span className="text-sm text-primary">From ILS {card.price.amount.toLocaleString("en-US")}</span></Link></li>)}
+          {more.map((card) => <li key={card.id}><Link to="/transfers/ben-gurion-airport/" search={{ destination: card.id }} hash="request-quote" className="flex h-full flex-wrap items-center justify-between gap-3 rounded-xl border bg-card p-4 hover:border-primary"><span className="font-medium">{card.destination}</span><PriceDisplay amount={card.price.amount} size="compact" /></Link></li>)}
           <li><Link to="/transfers/ben-gurion-airport/" search={{ destination: "other" }} hash="request-quote" className="block h-full rounded-xl border bg-card p-4 font-medium text-primary hover:border-primary">Another destination or a larger group? Request a quote →</Link></li>
         </ul>
       </section>

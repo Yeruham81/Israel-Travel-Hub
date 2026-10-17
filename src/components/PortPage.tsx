@@ -7,6 +7,7 @@ import { airportTransferPhotos } from "@/data/airportTransfers";
 import { getShorePort, shoreExcursionBenefits } from "@/data/shoreExcursions";
 import { formatCheckDate, getSource, linksForPage, SHORE_EXCURSION_CHECK_DATE, shorePorts, type ShorePortId } from "@/data/registry";
 import { CANONICAL_ORIGIN, SITE_NAME, pageMeta } from "@/lib/site";
+import { ExchangeRateNote, PriceDisplay } from "@/components/CurrencyRates";
 
 function crumbsFor(id: ShorePortId) {
   return [{ name: "Home", path: "/" as const }, { name: "Shore excursions", path: "/shore-excursions/" as const }, { name: `From ${shorePorts[id].name} Port`, path: shorePorts[id].path }];
@@ -42,9 +43,10 @@ export function PortPage({ id }: { id: ShorePortId }) {
           <p className="eyebrow">Your ship. Your day ashore.</p>
           <h1 className="mt-3 text-4xl leading-[1.1] md:text-5xl">{port.title}</h1>
           <p className="mt-4 text-lg leading-relaxed text-muted-foreground">{port.intro}</p>
-          <p className="mt-5 text-3xl font-semibold tabular-nums">From ILS {minimumRate.toLocaleString("en-US")}</p>
+          <PriceDisplay amount={minimumRate} size="hero" className="mt-5" />
           <p className="mt-1 text-sm text-muted-foreground">Full-day return transport · per vehicle · up to 4 passengers</p>
           <p className="mt-2 text-xs leading-relaxed text-muted-foreground">Weekday starting rate for transport only. Guide, admissions, meals and tips excluded. Night, weekend and holiday supplements may apply; final quote by confirmation.</p>
+          <ExchangeRateNote className="mt-3" />
           <a href="#request-quote" onClick={focusQuote} className="btn btn-primary mt-5">Request your {port.name} excursion</a>
         </div>
         <figure><img src={port.photo.src} alt={port.photo.alt} width={900} height={600} fetchPriority="high" decoding="async" className="aspect-[3/2] w-full rounded-2xl object-cover" /><GuidePhotoCredit photo={port.photo} /></figure>
@@ -69,7 +71,7 @@ export function PortPage({ id }: { id: ShorePortId }) {
             <ul aria-label="Possible highlights" className="mt-4 flex flex-wrap gap-2">{itinerary.highlights.map((highlight) => <li key={highlight} className="rounded-full bg-secondary px-3 py-1 text-xs">{highlight}</li>)}</ul>
             <p className="mt-4 text-sm"><strong>Best for:</strong> {itinerary.bestFor}</p>
             <p className="mt-3 flex-1 text-sm leading-relaxed text-muted-foreground">{itinerary.planningNote}</p>
-            <div className="mt-5 border-t pt-4"><p className="text-xs text-muted-foreground">Published starting rate</p><p className="mt-1 text-2xl font-semibold tabular-nums">From ILS {itinerary.price.amount.toLocaleString("en-US")}</p><p className="mt-1 text-xs text-muted-foreground">Per vehicle · up to 4 · transport only</p></div>
+            <div className="mt-5 border-t pt-4"><p className="text-xs text-muted-foreground">Published starting rate</p><PriceDisplay amount={itinerary.price.amount} className="mt-1" /><p className="mt-2 text-xs text-muted-foreground">Per vehicle · up to 4 · transport only</p></div>
             <a href="#request-quote" onClick={() => { setItineraryId(itinerary.id); focusQuote(); }} className="btn btn-primary mt-4" aria-label={`Request ${itinerary.destination} from ${port.name}`}>{itineraryId === itinerary.id ? "Selected — request this day trip" : "Request this day trip"}</a>
           </div>
         </li>)}

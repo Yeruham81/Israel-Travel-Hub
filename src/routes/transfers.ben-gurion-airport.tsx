@@ -9,6 +9,7 @@ import { airportDestinationCards, airportTransferPhotos, airportTransferBenefits
 import { AIRPORT_TRANSFER_CHECK_DATE, formatCheckDate, getSource, linksForPage } from "@/data/registry";
 import { recordOutboundClick, relFor } from "@/lib/outbound";
 import { pageMeta } from "@/lib/site";
+import { ExchangeRateNote } from "@/components/CurrencyRates";
 
 export const Route = createFileRoute("/transfers/ben-gurion-airport")({
   validateSearch: (search: Record<string, unknown>): { destination?: string } => {
@@ -60,6 +61,7 @@ function Airport() {
     <div className="mt-5 rounded-xl border bg-secondary/40 p-4 text-sm leading-relaxed" data-testid="airport-rate-terms">
       <p><strong>About these starting prices:</strong> one-way weekday rates for Moshe Barak's service, per vehicle for up to four passengers. Night, weekend and holiday supplements may apply. Larger groups need a separate quote.</p>
       <p className="mt-2 text-muted-foreground">Final price and availability are confirmed before booking. <a href={source.url} target="_blank" rel="noopener noreferrer" className="underline">Published operator rates<span className="sr-only"> (opens in a new tab)</span></a> checked {formatCheckDate(AIRPORT_TRANSFER_CHECK_DATE)}.</p>
+      <ExchangeRateNote className="mt-3" />
     </div>
 
     <TransferQuoteForm destinationId={destinationId} onDestinationChange={setDestinationId} />

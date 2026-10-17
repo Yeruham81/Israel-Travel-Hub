@@ -6,6 +6,7 @@ import { getAirportRouteGuide } from "@/data/airportRoutes";
 import { airportTransferPhotos } from "@/data/airportTransfers";
 import { AIRPORT_TRANSFER_CHECK_DATE, airportTransferRoutes, formatCheckDate, getSource, travelGuidePaths, type AirportTransferRouteId } from "@/data/registry";
 import { pageMeta } from "@/lib/site";
+import { ExchangeRateNote, PriceDisplay } from "@/components/CurrencyRates";
 
 function crumbsFor(id: AirportTransferRouteId) {
   const guide = getAirportRouteGuide(id);
@@ -47,10 +48,11 @@ export function AirportRoutePage({ id }: { id: AirportTransferRouteId }) {
           <h1 className="mt-3 text-4xl leading-[1.1] md:text-5xl">{guide.title}</h1>
           <p className="mt-4 text-lg leading-relaxed text-muted-foreground">{guide.intro}</p>
           <div className="mt-5 flex flex-wrap items-end gap-x-6 gap-y-3 rounded-xl border bg-secondary/50 p-4" data-testid="route-starting-rate">
-            <div><p className="text-xs font-medium text-muted-foreground">Published starting rate</p><p className="mt-1 text-3xl font-semibold tabular-nums">From ILS {price.amount.toLocaleString("en-US")}</p><p className="mt-1 text-xs text-muted-foreground">One way · per vehicle · up to 4</p></div>
+            <div><p className="text-xs font-medium text-muted-foreground">Published starting rate</p><PriceDisplay amount={price.amount} size="hero" className="mt-1" /><p className="mt-2 text-xs text-muted-foreground">One way · per vehicle · up to 4</p></div>
             <div><p className="text-xs font-medium text-muted-foreground">Drive after pickup</p><p className="mt-1 font-semibold">{guide.driveTime}</p><p className="mt-1 text-xs text-muted-foreground">Guide estimate · traffic can add time</p></div>
           </div>
           <p className="mt-2 text-xs leading-relaxed text-muted-foreground">Weekday starting rate. Night, weekend and holiday supplements may apply. Final price and availability by confirmation; larger groups need a quote.</p>
+          <ExchangeRateNote className="mt-3" />
           <a href="#request-quote" onClick={focusQuote} className="btn btn-primary mt-5">Request your airport transfer</a>
           <p className="mt-3 text-sm text-muted-foreground">Private vehicle for your party · Exact hotel or address · Request at least 24 hours ahead</p>
         </div>

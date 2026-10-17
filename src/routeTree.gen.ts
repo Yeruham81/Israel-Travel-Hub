@@ -20,6 +20,7 @@ import { Route as HotelsRouteImport } from './routes/hotels'
 import { Route as PrivateDriverRouteImport } from './routes/private-driver'
 import { Route as ShoreExcursionsRouteImport } from './routes/shore-excursions'
 import { Route as TicketsRouteImport } from './routes/tickets'
+import { Route as ApiExchangeRatesRouteImport } from './routes/api.exchange-rates'
 import { Route as AttractionsIndexRouteImport } from './routes/attractions.index'
 import { Route as AttractionsCaesareaRouteImport } from './routes/attractions.caesarea'
 import { Route as DeadSeaFamilyHotelsRouteImport } from './routes/dead-sea.family-hotels'
@@ -117,6 +118,11 @@ const ShoreExcursionsRoute = ShoreExcursionsRouteImport.update({
 const TicketsRoute = TicketsRouteImport.update({
   id: '/tickets',
   path: '/tickets',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiExchangeRatesRoute = ApiExchangeRatesRouteImport.update({
+  id: '/api/exchange-rates',
+  path: '/api/exchange-rates',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AttractionsIndexRoute = AttractionsIndexRouteImport.update({
@@ -371,6 +377,7 @@ export interface FileRoutesByFullPath {
   '/private-driver': typeof PrivateDriverRoute
   '/shore-excursions': typeof ShoreExcursionsRoute
   '/tickets': typeof TicketsRoute
+  '/api/exchange-rates': typeof ApiExchangeRatesRoute
   '/attractions/caesarea': typeof AttractionsCaesareaRoute
   '/dead-sea/family-hotels': typeof DeadSeaFamilyHotelsRoute
   '/dead-sea/spa-hotels': typeof DeadSeaSpaHotelsRoute
@@ -427,6 +434,7 @@ export interface FileRoutesByTo {
   '/private-driver': typeof PrivateDriverRoute
   '/shore-excursions': typeof ShoreExcursionsRoute
   '/tickets': typeof TicketsRoute
+  '/api/exchange-rates': typeof ApiExchangeRatesRoute
   '/attractions/caesarea': typeof AttractionsCaesareaRoute
   '/dead-sea/family-hotels': typeof DeadSeaFamilyHotelsRoute
   '/dead-sea/spa-hotels': typeof DeadSeaSpaHotelsRoute
@@ -484,6 +492,7 @@ export interface FileRoutesById {
   '/private-driver': typeof PrivateDriverRoute
   '/shore-excursions': typeof ShoreExcursionsRoute
   '/tickets': typeof TicketsRoute
+  '/api/exchange-rates': typeof ApiExchangeRatesRoute
   '/attractions/caesarea': typeof AttractionsCaesareaRoute
   '/dead-sea/family-hotels': typeof DeadSeaFamilyHotelsRoute
   '/dead-sea/spa-hotels': typeof DeadSeaSpaHotelsRoute
@@ -542,6 +551,7 @@ export interface FileRouteTypes {
     | '/private-driver'
     | '/shore-excursions'
     | '/tickets'
+    | '/api/exchange-rates'
     | '/attractions/caesarea'
     | '/dead-sea/family-hotels'
     | '/dead-sea/spa-hotels'
@@ -598,6 +608,7 @@ export interface FileRouteTypes {
     | '/private-driver'
     | '/shore-excursions'
     | '/tickets'
+    | '/api/exchange-rates'
     | '/attractions/caesarea'
     | '/dead-sea/family-hotels'
     | '/dead-sea/spa-hotels'
@@ -654,6 +665,7 @@ export interface FileRouteTypes {
     | '/private-driver'
     | '/shore-excursions'
     | '/tickets'
+    | '/api/exchange-rates'
     | '/attractions/caesarea'
     | '/dead-sea/family-hotels'
     | '/dead-sea/spa-hotels'
@@ -711,6 +723,7 @@ export interface RootRouteChildren {
   PrivateDriverRoute: typeof PrivateDriverRoute
   ShoreExcursionsRoute: typeof ShoreExcursionsRoute
   TicketsRoute: typeof TicketsRoute
+  ApiExchangeRatesRoute: typeof ApiExchangeRatesRoute
   AttractionsCaesareaRoute: typeof AttractionsCaesareaRoute
   DeadSeaFamilyHotelsRoute: typeof DeadSeaFamilyHotelsRoute
   DeadSeaSpaHotelsRoute: typeof DeadSeaSpaHotelsRoute
@@ -833,6 +846,13 @@ declare module '@tanstack/react-router' {
       path: '/tickets'
       fullPath: '/tickets'
       preLoaderRoute: typeof TicketsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/exchange-rates': {
+      id: '/api/exchange-rates'
+      path: '/api/exchange-rates'
+      fullPath: '/api/exchange-rates'
+      preLoaderRoute: typeof ApiExchangeRatesRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/attractions/': {
@@ -1151,6 +1171,7 @@ const rootRouteChildren: RootRouteChildren = {
   PrivateDriverRoute: PrivateDriverRoute,
   ShoreExcursionsRoute: ShoreExcursionsRoute,
   TicketsRoute: TicketsRoute,
+  ApiExchangeRatesRoute: ApiExchangeRatesRoute,
   AttractionsCaesareaRoute: AttractionsCaesareaRoute,
   DeadSeaFamilyHotelsRoute: DeadSeaFamilyHotelsRoute,
   DeadSeaSpaHotelsRoute: DeadSeaSpaHotelsRoute,
