@@ -4,7 +4,10 @@ export function siteConfig(env: { VITE_CANONICAL_ORIGIN?: string; VITE_INDEXABLE
   return { origin, indexable: env.VITE_INDEXABLE === "true" };
 }
 
-export const SITE_CONFIG = siteConfig(import.meta.env);
+export const SITE_CONFIG = siteConfig({
+  VITE_CANONICAL_ORIGIN: import.meta.env["VITE_CANONICAL_ORIGIN"] || "",
+  VITE_INDEXABLE: import.meta.env["VITE_INDEXABLE"] || "",
+});
 export const CANONICAL_ORIGIN = SITE_CONFIG.origin;
 export const INDEXABLE = SITE_CONFIG.indexable;
 

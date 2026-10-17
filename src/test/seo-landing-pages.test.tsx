@@ -92,12 +92,14 @@ describe("ten search-intent landing pages", () => {
     const main = document.querySelector("main");
     if (!main) throw new Error("Missing main content");
     const links = [...main.querySelectorAll<HTMLAnchorElement>('a[href^="/"]')];
-    expect(new Set(links.map((link) => link.pathname)).size).toBeGreaterThanOrEqual(2);
+    expect(new Set(links.map((link) => new URL(link.getAttribute("href") || "/", "https://test.example").pathname)).size).toBeGreaterThanOrEqual(2);
     for (const link of links) {
-      expect(router.matchRoutes(link.pathname).at(-1)?.routeId, link.pathname).toBe(link.pathname.replace(/\/$/, "") || "/");
+      const pathname = new URL(link.getAttribute("href") || "/", "https://test.example").pathname;
+      expect(router.matchRoutes(pathname).at(-1)?.routeId, pathname).toBe(pathname.replace(/\/$/, "") || "/");
     }
     for (const link of main.querySelectorAll<HTMLAnchorElement>('a[href^="#"]')) {
-      expect(document.getElementById(link.hash.slice(1)), link.hash).not.toBeNull();
+      const hash = link.getAttribute("href") || "";
+      expect(document.getElementById(hash.slice(1)), hash).not.toBeNull();
     }
     const info = main.querySelector(path.includes("ben-gurion-airport-to-") ? "#journey-details" : path.includes("where-to-stay") || path.includes("best-dead-sea") ? "#overview" : "#quick-answer");
     expect(info?.textContent?.length).toBeGreaterThan(100);
