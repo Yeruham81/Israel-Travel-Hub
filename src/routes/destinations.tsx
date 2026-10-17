@@ -15,7 +15,7 @@ export const Route = createFileRoute("/destinations")({
 });
 
 type L = { label: string; to: LinkProps["to"] };
-const dests: { name: string; text: string; links: L[] }[] = [
+const dests: { id?: string; name: string; text: string; links: L[] }[] = [
   {
     name: "Dead Sea & Ein Bokek",
     text: "Compare spa breaks, family resorts, luxury stays and nature-focused alternatives near Ein Gedi on the Israeli shore.",
@@ -80,6 +80,16 @@ const dests: { name: string; text: string; links: L[] }[] = [
       { label: "Airport transfers", to: "/transfers/" },
     ],
   },
+  {
+    id: "eilat", name: "Eilat & the Red Sea",
+    text: "Red Sea beaches, resort stays and desert scenery. Consider your beach and pool priorities, the hotel's location and the onward journey when planning an Eilat stay.",
+    links: [
+      { label: "Plan your visit to Israel", to: travelGuidePaths.travelTips },
+      { label: "Getting around Israel", to: travelGuidePaths.israel },
+      { label: "Airport-transfer destinations & quotes", to: "/transfers/" },
+      { label: "Private driver for your route", to: "/private-driver/" },
+    ],
+  },
 ];
 
 function Destinations() {
@@ -93,7 +103,7 @@ function Destinations() {
       />
       <div className="mt-10 space-y-6">
         {dests.map((d) => (
-          <section key={d.name} aria-label={d.name} className="rounded-2xl border bg-card p-6 md:p-8">
+          <section key={d.name} id={d.id} aria-label={d.name} className="scroll-mt-24 rounded-2xl border bg-card p-6 md:p-8">
             <h2 className="text-3xl">{d.name}</h2>
             <p className="mt-2 text-muted-foreground">{d.text}</p>
             <ul className="mt-4 grid gap-2 sm:grid-cols-2">

@@ -128,13 +128,14 @@ describe("accommodation destination hub", () => {
       expect(within(card).getByRole("img").getAttribute("alt")).not.toBe("");
       expect(card.textContent).not.toMatch(/compare\s+(?:\d+|six|eight|ten|eleven)\s+(?:hotels|areas)/i);
       const href = card.getAttribute("href")!;
-      if (href.startsWith("/")) expect(router.matchRoutes(href).at(-1)?.routeId).toBe(href.replace(/\/$/, ""));
+      if (href.startsWith("/")) expect(router.matchRoutes(href.split("#")[0]!).at(-1)?.routeId).toBe(href.split("#")[0]!.replace(/\/$/, ""));
     }
     const eilat = cards.at(-1)!;
-    expect(eilat).toHaveAttribute("href", "https://www.israel-taxi.com/travel-blog/eilat/");
-    expect(eilat).toHaveAttribute("target", "_blank");
-    expect(eilat).toHaveTextContent("Travel guide on israel-taxi.com");
-    expect(screen.getByText("Guide image sources").closest("details")!.querySelectorAll("a")).toHaveLength(6);
+    expect(eilat).toHaveAttribute("href", "/destinations/#eilat");
+    expect(eilat).not.toHaveAttribute("target");
+    expect(eilat).not.toHaveTextContent("israel-taxi.com");
+    expect(screen.queryByText("Guide image sources")).not.toBeInTheDocument();
+    expect(document.querySelector('a[href*="israel-taxi.com/wp-content/"]')).toBeNull();
   });
 
   it("retains the accommodation URL and includes Eilat in page discovery", async () => {

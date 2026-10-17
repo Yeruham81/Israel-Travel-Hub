@@ -275,7 +275,7 @@ export const jerusalemAreaGuides: NeighborhoodStayGuide[] = [
     overview: [
       "The German Colony and Baka are neighboring residential areas south of central Jerusalem. Emek Refaim is the German Colony's main café and shopping street, while Baka extends farther south and east around Bethlehem Road. A hotel at the northern end of the German Colony has a different relationship to the Old City from a suite deep inside Baka.",
       "This is an appealing base for families, repeat visitors and longer stays. Historic stone buildings, neighborhood cafés and residential side streets give you a place to return to after sightseeing, rather than placing you in the busiest tourist or market streets. The accommodation mix includes a large luxury hotel and apartment-style properties with more independent living space.",
-      "Distance is the tradeoff. Plan to use buses or taxis for some journeys, particularly from southern Baka, and do not assume that every important attraction is a short walk away. The original guide flags light-rail construction around Emek Refaim and the First Station: ask the hotel for a current update on noise, pedestrian routes and vehicle access rather than relying on an old construction timetable.",
+      "Distance is the tradeoff. Plan to use buses or taxis for some journeys, particularly from southern Baka, and do not assume that every important attraction is a short walk away. Ask the hotel about current construction near Emek Refaim and the First Station, including noise, pedestrian routes and vehicle access.",
     ],
     highlights: [
       { name: "Emek Refaim", text: "Cafés, restaurants and historic stone buildings form the main neighborhood spine." },
@@ -974,7 +974,7 @@ export const haifaStayGuide: HotelStayDestination = {
   overview: [
     "Start by deciding where you want to spend your time. The German Colony suits a city break around historic streets, restaurants and the lower Bahá'í Gardens. Carmel Center gives a higher base near the Louis Promenade and bay viewpoints. For beach time, Leonardo Plaza's southern seafront position is a different choice from either of those neighborhoods.",
     "The luxury comparison begins with Botanica's contemporary German Colony setting and Dan Carmel's classic hilltop hotel format. For heritage boutique stays, compare The Schumacher and The Colony Hotel. Families can compare Crowne Plaza's indoor pool, Leonardo Plaza's beachfront setting and Dan Carmel's pools and family-room options in the dedicated family guide.",
-    "Golden Crown and Nof provide two practical city-hotel comparisons on different levels of Haifa: the lower city and the Carmel. Nof is the property called Haifa Bay View in the original guide and may still appear under that name on booking sites. Port Inn and Loui Talpiot offer smaller independent formats. 'Mid-range' and 'budget-minded' describe the comparison, not fixed nightly prices or a promise that one hotel is always cheaper.",
+    "Golden Crown and Nof provide two practical city-hotel comparisons on different levels of Haifa: the lower city and the Carmel. Nof may also appear as Haifa Bay View on booking sites. Port Inn and Loui Talpiot offer smaller independent formats. 'Mid-range' and 'budget-minded' describe the comparison, not fixed nightly prices or a promise that one hotel is always cheaper.",
   ],
   map: { lat: 32.8191, lon: 34.9884, bounds: [34.951, 32.785, 35.017, 32.837], reference: "German Colony reference point; map also covers Carmel Center, Hadar and the southern beachfront" },
   locations: [
@@ -999,7 +999,7 @@ export const haifaStayGuide: HotelStayDestination = {
     { q: "Which hotel should I compare for a beach holiday?", a: "Leonardo Plaza is the beachfront comparison in this shortlist, with access to the shore from the pool area. Carmel hotels can offer impressive sea views while still requiring a separate journey to a swimming beach." },
     { q: "Which boutique hotels are suitable for a couples' break?", a: "Compare The Schumacher and The Colony Hotel for heritage settings in the German Colony, and Botanica for contemporary design, a spa and a seasonal rooftop plunge pool. Check the individual age policy, room and inclusions; boutique is not a single facilities standard." },
     { q: "Are Botanica and Schumacher options for young children?", a: "They are excluded from this guide's young-family shortlist. Botanica's operator describes age-restricted stays from 16, while Schumacher's own site says adults-only. Confirm exact eligibility directly. The family guide compares Leonardo Plaza, Crowne Plaza and Dan Carmel instead." },
-    { q: "Is Nof Hotel the same property as Haifa Bay View?", a: "The property at 101 Hanassi Avenue, listed as Haifa Bay View in the original guide, is presented by Nara Hotels as Nof Hotel. Booking platforms may retain the Bay View name. Check the address and exact room when following the booking link." },
+    { q: "Is Nof Hotel the same property as Haifa Bay View?", a: "The property at 101 Hanassi Avenue, also known as Haifa Bay View, is presented by Nara Hotels as Nof Hotel. Booking platforms may retain the Bay View name. Check the address and exact room when following the booking link." },
     { q: "Can I use a Haifa hotel before or after a cruise?", a: "Yes, but plan the journey for the actual terminal and ship schedule. A hotel near the port district is not proof of a walkable passenger entrance. Confirm luggage storage, reception times and pickup arrangements before choosing a short stay." },
   ],
   sourceIds: ["owner-hotels-haifa", "haifa-botanica-facilities", "haifa-dan-carmel-rooms"],
@@ -1104,7 +1104,7 @@ export type AccommodationDestinationCard = {
   text: string;
   cta: string;
   photo: StayGuidePhoto;
-} & ({ to: NonNullable<LinkProps["to"]> } | { href: string });
+} & ({ to: NonNullable<LinkProps["to"]>; hash?: string } | { href: string });
 
 /** The accommodation hub introduces the experience, then leads into a guide. */
 export const accommodationDestinations: AccommodationDestinationCard[] = [
@@ -1138,7 +1138,7 @@ export const accommodationDestinations: AccommodationDestinationCard[] = [
   {
     id: "eilat", title: "Hotels in Eilat",
     text: "Red Sea beaches, resort escapes and desert scenery set the scene for a laid-back holiday. Get to know Eilat before choosing your stay.",
-    cta: "Explore Eilat", href: `${OWNER_BASE}/travel-blog/eilat/`,
+    cta: "Explore Eilat", to: "/destinations/", hash: "eilat",
     photo: { src: eilatWaterfrontPhoto, alt: "Hotels, palm trees and the waterfront beside the Red Sea in Eilat", sourceUrl: "https://www.israel-taxi.com/wp-content/uploads/2025/08/eilat_.jpg", label: "Eilat — Red Sea waterfront" },
   },
 ];

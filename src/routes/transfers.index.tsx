@@ -7,7 +7,8 @@ import { AirportDestinationCard as DestinationCard } from "@/components/AirportD
 import { AirportBookingPlatforms } from "@/components/AirportBookingPlatforms";
 import { StayPhotoCredits } from "@/components/StayGuideParts";
 import { airportDestinationCards, airportTransferPhotos, airportTransferBenefits, airportTransferTips, airportTransferFaqs, airportRelatedLinks } from "@/data/airportTransfers";
-import { AIRPORT_TRANSFER_CHECK_DATE, formatCheckDate, getSource } from "@/data/registry";
+import { AIRPORT_TRANSFER_CHECK_DATE } from "@/data/registry";
+import { PageUpdated } from "@/components/PageUpdated";
 import { pageMeta } from "@/lib/site";
 import { parseAirportTransferSearch } from "@/lib/transfer-quote";
 import { ExchangeRateNote } from "@/components/CurrencyRates";
@@ -28,7 +29,6 @@ function Airport() {
   const { destination } = Route.useSearch();
   const [destinationId, setDestinationId] = useState(destination ?? "");
   useEffect(() => setDestinationId(destination ?? ""), [destination]);
-  const source = getSource("moshe-airport-transfers");
   const choose = (id: string) => {
     setDestinationId(id);
     requestAnimationFrame(() => document.getElementById("request-quote")?.focus({ preventScroll: true }));
@@ -50,7 +50,8 @@ function Airport() {
     </section>
     <div className="mt-5 rounded-xl border bg-secondary/40 p-4 text-sm leading-relaxed" data-testid="airport-rate-terms">
       <p><strong>About these starting prices:</strong> one-way weekday rates for Moshe Barak's service, per vehicle for up to four passengers. Night, weekend and holiday supplements may apply. Larger groups need a separate quote.</p>
-      <p className="mt-2 text-muted-foreground">Final price and availability are confirmed before booking. <a href={source.url} target="_blank" rel="noopener noreferrer" className="underline">Published operator rates<span className="sr-only"> (opens in a new tab)</span></a> checked {formatCheckDate(AIRPORT_TRANSFER_CHECK_DATE)}.</p>
+      <p className="mt-2 text-muted-foreground">Final price and availability are confirmed before booking.</p>
+      <PageUpdated date={AIRPORT_TRANSFER_CHECK_DATE} />
       <ExchangeRateNote className="mt-3" />
     </div>
 

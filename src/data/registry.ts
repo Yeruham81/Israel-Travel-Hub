@@ -108,6 +108,29 @@ export const DEAD_SEA_STAY_REVIEW_DATE: ISODate = "2026-10-17";
 export const TIBERIAS_STAY_REVIEW_DATE: ISODate = "2026-10-17";
 export const HAIFA_STAY_REVIEW_DATE: ISODate = "2026-10-17";
 export const OWNER_BASE = "https://www.israel-taxi.com";
+export interface AuthorProfile {
+  name: string;
+  role: string;
+  experience: string;
+  bio: string;
+  reviewsUrl: string;
+  sourceIds: string[];
+}
+export const mosheBarakAuthor: AuthorProfile = {
+  name: "Moshe Barak",
+  role: "Local travel writer & private transport operator",
+  experience: "20+ years of experience in Israel.",
+  bio: "Moshe helps international visitors plan airport transfers, private day trips and journeys across Israel. His guides draw on practical local knowledge and a commitment to reliable, professional service.",
+  reviewsUrl: "https://www.tripadvisor.com/Attraction_Review-g293984-d14803612-Reviews-Moshe_Barak-Tel_Aviv_Tel_Aviv_District.html",
+  sourceIds: ["moshe-author-profile"],
+};
+
+/** Keep migration provenance in the registry without publishing legacy-site referrals. */
+export function isPublisherUrl(url?: string) {
+  if (!url) return false;
+  try { return new URL(url).hostname.replace(/^www\./, "") === "israel-taxi.com"; }
+  catch { return false; }
+}
 export const AIRPORT_TRANSFER_CHECK_DATE: ISODate = "2026-10-17";
 export const TRAVEL_GUIDE_CHECK_DATE: ISODate = "2026-10-17";
 export const SHORE_EXCURSION_CHECK_DATE: ISODate = "2026-10-17";
@@ -383,6 +406,7 @@ const haifaHotelSources: SourceReference[] = [
 }));
 
 export const sources: SourceReference[] = [
+  { id: "moshe-author-profile", title: "Moshe Barak biography", publisher: "Moshe Barak", url: `${OWNER_BASE}/about-me/`, checkedAt: "2026-10-18", note: "Publisher biography supports over 20 years in private transport, local route knowledge and tailored journeys for international visitors. Tripadvisor is linked to the owner-supplied profile only; no live score, count or review text is reproduced." },
   referenceFxSource,
   ...travelGuideSources,
   ...airportTransferRoutes.filter((route) => route.id !== "jerusalem").map((route): SourceReference => ({
@@ -1279,9 +1303,11 @@ export const offers: Offer[] = [
 
 export const getSource = (id: string) => sources.find((s) => s.id === id)!;
 
+export const publicSources = (ids: string[]) => [...new Set(ids)].map(getSource).filter((source) => !isPublisherUrl(source.url));
+
 export function formatCheckDate(d: ISODate) {
   return new Date(d + "T12:00:00Z").toLocaleDateString("en-GB", {
-    day: "numeric", month: "long", year: "numeric", timeZone: "UTC",
+    month: "long", year: "numeric", timeZone: "UTC",
   });
 }
 

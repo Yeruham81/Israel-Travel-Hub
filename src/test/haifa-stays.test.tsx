@@ -77,7 +77,8 @@ describe("Haifa accommodation: location and travel intent before booking", () =>
     expect(within(screen.getByRole("navigation", { name: "Breadcrumb" })).getByRole("link", { name: "Haifa" })).toHaveAttribute("href", destination.path);
     expect(screen.getByRole("link", { name: /See the map and compare/ })).toHaveAttribute("href", `${destination.path}#location`);
     expect(screen.getByRole("link", { name: categories.find((other) => other.id !== guide.id)!.title })).toBeInTheDocument();
-    expect(container.querySelector(`#sources a[href="${getSource("owner-hotels-haifa").url}"]`)).toBeInTheDocument();
+    expect(container.querySelector(`#sources a[href="${getSource("owner-hotels-haifa").url}"]`)).toBeNull();
+    expect(container.querySelector('#sources a[href^="https://"]')).not.toBeNull();
     for (const id of ["owner-hotels-tiberias", "owner-hotels-deadsea"]) expect(container.querySelector(`#sources a[href="${getSource(id).url}"]`)).toBeNull();
     expect(container.textContent).not.toMatch(/Ein Bokek|Ein Gedi|Tiberias|Dead Sea/);
     expect(container.querySelector('a[href^="/tiberias/"], a[href^="/dead-sea/"]')).toBeNull();

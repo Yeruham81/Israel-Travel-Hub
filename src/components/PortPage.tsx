@@ -5,9 +5,13 @@ import { GuidePhotoCredit } from "@/components/TravelGuide";
 import { ShoreQuoteForm } from "@/components/ShoreQuoteForm";
 import { airportTransferPhotos } from "@/data/airportTransfers";
 import { getShorePort, shoreExcursionBenefits } from "@/data/shoreExcursions";
-import { formatCheckDate, getSource, linksForPage, SHORE_EXCURSION_CHECK_DATE, shorePorts, type ShorePortId } from "@/data/registry";
+import { publicSources, linksForPage, SHORE_EXCURSION_CHECK_DATE, shorePorts, type ShorePortId } from "@/data/registry";
 import { CANONICAL_ORIGIN, SITE_NAME, pageMeta } from "@/lib/site";
 import { ExchangeRateNote, PriceDisplay } from "@/components/CurrencyRates";
+import { AuthorCard } from "@/components/AuthorCard";
+import { PageUpdated } from "@/components/PageUpdated";
+import { authorLd } from "@/lib/author";
+import { hasPublicPhotoCredit } from "@/lib/photo-credits";
 
 function crumbsFor(id: ShorePortId) {
   return [{ name: "Home", path: "/" as const }, { name: "Shore excursions", path: "/shore-excursions/" as const }, { name: `From ${shorePorts[id].name} Port`, path: shorePorts[id].path }];
@@ -19,8 +23,8 @@ export function shorePortMeta(id: ShorePortId) {
   const imageUrl = new URL(port.photo.src, CANONICAL_ORIGIN).href;
   return { ...meta, meta: [...meta.meta, { property: "og:image", content: imageUrl }, { name: "twitter:image", content: imageUrl }], scripts: [...meta.scripts, {
     type: "application/ld+json", children: JSON.stringify({ "@context": "https://schema.org", "@type": "Article", headline: port.title, description: port.description, mainEntityOfPage: `${CANONICAL_ORIGIN}${port.path}`, inLanguage: "en", dateModified: SHORE_EXCURSION_CHECK_DATE,
-      author: { "@type": "Organization", name: `${SITE_NAME} editorial team`, url: `${CANONICAL_ORIGIN}/about/` }, publisher: { "@type": "Organization", name: SITE_NAME }, image: imageUrl,
-      citation: [port.sourceId, port.alternativeSourceId].map((sourceId) => getSource(sourceId).url),
+      author: authorLd(), publisher: { "@type": "Organization", name: SITE_NAME }, image: imageUrl,
+      citation: publicSources([port.sourceId, port.alternativeSourceId]).map((source) => source.url),
     }).replaceAll("<", "\\u003c"),
   }] };
 }
@@ -33,7 +37,7 @@ export function PortPage({ id }: { id: ShorePortId }) {
   const [itineraryId, setItineraryId] = useState("");
   const otherOperators = linksForPage(port.pageId).filter((link) => link.relationship !== "publisher_operator");
   const minimumRate = Math.min(...port.itineraries.map((itinerary) => itinerary.price.amount));
-  const photos = [port.photo, ...port.itineraries.map((itinerary) => itinerary.photo), airportTransferPhotos["moshe"]!];
+  const photos = [port.photo, ...port.itineraries.map((itinerary) => itinerary.photo), airportTransferPhotos["moshe"]!].filter(hasPublicPhotoCredit);
   return <main className="mx-auto max-w-5xl px-4 pb-24 lg:pb-8">
     <header className="pt-6">
       <Breadcrumbs items={crumbsFor(id).map((crumb) => ({ name: crumb.name, to: crumb.path }))} />
@@ -51,7 +55,8 @@ export function PortPage({ id }: { id: ShorePortId }) {
         </div>
         <figure><img src={port.photo.src} alt={port.photo.alt} width={900} height={600} fetchPriority="high" decoding="async" className="aspect-[3/2] w-full rounded-2xl object-cover" /><GuidePhotoCredit photo={port.photo} /></figure>
       </div>
-      <p className="mt-5 text-xs leading-relaxed text-muted-foreground">{SITE_NAME} editorial team · Adapted from Moshe Barak's original excursion page · <time dateTime={SHORE_EXCURSION_CHECK_DATE}>Updated {formatCheckDate(SHORE_EXCURSION_CHECK_DATE)}</time>. Starting figures are published rates, not live quotes or availability.</p>
+      <PageUpdated date={SHORE_EXCURSION_CHECK_DATE} />
+      <AuthorCard />
     </header>
 
     <section aria-labelledby="answer-h" className="mt-7 rounded-2xl border border-primary/20 bg-secondary/60 p-5 sm:p-6"><h2 id="answer-h" className="text-2xl">Which day trip should I choose?</h2><p className="mt-3 leading-relaxed">{port.answer}</p></section>

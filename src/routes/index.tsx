@@ -23,6 +23,8 @@ import { pageMeta } from "@/lib/site";
 import { photoCredits } from "@/data/photoCredits";
 import { GuideCard } from "@/components/TravelGuide";
 import { guideDirectory } from "@/data/travelGuides";
+import { isPublisherUrl } from "@/data/registry";
+import { AuthorCard } from "@/components/AuthorCard";
 
 export const Route = createFileRoute("/")({
   head: () =>
@@ -210,10 +212,11 @@ function Home() {
           <Link to="/destinations/" className="btn btn-light mt-6">Explore all destinations →</Link>
         </div>
       </section>
+      <div className="mx-auto mt-10 max-w-6xl px-4"><AuthorCard introduction /></div>
       <details className="mx-auto mb-10 mt-10 max-w-6xl px-4 text-sm text-muted-foreground">
         <summary className="inline-block cursor-pointer rounded px-1 font-medium hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring">Photo credits</summary>
         <ul className="mt-3 space-y-1.5">
-          {photoCredits.map((c) => (
+          {photoCredits.filter((credit) => !isPublisherUrl(credit.sourceUrl)).map((c) => (
             <li key={c.asset}>
               {c.sourceUrl ? <a href={c.sourceUrl} target="_blank" rel="noopener noreferrer" className="underline hover:text-foreground">{c.subject}</a> : c.subject}
               {c.author && <> by {c.author}</>}

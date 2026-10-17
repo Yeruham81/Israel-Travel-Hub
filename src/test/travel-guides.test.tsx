@@ -22,7 +22,7 @@ import { Route as ChurchesRoute } from "@/routes/travel-blog.churches-in-jerusal
 import { Route as ShoppingRoute } from "@/routes/travel-blog.shopping-in-jerusalem";
 import { Route as TelAvivDayTripsRoute } from "@/routes/travel-blog.day-trips-from-tel-aviv";
 import { filterGuides, guideDirectory, guideTopics, travelGuides } from "@/data/travelGuides";
-import { affiliateConfig, getSource, linksForPage, travelGuidePaths, TRAVEL_GUIDE_CHECK_DATE } from "@/data/registry";
+import { affiliateConfig, getSource, isPublisherUrl, linksForPage, mosheBarakAuthor, travelGuidePaths, TRAVEL_GUIDE_CHECK_DATE } from "@/data/registry";
 import { readOutboundClicks } from "@/lib/outbound";
 
 afterEach(() => { cleanup(); localStorage.clear(); });
@@ -51,10 +51,18 @@ describe("migrated practical guides", () => {
     for (const section of guide.sections) expect(screen.getByRole("heading", { name: section.title })).toBeInTheDocument();
     for (const section of guide.sections) if ("photo" in section && section.photo) {
       expect(within(container.querySelector(`#${section.id}`)! as HTMLElement).getByRole("img", { name: section.photo.alt })).toHaveAttribute("src", section.photo.src);
-      if (section.photo.sourceUrl) expect(container.querySelector(`#${section.id} a[href="${section.photo.sourceUrl}"]`)).not.toBeNull();
+      if (section.photo.sourceUrl && !isPublisherUrl(section.photo.sourceUrl)) expect(container.querySelector(`#${section.id} a[href="${section.photo.sourceUrl}"]`)).not.toBeNull();
     }
     for (const sourceId of guide.sourceIds) expect(getSource(sourceId)?.url).toMatch(/^https:\/\//);
     expect(container.querySelector("time")).toHaveAttribute("datetime", TRAVEL_GUIDE_CHECK_DATE);
+    expect(container.querySelector("time")).toHaveTextContent("October 2026");
+    const authorCard = screen.getByRole("complementary", { name: "About the author" });
+    expect(authorCard).toHaveTextContent("Written by Moshe Barak");
+    expect(authorCard).toHaveTextContent("20+ years");
+    expect(within(authorCard).getByRole("link", { name: /reviews on Tripadvisor/ })).toHaveAttribute("href", mosheBarakAuthor.reviewsUrl);
+    expect(authorCard.compareDocumentPosition(screen.getByRole("region", { name: "Quick answer" }))).toBe(Node.DOCUMENT_POSITION_FOLLOWING);
+    expect(container.textContent).not.toMatch(/editorial team|Adapted from|Source checks and limitations below|Image from the original publisher/);
+    expect(container.querySelector('a[href*="israel-taxi.com"]')).toBeNull();
     expect(container.querySelector("a a")).toBeNull();
     const related = screen.getByRole("region", { name: "Related practical guides" });
     for (const link of within(related).getAllByRole("link")) {
@@ -66,7 +74,7 @@ describe("migrated practical guides", () => {
     expect(head).toMatchObject({ meta: expect.arrayContaining([{ title: guide.title }, { name: "description", content: guide.description }, { name: "robots", content: "noindex,nofollow" }]), links: [{ rel: "canonical", href: expect.stringMatching(new RegExp(`${path}$`)) }] });
     const structured = head!.scripts!.flatMap((script) => typeof script?.children === "string" ? [JSON.parse(script.children)] : []);
     const article = structured.find((item) => item["@type"] === "Article");
-    expect(article).toMatchObject({ headline: guide.title, dateModified: TRAVEL_GUIDE_CHECK_DATE, inLanguage: "en", author: { "@type": "Organization", name: expect.stringContaining("editorial team") } });
+    expect(article).toMatchObject({ headline: guide.title, dateModified: TRAVEL_GUIDE_CHECK_DATE, inLanguage: "en", author: { "@type": "Person", name: "Moshe Barak", sameAs: [mosheBarakAuthor.reviewsUrl] } });
     expect(article.mainEntityOfPage.endsWith(path)).toBe(true);
     for (const url of article.citation) expect(container.querySelector(`a[href="${url}"]`)).not.toBeNull();
     const crumbs = structured.find((item) => item["@type"] === "BreadcrumbList");

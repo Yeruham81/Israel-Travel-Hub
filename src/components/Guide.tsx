@@ -1,7 +1,9 @@
 import { Link, type LinkProps } from "@tanstack/react-router";
 import type { ReactNode } from "react";
 import { ExtLink } from "@/components/Layout";
-import { getSource, formatCheckDate, INFO_CHECK_DATE, type ProviderLink } from "@/data/registry";
+import { publicSources, formatCheckDate, INFO_CHECK_DATE, type ProviderLink } from "@/data/registry";
+import { AuthorCard } from "@/components/AuthorCard";
+import { PageUpdated } from "@/components/PageUpdated";
 import { modeNote, relationshipLabel } from "@/lib/booking";
 import { recordOutboundClick, relFor } from "@/lib/outbound";
 
@@ -44,8 +46,9 @@ export function GuideHeader({ crumbs, eyebrow, title, intro, image, checkedAt = 
       <p className="eyebrow mt-6">{eyebrow}</p>
       <h1 className="mt-3 max-w-4xl text-4xl leading-[1.1] md:text-5xl">{title}</h1>
       <div className="mt-4 max-w-3xl text-lg leading-relaxed text-muted-foreground">{intro}</div>
-      <p className="mt-3 text-sm text-muted-foreground">Source facts checked {formatCheckDate(checkedAt)} (page facts only, not live availability) · <Link to="/about/" className="underline">How we compare</Link></p>
+      <PageUpdated date={checkedAt} />
       {image && <img src={image.src} alt={image.alt} width={1600} height={900} className="mt-8 aspect-[21/9] w-full rounded-2xl object-cover" />}
+      <AuthorCard />
     </header>
   );
 }
@@ -87,12 +90,14 @@ export function FaqList({ faqs }: { faqs: { q: string; a: string }[] }) {
 }
 
 export function SourceList({ ids, intro = "“Checked” dates refer to the facts on these pages only. Provider prices, availability and inventory were not verified." }: { ids: string[]; intro?: string }) {
+  const sources = publicSources(ids);
+  if (!sources.length) return null;
   return (
     <section id="sources" aria-labelledby="sources-h" className="mt-14">
       <h2 id="sources-h" className="text-3xl">Sources</h2>
       <p className="mt-2 text-sm text-muted-foreground">{intro}</p>
       <ul className="mt-4 space-y-3">
-        {ids.map(getSource).map((s) => (
+        {sources.map((s) => (
           <li key={s.id} className="rounded-xl border bg-card p-4 text-sm">
             <ExtLink href={s.url} className="font-semibold text-primary">{s.publisher}: {s.title}</ExtLink>
             <p className="mt-1 text-muted-foreground">{s.note}</p>
@@ -192,6 +197,7 @@ export function HubHeader({ crumbs, eyebrow, title, intro }: { crumbs: UiCrumb[]
       <p className="eyebrow mt-6">{eyebrow}</p>
       <h1 className="mt-3 max-w-4xl text-4xl leading-[1.1] md:text-5xl">{title}</h1>
       <div className="mt-4 max-w-3xl text-lg leading-relaxed text-muted-foreground">{intro}</div>
+      <AuthorCard />
     </header>
   );
 }

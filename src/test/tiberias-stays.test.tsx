@@ -82,7 +82,8 @@ describe("Tiberias destination and distinct hotel intents", () => {
     expect(within(screen.getByRole("navigation", { name: "Breadcrumb" })).getByRole("link", { name: "Tiberias" })).toHaveAttribute("href", destination.path);
     expect(screen.getByRole("link", { name: /See the map and compare/ })).toHaveAttribute("href", `${destination.path}#location`);
     expect(screen.getByRole("link", { name: categories.find((other) => other.id !== guide.id)!.title })).toBeInTheDocument();
-    expect(container.querySelector(`#sources a[href="${getSource("owner-hotels-tiberias").url}"]`)).toBeInTheDocument();
+    expect(container.querySelector(`#sources a[href="${getSource("owner-hotels-tiberias").url}"]`)).toBeNull();
+    expect(container.querySelector('#sources a[href^="https://"]')).not.toBeNull();
     expect(container.querySelector(`#sources a[href="${getSource("owner-hotels-deadsea").url}"]`)).toBeNull();
     expect(container.textContent).not.toMatch(/Ein Bokek|Ein Gedi|Dead Sea|Choose the spa experience/);
     expect(container.querySelector('a[href^="/dead-sea/"]')).toBeNull();

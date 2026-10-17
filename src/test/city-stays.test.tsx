@@ -68,7 +68,7 @@ describe.each([
       expect(within(screen.getByRole("navigation", { name: "Breadcrumb" })).getByRole("link", { name: g.city })).toHaveAttribute("href", g.path);
       expect(container.querySelector(`a[href="${g.related[0]!.to}"]`)).toBeInTheDocument();
       expect(container.querySelector(`a[href="${otherCity.related[0]!.to}"]`)).toBeNull();
-      expect(container.querySelector(`#sources a[href="${getSource(g.sourceIds[0]!).url}"]`)).toBeInTheDocument();
+      expect(container.querySelector(`#sources a[href="${getSource(g.sourceIds[0]!).url}"]`)).toBeNull();
       expect(container.querySelector(`#sources a[href="${getSource(otherCity.sourceIds[0]!).url}"]`)).toBeNull();
       for (const hotel of hotelsForArea(area.id, g.id)) {
         expect(hotel.cityId).toBe(g.id);

@@ -3,6 +3,7 @@ import { Link, type LinkProps } from "@tanstack/react-router";
 import type { HotelCategoryGuide, StayGuidePhoto } from "@/data/content";
 import { deadSeaHotelRecommendations, tiberiasHotelRecommendations, haifaHotelRecommendations, providerLinks, type ResortHotelFacts, type ProviderLink } from "@/data/registry";
 import { recordOutboundClick, relFor } from "@/lib/outbound";
+import { isPublisherUrl } from "@/data/registry";
 
 const resortHotels = [...deadSeaHotelRecommendations, ...tiberiasHotelRecommendations, ...haifaHotelRecommendations];
 export const resortHotel = (id: string) => resortHotels.find((hotel) => hotel.id === id)!;
@@ -33,7 +34,7 @@ export function StayCategoryCard({ guide }: { guide: HotelCategoryGuide }) {
 }
 
 export function StayBookingDisclosure() {
-  return <div className="mt-5 rounded-xl border bg-secondary/60 p-4 text-sm leading-relaxed"><p>These editorial picks build on the publisher's original guide and the hotels' own information. They are selected for travel style and practical fit, and do not claim personal stays at every property.</p><p className="mt-2">Links marked “Sponsored link” may earn us a commission at no extra cost to you. Prices and availability are confirmed on the booking site; enter your dates and guests there before choosing a room.</p></div>;
+  return <div className="mt-5 rounded-xl border bg-secondary/60 p-4 text-sm leading-relaxed"><p>Hotels are selected for location, travel style and practical fit, using the properties' own information. These recommendations do not claim personal stays at every property.</p><p className="mt-2">Links marked “Sponsored link” may earn us a commission at no extra cost to you. Prices and availability are confirmed on the booking site; enter your dates and guests there before choosing a room.</p></div>;
 }
 
 export function StayBrowseLink({ link, pageId }: { link: ProviderLink | undefined; pageId: string }) {
@@ -42,6 +43,7 @@ export function StayBrowseLink({ link, pageId }: { link: ProviderLink | undefine
 }
 
 export function StayPhotoCredits({ photos }: { photos: StayGuidePhoto[] }) {
-  const unique = [...new Map(photos.map((photo) => [photo.sourceUrl, photo])).values()];
-  return <details className="mt-10 rounded-xl border bg-card p-4 text-xs text-muted-foreground"><summary className="cursor-pointer font-semibold">Guide image sources</summary><p className="mt-3">Photographs reused from the publisher's original destination guide and optimized for this site. Location scenes illustrate the area; named property photographs are identified below.</p><ul className="mt-2 space-y-2">{unique.map((photo) => <li key={photo.sourceUrl}><a href={photo.sourceUrl} target="_blank" rel="noopener noreferrer" className="underline underline-offset-2">{photo.label}<span className="sr-only"> (opens in a new tab)</span></a></li>)}</ul></details>;
+  const unique = [...new Map(photos.filter((photo) => !isPublisherUrl(photo.sourceUrl)).map((photo) => [photo.sourceUrl, photo])).values()];
+  if (!unique.length) return null;
+  return <details className="mt-10 rounded-xl border bg-card p-4 text-xs text-muted-foreground"><summary className="cursor-pointer font-semibold">Photo credits</summary><ul className="mt-2 space-y-2">{unique.map((photo) => <li key={photo.sourceUrl}><a href={photo.sourceUrl} target="_blank" rel="noopener noreferrer" className="underline underline-offset-2">{photo.label}<span className="sr-only"> (opens in a new tab)</span></a></li>)}</ul></details>;
 }

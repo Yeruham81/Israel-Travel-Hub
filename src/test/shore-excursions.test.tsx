@@ -4,7 +4,7 @@ import { cleanup, fireEvent, render, screen, waitFor, within } from "@testing-li
 import { afterEach, describe, expect, it } from "vitest";
 import { GlobalNav, SiteHeader } from "@/components/Layout";
 import { getShorePort } from "@/data/shoreExcursions";
-import { getSource, SHORE_EXCURSION_CHECK_DATE, shoreExcursionRates, shoreOnlineFormUrl, shorePorts } from "@/data/registry";
+import { getSource, publicSources, SHORE_EXCURSION_CHECK_DATE, shoreExcursionRates, shoreOnlineFormUrl, shorePorts } from "@/data/registry";
 import { buildShoreQuoteDraft, emptyShoreQuote, validateShoreQuote } from "@/lib/shore-quote";
 import { routeTree } from "@/routeTree.gen";
 import { Route as AshdodRoute } from "@/routes/ashdod-shore-excursions";
@@ -94,7 +94,7 @@ describe("shore excursions", () => {
     const head = await route.options.head?.({} as never);
     expect(head).toMatchObject({ meta: expect.arrayContaining([{ title: expect.stringContaining(`${port.name} shore excursions`) }, { name: "robots", content: "noindex,nofollow" }]), links: [{ rel: "canonical", href: expect.stringContaining(port.path) }] });
     const schemas = (head?.scripts || []).map((script) => typeof script?.children === "string" ? JSON.parse(script.children) : null);
-    expect(schemas.find((schema) => schema?.["@type"] === "Article")).toMatchObject({ headline: port.title, dateModified: SHORE_EXCURSION_CHECK_DATE, citation: [getSource(port.sourceId).url, getSource(port.alternativeSourceId).url] });
+    expect(schemas.find((schema) => schema?.["@type"] === "Article")).toMatchObject({ headline: port.title, dateModified: SHORE_EXCURSION_CHECK_DATE, author: { "@type": "Person", name: "Moshe Barak" }, citation: publicSources([port.sourceId, port.alternativeSourceId]).map((source) => source.url) });
     expect(schemas.some((schema) => schema?.["@type"] === "FAQPage")).toBe(false);
   });
 

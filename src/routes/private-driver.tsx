@@ -1,13 +1,15 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState } from "react";
 import { ArrowRight, Clock3, Luggage, MapPinned, MessageSquareText } from "lucide-react";
-import { Breadcrumbs, Checklist, FaqList, RelatedLinks, SourceList } from "@/components/Guide";
+import { Breadcrumbs, Checklist, FaqList, RelatedLinks } from "@/components/Guide";
 import { PrivateDriverQuoteForm } from "@/components/PrivateDriverQuoteForm";
 import { StayPhotoCredits } from "@/components/StayGuideParts";
 import { privateDriverBenefits, privateDriverFaqs, privateDriverGuides, privateDriverHero, privateDriverJourneys, privateDriverSteps } from "@/data/privateDriver";
 import { airportTransferPhotos } from "@/data/airportTransfers";
-import { PRIVATE_DRIVER_CHECK_DATE, formatCheckDate } from "@/data/registry";
+import { PRIVATE_DRIVER_CHECK_DATE } from "@/data/registry";
 import { pageMeta } from "@/lib/site";
+import { AuthorCard } from "@/components/AuthorCard";
+import { PageUpdated } from "@/components/PageUpdated";
 
 export const Route = createFileRoute("/private-driver")({
   head: () => pageMeta({
@@ -30,10 +32,11 @@ function PrivateDriver() {
       <div className="min-w-0"><p className="eyebrow">Your journey, your pace</p><h1 className="mt-3 text-4xl leading-[1.1] md:text-5xl">Private driver in Israel</h1>
         <p className="mt-4 text-lg leading-relaxed text-muted-foreground">Travel between hotels, plan a day out or connect several stops with a private driver. Share your route with Moshe Barak and agree the vehicle, itinerary and full price before you book.</p>
         <a href="#request-quote" onClick={focusQuote} className="btn btn-primary mt-6">Request your private driver</a><p className="mt-3 text-sm text-muted-foreground">A personal quote · Your agreed itinerary · No booking until confirmation</p>
-        <p className="mt-4 text-xs text-muted-foreground">Service information reviewed <time dateTime={PRIVATE_DRIVER_CHECK_DATE}>{formatCheckDate(PRIVATE_DRIVER_CHECK_DATE)}</time></p>
+        <PageUpdated date={PRIVATE_DRIVER_CHECK_DATE} />
       </div>
       <img src={privateDriverHero.src} alt={privateDriverHero.alt} width={755} height={503} fetchPriority="high" decoding="async" className="aspect-[4/3] w-full rounded-2xl object-cover" />
     </header>
+    <AuthorCard />
     <section id="journeys" aria-labelledby="journeys-h" className="mt-12">
       <p className="eyebrow">Choose the journey you need</p><h2 id="journeys-h" className="mt-2 text-3xl">Intercity transfers & day hire</h2><p className="mt-3 leading-relaxed text-muted-foreground">Start with the type of trip, then tell us the details. Every route is quoted individually.</p>
       <div className="mt-6 grid gap-5 md:grid-cols-3">{privateDriverJourneys.map((journey) => <article key={journey.id} className="flex h-full flex-col overflow-hidden rounded-2xl border bg-card" data-testid="driver-journey-card">
@@ -67,7 +70,6 @@ function PrivateDriver() {
       { label: "Tours & day trips", to: "/tours/", note: "Explore organised visits and day-trip options" },
       { label: "Shore excursions", to: "/shore-excursions/", note: "Plan around a Haifa or Ashdod port call" },
     ]} />
-    <SourceList ids={["owner-private-driver"]} intro="Adapted from the publisher's private-driver service page, with practical planning advice. The review date covers the published service/contact information; vehicle availability, itinerary feasibility and prices require a personal confirmation." />
     <StayPhotoCredits photos={[privateDriverHero, ...privateDriverJourneys.map((journey) => journey.photo), ...privateDriverGuides.map((guide) => guide.photo), airportTransferPhotos["moshe"]!]} />
     <div className="fixed inset-x-0 bottom-0 z-30 border-t bg-background/95 px-4 py-3 backdrop-blur lg:hidden"><div className="mx-auto flex max-w-5xl items-center justify-between gap-3"><p className="text-sm font-medium">Your private driver<br /><span className="text-xs text-muted-foreground">A quote for your itinerary</span></p><a href="#request-quote" onClick={focusQuote} className="btn btn-primary shrink-0 text-sm">Request a quote</a></div></div>
   </main>;

@@ -27,7 +27,7 @@ describe("private driver page and inquiry", () => {
     expect(screen.getByRole("heading", { level: 1 })).toHaveTextContent("Private driver in Israel");
     expect(screen.getByRole("navigation", { name: "Breadcrumb" })).toHaveTextContent("Home /Private driver");
     expect(screen.getAllByTestId("driver-journey-card")).toHaveLength(3);
-    const sections = ["journeys", "request-quote", "benefits", "planning", "how-it-works", "faq", "travel-guides", "sources"];
+    const sections = ["journeys", "request-quote", "benefits", "planning", "how-it-works", "faq", "travel-guides"];
     for (let i = 1; i < sections.length; i++) expect(container.querySelector(`#${sections[i - 1]}`)!.compareDocumentPosition(container.querySelector(`#${sections[i]}`)!)).toBe(Node.DOCUMENT_POSITION_FOLLOWING);
     for (const image of screen.getAllByRole("img")) { expect(image).toHaveAttribute("src"); expect(image.getAttribute("alt")).toBeTruthy(); }
     const guides = screen.getAllByTestId("driver-guide-card");

@@ -6,9 +6,11 @@ import { getAirportRouteGuide } from "@/data/airportRoutes";
 import { airportTransferPhotos } from "@/data/airportTransfers";
 import { airportTransferNav } from "@/data/nav";
 import { AirportBookingPlatforms } from "@/components/AirportBookingPlatforms";
-import { AIRPORT_TRANSFER_CHECK_DATE, airportTransferRoutes, formatCheckDate, getSource, travelGuidePaths, type AirportTransferRouteId } from "@/data/registry";
+import { AIRPORT_TRANSFER_CHECK_DATE, airportTransferRoutes, travelGuidePaths, type AirportTransferRouteId } from "@/data/registry";
 import { pageMeta } from "@/lib/site";
 import { ExchangeRateNote, PriceDisplay } from "@/components/CurrencyRates";
+import { AuthorCard } from "@/components/AuthorCard";
+import { PageUpdated } from "@/components/PageUpdated";
 
 function crumbsFor(id: AirportTransferRouteId) {
   const guide = getAirportRouteGuide(id);
@@ -56,9 +58,12 @@ export function AirportRoutePage({ id }: { id: AirportTransferRouteId }) {
           <ExchangeRateNote className="mt-3" />
           <a href="#request-quote" onClick={focusQuote} className="btn btn-primary mt-5">Request your airport transfer</a>
           <p className="mt-3 text-sm text-muted-foreground">Private vehicle for your party · Exact hotel or address · Request at least 24 hours ahead</p>
+          <PageUpdated date={AIRPORT_TRANSFER_CHECK_DATE} />
         </div>
         <img src={guide.photo.src} alt={guide.photo.alt} width={900} height={675} fetchPriority="high" decoding="async" className="aspect-[4/3] w-full rounded-2xl object-cover lg:aspect-[3/4] lg:max-h-[560px]" />
       </header>
+
+      <AuthorCard />
 
       <TransferQuoteForm destinationId={id} fixedDestination />
 
@@ -92,9 +97,8 @@ export function AirportRoutePage({ id }: { id: AirportTransferRouteId }) {
         <ul className="mt-4 flex flex-wrap gap-3">{airportTransferRoutes.filter((route) => route.id !== id).map((route) => <li key={route.id}><Link to={route.path} className="chip inline-block">Ben Gurion to {getAirportRouteGuide(route.id).city}</Link></li>)}<li><Link to="/transfers/" className="chip inline-block">All destinations</Link></li></ul>
       </section>
       <details className="mt-10 rounded-xl border p-5 text-sm text-muted-foreground">
-        <summary className="cursor-pointer font-medium text-foreground">Sources and route notes</summary>
-        <p className="mt-3">Adapted from Moshe Barak's original Israel-Taxi.com guide. Planning estimates and published starting rates reviewed {formatCheckDate(AIRPORT_TRANSFER_CHECK_DATE)}. Driving times begin after pickup and are not live traffic predictions. Your final quote and booking require confirmation.</p>
-        <ul className="mt-3 space-y-3">{[guide.sourceId, "moshe-airport-transfers"].map(getSource).map((source) => <li key={source.id}><a href={source.url} target="_blank" rel="noopener noreferrer" className="font-medium text-primary underline">{source.title}<span className="sr-only"> (opens in a new tab)</span></a><p className="mt-1">{source.note}</p></li>)}</ul>
+        <summary className="cursor-pointer font-medium text-foreground">Route planning notes</summary>
+        <p className="mt-3">Driving times begin after pickup and are planning estimates, not live traffic predictions. Starting rates are for the conditions stated above. Your final quote and booking require confirmation.</p>
       </details>
       <AirportBookingPlatforms pageId={`airport-route-${id}`} destination={guide.city} />
       <StayPhotoCredits photos={[guide.photo, airportTransferPhotos["moshe"]!]} />

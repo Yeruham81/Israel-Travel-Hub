@@ -50,7 +50,7 @@ export function NeighborhoodStayPage({ area }: { area: NeighborhoodStayGuide }) 
           <p className="eyebrow">Your accommodation shortlist</p>
           <h2 id="book-h" className="mt-2 text-3xl">Places to stay in {area.name}</h2>
           <p className="mt-3 max-w-3xl leading-relaxed text-muted-foreground">These picks offer different ways to stay in the area. They are selected for location and travel style, rather than a live ranking or a claim that rooms are currently available.</p>
-          <p className="mt-3 text-sm leading-relaxed text-muted-foreground">The shortlist draws on Moshe Barak's original {city.city} guide and the hotels' own information. These are editorial recommendations, not reviews of personal stays at every property.</p>
+          <p className="mt-3 text-sm leading-relaxed text-muted-foreground">The shortlist considers location, travel style and the hotels' own information. These are editorial recommendations, not reviews of personal stays at every property.</p>
           <p className="mt-3 rounded-xl border bg-secondary/60 p-4 text-sm leading-relaxed">We may earn a commission from links marked “Sponsored link”, at no extra cost to you. Enter your dates on the booking site and confirm the hotel, room category, final total and cancellation terms before paying.</p>
           <ul className="mt-6 space-y-5">{hotels.map((hotel) => <StayHotelCard key={hotel.id} hotel={hotel} booking={bookings.find((booking) => booking.id === `hotel-${hotel.id}-expedia`)} pageId={pageId} />)}</ul>
         </section>

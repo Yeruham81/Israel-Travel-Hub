@@ -13,11 +13,11 @@ export function AccommodationCard({ destination: d }: { destination: Accommodati
       <h3 className="text-2xl">{d.title}</h3>
       <p className="mt-3 flex-1 text-sm leading-relaxed text-muted-foreground">{d.text}</p>
       <span className="mt-5 font-semibold text-primary">{d.cta}</span>
-      {isExternal && <span className="mt-1 text-xs text-muted-foreground">Travel guide on israel-taxi.com<span className="sr-only"> (opens in a new tab)</span></span>}
+      {isExternal && <span className="sr-only"> (opens in a new tab)</span>}
     </div>
   </>;
 
   return isExternal
     ? <a href={d.href} target="_blank" rel={relFor(false)} className={className} data-testid="accommodation-destination-card">{content}</a>
-    : <Link to={d.to} className={className} data-testid="accommodation-destination-card">{content}</Link>;
+    : <Link to={d.to} {...(d.hash ? { hash: d.hash } : {})} className={className} data-testid="accommodation-destination-card">{content}</Link>;
 }
