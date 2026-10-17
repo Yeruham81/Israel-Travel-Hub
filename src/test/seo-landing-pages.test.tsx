@@ -6,6 +6,9 @@ import { existsSync } from "node:fs";
 import { routeTree } from "@/routeTree.gen";
 import { Route as Root } from "@/routes/__root";
 import { pageMeta, siteConfig, jsonLd, CANONICAL_ORIGIN } from "@/lib/site";
+import { getAirportRouteGuide } from "@/data/airportRoutes";
+import { travelGuides } from "@/data/travelGuides";
+import { cityStayGuides, deadSeaStayGuide } from "@/data/content";
 
 export const landingPaths = [
   "/travel-blog/ben-gurion-airport-to-jerusalem/",
@@ -51,6 +54,32 @@ describe("ten search-intent landing pages", () => {
     const script = jsonLd(value);
     expect(script.children).not.toContain("<");
     expect(JSON.parse(script.children)).toEqual(value);
+  });
+
+  it("keeps the four airport destinations private-service landings instead of all-mode comparisons", () => {
+    for (const id of ["jerusalem", "tel-aviv", "haifa", "dead-sea"] as const) {
+      const guide = getAirportRouteGuide(id);
+      expect(guide.title.toLowerCase()).toContain("private transfer");
+      expect(guide.journeyText).toMatch(/after pickup/);
+      expect(guide.areas.length).toBeGreaterThanOrEqual(3);
+    }
+  });
+
+  it("keeps Shabbat terminal and restart coverage on the dedicated guide", () => {
+    expect(travelGuides.shabbat.sections.map((section) => section.id)).toEqual(expect.arrayContaining(["weekend-711", "restart", "beyond-tel-aviv"]));
+    expect(travelGuides.shabbat.nextSteps?.map((link) => link.to)).toContain(landingPaths[0]);
+    expect(travelGuides.israel.related).toContain("shabbat");
+    expect(travelGuides.taxis.nextSteps?.map((link) => link.to)).toContain(landingPaths[4]);
+  });
+
+  it("keeps hotel location decisions separate from room inventory and corrects route referral descriptions", () => {
+    expect(cityStayGuides.jerusalem.areas).toHaveLength(6);
+    expect(cityStayGuides.telaviv.areas).toHaveLength(8);
+    expect(deadSeaStayGuide.locations.map((location) => location.name)).toEqual(["Ein Bokek", "Neve Zohar & the southern hotel district", "Ein Gedi"]);
+    for (const city of [cityStayGuides.jerusalem, cityStayGuides.telaviv]) {
+      expect(city.faqs.find((faq) => faq.q.startsWith("How do I get"))?.a).toContain("private airport-to-");
+      expect(city.faqs.find((faq) => faq.q.startsWith("How do I get"))?.a).not.toMatch(/guide for the licensed taxi rank/);
+    }
   });
 
   it("has unique accurate metadata, self URLs and truthful schemas for exactly ten pages", async () => {
