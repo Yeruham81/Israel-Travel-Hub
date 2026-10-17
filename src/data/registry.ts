@@ -202,6 +202,19 @@ export const airportTransferContact = {
   deliveryMode: "email_draft" as const,
 };
 
+export const PRIVATE_DRIVER_CHECK_DATE: ISODate = "2026-10-17";
+export const privateDriverServices = [
+  { id: "intercity", label: "Intercity transfer" },
+  { id: "day-hire", label: "Private driver by the day" },
+  { id: "multi-stop", label: "Multi-stop journey" },
+] as const;
+export type PrivateDriverServiceId = typeof privateDriverServices[number]["id"];
+export const privateDriverContact = {
+  name: airportTransferContact.name, email: airportTransferContact.email,
+  onlineFormUrl: `${OWNER_BASE}/private-driver-in-israel/#contact-me`,
+  privacyUrl: airportTransferContact.privacyUrl, deliveryMode: "email_draft" as const,
+};
+
 export const shorePorts = {
   haifa: { name: "Haifa", path: "/haifa-shore-excursions/", sourceId: "owner-haifa-shore", pageId: "shore-haifa" },
   ashdod: { name: "Ashdod", path: "/ashdod-shore-excursions/", sourceId: "owner-ashdod-shore", pageId: "shore-ashdod" },
@@ -554,8 +567,8 @@ export const sources: SourceReference[] = [
     title: "Private driver in Israel",
     publisher: "Israel-Taxi.com (Moshe Barak)",
     url: `${OWNER_BASE}/private-driver-in-israel/`,
-    checkedAt: INFO_CHECK_DATE,
-    note: "Publisher's local operator page for private driver hire.",
+    checkedAt: PRIVATE_DRIVER_CHECK_DATE,
+    note: "Publisher's private-driver service and contact form checked on 17 October 2026. The original page prices each itinerary by vehicle, distance, travel date/time and special requests. No fixed fare, vehicle inventory or availability has been independently confirmed.",
   },
   {
     id: "inpa-masada",

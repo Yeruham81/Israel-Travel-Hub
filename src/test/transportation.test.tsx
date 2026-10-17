@@ -89,16 +89,16 @@ describe("airport transfers and private driver separation", () => {
     }
   });
 
-  it("places intercity/day hire and its existing operator inquiry on the independent private-driver route", async () => {
+  it("places intercity/day hire and its inline inquiry on the independent private-driver route", async () => {
     const { container, router } = await renderPage("/private-driver/", DriverRoute.options.component!);
     expect(router.matchRoutes("/private-driver/").at(-1)?.routeId).toBe("/private-driver");
     expect(screen.getByRole("heading", { level: 1 })).toHaveTextContent("Private driver in Israel");
     expect(screen.getByRole("heading", { name: "Intercity transfers & day hire" })).toBeInTheDocument();
     const planning = screen.getByRole("region", { name: "Plan the day before requesting a quote" });
-    const provider = screen.getByTestId("provider-card");
-    expect(planning.compareDocumentPosition(provider)).toBe(Node.DOCUMENT_POSITION_FOLLOWING);
-    expect(within(provider).getByRole("link")).toHaveAttribute("href", "https://www.israel-taxi.com/private-driver-in-israel/");
-    expect(provider).toHaveTextContent("operated by the publisher's local transport business");
+    const form = screen.getByRole("form", { name: "Private driver quote request" });
+    expect(form.compareDocumentPosition(planning)).toBe(Node.DOCUMENT_POSITION_FOLLOWING);
+    expect(screen.getByRole("link", { name: /Use Moshe's existing contact form/ })).toHaveAttribute("href", "https://www.israel-taxi.com/private-driver-in-israel/#contact-me");
+    expect(screen.getByText(/Disclosure: Moshe Barak operates the publisher's local transport business/)).toBeInTheDocument();
     expect(container.textContent).not.toMatch(/ILS\s*\d/);
     expect(linksForPage("private-driver").map((link) => link.id)).toEqual(["private-driver-moshe"]);
     expect(linksForPage("transfers-hub")).toEqual([]);
