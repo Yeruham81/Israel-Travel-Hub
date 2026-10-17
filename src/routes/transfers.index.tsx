@@ -4,10 +4,10 @@ import { Baby, CarFront, Clock3, Handshake, Luggage, PlaneLanding } from "lucide
 import { FaqList, HubHeader } from "@/components/Guide";
 import { TransferQuoteForm } from "@/components/TransferQuoteForm";
 import { AirportDestinationCard as DestinationCard } from "@/components/AirportDestinationCard";
+import { AirportBookingPlatforms } from "@/components/AirportBookingPlatforms";
 import { StayPhotoCredits } from "@/components/StayGuideParts";
 import { airportDestinationCards, airportTransferPhotos, airportTransferBenefits, airportTransferTips, airportTransferFaqs, airportRelatedLinks } from "@/data/airportTransfers";
-import { AIRPORT_TRANSFER_CHECK_DATE, formatCheckDate, getSource, linksForPage, partners } from "@/data/registry";
-import { recordOutboundClick, relFor } from "@/lib/outbound";
+import { AIRPORT_TRANSFER_CHECK_DATE, formatCheckDate, getSource } from "@/data/registry";
 import { pageMeta } from "@/lib/site";
 import { parseAirportTransferSearch } from "@/lib/transfer-quote";
 import { ExchangeRateNote } from "@/components/CurrencyRates";
@@ -24,19 +24,11 @@ export const Route = createFileRoute("/transfers/")({
 });
 
 const benefitIcons = [Handshake, PlaneLanding, CarFront, Luggage, Baby, Clock3];
-const bannerStyles: Record<string, string> = {
-  kiwitaxi: "border-emerald-200 bg-emerald-50 text-emerald-950",
-  welcome: "border-amber-200 bg-amber-50 text-amber-950",
-  intui: "border-sky-200 bg-sky-50 text-sky-950",
-  gettransfer: "border-indigo-200 bg-indigo-50 text-indigo-950",
-};
-
 function Airport() {
   const { destination } = Route.useSearch();
   const [destinationId, setDestinationId] = useState(destination ?? "");
   useEffect(() => setDestinationId(destination ?? ""), [destination]);
   const source = getSource("moshe-airport-transfers");
-  const platforms = linksForPage("airport-private-transfers");
   const choose = (id: string) => {
     setDestinationId(id);
     requestAnimationFrame(() => document.getElementById("request-quote")?.focus({ preventScroll: true }));
@@ -53,8 +45,8 @@ function Airport() {
       <div className="mt-6 grid grid-cols-2 gap-3 sm:gap-5 xl:grid-cols-4">{airportDestinationCards.filter((card) => card.popular).map((card) => <DestinationCard key={card.id} id={card.id} destination={card.destination} price={card.price} photo={card.photo} onChoose={choose} />)}</div>
     </section>
     <section id="more-destinations" aria-labelledby="more-h" className="mt-10">
-      <h2 id="more-h" className="text-3xl">More destinations across Israel</h2>
-      <div className="mt-6 grid grid-cols-2 gap-3 sm:gap-5 xl:grid-cols-4">{airportDestinationCards.filter((card) => !card.popular).map((card) => <DestinationCard key={card.id} id={card.id} destination={card.destination} price={card.price} photo={card.photo} onChoose={choose} />)}<DestinationCard id="other" destination="Your destination" photo={airportTransferPhotos["other"]!} onChoose={choose} /></div>
+      <h2 id="more-h" className="text-3xl">More destinations from Ben Gurion Airport</h2>
+      <div className="mt-6 grid gap-3 sm:grid-cols-2 sm:gap-5">{airportDestinationCards.filter((card) => !card.popular).map((card) => <DestinationCard key={card.id} id={card.id} destination={card.destination} price={card.price} photo={card.photo} onChoose={choose} layout="compact" />)}<DestinationCard id="other" destination="Your destination" photo={airportTransferPhotos["other"]!} onChoose={choose} layout="compact" /></div>
     </section>
     <div className="mt-5 rounded-xl border bg-secondary/40 p-4 text-sm leading-relaxed" data-testid="airport-rate-terms">
       <p><strong>About these starting prices:</strong> one-way weekday rates for Moshe Barak's service, per vehicle for up to four passengers. Night, weekend and holiday supplements may apply. Larger groups need a separate quote.</p>
@@ -74,24 +66,7 @@ function Airport() {
     </section>
     <FaqList faqs={airportTransferFaqs} />
 
-    <section id="booking-platforms" aria-labelledby="platforms-h" className="mt-16 rounded-2xl border p-5 sm:p-8">
-      <p className="eyebrow">More ways to arrange your ride</p><h2 id="platforms-h" className="mt-2 text-3xl">Prefer to book through a platform?</h2>
-      <p className="mt-3 leading-relaxed text-muted-foreground">Explore these booking sites for your airport pickup. The starting prices above belong to Moshe's service; each platform supplies its own offers and terms. Enter your exact route and trip details there.</p>
-      {platforms.some((p) => p.isAffiliate) && <p className="mt-3 text-sm">Links marked “Sponsored link” may earn us a commission at no extra cost to you.</p>}
-      <div className="mt-6 grid gap-4 sm:grid-cols-2">{platforms.map((platform) => {
-        const logo = partners.find((partner) => partner.id === platform.partnerId)?.logo;
-        return <a key={platform.id} href={platform.url} target="_blank" rel={relFor(platform.isAffiliate)} onClick={() => recordOutboundClick({ pageId: "airport-private-transfers", productId: platform.id, offerId: platform.id })} className={`flex h-full min-w-0 flex-col rounded-xl border p-5 transition-shadow hover:shadow-md focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary ${bannerStyles[platform.partnerId!] || "bg-secondary"}`} data-testid="airport-platform-banner">
-          {logo && <div className="mb-5 flex h-24 shrink-0 items-center justify-center rounded-lg bg-white px-4 py-4 ring-1 ring-black/5">
-            <img src={logo.src} alt={`${platform.providerName} logo`} width={logo.width} height={logo.height} loading="lazy" decoding="async" className="h-16 w-full max-w-56 object-contain" />
-          </div>}
-          <p className="text-xs font-semibold uppercase tracking-widest opacity-70">Private transfer booking</p>
-          <h3 className="mt-2 font-sans text-2xl font-bold tracking-tight">{platform.providerName}</h3>
-          <p className="mt-3 flex-1 text-sm leading-relaxed">{platform.summary}</p>
-          {platform.isAffiliate && <p className="mt-3 text-xs font-semibold">Sponsored link</p>}
-          <span className="mt-5 text-sm font-semibold underline underline-offset-4">{platform.ctaLabel}</span><span className="sr-only"> (opens in a new tab)</span>
-        </a>;
-      })}</div>
-    </section>
+    <AirportBookingPlatforms />
 
     <section id="keep-planning" aria-labelledby="planning-h" className="mt-14">
       <p className="eyebrow">Make more of your visit</p><h2 id="planning-h" className="mt-2 text-3xl">Your ride is only the start</h2><p className="mt-3 text-muted-foreground">Find the right place to stay and discover what to do when you arrive.</p>

@@ -53,7 +53,8 @@ function SidebarLink({ item, onNavigate }: { item: SidebarNavItem; onNavigate: (
 
 function SidebarBranch({ item, onNavigate }: { item: SidebarNavItem; onNavigate: (() => void) | undefined }) {
   const pathname = useRouterState({ select: (state) => state.location.pathname });
-  const children = "children" in item ? item.children : undefined;
+  const branch = "children" in item ? item : undefined;
+  const children = branch?.children;
   const isChildPage = children?.some((child) => child.to === pathname) ?? false;
   const [expanded, setExpanded] = useState(isChildPage);
   const id = useId();
@@ -62,11 +63,11 @@ function SidebarBranch({ item, onNavigate }: { item: SidebarNavItem; onNavigate:
   return <>
     <div className="flex items-center gap-1">
       <div className="min-w-0 flex-1"><SidebarLink item={item} onNavigate={onNavigate} /></div>
-      <button type="button" aria-label="Choose a shore excursion port" aria-expanded={expanded} aria-controls={id} onClick={() => setExpanded(!expanded)} className="rounded-lg p-2 hover:bg-muted focus-visible:outline-2 focus-visible:outline-primary">
+      <button type="button" aria-label={branch?.toggleLabel ?? `Show ${item.label} pages`} aria-expanded={expanded} aria-controls={id} onClick={() => setExpanded(!expanded)} className="rounded-lg p-2 hover:bg-muted focus-visible:outline-2 focus-visible:outline-primary">
         <ChevronDown aria-hidden className={`h-4 w-4 transition-transform ${expanded ? "rotate-180" : ""}`} />
       </button>
     </div>
-    <ul id={id} hidden={!expanded} aria-label="Shore excursion ports" className="ml-3 mt-1 space-y-0.5 border-l pl-2">
+    <ul id={id} hidden={!expanded} aria-label={branch?.childrenLabel ?? `${item.label} pages`} className="ml-3 mt-1 space-y-0.5 border-l pl-2">
       {children.map((child) => <li key={child.to}><SidebarLink item={child} onNavigate={onNavigate} /></li>)}
     </ul>
   </>;

@@ -1,9 +1,15 @@
 import type { LinkProps } from "@tanstack/react-router";
-import { travelGuidePaths } from "@/data/registry";
+import { airportTransferRates, airportTransferRoutes, travelGuidePaths } from "@/data/registry";
 
 export type NavItem = { label: string; to: LinkProps["to"] };
-export type SidebarNavItem = (NavItem & { children?: NavItem[] }) | { label: string; href: string };
+export type SidebarNavItem = (NavItem & { children?: NavItem[]; childrenLabel?: string; toggleLabel?: string }) | { label: string; href: string };
 export type NavGroup = { title: string; items: SidebarNavItem[] };
+
+export const airportTransferNav = {
+  label: "Airport transfers", to: "/transfers/" as const,
+  childrenLabel: "Airport transfer destinations", toggleLabel: "Choose an airport transfer destination",
+  children: airportTransferRoutes.map((route) => ({ label: airportTransferRates.find((rate) => rate.id === route.id)!.destination, to: route.path })),
+} satisfies SidebarNavItem;
 
 export const serviceNav: NavItem[] = [
   { label: "Home", to: "/" },
@@ -50,7 +56,7 @@ export const allNavGroups: NavGroup[] = [
   {
     title: "Transportation",
     items: [
-      { label: "Airport transfers", to: "/transfers/" },
+      airportTransferNav,
       { label: "Private driver", to: "/private-driver/" },
       { label: "Car rental", to: "/car-rental/" },
     ],
@@ -60,7 +66,7 @@ export const allNavGroups: NavGroup[] = [
     items: [
       { label: "Tours & day trips", to: "/tours/" },
       { label: "Bethlehem tours", to: "/tours/bethlehem-from-jerusalem/" },
-      { label: "Shore excursions", to: "/shore-excursions/", children: [
+      { label: "Shore excursions", to: "/shore-excursions/", childrenLabel: "Shore excursion ports", toggleLabel: "Choose a shore excursion port", children: [
         { label: "From Haifa Port", to: "/haifa-shore-excursions/" },
         { label: "From Ashdod Port", to: "/ashdod-shore-excursions/" },
       ] },

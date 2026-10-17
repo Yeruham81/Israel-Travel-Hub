@@ -1329,7 +1329,7 @@ export const providerLinks: ProviderLink[] = [
   ] as const).map(([partnerId, providerName, sourceId, summary]): ProviderLink => {
     const id = `airport-${partnerId}`;
     const trackingUrl = affiliateConfig[id]?.trackingUrl;
-    return { id, pageIds: ["airport-private-transfers"], providerName, relationship: "booking_platform", partnerId, mode: "provider_redirect",
+    return { id, pageIds: ["airport-private-transfers", ...airportTransferRoutes.map((route) => `airport-route-${route.id}`)], providerName, relationship: "booking_platform", partnerId, mode: "provider_redirect",
       title: `${providerName} airport transfers`, summary, ctaLabel: `Check transfers on ${providerName}`,
       url: trackingUrl || sources.find((source) => source.id === sourceId)!.url, isAffiliate: Boolean(trackingUrl),
       reentryNote: "Enter Ben Gurion Airport, your exact destination, date, passengers and luggage on the provider's site.",

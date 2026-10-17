@@ -4,6 +4,8 @@ import { TransferQuoteForm } from "@/components/TransferQuoteForm";
 import { StayPhotoCredits } from "@/components/StayGuideParts";
 import { getAirportRouteGuide } from "@/data/airportRoutes";
 import { airportTransferPhotos } from "@/data/airportTransfers";
+import { airportTransferNav } from "@/data/nav";
+import { AirportBookingPlatforms } from "@/components/AirportBookingPlatforms";
 import { AIRPORT_TRANSFER_CHECK_DATE, airportTransferRoutes, formatCheckDate, getSource, travelGuidePaths, type AirportTransferRouteId } from "@/data/registry";
 import { pageMeta } from "@/lib/site";
 import { ExchangeRateNote, PriceDisplay } from "@/components/CurrencyRates";
@@ -12,7 +14,7 @@ function crumbsFor(id: AirportTransferRouteId) {
   const guide = getAirportRouteGuide(id);
   return [
     { name: "Home", path: "/" as const },
-    { name: "Airport transfers", path: "/transfers/" as const },
+    { name: airportTransferNav.label, path: airportTransferNav.to },
     { name: guide.city, path: guide.path },
   ];
 }
@@ -94,6 +96,7 @@ export function AirportRoutePage({ id }: { id: AirportTransferRouteId }) {
         <p className="mt-3">Adapted from Moshe Barak's original Israel-Taxi.com guide. Planning estimates and published starting rates reviewed {formatCheckDate(AIRPORT_TRANSFER_CHECK_DATE)}. Driving times begin after pickup and are not live traffic predictions. Your final quote and booking require confirmation.</p>
         <ul className="mt-3 space-y-3">{[guide.sourceId, "moshe-airport-transfers"].map(getSource).map((source) => <li key={source.id}><a href={source.url} target="_blank" rel="noopener noreferrer" className="font-medium text-primary underline">{source.title}<span className="sr-only"> (opens in a new tab)</span></a><p className="mt-1">{source.note}</p></li>)}</ul>
       </details>
+      <AirportBookingPlatforms pageId={`airport-route-${id}`} destination={guide.city} />
       <StayPhotoCredits photos={[guide.photo, airportTransferPhotos["moshe"]!]} />
       <div className="fixed inset-x-0 bottom-0 z-30 border-t bg-background/95 px-4 py-3 backdrop-blur lg:hidden">
         <div className="mx-auto flex max-w-5xl items-center justify-between gap-3"><p className="min-w-0 text-sm font-medium">Private transfer<br /><span className="text-xs text-muted-foreground">Ben Gurion to {guide.city}</span></p><a href="#request-quote" onClick={focusQuote} className="btn btn-primary shrink-0 text-sm">Request a quote</a></div>

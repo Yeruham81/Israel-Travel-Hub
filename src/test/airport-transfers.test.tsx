@@ -5,6 +5,7 @@ import { afterEach, describe, expect, it, vi } from "vitest";
 import { Route as AirportRoute } from "@/routes/transfers.index";
 import { routeTree } from "@/routeTree.gen";
 import { airportTransferRates, affiliateConfig, linksForPage, partners } from "@/data/registry";
+import { airportTransferPhotos } from "@/data/airportTransfers";
 import { emptyTransferQuote, buildTransferQuoteDraft, validateTransferQuote } from "@/lib/transfer-quote";
 import { readOutboundClicks } from "@/lib/outbound";
 
@@ -41,10 +42,17 @@ describe("private Ben Gurion transfers", () => {
     for (const rate of airportTransferRates) {
       expect(rate.price).toMatchObject({ kind: "published_starting_rate", currency: "ILS", basis: "per_vehicle", maxPartySize: 4, sourceId: "moshe-airport-transfers" });
       const card = container.querySelector(`[data-destination="${rate.id}"]`)!;
-      expect(within(card as HTMLElement).getByRole("img").getAttribute("alt")).toBeTruthy();
+      const image = within(card as HTMLElement).getByRole("img");
+      expect(image).toHaveAttribute("src", airportTransferPhotos[rate.id]!.src);
+      expect(image).toHaveAttribute("alt", airportTransferPhotos[rate.id]!.alt);
+      expect(image).toHaveAttribute("width", rate.popular ? "360" : "80");
+      expect(image).toHaveAttribute("height", rate.popular ? "240" : "80");
       expect(within(card as HTMLElement).getByRole("link", { name: "Request a quote" })).toHaveAttribute("href", "#request-quote");
       expect(card).toHaveTextContent(rate.price.amount.toLocaleString("en-US"));
     }
+    const more = screen.getByRole("region", { name: "More destinations from Ben Gurion Airport" });
+    expect(within(more).getAllByTestId("airport-destination-card").map((card) => card.dataset["destination"])).toEqual(["raanana", "herzliya", "netanya", "ashdod", "caesarea", "nazareth", "eilat", "other"]);
+    expect(new Set(within(more).getAllByRole("img").map((image) => image.getAttribute("src"))).size).toBe(8);
     expect(screen.getByTestId("airport-rate-terms")).toHaveTextContent(/weekday.*up to four.*Night, weekend and holiday/s);
   });
 
@@ -65,6 +73,8 @@ describe("private Ben Gurion transfers", () => {
 
   it("selects the clicked destination in the form and handles groups and other addresses", async () => {
     const { container } = await renderAirport();
+    chooseDestination("netanya");
+    expect(screen.getByLabelText("Destination *")).toHaveValue("netanya");
     chooseDestination("jerusalem");
     expect(screen.getByLabelText("Destination *")).toHaveValue("jerusalem");
     fireEvent.change(screen.getByLabelText("Passengers, including children *"), { target: { value: "6" } });

@@ -4,7 +4,8 @@ import { cleanup, fireEvent, render, screen, within } from "@testing-library/rea
 import { afterEach, describe, expect, it, vi } from "vitest";
 import { AirportRoutePage, airportRouteMeta } from "@/components/AirportRoutePage";
 import { getAirportRouteGuide } from "@/data/airportRoutes";
-import { airportTransferRates, airportTransferRoutes, getSource } from "@/data/registry";
+import { airportTransferRates, airportTransferRoutes, getSource, linksForPage } from "@/data/registry";
+import { readOutboundClicks, relFor } from "@/lib/outbound";
 import { routeTree } from "@/routeTree.gen";
 
 afterEach(() => { cleanup(); localStorage.clear(); vi.restoreAllMocks(); });
@@ -18,6 +19,10 @@ describe("four dedicated airport transfer routes", () => {
     expect(router.matchRoutes(route.path).at(-1)?.routeId).toBe(route.path.replace(/\/$/, ""));
     expect(screen.getAllByRole("heading", { level: 1 })).toHaveLength(1);
     expect(screen.getByRole("heading", { level: 1 })).toHaveTextContent(guide.title);
+    const visibleBreadcrumbs = screen.getByRole("navigation", { name: "Breadcrumb" });
+    expect(within(visibleBreadcrumbs).getAllByRole("link").map((link) => [link.textContent, link.getAttribute("href")])).toEqual([["Home", "/"], ["Airport transfers", "/transfers/"]]);
+    expect(within(visibleBreadcrumbs).getByText(guide.city)).toHaveAttribute("aria-current", "page");
+    expect(visibleBreadcrumbs).not.toHaveTextContent("Ben Gurion Airport");
     expect(container.querySelector("main")!.textContent).not.toMatch(/taxi rank|\btrain\b|\bbuses\b|live availability|guaranteed pickup/i);
     expect(screen.getByTestId("route-starting-rate")).toHaveTextContent(`From ILS ${guide.rate.price.amount.toLocaleString("en-US")}`);
     expect(screen.getByTestId("route-starting-rate")).toHaveTextContent("One way · per vehicle · up to 4");
@@ -35,6 +40,20 @@ describe("four dedicated airport transfer routes", () => {
     for (const other of airportTransferRoutes.filter((item) => item.id !== route.id)) expect(within(otherRoutes).getByRole("link", { name: `Ben Gurion to ${getAirportRouteGuide(other.id).city}` })).toHaveAttribute("href", other.path);
     expect(getSource(route.sourceId).url).toBe(`https://www.israel-taxi.com${route.path}`);
     expect(guide.rate).toBe(airportTransferRates.find((rate) => rate.id === route.id));
+    const platformSection = screen.getByRole("region", { name: "Prefer to book through a platform?" });
+    const platformLinks = linksForPage(`airport-route-${route.id}`);
+    const banners = within(platformSection).getAllByTestId("airport-platform-banner");
+    expect(platformLinks.map((platform) => platform.providerName)).toEqual(["Kiwitaxi", "Welcome Pickups", "Intui.travel", "GetTransfer.com"]);
+    expect(banners).toHaveLength(4);
+    expect(platformSection).toHaveTextContent(`airport pickup to ${guide.city}`);
+    expect(platformSection).toHaveTextContent("The starting prices above belong to Moshe's service");
+    expect(container.querySelector("#faq")!.compareDocumentPosition(platformSection)).toBe(Node.DOCUMENT_POSITION_FOLLOWING);
+    for (const [index, platform] of platformLinks.entries()) {
+      expect(within(banners[index]!).getByRole("img", { name: `${platform.providerName} logo` })).toHaveAttribute("src");
+      expect(banners[index]).toHaveAttribute("href", platform.url);
+      expect(banners[index]).toHaveAttribute("target", "_blank");
+      expect(banners[index]).toHaveAttribute("rel", relFor(platform.isAffiliate));
+    }
     const metadata = airportRouteMeta(route.id);
     expect(metadata.meta).toEqual(expect.arrayContaining([{ title: guide.title }, { name: "description", content: guide.description }, { name: "robots", content: "noindex,nofollow" }]));
     expect(metadata.links).toEqual([{ rel: "canonical", href: expect.stringMatching(new RegExp(`${route.path}$`)) }]);
@@ -60,6 +79,9 @@ describe("four dedicated airport transfer routes", () => {
     expect(draft.searchParams.get("body")).toContain("Passengers (including children): 6");
     expect(fetchSpy).not.toHaveBeenCalled();
     expect(localStorage.length).toBe(0);
+    fireEvent.click(banners[0]!);
+    expect(readOutboundClicks()).toEqual([expect.objectContaining({ pageId: `airport-route-${route.id}`, productId: "airport-kiwitaxi", offerId: "airport-kiwitaxi" })]);
+    expect(JSON.stringify(readOutboundClicks())).not.toMatch(/Jamie|jamie\+israel|Example Hotel/);
   });
 
   it("keeps the scope to four distinct guides and separates the Ein Bokek rate from other Dead Sea destinations", () => {

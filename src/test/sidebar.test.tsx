@@ -6,6 +6,7 @@ import { GlobalNav, SiteHeader } from "@/components/Layout";
 import { routeTree } from "@/routeTree.gen";
 import { Route as HotelsRoute } from "@/routes/hotels";
 import { accommodationDestinations } from "@/data/content";
+import { airportTransferNav } from "@/data/nav";
 
 afterEach(cleanup);
 
@@ -61,6 +62,26 @@ describe("shared sidebar navigation", () => {
     expect(within(popular).getByRole("link", { name: "Ben Gurion to Jerusalem" })).toHaveAttribute("href", "/travel-blog/ben-gurion-airport-to-jerusalem/");
   });
 
+  it("groups the four airport routes under Airport transfers and opens the current destination automatically", async () => {
+    const router = await navigationRouter();
+    const result = render(<RouterContextProvider router={router}><GlobalNav /></RouterContextProvider>);
+    const transportation = screen.getByRole("region", { name: "Transportation" });
+    const toggle = within(transportation).getByRole("button", { name: "Choose an airport transfer destination" });
+    expect(toggle).toHaveAttribute("aria-expanded", "false");
+    expect(within(transportation).queryByRole("link", { name: "Haifa" })).not.toBeInTheDocument();
+    expect(within(transportation).getByRole("link", { name: "Airport transfers" })).toHaveAttribute("href", "/transfers/");
+    fireEvent.click(toggle);
+    const destinations = within(transportation).getByRole("list", { name: "Airport transfer destinations" });
+    expect(within(destinations).getAllByRole("link").map((link) => [link.textContent, link.getAttribute("href")])).toEqual(airportTransferNav.children.map((child) => [child.label, child.to]));
+    expect(within(destinations).getAllByRole("link")).toHaveLength(4);
+    fireEvent.click(within(destinations).getByRole("link", { name: "Haifa" }));
+    await waitFor(() => expect(router.state.location.pathname).toBe("/travel-blog/ben-gurion-airport-to-haifa/"));
+    result.unmount();
+    render(<RouterContextProvider router={router}><GlobalNav /></RouterContextProvider>);
+    expect(screen.getByRole("button", { name: "Choose an airport transfer destination" })).toHaveAttribute("aria-expanded", "true");
+    expect(screen.getByRole("link", { name: "Haifa" })).toHaveAttribute("aria-current", "page");
+  });
+
   it("uses the same groups in the mobile drawer and closes it after service and guide navigation", async () => {
     const router = await navigationRouter();
     render(<RouterContextProvider router={router}><SiteHeader /></RouterContextProvider>);
@@ -82,6 +103,13 @@ describe("shared sidebar navigation", () => {
     fireEvent.click(within(popular).getByRole("link", { name: /Choosing an eSIM for Israel/ }));
     await waitFor(() => expect(screen.queryByRole("dialog")).not.toBeInTheDocument());
     await waitFor(() => expect(router.state.location.pathname).toBe("/travel-blog/best-esim-for-israel/"));
+
+    fireEvent.click(trigger);
+    dialog = await screen.findByRole("dialog");
+    fireEvent.click(within(dialog).getByRole("button", { name: "Choose an airport transfer destination" }));
+    fireEvent.click(within(dialog).getByRole("link", { name: "Jerusalem" }));
+    await waitFor(() => expect(screen.queryByRole("dialog")).not.toBeInTheDocument());
+    await waitFor(() => expect(router.state.location.pathname).toBe("/travel-blog/ben-gurion-airport-to-jerusalem/"));
   });
 });
 
