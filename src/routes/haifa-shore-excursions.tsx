@@ -50,6 +50,7 @@ function Haifa() {
       ]}
       sourceIds={["owner-haifa-shore", "beinharim-haifa-jlm-bethlehem"]}
       related={[
+        { label: "Hotels in Haifa before or after your cruise", to: "/travel-blog/best-hotels-in-haifa/" },
         { label: "Shore excursions from Ashdod Port", to: "/ashdod-shore-excursions/" },
         { label: "All shore excursions", to: "/shore-excursions/" },
         { label: "Caesarea visit planning", to: "/attractions/caesarea/" },

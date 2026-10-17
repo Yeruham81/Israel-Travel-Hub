@@ -27,6 +27,11 @@ import tiberiasWaterfrontPhoto from "@/assets/tiberias/waterfront.webp";
 import tiberiasHeritagePhoto from "@/assets/tiberias/heritage.webp";
 import tiberiasCentralPhoto from "@/assets/tiberias/central.webp";
 import galileeSunrisePhoto from "@/assets/tiberias/sunrise.webp";
+import haifaPanoramaPhoto from "@/assets/haifa/panorama.webp";
+import haifaBotanicaPhoto from "@/assets/haifa/botanica.webp";
+import haifaColonyPhoto from "@/assets/haifa/colony.webp";
+import haifaLeonardoPhoto from "@/assets/haifa/leonardo.webp";
+import haifaDanCarmelPhoto from "@/assets/haifa/dan-carmel.webp";
 
 export type StayPreference = "first-visit" | "car-free" | "quiet" | "nightlife" | "family" | "views" | "luxury" | "heritage" | "food" | "long-stay" | "beach" | "history";
 
@@ -944,7 +949,152 @@ const tiberiasCategoryGuides: HotelCategoryGuide[] = [
   },
 ];
 
+export const haifaPhotos = {
+  panorama: { src: haifaPanoramaPhoto, alt: "Haifa Bay, the Bahá'í Gardens and the lower city seen from Mount Carmel", sourceUrl: "https://www.israel-taxi.com/wp-content/uploads/2026/01/best_hotels_in_haifa_.webp", label: "Haifa Bay and the Bahá'í Gardens — city panorama" },
+  botanica: { src: haifaBotanicaPhoto, alt: "Botanica Hotel's rooftop plunge pool overlooking the Bahá'í Gardens at dusk", sourceUrl: "https://www.israel-taxi.com/wp-content/uploads/2026/01/hotel_botanica_haifa.webp", label: "Hotel Botanica — rooftop plunge pool" },
+  colony: { src: haifaColonyPhoto, alt: "Preserved stone facade and balconies of The Colony Hotel in Haifa", sourceUrl: "https://www.israel-taxi.com/wp-content/uploads/2026/01/colony_hotel_haifa.webp", label: "The Colony Hotel — German Colony exterior" },
+  leonardo: { src: haifaLeonardoPhoto, alt: "Entrance of Leonardo Plaza Haifa beside the beachfront", sourceUrl: "https://www.israel-taxi.com/wp-content/uploads/2026/01/leonardo_plaza_haifa.jpg", label: "Leonardo Plaza Haifa — entrance" },
+  danCarmel: { src: haifaDanCarmelPhoto, alt: "Dan Carmel Haifa hotel building and balconies on Mount Carmel", sourceUrl: "https://www.israel-taxi.com/wp-content/uploads/2026/01/Dan_Carmel_hotel_haifa.jpg", label: "Dan Carmel Haifa — hotel exterior" },
+} satisfies Record<string, StayGuidePhoto>;
+
+export const haifaStayGuide: HotelStayDestination = {
+  id: "haifa", name: "Haifa", path: "/travel-blog/best-hotels-in-haifa/",
+  title: "Best hotels in Haifa: boutique, family & luxury stays",
+  metaDescription: "Compare 10 Haifa hotels and guesthouses by location, travel style and facilities. Explore boutique and family guides, from the German Colony to Carmel and the beach.",
+  intro: "Choose a heritage hotel in the German Colony, a Carmel hotel overlooking the bay or a family stay beside the beach. Compare ten places to stay, understand Haifa's hills and neighborhoods, then check the right room for your trip.",
+  reviewedAt: "2026-10-17", photo: haifaPhotos.panorama,
+  categoryIntro: "Open a focused boutique comparison for design, heritage and guest-age policies, or a family guide for pools, room layouts and the choice between the beach and Mount Carmel. Luxury, mid-range and independent options are also covered in the complete guide below.",
+  comparisonIntro: "Haifa's elevation changes the daily experience. A room with a bay view on the Carmel is different from a hotel beside a swimming beach; the German Colony and downtown offer another urban base. Compare locations and facilities before looking at the final room total.",
+  comparison: [{ key: "location", label: "City setting" }, { key: "beach", label: "Beach access" }, { key: "agePolicy", label: "Guest & facility ages" }],
+  locationLinkText: "See the map and compare the German Colony, Carmel, Hadar and beachfront settings.",
+  overview: [
+    "Start by deciding where you want to spend your time. The German Colony suits a city break around historic streets, restaurants and the lower Bahá'í Gardens. Carmel Center gives a higher base near the Louis Promenade and bay viewpoints. For beach time, Leonardo Plaza's southern seafront position is a different choice from either of those neighborhoods.",
+    "The luxury comparison begins with Botanica's contemporary German Colony setting and Dan Carmel's classic hilltop hotel format. For heritage boutique stays, compare The Schumacher and The Colony Hotel. Families can compare Crowne Plaza's indoor pool, Leonardo Plaza's beachfront setting and Dan Carmel's pools and family-room options in the dedicated family guide.",
+    "Golden Crown and Nof provide two practical city-hotel comparisons on different levels of Haifa: the lower city and the Carmel. Nof is the property called Haifa Bay View in the original guide and may still appear under that name on booking sites. Port Inn and Loui Talpiot offer smaller independent formats. 'Mid-range' and 'budget-minded' describe the comparison, not fixed nightly prices or a promise that one hotel is always cheaper.",
+  ],
+  map: { lat: 32.8191, lon: 34.9884, bounds: [34.951, 32.785, 35.017, 32.837], reference: "German Colony reference point; map also covers Carmel Center, Hadar and the southern beachfront" },
+  locations: [
+    { name: "German Colony & lower city", text: "Historic streets and restaurants below the Bahá'í Gardens, with downtown and the port district nearby. Botanica, Schumacher, Colony and Golden Crown are comparisons here; Port Inn is a lower-city option. Check the actual port entrance and station route if arriving with luggage." },
+    { name: "Carmel Center & Hadar", text: "Dan Carmel, Crowne Plaza and Nof occupy the higher Carmel area. Loui Talpiot is in the market neighborhood of Hadar, on a different level. Map distance can hide steep climbs, so compare the route and transport rather than assuming every nearby point is an easy walk." },
+    { name: "Southern beachfront", text: "Leonardo Plaza suits time on the beach and promenade. It is a different base from the German Colony and Carmel viewpoints. Include journeys into town and to your planned attractions when deciding whether to stay by the shore." },
+  ],
+  arrival: [
+    "Arrange the journey to the exact hotel entrance. If arriving by train, choose the station and final transfer for your property; a lower-city hotel, a Carmel hotel and the southern beachfront need different plans. Check current services, the walk with luggage and any steps or steep streets, especially for late arrivals or mobility needs.",
+    "If combining a stay with a cruise, confirm your terminal, ship schedule and the actual pickup or drop-off point. A hotel near the port is not a guarantee of a walkable cruise entrance. For Galilee outings, compare a rental car, tour or booked driver, and confirm hotel parking and date-specific transport around Shabbat and holidays.",
+  ],
+  groups: [
+    { id: "luxury", title: "Luxury hotels: German Colony or Carmel", intro: "Compare Botanica's contemporary design and age-restricted setting with Dan Carmel's larger hilltop hotel and family facilities. Choose between the neighborhood, the room's outlook and the leisure experience you want.", hotelIds: ["haifa-botanica", "haifa-dan-carmel"], photo: haifaPhotos.botanica },
+    { id: "boutique", title: "Boutique hotels & historic character", intro: "The Schumacher combines a preserved building and newer wing with an adults-only policy; The Colony Hotel offers a heritage address on Ben Gurion Boulevard. The detailed boutique guide also includes Botanica as a larger design-led alternative.", hotelIds: ["haifa-schumacher", "haifa-colony"], photo: haifaPhotos.colony, guidePath: "/haifa/boutique-hotels/", guideLabel: "Compare Haifa boutique hotels" },
+    { id: "family", title: "Hotels for families with children", intro: "Compare a heated indoor pool on the Carmel with a beachfront hotel and children's facilities. The dedicated family guide also covers Dan Carmel, room occupancy and the activities that are actually available on your travel dates.", hotelIds: ["haifa-crowne-plaza", "haifa-leonardo-plaza"], photo: haifaPhotos.leonardo, guidePath: "/haifa/family-hotels/", guideLabel: "Compare Haifa family hotels" },
+    { id: "mid-range", title: "Practical city hotels & mid-range comparisons", intro: "Golden Crown is a lower-city base near the German Colony; Nof is a Carmel address with bay views. Compare the final room offer and your daily transport rather than expecting the same experience from hotels in a similar price bracket.", hotelIds: ["haifa-golden-crown", "haifa-nof"], photo: haifaPhotos.panorama },
+    { id: "budget", title: "Budget-minded & independent stays", intro: "Port Inn is a downtown guesthouse comparison; Loui Talpiot adds a market-neighborhood location and room kitchenettes. Check the exact room and included services, with meals, bathrooms and arrival arrangements part of the decision.", hotelIds: ["haifa-port-inn", "haifa-loui-talpiot"], photo: haifaPhotos.panorama },
+  ],
+  checklist: ["Match the hotel to the German Colony, Carmel, Hadar or beach part of your trip", "Check hills, steps and the actual luggage route from the arrival point", "Enter every guest's age and confirm the room's maximum occupancy", "Confirm seasonal pools, club dates, spa entry and any essential facility", "Compare meals, parking, taxes and local transport in the final total", "Read cancellation terms and confirm late or Shabbat arrival arrangements"],
+  faqs: [
+    { q: "Is it better to stay on Mount Carmel or in the German Colony?", a: "Choose the Carmel for the Louis Promenade, bay viewpoints and a higher hotel base. The German Colony suits historic streets, restaurants and the lower part of the Bahá'í Gardens. Haifa is steep, so compare the actual daily route and transport rather than map distance alone." },
+    { q: "Which hotel should I compare for a beach holiday?", a: "Leonardo Plaza is the beachfront comparison in this shortlist, with access to the shore from the pool area. Carmel hotels can offer impressive sea views while still requiring a separate journey to a swimming beach." },
+    { q: "Which boutique hotels are suitable for a couples' break?", a: "Compare The Schumacher and The Colony Hotel for heritage settings in the German Colony, and Botanica for contemporary design, a spa and a seasonal rooftop plunge pool. Check the individual age policy, room and inclusions; boutique is not a single facilities standard." },
+    { q: "Are Botanica and Schumacher options for young children?", a: "They are excluded from this guide's young-family shortlist. Botanica's operator describes age-restricted stays from 16, while Schumacher's own site says adults-only. Confirm exact eligibility directly. The family guide compares Leonardo Plaza, Crowne Plaza and Dan Carmel instead." },
+    { q: "Is Nof Hotel the same property as Haifa Bay View?", a: "The property at 101 Hanassi Avenue, listed as Haifa Bay View in the original guide, is presented by Nara Hotels as Nof Hotel. Booking platforms may retain the Bay View name. Check the address and exact room when following the booking link." },
+    { q: "Can I use a Haifa hotel before or after a cruise?", a: "Yes, but plan the journey for the actual terminal and ship schedule. A hotel near the port district is not proof of a walkable passenger entrance. Confirm luggage storage, reception times and pickup arrangements before choosing a short stay." },
+  ],
+  sourceIds: ["owner-hotels-haifa", "haifa-botanica-facilities", "haifa-dan-carmel-rooms"],
+  related: [
+    { label: "Shore excursions from Haifa Port", to: "/haifa-shore-excursions/", note: "Plan the day around your ship's schedule" },
+    { label: "Transfers & private transport", to: "/transfers/", note: "Arrange the exact hotel and arrival point" },
+    { label: "Tours & day trips", to: "/tours/" },
+    { label: "Car rental in Israel", to: "/car-rental/" },
+    { label: "All accommodation", to: "/hotels/" },
+  ],
+};
+
+const haifaCategoryGuides: HotelCategoryGuide[] = [
+  {
+    id: "boutique", destinationId: "haifa", path: "/haifa/boutique-hotels/", shortTitle: "Boutique hotels",
+    title: "Best boutique hotels in Haifa: German Colony & design stays",
+    metaDescription: "Compare The Schumacher, The Colony Hotel and Botanica in Haifa's German Colony. Check heritage settings, guest ages, rooftop facilities and room choices before booking.",
+    summary: "Choose between restored historic buildings and a contemporary design-led hotel below the Bahá'í Gardens. Compare three German Colony stays by character, guest policy and the facilities that matter to your city break.",
+    photo: haifaPhotos.colony,
+    overviewTitle: "Choose the character and facilities you want", detailNavLabel: "Heritage, ages & facilities", checklistTitle: "Room, setting & guest ages",
+    overview: [
+      "Haifa's German Colony is a useful place to begin a boutique-hotel search if restaurants, historic architecture and an urban base matter to you. The Schumacher and The Colony Hotel offer different heritage settings. Botanica is included as a larger, contemporary luxury alternative for visitors who put design and wellness facilities ahead of a small property size.",
+      "A boutique label does not establish a pool, a restaurant, a balcony or an adults-only policy. Compare your actual room and the way you plan to spend the day. Schumacher's garden and sun terrace, Colony's historic boulevard setting and Botanica's spa and seasonal plunge pool create different stays within the same broad neighborhood.",
+      "Guest ages need a separate check. Schumacher's own site describes adults-only stays; Botanica's operator lists an age restriction from 16. Confirm the exact eligibility for your dates and party rather than treating all boutique properties as interchangeable. Families with younger children should start with the dedicated family guide.",
+    ],
+    decisions: [
+      { title: "Preserved building or contemporary design?", text: "Compare Schumacher's restored Templer building and modern wing with Colony's historic boulevard building. Botanica offers a contemporary design-led alternative and a larger hotel format." },
+      { title: "Terrace, treatments or a pool?", text: "A sun terrace and a treatment room are different from a swimming pool. Botanica's operator specifically describes a rooftop plunge pool, with seasonal operation. Check the facilities you actually intend to use." },
+      { title: "Main boulevard or side-street address?", text: "Colony sits on Ben Gurion Boulevard; Schumacher is on Lohamei HaGeta'ot Street; Botanica is beside the lower gardens. Check the room's outlook, street noise and walk to your chosen restaurants." },
+      { title: "Can every guest stay?", text: "Get the hotel's precise minimum guest age confirmed. A couples' atmosphere, a restricted admission policy and spa age limits are separate matters; room capacity is another check." },
+    ],
+    comparison: [{ key: "location", label: "Neighborhood setting" }, { key: "spa", label: "Leisure facilities" }, { key: "agePolicy", label: "Guest policy" }],
+    picks: [
+      { hotelId: "haifa-schumacher", summary: "Choose The Schumacher when a preserved building, garden and smaller neighborhood-hotel format are central to the trip. Its combination of historic and modern wings gives another room choice within the German Colony. The operator's own site says adults-only, making the admission policy part of the decision rather than a detail to check after booking.", bestFor: "Couples and independent adults seeking heritage character, design and a German Colony base.", watch: "Confirm the exact minimum age, building, room layout and step-free route if needed. Ask where breakfast is served and how treatments and parking work; do not assume a full resort facilities package." },
+      { hotelId: "haifa-colony", summary: "The Colony Hotel is the comparison for a preserved building directly on Ben Gurion Boulevard. Its location makes the neighborhood's restaurants and architecture part of the stay, with the lower Bahá'í Gardens as a nearby landmark. Choose the room and outlook as carefully as the historic exterior.", bestFor: "Visitors wanting a heritage hotel on the main German Colony boulevard and a city break focused on walking and dining.", watch: "Ask about your room's view, street noise, accessibility and maximum occupancy. Check breakfast and spa-treatment inclusions separately, along with parking and arrival arrangements." },
+      { hotelId: "haifa-botanica", summary: "Botanica is the contemporary luxury alternative in this comparison. Its botanical design, spa and seasonal rooftop plunge pool suit a stay where the hotel experience matters alongside the German Colony location. It is larger than the two heritage boutiques, so choose it for the experience rather than expecting an intimate guesthouse.", bestFor: "Couples and eligible older guests prioritizing contemporary design and wellness facilities.", watch: "Confirm the operator's 16+ guest policy and exact eligibility. The rooftop facility is a plunge pool, not a full-size swimming pool; check its season, spa access, treatments and the room's actual outlook." },
+    ],
+    detailTitle: "Historic rooms, age policies & what a boutique stay includes",
+    details: [
+      { title: "The German Colony is below the Carmel viewpoints", text: "These hotels are comparisons for the lower German Colony setting, rather than hilltop addresses by the Louis Promenade. Seeing the gardens from your hotel does not establish access through every terrace or gate. Check current visiting arrangements and plan the route to the sights you will actually visit." },
+      { title: "Confirm the room inside the building", text: "In a heritage property, room layout, floor and access can matter as much as the exterior. Ask about the wing, steps, bathroom, balcony and outlook of the room category you are booking. A photograph of a terrace or a special room does not mean every room includes it." },
+      { title: "Read guest policies before choosing dates", text: "Schumacher's operator describes adults-only accommodation. Botanica describes an age-restricted stay from 16; confirm its exact minimum-age rule for every guest. At Colony, check the selected room's occupancy and any relevant facility rules. Do not infer a shared policy from the boutique label." },
+      { title: "Compare the complete hotel experience", text: "Confirm breakfast inclusion and where it is served, treatment charges, parking and late-arrival arrangements. For Botanica, check the seasonal plunge pool and spa separately. Compare the same dates and cancellation conditions before deciding which offer provides the stay you want." },
+    ],
+    checklist: ["Confirm minimum ages, guest eligibility and room occupancy", "Check the actual building, floor, room layout and any steps", "Confirm whether your room has the balcony or outlook you want", "Check seasonal leisure facilities, treatments and breakfast arrangements", "Include parking, meals and transport to the Carmel or beach in the total", "Read the cancellation deadline and confirm your arrival time"],
+    faqs: [
+      { q: "Which Haifa boutique hotels are compared here?", a: "The Schumacher and The Colony Hotel are the heritage-focused comparisons in the German Colony. Botanica is a larger, contemporary design-led alternative with a spa and seasonal rooftop plunge pool." },
+      { q: "Are these hotels all adults-only?", a: "They have different policies. Schumacher's own site says adults-only; Botanica's operator lists a restriction from age 16. Confirm exact eligibility directly and check Colony's selected room and facility policies separately." },
+      { q: "Does a boutique hotel in Haifa necessarily have a pool?", a: "No. Compare the actual leisure facilities. A sun terrace or treatment room is not a pool, and Botanica specifically describes its rooftop facility as a plunge pool for a dip and relaxation." },
+      { q: "Is the German Colony convenient for a beach holiday?", a: "It is principally an urban base for dining, architecture and the lower gardens. Plan a separate beach journey. If immediate beach access is your priority, compare the beachfront option in the main and family guides." },
+      { q: "Will every room overlook the Bahá'í Gardens?", a: "No view should be assumed from the hotel's location or a promotional photograph. Check the exact room category, outlook and any balcony in the offer before booking." },
+    ],
+    sourceIds: ["haifa-botanica-facilities"],
+  },
+  {
+    id: "family", destinationId: "haifa", path: "/haifa/family-hotels/", shortTitle: "Family hotels",
+    title: "Best family hotels in Haifa: beach, pools & Carmel stays",
+    metaDescription: "Compare Leonardo Plaza, Crowne Plaza and Dan Carmel for a Haifa family trip. Check beach access, pools, children's activities, room occupancy and transport.",
+    summary: "Choose a beachfront family stay or a Carmel base with hotel pools and city outings. Compare three Haifa hotels by swimming arrangements, room layouts and the daily journeys you will make with children.",
+    photo: haifaPhotos.danCarmel,
+    overviewTitle: "Decide between beach days and a Carmel city base", detailNavLabel: "Pools, rooms & transport", checklistTitle: "Children, rooms & pool access",
+    overview: [
+      "Start with your family's daily plan. Leonardo Plaza puts the beach and promenade beside the hotel. Crowne Plaza offers a Carmel address with a heated indoor pool. Dan Carmel combines a higher city setting with hotel gardens, an outdoor pool and a separate children's pool. Each suits a different balance of hotel time and outings.",
+      "A bay view from the Carmel is not the same as immediate beach access. Factor in the journeys to the shore, downtown or your chosen attractions, especially with a stroller or tired children. If you need step-free access or car seats, arrange them for the actual hotel entrance and transport plan.",
+      "Match the room to the whole party before comparing a headline rate. Dan Carmel's published occupancy varies between categories, and a hotel's family-friendly label does not establish a separate bedroom or an internal connection. Also check the dates of children's programming: Leonardo Plaza lists club activity on weekends, holidays and in July–August, not an unrestricted daily timetable.",
+    ],
+    decisions: [
+      { title: "Beach and promenade nearby", text: "Compare Leonardo Plaza when swimming and time by the sea are central to the holiday. Ask about current beach arrangements, the pool calendar and the exact room or suite layout." },
+      { title: "Indoor pool on the Carmel", text: "Compare Crowne Plaza when an indoor swimming option and Carmel Center matter more than immediate beach access. Confirm children's admission, supervision and operating hours directly." },
+      { title: "Hotel grounds and an upscale base", text: "Dan Carmel offers another family format with gardens, an outdoor pool and a separate children's pool. Check the pool season and choose a room category with the right capacity for all children." },
+      { title: "Space and transport together", text: "Compare beds, room connections and cots alongside parking, taxis and outing costs. A room that sleeps everyone may still differ from the layout your family needs at bedtime." },
+    ],
+    comparison: [{ key: "children", label: "Family facilities" }, { key: "beach", label: "Beach & daily journeys" }, { key: "meals", label: "Meals to check" }],
+    picks: [
+      { hotelId: "haifa-leonardo-plaza", summary: "Choose Leonardo Plaza when the beach and promenade are part of your daily routine. Its operator advertises a main pool covered and heated in colder seasons, children's pools and a club with a date-dependent schedule. The beachfront setting is a different choice from the hilltop hotels, especially if you expect to spend substantial time by the water.", bestFor: "Families prioritizing immediate access to the beach area, pools and a coastal holiday setting.", watch: "Confirm the suite's actual bedrooms, beds, balcony and outlook. Check pool and beach operation; the operator lists children's club activity on weekends, holidays and July–August. Arrange transport for outings away from the beachfront." },
+      { hotelId: "haifa-crowne-plaza", summary: "Crowne Plaza suits a family city break based near Carmel Center, with a heated indoor pool as a practical leisure option. Compare it when you plan to combine hotel time with viewpoints, restaurants and outings, allowing for transport to the beach and lower city.", bestFor: "Families who prefer a Carmel base and want to check an indoor swimming option for their travel dates.", watch: "Confirm child access to the pool and health club, maximum room occupancy and any extra bed. Do not assume a children's activity club. If a dining promotion affects your choice, check its specific age, adult-meal and rate conditions." },
+      { hotelId: "haifa-dan-carmel", summary: "Dan Carmel is the upscale comparison for families who want hotel gardens and pools alongside a hilltop city base. The operator lists a separate children's pool, and selected room categories accommodate two adults and two children. That does not mean every room or executive category fits the same party.", bestFor: "Families who value a substantial hotel setting, outdoor pool time and the Carmel location.", watch: "Confirm the exact room's occupancy and beds, pool opening and any essential connection. Certain executive rooms and lounge access have age restrictions separate from family admission. Include meals, paid parking and beach journeys in the total." },
+    ],
+    detailTitle: "Swimming dates, family-room layouts & the real trip total",
+    details: [
+      { title: "Check the facilities for the dates, not just the photograph", text: "Ask about current pool opening, children's access, adult supervision and any maintenance. Leonardo Plaza's published children's club schedule covers weekends, holidays and July–August; verify the actual dates and age groups. Crowne Plaza's indoor pool does not imply a children's club, while Dan Carmel's outdoor and children's pools need a seasonal check." },
+      { title: "Book the right room category for every child", text: "Enter all adults and every child's age on the booking site. Compare a single family room, a suite and connecting rooms as different layouts. Dan Carmel's published room categories have different occupancy limits, and lounge or executive-floor restrictions are separate. Get an essential internal connection or cot confirmed in writing." },
+      { title: "Include Haifa's hills in the plan", text: "A Carmel hotel can suit viewpoints and outings while requiring transport for beach time. A beachfront hotel creates the opposite tradeoff for visits to the German Colony or higher city. Check the route with a stroller, hotel parking and child seats for a booked driver rather than assuming map proximity means an easy walk." },
+      { title: "Compare meals and outings in the family total", text: "Read the actual meal basis and any children's dining promotion. A breakfast rate, a conditional dining offer and a broader package are different products. Add parking, transport, lunches and other meals to compare the same dates and cancellation conditions fairly." },
+    ],
+    checklist: ["Enter all adults and each child's age; confirm the actual beds and capacity", "Ask about pool access, supervision, opening and maintenance for your dates", "Confirm club dates and age groups rather than assuming daily programming", "Check cots, a separate bedroom or any essential connecting doorway", "Include meals, parking, child seats and daily transport in the total", "Confirm arrival arrangements, cancellation terms and access needs"],
+    faqs: [
+      { q: "Which hotel in this family shortlist is on the beach?", a: "Leonardo Plaza is the beachfront comparison, with access from the pool area to the shore. Crowne Plaza and Dan Carmel are Carmel bases; a sea view there does not establish immediate beach access." },
+      { q: "Which Haifa hotel should I compare for an indoor pool?", a: "Crowne Plaza advertises a heated indoor pool. Leonardo Plaza describes its main pool as covered and heated during colder seasons. Confirm current operation and children's access directly for your dates." },
+      { q: "Is Leonardo Plaza's children's club open every day?", a: "Do not assume so. The operator lists Fridays, Saturdays, holidays and July–August. Reconfirm the timetable, age groups and supervision arrangements for the stay you intend to book." },
+      { q: "Can every Dan Carmel room fit two adults and two children?", a: "No. Published occupancy varies by room category, with some rooms accommodating that party and other categories having different limits. Enter the actual guests and ages, and confirm the room's sleeping arrangement before paying." },
+      { q: "Are Botanica and Schumacher included as young-family options?", a: "No. Their guest-age policies make them different choices from these family hotels. Check the boutique guide for those policies; this shortlist focuses on Leonardo Plaza, Crowne Plaza and Dan Carmel." },
+    ],
+    sourceIds: ["haifa-dan-carmel-rooms"],
+  },
+];
+
 export const hotelCategoryGuides: HotelCategoryGuide[] = [
+  ...haifaCategoryGuides,
   ...tiberiasCategoryGuides,
   {
     id: "spa", destinationId: "deadsea", path: "/dead-sea/spa-hotels/", shortTitle: "Spa hotels",

@@ -17,6 +17,7 @@ import roadTrip from "@/assets/home/road-trip.webp";
 import cruisePort from "@/assets/home/cruise-port.webp";
 import ashdodPort from "@/assets/home/ashdod-port.webp";
 import haifaPort from "@/assets/home/haifa-port.webp";
+import haifaHotels from "@/assets/haifa/panorama.webp";
 import deadSeaBeach from "@/assets/dead-sea/beach.webp";
 import { pageMeta } from "@/lib/site";
 import { photoCredits } from "@/data/photoCredits";
@@ -40,6 +41,7 @@ const IMG = {
   telAviv: { src: telAviv, alt: "Tel Aviv's beachfront skyline seen from Jaffa" },
   tiberias: { src: tiberias, alt: "Tiberias on the shore of the Sea of Galilee, seen from the water" },
   deadSea: { src: deadSeaBeach, alt: "Ein Bokek's beach and palm-lined promenade beside the Dead Sea" },
+  haifa: { src: haifaHotels, alt: "Haifa Bay and the Bahá'í Gardens seen from Mount Carmel" },
   t3: { src: t3, alt: "Arrivals hall at Ben Gurion Airport Terminal 3" },
   bethlehem: { src: bethlehem, alt: "Church of the Nativity on Manger Square, Bethlehem" },
   masada: { src: masada, alt: "Masada plateau from the air with the Dead Sea behind" },
@@ -58,6 +60,7 @@ const services: Service[] = [
       { label: "Tel Aviv", text: "Beachfront, Jaffa or the White City", to: "/travel-blog/where-to-stay-in-tel-aviv/", img: IMG.telAviv },
       { label: "Tiberias & Galilee", text: "Family, luxury & lakeside hotels", to: "/travel-blog/best-hotels-in-tiberias/", img: IMG.tiberias },
       { label: "Dead Sea", text: "Spa breaks, family resorts & luxury stays", to: "/travel-blog/best-dead-sea-hotels/", img: IMG.deadSea },
+      { label: "Haifa", text: "Boutique, family & Carmel hotels", to: "/travel-blog/best-hotels-in-haifa/", img: IMG.haifa },
     ],
     hub: { label: "Explore accommodation", to: "/hotels/" },
   },
@@ -191,11 +194,12 @@ function Home() {
         <div className="rounded-2xl bg-navy p-6 text-navy-foreground md:p-8">
           <p className="text-xs font-semibold uppercase tracking-[0.14em] opacity-80">Where to base yourself</p>
           <h2 id="dest-h" className="mt-2 text-3xl">Popular destinations</h2>
-          <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
             <PhotoCard c={{ label: "Jerusalem", text: "Old City, Bethlehem & Masada trips", to: "/travel-blog/where-to-stay-in-jerusalem/", img: IMG.jerusalem }} />
             <PhotoCard c={{ label: "Tel Aviv & Jaffa", text: "Beaches, food and the coast", to: "/travel-blog/where-to-stay-in-tel-aviv/", img: IMG.telAviv }} />
             <PhotoCard c={{ label: "Tiberias & Galilee", text: "Lakeside base for the north", to: "/travel-blog/best-hotels-in-tiberias/", img: IMG.tiberias }} />
             <PhotoCard c={{ label: "Dead Sea", text: "Spa, family and resort stays", to: "/travel-blog/best-dead-sea-hotels/", img: IMG.deadSea }} />
+            <PhotoCard c={{ label: "Haifa", text: "Carmel views, boutique & beach stays", to: "/travel-blog/best-hotels-in-haifa/", img: IMG.haifa }} />
           </div>
           <Link to="/destinations/" className="btn btn-light mt-6">Explore all destinations →</Link>
         </div>

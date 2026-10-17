@@ -22,6 +22,8 @@ import { Route as AttractionsIndexRouteImport } from './routes/attractions.index
 import { Route as AttractionsCaesareaRouteImport } from './routes/attractions.caesarea'
 import { Route as DeadSeaFamilyHotelsRouteImport } from './routes/dead-sea.family-hotels'
 import { Route as DeadSeaSpaHotelsRouteImport } from './routes/dead-sea.spa-hotels'
+import { Route as HaifaBoutiqueHotelsRouteImport } from './routes/haifa.boutique-hotels'
+import { Route as HaifaFamilyHotelsRouteImport } from './routes/haifa.family-hotels'
 import { Route as JerusalemDowntownHotelsRouteImport } from './routes/jerusalem.downtown-hotels'
 import { Route as JerusalemEastJerusalemHotelsRouteImport } from './routes/jerusalem.east-jerusalem-hotels'
 import { Route as JerusalemGermanColonyBakaHotelsRouteImport } from './routes/jerusalem.german-colony-baka-hotels'
@@ -45,6 +47,7 @@ import { Route as TransfersBenGurionAirportRouteImport } from './routes/transfer
 import { Route as TravelBlogBenGurionAirportToJerusalemRouteImport } from './routes/travel-blog.ben-gurion-airport-to-jerusalem'
 import { Route as TravelBlogBenGurionAirportToTelAvivRouteImport } from './routes/travel-blog.ben-gurion-airport-to-tel-aviv'
 import { Route as TravelBlogBestDeadSeaHotelsRouteImport } from './routes/travel-blog.best-dead-sea-hotels'
+import { Route as TravelBlogBestHotelsInHaifaRouteImport } from './routes/travel-blog.best-hotels-in-haifa'
 import { Route as TravelBlogBestHotelsInTiberiasRouteImport } from './routes/travel-blog.best-hotels-in-tiberias'
 import { Route as TravelBlogMasadaRouteImport } from './routes/travel-blog.masada'
 import { Route as TravelBlogWhereToStayInJerusalemRouteImport } from './routes/travel-blog.where-to-stay-in-jerusalem'
@@ -113,6 +116,16 @@ const DeadSeaFamilyHotelsRoute = DeadSeaFamilyHotelsRouteImport.update({
 const DeadSeaSpaHotelsRoute = DeadSeaSpaHotelsRouteImport.update({
   id: '/dead-sea/spa-hotels',
   path: '/dead-sea/spa-hotels',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const HaifaBoutiqueHotelsRoute = HaifaBoutiqueHotelsRouteImport.update({
+  id: '/haifa/boutique-hotels',
+  path: '/haifa/boutique-hotels',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const HaifaFamilyHotelsRoute = HaifaFamilyHotelsRouteImport.update({
+  id: '/haifa/family-hotels',
+  path: '/haifa/family-hotels',
   getParentRoute: () => rootRouteImport,
 } as any)
 const JerusalemDowntownHotelsRoute = JerusalemDowntownHotelsRouteImport.update({
@@ -243,6 +256,12 @@ const TravelBlogBestDeadSeaHotelsRoute =
     path: '/travel-blog/best-dead-sea-hotels',
     getParentRoute: () => rootRouteImport,
   } as any)
+const TravelBlogBestHotelsInHaifaRoute =
+  TravelBlogBestHotelsInHaifaRouteImport.update({
+    id: '/travel-blog/best-hotels-in-haifa',
+    path: '/travel-blog/best-hotels-in-haifa',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const TravelBlogBestHotelsInTiberiasRoute =
   TravelBlogBestHotelsInTiberiasRouteImport.update({
     id: '/travel-blog/best-hotels-in-tiberias',
@@ -280,6 +299,8 @@ export interface FileRoutesByFullPath {
   '/attractions/caesarea': typeof AttractionsCaesareaRoute
   '/dead-sea/family-hotels': typeof DeadSeaFamilyHotelsRoute
   '/dead-sea/spa-hotels': typeof DeadSeaSpaHotelsRoute
+  '/haifa/boutique-hotels': typeof HaifaBoutiqueHotelsRoute
+  '/haifa/family-hotels': typeof HaifaFamilyHotelsRoute
   '/jerusalem/downtown-hotels': typeof JerusalemDowntownHotelsRoute
   '/jerusalem/east-jerusalem-hotels': typeof JerusalemEastJerusalemHotelsRoute
   '/jerusalem/german-colony-baka-hotels': typeof JerusalemGermanColonyBakaHotelsRoute
@@ -301,6 +322,7 @@ export interface FileRoutesByFullPath {
   '/travel-blog/ben-gurion-airport-to-jerusalem': typeof TravelBlogBenGurionAirportToJerusalemRoute
   '/travel-blog/ben-gurion-airport-to-tel-aviv': typeof TravelBlogBenGurionAirportToTelAvivRoute
   '/travel-blog/best-dead-sea-hotels': typeof TravelBlogBestDeadSeaHotelsRoute
+  '/travel-blog/best-hotels-in-haifa': typeof TravelBlogBestHotelsInHaifaRoute
   '/travel-blog/best-hotels-in-tiberias': typeof TravelBlogBestHotelsInTiberiasRoute
   '/travel-blog/masada': typeof TravelBlogMasadaRoute
   '/travel-blog/where-to-stay-in-jerusalem': typeof TravelBlogWhereToStayInJerusalemRoute
@@ -322,6 +344,8 @@ export interface FileRoutesByTo {
   '/attractions/caesarea': typeof AttractionsCaesareaRoute
   '/dead-sea/family-hotels': typeof DeadSeaFamilyHotelsRoute
   '/dead-sea/spa-hotels': typeof DeadSeaSpaHotelsRoute
+  '/haifa/boutique-hotels': typeof HaifaBoutiqueHotelsRoute
+  '/haifa/family-hotels': typeof HaifaFamilyHotelsRoute
   '/jerusalem/downtown-hotels': typeof JerusalemDowntownHotelsRoute
   '/jerusalem/east-jerusalem-hotels': typeof JerusalemEastJerusalemHotelsRoute
   '/jerusalem/german-colony-baka-hotels': typeof JerusalemGermanColonyBakaHotelsRoute
@@ -343,6 +367,7 @@ export interface FileRoutesByTo {
   '/travel-blog/ben-gurion-airport-to-jerusalem': typeof TravelBlogBenGurionAirportToJerusalemRoute
   '/travel-blog/ben-gurion-airport-to-tel-aviv': typeof TravelBlogBenGurionAirportToTelAvivRoute
   '/travel-blog/best-dead-sea-hotels': typeof TravelBlogBestDeadSeaHotelsRoute
+  '/travel-blog/best-hotels-in-haifa': typeof TravelBlogBestHotelsInHaifaRoute
   '/travel-blog/best-hotels-in-tiberias': typeof TravelBlogBestHotelsInTiberiasRoute
   '/travel-blog/masada': typeof TravelBlogMasadaRoute
   '/travel-blog/where-to-stay-in-jerusalem': typeof TravelBlogWhereToStayInJerusalemRoute
@@ -365,6 +390,8 @@ export interface FileRoutesById {
   '/attractions/caesarea': typeof AttractionsCaesareaRoute
   '/dead-sea/family-hotels': typeof DeadSeaFamilyHotelsRoute
   '/dead-sea/spa-hotels': typeof DeadSeaSpaHotelsRoute
+  '/haifa/boutique-hotels': typeof HaifaBoutiqueHotelsRoute
+  '/haifa/family-hotels': typeof HaifaFamilyHotelsRoute
   '/jerusalem/downtown-hotels': typeof JerusalemDowntownHotelsRoute
   '/jerusalem/east-jerusalem-hotels': typeof JerusalemEastJerusalemHotelsRoute
   '/jerusalem/german-colony-baka-hotels': typeof JerusalemGermanColonyBakaHotelsRoute
@@ -386,6 +413,7 @@ export interface FileRoutesById {
   '/travel-blog/ben-gurion-airport-to-jerusalem': typeof TravelBlogBenGurionAirportToJerusalemRoute
   '/travel-blog/ben-gurion-airport-to-tel-aviv': typeof TravelBlogBenGurionAirportToTelAvivRoute
   '/travel-blog/best-dead-sea-hotels': typeof TravelBlogBestDeadSeaHotelsRoute
+  '/travel-blog/best-hotels-in-haifa': typeof TravelBlogBestHotelsInHaifaRoute
   '/travel-blog/best-hotels-in-tiberias': typeof TravelBlogBestHotelsInTiberiasRoute
   '/travel-blog/masada': typeof TravelBlogMasadaRoute
   '/travel-blog/where-to-stay-in-jerusalem': typeof TravelBlogWhereToStayInJerusalemRoute
@@ -409,6 +437,8 @@ export interface FileRouteTypes {
     | '/attractions/caesarea'
     | '/dead-sea/family-hotels'
     | '/dead-sea/spa-hotels'
+    | '/haifa/boutique-hotels'
+    | '/haifa/family-hotels'
     | '/jerusalem/downtown-hotels'
     | '/jerusalem/east-jerusalem-hotels'
     | '/jerusalem/german-colony-baka-hotels'
@@ -430,6 +460,7 @@ export interface FileRouteTypes {
     | '/travel-blog/ben-gurion-airport-to-jerusalem'
     | '/travel-blog/ben-gurion-airport-to-tel-aviv'
     | '/travel-blog/best-dead-sea-hotels'
+    | '/travel-blog/best-hotels-in-haifa'
     | '/travel-blog/best-hotels-in-tiberias'
     | '/travel-blog/masada'
     | '/travel-blog/where-to-stay-in-jerusalem'
@@ -451,6 +482,8 @@ export interface FileRouteTypes {
     | '/attractions/caesarea'
     | '/dead-sea/family-hotels'
     | '/dead-sea/spa-hotels'
+    | '/haifa/boutique-hotels'
+    | '/haifa/family-hotels'
     | '/jerusalem/downtown-hotels'
     | '/jerusalem/east-jerusalem-hotels'
     | '/jerusalem/german-colony-baka-hotels'
@@ -472,6 +505,7 @@ export interface FileRouteTypes {
     | '/travel-blog/ben-gurion-airport-to-jerusalem'
     | '/travel-blog/ben-gurion-airport-to-tel-aviv'
     | '/travel-blog/best-dead-sea-hotels'
+    | '/travel-blog/best-hotels-in-haifa'
     | '/travel-blog/best-hotels-in-tiberias'
     | '/travel-blog/masada'
     | '/travel-blog/where-to-stay-in-jerusalem'
@@ -493,6 +527,8 @@ export interface FileRouteTypes {
     | '/attractions/caesarea'
     | '/dead-sea/family-hotels'
     | '/dead-sea/spa-hotels'
+    | '/haifa/boutique-hotels'
+    | '/haifa/family-hotels'
     | '/jerusalem/downtown-hotels'
     | '/jerusalem/east-jerusalem-hotels'
     | '/jerusalem/german-colony-baka-hotels'
@@ -514,6 +550,7 @@ export interface FileRouteTypes {
     | '/travel-blog/ben-gurion-airport-to-jerusalem'
     | '/travel-blog/ben-gurion-airport-to-tel-aviv'
     | '/travel-blog/best-dead-sea-hotels'
+    | '/travel-blog/best-hotels-in-haifa'
     | '/travel-blog/best-hotels-in-tiberias'
     | '/travel-blog/masada'
     | '/travel-blog/where-to-stay-in-jerusalem'
@@ -536,6 +573,8 @@ export interface RootRouteChildren {
   AttractionsCaesareaRoute: typeof AttractionsCaesareaRoute
   DeadSeaFamilyHotelsRoute: typeof DeadSeaFamilyHotelsRoute
   DeadSeaSpaHotelsRoute: typeof DeadSeaSpaHotelsRoute
+  HaifaBoutiqueHotelsRoute: typeof HaifaBoutiqueHotelsRoute
+  HaifaFamilyHotelsRoute: typeof HaifaFamilyHotelsRoute
   JerusalemDowntownHotelsRoute: typeof JerusalemDowntownHotelsRoute
   JerusalemEastJerusalemHotelsRoute: typeof JerusalemEastJerusalemHotelsRoute
   JerusalemGermanColonyBakaHotelsRoute: typeof JerusalemGermanColonyBakaHotelsRoute
@@ -557,6 +596,7 @@ export interface RootRouteChildren {
   TravelBlogBenGurionAirportToJerusalemRoute: typeof TravelBlogBenGurionAirportToJerusalemRoute
   TravelBlogBenGurionAirportToTelAvivRoute: typeof TravelBlogBenGurionAirportToTelAvivRoute
   TravelBlogBestDeadSeaHotelsRoute: typeof TravelBlogBestDeadSeaHotelsRoute
+  TravelBlogBestHotelsInHaifaRoute: typeof TravelBlogBestHotelsInHaifaRoute
   TravelBlogBestHotelsInTiberiasRoute: typeof TravelBlogBestHotelsInTiberiasRoute
   TravelBlogMasadaRoute: typeof TravelBlogMasadaRoute
   TravelBlogWhereToStayInJerusalemRoute: typeof TravelBlogWhereToStayInJerusalemRoute
@@ -657,6 +697,20 @@ declare module '@tanstack/react-router' {
       path: '/dead-sea/spa-hotels'
       fullPath: '/dead-sea/spa-hotels'
       preLoaderRoute: typeof DeadSeaSpaHotelsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/haifa/boutique-hotels': {
+      id: '/haifa/boutique-hotels'
+      path: '/haifa/boutique-hotels'
+      fullPath: '/haifa/boutique-hotels'
+      preLoaderRoute: typeof HaifaBoutiqueHotelsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/haifa/family-hotels': {
+      id: '/haifa/family-hotels'
+      path: '/haifa/family-hotels'
+      fullPath: '/haifa/family-hotels'
+      preLoaderRoute: typeof HaifaFamilyHotelsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/jerusalem/downtown-hotels': {
@@ -820,6 +874,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof TravelBlogBestDeadSeaHotelsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/travel-blog/best-hotels-in-haifa': {
+      id: '/travel-blog/best-hotels-in-haifa'
+      path: '/travel-blog/best-hotels-in-haifa'
+      fullPath: '/travel-blog/best-hotels-in-haifa'
+      preLoaderRoute: typeof TravelBlogBestHotelsInHaifaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/travel-blog/best-hotels-in-tiberias': {
       id: '/travel-blog/best-hotels-in-tiberias'
       path: '/travel-blog/best-hotels-in-tiberias'
@@ -864,6 +925,8 @@ const rootRouteChildren: RootRouteChildren = {
   AttractionsCaesareaRoute: AttractionsCaesareaRoute,
   DeadSeaFamilyHotelsRoute: DeadSeaFamilyHotelsRoute,
   DeadSeaSpaHotelsRoute: DeadSeaSpaHotelsRoute,
+  HaifaBoutiqueHotelsRoute: HaifaBoutiqueHotelsRoute,
+  HaifaFamilyHotelsRoute: HaifaFamilyHotelsRoute,
   JerusalemDowntownHotelsRoute: JerusalemDowntownHotelsRoute,
   JerusalemEastJerusalemHotelsRoute: JerusalemEastJerusalemHotelsRoute,
   JerusalemGermanColonyBakaHotelsRoute: JerusalemGermanColonyBakaHotelsRoute,
@@ -888,6 +951,7 @@ const rootRouteChildren: RootRouteChildren = {
   TravelBlogBenGurionAirportToTelAvivRoute:
     TravelBlogBenGurionAirportToTelAvivRoute,
   TravelBlogBestDeadSeaHotelsRoute: TravelBlogBestDeadSeaHotelsRoute,
+  TravelBlogBestHotelsInHaifaRoute: TravelBlogBestHotelsInHaifaRoute,
   TravelBlogBestHotelsInTiberiasRoute: TravelBlogBestHotelsInTiberiasRoute,
   TravelBlogMasadaRoute: TravelBlogMasadaRoute,
   TravelBlogWhereToStayInJerusalemRoute: TravelBlogWhereToStayInJerusalemRoute,

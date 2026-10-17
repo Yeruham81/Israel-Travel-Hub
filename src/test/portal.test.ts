@@ -16,7 +16,7 @@ describe("portal navigation", () => {
   });
   it("sidebar includes one-click hotel guides for every destination covered", () => {
     const hotels = allNavGroups.find((g) => g.title === "Popular hotels")!.items.map((i) => i.label);
-    expect(hotels).toEqual(["Hotels in Jerusalem", "Hotels in Tel Aviv", "Hotels in Tiberias", "Dead Sea hotels"]);
+    expect(hotels).toEqual(["Hotels in Jerusalem", "Hotels in Tel Aviv", "Hotels in Tiberias", "Hotels in Haifa", "Dead Sea hotels"]);
   });
 });
 

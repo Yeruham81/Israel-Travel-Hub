@@ -1,10 +1,10 @@
 import { ArrowRight, ExternalLink } from "lucide-react";
 import { Link, type LinkProps } from "@tanstack/react-router";
 import type { HotelCategoryGuide, StayGuidePhoto } from "@/data/content";
-import { deadSeaHotelRecommendations, tiberiasHotelRecommendations, providerLinks, type ResortHotelFacts, type ProviderLink } from "@/data/registry";
+import { deadSeaHotelRecommendations, tiberiasHotelRecommendations, haifaHotelRecommendations, providerLinks, type ResortHotelFacts, type ProviderLink } from "@/data/registry";
 import { recordOutboundClick, relFor } from "@/lib/outbound";
 
-const resortHotels = [...deadSeaHotelRecommendations, ...tiberiasHotelRecommendations];
+const resortHotels = [...deadSeaHotelRecommendations, ...tiberiasHotelRecommendations, ...haifaHotelRecommendations];
 export const resortHotel = (id: string) => resortHotels.find((hotel) => hotel.id === id)!;
 export const hotelBooking = (id: string) => providerLinks.find((link) => link.id === `hotel-${id}-expedia`);
 

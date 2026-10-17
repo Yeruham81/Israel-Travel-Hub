@@ -6,7 +6,7 @@ export const Route = createFileRoute("/destinations")({
   head: () =>
     pageMeta({
       title: "Israel destinations: cities, Galilee & Dead Sea — Israel Taxi & Travel",
-      description: "Plan by destination: hotels, transport, tours and attractions for Jerusalem, Tel Aviv, Tiberias, the Sea of Galilee and Israel's Dead Sea shore.",
+      description: "Plan by destination: hotels, transport, tours and attractions for Jerusalem, Tel Aviv, Haifa, Tiberias, the Sea of Galilee and Israel's Dead Sea shore.",
       path: "/destinations/",
       crumbs: [{ name: "Home", path: "/" }, { name: "Destinations", path: "/destinations/" }],
     }),
@@ -43,6 +43,18 @@ const dests: { name: string; text: string; links: L[] }[] = [
       { label: "Airport to Tel Aviv", to: "/travel-blog/ben-gurion-airport-to-tel-aviv/" },
       { label: "Caesarea on the coast", to: "/attractions/caesarea/" },
       { label: "Car rental", to: "/car-rental/" },
+    ],
+  },
+  {
+    name: "Haifa & Mount Carmel",
+    text: "Compare German Colony boutique stays, Carmel views and beachfront family hotels, with connections to shore excursions and northern day trips.",
+    links: [
+      { label: "All Haifa hotels", to: "/travel-blog/best-hotels-in-haifa/" },
+      { label: "Haifa boutique hotels", to: "/haifa/boutique-hotels/" },
+      { label: "Haifa family hotels", to: "/haifa/family-hotels/" },
+      { label: "Shore excursions from Haifa Port", to: "/haifa-shore-excursions/" },
+      { label: "Transfers & private transport", to: "/transfers/" },
+      { label: "Tours & day trips", to: "/tours/" },
     ],
   },
   {

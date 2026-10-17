@@ -95,6 +95,7 @@ export const JERUSALEM_STAY_REVIEW_DATE: ISODate = "2026-10-17";
 export const TELAVIV_STAY_REVIEW_DATE: ISODate = "2026-10-17";
 export const DEAD_SEA_STAY_REVIEW_DATE: ISODate = "2026-10-17";
 export const TIBERIAS_STAY_REVIEW_DATE: ISODate = "2026-10-17";
+export const HAIFA_STAY_REVIEW_DATE: ISODate = "2026-10-17";
 export const OWNER_BASE = "https://www.israel-taxi.com";
 
 const jerusalemHotelSources: SourceReference[] = [
@@ -176,11 +177,46 @@ const tiberiasHotelSources: SourceReference[] = [
     : "Identity, location and relevant facilities or policies checked against primary operator information. Reconfirm operation, guest and facility age limits, seasonal pools, beach arrangements and the exact meal plan for your dates. No live rates or availability are supplied.",
 }));
 
+const haifaHotelSources: SourceReference[] = [
+  ["botanica", "Hotel Botanica — Leonardo Hotels", "https://www.leonardo-hotels.com/haifa/hotel-botanica-haifa"],
+  ["dan-carmel", "Dan Carmel Haifa — Dan Hotels", "https://www.danhotels.com/HaifaHotels/DanCarmelHaifaHotel"],
+  ["schumacher", "The Schumacher Hotel", "https://www.theschumacher.co.il/"],
+  ["colony", "The Colony Hotel Haifa", "https://colonyhaifa.com/"],
+  ["crowne-plaza", "Crowne Plaza Haifa — IHG", "https://www.ihg.com/crowneplaza/hotels/gb/en/haifa/hfayn/hoteldetail"],
+  ["leonardo-plaza", "Leonardo Plaza Haifa — operator facilities", "https://www.leonardo-hotels.com/haifa/leonardo-plaza-haifa/facilities"],
+  ["golden-crown", "Golden Crown Haifa", "https://www.goldencrown-hotels.com/hotel/golden-crown-haifa"],
+  ["nof", "Nof Hotel Haifa — Nara Hotels", "https://www.nara-hotels.com/nof"],
+  ["port-inn", "Port Inn Haifa — operator's public profile", "https://www.facebook.com/Port.Inn.Haifa/"],
+  ["loui-talpiot", "Loui Talpiot Hotel", "https://talpiotguesthouse.com/en/loui-talpiot-hotel/"],
+].map(([id, name, url]): SourceReference => ({
+  id: `hotel-haifa-${id}-official`, title: `${name} — property information`, publisher: name!, url: url!,
+  checkedAt: HAIFA_STAY_REVIEW_DATE,
+  note: id === "port-inn"
+    ? "The indexed operator public profile supports the name and downtown address only; a full current facilities page could not be retrieved. Confirm room type, bathroom, meals and arrival arrangements directly. No detailed amenities or live inventory are asserted."
+    : "Property identity, location and relevant facilities or policies checked against primary operator information. Confirm current operation, room occupancy, age restrictions, seasonal pools, meals and parking for your dates. Rates and inventory are not live.",
+}));
+
 export const sources: SourceReference[] = [
   ...jerusalemHotelSources,
   ...telAvivHotelSources,
   ...deadSeaHotelSources,
   ...tiberiasHotelSources,
+  ...haifaHotelSources,
+  {
+    id: "owner-hotels-haifa", title: "Best hotels in Haifa (original guide)", publisher: "Israel-Taxi.com",
+    url: `${OWNER_BASE}/travel-blog/best-hotels-in-haifa/`, checkedAt: HAIFA_STAY_REVIEW_DATE,
+    note: "Editorial basis for the ten-property hub, boutique and family guides. Existing publisher-owned Expedia links and selected photographs are reused. Primary operator sources supplement the original guide; old ratings, fixed price ranges and unconfirmed amenities are not repeated.",
+  },
+  {
+    id: "haifa-botanica-facilities", title: "Botanica — rooftop plunge pool and facilities", publisher: "Leonardo Hotels",
+    url: "https://www.leonardo-hotels.com/haifa/hotel-botanica-haifa/facilities", checkedAt: HAIFA_STAY_REVIEW_DATE,
+    note: "The operator describes a rooftop plunge pool, rather than a full-size swimming pool. Confirm the seasonal calendar and spa inclusions separately from the room offer.",
+  },
+  {
+    id: "haifa-dan-carmel-rooms", title: "Dan Carmel — room layouts and occupancy", publisher: "Dan Hotels",
+    url: "https://www.danhotels.com/HaifaHotels/DanCarmelHaifaHotel/Rooms", checkedAt: HAIFA_STAY_REVIEW_DATE,
+    note: "Room occupancy varies by category; some rooms accept two adults and two children, while certain executive rooms and lounge access have different restrictions. Confirm the exact room, beds and ages in your offer.",
+  },
   {
     id: "owner-hotels-deadsea", title: "Best Dead Sea Hotels (original guide)", publisher: "Israel-Taxi.com",
     url: `${OWNER_BASE}/travel-blog/best-dead-sea-hotels/`, checkedAt: DEAD_SEA_STAY_REVIEW_DATE,
@@ -474,6 +510,16 @@ export const affiliateConfig: Record<string, { trackingUrl: string } | undefined
   "hotel-tib-emily-expedia": { trackingUrl: "https://expedia.tpm.li/e19VwpLE" },
   "hotel-tib-tiberia-expedia": { trackingUrl: "https://expedia.tpm.li/KFPHkIPk" },
   "hotel-tib-hostel-expedia": { trackingUrl: "https://expedia.tpm.li/oPqpXNAU" },
+  "hotel-haifa-botanica-expedia": { trackingUrl: "https://expedia.tpm.li/2e89Wczt" },
+  "hotel-haifa-dan-carmel-expedia": { trackingUrl: "https://expedia.tpm.li/ykXaomoy" },
+  "hotel-haifa-schumacher-expedia": { trackingUrl: "https://expedia.tpm.li/B0kTGlZv" },
+  "hotel-haifa-colony-expedia": { trackingUrl: "https://expedia.tpm.li/aNh9exqi" },
+  "hotel-haifa-crowne-plaza-expedia": { trackingUrl: "https://expedia.tpm.li/3gDCII02" },
+  "hotel-haifa-leonardo-plaza-expedia": { trackingUrl: "https://expedia.tpm.li/5EteFiQA" },
+  "hotel-haifa-golden-crown-expedia": { trackingUrl: "https://expedia.tpm.li/vNAvMtwB" },
+  "hotel-haifa-nof-expedia": { trackingUrl: "https://expedia.tpm.li/29IRgC8m" },
+  "hotel-haifa-port-inn-expedia": { trackingUrl: "https://expedia.tpm.li/wYvcNQoB" },
+  "hotel-haifa-loui-talpiot-expedia": { trackingUrl: "https://expedia.tpm.li/p7P9zxsX" },
 };
 
 export interface ResortHotelFacts {
@@ -487,7 +533,7 @@ export interface ResortHotelFacts {
 
 export interface HotelRecommendation {
   id: string;
-  cityId: "jerusalem" | "telaviv" | "tiberias" | "deadsea";
+  cityId: "jerusalem" | "telaviv" | "tiberias" | "deadsea" | "haifa";
   areaId: string;
   name: string;
   style: string;
@@ -650,6 +696,79 @@ export const tiberiasHotelRecommendations: (HotelRecommendation & { resortFacts:
     bestFor: "Independent travelers prioritizing a central base, shared facilities and flexible self-catering.",
     watch: "Check private versus shared room and bathroom, reception hours and late-arrival arrangements. Do not assume every room is en suite or that reception operates around the clock.", sourceId: "hotel-tib-hostel-official",
     resortFacts: { location: "Central town, between the bus station and lake", beach: "Walk to the waterfront; no private beach", spa: "Hostel facilities, not a spa resort", agePolicy: "Check dorm and private-room policies for your party", children: "Private-room capacity and suitability need confirmation", meals: "Shared kitchen; do not assume a meal package" },
+  },
+];
+
+export const haifaHotelRecommendations: (HotelRecommendation & { resortFacts: ResortHotelFacts })[] = [
+  {
+    id: "haifa-botanica", cityId: "haifa", areaId: "haifa", name: "Hotel Botanica Haifa", style: "Design-led luxury hotel · operator lists 16+",
+    summary: "A contemporary hotel beside the lower Bahá'í Gardens in the German Colony, with a botanical design theme, spa and seasonal rooftop plunge pool. It is an age-restricted city stay, rather than a family swimming resort.",
+    bestFor: "Couples and eligible older guests seeking design, dining and a German Colony base.",
+    watch: "Confirm the minimum guest age for your party, your room's outlook and spa inclusions. The rooftop plunge pool is for a dip and relaxation, not a full-size swimming pool; check seasonal operation.", sourceId: "hotel-haifa-botanica-official",
+    resortFacts: { location: "German Colony, beside the lower Bahá'í Gardens", beach: "City location; transport needed for a beach day", spa: "Spa and seasonal rooftop plunge pool; confirm inclusions", agePolicy: "Operator describes guests aged 16+; reconfirm eligibility", children: "Not a young-family hotel; age-restricted admission", meals: "Check breakfast and any other dining inclusions" },
+  },
+  {
+    id: "haifa-dan-carmel", cityId: "haifa", areaId: "haifa", name: "Dan Carmel Haifa", style: "Classic luxury hotel on Mount Carmel",
+    summary: "A substantial hilltop hotel by the Louis Promenade, with gardens, an outdoor pool and a separate children's pool. Choose it for the Carmel setting and hotel facilities; a panoramic bay view does not put the beach beside the hotel.",
+    bestFor: "Couples and families who want an upscale Carmel base and time at the hotel between outings.",
+    watch: "Room occupancy differs by category. Confirm beds for every child, pool operation, your exact view, meals and paid parking. Some executive rooms and lounge access have additional age restrictions.", sourceId: "hotel-haifa-dan-carmel-official",
+    resortFacts: { location: "Carmel Center, by the Louis Promenade", beach: "Hilltop location; separate journey to the shore", spa: "Outdoor pool, children's pool and wellness facilities; check operation", agePolicy: "Family hotel; certain room floors and lounge access have separate rules", children: "Separate children's pool; selected rooms accommodate families", meals: "Compare the specific breakfast or other board offer" },
+  },
+  {
+    id: "haifa-schumacher", cityId: "haifa", areaId: "haifa", name: "The Schumacher Hotel", style: "Adults-only heritage boutique hotel",
+    summary: "A preserved Templer building and a newer wing in the German Colony, with design-focused rooms, a garden and rooftop sun terrace. The hotel's own site describes it as adults-only.",
+    bestFor: "Couples and independent adults prioritizing historic character and a neighborhood hotel.",
+    watch: "Confirm the precise minimum age, building, room layout and any steps. Check where breakfast is served, treatment bookings and parking arrangements rather than assuming full-service resort facilities.", sourceId: "hotel-haifa-schumacher-official",
+    resortFacts: { location: "German Colony, on Lohamei HaGeta'ot Street", beach: "Urban neighborhood base; not a beachfront hotel", spa: "Treatment room and rooftop sun terrace; confirm services", agePolicy: "Operator's own site says adults-only; confirm minimum age", children: "Excluded from the young-family shortlist", meals: "Check breakfast inclusion and where it is served" },
+  },
+  {
+    id: "haifa-colony", cityId: "haifa", areaId: "haifa", name: "The Colony Hotel Haifa", style: "Historic boutique hotel on Ben Gurion Boulevard",
+    summary: "A preserved historic building in the German Colony, directly on Ben Gurion Boulevard below the Bahá'í Gardens. It suits a city stay built around the neighborhood's architecture, cafés and restaurants.",
+    bestFor: "Couples and city-break visitors who want a heritage hotel on the main German Colony boulevard.",
+    watch: "Compare room categories, outlook and possible boulevard noise. Confirm accessibility, spa-treatment arrangements, breakfast, room occupancy and parking for the selected offer.", sourceId: "hotel-haifa-colony-official",
+    resortFacts: { location: "Ben Gurion Boulevard, German Colony", beach: "Boulevard setting; separate trip to a swimming beach", spa: "Rooftop terrace and spa services; check access and extras", agePolicy: "Confirm guest and treatment policies for your party", children: "Check the selected room's capacity and beds directly", meals: "Check breakfast and any package inclusions" },
+  },
+  {
+    id: "haifa-crowne-plaza", cityId: "haifa", areaId: "haifa", name: "Crowne Plaza Haifa", style: "Carmel hotel with a heated indoor pool",
+    summary: "A hotel on Yefe Nof Street near Carmel Center, with a heated indoor pool and health-club facilities. It is a family comparison for visitors who want a hilltop city base and an indoor swimming option.",
+    bestFor: "Families and couples prioritizing Carmel Center and indoor-pool facilities over immediate beach access.",
+    watch: "Confirm children's pool-access rules and the exact room or extra-bed arrangement. Check any meal promotions against their terms; do not assume a children's club or play program is included.", sourceId: "hotel-haifa-crowne-plaza-official",
+    resortFacts: { location: "Yefe Nof Street, near Carmel Center", beach: "Hilltop base; arrange transport to the beach", spa: "Heated indoor pool and health club; check facility ages", agePolicy: "Families accepted; minimum check-in age and facility ages differ", children: "Indoor pool; confirm child access and room occupancy", meals: "Check the actual rate; children's dining offers have conditions" },
+  },
+  {
+    id: "haifa-leonardo-plaza", cityId: "haifa", areaId: "haifa", name: "Leonardo Plaza Haifa", style: "Beachfront hotel with family suites",
+    summary: "A hotel on Haifa's southern beachfront, with access to the beach from the pool area. The operator lists a pool covered and heated in colder seasons, children's pools and a children's club with a date-dependent schedule.",
+    bestFor: "Families who want the promenade, beach and swimming facilities to be a central part of the holiday.",
+    watch: "Confirm the suite layout, balcony or sea view, pool operation and children's club dates. The operator lists club activity on weekends, holidays and in July–August, rather than every day all year.", sourceId: "hotel-haifa-leonardo-plaza-official",
+    resortFacts: { location: "Southern beachfront, by the beach promenade", beach: "Beach access from the pool area; confirm current swimming arrangements", spa: "Main pool covered and heated in colder seasons; confirm operation", agePolicy: "Family hotel; pool and club rules need age-specific confirmation", children: "Children's pools; club on weekends, holidays and July–August", meals: "Compare breakfast and any other board basis in the offer" },
+  },
+  {
+    id: "haifa-golden-crown", cityId: "haifa", areaId: "haifa", name: "Golden Crown Haifa", style: "Modern lower-city hotel near the German Colony",
+    summary: "A city hotel on Derech Yafo near the German Colony and lower town, useful for restaurants, business and time around the port district. Compare it as a practical urban base rather than a beach resort.",
+    bestFor: "Couples, independent visitors and business travelers prioritizing a lower-city location.",
+    watch: "Confirm your room's outlook, occupancy, breakfast and parking availability. Check the exact route to your station, port entrance or meeting; being near the port does not establish terminal access.", sourceId: "hotel-haifa-golden-crown-official",
+    resortFacts: { location: "Derech Yafo, near the German Colony and lower city", beach: "Port-district location; not a swimming-beach hotel", spa: "Gym advertised; no resort-spa or pool package assumed", agePolicy: "Confirm the selected room's guest policy", children: "Check room capacity; no children's resort program assumed", meals: "Breakfast offered; verify inclusion in the selected rate" },
+  },
+  {
+    id: "haifa-nof", cityId: "haifa", areaId: "haifa", name: "Nof Hotel (Haifa Bay View)", style: "Carmel hotel overlooking Haifa Bay",
+    summary: "The hotel listed as Haifa Bay View in the original guide is now presented by Nara Hotels as Nof Hotel. Its Carmel location and bay outlook suit an urban sightseeing base, rather than a stay beside a swimming beach.",
+    bestFor: "Visitors comparing a Carmel address and bay views with larger full-service hotels.",
+    watch: "The booking site may retain the Bay View name. Confirm the property at 101 Hanassi Avenue, the room, meals and parking, and ask directly about any leisure facility essential to your stay.", sourceId: "hotel-haifa-nof-official",
+    resortFacts: { location: "101 Hanassi Avenue, Carmel Center", beach: "Bay outlook from the hill; separate journey to the beach", spa: "Gym advertised; confirm any other required leisure facilities", agePolicy: "Confirm room and facility policies for your party", children: "Check the exact room's occupancy and sleeping arrangements", meals: "Check breakfast or dining inclusions in the selected rate" },
+  },
+  {
+    id: "haifa-port-inn", cityId: "haifa", areaId: "haifa", name: "Port Inn Haifa", style: "Downtown guesthouse · confirm the room format",
+    summary: "A smaller downtown accommodation option on Derech Yafo from the original guide. Compare its exact room and total with conventional hotels, checking private versus shared facilities and the arrival arrangements directly.",
+    bestFor: "Independent visitors seeking a lower-city base and willing to verify the room's essential details.",
+    watch: "Current primary information is limited to the operator's indexed public profile. Confirm bathroom, room capacity, meals, accessibility and late arrival; detailed facilities and a permanently low price are not assumed.", sourceId: "hotel-haifa-port-inn-official",
+    resortFacts: { location: "34 Derech Yafo, lower city", beach: "Downtown base; arrange beach visits separately", spa: "No resort-spa or pool facilities assumed", agePolicy: "Confirm the chosen room's guest policy directly", children: "Confirm capacity and room suitability with the property", meals: "Confirm whether any meals or kitchen access are included" },
+  },
+  {
+    id: "haifa-loui-talpiot", cityId: "haifa", areaId: "haifa", name: "Loui Talpiot Hotel", style: "Market-neighborhood stay with kitchenettes",
+    summary: "An independent hotel by Talpiot Market in Hadar, with simple rooms, kitchenettes and shared courtyard and rooftop spaces. Its cultural events and market surroundings suit visitors who want the neighborhood to be part of the stay.",
+    bestFor: "Market and food enthusiasts, independent travelers and guests who value simple self-catering.",
+    watch: "Confirm the exact kitchenette equipment, beds, steps and arrival procedure. Ask about rooftop events and room noise for your dates, and check the route between Hadar, downtown and the Carmel.", sourceId: "hotel-haifa-loui-talpiot-official",
+    resortFacts: { location: "HaHalutz Street, Talpiot Market / Hadar", beach: "Hillside urban neighborhood; separate trip to the shore", spa: "Courtyard and rooftop setting; no resort-spa package assumed", agePolicy: "Check room occupancy and policies for your party", children: "Operator lists family layouts; confirm the actual beds", meals: "Room kitchenettes; confirm equipment and any meal inclusions" },
   },
 ];
 
@@ -824,6 +943,7 @@ export const hotelRecommendations: HotelRecommendation[] = [
   },
   ...deadSeaHotelRecommendations,
   ...tiberiasHotelRecommendations,
+  ...haifaHotelRecommendations,
 ];
 
 export const hotelsForArea = (areaId: string, cityId?: HotelRecommendation["cityId"]) => hotelRecommendations.filter((hotel) => hotel.areaId === areaId && (!cityId || hotel.cityId === cityId));
@@ -1005,7 +1125,7 @@ export const providerLinks: ProviderLink[] = [
     const trackingUrl = affiliateConfig[id]?.trackingUrl;
     const officialUrl = sources.find((source) => source.id === hotel.sourceId)!.url;
     return {
-      id, pageIds: [hotel.cityId === "deadsea" || hotel.cityId === "tiberias" ? `stay-${hotel.cityId}` : `stay-area-${hotel.areaId}`], providerName: trackingUrl ? "Expedia" : hotel.name,
+      id, pageIds: [hotel.cityId === "deadsea" || hotel.cityId === "tiberias" || hotel.cityId === "haifa" ? `stay-${hotel.cityId}` : `stay-area-${hotel.areaId}`], providerName: trackingUrl ? "Expedia" : hotel.name,
       relationship: trackingUrl ? "booking_platform" : "official", ...(trackingUrl ? { partnerId: "expedia" } : {}), mode: "provider_redirect",
       title: hotel.name, summary: hotel.summary, ctaLabel: trackingUrl ? "Check rooms on Expedia" : "Visit the hotel's website",
       url: trackingUrl || officialUrl, isAffiliate: Boolean(trackingUrl), sourceId: hotel.sourceId,
@@ -1152,8 +1272,9 @@ export const providerLinks: ProviderLink[] = [
     ["jerusalem", "Jerusalem", "https://www.booking.com/city/il/jerusalem.html"],
     ["telaviv", "Tel Aviv", "https://www.booking.com/city/il/tel-aviv.html"],
     ["tiberias", "Tiberias", "https://www.booking.com/city/il/tiberias.html"],
+    ["haifa", "Haifa", "https://www.booking.com/city/il/haifa.html"],
   ] as const).map(([id, city, url]): ProviderLink => ({
-    id: `hotels-${id}-booking`, pageIds: id === "tiberias" ? ["stay-tiberias", "stay-tiberias-browse"] : [`stay-${id}`], providerName: "Booking.com", relationship: "booking_platform", partnerId: "booking", mode: "provider_redirect",
+    id: `hotels-${id}-booking`, pageIds: id === "haifa" ? ["stay-haifa", "stay-haifa-browse", "stay-haifa-family-browse", "stay-haifa-boutique-browse"] : id === "tiberias" ? ["stay-tiberias", "stay-tiberias-browse"] : [`stay-${id}`], providerName: "Booking.com", relationship: "booking_platform", partnerId: "booking", mode: "provider_redirect",
     title: `Browse places to stay in ${city}`, summary: `Booking.com's ${city} city page. Enter your dates and guests there to see current properties and prices.`,
     ctaLabel: "Check prices on Booking.com", url, isAffiliate: false,
     reentryNote: "Dates and preferences chosen here are not passed on. Enter them on Booking.com.",
