@@ -56,8 +56,9 @@ describe("Haifa accommodation: location and travel intent before booking", () =>
     const cards = screen.getAllByTestId("stay-category-card");
     expect(cards).toHaveLength(2);
     for (const guide of categories) expect(cards.find((card) => card.getAttribute("href") === guide.path)!.querySelector("img")).toHaveAttribute("src", guide.photo.src);
-    const map = new URL(container.querySelector("#location iframe")!.getAttribute("src")!);
-    expect(map.hostname).toBe("www.openstreetmap.org");
+    const map = new URL(container.querySelector("#location iframe")!.getAttribute("src")!, "https://example.test");
+    expect(map.pathname).toBe("/maps/area.html");
+    expect(map.searchParams.get("lang")).toBe("en");
     expect(map.searchParams.get("marker")).toBe(`${destination.map.lat},${destination.map.lon}`);
     expect(container.querySelector("#location")!.compareDocumentPosition(container.querySelector("#book")!)).toBe(Node.DOCUMENT_POSITION_FOLLOWING);
     expect(screen.getByRole("link", { name: /Shore excursions from Haifa Port/ })).toHaveAttribute("href", "/haifa-shore-excursions/");

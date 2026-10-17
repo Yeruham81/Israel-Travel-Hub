@@ -58,7 +58,7 @@ describe("Dead Sea destination → travel intent → booking", () => {
       expect(within(card).getByRole("heading", { name: guide.shortTitle })).toBeInTheDocument();
     }
     const map = container.querySelector("#location iframe")!;
-    expect(new URL(map.getAttribute("src")!).hostname).toBe("www.openstreetmap.org");
+    expect(new URL(map.getAttribute("src")!, "https://example.test").pathname).toBe("/maps/area.html");
     expect(container.querySelector("#location")!.compareDocumentPosition(container.querySelector("#book")!)).toBe(Node.DOCUMENT_POSITION_FOLLOWING);
     expect(container.querySelectorAll("main")).toHaveLength(1);
     for (const hotel of deadSeaHotelRecommendations) expect(container.querySelectorAll(`#hotel-${hotel.id}`)).toHaveLength(1);

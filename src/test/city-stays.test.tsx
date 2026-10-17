@@ -39,7 +39,8 @@ describe.each([
       expect(card).toBeDefined();
       expect(card.querySelector("img")?.getAttribute("src")).toBe(area.photo.src);
       const map = card.querySelector("iframe")!;
-      expect(new URL(map.src).hostname).toBe("www.openstreetmap.org");
+      expect(new URL(map.src).pathname).toBe("/maps/area.html");
+      expect(new URL(map.src).searchParams.get("lang")).toBe("en");
       expect(new URL(map.src).searchParams.get("marker")).toBe(`${area.map.lat},${area.map.lon}`);
       expect(map.title).toContain(area.name);
       expect(within(card).getByRole("link", { name: `Read the ${area.name} guide and hotel recommendations` })).toHaveAttribute("href", area.path);
