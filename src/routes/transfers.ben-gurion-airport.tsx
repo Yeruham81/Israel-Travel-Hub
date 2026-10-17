@@ -3,10 +3,10 @@ import { useEffect, useState } from "react";
 import { Baby, CarFront, Clock3, Handshake, Luggage, PlaneLanding } from "lucide-react";
 import { FaqList, HubHeader } from "@/components/Guide";
 import { TransferQuoteForm } from "@/components/TransferQuoteForm";
+import { AirportDestinationCard as DestinationCard } from "@/components/AirportDestinationCard";
 import { StayPhotoCredits } from "@/components/StayGuideParts";
 import { airportDestinationCards, airportTransferPhotos, airportTransferBenefits, airportTransferTips, airportTransferFaqs, airportRelatedLinks } from "@/data/airportTransfers";
-import { AIRPORT_TRANSFER_CHECK_DATE, formatCheckDate, getSource, linksForPage, type AirportTransferRate } from "@/data/registry";
-import type { StayGuidePhoto } from "@/data/content";
+import { AIRPORT_TRANSFER_CHECK_DATE, formatCheckDate, getSource, linksForPage } from "@/data/registry";
 import { recordOutboundClick, relFor } from "@/lib/outbound";
 import { pageMeta } from "@/lib/site";
 
@@ -23,18 +23,6 @@ export const Route = createFileRoute("/transfers/ben-gurion-airport")({
   }),
   component: Airport,
 });
-
-function DestinationCard({ id, destination, price, photo, onChoose }: {
-  id: string; destination: string; price?: AirportTransferRate["price"]; photo: StayGuidePhoto; onChoose: (id: string) => void;
-}) {
-  return <a href="#request-quote" onClick={() => onChoose(id)} className="group flex h-full flex-col overflow-hidden rounded-2xl border bg-card transition-colors hover:border-primary focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary" data-testid="airport-destination-card" data-destination={id}>
-    <img src={photo.src} alt={photo.alt} width={360} height={240} loading="lazy" decoding="async" className="aspect-[3/2] w-full object-cover" />
-    <div className="flex flex-1 flex-col p-3 sm:p-5"><p className="text-[0.65rem] font-semibold uppercase tracking-wide text-muted-foreground">Ben Gurion Airport to</p><h3 className="mt-1 min-h-12 text-xl leading-tight sm:text-2xl">{destination}</h3>
-      <div className="mt-3 flex-1">{price ? <><p className="text-xs text-muted-foreground">From</p><p className="text-2xl font-semibold tabular-nums"><span className="text-sm font-medium">ILS </span>{price.amount.toLocaleString("en-US")}</p><p className="mt-1 text-xs text-muted-foreground">Per vehicle · up to 4</p></> : <p className="text-lg font-semibold">Ask for a quote</p>}</div>
-      <span className="mt-4 rounded-lg bg-secondary px-2 py-2 text-center text-sm font-semibold text-primary group-hover:bg-primary group-hover:text-primary-foreground">Request a quote</span>
-    </div>
-  </a>;
-}
 
 const benefitIcons = [Handshake, PlaneLanding, CarFront, Luggage, Baby, Clock3];
 const bannerStyles: Record<string, string> = {
@@ -62,7 +50,7 @@ function Airport() {
 
     <section id="popular-destinations" aria-labelledby="popular-h" className="mt-10">
       <p className="eyebrow">Your first stop in Israel</p><h2 id="popular-h" className="mt-2 text-3xl">Popular private transfers</h2>
-      <p className="mt-3 text-muted-foreground">Choose your destination to start a personal quote request.</p>
+      <p className="mt-3 text-muted-foreground">Explore the route details or request a personal quote for your destination.</p>
       <div className="mt-6 grid grid-cols-2 gap-3 sm:gap-5 xl:grid-cols-4">{airportDestinationCards.filter((card) => card.popular).map((card) => <DestinationCard key={card.id} id={card.id} destination={card.destination} price={card.price} photo={card.photo} onChoose={choose} />)}</div>
     </section>
     <section id="more-destinations" aria-labelledby="more-h" className="mt-10">

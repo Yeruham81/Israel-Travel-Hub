@@ -71,7 +71,7 @@ const services: Service[] = [
     cards: [
       { label: "Ben Gurion Airport", text: "Private pickups, destinations & starting prices", to: "/transfers/ben-gurion-airport/", img: IMG.t3 },
       { label: "Private driver", text: "Intercity journeys & a driver for the day", to: "/private-driver/", img: { src: roadTrip, alt: "Illustrative vehicle on an open desert road" } },
-      { label: "Airport to Jerusalem guide", text: "Plan your arrival in Jerusalem", to: "/travel-blog/ben-gurion-airport-to-jerusalem/", img: IMG.jerusalem },
+      { label: "Private transfer to Jerusalem", text: "Hotel drop-off advice & a personal quote", to: "/travel-blog/ben-gurion-airport-to-jerusalem/", img: IMG.jerusalem },
     ],
     hub: { label: "Explore airport transfers", to: "/transfers/" },
   },

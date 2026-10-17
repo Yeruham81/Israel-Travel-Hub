@@ -133,6 +133,15 @@ export const airportTransferContact = {
   deliveryMode: "email_draft" as const,
 };
 
+/** Only these four airport destinations have individual transfer guides. */
+export const airportTransferRoutes = [
+  { id: "jerusalem", path: "/travel-blog/ben-gurion-airport-to-jerusalem/", sourceId: "owner-route-guide", driveTime: "45–60+ minutes" },
+  { id: "tel-aviv", path: "/travel-blog/ben-gurion-airport-to-tel-aviv/", sourceId: "owner-airport-tel-aviv", driveTime: "20–40+ minutes" },
+  { id: "haifa", path: "/travel-blog/ben-gurion-airport-to-haifa/", sourceId: "owner-airport-haifa", driveTime: "75–110+ minutes" },
+  { id: "dead-sea", path: "/travel-blog/ben-gurion-airport-to-ein-bokek/", sourceId: "owner-airport-ein-bokek", driveTime: "1 hr 45 min–2 hr 30 min+" },
+] as const;
+export type AirportTransferRouteId = typeof airportTransferRoutes[number]["id"];
+
 const jerusalemHotelSources: SourceReference[] = [
   ["herbert-samuel", "Herbert Samuel Jerusalem", "https://herbertsamuel.com/en/herbert-samuel-jerusalem-hotel/"],
   ["arthur", "Arthur Hotel — Atlas Hotels", "https://www.atlas.co.il/en/our-hotels/hotels-in-jerusalem/arthur-hotel-jerusalem/"],
@@ -232,6 +241,11 @@ const haifaHotelSources: SourceReference[] = [
 }));
 
 export const sources: SourceReference[] = [
+  ...airportTransferRoutes.filter((route) => route.id !== "jerusalem").map((route): SourceReference => ({
+    id: route.sourceId, title: `Ben Gurion Airport to ${route.id === "dead-sea" ? "Ein Bokek" : route.id === "tel-aviv" ? "Tel Aviv" : "Haifa"} — original guide`,
+    publisher: "Israel-Taxi.com (Moshe Barak)", url: `${OWNER_BASE}${route.path}`, checkedAt: AIRPORT_TRANSFER_CHECK_DATE,
+    note: "Moshe Barak's original route guide provides local planning context and approximate driving time. Road time starts after pickup and excludes airport formalities. It is a planning estimate; current traffic, the exact address and road conditions can change the journey.",
+  })),
   ...jerusalemHotelSources,
   ...telAvivHotelSources,
   ...deadSeaHotelSources,
@@ -345,8 +359,8 @@ export const sources: SourceReference[] = [
     title: "Ben Gurion Airport to Jerusalem (existing guide)",
     publisher: "Israel-Taxi.com",
     url: `${OWNER_BASE}/travel-blog/ben-gurion-airport-to-jerusalem/`,
-    checkedAt: null,
-    note: "Local editorial context only; not used for regulated fares or availability.",
+    checkedAt: AIRPORT_TRANSFER_CHECK_DATE,
+    note: "Moshe Barak's original Jerusalem guide gives local planning context and an approximate 45–60+ minute drive after pickup. Airport formalities are additional; the final Jerusalem address and road traffic can extend the journey. The estimate is not a live traffic forecast.",
   },
   {
     id: "owner-stay-jerusalem",

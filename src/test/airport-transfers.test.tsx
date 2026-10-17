@@ -15,6 +15,10 @@ async function renderAirport() {
   const Airport = AirportRoute.options.component!;
   return { ...render(<RouterContextProvider router={router}><Airport /></RouterContextProvider>), router };
 }
+function chooseDestination(id: string) {
+  const card = screen.getAllByTestId("airport-destination-card").find((item) => item.dataset["destination"] === id)!;
+  fireEvent.click(within(card).getByRole("link", { name: "Request a quote" }));
+}
 function fillRequest() {
   fireEvent.change(screen.getByLabelText("Full name *"), { target: { value: "Jamie Smith" } });
   fireEvent.change(screen.getByLabelText("Email address *"), { target: { value: "jamie+trip@example.com" } });
@@ -38,7 +42,7 @@ describe("private Ben Gurion transfers", () => {
       expect(rate.price).toMatchObject({ kind: "published_starting_rate", currency: "ILS", basis: "per_vehicle", maxPartySize: 4, sourceId: "moshe-airport-transfers" });
       const card = container.querySelector(`[data-destination="${rate.id}"]`)!;
       expect(within(card as HTMLElement).getByRole("img").getAttribute("alt")).toBeTruthy();
-      expect(card).toHaveAttribute("href", "#request-quote");
+      expect(within(card as HTMLElement).getByRole("link", { name: "Request a quote" })).toHaveAttribute("href", "#request-quote");
       expect(card).toHaveTextContent(rate.price.amount.toLocaleString("en-US"));
     }
     expect(screen.getByTestId("airport-rate-terms")).toHaveTextContent(/weekday.*up to four.*Night, weekend and holiday/s);
@@ -61,11 +65,11 @@ describe("private Ben Gurion transfers", () => {
 
   it("selects the clicked destination in the form and handles groups and other addresses", async () => {
     const { container } = await renderAirport();
-    fireEvent.click(container.querySelector('[data-destination="jerusalem"]')!);
+    chooseDestination("jerusalem");
     expect(screen.getByLabelText("Destination *")).toHaveValue("jerusalem");
     fireEvent.change(screen.getByLabelText("Passengers, including children *"), { target: { value: "6" } });
     expect(screen.getByText(/published car starting prices do not apply/)).toBeInTheDocument();
-    fireEvent.click(container.querySelector('[data-destination="other"]')!);
+    chooseDestination("other");
     expect(screen.getByLabelText("City or destination *")).toBeRequired();
     expect(screen.getByLabelText("Destination *")).toHaveValue("other");
   });
@@ -75,7 +79,7 @@ describe("private Ben Gurion transfers", () => {
     fireEvent.click(screen.getByRole("button", { name: "Prepare my quote request" }));
     expect(screen.getByRole("alert")).toHaveTextContent("Enter your full name");
     expect(screen.queryByRole("link", { name: "Open email to Moshe" })).not.toBeInTheDocument();
-    fireEvent.click(container.querySelector('[data-destination="jerusalem"]')!);
+    chooseDestination("jerusalem");
     fillRequest();
     const fetchSpy = vi.spyOn(globalThis, "fetch");
     fireEvent.click(screen.getByRole("button", { name: "Prepare my quote request" }));
@@ -98,7 +102,7 @@ describe("private Ben Gurion transfers", () => {
   it("retains a usable online-form alternative and copy fallback for email clients", async () => {
     const { container } = await renderAirport();
     expect(screen.getByRole("link", { name: /Use Moshe's existing contact form/ })).toHaveAttribute("href", "https://www.israel-taxi.com/airport-transfers/#contact-me");
-    fireEvent.click(container.querySelector('[data-destination="tel-aviv"]')!);
+    chooseDestination("tel-aviv");
     fillRequest(); fireEvent.click(screen.getByRole("button", { name: "Prepare my quote request" }));
     fireEvent.click(screen.getByRole("button", { name: "Copy request" }));
     expect(await screen.findByText(/Select and copy the request text/)).toBeInTheDocument();

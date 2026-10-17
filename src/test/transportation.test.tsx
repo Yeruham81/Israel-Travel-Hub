@@ -8,7 +8,7 @@ import { Route as AirportRoute } from "@/routes/transfers.ben-gurion-airport";
 import { Route as DriverRoute } from "@/routes/private-driver";
 import { Route as JerusalemRoute } from "@/routes/travel-blog.ben-gurion-airport-to-jerusalem";
 import { Route as TelAvivRoute } from "@/routes/travel-blog.ben-gurion-airport-to-tel-aviv";
-import { airportTransferRates, linksForPage } from "@/data/registry";
+import { airportTransferRates, airportTransferRoutes, linksForPage } from "@/data/registry";
 import { routeTree } from "@/routeTree.gen";
 
 afterEach(cleanup);
@@ -27,27 +27,31 @@ describe("airport transfers and private driver separation", () => {
     expect(screen.queryByTestId("provider-card")).not.toBeInTheDocument();
     expect(screen.getAllByTestId("airport-hub-destination")).toHaveLength(4);
     const quoteLinks = [...container.querySelectorAll('a[href*="?destination="]')];
-    expect(quoteLinks).toHaveLength(12);
-    for (const rate of airportTransferRates) {
+    expect(quoteLinks).toHaveLength(8);
+    for (const rate of airportTransferRates.filter((item) => !item.popular)) {
       const link = quoteLinks.find((item) => new URL(item.getAttribute("href")!, "https://example.test").searchParams.get("destination") === rate.id)!;
       expect(link).toHaveTextContent(rate.destination);
       expect(link).toHaveTextContent(rate.price.amount.toLocaleString("en-US"));
       expect(new URL(link.getAttribute("href")!, "https://example.test")).toMatchObject({ pathname: "/transfers/ben-gurion-airport/", hash: "#request-quote" });
+    }
+    for (const route of airportTransferRoutes) {
+      const card = screen.getAllByTestId("airport-hub-destination").find((item) => item.dataset["destination"] === route.id)!;
+      expect(within(card).getByRole("link", { name: /View transfer details/ })).toHaveAttribute("href", route.path);
+      expect(within(card).getByRole("link", { name: "Request a quote" })).toHaveAttribute("href", `${route.path}#request-quote`);
     }
     expect(screen.getByTestId("airport-hub-rate-terms")).toHaveTextContent(/weekday.*4 passengers.*supplements.*24 hours/s);
     const head = await TransfersRoute.options.head?.({} as never);
     expect(head).toMatchObject({ meta: expect.arrayContaining([{ name: "robots", content: "noindex,nofollow" }, { title: expect.stringContaining("Airport transfers") }]), links: [{ rel: "canonical", href: expect.stringMatching(/\/transfers\/$/) }] });
   });
 
-  it("preselects a destination from a hub link and updates it on same-page navigation without clearing contact details", async () => {
+  it("preselects a remaining destination from a hub link and updates it on same-page navigation without clearing contact details", async () => {
     const hub = await renderPage("/transfers/", TransfersRoute.options.component!);
-    const haifa = screen.getAllByTestId("airport-hub-destination").find((card) => within(card).getByRole("heading").textContent === "Haifa")!;
-    fireEvent.click(haifa);
+    fireEvent.click(screen.getByRole("link", { name: /Netanya From ILS/ }));
     await waitFor(() => expect(hub.router.state.location.pathname).toBe("/transfers/ben-gurion-airport/"));
     const target = hub.router.state.location.href;
     cleanup();
     const { router } = await renderPage(target, AirportRoute.options.component!);
-    expect(screen.getByLabelText("Destination *")).toHaveValue("haifa");
+    expect(screen.getByLabelText("Destination *")).toHaveValue("netanya");
     fireEvent.change(screen.getByLabelText("Full name *"), { target: { value: "Jamie Smith" } });
     await act(async () => { await router.navigate({ to: "/transfers/ben-gurion-airport/", search: { destination: "jerusalem" }, hash: "request-quote" }); });
     expect(screen.getByLabelText("Destination *")).toHaveValue("jerusalem");

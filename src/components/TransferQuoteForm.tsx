@@ -5,7 +5,8 @@ import { airportTransferContact, airportTransferRates } from "@/data/registry";
 import { airportTransferPhotos } from "@/data/airportTransfers";
 import { buildTransferQuoteDraft, emptyTransferQuote, validateTransferQuote, type TransferQuoteFields } from "@/lib/transfer-quote";
 
-export function TransferQuoteForm({ destinationId, onDestinationChange }: { destinationId: string; onDestinationChange: (id: string) => void }) {
+export function TransferQuoteForm({ destinationId, onDestinationChange, fixedDestination = false }: { destinationId: string; onDestinationChange?: (id: string) => void; fixedDestination?: boolean }) {
+  const selectedDestination = airportTransferRates.find((rate) => rate.id === destinationId);
   const [fields, setFields] = useState(emptyTransferQuote);
   const [errors, setErrors] = useState<string[]>([]);
   const [prepared, setPrepared] = useState<{ destinationId: string; draft: ReturnType<typeof buildTransferQuoteDraft> } | null>(null);
@@ -36,7 +37,7 @@ export function TransferQuoteForm({ destinationId, onDestinationChange }: { dest
         <div className="bg-navy p-6 text-navy-foreground sm:p-8">
           <img src={photo.src} alt={photo.alt} width={150} height={200} loading="lazy" className="h-24 w-20 rounded-xl object-cover" />
           <p className="mt-5 text-xs font-semibold uppercase tracking-widest opacity-75">A local, personal service</p>
-          <h2 id="quote-h" className="mt-3 text-3xl">Request a quote from Moshe Barak</h2>
+          <h2 id="quote-h" className="mt-3 text-3xl">{fixedDestination && selectedDestination ? `Request your transfer to ${selectedDestination.destination}` : "Request a quote from Moshe Barak"}</h2>
           <p className="mt-4 leading-relaxed opacity-90">Share your arrival and destination. Moshe can help arrange the right private vehicle for your party and confirm the full price before you book.</p>
           <ul className="mt-6 space-y-3 text-sm opacity-90"><li>One-way pickup from Ben Gurion Airport</li><li>Cars, vans and larger group requests</li><li>Request at least 24 hours ahead</li><li>A quote request carries no booking commitment</li></ul>
           <p className="mt-6 border-t border-white/20 pt-5 text-xs leading-relaxed opacity-75">Moshe Barak operates the publisher's local transport business. The prices above relate to this service.</p>
@@ -53,7 +54,7 @@ export function TransferQuoteForm({ destinationId, onDestinationChange }: { dest
               <label className="text-sm font-medium">Flight arrival date *<Input name="date" type="date" required value={fields.date} onChange={(e) => update("date", e.target.value)} className={fieldClass} /></label>
               <label className="text-sm font-medium">Flight arrival time *<Input name="time" type="time" required value={fields.time} onChange={(e) => update("time", e.target.value)} className={fieldClass} /></label>
               <p className="-mt-3 text-xs text-muted-foreground sm:col-span-2">Use the arrival date and time in Israel local time, including the correct date after midnight.</p>
-              <label className="text-sm font-medium sm:col-span-2">Destination *<select name="destination" required value={destinationId} onChange={(e) => { onDestinationChange(e.target.value); setPrepared(null); }} className="mt-2 h-11 w-full rounded-md border border-input bg-background px-3 text-base"><option value="">Choose your destination</option>{airportTransferRates.map((rate) => <option key={rate.id} value={rate.id}>{rate.destination}</option>)}<option value="other">Another destination</option></select></label>
+              <label className="text-sm font-medium sm:col-span-2">Destination *{fixedDestination && selectedDestination ? <Input name="destination" readOnly value={selectedDestination.destination} className={`${fieldClass} bg-secondary/40`} /> : <select name="destination" required value={destinationId} onChange={(e) => { onDestinationChange?.(e.target.value); setPrepared(null); }} className="mt-2 h-11 w-full rounded-md border border-input bg-background px-3 text-base"><option value="">Choose your destination</option>{airportTransferRates.map((rate) => <option key={rate.id} value={rate.id}>{rate.destination}</option>)}<option value="other">Another destination</option></select>}</label>
               {destinationId === "other" && <label className="text-sm font-medium sm:col-span-2">City or destination *<Input name="otherDestination" required maxLength={120} value={fields.otherDestination} onChange={(e) => update("otherDestination", e.target.value)} className={fieldClass} /></label>}
               <label className="text-sm font-medium sm:col-span-2">Drop-off hotel or address<Input name="address" maxLength={250} placeholder="Hotel name or full address, if known" value={fields.address} onChange={(e) => update("address", e.target.value)} className={fieldClass} /></label>
               <label className="text-sm font-medium">Passengers, including children *<Input name="passengers" type="number" min={1} max={99} step={1} required value={fields.passengers} onChange={(e) => update("passengers", e.target.value)} className={fieldClass} /></label>

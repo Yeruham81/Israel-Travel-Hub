@@ -23,6 +23,7 @@ const dests: { name: string; text: string; links: L[] }[] = [
       { label: "Dead Sea spa hotels", to: "/dead-sea/spa-hotels/" },
       { label: "Dead Sea family hotels", to: "/dead-sea/family-hotels/" },
       { label: "Masada visit & tickets", to: "/travel-blog/masada/" },
+      { label: "Airport transfer to Ein Bokek", to: "/travel-blog/ben-gurion-airport-to-ein-bokek/" },
     ],
   },
   {
@@ -53,7 +54,7 @@ const dests: { name: string; text: string; links: L[] }[] = [
       { label: "Haifa boutique hotels", to: "/haifa/boutique-hotels/" },
       { label: "Haifa family hotels", to: "/haifa/family-hotels/" },
       { label: "Shore excursions from Haifa Port", to: "/haifa-shore-excursions/" },
-      { label: "Airport transfers", to: "/transfers/" },
+      { label: "Airport transfer to Haifa", to: "/travel-blog/ben-gurion-airport-to-haifa/" },
       { label: "Private driver", to: "/private-driver/" },
       { label: "Tours & day trips", to: "/tours/" },
     ],

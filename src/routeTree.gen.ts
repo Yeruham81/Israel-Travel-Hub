@@ -45,6 +45,8 @@ import { Route as ToursIndexRouteImport } from './routes/tours.index'
 import { Route as ToursBethlehemFromJerusalemRouteImport } from './routes/tours.bethlehem-from-jerusalem'
 import { Route as TransfersIndexRouteImport } from './routes/transfers.index'
 import { Route as TransfersBenGurionAirportRouteImport } from './routes/transfers.ben-gurion-airport'
+import { Route as TravelBlogBenGurionAirportToEinBokekRouteImport } from './routes/travel-blog.ben-gurion-airport-to-ein-bokek'
+import { Route as TravelBlogBenGurionAirportToHaifaRouteImport } from './routes/travel-blog.ben-gurion-airport-to-haifa'
 import { Route as TravelBlogBenGurionAirportToJerusalemRouteImport } from './routes/travel-blog.ben-gurion-airport-to-jerusalem'
 import { Route as TravelBlogBenGurionAirportToTelAvivRouteImport } from './routes/travel-blog.ben-gurion-airport-to-tel-aviv'
 import { Route as TravelBlogBestDeadSeaHotelsRouteImport } from './routes/travel-blog.best-dead-sea-hotels'
@@ -244,6 +246,18 @@ const TransfersBenGurionAirportRoute =
     path: '/transfers/ben-gurion-airport',
     getParentRoute: () => rootRouteImport,
   } as any)
+const TravelBlogBenGurionAirportToEinBokekRoute =
+  TravelBlogBenGurionAirportToEinBokekRouteImport.update({
+    id: '/travel-blog/ben-gurion-airport-to-ein-bokek',
+    path: '/travel-blog/ben-gurion-airport-to-ein-bokek',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const TravelBlogBenGurionAirportToHaifaRoute =
+  TravelBlogBenGurionAirportToHaifaRouteImport.update({
+    id: '/travel-blog/ben-gurion-airport-to-haifa',
+    path: '/travel-blog/ben-gurion-airport-to-haifa',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const TravelBlogBenGurionAirportToJerusalemRoute =
   TravelBlogBenGurionAirportToJerusalemRouteImport.update({
     id: '/travel-blog/ben-gurion-airport-to-jerusalem',
@@ -326,6 +340,8 @@ export interface FileRoutesByFullPath {
   '/tiberias/luxury-hotels': typeof TiberiasLuxuryHotelsRoute
   '/tours/bethlehem-from-jerusalem': typeof ToursBethlehemFromJerusalemRoute
   '/transfers/ben-gurion-airport': typeof TransfersBenGurionAirportRoute
+  '/travel-blog/ben-gurion-airport-to-ein-bokek': typeof TravelBlogBenGurionAirportToEinBokekRoute
+  '/travel-blog/ben-gurion-airport-to-haifa': typeof TravelBlogBenGurionAirportToHaifaRoute
   '/travel-blog/ben-gurion-airport-to-jerusalem': typeof TravelBlogBenGurionAirportToJerusalemRoute
   '/travel-blog/ben-gurion-airport-to-tel-aviv': typeof TravelBlogBenGurionAirportToTelAvivRoute
   '/travel-blog/best-dead-sea-hotels': typeof TravelBlogBestDeadSeaHotelsRoute
@@ -372,6 +388,8 @@ export interface FileRoutesByTo {
   '/tiberias/luxury-hotels': typeof TiberiasLuxuryHotelsRoute
   '/tours/bethlehem-from-jerusalem': typeof ToursBethlehemFromJerusalemRoute
   '/transfers/ben-gurion-airport': typeof TransfersBenGurionAirportRoute
+  '/travel-blog/ben-gurion-airport-to-ein-bokek': typeof TravelBlogBenGurionAirportToEinBokekRoute
+  '/travel-blog/ben-gurion-airport-to-haifa': typeof TravelBlogBenGurionAirportToHaifaRoute
   '/travel-blog/ben-gurion-airport-to-jerusalem': typeof TravelBlogBenGurionAirportToJerusalemRoute
   '/travel-blog/ben-gurion-airport-to-tel-aviv': typeof TravelBlogBenGurionAirportToTelAvivRoute
   '/travel-blog/best-dead-sea-hotels': typeof TravelBlogBestDeadSeaHotelsRoute
@@ -419,6 +437,8 @@ export interface FileRoutesById {
   '/tiberias/luxury-hotels': typeof TiberiasLuxuryHotelsRoute
   '/tours/bethlehem-from-jerusalem': typeof ToursBethlehemFromJerusalemRoute
   '/transfers/ben-gurion-airport': typeof TransfersBenGurionAirportRoute
+  '/travel-blog/ben-gurion-airport-to-ein-bokek': typeof TravelBlogBenGurionAirportToEinBokekRoute
+  '/travel-blog/ben-gurion-airport-to-haifa': typeof TravelBlogBenGurionAirportToHaifaRoute
   '/travel-blog/ben-gurion-airport-to-jerusalem': typeof TravelBlogBenGurionAirportToJerusalemRoute
   '/travel-blog/ben-gurion-airport-to-tel-aviv': typeof TravelBlogBenGurionAirportToTelAvivRoute
   '/travel-blog/best-dead-sea-hotels': typeof TravelBlogBestDeadSeaHotelsRoute
@@ -467,6 +487,8 @@ export interface FileRouteTypes {
     | '/tiberias/luxury-hotels'
     | '/tours/bethlehem-from-jerusalem'
     | '/transfers/ben-gurion-airport'
+    | '/travel-blog/ben-gurion-airport-to-ein-bokek'
+    | '/travel-blog/ben-gurion-airport-to-haifa'
     | '/travel-blog/ben-gurion-airport-to-jerusalem'
     | '/travel-blog/ben-gurion-airport-to-tel-aviv'
     | '/travel-blog/best-dead-sea-hotels'
@@ -513,6 +535,8 @@ export interface FileRouteTypes {
     | '/tiberias/luxury-hotels'
     | '/tours/bethlehem-from-jerusalem'
     | '/transfers/ben-gurion-airport'
+    | '/travel-blog/ben-gurion-airport-to-ein-bokek'
+    | '/travel-blog/ben-gurion-airport-to-haifa'
     | '/travel-blog/ben-gurion-airport-to-jerusalem'
     | '/travel-blog/ben-gurion-airport-to-tel-aviv'
     | '/travel-blog/best-dead-sea-hotels'
@@ -559,6 +583,8 @@ export interface FileRouteTypes {
     | '/tiberias/luxury-hotels'
     | '/tours/bethlehem-from-jerusalem'
     | '/transfers/ben-gurion-airport'
+    | '/travel-blog/ben-gurion-airport-to-ein-bokek'
+    | '/travel-blog/ben-gurion-airport-to-haifa'
     | '/travel-blog/ben-gurion-airport-to-jerusalem'
     | '/travel-blog/ben-gurion-airport-to-tel-aviv'
     | '/travel-blog/best-dead-sea-hotels'
@@ -606,6 +632,8 @@ export interface RootRouteChildren {
   TiberiasLuxuryHotelsRoute: typeof TiberiasLuxuryHotelsRoute
   ToursBethlehemFromJerusalemRoute: typeof ToursBethlehemFromJerusalemRoute
   TransfersBenGurionAirportRoute: typeof TransfersBenGurionAirportRoute
+  TravelBlogBenGurionAirportToEinBokekRoute: typeof TravelBlogBenGurionAirportToEinBokekRoute
+  TravelBlogBenGurionAirportToHaifaRoute: typeof TravelBlogBenGurionAirportToHaifaRoute
   TravelBlogBenGurionAirportToJerusalemRoute: typeof TravelBlogBenGurionAirportToJerusalemRoute
   TravelBlogBenGurionAirportToTelAvivRoute: typeof TravelBlogBenGurionAirportToTelAvivRoute
   TravelBlogBestDeadSeaHotelsRoute: typeof TravelBlogBestDeadSeaHotelsRoute
@@ -873,6 +901,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof TransfersBenGurionAirportRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/travel-blog/ben-gurion-airport-to-ein-bokek': {
+      id: '/travel-blog/ben-gurion-airport-to-ein-bokek'
+      path: '/travel-blog/ben-gurion-airport-to-ein-bokek'
+      fullPath: '/travel-blog/ben-gurion-airport-to-ein-bokek'
+      preLoaderRoute: typeof TravelBlogBenGurionAirportToEinBokekRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/travel-blog/ben-gurion-airport-to-haifa': {
+      id: '/travel-blog/ben-gurion-airport-to-haifa'
+      path: '/travel-blog/ben-gurion-airport-to-haifa'
+      fullPath: '/travel-blog/ben-gurion-airport-to-haifa'
+      preLoaderRoute: typeof TravelBlogBenGurionAirportToHaifaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/travel-blog/ben-gurion-airport-to-jerusalem': {
       id: '/travel-blog/ben-gurion-airport-to-jerusalem'
       path: '/travel-blog/ben-gurion-airport-to-jerusalem'
@@ -967,6 +1009,10 @@ const rootRouteChildren: RootRouteChildren = {
   TiberiasLuxuryHotelsRoute: TiberiasLuxuryHotelsRoute,
   ToursBethlehemFromJerusalemRoute: ToursBethlehemFromJerusalemRoute,
   TransfersBenGurionAirportRoute: TransfersBenGurionAirportRoute,
+  TravelBlogBenGurionAirportToEinBokekRoute:
+    TravelBlogBenGurionAirportToEinBokekRoute,
+  TravelBlogBenGurionAirportToHaifaRoute:
+    TravelBlogBenGurionAirportToHaifaRoute,
   TravelBlogBenGurionAirportToJerusalemRoute:
     TravelBlogBenGurionAirportToJerusalemRoute,
   TravelBlogBenGurionAirportToTelAvivRoute:

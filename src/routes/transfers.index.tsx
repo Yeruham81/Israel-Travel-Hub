@@ -1,5 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { HubHeader } from "@/components/Guide";
+import { AirportDestinationCard } from "@/components/AirportDestinationCard";
 import { StayPhotoCredits } from "@/components/StayGuideParts";
 import { airportDestinationCards, airportTransferPhotos } from "@/data/airportTransfers";
 import { AIRPORT_TRANSFER_CHECK_DATE, formatCheckDate, getSource } from "@/data/registry";
@@ -43,21 +44,9 @@ function AirportTransfers() {
       <section aria-labelledby="destinations-h" className="mt-12">
         <p className="eyebrow">Your first stop</p>
         <h2 id="destinations-h" className="mt-2 text-3xl">Popular airport transfer destinations</h2>
-        <p className="mt-3 text-muted-foreground">Choose a destination to open your quote request with that destination selected.</p>
+        <p className="mt-3 text-muted-foreground">Explore the details for your route, or go straight to its quote form with the destination already filled in.</p>
         <div className="mt-6 grid grid-cols-2 gap-3 sm:gap-5 xl:grid-cols-4">
-          {popular.map((card) => (
-            <Link key={card.id} to="/transfers/ben-gurion-airport/" search={{ destination: card.id }} hash="request-quote" className="group flex h-full flex-col overflow-hidden rounded-2xl border bg-card hover:border-primary focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary" data-testid="airport-hub-destination">
-              <img src={card.photo.src} alt={card.photo.alt} width={360} height={240} loading="lazy" decoding="async" className="aspect-[3/2] w-full object-cover" />
-              <div className="flex flex-1 flex-col p-3 sm:p-5">
-                <p className="text-[0.65rem] font-semibold uppercase tracking-wide text-muted-foreground">Ben Gurion Airport to</p>
-                <h3 className="mt-1 min-h-12 text-xl leading-tight sm:text-2xl">{card.destination}</h3>
-                <p className="mt-3 text-xs text-muted-foreground">From</p>
-                <p className="text-2xl font-semibold tabular-nums"><span className="text-sm">ILS </span>{card.price.amount.toLocaleString("en-US")}</p>
-                <p className="mt-1 text-xs text-muted-foreground">Per vehicle · up to 4</p>
-                <span className="mt-4 text-sm font-semibold text-primary">Request a quote →</span>
-              </div>
-            </Link>
-          ))}
+          {popular.map((card) => <AirportDestinationCard key={card.id} id={card.id} destination={card.destination} price={card.price} photo={card.photo} testId="airport-hub-destination" />)}
         </div>
         <div className="mt-5 rounded-xl border bg-secondary/40 p-4 text-sm leading-relaxed" data-testid="airport-hub-rate-terms">
           <p><strong>Moshe Barak's published starting rates:</strong> {popular[0]!.price.conditions}</p>
