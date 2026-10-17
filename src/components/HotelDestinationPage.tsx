@@ -18,7 +18,7 @@ export function HotelDestinationPage({ guide: g }: { guide: HotelStayDestination
       <GuideHeader crumbs={[{ name: "Home", to: "/" }, { name: "Accommodation", to: "/hotels/" }, { name: g.name, to: g.path as LinkProps["to"] }]} eyebrow={`Where to stay · ${g.name}, Israel`} title={g.title} intro={g.intro} image={g.photo} checkedAt={g.reviewedAt} />
       <OnThisPage sections={sections} />
       <article className="mx-auto max-w-5xl px-4">
-        <Section id="overview" title="Choose the holiday, then the hotel" className="scroll-mt-32">{g.overview.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}</Section>
+        <Section id="overview" title="Choose the holiday, then the hotel" className="scroll-mt-32">{g.overview.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}{g.id === "deadsea" && <><h3 className="mt-6 text-xl">Ein Bokek, Neve Zohar or Ein Gedi?</h3>{g.locations.map((location) => <p key={location.name}><strong>{location.name}:</strong> {location.text}</p>)}<a href="#location" className="font-semibold text-primary underline">Check the map & arrival route</a></>}</Section>
         <section id="categories" aria-labelledby="categories-h" className="mt-14 scroll-mt-32">
           <p className="eyebrow">Two ways to go deeper</p><h2 id="categories-h" className="mt-2 text-3xl md:text-4xl">Find a stay that fits your party</h2>
           <p className="mt-3 max-w-3xl leading-relaxed text-muted-foreground">{g.categoryIntro}</p>

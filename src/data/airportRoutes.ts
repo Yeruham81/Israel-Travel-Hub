@@ -15,7 +15,7 @@ type RouteGuide = {
 const guides: Record<AirportTransferRouteId, RouteGuide> = {
   jerusalem: {
     city: "Jerusalem", title: "Private transfer from Ben Gurion Airport to Jerusalem",
-    description: "Arrange your private Ben Gurion Airport to Jerusalem transfer with Moshe Barak. See the published starting rate, hotel drop-off advice and request a personal quote.",
+    description: "Plan a private Ben Gurion Airport transfer to Jerusalem: drive-time guidance, Old City hotel access, luggage and weekday starting-rate conditions. Prepare a quote request to Moshe.",
     intro: "Start your Jerusalem visit with your airport pickup planned. Send Moshe your flight and hotel details to arrange a private ride for your party, with the vehicle and full price agreed before booking.",
     journeyTitle: "From the arrivals hall to your Jerusalem address",
     journeyText: "The original route guide allows around 45–60 minutes or more for the drive after pickup. Traffic on the approach to Jerusalem and the final journey through the city can add time. Passport control, baggage collection and the walk to your meeting point come before this estimate. Share the hotel's actual address so Moshe can plan the whole journey, rather than just an airport-to-city-centre trip.",
@@ -39,7 +39,7 @@ const guides: Record<AirportTransferRouteId, RouteGuide> = {
   },
   "tel-aviv": {
     city: "Tel Aviv & Jaffa", title: "Private transfer from Ben Gurion Airport to Tel Aviv",
-    description: "Request a private airport transfer to Tel Aviv or Jaffa with Moshe Barak. Published starting rate, beachfront and apartment drop-off tips, and a personal quote form.",
+    description: "Arrange a private Ben Gurion Airport transfer to Tel Aviv or Jaffa. Check drive-time estimates, hotel entrances, luggage capacity and starting-rate conditions before requesting a quote.",
     intro: "Head from Ben Gurion Airport to your Tel Aviv hotel or Jaffa address with your ride arranged in advance. Share your arrival details and luggage so Moshe can confirm a suitable vehicle and a personal quote.",
     journeyTitle: "A short distance, with a city arrival to plan",
     journeyText: "The original guide estimates around 20–40 minutes or more for the drive after pickup. Traffic entering Tel Aviv and the final streets around your accommodation can lengthen the journey. Airport formalities and baggage collection are additional. Giving your hotel name, apartment entrance or full Jaffa address helps make the quote and drop-off specific to your stay.",
@@ -63,7 +63,7 @@ const guides: Record<AirportTransferRouteId, RouteGuide> = {
   },
   haifa: {
     city: "Haifa", title: "Private transfer from Ben Gurion Airport to Haifa",
-    description: "Plan a private airport pickup to Haifa with Moshe Barak. See the published starting price, Carmel and coastal hotel advice, and request a transfer quote.",
+    description: "Plan a private Ben Gurion Airport transfer to Haifa, Mount Carmel or a coastal hotel. Check road-time estimates, exact drop-off and cruise-connection margins before requesting a quote.",
     intro: "Arrange your airport-to-Haifa journey before you fly. Send Moshe your flight, destination and party details for a private pickup, a suitable vehicle and a price confirmed before booking.",
     journeyTitle: "Plan the complete journey to your part of Haifa",
     journeyText: "The original route guide estimates about 75–110 minutes or more by road after pickup. Heavy traffic and your final address can extend the trip. Haifa stretches along the coast and up Mount Carmel, so a city name or a pin near the bay is not enough to identify your hotel. Include its complete address, and allow separately for time spent in the airport after landing.",
@@ -87,7 +87,7 @@ const guides: Record<AirportTransferRouteId, RouteGuide> = {
   },
   "dead-sea": {
     city: "Ein Bokek (Dead Sea)", title: "Private transfer from Ben Gurion Airport to Ein Bokek",
-    description: "Arrange a private airport transfer to Ein Bokek on the Dead Sea with Moshe Barak. Published starting price, hotel-arrival advice and a personal quote request.",
+    description: "Arrange a private Ben Gurion Airport transfer to Ein Bokek on the Israeli Dead Sea shore. Check the longer drive, exact hotel, one-way starting-rate conditions and separate return requests.",
     intro: "Begin your Dead Sea stay with the longer airport journey arranged. Request a private transfer to your Ein Bokek hotel and agree the vehicle, full price and pickup details with Moshe before booking.",
     journeyTitle: "From the airport to the Ein Bokek hotel area",
     journeyText: "The original guide allows around 1 hour 45 minutes to 2 hours 30 minutes or more for the road journey after pickup. Traffic, road conditions and your exact hotel affect the timing; passport control and baggage collection come before the drive. Share the hotel name rather than simply asking for the Dead Sea, which covers several different destinations.",
@@ -112,7 +112,9 @@ const guides: Record<AirportTransferRouteId, RouteGuide> = {
 };
 
 export function getAirportRouteGuide(id: AirportTransferRouteId) {
-  const route = airportTransferRoutes.find((item) => item.id === id)!;
-  const rate = airportTransferRates.find((item) => item.id === id)!;
-  return { ...guides[id], ...route, rate, photo: airportTransferPhotos[id]! };
+  const route = airportTransferRoutes.find((item) => item.id === id);
+  const rate = airportTransferRates.find((item) => item.id === id);
+  const photo = airportTransferPhotos[id];
+  if (!route || !rate || !photo) throw new Error(`Missing airport route data: ${id}`);
+  return { ...guides[id], ...route, rate, photo };
 }

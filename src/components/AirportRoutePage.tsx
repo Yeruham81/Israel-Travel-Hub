@@ -7,7 +7,8 @@ import { airportTransferPhotos } from "@/data/airportTransfers";
 import { airportTransferNav } from "@/data/nav";
 import { AirportBookingPlatforms } from "@/components/AirportBookingPlatforms";
 import { AIRPORT_TRANSFER_CHECK_DATE, airportTransferRoutes, travelGuidePaths, type AirportTransferRouteId } from "@/data/registry";
-import { pageMeta } from "@/lib/site";
+import { CANONICAL_ORIGIN, jsonLd, pageMeta } from "@/lib/site";
+import { authorLd } from "@/lib/author";
 import { ExchangeRateNote, PriceDisplay } from "@/components/CurrencyRates";
 import { AuthorCard } from "@/components/AuthorCard";
 import { PageUpdated } from "@/components/PageUpdated";
@@ -23,7 +24,17 @@ function crumbsFor(id: AirportTransferRouteId) {
 
 export function airportRouteMeta(id: AirportTransferRouteId) {
   const guide = getAirportRouteGuide(id);
-  return pageMeta({ title: guide.title, description: guide.description, path: guide.path, crumbs: crumbsFor(id) });
+  const head = pageMeta({ title: guide.title, description: guide.description, path: guide.path, crumbs: crumbsFor(id) });
+  const url = CANONICAL_ORIGIN + guide.path;
+  return { ...head, scripts: [...head.scripts, jsonLd({
+    "@context": "https://schema.org", "@type": "WebPage", "@id": `${url}#webpage`, url,
+    name: guide.title, description: guide.description, inLanguage: "en", author: authorLd(),
+    primaryImageOfPage: { "@type": "ImageObject", url: new URL(guide.photo.src, CANONICAL_ORIGIN).href },
+    mainEntity: { "@type": "Service", name: guide.title, serviceType: "Private airport transfer",
+      provider: { "@type": "Person", name: "Moshe Barak", url: `${CANONICAL_ORIGIN}/about/#moshe-barak` },
+      areaServed: [{ "@type": "Place", name: "Ben Gurion Airport" }, { "@type": "Place", name: guide.city }],
+    },
+  })] };
 }
 
 const pickupSteps = [
@@ -64,8 +75,11 @@ export function AirportRoutePage({ id }: { id: AirportTransferRouteId }) {
       </header>
 
       <AuthorCard />
-
-      <TransferQuoteForm destinationId={id} fixedDestination />
+      <nav aria-label="Transfer planning next steps" className="mt-5 flex flex-wrap gap-4 text-sm">
+        <a href="#journey-details" className="font-semibold text-primary underline">Drive time & destination</a>
+        <Link to={travelGuidePaths.shabbat} className="text-primary underline">Friday-night or Saturday arrival?</Link>
+        <Link to={guide.related[0]?.to} className="text-primary underline">Choose your hotel area</Link>
+      </nav>
 
       <section id="journey-details" aria-labelledby="journey-h" className="mt-14 scroll-mt-24">
         <p className="eyebrow">Your route, planned properly</p>
@@ -85,6 +99,7 @@ export function AirportRoutePage({ id }: { id: AirportTransferRouteId }) {
         <h2 id="pickup-h" className="text-3xl">Arrange the pickup before you fly</h2>
         <ol className="mt-5 grid gap-4 md:grid-cols-3">{pickupSteps.map((step, index) => <li key={step.title} className="rounded-xl border bg-card p-5"><p className="text-xs font-semibold text-primary">0{index + 1}</p><h3 className="mt-2 text-xl">{step.title}</h3><p className="mt-3 text-sm leading-relaxed text-muted-foreground">{step.text}</p></li>)}</ol>
       </section>
+      <TransferQuoteForm destinationId={id} fixedDestination />
       <FaqList faqs={faqs} />
       <section className="mt-14 rounded-2xl bg-navy p-6 text-navy-foreground sm:p-8" aria-labelledby="ready-h">
         <h2 id="ready-h" className="text-3xl">Your flight. Your destination. Your private ride.</h2>
@@ -101,7 +116,7 @@ export function AirportRoutePage({ id }: { id: AirportTransferRouteId }) {
         <p className="mt-3">Driving times begin after pickup and are planning estimates, not live traffic predictions. Starting rates are for the conditions stated above. Your final quote and booking require confirmation.</p>
       </details>
       <AirportBookingPlatforms pageId={`airport-route-${id}`} destination={guide.city} />
-      <StayPhotoCredits photos={[guide.photo, airportTransferPhotos["moshe"]!]} />
+      <StayPhotoCredits photos={airportTransferPhotos["moshe"] ? [guide.photo, airportTransferPhotos["moshe"]] : [guide.photo]} />
       <div className="fixed inset-x-0 bottom-0 z-30 border-t bg-background/95 px-4 py-3 backdrop-blur lg:hidden">
         <div className="mx-auto flex max-w-5xl items-center justify-between gap-3"><p className="min-w-0 text-sm font-medium">Private transfer<br /><span className="text-xs text-muted-foreground">Ben Gurion to {guide.city}</span></p><a href="#request-quote" onClick={focusQuote} className="btn btn-primary shrink-0 text-sm">Request a quote</a></div>
       </div>

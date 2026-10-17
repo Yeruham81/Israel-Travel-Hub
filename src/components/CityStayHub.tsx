@@ -25,8 +25,9 @@ export function CityStayHub({ g, areas }: { g: CityStayGuide; areas: Neighborhoo
       />
       <OnThisPage sections={sections} />
       <article className="mx-auto max-w-5xl px-4">
-        <Section id="overview" title="A neighborhood for the way you travel" className="scroll-mt-32">
+        <Section id="overview" title={`Where should you stay in ${g.city}?`} className="scroll-mt-32">
           <p>{g.areaIntro || g.overview.join(" ")}</p>
+          {g.areaIntro && g.overview.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
         </Section>
         <ul className="mt-6 grid gap-3 sm:grid-cols-3">
           {quickPicks.map(({ area, label, description }) => area && (
