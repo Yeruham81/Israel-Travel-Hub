@@ -25,14 +25,14 @@ export function Breadcrumbs({ items }: { items: UiCrumb[] }) {
   );
 }
 
-/** Local in-page contents: horizontal chip bar, visually distinct from the global rail. */
-export function OnThisPage({ sections, sticky = true }: { sections: readonly (readonly [string, string])[]; sticky?: boolean }) {
+/** Wrapping in-page links stay in the document flow so a long list cannot cover sections. */
+export function OnThisPage({ sections, sticky = false }: { sections: readonly (readonly [string, string])[]; sticky?: boolean }) {
   return (
     <nav aria-label="On this page" className={`${sticky ? "sticky top-[57px] z-30" : ""} mt-6 border-y bg-background/95 backdrop-blur`}>
-      <div className="flex items-center gap-3 overflow-x-auto px-4 py-2 text-sm whitespace-nowrap">
-        <span className="text-[0.7rem] font-semibold uppercase tracking-[0.14em] text-muted-foreground">On this page</span>
-        <ul className="flex gap-2">
-          {sections.map(([id, label]) => <li key={id}><a href={`#${id}`} className="chip inline-block">{label}</a></li>)}
+      <div className="flex min-w-0 flex-col items-start gap-3 px-4 py-3 text-sm sm:flex-row">
+        <span className="shrink-0 text-[0.7rem] font-semibold uppercase tracking-[0.14em] text-muted-foreground sm:pt-2">On this page</span>
+        <ul className="flex min-w-0 max-w-full flex-wrap gap-2">
+          {sections.map(([id, label]) => <li key={id} className="min-w-0 max-w-full"><a href={`#${id}`} className="chip block max-w-full whitespace-normal [overflow-wrap:anywhere]">{label}</a></li>)}
         </ul>
       </div>
     </nav>
