@@ -21,6 +21,8 @@ import haifaHotels from "@/assets/haifa/panorama.webp";
 import deadSeaBeach from "@/assets/dead-sea/beach.webp";
 import { pageMeta } from "@/lib/site";
 import { photoCredits } from "@/data/photoCredits";
+import { GuideCard } from "@/components/TravelGuide";
+import { guideDirectory } from "@/data/travelGuides";
 
 export const Route = createFileRoute("/")({
   head: () =>
@@ -190,6 +192,10 @@ function Home() {
         ))}
       </div>
 
+      <section aria-labelledby="guides-h" className="mx-auto mt-16 max-w-6xl px-4">
+        <div className="flex flex-wrap items-end justify-between gap-4"><div><p className="eyebrow">Before you travel</p><h2 id="guides-h" className="mt-2 text-3xl">Practical Israel travel guides</h2><p className="mt-3 max-w-2xl text-muted-foreground">Clear answers about arrival, getting connected and choosing how to get around.</p></div><Link to="/guides/" className="btn btn-primary">Browse all guides →</Link></div>
+        <div className="mt-6 grid gap-5 sm:grid-cols-2 xl:grid-cols-3">{guideDirectory.filter((guide) => ["uber", "esim", "arrival"].includes(guide.id)).map((guide) => <GuideCard key={guide.id} guide={guide} headingLevel={3} />)}</div>
+      </section>
       <section aria-labelledby="dest-h" className="mx-auto mt-20 max-w-6xl px-4">
         <div className="rounded-2xl bg-navy p-6 text-navy-foreground md:p-8">
           <p className="text-xs font-semibold uppercase tracking-[0.14em] opacity-80">Where to base yourself</p>

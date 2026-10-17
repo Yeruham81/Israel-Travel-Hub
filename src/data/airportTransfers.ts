@@ -11,7 +11,7 @@ import caesarea from "@/assets/airport-transfers/caesarea.webp";
 import nazareth from "@/assets/airport-transfers/nazareth.webp";
 import airport from "@/assets/airport-transfers/airport.webp";
 import moshe from "@/assets/airport-transfers/moshe.webp";
-import { airportTransferRates, OWNER_BASE } from "@/data/registry";
+import { airportTransferRates, OWNER_BASE, travelGuidePaths } from "@/data/registry";
 import type { StayGuidePhoto } from "@/data/content";
 
 const upload = `${OWNER_BASE}/wp-content/uploads`;
@@ -58,6 +58,9 @@ export const airportTransferFaqs = [
 ];
 
 export const airportRelatedLinks = [
+  { label: "Ben Gurion arrival tips", to: travelGuidePaths.arrival },
+  { label: "Choosing an eSIM for Israel", to: travelGuidePaths.esim },
+  { label: "Taxis in Israel", to: travelGuidePaths.taxis },
   { label: "Where to stay in Jerusalem", to: "/travel-blog/where-to-stay-in-jerusalem/" as const },
   { label: "Where to stay in Tel Aviv", to: "/travel-blog/where-to-stay-in-tel-aviv/" as const },
   { label: "Haifa hotels", to: "/travel-blog/best-hotels-in-haifa/" as const },

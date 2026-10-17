@@ -8,7 +8,7 @@ export const Route = createFileRoute("/shore-excursions")({
   head: () =>
     pageMeta({
       title: "Shore excursions in Israel from Ashdod and Haifa — Israel Taxi & Travel",
-      description: "Planning a cruise stop in Israel? Choose your port — Ashdod or Haifa — then compare itineraries, timing and private vs guided excursions.",
+      description: "Choose Haifa or Ashdod Port to compare private shore-excursion destinations, published car-and-driver starting prices and ship-timing advice. Request a tailored quote.",
       path: "/shore-excursions/",
       crumbs: [{ name: "Home", path: "/" }, { name: "Shore excursions", path: "/shore-excursions/" }],
     }),
@@ -27,7 +27,7 @@ function Shore() {
         crumbs={[{ name: "Home", to: "/" }, { name: "Shore excursions", to: "/shore-excursions/" }]}
         eyebrow="Shore excursions"
         title="Shore excursions from Israel's cruise ports"
-        intro="Cruise ships call at Ashdod in the south and Haifa in the north. Start with your port and your ship's hours ashore — they decide which day trips are realistic."
+        intro="Start with your cruise port and ship's hours ashore. Open the Haifa or Ashdod page to explore destination photos, compare published private-driver starting rates and request a day trip planned around your ship."
       />
       <section aria-labelledby="ports-h" className="mt-10">
         <h2 id="ports-h" className="text-3xl">Choose your port</h2>
@@ -39,7 +39,7 @@ function Shore() {
                 <div className="p-5">
                   <h3 className="text-2xl group-hover:text-primary">{p.name}</h3>
                   <p className="mt-1.5 text-muted-foreground">{p.text}</p>
-                  <span className="mt-3 inline-block font-semibold text-primary">Plan your day →</span>
+                  <span className="mt-3 inline-block font-semibold text-primary">View day trips & starting prices →</span>
                 </div>
               </Link>
             </li>

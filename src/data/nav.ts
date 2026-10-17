@@ -1,8 +1,8 @@
 import type { LinkProps } from "@tanstack/react-router";
-import { OWNER_BASE } from "@/data/registry";
+import { travelGuidePaths } from "@/data/registry";
 
 export type NavItem = { label: string; to: LinkProps["to"] };
-export type SidebarNavItem = NavItem | { label: string; href: string };
+export type SidebarNavItem = (NavItem & { children?: NavItem[] }) | { label: string; href: string };
 export type NavGroup = { title: string; items: SidebarNavItem[] };
 
 export const serviceNav: NavItem[] = [
@@ -29,12 +29,12 @@ export const hotelNav: NavItem[] = [
   { label: "Dead Sea hotels", to: "/travel-blog/best-dead-sea-hotels/" },
 ];
 
-/** Existing publisher guides stay on their verified URLs until migrated. */
+/** Migrated practical guides resolve inside this portal. */
 const travelTips = {
-  gettingAround: { label: "Getting around Israel", href: `${OWNER_BASE}/travel-blog/getting-around-israel/` },
-  uber: { label: "Is there Uber in Israel?", href: `${OWNER_BASE}/travel-blog/uber-in-israel/` },
-  esim: { label: "Choosing an eSIM for Israel", href: `${OWNER_BASE}/travel-blog/best-esim-for-israel/` },
-  arrival: { label: "Ben Gurion arrival tips", href: `${OWNER_BASE}/travel-blog/ben-gurion-airport-arrival-tips/` },
+  gettingAround: { label: "Getting around Israel", to: travelGuidePaths.israel },
+  uber: { label: "Is there Uber in Israel?", to: travelGuidePaths.uber },
+  esim: { label: "Choosing an eSIM for Israel", to: travelGuidePaths.esim },
+  arrival: { label: "Ben Gurion arrival tips", to: travelGuidePaths.arrival },
 } satisfies Record<string, SidebarNavItem>;
 
 export const utilityNav: NavItem[] = [
@@ -60,9 +60,10 @@ export const allNavGroups: NavGroup[] = [
     items: [
       { label: "Tours & day trips", to: "/tours/" },
       { label: "Bethlehem tours", to: "/tours/bethlehem-from-jerusalem/" },
-      { label: "Shore excursions", to: "/shore-excursions/" },
-      { label: "From Ashdod Port", to: "/ashdod-shore-excursions/" },
-      { label: "From Haifa Port", to: "/haifa-shore-excursions/" },
+      { label: "Shore excursions", to: "/shore-excursions/", children: [
+        { label: "From Haifa Port", to: "/haifa-shore-excursions/" },
+        { label: "From Ashdod Port", to: "/ashdod-shore-excursions/" },
+      ] },
     ],
   },
   {
@@ -81,11 +82,15 @@ export const allNavGroups: NavGroup[] = [
   {
     title: "Travel Guides & Tips",
     items: [
-      { label: "Destinations & city guides", to: "/destinations/" },
+      { label: "All travel guides", to: "/guides/" },
       travelTips.gettingAround,
+      { label: "Getting around Tel Aviv", to: travelGuidePaths.telAviv },
+      { label: "Taxis in Israel", to: travelGuidePaths.taxis },
+      { label: "Airport sherut: current status", to: travelGuidePaths.sherut },
       travelTips.uber,
       travelTips.esim,
       travelTips.arrival,
+      { label: "Destinations & city guides", to: "/destinations/" },
     ],
   },
   {

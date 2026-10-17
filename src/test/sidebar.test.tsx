@@ -41,7 +41,7 @@ describe("shared sidebar navigation", () => {
     ]);
   });
 
-  it("clearly identifies external guides and preserves their real destinations", async () => {
+  it("opens the migrated practical guides inside the portal", async () => {
     const router = await navigationRouter();
     const onNavigate = vi.fn();
     render(<RouterContextProvider router={router}><GlobalNav onNavigate={onNavigate} /></RouterContextProvider>);
@@ -50,11 +50,10 @@ describe("shared sidebar navigation", () => {
       ["Is there Uber in Israel?", "uber-in-israel"],
       ["Choosing an eSIM for Israel", "best-esim-for-israel"],
       ["Ben Gurion arrival tips", "ben-gurion-airport-arrival-tips"],
-    ]) {
-      const link = within(popular).getByRole("link", { name: `${label} (on israel-taxi.com, opens in a new tab)` });
-      expect(link).toHaveAttribute("href", `https://www.israel-taxi.com/travel-blog/${path}/`);
-      expect(link).toHaveAttribute("target", "_blank");
-      expect(link).toHaveAttribute("rel", "noopener noreferrer");
+    ] as const) {
+      const link = within(popular).getByRole("link", { name: label });
+      expect(link).toHaveAttribute("href", `/travel-blog/${path}/`);
+      expect(link).not.toHaveAttribute("target");
       expect(link.querySelector('[aria-hidden]')).toBeNull();
     }
     fireEvent.click(within(popular).getByRole("link", { name: /Is there Uber in Israel/ }));
@@ -62,7 +61,7 @@ describe("shared sidebar navigation", () => {
     expect(within(popular).getByRole("link", { name: "Ben Gurion to Jerusalem" })).toHaveAttribute("href", "/travel-blog/ben-gurion-airport-to-jerusalem/");
   });
 
-  it("uses the same groups in the mobile drawer and closes it after either kind of link", async () => {
+  it("uses the same groups in the mobile drawer and closes it after service and guide navigation", async () => {
     const router = await navigationRouter();
     render(<RouterContextProvider router={router}><SiteHeader /></RouterContextProvider>);
     const trigger = screen.getByRole("button", { name: "Explore Israel" });
@@ -82,7 +81,7 @@ describe("shared sidebar navigation", () => {
     const popular = within(nav).getByRole("region", { name: "Popular Links" });
     fireEvent.click(within(popular).getByRole("link", { name: /Choosing an eSIM for Israel/ }));
     await waitFor(() => expect(screen.queryByRole("dialog")).not.toBeInTheDocument());
-    expect(router.state.location.pathname).toBe("/private-driver/");
+    await waitFor(() => expect(router.state.location.pathname).toBe("/travel-blog/best-esim-for-israel/"));
   });
 });
 

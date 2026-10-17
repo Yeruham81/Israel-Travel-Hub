@@ -1,91 +1,111 @@
-import type { LinkProps } from "@tanstack/react-router";
-import type { ReactNode } from "react";
-import { Checklist, EndCta, FaqList, GuideHeader, OnThisPage, ProviderSection, RelatedLinks, Section, SourceList } from "@/components/Guide";
-import { linksForPage } from "@/data/registry";
+import { Link } from "@tanstack/react-router";
+import { useState } from "react";
+import { Breadcrumbs, Checklist, FaqList, OnThisPage, ProviderSection, RelatedLinks, Section, SourceList } from "@/components/Guide";
+import { GuidePhotoCredit } from "@/components/TravelGuide";
+import { ShoreQuoteForm } from "@/components/ShoreQuoteForm";
+import { airportTransferPhotos } from "@/data/airportTransfers";
+import { getShorePort, shoreExcursionBenefits } from "@/data/shoreExcursions";
+import { formatCheckDate, getSource, linksForPage, SHORE_EXCURSION_CHECK_DATE, shorePorts, type ShorePortId } from "@/data/registry";
+import { CANONICAL_ORIGIN, SITE_NAME, pageMeta } from "@/lib/site";
 
-export type PortPageProps = {
-  path: LinkProps["to"];
-  pageId: string;
-  port: string;
-  title: string;
-  intro: string;
-  image: { src: string; alt: string };
-  overview: ReactNode;
-  itineraries: { name: string; text: string }[];
-  itineraryNote: ReactNode;
-  providerIntro: ReactNode;
-  faqs: { q: string; a: string }[];
-  sourceIds: string[];
-  related: { label: string; to: LinkProps["to"]; note?: string }[];
-};
+function crumbsFor(id: ShorePortId) {
+  return [{ name: "Home", path: "/" as const }, { name: "Shore excursions", path: "/shore-excursions/" as const }, { name: `From ${shorePorts[id].name} Port`, path: shorePorts[id].path }];
+}
 
-const sections = [
-  ["overview", "Overview"],
-  ["itineraries", "Itinerary ideas"],
-  ["timing", "Timing"],
-  ["format", "Driver or guide"],
-  ["check", "What to check"],
-  ["book", "Excursion options"],
-  ["faq", "FAQ"],
-  ["sources", "Sources"],
-] as const;
+export function shorePortMeta(id: ShorePortId) {
+  const port = getShorePort(id);
+  const meta = pageMeta({ title: port.title, description: port.description, path: port.path, type: "article", crumbs: crumbsFor(id) });
+  const imageUrl = new URL(port.photo.src, CANONICAL_ORIGIN).href;
+  return { ...meta, meta: [...meta.meta, { property: "og:image", content: imageUrl }, { name: "twitter:image", content: imageUrl }], scripts: [...meta.scripts, {
+    type: "application/ld+json", children: JSON.stringify({ "@context": "https://schema.org", "@type": "Article", headline: port.title, description: port.description, mainEntityOfPage: `${CANONICAL_ORIGIN}${port.path}`, inLanguage: "en", dateModified: SHORE_EXCURSION_CHECK_DATE,
+      author: { "@type": "Organization", name: `${SITE_NAME} editorial team`, url: `${CANONICAL_ORIGIN}/about/` }, publisher: { "@type": "Organization", name: SITE_NAME }, image: imageUrl,
+      citation: [port.sourceId, port.alternativeSourceId].map((sourceId) => getSource(sourceId).url),
+    }).replaceAll("<", "\\u003c"),
+  }] };
+}
 
-/** Information-first port page: planning sections precede the provider area. */
-export function PortPage(p: PortPageProps) {
-  const links = linksForPage(p.pageId);
-  return (
-    <main>
-      <GuideHeader
-        crumbs={[{ name: "Home", to: "/" }, { name: "Shore excursions", to: "/shore-excursions/" }, { name: `From ${p.port} Port`, to: p.path }]}
-        eyebrow={`Shore excursions · ${p.port} Port`}
-        title={p.title}
-        intro={p.intro}
-        image={p.image}
-      />
-      <OnThisPage sections={sections} />
-      <article className="mx-auto max-w-5xl px-4">
-        <Section id="overview" title={`Planning a day ashore from ${p.port}`}>{p.overview}</Section>
+const sections = [["itineraries", "Destinations & prices"], ["request-quote", "Request a quote"], ["timing", "Ship timing"], ["format", "Driver or guide"], ["check", "Before booking"], ["faq", "FAQ"], ["sources", "Sources"]] as const;
+const focusQuote = () => requestAnimationFrame(() => document.getElementById("request-quote")?.focus({ preventScroll: true }));
 
-        <section id="itineraries" aria-labelledby="itineraries-h" className="mt-14">
-          <h2 id="itineraries-h" className="text-3xl">Itinerary ideas</h2>
-          <p className="mt-2 max-w-3xl text-muted-foreground">{p.itineraryNote}</p>
-          <ul className="mt-5 grid gap-4 sm:grid-cols-2">
-            {p.itineraries.map((it) => (
-              <li key={it.name} className="rounded-xl border bg-card p-5">
-                <h3 className="font-serif text-xl">{it.name}</h3>
-                <p className="mt-1.5 text-muted-foreground">{it.text}</p>
-              </li>
-            ))}
-          </ul>
-        </section>
+export function PortPage({ id }: { id: ShorePortId }) {
+  const port = getShorePort(id);
+  const [itineraryId, setItineraryId] = useState("");
+  const otherOperators = linksForPage(port.pageId).filter((link) => link.relationship !== "publisher_operator");
+  const minimumRate = Math.min(...port.itineraries.map((itinerary) => itinerary.price.amount));
+  const photos = [port.photo, ...port.itineraries.map((itinerary) => itinerary.photo), airportTransferPhotos["moshe"]!];
+  return <main className="mx-auto max-w-5xl px-4 pb-24 lg:pb-8">
+    <header className="pt-6">
+      <Breadcrumbs items={crumbsFor(id).map((crumb) => ({ name: crumb.name, to: crumb.path }))} />
+      <nav aria-label="Choose your cruise port" className="mt-5 flex flex-wrap gap-2">{(Object.keys(shorePorts) as ShorePortId[]).map((portId) => <Link key={portId} to={shorePorts[portId].path} className="chip inline-block" activeProps={{ "aria-current": "page", className: "bg-navy text-navy-foreground" }}>{shorePorts[portId].name} Port</Link>)}</nav>
+      <div className="mt-6 grid items-center gap-7 lg:grid-cols-[1.2fr_1fr]">
+        <div>
+          <p className="eyebrow">Your ship. Your day ashore.</p>
+          <h1 className="mt-3 text-4xl leading-[1.1] md:text-5xl">{port.title}</h1>
+          <p className="mt-4 text-lg leading-relaxed text-muted-foreground">{port.intro}</p>
+          <p className="mt-5 text-3xl font-semibold tabular-nums">From ILS {minimumRate.toLocaleString("en-US")}</p>
+          <p className="mt-1 text-sm text-muted-foreground">Full-day return transport · per vehicle · up to 4 passengers</p>
+          <p className="mt-2 text-xs leading-relaxed text-muted-foreground">Weekday starting rate for transport only. Guide, admissions, meals and tips excluded. Night, weekend and holiday supplements may apply; final quote by confirmation.</p>
+          <a href="#request-quote" onClick={focusQuote} className="btn btn-primary mt-5">Request your {port.name} excursion</a>
+        </div>
+        <figure><img src={port.photo.src} alt={port.photo.alt} width={900} height={600} fetchPriority="high" decoding="async" className="aspect-[3/2] w-full rounded-2xl object-cover" /><GuidePhotoCredit photo={port.photo} /></figure>
+      </div>
+      <p className="mt-5 text-xs leading-relaxed text-muted-foreground">{SITE_NAME} editorial team · Adapted from Moshe Barak's original excursion page · <time dateTime={SHORE_EXCURSION_CHECK_DATE}>Updated {formatCheckDate(SHORE_EXCURSION_CHECK_DATE)}</time>. Starting figures are published rates, not live quotes or availability.</p>
+    </header>
 
-        <Section id="timing" title="Work back from your all-aboard time">
-          <p>Before contacting anyone, have your <strong>ship name, port-call date, expected disembarkation time and all-aboard time</strong> to hand — they decide which itineraries are realistic. Ships sometimes change schedules, berths or tender arrangements, so check your cruise line's latest daily programme.</p>
-          <p>Allow for passport and security procedures when leaving and re-entering the port, traffic on the way back, and a comfortable buffer before all-aboard. Ask each provider how they plan the return and what happens if there is a delay — terms differ between operators and products, and we can't confirm them for you.</p>
-        </Section>
+    <section aria-labelledby="answer-h" className="mt-7 rounded-2xl border border-primary/20 bg-secondary/60 p-5 sm:p-6"><h2 id="answer-h" className="text-2xl">Which day trip should I choose?</h2><p className="mt-3 leading-relaxed">{port.answer}</p></section>
+    <OnThisPage sections={sections} />
 
-        <Section id="format" title="Private driver, licensed guide or shared tour?">
-          <p><strong>Private car and driver:</strong> your own vehicle and timing. A driver can take you between sites but may not be permitted to guide inside them — ask whether a licensed tour guide is included or can be added.</p>
-          <p><strong>Private guided tour:</strong> a licensed guide explains the sites; check whether the guide also drives or travels with a separate driver.</p>
-          <p><strong>Shared/group excursion:</strong> a set itinerary with other passengers. Check group size, the meeting point and what is included.</p>
-        </Section>
-
-        <section id="check" aria-labelledby="check-h" className="mt-14">
-          <h2 id="check-h" className="text-3xl">What to check before booking</h2>
-          <div className="mt-5 grid gap-4 sm:grid-cols-2">
-            <Checklist title="Meeting & return" items={["Exact meeting point for your berth or terminal", "How the provider tracks your arrival time (ask — don't assume)", "Planned return time vs your all-aboard time", "What happens if the ship is late or the call is cancelled"]} />
-            <Checklist title="What's included" items={["Driver only or licensed guide", "Entrance fees and which sites", "Vehicle size for your party", "Per vehicle or per person price"]} />
-            <Checklist title="Terms" items={["Cancellation deadline and refund terms", "Payment method and deposit", "Dress code at religious sites", "Passport needed for any crossing (e.g. Bethlehem)"]} />
-            <Checklist title="Your cruise" items={["Ship name and date", "Disembarkation and all-aboard times", "Tender or berth details", "Mobility needs in your group"]} />
+    <section id="itineraries" aria-labelledby="itineraries-h" className="mt-10 scroll-mt-24">
+      <h2 id="itineraries-h" className="text-3xl">Popular day trips from {port.name} Port</h2>
+      <p className="mt-3 max-w-4xl leading-relaxed text-muted-foreground">Choose an idea to add it to your request. These are Moshe Barak's published private car-and-driver options, operated by the publisher's local transport business. Each route returns to {port.name} Port and must fit your ship's schedule.</p>
+      <div className="mt-5 rounded-xl border bg-secondary/50 p-4 text-sm leading-relaxed"><strong>What the price covers:</strong> weekday transportation and a private driver for up to four passengers. <strong>Not included:</strong> licensed guiding, admission, meals and tips. Night, weekend and holiday supplements may apply. Larger parties need a separate quote; final price, site access and route feasibility require confirmation.</div>
+      <ul className="mt-6 grid gap-5 sm:grid-cols-2">
+        {port.itineraries.map((itinerary) => <li key={itinerary.id} className={`flex min-w-0 flex-col overflow-hidden rounded-2xl border bg-card ${itineraryId === itinerary.id ? "border-primary ring-1 ring-primary" : ""}`} data-testid="shore-itinerary-card">
+          <img src={itinerary.photo.src} alt={itinerary.photo.alt} width={720} height={480} loading="lazy" decoding="async" className="aspect-[3/2] w-full object-cover" />
+          <div className="flex flex-1 flex-col p-5 sm:p-6">
+            <p className="text-xs font-semibold uppercase tracking-wide text-primary">Private day trip · return to {port.name}</p>
+            <h3 className="mt-2 text-2xl">{itinerary.destination}</h3>
+            <p className="mt-3 leading-relaxed text-muted-foreground">{itinerary.description}</p>
+            <ul aria-label="Possible highlights" className="mt-4 flex flex-wrap gap-2">{itinerary.highlights.map((highlight) => <li key={highlight} className="rounded-full bg-secondary px-3 py-1 text-xs">{highlight}</li>)}</ul>
+            <p className="mt-4 text-sm"><strong>Best for:</strong> {itinerary.bestFor}</p>
+            <p className="mt-3 flex-1 text-sm leading-relaxed text-muted-foreground">{itinerary.planningNote}</p>
+            <div className="mt-5 border-t pt-4"><p className="text-xs text-muted-foreground">Published starting rate</p><p className="mt-1 text-2xl font-semibold tabular-nums">From ILS {itinerary.price.amount.toLocaleString("en-US")}</p><p className="mt-1 text-xs text-muted-foreground">Per vehicle · up to 4 · transport only</p></div>
+            <a href="#request-quote" onClick={() => { setItineraryId(itinerary.id); focusQuote(); }} className="btn btn-primary mt-4" aria-label={`Request ${itinerary.destination} from ${port.name}`}>{itineraryId === itinerary.id ? "Selected — request this day trip" : "Request this day trip"}</a>
           </div>
-        </section>
+        </li>)}
+      </ul>
+      <p className="mt-4 text-sm text-muted-foreground">Have another destination in mind? <a href="#request-quote" onClick={() => { setItineraryId("other"); focusQuote(); }} className="font-medium text-primary underline">Ask for a custom itinerary</a>.</p>
+    </section>
 
-        <ProviderSection title="Excursion options" intro={p.providerIntro} links={links} pageId={p.pageId} />
-        <FaqList faqs={p.faqs} />
-        <SourceList ids={p.sourceIds} />
-        <RelatedLinks items={p.related} />
-        <EndCta title={`Ready to plan your day from ${p.port}?`} links={links} pageId={p.pageId} />
-      </article>
-    </main>
-  );
+    <ShoreQuoteForm key={id} portId={id} itineraryId={itineraryId} onItineraryChange={setItineraryId} />
+
+    <Section id="overview" title={`Make the most of your day from ${port.name}`}>
+      {port.overview.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
+    </Section>
+    <section aria-labelledby="benefits-h" className="mt-12"><h2 id="benefits-h" className="text-3xl">A private day, planned around you</h2><ul className="mt-5 grid gap-4 sm:grid-cols-2">{shoreExcursionBenefits.map((benefit) => <li key={benefit.title} className="rounded-xl border bg-card p-5"><h3 className="text-xl">{benefit.title}</h3><p className="mt-3 text-sm leading-relaxed text-muted-foreground">{benefit.text}</p></li>)}</ul></section>
+
+    <Section id="timing" title="Work back from your all-aboard time">
+      <p>Docking, disembarkation, pickup and all-aboard are different times. Give the operator the ship's actual schedule and allow for the port's exit and re-entry procedures, road traffic and a return buffer before you need to be on board.</p>
+      <p>Agree which stops will be shortened or removed if the ship is late. Ask for a planned return time and the terms for an itinerary change or missed port call in writing. A published excursion is an idea to assess against your schedule, not a promise that it fits every cruise.</p>
+    </Section>
+    <Section id="format" title="Private driver, licensed guide or shared excursion?">
+      <p><strong>The cards above are a private car-and-driver service.</strong> They cover transportation for your party. A driver is not automatically a licensed guide, and admission or guided visits inside attractions are not included in these starting prices.</p>
+      <p>Request a licensed guide if you want a guided historical or religious visit, and confirm the extra cost. A shared guided excursion is another format: you join other passengers on a set itinerary, with a separate operator's inclusions, per-person pricing and conditions.</p>
+    </Section>
+    <section id="check" aria-labelledby="check-h" className="mt-14 scroll-mt-24">
+      <h2 id="check-h" className="text-3xl">Before confirming your excursion</h2>
+      <div className="mt-5 grid gap-4 sm:grid-cols-2">
+        <Checklist title="Your ship & return" items={["Ship name, call date and expected disembarkation", "All-aboard deadline and planned port-return buffer", "Exact meeting point and any port-shuttle arrangements", "Delay, cancellation and missed-call policy"]} />
+        <Checklist title="Your party & itinerary" items={["All passengers, children's ages and requested seats", "Walking pace, steps, accessibility and equipment", "Which sites are open and which stops are agreed", "Full price, exclusions, any guide, payment and deposit"]} />
+      </div>
+    </section>
+
+    {otherOperators.length > 0 && <ProviderSection title="Prefer a separate guided excursion?" intro={<>The independent operator below lists its own {port.name}-port Jerusalem and Bethlehem tour. It is separate from Moshe's car-and-driver itineraries and starting rates above. Check its actual dates, guide, inclusions, suitability and cancellation terms on the operator's page.</>} links={otherOperators} pageId={port.pageId} />}
+    <FaqList faqs={port.faqs} />
+    <section aria-labelledby="ready-h" className="mt-14 rounded-2xl bg-navy p-6 text-navy-foreground sm:p-8"><h2 id="ready-h" className="text-3xl">Let's plan your day from {port.name}</h2><p className="mt-3 opacity-90">Share your ship's timetable, party size and favorite itinerary. Moshe will need to confirm the route, vehicle, total and booking terms.</p><a href="#request-quote" onClick={focusQuote} className="btn btn-light mt-5">Request a quote from Moshe</a></section>
+    <RelatedLinks title="Useful guides for your day ashore" items={port.related} />
+    <SourceList ids={[port.sourceId, port.alternativeSourceId]} intro="The local operator's published starting rates and itinerary descriptions were checked on the date below. They are not live prices or confirmed availability. Other operators' products have separate prices and terms." />
+    <details className="mt-10 rounded-xl border p-5"><summary className="cursor-pointer text-sm font-medium">Excursion image credits</summary><ul className="mt-3 space-y-3">{[...new Map(photos.map((photo) => [photo.src, photo])).values()].map((photo) => <li key={photo.src}><p className="text-sm">{photo.alt}</p><GuidePhotoCredit photo={photo} /></li>)}</ul></details>
+    <div className="fixed inset-x-0 bottom-0 z-30 border-t bg-background/95 px-4 py-3 backdrop-blur lg:hidden"><div className="mx-auto flex max-w-5xl items-center justify-between gap-3"><p className="text-sm font-medium">Private day ashore<br /><span className="text-xs text-muted-foreground">From {port.name} Port</span></p><a href="#request-quote" onClick={focusQuote} className="btn btn-primary shrink-0 text-sm">Request a quote</a></div></div>
+  </main>;
 }

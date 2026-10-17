@@ -94,6 +94,6 @@
   .btn-light { background: var(--color-navy-foreground); color: var(--color-navy); }
   .field { width: 100%; border: 1px solid var(--color-input); background: var(--color-card); border-radius: .5rem; padding: .55rem .75rem; font-size: 1rem; }
   .chip { border: 1px solid var(--color-border); border-radius: 999px; padding: .4rem .9rem; font-size: .875rem; font-weight: 500; }
-  .chip[aria-pressed="true"] { background: var(--color-navy); color: var(--color-navy-foreground); border-color: var(--color-navy); }
+  .chip[aria-pressed="true"], .chip[aria-current="true"] { background: var(--color-navy); color: var(--color-navy-foreground); border-color: var(--color-navy); }
 }
 @media (prefers-reduced-motion: reduce) { .photo-card img { transition: none !important; transform: none !important; } }

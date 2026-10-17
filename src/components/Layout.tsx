@@ -1,8 +1,7 @@
 import { Link, useRouterState } from "@tanstack/react-router";
-import { useEffect, useState, type ReactNode } from "react";
-import { Compass } from "lucide-react";
+import { useEffect, useId, useState, type ReactNode } from "react";
+import { ChevronDown, Compass } from "lucide-react";
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetDescription } from "@/components/ui/sheet";
-import { OWNER_BASE } from "@/data/registry";
 import { allNavGroups, serviceNav, serviceDomains, hotelNav, utilityNav, footerNav, type SidebarNavItem } from "@/data/nav";
 import { relFor } from "@/lib/outbound";
 
@@ -52,6 +51,27 @@ function SidebarLink({ item, onNavigate }: { item: SidebarNavItem; onNavigate: (
   );
 }
 
+function SidebarBranch({ item, onNavigate }: { item: SidebarNavItem; onNavigate: (() => void) | undefined }) {
+  const pathname = useRouterState({ select: (state) => state.location.pathname });
+  const children = "children" in item ? item.children : undefined;
+  const isChildPage = children?.some((child) => child.to === pathname) ?? false;
+  const [expanded, setExpanded] = useState(isChildPage);
+  const id = useId();
+  useEffect(() => { if (isChildPage) setExpanded(true); }, [isChildPage]);
+  if (!children) return <SidebarLink item={item} onNavigate={onNavigate} />;
+  return <>
+    <div className="flex items-center gap-1">
+      <div className="min-w-0 flex-1"><SidebarLink item={item} onNavigate={onNavigate} /></div>
+      <button type="button" aria-label="Choose a shore excursion port" aria-expanded={expanded} aria-controls={id} onClick={() => setExpanded(!expanded)} className="rounded-lg p-2 hover:bg-muted focus-visible:outline-2 focus-visible:outline-primary">
+        <ChevronDown aria-hidden className={`h-4 w-4 transition-transform ${expanded ? "rotate-180" : ""}`} />
+      </button>
+    </div>
+    <ul id={id} hidden={!expanded} aria-label="Shore excursion ports" className="ml-3 mt-1 space-y-0.5 border-l pl-2">
+      {children.map((child) => <li key={child.to}><SidebarLink item={child} onNavigate={onNavigate} /></li>)}
+    </ul>
+  </>;
+}
+
 /** Global navigation shared by the desktop rail and the mobile drawer. */
 export function GlobalNav({ onNavigate }: { onNavigate?: () => void }) {
   return (
@@ -65,7 +85,7 @@ export function GlobalNav({ onNavigate }: { onNavigate?: () => void }) {
           <ul className="space-y-0.5">
             {g.items.map((i) => (
               <li key={i.label}>
-                <SidebarLink item={i} onNavigate={onNavigate} />
+                <SidebarBranch item={i} onNavigate={onNavigate} />
               </li>
             ))}
           </ul>
@@ -142,7 +162,8 @@ export function SiteFooter() {
           <ul className="mt-3 space-y-2 opacity-90">
             {hotelNav.map((n) => <li key={n.label}><Link to={n.to}>{n.label}</Link></li>)}
             <li><Link to="/travel-blog/ben-gurion-airport-to-jerusalem/">Airport to Jerusalem</Link></li>
-            <li><ExtLink href={`${OWNER_BASE}/travel-blog/getting-around-israel/`}>Getting around Israel (existing guide)</ExtLink></li>
+            <li><Link to="/guides/">Travel guides & tips</Link></li>
+            <li><Link to="/travel-blog/getting-around-israel/">Getting around Israel</Link></li>
             <li><Link to="/about/">About &amp; methodology</Link></li>
           </ul>
         </div>

@@ -4,7 +4,7 @@ import { TransferQuoteForm } from "@/components/TransferQuoteForm";
 import { StayPhotoCredits } from "@/components/StayGuideParts";
 import { getAirportRouteGuide } from "@/data/airportRoutes";
 import { airportTransferPhotos } from "@/data/airportTransfers";
-import { AIRPORT_TRANSFER_CHECK_DATE, airportTransferRoutes, formatCheckDate, getSource, type AirportTransferRouteId } from "@/data/registry";
+import { AIRPORT_TRANSFER_CHECK_DATE, airportTransferRoutes, formatCheckDate, getSource, travelGuidePaths, type AirportTransferRouteId } from "@/data/registry";
 import { pageMeta } from "@/lib/site";
 
 function crumbsFor(id: AirportTransferRouteId) {
@@ -83,7 +83,7 @@ export function AirportRoutePage({ id }: { id: AirportTransferRouteId }) {
         <p className="mt-3 opacity-90">Tell Moshe when you arrive and where you're staying in {guide.city}. Ask for the full price and pickup details before confirming your booking.</p>
         <a href="#request-quote" onClick={focusQuote} className="btn btn-light mt-5">Request a quote from Moshe</a>
       </section>
-      <RelatedLinks title="Plan your stay" items={guide.related} />
+      <RelatedLinks title="Plan your stay" items={[...guide.related, { label: "Ben Gurion arrival tips", to: travelGuidePaths.arrival }, { label: "Choosing an eSIM for Israel", to: travelGuidePaths.esim }]} />
       <section aria-labelledby="other-routes-h" className="mt-12">
         <h2 id="other-routes-h" className="text-2xl">Other airport transfer routes</h2>
         <ul className="mt-4 flex flex-wrap gap-3">{airportTransferRoutes.filter((route) => route.id !== id).map((route) => <li key={route.id}><Link to={route.path} className="chip inline-block">Ben Gurion to {getAirportRouteGuide(route.id).city}</Link></li>)}<li><Link to="/transfers/ben-gurion-airport/" className="chip inline-block">All destinations</Link></li></ul>

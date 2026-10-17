@@ -86,11 +86,11 @@ export function FaqList({ faqs }: { faqs: { q: string; a: string }[] }) {
   );
 }
 
-export function SourceList({ ids }: { ids: string[] }) {
+export function SourceList({ ids, intro = "“Checked” dates refer to the facts on these pages only. Provider prices, availability and inventory were not verified." }: { ids: string[]; intro?: string }) {
   return (
     <section id="sources" aria-labelledby="sources-h" className="mt-14">
       <h2 id="sources-h" className="text-3xl">Sources</h2>
-      <p className="mt-2 text-sm text-muted-foreground">“Checked” dates refer to the facts on these pages only. Provider prices, availability and inventory were not verified.</p>
+      <p className="mt-2 text-sm text-muted-foreground">{intro}</p>
       <ul className="mt-4 space-y-3">
         {ids.map(getSource).map((s) => (
           <li key={s.id} className="rounded-xl border bg-card p-4 text-sm">

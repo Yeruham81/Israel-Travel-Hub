@@ -98,6 +98,40 @@ export const TIBERIAS_STAY_REVIEW_DATE: ISODate = "2026-10-17";
 export const HAIFA_STAY_REVIEW_DATE: ISODate = "2026-10-17";
 export const OWNER_BASE = "https://www.israel-taxi.com";
 export const AIRPORT_TRANSFER_CHECK_DATE: ISODate = "2026-10-17";
+export const TRAVEL_GUIDE_CHECK_DATE: ISODate = "2026-10-17";
+export const SHORE_EXCURSION_CHECK_DATE: ISODate = "2026-10-17";
+
+export const travelGuidePaths = {
+  uber: "/travel-blog/uber-in-israel/",
+  sherut: "/travel-blog/sherut-in-israel/",
+  esim: "/travel-blog/best-esim-for-israel/",
+  arrival: "/travel-blog/ben-gurion-airport-arrival-tips/",
+  israel: "/travel-blog/getting-around-israel/",
+  telAviv: "/travel-blog/getting-around-tel-aviv/",
+  taxis: "/travel-blog/taxis-in-israel/",
+} as const;
+export type TravelGuideId = keyof typeof travelGuidePaths;
+
+const travelGuideSources: SourceReference[] = [
+  ...Object.entries(travelGuidePaths).map(([id, path]): SourceReference => ({
+    id: `guide-original-${id}`, title: `Original guide: ${path.split("/").filter(Boolean).at(-1)!.replaceAll("-", " ")}`,
+    publisher: "Israel-Taxi.com (Moshe Barak)", url: `${OWNER_BASE}${path}`, checkedAt: TRAVEL_GUIDE_CHECK_DATE,
+    note: "Original local guide, adapted and shortened for this portal. Operator availability reports are attributed to the publisher; current official service and product pages supplement the travel advice.",
+  })),
+  ...([
+    ["guide-gett", "Airport taxi pickup and payment instructions", "Gett", "https://www.gett.com/il/airport-en/", "Official on-demand code/queue process, Terminal 3 Exit 03 and the separate scheduled-ride pickup at Level 2, Exit 23. Check the actual booking instructions before travelling."],
+    ["guide-iaa", "Airport ground transportation", "Israel Airports Authority", "https://www.iaa.gov.il/en/airports/ben-gurion/directions/directions-list/", "Official train, bus, airport shuttle and taxi information. The internal airport shuttle is not an airport-to-city sherut."],
+    ["guide-lost-property", "Lost property and baggage contacts", "Israel Airports Authority", "https://www.iaa.gov.il/en/airports/ben-gurion/lost-found/", "Use the airline or its handler for checked-baggage issues and the airport's instructions for items lost elsewhere in the terminal."],
+    ["guide-telaviv-transit", "Public transport and weekend services", "Tel Aviv-Yafo Municipality", "https://www.tel-aviv.gov.il/en/Live/Transportation/Pages/PublicTransportaiton.aspx", "Municipal information on Rav-Kav and the free weekend network. Routes and operating hours must be checked for the travel date."],
+    ["guide-red-line", "Tel Aviv light rail", "Tel Aviv-Yafo Municipality", "https://www.tel-aviv.gov.il/en/Live/Transportation/Pages/lightrail.aspx", "The operating Red Line is distinguished from future lines. Use the operator's current map and timetable rather than a future-network map."],
+    ["guide-esim-airalo", "Israel eSIM plans and setup", "Airalo", "https://www.airalo.com/israel-esim", "Published Israel plans and installation guidance. Check the exact package for data, validity, voice/text inclusions and activation conditions. No local speed test was performed."],
+    ["guide-esim-saily", "Israel plans, hotspot and optional calling", "Saily", "https://saily.com/esim-israel/", "Current Israel product page includes data packages and optional phone-number/call/text products. Its phone-number product uses a US number; an eSIM does not automatically supply an Israeli number."],
+    ["guide-esim-yesim", "Israel fixed and unlimited plans", "Yesim", "https://yesim.app/country/israel/", "Israel packages include fixed and unlimited options; the provider explains fair-use speed limitations. Unlimited does not guarantee continuous maximum speed."],
+    ["guide-esim-gigsky", "Israel mobile-data plans", "GigSky", "https://www.gigsky.com/country/esim-in-israel", "Country, regional and other coverage options are separate products. Confirm Israel and every other destination in the exact package's country list."],
+    ["guide-esim-drimsim", "Israel pay-as-you-use SIM and eSIM", "Drimsim", "https://drimsim.com/en/country/israel", "The country page lists usage-based data for physical SIM and eSIM. Compare the current per-unit rate and any setup or balance terms with a fixed package."],
+  ] as const).map(([id, title, publisher, url, note]): SourceReference => ({ id, title, publisher, url, note, checkedAt: TRAVEL_GUIDE_CHECK_DATE })),
+  { id: "guide-entry", title: "Official Israel entry and ETA-IL portal", publisher: "Population and Immigration Authority", url: "https://israel-entry.piba.gov.il/", checkedAt: null, note: "Official portal for current passport-specific eligibility and application instructions. The portal is linked for readers to check their own requirements; fees, processing periods and admission conditions are not reproduced here." },
+];
 
 export interface AirportTransferRate {
   id: string;
@@ -132,6 +166,42 @@ export const airportTransferContact = {
   privacyUrl: `${OWNER_BASE}/privacy-policy/`,
   deliveryMode: "email_draft" as const,
 };
+
+export const shorePorts = {
+  haifa: { name: "Haifa", path: "/haifa-shore-excursions/", sourceId: "owner-haifa-shore", pageId: "shore-haifa" },
+  ashdod: { name: "Ashdod", path: "/ashdod-shore-excursions/", sourceId: "owner-ashdod-shore", pageId: "shore-ashdod" },
+} as const;
+export type ShorePortId = keyof typeof shorePorts;
+
+export interface ShoreExcursionRate {
+  id: string;
+  portId: ShorePortId;
+  destination: string;
+  price: IndicativePrice;
+}
+
+/** Published car-and-driver round-trip rates; never a live quote or guided-tour price. */
+export const shoreExcursionRates: ShoreExcursionRate[] = ([
+  ["ashdod-tel-aviv", "ashdod", "Tel Aviv & Jaffa", 1200],
+  ["ashdod-jerusalem", "ashdod", "Classical Jerusalem", 1700],
+  ["ashdod-masada", "ashdod", "Masada & the Dead Sea", 2200],
+  ["ashdod-masada-jerusalem", "ashdod", "Masada, the Dead Sea & Jerusalem", 2400],
+  ["haifa-akko", "haifa", "Akko & Rosh Hanikra", 1900],
+  ["haifa-tel-aviv", "haifa", "Tel Aviv & Jaffa", 2100],
+  ["haifa-galilee", "haifa", "Nazareth & the Sea of Galilee", 2300],
+  ["haifa-jerusalem", "haifa", "Classical Jerusalem", 2700],
+] as const).map(([id, portId, destination, amount]) => ({
+  id, portId, destination,
+  price: { kind: "published_starting_rate", currency: "ILS", amount, basis: "per_vehicle", maxPartySize: 4,
+    conditions: "Full-day return transportation with a private driver for up to 4 passengers on weekdays. Licensed guiding, admission, meals and tips are excluded. Night, weekend and holiday supplements may apply. Final itinerary, price and availability require confirmation.",
+    sourceId: shorePorts[portId].sourceId },
+}));
+
+export const shoreExcursionContact = {
+  name: airportTransferContact.name, email: airportTransferContact.email,
+  privacyUrl: airportTransferContact.privacyUrl, deliveryMode: "email_draft" as const,
+};
+export const shoreOnlineFormUrl = (portId: ShorePortId) => `${OWNER_BASE}${shorePorts[portId].path}#contact-me`;
 
 /** Only these four airport destinations have individual transfer guides. */
 export const airportTransferRoutes = [
@@ -241,6 +311,7 @@ const haifaHotelSources: SourceReference[] = [
 }));
 
 export const sources: SourceReference[] = [
+  ...travelGuideSources,
   ...airportTransferRoutes.filter((route) => route.id !== "jerusalem").map((route): SourceReference => ({
     id: route.sourceId, title: `Ben Gurion Airport to ${route.id === "dead-sea" ? "Ein Bokek" : route.id === "tel-aviv" ? "Tel Aviv" : "Haifa"} — original guide`,
     publisher: "Israel-Taxi.com (Moshe Barak)", url: `${OWNER_BASE}${route.path}`, checkedAt: AIRPORT_TRANSFER_CHECK_DATE,
@@ -407,23 +478,23 @@ export const sources: SourceReference[] = [
     title: "Ashdod shore excursions",
     publisher: "Israel-Taxi.com (Moshe Barak)",
     url: `${OWNER_BASE}/ashdod-shore-excursions/`,
-    checkedAt: INFO_CHECK_DATE,
-    note: "Publisher's car-and-driver page. Lists suggested Tel Aviv/Jaffa, classical Jerusalem and Masada/Dead Sea itineraries. Prices and guarantee wording on the page are not reproduced here.",
+    checkedAt: SHORE_EXCURSION_CHECK_DATE,
+    note: "Publisher's four Ashdod return car-and-driver itineraries and ILS starting rates checked: Tel Aviv/Jaffa 1,200; Jerusalem 1,700; Masada/Dead Sea 2,200; Masada/Dead Sea/Jerusalem 2,400. Up to four passengers. The fare cards and payment note specify ILS; a conflicting USD FAQ and approximate conversions are not used. These are published starting figures, not live quotes. Guiding and admissions are excluded; final terms require confirmation.",
   },
   {
     id: "owner-haifa-shore",
     title: "Haifa shore excursions",
     publisher: "Israel-Taxi.com (Moshe Barak)",
     url: `${OWNER_BASE}/haifa-shore-excursions/`,
-    checkedAt: INFO_CHECK_DATE,
-    note: "Publisher's car-and-driver page. Lists suggested Akko/Rosh Hanikra, Tel Aviv/Jaffa, Nazareth/Sea of Galilee and classical Jerusalem itineraries. Its published price figures are not reproduced here; a current offer must be requested from the operator.",
+    checkedAt: SHORE_EXCURSION_CHECK_DATE,
+    note: "Publisher's four Haifa return car-and-driver itineraries and ILS starting rates checked: Akko/Rosh Hanikra 1,900; Tel Aviv/Jaffa 2,100; Nazareth/Galilee 2,300; Jerusalem 2,700. Up to four passengers. The fare cards and payment note specify ILS; a conflicting USD FAQ and approximate conversions are not used. These are published starting figures, not live quotes. Site operation, guiding, admissions and final terms must be confirmed.",
   },
   {
     id: "beinharim-ashdod-jlm-bethlehem",
     title: "Jerusalem and Bethlehem day tour from Ashdod Port",
     publisher: "Bein Harim Tours",
     url: "https://www.beinharimtours.com/jerusalem-and-bethlehem-day-tour-from-ashdod-port/",
-    checkedAt: INFO_CHECK_DATE,
+    checkedAt: SHORE_EXCURSION_CHECK_DATE,
     note: "Operator product page for a combined Jerusalem and Bethlehem itinerary departing from Ashdod Port. Price, dates, inclusions and availability not checked.",
   },
   {
@@ -431,7 +502,7 @@ export const sources: SourceReference[] = [
     title: "Ship-to-shore excursion: Haifa to Jerusalem and Bethlehem",
     publisher: "Bein Harim Tours",
     url: "https://www.beinharimtours.com/ship-to-shore-excursions-haifa-jerusalem-bethlehem/",
-    checkedAt: INFO_CHECK_DATE,
+    checkedAt: SHORE_EXCURSION_CHECK_DATE,
     note: "Operator product page for a combined Jerusalem and Bethlehem itinerary departing from Haifa Port. Price, dates, inclusions and availability not checked.",
   },
   {
@@ -489,6 +560,11 @@ export const operators: Operator[] = [
 
 /** Existing publisher-owned tracking links copied exactly from the supplied destination guides. */
 export const affiliateConfig: Record<string, { trackingUrl: string } | undefined> = {
+  "esim-airalo": { trackingUrl: "https://airalo.tpm.li/JmHFDV3v" },
+  "esim-saily": { trackingUrl: "https://saily.tpm.li/nM5mNYzP" },
+  "esim-yesim": { trackingUrl: "https://yesim.tpm.li/6WmqBIJV" },
+  "esim-gigsky": { trackingUrl: "https://gigsky.tpm.li/NxqtNVtH" },
+  "esim-drimsim": { trackingUrl: "https://drimsim.tpm.li/khIJTNaX" },
   // Replace only with the publisher's actual approved tracking links, including destination parameters.
   "airport-kiwitaxi": undefined,
   "airport-welcome": undefined,
@@ -583,6 +659,7 @@ export const affiliateConfig: Record<string, { trackingUrl: string } | undefined
 };
 
 export const partners: BookingPartner[] = [
+  ...(["airalo", "saily", "yesim", "gigsky", "drimsim"] as const).map((id): BookingPartner => ({ id, name: ({ airalo: "Airalo", saily: "Saily", yesim: "Yesim", gigsky: "GigSky", drimsim: "Drimsim" })[id], capability: affiliateConfig[`esim-${id}`] ? "affiliate_link" : "editorial_only", homepage: travelGuideSources.find((source) => source.id === `guide-esim-${id}`)!.url })),
   { id: "kiwitaxi", name: "Kiwitaxi", capability: affiliateConfig["airport-kiwitaxi"] ? "affiliate_link" : "editorial_only", homepage: "https://kiwitaxi.com/" },
   { id: "welcome", name: "Welcome Pickups", capability: affiliateConfig["airport-welcome"] ? "affiliate_link" : "editorial_only", homepage: "https://www.welcomepickups.com/" },
   { id: "intui", name: "Intui.travel", capability: affiliateConfig["airport-intui"] ? "affiliate_link" : "editorial_only", homepage: "https://en.intui.travel/" },
@@ -1191,6 +1268,19 @@ export interface ProviderLink {
 const moshe = { providerName: "Moshe Barak", relationship: "publisher_operator" as const, operatorId: "moshe-barak" };
 
 export const providerLinks: ProviderLink[] = [
+  ...([
+    ["airalo", "Airalo", "Compare Israel package sizes, validity and the inclusions of the exact plan."],
+    ["saily", "Saily", "Compare data packages and any optional call/text product separately; check the number's country."],
+    ["yesim", "Yesim", "Compare fixed data with unlimited packages and read the fair-use speed conditions."],
+    ["gigsky", "GigSky", "Choose Israel in the app or site; check country coverage if considering a regional or wider-travel package."],
+    ["drimsim", "Drimsim", "Compare pay-as-you-use data costs and setup terms with a fixed-data travel package."],
+  ] as const).map(([partnerId, providerName, summary]): ProviderLink => {
+    const id = `esim-${partnerId}`;
+    const trackingUrl = affiliateConfig[id]?.trackingUrl;
+    return { id, pageIds: ["guide-esim"], providerName, relationship: "booking_platform", partnerId, mode: "provider_redirect", title: `${providerName} for Israel`, summary,
+      ctaLabel: `Check plans on ${providerName}`, url: trackingUrl || travelGuideSources.find((source) => source.id === `guide-esim-${partnerId}`)!.url, isAffiliate: Boolean(trackingUrl), sourceId: `guide-esim-${partnerId}`,
+      confirm: ["Exact device compatibility", "Country coverage and activation", "Data and validity", "Hotspot and fair-use rules", "Final price and refund terms"], reentryNote: "Choose and purchase the plan on the provider's site. No live price, network speed or completed purchase is verified here." };
+  }),
   ...([
     ["kiwitaxi", "Kiwitaxi", "kiwitaxi-airport", "Choose your destination and vehicle on Kiwitaxi's Ben Gurion Airport page."],
     ["welcome", "Welcome Pickups", "welcome-telaviv", "Start from Welcome's Tel Aviv page and enter your airport pickup and exact drop-off."],
