@@ -27,7 +27,7 @@ function Transfers() {
       <section aria-labelledby="types-h" className="mt-10">
         <h2 id="types-h" className="text-3xl">What do you need?</h2>
         <div className="mt-5 grid gap-4 md:grid-cols-2">
-          <HubCard to="/transfers/ben-gurion-airport/" eyebrow="Airport" title="From Ben Gurion Airport" text="Licensed taxi rank vs pre-booked transfer vs train, with route guides to Jerusalem and Tel Aviv." cta="Choose your destination" />
+          <HubCard to="/transfers/ben-gurion-airport/" eyebrow="Airport" title="From Ben Gurion Airport" text="Pre-book a private pickup. Explore destinations and starting prices, then request a personal quote or check other booking platforms." cta="Choose your destination" />
           <div className="flex h-full flex-col rounded-2xl border bg-card p-6">
             <p className="eyebrow">Private transport</p>
             <h3 className="mt-2 text-2xl">Intercity & day hire</h3>

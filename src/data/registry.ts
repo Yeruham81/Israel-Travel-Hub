@@ -97,6 +97,41 @@ export const DEAD_SEA_STAY_REVIEW_DATE: ISODate = "2026-10-17";
 export const TIBERIAS_STAY_REVIEW_DATE: ISODate = "2026-10-17";
 export const HAIFA_STAY_REVIEW_DATE: ISODate = "2026-10-17";
 export const OWNER_BASE = "https://www.israel-taxi.com";
+export const AIRPORT_TRANSFER_CHECK_DATE: ISODate = "2026-10-17";
+
+export interface AirportTransferRate {
+  id: string;
+  destination: string;
+  popular: boolean;
+  price: IndicativePrice;
+}
+
+/** Moshe Barak's published starting rates, not live availability or a booking quote. */
+export const airportTransferRates: AirportTransferRate[] = ([
+  ["tel-aviv", "Tel Aviv & Jaffa", 330, true],
+  ["jerusalem", "Jerusalem", 550, true],
+  ["haifa", "Haifa", 930, true],
+  ["dead-sea", "Ein Bokek · Dead Sea", 1300, true],
+  ["raanana", "Ra’anana", 340, false],
+  ["herzliya", "Herzliya", 340, false],
+  ["netanya", "Netanya", 450, false],
+  ["ashdod", "Ashdod", 480, false],
+  ["caesarea", "Caesarea", 630, false],
+  ["nazareth", "Nazareth", 950, false],
+  ["eilat", "Eilat", 2700, false],
+] as const).map(([id, destination, amount, popular]) => ({
+  id, destination, popular,
+  price: { kind: "published_starting_rate", currency: "ILS", amount, basis: "per_vehicle", maxPartySize: 4,
+    conditions: "One-way weekday transfer for up to 4 passengers. Night, weekend and holiday supplements may apply. Final price and availability confirmed by Moshe Barak; request at least 24 hours ahead.",
+    sourceId: "moshe-airport-transfers" },
+}));
+
+export const airportTransferContact = {
+  name: "Moshe Barak", email: "reservations@israel-taxi.com",
+  onlineFormUrl: `${OWNER_BASE}/airport-transfers/#contact-me`,
+  privacyUrl: `${OWNER_BASE}/privacy-policy/`,
+  deliveryMode: "email_draft" as const,
+};
 
 const jerusalemHotelSources: SourceReference[] = [
   ["herbert-samuel", "Herbert Samuel Jerusalem", "https://herbertsamuel.com/en/herbert-samuel-jerusalem-hotel/"],
@@ -263,8 +298,8 @@ export const sources: SourceReference[] = [
     title: "Airport transfers – published rates",
     publisher: "Israel-Taxi.com (Moshe Barak)",
     url: `${OWNER_BASE}/airport-transfers/`,
-    checkedAt: INFO_CHECK_DATE,
-    note: "Published starting fare ILS 550 Ben Gurion → Jerusalem for up to 4 passengers, weekday rate; surcharges may apply nights/weekends/holidays; 24 hours' notice; final price by quote.",
+    checkedAt: AIRPORT_TRANSFER_CHECK_DATE,
+    note: "Publisher's starting fares for eleven Ben Gurion airport destinations, for up to 4 passengers on weekdays. Night/weekend/holiday supplements may apply; at least 24 hours' notice; final price and availability by quote. Not live inventory.",
   },
   {
     id: "intui-airport",
@@ -273,6 +308,21 @@ export const sources: SourceReference[] = [
     url: "https://en.intui.travel/tel-aviv-ben-gurion-international-airport-transfer/",
     checkedAt: INFO_CHECK_DATE,
     note: "Transfer search page listing Jerusalem as a destination. No date-specific price or inventory was checked.",
+  },
+  {
+    id: "kiwitaxi-airport", title: "Ben Gurion Airport transfers", publisher: "Kiwitaxi",
+    url: "https://kiwitaxi.com/en/israel/ben-gurion-airport", checkedAt: AIRPORT_TRANSFER_CHECK_DATE,
+    note: "Official airport transfer page. Travelers enter their destination and dates; no live quote or booking was checked.",
+  },
+  {
+    id: "welcome-telaviv", title: "Tel Aviv airport pickups", publisher: "Welcome Pickups",
+    url: "https://www.welcomepickups.com/tel-aviv/", checkedAt: AIRPORT_TRANSFER_CHECK_DATE,
+    note: "Official destination and airport pickup page. Enter the exact destination, flight and guests on the booking site; availability not checked.",
+  },
+  {
+    id: "gettransfer-telaviv", title: "Tel Aviv transfers", publisher: "GetTransfer.com",
+    url: "https://gettransfer.com/en/directions/israel/tel-aviv", checkedAt: AIRPORT_TRANSFER_CHECK_DATE,
+    note: "Official local transfer page. Travelers re-enter their route and trip details; no price or inventory is supplied here.",
   },
   {
     id: "gettransfer-home",
@@ -423,17 +473,13 @@ export const operators: Operator[] = [
   { id: "inpa", name: "Israel Nature and Parks Authority", kind: "official_site" },
 ];
 
-export const partners: BookingPartner[] = [
-  { id: "intui", name: "Intui.travel", capability: "editorial_only", homepage: "https://en.intui.travel/" },
-  { id: "gettransfer", name: "GetTransfer.com", capability: "editorial_only", homepage: "https://gettransfer.com/en" },
-  { id: "gett", name: "Gett", capability: "editorial_only", homepage: "https://www.gett.com/il/airport-en/" },
-  { id: "booking", name: "Booking.com", capability: "editorial_only", homepage: "https://www.booking.com/" },
-  { id: "expedia", name: "Expedia", capability: "affiliate_link", homepage: "https://www.expedia.com/" },
-  { id: "discovercars", name: "DiscoverCars", capability: "editorial_only", homepage: "https://www.discovercars.com/" },
-];
-
 /** Existing publisher-owned tracking links copied exactly from the supplied destination guides. */
 export const affiliateConfig: Record<string, { trackingUrl: string } | undefined> = {
+  // Replace only with the publisher's actual approved tracking links, including destination parameters.
+  "airport-kiwitaxi": undefined,
+  "airport-welcome": undefined,
+  "airport-intui": undefined,
+  "airport-gettransfer": undefined,
   "hotels-jerusalem-expedia": { trackingUrl: "https://expedia.tpm.li/yNeL4j4v" },
   "area-downtown-expedia": { trackingUrl: "https://expedia.tpm.li/2i5lfUjl" },
   "area-mamilla-expedia": { trackingUrl: "https://expedia.tpm.li/UWWQ1gK3" },
@@ -521,6 +567,17 @@ export const affiliateConfig: Record<string, { trackingUrl: string } | undefined
   "hotel-haifa-port-inn-expedia": { trackingUrl: "https://expedia.tpm.li/wYvcNQoB" },
   "hotel-haifa-loui-talpiot-expedia": { trackingUrl: "https://expedia.tpm.li/p7P9zxsX" },
 };
+
+export const partners: BookingPartner[] = [
+  { id: "kiwitaxi", name: "Kiwitaxi", capability: affiliateConfig["airport-kiwitaxi"] ? "affiliate_link" : "editorial_only", homepage: "https://kiwitaxi.com/" },
+  { id: "welcome", name: "Welcome Pickups", capability: affiliateConfig["airport-welcome"] ? "affiliate_link" : "editorial_only", homepage: "https://www.welcomepickups.com/" },
+  { id: "intui", name: "Intui.travel", capability: affiliateConfig["airport-intui"] ? "affiliate_link" : "editorial_only", homepage: "https://en.intui.travel/" },
+  { id: "gettransfer", name: "GetTransfer.com", capability: affiliateConfig["airport-gettransfer"] ? "affiliate_link" : "editorial_only", homepage: "https://gettransfer.com/en" },
+  { id: "gett", name: "Gett", capability: "editorial_only", homepage: "https://www.gett.com/il/airport-en/" },
+  { id: "booking", name: "Booking.com", capability: "editorial_only", homepage: "https://www.booking.com/" },
+  { id: "expedia", name: "Expedia", capability: "affiliate_link", homepage: "https://www.expedia.com/" },
+  { id: "discovercars", name: "DiscoverCars", capability: "editorial_only", homepage: "https://www.discovercars.com/" },
+];
 
 export interface ResortHotelFacts {
   location: string;
@@ -1120,6 +1177,20 @@ export interface ProviderLink {
 const moshe = { providerName: "Moshe Barak", relationship: "publisher_operator" as const, operatorId: "moshe-barak" };
 
 export const providerLinks: ProviderLink[] = [
+  ...([
+    ["kiwitaxi", "Kiwitaxi", "kiwitaxi-airport", "Choose your destination and vehicle on Kiwitaxi's Ben Gurion Airport page."],
+    ["welcome", "Welcome Pickups", "welcome-telaviv", "Start from Welcome's Tel Aviv page and enter your airport pickup and exact drop-off."],
+    ["intui", "Intui.travel", "intui-airport", "Search from Ben Gurion Airport to your destination, with dates and party details."],
+    ["gettransfer", "GetTransfer.com", "gettransfer-telaviv", "Open the Tel Aviv transfer page, then enter Ben Gurion Airport and your destination."],
+  ] as const).map(([partnerId, providerName, sourceId, summary]): ProviderLink => {
+    const id = `airport-${partnerId}`;
+    const trackingUrl = affiliateConfig[id]?.trackingUrl;
+    return { id, pageIds: ["airport-private-transfers"], providerName, relationship: "booking_platform", partnerId, mode: "provider_redirect",
+      title: `${providerName} airport transfers`, summary, ctaLabel: `Check transfers on ${providerName}`,
+      url: trackingUrl || sources.find((source) => source.id === sourceId)!.url, isAffiliate: Boolean(trackingUrl),
+      reentryNote: "Enter Ben Gurion Airport, your exact destination, date, passengers and luggage on the provider's site.",
+      confirm: ["Route and pickup time", "Vehicle and luggage allowance", "Total price and waiting policy", "Cancellation terms"], sourceId };
+  }),
   ...hotelRecommendations.map((hotel): ProviderLink => {
     const id = `hotel-${hotel.id}-expedia`;
     const trackingUrl = affiliateConfig[id]?.trackingUrl;
@@ -1181,7 +1252,7 @@ export const providerLinks: ProviderLink[] = [
       confirm: ["Exact neighborhood and map location", "Total including taxes and fees", "Room type", "Cancellation conditions"],
     };
   }),
-  // Ben Gurion → Tel Aviv (no published Tel Aviv rate is shown)
+  // The Tel Aviv route keeps its inquiry flow; starting rates are listed on the airport hub.
   {
     id: "tlv-ta-moshe", pageIds: ["tlv-telaviv"], ...moshe, mode: "provider_inquiry",
     title: "Private pre-booked transfer", summary: "Local driver business. Ask for a quote for your Tel Aviv or Jaffa address, party size and arrival time.",
