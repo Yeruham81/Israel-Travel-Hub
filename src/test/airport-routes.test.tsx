@@ -29,7 +29,9 @@ describe("four dedicated airport transfer routes", () => {
     expect(screen.getByTestId("route-starting-rate")).toHaveTextContent(route.driveTime);
     expect(screen.getByRole("link", { name: "Request your airport transfer" })).toHaveAttribute("href", "#request-quote");
     const form = screen.getByRole("form", { name: "Private airport transfer quote request" });
-    expect(form.compareDocumentPosition(container.querySelector("#journey-details")!)).toBe(Node.DOCUMENT_POSITION_FOLLOWING);
+    const journey = container.querySelector("#journey-details");
+    if (!journey) throw new Error("Missing route information");
+    expect(journey.compareDocumentPosition(form)).toBe(Node.DOCUMENT_POSITION_FOLLOWING);
     expect(screen.getByLabelText("Destination *")).toHaveValue(guide.rate.destination);
     expect(screen.getByLabelText("Destination *")).toHaveAttribute("readonly");
     expect(screen.queryByRole("combobox")).not.toBeInTheDocument();
