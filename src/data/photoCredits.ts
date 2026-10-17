@@ -12,6 +12,7 @@ export type PhotoCredit = {
 const RESIZED = "Resized and converted to WebP";
 
 export const photoCredits: PhotoCredit[] = [
+  { asset: "dead-sea-beach", subject: "Ein Bokek beach and promenade (Dead Sea accommodation cards)", sourceUrl: "https://www.israel-taxi.com/wp-content/uploads/2025/08/dead_sea_beach_1.jpg", license: "Reused from the publisher's original Dead Sea guide", changes: RESIZED },
   { asset: "hero-tel-aviv", subject: "Tel Aviv beach promenade (hero)", author: "FLASHPACKER TRAVELGUIDE", sourceUrl: "https://commons.wikimedia.org/wiki/File:Tel_Aviv_Tayelet-Strand-Promenade_Beach_(34257299744).jpg", license: "CC BY-SA 2.0", licenseUrl: "https://creativecommons.org/licenses/by-sa/2.0/", changes: "Cropped to panorama, resized and converted to WebP" },
   { asset: "hero-haifa", subject: "Haifa Bay and Bahá'í Gardens from Mount Carmel (hero)", author: "Юкатан", sourceUrl: "https://commons.wikimedia.org/wiki/File:Panorama_Haifa_(cropped).jpg", license: "CC BY-SA 3.0", licenseUrl: "https://creativecommons.org/licenses/by-sa/3.0/", changes: "Cropped to panorama, resized and converted to WebP" },
   { asset: "tel-aviv-coast", subject: "Tel Aviv shoreline from Jaffa", author: "Ariel Manor", sourceUrl: "https://commons.wikimedia.org/wiki/File:PikiWiki_Israel_58105_jaffa_-_old_city.jpg", license: "CC BY 2.5", licenseUrl: "https://creativecommons.org/licenses/by/2.5/", changes: RESIZED },

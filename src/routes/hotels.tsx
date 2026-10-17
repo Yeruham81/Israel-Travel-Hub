@@ -1,13 +1,13 @@
 import { createFileRoute, type LinkProps } from "@tanstack/react-router";
 import { Checklist, HubCard, HubHeader, RelatedLinks } from "@/components/Guide";
-import { cityStayGuides } from "@/data/content";
+import { cityStayGuides, deadSeaStayGuide } from "@/data/content";
 import { pageMeta } from "@/lib/site";
 
 export const Route = createFileRoute("/hotels")({
   head: () =>
     pageMeta({
-      title: "Hotels & places to stay in Israel by city — Israel Taxi & Travel",
-      description: "Choose where to stay in Jerusalem, Tel Aviv or Tiberias: area guidance, what to check before booking, and links to compare current properties.",
+      title: "Hotels & places to stay in Israel by destination — Israel Taxi & Travel",
+      description: "Choose stays in Jerusalem, Tel Aviv, Tiberias or the Dead Sea. Explore area guides, spa and family hotel comparisons, and links to check current room options.",
       path: "/hotels/",
       crumbs: [{ name: "Home", path: "/" }, { name: "Accommodation", path: "/hotels/" }],
     }),
@@ -27,14 +27,15 @@ function Hotels() {
         crumbs={[{ name: "Home", to: "/" }, { name: "Accommodation", to: "/hotels/" }]}
         eyebrow="Accommodation"
         title="Where to stay in Israel"
-        intro="Start with the city, then choose an area that fits how you'll get around. Jerusalem and Tel Aviv have detailed neighborhood guides with hotel shortlists; each city guide also links to current accommodation options for your dates."
+        intro="Start with your destination, then choose a neighborhood or hotel style that fits your trip. Explore Jerusalem and Tel Aviv area guides, compare Dead Sea spa and family stays, or plan a base around Tiberias and the Galilee."
       />
       <section aria-labelledby="cities-h" className="mt-10">
-        <h2 id="cities-h" className="text-3xl">Choose a city</h2>
-        <div className="mt-5 grid gap-4 md:grid-cols-3">
+        <h2 id="cities-h" className="text-3xl">Choose a destination</h2>
+        <div className="mt-5 grid gap-4 md:grid-cols-2">
           {Object.values(cityStayGuides).map((g) => (
             <HubCard key={g.id} to={g.path as LinkProps["to"]} eyebrow={g.city} title={`Hotels in ${g.city}`} text={blurbs[g.id]} cta={`Explore ${g.city} areas`} />
           ))}
+          <HubCard to={deadSeaStayGuide.path as LinkProps["to"]} eyebrow="Dead Sea, Israel" title="Dead Sea hotels" text="Compare spa, family and luxury stays, with focused guides for wellness breaks and traveling with children." cta="Explore Dead Sea stays" />
         </div>
       </section>
       <section aria-labelledby="crit-h" className="mt-14">

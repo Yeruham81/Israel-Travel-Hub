@@ -17,6 +17,7 @@ import roadTrip from "@/assets/home/road-trip.webp";
 import cruisePort from "@/assets/home/cruise-port.webp";
 import ashdodPort from "@/assets/home/ashdod-port.webp";
 import haifaPort from "@/assets/home/haifa-port.webp";
+import deadSeaBeach from "@/assets/dead-sea/beach.webp";
 import { pageMeta } from "@/lib/site";
 import { photoCredits } from "@/data/photoCredits";
 
@@ -38,6 +39,7 @@ const IMG = {
   jerusalem: { src: jerusalem, alt: "Jerusalem's Old City and the Dome of the Rock seen from the Mount of Olives" },
   telAviv: { src: telAviv, alt: "Tel Aviv's beachfront skyline seen from Jaffa" },
   tiberias: { src: tiberias, alt: "Tiberias on the shore of the Sea of Galilee, seen from the water" },
+  deadSea: { src: deadSeaBeach, alt: "Ein Bokek's beach and palm-lined promenade beside the Dead Sea" },
   t3: { src: t3, alt: "Arrivals hall at Ben Gurion Airport Terminal 3" },
   bethlehem: { src: bethlehem, alt: "Church of the Nativity on Manger Square, Bethlehem" },
   masada: { src: masada, alt: "Masada plateau from the air with the Dead Sea behind" },
@@ -49,12 +51,13 @@ const IMG = {
 const services: Service[] = [
   {
     id: "accommodation", eyebrow: "Accommodation", title: "Accommodation in Israel",
-    text: "Area-by-area advice — Shabbat, hills, parking, beach access — before you compare properties for your dates.",
+    text: "Choose a neighborhood or hotel style, then compare practical details such as beach access, family facilities, spa entry and arrival before booking.",
     feature: { src: hotelRoom, alt: "Illustrative bright hotel room with a made bed by the window (not a specific property)" },
     cards: [
       { label: "Jerusalem", text: "Old City, German Colony or city centre?", to: "/travel-blog/where-to-stay-in-jerusalem/", img: IMG.jerusalem },
       { label: "Tel Aviv", text: "Beachfront, Jaffa or the White City", to: "/travel-blog/where-to-stay-in-tel-aviv/", img: IMG.telAviv },
       { label: "Tiberias & Galilee", text: "A lakeside base for the north", to: "/travel-blog/best-hotels-in-tiberias/", img: IMG.tiberias },
+      { label: "Dead Sea", text: "Spa breaks, family resorts & luxury stays", to: "/travel-blog/best-dead-sea-hotels/", img: IMG.deadSea },
     ],
     hub: { label: "Explore accommodation", to: "/hotels/" },
   },
@@ -188,10 +191,11 @@ function Home() {
         <div className="rounded-2xl bg-navy p-6 text-navy-foreground md:p-8">
           <p className="text-xs font-semibold uppercase tracking-[0.14em] opacity-80">Where to base yourself</p>
           <h2 id="dest-h" className="mt-2 text-3xl">Popular destinations</h2>
-          <div className="mt-6 grid gap-4 sm:grid-cols-3">
+          <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
             <PhotoCard c={{ label: "Jerusalem", text: "Old City, Bethlehem & Masada trips", to: "/travel-blog/where-to-stay-in-jerusalem/", img: IMG.jerusalem }} />
             <PhotoCard c={{ label: "Tel Aviv & Jaffa", text: "Beaches, food and the coast", to: "/travel-blog/where-to-stay-in-tel-aviv/", img: IMG.telAviv }} />
             <PhotoCard c={{ label: "Tiberias & Galilee", text: "Lakeside base for the north", to: "/travel-blog/best-hotels-in-tiberias/", img: IMG.tiberias }} />
+            <PhotoCard c={{ label: "Dead Sea", text: "Spa, family and resort stays", to: "/travel-blog/best-dead-sea-hotels/", img: IMG.deadSea }} />
           </div>
           <Link to="/destinations/" className="btn btn-light mt-6">Explore all destinations →</Link>
         </div>

@@ -14,9 +14,9 @@ describe("portal navigation", () => {
       expect(router.matchRoutes(String(i.to)).at(-1)?.routeId, String(i.to)).not.toBe(rootRouteId);
     }
   });
-  it("sidebar includes one-click hotels for Jerusalem, Tel Aviv and Tiberias", () => {
+  it("sidebar includes one-click hotel guides for every destination covered", () => {
     const hotels = allNavGroups.find((g) => g.title === "Popular hotels")!.items.map((i) => i.label);
-    expect(hotels).toEqual(["Hotels in Jerusalem", "Hotels in Tel Aviv", "Hotels in Tiberias"]);
+    expect(hotels).toEqual(["Hotels in Jerusalem", "Hotels in Tel Aviv", "Hotels in Tiberias", "Dead Sea hotels"]);
   });
 });
 

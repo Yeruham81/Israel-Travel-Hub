@@ -5,8 +5,8 @@ import { pageMeta } from "@/lib/site";
 export const Route = createFileRoute("/destinations")({
   head: () =>
     pageMeta({
-      title: "Israel destinations: Jerusalem, Tel Aviv & Sea of Galilee — Israel Taxi & Travel",
-      description: "Plan by destination: hotels, airport transfers, tours and attractions for Jerusalem, Tel Aviv and Tiberias / the Sea of Galilee.",
+      title: "Israel destinations: cities, Galilee & Dead Sea — Israel Taxi & Travel",
+      description: "Plan by destination: hotels, transport, tours and attractions for Jerusalem, Tel Aviv, Tiberias, the Sea of Galilee and Israel's Dead Sea shore.",
       path: "/destinations/",
       crumbs: [{ name: "Home", path: "/" }, { name: "Destinations", path: "/destinations/" }],
     }),
@@ -15,6 +15,16 @@ export const Route = createFileRoute("/destinations")({
 
 type L = { label: string; to: LinkProps["to"] };
 const dests: { name: string; text: string; links: L[] }[] = [
+  {
+    name: "Dead Sea & Ein Bokek",
+    text: "Compare spa breaks, family resorts, luxury stays and nature-focused alternatives near Ein Gedi on the Israeli shore.",
+    links: [
+      { label: "All Dead Sea hotels", to: "/travel-blog/best-dead-sea-hotels/" },
+      { label: "Dead Sea spa hotels", to: "/dead-sea/spa-hotels/" },
+      { label: "Dead Sea family hotels", to: "/dead-sea/family-hotels/" },
+      { label: "Masada visit & tickets", to: "/travel-blog/masada/" },
+    ],
+  },
   {
     name: "Jerusalem",
     text: "The Old City, holy sites and museums, with Bethlehem and Masada as popular day trips.",

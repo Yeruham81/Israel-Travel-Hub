@@ -1,37 +1,12 @@
 import { Link, type LinkProps } from "@tanstack/react-router";
-import { ArrowLeft, ArrowRight, Building2, MapPin } from "lucide-react";
+import { ArrowLeft, ArrowRight, MapPin } from "lucide-react";
 import { cityStayGuides, neighborhoodGuidesForCity, type NeighborhoodStayGuide } from "@/data/content";
-import { getSource, hotelsForArea, INFO_CHECK_DATE, linksForPage, type HotelRecommendation, type ProviderLink } from "@/data/registry";
-import { recordOutboundClick, relFor } from "@/lib/outbound";
+import { getSource, hotelsForArea, INFO_CHECK_DATE, linksForPage } from "@/data/registry";
+import { StayHotelCard } from "@/components/StayHotelCard";
 import { AreaMap, AreaPhotoCredit } from "@/components/AreaMap";
 import { GuideHeader, OnThisPage, Section, Checklist, FaqList, ProviderSection, RelatedLinks, SourceList } from "@/components/Guide";
 
 const sections = [["overview", "The area"], ["highlights", "Nearby sights"], ["location", "Map & arrival"], ["book", "Hotel picks"], ["checklist", "Booking tips"], ["faq", "FAQ"], ["sources", "Sources"]] as const;
-
-function HotelCard({ hotel, booking, pageId }: { hotel: HotelRecommendation; booking: ProviderLink | undefined; pageId: string }) {
-  return (
-    <li className="overflow-hidden rounded-2xl border bg-card" data-testid="hotel-recommendation">
-      <div className="p-5 sm:p-7">
-        <div className="flex items-start gap-4">
-          <span className="grid h-12 w-12 shrink-0 place-items-center rounded-2xl bg-secondary text-primary"><Building2 className="h-6 w-6" aria-hidden /></span>
-          <div><p className="eyebrow">{hotel.style}</p><h3 className="mt-1 text-2xl sm:text-3xl">{hotel.name}</h3></div>
-        </div>
-        <p className="mt-4 leading-relaxed text-muted-foreground">{hotel.summary}</p>
-        <dl className="mt-5 grid gap-4 sm:grid-cols-2">
-          <div><dt className="text-sm font-semibold">Who it suits</dt><dd className="mt-1 text-sm leading-relaxed text-muted-foreground">{hotel.bestFor}</dd></div>
-          <div><dt className="text-sm font-semibold">Check before booking</dt><dd className="mt-1 text-sm leading-relaxed text-muted-foreground">{hotel.watch}</dd></div>
-        </dl>
-        <a href={getSource(hotel.sourceId).url} target="_blank" rel="noopener noreferrer" className="mt-4 inline-block text-xs text-muted-foreground underline underline-offset-2">Hotel information source ↗<span className="sr-only"> (opens in a new tab)</span></a>
-      </div>
-      {booking && <div className="flex flex-wrap items-center justify-between gap-4 border-t bg-secondary/50 px-5 py-4 sm:px-7">
-        <div><p className="text-sm font-semibold">Check room options for your dates</p><p className="mt-1 text-xs text-muted-foreground">{booking.isAffiliate ? "Sponsored link · " : ""}{booking.providerName} · Price and availability on the booking site</p></div>
-        <a href={booking.url} target="_blank" rel={relFor(booking.isAffiliate)} onClick={() => recordOutboundClick({ pageId, productId: hotel.id, offerId: booking.id })} className="btn btn-primary" aria-label={`${booking.ctaLabel} for ${hotel.name}`}>
-          {booking.ctaLabel} <span aria-hidden>↗</span><span className="sr-only"> (opens in a new tab)</span>
-        </a>
-      </div>}
-    </li>
-  );
-}
 
 export function NeighborhoodStayPage({ area }: { area: NeighborhoodStayGuide }) {
   const city = cityStayGuides[area.cityId];
@@ -77,7 +52,7 @@ export function NeighborhoodStayPage({ area }: { area: NeighborhoodStayGuide }) 
           <p className="mt-3 max-w-3xl leading-relaxed text-muted-foreground">These picks offer different ways to stay in the area. They are selected for location and travel style, rather than a live ranking or a claim that rooms are currently available.</p>
           <p className="mt-3 text-sm leading-relaxed text-muted-foreground">The shortlist draws on Moshe Barak's original {city.city} guide and the hotels' own information. These are editorial recommendations, not reviews of personal stays at every property.</p>
           <p className="mt-3 rounded-xl border bg-secondary/60 p-4 text-sm leading-relaxed">We may earn a commission from links marked “Sponsored link”, at no extra cost to you. Enter your dates on the booking site and confirm the hotel, room category, final total and cancellation terms before paying.</p>
-          <ul className="mt-6 space-y-5">{hotels.map((hotel) => <HotelCard key={hotel.id} hotel={hotel} booking={bookings.find((booking) => booking.id === `hotel-${hotel.id}-expedia`)} pageId={pageId} />)}</ul>
+          <ul className="mt-6 space-y-5">{hotels.map((hotel) => <StayHotelCard key={hotel.id} hotel={hotel} booking={bookings.find((booking) => booking.id === `hotel-${hotel.id}-expedia`)} pageId={pageId} />)}</ul>
         </section>
         <Section id="checklist" title="Before you book" className="scroll-mt-32">
           <div className="mt-5 grid gap-4 sm:grid-cols-2">

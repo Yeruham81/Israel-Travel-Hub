@@ -93,6 +93,7 @@ export interface RouteRecord {
 export const INFO_CHECK_DATE: ISODate = "2026-10-16";
 export const JERUSALEM_STAY_REVIEW_DATE: ISODate = "2026-10-17";
 export const TELAVIV_STAY_REVIEW_DATE: ISODate = "2026-10-17";
+export const DEAD_SEA_STAY_REVIEW_DATE: ISODate = "2026-10-17";
 export const OWNER_BASE = "https://www.israel-taxi.com";
 
 const jerusalemHotelSources: SourceReference[] = [
@@ -137,9 +138,53 @@ const telAvivHotelSources: SourceReference[] = [
   note: "Property identity, location and general accommodation style checked against the property's own information. Reconfirm rooms, services, access, minimum stays and booking conditions for your dates.",
 }));
 
+const deadSeaHotelSources: SourceReference[] = [
+  ["kayma", "Kayma — Isrotel", "https://www.isrotel.com/isrotel-hotels/dead-sea/kayma/"],
+  ["herods", "Herods Dead Sea — Leonardo Hotels", "https://www.leonardo-hotels.com/dead-sea/herods-dead-sea-hotel/facilities"],
+  ["milos", "Herbert Samuel Milos Dead Sea", "https://herbertsamuel.com/en/herbert-samuel-milos-dead-sea-hotel/"],
+  ["nevo", "Nevo — Isrotel", "https://www.isrotel.com/isrotel-hotels/dead-sea/isrotel-dead-sea/"],
+  ["oasis", "Oasis Spa Club — Prima Hotels", "https://www.prima-hotels-israel.com/oasis-spa-club-hotel-dead-sea"],
+  ["leonardo-club", "Leonardo Club Dead Sea — all-inclusive", "https://www.leonardo-hotels.com/dead-sea/leonardo-club-dead-sea/all-inclusive"],
+  ["vert", "VERT Dead Sea — AFI Hotels", "https://www.afi-hotels.com/vert-dead-sea-hotel"],
+  ["noga", "Noga — Isrotel", "https://www.isrotel.com/isrotel-hotels/dead-sea/isrotel-ganim/"],
+  ["leonardo-plaza", "Leonardo Plaza Dead Sea — hotel FAQ", "https://www.leonardo-hotels.com/dead-sea/leonardo-plaza-dead-sea/faq"],
+  ["ein-gedi", "Ein Gedi Hotel", "https://ngedi.co.il/en/"],
+  ["hi-ein-gedi", "HI Ein Gedi Hostel — Israel Youth Hostels Association", "https://en.iyha.org.il/ein-gedi-hostel"],
+].map(([id, name, url]): SourceReference => ({
+  id: `hotel-ds-${id}-official`, title: `${name} — property information`, publisher: name!, url: url!,
+  checkedAt: DEAD_SEA_STAY_REVIEW_DATE,
+  note: "Property identity, location and general facilities checked against the operator's own information. Confirm current operation, beach access, room occupancy, age limits, meal-plan inclusions and seasonal facilities for your dates; rates and inventory are not live.",
+}));
+
 export const sources: SourceReference[] = [
   ...jerusalemHotelSources,
   ...telAvivHotelSources,
+  ...deadSeaHotelSources,
+  {
+    id: "owner-hotels-deadsea", title: "Best Dead Sea Hotels (original guide)", publisher: "Israel-Taxi.com",
+    url: `${OWNER_BASE}/travel-blog/best-dead-sea-hotels/`, checkedAt: DEAD_SEA_STAY_REVIEW_DATE,
+    note: "Editorial basis for the destination guide, spa and family comparisons. Existing publisher-owned Expedia links and photographs are reused. Hotel policies were checked against primary operator sources; no firsthand stays at every property or live prices are claimed.",
+  },
+  {
+    id: "ds-nevo-spa", title: "Esprit Spa — Nevo", publisher: "Isrotel",
+    url: "https://www.isrotel.com/eventsmain/hangouts/attraction/dead-sea/isrotel-dead-sea-attractions/esprit-dead-sea-spa/", checkedAt: DEAD_SEA_STAY_REVIEW_DATE,
+    note: "Operator's spa description. Check which facilities your room rate includes and book treatments separately unless explicitly included.",
+  },
+  {
+    id: "ds-noga-spa", title: "Esprit Spa — Noga: facilities and minimum age", publisher: "Isrotel",
+    url: "https://www.isrotel.com/eventsmain/hangouts/attraction/dead-sea/isrotel-ganim-attractions/esprit-spa/", checkedAt: DEAD_SEA_STAY_REVIEW_DATE,
+    note: "The operator states spa entry is for guests aged 16 and over, with treatments charged separately. This restriction applies to the spa rather than the whole hotel.",
+  },
+  {
+    id: "ds-herods-spa", title: "Vitalis Spa — Herods Dead Sea", publisher: "Leonardo Hotels",
+    url: "https://www.leonardo-hotels.com/dead-sea/herods-dead-sea-hotel/spa", checkedAt: DEAD_SEA_STAY_REVIEW_DATE,
+    note: "Primary spa information; reconfirm access, treatment charges and age restrictions for the facilities you intend to use.",
+  },
+  {
+    id: "ds-ein-gedi-spa", title: "Synergy Spa — Ein Gedi Hotel", publisher: "Ein Gedi Hotel",
+    url: "https://ngedi.co.il/en/synergy-spa/", checkedAt: DEAD_SEA_STAY_REVIEW_DATE,
+    note: "The inland hotel's spa includes a Dead Sea water pool. A mineral-water pool is different from access to an operating beach on the shore.",
+  },
   {
     id: "iaa-directions",
     title: "Ben Gurion Airport – directions and transport",
@@ -330,7 +375,7 @@ export const partners: BookingPartner[] = [
   { id: "discovercars", name: "DiscoverCars", capability: "editorial_only", homepage: "https://www.discovercars.com/" },
 ];
 
-/** Existing publisher-owned tracking links copied exactly from the supplied Jerusalem and Tel Aviv guides. */
+/** Existing publisher-owned tracking links copied exactly from the supplied destination guides. */
 export const affiliateConfig: Record<string, { trackingUrl: string } | undefined> = {
   "hotels-jerusalem-expedia": { trackingUrl: "https://expedia.tpm.li/yNeL4j4v" },
   "area-downtown-expedia": { trackingUrl: "https://expedia.tpm.li/2i5lfUjl" },
@@ -376,11 +421,37 @@ export const affiliateConfig: Record<string, { trackingUrl: string } | undefined
   "hotel-tlv-assemblage-expedia": { trackingUrl: "https://expedia.tpm.li/K0vqkaFB" },
   "hotel-tlv-the-norman-expedia": { trackingUrl: "https://expedia.tpm.li/VLBMm8gI" },
   "hotel-tlv-65-rothschild-expedia": { trackingUrl: "https://expedia.tpm.li/hpcJ9Htm" },
+  "hotels-deadsea-expedia": { trackingUrl: "https://expedia.tpm.li/UgChNxYh" },
+  "category-deadsea-luxury-expedia": { trackingUrl: "https://expedia.tpm.li/kIQiA2gD" },
+  "category-deadsea-spa-expedia": { trackingUrl: "https://expedia.tpm.li/hj7Ho47x" },
+  "category-deadsea-family-expedia": { trackingUrl: "https://expedia.tpm.li/nJNahv0S" },
+  "category-deadsea-value-expedia": { trackingUrl: "https://expedia.tpm.li/p3ucPL77" },
+  "category-deadsea-ein-gedi-expedia": { trackingUrl: "https://expedia.tpm.li/XGDXTTv5" },
+  "hotel-ds-kayma-expedia": { trackingUrl: "https://expedia.tpm.li/KcmNOZek" },
+  "hotel-ds-herods-expedia": { trackingUrl: "https://expedia.tpm.li/bfBGkDIB" },
+  "hotel-ds-milos-expedia": { trackingUrl: "https://expedia.tpm.li/4vmGNewy" },
+  "hotel-ds-nevo-expedia": { trackingUrl: "https://expedia.tpm.li/vqyc5OUk" },
+  "hotel-ds-oasis-expedia": { trackingUrl: "https://expedia.tpm.li/wSfoVPfF" },
+  "hotel-ds-leonardo-club-expedia": { trackingUrl: "https://expedia.tpm.li/BWsDABMA" },
+  "hotel-ds-vert-expedia": { trackingUrl: "https://expedia.tpm.li/Q55gt8Wx" },
+  "hotel-ds-noga-expedia": { trackingUrl: "https://expedia.tpm.li/5JwQJQLV" },
+  "hotel-ds-leonardo-plaza-expedia": { trackingUrl: "https://expedia.tpm.li/ExXg3tn5" },
+  "hotel-ds-ein-gedi-expedia": { trackingUrl: "https://expedia.tpm.li/6BK7fDJ1" },
+  "hotel-ds-hi-ein-gedi-expedia": { trackingUrl: "https://expedia.tpm.li/PscLWtIj" },
 };
+
+export interface ResortHotelFacts {
+  location: string;
+  beach: string;
+  spa: string;
+  agePolicy: string;
+  children: string;
+  meals: string;
+}
 
 export interface HotelRecommendation {
   id: string;
-  cityId: "jerusalem" | "telaviv" | "tiberias";
+  cityId: "jerusalem" | "telaviv" | "tiberias" | "deadsea";
   areaId: string;
   name: string;
   style: string;
@@ -388,7 +459,88 @@ export interface HotelRecommendation {
   bestFor: string;
   watch: string;
   sourceId: string;
+  resortFacts?: ResortHotelFacts;
 }
+
+export const deadSeaHotelRecommendations: (HotelRecommendation & { resortFacts: ResortHotelFacts })[] = [
+  {
+    id: "ds-kayma", cityId: "deadsea", areaId: "deadsea", name: "Kayma by Isrotel Exclusive", style: "Intimate luxury resort · guests aged 10+",
+    summary: "A smaller luxury resort in the southern hotel district, with an infinity pool and direct access to the beach. Choose it for a more intimate hotel experience, keeping its minimum guest age in mind.",
+    bestFor: "Couples and travelers seeking a quieter luxury stay; guests must be at least ten.",
+    watch: "Confirm the minimum age for every guest, your exact room category and meal inclusions. It is not an option for families with younger children.", sourceId: "hotel-ds-kayma-official",
+    resortFacts: { location: "Southern hotel district", beach: "Direct beach access", spa: "Confirm the wellness facilities in your offer", agePolicy: "Hotel welcomes guests aged 10+", children: "Not suitable for children under ten", meals: "Confirm the selected room rate and meal plan" },
+  },
+  {
+    id: "ds-herods", cityId: "deadsea", areaId: "deadsea", name: "Herods Dead Sea", style: "Luxury beachfront resort with Vitalis Spa",
+    summary: "A resort near Neve Zohar with an adjoining beach and the Vitalis Spa. Its southern setting suits a stay centered on the hotel, with fewer outside dining and shopping options close by than central Ein Bokek.",
+    bestFor: "Couples and travelers combining a substantial spa with a southern beachfront base.",
+    watch: "Ask which spa facilities your rate includes, about treatment charges and age limits, and whether your room has the outlook you want.", sourceId: "hotel-ds-herods-official",
+    resortFacts: { location: "Neve Zohar / southern hotel district", beach: "Adjoining serviced beach via a deck path", spa: "Vitalis Spa, mineral pools and treatment options", agePolicy: "Family hotel; confirm spa age limits", children: "Children's facilities; confirm the activity schedule", meals: "Meal plan depends on the rate selected" },
+  },
+  {
+    id: "ds-milos", cityId: "deadsea", areaId: "deadsea", name: "Herbert Samuel Milos Dead Sea", style: "Design-focused beachfront resort",
+    summary: "A low-rise, Greek-inspired hotel in Ein Bokek with beach access and a spa complex. It offers a different atmosphere from the larger resort towers, with room categories and outdoor spaces that need individual comparison.",
+    bestFor: "Couples who value design, a beachfront setting and spa facilities.",
+    watch: "Confirm spa access, any age restrictions and extra charges. A private pool or special terrace is included only when stated for the room you book.", sourceId: "hotel-ds-milos-official",
+    resortFacts: { location: "Ein Bokek", beach: "Beachfront access", spa: "Dead Sea water pool, sulfur pool, hammam and treatments", agePolicy: "Check spa age restrictions separately", children: "Confirm room occupancy and children's facilities", meals: "Check which meals your room offer includes" },
+  },
+  {
+    id: "ds-nevo", cityId: "deadsea", areaId: "deadsea", name: "Nevo by Isrotel Collection", style: "Full-service resort with Esprit Spa",
+    summary: "A substantial Ein Bokek resort combining the Esprit Spa, pools and access to nearby beach services. It is a useful all-round choice when different members of the party want hotel facilities as well as time beside the water.",
+    bestFor: "First visits and mixed-interest groups looking for a broad resort experience.",
+    watch: "Confirm the route to the beach, the spa access included in your room rate and charges for treatments or specific facilities.", sourceId: "hotel-ds-nevo-official",
+    resortFacts: { location: "Ein Bokek", beach: "Beach beside the hotel; confirm the access route", spa: "Esprit Spa, mineral-water pools and treatments", agePolicy: "Hotel accepts families; confirm spa age limits", children: "Kids' club and pool facilities; schedules vary", meals: "Meals depend on the selected booking offer" },
+  },
+  {
+    id: "ds-oasis", cityId: "deadsea", areaId: "deadsea", name: "Oasis Spa Club", style: "Age-restricted spa hotel · operator lists 16+",
+    summary: "A spa-focused Prima property in Ein Bokek, a short walk from the beach. Its Moroccan-inspired spa and age-restricted format suit visitors prioritizing a quieter wellness setting over a family activity resort.",
+    bestFor: "Adults and eligible older teenagers seeking a spa-focused stay.",
+    watch: "The operator currently lists hotel and spa entry as 16+, with check-in from age 18 and younger eligible guests accompanied by an adult. Confirm the policy for your party directly.", sourceId: "hotel-ds-oasis-official",
+    resortFacts: { location: "Ein Bokek", beach: "Short walk to the beach", spa: "Heated Dead Sea water pool, hammam, sauna and treatments", agePolicy: "Entry 16+; check-in 18+; confirm accompaniment", children: "No guests under 16 under the published policy", meals: "Confirm breakfast and dinner inclusions" },
+  },
+  {
+    id: "ds-leonardo-club", cityId: "deadsea", areaId: "deadsea", name: "Leonardo Club Dead Sea", style: "All-inclusive family resort with a water park",
+    summary: "A family-focused resort in the southern hotel district with a water park, children's pools and adjacent beach access. The operator markets an all-inclusive format, making the package contents an important part of comparing total holiday costs.",
+    bestFor: "Families who want meals, hotel activities and water slides in one resort.",
+    watch: "Confirm water-park opening, slide height or age rules, kids' club arrangements and exactly which meals, drinks and services your package includes.", sourceId: "hotel-ds-leonardo-club-official",
+    resortFacts: { location: "Southern hotel district, near Neve Zohar", beach: "Adjacent beach with direct access", spa: "Spa facilities; confirm age limits and extras", agePolicy: "Family resort; facility-specific restrictions apply", children: "Water park, children's pools and activity clubs", meals: "Marketed as all-inclusive; confirm package details" },
+  },
+  {
+    id: "ds-vert", cityId: "deadsea", areaId: "deadsea", name: "VERT Dead Sea", style: "Beachfront resort in central Ein Bokek",
+    summary: "An AFI resort by the Ein Bokek promenade with beach access, pools, a spa and children's facilities. It suits families who want a hotel base near the central resort area and prefer choosing their meal plan.",
+    bestFor: "Families combining beach time, hotel facilities and central Ein Bokek convenience.",
+    watch: "Check the exact room layout, connecting-room confirmation, club schedule and meal plan. A family-hotel label does not mean an all-inclusive rate.", sourceId: "hotel-ds-vert-official",
+    resortFacts: { location: "Ein Bokek promenade", beach: "Hotel access to the adjacent beach", spa: "Indoor mineral-water pool, spa and treatments", agePolicy: "Families welcome; check spa age restrictions", children: "Children's club and pool facilities", meals: "Compare the selected meal plan; do not assume all-inclusive" },
+  },
+  {
+    id: "ds-noga", cityId: "deadsea", areaId: "deadsea", name: "Noga by Isrotel Collection", style: "Ein Bokek hotel with mineral-water pools",
+    summary: "An Ein Bokek hotel near the beach, combining the Esprit Spa with a more straightforward resort format. Consider it when comparing the facilities you will use rather than paying primarily for a luxury room or a direct beachfront address.",
+    bestFor: "Couples and families comparing wellness facilities with the total cost of a stay.",
+    watch: "The spa is for guests aged 16+, and treatments cost extra. Confirm the beach walk, children's facilities and room occupancy for your dates.", sourceId: "hotel-ds-noga-official",
+    resortFacts: { location: "Ein Bokek", beach: "Short walk to the beach", spa: "Two Dead Sea pools; treatments charged separately", agePolicy: "Spa entry 16+; the hotel itself accepts families", children: "Children's activities; verify seasonal programming", meals: "Check your chosen room offer and meal plan" },
+  },
+  {
+    id: "ds-leonardo-plaza", cityId: "deadsea", areaId: "deadsea", name: "Leonardo Plaza Dead Sea", style: "Southern resort with family-room options",
+    summary: "A resort near Neve Zohar offering family rooms and hotel activities in a more self-contained setting. Compare it when its total rate and room configuration suit your party, allowing for the separate route to the beach.",
+    bestFor: "Families and groups who prioritize room arrangements and a resort-based stay.",
+    watch: "The beach is reached by a pathway or shuttle rather than immediately from the room block. Confirm shuttle hours, connecting rooms, meals and children's activities.", sourceId: "hotel-ds-leonardo-plaza-official",
+    resortFacts: { location: "Neve Zohar / southern hotel district", beach: "Pathway or hotel shuttle to the beach", spa: "Hotel spa; check inclusions and minimum ages", agePolicy: "Family hotel; spa rules are separate", children: "Family and connecting rooms; children's activities", meals: "Confirm the meal plan for the selected rate" },
+  },
+  {
+    id: "ds-ein-gedi", cityId: "deadsea", areaId: "deadsea", name: "Ein Gedi Hotel", style: "Inland nature stay with Synergy Spa",
+    summary: "A hotel in the Ein Gedi kibbutz setting, with gardens and the Synergy Spa. It is an alternative for travelers who want a nature-focused stay rather than the Ein Bokek beachfront resort district.",
+    bestFor: "Visitors prioritizing gardens, the Ein Gedi area and an inland spa retreat.",
+    watch: "Do not assume a room overlooking the Dead Sea includes nearby sea bathing. Plan a separate journey to an operating beach and check nature-reserve access for your dates.", sourceId: "hotel-ds-ein-gedi-official",
+    resortFacts: { location: "Ein Gedi, north of the main hotel district", beach: "Separate journey to an operating beach", spa: "Synergy Spa with a Dead Sea water pool", agePolicy: "Confirm age rules for the hotel and spa separately", children: "Check room layout and the facilities your family needs", meals: "Check the offer and outside dining options" },
+  },
+  {
+    id: "ds-hi-ein-gedi", cityId: "deadsea", areaId: "deadsea", name: "HI Ein Gedi Hostel", style: "Simple hostel stay near the nature reserve",
+    summary: "An Israel Youth Hostels Association property near Ein Gedi, with private-room options for travelers and groups. It is a practical accommodation alternative for a nature-focused itinerary, with a simpler format than a spa resort.",
+    bestFor: "Hikers, independent visitors and groups comparing simpler accommodation.",
+    watch: "This is not a beachfront spa resort. Confirm the room format, reception arrangements, meals and transport to any beach or attraction you intend to visit.", sourceId: "hotel-ds-hi-ein-gedi-official",
+    resortFacts: { location: "Ein Gedi nature-reserve area", beach: "Separate journey to an operating beach", spa: "No resort spa advertised", agePolicy: "Confirm room and group arrangements", children: "Private-room options; no resort activity format", meals: "Confirm breakfast and any additional meals" },
+  },
+];
 
 export const hotelRecommendations: HotelRecommendation[] = [
   {
@@ -559,6 +711,7 @@ export const hotelRecommendations: HotelRecommendation[] = [
     bestFor: "Visitors who want Rothschild as their daily walking route and a boutique city-hotel format.",
     watch: "Ask about your room's outlook, traffic or venue noise, breakfast inclusion and parking availability for your dates.", sourceId: "hotel-tlv-65-rothschild-official",
   },
+  ...deadSeaHotelRecommendations,
 ];
 
 export const hotelsForArea = (areaId: string, cityId?: HotelRecommendation["cityId"]) => hotelRecommendations.filter((hotel) => hotel.areaId === areaId && (!cityId || hotel.cityId === cityId));
@@ -740,13 +893,27 @@ export const providerLinks: ProviderLink[] = [
     const trackingUrl = affiliateConfig[id]?.trackingUrl;
     const officialUrl = sources.find((source) => source.id === hotel.sourceId)!.url;
     return {
-      id, pageIds: [`stay-area-${hotel.areaId}`], providerName: trackingUrl ? "Expedia" : hotel.name,
+      id, pageIds: [hotel.cityId === "deadsea" ? "stay-deadsea" : `stay-area-${hotel.areaId}`], providerName: trackingUrl ? "Expedia" : hotel.name,
       relationship: trackingUrl ? "booking_platform" : "official", ...(trackingUrl ? { partnerId: "expedia" } : {}), mode: "provider_redirect",
       title: hotel.name, summary: hotel.summary, ctaLabel: trackingUrl ? "Check rooms on Expedia" : "Visit the hotel's website",
       url: trackingUrl || officialUrl, isAffiliate: Boolean(trackingUrl), sourceId: hotel.sourceId,
       confirm: ["Property name and location", "Dates and room category", "Total including taxes and fees", "Cancellation deadline"],
     };
   }),
+  ...([
+    ["hotels-deadsea-expedia", "stay-deadsea-browse", "Dead Sea hotels in Israel"],
+    ["category-deadsea-luxury-expedia", "stay-deadsea-luxury-browse", "luxury hotels on Israel's Dead Sea shore"],
+    ["category-deadsea-spa-expedia", "stay-deadsea-spa-browse", "Dead Sea spa hotels in Israel"],
+    ["category-deadsea-family-expedia", "stay-deadsea-family-browse", "Dead Sea family hotels in Israel"],
+    ["category-deadsea-value-expedia", "stay-deadsea-value-browse", "value stays in the Dead Sea region"],
+    ["category-deadsea-ein-gedi-expedia", "stay-deadsea-ein-gedi-browse", "places to stay near Ein Gedi"],
+  ] as const).map(([id, pageId, name]): ProviderLink => ({
+    id, pageIds: [pageId], providerName: "Expedia", relationship: "booking_platform", partnerId: "expedia", mode: "provider_redirect",
+    title: `Browse more ${name}`, summary: "Explore other properties for your dates. Check the map, country and exact accommodation type before choosing a room.",
+    ctaLabel: "Browse stays on Expedia", url: affiliateConfig[id]?.trackingUrl || "https://www.expedia.com/", isAffiliate: Boolean(affiliateConfig[id]?.trackingUrl), sourceId: "owner-hotels-deadsea",
+    reentryNote: "Enter dates, adults and the ages of all children on Expedia. No trip details are passed from this page.",
+    confirm: ["Israeli location and exact property", "Room occupancy and guest ages", "Meal and spa inclusions", "Total price and cancellation terms"],
+  })),
   ...([
     ["jerusalem", "Jerusalem", "jerusalem"],
     ["downtown", "Downtown Jerusalem", "jerusalem"],

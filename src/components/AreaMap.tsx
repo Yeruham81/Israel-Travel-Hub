@@ -2,7 +2,7 @@ import { MapPin, ExternalLink } from "lucide-react";
 import type { NeighborhoodStayGuide } from "@/data/content";
 
 /** A real, key-free map. The external link also works if an embed is blocked. */
-export function AreaMap({ area, compact = false }: { area: NeighborhoodStayGuide; compact?: boolean }) {
+export function AreaMap({ area, compact = false }: { area: Pick<NeighborhoodStayGuide, "name" | "map">; compact?: boolean }) {
   const { lat, lon, bounds, reference } = area.map;
   const embed = `https://www.openstreetmap.org/export/embed.html?bbox=${bounds.join("%2C")}&layer=mapnik&marker=${lat}%2C${lon}`;
   const fullMap = `https://www.openstreetmap.org/?mlat=${lat}&mlon=${lon}#map=15/${lat}/${lon}`;

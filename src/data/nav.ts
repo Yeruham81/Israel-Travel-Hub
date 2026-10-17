@@ -21,6 +21,7 @@ export const hotelNav: NavItem[] = [
   { label: "Hotels in Jerusalem", to: "/travel-blog/where-to-stay-in-jerusalem/" },
   { label: "Hotels in Tel Aviv", to: "/travel-blog/where-to-stay-in-tel-aviv/" },
   { label: "Hotels in Tiberias", to: "/travel-blog/best-hotels-in-tiberias/" },
+  { label: "Dead Sea hotels", to: "/travel-blog/best-dead-sea-hotels/" },
 ];
 
 export const shortcutNav: NavItem[] = [

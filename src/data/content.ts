@@ -3,6 +3,7 @@
  * Property records, sources and all booking links live in registry.ts.
  */
 import type { LinkProps } from "@tanstack/react-router";
+import type { ResortHotelFacts } from "@/data/registry";
 import downtownPhoto from "@/assets/jerusalem/downtown.webp";
 import mamillaPhoto from "@/assets/jerusalem/mamilla.webp";
 import oldCityPhoto from "@/assets/jerusalem/old-city.webp";
@@ -17,6 +18,11 @@ import jaffaPhoto from "@/assets/tel-aviv/jaffa.webp";
 import florentinPhoto from "@/assets/tel-aviv/florentin.webp";
 import keremPhoto from "@/assets/tel-aviv/kerem-hateimanim.webp";
 import rothschildPhoto from "@/assets/tel-aviv/rothschild.webp";
+import deadSeaBeachPhoto from "@/assets/dead-sea/beach.webp";
+import deadSeaPoolPhoto from "@/assets/dead-sea/pool.webp";
+import deadSeaLandscapePhoto from "@/assets/dead-sea/landscape.webp";
+import deadSeaSunbedsPhoto from "@/assets/dead-sea/sunbeds.webp";
+import einGediStayPhoto from "@/assets/dead-sea/ein-gedi.webp";
 
 export type StayPreference = "first-visit" | "car-free" | "quiet" | "nightlife" | "family" | "views" | "luxury" | "heritage" | "food" | "long-stay" | "beach" | "history";
 
@@ -662,3 +668,207 @@ export const cityStayGuides: Record<CityStayGuide["id"], CityStayGuide> = {
     ],
   },
 };
+
+export interface StayGuidePhoto {
+  src: string;
+  alt: string;
+  sourceUrl: string;
+  label: string;
+}
+
+export interface HotelStayGroup {
+  id: string;
+  title: string;
+  intro: string;
+  hotelIds: string[];
+  photo: StayGuidePhoto;
+  guidePath?: string;
+  guideLabel?: string;
+  browsePageId?: string;
+}
+
+/** A destination organized by hotel intent rather than neighborhood pages. */
+export interface HotelStayDestination {
+  id: string;
+  name: string;
+  path: string;
+  title: string;
+  metaDescription: string;
+  intro: string;
+  reviewedAt: string;
+  photo: StayGuidePhoto;
+  overview: string[];
+  map: NeighborhoodStayGuide["map"];
+  locations: { name: string; text: string }[];
+  arrival: string[];
+  groups: HotelStayGroup[];
+  checklist: string[];
+  faqs: { q: string; a: string }[];
+  sourceIds: string[];
+  related: CityStayGuide["related"];
+}
+
+export interface HotelCategoryGuide {
+  id: string;
+  destinationId: string;
+  path: string;
+  title: string;
+  metaDescription: string;
+  shortTitle: string;
+  summary: string;
+  photo: StayGuidePhoto;
+  overview: string[];
+  decisions: { title: string; text: string }[];
+  comparison: { key: keyof ResortHotelFacts; label: string }[];
+  picks: { hotelId: string; summary: string; bestFor: string; watch: string }[];
+  detailTitle: string;
+  details: { title: string; text: string }[];
+  checklist: string[];
+  faqs: { q: string; a: string }[];
+  sourceIds: string[];
+}
+
+export const deadSeaPhotos = {
+  beach: { src: deadSeaBeachPhoto, alt: "Palm-lined Ein Bokek promenade, maintained beach and turquoise Dead Sea", sourceUrl: "https://www.israel-taxi.com/wp-content/uploads/2025/08/dead_sea_beach_1.jpg", label: "Ein Bokek beach and promenade" },
+  pool: { src: deadSeaPoolPhoto, alt: "Outdoor hotel swimming pools and sun loungers with the Dead Sea beyond", sourceUrl: "https://www.israel-taxi.com/wp-content/uploads/2026/01/Dead_Sea_61.jpg", label: "Dead Sea resort pool scene" },
+  landscape: { src: deadSeaLandscapePhoto, alt: "Aerial view of the southern Dead Sea hotel district and turquoise water", sourceUrl: "https://www.israel-taxi.com/wp-content/uploads/2026/02/jerusalem_to_the_dead_sea.jpg", label: "Southern Dead Sea hotel district" },
+  sunbeds: { src: deadSeaSunbedsPhoto, alt: "Shaded sun loungers beside a maintained Dead Sea beach and desert cliffs", sourceUrl: "https://www.israel-taxi.com/wp-content/uploads/2025/08/dead_sea_beach_sunbeds_.jpg", label: "Dead Sea beach and shaded loungers" },
+  einGedi: { src: einGediStayPhoto, alt: "A courtyard and low-rise hostel buildings beneath the desert cliffs at Ein Gedi", sourceUrl: "https://www.israel-taxi.com/wp-content/uploads/2026/01/dead_sea_hostel.jpg", label: "Ein Gedi hostel setting" },
+} satisfies Record<string, StayGuidePhoto>;
+
+export const deadSeaStayGuide: HotelStayDestination = {
+  id: "deadsea", name: "Dead Sea", path: "/travel-blog/best-dead-sea-hotels/",
+  title: "Best Dead Sea hotels in Israel: spa, family & luxury stays",
+  metaDescription: "Compare 11 Dead Sea stays in Israel, from luxury resorts to family hotels and Ein Gedi alternatives. Explore dedicated spa and family guides before booking.",
+  intro: "Choose your Dead Sea stay by the holiday you want: a spa break, a family resort, an intimate luxury hotel or a nature-focused base near Ein Gedi. Compare the Israeli shore's options, then check rooms for your dates.",
+  reviewedAt: "2026-10-17", photo: deadSeaPhotos.beach,
+  overview: [
+    "A Dead Sea hotel is often a large part of the holiday itself. Beach access, freshwater pools, spa entry, children's facilities and meals can matter more than choosing a particular street. This guide covers the Israeli side of the Dead Sea, with the main resort hotels around Ein Bokek and the southern district near Neve Zohar.",
+    "Start with the tradeoff that matters to your party. Nevo offers a broad resort-and-spa format; Oasis Spa Club has an age-restricted spa focus. Leonardo Club is a family option marketed as all-inclusive, while VERT combines a central Ein Bokek setting with a more conventional resort stay. Kayma, Herods and Milos offer different styles of upscale accommodation.",
+    "The comparison also includes Ein Gedi Hotel and HI Ein Gedi Hostel as inland alternatives. A Dead Sea view or a mineral-water pool does not establish access to an operating beach. Check the actual route to the water and the facilities included in the room offer, rather than relying on a 'spa' or 'beachfront' label.",
+  ],
+  map: { lat: 31.1997, lon: 35.3634, bounds: [35.325, 31.13, 35.405, 31.49], reference: "Ein Bokek reference point; map also covers the southern district and Ein Gedi" },
+  locations: [
+    { name: "Ein Bokek", text: "The main resort center, with the promenade, maintained beaches and a greater choice of shops and outside dining within walking reach. Check the hotel entrance and actual beach route." },
+    { name: "Neve Zohar & the southern hotel district", text: "A more spread-out, resort-focused base. Choose the hotel for the facilities and dining you will use, and plan transport for trips beyond it." },
+    { name: "Ein Gedi", text: "An inland nature-focused alternative north of the resort strip. Choose it for the surrounding landscape and local outings; plan a separate journey if you want to visit an operating Dead Sea beach." },
+  ],
+  arrival: [
+    "Arrange the journey to the exact hotel, not simply to 'the Dead Sea'. Hotels around Ein Bokek, the southern resort district and Ein Gedi are different destinations. If arriving by bus, check the stop and the final walk with luggage; for a driver, confirm the entrance and return pickup.",
+    "A car or a booked driver is useful for combining your stay with Masada and other sites along Route 90. Check current transport services, attraction access and hotel check-in for your travel date, especially Friday evening, Saturday and holidays. Reserve child seats or accessible transport where needed.",
+  ],
+  groups: [
+    { id: "luxury", title: "Luxury & quieter resort stays", intro: "Choose between a smaller luxury format, a substantial beachfront spa resort and a low-rise design hotel. Check minimum guest ages and the exact room category before choosing a special stay.", hotelIds: ["ds-kayma", "ds-herods", "ds-milos"], photo: deadSeaPhotos.landscape, browsePageId: "stay-deadsea-luxury-browse" },
+    { id: "spa", title: "Spa-focused hotels", intro: "Nevo and Oasis offer different wellness breaks: a broad full-service resort versus an age-restricted spa setting. The detailed guide also compares Herods, Milos and Noga by facilities, access and booking conditions.", hotelIds: ["ds-nevo", "ds-oasis"], photo: deadSeaPhotos.sunbeds, guidePath: "/dead-sea/spa-hotels/", guideLabel: "Compare Dead Sea spa hotels" },
+    { id: "family", title: "Hotels for families with children", intro: "Compare an all-inclusive resort with a water park against a central beachfront hotel with a choice of meal plans. For more options, the family guide also covers Noga and Leonardo Plaza and the questions to ask for your children's ages.", hotelIds: ["ds-leonardo-club", "ds-vert"], photo: deadSeaPhotos.pool, guidePath: "/dead-sea/family-hotels/", guideLabel: "Compare Dead Sea family hotels" },
+    { id: "value", title: "Value & practical resort alternatives", intro: "Value depends on the total offer, not a permanent 'cheap' label. Compare Noga's Ein Bokek setting with Leonardo Plaza's southern location, room options and separate route to the beach.", hotelIds: ["ds-noga", "ds-leonardo-plaza"], photo: deadSeaPhotos.beach, browsePageId: "stay-deadsea-value-browse" },
+    { id: "ein-gedi", title: "Nature-focused stays near Ein Gedi", intro: "These two alternatives suit a different trip from a beachfront resort holiday. Ein Gedi Hotel adds gardens and a spa; the HI hostel offers a simpler base near the nature-reserve area. Check current access to the places you plan to visit.", hotelIds: ["ds-ein-gedi", "ds-hi-ein-gedi"], photo: deadSeaPhotos.einGedi, browsePageId: "stay-deadsea-ein-gedi-browse" },
+  ],
+  checklist: [
+    "Confirm the hotel is on the Israeli shore and check its exact location",
+    "Check whether beach access is direct, a walk, a pathway or a shuttle",
+    "Enter all adults and the ages of every child for the room offer",
+    "Confirm spa entry, minimum ages and charges for treatments or special pools",
+    "Check meals, parking, taxes and other extras in the final total",
+    "Read cancellation terms and reconfirm essential seasonal facilities before travel",
+  ],
+  faqs: [
+    { q: "Does this guide include hotels in Jordan?", a: "No. It covers hotels on the Israeli side of the Dead Sea, including Ein Bokek, the southern hotel district near Neve Zohar and alternatives near Ein Gedi. Confirm the country and exact property on any booking platform." },
+    { q: "Should I choose Ein Bokek or the southern hotel district?", a: "Ein Bokek is useful if you want the promenade, shops and outside dining within easier reach. The southern resorts suit a stay centered on the hotel's own beach, meals and facilities. Choose the actual property and arrival route rather than the area name alone." },
+    { q: "Which Dead Sea hotel has an all-inclusive format?", a: "Leonardo Club Dead Sea is marketed by its operator as all-inclusive. Check the exact package, drinks, meal times and activity inclusions. Other hotels' breakfast or half-board rates are different products; the family guide explains how to compare them." },
+    { q: "Does having a spa mean the hotel is adults-only?", a: "No. A hotel can accept families while restricting spa entry to older guests. Noga, for example, lists spa entry from age 16. Oasis Spa Club has a separate age-restricted hotel policy. Check the hotel's admission rules and each facility's age limit separately." },
+    { q: "Can I choose Ein Gedi for a beachfront holiday?", a: "Treat Ein Gedi as a nature-focused base rather than assuming beach access beside your hotel. A view of the water and a Dead Sea water spa pool are different from an operating beach. Confirm your beach plan and transport before booking." },
+  ],
+  sourceIds: ["owner-hotels-deadsea", "ds-nevo-spa", "ds-noga-spa", "ds-herods-spa", "ds-ein-gedi-spa"],
+  related: [
+    { label: "Masada: plan your visit", to: "/travel-blog/masada/", note: "Tickets, cable car and practical visit information" },
+    { label: "Transfers & private transport", to: "/transfers/", note: "Plan your arrival and return journey" },
+    { label: "Car rental in Israel", to: "/car-rental/" },
+    { label: "All accommodation", to: "/hotels/" },
+  ],
+};
+
+export const hotelCategoryGuides: HotelCategoryGuide[] = [
+  {
+    id: "spa", destinationId: "deadsea", path: "/dead-sea/spa-hotels/", shortTitle: "Spa hotels",
+    title: "Best Dead Sea spa hotels in Israel: compare facilities & stays",
+    metaDescription: "Compare five Dead Sea spa hotels in Israel by wellness facilities, age policies and beach access. Understand spa inclusions and treatment extras before booking.",
+    summary: "Find the spa break that fits your trip, from a full-service resort to an age-restricted wellness stay. Compare five hotels on Israel's Dead Sea shore by facilities, beach access and what your room rate actually includes.",
+    photo: deadSeaPhotos.sunbeds,
+    overview: [
+      "Start by separating the hotel stay from the spa experience. A property may advertise mineral-water pools and treatment rooms while charging separately for massages, sulfur pools or particular access packages. A cheaper room is not necessarily better value once you add the facilities you intend to use.",
+      "The shortlist below compares different settings rather than awarding one universal winner. Nevo combines a broad resort format with the Esprit Spa; Oasis Spa Club focuses on an age-restricted wellness stay. Herods adds a southern beachfront setting, Milos offers a low-rise design format, and Noga is an alternative with two Dead Sea water pools.",
+      "A spa hotel can still welcome families. Check whole-hotel guest ages separately from access to mineral pools, saunas, gyms and treatments. The same distinction matters for beach access: a saltwater pool inside the hotel is different from an operating beach on the shore.",
+    ],
+    decisions: [
+      { title: "Choose the atmosphere", text: "Decide whether you want an age-restricted stay, a couples' break in a family hotel or a full-service resort where your party can split between activities." },
+      { title: "Compare the actual facilities", text: "List the pools, sauna or hammam you will use, then confirm current operation. A general spa label does not describe every hotel's facilities." },
+      { title: "Add the extra costs", text: "Compare room, meals, spa entry and any treatments as one budget. Check whether an advertised spa package is a day visit or an overnight room offer." },
+      { title: "Plan the beach route", text: "Decide how often you want to move between your room, the spa and the beach. Compare direct access with a walk or shuttle." },
+    ],
+    comparison: [{ key: "spa", label: "Wellness facilities" }, { key: "agePolicy", label: "Age policy" }, { key: "beach", label: "Beach arrangement" }],
+    picks: [
+      { hotelId: "ds-nevo", summary: "Choose Nevo when the spa is one part of a broader resort holiday. Its Esprit Spa and mineral-water facilities sit alongside the services of a substantial hotel in Ein Bokek, so companions with different priorities have more to compare than a treatment menu alone.", bestFor: "A first spa-and-resort stay, or couples and groups who want facilities beyond the spa.", watch: "Ask for the spa inclusions attached to your exact room offer. Confirm any charges for treatments or particular pools and the minimum age for each facility." },
+      { hotelId: "ds-oasis", summary: "Oasis Spa Club is the shortlist's most explicitly age-restricted wellness format, with a Moroccan-inspired spa, indoor mineral-water facilities and a beach reached on foot. The operator currently states hotel and spa entry from 16, with an adult-accompaniment rule and minimum check-in age of 18.", bestFor: "Adults seeking a spa-focused atmosphere rather than a children's activity resort.", watch: "Confirm the current policy directly for any 16–17-year-old. Check which treatments are extra and whether the short beach walk suits your mobility requirements." },
+      { hotelId: "ds-herods", summary: "Choose Herods if you want a substantial spa and an adjoining beach in the southern hotel district. It suits spending much of the stay at the resort; that setting is less convenient for frequent walks to Ein Bokek's shops and restaurants.", bestFor: "A resort-focused couples' break combining the Vitalis Spa with beach time.", watch: "Verify the Vitalis facilities and entry included in your rate. Check treatment availability, spa age limits and the exact room outlook before paying." },
+      { hotelId: "ds-milos", summary: "Milos offers a design-focused alternative to a large hotel tower. Its low-rise setting in Ein Bokek combines beach access with a spa advertising mineral-water and sulfur pools, a hammam and treatments. Compare the actual room and facilities rather than assuming every offer includes private outdoor space.", bestFor: "Couples who want hotel design and beach access alongside a spa break.", watch: "Check spa admission ages, pool operation and treatment charges. Confirm any private pool or terrace explicitly in the room category you select." },
+      { hotelId: "ds-noga", summary: "Noga is worth comparing when you want mineral-water facilities without making luxury-room design the main priority. Its Esprit Spa advertises two Dead Sea pools, and its Ein Bokek position places the beach a short walk away rather than making it a direct beachfront stay.", bestFor: "Travelers comparing a practical Ein Bokek base and the facilities they will actually use.", watch: "Spa entry is listed for guests aged 16+, and treatments are charged separately. Compare the final room-and-meals total with other hotels for the same dates." },
+    ],
+    detailTitle: "Spa access, treatments & age restrictions",
+    details: [
+      { title: "Included entry is different from included treatments", text: "Ask the hotel to list which pools and shared spa facilities your rate covers. Treatments, private sessions and certain facilities can cost extra even when basic entry is included. Reserve essential treatment times directly before relying on them as the reason for your stay." },
+      { title: "Check the policy for each guest", text: "A whole-hotel age restriction and a spa minimum age are different. Noga's 16+ spa rule does not make the hotel adults-only. Oasis currently publishes 16+ admission with additional check-in and accompaniment conditions. Reconfirm the exact policy for your party." },
+      { title: "Compare the location beyond the spa", text: "For outside dining and promenade walks, compare the exact Ein Bokek address. For a more self-contained southern stay, plan meals and transport around the resort. An Ein Gedi spa stay is another format, covered in the main destination guide rather than treated as a beachfront hotel." },
+    ],
+    checklist: ["Get the spa inclusions for your exact room rate", "Confirm minimum ages for the hotel, mineral pools, gym and treatments", "Book any essential treatments and check cancellation terms", "Ask about maintenance or seasonal closures before arrival", "Check the beach route and any step-free access needs", "Compare room, meals, spa extras, taxes and parking as one total"],
+    faqs: [
+      { q: "Are all Dead Sea spa hotels adults-only?", a: "No. Several are family hotels with age-restricted spa facilities. If a child-free or age-restricted atmosphere matters, check the whole-hotel policy rather than relying on the spa description." },
+      { q: "Is Oasis Spa Club strictly 18+?", a: "The operator's current English information states hotel and spa entry from 16, minimum check-in age 18 and adult accompaniment for eligible younger guests. Older guides can differ. Confirm directly before booking, especially for a 16–17-year-old." },
+      { q: "Are massages included with a spa hotel room?", a: "Only rely on a treatment being included when the exact room or package description says so. Basic spa entry, specific pools and treatments can be sold separately." },
+      { q: "Does a Dead Sea water pool replace beach access?", a: "They are different facilities. If visiting the shore is central to your trip, confirm the hotel's route to an operating beach, the hours and any shuttle arrangements." },
+      { q: "Can I book a spa day instead of staying overnight?", a: "Some operators offer day packages, but those are different products from the overnight hotel links here. Ask the spa directly for current day-visit availability, inclusions and reservation conditions." },
+    ],
+    sourceIds: ["ds-nevo-spa", "ds-noga-spa", "ds-herods-spa"],
+  },
+  {
+    id: "family", destinationId: "deadsea", path: "/dead-sea/family-hotels/", shortTitle: "Family hotels",
+    title: "Best Dead Sea family hotels in Israel: pools, rooms & meal plans",
+    metaDescription: "Compare four Dead Sea family hotels in Israel by children's facilities, beach access and meals. Explore all-inclusive options and the room checks to make before booking.",
+    summary: "Choose a Dead Sea hotel for the children who are actually traveling with you. Compare four Israeli resorts by pools and activities, room arrangements, beach access and the cost of the meal plan.",
+    photo: deadSeaPhotos.pool,
+    overview: [
+      "The right family hotel depends on the ages of your children and how you plan to spend the day. A toddler pool, water slides, an older child's activities and space for everyone to sleep are different needs. A 'family-friendly' label is only the start of the comparison.",
+      "Leonardo Club is the most activity-focused option in this shortlist, with a water park and an all-inclusive format. VERT suits a central Ein Bokek resort stay with beach access and a choice of meal plans. Noga offers another Ein Bokek base, while Leonardo Plaza is useful to compare for family-room arrangements in the southern district.",
+      "Start with the exact room occupancy, then compare the facilities and total cost. Hotel photos do not confirm the number of beds, a connecting doorway or which activities operate on your dates. Spa facilities can have older-guest age limits even when the hotel welcomes young children.",
+    ],
+    decisions: [
+      { title: "Match the children's ages", text: "Ask which activities are suitable for toddlers, school-age children and teens. Check slide height rules, club ages, opening times and whether adult attendance is required." },
+      { title: "Confirm where everyone sleeps", text: "Enter every child's age and compare a family room, suite or two rooms. A connecting-room request needs written confirmation if the connection is essential." },
+      { title: "Choose the meal plan", text: "Compare all-inclusive with breakfast or half board using the full family total. Check which meals and drinks are included and where you will eat outside the hotel." },
+      { title: "Check the daily routes", text: "Consider the walk between the room, pool, dining area and beach with a stroller or tired children. A shuttle can affect your plans differently from an adjoining beach." },
+    ],
+    comparison: [{ key: "children", label: "Family facilities" }, { key: "meals", label: "Meals" }, { key: "beach", label: "Beach arrangement" }],
+    picks: [
+      { hotelId: "ds-leonardo-club", summary: "Choose Leonardo Club when the hotel activities and meals are the core of the family holiday. Its operator advertises an all-inclusive format, a water park, children's pools and clubs, with adjacent beach access. Compare the room category and the package details together rather than judging only the nightly headline rate.", bestFor: "Families seeking water slides, on-site activities and a package built around meals and drinks.", watch: "Confirm slide height or age rules, water-park operation, club ages and supervision arrangements. Ask which snacks, drinks and services are included on your exact dates." },
+      { hotelId: "ds-vert", summary: "VERT is a useful alternative when you want a central Ein Bokek base and beach access without making an all-inclusive package the deciding factor. The hotel's pools and children's facilities sit alongside the promenade setting, giving families another way to combine hotel time with short outings.", bestFor: "Families prioritizing the Ein Bokek location, beach access and flexibility over meal plans.", watch: "Confirm the sleeping arrangement for all children, any connecting rooms and club hours. Check the selected meal plan and allow for extra food and drinks in the family budget." },
+      { hotelId: "ds-noga", summary: "Compare Noga for a family stay that combines the Ein Bokek location with a more straightforward hotel format. The beach is reached on foot, so check the route with a stroller. Its mineral-water spa is a separate consideration for adults and eligible older teenagers rather than a young-child activity.", bestFor: "Families comparing an Ein Bokek base and overall cost without needing a water-park resort.", watch: "Check the room's maximum occupancy, children's pool and activity schedule, and beach route. Spa entry is 16+, so do not count those facilities among options for younger children." },
+      { hotelId: "ds-leonardo-plaza", summary: "Leonardo Plaza is worth comparing when your family needs a particular room layout or wants a southern resort base. The operator lists family and connecting-room options. Beach access uses a pathway or shuttle, which is a different daily routine from stepping out onto an adjoining beach.", bestFor: "Families and groups who value room configuration and are comfortable with a more self-contained location.", watch: "Get the essential room connection confirmed in writing. Check the beach shuttle schedule, activity programming and meals, and include local journeys in the total cost." },
+    ],
+    detailTitle: "All-inclusive, half board & the real family total",
+    details: [
+      { title: "What all-inclusive means here", text: "Leonardo Club Dead Sea is marketed by its operator as all-inclusive, with meals, drinks and activities forming part of the resort format. Check the exact offer for meal times, drink selections, snacks, activities and exclusions. A spa treatment or every special service should not be assumed included." },
+      { title: "When another meal plan may work better", text: "If your family plans excursions or wants outside dining, compare breakfast or half board with the all-inclusive total. Central Ein Bokek and a self-contained southern resort provide different outside options. Count lunch, drinks, snacks and local transport in the comparison." },
+      { title: "Use the right party details", text: "Enter the ages of all children and the true number of adults on the booking site. Compare the same dates and cancellation conditions. A cot, extra bed, separate bedroom or connecting room is available only if the hotel confirms it for the room you choose." },
+      { title: "Plan around freshwater pools and activities", text: "Check the actual children's pools and activity timetable rather than treating a Dead Sea beachfront as a substitute for a family swimming program. Ask about shaded areas, the walk between facilities and any age or height restrictions before choosing the hotel." },
+    ],
+    checklist: ["Enter every adult and each child's age on the booking site", "Confirm beds, maximum occupancy, cots and any essential connecting doorway", "Check pool and water-park operation for the travel dates", "Ask about club age groups, staffing and adult-attendance rules", "Compare meals, snacks, drinks, parking and transport in the final family total", "Arrange child seats and check the hotel's arrival and cancellation terms"],
+    faqs: [
+      { q: "Which hotel in this shortlist offers all-inclusive?", a: "Leonardo Club Dead Sea is marketed as all-inclusive. The other shortlisted hotels offer different room and meal-plan choices. Check each exact offer rather than assuming every family resort is all-inclusive." },
+      { q: "Is a water park guaranteed to be open on our dates?", a: "No. Confirm current operation directly with the hotel, along with slide height or age restrictions and weather or maintenance limitations. Do the same for children's pools and activity clubs." },
+      { q: "Can children use all the spa pools?", a: "Do not assume so. Spa and mineral-pool age limits are separate from a hotel's family policy. Noga's spa, for example, is listed for guests aged 16 and over. Ask about the freshwater pools and activities appropriate for your children." },
+      { q: "Is a family room the same as two connecting rooms?", a: "No. A family room may put everyone in one space, while connecting rooms require two rooms with an internal doorway. Check the actual layout and get a connection confirmed in writing if you need it." },
+      { q: "Should families choose Ein Bokek or the southern resorts?", a: "Ein Bokek gives easier access to the promenade and outside shops and dining. Southern resorts can work well when you plan to use the hotel's own facilities and meals. Compare the actual beach route, room and children's program before deciding." },
+    ],
+    sourceIds: ["ds-noga-spa"],
+  },
+];
