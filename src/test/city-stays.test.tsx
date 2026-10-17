@@ -5,7 +5,7 @@ import { cleanup, fireEvent, render, screen, within } from "@testing-library/rea
 import { afterEach, describe, expect, it, vi } from "vitest";
 import { CityStayPage } from "@/components/CityStayPage";
 import { NeighborhoodStayPage } from "@/components/NeighborhoodStayPage";
-import { cityStayGuides, jerusalemAreaGuides } from "@/data/content";
+import { cityStayGuides, jerusalemAreaGuides, telAvivAreaGuides, neighborhoodGuidesForCity } from "@/data/content";
 import { affiliateConfig, getSource, hotelsForArea, linksForPage } from "@/data/registry";
 import { routeTree } from "@/routeTree.gen";
 
@@ -18,19 +18,23 @@ vi.mock("@tanstack/react-router", async () => {
 
 afterEach(cleanup);
 
-describe("Jerusalem city → neighborhood → booking journey", () => {
+describe.each([
+  { g: cityStayGuides.jerusalem, areas: jerusalemAreaGuides, filter: "Luxury hotels", matches: 2, otherCity: cityStayGuides.telaviv },
+  { g: cityStayGuides.telaviv, areas: telAvivAreaGuides, filter: "Beach days", matches: 3, otherCity: cityStayGuides.jerusalem },
+])("$g.city city → neighborhood → booking journey", ({ g, areas, filter, matches, otherCity }) => {
   it("the existing city URL and every linked neighborhood resolve to their own page", () => {
     const router = createRouter({ routeTree, context: { queryClient: new QueryClient() }, trailingSlash: "always" });
-    for (const path of [cityStayGuides.jerusalem.path, ...jerusalemAreaGuides.map((area) => area.path)]) {
+    for (const path of [g.path, ...areas.map((area) => area.path)]) {
       expect(router.matchRoutes(path).at(-1)?.routeId).toBe(path.replace(/\/$/, ""));
     }
   });
 
   it("the city hub gives every area its own image, real map and internal guide link", () => {
-    render(<CityStayPage g={cityStayGuides.jerusalem} />);
+    render(<CityStayPage g={g} />);
     const cards = screen.getAllByTestId("neighborhood-card");
-    expect(cards).toHaveLength(6);
-    for (const area of jerusalemAreaGuides) {
+    expect(cards).toHaveLength(areas.length);
+    expect(neighborhoodGuidesForCity(g.id)).toEqual(areas);
+    for (const area of areas) {
       const card = cards.find((card) => within(card).queryByRole("heading", { name: area.name }))!;
       expect(card).toBeDefined();
       expect(card.querySelector("img")?.getAttribute("src")).toBe(area.photo.src);
@@ -44,24 +48,29 @@ describe("Jerusalem city → neighborhood → booking journey", () => {
   });
 
   it("travel-style filters narrow the areas and All areas restores the complete guide", () => {
-    render(<CityStayPage g={cityStayGuides.jerusalem} />);
-    fireEvent.click(screen.getByRole("button", { name: "Luxury hotels" }));
-    expect(screen.getAllByTestId("neighborhood-card")).toHaveLength(2);
-    expect(screen.getByRole("status")).toHaveTextContent("2 areas for luxury hotels");
+    render(<CityStayPage g={g} />);
+    fireEvent.click(screen.getByRole("button", { name: filter }));
+    expect(screen.getAllByTestId("neighborhood-card")).toHaveLength(matches);
+    expect(screen.getByRole("status")).toHaveTextContent(`${matches} areas for ${filter.toLowerCase()}`);
     fireEvent.click(screen.getByRole("button", { name: "All areas" }));
-    expect(screen.getAllByTestId("neighborhood-card")).toHaveLength(6);
+    expect(screen.getAllByTestId("neighborhood-card")).toHaveLength(areas.length);
   });
 
   it("each area explains location before hotel recommendations and preserves sponsored booking links", () => {
-    for (const area of jerusalemAreaGuides) {
+    for (const area of areas) {
       const { container, unmount } = render(<NeighborhoodStayPage area={area} />);
       expect(screen.getByRole("heading", { level: 1 })).toHaveTextContent(area.title);
       expect(container.querySelectorAll("main")).toHaveLength(1);
       expect(container.querySelector("main main")).toBeNull();
       expect(container.querySelector("#location")!.compareDocumentPosition(container.querySelector("#book")!)).toBe(Node.DOCUMENT_POSITION_FOLLOWING);
       expect(screen.getAllByTestId("hotel-recommendation")).toHaveLength(2);
-      expect(within(screen.getByRole("navigation", { name: "Breadcrumb" })).getByRole("link", { name: "Jerusalem" })).toHaveAttribute("href", cityStayGuides.jerusalem.path);
-      for (const hotel of hotelsForArea(area.id)) {
+      expect(within(screen.getByRole("navigation", { name: "Breadcrumb" })).getByRole("link", { name: g.city })).toHaveAttribute("href", g.path);
+      expect(container.querySelector(`a[href="${g.related[0]!.to}"]`)).toBeInTheDocument();
+      expect(container.querySelector(`a[href="${otherCity.related[0]!.to}"]`)).toBeNull();
+      expect(container.querySelector(`#sources a[href="${getSource(g.sourceIds[0]!).url}"]`)).toBeInTheDocument();
+      expect(container.querySelector(`#sources a[href="${getSource(otherCity.sourceIds[0]!).url}"]`)).toBeNull();
+      for (const hotel of hotelsForArea(area.id, g.id)) {
+        expect(hotel.cityId).toBe(g.id);
         const booking = linksForPage(`stay-area-${area.id}`).find((link) => link.id === `hotel-${hotel.id}-expedia`)!;
         expect(getSource(hotel.sourceId).url).toMatch(/^https:\/\//);
         expect(booking.url).toBe(affiliateConfig[booking.id]?.trackingUrl);
@@ -71,6 +80,18 @@ describe("Jerusalem city → neighborhood → booking journey", () => {
         expect(link).toHaveAttribute("target", "_blank");
       }
       unmount();
+    }
+  });
+
+  it("city and area browsing links retain the correct guide's configured affiliate destination", () => {
+    for (const [pageId, sourceId] of [
+      [`stay-${g.id}`, g.sourceIds[0]!],
+      ...areas.map((area) => [`stay-area-${area.id}-browse`, g.sourceIds[0]!]),
+    ]) {
+      const affiliateLinks = linksForPage(pageId!).filter((link) => link.isAffiliate);
+      expect(affiliateLinks).toHaveLength(1);
+      expect(affiliateLinks[0]!.url).toBe(affiliateConfig[affiliateLinks[0]!.id]?.trackingUrl);
+      expect(affiliateLinks[0]!.sourceId).toBe(sourceId);
     }
   });
 });

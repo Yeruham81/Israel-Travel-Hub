@@ -9,8 +9,16 @@ import oldCityPhoto from "@/assets/jerusalem/old-city.webp";
 import marketPhoto from "@/assets/jerusalem/mahane-yehuda.webp";
 import eastJerusalemPhoto from "@/assets/jerusalem/east-jerusalem.webp";
 import germanColonyPhoto from "@/assets/jerusalem/german-colony.webp";
+import telAvivBeachfrontPhoto from "@/assets/tel-aviv/beachfront.webp";
+import dizengoffPhoto from "@/assets/tel-aviv/dizengoff.webp";
+import oldNorthPhoto from "@/assets/tel-aviv/old-north.webp";
+import neveTzedekPhoto from "@/assets/tel-aviv/neve-tzedek.webp";
+import jaffaPhoto from "@/assets/tel-aviv/jaffa.webp";
+import florentinPhoto from "@/assets/tel-aviv/florentin.webp";
+import keremPhoto from "@/assets/tel-aviv/kerem-hateimanim.webp";
+import rothschildPhoto from "@/assets/tel-aviv/rothschild.webp";
 
-export type StayPreference = "first-visit" | "car-free" | "quiet" | "nightlife" | "family" | "views" | "luxury" | "heritage" | "food" | "long-stay";
+export type StayPreference = "first-visit" | "car-free" | "quiet" | "nightlife" | "family" | "views" | "luxury" | "heritage" | "food" | "long-stay" | "beach" | "history";
 
 export const preferenceLabels: Record<StayPreference, string> = {
   "first-visit": "First visit / sightseeing",
@@ -23,6 +31,8 @@ export const preferenceLabels: Record<StayPreference, string> = {
   heritage: "History & pilgrimage",
   food: "Food & markets",
   "long-stay": "Longer stays",
+  beach: "Beach days",
+  history: "Historic streets & architecture",
 };
 
 export interface StayArea {
@@ -39,6 +49,9 @@ export interface CityStayGuide {
   title: string;
   metaDescription: string;
   intro: string;
+  reviewedAt?: string;
+  areaIntro?: string;
+  quickPicks?: { areaId: string; label: string; description: string }[];
   overview: string[];
   areas: StayArea[];
   checklist: string[];
@@ -266,12 +279,278 @@ export const jerusalemAreaGuides: NeighborhoodStayGuide[] = [
   },
 ];
 
-export const neighborhoodGuidesForCity = (cityId: CityStayGuide["id"]) => jerusalemAreaGuides.filter((area) => area.cityId === cityId);
+export const telAvivAreaGuides: NeighborhoodStayGuide[] = [
+  {
+    id: "telaviv-beachfront", cityId: "telaviv", name: "Tel Aviv Beachfront", shortName: "Beachfront",
+    path: "/tel-aviv/beachfront-hotels/",
+    title: "Tel Aviv beachfront hotels: promenade & beach area guide",
+    metaDescription: "Choose a base by Tel Aviv's promenade, Gordon and Frishman beaches. Explore the area, compare two hotel picks and check sea-view room details before booking.",
+    summary: "Make the Mediterranean part of every day, with the promenade, central beaches and cafés close by. Choose between large seafront hotels and smaller properties a street inland.",
+    bestFor: "Beach days & a first Tel Aviv visit", suits: ["beach", "first-visit", "views", "luxury"], priceLevel: "Mid-range to luxury",
+    watch: "A beachfront address does not guarantee a sea-facing room or a private beach.",
+    photo: { src: telAvivBeachfrontPhoto, alt: "Tel Aviv's beachfront hotels and Mediterranean promenade", sourceUrl: "https://www.israel-taxi.com/wp-content/uploads/2025/08/Tel_Aviv_Promenade1.jpg" },
+    map: { lat: 32.0821, lon: 34.7674, bounds: [34.759, 32.069, 34.775, 32.0915], reference: "Gordon / Frishman beach district" },
+    overview: [
+      "Tel Aviv's central beachfront follows the promenade beside HaYarkon Street, with Gordon, Frishman and Bograshov beaches providing useful landmarks. This guide focuses on that central strip: the port to the north and Jaffa to the south offer different bases and have their own guides.",
+      "Stay here if an early swim, a sunset walk or an easy return from the beach matters to your trip. The coast also works for a first visit because you can walk inland to restaurants and central streets. The accommodation mix ranges from substantial hotels with leisure facilities to smaller boutique properties just behind the waterfront.",
+      "Expect an urban coastline, with road traffic, people on the promenade and busy public beaches. Sea-facing rooms often carry a premium, while a side view can be very different from a full view. Look at the exact entrance and room description: some properties are across HaYarkon Street, and others sit a block or more inland.",
+    ],
+    highlights: [
+      { name: "Gordon, Frishman & Bograshov beaches", text: "Central beach landmarks for choosing your preferred part of the coast. Check current lifeguard hours and swimming conditions locally." },
+      { name: "The seafront promenade", text: "A continuous waterfront route for walking north toward the port or south toward Jaffa; the full distance is longer than a short city stroll." },
+      { name: "Ben Yehuda & the city center", text: "Cafés, shops and restaurants a few streets inland add everyday choices beyond hotel dining." },
+    ],
+    gettingAround: [
+      "From the central beaches, Dizengoff Square is often around 10–20 minutes away on foot, depending on the hotel. Jaffa and the port are farther along the coast: compare the actual walking route before deciding to cover both ends of the city in one day.",
+      "The airport train does not deliver you to the promenade. Plan the onward trip from your chosen Tel Aviv station, or arrange a transfer to the hotel's street entrance. If driving, confirm a specific parking space and charge; a nearby public car park is different from hotel parking.",
+    ],
+    arrivalTips: ["Give your driver the hotel's entrance address, which may differ from the promenade frontage.", "Check the current train or bus service for your arrival date, especially Friday evening and Saturday.", "Ask how far you will carry bags from the drop-off, and whether the route has steps."],
+    bookingTips: ["Choose a room explicitly described as full sea view if that is essential; do not infer it from the hotel's location.", "Confirm which pool, breakfast and beach-related services are included for your dates."],
+    faqs: [
+      { q: "Does a beachfront hotel have its own beach?", a: "Do not assume so. Tel Aviv's central beaches are public, and hotel arrangements vary. Confirm any advertised beach services directly and check whether a road separates your hotel from the sand." },
+      { q: "Is the beachfront convenient for a first visit?", a: "Yes, particularly if you want beach time alongside city sightseeing. The central strip gives access to the promenade and inland cafés; Jaffa and the northern port still require a longer walk or a ride." },
+      { q: "What is the difference between full and side sea view?", a: "A full view normally faces the sea more directly, while a side view may be angled or partly obstructed. The property's own room description and photos should define what your selected category includes." },
+    ],
+  },
+  {
+    id: "telaviv-dizengoff", cityId: "telaviv", name: "Dizengoff Square & City Center", shortName: "Dizengoff & City Center",
+    path: "/tel-aviv/dizengoff-city-center-hotels/",
+    title: "Dizengoff & central Tel Aviv: area guide & boutique hotels",
+    metaDescription: "Explore the streets around Dizengoff Square, cafés and White City architecture. Compare two boutique hotels and plan a central Tel Aviv stay without a car.",
+    summary: "Cafés, boutique hotels and White City streets make this a convenient base for exploring on foot, with the beach a walk away rather than outside your door.",
+    bestFor: "First visits, cafés & exploring on foot", suits: ["first-visit", "car-free", "nightlife", "history"], priceLevel: "Mid-range to upscale",
+    watch: "Dizengoff Street is long. Check the address rather than assuming every hotel is beside the square.",
+    photo: { src: dizengoffPhoto, alt: "The fountain and pedestrian plaza at Dizengoff Square in Tel Aviv", sourceUrl: "https://www.israel-taxi.com/wp-content/uploads/2026/07/dizengoff_square_tel_aviv.webp" },
+    map: { lat: 32.0773, lon: 34.7737, bounds: [34.7664, 32.0705, 34.783, 32.0858], reference: "Dizengoff Square" },
+    overview: [
+      "This area centers on Dizengoff Square and the surrounding streets, including the nearby stretch of Dizengoff Street, Frishman and Bograshov. It is a useful introduction to central Tel Aviv, with neighborhood cafés, restaurants and architecture woven into everyday city life.",
+      "Choose it if you want to leave the hotel on foot and have several directions to explore. You can head west toward the beach, south toward Meir Park and the shopping streets, or spend the evening close to the square. Several boutique hotels occupy buildings with their own histories, making the accommodation part of the neighborhood experience.",
+      "The tradeoff is city noise and a smaller hotel format. A characterful central property may have fewer leisure facilities than a large hotel on the seafront. Some streets are lively late into the evening, and a listing described simply as 'Dizengoff' can be well north of the square.",
+    ],
+    highlights: [
+      { name: "Dizengoff Square", text: "The fountain and surrounding buildings provide a recognizable meeting point and an easy start for a walk through the White City." },
+      { name: "Dizengoff Street cafés", text: "Independent shops, places to eat and bars offer options throughout the day; the atmosphere varies along the street." },
+      { name: "Meir Park & Dizengoff Center", text: "A park and shopping landmark to the south help orient your route toward the wider city center." },
+    ],
+    gettingAround: [
+      "The beach is roughly 10–15 minutes on foot from the square, with extra time from hotels farther east or north. For Jaffa, the port or an airport station, plan a longer walk or a bus or taxi rather than treating every Tel Aviv sight as immediately nearby.",
+      "This is a practical base without a rental car. Check the walking route from your bus stop and the hotel's vehicle entrance, particularly if the address faces a pedestrian space. Friday-evening and Saturday transport has different service patterns; verify your exact journey before arrival.",
+    ],
+    arrivalTips: ["Confirm the hotel is near Dizengoff Square if that is the location you want.", "Ask for the nearest taxi stopping point and how to reach reception with luggage.", "Light sleepers should ask about room orientation, nearby bars and street works."],
+    bookingTips: ["Compare room size and window outlook, particularly in converted historic buildings.", "Check breakfast, parking and any rooftop access against the rate you select."],
+    faqs: [
+      { q: "Is this a good alternative to a beachfront hotel?", a: "Yes, if you prefer cafés, architecture and a central city feel. You can still walk to the beach, but you will not have the same immediate access or outlook as a room on the coast." },
+      { q: "Are all Dizengoff hotels close to the square?", a: "No. Dizengoff Street continues a long way north. Check the exact address and walking route to the square before booking." },
+      { q: "Can I explore without a car?", a: "Walking works well for the nearby center and beaches. Use current bus information or taxis for longer trips, and plan airport journeys and Shabbat travel separately." },
+    ],
+  },
+  {
+    id: "telaviv-old-north", cityId: "telaviv", name: "Old North & Tel Aviv Port", shortName: "Old North & Port",
+    path: "/tel-aviv/old-north-port-hotels/",
+    title: "Old North & Tel Aviv Port: neighborhood guide & hotels",
+    metaDescription: "Find a base near Tel Aviv Port, northern beaches and Yarkon Park. Compare two hotel styles, map the district and understand the distance to central Tel Aviv.",
+    summary: "Residential café streets, northern beaches and waterfront walks suit a slower city stay. The port and Yarkon Park add outdoor space, farther from Jaffa and the southern markets.",
+    bestFor: "Northern beaches, parks & a slower pace", suits: ["beach", "family", "quiet", "long-stay"], priceLevel: "Mid-range to upscale",
+    watch: "The port can be lively; a quiet residential side street and a waterfront hotel offer different evenings.",
+    photo: { src: oldNorthPhoto, alt: "Aerial view of Tel Aviv Port and the Yarkon River meeting the Mediterranean", sourceUrl: "https://www.israel-taxi.com/wp-content/uploads/2025/08/tel-aviv_port_aerial.jpg" },
+    map: { lat: 32.0936, lon: 34.7777, bounds: [34.768, 32.083, 34.793, 32.1045], reference: "Old North / Tel Aviv Port district" },
+    overview: [
+      "The Old North stretches through residential streets north of the central city toward the Yarkon River. Tel Aviv Port, known locally as the Namal, sits on its coastal edge. These are adjoining places rather than one compact hotel block, so the street you choose affects both the atmosphere and your daily walks.",
+      "The appeal is a mix of neighborhood cafés, beach access and open space. Independence Park, the northern beaches, the port's waterfront and the Yarkon corridor give families and longer-stay visitors alternatives to a day of shopping or sightseeing. Southern parts of the Old North remain closer to the city center than a hotel right beside the port.",
+      "Do not read 'north' as a guarantee of silence. The port has restaurants and a lively public waterfront, while major roads remain busy. If your itinerary focuses on Jaffa, Carmel Market and the southern neighborhoods, factor in the extra journeys before choosing this base.",
+    ],
+    highlights: [
+      { name: "Tel Aviv Port boardwalk", text: "Waterfront restaurants and an open walking area at the northern end of the city's coastal route." },
+      { name: "Independence Park & northern beaches", text: "Green space and access toward Hilton, Nordau and Metzitzim beaches, depending on where you stay." },
+      { name: "Yarkon River & park", text: "The river corridor leads inland from the coast, offering a different setting for a walk or a longer outdoor outing." },
+    ],
+    gettingAround: [
+      "Map the route from your hotel to the particular beach or park entrance you plan to use. A property near Independence Park is not beside the port itself. Central Tel Aviv is closer from the southern Old North; Jaffa is a substantially longer coastal walk from the port.",
+      "Buses and taxis help with trips to the southern city and railway stations. For an airport arrival, choose the onward connection based on the actual address rather than the broad 'Tel Aviv' destination. Ask about parking if driving, and check services for your exact arrival time.",
+    ],
+    arrivalTips: ["Use the hotel's street entrance rather than a general map pin for Tel Aviv Port.", "Check which side of a main road you need to reach when arriving with children or bags.", "Ask about nearby nightlife, construction and room orientation if quiet is a priority."],
+    bookingTips: ["For a family stay, confirm the actual sleeping arrangement and maximum occupancy.", "Check the distance to your preferred beach and whether advertised leisure facilities are available for your dates."],
+    faqs: [
+      { q: "Is the Old North the same as Tel Aviv Port?", a: "No. The Old North is a broader residential district. The port is its northern waterfront destination; a hotel described as Old North may be a walk away from it." },
+      { q: "Is this a useful area for families?", a: "It can be, because of the parks, waterfront and northern beaches. Check the hotel's room layout and the route to the places you will use rather than relying on the district label alone." },
+      { q: "Is it convenient for exploring Jaffa every day?", a: "Jaffa is at the other end of the coastal city. A stay here works best if you are comfortable using transport for southern outings; choose Jaffa or the southern center if those are your main focus." },
+    ],
+  },
+  {
+    id: "telaviv-neve-tzedek", cityId: "telaviv", name: "Neve Tzedek & Surroundings", shortName: "Neve Tzedek",
+    path: "/tel-aviv/neve-tzedek-hotels/",
+    title: "Neve Tzedek: historic neighborhood guide & boutique stays",
+    metaDescription: "Explore Shabazi Street, the Suzanne Dellal area and historic Neve Tzedek. Compare two stays in and around the neighborhood with maps and practical arrival tips.",
+    summary: "Low-rise historic streets, galleries and cafés create an intimate southern base near the coast. Hotel listings also include the neighborhood's edges, so check the precise street.",
+    bestFor: "Couples, historic streets & boutique stays", suits: ["history", "quiet", "food", "luxury"], priceLevel: "Mid-range to luxury",
+    watch: "Properties on Lilienblum or Herzl may be on the edge of Neve Tzedek rather than in its historic lanes.",
+    photo: { src: neveTzedekPhoto, alt: "Historic buildings and gardens in Neve Tzedek", sourceUrl: "https://www.israel-taxi.com/wp-content/uploads/2025/08/Neve_Tzedek_Tel_Aviv_1.jpg" },
+    map: { lat: 32.061, lon: 34.7659, bounds: [34.756, 32.053, 34.775, 32.069], reference: "Shabazi / Suzanne Dellal district" },
+    overview: [
+      "Neve Tzedek is one of the city's earliest neighborhoods, with small historic houses, narrow lanes and Shabazi Street at its heart. Its scale feels different from the hotel towers on the beachfront and the busier commercial streets of central Tel Aviv.",
+      "Choose this area for wandering, cafés, galleries and an evening close to your accommodation. The Suzanne Dellal area is a natural landmark, and the southern promenade, Rothschild Boulevard and Florentin are nearby directions to explore. It suits visitors who want the neighborhood itself to be part of the holiday.",
+      "Accommodation within the historic core is limited, and booking platforms often include properties just beyond it. Lilienblum, Herzl and Yehuda HaLevi streets connect Neve Tzedek with the wider southern center; a hotel there may offer easy access without the same quiet-lane setting. Narrow streets and limited parking also make the exact entrance important.",
+    ],
+    highlights: [
+      { name: "Shabazi Street", text: "The neighborhood's main walking spine, with boutiques, cafés and side lanes to explore." },
+      { name: "Suzanne Dellal area", text: "Historic buildings and courtyards around the dance and cultural center form a useful neighborhood landmark; check events separately." },
+      { name: "Charles Clore Park & the southern promenade", text: "The nearby coast offers a route toward Jaffa and a break from the enclosed neighborhood streets." },
+    ],
+    gettingAround: [
+      "The southern promenade is roughly 10–15 minutes on foot from many parts of Neve Tzedek, with a different walk from hotels on its eastern edges. Rothschild and Florentin are nearby; Jaffa is farther south. Plot the actual route rather than assuming all southern districts meet at your hotel.",
+      "Much of the appeal is exploring on foot. For luggage, a late arrival or an airport transfer, ask where a car can legally stop and which doorway is yours. If bringing a car, arrange a specific parking option before arrival instead of relying on a space in the historic lanes.",
+    ],
+    arrivalTips: ["Check whether your hotel is inside Neve Tzedek or on its eastern edge.", "Ask about steps and lifts in converted historic buildings.", "Arrange the drop-off and any independent check-in instructions before a late arrival."],
+    bookingTips: ["Compare full hotel service with a more independent guesthouse format; both appear in the wider area.", "Confirm room size, noise exposure and whether breakfast is offered or included."],
+    faqs: [
+      { q: "Are all Neve Tzedek hotel listings inside the neighborhood?", a: "No. Listings commonly cover nearby Lilienblum, Herzl and other southern-center streets. Check the street and map if staying among the low-rise historic lanes is important to you." },
+      { q: "Is Neve Tzedek beside the beach?", a: "The southern coast is within walking reach, but this is an inland neighborhood. Allow roughly 10–15 minutes from many addresses and check the route from your chosen property." },
+      { q: "Is it a quiet area?", a: "Its residential lanes can feel calmer than the major nightlife streets, but cafés, deliveries and nearby roads still matter. Ask about your room's outlook rather than expecting the whole area to be silent." },
+    ],
+  },
+  {
+    id: "telaviv-jaffa", cityId: "telaviv", name: "Jaffa: Old City & Flea Market", shortName: "Jaffa",
+    path: "/tel-aviv/jaffa-hotels/",
+    title: "Where to stay in Jaffa: Old City, flea market & hotels",
+    metaDescription: "Choose between Old Jaffa's historic lanes and the lively flea-market district. Explore the map, compare two hotel picks and plan luggage access before booking.",
+    summary: "Historic stone streets, the fishing port and flea-market cafés make Jaffa a destination in its own right. Choose between an Old City landmark and a lively market-side stay.",
+    bestFor: "Historic atmosphere, galleries & market evenings", suits: ["history", "food", "views", "luxury"], priceLevel: "Mid-range to luxury",
+    watch: "Old Jaffa has slopes and steps; the flea-market streets can be lively at night.",
+    photo: { src: jaffaPhoto, alt: "Aerial view of Old Jaffa, its port and the Mediterranean coast", sourceUrl: "https://www.israel-taxi.com/wp-content/uploads/2025/08/jaffa_panorama2.jpg" },
+    map: { lat: 32.0538, lon: 34.7523, bounds: [34.743, 32.0445, 34.766, 32.064], reference: "Old Jaffa / flea-market district" },
+    overview: [
+      "Jaffa sits at the southern end of the Tel Aviv coastline, with an old port, stone lanes and a historic hill above the sea. The adjoining flea-market district adds shops, cafés and evening restaurants around the streets inland from the Clock Tower.",
+      "Choose Jaffa if you want to spend time here rather than treat it as a quick excursion from central Tel Aviv. A morning around the port, an afternoon among galleries and an evening in the market make a different rhythm from a stay beside Dizengoff Square. Luxury heritage hotels and smaller boutique properties offer different ways to experience it.",
+      "Be precise about which part you book. The Old City can involve slopes, cobbles and steps, while a flea-market hotel puts you closer to lively eating and drinking streets. Jaffa's coastal setting does not mean every room has a sea view, and the central Tel Aviv beaches and northern neighborhoods are a longer journey away.",
+    ],
+    highlights: [
+      { name: "Old Jaffa lanes & galleries", text: "Stone streets and courtyards lead around the historic hill, with sea viewpoints along the way." },
+      { name: "Flea market & Clock Tower", text: "A useful meeting point and a neighborhood of shops, cafés and restaurants; individual businesses keep their own hours." },
+      { name: "Jaffa Port & the southern coast", text: "The old fishing port and routes toward Alma Beach connect the historic district with the waterfront." },
+    ],
+    gettingAround: [
+      "Old Jaffa and the flea-market district can be explored on foot, but the hill and steps affect accessibility. The coastal route north links toward Neve Tzedek and central Tel Aviv; allow a longer walk or use transport if your daily plans center on Dizengoff or the port.",
+      "For an airport transfer, use the exact Jaffa address and ask the hotel which entrance a vehicle can reach. A road-level doorway does not guarantee a step-free route to the room. Confirm the whole arrival route if you have a stroller, limited mobility or heavy luggage.",
+    ],
+    arrivalTips: ["Ask about stairs, lifts and the route from the taxi drop-off to your room.", "Check whether your hotel is on the Old City hill or beside the flea market.", "For a market-side room, ask about restaurant noise and late-evening activity."],
+    bookingTips: ["Book an explicit sea-view category if an outlook matters; a Jaffa address alone is not enough.", "Confirm the current property name, room category and services, particularly in landmark hotels that have changed operator."],
+    faqs: [
+      { q: "Should I choose Old Jaffa or the flea market?", a: "Old Jaffa suits historic surroundings and time around the port and galleries. The flea-market district puts cafés and restaurants close by, with a livelier evening feel. Check the exact entrance and room outlook in either area." },
+      { q: "Is Jaffa convenient for central Tel Aviv?", a: "It is connected to the city, but the central beaches, Dizengoff Square and especially the northern port are farther away. Choose Jaffa for its own atmosphere and plan transport for longer outings." },
+      { q: "Is Old Jaffa suitable with a stroller or limited mobility?", a: "Some routes have slopes, uneven surfaces or steps. Ask the hotel for a specific accessible approach and check the route to the attractions you want to visit rather than relying on a general accessibility label." },
+    ],
+  },
+  {
+    id: "telaviv-florentin", cityId: "telaviv", name: "Florentin & Levinsky Market", shortName: "Florentin",
+    path: "/tel-aviv/florentin-hotels/",
+    title: "Florentin hotels: street art, Levinsky Market & area guide",
+    metaDescription: "Explore Florentin's cafés, street art and nightlife near Levinsky Market. Compare two small-property stays and check noise, check-in and location before booking.",
+    summary: "Street art, neighborhood bars and Levinsky Market suit visitors who enjoy an active, less polished city base. Small hotels and independent stays are the main accommodation style.",
+    bestFor: "Nightlife, food & an independent city stay", suits: ["nightlife", "food", "long-stay"], priceLevel: "Budget to mid-range; dates vary",
+    watch: "Bars, workshops and building activity make the exact block and room orientation important.",
+    photo: { src: florentinPhoto, alt: "Street cafés and apartment buildings in Florentin, Tel Aviv", sourceUrl: "https://www.israel-taxi.com/wp-content/uploads/2025/08/florentin_tel_aviv1.jpg" },
+    map: { lat: 32.0557, lon: 34.7695, bounds: [34.76, 32.0485, 34.781, 32.063], reference: "Florentin / Levinsky Market district" },
+    overview: [
+      "Florentin is a southern Tel Aviv neighborhood of apartment buildings, workshops, cafés, bars and changing street art. The Levinsky Market streets add food shops and places to eat along its northern side. The appeal is everyday city life rather than a polished hotel district.",
+      "Choose it if you enjoy exploring food streets by day and going out nearby in the evening. Neve Tzedek, the southern end of Rothschild Boulevard and Jaffa are nearby directions to explore, making it useful for a trip focused on the southern city. Accommodation is more often a small property, room or apartment-style stay than a large resort hotel.",
+      "The same mix that gives Florentin its character can affect sleep. Nightlife, deliveries, workshops and construction vary from one block to the next. Compare recent room-specific information, and ask about the entrance and check-in format: a digitally managed stay may provide a different level of on-site service from a conventional hotel.",
+    ],
+    highlights: [
+      { name: "Florentin's street art", text: "Murals and painted shutters change over time; explore the neighborhood rather than expecting every artwork in an old photo to remain." },
+      { name: "Levinsky Market streets", text: "Food shops, spices and cafés provide a natural route for tasting the southern city. Check individual opening hours." },
+      { name: "Neighborhood cafés & bars", text: "Florentin's evening life is part of the attraction and a reason to choose your room location carefully." },
+    ],
+    gettingAround: [
+      "The beach is roughly a 15–25 minute walk from different parts of Florentin, so treat this as an inland base. The walk toward Neve Tzedek or lower Rothschild is shorter from the neighborhood's northern edge; central Dizengoff and the northern port are farther away.",
+      "Ask your accommodation for the exact doorway and airport drop-off instructions. Smaller properties may use remote support or self check-in, so obtain the access process before traveling. Confirm current bus or train connections for your date and the onward journey to Florentin.",
+    ],
+    arrivalTips: ["Get access codes and the support contact before a late arrival if check-in is independent.", "Ask whether the room faces a bar, a workshop, a main road or a quieter rear side.", "Confirm lift access, luggage storage and where a taxi can stop."],
+    bookingTips: ["Check whether you are booking a private room, apartment or another format, and what service is included.", "For a longer stay, confirm cleaning, kitchen facilities and any additional charges for your specific unit."],
+    faqs: [
+      { q: "Is Florentin a beachfront area?", a: "No. It is inland in southern Tel Aviv. The beach can be around 15–25 minutes away on foot, depending on your address and route." },
+      { q: "Is Florentin a quiet place to stay?", a: "Its nightlife and working streets can be lively. Noise varies by block and room, so ask about the exact outlook. Travelers prioritizing early, quiet nights should compare other areas as well." },
+      { q: "Are all Florentin stays conventional hotels?", a: "No. The area includes small hotels, apartments and properties with independent or digital check-in. Read the listing for the actual room format, staffing and arrival process." },
+    ],
+  },
+  {
+    id: "telaviv-kerem", cityId: "telaviv", name: "Kerem HaTeimanim & Carmel Market", shortName: "Kerem HaTeimanim",
+    path: "/tel-aviv/kerem-hateimanim-hotels/",
+    title: "Kerem HaTeimanim hotels: Yemenite Quarter & Carmel Market guide",
+    metaDescription: "Stay near Carmel Market, Yemenite food streets and the beach. Explore Kerem HaTeimanim, compare two nearby stays and check exact locations and arrival access.",
+    summary: "Narrow residential lanes and Yemenite food sit between Carmel Market and the coast. Nearby market-edge hotels offer a lively base with easy access to several southern districts.",
+    bestFor: "Food, market mornings & beach access", suits: ["food", "beach", "car-free", "history"], priceLevel: "Mid-range to upscale",
+    watch: "Market-edge and Allenby addresses can be busy; nearby listings are not always inside the residential quarter.",
+    photo: { src: keremPhoto, alt: "A narrow residential street in Kerem HaTeimanim, Tel Aviv", sourceUrl: "https://www.israel-taxi.com/wp-content/uploads/2025/08/Kerem_Hateimanim_tel_aviv1.jpg" },
+    map: { lat: 32.069, lon: 34.7672, bounds: [34.759, 32.0635, 34.777, 32.0765], reference: "Kerem HaTeimanim / Carmel Market" },
+    overview: [
+      "Kerem HaTeimanim, the Yemenite Quarter, occupies small streets between the Carmel Market area and the coast. Its low-rise buildings, residential lanes and places serving Yemenite food create a distinct setting close to several of Tel Aviv's busiest visitor routes.",
+      "Choose this area if you want market food and the beach in the same stay. Nachalat Binyamin, Neve Tzedek and Rothschild Boulevard are nearby directions to explore, while the coastal promenade gives another route through the city. It can work particularly well if you prefer walking between smaller outings rather than driving each day.",
+      "The boundaries matter when choosing accommodation. Properties around Allenby and Nachalat Binyamin are often grouped with the quarter but sit on its market-facing edges. The inner lanes can feel more residential; market deliveries, main-road activity and evening venues create a different atmosphere around the perimeter.",
+    ],
+    highlights: [
+      { name: "Carmel Market", text: "A focal point for food shopping and market browsing. Opening hours and the Friday-to-Saturday rhythm vary by business." },
+      { name: "Yemenite Quarter food streets", text: "Small local places to eat and residential lanes give the quarter a different feel from the main market thoroughfare." },
+      { name: "Nachalat Binyamin & the nearby coast", text: "Historic streets and the promenade offer two directions for extending a short neighborhood walk." },
+    ],
+    gettingAround: [
+      "The beach is around 10–15 minutes on foot from many addresses, sometimes closer from the western lanes. Check your actual route: an apartment on Nachalat Binyamin is east of the residential quarter, while a place closer to the sea gives a different starting point.",
+      "Narrow lanes, pedestrian sections and limited parking make this easier as a walking base than a driving base. Ask for a vehicle-accessible meeting point and the last stretch with luggage. Confirm transport and arrival instructions for the exact day rather than assuming the market's schedule applies to your hotel.",
+    ],
+    arrivalTips: ["Confirm whether your stay is in the quarter or on the Carmel Market / Nachalat Binyamin edge.", "Ask how far the taxi stop is from your entrance, especially in pedestrian streets.", "Check lift access and any early-morning delivery or nightlife noise near your room."],
+    bookingTips: ["For an apartment, confirm the exact unit, minimum stay, cleaning and on-site support.", "Compare the room's actual outlook and included services rather than treating every nearby listing as a quiet neighborhood stay."],
+    faqs: [
+      { q: "Is Kerem HaTeimanim the same as Carmel Market?", a: "No. The Yemenite Quarter is the residential neighborhood toward the sea from the market. Listings around the market and Nachalat Binyamin can be nearby without being within its inner lanes." },
+      { q: "Can I combine market visits and beach time on foot?", a: "Yes, that is one of the area's main attractions. Many addresses are roughly 10–15 minutes from the coast, but check the exact route from the property you choose." },
+      { q: "Are apartment stays available for a few nights?", a: "It depends on the property and unit. Some focus on monthly rentals or offer only selected apartments for short stays. Confirm the minimum stay and the exact unit before paying." },
+    ],
+  },
+  {
+    id: "telaviv-rothschild", cityId: "telaviv", name: "Rothschild Boulevard & White City", shortName: "Rothschild Boulevard",
+    path: "/tel-aviv/rothschild-boulevard-hotels/",
+    title: "Rothschild Boulevard hotels: White City area & booking guide",
+    metaDescription: "Explore Rothschild Boulevard's architecture, cafés and central promenade. Compare two hotel picks on and near the boulevard, with maps and practical booking advice.",
+    summary: "Tree-lined walks, historic architecture, restaurants and evening life suit a city-focused stay. Hotels on and just off the boulevard range from boutique properties to luxury landmarks.",
+    bestFor: "Architecture, restaurants & a stylish city stay", suits: ["history", "food", "nightlife", "luxury", "car-free"], priceLevel: "Mid-range to luxury",
+    watch: "Rothschild is a long inland boulevard; check which end you are booking and the walk to the beach.",
+    photo: { src: rothschildPhoto, alt: "The shaded central promenade and trees of Rothschild Boulevard in Tel Aviv", sourceUrl: "https://www.israel-taxi.com/wp-content/uploads/2025/08/Rothschild_Boulevard_Tel_Aviv1.jpg" },
+    map: { lat: 32.0643, lon: 34.7754, bounds: [34.767, 32.0555, 34.7855, 32.0755], reference: "Rothschild Boulevard / White City district" },
+    overview: [
+      "Rothschild Boulevard is a long, tree-lined route through the central and southern city, with a central walking strip and buildings from different periods of Tel Aviv's development. The surrounding White City streets mix historic architecture, offices, restaurants and residential life.",
+      "Choose it if architecture, food and evening walks matter more than waking up beside the sand. Some hotels stand directly on the boulevard; others, including The Norman on Nachmani Street, are a short walk away. The wider district offers boutique and luxury stays without the seafront tower setting.",
+      "Look at the street number and surrounding blocks. The southern end connects toward Neve Tzedek, Florentin and Levinsky Market, while the northern end leads toward Habima and the wider center. Traffic and evening venues can affect rooms even with a leafy outlook, and the beach remains a separate walk.",
+    ],
+    highlights: [
+      { name: "The boulevard's central promenade", text: "A shaded route for walking and getting a feel for the surrounding streets, with cafés along the way." },
+      { name: "White City & historic architecture", text: "International Style and other historic buildings make the boulevard and neighboring streets rewarding to explore on foot." },
+      { name: "Habima & southern-center connections", text: "The northern end points toward the cultural center; the southern end gives access toward Neve Tzedek and Florentin." },
+    ],
+    gettingAround: [
+      "Allow roughly 15–30 minutes to reach the coast from different parts of the boulevard, and check the route from your exact hotel. The distance between its ends also matters: a property near Habima offers a different starting point from one near the southern nightlife streets.",
+      "Walking is useful locally, with buses or taxis for farther trips and the airport-station connection. For a transfer, give the precise entrance address, especially for a property on a side street. If renting a car, confirm the parking location and total cost before committing to a city-center stay.",
+    ],
+    arrivalTips: ["Check whether the hotel is directly on Rothschild or on a nearby street.", "Ask about room orientation and nearby restaurants or bars if you prefer quieter evenings.", "Get the exact parking or taxi entrance rather than relying on the boulevard name."],
+    bookingTips: ["Compare the property's facilities and the selected room category; the district includes very different hotel formats.", "For a special stay, confirm any terrace, view, breakfast or leisure access explicitly in your booking."],
+    faqs: [
+      { q: "Is Rothschild Boulevard a beachfront location?", a: "No. It is inland. A walk to the coast can take around 15–30 minutes depending on the hotel and route, so choose it for the city atmosphere rather than immediate beach access." },
+      { q: "Are all hotels in this guide on the boulevard?", a: "No. The guide includes properties on and near Rothschild. For example, The Norman is on Nachmani Street nearby. Each recommendation explains its setting." },
+      { q: "Which end should I choose?", a: "Choose the southern end for easier access toward Neve Tzedek, Florentin and Levinsky Market, or look farther north for Habima and the wider center. Check the route to the places you will visit most." },
+    ],
+  },
+];
+
+export const neighborhoodGuidesForCity = (cityId: CityStayGuide["id"]) => [...jerusalemAreaGuides, ...telAvivAreaGuides].filter((area) => area.cityId === cityId);
 
 export const cityStayGuides: Record<CityStayGuide["id"], CityStayGuide> = {
   jerusalem: {
     id: "jerusalem",
     city: "Jerusalem",
+    reviewedAt: "2026-10-17",
+    areaIntro: "For a first visit, Downtown is a practical starting point. Mamilla puts luxury hotels close to Jaffa Gate; the Old City offers the most immersive historic stay. Choose the market for food and nightlife, the northern East Jerusalem hotel district for Damascus Gate, or the German Colony and Baka for a more residential base.",
+    quickPicks: [
+      { areaId: "downtown", label: "Your first visit", description: "A convenient base for the main sights" },
+      { areaId: "mamilla", label: "A little more luxury", description: "Landmark hotels near the Old City" },
+      { areaId: "german-colony", label: "A slower stay", description: "Neighborhood cafés and residential streets" },
+    ],
     path: "/travel-blog/where-to-stay-in-jerusalem/",
     title: "Where to stay in Jerusalem: areas and hotel booking tips",
     metaDescription: "Compare six areas to stay in Jerusalem with photos, neighborhood maps and detailed guides. Choose your base, explore hotel recommendations and check room rates.",
@@ -306,21 +585,22 @@ export const cityStayGuides: Record<CityStayGuide["id"], CityStayGuide> = {
   telaviv: {
     id: "telaviv",
     city: "Tel Aviv",
+    reviewedAt: "2026-10-17",
+    areaIntro: "Start with the beachfront for sea and promenade time, or Dizengoff for a central café base. Choose the Old North for parks and northern beaches, Neve Tzedek or Jaffa for historic character, Florentin for nightlife, Kerem HaTeimanim for food and the coast, or Rothschild for architecture and restaurants.",
+    quickPicks: [
+      { areaId: "telaviv-beachfront", label: "Sea & a first visit", description: "Central beaches and the Mediterranean promenade" },
+      { areaId: "telaviv-dizengoff", label: "Cafés & city life", description: "Boutique hotels around Dizengoff Square" },
+      { areaId: "telaviv-jaffa", label: "A historic stay", description: "Old Jaffa, the port and flea-market evenings" },
+    ],
     path: "/travel-blog/where-to-stay-in-tel-aviv/",
     title: "Where to stay in Tel Aviv: beachfront, Jaffa and city areas",
-    metaDescription: "Compare Tel Aviv areas to stay — beachfront, Jaffa, Neve Tzedek, the city centre and the Old Port — with a booking checklist for international visitors.",
-    intro: "Tel Aviv stretches along the Mediterranean, so the main choice is how close to the sea you want to be versus the cafés, bars and transport of the city centre.",
+    metaDescription: "Compare eight Tel Aviv areas with photos, maps and practical neighborhood guides. Choose between beachfront, Dizengoff, Jaffa and more, then explore hotel recommendations.",
+    intro: "Find your Tel Aviv base, from Mediterranean beaches to Jaffa's stone lanes and the cafés of the White City. Compare eight areas, then open a neighborhood guide for local highlights, arrival advice and hotel recommendations.",
     overview: [
-      "The beach promenade runs the length of the city down to Jaffa, and much of central Tel Aviv is flat and bike-friendly. Many visitors split time between the sea and inland streets like Rothschild and Dizengoff.",
-      "Tel Aviv is livelier on Shabbat than Jerusalem, but public transport is still limited from Friday afternoon to Saturday evening. If you're arriving then, pre-arrange your airport transfer.",
+      "The coast is a useful point of orientation, but a beachfront hotel, a boutique property near Dizengoff and a stay in Jaffa create very different holidays. Compare the actual street, the places you will visit and the room's outlook before choosing.",
+      "Friday-evening and Saturday transport follows different service patterns. Check the current train or bus service for your specific journey and plan the final connection from the airport or railway station to your accommodation.",
     ],
-    areas: [
-      { name: "Beachfront (Hayarkon St / promenade)", suits: ["first-visit", "views", "family"], text: "Sea views and direct beach access; easy walking along the promenade.", watch: "Sea-view rooms are priced differently; check whether 'sea view' means full or side view." },
-      { name: "City centre (Rothschild, Dizengoff)", suits: ["nightlife", "car-free", "first-visit"], text: "Bauhaus streets, cafés and restaurants, with good bus and taxi access.", watch: "Evening noise on popular streets; ask for a quieter room." },
-      { name: "Neve Tzedek & Florentin", suits: ["nightlife", "quiet"], text: "Neve Tzedek has low-rise historic lanes and boutique stays; nearby Florentin is grittier and late-night.", watch: "Narrow streets can make taxi drop-off and parking harder." },
-      { name: "Old Jaffa & Jaffa port", suits: ["views", "first-visit"], text: "Historic stone alleys, the port and flea-market area at the south end of the promenade.", watch: "Hilly, cobbled lanes; farther from northern Tel Aviv." },
-      { name: "North / Old Port (Namal)", suits: ["family", "quiet"], text: "Waterfront boardwalk and Yarkon Park nearby; calmer evenings.", watch: "Longer ride to Jaffa and the centre." },
-    ],
+    areas: telAvivAreaGuides.map((area) => ({ name: area.name, suits: area.suits, text: area.summary, watch: area.watch })),
     checklist: [
       "Check the walk to the beach or promenade on a map",
       "Confirm what 'sea view' means for the room you book",
@@ -332,7 +612,7 @@ export const cityStayGuides: Record<CityStayGuide["id"], CityStayGuide> = {
     faqs: [
       { q: "Beach or city centre for a first visit?", a: "Both work; the city is compact. Beachfront suits relaxed days and families, while Rothschild and Dizengoff suit food and nightlife. Jaffa adds historic atmosphere." },
       { q: "Do I need a car in Tel Aviv?", a: "Usually not. Walking, bikes, buses and taxis cover most needs and parking is difficult. Rent a car when you leave the city instead." },
-      { q: "Do you list specific hotels?", a: "No. We don't publish property lists or ratings we haven't verified. Use the area guidance, then compare current properties for your dates on the booking site." },
+      { q: "Where can I find hotel recommendations for each area?", a: "Open any of the eight neighborhood guides above. Each explains the area's character, nearby sights and practical arrival considerations, followed by two selected places to stay. Check current room options, prices and booking terms on Expedia." },
       { q: "How do I get from Ben Gurion Airport?", a: "See our airport-to-Tel Aviv guide for the licensed taxi rank, pre-booked transfers and checking the train for your date." },
     ],
     sourceIds: ["owner-stay-telaviv"],

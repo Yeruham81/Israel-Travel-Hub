@@ -92,6 +92,7 @@ export interface RouteRecord {
 
 export const INFO_CHECK_DATE: ISODate = "2026-10-16";
 export const JERUSALEM_STAY_REVIEW_DATE: ISODate = "2026-10-17";
+export const TELAVIV_STAY_REVIEW_DATE: ISODate = "2026-10-17";
 export const OWNER_BASE = "https://www.israel-taxi.com";
 
 const jerusalemHotelSources: SourceReference[] = [
@@ -113,8 +114,32 @@ const jerusalemHotelSources: SourceReference[] = [
   note: "Property identity, location and general accommodation style cross-checked with the hotel's own information. Room availability, rates, specific amenities and booking conditions must be reconfirmed for your dates.",
 }));
 
+const telAvivHotelSources: SourceReference[] = [
+  ["carlton", "Carlton Tel Aviv", "https://www.carlton.co.il/en/"],
+  ["embassy", "Embassy Hotel Tel Aviv", "https://www.embassyhoteltelaviv.com/"],
+  ["backstage", "Backstage Hotel — Atlas Hotels", "https://www.atlas.co.il/en/our-hotels/hotels-in-tel-aviv/backstage-hotel-tel-aviv/"],
+  ["cinema", "Cinema Hotel — Atlas Hotels", "https://www.atlas.co.il/en/our-hotels/hotels-in-tel-aviv/cinema-hotel-tel-aviv/"],
+  ["port-tower", "Port Tower — Isrotel", "https://www.isrotel.com/isrotel-hotels/tel-aviv/port-tower/"],
+  ["melody", "Melody Hotel — Atlas Hotels", "https://www.atlas.co.il/en/our-hotels/hotels-in-tel-aviv/melody-hotel-tel-aviv/"],
+  ["elkonin", "Elkonin Tel Aviv — MGallery", "https://elkonintelaviv.com/about/"],
+  ["ruby", "Ruby Tel Aviv", "https://rubytelaviv.com/en/about/"],
+  ["the-jaffa", "The Jaffa — Fattal Limited Edition", "https://www.fattal.co.il/hotel/the-jaffa-hotel"],
+  ["market-house", "Market House Hotel — Atlas Hotels", "https://www.atlas.co.il/en/our-hotels/hotels-in-tel-aviv/market-house-tel-aviv/"],
+  ["albi-florentin", "Albi Florentin", "https://albihotels.com/hotels/albi-florentin-about/"],
+  ["florentin-house", "Florentin House — HOMY", "https://homytlv.com/apartment-type/florentin-house/"],
+  ["poli-house", "Poli House — AFI Hotels", "https://www.afi-hotels.com/poli-house-hotel-tel-aviv-rooms"],
+  ["assemblage", "Assemblage Boutique", "https://assemblageboutiquehotel.com/"],
+  ["the-norman", "The Norman Tel Aviv", "https://www.thenorman.com/"],
+  ["65-rothschild", "65 Hotel — Atlas Hotels", "https://www.atlas.co.il/en/our-hotels/hotels-in-tel-aviv/65-hotel-tel-aviv/"],
+].map(([id, name, url]): SourceReference => ({
+  id: `hotel-tlv-${id}-official`, title: `${name} — property information`, publisher: name!, url: url!,
+  checkedAt: TELAVIV_STAY_REVIEW_DATE,
+  note: "Property identity, location and general accommodation style checked against the property's own information. Reconfirm rooms, services, access, minimum stays and booking conditions for your dates.",
+}));
+
 export const sources: SourceReference[] = [
   ...jerusalemHotelSources,
+  ...telAvivHotelSources,
   {
     id: "iaa-directions",
     title: "Ben Gurion Airport – directions and transport",
@@ -184,8 +209,8 @@ export const sources: SourceReference[] = [
     title: "Where to stay in Tel Aviv (existing guide)",
     publisher: "Israel-Taxi.com",
     url: `${OWNER_BASE}/travel-blog/where-to-stay-in-tel-aviv/`,
-    checkedAt: INFO_CHECK_DATE,
-    note: "Background for area guidance. No property, price or availability claims are taken from it.",
+    checkedAt: TELAVIV_STAY_REVIEW_DATE,
+    note: "Editorial basis for the eight neighborhood guides and selected stays. Existing publisher-owned Expedia affiliate links and neighborhood photographs are reused from this guide; hotel identity and accommodation style were cross-checked with primary property sources. No live prices or availability are supplied.",
   },
   {
     id: "owner-hotels-tiberias",
@@ -305,7 +330,7 @@ export const partners: BookingPartner[] = [
   { id: "discovercars", name: "DiscoverCars", capability: "editorial_only", homepage: "https://www.discovercars.com/" },
 ];
 
-/** Existing publisher-owned tracking links copied exactly from the supplied Jerusalem guide. */
+/** Existing publisher-owned tracking links copied exactly from the supplied Jerusalem and Tel Aviv guides. */
 export const affiliateConfig: Record<string, { trackingUrl: string } | undefined> = {
   "hotels-jerusalem-expedia": { trackingUrl: "https://expedia.tpm.li/yNeL4j4v" },
   "area-downtown-expedia": { trackingUrl: "https://expedia.tpm.li/2i5lfUjl" },
@@ -326,11 +351,36 @@ export const affiliateConfig: Record<string, { trackingUrl: string } | undefined
   "hotel-jerusalem-hotel-expedia": { trackingUrl: "https://expedia.tpm.li/6um6SpEN" },
   "hotel-orient-expedia": { trackingUrl: "https://expedia.tpm.li/LvbJzhBJ" },
   "hotel-rafael-residence-expedia": { trackingUrl: "https://expedia.tpm.li/yNS1BZnA" },
+  "hotels-telaviv-expedia": { trackingUrl: "https://expedia.tpm.li/Dr38bDcc" },
+  "area-telaviv-beachfront-expedia": { trackingUrl: "https://expedia.tpm.li/edZDHR1c" },
+  "area-telaviv-dizengoff-expedia": { trackingUrl: "https://expedia.tpm.li/JwiNWfsY" },
+  "area-telaviv-old-north-expedia": { trackingUrl: "https://expedia.tpm.li/emxupcKf" },
+  "area-telaviv-neve-tzedek-expedia": { trackingUrl: "https://expedia.tpm.li/JfyoXEqJ" },
+  "area-telaviv-jaffa-expedia": { trackingUrl: "https://expedia.tpm.li/5W9o2imV" },
+  "area-telaviv-florentin-expedia": { trackingUrl: "https://expedia.tpm.li/1ALbXsq0" },
+  "area-telaviv-kerem-expedia": { trackingUrl: "https://expedia.tpm.li/18erQFfV" },
+  "area-telaviv-rothschild-expedia": { trackingUrl: "https://expedia.tpm.li/8BO8YTGc" },
+  "hotel-tlv-carlton-expedia": { trackingUrl: "https://expedia.tpm.li/daLbFCRQ" },
+  "hotel-tlv-embassy-expedia": { trackingUrl: "https://expedia.tpm.li/ROz7o60R" },
+  "hotel-tlv-backstage-expedia": { trackingUrl: "https://expedia.tpm.li/IoAftG4v" },
+  "hotel-tlv-cinema-expedia": { trackingUrl: "https://expedia.tpm.li/Bg9FgnkO" },
+  "hotel-tlv-port-tower-expedia": { trackingUrl: "https://expedia.tpm.li/iMFiop3v" },
+  "hotel-tlv-melody-expedia": { trackingUrl: "https://expedia.tpm.li/A2UCTV6o" },
+  "hotel-tlv-elkonin-expedia": { trackingUrl: "https://expedia.tpm.li/foilXhPU" },
+  "hotel-tlv-ruby-expedia": { trackingUrl: "https://expedia.tpm.li/tuDSNuXT" },
+  "hotel-tlv-the-jaffa-expedia": { trackingUrl: "https://expedia.tpm.li/uGzualBF" },
+  "hotel-tlv-market-house-expedia": { trackingUrl: "https://expedia.tpm.li/FSOsHluu" },
+  "hotel-tlv-albi-florentin-expedia": { trackingUrl: "https://expedia.tpm.li/XwLalnjb" },
+  "hotel-tlv-florentin-house-expedia": { trackingUrl: "https://expedia.tpm.li/mE7ZJLXn" },
+  "hotel-tlv-poli-house-expedia": { trackingUrl: "https://expedia.tpm.li/mIzxDpFJ" },
+  "hotel-tlv-assemblage-expedia": { trackingUrl: "https://expedia.tpm.li/K0vqkaFB" },
+  "hotel-tlv-the-norman-expedia": { trackingUrl: "https://expedia.tpm.li/VLBMm8gI" },
+  "hotel-tlv-65-rothschild-expedia": { trackingUrl: "https://expedia.tpm.li/hpcJ9Htm" },
 };
 
 export interface HotelRecommendation {
   id: string;
-  cityId: "jerusalem";
+  cityId: "jerusalem" | "telaviv" | "tiberias";
   areaId: string;
   name: string;
   style: string;
@@ -413,9 +463,105 @@ export const hotelRecommendations: HotelRecommendation[] = [
     bestFor: "Families and longer visits where living space and preparing some meals matter.",
     watch: "Confirm the exact suite layout, kitchen equipment, parking and late check-in arrangements. Plan buses or taxis for some trips to central attractions.", sourceId: "hotel-rafael-residence-official",
   },
+  {
+    id: "tlv-carlton", cityId: "telaviv", areaId: "telaviv-beachfront", name: "Carlton Tel Aviv", style: "Luxury hotel by the northern central beaches",
+    summary: "A substantial seafront hotel near Gordon Beach and the marina, suited to visitors who want the coast to be central to their stay. Its different room categories include different outlooks, so choosing the hotel and choosing a sea-facing room are separate decisions.",
+    bestFor: "Couples and visitors seeking a full-service coastal hotel rather than a small inland boutique stay.",
+    watch: "Compare full, side and other room outlooks. Confirm breakfast, parking and leisure access for the exact offer.", sourceId: "hotel-tlv-carlton-official",
+  },
+  {
+    id: "tlv-embassy", cityId: "telaviv", areaId: "telaviv-beachfront", name: "Embassy Hotel Tel Aviv", style: "Retro-inspired boutique hotel near the beach",
+    summary: "A smaller hotel on Shalom Aleichem Street at HaYarkon, close to the central promenade. Its retro-inspired interiors offer a different format from the large beachfront hotels, with the sea nearby rather than a resort setting.",
+    bestFor: "Independent travelers who want central beach access and a smaller hotel atmosphere.",
+    watch: "Check the room's outlook and size. A location near the coast does not guarantee a sea view or the facilities of a large resort.", sourceId: "hotel-tlv-embassy-official",
+  },
+  {
+    id: "tlv-backstage", cityId: "telaviv", areaId: "telaviv-dizengoff", name: "Backstage Hotel", style: "Theater-inspired boutique hotel",
+    summary: "An Atlas boutique hotel in the former Ohel Theater on Beilinson Street near Dizengoff Square. Theater-inspired interiors give the property a distinctive identity, with central cafés and walking routes close by.",
+    bestFor: "Couples and city-break visitors who enjoy design, historic buildings and exploring on foot.",
+    watch: "Ask about room orientation and any rooftop or restaurant activity. Check breakfast and access to shared spaces against your chosen rate.", sourceId: "hotel-tlv-backstage-official",
+  },
+  {
+    id: "tlv-cinema", cityId: "telaviv", areaId: "telaviv-dizengoff", name: "Cinema Hotel", style: "Historic cinema building on Dizengoff Square",
+    summary: "An Atlas hotel in the former Esther cinema beside Dizengoff Square. Film memorabilia and the building's architecture make it a characterful central base, particularly for visitors who want the square itself as their point of orientation.",
+    bestFor: "Architecture and film enthusiasts, and first-time visitors seeking a recognizable central location.",
+    watch: "Check the room's size, outlook and noise exposure. Confirm where a taxi can stop and any rooftop opening arrangements.", sourceId: "hotel-tlv-cinema-official",
+  },
+  {
+    id: "tlv-port-tower", cityId: "telaviv", areaId: "telaviv-old-north", name: "Port Tower by Isrotel Design", style: "Contemporary tower hotel near Tel Aviv Port",
+    summary: "Isrotel's modern hotel at the northern end of HaYarkon Street is a useful option for time around the port and northern waterfront. Its tower format offers a different stay from the smaller boutique properties farther south in the Old North.",
+    bestFor: "Visitors focused on the port, northern coast and a contemporary hotel setting.",
+    watch: "Check your room's actual view and the walk to your preferred beach. Confirm any pool, meal and parking conditions for your dates.", sourceId: "hotel-tlv-port-tower-official",
+  },
+  {
+    id: "tlv-melody", cityId: "telaviv", areaId: "telaviv-old-north", name: "Melody Hotel", style: "Boutique hotel near Independence Park",
+    summary: "An Atlas boutique property on HaYarkon Street beside the Independence Park area. It suits a stay that combines the northern beaches with neighborhood streets, south of the port itself and closer to central Tel Aviv than a port-side address.",
+    bestFor: "Couples and independent visitors who prefer a smaller property near the park and coast.",
+    watch: "Map the route to your preferred beach, and confirm the room outlook, breakfast and parking arrangements.", sourceId: "hotel-tlv-melody-official",
+  },
+  {
+    id: "tlv-elkonin", cityId: "telaviv", areaId: "telaviv-neve-tzedek", name: "Elkonin Tel Aviv – MGallery", style: "Restored heritage hotel near Neve Tzedek",
+    summary: "A restored historic hotel on Lilienblum Street, on the eastern approach to Neve Tzedek and near the southern end of Rothschild. It combines a heritage building with a contemporary hotel setting, rather than placing you deep within Shabazi's residential lanes.",
+    bestFor: "Couples seeking an upscale heritage stay with access to both Neve Tzedek and the southern center.",
+    watch: "Confirm your room's building and outlook, and check any spa, pool, breakfast or restaurant arrangements for the dates you book.", sourceId: "hotel-tlv-elkonin-official",
+  },
+  {
+    id: "tlv-ruby", cityId: "telaviv", areaId: "telaviv-neve-tzedek", name: "Ruby", style: "Small independent stay near Neve Tzedek",
+    summary: "A small property in the Yehuda HaLevi area near Neve Tzedek, with a more independent, house-like format than a large full-service hotel. Its position connects the historic neighborhood with the streets around lower Rothschild.",
+    bestFor: "Independent travelers who enjoy a smaller property and exploring nearby cafés and neighborhoods.",
+    watch: "Check the current arrival process, staff availability, shared facilities and your room layout. Confirm the exact entrance before a late arrival.", sourceId: "hotel-tlv-ruby-official",
+  },
+  {
+    id: "tlv-the-jaffa", cityId: "telaviv", areaId: "telaviv-jaffa", name: "The Jaffa (Fattal Limited Edition)", style: "Luxury heritage hotel in Old Jaffa",
+    summary: "A landmark hotel on Louis Pasteur Street in Old Jaffa, combining a restored historic building with a contemporary addition. The current Fattal Limited Edition property suits a trip where the hotel and Jaffa's historic setting are central to the experience.",
+    bestFor: "Luxury travelers and couples who want a distinctive Old Jaffa base.",
+    watch: "Confirm the current property name, building, room category and included services. Ask about the accessible route and any seasonal leisure arrangements.", sourceId: "hotel-tlv-the-jaffa-official",
+  },
+  {
+    id: "tlv-market-house", cityId: "telaviv", areaId: "telaviv-jaffa", name: "Market House Hotel", style: "Boutique hotel by Jaffa's flea market",
+    summary: "An Atlas boutique hotel on Beit Eshel Street near the Clock Tower and flea market. Its market-inspired design and street setting suit visitors who want Jaffa's cafés, shops and evening restaurants close to their accommodation.",
+    bestFor: "Couples and independent visitors who value a lively market-side location.",
+    watch: "Ask about evening noise and your room's outlook. A balcony or sea view should be explicitly included in the category you choose.", sourceId: "hotel-tlv-market-house-official",
+  },
+  {
+    id: "tlv-albi-florentin", cityId: "telaviv", areaId: "telaviv-florentin", name: "Albi Florentin", style: "Small hotel with digital self check-in",
+    summary: "A Florentin property with a technology-led arrival format, described by its operator as using self check-in. Consider it for a more independent stay focused on the neighborhood rather than a conventional staffed hotel experience.",
+    bestFor: "Travelers comfortable with digital arrival instructions and a small urban property.",
+    watch: "Obtain check-in instructions before arrival and confirm support availability, luggage storage and the room's noise exposure.", sourceId: "hotel-tlv-albi-florentin-official",
+  },
+  {
+    id: "tlv-florentin-house", cityId: "telaviv", areaId: "telaviv-florentin", name: "Florentin House by HOMY", style: "Neighborhood stay on Florentin Street",
+    summary: "A small-property option on Florentin Street listed by HOMY, placing you within the neighborhood's everyday café and nightlife setting. Compare the current room descriptions rather than relying on older accounts of the building's accommodation format.",
+    bestFor: "Independent visitors who want Florentin itself as their base for the southern city.",
+    watch: "Confirm the exact room or unit, private facilities, check-in process and sound insulation. Do not assume an older hostel listing describes the current offer.", sourceId: "hotel-tlv-florentin-house-official",
+  },
+  {
+    id: "tlv-poli-house", cityId: "telaviv", areaId: "telaviv-kerem", name: "Poli House by AFI Hotels", style: "Design hotel by the Carmel Market district",
+    summary: "An AFI design hotel by the Allenby and Nachalat Binyamin market-side streets. It offers access to Carmel Market and the Yemenite Quarter, while its busier edge location differs from a room within the quarter's small residential lanes.",
+    bestFor: "Couples and city-break visitors who want design and nearby market food and nightlife.",
+    watch: "Some room categories are compact. Confirm the exact size, balcony if offered, noise exposure and any rooftop or leisure access included.", sourceId: "hotel-tlv-poli-house-official",
+  },
+  {
+    id: "tlv-assemblage", cityId: "telaviv", areaId: "telaviv-kerem", name: "Assemblage Boutique", style: "Historic boutique stay on the quarter's northern edge",
+    summary: "A small property in a preserved building at 48 Allenby Street, near the northern edge of Kerem HaTeimanim. Its rooms, studios and suites offer different layouts, with access toward both the beach and Carmel Market from a busy central street.",
+    bestFor: "Couples and independent visitors who enjoy historic buildings and a central market-and-beach base.",
+    watch: "The operator states that the building has no lift. Confirm stairs, the self-service check-in process, exact room layout and street-facing versus courtyard outlook.", sourceId: "hotel-tlv-assemblage-official",
+  },
+  {
+    id: "tlv-the-norman", cityId: "telaviv", areaId: "telaviv-rothschild", name: "The Norman Tel Aviv", style: "Luxury heritage hotel off Rothschild",
+    summary: "A luxury property in restored buildings on Nachmani Street, near Rothschild Boulevard rather than directly on it. The historic setting suits visitors who want a distinctive hotel alongside access to the central city's restaurants and architecture.",
+    bestFor: "Couples and luxury city stays where the property itself is part of the trip.",
+    watch: "Confirm the exact building and room category, and check breakfast, leisure access and any additional charges in your selected offer.", sourceId: "hotel-tlv-the-norman-official",
+  },
+  {
+    id: "tlv-65-rothschild", cityId: "telaviv", areaId: "telaviv-rothschild", name: "65 Hotel Rothschild", style: "Boutique hotel directly on Rothschild Boulevard",
+    summary: "An Atlas boutique hotel at 65 Rothschild Boulevard, with the tree-lined promenade immediately outside. It is a direct-on-the-boulevard alternative to nearby heritage hotels on side streets, with the cafés and architecture of the central district close by.",
+    bestFor: "Visitors who want Rothschild as their daily walking route and a boutique city-hotel format.",
+    watch: "Ask about your room's outlook, traffic or venue noise, breakfast inclusion and parking availability for your dates.", sourceId: "hotel-tlv-65-rothschild-official",
+  },
 ];
 
-export const hotelsForArea = (areaId: string) => hotelRecommendations.filter((hotel) => hotel.areaId === areaId);
+export const hotelsForArea = (areaId: string, cityId?: HotelRecommendation["cityId"]) => hotelRecommendations.filter((hotel) => hotel.areaId === areaId && (!cityId || hotel.cityId === cityId));
 
 export const tlvToJerusalem: RouteRecord = {
   id: "tlv-jerusalem",
@@ -592,7 +738,7 @@ export const providerLinks: ProviderLink[] = [
   ...hotelRecommendations.map((hotel): ProviderLink => {
     const id = `hotel-${hotel.id}-expedia`;
     const trackingUrl = affiliateConfig[id]?.trackingUrl;
-    const officialUrl = jerusalemHotelSources.find((source) => source.id === hotel.sourceId)!.url;
+    const officialUrl = sources.find((source) => source.id === hotel.sourceId)!.url;
     return {
       id, pageIds: [`stay-area-${hotel.areaId}`], providerName: trackingUrl ? "Expedia" : hotel.name,
       relationship: trackingUrl ? "booking_platform" : "official", ...(trackingUrl ? { partnerId: "expedia" } : {}), mode: "provider_redirect",
@@ -602,22 +748,31 @@ export const providerLinks: ProviderLink[] = [
     };
   }),
   ...([
-    ["jerusalem", "Jerusalem"],
-    ["downtown", "Downtown Jerusalem"],
-    ["mamilla", "Mamilla & King David Street"],
-    ["old-city", "Jerusalem's Old City"],
-    ["mahane-yehuda", "Mahane Yehuda & Nachlaot"],
-    ["east-jerusalem", "East Jerusalem"],
-    ["german-colony", "German Colony & Baka"],
-  ] as const).map(([areaId, name]): ProviderLink => {
-    const cityWide = areaId === "jerusalem";
-    const id = cityWide ? "hotels-jerusalem-expedia" : `area-${areaId}-expedia`;
+    ["jerusalem", "Jerusalem", "jerusalem"],
+    ["downtown", "Downtown Jerusalem", "jerusalem"],
+    ["mamilla", "Mamilla & King David Street", "jerusalem"],
+    ["old-city", "Jerusalem's Old City", "jerusalem"],
+    ["mahane-yehuda", "Mahane Yehuda & Nachlaot", "jerusalem"],
+    ["east-jerusalem", "East Jerusalem", "jerusalem"],
+    ["german-colony", "German Colony & Baka", "jerusalem"],
+    ["telaviv", "Tel Aviv", "telaviv"],
+    ["telaviv-beachfront", "Tel Aviv Beachfront", "telaviv"],
+    ["telaviv-dizengoff", "Dizengoff & City Center", "telaviv"],
+    ["telaviv-old-north", "Old North & Tel Aviv Port", "telaviv"],
+    ["telaviv-neve-tzedek", "Neve Tzedek & Surroundings", "telaviv"],
+    ["telaviv-jaffa", "Jaffa", "telaviv"],
+    ["telaviv-florentin", "Florentin", "telaviv"],
+    ["telaviv-kerem", "Kerem HaTeimanim & Carmel Market", "telaviv"],
+    ["telaviv-rothschild", "Rothschild Boulevard", "telaviv"],
+  ] as const).map(([areaId, name, cityId]): ProviderLink => {
+    const cityWide = areaId === cityId;
+    const id = cityWide ? `hotels-${cityId}-expedia` : `area-${areaId}-expedia`;
     const trackingUrl = affiliateConfig[id]?.trackingUrl;
     return {
-      id, pageIds: [cityWide ? "stay-jerusalem" : `stay-area-${areaId}-browse`],
+      id, pageIds: [cityWide ? `stay-${cityId}` : `stay-area-${areaId}-browse`],
       providerName: "Expedia", relationship: "booking_platform", partnerId: "expedia", mode: "provider_redirect",
       title: `Browse more places to stay in ${name}`, summary: "Compare other accommodation options for your dates. Check the map on Expedia to confirm the property is in your preferred area.",
-      ctaLabel: "Browse hotels on Expedia", url: trackingUrl || "https://www.expedia.com/", isAffiliate: Boolean(trackingUrl), sourceId: "owner-stay-jerusalem",
+      ctaLabel: "Browse hotels on Expedia", url: trackingUrl || "https://www.expedia.com/", isAffiliate: Boolean(trackingUrl), sourceId: `owner-stay-${cityId}`,
       reentryNote: "Enter your dates and guests on Expedia, then confirm the property and room before booking.",
       confirm: ["Exact neighborhood and map location", "Total including taxes and fees", "Room type", "Cancellation conditions"],
     };

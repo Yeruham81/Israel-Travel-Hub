@@ -34,7 +34,7 @@ export function AreaPhotoCredit({ areas }: { areas: NeighborhoodStayGuide[] }) {
       <summary className="cursor-pointer font-semibold">Area image sources</summary>
       <p className="mt-3">Neighborhood photographs and their original sources. Images have been resized and optimized for this site.</p>
       <ul className="mt-2 space-y-2">
-        {areas.map((area) => <li key={area.id}><a href={area.photo.sourceUrl} target="_blank" rel="noopener noreferrer" className="underline underline-offset-2">{area.name}: {area.photo.credit || "Image from the publisher's original Jerusalem guide"} ↗<span className="sr-only"> (opens in a new tab)</span></a></li>)}
+        {areas.map((area) => <li key={area.id}><a href={area.photo.sourceUrl} target="_blank" rel="noopener noreferrer" className="underline underline-offset-2">{area.name}: {area.photo.credit || "Image from the publisher's original city guide"} ↗<span className="sr-only"> (opens in a new tab)</span></a></li>)}
       </ul>
     </details>
   );

@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Link, type LinkProps } from "@tanstack/react-router";
 import { ArrowRight, MapPin, Check, Compass } from "lucide-react";
 import { type CityStayGuide, type NeighborhoodStayGuide, type StayPreference, preferenceLabels } from "@/data/content";
-import { JERUSALEM_STAY_REVIEW_DATE, hotelsForArea, linksForPage } from "@/data/registry";
+import { INFO_CHECK_DATE, hotelsForArea, linksForPage } from "@/data/registry";
 import { GuideHeader, OnThisPage, Section, Checklist, ProviderSection, FaqList, RelatedLinks, SourceList } from "@/components/Guide";
 import { AreaMap, AreaPhotoCredit } from "@/components/AreaMap";
 
@@ -12,11 +12,7 @@ export function CityStayHub({ g, areas }: { g: CityStayGuide; areas: Neighborhoo
   const [preference, setPreference] = useState<StayPreference | null>(null);
   const preferences = [...new Set(areas.flatMap((area) => area.suits))];
   const visibleAreas = preference ? areas.filter((area) => area.suits.includes(preference)) : areas;
-  const quickPicks = ([
-    ["first-visit", "Your first visit", "A convenient base for the main sights"],
-    ["luxury", "A little more luxury", "Landmark hotels near the Old City"],
-    ["quiet", "A slower stay", "Neighborhood cafés and residential streets"],
-  ] as const).map(([pref, label, description]) => ({ area: areas.find((area) => area.suits.includes(pref)), label, description }));
+  const quickPicks = (g.quickPicks || []).map((pick) => ({ ...pick, area: areas.find((area) => area.id === pick.areaId) }));
 
   return (
     <main className="pb-8">
@@ -25,12 +21,12 @@ export function CityStayHub({ g, areas }: { g: CityStayGuide; areas: Neighborhoo
         eyebrow={`Where to stay · ${g.city}`}
         title={g.title}
         intro={g.intro}
-        checkedAt={JERUSALEM_STAY_REVIEW_DATE}
+        checkedAt={g.reviewedAt || INFO_CHECK_DATE}
       />
       <OnThisPage sections={sections} />
       <article className="mx-auto max-w-5xl px-4">
         <Section id="overview" title="A neighborhood for the way you travel" className="scroll-mt-32">
-          <p>For a first visit, Downtown is a practical starting point. Mamilla puts luxury hotels close to Jaffa Gate; the Old City offers the most immersive historic stay. Choose the market for food and nightlife, the northern East Jerusalem hotel district for Damascus Gate, or the German Colony and Baka for a more residential base.</p>
+          <p>{g.areaIntro || g.overview.join(" ")}</p>
         </Section>
         <ul className="mt-6 grid gap-3 sm:grid-cols-3">
           {quickPicks.map(({ area, label, description }) => area && (
@@ -80,7 +76,7 @@ export function CityStayHub({ g, areas }: { g: CityStayGuide; areas: Neighborhoo
                     </div>
                     <p className="mt-4 rounded-xl bg-secondary/70 px-3 py-2 text-xs leading-relaxed"><span className="font-semibold">Keep in mind:</span> {area.watch}</p>
                     <Link to={area.path as LinkProps["to"]} className="mt-4 inline-flex items-center gap-2 font-semibold text-primary underline-offset-4 hover:underline" aria-label={`Read the ${area.name} guide and hotel recommendations`}>
-                      Area guide & {hotelsForArea(area.id).length} hotel picks <ArrowRight className="h-4 w-4" aria-hidden />
+                      Area guide & {hotelsForArea(area.id, g.id).length} hotel picks <ArrowRight className="h-4 w-4" aria-hidden />
                     </Link>
                   </div>
                 </div>
@@ -90,19 +86,19 @@ export function CityStayHub({ g, areas }: { g: CityStayGuide; areas: Neighborhoo
         </section>
 
         <section id="compare" aria-labelledby="compare-h" className="mt-14 scroll-mt-32">
-          <h2 id="compare-h" className="text-3xl">Compare the six areas</h2>
+          <h2 id="compare-h" className="text-3xl">Compare {areas.length === 6 ? "the six" : `all ${areas.length}`} areas</h2>
           <p className="mt-2 text-sm text-muted-foreground">These are relative accommodation styles, not live room rates. The exact hotel and street matter as much as the area name.</p>
-          <div className="mt-5 overflow-x-auto rounded-2xl border bg-card" role="region" aria-label="Jerusalem area comparison" tabIndex={0}>
+          <div className="mt-5 overflow-x-auto rounded-2xl border bg-card" role="region" aria-label={`${g.city} area comparison`} tabIndex={0}>
             <table className="w-full min-w-[620px] text-left text-sm">
-              <caption className="sr-only">Jerusalem neighborhoods, travel styles, accommodation levels and main tradeoffs</caption>
+              <caption className="sr-only">{g.city} neighborhoods, travel styles, accommodation levels and main tradeoffs</caption>
               <thead className="bg-secondary"><tr>{["Area", "Best for", "Accommodation", "Keep in mind"].map((label) => <th scope="col" key={label} className="px-4 py-3 font-semibold">{label}</th>)}</tr></thead>
               <tbody className="divide-y">{areas.map((area) => <tr key={area.id}><th scope="row" className="px-4 py-4 font-semibold"><Link to={area.path as LinkProps["to"]} className="text-primary underline underline-offset-2">{area.shortName}</Link></th><td className="px-4 py-4">{area.bestFor}</td><td className="px-4 py-4">{area.priceLevel}</td><td className="max-w-64 px-4 py-4 text-muted-foreground">{area.watch}</td></tr>)}</tbody>
             </table>
           </div>
         </section>
 
-        <Section id="checklist" title="Before you choose your Jerusalem hotel" className="scroll-mt-32">
-          <p>Look beyond a neighborhood label. Jerusalem's hills, pedestrian streets and Shabbat schedules can affect your stay more than a small difference in the nightly room rate.</p>
+        <Section id="checklist" title={`Before you choose your ${g.city} hotel`} className="scroll-mt-32">
+          <p>Look beyond a neighborhood label. Check the actual walking route, street noise, vehicle access and arrival-day transport before comparing room rates.</p>
           <div className="mt-5 grid gap-4 sm:grid-cols-2">
             <Checklist title="Location & arrival" items={g.checklist.slice(0, 4)} />
             <div className="rounded-xl border bg-card p-5"><h3 className="text-lg">Room & booking conditions</h3><ul className="mt-2 space-y-2 text-sm">{["Compare the final total, taxes and fees for your dates", "Read the cancellation deadline and payment conditions", "Confirm the exact room, beds and occupancy", "Check current access, parking and any street works"].map((tip) => <li key={tip} className="flex gap-2"><Check className="mt-0.5 h-4 w-4 shrink-0 text-primary" aria-hidden />{tip}</li>)}</ul></div>

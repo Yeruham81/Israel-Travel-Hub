@@ -1,7 +1,7 @@
 import { Link, type LinkProps } from "@tanstack/react-router";
 import { ArrowLeft, ArrowRight, Building2, MapPin } from "lucide-react";
 import { cityStayGuides, neighborhoodGuidesForCity, type NeighborhoodStayGuide } from "@/data/content";
-import { getSource, hotelsForArea, JERUSALEM_STAY_REVIEW_DATE, linksForPage, type HotelRecommendation, type ProviderLink } from "@/data/registry";
+import { getSource, hotelsForArea, INFO_CHECK_DATE, linksForPage, type HotelRecommendation, type ProviderLink } from "@/data/registry";
 import { recordOutboundClick, relFor } from "@/lib/outbound";
 import { AreaMap, AreaPhotoCredit } from "@/components/AreaMap";
 import { GuideHeader, OnThisPage, Section, Checklist, FaqList, ProviderSection, RelatedLinks, SourceList } from "@/components/Guide";
@@ -35,10 +35,11 @@ function HotelCard({ hotel, booking, pageId }: { hotel: HotelRecommendation; boo
 
 export function NeighborhoodStayPage({ area }: { area: NeighborhoodStayGuide }) {
   const city = cityStayGuides[area.cityId];
-  const hotels = hotelsForArea(area.id);
+  const hotels = hotelsForArea(area.id, area.cityId);
   const bookings = linksForPage(`stay-area-${area.id}`);
   const otherAreas = neighborhoodGuidesForCity(area.cityId).filter((other) => other.id !== area.id);
   const pageId = `stay-area-${area.id}`;
+  const airportGuide = city.related.find((item) => item.label.startsWith("Ben Gurion Airport"));
   return (
     <main className="pb-8">
       <GuideHeader
@@ -47,7 +48,7 @@ export function NeighborhoodStayPage({ area }: { area: NeighborhoodStayGuide }) 
         title={area.title}
         intro={area.summary}
         image={area.photo}
-        checkedAt={JERUSALEM_STAY_REVIEW_DATE}
+        checkedAt={city.reviewedAt || INFO_CHECK_DATE}
       />
       <OnThisPage sections={sections} />
       <article className="mx-auto max-w-5xl px-4">
@@ -67,26 +68,26 @@ export function NeighborhoodStayPage({ area }: { area: NeighborhoodStayGuide }) 
           <div className="mt-5"><AreaMap area={area} /></div>
           {area.gettingAround.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
           <div className="mt-5"><Checklist title="Make your arrival easier" items={area.arrivalTips} /></div>
-          <p><Link to="/travel-blog/ben-gurion-airport-to-jerusalem/">Planning an airport arrival? Compare the options from Ben Gurion Airport to Jerusalem.</Link></p>
+          {airportGuide && <p><Link to={airportGuide.to}>Planning an airport arrival? Compare the options from Ben Gurion Airport to {city.city}.</Link></p>}
         </Section>
 
         <section id="book" aria-labelledby="book-h" className="mt-14 scroll-mt-32">
           <p className="eyebrow">Your accommodation shortlist</p>
           <h2 id="book-h" className="mt-2 text-3xl">Places to stay in {area.name}</h2>
           <p className="mt-3 max-w-3xl leading-relaxed text-muted-foreground">These picks offer different ways to stay in the area. They are selected for location and travel style, rather than a live ranking or a claim that rooms are currently available.</p>
-          <p className="mt-3 text-sm leading-relaxed text-muted-foreground">The shortlist draws on Moshe Barak's original Jerusalem guide and the hotels' own information. These are editorial recommendations, not reviews of personal stays at every property.</p>
+          <p className="mt-3 text-sm leading-relaxed text-muted-foreground">The shortlist draws on Moshe Barak's original {city.city} guide and the hotels' own information. These are editorial recommendations, not reviews of personal stays at every property.</p>
           <p className="mt-3 rounded-xl border bg-secondary/60 p-4 text-sm leading-relaxed">We may earn a commission from links marked “Sponsored link”, at no extra cost to you. Enter your dates on the booking site and confirm the hotel, room category, final total and cancellation terms before paying.</p>
           <ul className="mt-6 space-y-5">{hotels.map((hotel) => <HotelCard key={hotel.id} hotel={hotel} booking={bookings.find((booking) => booking.id === `hotel-${hotel.id}-expedia`)} pageId={pageId} />)}</ul>
         </section>
         <Section id="checklist" title="Before you book" className="scroll-mt-32">
           <div className="mt-5 grid gap-4 sm:grid-cols-2">
             <Checklist title="For this area" items={area.bookingTips} />
-            <Checklist title="For any Jerusalem stay" items={["Confirm the final total including taxes, fees and extras", "Read cancellation and payment conditions for your exact room offer", "Ask about Shabbat check-in, meals and transport if relevant", "Check recent room-specific feedback and accessibility requirements"]} />
+            <Checklist title={`For any ${city.city} stay`} items={["Confirm the final total including taxes, fees and extras", "Read cancellation and payment conditions for your exact room offer", "Ask about Shabbat check-in, meals and transport if relevant", "Check recent room-specific feedback and accessibility requirements"]} />
           </div>
         </Section>
         <ProviderSection id="more-hotels" title={`See more options in ${area.shortName}`} intro="Want a different room style or budget? Browse other properties, and check each one's exact map location before booking." links={linksForPage(`stay-area-${area.id}-browse`)} pageId={pageId} />
         <FaqList faqs={area.faqs} />
-        <SourceList ids={["owner-stay-jerusalem", ...hotels.map((hotel) => hotel.sourceId)]} />
+        <SourceList ids={[...city.sourceIds, ...hotels.map((hotel) => hotel.sourceId)]} />
         <section aria-labelledby="other-areas-h" className="mt-14">
           <h2 id="other-areas-h" className="text-3xl">Still choosing your area?</h2>
           <p className="mt-2 text-muted-foreground">Compare a different side of {city.city} before you decide.</p>

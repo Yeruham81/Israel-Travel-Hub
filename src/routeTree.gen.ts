@@ -26,6 +26,14 @@ import { Route as JerusalemGermanColonyBakaHotelsRouteImport } from './routes/je
 import { Route as JerusalemMahaneYehudaNachlaotHotelsRouteImport } from './routes/jerusalem.mahane-yehuda-nachlaot-hotels'
 import { Route as JerusalemMamillaKingDavidHotelsRouteImport } from './routes/jerusalem.mamilla-king-david-hotels'
 import { Route as JerusalemOldCityHotelsRouteImport } from './routes/jerusalem.old-city-hotels'
+import { Route as TelAvivBeachfrontHotelsRouteImport } from './routes/tel-aviv.beachfront-hotels'
+import { Route as TelAvivDizengoffCityCenterHotelsRouteImport } from './routes/tel-aviv.dizengoff-city-center-hotels'
+import { Route as TelAvivFlorentinHotelsRouteImport } from './routes/tel-aviv.florentin-hotels'
+import { Route as TelAvivJaffaHotelsRouteImport } from './routes/tel-aviv.jaffa-hotels'
+import { Route as TelAvivKeremHateimanimHotelsRouteImport } from './routes/tel-aviv.kerem-hateimanim-hotels'
+import { Route as TelAvivNeveTzedekHotelsRouteImport } from './routes/tel-aviv.neve-tzedek-hotels'
+import { Route as TelAvivOldNorthPortHotelsRouteImport } from './routes/tel-aviv.old-north-port-hotels'
+import { Route as TelAvivRothschildBoulevardHotelsRouteImport } from './routes/tel-aviv.rothschild-boulevard-hotels'
 import { Route as ToursIndexRouteImport } from './routes/tours.index'
 import { Route as ToursBethlehemFromJerusalemRouteImport } from './routes/tours.bethlehem-from-jerusalem'
 import { Route as TransfersIndexRouteImport } from './routes/transfers.index'
@@ -126,6 +134,50 @@ const JerusalemOldCityHotelsRoute = JerusalemOldCityHotelsRouteImport.update({
   path: '/jerusalem/old-city-hotels',
   getParentRoute: () => rootRouteImport,
 } as any)
+const TelAvivBeachfrontHotelsRoute = TelAvivBeachfrontHotelsRouteImport.update({
+  id: '/tel-aviv/beachfront-hotels',
+  path: '/tel-aviv/beachfront-hotels',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TelAvivDizengoffCityCenterHotelsRoute =
+  TelAvivDizengoffCityCenterHotelsRouteImport.update({
+    id: '/tel-aviv/dizengoff-city-center-hotels',
+    path: '/tel-aviv/dizengoff-city-center-hotels',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const TelAvivFlorentinHotelsRoute = TelAvivFlorentinHotelsRouteImport.update({
+  id: '/tel-aviv/florentin-hotels',
+  path: '/tel-aviv/florentin-hotels',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TelAvivJaffaHotelsRoute = TelAvivJaffaHotelsRouteImport.update({
+  id: '/tel-aviv/jaffa-hotels',
+  path: '/tel-aviv/jaffa-hotels',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TelAvivKeremHateimanimHotelsRoute =
+  TelAvivKeremHateimanimHotelsRouteImport.update({
+    id: '/tel-aviv/kerem-hateimanim-hotels',
+    path: '/tel-aviv/kerem-hateimanim-hotels',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const TelAvivNeveTzedekHotelsRoute = TelAvivNeveTzedekHotelsRouteImport.update({
+  id: '/tel-aviv/neve-tzedek-hotels',
+  path: '/tel-aviv/neve-tzedek-hotels',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TelAvivOldNorthPortHotelsRoute =
+  TelAvivOldNorthPortHotelsRouteImport.update({
+    id: '/tel-aviv/old-north-port-hotels',
+    path: '/tel-aviv/old-north-port-hotels',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const TelAvivRothschildBoulevardHotelsRoute =
+  TelAvivRothschildBoulevardHotelsRouteImport.update({
+    id: '/tel-aviv/rothschild-boulevard-hotels',
+    path: '/tel-aviv/rothschild-boulevard-hotels',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const ToursIndexRoute = ToursIndexRouteImport.update({
   id: '/tours/',
   path: '/tours/',
@@ -201,6 +253,14 @@ export interface FileRoutesByFullPath {
   '/jerusalem/mahane-yehuda-nachlaot-hotels': typeof JerusalemMahaneYehudaNachlaotHotelsRoute
   '/jerusalem/mamilla-king-david-hotels': typeof JerusalemMamillaKingDavidHotelsRoute
   '/jerusalem/old-city-hotels': typeof JerusalemOldCityHotelsRoute
+  '/tel-aviv/beachfront-hotels': typeof TelAvivBeachfrontHotelsRoute
+  '/tel-aviv/dizengoff-city-center-hotels': typeof TelAvivDizengoffCityCenterHotelsRoute
+  '/tel-aviv/florentin-hotels': typeof TelAvivFlorentinHotelsRoute
+  '/tel-aviv/jaffa-hotels': typeof TelAvivJaffaHotelsRoute
+  '/tel-aviv/kerem-hateimanim-hotels': typeof TelAvivKeremHateimanimHotelsRoute
+  '/tel-aviv/neve-tzedek-hotels': typeof TelAvivNeveTzedekHotelsRoute
+  '/tel-aviv/old-north-port-hotels': typeof TelAvivOldNorthPortHotelsRoute
+  '/tel-aviv/rothschild-boulevard-hotels': typeof TelAvivRothschildBoulevardHotelsRoute
   '/tours/bethlehem-from-jerusalem': typeof ToursBethlehemFromJerusalemRoute
   '/transfers/ben-gurion-airport': typeof TransfersBenGurionAirportRoute
   '/travel-blog/ben-gurion-airport-to-jerusalem': typeof TravelBlogBenGurionAirportToJerusalemRoute
@@ -230,6 +290,14 @@ export interface FileRoutesByTo {
   '/jerusalem/mahane-yehuda-nachlaot-hotels': typeof JerusalemMahaneYehudaNachlaotHotelsRoute
   '/jerusalem/mamilla-king-david-hotels': typeof JerusalemMamillaKingDavidHotelsRoute
   '/jerusalem/old-city-hotels': typeof JerusalemOldCityHotelsRoute
+  '/tel-aviv/beachfront-hotels': typeof TelAvivBeachfrontHotelsRoute
+  '/tel-aviv/dizengoff-city-center-hotels': typeof TelAvivDizengoffCityCenterHotelsRoute
+  '/tel-aviv/florentin-hotels': typeof TelAvivFlorentinHotelsRoute
+  '/tel-aviv/jaffa-hotels': typeof TelAvivJaffaHotelsRoute
+  '/tel-aviv/kerem-hateimanim-hotels': typeof TelAvivKeremHateimanimHotelsRoute
+  '/tel-aviv/neve-tzedek-hotels': typeof TelAvivNeveTzedekHotelsRoute
+  '/tel-aviv/old-north-port-hotels': typeof TelAvivOldNorthPortHotelsRoute
+  '/tel-aviv/rothschild-boulevard-hotels': typeof TelAvivRothschildBoulevardHotelsRoute
   '/tours/bethlehem-from-jerusalem': typeof ToursBethlehemFromJerusalemRoute
   '/transfers/ben-gurion-airport': typeof TransfersBenGurionAirportRoute
   '/travel-blog/ben-gurion-airport-to-jerusalem': typeof TravelBlogBenGurionAirportToJerusalemRoute
@@ -260,6 +328,14 @@ export interface FileRoutesById {
   '/jerusalem/mahane-yehuda-nachlaot-hotels': typeof JerusalemMahaneYehudaNachlaotHotelsRoute
   '/jerusalem/mamilla-king-david-hotels': typeof JerusalemMamillaKingDavidHotelsRoute
   '/jerusalem/old-city-hotels': typeof JerusalemOldCityHotelsRoute
+  '/tel-aviv/beachfront-hotels': typeof TelAvivBeachfrontHotelsRoute
+  '/tel-aviv/dizengoff-city-center-hotels': typeof TelAvivDizengoffCityCenterHotelsRoute
+  '/tel-aviv/florentin-hotels': typeof TelAvivFlorentinHotelsRoute
+  '/tel-aviv/jaffa-hotels': typeof TelAvivJaffaHotelsRoute
+  '/tel-aviv/kerem-hateimanim-hotels': typeof TelAvivKeremHateimanimHotelsRoute
+  '/tel-aviv/neve-tzedek-hotels': typeof TelAvivNeveTzedekHotelsRoute
+  '/tel-aviv/old-north-port-hotels': typeof TelAvivOldNorthPortHotelsRoute
+  '/tel-aviv/rothschild-boulevard-hotels': typeof TelAvivRothschildBoulevardHotelsRoute
   '/tours/bethlehem-from-jerusalem': typeof ToursBethlehemFromJerusalemRoute
   '/transfers/ben-gurion-airport': typeof TransfersBenGurionAirportRoute
   '/travel-blog/ben-gurion-airport-to-jerusalem': typeof TravelBlogBenGurionAirportToJerusalemRoute
@@ -291,6 +367,14 @@ export interface FileRouteTypes {
     | '/jerusalem/mahane-yehuda-nachlaot-hotels'
     | '/jerusalem/mamilla-king-david-hotels'
     | '/jerusalem/old-city-hotels'
+    | '/tel-aviv/beachfront-hotels'
+    | '/tel-aviv/dizengoff-city-center-hotels'
+    | '/tel-aviv/florentin-hotels'
+    | '/tel-aviv/jaffa-hotels'
+    | '/tel-aviv/kerem-hateimanim-hotels'
+    | '/tel-aviv/neve-tzedek-hotels'
+    | '/tel-aviv/old-north-port-hotels'
+    | '/tel-aviv/rothschild-boulevard-hotels'
     | '/tours/bethlehem-from-jerusalem'
     | '/transfers/ben-gurion-airport'
     | '/travel-blog/ben-gurion-airport-to-jerusalem'
@@ -320,6 +404,14 @@ export interface FileRouteTypes {
     | '/jerusalem/mahane-yehuda-nachlaot-hotels'
     | '/jerusalem/mamilla-king-david-hotels'
     | '/jerusalem/old-city-hotels'
+    | '/tel-aviv/beachfront-hotels'
+    | '/tel-aviv/dizengoff-city-center-hotels'
+    | '/tel-aviv/florentin-hotels'
+    | '/tel-aviv/jaffa-hotels'
+    | '/tel-aviv/kerem-hateimanim-hotels'
+    | '/tel-aviv/neve-tzedek-hotels'
+    | '/tel-aviv/old-north-port-hotels'
+    | '/tel-aviv/rothschild-boulevard-hotels'
     | '/tours/bethlehem-from-jerusalem'
     | '/transfers/ben-gurion-airport'
     | '/travel-blog/ben-gurion-airport-to-jerusalem'
@@ -349,6 +441,14 @@ export interface FileRouteTypes {
     | '/jerusalem/mahane-yehuda-nachlaot-hotels'
     | '/jerusalem/mamilla-king-david-hotels'
     | '/jerusalem/old-city-hotels'
+    | '/tel-aviv/beachfront-hotels'
+    | '/tel-aviv/dizengoff-city-center-hotels'
+    | '/tel-aviv/florentin-hotels'
+    | '/tel-aviv/jaffa-hotels'
+    | '/tel-aviv/kerem-hateimanim-hotels'
+    | '/tel-aviv/neve-tzedek-hotels'
+    | '/tel-aviv/old-north-port-hotels'
+    | '/tel-aviv/rothschild-boulevard-hotels'
     | '/tours/bethlehem-from-jerusalem'
     | '/transfers/ben-gurion-airport'
     | '/travel-blog/ben-gurion-airport-to-jerusalem'
@@ -379,6 +479,14 @@ export interface RootRouteChildren {
   JerusalemMahaneYehudaNachlaotHotelsRoute: typeof JerusalemMahaneYehudaNachlaotHotelsRoute
   JerusalemMamillaKingDavidHotelsRoute: typeof JerusalemMamillaKingDavidHotelsRoute
   JerusalemOldCityHotelsRoute: typeof JerusalemOldCityHotelsRoute
+  TelAvivBeachfrontHotelsRoute: typeof TelAvivBeachfrontHotelsRoute
+  TelAvivDizengoffCityCenterHotelsRoute: typeof TelAvivDizengoffCityCenterHotelsRoute
+  TelAvivFlorentinHotelsRoute: typeof TelAvivFlorentinHotelsRoute
+  TelAvivJaffaHotelsRoute: typeof TelAvivJaffaHotelsRoute
+  TelAvivKeremHateimanimHotelsRoute: typeof TelAvivKeremHateimanimHotelsRoute
+  TelAvivNeveTzedekHotelsRoute: typeof TelAvivNeveTzedekHotelsRoute
+  TelAvivOldNorthPortHotelsRoute: typeof TelAvivOldNorthPortHotelsRoute
+  TelAvivRothschildBoulevardHotelsRoute: typeof TelAvivRothschildBoulevardHotelsRoute
   ToursBethlehemFromJerusalemRoute: typeof ToursBethlehemFromJerusalemRoute
   TransfersBenGurionAirportRoute: typeof TransfersBenGurionAirportRoute
   TravelBlogBenGurionAirportToJerusalemRoute: typeof TravelBlogBenGurionAirportToJerusalemRoute
@@ -513,6 +621,62 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof JerusalemOldCityHotelsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/tel-aviv/beachfront-hotels': {
+      id: '/tel-aviv/beachfront-hotels'
+      path: '/tel-aviv/beachfront-hotels'
+      fullPath: '/tel-aviv/beachfront-hotels'
+      preLoaderRoute: typeof TelAvivBeachfrontHotelsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/tel-aviv/dizengoff-city-center-hotels': {
+      id: '/tel-aviv/dizengoff-city-center-hotels'
+      path: '/tel-aviv/dizengoff-city-center-hotels'
+      fullPath: '/tel-aviv/dizengoff-city-center-hotels'
+      preLoaderRoute: typeof TelAvivDizengoffCityCenterHotelsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/tel-aviv/florentin-hotels': {
+      id: '/tel-aviv/florentin-hotels'
+      path: '/tel-aviv/florentin-hotels'
+      fullPath: '/tel-aviv/florentin-hotels'
+      preLoaderRoute: typeof TelAvivFlorentinHotelsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/tel-aviv/jaffa-hotels': {
+      id: '/tel-aviv/jaffa-hotels'
+      path: '/tel-aviv/jaffa-hotels'
+      fullPath: '/tel-aviv/jaffa-hotels'
+      preLoaderRoute: typeof TelAvivJaffaHotelsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/tel-aviv/kerem-hateimanim-hotels': {
+      id: '/tel-aviv/kerem-hateimanim-hotels'
+      path: '/tel-aviv/kerem-hateimanim-hotels'
+      fullPath: '/tel-aviv/kerem-hateimanim-hotels'
+      preLoaderRoute: typeof TelAvivKeremHateimanimHotelsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/tel-aviv/neve-tzedek-hotels': {
+      id: '/tel-aviv/neve-tzedek-hotels'
+      path: '/tel-aviv/neve-tzedek-hotels'
+      fullPath: '/tel-aviv/neve-tzedek-hotels'
+      preLoaderRoute: typeof TelAvivNeveTzedekHotelsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/tel-aviv/old-north-port-hotels': {
+      id: '/tel-aviv/old-north-port-hotels'
+      path: '/tel-aviv/old-north-port-hotels'
+      fullPath: '/tel-aviv/old-north-port-hotels'
+      preLoaderRoute: typeof TelAvivOldNorthPortHotelsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/tel-aviv/rothschild-boulevard-hotels': {
+      id: '/tel-aviv/rothschild-boulevard-hotels'
+      path: '/tel-aviv/rothschild-boulevard-hotels'
+      fullPath: '/tel-aviv/rothschild-boulevard-hotels'
+      preLoaderRoute: typeof TelAvivRothschildBoulevardHotelsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/tours/': {
       id: '/tours/'
       path: '/tours'
@@ -604,6 +768,14 @@ const rootRouteChildren: RootRouteChildren = {
     JerusalemMahaneYehudaNachlaotHotelsRoute,
   JerusalemMamillaKingDavidHotelsRoute: JerusalemMamillaKingDavidHotelsRoute,
   JerusalemOldCityHotelsRoute: JerusalemOldCityHotelsRoute,
+  TelAvivBeachfrontHotelsRoute: TelAvivBeachfrontHotelsRoute,
+  TelAvivDizengoffCityCenterHotelsRoute: TelAvivDizengoffCityCenterHotelsRoute,
+  TelAvivFlorentinHotelsRoute: TelAvivFlorentinHotelsRoute,
+  TelAvivJaffaHotelsRoute: TelAvivJaffaHotelsRoute,
+  TelAvivKeremHateimanimHotelsRoute: TelAvivKeremHateimanimHotelsRoute,
+  TelAvivNeveTzedekHotelsRoute: TelAvivNeveTzedekHotelsRoute,
+  TelAvivOldNorthPortHotelsRoute: TelAvivOldNorthPortHotelsRoute,
+  TelAvivRothschildBoulevardHotelsRoute: TelAvivRothschildBoulevardHotelsRoute,
   ToursBethlehemFromJerusalemRoute: ToursBethlehemFromJerusalemRoute,
   TransfersBenGurionAirportRoute: TransfersBenGurionAirportRoute,
   TravelBlogBenGurionAirportToJerusalemRoute:
