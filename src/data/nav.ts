@@ -38,6 +38,9 @@ const travelTips = {
 
 export const utilityNav: NavItem[] = [
   { label: "Home", to: "/" },
+];
+
+export const footerNav: NavItem[] = [
   { label: "About", to: "/about/" },
 ];
 
@@ -87,11 +90,11 @@ export const allNavGroups: NavGroup[] = [
   {
     title: "Popular Links",
     items: [
-      { label: "Ben Gurion → Jerusalem", to: "/travel-blog/ben-gurion-airport-to-jerusalem/" },
+      { label: "Ben Gurion to Jerusalem", to: "/travel-blog/ben-gurion-airport-to-jerusalem/" },
       travelTips.uber,
       travelTips.esim,
       travelTips.arrival,
-      { label: "Ben Gurion → Tel Aviv", to: "/travel-blog/ben-gurion-airport-to-tel-aviv/" },
+      { label: "Ben Gurion to Tel Aviv", to: "/travel-blog/ben-gurion-airport-to-tel-aviv/" },
     ],
   },
 ];

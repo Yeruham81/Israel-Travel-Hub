@@ -3,7 +3,7 @@ import { useEffect, useState, type ReactNode } from "react";
 import { Compass } from "lucide-react";
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetDescription } from "@/components/ui/sheet";
 import { OWNER_BASE } from "@/data/registry";
-import { allNavGroups, serviceNav, serviceDomains, hotelNav, utilityNav, type SidebarNavItem } from "@/data/nav";
+import { allNavGroups, serviceNav, serviceDomains, hotelNav, utilityNav, footerNav, type SidebarNavItem } from "@/data/nav";
 import { relFor } from "@/lib/outbound";
 
 export function ExtLink({ href, children, className, guide }: { href: string; children: ReactNode; className?: string; guide?: boolean }) {
@@ -33,7 +33,7 @@ function SidebarLink({ item, onNavigate }: { item: SidebarNavItem; onNavigate: (
   if ("href" in item) {
     return (
       <a href={item.href} target="_blank" rel={relFor(false)} onClick={onNavigate} className={`${className} hover:bg-muted`}>
-        {item.label}<span aria-hidden className="ml-1 text-xs text-muted-foreground">↗</span>
+        {item.label}
         <span className="sr-only"> (on israel-taxi.com, opens in a new tab)</span>
       </a>
     );
@@ -56,11 +56,11 @@ function SidebarLink({ item, onNavigate }: { item: SidebarNavItem; onNavigate: (
 export function GlobalNav({ onNavigate }: { onNavigate?: () => void }) {
   return (
     <nav aria-label="Explore Israel" className="text-sm">
-      <ul className="mb-5 flex gap-2 border-b pb-4">
+      <ul className="mb-5 border-b pb-4">
         {utilityNav.map((item) => <li key={item.label}><SidebarLink item={item} onNavigate={onNavigate} /></li>)}
       </ul>
       {allNavGroups.map((g) => (
-        <section key={g.title} aria-label={g.title} className="mb-6 border-b pb-5 last:mb-0 last:border-0 last:pb-0">
+        <section key={g.title} aria-label={g.title} className="mb-6 border-b pb-5">
           <h2 className="mb-2 border-l-2 border-primary/50 pl-3 text-[0.7rem] font-semibold uppercase tracking-[0.1em] text-navy">{g.title}</h2>
           <ul className="space-y-0.5">
             {g.items.map((i) => (
@@ -69,9 +69,11 @@ export function GlobalNav({ onNavigate }: { onNavigate?: () => void }) {
               </li>
             ))}
           </ul>
-          {g.title === "Travel Guides & Tips" && <p className="mt-2 px-3 text-xs leading-relaxed text-muted-foreground">↗ Guides on israel-taxi.com open in a new tab.</p>}
         </section>
       ))}
+      <ul>
+        {footerNav.map((item) => <li key={item.label}><SidebarLink item={item} onNavigate={onNavigate} /></li>)}
+      </ul>
     </nav>
   );
 }

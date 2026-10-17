@@ -32,6 +32,8 @@ import haifaBotanicaPhoto from "@/assets/haifa/botanica.webp";
 import haifaColonyPhoto from "@/assets/haifa/colony.webp";
 import haifaLeonardoPhoto from "@/assets/haifa/leonardo.webp";
 import haifaDanCarmelPhoto from "@/assets/haifa/dan-carmel.webp";
+import eilatWaterfrontPhoto from "@/assets/eilat/waterfront.webp";
+import { OWNER_BASE } from "@/data/registry";
 
 export type StayPreference = "first-visit" | "car-free" | "quiet" | "nightlife" | "family" | "views" | "luxury" | "heritage" | "food" | "long-stay" | "beach" | "history";
 
@@ -1090,6 +1092,51 @@ const haifaCategoryGuides: HotelCategoryGuide[] = [
       { q: "Are Botanica and Schumacher included as young-family options?", a: "No. Their guest-age policies make them different choices from these family hotels. Check the boutique guide for those policies; this shortlist focuses on Leonardo Plaza, Crowne Plaza and Dan Carmel." },
     ],
     sourceIds: ["haifa-dan-carmel-rooms"],
+  },
+];
+
+export type AccommodationDestinationCard = {
+  id: string;
+  title: string;
+  text: string;
+  cta: string;
+  photo: StayGuidePhoto;
+} & ({ to: NonNullable<LinkProps["to"]> } | { href: string });
+
+/** The accommodation hub introduces the experience, then leads into a guide. */
+export const accommodationDestinations: AccommodationDestinationCard[] = [
+  {
+    id: "jerusalem", title: "Hotels in Jerusalem",
+    text: "Ancient lanes, lively markets or leafy streets? Discover the neighborhoods and hotels that bring your Jerusalem trip to life.",
+    cta: "Explore Jerusalem hotels", to: cityStayGuides.jerusalem.path as NonNullable<LinkProps["to"]>,
+    photo: { src: oldCityPhoto, alt: "Stone buildings and a cobbled street inside Jerusalem's Old City", sourceUrl: "https://www.israel-taxi.com/wp-content/uploads/2026/07/Jerusalem_Old_City_street.webp", label: "Jerusalem — Old City streets" },
+  },
+  {
+    id: "telaviv", title: "Hotels in Tel Aviv",
+    text: "Beachfront mornings, Jaffa charm or a stylish city hideaway? Find the neighborhood and hotel for the Tel Aviv you want to experience.",
+    cta: "Explore Tel Aviv hotels", to: cityStayGuides.telaviv.path as NonNullable<LinkProps["to"]>,
+    photo: { src: telAvivBeachfrontPhoto, alt: "Tel Aviv's beachfront hotels and Mediterranean promenade", sourceUrl: "https://www.israel-taxi.com/wp-content/uploads/2025/08/Tel_Aviv_Promenade1.jpg", label: "Tel Aviv — beachfront hotels and promenade" },
+  },
+  {
+    id: "haifa", title: "Hotels in Haifa",
+    text: "Garden views, characterful boutique hotels and Mediterranean beach days. Find your place between Mount Carmel and the coast.",
+    cta: "Explore Haifa hotels", to: haifaStayGuide.path as NonNullable<LinkProps["to"]>, photo: haifaPhotos.panorama,
+  },
+  {
+    id: "tiberias", title: "Hotels in Tiberias",
+    text: "Slow mornings by the Sea of Galilee, family pool days and a base for exploring the north. Discover a stay that suits your pace.",
+    cta: "Explore Tiberias hotels", to: tiberiasStayGuide.path as NonNullable<LinkProps["to"]>, photo: tiberiasPhotos.waterfront,
+  },
+  {
+    id: "deadsea", title: "Dead Sea hotels",
+    text: "Unwind with a spa escape, a relaxing resort break or time together by the water. Explore where to stay for your Dead Sea getaway.",
+    cta: "Explore Dead Sea hotels", to: deadSeaStayGuide.path as NonNullable<LinkProps["to"]>, photo: deadSeaPhotos.beach,
+  },
+  {
+    id: "eilat", title: "Hotels in Eilat",
+    text: "Red Sea beaches, resort escapes and desert scenery set the scene for a laid-back holiday. Get to know Eilat before choosing your stay.",
+    cta: "Explore Eilat", href: `${OWNER_BASE}/travel-blog/eilat/`,
+    photo: { src: eilatWaterfrontPhoto, alt: "Hotels, palm trees and the waterfront beside the Red Sea in Eilat", sourceUrl: "https://www.israel-taxi.com/wp-content/uploads/2025/08/eilat_.jpg", label: "Eilat — Red Sea waterfront" },
   },
 ];
 

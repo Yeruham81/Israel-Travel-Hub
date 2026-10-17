@@ -4,6 +4,8 @@ import { cleanup, fireEvent, render, screen, waitFor, within } from "@testing-li
 import { afterEach, describe, expect, it, vi } from "vitest";
 import { GlobalNav, SiteHeader } from "@/components/Layout";
 import { routeTree } from "@/routeTree.gen";
+import { Route as HotelsRoute } from "@/routes/hotels";
+import { accommodationDestinations } from "@/data/content";
 
 afterEach(cleanup);
 
@@ -29,6 +31,10 @@ describe("shared sidebar navigation", () => {
     expect(within(nav).getByRole("link", { name: "Hotels in Jerusalem" })).toHaveAttribute("aria-current", "page");
     expect(within(nav).getByRole("link", { name: "All accommodation" })).not.toHaveAttribute("aria-current");
     expect(within(nav).getByRole("link", { name: "Home" })).toHaveAttribute("href", "/");
+    const links = within(nav).getAllByRole("link");
+    expect(links[0]).toHaveTextContent("Home");
+    expect(links.at(-1)).toHaveTextContent("About");
+    expect(nav.textContent).not.toMatch(/[↗→]/);
   });
 
   it("clearly identifies external guides and preserves their real destinations", async () => {
@@ -45,11 +51,11 @@ describe("shared sidebar navigation", () => {
       expect(link).toHaveAttribute("href", `https://www.israel-taxi.com/travel-blog/${path}/`);
       expect(link).toHaveAttribute("target", "_blank");
       expect(link).toHaveAttribute("rel", "noopener noreferrer");
-      expect(link.querySelector('[aria-hidden]')).toHaveTextContent("↗");
+      expect(link.querySelector('[aria-hidden]')).toBeNull();
     }
     fireEvent.click(within(popular).getByRole("link", { name: /Is there Uber in Israel/ }));
     expect(onNavigate).toHaveBeenCalledOnce();
-    expect(within(popular).getByRole("link", { name: "Ben Gurion → Jerusalem" })).toHaveAttribute("href", "/travel-blog/ben-gurion-airport-to-jerusalem/");
+    expect(within(popular).getByRole("link", { name: "Ben Gurion to Jerusalem" })).toHaveAttribute("href", "/travel-blog/ben-gurion-airport-to-jerusalem/");
   });
 
   it("uses the same groups in the mobile drawer and closes it after either kind of link", async () => {
@@ -60,6 +66,8 @@ describe("shared sidebar navigation", () => {
     let dialog = await screen.findByRole("dialog");
     let nav = within(dialog).getByRole("navigation", { name: "Explore Israel" });
     expect(within(nav).getAllByRole("region")).toHaveLength(6);
+    expect(within(nav).getAllByRole("link")[0]).toHaveTextContent("Home");
+    expect(within(nav).getAllByRole("link").at(-1)).toHaveTextContent("About");
     fireEvent.click(within(nav).getByRole("link", { name: "Hotels in Haifa" }));
     await waitFor(() => expect(screen.queryByRole("dialog")).not.toBeInTheDocument());
     await waitFor(() => expect(router.state.location.pathname).toBe("/travel-blog/best-hotels-in-haifa/"));
@@ -71,5 +79,39 @@ describe("shared sidebar navigation", () => {
     fireEvent.click(within(popular).getByRole("link", { name: /Choosing an eSIM for Israel/ }));
     await waitFor(() => expect(screen.queryByRole("dialog")).not.toBeInTheDocument());
     expect(router.state.location.pathname).toBe("/travel-blog/best-hotels-in-haifa/");
+  });
+});
+
+describe("accommodation destination hub", () => {
+  it("presents six illustrated destinations with real guide links and inviting copy", async () => {
+    const router = await navigationRouter("/hotels/");
+    const Hotels = HotelsRoute.options.component!;
+    render(<RouterContextProvider router={router}><Hotels /></RouterContextProvider>);
+    const cards = screen.getAllByTestId("accommodation-destination-card");
+    expect(cards).toHaveLength(6);
+    expect(cards.map((card) => within(card).getByRole("heading").textContent)).toEqual([
+      "Hotels in Jerusalem", "Hotels in Tel Aviv", "Hotels in Haifa", "Hotels in Tiberias", "Dead Sea hotels", "Hotels in Eilat",
+    ]);
+    for (const card of cards) {
+      expect(within(card).getByRole("img")).toHaveAttribute("src");
+      expect(within(card).getByRole("img").getAttribute("alt")).not.toBe("");
+      expect(card.textContent).not.toMatch(/compare\s+(?:\d+|six|eight|ten|eleven)\s+(?:hotels|areas)/i);
+      const href = card.getAttribute("href")!;
+      if (href.startsWith("/")) expect(router.matchRoutes(href).at(-1)?.routeId).toBe(href.replace(/\/$/, ""));
+    }
+    const eilat = cards.at(-1)!;
+    expect(eilat).toHaveAttribute("href", "https://www.israel-taxi.com/travel-blog/eilat/");
+    expect(eilat).toHaveAttribute("target", "_blank");
+    expect(eilat).toHaveTextContent("Travel guide on israel-taxi.com");
+    expect(screen.getByText("Guide image sources").closest("details")!.querySelectorAll("a")).toHaveLength(6);
+  });
+
+  it("retains the accommodation URL and includes Eilat in page discovery", async () => {
+    const head = await HotelsRoute.options.head?.({} as never);
+    expect(head).toMatchObject({
+      meta: expect.arrayContaining([expect.objectContaining({ name: "description", content: expect.stringContaining("Eilat") })]),
+      links: expect.arrayContaining([expect.objectContaining({ rel: "canonical", href: expect.stringMatching(/\/hotels\/$/) })]),
+    });
+    expect(new Set(accommodationDestinations.map((destination) => destination.photo.src)).size).toBe(6);
   });
 });

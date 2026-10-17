@@ -2,7 +2,7 @@ import { QueryClient } from "@tanstack/react-query";
 import { createRouter, rootRouteId } from "@tanstack/react-router";
 import { describe, expect, it } from "vitest";
 import { routeTree } from "@/routeTree.gen";
-import { allNavGroups, hotelNav, serviceNav, utilityNav } from "@/data/nav";
+import { allNavGroups, hotelNav, serviceNav, utilityNav, footerNav } from "@/data/nav";
 import { OWNER_BASE, providerLinks, offers, sources, linksForPage, affiliateConfig, partners } from "@/data/registry";
 import { isDisplayableLiveQuote, type LiveQuote } from "@/lib/booking";
 
@@ -10,7 +10,7 @@ const router = createRouter({ routeTree, context: { queryClient: new QueryClient
 
 describe("portal navigation", () => {
   it("every internal sidebar link resolves to a real page and every service remains reachable", () => {
-    const internal = [...utilityNav, ...allNavGroups.flatMap((g) => g.items).filter((item) => "to" in item)];
+    const internal = [...utilityNav, ...footerNav, ...allNavGroups.flatMap((g) => g.items).filter((item) => "to" in item)];
     for (const item of internal) {
       const match = router.matchRoutes(String(item.to)).at(-1);
       expect(match?.routeId, String(item.to)).toBeTruthy();

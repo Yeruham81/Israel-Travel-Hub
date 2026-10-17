@@ -1,24 +1,20 @@
-import { createFileRoute, type LinkProps } from "@tanstack/react-router";
-import { Checklist, HubCard, HubHeader, RelatedLinks } from "@/components/Guide";
-import { cityStayGuides, deadSeaStayGuide, haifaStayGuide } from "@/data/content";
+import { createFileRoute } from "@tanstack/react-router";
+import { AccommodationCard } from "@/components/AccommodationCard";
+import { Checklist, HubHeader, RelatedLinks } from "@/components/Guide";
+import { StayPhotoCredits } from "@/components/StayGuideParts";
+import { accommodationDestinations } from "@/data/content";
 import { pageMeta } from "@/lib/site";
 
 export const Route = createFileRoute("/hotels")({
   head: () =>
     pageMeta({
       title: "Hotels & places to stay in Israel by destination — Israel Taxi & Travel",
-      description: "Choose stays in Jerusalem, Tel Aviv, Haifa, Tiberias or the Dead Sea. Explore neighborhood, boutique, spa and family guides, then check room options for your dates.",
+      description: "Find your stay in Jerusalem, Tel Aviv, Haifa, Tiberias, the Dead Sea or Eilat. Discover neighborhood guides, boutique hotels, beach resorts and family escapes.",
       path: "/hotels/",
       crumbs: [{ name: "Home", path: "/" }, { name: "Accommodation", path: "/hotels/" }],
     }),
   component: Hotels,
 });
-
-const blurbs = {
-  jerusalem: "Compare six areas with photos and maps, then explore detailed neighborhood guides and hotel picks.",
-  telaviv: "Compare eight areas with photos and maps, from the beachfront to Jaffa, then explore local guides and hotel picks.",
-  tiberias: "Compare ten hotels and hostels, then explore focused family and luxury guides with beach, facility and meal-plan checks.",
-} as const;
 
 function Hotels() {
   return (
@@ -27,18 +23,16 @@ function Hotels() {
         crumbs={[{ name: "Home", to: "/" }, { name: "Accommodation", to: "/hotels/" }]}
         eyebrow="Accommodation"
         title="Where to stay in Israel"
-        intro="Start with your destination, then choose a neighborhood or hotel style that fits your trip. Explore Jerusalem and Tel Aviv area guides, Haifa boutique and family stays, Dead Sea spa and family hotels, or Tiberias family and luxury comparisons."
+        intro="Picture your next stay: a boutique hideaway in a historic neighborhood, a room steps from the beach or a resort made for unwinding. Choose your destination, discover the places that suit your trip and find a hotel you'll look forward to returning to."
       />
       <section aria-labelledby="cities-h" className="mt-10">
         <h2 id="cities-h" className="text-3xl">Choose a destination</h2>
-        <div className="mt-5 grid gap-4 md:grid-cols-2">
-          {Object.values(cityStayGuides).map((g) => (
-            <HubCard key={g.id} to={g.path as LinkProps["to"]} eyebrow={g.city} title={`Hotels in ${g.city}`} text={blurbs[g.id]} cta={`Explore ${g.city} ${g.id === "tiberias" ? "hotels" : "areas"}`} />
-          ))}
-          <HubCard to={deadSeaStayGuide.path as LinkProps["to"]} eyebrow="Dead Sea, Israel" title="Dead Sea hotels" text="Compare spa, family and luxury stays, with focused guides for wellness breaks and traveling with children." cta="Explore Dead Sea stays" />
-          <HubCard to={haifaStayGuide.path as LinkProps["to"]} eyebrow="Haifa" title="Hotels in Haifa" text="Compare ten hotels and guesthouses, with focused boutique and family guides covering the German Colony, Carmel and beachfront." cta="Explore Haifa hotels" />
+        <p className="mt-3 max-w-3xl leading-relaxed text-muted-foreground">From Mediterranean city breaks to peaceful lakeside mornings and Red Sea beach days, start with the place that inspires you.</p>
+        <div className="mt-6 grid gap-6 sm:grid-cols-2 xl:grid-cols-3">
+          {accommodationDestinations.map((destination) => <AccommodationCard key={destination.id} destination={destination} />)}
         </div>
       </section>
+      <StayPhotoCredits photos={accommodationDestinations.map((destination) => destination.photo)} />
       <section aria-labelledby="crit-h" className="mt-14">
         <h2 id="crit-h" className="text-3xl">What matters when choosing</h2>
         <div className="mt-5 grid gap-4 sm:grid-cols-2">
