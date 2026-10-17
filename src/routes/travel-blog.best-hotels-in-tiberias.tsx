@@ -1,9 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { CityStayPage } from "@/components/CityStayPage";
-import { cityStayGuides } from "@/data/content";
+import { HotelDestinationPage } from "@/components/HotelDestinationPage";
+import { tiberiasStayGuide as g } from "@/data/content";
 import { pageMeta } from "@/lib/site";
-
-const g = cityStayGuides.tiberias;
 
 export const Route = createFileRoute("/travel-blog/best-hotels-in-tiberias")({
   head: () =>
@@ -12,11 +10,11 @@ export const Route = createFileRoute("/travel-blog/best-hotels-in-tiberias")({
       description: g.metaDescription,
       path: g.path,
       type: "article",
-      crumbs: [{ name: "Home", path: "/" }, { name: "Accommodation", path: "/hotels/" }, { name: g.city, path: g.path }],
+      crumbs: [{ name: "Home", path: "/" }, { name: "Accommodation", path: "/hotels/" }, { name: g.name, path: g.path }],
     }),
   component: StayTiberias,
 });
 
 function StayTiberias() {
-  return <CityStayPage g={g} />;
+  return <HotelDestinationPage guide={g} />;
 }

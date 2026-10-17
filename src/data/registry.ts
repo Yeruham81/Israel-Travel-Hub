@@ -94,6 +94,7 @@ export const INFO_CHECK_DATE: ISODate = "2026-10-16";
 export const JERUSALEM_STAY_REVIEW_DATE: ISODate = "2026-10-17";
 export const TELAVIV_STAY_REVIEW_DATE: ISODate = "2026-10-17";
 export const DEAD_SEA_STAY_REVIEW_DATE: ISODate = "2026-10-17";
+export const TIBERIAS_STAY_REVIEW_DATE: ISODate = "2026-10-17";
 export const OWNER_BASE = "https://www.israel-taxi.com";
 
 const jerusalemHotelSources: SourceReference[] = [
@@ -156,10 +157,30 @@ const deadSeaHotelSources: SourceReference[] = [
   note: "Property identity, location and general facilities checked against the operator's own information. Confirm current operation, beach access, room occupancy, age limits, meal-plan inclusions and seasonal facilities for your dates; rates and inventory are not live.",
 }));
 
+const tiberiasHotelSources: SourceReference[] = [
+  ["u-boutique", "U Boutique Kinneret — operator facilities", "https://www.nyx-hotels.com/tiberias/u-boutique-kinneret/facilities"],
+  ["galei-kinneret", "Galei Kinneret — hotel information and guest ages", "https://www.galei-kinneret.com/info-page"],
+  ["scots", "The Scots Hotel", "https://www.scotshotels.com/"],
+  ["gai-beach", "Gai Beach — water park and beach", "https://www.gaibeach.com/water-park-sea-of-galilee"],
+  ["leonardo-club", "Leonardo Club Tiberias — facilities and operating notices", "https://www.leonardo-hotels.com/tiberias/leonardo-club-tiberias"],
+  ["caesar", "Caesar Premier Tiberias", "https://www.caesarpremier.com/caesar-tiberias-hotel"],
+  ["sofia", "Sofia Hotel Tiberias", "https://sofiahotel.co.il/"],
+  ["emily", "Emily's Hotel", "https://english.emilys-aviv.co.il/emilys-tiberias-hotel"],
+  ["tiberia", "Tiberia Hotel — operator's public profile", "https://www.facebook.com/tiberiahotel/"],
+  ["hostel", "Tiberias Hostel", "https://www.hosteltiberias.com/"],
+].map(([id, name, url]): SourceReference => ({
+  id: `hotel-tib-${id}-official`, title: `${name} — property information`, publisher: name!, url: url!,
+  checkedAt: TIBERIAS_STAY_REVIEW_DATE,
+  note: id === "tiberia"
+    ? "The operator's public profile supports the property identity and small central-hotel format. No separate official website was established; confirm room facilities and arrival arrangements directly. Prices and inventory are not live."
+    : "Identity, location and relevant facilities or policies checked against primary operator information. Reconfirm operation, guest and facility age limits, seasonal pools, beach arrangements and the exact meal plan for your dates. No live rates or availability are supplied.",
+}));
+
 export const sources: SourceReference[] = [
   ...jerusalemHotelSources,
   ...telAvivHotelSources,
   ...deadSeaHotelSources,
+  ...tiberiasHotelSources,
   {
     id: "owner-hotels-deadsea", title: "Best Dead Sea Hotels (original guide)", publisher: "Israel-Taxi.com",
     url: `${OWNER_BASE}/travel-blog/best-dead-sea-hotels/`, checkedAt: DEAD_SEA_STAY_REVIEW_DATE,
@@ -262,8 +283,8 @@ export const sources: SourceReference[] = [
     title: "Best hotels in Tiberias (existing guide)",
     publisher: "Israel-Taxi.com",
     url: `${OWNER_BASE}/travel-blog/best-hotels-in-tiberias/`,
-    checkedAt: INFO_CHECK_DATE,
-    note: "Background for area guidance. No property, price or availability claims are taken from it.",
+    checkedAt: TIBERIAS_STAY_REVIEW_DATE,
+    note: "Editorial basis for the ten-property destination guide and focused family and luxury comparisons. Publisher-owned Expedia links and selected photographs are reused. Primary hotel sources supplement the guide, including current meal-plan notices and guest ages; no firsthand stays at every hotel or live room offers are claimed.",
   },
   {
     id: "owner-bethlehem-guide",
@@ -438,6 +459,21 @@ export const affiliateConfig: Record<string, { trackingUrl: string } | undefined
   "hotel-ds-leonardo-plaza-expedia": { trackingUrl: "https://expedia.tpm.li/ExXg3tn5" },
   "hotel-ds-ein-gedi-expedia": { trackingUrl: "https://expedia.tpm.li/6BK7fDJ1" },
   "hotel-ds-hi-ein-gedi-expedia": { trackingUrl: "https://expedia.tpm.li/PscLWtIj" },
+  "hotels-tiberias-expedia": { trackingUrl: "https://expedia.tpm.li/DEbYK2CW" },
+  "category-tiberias-luxury-expedia": { trackingUrl: "https://expedia.tpm.li/xdeJinwP" },
+  "category-tiberias-family-expedia": { trackingUrl: "https://expedia.tpm.li/Jj517ypi" },
+  "category-tiberias-central-expedia": { trackingUrl: "https://expedia.tpm.li/qWtAVTqG" },
+  "category-tiberias-budget-expedia": { trackingUrl: "https://expedia.tpm.li/YLENwQmV" },
+  "hotel-tib-u-boutique-expedia": { trackingUrl: "https://expedia.tpm.li/cji9mC7b" },
+  "hotel-tib-galei-kinneret-expedia": { trackingUrl: "https://expedia.tpm.li/OjD96b2I" },
+  "hotel-tib-scots-expedia": { trackingUrl: "https://expedia.tpm.li/DlqQLqw5" },
+  "hotel-tib-gai-beach-expedia": { trackingUrl: "https://expedia.tpm.li/9WNQnms9" },
+  "hotel-tib-leonardo-club-expedia": { trackingUrl: "https://expedia.tpm.li/gu6JTl94" },
+  "hotel-tib-caesar-expedia": { trackingUrl: "https://expedia.tpm.li/t4Qn13Gp" },
+  "hotel-tib-sofia-expedia": { trackingUrl: "https://expedia.tpm.li/PvwSGlLH" },
+  "hotel-tib-emily-expedia": { trackingUrl: "https://expedia.tpm.li/e19VwpLE" },
+  "hotel-tib-tiberia-expedia": { trackingUrl: "https://expedia.tpm.li/KFPHkIPk" },
+  "hotel-tib-hostel-expedia": { trackingUrl: "https://expedia.tpm.li/oPqpXNAU" },
 };
 
 export interface ResortHotelFacts {
@@ -460,6 +496,7 @@ export interface HotelRecommendation {
   watch: string;
   sourceId: string;
   resortFacts?: ResortHotelFacts;
+  operatingNotice?: { message: string; expiresOn: ISODate };
 }
 
 export const deadSeaHotelRecommendations: (HotelRecommendation & { resortFacts: ResortHotelFacts })[] = [
@@ -539,6 +576,80 @@ export const deadSeaHotelRecommendations: (HotelRecommendation & { resortFacts: 
     bestFor: "Hikers, independent visitors and groups comparing simpler accommodation.",
     watch: "This is not a beachfront spa resort. Confirm the room format, reception arrangements, meals and transport to any beach or attraction you intend to visit.", sourceId: "hotel-ds-hi-ein-gedi-official",
     resortFacts: { location: "Ein Gedi nature-reserve area", beach: "Separate journey to an operating beach", spa: "No resort spa advertised", agePolicy: "Confirm room and group arrangements", children: "Private-room options; no resort activity format", meals: "Confirm breakfast and any additional meals" },
+  },
+];
+
+export const tiberiasHotelRecommendations: (HotelRecommendation & { resortFacts: ResortHotelFacts })[] = [
+  {
+    id: "tib-u-boutique", cityId: "tiberias", areaId: "tiberias", name: "U Boutique Kinneret", style: "Contemporary lakefront boutique hotel",
+    summary: "A smaller lakefront hotel with a private beach area, seasonal outdoor pool and spa facilities. It combines a resort setting with a boutique format, and accepts families as well as couples.",
+    bestFor: "Couples who want lake access and a contemporary hotel, or families comparing a smaller upscale stay.",
+    watch: "Confirm beach and pool operation, your room's actual outlook, spa access and the meal plan. Lake-view rooms and particular facilities are not implied by every rate.", sourceId: "hotel-tib-u-boutique-official",
+    resortFacts: { location: "Northern edge of the central waterfront", beach: "Private beach area; confirm seasonal access", spa: "Spa facilities; check access and treatment extras", agePolicy: "Families accepted; check individual spa age limits", children: "Seasonal outdoor pool and shallow children's pool", meals: "Check the selected room's meal plan" },
+  },
+  {
+    id: "tib-galei-kinneret", cityId: "tiberias", areaId: "tiberias", name: "Galei Kinneret", style: "Luxury lakeside hotel · guests aged 12+",
+    summary: "A luxury hotel on the southern waterfront with a private beach, pool and spa. Its minimum guest age of 12 makes it a different choice from a resort designed around younger children's activities.",
+    bestFor: "Couples and eligible older families prioritizing a lakeside hotel and wellness break.",
+    watch: "The operator states guests must be 12 or older. Confirm seasonal beach access, spa inclusions, treatments and the exact room category.", sourceId: "hotel-tib-galei-kinneret-official",
+    resortFacts: { location: "Southern waterfront, near the town", beach: "Private beach; seasonal operation", spa: "Spa and pool; confirm access inclusions", agePolicy: "Hotel guests 12+", children: "Not a young-child resort; minimum age 12", meals: "Check meals and dining reservations in the offer" },
+  },
+  {
+    id: "tib-scots", cityId: "tiberias", areaId: "tiberias", name: "The Scots Hotel", style: "Heritage hotel in restored hospital buildings",
+    summary: "Historic basalt-stone buildings and gardens on the central waterfront create a distinctive heritage stay. Choose it for the architecture and atmosphere; lakeside gardens do not mean a swimming beach.",
+    bestFor: "Couples interested in a historic setting, gardens and a central base for exploring Tiberias.",
+    watch: "The usual guest policy is 16+, with exceptions during holidays and July–August. Contact reservations directly before planning a stay with children, and check seasonal pool operation.", sourceId: "hotel-tib-scots-official",
+    resortFacts: { location: "Central waterfront and historic town", beach: "Lakefront gardens; no swimming beach assumed", spa: "Spa services and seasonal outdoor pool; check inclusions", agePolicy: "Generally 16+; holiday and July–August exceptions need confirmation", children: "Children's stays require checking the date-specific policy", meals: "Compare the selected dining package" },
+  },
+  {
+    id: "tib-gai-beach", cityId: "tiberias", areaId: "tiberias", name: "Gai Beach Hotel", style: "Lakeside family hotel with a water park",
+    summary: "A southern-shore hotel combining a declared swimming beach with a water park. The operator advertises water-park entry for hotel guests, making it a useful family comparison when slides and time by the water are central to the holiday.",
+    bestFor: "Families planning to spend substantial time at the hotel, beach and water park.",
+    watch: "Confirm the current water-park calendar, separate-swimming sessions, slide restrictions and which facilities operate during your stay. Do not assume year-round water-park opening.", sourceId: "hotel-tib-gai-beach-official",
+    resortFacts: { location: "Southern lakeshore, beyond the central promenade", beach: "Declared beach beside the water park; check operation", spa: "Hotel spa; confirm entry ages and charges", agePolicy: "Families accepted; water attractions have separate rules", children: "Water park with slides and children's areas; seasonal calendar", meals: "Compare the exact breakfast or other board package" },
+  },
+  {
+    id: "tib-leonardo-club", cityId: "tiberias", areaId: "tiberias", name: "Leonardo Club Tiberias", style: "Central family hotel · check the current board basis",
+    summary: "A central hotel with children's and teens' clubs, pools and seasonal water slides. Although marketed as all-inclusive, the operator currently posts a notice that it is running on full board instead; confirm the exact package before booking.",
+    bestFor: "Families who want on-site activities and meals while staying near the town and promenade.",
+    watch: "Full board does not automatically include all drinks and snacks. Confirm the meal basis in writing, pool and slide opening, club ages and your room's occupancy. This is not a private-beach hotel.", sourceId: "hotel-tib-leonardo-club-official",
+    operatingNotice: { message: "Operator notice, checked 17 October 2026: the pool is scheduled to close on 25–27 October 2026 for enclosure maintenance. Confirm any change directly before booking those dates.", expiresOn: "2026-10-27" },
+    resortFacts: { location: "Central Tiberias, a walk from the promenade", beach: "No private beach; plan swimming separately", spa: "Check which wellness facilities are currently available", agePolicy: "Families accepted; confirm slide and club ages", children: "Children's and teens' clubs; seasonal water slides", meals: "Marketed all-inclusive, but current operator notice says full board; confirm" },
+  },
+  {
+    id: "tib-caesar", cityId: "tiberias", areaId: "tiberias", name: "Caesar Premier Tiberias", style: "Full-service hotel by the promenade",
+    summary: "A central promenade hotel with family facilities, an outdoor pool and a spa with a thermal mineral pool. It suits visitors combining hotel time with walks in town; the thermal pool is for guests aged 18 and over.",
+    bestFor: "Families and couples seeking a central waterfront base with conventional hotel facilities.",
+    watch: "The 18+ restriction applies to the thermal mineral pool, not the whole hotel. Check outdoor-pool operation, children's facilities, room layout, meals and parking availability.", sourceId: "hotel-tib-caesar-official",
+    resortFacts: { location: "On the central promenade", beach: "Promenade location; no private beach assumed", spa: "Spa and thermal mineral pool; mineral pool 18+", agePolicy: "Family hotel; thermal mineral pool 18+", children: "Outdoor pool, children's playroom and family-room options", meals: "Check the selected room and board basis" },
+  },
+  {
+    id: "tib-sofia", cityId: "tiberias", areaId: "tiberias", name: "Sofia Hotel Tiberias", style: "City hotel with history, spa and lake views",
+    summary: "A hotel on Palmach Street above the lower waterfront, with a historic setting and spa. Compare it when you want a city base with a lake outlook, allowing for the uphill return from the promenade.",
+    bestFor: "Couples and city-break visitors who value the hotel's setting and do not need an adjoining beach.",
+    watch: "Ask which rooms actually face the lake, about the walking route and steps, and which spa facilities your rate includes. A lake view is not direct beach access.", sourceId: "hotel-tib-sofia-official",
+    resortFacts: { location: "Palmach Street, above the lower waterfront", beach: "Walk down to the shore; no adjoining swimming beach assumed", spa: "Hotel spa; check access, age limits and treatments", agePolicy: "Confirm guest and facility policies for your party", children: "Check room occupancy and facilities for your children's ages", meals: "Compare the selected dining package" },
+  },
+  {
+    id: "tib-emily", cityId: "tiberias", areaId: "tiberias", name: "Emily's Hotel", style: "Small hotel near central Tiberias",
+    summary: "A smaller hotel within walking reach of downtown, useful as a base for time in town and trips around the Galilee. Its operator describes a bed-and-breakfast format, with other meals available by advance arrangement at extra cost.",
+    bestFor: "Travelers comparing a smaller base rather than a large activity resort.",
+    watch: "Confirm parking availability, the exact room, pool operation if important and the walk to your planned outings. Do not treat proximity to the lake as a private beach.", sourceId: "hotel-tib-emily-official",
+    resortFacts: { location: "Near the southern side of downtown", beach: "Near the shore; no private beach assumed", spa: "No resort-spa package assumed; confirm any required facilities", agePolicy: "Check room and guest policies for your party", children: "Confirm room capacity; no large resort activity program assumed", meals: "B&B format; lunch/dinner by advance arrangement at extra cost" },
+  },
+  {
+    id: "tib-tiberia", cityId: "tiberias", areaId: "tiberias", name: "Tiberia Hotel", style: "Small central hotel in a restored building",
+    summary: "A smaller central-hotel option from the original guide, in a restored historic building. Compare the final room total with larger hotels and hostels; being in this group is not a promise of the lowest price.",
+    bestFor: "Independent visitors who need a simple town base and can confirm the room's essential facilities.",
+    watch: "The primary source is the operator's public profile. Confirm reception and late arrival, bathroom, accessibility, parking and all required facilities directly; a pool or spa is not assumed.", sourceId: "hotel-tib-tiberia-official",
+    resortFacts: { location: "Central Tiberias", beach: "Town base; arrange swimming separately", spa: "No spa or pool assumed; confirm required facilities", agePolicy: "Confirm with the property for the selected room", children: "Check occupancy and sleeping arrangements directly", meals: "Confirm whether any meals are included" },
+  },
+  {
+    id: "tib-hostel", cityId: "tiberias", areaId: "tiberias", name: "Tiberias Hostel", style: "Independent hostel · private and shared-room options",
+    summary: "A central hostel between the bus station and waterfront, with a shared kitchen, luggage storage and rooftop space. Compare a private room with a dorm bed as different products, checking the bathroom arrangement for each.",
+    bestFor: "Independent travelers prioritizing a central base, shared facilities and flexible self-catering.",
+    watch: "Check private versus shared room and bathroom, reception hours and late-arrival arrangements. Do not assume every room is en suite or that reception operates around the clock.", sourceId: "hotel-tib-hostel-official",
+    resortFacts: { location: "Central town, between the bus station and lake", beach: "Walk to the waterfront; no private beach", spa: "Hostel facilities, not a spa resort", agePolicy: "Check dorm and private-room policies for your party", children: "Private-room capacity and suitability need confirmation", meals: "Shared kitchen; do not assume a meal package" },
   },
 ];
 
@@ -712,6 +823,7 @@ export const hotelRecommendations: HotelRecommendation[] = [
     watch: "Ask about your room's outlook, traffic or venue noise, breakfast inclusion and parking availability for your dates.", sourceId: "hotel-tlv-65-rothschild-official",
   },
   ...deadSeaHotelRecommendations,
+  ...tiberiasHotelRecommendations,
 ];
 
 export const hotelsForArea = (areaId: string, cityId?: HotelRecommendation["cityId"]) => hotelRecommendations.filter((hotel) => hotel.areaId === areaId && (!cityId || hotel.cityId === cityId));
@@ -893,7 +1005,7 @@ export const providerLinks: ProviderLink[] = [
     const trackingUrl = affiliateConfig[id]?.trackingUrl;
     const officialUrl = sources.find((source) => source.id === hotel.sourceId)!.url;
     return {
-      id, pageIds: [hotel.cityId === "deadsea" ? "stay-deadsea" : `stay-area-${hotel.areaId}`], providerName: trackingUrl ? "Expedia" : hotel.name,
+      id, pageIds: [hotel.cityId === "deadsea" || hotel.cityId === "tiberias" ? `stay-${hotel.cityId}` : `stay-area-${hotel.areaId}`], providerName: trackingUrl ? "Expedia" : hotel.name,
       relationship: trackingUrl ? "booking_platform" : "official", ...(trackingUrl ? { partnerId: "expedia" } : {}), mode: "provider_redirect",
       title: hotel.name, summary: hotel.summary, ctaLabel: trackingUrl ? "Check rooms on Expedia" : "Visit the hotel's website",
       url: trackingUrl || officialUrl, isAffiliate: Boolean(trackingUrl), sourceId: hotel.sourceId,
@@ -901,16 +1013,21 @@ export const providerLinks: ProviderLink[] = [
     };
   }),
   ...([
-    ["hotels-deadsea-expedia", "stay-deadsea-browse", "Dead Sea hotels in Israel"],
-    ["category-deadsea-luxury-expedia", "stay-deadsea-luxury-browse", "luxury hotels on Israel's Dead Sea shore"],
-    ["category-deadsea-spa-expedia", "stay-deadsea-spa-browse", "Dead Sea spa hotels in Israel"],
-    ["category-deadsea-family-expedia", "stay-deadsea-family-browse", "Dead Sea family hotels in Israel"],
-    ["category-deadsea-value-expedia", "stay-deadsea-value-browse", "value stays in the Dead Sea region"],
-    ["category-deadsea-ein-gedi-expedia", "stay-deadsea-ein-gedi-browse", "places to stay near Ein Gedi"],
-  ] as const).map(([id, pageId, name]): ProviderLink => ({
+    ["hotels-deadsea-expedia", "stay-deadsea-browse", "Dead Sea hotels in Israel", "owner-hotels-deadsea"],
+    ["category-deadsea-luxury-expedia", "stay-deadsea-luxury-browse", "luxury hotels on Israel's Dead Sea shore", "owner-hotels-deadsea"],
+    ["category-deadsea-spa-expedia", "stay-deadsea-spa-browse", "Dead Sea spa hotels in Israel", "owner-hotels-deadsea"],
+    ["category-deadsea-family-expedia", "stay-deadsea-family-browse", "Dead Sea family hotels in Israel", "owner-hotels-deadsea"],
+    ["category-deadsea-value-expedia", "stay-deadsea-value-browse", "value stays in the Dead Sea region", "owner-hotels-deadsea"],
+    ["category-deadsea-ein-gedi-expedia", "stay-deadsea-ein-gedi-browse", "places to stay near Ein Gedi", "owner-hotels-deadsea"],
+    ["hotels-tiberias-expedia", "stay-tiberias-browse", "Tiberias hotels", "owner-hotels-tiberias"],
+    ["category-tiberias-luxury-expedia", "stay-tiberias-luxury-browse", "Tiberias luxury hotels", "owner-hotels-tiberias"],
+    ["category-tiberias-family-expedia", "stay-tiberias-family-browse", "Tiberias family hotels", "owner-hotels-tiberias"],
+    ["category-tiberias-central-expedia", "stay-tiberias-central-browse", "central Tiberias hotels", "owner-hotels-tiberias"],
+    ["category-tiberias-budget-expedia", "stay-tiberias-budget-browse", "budget stays in Tiberias", "owner-hotels-tiberias"],
+  ] as const).map(([id, pageId, name, sourceId]): ProviderLink => ({
     id, pageIds: [pageId], providerName: "Expedia", relationship: "booking_platform", partnerId: "expedia", mode: "provider_redirect",
     title: `Browse more ${name}`, summary: "Explore other properties for your dates. Check the map, country and exact accommodation type before choosing a room.",
-    ctaLabel: "Browse stays on Expedia", url: affiliateConfig[id]?.trackingUrl || "https://www.expedia.com/", isAffiliate: Boolean(affiliateConfig[id]?.trackingUrl), sourceId: "owner-hotels-deadsea",
+    ctaLabel: "Browse stays on Expedia", url: affiliateConfig[id]?.trackingUrl || "https://www.expedia.com/", isAffiliate: Boolean(affiliateConfig[id]?.trackingUrl), sourceId,
     reentryNote: "Enter dates, adults and the ages of all children on Expedia. No trip details are passed from this page.",
     confirm: ["Israeli location and exact property", "Room occupancy and guest ages", "Meal and spa inclusions", "Total price and cancellation terms"],
   })),
@@ -1036,7 +1153,7 @@ export const providerLinks: ProviderLink[] = [
     ["telaviv", "Tel Aviv", "https://www.booking.com/city/il/tel-aviv.html"],
     ["tiberias", "Tiberias", "https://www.booking.com/city/il/tiberias.html"],
   ] as const).map(([id, city, url]): ProviderLink => ({
-    id: `hotels-${id}-booking`, pageIds: [`stay-${id}`], providerName: "Booking.com", relationship: "booking_platform", partnerId: "booking", mode: "provider_redirect",
+    id: `hotels-${id}-booking`, pageIds: id === "tiberias" ? ["stay-tiberias", "stay-tiberias-browse"] : [`stay-${id}`], providerName: "Booking.com", relationship: "booking_platform", partnerId: "booking", mode: "provider_redirect",
     title: `Browse places to stay in ${city}`, summary: `Booking.com's ${city} city page. Enter your dates and guests there to see current properties and prices.`,
     ctaLabel: "Check prices on Booking.com", url, isAffiliate: false,
     reentryNote: "Dates and preferences chosen here are not passed on. Enter them on Booking.com.",

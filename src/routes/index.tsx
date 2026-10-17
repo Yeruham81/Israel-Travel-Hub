@@ -56,7 +56,7 @@ const services: Service[] = [
     cards: [
       { label: "Jerusalem", text: "Old City, German Colony or city centre?", to: "/travel-blog/where-to-stay-in-jerusalem/", img: IMG.jerusalem },
       { label: "Tel Aviv", text: "Beachfront, Jaffa or the White City", to: "/travel-blog/where-to-stay-in-tel-aviv/", img: IMG.telAviv },
-      { label: "Tiberias & Galilee", text: "A lakeside base for the north", to: "/travel-blog/best-hotels-in-tiberias/", img: IMG.tiberias },
+      { label: "Tiberias & Galilee", text: "Family, luxury & lakeside hotels", to: "/travel-blog/best-hotels-in-tiberias/", img: IMG.tiberias },
       { label: "Dead Sea", text: "Spa breaks, family resorts & luxury stays", to: "/travel-blog/best-dead-sea-hotels/", img: IMG.deadSea },
     ],
     hub: { label: "Explore accommodation", to: "/hotels/" },

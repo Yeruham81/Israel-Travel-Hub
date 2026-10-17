@@ -50,6 +50,8 @@ const dests: { name: string; text: string; links: L[] }[] = [
     text: "Lakeside town and Christian sites, with the Golan and northern Israel nearby.",
     links: [
       { label: "Hotels in Tiberias", to: "/travel-blog/best-hotels-in-tiberias/" },
+      { label: "Tiberias family hotels", to: "/tiberias/family-hotels/" },
+      { label: "Tiberias luxury & couples' hotels", to: "/tiberias/luxury-hotels/" },
       { label: "Tours & private day trips", to: "/tours/" },
       { label: "Car rental", to: "/car-rental/" },
       { label: "Private transport", to: "/transfers/" },

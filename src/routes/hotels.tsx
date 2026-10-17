@@ -17,7 +17,7 @@ export const Route = createFileRoute("/hotels")({
 const blurbs = {
   jerusalem: "Compare six areas with photos and maps, then explore detailed neighborhood guides and hotel picks.",
   telaviv: "Compare eight areas with photos and maps, from the beachfront to Jaffa, then explore local guides and hotel picks.",
-  tiberias: "Lakefront town, hillside views or countryside stays around the Sea of Galilee.",
+  tiberias: "Compare ten hotels and hostels, then explore focused family and luxury guides with beach, facility and meal-plan checks.",
 } as const;
 
 function Hotels() {
@@ -27,13 +27,13 @@ function Hotels() {
         crumbs={[{ name: "Home", to: "/" }, { name: "Accommodation", to: "/hotels/" }]}
         eyebrow="Accommodation"
         title="Where to stay in Israel"
-        intro="Start with your destination, then choose a neighborhood or hotel style that fits your trip. Explore Jerusalem and Tel Aviv area guides, compare Dead Sea spa and family stays, or plan a base around Tiberias and the Galilee."
+        intro="Start with your destination, then choose a neighborhood or hotel style that fits your trip. Explore Jerusalem and Tel Aviv area guides, Dead Sea spa and family stays, or Tiberias family and luxury hotel comparisons."
       />
       <section aria-labelledby="cities-h" className="mt-10">
         <h2 id="cities-h" className="text-3xl">Choose a destination</h2>
         <div className="mt-5 grid gap-4 md:grid-cols-2">
           {Object.values(cityStayGuides).map((g) => (
-            <HubCard key={g.id} to={g.path as LinkProps["to"]} eyebrow={g.city} title={`Hotels in ${g.city}`} text={blurbs[g.id]} cta={`Explore ${g.city} areas`} />
+            <HubCard key={g.id} to={g.path as LinkProps["to"]} eyebrow={g.city} title={`Hotels in ${g.city}`} text={blurbs[g.id]} cta={`Explore ${g.city} ${g.id === "tiberias" ? "hotels" : "areas"}`} />
           ))}
           <HubCard to={deadSeaStayGuide.path as LinkProps["to"]} eyebrow="Dead Sea, Israel" title="Dead Sea hotels" text="Compare spa, family and luxury stays, with focused guides for wellness breaks and traveling with children." cta="Explore Dead Sea stays" />
         </div>

@@ -1,10 +1,11 @@
 import { ArrowRight, ExternalLink } from "lucide-react";
 import { Link, type LinkProps } from "@tanstack/react-router";
 import type { HotelCategoryGuide, StayGuidePhoto } from "@/data/content";
-import { deadSeaHotelRecommendations, providerLinks, type ResortHotelFacts, type ProviderLink } from "@/data/registry";
+import { deadSeaHotelRecommendations, tiberiasHotelRecommendations, providerLinks, type ResortHotelFacts, type ProviderLink } from "@/data/registry";
 import { recordOutboundClick, relFor } from "@/lib/outbound";
 
-export const resortHotel = (id: string) => deadSeaHotelRecommendations.find((hotel) => hotel.id === id)!;
+const resortHotels = [...deadSeaHotelRecommendations, ...tiberiasHotelRecommendations];
+export const resortHotel = (id: string) => resortHotels.find((hotel) => hotel.id === id)!;
 export const hotelBooking = (id: string) => providerLinks.find((link) => link.id === `hotel-${id}-expedia`);
 
 export function StayComparison({ hotelIds, columns, caption }: { hotelIds: string[]; columns: { key: keyof ResortHotelFacts; label: string }[]; caption: string }) {
@@ -42,5 +43,5 @@ export function StayBrowseLink({ link, pageId }: { link: ProviderLink | undefine
 
 export function StayPhotoCredits({ photos }: { photos: StayGuidePhoto[] }) {
   const unique = [...new Map(photos.map((photo) => [photo.sourceUrl, photo])).values()];
-  return <details className="mt-10 rounded-xl border bg-card p-4 text-xs text-muted-foreground"><summary className="cursor-pointer font-semibold">Guide image sources</summary><p className="mt-3">Destination photographs reused from the publisher's original Dead Sea guide and optimized for this site.</p><ul className="mt-2 space-y-2">{unique.map((photo) => <li key={photo.sourceUrl}><a href={photo.sourceUrl} target="_blank" rel="noopener noreferrer" className="underline underline-offset-2">{photo.label} ↗<span className="sr-only"> (opens in a new tab)</span></a></li>)}</ul></details>;
+  return <details className="mt-10 rounded-xl border bg-card p-4 text-xs text-muted-foreground"><summary className="cursor-pointer font-semibold">Guide image sources</summary><p className="mt-3">Photographs reused from the publisher's original destination guide and optimized for this site. Location scenes illustrate the area; named property photographs are identified below.</p><ul className="mt-2 space-y-2">{unique.map((photo) => <li key={photo.sourceUrl}><a href={photo.sourceUrl} target="_blank" rel="noopener noreferrer" className="underline underline-offset-2">{photo.label} ↗<span className="sr-only"> (opens in a new tab)</span></a></li>)}</ul></details>;
 }

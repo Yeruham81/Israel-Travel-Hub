@@ -36,7 +36,7 @@ function About() {
             <li><strong>Quote requests:</strong> you contact the provider on their own site. Nothing is sent from our pages.</li>
             <li><strong>Official sites:</strong> national parks and airport information link to the official source.</li>
             <li>We don't currently show live prices or availability. We will only do so when a provider returns a quote for your exact date and party, with its time and expiry.</li>
-            <li>The Jerusalem, Tel Aviv and Dead Sea accommodation guides include editorial hotel shortlists based on location, travel style and the hotels' own information. The Dead Sea comparisons also distinguish spa entry, family facilities, age policies and meal plans. These are not reviews of personal stays at every property, and they do not establish current room availability.</li>
+            <li>The Jerusalem, Tel Aviv, Dead Sea and Tiberias accommodation guides include editorial hotel shortlists based on location, travel style and the hotels' own information. The destination comparisons also distinguish beach access, spa entry, family facilities, age policies and meal plans. Date-specific operator notices are identified separately. These are not reviews of personal stays at every property, and they do not establish current room availability.</li>
           </ul>
           <h2 className="mt-10 text-2xl">Affiliate links</h2>
           <p>Some links on this site may earn us a commission at no extra cost to you. Only links from partners with a configured affiliate agreement are labeled “Sponsored link”. Links without that label are regular links. Bookings are always made on the provider's own website; we don't take payments or make reservations.</p>

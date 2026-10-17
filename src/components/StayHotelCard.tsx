@@ -1,8 +1,10 @@
 import { Building2 } from "lucide-react";
 import { getSource, type HotelRecommendation, type ProviderLink } from "@/data/registry";
 import { recordOutboundClick, relFor } from "@/lib/outbound";
+import { activeHotelNotice } from "@/lib/hotel-notices";
 
 export function StayHotelCard({ hotel, booking, pageId, editorial, compact = false }: { hotel: HotelRecommendation; booking: ProviderLink | undefined; pageId: string; editorial?: Pick<HotelRecommendation, "summary" | "bestFor" | "watch">; compact?: boolean }) {
+  const notice = activeHotelNotice(hotel);
   return (
     <li id={`hotel-${hotel.id}`} className="scroll-mt-32 overflow-hidden rounded-2xl border bg-card" data-testid="hotel-recommendation">
       <div className="p-5 sm:p-7">
@@ -11,6 +13,7 @@ export function StayHotelCard({ hotel, booking, pageId, editorial, compact = fal
           <div><p className="eyebrow">{hotel.style}</p><h3 className="mt-1 text-2xl sm:text-3xl">{hotel.name}</h3></div>
         </div>
         <p className="mt-4 leading-relaxed text-muted-foreground">{editorial?.summary || hotel.summary}</p>
+        {notice && <p className="mt-4 rounded-xl border border-primary/25 bg-secondary p-4 text-sm leading-relaxed" data-testid="hotel-operating-notice">{notice.message}</p>}
         {!compact && <dl className="mt-5 grid gap-4 sm:grid-cols-2">
           <div><dt className="text-sm font-semibold">Who it suits</dt><dd className="mt-1 text-sm leading-relaxed text-muted-foreground">{editorial?.bestFor || hotel.bestFor}</dd></div>
           <div><dt className="text-sm font-semibold">Check before booking</dt><dd className="mt-1 text-sm leading-relaxed text-muted-foreground">{editorial?.watch || hotel.watch}</dd></div>

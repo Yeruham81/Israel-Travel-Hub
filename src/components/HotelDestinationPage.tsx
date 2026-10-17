@@ -15,23 +15,23 @@ export function HotelDestinationPage({ guide: g }: { guide: HotelStayDestination
   const pageId = `stay-${g.id}`;
   return (
     <main className="pb-8">
-      <GuideHeader crumbs={[{ name: "Home", to: "/" }, { name: "Accommodation", to: "/hotels/" }, { name: g.name, to: g.path as LinkProps["to"] }]} eyebrow="Where to stay · Dead Sea, Israel" title={g.title} intro={g.intro} image={g.photo} checkedAt={g.reviewedAt} />
+      <GuideHeader crumbs={[{ name: "Home", to: "/" }, { name: "Accommodation", to: "/hotels/" }, { name: g.name, to: g.path as LinkProps["to"] }]} eyebrow={`Where to stay · ${g.name}, Israel`} title={g.title} intro={g.intro} image={g.photo} checkedAt={g.reviewedAt} />
       <OnThisPage sections={sections} />
       <article className="mx-auto max-w-5xl px-4">
         <Section id="overview" title="Choose the holiday, then the hotel" className="scroll-mt-32">{g.overview.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}</Section>
         <section id="categories" aria-labelledby="categories-h" className="mt-14 scroll-mt-32">
           <p className="eyebrow">Two ways to go deeper</p><h2 id="categories-h" className="mt-2 text-3xl md:text-4xl">Find a stay that fits your party</h2>
-          <p className="mt-3 max-w-3xl leading-relaxed text-muted-foreground">Open a focused guide for a different set of comparisons: spa facilities and age policies, or children's activities, rooms and meal plans.</p>
+          <p className="mt-3 max-w-3xl leading-relaxed text-muted-foreground">{g.categoryIntro}</p>
           <div className="mt-6 grid gap-5 md:grid-cols-2">{categories.map((guide) => <StayCategoryCard key={guide.id} guide={guide} />)}</div>
-          <nav aria-label="Other Dead Sea hotel categories" className="mt-5 flex flex-wrap gap-2">{g.groups.filter((group) => !group.guidePath).map((group) => <a key={group.id} href={`#${group.id}`} className="chip">{group.title}</a>)}</nav>
+          <nav aria-label={`Other ${g.name} hotel categories`} className="mt-5 flex flex-wrap gap-2">{g.groups.filter((group) => !group.guidePath).map((group) => <a key={group.id} href={`#${group.id}`} className="chip">{group.title}</a>)}</nav>
         </section>
-        <Section id="compare" title="Compare all 11 places to stay" className="scroll-mt-32">
-          <p>Compare locations and access before room rates. The table includes nine resort hotels and two Ein Gedi alternatives; a sea view, a mineral-water pool and an operating beach are different features.</p>
-          <StayComparison hotelIds={hotelIds} columns={[{ key: "location", label: "Location" }, { key: "beach", label: "Beach arrangement" }, { key: "agePolicy", label: "Guest & spa ages" }]} caption="Dead Sea hotels in Israel: location, beach access and age policies" />
+        <Section id="compare" title={`Compare all ${hotelIds.length} places to stay`} className="scroll-mt-32">
+          <p>{g.comparisonIntro}</p>
+          <StayComparison hotelIds={hotelIds} columns={g.comparison} caption={`${g.name} hotels in Israel: practical comparison`} />
           <p className="text-sm! text-muted-foreground">Select a hotel name for its summary and booking link below. This is an editorial comparison, with no live room rates or availability.</p>
         </Section>
         <Section id="location" title="Where to stay: map & arrival" className="scroll-mt-32">
-          <div className="mt-5"><AreaMap area={{ name: "Israel's Dead Sea hotel region", map: g.map }} /></div>
+          <div className="mt-5"><AreaMap area={{ name: `${g.name} hotel region`, map: g.map }} /></div>
           <div className="mt-5 grid gap-4 md:grid-cols-3">{g.locations.map((location) => <div key={location.name} className="rounded-2xl border bg-card p-5"><MapPin className="h-5 w-5 text-primary" aria-hidden /><h3 className="mt-3 text-xl">{location.name}</h3><p className="mt-2 text-sm! leading-relaxed text-muted-foreground">{location.text}</p></div>)}</div>
           {g.arrival.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
         </Section>
@@ -41,8 +41,8 @@ export function HotelDestinationPage({ guide: g }: { guide: HotelStayDestination
           <ul className={`mt-6 grid gap-4 ${group.hotelIds.length === 3 ? "lg:grid-cols-3" : "md:grid-cols-2"}`}>{group.hotelIds.map((id) => <StayHotelCard key={id} hotel={resortHotel(id)} booking={hotelBooking(id)} pageId={pageId} compact />)}</ul>
           {group.browsePageId && <StayBrowseLink link={linksForPage(group.browsePageId)[0]} pageId={pageId} />}
         </section>)}
-        <Section id="checklist" title="Before you book your Dead Sea stay" className="scroll-mt-32"><div className="mt-5 grid gap-4 sm:grid-cols-2"><Checklist title="Location, rooms & guest ages" items={g.checklist.slice(0, 3)} /><Checklist title="Facilities & the final total" items={g.checklist.slice(3)} /></div></Section>
-        <ProviderSection id="more-stays" title="Browse more Dead Sea stays" intro="Check the exact Israeli location, room offer and cancellation terms on Expedia. Enter your dates and all guests there; no booking is made on this page." links={linksForPage(`stay-${g.id}-browse`)} pageId={pageId} />
+        <Section id="checklist" title={`Before you book your ${g.name} stay`} className="scroll-mt-32"><div className="mt-5 grid gap-4 sm:grid-cols-2"><Checklist title="Location, rooms & guest ages" items={g.checklist.slice(0, 3)} /><Checklist title="Facilities & the final total" items={g.checklist.slice(3)} /></div></Section>
+        <ProviderSection id="more-stays" title={`Browse more ${g.name} stays`} intro="Check the exact location, room offer and cancellation terms on the booking site. Enter your dates and all guests there; no booking is made on this page." links={linksForPage(`stay-${g.id}-browse`)} pageId={pageId} />
         <FaqList faqs={g.faqs} />
         <SourceList ids={[...new Set([...g.sourceIds, ...hotelIds.map((id) => resortHotel(id).sourceId)])]} />
         <RelatedLinks items={g.related} />

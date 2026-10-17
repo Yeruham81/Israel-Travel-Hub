@@ -23,6 +23,10 @@ import deadSeaPoolPhoto from "@/assets/dead-sea/pool.webp";
 import deadSeaLandscapePhoto from "@/assets/dead-sea/landscape.webp";
 import deadSeaSunbedsPhoto from "@/assets/dead-sea/sunbeds.webp";
 import einGediStayPhoto from "@/assets/dead-sea/ein-gedi.webp";
+import tiberiasWaterfrontPhoto from "@/assets/tiberias/waterfront.webp";
+import tiberiasHeritagePhoto from "@/assets/tiberias/heritage.webp";
+import tiberiasCentralPhoto from "@/assets/tiberias/central.webp";
+import galileeSunrisePhoto from "@/assets/tiberias/sunrise.webp";
 
 export type StayPreference = "first-visit" | "car-free" | "quiet" | "nightlife" | "family" | "views" | "luxury" | "heritage" | "food" | "long-stay" | "beach" | "history";
 
@@ -656,7 +660,7 @@ export const cityStayGuides: Record<CityStayGuide["id"], CityStayGuide> = {
     faqs: [
       { q: "Tiberias or a countryside stay?", a: "Tiberias suits travellers without a car and those who want restaurants nearby. Countryside guesthouses around the lake are quieter and scenic but usually need a car or driver." },
       { q: "Can I visit the Galilee without driving?", a: "Yes, with a tour or a private driver. Buses exist but are slower between scattered sites. See tours and private transport options." },
-      { q: "Do you list specific hotels?", a: "No. We don't publish property lists or ratings we haven't verified. Use the area guidance, then compare current properties for your dates on the booking site." },
+      { q: "Do you list specific hotels?", a: "The Tiberias destination guide now compares ten hotels and hostels, with focused family and luxury guides. Property information is checked against primary operator sources; room rates and availability are confirmed on the booking site." },
       { q: "When is it hottest?", a: "Midsummer at lake level can be very hot. Plan outdoor sightseeing for mornings and evenings and check your accommodation's cooling and pool." },
     ],
     sourceIds: ["owner-hotels-tiberias"],
@@ -702,6 +706,10 @@ export interface HotelStayDestination {
   locations: { name: string; text: string }[];
   arrival: string[];
   groups: HotelStayGroup[];
+  categoryIntro: string;
+  comparisonIntro: string;
+  comparison: { key: keyof ResortHotelFacts; label: string }[];
+  locationLinkText: string;
   checklist: string[];
   faqs: { q: string; a: string }[];
   sourceIds: string[];
@@ -717,6 +725,9 @@ export interface HotelCategoryGuide {
   shortTitle: string;
   summary: string;
   photo: StayGuidePhoto;
+  overviewTitle: string;
+  detailNavLabel: string;
+  checklistTitle: string;
   overview: string[];
   decisions: { title: string; text: string }[];
   comparison: { key: keyof ResortHotelFacts; label: string }[];
@@ -742,6 +753,10 @@ export const deadSeaStayGuide: HotelStayDestination = {
   metaDescription: "Compare 11 Dead Sea stays in Israel, from luxury resorts to family hotels and Ein Gedi alternatives. Explore dedicated spa and family guides before booking.",
   intro: "Choose your Dead Sea stay by the holiday you want: a spa break, a family resort, an intimate luxury hotel or a nature-focused base near Ein Gedi. Compare the Israeli shore's options, then check rooms for your dates.",
   reviewedAt: "2026-10-17", photo: deadSeaPhotos.beach,
+  categoryIntro: "Open a focused guide for a different set of comparisons: spa facilities and age policies, or children's activities, rooms and meal plans.",
+  comparisonIntro: "Compare locations and access before room rates. The table includes nine resort hotels and two Ein Gedi alternatives; a sea view, a mineral-water pool and an operating beach are different features.",
+  comparison: [{ key: "location", label: "Location" }, { key: "beach", label: "Beach arrangement" }, { key: "agePolicy", label: "Guest & spa ages" }],
+  locationLinkText: "See the map and compare Ein Bokek, the southern hotel district and Ein Gedi.",
   overview: [
     "A Dead Sea hotel is often a large part of the holiday itself. Beach access, freshwater pools, spa entry, children's facilities and meals can matter more than choosing a particular street. This guide covers the Israeli side of the Dead Sea, with the main resort hotels around Ein Bokek and the southern district near Neve Zohar.",
     "Start with the tradeoff that matters to your party. Nevo offers a broad resort-and-spa format; Oasis Spa Club has an age-restricted spa focus. Leonardo Club is a family option marketed as all-inclusive, while VERT combines a central Ein Bokek setting with a more conventional resort stay. Kayma, Herods and Milos offer different styles of upscale accommodation.",
@@ -788,9 +803,152 @@ export const deadSeaStayGuide: HotelStayDestination = {
   ],
 };
 
+export const tiberiasPhotos = {
+  waterfront: { src: tiberiasWaterfrontPhoto, alt: "Tiberias waterfront, marina and hotels beside the Sea of Galilee", sourceUrl: "https://www.israel-taxi.com/wp-content/uploads/2026/01/best_hotels_in_tiberias-1.webp", label: "Tiberias waterfront and marina" },
+  heritage: { src: tiberiasHeritagePhoto, alt: "Historic basalt-stone buildings and palm trees at The Scots Hotel in Tiberias", sourceUrl: "https://www.israel-taxi.com/wp-content/uploads/2026/01/The_Scots_Hotel_Tiberias.webp", label: "The Scots Hotel — historic buildings" },
+  central: { src: tiberiasCentralPhoto, alt: "Caesar Premier Tiberias and the central promenade seen from the lake", sourceUrl: "https://www.israel-taxi.com/wp-content/uploads/2026/01/caesar_premier_hotel_tiberias.jpg", label: "Caesar Premier and the Tiberias promenade" },
+  sunrise: { src: galileeSunrisePhoto, alt: "Sunrise over the Sea of Galilee with a boat on the water", sourceUrl: "https://www.israel-taxi.com/wp-content/uploads/2026/01/Israel_Sunrise_over_Sea_of_Galilee.jpg", label: "Sea of Galilee sunrise — destination scene" },
+} satisfies Record<string, StayGuidePhoto>;
+
+export const tiberiasStayGuide: HotelStayDestination = {
+  id: "tiberias", name: "Tiberias", path: "/travel-blog/best-hotels-in-tiberias/",
+  title: "Best hotels in Tiberias: family, luxury & lakeside stays",
+  metaDescription: "Compare 10 Tiberias hotels and hostels by location, beach access and travel style. Explore focused family and luxury guides, then check rooms for your dates.",
+  intro: "Find your base on the Sea of Galilee: a family hotel with water slides, a luxury lakeside retreat, a central hotel or a simpler independent stay. Start with the experience and location, then compare the room offer.",
+  reviewedAt: "2026-10-17", photo: tiberiasPhotos.waterfront,
+  categoryIntro: "Explore two focused comparisons: water parks, children's facilities and meal plans for families; or beach access, heritage settings and guest ages for a luxury or couples' break. Central and budget options remain in the complete guide below.",
+  comparisonIntro: "All ten places below are in Tiberias. Compare a private swimming beach, a walk to the promenade and a room with a lake view as different features. The wider Sea of Galilee also has rural stays, but those are a different location choice from these town hotels.",
+  comparison: [{ key: "location", label: "Location" }, { key: "beach", label: "Lake & beach access" }, { key: "agePolicy", label: "Guest & facility ages" }],
+  locationLinkText: "See the map and compare the central waterfront, upper streets and lakeside hotel locations.",
+  overview: [
+    "Choose Tiberias if you want a town base with restaurants, the waterfront promenade and places to stay at several price levels. For Galilee sightseeing, think beyond the hotel view: Capernaum, Tabgha and other sites are spread around the lake. A central address helps with time in town, while a rental car, organized excursion or booked driver makes a different kind of trip possible.",
+    "For families, Gai Beach combines a water park and a declared swimming beach; Leonardo Club combines activities with a central location, but its operator currently posts a full-board notice despite the all-inclusive branding. Caesar Premier is another family comparison if access to the promenade matters more than water slides. The focused family guide explains these differences before presenting room links.",
+    "For an upscale break, compare U Boutique Kinneret's contemporary lakefront format, Galei Kinneret's 12+ guest policy and The Scots Hotel's historic buildings and usual 16+ policy. Sofia and Emily's offer other city-hotel formats; Tiberia Hotel and Tiberias Hostel provide smaller alternatives. These are editorial matches for different trips, rather than a claim that one hotel wins for every traveler or always costs less.",
+  ],
+  map: { lat: 32.7889, lon: 35.5418, bounds: [35.525, 32.762, 35.558, 32.812], reference: "Central Tiberias waterfront reference point; the map also shows the nearby northern and southern shores" },
+  locations: [
+    { name: "Promenade & lower town", text: "Useful for waterfront walks, restaurants and the marina. Caesar Premier and The Scots Hotel are central waterfront comparisons; Leonardo Club and the hostel are town bases. Being near the promenade does not establish a private swimming beach." },
+    { name: "Streets above the waterfront", text: "A higher address can provide a lake outlook but a steeper return from town. Sofia is a comparison here. Check the actual entrance, steps, accessible route and the walk with luggage rather than relying on a straight-line distance." },
+    { name: "Lakeside hotel edges", text: "U Boutique is toward the northern edge of the central waterfront; Galei Kinneret and Gai Beach are to the south. Compare the hotel's own beach and facilities, then consider journeys to dinner or sightseeing outside the property." },
+  ],
+  arrival: [
+    "Give your driver the exact property and entrance. The waterfront, upper streets and southern hotels have different arrival routes. If you arrive by bus, check the final walk with luggage, reception hours and any hills. Arrange late check-in with smaller hotels and the hostel rather than assuming a staffed desk all night.",
+    "If you will drive around the Galilee, compare parking availability, charges and access at the hotel. Without a car, plan your northern sightseeing through the tours or transport pages and check date-specific services, especially around Shabbat and holidays. Book suitable child seats when arranging family transport.",
+  ],
+  groups: [
+    { id: "luxury", title: "Luxury & couples' stays", intro: "Compare a contemporary boutique hotel, a luxury beach hotel and a heritage property. Their guest ages and relationship to the lake differ, so choose the setting before paying for a particular room category.", hotelIds: ["tib-u-boutique", "tib-galei-kinneret", "tib-scots"], photo: tiberiasPhotos.heritage, guidePath: "/tiberias/luxury-hotels/", guideLabel: "Compare Tiberias luxury & couples' hotels" },
+    { id: "family", title: "Family hotels & water activities", intro: "Gai Beach suits a holiday built around the beach and water park. Leonardo Club is a central activity hotel with a meal-plan notice to check. The full family guide also includes Caesar Premier for a promenade-based stay.", hotelIds: ["tib-gai-beach", "tib-leonardo-club"], photo: tiberiasPhotos.sunrise, guidePath: "/tiberias/family-hotels/", guideLabel: "Compare Tiberias family hotels" },
+    { id: "central", title: "Central hotels & a base for exploring", intro: "Compare a full-service promenade hotel, a hotel above the waterfront and a smaller property near downtown. Choose for the daily walking route and the facilities you will actually use between Galilee outings.", hotelIds: ["tib-caesar", "tib-sofia", "tib-emily"], photo: tiberiasPhotos.central, browsePageId: "stay-tiberias-central-browse" },
+    { id: "budget", title: "Budget-minded & independent stays", intro: "Compare a smaller hotel with hostel-style accommodation, including private and shared rooms. Check the final price for the same dates and party, plus bathrooms, meals and arrival arrangements; neither format guarantees the lowest total.", hotelIds: ["tib-tiberia", "tib-hostel"], photo: tiberiasPhotos.waterfront, browsePageId: "stay-tiberias-budget-browse" },
+  ],
+  checklist: ["Check the exact Tiberias address and the walking route, including hills", "Distinguish a swimming beach from a promenade or lake-view room", "Enter all guests and children's ages; check hotel and facility restrictions separately", "Confirm seasonal pools, water parks and essential facilities directly", "Read the actual meal plan, parking charges, taxes and final room total", "Confirm arrival arrangements and the cancellation deadline for the selected rate"],
+  faqs: [
+    { q: "Should I stay in Tiberias or elsewhere around the Sea of Galilee?", a: "Tiberias suits visitors who want town services, restaurants and the promenade. Rural and kibbutz stays around the lake can suit a quieter base but require a different transport plan. This shortlist covers Tiberias properties, not every hotel around the lake." },
+    { q: "Which Tiberias hotels should families compare first?", a: "Start with Gai Beach for the water park and beach, Leonardo Club for central activities and its current meal-plan terms, and Caesar Premier for a promenade base. The family guide compares all three by children's facilities, meals and swimming arrangements." },
+    { q: "Is Leonardo Club Tiberias currently all-inclusive?", a: "The hotel retains all-inclusive branding, but the operator page checked on 17 October 2026 says it is operating on full board instead. Confirm the current basis and exactly which meals, drinks and snacks your offer includes before paying." },
+    { q: "Are the luxury hotels adults-only?", a: "They have different policies. U Boutique accepts families, Galei Kinneret states a minimum age of 12, and The Scots Hotel usually accepts guests from 16 with holiday and July–August exceptions. Confirm directly for all guests and dates; a spa can have additional restrictions." },
+    { q: "Does a lakefront hotel guarantee a swimming beach?", a: "No. A lake view, lakeside garden, marina or promenade is different from access to a declared operating swimming beach. Check the hotel's actual beach arrangement, season and route before booking." },
+    { q: "Can I stay in Tiberias without renting a car?", a: "A central hotel can work for time in town. For sights spread around the Galilee, plan an organized excursion, booked driver or current public-transport itinerary. Check the final walk to your hotel and services on your travel dates." },
+  ],
+  sourceIds: ["owner-hotels-tiberias"],
+  related: [
+    { label: "Tours & day trips", to: "/tours/", note: "Plan outings around the Galilee" },
+    { label: "Transfers & private transport", to: "/transfers/", note: "Arrange the exact hotel and return journey" },
+    { label: "Car rental in Israel", to: "/car-rental/" },
+    { label: "All accommodation", to: "/hotels/" },
+  ],
+};
+
+const tiberiasCategoryGuides: HotelCategoryGuide[] = [
+  {
+    id: "family", destinationId: "tiberias", path: "/tiberias/family-hotels/", shortTitle: "Family hotels",
+    title: "Best family hotels in Tiberias: pools, water parks & meals",
+    metaDescription: "Compare Gai Beach, Leonardo Club and Caesar Premier for a Tiberias family holiday. Check water parks, beach access, room layouts and the current meal plan.",
+    summary: "Choose between a beach-and-water-park holiday, a central activity hotel and a promenade base. Compare three Tiberias family hotels by children's facilities, meal plans and the practical details that change the whole family total.",
+    photo: tiberiasPhotos.sunrise,
+    overviewTitle: "Match the hotel to your children's ages and your days out", detailNavLabel: "Meals & rooms", checklistTitle: "Children, rooms & swimming",
+    overview: [
+      "Start with how your family will spend the day. Gai Beach is a comparison for beach time and the water park, Leonardo Club for children's activities near the town, and Caesar Premier for a central hotel beside the promenade. The most useful choice depends on whether hotel activities or Galilee outings will fill most of your time.",
+      "A family-hotel label does not confirm a cot, separate sleeping area or suitable slides for every child. Enter every child's age, inspect the actual room layout and check seasonal operation. If you need two rooms with an internal connection, ask for that connection to be confirmed rather than relying on a request field.",
+      "Meal-plan descriptions need particular attention here. Leonardo Club Tiberias is still marketed as all-inclusive, but the operator's current notice says full board instead. Treat the exact written offer as the basis for comparing meals and drinks. Caesar's 18+ thermal-pool rule is a facility restriction, not a ban on children staying at the hotel.",
+    ],
+    decisions: [
+      { title: "Water park or a town base?", text: "Gai Beach's water park and declared beach suit time at the hotel. Leonardo Club and Caesar are central town comparisons, with different pool and activity arrangements; neither should be assumed to include a private beach." },
+      { title: "Toddlers, school-age children or teens?", text: "Check pool depth, slide height and age rules, club groups and whether a parent must remain. A resort's headline activity list may not suit every child's age." },
+      { title: "What does the room actually fit?", text: "Compare beds, maximum occupancy, cots and the layout when extra beds are in place. A family room, suite and pair of connecting rooms can provide very different evenings and sleeping arrangements." },
+      { title: "Which meals will you use?", text: "Compare all-inclusive, full board, half board and breakfast on their actual inclusions. Count drinks, snacks, outside meals and any lunch missed while touring in the family total." },
+    ],
+    comparison: [{ key: "children", label: "Children's facilities" }, { key: "meals", label: "Meal-plan checks" }, { key: "beach", label: "Swimming & beach" }],
+    picks: [
+      { hotelId: "tib-gai-beach", summary: "Choose Gai Beach when the water park and beach are central to the holiday rather than an occasional extra. The operator advertises water-park entry for hotel guests, alongside slides, children's areas and a declared beach. The southern-shore setting also means considering journeys into town or around the Galilee.", bestFor: "Families wanting water activities and beach time as a substantial part of the stay.", watch: "Confirm opening dates, current hours, separate-swimming sessions and slide restrictions for each child. Check the exact guest-entry entitlement, room layout, meals and parking in your booking." },
+      { hotelId: "tib-leonardo-club", summary: "Leonardo Club is a different family format: a central hotel with children's and teens' clubs, pools and seasonal water slides. Compare it when activities and on-site meals matter alongside access to town. The operator currently says full board instead of all-inclusive, so use the written package rather than the hotel's branding to decide its value.", bestFor: "Families looking for an activity hotel near the promenade and a package built around meals.", watch: "Ask which drinks, snacks and services are included under full board. Reconfirm pool and slide operation, club supervision, the children's age groups and the room's maximum occupancy. There is no private hotel beach." },
+      { hotelId: "tib-caesar", summary: "Caesar Premier suits a family trip combining time at the hotel with waterfront walks and outings. Its promenade setting, outdoor pool and children's playroom give a different comparison from a water-park resort. The spa's thermal mineral pool is reserved for guests aged 18 and over, so it is not part of a younger child's activity plan.", bestFor: "Families prioritizing a central promenade location and hotel facilities between excursions.", watch: "Confirm outdoor-pool opening, family-room beds and current children's programming. The thermal mineral pool is 18+; ask separately about facilities appropriate for your children. Check meals, parking and the actual swimming plan." },
+    ],
+    detailTitle: "Full board, all-inclusive & a room that works for everyone",
+    details: [
+      { title: "Leonardo Club: read the current full-board notice", text: "The operator page checked on 17 October 2026 retains all-inclusive marketing but explicitly says the hotel is operating on full board instead. Full board normally describes meals, while drinks, snacks and other services depend on the offer. Get the current inclusions confirmed in writing and compare the same dates and cancellation terms." },
+      { title: "Seasonal water attractions need a date check", text: "A photograph of slides does not establish that they will run during your stay. Confirm Gai Beach's current water-park calendar and Leonardo Club's pool and slide operation, including maintenance and weather limitations. Ask which areas suit your children's ages and whether an adult needs to accompany them." },
+      { title: "Separate hotel admission from facility ages", text: "Caesar Premier accepts families while restricting its thermal mineral pool to guests aged 18 and over. Water slides, spas and activity clubs can each have their own rules. For a toddler or school-age child, compare the freshwater pools and children's facilities that the hotel confirms they can actually use." },
+      { title: "Compare the whole family total", text: "Enter all adults and the ages of all children on the booking site. Add meals and drinks outside the package, parking and transport for outings. Confirm a cot, extra bed or essential connecting doorway directly, then check whether the cancellation deadline allows you to change plans." },
+    ],
+    checklist: ["Enter every child's age and confirm beds, cots and maximum room occupancy", "Ask about slide rules, club ages, supervision and the current pool calendar", "Check the actual swimming-beach arrangement and route with a stroller", "Get the current meal basis and drinks or snack inclusions in writing", "Include parking, outside meals and Galilee transport in the family total", "Confirm child seats, arrival timing and the cancellation deadline"],
+    faqs: [
+      { q: "Which hotel in this shortlist has a water park?", a: "Gai Beach advertises a water park with guest entry, and Leonardo Club lists seasonal water slides. They are different facilities. Confirm the calendar, entry terms and each child's eligibility rather than assuming all attractions operate throughout the year." },
+      { q: "Can I book Leonardo Club Tiberias as all-inclusive?", a: "Check the exact current offer. The operator notice reviewed on 17 October 2026 says full board instead of all-inclusive. Ask the hotel to confirm meals, drinks, snacks and other inclusions before paying." },
+      { q: "Can children stay at Caesar Premier?", a: "Yes, it is a family-hotel comparison. Its 18+ thermal mineral-pool restriction is separate from hotel admission. Check the outdoor pool and children's facilities for your dates and the ages of your children." },
+      { q: "Are all three hotels on a private swimming beach?", a: "No. Gai Beach advertises a declared beach by its water park. Leonardo Club is a town hotel, and Caesar's promenade position does not establish a private beach. Confirm the actual swimming arrangement before deciding." },
+      { q: "Should I choose a family room or connecting rooms?", a: "Compare the actual floor plan, beds and maximum occupancy. A family room may keep everyone in one space; connecting rooms require an internal doorway between two rooms. If that connection is essential, get it confirmed in writing." },
+    ],
+    sourceIds: [],
+  },
+  {
+    id: "luxury", destinationId: "tiberias", path: "/tiberias/luxury-hotels/", shortTitle: "Luxury & couples' hotels",
+    title: "Best luxury hotels in Tiberias: lakeside & couples' stays",
+    metaDescription: "Compare U Boutique Kinneret, Galei Kinneret and The Scots Hotel for a luxury Tiberias stay. Check beach access, heritage settings, spa inclusions and guest ages.",
+    summary: "Compare three different luxury stays on the Sea of Galilee: contemporary boutique comfort, a beach-and-spa hotel and a historic waterfront setting. Choose the atmosphere, lake access and guest policy that fit your trip.",
+    photo: tiberiasPhotos.heritage,
+    overviewTitle: "Choose the setting before the room category", detailNavLabel: "Beach, spa & ages", checklistTitle: "Setting, guest ages & spa",
+    overview: [
+      "Luxury in Tiberias can mean different things. U Boutique Kinneret offers a contemporary lakefront hotel with a smaller boutique format; Galei Kinneret combines a private beach and spa with a minimum guest age of 12; The Scots Hotel offers historic basalt-stone buildings, gardens and a central waterfront setting. Compare these experiences before comparing room names.",
+      "For couples, privacy, the room's outlook and the facilities you plan to use may matter more than the length of the amenities list. A lake-view room is not implied by every booking, and lakefront gardens do not establish a swimming beach. Check the exact room and how you reach the water.",
+      "None of these labels alone guarantees a child-free stay. U Boutique accepts families; Galei Kinneret allows guests from 12; The Scots Hotel usually has a 16+ policy, with holiday and July–August exceptions that need direct confirmation. Ask about your travel dates and distinguish admission to the hotel from entry to a spa or treatment area.",
+    ],
+    decisions: [
+      { title: "Contemporary boutique or historic character?", text: "U Boutique is the contemporary lakeside comparison. The Scots Hotel is the heritage option, with restored hospital buildings and gardens. Galei Kinneret is a comparison when a beach-and-spa setting is the priority." },
+      { title: "Will you actually swim in the lake?", text: "U Boutique and Galei Kinneret advertise private beach areas; confirm operation for your dates. At The Scots Hotel, compare the gardens and seasonal pool without assuming a swimming beach beside the room." },
+      { title: "How quiet do you need the stay to be?", text: "Check the property's guest-age rules, exceptions and any events for the dates you want. A minimum age of 12 or 16 is different from an adults-only 18+ policy." },
+      { title: "What is included in the special stay?", text: "Confirm breakfast or other meals, spa access, treatments, parking and the room's actual view. A more expensive room category may change the outlook or space without including every hotel service." },
+    ],
+    comparison: [{ key: "beach", label: "Lake & beach arrangement" }, { key: "spa", label: "Spa & pool checks" }, { key: "agePolicy", label: "Guest ages" }],
+    picks: [
+      { hotelId: "tib-u-boutique", summary: "U Boutique Kinneret suits a contemporary lakeside break where the beach area and seasonal pool matter alongside a smaller hotel format. It is a useful comparison for couples who want lake access without choosing a heritage property. Families are accepted, so the boutique label does not imply an adults-only setting.", bestFor: "Couples seeking contemporary comfort and lake access, or guests who prefer a smaller upscale format.", watch: "Check beach and pool operation, spa entry and treatment charges. Confirm the room's view and layout, meals and parking, and ask about any date-specific facility changes." },
+      { hotelId: "tib-galei-kinneret", summary: "Choose Galei Kinneret when a luxury lakeside hotel, private beach and wellness facilities form the core of the holiday. The operator's minimum guest age of 12 distinguishes it from an unrestricted family resort, while still allowing eligible teenagers. Compare its actual room-and-dining package with the alternatives.", bestFor: "Couples and eligible older guests prioritizing a beach-and-spa stay on the southern waterfront.", watch: "Every guest must meet the 12+ hotel policy. Reconfirm beach season, spa entry and treatments, pool operation and the precise room category; do not assume all services are included in the room price." },
+      { hotelId: "tib-scots", summary: "The Scots Hotel is the heritage choice: restored hospital buildings, basalt-stone architecture and gardens in a central waterfront location. It suits a stay built around atmosphere and time in town as much as hotel leisure. Its lakeside setting should not be confused with a hotel swimming beach.", bestFor: "Couples and heritage-focused visitors wanting a distinctive historic hotel and access to central Tiberias.", watch: "The usual policy is 16+, with exceptions during holidays and July–August. Contact reservations directly for a stay with children. Confirm the building and room category, seasonal pool, spa services and dining inclusions." },
+    ],
+    detailTitle: "Beach access, spa inclusions & choosing a quieter stay",
+    details: [
+      { title: "A lake view and a swimming beach are different", text: "Choose a room for its confirmed outlook, then check beach access separately. U Boutique and Galei Kinneret advertise private beach arrangements, subject to current operation. The Scots Hotel's gardens and waterfront location offer a different experience. A marina or promenade is not evidence of an operating swimming beach." },
+      { title: "Check hotel ages and spa ages separately", text: "Galei Kinneret's operator states a hotel minimum age of 12. The Scots Hotel normally accepts guests from 16, with exceptions in holidays and July–August; direct confirmation is needed for younger guests. U Boutique accepts families. In every case, a spa, pool or treatment can have separate access rules." },
+      { title: "Book the wellness experience you intend to use", text: "A spa on the property does not mean massages, every treatment or every facility is included in the room. Confirm basic entry, opening hours, any age restrictions and advance treatment reservations. If a particular pool or treatment is essential to the trip, reconfirm directly before the cancellation deadline." },
+      { title: "Choose between hotel time and exploring", text: "The Scots Hotel has a central waterfront setting, while the other two offer different lakeside positions. Check the actual walking route, hotel entrance and parking if you will visit sites around the Galilee. Compare transport and outside dining with the cost of the room and meal package." },
+    ],
+    checklist: ["Confirm guest ages and any date-specific exceptions directly", "Check the precise room category, lake outlook and layout", "Verify beach, seasonal pool and spa operation for the stay", "Confirm treatments, meals and other services included in the offer", "Ask about parking, access needs and any events affecting the stay", "Compare the total and cancellation deadline for the same dates"],
+    faqs: [
+      { q: "Which Tiberias luxury hotel is adults-only?", a: "Do not treat this shortlist as uniformly adults-only. U Boutique accepts families, Galei Kinneret has a 12+ hotel policy, and The Scots Hotel normally uses 16+ with date-specific exceptions. Confirm the current policy and atmosphere for your dates." },
+      { q: "Which hotels advertise private beach access?", a: "U Boutique Kinneret and Galei Kinneret advertise private beach areas. Check current operation and the route to the water. The Scots Hotel's lakefront gardens do not establish a swimming beach." },
+      { q: "Is The Scots Hotel a good choice for a historic setting?", a: "It is the heritage-focused comparison here, with restored hospital buildings, basalt-stone architecture and gardens on the central waterfront. Compare the exact building and room category with your accessibility and space needs." },
+      { q: "Does a luxury room include spa treatments?", a: "Only if the specific offer says so. Confirm basic spa access separately from massages and other treatments, along with age limits and advance-booking requirements." },
+      { q: "Should I pay extra for a lake-view room?", a: "It depends on how much time you plan to spend in the room and the confirmed outlook. Compare the actual room description and any balcony rather than assuming every room in a waterfront hotel faces the lake." },
+    ],
+    sourceIds: [],
+  },
+];
+
 export const hotelCategoryGuides: HotelCategoryGuide[] = [
+  ...tiberiasCategoryGuides,
   {
     id: "spa", destinationId: "deadsea", path: "/dead-sea/spa-hotels/", shortTitle: "Spa hotels",
+    overviewTitle: "Choose the spa experience you want", detailNavLabel: "Spa access", checklistTitle: "Spa entry & guest ages",
     title: "Best Dead Sea spa hotels in Israel: compare facilities & stays",
     metaDescription: "Compare five Dead Sea spa hotels in Israel by wellness facilities, age policies and beach access. Understand spa inclusions and treatment extras before booking.",
     summary: "Find the spa break that fits your trip, from a full-service resort to an age-restricted wellness stay. Compare five hotels on Israel's Dead Sea shore by facilities, beach access and what your room rate actually includes.",
@@ -832,6 +990,7 @@ export const hotelCategoryGuides: HotelCategoryGuide[] = [
   },
   {
     id: "family", destinationId: "deadsea", path: "/dead-sea/family-hotels/", shortTitle: "Family hotels",
+    overviewTitle: "Choose for your children's ages and your travel plans", detailNavLabel: "Meals & rooms", checklistTitle: "The room & children's facilities",
     title: "Best Dead Sea family hotels in Israel: pools, rooms & meal plans",
     metaDescription: "Compare four Dead Sea family hotels in Israel by children's facilities, beach access and meals. Explore all-inclusive options and the room checks to make before booking.",
     summary: "Choose a Dead Sea hotel for the children who are actually traveling with you. Compare four Israeli resorts by pools and activities, room arrangements, beach access and the cost of the meal plan.",

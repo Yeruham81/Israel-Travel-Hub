@@ -36,6 +36,8 @@ import { Route as TelAvivKeremHateimanimHotelsRouteImport } from './routes/tel-a
 import { Route as TelAvivNeveTzedekHotelsRouteImport } from './routes/tel-aviv.neve-tzedek-hotels'
 import { Route as TelAvivOldNorthPortHotelsRouteImport } from './routes/tel-aviv.old-north-port-hotels'
 import { Route as TelAvivRothschildBoulevardHotelsRouteImport } from './routes/tel-aviv.rothschild-boulevard-hotels'
+import { Route as TiberiasFamilyHotelsRouteImport } from './routes/tiberias.family-hotels'
+import { Route as TiberiasLuxuryHotelsRouteImport } from './routes/tiberias.luxury-hotels'
 import { Route as ToursIndexRouteImport } from './routes/tours.index'
 import { Route as ToursBethlehemFromJerusalemRouteImport } from './routes/tours.bethlehem-from-jerusalem'
 import { Route as TransfersIndexRouteImport } from './routes/transfers.index'
@@ -191,6 +193,16 @@ const TelAvivRothschildBoulevardHotelsRoute =
     path: '/tel-aviv/rothschild-boulevard-hotels',
     getParentRoute: () => rootRouteImport,
   } as any)
+const TiberiasFamilyHotelsRoute = TiberiasFamilyHotelsRouteImport.update({
+  id: '/tiberias/family-hotels',
+  path: '/tiberias/family-hotels',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TiberiasLuxuryHotelsRoute = TiberiasLuxuryHotelsRouteImport.update({
+  id: '/tiberias/luxury-hotels',
+  path: '/tiberias/luxury-hotels',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ToursIndexRoute = ToursIndexRouteImport.update({
   id: '/tours/',
   path: '/tours/',
@@ -282,6 +294,8 @@ export interface FileRoutesByFullPath {
   '/tel-aviv/neve-tzedek-hotels': typeof TelAvivNeveTzedekHotelsRoute
   '/tel-aviv/old-north-port-hotels': typeof TelAvivOldNorthPortHotelsRoute
   '/tel-aviv/rothschild-boulevard-hotels': typeof TelAvivRothschildBoulevardHotelsRoute
+  '/tiberias/family-hotels': typeof TiberiasFamilyHotelsRoute
+  '/tiberias/luxury-hotels': typeof TiberiasLuxuryHotelsRoute
   '/tours/bethlehem-from-jerusalem': typeof ToursBethlehemFromJerusalemRoute
   '/transfers/ben-gurion-airport': typeof TransfersBenGurionAirportRoute
   '/travel-blog/ben-gurion-airport-to-jerusalem': typeof TravelBlogBenGurionAirportToJerusalemRoute
@@ -322,6 +336,8 @@ export interface FileRoutesByTo {
   '/tel-aviv/neve-tzedek-hotels': typeof TelAvivNeveTzedekHotelsRoute
   '/tel-aviv/old-north-port-hotels': typeof TelAvivOldNorthPortHotelsRoute
   '/tel-aviv/rothschild-boulevard-hotels': typeof TelAvivRothschildBoulevardHotelsRoute
+  '/tiberias/family-hotels': typeof TiberiasFamilyHotelsRoute
+  '/tiberias/luxury-hotels': typeof TiberiasLuxuryHotelsRoute
   '/tours/bethlehem-from-jerusalem': typeof ToursBethlehemFromJerusalemRoute
   '/transfers/ben-gurion-airport': typeof TransfersBenGurionAirportRoute
   '/travel-blog/ben-gurion-airport-to-jerusalem': typeof TravelBlogBenGurionAirportToJerusalemRoute
@@ -363,6 +379,8 @@ export interface FileRoutesById {
   '/tel-aviv/neve-tzedek-hotels': typeof TelAvivNeveTzedekHotelsRoute
   '/tel-aviv/old-north-port-hotels': typeof TelAvivOldNorthPortHotelsRoute
   '/tel-aviv/rothschild-boulevard-hotels': typeof TelAvivRothschildBoulevardHotelsRoute
+  '/tiberias/family-hotels': typeof TiberiasFamilyHotelsRoute
+  '/tiberias/luxury-hotels': typeof TiberiasLuxuryHotelsRoute
   '/tours/bethlehem-from-jerusalem': typeof ToursBethlehemFromJerusalemRoute
   '/transfers/ben-gurion-airport': typeof TransfersBenGurionAirportRoute
   '/travel-blog/ben-gurion-airport-to-jerusalem': typeof TravelBlogBenGurionAirportToJerusalemRoute
@@ -405,6 +423,8 @@ export interface FileRouteTypes {
     | '/tel-aviv/neve-tzedek-hotels'
     | '/tel-aviv/old-north-port-hotels'
     | '/tel-aviv/rothschild-boulevard-hotels'
+    | '/tiberias/family-hotels'
+    | '/tiberias/luxury-hotels'
     | '/tours/bethlehem-from-jerusalem'
     | '/transfers/ben-gurion-airport'
     | '/travel-blog/ben-gurion-airport-to-jerusalem'
@@ -445,6 +465,8 @@ export interface FileRouteTypes {
     | '/tel-aviv/neve-tzedek-hotels'
     | '/tel-aviv/old-north-port-hotels'
     | '/tel-aviv/rothschild-boulevard-hotels'
+    | '/tiberias/family-hotels'
+    | '/tiberias/luxury-hotels'
     | '/tours/bethlehem-from-jerusalem'
     | '/transfers/ben-gurion-airport'
     | '/travel-blog/ben-gurion-airport-to-jerusalem'
@@ -485,6 +507,8 @@ export interface FileRouteTypes {
     | '/tel-aviv/neve-tzedek-hotels'
     | '/tel-aviv/old-north-port-hotels'
     | '/tel-aviv/rothschild-boulevard-hotels'
+    | '/tiberias/family-hotels'
+    | '/tiberias/luxury-hotels'
     | '/tours/bethlehem-from-jerusalem'
     | '/transfers/ben-gurion-airport'
     | '/travel-blog/ben-gurion-airport-to-jerusalem'
@@ -526,6 +550,8 @@ export interface RootRouteChildren {
   TelAvivNeveTzedekHotelsRoute: typeof TelAvivNeveTzedekHotelsRoute
   TelAvivOldNorthPortHotelsRoute: typeof TelAvivOldNorthPortHotelsRoute
   TelAvivRothschildBoulevardHotelsRoute: typeof TelAvivRothschildBoulevardHotelsRoute
+  TiberiasFamilyHotelsRoute: typeof TiberiasFamilyHotelsRoute
+  TiberiasLuxuryHotelsRoute: typeof TiberiasLuxuryHotelsRoute
   ToursBethlehemFromJerusalemRoute: typeof ToursBethlehemFromJerusalemRoute
   TransfersBenGurionAirportRoute: typeof TransfersBenGurionAirportRoute
   TravelBlogBenGurionAirportToJerusalemRoute: typeof TravelBlogBenGurionAirportToJerusalemRoute
@@ -731,6 +757,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof TelAvivRothschildBoulevardHotelsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/tiberias/family-hotels': {
+      id: '/tiberias/family-hotels'
+      path: '/tiberias/family-hotels'
+      fullPath: '/tiberias/family-hotels'
+      preLoaderRoute: typeof TiberiasFamilyHotelsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/tiberias/luxury-hotels': {
+      id: '/tiberias/luxury-hotels'
+      path: '/tiberias/luxury-hotels'
+      fullPath: '/tiberias/luxury-hotels'
+      preLoaderRoute: typeof TiberiasLuxuryHotelsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/tours/': {
       id: '/tours/'
       path: '/tours'
@@ -839,6 +879,8 @@ const rootRouteChildren: RootRouteChildren = {
   TelAvivNeveTzedekHotelsRoute: TelAvivNeveTzedekHotelsRoute,
   TelAvivOldNorthPortHotelsRoute: TelAvivOldNorthPortHotelsRoute,
   TelAvivRothschildBoulevardHotelsRoute: TelAvivRothschildBoulevardHotelsRoute,
+  TiberiasFamilyHotelsRoute: TiberiasFamilyHotelsRoute,
+  TiberiasLuxuryHotelsRoute: TiberiasLuxuryHotelsRoute,
   ToursBethlehemFromJerusalemRoute: ToursBethlehemFromJerusalemRoute,
   TransfersBenGurionAirportRoute: TransfersBenGurionAirportRoute,
   TravelBlogBenGurionAirportToJerusalemRoute:
