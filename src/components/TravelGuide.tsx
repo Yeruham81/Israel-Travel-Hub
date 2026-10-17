@@ -20,8 +20,7 @@ export function travelGuideMeta(id: TravelGuideId) {
     { "@context": "https://schema.org", "@type": "Article", "@id": `${CANONICAL_ORIGIN}${path}#article`, headline: guide.title, description: guide.description, mainEntityOfPage: `${CANONICAL_ORIGIN}${path}`, inLanguage: "en", dateModified: TRAVEL_GUIDE_CHECK_DATE,
       author: authorLd(), publisher: { "@type": "Organization", name: SITE_NAME, url: CANONICAL_ORIGIN },
       about: guide.topics.map((topic) => guideTopics.find((item) => item.id === topic)!.label), citation: publicSources(sourcesFor(guide)).map((source) => source.url), image: imageUrl,
-    }).replaceAll("<", "\\u003c"),
-  }] };
+    })] };
 }
 
 export function GuideTags({ topics }: { topics: GuideTopicId[] }) {
