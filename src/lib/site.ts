@@ -1,33 +1,40 @@
-/** Staging origin used for canonicals. Override with VITE_CANONICAL_ORIGIN at launch. */
-export const CANONICAL_ORIGIN: string =
-  (import.meta.env["VITE_CANONICAL_ORIGIN"] as string | undefined) ||
-  "https://id-preview--7cd7aae9-57c0-4ced-b1fa-2f0691483fee.lovable.app";
+/** Pure launch configuration: no publishing or indexing changes occur here. */
+export function siteConfig(env: { VITE_CANONICAL_ORIGIN?: string; VITE_INDEXABLE?: string }) {
+  const origin = (env.VITE_CANONICAL_ORIGIN || "https://id-preview--7cd7aae9-57c0-4ced-b1fa-2f0691483fee.lovable.app").replace(/\/+$/, "");
+  return { origin, indexable: env.VITE_INDEXABLE === "true" };
+}
 
-/** Staging: keep every page out of search until launch is explicitly requested. */
-export const INDEXABLE = (import.meta.env["VITE_INDEXABLE"] as string | undefined) === "true";
+export const SITE_CONFIG = siteConfig({
+  VITE_CANONICAL_ORIGIN: import.meta.env["VITE_CANONICAL_ORIGIN"] || "",
+  VITE_INDEXABLE: import.meta.env["VITE_INDEXABLE"] || "",
+});
+export const CANONICAL_ORIGIN = SITE_CONFIG.origin;
+export const INDEXABLE = SITE_CONFIG.indexable;
 
 export const SITE_NAME = "Israel Taxi & Travel";
 
 export type Crumb = { name: string; path: string };
 
-export function breadcrumbLd(crumbs: Crumb[]) {
-  return {
-    type: "application/ld+json",
-    children: JSON.stringify({
-      "@context": "https://schema.org",
-      "@type": "BreadcrumbList",
-      itemListElement: crumbs.map((c, i) => ({ "@type": "ListItem", position: i + 1, name: c.name, item: CANONICAL_ORIGIN + c.path })),
-    }),
-  };
+/** Escape HTML-sensitive characters even when structured text contains markup. */
+export function jsonLd(value: unknown) {
+  return { type: "application/ld+json", children: JSON.stringify(value).replaceAll("<", "\\u003c").replaceAll(">", "\\u003e").replaceAll("&", "\\u0026") };
 }
 
-export function pageMeta(opts: { title: string; description: string; path: string; type?: string; crumbs?: Crumb[] }) {
-  const url = CANONICAL_ORIGIN + opts.path;
+export function breadcrumbLd(crumbs: Crumb[], origin = CANONICAL_ORIGIN) {
+  return jsonLd({
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      itemListElement: crumbs.map((c, i) => ({ "@type": "ListItem", position: i + 1, name: c.name, item: origin + c.path })),
+    });
+}
+
+export function pageMeta(opts: { title: string; description: string; path: string; type?: string; crumbs?: Crumb[] }, config = SITE_CONFIG) {
+  const url = config.origin + opts.path;
   return {
     meta: [
       { title: opts.title },
       { name: "description", content: opts.description },
-      { name: "robots", content: INDEXABLE ? "index,follow" : "noindex,nofollow" },
+      { name: "robots", content: config.indexable ? "index,follow" : "noindex,nofollow" },
       { property: "og:title", content: opts.title },
       { property: "og:description", content: opts.description },
       { property: "og:type", content: opts.type ?? "website" },
@@ -35,6 +42,6 @@ export function pageMeta(opts: { title: string; description: string; path: strin
       { name: "twitter:card", content: "summary_large_image" },
     ],
     links: [{ rel: "canonical", href: url }],
-    scripts: opts.crumbs ? [breadcrumbLd(opts.crumbs)] : [],
+    scripts: opts.crumbs ? [breadcrumbLd(opts.crumbs, config.origin)] : [],
   };
 }

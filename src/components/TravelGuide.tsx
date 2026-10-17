@@ -2,7 +2,7 @@ import { Link } from "@tanstack/react-router";
 import { Breadcrumbs, Checklist, FaqList, OnThisPage, ProviderCard, RelatedLinks, SourceList } from "@/components/Guide";
 import { guideTopics, travelGuides, type GuideDirectoryEntry, type GuidePhoto, type GuideTopicId, type TravelGuide } from "@/data/travelGuides";
 import { publicSources, isPublisherUrl, linksForPage, travelGuidePaths, TRAVEL_GUIDE_CHECK_DATE, type TravelGuideId } from "@/data/registry";
-import { CANONICAL_ORIGIN, SITE_NAME, pageMeta } from "@/lib/site";
+import { CANONICAL_ORIGIN, SITE_NAME, jsonLd, pageMeta } from "@/lib/site";
 import { authorLd } from "@/lib/author";
 import { hasPublicPhotoCredit } from "@/lib/photo-credits";
 import { AuthorCard } from "@/components/AuthorCard";
@@ -15,13 +15,12 @@ export function travelGuideMeta(id: TravelGuideId) {
   const path = travelGuidePaths[id];
   const meta = pageMeta({ title: guide.title, description: guide.description, path, type: "article", crumbs: [{ name: "Home", path: "/" }, { name: "Travel guides", path: "/guides/" }, { name: guide.title, path }] });
   const imageUrl = new URL(guide.photo.src, CANONICAL_ORIGIN).href;
-  return { ...meta, meta: [...meta.meta, { property: "og:image", content: imageUrl }, { name: "twitter:image", content: imageUrl }], scripts: [...meta.scripts, {
-    type: "application/ld+json",
-    children: JSON.stringify({ "@context": "https://schema.org", "@type": "Article", "@id": `${CANONICAL_ORIGIN}${path}#article`, headline: guide.title, description: guide.description, mainEntityOfPage: `${CANONICAL_ORIGIN}${path}`, inLanguage: "en", dateModified: TRAVEL_GUIDE_CHECK_DATE,
+  const scoped = ["shabbat", "israel", "taxis"].includes(id);
+  return { ...meta, meta: scoped ? meta.meta : [...meta.meta, { property: "og:image", content: imageUrl }, { name: "twitter:image", content: imageUrl }], scripts: [...meta.scripts, jsonLd(
+    { "@context": "https://schema.org", "@type": "Article", "@id": `${CANONICAL_ORIGIN}${path}#article`, headline: guide.title, description: guide.description, mainEntityOfPage: `${CANONICAL_ORIGIN}${path}`, inLanguage: "en", dateModified: TRAVEL_GUIDE_CHECK_DATE,
       author: authorLd(), publisher: { "@type": "Organization", name: SITE_NAME, url: CANONICAL_ORIGIN },
       about: guide.topics.map((topic) => guideTopics.find((item) => item.id === topic)!.label), citation: publicSources(sourcesFor(guide)).map((source) => source.url), image: imageUrl,
-    }).replaceAll("<", "\\u003c"),
-  }] };
+    })] };
 }
 
 export function GuideTags({ topics }: { topics: GuideTopicId[] }) {
@@ -71,6 +70,7 @@ export function TravelGuidePage({ id }: { id: TravelGuideId }) {
         <h2 id="answer-h" className="text-2xl">Quick answer</h2><p className="mt-3 text-lg leading-relaxed">{guide.answer}</p>
         {guide.reviewNote && <p className="mt-4 border-t border-primary/20 pt-3 text-sm leading-relaxed text-muted-foreground">{guide.reviewNote}</p>}
       </section>
+      {guide.nextSteps && <RelatedLinks title="Choose your next step" items={guide.nextSteps} />}
       <dl className="mt-5 grid gap-3 sm:grid-cols-3">{guide.facts.map((fact) => <div key={fact.label} className="rounded-xl border bg-card p-4"><dt className="text-xs font-semibold uppercase tracking-wide text-primary">{fact.label}</dt><dd className="mt-2 text-sm leading-relaxed">{fact.text}</dd></div>)}</dl>
       <OnThisPage sections={[["at-a-glance", "At a glance"], ...guide.sections.map((section) => [section.id, section.title] as const), ["checklist", "Checklist"], ["faq", "FAQ"], ["sources", "Sources"]]} />
       <section id="at-a-glance" aria-labelledby="comparison-h" className="mt-10 scroll-mt-24">

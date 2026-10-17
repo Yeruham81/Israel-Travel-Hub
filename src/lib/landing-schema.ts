@@ -1,0 +1,18 @@
+import { authorLd } from "@/lib/author";
+import { CANONICAL_ORIGIN, SITE_NAME, jsonLd, pageMeta, type Crumb } from "@/lib/site";
+import { publicSources } from "@/data/registry";
+
+/** Metadata for the substantial hotel guides, not a product or live offer. */
+export function hotelGuideMeta(guide: { title: string; metaDescription: string; path: string; reviewedAt?: string; sourceIds: string[] }, name: string, image: string) {
+  const crumbs: Crumb[] = [{ name: "Home", path: "/" }, { name: "Accommodation", path: "/hotels/" }, { name, path: guide.path }];
+  const head = pageMeta({ title: guide.title, description: guide.metaDescription, path: guide.path, type: "article", crumbs });
+  const url = CANONICAL_ORIGIN + guide.path;
+  return { ...head, scripts: [...head.scripts, jsonLd({
+    "@context": "https://schema.org", "@type": "Article", "@id": `${url}#article`,
+    headline: guide.title, description: guide.metaDescription, mainEntityOfPage: url, inLanguage: "en",
+    ...(guide.reviewedAt ? { dateModified: guide.reviewedAt } : {}),
+    author: authorLd(), publisher: { "@type": "Organization", name: SITE_NAME, url: CANONICAL_ORIGIN },
+    image: new URL(image, CANONICAL_ORIGIN).href,
+    citation: publicSources(guide.sourceIds).map((source) => source.url),
+  })] };
+}

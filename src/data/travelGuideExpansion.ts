@@ -20,8 +20,9 @@ const photos = {
 
 export const expandedTravelGuides = {
   shabbat: {
-    id: "shabbat", title: "Ben Gurion Airport on Shabbat: transport options & planning",
-    description: "Compare limited weekend Line 711 from Terminal 1, authorized airport taxis, private transfers and rental collection. Plan a Friday or Saturday airport arrival.",
+    id: "shabbat", title: "From Ben Gurion Airport on Shabbat: transport options",
+    nextSteps: [{ label: "Airport arrival & terminal planning", to: "/travel-blog/ben-gurion-airport-arrival-tips/" }, { label: "Private pickup to Jerusalem", to: "/travel-blog/ben-gurion-airport-to-jerusalem/" }, { label: "Private pickup to Tel Aviv", to: "/travel-blog/ben-gurion-airport-to-tel-aviv/" }],
+    description: "Plan a Friday-night or Saturday arrival at Ben Gurion Airport: check Terminal 1 weekend Line 711, authorized taxis, confirmed private pickups and the first regular service for your date.",
     intro: "Your landing time is only the start of the journey. Plan how you will leave the actual terminal, reach your destination and handle a late arrival.",
     answer: "During the main Shabbat break, check regular trains and buses against your exact date rather than expecting weekday service. Limited free weekend Line 711 is an important exception: the municipality lists a Terminal 1 stop between Shoham and central Tel Aviv. If its timetable and last leg do not work, consider an authorized taxi, a confirmed private transfer or a rental with verified collection hours.",
     topics: ["transportation", "tips"], photo: photos.hall,
