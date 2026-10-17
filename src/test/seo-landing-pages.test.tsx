@@ -2,6 +2,7 @@ import { QueryClient } from "@tanstack/react-query";
 import { createMemoryHistory, createRouter, RouterContextProvider } from "@tanstack/react-router";
 import { renderToString } from "react-dom/server";
 import { describe, expect, it } from "vitest";
+import { existsSync } from "node:fs";
 import { routeTree } from "@/routeTree.gen";
 import { Route as Root } from "@/routes/__root";
 import { pageMeta, siteConfig, jsonLd, CANONICAL_ORIGIN } from "@/lib/site";
@@ -95,7 +96,11 @@ describe("ten search-intent landing pages", () => {
     expect(new Set(links.map((link) => new URL(link.getAttribute("href") || "/", "https://test.example").pathname)).size).toBeGreaterThanOrEqual(2);
     for (const link of links) {
       const pathname = new URL(link.getAttribute("href") || "/", "https://test.example").pathname;
-      expect(router.matchRoutes(pathname).at(-1)?.routeId, pathname).toBe(pathname.replace(/\/$/, "") || "/");
+      if (pathname.startsWith("/maps/")) {
+        expect(existsSync(`public${pathname}`), pathname).toBe(true);
+        continue;
+      }
+      expect(router.matchRoutes(pathname).at(-1)?.routeId.replace(/\/$/, "") || "/", pathname).toBe(pathname.replace(/\/$/, "") || "/");
     }
     for (const link of main.querySelectorAll<HTMLAnchorElement>('a[href^="#"]')) {
       const hash = link.getAttribute("href") || "";
