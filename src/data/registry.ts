@@ -144,6 +144,15 @@ export const travelGuidePaths = {
   israel: "/travel-blog/getting-around-israel/",
   telAviv: "/travel-blog/getting-around-tel-aviv/",
   taxis: "/travel-blog/taxis-in-israel/",
+  shabbat: "/travel-blog/from-ben-gurion-airport-on-shabbat/",
+  travelTips: "/travel-blog/israel-travel-tips/",
+  jerusalem: "/travel-blog/jerusalem-travel-guide/",
+  jerusalemDeadSea: "/travel-blog/jerusalem-to-the-dead-sea/",
+  baptism: "/travel-blog/baptism-in-the-jordan-river/",
+  jerusalemDayTrips: "/travel-blog/day-trips-from-jerusalem/",
+  jerusalemChurches: "/travel-blog/churches-in-jerusalem/",
+  jerusalemShopping: "/travel-blog/shopping-in-jerusalem/",
+  telAvivDayTrips: "/travel-blog/day-trips-from-tel-aviv/",
 } as const;
 export type TravelGuideId = keyof typeof travelGuidePaths;
 
@@ -151,7 +160,7 @@ const travelGuideSources: SourceReference[] = [
   ...Object.entries(travelGuidePaths).map(([id, path]): SourceReference => ({
     id: `guide-original-${id}`, title: `Original guide: ${path.split("/").filter(Boolean).at(-1)!.replaceAll("-", " ")}`,
     publisher: "Israel-Taxi.com (Moshe Barak)", url: `${OWNER_BASE}${path}`, checkedAt: TRAVEL_GUIDE_CHECK_DATE,
-    note: "Original local guide, adapted and shortened for this portal. Operator availability reports are attributed to the publisher; current official service and product pages supplement the travel advice.",
+    note: "Original publisher guide, adapted, shortened and supplemented by the primary references on this page. Published descriptions do not establish live transport, site access, opening hours or product availability. Operator-status limitations are identified in the article.",
   })),
   ...([
     ["guide-gett", "Airport taxi pickup and payment instructions", "Gett", "https://www.gett.com/il/airport-en/", "Official on-demand code/queue process, Terminal 3 Exit 03 and the separate scheduled-ride pickup at Level 2, Exit 23. Check the actual booking instructions before travelling."],
@@ -166,6 +175,21 @@ const travelGuideSources: SourceReference[] = [
     ["guide-esim-drimsim", "Israel pay-as-you-use SIM and eSIM", "Drimsim", "https://drimsim.com/en/country/israel", "The country page lists usage-based data for physical SIM and eSIM. Compare the current per-unit rate and any setup or balance terms with a fixed package."],
   ] as const).map(([id, title, publisher, url, note]): SourceReference => ({ id, title, publisher, url, note, checkedAt: TRAVEL_GUIDE_CHECK_DATE })),
   { id: "guide-entry", title: "Official Israel entry and ETA-IL portal", publisher: "Population and Immigration Authority", url: "https://israel-entry.piba.gov.il/", checkedAt: null, note: "Official portal for current passport-specific eligibility and application instructions. The portal is linked for readers to check their own requirements; fees, processing periods and admission conditions are not reproduced here." },
+  { id: "guide-bus-planner", title: "National public-transport journey planner", publisher: "National Public Transportation Authority", url: "https://bus.gov.il/", checkedAt: null, note: "Official planning resource linked for date-specific bus routes and fares. No live journey was queried for the visitor's own dates; no old route number or fare is treated as a current quote." },
+  ...([
+    ["guide-weekend-711", "Weekend transport and Line 711", "Tel Aviv-Yafo Municipality", "https://www.tel-aviv.gov.il/Residents/Transportation/Pages/naimbesofash.aspx", "The municipal network page lists Line 711 between Shoham and Tel Aviv with a Ben Gurion Terminal 1 stop and describes the service as free. Route identity checked; no live departure, luggage capacity or holiday operation was tested."],
+    ["guide-weekend-timetable", "Na'im Besofash route maps and timetables", "Na'im Besofash", "https://busofash.co.il/", "Official network timetable reference. Visitors must check the actual date, direction and stop; no fixed departure times are copied into the guide."],
+    ["guide-jerusalem-tourism", "Jerusalem visitor information", "iTravelJerusalem / Jerusalem Development Authority", "https://www.itraveljerusalem.com/", "Official destination information for areas, museums, heritage sites and visitor planning. Individual site access, reservations and religious-event arrangements need a current check."],
+    ["guide-jerusalem-shopping", "Shopping in Jerusalem", "iTravelJerusalem / Jerusalem Development Authority", "https://www.itraveljerusalem.com/lobby/shopping", "Destination shopping directory, used for area orientation. The old publisher guide's blanket opening hours, fixed bargaining percentages and weekly-fair address are not treated as verified current arrangements."],
+    ["guide-mahane-yehuda", "Mahane Yehuda Market", "iTravelJerusalem / Jerusalem Development Authority", "https://www.itraveljerusalem.com/lobby/machane-yehuda-market", "Market identity, location context and food/nightlife character. Individual stalls and restaurants have separate hours; not a live trading schedule."],
+    ["guide-first-station", "First Station visitor information", "The First Station Jerusalem", "https://www.firststation.co.il/en/contact-us/", "The operator lists the complex as operating through the week including Saturday. This does not mean every business or event operates then; old event dates, parking prices and transport route lists are not reproduced."],
+    ["guide-holy-sepulchre", "Basilica of the Holy Sepulchre", "Custodia di Terra Santa", "https://www.custodia.org/en/sanctuaries/basilica-of-the-holy-sepulchre/", "Sanctuary identity, Christian traditions and visitor information. The guide distinguishes tradition from historical certainty and does not extend one church's timetable to other sites."],
+    ["guide-yardenit", "Baptism at Yardenit", "Yardenit Baptismal Site", "https://www.yardenit.com/baptism/", "The operator describes its location at the southern Sea of Galilee, designated baptism arrangements, changing facilities and required white robes. Ceremony/clergy arrangements and current charges must be confirmed separately."],
+    ["guide-yardenit-about", "About Yardenit and visiting information", "Yardenit Baptismal Site", "https://www.yardenit.com/about/", "The operator's about page and other site pages display different hour sets. No single timetable or old robe price is copied; visitors are asked to confirm visit and last-baptism times directly."],
+    ["guide-qasr", "Kasr el Yahud baptismal site", "Israel Nature and Parks Authority", "https://en.parks.org.il/reserve-park/baptismal-site-on-the-jordan-river-qasr-al-yahud/", "Primary site identity and visitor guidance for the lower Jordan near Jericho. Access and permitted activity depend on current instructions; an open information page is not confirmation of admission on a particular date."],
+    ["guide-ein-gedi", "En Gedi Nature Reserve", "Israel Nature and Parks Authority", "https://en.parks.org.il/reserve-park/en-gedi-nature-reserve/", "Reserve and visitor-planning reference. Trails, weather closures, reservations and permitted routes must be checked for the actual visit; old assumptions of universal waterfall access are not repeated."],
+    ["guide-jerusalem-deadsea", "Jerusalem to the Dead Sea and Masada", "iTravelJerusalem / Jerusalem Development Authority", "https://www.itraveljerusalem.com/en/article/travel-from-jerusalem-to-the-dead-sea-and-masada", "Useful for destination and transport orientation, including published bus-route context. Its fare examples, old spa-stop assumptions and driving-time examples are not copied as current prices or schedules."],
+  ] as const).map(([id, title, publisher, url, note]): SourceReference => ({ id, title, publisher, url, note, checkedAt: TRAVEL_GUIDE_CHECK_DATE })),
 ];
 
 export interface AirportTransferRate {

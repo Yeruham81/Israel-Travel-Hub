@@ -12,12 +12,23 @@ import { Route as ArrivalRoute } from "@/routes/travel-blog.ben-gurion-airport-a
 import { Route as IsraelRoute } from "@/routes/travel-blog.getting-around-israel";
 import { Route as TelAvivRoute } from "@/routes/travel-blog.getting-around-tel-aviv";
 import { Route as TaxiRoute } from "@/routes/travel-blog.taxis-in-israel";
-import { guideDirectory, guideTopics, travelGuides } from "@/data/travelGuides";
+import { Route as ShabbatRoute } from "@/routes/travel-blog.from-ben-gurion-airport-on-shabbat";
+import { Route as TipsRoute } from "@/routes/travel-blog.israel-travel-tips";
+import { Route as JerusalemRoute } from "@/routes/travel-blog.jerusalem-travel-guide";
+import { Route as DeadSeaRoute } from "@/routes/travel-blog.jerusalem-to-the-dead-sea";
+import { Route as BaptismRoute } from "@/routes/travel-blog.baptism-in-the-jordan-river";
+import { Route as JerusalemDayTripsRoute } from "@/routes/travel-blog.day-trips-from-jerusalem";
+import { Route as ChurchesRoute } from "@/routes/travel-blog.churches-in-jerusalem";
+import { Route as ShoppingRoute } from "@/routes/travel-blog.shopping-in-jerusalem";
+import { Route as TelAvivDayTripsRoute } from "@/routes/travel-blog.day-trips-from-tel-aviv";
+import { filterGuides, guideDirectory, guideTopics, travelGuides } from "@/data/travelGuides";
 import { affiliateConfig, getSource, linksForPage, travelGuidePaths, TRAVEL_GUIDE_CHECK_DATE } from "@/data/registry";
 import { readOutboundClicks } from "@/lib/outbound";
 
 afterEach(() => { cleanup(); localStorage.clear(); });
-const cases = [{ id: "uber", route: UberRoute }, { id: "sherut", route: SherutRoute }, { id: "esim", route: EsimRoute }, { id: "arrival", route: ArrivalRoute }, { id: "israel", route: IsraelRoute }, { id: "telAviv", route: TelAvivRoute }, { id: "taxis", route: TaxiRoute }] as const;
+const cases = [{ id: "uber", route: UberRoute }, { id: "sherut", route: SherutRoute }, { id: "esim", route: EsimRoute }, { id: "arrival", route: ArrivalRoute }, { id: "israel", route: IsraelRoute }, { id: "telAviv", route: TelAvivRoute }, { id: "taxis", route: TaxiRoute },
+  { id: "shabbat", route: ShabbatRoute }, { id: "travelTips", route: TipsRoute }, { id: "jerusalem", route: JerusalemRoute }, { id: "jerusalemDeadSea", route: DeadSeaRoute }, { id: "baptism", route: BaptismRoute }, { id: "jerusalemDayTrips", route: JerusalemDayTripsRoute }, { id: "jerusalemChurches", route: ChurchesRoute }, { id: "jerusalemShopping", route: ShoppingRoute }, { id: "telAvivDayTrips", route: TelAvivDayTripsRoute },
+] as const;
 async function routerAt(path: string) {
   const router = createRouter({ routeTree, context: { queryClient: new QueryClient() }, history: createMemoryHistory({ initialEntries: [path] }), trailingSlash: "always" });
   await router.load();
@@ -38,6 +49,10 @@ describe("migrated practical guides", () => {
     expect(screen.getByRole("table", { name: guide.comparison.caption })).toBeInTheDocument();
     expect(screen.getByRole("region", { name: "Travel checklist" })).toHaveTextContent("Before you go");
     for (const section of guide.sections) expect(screen.getByRole("heading", { name: section.title })).toBeInTheDocument();
+    for (const section of guide.sections) if ("photo" in section && section.photo) {
+      expect(within(container.querySelector(`#${section.id}`)! as HTMLElement).getByRole("img", { name: section.photo.alt })).toHaveAttribute("src", section.photo.src);
+      if (section.photo.sourceUrl) expect(container.querySelector(`#${section.id} a[href="${section.photo.sourceUrl}"]`)).not.toBeNull();
+    }
     for (const sourceId of guide.sourceIds) expect(getSource(sourceId)?.url).toMatch(/^https:\/\//);
     expect(container.querySelector("time")).toHaveAttribute("datetime", TRAVEL_GUIDE_CHECK_DATE);
     expect(container.querySelector("a a")).toBeNull();
@@ -63,8 +78,8 @@ describe("migrated practical guides", () => {
     const router = await routerAt("/guides/");
     const Hub = HubRoute.options.component!;
     const html = renderToString(<RouterContextProvider router={router}><Hub /></RouterContextProvider>);
-    expect(guideDirectory).toHaveLength(17);
-    expect(new Set(guideDirectory.map((guide) => guide.to)).size).toBe(17);
+    expect(guideDirectory).toHaveLength(26);
+    expect(new Set(guideDirectory.map((guide) => guide.to)).size).toBe(26);
     for (const guide of guideDirectory) {
       expect(html).toContain(`href="${guide.to}"`);
       expect(router.matchRoutes(String(guide.to)).at(-1)?.routeId).toBe(String(guide.to).replace(/\/$/, ""));
@@ -76,7 +91,7 @@ describe("migrated practical guides", () => {
     const router = await routerAt("/guides/");
     const Hub = HubRoute.options.component!;
     render(<RouterContextProvider router={router}><Hub /></RouterContextProvider>);
-    expect(screen.getAllByTestId("guide-directory-card")).toHaveLength(17);
+    expect(screen.getAllByTestId("guide-directory-card")).toHaveLength(26);
     fireEvent.change(screen.getByRole("searchbox"), { target: { value: "eSIM" } });
     expect(screen.getAllByTestId("guide-directory-card")).toHaveLength(1);
     fireEvent.submit(screen.getByRole("search"));
@@ -85,10 +100,10 @@ describe("migrated practical guides", () => {
     fireEvent.click(within(topics).getByRole("link", { name: "Attractions" }));
     await screen.findByRole("heading", { name: "No guides match this search" });
     fireEvent.click(screen.getByRole("button", { name: "Clear filters" }));
-    await waitFor(() => expect(screen.getAllByTestId("guide-directory-card")).toHaveLength(17));
+    await waitFor(() => expect(screen.getAllByTestId("guide-directory-card")).toHaveLength(26));
     expect(screen.getByRole("searchbox")).toHaveValue("");
     await act(async () => { await router.navigate({ to: "/guides/", search: { topic: "attractions" } }); });
-    expect(screen.getAllByTestId("guide-directory-card")).toHaveLength(3);
+    expect(screen.getAllByTestId("guide-directory-card")).toHaveLength(filterGuides("", "attractions").length);
     expect(within(topics).getByRole("link", { name: "Attractions" })).toHaveAttribute("aria-current", "true");
     expect(within(topics).getByRole("link", { name: "All topics" })).not.toHaveAttribute("aria-current");
     expect(topics.querySelectorAll('[aria-current="true"]')).toHaveLength(1);
@@ -111,6 +126,41 @@ describe("migrated practical guides", () => {
     expect(travelGuides.sherut.reviewNote).toMatch(/no current operator closure notice/i);
     expect(travelGuides.esim.sections.find((section) => section.id === "calling")!.paragraphs.join(" ")).toMatch(/US phone number.*different from an Israeli/s);
     expect(travelGuides.esim.answer).toMatch(/unlimited.*does not promise unlimited full-speed/i);
+  });
+
+  it("retains the limited Terminal 1 weekend option without copying old fares or treating it as a universal airport shuttle", () => {
+    const shabbat = travelGuides.shabbat;
+    expect(shabbat.answer).toMatch(/limited free weekend Line 711/i);
+    expect(shabbat.answer).toContain("Terminal 1");
+    expect(shabbat.sourceIds).toContain("guide-weekend-711");
+    expect(getSource("guide-weekend-711").url).toContain("tel-aviv.gov.il");
+    expect(shabbat.sections.find((section) => section.id === "weekend-711")!.paragraphs.join(" ")).toMatch(/not a frequent.*shuttle/);
+    expect(shabbat.sections.find((section) => section.id === "restart")!.paragraphs.join(" ")).toContain("actual Saturday date");
+    expect(JSON.stringify(shabbat)).not.toMatch(/guaranteed pickup|150–230|300–360|500–600/);
+  });
+
+  it("distinguishes baptism sites, church clusters and region-specific Dead Sea planning without blanket operating claims", () => {
+    expect(travelGuides.baptism.answer).toMatch(/Yardenit.*Sea of Galilee.*Qasr el-Yahud.*near Jericho/s);
+    expect(travelGuides.baptism.reviewNote).toMatch(/different hour sets|differing hour|different hours/i);
+    expect(travelGuides.baptism.sections.find((section) => section.id === "qasr-visit")!.photo?.alt).toContain("Qasr el-Yahud");
+    expect(travelGuides.jerusalemChurches.comparison.rows.map((row) => row[0])).toEqual(["Old City", "Mount of Olives / Kidron", "Mount Zion", "Ein Karem"]);
+    expect(travelGuides.jerusalemDeadSea.sections[0]!.paragraphs.join(" ")).toContain("not the same destination as Ein Bokek");
+    expect(travelGuides.jerusalemShopping.sections.find((section) => section.id === "crafts-and-practicalities")!.paragraphs.join(" ")).toContain("not independently confirmed");
+    expect(JSON.stringify(travelGuides.jerusalemChurches)).not.toMatch(/10-20 ILS|50-80 ILS|open daily.*8:00/i);
+    expect(travelGuides.jerusalemDayTrips.sections.find((section) => section.id === "tel-aviv-jaffa")).toBeTruthy();
+    expect(travelGuides.telAvivDayTrips.sections.find((section) => section.id === "jerusalem-day")).toBeTruthy();
+    expect(travelGuides.jerusalemDayTrips.answer).not.toBe(travelGuides.telAvivDayTrips.answer);
+  });
+
+  it("makes religion and shopping filters useful and keeps migrated related reading inside the portal", () => {
+    expect(filterGuides("baptism", "religion").map((guide) => guide.id)).toContain("baptism");
+    expect(filterGuides("Jerusalem", "shopping").map((guide) => guide.id)).toContain("jerusalemShopping");
+    for (const guide of Object.values(travelGuides)) {
+      for (const reading of guide.reading || []) expect(Object.values(travelGuidePaths).some((path) => reading.href === `https://www.israel-taxi.com${path}`)).toBe(false);
+      for (const related of guide.related) expect(travelGuides[related]).toBeTruthy();
+    }
+    expect(travelGuides.arrival.related).toContain("shabbat");
+    expect(travelGuides.israel.related).toContain("jerusalem");
   });
 
   it("preserves exactly the publisher's five eSIM links with sponsored attributes and anonymous click attribution", async () => {

@@ -10,6 +10,7 @@ import tiberias from "@/assets/home/tiberias-lake.webp";
 import masada from "@/assets/home/masada-dead-sea.webp";
 import caesarea from "@/assets/home/caesarea-dusk.webp";
 import bethlehem from "@/assets/home/bethlehem-nativity.webp";
+import { expandedTravelGuides } from "@/data/travelGuideExpansion";
 
 export const guideTopics = [
   { id: "transportation", label: "Transportation" },
@@ -19,10 +20,12 @@ export const guideTopics = [
   { id: "tips", label: "Tips & recommendations" },
   { id: "accommodation", label: "Accommodation" },
   { id: "connectivity", label: "Mobile & connectivity" },
+  { id: "religion", label: "Religion & heritage" },
+  { id: "shopping", label: "Shopping & markets" },
 ] as const;
 export type GuideTopicId = typeof guideTopics[number]["id"];
 export type GuidePhoto = { src: string; alt: string; sourceUrl?: string; credit?: string; licenseUrl?: string };
-export type GuideSection = { id: string; title: string; paragraphs: string[]; bullets?: string[]; sourceIds?: string[] };
+export type GuideSection = { id: string; title: string; paragraphs: string[]; bullets?: string[]; sourceIds?: string[]; photo?: GuidePhoto };
 export type GuideReading = { label: string; href: string; note: string };
 export type TravelGuide = {
   id: TravelGuideId; title: string; description: string; intro: string; answer: string;
@@ -36,9 +39,9 @@ export type TravelGuide = {
 
 const pickupPhoto: GuidePhoto = { src: airportPickup, alt: "Illustrative airport driver and luggage scene, not a specific taxi company", credit: "Illustrative transport scene; no company or vehicle endorsement." };
 const hallPhoto: GuidePhoto = { src: airportHall, alt: "Ben Gurion Airport Terminal 3 arrivals hall", credit: "GeorgeDement · CC BY-SA 2.0 · resized WebP", sourceUrl: "https://commons.wikimedia.org/wiki/File:Ben_Gurion_Airport_terminal_3_reception_hall.jpg", licenseUrl: "https://creativecommons.org/licenses/by-sa/2.0/" };
-const shabbatReading: GuideReading = { label: "Ben Gurion Airport on Shabbat", href: "https://www.israel-taxi.com/travel-blog/from-ben-gurion-airport-on-shabbat/", note: "Additional arrival-date planning on the publisher's original website." };
 
 export const travelGuides: Record<TravelGuideId, TravelGuide> = {
+  ...expandedTravelGuides,
   uber: {
     id: "uber", title: "Is Uber available in Israel? Taxi apps & alternatives",
     description: "Understand Uber availability in Israel, licensed taxi apps, airport pickup rules and practical alternatives for Tel Aviv, Jerusalem and Haifa.",
@@ -56,7 +59,7 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
     ],
     checklist: ["Install and register with a usable taxi app", "Save the full address and an offline backup", "Confirm fare basis, payment and luggage space", "Use the correct airport pickup instructions", "Arrange critical or larger-group rides ahead"],
     faqs: [{ q: "Is Uber available in Tel Aviv or Jerusalem?", a: "The publisher's current guide reports that the usual Uber passenger service is unavailable. Plan with a usable licensed taxi service or confirmed transfer, and recheck the actual app before travel." }, { q: "Is Gett the same as Uber?", a: "It can provide a familiar app-booking experience, but you should read the local taxi fare and pickup terms instead of assuming another country's Uber model applies." }, { q: "Can I order an airport taxi without downloading an app?", a: "Yes. Gett's official airport instructions also provide a self-service kiosk route: enter the details, retain the ride code and join the authorized queue." }],
-    sourceIds: ["guide-original-uber", "guide-gett", "guide-iaa"], related: ["taxis", "sherut", "esim", "telAviv"], services: [{ label: "Airport transfers", to: "/transfers/" }, { label: "Private driver for intercity journeys", to: "/private-driver/" }], reading: [shabbatReading],
+    sourceIds: ["guide-original-uber", "guide-gett", "guide-iaa"], related: ["taxis", "sherut", "esim", "telAviv", "shabbat"], services: [{ label: "Airport transfers", to: "/transfers/" }, { label: "Private driver for intercity journeys", to: "/private-driver/" }],
   },
   sherut: {
     id: "sherut", title: "Is there still a sherut from Ben Gurion Airport?",
@@ -75,7 +78,7 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
     ],
     checklist: ["Ignore undated airport sherut prices and phone numbers", "Check the exact date and final hotel address", "Distinguish an airport shuttle from a city transfer", "Get written details for a commercial shared ride", "Keep a workable Shabbat and late-arrival alternative"],
     faqs: [{ q: "Is there still a Nesher sherut to Jerusalem?", a: "The publisher's current local guide reports the former airport service discontinued. Do not plan around an old timetable or expect a walk-up desk without current provider confirmation." }, { q: "Does the free airport shuttle go to Tel Aviv?", a: "No. The IAA internal shuttle serves the airport complex. It is not a free airport-to-Tel-Aviv hotel service." }, { q: "Is a private transfer a shared sherut?", a: "A private transfer is arranged for your own party. A shared shuttle sells seats to different passengers and can have different departure and drop-off conditions." }],
-    sourceIds: ["guide-original-sherut", "guide-iaa", "guide-gett", "israel-rail"], related: ["arrival", "israel", "taxis", "telAviv"], services: [{ label: "Private transfer to Jerusalem", to: "/travel-blog/ben-gurion-airport-to-jerusalem/" }, { label: "Private transfer to Haifa", to: "/travel-blog/ben-gurion-airport-to-haifa/" }, { label: "All airport destinations", to: "/transfers/" }], reading: [shabbatReading],
+    sourceIds: ["guide-original-sherut", "guide-iaa", "guide-gett", "israel-rail"], related: ["arrival", "israel", "taxis", "telAviv", "shabbat"], services: [{ label: "Private transfer to Jerusalem", to: "/travel-blog/ben-gurion-airport-to-jerusalem/" }, { label: "Private transfer to Haifa", to: "/travel-blog/ben-gurion-airport-to-haifa/" }, { label: "All airport destinations", to: "/transfers/" }],
   },
   esim: {
     id: "esim", title: "How to choose the best eSIM for Israel",
@@ -111,7 +114,7 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
     ],
     checklist: ["Check official entry requirements before departure", "Save passport/approval and accommodation details offline", "Check the actual terminal and flight status", "Keep baggage tags and any entry record", "Report baggage problems before leaving claim", "Confirm mobile data, onward route and pickup location"],
     faqs: [{ q: "How long does it take to leave Ben Gurion Airport?", a: "It varies with the flight, stand, border queues and bags. The original guide suggests leaving a generous margin rather than booking an onward connection from landing time alone. Give a transfer operator the flight number and discuss waiting terms." }, { q: "Are all airport taxi pickup points the same?", a: "No. Gett distinguishes on-demand and scheduled rides at Terminal 3. Private operators provide their own confirmed meeting instructions. Use the correct terminal and booking type." }, { q: "Should I throw away my entry card?", a: "Keep any entry card or record issued to you with your passport during the stay. Follow the issuing authority's advice if it is lost." }],
-    sourceIds: ["guide-original-arrival", "guide-iaa", "guide-gett", "guide-lost-property", "guide-entry"], related: ["esim", "sherut", "taxis", "israel"], services: [{ label: "Choose your airport destination", to: "/transfers/" }, { label: "Private transfer to Tel Aviv", to: "/travel-blog/ben-gurion-airport-to-tel-aviv/" }, { label: "Private transfer to Jerusalem", to: "/travel-blog/ben-gurion-airport-to-jerusalem/" }], reading: [shabbatReading],
+    sourceIds: ["guide-original-arrival", "guide-iaa", "guide-gett", "guide-lost-property", "guide-entry"], related: ["esim", "sherut", "taxis", "israel", "shabbat", "travelTips"], services: [{ label: "Choose your airport destination", to: "/transfers/" }, { label: "Private transfer to Tel Aviv", to: "/travel-blog/ben-gurion-airport-to-tel-aviv/" }, { label: "Private transfer to Jerusalem", to: "/travel-blog/ben-gurion-airport-to-jerusalem/" }],
   },
   israel: {
     id: "israel", title: "Getting around Israel: a practical transport guide",
@@ -129,7 +132,7 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
     ],
     checklist: ["Use actual hotel and attraction addresses", "Check dates, last departures and return connections", "Prepare payment and validate every journey", "Include luggage, walking and elevation in the comparison", "Confirm rental restrictions or driver inclusions", "Save an offline route and contact number"],
     faqs: [{ q: "Do tourists need a rental car in Israel?", a: "It depends on the itinerary. A city-focused stay may work well without one; several rural stops may make a car useful. Compare actual routes, parking and total cost rather than choosing by country alone." }, { q: "Can one app or ticket cover every journey?", a: "Do not assume so. Check the supported operator, product, distance and transfer rules. A taxi, rental car or private tour is separate from a public-transport fare." }, { q: "Does public transport run normally on Saturday?", a: "Check each route and date. Many regular services have a Shabbat break; some municipal weekend services are local exceptions with their own network and timetable." }],
-    sourceIds: ["guide-original-israel", "israel-rail", "guide-telaviv-transit", "guide-red-line", "guide-iaa"], related: ["telAviv", "taxis", "sherut", "arrival", "esim"], services: [{ label: "Private driver and intercity journeys", to: "/private-driver/" }, { label: "Car rental", to: "/car-rental/" }, { label: "Tours & day trips", to: "/tours/" }, { label: "Destinations and city guides", to: "/destinations/" }], reading: [shabbatReading, { label: "Israel itinerary: five days", href: "https://www.israel-taxi.com/travel-blog/israel-itinerary-5-days/", note: "A suggested wider itinerary on the original publisher website; check transport for your own dates." }],
+    sourceIds: ["guide-original-israel", "israel-rail", "guide-telaviv-transit", "guide-red-line", "guide-iaa"], related: ["telAviv", "taxis", "sherut", "arrival", "esim", "travelTips", "jerusalem"], services: [{ label: "Private driver and intercity journeys", to: "/private-driver/" }, { label: "Car rental", to: "/car-rental/" }, { label: "Tours & day trips", to: "/tours/" }, { label: "Destinations and city guides", to: "/destinations/" }], reading: [{ label: "Israel itinerary: five days", href: "https://www.israel-taxi.com/travel-blog/israel-itinerary-5-days/", note: "A suggested wider itinerary on the original publisher website; check transport for your own dates." }],
   },
   telAviv: {
     id: "telAviv", title: "Getting around Tel Aviv: walking, buses, rail & taxis",
@@ -147,7 +150,7 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
     ],
     checklist: ["Choose your hotel area around the places you will visit", "Group nearby attractions into a walking route", "Check current Red Line and bus maps", "Include the last leg from national rail", "Check the separate weekend service and return trip", "Read taxi or bike/scooter terms before starting"],
     faqs: [{ q: "Is Tel Aviv easy to visit without a car?", a: "A central stay can work well with walking, buses, the Red Line and occasional taxis. The right hotel location and actual daily routes matter more than having a car for every day." }, { q: "Does the Red Line go to every beach hotel?", a: "No. Check the current route and remaining walk. A bus or taxi may suit a particular hotel better." }, { q: "Are Tel Aviv weekend buses the same as weekday buses?", a: "No. The municipal weekend network has its own map, stops and timetable. Check the return journey and do not assume it provides your airport connection." }],
-    sourceIds: ["guide-original-telAviv", "guide-telaviv-transit", "guide-red-line", "israel-rail"], related: ["israel", "uber", "taxis", "esim"], services: [{ label: "Choose your Tel Aviv hotel area", to: "/travel-blog/where-to-stay-in-tel-aviv/" }, { label: "Jaffa hotel guide", to: "/tel-aviv/jaffa-hotels/" }, { label: "Private airport transfer to Tel Aviv", to: "/travel-blog/ben-gurion-airport-to-tel-aviv/" }],
+    sourceIds: ["guide-original-telAviv", "guide-telaviv-transit", "guide-red-line", "israel-rail"], related: ["israel", "uber", "taxis", "esim", "telAvivDayTrips", "shabbat"], services: [{ label: "Choose your Tel Aviv hotel area", to: "/travel-blog/where-to-stay-in-tel-aviv/" }, { label: "Jaffa hotel guide", to: "/tel-aviv/jaffa-hotels/" }, { label: "Private airport transfer to Tel Aviv", to: "/travel-blog/ben-gurion-airport-to-tel-aviv/" }],
   },
   taxis: {
     id: "taxis", title: "Taxis in Israel: meters, apps, payment & airport pickups",

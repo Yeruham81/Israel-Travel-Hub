@@ -89,6 +89,8 @@ export const allNavGroups: NavGroup[] = [
     title: "Travel Guides & Tips",
     items: [
       { label: "All travel guides", to: "/guides/" },
+      { label: "Israel travel tips", to: travelGuidePaths.travelTips },
+      { label: "Jerusalem travel guide", to: travelGuidePaths.jerusalem },
       travelTips.gettingAround,
       { label: "Getting around Tel Aviv", to: travelGuidePaths.telAviv },
       { label: "Taxis in Israel", to: travelGuidePaths.taxis },

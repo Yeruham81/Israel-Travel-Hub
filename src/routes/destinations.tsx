@@ -1,6 +1,7 @@
 import { createFileRoute, Link, type LinkProps } from "@tanstack/react-router";
 import { HubHeader } from "@/components/Guide";
 import { pageMeta } from "@/lib/site";
+import { travelGuidePaths } from "@/data/registry";
 
 export const Route = createFileRoute("/destinations")({
   head: () =>
@@ -20,6 +21,7 @@ const dests: { name: string; text: string; links: L[] }[] = [
     text: "Compare spa breaks, family resorts, luxury stays and nature-focused alternatives near Ein Gedi on the Israeli shore.",
     links: [
       { label: "All Dead Sea hotels", to: "/travel-blog/best-dead-sea-hotels/" },
+      { label: "Jerusalem to the Dead Sea", to: travelGuidePaths.jerusalemDeadSea },
       { label: "Dead Sea spa hotels", to: "/dead-sea/spa-hotels/" },
       { label: "Dead Sea family hotels", to: "/dead-sea/family-hotels/" },
       { label: "Masada visit & tickets", to: "/travel-blog/masada/" },
@@ -30,6 +32,10 @@ const dests: { name: string; text: string; links: L[] }[] = [
     name: "Jerusalem",
     text: "The Old City, holy sites and museums, with Bethlehem and Masada as popular day trips.",
     links: [
+      { label: "Jerusalem travel guide", to: travelGuidePaths.jerusalem },
+      { label: "Churches and pilgrimage routes", to: travelGuidePaths.jerusalemChurches },
+      { label: "Jerusalem shopping guide", to: travelGuidePaths.jerusalemShopping },
+      { label: "Day trips from Jerusalem", to: travelGuidePaths.jerusalemDayTrips },
       { label: "Where to stay in Jerusalem", to: "/travel-blog/where-to-stay-in-jerusalem/" },
       { label: "Airport to Jerusalem", to: "/travel-blog/ben-gurion-airport-to-jerusalem/" },
       { label: "Bethlehem tours", to: "/tours/bethlehem-from-jerusalem/" },
@@ -40,6 +46,7 @@ const dests: { name: string; text: string; links: L[] }[] = [
     name: "Tel Aviv & Jaffa",
     text: "Beaches, Bauhaus streets, food and nightlife; a base for the coast.",
     links: [
+      { label: "Day trips from Tel Aviv", to: travelGuidePaths.telAvivDayTrips },
       { label: "Where to stay in Tel Aviv", to: "/travel-blog/where-to-stay-in-tel-aviv/" },
       { label: "Airport to Tel Aviv", to: "/travel-blog/ben-gurion-airport-to-tel-aviv/" },
       { label: "Caesarea on the coast", to: "/attractions/caesarea/" },
@@ -63,6 +70,7 @@ const dests: { name: string; text: string; links: L[] }[] = [
     name: "Tiberias & the Sea of Galilee",
     text: "Lakeside town and Christian sites, with the Golan and northern Israel nearby.",
     links: [
+      { label: "Jordan River baptism sites", to: travelGuidePaths.baptism },
       { label: "Hotels in Tiberias", to: "/travel-blog/best-hotels-in-tiberias/" },
       { label: "Tiberias family hotels", to: "/tiberias/family-hotels/" },
       { label: "Tiberias luxury & couples' hotels", to: "/tiberias/luxury-hotels/" },

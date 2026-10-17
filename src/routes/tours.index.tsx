@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { HubCard, HubHeader, ProviderSection } from "@/components/Guide";
-import { linksForPage } from "@/data/registry";
+import { HubCard, HubHeader, ProviderSection, RelatedLinks } from "@/components/Guide";
+import { linksForPage, travelGuidePaths } from "@/data/registry";
 import { pageMeta } from "@/lib/site";
 
 export const Route = createFileRoute("/tours/")({
@@ -42,6 +42,12 @@ function Tours() {
         </div>
       </section>
       <ProviderSection title="Private day trips" links={links} pageId="tours-hub" />
+      <RelatedLinks title="Plan your day-trip itinerary" items={[
+        { label: "Day trips from Jerusalem", to: travelGuidePaths.jerusalemDayTrips },
+        { label: "Day trips from Tel Aviv", to: travelGuidePaths.telAvivDayTrips },
+        { label: "Jerusalem to the Dead Sea", to: travelGuidePaths.jerusalemDeadSea },
+        { label: "Jordan River baptism sites", to: travelGuidePaths.baptism },
+      ]} />
     </main>
   );
 }

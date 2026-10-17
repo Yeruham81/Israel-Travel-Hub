@@ -29,7 +29,7 @@ function Guides() {
   }
   const photos = [...new Map(guideDirectory.map((guide) => [guide.photo.src, guide.photo])).values()].filter((photo) => photo.credit || photo.sourceUrl);
   return <main className="mx-auto max-w-6xl px-4 pb-8">
-    <HubHeader crumbs={[{ name: "Home", to: "/" }, { name: "Travel guides", to: "/guides/" }]} eyebrow="Useful answers for your Israel trip" title="Travel guides & practical tips" intro="Prepare for arrival, choose how to get around and discover the right places to stay and explore. Browse by topic or search for the question you need answered." />
+    <HubHeader crumbs={[{ name: "Home", to: "/" }, { name: "Travel guides", to: "/guides/" }]} eyebrow="Useful answers for your Israel trip" title="Travel guides & practical tips" intro="Prepare for arrival, choose how to get around and explore destinations, day trips, religious heritage and local markets. Browse by topic or search for the question you need answered." />
     <div className="mt-8 rounded-2xl border bg-secondary/50 p-5 sm:p-7">
       <form onSubmit={(event) => { event.preventDefault(); void navigate({ search: searchFor(topic), replace: true }); }} role="search" className="flex flex-wrap gap-3"><label className="min-w-0 flex-1 text-sm font-medium">Search travel guides<input value={query} maxLength={120} onChange={(event) => setQuery(event.target.value)} type="search" placeholder="Try airport, eSIM, Tel Aviv or hotels" className="mt-2 h-12 w-full rounded-lg border bg-background px-4 text-base" /></label><button type="submit" className="btn btn-primary self-end">Search</button></form>
       <nav aria-label="Filter guides by topic" className="mt-5">

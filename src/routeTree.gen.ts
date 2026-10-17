@@ -47,6 +47,7 @@ import { Route as ToursIndexRouteImport } from './routes/tours.index'
 import { Route as ToursBethlehemFromJerusalemRouteImport } from './routes/tours.bethlehem-from-jerusalem'
 import { Route as TransfersIndexRouteImport } from './routes/transfers.index'
 import { Route as TransfersBenGurionAirportRouteImport } from './routes/transfers.ben-gurion-airport'
+import { Route as TravelBlogBaptismInTheJordanRiverRouteImport } from './routes/travel-blog.baptism-in-the-jordan-river'
 import { Route as TravelBlogBenGurionAirportArrivalTipsRouteImport } from './routes/travel-blog.ben-gurion-airport-arrival-tips'
 import { Route as TravelBlogBenGurionAirportToEinBokekRouteImport } from './routes/travel-blog.ben-gurion-airport-to-ein-bokek'
 import { Route as TravelBlogBenGurionAirportToHaifaRouteImport } from './routes/travel-blog.ben-gurion-airport-to-haifa'
@@ -56,10 +57,18 @@ import { Route as TravelBlogBestDeadSeaHotelsRouteImport } from './routes/travel
 import { Route as TravelBlogBestEsimForIsraelRouteImport } from './routes/travel-blog.best-esim-for-israel'
 import { Route as TravelBlogBestHotelsInHaifaRouteImport } from './routes/travel-blog.best-hotels-in-haifa'
 import { Route as TravelBlogBestHotelsInTiberiasRouteImport } from './routes/travel-blog.best-hotels-in-tiberias'
+import { Route as TravelBlogChurchesInJerusalemRouteImport } from './routes/travel-blog.churches-in-jerusalem'
+import { Route as TravelBlogDayTripsFromJerusalemRouteImport } from './routes/travel-blog.day-trips-from-jerusalem'
+import { Route as TravelBlogDayTripsFromTelAvivRouteImport } from './routes/travel-blog.day-trips-from-tel-aviv'
+import { Route as TravelBlogFromBenGurionAirportOnShabbatRouteImport } from './routes/travel-blog.from-ben-gurion-airport-on-shabbat'
 import { Route as TravelBlogGettingAroundIsraelRouteImport } from './routes/travel-blog.getting-around-israel'
 import { Route as TravelBlogGettingAroundTelAvivRouteImport } from './routes/travel-blog.getting-around-tel-aviv'
+import { Route as TravelBlogIsraelTravelTipsRouteImport } from './routes/travel-blog.israel-travel-tips'
+import { Route as TravelBlogJerusalemToTheDeadSeaRouteImport } from './routes/travel-blog.jerusalem-to-the-dead-sea'
+import { Route as TravelBlogJerusalemTravelGuideRouteImport } from './routes/travel-blog.jerusalem-travel-guide'
 import { Route as TravelBlogMasadaRouteImport } from './routes/travel-blog.masada'
 import { Route as TravelBlogSherutInIsraelRouteImport } from './routes/travel-blog.sherut-in-israel'
+import { Route as TravelBlogShoppingInJerusalemRouteImport } from './routes/travel-blog.shopping-in-jerusalem'
 import { Route as TravelBlogTaxisInIsraelRouteImport } from './routes/travel-blog.taxis-in-israel'
 import { Route as TravelBlogUberInIsraelRouteImport } from './routes/travel-blog.uber-in-israel'
 import { Route as TravelBlogWhereToStayInJerusalemRouteImport } from './routes/travel-blog.where-to-stay-in-jerusalem'
@@ -265,6 +274,12 @@ const TransfersBenGurionAirportRoute =
     path: '/transfers/ben-gurion-airport',
     getParentRoute: () => rootRouteImport,
   } as any)
+const TravelBlogBaptismInTheJordanRiverRoute =
+  TravelBlogBaptismInTheJordanRiverRouteImport.update({
+    id: '/travel-blog/baptism-in-the-jordan-river',
+    path: '/travel-blog/baptism-in-the-jordan-river',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const TravelBlogBenGurionAirportArrivalTipsRoute =
   TravelBlogBenGurionAirportArrivalTipsRouteImport.update({
     id: '/travel-blog/ben-gurion-airport-arrival-tips',
@@ -319,6 +334,30 @@ const TravelBlogBestHotelsInTiberiasRoute =
     path: '/travel-blog/best-hotels-in-tiberias',
     getParentRoute: () => rootRouteImport,
   } as any)
+const TravelBlogChurchesInJerusalemRoute =
+  TravelBlogChurchesInJerusalemRouteImport.update({
+    id: '/travel-blog/churches-in-jerusalem',
+    path: '/travel-blog/churches-in-jerusalem',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const TravelBlogDayTripsFromJerusalemRoute =
+  TravelBlogDayTripsFromJerusalemRouteImport.update({
+    id: '/travel-blog/day-trips-from-jerusalem',
+    path: '/travel-blog/day-trips-from-jerusalem',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const TravelBlogDayTripsFromTelAvivRoute =
+  TravelBlogDayTripsFromTelAvivRouteImport.update({
+    id: '/travel-blog/day-trips-from-tel-aviv',
+    path: '/travel-blog/day-trips-from-tel-aviv',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const TravelBlogFromBenGurionAirportOnShabbatRoute =
+  TravelBlogFromBenGurionAirportOnShabbatRouteImport.update({
+    id: '/travel-blog/from-ben-gurion-airport-on-shabbat',
+    path: '/travel-blog/from-ben-gurion-airport-on-shabbat',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const TravelBlogGettingAroundIsraelRoute =
   TravelBlogGettingAroundIsraelRouteImport.update({
     id: '/travel-blog/getting-around-israel',
@@ -331,6 +370,24 @@ const TravelBlogGettingAroundTelAvivRoute =
     path: '/travel-blog/getting-around-tel-aviv',
     getParentRoute: () => rootRouteImport,
   } as any)
+const TravelBlogIsraelTravelTipsRoute =
+  TravelBlogIsraelTravelTipsRouteImport.update({
+    id: '/travel-blog/israel-travel-tips',
+    path: '/travel-blog/israel-travel-tips',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const TravelBlogJerusalemToTheDeadSeaRoute =
+  TravelBlogJerusalemToTheDeadSeaRouteImport.update({
+    id: '/travel-blog/jerusalem-to-the-dead-sea',
+    path: '/travel-blog/jerusalem-to-the-dead-sea',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const TravelBlogJerusalemTravelGuideRoute =
+  TravelBlogJerusalemTravelGuideRouteImport.update({
+    id: '/travel-blog/jerusalem-travel-guide',
+    path: '/travel-blog/jerusalem-travel-guide',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const TravelBlogMasadaRoute = TravelBlogMasadaRouteImport.update({
   id: '/travel-blog/masada',
   path: '/travel-blog/masada',
@@ -340,6 +397,12 @@ const TravelBlogSherutInIsraelRoute =
   TravelBlogSherutInIsraelRouteImport.update({
     id: '/travel-blog/sherut-in-israel',
     path: '/travel-blog/sherut-in-israel',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const TravelBlogShoppingInJerusalemRoute =
+  TravelBlogShoppingInJerusalemRouteImport.update({
+    id: '/travel-blog/shopping-in-jerusalem',
+    path: '/travel-blog/shopping-in-jerusalem',
     getParentRoute: () => rootRouteImport,
   } as any)
 const TravelBlogTaxisInIsraelRoute = TravelBlogTaxisInIsraelRouteImport.update({
@@ -401,6 +464,7 @@ export interface FileRoutesByFullPath {
   '/tiberias/luxury-hotels': typeof TiberiasLuxuryHotelsRoute
   '/tours/bethlehem-from-jerusalem': typeof ToursBethlehemFromJerusalemRoute
   '/transfers/ben-gurion-airport': typeof TransfersBenGurionAirportRoute
+  '/travel-blog/baptism-in-the-jordan-river': typeof TravelBlogBaptismInTheJordanRiverRoute
   '/travel-blog/ben-gurion-airport-arrival-tips': typeof TravelBlogBenGurionAirportArrivalTipsRoute
   '/travel-blog/ben-gurion-airport-to-ein-bokek': typeof TravelBlogBenGurionAirportToEinBokekRoute
   '/travel-blog/ben-gurion-airport-to-haifa': typeof TravelBlogBenGurionAirportToHaifaRoute
@@ -410,10 +474,18 @@ export interface FileRoutesByFullPath {
   '/travel-blog/best-esim-for-israel': typeof TravelBlogBestEsimForIsraelRoute
   '/travel-blog/best-hotels-in-haifa': typeof TravelBlogBestHotelsInHaifaRoute
   '/travel-blog/best-hotels-in-tiberias': typeof TravelBlogBestHotelsInTiberiasRoute
+  '/travel-blog/churches-in-jerusalem': typeof TravelBlogChurchesInJerusalemRoute
+  '/travel-blog/day-trips-from-jerusalem': typeof TravelBlogDayTripsFromJerusalemRoute
+  '/travel-blog/day-trips-from-tel-aviv': typeof TravelBlogDayTripsFromTelAvivRoute
+  '/travel-blog/from-ben-gurion-airport-on-shabbat': typeof TravelBlogFromBenGurionAirportOnShabbatRoute
   '/travel-blog/getting-around-israel': typeof TravelBlogGettingAroundIsraelRoute
   '/travel-blog/getting-around-tel-aviv': typeof TravelBlogGettingAroundTelAvivRoute
+  '/travel-blog/israel-travel-tips': typeof TravelBlogIsraelTravelTipsRoute
+  '/travel-blog/jerusalem-to-the-dead-sea': typeof TravelBlogJerusalemToTheDeadSeaRoute
+  '/travel-blog/jerusalem-travel-guide': typeof TravelBlogJerusalemTravelGuideRoute
   '/travel-blog/masada': typeof TravelBlogMasadaRoute
   '/travel-blog/sherut-in-israel': typeof TravelBlogSherutInIsraelRoute
+  '/travel-blog/shopping-in-jerusalem': typeof TravelBlogShoppingInJerusalemRoute
   '/travel-blog/taxis-in-israel': typeof TravelBlogTaxisInIsraelRoute
   '/travel-blog/uber-in-israel': typeof TravelBlogUberInIsraelRoute
   '/travel-blog/where-to-stay-in-jerusalem': typeof TravelBlogWhereToStayInJerusalemRoute
@@ -458,6 +530,7 @@ export interface FileRoutesByTo {
   '/tiberias/luxury-hotels': typeof TiberiasLuxuryHotelsRoute
   '/tours/bethlehem-from-jerusalem': typeof ToursBethlehemFromJerusalemRoute
   '/transfers/ben-gurion-airport': typeof TransfersBenGurionAirportRoute
+  '/travel-blog/baptism-in-the-jordan-river': typeof TravelBlogBaptismInTheJordanRiverRoute
   '/travel-blog/ben-gurion-airport-arrival-tips': typeof TravelBlogBenGurionAirportArrivalTipsRoute
   '/travel-blog/ben-gurion-airport-to-ein-bokek': typeof TravelBlogBenGurionAirportToEinBokekRoute
   '/travel-blog/ben-gurion-airport-to-haifa': typeof TravelBlogBenGurionAirportToHaifaRoute
@@ -467,10 +540,18 @@ export interface FileRoutesByTo {
   '/travel-blog/best-esim-for-israel': typeof TravelBlogBestEsimForIsraelRoute
   '/travel-blog/best-hotels-in-haifa': typeof TravelBlogBestHotelsInHaifaRoute
   '/travel-blog/best-hotels-in-tiberias': typeof TravelBlogBestHotelsInTiberiasRoute
+  '/travel-blog/churches-in-jerusalem': typeof TravelBlogChurchesInJerusalemRoute
+  '/travel-blog/day-trips-from-jerusalem': typeof TravelBlogDayTripsFromJerusalemRoute
+  '/travel-blog/day-trips-from-tel-aviv': typeof TravelBlogDayTripsFromTelAvivRoute
+  '/travel-blog/from-ben-gurion-airport-on-shabbat': typeof TravelBlogFromBenGurionAirportOnShabbatRoute
   '/travel-blog/getting-around-israel': typeof TravelBlogGettingAroundIsraelRoute
   '/travel-blog/getting-around-tel-aviv': typeof TravelBlogGettingAroundTelAvivRoute
+  '/travel-blog/israel-travel-tips': typeof TravelBlogIsraelTravelTipsRoute
+  '/travel-blog/jerusalem-to-the-dead-sea': typeof TravelBlogJerusalemToTheDeadSeaRoute
+  '/travel-blog/jerusalem-travel-guide': typeof TravelBlogJerusalemTravelGuideRoute
   '/travel-blog/masada': typeof TravelBlogMasadaRoute
   '/travel-blog/sherut-in-israel': typeof TravelBlogSherutInIsraelRoute
+  '/travel-blog/shopping-in-jerusalem': typeof TravelBlogShoppingInJerusalemRoute
   '/travel-blog/taxis-in-israel': typeof TravelBlogTaxisInIsraelRoute
   '/travel-blog/uber-in-israel': typeof TravelBlogUberInIsraelRoute
   '/travel-blog/where-to-stay-in-jerusalem': typeof TravelBlogWhereToStayInJerusalemRoute
@@ -516,6 +597,7 @@ export interface FileRoutesById {
   '/tiberias/luxury-hotels': typeof TiberiasLuxuryHotelsRoute
   '/tours/bethlehem-from-jerusalem': typeof ToursBethlehemFromJerusalemRoute
   '/transfers/ben-gurion-airport': typeof TransfersBenGurionAirportRoute
+  '/travel-blog/baptism-in-the-jordan-river': typeof TravelBlogBaptismInTheJordanRiverRoute
   '/travel-blog/ben-gurion-airport-arrival-tips': typeof TravelBlogBenGurionAirportArrivalTipsRoute
   '/travel-blog/ben-gurion-airport-to-ein-bokek': typeof TravelBlogBenGurionAirportToEinBokekRoute
   '/travel-blog/ben-gurion-airport-to-haifa': typeof TravelBlogBenGurionAirportToHaifaRoute
@@ -525,10 +607,18 @@ export interface FileRoutesById {
   '/travel-blog/best-esim-for-israel': typeof TravelBlogBestEsimForIsraelRoute
   '/travel-blog/best-hotels-in-haifa': typeof TravelBlogBestHotelsInHaifaRoute
   '/travel-blog/best-hotels-in-tiberias': typeof TravelBlogBestHotelsInTiberiasRoute
+  '/travel-blog/churches-in-jerusalem': typeof TravelBlogChurchesInJerusalemRoute
+  '/travel-blog/day-trips-from-jerusalem': typeof TravelBlogDayTripsFromJerusalemRoute
+  '/travel-blog/day-trips-from-tel-aviv': typeof TravelBlogDayTripsFromTelAvivRoute
+  '/travel-blog/from-ben-gurion-airport-on-shabbat': typeof TravelBlogFromBenGurionAirportOnShabbatRoute
   '/travel-blog/getting-around-israel': typeof TravelBlogGettingAroundIsraelRoute
   '/travel-blog/getting-around-tel-aviv': typeof TravelBlogGettingAroundTelAvivRoute
+  '/travel-blog/israel-travel-tips': typeof TravelBlogIsraelTravelTipsRoute
+  '/travel-blog/jerusalem-to-the-dead-sea': typeof TravelBlogJerusalemToTheDeadSeaRoute
+  '/travel-blog/jerusalem-travel-guide': typeof TravelBlogJerusalemTravelGuideRoute
   '/travel-blog/masada': typeof TravelBlogMasadaRoute
   '/travel-blog/sherut-in-israel': typeof TravelBlogSherutInIsraelRoute
+  '/travel-blog/shopping-in-jerusalem': typeof TravelBlogShoppingInJerusalemRoute
   '/travel-blog/taxis-in-israel': typeof TravelBlogTaxisInIsraelRoute
   '/travel-blog/uber-in-israel': typeof TravelBlogUberInIsraelRoute
   '/travel-blog/where-to-stay-in-jerusalem': typeof TravelBlogWhereToStayInJerusalemRoute
@@ -575,6 +665,7 @@ export interface FileRouteTypes {
     | '/tiberias/luxury-hotels'
     | '/tours/bethlehem-from-jerusalem'
     | '/transfers/ben-gurion-airport'
+    | '/travel-blog/baptism-in-the-jordan-river'
     | '/travel-blog/ben-gurion-airport-arrival-tips'
     | '/travel-blog/ben-gurion-airport-to-ein-bokek'
     | '/travel-blog/ben-gurion-airport-to-haifa'
@@ -584,10 +675,18 @@ export interface FileRouteTypes {
     | '/travel-blog/best-esim-for-israel'
     | '/travel-blog/best-hotels-in-haifa'
     | '/travel-blog/best-hotels-in-tiberias'
+    | '/travel-blog/churches-in-jerusalem'
+    | '/travel-blog/day-trips-from-jerusalem'
+    | '/travel-blog/day-trips-from-tel-aviv'
+    | '/travel-blog/from-ben-gurion-airport-on-shabbat'
     | '/travel-blog/getting-around-israel'
     | '/travel-blog/getting-around-tel-aviv'
+    | '/travel-blog/israel-travel-tips'
+    | '/travel-blog/jerusalem-to-the-dead-sea'
+    | '/travel-blog/jerusalem-travel-guide'
     | '/travel-blog/masada'
     | '/travel-blog/sherut-in-israel'
+    | '/travel-blog/shopping-in-jerusalem'
     | '/travel-blog/taxis-in-israel'
     | '/travel-blog/uber-in-israel'
     | '/travel-blog/where-to-stay-in-jerusalem'
@@ -632,6 +731,7 @@ export interface FileRouteTypes {
     | '/tiberias/luxury-hotels'
     | '/tours/bethlehem-from-jerusalem'
     | '/transfers/ben-gurion-airport'
+    | '/travel-blog/baptism-in-the-jordan-river'
     | '/travel-blog/ben-gurion-airport-arrival-tips'
     | '/travel-blog/ben-gurion-airport-to-ein-bokek'
     | '/travel-blog/ben-gurion-airport-to-haifa'
@@ -641,10 +741,18 @@ export interface FileRouteTypes {
     | '/travel-blog/best-esim-for-israel'
     | '/travel-blog/best-hotels-in-haifa'
     | '/travel-blog/best-hotels-in-tiberias'
+    | '/travel-blog/churches-in-jerusalem'
+    | '/travel-blog/day-trips-from-jerusalem'
+    | '/travel-blog/day-trips-from-tel-aviv'
+    | '/travel-blog/from-ben-gurion-airport-on-shabbat'
     | '/travel-blog/getting-around-israel'
     | '/travel-blog/getting-around-tel-aviv'
+    | '/travel-blog/israel-travel-tips'
+    | '/travel-blog/jerusalem-to-the-dead-sea'
+    | '/travel-blog/jerusalem-travel-guide'
     | '/travel-blog/masada'
     | '/travel-blog/sherut-in-israel'
+    | '/travel-blog/shopping-in-jerusalem'
     | '/travel-blog/taxis-in-israel'
     | '/travel-blog/uber-in-israel'
     | '/travel-blog/where-to-stay-in-jerusalem'
@@ -689,6 +797,7 @@ export interface FileRouteTypes {
     | '/tiberias/luxury-hotels'
     | '/tours/bethlehem-from-jerusalem'
     | '/transfers/ben-gurion-airport'
+    | '/travel-blog/baptism-in-the-jordan-river'
     | '/travel-blog/ben-gurion-airport-arrival-tips'
     | '/travel-blog/ben-gurion-airport-to-ein-bokek'
     | '/travel-blog/ben-gurion-airport-to-haifa'
@@ -698,10 +807,18 @@ export interface FileRouteTypes {
     | '/travel-blog/best-esim-for-israel'
     | '/travel-blog/best-hotels-in-haifa'
     | '/travel-blog/best-hotels-in-tiberias'
+    | '/travel-blog/churches-in-jerusalem'
+    | '/travel-blog/day-trips-from-jerusalem'
+    | '/travel-blog/day-trips-from-tel-aviv'
+    | '/travel-blog/from-ben-gurion-airport-on-shabbat'
     | '/travel-blog/getting-around-israel'
     | '/travel-blog/getting-around-tel-aviv'
+    | '/travel-blog/israel-travel-tips'
+    | '/travel-blog/jerusalem-to-the-dead-sea'
+    | '/travel-blog/jerusalem-travel-guide'
     | '/travel-blog/masada'
     | '/travel-blog/sherut-in-israel'
+    | '/travel-blog/shopping-in-jerusalem'
     | '/travel-blog/taxis-in-israel'
     | '/travel-blog/uber-in-israel'
     | '/travel-blog/where-to-stay-in-jerusalem'
@@ -747,6 +864,7 @@ export interface RootRouteChildren {
   TiberiasLuxuryHotelsRoute: typeof TiberiasLuxuryHotelsRoute
   ToursBethlehemFromJerusalemRoute: typeof ToursBethlehemFromJerusalemRoute
   TransfersBenGurionAirportRoute: typeof TransfersBenGurionAirportRoute
+  TravelBlogBaptismInTheJordanRiverRoute: typeof TravelBlogBaptismInTheJordanRiverRoute
   TravelBlogBenGurionAirportArrivalTipsRoute: typeof TravelBlogBenGurionAirportArrivalTipsRoute
   TravelBlogBenGurionAirportToEinBokekRoute: typeof TravelBlogBenGurionAirportToEinBokekRoute
   TravelBlogBenGurionAirportToHaifaRoute: typeof TravelBlogBenGurionAirportToHaifaRoute
@@ -756,10 +874,18 @@ export interface RootRouteChildren {
   TravelBlogBestEsimForIsraelRoute: typeof TravelBlogBestEsimForIsraelRoute
   TravelBlogBestHotelsInHaifaRoute: typeof TravelBlogBestHotelsInHaifaRoute
   TravelBlogBestHotelsInTiberiasRoute: typeof TravelBlogBestHotelsInTiberiasRoute
+  TravelBlogChurchesInJerusalemRoute: typeof TravelBlogChurchesInJerusalemRoute
+  TravelBlogDayTripsFromJerusalemRoute: typeof TravelBlogDayTripsFromJerusalemRoute
+  TravelBlogDayTripsFromTelAvivRoute: typeof TravelBlogDayTripsFromTelAvivRoute
+  TravelBlogFromBenGurionAirportOnShabbatRoute: typeof TravelBlogFromBenGurionAirportOnShabbatRoute
   TravelBlogGettingAroundIsraelRoute: typeof TravelBlogGettingAroundIsraelRoute
   TravelBlogGettingAroundTelAvivRoute: typeof TravelBlogGettingAroundTelAvivRoute
+  TravelBlogIsraelTravelTipsRoute: typeof TravelBlogIsraelTravelTipsRoute
+  TravelBlogJerusalemToTheDeadSeaRoute: typeof TravelBlogJerusalemToTheDeadSeaRoute
+  TravelBlogJerusalemTravelGuideRoute: typeof TravelBlogJerusalemTravelGuideRoute
   TravelBlogMasadaRoute: typeof TravelBlogMasadaRoute
   TravelBlogSherutInIsraelRoute: typeof TravelBlogSherutInIsraelRoute
+  TravelBlogShoppingInJerusalemRoute: typeof TravelBlogShoppingInJerusalemRoute
   TravelBlogTaxisInIsraelRoute: typeof TravelBlogTaxisInIsraelRoute
   TravelBlogUberInIsraelRoute: typeof TravelBlogUberInIsraelRoute
   TravelBlogWhereToStayInJerusalemRoute: typeof TravelBlogWhereToStayInJerusalemRoute
@@ -1037,6 +1163,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof TransfersBenGurionAirportRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/travel-blog/baptism-in-the-jordan-river': {
+      id: '/travel-blog/baptism-in-the-jordan-river'
+      path: '/travel-blog/baptism-in-the-jordan-river'
+      fullPath: '/travel-blog/baptism-in-the-jordan-river'
+      preLoaderRoute: typeof TravelBlogBaptismInTheJordanRiverRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/travel-blog/ben-gurion-airport-arrival-tips': {
       id: '/travel-blog/ben-gurion-airport-arrival-tips'
       path: '/travel-blog/ben-gurion-airport-arrival-tips'
@@ -1100,6 +1233,34 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof TravelBlogBestHotelsInTiberiasRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/travel-blog/churches-in-jerusalem': {
+      id: '/travel-blog/churches-in-jerusalem'
+      path: '/travel-blog/churches-in-jerusalem'
+      fullPath: '/travel-blog/churches-in-jerusalem'
+      preLoaderRoute: typeof TravelBlogChurchesInJerusalemRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/travel-blog/day-trips-from-jerusalem': {
+      id: '/travel-blog/day-trips-from-jerusalem'
+      path: '/travel-blog/day-trips-from-jerusalem'
+      fullPath: '/travel-blog/day-trips-from-jerusalem'
+      preLoaderRoute: typeof TravelBlogDayTripsFromJerusalemRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/travel-blog/day-trips-from-tel-aviv': {
+      id: '/travel-blog/day-trips-from-tel-aviv'
+      path: '/travel-blog/day-trips-from-tel-aviv'
+      fullPath: '/travel-blog/day-trips-from-tel-aviv'
+      preLoaderRoute: typeof TravelBlogDayTripsFromTelAvivRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/travel-blog/from-ben-gurion-airport-on-shabbat': {
+      id: '/travel-blog/from-ben-gurion-airport-on-shabbat'
+      path: '/travel-blog/from-ben-gurion-airport-on-shabbat'
+      fullPath: '/travel-blog/from-ben-gurion-airport-on-shabbat'
+      preLoaderRoute: typeof TravelBlogFromBenGurionAirportOnShabbatRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/travel-blog/getting-around-israel': {
       id: '/travel-blog/getting-around-israel'
       path: '/travel-blog/getting-around-israel'
@@ -1114,6 +1275,27 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof TravelBlogGettingAroundTelAvivRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/travel-blog/israel-travel-tips': {
+      id: '/travel-blog/israel-travel-tips'
+      path: '/travel-blog/israel-travel-tips'
+      fullPath: '/travel-blog/israel-travel-tips'
+      preLoaderRoute: typeof TravelBlogIsraelTravelTipsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/travel-blog/jerusalem-to-the-dead-sea': {
+      id: '/travel-blog/jerusalem-to-the-dead-sea'
+      path: '/travel-blog/jerusalem-to-the-dead-sea'
+      fullPath: '/travel-blog/jerusalem-to-the-dead-sea'
+      preLoaderRoute: typeof TravelBlogJerusalemToTheDeadSeaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/travel-blog/jerusalem-travel-guide': {
+      id: '/travel-blog/jerusalem-travel-guide'
+      path: '/travel-blog/jerusalem-travel-guide'
+      fullPath: '/travel-blog/jerusalem-travel-guide'
+      preLoaderRoute: typeof TravelBlogJerusalemTravelGuideRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/travel-blog/masada': {
       id: '/travel-blog/masada'
       path: '/travel-blog/masada'
@@ -1126,6 +1308,13 @@ declare module '@tanstack/react-router' {
       path: '/travel-blog/sherut-in-israel'
       fullPath: '/travel-blog/sherut-in-israel'
       preLoaderRoute: typeof TravelBlogSherutInIsraelRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/travel-blog/shopping-in-jerusalem': {
+      id: '/travel-blog/shopping-in-jerusalem'
+      path: '/travel-blog/shopping-in-jerusalem'
+      fullPath: '/travel-blog/shopping-in-jerusalem'
+      preLoaderRoute: typeof TravelBlogShoppingInJerusalemRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/travel-blog/taxis-in-israel': {
@@ -1196,6 +1385,8 @@ const rootRouteChildren: RootRouteChildren = {
   TiberiasLuxuryHotelsRoute: TiberiasLuxuryHotelsRoute,
   ToursBethlehemFromJerusalemRoute: ToursBethlehemFromJerusalemRoute,
   TransfersBenGurionAirportRoute: TransfersBenGurionAirportRoute,
+  TravelBlogBaptismInTheJordanRiverRoute:
+    TravelBlogBaptismInTheJordanRiverRoute,
   TravelBlogBenGurionAirportArrivalTipsRoute:
     TravelBlogBenGurionAirportArrivalTipsRoute,
   TravelBlogBenGurionAirportToEinBokekRoute:
@@ -1210,10 +1401,19 @@ const rootRouteChildren: RootRouteChildren = {
   TravelBlogBestEsimForIsraelRoute: TravelBlogBestEsimForIsraelRoute,
   TravelBlogBestHotelsInHaifaRoute: TravelBlogBestHotelsInHaifaRoute,
   TravelBlogBestHotelsInTiberiasRoute: TravelBlogBestHotelsInTiberiasRoute,
+  TravelBlogChurchesInJerusalemRoute: TravelBlogChurchesInJerusalemRoute,
+  TravelBlogDayTripsFromJerusalemRoute: TravelBlogDayTripsFromJerusalemRoute,
+  TravelBlogDayTripsFromTelAvivRoute: TravelBlogDayTripsFromTelAvivRoute,
+  TravelBlogFromBenGurionAirportOnShabbatRoute:
+    TravelBlogFromBenGurionAirportOnShabbatRoute,
   TravelBlogGettingAroundIsraelRoute: TravelBlogGettingAroundIsraelRoute,
   TravelBlogGettingAroundTelAvivRoute: TravelBlogGettingAroundTelAvivRoute,
+  TravelBlogIsraelTravelTipsRoute: TravelBlogIsraelTravelTipsRoute,
+  TravelBlogJerusalemToTheDeadSeaRoute: TravelBlogJerusalemToTheDeadSeaRoute,
+  TravelBlogJerusalemTravelGuideRoute: TravelBlogJerusalemTravelGuideRoute,
   TravelBlogMasadaRoute: TravelBlogMasadaRoute,
   TravelBlogSherutInIsraelRoute: TravelBlogSherutInIsraelRoute,
+  TravelBlogShoppingInJerusalemRoute: TravelBlogShoppingInJerusalemRoute,
   TravelBlogTaxisInIsraelRoute: TravelBlogTaxisInIsraelRoute,
   TravelBlogUberInIsraelRoute: TravelBlogUberInIsraelRoute,
   TravelBlogWhereToStayInJerusalemRoute: TravelBlogWhereToStayInJerusalemRoute,
