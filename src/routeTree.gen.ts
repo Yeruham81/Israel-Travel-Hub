@@ -53,6 +53,10 @@ import { Route as TravelBlogBenGurionAirportToEinBokekRouteImport } from './rout
 import { Route as TravelBlogBenGurionAirportToHaifaRouteImport } from './routes/travel-blog.ben-gurion-airport-to-haifa'
 import { Route as TravelBlogBenGurionAirportToJerusalemRouteImport } from './routes/travel-blog.ben-gurion-airport-to-jerusalem'
 import { Route as TravelBlogBenGurionAirportToTelAvivRouteImport } from './routes/travel-blog.ben-gurion-airport-to-tel-aviv'
+import { Route as TravelBlogHowToGetFromBenGurionAirportToJerusalemRouteImport } from './routes/travel-blog.how-to-get-from-ben-gurion-airport-to-jerusalem'
+import { Route as TravelBlogHowToGetFromBenGurionAirportToTelAvivRouteImport } from './routes/travel-blog.how-to-get-from-ben-gurion-airport-to-tel-aviv'
+import { Route as TravelBlogHowToGetFromBenGurionAirportToHaifaRouteImport } from './routes/travel-blog.how-to-get-from-ben-gurion-airport-to-haifa'
+import { Route as TravelBlogHowToGetFromBenGurionAirportToEinBokekRouteImport } from './routes/travel-blog.how-to-get-from-ben-gurion-airport-to-ein-bokek'
 import { Route as TravelBlogBestDeadSeaHotelsRouteImport } from './routes/travel-blog.best-dead-sea-hotels'
 import { Route as TravelBlogBestEsimForIsraelRouteImport } from './routes/travel-blog.best-esim-for-israel'
 import { Route as TravelBlogBestHotelsInHaifaRouteImport } from './routes/travel-blog.best-hotels-in-haifa'
@@ -310,6 +314,30 @@ const TravelBlogBenGurionAirportToTelAvivRoute =
     path: '/travel-blog/ben-gurion-airport-to-tel-aviv',
     getParentRoute: () => rootRouteImport,
   } as any)
+const TravelBlogHowToGetFromBenGurionAirportToJerusalemRoute =
+  TravelBlogHowToGetFromBenGurionAirportToJerusalemRouteImport.update({
+    id: '/travel-blog/how-to-get-from-ben-gurion-airport-to-jerusalem',
+    path: '/travel-blog/how-to-get-from-ben-gurion-airport-to-jerusalem',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const TravelBlogHowToGetFromBenGurionAirportToTelAvivRoute =
+  TravelBlogHowToGetFromBenGurionAirportToTelAvivRouteImport.update({
+    id: '/travel-blog/how-to-get-from-ben-gurion-airport-to-tel-aviv',
+    path: '/travel-blog/how-to-get-from-ben-gurion-airport-to-tel-aviv',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const TravelBlogHowToGetFromBenGurionAirportToHaifaRoute =
+  TravelBlogHowToGetFromBenGurionAirportToHaifaRouteImport.update({
+    id: '/travel-blog/how-to-get-from-ben-gurion-airport-to-haifa',
+    path: '/travel-blog/how-to-get-from-ben-gurion-airport-to-haifa',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const TravelBlogHowToGetFromBenGurionAirportToEinBokekRoute =
+  TravelBlogHowToGetFromBenGurionAirportToEinBokekRouteImport.update({
+    id: '/travel-blog/how-to-get-from-ben-gurion-airport-to-ein-bokek',
+    path: '/travel-blog/how-to-get-from-ben-gurion-airport-to-ein-bokek',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const TravelBlogBestDeadSeaHotelsRoute =
   TravelBlogBestDeadSeaHotelsRouteImport.update({
     id: '/travel-blog/best-dead-sea-hotels',
@@ -470,6 +498,10 @@ export interface FileRoutesByFullPath {
   '/travel-blog/ben-gurion-airport-to-haifa': typeof TravelBlogBenGurionAirportToHaifaRoute
   '/travel-blog/ben-gurion-airport-to-jerusalem': typeof TravelBlogBenGurionAirportToJerusalemRoute
   '/travel-blog/ben-gurion-airport-to-tel-aviv': typeof TravelBlogBenGurionAirportToTelAvivRoute
+  '/travel-blog/how-to-get-from-ben-gurion-airport-to-jerusalem': typeof TravelBlogHowToGetFromBenGurionAirportToJerusalemRoute
+  '/travel-blog/how-to-get-from-ben-gurion-airport-to-tel-aviv': typeof TravelBlogHowToGetFromBenGurionAirportToTelAvivRoute
+  '/travel-blog/how-to-get-from-ben-gurion-airport-to-haifa': typeof TravelBlogHowToGetFromBenGurionAirportToHaifaRoute
+  '/travel-blog/how-to-get-from-ben-gurion-airport-to-ein-bokek': typeof TravelBlogHowToGetFromBenGurionAirportToEinBokekRoute
   '/travel-blog/best-dead-sea-hotels': typeof TravelBlogBestDeadSeaHotelsRoute
   '/travel-blog/best-esim-for-israel': typeof TravelBlogBestEsimForIsraelRoute
   '/travel-blog/best-hotels-in-haifa': typeof TravelBlogBestHotelsInHaifaRoute
@@ -536,6 +568,10 @@ export interface FileRoutesByTo {
   '/travel-blog/ben-gurion-airport-to-haifa': typeof TravelBlogBenGurionAirportToHaifaRoute
   '/travel-blog/ben-gurion-airport-to-jerusalem': typeof TravelBlogBenGurionAirportToJerusalemRoute
   '/travel-blog/ben-gurion-airport-to-tel-aviv': typeof TravelBlogBenGurionAirportToTelAvivRoute
+  '/travel-blog/how-to-get-from-ben-gurion-airport-to-jerusalem': typeof TravelBlogHowToGetFromBenGurionAirportToJerusalemRoute
+  '/travel-blog/how-to-get-from-ben-gurion-airport-to-tel-aviv': typeof TravelBlogHowToGetFromBenGurionAirportToTelAvivRoute
+  '/travel-blog/how-to-get-from-ben-gurion-airport-to-haifa': typeof TravelBlogHowToGetFromBenGurionAirportToHaifaRoute
+  '/travel-blog/how-to-get-from-ben-gurion-airport-to-ein-bokek': typeof TravelBlogHowToGetFromBenGurionAirportToEinBokekRoute
   '/travel-blog/best-dead-sea-hotels': typeof TravelBlogBestDeadSeaHotelsRoute
   '/travel-blog/best-esim-for-israel': typeof TravelBlogBestEsimForIsraelRoute
   '/travel-blog/best-hotels-in-haifa': typeof TravelBlogBestHotelsInHaifaRoute
@@ -603,6 +639,10 @@ export interface FileRoutesById {
   '/travel-blog/ben-gurion-airport-to-haifa': typeof TravelBlogBenGurionAirportToHaifaRoute
   '/travel-blog/ben-gurion-airport-to-jerusalem': typeof TravelBlogBenGurionAirportToJerusalemRoute
   '/travel-blog/ben-gurion-airport-to-tel-aviv': typeof TravelBlogBenGurionAirportToTelAvivRoute
+  '/travel-blog/how-to-get-from-ben-gurion-airport-to-jerusalem': typeof TravelBlogHowToGetFromBenGurionAirportToJerusalemRoute
+  '/travel-blog/how-to-get-from-ben-gurion-airport-to-tel-aviv': typeof TravelBlogHowToGetFromBenGurionAirportToTelAvivRoute
+  '/travel-blog/how-to-get-from-ben-gurion-airport-to-haifa': typeof TravelBlogHowToGetFromBenGurionAirportToHaifaRoute
+  '/travel-blog/how-to-get-from-ben-gurion-airport-to-ein-bokek': typeof TravelBlogHowToGetFromBenGurionAirportToEinBokekRoute
   '/travel-blog/best-dead-sea-hotels': typeof TravelBlogBestDeadSeaHotelsRoute
   '/travel-blog/best-esim-for-israel': typeof TravelBlogBestEsimForIsraelRoute
   '/travel-blog/best-hotels-in-haifa': typeof TravelBlogBestHotelsInHaifaRoute
@@ -671,6 +711,10 @@ export interface FileRouteTypes {
     | '/travel-blog/ben-gurion-airport-to-haifa'
     | '/travel-blog/ben-gurion-airport-to-jerusalem'
     | '/travel-blog/ben-gurion-airport-to-tel-aviv'
+    | '/travel-blog/how-to-get-from-ben-gurion-airport-to-jerusalem'
+    | '/travel-blog/how-to-get-from-ben-gurion-airport-to-tel-aviv'
+    | '/travel-blog/how-to-get-from-ben-gurion-airport-to-haifa'
+    | '/travel-blog/how-to-get-from-ben-gurion-airport-to-ein-bokek'
     | '/travel-blog/best-dead-sea-hotels'
     | '/travel-blog/best-esim-for-israel'
     | '/travel-blog/best-hotels-in-haifa'
@@ -737,6 +781,10 @@ export interface FileRouteTypes {
     | '/travel-blog/ben-gurion-airport-to-haifa'
     | '/travel-blog/ben-gurion-airport-to-jerusalem'
     | '/travel-blog/ben-gurion-airport-to-tel-aviv'
+    | '/travel-blog/how-to-get-from-ben-gurion-airport-to-jerusalem'
+    | '/travel-blog/how-to-get-from-ben-gurion-airport-to-tel-aviv'
+    | '/travel-blog/how-to-get-from-ben-gurion-airport-to-haifa'
+    | '/travel-blog/how-to-get-from-ben-gurion-airport-to-ein-bokek'
     | '/travel-blog/best-dead-sea-hotels'
     | '/travel-blog/best-esim-for-israel'
     | '/travel-blog/best-hotels-in-haifa'
@@ -803,6 +851,10 @@ export interface FileRouteTypes {
     | '/travel-blog/ben-gurion-airport-to-haifa'
     | '/travel-blog/ben-gurion-airport-to-jerusalem'
     | '/travel-blog/ben-gurion-airport-to-tel-aviv'
+    | '/travel-blog/how-to-get-from-ben-gurion-airport-to-jerusalem'
+    | '/travel-blog/how-to-get-from-ben-gurion-airport-to-tel-aviv'
+    | '/travel-blog/how-to-get-from-ben-gurion-airport-to-haifa'
+    | '/travel-blog/how-to-get-from-ben-gurion-airport-to-ein-bokek'
     | '/travel-blog/best-dead-sea-hotels'
     | '/travel-blog/best-esim-for-israel'
     | '/travel-blog/best-hotels-in-haifa'
@@ -870,6 +922,10 @@ export interface RootRouteChildren {
   TravelBlogBenGurionAirportToHaifaRoute: typeof TravelBlogBenGurionAirportToHaifaRoute
   TravelBlogBenGurionAirportToJerusalemRoute: typeof TravelBlogBenGurionAirportToJerusalemRoute
   TravelBlogBenGurionAirportToTelAvivRoute: typeof TravelBlogBenGurionAirportToTelAvivRoute
+  TravelBlogHowToGetFromBenGurionAirportToJerusalemRoute: typeof TravelBlogHowToGetFromBenGurionAirportToJerusalemRoute
+  TravelBlogHowToGetFromBenGurionAirportToTelAvivRoute: typeof TravelBlogHowToGetFromBenGurionAirportToTelAvivRoute
+  TravelBlogHowToGetFromBenGurionAirportToHaifaRoute: typeof TravelBlogHowToGetFromBenGurionAirportToHaifaRoute
+  TravelBlogHowToGetFromBenGurionAirportToEinBokekRoute: typeof TravelBlogHowToGetFromBenGurionAirportToEinBokekRoute
   TravelBlogBestDeadSeaHotelsRoute: typeof TravelBlogBestDeadSeaHotelsRoute
   TravelBlogBestEsimForIsraelRoute: typeof TravelBlogBestEsimForIsraelRoute
   TravelBlogBestHotelsInHaifaRoute: typeof TravelBlogBestHotelsInHaifaRoute
@@ -1205,6 +1261,34 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof TravelBlogBenGurionAirportToTelAvivRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/travel-blog/how-to-get-from-ben-gurion-airport-to-jerusalem': {
+      id: '/travel-blog/how-to-get-from-ben-gurion-airport-to-jerusalem'
+      path: '/travel-blog/how-to-get-from-ben-gurion-airport-to-jerusalem'
+      fullPath: '/travel-blog/how-to-get-from-ben-gurion-airport-to-jerusalem'
+      preLoaderRoute: typeof TravelBlogHowToGetFromBenGurionAirportToJerusalemRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/travel-blog/how-to-get-from-ben-gurion-airport-to-tel-aviv': {
+      id: '/travel-blog/how-to-get-from-ben-gurion-airport-to-tel-aviv'
+      path: '/travel-blog/how-to-get-from-ben-gurion-airport-to-tel-aviv'
+      fullPath: '/travel-blog/how-to-get-from-ben-gurion-airport-to-tel-aviv'
+      preLoaderRoute: typeof TravelBlogHowToGetFromBenGurionAirportToTelAvivRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/travel-blog/how-to-get-from-ben-gurion-airport-to-haifa': {
+      id: '/travel-blog/how-to-get-from-ben-gurion-airport-to-haifa'
+      path: '/travel-blog/how-to-get-from-ben-gurion-airport-to-haifa'
+      fullPath: '/travel-blog/how-to-get-from-ben-gurion-airport-to-haifa'
+      preLoaderRoute: typeof TravelBlogHowToGetFromBenGurionAirportToHaifaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/travel-blog/how-to-get-from-ben-gurion-airport-to-ein-bokek': {
+      id: '/travel-blog/how-to-get-from-ben-gurion-airport-to-ein-bokek'
+      path: '/travel-blog/how-to-get-from-ben-gurion-airport-to-ein-bokek'
+      fullPath: '/travel-blog/how-to-get-from-ben-gurion-airport-to-ein-bokek'
+      preLoaderRoute: typeof TravelBlogHowToGetFromBenGurionAirportToEinBokekRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/travel-blog/best-dead-sea-hotels': {
       id: '/travel-blog/best-dead-sea-hotels'
       path: '/travel-blog/best-dead-sea-hotels'
@@ -1397,6 +1481,10 @@ const rootRouteChildren: RootRouteChildren = {
     TravelBlogBenGurionAirportToJerusalemRoute,
   TravelBlogBenGurionAirportToTelAvivRoute:
     TravelBlogBenGurionAirportToTelAvivRoute,
+  TravelBlogHowToGetFromBenGurionAirportToJerusalemRoute: TravelBlogHowToGetFromBenGurionAirportToJerusalemRoute,
+  TravelBlogHowToGetFromBenGurionAirportToTelAvivRoute: TravelBlogHowToGetFromBenGurionAirportToTelAvivRoute,
+  TravelBlogHowToGetFromBenGurionAirportToHaifaRoute: TravelBlogHowToGetFromBenGurionAirportToHaifaRoute,
+  TravelBlogHowToGetFromBenGurionAirportToEinBokekRoute: TravelBlogHowToGetFromBenGurionAirportToEinBokekRoute,
   TravelBlogBestDeadSeaHotelsRoute: TravelBlogBestDeadSeaHotelsRoute,
   TravelBlogBestEsimForIsraelRoute: TravelBlogBestEsimForIsraelRoute,
   TravelBlogBestHotelsInHaifaRoute: TravelBlogBestHotelsInHaifaRoute,

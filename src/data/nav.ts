@@ -89,6 +89,11 @@ export const allNavGroups: NavGroup[] = [
     title: "Travel Guides & Tips",
     items: [
       { label: "All travel guides", to: "/guides/" },
+      { label: "Airport to Jerusalem: all options", to: "/travel-blog/how-to-get-from-ben-gurion-airport-to-jerusalem/" },
+      { label: "Airport to Tel Aviv: all options", to: "/travel-blog/how-to-get-from-ben-gurion-airport-to-tel-aviv/" },
+      { label: "Airport to Haifa: all options", to: "/travel-blog/how-to-get-from-ben-gurion-airport-to-haifa/" },
+      { label: "Airport to Ein Bokek: all options", to: "/travel-blog/how-to-get-from-ben-gurion-airport-to-ein-bokek/" },
+
       { label: "Israel travel tips", to: travelGuidePaths.travelTips },
       { label: "Jerusalem travel guide", to: travelGuidePaths.jerusalem },
       travelTips.gettingAround,
