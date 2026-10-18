@@ -38,7 +38,7 @@ export type TravelGuide = {
   nextSteps?: { label: string; to: LinkProps["to"] }[];
 };
 
-const pickupPhoto: GuidePhoto = { src: airportPickup, alt: "Illustrative airport driver and luggage scene, not a specific taxi company", credit: "Illustrative transport scene; no company or vehicle endorsement." };
+const pickupPhoto: GuidePhoto = { src: airportPickup, alt: "Illustration of an airport pickup with driver and luggage" };
 const hallPhoto: GuidePhoto = { src: airportHall, alt: "Ben Gurion Airport Terminal 3 arrivals hall", credit: "GeorgeDement · CC BY-SA 2.0 · resized WebP", sourceUrl: "https://commons.wikimedia.org/wiki/File:Ben_Gurion_Airport_terminal_3_reception_hall.jpg", licenseUrl: "https://creativecommons.org/licenses/by-sa/2.0/" };
 
 export const travelGuides: Record<TravelGuideId, TravelGuide> = {
@@ -122,7 +122,7 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
     description: "Getting around Israel without a car? Compare trains, buses, light rail, taxis and rentals for city trips, rural stops, payment and weekends.",
     intro: "Plan the whole journey to the address you need, then choose a mix of transport that suits your cities, countryside days, luggage and travel dates.",
     answer: "Combine rail for suitable intercity journeys, buses or light rail for the remaining local route, and walking within convenient areas. Use a taxi or agreed private transfer when luggage, access, timing or a remote pickup makes connections awkward. A rental car is most useful when your actual itinerary benefits from driving and parking it.",
-    topics: ["transportation", "destinations", "itineraries", "tips"], photo: { src: roadTrip, alt: "Illustrative vehicle on a desert road, not a specified Israeli route", credit: "Illustrative road-trip scene; check the real route and rental terms." },
+    topics: ["transportation", "destinations", "itineraries", "tips"], photo: { src: roadTrip, alt: "Illustration of a vehicle traveling along a desert road" },
     facts: [{ label: "Compare", text: "Door-to-door time, not just station-to-station time" }, { label: "Pay", text: "Use a supported ticket, Rav-Kav or authorized payment method" }, { label: "Weekend", text: "Check each route and date; municipal exceptions are local" }],
     comparison: { caption: "Choose transport by the journey", headers: ["Option", "Useful when", "Allow for"], rows: [["Israel Railways", "Your cities and travel date have a suitable connection", "Station access, the final leg and service changes"], ["Bus / light rail", "The route reaches the place you need", "Validation, connections and actual operating hours"], ["Taxi / private driver", "You need an exact address, luggage space or a planned pickup", "Fare terms, capacity and confirmation"], ["Rental car", "Several rural stops make independent driving useful", "Parking, fuel, tolls, insurance and permitted areas"], ["Organized day trip", "Transport and an itinerary are sold together", "Pickup, guide language, admission and return time"]] },
     sections: [

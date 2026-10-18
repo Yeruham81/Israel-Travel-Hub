@@ -44,11 +44,13 @@ describe("independent author identity and page credits", () => {
   it("keeps required external photo attribution and removes owned-image migration credits", () => {
     const owned = { src: "/photo.jpg", alt: "Owned photograph", sourceUrl: "https://www.israel-taxi.com/wp-content/uploads/photo.jpg", credit: "Image from the original publisher guide" };
     const external = { src: "/commons.jpg", alt: "Licensed photograph", sourceUrl: "https://commons.wikimedia.org/wiki/File:Example.jpg", credit: "Photographer · CC BY-SA 4.0 · resized", licenseUrl: "https://creativecommons.org/licenses/by-sa/4.0/" };
-    const { container } = render(<><GuidePhotoCredit photo={owned} /><GuidePhotoCredit photo={external} /></>);
+    const illustration = { src: "/illustration.webp", alt: "Illustration of an airport pickup", credit: "Illustrative scene; check the real route and terms." };
+    const { container } = render(<><GuidePhotoCredit photo={owned} /><GuidePhotoCredit photo={illustration} /><GuidePhotoCredit photo={external} /></>);
     expect(container.querySelector(`a[href="${owned.sourceUrl}"]`)).toBeNull();
     expect(screen.getByRole("link", { name: /Photographer/ })).toHaveAttribute("href", external.sourceUrl);
     expect(screen.getByRole("link", { name: /Licence/ })).toHaveAttribute("href", external.licenseUrl);
     expect(container.textContent).not.toContain("original publisher");
+    expect(container.textContent).not.toContain("Illustrative scene");
   });
 
   it("preserves public source references and hides legacy provenance without leaving an empty section", () => {
