@@ -47,7 +47,6 @@ const IMG = {
   t3: { src: t3, alt: "Arrivals hall at Ben Gurion Airport Terminal 3" },
   bethlehem: { src: bethlehem, alt: "Church of the Nativity on Manger Square, Bethlehem" },
   masada: { src: masada, alt: "Masada plateau from the air with the Dead Sea behind" },
-  cableCar: { src: cableCar, alt: "Masada cable car approaching the summit station" },
   caesarea: { src: caesareaAqueduct, alt: "Roman aqueduct along the beach at Caesarea" },
 } satisfies Record<string, Img>;
 
