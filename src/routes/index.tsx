@@ -53,7 +53,7 @@ const IMG = {
 
 const services: Service[] = [
   {
-    id: "transfers", eyebrow: "Transportation", title: "Airport transfers & private drivers",
+    id: "transfers", eyebrow: "Airport transfers", title: "Airport transfers & private drivers",
     text: "Arrange your airport arrival, or plan intercity journeys and multi-stop days with a private driver.",
     feature: { src: airportPickup, alt: "Illustrative driver loading luggage for arriving travellers" },
     cards: [
