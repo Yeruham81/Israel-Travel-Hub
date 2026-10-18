@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { ChevronLeft, ChevronRight, ExternalLink, Quote, Star } from "lucide-react";
+import { ChevronLeft, ChevronRight, ExternalLink, Star } from "lucide-react";
 import { customerTestimonials, tripadvisorProfileUrl, tripadvisorSnapshot } from "@/data/homeReviews";
 import { TripadvisorReviewCarousel } from "@/components/TripadvisorReviewCarousel";
 
@@ -33,7 +33,6 @@ export function HomeTestimonials() {
         <div className="mt-6 grid gap-6 rounded-2xl border bg-card p-6 shadow-sm md:grid-cols-[minmax(150px,220px)_minmax(0,1fr)] md:items-center sm:p-8" data-testid="original-testimonial-carousel" aria-live="polite">
           <img src={current.photo} alt={"Photo featured alongside the testimonial from " + current.author} width={440} height={330} loading="lazy" decoding="async" className="mx-auto aspect-[4/3] w-full max-w-[220px] rounded-2xl border border-border object-cover shadow-md" />
           <figure>
-            <Quote size={27} className="text-primary" aria-hidden />
             <blockquote className="mt-3 whitespace-pre-line font-serif text-lg leading-relaxed sm:text-xl">“{current.quote}”</blockquote>
             <figcaption className="mt-5 font-semibold">{current.author}<span className="ml-2 font-normal text-muted-foreground">· {current.location}</span></figcaption>
           </figure>
