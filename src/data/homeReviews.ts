@@ -7,13 +7,18 @@ import jimJillLustigPhoto from "@/assets/testimonials/jim-jill-lustig.webp";
 export const tripadvisorProfileUrl = "https://www.tripadvisor.com/Attraction_Review-g293984-d14803612-Reviews-Moshe_Barak-Tel_Aviv_Tel_Aviv_District.html";
 export const tripadvisorSnapshot = { rating: 5, reviewCount: 11, checkedAt: "2026-10-18" } as const;
 
+/**
+ * Verbatim, contiguous passages from the published Tripadvisor reviews.
+ * Do not summarize, paraphrase or join nonadjacent fragments in a quotation.
+ * Each card shows about 27–33 original words; the link below opens the source.
+ */
 export const tripadvisorReviews = [
-  { author: "Kaye L", period: "August 2025", excerpt: "He has always been on time and makes the process of finding him when we land at Ben Gurion airport easy." },
-  { author: "Lilach T", period: "July 2025", excerpt: "He was on time, easy to communicate with, and very professional throughout. I felt completely safe and taken care of" },
-  { author: "Janet", period: "June 2025", excerpt: "The service was easy to coordinate and reasonably priced. It was such a good experience we also used his service to return to the airport" },
-  { author: "Yaniv B", period: "June 2025", summary: "A frequent business traveler praised Moshe’s dependable airport pickups and day tours, describing his safe driving, punctuality, kindness, and deep local knowledge." },
-  { author: "Marc", period: "July 2025", summary: "Marc and Charles appreciated many years of reliable airport pickups, friendly service at all hours, and Moshe’s knowledge during trips around Israel." },
-  { author: "david", period: "June 2025", summary: "David enjoyed a private day trip with Moshe and especially valued his helpful guidance while exploring Mount Tabor during a visit to Israel." },
+  { author: "Kaye L", period: "August 2025", excerpt: "He has always been on time and makes the process of finding him when we land at Ben Gurion airport easy. He drives very well and safely." },
+  { author: "Lilach T", period: "July 2025", excerpt: "He was on time, easy to communicate with, and very professional throughout. I felt completely safe and taken care of, which made a big difference while traveling." },
+  { author: "Janet", period: "June 2025", excerpt: "The service was easy to coordinate and reasonably priced. It was such a good experience we also used his service to return to the airport after our time in Jerusalem." },
+  { author: "Yaniv B", period: "June 2025", excerpt: "From airport pickups to full-day tours, he’s consistently professional, punctual, and incredibly kind. His car is spotless, his driving is safe, and his knowledge of the country is unmatched." },
+  { author: "Marc", period: "July 2025", excerpt: "Moshe Barak has picked us up from the airport for many many years, always reliable and super friendly! We can count on him day and night, also he offers trips around the country." },
+  { author: "david", period: "June 2025", excerpt: "Moshe was and is an excellent driver and very helpful for a private day tour. I greatly enjoyed my visit in israel, and especially exploring Mount Tabor." },
 ] as const;
 
 /** Original testimonials paired with the photographs published alongside them. */

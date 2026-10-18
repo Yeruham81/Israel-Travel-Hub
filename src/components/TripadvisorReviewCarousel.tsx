@@ -22,9 +22,7 @@ function ReviewCard({ review }: { review: TripadvisorReview }) {
           <span key={index} aria-hidden="true" className="size-5 rounded-full border-2 border-white bg-[#00AA6C] shadow-[0_0_0_1px_#00AA6C]" />
         ))}
       </div>
-      {"excerpt" in review
-        ? <blockquote className="mt-3 flex-1 text-[1.05rem] leading-relaxed text-slate-950">“{review.excerpt}…”</blockquote>
-        : <p className="mt-3 flex-1 text-[1.05rem] leading-relaxed text-slate-950">{review.summary}</p>}
+      <blockquote cite={tripadvisorProfileUrl} className="mt-3 flex-1 text-[1.05rem] leading-relaxed text-slate-950">“{review.excerpt}”</blockquote>
       <div className="mt-5 border-t border-slate-200 pt-3">
         <p className="font-semibold text-slate-950">{review.author}</p>
         <p className="text-xs text-slate-600">{review.period}</p>
@@ -88,7 +86,7 @@ export function TripadvisorReviewCarousel() {
       <div className="grid gap-4 px-6 py-8 md:grid-cols-3 sm:px-10" data-testid="tripadvisor-review-cards" aria-live={rotating ? "off" : "polite"}>
         {[0, 1, 2].map(slot => {
           const review = tripadvisorReviews[(index + slot) % count]!;
-          return <div key={review.author} className={slot === 0 ? "min-w-0" : "hidden min-w-0 md:block"}>
+          return <div key={review.author} className={slot === 0 ? "h-full min-w-0" : "hidden h-full min-w-0 md:block"}>
             <ReviewCard review={review} />
           </div>;
         })}
