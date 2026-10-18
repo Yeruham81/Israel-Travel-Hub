@@ -14,7 +14,7 @@ export function HomeTestimonials() {
         <p className="mt-3 max-w-3xl leading-relaxed opacity-85">These reviews are about my private transportation and day-trip services, not ratings of other providers featured on this site.</p>
         <div className="mt-7 flex flex-wrap items-center gap-4 rounded-2xl border border-white/20 bg-white/10 p-5">
           <a href={tripadvisorProfileUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 text-xl font-bold tracking-tight text-white" aria-label="Tripadvisor reviews for Moshe Barak">
-            <span className="grid size-9 place-items-center rounded-full bg-[#34e0a1] text-[#06281e]"><span className="font-extrabold" aria-hidden>ta</span></span>
+            <img src="https://cdn.simpleicons.org/tripadvisor/34E0A1" alt="" width={36} height={36} loading="lazy" className="size-9" />
             Tripadvisor <ExternalLink size={15} aria-hidden />
           </a>
           <span className="flex items-center gap-1 text-[#34e0a1]" aria-label="Five out of five stars">
@@ -29,7 +29,7 @@ export function HomeTestimonials() {
         {tripadvisorReviews.map((review,i)=><article key={review.author} className="flex flex-col rounded-2xl border bg-background p-5 shadow-sm">
           <div className="flex items-center justify-between gap-2">
             <div className="grid size-11 place-items-center rounded-full bg-emerald-100 font-semibold text-emerald-900" aria-hidden>{review.author.slice(0,1).toUpperCase()}</div>
-            <div className="flex text-[#00aa6c]" aria-label="Tripadvisor listing has a five-star aggregate rating">{Array.from({length:5},(_,j)=><Star key={j} size={13} fill="currentColor" aria-hidden />)}</div>
+            <span className="text-xs font-semibold text-emerald-700">Tripadvisor</span>
           </div>
           <Quote size={20} className="mt-4 text-primary" aria-hidden />
           <p className="mt-2 flex-1 leading-relaxed">{review.summary}</p>
