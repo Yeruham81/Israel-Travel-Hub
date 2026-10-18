@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { serviceDomains, allNavGroups } from "@/data/nav";
-import { reviewHighlights, tripadvisorProfileUrl } from "@/data/homeReviews";
+import { customerTestimonials, tripadvisorReviews, tripadvisorProfileUrl, tripadvisorSnapshot } from "@/data/homeReviews";
 
 describe("homepage navigation and review sources", () => {
   it("keeps six ordered primary entries and rental only in the sidebar", () => {
@@ -11,8 +11,9 @@ describe("homepage navigation and review sources", () => {
     expect(sidebar.some(x => "to" in x && x.to === "/tickets/")).toBe(false);
   });
   it("attributes one-time summaries to distinct sources", () => {
-    expect(reviewHighlights.filter(x => x.source === "Tripadvisor")).toHaveLength(3);
-    expect(reviewHighlights.filter(x => x.source === "Israel Taxi Service")).toHaveLength(3);
+    expect(tripadvisorReviews).toHaveLength(3);
+    expect(customerTestimonials).toHaveLength(3);
+    expect(tripadvisorSnapshot).toMatchObject({ rating: 5, reviewCount: 11 });
     expect(tripadvisorProfileUrl).toMatch(/^https:\/\/www\.tripadvisor\.com\//);
   });
 });
