@@ -10,11 +10,10 @@
  * VITE_CANONICAL_ORIGIN. No indexability / publishing flag is changed.
  */
 import { readdir, readFile, mkdir, writeFile } from "node:fs/promises";
-import { fileURLToPath } from "node:url";
 import path from "node:path";
 import { loadEnv } from "vite";
 
-const root = fileURLToPath(new URL("../", import.meta.url));
+const root = process.cwd();
 const routesDir = path.join(root, "src/routes");
 const publicDir = path.join(root, "public");
 
@@ -111,6 +110,6 @@ async function main() {
   console.log("Generated sitemap.xml with " + pages.length + " pages and robots.txt for " + origin);
 }
 
-if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
+if (process.argv[1] && path.basename(process.argv[1]) === "generate-sitemap.mjs") {
   main().catch(error => { console.error(error); process.exitCode = 1; });
 }
