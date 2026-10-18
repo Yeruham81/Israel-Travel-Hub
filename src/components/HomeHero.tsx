@@ -33,7 +33,6 @@ export function HomeHero() {
             From airport arrivals and private day trips to beautiful places to stay and unforgettable sights, discover local insights that make every journey easier and more rewarding.
           </p>
         </div>
-        </div>
       </HeroCarousel>
     </section>
   );
