@@ -28,9 +28,11 @@ describe("international price estimates", () => {
     expect(price.querySelector('[data-currency="EUR"]')).toHaveTextContent("≈ EUR 110");
     expect([...price.querySelectorAll('[aria-hidden="true"]')].map((icon) => icon.textContent)).toEqual(["₪", "$", "€"]);
     expect(new Set([...price.querySelectorAll('[aria-hidden="true"]')].map((icon) => icon.className)).size).toBe(3);
-    expect(screen.getByTestId("exchange-rate-note")).toHaveTextContent("Charged in ILS. USD/EUR amounts are approximate estimates only.");
-    expect(screen.getByTestId("exchange-rate-note").querySelector("time")).toHaveAttribute("datetime", "2026-10-16");
-    expect(html).toMatch(/datetime="2026-10-16"/i);
+    const note = screen.getByTestId("exchange-rate-note");
+    expect(note).toHaveTextContent("Charged in ILS. USD and EUR amounts are approximate estimates only.");
+    expect(note).not.toHaveTextContent(/Bank of Israel|dated|Rates are checked daily|last saved rates|temporarily unavailable/i);
+    expect(note.querySelector("a, time")).toBeNull();
+    expect(html).not.toContain("Bank of Israel");
   });
 
   it.each([
@@ -85,7 +87,7 @@ describe("international price estimates", () => {
     await flush();
     expect(screen.getByTestId("currency-price")).toHaveTextContent("ILS 550");
     expect(screen.getByTestId("currency-price").querySelector('[data-currency="USD"]')).toHaveTextContent("178");
-    expect(screen.getByTestId("exchange-rate-note")).toHaveTextContent("Using the last saved rates");
+    expect(screen.getByTestId("exchange-rate-note")).toHaveTextContent("Charged in ILS. USD and EUR amounts are approximate estimates only.");
     expect(JSON.parse(localStorage.getItem(referenceFxConfig.storageKey)!).rates.checkedAt).toBe(initialReferenceFx.checkedAt);
     await act(async () => { await vi.advanceTimersByTimeAsync(referenceFxConfig.retryMs); });
     expect(fetch).toHaveBeenCalledTimes(2);
@@ -102,7 +104,7 @@ describe("international price estimates", () => {
     expect(price.querySelector('[data-currency="USD"]')).toBeNull();
     expect(price.querySelector('[data-currency="EUR"]')).toBeNull();
     expect(price).not.toHaveTextContent(/NaN|Infinity/);
-    expect(screen.getByTestId("exchange-rate-note")).toHaveTextContent("temporarily unavailable");
+    expect(screen.getByTestId("exchange-rate-note")).toHaveTextContent("Charged in ILS. USD and EUR amounts are approximate estimates only.");
     expect(localStorage.getItem(referenceFxConfig.storageKey)).toBeNull();
   });
 

@@ -1,6 +1,6 @@
 import { createContext, useContext, useEffect, useState, type ReactNode } from "react";
-import { initialReferenceFx, referenceFxConfig, referenceFxSource, type ExchangeRateSnapshot, type ForeignDisplayCurrency } from "@/data/registry";
-import { convertedAmount, displayCurrencies, formatFxDate, isUsableExchangeRates, parseExchangeRateResult, type ExchangeRateResult } from "@/lib/exchange-rates";
+import { initialReferenceFx, referenceFxConfig, type ForeignDisplayCurrency } from "@/data/registry";
+import { convertedAmount, displayCurrencies, isUsableExchangeRates, parseExchangeRateResult, type ExchangeRateResult } from "@/lib/exchange-rates";
 
 type CurrencyState = ExchangeRateResult & { loading: boolean };
 type StoredRates = ExchangeRateResult & { nextCheckAt: number };
@@ -108,11 +108,9 @@ export function PriceDisplay({ amount, size = "card", from = true, className = "
   </div>;
 }
 
+/** Shared concise pricing disclaimer; FX publication and cache status are kept in data, not displayed. */
 export function ExchangeRateNote({ className = "" }: { className?: string }) {
-  const { rates, status, loading } = useContext(CurrencyRatesContext);
-  const available = isUsableExchangeRates(rates);
-  return <div className={`text-xs leading-relaxed text-muted-foreground ${className}`} data-testid="exchange-rate-note">
-    {available ? <p>USD/EUR estimates use <a href={referenceFxSource.url} target="_blank" rel="noopener noreferrer" className="underline">Bank of Israel reference rates<span className="sr-only"> (opens in a new tab)</span></a> dated <time dateTime={rates.publishedAt}>{formatFxDate(rates.publishedAt)}</time>. Rates are checked daily; weekends and holidays use the latest available publication.{status === "cached" && !loading && " Using the last saved rates."}</p> : <p>{loading ? "Checking reference exchange rates." : "Currency estimates are temporarily unavailable. The ILS prices still apply."}</p>}
-    <p className="mt-1">Charged in ILS. USD/EUR amounts are approximate estimates only.</p>
-  </div>;
+  return <p className={`text-xs leading-relaxed text-muted-foreground ${className}`} data-testid="exchange-rate-note">
+    Charged in ILS. USD and EUR amounts are approximate estimates only.
+  </p>;
 }
