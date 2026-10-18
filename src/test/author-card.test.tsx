@@ -27,7 +27,7 @@ describe("independent author identity and page credits", () => {
       expect(cards, path).toHaveLength(1);
       const card = cards[0]!;
       expect(within(card).getByRole("img", { name: "Moshe Barak" })).toHaveAttribute("width", "80");
-      expect(card, path).toHaveTextContent("20+ years of experience in Israel");
+      expect(card, path).toHaveTextContent("more than 20 years helping travelers explore Israel");
       const reviews = within(card).getByRole("link", { name: /Read traveler reviews on Tripadvisor/ });
       expect(reviews, path).toHaveAttribute("href", mosheBarakAuthor.reviewsUrl);
       expect(reviews).toHaveAttribute("target", "_blank");
