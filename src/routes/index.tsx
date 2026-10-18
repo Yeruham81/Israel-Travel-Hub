@@ -10,7 +10,6 @@ import caesareaAqueduct from "@/assets/home/caesarea-aqueduct.webp";
 import hotelRoom from "@/assets/home/hotel-room.webp";
 import airportPickup from "@/assets/home/airport-pickup.webp";
 import guidedTour from "@/assets/home/guided-tour.webp";
-import roadTrip from "@/assets/home/road-trip.webp";
 import cruisePort from "@/assets/home/cruise-port.webp";
 import ashdodPort from "@/assets/home/ashdod-port.webp";
 import haifaPort from "@/assets/home/haifa-port.webp";
@@ -44,7 +43,6 @@ const IMG = {
   tiberias: { src: tiberias, alt: "Tiberias on the shore of the Sea of Galilee, seen from the water" },
   deadSea: { src: deadSeaBeach, alt: "Ein Bokek's beach and palm-lined promenade beside the Dead Sea" },
   haifa: { src: haifaHotels, alt: "Haifa Bay and the Bahá'í Gardens seen from Mount Carmel" },
-  t3: { src: t3, alt: "Arrivals hall at Ben Gurion Airport Terminal 3" },
   bethlehem: { src: bethlehem, alt: "Church of the Nativity on Manger Square, Bethlehem" },
   masada: { src: masada, alt: "Masada plateau from the air with the Dead Sea behind" },
   caesarea: { src: caesareaAqueduct, alt: "Roman aqueduct along the beach at Caesarea" },
@@ -53,12 +51,12 @@ const IMG = {
 const services: Service[] = [
   {
     id: "transfers", eyebrow: "Airport transfers", title: "Airport transfers & private drivers",
-    text: "Arrange your airport arrival, or plan intercity journeys and multi-stop days with a private driver.",
+    text: "Arrange a comfortable private pickup from Ben Gurion Airport to Jerusalem, Tel Aviv or Haifa, with a vehicle and meeting point tailored to your needs.",
     feature: { src: airportPickup, alt: "Illustrative driver loading luggage for arriving travellers" },
     cards: [
-      { label: "Airport transfers", text: "Ben Gurion pickups, destinations & starting prices", to: "/transfers/", img: IMG.t3 },
-      { label: "Private driver", text: "Intercity journeys & a driver for the day", to: "/private-driver/", img: { src: roadTrip, alt: "Illustrative vehicle on an open desert road" } },
-      { label: "Private transfer to Jerusalem", text: "Hotel drop-off advice & a personal quote", to: "/travel-blog/ben-gurion-airport-to-jerusalem/", img: IMG.jerusalem },
+      { label: "Private Transfer to Jerusalem", text: "Book a private pickup to your Jerusalem hotel", to: "/travel-blog/ben-gurion-airport-to-jerusalem/", img: IMG.jerusalem },
+      { label: "Private Transfer to Tel Aviv", text: "Airport pickup for Tel Aviv hotels and Jaffa", to: "/travel-blog/ben-gurion-airport-to-tel-aviv/", img: IMG.telAviv },
+      { label: "Private Transfer to Haifa", text: "Door-to-door travel to Haifa and Mount Carmel", to: "/travel-blog/ben-gurion-airport-to-haifa/", img: IMG.haifa },
     ],
     hub: { label: "Explore airport transfers", to: "/transfers/" },
   },
