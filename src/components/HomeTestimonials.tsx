@@ -28,7 +28,9 @@ export function HomeTestimonials() {
             <div className="grid size-11 place-items-center rounded-full bg-emerald-100 font-semibold text-emerald-900" aria-hidden>{review.author.slice(0,1).toUpperCase()}</div>
             <span className="inline-flex items-center gap-1.5 text-xs font-semibold text-emerald-800"><img src="https://cdn.simpleicons.org/tripadvisor/00AA6C" alt="" width={20} height={20} loading="lazy" className="size-5" />Tripadvisor</span>
           </div>
-          <Quote size={20} className="mt-4 text-emerald-700" aria-hidden />
+          <div className="mt-4 flex items-center gap-1" role="img" aria-label="5 out of 5 rating" data-testid="tripadvisor-rating-circles">
+            {Array.from({length: 5}, (_, index) => <span key={index} aria-hidden="true" className="size-5 rounded-full border-2 border-white bg-[#00AA6C] shadow-[0_0_0_1px_#00AA6C]" />)}
+          </div>
           <blockquote className="mt-3 flex-1 text-[1.05rem] leading-relaxed text-slate-950">“{review.excerpt}…”</blockquote>
           <div className="mt-5 border-t border-slate-200 pt-3"><p className="font-semibold text-slate-950">{review.author}</p><p className="text-xs text-slate-600">{review.period}</p></div>
           <a href={tripadvisorProfileUrl} target="_blank" rel="noopener noreferrer" className="mt-3 inline-flex items-center gap-1 text-sm font-semibold text-emerald-800 underline underline-offset-4">See full review <ExternalLink size={13} aria-hidden /></a>
