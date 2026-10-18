@@ -58,7 +58,7 @@ describe("migrated practical guides", () => {
     expect(container.querySelector("time")).toHaveTextContent("October 2026");
     const authorCard = screen.getByRole("complementary", { name: "About the author" });
     expect(authorCard).toHaveTextContent("Written by Moshe Barak");
-    expect(authorCard).toHaveTextContent("20+ years");
+    expect(authorCard).toHaveTextContent("more than 20 years");
     expect(within(authorCard).getByRole("link", { name: /reviews on Tripadvisor/ })).toHaveAttribute("href", mosheBarakAuthor.reviewsUrl);
     expect(authorCard.compareDocumentPosition(screen.getByRole("region", { name: "Quick answer" }))).toBe(Node.DOCUMENT_POSITION_FOLLOWING);
     expect(container.textContent).not.toMatch(/editorial team|Adapted from|Source checks and limitations below|Image from the original publisher/);
