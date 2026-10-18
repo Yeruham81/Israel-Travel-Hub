@@ -35,7 +35,7 @@ export const Route = createFileRoute("/")({
 
 type Img = { src: string; alt: string; pos?: string };
 type Card = { label: string; text: string; to: LinkProps["to"]; img: Img };
-type Service = { id: string; eyebrow: string; title: string; text: string; feature: Img; cards: Card[]; hub: { label: string; to: LinkProps["to"] } };
+type Service = { id: string; eyebrow: string; tagline: string; title: string; text: string; feature: Img; cards: Card[]; hub: { label: string; to: LinkProps["to"] } };
 
 const IMG = {
   jerusalem: { src: jerusalem, alt: "Jerusalem's Old City and the Dome of the Rock seen from the Mount of Olives" },
@@ -50,7 +50,7 @@ const IMG = {
 
 const services: Service[] = [
   {
-    id: "transfers", eyebrow: "Airport transfers", title: "Airport transfers & private drivers",
+    id: "transfers", eyebrow: "Airport transfers", tagline: "Plan a smooth arrival in Israel", title: "Airport transfers & private drivers",
     text: "Arrange a comfortable private pickup from Ben Gurion Airport to Jerusalem, Tel Aviv or Haifa, with a vehicle and meeting point tailored to your needs.",
     feature: { src: airportPickup, alt: "Illustrative driver loading luggage for arriving travellers" },
     cards: [
@@ -61,7 +61,7 @@ const services: Service[] = [
     hub: { label: "Explore airport transfers", to: "/transfers/" },
   },
   {
-    id: "tours", eyebrow: "Tours & day trips", title: "Tours & day trips",
+    id: "tours", eyebrow: "Tours & day trips", tagline: "See the best of Israel in a day", title: "Tours & day trips",
     text: "How to read an itinerary, what pickup and guide language mean in practice, and when a private driver fits better.",
     feature: { src: guidedTour, alt: "Illustrative small group on a guided walk through old stone streets" },
     cards: [
@@ -71,7 +71,7 @@ const services: Service[] = [
     hub: { label: "Explore tours", to: "/tours/" },
   },
   {
-    id: "shore-excursions", eyebrow: "Shore excursions", title: "Shore excursions",
+    id: "shore-excursions", eyebrow: "Shore excursions", tagline: "Make the most of your time ashore", title: "Shore excursions",
     text: "Arriving by cruise ship? Plan a day ashore around your all-aboard time, then choose a private driver, guide or port-specific tour.",
     feature: { src: cruisePort, alt: "Illustrative cruise passengers walking along a harbour quay toward a waiting minivan (not a specific ship or operator)" },
     cards: [
@@ -81,7 +81,7 @@ const services: Service[] = [
     hub: { label: "Explore shore excursions", to: "/shore-excursions/" },
   },
   {
-    id: "accommodation", eyebrow: "Accommodation", title: "Accommodation in Israel",
+    id: "accommodation", eyebrow: "Accommodation", tagline: "Find the perfect place to stay", title: "Accommodation in Israel",
     text: "Choose a neighborhood or hotel style, then compare practical details such as beach access, family facilities, spa entry and arrival before booking.",
     feature: { src: hotelRoom, alt: "Illustrative bright hotel room with a made bed by the window (not a specific property)" },
     cards: [
@@ -94,7 +94,7 @@ const services: Service[] = [
     hub: { label: "Explore accommodation", to: "/hotels/" },
   },
   {
-    id: "attractions", eyebrow: "Attractions & experiences", title: "Attractions & experiences",
+    id: "attractions", eyebrow: "Attractions & experiences", tagline: "Discover Israel’s must-see places", title: "Attractions & experiences",
     text: "Desert fortresses, seaside ruins and holy places — what to expect and how long to allow.",
     feature: { src: caesareaDusk, alt: "Ancient ruins on the shore at Caesarea at dusk" },
     cards: [
@@ -153,7 +153,7 @@ function Home() {
           <section key={s.id} id={s.id} aria-labelledby={`${s.id}-h`} className={`scroll-mt-6 rounded-2xl border p-5 md:p-8 ${i % 2 ? "bg-accent/40" : "bg-card"}`}>
             <header className="grid gap-4 border-b pb-5 md:grid-cols-[minmax(0,1fr)_auto] md:items-end">
               <div className="min-w-0">
-                <p className="eyebrow">{String(i + 1).padStart(2, "0")} · {s.eyebrow}</p>
+                <p className="eyebrow">{s.tagline}</p>
                 <h2 id={`${s.id}-h`} className="mt-2 text-3xl md:text-4xl">{s.title}</h2>
                 <p className="mt-2 max-w-2xl text-muted-foreground">{s.text}</p>
               </div>
