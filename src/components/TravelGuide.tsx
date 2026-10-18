@@ -42,7 +42,7 @@ export function GuideCard({ guide, headingLevel = 2 }: { guide: GuideDirectoryEn
   const Heading = headingLevel === 3 ? "h3" : "h2";
   return <article className="flex h-full min-w-0 flex-col overflow-hidden rounded-2xl border bg-card" data-testid="guide-directory-card">
     <Link to={guide.to} className="group flex flex-1 flex-col focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-primary">
-      <img src={guide.photo.src} alt={guide.photo.alt} width={600} height={400} loading="lazy" decoding="async" className="aspect-[3/2] w-full object-cover" />
+      {guide.photo && <img src={guide.photo.src} alt={guide.photo.alt} width={600} height={400} loading="lazy" decoding="async" className="aspect-[3/2] w-full object-cover" />}
       <div className="flex flex-1 flex-col p-5"><Heading className="text-2xl leading-tight group-hover:text-primary">{guide.title}</Heading><p className="mt-3 flex-1 text-sm leading-relaxed text-muted-foreground">{guide.description}</p><span className="mt-4 text-sm font-semibold text-primary">Read the guide →</span></div>
     </Link>
     <div className="px-5 pb-5"><GuideTags topics={guide.topics} /></div>

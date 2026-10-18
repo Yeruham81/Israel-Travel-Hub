@@ -1,6 +1,5 @@
 import type { Attraction } from "@/data/attractionGuideTypes";
 import panorama from "@/assets/home/jerusalem-old-city.webp";
-import sepulchre from "@/assets/guides/holy-sepulchre.jpg";
 export const jerusalemAttractions: Record<string, Attraction> = {
 "old-city-jerusalem": {
   title:"Jerusalem Old City: quarters, gates and sights",description:"A practical guide to Jerusalem's Old City, four quarters, Western Wall, Holy Sepulchre, key gates, walking routes, accessibility and visiting etiquette.",
@@ -19,7 +18,7 @@ export const jerusalemAttractions: Record<string, Attraction> = {
 },
 "museums-in-jerusalem": {
  title:"Best museums in Jerusalem: art, history and archaeology",description:"Compare Jerusalem museums: Israel Museum, Yad Vashem, Tower of David, Bible Lands, Islamic Art and specialist collections, with practical visit planning.",
- region:"Jerusalem",image:{src:panorama,alt:"Jerusalem Old City panorama, home to several historic museums"},
+ region:"Jerusalem",
  intro:"Jerusalem's leading museums tell very different stories. The Israel Museum is expansive and collection-led, Yad Vashem focuses on Holocaust remembrance, and Tower of David makes the city itself the central subject. Choosing by theme and neighbourhood is better than chasing a checklist.",
  takeaway:"If you have one museum afternoon, pick the Israel Museum for art and archaeology, Tower of David for Jerusalem's layers of history, or Yad Vashem for a focused and emotionally demanding memorial visit. They are not next door to one another.", duration:"2–4 hours per major museum",
  highlights:[
@@ -49,7 +48,7 @@ export const jerusalemAttractions: Record<string, Attraction> = {
 },
 "mount-zion": {
  title:"Mount Zion Jerusalem: Last Supper room, churches and history",description:"Discover Mount Zion's Cenacle, David's Tomb, Dormition Abbey and St Peter in Gallicantu, with visiting advice and Old City connections.",
- region:"Jerusalem",image:{src:panorama,alt:"Jerusalem skyline near the Old City and Mount Zion"},
+ region:"Jerusalem",
  intro:"Just outside Jerusalem's walls, Mount Zion contains places connected to Jewish and Christian memory as well as major churches and a historic cemetery. Its sites are close enough for a focused walk but do not share the same admission rules.",
  takeaway:"From Zion Gate, explore the traditional Last Supper room and David's Tomb area, then consider Dormition Abbey or St Peter in Gallicantu. Check each religious site's opening policy; some interiors close during services.",duration:"1.5–3 hours",
  highlights:[

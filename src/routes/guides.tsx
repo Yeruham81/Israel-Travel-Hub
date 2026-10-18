@@ -28,7 +28,7 @@ function Guides() {
     event.preventDefault();
     void navigate({ search: searchFor(nextTopic) });
   }
-  const photos = [...new Map(guideDirectory.map((guide) => [guide.photo.src, guide.photo])).values()].filter(hasPublicPhotoCredit);
+  const photos = [...new Map(guideDirectory.flatMap(guide => guide.photo ? [[guide.photo.src, guide.photo] as const] : [])).values()].filter(hasPublicPhotoCredit);
   return <main className="mx-auto max-w-6xl px-4 pb-8">
     <HubHeader crumbs={[{ name: "Home", to: "/" }, { name: "Travel guides", to: "/guides/" }]} eyebrow="Useful answers for your Israel trip" title="Travel guides & practical tips" intro="Prepare for arrival, choose how to get around and explore destinations, day trips, religious heritage and local markets. Browse by topic or search for the question you need answered." />
     <div className="mt-8 rounded-2xl border bg-secondary/50 p-5 sm:p-7">

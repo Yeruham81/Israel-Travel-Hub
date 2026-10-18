@@ -86,8 +86,8 @@ describe("migrated practical guides", () => {
     const router = await routerAt("/guides/");
     const Hub = HubRoute.options.component!;
     const html = renderToString(<RouterContextProvider router={router}><Hub /></RouterContextProvider>);
-    expect(guideDirectory).toHaveLength(30);
-    expect(new Set(guideDirectory.map((guide) => guide.to)).size).toBe(30);
+    expect(guideDirectory).toHaveLength(47);
+    expect(new Set(guideDirectory.map((guide) => guide.to)).size).toBe(47);
     for (const guide of guideDirectory) {
       expect(html).toContain(`href="${guide.to}"`);
       expect(router.matchRoutes(String(guide.to)).at(-1)?.routeId).toBe(String(guide.to).replace(/\/$/, ""));
@@ -99,7 +99,7 @@ describe("migrated practical guides", () => {
     const router = await routerAt("/guides/");
     const Hub = HubRoute.options.component!;
     render(<RouterContextProvider router={router}><Hub /></RouterContextProvider>);
-    expect(screen.getAllByTestId("guide-directory-card")).toHaveLength(30);
+    expect(screen.getAllByTestId("guide-directory-card")).toHaveLength(47);
     fireEvent.change(screen.getByRole("searchbox"), { target: { value: "eSIM" } });
     expect(screen.getAllByTestId("guide-directory-card")).toHaveLength(1);
     fireEvent.submit(screen.getByRole("search"));
@@ -108,7 +108,7 @@ describe("migrated practical guides", () => {
     fireEvent.click(within(topics).getByRole("link", { name: "Attractions" }));
     await screen.findByRole("heading", { name: "No guides match this search" });
     fireEvent.click(screen.getByRole("button", { name: "Clear filters" }));
-    await waitFor(() => expect(screen.getAllByTestId("guide-directory-card")).toHaveLength(30));
+    await waitFor(() => expect(screen.getAllByTestId("guide-directory-card")).toHaveLength(47));
     expect(screen.getByRole("searchbox")).toHaveValue("");
     await act(async () => { await router.navigate({ to: "/guides/", search: { topic: "attractions" } }); });
     expect(screen.getAllByTestId("guide-directory-card")).toHaveLength(filterGuides("", "attractions").length);

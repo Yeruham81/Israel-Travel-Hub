@@ -36,7 +36,7 @@ export const northernAttractions: Record<string, Attraction> = {
 },
 "rosh-hanikra":{
  title:"Rosh Hanikra: sea grottoes and the northern coast",description:"Plan Rosh Hanikra's coastal grottoes, scenic viewpoints, cable-car access when operating and nearby north-coast stops.",
- region:"Haifa & northern coast",image:{src:haifaImg,alt:"Northern Israeli Mediterranean coastal landscape"},duration:"1–2 hours, excluding travel",
+ region:"Haifa & northern coast",duration:"1–2 hours, excluding travel",
  intro:"At Israel's far northern Mediterranean coastline, Rosh Hanikra is known for pale limestone cliffs and sea-carved grottoes. Access to the tourist facilities can be disrupted by regional security and operational restrictions.",
  takeaway:"Confirm the visitor site's current operating status directly before travelling north. A dramatic viewpoint does not guarantee that the grotto tunnels or cable car are accessible on your date.",
  highlights:[
@@ -67,7 +67,7 @@ export const northernAttractions: Record<string, Attraction> = {
 },
 "mount-tabor":{
  title:"Mount Tabor: Church of the Transfiguration and Galilee views",description:"Visit Mount Tabor's Church of the Transfiguration, hilltop viewpoints and pilgrimage setting, with advice on shuttle access and opening hours.",
- region:"Sea of Galilee",image:{src:lake,alt:"Galilee hills and the Sea of Galilee region"},duration:"1–2 hours plus access time",
+ region:"Sea of Galilee",duration:"1–2 hours plus access time",
  intro:"Mount Tabor rises prominently above the Jezreel Valley and is traditionally associated with the Transfiguration of Jesus. The Franciscan sanctuary, views and wooded slopes form the focus of most visits.",
  takeaway:"Reach the base area first and confirm how visitors are currently admitted to the hilltop. Access for large coaches and private vehicles can be restricted, making a local shuttle or taxi necessary.",
  highlights:[
@@ -81,7 +81,7 @@ export const northernAttractions: Record<string, Attraction> = {
 },
 "capernaum":{
  title:"Capernaum: ancient synagogue and churches by the Sea of Galilee",description:"Plan Capernaum on the Sea of Galilee: archaeological remains, ancient synagogue, Peter's house and the nearby Greek Orthodox church.",
- region:"Sea of Galilee",image:{src:lake,alt:"Sea of Galilee shoreline near the historic pilgrimage sites"},duration:"1–2 hours",
+ region:"Sea of Galilee",duration:"1–2 hours",
  intro:"Capernaum, or Kfar Nahum, is an important archaeological and Christian pilgrimage area on the northwestern Sea of Galilee. Visitors come for the ancient synagogue remains and structures associated by tradition with the ministry of Jesus.",
  takeaway:"Treat the Franciscan archaeological compound and the nearby Greek Orthodox church as separate entrances. Confirm admission and services for each, rather than expecting one ticket or timetable.",
  highlights:[
@@ -96,7 +96,7 @@ export const northernAttractions: Record<string, Attraction> = {
 },
 "tabgha":{
  title:"Tabgha: Church of the Multiplication and Primacy of Peter",description:"Discover Tabgha's two major pilgrimage churches on the Sea of Galilee, their historic mosaics and lakeside setting.",
- region:"Sea of Galilee",image:{src:lake,alt:"Sea of Galilee and surrounding hills"},duration:"1–2 hours",
+ region:"Sea of Galilee",duration:"1–2 hours",
  intro:"Tabgha is a quiet lakeside area west of Capernaum, traditionally linked with two New Testament events: the feeding of the multitude and Jesus' post-resurrection appearance to his disciples.",
  takeaway:"Visit the Church of the Multiplication and the Church of the Primacy of Peter as two separate sanctuaries. Walking distances are manageable for some visitors, but vehicle access and services differ.",
  highlights:[
@@ -110,7 +110,7 @@ export const northernAttractions: Record<string, Attraction> = {
 },
 "mount-of-beatitudes":{
  title:"Mount of Beatitudes: church and panorama over Galilee",description:"Visit the Mount of Beatitudes above the Sea of Galilee: hilltop church, garden paths, viewpoints and practical travel advice.",
- region:"Sea of Galilee",image:{src:lake,alt:"Panorama of the Sea of Galilee and hills"},duration:"1–2 hours",
+ region:"Sea of Galilee",duration:"1–2 hours",
  intro:"The Mount of Beatitudes is traditionally associated with Jesus' Sermon on the Mount. Its peaceful sanctuary, gardens and views across the Sea of Galilee give the site a contemplative character.",
  takeaway:"Visit the church and its grounds with time for quiet reflection. This is a separate hilltop site from Mount Tabor, and access requires a distinct road journey.",
  highlights:[
