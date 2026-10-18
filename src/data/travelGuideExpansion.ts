@@ -41,7 +41,7 @@ export const expandedTravelGuides = {
   },
   travelTips: {
     id: "travelTips", title: "Israel travel tips for first-time visitors: practical checklist",
-    description: "Planning a first Israel trip? Check entry requirements, Shabbat transport, hotel bases, payments, eSIMs and respectful visits to religious sites.",
+    description: "Planning a first Israel trip? Check entry requirements, Shabbat transport, hotel bases, payments, mobile data and visits to religious sites.",
     intro: "Build a trip that works on your actual dates. A few decisions made before booking can prevent awkward arrivals, unnecessary hotel changes and overfilled days.",
     answer: "Check the official entry requirements for your passport, choose a manageable set of bases, and plan arrival and hotel changes around Shabbat and holidays. Then connect each day's real addresses, prepare mobile data and offline records, and confirm bookings and site access before relying on them. Use current official travel advice when deciding whether and where to travel.",
     topics: ["tips", "transportation", "destinations"], photo: airportTransferPhotos["tel-aviv"]!,
