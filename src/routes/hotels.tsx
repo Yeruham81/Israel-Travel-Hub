@@ -9,7 +9,7 @@ export const Route = createFileRoute("/hotels")({
   head: () =>
     pageMeta({
       title: "Where to stay in Israel: city and resort hotel guides",
-      description: "Compare places to stay in Jerusalem, Tel Aviv, Haifa, Tiberias and the Dead Sea, from boutique areas to beach, spa and family hotels.",
+      description: "Compare hotels across Israel, from Jerusalem and Tel Aviv to Haifa, Tiberias, the Dead Sea and Eilat. Explore city areas, beach and family stays.",
       path: "/hotels/",
       crumbs: [{ name: "Home", path: "/" }, { name: "Accommodation", path: "/hotels/" }],
     }),
