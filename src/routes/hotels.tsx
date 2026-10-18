@@ -8,8 +8,8 @@ import { pageMeta } from "@/lib/site";
 export const Route = createFileRoute("/hotels")({
   head: () =>
     pageMeta({
-      title: "Hotels & places to stay in Israel by destination — Israel Taxi & Travel",
-      description: "Find your stay in Jerusalem, Tel Aviv, Haifa, Tiberias, the Dead Sea or Eilat. Discover neighborhood guides, boutique hotels, beach resorts and family escapes.",
+      title: "Where to stay in Israel: city and resort hotel guides",
+      description: "Compare places to stay in Jerusalem, Tel Aviv, Haifa, Tiberias and the Dead Sea, from boutique areas to beach, spa and family hotels.",
       path: "/hotels/",
       crumbs: [{ name: "Home", path: "/" }, { name: "Accommodation", path: "/hotels/" }],
     }),

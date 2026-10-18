@@ -7,8 +7,8 @@ import { pageMeta } from "@/lib/site";
 export const Route = createFileRoute("/car-rental")({
   head: () =>
     pageMeta({
-      title: "Car rental in Israel: airport vs city pickup — Israel Taxi & Travel",
-      description: "Should you rent a car in Israel? Airport vs city pickup, Shabbat and parking tips, what to check in rental terms, and where to compare rentals.",
+      title: "Car rental in Israel: Ben Gurion Airport or city pickup?",
+      description: "Should you rent a car in Israel? Compare airport and city pickup, parking, Shabbat hours, insurance checks and trips beyond Tel Aviv and Jerusalem.",
       path: "/car-rental/",
       crumbs: [{ name: "Home", path: "/" }, { name: "Car rental", path: "/car-rental/" }],
     }),

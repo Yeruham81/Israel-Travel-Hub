@@ -16,8 +16,8 @@ import { ExchangeRateNote } from "@/components/CurrencyRates";
 export const Route = createFileRoute("/transfers/")({
   validateSearch: parseAirportTransferSearch,
   head: () => pageMeta({
-    title: "Airport transfers from Ben Gurion Airport: destinations & prices",
-    description: "Pre-book a private transfer from Ben Gurion Airport to Tel Aviv, Jerusalem, Haifa, the Dead Sea and more. See starting prices and request a quote from Moshe Barak.",
+    title: "Private airport transfers from Ben Gurion: destinations & prices",
+    description: "Pre-book a private TLV airport pickup to Jerusalem, Tel Aviv, Haifa or the Dead Sea. Compare weekday starting rates and request a vehicle quote.",
     path: "/transfers/",
     crumbs: [{ name: "Home", path: "/" }, { name: "Airport transfers", path: "/transfers/" }],
   }),

@@ -5,13 +5,13 @@ import { getSource, linksForPage } from "@/data/registry";
 import { pageMeta } from "@/lib/site";
 
 const PATH = "/attractions/caesarea/";
-const TITLE = "Caesarea National Park: planning your visit";
+const TITLE = "Caesarea National Park: tickets, Roman ruins and getting there";
 
 export const Route = createFileRoute("/attractions/caesarea")({
   head: () =>
     pageMeta({
       title: TITLE,
-      description: "Plan a visit to Caesarea National Park on Israel's Mediterranean coast: what to see, timing, getting there from Tel Aviv or Haifa and official visit options.",
+      description: "Planning Caesarea National Park? Discover Roman ruins, harbour highlights, official tickets and transport from Tel Aviv or Haifa.",
       path: PATH,
       type: "article",
       crumbs: [{ name: "Home", path: "/" }, { name: "Attractions", path: "/attractions/" }, { name: "Caesarea", path: PATH }],

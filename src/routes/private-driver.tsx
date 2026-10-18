@@ -13,8 +13,8 @@ import { PageUpdated } from "@/components/PageUpdated";
 
 export const Route = createFileRoute("/private-driver")({
   head: () => pageMeta({
-    title: "Private driver in Israel: intercity transfers & day hire",
-    description: "Plan hotel-to-hotel journeys, intercity transfers and multi-stop days in Israel. Share your itinerary, passengers and luggage to request a private driver quote from Moshe Barak.",
+    title: "Private driver in Israel: intercity transfers and day hire",
+    description: "Hire a private driver in Israel for hotel-to-hotel journeys, full-day itineraries and multiple stops. Share your route and request a written quote.",
     path: "/private-driver/",
     crumbs: [{ name: "Home", path: "/" }, { name: "Private driver", path: "/private-driver/" }],
   }),

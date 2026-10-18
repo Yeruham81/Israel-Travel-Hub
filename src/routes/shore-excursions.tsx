@@ -7,8 +7,8 @@ import { pageMeta } from "@/lib/site";
 export const Route = createFileRoute("/shore-excursions")({
   head: () =>
     pageMeta({
-      title: "Shore excursions in Israel from Ashdod and Haifa — Israel Taxi & Travel",
-      description: "Choose Haifa or Ashdod Port to compare private shore-excursion destinations, published car-and-driver starting prices and ship-timing advice. Request a tailored quote.",
+      title: "Israel shore excursions from Ashdod and Haifa cruise ports",
+      description: "Compare private shore excursions from Ashdod or Haifa to Jerusalem, Galilee, Masada and the coast. Check ship timing and driver quote terms.",
       path: "/shore-excursions/",
       crumbs: [{ name: "Home", path: "/" }, { name: "Shore excursions", path: "/shore-excursions/" }],
     }),

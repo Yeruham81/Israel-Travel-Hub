@@ -8,7 +8,7 @@ import { pageMeta } from "@/lib/site";
 
 export const Route = createFileRoute("/guides")({
   validateSearch: (search: Record<string, unknown>): { q?: string; topic?: GuideTopicId } => ({ ...(typeof search["q"] === "string" && search["q"].trim() ? { q: search["q"].trim().slice(0, 120) } : {}), ...(isGuideTopic(search["topic"]) ? { topic: search["topic"] } : {}) }),
-  head: () => pageMeta({ title: "Israel travel guides & practical tips", description: "Find Israel travel guides by topic: airport arrivals, transport, eSIMs, destinations, hotels, attractions and day trips. Search and filter practical local advice.", path: "/guides/", crumbs: [{ name: "Home", path: "/" }, { name: "Travel guides", path: "/guides/" }] }),
+  head: () => pageMeta({ title: "Israel travel guides: transport, destinations and trip planning", description: "Browse guides to Israel's airport arrivals, taxis, public transport, hotel areas, Jerusalem, the Dead Sea, attractions and day trips.", path: "/guides/", crumbs: [{ name: "Home", path: "/" }, { name: "Travel guides", path: "/guides/" }] }),
   component: Guides,
 });
 

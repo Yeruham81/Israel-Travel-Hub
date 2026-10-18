@@ -5,8 +5,8 @@ import { pageMeta } from "@/lib/site";
 export const Route = createFileRoute("/attractions/")({
   head: () =>
     pageMeta({
-      title: "Attractions & experiences in Israel by region — Israel Taxi & Travel",
-      description: "Discover Israel's attractions by region: Masada by the Dead Sea, Caesarea on the Mediterranean coast and Bethlehem near Jerusalem, with planning guides.",
+      title: "Israel attractions to visit: Masada, Caesarea and more",
+      description: "Explore Israeli attractions by region, including Masada, Caesarea and Bethlehem. Find practical guides to admission, travel and tours.",
       path: "/attractions/",
       crumbs: [{ name: "Home", path: "/" }, { name: "Attractions", path: "/attractions/" }],
     }),

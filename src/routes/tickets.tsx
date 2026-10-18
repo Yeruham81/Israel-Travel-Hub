@@ -5,8 +5,8 @@ import { pageMeta } from "@/lib/site";
 export const Route = createFileRoute("/tickets")({
   head: () =>
     pageMeta({
-      title: "Tickets & admission for Israel's sites — Israel Taxi & Travel",
-      description: "Entry tickets for Masada and Caesarea national parks: what admission covers, how it differs from transport-inclusive tours, and where to reserve officially.",
+      title: "Israel attraction tickets: Masada and Caesarea entry explained",
+      description: "Plan tickets for Masada and Caesarea National Parks. Compare official site entry, cable cars and separate transport-inclusive tour options.",
       path: "/tickets/",
       crumbs: [{ name: "Home", path: "/" }, { name: "Tickets & admission", path: "/tickets/" }],
     }),
