@@ -15,7 +15,7 @@ export const airportTransferNav = {
 export const serviceNav: NavItem[] = [
   { label: "Home", to: "/" },
   { label: "Airport transfers", to: "/transfers/" },
-  { label: "Tours & day trips", to: "/tours/" },
+  { label: "Tours & Day Trips", to: "/tours/" },
   { label: "Shore excursions", to: "/shore-excursions/" },
   { label: "Accommodation", to: "/hotels/" },
   { label: "Attractions", to: "/attractions/" },

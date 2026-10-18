@@ -6,7 +6,7 @@ import { customerTestimonials, tripadvisorReviews, tripadvisorProfileUrl, tripad
 
 describe("homepage navigation and review sources", () => {
   it("keeps six ordered primary entries and rental only in the sidebar", () => {
-    expect(serviceDomains.map(x => x.label)).toEqual(["Airport transfers", "Tours & day trips", "Shore excursions", "Accommodation", "Attractions", "Travel guides"]);
+    expect(serviceDomains.map(x => x.label)).toEqual(["Airport transfers", "Tours & Day Trips", "Shore excursions", "Accommodation", "Attractions", "Travel guides"]);
     expect(serviceDomains.some(x => x.to === "/car-rental/" || x.to === "/tickets/")).toBe(false);
     const sidebar = allNavGroups.flatMap(group => group.items.filter(item => "to" in item));
     expect(sidebar.some(x => "to" in x && x.to === "/car-rental/")).toBe(true);

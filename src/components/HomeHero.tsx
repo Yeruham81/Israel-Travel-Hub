@@ -1,4 +1,3 @@
-import { Link } from "@tanstack/react-router";
 import { HeroCarousel, type HeroSlide } from "@/components/HeroCarousel";
 import hJer from "@/assets/home/hero-jerusalem.webp";
 import hJerSm from "@/assets/home/hero-jerusalem-sm.webp";
@@ -27,16 +26,13 @@ export function HomeHero() {
   return (
     <section aria-labelledby="home-title">
       <HeroCarousel slides={heroSlides}>
-        <div className="max-w-2xl px-6 pb-6 pt-14 text-navy-foreground md:px-12 md:pt-20">
-          <p className="text-xs font-semibold uppercase tracking-[0.14em] opacity-85">Plan your trip to Israel</p>
-          <h1 id="home-title" className="mt-4 text-4xl leading-[1.08] md:text-6xl">Where to stay, how to get around, what to see.</h1>
-          <p className="mt-5 max-w-xl text-lg leading-relaxed opacity-90">
-            Locally written guides for international visitors — useful information first, then clear links to book with hotels, transfer companies, tour operators and official sites.
+        <div className="max-w-3xl px-6 pb-8 pt-16 text-navy-foreground md:px-12 md:pb-10 md:pt-24">
+          <p className="text-xs font-semibold uppercase tracking-[0.17em] opacity-90">Your Israel journey starts here</p>
+          <h1 id="home-title" className="mt-4 max-w-2xl text-4xl leading-[1.08] md:text-6xl">Explore Israel with confidence.</h1>
+          <p className="mt-5 max-w-2xl text-lg leading-relaxed opacity-95 md:text-xl">
+            From airport arrivals and private day trips to beautiful places to stay and unforgettable sights, discover local insights that make every journey easier and more rewarding.
           </p>
-          <div className="mt-7 flex flex-wrap gap-3">
-            <Link to="/hotels/" className="btn btn-light">Find where to stay</Link>
-            <Link to="/destinations/" className="btn border border-navy-foreground/60 text-navy-foreground hover:bg-navy-foreground/15">Browse destinations</Link>
-          </div>
+        </div>
         </div>
       </HeroCarousel>
     </section>

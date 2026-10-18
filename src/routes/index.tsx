@@ -142,7 +142,7 @@ function Home() {
       <div className="mx-auto max-w-6xl px-4 pt-6">
         <nav aria-label="Services" className="grid grid-cols-2 gap-2 rounded-2xl border bg-card p-3 shadow-lg sm:grid-cols-3 lg:grid-cols-6">
           {services.map((s) => (
-            <a key={s.id} href={`#${s.id}`} className="rounded-lg px-3 py-2 text-center text-sm font-semibold hover:bg-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring">{s.eyebrow.split(" &")[0]}</a>
+            <a key={s.id} href={`#${s.id}`} className="rounded-lg px-3 py-2 text-center text-sm font-semibold hover:bg-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring">{s.id === "tours" ? "Tours & Day Trips" : s.eyebrow.split(" &")[0]}</a>
           ))}
           <a href="#guides" className="rounded-lg px-3 py-2 text-center text-sm font-semibold hover:bg-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring">Travel guides</a>
         </nav>
