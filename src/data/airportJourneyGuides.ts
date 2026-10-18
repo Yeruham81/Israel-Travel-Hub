@@ -14,7 +14,7 @@ export type JourneyOption = {
   heading: string; paragraphs: string[]; checklist: string[];
 };
 export type AirportJourneyGuide = {
-  id: AirportJourneyId; city: string; path: string; title: string; description: string;
+  id: AirportJourneyId; city: string; path: LinkProps["to"]; title: string; description: string;
   distance: string; intro: string; answer: string; trainIntro: string;
   privatePath: LinkProps["to"]; privateLabel: string; photo: StayGuidePhoto;
   options: JourneyOption[];
@@ -47,7 +47,7 @@ const byId: Record<AirportJourneyId, AirportJourneyGuide> = {
     intro: "Choose the best journey to your actual Jerusalem hotel, not just to a station. This independent transport comparison covers the fast direct train, airport taxis, private transfers, limited bus options and car rental.",
     answer: "For many weekday arrivals, a direct train to Jerusalem–Yitzhak Navon is the least expensive and fastest station-to-station option. You still need to reach your accommodation from the station. If you arrive on Shabbat, have several large bags or need an Old City drop-off, compare an authorized metered airport taxi with a private pickup arranged in advance.",
     trainIntro: "The airport rail station is below Terminal 3. Follow the train signs from arrivals. Terminal 1 passengers must first use the airport's internal shuttle to Terminal 3. Check the actual platform, fare and departure for your arrival date with Israel Railways.",
-    photo: airportTransferPhotos.jerusalem!,
+    photo: airportTransferPhotos["jerusalem"]!,
     privatePath: "/travel-blog/ben-gurion-airport-to-jerusalem/",
     privateLabel: "Request a private Jerusalem transfer",
     legacySource: airport + "ben-gurion-airport-to-jerusalem/",
@@ -172,7 +172,7 @@ const byId: Record<AirportJourneyId, AirportJourneyGuide> = {
     intro: "Haifa stretches from the coastline to Mount Carmel. Choosing a station or road drop-off for your exact neighbourhood matters as much as choosing between rail, taxi and a private transfer.",
     answer: "When the service is running, direct trains toward Haifa are normally the lowest-cost practical choice. Choose Hof HaCarmel, Bat Galim, Center HaShmona or HaMifrats for the right final connection. For night, Shabbat or a hilltop hotel with heavy luggage, compare an authorized metered taxi or a pre-booked driver.",
     trainIntro: "The airport railway station is below Terminal 3; Terminal 1 arrivals connect by internal shuttle. Many services run directly north to Haifa, but stops vary by train. Check the current timetable, station and whether a change is needed.",
-    photo: airportTransferPhotos.haifa!,
+    photo: airportTransferPhotos["haifa"]!,
     privatePath: "/travel-blog/ben-gurion-airport-to-haifa/",
     privateLabel: "Request a private Haifa transfer",
     legacySource: airport + "ben-gurion-airport-to-haifa/",
