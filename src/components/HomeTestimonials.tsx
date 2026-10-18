@@ -11,7 +11,6 @@ export function HomeTestimonials() {
       <div className="bg-navy px-6 py-9 text-navy-foreground sm:px-10">
         <p className="text-xs font-semibold uppercase tracking-widest opacity-80">Real traveler experiences</p>
         <h2 id="reviews-h" className="mt-2 text-3xl sm:text-4xl">Kind words from people I've helped</h2>
-        <p className="mt-3 max-w-3xl leading-relaxed opacity-85">These reviews are about my private transportation and day-trip services, not ratings of other providers featured on this site.</p>
         <div className="mt-7 flex flex-wrap items-center gap-4 rounded-2xl border border-white/20 bg-white/10 p-5">
           <a href={tripadvisorProfileUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 text-xl font-bold tracking-tight text-white" aria-label="Tripadvisor reviews for Moshe Barak">
             <img src="https://cdn.simpleicons.org/tripadvisor/34E0A1" alt="" width={36} height={36} loading="lazy" className="size-9" />
@@ -20,21 +19,19 @@ export function HomeTestimonials() {
           <span className="flex items-center gap-1 text-[#34e0a1]" aria-label="Five out of five stars">
             {Array.from({length: 5},(_,i)=><Star key={i} size={20} fill="currentColor" aria-hidden />)}
           </span>
-          <span className="text-2xl font-semibold tabular-nums">5.0 / 5</span>
-          <span className="text-sm opacity-90">11 reviews</span>
+          <span className="text-2xl font-semibold tabular-nums">{tripadvisorSnapshot.rating.toFixed(1)} / 5</span>
         </div>
-        <p className="mt-2 text-xs opacity-75">Tripadvisor listing snapshot checked October 18, 2026; scores and review counts can change. Not an official Tripadvisor widget.</p>
       </div>
       <div className="grid gap-4 px-6 py-8 md:grid-cols-3 sm:px-10" data-testid="tripadvisor-review-cards">
-        {tripadvisorReviews.map((review,i)=><article key={review.author} className="flex flex-col rounded-2xl border bg-background p-5 shadow-sm">
+        {tripadvisorReviews.map((review)=><article key={review.author} className="flex h-full flex-col rounded-2xl border border-slate-200 bg-white p-5 text-slate-950 shadow-sm">
           <div className="flex items-center justify-between gap-2">
             <div className="grid size-11 place-items-center rounded-full bg-emerald-100 font-semibold text-emerald-900" aria-hidden>{review.author.slice(0,1).toUpperCase()}</div>
-            <span className="text-xs font-semibold text-emerald-700">Tripadvisor</span>
+            <span className="inline-flex items-center gap-1.5 text-xs font-semibold text-emerald-800"><img src="https://cdn.simpleicons.org/tripadvisor/00AA6C" alt="" width={20} height={20} loading="lazy" className="size-5" />Tripadvisor</span>
           </div>
-          <Quote size={20} className="mt-4 text-primary" aria-hidden />
-          <p className="mt-2 flex-1 leading-relaxed">{review.summary}</p>
-          <div className="mt-5 border-t pt-3"><p className="font-semibold">{review.author}</p><p className="text-xs text-muted-foreground">{review.period} · Tripadvisor review summary</p></div>
-          <a href={tripadvisorProfileUrl} target="_blank" rel="noopener noreferrer" className="mt-3 inline-flex items-center gap-1 text-sm font-semibold text-primary underline underline-offset-4">See original review <ExternalLink size={13} aria-hidden /></a>
+          <Quote size={20} className="mt-4 text-emerald-700" aria-hidden />
+          <blockquote className="mt-3 flex-1 text-[1.05rem] leading-relaxed text-slate-950">“{review.excerpt}…”</blockquote>
+          <div className="mt-5 border-t border-slate-200 pt-3"><p className="font-semibold text-slate-950">{review.author}</p><p className="text-xs text-slate-600">{review.period}</p></div>
+          <a href={tripadvisorProfileUrl} target="_blank" rel="noopener noreferrer" className="mt-3 inline-flex items-center gap-1 text-sm font-semibold text-emerald-800 underline underline-offset-4">See full review <ExternalLink size={13} aria-hidden /></a>
         </article>)}
       </div>
       <div className="px-6 pb-8 sm:px-10"><a href={tripadvisorProfileUrl} target="_blank" rel="noopener noreferrer" className="btn btn-primary">Explore all Tripadvisor reviews <ExternalLink size={16} aria-hidden /></a></div>
@@ -54,7 +51,6 @@ export function HomeTestimonials() {
         <div className="mt-4 flex justify-center gap-2" aria-label="Choose testimonial">
           {customerTestimonials.map((person,i)=><button key={person.author} type="button" aria-label={"Show testimonial from "+person.author} aria-pressed={i===active} onClick={()=>setActive(i)} className={"h-2.5 rounded-full transition-all "+(i===active?"w-9 bg-primary":"w-2.5 bg-muted-foreground/40 hover:bg-primary/60")} />)}
         </div>
-        <p className="mt-5 text-center text-xs text-muted-foreground">Customer messages previously shared with Moshe Barak. Portraits will be added only when verified and approved by their owners.</p>
       </div>
     </div>
   </section>;

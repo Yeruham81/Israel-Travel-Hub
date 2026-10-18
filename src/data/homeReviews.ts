@@ -3,9 +3,9 @@ export const tripadvisorProfileUrl = "https://www.tripadvisor.com/Attraction_Rev
 export const tripadvisorSnapshot = { rating: 5, reviewCount: 11, checkedAt: "2026-10-18" } as const;
 
 export const tripadvisorReviews = [
-  { author: "Kaye L", period: "August 2025", summary: "A reliable airport pickup, clear pricing and welcome assistance when travel plans changed." },
-  { author: "Lilach T", period: "July 2025", summary: "Professional, punctual service and easy communication throughout the journey." },
-  { author: "Janet", period: "June 2025", summary: "A well-coordinated Shabbat transfer to Jerusalem for a larger group, with return airport transportation." },
+  { author: "Kaye L", period: "August 2025", excerpt: "He has always been on time and makes the process of finding him when we land at Ben Gurion airport easy." },
+  { author: "Lilach T", period: "July 2025", excerpt: "He was on time, easy to communicate with, and very professional throughout. I felt completely safe and taken care of" },
+  { author: "Janet", period: "June 2025", excerpt: "The service was easy to coordinate and reasonably priced. It was such a good experience we also used his service to return to the airport" },
 ] as const;
 
 /** Customer messages originally published by Moshe's Israel Taxi Service.

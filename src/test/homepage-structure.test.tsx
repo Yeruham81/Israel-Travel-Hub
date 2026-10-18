@@ -10,8 +10,11 @@ describe("homepage navigation and review sources", () => {
     expect(sidebar.some(x => "to" in x && x.to === "/car-rental/")).toBe(true);
     expect(sidebar.some(x => "to" in x && x.to === "/tickets/")).toBe(false);
   });
-  it("attributes one-time summaries to distinct sources", () => {
+  it("keeps credited review excerpts concise, balanced and linked to Tripadvisor", () => {
     expect(tripadvisorReviews).toHaveLength(3);
+    const lengths = tripadvisorReviews.map(review => review.excerpt.split(/\s+/).length);
+    expect(Math.max(...lengths) - Math.min(...lengths)).toBeLessThanOrEqual(5);
+    expect(lengths.every(length => length >= 20 && length <= 25)).toBe(true);
     expect(customerTestimonials).toHaveLength(3);
     expect(tripadvisorSnapshot).toMatchObject({ rating: 5, reviewCount: 11 });
     expect(tripadvisorProfileUrl).toMatch(/^https:\/\/www\.tripadvisor\.com\//);
