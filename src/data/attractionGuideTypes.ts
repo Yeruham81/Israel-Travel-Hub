@@ -13,4 +13,4 @@ export interface Attraction {
   official: {label:string;url:string}[];
   image?: {src:string;alt:string};
 }
-export const attractionPath = (id: AttractionId) => `/travel-blog/${id}/`;
+export const attractionPath = (id: AttractionId): `/travel-blog/${AttractionId}/` => `/travel-blog/${id}/`;
