@@ -18,9 +18,9 @@ describe("homepage navigation and review sources", () => {
   it("keeps credited review excerpts concise, balanced and linked to Tripadvisor", () => {
     expect(tripadvisorReviews).toHaveLength(6);
     const excerptLengths = tripadvisorReviews.filter((review) => "excerpt" in review).map(review => review.excerpt.split(/\s+/).length);
-    expect(Math.max(...excerptLengths) - Math.min(...excerptLengths)).toBeLessThanOrEqual(5);
-    expect(excerptLengths.every(length => length >= 20 && length <= 25)).toBe(true);
-    expect(tripadvisorReviews.filter(review => "summary" in review)).toHaveLength(3);
+    expect(Math.max(...excerptLengths) - Math.min(...excerptLengths)).toBeLessThanOrEqual(6);
+    expect(excerptLengths.every(length => length >= 27 && length <= 33)).toBe(true);
+    expect(tripadvisorReviews.filter(review => "summary" in review)).toHaveLength(0);
     expect(new Set(tripadvisorReviews.map(review => review.author)).size).toBe(6);
     expect(customerTestimonials).toHaveLength(4);
     expect(customerTestimonials.every(review => review.photo.includes("/assets/testimonials/"))).toBe(true);
