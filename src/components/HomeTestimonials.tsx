@@ -40,8 +40,8 @@ export function HomeTestimonials() {
           <div><p className="eyebrow">More stories from my travelers</p><h3 className="mt-2 text-2xl sm:text-3xl">Personal messages from past clients</h3></div>
           <div className="flex gap-2"><button type="button" onClick={()=>change(-1)} aria-label="Previous testimonial" className="grid size-11 place-items-center rounded-full border bg-background hover:border-primary"><ChevronLeft aria-hidden /></button><button type="button" onClick={()=>change(1)} aria-label="Next testimonial" className="grid size-11 place-items-center rounded-full border bg-background hover:border-primary"><ChevronRight aria-hidden /></button></div>
         </div>
-        <div className="mt-6 grid gap-6 rounded-2xl border bg-card p-6 shadow-sm md:grid-cols-[160px_minmax(0,1fr)] md:items-center sm:p-8" data-testid="original-testimonial-carousel" aria-live="polite">
-          <div className="mx-auto grid size-32 place-items-center rounded-full border-4 border-primary/20 bg-secondary font-serif text-4xl text-primary" aria-label={current.author + " initials"}>{current.initials}</div>
+        <div className="mt-6 grid gap-6 rounded-2xl border bg-card p-6 shadow-sm md:grid-cols-[minmax(150px,220px)_minmax(0,1fr)] md:items-center sm:p-8" data-testid="original-testimonial-carousel" aria-live="polite">
+          <img src={current.photo} alt={"Photo featured alongside the testimonial from " + current.author} width={440} height={330} loading="lazy" decoding="async" className="mx-auto aspect-[4/3] w-full max-w-[220px] rounded-2xl border border-border object-cover shadow-md" />
           <figure>
             <Quote size={27} className="text-primary" aria-hidden />
             <blockquote className="mt-3 whitespace-pre-line font-serif text-lg leading-relaxed sm:text-xl">“{current.quote}”</blockquote>
