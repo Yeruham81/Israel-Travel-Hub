@@ -87,7 +87,7 @@ describe("migrated practical guides", () => {
     const Hub = HubRoute.options.component!;
     const html = renderToString(<RouterContextProvider router={router}><Hub /></RouterContextProvider>);
     expect(guideDirectory).toHaveLength(30);
-    expect(new Set(guideDirectory.map((guide) => guide.to)).size).toBe(26);
+    expect(new Set(guideDirectory.map((guide) => guide.to)).size).toBe(30);
     for (const guide of guideDirectory) {
       expect(html).toContain(`href="${guide.to}"`);
       expect(router.matchRoutes(String(guide.to)).at(-1)?.routeId).toBe(String(guide.to).replace(/\/$/, ""));
