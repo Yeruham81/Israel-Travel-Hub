@@ -44,8 +44,8 @@ const hallPhoto: GuidePhoto = { src: airportHall, alt: "Ben Gurion Airport Termi
 export const travelGuides: Record<TravelGuideId, TravelGuide> = {
   ...expandedTravelGuides,
   uber: {
-    id: "uber", title: "Is Uber available in Israel? Taxi apps & alternatives",
-    description: "Understand Uber availability in Israel, licensed taxi apps, airport pickup rules and practical alternatives for Tel Aviv, Jerusalem and Haifa.",
+    id: "uber", title: "Is Uber available in Israel? Gett and taxi alternatives",
+    description: "Can you use Uber in Israel? Compare Gett, licensed taxis and private transfers, including Ben Gurion Airport pickup rules and city rides.",
     intro: "Choose a workable ride plan before you land, understand what a local taxi app actually books, and keep a backup for an important journey.",
     answer: "Do not plan on a standard Uber ride in Israel. The publisher's current local guide reports Uber's usual passenger service unavailable. Gett, licensed taxis and confirmed private transfers are practical alternatives; Gett's authorized Ben Gurion Airport service is separately documented by the operator.",
     topics: ["transportation", "tips"], photo: pickupPhoto,
@@ -63,8 +63,8 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
     sourceIds: ["guide-original-uber", "guide-gett", "guide-iaa"], related: ["taxis", "sherut", "esim", "telAviv", "shabbat"], services: [{ label: "Airport transfers", to: "/transfers/" }, { label: "Private driver for intercity journeys", to: "/private-driver/" }],
   },
   sherut: {
-    id: "sherut", title: "Is there still a sherut from Ben Gurion Airport?",
-    description: "Understand the reported closure of the former Nesher and Amal airport sheruts, how local shared taxis differ, and which airport alternatives to plan.",
+    id: "sherut", title: "Ben Gurion Airport sherut: are shared taxis still running?",
+    description: "Are Nesher and Amal airport sheruts still operating? Understand discontinued routes, local shared taxis and reliable airport alternatives.",
     intro: "Separate old airport shared-taxi advice from the services you can actually plan, and avoid confusing an internal airport shuttle with a ride to your hotel.",
     answer: "Do not arrive expecting the former Nesher sherut to Jerusalem or Amal sherut to Haifa. The publisher's current guide reports those airport services discontinued and no comparable regular Tel Aviv airport sherut. Plan a current train or bus connection, an authorized taxi or a confirmed private transfer instead.",
     topics: ["transportation", "tips"], photo: airportTransferPhotos["other"]!,
@@ -82,8 +82,8 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
     sourceIds: ["guide-original-sherut", "guide-iaa", "guide-gett", "israel-rail"], related: ["arrival", "israel", "taxis", "telAviv", "shabbat"], services: [{ label: "Private transfer to Jerusalem", to: "/travel-blog/ben-gurion-airport-to-jerusalem/" }, { label: "Private transfer to Haifa", to: "/travel-blog/ben-gurion-airport-to-haifa/" }, { label: "All airport destinations", to: "/transfers/" }],
   },
   esim: {
-    id: "esim", title: "How to choose the best eSIM for Israel",
-    description: "Compare Israel eSIM options by device compatibility, data, validity, hotspot, calling and total cost. Practical setup advice and links to current provider plans.",
+    id: "esim", title: "Best eSIM for Israel: data plans, calls and setup explained",
+    description: "Choose an Israel eSIM by phone compatibility, data, validity, calls and hotspot rules. Compare providers and avoid common activation mistakes.",
     intro: "Get mobile data ready for maps, your hotel and your airport pickup. Choose the actual plan that fits your phone and trip, with a clear view of its limitations.",
     answer: "The best Israel eSIM depends on your exact phone, days of use, data needs and whether you need calls or a local number. Check device compatibility first, then compare the package's country coverage, activation rule, data allowance, fair-use policy and final total. An unlimited label does not promise unlimited full-speed data.",
     topics: ["connectivity", "tips"], photo: { src: esimPhoto, alt: "A phone displaying an eSIM graphic in front of a blurred city background", sourceUrl: "https://www.israel-taxi.com/wp-content/uploads/2025/08/best_esim_for_israel.jpeg", credit: "Illustrative eSIM screen, not a provider speed test." },
@@ -100,8 +100,8 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
     sourceIds: ["guide-original-esim", "guide-esim-airalo", "guide-esim-saily", "guide-esim-yesim", "guide-esim-gigsky", "guide-esim-drimsim"], related: ["arrival", "uber", "israel"], services: [{ label: "Arrange your airport pickup", to: "/transfers/" }], providerPageId: "guide-esim",
   },
   arrival: {
-    id: "arrival", title: "Ben Gurion Airport arrival tips for first-time visitors",
-    description: "Plan passport control, baggage, customs, mobile data and onward travel at Ben Gurion Airport. A practical arrival sequence, checklist and official source links.",
+    id: "arrival", title: "Ben Gurion Airport arrivals: passport control, bags and taxis",
+    description: "Arriving at Ben Gurion Airport? Plan passport control, baggage claim, customs, mobile data and how to get to your hotel after landing.",
     intro: "Keep the essentials ready before your flight, then work through the arrival process without confusing your landing time with your hotel arrival time.",
     answer: "After landing, follow arrivals signs to passport control, collect checked bags, pass through customs and enter the public arrivals area. Keep your passport, entry record and accommodation details accessible. Confirm the actual arrival terminal and onward transport shortly before travel; airport processing time varies.",
     topics: ["tips", "transportation"], photo: hallPhoto,
@@ -136,8 +136,8 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
     sourceIds: ["guide-original-israel", "israel-rail", "guide-telaviv-transit", "guide-red-line", "guide-iaa"], related: ["telAviv", "taxis", "shabbat", "arrival", "esim", "travelTips", "jerusalem"], services: [{ label: "Private driver and intercity journeys", to: "/private-driver/" }, { label: "Car rental", to: "/car-rental/" }, { label: "Tours & day trips", to: "/tours/" }, { label: "Destinations and city guides", to: "/destinations/" }],
   },
   telAviv: {
-    id: "telAviv", title: "Getting around Tel Aviv: walking, buses, rail & taxis",
-    description: "Plan Tel Aviv and Jaffa journeys by foot, bus, Red Line or taxi. Understand payment, national rail stations, weekend transport and hotel-location choices.",
+    id: "telAviv", title: "Getting around Tel Aviv without a car: buses, rail and taxis",
+    description: "Explore Tel Aviv by foot, bus, Red Line light rail or taxi. Check Rav-Kav payment, railway stations, Jaffa connections and weekend options.",
     intro: "Match the mode to the neighbourhood you want to explore. A short coastal walk and an airport train solve different parts of your trip.",
     answer: "For a central Tel Aviv stay, combine walking with buses, the Red Line where its corridor helps, and occasional taxis. National rail is mainly useful for the airport and journeys beyond the city. Check the municipal weekend network separately for Shabbat; a rental car is often easier to justify for days outside the city.",
     topics: ["transportation", "destinations", "tips"], photo: airportTransferPhotos["tel-aviv"]!,
