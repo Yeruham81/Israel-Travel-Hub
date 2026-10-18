@@ -5,11 +5,8 @@ import tiberias from "@/assets/home/tiberias-lake.webp";
 import t3 from "@/assets/home/ben-gurion-t3.webp";
 import bethlehem from "@/assets/home/bethlehem-nativity.webp";
 import masada from "@/assets/home/masada-dead-sea.webp";
-import cableCar from "@/assets/home/masada-cable-car.webp";
-import cableCarWide from "@/assets/home/masada-cable-car-wide.webp";
 import caesareaDusk from "@/assets/home/caesarea-dusk.webp";
 import caesareaAqueduct from "@/assets/home/caesarea-aqueduct.webp";
-import caesareaTheatre from "@/assets/home/caesarea-theatre.webp";
 import hotelRoom from "@/assets/home/hotel-room.webp";
 import airportPickup from "@/assets/home/airport-pickup.webp";
 import guidedTour from "@/assets/home/guided-tour.webp";
@@ -25,12 +22,13 @@ import { GuideCard } from "@/components/TravelGuide";
 import { guideDirectory } from "@/data/travelGuides";
 import { isPublisherUrl } from "@/data/registry";
 import { AuthorCard } from "@/components/AuthorCard";
+import { HomeTestimonials } from "@/components/HomeTestimonials";
 
 export const Route = createFileRoute("/")({
   head: () =>
     pageMeta({
-      title: "Israel Taxi & Travel — plan hotels, transfers, tours and tickets in Israel",
-      description: "Local guidance for visiting Israel: where to stay, airport transfers, tours, attractions, tickets and car rental — with honest comparisons and links to book with providers.",
+      title: "Israel Travel Guides: Airport Transfers, Tours, Hotels & Attractions",
+      description: "Plan Israel airport transfers, tours, shore excursions, accommodation and attractions with practical local travel guides and clear booking options.",
       path: "/",
     }),
   component: Home,
@@ -51,23 +49,9 @@ const IMG = {
   masada: { src: masada, alt: "Masada plateau from the air with the Dead Sea behind" },
   cableCar: { src: cableCar, alt: "Masada cable car approaching the summit station" },
   caesarea: { src: caesareaAqueduct, alt: "Roman aqueduct along the beach at Caesarea" },
-  caesareaTheatre: { src: caesareaTheatre, alt: "Roman theatre at Caesarea National Park" },
 } satisfies Record<string, Img>;
 
 const services: Service[] = [
-  {
-    id: "accommodation", eyebrow: "Accommodation", title: "Accommodation in Israel",
-    text: "Choose a neighborhood or hotel style, then compare practical details such as beach access, family facilities, spa entry and arrival before booking.",
-    feature: { src: hotelRoom, alt: "Illustrative bright hotel room with a made bed by the window (not a specific property)" },
-    cards: [
-      { label: "Jerusalem", text: "Old City, German Colony or city centre?", to: "/travel-blog/where-to-stay-in-jerusalem/", img: IMG.jerusalem },
-      { label: "Tel Aviv", text: "Beachfront, Jaffa or the White City", to: "/travel-blog/where-to-stay-in-tel-aviv/", img: IMG.telAviv },
-      { label: "Tiberias & Galilee", text: "Family, luxury & lakeside hotels", to: "/travel-blog/best-hotels-in-tiberias/", img: IMG.tiberias },
-      { label: "Dead Sea", text: "Spa breaks, family resorts & luxury stays", to: "/travel-blog/best-dead-sea-hotels/", img: IMG.deadSea },
-      { label: "Haifa", text: "Boutique, family & Carmel hotels", to: "/travel-blog/best-hotels-in-haifa/", img: IMG.haifa },
-    ],
-    hub: { label: "Explore accommodation", to: "/hotels/" },
-  },
   {
     id: "transfers", eyebrow: "Transportation", title: "Airport transfers & private drivers",
     text: "Arrange your airport arrival, or plan intercity journeys and multi-stop days with a private driver.",
@@ -100,6 +84,19 @@ const services: Service[] = [
     hub: { label: "Explore shore excursions", to: "/shore-excursions/" },
   },
   {
+    id: "accommodation", eyebrow: "Accommodation", title: "Accommodation in Israel",
+    text: "Choose a neighborhood or hotel style, then compare practical details such as beach access, family facilities, spa entry and arrival before booking.",
+    feature: { src: hotelRoom, alt: "Illustrative bright hotel room with a made bed by the window (not a specific property)" },
+    cards: [
+      { label: "Jerusalem", text: "Old City, German Colony or city centre?", to: "/travel-blog/where-to-stay-in-jerusalem/", img: IMG.jerusalem },
+      { label: "Tel Aviv", text: "Beachfront, Jaffa or the White City", to: "/travel-blog/where-to-stay-in-tel-aviv/", img: IMG.telAviv },
+      { label: "Tiberias & Galilee", text: "Family, luxury & lakeside hotels", to: "/travel-blog/best-hotels-in-tiberias/", img: IMG.tiberias },
+      { label: "Dead Sea", text: "Spa breaks, family resorts & luxury stays", to: "/travel-blog/best-dead-sea-hotels/", img: IMG.deadSea },
+      { label: "Haifa", text: "Boutique, family & Carmel hotels", to: "/travel-blog/best-hotels-in-haifa/", img: IMG.haifa },
+    ],
+    hub: { label: "Explore accommodation", to: "/hotels/" },
+  },
+  {
     id: "attractions", eyebrow: "Attractions & experiences", title: "Attractions & experiences",
     text: "Desert fortresses, seaside ruins and holy places — what to expect and how long to allow.",
     feature: { src: caesareaDusk, alt: "Ancient ruins on the shore at Caesarea at dusk" },
@@ -110,27 +107,7 @@ const services: Service[] = [
     ],
     hub: { label: "Explore attractions", to: "/attractions/" },
   },
-  {
-    id: "tickets", eyebrow: "Tickets & admission", title: "Tickets & admission",
-    text: "Admission options on official sites, kept separate from tours that include transport.",
-    feature: { src: cableCarWide, alt: "Masada cable car above the desert cliffs" },
-    cards: [
-      { label: "Masada tickets & cable car", text: "Official visit options", to: "/travel-blog/masada/", img: IMG.cableCar },
-      { label: "Caesarea visit options", text: "Official park admission", to: "/attractions/caesarea/", img: IMG.caesareaTheatre },
-    ],
-    hub: { label: "Explore tickets", to: "/tickets/" },
-  },
-  {
-    id: "car-rental", eyebrow: "Car rental", title: "Car rental",
-    text: "Airport or city pickup, Shabbat office hours, tolls and parking — then compare on the provider's site.",
-    feature: { src: roadTrip, alt: "Illustrative rental car on an open desert road at sunset" },
-    cards: [
-      { label: "Airport pickup", text: "Collect at Ben Gurion on arrival", to: "/car-rental/", img: IMG.t3 },
-      { label: "City pickup", text: "Rent only for out-of-town days", to: "/car-rental/", img: IMG.telAviv },
-      { label: "Tiberias & Galilee", text: "Where a car is most useful", to: "/travel-blog/best-hotels-in-tiberias/", img: IMG.tiberias },
-    ],
-    hub: { label: "Explore car rental", to: "/car-rental/" },
-  },
+
 ];
 
 function PhotoCard({ c }: { c: Card }) {
@@ -166,10 +143,11 @@ function Home() {
   return (
     <div>
       <div className="mx-auto max-w-6xl px-4 pt-6">
-        <nav aria-label="Services" className="grid grid-cols-2 gap-2 rounded-2xl border bg-card p-3 shadow-lg sm:grid-cols-4 xl:grid-cols-7 [&>*:last-child]:col-span-2 sm:[&>*:last-child]:col-span-1">
+        <nav aria-label="Services" className="grid grid-cols-2 gap-2 rounded-2xl border bg-card p-3 shadow-lg sm:grid-cols-3 lg:grid-cols-6">
           {services.map((s) => (
             <a key={s.id} href={`#${s.id}`} className="rounded-lg px-3 py-2 text-center text-sm font-semibold hover:bg-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring">{s.eyebrow.split(" &")[0]}</a>
           ))}
+          <a href="#guides" className="rounded-lg px-3 py-2 text-center text-sm font-semibold hover:bg-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring">Travel guides</a>
         </nav>
       </div>
 
@@ -184,19 +162,25 @@ function Home() {
               </div>
               <Link to={s.hub.to} className="btn btn-primary shrink-0 justify-self-start">{s.hub.label} →</Link>
             </header>
-            <div className={`mt-6 grid gap-5 md:grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)] md:items-center ${i % 2 ? "md:[&>*:first-child]:order-2" : ""}`}>
-              <img src={s.feature.src} alt={s.feature.alt} loading="lazy" decoding="async" width={1400} height={880} className="aspect-[16/10] w-full rounded-xl object-cover md:max-h-[300px]" />
-              <ul className="grid gap-3" aria-label={`${s.eyebrow} choices`}>
-                {s.cards.map((c) => <CompactCard key={c.label} c={c} />)}
+            <div className="mt-6 grid gap-4 lg:grid-cols-2 lg:items-stretch" data-testid={`service-layout-${s.id}`}>
+              <img src={s.feature.src} alt={s.feature.alt} loading="lazy" decoding="async" width={1400} height={880} className="aspect-[16/10] h-full min-h-64 w-full rounded-xl object-cover lg:max-h-[410px]" />
+              <ul className="grid content-start gap-3" aria-label={`${s.eyebrow} choices`}>
+                {s.cards.slice(0, 3).map((c) => <CompactCard key={c.label} c={c} />)}
               </ul>
+              {s.cards.length > 3 && (
+                <ul className="grid gap-3 sm:grid-cols-2 lg:col-span-2" aria-label={`More ${s.eyebrow.toLowerCase()} choices`} data-testid={`service-more-${s.id}`}>
+                  {s.cards.slice(3).map((c) => <CompactCard key={c.label} c={c} />)}
+                </ul>
+              )}
             </div>
           </section>
         ))}
       </div>
 
-      <section aria-labelledby="guides-h" className="mx-auto mt-16 max-w-6xl px-4">
+      <section id="guides" aria-labelledby="guides-h" className="mx-auto mt-16 max-w-6xl scroll-mt-6 px-4">
         <div className="flex flex-wrap items-end justify-between gap-4"><div><p className="eyebrow">Before you travel</p><h2 id="guides-h" className="mt-2 text-3xl">Practical Israel travel guides</h2><p className="mt-3 max-w-2xl text-muted-foreground">Clear answers about arrival, getting connected and choosing how to get around.</p></div><Link to="/guides/" className="btn btn-primary">Browse all guides →</Link></div>
-        <div className="mt-6 grid gap-5 sm:grid-cols-2 xl:grid-cols-3">{guideDirectory.filter((guide) => ["uber", "esim", "arrival"].includes(guide.id)).map((guide) => <GuideCard key={guide.id} guide={guide} headingLevel={3} />)}</div>
+        <div className="mt-6 grid gap-5 sm:grid-cols-2 xl:grid-cols-3" data-testid="guide-row-one">{guideDirectory.filter((guide) => ["uber", "esim", "arrival"].includes(guide.id)).map((guide) => <GuideCard key={guide.id} guide={guide} headingLevel={3} />)}</div>
+        <div className="mt-5 grid gap-5 sm:grid-cols-2 xl:grid-cols-3" data-testid="guide-row-two">{guideDirectory.filter((guide) => ["israel", "travelTips", "airport-journey-jerusalem"].includes(guide.id)).map((guide) => <GuideCard key={guide.id} guide={guide} headingLevel={3} />)}</div>
       </section>
       <section aria-labelledby="dest-h" className="mx-auto mt-20 max-w-6xl px-4">
         <div className="rounded-2xl bg-navy p-6 text-navy-foreground md:p-8">
@@ -212,6 +196,7 @@ function Home() {
           <Link to="/destinations/" className="btn btn-light mt-6">Explore all destinations →</Link>
         </div>
       </section>
+      <HomeTestimonials />
       <div className="mx-auto mt-10 max-w-6xl px-4"><AuthorCard introduction /></div>
       <details className="mx-auto mb-10 mt-10 max-w-6xl px-4 text-sm text-muted-foreground">
         <summary className="inline-block cursor-pointer rounded px-1 font-medium hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring">Photo credits</summary>

@@ -114,7 +114,6 @@ export function SiteHeader() {
             {headerNav.map((n) => (
               <li key={n.label}><Link to={n.to} className="hover:text-primary" activeProps={{ className: "text-primary" }}>{n.label}</Link></li>
             ))}
-            <li><Link to="/about/" className="text-muted-foreground hover:text-primary">About</Link></li>
           </ul>
         </nav>
         <button type="button" onClick={() => setOpen(true)} className="btn btn-primary py-2 text-sm lg:hidden" aria-haspopup="dialog" aria-expanded={open}>

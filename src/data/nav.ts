@@ -11,21 +11,19 @@ export const airportTransferNav = {
   children: airportTransferRoutes.map((route) => ({ label: airportTransferRates.find((rate) => rate.id === route.id)!.destination, to: route.path })),
 } satisfies SidebarNavItem;
 
+/** Six primary links: shared by desktop header and footer, in homepage order. */
 export const serviceNav: NavItem[] = [
   { label: "Home", to: "/" },
-  { label: "Accommodation", to: "/hotels/" },
   { label: "Airport transfers", to: "/transfers/" },
-  { label: "Private driver", to: "/private-driver/" },
   { label: "Tours & day trips", to: "/tours/" },
   { label: "Shore excursions", to: "/shore-excursions/" },
+  { label: "Accommodation", to: "/hotels/" },
   { label: "Attractions", to: "/attractions/" },
-  { label: "Tickets & admission", to: "/tickets/" },
-  { label: "Car rental", to: "/car-rental/" },
-  { label: "Destinations", to: "/destinations/" },
+  { label: "Travel guides", to: "/guides/" },
 ];
 
-/** Service domains (no Home/Destinations) — used by the header. */
-export const serviceDomains: NavItem[] = serviceNav.filter((n) => n.to !== "/" && n.to !== "/destinations/");
+/** Desktop top navigation: exactly the six primary sections. */
+export const serviceDomains: NavItem[] = serviceNav.filter((n) => n.to !== "/");
 
 export const hotelNav: NavItem[] = [
   { label: "Hotels in Jerusalem", to: "/travel-blog/where-to-stay-in-jerusalem/" },
@@ -80,7 +78,6 @@ export const allNavGroups: NavGroup[] = [
     title: "Attractions",
     items: [
       { label: "Attractions & places", to: "/attractions/" },
-      { label: "Tickets & admission", to: "/tickets/" },
       { label: "Masada tickets & visit", to: "/travel-blog/masada/" },
       { label: "Caesarea visit", to: "/attractions/caesarea/" },
     ],
