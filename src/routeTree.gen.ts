@@ -70,6 +70,23 @@ import { Route as TravelBlogGettingAroundTelAvivRouteImport } from './routes/tra
 import { Route as TravelBlogIsraelTravelTipsRouteImport } from './routes/travel-blog.israel-travel-tips'
 import { Route as TravelBlogJerusalemToTheDeadSeaRouteImport } from './routes/travel-blog.jerusalem-to-the-dead-sea'
 import { Route as TravelBlogJerusalemTravelGuideRouteImport } from './routes/travel-blog.jerusalem-travel-guide'
+import { Route as TravelBlogOldCityJerusalemRouteImport } from './routes/travel-blog.old-city-jerusalem'
+import { Route as TravelBlogAttractionsInTelAvivRouteImport } from './routes/travel-blog.attractions-in-tel-aviv'
+import { Route as TravelBlogDeadSeaAttractionsRouteImport } from './routes/travel-blog.dead-sea-attractions'
+import { Route as TravelBlogJaffaRouteImport } from './routes/travel-blog.jaffa'
+import { Route as TravelBlogMuseumsInJerusalemRouteImport } from './routes/travel-blog.museums-in-jerusalem'
+import { Route as TravelBlogSeaOfGalileeRouteImport } from './routes/travel-blog.sea-of-galilee'
+import { Route as TravelBlogMitzpeRamonCraterRouteImport } from './routes/travel-blog.mitzpe-ramon-crater'
+import { Route as TravelBlogAkkoAcreRouteImport } from './routes/travel-blog.akko-acre'
+import { Route as TravelBlogEinGediRouteImport } from './routes/travel-blog.ein-gedi'
+import { Route as TravelBlogRoshHanikraRouteImport } from './routes/travel-blog.rosh-hanikra'
+import { Route as TravelBlogMountOfOlivesRouteImport } from './routes/travel-blog.mount-of-olives'
+import { Route as TravelBlogHaifaRouteImport } from './routes/travel-blog.haifa'
+import { Route as TravelBlogMountZionRouteImport } from './routes/travel-blog.mount-zion'
+import { Route as TravelBlogMountTaborRouteImport } from './routes/travel-blog.mount-tabor'
+import { Route as TravelBlogCapernaumRouteImport } from './routes/travel-blog.capernaum'
+import { Route as TravelBlogTabghaRouteImport } from './routes/travel-blog.tabgha'
+import { Route as TravelBlogMountOfBeatitudesRouteImport } from './routes/travel-blog.mount-of-beatitudes'
 import { Route as TravelBlogMasadaRouteImport } from './routes/travel-blog.masada'
 import { Route as TravelBlogSherutInIsraelRouteImport } from './routes/travel-blog.sherut-in-israel'
 import { Route as TravelBlogShoppingInJerusalemRouteImport } from './routes/travel-blog.shopping-in-jerusalem'
@@ -416,6 +433,91 @@ const TravelBlogJerusalemTravelGuideRoute =
     path: '/travel-blog/jerusalem-travel-guide',
     getParentRoute: () => rootRouteImport,
   } as any)
+const TravelBlogOldCityJerusalemRoute = TravelBlogOldCityJerusalemRouteImport.update({
+  id: '/travel-blog/old-city-jerusalem',
+  path: '/travel-blog/old-city-jerusalem',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TravelBlogAttractionsInTelAvivRoute = TravelBlogAttractionsInTelAvivRouteImport.update({
+  id: '/travel-blog/attractions-in-tel-aviv',
+  path: '/travel-blog/attractions-in-tel-aviv',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TravelBlogDeadSeaAttractionsRoute = TravelBlogDeadSeaAttractionsRouteImport.update({
+  id: '/travel-blog/dead-sea-attractions',
+  path: '/travel-blog/dead-sea-attractions',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TravelBlogJaffaRoute = TravelBlogJaffaRouteImport.update({
+  id: '/travel-blog/jaffa',
+  path: '/travel-blog/jaffa',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TravelBlogMuseumsInJerusalemRoute = TravelBlogMuseumsInJerusalemRouteImport.update({
+  id: '/travel-blog/museums-in-jerusalem',
+  path: '/travel-blog/museums-in-jerusalem',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TravelBlogSeaOfGalileeRoute = TravelBlogSeaOfGalileeRouteImport.update({
+  id: '/travel-blog/sea-of-galilee',
+  path: '/travel-blog/sea-of-galilee',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TravelBlogMitzpeRamonCraterRoute = TravelBlogMitzpeRamonCraterRouteImport.update({
+  id: '/travel-blog/mitzpe-ramon-crater',
+  path: '/travel-blog/mitzpe-ramon-crater',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TravelBlogAkkoAcreRoute = TravelBlogAkkoAcreRouteImport.update({
+  id: '/travel-blog/akko-acre',
+  path: '/travel-blog/akko-acre',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TravelBlogEinGediRoute = TravelBlogEinGediRouteImport.update({
+  id: '/travel-blog/ein-gedi',
+  path: '/travel-blog/ein-gedi',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TravelBlogRoshHanikraRoute = TravelBlogRoshHanikraRouteImport.update({
+  id: '/travel-blog/rosh-hanikra',
+  path: '/travel-blog/rosh-hanikra',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TravelBlogMountOfOlivesRoute = TravelBlogMountOfOlivesRouteImport.update({
+  id: '/travel-blog/mount-of-olives',
+  path: '/travel-blog/mount-of-olives',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TravelBlogHaifaRoute = TravelBlogHaifaRouteImport.update({
+  id: '/travel-blog/haifa',
+  path: '/travel-blog/haifa',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TravelBlogMountZionRoute = TravelBlogMountZionRouteImport.update({
+  id: '/travel-blog/mount-zion',
+  path: '/travel-blog/mount-zion',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TravelBlogMountTaborRoute = TravelBlogMountTaborRouteImport.update({
+  id: '/travel-blog/mount-tabor',
+  path: '/travel-blog/mount-tabor',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TravelBlogCapernaumRoute = TravelBlogCapernaumRouteImport.update({
+  id: '/travel-blog/capernaum',
+  path: '/travel-blog/capernaum',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TravelBlogTabghaRoute = TravelBlogTabghaRouteImport.update({
+  id: '/travel-blog/tabgha',
+  path: '/travel-blog/tabgha',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TravelBlogMountOfBeatitudesRoute = TravelBlogMountOfBeatitudesRouteImport.update({
+  id: '/travel-blog/mount-of-beatitudes',
+  path: '/travel-blog/mount-of-beatitudes',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const TravelBlogMasadaRoute = TravelBlogMasadaRouteImport.update({
   id: '/travel-blog/masada',
   path: '/travel-blog/masada',
@@ -515,6 +617,23 @@ export interface FileRoutesByFullPath {
   '/travel-blog/israel-travel-tips': typeof TravelBlogIsraelTravelTipsRoute
   '/travel-blog/jerusalem-to-the-dead-sea': typeof TravelBlogJerusalemToTheDeadSeaRoute
   '/travel-blog/jerusalem-travel-guide': typeof TravelBlogJerusalemTravelGuideRoute
+  '/travel-blog/old-city-jerusalem': typeof TravelBlogOldCityJerusalemRoute
+  '/travel-blog/attractions-in-tel-aviv': typeof TravelBlogAttractionsInTelAvivRoute
+  '/travel-blog/dead-sea-attractions': typeof TravelBlogDeadSeaAttractionsRoute
+  '/travel-blog/jaffa': typeof TravelBlogJaffaRoute
+  '/travel-blog/museums-in-jerusalem': typeof TravelBlogMuseumsInJerusalemRoute
+  '/travel-blog/sea-of-galilee': typeof TravelBlogSeaOfGalileeRoute
+  '/travel-blog/mitzpe-ramon-crater': typeof TravelBlogMitzpeRamonCraterRoute
+  '/travel-blog/akko-acre': typeof TravelBlogAkkoAcreRoute
+  '/travel-blog/ein-gedi': typeof TravelBlogEinGediRoute
+  '/travel-blog/rosh-hanikra': typeof TravelBlogRoshHanikraRoute
+  '/travel-blog/mount-of-olives': typeof TravelBlogMountOfOlivesRoute
+  '/travel-blog/haifa': typeof TravelBlogHaifaRoute
+  '/travel-blog/mount-zion': typeof TravelBlogMountZionRoute
+  '/travel-blog/mount-tabor': typeof TravelBlogMountTaborRoute
+  '/travel-blog/capernaum': typeof TravelBlogCapernaumRoute
+  '/travel-blog/tabgha': typeof TravelBlogTabghaRoute
+  '/travel-blog/mount-of-beatitudes': typeof TravelBlogMountOfBeatitudesRoute
   '/travel-blog/masada': typeof TravelBlogMasadaRoute
   '/travel-blog/sherut-in-israel': typeof TravelBlogSherutInIsraelRoute
   '/travel-blog/shopping-in-jerusalem': typeof TravelBlogShoppingInJerusalemRoute
@@ -585,6 +704,23 @@ export interface FileRoutesByTo {
   '/travel-blog/israel-travel-tips': typeof TravelBlogIsraelTravelTipsRoute
   '/travel-blog/jerusalem-to-the-dead-sea': typeof TravelBlogJerusalemToTheDeadSeaRoute
   '/travel-blog/jerusalem-travel-guide': typeof TravelBlogJerusalemTravelGuideRoute
+  '/travel-blog/old-city-jerusalem': typeof TravelBlogOldCityJerusalemRoute
+  '/travel-blog/attractions-in-tel-aviv': typeof TravelBlogAttractionsInTelAvivRoute
+  '/travel-blog/dead-sea-attractions': typeof TravelBlogDeadSeaAttractionsRoute
+  '/travel-blog/jaffa': typeof TravelBlogJaffaRoute
+  '/travel-blog/museums-in-jerusalem': typeof TravelBlogMuseumsInJerusalemRoute
+  '/travel-blog/sea-of-galilee': typeof TravelBlogSeaOfGalileeRoute
+  '/travel-blog/mitzpe-ramon-crater': typeof TravelBlogMitzpeRamonCraterRoute
+  '/travel-blog/akko-acre': typeof TravelBlogAkkoAcreRoute
+  '/travel-blog/ein-gedi': typeof TravelBlogEinGediRoute
+  '/travel-blog/rosh-hanikra': typeof TravelBlogRoshHanikraRoute
+  '/travel-blog/mount-of-olives': typeof TravelBlogMountOfOlivesRoute
+  '/travel-blog/haifa': typeof TravelBlogHaifaRoute
+  '/travel-blog/mount-zion': typeof TravelBlogMountZionRoute
+  '/travel-blog/mount-tabor': typeof TravelBlogMountTaborRoute
+  '/travel-blog/capernaum': typeof TravelBlogCapernaumRoute
+  '/travel-blog/tabgha': typeof TravelBlogTabghaRoute
+  '/travel-blog/mount-of-beatitudes': typeof TravelBlogMountOfBeatitudesRoute
   '/travel-blog/masada': typeof TravelBlogMasadaRoute
   '/travel-blog/sherut-in-israel': typeof TravelBlogSherutInIsraelRoute
   '/travel-blog/shopping-in-jerusalem': typeof TravelBlogShoppingInJerusalemRoute
@@ -656,6 +792,23 @@ export interface FileRoutesById {
   '/travel-blog/israel-travel-tips': typeof TravelBlogIsraelTravelTipsRoute
   '/travel-blog/jerusalem-to-the-dead-sea': typeof TravelBlogJerusalemToTheDeadSeaRoute
   '/travel-blog/jerusalem-travel-guide': typeof TravelBlogJerusalemTravelGuideRoute
+  '/travel-blog/old-city-jerusalem': typeof TravelBlogOldCityJerusalemRoute
+  '/travel-blog/attractions-in-tel-aviv': typeof TravelBlogAttractionsInTelAvivRoute
+  '/travel-blog/dead-sea-attractions': typeof TravelBlogDeadSeaAttractionsRoute
+  '/travel-blog/jaffa': typeof TravelBlogJaffaRoute
+  '/travel-blog/museums-in-jerusalem': typeof TravelBlogMuseumsInJerusalemRoute
+  '/travel-blog/sea-of-galilee': typeof TravelBlogSeaOfGalileeRoute
+  '/travel-blog/mitzpe-ramon-crater': typeof TravelBlogMitzpeRamonCraterRoute
+  '/travel-blog/akko-acre': typeof TravelBlogAkkoAcreRoute
+  '/travel-blog/ein-gedi': typeof TravelBlogEinGediRoute
+  '/travel-blog/rosh-hanikra': typeof TravelBlogRoshHanikraRoute
+  '/travel-blog/mount-of-olives': typeof TravelBlogMountOfOlivesRoute
+  '/travel-blog/haifa': typeof TravelBlogHaifaRoute
+  '/travel-blog/mount-zion': typeof TravelBlogMountZionRoute
+  '/travel-blog/mount-tabor': typeof TravelBlogMountTaborRoute
+  '/travel-blog/capernaum': typeof TravelBlogCapernaumRoute
+  '/travel-blog/tabgha': typeof TravelBlogTabghaRoute
+  '/travel-blog/mount-of-beatitudes': typeof TravelBlogMountOfBeatitudesRoute
   '/travel-blog/masada': typeof TravelBlogMasadaRoute
   '/travel-blog/sherut-in-israel': typeof TravelBlogSherutInIsraelRoute
   '/travel-blog/shopping-in-jerusalem': typeof TravelBlogShoppingInJerusalemRoute
@@ -728,6 +881,23 @@ export interface FileRouteTypes {
     | '/travel-blog/israel-travel-tips'
     | '/travel-blog/jerusalem-to-the-dead-sea'
     | '/travel-blog/jerusalem-travel-guide'
+    | '/travel-blog/old-city-jerusalem'
+    | '/travel-blog/attractions-in-tel-aviv'
+    | '/travel-blog/dead-sea-attractions'
+    | '/travel-blog/jaffa'
+    | '/travel-blog/museums-in-jerusalem'
+    | '/travel-blog/sea-of-galilee'
+    | '/travel-blog/mitzpe-ramon-crater'
+    | '/travel-blog/akko-acre'
+    | '/travel-blog/ein-gedi'
+    | '/travel-blog/rosh-hanikra'
+    | '/travel-blog/mount-of-olives'
+    | '/travel-blog/haifa'
+    | '/travel-blog/mount-zion'
+    | '/travel-blog/mount-tabor'
+    | '/travel-blog/capernaum'
+    | '/travel-blog/tabgha'
+    | '/travel-blog/mount-of-beatitudes'
     | '/travel-blog/masada'
     | '/travel-blog/sherut-in-israel'
     | '/travel-blog/shopping-in-jerusalem'
@@ -798,6 +968,23 @@ export interface FileRouteTypes {
     | '/travel-blog/israel-travel-tips'
     | '/travel-blog/jerusalem-to-the-dead-sea'
     | '/travel-blog/jerusalem-travel-guide'
+    | '/travel-blog/old-city-jerusalem'
+    | '/travel-blog/attractions-in-tel-aviv'
+    | '/travel-blog/dead-sea-attractions'
+    | '/travel-blog/jaffa'
+    | '/travel-blog/museums-in-jerusalem'
+    | '/travel-blog/sea-of-galilee'
+    | '/travel-blog/mitzpe-ramon-crater'
+    | '/travel-blog/akko-acre'
+    | '/travel-blog/ein-gedi'
+    | '/travel-blog/rosh-hanikra'
+    | '/travel-blog/mount-of-olives'
+    | '/travel-blog/haifa'
+    | '/travel-blog/mount-zion'
+    | '/travel-blog/mount-tabor'
+    | '/travel-blog/capernaum'
+    | '/travel-blog/tabgha'
+    | '/travel-blog/mount-of-beatitudes'
     | '/travel-blog/masada'
     | '/travel-blog/sherut-in-israel'
     | '/travel-blog/shopping-in-jerusalem'
@@ -868,6 +1055,23 @@ export interface FileRouteTypes {
     | '/travel-blog/israel-travel-tips'
     | '/travel-blog/jerusalem-to-the-dead-sea'
     | '/travel-blog/jerusalem-travel-guide'
+    | '/travel-blog/old-city-jerusalem'
+    | '/travel-blog/attractions-in-tel-aviv'
+    | '/travel-blog/dead-sea-attractions'
+    | '/travel-blog/jaffa'
+    | '/travel-blog/museums-in-jerusalem'
+    | '/travel-blog/sea-of-galilee'
+    | '/travel-blog/mitzpe-ramon-crater'
+    | '/travel-blog/akko-acre'
+    | '/travel-blog/ein-gedi'
+    | '/travel-blog/rosh-hanikra'
+    | '/travel-blog/mount-of-olives'
+    | '/travel-blog/haifa'
+    | '/travel-blog/mount-zion'
+    | '/travel-blog/mount-tabor'
+    | '/travel-blog/capernaum'
+    | '/travel-blog/tabgha'
+    | '/travel-blog/mount-of-beatitudes'
     | '/travel-blog/masada'
     | '/travel-blog/sherut-in-israel'
     | '/travel-blog/shopping-in-jerusalem'
@@ -939,6 +1143,23 @@ export interface RootRouteChildren {
   TravelBlogIsraelTravelTipsRoute: typeof TravelBlogIsraelTravelTipsRoute
   TravelBlogJerusalemToTheDeadSeaRoute: typeof TravelBlogJerusalemToTheDeadSeaRoute
   TravelBlogJerusalemTravelGuideRoute: typeof TravelBlogJerusalemTravelGuideRoute
+  TravelBlogOldCityJerusalemRoute: typeof TravelBlogOldCityJerusalemRoute
+  TravelBlogAttractionsInTelAvivRoute: typeof TravelBlogAttractionsInTelAvivRoute
+  TravelBlogDeadSeaAttractionsRoute: typeof TravelBlogDeadSeaAttractionsRoute
+  TravelBlogJaffaRoute: typeof TravelBlogJaffaRoute
+  TravelBlogMuseumsInJerusalemRoute: typeof TravelBlogMuseumsInJerusalemRoute
+  TravelBlogSeaOfGalileeRoute: typeof TravelBlogSeaOfGalileeRoute
+  TravelBlogMitzpeRamonCraterRoute: typeof TravelBlogMitzpeRamonCraterRoute
+  TravelBlogAkkoAcreRoute: typeof TravelBlogAkkoAcreRoute
+  TravelBlogEinGediRoute: typeof TravelBlogEinGediRoute
+  TravelBlogRoshHanikraRoute: typeof TravelBlogRoshHanikraRoute
+  TravelBlogMountOfOlivesRoute: typeof TravelBlogMountOfOlivesRoute
+  TravelBlogHaifaRoute: typeof TravelBlogHaifaRoute
+  TravelBlogMountZionRoute: typeof TravelBlogMountZionRoute
+  TravelBlogMountTaborRoute: typeof TravelBlogMountTaborRoute
+  TravelBlogCapernaumRoute: typeof TravelBlogCapernaumRoute
+  TravelBlogTabghaRoute: typeof TravelBlogTabghaRoute
+  TravelBlogMountOfBeatitudesRoute: typeof TravelBlogMountOfBeatitudesRoute
   TravelBlogMasadaRoute: typeof TravelBlogMasadaRoute
   TravelBlogSherutInIsraelRoute: typeof TravelBlogSherutInIsraelRoute
   TravelBlogShoppingInJerusalemRoute: typeof TravelBlogShoppingInJerusalemRoute
@@ -1380,6 +1601,125 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof TravelBlogJerusalemTravelGuideRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/travel-blog/old-city-jerusalem': {
+      id: '/travel-blog/old-city-jerusalem'
+      path: '/travel-blog/old-city-jerusalem'
+      fullPath: '/travel-blog/old-city-jerusalem'
+      preLoaderRoute: typeof TravelBlogOldCityJerusalemRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/travel-blog/attractions-in-tel-aviv': {
+      id: '/travel-blog/attractions-in-tel-aviv'
+      path: '/travel-blog/attractions-in-tel-aviv'
+      fullPath: '/travel-blog/attractions-in-tel-aviv'
+      preLoaderRoute: typeof TravelBlogAttractionsInTelAvivRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/travel-blog/dead-sea-attractions': {
+      id: '/travel-blog/dead-sea-attractions'
+      path: '/travel-blog/dead-sea-attractions'
+      fullPath: '/travel-blog/dead-sea-attractions'
+      preLoaderRoute: typeof TravelBlogDeadSeaAttractionsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/travel-blog/jaffa': {
+      id: '/travel-blog/jaffa'
+      path: '/travel-blog/jaffa'
+      fullPath: '/travel-blog/jaffa'
+      preLoaderRoute: typeof TravelBlogJaffaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/travel-blog/museums-in-jerusalem': {
+      id: '/travel-blog/museums-in-jerusalem'
+      path: '/travel-blog/museums-in-jerusalem'
+      fullPath: '/travel-blog/museums-in-jerusalem'
+      preLoaderRoute: typeof TravelBlogMuseumsInJerusalemRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/travel-blog/sea-of-galilee': {
+      id: '/travel-blog/sea-of-galilee'
+      path: '/travel-blog/sea-of-galilee'
+      fullPath: '/travel-blog/sea-of-galilee'
+      preLoaderRoute: typeof TravelBlogSeaOfGalileeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/travel-blog/mitzpe-ramon-crater': {
+      id: '/travel-blog/mitzpe-ramon-crater'
+      path: '/travel-blog/mitzpe-ramon-crater'
+      fullPath: '/travel-blog/mitzpe-ramon-crater'
+      preLoaderRoute: typeof TravelBlogMitzpeRamonCraterRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/travel-blog/akko-acre': {
+      id: '/travel-blog/akko-acre'
+      path: '/travel-blog/akko-acre'
+      fullPath: '/travel-blog/akko-acre'
+      preLoaderRoute: typeof TravelBlogAkkoAcreRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/travel-blog/ein-gedi': {
+      id: '/travel-blog/ein-gedi'
+      path: '/travel-blog/ein-gedi'
+      fullPath: '/travel-blog/ein-gedi'
+      preLoaderRoute: typeof TravelBlogEinGediRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/travel-blog/rosh-hanikra': {
+      id: '/travel-blog/rosh-hanikra'
+      path: '/travel-blog/rosh-hanikra'
+      fullPath: '/travel-blog/rosh-hanikra'
+      preLoaderRoute: typeof TravelBlogRoshHanikraRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/travel-blog/mount-of-olives': {
+      id: '/travel-blog/mount-of-olives'
+      path: '/travel-blog/mount-of-olives'
+      fullPath: '/travel-blog/mount-of-olives'
+      preLoaderRoute: typeof TravelBlogMountOfOlivesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/travel-blog/haifa': {
+      id: '/travel-blog/haifa'
+      path: '/travel-blog/haifa'
+      fullPath: '/travel-blog/haifa'
+      preLoaderRoute: typeof TravelBlogHaifaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/travel-blog/mount-zion': {
+      id: '/travel-blog/mount-zion'
+      path: '/travel-blog/mount-zion'
+      fullPath: '/travel-blog/mount-zion'
+      preLoaderRoute: typeof TravelBlogMountZionRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/travel-blog/mount-tabor': {
+      id: '/travel-blog/mount-tabor'
+      path: '/travel-blog/mount-tabor'
+      fullPath: '/travel-blog/mount-tabor'
+      preLoaderRoute: typeof TravelBlogMountTaborRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/travel-blog/capernaum': {
+      id: '/travel-blog/capernaum'
+      path: '/travel-blog/capernaum'
+      fullPath: '/travel-blog/capernaum'
+      preLoaderRoute: typeof TravelBlogCapernaumRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/travel-blog/tabgha': {
+      id: '/travel-blog/tabgha'
+      path: '/travel-blog/tabgha'
+      fullPath: '/travel-blog/tabgha'
+      preLoaderRoute: typeof TravelBlogTabghaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/travel-blog/mount-of-beatitudes': {
+      id: '/travel-blog/mount-of-beatitudes'
+      path: '/travel-blog/mount-of-beatitudes'
+      fullPath: '/travel-blog/mount-of-beatitudes'
+      preLoaderRoute: typeof TravelBlogMountOfBeatitudesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/travel-blog/masada': {
       id: '/travel-blog/masada'
       path: '/travel-blog/masada'
@@ -1499,6 +1839,23 @@ const rootRouteChildren: RootRouteChildren = {
   TravelBlogIsraelTravelTipsRoute: TravelBlogIsraelTravelTipsRoute,
   TravelBlogJerusalemToTheDeadSeaRoute: TravelBlogJerusalemToTheDeadSeaRoute,
   TravelBlogJerusalemTravelGuideRoute: TravelBlogJerusalemTravelGuideRoute,
+  TravelBlogOldCityJerusalemRoute: TravelBlogOldCityJerusalemRoute,
+  TravelBlogAttractionsInTelAvivRoute: TravelBlogAttractionsInTelAvivRoute,
+  TravelBlogDeadSeaAttractionsRoute: TravelBlogDeadSeaAttractionsRoute,
+  TravelBlogJaffaRoute: TravelBlogJaffaRoute,
+  TravelBlogMuseumsInJerusalemRoute: TravelBlogMuseumsInJerusalemRoute,
+  TravelBlogSeaOfGalileeRoute: TravelBlogSeaOfGalileeRoute,
+  TravelBlogMitzpeRamonCraterRoute: TravelBlogMitzpeRamonCraterRoute,
+  TravelBlogAkkoAcreRoute: TravelBlogAkkoAcreRoute,
+  TravelBlogEinGediRoute: TravelBlogEinGediRoute,
+  TravelBlogRoshHanikraRoute: TravelBlogRoshHanikraRoute,
+  TravelBlogMountOfOlivesRoute: TravelBlogMountOfOlivesRoute,
+  TravelBlogHaifaRoute: TravelBlogHaifaRoute,
+  TravelBlogMountZionRoute: TravelBlogMountZionRoute,
+  TravelBlogMountTaborRoute: TravelBlogMountTaborRoute,
+  TravelBlogCapernaumRoute: TravelBlogCapernaumRoute,
+  TravelBlogTabghaRoute: TravelBlogTabghaRoute,
+  TravelBlogMountOfBeatitudesRoute: TravelBlogMountOfBeatitudesRoute,
   TravelBlogMasadaRoute: TravelBlogMasadaRoute,
   TravelBlogSherutInIsraelRoute: TravelBlogSherutInIsraelRoute,
   TravelBlogShoppingInJerusalemRoute: TravelBlogShoppingInJerusalemRoute,

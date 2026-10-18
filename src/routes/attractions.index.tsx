@@ -1,23 +1,22 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { HubCard, HubHeader, RelatedLinks } from "@/components/Guide";
+import { attractionGuides } from "@/data/attractionGuides";
+import { attractionIds, attractionPath, type Region } from "@/data/attractionGuideTypes";
 import { pageMeta } from "@/lib/site";
 
 export const Route = createFileRoute("/attractions/")({
   head: () =>
     pageMeta({
-      title: "Israel attractions to visit: Masada, Caesarea and more",
-      description: "Explore Israeli attractions by region, including Masada, Caesarea and Bethlehem. Find practical guides to admission, travel and tours.",
+      title: "Israel attractions: 19 visitor guides to sights, cities and nature",
+      description: "Explore 19 attractions and visitor guides across Jerusalem, Tel Aviv, the Dead Sea and Galilee, with highlights, access and practical visiting tips.",
       path: "/attractions/",
       crumbs: [{ name: "Home", path: "/" }, { name: "Attractions", path: "/attractions/" }],
     }),
   component: Attractions,
 });
 
-const regions = [
-  { region: "Dead Sea & desert", items: [{ to: "/travel-blog/masada/" as const, title: "Masada National Park", text: "Desert fortress with cable car, hiking ascent, museum and a separate west-side night show.", type: "National park · archaeology" }] },
-  { region: "Mediterranean coast", items: [{ to: "/attractions/caesarea/" as const, title: "Caesarea National Park", text: "Seafront archaeological park between Tel Aviv and Haifa.", type: "National park · archaeology" }] },
-  { region: "Jerusalem area", items: [{ to: "/tours/bethlehem-from-jerusalem/" as const, title: "Bethlehem", text: "Church of the Nativity and Manger Square, usually visited with a tour or driver.", type: "Religious heritage · tour" }] },
-];
+const regions: Region[] = ["Jerusalem", "Tel Aviv & Jaffa", "Dead Sea & Negev", "Haifa & northern coast", "Sea of Galilee"];
+
 
 function Attractions() {
   return (
@@ -26,18 +25,22 @@ function Attractions() {
         crumbs={[{ name: "Home", to: "/" }, { name: "Attractions", to: "/attractions/" }]}
         eyebrow="Attractions & experiences"
         title="Attractions and experiences"
-        intro="Browse by region. Each guide covers what to expect, timing and how to get there before linking to official visit options or tours."
+        intro="Explore historic cities, sacred sites, museums and remarkable natural landscapes. Choose an area to find practical visitor advice, what to see and how to get there."
       />
-      {regions.map((r) => (
-        <section key={r.region} aria-label={r.region} className="mt-10">
-          <h2 className="text-3xl">{r.region}</h2>
+      {regions.map((region) => (
+        <section key={region} aria-label={region} className="mt-10">
+          <h2 className="text-3xl">{region}</h2>
           <div className="mt-4 grid gap-4 md:grid-cols-2">
-            {r.items.map((i) => <HubCard key={i.title} to={i.to} eyebrow={i.type} title={i.title} text={i.text} cta="Plan your visit" />)}
+            {attractionIds.filter(id => attractionGuides[id].region === region).map(id => (
+              <HubCard key={id} to={attractionPath(id)} eyebrow="Attractions & places" title={attractionGuides[id].title}
+                text={attractionGuides[id].description} cta="Plan your visit" />
+            ))}
+            {region === "Dead Sea & Negev" && <HubCard to="/travel-blog/masada/" eyebrow="National park · archaeology" title="Masada National Park" text="Cable car, hiking, archaeology and spectacular views of the Dead Sea." cta="Plan your visit" />}
+            {region === "Haifa & northern coast" && <HubCard to="/attractions/caesarea/" eyebrow="National park · archaeology" title="Caesarea National Park" text="Ancient harbour and Roman remains by the Mediterranean." cta="Plan your visit" />}
           </div>
         </section>
       ))}
       <RelatedLinks title="Related" items={[
-        { label: "Tickets & admission", to: "/tickets/", note: "Entry-only options, separate from tours" },
         { label: "Tours & day trips", to: "/tours/" },
         { label: "Car rental", to: "/car-rental/" },
         { label: "Destinations", to: "/destinations/" },
