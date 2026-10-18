@@ -1,3 +1,5 @@
+import defaultSharePhoto from "@/assets/home/jerusalem-old-city.webp";
+
 /** Pure launch configuration: no publishing or indexing changes occur here. */
 export function siteConfig(env: { VITE_CANONICAL_ORIGIN?: string; VITE_INDEXABLE?: string }) {
   const origin = (env.VITE_CANONICAL_ORIGIN || "https://id-preview--7cd7aae9-57c0-4ced-b1fa-2f0691483fee.lovable.app").replace(/\/+$/, "");
@@ -30,7 +32,7 @@ export function breadcrumbLd(crumbs: Crumb[], origin = CANONICAL_ORIGIN) {
 
 export function pageMeta(opts: { title: string; description: string; path: string; type?: string; crumbs?: Crumb[]; image?: string; imageAlt?: string }, config = SITE_CONFIG) {
   const url = config.origin + opts.path;
-  const shareImage = opts.image ? new URL(opts.image, config.origin).href : undefined;
+  const shareImage = new URL(opts.image || defaultSharePhoto, config.origin).href;
   return {
     meta: [
       { title: opts.title },

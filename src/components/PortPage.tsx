@@ -19,9 +19,9 @@ function crumbsFor(id: ShorePortId) {
 
 export function shorePortMeta(id: ShorePortId) {
   const port = getShorePort(id);
-  const meta = pageMeta({ title: port.title, description: port.description, path: port.path, type: "article", crumbs: crumbsFor(id) });
+  const meta = pageMeta({ title: port.title, description: port.description, path: port.path, type: "article", crumbs: crumbsFor(id), image: port.photo.src, imageAlt: port.photo.alt });
   const imageUrl = new URL(port.photo.src, CANONICAL_ORIGIN).href;
-  return { ...meta, meta: [...meta.meta, { property: "og:image", content: imageUrl }, { name: "twitter:image", content: imageUrl }], scripts: [...meta.scripts, {
+  return { ...meta, scripts: [...meta.scripts, {
     type: "application/ld+json", children: JSON.stringify({ "@context": "https://schema.org", "@type": "Article", headline: port.title, description: port.description, mainEntityOfPage: `${CANONICAL_ORIGIN}${port.path}`, inLanguage: "en", dateModified: SHORE_EXCURSION_CHECK_DATE,
       author: authorLd(), publisher: { "@type": "Organization", name: SITE_NAME }, image: imageUrl,
       citation: publicSources([port.sourceId, port.alternativeSourceId]).map((source) => source.url),
