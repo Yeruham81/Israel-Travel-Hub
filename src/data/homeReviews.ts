@@ -11,6 +11,9 @@ export const tripadvisorReviews = [
   { author: "Kaye L", period: "August 2025", excerpt: "He has always been on time and makes the process of finding him when we land at Ben Gurion airport easy." },
   { author: "Lilach T", period: "July 2025", excerpt: "He was on time, easy to communicate with, and very professional throughout. I felt completely safe and taken care of" },
   { author: "Janet", period: "June 2025", excerpt: "The service was easy to coordinate and reasonably priced. It was such a good experience we also used his service to return to the airport" },
+  { author: "Yaniv B", period: "June 2025", summary: "A frequent business traveler praised Moshe’s dependable airport pickups and day tours, describing his safe driving, punctuality, kindness, and deep local knowledge." },
+  { author: "Marc", period: "July 2025", summary: "Marc and Charles appreciated many years of reliable airport pickups, friendly service at all hours, and Moshe’s knowledge during trips around Israel." },
+  { author: "david", period: "June 2025", summary: "David enjoyed a private day trip with Moshe and especially valued his helpful guidance while exploring Mount Tabor during a visit to Israel." },
 ] as const;
 
 /** Original testimonials paired with the photographs published alongside them. */

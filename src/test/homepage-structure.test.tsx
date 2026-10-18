@@ -1,8 +1,11 @@
 import { describe, expect, it } from "vitest";
-import { fireEvent, render, screen } from "@testing-library/react";
+import { act, cleanup, fireEvent, render, screen } from "@testing-library/react";
+import { afterEach, vi } from "vitest";
 import { HomeTestimonials } from "@/components/HomeTestimonials";
 import { serviceDomains, allNavGroups } from "@/data/nav";
 import { customerTestimonials, tripadvisorReviews, tripadvisorProfileUrl, tripadvisorSnapshot } from "@/data/homeReviews";
+
+afterEach(() => { cleanup(); vi.useRealTimers(); });
 
 describe("homepage navigation and review sources", () => {
   it("keeps six ordered primary entries and rental only in the sidebar", () => {
@@ -13,16 +16,46 @@ describe("homepage navigation and review sources", () => {
     expect(sidebar.some(x => "to" in x && x.to === "/tickets/")).toBe(false);
   });
   it("keeps credited review excerpts concise, balanced and linked to Tripadvisor", () => {
-    expect(tripadvisorReviews).toHaveLength(3);
-    const lengths = tripadvisorReviews.map(review => review.excerpt.split(/\s+/).length);
-    expect(Math.max(...lengths) - Math.min(...lengths)).toBeLessThanOrEqual(5);
-    expect(lengths.every(length => length >= 20 && length <= 25)).toBe(true);
+    expect(tripadvisorReviews).toHaveLength(6);
+    const excerptLengths = tripadvisorReviews.filter((review) => "excerpt" in review).map(review => review.excerpt.split(/\s+/).length);
+    expect(Math.max(...excerptLengths) - Math.min(...excerptLengths)).toBeLessThanOrEqual(5);
+    expect(excerptLengths.every(length => length >= 20 && length <= 25)).toBe(true);
+    expect(tripadvisorReviews.filter(review => "summary" in review)).toHaveLength(3);
+    expect(new Set(tripadvisorReviews.map(review => review.author)).size).toBe(6);
     expect(customerTestimonials).toHaveLength(4);
     expect(customerTestimonials.every(review => review.photo.includes("/assets/testimonials/"))).toBe(true);
     expect(new Set(customerTestimonials.map(review => review.photo)).size).toBe(4);
     expect(tripadvisorSnapshot).toMatchObject({ rating: 5, reviewCount: 11 });
     expect(tripadvisorProfileUrl).toMatch(/^https:\/\/www\.tripadvisor\.com\//);
   });
+  it("shows three Tripadvisor cards, rotates every six seconds and honors pause and navigation", () => {
+    vi.useFakeTimers();
+    render(<HomeTestimonials />);
+    const cards = screen.getByTestId("tripadvisor-review-cards");
+    expect(cards.querySelectorAll("article")).toHaveLength(3);
+    expect(cards).toHaveTextContent("Kaye L");
+    expect(cards).toHaveTextContent("Lilach T");
+    expect(cards).toHaveTextContent("Janet");
+    expect(screen.getByRole("heading", { name: "Kind words from satisfied travelers" })).toBeInTheDocument();
+
+    act(() => vi.advanceTimersByTime(6000));
+    expect(cards).toHaveTextContent("Yaniv B");
+    expect(cards).not.toHaveTextContent("Kaye L");
+
+    fireEvent.click(screen.getByRole("button", { name: "Pause Tripadvisor reviews" }));
+    act(() => vi.advanceTimersByTime(18000));
+    expect(cards).not.toHaveTextContent("Marc");
+
+    fireEvent.click(screen.getByRole("button", { name: "Next Tripadvisor reviews" }));
+    expect(cards).toHaveTextContent("Marc");
+    fireEvent.click(screen.getByRole("button", { name: "Previous Tripadvisor reviews" }));
+    expect(cards).toHaveTextContent("Yaniv B");
+
+    fireEvent.click(screen.getByRole("button", { name: "Play Tripadvisor reviews" }));
+    act(() => vi.advanceTimersByTime(6000));
+    expect(cards).toHaveTextContent("Marc");
+  });
+
   it("renders the correct uploaded image for every client and changes images with the carousel", () => {
     render(<HomeTestimonials />);
     for (const client of customerTestimonials) {

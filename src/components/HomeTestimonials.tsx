@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { ChevronLeft, ChevronRight, ExternalLink, Quote, Star } from "lucide-react";
-import { customerTestimonials, tripadvisorProfileUrl, tripadvisorReviews, tripadvisorSnapshot } from "@/data/homeReviews";
+import { customerTestimonials, tripadvisorProfileUrl, tripadvisorSnapshot } from "@/data/homeReviews";
+import { TripadvisorReviewCarousel } from "@/components/TripadvisorReviewCarousel";
 
 export function HomeTestimonials() {
   const [active, setActive] = useState(0);
@@ -10,7 +11,7 @@ export function HomeTestimonials() {
     <div className="overflow-hidden rounded-3xl border bg-card shadow-sm">
       <div className="bg-navy px-6 py-9 text-navy-foreground sm:px-10">
         <p className="text-xs font-semibold uppercase tracking-widest opacity-80">Real traveler experiences</p>
-        <h2 id="reviews-h" className="mt-2 text-3xl sm:text-4xl">Kind words from people I've helped</h2>
+        <h2 id="reviews-h" className="mt-2 text-3xl sm:text-4xl">Kind words from satisfied travelers</h2>
         <div className="mt-7 flex flex-wrap items-center gap-4 rounded-2xl border border-white/20 bg-white/10 p-5">
           <a href={tripadvisorProfileUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 text-xl font-bold tracking-tight text-white" aria-label="Tripadvisor reviews for Moshe Barak">
             <img src="https://cdn.simpleicons.org/tripadvisor/34E0A1" alt="" width={36} height={36} loading="lazy" className="size-9" />
@@ -22,20 +23,7 @@ export function HomeTestimonials() {
           <span className="text-2xl font-semibold tabular-nums">{tripadvisorSnapshot.rating.toFixed(1)} / 5</span>
         </div>
       </div>
-      <div className="grid gap-4 px-6 py-8 md:grid-cols-3 sm:px-10" data-testid="tripadvisor-review-cards">
-        {tripadvisorReviews.map((review)=><article key={review.author} className="flex h-full flex-col rounded-2xl border border-slate-200 bg-white p-5 text-slate-950 shadow-sm">
-          <div className="flex items-center justify-between gap-2">
-            <div className="grid size-11 place-items-center rounded-full bg-emerald-100 font-semibold text-emerald-900" aria-hidden>{review.author.slice(0,1).toUpperCase()}</div>
-            <span className="inline-flex items-center gap-1.5 text-xs font-semibold text-emerald-800"><img src="https://cdn.simpleicons.org/tripadvisor/00AA6C" alt="" width={20} height={20} loading="lazy" className="size-5" />Tripadvisor</span>
-          </div>
-          <div className="mt-4 flex items-center gap-1" role="img" aria-label="5 out of 5 rating" data-testid="tripadvisor-rating-circles">
-            {Array.from({length: 5}, (_, index) => <span key={index} aria-hidden="true" className="size-5 rounded-full border-2 border-white bg-[#00AA6C] shadow-[0_0_0_1px_#00AA6C]" />)}
-          </div>
-          <blockquote className="mt-3 flex-1 text-[1.05rem] leading-relaxed text-slate-950">“{review.excerpt}…”</blockquote>
-          <div className="mt-5 border-t border-slate-200 pt-3"><p className="font-semibold text-slate-950">{review.author}</p><p className="text-xs text-slate-600">{review.period}</p></div>
-          <a href={tripadvisorProfileUrl} target="_blank" rel="noopener noreferrer" className="mt-3 inline-flex items-center gap-1 text-sm font-semibold text-emerald-800 underline underline-offset-4">See full review <ExternalLink size={13} aria-hidden /></a>
-        </article>)}
-      </div>
+      <TripadvisorReviewCarousel />
       <div className="px-6 pb-8 sm:px-10"><a href={tripadvisorProfileUrl} target="_blank" rel="noopener noreferrer" className="btn btn-primary">Explore all Tripadvisor reviews <ExternalLink size={16} aria-hidden /></a></div>
       <div className="border-t bg-secondary/30 px-6 py-9 sm:px-10">
         <div className="flex flex-wrap items-end justify-between gap-4">
