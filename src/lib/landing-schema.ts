@@ -3,7 +3,7 @@ import { CANONICAL_ORIGIN, SITE_NAME, jsonLd, pageMeta, type Crumb } from "@/lib
 import { publicSources } from "@/data/registry";
 
 /** Individual hotel/neighborhood guide with the appropriate destination breadcrumb. */
-export function hotelSubguideMeta(guide: { title: string; metaDescription: string; path: string }, destination: { name: string; path: string; reviewedAt?: string; sourceIds?: string[] }, label: string, image: string) {
+export function hotelSubguideMeta(guide: { title: string; metaDescription: string; path: string }, destination: { name: string; path: string; reviewedAt?: string | undefined; sourceIds?: string[] }, label: string, image: string) {
   const crumbs: Crumb[] = [{ name: "Home", path: "/" }, { name: "Accommodation", path: "/hotels/" }, { name: destination.name, path: destination.path }, { name: label, path: guide.path }];
   return hotelGuideMeta({ ...guide, ...(destination.reviewedAt ? { reviewedAt: destination.reviewedAt } : {}), sourceIds: destination.sourceIds || [] }, label, image, crumbs);
 }
