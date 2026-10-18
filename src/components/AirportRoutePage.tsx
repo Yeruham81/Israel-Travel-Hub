@@ -24,7 +24,7 @@ function crumbsFor(id: AirportTransferRouteId) {
 
 export function airportRouteMeta(id: AirportTransferRouteId) {
   const guide = getAirportRouteGuide(id);
-  const head = pageMeta({ title: guide.title, description: guide.description, path: guide.path, crumbs: crumbsFor(id) });
+  const head = pageMeta({ title: guide.title, description: guide.description, path: guide.path, crumbs: crumbsFor(id), image: guide.photo.src, imageAlt: guide.photo.alt });
   const url = CANONICAL_ORIGIN + guide.path;
   return { ...head, scripts: [...head.scripts, jsonLd({
     "@context": "https://schema.org", "@type": "WebPage", "@id": `${url}#webpage`, url,
@@ -85,6 +85,11 @@ export function AirportRoutePage({ id }: { id: AirportTransferRouteId }) {
         <p className="eyebrow">Your route, planned properly</p>
         <h2 id="journey-h" className="mt-2 text-3xl">{guide.journeyTitle}</h2>
         <p className="mt-4 max-w-4xl leading-relaxed text-muted-foreground">{guide.journeyText}</p>
+      </section>
+      <section id="taxi-or-transfer" aria-labelledby="taxi-or-transfer-h" className="mt-10 rounded-2xl border bg-card p-5 sm:p-7">
+        <h2 id="taxi-or-transfer-h" className="text-2xl">Private transfer or airport taxi to {guide.city}?</h2>
+        <p className="mt-3 leading-relaxed text-muted-foreground">This page is for a private vehicle arranged in advance for your party, with pickup instructions and a quoted total to confirm with Moshe. An on-arrival licensed airport taxi instead uses the authorized taxi queue and a regulated meter. These are different booking arrangements.</p>
+        <p className="mt-3 text-sm leading-relaxed">Compare the options in our <Link to={travelGuidePaths.taxis} className="font-semibold text-primary underline">Israel taxi fares and airport pickup guide</Link>, or read the <a href="https://www.iaa.gov.il/en/airports/ben-gurion/directions/directions-list/?categoryId=10450" target="_blank" rel="noopener noreferrer" className="font-semibold text-primary underline">Israel Airports Authority's official instructions<span className="sr-only"> (opens in a new tab)</span></a>. Recheck the current arrangements for your travel date.</p>
       </section>
       <section id="drop-off" aria-labelledby="dropoff-h" className="mt-12">
         <h2 id="dropoff-h" className="text-3xl">{guide.areasTitle}</h2>

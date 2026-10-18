@@ -28,8 +28,9 @@ export function breadcrumbLd(crumbs: Crumb[], origin = CANONICAL_ORIGIN) {
     });
 }
 
-export function pageMeta(opts: { title: string; description: string; path: string; type?: string; crumbs?: Crumb[] }, config = SITE_CONFIG) {
+export function pageMeta(opts: { title: string; description: string; path: string; type?: string; crumbs?: Crumb[]; image?: string; imageAlt?: string }, config = SITE_CONFIG) {
   const url = config.origin + opts.path;
+  const shareImage = opts.image ? new URL(opts.image, config.origin).href : undefined;
   return {
     meta: [
       { title: opts.title },
@@ -39,6 +40,11 @@ export function pageMeta(opts: { title: string; description: string; path: strin
       { property: "og:description", content: opts.description },
       { property: "og:type", content: opts.type ?? "website" },
       { property: "og:url", content: url },
+      ...(shareImage ? [
+        { property: "og:image", content: shareImage },
+        ...(opts.imageAlt ? [{ property: "og:image:alt", content: opts.imageAlt }] : []),
+        { name: "twitter:image", content: shareImage },
+      ] : []),
       { name: "twitter:card", content: "summary_large_image" },
     ],
     links: [{ rel: "canonical", href: url }],

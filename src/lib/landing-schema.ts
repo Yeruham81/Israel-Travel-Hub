@@ -5,7 +5,7 @@ import { publicSources } from "@/data/registry";
 /** Metadata for the substantial hotel guides, not a product or live offer. */
 export function hotelGuideMeta(guide: { title: string; metaDescription: string; path: string; reviewedAt?: string; sourceIds: string[] }, name: string, image: string) {
   const crumbs: Crumb[] = [{ name: "Home", path: "/" }, { name: "Accommodation", path: "/hotels/" }, { name, path: guide.path }];
-  const head = pageMeta({ title: guide.title, description: guide.metaDescription, path: guide.path, type: "article", crumbs });
+  const head = pageMeta({ title: guide.title, description: guide.metaDescription, path: guide.path, type: "article", crumbs, image });
   const url = CANONICAL_ORIGIN + guide.path;
   return { ...head, scripts: [...head.scripts, jsonLd({
     "@context": "https://schema.org", "@type": "Article", "@id": `${url}#article`,

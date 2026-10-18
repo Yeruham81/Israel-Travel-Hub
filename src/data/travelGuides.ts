@@ -119,7 +119,7 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
   },
   israel: {
     id: "israel", nextSteps: [{ label: "Taxi fares, apps & payment", to: travelGuidePaths.taxis }, { label: "Airport transport on Shabbat", to: travelGuidePaths.shabbat }, { label: "Compare rental-car requirements", to: "/car-rental/" }], title: "Getting around Israel: a practical transport guide",
-    description: "Decide how to get around Israel by train, bus, light rail, taxi or rental car. Compare door-to-door routes, payment and rural trips, with links to dedicated city and Shabbat advice.",
+    description: "Getting around Israel without a car? Compare trains, buses, light rail, taxis and rentals for city trips, rural stops, payment and weekends.",
     intro: "Plan the whole journey to the address you need, then choose a mix of transport that suits your cities, countryside days, luggage and travel dates.",
     answer: "Combine rail for suitable intercity journeys, buses or light rail for the remaining local route, and walking within convenient areas. Use a taxi or agreed private transfer when luggage, access, timing or a remote pickup makes connections awkward. A rental car is most useful when your actual itinerary benefits from driving and parking it.",
     topics: ["transportation", "destinations", "itineraries", "tips"], photo: { src: roadTrip, alt: "Illustrative vehicle on a desert road, not a specified Israeli route", credit: "Illustrative road-trip scene; check the real route and rental terms." },
@@ -155,7 +155,7 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
   },
   taxis: {
     id: "taxis", nextSteps: [{ label: "Airport arrival process", to: travelGuidePaths.arrival }, { label: "Airport transport on Shabbat", to: travelGuidePaths.shabbat }, { label: "Arrange a private airport pickup", to: "/transfers/" }], title: "Taxis in Israel: meters, apps, payment & airport pickups",
-    description: "Understand taxis in Israel: licensed stands and apps, metered fares versus private quotes, card or cash payment, receipts and the correct Ben Gurion Airport pickup for your booking.",
+    description: "Taxis in Israel explained: meters, Gett, cash or card, luggage and airport pickup points. Check fare terms before booking a ride.",
     intro: "Know what you are booking, how its price is set and where to meet it. Keep the driver and ride details so that a useful taxi journey stays easy to follow.",
     answer: "Use a licensed taxi or a confirmed transport operator, give the full destination and check the fare and payment basis before starting. Ordinary airport taxis use the regulated meter. Gett's Ben Gurion instructions distinguish the on-demand queue from scheduled pickups; a separately arranged private transfer follows its written quote and confirmation.",
     topics: ["transportation", "tips"], photo: pickupPhoto,

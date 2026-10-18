@@ -61,6 +61,7 @@ describe("ten search-intent landing pages", () => {
       const guide = getAirportRouteGuide(id);
       expect(guide.title.toLowerCase()).toContain("private transfer");
       expect(guide.journeyText).toMatch(/after pickup/);
+      expect(guide.journeyText).not.toMatch(/original (?:route )?guide/i);
       expect(guide.areas.length).toBeGreaterThanOrEqual(3);
     }
   });
@@ -97,6 +98,14 @@ describe("ten search-intent landing pages", () => {
       expect(meta).toContainEqual({ property: "og:title", content: title });
       expect(meta).toContainEqual({ property: "og:description", content: description.content });
       expect(meta).toContainEqual({ name: "twitter:card", content: "summary_large_image" });
+      const ogImages = meta.filter((item) => item && "property" in item && item.property === "og:image");
+      const twitterImages = meta.filter((item) => item && "name" in item && item.name === "twitter:image");
+      expect(ogImages, path).toHaveLength(1);
+      expect(twitterImages, path).toHaveLength(1);
+      const ogImage = ogImages[0] && "content" in ogImages[0] ? ogImages[0].content : "";
+      expect(ogImage).toMatch(/^https:\/\//);
+      expect(twitterImages[0]).toMatchObject({ name: "twitter:image", content: ogImage });
+      expect(description.content.length, path).toBeLessThanOrEqual(165);
       expect(document.querySelectorAll("h1"), path).toHaveLength(1);
       expect(document.querySelector("h1")?.textContent).toBe(title);
       const schemas = (head?.scripts || []).flatMap((script) => typeof script?.children === "string" ? [JSON.parse(script.children)] : []);

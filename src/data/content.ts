@@ -570,11 +570,12 @@ export const cityStayGuides: Record<CityStayGuide["id"], CityStayGuide> = {
     ],
     path: "/travel-blog/where-to-stay-in-jerusalem/",
     title: "Where to stay in Jerusalem: areas and hotel booking tips",
-    metaDescription: "Choose where to stay in Jerusalem: compare six areas for Old City access, nightlife, quieter streets and luggage arrival. Explore neighborhood hotel guides and check booking terms.",
+    metaDescription: "Where to stay in Jerusalem: compare Downtown, Mamilla, the Old City and quieter areas for sightseeing, hotel choice and luggage access.",
     intro: "Find your Jerusalem base, from the Old City's historic lanes to Downtown cafés and the quieter streets of Baka. Explore six areas, then open a neighborhood guide for practical advice and hotel recommendations.",
     overview: [
       "Most first-time visitors want to be within walking distance of the Old City gates. The western city centre gives that plus restaurants and the light rail; staying inside the walls is atmospheric but involves stairs, cobbles and limited vehicle access.",
       "From Friday afternoon to Saturday evening much of West Jerusalem slows down for Shabbat: many restaurants and public transport pause. East Jerusalem and the Old City's Christian and Muslim quarters keep a different rhythm. Plan meals and arrivals with that in mind.",
+      "For a first trip without a car, compare Downtown and Mamilla before choosing an Old City address: a short map distance can still involve uphill walking, steps or a luggage drop-off outside the walls. Check your hotel entrance, not just the neighborhood name.",
     ],
     areas: jerusalemAreaGuides.map((area) => ({ name: area.name, suits: area.suits, text: area.summary, watch: area.watch })),
     checklist: [
@@ -611,11 +612,12 @@ export const cityStayGuides: Record<CityStayGuide["id"], CityStayGuide> = {
     ],
     path: "/travel-blog/where-to-stay-in-tel-aviv/",
     title: "Where to stay in Tel Aviv: beachfront, Jaffa and city areas",
-    metaDescription: "Choose where to stay in Tel Aviv or Jaffa: compare eight areas for beach access, cafés, nightlife and historic character, with maps, arrival tips and neighborhood hotel guides.",
+    metaDescription: "Where to stay in Tel Aviv: compare beachfront hotels, Dizengoff, Jaffa and quieter areas for beach access, nightlife and arrival.",
     intro: "Find your Tel Aviv base, from Mediterranean beaches to Jaffa's stone lanes and the cafés of the White City. Compare eight areas, then open a neighborhood guide for local highlights, arrival advice and hotel recommendations.",
     overview: [
       "The coast is a useful point of orientation, but a beachfront hotel, a boutique property near Dizengoff and a stay in Jaffa create very different holidays. Compare the actual street, the places you will visit and the room's outlook before choosing.",
       "Friday-evening and Saturday transport follows different service patterns. Check the current train or bus service for your specific journey and plan the final connection from the airport or railway station to your accommodation.",
+      "First-time visitors who plan to walk to beaches and cafés may favor the central beachfront or Dizengoff. Jaffa offers a different historic atmosphere, but some northern sights need a longer connection. Compare the street, evening noise and walk before booking.",
     ],
     areas: telAvivAreaGuides.map((area) => ({ name: area.name, suits: area.suits, text: area.summary, watch: area.watch })),
     checklist: [
@@ -757,7 +759,7 @@ export const deadSeaPhotos = {
 export const deadSeaStayGuide: HotelStayDestination = {
   id: "deadsea", name: "Dead Sea", path: "/travel-blog/best-dead-sea-hotels/",
   title: "Best Dead Sea hotels in Israel: spa, family & luxury stays",
-  metaDescription: "Choose a Dead Sea hotel on the Israeli shore: compare Ein Bokek, Neve Zohar and Ein Gedi, beach access, spa age policies and family stays. Check room and meal inclusions before booking.",
+  metaDescription: "Compare Dead Sea hotels in Ein Bokek, Neve Zohar and Ein Gedi: spa or family resorts, beach access, age policies and room inclusions.",
   intro: "Choose your Dead Sea stay by the holiday you want: a spa break, a family resort, an intimate luxury hotel or a nature-focused base near Ein Gedi. Compare the Israeli shore's options, then check rooms for your dates.",
   reviewedAt: "2026-10-17", photo: deadSeaPhotos.beach,
   categoryIntro: "Open a focused guide for a different set of comparisons: spa facilities and age policies, or children's activities, rooms and meal plans.",
@@ -768,6 +770,7 @@ export const deadSeaStayGuide: HotelStayDestination = {
     "A Dead Sea hotel is often a large part of the holiday itself. Beach access, freshwater pools, spa entry, children's facilities and meals can matter more than choosing a particular street. This guide covers the Israeli side of the Dead Sea, with the main resort hotels around Ein Bokek and the southern district near Neve Zohar.",
     "Start with the tradeoff that matters to your party. Nevo offers a broad resort-and-spa format; Oasis Spa Club has an age-restricted spa focus. Leonardo Club is a family option marketed as all-inclusive, while VERT combines a central Ein Bokek setting with a more conventional resort stay. Kayma, Herods and Milos offer different styles of upscale accommodation.",
     "The comparison also includes Ein Gedi Hotel and HI Ein Gedi Hostel as inland alternatives. A Dead Sea view or a mineral-water pool does not establish access to an operating beach. Check the actual route to the water and the facilities included in the room offer, rather than relying on a 'spa' or 'beachfront' label.",
+    "For a family or all-inclusive stay, compare the exact meal plan, child ages and seasonal pool or kids-club access. For a spa holiday, check whether admission is included with your room and whether age restrictions apply to the hotel, particular spa facilities or both. Details can vary between room offers.",
   ],
   map: { lat: 31.1997, lon: 35.3634, bounds: [35.325, 31.13, 35.405, 31.49], reference: "Ein Bokek reference point; map also covers the southern district and Ein Gedi" },
   locations: [

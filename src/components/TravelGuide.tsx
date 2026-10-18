@@ -13,10 +13,9 @@ function sourcesFor(guide: TravelGuide) { return [...new Set([...guide.sourceIds
 export function travelGuideMeta(id: TravelGuideId) {
   const guide = travelGuides[id];
   const path = travelGuidePaths[id];
-  const meta = pageMeta({ title: guide.title, description: guide.description, path, type: "article", crumbs: [{ name: "Home", path: "/" }, { name: "Travel guides", path: "/guides/" }, { name: guide.title, path }] });
+  const meta = pageMeta({ title: guide.title, description: guide.description, path, type: "article", crumbs: [{ name: "Home", path: "/" }, { name: "Travel guides", path: "/guides/" }, { name: guide.title, path }], image: guide.photo.src, imageAlt: guide.photo.alt });
   const imageUrl = new URL(guide.photo.src, CANONICAL_ORIGIN).href;
-  const scoped = ["shabbat", "israel", "taxis"].includes(id);
-  return { ...meta, meta: scoped ? meta.meta : [...meta.meta, { property: "og:image", content: imageUrl }, { name: "twitter:image", content: imageUrl }], scripts: [...meta.scripts, jsonLd(
+  return { ...meta, scripts: [...meta.scripts, jsonLd(
     { "@context": "https://schema.org", "@type": "Article", "@id": `${CANONICAL_ORIGIN}${path}#article`, headline: guide.title, description: guide.description, mainEntityOfPage: `${CANONICAL_ORIGIN}${path}`, inLanguage: "en", dateModified: TRAVEL_GUIDE_CHECK_DATE,
       author: authorLd(), publisher: { "@type": "Organization", name: SITE_NAME, url: CANONICAL_ORIGIN },
       about: guide.topics.map((topic) => guideTopics.find((item) => item.id === topic)!.label), citation: publicSources(sourcesFor(guide)).map((source) => source.url), image: imageUrl,
