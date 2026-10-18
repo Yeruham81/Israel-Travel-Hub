@@ -33,6 +33,5 @@ describe("homepage marketing copy and top navigation", () => {
       "Airport transfers", "Tours & Day Trips", "Shore excursions", "Accommodation", "Attractions", "Travel guides",
     ]);
     expect(within(nav).getByRole("link", { name: "Tours & Day Trips" })).toHaveAttribute("href", "#tours");
-    router.dispose();
   });
 });
