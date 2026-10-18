@@ -46,7 +46,7 @@ export async function collectSitemapPaths(dir = routesDir) {
   for (const file of await allRouteFiles(dir)) {
     if (path.basename(file) === "__root.tsx") continue;
     const contents = await readFile(file, "utf8");
-    const match = contents.match(/createFileRoute\s*\(\s*["'\x60](\/[^"'\x60]+)["'\x60]\s*\)/);
+    const match = contents.match(/createFileRoute\s*\(\s*["'\x60](\/[^"'\x60]*)["'\x60]\s*\)/);
     if (!match) throw new Error("Missing literal createFileRoute in " + file);
     const route = match[1];
     // API handlers, path parameters and catchalls should never appear in XML.
