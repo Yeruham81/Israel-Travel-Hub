@@ -40,7 +40,7 @@ describe("generated XML sitemap and robots.txt", () => {
     expect(xml).not.toContain("/api/exchange-rates/");
     expect(() => buildSitemap(["/valid/", "/valid/"], "https://example.org")).toThrow("Duplicate");
     expect(() => buildSitemap(["/invalid"], "https://example.org")).toThrow("Non-canonical");
-    expect(buildSitemap(["/"], "https://example.org/a?b=1")).toThrow();
+    expect(() => buildSitemap(["/"], "https://example.org/a?b=1")).toThrow();
   });
 
   it("generates the sitemap and robots directive under the same site origin as canonical tags", async () => {
