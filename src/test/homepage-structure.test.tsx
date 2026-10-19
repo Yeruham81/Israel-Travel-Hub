@@ -36,7 +36,7 @@ describe("homepage navigation and review sources", () => {
     expect(cards).toHaveTextContent("Kaye L");
     expect(cards).toHaveTextContent("Lilach T");
     expect(cards).toHaveTextContent("Janet");
-    expect(screen.getByRole("heading", { name: "Kind words from satisfied travelers" })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "Kind Words from Satisfied Travelers" })).toBeInTheDocument();
 
     act(() => vi.advanceTimersByTime(6000));
     expect(cards).toHaveTextContent("Yaniv B");

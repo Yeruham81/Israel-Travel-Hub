@@ -7,8 +7,8 @@ export function TripadvisorReviewsSection() {
   return <section aria-labelledby="reviews-h" className="mx-auto mt-16 max-w-6xl px-4">
     <div className="overflow-hidden rounded-3xl border bg-card shadow-sm">
       <div className="bg-navy px-6 py-9 text-navy-foreground sm:px-10">
-        <p className="text-xs font-semibold uppercase tracking-widest opacity-80">Real traveler experiences</p>
-        <h2 id="reviews-h" className="mt-2 text-3xl sm:text-4xl">Kind words from satisfied travelers</h2>
+        <p className="text-xs font-semibold uppercase tracking-widest opacity-80">Real Traveler Experiences</p>
+        <h2 id="reviews-h" className="mt-2 text-3xl sm:text-4xl">Kind Words from Satisfied Travelers</h2>
         <div className="mt-7 flex flex-wrap items-center gap-4 rounded-2xl border border-white/20 bg-white/10 p-5">
           <a href={tripadvisorProfileUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 text-xl font-bold tracking-tight text-white" aria-label="Tripadvisor reviews for Moshe Barak">
             <img src="https://cdn.simpleicons.org/tripadvisor/34E0A1" alt="" width={36} height={36} loading="lazy" className="size-9" />
@@ -34,7 +34,7 @@ export function PersonalTestimonialsSection() {
     <div className="overflow-hidden rounded-3xl border bg-card shadow-sm">
       <div className="bg-secondary/30 px-6 py-9 sm:px-10">
         <div className="flex flex-wrap items-end justify-between gap-4">
-          <div><p className="eyebrow">More stories from my travelers</p><h2 id="personal-reviews-h" className="mt-2 text-2xl sm:text-3xl">Personal messages from past clients</h2></div>
+          <div><p className="eyebrow">More Stories from My Travelers</p><h2 id="personal-reviews-h" className="mt-2 text-2xl sm:text-3xl">Personal Messages from Past Clients</h2></div>
           <div className="flex gap-2"><button type="button" onClick={()=>change(-1)} aria-label="Previous testimonial" className="grid size-11 place-items-center rounded-full border bg-background hover:border-primary"><ChevronLeft aria-hidden /></button><button type="button" onClick={()=>change(1)} aria-label="Next testimonial" className="grid size-11 place-items-center rounded-full border bg-background hover:border-primary"><ChevronRight aria-hidden /></button></div>
         </div>
         <div className="mt-6 grid gap-6 rounded-2xl border bg-card p-6 shadow-sm md:grid-cols-[minmax(150px,220px)_minmax(0,1fr)] md:items-center sm:p-8" data-testid="original-testimonial-carousel" aria-live="polite">

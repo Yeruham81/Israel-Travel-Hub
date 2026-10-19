@@ -36,8 +36,8 @@ export function HomeContactForm({ context = "homepage" }: { context?: "homepage"
   return <section id="contact" aria-labelledby={context === "about" ? "about-contact-h" : "home-contact-h"} className="scroll-mt-24 overflow-hidden rounded-2xl border bg-card shadow-sm">
     <div className="grid md:grid-cols-[0.85fr_1.5fr]">
       <div className="bg-navy p-6 text-navy-foreground sm:p-8">
-        <p className="text-xs font-semibold uppercase tracking-widest opacity-80">Get in touch</p>
-        <h2 id={context === "about" ? "about-contact-h" : "home-contact-h"} className="mt-3 text-3xl">Send Moshe a message</h2>
+        <p className="text-xs font-semibold uppercase tracking-widest opacity-80">Get in Touch</p>
+        <h2 id={context === "about" ? "about-contact-h" : "home-contact-h"} className="mt-3 text-3xl">Send Moshe a Message</h2>
         <p className="mt-4 leading-relaxed opacity-90">Questions about airport transfers, private journeys or planning your visit to Israel? Share a few details and Moshe Barak can reply personally.</p>
         <p className="mt-6 text-sm opacity-85">For travel enquiries and private-transport requests. A message is not a confirmed booking.</p>
       </div>
@@ -56,7 +56,7 @@ export function HomeContactForm({ context = "homepage" }: { context?: "homepage"
           <p className="text-xs text-muted-foreground">Preparing a message does not send it. You must open your email app and press Send.</p>
         </form>
         {prepared && <div role="status" className="mt-6 rounded-xl border border-primary/30 bg-secondary/50 p-5">
-          <h3 className="text-xl">Your message is ready</h3>
+          <h3 className="text-xl">Your Message Is Ready</h3>
           <p className="mt-2 text-sm">Send it to {airportTransferContact.email} from your email app.</p>
           <div className="mt-4 flex flex-wrap gap-3"><a className="btn btn-primary" href={prepared.url}>Open email app</a><button type="button" onClick={copyDraft} className="btn btn-outline">Copy message</button></div>
           {copyStatus && <p className="mt-3 text-sm">{copyStatus}</p>}

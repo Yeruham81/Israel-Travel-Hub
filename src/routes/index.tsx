@@ -51,7 +51,7 @@ const IMG = {
 
 const services: Service[] = [
   {
-    id: "transfers", eyebrow: "Airport transfers", tagline: "Plan a smooth arrival in Israel", title: "Airport transfers & private drivers",
+    id: "transfers", eyebrow: "Airport Transfers", tagline: "Plan a Smooth Arrival in Israel", title: "Airport Transfers",
     text: "Arrange a comfortable private pickup from Ben Gurion Airport to Jerusalem, Tel Aviv or Haifa, with a vehicle and meeting point tailored to your needs.",
     feature: { src: airportPickup, alt: "Illustrative driver loading luggage for arriving travellers" },
     cards: [
@@ -62,7 +62,7 @@ const services: Service[] = [
     hub: { label: "Explore airport transfers", to: "/transfers/" },
   },
   {
-    id: "tours", eyebrow: "Tours & day trips", tagline: "See the best of Israel in a day", title: "Tours & day trips",
+    id: "tours", eyebrow: "Tours & Day Trips", tagline: "See the Best of Israel in a Day", title: "Tours & Day Trips",
     text: "How to read an itinerary, what pickup and guide language mean in practice, and when a private driver fits better.",
     feature: { src: guidedTour, alt: "Illustrative small group on a guided walk through old stone streets" },
     cards: [
@@ -72,7 +72,7 @@ const services: Service[] = [
     hub: { label: "Explore tours", to: "/tours/" },
   },
   {
-    id: "shore-excursions", eyebrow: "Shore excursions", tagline: "Make the most of your time ashore", title: "Shore excursions",
+    id: "shore-excursions", eyebrow: "Shore Excursions", tagline: "Make the Most of Your Time Ashore", title: "Shore Excursions",
     text: "Arriving by cruise ship? Plan a day ashore around your all-aboard time, then choose a private driver, guide or port-specific tour.",
     feature: { src: cruisePort, alt: "Illustrative cruise passengers walking along a harbour quay toward a waiting minivan (not a specific ship or operator)" },
     cards: [
@@ -82,7 +82,7 @@ const services: Service[] = [
     hub: { label: "Explore shore excursions", to: "/shore-excursions/" },
   },
   {
-    id: "accommodation", eyebrow: "Accommodation", tagline: "Find the perfect place to stay", title: "Accommodation in Israel",
+    id: "accommodation", eyebrow: "Accommodation", tagline: "Find the Perfect Place to Stay", title: "Accommodation in Israel",
     text: "Choose a neighborhood or hotel style, then compare practical details such as beach access, family facilities, spa entry and arrival before booking.",
     feature: { src: hotelRoom, alt: "Illustrative bright hotel room with a made bed by the window (not a specific property)" },
     cards: [
@@ -95,7 +95,7 @@ const services: Service[] = [
     hub: { label: "Explore accommodation", to: "/hotels/" },
   },
   {
-    id: "attractions", eyebrow: "Attractions & experiences", tagline: "Discover Israel’s must-see places", title: "Attractions & experiences",
+    id: "attractions", eyebrow: "Attractions & Experiences", tagline: "Discover Israel’s Must-See Places", title: "Attractions & Experiences",
     text: "Desert fortresses, seaside ruins and holy places — what to expect and how long to allow.",
     feature: { src: caesareaDusk, alt: "Ancient ruins on the shore at Caesarea at dusk" },
     cards: [
@@ -145,7 +145,7 @@ function Home() {
           {services.map((s) => (
             <a key={s.id} href={`#${s.id}`} className="rounded-lg px-3 py-2 text-center text-sm font-semibold hover:bg-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring">{s.id === "tours" ? "Tours & Day Trips" : s.eyebrow.split(" &")[0]}</a>
           ))}
-          <a href="#guides" className="rounded-lg px-3 py-2 text-center text-sm font-semibold hover:bg-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring">Travel guides</a>
+          <a href="#guides" className="rounded-lg px-3 py-2 text-center text-sm font-semibold hover:bg-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring">Travel Guides</a>
         </nav>
       </div>
 
@@ -202,14 +202,14 @@ function Home() {
       </div>
 
       <section id="guides" aria-labelledby="guides-h" className="mx-auto mt-16 max-w-6xl scroll-mt-6 px-4">
-        <div className="flex flex-wrap items-end justify-between gap-4"><div><p className="eyebrow">Before you travel</p><h2 id="guides-h" className="mt-2 text-3xl">Practical Israel travel guides</h2><p className="mt-3 max-w-2xl text-muted-foreground">Clear answers about arrival, getting connected and choosing how to get around.</p></div><Link to="/guides/" className="btn btn-primary">Browse all guides →</Link></div>
+        <div className="flex flex-wrap items-end justify-between gap-4"><div><p className="eyebrow">Before You Travel</p><h2 id="guides-h" className="mt-2 text-3xl">Practical Israel Travel Guides</h2><p className="mt-3 max-w-2xl text-muted-foreground">Clear answers about arrival, getting connected and choosing how to get around.</p></div><Link to="/guides/" className="btn btn-primary">Browse all guides →</Link></div>
         <div className="mt-6 grid gap-5 sm:grid-cols-2 xl:grid-cols-3" data-testid="guide-row-one">{guideDirectory.filter((guide) => ["uber", "esim", "arrival"].includes(guide.id)).map((guide) => <GuideCard key={guide.id} guide={guide} headingLevel={3} />)}</div>
         <div className="mt-5 grid gap-5 sm:grid-cols-2 xl:grid-cols-3" data-testid="guide-row-two">{guideDirectory.filter((guide) => ["israel", "travelTips", "airport-journey-jerusalem"].includes(guide.id)).map((guide) => <GuideCard key={guide.id} guide={guide} headingLevel={3} />)}</div>
       </section>
       <section aria-labelledby="dest-h" className="mx-auto mt-20 max-w-6xl px-4">
         <div className="rounded-2xl bg-navy p-6 text-navy-foreground md:p-8">
-          <p className="text-xs font-semibold uppercase tracking-[0.14em] opacity-80">Where to base yourself</p>
-          <h2 id="dest-h" className="mt-2 text-3xl">Popular destinations</h2>
+          <p className="text-xs font-semibold uppercase tracking-[0.14em] opacity-80">Where to Base Yourself</p>
+          <h2 id="dest-h" className="mt-2 text-3xl">Popular Destinations</h2>
           <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
             <PhotoCard c={{ label: "Jerusalem", text: "Old City, Bethlehem & Masada trips", to: "/travel-blog/where-to-stay-in-jerusalem/", img: IMG.jerusalem }} />
             <PhotoCard c={{ label: "Tel Aviv & Jaffa", text: "Beaches, food and the coast", to: "/travel-blog/where-to-stay-in-tel-aviv/", img: IMG.telAviv }} />

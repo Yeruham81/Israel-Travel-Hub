@@ -30,8 +30,24 @@ describe("homepage marketing copy and top navigation", () => {
     render(<RouterContextProvider router={router}><View /></RouterContextProvider>);
     const nav = screen.getByRole("navigation", { name: "Services" });
     expect(within(nav).getAllByRole("link").map(link => link.textContent)).toEqual([
-      "Airport transfers", "Tours & Day Trips", "Shore excursions", "Accommodation", "Attractions", "Travel guides",
+      "Airport Transfers", "Tours & Day Trips", "Shore Excursions", "Accommodation", "Attractions", "Travel Guides",
     ]);
     expect(within(nav).getByRole("link", { name: "Tours & Day Trips" })).toHaveAttribute("href", "#tours");
+    const sectionHeadings = [
+      "Airport Transfers",
+      "Kind Words from Satisfied Travelers",
+      "Tours & Day Trips",
+      "Shore Excursions",
+      "Accommodation in Israel",
+      "Attractions & Experiences",
+      "Practical Israel Travel Guides",
+      "Popular Destinations",
+      "Personal Messages from Past Clients",
+      "Send Moshe a Message",
+    ];
+    const actualHeadings = screen.getAllByRole("heading", { level: 2 }).map(heading => heading.textContent);
+    expect(actualHeadings).toEqual(sectionHeadings);
+    expect(screen.queryByRole("heading", { name: /Airport Transfers & Private Drivers/i })).not.toBeInTheDocument();
+
   });
 });
