@@ -61,13 +61,13 @@ describe("homepage marketing copy and top navigation", () => {
       expect(button).toHaveAttribute("href", target);
       expect(section.querySelector("header")?.contains(button)).toBe(false);
       expect(section.lastElementChild).toContainElement(button);
-      expect(section.querySelector('[data-testid="service-layout-' + sectionId + '"]')?.compareDocumentPosition(button) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
+      expect(section.querySelector('[data-testid="service-layout-' + sectionId + '"]')!.compareDocumentPosition(button) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
     }
     const guidesSection = document.getElementById("guides")!;
     const guideButton = within(guidesSection).getByRole("link", { name: /Browse all guides/i });
     expect(guideButton).toHaveAttribute("href", "/guides/");
     expect(guidesSection.lastElementChild).toContainElement(guideButton);
-    expect(guidesSection.querySelector('[data-testid="guide-row-two"]')?.compareDocumentPosition(guideButton) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
+    expect(guidesSection.querySelector('[data-testid="guide-row-two"]')!.compareDocumentPosition(guideButton) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
 
     expect(screen.queryByRole("heading", { name: /Airport Transfers & Private Drivers/i })).not.toBeInTheDocument();
 
