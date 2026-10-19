@@ -18,9 +18,9 @@ export function ExtLink({ href, children, className, guide }: { href: string; ch
 
 export function Wordmark() {
   return (
-    <Link to="/" className="flex items-center gap-2" aria-label="Israel Taxi & Travel home">
-      <span aria-hidden className="grid h-8 w-8 place-items-center rounded-full bg-navy font-serif text-base italic text-navy-foreground">i</span>
-      <span className="font-serif text-xl leading-none">
+    <Link to="/" className="flex shrink-0 items-center gap-1.5 sm:gap-2" aria-label="Israel Taxi & Travel home">
+      <span aria-hidden className="grid h-7 w-7 shrink-0 place-items-center rounded-full bg-navy font-serif text-sm italic text-navy-foreground sm:h-8 sm:w-8 sm:text-base">i</span>
+      <span className="whitespace-nowrap font-serif text-[0.9rem] leading-none min-[375px]:text-base sm:text-xl">
         Israel Taxi <span className="italic text-primary">&amp;</span> Travel
       </span>
     </Link>
@@ -107,7 +107,7 @@ export function SiteHeader() {
   useEffect(() => setOpen(false), [pathname]);
   return (
     <header className="sticky top-0 z-40 border-b bg-background/95 backdrop-blur">
-      <div className="mx-auto flex max-w-[90rem] items-center justify-between gap-4 px-4 py-3">
+      <div className="mx-auto flex w-full max-w-7xl items-center justify-between gap-2 px-3 py-2 sm:gap-4 sm:px-4 sm:py-3">
         <Wordmark />
         <nav aria-label="Services" className="hidden 2xl:block">
           <ul className="flex items-center gap-4 text-sm font-medium">
@@ -116,8 +116,8 @@ export function SiteHeader() {
             ))}
           </ul>
         </nav>
-        <button type="button" onClick={() => setOpen(true)} className="btn btn-primary py-2 text-sm lg:hidden" aria-haspopup="dialog" aria-expanded={open}>
-          <Compass className="h-4 w-4" aria-hidden /> Explore Israel
+        <button type="button" onClick={() => setOpen(true)} className="btn btn-primary shrink-0 whitespace-nowrap gap-1 px-3 py-2 text-sm lg:hidden" aria-haspopup="dialog" aria-expanded={open}>
+          <Compass className="h-4 w-4" aria-hidden /> Menu
         </button>
         <Sheet open={open} onOpenChange={setOpen}>
           <SheetContent side="left" className="w-[85vw] max-w-sm overflow-y-auto">

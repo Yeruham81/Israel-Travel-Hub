@@ -85,7 +85,11 @@ describe("shared sidebar navigation", () => {
   it("uses the same groups in the mobile drawer and closes it after service and guide navigation", async () => {
     const router = await navigationRouter();
     render(<RouterContextProvider router={router}><SiteHeader /></RouterContextProvider>);
-    const trigger = screen.getByRole("button", { name: "Explore Israel" });
+    const trigger = screen.getByRole("button", { name: "Menu" });
+    const brand = screen.getByRole("link", { name: "Israel Taxi & Travel home" });
+    expect(brand).toHaveAttribute("href", "/");
+    expect(brand.querySelector("span.whitespace-nowrap")).toHaveTextContent("Israel Taxi & Travel");
+    expect(trigger).toHaveClass("shrink-0", "whitespace-nowrap", "px-3");
     fireEvent.click(trigger);
     let dialog = await screen.findByRole("dialog");
     let nav = within(dialog).getByRole("navigation", { name: "Explore Israel" });
