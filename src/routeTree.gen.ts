@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AboutMosheBarakRouteImport } from './routes/about-moshe-barak'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as AshdodShoreExcursionsRouteImport } from './routes/ashdod-shore-excursions'
 import { Route as CarRentalRouteImport } from './routes/car-rental'
@@ -98,6 +99,11 @@ import { Route as TravelBlogWhereToStayInTelAvivRouteImport } from './routes/tra
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AboutMosheBarakRoute = AboutMosheBarakRouteImport.update({
+  id: '/about-moshe-barak',
+  path: '/about-moshe-barak',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AboutRoute = AboutRouteImport.update({
@@ -560,6 +566,7 @@ const TravelBlogWhereToStayInTelAvivRoute =
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/about-moshe-barak': typeof AboutMosheBarakRoute
   '/about': typeof AboutRoute
   '/ashdod-shore-excursions': typeof AshdodShoreExcursionsRoute
   '/car-rental': typeof CarRentalRoute
@@ -647,6 +654,7 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/about-moshe-barak': typeof AboutMosheBarakRoute
   '/about': typeof AboutRoute
   '/ashdod-shore-excursions': typeof AshdodShoreExcursionsRoute
   '/car-rental': typeof CarRentalRoute
@@ -735,6 +743,7 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/about-moshe-barak': typeof AboutMosheBarakRoute
   '/about': typeof AboutRoute
   '/ashdod-shore-excursions': typeof AshdodShoreExcursionsRoute
   '/car-rental': typeof CarRentalRoute
@@ -824,6 +833,7 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/about-moshe-barak'
     | '/about'
     | '/ashdod-shore-excursions'
     | '/car-rental'
@@ -911,6 +921,7 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/about-moshe-barak'
     | '/about'
     | '/ashdod-shore-excursions'
     | '/car-rental'
@@ -998,6 +1009,7 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
+    | '/about-moshe-barak'
     | '/about'
     | '/ashdod-shore-excursions'
     | '/car-rental'
@@ -1086,6 +1098,7 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AboutMosheBarakRoute: typeof AboutMosheBarakRoute
   AboutRoute: typeof AboutRoute
   AshdodShoreExcursionsRoute: typeof AshdodShoreExcursionsRoute
   CarRentalRoute: typeof CarRentalRoute
@@ -1179,6 +1192,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/about-moshe-barak': {
+      id: '/about-moshe-barak'
+      path: '/about-moshe-barak'
+      fullPath: '/about-moshe-barak'
+      preLoaderRoute: typeof AboutMosheBarakRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/about': {
@@ -1774,6 +1794,7 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AboutMosheBarakRoute: AboutMosheBarakRoute,
   AboutRoute: AboutRoute,
   AshdodShoreExcursionsRoute: AshdodShoreExcursionsRoute,
   CarRentalRoute: CarRentalRoute,
