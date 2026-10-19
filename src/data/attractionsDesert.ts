@@ -1,6 +1,7 @@
 import type { Attraction } from "@/data/attractionGuideTypes";
 import deadSea from "@/assets/dead-sea/landscape.webp";
 import einGedi from "@/assets/dead-sea/ein-gedi.webp";
+import ramonCrater from "@/assets/guides/mitzpe-ramon-crater.jpg";
 export const desertAttractions: Record<string, Attraction> = {
 "dead-sea-attractions": {
  title:"Dead Sea attractions: beaches, nature and historic sites",description:"Explore the Dead Sea's top attractions, from Ein Bokek and Masada to Ein Gedi and desert viewpoints, with planning and road-trip advice.",region:"Dead Sea & Negev",image:{src:deadSea,alt:"Dead Sea mountains and shoreline"},duration:"One day to several days",
@@ -18,7 +19,7 @@ export const desertAttractions: Record<string, Attraction> = {
  official:[{label:"Israel Nature and Parks Authority",url:"https://en.parks.org.il/"}],
 },
 "mitzpe-ramon-crater": {
- title:"Mitzpe Ramon & Ramon Crater: viewpoints and desert nature",description:"Visit the Makhtesh Ramon crater, Mitzpe Ramon viewpoints, visitor centre, desert trails and stargazing, with weather and access tips.",region:"Dead Sea & Negev",duration:"Half day to two days",
+ title:"Mitzpe Ramon & Ramon Crater: viewpoints and desert nature",description:"Visit the Makhtesh Ramon crater, Mitzpe Ramon viewpoints, visitor centre, desert trails and stargazing, with weather and access tips.",region:"Dead Sea & Negev",image:{src:ramonCrater,alt:"Layered desert cliffs and the landscape of Ramon Crater"},duration:"Half day to two days",
  intro:"Makhtesh Ramon is a huge erosion landform carved through the Negev Highlands, not a volcanic or meteor-impact crater. The town of Mitzpe Ramon stands on its rim and makes a comfortable starting point for scenery, geology and desert experiences.",
  takeaway:"Begin at a marked rim viewpoint and the visitor centre, then choose a short signed trail or authorised guided experience. Overnight stays let you enjoy cooler walking hours and clear-sky stargazing.",
  highlights:[
