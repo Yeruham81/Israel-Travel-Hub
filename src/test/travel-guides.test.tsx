@@ -54,7 +54,7 @@ describe("migrated practical guides", () => {
       if (section.photo.sourceUrl && !isPublisherUrl(section.photo.sourceUrl)) expect(container.querySelector(`#${section.id} a[href="${section.photo.sourceUrl}"]`)).not.toBeNull();
     }
     for (const sourceId of guide.sourceIds) expect(getSource(sourceId)?.url).toMatch(/^https:\/\//);
-    expect(container.querySelector("time")).toHaveAttribute("datetime", TRAVEL_GUIDE_CHECK_DATE);
+    expect(container.querySelector("time")).toHaveAttribute("datetime", guide.updatedAt || TRAVEL_GUIDE_CHECK_DATE);
     expect(container.querySelector("time")).toHaveTextContent("October 2026");
     const authorCard = screen.getByRole("complementary", { name: "About the author" });
     expect(authorCard).toHaveTextContent("Written by Moshe Barak");
@@ -74,7 +74,7 @@ describe("migrated practical guides", () => {
     expect(head).toMatchObject({ meta: expect.arrayContaining([{ title: guide.title }, { name: "description", content: guide.description }, { name: "robots", content: "noindex,nofollow" }]), links: [{ rel: "canonical", href: expect.stringMatching(new RegExp(`${path}$`)) }] });
     const structured = head!.scripts!.flatMap((script) => typeof script?.children === "string" ? [JSON.parse(script.children)] : []);
     const article = structured.find((item) => item["@type"] === "Article");
-    expect(article).toMatchObject({ headline: guide.title, dateModified: TRAVEL_GUIDE_CHECK_DATE, inLanguage: "en", author: { "@type": "Person", name: "Moshe Barak", sameAs: [mosheBarakAuthor.reviewsUrl] } });
+    expect(article).toMatchObject({ headline: guide.title, dateModified: guide.updatedAt || TRAVEL_GUIDE_CHECK_DATE, inLanguage: "en", author: { "@type": "Person", name: "Moshe Barak", sameAs: [mosheBarakAuthor.reviewsUrl] } });
     expect(article.mainEntityOfPage.endsWith(path)).toBe(true);
     for (const url of article.citation) expect(container.querySelector(`a[href="${url}"]`)).not.toBeNull();
     const crumbs = structured.find((item) => item["@type"] === "BreadcrumbList");
@@ -86,8 +86,8 @@ describe("migrated practical guides", () => {
     const router = await routerAt("/guides/");
     const Hub = HubRoute.options.component!;
     const html = renderToString(<RouterContextProvider router={router}><Hub /></RouterContextProvider>);
-    expect(guideDirectory).toHaveLength(47);
-    expect(new Set(guideDirectory.map((guide) => guide.to)).size).toBe(47);
+    expect(guideDirectory).toHaveLength(63);
+    expect(new Set(guideDirectory.map((guide) => guide.to)).size).toBe(63);
     for (const guide of guideDirectory) {
       expect(html).toContain(`href="${guide.to}"`);
       expect(router.matchRoutes(String(guide.to)).at(-1)?.routeId).toBe(String(guide.to).replace(/\/$/, ""));
@@ -99,7 +99,7 @@ describe("migrated practical guides", () => {
     const router = await routerAt("/guides/");
     const Hub = HubRoute.options.component!;
     render(<RouterContextProvider router={router}><Hub /></RouterContextProvider>);
-    expect(screen.getAllByTestId("guide-directory-card")).toHaveLength(47);
+    expect(screen.getAllByTestId("guide-directory-card")).toHaveLength(63);
     fireEvent.change(screen.getByRole("searchbox"), { target: { value: "eSIM" } });
     expect(screen.getAllByTestId("guide-directory-card")).toHaveLength(1);
     fireEvent.submit(screen.getByRole("search"));
@@ -108,7 +108,7 @@ describe("migrated practical guides", () => {
     fireEvent.click(within(topics).getByRole("link", { name: "Attractions" }));
     await screen.findByRole("heading", { name: "No guides match this search" });
     fireEvent.click(screen.getByRole("button", { name: "Clear filters" }));
-    await waitFor(() => expect(screen.getAllByTestId("guide-directory-card")).toHaveLength(47));
+    await waitFor(() => expect(screen.getAllByTestId("guide-directory-card")).toHaveLength(63));
     expect(screen.getByRole("searchbox")).toHaveValue("");
     await act(async () => { await router.navigate({ to: "/guides/", search: { topic: "attractions" } }); });
     expect(screen.getAllByTestId("guide-directory-card")).toHaveLength(filterGuides("", "attractions").length);
@@ -152,7 +152,7 @@ describe("migrated practical guides", () => {
     expect(travelGuides.baptism.reviewNote).toMatch(/different hour sets|differing hour|different hours/i);
     expect(travelGuides.baptism.sections.find((section) => section.id === "qasr-visit")!.photo?.alt).toContain("Qasr el-Yahud");
     expect(travelGuides.jerusalemChurches.comparison.rows.map((row) => row[0])).toEqual(["Old City", "Mount of Olives / Kidron", "Mount Zion", "Ein Karem"]);
-    expect(travelGuides.jerusalemDeadSea.sections[0]!.paragraphs.join(" ")).toContain("not the same destination as Ein Bokek");
+    expect(travelGuides.jerusalemDeadSea.sections[0]!.paragraphs.join(" ")).toContain("a northern beach should not be applied to Ein Bokek");
     expect(travelGuides.jerusalemShopping.sections.find((section) => section.id === "crafts-and-practicalities")!.paragraphs.join(" ")).toContain("not independently confirmed");
     expect(JSON.stringify(travelGuides.jerusalemChurches)).not.toMatch(/10-20 ILS|50-80 ILS|open daily.*8:00/i);
     expect(travelGuides.jerusalemDayTrips.sections.find((section) => section.id === "tel-aviv-jaffa")).toBeTruthy();

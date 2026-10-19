@@ -93,6 +93,10 @@ export const allNavGroups: NavGroup[] = [
       { label: "Airport to Ein Bokek: all options", to: "/travel-blog/how-to-get-from-ben-gurion-airport-to-ein-bokek/" },
 
       { label: "Israel travel tips", to: travelGuidePaths.travelTips },
+      { label: "Best time to visit Israel", to: travelGuidePaths.bestTime },
+      { label: "Holidays & events", to: travelGuidePaths.calendar },
+      { label: "What to eat in Israel", to: travelGuidePaths.food },
+      { label: "Top 10 Israel experiences", to: travelGuidePaths.topTen },
       { label: "Jerusalem travel guide", to: travelGuidePaths.jerusalem },
       travelTips.gettingAround,
       { label: "Getting around Tel Aviv", to: travelGuidePaths.telAviv },

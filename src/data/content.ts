@@ -1141,7 +1141,7 @@ export const accommodationDestinations: AccommodationDestinationCard[] = [
   {
     id: "eilat", title: "Hotels in Eilat",
     text: "Red Sea beaches, resort escapes and desert scenery set the scene for a laid-back holiday. Get to know Eilat before choosing your stay.",
-    cta: "Explore Eilat", to: "/destinations/", hash: "eilat",
+    cta: "Explore Eilat", to: "/travel-blog/eilat/",
     photo: { src: eilatWaterfrontPhoto, alt: "Hotels, palm trees and the waterfront beside the Red Sea in Eilat", sourceUrl: "https://www.israel-taxi.com/wp-content/uploads/2025/08/eilat_.jpg", label: "Eilat — Red Sea waterfront" },
   },
 ];

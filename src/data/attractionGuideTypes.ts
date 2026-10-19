@@ -5,7 +5,7 @@ export const attractionIds = [
 "mount-tabor","capernaum","tabgha","mount-of-beatitudes"
 ] as const;
 export type AttractionId = typeof attractionIds[number];
-export type Region = "Jerusalem" | "Tel Aviv & Jaffa" | "Dead Sea & Negev" | "Haifa & northern coast" | "Sea of Galilee";
+export type Region = "Jerusalem" | "Tel Aviv & Jaffa" | "Dead Sea & Negev" | "Haifa & northern coast" | "Sea of Galilee" | "Lower Galilee & Jezreel Valley" | "Eilat & Red Sea";
 export interface Attraction {
   title: string; description: string; region: Region; intro: string; takeaway: string; duration: string;
   highlights: {name:string; description:string; tip:string}[];

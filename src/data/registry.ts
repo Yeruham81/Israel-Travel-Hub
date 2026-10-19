@@ -2,6 +2,7 @@
  * Typed content registry. Every record here is shaped like a future database row
  * so it can be swapped for DB-backed queries without changing page components.
  */
+import { migrationSources } from "@/data/guideMigrationSources";
 import kiwitaxiLogo from "@/assets/providers/kiwitaxi.svg";
 import welcomePickupsLogo from "@/assets/providers/welcome-pickups.svg";
 import intuiLogo from "@/assets/providers/intui.webp";
@@ -160,6 +161,23 @@ export const initialReferenceFx: ExchangeRateSnapshot = {
 };
 
 export const travelGuidePaths = {
+  bestTime: "/travel-blog/best-time-to-visit-israel/",
+  food: "/travel-blog/what-to-eat-in-israel/",
+  calendar: "/travel-blog/calendar-of-events/",
+  eilat: "/travel-blog/eilat/",
+  telAvivBeaches: "/travel-blog/beaches-in-tel-aviv/",
+  telAvivMuseums: "/travel-blog/museums-in-tel-aviv/",
+  haifaMuseums: "/travel-blog/museums-in-haifa/",
+  megiddo: "/travel-blog/tel-megiddo/",
+  precipice: "/travel-blog/mount-precipice/",
+  annunciation: "/travel-blog/basilica-of-the-annunciation/",
+  magdala: "/travel-blog/magdala/",
+  yardenit: "/travel-blog/yardenit/",
+  qasr: "/travel-blog/qasr-el-yahud/",
+  deadSea: "/travel-blog/the-dead-sea/",
+  bethlehem: "/travel-blog/jerusalem-to-bethlehem/",
+  topTen: "/travel-blog/top-10-things-to-do-in-israel/",
+
   uber: "/travel-blog/uber-in-israel/",
   sherut: "/travel-blog/sherut-in-israel/",
   esim: "/travel-blog/best-esim-for-israel/",
@@ -409,6 +427,7 @@ export const sources: SourceReference[] = [
   { id: "moshe-author-profile", title: "Moshe Barak biography", publisher: "Moshe Barak", url: `${OWNER_BASE}/about-me/`, checkedAt: "2026-10-18", note: "Publisher biography supports over 20 years in private transport, local route knowledge and tailored journeys for international visitors. Tripadvisor is linked to the owner-supplied profile only; no live score, count or review text is reproduced." },
   referenceFxSource,
   ...travelGuideSources,
+  ...migrationSources,
   ...airportTransferRoutes.filter((route) => route.id !== "jerusalem").map((route): SourceReference => ({
     id: route.sourceId, title: `Ben Gurion Airport to ${route.id === "dead-sea" ? "Ein Bokek" : route.id === "tel-aviv" ? "Tel Aviv" : "Haifa"} — original guide`,
     publisher: "Israel-Taxi.com (Moshe Barak)", url: `${OWNER_BASE}${route.path}`, checkedAt: AIRPORT_TRANSFER_CHECK_DATE,

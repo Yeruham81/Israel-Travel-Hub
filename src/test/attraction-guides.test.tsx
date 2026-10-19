@@ -28,7 +28,7 @@ describe("17 original attraction destination guides", () => {
     }
   });
   it("includes the new guides in the directory and its attraction search filter", () => {
-    expect(guideDirectory).toHaveLength(47);
+    expect(guideDirectory).toHaveLength(63);
     const attractionItems = filterGuides("", "attractions");
     for (const id of attractionIds) {
       expect(attractionItems.some(guide => guide.to === attractionPath(id))).toBe(true);

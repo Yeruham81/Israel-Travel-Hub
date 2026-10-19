@@ -13,6 +13,10 @@ import bethlehem from "@/assets/home/bethlehem-nativity.webp";
 import { expandedTravelGuides } from "@/data/travelGuideExpansion";
 import { attractionGuides } from "@/data/attractionGuides";
 import { attractionIds, attractionPath } from "@/data/attractionGuideTypes";
+import { planningGuides } from "@/data/guidePlanning2026";
+import { cityCultureGuides } from "@/data/guideCities2026";
+import { heritageGuides } from "@/data/guideHeritage2026";
+import { journeyDestinationGuides } from "@/data/guideJourneys2026";
 
 export const guideTopics = [
   { id: "transportation", label: "Transportation" },
@@ -27,10 +31,10 @@ export const guideTopics = [
 ] as const;
 export type GuideTopicId = typeof guideTopics[number]["id"];
 export type GuidePhoto = { src: string; alt: string; sourceUrl?: string; credit?: string; licenseUrl?: string };
-export type GuideSection = { id: string; title: string; paragraphs: string[]; bullets?: string[]; sourceIds?: string[]; photo?: GuidePhoto };
+export type GuideSection = { id: string; title: string; paragraphs: string[]; bullets?: string[]; sourceIds?: string[]; photo?: GuidePhoto; links?: { label: string; to: LinkProps["to"] }[] };
 export type GuideReading = { label: string; href: string; note: string };
 export type TravelGuide = {
-  id: TravelGuideId; title: string; description: string; intro: string; answer: string;
+  id: TravelGuideId; title: string; description: string; intro: string; answer: string; updatedAt?: string;
   topics: GuideTopicId[]; photo: GuidePhoto; facts: { label: string; text: string }[];
   comparison: { caption: string; headers: string[]; rows: string[][] };
   sections: GuideSection[]; checklist: string[]; faqs: { q: string; a: string }[];
@@ -45,6 +49,10 @@ const hallPhoto: GuidePhoto = { src: airportHall, alt: "Ben Gurion Airport Termi
 
 export const travelGuides: Record<TravelGuideId, TravelGuide> = {
   ...expandedTravelGuides,
+  ...planningGuides,
+  ...cityCultureGuides,
+  ...heritageGuides,
+  ...journeyDestinationGuides,
   uber: {
     id: "uber", title: "Is Uber available in Israel? Gett and taxi alternatives",
     description: "Can you use Uber in Israel? Compare Gett, licensed taxis and private transfers, including Ben Gurion Airport pickup rules and city rides.",
@@ -192,7 +200,7 @@ export const guideDirectory: GuideDirectoryEntry[] = [
   { id: "stay-deadsea", title: "Dead Sea hotels", description: "Choose Ein Bokek, a spa stay or a family hotel on the Israeli shore.", to: "/travel-blog/best-dead-sea-hotels/", topics: ["destinations", "accommodation"], photo: airportTransferPhotos["dead-sea"]! },
   { id: "masada", title: "Masada: plan your visit", description: "Cable car, entrance choices and a practical desert day trip.", to: "/travel-blog/masada/", topics: ["attractions", "itineraries", "tips"], photo: { src: masada, alt: "Masada plateau above the Dead Sea", credit: "Godot13 · CC BY-SA 4.0 · resized WebP", sourceUrl: "https://commons.wikimedia.org/wiki/File:Israel-2013-Aerial_13-Masada.jpg", licenseUrl: "https://creativecommons.org/licenses/by-sa/4.0/" } },
   { id: "caesarea", title: "Caesarea: visiting the ancient harbour", description: "Explore the coast, park entry and what to plan before travelling.", to: "/attractions/caesarea/", topics: ["attractions", "destinations"], photo: { src: caesarea, alt: "Caesarea's ancient coastal ruins", credit: "Zeev Stein · CC BY 2.5 · resized WebP", sourceUrl: "https://commons.wikimedia.org/wiki/File:125342_caesarea_national_park_PikiWiki_Israel.jpg", licenseUrl: "https://creativecommons.org/licenses/by/2.5/" } },
-  { id: "bethlehem", title: "Bethlehem from Jerusalem", description: "Read the itinerary and practical requirements of a combined day tour.", to: "/tours/bethlehem-from-jerusalem/", topics: ["itineraries", "attractions"], photo: { src: bethlehem, alt: "Church of the Nativity in Bethlehem", credit: "Britchi Mirela · CC BY-SA 4.0 · resized WebP", sourceUrl: "https://commons.wikimedia.org/wiki/File:Palestine,_Bethlehem,_Church_of_the_Nativity_or_Birthplace_of_Jesus_(Square).jpg", licenseUrl: "https://creativecommons.org/licenses/by-sa/4.0/" } },
+  { id: "tour-bethlehem", title: "Bethlehem from Jerusalem", description: "Read the itinerary and practical requirements of a combined day tour.", to: "/tours/bethlehem-from-jerusalem/", topics: ["itineraries", "attractions"], photo: { src: bethlehem, alt: "Church of the Nativity in Bethlehem", credit: "Britchi Mirela · CC BY-SA 4.0 · resized WebP", sourceUrl: "https://commons.wikimedia.org/wiki/File:Palestine,_Bethlehem,_Church_of_the_Nativity_or_Birthplace_of_Jesus_(Square).jpg", licenseUrl: "https://creativecommons.org/licenses/by-sa/4.0/" } },
 ];
 
 export function isGuideTopic(value: unknown): value is GuideTopicId { return typeof value === "string" && guideTopics.some((topic) => topic.id === value); }

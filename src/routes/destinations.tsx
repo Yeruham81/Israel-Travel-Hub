@@ -21,6 +21,8 @@ const dests: { id?: string; name: string; text: string; links: L[] }[] = [
     text: "Compare spa breaks, family resorts, luxury stays and nature-focused alternatives near Ein Gedi on the Israeli shore.",
     links: [
       { label: "All Dead Sea hotels", to: "/travel-blog/best-dead-sea-hotels/" },
+      { label: "Dead Sea visitor guide", to: travelGuidePaths.deadSea },
+      { label: "Qasr el-Yahud visitor guide", to: travelGuidePaths.qasr },
       { label: "Jerusalem to the Dead Sea", to: travelGuidePaths.jerusalemDeadSea },
       { label: "Dead Sea spa hotels", to: "/dead-sea/spa-hotels/" },
       { label: "Dead Sea family hotels", to: "/dead-sea/family-hotels/" },
@@ -39,6 +41,7 @@ const dests: { id?: string; name: string; text: string; links: L[] }[] = [
       { label: "Where to stay in Jerusalem", to: "/travel-blog/where-to-stay-in-jerusalem/" },
       { label: "Airport to Jerusalem", to: "/travel-blog/ben-gurion-airport-to-jerusalem/" },
       { label: "Bethlehem tours", to: "/tours/bethlehem-from-jerusalem/" },
+      { label: "Jerusalem to Bethlehem: transport", to: travelGuidePaths.bethlehem },
       { label: "Masada day trip", to: "/travel-blog/masada/" },
     ],
   },
@@ -47,6 +50,8 @@ const dests: { id?: string; name: string; text: string; links: L[] }[] = [
     text: "Beaches, Bauhaus streets, food and nightlife; a base for the coast.",
     links: [
       { label: "Day trips from Tel Aviv", to: travelGuidePaths.telAvivDayTrips },
+      { label: "Tel Aviv beaches", to: travelGuidePaths.telAvivBeaches },
+      { label: "Tel Aviv museums", to: travelGuidePaths.telAvivMuseums },
       { label: "Where to stay in Tel Aviv", to: "/travel-blog/where-to-stay-in-tel-aviv/" },
       { label: "Airport to Tel Aviv", to: "/travel-blog/ben-gurion-airport-to-tel-aviv/" },
       { label: "Caesarea on the coast", to: "/attractions/caesarea/" },
@@ -58,6 +63,7 @@ const dests: { id?: string; name: string; text: string; links: L[] }[] = [
     text: "Compare German Colony boutique stays, Carmel views and beachfront family hotels, with connections to shore excursions and northern day trips.",
     links: [
       { label: "All Haifa hotels", to: "/travel-blog/best-hotels-in-haifa/" },
+      { label: "Haifa museums", to: travelGuidePaths.haifaMuseums },
       { label: "Haifa boutique hotels", to: "/haifa/boutique-hotels/" },
       { label: "Haifa family hotels", to: "/haifa/family-hotels/" },
       { label: "Shore excursions from Haifa Port", to: "/haifa-shore-excursions/" },
@@ -71,6 +77,9 @@ const dests: { id?: string; name: string; text: string; links: L[] }[] = [
     text: "Lakeside town and Christian sites, with the Golan and northern Israel nearby.",
     links: [
       { label: "Jordan River baptism sites", to: travelGuidePaths.baptism },
+      { label: "Yardenit visitor guide", to: travelGuidePaths.yardenit },
+      { label: "Magdala archaeology and pilgrimage", to: travelGuidePaths.magdala },
+      { label: "Basilica of the Annunciation", to: travelGuidePaths.annunciation },
       { label: "Hotels in Tiberias", to: "/travel-blog/best-hotels-in-tiberias/" },
       { label: "Tiberias family hotels", to: "/tiberias/family-hotels/" },
       { label: "Tiberias luxury & couples' hotels", to: "/tiberias/luxury-hotels/" },
@@ -84,7 +93,8 @@ const dests: { id?: string; name: string; text: string; links: L[] }[] = [
     id: "eilat", name: "Eilat & the Red Sea",
     text: "Red Sea beaches, resort stays and desert scenery. Consider your beach and pool priorities, the hotel's location and the onward journey when planning an Eilat stay.",
     links: [
-      { label: "Plan your visit to Israel", to: travelGuidePaths.travelTips },
+      { label: "Eilat beaches, reef and desert guide", to: travelGuidePaths.eilat },
+      { label: "Best time to visit Israel", to: travelGuidePaths.bestTime },
       { label: "Getting around Israel", to: travelGuidePaths.israel },
       { label: "Airport-transfer destinations & quotes", to: "/transfers/" },
       { label: "Private driver for your route", to: "/private-driver/" },

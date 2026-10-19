@@ -144,7 +144,7 @@ describe("accommodation destination hub", () => {
       if (href.startsWith("/")) expect(router.matchRoutes(href.split("#")[0]!).at(-1)?.routeId).toBe(href.split("#")[0]!.replace(/\/$/, ""));
     }
     const eilat = cards.at(-1)!;
-    expect(eilat).toHaveAttribute("href", "/destinations/#eilat");
+    expect(eilat).toHaveAttribute("href", "/travel-blog/eilat/");
     expect(eilat).not.toHaveAttribute("target");
     expect(eilat).not.toHaveTextContent("israel-taxi.com");
     expect(screen.queryByText("Guide image sources")).not.toBeInTheDocument();
