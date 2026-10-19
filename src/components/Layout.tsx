@@ -20,7 +20,7 @@ export function Wordmark() {
   return (
     <Link to="/" className="flex shrink-0 items-center gap-1.5 sm:gap-2" aria-label="Israel Taxi & Travel home">
       <span aria-hidden className="grid h-7 w-7 shrink-0 place-items-center rounded-full bg-navy font-serif text-sm italic text-navy-foreground sm:h-8 sm:w-8 sm:text-base">i</span>
-      <span className="whitespace-nowrap font-serif text-[0.9rem] leading-none min-[375px]:text-base sm:text-xl">
+      <span className="whitespace-nowrap font-serif font-semibold text-[0.9rem] leading-none min-[375px]:text-base sm:text-xl">
         Israel Taxi <span className="italic text-primary">&amp;</span> Travel
       </span>
     </Link>
