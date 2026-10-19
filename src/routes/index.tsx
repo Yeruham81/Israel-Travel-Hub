@@ -152,13 +152,12 @@ function Home() {
       <div className="mx-auto mt-14 max-w-6xl space-y-8 px-4">
         {services.slice(0, 1).map((s, i) => (
           <section key={s.id} id={s.id} aria-labelledby={`${s.id}-h`} className={`scroll-mt-6 rounded-2xl border p-5 md:p-8 ${i % 2 ? "bg-accent/40" : "bg-card"}`}>
-            <header className="grid gap-4 border-b pb-5 md:grid-cols-[minmax(0,1fr)_auto] md:items-end">
+            <header className="border-b pb-5">
               <div className="min-w-0">
                 <p className="eyebrow">{s.tagline}</p>
                 <h2 id={`${s.id}-h`} className="mt-2 text-3xl md:text-4xl">{s.title}</h2>
                 <p className="mt-2 max-w-2xl text-muted-foreground">{s.text}</p>
               </div>
-              <Link to={s.hub.to} className="btn btn-primary shrink-0 justify-self-start">{s.hub.label} →</Link>
             </header>
             <div className="mt-6 grid gap-4 lg:grid-cols-2 lg:items-stretch" data-testid={`service-layout-${s.id}`}>
               <img src={s.feature.src} alt={s.feature.alt} loading="lazy" decoding="async" width={1400} height={880} className="aspect-[16/10] h-full min-h-64 w-full rounded-xl object-cover lg:max-h-[410px]" />
@@ -170,6 +169,9 @@ function Home() {
                   {s.cards.slice(3).map((c) => <CompactCard key={c.label} c={c} />)}
                 </ul>
               )}
+            </div>
+            <div className="mt-6 flex justify-center">
+              <Link to={s.hub.to} className="btn btn-primary">{s.hub.label} →</Link>
             </div>
           </section>
         ))}
@@ -178,13 +180,12 @@ function Home() {
       <div className="mx-auto mt-14 max-w-6xl space-y-8 px-4">
         {services.slice(1).map((s, i) => (
           <section key={s.id} id={s.id} aria-labelledby={`${s.id}-h`} className={`scroll-mt-6 rounded-2xl border p-5 md:p-8 ${(i + 1) % 2 ? "bg-accent/40" : "bg-card"}`}>
-            <header className="grid gap-4 border-b pb-5 md:grid-cols-[minmax(0,1fr)_auto] md:items-end">
+            <header className="border-b pb-5">
               <div className="min-w-0">
                 <p className="eyebrow">{s.tagline}</p>
                 <h2 id={`${s.id}-h`} className="mt-2 text-3xl md:text-4xl">{s.title}</h2>
                 <p className="mt-2 max-w-2xl text-muted-foreground">{s.text}</p>
               </div>
-              <Link to={s.hub.to} className="btn btn-primary shrink-0 justify-self-start">{s.hub.label} →</Link>
             </header>
             <div className="mt-6 grid gap-4 lg:grid-cols-2 lg:items-stretch" data-testid={`service-layout-${s.id}`}>
               <img src={s.feature.src} alt={s.feature.alt} loading="lazy" decoding="async" width={1400} height={880} className="aspect-[16/10] h-full min-h-64 w-full rounded-xl object-cover lg:max-h-[410px]" />
@@ -197,14 +198,18 @@ function Home() {
                 </ul>
               )}
             </div>
+            <div className="mt-6 flex justify-center">
+              <Link to={s.hub.to} className="btn btn-primary">{s.hub.label} →</Link>
+            </div>
           </section>
         ))}
       </div>
 
       <section id="guides" aria-labelledby="guides-h" className="mx-auto mt-16 max-w-6xl scroll-mt-6 px-4">
-        <div className="flex flex-wrap items-end justify-between gap-4"><div><p className="eyebrow">Before You Travel</p><h2 id="guides-h" className="mt-2 text-3xl">Practical Israel Travel Guides</h2><p className="mt-3 max-w-2xl text-muted-foreground">Clear answers about arrival, getting connected and choosing how to get around.</p></div><Link to="/guides/" className="btn btn-primary">Browse all guides →</Link></div>
+        <div><p className="eyebrow">Before You Travel</p><h2 id="guides-h" className="mt-2 text-3xl">Practical Israel Travel Guides</h2><p className="mt-3 max-w-2xl text-muted-foreground">Clear answers about arrival, getting connected and choosing how to get around.</p></div>
         <div className="mt-6 grid gap-5 sm:grid-cols-2 xl:grid-cols-3" data-testid="guide-row-one">{guideDirectory.filter((guide) => ["uber", "esim", "arrival"].includes(guide.id)).map((guide) => <GuideCard key={guide.id} guide={guide} headingLevel={3} />)}</div>
         <div className="mt-5 grid gap-5 sm:grid-cols-2 xl:grid-cols-3" data-testid="guide-row-two">{guideDirectory.filter((guide) => ["israel", "travelTips", "airport-journey-jerusalem"].includes(guide.id)).map((guide) => <GuideCard key={guide.id} guide={guide} headingLevel={3} />)}</div>
+        <div className="mt-7 flex justify-center"><Link to="/guides/" className="btn btn-primary">Browse all guides →</Link></div>
       </section>
       <section aria-labelledby="dest-h" className="mx-auto mt-20 max-w-6xl px-4">
         <div className="rounded-2xl bg-navy p-6 text-navy-foreground md:p-8">

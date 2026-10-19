@@ -47,6 +47,28 @@ describe("homepage marketing copy and top navigation", () => {
     ];
     const actualHeadings = screen.getAllByRole("heading", { level: 2 }).map(heading => heading.textContent);
     expect(actualHeadings).toEqual(sectionHeadings);
+
+    // Every broad-category CTA follows its own cards rather than preceding them.
+    for (const [sectionId, linkName, target] of [
+      ["transfers", "Explore Airport Transfers", "/transfers/"],
+      ["tours", "Explore Tours", "/tours/"],
+      ["shore-excursions", "Explore Shore Excursions", "/shore-excursions/"],
+      ["accommodation", "Explore Accommodation", "/hotels/"],
+      ["attractions", "Explore Attractions", "/attractions/"],
+    ] as const) {
+      const section = document.getElementById(sectionId)!;
+      const button = within(section).getByRole("link", { name: new RegExp(linkName, "i") });
+      expect(button).toHaveAttribute("href", target);
+      expect(section.querySelector("header")?.contains(button)).toBe(false);
+      expect(section.lastElementChild).toContainElement(button);
+      expect(section.querySelector('[data-testid="service-layout-' + sectionId + '"]')?.compareDocumentPosition(button) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
+    }
+    const guidesSection = document.getElementById("guides")!;
+    const guideButton = within(guidesSection).getByRole("link", { name: /Browse all guides/i });
+    expect(guideButton).toHaveAttribute("href", "/guides/");
+    expect(guidesSection.lastElementChild).toContainElement(guideButton);
+    expect(guidesSection.querySelector('[data-testid="guide-row-two"]')?.compareDocumentPosition(guideButton) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
+
     expect(screen.queryByRole("heading", { name: /Airport Transfers & Private Drivers/i })).not.toBeInTheDocument();
 
   });
