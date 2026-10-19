@@ -90,9 +90,12 @@ describe("shared sidebar navigation", () => {
     expect(brand).toHaveAttribute("href", "/");
     expect(brand.querySelector("span.font-serif.whitespace-nowrap")).toHaveTextContent("Israel Taxi & Travel");
     const byline = within(brand).getByTestId("wordmark-byline");
-    expect(byline).toHaveTextContent("MosheBarak");
-    expect(byline).toHaveClass("font-sans", "text-primary", "w-full", "justify-between");
-    expect(byline.querySelectorAll("span")).toHaveLength(2);
+    expect(byline).toHaveTextContent("Moshe Barak");
+    expect(byline).toHaveClass("font-sans", "text-primary", "w-full", "justify-center", "items-center");
+    expect(byline.querySelectorAll("span")).toHaveLength(1);
+    expect(byline.querySelector("span")).toHaveTextContent("Moshe Barak");
+    expect(byline.querySelector("svg")).toBeInTheDocument();
+    expect(byline.firstElementChild?.tagName.toLowerCase()).toBe("svg");
     expect(trigger).toHaveClass("shrink-0", "whitespace-nowrap", "px-3");
     fireEvent.click(trigger);
     let dialog = await screen.findByRole("dialog");
