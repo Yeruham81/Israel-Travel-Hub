@@ -42,7 +42,7 @@ describe("shore excursions", () => {
   it("expands the port choices in the shared mobile drawer and closes after navigation", async () => {
     const router = await routerAt();
     render(<RouterContextProvider router={router}><SiteHeader /></RouterContextProvider>);
-    fireEvent.click(screen.getByRole("button", { name: "Explore Israel" }));
+    fireEvent.click(screen.getByRole("button", { name: "Menu" }));
     const dialog = await screen.findByRole("dialog");
     fireEvent.click(within(dialog).getByRole("button", { name: "Choose a shore excursion port" }));
     fireEvent.click(within(dialog).getByRole("link", { name: "From Ashdod Port" }));
