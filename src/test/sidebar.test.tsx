@@ -88,7 +88,11 @@ describe("shared sidebar navigation", () => {
     const trigger = screen.getByRole("button", { name: "Menu" });
     const brand = screen.getByRole("link", { name: "Israel Taxi & Travel home" });
     expect(brand).toHaveAttribute("href", "/");
-    expect(brand.querySelector("span.whitespace-nowrap")).toHaveTextContent("Israel Taxi & Travel");
+    expect(brand.querySelector("span.font-serif.whitespace-nowrap")).toHaveTextContent("Israel Taxi & Travel");
+    const byline = within(brand).getByTestId("wordmark-byline");
+    expect(byline).toHaveTextContent("MosheBarak");
+    expect(byline).toHaveClass("font-sans", "text-primary", "w-full", "justify-between");
+    expect(byline.querySelectorAll("span")).toHaveLength(2);
     expect(trigger).toHaveClass("shrink-0", "whitespace-nowrap", "px-3");
     fireEvent.click(trigger);
     let dialog = await screen.findByRole("dialog");
