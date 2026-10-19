@@ -46,7 +46,8 @@ export const utilityNav: NavItem[] = [
 ];
 
 export const footerNav: NavItem[] = [
-  { label: "About", to: "/about/" },
+  { label: "Meet Moshe Barak", to: "/about-moshe-barak/" },
+  { label: "About & methodology", to: "/about/" },
 ];
 
 /** One shared structure for the desktop sidebar and the mobile menu. */

@@ -164,6 +164,7 @@ export function SiteFooter() {
             <li><Link to="/travel-blog/ben-gurion-airport-to-jerusalem/">Airport to Jerusalem</Link></li>
             <li><Link to="/guides/">Travel guides & tips</Link></li>
             <li><Link to="/travel-blog/getting-around-israel/">Getting around Israel</Link></li>
+            <li><Link to="/about-moshe-barak/">Meet Moshe Barak</Link></li>
             <li><Link to="/about/">About &amp; methodology</Link></li>
           </ul>
         </div>
