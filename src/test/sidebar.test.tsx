@@ -91,11 +91,13 @@ describe("shared sidebar navigation", () => {
     expect(brand.querySelector("span.font-serif.whitespace-nowrap")).toHaveTextContent("Israel Taxi & Travel");
     const byline = within(brand).getByTestId("wordmark-byline");
     expect(byline).toHaveTextContent("Moshe Barak");
-    expect(byline).toHaveClass("font-sans", "text-primary", "w-full", "justify-center", "items-center");
-    expect(byline.querySelectorAll("span")).toHaveLength(1);
-    expect(byline.querySelector("span")).toHaveTextContent("Moshe Barak");
-    expect(byline.querySelector("svg")).toBeInTheDocument();
-    expect(byline.firstElementChild?.tagName.toLowerCase()).toBe("svg");
+    expect(byline).toHaveClass("font-sans", "font-bold", "text-primary", "w-full", "justify-center", "items-center");
+    expect(byline.querySelectorAll("span")).toHaveLength(2);
+    expect(byline.lastElementChild).toHaveTextContent("Moshe Barak");
+    const taxiIcon = within(byline).getByTestId("custom-taxi-icon");
+    expect(taxiIcon).toHaveClass("bg-primary");
+    expect(taxiIcon).toHaveAttribute("aria-hidden", "true");
+    expect(taxiIcon).toHaveStyle({ mask: "url(/images/taxi-byline.png) center / contain no-repeat" });
     expect(trigger).toHaveClass("shrink-0", "whitespace-nowrap", "px-3");
     fireEvent.click(trigger);
     let dialog = await screen.findByRole("dialog");

@@ -1,6 +1,6 @@
 import { Link, useRouterState } from "@tanstack/react-router";
 import { useEffect, useId, useState, type ReactNode } from "react";
-import { CarTaxiFront, ChevronDown, Compass } from "lucide-react";
+import { ChevronDown, Compass } from "lucide-react";
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetDescription } from "@/components/ui/sheet";
 import { allNavGroups, serviceNav, serviceDomains, hotelNav, utilityNav, footerNav, type SidebarNavItem } from "@/data/nav";
 import { relFor } from "@/lib/outbound";
@@ -24,8 +24,8 @@ export function Wordmark() {
         <span className="whitespace-nowrap font-serif font-semibold text-[0.9rem] leading-none min-[375px]:text-base sm:text-xl">
           Israel Taxi <span className="italic text-primary">&amp;</span> Travel
         </span>
-        <span data-testid="wordmark-byline" className="flex w-full items-center justify-center gap-1.5 whitespace-nowrap font-sans text-[0.65rem] font-semibold leading-none tracking-[0.04em] text-primary sm:text-xs">
-          <CarTaxiFront className="size-3.5 shrink-0" aria-hidden="true" />
+        <span data-testid="wordmark-byline" className="flex w-full items-center justify-center gap-1.5 whitespace-nowrap font-sans text-[0.72rem] font-bold leading-none tracking-[0.025em] text-primary sm:text-[0.85rem]">
+          <span data-testid="custom-taxi-icon" aria-hidden="true" className="inline-block h-3.5 w-[18px] shrink-0 bg-primary sm:h-4 sm:w-5" style={{ mask: "url(/images/taxi-byline.png) center / contain no-repeat", WebkitMask: "url(/images/taxi-byline.png) center / contain no-repeat" }} />
           <span>Moshe Barak</span>
         </span>
       </span>
