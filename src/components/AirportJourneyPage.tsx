@@ -40,7 +40,7 @@ export function airportJourneyMeta(id: AirportJourneyId) {
     dateModified: PUBLISHED_REVIEW, author: authorLd(),
     publisher: { "@type": "Organization", name: SITE_NAME, url: CANONICAL_ORIGIN },
     image: new URL(guide.photo.src, CANONICAL_ORIGIN).href,
-    citation: [...sources.map((source) => source.url), guide.legacySource],
+    citation: sources.map((source) => source.url),
   })] };
 }
 
@@ -124,7 +124,7 @@ export function AirportJourneyPage({ id }: { id: AirportJourneyId }) {
             ))}</tbody>
           </table>
         </div>
-        <p className="mt-3 text-sm"><strong>*Price and time note:</strong> ₪ ranges are historical editorial estimates taken from the publisher's August 2026 guides; they are not current verified fares. Train and bus figures are per passenger, authorized taxis are metered per trip, rental totals depend on dates, and Moshe's displayed starting rate is a one-way weekday <strong>per-vehicle</strong> rate for up to four passengers, with possible supplements. All prices and operating schedules can change. Check the official planner/operator and a written quote for your date.</p>
+        <p className="mt-3 text-sm"><strong>*Price and time note:</strong> ₪ ranges are historical editorial estimates from August 2026; they are not current verified fares. Train and bus figures are per passenger, authorized taxis are metered per trip, rental totals depend on dates, and Moshe's displayed starting rate is a one-way weekday <strong>per-vehicle</strong> rate for up to four passengers, with possible supplements. All prices and operating schedules can change. Check the official planner/operator and a written quote for your date.</p>
       </Section>
       <PrivateRideCta id={id}/>
       <Section id="station-choice" title={"Train stations, changes and the final journey in " + g.city}>
@@ -154,9 +154,9 @@ export function AirportJourneyPage({ id }: { id: AirportJourneyId }) {
       <FaqList faqs={g.faqs}/>
       <PrivateRideCta id={id} variant="bottom"/>
       <SourcesDisclosure>
-        <p className="mt-3 text-sm text-muted-foreground">Schedules, routes, meeting points, fares and access can change. Refer to the official provider pages for actual travel dates. Historical costs were sourced from Moshe's earlier August 2026 editorial comparison and are labeled as estimates.</p>
+        <p className="mt-3 text-sm text-muted-foreground">Schedules, routes, meeting points, fares and access can change. Refer to the official provider pages for actual travel dates. Cost ranges are historical August 2026 editorial estimates, not verified current fares.</p>
         <ul className="mt-4 grid gap-3 sm:grid-cols-2">{sources.map(s=><li key={s.url}><a className="block rounded-lg border bg-card p-4 font-medium text-primary underline" href={s.url} target="_blank" rel="noopener noreferrer">{s.title} <span className="sr-only">(opens a new tab)</span></a></li>)}
-          <li><a className="block rounded-lg border bg-card p-4 font-medium text-primary underline" href={g.legacySource} target="_blank" rel="noopener noreferrer">Publisher's August 2026 route comparison (historical figures) <span className="sr-only">(opens a new tab)</span></a></li>
+
         </ul>
       </SourcesDisclosure>
       <RelatedLinks title="Plan your next step" items={[...g.related, ...airportJourneyIds.filter(other=>other!==id).map(other=>({label:"How to get to "+airportJourneyGuides[other].city,to:airportJourneyGuides[other].path}))]}/>

@@ -3,7 +3,7 @@ import { createRouter, rootRouteId } from "@tanstack/react-router";
 import { describe, expect, it } from "vitest";
 import { routeTree } from "@/routeTree.gen";
 import { allNavGroups, hotelNav, serviceNav, utilityNav, footerNav } from "@/data/nav";
-import { OWNER_BASE, providerLinks, offers, sources, linksForPage, affiliateConfig, partners } from "@/data/registry";
+import { providerLinks, offers, sources, linksForPage, affiliateConfig, partners } from "@/data/registry";
 import { isDisplayableLiveQuote, type LiveQuote } from "@/lib/booking";
 
 const router = createRouter({ routeTree, context: { queryClient: new QueryClient() }, trailingSlash: "always" });
@@ -49,7 +49,12 @@ describe("booking honesty", () => {
   it("only configured affiliate partners can have sponsored links; no referral claims live prices", () => {
     for (const l of providerLinks) {
       expect(l.mode).not.toBe("live_quote");
-      expect(l.url).toMatch(/^https:\/\//);
+      if (l.relationship === "publisher_operator") {
+        expect(l.url).toMatch(/^\/(?!\/)/);
+        expect(router.matchRoutes(l.url.split("#")[0]!).at(-1)?.routeId, l.id).not.toBe(rootRouteId);
+      } else {
+        expect(l.url).toMatch(/^https:\/\//);
+      }
       if (l.isAffiliate) {
         expect(affiliateConfig[l.id]?.trackingUrl, l.id).toBe(l.url);
         expect(partners.find((partner) => partner.id === l.partnerId)?.capability, l.id).toBe("affiliate_link");

@@ -1,8 +1,9 @@
+import { PrivacyInformationLink } from "@/components/PrivacyInformationLink";
 import { useRef, useState, type FormEvent } from "react";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { airportTransferPhotos } from "@/data/airportTransfers";
-import { shoreExcursionContact, shoreExcursionRates, shoreOnlineFormUrl, shorePorts, type ShorePortId } from "@/data/registry";
+import { shoreExcursionContact, shoreExcursionRates, shorePorts, type ShorePortId } from "@/data/registry";
 import { buildShoreQuoteDraft, emptyShoreQuote, validateShoreQuote, type ShoreQuoteFields } from "@/lib/shore-quote";
 
 export function ShoreQuoteForm({ portId, itineraryId, onItineraryChange }: { portId: ShorePortId; itineraryId: string; onItineraryChange: (id: string) => void }) {
@@ -44,8 +45,7 @@ export function ShoreQuoteForm({ portId, itineraryId, onItineraryChange }: { por
         <p className="mt-6 border-t border-white/20 pt-5 text-xs leading-relaxed opacity-75">Moshe Barak operates the publisher's local transport business. The starting prices above relate to his car-and-driver service; a licensed guide is a separate arrangement.</p>
       </div>
       <div className="p-5 sm:p-8">
-        <p className="text-sm leading-relaxed text-muted-foreground">Prepare your request, then open it in your email app to review and send. Prefer an online form? <a href={shoreOnlineFormUrl(portId)} target="_blank" rel="noopener noreferrer" className="font-medium text-primary underline">Use Moshe's existing {port.name} contact form<span className="sr-only"> (opens in a new tab)</span></a>.</p>
-        <form onSubmit={prepare} noValidate className="mt-6" aria-label={`${port.name} shore excursion quote request`}>
+        <form onSubmit={prepare} noValidate aria-label={`${port.name} shore excursion quote request`}>
           {errors.length > 0 && <div ref={errorRef} tabIndex={-1} role="alert" className="mb-5 rounded-xl border border-destructive p-4 text-sm text-destructive"><p className="font-semibold">Please check these details:</p><ul className="mt-2 list-disc pl-5">{errors.map((error) => <li key={error}>{error}</li>)}</ul></div>}
           <div className="grid gap-5 sm:grid-cols-2">
             <label className="text-sm font-medium">Full name *<Input name="name" autoComplete="name" required maxLength={120} value={fields.name} onChange={(event) => update("name", event.target.value)} className={fieldClass} /></label>
@@ -65,9 +65,9 @@ export function ShoreQuoteForm({ portId, itineraryId, onItineraryChange }: { por
             {Number(fields.passengers) > 4 && <p className="rounded-lg bg-secondary p-3 text-sm sm:col-span-2">Your party needs a separate group quote. The published starting rates for up to four passengers do not apply to your whole group.</p>}
             <label className="text-sm font-medium sm:col-span-2">Priorities, child seats, mobility needs or other requests<Textarea name="notes" maxLength={1500} rows={4} placeholder="Must-see stops, children's ages, walking preferences, equipment, luggage or a request for a licensed guide" value={fields.notes} onChange={(event) => update("notes", event.target.value)} className="mt-2 bg-background text-base" /></label>
           </div>
-          <label className="mt-5 flex items-start gap-3 text-sm leading-relaxed"><input name="consent" type="checkbox" required checked={fields.consent} onChange={(event) => update("consent", event.target.checked)} className="mt-1 h-4 w-4 shrink-0 accent-primary" /><span>I agree to share these details with Moshe Barak for this inquiry. <a href={shoreExcursionContact.privacyUrl} target="_blank" rel="noopener noreferrer" className="underline">Privacy policy<span className="sr-only"> (opens in a new tab)</span></a></span></label>
+          <label className="mt-5 flex items-start gap-3 text-sm leading-relaxed"><input name="consent" type="checkbox" required checked={fields.consent} onChange={(event) => update("consent", event.target.checked)} className="mt-1 h-4 w-4 shrink-0 accent-primary" /><span>I agree to share these details with Moshe Barak for this inquiry. <PrivacyInformationLink /></span></label>
           <button type="submit" className="btn btn-primary mt-6 w-full sm:w-auto">Prepare my excursion request</button>
-          <p className="mt-3 text-xs text-muted-foreground">Your request is sent only when you send the email or submit the existing online form. A booking requires Moshe's confirmation.</p>
+          <p className="mt-3 text-xs text-muted-foreground">Your request is sent only when you send the email. A booking requires Moshe's confirmation.</p>
         </form>
         {draft && <div role="status" className="mt-6 rounded-xl border border-primary/30 bg-secondary/60 p-5">
           <h3 className="text-xl">Your request is ready to send</h3><p className="mt-2 text-sm leading-relaxed">Open your email app, review the details and send to <strong>{shoreExcursionContact.email}</strong>. Your request has not been sent yet.</p>

@@ -109,9 +109,10 @@ describe("private Ben Gurion transfers", () => {
     expect(screen.queryByRole("link", { name: "Open email to Moshe" })).not.toBeInTheDocument();
   });
 
-  it("retains a usable online-form alternative and copy fallback for email clients", async () => {
+  it("keeps privacy information on this site and a copy fallback for email clients", async () => {
     const { container } = await renderAirport();
-    expect(screen.getByRole("link", { name: /Use Moshe's existing contact form/ })).toHaveAttribute("href", "https://www.israel-taxi.com/airport-transfers/#contact-me");
+    expect(screen.getByRole("link", { name: "Privacy information" })).toHaveAttribute("href", "/about-moshe-barak/#privacy");
+    expect(screen.queryByText(/Prefer an online form|existing .*contact form/)).not.toBeInTheDocument();
     chooseDestination("tel-aviv");
     fillRequest(); fireEvent.click(screen.getByRole("button", { name: "Prepare my quote request" }));
     fireEvent.click(screen.getByRole("button", { name: "Copy request" }));

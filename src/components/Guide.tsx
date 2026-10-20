@@ -109,6 +109,20 @@ export function SourceList({ ids, intro = "“Checked” dates refer to the fact
   );
 }
 
+function ProviderAction({ link: l, pageId, className, children }: { link: ProviderLink; pageId: string; className: string; children: ReactNode }) {
+  const internal = l.url.startsWith("/");
+  return <a
+    href={l.url}
+    target={internal ? undefined : "_blank"}
+    rel={internal ? undefined : relFor(l.isAffiliate)}
+    onClick={internal ? undefined : () => recordOutboundClick({ pageId, productId: l.id, offerId: l.id })}
+    className={className}
+  >
+    {children} <span aria-hidden>{internal ? "→" : "↗"}</span>
+    {!internal && <span className="sr-only"> (opens in a new tab)</span>}
+  </a>;
+}
+
 export function ProviderCard({ link: l, pageId }: { link: ProviderLink; pageId: string }) {
   return (
     <li className="rounded-2xl border bg-card p-5 md:p-6" data-testid="provider-card">
@@ -119,16 +133,8 @@ export function ProviderCard({ link: l, pageId }: { link: ProviderLink; pageId: 
       <p className="mt-2 text-muted-foreground">{l.summary}</p>
       <p className="mt-3 text-sm"><span className="font-medium">Confirm on the offer:</span> {l.confirm.join(", ")}.</p>
       <div className="mt-4 flex flex-wrap items-center gap-3">
-        <a
-          href={l.url}
-          target="_blank"
-          rel={relFor(l.isAffiliate)}
-          onClick={() => recordOutboundClick({ pageId, productId: l.id, offerId: l.id })}
-          className="btn btn-primary"
-        >
-          {l.ctaLabel} <span aria-hidden>↗</span><span className="sr-only"> (opens in a new tab)</span>
-        </a>
-        <p className="text-xs text-muted-foreground">{modeNote[l.mode]}{l.reentryNote ? ` ${l.reentryNote}` : ""}</p>
+        <ProviderAction link={l} pageId={pageId} className="btn btn-primary">{l.ctaLabel}</ProviderAction>
+        <p className="text-xs text-muted-foreground">{l.url.startsWith("/") ? "Review the service and prepare a quote request." : modeNote[l.mode]}{l.reentryNote ? ` ${l.reentryNote}` : ""}</p>
       </div>
     </li>
   );
@@ -166,12 +172,12 @@ export function EndCta({ title, links, pageId }: { title: string; links: Provide
   return (
     <section className="mt-14 rounded-2xl bg-navy p-8 text-navy-foreground">
       <h2 className="text-3xl">{title}</h2>
-      <p className="mt-2 opacity-85">Confirm the price and details on the provider's own site before paying.</p>
+      <p className="mt-2 opacity-85">Confirm the final price and arrangements with the provider before paying.</p>
       <div className="mt-6 flex flex-wrap gap-3">
         {links.map((l) => (
-          <a key={l.id} href={l.url} target="_blank" rel={relFor(l.isAffiliate)} onClick={() => recordOutboundClick({ pageId, productId: l.id, offerId: l.id })} className="btn btn-light">
-            {l.providerName}: {l.ctaLabel.replace(/ on .+$/, "")} <span aria-hidden>↗</span><span className="sr-only"> (opens in a new tab)</span>
-          </a>
+          <ProviderAction key={l.id} link={l} pageId={pageId} className="btn btn-light">
+            {l.providerName}: {l.ctaLabel.replace(/ on .+$/, "")}
+          </ProviderAction>
         ))}
       </div>
     </section>

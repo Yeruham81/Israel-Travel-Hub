@@ -67,7 +67,7 @@ export type OfferCategory = "prebooked" | "on_arrival";
  * How a traveler continues with an offer.
  * - live_quote: a configured API returned a price for the traveler's exact context (none configured yet).
  * - provider_redirect: regular link to the provider's own site; traveler enters details there.
- * - provider_inquiry: traveler requests a quote / contacts the provider on the provider's site.
+ * - provider_inquiry: traveler requests a quote / contacts the provider through a service page.
  * - official_info: official information / reservation page (e.g. national parks, airport authority).
  */
 export type BookingMode = "live_quote" | "provider_redirect" | "provider_inquiry" | "official_info";
@@ -262,8 +262,6 @@ export const airportTransferRates: AirportTransferRate[] = ([
 
 export const airportTransferContact = {
   name: "Moshe Barak", email: "reservations@israel-taxi.com",
-  onlineFormUrl: `${OWNER_BASE}/airport-transfers/#contact-me`,
-  privacyUrl: `${OWNER_BASE}/privacy-policy/`,
   deliveryMode: "email_draft" as const,
 };
 
@@ -276,8 +274,7 @@ export const privateDriverServices = [
 export type PrivateDriverServiceId = typeof privateDriverServices[number]["id"];
 export const privateDriverContact = {
   name: airportTransferContact.name, email: airportTransferContact.email,
-  onlineFormUrl: `${OWNER_BASE}/private-driver-in-israel/#contact-me`,
-  privacyUrl: airportTransferContact.privacyUrl, deliveryMode: "email_draft" as const,
+  deliveryMode: "email_draft" as const,
 };
 
 export const shorePorts = {
@@ -312,9 +309,8 @@ export const shoreExcursionRates: ShoreExcursionRate[] = ([
 
 export const shoreExcursionContact = {
   name: airportTransferContact.name, email: airportTransferContact.email,
-  privacyUrl: airportTransferContact.privacyUrl, deliveryMode: "email_draft" as const,
+  deliveryMode: "email_draft" as const,
 };
-export const shoreOnlineFormUrl = (portId: ShorePortId) => `${OWNER_BASE}${shorePorts[portId].path}#contact-me`;
 
 /** Only these four airport destinations have individual transfer guides. */
 export const airportTransferRoutes = [
@@ -953,7 +949,7 @@ export const tiberiasHotelRecommendations: (HotelRecommendation & { resortFacts:
   },
   {
     id: "tib-tiberia", cityId: "tiberias", areaId: "tiberias", name: "Tiberia Hotel", style: "Small central hotel in a restored building",
-    summary: "A smaller central-hotel option from the original guide, in a restored historic building. Compare the final room total with larger hotels and hostels; being in this group is not a promise of the lowest price.",
+    summary: "A smaller central-hotel option in a restored historic building. Compare the final room total with larger hotels and hostels; being in this group is not a promise of the lowest price.",
     bestFor: "Independent visitors who need a simple town base and can confirm the room's essential facilities.",
     watch: "The primary source is the operator's public profile. Confirm reception and late arrival, bathroom, accessibility, parking and all required facilities directly; a pool or spa is not assumed.", sourceId: "hotel-tib-tiberia-official",
     resortFacts: { location: "Central Tiberias", beach: "Town base; arrange swimming separately", spa: "No spa or pool assumed; confirm required facilities", agePolicy: "Confirm with the property for the selected room", children: "Check occupancy and sleeping arrangements directly", meals: "Confirm whether any meals are included" },
@@ -1019,14 +1015,14 @@ export const haifaHotelRecommendations: (HotelRecommendation & { resortFacts: Re
   },
   {
     id: "haifa-nof", cityId: "haifa", areaId: "haifa", name: "Nof Hotel (Haifa Bay View)", style: "Carmel hotel overlooking Haifa Bay",
-    summary: "The hotel listed as Haifa Bay View in the original guide is now presented by Nara Hotels as Nof Hotel. Its Carmel location and bay outlook suit an urban sightseeing base, rather than a stay beside a swimming beach.",
+    summary: "Also known as Haifa Bay View, this property is now presented by Nara Hotels as Nof Hotel. Its Carmel location and bay outlook suit an urban sightseeing base, rather than a stay beside a swimming beach.",
     bestFor: "Visitors comparing a Carmel address and bay views with larger full-service hotels.",
     watch: "The booking site may retain the Bay View name. Confirm the property at 101 Hanassi Avenue, the room, meals and parking, and ask directly about any leisure facility essential to your stay.", sourceId: "hotel-haifa-nof-official",
     resortFacts: { location: "101 Hanassi Avenue, Carmel Center", beach: "Bay outlook from the hill; separate journey to the beach", spa: "Gym advertised; confirm any other required leisure facilities", agePolicy: "Confirm room and facility policies for your party", children: "Check the exact room's occupancy and sleeping arrangements", meals: "Check breakfast or dining inclusions in the selected rate" },
   },
   {
     id: "haifa-port-inn", cityId: "haifa", areaId: "haifa", name: "Port Inn Haifa", style: "Downtown guesthouse · confirm the room format",
-    summary: "A smaller downtown accommodation option on Derech Yafo from the original guide. Compare its exact room and total with conventional hotels, checking private versus shared facilities and the arrival arrangements directly.",
+    summary: "A smaller downtown accommodation option on Derech Yafo. Compare its exact room and total with conventional hotels, checking private versus shared facilities and the arrival arrangements directly.",
     bestFor: "Independent visitors seeking a lower-city base and willing to verify the room's essential details.",
     watch: "Current primary information is limited to the operator's indexed public profile. Confirm bathroom, room capacity, meals, accessibility and late arrival; detailed facilities and a permanently low price are not assumed.", sourceId: "hotel-haifa-port-inn-official",
     resortFacts: { location: "34 Derech Yafo, lower city", beach: "Downtown base; arrange beach visits separately", spa: "No resort-spa or pool facilities assumed", agePolicy: "Confirm the chosen room's guest policy directly", children: "Confirm capacity and room suitability with the property", meals: "Confirm whether any meals or kitchen access are included" },
@@ -1255,7 +1251,7 @@ export const offers: Offer[] = [
     },
     maxPassengersKnown: 4,
     ctaLabel: "Request a quote",
-    url: `${OWNER_BASE}/airport-transfers/`,
+    url: "/travel-blog/ben-gurion-airport-to-jerusalem/#request-quote",
     isAffiliate: false,
     isInformational: false,
     confirmOnOffer: commonConfirm,
@@ -1482,7 +1478,7 @@ export const providerLinks: ProviderLink[] = [
   {
     id: "tlv-ta-moshe", pageIds: ["tlv-telaviv"], ...moshe, mode: "provider_inquiry",
     title: "Private pre-booked transfer", summary: "Local driver business. Ask for a quote for your Tel Aviv or Jaffa address, party size and arrival time.",
-    ctaLabel: "Request a quote on Israel-Taxi.com", url: `${OWNER_BASE}/airport-transfers/`, isAffiliate: false,
+    ctaLabel: "Request a quote", url: "/travel-blog/ben-gurion-airport-to-tel-aviv/#request-quote", isAffiliate: false,
     reentryNote: "Your details are not passed on. Include flight time, passengers, luggage and address in your request.",
     confirm: ["Final price and surcharges", "Vehicle size", "Meeting point and waiting time", "Child seats"], sourceId: "moshe-airport-transfers",
   },
@@ -1508,8 +1504,8 @@ export const providerLinks: ProviderLink[] = [
   {
     id: "private-driver-moshe", pageIds: ["private-driver", "tours-hub"], ...moshe, mode: "provider_inquiry",
     title: "Private driver by the day", summary: "Hire a local driver for multi-stop days or intercity transfers. Itinerary and price agreed by inquiry.",
-    ctaLabel: "Request a quote on Israel-Taxi.com", url: `${OWNER_BASE}/private-driver-in-israel/`, isAffiliate: false,
-    reentryNote: "Nothing is sent from this page. Contact the operator on their site.", confirm: ["Hours included", "Entrance fees not included unless stated", "Guide vs driver only"], sourceId: "owner-private-driver",
+    ctaLabel: "Request a quote", url: "/private-driver/#request-quote", isAffiliate: false,
+    reentryNote: "Include your date, route and party details. Moshe will confirm the arrangements with you.", confirm: ["Hours included", "Entrance fees not included unless stated", "Guide vs driver only"], sourceId: "owner-private-driver",
   },
   // Tours
   {
@@ -1521,14 +1517,14 @@ export const providerLinks: ProviderLink[] = [
   {
     id: "private-daytrips-moshe", pageIds: ["tours-hub", "masada"], ...moshe, mode: "provider_inquiry",
     title: "Private day trips", summary: "Private day trips with a local driver, planned around your own itinerary.",
-    ctaLabel: "Request a quote on Israel-Taxi.com", url: `${OWNER_BASE}/private-day-trips/`, isAffiliate: false,
-    reentryNote: "Nothing is sent from this page. Contact the operator on their site.", confirm: ["Exact itinerary and stops", "Whether a licensed guide is included", "Entrance fees", "Travel requirements for crossings"], sourceId: "owner-private-day-trips",
+    ctaLabel: "Request a quote", url: "/private-driver/#request-quote", isAffiliate: false,
+    reentryNote: "Include your date, route and party details. Moshe will confirm the arrangements with you.", confirm: ["Exact itinerary and stops", "Whether a licensed guide is included", "Entrance fees", "Travel requirements for crossings"], sourceId: "owner-private-day-trips",
   },
   // Shore excursions (port-specific pages only)
   {
     id: "ashdod-shore-moshe", pageIds: ["shore-ashdod", "shore-hub"], ...moshe, mode: "provider_inquiry",
     title: "Private car-and-driver shore excursion from Ashdod", summary: "Local driver business with suggested Tel Aviv/Jaffa, Jerusalem and Masada/Dead Sea days from Ashdod Port. Itinerary, price and timing agreed by inquiry.",
-    ctaLabel: "Request a quote on Israel-Taxi.com", url: `${OWNER_BASE}/ashdod-shore-excursions/`, isAffiliate: false,
+    ctaLabel: "Request a quote", url: "/ashdod-shore-excursions/#request-quote", isAffiliate: false,
     reentryNote: "Nothing is sent from this page. Include ship name, date, disembarkation and all-aboard times and party size in your request.",
     confirm: ["Price and what it covers", "Pickup point at the port", "Driver only or licensed guide", "Return timing for your all-aboard time", "Cancellation terms"], sourceId: "owner-ashdod-shore",
   },
@@ -1541,7 +1537,7 @@ export const providerLinks: ProviderLink[] = [
   {
     id: "haifa-shore-moshe", pageIds: ["shore-haifa", "shore-hub"], ...moshe, mode: "provider_inquiry",
     title: "Private car-and-driver shore excursion from Haifa", summary: "Local driver business with suggested Akko/Rosh Hanikra, Tel Aviv/Jaffa, Nazareth/Sea of Galilee and Jerusalem days from Haifa Port. Itinerary and price by inquiry.",
-    ctaLabel: "Request a quote on Israel-Taxi.com", url: `${OWNER_BASE}/haifa-shore-excursions/`, isAffiliate: false,
+    ctaLabel: "Request a quote", url: "/haifa-shore-excursions/#request-quote", isAffiliate: false,
     reentryNote: "Nothing is sent from this page. Include ship name, date, disembarkation and all-aboard times and party size in your request.",
     confirm: ["Whether the itinerary fits your port-call time", "Pickup point at the port", "Driver only or licensed guide", "Entrance fees", "Cancellation terms"], sourceId: "owner-haifa-shore",
   },

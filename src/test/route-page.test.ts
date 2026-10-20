@@ -12,9 +12,9 @@ describe("registry & routes", () => {
       expect(r.matchRoutes(p).at(-1)?.routeId).not.toBe(rootRouteId);
     }
   });
-  it("uses real https outbound URLs, none affiliate", () => {
+  it("keeps local inquiries internal and uses HTTPS for other providers, none affiliate", () => {
     for (const o of offers) {
-      expect(o.url).toMatch(/^https:\/\//);
+      expect(o.url).toMatch(o.operatorId === "moshe-barak" ? /^\/(?!\/)/ : /^https:\/\//);
       expect(o.isAffiliate).toBe(false);
     }
     expect(sources.every((s) => s.url.startsWith("https://"))).toBe(true);

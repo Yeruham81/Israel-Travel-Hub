@@ -1,3 +1,4 @@
+import { PrivacyInformationLink } from "@/components/PrivacyInformationLink";
 import { useState, type FormEvent } from "react";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -51,7 +52,7 @@ export function HomeContactForm({ context = "homepage" }: { context?: "homepage"
           </div>
           <label className="block text-sm font-medium">Subject *<Input name="subject" required maxLength={160} value={subject} onChange={e => update(setSubject, e.target.value)} placeholder="What would you like to ask?" className="mt-2 h-11 bg-background" /></label>
           <label className="block text-sm font-medium">Your message *<Textarea name="message" required maxLength={4000} rows={5} value={message} onChange={e => update(setMessage, e.target.value)} placeholder={context === "about" ? "Tell me how I can help…" : "Tell us how we can help…"} className="mt-2 bg-background" /></label>
-          <label className="flex items-start gap-3 text-sm leading-relaxed"><input type="checkbox" name="consent" checked={consent} onChange={e => { setConsent(e.target.checked); setPrepared(null); }} required className="mt-1 size-4 shrink-0 accent-primary" /><span>I agree to share these details with Moshe Barak to respond to my enquiry. <a href={airportTransferContact.privacyUrl} target="_blank" rel="noopener noreferrer" className="underline">Privacy policy</a>.</span></label>
+          <label className="flex items-start gap-3 text-sm leading-relaxed"><input type="checkbox" name="consent" checked={consent} onChange={e => { setConsent(e.target.checked); setPrepared(null); }} required className="mt-1 size-4 shrink-0 accent-primary" /><span>I agree to share these details with Moshe Barak to respond to my enquiry. <PrivacyInformationLink />.</span></label>
           <button className="btn btn-primary" type="submit">Prepare my message</button>
           <p className="text-xs text-muted-foreground">Preparing a message does not send it. You must open your email app and press Send.</p>
         </form>

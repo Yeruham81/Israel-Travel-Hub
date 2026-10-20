@@ -21,10 +21,8 @@ export type AirportJourneyGuide = {
   stations: { name: string; time: string; usefulFor: string }[];
   connections: string[]; weekend: string[]; advice: string[]; faqs: { q: string; a: string }[];
   related: { label: string; to: LinkProps["to"] }[];
-  legacySource: string;
 };
 
-const airport = "https://www.israel-taxi.com/travel-blog/";
 const commonTaxi = [
   "For an official on-demand airport taxi, use Gett or a self-service kiosk to obtain a ride code and join the authorized queue: Terminal 3 ground floor, Exit 03; Terminal 1 main arrivals exit. A Gett ride scheduled in advance has different instructions (Terminal 3 Level 2, Exit 23).",
   "Official airport taxis use a regulated meter, not the published private-transfer starting rate. Actual cost depends on the route, traffic, tariffs and allowed extras. Keep your ride code and receipt, and confirm luggage space before boarding.",
@@ -50,7 +48,6 @@ const byId: Record<AirportJourneyId, AirportJourneyGuide> = {
     photo: airportTransferPhotos["jerusalem"]!,
     privatePath: "/travel-blog/ben-gurion-airport-to-jerusalem/",
     privateLabel: "Request a private Jerusalem transfer",
-    legacySource: airport + "ben-gurion-airport-to-jerusalem/",
     options: [
       { id: "rail", name: "Direct train", time: "About 26–30 min to Navon station", cost: "≈ ₪20–30 per person*", bestFor: "Solo/couples, light luggage", doorToDoor: "No", availability: "Not during the main Shabbat break", heading: "Taking the direct train to Jerusalem–Yitzhak Navon", paragraphs: [
         "The rail journey is generally faster than driving in highway traffic. Jerusalem–Yitzhak Navon station sits next to the central bus station and near Jaffa Road light rail, not in the Old City or outside every hotel.",
@@ -108,7 +105,6 @@ const byId: Record<AirportJourneyId, AirportJourneyGuide> = {
     photo: airportTransferPhotos["tel-aviv"]!,
     privatePath: "/travel-blog/ben-gurion-airport-to-tel-aviv/",
     privateLabel: "Request a private Tel Aviv or Jaffa transfer",
-    legacySource: airport + "ben-gurion-airport-to-tel-aviv/",
     options: [
       { id: "rail", name: "Train to Tel Aviv", time: "About 11–30 min to a station", cost: "≈ ₪10–15 per person*", bestFor: "Quick, lower-cost weekday arrival", doorToDoor: "No", availability: "Not during the main Shabbat break", heading: "Choosing the right Tel Aviv railway station", paragraphs: [
         "Check whether HaHagana, HaShalom, Savidor Central or University best fits the actual street of your destination. HaShalom is convenient for Azrieli/Sarona, while Savidor has intercity and local connections. HaHagana can suit southern-city onward travel.",
@@ -175,7 +171,6 @@ const byId: Record<AirportJourneyId, AirportJourneyGuide> = {
     photo: airportTransferPhotos["haifa"]!,
     privatePath: "/travel-blog/ben-gurion-airport-to-haifa/",
     privateLabel: "Request a private Haifa transfer",
-    legacySource: airport + "ben-gurion-airport-to-haifa/",
     options: [
       { id: "rail", name: "Train to Haifa", time: "About 80–110 min to a station", cost: "≈ ₪30–45 per person*", bestFor: "Budget-minded intercity travel", doorToDoor: "No", availability: "Varies; not during the main Shabbat break", heading: "Direct rail to Haifa: which station should you choose?", paragraphs: [
         "Depending on the service, the journey may take about 80 minutes to Hof HaCarmel or roughly 90–100 minutes to Center HaShmona. Trains do not always serve the same stops.",
@@ -188,7 +183,7 @@ const byId: Record<AirportJourneyId, AirportJourneyGuide> = {
         ...commonTransfer, "It can be useful for Mount Carmel accommodation, larger parties or a cruise departure. If travelling to a port, give the ship name, terminal, check-in deadline and required drop-off. Flight-delay and road contingencies matter."
       ], checklist: ["Confirm luggage and vehicle size.", "If travelling to a ship, share boarding deadlines.", "Request the exact Haifa hotel or terminal entrance."] },
       { id: "bus", name: "Bus 905 (limited)", time: "About 110–125+ min when available", cost: "≈ ₪20–30 per person*", bestFor: "Flexible arrivals within its window", doorToDoor: "No", availability: "Very restricted weekend/night window; verify", heading: "What about airport-to-Haifa bus 905?", paragraphs: [
-        "Bus 905 appears in route listings for airport–Haifa, but it is not a full-day bus alternative to the train. The original guide described a narrow Saturday-night/early-Sunday operating window; the dated public journey planner is essential.",
+        "Bus 905 appears in route listings for airport–Haifa, but it is not a full-day bus alternative to the train. Historical descriptions of a narrow Saturday-night/early-Sunday operating window need date-specific confirmation in the public journey planner.",
         "Verify the stop served by your particular bus and whether it matches your hotel. If it ends at HaMifrats or another major station you may still need a local connection."
       ], checklist: ["Confirm a real departure for your landing date.", "Check the exact Terminal 3 boarding stop and city destination.", "Plan a second option if the timing does not work."] },
       { id: "rental", name: "Rental car", time: "About 75–110+ min driving plus collection", cost: "Rental + insurance, tolls, fuel and parking", bestFor: "A northern Israel road trip", doorToDoor: "Yes, where permitted", availability: "Collection hours vary", heading: "Renting for Haifa and northern Israel", paragraphs: [
@@ -238,7 +233,6 @@ const byId: Record<AirportJourneyId, AirportJourneyGuide> = {
     photo: airportTransferPhotos["dead-sea"]!,
     privatePath: "/travel-blog/ben-gurion-airport-to-ein-bokek/",
     privateLabel: "Request a private Ein Bokek transfer",
-    legacySource: airport + "ben-gurion-airport-to-ein-bokek/",
     options: [
       { id: "rail", name: "Train + bus via Jerusalem", time: "About 3–4+ hours with transfers", cost: "≈ ₪35–50 per person total*", bestFor: "Daytime, light luggage, flexible plans", doorToDoor: "No", availability: "Bus and rail both required; limited late service", heading: "Step by step: airport train and bus via Jerusalem", paragraphs: [
         "Take the train to Jerusalem–Yitzhak Navon, exit the deep station and walk into Jerusalem Central Bus Station. Allow time to locate the correct bus platform rather than planning a tight same-minute transfer.",

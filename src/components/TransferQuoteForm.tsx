@@ -1,3 +1,4 @@
+import { PrivacyInformationLink } from "@/components/PrivacyInformationLink";
 import { useRef, useState, type FormEvent } from "react";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -43,8 +44,7 @@ export function TransferQuoteForm({ destinationId, onDestinationChange, fixedDes
           <p className="mt-6 border-t border-white/20 pt-5 text-xs leading-relaxed opacity-75">Moshe Barak operates the publisher's local transport business. The prices above relate to this service.</p>
         </div>
         <div className="p-5 sm:p-8">
-          <p className="text-sm leading-relaxed text-muted-foreground">Prepare your request below, then open it in your email app to review and send to Moshe. Prefer an online form? <a href={airportTransferContact.onlineFormUrl} target="_blank" rel="noopener noreferrer" className="font-medium text-primary underline">Use Moshe's existing contact form<span className="sr-only"> (opens in a new tab)</span></a>.</p>
-          <form onSubmit={prepare} noValidate className="mt-6" aria-label="Private airport transfer quote request">
+          <form onSubmit={prepare} noValidate aria-label="Private airport transfer quote request">
             {errors.length > 0 && <div ref={errorRef} tabIndex={-1} role="alert" className="mb-5 rounded-xl border border-destructive p-4 text-sm text-destructive"><p className="font-semibold">Please check these details:</p><ul className="mt-2 list-disc pl-5">{errors.map((error) => <li key={error}>{error}</li>)}</ul></div>}
             <div className="grid gap-5 sm:grid-cols-2">
               <label className="text-sm font-medium">Full name *<Input name="name" autoComplete="name" required maxLength={120} value={fields.name} onChange={(e) => update("name", e.target.value)} className={fieldClass} /></label>
@@ -63,9 +63,9 @@ export function TransferQuoteForm({ destinationId, onDestinationChange, fixedDes
               {Number(fields.passengers) > 4 && <p className="self-center rounded-lg bg-secondary p-3 text-sm sm:col-span-2">For more than four passengers, ask for a group quote. The published car starting prices do not apply to your whole group.</p>}
               <label className="text-sm font-medium sm:col-span-2">Child seats or additional requests<Textarea name="notes" maxLength={1500} rows={4} placeholder="Children's ages, strollers, extra luggage, accessibility needs or a return-trip request" value={fields.notes} onChange={(e) => update("notes", e.target.value)} className="mt-2 bg-background text-base" /></label>
             </div>
-            <label className="mt-5 flex items-start gap-3 text-sm leading-relaxed"><input name="consent" type="checkbox" required checked={fields.consent} onChange={(e) => update("consent", e.target.checked)} className="mt-1 h-4 w-4 shrink-0 accent-primary" /><span>I agree to share these details with Moshe Barak for this quote request. <a href={airportTransferContact.privacyUrl} target="_blank" rel="noopener noreferrer" className="underline">Privacy policy<span className="sr-only"> (opens in a new tab)</span></a></span></label>
+            <label className="mt-5 flex items-start gap-3 text-sm leading-relaxed"><input name="consent" type="checkbox" required checked={fields.consent} onChange={(e) => update("consent", e.target.checked)} className="mt-1 h-4 w-4 shrink-0 accent-primary" /><span>I agree to share these details with Moshe Barak for this quote request. <PrivacyInformationLink /></span></label>
             <button type="submit" className="btn btn-primary mt-6 w-full sm:w-auto">Prepare my quote request</button>
-            <p className="mt-3 text-xs text-muted-foreground">Your request is sent only when you send the email or submit the existing online form. A booking requires Moshe's confirmation.</p>
+            <p className="mt-3 text-xs text-muted-foreground">Your request is sent only when you send the email. A booking requires Moshe's confirmation.</p>
           </form>
           {draft && <div role="status" className="mt-6 rounded-xl border border-primary/30 bg-secondary/60 p-5">
             <h3 className="text-xl">Your request is ready to send</h3><p className="mt-2 text-sm leading-relaxed">Open your email app, review the details and send to <strong>{airportTransferContact.email}</strong>. Your request has not been sent yet.</p>

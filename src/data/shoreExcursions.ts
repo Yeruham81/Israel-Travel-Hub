@@ -52,7 +52,7 @@ const itineraryDetails: Record<string, ItineraryDetails> = {
   },
   "ashdod-masada-jerusalem": {
     photo: airportTransferPhotos["dead-sea"]!,
-    description: "The original operator page also offers a combined desert-and-Jerusalem route. Treat it as an ambitious custom request, with priorities and shorter stops agreed before booking.",
+    description: "Combining the desert with Jerusalem is an ambitious custom request, with priorities and shorter stops agreed before booking.",
     bestFor: "A long port call with carefully chosen highlights",
     planningNote: "Request only for a sufficiently long call. The provider must confirm feasibility; a published route does not mean every port schedule can accommodate it.",
     highlights: ["Masada", "Dead Sea", "Selected Jerusalem stops"],
@@ -93,8 +93,8 @@ const sharedFaqs = [
   { q: "Can the itinerary be customized?", a: "Yes, request different priorities, a slower pace or another destination. The operator must confirm that the route fits your hours ashore, site access and return buffer. Changes can alter the price." },
   { q: "Can I request a van, child seats or an accessible vehicle?", a: "Include all passengers, children's ages, mobility needs and any equipment in the inquiry. Vans and minibuses are available by request, subject to confirmation. Do not assume a suitable vehicle or seat is reserved until the operator confirms it." },
   { q: "Where will I meet the driver?", a: "Agree the precise meeting point for your ship, berth and port procedures in writing. Ask whether a terminal transfer or port shuttle is needed; do not assume every driver can wait beside the ship." },
-  { q: "What happens if the ship is delayed or cancels the port call?", a: "Send any schedule change to the operator promptly. The original local pages advertise schedule coordination and a 24-hour cancellation window, but your written offer should specify the cutoff, any deposit refund, missed-call policy and revised itinerary. Other operators have their own terms. No return-to-ship guarantee is made by this portal." },
-  { q: "How do I send the inquiry and book?", a: "Choose an itinerary and complete the form with your ship, date, hours ashore and party details. Prepare and send the request through your email app, or use the original online form. A prepared draft has not been sent. The excursion is booked only after the operator confirms availability, price, payment and terms." },
+  { q: "What happens if the ship is delayed or cancels the port call?", a: "Send any schedule change to the operator promptly. Ask for written confirmation of the cancellation cutoff, any deposit refund, missed-call policy and revised itinerary. Other operators have their own terms. No return-to-ship guarantee is made by this portal." },
+  { q: "How do I send the inquiry and book?", a: "Choose an itinerary and complete the form with your ship, date, hours ashore and party details. Prepare and send the request through your email app. A prepared draft has not been sent. The excursion is booked only after the operator confirms availability, price, payment and terms." },
 ];
 
 const portDetails: Record<ShorePortId, PortDetails> = {
@@ -110,7 +110,7 @@ const portDetails: Record<ShorePortId, PortDetails> = {
     ],
     faqs: [
       { q: "Which excursion suits a shorter Ashdod port call?", a: "Discuss Tel Aviv and Jaffa or a more local coastal plan before a long desert itinerary. No route is automatically suitable: give the operator your expected time off the ship and all-aboard deadline so the return buffer can be assessed." },
-      { q: "Can I combine Jerusalem, Masada and the Dead Sea?", a: "The original operator page publishes this combined route, but it is an ambitious long day. Request a feasibility check for your exact call and agree the priority stops. Choose a simpler itinerary if the schedule does not allow enough time." },
+      { q: "Can I combine Jerusalem, Masada and the Dead Sea?", a: "Combining these destinations makes for an ambitious long day. Request a feasibility check for your exact call and agree the priority stops. Choose a simpler itinerary if the schedule does not allow enough time." },
       ...sharedFaqs,
     ],
     related: [

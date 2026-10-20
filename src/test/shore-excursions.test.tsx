@@ -4,7 +4,7 @@ import { cleanup, fireEvent, render, screen, waitFor, within } from "@testing-li
 import { afterEach, describe, expect, it } from "vitest";
 import { GlobalNav, SiteHeader } from "@/components/Layout";
 import { getShorePort } from "@/data/shoreExcursions";
-import { getSource, publicSources, SHORE_EXCURSION_CHECK_DATE, shoreExcursionRates, shoreOnlineFormUrl, shorePorts } from "@/data/registry";
+import { getSource, publicSources, SHORE_EXCURSION_CHECK_DATE, shoreExcursionRates, shorePorts } from "@/data/registry";
 import { buildShoreQuoteDraft, emptyShoreQuote, validateShoreQuote } from "@/lib/shore-quote";
 import { routeTree } from "@/routeTree.gen";
 import { Route as AshdodRoute } from "@/routes/ashdod-shore-excursions";
@@ -79,7 +79,8 @@ describe("shore excursions", () => {
     });
     expect(container.querySelector("#itineraries")!.compareDocumentPosition(container.querySelector("#request-quote")!)).toBe(Node.DOCUMENT_POSITION_FOLLOWING);
     expect(screen.getByLabelText("Departure & return port")).toHaveValue(`${port.name} Port`);
-    expect(screen.getByRole("link", { name: new RegExp(`Use Moshe's existing ${port.name} contact form`) })).toHaveAttribute("href", shoreOnlineFormUrl(id));
+    expect(screen.getByRole("link", { name: "Privacy information" })).toHaveAttribute("href", "/about-moshe-barak/#privacy");
+    expect(screen.queryByText(/Prefer an online form|existing .*contact form/)).not.toBeInTheDocument();
     const alternative = screen.getByRole("region", { name: "Prefer a separate guided excursion?" });
     expect(within(alternative).getAllByTestId("provider-card")).toHaveLength(1);
     expect(alternative).toHaveTextContent("Bein Harim Tours");

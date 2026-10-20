@@ -33,7 +33,8 @@ describe("private driver page and inquiry", () => {
     const guides = screen.getAllByTestId("driver-guide-card");
     expect(guides).toHaveLength(6);
     for (const card of guides) expect(router.matchRoutes(card.getAttribute("href")!).at(-1)?.routeId).toBe(card.getAttribute("href")!.replace(/\/$/, ""));
-    expect(screen.getByRole("link", { name: /Use Moshe's existing contact form/ })).toHaveAttribute("href", privateDriverContact.onlineFormUrl);
+    expect(screen.getByRole("link", { name: "Privacy information" })).toHaveAttribute("href", "/about-moshe-barak/#privacy");
+    expect(screen.queryByText(/Prefer an online form|existing .*contact form/)).not.toBeInTheDocument();
     expect(container.textContent).not.toMatch(/ILS\s*\d|guaranteed pickup|live availability/i);
     const head = await DriverRoute.options.head?.({} as never);
     expect(head).toMatchObject({ meta: expect.arrayContaining([{ name: "robots", content: "noindex,nofollow" }]), links: [{ rel: "canonical", href: expect.stringMatching(/\/private-driver\/$/) }] });

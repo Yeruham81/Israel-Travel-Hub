@@ -111,7 +111,7 @@ function MosheAbout() {
             <p>I may earn a commission from some links at no extra cost to you. I mark links covered by an affiliate arrangement as “Sponsored link”; other links are ordinary links. I identify my own local transport business separately, so you can see when I'm describing a service I operate.</p>
             <p>I explain alternatives in the guides so you can decide what fits your plans. When you book through another provider, I ask you to check that provider's inclusions, conditions and payment arrangements.</p>
           </div>
-          <div className="prose-guide">
+          <div id="privacy" className="prose-guide scroll-mt-24">
             <h3 className="text-xl">How I handle your enquiry</h3>
             <p>I don't attach your personal details or flight information to outbound booking links. Details you enter in the journey planners stay on the page.</p>
             <p>My message form prepares an email in your browser. You can review it before opening your email app, and the form doesn't transmit your message. I receive it only when you send the email. A message or quote request is the start of a conversation, rather than a confirmed booking.</p>

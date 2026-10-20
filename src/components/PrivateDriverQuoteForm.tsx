@@ -1,3 +1,4 @@
+import { PrivacyInformationLink } from "@/components/PrivacyInformationLink";
 import { useRef, useState, type FormEvent } from "react";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -42,8 +43,7 @@ export function PrivateDriverQuoteForm({ serviceId, onServiceChange }: { service
         <p className="mt-6 border-t border-white/20 pt-5 text-xs leading-relaxed opacity-75">Disclosure: Moshe Barak operates the publisher's local transport business. Requests here are for this service.</p>
       </div>
       <div className="p-5 sm:p-8">
-        <p className="text-sm leading-relaxed text-muted-foreground">Prepare your request, then review and send it in your email app. Prefer an online form? <a href={privateDriverContact.onlineFormUrl} target="_blank" rel="noopener noreferrer" className="font-medium text-primary underline">Use Moshe's existing contact form<span className="sr-only"> (opens in a new tab)</span></a>.</p>
-        <form onSubmit={prepare} noValidate aria-label="Private driver quote request" className="mt-6">
+        <form onSubmit={prepare} noValidate aria-label="Private driver quote request">
           {errors.length > 0 && <div ref={errorRef} tabIndex={-1} role="alert" className="mb-5 rounded-xl border border-destructive p-4 text-sm text-destructive"><p className="font-semibold">Please check these details:</p><ul className="mt-2 list-disc pl-5">{errors.map((error) => <li key={error}>{error}</li>)}</ul></div>}
           <div className="grid gap-5 sm:grid-cols-2">
             <label className="text-sm font-medium">Full name *<Input name="name" autoComplete="name" required maxLength={120} value={fields.name} onChange={(e) => update("name", e.target.value)} className={fieldClass} /></label>
@@ -61,9 +61,9 @@ export function PrivateDriverQuoteForm({ serviceId, onServiceChange }: { service
             <label className="text-sm font-medium sm:col-span-2">Driver or licensed guide?<select name="guide" value={fields.guide} onChange={(e) => update("guide", e.target.value)} className={selectClass}>{driverGuideOptions.map((option) => <option key={option.id} value={option.id}>{option.label}</option>)}</select></label>
             <label className="text-sm font-medium sm:col-span-2">Child seats or additional requests<Textarea name="notes" maxLength={1500} rows={3} placeholder="Children's ages, mobility needs, desired hours or a return journey" value={fields.notes} onChange={(e) => update("notes", e.target.value)} className="mt-2 bg-background text-base" /></label>
           </div>
-          <label className="mt-5 flex items-start gap-3 text-sm leading-relaxed"><input name="consent" type="checkbox" required checked={fields.consent} onChange={(e) => update("consent", e.target.checked)} className="mt-1 h-4 w-4 shrink-0 accent-primary" /><span>I agree to share these details with Moshe Barak for this quote request. <a href={privateDriverContact.privacyUrl} target="_blank" rel="noopener noreferrer" className="underline">Privacy policy<span className="sr-only"> (opens in a new tab)</span></a></span></label>
+          <label className="mt-5 flex items-start gap-3 text-sm leading-relaxed"><input name="consent" type="checkbox" required checked={fields.consent} onChange={(e) => update("consent", e.target.checked)} className="mt-1 h-4 w-4 shrink-0 accent-primary" /><span>I agree to share these details with Moshe Barak for this quote request. <PrivacyInformationLink /></span></label>
           <button type="submit" className="btn btn-primary mt-6 w-full sm:w-auto">Prepare my quote request</button>
-          <p className="mt-3 text-xs leading-relaxed text-muted-foreground">Your request is sent only when you send the email or submit the existing online form. The itinerary, vehicle, price and booking require confirmation.</p>
+          <p className="mt-3 text-xs leading-relaxed text-muted-foreground">Your request is sent only when you send the email. The itinerary, vehicle, price and booking require confirmation.</p>
         </form>
         {draft && <div role="status" className="mt-6 rounded-xl border border-primary/30 bg-secondary/60 p-5">
           <h3 className="text-xl">Your request is ready to send</h3>

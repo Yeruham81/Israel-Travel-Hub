@@ -5,12 +5,11 @@ import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetDescription } from "
 import { allNavGroups, serviceNav, serviceDomains, hotelNav, utilityNav, footerNav, type SidebarNavItem } from "@/data/nav";
 import { relFor } from "@/lib/outbound";
 
-export function ExtLink({ href, children, className, guide }: { href: string; children: ReactNode; className?: string; guide?: boolean }) {
+export function ExtLink({ href, children, className }: { href: string; children: ReactNode; className?: string }) {
   return (
     <a href={href} target="_blank" rel={relFor(false)} className={className}>
       {children}
-      {guide && <span className="ml-1 text-xs font-normal opacity-80">(existing guide ↗)</span>}
-      {!guide && <span aria-hidden> ↗</span>}
+      <span aria-hidden> ↗</span>
       <span className="sr-only"> (opens in a new tab)</span>
     </a>
   );
@@ -39,7 +38,7 @@ function SidebarLink({ item, onNavigate }: { item: SidebarNavItem; onNavigate: (
     return (
       <a href={item.href} target="_blank" rel={relFor(false)} onClick={onNavigate} className={`${className} hover:bg-muted`}>
         {item.label}
-        <span className="sr-only"> (on israel-taxi.com, opens in a new tab)</span>
+        <span className="sr-only"> (opens in a new tab)</span>
       </a>
     );
   }

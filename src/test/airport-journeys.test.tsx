@@ -46,7 +46,9 @@ describe("four independent airport transportation comparisons", () => {
       expect(sourceDisclosure).not.toBeNull();
       expect(sourceDisclosure!.hasAttribute("open")).toBe(false);
       expect(sourceDisclosure!.querySelector("summary")?.textContent).toContain("Sources");
-      expect(sourceDisclosure!.querySelectorAll("a")).toHaveLength(7);
+      expect(sourceDisclosure!.querySelectorAll("a")).toHaveLength(6);
+      expect(article.citation).toHaveLength(6);
+      expect(JSON.stringify(article.citation)).not.toContain("israel-taxi.com");
     }
     expect(new Set(titles).size).toBe(4);
   }, 30000);

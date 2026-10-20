@@ -33,7 +33,6 @@ import haifaColonyPhoto from "@/assets/haifa/colony.webp";
 import haifaLeonardoPhoto from "@/assets/haifa/leonardo.webp";
 import haifaDanCarmelPhoto from "@/assets/haifa/dan-carmel.webp";
 import eilatWaterfrontPhoto from "@/assets/eilat/waterfront.webp";
-import { OWNER_BASE } from "@/data/registry";
 
 export type StayPreference = "first-visit" | "car-free" | "quiet" | "nightlife" | "family" | "views" | "luxury" | "heritage" | "food" | "long-stay" | "beach" | "history";
 
