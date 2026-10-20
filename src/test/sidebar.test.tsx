@@ -26,7 +26,7 @@ describe("shared sidebar navigation", () => {
     render(<RouterContextProvider router={router}><GlobalNav /></RouterContextProvider>);
     const nav = screen.getByRole("navigation", { name: "Explore Israel" });
     expect(within(nav).getAllByRole("heading").map((heading) => heading.textContent)).toEqual([
-      "Transportation", "Tours & Trips", "Accommodation", "Attractions", "Religious Sites", "Travel Guides & Tips",
+      "Transportation", "Tours & trips", "Accommodation", "Attractions", "Religious sites", "Travel guides & tips",
     ]);
     expect(within(nav).queryByRole("region", { name: "Popular Links" })).not.toBeInTheDocument();
     expect(within(nav).getByRole("link", { name: "Hotels in Jerusalem" })).toHaveAttribute("aria-current", "page");
@@ -42,9 +42,9 @@ describe("shared sidebar navigation", () => {
       ["To Jerusalem", "/travel-blog/ben-gurion-airport-to-jerusalem/"],
       ["To Tel Aviv & Jaffa", "/travel-blog/ben-gurion-airport-to-tel-aviv/"],
       ["To Haifa", "/travel-blog/ben-gurion-airport-to-haifa/"],
-      ["To Ein Bokek · Dead Sea", "/travel-blog/ben-gurion-airport-to-ein-bokek/"],
+      ["To Ein Bokek at the Dead Sea", "/travel-blog/ben-gurion-airport-to-ein-bokek/"],
       ["To other destinations", "/transfers/"],
-      ["Private Driver Service", "/private-driver/"],
+      ["Private driver service", "/private-driver/"],
       ["Rent a car in Israel", "/car-rental/"],
     ]);
   });
@@ -53,7 +53,7 @@ describe("shared sidebar navigation", () => {
     const router = await navigationRouter();
     const onNavigate = vi.fn();
     render(<RouterContextProvider router={router}><GlobalNav onNavigate={onNavigate} /></RouterContextProvider>);
-    const guides = screen.getByRole("region", { name: "Travel Guides & Tips" });
+    const guides = screen.getByRole("region", { name: "Travel guides & tips" });
     for (const [label, path] of [
       ["Is there Uber in Israel?", "uber-in-israel"],
       ["Choosing an eSIM for Israel", "best-esim-for-israel"],
@@ -120,14 +120,14 @@ describe("shared sidebar navigation", () => {
     expect(within(nav).getAllByRole("link").at(-1)).toHaveTextContent("About");
     expect(within(nav).getByRole("list", { name: "Airport transfer destinations" })).toBeVisible();
     expect(within(nav).queryByText("Popular Links")).not.toBeInTheDocument();
-    fireEvent.click(within(nav).getByRole("link", { name: "Private Driver Service" }));
+    fireEvent.click(within(nav).getByRole("link", { name: "Private driver service" }));
     await waitFor(() => expect(screen.queryByRole("dialog")).not.toBeInTheDocument());
     await waitFor(() => expect(router.state.location.pathname).toBe("/private-driver/"));
 
     fireEvent.click(trigger);
     dialog = await screen.findByRole("dialog");
     nav = within(dialog).getByRole("navigation", { name: "Explore Israel" });
-    const guides = within(nav).getByRole("region", { name: "Travel Guides & Tips" });
+    const guides = within(nav).getByRole("region", { name: "Travel guides & tips" });
     fireEvent.click(within(guides).getByRole("link", { name: /Choosing an eSIM for Israel/ }));
     await waitFor(() => expect(screen.queryByRole("dialog")).not.toBeInTheDocument());
     await waitFor(() => expect(router.state.location.pathname).toBe("/travel-blog/best-esim-for-israel/"));
@@ -140,8 +140,8 @@ describe("shared sidebar navigation", () => {
 
     fireEvent.click(trigger);
     dialog = await screen.findByRole("dialog");
-    const religiousSites = within(dialog).getByRole("region", { name: "Religious Sites" });
-    expect(within(religiousSites).getAllByRole("link")).toHaveLength(9);
+    const religiousSites = within(dialog).getByRole("region", { name: "Religious sites" });
+    expect(within(religiousSites).getAllByRole("link")).toHaveLength(11);
     fireEvent.click(within(religiousSites).getByRole("link", { name: "Yardenit" }));
     await waitFor(() => expect(screen.queryByRole("dialog")).not.toBeInTheDocument());
     await waitFor(() => expect(router.state.location.pathname).toBe("/travel-blog/yardenit/"));

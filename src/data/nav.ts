@@ -9,7 +9,10 @@ export const airportTransferNav = {
   label: "Airport transfers", to: "/transfers/" as const,
   childrenLabel: "Airport transfer destinations", alwaysExpanded: true,
   children: [
-    ...airportTransferRoutes.map((route) => ({ label: `To ${airportTransferRates.find((rate) => rate.id === route.id)!.destination}`, to: route.path })),
+    ...airportTransferRoutes.map((route) => ({
+      label: route.id === "dead-sea" ? "To Ein Bokek at the Dead Sea" : `To ${airportTransferRates.find((rate) => rate.id === route.id)!.destination}`,
+      to: route.path,
+    })),
     { label: "To other destinations", to: "/transfers/" },
   ],
 } satisfies SidebarNavItem;
@@ -53,18 +56,18 @@ export const footerNav: NavItem[] = [
   { label: "About & methodology", to: "/about/" },
 ];
 
-/** One shared structure for the desktop sidebar and the mobile menu. */
+/** Shared desktop/mobile menu; labels use sentence case, retaining proper names. */
 export const allNavGroups: NavGroup[] = [
   {
     title: "Transportation",
     items: [
       airportTransferNav,
-      { label: "Private Driver Service", to: "/private-driver/" },
+      { label: "Private driver service", to: "/private-driver/" },
       { label: "Rent a car in Israel", to: "/car-rental/" },
     ],
   },
   {
-    title: "Tours & Trips",
+    title: "Tours & trips",
     items: [
       { label: "Tours & day trips", to: "/tours/" },
       { label: "Bethlehem tours", to: "/tours/bethlehem-from-jerusalem/" },
@@ -81,7 +84,7 @@ export const allNavGroups: NavGroup[] = [
   {
     title: "Attractions",
     items: [
-      { label: "Attractions & places", to: "/attractions/" },
+      { label: "All attractions", to: "/attractions/" },
       { label: "Old City of Jerusalem", to: "/travel-blog/old-city-jerusalem/" },
       { label: "Jaffa", to: "/travel-blog/jaffa/" },
       { label: "Akko (Acre)", to: "/travel-blog/akko-acre/" },
@@ -89,15 +92,17 @@ export const allNavGroups: NavGroup[] = [
       { label: "Rosh Hanikra", to: "/travel-blog/rosh-hanikra/" },
       { label: "Sea of Galilee", to: "/travel-blog/sea-of-galilee/" },
       { label: "Tel Megiddo", to: travelGuidePaths.megiddo },
-      { label: "Mitzpe Ramon Crater", to: "/travel-blog/mitzpe-ramon-crater/" },
+      { label: "Mitzpe Ramon & Ramon Crater", to: "/travel-blog/mitzpe-ramon-crater/" },
       { label: "Masada", to: "/travel-blog/masada/" },
       { label: "Ein Gedi", to: "/travel-blog/ein-gedi/" },
-      { label: "Dead Sea", to: travelGuidePaths.deadSea },
+      { label: "The Dead Sea", to: travelGuidePaths.deadSea },
     ],
   },
   {
-    title: "Religious Sites",
+    title: "Religious sites",
     items: [
+      { label: "Mount Zion", to: "/travel-blog/mount-zion/" },
+      { label: "Mount of Olives", to: "/travel-blog/mount-of-olives/" },
       { label: "Basilica of the Annunciation", to: travelGuidePaths.annunciation },
       { label: "Mount Precipice", to: travelGuidePaths.precipice },
       { label: "Mount Tabor", to: "/travel-blog/mount-tabor/" },
@@ -110,7 +115,7 @@ export const allNavGroups: NavGroup[] = [
     ],
   },
   {
-    title: "Travel Guides & Tips",
+    title: "Travel guides & tips",
     items: [
       { label: "All travel guides", to: "/guides/" },
       { label: "Airport to Jerusalem: all options", to: "/travel-blog/how-to-get-from-ben-gurion-airport-to-jerusalem/" },

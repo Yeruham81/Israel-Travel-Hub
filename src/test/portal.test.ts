@@ -20,14 +20,14 @@ describe("portal navigation", () => {
   });
   it("organizes attractions and religious sites without the removed popular-links group", () => {
     expect(allNavGroups.map((group) => group.title)).toEqual([
-      "Transportation", "Tours & Trips", "Accommodation", "Attractions", "Religious Sites", "Travel Guides & Tips",
+      "Transportation", "Tours & trips", "Accommodation", "Attractions", "Religious sites", "Travel guides & tips",
     ]);
     const attractions = allNavGroups.find((group) => group.title === "Attractions")!.items;
     for (const path of ["mitzpe-ramon-crater", "rosh-hanikra", "masada", "old-city-jerusalem", "jaffa", "ein-gedi", "akko-acre", "the-dead-sea"]) {
       expect(attractions).toContainEqual(expect.objectContaining({ to: `/travel-blog/${path}/` }));
     }
-    const religiousSites = allNavGroups.find((group) => group.title === "Religious Sites")!.items;
-    for (const path of ["basilica-of-the-annunciation", "mount-precipice", "mount-tabor", "magdala", "capernaum", "tabgha", "mount-of-beatitudes", "yardenit", "qasr-el-yahud"]) {
+    const religiousSites = allNavGroups.find((group) => group.title === "Religious sites")!.items;
+    for (const path of ["mount-zion", "mount-of-olives", "basilica-of-the-annunciation", "mount-precipice", "mount-tabor", "magdala", "capernaum", "tabgha", "mount-of-beatitudes", "yardenit", "qasr-el-yahud"]) {
       expect(religiousSites).toContainEqual(expect.objectContaining({ to: `/travel-blog/${path}/` }));
     }
   });
@@ -37,7 +37,7 @@ describe("portal navigation", () => {
     expect(hotelNav.map((item) => item.label)).toEqual(["Hotels in Jerusalem", "Hotels in Tel Aviv", "Hotels in Tiberias", "Hotels in Haifa", "Dead Sea hotels"]);
   });
   it("links all seven migrated practical guides internally", () => {
-    const group = allNavGroups.find((item) => item.title === "Travel Guides & Tips")!;
+    const group = allNavGroups.find((item) => item.title === "Travel guides & tips")!;
     const links = group.items.filter((item) => "to" in item).map((item) => item.to);
     expect(links).toContain("/guides/");
     for (const path of ["uber-in-israel", "sherut-in-israel", "best-esim-for-israel", "ben-gurion-airport-arrival-tips", "getting-around-israel", "getting-around-tel-aviv", "taxis-in-israel"]) expect(links).toContain(`/travel-blog/${path}/`);
