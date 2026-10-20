@@ -88,7 +88,7 @@ export function GlobalNav({ onNavigate }: { onNavigate?: () => void }) {
       </ul>
       {allNavGroups.map((g) => (
         <section key={g.title} aria-label={g.title} className="mb-6 border-b pb-5">
-          <h2 className="mb-2 border-l-2 border-primary/50 pl-3 text-[0.7rem] font-semibold uppercase tracking-[0.1em] text-navy">{g.title}</h2>
+          <h2 className="mb-3 border-l-2 border-primary/50 pl-3 font-sans text-base font-bold uppercase leading-5 tracking-wide text-navy">{g.title}</h2>
           <ul className="space-y-0.5">
             {g.items.map((i) => (
               <li key={i.label}>
