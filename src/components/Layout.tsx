@@ -116,7 +116,7 @@ export function SiteHeader() {
       <div className="mx-auto flex w-full max-w-7xl items-center justify-between gap-2 px-3 py-2 sm:gap-4 sm:px-4 sm:py-3">
         <Wordmark />
         <nav aria-label="Services" className="hidden min-w-0 flex-1 lg:block">
-          <ul className="flex items-center justify-end gap-1 text-[15px] font-medium xl:gap-3">
+          <ul className="flex items-center justify-end gap-1 text-[15px] font-medium capitalize xl:gap-3">
             {headerNav.map((n) => (
               <li key={n.label}><Link to={n.to} className="flex min-h-11 items-center justify-center rounded-lg px-2 py-1 text-center leading-5 transition-colors hover:bg-muted hover:text-primary" activeProps={{ className: "bg-primary/10 text-primary" }}>{n.label}</Link></li>
             ))}
