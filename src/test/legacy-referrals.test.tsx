@@ -29,6 +29,7 @@ describe("replacement-site navigation", () => {
         for (const attribute of ["href", "src", "action", "srcset"]) {
           const value = element.getAttribute(attribute);
           if (value) expect(isPublisherUrl(value), `${path}: ${attribute}=${value}`).toBe(false);
+          if (attribute === "href" && value) expect(value, path).not.toMatch(/^\/about(?:\/|[?#]|$)/);
         }
       }
       // The existing business email remains a valid way to contact Moshe.

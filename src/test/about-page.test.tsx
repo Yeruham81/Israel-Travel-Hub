@@ -1,10 +1,9 @@
 import { QueryClient } from "@tanstack/react-query";
-import { createMemoryHistory, createRouter, isRedirect, RouterContextProvider } from "@tanstack/react-router";
-import { act, cleanup, fireEvent, render, screen, waitFor, within } from "@testing-library/react";
+import { createMemoryHistory, createRouter, RouterContextProvider } from "@tanstack/react-router";
+import { act, cleanup, fireEvent, render, screen, within } from "@testing-library/react";
 import { afterEach, describe, expect, it, vi } from "vitest";
 import { routeTree } from "@/routeTree.gen";
 import { Route as AboutRoute } from "@/routes/about-moshe-barak";
-import { Route as LegacyAboutRoute } from "@/routes/about";
 import { tripadvisorProfileUrl, tripadvisorReviews } from "@/data/homeReviews";
 
 afterEach(() => { cleanup(); vi.useRealTimers(); });
@@ -64,16 +63,11 @@ describe("one personal About Moshe Barak page", () => {
     expect(screen.getByRole("link", { name: "Explore all my Tripadvisor reviews" })).toHaveAttribute("href", tripadvisorProfileUrl);
   });
 
-  it("permanently redirects the retired page and preserves biography bookmarks", async () => {
-    let response: unknown;
-    try { await LegacyAboutRoute.options.beforeLoad?.({ location: { hash: "moshe-barak" } } as never); }
-    catch (error) { response = error; }
-    if (!isRedirect(response)) throw new Error("Expected a permanent redirect");
-    expect(response.status).toBe(301);
-    expect(response.options).toMatchObject({ to: "/about-moshe-barak/", hash: "moshe-barak", replace: true });
-    expect(LegacyAboutRoute.options.component).toBeUndefined();
+  it("removes the retired route without redirecting old addresses", async () => {
     const router = await aboutRouter("/about/#moshe-barak");
-    await waitFor(() => expect(router.state.location.pathname).toBe("/about-moshe-barak/"));
+    expect(router.routesById).not.toHaveProperty("/about");
+    expect(router.matchRoutes("/about/").at(-1)?.routeId).toBe("__root__");
+    expect(router.state.location.pathname).toBe("/about/");
     expect(router.state.location.hash).toBe("moshe-barak");
   });
 });
