@@ -40,7 +40,7 @@ async function allRouteFiles(dir) {
   return batches.flat();
 }
 
-/** All static HTML pages, excluding API endpoints, the root layout and parametric routes. */
+/** Static HTML pages, excluding API endpoints, layouts, parameters and redirect-only routes. */
 export async function collectSitemapPaths(dir = routesDir) {
   const paths = new Set();
   for (const file of await allRouteFiles(dir)) {
@@ -51,6 +51,9 @@ export async function collectSitemapPaths(dir = routesDir) {
     const route = match[1];
     // API handlers, path parameters and catchalls should never appear in XML.
     if (route.startsWith("/api/") || /[$*]/.test(route)) continue;
+    // A route that only redirects has no page document; guarded content routes
+    // still belong in the sitemap when they declare a component.
+    if (/\bbeforeLoad\s*:/.test(contents) && /\b(?:throw|return)\s+redirect\s*\(/.test(contents) && !/\bcomponent\s*[:,]/.test(contents)) continue;
     const canonicalPath = normalizePath(route);
     if (paths.has(canonicalPath)) throw new Error("Duplicate sitemap route: " + canonicalPath);
     paths.add(canonicalPath);

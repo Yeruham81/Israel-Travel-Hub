@@ -52,8 +52,7 @@ export const utilityNav: NavItem[] = [
 ];
 
 export const footerNav: NavItem[] = [
-  { label: "Meet Moshe Barak", to: "/about-moshe-barak/" },
-  { label: "About & methodology", to: "/about/" },
+  { label: "About Moshe Barak", to: "/about-moshe-barak/" },
 ];
 
 /** Shared desktop/mobile menu; labels use sentence case, retaining proper names. */

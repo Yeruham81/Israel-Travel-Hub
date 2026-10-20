@@ -3,14 +3,14 @@ import { ChevronLeft, ChevronRight, ExternalLink, Star } from "lucide-react";
 import { customerTestimonials, tripadvisorProfileUrl, tripadvisorSnapshot } from "@/data/homeReviews";
 import { TripadvisorReviewCarousel } from "@/components/TripadvisorReviewCarousel";
 
-export function TripadvisorReviewsSection() {
+export function TripadvisorReviewsSection({ personal = false }: { personal?: boolean } = {}) {
   return <section aria-labelledby="reviews-h" className="mx-auto mt-16 max-w-6xl px-4">
     <div className="overflow-hidden rounded-3xl border bg-card shadow-sm">
       <div className="bg-navy px-6 py-9 text-navy-foreground sm:px-10">
-        <p className="text-xs font-semibold uppercase tracking-widest opacity-80">Real Traveler Experiences</p>
-        <h2 id="reviews-h" className="mt-2 text-3xl sm:text-4xl">Kind Words from Satisfied Travelers</h2>
+        <p className="text-xs font-semibold uppercase tracking-widest opacity-80">{personal ? "From travelers I've helped" : "Real Traveler Experiences"}</p>
+        <h2 id="reviews-h" className="mt-2 text-3xl sm:text-4xl">{personal ? "What travelers say about their journeys with me" : "Kind Words from Satisfied Travelers"}</h2>
         <div className="mt-7 flex flex-wrap items-center gap-4 rounded-2xl border border-white/20 bg-white/10 p-5">
-          <a href={tripadvisorProfileUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 text-xl font-bold tracking-tight text-white" aria-label="Tripadvisor reviews for Moshe Barak">
+          <a href={tripadvisorProfileUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 text-xl font-bold tracking-tight text-white" aria-label={personal ? "Tripadvisor reviews of my transport service" : "Tripadvisor reviews for Moshe Barak"}>
             <img src="https://cdn.simpleicons.org/tripadvisor/34E0A1" alt="" width={36} height={36} loading="lazy" className="size-9" />
             Tripadvisor <ExternalLink size={15} aria-hidden />
           </a>
@@ -21,7 +21,7 @@ export function TripadvisorReviewsSection() {
         </div>
       </div>
       <TripadvisorReviewCarousel />
-      <div className="flex justify-center px-6 pb-8 sm:px-10"><a href={tripadvisorProfileUrl} target="_blank" rel="noopener noreferrer" className="btn btn-primary">Explore all Tripadvisor reviews <ExternalLink size={16} aria-hidden /></a></div>
+      <div className="flex justify-center px-6 pb-8 sm:px-10"><a href={tripadvisorProfileUrl} target="_blank" rel="noopener noreferrer" className="btn btn-primary">{personal ? "Explore all my Tripadvisor reviews" : "Explore all Tripadvisor reviews"} <ExternalLink size={16} aria-hidden /></a></div>
     </div>
   </section>;
 }

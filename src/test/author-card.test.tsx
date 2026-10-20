@@ -3,7 +3,7 @@ import { createMemoryHistory, createRouter, RouterContextProvider } from "@tanst
 import { cleanup, fireEvent, render, screen, within } from "@testing-library/react";
 import { afterEach, describe, expect, it } from "vitest";
 import { routeTree } from "@/routeTree.gen";
-import { Route as AboutRoute } from "@/routes/about";
+import { Route as AboutRoute } from "@/routes/about-moshe-barak";
 import { GuidePhotoCredit } from "@/components/TravelGuide";
 import { SourceList } from "@/components/Guide";
 import { formatCheckDate, getSource, isPublisherUrl, mosheBarakAuthor } from "@/data/registry";
@@ -20,7 +20,7 @@ async function pageAt(path: string) {
 
 describe("independent author identity and page credits", () => {
   it("shows one real portrait, experience statement and exact review profile across the page families", async () => {
-    const paths = ["/", "/about/", "/guides/", "/hotels/", "/transfers/", "/private-driver/", "/haifa-shore-excursions/", "/travel-blog/ben-gurion-airport-to-jerusalem/", "/travel-blog/where-to-stay-in-jerusalem/", "/tel-aviv/jaffa-hotels/", "/travel-blog/best-hotels-in-haifa/", "/dead-sea/spa-hotels/", "/attractions/caesarea/"];
+    const paths = ["/", "/guides/", "/hotels/", "/transfers/", "/private-driver/", "/haifa-shore-excursions/", "/travel-blog/ben-gurion-airport-to-jerusalem/", "/travel-blog/where-to-stay-in-jerusalem/", "/tel-aviv/jaffa-hotels/", "/travel-blog/best-hotels-in-haifa/", "/dead-sea/spa-hotels/", "/attractions/caesarea/"];
     for (const path of paths) {
       const { container, unmount } = await pageAt(path);
       const cards = screen.getAllByTestId("author-card");
@@ -32,7 +32,7 @@ describe("independent author identity and page credits", () => {
       expect(reviews, path).toHaveAttribute("href", mosheBarakAuthor.reviewsUrl);
       expect(reviews).toHaveAttribute("target", "_blank");
       expect(reviews).toHaveAttribute("rel", "noopener noreferrer");
-      expect(within(card).getByRole("link", { name: "Moshe Barak" })).toHaveAttribute("href", "/about/#moshe-barak");
+      expect(within(card).getByRole("link", { name: "Moshe Barak" })).toHaveAttribute("href", "/about-moshe-barak/#moshe-barak");
       expect(card).not.toHaveTextContent(/5\.0|five stars|\d+ reviews|licensed guide/i);
       expect(container.querySelector('a[href*="israel-taxi.com/wp-content/"]'), path).toBeNull();
       expect(container.querySelector('#sources a[href*="israel-taxi.com"]'), path).toBeNull();
@@ -77,12 +77,12 @@ describe("independent author identity and page credits", () => {
   });
 
   it("connects the visible local author biography to Person metadata without inventing review ratings", async () => {
-    const { container } = await pageAt("/about/");
+    const { container } = await pageAt("/about-moshe-barak/");
     expect(container.querySelector("#moshe-barak")).toHaveTextContent("Moshe Barak");
-    expect(screen.getByRole("complementary", { name: "Meet Moshe Barak" })).toHaveTextContent(mosheBarakAuthor.bio);
+    expect(screen.getByRole("heading", { level: 1, name: "About Moshe Barak" })).toBeInTheDocument();
     const head = await AboutRoute.options.head?.({} as never);
     const schema = head!.scripts!.flatMap((script) => typeof script?.children === "string" ? [JSON.parse(script.children)] : []).find((item) => item["@type"] === "Person");
-    expect(schema).toMatchObject({ name: "Moshe Barak", url: expect.stringMatching(/\/about\/#moshe-barak$/), sameAs: [mosheBarakAuthor.reviewsUrl] });
+    expect(schema).toMatchObject({ name: "Moshe Barak", url: expect.stringMatching(/\/about-moshe-barak\/#moshe-barak$/), sameAs: [mosheBarakAuthor.reviewsUrl] });
     expect(schema.aggregateRating).toBeUndefined();
     expect(schema.review).toBeUndefined();
     expect(head!.meta).toContainEqual({ name: "robots", content: "noindex,nofollow" });

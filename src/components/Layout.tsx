@@ -171,13 +171,12 @@ export function SiteFooter() {
             <li><Link to="/travel-blog/ben-gurion-airport-to-jerusalem/">Airport to Jerusalem</Link></li>
             <li><Link to="/guides/">Travel guides & tips</Link></li>
             <li><Link to="/travel-blog/getting-around-israel/">Getting around Israel</Link></li>
-            <li><Link to="/about-moshe-barak/">Meet Moshe Barak</Link></li>
-            <li><Link to="/about/">About &amp; methodology</Link></li>
+            <li><Link to="/about-moshe-barak/">About Moshe Barak</Link></li>
           </ul>
         </div>
         <div className="text-sm opacity-90">
           <p className="font-semibold">Disclosure</p>
-          <p className="mt-3">Some links on this site may earn us a commission at no extra cost to you. Only links from configured affiliate partners are labeled “Sponsored link”. Our editorial selection is explained on the <Link to="/about/" className="underline">methodology page</Link>.</p>
+          <p className="mt-3">Some links on this site may earn us a commission at no extra cost to you. Only links from configured affiliate partners are labeled “Sponsored link”. I explain how I choose travel options on the <Link to="/about-moshe-barak/" hash="methodology" className="underline">About Moshe Barak page</Link>.</p>
         </div>
       </div>
     </footer>
