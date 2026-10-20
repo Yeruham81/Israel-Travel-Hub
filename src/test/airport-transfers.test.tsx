@@ -111,7 +111,7 @@ describe("private Ben Gurion transfers", () => {
 
   it("keeps privacy information on this site and a copy fallback for email clients", async () => {
     const { container } = await renderAirport();
-    expect(screen.getByRole("link", { name: "Privacy information" })).toHaveAttribute("href", "/about-moshe-barak/#privacy");
+    expect(screen.getByRole("link", { name: "Privacy Policy" })).toHaveAttribute("href", "/privacy-policy/");
     expect(screen.queryByText(/Prefer an online form|existing .*contact form/)).not.toBeInTheDocument();
     chooseDestination("tel-aviv");
     fillRequest(); fireEvent.click(screen.getByRole("button", { name: "Prepare my quote request" }));

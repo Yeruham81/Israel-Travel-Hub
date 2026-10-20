@@ -79,7 +79,7 @@ describe("shore excursions", () => {
     });
     expect(container.querySelector("#itineraries")!.compareDocumentPosition(container.querySelector("#request-quote")!)).toBe(Node.DOCUMENT_POSITION_FOLLOWING);
     expect(screen.getByLabelText("Departure & return port")).toHaveValue(`${port.name} Port`);
-    expect(screen.getByRole("link", { name: "Privacy information" })).toHaveAttribute("href", "/about-moshe-barak/#privacy");
+    expect(screen.getByRole("link", { name: "Privacy Policy" })).toHaveAttribute("href", "/privacy-policy/");
     expect(screen.queryByText(/Prefer an online form|existing .*contact form/)).not.toBeInTheDocument();
     const alternative = screen.getByRole("region", { name: "Prefer a separate guided excursion?" });
     expect(within(alternative).getAllByTestId("provider-card")).toHaveLength(1);

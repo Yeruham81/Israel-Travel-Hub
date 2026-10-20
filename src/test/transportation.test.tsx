@@ -97,7 +97,7 @@ describe("airport transfers and private driver separation", () => {
     const planning = screen.getByRole("region", { name: "Plan the day before requesting a quote" });
     const form = screen.getByRole("form", { name: "Private driver quote request" });
     expect(form.compareDocumentPosition(planning)).toBe(Node.DOCUMENT_POSITION_FOLLOWING);
-    expect(screen.getByRole("link", { name: "Privacy information" })).toHaveAttribute("href", "/about-moshe-barak/#privacy");
+    expect(screen.getByRole("link", { name: "Privacy Policy" })).toHaveAttribute("href", "/privacy-policy/");
     expect(screen.queryByText(/Prefer an online form|existing .*contact form/)).not.toBeInTheDocument();
     expect(screen.getByText(/Disclosure: Moshe Barak operates the publisher's local transport business/)).toBeInTheDocument();
     expect(container.textContent).not.toMatch(/ILS\s*\d/);

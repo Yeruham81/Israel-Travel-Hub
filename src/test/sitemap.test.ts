@@ -16,6 +16,8 @@ describe("generated XML sitemap and robots.txt", () => {
     expect(paths).not.toContain("/about/");
     expect(paths).not.toContain("/transfers/ben-gurion-airport/");
     expect(paths).toContain("/about-moshe-barak/");
+    expect(paths).toContain("/privacy-policy/");
+    expect(paths).toContain("/terms-of-use/");
     for (const city of ["jerusalem", "tel-aviv", "haifa", "ein-bokek"]) {
       expect(paths).toContain("/travel-blog/how-to-get-from-ben-gurion-airport-to-" + city + "/");
       expect(paths).toContain("/travel-blog/ben-gurion-airport-to-" + city + "/");

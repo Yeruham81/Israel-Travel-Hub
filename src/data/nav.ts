@@ -55,6 +55,11 @@ export const footerNav: NavItem[] = [
   { label: "About Moshe Barak", to: "/about-moshe-barak/" },
 ];
 
+export const legalNav: NavItem[] = [
+  { label: "Privacy Policy", to: "/privacy-policy/" },
+  { label: "Terms of Use", to: "/terms-of-use/" },
+];
+
 /** Shared desktop/mobile menu; labels use sentence case, retaining proper names. */
 export const allNavGroups: NavGroup[] = [
   {

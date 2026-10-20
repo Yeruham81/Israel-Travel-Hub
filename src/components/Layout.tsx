@@ -2,7 +2,7 @@ import { Link, useRouterState } from "@tanstack/react-router";
 import { useEffect, useId, useState, type ReactNode } from "react";
 import { ChevronDown, Compass } from "lucide-react";
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetDescription } from "@/components/ui/sheet";
-import { allNavGroups, serviceNav, serviceDomains, hotelNav, utilityNav, footerNav, type SidebarNavItem } from "@/data/nav";
+import { allNavGroups, serviceNav, serviceDomains, hotelNav, utilityNav, footerNav, legalNav, type SidebarNavItem } from "@/data/nav";
 import { relFor } from "@/lib/outbound";
 
 export function ExtLink({ href, children, className }: { href: string; children: ReactNode; className?: string }) {
@@ -177,6 +177,11 @@ export function SiteFooter() {
           <p className="font-semibold">Disclosure</p>
           <p className="mt-3">Some links on this site may earn us a commission at no extra cost to you. Only links from configured affiliate partners are labeled “Sponsored link”. I explain how I choose travel options on the <Link to="/about-moshe-barak/" hash="methodology" className="underline">About Moshe Barak page</Link>.</p>
         </div>
+        <nav aria-label="Legal" className="border-t border-white/20 pt-6 text-sm md:col-span-4">
+          <ul className="flex flex-wrap gap-x-6 gap-y-3">
+            {legalNav.map((item) => <li key={item.label}><Link to={item.to} className="underline underline-offset-4 focus-visible:outline-2 focus-visible:outline-offset-4">{item.label}</Link></li>)}
+          </ul>
+        </nav>
       </div>
     </footer>
   );

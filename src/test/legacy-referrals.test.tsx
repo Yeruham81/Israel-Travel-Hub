@@ -38,7 +38,7 @@ describe("replacement-site navigation", () => {
       const head = await route.options.head?.({} as never);
       expect(JSON.stringify(head), `${path}: metadata`).not.toMatch(/israel-taxi\.com/i);
       if (path === "/about-moshe-barak/") expect(doc.querySelector("#privacy")?.textContent).toContain("the form doesn't transmit your message");
-      for (const link of doc.querySelectorAll('a[href="/about-moshe-barak/#privacy"]')) {
+      for (const link of doc.querySelectorAll('a[href="/privacy-policy/"]')) {
         expect(link.hasAttribute("target"), path).toBe(false);
       }
     }
