@@ -18,17 +18,18 @@ describe("portal navigation", () => {
     }
     for (const item of serviceNav) expect(internal.some((link) => link.to === item.to), item.label).toBe(true);
   });
-  it("organizes the sidebar by the requested topics before popular links", () => {
+  it("organizes attractions and religious sites without the removed popular-links group", () => {
     expect(allNavGroups.map((group) => group.title)).toEqual([
-      "Transportation", "Tours & Trips", "Accommodation", "Attractions", "Travel Guides & Tips", "Popular Links",
+      "Transportation", "Tours & Trips", "Accommodation", "Attractions", "Religious Sites", "Travel Guides & Tips",
     ]);
-    const popular = allNavGroups.find((group) => group.title === "Popular Links")!.items;
-    expect(popular).toEqual(expect.arrayContaining([
-      expect.objectContaining({ to: "/travel-blog/ben-gurion-airport-to-jerusalem/" }),
-      expect.objectContaining({ to: "/travel-blog/uber-in-israel/" }),
-      expect.objectContaining({ to: "/travel-blog/best-esim-for-israel/" }),
-      expect.objectContaining({ to: "/travel-blog/ben-gurion-airport-arrival-tips/" }),
-    ]));
+    const attractions = allNavGroups.find((group) => group.title === "Attractions")!.items;
+    for (const path of ["mitzpe-ramon-crater", "rosh-hanikra", "masada", "old-city-jerusalem", "jaffa", "ein-gedi", "akko-acre", "the-dead-sea"]) {
+      expect(attractions).toContainEqual(expect.objectContaining({ to: `/travel-blog/${path}/` }));
+    }
+    const religiousSites = allNavGroups.find((group) => group.title === "Religious Sites")!.items;
+    for (const path of ["basilica-of-the-annunciation", "mount-precipice", "mount-tabor", "magdala", "capernaum", "tabgha", "mount-of-beatitudes", "yardenit", "qasr-el-yahud"]) {
+      expect(religiousSites).toContainEqual(expect.objectContaining({ to: `/travel-blog/${path}/` }));
+    }
   });
   it("sidebar includes one-click hotel guides for every destination covered", () => {
     const accommodation = allNavGroups.find((g) => g.title === "Accommodation")!.items;

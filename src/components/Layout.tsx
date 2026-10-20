@@ -61,6 +61,7 @@ function SidebarBranch({ item, onNavigate }: { item: SidebarNavItem; onNavigate:
   const pathname = useRouterState({ select: (state) => state.location.pathname });
   const branch = "children" in item ? item : undefined;
   const children = branch?.children;
+  const alwaysExpanded = branch?.alwaysExpanded ?? false;
   const isChildPage = children?.some((child) => child.to === pathname) ?? false;
   const [expanded, setExpanded] = useState(isChildPage);
   const id = useId();
@@ -69,11 +70,11 @@ function SidebarBranch({ item, onNavigate }: { item: SidebarNavItem; onNavigate:
   return <>
     <div className="flex items-center gap-1">
       <div className="min-w-0 flex-1"><SidebarLink item={item} onNavigate={onNavigate} /></div>
-      <button type="button" aria-label={branch?.toggleLabel ?? `Show ${item.label} pages`} aria-expanded={expanded} aria-controls={id} onClick={() => setExpanded(!expanded)} className="rounded-lg p-2 hover:bg-muted focus-visible:outline-2 focus-visible:outline-primary">
+      {!alwaysExpanded && <button type="button" aria-label={branch?.toggleLabel ?? `Show ${item.label} pages`} aria-expanded={expanded} aria-controls={id} onClick={() => setExpanded(!expanded)} className="rounded-lg p-2 hover:bg-muted focus-visible:outline-2 focus-visible:outline-primary">
         <ChevronDown aria-hidden className={`h-4 w-4 transition-transform ${expanded ? "rotate-180" : ""}`} />
-      </button>
+      </button>}
     </div>
-    <ul id={id} hidden={!expanded} aria-label={branch?.childrenLabel ?? `${item.label} pages`} className="ml-3 mt-1 space-y-0.5 border-l pl-2">
+    <ul id={id} hidden={!alwaysExpanded && !expanded} aria-label={branch?.childrenLabel ?? `${item.label} pages`} className="ml-3 mt-1 space-y-0.5 border-l pl-2">
       {children.map((child) => <li key={child.to}><SidebarLink item={child} onNavigate={onNavigate} /></li>)}
     </ul>
   </>;
@@ -129,7 +130,7 @@ export function SiteHeader() {
           <SheetContent side="left" className="w-[85vw] max-w-sm overflow-y-auto">
             <SheetHeader className="mb-4 text-left">
               <SheetTitle className="font-serif text-2xl">Explore Israel</SheetTitle>
-              <SheetDescription>Transportation, tours, accommodation, attractions and travel tips, with popular links for your trip.</SheetDescription>
+              <SheetDescription>Transportation, tours, accommodation, attractions, religious sites and travel tips for your trip.</SheetDescription>
             </SheetHeader>
             <GlobalNav onNavigate={() => setOpen(false)} />
           </SheetContent>

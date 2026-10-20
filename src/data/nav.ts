@@ -2,13 +2,16 @@ import type { LinkProps } from "@tanstack/react-router";
 import { airportTransferRates, airportTransferRoutes, travelGuidePaths } from "@/data/registry";
 
 export type NavItem = { label: string; to: LinkProps["to"] };
-export type SidebarNavItem = (NavItem & { children?: NavItem[]; childrenLabel?: string; toggleLabel?: string }) | { label: string; href: string };
+export type SidebarNavItem = (NavItem & { children?: NavItem[]; childrenLabel?: string; toggleLabel?: string; alwaysExpanded?: boolean }) | { label: string; href: string };
 export type NavGroup = { title: string; items: SidebarNavItem[] };
 
 export const airportTransferNav = {
   label: "Airport transfers", to: "/transfers/" as const,
-  childrenLabel: "Airport transfer destinations", toggleLabel: "Choose an airport transfer destination",
-  children: airportTransferRoutes.map((route) => ({ label: airportTransferRates.find((rate) => rate.id === route.id)!.destination, to: route.path })),
+  childrenLabel: "Airport transfer destinations", alwaysExpanded: true,
+  children: [
+    ...airportTransferRoutes.map((route) => ({ label: `To ${airportTransferRates.find((rate) => rate.id === route.id)!.destination}`, to: route.path })),
+    { label: "To other destinations", to: "/transfers/" },
+  ],
 } satisfies SidebarNavItem;
 
 /** Six primary links: shared by desktop header and footer, in homepage order. */
@@ -56,8 +59,8 @@ export const allNavGroups: NavGroup[] = [
     title: "Transportation",
     items: [
       airportTransferNav,
-      { label: "Private driver", to: "/private-driver/" },
-      { label: "Car rental", to: "/car-rental/" },
+      { label: "Private Driver Service", to: "/private-driver/" },
+      { label: "Rent a car in Israel", to: "/car-rental/" },
     ],
   },
   {
@@ -79,8 +82,31 @@ export const allNavGroups: NavGroup[] = [
     title: "Attractions",
     items: [
       { label: "Attractions & places", to: "/attractions/" },
-      { label: "Masada tickets & visit", to: "/travel-blog/masada/" },
-      { label: "Caesarea visit", to: "/attractions/caesarea/" },
+      { label: "Old City of Jerusalem", to: "/travel-blog/old-city-jerusalem/" },
+      { label: "Jaffa", to: "/travel-blog/jaffa/" },
+      { label: "Akko (Acre)", to: "/travel-blog/akko-acre/" },
+      { label: "Caesarea", to: "/attractions/caesarea/" },
+      { label: "Rosh Hanikra", to: "/travel-blog/rosh-hanikra/" },
+      { label: "Sea of Galilee", to: "/travel-blog/sea-of-galilee/" },
+      { label: "Tel Megiddo", to: travelGuidePaths.megiddo },
+      { label: "Mitzpe Ramon Crater", to: "/travel-blog/mitzpe-ramon-crater/" },
+      { label: "Masada", to: "/travel-blog/masada/" },
+      { label: "Ein Gedi", to: "/travel-blog/ein-gedi/" },
+      { label: "Dead Sea", to: travelGuidePaths.deadSea },
+    ],
+  },
+  {
+    title: "Religious Sites",
+    items: [
+      { label: "Basilica of the Annunciation", to: travelGuidePaths.annunciation },
+      { label: "Mount Precipice", to: travelGuidePaths.precipice },
+      { label: "Mount Tabor", to: "/travel-blog/mount-tabor/" },
+      { label: "Magdala", to: travelGuidePaths.magdala },
+      { label: "Capernaum", to: "/travel-blog/capernaum/" },
+      { label: "Tabgha", to: "/travel-blog/tabgha/" },
+      { label: "Mount of Beatitudes", to: "/travel-blog/mount-of-beatitudes/" },
+      { label: "Yardenit", to: travelGuidePaths.yardenit },
+      { label: "Qasr el-Yahud", to: travelGuidePaths.qasr },
     ],
   },
   {
@@ -106,16 +132,6 @@ export const allNavGroups: NavGroup[] = [
       travelTips.esim,
       travelTips.arrival,
       { label: "Destinations & city guides", to: "/destinations/" },
-    ],
-  },
-  {
-    title: "Popular Links",
-    items: [
-      { label: "Ben Gurion to Jerusalem", to: "/travel-blog/ben-gurion-airport-to-jerusalem/" },
-      travelTips.uber,
-      travelTips.esim,
-      travelTips.arrival,
-      { label: "Ben Gurion to Tel Aviv", to: "/travel-blog/ben-gurion-airport-to-tel-aviv/" },
     ],
   },
 ];
