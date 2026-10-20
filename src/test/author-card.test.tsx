@@ -1,6 +1,6 @@
 import { QueryClient } from "@tanstack/react-query";
 import { createMemoryHistory, createRouter, RouterContextProvider } from "@tanstack/react-router";
-import { cleanup, render, screen, within } from "@testing-library/react";
+import { cleanup, fireEvent, render, screen, within } from "@testing-library/react";
 import { afterEach, describe, expect, it } from "vitest";
 import { routeTree } from "@/routeTree.gen";
 import { Route as AboutRoute } from "@/routes/about";
@@ -53,12 +53,24 @@ describe("independent author identity and page credits", () => {
     expect(container.textContent).not.toContain("Illustrative scene");
   });
 
-  it("preserves public source references and hides legacy provenance without leaving an empty section", () => {
+  it("expands public references on demand and omits empty legacy-only source sections", () => {
     const { container, rerender } = render(<SourceList ids={["guide-original-shabbat"]} />);
     expect(container).toBeEmptyDOMElement();
     rerender(<SourceList ids={["guide-original-shabbat", "guide-weekend-711"]} />);
+    const disclosure = container.querySelector("#sources details")!;
+    const summary = disclosure.querySelector("summary")!;
+    const reference = disclosure.querySelector("a")!;
+    expect(disclosure).not.toHaveAttribute("open");
+    expect(screen.getByRole("heading", { name: "Sources" })).toBeVisible();
+    expect(reference).not.toBeVisible();
+    fireEvent.click(summary);
+    expect(disclosure).toHaveAttribute("open");
+    expect(reference).toBeVisible();
     expect(screen.getByRole("link", { name: /Tel Aviv-Yafo Municipality/ })).toHaveAttribute("href", getSource("guide-weekend-711").url);
     expect(container.querySelector('a[href*="israel-taxi.com"]')).toBeNull();
+    fireEvent.click(summary);
+    expect(disclosure).not.toHaveAttribute("open");
+    expect(reference).not.toBeVisible();
     expect(formatCheckDate("2026-10-17")).toBe("October 2026");
     expect(isPublisherUrl("https://israel-taxi.com/about-me/")).toBe(true);
     expect(isPublisherUrl(mosheBarakAuthor.reviewsUrl)).toBe(false);

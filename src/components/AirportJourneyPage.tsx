@@ -2,6 +2,7 @@ import { Link } from "@tanstack/react-router";
 import { Breadcrumbs, FaqList, OnThisPage, RelatedLinks, Section } from "@/components/Guide";
 import { GuidePhotoCredit } from "@/components/TravelGuide";
 import { AuthorCard } from "@/components/AuthorCard";
+import { SourcesDisclosure } from "@/components/SourcesDisclosure";
 import { airportJourneyGuides, airportJourneyIds, type AirportJourneyId, type JourneyOption } from "@/data/airportJourneyGuides";
 import { getAirportRouteGuide } from "@/data/airportRoutes";
 import { authorLd } from "@/lib/author";
@@ -152,13 +153,12 @@ export function AirportJourneyPage({ id }: { id: AirportJourneyId }) {
       </Section>
       <FaqList faqs={g.faqs}/>
       <PrivateRideCta id={id} variant="bottom"/>
-      <section id="sources" aria-labelledby="sources-h" className="mt-14 scroll-mt-28">
-        <h2 id="sources-h" className="text-3xl">Official sources and price provenance</h2>
+      <SourcesDisclosure>
         <p className="mt-3 text-sm text-muted-foreground">Schedules, routes, meeting points, fares and access can change. Refer to the official provider pages for actual travel dates. Historical costs were sourced from Moshe's earlier August 2026 editorial comparison and are labeled as estimates.</p>
         <ul className="mt-4 grid gap-3 sm:grid-cols-2">{sources.map(s=><li key={s.url}><a className="block rounded-lg border bg-card p-4 font-medium text-primary underline" href={s.url} target="_blank" rel="noopener noreferrer">{s.title} <span className="sr-only">(opens a new tab)</span></a></li>)}
           <li><a className="block rounded-lg border bg-card p-4 font-medium text-primary underline" href={g.legacySource} target="_blank" rel="noopener noreferrer">Publisher's August 2026 route comparison (historical figures) <span className="sr-only">(opens a new tab)</span></a></li>
         </ul>
-      </section>
+      </SourcesDisclosure>
       <RelatedLinks title="Plan your next step" items={[...g.related, ...airportJourneyIds.filter(other=>other!==id).map(other=>({label:"How to get to "+airportJourneyGuides[other].city,to:airportJourneyGuides[other].path}))]}/>
     </main>
   );

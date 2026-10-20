@@ -4,6 +4,7 @@ import { ExtLink } from "@/components/Layout";
 import { publicSources, formatCheckDate, INFO_CHECK_DATE, type ProviderLink } from "@/data/registry";
 import { AuthorCard } from "@/components/AuthorCard";
 import { PageUpdated } from "@/components/PageUpdated";
+import { SourcesDisclosure } from "@/components/SourcesDisclosure";
 import { modeNote, relationshipLabel } from "@/lib/booking";
 import { recordOutboundClick, relFor } from "@/lib/outbound";
 
@@ -93,8 +94,7 @@ export function SourceList({ ids, intro = "“Checked” dates refer to the fact
   const sources = publicSources(ids);
   if (!sources.length) return null;
   return (
-    <section id="sources" aria-labelledby="sources-h" className="mt-14">
-      <h2 id="sources-h" className="text-3xl">Sources</h2>
+    <SourcesDisclosure>
       <p className="mt-2 text-sm text-muted-foreground">{intro}</p>
       <ul className="mt-4 space-y-3">
         {sources.map((s) => (
@@ -105,7 +105,7 @@ export function SourceList({ ids, intro = "“Checked” dates refer to the fact
           </li>
         ))}
       </ul>
-    </section>
+    </SourcesDisclosure>
   );
 }
 

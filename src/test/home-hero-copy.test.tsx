@@ -51,10 +51,10 @@ describe("homepage marketing copy and top navigation", () => {
     // Every broad-category CTA follows its own cards rather than preceding them.
     for (const [sectionId, linkName, target] of [
       ["transfers", "Explore Airport Transfers", "/transfers/"],
-      ["tours", "Explore Tours", "/tours/"],
+      ["tours", "Explore tours & day trips", "/tours/"],
       ["shore-excursions", "Explore Shore Excursions", "/shore-excursions/"],
       ["accommodation", "Explore Accommodation", "/hotels/"],
-      ["attractions", "Explore Attractions", "/attractions/"],
+      ["attractions", "Explore attractions & experiences", "/attractions/"],
     ] as const) {
       const section = document.getElementById(sectionId)!;
       const button = within(section).getByRole("link", { name: new RegExp(linkName, "i") });

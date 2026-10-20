@@ -69,7 +69,7 @@ const services: Service[] = [
       { label: "Bethlehem from Jerusalem", text: "Compare combined day tours", to: "/tours/bethlehem-from-jerusalem/", img: IMG.bethlehem },
       { label: "Masada & Dead Sea", text: "Plan the desert day", to: "/travel-blog/masada/", img: IMG.masada },
     ],
-    hub: { label: "Explore tours", to: "/tours/" },
+    hub: { label: "Explore tours & day trips", to: "/tours/" },
   },
   {
     id: "shore-excursions", eyebrow: "Shore Excursions", tagline: "Make the Most of Your Time Ashore", title: "Shore Excursions",
@@ -103,7 +103,7 @@ const services: Service[] = [
       { label: "Caesarea", text: "Roman harbour city on the coast", to: "/attractions/caesarea/", img: IMG.caesarea },
       { label: "Bethlehem", text: "Church of the Nativity & Manger Square", to: "/tours/bethlehem-from-jerusalem/", img: IMG.bethlehem },
     ],
-    hub: { label: "Explore attractions", to: "/attractions/" },
+    hub: { label: "Explore attractions & experiences", to: "/attractions/" },
   },
 
 ];

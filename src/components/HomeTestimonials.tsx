@@ -21,7 +21,7 @@ export function TripadvisorReviewsSection() {
         </div>
       </div>
       <TripadvisorReviewCarousel />
-      <div className="px-6 pb-8 sm:px-10"><a href={tripadvisorProfileUrl} target="_blank" rel="noopener noreferrer" className="btn btn-primary">Explore all Tripadvisor reviews <ExternalLink size={16} aria-hidden /></a></div>
+      <div className="flex justify-center px-6 pb-8 sm:px-10"><a href={tripadvisorProfileUrl} target="_blank" rel="noopener noreferrer" className="btn btn-primary">Explore all Tripadvisor reviews <ExternalLink size={16} aria-hidden /></a></div>
     </div>
   </section>;
 }

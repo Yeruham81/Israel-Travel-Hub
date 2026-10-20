@@ -42,7 +42,11 @@ describe("four independent airport transportation comparisons", () => {
       expect(doc.querySelector('a[href*="#request-quote"]')).not.toBeNull();
       expect(doc.querySelector('a[href*="#request-quote"]')?.getAttribute("href")).toContain(privateGuide.path);
       expect(doc.body.textContent).toContain("historical editorial estimates");
-      expect(doc.querySelector("#sources")).not.toBeNull();
+      const sourceDisclosure = doc.querySelector("#sources details");
+      expect(sourceDisclosure).not.toBeNull();
+      expect(sourceDisclosure!.hasAttribute("open")).toBe(false);
+      expect(sourceDisclosure!.querySelector("summary")?.textContent).toContain("Sources");
+      expect(sourceDisclosure!.querySelectorAll("a")).toHaveLength(7);
     }
     expect(new Set(titles).size).toBe(4);
   }, 30000);
