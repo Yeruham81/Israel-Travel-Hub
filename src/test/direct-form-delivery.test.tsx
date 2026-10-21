@@ -46,7 +46,7 @@ describe("one-step direct form delivery", () => {
     fill();
     expect(fetch).not.toHaveBeenCalled();
     fireEvent.click(screen.getByRole("button", { name: "Send message" }));
-    expect(await screen.findByText("Your message has been sent")).toBeInTheDocument();
+    expect(await screen.findByText("Thank you for contacting me")).toBeInTheDocument();
     expect(fetch).toHaveBeenCalledOnce();
     expect(fetch).toHaveBeenCalledWith("/api/quote-request/", expect.objectContaining({ method: "POST", credentials: "same-origin" }));
     const payload = JSON.parse(fetch.mock.calls[0]![1].body);
@@ -77,9 +77,9 @@ describe("one-step direct form delivery", () => {
     expect(fetch).toHaveBeenCalledOnce();
     expect(screen.getByRole("button", { name: "Sending…" })).toBeDisabled();
     expect(screen.getByLabelText("Your message *")).toBeDisabled();
-    expect(screen.queryByText("Your message has been sent")).not.toBeInTheDocument();
+    expect(screen.queryByText("Thank you for contacting me")).not.toBeInTheDocument();
     finish();
-    await screen.findByText("Your message has been sent");
+    await screen.findByText("Thank you for contacting me");
     fireEvent.submit(form);
     expect(fetch).toHaveBeenCalledOnce();
     expect(send).toHaveBeenCalledOnce();
@@ -92,7 +92,7 @@ describe("one-step direct form delivery", () => {
     fireEvent.click(screen.getByRole("button", { name: "Send message" }));
     expect(await screen.findByRole("alert")).toHaveTextContent("Message sending is temporarily unavailable");
     expect(screen.getByLabelText("Your message *")).toHaveValue(fields.message);
-    expect(screen.queryByText("Your message has been sent")).not.toBeInTheDocument();
+    expect(screen.queryByText("Thank you for contacting me")).not.toBeInTheDocument();
     expect(fetch).toHaveBeenCalledOnce();
     expect(send).not.toHaveBeenCalled();
   });
@@ -125,7 +125,7 @@ describe("one-step direct form delivery", () => {
     fireEvent.click(screen.getByRole("button", { name: "Send message" }));
     expect(await screen.findByRole("alert")).toHaveTextContent("could not confirm email delivery");
     expect(screen.getByRole("alert")).toHaveTextContent("Error code: BAD_RESPONSE (HTTP 200)");
-    expect(screen.queryByText("Your message has been sent")).not.toBeInTheDocument();
+    expect(screen.queryByText("Thank you for contacting me")).not.toBeInTheDocument();
   });
 
   it.each([
@@ -143,6 +143,6 @@ describe("one-step direct form delivery", () => {
     expect(alert).toHaveTextContent(`Error code: ${code} (HTTP ${status})`);
     expect(alert).not.toHaveTextContent(/password|Private server diagnostic/);
     expect(screen.getByLabelText("Your message *")).toHaveValue(fields.message);
-    expect(screen.queryByText("Your message has been sent")).not.toBeInTheDocument();
+    expect(screen.queryByText("Thank you for contacting me")).not.toBeInTheDocument();
   });
 });
