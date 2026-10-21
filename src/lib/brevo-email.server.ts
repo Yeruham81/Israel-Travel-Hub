@@ -46,6 +46,8 @@ export async function sendBrevoQuote(message: QuoteEmail, apiKey: string): Promi
         sender: { email: airportTransferContact.email, name: message.senderName },
         to: [{ email: airportTransferContact.email }],
         replyTo: { email: message.replyTo }, subject: message.subject, textContent: message.text, htmlContent: message.html,
+        // Reuse the validated request UUID across server instances and explicit retries.
+        headers: { idempotencyKey: message.requestId, "X-Mailin-custom": `request-reference:${message.requestId}` },
       }),
     });
     if (response.status !== 201) {

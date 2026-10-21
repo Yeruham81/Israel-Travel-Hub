@@ -55,3 +55,7 @@ The review used official guidance and operator documentation alongside the actua
 - A local production-worker HTTP audit returned **200 for all 101 sitemap pages**, including both legal documents. Both legal footer links were present on every page, canonical paths and staging `noindex,nofollow` were preserved, contents anchors resolved, and no legacy-site page referrals were found. The retired `/about/` still returned 404 without a redirect.
 - The legal-route tests cover section navigation, contact and reciprocal links, metadata/indexing, conditional planned features, ILS prices/charges, foreign-currency external-provider prices, mandatory-rights safeguards and shared footer links. The existing form, legacy-link and sitemap checks also cover these additions.
 - Verification used rendered HTML, route behavior and production CSS availability. Interactive browser visual inspection was unavailable in this environment; no claim of that inspection is made.
+
+## Brevo delivery clarification · 21 October 2026
+
+The Privacy Policy identifies Brevo transactional HTTPS delivery followed by the Hostinger business mailbox, provider retention of message content/delivery records and the source information transmitted through the form service. The integration does not subscribe visitors to a marketing list or install a website tracker. Actual account activation, runtime secrets and inbox checks remain operational steps; see [BREVO_SETUP.md](BREVO_SETUP.md). Earlier test totals above describe the original legal-document release.

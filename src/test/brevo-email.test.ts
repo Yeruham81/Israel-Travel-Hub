@@ -4,7 +4,7 @@ import { sendBrevoQuote, classifyBrevoNetworkError } from "@/lib/brevo-email.ser
 import { createQuoteDeliveryService } from "@/lib/quote-delivery.server";
 import { israelSubmissionTime, quoteEmailHtml, safeEmailSenderName } from "@/lib/quote-email-format.server";
 
-const message = { requestId: "test-reference", replyTo: "guest@example.com", subject: "Test enquiry", text: "Sent from page: Example\nAll fields\nשלום", html: "<strong>Sent from page:</strong> Example", senderName: "Test Visitor" };
+const message = { requestId: "f5835fad-372d-4e57-8379-d6d461a2407f", replyTo: "guest@example.com", subject: "Test enquiry", text: "Sent from page: Example\nAll fields\nשלום", html: "<strong>Sent from page:</strong> Example", senderName: "Test Visitor" };
 afterEach(() => { vi.unstubAllGlobals(); vi.useRealTimers(); });
 
 describe("Brevo email presentation", () => {
@@ -40,6 +40,7 @@ describe("Brevo REST transport", () => {
       sender: { email: "reservations@israel-taxi.com", name: "Test Visitor" },
       to: [{ email: "reservations@israel-taxi.com" }], replyTo: { email: "guest@example.com" },
       subject: message.subject, textContent: message.text, htmlContent: message.html,
+      headers: { idempotencyKey: message.requestId, "X-Mailin-custom": `request-reference:${message.requestId}` },
     });
   });
 
@@ -111,5 +112,31 @@ describe("Brevo REST transport", () => {
     expect(await (await handle(request())).json()).toEqual({ accepted: true, requestId });
     expect(await (await handle(request())).json()).toEqual({ accepted: true, requestId });
     expect(fetch).toHaveBeenCalledOnce();
+  });
+
+  it("keeps the same provider idempotency key across server instances without treating a duplicate rejection as new success", async () => {
+    const fetch = vi.fn()
+      .mockResolvedValueOnce(Response.json({ messageId: "private-provider-reference" }, { status: 201 }))
+      .mockResolvedValueOnce(Response.json({ code: "duplicate_parameter", message: "private provider response" }, { status: 400 }));
+    vi.stubGlobal("fetch", fetch);
+    const environment = () => ({ BREVO_API_KEY: "mock-credential", QUOTE_DELIVERY_ENABLED: "true" });
+    const first = createQuoteDeliveryService({ environment });
+    const reportFailure = vi.fn();
+    const anotherInstance = createQuoteDeliveryService({ environment, reportFailure });
+    const requestId = crypto.randomUUID();
+    const request = () => new Request("https://example.com/api/quote-request/", {
+      method: "POST", headers: { Origin: "https://example.com", "Content-Type": "application/json" },
+      body: JSON.stringify({ requestId, sourcePath: "/about-moshe-barak/", sourceTitle: "About Moshe Barak", website: "", request: { kind: "contact", fields: { name: "Test visitor", email: "guest@example.com", subject: "Test enquiry", message: "Test message", consent: true } } }),
+    });
+    expect(await (await first(request())).json()).toEqual({ accepted: true, requestId });
+    const duplicate = await anotherInstance(request());
+    expect(duplicate.status).toBe(502);
+    expect(await duplicate.json()).toMatchObject({ requestId, deliveryCode: "BREVO_REJECTED" });
+    expect(fetch).toHaveBeenCalledTimes(2);
+    for (const [, options] of fetch.mock.calls) expect(JSON.parse(String(options?.body)).headers.idempotencyKey).toBe(requestId);
+    // A further unchanged retry on that instance reuses its result, not another send.
+    expect((await anotherInstance(request())).status).toBe(502);
+    expect(fetch).toHaveBeenCalledTimes(2);
+    expect(JSON.stringify(reportFailure.mock.calls)).not.toMatch(/private|mock-credential|guest@/);
   });
 });

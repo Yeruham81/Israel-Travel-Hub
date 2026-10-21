@@ -2,38 +2,81 @@
 
 ## Current implementation
 
-All ten existing contact/quote form pages retain their direct Send action, field validation and shared same-origin `POST /api/quote-request/`. No form layout, route, booking behavior or publication setting was changed. Filling fields does not transmit them.
+All ten contact/quote form pages use the shared same-origin `POST /api/quote-request/` and the server-only Brevo HTTPS API. The existing field validation, required consent, source capture and direct Send action remain. Filling fields does not transmit them. No Nodemailer, SMTP socket, marketing-list subscription, visitor acknowledgement email or Brevo website tracker is used.
 
-The shared service validates input, consent, source title/path and Reply-To, and generates the subject and complete plain-text message, including all fields, source page/title, UTC submission time and request reference. Clients cannot set sender or recipient.
+The server builds both readable plain text and escaped HTML, with the source heading above the entered fields. The email starts with `Sent from page: [page heading]`; older clients without a heading use the path. Submission time follows Israel's daylight-saving rules. The subject is `Moshe Barak - Taxi & Travel in Israel / [visitor name]`, as requested. Message presentation and the current form labels are shared with the latest form updates.
 
-The server-only transport calls `POST https://api.brevo.com/v3/smtp/email` using global fetch with `api-key`, `accept: application/json` and `content-type: application/json` headers. Sender is **Israel Travel Hub <reservations@israel-taxi.com>**, recipient is **reservations@israel-taxi.com**, and Reply-To is the validated visitor email. No marketing contact list or visitor confirmation email is created.
+| Setting | Current value |
+| --- | --- |
+| Endpoint | `https://api.brevo.com/v3/smtp/email` |
+| From address / To | `reservations@israel-taxi.com`, fixed server-side |
+| From display name | Sanitized name entered by the visitor |
+| Reply-To | Validated visitor email |
+| Sending domain | `israel-taxi.com` |
+| Receiving mailbox | Existing Hostinger Email mailbox |
 
-Only **HTTP 201 with a nonempty messageId** counts as Brevo acceptance. The provider reference/body is not returned or logged. Acceptance is not proof of inbox placement or a booking. The existing confirmation remains an accepted-for-email-delivery message with the website request reference.
+The server authenticates in the `api-key` request header. Only HTTP 201 with a nonempty `messageId` counts as provider acceptance. That does not guarantee inbox receipt or a booking. Provider bodies, messages, keys and message IDs are not logged or returned. Manual redirects prevent forwarding credentials or enquiry data to another URL and are compatible with Cloudflare Workers.
 
-## Runtime secrets and preview testing
+## Brevo account and domain
 
-- `BREVO_API_KEY`: already listed in Lovable project Secrets. This uses the owner's explicitly requested direct API credential, not a connector gateway key. It is read only server-side at request time. Never use a VITE prefix, commit it, or paste it into chat.
-- `QUOTE_DELIVERY_ENABLED`: also listed in project Secrets. Its value must be the literal string `true`. A name listing does not verify its value. If readiness is false, open **Project Settings → Secrets**, set/update **QUOTE_DELIVERY_ENABLED** to **true**, and retain the existing Brevo key.
-- `SMTP_PASSWORD` is absent and no longer used; Nodemailer and its type dependency have been removed.
+1. Under **Settings → Senders, Domains, IPs → Domains**, authenticate **israel-taxi.com**, matching the From address. The temporary website domain does not need authentication. A marketing subdomain is optional for a future separate use.
+2. Add the exact account-specific Brevo-code and DKIM records to the authoritative DNS zone, then check authentication in Brevo. Under **Senders**, verify `reservations@israel-taxi.com`; complete any mailbox challenge requested by Brevo. Confirm transactional sending is active and quota is available. No campaign, mailing list, template or embedded form is required.
+3. Under **Settings → SMTP & API → API Keys & MCP**, create a normal API key for this website. Use an API key rather than an SMTP key or MCP key. Store it only in the website's secure runtime Secrets dialog. Never commit it, prefix it with `VITE_`, or paste it into chat/screenshots.
 
-Open `/api/quote-request/` in the current Lovable preview. The response contains only `available`; true requires both the enabled switch and a present Brevo key. This checks configuration only, not credential validity, sender verification, quota or delivery. Nothing was published or changed on the custom domain.
+### DNS verification
 
-Before the owner sends a controlled request, confirm Brevo permits **reservations@israel-taxi.com** as a transactional sender, verify the sender/domain as required in Brevo, and ensure transactional sending and account quota are available. Sender/domain/account status has not been checked by this migration.
+The owner added the records in QUIC.cloud. Public DNS on 21 October 2026 showed:
 
-Then the owner may submit one form with their own details, check Brevo's transactional logs and the reservations inbox (including Spam), confirm every field/source heading arrived and Reply-To targets the visitor. No real message was sent by the implementation tests. Preview uses the current changes; a later production update requires a separate explicit publication decision.
+| Record | Observed value |
+| --- | --- |
+| NS | `jon.quicns.com`, `kevin.quicns.com` |
+| Brevo-code TXT at root | Present |
+| `brevo1._domainkey` CNAME | `b1.israel-taxi-com.dkim.brevo.com` |
+| `brevo2._domainkey` CNAME | `b2.israel-taxi-com.dkim.brevo.com` |
+| `_dmarc` TXT | `v=DMARC1; p=none` |
+| MX | `5 mx1.hostinger.com`, `10 mx2.hostinger.com` |
+| Existing SPF TXT | `v=spf1 include:_spf.mail.hostinger.com ~all` |
 
-## Preserved safeguards and diagnostics
+Both DKIM CNAME targets resolved to public keys. The latest resolver checks show the DMARC policy above without a reporting tag; if Brevo requests its `rua` reporting destination, merge the account-provided tag into that existing policy. Public DNS is not proof that the Brevo account's authentication check has completed. While those nameservers remain authoritative, edits belong in **QUIC.cloud → DNS Zones → israel-taxi.com**. Keep the Hostinger mailbox, MX and existing SPF. Ordinary Brevo shared-IP authentication does not require changing MX/SPF. Do not add a second SPF/DMARC policy or move website records/nameservers. Merge a requested reporting tag into the existing DMARC policy rather than replacing another configured policy.
 
-- 20,000-byte actual body cap, strict schema, same-origin JSON POST, required consent and honeypot remain unchanged.
-- Per-instance ten-minute idempotency and hashed contact/IP limits, five attempts per window, two concurrent sends and bounded maps remain unchanged. These are not distributed quotas or guaranteed exactly-once delivery. Identical retries share the previous result; changed details require a new reference. No provider retries occur.
-- AbortController cancels after 20 seconds, including response processing. Network/timeouts can be ambiguous; fields remain and the user is told to confirm before resending. The browser's existing timeout and duplicate prevention are unchanged.
-- Sanitized logs contain only `quote-delivery.failed`, website request UUID, allowlisted delivery code and optional numeric provider HTTP status. No key, response body, provider error message, visitor fields or provider messageId is logged.
-- Codes: `BREVO_UNAUTHORIZED` (401), `BREVO_FORBIDDEN` (403), `BREVO_SENDER` (400 sender validation), `BREVO_RATE_LIMIT` (429), `BREVO_REJECTED` (other non-201 rejection), `BREVO_PROVIDER` (5xx or unknown service exception), `BREVO_RESPONSE` (invalid 201 acknowledgement), `BREVO_TIMEOUT`, `BREVO_NETWORK`. Existing origin/endpoint/browser HTTP and request codes remain separate. Sender-specific classification examines only 400 validation privately; unsupported error formats remain generic rejection.
-- The application does not add enquiry storage or new backend infrastructure. Brevo and hosting/mailbox providers process/retain their own records; the privacy notice now identifies Brevo. Transient guard maps retain hashes/references/results, not message bodies.
+## Runtime activation
+
+| Secret | Value |
+| --- | --- |
+| `BREVO_API_KEY` | Normal Brevo API key, server-side only |
+| `QUOTE_DELIVERY_ENABLED` | Exact string `true`; `false` pauses delivery |
+
+Both secret names were previously listed in the project. A listing does not verify their values or validity. `SMTP_PASSWORD` is no longer used by this website. Repository/Actions secrets do not automatically configure managed website runtime secrets. No new backend, hosting migration or Lovable AI prompt is required for this integration.
+
+`GET /api/quote-request/` returns only `available`. True means the running server can see the key and enabled switch; it does not check account activation, API authorization, sender/domain verification or quota. An authenticated preview may reject anonymous external requests. Public production can serve an older snapshot until the owner publishes updates through the normal deployment controls.
+
+## The Authorized IP warning
+
+IP blocking is an additional account-level security restriction: requests must have a valid API key and come from an approved source IP. The request originates at the website server, not the visitor's/home browser IP. There is no confirmed fixed egress IP for the current managed hosting, so **leave optional IP blocking inactive during setup**. Enabling it with an incomplete list can block genuine form delivery. Do not guess IP addresses or authorize broad shared networks.
+
+Brevo documents an initial API learning phase. After 30 days without newly detected IPs, blocking can activate automatically; monitor its security notices and review the learned list. A strict allowlist is appropriate after all actual server egress addresses are confirmed, preferably fixed egress. The list is shared across API/SMTP keys, so account-wide changes can affect other integrations. Store/rotate the key securely and observe its expiry/inactivity policy.
+
+## Controlled delivery and duplicate handling
+
+Submit one request using contact details you own on the actual site. Confirm acceptance, then check the reservations inbox including Spam and **Brevo → Transactional → Logs**. Check every field, source heading, name/subject and Reply-To. Confirm the other form formats before launch. Neither a readiness response nor automated tests proves actual inbox delivery.
+
+There are no automatic retries. Unchanged explicit retries keep their UUID; same-instance attempts share results for ten minutes. The UUID also goes to Brevo as `headers.idempotencyKey` and in `X-Mailin-custom` for correlation. Brevo documents a 30-minute deduplication window and a `duplicate_parameter` rejection for repeated keys. A duplicate rejection is not new success; check logs/mailbox before creating a new reference, especially after a timeout. These guards do not guarantee exactly-once delivery indefinitely.
+
+The existing actual-body cap (20 KB), strict schema, origin check, honeypot, consent, hashed contact/IP limits (five attempts per ten minutes), two-send concurrency cap and bounded maps remain. They are per-instance controls rather than global quotas. Provider/hosting services can retain content and delivery records under their own policies/settings; review retention before launch. The Privacy Policy identifies both Brevo and the receiving mailbox provider.
+
+## Diagnostics and verification
+
+Safe codes distinguish authentication (`BREVO_UNAUTHORIZED`), permissions/IP restrictions (`BREVO_FORBIDDEN`), sender verification (`BREVO_SENDER`), rate limits, provider rejection/server failures, invalid acceptance, timeouts, DNS, TLS, connection, redirect/runtime and general network failures. Only the fixed code, website UUID and optional numeric provider status enter structured warnings. The site's HTTP 502 differs from the upstream provider status. Browser/origin/endpoint codes remain separate. Never paste keys or raw enquiry data when reporting errors.
+
+The current verification results are in BUILD_STATUS.md. Tests use mocked Brevo responses and no real credentials or emails. Actual account/runtime/inbox state must be confirmed in the live account/site.
 
 ## References
 
-- [Brevo transactional email API](https://developers.brevo.com/reference/sendtransacemail)
+- [Brevo transactional send](https://developers.brevo.com/reference/send-transac-email)
+- [Brevo idempotency](https://developers.brevo.com/docs/heterogenous-versions-batch-emails)
+- [Domain authentication](https://help.brevo.com/hc/en-us/articles/12163873383186-Authenticate-your-domain-with-Brevo-Brevo-code-DKIM-DMARC)
+- [Create a sender](https://help.brevo.com/hc/en-us/articles/208836149-Create-a-new-sender-From-name-and-From-email)
+- [API keys](https://help.brevo.com/hc/en-us/articles/209467485-Create-and-manage-your-API-keys)
+- [Authorized IP security](https://help.brevo.com/hc/en-us/articles/5740111683858-Authorize-and-block-IP-addresses-for-API-and-SMTP-security)
+- [QUIC.cloud DNS](https://docs.quic.cloud/cdn/dns/)
 - [Lovable secrets](https://docs.lovable.dev/features/secrets)
-
-Automated migration results are recorded in BUILD_STATUS.md. Mock acceptance is not live end-to-end delivery verification.

@@ -49,6 +49,10 @@ describe("current legal documents", () => {
     expect(doc.getElementById("enquiries")?.textContent).toContain("Where a form offers direct submission");
     expect(doc.getElementById("enquiries")?.textContent).toContain("send the entered details directly through this website");
     expect(doc.getElementById("enquiries")?.textContent).toContain("does not save those enquiry fields in browser storage");
+    const recipients = doc.getElementById("recipients")?.textContent || "";
+    expect(recipients).toContain("Brevo's transactional email service");
+    expect(recipients).toContain("business mailbox hosted by Hostinger Email");
+    expect(recipients).toContain("does not subscribe you to a marketing list");
     expect(doc.getElementById("storage")?.textContent).toContain("up to 200 outbound-link clicks");
     expect(doc.getElementById("storage")?.textContent).toContain("does not upload the record");
     expect(doc.getElementById("storage")?.textContent).toContain("continuing to browse, is not a substitute");
