@@ -18,6 +18,7 @@ describe("Brevo email presentation", () => {
     expect(html).toContain("<strong>Sent from page:</strong> About &amp; contact");
     expect(html).toContain("<strong>Name:</strong> &lt;script&gt;alert(1)&lt;/script&gt;");
     expect(html).toContain("<strong>Message:</strong><br>Hello &amp; goodbye");
+    expect(quoteEmailHtml("Additional requests:\nChild seat")).toContain("<strong>Additional requests:</strong><br>Child seat");
     expect(html).toContain("Unknown: must remain plain");
     expect(html).not.toContain("<script>");
     expect(safeEmailSenderName("  Jane\r\nSmith  ")).toBe("Jane Smith");
