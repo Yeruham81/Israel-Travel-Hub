@@ -9,4 +9,10 @@ export type QuoteRequest =
   | { kind: "driver"; fields: DriverQuoteFields }
   | { kind: "shore"; portId: ShorePortId; fields: ShoreQuoteFields };
 
-export type QuoteRequestPayload = { requestId: string; sourcePath: string; website: string; request: QuoteRequest };
+export type QuoteSourcePage = { sourcePath: string; sourceTitle?: string | undefined };
+export type QuoteRequestPayload = QuoteSourcePage & { requestId: string; website: string; request: QuoteRequest };
+
+/** Keep the source above the enquiry in direct email, email-app drafts and copied text. */
+export function quoteRequestBody(body: string, source: QuoteSourcePage) {
+  return `Source page: ${source.sourceTitle || source.sourcePath}\nPage path: ${source.sourcePath}\n\n${body}`;
+}

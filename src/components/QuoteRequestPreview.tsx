@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { airportTransferContact } from "@/data/registry";
-import { quoteRequestEndpoint, type QuoteRequest } from "@/lib/quote-request";
+import { quoteRequestBody, quoteRequestEndpoint, type QuoteRequest } from "@/lib/quote-request";
 
 type Draft = { subject: string; body: string; url: string };
 
@@ -12,6 +12,14 @@ export function QuoteRequestPreview({ draft, request, previewLabel, onBusy }: {
   const [state, setState] = useState<"draft" | "sending" | "sent" | "failed">("draft");
   const [copyMessage, setCopyMessage] = useState("");
   const [website, setWebsite] = useState("");
+  // Capture the page when the reviewed draft opens, before any later navigation.
+  const [source] = useState(() => ({
+    sourcePath: typeof window === "undefined" ? "/" : window.location.pathname,
+    sourceTitle: typeof document === "undefined" ? undefined :
+      (document.querySelector("main h1")?.textContent || document.title).replace(/\s+/g, " ").trim().slice(0, 300) || undefined,
+  }));
+  const body = quoteRequestBody(draft.body, source);
+  const emailUrl = `${draft.url.split("?")[0]}?subject=${encodeURIComponent(draft.subject)}&body=${encodeURIComponent(body)}`;
   const requestId = useRef<string | null>(null);
   const sending = useRef(false);
 
@@ -39,7 +47,7 @@ export function QuoteRequestPreview({ draft, request, previewLabel, onBusy }: {
         method: "POST", credentials: "same-origin", cache: "no-store",
         signal: controller.signal,
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ requestId: requestId.current, sourcePath: window.location.pathname, website, request }),
+        body: JSON.stringify({ requestId: requestId.current, ...source, website, request }),
       });
       const result = await response.json() as { accepted?: boolean; requestId?: string };
       if (!response.ok || result.accepted !== true || result.requestId !== requestId.current) throw new Error("Delivery not confirmed");
@@ -49,7 +57,7 @@ export function QuoteRequestPreview({ draft, request, previewLabel, onBusy }: {
   }
 
   async function copyRequest() {
-    try { await navigator.clipboard.writeText(`${draft.subject}\n\n${draft.body}`); setCopyMessage("Request copied. Paste it into an email to Moshe."); }
+    try { await navigator.clipboard.writeText(`${draft.subject}\n\n${body}`); setCopyMessage("Request copied. Paste it into an email to Moshe."); }
     catch { setCopyMessage("Select and copy the request text below, then paste it into your email."); }
   }
 
@@ -67,9 +75,9 @@ export function QuoteRequestPreview({ draft, request, previewLabel, onBusy }: {
     <div className="sr-only" aria-hidden="true"><label>Leave this field empty<input name="website" tabIndex={-1} autoComplete="off" value={website} onChange={(event) => setWebsite(event.target.value)} /></label></div>
     <div className="mt-4 flex flex-wrap gap-3">
       {available && (state === "draft" || state === "sending") && <button type="button" onClick={() => void send()} disabled={state === "sending"} className="btn btn-primary">{state === "sending" ? "Sending request…" : "Send request to Moshe"}</button>}
-      {state !== "sending" && <><a href={draft.url} className={available ? "btn btn-outline" : "btn btn-primary"}>Open email to Moshe</a><button type="button" onClick={() => void copyRequest()} className="btn btn-outline">Copy request</button></>}
+      {state !== "sending" && <><a href={emailUrl} className={available ? "btn btn-outline" : "btn btn-primary"}>Open email to Moshe</a><button type="button" onClick={() => void copyRequest()} className="btn btn-outline">Copy request</button></>}
     </div>
     {copyMessage && <p className="mt-3 text-sm">{copyMessage}</p>}
-    <details className="mt-4 text-sm"><summary className="cursor-pointer font-medium">Review request text</summary><textarea aria-label={previewLabel} readOnly rows={12} value={`${draft.subject}\n\n${draft.body}`} className="mt-3 w-full rounded border bg-background p-3 text-sm" /></details>
+    <details className="mt-4 text-sm"><summary className="cursor-pointer font-medium">Review request text</summary><textarea aria-label={previewLabel} readOnly rows={12} value={`${draft.subject}\n\n${body}`} className="mt-3 w-full rounded border bg-background p-3 text-sm" /></details>
   </div>;
 }

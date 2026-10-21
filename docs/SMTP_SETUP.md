@@ -4,7 +4,7 @@
 
 All three quote forms (airport transfers and destination pages, private driver, and Haifa/Ashdod shore excursions) use the shared request preview. Preparing a request keeps its fields in browser memory. The preview makes a read-only `GET /api/quote-request/` readiness check without transmitting enquiry fields. When direct delivery is enabled, a separate **Send request to Moshe** action submits the reviewed snapshot to the same-origin server endpoint. The existing email-app and copy alternatives remain available until a message is accepted.
 
-The server checks the runtime input types, required consent, journey validation and actual body size. It constructs the subject/body itself from the existing form-specific formatters, including all the filled fields, and adds the source page path (without query parameters), UTC submission time and request reference. The visitor's address is used as Reply-To. SMTP sender, envelope and recipient are fixed server-side; the client cannot choose them.
+The server checks the runtime input types, required consent, journey validation and actual body size. It constructs the subject/body itself from the existing form-specific formatters, including all the filled fields. Every email begins with **Source page: [page name]** and **Page path: [path without query parameters or fragments]**, above the enquiry. The name is captured from the visible main heading when the preview opens, with the document title as a fallback; older clients without a name retain the path. This same header appears in the reviewed text, email-app draft and copied request. UTC submission time and request reference remain at the end. The visitor's address is used as Reply-To. SMTP sender, envelope and recipient are fixed server-side; the client cannot choose them.
 
 | Setting | Confirmed value |
 | --- | --- |
@@ -66,3 +66,5 @@ The temporary Lovable URL can use the existing Hostinger SMTP mailbox now. Movin
 ## Validation
 
 Verification results are recorded in `docs/BUILD_STATUS.md`. No claim of live SMTP authentication, inbox delivery, or deployment is made without observing it in the actual hosting environment.
+
+The source-page email header update passed all **218 tests across 33 files**, TypeScript and the production build. Coverage checks the header before the enquiry for each form type, a destination page independent of the requested destination, email-app/copy/direct consistency, safe title validation, omission of query parameters/fragments and compatibility with older clients. No real SMTP email was attempted.

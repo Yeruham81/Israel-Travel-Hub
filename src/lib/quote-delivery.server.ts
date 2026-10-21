@@ -3,7 +3,7 @@ import { buildTransferQuoteDraft, validateTransferQuote } from "@/lib/transfer-q
 import { buildDriverQuoteDraft, validateDriverQuote } from "@/lib/private-driver-quote";
 import { buildShoreQuoteDraft, validateShoreQuote } from "@/lib/shore-quote";
 import { quoteRequestSchema } from "@/lib/quote-request-schema.server";
-import type { QuoteRequestPayload } from "@/lib/quote-request";
+import { quoteRequestBody, type QuoteRequestPayload } from "@/lib/quote-request";
 import type { QuoteEmail } from "@/lib/hostinger-smtp.server";
 
 type MailEnvironment = { SMTP_PASSWORD?: string; QUOTE_DELIVERY_ENABLED?: string };
@@ -57,7 +57,7 @@ export function quoteEmail(payload: QuoteRequestPayload, now: Date): QuoteEmail 
   }
   return {
     requestId: payload.requestId, replyTo: fields.email.trim(), subject: draft.subject,
-    text: `${draft.body}\n\n---\nWebsite: Israel Travel Hub\nForm: ${request.kind}\nSource page: ${payload.sourcePath}\nSubmitted: ${now.toISOString()}\nRequest reference: ${payload.requestId}`,
+    text: `${quoteRequestBody(draft.body, payload)}\n\n---\nWebsite: Israel Travel Hub\nForm: ${request.kind}\nSubmitted: ${now.toISOString()}\nRequest reference: ${payload.requestId}`,
   };
 }
 
@@ -94,7 +94,7 @@ export function createQuoteDeliveryService({
     } catch { return response({ error: "Please check your request details." }, 400); }
     const email = quoteEmail(payload, new Date(timestamp));
     if (!email) return response({ error: "Please check your contact and journey details." }, 400);
-    const fingerprint = hash(JSON.stringify({ request: payload.request, sourcePath: payload.sourcePath }));
+    const fingerprint = hash(JSON.stringify({ request: payload.request, sourcePath: payload.sourcePath, sourceTitle: payload.sourceTitle }));
     const previous = recent.get(payload.requestId);
     if (previous) {
       if (previous.fingerprint !== fingerprint) return response({ error: "Please prepare a new request after editing." }, 409);

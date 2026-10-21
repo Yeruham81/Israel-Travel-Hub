@@ -13,7 +13,12 @@ const contact = { name: "Jamie & Alex", email: "jamie+trip@example.com", phone: 
 const transfer: QuoteRequest = { kind: "transfer", fields: { ...emptyTransferQuote, ...contact, date: "2027-06-20", time: "14:30", flight: "LY315", destinationId: "other", otherDestination: "Ein Gedi", address: "Example Hotel", passengers: "6", suitcases: "4", carryOns: "2" } };
 const driver: QuoteRequest = { kind: "driver", fields: { ...emptyDriverQuote, ...contact, serviceId: "multi-stop", date: "2027-06-20", time: "09:30", pickup: "Tel Aviv Hotel", dropoff: "Jerusalem Hotel", passengers: "5", luggage: "Three cases and stroller", itinerary: "Caesarea\nLunch & Jerusalem", guide: "licensed-guide" } };
 const shore: QuoteRequest = { kind: "shore", portId: "haifa", fields: { ...emptyShoreQuote, ...contact, country: "United Kingdom", ship: "Voyager", date: "2027-06-20", pickupTime: "08:30", allAboardDate: "2027-06-21", allAboardTime: "17:00", itineraryId: "other", otherItinerary: "Akko & Nazareth", passengers: "6" } };
-const payload = (request: QuoteRequest = transfer): QuoteRequestPayload => ({ requestId: randomUUID(), sourcePath: "/transfers/", website: "", request });
+const payload = (request: QuoteRequest = transfer): QuoteRequestPayload => ({
+  requestId: randomUUID(), website: "", request,
+  ...(request.kind === "transfer" ? { sourcePath: "/transfers/", sourceTitle: "Airport transfers" }
+    : request.kind === "driver" ? { sourcePath: "/private-driver/", sourceTitle: "Private driver in Israel" }
+      : { sourcePath: `/${request.portId}-shore-excursions/`, sourceTitle: `${request.portId === "haifa" ? "Haifa" : "Ashdod"} shore excursions: private day trips & prices` }),
+});
 function post(data: unknown, headers: Record<string, string> = {}) {
   return new Request("https://preview.example/api/quote-request/", { method: "POST", headers: { Origin: "https://preview.example", "Content-Type": "application/json", ...headers }, body: JSON.stringify(data) });
 }
@@ -48,11 +53,25 @@ describe("server-side quote delivery", () => {
     const message = send.mock.calls[0]![0];
     for (const value of values) expect(message.text).toContain(value);
     expect(message.text).toContain("I consent to sharing these details");
-    expect(message.text).toContain("Source page: /transfers/");
+    expect(message.text).toMatch(new RegExp(`^Source page: ${data.sourceTitle}\\nPage path: ${data.sourcePath}\\n\\nHello Moshe,`));
     expect(message.text).toContain("2026-10-21T12:00:00.000Z");
     expect(message.replyTo).toBe(contact.email);
     expect(Object.keys(message).sort()).toEqual(["replyTo", "requestId", "subject", "text"]);
     expect(send.mock.calls[0]![1]).toBe("test-only-password");
+  });
+
+  it("uses the actual page title independently of the selected destination and supports older clients without a title", async () => {
+    const send = vi.fn().mockResolvedValue(undefined);
+    const handle = createQuoteDeliveryService({ environment: enabled, send, now });
+    const data = { ...payload(), sourcePath: "/travel-blog/ben-gurion-airport-to-jerusalem/", sourceTitle: "Private transfer from Ben Gurion Airport to Jerusalem" };
+    expect((await handle(post(data))).status).toBe(200);
+    expect(send.mock.calls[0]![0].text).toMatch(/^Source page: Private transfer from Ben Gurion Airport to Jerusalem\nPage path: \/travel-blog\/ben-gurion-airport-to-jerusalem\/\n\nHello Moshe,/);
+    expect(send.mock.calls[0]![0].text).toContain("Destination: Ein Gedi");
+    const legacy = { ...payload(), sourceTitle: undefined };
+    expect((await handle(post(legacy))).status).toBe(200);
+    expect(send.mock.calls[1]![0].text).toMatch(/^Source page: \/transfers\/\nPage path: \/transfers\/\n\nHello Moshe,/);
+    expect((await handle(post({ ...data, sourceTitle: "Changed page title" }))).status).toBe(409);
+    expect(send).toHaveBeenCalledTimes(2);
   });
 
   it("rejects forged types, consent, destinations, dates, extra recipients and header injection", async () => {
@@ -69,6 +88,11 @@ describe("server-side quote delivery", () => {
       { ...base, request: { ...transfer, fields: { ...fields, date: "2020-01-01" } } },
       { ...base, website: "spam.example" },
       { ...base, sourcePath: "/?email=private@example.com" },
+      { ...base, sourceTitle: { title: "Invalid" } },
+      { ...base, sourceTitle: "" },
+      { ...base, sourceTitle: "x".repeat(301) },
+      { ...base, sourceTitle: "Page\r\nInjected content" },
+      { ...base, sourceTitle: "Page\u0000title" },
       { ...base, request: { ...shore, portId: "other" } },
     ];
     for (const data of cases) expect((await handle(post(data))).status).toBe(400);
