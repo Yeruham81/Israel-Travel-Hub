@@ -43,9 +43,9 @@ describe("server-side quote delivery", () => {
   });
 
   it.each([
-    [transfer, ["Name: Jamie & Alex", "Email: jamie+trip@example.com", "Phone / WhatsApp: +44 12345", "Destination: Ein Gedi", "Hotel / address: Example Hotel", "2027-06-20 at 14:30", "Flight number: LY315", "Passengers (including children): 6", "Suitcases: 4", "Carry-ons: 2", contact.notes]],
-    [driver, ["2027-06-20", "09:30", "Pickup: Tel Aviv Hotel", "Final drop-off: Jerusalem Hotel", "Passengers (including children): 5", "Luggage: Three cases and stroller", "Caesarea\nLunch & Jerusalem", contact.notes]],
-    [shore, ["Haifa", "Country: United Kingdom", "Cruise ship: Voyager", "2027-06-20", "08:30", "2027-06-21 at 17:00", "Requested itinerary: Akko & Nazareth", "Passengers (including children): 6", contact.notes]],
+    [transfer, ["Name: Jamie & Alex", "Email: jamie+trip@example.com", "Phone / WhatsApp: +44 12345", "Destination: Ein Gedi", "Hotel / address: Example Hotel", "2027-06-20 at 14:30", "Flight number: LY315", "Passengers: 6", "Suitcases: 4", "Carry-ons: 2", contact.notes]],
+    [driver, ["2027-06-20", "09:30", "Pickup: Tel Aviv Hotel", "Final drop-off: Jerusalem Hotel", "Passengers: 5", "Luggage: Three cases and stroller", "Caesarea\nLunch & Jerusalem", contact.notes]],
+    [shore, ["Haifa", "Country: United Kingdom", "Cruise ship: Voyager", "2027-06-20", "08:30", "2027-06-21 at 17:00", "Requested itinerary: Akko & Nazareth", "Passengers: 6", contact.notes]],
     [enquiry, ["Name: Jamie & Alex", "Email: jamie+trip@example.com", "Subject: Airport trip & a question", enquiry.fields.message]],
   ] as const)("builds every %s field into the server-generated message", async (request, values) => {
     const send = vi.fn().mockResolvedValue(undefined);
@@ -56,22 +56,30 @@ describe("server-side quote delivery", () => {
     expect(await result.json()).toEqual({ accepted: true, requestId: data.requestId });
     const message = send.mock.calls[0]![0];
     for (const value of values) expect(message.text).toContain(value);
-    expect(message.text).toContain("I consent to sharing these details");
+    const consent = "I consent to sharing these details with Moshe Barak for this inquiry.";
+    expect(message.text.split(consent)).toHaveLength(2);
+    expect(message.text).not.toMatch(/Hello Moshe|Please send me a quote|Please confirm|I understand that|Please quote a suitable vehicle/);
+    expect(message.html).toContain(consent);
+    expect(message.subject).toBe("Moshe Barak - Taxi & Travel in Israel / Jamie & Alex");
     expect(message.text.startsWith(`Sent from page: ${data.sourceTitle}\n\n`)).toBe(true);
     expect(message.text).toContain("21 October 2026, 15:00 (Israel time)");
     expect(message.replyTo).toBe(contact.email);
     expect(message.senderName).toBe(contact.name);
-    if (request.kind === "transfer") {
-      expect(message.subject).toBe("Moshe Barak - Taxi & Travel in Israel - Ben Gurion to Ein Gedi / Jamie & Alex");
-    }
     if (request.kind === "driver") {
-      expect(message.subject).toBe("Moshe Barak - Taxi & Travel in Israel - Tel Aviv Hotel to Jerusalem Hotel / Jamie & Alex");
       expect(message.text).not.toContain("Guide preference:");
       expect(message.text).toContain("Additional requests:");
       expect(message.html).toContain("<strong>Additional requests:</strong>");
     }
     expect(message.html).toContain("<strong>Sent from page:</strong>");
     expect(message.html).toContain("<strong>Name:</strong>");
+    if (request.kind !== "contact") {
+      expect(message.html).toContain("<strong>Passengers:</strong>");
+      expect(message.text).not.toContain("Passengers (including children):");
+    }
+    if (request.kind === "shore") {
+      expect(message.text).toContain("Departure & return port: Haifa Port");
+      expect(message.html).toContain("<strong>Departure &amp; return port:</strong> Haifa Port");
+    }
     expect(Object.keys(message).sort()).toEqual(["html", "replyTo", "requestId", "senderName", "subject", "text"]);
     expect(send.mock.calls[0]![1]).toBe("test-only-key");
   });
@@ -81,11 +89,11 @@ describe("server-side quote delivery", () => {
     const handle = createQuoteDeliveryService({ environment: enabled, send, now });
     const data = { ...payload(), sourcePath: "/travel-blog/ben-gurion-airport-to-jerusalem/", sourceTitle: "Private transfer from Ben Gurion Airport to Jerusalem" };
     expect((await handle(post(data))).status).toBe(200);
-    expect(send.mock.calls[0]![0].text).toMatch(/^Sent from page: Private transfer from Ben Gurion Airport to Jerusalem\n\nHello Moshe,/);
+    expect(send.mock.calls[0]![0].text).toMatch(/^Sent from page: Private transfer from Ben Gurion Airport to Jerusalem\n\nName: Jamie & Alex/);
     expect(send.mock.calls[0]![0].text).toContain("Destination: Ein Gedi");
     const legacy = { ...payload(), sourceTitle: undefined };
     expect((await handle(post(legacy))).status).toBe(200);
-    expect(send.mock.calls[1]![0].text).toMatch(/^Sent from page: \/transfers\/\n\nHello Moshe,/);
+    expect(send.mock.calls[1]![0].text).toMatch(/^Sent from page: \/transfers\/\n\nName: Jamie & Alex/);
     expect((await handle(post({ ...data, sourceTitle: "Changed page title" }))).status).toBe(409);
     expect(send).toHaveBeenCalledTimes(2);
   });
