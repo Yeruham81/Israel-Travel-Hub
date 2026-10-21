@@ -61,6 +61,9 @@ describe("server-side quote delivery", () => {
     expect(message.text).toContain("21 October 2026, 15:00 (Israel time)");
     expect(message.replyTo).toBe(contact.email);
     expect(message.senderName).toBe(contact.name);
+    if (request.kind === "transfer") {
+      expect(message.subject).toBe("Moshe Barak - Taxi & Travel in Israel - Ben Gurion to Ein Gedi / Jamie & Alex");
+    }
     expect(message.html).toContain("<strong>Sent from page:</strong>");
     expect(message.html).toContain("<strong>Name:</strong>");
     expect(Object.keys(message).sort()).toEqual(["html", "replyTo", "requestId", "senderName", "subject", "text"]);
