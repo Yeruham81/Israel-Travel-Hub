@@ -105,6 +105,8 @@ import { Route as TravelBlogSherutInIsraelRouteImport } from './routes/travel-bl
 import { Route as TravelBlogShoppingInJerusalemRouteImport } from './routes/travel-blog.shopping-in-jerusalem'
 import { Route as TravelBlogTabghaRouteImport } from './routes/travel-blog.tabgha'
 import { Route as TravelBlogTaxisInIsraelRouteImport } from './routes/travel-blog.taxis-in-israel'
+import { Route as TravelBlogTaxiFaresInIsraelRouteImport } from './routes/travel-blog.taxi-fares-in-israel'
+import { Route as TravelBlogBenGurionAirportTaxisRouteImport } from './routes/travel-blog.ben-gurion-airport-taxis'
 import { Route as TravelBlogTelMegiddoRouteImport } from './routes/travel-blog.tel-megiddo'
 import { Route as TravelBlogTheDeadSeaRouteImport } from './routes/travel-blog.the-dead-sea'
 import { Route as TravelBlogTop10ThingsToDoInIsraelRouteImport } from './routes/travel-blog.top-10-things-to-do-in-israel'
@@ -643,6 +645,16 @@ const TravelBlogTaxisInIsraelRoute = TravelBlogTaxisInIsraelRouteImport.update({
   path: '/travel-blog/taxis-in-israel',
   getParentRoute: () => rootRouteImport,
 } as any)
+const TravelBlogTaxiFaresInIsraelRoute = TravelBlogTaxiFaresInIsraelRouteImport.update({
+  id: '/travel-blog/taxi-fares-in-israel',
+  path: '/travel-blog/taxi-fares-in-israel',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TravelBlogBenGurionAirportTaxisRoute = TravelBlogBenGurionAirportTaxisRouteImport.update({
+  id: '/travel-blog/ben-gurion-airport-taxis',
+  path: '/travel-blog/ben-gurion-airport-taxis',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const TravelBlogTelMegiddoRoute = TravelBlogTelMegiddoRouteImport.update({
   id: '/travel-blog/tel-megiddo',
   path: '/travel-blog/tel-megiddo',
@@ -782,6 +794,8 @@ export interface FileRoutesByFullPath {
   '/travel-blog/shopping-in-jerusalem': typeof TravelBlogShoppingInJerusalemRoute
   '/travel-blog/tabgha': typeof TravelBlogTabghaRoute
   '/travel-blog/taxis-in-israel': typeof TravelBlogTaxisInIsraelRoute
+  '/travel-blog/taxi-fares-in-israel': typeof TravelBlogTaxiFaresInIsraelRoute
+  '/travel-blog/ben-gurion-airport-taxis': typeof TravelBlogBenGurionAirportTaxisRoute
   '/travel-blog/tel-megiddo': typeof TravelBlogTelMegiddoRoute
   '/travel-blog/the-dead-sea': typeof TravelBlogTheDeadSeaRoute
   '/travel-blog/top-10-things-to-do-in-israel': typeof TravelBlogTop10ThingsToDoInIsraelRoute
@@ -888,6 +902,8 @@ export interface FileRoutesByTo {
   '/travel-blog/shopping-in-jerusalem': typeof TravelBlogShoppingInJerusalemRoute
   '/travel-blog/tabgha': typeof TravelBlogTabghaRoute
   '/travel-blog/taxis-in-israel': typeof TravelBlogTaxisInIsraelRoute
+  '/travel-blog/taxi-fares-in-israel': typeof TravelBlogTaxiFaresInIsraelRoute
+  '/travel-blog/ben-gurion-airport-taxis': typeof TravelBlogBenGurionAirportTaxisRoute
   '/travel-blog/tel-megiddo': typeof TravelBlogTelMegiddoRoute
   '/travel-blog/the-dead-sea': typeof TravelBlogTheDeadSeaRoute
   '/travel-blog/top-10-things-to-do-in-israel': typeof TravelBlogTop10ThingsToDoInIsraelRoute
@@ -995,6 +1011,8 @@ export interface FileRoutesById {
   '/travel-blog/shopping-in-jerusalem': typeof TravelBlogShoppingInJerusalemRoute
   '/travel-blog/tabgha': typeof TravelBlogTabghaRoute
   '/travel-blog/taxis-in-israel': typeof TravelBlogTaxisInIsraelRoute
+  '/travel-blog/taxi-fares-in-israel': typeof TravelBlogTaxiFaresInIsraelRoute
+  '/travel-blog/ben-gurion-airport-taxis': typeof TravelBlogBenGurionAirportTaxisRoute
   '/travel-blog/tel-megiddo': typeof TravelBlogTelMegiddoRoute
   '/travel-blog/the-dead-sea': typeof TravelBlogTheDeadSeaRoute
   '/travel-blog/top-10-things-to-do-in-israel': typeof TravelBlogTop10ThingsToDoInIsraelRoute
@@ -1103,6 +1121,8 @@ export interface FileRouteTypes {
     | '/travel-blog/shopping-in-jerusalem'
     | '/travel-blog/tabgha'
     | '/travel-blog/taxis-in-israel'
+    | '/travel-blog/taxi-fares-in-israel'
+    | '/travel-blog/ben-gurion-airport-taxis'
     | '/travel-blog/tel-megiddo'
     | '/travel-blog/the-dead-sea'
     | '/travel-blog/top-10-things-to-do-in-israel'
@@ -1209,6 +1229,8 @@ export interface FileRouteTypes {
     | '/travel-blog/shopping-in-jerusalem'
     | '/travel-blog/tabgha'
     | '/travel-blog/taxis-in-israel'
+    | '/travel-blog/taxi-fares-in-israel'
+    | '/travel-blog/ben-gurion-airport-taxis'
     | '/travel-blog/tel-megiddo'
     | '/travel-blog/the-dead-sea'
     | '/travel-blog/top-10-things-to-do-in-israel'
@@ -1315,6 +1337,8 @@ export interface FileRouteTypes {
     | '/travel-blog/shopping-in-jerusalem'
     | '/travel-blog/tabgha'
     | '/travel-blog/taxis-in-israel'
+    | '/travel-blog/taxi-fares-in-israel'
+    | '/travel-blog/ben-gurion-airport-taxis'
     | '/travel-blog/tel-megiddo'
     | '/travel-blog/the-dead-sea'
     | '/travel-blog/top-10-things-to-do-in-israel'
@@ -1422,6 +1446,8 @@ export interface RootRouteChildren {
   TravelBlogShoppingInJerusalemRoute: typeof TravelBlogShoppingInJerusalemRoute
   TravelBlogTabghaRoute: typeof TravelBlogTabghaRoute
   TravelBlogTaxisInIsraelRoute: typeof TravelBlogTaxisInIsraelRoute
+  TravelBlogTaxiFaresInIsraelRoute: typeof TravelBlogTaxiFaresInIsraelRoute
+  TravelBlogBenGurionAirportTaxisRoute: typeof TravelBlogBenGurionAirportTaxisRoute
   TravelBlogTelMegiddoRoute: typeof TravelBlogTelMegiddoRoute
   TravelBlogTheDeadSeaRoute: typeof TravelBlogTheDeadSeaRoute
   TravelBlogTop10ThingsToDoInIsraelRoute: typeof TravelBlogTop10ThingsToDoInIsraelRoute
@@ -2109,6 +2135,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof TravelBlogTaxisInIsraelRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/travel-blog/taxi-fares-in-israel': {
+      id: '/travel-blog/taxi-fares-in-israel'
+      path: '/travel-blog/taxi-fares-in-israel'
+      fullPath: '/travel-blog/taxi-fares-in-israel'
+      preLoaderRoute: typeof TravelBlogTaxiFaresInIsraelRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/travel-blog/ben-gurion-airport-taxis': {
+      id: '/travel-blog/ben-gurion-airport-taxis'
+      path: '/travel-blog/ben-gurion-airport-taxis'
+      fullPath: '/travel-blog/ben-gurion-airport-taxis'
+      preLoaderRoute: typeof TravelBlogBenGurionAirportTaxisRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/travel-blog/tel-megiddo': {
       id: '/travel-blog/tel-megiddo'
       path: '/travel-blog/tel-megiddo'
@@ -2275,6 +2315,8 @@ const rootRouteChildren: RootRouteChildren = {
   TravelBlogShoppingInJerusalemRoute: TravelBlogShoppingInJerusalemRoute,
   TravelBlogTabghaRoute: TravelBlogTabghaRoute,
   TravelBlogTaxisInIsraelRoute: TravelBlogTaxisInIsraelRoute,
+  TravelBlogTaxiFaresInIsraelRoute: TravelBlogTaxiFaresInIsraelRoute,
+  TravelBlogBenGurionAirportTaxisRoute: TravelBlogBenGurionAirportTaxisRoute,
   TravelBlogTelMegiddoRoute: TravelBlogTelMegiddoRoute,
   TravelBlogTheDeadSeaRoute: TravelBlogTheDeadSeaRoute,
   TravelBlogTop10ThingsToDoInIsraelRoute:
