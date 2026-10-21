@@ -44,16 +44,13 @@ export function validateTransferQuote(v: TransferQuoteFields, now = new Date()) 
 export function buildTransferQuoteDraft(v: TransferQuoteFields) {
   const destination = airportTransferRates.find((r) => r.id === v.destinationId)?.destination || v.otherDestination.trim();
   const singleLine = (value: string) => value.trim().replace(/[\r\n]+/g, " ");
-  const subject = `Moshe Barak - Taxi & Travel in Israel - Ben Gurion to ${singleLine(destination)} / ${singleLine(v.name)}`;
+  const subject = `Moshe Barak - Taxi & Travel in Israel / ${singleLine(v.name)}`;
   const body = [
-    "Hello Moshe,", "", "Please send me a quote for a private transfer from Ben Gurion Airport.", "",
     `Name: ${singleLine(v.name)}`, `Email: ${singleLine(v.email)}`, `Phone / WhatsApp: ${singleLine(v.phone) || "Not supplied"}`,
     "Pickup: Ben Gurion Airport (TLV)", `Destination: ${singleLine(destination)}`, `Hotel / address: ${singleLine(v.address) || "To be confirmed"}`,
     `Flight arrival: ${v.date} at ${v.time} (Israel local time)`, `Flight number: ${singleLine(v.flight) || "To be confirmed"}`,
-    `Passengers (including children): ${v.passengers}`, `Suitcases: ${v.suitcases}`, `Carry-ons: ${v.carryOns}`,
+    `Passengers: ${v.passengers}`, `Suitcases: ${v.suitcases}`, `Carry-ons: ${v.carryOns}`,
     "", "Additional requests / child seats:", v.notes.trim() || "None specified", "",
-    "Please confirm availability, the full price, vehicle, meeting point, waiting time, payment and cancellation terms.",
-    "I understand that this is a quote request and the transfer is only booked after confirmation.",
     "I consent to sharing these details with Moshe Barak for this inquiry.",
   ].join("\n");
   return { subject, body, url: `mailto:${airportTransferContact.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}` };
