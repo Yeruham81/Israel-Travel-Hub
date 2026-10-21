@@ -59,7 +59,7 @@ describe("one-step direct form delivery", () => {
     expect(email.senderName).toBe(fields.name);
     expect(email.html).toContain("<strong>Sent from page:</strong>");
     expect(screen.getByText("I will reply soon to the email address you provided.")).toBeInTheDocument();
-    expect(email.subject).toBe("Israel Travel Hub enquiry: " + fields.subject);
+    expect(email.subject).toBe("Moshe Barak - Taxi & Travel in Israel / " + fields.name);
     expect(email.text).not.toMatch(/campaign=|SEO title|#contact/);
     expect(screen.queryByText("Your Message Is Ready")).not.toBeInTheDocument();
     expect(screen.queryByRole("link", { name: /Open email/ })).not.toBeInTheDocument();
