@@ -6,6 +6,7 @@ import { quoteRequestSchema } from "@/lib/quote-request-schema.server";
 import { quoteRequestBody, type DeliveryErrorCode, type QuoteRequestPayload } from "@/lib/quote-request";
 import { BrevoDeliveryError, type QuoteEmail } from "@/lib/brevo-email.server";
 import { buildContactMessage, validateContactMessage } from "@/lib/contact-message";
+import { israelSubmissionTime, quoteEmailHtml, safeEmailSenderName } from "@/lib/quote-email-format.server";
 
 type MailEnvironment = { BREVO_API_KEY?: string; QUOTE_DELIVERY_ENABLED?: string };
 type Result = { status: number; body: { accepted?: boolean; requestId?: string; error?: string; deliveryCode?: DeliveryErrorCode } };
@@ -69,8 +70,8 @@ export function quoteEmail(payload: QuoteRequestPayload, now: Date): QuoteEmail 
       draft = buildShoreQuoteDraft(request.fields, request.portId); break;
   }
   return {
-    requestId: payload.requestId, replyTo: fields.email.trim(), subject: draft.subject,
-    text: `${quoteRequestBody(draft.body, payload)}\n\n---\nWebsite: Israel Travel Hub\nForm: ${request.kind}\nSubmitted: ${now.toISOString()}\nRequest reference: ${payload.requestId}`,
+    requestId: payload.requestId, replyTo: fields.email.trim(), senderName: safeEmailSenderName(fields.name), subject: draft.subject,
+    ...(() => { const text = `${quoteRequestBody(draft.body, payload)}\n\n---\nWebsite: Israel Taxi & Travel\nForm: ${request.kind}\nSubmitted: ${israelSubmissionTime(now)}\nRequest reference: ${payload.requestId}`; return { text, html: quoteEmailHtml(text) }; })(),
   };
 }
 
