@@ -54,7 +54,7 @@ describe("one-step direct form delivery", () => {
     expect(send).toHaveBeenCalledOnce();
     const email = send.mock.calls[0]![0];
     expect(email.text.startsWith(`Sent from page: ${title}\n\n`)).toBe(true);
-    for (const value of [fields.name, fields.email, fields.subject, fields.message, "I consent to sharing these details"]) expect(email.text).toContain(value);
+    for (const value of [fields.name, fields.email, fields.subject, fields.message, "I consent to sharing these details with Moshe Barak for this inquiry."]) expect(email.text).toContain(value);
     expect(email.replyTo).toBe(fields.email);
     expect(email.senderName).toBe(fields.name);
     expect(email.html).toContain("<strong>Sent from page:</strong>");
