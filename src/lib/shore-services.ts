@@ -37,7 +37,6 @@ export function portTransferPrefill(search: PortTransferSearch) {
   return {
     pickup: `${shorePorts[search.port].name} Port`,
     dropoff: search.transfer === "airport" ? "Ben Gurion Airport" : "",
-    guide: "driver-only",
     notes: `One-way transfer after a cruise call at ${shorePorts[search.port].name} Port. Please confirm the ship's disembarkation time and exact port meeting point.`,
   };
 }
