@@ -20,7 +20,7 @@ export function buildContactMessage(fields: ContactMessageFields) {
     subject: `Moshe Barak - Taxi & Travel in Israel / ${line(fields.name)}`,
     body: [
       `Name: ${line(fields.name)}`, `Email: ${line(fields.email)}`, `Subject: ${line(fields.subject)}`,
-      "", "Message:", fields.message.trim(), "", "I consent to sharing these details with Moshe Barak to respond to my enquiry.",
+      "", "Message:", fields.message.trim(), "", "I consent to sharing these details with Moshe Barak for this inquiry.",
     ].join("\n"),
   };
 }
