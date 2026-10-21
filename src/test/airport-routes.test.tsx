@@ -79,7 +79,8 @@ describe("four dedicated airport transfer routes", () => {
     expect(draft.searchParams.get("subject")).toContain(`Ben Gurion to ${guide.rate.destination}`);
     expect(draft.searchParams.get("body")).toContain(`Example Hotel, ${guide.city}`);
     expect(draft.searchParams.get("body")).toContain("Passengers (including children): 6");
-    expect(fetchSpy).not.toHaveBeenCalled();
+    expect(fetchSpy).toHaveBeenCalledWith("/api/quote-request/", expect.objectContaining({ method: "GET" }));
+    expect(fetchSpy.mock.calls.every(([, options]) => options?.method === "GET" && options.body === undefined)).toBe(true);
     expect(localStorage.length).toBe(0);
     fireEvent.click(banners[0]!);
     expect(readOutboundClicks()).toEqual([expect.objectContaining({ pageId: `airport-route-${route.id}`, productId: "airport-kiwitaxi", offerId: "airport-kiwitaxi" })]);

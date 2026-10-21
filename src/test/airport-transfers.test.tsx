@@ -103,7 +103,8 @@ describe("private Ben Gurion transfers", () => {
     expect(draft.searchParams.get("body")).toContain("2099-11-01 at 23:45 (Israel local time)");
     expect(draft.searchParams.get("body")).toContain("Flight number: LY123");
     expect(draft.searchParams.get("body")).toContain("Example Hotel, Jerusalem");
-    expect(fetchSpy).not.toHaveBeenCalled();
+    expect(fetchSpy).toHaveBeenCalledWith("/api/quote-request/", expect.objectContaining({ method: "GET" }));
+    expect(fetchSpy.mock.calls.every(([, options]) => options?.method === "GET" && options.body === undefined)).toBe(true);
     expect(localStorage.length).toBe(0);
     fireEvent.change(screen.getByLabelText("Full name *"), { target: { value: "Another name" } });
     expect(screen.queryByRole("link", { name: "Open email to Moshe" })).not.toBeInTheDocument();

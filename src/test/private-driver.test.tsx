@@ -65,7 +65,8 @@ describe("private driver page and inquiry", () => {
     expect(url.searchParams.get("subject")).toContain("Multi-stop journey on 2099-11-01");
     const body = url.searchParams.get("body")!;
     for (const value of ["jamie+trip@example.com", "Hotel A, Tel Aviv", "Hotel B, Jerusalem", "Caesarea & lunch\nThen Jerusalem", "Please quote a licensed guide as well", "To be agreed (Israel local time)", "booking requires confirmation"]) expect(body).toContain(value);
-    expect(fetchSpy).not.toHaveBeenCalled(); expect(localStorage.length).toBe(0);
+    expect(fetchSpy).toHaveBeenCalledWith("/api/quote-request/", expect.objectContaining({ method: "GET" }));
+    expect(fetchSpy.mock.calls.every(([, options]) => options?.method === "GET" && options.body === undefined)).toBe(true); expect(localStorage.length).toBe(0);
     fireEvent.click(screen.getByRole("button", { name: "Copy request" }));
     expect(await screen.findByText(/Select and copy the request text/)).toBeInTheDocument();
     expect((screen.getByLabelText("Prepared driver request") as HTMLTextAreaElement).value).toContain("Caesarea & lunch");

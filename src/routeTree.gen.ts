@@ -23,6 +23,7 @@ import { Route as ShoreExcursionsRouteImport } from './routes/shore-excursions'
 import { Route as TermsOfUseRouteImport } from './routes/terms-of-use'
 import { Route as TicketsRouteImport } from './routes/tickets'
 import { Route as ApiExchangeRatesRouteImport } from './routes/api.exchange-rates'
+import { Route as ApiQuoteRequestRouteImport } from './routes/api.quote-request'
 import { Route as AttractionsIndexRouteImport } from './routes/attractions.index'
 import { Route as AttractionsCaesareaRouteImport } from './routes/attractions.caesarea'
 import { Route as DeadSeaFamilyHotelsRouteImport } from './routes/dead-sea.family-hotels'
@@ -181,6 +182,11 @@ const TicketsRoute = TicketsRouteImport.update({
 const ApiExchangeRatesRoute = ApiExchangeRatesRouteImport.update({
   id: '/api/exchange-rates',
   path: '/api/exchange-rates',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiQuoteRequestRoute = ApiQuoteRequestRouteImport.update({
+  id: '/api/quote-request',
+  path: '/api/quote-request',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AttractionsIndexRoute = AttractionsIndexRouteImport.update({
@@ -697,6 +703,7 @@ export interface FileRoutesByFullPath {
   '/terms-of-use': typeof TermsOfUseRoute
   '/tickets': typeof TicketsRoute
   '/api/exchange-rates': typeof ApiExchangeRatesRoute
+  '/api/quote-request': typeof ApiQuoteRequestRoute
   '/attractions/caesarea': typeof AttractionsCaesareaRoute
   '/dead-sea/family-hotels': typeof DeadSeaFamilyHotelsRoute
   '/dead-sea/spa-hotels': typeof DeadSeaSpaHotelsRoute
@@ -802,6 +809,7 @@ export interface FileRoutesByTo {
   '/terms-of-use': typeof TermsOfUseRoute
   '/tickets': typeof TicketsRoute
   '/api/exchange-rates': typeof ApiExchangeRatesRoute
+  '/api/quote-request': typeof ApiQuoteRequestRoute
   '/attractions/caesarea': typeof AttractionsCaesareaRoute
   '/dead-sea/family-hotels': typeof DeadSeaFamilyHotelsRoute
   '/dead-sea/spa-hotels': typeof DeadSeaSpaHotelsRoute
@@ -908,6 +916,7 @@ export interface FileRoutesById {
   '/terms-of-use': typeof TermsOfUseRoute
   '/tickets': typeof TicketsRoute
   '/api/exchange-rates': typeof ApiExchangeRatesRoute
+  '/api/quote-request': typeof ApiQuoteRequestRoute
   '/attractions/caesarea': typeof AttractionsCaesareaRoute
   '/dead-sea/family-hotels': typeof DeadSeaFamilyHotelsRoute
   '/dead-sea/spa-hotels': typeof DeadSeaSpaHotelsRoute
@@ -1015,6 +1024,7 @@ export interface FileRouteTypes {
     | '/terms-of-use'
     | '/tickets'
     | '/api/exchange-rates'
+    | '/api/quote-request'
     | '/attractions/caesarea'
     | '/dead-sea/family-hotels'
     | '/dead-sea/spa-hotels'
@@ -1120,6 +1130,7 @@ export interface FileRouteTypes {
     | '/terms-of-use'
     | '/tickets'
     | '/api/exchange-rates'
+    | '/api/quote-request'
     | '/attractions/caesarea'
     | '/dead-sea/family-hotels'
     | '/dead-sea/spa-hotels'
@@ -1225,6 +1236,7 @@ export interface FileRouteTypes {
     | '/terms-of-use'
     | '/tickets'
     | '/api/exchange-rates'
+    | '/api/quote-request'
     | '/attractions/caesarea'
     | '/dead-sea/family-hotels'
     | '/dead-sea/spa-hotels'
@@ -1331,6 +1343,7 @@ export interface RootRouteChildren {
   TermsOfUseRoute: typeof TermsOfUseRoute
   TicketsRoute: typeof TicketsRoute
   ApiExchangeRatesRoute: typeof ApiExchangeRatesRoute
+  ApiQuoteRequestRoute: typeof ApiQuoteRequestRoute
   AttractionsCaesareaRoute: typeof AttractionsCaesareaRoute
   DeadSeaFamilyHotelsRoute: typeof DeadSeaFamilyHotelsRoute
   DeadSeaSpaHotelsRoute: typeof DeadSeaSpaHotelsRoute
@@ -1520,6 +1533,13 @@ declare module '@tanstack/react-router' {
       path: '/api/exchange-rates'
       fullPath: '/api/exchange-rates'
       preLoaderRoute: typeof ApiExchangeRatesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/quote-request': {
+      id: '/api/quote-request'
+      path: '/api/quote-request'
+      fullPath: '/api/quote-request'
+      preLoaderRoute: typeof ApiQuoteRequestRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/attractions/': {
@@ -2163,6 +2183,7 @@ const rootRouteChildren: RootRouteChildren = {
   TermsOfUseRoute: TermsOfUseRoute,
   TicketsRoute: TicketsRoute,
   ApiExchangeRatesRoute: ApiExchangeRatesRoute,
+  ApiQuoteRequestRoute: ApiQuoteRequestRoute,
   AttractionsCaesareaRoute: AttractionsCaesareaRoute,
   DeadSeaFamilyHotelsRoute: DeadSeaFamilyHotelsRoute,
   DeadSeaSpaHotelsRoute: DeadSeaSpaHotelsRoute,
