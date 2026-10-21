@@ -40,16 +40,15 @@ export function validateDriverQuote(v: DriverQuoteFields, now = new Date()) {
 export function buildDriverQuoteDraft(v: DriverQuoteFields) {
   const line = (value: string) => value.trim().replace(/[\r\n]+/g, " ");
   const service = privateDriverServices.find((item) => item.id === v.serviceId)!.label;
-  const subject = `Moshe Barak - Taxi & Travel in Israel - ${line(v.pickup)} to ${line(v.dropoff)} / ${line(v.name)}`;
-  const body = ["Hello Moshe,", "", "Please send me a quote for a private driver in Israel.", "",
+  const subject = `Moshe Barak - Taxi & Travel in Israel / ${line(v.name)}`;
+  const body = [
     `Name: ${line(v.name)}`, `Email: ${line(v.email)}`, `Phone / WhatsApp: ${line(v.phone) || "Not supplied"}`,
     `Service: ${service}`, `Pickup date: ${line(v.date)}`, `Preferred pickup time: ${line(v.time) || "To be agreed"} (Israel local time)`,
-    `Pickup: ${line(v.pickup)}`, `Final drop-off: ${line(v.dropoff)}`, `Passengers (including children): ${line(v.passengers)}`,
+    `Pickup: ${line(v.pickup)}`, `Final drop-off: ${line(v.dropoff)}`, `Passengers: ${line(v.passengers)}`,
     `Luggage: ${line(v.luggage) || "To be confirmed"}`,
     "", "Stops, approximate timing and priorities:", v.itinerary.trim() || "Direct journey between the addresses above.",
     "", "Additional requests:", v.notes.trim() || "None specified", "",
-    "Please confirm itinerary feasibility, vehicle and luggage capacity, full price, included hours and distance, waiting, parking/tolls and extra-time charges, guiding and other exclusions, pickup arrangements, payment and cancellation terms.",
-    "I understand that this is an inquiry and a booking requires confirmation.", "I consent to sharing these details with Moshe Barak for this inquiry.",
+    "I consent to sharing these details with Moshe Barak for this inquiry.",
   ].join("\n");
   return { subject, body, url: `mailto:${privateDriverContact.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}` };
 }
