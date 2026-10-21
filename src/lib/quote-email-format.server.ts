@@ -33,7 +33,7 @@ const fieldLabels = new Set([
   "Cruise ship", "Excursion date", "Expected disembarkation",
   "Ship's all-aboard deadline", "Requested itinerary",
   "Priorities, child seats, mobility needs or additional requests",
-  "Website", "Form", "Submitted", "Request reference",
+  "Additional requests", "Website", "Form", "Submitted", "Request reference",
 ]);
 
 /** Rich HTML and readable plain text are sent in the same Brevo request. */
