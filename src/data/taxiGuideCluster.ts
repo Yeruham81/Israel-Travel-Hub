@@ -8,9 +8,14 @@ import type { TravelGuide } from "@/data/travelGuides";
 import { travelGuidePaths } from "@/data/registry";
 import { airportTransferPhotos } from "@/data/airportTransfers";
 import airportPickup from "@/assets/home/airport-pickup.webp";
+import roadTrip from "@/assets/home/road-trip.webp";
+import airportHall from "@/assets/home/ben-gurion-t3.webp";
 
 const pickup = { src: airportPickup, alt: "Illustration of a driver assisting arriving travelers with luggage" };
 const airport = airportTransferPhotos["other"]!;
+const cityPhoto = airportTransferPhotos["tel-aviv"]!;
+const intercityPhoto = { src: roadTrip, alt: "Illustration of a vehicle traveling on a road through the Israeli landscape" };
+const terminalHallPhoto = { src: airportHall, alt: "Ben Gurion Airport Terminal 3 arrivals hall", credit: "GeorgeDement · CC BY-SA 2.0 · resized WebP", sourceUrl: "https://commons.wikimedia.org/wiki/File:Ben_Gurion_Airport_terminal_3_reception_hall.jpg", licenseUrl: "https://creativecommons.org/licenses/by-sa/2.0/" };
 
 export const taxiGuideCluster: Record<"taxis" | "taxiFares" | "airportTaxis", TravelGuide> = {
   taxis: {
@@ -56,6 +61,7 @@ export const taxiGuideCluster: Record<"taxis" | "taxiFares" | "airportTaxis", Tr
       },
       {
         id: "booking", title: "How to Find and Book a Taxi in Israel",
+        photo: cityPhoto,
         paragraphs: [
           "In central Tel Aviv, Jerusalem, Haifa and other busy areas, you may be able to hail an available licensed taxi on the street. Tell the driver the actual address and confirm the payment method and regulated meter before departure. At peak hours, late at night or in remote places, street hailing may not be practical.",
           "Taxi stands are found near major hotels, railway stations, hospitals and shopping areas. A hotel or local dispatcher can also arrange a pickup; ask whether a regulated ordering addition applies and keep a dispatcher's phone number or your hotel address available offline.",
@@ -124,6 +130,7 @@ export const taxiGuideCluster: Record<"taxis" | "taxiFares" | "airportTaxis", Tr
       },
       {
         id: "intercity", title: "Long-Distance Taxis and Remote Destinations",
+        photo: intercityPhoto,
         paragraphs: [
           "A taxi can be convenient between cities and at destinations that lack an easy public transport connection. Check the entire journey to your hotel or attraction rather than comparing only the railway-station or bus-stop distance.",
           "Do not assume that an app can find a return ride at a remote Dead Sea viewpoint, nature reserve or desert attraction. Confirm your return pickup, time, meeting point and contact number before departing, or consider an arranged driver for a multi-stop day.",
@@ -207,6 +214,7 @@ export const taxiGuideCluster: Record<"taxis" | "taxiFares" | "airportTaxis", Tr
       },
       {
         id: "time-distance", title: "How the Meter Calculates the Price",
+        photo: intercityPhoto,
         paragraphs: [
           "The taximeter combines a starting amount, an accumulated time charge and an accumulated distance charge; it does not choose the higher of the last two. Traffic jams may therefore increase the final fare without changing the route length.",
           "For the first 10 km, the time and per-kilometer amounts are the same within each tariff: A ₪1.95, B ₪2.34 and C ₪2.73 with 18% VAT. After 10 km, the distance rate rises to approximately ₪3.79, ₪4.18 and ₪4.57 per extra kilometer. Do not add this higher full per-kilometer rate again on top of the original distance rate.",
@@ -235,6 +243,7 @@ export const taxiGuideCluster: Record<"taxis" | "taxiFares" | "airportTaxis", Tr
       },
       {
         id: "examples", title: "Two Worked Taxi Fare Examples",
+        photo: cityPhoto,
         paragraphs: [
           "Example 1: a hypothetical 5 km daytime ride lasting 15 minutes under Tariff A, excluding dispatch, tolls and other additions. Using the official PRE-VAT figures: starting ₪10.56 + distance (5 × ₪1.65 = ₪8.25) + time (15 × ₪1.65 = ₪24.75) = ₪43.56. With 18% VAT, the estimated total is ₪51.40.",
           "Example 2: a hypothetical 12 km ride lasting 25 minutes under Tariff B. Starting ₪10.56 + first 10 km (10 × ₪1.98 = ₪19.80) + 2 km beyond 10 km (2 × ₪3.54 = ₪7.08) + 25 minutes (25 × ₪1.98 = ₪49.50) = ₪86.94 before VAT, or approximately ₪102.59 with 18% VAT.",
@@ -350,6 +359,7 @@ export const taxiGuideCluster: Record<"taxis" | "taxiFares" | "airportTaxis", Tr
     sections: [
       {
         id: "steps", title: "How to Order an Immediate Official Airport Taxi",
+        photo: pickup,
         paragraphs: [
           "Step 1 — Create an order using the Gett app or one of the airport's self-service kiosks. Enter the destination and follow the service instructions. The kiosk lets you order without installing Gett on your phone.",
           "Step 2 — Receive the ride code. Save it or retain the SMS so that the driver and dispatcher can identify your journey and you can refer to it if support is needed later.",
@@ -359,6 +369,7 @@ export const taxiGuideCluster: Record<"taxis" | "taxiFares" | "airportTaxis", Tr
       },
       {
         id: "terminal3", title: "Terminal 3: Exit 03 for Immediate Taxis",
+        photo: terminalHallPhoto,
         paragraphs: [
           "After passport control, baggage collection and customs, follow signs for the authorized taxi queue at Terminal 3's ground floor, Exit 03. Keep the Gett ride code ready before joining the line.",
           "Do not mistake the scheduled-ride pickup point on Level 2 for the on-demand queue on the ground floor. These are different services with different meeting instructions.",
