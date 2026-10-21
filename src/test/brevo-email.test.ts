@@ -14,13 +14,13 @@ describe("Brevo email presentation", () => {
   });
 
   it("escapes HTML input, styles only known labels and keeps multiline message text", () => {
-    const html = quoteEmailHtml("Sent from page: About & contact\\nName: <script>alert(1)</script>\\nMessage:\\nHello & goodbye\\nUnknown: must remain plain");
+    const html = quoteEmailHtml("Sent from page: About & contact\nName: <script>alert(1)</script>\nMessage:\nHello & goodbye\nUnknown: must remain plain");
     expect(html).toContain("<strong>Sent from page:</strong> About &amp; contact");
     expect(html).toContain("<strong>Name:</strong> &lt;script&gt;alert(1)&lt;/script&gt;");
     expect(html).toContain("<strong>Message:</strong><br>Hello &amp; goodbye");
     expect(html).toContain("Unknown: must remain plain");
     expect(html).not.toContain("<script>");
-    expect(safeEmailSenderName("  Jane\\r\\nSmith  ")).toBe("Jane Smith");
+    expect(safeEmailSenderName("  Jane\r\nSmith  ")).toBe("Jane Smith");
   });
 });
 
