@@ -1,7 +1,7 @@
 import { airportTransferContact } from "@/data/registry";
 
 export type QuoteEmail = { requestId: string; replyTo: string; subject: string; text: string };
-export const brevoFailureCodes = ["BREVO_UNAUTHORIZED", "BREVO_FORBIDDEN", "BREVO_SENDER", "BREVO_RATE_LIMIT", "BREVO_REJECTED", "BREVO_PROVIDER", "BREVO_RESPONSE", "BREVO_TIMEOUT", "BREVO_NETWORK"] as const;
+export const brevoFailureCodes = ["BREVO_UNAUTHORIZED", "BREVO_FORBIDDEN", "BREVO_SENDER", "BREVO_RATE_LIMIT", "BREVO_REJECTED", "BREVO_PROVIDER", "BREVO_RESPONSE", "BREVO_TIMEOUT", "BREVO_DNS", "BREVO_TLS", "BREVO_CONNECT", "BREVO_REDIRECT", "BREVO_RUNTIME", "BREVO_NETWORK"] as const;
 export type BrevoFailureCode = typeof brevoFailureCodes[number];
 
 /** Contains fixed diagnostics only; never retain provider bodies, credentials or visitor data. */
@@ -10,6 +10,28 @@ export class BrevoDeliveryError extends Error {
     super(deliveryCode);
     this.name = "BrevoDeliveryError";
   }
+}
+
+/**
+ * Classify only known, non-sensitive transport failure patterns. Do not return
+ * provider error messages or network exception text: those may contain secrets.
+ * Workers and Node runtimes wrap fetch errors differently, often in cause.
+ */
+export function classifyBrevoNetworkError(error: unknown): BrevoFailureCode {
+  let current = error;
+  for (let depth = 0; depth < 3 && current && typeof current === "object"; depth++) {
+    const value = current as { code?: unknown; name?: unknown; message?: unknown; cause?: unknown };
+    const code = typeof value.code === "string" ? value.code.toUpperCase() : "";
+    const name = typeof value.name === "string" ? value.name : "";
+    const detail = typeof value.message === "string" ? value.message : "";
+    if (/^(?:ENOTFOUND|EAI_AGAIN|EDNS|DNS_ERROR)$/.test(code) || /getaddrinfo|dns resolution|failed to resolve|dns lookup/i.test(detail)) return "BREVO_DNS";
+    if (/^(?:ERR_TLS_|CERT_|DEPTH_ZERO_|UNABLE_TO_VERIFY_)/.test(code) || /(?:tls|ssl) handshake|certificate verify/i.test(detail)) return "BREVO_TLS";
+    if (/^(?:ECONNREFUSED|ECONNRESET|EHOSTUNREACH|ENETUNREACH|EPIPE|UND_ERR_CONNECT_TIMEOUT|UND_ERR_SOCKET)$/.test(code) || /connection (?:refused|reset)|connect(?:ion)? timed out/i.test(detail)) return "BREVO_CONNECT";
+    if (/redirect/i.test(detail) && /redirect|fetch|network/i.test(detail)) return "BREVO_REDIRECT";
+    if ((name === "ReferenceError" && /fetch/i.test(detail)) || /fetch is not (?:defined|a function)|not implemented.*fetch/i.test(detail)) return "BREVO_RUNTIME";
+    current = value.cause;
+  }
+  return "BREVO_NETWORK";
 }
 
 export async function sendBrevoQuote(message: QuoteEmail, apiKey: string): Promise<void> {
@@ -37,7 +59,10 @@ export async function sendBrevoQuote(message: QuoteEmail, apiKey: string): Promi
           const error = body as { code?: unknown; message?: unknown };
           if (error.code === "invalid_sender" || (error.code === "invalid_parameter" && typeof error.message === "string" && /\bsender\b/i.test(error.message))) code = "BREVO_SENDER";
         }
-      } else { await response.body?.cancel(); }
+      } else {
+        // Once HTTP status is known, stream cleanup must never mask a 401/403/etc.
+        try { await response.body?.cancel(); } catch { /* Keep the real provider HTTP error. */ }
+      }
       throw new BrevoDeliveryError(code, response.status);
     }
     const body: unknown = await response.json().catch(() => null);
@@ -48,6 +73,6 @@ export async function sendBrevoQuote(message: QuoteEmail, apiKey: string): Promi
   } catch (error) {
     if (controller.signal.aborted) throw new BrevoDeliveryError("BREVO_TIMEOUT");
     if (error instanceof BrevoDeliveryError) throw error;
-    throw new BrevoDeliveryError("BREVO_NETWORK");
+    throw new BrevoDeliveryError(classifyBrevoNetworkError(error));
   } finally { clearTimeout(timer); }
 }
