@@ -119,9 +119,9 @@ export interface AuthorProfile {
 }
 export const mosheBarakAuthor: AuthorProfile = {
   name: "Moshe Barak",
-  role: "Local travel writer & private transport operator",
-  experience: "I’ve spent more than 20 years helping travelers explore Israel.",
-  bio: "I’m Moshe Barak. Whether you’re arriving at Ben Gurion Airport, planning a private day trip or exploring another part of the country, I’m happy to help you find a comfortable, practical way to travel. I share the local knowledge I’ve gained over the years so you can plan with confidence and enjoy your visit.",
+  role: "Private transport operator & local travel expert",
+  experience: "Over 20 years helping visitors travel around Israel.",
+  bio: "Practical, first-hand advice on taxis, airport pickups and exploring Israel.",
   reviewsUrl: "https://www.tripadvisor.com/Attraction_Review-g293984-d14803612-Reviews-Moshe_Barak-Tel_Aviv_Tel_Aviv_District.html",
   sourceIds: ["moshe-author-profile"],
 };
