@@ -4,7 +4,6 @@ import { cleanup, fireEvent, render, screen, within } from "@testing-library/rea
 import { afterEach, describe, expect, it, vi } from "vitest";
 import { Route as DriverRoute } from "@/routes/private-driver";
 import { routeTree } from "@/routeTree.gen";
-import { privateDriverContact } from "@/data/registry";
 import { buildDriverQuoteDraft, emptyDriverQuote, validateDriverQuote } from "@/lib/private-driver-quote";
 
 afterEach(() => { cleanup(); localStorage.clear(); vi.restoreAllMocks(); });
@@ -56,20 +55,21 @@ describe("private driver page and inquiry", () => {
   it("sends the route-specific details in one action and allows a new request after editing", async () => {
     await renderDriver(); choose(2); fill();
     fireEvent.change(screen.getByLabelText("Stops / itinerary *"), { target: { value: "Caesarea & lunch\nThen Jerusalem" } });
-    fireEvent.change(screen.getByLabelText("Driver or licensed guide?"), { target: { value: "licensed-guide" } });
+    expect(screen.queryByLabelText("Driver or licensed guide?")).not.toBeInTheDocument();
+    expect(screen.getByLabelText("Additional requests")).toBeInTheDocument();
     const fetchSpy = vi.spyOn(globalThis, "fetch").mockImplementation(async (_url, options) => Response.json({ accepted: true, requestId: JSON.parse(String(options?.body)).requestId }));
     fireEvent.click(screen.getByRole("button", { name: "Send quote request" }));
-    expect(await screen.findByText("Your request has been sent to Moshe")).toBeInTheDocument();
-    expect(screen.getByRole("status")).toHaveTextContent(privateDriverContact.email);
+    expect(await screen.findByText("Thank you for contacting me")).toBeInTheDocument();
+    expect(screen.getByRole("status")).toHaveTextContent("I will reply soon to the email address you provided.");
     expect(fetchSpy).toHaveBeenCalledOnce();
     expect(fetchSpy).toHaveBeenCalledWith("/api/quote-request/", expect.objectContaining({ method: "POST" }));
     const data = JSON.parse(String(fetchSpy.mock.calls[0]![1]?.body));
-    expect(data).toMatchObject({ sourceTitle: "Private driver in Israel", request: { kind: "driver", fields: { serviceId: "multi-stop", email: "jamie+trip@example.com", pickup: "Hotel A, Tel Aviv", dropoff: "Hotel B, Jerusalem", itinerary: "Caesarea & lunch\nThen Jerusalem", guide: "licensed-guide", consent: true } } });
+    expect(data).toMatchObject({ sourceTitle: "Private driver in Israel", request: { kind: "driver", fields: { serviceId: "multi-stop", email: "jamie+trip@example.com", pickup: "Hotel A, Tel Aviv", dropoff: "Hotel B, Jerusalem", itinerary: "Caesarea & lunch\nThen Jerusalem", consent: true } } });
     expect(localStorage.length).toBe(0);
     choose(0);
     expect(screen.getByRole("button", { name: "Send quote request" })).toBeEnabled();
     fireEvent.click(screen.getByRole("button", { name: "Send quote request" }));
-    await screen.findByText("Your request has been sent to Moshe");
+    await screen.findByText("Thank you for contacting me");
     expect(fetchSpy).toHaveBeenCalledTimes(2);
     fireEvent.change(screen.getByLabelText("Final drop-off *"), { target: { value: "A different hotel" } });
     expect(screen.getByRole("button", { name: "Send quote request" })).toBeEnabled();
@@ -86,10 +86,10 @@ describe("private driver request validation", () => {
     expect(validateDriverQuote({ ...good, time: "24:00" }, now)).toContain("Enter a valid pickup time in Israel local time, or leave it open.");
     expect(validateDriverQuote({ ...good, date: "2026-10-17" }, new Date("2026-10-17T22:30:00Z"))).toContain("Choose a pickup date that is not in the past in Israel.");
   });
-  it("rejects missing route/itinerary, unknown services and guide options, invalid party sizes, overlong details and missing consent", () => {
+  it("rejects missing route/itinerary, unknown services, invalid party sizes, overlong details and missing consent", () => {
     expect(validateDriverQuote({ ...good, pickup: "", dropoff: "", consent: false }, now)).toHaveLength(3);
     for (const serviceId of ["day-hire", "multi-stop"]) expect(validateDriverQuote({ ...good, serviceId }, now)).toContain("Describe the stops or priorities for your journey.");
-    expect(validateDriverQuote({ ...good, serviceId: "invalid", guide: "invalid", passengers: "1.5", notes: "a".repeat(1501) }, now)).toHaveLength(4);
+    expect(validateDriverQuote({ ...good, serviceId: "invalid", passengers: "1.5", notes: "a".repeat(1501) }, now)).toHaveLength(3);
     for (const passengers of ["0", "100", ""]) expect(validateDriverQuote({ ...good, passengers }, now)).toContain("Enter passengers between 1 and 99, including children.");
   });
   it("preserves special characters and multiline requests in encoded drafts without injecting subject headers", () => {
@@ -100,5 +100,6 @@ describe("private driver request validation", () => {
     expect(url.searchParams.get("body")).toContain("Seat for age 3\nTwo large bags + stroller");
     expect(url.searchParams.get("body")).not.toContain("\nBcc:");
     expect(url.searchParams.get("subject")).toBe(draft.subject);
+    expect(draft.subject).toBe("Moshe Barak - Taxi & Travel in Israel - מלון & Spa #2 to Jerusalem / Jamie Bcc: test@example.com");
   });
 });
