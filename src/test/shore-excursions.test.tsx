@@ -5,6 +5,7 @@ import { afterEach, describe, expect, it, vi } from "vitest";
 import { GlobalNav, SiteHeader } from "@/components/Layout";
 import { getShorePort } from "@/data/shoreExcursions";
 import { getSource, publicSources, SHORE_EXCURSION_CHECK_DATE, shoreExcursionRates, shorePorts } from "@/data/registry";
+import { servicesForPort, shoreSourceIds } from "@/lib/shore-services";
 import { buildShoreQuoteDraft, emptyShoreQuote, validateShoreQuote } from "@/lib/shore-quote";
 import { routeTree } from "@/routeTree.gen";
 import { Route as AshdodRoute } from "@/routes/ashdod-shore-excursions";
@@ -68,7 +69,7 @@ describe("shore excursions", () => {
     expect(screen.getByRole("heading", { level: 1 })).toHaveTextContent(port.title);
     expect(router.matchRoutes(port.path).at(-1)?.routeId).toBe(port.path.replace(/\/$/, ""));
     const services = screen.getAllByTestId("shore-service-card");
-    expect(services).toHaveLength(7);
+    expect(services).toHaveLength(servicesForPort(id).length);
     const cards = services.filter((card) => card.dataset["serviceKind"] === "private-driver");
     expect(cards).toHaveLength(4);
     cards.forEach((card, index) => {
@@ -97,7 +98,7 @@ describe("shore excursions", () => {
     const head = await route.options.head?.({} as never);
     expect(head).toMatchObject({ meta: expect.arrayContaining([{ title: expect.stringContaining(`${port.name} shore excursions`) }, { name: "robots", content: "noindex,nofollow" }]), links: [{ rel: "canonical", href: expect.stringContaining(port.path) }] });
     const schemas = (head?.scripts || []).map((script) => typeof script?.children === "string" ? JSON.parse(script.children) : null);
-    expect(schemas.find((schema) => schema?.["@type"] === "Article")).toMatchObject({ headline: port.title, dateModified: SHORE_EXCURSION_CHECK_DATE, author: { "@type": "Person", name: "Moshe Barak" }, citation: publicSources([port.sourceId, port.alternativeSourceId]).map((source) => source.url) });
+    expect(schemas.find((schema) => schema?.["@type"] === "Article")).toMatchObject({ headline: port.title, dateModified: SHORE_EXCURSION_CHECK_DATE, author: { "@type": "Person", name: "Moshe Barak" }, citation: publicSources(shoreSourceIds(id)).map((source) => source.url) });
     expect(schemas.some((schema) => schema?.["@type"] === "FAQPage")).toBe(false);
   });
 
@@ -124,7 +125,7 @@ describe("shore excursions", () => {
     const fetchSpy = vi.spyOn(globalThis, "fetch").mockImplementation(async (_url, options) => Response.json({ accepted: true, requestId: JSON.parse(String(options?.body)).requestId }));
     fireEvent.click(screen.getByRole("button", { name: "Send excursion request" }));
     expect(screen.queryByRole("alert")).not.toBeInTheDocument();
-    expect(await screen.findByText("Your request has been sent to Moshe")).toBeInTheDocument();
+    expect(await screen.findByText("Thank you for contacting me")).toBeInTheDocument();
     expect(fetchSpy).toHaveBeenCalledOnce();
     expect(fetchSpy).toHaveBeenCalledWith("/api/quote-request/", expect.objectContaining({ method: "POST" }));
     expect(JSON.parse(String(fetchSpy.mock.calls[0]![1]?.body))).toMatchObject({ sourceTitle: port.title, request: { kind: "shore", portId: id, fields: { ship: "Example Voyager", date: "2099-11-01", pickupTime: "08:00", allAboardDate: "2099-11-01", allAboardTime: "18:00", passengers: "6", itineraryId: itinerary.id, consent: true } } });

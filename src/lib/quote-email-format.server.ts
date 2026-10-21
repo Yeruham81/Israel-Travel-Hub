@@ -40,8 +40,8 @@ const fieldLabels = new Set([
 export function quoteEmailHtml(text: string): string {
   const lines = text.split(/\r?\n/).map((line) => {
     const labelMatch = /^([^:\r\n]{1,90}):(.*)$/.exec(line);
-    if (labelMatch && fieldLabels.has(labelMatch[1])) {
-      return `<strong>${escapeHtml(labelMatch[1])}:</strong>${escapeHtml(labelMatch[2])}`;
+    if (labelMatch && fieldLabels.has(labelMatch[1]!)) {
+      return `<strong>${escapeHtml(labelMatch[1]!)}:</strong>${escapeHtml(labelMatch[2]!)}`;
     }
     return escapeHtml(line);
   });

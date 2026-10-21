@@ -320,6 +320,9 @@ export const shoreServiceKinds = [
 ] as const;
 export type ShoreServiceKind = typeof shoreServiceKinds[number]["id"];
 export const shoreDestinations = [
+  { id: "haifa", label: "Haifa" },
+  { id: "caesarea", label: "Caesarea" },
+  { id: "ein-gedi", label: "Ein Gedi" },
   { id: "jerusalem", label: "Jerusalem" },
   { id: "bethlehem", label: "Bethlehem" },
   { id: "tel-aviv", label: "Tel Aviv & Jaffa" },
@@ -333,8 +336,157 @@ export const shoreDestinations = [
   { id: "hotels-cities", label: "Hotels & other cities" },
 ] as const;
 export type ShoreDestinationId = typeof shoreDestinations[number]["id"];
+export interface ShoreTourProduct {
+  id: string;
+  portIds: ShorePortId[];
+  operatorId: string;
+  partnerId?: string;
+  destinationIds: ShoreDestinationId[];
+  title: string;
+  summary: string;
+  publicUrl: string;
+  groupFormat: "private" | "shared" | "confirm";
+  seasonNote?: string;
+}
+
+/** Verified product pages, not live inventory. One identity can appear under several ports/destinations. */
+export const shoreTourProducts: ShoreTourProduct[] = [
+  {
+    id: "shore-tourist-haifa-jerusalem", portIds: ["haifa"], operatorId: "tourist-israel",
+    destinationIds: ["jerusalem"], title: "Private Jerusalem shore excursion from Haifa",
+    summary: "Walk through Jerusalem's Old City and explore modern neighborhoods and market streets with a private guide.",
+    publicUrl: "https://www.touristisrael.com/tours/jerusalem-tour-from-haifa-port/", groupFormat: "private",
+  },
+  {
+    id: "shore-tourist-haifa-tel-aviv", portIds: ["haifa"], operatorId: "tourist-israel",
+    destinationIds: ["tel-aviv"], title: "Private Jaffa & Tel Aviv shore excursion from Haifa",
+    summary: "Explore Old Jaffa, Neve Tzedek and Tel Aviv's city neighborhoods with private guiding and port transportation.",
+    publicUrl: "https://www.touristisrael.com/tours/caesarea-jaffa-and-tel-aviv-tour-from-haifa-port-shore-excursion/", groupFormat: "private",
+  },
+  {
+    id: "shore-tourist-haifa-jerusalem-bethlehem", portIds: ["haifa"], operatorId: "tourist-israel",
+    destinationIds: ["jerusalem", "bethlehem"], title: "Private Jerusalem & Bethlehem shore excursion from Haifa",
+    summary: "Combine Jerusalem's Old City landmarks with Bethlehem's Church of the Nativity on a privately guided port excursion.",
+    publicUrl: "https://www.touristisrael.com/tours/jerusalem-and-bethlehem-tour-from-haifa-port-shore-excursion/", groupFormat: "private",
+  },
+  {
+    id: "shore-tourist-ashdod-jerusalem", portIds: ["ashdod"], operatorId: "tourist-israel",
+    destinationIds: ["jerusalem"], title: "Private Jerusalem shore excursion from Ashdod",
+    summary: "Walk through Jerusalem's Old City and explore modern neighborhoods and market streets with a private guide.",
+    publicUrl: "https://www.touristisrael.com/tours/jerusalem-tour-from-ashdod-port/", groupFormat: "private",
+  },
+  {
+    id: "shore-tourist-ashdod-tel-aviv", portIds: ["ashdod"], operatorId: "tourist-israel",
+    destinationIds: ["tel-aviv"], title: "Private Jaffa & Tel Aviv shore excursion from Ashdod",
+    summary: "Explore Old Jaffa, Neve Tzedek and Tel Aviv's city neighborhoods with private guiding and port transportation.",
+    publicUrl: "https://www.touristisrael.com/tours/tel-aviv-jaffa-tour-from-ashdod-port/", groupFormat: "private",
+  },
+  {
+    id: "shore-tourist-ashdod-jerusalem-bethlehem", portIds: ["ashdod"], operatorId: "tourist-israel",
+    destinationIds: ["jerusalem", "bethlehem"], title: "Private Jerusalem & Bethlehem shore excursion from Ashdod",
+    summary: "Combine Jerusalem's Old City landmarks with Bethlehem's Church of the Nativity on a privately guided port excursion.",
+    publicUrl: "https://www.touristisrael.com/tours/jerusalem-and-bethlehem-shore-excursion-from-ashdod-port/", groupFormat: "private",
+  },
+  {
+    id: "shore-tourist-haifa-galilee", portIds: ["haifa"], operatorId: "tourist-israel",
+    destinationIds: ["nazareth", "galilee"], title: "Private Galilee & Nazareth from Haifa",
+    summary: "Visit Nazareth and selected Christian heritage sites around the Sea of Galilee with a private guide and return to Haifa Port.",
+    publicUrl: "https://www.touristisrael.com/tours/galilee-tour-from-haifa-port/", groupFormat: "private",
+  },
+  {
+    id: "shore-tourist-haifa-jerusalem-dead-sea", portIds: ["haifa"], operatorId: "tourist-israel",
+    destinationIds: ["jerusalem", "dead-sea"], title: "Private Jerusalem & Dead Sea from Haifa",
+    summary: "A long private excursion combining Jerusalem's Old City with a Dead Sea beach stop. Ask whether the full route fits your ship's hours.",
+    publicUrl: "https://www.touristisrael.com/tours/jerusalem-and-dead-sea-tour-from-haifa-port-shore-excursion/", groupFormat: "private",
+  },
+  {
+    id: "shore-tourist-ashdod-masada", portIds: ["ashdod"], operatorId: "tourist-israel",
+    destinationIds: ["masada", "dead-sea", "ein-gedi"], title: "Private Masada, Ein Gedi & Dead Sea from Ashdod",
+    summary: "A private desert itinerary featuring Masada, Ein Gedi and the Dead Sea, with pickup and return at Ashdod Port. Confirm which sites are accessible on your date.",
+    publicUrl: "https://www.touristisrael.com/tours/masada-ein-gedi-and-dead-sea-tour-from-ashdod/", groupFormat: "private",
+  },
+  {
+    id: "shore-compass-jerusalem-bethlehem", portIds: ["haifa", "ashdod"], operatorId: "compass-travel",
+    destinationIds: ["jerusalem", "bethlehem"], title: "Private Jerusalem & Bethlehem",
+    summary: "A privately guided itinerary through Jerusalem and Bethlehem, with a local guide for the Bethlehem section and return to your departure port.",
+    publicUrl: "https://compasstravelisrael.com/tours/jerusalem-bethlehem-private-tour-from-haifa-or-ashdod-ports/", groupFormat: "private",
+    seasonNote: "2027 cruise program \u00b7 confirm your sailing",
+  },
+  {
+    id: "shore-compass-tel-aviv-caesarea", portIds: ["haifa", "ashdod"], operatorId: "compass-travel",
+    destinationIds: ["tel-aviv", "caesarea"], title: "Private Tel Aviv, Old Jaffa & Caesarea",
+    summary: "Combine Caesarea's coastal archaeology with Tel Aviv and Old Jaffa on a private guided day from your cruise port.",
+    publicUrl: "https://compasstravelisrael.com/tours/tel-aviv-old-jaffa-caesarea-private-tour-from-haifa-ashdod-port/", groupFormat: "private",
+    seasonNote: "2027 cruise program \u00b7 confirm your sailing",
+  },
+  {
+    id: "shore-compass-ashdod-masada", portIds: ["ashdod"], operatorId: "compass-travel",
+    destinationIds: ["masada", "dead-sea"], title: "Private Masada & Dead Sea from Ashdod",
+    summary: "Visit Masada and plan a Dead Sea stop with a private guide and transportation back to Ashdod Port. Site entry is arranged separately.",
+    publicUrl: "https://compasstravelisrael.com/tours/masada-dead-sea-private-tour-from-ashdod-port/", groupFormat: "private",
+    seasonNote: "2027 cruise program \u00b7 confirm your sailing",
+  },
+  {
+    id: "shore-compass-haifa-galilee", portIds: ["haifa"], operatorId: "compass-travel",
+    destinationIds: ["nazareth", "galilee"], title: "Private Nazareth & Sea of Galilee from Haifa",
+    summary: "Explore Nazareth and selected Galilee pilgrimage sites on a private guided excursion returning to Haifa Port.",
+    publicUrl: "https://compasstravelisrael.com/tours/haifa-shore-nazareth-sea-of-galilee-private/", groupFormat: "private",
+    seasonNote: "2027 cruise program \u00b7 confirm your sailing",
+  },
+  {
+    id: "shore-compass-haifa-akko", portIds: ["haifa"], operatorId: "compass-travel",
+    destinationIds: ["akko", "rosh-hanikra"], title: "Private Akko & Rosh Hanikra from Haifa",
+    summary: "A private guided northern-coast itinerary through Haifa and Akko, with Rosh Hanikra subject to confirmed site access.",
+    publicUrl: "https://compasstravelisrael.com/tours/rosh-hanikra-akko-private-tour-from-haifa-port/", groupFormat: "private",
+    seasonNote: "2027 cruise program \u00b7 confirm your sailing",
+  },
+  {
+    id: "shore-gyg-haifa-akko", portIds: ["haifa"], operatorId: "ilya-pevzner", partnerId: "getyourguide",
+    destinationIds: ["akko", "rosh-hanikra", "haifa"], title: "Haifa, Acre & Rosh Hanikra for cruise passengers",
+    summary: "A guided coastal outing starting and finishing at Haifa Port, with Haifa viewpoints and Akko. Confirm access to the proposed Rosh Hanikra stop.",
+    publicUrl: "https://www.getyourguide.com/haifa-l2051/haifa-acre-and-rosh-anikra-for-cruises-with-licensed-guide-t482201/", groupFormat: "shared",
+  },
+  {
+    id: "shore-gyg-haifa-galilee", portIds: ["haifa"], operatorId: "ilya-pevzner", partnerId: "getyourguide",
+    destinationIds: ["nazareth", "galilee"], title: "Christian heritage in Galilee from Haifa Port",
+    summary: "A guided day visiting Nazareth and Christian sites around the Sea of Galilee. The listing includes ship pickup and drop-off; confirm the exact group arrangement.",
+    publicUrl: "https://www.getyourguide.com/haifa-l2051/haifa-port-full-day-christianity-tour-to-galilee-t482329/", groupFormat: "confirm",
+  },
+  {
+    id: "shore-gyg-ashdod-jerusalem-bethlehem", portIds: ["ashdod"], operatorId: "rent-a-guide", partnerId: "getyourguide",
+    destinationIds: ["jerusalem", "bethlehem"], title: "Private Jerusalem & Bethlehem from Ashdod",
+    summary: "Meet your guide at Ashdod's cruise terminal and combine Jerusalem's Old City with Bethlehem before returning to Ashdod Port.",
+    publicUrl: "https://www.getyourguide.com/jerusalem-l97/private-shore-excursion-jerusalembethlehem-from-ashdod-port-t1219278/", groupFormat: "private",
+  },
+  {
+    id: "shore-gyg-ashdod-galilee", portIds: ["ashdod"], operatorId: "rent-a-guide", partnerId: "getyourguide",
+    destinationIds: ["nazareth", "galilee"], title: "Private Nazareth & Galilee from Ashdod",
+    summary: "A long private guided journey to Nazareth, Cana and the Sea of Galilee. The detailed inclusions specify pickup and drop-off at Ashdod Port.",
+    publicUrl: "https://www.getyourguide.com/nazareth-l211/private-shore-excursion-nazareth-galilee-from-ashdod-port-t1223962/", groupFormat: "private",
+  },
+  {
+    id: "shore-gyg-ashdod-masada", portIds: ["ashdod"], operatorId: "bein-harim", partnerId: "getyourguide",
+    destinationIds: ["masada", "dead-sea"], title: "Masada & Dead Sea guided day from Ashdod",
+    summary: "Travel from Ashdod Port to Masada and a Dead Sea beach stop at Ein Bokek, with guiding and return transportation listed by the operator.",
+    publicUrl: "https://www.getyourguide.com/ashdod-l2574/from-ashdod-port-masada-and-dead-sea-guided-day-trip-t427916/", groupFormat: "confirm",
+  },
+  {
+    id: "shore-viator-haifa-galilee", portIds: ["haifa"], operatorId: "guided-tours-israel", partnerId: "viator",
+    destinationIds: ["nazareth", "galilee"], title: "Nazareth & Galilee for cruise ship guests",
+    summary: "A shared guided excursion to Nazareth and Galilee's Christian sites, with pickup and drop-off at Haifa Port. This product is for arriving cruise passengers.",
+    publicUrl: "https://www.viator.com/tours/Tiberias/Haifa-Shore-Excursion-Nazareth-and-Galilee-Day-Trip/d24329-7414HBG", groupFormat: "shared",
+  },
+  {
+    id: "shore-viator-ashdod-jerusalem-dead-sea", portIds: ["ashdod"], operatorId: "guided-tours-israel", partnerId: "viator",
+    destinationIds: ["jerusalem", "dead-sea"], title: "Jerusalem & Dead Sea for cruise ship guests",
+    summary: "A shared guided day combining Jerusalem's Old City with a Dead Sea visit, with pickup and return at Ashdod Port for cruise passengers.",
+    publicUrl: "https://www.viator.com/tours/Ashdod/Ashdod-Shore-Excursion-Jerusalem-and-Dead-Sea-Day-Trip/d4470-7414AJD", groupFormat: "shared",
+  },
+];
+
 export interface ShoreServiceRecord {
   id: string;
+  productId: string;
   portId: ShorePortId;
   kind: ShoreServiceKind;
   destinationIds: ShoreDestinationId[];
@@ -351,14 +503,18 @@ const shoreItineraryDestinations: Record<string, ShoreDestinationId[]> = {
 };
 export const shoreServices: ShoreServiceRecord[] = [
   ...shoreExcursionRates.map((rate): ShoreServiceRecord => ({
-    id: rate.id, portId: rate.portId, kind: "private-driver", destinationIds: shoreItineraryDestinations[rate.id]!,
+    id: rate.id, productId: rate.id, portId: rate.portId, kind: "private-driver", destinationIds: shoreItineraryDestinations[rate.id]!,
     providerLinkId: `${rate.portId}-shore-moshe`, itineraryId: rate.id, status: "published",
   })),
   ...(["haifa", "ashdod"] as const).flatMap((portId): ShoreServiceRecord[] => [
-    { id: `${portId}-guided-jerusalem-bethlehem`, portId, kind: "guided-tour", destinationIds: ["jerusalem", "bethlehem"], providerLinkId: `${portId}-shore-beinharim`, status: "published" },
-    { id: `${portId}-airport-transfer`, portId, kind: "transfer", destinationIds: ["airport"], providerLinkId: `${portId}-port-airport-transfer`, status: "published" },
-    { id: `${portId}-city-transfer`, portId, kind: "transfer", destinationIds: ["hotels-cities"], providerLinkId: `${portId}-port-city-transfer`, status: "published" },
+    { id: `${portId}-guided-jerusalem-bethlehem`, productId: `${portId}-guided-jerusalem-bethlehem`, portId, kind: "guided-tour", destinationIds: ["jerusalem", "bethlehem"], providerLinkId: `${portId}-shore-beinharim`, status: "published" },
+    { id: `${portId}-airport-transfer`, productId: `${portId}-airport-transfer`, portId, kind: "transfer", destinationIds: ["airport"], providerLinkId: `${portId}-port-airport-transfer`, status: "published" },
+    { id: `${portId}-city-transfer`, productId: `${portId}-city-transfer`, portId, kind: "transfer", destinationIds: ["hotels-cities"], providerLinkId: `${portId}-port-city-transfer`, status: "published" },
   ]),
+  ...shoreTourProducts.flatMap((product) => product.portIds.map((portId): ShoreServiceRecord => ({
+    id: `${portId}-${product.id}`, productId: product.id, portId, kind: "guided-tour",
+    destinationIds: product.destinationIds, providerLinkId: product.id, status: "published",
+  }))),
 ];
 
 /** Only these four airport destinations have individual transfer guides. */
@@ -469,6 +625,11 @@ const haifaHotelSources: SourceReference[] = [
 }));
 
 export const sources: SourceReference[] = [
+  ...shoreTourProducts.map((product): SourceReference => ({
+    id: product.id, title: product.title, publisher: product.partnerId === "getyourguide" ? "GetYourGuide product listing" : product.partnerId === "viator" ? "Viator product listing" : product.operatorId === "tourist-israel" ? "Tourist Israel" : "Compass Travel Israel",
+    url: product.publicUrl, checkedAt: SHORE_EXCURSION_CHECK_DATE,
+    note: `Product identity, named operator, itinerary and pickup/return at ${product.portIds.map((id) => shorePorts[id].name).join(" / ")} Port checked. ${product.seasonNote ? "The operator currently advertises a 2027 cruise program. " : ""}${product.operatorId === "rent-a-guide" ? "The title mentions both ports, but the detailed return/inclusions specify Ashdod; listed here only for Ashdod. " : ""}No sailing-date availability, live price, port-access permission or return guarantee is verified by this portal. Confirm all arrangements before booking.`,
+  })),
   { id: "moshe-author-profile", title: "Moshe Barak biography", publisher: "Moshe Barak", url: `${OWNER_BASE}/about-me/`, checkedAt: "2026-10-18", note: "Publisher biography supports over 20 years in private transport, local route knowledge and tailored journeys for international visitors. Tripadvisor is linked to the owner-supplied profile only; no live score, count or review text is reproduced." },
   referenceFxSource,
   ...travelGuideSources,
@@ -716,11 +877,39 @@ export const operators: Operator[] = [
     disclosure: "Operated by the publisher's local transport business.",
   },
   { id: "bein-harim", name: "Bein Harim Tours", kind: "tour_operator" },
+  { id: "tourist-israel", name: "Tourist Israel", kind: "tour_operator" },
+  { id: "compass-travel", name: "Compass Travel Israel", kind: "tour_operator" },
+  { id: "ilya-pevzner", name: "Ilya Pevzner Guide Israel", kind: "tour_operator" },
+  { id: "rent-a-guide", name: "Rent-a-Guide", kind: "tour_operator" },
+  { id: "guided-tours-israel", name: "Guided Tours Israel", kind: "tour_operator" },
   { id: "inpa", name: "Israel Nature and Parks Authority", kind: "official_site" },
 ];
 
 /** Existing publisher-owned tracking links copied exactly from the supplied destination guides. */
 export const affiliateConfig: Record<string, { trackingUrl: string } | undefined> = {
+  // Shore products: replace each undefined value with { trackingUrl: "your approved product link" }.
+  "shore-tourist-haifa-jerusalem": undefined,
+  "shore-tourist-haifa-tel-aviv": undefined,
+  "shore-tourist-haifa-jerusalem-bethlehem": undefined,
+  "shore-tourist-ashdod-jerusalem": undefined,
+  "shore-tourist-ashdod-tel-aviv": undefined,
+  "shore-tourist-ashdod-jerusalem-bethlehem": undefined,
+  "shore-tourist-haifa-galilee": undefined,
+  "shore-tourist-haifa-jerusalem-dead-sea": undefined,
+  "shore-tourist-ashdod-masada": undefined,
+  "shore-compass-jerusalem-bethlehem": undefined,
+  "shore-compass-tel-aviv-caesarea": undefined,
+  "shore-compass-ashdod-masada": undefined,
+  "shore-compass-haifa-galilee": undefined,
+  "shore-compass-haifa-akko": undefined,
+  "shore-gyg-haifa-akko": undefined,
+  "shore-gyg-haifa-galilee": undefined,
+  "shore-gyg-ashdod-jerusalem-bethlehem": undefined,
+  "shore-gyg-ashdod-galilee": undefined,
+  "shore-gyg-ashdod-masada": undefined,
+  "shore-viator-haifa-galilee": undefined,
+  "shore-viator-ashdod-jerusalem-dead-sea": undefined,
+
   "esim-airalo": { trackingUrl: "https://airalo.tpm.li/JmHFDV3v" },
   "esim-saily": { trackingUrl: "https://saily.tpm.li/nM5mNYzP" },
   "esim-yesim": { trackingUrl: "https://yesim.tpm.li/6WmqBIJV" },
@@ -822,6 +1011,7 @@ export const affiliateConfig: Record<string, { trackingUrl: string } | undefined
 };
 
 export const partners: BookingPartner[] = [
+  ...([{ id: "getyourguide", name: "GetYourGuide", homepage: "https://www.getyourguide.com/" }, { id: "viator", name: "Viator", homepage: "https://www.viator.com/" }]).map((partner): BookingPartner => ({ ...partner, capability: shoreTourProducts.some((product) => product.partnerId === partner.id && affiliateConfig[product.id]?.trackingUrl) ? "affiliate_link" : "editorial_only" })),
   ...(["airalo", "saily", "yesim", "gigsky", "drimsim"] as const).map((id): BookingPartner => ({ id, name: ({ airalo: "Airalo", saily: "Saily", yesim: "Yesim", gigsky: "GigSky", drimsim: "Drimsim" })[id], capability: affiliateConfig[`esim-${id}`] ? "affiliate_link" : "editorial_only", homepage: travelGuideSources.find((source) => source.id === `guide-esim-${id}`)!.url })),
   { id: "kiwitaxi", name: "Kiwitaxi", capability: affiliateConfig["airport-kiwitaxi"] ? "affiliate_link" : "editorial_only", homepage: "https://kiwitaxi.com/",
     logo: { src: kiwitaxiLogo, width: 45, height: 40, sourceUrl: "https://ftcdn.kiwitaxi.com/app2/assets/icons/logo-dark.svg", checkedAt: "2026-10-17" } },
@@ -1437,6 +1627,19 @@ export interface ProviderLink {
 const moshe = { providerName: "Moshe Barak", relationship: "publisher_operator" as const, operatorId: "moshe-barak" };
 
 export const providerLinks: ProviderLink[] = [
+  ...shoreTourProducts.map((product): ProviderLink => {
+    const operator = operators.find((item) => item.id === product.operatorId)!;
+    const partner = partners.find((item) => item.id === product.partnerId);
+    const trackingUrl = affiliateConfig[product.id]?.trackingUrl;
+    return {
+      id: product.id, pageIds: product.portIds.map((id) => shorePorts[id].pageId), providerName: partner?.name || operator.name,
+      relationship: partner ? "booking_platform" : "independent_operator", operatorId: operator.id, ...(partner ? { partnerId: partner.id } : {}),
+      mode: "provider_redirect", title: product.title, summary: product.summary,
+      ctaLabel: `See tour on ${partner?.name || operator.name}`, url: trackingUrl || product.publicUrl, isAffiliate: Boolean(trackingUrl), sourceId: product.id,
+      reentryNote: "Select your actual sailing date and party on the booking site. Confirm the port and return arrangements before booking.",
+      confirm: ["Actual sailing date and port-call times", "Exact port meeting point", "Guide, group format and inclusions", "Site access and admission fees", "Return arrangements and cancellation terms"],
+    };
+  }),
   ...([
     ["airalo", "Airalo", "Compare Israel package sizes, validity and the inclusions of the exact plan."],
     ["saily", "Saily", "Compare data packages and any optional call/text product separately; check the number's country."],

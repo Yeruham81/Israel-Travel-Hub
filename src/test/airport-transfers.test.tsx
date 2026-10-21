@@ -93,7 +93,7 @@ describe("private Ben Gurion transfers", () => {
     fillRequest();
     const fetchSpy = vi.spyOn(globalThis, "fetch").mockImplementation(async (_url, options) => Response.json({ accepted: true, requestId: JSON.parse(String(options?.body)).requestId }));
     fireEvent.click(screen.getByRole("button", { name: "Send quote request" }));
-    expect(await screen.findByText("Your request has been sent to Moshe")).toBeInTheDocument();
+    expect(await screen.findByText("Thank you for contacting me")).toBeInTheDocument();
     expect(fetchSpy).toHaveBeenCalledOnce();
     expect(fetchSpy).toHaveBeenCalledWith("/api/quote-request/", expect.objectContaining({ method: "POST" }));
     expect(JSON.parse(String(fetchSpy.mock.calls[0]![1]?.body))).toMatchObject({ sourceTitle: "Airport transfers", request: { kind: "transfer", fields: { destinationId: "jerusalem", email: "jamie+trip@example.com", date: "2099-11-01", time: "23:45", flight: "LY123", address: "Example Hotel, Jerusalem", consent: true } } });
@@ -111,7 +111,7 @@ describe("private Ben Gurion transfers", () => {
     fillRequest(); fireEvent.click(screen.getByRole("button", { name: "Send quote request" }));
     expect(await screen.findByRole("alert")).toHaveTextContent("Message sending is temporarily unavailable");
     expect(screen.getByLabelText("Full name *")).toHaveValue("Jamie Smith");
-    expect(screen.queryByText("Your request has been sent to Moshe")).not.toBeInTheDocument();
+    expect(screen.queryByText("Thank you for contacting me")).not.toBeInTheDocument();
     expect(screen.queryByRole("button", { name: /Copy|Prepare/ })).not.toBeInTheDocument();
     expect(screen.queryByRole("link", { name: /Open email/ })).not.toBeInTheDocument();
     expect(fetchSpy).toHaveBeenCalledOnce();

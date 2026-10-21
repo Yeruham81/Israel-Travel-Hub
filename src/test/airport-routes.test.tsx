@@ -72,7 +72,7 @@ describe("four dedicated airport transfer routes", () => {
     fireEvent.click(screen.getByRole("checkbox"));
     const fetchSpy = vi.spyOn(globalThis, "fetch").mockImplementation(async (_url, options) => Response.json({ accepted: true, requestId: JSON.parse(String(options?.body)).requestId }));
     fireEvent.submit(form);
-    expect(await screen.findByText("Your request has been sent to Moshe")).toBeInTheDocument();
+    expect(await screen.findByText("Thank you for contacting me")).toBeInTheDocument();
     expect(fetchSpy).toHaveBeenCalledOnce();
     expect(fetchSpy).toHaveBeenCalledWith("/api/quote-request/", expect.objectContaining({ method: "POST" }));
     expect(JSON.parse(String(fetchSpy.mock.calls[0]![1]?.body))).toMatchObject({ sourceTitle: guide.title, request: { kind: "transfer", fields: { destinationId: route.id, address: `Example Hotel, ${guide.city}`, passengers: "6", consent: true } } });

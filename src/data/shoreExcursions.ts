@@ -89,14 +89,14 @@ const itineraryDetails: Record<string, ItineraryDetails> = {
 };
 
 const sharedFaqs = [
-  { q: "Do all cards belong to the same operator?", a: "No. Each card names its provider. Moshe Barak's car-and-driver day trips and one-way transfer requests are separate from the guided excursion sold by Bein Harim Tours. Published ILS day-trip starting rates apply only to the named Moshe itinerary; other services have their own quote, inclusions and terms." },
+  { q: "Do all cards belong to the same operator?", a: "No. Each card names the operator and, where relevant, the booking platform such as GetYourGuide or Viator. Use the operator tags to compare one company's options. Moshe Barak's published ILS day-trip starting rates apply only to his named car-and-driver itineraries; other operators have separate prices, inclusions and terms." },
   { q: "Are the starting prices per person or per vehicle?", a: "They are published ILS starting prices for a full-day return car-and-driver service for up to four passengers on weekdays. They are not per-person fares or live quotes. Night, weekend and holiday supplements may apply; Moshe confirms the total for your actual party and schedule." },
   { q: "Is a licensed guide included?", a: "No. These starting rates cover private transportation and a driver. Licensed guiding, site admission, meals and tips are excluded. Request a guide separately if you want interpretation or guided visits inside sites, and ask for its price in the written quote." },
   { q: "Can the itinerary be customized?", a: "Yes, request different priorities, a slower pace or another destination. The operator must confirm that the route fits your hours ashore, site access and return buffer. Changes can alter the price." },
   { q: "Can I request a van, child seats or an accessible vehicle?", a: "Include all passengers, children's ages, mobility needs and any equipment in the inquiry. Vans and minibuses are available by request, subject to confirmation. Do not assume a suitable vehicle or seat is reserved until the operator confirms it." },
   { q: "Where will I meet the driver?", a: "Agree the precise meeting point for your ship, berth and port procedures in writing. Ask whether a terminal transfer or port shuttle is needed; do not assume every driver can wait beside the ship." },
   { q: "What happens if the ship is delayed or cancels the port call?", a: "Send any schedule change to the operator promptly. Ask for written confirmation of the cancellation cutoff, any deposit refund, missed-call policy and revised itinerary. Other operators have their own terms. No return-to-ship guarantee is made by this portal." },
-  { q: "How do I request Moshe's car-and-driver day trip?", a: "Choose an itinerary and complete the form with your ship, date, hours ashore and party details. Press Send excursion request to email the details directly and wait for the on-page confirmation. The excursion is booked only after the operator confirms availability, price, payment and terms. Transfer cards open a separate one-way request; the guided-tour card opens that operator's site." },
+  { q: "How do I request Moshe's car-and-driver day trip?", a: "Choose an itinerary and complete the form with your ship, date, hours ashore and party details. Press Send excursion request to email the details directly and wait for the on-page confirmation. The excursion is booked only after the operator confirms availability, price, payment and terms. Transfer cards open a separate one-way request; guided-tour cards open the named operator or booking platform." },
 ];
 
 const portDetails: Record<ShorePortId, PortDetails> = {
@@ -170,12 +170,19 @@ export function getShoreCatalog(portId: ShorePortId, filters: ShoreServiceSearch
   return filterShoreServices(portId, filters).map((service) => {
     const itinerary = port.itineraries.find((item) => item.id === service.itineraryId);
     const airport = service.destinationIds.includes("airport");
+    const destinationPhoto = service.destinationIds.includes("masada") ? masadaPhoto
+      : service.destinationIds.includes("akko") ? itineraryDetails["haifa-akko"]!.photo
+      : service.destinationIds.includes("nazareth") ? airportTransferPhotos["nazareth"]!
+      : service.destinationIds.includes("jerusalem") ? airportTransferPhotos["jerusalem"]!
+      : service.destinationIds.includes("haifa") ? airportTransferPhotos["haifa"]!
+      : airportTransferPhotos[airport ? "other" : "tel-aviv"]!;
+    const guidedFormat = service.product?.groupFormat === "private" ? "Private guided excursion" : service.product?.groupFormat === "shared" ? "Shared guided excursion" : "Guided excursion";
     return {
       ...service, itinerary,
       title: itinerary?.destination || service.provider.title,
       description: itinerary?.description || service.provider.summary,
-      photo: itinerary?.photo || airportTransferPhotos[service.kind === "guided-tour" ? "jerusalem" : airport ? "other" : "tel-aviv"]!,
-      format: service.kind === "private-driver" ? "Private transport · return to port" : service.kind === "guided-tour" ? "Guided excursion · return to port" : "Private one-way transport · by request",
+      photo: itinerary?.photo || destinationPhoto,
+      format: service.kind === "private-driver" ? "Private transport · return to port" : service.kind === "guided-tour" ? `${guidedFormat} · return to port` : "Private one-way transport · by request",
     };
   });
 }

@@ -13,7 +13,7 @@ import { PageUpdated } from "@/components/PageUpdated";
 import { authorLd } from "@/lib/author";
 import { hasPublicPhotoCredit } from "@/lib/photo-credits";
 import { ShoreServiceCatalog } from "@/components/ShoreServiceCatalog";
-import type { ShoreServiceSearch } from "@/lib/shore-services";
+import { shoreSourceIds, type ShoreServiceSearch } from "@/lib/shore-services";
 
 function crumbsFor(id: ShorePortId) {
   return [{ name: "Home", path: "/" as const }, { name: "Shore excursions", path: "/shore-excursions/" as const }, { name: `From ${shorePorts[id].name} Port`, path: shorePorts[id].path }];
@@ -26,7 +26,7 @@ export function shorePortMeta(id: ShorePortId) {
   return { ...meta, scripts: [...meta.scripts, {
     type: "application/ld+json", children: JSON.stringify({ "@context": "https://schema.org", "@type": "Article", headline: port.title, description: port.description, mainEntityOfPage: `${CANONICAL_ORIGIN}${port.path}`, inLanguage: "en", dateModified: SHORE_EXCURSION_CHECK_DATE,
       author: authorLd(), publisher: { "@type": "Organization", name: SITE_NAME }, image: imageUrl,
-      citation: publicSources([port.sourceId, port.alternativeSourceId]).map((source) => source.url),
+      citation: publicSources(shoreSourceIds(id)).map((source) => source.url),
     }).replaceAll("<", "\\u003c"),
   }] };
 }
@@ -91,7 +91,7 @@ export function PortPage({ id, filters, onFilterChange }: { id: ShorePortId; fil
     <FaqList faqs={port.faqs} />
     <section aria-labelledby="ready-h" className="mt-14 rounded-2xl bg-navy p-6 text-navy-foreground sm:p-8"><h2 id="ready-h" className="text-3xl">Let's plan your day from {port.name}</h2><p className="mt-3 opacity-90">Share your ship's timetable, party size and favorite itinerary. Moshe will need to confirm the route, vehicle, total and booking terms.</p><a href="#request-quote" onClick={focusQuote} className="btn btn-light mt-5">Request a quote from Moshe</a></section>
     <RelatedLinks title="Useful guides for your day ashore" items={port.related} />
-    <SourceList ids={[port.sourceId, port.alternativeSourceId, "owner-private-driver"]} intro="The local operator's published starting rates and itinerary descriptions were checked on the date below. They are not live prices or confirmed availability. Other operators' products have separate prices and terms." />
+    <SourceList ids={shoreSourceIds(id)} intro="Product pages were checked for the named operator, itinerary and port pickup/return. Listings are not confirmed sailing-date availability. Published ILS rates apply only to Moshe's named day trips; each external operator or booking platform has its own prices and terms." />
     <details className="mt-10 rounded-xl border p-5"><summary className="cursor-pointer text-sm font-medium">Excursion image credits</summary><ul className="mt-3 space-y-3">{[...new Map(photos.map((photo) => [photo.src, photo])).values()].map((photo) => <li key={photo.src}><p className="text-sm">{photo.alt}</p><GuidePhotoCredit photo={photo} /></li>)}</ul></details>
     <div className="fixed inset-x-0 bottom-0 z-30 border-t bg-background/95 px-4 py-3 backdrop-blur lg:hidden"><div className="mx-auto flex max-w-5xl items-center justify-between gap-3"><p className="text-sm font-medium">Private day ashore<br /><span className="text-xs text-muted-foreground">From {port.name} Port</span></p><a href="#request-quote" onClick={focusQuote} className="btn btn-primary shrink-0 text-sm">Request a quote</a></div></div>
   </main>;
