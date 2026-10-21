@@ -59,7 +59,7 @@ describe("shore excursions", () => {
     }
   });
 
-  it.each(cases)("renders $id with four illustrated itineraries, a port-specific inquiry and matching metadata", async ({ id, route }) => {
+  it.each(cases)("renders $id with an integrated service catalog, a port-specific inquiry and matching metadata", async ({ id, route }) => {
     const port = getShorePort(id);
     const router = await routerAt(port.path);
     const Page = route.options.component!;
@@ -67,7 +67,9 @@ describe("shore excursions", () => {
     expect(screen.getAllByRole("heading", { level: 1 })).toHaveLength(1);
     expect(screen.getByRole("heading", { level: 1 })).toHaveTextContent(port.title);
     expect(router.matchRoutes(port.path).at(-1)?.routeId).toBe(port.path.replace(/\/$/, ""));
-    const cards = screen.getAllByTestId("shore-itinerary-card");
+    const services = screen.getAllByTestId("shore-service-card");
+    expect(services).toHaveLength(7);
+    const cards = services.filter((card) => card.dataset["serviceKind"] === "private-driver");
     expect(cards).toHaveLength(4);
     cards.forEach((card, index) => {
       const itinerary = port.itineraries[index]!;
@@ -75,16 +77,16 @@ describe("shore excursions", () => {
       expect(within(card).getByRole("img").getAttribute("alt")).toBeTruthy();
       expect(card).toHaveTextContent(`From ILS ${itinerary.price.amount.toLocaleString("en-US")}`);
       expect(card).toHaveTextContent("Per vehicle · up to 4 · transport only");
-      expect(within(card).getByRole("link")).toHaveAttribute("href", "#request-quote");
+      expect(within(card).getByRole("link", { name: `Request ${itinerary.destination} from ${port.name}` })).toHaveAttribute("href", "#request-quote");
     });
     expect(container.querySelector("#itineraries")!.compareDocumentPosition(container.querySelector("#request-quote")!)).toBe(Node.DOCUMENT_POSITION_FOLLOWING);
     expect(screen.getByLabelText("Departure & return port")).toHaveValue(`${port.name} Port`);
     expect(screen.getByRole("link", { name: "Privacy Policy" })).toHaveAttribute("href", "/privacy-policy/");
     expect(screen.queryByText(/Prefer an online form|existing .*contact form/)).not.toBeInTheDocument();
-    const alternative = screen.getByRole("region", { name: "Prefer a separate guided excursion?" });
-    expect(within(alternative).getAllByTestId("provider-card")).toHaveLength(1);
+    const alternative = services.find((card) => card.dataset["serviceKind"] === "guided-tour")!;
     expect(alternative).toHaveTextContent("Bein Harim Tours");
     expect(alternative).not.toHaveTextContent(/From ILS/);
+    expect(within(alternative).getByRole("link", { name: /See dates and prices on Bein Harim/ })).toHaveAttribute("rel", "noopener noreferrer");
     const related = screen.getByRole("region", { name: "Useful guides for your day ashore" });
     for (const link of within(related).getAllByRole("link")) {
       const href = link.getAttribute("href")!;

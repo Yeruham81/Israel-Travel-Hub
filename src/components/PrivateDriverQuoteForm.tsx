@@ -8,8 +8,8 @@ import { privateDriverServices } from "@/data/registry";
 import { airportTransferPhotos } from "@/data/airportTransfers";
 import { driverGuideOptions, emptyDriverQuote, validateDriverQuote, type DriverQuoteFields } from "@/lib/private-driver-quote";
 
-export function PrivateDriverQuoteForm({ serviceId, onServiceChange }: { serviceId: string; onServiceChange: (id: string) => void }) {
-  const [fields, setFields] = useState(emptyDriverQuote);
+export function PrivateDriverQuoteForm({ serviceId, onServiceChange, initialFields }: { serviceId: string; onServiceChange: (id: string) => void; initialFields?: Partial<DriverQuoteFields> | undefined }) {
+  const [fields, setFields] = useState(() => ({ ...emptyDriverQuote, ...initialFields }));
   const [errors, setErrors] = useState<string[]>([]);
   const submission = useQuoteSubmission();
   const { reset } = submission;

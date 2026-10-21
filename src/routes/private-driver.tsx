@@ -10,8 +10,10 @@ import { PRIVATE_DRIVER_CHECK_DATE } from "@/data/registry";
 import { pageMeta } from "@/lib/site";
 import { AuthorCard } from "@/components/AuthorCard";
 import { PageUpdated } from "@/components/PageUpdated";
+import { parsePortTransferSearch, portTransferPrefill } from "@/lib/shore-services";
 
 export const Route = createFileRoute("/private-driver")({
+  validateSearch: parsePortTransferSearch,
   head: () => pageMeta({
     title: "Private driver in Israel: intercity transfers and day hire",
     description: "Hire a private driver in Israel for hotel-to-hotel journeys, full-day itineraries and multiple stops. Share your route and request a written quote.",
@@ -25,7 +27,13 @@ const benefitIcons = [MapPinned, Luggage, Clock3, MessageSquareText];
 const focusQuote = () => requestAnimationFrame(() => document.getElementById("request-quote")?.focus({ preventScroll: true }));
 
 function PrivateDriver() {
-  const [serviceId, setServiceId] = useState("");
+  const transfer = Route.useSearch();
+  return <PrivateDriverContent key={`${transfer.port || ""}-${transfer.transfer || ""}`} transfer={transfer} />;
+}
+
+function PrivateDriverContent({ transfer }: { transfer: ReturnType<typeof parsePortTransferSearch> }) {
+  const initialFields = portTransferPrefill(transfer);
+  const [serviceId, setServiceId] = useState(initialFields ? "intercity" : "");
   return <main className="mx-auto max-w-5xl px-4 pb-24 lg:pb-8">
     <div className="pt-6"><Breadcrumbs items={[{ name: "Home", to: "/" }, { name: "Private driver", to: "/private-driver/" }]} /></div>
     <header className="mt-7 grid items-center gap-7 lg:grid-cols-[1.2fr_1fr]">
@@ -44,7 +52,8 @@ function PrivateDriver() {
         <div className="flex flex-1 flex-col p-5"><h3 className="text-2xl">{journey.title}</h3><p className="mt-3 flex-1 text-sm leading-relaxed text-muted-foreground">{journey.text}</p><a href="#request-quote" onClick={() => { setServiceId(journey.id); focusQuote(); }} className="mt-5 inline-flex items-center gap-2 font-semibold text-primary underline underline-offset-4">Plan this journey<ArrowRight className="h-4 w-4" aria-hidden /></a></div>
       </article>)}</div>
     </section>
-    <PrivateDriverQuoteForm serviceId={serviceId} onServiceChange={setServiceId} />
+    {initialFields && <p className="mt-8 rounded-xl border bg-secondary/50 p-5 text-sm">Your one-way transfer request starts at {initialFields.pickup}{initialFields.dropoff ? ` and goes to ${initialFields.dropoff}` : "; add your hotel or final address below"}. Please include the cruise ship and disembarkation details, and any flight details for an airport transfer. Moshe must confirm the meeting point, timing, vehicle and price.</p>}
+    <PrivateDriverQuoteForm serviceId={serviceId} onServiceChange={setServiceId} initialFields={initialFields} />
     <section id="benefits" aria-labelledby="benefits-h" className="mt-14">
       <p className="eyebrow">Make the day work for you</p><h2 id="benefits-h" className="mt-2 text-3xl">What to arrange with your private driver</h2>
       <div className="mt-6 grid gap-4 sm:grid-cols-2">{privateDriverBenefits.map((benefit, index) => { const Icon = benefitIcons[index]!; return <article key={benefit.title} className="rounded-xl border bg-card p-6"><Icon className="h-6 w-6 text-primary" aria-hidden /><h3 className="mt-4 text-2xl">{benefit.title}</h3><p className="mt-3 text-sm leading-relaxed text-muted-foreground">{benefit.text}</p></article>; })}</div>

@@ -6,6 +6,7 @@ import akko from "@/assets/shore-excursions/akko-port.jpg";
 import ashdod from "@/assets/home/ashdod-port.webp";
 import haifa from "@/assets/home/haifa-port.webp";
 import masada from "@/assets/home/masada-dead-sea.webp";
+import { filterShoreServices, type ShoreServiceSearch } from "@/lib/shore-services";
 
 type ItineraryDetails = {
   photo: GuidePhoto;
@@ -82,27 +83,28 @@ const itineraryDetails: Record<string, ItineraryDetails> = {
     photo: airportTransferPhotos["jerusalem"]!,
     description: "A long day south to Jerusalem, focused on your essential Old City sites and viewpoints. Keep the plan selective and make the ship's return deadline the first planning constraint.",
     bestFor: "A Jerusalem priority on a sufficiently long port call",
-    planningNote: "Confirm the full return plan before choosing this route. Bethlehem is not included in this starting price; a guided combined product is listed separately below.",
+    planningNote: "Confirm the full return plan before choosing this route. Bethlehem is not included in this starting price; choose Guided tours for the separate combined product.",
     highlights: ["Jerusalem Old City", "Chosen holy sites", "Viewpoint if time allows"],
   },
 };
 
 const sharedFaqs = [
+  { q: "Do all cards belong to the same operator?", a: "No. Each card names its provider. Moshe Barak's car-and-driver day trips and one-way transfer requests are separate from the guided excursion sold by Bein Harim Tours. Published ILS day-trip starting rates apply only to the named Moshe itinerary; other services have their own quote, inclusions and terms." },
   { q: "Are the starting prices per person or per vehicle?", a: "They are published ILS starting prices for a full-day return car-and-driver service for up to four passengers on weekdays. They are not per-person fares or live quotes. Night, weekend and holiday supplements may apply; Moshe confirms the total for your actual party and schedule." },
   { q: "Is a licensed guide included?", a: "No. These starting rates cover private transportation and a driver. Licensed guiding, site admission, meals and tips are excluded. Request a guide separately if you want interpretation or guided visits inside sites, and ask for its price in the written quote." },
   { q: "Can the itinerary be customized?", a: "Yes, request different priorities, a slower pace or another destination. The operator must confirm that the route fits your hours ashore, site access and return buffer. Changes can alter the price." },
   { q: "Can I request a van, child seats or an accessible vehicle?", a: "Include all passengers, children's ages, mobility needs and any equipment in the inquiry. Vans and minibuses are available by request, subject to confirmation. Do not assume a suitable vehicle or seat is reserved until the operator confirms it." },
   { q: "Where will I meet the driver?", a: "Agree the precise meeting point for your ship, berth and port procedures in writing. Ask whether a terminal transfer or port shuttle is needed; do not assume every driver can wait beside the ship." },
   { q: "What happens if the ship is delayed or cancels the port call?", a: "Send any schedule change to the operator promptly. Ask for written confirmation of the cancellation cutoff, any deposit refund, missed-call policy and revised itinerary. Other operators have their own terms. No return-to-ship guarantee is made by this portal." },
-  { q: "How do I send the inquiry and book?", a: "Choose an itinerary and complete the form with your ship, date, hours ashore and party details. Press Send excursion request to email the details directly and wait for the on-page confirmation. The excursion is booked only after the operator confirms availability, price, payment and terms." },
+  { q: "How do I request Moshe's car-and-driver day trip?", a: "Choose an itinerary and complete the form with your ship, date, hours ashore and party details. Press Send excursion request to email the details directly and wait for the on-page confirmation. The excursion is booked only after the operator confirms availability, price, payment and terms. Transfer cards open a separate one-way request; the guided-tour card opens that operator's site." },
 ];
 
 const portDetails: Record<ShorePortId, PortDetails> = {
   ashdod: {
-    title: "Ashdod shore excursions: private day trips & prices",
-    description: "Plan a private shore excursion from Ashdod Port to Tel Aviv and Jaffa, Jerusalem, Masada or the Dead Sea. Compare published car-and-driver rates and request a quote.",
-    intro: "Make your day ashore your own: explore Jerusalem, stroll Tel Aviv and Jaffa, or plan a desert day at Masada and the Dead Sea. Choose an idea below and send Moshe your ship's schedule for a tailored quote.",
-    answer: "From Ashdod, choose the Tel Aviv–Jaffa coast, Jerusalem or a longer Masada and Dead Sea journey. Compare Moshe Barak's published car-and-driver starting rates below, quoted per vehicle for up to four passengers. The right route depends on your actual disembarkation and all-aboard times; guiding and admission are separate.",
+    title: "Ashdod shore excursions: tours, day trips & transfers",
+    description: "Browse shore excursions, guided tours, private car-and-driver day trips and onward transfers from Ashdod Port. Filter by service or destination and compare what is included.",
+    intro: "Explore Jerusalem, Tel Aviv and Jaffa, or the desert around Masada and the Dead Sea. Browse the tours, private-driver days and onward transfers below, then narrow the choices with a tag.",
+    answer: "From Ashdod, choose a return day trip, a guided excursion or a one-way transfer after your cruise. All services are shown below: use the service and destination tags to find your preferred option. For day trips, confirm that the plan fits your actual disembarkation and all-aboard times.",
     photo: { src: ashdod, alt: "Aerial view of Ashdod Port and its Mediterranean breakwater", credit: "Amos Meron · CC BY-SA 3.0 · cropped and resized WebP", sourceUrl: "https://commons.wikimedia.org/wiki/File:Ashdod_Port_Aerial_View.jpg", licenseUrl: "https://creativecommons.org/licenses/by-sa/3.0/" },
     overview: [
       "Ashdod is the southern cruise-port starting point in this guide. A Tel Aviv–Jaffa day keeps the focus on the coast; Jerusalem puts historic and religious sites first. Masada and the Dead Sea add a longer desert drive, so choose them for a port call that leaves enough time for the return.",
@@ -124,10 +126,10 @@ const portDetails: Record<ShorePortId, PortDetails> = {
     alternativeSourceId: "beinharim-ashdod-jlm-bethlehem",
   },
   haifa: {
-    title: "Haifa shore excursions: private day trips & prices",
-    description: "Choose a Haifa Port shore excursion to Akko, Nazareth and the Sea of Galilee, Tel Aviv or Jerusalem. See published private-driver starting rates and request a quote.",
-    intro: "Explore the northern coast, follow a Galilee itinerary or make Jerusalem your priority. Start with an excursion idea, then let Moshe plan the vehicle and route around your ship's time in Haifa.",
-    answer: "Haifa is a practical starting point for Akko, Nazareth and the Sea of Galilee; Tel Aviv and Jerusalem involve longer drives south. Compare his published return car-and-driver starting rates below, quoted per vehicle for up to four passengers. Site access, your hours ashore and the return plan must be confirmed before booking.",
+    title: "Haifa shore excursions: tours, day trips & transfers",
+    description: "Browse guided shore excursions, private car-and-driver day trips and onward transfers from Haifa Port. Filter by service or destination, including Akko, Galilee and Jerusalem.",
+    intro: "Explore the northern coast, follow a Galilee itinerary or make Jerusalem your priority. Browse tours, private-driver days and onward transfers from Haifa Port, with simple tags to narrow your choices.",
+    answer: "Choose a return day trip, a guided excursion or a one-way transfer after your cruise. Akko and the Galilee focus on the north; Tel Aviv and Jerusalem involve longer drives south. All services are shown below, with service and destination tags to help you choose.",
     photo: { src: haifa, alt: "Haifa Port and Haifa Bay seen from Mount Carmel", credit: "Юкатан · CC BY-SA 3.0 · cropped and resized WebP", sourceUrl: "https://commons.wikimedia.org/wiki/File:Panorama_Haifa_(cropped).jpg", licenseUrl: "https://creativecommons.org/licenses/by-sa/3.0/" },
     overview: [
       "Choose the north if you want more of the day around Akko, the Galilee or the Carmel rather than on the road to Jerusalem. Akko's old harbour suits a coastal day; Nazareth and selected lakeside sites offer a different route for Christian heritage and Galilee scenery.",
@@ -160,4 +162,20 @@ export const shoreExcursionBenefits = [
 
 export function getShorePort(id: ShorePortId) {
   return { id, ...shorePorts[id], ...portDetails[id], itineraries: shoreExcursionRates.filter((rate) => rate.portId === id).map((rate) => ({ ...rate, ...itineraryDetails[rate.id]! })) };
+}
+
+/** Editorial display details are separate from registry products and booking links. */
+export function getShoreCatalog(portId: ShorePortId, filters: ShoreServiceSearch = {}) {
+  const port = getShorePort(portId);
+  return filterShoreServices(portId, filters).map((service) => {
+    const itinerary = port.itineraries.find((item) => item.id === service.itineraryId);
+    const airport = service.destinationIds.includes("airport");
+    return {
+      ...service, itinerary,
+      title: itinerary?.destination || service.provider.title,
+      description: itinerary?.description || service.provider.summary,
+      photo: itinerary?.photo || airportTransferPhotos[service.kind === "guided-tour" ? "jerusalem" : airport ? "other" : "tel-aviv"]!,
+      format: service.kind === "private-driver" ? "Private transport · return to port" : service.kind === "guided-tour" ? "Guided excursion · return to port" : "Private one-way transport · by request",
+    };
+  });
 }

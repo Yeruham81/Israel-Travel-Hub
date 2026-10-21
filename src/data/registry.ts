@@ -134,7 +134,7 @@ export function isPublisherUrl(url?: string) {
 }
 export const AIRPORT_TRANSFER_CHECK_DATE: ISODate = "2026-10-17";
 export const TRAVEL_GUIDE_CHECK_DATE: ISODate = "2026-10-17";
-export const SHORE_EXCURSION_CHECK_DATE: ISODate = "2026-10-17";
+export const SHORE_EXCURSION_CHECK_DATE: ISODate = "2026-10-21";
 
 export const referenceFxSource: SourceReference = {
   id: "fx-bank-of-israel", title: "Representative exchange rates", publisher: "Bank of Israel",
@@ -311,6 +311,55 @@ export const shoreExcursionContact = {
   name: airportTransferContact.name, email: airportTransferContact.email,
   deliveryMode: "server_email" as const,
 };
+
+/** Port catalog records describe services, not date-specific availability. */
+export const shoreServiceKinds = [
+  { id: "private-driver", label: "Car & driver" },
+  { id: "guided-tour", label: "Guided tours" },
+  { id: "transfer", label: "Transfers" },
+] as const;
+export type ShoreServiceKind = typeof shoreServiceKinds[number]["id"];
+export const shoreDestinations = [
+  { id: "jerusalem", label: "Jerusalem" },
+  { id: "bethlehem", label: "Bethlehem" },
+  { id: "tel-aviv", label: "Tel Aviv & Jaffa" },
+  { id: "akko", label: "Akko (Acre)" },
+  { id: "rosh-hanikra", label: "Rosh Hanikra" },
+  { id: "nazareth", label: "Nazareth" },
+  { id: "galilee", label: "Sea of Galilee" },
+  { id: "masada", label: "Masada" },
+  { id: "dead-sea", label: "Dead Sea" },
+  { id: "airport", label: "Ben Gurion Airport" },
+  { id: "hotels-cities", label: "Hotels & other cities" },
+] as const;
+export type ShoreDestinationId = typeof shoreDestinations[number]["id"];
+export interface ShoreServiceRecord {
+  id: string;
+  portId: ShorePortId;
+  kind: ShoreServiceKind;
+  destinationIds: ShoreDestinationId[];
+  providerLinkId: string;
+  /** Only a publisher's priced return itinerary can select the shore form. */
+  itineraryId?: string;
+  status: "draft" | "published";
+}
+const shoreItineraryDestinations: Record<string, ShoreDestinationId[]> = {
+  "ashdod-tel-aviv": ["tel-aviv"], "ashdod-jerusalem": ["jerusalem"],
+  "ashdod-masada": ["masada", "dead-sea"], "ashdod-masada-jerusalem": ["masada", "dead-sea", "jerusalem"],
+  "haifa-akko": ["akko", "rosh-hanikra"], "haifa-tel-aviv": ["tel-aviv"],
+  "haifa-galilee": ["nazareth", "galilee"], "haifa-jerusalem": ["jerusalem"],
+};
+export const shoreServices: ShoreServiceRecord[] = [
+  ...shoreExcursionRates.map((rate): ShoreServiceRecord => ({
+    id: rate.id, portId: rate.portId, kind: "private-driver", destinationIds: shoreItineraryDestinations[rate.id]!,
+    providerLinkId: `${rate.portId}-shore-moshe`, itineraryId: rate.id, status: "published",
+  })),
+  ...(["haifa", "ashdod"] as const).flatMap((portId): ShoreServiceRecord[] => [
+    { id: `${portId}-guided-jerusalem-bethlehem`, portId, kind: "guided-tour", destinationIds: ["jerusalem", "bethlehem"], providerLinkId: `${portId}-shore-beinharim`, status: "published" },
+    { id: `${portId}-airport-transfer`, portId, kind: "transfer", destinationIds: ["airport"], providerLinkId: `${portId}-port-airport-transfer`, status: "published" },
+    { id: `${portId}-city-transfer`, portId, kind: "transfer", destinationIds: ["hotels-cities"], providerLinkId: `${portId}-port-city-transfer`, status: "published" },
+  ]),
+];
 
 /** Only these four airport destinations have individual transfer guides. */
 export const airportTransferRoutes = [
@@ -607,7 +656,7 @@ export const sources: SourceReference[] = [
     publisher: "Bein Harim Tours",
     url: "https://www.beinharimtours.com/jerusalem-and-bethlehem-day-tour-from-ashdod-port/",
     checkedAt: SHORE_EXCURSION_CHECK_DATE,
-    note: "Operator product page for a combined Jerusalem and Bethlehem itinerary departing from Ashdod Port. Price, dates, inclusions and availability not checked.",
+    note: "Operator product page reopened 21 October 2026: guided Jerusalem and Bethlehem itinerary with pickup and return at Ashdod Port. No date-specific availability, current price or return guarantee is verified by this portal.",
   },
   {
     id: "beinharim-haifa-jlm-bethlehem",
@@ -615,7 +664,7 @@ export const sources: SourceReference[] = [
     publisher: "Bein Harim Tours",
     url: "https://www.beinharimtours.com/ship-to-shore-excursions-haifa-jerusalem-bethlehem/",
     checkedAt: SHORE_EXCURSION_CHECK_DATE,
-    note: "Operator product page for a combined Jerusalem and Bethlehem itinerary departing from Haifa Port. Price, dates, inclusions and availability not checked.",
+    note: "Operator product page reopened 21 October 2026: private guided Jerusalem and Bethlehem itinerary with pickup and return at Haifa Port. No date-specific availability, current price or return guarantee is verified by this portal.",
   },
   {
     id: "owner-private-day-trips",
@@ -682,6 +731,8 @@ export const affiliateConfig: Record<string, { trackingUrl: string } | undefined
   "airport-welcome": undefined,
   "airport-intui": undefined,
   "airport-gettransfer": undefined,
+  "ashdod-shore-beinharim": undefined,
+  "haifa-shore-beinharim": undefined,
   "hotels-jerusalem-expedia": { trackingUrl: "https://expedia.tpm.li/yNeL4j4v" },
   "area-downtown-expedia": { trackingUrl: "https://expedia.tpm.li/2i5lfUjl" },
   "area-mamilla-expedia": { trackingUrl: "https://expedia.tpm.li/UWWQ1gK3" },
@@ -1531,7 +1582,7 @@ export const providerLinks: ProviderLink[] = [
   {
     id: "ashdod-shore-beinharim", pageIds: ["shore-ashdod"], providerName: "Bein Harim Tours", relationship: "independent_operator", operatorId: "bein-harim", mode: "provider_redirect",
     title: "Jerusalem and Bethlehem day tour from Ashdod Port", summary: "The operator's port-specific product combining Jerusalem and Bethlehem in one day from Ashdod.",
-    ctaLabel: "See dates and prices on Bein Harim", url: "https://www.beinharimtours.com/jerusalem-and-bethlehem-day-tour-from-ashdod-port/", isAffiliate: false,
+    ctaLabel: "See dates and prices on Bein Harim", url: affiliateConfig["ashdod-shore-beinharim"]?.trackingUrl || "https://www.beinharimtours.com/jerusalem-and-bethlehem-day-tour-from-ashdod-port/", isAffiliate: Boolean(affiliateConfig["ashdod-shore-beinharim"]?.trackingUrl),
     reentryNote: "Choose your date on the operator's site.", confirm: ["Your ship's date and port-call times", "Meeting point at the port", "Shared or private format and inclusions", "Passport and travel requirements for Bethlehem", "Return arrangements and cancellation terms"], sourceId: "beinharim-ashdod-jlm-bethlehem",
   },
   {
@@ -1544,9 +1595,17 @@ export const providerLinks: ProviderLink[] = [
   {
     id: "haifa-shore-beinharim", pageIds: ["shore-haifa"], providerName: "Bein Harim Tours", relationship: "independent_operator", operatorId: "bein-harim", mode: "provider_redirect",
     title: "Ship-to-shore: Haifa to Jerusalem and Bethlehem", summary: "The operator's Haifa-port product combining Jerusalem and Bethlehem in one long day.",
-    ctaLabel: "See dates and prices on Bein Harim", url: "https://www.beinharimtours.com/ship-to-shore-excursions-haifa-jerusalem-bethlehem/", isAffiliate: false,
+    ctaLabel: "See dates and prices on Bein Harim", url: affiliateConfig["haifa-shore-beinharim"]?.trackingUrl || "https://www.beinharimtours.com/ship-to-shore-excursions-haifa-jerusalem-bethlehem/", isAffiliate: Boolean(affiliateConfig["haifa-shore-beinharim"]?.trackingUrl),
     reentryNote: "Choose your date on the operator's site.", confirm: ["Your ship's date and port-call times", "Meeting point at the port", "Shared or private format and inclusions", "Passport and travel requirements for Bethlehem", "Return arrangements and cancellation terms"], sourceId: "beinharim-haifa-jlm-bethlehem",
   },
+  ...(["haifa", "ashdod"] as const).flatMap((portId): ProviderLink[] => (["airport", "city"] as const).map((destination) => ({
+    id: `${portId}-port-${destination}-transfer`, pageIds: [shorePorts[portId].pageId], ...moshe, mode: "provider_inquiry",
+    title: destination === "airport" ? `${shorePorts[portId].name} Port to Ben Gurion Airport` : `${shorePorts[portId].name} Port to your hotel or another city`,
+    summary: destination === "airport" ? "Request a one-way private transfer after your cruise. Share your ship, flight, passengers and luggage so Moshe can assess the pickup, route and price." : "Request a one-way transfer from the port to your hotel or another address in Israel. The route, vehicle, pickup point and price are agreed individually.",
+    ctaLabel: "Request a transfer quote", url: `/private-driver/?port=${portId}&transfer=${destination}#request-quote`, isAffiliate: false,
+    reentryNote: "A transfer request, not a return shore excursion. Confirm the exact meeting point and destination; no vehicle, port access or availability is reserved by selecting it.",
+    confirm: ["Exact port meeting point", "Destination and luggage", "Pickup date and time", "Vehicle and total price", "Cancellation terms"], sourceId: "owner-private-driver",
+  }))),
   // Attractions & tickets (official)
   {
     id: "masada-inpa", pageIds: ["masada", "tickets-hub", "attractions-hub"], providerName: "Israel Nature and Parks Authority", relationship: "official", operatorId: "inpa", mode: "official_info",
