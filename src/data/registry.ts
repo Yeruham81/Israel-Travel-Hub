@@ -185,6 +185,8 @@ export const travelGuidePaths = {
   israel: "/travel-blog/getting-around-israel/",
   telAviv: "/travel-blog/getting-around-tel-aviv/",
   taxis: "/travel-blog/taxis-in-israel/",
+  taxiFares: "/travel-blog/taxi-fares-in-israel/",
+  airportTaxis: "/travel-blog/ben-gurion-airport-taxis/",
   shabbat: "/travel-blog/from-ben-gurion-airport-on-shabbat/",
   travelTips: "/travel-blog/israel-travel-tips/",
   jerusalem: "/travel-blog/jerusalem-travel-guide/",
@@ -198,12 +200,16 @@ export const travelGuidePaths = {
 export type TravelGuideId = keyof typeof travelGuidePaths;
 
 const travelGuideSources: SourceReference[] = [
-  ...Object.entries(travelGuidePaths).map(([id, path]): SourceReference => ({
+  ...Object.entries(travelGuidePaths).filter(([id]) => id !== "taxiFares" && id !== "airportTaxis").map(([id, path]): SourceReference => ({
     id: `guide-original-${id}`, title: `Original guide: ${path.split("/").filter(Boolean).at(-1)!.replaceAll("-", " ")}`,
     publisher: "Israel-Taxi.com (Moshe Barak)", url: `${OWNER_BASE}${path}`, checkedAt: TRAVEL_GUIDE_CHECK_DATE,
     note: "Original publisher guide, adapted, shortened and supplemented by the primary references on this page. Published descriptions do not establish live transport, site access, opening hours or product availability. Operator-status limitations are identified in the article.",
   })),
   ...([
+    ["taxi-fares-2026", "Taxi fares for 2026: official amendment and temporary rates", "Israel Ministry of Transport", "https://www.gov.il/BlobFolder/policy/taxi-rate-2026/he/taxi-rate-26.pdf", "Official government regulated taxi rates, published March 30, 2026; interim schedule April 1, 2026–March 31, 2027 unless amended. Amounts stated before VAT."],
+    ["taxi-tariff-hours", "Approved A/B/C taxi tariff periods", "Israel Ministry of Transport — Price Committee", "https://www.gov.il/blobFolder/dynamiccollectorresultitem/Decision_14032018/he/decision_and_directives_Decision_14032018.pdf", "Official tariff-period framework: Sunday–Wednesday, Thursday, Friday/holiday eve, Saturday/recognized holidays; confirm later amendments if any."],
+    ["taxi-passenger-rights", "Taxi driver and passenger rights", "Israel Ministry of Transport", "https://www.gov.il/he/pages/rights_and_obligations_of_a_taxi_driver", "Official guidance on regulated licensed taxi service and passenger rights; conditions may change."],
+    ["taxi-complaints", "Complaints about public transportation, including taxis", "Israel Ministry of Transport", "https://www.gov.il/en/service/complaint_about_conduct_in_public_transportation", "Formal public transport complaints process, evidence and submission rules."],
     ["guide-gett", "Airport taxi pickup and payment instructions", "Gett", "https://www.gett.com/il/airport-en/", "Official on-demand code/queue process, Terminal 3 Exit 03 and the separate scheduled-ride pickup at Level 2, Exit 23. Check the actual booking instructions before travelling."],
     ["guide-iaa", "Airport ground transportation", "Israel Airports Authority", "https://www.iaa.gov.il/en/airports/ben-gurion/directions/directions-list/", "Official train, bus, airport shuttle and taxi information. The internal airport shuttle is not an airport-to-city sherut."],
     ["guide-lost-property", "Lost property and baggage contacts", "Israel Airports Authority", "https://www.iaa.gov.il/en/airports/ben-gurion/lost-found/", "Use the airline or its handler for checked-baggage issues and the airport's instructions for items lost elsewhere in the terminal."],
