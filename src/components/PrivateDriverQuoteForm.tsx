@@ -35,9 +35,8 @@ export function PrivateDriverQuoteForm({ serviceId, onServiceChange, initialFiel
         <img src={photo.src} alt={photo.alt} width={150} height={200} loading="lazy" className="h-24 w-20 rounded-xl object-cover" />
         <p className="mt-5 text-xs font-semibold uppercase tracking-widest opacity-75">Your route starts here</p>
         <h2 id="driver-quote-h" className="mt-3 text-3xl">Request a private driver quote</h2>
-        <p className="mt-4 leading-relaxed opacity-90">Tell Moshe Barak where you want to go, when and who is travelling. Ask for an itinerary and vehicle that fit your trip.</p>
-        <ul className="mt-6 space-y-3 text-sm opacity-90"><li>Hotel-to-hotel and intercity journeys</li><li>A driver for the day or several stops</li><li>A personal quote for your actual route</li><li>Booking only after confirmation</li></ul>
-        <p className="mt-6 border-t border-white/20 pt-5 text-xs leading-relaxed opacity-75">Disclosure: Moshe Barak operates the publisher's local transport business. Requests here are for this service.</p>
+        <p className="mt-4 leading-relaxed opacity-90">Tell me where you'd like to go, when you plan to travel and who's coming along. I'll help plan a suitable itinerary and vehicle for your journey.</p>
+        <ul className="mt-6 list-disc space-y-3 pl-5 text-sm text-navy-foreground marker:text-white"><li>Hotel-to-hotel and intercity journeys</li><li>A driver for the day or several stops</li><li>Vehicles suited to your group and luggage</li><li>I'll prepare a personal quote for your route</li></ul>
       </div>
       <div className="p-5 sm:p-8">
         <form onSubmit={send} noValidate aria-label="Private driver quote request" aria-busy={submission.isSending}>
