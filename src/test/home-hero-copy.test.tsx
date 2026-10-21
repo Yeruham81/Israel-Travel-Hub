@@ -43,7 +43,7 @@ describe("homepage marketing copy and top navigation", () => {
       "Practical Israel Travel Guides",
       "Popular Destinations",
       "Personal Messages from Past Clients",
-      "Send Moshe a Message",
+      "Send me a message",
     ];
     const actualHeadings = screen.getAllByRole("heading", { level: 2 }).map(heading => heading.textContent);
     expect(actualHeadings).toEqual(sectionHeadings);
