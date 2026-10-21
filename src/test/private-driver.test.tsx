@@ -100,6 +100,6 @@ describe("private driver request validation", () => {
     expect(url.searchParams.get("body")).toContain("Seat for age 3\nTwo large bags + stroller");
     expect(url.searchParams.get("body")).not.toContain("\nBcc:");
     expect(url.searchParams.get("subject")).toBe(draft.subject);
-    expect(draft.subject).toBe("Moshe Barak - Taxi & Travel in Israel - מלון & Spa #2 to Jerusalem / Jamie Bcc: test@example.com");
+    expect(draft.subject).toBe("Moshe Barak - Taxi & Travel in Israel / Jamie Bcc: test@example.com");
   });
 });
