@@ -1,4 +1,5 @@
 import { Link, type LinkProps } from "@tanstack/react-router";
+import { guideDirectory } from "@/data/travelGuides";
 import type { ReactNode } from "react";
 import { ExtLink } from "@/components/Layout";
 import { publicSources, formatCheckDate, INFO_CHECK_DATE, type ProviderLink } from "@/data/registry";
@@ -27,13 +28,16 @@ export function Breadcrumbs({ items }: { items: UiCrumb[] }) {
 }
 
 /** Wrapping in-page links stay in the document flow so a long list cannot cover sections. */
+/** Compact, fully wrapping jump links; truncation preserves the full title for accessibility. */
 export function OnThisPage({ sections, sticky = false }: { sections: readonly (readonly [string, string])[]; sticky?: boolean }) {
   return (
-    <nav aria-label="On this page" className={`${sticky ? "sticky top-[57px] z-30" : ""} mt-6 border-y bg-background/95 backdrop-blur`}>
-      <div className="flex min-w-0 flex-col items-start gap-3 px-4 py-3 text-sm sm:flex-row">
-        <span className="shrink-0 text-[0.7rem] font-semibold uppercase tracking-[0.14em] text-muted-foreground sm:pt-2">On this page</span>
-        <ul className="flex min-w-0 max-w-full flex-wrap gap-2">
-          {sections.map(([id, label]) => <li key={id} className="min-w-0 max-w-full"><a href={`#${id}`} className="chip block max-w-full whitespace-normal [overflow-wrap:anywhere]">{label}</a></li>)}
+    <nav aria-label="On this page" className={`${sticky ? "sticky top-[57px] z-30" : ""} mt-4 min-w-0 border-y bg-background/95 backdrop-blur`}>
+      <div className="flex min-w-0 flex-wrap items-center gap-x-2 gap-y-1 px-1 py-2">
+        <span className="mr-1 shrink-0 text-[10px] font-bold uppercase tracking-wide text-muted-foreground">On this page</span>
+        <ul className="flex min-w-0 max-w-full flex-wrap items-center gap-1">
+          {sections.map(([id, label]) => <li key={id} className="min-w-0 max-w-full">
+            <a href={`#${id}`} title={label} aria-label={label} className="block max-w-[155px] truncate rounded-md border border-border bg-secondary/60 px-2 py-1 text-[11px] font-medium leading-tight text-foreground transition-colors hover:border-primary hover:text-primary focus-visible:outline-2 focus-visible:outline-primary sm:max-w-[195px]">{label}</a>
+          </li>)}
         </ul>
       </div>
     </nav>
@@ -150,22 +154,50 @@ export function ProviderSection({ id = "book", title, intro, links, pageId }: { 
   );
 }
 
+/**
+ * Illustrate and describe only genuine, editorially selected guide links.
+ * Guide cards are capped at six and kept in complete pairs on all devices.
+ * Service/action links keep their own compact link-card presentation.
+ */
 export function RelatedLinks({ title = "Plan the rest of your trip", items }: { title?: string; items: { label: string; to: LinkProps["to"]; note?: string }[] }) {
-  return (
-    <section aria-label={title} className="mt-14">
-      <h2 className="text-3xl">{title}</h2>
-      <ul className="mt-4 grid gap-3 sm:grid-cols-2">
-        {items.map((i) => (
-          <li key={i.label}>
-            <Link to={i.to} className="block h-full rounded-xl border bg-card p-4 hover:border-primary">
-              <span className="font-medium">{i.label} →</span>
-              {i.note && <span className="mt-1 block text-sm text-muted-foreground">{i.note}</span>}
-            </Link>
-          </li>
-        ))}
+  const guideSection = /\bguides?\b/i.test(title);
+  const guideItems = guideSection
+    ? items.flatMap((item) => {
+        const guide = guideDirectory.find((candidate) => candidate.to === item.to && Boolean(candidate.photo));
+        return guide ? [{ item, guide }] : [];
+      }).filter(({ guide }, index, all) => all.findIndex((entry) => entry.guide.to === guide.to) === index).slice(0, 6)
+    : [];
+  // Prefer the author's existing relevance order over automatically filling with unrelated pages.
+  const pairedGuides = guideItems.slice(0, guideItems.length - (guideItems.length % 2));
+  if (guideSection && pairedGuides.length === 0) return null;
+  if (!guideSection && items.length === 0) return null;
+
+  return <section aria-label={title} className="mt-12">
+    <h2 className="text-2xl font-bold leading-tight sm:text-3xl">{title}</h2>
+    {guideSection ? (
+      <ul className="mt-4 grid gap-4 sm:grid-cols-2">
+        {pairedGuides.map(({ item, guide }) => <li key={String(guide.to)} className="min-w-0">
+          <Link to={guide.to} className="group flex h-full min-w-0 flex-col overflow-hidden rounded-xl border bg-card transition-colors hover:border-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
+            <img src={guide.photo!.src} alt={guide.photo!.alt} loading="lazy" decoding="async" width={600} height={340} className="aspect-[16/9] w-full object-cover" />
+            <span className="flex flex-1 flex-col p-4">
+              <span className="text-base font-bold leading-snug text-foreground group-hover:text-primary">{item.label}</span>
+              <span className="mt-2 line-clamp-3 flex-1 text-sm leading-relaxed text-muted-foreground">{item.note || guide.description}</span>
+              <span className="mt-3 text-sm font-semibold text-primary">Read more</span>
+            </span>
+          </Link>
+        </li>)}
       </ul>
-    </section>
-  );
+    ) : (
+      <ul className="mt-4 grid gap-3 sm:grid-cols-2">
+        {items.map((item) => <li key={String(item.to)}>
+          <Link to={item.to} className="block h-full rounded-xl border bg-card p-4 hover:border-primary focus-visible:outline-2 focus-visible:outline-primary">
+            <span className="font-medium">{item.label}</span>
+            {item.note && <span className="mt-1 block text-sm text-muted-foreground">{item.note}</span>}
+          </Link>
+        </li>)}
+      </ul>
+    )}
+  </section>;
 }
 
 export function EndCta({ title, links, pageId }: { title: string; links: ProviderLink[]; pageId: string }) {
