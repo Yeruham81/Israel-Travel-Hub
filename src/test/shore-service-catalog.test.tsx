@@ -94,7 +94,7 @@ describe("port service catalog", () => {
     expect(screen.getByLabelText("Type of journey *")).toHaveValue("intercity");
     expect(screen.getByLabelText("Pickup city, hotel or address *")).toHaveValue(`${shorePorts[port].name} Port`);
     expect(screen.getByLabelText("Final drop-off *")).toHaveValue("Ben Gurion Airport");
-    expect(screen.getByLabelText("Driver or licensed guide?")).toHaveValue("driver-only");
+    expect(screen.queryByLabelText("Driver or licensed guide?")).not.toBeInTheDocument();
     expect(screen.queryByLabelText("Ship's all-aboard time *")).not.toBeInTheDocument();
     expect((screen.getByLabelText("Child seats or additional requests") as HTMLTextAreaElement).value).toContain(`${shorePorts[port].name} Port`);
   });
