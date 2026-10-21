@@ -254,8 +254,12 @@ export const taxiGuideCluster: Record<"taxis" | "taxiFares" | "airportTaxis", Tr
           headers: ["Charge", "Amount / method"],
           rows: [
             ["Taxi ordered to your address", "₪5.78, when the regulated dispatch addition applies"],
-            ["Ben Gurion Airport departure", "Regulated airport supplement; check the current meter rules and actual trip"],
-            ["Toll road / tunnel", "Only as allowed under the governing fare order and actual routing"],
+            ["Ben Gurion Airport departure", "₪5.00, when the regulated airport departure supplement applies"],
+            ["Ramon or Haifa Airport departure", "₪1.99, when the regulated supplement applies"],
+            ["Highway 6 (excluding the northern Section 18)", "₪20.00, subject to the specified route and passenger-request conditions"],
+            ["Highway 6 northern Section 18", "₪7.74, when the specific section surcharge applies"],
+            ["Carmel Tunnels, one / two sections", "₪11.82 / ₪23.64 under the fare-order conditions"],
+            ["Fast Lane toll", "Actual displayed toll when chargeable under the rules"],
             ["Separate passenger waiting — per hour", "A ₪116.82 / B ₪140.18 / C ₪162.84; where chargeable, proportional for shorter periods"],
           ],
           note: "Only the order's listed legally permitted additions may be charged. VAT and applicability can vary by transaction.",
@@ -383,7 +387,7 @@ export const taxiGuideCluster: Record<"taxis" | "taxiFares" | "airportTaxis", Tr
         id: "fares", title: "How Are Official Ben Gurion Airport Taxi Fares Calculated?",
         paragraphs: [
           "Gett and the airport authority describe authorized airport taxi journeys as regulated meter rides. Fare components include the starting amount, time, distance and legally permitted additions; congestion and the applicable A/B/C tariff affect the result.",
-          "An airport departure supplement may be charged as allowed by the fare order. This page intentionally avoids duplicating the national price tables or claiming a universal fixed fare to a destination.",
+          "A regulated ₪5 airport departure supplement may apply to an authorized ride leaving Ben Gurion Airport. This page intentionally avoids duplicating the national price tables or claiming a universal fixed fare to a destination.",
           "For exact 2026 tariff components, evening and Shabbat hours, and worked estimates, visit the dedicated national taxi fares guide.",
         ],
         links: [{ label: "Official Taxi Fares in Israel — 2026 prices and examples", to: travelGuidePaths.taxiFares }],
