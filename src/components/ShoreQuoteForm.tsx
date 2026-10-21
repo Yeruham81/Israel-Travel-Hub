@@ -65,7 +65,7 @@ export function ShoreQuoteForm({ portId, itineraryId, onItineraryChange }: { por
             </div>
             <label className="mt-5 flex items-start gap-3 text-sm leading-relaxed"><input name="consent" type="checkbox" required checked={fields.consent} onChange={(event) => update("consent", event.target.checked)} className="mt-1 h-4 w-4 shrink-0 accent-primary" /><span>I agree to share these details with Moshe Barak for this inquiry. <PrivacyInformationLink /></span></label>
             <QuoteSubmissionControls submission={submission} label="Send excursion request" />
-            <p className="mt-3 text-xs text-muted-foreground">Send your details directly to Moshe. A booking requires Moshe's confirmation.</p>
+            <p className="mt-3 text-xs text-muted-foreground">Submitting this form does not constitute a booking. Please wait for confirmation.</p>
           </fieldset>
         </form>
       </div>
