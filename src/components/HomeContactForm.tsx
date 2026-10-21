@@ -33,7 +33,6 @@ export function HomeContactForm({ context = "homepage" }: { context?: "homepage"
         <p className="text-xs font-semibold uppercase tracking-widest opacity-80">Get in Touch</p>
         <h2 id={context === "about" ? "about-contact-h" : "home-contact-h"} className="mt-3 text-3xl">Send me a message</h2>
         <p className="mt-4 leading-relaxed opacity-90">Have a question about airport transfers, private journeys or your visit to Israel? Tell me a little about your plans, and I’ll reply personally.</p>
-        <p className="mt-6 text-sm opacity-85">For travel enquiries and private-transport requests.</p>
       </div>
       <div className="p-5 sm:p-8">
         <form onSubmit={send} noValidate className="mt-6" aria-label={context === "about" ? "Contact me" : "Homepage contact message"} aria-busy={submission.isSending}>
