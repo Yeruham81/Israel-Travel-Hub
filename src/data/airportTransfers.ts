@@ -14,6 +14,7 @@ import moshe from "@/assets/airport-transfers/moshe.webp";
 import airportHall from "@/assets/home/ben-gurion-t3.webp";
 import airportPickup from "@/assets/home/airport-pickup.webp";
 import esim from "@/assets/guides/esim-israel.jpeg";
+import roadTrip from "@/assets/home/road-trip.webp";
 import { airportTransferRates, OWNER_BASE, travelGuidePaths } from "@/data/registry";
 import type { StayGuidePhoto } from "@/data/content";
 
@@ -105,5 +106,10 @@ export const airportRelatedLinks = [
     label: "Attractions & experiences", to: "/attractions/" as const,
     description: "Find the places that make your Israel itinerary your own. Discover ancient harbours, city sights, heritage sites and natural landscapes across the country.",
     photo: airportTransferPhotos["caesarea"]!,
+  },
+  {
+    label: "Israel travel tips", to: travelGuidePaths.travelTips,
+    description: "Prepare for a smoother trip, from everyday essentials to planning your days. Find practical advice on packing, communication and exploring Israel's cities and sights.",
+    photo: { src: roadTrip, alt: "Illustration of a vehicle traveling along a desert road in Israel" },
   },
 ];

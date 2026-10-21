@@ -62,11 +62,11 @@ describe("private Ben Gurion transfers", () => {
     for (let i = 1; i < sections.length; i++) expect(container.querySelector(`#${sections[i - 1]}`)!.compareDocumentPosition(container.querySelector(`#${sections[i]}`)!)).toBe(Node.DOCUMENT_POSITION_FOLLOWING);
     expect(container.querySelector("main")!.textContent).not.toMatch(/\b(metered|taxi rank|train|buses)\b/i);
     const related = screen.getByRole("region", { name: "Your ride is only the start" });
-    expect(within(related).getAllByRole("article")).toHaveLength(9);
-    expect(within(related).getAllByRole("img")).toHaveLength(9);
-    expect(within(related).getAllByRole("heading", { level: 3 })).toHaveLength(9);
+    expect(within(related).getAllByRole("article")).toHaveLength(10);
+    expect(within(related).getAllByRole("img")).toHaveLength(10);
+    expect(within(related).getAllByRole("heading", { level: 3 })).toHaveLength(10);
     expect(related).not.toHaveTextContent("→");
-    expect(within(related).getAllByRole("link")).toHaveLength(9);
+    expect(within(related).getAllByRole("link")).toHaveLength(10);
     for (const link of within(related).getAllByRole("link")) {
       expect(link).toHaveTextContent("Read More");
       const path = link.getAttribute("href")!;
