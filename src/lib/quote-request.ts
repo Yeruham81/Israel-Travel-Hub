@@ -24,5 +24,5 @@ export type QuoteRequestPayload = QuoteSourcePage & { requestId: string; website
 
 /** Keep the source above the enquiry in every directly submitted email. */
 export function quoteRequestBody(body: string, source: QuoteSourcePage) {
-  return `Source page: ${source.sourceTitle || source.sourcePath}\nPage path: ${source.sourcePath}\n\n${body}`;
+  return `Sent from page: ${source.sourceTitle || source.sourcePath}\n\n${body}`;
 }
