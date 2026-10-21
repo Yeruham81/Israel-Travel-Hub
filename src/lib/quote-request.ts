@@ -6,7 +6,7 @@ import type { ContactMessageFields } from "@/lib/contact-message";
 
 export const quoteRequestEndpoint = "/api/quote-request/";
 export const deliveryErrorCodes = [
-  "BREVO_UNAUTHORIZED", "BREVO_FORBIDDEN", "BREVO_SENDER", "BREVO_RATE_LIMIT", "BREVO_REJECTED", "BREVO_PROVIDER", "BREVO_RESPONSE", "BREVO_TIMEOUT", "BREVO_NETWORK",
+  "BREVO_UNAUTHORIZED", "BREVO_FORBIDDEN", "BREVO_SENDER", "BREVO_RATE_LIMIT", "BREVO_REJECTED", "BREVO_PROVIDER", "BREVO_RESPONSE", "BREVO_TIMEOUT", "BREVO_DNS", "BREVO_TLS", "BREVO_CONNECT", "BREVO_REDIRECT", "BREVO_RUNTIME", "BREVO_NETWORK",
   "HTTP_403", "HTTP_404", "HTTP_ERROR", "BAD_RESPONSE", "REQUEST_TIMEOUT", "REQUEST_NETWORK",
 ] as const;
 export type DeliveryErrorCode = typeof deliveryErrorCodes[number];
