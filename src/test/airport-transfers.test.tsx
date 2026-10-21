@@ -77,7 +77,7 @@ describe("private Ben Gurion transfers", () => {
     expect(screen.getByLabelText("Destination *")).toHaveValue("netanya");
     chooseDestination("jerusalem");
     expect(screen.getByLabelText("Destination *")).toHaveValue("jerusalem");
-    fireEvent.change(screen.getByLabelText("Passengers, including children *"), { target: { value: "6" } });
+    fireEvent.change(screen.getByLabelText("Passengers *"), { target: { value: "6" } });
     expect(screen.getByText(/published car starting prices do not apply/)).toBeInTheDocument();
     chooseDestination("other");
     expect(screen.getByLabelText("City or destination *")).toBeRequired();
