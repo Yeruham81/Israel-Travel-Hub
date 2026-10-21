@@ -50,6 +50,26 @@ If a test fails, set `QUOTE_DELIVERY_ENABLED` to `false` and diagnose the actual
 - Request bodies are capped at 20 KB, cross-origin POSTs and unexpected JSON fields are rejected, and a honeypot is checked. Per-instance guards limit contacts/IPs to five attempts per ten-minute window and two concurrent sends; bounded maps keep only references, hashes, counters and results. These are **not distributed, account-wide quotas or guaranteed exactly-once delivery**. Keep the host's abuse controls active and monitor the mailbox/Hostinger plan limits before launch.
 - The application does not put enquiry fields in browser storage, analytics or a database. The privacy notice describes conditional Hostinger SMTP processing and the short-lived server-memory guards. Hosting/email providers can retain their own operational records under their policies.
 
+## Diagnosing an actual delivery failure
+
+A generic delivery failure and a request reference alone do not establish whether SMTP was reached. The form now distinguishes origin/endpoint HTTP failures, unexpected responses, browser network/timeouts and sanitized SMTP categories. Errors show an **Error code** next to the request reference. Only a fixed allowlist is displayed; arbitrary server error text is never rendered.
+
+| Code | Meaning |
+| --- | --- |
+| `HTTP_403` / `HTTP_404` | The submission was rejected or its endpoint was not found; this does not prove any SMTP attempt. Check the actual public URL, proxy/origin handling and deployed version. |
+| `HTTP_ERROR` / `BAD_RESPONSE` | The endpoint or hosting layer returned an unexpected status/body. Inspect the HTTP status and deployment logs. |
+| `SMTP_AUTH` | Nodemailer reported authentication failure; check the mailbox credentials in the secure runtime settings. |
+| `SMTP_CONNECT` / `SMTP_DNS` / `SMTP_TLS` | The transport reported a connection, name-resolution or TLS error. |
+| `SMTP_TIMEOUT` | A transport timeout; whether a message was accepted may be ambiguous. |
+| `SMTP_REJECTED` | The SMTP transport did not accept the message or fixed recipient. |
+| `SMTP_RUNTIME` | A required module/API was missing, unsupported or unimplemented in the runtime. |
+| `SMTP_UNKNOWN` | A send failure that does not fit the safe categories; further host-side investigation is needed. |
+| `REQUEST_TIMEOUT` / `REQUEST_NETWORK` | The browser could not complete the request; this does not establish whether SMTP accepted it. |
+
+Server failures produce a structured `quote-delivery.failed` warning with only the validated request UUID, fixed delivery code and an optional numeric SMTP status. Passwords, raw SMTP errors, response text, stacks and enquiry fields are not logged by this diagnostic. Existing idempotency and no-automatic-retry behavior still apply. Old failures that happened before these diagnostics cannot be recovered from a reference alone.
+
+The hosted failure reported on 21 October 2026 has **not yet been attributed to a specific cause**. The configured preview URL requires authentication (HTTP 401), and the exact URL used for the user's test is needed to inspect the running endpoint. An unauthenticated, no-message local Worker connection probe encountered the test environment's restricted DNS; it did not attempt mailbox authentication and is not evidence that hosted DNS or the mailbox is broken. No SMTP port, password or provider has been changed based on that probe. Automated checks validate diagnostics and prevent false success; they do not verify actual inbox delivery.
+
 ## Domain change
 
 The temporary Lovable URL can use the existing Hostinger SMTP mailbox now. Moving the website to `israel-taxi.com` later does not require changing the SMTP host, username or recipient. Requests use the same-origin relative API path, so no temporary website hostname is hardcoded into the mail endpoint. Keep the Hostinger mailbox subscription and its existing email DNS records active. The website's custom-domain and indexing launch configuration are separate changes.

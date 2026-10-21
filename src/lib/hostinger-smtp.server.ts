@@ -34,7 +34,7 @@ export async function sendHostingerQuote(message: QuoteEmail, password: string) 
       text: message.text,
       messageId: `<quote-${message.requestId}@israel-taxi.com>`,
     });
-    if (!result.accepted.includes(airportTransferContact.email) || result.rejected.length) throw new Error("Mail was not accepted");
+    if (!result.accepted.includes(airportTransferContact.email) || result.rejected.length) throw Object.assign(new Error("Mail was not accepted"), { code: "SMTP_NOT_ACCEPTED" });
   } finally {
     transport.close();
   }

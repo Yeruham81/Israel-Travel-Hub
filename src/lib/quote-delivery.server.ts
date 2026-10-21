@@ -3,15 +3,33 @@ import { buildTransferQuoteDraft, validateTransferQuote } from "@/lib/transfer-q
 import { buildDriverQuoteDraft, validateDriverQuote } from "@/lib/private-driver-quote";
 import { buildShoreQuoteDraft, validateShoreQuote } from "@/lib/shore-quote";
 import { quoteRequestSchema } from "@/lib/quote-request-schema.server";
-import { quoteRequestBody, type QuoteRequestPayload } from "@/lib/quote-request";
+import { quoteRequestBody, type DeliveryErrorCode, type QuoteRequestPayload } from "@/lib/quote-request";
 import type { QuoteEmail } from "@/lib/hostinger-smtp.server";
 import { buildContactMessage, validateContactMessage } from "@/lib/contact-message";
 
 type MailEnvironment = { SMTP_PASSWORD?: string; QUOTE_DELIVERY_ENABLED?: string };
-type Result = { status: number; body: { accepted?: boolean; requestId?: string; error?: string } };
+type Result = { status: number; body: { accepted?: boolean; requestId?: string; error?: string; deliveryCode?: DeliveryErrorCode } };
+export type DeliveryFailure = { event: "quote-delivery.failed"; requestId: string; deliveryCode: DeliveryErrorCode; smtpStatus?: number };
 const hash = (value: string) => createHash("sha256").update(value).digest("hex");
 const maxBodyBytes = 20_000;
 const windowMs = 10 * 60_000;
+
+/** Only fixed labels and numeric SMTP statuses escape this classifier, never raw errors. */
+export function deliveryFailure(error: unknown, requestId: string): DeliveryFailure {
+  const value = (error && typeof error === "object" ? error : {}) as { code?: unknown; message?: unknown; responseCode?: unknown };
+  const code = typeof value.code === "string" ? value.code : "";
+  const message = typeof value.message === "string" ? value.message : "";
+  let deliveryCode: DeliveryErrorCode = "SMTP_UNKNOWN";
+  if (code === "EAUTH") deliveryCode = "SMTP_AUTH";
+  else if (code === "EDNS" || code === "ENOTFOUND" || code === "EAI_AGAIN") deliveryCode = "SMTP_DNS";
+  else if (code === "ETLS" || /^ERR_TLS_|^CERT_|^DEPTH_ZERO_|^UNABLE_TO_/.test(code)) deliveryCode = "SMTP_TLS";
+  else if (code === "ETIMEDOUT" || code === "ESOCKETTIMEDOUT") deliveryCode = "SMTP_TIMEOUT";
+  else if (["ECONNECTION", "ESOCKET", "ECONNREFUSED", "ECONNRESET", "EHOSTUNREACH", "ENETUNREACH"].includes(code)) deliveryCode = "SMTP_CONNECT";
+  else if (["EENVELOPE", "EMESSAGE", "SMTP_NOT_ACCEPTED"].includes(code)) deliveryCode = "SMTP_REJECTED";
+  if (/not implemented|unsupported.*(?:node:|socket|module)|cannot find module/i.test(message) || ["ERR_MODULE_NOT_FOUND", "ERR_UNKNOWN_BUILTIN_MODULE", "ERR_UNSUPPORTED_ESM_URL_SCHEME"].includes(code)) deliveryCode = "SMTP_RUNTIME";
+  const smtpStatus = typeof value.responseCode === "number" && Number.isInteger(value.responseCode) && value.responseCode >= 400 && value.responseCode <= 599 ? value.responseCode : undefined;
+  return { event: "quote-delivery.failed", requestId, deliveryCode, ...(smtpStatus === undefined ? {} : { smtpStatus }) };
+}
 
 function response(body: unknown, status = 200, extraHeaders: Record<string, string> = {}) {
   return Response.json(body, { status, headers: {
@@ -70,6 +88,7 @@ export function createQuoteDeliveryService({
   environment = (): MailEnvironment => process.env,
   send = async (message: QuoteEmail, password: string) => (await import("@/lib/hostinger-smtp.server")).sendHostingerQuote(message, password),
   now = () => Date.now(),
+  reportFailure = (failure: DeliveryFailure) => { console.warn(JSON.stringify(failure)); },
 } = {}) {
   const recent = new Map<string, { expires: number; fingerprint: string; result: Promise<Result> }>();
   const limits = new Map<string, { expires: number; count: number }>();
@@ -121,9 +140,11 @@ export function createQuoteDeliveryService({
       try {
         await send(email, password);
         return { status: 200, body: { accepted: true, requestId: payload.requestId } };
-      } catch {
+      } catch (error) {
+        const failure = deliveryFailure(error, payload.requestId);
+        try { reportFailure(failure); } catch { /* Logging must not change the delivery result. */ }
         // A timeout after SMTP DATA can be ambiguous. Do not retry it automatically.
-        return { status: 502, body: { error: "We could not confirm email delivery. Please check with Moshe before sending the same message again." } };
+        return { status: 502, body: { error: "We could not confirm email delivery. Please check with Moshe before sending the same message again.", requestId: payload.requestId, deliveryCode: failure.deliveryCode } };
       } finally { inFlight--; }
     });
     recent.set(payload.requestId, { fingerprint, expires: timestamp + windowMs, result });

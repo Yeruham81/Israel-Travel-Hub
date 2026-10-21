@@ -18,6 +18,7 @@ export function QuoteSubmissionControls({ submission, label, message = false }: 
     {(result.state === "failed" || result.state === "unavailable") && <div role="alert" className="mt-5 rounded-xl border border-destructive p-4 text-sm">
       <p>{result.error}</p><p className="mt-2">Your details are still in the form. You can contact Moshe at <strong>{airportTransferContact.email}</strong>.</p>
       {result.requestId && <p className="mt-2 text-xs">Request reference: {result.requestId}</p>}
+      {result.deliveryCode && <p className="mt-1 text-xs">Error code: {result.deliveryCode}{result.httpStatus ? ` (HTTP ${result.httpStatus})` : ""}</p>}
     </div>}
   </>;
 }

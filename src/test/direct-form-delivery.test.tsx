@@ -121,6 +121,25 @@ describe("one-step direct form delivery", () => {
     await contactForm(); fill();
     fireEvent.click(screen.getByRole("button", { name: "Send message" }));
     expect(await screen.findByRole("alert")).toHaveTextContent("could not confirm email delivery");
+    expect(screen.getByRole("alert")).toHaveTextContent("Error code: BAD_RESPONSE (HTTP 200)");
+    expect(screen.queryByText("Your message has been sent to Moshe")).not.toBeInTheDocument();
+  });
+
+  it.each([
+    [403, null, "HTTP_403"], [404, null, "HTTP_404"],
+    [502, { deliveryCode: "SMTP_AUTH" }, "SMTP_AUTH"],
+    [502, { deliveryCode: "SMTP_DNS" }, "SMTP_DNS"],
+    [502, { deliveryCode: "SMTP_RUNTIME" }, "SMTP_RUNTIME"],
+    [502, { deliveryCode: "password=must-not-display" }, "HTTP_ERROR"],
+    [500, null, "HTTP_ERROR"],
+  ])("distinguishes HTTP %s / %s errors from SMTP failures without displaying arbitrary server details", async (status, body, code) => {
+    vi.stubGlobal("fetch", vi.fn().mockImplementation(async () => body ? Response.json(body, { status }) : new Response("<html>Private server diagnostic</html>", { status, headers: { "Content-Type": "text/html" } })));
+    await contactForm(); fill();
+    fireEvent.click(screen.getByRole("button", { name: "Send message" }));
+    const alert = await screen.findByRole("alert");
+    expect(alert).toHaveTextContent(`Error code: ${code} (HTTP ${status})`);
+    expect(alert).not.toHaveTextContent(/password|Private server diagnostic/);
+    expect(screen.getByLabelText("Your message *")).toHaveValue(fields.message);
     expect(screen.queryByText("Your message has been sent to Moshe")).not.toBeInTheDocument();
   });
 });

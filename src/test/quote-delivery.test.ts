@@ -1,7 +1,7 @@
 // @vitest-environment node
 import { randomUUID } from "node:crypto";
 import { describe, expect, it, vi } from "vitest";
-import { createQuoteDeliveryService } from "@/lib/quote-delivery.server";
+import { createQuoteDeliveryService, deliveryFailure } from "@/lib/quote-delivery.server";
 import { emptyTransferQuote } from "@/lib/transfer-quote";
 import { emptyDriverQuote } from "@/lib/private-driver-quote";
 import { emptyShoreQuote } from "@/lib/shore-quote";
@@ -137,7 +137,8 @@ describe("server-side quote delivery", () => {
 
   it("does not claim success, leak SMTP errors, or retry an ambiguous failed attempt", async () => {
     const send = vi.fn().mockRejectedValue(new Error("SMTP password=do-not-expose; AUTH failed"));
-    const handle = createQuoteDeliveryService({ environment: enabled, send, now });
+    const reportFailure = vi.fn();
+    const handle = createQuoteDeliveryService({ environment: enabled, send, now, reportFailure });
     const data = payload();
     const result = await handle(post(data));
     expect(result.status).toBe(502);
@@ -145,6 +146,32 @@ describe("server-side quote delivery", () => {
     expect(body).not.toMatch(/accepted|password|AUTH|do-not-expose/);
     expect((await handle(post(data))).status).toBe(502);
     expect(send).toHaveBeenCalledTimes(1);
+    expect(reportFailure).toHaveBeenCalledOnce();
+    expect(reportFailure).toHaveBeenCalledWith({ event: "quote-delivery.failed", requestId: data.requestId, deliveryCode: "SMTP_UNKNOWN" });
+  });
+
+  it.each([
+    ["EAUTH", "SMTP_AUTH"], ["EDNS", "SMTP_DNS"], ["ETLS", "SMTP_TLS"],
+    ["ECONNREFUSED", "SMTP_CONNECT"], ["ETIMEDOUT", "SMTP_TIMEOUT"],
+    ["EENVELOPE", "SMTP_REJECTED"], ["ERR_MODULE_NOT_FOUND", "SMTP_RUNTIME"],
+  ])("returns a safe %s diagnosis while keeping the SMTP error and all enquiry data private", async (code, deliveryCode) => {
+    const reportFailure = vi.fn();
+    const send = vi.fn().mockRejectedValue(Object.assign(new Error("private password and visitor details"), { code, responseCode: 535, response: "private server response" }));
+    const handle = createQuoteDeliveryService({ environment: enabled, send, now, reportFailure });
+    const data = payload();
+    const result = await handle(post(data));
+    expect(result.status).toBe(502);
+    expect(await result.json()).toMatchObject({ deliveryCode, requestId: data.requestId });
+    expect(reportFailure).toHaveBeenCalledWith({ event: "quote-delivery.failed", requestId: data.requestId, deliveryCode, smtpStatus: 535 });
+    expect(JSON.stringify(reportFailure.mock.calls)).not.toMatch(/private|visitor|password|jamie/i);
+    expect((await handle(post(data))).status).toBe(502);
+    expect(send).toHaveBeenCalledOnce();
+    expect(reportFailure).toHaveBeenCalledOnce();
+  });
+
+  it("identifies runtime incompatibility wrapped as a connection error without logging raw messages", () => {
+    expect(deliveryFailure({ code: "ECONNECTION", message: "[unenv] net.connect is not implemented yet! password=private", responseCode: "535" }, "reference"))
+      .toEqual({ event: "quote-delivery.failed", requestId: "reference", deliveryCode: "SMTP_RUNTIME" });
   });
 
   it("limits submissions per contact/network window and permits a later fresh request", async () => {
