@@ -2,13 +2,14 @@
 import { randomUUID } from "node:crypto";
 import { describe, expect, it, vi } from "vitest";
 import { createQuoteDeliveryService, deliveryFailure } from "@/lib/quote-delivery.server";
+import { BrevoDeliveryError } from "@/lib/brevo-email.server";
 import { emptyTransferQuote } from "@/lib/transfer-quote";
 import { emptyDriverQuote } from "@/lib/private-driver-quote";
 import { emptyShoreQuote } from "@/lib/shore-quote";
 import type { QuoteRequest, QuoteRequestPayload } from "@/lib/quote-request";
 
 const now = () => Date.parse("2026-10-21T12:00:00Z");
-const enabled = () => ({ SMTP_PASSWORD: "test-only-password", QUOTE_DELIVERY_ENABLED: "true" });
+const enabled = () => ({ BREVO_API_KEY: "test-only-key", QUOTE_DELIVERY_ENABLED: "true" });
 const contact = { name: "Jamie & Alex", email: "jamie+trip@example.com", phone: "+44 12345", consent: true, notes: "Child seat & stroller\nבקשה נוספת" };
 const transfer: QuoteRequest = { kind: "transfer", fields: { ...emptyTransferQuote, ...contact, date: "2027-06-20", time: "14:30", flight: "LY315", destinationId: "other", otherDestination: "Ein Gedi", address: "Example Hotel", passengers: "6", suitcases: "4", carryOns: "2" } };
 const driver: QuoteRequest = { kind: "driver", fields: { ...emptyDriverQuote, ...contact, serviceId: "multi-stop", date: "2027-06-20", time: "09:30", pickup: "Tel Aviv Hotel", dropoff: "Jerusalem Hotel", passengers: "5", luggage: "Three cases and stroller", itinerary: "Caesarea\nLunch & Jerusalem", guide: "licensed-guide" } };
@@ -26,9 +27,9 @@ function post(data: unknown, headers: Record<string, string> = {}) {
 }
 
 describe("server-side quote delivery", () => {
-  it("remains disabled unless both the runtime password and explicit switch are set", async () => {
+  it("remains disabled unless both the runtime API key and explicit switch are set", async () => {
     const send = vi.fn();
-    for (const env of [{}, { SMTP_PASSWORD: "test" }, { QUOTE_DELIVERY_ENABLED: "true" }, { SMTP_PASSWORD: "test", QUOTE_DELIVERY_ENABLED: "false" }]) {
+    for (const env of [{}, { BREVO_API_KEY: "test" }, { QUOTE_DELIVERY_ENABLED: "true" }, { BREVO_API_KEY: "test", QUOTE_DELIVERY_ENABLED: "false" }]) {
       const handle = createQuoteDeliveryService({ environment: () => env, send, now });
       const status = await handle(new Request("https://preview.example/api/quote-request/"));
       expect(await status.json()).toEqual({ available: false });
@@ -60,7 +61,7 @@ describe("server-side quote delivery", () => {
     expect(message.text).toContain("2026-10-21T12:00:00.000Z");
     expect(message.replyTo).toBe(contact.email);
     expect(Object.keys(message).sort()).toEqual(["replyTo", "requestId", "subject", "text"]);
-    expect(send.mock.calls[0]![1]).toBe("test-only-password");
+    expect(send.mock.calls[0]![1]).toBe("test-only-key");
   });
 
   it("uses the actual page title independently of the selected destination and supports older clients without a title", async () => {
@@ -135,7 +136,7 @@ describe("server-side quote delivery", () => {
     expect((await handle(post({ ...data, sourcePath: "/private-driver/" }))).status).toBe(409);
   });
 
-  it("does not claim success, leak SMTP errors, or retry an ambiguous failed attempt", async () => {
+  it("does not claim success, leak provider errors, or retry an ambiguous failed attempt", async () => {
     const send = vi.fn().mockRejectedValue(new Error("SMTP password=do-not-expose; AUTH failed"));
     const reportFailure = vi.fn();
     const handle = createQuoteDeliveryService({ environment: enabled, send, now, reportFailure });
@@ -147,31 +148,29 @@ describe("server-side quote delivery", () => {
     expect((await handle(post(data))).status).toBe(502);
     expect(send).toHaveBeenCalledTimes(1);
     expect(reportFailure).toHaveBeenCalledOnce();
-    expect(reportFailure).toHaveBeenCalledWith({ event: "quote-delivery.failed", requestId: data.requestId, deliveryCode: "SMTP_UNKNOWN" });
+    expect(reportFailure).toHaveBeenCalledWith({ event: "quote-delivery.failed", requestId: data.requestId, deliveryCode: "BREVO_PROVIDER" });
   });
 
   it.each([
-    ["EAUTH", "SMTP_AUTH"], ["EDNS", "SMTP_DNS"], ["ETLS", "SMTP_TLS"],
-    ["ECONNREFUSED", "SMTP_CONNECT"], ["ETIMEDOUT", "SMTP_TIMEOUT"],
-    ["EENVELOPE", "SMTP_REJECTED"], ["ERR_MODULE_NOT_FOUND", "SMTP_RUNTIME"],
-  ])("returns a safe %s diagnosis while keeping the SMTP error and all enquiry data private", async (code, deliveryCode) => {
+    ["BREVO_UNAUTHORIZED", 401], ["BREVO_FORBIDDEN", 403], ["BREVO_SENDER", 400],
+    ["BREVO_RATE_LIMIT", 429], ["BREVO_PROVIDER", 503], ["BREVO_TIMEOUT", undefined], ["BREVO_NETWORK", undefined],
+  ] as const)("returns safe %s diagnostics without visitor or provider details", async (deliveryCode, providerStatus) => {
     const reportFailure = vi.fn();
-    const send = vi.fn().mockRejectedValue(Object.assign(new Error("private password and visitor details"), { code, responseCode: 535, response: "private server response" }));
+    const send = vi.fn().mockRejectedValue(new BrevoDeliveryError(deliveryCode, providerStatus));
     const handle = createQuoteDeliveryService({ environment: enabled, send, now, reportFailure });
     const data = payload();
     const result = await handle(post(data));
     expect(result.status).toBe(502);
     expect(await result.json()).toMatchObject({ deliveryCode, requestId: data.requestId });
-    expect(reportFailure).toHaveBeenCalledWith({ event: "quote-delivery.failed", requestId: data.requestId, deliveryCode, smtpStatus: 535 });
-    expect(JSON.stringify(reportFailure.mock.calls)).not.toMatch(/private|visitor|password|jamie/i);
+    expect(reportFailure).toHaveBeenCalledWith({ event: "quote-delivery.failed", requestId: data.requestId, deliveryCode, ...(providerStatus === undefined ? {} : { providerStatus }) });
+    expect(JSON.stringify(reportFailure.mock.calls)).not.toMatch(/visitor|password|jamie|test-only-key/i);
     expect((await handle(post(data))).status).toBe(502);
     expect(send).toHaveBeenCalledOnce();
-    expect(reportFailure).toHaveBeenCalledOnce();
   });
 
-  it("identifies runtime incompatibility wrapped as a connection error without logging raw messages", () => {
-    expect(deliveryFailure({ code: "ECONNECTION", message: "[unenv] net.connect is not implemented yet! password=private", responseCode: "535" }, "reference"))
-      .toEqual({ event: "quote-delivery.failed", requestId: "reference", deliveryCode: "SMTP_RUNTIME" });
+  it("does not expose arbitrary exception properties", () => {
+    expect(deliveryFailure({ deliveryCode: "private", message: "private", providerStatus: 535 }, "reference"))
+      .toEqual({ event: "quote-delivery.failed", requestId: "reference", deliveryCode: "BREVO_PROVIDER" });
   });
 
   it("limits submissions per contact/network window and permits a later fresh request", async () => {
