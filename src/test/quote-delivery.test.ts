@@ -12,7 +12,7 @@ const now = () => Date.parse("2026-10-21T12:00:00Z");
 const enabled = () => ({ BREVO_API_KEY: "test-only-key", QUOTE_DELIVERY_ENABLED: "true" });
 const contact = { name: "Jamie & Alex", email: "jamie+trip@example.com", phone: "+44 12345", consent: true, notes: "Child seat & stroller\nבקשה נוספת" };
 const transfer: QuoteRequest = { kind: "transfer", fields: { ...emptyTransferQuote, ...contact, date: "2027-06-20", time: "14:30", flight: "LY315", destinationId: "other", otherDestination: "Ein Gedi", address: "Example Hotel", passengers: "6", suitcases: "4", carryOns: "2" } };
-const driver: QuoteRequest = { kind: "driver", fields: { ...emptyDriverQuote, ...contact, serviceId: "multi-stop", date: "2027-06-20", time: "09:30", pickup: "Tel Aviv Hotel", dropoff: "Jerusalem Hotel", passengers: "5", luggage: "Three cases and stroller", itinerary: "Caesarea\nLunch & Jerusalem", guide: "licensed-guide" } };
+const driver: QuoteRequest = { kind: "driver", fields: { ...emptyDriverQuote, ...contact, serviceId: "multi-stop", date: "2027-06-20", time: "09:30", pickup: "Tel Aviv Hotel", dropoff: "Jerusalem Hotel", passengers: "5", luggage: "Three cases and stroller", itinerary: "Caesarea\nLunch & Jerusalem" } };
 const shore: QuoteRequest = { kind: "shore", portId: "haifa", fields: { ...emptyShoreQuote, ...contact, country: "United Kingdom", ship: "Voyager", date: "2027-06-20", pickupTime: "08:30", allAboardDate: "2027-06-21", allAboardTime: "17:00", itineraryId: "other", otherItinerary: "Akko & Nazareth", passengers: "6" } };
 const enquiry: QuoteRequest = { kind: "contact", fields: { name: contact.name, email: contact.email, subject: "Airport trip & a question", message: "שלום Moshe\n" + "x".repeat(3500), consent: true } };
 const payload = (request: QuoteRequest = transfer): QuoteRequestPayload => ({
@@ -44,7 +44,7 @@ describe("server-side quote delivery", () => {
 
   it.each([
     [transfer, ["Name: Jamie & Alex", "Email: jamie+trip@example.com", "Phone / WhatsApp: +44 12345", "Destination: Ein Gedi", "Hotel / address: Example Hotel", "2027-06-20 at 14:30", "Flight number: LY315", "Passengers (including children): 6", "Suitcases: 4", "Carry-ons: 2", contact.notes]],
-    [driver, ["2027-06-20", "09:30", "Pickup: Tel Aviv Hotel", "Final drop-off: Jerusalem Hotel", "Passengers (including children): 5", "Luggage: Three cases and stroller", "Please quote a licensed guide as well", "Caesarea\nLunch & Jerusalem", contact.notes]],
+    [driver, ["2027-06-20", "09:30", "Pickup: Tel Aviv Hotel", "Final drop-off: Jerusalem Hotel", "Passengers (including children): 5", "Luggage: Three cases and stroller", "Caesarea\nLunch & Jerusalem", contact.notes]],
     [shore, ["Haifa", "Country: United Kingdom", "Cruise ship: Voyager", "2027-06-20", "08:30", "2027-06-21 at 17:00", "Requested itinerary: Akko & Nazareth", "Passengers (including children): 6", contact.notes]],
     [enquiry, ["Name: Jamie & Alex", "Email: jamie+trip@example.com", "Subject: Airport trip & a question", enquiry.fields.message]],
   ] as const)("builds every %s field into the server-generated message", async (request, values) => {
@@ -63,6 +63,12 @@ describe("server-side quote delivery", () => {
     expect(message.senderName).toBe(contact.name);
     if (request.kind === "transfer") {
       expect(message.subject).toBe("Moshe Barak - Taxi & Travel in Israel - Ben Gurion to Ein Gedi / Jamie & Alex");
+    }
+    if (request.kind === "driver") {
+      expect(message.subject).toBe("Moshe Barak - Taxi & Travel in Israel - Tel Aviv Hotel to Jerusalem Hotel / Jamie & Alex");
+      expect(message.text).not.toContain("Guide preference:");
+      expect(message.text).toContain("Additional requests:");
+      expect(message.html).toContain("<strong>Additional requests:</strong>");
     }
     expect(message.html).toContain("<strong>Sent from page:</strong>");
     expect(message.html).toContain("<strong>Name:</strong>");
