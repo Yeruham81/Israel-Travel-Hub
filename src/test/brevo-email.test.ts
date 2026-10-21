@@ -3,7 +3,7 @@ import { afterEach, describe, expect, it, vi } from "vitest";
 import { sendBrevoQuote, classifyBrevoNetworkError } from "@/lib/brevo-email.server";
 import { createQuoteDeliveryService } from "@/lib/quote-delivery.server";
 
-const message = { requestId: "test-reference", replyTo: "guest@example.com", subject: "Test enquiry", text: "Source page: Example\nAll fields\nשלום" };
+const message = { requestId: "test-reference", replyTo: "guest@example.com", subject: "Test enquiry", text: "Sent from page: Example\nAll fields\nשלום", html: "<strong>Sent from page:</strong> Example", senderName: "Test Visitor" };
 afterEach(() => { vi.unstubAllGlobals(); vi.useRealTimers(); });
 
 describe("Brevo REST transport", () => {
@@ -18,9 +18,9 @@ describe("Brevo REST transport", () => {
     }));
     const options = fetch.mock.calls[0]?.[1] as RequestInit;
     expect(JSON.parse(String(options.body))).toEqual({
-      sender: { email: "reservations@israel-taxi.com", name: "Israel Travel Hub" },
+      sender: { email: "reservations@israel-taxi.com", name: "Test Visitor" },
       to: [{ email: "reservations@israel-taxi.com" }], replyTo: { email: "guest@example.com" },
-      subject: message.subject, textContent: message.text,
+      subject: message.subject, textContent: message.text, htmlContent: message.html,
     });
   });
 
