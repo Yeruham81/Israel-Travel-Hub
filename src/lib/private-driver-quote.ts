@@ -4,16 +4,11 @@ import { israelNow } from "@/lib/israel-time";
 export type DriverQuoteFields = {
   name: string; email: string; phone: string; serviceId: string; date: string; time: string;
   pickup: string; dropoff: string; passengers: string; luggage: string; itinerary: string;
-  guide: string; notes: string; consent: boolean;
+  notes: string; consent: boolean;
 };
-export const driverGuideOptions = [
-  { id: "driver-only", label: "Driver only" },
-  { id: "licensed-guide", label: "Please quote a licensed guide as well" },
-  { id: "unsure", label: "Not sure yet — please advise" },
-] as const;
 export const emptyDriverQuote: DriverQuoteFields = {
   name: "", email: "", phone: "", serviceId: "", date: "", time: "", pickup: "", dropoff: "",
-  passengers: "2", luggage: "", itinerary: "", guide: "unsure", notes: "", consent: false,
+  passengers: "2", luggage: "", itinerary: "", notes: "", consent: false,
 };
 
 export function validateDriverQuote(v: DriverQuoteFields, now = new Date()) {
@@ -36,7 +31,6 @@ export function validateDriverQuote(v: DriverQuoteFields, now = new Date()) {
   if ((v.serviceId === "day-hire" || v.serviceId === "multi-stop") && !v.itinerary.trim()) errors.push("Describe the stops or priorities for your journey.");
   const passengers = Number(v.passengers);
   if (!v.passengers.trim() || !Number.isInteger(passengers) || passengers < 1 || passengers > 99) errors.push("Enter passengers between 1 and 99, including children.");
-  if (!driverGuideOptions.some((option) => option.id === v.guide)) errors.push("Choose your guide preference.");
   if (v.phone.length > 50 || v.pickup.length > 250 || v.dropoff.length > 250 || v.luggage.length > 250 || v.itinerary.length > 1500 || v.notes.length > 1500) errors.push("Shorten the trip details to the limits shown in the form.");
   if (!v.consent) errors.push("Confirm that you agree to share your details with Moshe for this request.");
   return errors;
@@ -46,14 +40,14 @@ export function validateDriverQuote(v: DriverQuoteFields, now = new Date()) {
 export function buildDriverQuoteDraft(v: DriverQuoteFields) {
   const line = (value: string) => value.trim().replace(/[\r\n]+/g, " ");
   const service = privateDriverServices.find((item) => item.id === v.serviceId)!.label;
-  const subject = `Private driver quote: ${service} on ${line(v.date)}`;
+  const subject = `Moshe Barak - Taxi & Travel in Israel - ${line(v.pickup)} to ${line(v.dropoff)} / ${line(v.name)}`;
   const body = ["Hello Moshe,", "", "Please send me a quote for a private driver in Israel.", "",
     `Name: ${line(v.name)}`, `Email: ${line(v.email)}`, `Phone / WhatsApp: ${line(v.phone) || "Not supplied"}`,
     `Service: ${service}`, `Pickup date: ${line(v.date)}`, `Preferred pickup time: ${line(v.time) || "To be agreed"} (Israel local time)`,
     `Pickup: ${line(v.pickup)}`, `Final drop-off: ${line(v.dropoff)}`, `Passengers (including children): ${line(v.passengers)}`,
-    `Luggage: ${line(v.luggage) || "To be confirmed"}`, `Guide preference: ${driverGuideOptions.find((item) => item.id === v.guide)!.label}`,
+    `Luggage: ${line(v.luggage) || "To be confirmed"}`,
     "", "Stops, approximate timing and priorities:", v.itinerary.trim() || "Direct journey between the addresses above.",
-    "", "Child seats, mobility needs or additional requests:", v.notes.trim() || "None specified", "",
+    "", "Additional requests:", v.notes.trim() || "None specified", "",
     "Please confirm itinerary feasibility, vehicle and luggage capacity, full price, included hours and distance, waiting, parking/tolls and extra-time charges, guiding and other exclusions, pickup arrangements, payment and cancellation terms.",
     "I understand that this is an inquiry and a booking requires confirmation.", "I consent to sharing these details with Moshe Barak for this inquiry.",
   ].join("\n");
