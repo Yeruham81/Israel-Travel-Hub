@@ -88,10 +88,9 @@ describe("shared sidebar navigation", () => {
     await waitFor(() => expect(router.state.location.pathname).toBe("/transfers/"));
     expect(screen.getByRole("list", { name: "Airport transfer destinations" })).toBeVisible();
 
-    const ports = screen.getByRole("button", { name: "Choose a shore excursion port" });
-    expect(ports).toHaveAttribute("aria-expanded", "false");
-    fireEvent.click(ports);
-    expect(ports).toHaveAttribute("aria-expanded", "true");
+    expect(screen.queryByRole("button", { name: "Choose a shore excursion port" })).not.toBeInTheDocument();
+    expect(screen.getByRole("list", { name: "Shore excursion ports" })).toBeVisible();
+    expect(screen.getByRole("link", { name: "From Ashdod Port" })).toBeVisible();
     expect(screen.getByRole("link", { name: "From Haifa Port" })).toBeVisible();
   });
 

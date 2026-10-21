@@ -1,6 +1,6 @@
 import { Link } from "@tanstack/react-router";
 import { useState } from "react";
-import { Breadcrumbs, Checklist, FaqList, OnThisPage, RelatedLinks, Section, SourceList } from "@/components/Guide";
+import { Breadcrumbs, Checklist, FaqList, OnThisPage, Section, SourceList } from "@/components/Guide";
 import { GuidePhotoCredit } from "@/components/TravelGuide";
 import { ShoreQuoteForm } from "@/components/ShoreQuoteForm";
 import { airportTransferPhotos } from "@/data/airportTransfers";
@@ -12,6 +12,7 @@ import { PageUpdated } from "@/components/PageUpdated";
 import { authorLd } from "@/lib/author";
 import { hasPublicPhotoCredit } from "@/lib/photo-credits";
 import { ShoreServiceCatalog } from "@/components/ShoreServiceCatalog";
+import { ShoreReadingGuides } from "@/components/ShoreReadingGuides";
 import { parseShoreServiceSearch, shoreSourceIds, type ShoreServiceSearch } from "@/lib/shore-services";
 
 function crumbsFor(id: ShorePortId) {
@@ -38,7 +39,7 @@ export function PortPage({ id, filters: routeSearch, onFilterChange }: { id: Sho
   const filters = parseShoreServiceSearch(routeSearch);
   const port = getShorePort(id);
   const [itineraryId, setItineraryId] = useState("");
-  const photos = [port.photo, ...getShoreCatalog(id).map((service) => service.photo), airportTransferPhotos["moshe"]!].filter(hasPublicPhotoCredit);
+  const photos = [port.photo, ...getShoreCatalog(id).map((service) => service.photo), ...port.related.map((guide) => guide.photo), airportTransferPhotos["moshe"]!].filter(hasPublicPhotoCredit);
   return <main className="mx-auto max-w-5xl px-4 pb-24 lg:pb-8">
     <header className="pt-6">
       <Breadcrumbs items={crumbsFor(id).map((crumb) => ({ name: crumb.name, to: crumb.path }))} />
@@ -85,7 +86,7 @@ export function PortPage({ id, filters: routeSearch, onFilterChange }: { id: Sho
     </section>
     <FaqList faqs={port.faqs} />
     <section aria-labelledby="ready-h" className="mt-14 rounded-2xl bg-navy p-6 text-navy-foreground sm:p-8"><h2 id="ready-h" className="text-3xl">Let's plan your day from {port.name}</h2><p className="mt-3 opacity-90">Share your ship's timetable, party size and favorite itinerary. Moshe will need to confirm the route, vehicle, total and booking terms.</p><a href="#request-quote" onClick={focusQuote} className="btn btn-light mt-5">Request a quote from Moshe</a></section>
-    <RelatedLinks title="Useful guides for your day ashore" items={port.related} />
+    <ShoreReadingGuides guides={port.related} />
     <SourceList ids={shoreSourceIds(id)} intro="Product pages were checked for itinerary, duration and port pickup/return. External starting prices are dated reference snapshots, not live prices or confirmed availability. Published ILS rates apply only to Moshe's named day trips; external tours are booked on GetYourGuide or Viator under their own terms." />
     <details className="mt-10 rounded-xl border p-5"><summary className="cursor-pointer text-sm font-medium">Excursion image credits</summary><ul className="mt-3 space-y-3">{[...new Map(photos.map((photo) => [photo.src, photo])).values()].map((photo) => <li key={photo.src}><p className="text-sm">{photo.alt}</p><GuidePhotoCredit photo={photo} /></li>)}</ul></details>
     <div className="fixed inset-x-0 bottom-0 z-30 border-t bg-background/95 px-4 py-3 backdrop-blur lg:hidden"><div className="mx-auto flex max-w-5xl items-center justify-between gap-3"><p className="text-sm font-medium">Private day ashore<br /><span className="text-xs text-muted-foreground">From {port.name} Port</span></p><a href="#request-quote" onClick={focusQuote} className="btn btn-primary shrink-0 text-sm">Request a quote</a></div></div>

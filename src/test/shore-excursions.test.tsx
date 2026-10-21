@@ -20,15 +20,13 @@ async function routerAt(path = "/shore-excursions/") {
 }
 
 describe("shore excursions", () => {
-  it("shows a single parent in the sidebar, expands the two port choices and opens the current port automatically", async () => {
+  it("always shows both port pages under a single sidebar parent and marks the current port", async () => {
     const router = await routerAt();
     const result = render(<RouterContextProvider router={router}><GlobalNav /></RouterContextProvider>);
     const nav = screen.getByRole("navigation", { name: "Explore Israel" });
     expect(within(nav).getAllByRole("link", { name: "Shore excursions" })).toHaveLength(1);
-    expect(within(nav).queryByRole("link", { name: "From Haifa Port" })).not.toBeInTheDocument();
-    const toggle = within(nav).getByRole("button", { name: "Choose a shore excursion port" });
-    expect(toggle).toHaveAttribute("aria-expanded", "false");
-    fireEvent.click(toggle);
+    expect(within(nav).queryByRole("button", { name: "Choose a shore excursion port" })).not.toBeInTheDocument();
+    expect(within(nav).getByRole("link", { name: "From Haifa Port" })).toBeVisible();
     const ports = within(nav).getByRole("list", { name: "Shore excursion ports" });
     expect(within(ports).getAllByRole("link").map((link) => link.getAttribute("href"))).toEqual([shorePorts.haifa.path, shorePorts.ashdod.path]);
     fireEvent.click(within(ports).getByRole("link", { name: "From Haifa Port" }));
@@ -36,16 +34,18 @@ describe("shore excursions", () => {
     expect(within(ports).getByRole("link", { name: "From Haifa Port" })).toHaveAttribute("aria-current", "page");
     result.unmount();
     render(<RouterContextProvider router={router}><GlobalNav /></RouterContextProvider>);
-    expect(screen.getByRole("button", { name: "Choose a shore excursion port" })).toHaveAttribute("aria-expanded", "true");
+    expect(screen.queryByRole("button", { name: "Choose a shore excursion port" })).not.toBeInTheDocument();
+    expect(screen.getByRole("link", { name: "From Ashdod Port" })).toBeVisible();
     expect(screen.getByRole("link", { name: "From Haifa Port" })).toBeVisible();
   });
 
-  it("expands the port choices in the shared mobile drawer and closes after navigation", async () => {
+  it("keeps both port choices visible in the mobile drawer without a toggle and closes after navigation", async () => {
     const router = await routerAt();
     render(<RouterContextProvider router={router}><SiteHeader /></RouterContextProvider>);
     fireEvent.click(screen.getByRole("button", { name: "Menu" }));
     const dialog = await screen.findByRole("dialog");
-    fireEvent.click(within(dialog).getByRole("button", { name: "Choose a shore excursion port" }));
+    expect(within(dialog).queryByRole("button", { name: "Choose a shore excursion port" })).not.toBeInTheDocument();
+    expect(within(dialog).getByRole("link", { name: "From Haifa Port" })).toBeVisible();
     fireEvent.click(within(dialog).getByRole("link", { name: "From Ashdod Port" }));
     await waitFor(() => expect(screen.queryByRole("dialog")).not.toBeInTheDocument());
     await waitFor(() => expect(router.state.location.pathname).toBe(shorePorts.ashdod.path));
@@ -89,7 +89,13 @@ describe("shore excursions", () => {
     expect(alternative).not.toHaveTextContent(/From ILS/);
     expect(within(alternative).getByRole("link", { name: /View on Viator/ })).toHaveAttribute("rel", "noopener noreferrer");
     const related = screen.getByRole("region", { name: "Useful guides for your day ashore" });
+    expect(within(related).getAllByRole("article")).toHaveLength(6);
+    expect(within(related).getAllByRole("img")).toHaveLength(6);
+    expect(within(related).getAllByRole("heading", { level: 3 })).toHaveLength(6);
+    expect(within(related).getAllByRole("link")).toHaveLength(6);
+    expect(related).not.toHaveTextContent("→");
     for (const link of within(related).getAllByRole("link")) {
+      expect(link).toHaveTextContent("Read More");
       const href = link.getAttribute("href")!;
       expect(router.matchRoutes(href).at(-1)?.routeId).toBe(href.replace(/\/$/, ""));
     }

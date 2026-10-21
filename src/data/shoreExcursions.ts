@@ -1,7 +1,6 @@
-import type { LinkProps } from "@tanstack/react-router";
 import type { GuidePhoto } from "@/data/travelGuides";
 import { airportTransferPhotos } from "@/data/airportTransfers";
-import { shoreExcursionRates, shorePorts, travelGuidePaths, type ShorePortId } from "@/data/registry";
+import { shoreExcursionRates, shorePorts, type ShorePortId } from "@/data/registry";
 import akko from "@/assets/shore-excursions/akko-port.jpg";
 import ashdod from "@/assets/home/ashdod-port.webp";
 import haifa from "@/assets/home/haifa-port.webp";
@@ -11,6 +10,7 @@ import bethlehem from "@/assets/home/bethlehem-nativity.webp";
 import cableCar from "@/assets/home/masada-cable-car.webp";
 import sepulchre from "@/assets/guides/holy-sepulchre.jpg";
 import { migrationPhotos } from "@/data/guideMigrationPhotos";
+import { portShoreGuides, type ShoreReadingGuide } from "@/data/shoreReading";
 import { filterShoreServices, shoreListedPrice, type ShoreServiceSearch } from "@/lib/shore-services";
 
 type ItineraryDetails = {
@@ -28,7 +28,7 @@ type PortDetails = {
   photo: GuidePhoto;
   overview: string[];
   faqs: { q: string; a: string }[];
-  related: { label: string; to: LinkProps["to"]; note?: string }[];
+  related: ShoreReadingGuide[];
   alternativeSourceId: string;
 };
 
@@ -133,14 +133,7 @@ const portDetails: Record<ShorePortId, PortDetails> = {
       { q: "Can I combine Jerusalem, Masada and the Dead Sea?", a: "Combining these destinations makes for an ambitious long day. Request a feasibility check for your exact call and agree the priority stops. Choose a simpler itinerary if the schedule does not allow enough time." },
       ...sharedFaqs,
     ],
-    related: [
-      { label: "Masada visit & tickets", to: "/travel-blog/masada/", note: "Plan the fortress visit and admission separately." },
-      { label: "Getting around Tel Aviv", to: travelGuidePaths.telAviv },
-      { label: "Jerusalem neighborhoods & stays", to: "/travel-blog/where-to-stay-in-jerusalem/" },
-      { label: "Bethlehem guided-tour planning", to: "/tours/bethlehem-from-jerusalem/", note: "A separate guided product; not included in the car-and-driver cards." },
-      { label: "Private driver for other travel days", to: "/private-driver/" },
-      { label: "Shore excursions from Haifa", to: "/haifa-shore-excursions/" },
-    ],
+    related: portShoreGuides.ashdod,
     alternativeSourceId: "beinharim-ashdod-jlm-bethlehem",
   },
   haifa: {
@@ -159,14 +152,7 @@ const portDetails: Record<ShorePortId, PortDetails> = {
       { q: "Can I visit Jerusalem from Haifa Port?", a: "It is a published option, with a long drive in each direction. Ask for a selective itinerary and a realistic return plan for your actual port call. The car-and-driver Jerusalem rate does not include Bethlehem or a licensed guide." },
       ...sharedFaqs,
     ],
-    related: [
-      { label: "Haifa hotels before or after your cruise", to: "/travel-blog/best-hotels-in-haifa/" },
-      { label: "Caesarea visit planning", to: "/attractions/caesarea/", note: "An alternative destination to discuss in a custom request." },
-      { label: "Tiberias & Sea of Galilee stays", to: "/travel-blog/best-hotels-in-tiberias/" },
-      { label: "Choosing an eSIM for Israel", to: travelGuidePaths.esim },
-      { label: "Private driver for other travel days", to: "/private-driver/" },
-      { label: "Shore excursions from Ashdod", to: "/ashdod-shore-excursions/" },
-    ],
+    related: portShoreGuides.haifa,
     alternativeSourceId: "beinharim-haifa-jlm-bethlehem",
   },
 };

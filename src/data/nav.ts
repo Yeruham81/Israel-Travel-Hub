@@ -75,7 +75,7 @@ export const allNavGroups: NavGroup[] = [
     items: [
       { label: "Tours & day trips", to: "/tours/" },
       { label: "Bethlehem tours", to: "/tours/bethlehem-from-jerusalem/" },
-      { label: "Shore excursions", to: "/shore-excursions/", childrenLabel: "Shore excursion ports", toggleLabel: "Choose a shore excursion port", children: [
+      { label: "Shore excursions", to: "/shore-excursions/", childrenLabel: "Shore excursion ports", alwaysExpanded: true, children: [
         { label: "From Haifa Port", to: "/haifa-shore-excursions/" },
         { label: "From Ashdod Port", to: "/ashdod-shore-excursions/" },
       ] },
