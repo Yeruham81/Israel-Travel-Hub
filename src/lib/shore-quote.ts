@@ -43,15 +43,13 @@ export function buildShoreQuoteDraft(v: ShoreQuoteFields, portId: ShorePortId) {
   const port = shorePorts[portId];
   const itinerary = shoreExcursionRates.find((rate) => rate.id === v.itineraryId && rate.portId === portId)?.destination || v.otherItinerary.trim();
   const line = (value: string) => value.trim().replace(/[\r\n]+/g, " ");
-  const subject = `${port.name} shore excursion quote: ${line(itinerary)}`;
-  const body = ["Hello Moshe,", "", `Please send me a quote for a private shore excursion from ${port.name} Port, returning to the same port.`, "",
+  const subject = `Moshe Barak - Taxi & Travel in Israel / ${line(v.name)}`;
+  const body = [
     `Name: ${line(v.name)}`, `Email: ${line(v.email)}`, `Phone / WhatsApp: ${line(v.phone) || "Not supplied"}`, `Country: ${line(v.country) || "Not supplied"}`,
-    `Cruise ship: ${line(v.ship)}`, `Excursion date: ${v.date}`, `Expected disembarkation: ${v.pickupTime} (Israel local time)`,
-    `Ship's all-aboard deadline: ${v.allAboardDate} at ${v.allAboardTime} (Israel local time)`, `Requested itinerary: ${line(itinerary)}`, `Passengers (including children): ${v.passengers}`,
-    ...(Number(v.passengers) > 4 ? ["Please quote a suitable vehicle for our larger group; the published up-to-four starting rates do not apply to our party."] : []),
+    `Departure & return port: ${port.name} Port`, `Cruise ship: ${line(v.ship)}`, `Excursion date: ${v.date}`, `Expected disembarkation: ${v.pickupTime} (Israel local time)`,
+    `Ship's all-aboard deadline: ${v.allAboardDate} at ${v.allAboardTime} (Israel local time)`, `Requested itinerary: ${line(itinerary)}`, `Passengers: ${v.passengers}`,
     "", "Priorities, child seats, mobility needs or additional requests:", v.notes.trim() || "None specified", "",
-    "Please confirm itinerary feasibility, site access, vehicle, full price and exclusions, licensed-guide options, meeting point, planned return time and buffer, payment/deposit, cancellation and missed-port-call terms.",
-    "I understand that this is an inquiry and the excursion is only booked after confirmation.", "I consent to sharing these details with Moshe Barak for this inquiry.",
+    "I consent to sharing these details with Moshe Barak for this inquiry.",
   ].join("\n");
   return { subject, body, url: `mailto:${shoreExcursionContact.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}` };
 }
