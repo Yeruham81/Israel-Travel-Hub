@@ -67,7 +67,7 @@ describe("four dedicated airport transfer routes", () => {
     fireEvent.change(screen.getByLabelText("Flight arrival date *"), { target: { value: "2099-11-01" } });
     fireEvent.change(screen.getByLabelText("Flight arrival time *"), { target: { value: "22:30" } });
     fireEvent.change(screen.getByLabelText("Drop-off hotel or address"), { target: { value: `Example Hotel, ${guide.city}` } });
-    fireEvent.change(screen.getByLabelText("Passengers, including children *"), { target: { value: "6" } });
+    fireEvent.change(screen.getByLabelText("Passengers *"), { target: { value: "6" } });
     expect(screen.getByText(/published car starting prices do not apply/)).toBeInTheDocument();
     fireEvent.click(screen.getByRole("checkbox"));
     const fetchSpy = vi.spyOn(globalThis, "fetch").mockImplementation(async (_url, options) => Response.json({ accepted: true, requestId: JSON.parse(String(options?.body)).requestId }));
