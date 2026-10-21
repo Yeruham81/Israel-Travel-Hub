@@ -3,7 +3,7 @@ import { createMemoryHistory, createRouter, RouterProvider } from "@tanstack/rea
 import { act, cleanup, fireEvent, render, screen, waitFor, within } from "@testing-library/react";
 import { afterEach, describe, expect, it, vi } from "vitest";
 import { affiliateConfig, getSource, providerLinks, shorePorts, shoreServices, shoreTourProducts, type ShorePortId } from "@/data/registry";
-import { filterShoreServices, parsePortTransferSearch, parseShoreServiceSearch, servicesForPort, shoreServiceHref, shoreSourceIds } from "@/lib/shore-services";
+import { filterShoreServices, parsePortTransferSearch, parseShoreServiceSearch, servicesForPort, shoreServiceHref, shoreSourceIds, shoreListedPrice } from "@/lib/shore-services";
 import { routeTree } from "@/routeTree.gen";
 
 afterEach(() => { cleanup(); localStorage.clear(); vi.restoreAllMocks(); });
@@ -16,7 +16,7 @@ async function pageAt(path: string) {
   return { ...result, router, history };
 }
 const cards = () => screen.queryAllByTestId("shore-service-card");
-const catalogSizes = { haifa: 19, ashdod: 18 };
+const catalogSizes = { haifa: 10, ashdod: 11 };
 
 describe("port service catalog", () => {
   it("keeps the actual port context, service identity and multi-stop destinations separate", () => {
@@ -56,10 +56,10 @@ describe("port service catalog", () => {
     fireEvent.click(within(types).getByRole("link", { name: "Guided tours" }));
     await waitFor(() => expect(cards()).toHaveLength(catalogSizes[port] - 6));
     expect(router.state.location.search).toEqual({ service: "guided-tour" });
-    const guidedId = cards()[0]!.dataset["serviceId"];
+    const guidedId = `${port}-shore-viator-${port}-jerusalem-bethlehem`;
     fireEvent.click(within(destinations).getByRole("link", { name: "Jerusalem" }));
     await waitFor(() => expect(router.state.location.search).toEqual({ service: "guided-tour", destination: "jerusalem" }));
-    expect(cards()[0]!.dataset["serviceId"]).toBe(guidedId);
+    expect(cards().some((card) => card.dataset["serviceId"] === guidedId)).toBe(true);
     expect(screen.getByLabelText("Full name *")).toHaveValue("Jamie Cruise");
     await act(async () => { history.back(); });
     await waitFor(() => expect(router.state.location.search).toEqual({ service: "guided-tour" }));
@@ -111,54 +111,57 @@ describe("port service catalog", () => {
 
   it("keeps truthful affiliate flags and records an outbound product click without a booking claim", async () => {
     await pageAt("/haifa-shore-excursions/?service=guided-tour");
-    const guided = cards().find((card) => card.dataset["serviceId"] === "haifa-guided-jerusalem-bethlehem")!;
+    const guided = cards().find((card) => card.dataset["serviceId"] === "haifa-shore-viator-haifa-jerusalem-bethlehem")!;
     expect(guided).not.toHaveTextContent("Sponsored link");
-    const link = within(guided).getByRole("link", { name: /See dates and prices on Bein Harim/ });
+    const link = within(guided).getByRole("link", { name: /View on Viator/ });
     expect(link).toHaveAttribute("target", "_blank");
     expect(link).toHaveAttribute("rel", "noopener noreferrer");
     fireEvent.click(link);
-    expect(JSON.parse(localStorage.getItem("itt_outbound_clicks_v1")!)[0]).toMatchObject({ event: "outbound_click", pageId: "shore-haifa", productId: "haifa-guided-jerusalem-bethlehem", offerId: "haifa-shore-beinharim" });
+    expect(JSON.parse(localStorage.getItem("itt_outbound_clicks_v1")!)[0]).toMatchObject({ event: "outbound_click", pageId: "shore-haifa", productId: "shore-viator-haifa-jerusalem-bethlehem", offerId: "shore-viator-haifa-jerusalem-bethlehem" });
     for (const port of ["haifa", "ashdod"]) {
       const id = `${port}-shore-beinharim`;
       expect(providerLinks.find((provider) => provider.id === id)?.isAffiliate).toBe(Boolean(affiliateConfig[id]?.trackingUrl));
     }
   });
 
-  it("retains one product identity across supported ports and verifies every external booking offer", () => {
-    const sharedId = "shore-compass-tel-aviv-caesarea";
-    const haifa = servicesForPort("haifa").find((item) => item.productId === sharedId)!;
-    const ashdod = servicesForPort("ashdod").find((item) => item.productId === sharedId)!;
-    expect(haifa.id).not.toBe(ashdod.id);
-    expect(haifa.provider.id).toBe(ashdod.provider.id);
-    expect(haifa.destinationIds).toEqual(["tel-aviv", "caesarea"]);
-    for (const product of shoreTourProducts) {
-      const link = providerLinks.find((item) => item.id === product.id)!;
-      expect(link.url).toBe(affiliateConfig[product.id]?.trackingUrl || product.publicUrl);
-      expect(link.isAffiliate).toBe(Boolean(affiliateConfig[product.id]?.trackingUrl));
-      expect(Object.hasOwn(affiliateConfig, product.id)).toBe(true);
-      expect(link.operatorId).toBe(product.operatorId);
-      expect(link.partnerId).toBe(product.partnerId);
-      expect(getSource(product.id).checkedAt).toBe("2026-10-21");
-      for (const port of product.portIds) expect(shoreSourceIds(port)).toContain(product.id);
+  it("publishes external excursions only through approved booking platforms, with one identity under every destination tag", () => {
+    for (const port of ["haifa", "ashdod"] as const) {
+      for (const service of servicesForPort(port)) {
+        if (service.provider.relationship === "publisher_operator") continue;
+        expect(["getyourguide", "viator"]).toContain(service.partner?.id);
+        const product = service.product!;
+        const link = service.provider;
+        expect(product.durationLabel).toMatch(/hours/);
+        expect(link.url).toBe(affiliateConfig[product.id]?.trackingUrl || product.publicUrl);
+        expect(link.isAffiliate).toBe(Boolean(affiliateConfig[product.id]?.trackingUrl));
+        expect(Object.hasOwn(affiliateConfig, product.id)).toBe(true);
+        expect(getSource(product.id).checkedAt).toBe("2026-10-21");
+        expect(shoreSourceIds(port)).toContain(product.id);
+        for (const destination of service.destinationIds) expect(filterShoreServices(port, { destination }).find((item) => item.productId === product.id)?.provider.id).toBe(link.id);
+      }
+      expect(shoreSourceIds(port).some((id) => id.startsWith("shore-tourist-") || id.startsWith("shore-compass-"))).toBe(false);
     }
-    // These marketplace titles mention both ports, but their detailed return arrangements specify Ashdod.
+    // A direct supplier cannot become public merely by adding a published service row.
+    const direct = { ...shoreServices[0]!, id: "test-direct-tourist", portId: "haifa" as const, providerLinkId: "shore-tourist-haifa-jerusalem" };
+    shoreServices.push(direct);
+    try { expect(servicesForPort("haifa").some((item) => item.id === direct.id)).toBe(false); }
+    finally { shoreServices.pop(); }
     expect(servicesForPort("haifa").some((item) => item.operator?.id === "rent-a-guide")).toBe(false);
-    expect(filterShoreServices("haifa", { destination: "nazareth", operator: "guided-tours-israel" })[0]?.partner?.name).toBe("Viator");
   });
 
-  it("combines operator, destination and service tags, preserving the other tags when one is cleared", async () => {
-    const { router } = await pageAt("/haifa-shore-excursions/?operator=tourist-israel");
-    expect(cards()).toHaveLength(5);
-    expect(cards().every((card) => card.dataset["operatorId"] === "tourist-israel")).toBe(true);
-    fireEvent.click(within(screen.getByRole("navigation", { name: "Filter port services by destination" })).getByRole("link", { name: "Jerusalem" }));
-    await waitFor(() => expect(cards()).toHaveLength(3));
+  it("combines booking site, destination and service tags without clearing the other groups", async () => {
+    const { router } = await pageAt("/haifa-shore-excursions/?platform=getyourguide");
+    expect(cards()).toHaveLength(2);
+    expect(cards().every((card) => card.dataset["bookingPlatform"] === "getyourguide")).toBe(true);
+    fireEvent.click(within(screen.getByRole("navigation", { name: "Filter port services by destination" })).getByRole("link", { name: "Nazareth" }));
+    await waitFor(() => expect(cards()).toHaveLength(1));
     fireEvent.click(within(screen.getByRole("navigation", { name: "Filter port services by type" })).getByRole("link", { name: "Guided tours" }));
-    await waitFor(() => expect(router.state.location.search).toEqual({ service: "guided-tour", destination: "jerusalem", operator: "tourist-israel" }));
+    await waitFor(() => expect(router.state.location.search).toEqual({ service: "guided-tour", destination: "nazareth", platform: "getyourguide" }));
     fireEvent.click(within(screen.getByRole("navigation", { name: "Filter port services by destination" })).getByRole("link", { name: "All destinations" }));
-    await waitFor(() => expect(cards()).toHaveLength(5));
-    expect(router.state.location.search).toEqual({ service: "guided-tour", operator: "tourist-israel" });
-    expect(parseShoreServiceSearch({ operator: ["tourist-israel"] })).toEqual({});
-    expect(parseShoreServiceSearch({ operator: "unknown" })).toEqual({});
+    await waitFor(() => expect(cards()).toHaveLength(2));
+    expect(router.state.location.search).toEqual({ service: "guided-tour", platform: "getyourguide" });
+    expect(parseShoreServiceSearch({ platform: ["viator"], operator: "tourist-israel" })).toEqual({});
+    expect(parseShoreServiceSearch({ platform: "compass-travel" })).toEqual({});
   });
 
   it("identifies the actual operator separately from the marketplace and uses the product's own outbound link", async () => {
@@ -166,13 +169,43 @@ describe("port service catalog", () => {
     expect(cards()).toHaveLength(1);
     const card = cards()[0]!;
     expect(card).toHaveTextContent("Operated by Ilya Pevzner Guide Israel");
-    expect(card).toHaveTextContent("Book on GetYourGuide");
+    expect(card).toHaveTextContent("GetYourGuide");
     expect(card).not.toHaveTextContent(/From ILS|Sponsored link/);
-    const link = within(card).getByRole("link", { name: /See tour on GetYourGuide/ });
+    const link = within(card).getByRole("link", { name: /View on GetYourGuide/ });
     expect(link).toHaveAttribute("href", "https://www.getyourguide.com/haifa-l2051/haifa-acre-and-rosh-anikra-for-cruises-with-licensed-guide-t482201/");
     expect(link).toHaveAttribute("rel", "noopener noreferrer");
     fireEvent.click(link);
     expect(JSON.parse(localStorage.getItem("itt_outbound_clicks_v1")!)[0]).toMatchObject({ pageId: "shore-haifa", productId: "shore-gyg-haifa-akko", offerId: "shore-gyg-haifa-akko" });
+  });
+
+  it("shows duration, pickup, format and a clearly based dated price instead of long repeated card conditions", async () => {
+    await pageAt("/ashdod-shore-excursions/?platform=getyourguide");
+    const card = cards().find((card) => card.dataset["productId"] === "shore-gyg-ashdod-jerusalem-bethlehem")!;
+    expect(card).toHaveTextContent("9–11 hours");
+    expect(card).toHaveTextContent("Private tour");
+    expect(card).toHaveTextContent("Ashdod Port · pickup & return");
+    expect(card).toHaveTextContent("US$1,009");
+    expect(card).toHaveTextContent("Per group · up to 3");
+    expect(card).toHaveTextContent("Price checked 21 October 2026");
+    expect(card).not.toHaveTextContent(/Per person|Best for:|Published car-and-driver starting rate|Check the actual ship date/);
+    const masada = cards().find((card) => card.dataset["productId"] === "shore-gyg-ashdod-masada")!;
+    expect(masada).toHaveTextContent("US$130");
+    expect(masada).toHaveTextContent("Per person");
+    expect(masada).not.toHaveTextContent("Per group");
+  });
+
+  it("suppresses old, future, unsupported or invalid price snapshots and preserves an honest price fallback", async () => {
+    const product = shoreTourProducts.find((item) => item.id === "shore-gyg-ashdod-masada")!;
+    const now = new Date("2026-10-21T12:00:00Z");
+    expect(shoreListedPrice(product, now)?.amount).toBe(130);
+    expect(shoreListedPrice(product, new Date("2026-11-22T12:00:00Z"))).toBeUndefined();
+    expect(shoreListedPrice(product, new Date("2026-10-20T12:00:00Z"))).toBeUndefined();
+    expect(shoreListedPrice({ ...product, listedPrice: { ...product.listedPrice!, amount: NaN } }, now)).toBeUndefined();
+    expect(shoreListedPrice({ ...product, listedPrice: { ...product.listedPrice!, basis: "per_group" } }, now)).toBeUndefined();
+    await pageAt("/haifa-shore-excursions/?platform=viator");
+    const privateTour = cards().find((card) => card.dataset["productId"] === "shore-viator-haifa-jerusalem-bethlehem")!;
+    expect(privateTour).toHaveTextContent("See current price");
+    expect(privateTour).not.toHaveTextContent(/US\$|From ILS/);
   });
 
 });

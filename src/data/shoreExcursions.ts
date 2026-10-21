@@ -6,7 +6,7 @@ import akko from "@/assets/shore-excursions/akko-port.jpg";
 import ashdod from "@/assets/home/ashdod-port.webp";
 import haifa from "@/assets/home/haifa-port.webp";
 import masada from "@/assets/home/masada-dead-sea.webp";
-import { filterShoreServices, type ShoreServiceSearch } from "@/lib/shore-services";
+import { filterShoreServices, shoreListedPrice, type ShoreServiceSearch } from "@/lib/shore-services";
 
 type ItineraryDetails = {
   photo: GuidePhoto;
@@ -89,7 +89,7 @@ const itineraryDetails: Record<string, ItineraryDetails> = {
 };
 
 const sharedFaqs = [
-  { q: "Do all cards belong to the same operator?", a: "No. Each card names the operator and, where relevant, the booking platform such as GetYourGuide or Viator. Use the operator tags to compare one company's options. Moshe Barak's published ILS day-trip starting rates apply only to his named car-and-driver itineraries; other operators have separate prices, inclusions and terms." },
+  { q: "Do all cards belong to the same operator?", a: "No. Each card names the operator and, where relevant, the booking platform such as GetYourGuide or Viator. External excursions are bookable through GetYourGuide or Viator. Use the booking-site tags to compare them. Moshe Barak's published ILS day-trip starting rates apply only to his named car-and-driver itineraries; other operators have separate prices, inclusions and terms." },
   { q: "Are the starting prices per person or per vehicle?", a: "They are published ILS starting prices for a full-day return car-and-driver service for up to four passengers on weekdays. They are not per-person fares or live quotes. Night, weekend and holiday supplements may apply; Moshe confirms the total for your actual party and schedule." },
   { q: "Is a licensed guide included?", a: "No. These starting rates cover private transportation and a driver. Licensed guiding, site admission, meals and tips are excluded. Request a guide separately if you want interpretation or guided visits inside sites, and ask for its price in the written quote." },
   { q: "Can the itinerary be customized?", a: "Yes, request different priorities, a slower pace or another destination. The operator must confirm that the route fits your hours ashore, site access and return buffer. Changes can alter the price." },
@@ -104,7 +104,7 @@ const portDetails: Record<ShorePortId, PortDetails> = {
     title: "Ashdod shore excursions: tours, day trips & transfers",
     description: "Browse shore excursions, guided tours, private car-and-driver day trips and onward transfers from Ashdod Port. Filter by service or destination and compare what is included.",
     intro: "Explore Jerusalem, Tel Aviv and Jaffa, or the desert around Masada and the Dead Sea. Browse the tours, private-driver days and onward transfers below, then narrow the choices with a tag.",
-    answer: "From Ashdod, choose a return day trip, a guided excursion or a one-way transfer after your cruise. All services are shown below: use the service and destination tags to find your preferred option. For day trips, confirm that the plan fits your actual disembarkation and all-aboard times.",
+    answer: "From Ashdod, choose a return day trip, a guided excursion or a one-way transfer after your cruise. All listed services are shown below: use the service, destination and booking-site tags to find your preferred option. For day trips, confirm that the plan fits your actual disembarkation and all-aboard times.",
     photo: { src: ashdod, alt: "Aerial view of Ashdod Port and its Mediterranean breakwater", credit: "Amos Meron · CC BY-SA 3.0 · cropped and resized WebP", sourceUrl: "https://commons.wikimedia.org/wiki/File:Ashdod_Port_Aerial_View.jpg", licenseUrl: "https://creativecommons.org/licenses/by-sa/3.0/" },
     overview: [
       "Ashdod is the southern cruise-port starting point in this guide. A Tel Aviv–Jaffa day keeps the focus on the coast; Jerusalem puts historic and religious sites first. Masada and the Dead Sea add a longer desert drive, so choose them for a port call that leaves enough time for the return.",
@@ -129,7 +129,7 @@ const portDetails: Record<ShorePortId, PortDetails> = {
     title: "Haifa shore excursions: tours, day trips & transfers",
     description: "Browse guided shore excursions, private car-and-driver day trips and onward transfers from Haifa Port. Filter by service or destination, including Akko, Galilee and Jerusalem.",
     intro: "Explore the northern coast, follow a Galilee itinerary or make Jerusalem your priority. Browse tours, private-driver days and onward transfers from Haifa Port, with simple tags to narrow your choices.",
-    answer: "Choose a return day trip, a guided excursion or a one-way transfer after your cruise. Akko and the Galilee focus on the north; Tel Aviv and Jerusalem involve longer drives south. All services are shown below, with service and destination tags to help you choose.",
+    answer: "Choose a return day trip, a guided excursion or a one-way transfer after your cruise. Akko and the Galilee focus on the north; Tel Aviv and Jerusalem involve longer drives south. All listed services are shown below, with service, destination and booking-site tags to help you choose.",
     photo: { src: haifa, alt: "Haifa Port and Haifa Bay seen from Mount Carmel", credit: "Юкатан · CC BY-SA 3.0 · cropped and resized WebP", sourceUrl: "https://commons.wikimedia.org/wiki/File:Panorama_Haifa_(cropped).jpg", licenseUrl: "https://creativecommons.org/licenses/by-sa/3.0/" },
     overview: [
       "Choose the north if you want more of the day around Akko, the Galilee or the Carmel rather than on the road to Jerusalem. Akko's old harbour suits a coastal day; Nazareth and selected lakeside sites offer a different route for Christian heritage and Galilee scenery.",
@@ -179,6 +179,10 @@ export function getShoreCatalog(portId: ShorePortId, filters: ShoreServiceSearch
     const guidedFormat = service.product?.groupFormat === "private" ? "Private guided excursion" : service.product?.groupFormat === "shared" ? "Shared guided excursion" : "Guided excursion";
     return {
       ...service, itinerary,
+      listedPrice: shoreListedPrice(service.product),
+      duration: service.product?.durationLabel || (service.kind === "transfer" ? "By route" : "Full day · by agreement"),
+      groupLabel: service.kind === "private-driver" || service.kind === "transfer" ? "Private vehicle" : service.product?.groupFormat === "private" ? "Private tour" : service.product?.groupFormat === "shared" ? "Shared tour" : "Confirm group size",
+      includesLabel: service.product?.includesLabel || "Driver & vehicle",
       title: itinerary?.destination || service.provider.title,
       description: itinerary?.description || service.provider.summary,
       photo: itinerary?.photo || destinationPhoto,

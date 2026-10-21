@@ -84,10 +84,10 @@ describe("shore excursions", () => {
     expect(screen.getByLabelText("Departure & return port")).toHaveValue(`${port.name} Port`);
     expect(screen.getByRole("link", { name: "Privacy Policy" })).toHaveAttribute("href", "/privacy-policy/");
     expect(screen.queryByText(/Prefer an online form|existing .*contact form/)).not.toBeInTheDocument();
-    const alternative = services.find((card) => card.dataset["serviceKind"] === "guided-tour")!;
+    const alternative = services.find((card) => card.dataset["productId"] === `shore-viator-${id}-jerusalem-bethlehem`)!;
     expect(alternative).toHaveTextContent("Bein Harim Tours");
     expect(alternative).not.toHaveTextContent(/From ILS/);
-    expect(within(alternative).getByRole("link", { name: /See dates and prices on Bein Harim/ })).toHaveAttribute("rel", "noopener noreferrer");
+    expect(within(alternative).getByRole("link", { name: /View on Viator/ })).toHaveAttribute("rel", "noopener noreferrer");
     const related = screen.getByRole("region", { name: "Useful guides for your day ashore" });
     for (const link of within(related).getAllByRole("link")) {
       const href = link.getAttribute("href")!;

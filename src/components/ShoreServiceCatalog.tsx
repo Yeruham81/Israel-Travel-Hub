@@ -1,7 +1,8 @@
 import type { MouseEvent } from "react";
+import { Clock3, MapPin, Users } from "lucide-react";
 import { PriceDisplay } from "@/components/CurrencyRates";
 import { getShoreCatalog } from "@/data/shoreExcursions";
-import { shoreDestinations, shoreServiceKinds, shorePorts, type ShorePortId } from "@/data/registry";
+import { shoreBookingPlatforms, shoreDestinations, shoreServiceKinds, shorePorts, type ShorePortId } from "@/data/registry";
 import { parseShoreServiceSearch, shoreCatalogOperators, shoreServiceHref, type ShoreServiceSearch } from "@/lib/shore-services";
 import { recordOutboundClick, relFor } from "@/lib/outbound";
 
@@ -13,15 +14,17 @@ type Props = {
   onSelectItinerary: (id: string) => void;
 };
 
+const priceCheckDate = (date: string) => new Date(`${date}T12:00:00Z`).toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric", timeZone: "UTC" });
+
 export function ShoreServiceCatalog({ portId, filters, onFilterChange, itineraryId, onSelectItinerary }: Props) {
   const port = shorePorts[portId];
   const catalog = getShoreCatalog(portId);
   const visible = getShoreCatalog(portId, filters);
   const destinations = shoreDestinations.filter((destination) => catalog.some((service) => service.destinationIds.includes(destination.id)));
-  const operators = shoreCatalogOperators.filter((operator) => catalog.some((service) => service.operator?.id === operator.id));
+  const platforms = shoreBookingPlatforms.filter((id) => catalog.some((service) => service.partner?.id === id));
   const withoutService = parseShoreServiceSearch({ ...filters, service: undefined });
   const withoutDestination = parseShoreServiceSearch({ ...filters, destination: undefined });
-  const withoutOperator = parseShoreServiceSearch({ ...filters, operator: undefined });
+  const withoutPlatform = parseShoreServiceSearch({ ...filters, platform: undefined });
   function filter(event: MouseEvent<HTMLAnchorElement>, next: ShoreServiceSearch) {
     if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
     event.preventDefault();
@@ -30,8 +33,8 @@ export function ShoreServiceCatalog({ portId, filters, onFilterChange, itinerary
 
   return <section id="itineraries" aria-labelledby="itineraries-h" className="mt-10 scroll-mt-24">
     <h2 id="itineraries-h" className="text-3xl">Tours, day trips & transfers from {port.name} Port</h2>
-    <p className="mt-3 max-w-4xl leading-relaxed text-muted-foreground">Browse every listed service below, then narrow the choices by service, destination or operator. Each card names the company running the service and where to book it.</p>
-    <div className="mt-6 rounded-2xl border bg-secondary/50 p-5 sm:p-6">
+    <p className="mt-3 max-w-4xl leading-relaxed text-muted-foreground">Compare the route, duration, tour format and starting price. External tours open on GetYourGuide or Viator; private transport can be requested directly from Moshe.</p>
+    <div className="mt-6 rounded-2xl border bg-secondary/50 p-4">
       <nav aria-label="Filter port services by type">
         <p className="mb-3 text-sm font-semibold">Service</p>
         <ul className="flex flex-wrap gap-2">
@@ -39,56 +42,61 @@ export function ShoreServiceCatalog({ portId, filters, onFilterChange, itinerary
           {shoreServiceKinds.map((kind) => <li key={kind.id}><a className="chip inline-block" href={shoreServiceHref(portId, { ...filters, service: kind.id })} onClick={(event) => filter(event, { ...filters, service: kind.id })} aria-current={filters.service === kind.id ? "true" : undefined}>{kind.label}</a></li>)}
         </ul>
       </nav>
-      <nav aria-label="Filter port services by destination" className="mt-5">
-        <p className="mb-3 text-sm font-semibold">Destination</p>
+      <nav aria-label="Filter port services by destination" className="mt-4">
+        <p className="mb-2 text-sm font-semibold">Destination</p>
         <ul className="flex flex-wrap gap-2">
           <li><a className="chip inline-block" href={shoreServiceHref(portId, withoutDestination)} onClick={(event) => filter(event, withoutDestination)} aria-current={!filters.destination ? "true" : undefined}>All destinations</a></li>
           {destinations.map((destination) => <li key={destination.id}><a className="chip inline-block" href={shoreServiceHref(portId, { ...filters, destination: destination.id })} onClick={(event) => filter(event, { ...filters, destination: destination.id })} aria-current={filters.destination === destination.id ? "true" : undefined}>{destination.label}</a></li>)}
         </ul>
       </nav>
-      <nav aria-label="Filter port services by operator" className="mt-5">
-        <p className="mb-3 text-sm font-semibold">Operator</p>
+      <nav aria-label="Filter port services by booking site" className="mt-4">
+        <p className="mb-2 text-sm font-semibold">Book with</p>
         <ul className="flex flex-wrap gap-2">
-          <li><a className="chip inline-block" href={shoreServiceHref(portId, withoutOperator)} onClick={(event) => filter(event, withoutOperator)} aria-current={!filters.operator ? "true" : undefined}>All operators</a></li>
-          {operators.map((operator) => <li key={operator.id}><a className="chip inline-block" href={shoreServiceHref(portId, { ...filters, operator: operator.id })} onClick={(event) => filter(event, { ...filters, operator: operator.id })} aria-current={filters.operator === operator.id ? "true" : undefined}>{operator.name}</a></li>)}
+          <li><a className="chip inline-block" href={shoreServiceHref(portId, withoutPlatform)} onClick={(event) => filter(event, withoutPlatform)} aria-current={!filters.platform ? "true" : undefined}>All booking options</a></li>
+          {platforms.map((id) => <li key={id}><a className="chip inline-block" href={shoreServiceHref(portId, { ...filters, platform: id })} onClick={(event) => filter(event, { ...filters, platform: id })} aria-current={filters.platform === id ? "true" : undefined}>{id === "getyourguide" ? "GetYourGuide" : "Viator"}</a></li>)}
         </ul>
       </nav>
     </div>
     <div className="mt-5 flex flex-wrap items-center justify-between gap-3">
-      <p role="status" aria-live="polite" className="text-sm text-muted-foreground">{visible.length} {visible.length === 1 ? "service" : "services"}{filters.service ? ` · ${shoreServiceKinds.find((kind) => kind.id === filters.service)?.label}` : ""}{filters.destination ? ` · ${shoreDestinations.find((destination) => destination.id === filters.destination)?.label}` : ""}{filters.operator ? ` · ${shoreCatalogOperators.find((operator) => operator.id === filters.operator)?.name}` : ""}</p>
-      {(filters.service || filters.destination || filters.operator) && <a href={shoreServiceHref(portId, {})} onClick={(event) => filter(event, {})} className="text-sm font-medium text-primary underline">Clear filters</a>}
+      <p role="status" aria-live="polite" className="text-sm text-muted-foreground">{visible.length} {visible.length === 1 ? "service" : "services"}{filters.service ? ` · ${shoreServiceKinds.find((kind) => kind.id === filters.service)?.label}` : ""}{filters.destination ? ` · ${shoreDestinations.find((destination) => destination.id === filters.destination)?.label}` : ""}{filters.operator ? ` · ${shoreCatalogOperators.find((operator) => operator.id === filters.operator)?.name}` : ""}{filters.platform ? ` · ${filters.platform === "getyourguide" ? "GetYourGuide" : "Viator"}` : ""}</p>
+      {(filters.service || filters.destination || filters.operator || filters.platform) && <a href={shoreServiceHref(portId, {})} onClick={(event) => filter(event, {})} className="text-sm font-medium text-primary underline">Clear filters</a>}
     </div>
     {visible.length > 0 ? <ul aria-label={`Services from ${port.name} Port`} className="mt-5 grid gap-5 sm:grid-cols-2 xl:grid-cols-3">
       {visible.map((service) => {
         const itinerary = service.itinerary;
         const provider = service.provider;
         const external = !provider.url.startsWith("/");
-        return <li key={service.id} data-testid="shore-service-card" data-service-id={service.id} data-product-id={service.productId} data-operator-id={service.operator?.id} data-service-kind={service.kind} className={`flex min-w-0 flex-col overflow-hidden rounded-2xl border bg-card ${itinerary && itineraryId === itinerary.id ? "border-primary ring-1 ring-primary" : ""}`}>
-          <img src={service.photo.src} alt={service.photo.alt} width={720} height={480} loading="lazy" decoding="async" className="aspect-[3/2] w-full object-cover" />
-          <div className="flex flex-1 flex-col p-5">
-            <p className="text-xs font-semibold uppercase tracking-wide text-primary">{service.format}</p>
-            <h3 className="mt-2 text-2xl">{service.title}</h3>
-            <p className="mt-2 text-sm font-medium">Operated by {service.operator?.name || provider.providerName}</p>
-            <p className="mt-1 text-xs text-muted-foreground">{service.partner ? `Book on ${service.partner.name}` : provider.relationship === "publisher_operator" ? "Request directly from Moshe" : "Book directly with the operator"}</p>
-            {service.product?.seasonNote && <p className="mt-2 text-xs font-medium">{service.product.seasonNote}</p>}
-            {provider.relationship === "publisher_operator" && <p className="mt-1 text-xs text-muted-foreground">Operated by the publisher's local transport business.</p>}
-            {provider.isAffiliate && <p className="mt-1 text-xs font-semibold">Sponsored link</p>}
-            <p className="mt-3 leading-relaxed text-muted-foreground">{service.description}</p>
-            <ul aria-label="Destinations" className="mt-4 flex flex-wrap gap-2">{service.destinationIds.map((id) => <li key={id}><a href={shoreServiceHref(portId, { ...filters, destination: id })} onClick={(event) => filter(event, { ...filters, destination: id })} className="inline-block rounded-full bg-secondary px-3 py-1 text-xs font-medium text-primary underline decoration-primary/30 underline-offset-2">{shoreDestinations.find((destination) => destination.id === id)!.label}</a></li>)}</ul>
-            {itinerary ? <>
-              <p className="mt-4 text-sm"><strong>Best for:</strong> {itinerary.bestFor}</p>
-              <p className="mt-3 flex-1 text-sm leading-relaxed text-muted-foreground">{itinerary.planningNote}</p>
-              <div className="mt-5 border-t pt-4"><p className="text-xs text-muted-foreground">Published car-and-driver starting rate</p><PriceDisplay amount={itinerary.price.amount} className="mt-1" /><p className="mt-2 text-xs text-muted-foreground">Per vehicle · up to 4 · transport only</p><p className="mt-2 text-xs leading-relaxed text-muted-foreground">Weekday rate. Guiding, admission, meals and tips excluded; supplements and final quote require confirmation.</p></div>
-              <a href="#request-quote" onClick={() => onSelectItinerary(itinerary.id)} className="btn btn-primary mt-4" aria-label={`Request ${itinerary.destination} from ${port.name}`}>{itineraryId === itinerary.id ? "Selected — request this day trip" : "Request this day trip"}</a>
-            </> : <>
-              <p className="mt-4 flex-1 text-sm leading-relaxed text-muted-foreground">{service.kind === "transfer" ? "A one-way journey, not a day trip returning to the ship. Exact pickup point, route, vehicle and price require confirmation." : "Check the actual ship date, meeting point, guide, group format, inclusions, return arrangements and cancellation terms with this operator."}</p>
-              <p className="mt-5 border-t pt-4 text-sm font-semibold">{service.kind === "transfer" ? "Price on request" : "Check dates & prices on the booking site"}</p>
-              <a href={provider.url} target={external ? "_blank" : undefined} rel={external ? relFor(provider.isAffiliate) : undefined} onClick={external ? () => recordOutboundClick({ pageId: port.pageId, productId: service.productId, offerId: provider.id }) : undefined} className="btn btn-primary mt-4">{provider.ctaLabel}{external && <><span aria-hidden> ↗</span><span className="sr-only"> (opens in a new tab)</span></>}</a>
-            </>}
+        return <li key={service.id} data-testid="shore-service-card" data-service-id={service.id} data-product-id={service.productId} data-operator-id={service.operator?.id} data-booking-platform={service.partner?.id || "direct"} data-service-kind={service.kind} className={`flex min-w-0 flex-col overflow-hidden rounded-2xl border bg-card ${itinerary && itineraryId === itinerary.id ? "border-primary ring-1 ring-primary" : ""}`}>
+          <img src={service.photo.src} alt={service.photo.alt} width={720} height={480} loading="lazy" decoding="async" className="aspect-[16/9] w-full object-cover" />
+          <div className="flex flex-1 flex-col p-4">
+            <div className="flex items-center justify-between gap-2 text-xs font-semibold">
+              <span className="rounded-full bg-secondary px-3 py-1 text-primary">{service.partner?.name || "Moshe Barak · direct quote"}</span>
+              {provider.isAffiliate && <span className="text-muted-foreground">Affiliate link</span>}
+            </div>
+            <h3 className="mt-3 text-xl leading-snug">{service.title}</h3>
+            <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{service.description}</p>
+            <dl className="mt-4 grid grid-cols-2 gap-x-3 gap-y-2 text-sm">
+              <div><dt className="sr-only">Duration</dt><dd className="flex items-start gap-2"><Clock3 className="mt-0.5 h-4 w-4 shrink-0 text-primary" aria-hidden />{service.duration}</dd></div>
+              <div><dt className="sr-only">Tour format</dt><dd className="flex items-start gap-2"><Users className="mt-0.5 h-4 w-4 shrink-0 text-primary" aria-hidden />{service.groupLabel}</dd></div>
+              <div className="col-span-2"><dt className="sr-only">Pickup and return</dt><dd className="flex items-start gap-2"><MapPin className="mt-0.5 h-4 w-4 shrink-0 text-primary" aria-hidden />{port.name} Port{service.kind === "transfer" ? " · one way" : " · pickup & return"}</dd></div>
+              <div className="col-span-2"><dt className="inline font-medium">Includes: </dt><dd className="inline text-muted-foreground">{service.includesLabel}</dd></div>
+            </dl>
+            <ul aria-label="Destinations" className="mt-3 flex flex-wrap gap-x-3 gap-y-1">{service.destinationIds.map((id) => <li key={id}><a href={shoreServiceHref(portId, { ...filters, destination: id })} onClick={(event) => filter(event, { ...filters, destination: id })} className="text-xs text-primary underline underline-offset-2">{shoreDestinations.find((destination) => destination.id === id)!.label}</a></li>)}</ul>
+            <p className="mt-3 text-xs text-muted-foreground">Operated by {service.operator?.name || provider.providerName}</p>
+            <div className="mt-auto pt-4">
+              <div className="border-t pt-4">
+                {itinerary ? <><PriceDisplay amount={itinerary.price.amount} /><p className="mt-2 text-xs text-muted-foreground">Per vehicle · up to 4 · transport only</p></>
+                  : service.listedPrice ? <><p className="text-xs text-muted-foreground">Listed from</p><p className="mt-1 text-2xl font-bold text-primary">US${service.listedPrice.amount.toLocaleString("en-US")}</p><p className="mt-1 text-xs">{service.listedPrice.basis === "per_group" ? `Per group · up to ${service.listedPrice.maxPartySize}` : "Per person"}</p><p className="mt-1 text-xs text-muted-foreground">Price checked <time dateTime={service.listedPrice.checkedAt}>{priceCheckDate(service.listedPrice.checkedAt)}</time></p></>
+                  : <><p className="text-lg font-semibold">{service.kind === "transfer" ? "Price on request" : "See current price"}</p><p className="mt-1 text-xs text-muted-foreground">{service.kind === "transfer" ? "Depends on route, vehicle and luggage" : `Choose date & travelers on ${service.partner?.name || provider.providerName}`}</p></>}
+              </div>
+              {itinerary ? <a href="#request-quote" onClick={() => onSelectItinerary(itinerary.id)} className="btn btn-primary mt-4 w-full" aria-label={`Request ${itinerary.destination} from ${port.name}`}>{itineraryId === itinerary.id ? "Selected — request this day trip" : "Request this day trip"}</a>
+                : <a href={provider.url} target={external ? "_blank" : undefined} rel={external ? relFor(provider.isAffiliate) : undefined} onClick={external ? () => recordOutboundClick({ pageId: port.pageId, productId: service.productId, offerId: provider.id }) : undefined} className="btn btn-primary mt-4 w-full">{provider.ctaLabel}{external && <><span aria-hidden> ↗</span><span className="sr-only"> (opens in a new tab)</span></>}</a>}
+            </div>
           </div>
         </li>;
       })}
     </ul> : <div className="mt-5 rounded-xl border p-6"><h3 className="text-2xl">No services match these tags</h3><p className="mt-2 text-muted-foreground">Choose another service or destination, or clear the filters to see all listed options from {port.name} Port.</p></div>}
+    <p className="mt-5 text-xs leading-relaxed text-muted-foreground">External starting prices are dated reference prices, not live quotes. Your date, party size, options and booking currency can change the total; check current prices, inclusions and cancellation terms on the booking site. Moshe's ILS rates are per vehicle for up to four on weekdays, transport only; guiding, admission, meals and tips are extra. Transfers are one way.</p>
     <p className="mt-5 text-sm text-muted-foreground">Prefer another return itinerary? <a href="#request-quote" onClick={() => onSelectItinerary("other")} className="font-medium text-primary underline">Ask for a custom itinerary</a>.</p>
   </section>;
 }
