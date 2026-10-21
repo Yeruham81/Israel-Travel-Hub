@@ -41,7 +41,6 @@ describe("intent-specific taxi guide cluster", () => {
     const guide = taxiGuideCluster.airportTaxis;
     const rows = guide.comparison.rows;
     expect(rows.some((row) => row[0]?.includes("Immediate taxi · Terminal 3") && row[1]?.includes("Exit 03"))).toBe(true);
-    expect(rows.some((row) => row[0]?.includes("scheduled") && row[1]?.includes("Exit 23"))).toBe(false);
     expect(rows.some((row) => row[0]?.includes("Gett ride scheduled") && row[1]?.includes("Exit 23"))).toBe(true);
     expect(rows.some((row) => row[0]?.includes("Terminal 1") && row[1]?.includes("Main arrivals exit"))).toBe(true);
     expect(guide.sections.find((section) => section.id === "steps")!.paragraphs.join(" ")).toMatch(/does NOT provide priority/);
