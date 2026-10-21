@@ -1,6 +1,6 @@
 import { airportTransferContact } from "@/data/registry";
 
-export type QuoteEmail = { requestId: string; replyTo: string; subject: string; text: string };
+export type QuoteEmail = { requestId: string; replyTo: string; subject: string; text: string; html: string; senderName: string };
 export const brevoFailureCodes = ["BREVO_UNAUTHORIZED", "BREVO_FORBIDDEN", "BREVO_SENDER", "BREVO_RATE_LIMIT", "BREVO_REJECTED", "BREVO_PROVIDER", "BREVO_RESPONSE", "BREVO_TIMEOUT", "BREVO_DNS", "BREVO_TLS", "BREVO_CONNECT", "BREVO_REDIRECT", "BREVO_RUNTIME", "BREVO_NETWORK"] as const;
 export type BrevoFailureCode = typeof brevoFailureCodes[number];
 
@@ -43,9 +43,9 @@ export async function sendBrevoQuote(message: QuoteEmail, apiKey: string): Promi
       method: "POST", signal: controller.signal, redirect: "manual",
       headers: { "api-key": apiKey, accept: "application/json", "content-type": "application/json" },
       body: JSON.stringify({
-        sender: { email: airportTransferContact.email, name: "Israel Travel Hub" },
+        sender: { email: airportTransferContact.email, name: message.senderName },
         to: [{ email: airportTransferContact.email }],
-        replyTo: { email: message.replyTo }, subject: message.subject, textContent: message.text,
+        replyTo: { email: message.replyTo }, subject: message.subject, textContent: message.text, htmlContent: message.html,
       }),
     });
     if (response.status !== 201) {
