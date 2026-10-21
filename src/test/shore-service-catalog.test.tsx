@@ -48,6 +48,7 @@ describe("port service catalog", () => {
   it.each([{ port: "haifa" }, { port: "ashdod" }] as const)("shows all $port services without asking for a search, and filters without changing the request", async ({ port }) => {
     const { router, history, container } = await pageAt(shorePorts[port].path);
     expect(cards()).toHaveLength(catalogSizes[port]);
+    expect(cards().slice(0, catalogSizes[port] - 6).every((card) => ["getyourguide", "viator"].includes(card.dataset["bookingPlatform"]!))).toBe(true);
     expect(screen.queryByRole("search")).not.toBeInTheDocument();
     expect(container.querySelector("a a")).toBeNull();
     fireEvent.change(screen.getByLabelText("Full name *"), { target: { value: "Jamie Cruise" } });

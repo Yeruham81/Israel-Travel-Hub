@@ -167,7 +167,7 @@ export function getShorePort(id: ShorePortId) {
 /** Editorial display details are separate from registry products and booking links. */
 export function getShoreCatalog(portId: ShorePortId, filters: ShoreServiceSearch = {}) {
   const port = getShorePort(portId);
-  return filterShoreServices(portId, filters).map((service) => {
+  return filterShoreServices(portId, filters).sort((a, b) => Number(Boolean(b.partner)) - Number(Boolean(a.partner))).map((service) => {
     const itinerary = port.itineraries.find((item) => item.id === service.itineraryId);
     const airport = service.destinationIds.includes("airport");
     const destinationPhoto = service.destinationIds.includes("masada") ? masadaPhoto
