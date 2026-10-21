@@ -1,4 +1,6 @@
-# Hostinger SMTP delivery · 21 October 2026
+# Retired Hostinger SMTP setup
+
+**Superseded on 21 October 2026:** all forms now use the server-only Brevo transactional REST API. Follow [BREVO_SETUP.md](./BREVO_SETUP.md), not the historical instructions below. SMTP_PASSWORD and Nodemailer are no longer used. Earlier SMTP test/build results below are historical, not verification of Brevo delivery.
 
 ## What is implemented
 

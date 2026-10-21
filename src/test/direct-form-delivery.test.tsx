@@ -7,7 +7,7 @@ import { routeTree } from "@/routeTree.gen";
 import { createQuoteDeliveryService } from "@/lib/quote-delivery.server";
 
 const fields = { name: "Jamie & Alex", email: "jamie+trip@example.com", subject: "Airport & tour #2", message: "שלום Moshe\n".padEnd(4000, "x"), consent: true };
-const enabled = () => ({ SMTP_PASSWORD: "test-only-password", QUOTE_DELIVERY_ENABLED: "true" });
+const enabled = () => ({ BREVO_API_KEY: "test-only-key", QUOTE_DELIVERY_ENABLED: "true" });
 const now = () => Date.parse("2026-10-21T12:00:00Z");
 
 afterEach(() => { cleanup(); vi.unstubAllGlobals(); vi.restoreAllMocks(); window.history.replaceState(null, "", "/"); document.title = ""; localStorage.clear(); });
@@ -64,7 +64,7 @@ describe("one-step direct form delivery", () => {
     expect(localStorage.length).toBe(0);
   });
 
-  it("locks fields and rejects double submissions while waiting for SMTP acceptance", async () => {
+  it("locks fields and rejects double submissions while waiting for Brevo acceptance", async () => {
     let finish!: () => void;
     const send = vi.fn(() => new Promise<void>((resolve) => { finish = resolve; }));
     const fetch = connectServer(createQuoteDeliveryService({ environment: enabled, send, now }));
@@ -82,7 +82,7 @@ describe("one-step direct form delivery", () => {
     expect(send).toHaveBeenCalledOnce();
   });
 
-  it("shows an error and preserves the original fields when runtime SMTP is not enabled", async () => {
+  it("shows an error and preserves the original fields when runtime Brevo is not enabled", async () => {
     const send = vi.fn();
     const fetch = connectServer(createQuoteDeliveryService({ environment: () => ({}), send, now }));
     await contactForm(); fill();
@@ -115,7 +115,7 @@ describe("one-step direct form delivery", () => {
     expect(JSON.parse(fetch.mock.calls[2]![1].body).requestId).not.toBe(first.requestId);
   });
 
-  it("does not show success for an HTTP 200 without matching SMTP acceptance", async () => {
+  it("does not show success for an HTTP 200 without matching Brevo acceptance", async () => {
     const fetch = vi.fn().mockResolvedValue(Response.json({ accepted: true, requestId: "unrelated-reference" }));
     vi.stubGlobal("fetch", fetch);
     await contactForm(); fill();
@@ -127,12 +127,12 @@ describe("one-step direct form delivery", () => {
 
   it.each([
     [403, null, "HTTP_403"], [404, null, "HTTP_404"],
-    [502, { deliveryCode: "SMTP_AUTH" }, "SMTP_AUTH"],
-    [502, { deliveryCode: "SMTP_DNS" }, "SMTP_DNS"],
-    [502, { deliveryCode: "SMTP_RUNTIME" }, "SMTP_RUNTIME"],
+    [502, { deliveryCode: "BREVO_UNAUTHORIZED" }, "BREVO_UNAUTHORIZED"],
+    [502, { deliveryCode: "BREVO_NETWORK" }, "BREVO_NETWORK"],
+    [502, { deliveryCode: "BREVO_PROVIDER" }, "BREVO_PROVIDER"],
     [502, { deliveryCode: "password=must-not-display" }, "HTTP_ERROR"],
     [500, null, "HTTP_ERROR"],
-  ])("distinguishes HTTP %s / %s errors from SMTP failures without displaying arbitrary server details", async (status, body, code) => {
+  ])("distinguishes HTTP %s / %s errors from Brevo failures without displaying arbitrary server details", async (status, body, code) => {
     vi.stubGlobal("fetch", vi.fn().mockImplementation(async () => body ? Response.json(body, { status }) : new Response("<html>Private server diagnostic</html>", { status, headers: { "Content-Type": "text/html" } })));
     await contactForm(); fill();
     fireEvent.click(screen.getByRole("button", { name: "Send message" }));

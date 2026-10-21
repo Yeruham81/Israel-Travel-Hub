@@ -19,3 +19,4 @@
 - Global navigation lives in `src/data/nav.ts` and renders in `__root.tsx` (desktop rail + mobile drawer); pages render only their own content — so every page shares one nav.
 - Non-transfer referrals are `ProviderLink` records with a `BookingMode`; live prices require `isDisplayableLiveQuote` in `src/lib/booking.ts` — so no unverified price can render.
 - Editorial guide content (city stay guides) lives in `src/data/content.ts`; leaf pages use shared components in `src/components/Guide.tsx`, with information sections before provider sections.
+- All contact and quote forms share the gated quote-delivery service and server-only Brevo REST transport; fixed recipients and sanitized diagnostics prevent client-controlled routing or credential leaks.
