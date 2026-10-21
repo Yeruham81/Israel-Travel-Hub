@@ -38,7 +38,7 @@ export function validateShoreQuote(v: ShoreQuoteFields, portId: ShorePortId, now
   return errors;
 }
 
-/** A local draft only: the application neither transmits nor stores the inquiry. */
+/** Shared formatter for validated shore-excursion details in server-generated email. */
 export function buildShoreQuoteDraft(v: ShoreQuoteFields, portId: ShorePortId) {
   const port = shorePorts[portId];
   const itinerary = shoreExcursionRates.find((rate) => rate.id === v.itineraryId && rate.portId === portId)?.destination || v.otherItinerary.trim();

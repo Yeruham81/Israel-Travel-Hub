@@ -16,7 +16,7 @@ const sections: LegalSection[] = [
   </> },
   { id: "enquiries-confirmation", title: "Enquiries and booking confirmation", content: <>
     <p>An adult with authority to make the arrangements should submit an enquiry or book for a group. Please supply accurate contact, pickup, destination, date, passenger and luggage details, and tell me about material changes.</p>
-    <p>The current forms prepare an email draft; you must send that draft through your email app. When direct form delivery is introduced, pressing Send or Submit will transmit the request as explained on the form. Neither a prepared draft, a submitted enquiry nor an automatic receipt acknowledgement is by itself a confirmed booking.</p>
+    <p>Pressing a form's Send button submits your details directly through the website for email delivery. Wait for the on-page confirmation; if sending is unavailable or cannot be confirmed, the form displays an error. Neither a submitted enquiry nor an automatic receipt acknowledgement is by itself a confirmed booking.</p>
     <p>Before accepting a direct-service booking, agree the supplier and contact details, itinerary, vehicle requirements, price, inclusions, payment arrangements and relevant cancellation terms in writing. Availability is subject to confirmation. Keep the confirmation and ask me to correct any discrepancy before travel.</p>
   </> },
   { id: "prices-payments", title: "Prices, currency and payment", content: <>

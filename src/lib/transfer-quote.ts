@@ -40,7 +40,7 @@ export function validateTransferQuote(v: TransferQuoteFields, now = new Date()) 
   return errors;
 }
 
-/** Local draft only. No request is transmitted or stored by the application. */
+/** Shared formatter for validated transfer details in server-generated email. */
 export function buildTransferQuoteDraft(v: TransferQuoteFields) {
   const destination = airportTransferRates.find((r) => r.id === v.destinationId)?.destination || v.otherDestination.trim();
   const singleLine = (value: string) => value.trim().replace(/[\r\n]+/g, " ");

@@ -84,41 +84,37 @@ describe("private Ben Gurion transfers", () => {
     expect(screen.getByLabelText("Destination *")).toHaveValue("other");
   });
 
-  it("validates required fields, then prepares an honest email draft without sending or storing the lead", async () => {
+  it("validates required fields, then sends all journey details directly without browser storage", async () => {
     const { container } = await renderAirport();
-    fireEvent.click(screen.getByRole("button", { name: "Prepare my quote request" }));
+    fireEvent.click(screen.getByRole("button", { name: "Send quote request" }));
     expect(screen.getByRole("alert")).toHaveTextContent("Enter your full name");
     expect(screen.queryByRole("link", { name: "Open email to Moshe" })).not.toBeInTheDocument();
     chooseDestination("jerusalem");
     fillRequest();
-    const fetchSpy = vi.spyOn(globalThis, "fetch");
-    fireEvent.click(screen.getByRole("button", { name: "Prepare my quote request" }));
-    expect(screen.getByRole("status")).toHaveTextContent("Your request has not been sent yet");
-    const draftUrl = screen.getByRole("link", { name: "Open email to Moshe" }).getAttribute("href")!;
-    const draft = new URL(draftUrl);
-    expect(draft.protocol).toBe("mailto:");
-    expect(draft.pathname).toBe("reservations@israel-taxi.com");
-    expect(draft.searchParams.get("subject")).toContain("Ben Gurion to Jerusalem");
-    expect(draft.searchParams.get("body")).toContain("jamie+trip@example.com");
-    expect(draft.searchParams.get("body")).toContain("2099-11-01 at 23:45 (Israel local time)");
-    expect(draft.searchParams.get("body")).toContain("Flight number: LY123");
-    expect(draft.searchParams.get("body")).toContain("Example Hotel, Jerusalem");
-    expect(fetchSpy).toHaveBeenCalledWith("/api/quote-request/", expect.objectContaining({ method: "GET" }));
-    expect(fetchSpy.mock.calls.every(([, options]) => options?.method === "GET" && options.body === undefined)).toBe(true);
+    const fetchSpy = vi.spyOn(globalThis, "fetch").mockImplementation(async (_url, options) => Response.json({ accepted: true, requestId: JSON.parse(String(options?.body)).requestId }));
+    fireEvent.click(screen.getByRole("button", { name: "Send quote request" }));
+    expect(await screen.findByText("Your request has been sent to Moshe")).toBeInTheDocument();
+    expect(fetchSpy).toHaveBeenCalledOnce();
+    expect(fetchSpy).toHaveBeenCalledWith("/api/quote-request/", expect.objectContaining({ method: "POST" }));
+    expect(JSON.parse(String(fetchSpy.mock.calls[0]![1]?.body))).toMatchObject({ sourceTitle: "Airport transfers", request: { kind: "transfer", fields: { destinationId: "jerusalem", email: "jamie+trip@example.com", date: "2099-11-01", time: "23:45", flight: "LY123", address: "Example Hotel, Jerusalem", consent: true } } });
     expect(localStorage.length).toBe(0);
     fireEvent.change(screen.getByLabelText("Full name *"), { target: { value: "Another name" } });
     expect(screen.queryByRole("link", { name: "Open email to Moshe" })).not.toBeInTheDocument();
   });
 
-  it("keeps privacy information on this site and a copy fallback for email clients", async () => {
+  it("keeps the details and shows an honest error if direct sending is unavailable", async () => {
     const { container } = await renderAirport();
     expect(screen.getByRole("link", { name: "Privacy Policy" })).toHaveAttribute("href", "/privacy-policy/");
     expect(screen.queryByText(/Prefer an online form|existing .*contact form/)).not.toBeInTheDocument();
     chooseDestination("tel-aviv");
-    fillRequest(); fireEvent.click(screen.getByRole("button", { name: "Prepare my quote request" }));
-    fireEvent.click(screen.getByRole("button", { name: "Copy request" }));
-    expect(await screen.findByText(/Select and copy the request text/)).toBeInTheDocument();
-    expect((screen.getByLabelText("Prepared quote request") as HTMLTextAreaElement).value).toContain("Ben Gurion to Tel Aviv");
+    const fetchSpy = vi.spyOn(globalThis, "fetch").mockResolvedValue(Response.json({ error: "Unavailable" }, { status: 503 }));
+    fillRequest(); fireEvent.click(screen.getByRole("button", { name: "Send quote request" }));
+    expect(await screen.findByRole("alert")).toHaveTextContent("Message sending is temporarily unavailable");
+    expect(screen.getByLabelText("Full name *")).toHaveValue("Jamie Smith");
+    expect(screen.queryByText("Your request has been sent to Moshe")).not.toBeInTheDocument();
+    expect(screen.queryByRole("button", { name: /Copy|Prepare/ })).not.toBeInTheDocument();
+    expect(screen.queryByRole("link", { name: /Open email/ })).not.toBeInTheDocument();
+    expect(fetchSpy).toHaveBeenCalledOnce();
   });
 
   it("shows four branded platform banners without invented affiliate attribution or transferring personal details", async () => {

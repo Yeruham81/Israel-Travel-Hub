@@ -42,7 +42,7 @@ export function validateDriverQuote(v: DriverQuoteFields, now = new Date()) {
   return errors;
 }
 
-/** Prepared locally: the visitor reviews and sends it using their email app. */
+/** Shared formatter for validated driver details in server-generated email. */
 export function buildDriverQuoteDraft(v: DriverQuoteFields) {
   const line = (value: string) => value.trim().replace(/[\r\n]+/g, " ");
   const service = privateDriverServices.find((item) => item.id === v.serviceId)!.label;

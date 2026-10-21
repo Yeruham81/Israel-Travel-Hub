@@ -262,7 +262,7 @@ export const airportTransferRates: AirportTransferRate[] = ([
 
 export const airportTransferContact = {
   name: "Moshe Barak", email: "reservations@israel-taxi.com",
-  deliveryMode: "email_draft" as const,
+  deliveryMode: "server_email" as const,
 };
 
 export const PRIVATE_DRIVER_CHECK_DATE: ISODate = "2026-10-17";
@@ -274,7 +274,7 @@ export const privateDriverServices = [
 export type PrivateDriverServiceId = typeof privateDriverServices[number]["id"];
 export const privateDriverContact = {
   name: airportTransferContact.name, email: airportTransferContact.email,
-  deliveryMode: "email_draft" as const,
+  deliveryMode: "server_email" as const,
 };
 
 export const shorePorts = {
@@ -309,7 +309,7 @@ export const shoreExcursionRates: ShoreExcursionRate[] = ([
 
 export const shoreExcursionContact = {
   name: airportTransferContact.name, email: airportTransferContact.email,
-  deliveryMode: "email_draft" as const,
+  deliveryMode: "server_email" as const,
 };
 
 /** Only these four airport destinations have individual transfer guides. */

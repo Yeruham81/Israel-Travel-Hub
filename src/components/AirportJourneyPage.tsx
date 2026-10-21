@@ -51,7 +51,7 @@ function PrivateRideCta({ id, variant = "mid" }: { id: AirportJourneyId; variant
       <p className={"text-xs font-bold uppercase tracking-widest " + (variant === "bottom" ? "opacity-80" : "text-primary")}>When door-to-door travel matters</p>
       <h2 className="mt-2 text-2xl sm:text-3xl">Would a private ride to {guide.city} be easier?</h2>
       <p className="mt-3 leading-relaxed">Traveling with children or several suitcases, arriving when trains stop, or simply want a vehicle arranged for your group? Moshe Barak can review your flight and destination and confirm a personal quote.</p>
-      <p className="mt-3 text-sm opacity-85">The private-transfer page lists its own weekday starting price and conditions. Preparing an email draft does not send a request or confirm a booking.</p>
+      <p className="mt-3 text-sm opacity-85">The private-transfer page lists its own weekday starting price and conditions. Send a quote request directly from the form. A request does not confirm a booking.</p>
       <Link to={guide.privatePath} hash="request-quote" className={"mt-5 inline-flex rounded-lg px-5 py-3 font-semibold " + (variant === "bottom" ? "bg-white text-slate-900" : "bg-primary text-primary-foreground")}>{guide.privateLabel} →</Link>
       <p className="mt-3 text-xs opacity-75">Moshe operates the publisher's own private transport service; this guide also explains cheaper public options.</p>
     </aside>
@@ -71,7 +71,7 @@ function OptionSection({ option, guideId }: { option: JourneyOption; guideId: Ai
           {option.checklist.map((item) => <li key={item}>{item}</li>)}
         </ul>
       </div>
-      {option.id === "private" && <p className="mt-4"><Link to={airportJourneyGuides[guideId].privatePath} hash="request-quote" className="font-semibold text-primary underline underline-offset-4">See private-transfer starting rate and prepare a quote request →</Link></p>}
+      {option.id === "private" && <p className="mt-4"><Link to={airportJourneyGuides[guideId].privatePath} hash="request-quote" className="font-semibold text-primary underline underline-offset-4">See private-transfer starting rate and send a quote request →</Link></p>}
     </section>
   );
 }

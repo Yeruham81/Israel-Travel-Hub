@@ -1,7 +1,7 @@
 import { QueryClient } from "@tanstack/react-query";
 import { createMemoryHistory, createRouter, RouterContextProvider } from "@tanstack/react-router";
 import { cleanup, fireEvent, render, screen, waitFor, within } from "@testing-library/react";
-import { afterEach, describe, expect, it } from "vitest";
+import { afterEach, describe, expect, it, vi } from "vitest";
 import { GlobalNav, SiteHeader } from "@/components/Layout";
 import { getShorePort } from "@/data/shoreExcursions";
 import { getSource, publicSources, SHORE_EXCURSION_CHECK_DATE, shoreExcursionRates, shorePorts } from "@/data/registry";
@@ -10,7 +10,7 @@ import { routeTree } from "@/routeTree.gen";
 import { Route as AshdodRoute } from "@/routes/ashdod-shore-excursions";
 import { Route as HaifaRoute } from "@/routes/haifa-shore-excursions";
 
-afterEach(() => { cleanup(); localStorage.clear(); });
+afterEach(() => { cleanup(); localStorage.clear(); vi.restoreAllMocks(); });
 const cases = [{ id: "ashdod", route: AshdodRoute }, { id: "haifa", route: HaifaRoute }] as const;
 async function routerAt(path = "/shore-excursions/") {
   const router = createRouter({ routeTree, context: { queryClient: new QueryClient() }, history: createMemoryHistory({ initialEntries: [path] }), trailingSlash: "always" });
@@ -99,7 +99,7 @@ describe("shore excursions", () => {
     expect(schemas.some((schema) => schema?.["@type"] === "FAQPage")).toBe(false);
   });
 
-  it.each(cases)("selects a $id card in the form, prepares an unsent request and invalidates edited drafts", async ({ id, route }) => {
+  it.each(cases)("selects a $id card and sends all ship and itinerary details directly", async ({ id, route }) => {
     const port = getShorePort(id);
     const router = await routerAt(port.path);
     const Page = route.options.component!;
@@ -107,7 +107,7 @@ describe("shore excursions", () => {
     const itinerary = port.itineraries[0]!;
     fireEvent.click(screen.getByRole("link", { name: `Request ${itinerary.destination} from ${port.name}` }));
     expect(screen.getByLabelText("Requested itinerary *")).toHaveValue(itinerary.id);
-    fireEvent.click(screen.getByRole("button", { name: "Prepare my excursion request" }));
+    fireEvent.click(screen.getByRole("button", { name: "Send excursion request" }));
     expect(screen.getByRole("alert")).toHaveTextContent("Enter your cruise ship's name");
     fireEvent.change(screen.getByLabelText("Full name *"), { target: { value: "Jamie & family" } });
     fireEvent.change(screen.getByLabelText("Email address *"), { target: { value: "jamie+cruise@example.com" } });
@@ -119,17 +119,16 @@ describe("shore excursions", () => {
     fireEvent.change(screen.getByLabelText("Passengers, including children *"), { target: { value: "6" } });
     expect(screen.getByText(/Your party needs a separate group quote/)).toBeInTheDocument();
     fireEvent.click(screen.getByRole("checkbox"));
-    fireEvent.click(screen.getByRole("button", { name: "Prepare my excursion request" }));
+    const fetchSpy = vi.spyOn(globalThis, "fetch").mockImplementation(async (_url, options) => Response.json({ accepted: true, requestId: JSON.parse(String(options?.body)).requestId }));
+    fireEvent.click(screen.getByRole("button", { name: "Send excursion request" }));
     expect(screen.queryByRole("alert")).not.toBeInTheDocument();
-    expect(screen.getByRole("status")).toHaveTextContent("Your request has not been sent yet");
-    const emailUrl = new URL(screen.getByRole("link", { name: "Open email to Moshe" }).getAttribute("href")!);
-    expect(emailUrl.protocol).toBe("mailto:");
-    expect(emailUrl.searchParams.get("subject")).toContain(`${port.name} shore excursion quote: ${itinerary.destination}`);
-    expect(emailUrl.searchParams.get("body")).toMatch(/Example Voyager.*2099-11-01.*08:00.*18:00.*Passengers \(including children\): 6/s);
-    expect(emailUrl.searchParams.get("body")).toContain("larger group");
+    expect(await screen.findByText("Your request has been sent to Moshe")).toBeInTheDocument();
+    expect(fetchSpy).toHaveBeenCalledOnce();
+    expect(fetchSpy).toHaveBeenCalledWith("/api/quote-request/", expect.objectContaining({ method: "POST" }));
+    expect(JSON.parse(String(fetchSpy.mock.calls[0]![1]?.body))).toMatchObject({ sourceTitle: port.title, request: { kind: "shore", portId: id, fields: { ship: "Example Voyager", date: "2099-11-01", pickupTime: "08:00", allAboardDate: "2099-11-01", allAboardTime: "18:00", passengers: "6", itineraryId: itinerary.id, consent: true } } });
     expect(localStorage.length).toBe(0);
     fireEvent.click(screen.getByRole("link", { name: `Request ${port.itineraries[1]!.destination} from ${port.name}` }));
-    expect(screen.queryByRole("link", { name: "Open email to Moshe" })).not.toBeInTheDocument();
+    expect(screen.getByRole("button", { name: "Send excursion request" })).toBeEnabled();
     fireEvent.click(screen.getByRole("link", { name: "Ask for a custom itinerary" }));
     expect(screen.getByLabelText("Requested itinerary *")).toHaveValue("other");
     expect(screen.getByLabelText("Your itinerary or destinations *")).toBeRequired();

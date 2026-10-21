@@ -134,7 +134,7 @@ export function ProviderCard({ link: l, pageId }: { link: ProviderLink; pageId: 
       <p className="mt-3 text-sm"><span className="font-medium">Confirm on the offer:</span> {l.confirm.join(", ")}.</p>
       <div className="mt-4 flex flex-wrap items-center gap-3">
         <ProviderAction link={l} pageId={pageId} className="btn btn-primary">{l.ctaLabel}</ProviderAction>
-        <p className="text-xs text-muted-foreground">{l.url.startsWith("/") ? "Review the service and prepare a quote request." : modeNote[l.mode]}{l.reentryNote ? ` ${l.reentryNote}` : ""}</p>
+        <p className="text-xs text-muted-foreground">{l.url.startsWith("/") ? "Review the service and send a quote request." : modeNote[l.mode]}{l.reentryNote ? ` ${l.reentryNote}` : ""}</p>
       </div>
     </li>
   );

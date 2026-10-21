@@ -37,7 +37,7 @@ describe("replacement-site navigation", () => {
       expect(text, path).not.toMatch(/israel-taxi\.com|Prefer an online form|existing .*contact form|original online form|original operator page/i);
       const head = await route.options.head?.({} as never);
       expect(JSON.stringify(head), `${path}: metadata`).not.toMatch(/israel-taxi\.com/i);
-      if (path === "/about-moshe-barak/") expect(doc.querySelector("#privacy")?.textContent).toContain("the form doesn't transmit your message");
+      if (path === "/about-moshe-barak/") expect(doc.querySelector("#privacy")?.textContent).toContain("email your enquiry directly to me");
       for (const link of doc.querySelectorAll('a[href="/privacy-policy/"]')) {
         expect(link.hasAttribute("target"), path).toBe(false);
       }

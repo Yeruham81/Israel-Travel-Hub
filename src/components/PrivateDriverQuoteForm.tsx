@@ -1,29 +1,30 @@
-import { QuoteRequestPreview } from "@/components/QuoteRequestPreview";
+import { QuoteSubmissionControls } from "@/components/QuoteSubmissionControls";
+import { useQuoteSubmission } from "@/hooks/useQuoteSubmission";
 import { PrivacyInformationLink } from "@/components/PrivacyInformationLink";
-import { useRef, useState, type FormEvent } from "react";
+import { useEffect, useRef, useState, type FormEvent } from "react";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { privateDriverServices } from "@/data/registry";
 import { airportTransferPhotos } from "@/data/airportTransfers";
-import { buildDriverQuoteDraft, driverGuideOptions, emptyDriverQuote, validateDriverQuote, type DriverQuoteFields } from "@/lib/private-driver-quote";
+import { driverGuideOptions, emptyDriverQuote, validateDriverQuote, type DriverQuoteFields } from "@/lib/private-driver-quote";
 
 export function PrivateDriverQuoteForm({ serviceId, onServiceChange }: { serviceId: string; onServiceChange: (id: string) => void }) {
   const [fields, setFields] = useState(emptyDriverQuote);
   const [errors, setErrors] = useState<string[]>([]);
-  const [prepared, setPrepared] = useState<{ serviceId: string; values: DriverQuoteFields; draft: ReturnType<typeof buildDriverQuoteDraft> } | null>(null);
-  const [isSending, setIsSending] = useState(false);
+  const submission = useQuoteSubmission();
+  const { reset } = submission;
+  useEffect(() => reset(), [serviceId, reset]);
   const errorRef = useRef<HTMLDivElement>(null);
-  const draft = prepared?.serviceId === serviceId ? prepared.draft : null;
   function update<K extends keyof DriverQuoteFields>(key: K, value: DriverQuoteFields[K]) {
-    setFields((previous) => ({ ...previous, [key]: value })); setPrepared(null);
+    setFields((previous) => ({ ...previous, [key]: value })); submission.reset();
   }
-  function prepare(event: FormEvent<HTMLFormElement>) {
+  async function send(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     const values = { ...fields, serviceId };
     const nextErrors = validateDriverQuote(values);
     setErrors(nextErrors);
-    if (nextErrors.length) { setPrepared(null); requestAnimationFrame(() => errorRef.current?.focus()); return; }
-    setPrepared({ serviceId, values, draft: buildDriverQuoteDraft(values) });
+    if (nextErrors.length) { submission.reset(); requestAnimationFrame(() => errorRef.current?.focus()); return; }
+    await submission.submit({ kind: "driver", fields: values });
   }
   const photo = airportTransferPhotos["moshe"]!;
   const fieldClass = "mt-2 h-11 bg-background text-base";
@@ -39,14 +40,14 @@ export function PrivateDriverQuoteForm({ serviceId, onServiceChange }: { service
         <p className="mt-6 border-t border-white/20 pt-5 text-xs leading-relaxed opacity-75">Disclosure: Moshe Barak operates the publisher's local transport business. Requests here are for this service.</p>
       </div>
       <div className="p-5 sm:p-8">
-        <form onSubmit={prepare} noValidate aria-label="Private driver quote request">
-          <fieldset disabled={isSending} className="min-w-0">
+        <form onSubmit={send} noValidate aria-label="Private driver quote request" aria-busy={submission.isSending}>
+          <fieldset disabled={submission.isSending} className="min-w-0">
             {errors.length > 0 && <div ref={errorRef} tabIndex={-1} role="alert" className="mb-5 rounded-xl border border-destructive p-4 text-sm text-destructive"><p className="font-semibold">Please check these details:</p><ul className="mt-2 list-disc pl-5">{errors.map((error) => <li key={error}>{error}</li>)}</ul></div>}
             <div className="grid gap-5 sm:grid-cols-2">
               <label className="text-sm font-medium">Full name *<Input name="name" autoComplete="name" required maxLength={120} value={fields.name} onChange={(e) => update("name", e.target.value)} className={fieldClass} /></label>
               <label className="text-sm font-medium">Email address *<Input name="email" type="email" autoComplete="email" required maxLength={254} value={fields.email} onChange={(e) => update("email", e.target.value)} className={fieldClass} /></label>
               <label className="text-sm font-medium">Phone / WhatsApp<Input name="phone" type="tel" autoComplete="tel" maxLength={50} placeholder="Include country code" value={fields.phone} onChange={(e) => update("phone", e.target.value)} className={fieldClass} /></label>
-              <label className="text-sm font-medium">Type of journey *<select name="service" required value={serviceId} onChange={(e) => { onServiceChange(e.target.value); setPrepared(null); }} className={selectClass}><option value="">Choose your journey</option>{privateDriverServices.map((service) => <option key={service.id} value={service.id}>{service.label}</option>)}</select></label>
+              <label className="text-sm font-medium">Type of journey *<select name="service" required value={serviceId} onChange={(e) => { onServiceChange(e.target.value); submission.reset(); }} className={selectClass}><option value="">Choose your journey</option>{privateDriverServices.map((service) => <option key={service.id} value={service.id}>{service.label}</option>)}</select></label>
               <label className="text-sm font-medium">Pickup date *<Input name="date" type="date" required value={fields.date} onChange={(e) => update("date", e.target.value)} className={fieldClass} /></label>
               <label className="text-sm font-medium">Preferred pickup time<Input name="time" type="time" value={fields.time} onChange={(e) => update("time", e.target.value)} className={fieldClass} /></label>
               <p className="-mt-3 text-xs text-muted-foreground sm:col-span-2">Use Israel local date and time. Leave the time open if it still needs to be agreed.</p>
@@ -59,11 +60,10 @@ export function PrivateDriverQuoteForm({ serviceId, onServiceChange }: { service
               <label className="text-sm font-medium sm:col-span-2">Child seats or additional requests<Textarea name="notes" maxLength={1500} rows={3} placeholder="Children's ages, mobility needs, desired hours or a return journey" value={fields.notes} onChange={(e) => update("notes", e.target.value)} className="mt-2 bg-background text-base" /></label>
             </div>
             <label className="mt-5 flex items-start gap-3 text-sm leading-relaxed"><input name="consent" type="checkbox" required checked={fields.consent} onChange={(e) => update("consent", e.target.checked)} className="mt-1 h-4 w-4 shrink-0 accent-primary" /><span>I agree to share these details with Moshe Barak for this quote request. <PrivacyInformationLink /></span></label>
-            <button type="submit" className="btn btn-primary mt-6 w-full sm:w-auto">Prepare my quote request</button>
-            <p className="mt-3 text-xs leading-relaxed text-muted-foreground">Review your details before sending your request. The itinerary, vehicle, price and booking require confirmation.</p>
+            <QuoteSubmissionControls submission={submission} label="Send quote request" />
+            <p className="mt-3 text-xs leading-relaxed text-muted-foreground">Send your details directly to Moshe. The itinerary, vehicle, price and booking require confirmation.</p>
           </fieldset>
         </form>
-        {draft && <QuoteRequestPreview key={draft.url} draft={draft} request={{ kind: "driver", fields: prepared!.values }} previewLabel="Prepared driver request" onBusy={setIsSending} />}
       </div>
     </div>
   </section>;

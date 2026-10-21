@@ -51,7 +51,7 @@ export function AirportRoutePage({ id }: { id: AirportTransferRouteId }) {
   const faqs = [
     ...guide.faqs,
     { q: "Is the starting price for the whole vehicle?", a: `The published starting rate of ILS ${price.amount.toLocaleString("en-US")} is a one-way weekday price per vehicle for up to four passengers. Night, weekend and holiday supplements may apply. The vehicle must fit your luggage; larger groups and special requirements need a separate quote. Moshe confirms the final total and availability.` },
-    { q: "How do I send the request and confirm the booking?", a: "Complete the form, prepare the request and send it through your email app. Preparing a draft does not send a message. Ask Moshe to confirm your quote and booking in writing before relying on the pickup." },
+    { q: "How do I send the request and confirm the booking?", a: "Complete the form and press Send quote request to email your details directly to Moshe. Wait for the on-page confirmation. Ask Moshe to confirm your quote and booking in writing before relying on the pickup." },
   ];
   return (
     <main className="mx-auto max-w-5xl px-4 pb-24 lg:pb-8">

@@ -5,6 +5,7 @@ import { buildShoreQuoteDraft, validateShoreQuote } from "@/lib/shore-quote";
 import { quoteRequestSchema } from "@/lib/quote-request-schema.server";
 import { quoteRequestBody, type QuoteRequestPayload } from "@/lib/quote-request";
 import type { QuoteEmail } from "@/lib/hostinger-smtp.server";
+import { buildContactMessage, validateContactMessage } from "@/lib/contact-message";
 
 type MailEnvironment = { SMTP_PASSWORD?: string; QUOTE_DELIVERY_ENABLED?: string };
 type Result = { status: number; body: { accepted?: boolean; requestId?: string; error?: string } };
@@ -51,6 +52,9 @@ export function quoteEmail(payload: QuoteRequestPayload, now: Date): QuoteEmail 
     case "driver":
       if (validateDriverQuote(request.fields, now).length) return null;
       draft = buildDriverQuoteDraft(request.fields); break;
+    case "contact":
+      if (validateContactMessage(request.fields).length) return null;
+      draft = buildContactMessage(request.fields); break;
     case "shore":
       if (validateShoreQuote(request.fields, request.portId, now).length) return null;
       draft = buildShoreQuoteDraft(request.fields, request.portId); break;
@@ -81,7 +85,7 @@ export function createQuoteDeliveryService({
     const origin = request.headers.get("origin");
     if (!origin || origin !== new URL(request.url).origin || request.headers.get("sec-fetch-site") === "cross-site") return response({ error: "Invalid request origin" }, 403);
     if (request.headers.get("content-type")?.split(";")[0]?.trim() !== "application/json") return response({ error: "Expected JSON" }, 415);
-    if (!configured()) return response({ error: "Direct delivery is unavailable. Please use the email option." }, 503);
+    if (!configured()) return response({ error: "Message sending is temporarily unavailable. Please try again later." }, 503);
     const timestamp = now();
     for (const [key, value] of recent) if (value.expires <= timestamp) recent.delete(key);
     for (const [key, value] of limits) if (value.expires <= timestamp) limits.delete(key);
@@ -97,7 +101,7 @@ export function createQuoteDeliveryService({
     const fingerprint = hash(JSON.stringify({ request: payload.request, sourcePath: payload.sourcePath, sourceTitle: payload.sourceTitle }));
     const previous = recent.get(payload.requestId);
     if (previous) {
-      if (previous.fingerprint !== fingerprint) return response({ error: "Please prepare a new request after editing." }, 409);
+      if (previous.fingerprint !== fingerprint) return response({ error: "Edited details need a new request reference." }, 409);
       const result = await previous.result;
       return response(result.body, result.status);
     }
@@ -119,7 +123,7 @@ export function createQuoteDeliveryService({
         return { status: 200, body: { accepted: true, requestId: payload.requestId } };
       } catch {
         // A timeout after SMTP DATA can be ambiguous. Do not retry it automatically.
-        return { status: 502, body: { error: "We could not confirm email delivery. Please use the email option if needed." } };
+        return { status: 502, body: { error: "We could not confirm email delivery. Please check with Moshe before sending the same message again." } };
       } finally { inFlight--; }
     });
     recent.set(payload.requestId, { fingerprint, expires: timestamp + windowMs, result });

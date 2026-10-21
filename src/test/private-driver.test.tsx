@@ -47,35 +47,32 @@ describe("private driver page and inquiry", () => {
     fireEvent.change(screen.getByLabelText("Full name *"), { target: { value: "Jamie" } });
     for (const [index, id] of ["intercity", "day-hire", "multi-stop"].entries()) { choose(index); expect(screen.getByLabelText("Type of journey *")).toHaveValue(id); expect(screen.getByLabelText("Full name *")).toHaveValue("Jamie"); }
     expect(screen.getByLabelText("Stops / itinerary *")).toBeRequired();
-    fireEvent.click(screen.getByRole("button", { name: "Prepare my quote request" }));
+    fireEvent.click(screen.getByRole("button", { name: "Send quote request" }));
     expect(screen.getByRole("alert")).toHaveTextContent("Describe the stops or priorities");
     choose(0);
     expect(screen.getByLabelText("Stops / itinerary")).not.toBeRequired();
   });
 
-  it("prepares an unsent route-specific email, supports copy fallback, stores no lead and invalidates edited drafts", async () => {
+  it("sends the route-specific details in one action and allows a new request after editing", async () => {
     await renderDriver(); choose(2); fill();
     fireEvent.change(screen.getByLabelText("Stops / itinerary *"), { target: { value: "Caesarea & lunch\nThen Jerusalem" } });
     fireEvent.change(screen.getByLabelText("Driver or licensed guide?"), { target: { value: "licensed-guide" } });
-    const fetchSpy = vi.spyOn(globalThis, "fetch");
-    fireEvent.click(screen.getByRole("button", { name: "Prepare my quote request" }));
-    expect(screen.getByRole("status")).toHaveTextContent("Your request has not been sent yet");
-    const url = new URL(screen.getByRole("link", { name: "Open email to Moshe" }).getAttribute("href")!);
-    expect(url.protocol).toBe("mailto:"); expect(url.pathname).toBe(privateDriverContact.email);
-    expect(url.searchParams.get("subject")).toContain("Multi-stop journey on 2099-11-01");
-    const body = url.searchParams.get("body")!;
-    for (const value of ["jamie+trip@example.com", "Hotel A, Tel Aviv", "Hotel B, Jerusalem", "Caesarea & lunch\nThen Jerusalem", "Please quote a licensed guide as well", "To be agreed (Israel local time)", "booking requires confirmation"]) expect(body).toContain(value);
-    expect(fetchSpy).toHaveBeenCalledWith("/api/quote-request/", expect.objectContaining({ method: "GET" }));
-    expect(fetchSpy.mock.calls.every(([, options]) => options?.method === "GET" && options.body === undefined)).toBe(true); expect(localStorage.length).toBe(0);
-    fireEvent.click(screen.getByRole("button", { name: "Copy request" }));
-    expect(await screen.findByText(/Select and copy the request text/)).toBeInTheDocument();
-    expect((screen.getByLabelText("Prepared driver request") as HTMLTextAreaElement).value).toContain("Caesarea & lunch");
+    const fetchSpy = vi.spyOn(globalThis, "fetch").mockImplementation(async (_url, options) => Response.json({ accepted: true, requestId: JSON.parse(String(options?.body)).requestId }));
+    fireEvent.click(screen.getByRole("button", { name: "Send quote request" }));
+    expect(await screen.findByText("Your request has been sent to Moshe")).toBeInTheDocument();
+    expect(screen.getByRole("status")).toHaveTextContent(privateDriverContact.email);
+    expect(fetchSpy).toHaveBeenCalledOnce();
+    expect(fetchSpy).toHaveBeenCalledWith("/api/quote-request/", expect.objectContaining({ method: "POST" }));
+    const data = JSON.parse(String(fetchSpy.mock.calls[0]![1]?.body));
+    expect(data).toMatchObject({ sourceTitle: "Private driver in Israel", request: { kind: "driver", fields: { serviceId: "multi-stop", email: "jamie+trip@example.com", pickup: "Hotel A, Tel Aviv", dropoff: "Hotel B, Jerusalem", itinerary: "Caesarea & lunch\nThen Jerusalem", guide: "licensed-guide", consent: true } } });
+    expect(localStorage.length).toBe(0);
     choose(0);
-    expect(screen.queryByRole("link", { name: "Open email to Moshe" })).not.toBeInTheDocument();
-    fireEvent.click(screen.getByRole("button", { name: "Prepare my quote request" }));
-    expect(screen.getByRole("link", { name: "Open email to Moshe" })).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: "Send quote request" })).toBeEnabled();
+    fireEvent.click(screen.getByRole("button", { name: "Send quote request" }));
+    await screen.findByText("Your request has been sent to Moshe");
+    expect(fetchSpy).toHaveBeenCalledTimes(2);
     fireEvent.change(screen.getByLabelText("Final drop-off *"), { target: { value: "A different hotel" } });
-    expect(screen.queryByRole("link", { name: "Open email to Moshe" })).not.toBeInTheDocument();
+    expect(screen.getByRole("button", { name: "Send quote request" })).toBeEnabled();
   });
 });
 

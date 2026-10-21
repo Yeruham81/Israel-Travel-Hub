@@ -1,32 +1,33 @@
-import { QuoteRequestPreview } from "@/components/QuoteRequestPreview";
+import { QuoteSubmissionControls } from "@/components/QuoteSubmissionControls";
+import { useQuoteSubmission } from "@/hooks/useQuoteSubmission";
 import { PrivacyInformationLink } from "@/components/PrivacyInformationLink";
-import { useRef, useState, type FormEvent } from "react";
+import { useEffect, useRef, useState, type FormEvent } from "react";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { airportTransferPhotos } from "@/data/airportTransfers";
 import { shoreExcursionRates, shorePorts, type ShorePortId } from "@/data/registry";
-import { buildShoreQuoteDraft, emptyShoreQuote, validateShoreQuote, type ShoreQuoteFields } from "@/lib/shore-quote";
+import { emptyShoreQuote, validateShoreQuote, type ShoreQuoteFields } from "@/lib/shore-quote";
 
 export function ShoreQuoteForm({ portId, itineraryId, onItineraryChange }: { portId: ShorePortId; itineraryId: string; onItineraryChange: (id: string) => void }) {
   const port = shorePorts[portId];
   const itineraries = shoreExcursionRates.filter((rate) => rate.portId === portId);
   const [fields, setFields] = useState(emptyShoreQuote);
   const [errors, setErrors] = useState<string[]>([]);
-  const [prepared, setPrepared] = useState<{ portId: ShorePortId; itineraryId: string; values: ShoreQuoteFields; draft: ReturnType<typeof buildShoreQuoteDraft> } | null>(null);
-  const [isSending, setIsSending] = useState(false);
+  const submission = useQuoteSubmission();
+  const { reset } = submission;
+  useEffect(() => reset(), [portId, itineraryId, reset]);
   const errorRef = useRef<HTMLDivElement>(null);
-  const draft = prepared?.portId === portId && prepared.itineraryId === itineraryId ? prepared.draft : null;
   function update<K extends keyof ShoreQuoteFields>(key: K, value: ShoreQuoteFields[K]) {
     setFields((previous) => ({ ...previous, [key]: value, ...(key === "date" && (!previous.allAboardDate || previous.allAboardDate === previous.date) ? { allAboardDate: String(value) } : {}) }));
-    setPrepared(null);
+    submission.reset();
   }
-  function prepare(event: FormEvent<HTMLFormElement>) {
+  async function send(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     const values = { ...fields, itineraryId };
     const nextErrors = validateShoreQuote(values, portId);
     setErrors(nextErrors);
-    if (nextErrors.length) { setPrepared(null); requestAnimationFrame(() => errorRef.current?.focus()); return; }
-    setPrepared({ portId, itineraryId, values, draft: buildShoreQuoteDraft(values, portId) });
+    if (nextErrors.length) { submission.reset(); requestAnimationFrame(() => errorRef.current?.focus()); return; }
+    await submission.submit({ kind: "shore", portId, fields: values });
   }
   const photo = airportTransferPhotos["moshe"]!;
   const fieldClass = "mt-2 h-11 bg-background text-base";
@@ -41,8 +42,8 @@ export function ShoreQuoteForm({ portId, itineraryId, onItineraryChange }: { por
         <p className="mt-6 border-t border-white/20 pt-5 text-xs leading-relaxed opacity-75">Moshe Barak operates the publisher's local transport business. The starting prices above relate to his car-and-driver service; a licensed guide is a separate arrangement.</p>
       </div>
       <div className="p-5 sm:p-8">
-        <form onSubmit={prepare} noValidate aria-label={`${port.name} shore excursion quote request`}>
-          <fieldset disabled={isSending} className="min-w-0">
+        <form onSubmit={send} noValidate aria-label={`${port.name} shore excursion quote request`} aria-busy={submission.isSending}>
+          <fieldset disabled={submission.isSending} className="min-w-0">
             {errors.length > 0 && <div ref={errorRef} tabIndex={-1} role="alert" className="mb-5 rounded-xl border border-destructive p-4 text-sm text-destructive"><p className="font-semibold">Please check these details:</p><ul className="mt-2 list-disc pl-5">{errors.map((error) => <li key={error}>{error}</li>)}</ul></div>}
             <div className="grid gap-5 sm:grid-cols-2">
               <label className="text-sm font-medium">Full name *<Input name="name" autoComplete="name" required maxLength={120} value={fields.name} onChange={(event) => update("name", event.target.value)} className={fieldClass} /></label>
@@ -56,18 +57,17 @@ export function ShoreQuoteForm({ portId, itineraryId, onItineraryChange }: { por
               <label className="text-sm font-medium">All-aboard date *<Input name="allAboardDate" type="date" min={fields.date || undefined} required value={fields.allAboardDate} onChange={(event) => update("allAboardDate", event.target.value)} className={fieldClass} /></label>
               <label className="text-sm font-medium">Ship's all-aboard time *<Input name="allAboardTime" type="time" required value={fields.allAboardTime} onChange={(event) => update("allAboardTime", event.target.value)} className={fieldClass} /></label>
               <p className="-mt-3 text-xs leading-relaxed text-muted-foreground sm:col-span-2">Use Israel local dates and times. All-aboard is the deadline to be back on the ship, which may be earlier than sailing. Check the return date for an overnight call.</p>
-              <label className="text-sm font-medium sm:col-span-2">Requested itinerary *<select name="itinerary" required value={itineraryId} onChange={(event) => { onItineraryChange(event.target.value); setPrepared(null); }} className="mt-2 h-11 w-full rounded-md border border-input bg-background px-3 text-base"><option value="">Choose your itinerary</option>{itineraries.map((itinerary) => <option key={itinerary.id} value={itinerary.id}>{itinerary.destination}</option>)}<option value="other">Another destination or custom day</option></select></label>
+              <label className="text-sm font-medium sm:col-span-2">Requested itinerary *<select name="itinerary" required value={itineraryId} onChange={(event) => { onItineraryChange(event.target.value); submission.reset(); }} className="mt-2 h-11 w-full rounded-md border border-input bg-background px-3 text-base"><option value="">Choose your itinerary</option>{itineraries.map((itinerary) => <option key={itinerary.id} value={itinerary.id}>{itinerary.destination}</option>)}<option value="other">Another destination or custom day</option></select></label>
               {itineraryId === "other" && <label className="text-sm font-medium sm:col-span-2">Your itinerary or destinations *<Input name="otherItinerary" required maxLength={250} value={fields.otherItinerary} onChange={(event) => update("otherItinerary", event.target.value)} className={fieldClass} /></label>}
               <label className="text-sm font-medium sm:col-span-2">Passengers, including children *<Input name="passengers" type="number" min={1} max={99} step={1} required value={fields.passengers} onChange={(event) => update("passengers", event.target.value)} className={fieldClass} /></label>
               {Number(fields.passengers) > 4 && <p className="rounded-lg bg-secondary p-3 text-sm sm:col-span-2">Your party needs a separate group quote. The published starting rates for up to four passengers do not apply to your whole group.</p>}
               <label className="text-sm font-medium sm:col-span-2">Priorities, child seats, mobility needs or other requests<Textarea name="notes" maxLength={1500} rows={4} placeholder="Must-see stops, children's ages, walking preferences, equipment, luggage or a request for a licensed guide" value={fields.notes} onChange={(event) => update("notes", event.target.value)} className="mt-2 bg-background text-base" /></label>
             </div>
             <label className="mt-5 flex items-start gap-3 text-sm leading-relaxed"><input name="consent" type="checkbox" required checked={fields.consent} onChange={(event) => update("consent", event.target.checked)} className="mt-1 h-4 w-4 shrink-0 accent-primary" /><span>I agree to share these details with Moshe Barak for this inquiry. <PrivacyInformationLink /></span></label>
-            <button type="submit" className="btn btn-primary mt-6 w-full sm:w-auto">Prepare my excursion request</button>
-            <p className="mt-3 text-xs text-muted-foreground">Review your details before sending your request. A booking requires Moshe's confirmation.</p>
+            <QuoteSubmissionControls submission={submission} label="Send excursion request" />
+            <p className="mt-3 text-xs text-muted-foreground">Send your details directly to Moshe. A booking requires Moshe's confirmation.</p>
           </fieldset>
         </form>
-        {draft && <QuoteRequestPreview key={draft.url} draft={draft} request={{ kind: "shore", portId: prepared!.portId, fields: prepared!.values }} previewLabel="Prepared excursion request" onBusy={setIsSending} />}
       </div>
     </div>
   </section>;

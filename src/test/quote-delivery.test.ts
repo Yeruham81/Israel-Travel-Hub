@@ -13,10 +13,12 @@ const contact = { name: "Jamie & Alex", email: "jamie+trip@example.com", phone: 
 const transfer: QuoteRequest = { kind: "transfer", fields: { ...emptyTransferQuote, ...contact, date: "2027-06-20", time: "14:30", flight: "LY315", destinationId: "other", otherDestination: "Ein Gedi", address: "Example Hotel", passengers: "6", suitcases: "4", carryOns: "2" } };
 const driver: QuoteRequest = { kind: "driver", fields: { ...emptyDriverQuote, ...contact, serviceId: "multi-stop", date: "2027-06-20", time: "09:30", pickup: "Tel Aviv Hotel", dropoff: "Jerusalem Hotel", passengers: "5", luggage: "Three cases and stroller", itinerary: "Caesarea\nLunch & Jerusalem", guide: "licensed-guide" } };
 const shore: QuoteRequest = { kind: "shore", portId: "haifa", fields: { ...emptyShoreQuote, ...contact, country: "United Kingdom", ship: "Voyager", date: "2027-06-20", pickupTime: "08:30", allAboardDate: "2027-06-21", allAboardTime: "17:00", itineraryId: "other", otherItinerary: "Akko & Nazareth", passengers: "6" } };
+const enquiry: QuoteRequest = { kind: "contact", fields: { name: contact.name, email: contact.email, subject: "Airport trip & a question", message: "שלום Moshe\n" + "x".repeat(3500), consent: true } };
 const payload = (request: QuoteRequest = transfer): QuoteRequestPayload => ({
   requestId: randomUUID(), website: "", request,
   ...(request.kind === "transfer" ? { sourcePath: "/transfers/", sourceTitle: "Airport transfers" }
     : request.kind === "driver" ? { sourcePath: "/private-driver/", sourceTitle: "Private driver in Israel" }
+      : request.kind === "contact" ? { sourcePath: "/about-moshe-barak/", sourceTitle: "About Moshe Barak" }
       : { sourcePath: `/${request.portId}-shore-excursions/`, sourceTitle: `${request.portId === "haifa" ? "Haifa" : "Ashdod"} shore excursions: private day trips & prices` }),
 });
 function post(data: unknown, headers: Record<string, string> = {}) {
@@ -43,6 +45,7 @@ describe("server-side quote delivery", () => {
     [transfer, ["Name: Jamie & Alex", "Email: jamie+trip@example.com", "Phone / WhatsApp: +44 12345", "Destination: Ein Gedi", "Hotel / address: Example Hotel", "2027-06-20 at 14:30", "Flight number: LY315", "Passengers (including children): 6", "Suitcases: 4", "Carry-ons: 2", contact.notes]],
     [driver, ["2027-06-20", "09:30", "Pickup: Tel Aviv Hotel", "Final drop-off: Jerusalem Hotel", "Passengers (including children): 5", "Luggage: Three cases and stroller", "Please quote a licensed guide as well", "Caesarea\nLunch & Jerusalem", contact.notes]],
     [shore, ["Haifa", "Country: United Kingdom", "Cruise ship: Voyager", "2027-06-20", "08:30", "2027-06-21 at 17:00", "Requested itinerary: Akko & Nazareth", "Passengers (including children): 6", contact.notes]],
+    [enquiry, ["Name: Jamie & Alex", "Email: jamie+trip@example.com", "Subject: Airport trip & a question", enquiry.fields.message]],
   ] as const)("builds every %s field into the server-generated message", async (request, values) => {
     const send = vi.fn().mockResolvedValue(undefined);
     const handle = createQuoteDeliveryService({ environment: enabled, send, now });
@@ -53,7 +56,7 @@ describe("server-side quote delivery", () => {
     const message = send.mock.calls[0]![0];
     for (const value of values) expect(message.text).toContain(value);
     expect(message.text).toContain("I consent to sharing these details");
-    expect(message.text).toMatch(new RegExp(`^Source page: ${data.sourceTitle}\\nPage path: ${data.sourcePath}\\n\\nHello Moshe,`));
+    expect(message.text.startsWith(`Source page: ${data.sourceTitle}\nPage path: ${data.sourcePath}\n\n`)).toBe(true);
     expect(message.text).toContain("2026-10-21T12:00:00.000Z");
     expect(message.replyTo).toBe(contact.email);
     expect(Object.keys(message).sort()).toEqual(["replyTo", "requestId", "subject", "text"]);
@@ -94,6 +97,10 @@ describe("server-side quote delivery", () => {
       { ...base, sourceTitle: "Page\r\nInjected content" },
       { ...base, sourceTitle: "Page\u0000title" },
       { ...base, request: { ...shore, portId: "other" } },
+      { ...base, request: { kind: "contact", fields: { ...enquiry.fields, message: "x".repeat(4001) } } },
+      { ...base, request: { kind: "contact", fields: { ...enquiry.fields, subject: "x".repeat(161) } } },
+      { ...base, request: { kind: "contact", fields: { ...enquiry.fields, consent: false } } },
+      { ...base, request: { kind: "contact", fields: { ...enquiry.fields, email: "a@example.com,other@example.com" } } },
     ];
     for (const data of cases) expect((await handle(post(data))).status).toBe(400);
     expect(send).not.toHaveBeenCalled();

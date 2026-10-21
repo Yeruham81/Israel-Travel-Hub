@@ -94,7 +94,7 @@ const sharedFaqs = [
   { q: "Can I request a van, child seats or an accessible vehicle?", a: "Include all passengers, children's ages, mobility needs and any equipment in the inquiry. Vans and minibuses are available by request, subject to confirmation. Do not assume a suitable vehicle or seat is reserved until the operator confirms it." },
   { q: "Where will I meet the driver?", a: "Agree the precise meeting point for your ship, berth and port procedures in writing. Ask whether a terminal transfer or port shuttle is needed; do not assume every driver can wait beside the ship." },
   { q: "What happens if the ship is delayed or cancels the port call?", a: "Send any schedule change to the operator promptly. Ask for written confirmation of the cancellation cutoff, any deposit refund, missed-call policy and revised itinerary. Other operators have their own terms. No return-to-ship guarantee is made by this portal." },
-  { q: "How do I send the inquiry and book?", a: "Choose an itinerary and complete the form with your ship, date, hours ashore and party details. Prepare and send the request through your email app. A prepared draft has not been sent. The excursion is booked only after the operator confirms availability, price, payment and terms." },
+  { q: "How do I send the inquiry and book?", a: "Choose an itinerary and complete the form with your ship, date, hours ashore and party details. Press Send excursion request to email the details directly and wait for the on-page confirmation. The excursion is booked only after the operator confirms availability, price, payment and terms." },
 ];
 
 const portDetails: Record<ShorePortId, PortDetails> = {

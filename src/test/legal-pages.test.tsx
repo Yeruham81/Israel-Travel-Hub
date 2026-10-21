@@ -47,7 +47,7 @@ describe("current legal documents", () => {
     const { doc } = await legalDocument("/privacy-policy/");
     expect(doc.getElementById("enquiries")?.textContent).toContain("Providing information is voluntary");
     expect(doc.getElementById("enquiries")?.textContent).toContain("Where a form offers direct submission");
-    expect(doc.getElementById("enquiries")?.textContent).toContain("currently prepare an email draft");
+    expect(doc.getElementById("enquiries")?.textContent).toContain("send the entered details directly through this website");
     expect(doc.getElementById("enquiries")?.textContent).toContain("does not save those enquiry fields in browser storage");
     expect(doc.getElementById("storage")?.textContent).toContain("up to 200 outbound-link clicks");
     expect(doc.getElementById("storage")?.textContent).toContain("does not upload the record");

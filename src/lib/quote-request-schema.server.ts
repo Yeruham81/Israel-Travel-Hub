@@ -18,6 +18,9 @@ export const quoteRequestSchema = z.object({
   request: z.discriminatedUnion("kind", [
     z.object({ kind: z.literal("transfer"), fields: fieldSchema(emptyTransferQuote) }).strict(),
     z.object({ kind: z.literal("driver"), fields: fieldSchema(emptyDriverQuote) }).strict(),
+    z.object({ kind: z.literal("contact"), fields: z.object({
+      name: z.string().max(120), email: z.string().max(254), subject: z.string().max(160), message: z.string().max(4000), consent: z.boolean(),
+    }).strict() }).strict(),
     z.object({ kind: z.literal("shore"), portId: z.enum(["haifa", "ashdod"]), fields: fieldSchema(emptyShoreQuote) }).strict(),
   ]),
 }).strict();

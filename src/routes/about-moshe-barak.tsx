@@ -114,7 +114,7 @@ function MosheAbout() {
           <div id="privacy" className="prose-guide scroll-mt-24">
             <h3 className="text-xl">How I handle your enquiry</h3>
             <p>I don't attach your personal details or flight information to outbound booking links. Details you enter in the journey planners stay on the page.</p>
-            <p>My message form prepares an email in your browser. You can review it before opening your email app, and the form doesn't transmit your message. I receive it only when you send the email. A message or quote request is the start of a conversation, rather than a confirmed booking.</p>
+            <p>Complete my message form and press Send message to email your enquiry directly to me. Wait for the confirmation on the page. A message or quote request is the start of a conversation, rather than a confirmed booking.</p>
             <p>Read my <Link to="/privacy-policy/" className="underline">Privacy Policy</Link> for the full explanation of how I handle enquiries, website data and optional features, and how to contact me about your information.</p>
           </div>
         </div>
