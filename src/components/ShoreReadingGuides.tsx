@@ -1,9 +1,11 @@
 import { Link } from "@tanstack/react-router";
 import type { ShoreReadingGuide } from "@/data/shoreReading";
 
-export function ShoreReadingGuides({ guides, title = "Useful guides for your day ashore" }: { guides: ShoreReadingGuide[]; title?: string }) {
-  return <section aria-label={title} className="mt-14">
+export function RelatedGuideCards({ guides, title = "Useful guides for your day ashore", id, intro, eyebrow }: { guides: ShoreReadingGuide[]; title?: string; id?: string; intro?: string; eyebrow?: string }) {
+  return <section id={id} aria-label={title} className="mt-14">
+    {eyebrow && <p className="eyebrow mb-2">{eyebrow}</p>}
     <h2 className="text-3xl font-semibold">{title}</h2>
+    {intro && <p className="mt-3 text-muted-foreground">{intro}</p>}
     <ul className="mt-5 grid gap-4 sm:grid-cols-2">
       {guides.map((guide) => <li key={guide.to} className="min-w-0">
         <article className="group flex h-full gap-4 rounded-2xl border bg-card p-4 transition-shadow hover:border-primary/40 hover:shadow-md">
@@ -18,3 +20,5 @@ export function ShoreReadingGuides({ guides, title = "Useful guides for your day
     </ul>
   </section>;
 }
+
+export const ShoreReadingGuides = RelatedGuideCards;

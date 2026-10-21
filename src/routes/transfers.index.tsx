@@ -1,17 +1,19 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { Baby, CarFront, Clock3, Handshake, Luggage, PlaneLanding } from "lucide-react";
 import { FaqList, HubHeader } from "@/components/Guide";
 import { TransferQuoteForm } from "@/components/TransferQuoteForm";
 import { AirportDestinationCard as DestinationCard } from "@/components/AirportDestinationCard";
 import { AirportBookingPlatforms } from "@/components/AirportBookingPlatforms";
-import { StayPhotoCredits } from "@/components/StayGuideParts";
+import { GuidePhotoCredit } from "@/components/TravelGuide";
+import { RelatedGuideCards } from "@/components/ShoreReadingGuides";
 import { airportDestinationCards, airportTransferPhotos, airportTransferBenefits, airportTransferTips, airportTransferFaqs, airportRelatedLinks } from "@/data/airportTransfers";
 import { AIRPORT_TRANSFER_CHECK_DATE } from "@/data/registry";
 import { PageUpdated } from "@/components/PageUpdated";
 import { pageMeta } from "@/lib/site";
 import { parseAirportTransferSearch } from "@/lib/transfer-quote";
 import { ExchangeRateNote } from "@/components/CurrencyRates";
+import { hasPublicPhotoCredit } from "@/lib/photo-credits";
 
 export const Route = createFileRoute("/transfers/")({
   validateSearch: parseAirportTransferSearch,
@@ -28,6 +30,8 @@ const benefitIcons = [Handshake, PlaneLanding, CarFront, Luggage, Baby, Clock3];
 function Airport() {
   const { destination } = Route.useSearch();
   const [destinationId, setDestinationId] = useState(destination ?? "");
+  const guideCards = airportRelatedLinks.map((link) => ({ ...link, title: link.label }));
+  const creditedPhotos = [...Object.values(airportTransferPhotos), ...guideCards.map((guide) => guide.photo)].filter(hasPublicPhotoCredit);
   useEffect(() => setDestinationId(destination ?? ""), [destination]);
   const choose = (id: string) => {
     setDestinationId(id);
@@ -69,10 +73,7 @@ function Airport() {
 
     <AirportBookingPlatforms />
 
-    <section id="keep-planning" aria-labelledby="planning-h" className="mt-14">
-      <p className="eyebrow">Make more of your visit</p><h2 id="planning-h" className="mt-2 text-3xl">Your ride is only the start</h2><p className="mt-3 text-muted-foreground">Find the right place to stay and discover what to do when you arrive.</p>
-      <ul className="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">{airportRelatedLinks.map((link) => <li key={link.to}><Link to={link.to} className="block h-full rounded-xl border bg-card px-5 py-4 font-medium text-primary hover:border-primary">{link.label}</Link></li>)}</ul>
-    </section>
-    <StayPhotoCredits photos={Object.values(airportTransferPhotos)} />
+    <RelatedGuideCards id="keep-planning" title="Your ride is only the start" eyebrow="Make more of your visit" intro="Find the right place to stay and discover what to do when you arrive." guides={guideCards} />
+    {creditedPhotos.length > 0 && <details className="mt-10 rounded-xl border bg-card p-4 text-xs text-muted-foreground"><summary className="cursor-pointer font-semibold">Photo credits</summary><ul className="mt-3 space-y-3">{[...new Map(creditedPhotos.map((photo) => [photo.src, photo])).values()].map((photo) => <li key={photo.src}><p>{photo.alt}</p><GuidePhotoCredit photo={photo} /></li>)}</ul></details>}
   </main>;
 }

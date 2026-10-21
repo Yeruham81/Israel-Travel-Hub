@@ -11,6 +11,9 @@ import caesarea from "@/assets/airport-transfers/caesarea.webp";
 import nazareth from "@/assets/airport-transfers/nazareth.webp";
 import airport from "@/assets/airport-transfers/airport.webp";
 import moshe from "@/assets/airport-transfers/moshe.webp";
+import airportHall from "@/assets/home/ben-gurion-t3.webp";
+import airportPickup from "@/assets/home/airport-pickup.webp";
+import esim from "@/assets/guides/esim-israel.jpeg";
 import { airportTransferRates, OWNER_BASE, travelGuidePaths } from "@/data/registry";
 import type { StayGuidePhoto } from "@/data/content";
 
@@ -58,13 +61,49 @@ export const airportTransferFaqs = [
 ];
 
 export const airportRelatedLinks = [
-  { label: "Ben Gurion arrival tips", to: travelGuidePaths.arrival },
-  { label: "Choosing an eSIM for Israel", to: travelGuidePaths.esim },
-  { label: "Taxis in Israel", to: travelGuidePaths.taxis },
-  { label: "Where to stay in Jerusalem", to: "/travel-blog/where-to-stay-in-jerusalem/" as const },
-  { label: "Where to stay in Tel Aviv", to: "/travel-blog/where-to-stay-in-tel-aviv/" as const },
-  { label: "Haifa hotels", to: "/travel-blog/best-hotels-in-haifa/" as const },
-  { label: "Dead Sea hotels", to: "/travel-blog/best-dead-sea-hotels/" as const },
-  { label: "Tours & day trips", to: "/tours/" as const },
-  { label: "Attractions & experiences", to: "/attractions/" as const },
+  {
+    label: "Ben Gurion arrival tips", to: travelGuidePaths.arrival,
+    description: "Feel ready for your first moments in Israel. Plan passport control, baggage collection, useful arrival essentials and the meeting with your driver.",
+    photo: { src: airportHall, alt: "Arrivals reception hall at Ben Gurion Airport Terminal 3", credit: "GeorgeDement · CC BY-SA 2.0 · resized WebP", sourceUrl: "https://commons.wikimedia.org/wiki/File:Ben_Gurion_Airport_terminal_3_reception_hall.jpg", licenseUrl: "https://creativecommons.org/licenses/by-sa/2.0/" },
+  },
+  {
+    label: "Choosing an eSIM for Israel", to: travelGuidePaths.esim,
+    description: "Stay connected for maps, messages and travel plans. Understand phone compatibility, data allowances and activation before choosing an eSIM for your visit.",
+    photo: { src: esim, alt: "A phone displaying an illustrative eSIM screen against a city background", sourceUrl: `${upload}/2025/08/best_esim_for_israel.jpeg`, credit: "Illustrative eSIM screen, not a provider speed test." },
+  },
+  {
+    label: "Taxis in Israel", to: travelGuidePaths.taxis,
+    description: "Make everyday journeys easier after your airport ride. Learn about taxi apps, payment, receipts and the details to confirm before setting off.",
+    photo: { src: airportPickup, alt: "Illustration of a traveler meeting a driver beside a car" },
+  },
+  {
+    label: "Where to stay in Jerusalem", to: "/travel-blog/where-to-stay-in-jerusalem/" as const,
+    description: "Find a Jerusalem neighborhood that suits your visit. Compare Old City atmosphere, central locations and quieter areas, with practical hotel and vehicle-access advice.",
+    photo: airportTransferPhotos["jerusalem"]!,
+  },
+  {
+    label: "Where to stay in Tel Aviv", to: "/travel-blog/where-to-stay-in-tel-aviv/" as const,
+    description: "Choose between beachfront mornings, central city life and historic Jaffa. Explore Tel Aviv's hotel areas and find the right base for your stay.",
+    photo: airportTransferPhotos["tel-aviv"]!,
+  },
+  {
+    label: "Haifa hotels", to: "/travel-blog/best-hotels-in-haifa/" as const,
+    description: "Discover places to stay around the German Colony, Carmel and coast. Match your hotel location to Haifa's sights, hills and onward plans.",
+    photo: airportTransferPhotos["haifa"]!,
+  },
+  {
+    label: "Dead Sea hotels", to: "/travel-blog/best-dead-sea-hotels/" as const,
+    description: "Plan a relaxing stay by the Dead Sea. Compare Ein Bokek, spa facilities and family options, with attention to beach access and location.",
+    photo: airportTransferPhotos["dead-sea"]!,
+  },
+  {
+    label: "Tours & day trips", to: "/tours/" as const,
+    description: "Turn your stay into a journey of discovery. Explore guided outings and private day trips to historic cities, sacred sites and memorable landscapes.",
+    photo: airportTransferPhotos["nazareth"]!,
+  },
+  {
+    label: "Attractions & experiences", to: "/attractions/" as const,
+    description: "Find the places that make your Israel itinerary your own. Discover ancient harbours, city sights, heritage sites and natural landscapes across the country.",
+    photo: airportTransferPhotos["caesarea"]!,
+  },
 ];
