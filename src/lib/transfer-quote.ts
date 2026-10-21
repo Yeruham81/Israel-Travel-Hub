@@ -44,7 +44,7 @@ export function validateTransferQuote(v: TransferQuoteFields, now = new Date()) 
 export function buildTransferQuoteDraft(v: TransferQuoteFields) {
   const destination = airportTransferRates.find((r) => r.id === v.destinationId)?.destination || v.otherDestination.trim();
   const singleLine = (value: string) => value.trim().replace(/[\r\n]+/g, " ");
-  const subject = `Private airport transfer quote: Ben Gurion to ${singleLine(destination)}`;
+  const subject = `Moshe Barak - Taxi & Travel in Israel - Ben Gurion to ${singleLine(destination)} / ${singleLine(v.name)}`;
   const body = [
     "Hello Moshe,", "", "Please send me a quote for a private transfer from Ben Gurion Airport.", "",
     `Name: ${singleLine(v.name)}`, `Email: ${singleLine(v.email)}`, `Phone / WhatsApp: ${singleLine(v.phone) || "Not supplied"}`,
