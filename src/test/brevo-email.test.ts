@@ -1,6 +1,6 @@
 // @vitest-environment node
 import { afterEach, describe, expect, it, vi } from "vitest";
-import { sendBrevoQuote } from "@/lib/brevo-email.server";
+import { sendBrevoQuote, classifyBrevoNetworkError } from "@/lib/brevo-email.server";
 import { createQuoteDeliveryService } from "@/lib/quote-delivery.server";
 
 const message = { requestId: "test-reference", replyTo: "guest@example.com", subject: "Test enquiry", text: "Source page: Example\nAll fields\nשלום" };
@@ -43,6 +43,21 @@ describe("Brevo REST transport", () => {
   it("rejects malformed acceptance JSON", async () => {
     vi.stubGlobal("fetch", vi.fn().mockResolvedValue(new Response("not-json", { status: 201 })));
     await expect(sendBrevoQuote(message, "mock-credential")).rejects.toMatchObject({ deliveryCode: "BREVO_RESPONSE" });
+  });
+
+  it("classifies nested transport causes without leaking their text", () => {
+    expect(classifyBrevoNetworkError({ cause: { code: "ENOTFOUND", message: "private hostname" } })).toBe("BREVO_DNS");
+    expect(classifyBrevoNetworkError({ cause: { code: "ECONNRESET" } })).toBe("BREVO_CONNECT");
+    expect(classifyBrevoNetworkError({ cause: { code: "ERR_TLS_CERT_ALTNAME_INVALID" } })).toBe("BREVO_TLS");
+    expect(classifyBrevoNetworkError(new TypeError("fetch failed"))).toBe("BREVO_NETWORK");
+    expect(classifyBrevoNetworkError(new ReferenceError("fetch is not defined"))).toBe("BREVO_RUNTIME");
+  });
+
+  it("retains a Brevo HTTP rejection if response stream cancellation fails", async () => {
+    const response = new Response(JSON.stringify({ detail: "private" }), { status: 403 });
+    Object.defineProperty(response, "body", { value: { cancel: () => Promise.reject(new Error("stream failed")) } });
+    vi.stubGlobal("fetch", vi.fn().mockResolvedValue(response));
+    await expect(sendBrevoQuote(message, "mock-credential")).rejects.toMatchObject({ deliveryCode: "BREVO_FORBIDDEN", providerStatus: 403 });
   });
 
   it("sanitizes network exceptions without retry", async () => {
