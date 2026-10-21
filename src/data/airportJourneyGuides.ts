@@ -91,7 +91,7 @@ const byId: Record<AirportJourneyId, AirportJourneyGuide> = {
       { q: "Is the old Nesher airport sherut still running?", a: "The former Nesher shared-taxi airport route is reported discontinued. Do not plan a journey from old forum posts or phone numbers without a current operating provider." },
       { q: "Taxi or private transfer to a Jerusalem hotel?", a: "The official airport taxi offers a metered on-demand ride. A private transfer requires advance confirmation of a suitable vehicle, meeting point and total quote. Compare the full terms, not only an indicative price." }
     ],
-    related: [{ label: "Choose a Jerusalem hotel area", to: "/travel-blog/where-to-stay-in-jerusalem/" }, { label: "Arriving on Shabbat", to: "/travel-blog/from-ben-gurion-airport-on-shabbat/" }, { label: "Jerusalem travel guide", to: "/travel-blog/jerusalem-travel-guide/" }],
+    related: [{ label: "Official Ben Gurion Airport taxi booking and pickup", to: "/travel-blog/ben-gurion-airport-taxis/" }, { label: "Choose a Jerusalem hotel area", to: "/travel-blog/where-to-stay-in-jerusalem/" }, { label: "Arriving on Shabbat", to: "/travel-blog/from-ben-gurion-airport-on-shabbat/" }, { label: "Jerusalem travel guide", to: "/travel-blog/jerusalem-travel-guide/" }],
   },
   "tel-aviv": {
     id: "tel-aviv", city: "Tel Aviv & Jaffa",
@@ -157,7 +157,7 @@ const byId: Record<AirportJourneyId, AirportJourneyGuide> = {
       { q: "What if my hotel is in Jaffa?", a: "Treat Jaffa as a specific address rather than a central Tel Aviv rail station. Work out the last leg or provide a drivable hotel/host meeting point for a taxi or transfer." },
       { q: "Will the airport train take me straight to the hotel?", a: "No. It serves four railway stations. Most hotels need a further walk or local connection." }
     ],
-    related: [{ label: "Where to stay in Tel Aviv", to: "/travel-blog/where-to-stay-in-tel-aviv/" }, { label: "Getting around Tel Aviv", to: "/travel-blog/getting-around-tel-aviv/" }, { label: "Airport transport on Shabbat", to: "/travel-blog/from-ben-gurion-airport-on-shabbat/" }]
+    related: [{ label: "Official Ben Gurion Airport taxi booking and pickup", to: "/travel-blog/ben-gurion-airport-taxis/" }, { label: "Where to stay in Tel Aviv", to: "/travel-blog/where-to-stay-in-tel-aviv/" }, { label: "Getting around Tel Aviv", to: "/travel-blog/getting-around-tel-aviv/" }, { label: "Airport transport on Shabbat", to: "/travel-blog/from-ben-gurion-airport-on-shabbat/" }]
   },
   haifa: {
     id: "haifa", city: "Haifa",
@@ -219,7 +219,7 @@ const byId: Record<AirportJourneyId, AirportJourneyGuide> = {
       { q: "Are there airport sheruts to Haifa?", a: "The former Amal shared airport taxi service is reported discontinued. A historical phone number or forum recommendation is not proof of an active service." },
       { q: "How should I plan an airport-to-cruise-port connection?", a: "Supply the exact Haifa passenger terminal, ship and check-in deadline. Leave a wide margin and confirm meeting/drop-off access and delay arrangements." }
     ],
-    related: [{ label: "Where to stay in Haifa", to: "/travel-blog/best-hotels-in-haifa/" }, { label: "Haifa shore excursions", to: "/haifa-shore-excursions/" }, { label: "Getting around Israel", to: "/travel-blog/getting-around-israel/" }]
+    related: [{ label: "Official Ben Gurion Airport taxi booking and pickup", to: "/travel-blog/ben-gurion-airport-taxis/" }, { label: "Where to stay in Haifa", to: "/travel-blog/best-hotels-in-haifa/" }, { label: "Haifa shore excursions", to: "/haifa-shore-excursions/" }, { label: "Getting around Israel", to: "/travel-blog/getting-around-israel/" }]
   },
   "ein-bokek": {
     id: "ein-bokek", city: "Ein Bokek (Dead Sea)",
@@ -282,7 +282,7 @@ const byId: Record<AirportJourneyId, AirportJourneyGuide> = {
       { q: "Is Ein Gedi the same drop-off as Ein Bokek?", a: "No. They are geographically separate. Tell the operator or route planner the exact hotel or stop you need." },
       { q: "Is a private transfer better for a Dead Sea family trip?", a: "It may be when you have children, large luggage, a late arrival or a hotel meal/check-in deadline. Compare its written vehicle quote with the total cost and waiting time of the available public transport." }
     ],
-    related: [{ label: "Compare Dead Sea hotels", to: "/travel-blog/best-dead-sea-hotels/" }, { label: "Jerusalem to the Dead Sea", to: "/travel-blog/jerusalem-to-the-dead-sea/" }, { label: "Masada trip planning", to: "/travel-blog/masada/" }]
+    related: [{ label: "Official Ben Gurion Airport taxi booking and pickup", to: "/travel-blog/ben-gurion-airport-taxis/" }, { label: "Compare Dead Sea hotels", to: "/travel-blog/best-dead-sea-hotels/" }, { label: "Jerusalem to the Dead Sea", to: "/travel-blog/jerusalem-to-the-dead-sea/" }, { label: "Masada trip planning", to: "/travel-blog/masada/" }]
   },
 };
 
