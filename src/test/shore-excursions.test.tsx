@@ -119,7 +119,7 @@ describe("shore excursions", () => {
     expect(screen.getByLabelText("All-aboard date *")).toHaveValue("2099-11-01");
     fireEvent.change(screen.getByLabelText("Expected disembarkation time *"), { target: { value: "08:00" } });
     fireEvent.change(screen.getByLabelText("Ship's all-aboard time *"), { target: { value: "18:00" } });
-    fireEvent.change(screen.getByLabelText("Passengers, including children *"), { target: { value: "6" } });
+    fireEvent.change(screen.getByLabelText("Passengers *"), { target: { value: "6" } });
     expect(screen.getByText(/Your party needs a separate group quote/)).toBeInTheDocument();
     fireEvent.click(screen.getByRole("checkbox"));
     const fetchSpy = vi.spyOn(globalThis, "fetch").mockImplementation(async (_url, options) => Response.json({ accepted: true, requestId: JSON.parse(String(options?.body)).requestId }));
@@ -150,7 +150,7 @@ describe("shore excursions", () => {
     expect(validateShoreQuote({ ...valid, consent: false }, "haifa", now).join(" ")).toMatch(/agree to share/);
     const draft = buildShoreQuoteDraft({ ...valid, itineraryId: "other", otherItinerary: "Caesarea\n& Haifa", notes: "Please add a licensed guide & child seat." }, "haifa");
     const url = new URL(draft.url);
-    expect(url.searchParams.get("subject")).toBe("Haifa shore excursion quote: Caesarea & Haifa");
+    expect(url.searchParams.get("subject")).toBe("Moshe Barak - Taxi & Travel in Israel / Jamie");
     expect(url.searchParams.get("body")).toContain("Please add a licensed guide & child seat.");
     expect(draft.body).not.toMatch(/ILS|1,900|1900/);
   });
