@@ -46,16 +46,19 @@ describe("one-step direct form delivery", () => {
     fill();
     expect(fetch).not.toHaveBeenCalled();
     fireEvent.click(screen.getByRole("button", { name: "Send message" }));
-    expect(await screen.findByText("Your message has been sent to Moshe")).toBeInTheDocument();
+    expect(await screen.findByText("Your message has been sent")).toBeInTheDocument();
     expect(fetch).toHaveBeenCalledOnce();
     expect(fetch).toHaveBeenCalledWith("/api/quote-request/", expect.objectContaining({ method: "POST", credentials: "same-origin" }));
     const payload = JSON.parse(fetch.mock.calls[0]![1].body);
     expect(payload).toMatchObject({ sourcePath: path, sourceTitle: title, website: "", request: { kind: "contact", fields } });
     expect(send).toHaveBeenCalledOnce();
     const email = send.mock.calls[0]![0];
-    expect(email.text.startsWith(`Source page: ${title}\nPage path: ${path}\n\n`)).toBe(true);
+    expect(email.text.startsWith(`Sent from page: ${title}\n\n`)).toBe(true);
     for (const value of [fields.name, fields.email, fields.subject, fields.message, "I consent to sharing these details"]) expect(email.text).toContain(value);
     expect(email.replyTo).toBe(fields.email);
+    expect(email.senderName).toBe(fields.name);
+    expect(email.html).toContain("<strong>Sent from page:</strong>");
+    expect(screen.getByText("I will reply soon to the email address you provided.")).toBeInTheDocument();
     expect(email.subject).toBe("Israel Travel Hub enquiry: " + fields.subject);
     expect(email.text).not.toMatch(/campaign=|SEO title|#contact/);
     expect(screen.queryByText("Your Message Is Ready")).not.toBeInTheDocument();
@@ -74,9 +77,9 @@ describe("one-step direct form delivery", () => {
     expect(fetch).toHaveBeenCalledOnce();
     expect(screen.getByRole("button", { name: "Sending…" })).toBeDisabled();
     expect(screen.getByLabelText("Your message *")).toBeDisabled();
-    expect(screen.queryByText("Your message has been sent to Moshe")).not.toBeInTheDocument();
+    expect(screen.queryByText("Your message has been sent")).not.toBeInTheDocument();
     finish();
-    await screen.findByText("Your message has been sent to Moshe");
+    await screen.findByText("Your message has been sent");
     fireEvent.submit(form);
     expect(fetch).toHaveBeenCalledOnce();
     expect(send).toHaveBeenCalledOnce();
@@ -89,7 +92,7 @@ describe("one-step direct form delivery", () => {
     fireEvent.click(screen.getByRole("button", { name: "Send message" }));
     expect(await screen.findByRole("alert")).toHaveTextContent("Message sending is temporarily unavailable");
     expect(screen.getByLabelText("Your message *")).toHaveValue(fields.message);
-    expect(screen.queryByText("Your message has been sent to Moshe")).not.toBeInTheDocument();
+    expect(screen.queryByText("Your message has been sent")).not.toBeInTheDocument();
     expect(fetch).toHaveBeenCalledOnce();
     expect(send).not.toHaveBeenCalled();
   });
@@ -122,7 +125,7 @@ describe("one-step direct form delivery", () => {
     fireEvent.click(screen.getByRole("button", { name: "Send message" }));
     expect(await screen.findByRole("alert")).toHaveTextContent("could not confirm email delivery");
     expect(screen.getByRole("alert")).toHaveTextContent("Error code: BAD_RESPONSE (HTTP 200)");
-    expect(screen.queryByText("Your message has been sent to Moshe")).not.toBeInTheDocument();
+    expect(screen.queryByText("Your message has been sent")).not.toBeInTheDocument();
   });
 
   it.each([
@@ -140,6 +143,6 @@ describe("one-step direct form delivery", () => {
     expect(alert).toHaveTextContent(`Error code: ${code} (HTTP ${status})`);
     expect(alert).not.toHaveTextContent(/password|Private server diagnostic/);
     expect(screen.getByLabelText("Your message *")).toHaveValue(fields.message);
-    expect(screen.queryByText("Your message has been sent to Moshe")).not.toBeInTheDocument();
+    expect(screen.queryByText("Your message has been sent")).not.toBeInTheDocument();
   });
 });
