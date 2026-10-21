@@ -2,9 +2,27 @@
 import { afterEach, describe, expect, it, vi } from "vitest";
 import { sendBrevoQuote, classifyBrevoNetworkError } from "@/lib/brevo-email.server";
 import { createQuoteDeliveryService } from "@/lib/quote-delivery.server";
+import { israelSubmissionTime, quoteEmailHtml, safeEmailSenderName } from "@/lib/quote-email-format.server";
 
 const message = { requestId: "test-reference", replyTo: "guest@example.com", subject: "Test enquiry", text: "Sent from page: Example\nAll fields\nשלום", html: "<strong>Sent from page:</strong> Example", senderName: "Test Visitor" };
 afterEach(() => { vi.unstubAllGlobals(); vi.useRealTimers(); });
+
+describe("Brevo email presentation", () => {
+  it("formats Israel summer and winter time without relying on server timezone", () => {
+    expect(israelSubmissionTime(new Date("2026-10-21T12:00:00Z"))).toBe("21 October 2026, 15:00 (Israel time)");
+    expect(israelSubmissionTime(new Date("2026-12-21T12:00:00Z"))).toBe("21 December 2026, 14:00 (Israel time)");
+  });
+
+  it("escapes HTML input, styles only known labels and keeps multiline message text", () => {
+    const html = quoteEmailHtml("Sent from page: About & contact\\nName: <script>alert(1)</script>\\nMessage:\\nHello & goodbye\\nUnknown: must remain plain");
+    expect(html).toContain("<strong>Sent from page:</strong> About &amp; contact");
+    expect(html).toContain("<strong>Name:</strong> &lt;script&gt;alert(1)&lt;/script&gt;");
+    expect(html).toContain("<strong>Message:</strong><br>Hello &amp; goodbye");
+    expect(html).toContain("Unknown: must remain plain");
+    expect(html).not.toContain("<script>");
+    expect(safeEmailSenderName("  Jane\\r\\nSmith  ")).toBe("Jane Smith");
+  });
+});
 
 describe("Brevo REST transport", () => {
   it("posts fixed sender and recipient, full text and visitor Reply-To; accepts only 201 with messageId", async () => {
