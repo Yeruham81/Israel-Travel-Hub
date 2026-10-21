@@ -37,9 +37,8 @@ export function ShoreQuoteForm({ portId, itineraryId, onItineraryChange }: { por
         <img src={photo.src} alt={photo.alt} width={150} height={200} loading="lazy" className="h-24 w-20 rounded-xl object-cover" />
         <p className="mt-5 text-xs font-semibold uppercase tracking-widest opacity-75">A personal plan for your day ashore</p>
         <h2 id="quote-h" className="mt-3 text-3xl">Request your {port.name} shore excursion</h2>
-        <p className="mt-4 leading-relaxed opacity-90">Tell Moshe about your ship and the places you want to visit. Agree a realistic route, the right vehicle and the full price before you book.</p>
-        <ul className="mt-6 space-y-3 text-sm opacity-90"><li>Private return trip from {port.name} Port</li><li>Custom priorities and larger-group requests</li><li>Pickup and return planned around your ship</li><li>A quote request carries no booking commitment</li></ul>
-        <p className="mt-6 border-t border-white/20 pt-5 text-xs leading-relaxed opacity-75">Moshe Barak operates the publisher's local transport business. The starting prices above relate to his car-and-driver service; a licensed guide is a separate arrangement.</p>
+        <p className="mt-4 leading-relaxed opacity-90">Tell me about your ship and the places you'd like to visit. I'll help plan a realistic route, arrange a suitable vehicle and confirm the full price before you book.</p>
+        <ul className="mt-6 list-disc space-y-3 pl-5 text-sm text-navy-foreground marker:text-white"><li>Private return trip from {port.name} Port</li><li>Custom itineraries and larger-group requests</li><li>Pickup and return planned around your ship</li><li>I'll prepare a personal quote for your day ashore</li></ul>
       </div>
       <div className="p-5 sm:p-8">
         <form onSubmit={send} noValidate aria-label={`${port.name} shore excursion quote request`} aria-busy={submission.isSending}>
