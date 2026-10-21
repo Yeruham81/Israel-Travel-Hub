@@ -13,7 +13,7 @@ describe("Brevo REST transport", () => {
     await sendBrevoQuote(message, "mock-credential");
     expect(fetch).toHaveBeenCalledOnce();
     expect(fetch).toHaveBeenCalledWith("https://api.brevo.com/v3/smtp/email", expect.objectContaining({
-      method: "POST", redirect: "error", signal: expect.any(AbortSignal),
+      method: "POST", redirect: "manual", signal: expect.any(AbortSignal),
       headers: { "api-key": "mock-credential", accept: "application/json", "content-type": "application/json" },
     }));
     const options = fetch.mock.calls[0]?.[1] as RequestInit;
@@ -25,7 +25,7 @@ describe("Brevo REST transport", () => {
   });
 
   it.each([
-    [401, {}, "BREVO_UNAUTHORIZED"], [403, {}, "BREVO_FORBIDDEN"], [429, {}, "BREVO_RATE_LIMIT"],
+    [302, {}, "BREVO_REDIRECT"], [401, {}, "BREVO_UNAUTHORIZED"], [403, {}, "BREVO_FORBIDDEN"], [429, {}, "BREVO_RATE_LIMIT"],
     [400, { code: "invalid_parameter", message: "sender is not valid: private" }, "BREVO_SENDER"],
     [400, { code: "invalid_parameter", message: "private parameter" }, "BREVO_REJECTED"],
     [503, { message: "private provider details" }, "BREVO_PROVIDER"],
