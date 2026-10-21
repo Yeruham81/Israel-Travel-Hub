@@ -6,7 +6,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { privateDriverServices } from "@/data/registry";
 import { airportTransferPhotos } from "@/data/airportTransfers";
-import { driverGuideOptions, emptyDriverQuote, validateDriverQuote, type DriverQuoteFields } from "@/lib/private-driver-quote";
+import { emptyDriverQuote, validateDriverQuote, type DriverQuoteFields } from "@/lib/private-driver-quote";
 
 export function PrivateDriverQuoteForm({ serviceId, onServiceChange, initialFields }: { serviceId: string; onServiceChange: (id: string) => void; initialFields?: Partial<DriverQuoteFields> | undefined }) {
   const [fields, setFields] = useState(() => ({ ...emptyDriverQuote, ...initialFields }));
@@ -56,7 +56,6 @@ export function PrivateDriverQuoteForm({ serviceId, onServiceChange, initialFiel
               <label className="text-sm font-medium">Passengers, including children *<Input name="passengers" type="number" min={1} max={99} step={1} required value={fields.passengers} onChange={(e) => update("passengers", e.target.value)} className={fieldClass} /></label>
               <label className="text-sm font-medium">Luggage<Input name="luggage" maxLength={250} placeholder="Cases, carry-ons, strollers, bulky items" value={fields.luggage} onChange={(e) => update("luggage", e.target.value)} className={fieldClass} /></label>
               <label className="text-sm font-medium sm:col-span-2">Stops / itinerary{serviceId === "day-hire" || serviceId === "multi-stop" ? " *" : ""}<Textarea name="itinerary" required={serviceId === "day-hire" || serviceId === "multi-stop"} maxLength={1500} rows={4} placeholder="Places you want to visit, rough timing and any fixed appointments" value={fields.itinerary} onChange={(e) => update("itinerary", e.target.value)} className="mt-2 bg-background text-base" /></label>
-              <label className="text-sm font-medium sm:col-span-2">Driver or licensed guide?<select name="guide" value={fields.guide} onChange={(e) => update("guide", e.target.value)} className={selectClass}>{driverGuideOptions.map((option) => <option key={option.id} value={option.id}>{option.label}</option>)}</select></label>
               <label className="text-sm font-medium sm:col-span-2">Additional requests<Textarea name="notes" maxLength={1500} rows={3} placeholder="Children's ages, mobility needs, desired hours or a return journey" value={fields.notes} onChange={(e) => update("notes", e.target.value)} className="mt-2 bg-background text-base" /></label>
             </div>
             <label className="mt-5 flex items-start gap-3 text-sm leading-relaxed"><input name="consent" type="checkbox" required checked={fields.consent} onChange={(e) => update("consent", e.target.checked)} className="mt-1 h-4 w-4 shrink-0 accent-primary" /><span>I agree to share these details with Moshe Barak for this quote request. <PrivacyInformationLink /></span></label>
