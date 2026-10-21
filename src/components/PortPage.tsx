@@ -7,13 +7,12 @@ import { airportTransferPhotos } from "@/data/airportTransfers";
 import { getShoreCatalog, getShorePort, shoreExcursionBenefits } from "@/data/shoreExcursions";
 import { publicSources, SHORE_EXCURSION_CHECK_DATE, shorePorts, type ShorePortId } from "@/data/registry";
 import { CANONICAL_ORIGIN, SITE_NAME, pageMeta } from "@/lib/site";
-import { ExchangeRateNote, PriceDisplay } from "@/components/CurrencyRates";
 import { AuthorCard } from "@/components/AuthorCard";
 import { PageUpdated } from "@/components/PageUpdated";
 import { authorLd } from "@/lib/author";
 import { hasPublicPhotoCredit } from "@/lib/photo-credits";
 import { ShoreServiceCatalog } from "@/components/ShoreServiceCatalog";
-import { shoreSourceIds, type ShoreServiceSearch } from "@/lib/shore-services";
+import { parseShoreServiceSearch, shoreSourceIds, type ShoreServiceSearch } from "@/lib/shore-services";
 
 function crumbsFor(id: ShorePortId) {
   return [{ name: "Home", path: "/" as const }, { name: "Shore excursions", path: "/shore-excursions/" as const }, { name: `From ${shorePorts[id].name} Port`, path: shorePorts[id].path }];
@@ -31,13 +30,14 @@ export function shorePortMeta(id: ShorePortId) {
   }] };
 }
 
-const sections = [["itineraries", "Tours & transfers"], ["request-quote", "Request a quote"], ["timing", "Ship timing"], ["format", "Driver or guide"], ["check", "Before booking"], ["faq", "FAQ"], ["sources", "Sources"]] as const;
+const sections = [["itineraries", "Tours & day trips"], ["request-quote", "Request a quote"], ["timing", "Ship timing"], ["format", "Driver or guide"], ["check", "Before booking"], ["faq", "FAQ"], ["sources", "Sources"]] as const;
 const focusQuote = () => requestAnimationFrame(() => document.getElementById("request-quote")?.focus({ preventScroll: true }));
 
-export function PortPage({ id, filters, onFilterChange }: { id: ShorePortId; filters: ShoreServiceSearch; onFilterChange: (filters: ShoreServiceSearch) => void }) {
+export function PortPage({ id, filters: routeSearch, onFilterChange }: { id: ShorePortId; filters: ShoreServiceSearch; onFilterChange: (filters: ShoreServiceSearch) => void }) {
+  // The router also retains raw query keys; discard retired and invalid filters at the page boundary.
+  const filters = parseShoreServiceSearch(routeSearch);
   const port = getShorePort(id);
   const [itineraryId, setItineraryId] = useState("");
-  const minimumRate = Math.min(...port.itineraries.map((itinerary) => itinerary.price.amount));
   const photos = [port.photo, ...getShoreCatalog(id).map((service) => service.photo), airportTransferPhotos["moshe"]!].filter(hasPublicPhotoCredit);
   return <main className="mx-auto max-w-5xl px-4 pb-24 lg:pb-8">
     <header className="pt-6">
@@ -48,12 +48,7 @@ export function PortPage({ id, filters, onFilterChange }: { id: ShorePortId; fil
           <p className="eyebrow">Your ship. Your day ashore.</p>
           <h1 className="mt-3 text-4xl leading-[1.1] md:text-5xl">{port.title}</h1>
           <p className="mt-4 text-lg leading-relaxed text-muted-foreground">{port.intro}</p>
-          <p className="mt-5 text-sm font-medium">Moshe Barak’s car-and-driver day trips</p>
-          <PriceDisplay amount={minimumRate} size="hero" className="mt-5" />
-          <p className="mt-1 text-sm text-muted-foreground">Full-day return transport · per vehicle · up to 4 passengers</p>
-          <p className="mt-2 text-xs leading-relaxed text-muted-foreground">Weekday starting rate for transport only. Guide, admissions, meals and tips excluded. Night, weekend and holiday supplements may apply; final quote by confirmation.</p>
-          <ExchangeRateNote className="mt-3" />
-          <div className="mt-5 flex flex-wrap gap-3"><a href="#itineraries" className="btn btn-primary">Browse tours & transfers</a><a href="#request-quote" onClick={focusQuote} className="btn btn-outline">Request a private day trip</a></div>
+          <div className="mt-5"><a href="#request-quote" onClick={focusQuote} className="btn btn-primary">Request a private day trip</a></div>
         </div>
         <figure><img src={port.photo.src} alt={port.photo.alt} width={900} height={600} fetchPriority="high" decoding="async" className="aspect-[3/2] w-full rounded-2xl object-cover" /><GuidePhotoCredit photo={port.photo} /></figure>
       </div>
@@ -61,7 +56,7 @@ export function PortPage({ id, filters, onFilterChange }: { id: ShorePortId; fil
       <AuthorCard />
     </header>
 
-    <section aria-labelledby="answer-h" className="mt-7 rounded-2xl border border-primary/20 bg-secondary/60 p-5 sm:p-6"><h2 id="answer-h" className="text-2xl">Which service should I choose?</h2><p className="mt-3 leading-relaxed">{port.answer}</p></section>
+    <section aria-labelledby="answer-h" className="mt-7 rounded-2xl border border-primary/20 bg-secondary/60 p-5 sm:p-6"><h2 id="answer-h" className="text-2xl">Find your ideal day ashore</h2><p className="mt-3 leading-relaxed">{port.answer}</p></section>
     <OnThisPage sections={sections} />
 
     <ShoreServiceCatalog portId={id} filters={filters} onFilterChange={onFilterChange} itineraryId={itineraryId} onSelectItinerary={(next) => { setItineraryId(next); focusQuote(); }} />
@@ -79,7 +74,7 @@ export function PortPage({ id, filters, onFilterChange }: { id: ShorePortId; fil
     </Section>
     <Section id="format" title="Private driver, licensed guide or shared excursion?">
       <p><strong>Car-and-driver cards cover private transportation for your party.</strong> A driver is not automatically a licensed guide, and admission or guided visits inside attractions are not included in these starting prices.</p>
-      <p>Choose Guided tours to see the separate operator's excursion, with its own guide, group format, inclusions and booking conditions. For Moshe's car-and-driver routes, request licensed guiding separately and confirm the extra cost. Transfers are one-way transport requests and do not include a sightseeing day or a return to the ship.</p>
+      <p>Guided excursions have their own operator, guide, group format, inclusions and booking conditions. For Moshe's car-and-driver routes, request licensed guiding separately and confirm the extra cost.</p>
     </Section>
     <section id="check" aria-labelledby="check-h" className="mt-14 scroll-mt-24">
       <h2 id="check-h" className="text-3xl">Before confirming your excursion</h2>

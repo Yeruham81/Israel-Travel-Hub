@@ -38,7 +38,7 @@ describe("international price estimates", () => {
   it.each([
     { label: "airport hub", path: "/transfers/", route: TransfersRoute, count: 11 },
     { label: "dedicated airport route", path: "/travel-blog/ben-gurion-airport-to-jerusalem/", route: JerusalemRoute, count: 1 },
-    { label: "shore-excursion hero and cards", path: "/haifa-shore-excursions/", route: HaifaShoreRoute, count: 5 },
+    { label: "shore-excursion cards", path: "/haifa-shore-excursions/", route: HaifaShoreRoute, count: 4 },
   ])("shows consistent estimates on $label while retaining ILS fares and unpriced inquiries", async ({ path, route, count }) => {
     const router = createRouter({ routeTree, context: { queryClient: new QueryClient() }, history: createMemoryHistory({ initialEntries: [path] }), trailingSlash: "always" });
     await router.load();

@@ -4,6 +4,7 @@ import { act, cleanup, fireEvent, render, screen, waitFor, within } from "@testi
 import { afterEach, describe, expect, it, vi } from "vitest";
 import { affiliateConfig, getSource, providerLinks, shorePorts, shoreServices, shoreTourProducts, type ShorePortId } from "@/data/registry";
 import { filterShoreServices, parsePortTransferSearch, parseShoreServiceSearch, servicesForPort, shoreServiceHref, shoreSourceIds, shoreListedPrice } from "@/lib/shore-services";
+import { getShoreCatalog } from "@/data/shoreExcursions";
 import { routeTree } from "@/routeTree.gen";
 
 afterEach(() => { cleanup(); localStorage.clear(); vi.restoreAllMocks(); });
@@ -16,7 +17,7 @@ async function pageAt(path: string) {
   return { ...result, router, history };
 }
 const cards = () => screen.queryAllByTestId("shore-service-card");
-const catalogSizes = { haifa: 10, ashdod: 11 };
+const catalogSizes = { haifa: 8, ashdod: 9 };
 
 describe("port service catalog", () => {
   it("keeps the actual port context, service identity and multi-stop destinations separate", () => {
@@ -25,58 +26,67 @@ describe("port service catalog", () => {
       expect(services).toHaveLength(catalogSizes[port]);
       expect(new Set(services.map((service) => service.id)).size).toBe(services.length);
       expect(services.every((service) => service.portId === port && service.provider.pageIds.includes(shorePorts[port].pageId))).toBe(true);
-      expect(filterShoreServices(port, { service: "transfer" })).toHaveLength(2);
+      expect(services.every((service) => service.kind !== "transfer")).toBe(true);
     }
     const byMasada = filterShoreServices("ashdod", { destination: "masada" });
     const byDeadSea = filterShoreServices("ashdod", { destination: "dead-sea" });
     expect(byMasada.every((service) => byDeadSea.some((other) => other.id === service.id))).toBe(true);
     expect(byDeadSea.length).toBeGreaterThan(byMasada.length);
     expect(byMasada.some((service) => service.id === "ashdod-masada-jerusalem")).toBe(true);
-    expect(filterShoreServices("haifa", { service: "transfer", destination: "jerusalem" })).toEqual([]);
+    expect(filterShoreServices("haifa", { destination: "masada" })).toEqual([]);
   });
 
   it("ignores invalid URL values and exposes no draft or unresolved provider as a public service", () => {
     expect(parseShoreServiceSearch({ service: "invalid", destination: ["jerusalem"], q: "discard" })).toEqual({});
-    expect(parseShoreServiceSearch({ service: "guided-tour", destination: "jerusalem", unrelated: "discard" })).toEqual({ service: "guided-tour", destination: "jerusalem" });
-    expect(shoreServiceHref("haifa", { service: "guided-tour", destination: "jerusalem" })).toBe("/haifa-shore-excursions/?service=guided-tour&destination=jerusalem");
+    expect(parseShoreServiceSearch({ service: "guided-tour", destination: "jerusalem", unrelated: "discard" })).toEqual({ destination: "jerusalem" });
+    expect(shoreServiceHref("haifa", { destination: "jerusalem" })).toBe("/haifa-shore-excursions/?destination=jerusalem");
     const sample = { ...shoreServices[0]!, id: "test-unpublished", portId: "haifa" as const, status: "draft" as const };
     shoreServices.push(sample);
     try { expect(servicesForPort("haifa").some((service) => service.id === sample.id)).toBe(false); }
     finally { shoreServices.pop(); }
   });
 
-  it.each([{ port: "haifa" }, { port: "ashdod" }] as const)("shows all $port services without asking for a search, and filters without changing the request", async ({ port }) => {
+  it.each([{ port: "haifa" }, { port: "ashdod" }] as const)("shows all $port return tours with destination tags and preserves the inquiry while filtering", async ({ port }) => {
     const { router, history, container } = await pageAt(shorePorts[port].path);
     expect(cards()).toHaveLength(catalogSizes[port]);
-    expect(cards().slice(0, catalogSizes[port] - 6).every((card) => ["getyourguide", "viator"].includes(card.dataset["bookingPlatform"]!))).toBe(true);
+    expect(cards().slice(0, catalogSizes[port] - 4).every((card) => ["getyourguide", "viator"].includes(card.dataset["bookingPlatform"]!))).toBe(true);
     expect(screen.queryByRole("search")).not.toBeInTheDocument();
+    expect(screen.queryByRole("navigation", { name: "Filter port services by type" })).not.toBeInTheDocument();
+    expect(screen.queryByRole("navigation", { name: "Filter port services by booking site" })).not.toBeInTheDocument();
     expect(container.querySelector("a a")).toBeNull();
+    const header = screen.getByRole("heading", { level: 1 }).closest("header")!;
+    expect(header.querySelectorAll("a.btn")).toHaveLength(1);
+    expect(within(header).getByRole("link", { name: "Request a private day trip" })).toHaveAttribute("href", "#request-quote");
+    expect(header).not.toHaveTextContent(/From ILS|Weekday starting rate|Full-day return transport|Exchange rate|Browse tours|narrow.*tag/i);
+    expect(cards().every((card) => card.textContent?.includes(`${shorePorts[port].name} Port · pickup & return`))).toBe(true);
+    expect(cards().every((card) => !/Price checked|one.way|direct quote/.test(card.textContent || ""))).toBe(true);
+    expect(cards().some((card) => card.dataset["serviceKind"] === "transfer")).toBe(false);
     fireEvent.change(screen.getByLabelText("Full name *"), { target: { value: "Jamie Cruise" } });
-    const types = screen.getByRole("navigation", { name: "Filter port services by type" });
     const destinations = screen.getByRole("navigation", { name: "Filter port services by destination" });
-    fireEvent.click(within(types).getByRole("link", { name: "Guided tours" }));
-    await waitFor(() => expect(cards()).toHaveLength(catalogSizes[port] - 6));
-    expect(router.state.location.search).toEqual({ service: "guided-tour" });
-    const guidedId = `${port}-shore-viator-${port}-jerusalem-bethlehem`;
+    expect(within(destinations).queryByRole("link", { name: /Airport|Hotels/ })).not.toBeInTheDocument();
     fireEvent.click(within(destinations).getByRole("link", { name: "Jerusalem" }));
-    await waitFor(() => expect(router.state.location.search).toEqual({ service: "guided-tour", destination: "jerusalem" }));
+    await waitFor(() => expect(router.state.location.search).toEqual({ destination: "jerusalem" }));
+    expect(cards()).toHaveLength(filterShoreServices(port, { destination: "jerusalem" }).length);
+    const guidedId = `${port}-shore-viator-${port}-jerusalem-bethlehem`;
     expect(cards().some((card) => card.dataset["serviceId"] === guidedId)).toBe(true);
+    fireEvent.click(within(destinations).getByRole("link", { name: "Nazareth" }));
+    await waitFor(() => expect(router.state.location.search).toEqual({ destination: "nazareth" }));
     expect(screen.getByLabelText("Full name *")).toHaveValue("Jamie Cruise");
     await act(async () => { history.back(); });
-    await waitFor(() => expect(router.state.location.search).toEqual({ service: "guided-tour" }));
+    await waitFor(() => expect(router.state.location.search).toEqual({ destination: "jerusalem" }));
     fireEvent.click(screen.getByRole("link", { name: "Clear filters" }));
     await waitFor(() => expect(cards()).toHaveLength(catalogSizes[port]));
     expect(router.state.location.search).toEqual({});
     expect(screen.getByLabelText("Full name *")).toHaveValue("Jamie Cruise");
   });
 
-  it("restores combined filters from a direct link and offers a working way out of an empty combination", async () => {
-    await pageAt("/haifa-shore-excursions/?service=transfer&destination=jerusalem");
+  it("restores a destination link and offers a working way out when that port has no matching tour", async () => {
+    await pageAt("/haifa-shore-excursions/?destination=masada");
     expect(cards()).toHaveLength(0);
-    expect(screen.getByRole("heading", { name: "No services match these tags" })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "No tours match this destination" })).toBeInTheDocument();
     fireEvent.click(screen.getByRole("link", { name: "Clear filters" }));
     await waitFor(() => expect(cards()).toHaveLength(catalogSizes.haifa));
-    const tag = within(screen.getByRole("navigation", { name: "Filter port services by type" })).getByRole("link", { name: "Transfers" });
+    const tag = within(screen.getByRole("navigation", { name: "Filter port services by destination" })).getByRole("link", { name: "Akko (Acre)" });
     let preventedByApp = true;
     window.addEventListener("click", (event) => { preventedByApp = event.defaultPrevented; event.preventDefault(); }, { once: true });
     fireEvent.click(tag, { ctrlKey: true });
@@ -84,16 +94,8 @@ describe("port service catalog", () => {
     expect(cards()).toHaveLength(catalogSizes.haifa);
   });
 
-  it.each(["haifa", "ashdod"] as ShorePortId[])("sends the $port transfer to the one-way form with correct context and no excursion price", async (port) => {
-    const result = await pageAt(`${shorePorts[port].path}?service=transfer`);
-    expect(cards()).toHaveLength(2);
-    const airport = cards().find((card) => card.dataset["serviceId"] === `${port}-airport-transfer`)!;
-    expect(airport).toHaveTextContent("Price on request");
-    expect(airport).not.toHaveTextContent("From ILS");
-    const href = within(airport).getByRole("link", { name: "Request a transfer quote" }).getAttribute("href")!;
-    expect(href).toBe(`/private-driver/?port=${port}&transfer=airport#request-quote`);
-    result.unmount();
-    await pageAt(href);
+  it.each(["haifa", "ashdod"] as ShorePortId[])("preserves existing $port transfer inquiry links outside the excursion catalog", async (port) => {
+    await pageAt(`/private-driver/?port=${port}&transfer=airport#request-quote`);
     expect(screen.getByLabelText("Type of journey *")).toHaveValue("intercity");
     expect(screen.getByLabelText("Pickup city, hotel or address *")).toHaveValue(`${shorePorts[port].name} Port`);
     expect(screen.getByLabelText("Final drop-off *")).toHaveValue("Ben Gurion Airport");
@@ -150,25 +152,28 @@ describe("port service catalog", () => {
     expect(servicesForPort("haifa").some((item) => item.operator?.id === "rent-a-guide")).toBe(false);
   });
 
-  it("combines booking site, destination and service tags without clearing the other groups", async () => {
-    const { router } = await pageAt("/haifa-shore-excursions/?platform=getyourguide");
-    expect(cards()).toHaveLength(2);
-    expect(cards().every((card) => card.dataset["bookingPlatform"] === "getyourguide")).toBe(true);
+  it("discards retired service and supplier filters so legacy links cannot hide tours", async () => {
+    const { router } = await pageAt("/haifa-shore-excursions/?service=transfer&platform=getyourguide&operator=ilya-pevzner&destination=airport");
+    await waitFor(() => expect(cards()).toHaveLength(catalogSizes.haifa));
     fireEvent.click(within(screen.getByRole("navigation", { name: "Filter port services by destination" })).getByRole("link", { name: "Nazareth" }));
-    await waitFor(() => expect(cards()).toHaveLength(1));
-    fireEvent.click(within(screen.getByRole("navigation", { name: "Filter port services by type" })).getByRole("link", { name: "Guided tours" }));
-    await waitFor(() => expect(router.state.location.search).toEqual({ service: "guided-tour", destination: "nazareth", platform: "getyourguide" }));
-    fireEvent.click(within(screen.getByRole("navigation", { name: "Filter port services by destination" })).getByRole("link", { name: "All destinations" }));
-    await waitFor(() => expect(cards()).toHaveLength(2));
-    expect(router.state.location.search).toEqual({ service: "guided-tour", platform: "getyourguide" });
-    expect(parseShoreServiceSearch({ platform: ["viator"], operator: "tourist-israel" })).toEqual({});
-    expect(parseShoreServiceSearch({ platform: "compass-travel" })).toEqual({});
+    await waitFor(() => expect(router.state.location.search).toEqual({ destination: "nazareth" }));
+    expect(cards()).toHaveLength(3);
+    expect(new Set(cards().map((card) => card.dataset["bookingPlatform"]))).toEqual(new Set(["getyourguide", "viator", "direct"]));
+    expect(parseShoreServiceSearch({ service: "guided-tour", platform: "viator", operator: "ilya-pevzner", destination: "jerusalem" })).toEqual({ destination: "jerusalem" });
+  });
+
+  it("uses a distinct credited destination photograph for every excursion across both ports", () => {
+    const catalog = [...getShoreCatalog("haifa"), ...getShoreCatalog("ashdod")];
+    expect(catalog).toHaveLength(17);
+    expect(new Set(catalog.map((service) => service.photo.src)).size).toBe(catalog.length);
+    expect(new Set(catalog.map((service) => service.photo.sourceUrl)).size).toBe(catalog.length);
+    expect(catalog.every((service) => Boolean(service.photo.alt && service.photo.sourceUrl))).toBe(true);
   });
 
   it("identifies the actual operator separately from the marketplace and uses the product's own outbound link", async () => {
     await pageAt("/haifa-shore-excursions/?operator=ilya-pevzner&destination=akko");
-    expect(cards()).toHaveLength(1);
-    const card = cards()[0]!;
+    expect(cards()).toHaveLength(2);
+    const card = cards().find((card) => card.dataset["productId"] === "shore-gyg-haifa-akko")!;
     expect(card).toHaveTextContent("Operated by Ilya Pevzner Guide Israel");
     expect(card).toHaveTextContent("GetYourGuide");
     expect(card).not.toHaveTextContent(/From ILS|Sponsored link/);
@@ -179,7 +184,7 @@ describe("port service catalog", () => {
     expect(JSON.parse(localStorage.getItem("itt_outbound_clicks_v1")!)[0]).toMatchObject({ pageId: "shore-haifa", productId: "shore-gyg-haifa-akko", offerId: "shore-gyg-haifa-akko" });
   });
 
-  it("shows duration, pickup, format and a clearly based dated price instead of long repeated card conditions", async () => {
+  it("shows duration, pickup, format and the price basis without a price-check date", async () => {
     await pageAt("/ashdod-shore-excursions/?platform=getyourguide");
     const card = cards().find((card) => card.dataset["productId"] === "shore-gyg-ashdod-jerusalem-bethlehem")!;
     expect(card).toHaveTextContent("9–11 hours");
@@ -187,7 +192,7 @@ describe("port service catalog", () => {
     expect(card).toHaveTextContent("Ashdod Port · pickup & return");
     expect(card).toHaveTextContent("US$1,009");
     expect(card).toHaveTextContent("Per group · up to 3");
-    expect(card).toHaveTextContent("Price checked 21 October 2026");
+    expect(card).not.toHaveTextContent("Price checked");
     expect(card).not.toHaveTextContent(/Per person|Best for:|Published car-and-driver starting rate|Check the actual ship date/);
     const masada = cards().find((card) => card.dataset["productId"] === "shore-gyg-ashdod-masada")!;
     expect(masada).toHaveTextContent("US$130");

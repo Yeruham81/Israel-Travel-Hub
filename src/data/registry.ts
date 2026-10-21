@@ -547,10 +547,6 @@ export const shoreServices: ShoreServiceRecord[] = [
     id: rate.id, productId: rate.id, portId: rate.portId, kind: "private-driver", destinationIds: shoreItineraryDestinations[rate.id]!,
     providerLinkId: `${rate.portId}-shore-moshe`, itineraryId: rate.id, status: "published",
   })),
-  ...(["haifa", "ashdod"] as const).flatMap((portId): ShoreServiceRecord[] => [
-    { id: `${portId}-airport-transfer`, productId: `${portId}-airport-transfer`, portId, kind: "transfer", destinationIds: ["airport"], providerLinkId: `${portId}-port-airport-transfer`, status: "published" },
-    { id: `${portId}-city-transfer`, productId: `${portId}-city-transfer`, portId, kind: "transfer", destinationIds: ["hotels-cities"], providerLinkId: `${portId}-port-city-transfer`, status: "published" },
-  ]),
   ...shoreTourProducts.filter((product) => product.partnerId && shoreBookingPlatforms.some((id) => id === product.partnerId)).flatMap((product) => product.portIds.map((portId): ShoreServiceRecord => ({
     id: `${portId}-${product.id}`, productId: product.id, portId, kind: "guided-tour",
     destinationIds: product.destinationIds, providerLinkId: product.id, status: "published",
