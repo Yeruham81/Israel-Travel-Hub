@@ -4,31 +4,22 @@ import { buildDriverQuoteDraft, validateDriverQuote } from "@/lib/private-driver
 import { buildShoreQuoteDraft, validateShoreQuote } from "@/lib/shore-quote";
 import { quoteRequestSchema } from "@/lib/quote-request-schema.server";
 import { quoteRequestBody, type DeliveryErrorCode, type QuoteRequestPayload } from "@/lib/quote-request";
-import type { QuoteEmail } from "@/lib/hostinger-smtp.server";
+import { BrevoDeliveryError, type QuoteEmail } from "@/lib/brevo-email.server";
 import { buildContactMessage, validateContactMessage } from "@/lib/contact-message";
 
-type MailEnvironment = { SMTP_PASSWORD?: string; QUOTE_DELIVERY_ENABLED?: string };
+type MailEnvironment = { BREVO_API_KEY?: string; QUOTE_DELIVERY_ENABLED?: string };
 type Result = { status: number; body: { accepted?: boolean; requestId?: string; error?: string; deliveryCode?: DeliveryErrorCode } };
-export type DeliveryFailure = { event: "quote-delivery.failed"; requestId: string; deliveryCode: DeliveryErrorCode; smtpStatus?: number };
+export type DeliveryFailure = { event: "quote-delivery.failed"; requestId: string; deliveryCode: DeliveryErrorCode; providerStatus?: number };
 const hash = (value: string) => createHash("sha256").update(value).digest("hex");
 const maxBodyBytes = 20_000;
 const windowMs = 10 * 60_000;
 
-/** Only fixed labels and numeric SMTP statuses escape this classifier, never raw errors. */
+/** Only trusted fixed labels and numeric HTTP statuses escape, never raw errors. */
 export function deliveryFailure(error: unknown, requestId: string): DeliveryFailure {
-  const value = (error && typeof error === "object" ? error : {}) as { code?: unknown; message?: unknown; responseCode?: unknown };
-  const code = typeof value.code === "string" ? value.code : "";
-  const message = typeof value.message === "string" ? value.message : "";
-  let deliveryCode: DeliveryErrorCode = "SMTP_UNKNOWN";
-  if (code === "EAUTH") deliveryCode = "SMTP_AUTH";
-  else if (code === "EDNS" || code === "ENOTFOUND" || code === "EAI_AGAIN") deliveryCode = "SMTP_DNS";
-  else if (code === "ETLS" || /^ERR_TLS_|^CERT_|^DEPTH_ZERO_|^UNABLE_TO_/.test(code)) deliveryCode = "SMTP_TLS";
-  else if (code === "ETIMEDOUT" || code === "ESOCKETTIMEDOUT") deliveryCode = "SMTP_TIMEOUT";
-  else if (["ECONNECTION", "ESOCKET", "ECONNREFUSED", "ECONNRESET", "EHOSTUNREACH", "ENETUNREACH"].includes(code)) deliveryCode = "SMTP_CONNECT";
-  else if (["EENVELOPE", "EMESSAGE", "SMTP_NOT_ACCEPTED"].includes(code)) deliveryCode = "SMTP_REJECTED";
-  if (/not implemented|unsupported.*(?:node:|socket|module)|cannot find module/i.test(message) || ["ERR_MODULE_NOT_FOUND", "ERR_UNKNOWN_BUILTIN_MODULE", "ERR_UNSUPPORTED_ESM_URL_SCHEME"].includes(code)) deliveryCode = "SMTP_RUNTIME";
-  const smtpStatus = typeof value.responseCode === "number" && Number.isInteger(value.responseCode) && value.responseCode >= 400 && value.responseCode <= 599 ? value.responseCode : undefined;
-  return { event: "quote-delivery.failed", requestId, deliveryCode, ...(smtpStatus === undefined ? {} : { smtpStatus }) };
+  const deliveryCode = error instanceof BrevoDeliveryError ? error.deliveryCode : "BREVO_PROVIDER";
+  const status = error instanceof BrevoDeliveryError ? error.providerStatus : undefined;
+  const providerStatus = typeof status === "number" && Number.isInteger(status) && status >= 100 && status <= 599 ? status : undefined;
+  return { event: "quote-delivery.failed", requestId, deliveryCode, ...(providerStatus === undefined ? {} : { providerStatus }) };
 }
 
 function response(body: unknown, status = 200, extraHeaders: Record<string, string> = {}) {
@@ -86,7 +77,7 @@ export function quoteEmail(payload: QuoteRequestPayload, now: Date): QuoteEmail 
 /** No message bodies or raw contact/IP data are kept in these short-lived guards. */
 export function createQuoteDeliveryService({
   environment = (): MailEnvironment => process.env,
-  send = async (message: QuoteEmail, password: string) => (await import("@/lib/hostinger-smtp.server")).sendHostingerQuote(message, password),
+  send = async (message: QuoteEmail, apiKey: string) => (await import("@/lib/brevo-email.server")).sendBrevoQuote(message, apiKey),
   now = () => Date.now(),
   reportFailure = (failure: DeliveryFailure) => { console.warn(JSON.stringify(failure)); },
 } = {}) {
@@ -95,7 +86,7 @@ export function createQuoteDeliveryService({
   let inFlight = 0;
   const configured = () => {
     const env = environment();
-    return env.QUOTE_DELIVERY_ENABLED === "true" && Boolean(env.SMTP_PASSWORD?.trim());
+    return env.QUOTE_DELIVERY_ENABLED === "true" && Boolean(env.BREVO_API_KEY?.trim());
   };
 
   return async function handle(request: Request): Promise<Response> {
@@ -133,17 +124,18 @@ export function createQuoteDeliveryService({
       const limit = limits.get(key);
       limits.set(key, { count: (limit?.count ?? 0) + 1, expires: limit?.expires ?? timestamp + windowMs });
     }
-    const password = environment().SMTP_PASSWORD!;
-    // Register the promise before starting SMTP, so concurrent retries share one attempt.
+    const apiKey = environment().BREVO_API_KEY;
+    if (!apiKey?.trim()) return response({ error: "Message sending is temporarily unavailable. Please try again later." }, 503);
+    // Register the promise before contacting Brevo, so concurrent retries share one attempt.
     inFlight++;
     const result: Promise<Result> = Promise.resolve().then(async () => {
       try {
-        await send(email, password);
+        await send(email, apiKey);
         return { status: 200, body: { accepted: true, requestId: payload.requestId } };
       } catch (error) {
         const failure = deliveryFailure(error, payload.requestId);
         try { reportFailure(failure); } catch { /* Logging must not change the delivery result. */ }
-        // A timeout after SMTP DATA can be ambiguous. Do not retry it automatically.
+        // A timeout after sending the API request can be ambiguous. Never retry automatically.
         return { status: 502, body: { error: "We could not confirm email delivery. Please check with Moshe before sending the same message again.", requestId: payload.requestId, deliveryCode: failure.deliveryCode } };
       } finally { inFlight--; }
     });
