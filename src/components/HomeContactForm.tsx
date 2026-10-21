@@ -36,7 +36,6 @@ export function HomeContactForm({ context = "homepage" }: { context?: "homepage"
         <p className="mt-6 text-sm opacity-85">For travel enquiries and private-transport requests.</p>
       </div>
       <div className="p-5 sm:p-8">
-        <p className="text-sm text-muted-foreground">Complete the form and press Send message.</p>
         <form onSubmit={send} noValidate className="mt-6" aria-label={context === "about" ? "Contact me" : "Homepage contact message"} aria-busy={submission.isSending}>
           <fieldset disabled={submission.isSending} className="min-w-0 space-y-5">
           {error && <p role="alert" className="rounded-lg border border-destructive p-3 text-sm text-destructive">{error}</p>}
