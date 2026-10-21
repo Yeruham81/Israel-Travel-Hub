@@ -39,7 +39,8 @@ export async function sendBrevoQuote(message: QuoteEmail, apiKey: string): Promi
   const timer = setTimeout(() => controller.abort(), 20_000);
   try {
     const response = await fetch("https://api.brevo.com/v3/smtp/email", {
-      method: "POST", signal: controller.signal, redirect: "error",
+      // workerd does not support redirect:"error"; manual prevents forwarding the API key.
+      method: "POST", signal: controller.signal, redirect: "manual",
       headers: { "api-key": apiKey, accept: "application/json", "content-type": "application/json" },
       body: JSON.stringify({
         sender: { email: airportTransferContact.email, name: "Israel Travel Hub" },
@@ -48,7 +49,8 @@ export async function sendBrevoQuote(message: QuoteEmail, apiKey: string): Promi
       }),
     });
     if (response.status !== 201) {
-      let code: BrevoFailureCode = response.status === 401 ? "BREVO_UNAUTHORIZED"
+      let code: BrevoFailureCode = response.status >= 300 && response.status < 400 ? "BREVO_REDIRECT"
+        : response.status === 401 ? "BREVO_UNAUTHORIZED"
         : response.status === 403 ? "BREVO_FORBIDDEN"
         : response.status === 429 ? "BREVO_RATE_LIMIT"
         : response.status >= 500 ? "BREVO_PROVIDER" : "BREVO_REJECTED";
