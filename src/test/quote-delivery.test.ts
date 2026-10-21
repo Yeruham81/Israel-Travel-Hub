@@ -57,10 +57,13 @@ describe("server-side quote delivery", () => {
     const message = send.mock.calls[0]![0];
     for (const value of values) expect(message.text).toContain(value);
     expect(message.text).toContain("I consent to sharing these details");
-    expect(message.text.startsWith(`Source page: ${data.sourceTitle}\nPage path: ${data.sourcePath}\n\n`)).toBe(true);
-    expect(message.text).toContain("2026-10-21T12:00:00.000Z");
+    expect(message.text.startsWith(`Sent from page: ${data.sourceTitle}\n\n`)).toBe(true);
+    expect(message.text).toContain("21 October 2026, 15:00 (Israel time)");
     expect(message.replyTo).toBe(contact.email);
-    expect(Object.keys(message).sort()).toEqual(["replyTo", "requestId", "subject", "text"]);
+    expect(message.senderName).toBe(contact.name);
+    expect(message.html).toContain("<strong>Sent from page:</strong>");
+    expect(message.html).toContain("<strong>Name:</strong>");
+    expect(Object.keys(message).sort()).toEqual(["html", "replyTo", "requestId", "senderName", "subject", "text"]);
     expect(send.mock.calls[0]![1]).toBe("test-only-key");
   });
 
@@ -69,11 +72,11 @@ describe("server-side quote delivery", () => {
     const handle = createQuoteDeliveryService({ environment: enabled, send, now });
     const data = { ...payload(), sourcePath: "/travel-blog/ben-gurion-airport-to-jerusalem/", sourceTitle: "Private transfer from Ben Gurion Airport to Jerusalem" };
     expect((await handle(post(data))).status).toBe(200);
-    expect(send.mock.calls[0]![0].text).toMatch(/^Source page: Private transfer from Ben Gurion Airport to Jerusalem\nPage path: \/travel-blog\/ben-gurion-airport-to-jerusalem\/\n\nHello Moshe,/);
+    expect(send.mock.calls[0]![0].text).toMatch(/^Sent from page: Private transfer from Ben Gurion Airport to Jerusalem\n\nHello Moshe,/);
     expect(send.mock.calls[0]![0].text).toContain("Destination: Ein Gedi");
     const legacy = { ...payload(), sourceTitle: undefined };
     expect((await handle(post(legacy))).status).toBe(200);
-    expect(send.mock.calls[1]![0].text).toMatch(/^Source page: \/transfers\/\nPage path: \/transfers\/\n\nHello Moshe,/);
+    expect(send.mock.calls[1]![0].text).toMatch(/^Sent from page: \/transfers\/\n\nHello Moshe,/);
     expect((await handle(post({ ...data, sourceTitle: "Changed page title" }))).status).toBe(409);
     expect(send).toHaveBeenCalledTimes(2);
   });
