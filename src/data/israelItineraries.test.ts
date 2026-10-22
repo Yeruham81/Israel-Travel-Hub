@@ -1,4 +1,7 @@
 import { describe, expect, it } from "vitest";
+import { createRouter, rootRouteId } from "@tanstack/react-router";
+import { QueryClient } from "@tanstack/react-query";
+import { routeTree } from "@/routeTree.gen";
 import { readFileSync } from "node:fs";
 import { resolve } from "node:path";
 import { itineraryIds, itineraries } from "@/data/israelItineraries";
@@ -66,6 +69,19 @@ describe("migrated Israel itineraries", () => {
     }
     expect(file("src/routes/hotels.tsx")).not.toContain("trip.href");
     expect(file("src/data/hotelHub.ts")).not.toContain("LEGACY_ITINERARY_ORIGIN");
+  });
+
+  it("keeps day-by-day internal destination links resolvable", () => {
+    const router = createRouter({ routeTree, context: { queryClient: new QueryClient() }, trailingSlash: "always" });
+    for (const guide of Object.values(itineraries)) {
+      for (const day of guide.daysPlan) for (const link of day.links) {
+        const path = link.to as string;
+        expect(router.matchRoutes(path).at(-1)?.routeId, `${guide.id}: ${path}`).not.toBe(rootRouteId);
+      }
+      for (const info of [...guide.alternatives, ...guide.logistics]) if (info.to) {
+        expect(router.matchRoutes(info.to as string).at(-1)?.routeId, `${guide.id}: ${info.to}`).not.toBe(rootRouteId);
+      }
+    }
   });
 
   it("has contextual navigation and a generated route-tree entry for every itinerary", () => {
