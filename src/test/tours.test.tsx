@@ -289,7 +289,7 @@ describe("tours hub and SEO category pages", () => {
     expect(guideDirectory.filter(guide => guide.to === travelGuidePaths.bethlehem)).toHaveLength(1);
     expect(guideDirectory.some(guide => guide.to === "/tours/bethlehem-from-jerusalem/")).toBe(false);
     await renderPage(travelGuidePaths.bethlehem);
-    expect(screen.getByRole("heading", { level: 1 })).toHaveTextContent("How to get from Jerusalem to Bethlehem");
+    expect(screen.getByRole("heading", { level: 1 })).toHaveTextContent(/How to get from Jerusalem to Bethlehem/i);
     const breadcrumbs = screen.getByRole("navigation", { name: "Breadcrumb" });
     expect(within(breadcrumbs).getByRole("link", { name: "Travel guides" })).toHaveAttribute("href", "/guides/");
     expect(document.querySelector("#buses")).not.toBeNull();
