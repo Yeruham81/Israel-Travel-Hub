@@ -9,6 +9,12 @@
 > the editor, so keep the branch in a working state.
 <!-- LOVABLE:END -->
 
+## Owner workflow preference — mandatory
+- **Do not invoke the Lovable AI agent, send Lovable chat messages or use Lovable credits for site development.** The owner has repeatedly and explicitly requested that all implementation, content edits and tests be handled independently through **GitHub only**.
+- Read and edit the connected GitHub repository directly (owner/repository: `Yeruham81/Israel-Travel-Hub`) and use GitHub Actions for validation. GitHub commits may sync into Lovable as a preview; that sync is not authorization to contact the Lovable agent.
+- Preserve pushed history, do not force-push, and do not publish to the production domain or change DNS without explicit owner authorization.
+- Only change this workflow if the owner explicitly instructs you to do so.
+
 ## Project rules
 - Provider/source/offer data lives in `src/data/registry.ts` as typed DB-shaped records; pages read only from it so it can be swapped for a database later.
 - Operators and booking partners are separate types; affiliate URLs live in `affiliateConfig`, never hardcoded into offers — so sponsored labeling stays truthful.
