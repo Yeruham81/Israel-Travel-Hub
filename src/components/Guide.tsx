@@ -1,4 +1,4 @@
-import { Link, useRouterState, type LinkProps } from "@tanstack/react-router";
+import { Link, type LinkProps } from "@tanstack/react-router";
 import { guideDirectory } from "@/data/travelGuides";
 import type { ReactNode } from "react";
 import { ExtLink } from "@/components/Layout";
@@ -159,11 +159,10 @@ export function ProviderSection({ id = "book", title, intro, links, pageId }: { 
  * Guide cards are capped at six and kept in complete pairs on all devices.
  * Service/action links keep their own compact link-card presentation.
  */
-export function RelatedLinks({ title = "Plan the rest of your trip", items }: { title?: string; items: { label: string; to: LinkProps["to"]; note?: string }[] }) {
+export function RelatedLinks({ title = "Plan the rest of your trip", items, currentPath }: { title?: string; items: { label: string; to: LinkProps["to"]; note?: string }[]; currentPath?: string }) {
   const guideSection = /\bguides?\b/i.test(title);
-  const pathname = useRouterState({ select: (state) => state.location.pathname });
   const normalized = (path: string) => path.replace(/\/+$/, "");
-  const current = guideDirectory.find((guide) => normalized(String(guide.to)) === normalized(pathname));
+  const current = currentPath ? guideDirectory.find((guide) => normalized(String(guide.to)) === normalized(currentPath)) : undefined;
   const titleWords = new Set((current?.title.toLowerCase().match(/[a-z]{4,}/g) || []).map((w) => w.replace(/s$/, "")).filter((w) => !["israel", "travel", "guide", "with", "from", "your", "what", "about", "best"].includes(w)));
   const guideItems = guideSection
     ? items.flatMap((item, order) => {
