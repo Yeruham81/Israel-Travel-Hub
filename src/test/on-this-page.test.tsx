@@ -13,7 +13,7 @@ describe("compact On this page navigation", () => {
   it("never needs more than three link rows at any responsive breakpoint", () => {
     const { container } = render(<OnThisPage sections={sections} />);
     const nav = screen.getByRole("navigation", { name: "On this page" });
-    const grid = within(nav).getByRole("list", { name: "" });
+    const grid = nav.querySelector("ul.grid") as HTMLElement;
     expect(grid).toHaveClass("grid-cols-2", "sm:grid-cols-3", "lg:grid-cols-4", "xl:grid-cols-5");
     const chips = [...grid.children] as HTMLElement[];
     expect(chips).toHaveLength(17);
