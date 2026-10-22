@@ -67,11 +67,11 @@ export function PortPage({ id, filters: routeSearch, onFilterChange }: { id: Sho
     <Section id="overview" title={`Make the most of your day from ${port.name}`}>
       {port.overview.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
     </Section>
-    <section aria-labelledby="benefits-h" className="mt-12"><h2 id="benefits-h" className="text-3xl">A private day, planned around you</h2><ul className="mt-5 grid gap-4 sm:grid-cols-2">{shoreExcursionBenefits.map((benefit) => <li key={benefit.title} className="rounded-xl border bg-card p-5"><h3 className="text-xl">{benefit.title}</h3><p className="mt-3 text-sm leading-relaxed text-muted-foreground">{benefit.text}</p></li>)}</ul></section>
+    <section aria-labelledby="benefits-h" className="mt-12"><h2 id="benefits-h" className="text-3xl">What a private car and driver covers</h2><ul className="mt-5 grid gap-4 sm:grid-cols-2">{shoreExcursionBenefits.map((benefit) => <li key={benefit.title} className="rounded-xl border bg-card p-5"><h3 className="text-xl">{benefit.title}</h3><p className="mt-3 text-sm leading-relaxed text-muted-foreground">{benefit.text}</p></li>)}</ul></section>
 
     <Section id="timing" title="Work back from your all-aboard time">
       <p>Docking, disembarkation, pickup and all-aboard are different times. Give the operator the ship's actual schedule and allow for the port's exit and re-entry procedures, road traffic and a return buffer before you need to be on board.</p>
-      <p>Agree which stops will be shortened or removed if the ship is late. Ask for a planned return time and the terms for an itinerary change or missed port call in writing. A published excursion is an idea to assess against your schedule, not a promise that it fits every cruise.</p>
+      <p>Agree which stops will be shortened or removed if the ship is late. Ask for a planned return time and the terms for an itinerary change or missed port call in writing. Even a published excursion may not fit a short port call.</p>
     </Section>
     <Section id="format" title="Private driver, licensed guide or shared excursion?">
       <p><strong>Car-and-driver cards cover private transportation for your party.</strong> A driver is not automatically a licensed guide, and admission or guided visits inside attractions are not included in these starting prices.</p>
@@ -85,7 +85,7 @@ export function PortPage({ id, filters: routeSearch, onFilterChange }: { id: Sho
       </div>
     </section>
     <FaqList faqs={port.faqs} />
-    <section aria-labelledby="ready-h" className="mt-14 rounded-2xl bg-navy p-6 text-navy-foreground sm:p-8"><h2 id="ready-h" className="text-3xl">Plan your day from {port.name} with me</h2><p className="mt-3 opacity-90">Share your ship's timetable, party size and favorite itinerary. I'll review the route, vehicle, total and booking terms and confirm them in writing before booking.</p><a href="#request-quote" onClick={focusQuote} className="btn btn-light mt-5">Request a personal quote</a></section>
+    <section aria-labelledby="ready-h" className="mt-14 rounded-2xl bg-navy p-6 text-navy-foreground sm:p-8"><h2 id="ready-h" className="text-3xl">Request an itinerary from {port.name}</h2><p className="mt-3 opacity-90">Send your ship's arrival and all-aboard times, party size and preferred route. I will reply with an itinerary and quote for your review.</p><a href="#request-quote" onClick={focusQuote} className="btn btn-light mt-5">Request a personal quote</a></section>
     <ShoreReadingGuides guides={port.related} />
     <SourceList ids={shoreSourceIds(id)} intro="Product pages were checked for itinerary, duration and port pickup/return. External starting prices are dated reference snapshots, not live prices or confirmed availability. Published ILS rates apply only to my named day trips; external tours are booked on GetYourGuide or Viator under their own terms." />
     <details className="mt-10 rounded-xl border p-5"><summary className="cursor-pointer text-sm font-medium">Excursion image credits</summary><ul className="mt-3 space-y-3">{[...new Map(photos.map((photo) => [photo.src, photo])).values()].map((photo) => <li key={photo.src}><p className="text-sm">{photo.alt}</p><GuidePhotoCredit photo={photo} insideDisclosure /></li>)}</ul></details>
