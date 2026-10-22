@@ -172,7 +172,7 @@ export const taxiGuideCluster: Record<"taxis" | "taxiFares" | "airportTaxis", Tr
       { q: "Are ordinary airport taxis the same as private airport transfers?", a: "No. The authorized airport taxi follows Gett's booking process and the regulated meter. Private transfers follow a separately agreed vehicle, pickup and booking confirmation." },
     ],
     sourceIds: ["guide-original-taxis", "guide-gett", "guide-iaa", "taxi-fares-2026", "taxi-passenger-rights", "taxi-complaints"],
-    related: ["taxiFares", "airportTaxis", "uber", "sherut", "shabbat", "israel", "calendar"],
+    related: ["taxiFares", "airportTaxis", "uber", "sherut", "shabbat", "israel"],
     services: [{ label: "Airport transfers and vehicle requests", to: "/transfers/" }, { label: "Private driver for a planned itinerary", to: "/private-driver/" }],
   },
 
@@ -328,7 +328,7 @@ export const taxiGuideCluster: Record<"taxis" | "taxiFares" | "airportTaxis", Tr
       { q: "When do these prices expire?", a: "The 2026 order specifies its temporary price schedule through March 31, 2027 unless amended earlier. Recheck the official order for later dates." },
     ],
     sourceIds: ["taxi-fares-2026", "taxi-tariff-hours", "taxi-passenger-rights", "taxi-complaints"],
-    related: ["taxis", "airportTaxis", "calendar", "shabbat"],
+    related: ["taxis", "airportTaxis", "shabbat", "uber"],
     services: [{ label: "Compare separately booked airport transfers", to: "/transfers/ben-gurion-airport/" }],
   },
 
@@ -500,7 +500,7 @@ export const taxiGuideCluster: Record<"taxis" | "taxiFares" | "airportTaxis", Tr
       { q: "Is a pre-booked private transfer the same as a Gett airport taxi?", a: "No. A separate operator's private transfer follows its own confirmed meeting point, vehicle and quoted terms; the official airport taxi uses the Gett system and regulated meter." },
     ],
     sourceIds: ["guide-gett", "guide-iaa", "taxi-fares-2026", "taxi-complaints"],
-    related: ["taxis", "taxiFares", "arrival", "shabbat", "calendar", "sherut"],
+    related: ["taxis", "taxiFares", "arrival", "shabbat", "sherut", "uber"],
     services: [{ label: "See private airport transfer options", to: "/transfers/ben-gurion-airport/" }],
   },
 };
