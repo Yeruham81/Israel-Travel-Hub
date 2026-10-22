@@ -1,6 +1,6 @@
 import { Link } from "@tanstack/react-router";
 import { Breadcrumbs, FaqList, OnThisPage, RelatedLinks, Section } from "@/components/Guide";
-import { GuidePhotoCredit } from "@/components/TravelGuide";
+import { GuidePhotoCredit, GuideParagraph } from "@/components/TravelGuide";
 import { AuthorCard } from "@/components/AuthorCard";
 import { SourcesDisclosure } from "@/components/SourcesDisclosure";
 import { airportJourneyGuides, airportJourneyIds, type AirportJourneyId, type JourneyOption } from "@/data/airportJourneyGuides";
@@ -37,10 +37,10 @@ export function airportJourneyMeta(id: AirportJourneyId) {
     "@context": "https://schema.org", "@type": "Article",
     "@id": url + "#article", mainEntityOfPage: url,
     headline: guide.title, description: guide.description, inLanguage: "en",
-    dateModified: PUBLISHED_REVIEW, author: authorLd(),
+    dateModified: guide.updatedAt || PUBLISHED_REVIEW, author: authorLd(),
     publisher: { "@type": "Organization", name: SITE_NAME, url: CANONICAL_ORIGIN },
     image: new URL(guide.photo.src, CANONICAL_ORIGIN).href,
-    citation: sources.map((source) => source.url),
+    citation: (guide.sources || sources).map((source) => source.url),
   })] };
 }
 
@@ -63,7 +63,7 @@ function OptionSection({ option, guideId }: { option: JourneyOption; guideId: Ai
     <section id={sectionId(option.id)} aria-labelledby={sectionId(option.id) + "-h"} className="mt-12 scroll-mt-28">
       <h3 id={sectionId(option.id) + "-h"} className="text-2xl font-semibold">{option.heading}</h3>
       <div className="mt-3 space-y-3 leading-relaxed text-muted-foreground">
-        {option.paragraphs.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
+        {option.paragraphs.map((paragraph) => <p key={paragraph}><GuideParagraph paragraph={paragraph} inlineLinks={option.inlineLinks} /></p>)}
       </div>
       <div className="mt-4 rounded-xl bg-secondary/50 p-5">
         <h4 className="font-semibold">Before choosing this option</h4>
@@ -96,7 +96,7 @@ export function AirportJourneyPage({ id }: { id: AirportJourneyId }) {
         <p className="eyebrow mt-6">Independent transport comparison · Ben Gurion Airport (TLV)</p>
         <h1 className="mt-3 max-w-4xl text-4xl leading-[1.1] md:text-5xl">{g.title}</h1>
         <p className="mt-4 max-w-3xl text-lg leading-relaxed text-muted-foreground">{g.intro}</p>
-        <p className="mt-3 text-sm text-muted-foreground">Approximate distance: {g.distance} · Editorial review: {PUBLISHED_REVIEW}</p>
+        <p className="mt-3 text-sm text-muted-foreground">Approximate distance: {g.distance} · Editorial review: {g.updatedAt || PUBLISHED_REVIEW}</p>
         <figure className="mt-7"><img src={g.photo.src} alt={g.photo.alt} width={1200} height={675} fetchPriority="high" decoding="async" className="aspect-[16/9] max-h-[450px] w-full rounded-2xl object-cover"/><GuidePhotoCredit photo={g.photo} /></figure>
         <AuthorCard />
       </header>
@@ -124,11 +124,12 @@ export function AirportJourneyPage({ id }: { id: AirportJourneyId }) {
             ))}</tbody>
           </table>
         </div>
-        <p className="mt-3 text-sm"><strong>*Price and time note:</strong> ₪ ranges are historical editorial estimates from August 2026; they are not current verified fares. Train and bus figures are per passenger, authorized taxis are metered per trip, rental totals depend on dates, and Moshe's displayed starting rate is a one-way weekday <strong>per-vehicle</strong> rate for up to four passengers, with possible supplements. All prices and operating schedules can change. Check the official planner/operator and a written quote for your date.</p>
+        <p className="mt-3 text-sm"><strong>*Price and time note:</strong> {g.historicalPrices === false ? "The train and bus prices must be checked in the official planner for your travel date; this guide does not quote an unverified current fare. " : "₪ ranges are historical editorial estimates from August 2026; they are not current verified fares. " }Train and bus prices are per passenger; official taxis use the regulated meter, and rental totals depend on dates. Moshe's displayed starting price is a one-way weekday <strong>per-vehicle</strong> rate for up to four passengers with possible supplements. All schedules can change. Check the operator and any written quote before you travel.</p>
       </Section>
       <PrivateRideCta id={id}/>
       <Section id="station-choice" title={"Train stations, changes and the final journey in " + g.city}>
-        <p>{g.trainIntro}</p>
+        {g.photos?.station && <figure className="mb-6 max-w-3xl"><img src={g.photos.station.src} alt={g.photos.station.alt} width={755} height={503} loading="lazy" decoding="async" className="aspect-[3/2] max-h-96 w-full rounded-xl object-cover" /><GuidePhotoCredit photo={g.photos.station} /></figure>}
+        <p><GuideParagraph paragraph={g.trainIntro} inlineLinks={g.stationLinks} /></p>
         <div className="mt-4 max-w-full overflow-x-auto rounded-xl border">
           <table className="w-full min-w-[540px] text-left text-sm">
             <caption className="sr-only">Useful stations and connections</caption>
@@ -141,11 +142,12 @@ export function AirportJourneyPage({ id }: { id: AirportJourneyId }) {
       </Section>
       <section id="options" aria-labelledby="options-h" className="mt-14 scroll-mt-28">
         <h2 id="options-h" className="text-3xl">How each transport option works</h2>
+        {g.photos?.onward && <figure className="mt-6 max-w-3xl"><img src={g.photos.onward.src} alt={g.photos.onward.alt} width={755} height={503} loading="lazy" decoding="async" className="aspect-[3/2] max-h-96 w-full rounded-xl object-cover" /><GuidePhotoCredit photo={g.photos.onward} /></figure>}
         {g.options.map(o=><OptionSection key={o.id} option={o} guideId={id}/>)}
       </section>
       <Section id="shabbat" title="Getting there on Shabbat and Jewish holidays">
-        {g.weekend.map(p=><p key={p}>{p}</p>)}
-        <p>For terminal-specific weekend travel, see our <Link to="/travel-blog/from-ben-gurion-airport-on-shabbat/" className="text-primary underline">Ben Gurion Airport Shabbat guide</Link>.</p>
+        {g.weekend.map(p=><p key={p}><GuideParagraph paragraph={p} inlineLinks={g.weekendLinks} /></p>)}
+        {!g.weekendLinks?.length && <p>For terminal-specific weekend travel, see our <Link to="/travel-blog/from-ben-gurion-airport-on-shabbat/" className="text-primary underline">Ben Gurion Airport Shabbat guide</Link>.</p>}
       </Section>
       <Section id="tips" title="Practical tips to avoid missed connections and extra costs">
         <ul className="list-disc space-y-3 pl-5">{g.advice.map(t=><li key={t}>{t}</li>)}</ul>
@@ -154,12 +156,20 @@ export function AirportJourneyPage({ id }: { id: AirportJourneyId }) {
       <FaqList faqs={g.faqs}/>
       <PrivateRideCta id={id} variant="bottom"/>
       <SourcesDisclosure>
-        <p className="mt-3 text-sm text-muted-foreground">Schedules, routes, meeting points, fares and access can change. Refer to the official provider pages for actual travel dates. Cost ranges are historical August 2026 editorial estimates, not verified current fares.</p>
-        <ul className="mt-4 grid gap-3 sm:grid-cols-2">{sources.map(s=><li key={s.url}><a className="block rounded-lg border bg-card p-4 font-medium text-primary underline" href={s.url} target="_blank" rel="noopener noreferrer">{s.title} <span className="sr-only">(opens a new tab)</span></a></li>)}
+        <p className="mt-3 text-sm text-muted-foreground">Schedules, routes, meeting points, fares and access can change. Refer to official provider pages for actual travel dates. {g.historicalPrices === false ? "Displayed rail and bus costs are not price quotes; verify current prices before travel." : "Cost ranges are historical August 2026 editorial estimates, not verified current fares."}</p>
+        <ul className="mt-4 grid gap-3 sm:grid-cols-2">{(g.sources || sources).map(s=><li key={s.url}><a className="block rounded-lg border bg-card p-4 font-medium text-primary underline" href={s.url} target="_blank" rel="noopener noreferrer">{s.title} <span className="sr-only">(opens a new tab)</span></a></li>)}
 
         </ul>
       </SourcesDisclosure>
-      <RelatedLinks title="Plan your next step" items={[...g.related, ...airportJourneyIds.filter(other=>other!==id).map(other=>({label:"How to get to "+airportJourneyGuides[other].city,to:airportJourneyGuides[other].path}))]}/>
+      {id === "tel-aviv" ? <>
+        <RelatedLinks title="Related practical guides" items={[
+          ...g.related,
+          { label: "Taxi fares in Israel", to: "/travel-blog/taxi-fares-in-israel/" },
+          { label: "Ben Gurion Airport arrival tips", to: "/travel-blog/ben-gurion-airport-arrival-tips/" },
+        ]} />
+        <RelatedLinks title="Other airport journey comparisons" items={airportJourneyIds.filter(other=>other!==id).map(other=>({label:"How to get to "+airportJourneyGuides[other].city,to:airportJourneyGuides[other].path}))} />
+      </> : <RelatedLinks title="Plan your next step" items={[...g.related, ...airportJourneyIds.filter(other=>other!==id).map(other=>({label:"How to get to "+airportJourneyGuides[other].city,to:airportJourneyGuides[other].path}))]}/>}
+
     </main>
   );
 }
