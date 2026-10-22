@@ -8,7 +8,8 @@ import { Route as HubRoute } from "@/routes/tours.index";
 import { tourCategoryMeta } from "@/components/TourCategoryPage";
 import { affiliateConfig, operators, sources, tourBookingOffers, tourProducts } from "@/data/registry";
 import { tourCategories, tourCategoryPaths, tourPhotos } from "@/data/tours";
-import { filterTours, isOwnerTour, offersForTour, parseTourSearch, tourSnapshotPrice, toursForCategory } from "@/lib/tours";
+import homepageCruise from "@/assets/home/cruise-port.webp";
+import { parseTourHubSearch, filterTours, isOwnerTour, offersForTour, parseTourSearch, tourSnapshotPrice, toursForCategory } from "@/lib/tours";
 import { CANONICAL_ORIGIN } from "@/lib/site";
 import { parsePrivateDriverSearch } from "@/lib/private-driver-search";
 import { readOutboundClicks } from "@/lib/outbound";
@@ -121,8 +122,8 @@ describe("tours hub and SEO category pages", () => {
     expect(within(planning).getAllByRole("link").every(link => link.textContent === "Read More")).toBe(true);
     expect(planning.querySelector('a[href*="shore-excursions"]')).toBeNull();
     for (const link of planning.querySelectorAll("a")) expect(router.matchRoutes(link.getAttribute("href")!).at(-1)?.routeId.replace(/\/$/, "")).toBe(link.getAttribute("href")!.replace(/\/$/, ""));
-    const cruise = screen.getByRole("region", { name: "A day ashore starts at your cruise port" });
-    expect(within(cruise).getByRole("img")).toHaveAttribute("alt", expect.stringMatching(/cruise ship.*Haifa/i));
+    const cruise = screen.getByRole("region", { name: "Arriving in Israel on a cruise?" });
+    expect(within(cruise).getByRole("img")).toHaveAttribute("src", homepageCruise);
     expect(within(cruise).getAllByRole("link").map(link => link.getAttribute("href"))).toEqual(["/haifa-shore-excursions/", "/ashdod-shore-excursions/"]);
 
   });
@@ -168,21 +169,27 @@ describe("tours hub and SEO category pages", () => {
     }
   });
 
-  it("searches the gateway by interest and departure, forwards choices and restores all categories", async () => {
-    const router = await renderPage("/tours/?q=food");
-    expect(screen.getByRole("searchbox")).toHaveValue("food");
-    expect([...document.querySelectorAll("[data-category-id]")].map(card => card.getAttribute("data-category-id"))).toEqual(["jerusalem", "tel-aviv-jaffa", "food-markets"]);
-    fireEvent.change(screen.getByRole("combobox", { name: "Start from" }), { target: { value: "jerusalem" } });
-    await waitFor(() => expect(router.state.location.search).toEqual({ q: "food", origin: "jerusalem" }));
-    expect(document.querySelectorAll("[data-category-id]")).toHaveLength(2);
-    for (const example of document.querySelectorAll("[data-product-id]")) expect(tourProducts.find(tour => tour.id === example.getAttribute("data-product-id"))!.originIds).toContain("jerusalem");
-    const foodLink = document.querySelector('[data-category-id="food-markets"] a.btn')!;
-    expect(new URL(foodLink.getAttribute("href")!, CANONICAL_ORIGIN).searchParams.get("origin")).toBe("jerusalem");
-    fireEvent.change(screen.getByRole("searchbox"), { target: { value: "no-such-experience-xyz" } });
-    await waitFor(() => expect(screen.getByRole("heading", { name: "No categories match your search" })).toBeInTheDocument());
-    fireEvent.click(screen.getByRole("button", { name: "Show all categories" }));
+  it("filters the gateway with destination tags, forwards the destination and restores history", async () => {
+    const router = await renderPage("/tours/?destination=jerusalem&q=food&origin=tel-aviv");
+    expect(screen.queryByRole("searchbox")).not.toBeInTheDocument();
+    expect(screen.queryByRole("combobox")).not.toBeInTheDocument();
+    const tags = screen.getByRole("navigation", { name: "Filter tour categories by destination" });
+    expect(within(tags).getByRole("button", { name: "Jerusalem" })).toHaveAttribute("aria-pressed", "true");
+    expect([...document.querySelectorAll("[data-category-id]")].map(card => card.getAttribute("data-category-id"))).toEqual(["jerusalem", "bethlehem-jericho", "food-markets"]);
+    fireEvent.click(within(tags).getByRole("button", { name: "Masada" }));
+    await waitFor(() => expect(router.state.location.search).toEqual({ destination: "masada" }));
+    expect(document.querySelectorAll("[data-category-id]")).toHaveLength(1);
+    for (const example of document.querySelectorAll("[data-product-id]")) expect(tourProducts.find(tour => tour.id === example.getAttribute("data-product-id"))!.destinationIds).toContain("masada");
+    const categoryLink = document.querySelector('[data-category-id="masada-dead-sea"] a.btn')!;
+    expect(new URL(categoryLink.getAttribute("href")!, CANONICAL_ORIGIN).searchParams.get("destination")).toBe("masada");
+    fireEvent.click(within(tags).getByRole("button", { name: "Masada" }));
     await waitFor(() => expect(document.querySelectorAll("[data-category-id]")).toHaveLength(8));
-    expect(router.state.location.search).toEqual({});
+    expect(within(tags).getByRole("button", { name: "All destinations" })).toHaveAttribute("aria-pressed", "true");
+    router.history.back();
+    await waitFor(() => expect(within(tags).getByRole("button", { name: "Masada" })).toHaveAttribute("aria-pressed", "true"));
+    fireEvent.click(within(tags).getByRole("button", { name: "All destinations" }));
+    await waitFor(() => expect(router.state.location.search).toEqual({}));
+    expect(parseTourHubSearch({ q: "food", origin: "tel-aviv", destination: "unknown" })).toEqual({});
   });
 
   it("updates the URL, empty state and results, preserves search words, and restores browser history", async () => {

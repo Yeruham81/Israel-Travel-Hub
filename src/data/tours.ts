@@ -9,7 +9,7 @@ import jaffa from "@/assets/tel-aviv/jaffa.webp";
 import akko from "@/assets/shore-excursions/akko-port.jpg";
 import holySepulchre from "@/assets/guides/holy-sepulchre.jpg";
 import coralReef from "@/assets/eilat/coral-reef.webp";
-import cruiseShip from "@/assets/shore-excursions/cruise-ship-haifa.webp";
+import cruiseShip from "@/assets/home/cruise-port.webp";
 import roadTrip from "@/assets/home/road-trip.webp";
 import esim from "@/assets/guides/esim-israel.jpeg";
 import hotelRoom from "@/assets/home/hotel-room.webp";
@@ -242,11 +242,9 @@ export const tourPlanningGuides: ShoreReadingGuide[] = [
   { title: "Find the right place to stay", description: "Choose a base that works with your itinerary. Explore accommodation areas and styles, from a city break to a relaxing resort stay.", to: "/hotels/", photo: { src: hotelRoom, alt: "Illustration of a welcoming hotel room" } },
 ];
 
+/** Reuse the homepage's cruise illustration without implying a particular ship or operator. */
 export const tourCruisePhoto: GuidePhoto = {
-  src: cruiseShip, alt: "Royal Iris cruise ship moored alongside a quay at Haifa Port",
-  sourceUrl: "https://commons.wikimedia.org/wiki/File:Haifa_6666-1_(Royal_Iris).jpg",
-  credit: "Zvi Roger · crop by Angelgreat · CC BY 3.0 · converted to WebP",
-  licenseUrl: "https://creativecommons.org/licenses/by/3.0/",
+  src: cruiseShip, alt: "Illustration of a cruise ship moored beside a harbour quay, with passengers setting out on an excursion",
 };
 
 export const tourCruisePorts = [

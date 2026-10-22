@@ -59,22 +59,18 @@ export function tourSnapshotPrice(offer: TourBookingOffer, now = new Date()) {
   return price;
 }
 
-/** Gateway filters find categories and reuse the matching product records for examples. */
-export type TourHubSearch = Pick<TourSearch, "q" | "origin">;
+/** Destination tags reuse the matching product records across topic pages. */
+export type TourHubSearch = Pick<TourSearch, "destination">;
 export function parseTourHubSearch(raw: Record<string, unknown>): TourHubSearch {
-  const { q, origin } = parseTourSearch(raw);
-  return { ...(q && { q }), ...(origin && { origin }) };
+  const { destination } = parseTourSearch(raw);
+  return destination ? { destination } : {};
 }
 export function tourCategoryResults(raw: TourHubSearch = {}) {
   const search = parseTourHubSearch(raw);
-  const terms = search.q?.trim().toLocaleLowerCase("en").split(/\s+/) || [];
   return tourCategories.flatMap(category => {
-    const categoryText = [category.title, category.shortTitle, category.intro].join(" ").toLocaleLowerCase("en");
-    const topicMatch = terms.every(term => categoryText.includes(term));
-    const nextSearch = parseTourHubSearch(topicMatch ? { origin: search.origin } : search);
-    const matches = filterTours(category.id, nextSearch);
+    const matches = filterTours(category.id, search);
     if (!matches.length) return [];
     const examples = [...matches.filter(tour => !isOwnerTour(tour)), ...matches.filter(isOwnerTour)].slice(0, 2);
-    return [{ category, examples, search: nextSearch }];
+    return [{ category, examples, search }];
   });
 }

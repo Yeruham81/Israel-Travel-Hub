@@ -26,10 +26,9 @@ function Tours() {
   const navigate = Route.useNavigate();
   return <main className="mx-auto max-w-5xl px-4 pb-12">
     <div className="pt-6"><Breadcrumbs items={[{ name: "Home", to: "/" }, { name: "Tours & day trips", to: "/tours/" }]} /></div>
-    <header className="relative mt-6 overflow-hidden rounded-3xl bg-navy text-navy-foreground">
-      <img src={hero.src} alt={hero.alt} width={1200} height={600} fetchPriority="high" className="absolute inset-0 size-full object-cover" />
-      <div className="absolute inset-0 bg-gradient-to-r from-navy/95 via-navy/80 to-navy/40" />
-      <div className="relative max-w-3xl px-6 py-12 sm:px-10 sm:py-16"><p className="text-xs font-bold uppercase tracking-[0.18em] text-amber-200">Great places. A day that fits you.</p><h1 className="mt-4 text-4xl font-semibold leading-tight sm:text-6xl">{toursHubTitle}</h1><p className="mt-5 max-w-2xl text-lg leading-relaxed">Ancient cities, desert views, market flavours and the Red Sea. Discover remarkable places, inspiring stories and local experiences that turn a day out into a highlight of your visit.</p></div>
+    <header className="mt-7 grid items-center gap-7 md:grid-cols-[1.1fr_1fr]">
+      <div><p className="eyebrow">Great places. A day that fits you.</p><h1 className="mt-3 text-4xl font-semibold leading-tight sm:text-5xl">{toursHubTitle}</h1><p className="mt-5 text-lg leading-relaxed text-muted-foreground">Ancient cities, desert views, market flavours and the Red Sea. Discover remarkable places, inspiring stories and local experiences that turn a day out into a highlight of your visit.</p></div>
+      <img src={hero.src} alt={hero.alt} width={1200} height={800} fetchPriority="high" className="aspect-[4/3] w-full rounded-3xl object-cover" />
     </header>
     <TourCategoryExplorer filters={filters} onChange={(search, replace) => { void navigate({ search: parseTourHubSearch(search), resetScroll: false, replace: Boolean(replace) }); }} />
     <section aria-labelledby="choose-format-h" className="mt-14"><h2 id="choose-format-h" className="text-3xl font-semibold">Choose how you want to spend the day</h2><div className="mt-5 grid gap-4 md:grid-cols-3">{[
