@@ -3,6 +3,10 @@ import { ArrowLeft, ArrowRight, MapPin } from "lucide-react";
 import { cityStayGuides, neighborhoodGuidesForCity, type NeighborhoodStayGuide } from "@/data/content";
 import { getSource, hotelsForArea, INFO_CHECK_DATE, linksForPage } from "@/data/registry";
 import { StayHotelCard } from "@/components/StayHotelCard";
+import { telAvivHotelPhotos } from "@/data/telAvivHotelPhotos";
+import { jerusalemHotelPhotos } from "@/data/jerusalemHotelPhotos";
+import { hotelTileCopy } from "@/components/TelAvivHotelBrowser";
+import { jerusalemHotelTileCopy } from "@/components/JerusalemHotelBrowser";
 import { AreaMap, AreaPhotoCredit } from "@/components/AreaMap";
 import { GuideHeader, OnThisPage, Section, Checklist, FaqList, ProviderSection, RelatedLinks, SourceList } from "@/components/Guide";
 
@@ -15,6 +19,15 @@ export function NeighborhoodStayPage({ area }: { area: NeighborhoodStayGuide }) 
   const otherAreas = neighborhoodGuidesForCity(area.cityId).filter((other) => other.id !== area.id);
   const pageId = `stay-area-${area.id}`;
   const airportGuide = city.related.find((item) => item.label.startsWith("Ben Gurion Airport"));
+  const photos = area.cityId === "jerusalem" ? jerusalemHotelPhotos : telAvivHotelPhotos;
+  const areaIndex = neighborhoodGuidesForCity(area.cityId).findIndex((item) => item.id === area.id);
+  const cityPhotoList = Object.values(photos);
+  // Additional cards use varied licensed generic photos from the existing city illustration pool.
+  // The original two keep their own city-catalog illustration. Neither is a property photo.
+  const photoFor = (hotelId: string, index: number) =>
+    photos[hotelId] || cityPhotoList[(areaIndex * 2 + index) % cityPhotoList.length];
+  const shortCopy = area.cityId === "jerusalem" ? jerusalemHotelTileCopy : hotelTileCopy;
+
   return (
     <main className="pb-8">
       <GuideHeader
@@ -47,12 +60,35 @@ export function NeighborhoodStayPage({ area }: { area: NeighborhoodStayGuide }) 
         </Section>
 
         <section id="book" aria-labelledby="book-h" className="mt-14 scroll-mt-32">
-          <p className="eyebrow">Your accommodation shortlist</p>
-          <h2 id="book-h" className="mt-2 text-3xl">Places to stay in {area.name}</h2>
-          <p className="mt-3 max-w-3xl leading-relaxed text-muted-foreground">These picks offer different ways to stay in the area. They are selected for location and travel style, rather than a live ranking or a claim that rooms are currently available.</p>
-          <p className="mt-3 text-sm leading-relaxed text-muted-foreground">The shortlist considers location, travel style and the hotels' own information. These are editorial recommendations, not reviews of personal stays at every property.</p>
-          <p className="mt-3 rounded-xl border bg-secondary/60 p-4 text-sm leading-relaxed">I may earn a commission from links marked “Sponsored link”, at no extra cost to you. Enter your dates on the booking site and confirm the hotel, room category, final total and cancellation terms before paying.</p>
-          <ul className="mt-6 space-y-5">{hotels.map((hotel) => <StayHotelCard key={hotel.id} hotel={hotel} booking={bookings.find((booking) => booking.id === `hotel-${hotel.id}-expedia`)} pageId={pageId} />)}</ul>
+          <h2 id="book-h" className="text-3xl">Places to stay in {area.name}</h2>
+          <p className="mt-2 max-w-3xl text-sm leading-relaxed text-muted-foreground">
+            Compare four different places to stay in this area. Use Expedia to check rooms, total prices and availability for your dates.
+          </p>
+          <ul className="mt-5 grid gap-4 sm:grid-cols-2" data-testid="neighborhood-hotel-grid">
+            {hotels.map((hotel, index) => (
+              <StayHotelCard key={hotel.id} compact hotel={hotel}
+                booking={bookings.find((booking) => booking.id === `hotel-${hotel.id}-expedia`)}
+                editorial={shortCopy[hotel.id] ? { summary: shortCopy[hotel.id]!.description, bestFor: shortCopy[hotel.id]!.bestFor, watch: hotel.watch } : undefined}
+                photo={photoFor(hotel.id, index)}
+                fallbackPhoto={area.photo}
+                pageId={pageId} />
+            ))}
+          </ul>
+          <p className="mt-4 text-xs leading-relaxed text-muted-foreground">
+            Images are illustrative, not photographs of these hotels. Some existing Expedia links are sponsored and may earn me a commission at no extra cost; new hotel links are direct, non-affiliate Expedia links until they are updated.
+          </p>
+          <details className="mt-3 rounded-xl border bg-card p-3 text-xs text-muted-foreground" data-testid="neighborhood-hotel-photo-credits">
+            <summary className="cursor-pointer font-semibold text-foreground">Illustrative photo credits & licenses</summary>
+            <ul className="mt-3 grid gap-2 sm:grid-cols-2">
+              {hotels.map((hotel, index) => {
+                const image = photoFor(hotel.id, index);
+                return <li key={hotel.id}><span className="font-medium text-foreground">{hotel.name}: </span>
+                  {image.sourceUrl ? <a href={image.sourceUrl} target="_blank" rel="noopener noreferrer" className="underline underline-offset-2">{image.credit}<span className="sr-only"> (opens in a new tab)</span></a> : image.credit}
+                  {image.licenseUrl && <> · <a href={image.licenseUrl} target="_blank" rel="noopener noreferrer" className="underline underline-offset-2">License<span className="sr-only"> (opens in a new tab)</span></a></>}
+                </li>;
+              })}
+            </ul>
+          </details>
         </section>
         <Section id="checklist" title="Before you book" className="scroll-mt-32">
           <div className="mt-5 grid gap-4 sm:grid-cols-2">
