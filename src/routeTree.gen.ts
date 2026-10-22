@@ -90,6 +90,10 @@ import { Route as TravelBlogHowToGetFromBenGurionAirportToEinBokekRouteImport } 
 import { Route as TravelBlogHowToGetFromBenGurionAirportToHaifaRouteImport } from './routes/travel-blog.how-to-get-from-ben-gurion-airport-to-haifa'
 import { Route as TravelBlogHowToGetFromBenGurionAirportToJerusalemRouteImport } from './routes/travel-blog.how-to-get-from-ben-gurion-airport-to-jerusalem'
 import { Route as TravelBlogHowToGetFromBenGurionAirportToTelAvivRouteImport } from './routes/travel-blog.how-to-get-from-ben-gurion-airport-to-tel-aviv'
+import { Route as TravelBlogIsraelItinerary3DaysRouteImport } from './routes/travel-blog.israel-itinerary-3-days'
+import { Route as TravelBlogIsraelItinerary5DaysRouteImport } from './routes/travel-blog.israel-itinerary-5-days'
+import { Route as TravelBlogIsraelItinerary7DaysRouteImport } from './routes/travel-blog.israel-itinerary-7-days'
+import { Route as TravelBlogIsraelItinerary10DaysRouteImport } from './routes/travel-blog.israel-itinerary-10-days'
 import { Route as TravelBlogIsraelTravelTipsRouteImport } from './routes/travel-blog.israel-travel-tips'
 import { Route as TravelBlogJaffaRouteImport } from './routes/travel-blog.jaffa'
 import { Route as TravelBlogJerusalemToBethlehemRouteImport } from './routes/travel-blog.jerusalem-to-bethlehem'
@@ -568,6 +572,26 @@ const TravelBlogHowToGetFromBenGurionAirportToTelAvivRoute =
     path: '/travel-blog/how-to-get-from-ben-gurion-airport-to-tel-aviv',
     getParentRoute: () => rootRouteImport,
   } as any)
+const TravelBlogIsraelItinerary3DaysRoute = TravelBlogIsraelItinerary3DaysRouteImport.update({
+  id: '/travel-blog/israel-itinerary-3-days',
+  path: '/travel-blog/israel-itinerary-3-days',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TravelBlogIsraelItinerary5DaysRoute = TravelBlogIsraelItinerary5DaysRouteImport.update({
+  id: '/travel-blog/israel-itinerary-5-days',
+  path: '/travel-blog/israel-itinerary-5-days',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TravelBlogIsraelItinerary7DaysRoute = TravelBlogIsraelItinerary7DaysRouteImport.update({
+  id: '/travel-blog/israel-itinerary-7-days',
+  path: '/travel-blog/israel-itinerary-7-days',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TravelBlogIsraelItinerary10DaysRoute = TravelBlogIsraelItinerary10DaysRouteImport.update({
+  id: '/travel-blog/israel-itinerary-10-days',
+  path: '/travel-blog/israel-itinerary-10-days',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const TravelBlogIsraelTravelTipsRoute =
   TravelBlogIsraelTravelTipsRouteImport.update({
     id: '/travel-blog/israel-travel-tips',
@@ -831,6 +855,10 @@ export interface FileRoutesByFullPath {
   '/travel-blog/how-to-get-from-ben-gurion-airport-to-haifa': typeof TravelBlogHowToGetFromBenGurionAirportToHaifaRoute
   '/travel-blog/how-to-get-from-ben-gurion-airport-to-jerusalem': typeof TravelBlogHowToGetFromBenGurionAirportToJerusalemRoute
   '/travel-blog/how-to-get-from-ben-gurion-airport-to-tel-aviv': typeof TravelBlogHowToGetFromBenGurionAirportToTelAvivRoute
+  '/travel-blog/israel-itinerary-3-days': typeof TravelBlogIsraelItinerary3DaysRoute
+  '/travel-blog/israel-itinerary-5-days': typeof TravelBlogIsraelItinerary5DaysRoute
+  '/travel-blog/israel-itinerary-7-days': typeof TravelBlogIsraelItinerary7DaysRoute
+  '/travel-blog/israel-itinerary-10-days': typeof TravelBlogIsraelItinerary10DaysRoute
   '/travel-blog/israel-travel-tips': typeof TravelBlogIsraelTravelTipsRoute
   '/travel-blog/jaffa': typeof TravelBlogJaffaRoute
   '/travel-blog/jerusalem-to-bethlehem': typeof TravelBlogJerusalemToBethlehemRoute
@@ -947,6 +975,10 @@ export interface FileRoutesByTo {
   '/travel-blog/how-to-get-from-ben-gurion-airport-to-haifa': typeof TravelBlogHowToGetFromBenGurionAirportToHaifaRoute
   '/travel-blog/how-to-get-from-ben-gurion-airport-to-jerusalem': typeof TravelBlogHowToGetFromBenGurionAirportToJerusalemRoute
   '/travel-blog/how-to-get-from-ben-gurion-airport-to-tel-aviv': typeof TravelBlogHowToGetFromBenGurionAirportToTelAvivRoute
+  '/travel-blog/israel-itinerary-3-days': typeof TravelBlogIsraelItinerary3DaysRoute
+  '/travel-blog/israel-itinerary-5-days': typeof TravelBlogIsraelItinerary5DaysRoute
+  '/travel-blog/israel-itinerary-7-days': typeof TravelBlogIsraelItinerary7DaysRoute
+  '/travel-blog/israel-itinerary-10-days': typeof TravelBlogIsraelItinerary10DaysRoute
   '/travel-blog/israel-travel-tips': typeof TravelBlogIsraelTravelTipsRoute
   '/travel-blog/jaffa': typeof TravelBlogJaffaRoute
   '/travel-blog/jerusalem-to-bethlehem': typeof TravelBlogJerusalemToBethlehemRoute
@@ -1064,6 +1096,10 @@ export interface FileRoutesById {
   '/travel-blog/how-to-get-from-ben-gurion-airport-to-haifa': typeof TravelBlogHowToGetFromBenGurionAirportToHaifaRoute
   '/travel-blog/how-to-get-from-ben-gurion-airport-to-jerusalem': typeof TravelBlogHowToGetFromBenGurionAirportToJerusalemRoute
   '/travel-blog/how-to-get-from-ben-gurion-airport-to-tel-aviv': typeof TravelBlogHowToGetFromBenGurionAirportToTelAvivRoute
+  '/travel-blog/israel-itinerary-3-days': typeof TravelBlogIsraelItinerary3DaysRoute
+  '/travel-blog/israel-itinerary-5-days': typeof TravelBlogIsraelItinerary5DaysRoute
+  '/travel-blog/israel-itinerary-7-days': typeof TravelBlogIsraelItinerary7DaysRoute
+  '/travel-blog/israel-itinerary-10-days': typeof TravelBlogIsraelItinerary10DaysRoute
   '/travel-blog/israel-travel-tips': typeof TravelBlogIsraelTravelTipsRoute
   '/travel-blog/jaffa': typeof TravelBlogJaffaRoute
   '/travel-blog/jerusalem-to-bethlehem': typeof TravelBlogJerusalemToBethlehemRoute
@@ -1182,6 +1218,10 @@ export interface FileRouteTypes {
     | '/travel-blog/how-to-get-from-ben-gurion-airport-to-haifa'
     | '/travel-blog/how-to-get-from-ben-gurion-airport-to-jerusalem'
     | '/travel-blog/how-to-get-from-ben-gurion-airport-to-tel-aviv'
+    | '/travel-blog/israel-itinerary-3-days'
+    | '/travel-blog/israel-itinerary-5-days'
+    | '/travel-blog/israel-itinerary-7-days'
+    | '/travel-blog/israel-itinerary-10-days'
     | '/travel-blog/israel-travel-tips'
     | '/travel-blog/jaffa'
     | '/travel-blog/jerusalem-to-bethlehem'
@@ -1298,6 +1338,10 @@ export interface FileRouteTypes {
     | '/travel-blog/how-to-get-from-ben-gurion-airport-to-haifa'
     | '/travel-blog/how-to-get-from-ben-gurion-airport-to-jerusalem'
     | '/travel-blog/how-to-get-from-ben-gurion-airport-to-tel-aviv'
+    | '/travel-blog/israel-itinerary-3-days'
+    | '/travel-blog/israel-itinerary-5-days'
+    | '/travel-blog/israel-itinerary-7-days'
+    | '/travel-blog/israel-itinerary-10-days'
     | '/travel-blog/israel-travel-tips'
     | '/travel-blog/jaffa'
     | '/travel-blog/jerusalem-to-bethlehem'
@@ -1414,6 +1458,10 @@ export interface FileRouteTypes {
     | '/travel-blog/how-to-get-from-ben-gurion-airport-to-haifa'
     | '/travel-blog/how-to-get-from-ben-gurion-airport-to-jerusalem'
     | '/travel-blog/how-to-get-from-ben-gurion-airport-to-tel-aviv'
+    | '/travel-blog/israel-itinerary-3-days'
+    | '/travel-blog/israel-itinerary-5-days'
+    | '/travel-blog/israel-itinerary-7-days'
+    | '/travel-blog/israel-itinerary-10-days'
     | '/travel-blog/israel-travel-tips'
     | '/travel-blog/jaffa'
     | '/travel-blog/jerusalem-to-bethlehem'
@@ -1531,6 +1579,10 @@ export interface RootRouteChildren {
   TravelBlogHowToGetFromBenGurionAirportToHaifaRoute: typeof TravelBlogHowToGetFromBenGurionAirportToHaifaRoute
   TravelBlogHowToGetFromBenGurionAirportToJerusalemRoute: typeof TravelBlogHowToGetFromBenGurionAirportToJerusalemRoute
   TravelBlogHowToGetFromBenGurionAirportToTelAvivRoute: typeof TravelBlogHowToGetFromBenGurionAirportToTelAvivRoute
+  TravelBlogIsraelItinerary3DaysRoute: typeof TravelBlogIsraelItinerary3DaysRoute
+  TravelBlogIsraelItinerary5DaysRoute: typeof TravelBlogIsraelItinerary5DaysRoute
+  TravelBlogIsraelItinerary7DaysRoute: typeof TravelBlogIsraelItinerary7DaysRoute
+  TravelBlogIsraelItinerary10DaysRoute: typeof TravelBlogIsraelItinerary10DaysRoute
   TravelBlogIsraelTravelTipsRoute: typeof TravelBlogIsraelTravelTipsRoute
   TravelBlogJaffaRoute: typeof TravelBlogJaffaRoute
   TravelBlogJerusalemToBethlehemRoute: typeof TravelBlogJerusalemToBethlehemRoute
@@ -2138,6 +2190,34 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof TravelBlogHowToGetFromBenGurionAirportToTelAvivRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/travel-blog/israel-itinerary-3-days': {
+      id: '/travel-blog/israel-itinerary-3-days'
+      path: '/travel-blog/israel-itinerary-3-days'
+      fullPath: '/travel-blog/israel-itinerary-3-days'
+      preLoaderRoute: typeof TravelBlogIsraelItinerary3DaysRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/travel-blog/israel-itinerary-5-days': {
+      id: '/travel-blog/israel-itinerary-5-days'
+      path: '/travel-blog/israel-itinerary-5-days'
+      fullPath: '/travel-blog/israel-itinerary-5-days'
+      preLoaderRoute: typeof TravelBlogIsraelItinerary5DaysRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/travel-blog/israel-itinerary-7-days': {
+      id: '/travel-blog/israel-itinerary-7-days'
+      path: '/travel-blog/israel-itinerary-7-days'
+      fullPath: '/travel-blog/israel-itinerary-7-days'
+      preLoaderRoute: typeof TravelBlogIsraelItinerary7DaysRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/travel-blog/israel-itinerary-10-days': {
+      id: '/travel-blog/israel-itinerary-10-days'
+      path: '/travel-blog/israel-itinerary-10-days'
+      fullPath: '/travel-blog/israel-itinerary-10-days'
+      preLoaderRoute: typeof TravelBlogIsraelItinerary10DaysRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/travel-blog/israel-travel-tips': {
       id: '/travel-blog/israel-travel-tips'
       path: '/travel-blog/israel-travel-tips'
@@ -2464,6 +2544,10 @@ const rootRouteChildren: RootRouteChildren = {
     TravelBlogHowToGetFromBenGurionAirportToJerusalemRoute,
   TravelBlogHowToGetFromBenGurionAirportToTelAvivRoute:
     TravelBlogHowToGetFromBenGurionAirportToTelAvivRoute,
+  TravelBlogIsraelItinerary3DaysRoute: TravelBlogIsraelItinerary3DaysRoute,
+  TravelBlogIsraelItinerary5DaysRoute: TravelBlogIsraelItinerary5DaysRoute,
+  TravelBlogIsraelItinerary7DaysRoute: TravelBlogIsraelItinerary7DaysRoute,
+  TravelBlogIsraelItinerary10DaysRoute: TravelBlogIsraelItinerary10DaysRoute,
   TravelBlogIsraelTravelTipsRoute: TravelBlogIsraelTravelTipsRoute,
   TravelBlogJaffaRoute: TravelBlogJaffaRoute,
   TravelBlogJerusalemToBethlehemRoute: TravelBlogJerusalemToBethlehemRoute,
