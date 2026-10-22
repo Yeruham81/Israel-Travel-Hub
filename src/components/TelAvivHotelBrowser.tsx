@@ -28,7 +28,7 @@ export function TelAvivHotelBrowser() {
         <p className="eyebrow">A quicker way to choose</p>
         <h2 id="hotel-catalog-h" className="mt-2 text-3xl md:text-4xl">Already know your dates? Browse Tel Aviv stays</h2>
         <p className="mt-3 max-w-3xl leading-relaxed text-muted-foreground">
-          My selected hotels are available to compare here without opening every neighborhood guide. Choose an area to narrow the cards, or view all stays and open the hotel's booking page to enter your travel dates.
+          Browse selected hotels without opening every neighborhood guide. Filter by area, then open the provider's booking page to enter your dates, guest count and room preferences.
         </p>
 
         <div className="mt-5 flex flex-wrap gap-2" role="group" aria-label="Filter Tel Aviv hotels by area">
