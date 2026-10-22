@@ -1,12 +1,10 @@
-/** Verified supplementary neighborhood hotel recommendations, reviewed 2026-10-22.
- * Four cards per neighborhood: two established picks plus two additions.
- * Extra offers deliberately go to hotels' official sites until an approved
- * property-specific affiliate URL is provided; none is invented.
- * The city-wide curated catalogs retain their original smaller shortlists.
+/** 28 added neighborhood hotel skeleton records with direct, verified Expedia property URLs.
+ * NOT affiliate links: replace only after obtaining per-hotel approved tracking links.
+ * City-wide shortlists are intentionally unchanged; additions render on neighborhood pages.
  */
 import type { HotelRecommendation, SourceReference } from "@/data/registry";
 
-const supplemental: (HotelRecommendation & { officialUrl: string })[] = [
+const supplemental: (HotelRecommendation & { expediaUrl: string })[] = [
   {
     "id": "jlm-ibis",
     "cityId": "jerusalem",
@@ -16,8 +14,8 @@ const supplemental: (HotelRecommendation & { officialUrl: string })[] = [
     "summary": "Contemporary rooms near Zion Square, Jaffa Road and the light rail.",
     "bestFor": "Central first visits",
     "watch": "Confirm the exact room size and pedestrian approach for luggage.",
-    "sourceId": "hotel-jlm-ibis-official",
-    "officialUrl": "https://jerusalemcenterhotels.com/ibis.html"
+    "sourceId": "hotel-jlm-ibis-expedia-listing",
+    "expediaUrl": "https://www.expedia.com/Jerusalem-Hotels-Ibis-Jerusalem-City-Center-An-AccorHotels-Brand.h17228236.Hotel-Information"
   },
   {
     "id": "jlm-ibis-styles",
@@ -28,8 +26,8 @@ const supplemental: (HotelRecommendation & { officialUrl: string })[] = [
     "summary": "Colourful rooms on Ben Yehuda's pedestrian mall, steps from downtown restaurants.",
     "bestFor": "Walkable city breaks",
     "watch": "Check the pedestrian-only access and nearest vehicle drop-off.",
-    "sourceId": "hotel-jlm-ibis-styles-official",
-    "officialUrl": "https://ibisjerusalemhotels.com/en/ibis-styles-jerusalem/ibis-styles-jerusalem-city-center/"
+    "sourceId": "hotel-jlm-ibis-styles-expedia-listing",
+    "expediaUrl": "https://www.expedia.com/Jerusalem-Hotels-Ibis-Styles-Jerusalem-City-Center-An-AccorHotels-Brand.h27464110.Hotel-Information"
   },
   {
     "id": "jlm-david-citadel",
@@ -40,8 +38,8 @@ const supplemental: (HotelRecommendation & { officialUrl: string })[] = [
     "summary": "Large luxury hotel on King David Street near Mamilla Avenue and Jaffa Gate.",
     "bestFor": "Families seeking luxury facilities",
     "watch": "Compare room views and check which family or wellness facilities are included.",
-    "sourceId": "hotel-jlm-david-citadel-official",
-    "officialUrl": "https://www.thedavidcitadel.com/the-hotel/"
+    "sourceId": "hotel-jlm-david-citadel-expedia-listing",
+    "expediaUrl": "https://www.expedia.com/Jerusalem-Hotels-The-David-Citadel-Jerusalem.h71571.Hotel-Information"
   },
   {
     "id": "jlm-waldorf",
@@ -52,32 +50,32 @@ const supplemental: (HotelRecommendation & { officialUrl: string })[] = [
     "summary": "Luxury hotel on Agron Street, combining a restored stone façade with an elegant interior.",
     "bestFor": "Grand hotel luxury",
     "watch": "Check room category, parking fees and the walking approach to Jaffa Gate.",
-    "sourceId": "hotel-jlm-waldorf-official",
-    "officialUrl": "https://www.hilton.com/en/hotels/jrswawa-waldorf-astoria-jerusalem/"
+    "sourceId": "hotel-jlm-waldorf-expedia-listing",
+    "expediaUrl": "https://www.expedia.com/Jerusalem-Hotels-Waldorf-Astoria-Jerusalem.h6368804.Hotel-Information"
   },
   {
-    "id": "jlm-austrian-hospice",
+    "id": "jlm-hashimi",
     "cityId": "jerusalem",
     "areaId": "old-city",
-    "name": "Austrian Hospice",
-    "style": "Pilgrim guesthouse",
-    "summary": "Long-established pilgrim guesthouse on Via Dolorosa with private rooms and simpler accommodation.",
-    "bestFor": "Pilgrimages and historic stays",
-    "watch": "Enquire well ahead; check room facilities, stairs and access through the Old City.",
-    "sourceId": "hotel-jlm-austrian-hospice-official",
-    "officialUrl": "https://www.austrianhospice.com/en/"
-  },
-  {
-    "id": "jlm-gloria",
-    "cityId": "jerusalem",
-    "areaId": "old-city",
-    "name": "Gloria Hotel",
+    "name": "Hashimi Hotel",
     "style": "Old City heritage hotel",
-    "summary": "Family-run hotel inside Jaffa Gate in the Christian Quarter, close to major pilgrimage sites.",
-    "bestFor": "Christian Quarter sightseeing",
-    "watch": "Confirm the room building, stairs and luggage arrangements inside the walls.",
-    "sourceId": "hotel-jlm-gloria-official",
-    "officialUrl": "https://gloria-hotel.com/about-us/"
+    "summary": "Historic guesthouse in the Muslim Quarter close to the Via Dolorosa and local bazaars.",
+    "bestFor": "Old City heritage travelers",
+    "watch": "Plan a walking route from the nearest accessible gate; compare room sizes and stairs.",
+    "sourceId": "hotel-jlm-hashimi-expedia-listing",
+    "expediaUrl": "https://www.expedia.com/Jerusalem-Hotels-Hashimi-Hotel.h2539297.Hotel-Information"
+  },
+  {
+    "id": "jlm-saladin",
+    "cityId": "jerusalem",
+    "areaId": "old-city",
+    "name": "Saladin Boutique Hotel",
+    "style": "Old City boutique stay",
+    "summary": "Small boutique accommodation in the Old City near the historic market lanes.",
+    "bestFor": "Old City cultural visits",
+    "watch": "Confirm the room location, stairs, luggage access and arrival gate.",
+    "sourceId": "hotel-jlm-saladin-expedia-listing",
+    "expediaUrl": "https://www.expedia.com/Saladin-Boutique-Hotel.h92173657.Hotel-Information"
   },
   {
     "id": "jlm-agripas",
@@ -88,8 +86,8 @@ const supplemental: (HotelRecommendation & { officialUrl: string })[] = [
     "summary": "Boutique-style rooms on Agripas Street within easy walking distance of Mahane Yehuda Market.",
     "bestFor": "Market and downtown exploring",
     "watch": "Ask about room orientation and potential market-side or traffic noise.",
-    "sourceId": "hotel-jlm-agripas-official",
-    "officialUrl": "https://agripas.com/en/agripas-hotel-en/"
+    "sourceId": "hotel-jlm-agripas-expedia-listing",
+    "expediaUrl": "https://www.expedia.com/Jerusalem-Hotels-Agripas-Boutique-Hotel.h6173524.Hotel-Information"
   },
   {
     "id": "jlm-villa-albi",
@@ -100,8 +98,8 @@ const supplemental: (HotelRecommendation & { officialUrl: string })[] = [
     "summary": "Small design-led accommodation on Nissim Bachar Street in the market-side Nachlaot area.",
     "bestFor": "Independent neighborhood stays",
     "watch": "Confirm self-check-in arrangements and the facilities of your exact suite.",
-    "sourceId": "hotel-jlm-villa-albi-official",
-    "officialUrl": "https://albihotels.com/"
+    "sourceId": "hotel-jlm-villa-albi-expedia-listing",
+    "expediaUrl": "https://www.expedia.com/Jerusalem-Hotels-Damson-Suites.h42538176.Hotel-Information"
   },
   {
     "id": "jlm-holy-land",
@@ -112,8 +110,8 @@ const supplemental: (HotelRecommendation & { officialUrl: string })[] = [
     "summary": "A renovated hotel just outside the Old City walls, well placed for nearby holy sites.",
     "bestFor": "Pilgrims and northern Old City",
     "watch": "Confirm the correct entrance, route on foot and the room's actual outlook.",
-    "sourceId": "hotel-jlm-holy-land-official",
-    "officialUrl": "https://www.holylandhotel.com/"
+    "sourceId": "hotel-jlm-holy-land-expedia-listing",
+    "expediaUrl": "https://www.expedia.com/Jerusalem-Hotels-Holy-Land-Hotel.h1887905.Hotel-Information"
   },
   {
     "id": "jlm-st-george",
@@ -124,8 +122,8 @@ const supplemental: (HotelRecommendation & { officialUrl: string })[] = [
     "summary": "Modern hotel north of the Old City with guest rooms and hospitality facilities.",
     "bestFor": "Contemporary East Jerusalem stays",
     "watch": "Confirm opening and seasonal use of facilities and the walking route to Damascus Gate.",
-    "sourceId": "hotel-jlm-st-george-official",
-    "officialUrl": "https://stgeorgehoteljerusalem.com/"
+    "sourceId": "hotel-jlm-st-george-expedia-listing",
+    "expediaUrl": "https://www.expedia.com/Jerusalem-Hotels-St-George-Hotel-Jerusalem.h5461438.Hotel-Information"
   },
   {
     "id": "jlm-templer-inn",
@@ -136,8 +134,8 @@ const supplemental: (HotelRecommendation & { officialUrl: string })[] = [
     "summary": "Restored Templer-era house near the First Station, offering a handful of independent suites.",
     "bestFor": "Heritage suites and couples",
     "watch": "Confirm minimum guest age, room access and kitchenette details.",
-    "sourceId": "hotel-jlm-templer-inn-official",
-    "officialUrl": "https://templerinn.com/templerinn-en/"
+    "sourceId": "hotel-jlm-templer-inn-expedia-listing",
+    "expediaUrl": "https://www.expedia.com/Jerusalem-Hotels-The-Templer-Inn.h37819305.Hotel-Information"
   },
   {
     "id": "jlm-little-house-baka",
@@ -148,8 +146,8 @@ const supplemental: (HotelRecommendation & { officialUrl: string })[] = [
     "summary": "Smaller hotel in a restored historic Baka house near Bethlehem Road and neighborhood cafés.",
     "bestFor": "Quiet residential neighborhood stays",
     "watch": "Ask about stairs, exact room configuration and transport into central Jerusalem.",
-    "sourceId": "hotel-jlm-little-house-baka-official",
-    "officialUrl": "https://bakah.jerusalem-hotel.co.il/?language=eng"
+    "sourceId": "hotel-jlm-little-house-baka-expedia-listing",
+    "expediaUrl": "https://www.expedia.com/Jerusalem-Hotels-Little-House-In-Bakah.h893791.Hotel-Information"
   },
   {
     "id": "tlv-dan",
@@ -160,8 +158,8 @@ const supplemental: (HotelRecommendation & { officialUrl: string })[] = [
     "summary": "Long-established luxury hotel on HaYarkon Street across from the Mediterranean promenade.",
     "bestFor": "Classic beachfront luxury",
     "watch": "Verify sea-view categories and current wellness or parking arrangements.",
-    "sourceId": "hotel-tlv-dan-official",
-    "officialUrl": "https://www.danhotels.com/telavivhotels"
+    "sourceId": "hotel-tlv-dan-expedia-listing",
+    "expediaUrl": "https://www.expedia.com/Tel-Aviv-Hotels-Dan-Tel-Aviv.h2286.Hotel-Information"
   },
   {
     "id": "tlv-royal-beach",
@@ -172,8 +170,8 @@ const supplemental: (HotelRecommendation & { officialUrl: string })[] = [
     "summary": "Isrotel hotel near the southern part of the central promenade, with multiple room categories.",
     "bestFor": "Full-service beach holidays",
     "watch": "Confirm sea view, parking costs and facilities included in your rate.",
-    "sourceId": "hotel-tlv-royal-beach-official",
-    "officialUrl": "https://www.isrotel.com/isrotel-hotels/tel-aviv/royal-beach-tel-aviv/"
+    "sourceId": "hotel-tlv-royal-beach-expedia-listing",
+    "expediaUrl": "https://www.expedia.com/Tel-Aviv-Hotels-Royal-Beach-Tel-Aviv.h6235889.Hotel-Information"
   },
   {
     "id": "tlv-center-chic",
@@ -184,8 +182,8 @@ const supplemental: (HotelRecommendation & { officialUrl: string })[] = [
     "summary": "Atlas boutique hotel opposite Dizengoff Square in a historic city-centre setting.",
     "bestFor": "Dizengoff cafés and architecture",
     "watch": "Compare room size, noise and whether breakfast is provided in another building.",
-    "sourceId": "hotel-tlv-center-chic-official",
-    "officialUrl": "https://www.atlas.co.il/en/our-hotels/hotels-in-tel-aviv/"
+    "sourceId": "hotel-tlv-center-chic-expedia-listing",
+    "expediaUrl": "https://www.expedia.com/Tel-Aviv-Hotels-Center-Chic-Hotel-An-Atlas-Boutique-Hotel.h13191.Hotel-Information"
   },
   {
     "id": "tlv-dizengoff-garden",
@@ -196,8 +194,8 @@ const supplemental: (HotelRecommendation & { officialUrl: string })[] = [
     "summary": "Garden-themed hotel on Dizengoff Street, convenient for shops, cafés and nightlife.",
     "bestFor": "Independent central city breaks",
     "watch": "Check your room's distance from late-night street activity.",
-    "sourceId": "hotel-tlv-dizengoff-garden-official",
-    "officialUrl": "https://d-garden.co.il/"
+    "sourceId": "hotel-tlv-dizengoff-garden-expedia-listing",
+    "expediaUrl": "https://www.expedia.com/Tel-Aviv-Hotels-Dizengoff-Garden-Hotel.h62957430.Hotel-Information"
   },
   {
     "id": "tlv-shalom",
@@ -208,8 +206,8 @@ const supplemental: (HotelRecommendation & { officialUrl: string })[] = [
     "summary": "Atlas boutique hotel beside Independence Park with sea-facing rooftop spaces.",
     "bestFor": "Boutique northern beach breaks",
     "watch": "Check if your booked room actually includes a sea view.",
-    "sourceId": "hotel-tlv-shalom-official",
-    "officialUrl": "https://www.atlas.co.il/en/our-hotels/hotels-in-tel-aviv/shalom-hotel-tel-aviv/"
+    "sourceId": "hotel-tlv-shalom-expedia-listing",
+    "expediaUrl": "https://www.expedia.com/Tel-Aviv-Hotels-Shalom-Hotel-Relax.h117922.Hotel-Information"
   },
   {
     "id": "tlv-tal",
@@ -220,8 +218,8 @@ const supplemental: (HotelRecommendation & { officialUrl: string })[] = [
     "summary": "Atlas hotel near Metzitzim Beach and Tel Aviv Port, with a rooftop terrace.",
     "bestFor": "Port access and beach walks",
     "watch": "Confirm parking, meals and the exact room orientation.",
-    "sourceId": "hotel-tlv-tal-official",
-    "officialUrl": "https://www.atlas.co.il/en/our-hotels/hotels-in-tel-aviv/tal-hotel-tel-aviv/"
+    "sourceId": "hotel-tlv-tal-expedia-listing",
+    "expediaUrl": "https://www.expedia.com/Tel-Aviv-Hotels-Tal-By-The-Beach-An-Atlas-Boutique-Hotel.h15869.Hotel-Information"
   },
   {
     "id": "tlv-trieste",
@@ -232,8 +230,8 @@ const supplemental: (HotelRecommendation & { officialUrl: string })[] = [
     "summary": "Three distinctive suites in a restored building on Ahad HaAm Street near Neve Tzedek.",
     "bestFor": "Romantic heritage suites",
     "watch": "Check arrival arrangements and your chosen suite's stairs and outdoor space.",
-    "sourceId": "hotel-tlv-trieste-official",
-    "officialUrl": "https://www.triestetlv.com/"
+    "sourceId": "hotel-tlv-trieste-expedia-listing",
+    "expediaUrl": "https://www.expedia.com/Tel-Aviv-Hotels-Trieste-Neve-Tzedek-Boutique-Suites.h39468710.Hotel-Information"
   },
   {
     "id": "tlv-vera",
@@ -244,8 +242,8 @@ const supplemental: (HotelRecommendation & { officialUrl: string })[] = [
     "summary": "Boutique rooms on Lilienblum Street, on the eastern approach to Neve Tzedek.",
     "bestFor": "Local design and boutique stays",
     "watch": "Compare smaller room categories and routes to Neve Tzedek's quieter lanes.",
-    "sourceId": "hotel-tlv-vera-official",
-    "officialUrl": "https://theverahotel.com/"
+    "sourceId": "hotel-tlv-vera-expedia-listing",
+    "expediaUrl": "https://www.expedia.com/Tel-Aviv-Hotels-The-Vera.h21623670.Hotel-Information"
   },
   {
     "id": "tlv-setai",
@@ -256,8 +254,8 @@ const supplemental: (HotelRecommendation & { officialUrl: string })[] = [
     "summary": "Historic former Kishle complex beside Jaffa's Clock Tower, with contemporary upscale rooms.",
     "bestFor": "Luxury historic Jaffa stays",
     "watch": "Confirm room outlook, accessible routes and seasonal hotel facilities.",
-    "sourceId": "hotel-tlv-setai-official",
-    "officialUrl": "https://thesetaihotels.com/en/setai-tel-aviv/rooms-suites/"
+    "sourceId": "hotel-tlv-setai-expedia-listing",
+    "expediaUrl": "https://www.expedia.com/Tel-Aviv-Hotels-The-Setai-Tel-Aviv.h19531620.Hotel-Information"
   },
   {
     "id": "tlv-margosa",
@@ -268,20 +266,20 @@ const supplemental: (HotelRecommendation & { officialUrl: string })[] = [
     "summary": "Boutique hotel on Even Shushan Street near the flea market and Old Jaffa lanes.",
     "bestFor": "Jaffa markets and cafés",
     "watch": "Ask about balcony type, nearby evening noise and parking availability.",
-    "sourceId": "hotel-tlv-margosa-official",
-    "officialUrl": "https://www.margosa-hotel.co.il/contact-us"
+    "sourceId": "hotel-tlv-margosa-expedia-listing",
+    "expediaUrl": "https://www.expedia.com/Tel-Aviv-Hotels-Margosa-Hotel.h11078978.Hotel-Information"
   },
   {
-    "id": "tlv-de-mar",
+    "id": "tlv-levinski-market",
     "cityId": "telaviv",
     "areaId": "telaviv-florentin",
-    "name": "De Mar Florentine Hotel",
-    "style": "Self-check-in boutique hotel",
-    "summary": "Small hotel on Zevulun Street near Levinsky Market, with a digital check-in approach.",
-    "bestFor": "Independent Levinsky Market stays",
-    "watch": "Confirm check-in codes, balcony type and on-site support hours.",
-    "sourceId": "hotel-tlv-de-mar-official",
-    "officialUrl": "https://www.peraia-tlv.com/"
+    "name": "Levinski Market Hotel",
+    "style": "Small market-side hotel",
+    "summary": "Compact hotel in the Levinsky Market area, near Florentin restaurants and independent shops.",
+    "bestFor": "Market food and city walks",
+    "watch": "Check room orientation, street noise and self-check-in instructions.",
+    "sourceId": "hotel-tlv-levinski-market-expedia-listing",
+    "expediaUrl": "https://www.expedia.com/Tel-Aviv-Hotels-Levinski-Market-Hotel.h88167404.Hotel-Information"
   },
   {
     "id": "tlv-mulan",
@@ -292,20 +290,20 @@ const supplemental: (HotelRecommendation & { officialUrl: string })[] = [
     "summary": "Modern rooms and suites near Levinsky Market at Florentin's eastern side.",
     "bestFor": "Florentin food and longer stays",
     "watch": "Check exact arrival instructions and whether breakfast is off-site.",
-    "sourceId": "hotel-tlv-mulan-official",
-    "officialUrl": "https://mulanhotel.co.il/en/rooms-suites/"
+    "sourceId": "hotel-tlv-mulan-expedia-listing",
+    "expediaUrl": "https://www.expedia.com/Tel-Aviv-Hotels-Mulan-TLV-Hotel.h101875279.Hotel-Information"
   },
   {
-    "id": "tlv-shell-house",
+    "id": "tlv-carmel-beach-house",
     "cityId": "telaviv",
     "areaId": "telaviv-kerem",
-    "name": "Shell House",
-    "style": "Small heritage boutique stay",
-    "summary": "Five design-focused rooms inside a restored heritage building on Haim Havshush Street.",
-    "bestFor": "Characterful Kerem boutique stays",
-    "watch": "Confirm the specific room, arrival details and noise from nearby market lanes.",
-    "sourceId": "hotel-tlv-shell-house-official",
-    "officialUrl": "https://shellhousetlv.com/en/"
+    "name": "Carmel Beach House by Berry Stays",
+    "style": "Apartment-style suites",
+    "summary": "Studio and apartment-style accommodation near Carmel Market and the coastal streets.",
+    "bestFor": "Market-side independent stays",
+    "watch": "Check the exact apartment floor, kitchen details and access arrangements.",
+    "sourceId": "hotel-tlv-carmel-beach-house-expedia-listing",
+    "expediaUrl": "https://www.expedia.com/Tel-Aviv-Hotels-Carmel-Beach-House-By-Berry-Stays.h88670601.Hotel-Information"
   },
   {
     "id": "tlv-fabric",
@@ -316,8 +314,8 @@ const supplemental: (HotelRecommendation & { officialUrl: string })[] = [
     "summary": "Atlas hotel in a former garment-industry building on Nachalat Binyamin, near Carmel Market.",
     "bestFor": "Design and market restaurants",
     "watch": "Consider street and rooftop activity when choosing a room.",
-    "sourceId": "hotel-tlv-fabric-official",
-    "officialUrl": "https://www.atlas.co.il/en/our-hotels/hotels-in-tel-aviv/fabric-hotel-tel-aviv/"
+    "sourceId": "hotel-tlv-fabric-expedia-listing",
+    "expediaUrl": "https://www.expedia.com/Tel-Aviv-Hotels-Fabric-Hotel-An-Atlas-Boutique-Hotel.h25178756.Hotel-Information"
   },
   {
     "id": "tlv-rothschild22",
@@ -328,30 +326,30 @@ const supplemental: (HotelRecommendation & { officialUrl: string })[] = [
     "summary": "Business-friendly hotel at Rothschild Boulevard 22 near the lower boulevard's restaurants.",
     "bestFor": "Rothschild business and leisure",
     "watch": "Check room views and availability of business or parking facilities.",
-    "sourceId": "hotel-tlv-rothschild22-official",
-    "officialUrl": "https://www.leonardo-hotels.com/tel-aviv/hotel-rothschild-22-tel-aviv"
+    "sourceId": "hotel-tlv-rothschild22-expedia-listing",
+    "expediaUrl": "https://www.expedia.com/Tel-Aviv-Hotels-Hotel-Rothschild-22-Tel-Aviv.h11831531.Hotel-Information"
   },
   {
-    "id": "tlv-rothschild96",
+    "id": "tlv-rothschild71",
     "cityId": "telaviv",
     "areaId": "telaviv-rothschild",
-    "name": "The Rothschild Hotel",
-    "style": "Romantic boutique hotel",
-    "summary": "Boutique hotel at 96 Rothschild Boulevard with individual design details.",
-    "bestFor": "Couples and boulevard walks",
-    "watch": "Compare room sizes, breakfast conditions and nearby traffic or nightlife.",
-    "sourceId": "hotel-tlv-rothschild96-official",
-    "officialUrl": "https://www.the-rothschild-hotel.com/en/about/"
+    "name": "The Rothschild 71",
+    "style": "Boutique boulevard hotel",
+    "summary": "Intimate heritage-style hotel directly on Rothschild Boulevard with compact rooms and suites.",
+    "bestFor": "Design-focused Rothschild walks",
+    "watch": "Check room category and proximity to nearby nightlife or street traffic.",
+    "sourceId": "hotel-tlv-rothschild71-expedia-listing",
+    "expediaUrl": "https://www.expedia.com/Tel-Aviv-Hotels-The-Rothschild-71.h4928554.Hotel-Information"
   }
 ];
 
-export const neighborhoodHotelAdditions: HotelRecommendation[] = supplemental.map(({ officialUrl: _url, ...hotel }) => hotel);
+export const neighborhoodHotelAdditions: HotelRecommendation[] = supplemental.map(({ expediaUrl: _url, ...hotel }) => hotel);
 
 export const neighborhoodHotelSources: SourceReference[] = supplemental.map((hotel) => ({
   id: hotel.sourceId,
-  title: `${hotel.name} — official hotel information`,
-  publisher: hotel.name,
-  url: hotel.officialUrl,
+  title: `${hotel.name} — Expedia property page`,
+  publisher: "Expedia",
+  url: hotel.expediaUrl,
   checkedAt: "2026-10-22",
-  note: "Property identity, neighborhood and described accommodation reviewed against a hotel/operator website. Link goes directly to the official operator; room inventory, total price and opening status on travel dates are not guaranteed.",
+  note: "Direct Expedia property page checked against its property name. This is not an affiliate link; actual room inventory, final prices and cancellation rules are checked on Expedia at the time of booking.",
 }));
