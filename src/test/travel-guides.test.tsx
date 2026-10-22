@@ -12,6 +12,8 @@ import { Route as ArrivalRoute } from "@/routes/travel-blog.ben-gurion-airport-a
 import { Route as IsraelRoute } from "@/routes/travel-blog.getting-around-israel";
 import { Route as TelAvivRoute } from "@/routes/travel-blog.getting-around-tel-aviv";
 import { Route as TaxiRoute } from "@/routes/travel-blog.taxis-in-israel";
+import { Route as TaxiFaresRoute } from "@/routes/travel-blog.taxi-fares-in-israel";
+import { Route as AirportTaxisRoute } from "@/routes/travel-blog.ben-gurion-airport-taxis";
 import { Route as ShabbatRoute } from "@/routes/travel-blog.from-ben-gurion-airport-on-shabbat";
 import { Route as TipsRoute } from "@/routes/travel-blog.israel-travel-tips";
 import { Route as JerusalemRoute } from "@/routes/travel-blog.jerusalem-travel-guide";
@@ -198,13 +200,11 @@ describe("migrated practical guides", () => {
 
   it.each([
     ["taxis", TaxiRoute],
-    ["taxiFares", undefined],
-    ["airportTaxis", undefined],
-  ] as const)("renders contextual taxi guide links for %s", async (id) => {
+    ["taxiFares", TaxiFaresRoute],
+    ["airportTaxis", AirportTaxisRoute],
+  ] as const)("renders contextual taxi guide links for %s", async (id, route) => {
     const router = await routerAt(travelGuidePaths[id]);
-    const page = router.routesById[travelGuidePaths[id].replace(/\/$/, "")]?.options.component;
-    expect(page).toBeTruthy();
-    const Page = page!;
+    const Page = route.options.component!;
     const { container } = render(<RouterContextProvider router={router}><Page /></RouterContextProvider>);
     for (const section of travelGuides[id].sections) {
       const element = container.querySelector(`#${section.id}`)! as HTMLElement;
@@ -216,7 +216,7 @@ describe("migrated practical guides", () => {
 
   it("keeps Getting Around Israel a practical 2026 pillar and delegates specialist detail", () => {
     const guide = travelGuides.israel;
-    expect(guide.answer).toMatch(/trains between well-connected cities.*buses and light rail.*licensed taxis.*rental car/s);
+    expect(guide.answer).toMatch(/trains between well-connected cities.*buses and light rail.*licensed taxis.*rental car/is);
     expect(guide.sections.map((s) => s.id)).toEqual([
       "choose-transport", "intercity-trains", "buses", "paying", "city-transport",
       "taxis-apps", "sherut", "airport", "weekends", "rental-car", "day-trips",
