@@ -75,17 +75,19 @@ describe("Accommodation hub editorial upgrade", () => {
     expect(arrivalCards.filter((card) => card.to.startsWith("/travel-blog/ben-gurion-airport-to-"))).toHaveLength(0);
   });
 
-  it("links four legacy itineraries externally, explicitly avoiding invented internal destinations", () => {
+  it("links the four migrated itineraries internally at their original URLs", () => {
     const { container } = page();
     const itineraryLinks = container.querySelectorAll<HTMLAnchorElement>('[data-testid="hotel-itinerary-card"]');
     expect(itineraryLinks).toHaveLength(4);
     expect(itineraryCards.map((card) => card.days)).toEqual([3, 5, 7, 10]);
+    const router = createRouter({ routeTree, context: { queryClient: new QueryClient() }, trailingSlash: "always" });
     for (const link of itineraryLinks) {
-      expect(link.href).toMatch(/^https:\/\/www\.israel-taxi\.com\/travel-blog\/israel-itinerary-(3|5|7|10)-days\/$/);
-      expect(link).toHaveAttribute("target", "_blank");
-      expect(link.getAttribute("rel")).toContain("noopener");
+      const path = link.getAttribute("href")!;
+      expect(path).toMatch(/^\/travel-blog\/israel-itinerary-(3|5|7|10)-days\/$/);
+      expect(link).not.toHaveAttribute("target");
+      expect(router.matchRoutes(path).at(-1)?.routeId).not.toBe(rootRouteId);
     }
-    expect(screen.getByText(/existing website in a separate tab/)).toBeInTheDocument();
+    expect(screen.queryByText(/existing website in a separate tab/)).not.toBeInTheDocument();
   });
 
   it("keeps internal paths resolvable and self-canonical staging SEO unchanged", async () => {
