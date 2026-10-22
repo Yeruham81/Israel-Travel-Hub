@@ -190,13 +190,13 @@ export const journeyDestinationGuides = {
       "guide-qasr"
     ]
   },
-  "bethlehem": {
+    "bethlehem": {
     "id": "bethlehem",
-    "updatedAt": "2026-10-20",
-    "title": "How to get from Jerusalem to Bethlehem: compare your options",
-    "description": "Compare Jerusalem–Bethlehem tours, private arrangements, taxis and South Buses services. Understand the last leg, documents, return journey and rental-car limits.",
-    "intro": "Jerusalem and Bethlehem are close on a map, but the journey crosses different transport and access arrangements. A bus towards Beit Jala, a taxi to Checkpoint 300 and an organised Bethlehem tour are different products. Choose around the whole journey to your actual destination, including the return, rather than only the first ticket or vehicle.",
-    "answer": "An organised tour or a properly confirmed private arrangement can simplify the transfers and return. For independent public transport, South Buses lists line 231 as Beit Jala and line 234 as Bethlehem; confirm the current stops, route and operating day directly. Carry the documents required for your own status and do not assume that every taxi or rental vehicle can enter Bethlehem.",
+    "updatedAt": "2026-10-23",
+    "title": "How to Get from Jerusalem to Bethlehem: Bus, Taxi & Tours",
+    "description": "Jerusalem to Bethlehem by bus 231 or 234, taxi, private driver or tour. Find the Damascus Gate departure, understand Checkpoint 300 and plan your return.",
+    "intro": "The route depends on how you want to arrive. Bus 231 heads towards Beit Jala; 234 serves the Checkpoint 300 approach. Tours and prearranged vehicles follow different arrangements, so plan the final leg to central Bethlehem and the journey back.",
+    "answer": "For independent travel, start with South Buses 231 (Beit Jala) or 234 (Checkpoint 300), normally boarding from the East Jerusalem bus area near Damascus Gate. Check where each service actually ends. A tour may arrange the whole visit, while a taxi to the checkpoint normally leaves you to cross and arrange the onward journey. Verify documents and entry eligibility before setting off.",
     "topics": [
       "transportation",
       "destinations",
@@ -206,16 +206,16 @@ export const journeyDestinationGuides = {
     "photo": P["jerusalem-to-bethlehem"],
     "facts": [
       {
-        "label": "Choose a complete journey",
-        "text": "Account for the crossing and the final leg"
+        "label": "Bus departure",
+        "text": "East Jerusalem bus station near Damascus Gate / Prophets Terminal"
       },
       {
-        "label": "Public transport",
-        "text": "Check South Buses 231 and 234 individually"
+        "label": "Bus 231",
+        "text": "Beit Jala route; confirm your final stop and local transfer"
       },
       {
-        "label": "Vehicle and documents",
-        "text": "Confirm permissions, insurance and personal requirements"
+        "label": "Bus 234",
+        "text": "Checkpoint 300 approach; crossing and onward ride are separate"
       }
     ],
     "comparison": {
@@ -256,54 +256,76 @@ export const journeyDestinationGuides = {
     "sections": [
       {
         "id": "tours",
-        "title": "A tour: read the actual Bethlehem itinerary",
+        "title": "Organised day trips from Jerusalem",
         "paragraphs": [
-          "A Bethlehem-focused outing and a combined Jerusalem–Bethlehem tour leave different amounts of time at each place. Check whether the Church of the Nativity, Manger Square and any additional stop are actually included, and whether a church interior visit depends on worship or access.",
-          "Ask about pickup location, guide language, group size, transfers or guide handovers and the final return point. A tour name alone does not establish a private service or hotel pickup. Use the dedicated tour-comparison page to check the product’s details."
+          "Choose a Bethlehem-only visit if the Church of the Nativity is your main reason for travelling. A combined Bethlehem and Jericho day is longer and leaves less time for the church precinct.",
+          "Read the departure city, operator, meeting place and return arrangements on the actual booking page. Guiding in Bethlehem and transport across the boundary may involve a local provider or a handover; this should be confirmed rather than assumed. Compare Jerusalem-based Bethlehem tours before choosing a departure."
         ],
         "links": [
           {
-            "label": "Compare Bethlehem tour formats",
+            "label": "Browse Bethlehem, Jericho & Jordan River tours",
+            "to": "/tours/bethlehem-jericho-jordan-river/"
+          }
+        ],
+        "inlineLinks": [
+          {
+            "text": "Compare Jerusalem-based Bethlehem tours",
             "to": "/tours/bethlehem-jericho-jordan-river/"
           }
         ]
       },
       {
         "id": "private-taxi",
-        "title": "Private arrangements and taxis",
+        "title": "Private driver or taxi: clarify where the journey ends",
         "paragraphs": [
-          "For a private day, ask who operates each part of the journey and where that vehicle is authorised and insured to travel. A Palestinian driver’s ability to collect in Jerusalem and an Israeli vehicle’s ability to enter Bethlehem depend on permissions; nationality or a general taxi label is not enough.",
-          "A taxi to the Checkpoint 300 approach does not include the crossing, a onward ride or guiding unless those elements are explicitly arranged. Agree the meeting point on each side, waiting, the complete price and the return plan. Do not choose an arrangement by assuming a driver can simply continue anywhere."
+          "For a private visit, ask who drives in Jerusalem, who drives inside Bethlehem and where any handover takes place. A Jerusalem taxi dropping you near Checkpoint 300 is not equivalent to a vehicle authorised and insured for every stage.",
+          "Agree the pickup address, route, waiting, any local guide, price and return arrangements in writing. If transport is only to the crossing, you will need to pass through it and arrange a permitted local ride on the other side. My private driver service describes what to include in a transport enquiry, but it does not promise a direct crossing into Bethlehem."
         ],
         "links": [
           {
             "label": "Questions to ask when arranging a private driver",
             "to": "/private-driver/"
           }
+        ],
+        "inlineLinks": [
+          {
+            "text": "private driver service",
+            "to": "/private-driver/"
+          }
         ]
       },
       {
         "id": "buses",
-        "title": "South Buses: distinguish the routes and last legs",
+        "title": "Bus 231 or 234: where to board and what happens next",
         "paragraphs": [
-          "The operator’s Lines and Stations page lists 231 as Beit Jala and 234 as Bethlehem. These are East Jerusalem-area services; they are not departures from Jerusalem’s western Central Bus Station by default. Use the current operator station and timetable information for your chosen boarding point and destination.",
-          "Do not treat “Bethlehem bus” as a promise of a stop beside the Church of the Nativity. Confirm the final stop, any remaining walk or local ride and the return boarding location. Check payment and the fare with the operator rather than copying an old travel-blog price."
+          "The Arab bus station is outside Damascus Gate; the nearby Prophets Terminal is listed by South Buses for both 231 and 234. This is not Jerusalem's western Central Bus Station. Confirm the exact boarding bay, direction and stops with the operator on the travel day.",
+          "Line 231 is labelled Beit Jala. Ask which stop best suits your Bethlehem destination, including any local taxi or onward connection. Line 234 is labelled Bethlehem, but its Checkpoint 300 approach is not a bus all the way to Manger Square: allow for crossing formalities and onward local transport.",
+          "Check the return stop and the last suitable departure before leaving Jerusalem. South Buses publishes a Rav-Kav payment system; confirm whether cash is accepted on your selected journey and the applicable fare rather than relying on older quoted amounts."
+        ],
+        "sourceIds": [
+          "m26-south-buses",
+          "m26-cicts-buses"
         ]
       },
       {
         "id": "documents-car",
-        "title": "Documents and rental-car permissions",
+        "title": "Checkpoint, passports and rental cars",
         "paragraphs": [
-          "Check current entry and travel requirements for your nationality and status, carry the required passport and entry documents, and ask the organiser what it needs for the journey. Israeli citizens are generally prohibited from entering Palestinian Authority-controlled Area A, which includes Bethlehem; holding another passport is not a reason to assume that restriction disappears.",
-          "For a rental, obtain explicit written permission and confirm insurance for the exact planned route. A route shown in a navigation app does not override rental conditions or access restrictions. Recheck arrangements shortly before departure because crossing operation can change."
+          "Bethlehem is in Palestinian Authority Area A. Israeli citizens are generally prohibited from entering Area A, including if they also hold another passport. Other travellers must check the requirements applying to their own nationality, entry permission and travel documents. Do not assume a checkpoint shown on a map guarantees admission.",
+          "A rental car is usually a poor default for Bethlehem. Rental agreements, insurance and legal access may prevent the vehicle from entering. Ask the rental company for explicit written permission for the exact route before attempting to drive.",
+          "Crossing procedures and traffic conditions may change without notice. Check official travel advisories and operator instructions close to departure, and carry the documents required for both legs."
+        ],
+        "sourceIds": [
+          "m26-bethlehem-entry"
         ]
       },
       {
         "id": "visit-return",
-        "title": "A focused visit and a planned return",
+        "title": "Visiting Bethlehem independently and getting back",
         "paragraphs": [
-          "For a short visit, centre the day on the Nativity complex and Manger Square, adding another place such as the Milk Grotto only if access and time allow. Churches have their own worship and visitor windows, and a queue can take a meaningful part of the day.",
-          "Shabbat patterns differ between communities and operators. Check both directions of the actual transport instead of applying Jerusalem’s standard public-transport pattern to every Bethlehem service. Leave time for the crossing and the last leg to your Jerusalem accommodation; avoid a tight flight or onward connection."
+          "For a short visit, walk the Church of the Nativity and Manger Square area first. Star Street and the Milk Grotto can fit into the same central walk if you have time. Shepherds' Field is outside the centre and usually needs additional transport.",
+          "The Grotto of the Nativity entered a restoration programme in 2026; the Custody of the Holy Land reported work continuing towards Christmas. Check access to the grotto separately from access to the church, and leave time for services, queues and local traffic.",
+          "Before leaving Bethlehem, confirm where to catch your return transport and whether you must change vehicles at the crossing. Services on Fridays, Saturdays and religious holidays may follow different patterns; leave a generous buffer before a flight or onward train. For other short excursions, see my day trips from Jerusalem guide."
         ],
         "links": [
           {
@@ -318,34 +340,55 @@ export const journeyDestinationGuides = {
             "label": "Check religious dates",
             "to": "/travel-blog/calendar-of-events/"
           }
+        ],
+        "inlineLinks": [
+          {
+            "text": "day trips from Jerusalem guide",
+            "to": "/travel-blog/day-trips-from-jerusalem/"
+          }
+        ],
+        "sourceIds": [
+          "m26-custodia-nativity-restoration",
+          "m26-cicts"
         ]
       }
     ],
     "checklist": [
-      "Choose the complete journey and exact destination",
-      "Confirm the current line, stops and return if using buses",
-      "Check documents for your own citizenship and status",
-      "Verify vehicle permissions and insurance",
-      "Agree any handovers, waiting and guiding",
-      "Check church visitor windows",
-      "Leave a buffer before an onward commitment"
+      "Check your legal entry requirements and carry the right documents",
+      "Confirm bus 231 or 234, boarding point, final stop and payment",
+      "Plan crossing and onward transport if your bus or taxi ends at Checkpoint 300",
+      "Save the return route and allow time for checks or changes",
+      "Check current access to the Church and Grotto of the Nativity",
+      "Bring water, a local payment option and an offline map"
     ],
     "faqs": [
       {
-        "q": "Is there a direct train from Jerusalem to Bethlehem?",
-        "a": "No. Compare the actual road-based arrangements, including any crossing and final local leg."
+        "q": "Which Jerusalem bus goes to Bethlehem?",
+        "a": "South Buses lists 231 as Beit Jala and 234 as Bethlehem / the Checkpoint 300 approach. Neither route name guarantees a stop beside Manger Square. Check the current operator map and the final leg."
       },
       {
-        "q": "Is bus 231 the same as bus 234?",
-        "a": "No. The operator lists 231 for Beit Jala and 234 for Bethlehem. Check the current stops and timetable to choose the journey that suits your destination."
+        "q": "Where do buses to Bethlehem leave from?",
+        "a": "The East Jerusalem Arab bus station near Damascus Gate and the Prophets Terminal area, not the western Central Bus Station. Verify the boarding bay before travelling."
       },
       {
-        "q": "Can any Israeli taxi or rental car drive into Bethlehem?",
-        "a": "Do not assume so. Confirm the operator’s permissions and the vehicle’s insurance and rental conditions for the exact route."
+        "q": "Does bus 234 take me straight to the Church of the Nativity?",
+        "a": "No. Plan for the Checkpoint 300 area and onward local transport after any required crossing. Check the current route and crossing arrangements."
       },
       {
-        "q": "Can I visit on Shabbat?",
-        "a": "Check the actual transport operator, organiser and church arrangements for that date. Different communities and services follow different patterns."
+        "q": "Can I visit Bethlehem without a guided tour?",
+        "a": "Some eligible visitors travel independently using East Jerusalem buses and local transport. Make sure your own entry status allows the visit and arrange both directions before leaving."
+      },
+      {
+        "q": "Can an Israeli taxi or rental car drive into Bethlehem?",
+        "a": "Do not assume so. Vehicle authorisation, insurance and entry rules govern the actual journey; an ordinary car hire or taxi fare is not permission to enter Area A."
+      },
+      {
+        "q": "Is the Church of the Nativity grotto open?",
+        "a": "Restoration work started in 2026. Church access and grotto access can differ. Check a current church notice or local operator before making the visit."
+      },
+      {
+        "q": "Can I go to Bethlehem on Saturday or Sunday?",
+        "a": "Potentially, but bus schedules, crossings and church visitor access vary. Check the date-specific return service as well as the outward journey."
       }
     ],
     "related": [
@@ -356,11 +399,15 @@ export const journeyDestinationGuides = {
     ],
     "services": [
       {
-        "label": "Compare organised Bethlehem tours",
+        "label": "Bethlehem, Jericho & Jordan River tours",
         "to": "/tours/bethlehem-jericho-jordan-river/"
       },
       {
-        "label": "Choose a Jerusalem accommodation base",
+        "label": "Day trips from Jerusalem",
+        "to": "/travel-blog/day-trips-from-jerusalem/"
+      },
+      {
+        "label": "Jerusalem hotels by area",
         "to": "/travel-blog/where-to-stay-in-jerusalem/"
       }
     ],
@@ -368,7 +415,20 @@ export const journeyDestinationGuides = {
       "m26-original-jerusalem-to-bethlehem",
       "m26-south-buses",
       "m26-bethlehem-entry",
-      "m26-cicts"
+      "m26-cicts",
+      "m26-cicts-buses",
+      "m26-custodia-nativity-restoration"
+    ],
+    "reviewNote": "Access and transport arrangements can change at short notice. Israel's Area A entry restrictions apply to Israeli citizens, including dual nationals; check your personal status and the actual route before booking. Church of the Nativity grotto restoration work was underway during 2026, so check present visitor access.",
+    "nextSteps": [
+      {
+        "label": "Check bus routes 231 and 234",
+        "to": "/travel-blog/getting-around-israel/"
+      },
+      {
+        "label": "See Bethlehem tour formats",
+        "to": "/tours/bethlehem-jericho-jordan-river/"
+      }
     ]
   },
   "topTen": {
@@ -654,13 +714,13 @@ export const journeyDestinationGuides = {
       "m26-ims"
     ]
   },
-  "jerusalemDeadSea": {
+    "jerusalemDeadSea": {
     "id": "jerusalemDeadSea",
-    "updatedAt": "2026-10-20",
-    "title": "How to get from Jerusalem to the Dead Sea: all travel options",
-    "description": "Compare buses, organised tours, a private driver and rental driving from Jerusalem to the Dead Sea. Choose a named beach or hotel and plan the return.",
-    "intro": "A Dead Sea journey starts with choosing the destination. A northern beach facility, Ein Gedi Nature Reserve, Masada and the Ein Bokek hotel district are different stops along a long corridor. Once you have a specific beach, hotel or park entrance, compare transport for that complete journey rather than an approximate travel time to “the Dead Sea”.",
-    "answer": "A bus can suit an independent visit when its actual stop and return timetable fit your beach or hotel. An organised excursion can combine transport and selected visits; a private driver can quote your chosen route and waiting. A rental offers flexibility within its permitted and insured area. Confirm current site access and both directions of the journey before departure.",
+    "updatedAt": "2026-10-23",
+    "title": "Jerusalem to the Dead Sea: Bus 486, Tours & Driving",
+    "description": "How to reach Ein Bokek, Masada or Ein Gedi from Jerusalem by Egged 486/444, guided tour, private driver or rental car. Stops, return bus and beach tips.",
+    "intro": "A visit to the Dead Sea is not one destination. First choose Ein Bokek beach, Masada, Ein Gedi or a northern-shore facility; then match the transport and return timetable to that stop.",
+    "answer": "Egged 486 serves Jerusalem and stops along the Dead Sea corridor, including Ein Gedi, Masada and Ein Bokek; the 444 Eilat route also serves parts of the corridor and is on Egged's advance-reservation list. A guided tour or prearranged private driver may suit a day with several stops. If you drive, check road and park access first. Always plan the return before the outward trip.",
     "topics": [
       "transportation",
       "destinations",
@@ -669,16 +729,16 @@ export const journeyDestinationGuides = {
     "photo": P["jerusalem-to-the-dead-sea"],
     "facts": [
       {
-        "label": "First decision",
-        "text": "Choose the beach, hotel or park entrance"
+        "label": "Public bus",
+        "text": "Egged 486; 444 may require advance seat booking"
       },
       {
-        "label": "Bus plan",
-        "text": "Check the exact stop and same-day return"
+        "label": "Beach day",
+        "text": "Ein Bokek public beach and promenade"
       },
       {
-        "label": "Private or tour",
-        "text": "Agree the actual stops and included services"
+        "label": "Multiple stops",
+        "text": "Tour, private driver or permitted rental car"
       }
     ],
     "comparison": {
@@ -714,10 +774,10 @@ export const journeyDestinationGuides = {
     "sections": [
       {
         "id": "destination",
-        "title": "Northern beaches, Ein Gedi, Masada or Ein Bokek?",
+        "title": "Ein Bokek, Masada, Ein Gedi or the northern shore?",
         "paragraphs": [
-          "The northern shore can suit a beach facility or a Qumran-area combination. Ein Gedi is a nature reserve with route-specific access; it is not an interchangeable hotel-beach stop. Masada has different entrances and its own cable-car or trail arrangements.",
-          "Ein Bokek is the southern hotel and managed public-beach district. Give that exact destination when checking buses or asking for a quote. A travel time quoted for a northern beach should not be applied to Ein Bokek, and a bus serving one stop is not evidence of convenient access to every attraction."
+          "For floating and beach facilities, head for Ein Bokek rather than a vague Dead Sea map pin. Tamar Regional Council maintains a free public beach with showers, toilets, changing rooms and shade; paid parking and separately operated hotel services are different.",
+          "Masada is an archaeological site with its own entrance, admission and cable-car arrangements. Ein Gedi is a nature reserve; its trails and gates are not interchangeable with the beach. Northern shore facilities have their own charges and access. Choose the actual stop before checking a bus or booking a car."
         ],
         "links": [
           {
@@ -728,28 +788,52 @@ export const journeyDestinationGuides = {
             "label": "Compare regional attractions",
             "to": "/travel-blog/dead-sea-attractions/"
           }
+        ],
+        "inlineLinks": [
+          {
+            "text": "Ein Bokek",
+            "to": "/travel-blog/the-dead-sea/"
+          },
+          {
+            "text": "Masada",
+            "to": "/travel-blog/masada/"
+          },
+          {
+            "text": "Ein Gedi",
+            "to": "/travel-blog/ein-gedi/"
+          }
+        ],
+        "sourceIds": [
+          "m26-deadsea-ein-bokek-council",
+          "m26-inpa-ein-gedi-2026"
         ]
       },
       {
         "id": "tours",
-        "title": "Organised tours: compare what happens at the destination",
+        "title": "Tours from Jerusalem: what is included?",
         "paragraphs": [
-          "Read whether a trip is beach-focused or combines the Dead Sea with Masada, Ein Gedi or another attraction. Check the named beach and how much usable time remains there after the road journey and other visits. Do not assume that all tours use Ein Bokek.",
-          "Confirm pickup, guide language, return point and what admission, towels, changing facilities and meals are included. A shorter excursion and a full-day park combination can be different products even when both have “Dead Sea” in the name."
+          "A Masada-and-beach day is quite different from an Ein Bokek transfer. Check that the booked product departs from Jerusalem, how long it stays at the beach, and whether Masada guiding, cable-car admission and changing facilities are included.",
+          "For a combined day, the order of the stops affects the heat and the amount of time left for floating. The Masada & Dead Sea tours catalogue lists independent operators and my private car-and-driver option; the two types of service have different inclusions."
         ],
         "links": [
           {
             "label": "Compare tour formats",
             "to": "/tours/"
           }
+        ],
+        "inlineLinks": [
+          {
+            "text": "Masada & Dead Sea tours catalogue",
+            "to": "/tours/masada-dead-sea/"
+          }
         ]
       },
       {
         "id": "private",
-        "title": "Private driver: agree the whole day",
+        "title": "Private car and driver: agree the stops and waiting",
         "paragraphs": [
-          "A private arrangement can suit a hotel transfer, a beach return or a day with specific stops. State the actual pickup address, beach or hotel, party size, luggage and return time. Ask whether the driver waits, returns later or provides a one-way service.",
-          "Agree the total, included waiting and distance, parking, extra-time charges and cancellation terms in writing. Transport does not automatically include a licensed guide, park entry, a hotel day pass or a meal. A fixed appointment such as a baptism needs its own realistic time allowance."
+          "For my Masada and Dead Sea private day from Jerusalem, the published weekday starting rate is ₪2,100 per vehicle for up to four travellers, for transport only. Guiding, admissions, meals, parking and tips are separate. Confirm the final quote for your date and itinerary.",
+          "A one-way ride to an Ein Bokek hotel is a different job from a return excursion with Masada. Give the driver the precise pickup address, destinations, time at each stop, luggage and whether you need a return journey. You can also read about hiring a private driver in Israel."
         ],
         "links": [
           {
@@ -760,30 +844,49 @@ export const journeyDestinationGuides = {
             "label": "Plan a separate Qasr el-Yahud stop",
             "to": "/travel-blog/qasr-el-yahud/"
           }
+        ],
+        "inlineLinks": [
+          {
+            "text": "hiring a private driver in Israel",
+            "to": "/private-driver/"
+          }
         ]
       },
       {
         "id": "bus",
-        "title": "Public bus: check a precise journey",
+        "title": "Egged 486 and 444: check the stop and return",
         "paragraphs": [
-          "Use Egged’s current journey planning for your travel date and the exact destination, including the Jerusalem departure point and any connection. Route numbers, fares and stop patterns should come from the current operator information, not an old article’s fixed timetable.",
-          "Find the stop for your beach or hotel and the remaining walking route before booking the rest of the day. Check the return before the outward journey, particularly on Fridays, Saturdays and holidays. A bus near a park entrance does not guarantee an easy walk to the visitor facilities or a convenient later return."
+          "Egged line 486 runs between Jerusalem and the Neve Zohar area via the Dead Sea corridor, serving stops for Ein Gedi, Masada and Ein Bokek. Line 444 also travels between Jerusalem and Eilat via Dead Sea stops and appears on Egged's seat-reservation route list; check its purchase rules before travelling.",
+          "Find the correct platform at Jerusalem Central Bus Station in the operator's current timetable, then identify the stop nearest the actual beach, park entrance or hotel. Some stops leave a substantial walk in the sun; a highway junction is not necessarily a visitor entrance.",
+          "Check the return bus first. Fridays, Saturdays and holidays can substantially reduce the practical choice of return journeys. Do not copy an old platform number, fare or departure time; use Egged for the date you are travelling."
+        ],
+        "sourceIds": [
+          "m26-egged",
+          "m26-egged-444-reservation"
         ]
       },
       {
         "id": "driving",
-        "title": "Rental driving and the desert road",
+        "title": "Driving from Jerusalem on Routes 1 and 90",
         "paragraphs": [
-          "Check that the rental contract and insurance cover the exact route you intend to use. The usual approach descends east from Jerusalem toward the Dead Sea corridor, but navigation must remain consistent with current road instructions and the vehicle’s permitted area.",
-          "Plan parking at each named attraction and avoid informal shoreline access or stopping on highway shoulders. Check weather and road notices, including flash-flood warnings affecting the region. Confirm current park and beach opening before making a long drive for a particular facility."
+          "A common approach from Jerusalem follows Route 1 east to the Dead Sea corridor and Route 90 south. Use current navigation to the precise entrance, not simply “Dead Sea”, and confirm your rental agreement permits the intended roads and region. My car rental guide covers insurance and collection questions.",
+          "Plan parking at each stop. The desert has long stretches with little shade, and flash floods can close roads and reserve entrances even when the weather in Jerusalem looks fine. Never leave the road for an informal shore access point or walk through sinkhole-risk areas.",
+          "Check park hours and whether any Masada access or Ein Gedi trail is closed. Leave adequate time for the drive back instead of combining every nearby-sounding site."
+        ],
+        "inlineLinks": [
+          {
+            "text": "car rental guide",
+            "to": "/car-rental/"
+          }
         ]
       },
       {
         "id": "day-plan",
-        "title": "Build a day with room for the return",
+        "title": "Two realistic days out, plus what to pack",
         "paragraphs": [
-          "Choose a main purpose: a beach visit, a substantial Masada visit or a currently open nature route. Add another stop only when driving, admissions, heat and visitor windows leave comfortable time. Several attractions shown near the same lake can still be far apart.",
-          "Keep time for changing, rinsing, lunch and the return to Jerusalem. Save the actual pickup point or bus stop and a usable contact method. If you are changing accommodation, compare an onward journey with stops against driving back to Jerusalem only to leave again the next morning."
+          "For an easy first visit, travel directly to Ein Bokek, use the staffed public beach, shower afterwards and return by your pre-checked bus or driver. Bring drinking water, sun protection, a towel, footwear suitable for the salty ground and a change of clothes. Keep saltwater away from your eyes and mouth.",
+          "If Masada is the main attraction, start with the fortress while temperatures are lower, then leave enough time for a separate beach stop. Cable-car and national-park tickets are not the same as a hotel day pass.",
+          "Ein Gedi can replace, rather than automatically add to, a beach day. The park's trail availability has changed during 2026 restoration work; check the exact route, entry slot and physical demands. For more detail on the place itself, use my Dead Sea visitor guide."
         ],
         "links": [
           {
@@ -802,33 +905,55 @@ export const journeyDestinationGuides = {
             "label": "Check holiday timing",
             "to": "/travel-blog/calendar-of-events/"
           }
+        ],
+        "inlineLinks": [
+          {
+            "text": "Dead Sea visitor guide",
+            "to": "/travel-blog/the-dead-sea/"
+          }
+        ],
+        "sourceIds": [
+          "m26-deadsea-ein-bokek-council",
+          "m26-inpa-ein-gedi-2026"
         ]
       }
     ],
     "checklist": [
-      "Choose an exact beach, hotel or park entrance",
-      "Check current transport and site access for the date",
-      "Plan the return before the outward journey",
-      "Confirm what a tour or private quote includes",
-      "Check rental permissions if driving",
-      "Leave time for changing, food and the final leg"
+      "Choose a precise beach, hotel or park entrance",
+      "Check Egged 486 or 444 for your travel date and final stop",
+      "Confirm the last workable return before departing",
+      "Check park, trail, beach and road access",
+      "Carry water, sun protection, water shoes and a towel for a beach day",
+      "Compare admissions, guiding, parking and waiting in a private or tour quote"
     ],
     "faqs": [
       {
-        "q": "How long is the journey from Jerusalem?",
-        "a": "It depends on whether you mean the northern shore, Ein Gedi, Masada or Ein Bokek, as well as the route and traffic. Plan to a named destination rather than one universal Dead Sea time."
+        "q": "Which bus goes from Jerusalem to the Dead Sea?",
+        "a": "Egged 486 serves the Dead Sea corridor and Ein Bokek. The 444 intercity route also serves Dead Sea stops on its way to Eilat and is listed among seat-reservation routes. Check the correct stop and current schedule."
       },
       {
-        "q": "Can I use the same bus plan for every Dead Sea attraction?",
-        "a": "No. Check the actual stops, final walk and return service for each place. The destinations are spread along the corridor."
+        "q": "Can I visit Ein Bokek without a tour?",
+        "a": "Yes, if the bus times and the walk from your stop suit you. The public beach has facilities and is open to non-hotel guests; plan the return before travelling."
       },
       {
-        "q": "Does a private taxi include beach or park entry?",
-        "a": "Only if the written quote explicitly includes it. Ask separately about transport, waiting, guiding, parking and admission."
+        "q": "Is there a free beach at the Dead Sea?",
+        "a": "Tamar Regional Council operates a free public beach at Ein Bokek, with showers, toilets, changing facilities and shade. Parking and hotel-operated services may carry extra charges."
       },
       {
-        "q": "Is Ein Gedi a beach stop?",
-        "a": "Treat it as a nature-reserve visit with a specific open route. Choose a separately designated beach for a Dead Sea water visit."
+        "q": "How long does it take from Jerusalem to the Dead Sea?",
+        "a": "A drive to the northern shore is shorter than a trip to Ein Bokek. Public buses add stops; allow around two hours for a Jerusalem–Ein Bokek bus journey, then account for the final walk and check live operator timing."
+      },
+      {
+        "q": "Can I go on Shabbat?",
+        "a": "Regular Egged service may be restricted around Shabbat and holidays. Confirm the actual outbound and return departures, or arrange another suitable permitted option."
+      },
+      {
+        "q": "Can I combine Masada, Ein Gedi and the beach in one day?",
+        "a": "It may be possible with an early start and private transport, but checking Masada entry, Ein Gedi's specific open trails and available beach time is more useful than forcing all three stops into a bus-only day."
+      },
+      {
+        "q": "Is Ein Gedi a Dead Sea bathing beach?",
+        "a": "No. Treat Ein Gedi Nature Reserve as a separate hiking visit. Use a designated managed beach such as Ein Bokek for floating."
       }
     ],
     "related": [
@@ -840,12 +965,20 @@ export const journeyDestinationGuides = {
     ],
     "services": [
       {
-        "label": "Compare Dead Sea hotels",
+        "label": "Masada & Dead Sea tours from Jerusalem",
+        "to": "/tours/masada-dead-sea/"
+      },
+      {
+        "label": "Private driver service",
+        "to": "/private-driver/"
+      },
+      {
+        "label": "Dead Sea hotels",
         "to": "/travel-blog/best-dead-sea-hotels/"
       },
       {
-        "label": "Plan your Jerusalem base",
-        "to": "/travel-blog/where-to-stay-in-jerusalem/"
+        "label": "Rent a car in Israel",
+        "to": "/car-rental/"
       }
     ],
     "sourceIds": [
@@ -854,7 +987,22 @@ export const journeyDestinationGuides = {
       "m26-ein-bokek",
       "guide-ein-gedi",
       "inpa-masada",
-      "guide-qasr"
+      "guide-qasr",
+      "m26-egged-444-reservation",
+      "m26-deadsea-ein-bokek-council",
+      "m26-inpa-ein-gedi-2026"
+    ],
+    "reviewNote": "Beach and park access can change after floods or road closures. The Israel Nature and Parks Authority has issued different Ein Gedi trail updates during the 2026 restoration period; check the specific trail and reserve entry before departure.",
+    "nextSteps": [
+      {
+        "label": "Compare Masada & Dead Sea tours",
+        "to": "/tours/masada-dead-sea/"
+      },
+      {
+        "label": "Choose a Dead Sea hotel",
+        "to": "/travel-blog/best-dead-sea-hotels/"
+      }
     ]
-  }
+  },
+
 } satisfies Record<string, TravelGuide>;
