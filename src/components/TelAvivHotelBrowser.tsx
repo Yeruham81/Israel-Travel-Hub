@@ -4,6 +4,7 @@ import { ArrowRight, ExternalLink, RotateCcw } from "lucide-react";
 import { telAvivAreaGuides } from "@/data/content";
 import { hotelRecommendations, linksForPage, type HotelRecommendation } from "@/data/registry";
 import { activeHotelNotice } from "@/lib/hotel-notices";
+import { telAvivHotelPhotos, type HotelIllustration } from "@/data/telAvivHotelPhotos";
 import { recordOutboundClick, relFor } from "@/lib/outbound";
 
 /**
@@ -66,24 +67,48 @@ export function TelAvivHotelBrowser() {
         {visible.map((hotel) => <TelAvivHotelTile key={hotel.id} hotel={hotel} />)}
       </ul>
       <p className="mt-5 text-sm leading-relaxed text-muted-foreground">
-        Photos show the hotel neighborhood, <strong>not the individual property</strong>. A property-specific photo gallery, room types, prices and availability can be checked at the provider. These recommendations are based on location and published hotel information, not a live ranking or a claim that I have stayed at each property.
+        Images are illustrative photographs of hotel rooms, hospitality spaces or Tel Aviv, <strong>not photographs of the listed hotels</strong>. Check each property’s real photo gallery, room types, prices and availability on the booking site. My shortlist is based on location and published hotel information, not a live ranking or a claim that I have stayed at every property.
       </p>
       {areaId !== "all" && <button type="button" onClick={() => setAreaId("all")} className="mt-3 inline-flex items-center gap-2 font-semibold text-primary underline underline-offset-4"><RotateCcw className="h-4 w-4" aria-hidden /> View all Tel Aviv hotels</button>}
+      <details className="mt-5 rounded-xl border bg-card p-4 text-xs text-muted-foreground" data-testid="tel-aviv-hotel-photo-credits">
+        <summary className="cursor-pointer font-semibold text-foreground">Illustrative photo credits & licenses</summary>
+        <p className="mt-2 leading-relaxed">These images were selected as general travel or accommodation illustrations. They do not depict the corresponding listed properties.</p>
+        <ul className="mt-3 grid gap-2 sm:grid-cols-2">
+          {telAvivHotelCatalog.map((hotel) => {
+            const photo = telAvivHotelPhotos[hotel.id];
+            if (!photo) return null;
+            return (
+              <li key={hotel.id}>
+                <span className="font-medium text-foreground">{hotel.name}: </span>
+                {photo.sourceUrl ? <a href={photo.sourceUrl} target="_blank" rel="noopener noreferrer" className="underline underline-offset-2">{photo.credit}<span className="sr-only"> (opens in a new tab)</span></a> : photo.credit}
+                {photo.licenseUrl && <> · <a href={photo.licenseUrl} target="_blank" rel="noopener noreferrer" className="underline underline-offset-2">License<span className="sr-only"> (opens in a new tab)</span></a></>}
+              </li>
+            );
+          })}
+        </ul>
+      </details>
+
     </section>
   );
 }
 
 function TelAvivHotelTile({ hotel }: { hotel: HotelRecommendation }) {
+  const [photoFailed, setPhotoFailed] = useState(false);
   const area = telAvivAreaGuides.find((item) => item.id === hotel.areaId);
   if (!area) return null;
+  const photo: HotelIllustration | undefined = telAvivHotelPhotos[hotel.id];
+  const image = photoFailed || !photo ? area.photo : photo;
+  const label = photoFailed || !photo ? "Neighborhood photograph" : photo.label;
   const booking = linksForPage(`stay-area-${area.id}`).find((item) => item.id === `hotel-${hotel.id}-expedia`);
   const notice = activeHotelNotice(hotel);
 
   return (
     <li className="flex min-w-0 flex-col overflow-hidden rounded-2xl border bg-card transition-colors hover:border-primary/60" data-testid="tel-aviv-hotel-card">
       <div className="relative overflow-hidden bg-muted">
-        <img src={area.photo.src} alt={area.photo.alt} width={755} height={503} loading="lazy" decoding="async" className="aspect-[16/10] w-full object-cover" />
-        <span className="absolute bottom-2 left-3 rounded-lg bg-card/95 px-2.5 py-1 text-[11px] font-medium text-foreground">Neighborhood photograph</span>
+        <img src={image.src} alt={image.alt} onError={() => { if (!photoFailed) setPhotoFailed(true); }}
+             width={755} height={503} loading="lazy" decoding="async" data-testid="hotel-illustration"
+             className="aspect-[16/10] w-full object-cover" />
+        <span className="absolute bottom-2 left-3 rounded-lg bg-card/95 px-2.5 py-1 text-[11px] font-medium text-foreground">{label}</span>
       </div>
       <div className="flex flex-1 flex-col p-5">
         <p className="text-xs font-semibold uppercase tracking-wide text-primary">{area.shortName} · {hotel.style}</p>
