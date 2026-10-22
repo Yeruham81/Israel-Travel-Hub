@@ -163,7 +163,7 @@ function Hotels() {
 
       <section id="when" aria-labelledby="when-h" className="mt-14 scroll-mt-28">
         <p className="eyebrow">Choose your dates as carefully as your location</p>
-        <h2 id="when-h" className="mt-2 text-3xl">When is the best time to book a hotel in Israel?</h2>
+        <h2 id="when-h" className="mt-2 text-3xl">When to visit Israel for your hotel stay</h2>
         <p className="mt-3 max-w-3xl leading-relaxed text-muted-foreground">
           There is no single best season for every itinerary. The Mediterranean coast, Jerusalem's hills, the Sea of Galilee and Eilat can feel very different during the same week. Weather affects what you will enjoy, while local holidays and events can affect demand, check-in plans and transport.
         </p>
