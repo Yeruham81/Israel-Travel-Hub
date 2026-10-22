@@ -13,6 +13,30 @@ import { recordOutboundClick, relFor } from "@/lib/outbound";
  */
 export const telAvivHotelCatalog = hotelRecommendations.filter((hotel) => hotel.cityId === "telaviv");
 
+/**
+ * Short, property-specific card copy, derived from the existing editorial records.
+ * The full descriptions, conditions and practical considerations stay in area guides.
+ */
+export const hotelTileCopy: Record<string, { description: string; bestFor: string }> = {
+  "tlv-carlton": { description: "Seafront hotel near Gordon Beach and the marina, with easy access to the promenade.", bestFor: "Coastal luxury stays" },
+  "tlv-embassy": { description: "Retro-inspired boutique stay near the central beach and HaYarkon Street.", bestFor: "Beach-loving independent travelers" },
+  "tlv-backstage": { description: "Theater-inspired boutique hotel in the former Ohel Theater, steps from Dizengoff Square.", bestFor: "Design and city breaks" },
+  "tlv-cinema": { description: "Characterful hotel in a former cinema overlooking lively Dizengoff Square.", bestFor: "Architecture and central sightseeing" },
+  "tlv-port-tower": { description: "Contemporary tower hotel close to Tel Aviv Port and the northern waterfront.", bestFor: "Port and waterfront access" },
+  "tlv-melody": { description: "Small boutique hotel near Independence Park and the northern beaches.", bestFor: "Couples and beach walks" },
+  "tlv-elkonin": { description: "Restored heritage hotel near Neve Tzedek and the southern end of Rothschild.", bestFor: "Upscale heritage stays" },
+  "tlv-ruby": { description: "Independent, house-like accommodation between Neve Tzedek and lower Rothschild.", bestFor: "Independent neighborhood explorers" },
+  "tlv-the-jaffa": { description: "Landmark luxury hotel combining historic architecture and contemporary design in Old Jaffa.", bestFor: "Luxury and historic Jaffa" },
+  "tlv-market-house": { description: "Boutique hotel near Jaffa's Clock Tower, flea market and evening cafés.", bestFor: "Jaffa cafés and markets" },
+  "tlv-albi-florentin": { description: "Small urban hotel offering a digital self-check-in format in Florentin.", bestFor: "Self-sufficient city travelers" },
+  "tlv-florentin-house": { description: "Small-property stay on Florentin Street near neighborhood cafés and nightlife.", bestFor: "Florentin nightlife and cafés" },
+  "tlv-poli-house": { description: "Design-led hotel beside Carmel Market and Nachalat Binyamin.", bestFor: "Market food and design" },
+  "tlv-assemblage": { description: "Boutique rooms in a preserved Allenby Street building, between the market and beach.", bestFor: "Historic boutique stays" },
+  "tlv-the-norman": { description: "Luxury hotel in restored buildings just off Rothschild Boulevard.", bestFor: "Luxury city getaways" },
+  "tlv-65-rothschild": { description: "Boutique hotel directly on Rothschild Boulevard's tree-lined promenade.", bestFor: "Rothschild walks and cafés" },
+};
+
+
 export function TelAvivHotelBrowser() {
   const [areaId, setAreaId] = useState<string>("all");
   const [sort, setSort] = useState<"area" | "name">("area");
@@ -105,22 +129,26 @@ function TelAvivHotelTile({ hotel }: { hotel: HotelRecommendation }) {
   const booking = linksForPage(`stay-area-${area.id}`).find((item) => item.id === `hotel-${hotel.id}-expedia`);
   const notice = activeHotelNotice(hotel);
 
+
+  const copy = hotelTileCopy[hotel.id] || { description: hotel.summary, bestFor: hotel.bestFor };
+
   return (
     <li className="flex min-w-0 flex-col overflow-hidden rounded-2xl border bg-card transition-colors hover:border-primary/60" data-testid="tel-aviv-hotel-card">
-      <div className="relative overflow-hidden bg-muted">
+      <div className="overflow-hidden bg-muted">
         <img src={image.src} alt={image.alt} onError={() => { if (!photoFailed) setPhotoFailed(true); }}
              width={755} height={503} loading="lazy" decoding="async" data-testid="hotel-illustration"
              className="aspect-[16/10] w-full object-cover" />
       </div>
-      <div className="flex flex-1 flex-col p-5">
-        <p className="text-xs font-semibold uppercase tracking-wide text-primary">{area.shortName} · {hotel.style}</p>
-        <h3 className="mt-2 text-xl leading-snug">{hotel.name}</h3>
-        <p className="mt-3 line-clamp-3 text-sm leading-relaxed text-muted-foreground">{hotel.summary}</p>
-        <p className="mt-3 flex-1 text-sm leading-relaxed"><span className="font-semibold">Best for:</span> {hotel.bestFor}</p>
-        {notice && <p className="mt-3 rounded-lg border border-primary/25 bg-secondary/70 p-3 text-xs leading-relaxed" data-testid="hotel-operating-notice">{notice.message}</p>}
-        <Link to={area.path as LinkProps["to"]} className="mt-3 inline-flex items-center gap-1 text-sm font-semibold text-primary underline underline-offset-4 focus-visible:outline-2 focus-visible:outline-primary">
-          Explore the area <ArrowRight className="h-4 w-4" aria-hidden />
+      <div className="flex flex-1 flex-col p-4 sm:p-5">
+        <h3 className="text-xl font-semibold leading-snug">{hotel.name}</h3>
+        <Link to={area.path as LinkProps["to"]}
+              className="mt-1.5 inline-flex w-fit items-center gap-1 text-sm font-medium text-primary underline underline-offset-2 hover:text-primary/80 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+              aria-label={`Explore ${area.shortName} area guide`}>
+          {area.shortName} <ArrowRight className="h-3.5 w-3.5" aria-hidden />
         </Link>
+        <p className="mt-3 line-clamp-2 flex-1 text-sm leading-relaxed text-muted-foreground" data-testid="hotel-short-description">{copy.description}</p>
+        <p className="mt-3 text-sm leading-snug" data-testid="hotel-best-for"><span className="font-semibold">Best for:</span> {copy.bestFor}</p>
+        {notice && <p className="mt-3 rounded-lg border border-primary/25 bg-secondary/70 p-3 text-xs leading-relaxed" data-testid="hotel-operating-notice">{notice.message}</p>}
       </div>
       {booking && (
         <div className="border-t bg-secondary/40 p-3.5">
