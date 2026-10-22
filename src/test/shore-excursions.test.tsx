@@ -91,7 +91,7 @@ describe("shore excursions", () => {
     expect(externalSection?.querySelector('[data-testid="partner-price-terms"]')).toHaveTextContent("External starting prices are dated published reference prices");
     expect(externalSection?.querySelector('[data-testid="partner-price-terms"]')).toHaveTextContent("cancellation terms");
     expect(externalSection).not.toHaveTextContent("My published starting rates");
-    expect(within(externalSection as HTMLElement).getByRole("heading", { level: 3 })).toHaveTextContent(`More shore excursions from ${port.name}`);
+    expect(externalSection?.querySelector("#partner-tours-h")).toHaveTextContent(`More shore excursions from ${port.name}`);
     expect(externalSection).toHaveTextContent("Looking for a guided experience, the company of a group or a different route?");
     expect(externalSection).not.toHaveTextContent("These tours are offered by independent operators and booked on their own booking platforms.");
     expect(container.querySelector("#itineraries")?.textContent).not.toContain("Compare the route, duration, tour format and starting price.");
