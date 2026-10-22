@@ -177,11 +177,17 @@ export function RelatedLinks({ title = "Plan the rest of your trip", items, curr
       }).filter(({ guide }, index, all) => all.findIndex((entry) => entry.guide.to === guide.to) === index)
         .sort((a, b) => b.score - a.score || a.order - b.order).slice(0, 6)
     : [];
+  // For broad planning topics (e.g. eSIM), retain a compact pair from the editor's
+  // explicitly selected guides when taxonomy alone cannot find two matches.
+  const selectedGuides = guideItems.length >= 2 ? guideItems : items.flatMap((item, order) => {
+    const guide = guideDirectory.find((candidate) => candidate.to === item.to && Boolean(candidate.photo));
+    return guide && (!current || guide.to !== current.to) ? [{ item, guide, order, score: 0 }] : [];
+  }).filter(({ guide }, index, all) => all.findIndex((entry) => entry.guide.to === guide.to) === index).slice(0, 6);
   // When an editorial list is odd, prefer a genuinely related additional guide.
   // If none qualifies, show the strongest complete pairs rather than inventing relevance.
-  const supplemental = current && guideItems.length > 0 && guideItems.length % 2 === 1 && guideItems.length < 6
+  const supplemental = current && selectedGuides.length > 0 && selectedGuides.length % 2 === 1 && selectedGuides.length < 6
     ? guideDirectory
-        .filter((candidate) => String(candidate.to).startsWith("/travel-blog/") && candidate.photo && candidate.to !== current.to && !guideItems.some((entry) => entry.guide.to === candidate.to))
+        .filter((candidate) => String(candidate.to).startsWith("/travel-blog/") && candidate.photo && candidate.to !== current.to && !selectedGuides.some((entry) => entry.guide.to === candidate.to))
         .map((candidate) => {
           const shared = candidate.topics.filter((topic) => topic !== "tips" && current.topics.includes(topic));
           const words = new Set((candidate.title.toLowerCase().match(/[a-z]{4,}/g) || []).map((word) => word.replace(/s$/, "")));
@@ -193,8 +199,8 @@ export function RelatedLinks({ title = "Plan the rest of your trip", items, curr
         .sort((a, b) => b.score - a.score)[0]
     : undefined;
   const completedGuides = supplemental
-    ? [...guideItems, { item: { label: supplemental.guide.title, to: supplemental.guide.to, note: supplemental.guide.description }, guide: supplemental.guide, score: supplemental.score, order: items.length }]
-    : guideItems;
+    ? [...selectedGuides, { item: { label: supplemental.guide.title, to: supplemental.guide.to, note: supplemental.guide.description }, guide: supplemental.guide, score: supplemental.score, order: items.length }]
+    : selectedGuides;
   const pairedGuides = completedGuides.slice(0, completedGuides.length - (completedGuides.length % 2));
   if (guideSection && pairedGuides.length === 0) return null;
   if (!guideSection && items.length === 0) return null;
