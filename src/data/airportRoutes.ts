@@ -17,7 +17,7 @@ const guides: Record<AirportTransferRouteId, RouteGuide> = {
   jerusalem: {
     city: "Jerusalem", title: "Private transfer from Ben Gurion Airport to Jerusalem",
     description: "Private Ben Gurion Airport to Jerusalem transfer: travel time, Old City hotel drop-off, luggage and weekday starting rate. Send a quote request.",
-    intro: "For a private ride to Jerusalem, the hotel entrance matters as much as the city name—especially around Jaffa Gate and the Old City. Send your flight, party size and hotel address for a confirmed vehicle and full quote.",
+    intro: "For a private ride to Jerusalem, the hotel entrance matters as much as the city name—especially around Jaffa Gate and the Old City. Send me your flight, party size and hotel address so I can confirm a suitable vehicle and provide a full quote.",
     journeyTitle: "From the arrivals hall to your Jerusalem address",
     journeyText: "As a planning estimate, allow around 45–60 minutes or more for the drive after pickup. Traffic on the approach to Jerusalem and the final journey through the city can add time. Passport control, baggage collection and the walk to your meeting point come before this estimate. Share the hotel's actual address so I can plan the whole journey, rather than just an airport-to-city-centre trip.",
     areasTitle: "Where in Jerusalem are you staying?",
