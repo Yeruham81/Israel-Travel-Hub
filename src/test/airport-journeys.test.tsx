@@ -41,7 +41,7 @@ describe("four independent airport transportation comparisons", () => {
       expect(doc.querySelectorAll("table")).toHaveLength(2);
       expect(doc.querySelector('a[href*="#request-quote"]')).not.toBeNull();
       expect(doc.querySelector('a[href*="#request-quote"]')?.getAttribute("href")).toContain(privateGuide.path);
-      if (id === "tel-aviv") expect(doc.body.textContent).toContain("this guide does not quote an unverified current fare");
+      if (g.historicalPrices === false) expect(doc.body.textContent).toContain("this guide does not quote an unverified current fare");
       else expect(doc.body.textContent).toContain("historical editorial estimates");
       const sourceDisclosure = doc.querySelector("#sources details");
       expect(sourceDisclosure).not.toBeNull();
@@ -104,6 +104,55 @@ describe("four independent airport transportation comparisons", () => {
     expect(doc.querySelectorAll('section[aria-label="Related practical guides"] img').length).toBeGreaterThanOrEqual(4);
     expect(doc.querySelector('a[href="/travel-blog/ben-gurion-airport-to-tel-aviv/#request-quote"]')).not.toBeNull();
     expect(doc.body.textContent).not.toMatch(/≈ ₪10–15|≈ ₪8–15|≈ ₪150–230/);
+  });
+
+  it("keeps the upgraded Jerusalem journey focused on rail, current voucher requirements, bus 485 and hotel connections", () => {
+    const g = airportJourneyGuides.jerusalem;
+    expect(g.updatedAt).toBe("2026-10-22");
+    expect(g.historicalPrices).toBe(false);
+    expect(g.title).toMatch(/Ben Gurion Airport to Jerusalem.*2026.*Train.*Bus.*Taxi/i);
+    expect(g.answer).toMatch(/Yitzhak Navon.*free personal travel voucher.*bus 485.*Level 2.*Exit 21/s);
+    expect(g.stations[0].name).toBe("Jerusalem–Yitzhak Navon");
+    expect(g.options.find(o => o.id === "rail")!.cost).not.toContain("₪");
+    expect(g.options.find(o => o.id === "bus")!.cost).not.toContain("₪");
+    expect(g.options.find(o => o.id === "taxi")!.cost).toMatch(/meter/i);
+    expect(g.options.find(o => o.id === "bus")!.paragraphs.join(" ")).toContain("Terminal 3, Level 2, Exit 21");
+    expect(g.options.find(o => o.id === "rail")!.paragraphs.join(" ")).toContain("19 August 2026");
+    expect(g.weekend.join(" ")).toMatch(/Nesher.*discontinued/);
+    expect(g.photos?.station.alt).toMatch(/Terminal 3/);
+    expect(g.photos?.onward.alt).toMatch(/Mamilla/);
+    expect(g.faqs).toHaveLength(10);
+    expect(g.sources).toHaveLength(6);
+    expect(g.sources?.some(x => x.url.includes("vouchers-jerusalem"))).toBe(true);
+    const inline = g.options.flatMap(option => option.inlineLinks || []);
+    expect(inline.map(x => x.to)).toEqual(expect.arrayContaining([
+      "/travel-blog/getting-around-israel/",
+      "/travel-blog/ben-gurion-airport-taxis/",
+      "/travel-blog/taxi-fares-in-israel/",
+      "/travel-blog/ben-gurion-airport-to-jerusalem/",
+      "/car-rental/",
+    ]));
+    for (const option of g.options) for (const link of option.inlineLinks || []) {
+      expect(option.paragraphs.join(" ").split(link.text), link.text).toHaveLength(2);
+    }
+    for (const link of g.weekendLinks || []) expect(g.weekend.join(" ").split(link.text)).toHaveLength(2);
+  });
+
+  it("renders Jerusalem article contextual links, new photos and specialist guide cards", async () => {
+    const g = airportJourneyGuides.jerusalem;
+    const router = createRouter({ routeTree, context: { queryClient: new QueryClient() }, history: createMemoryHistory({ initialEntries: [g.path] }), trailingSlash: "always" });
+    await router.load();
+    const html = renderToString(<RouterContextProvider router={router}><AirportJourneyPage id="jerusalem" /></RouterContextProvider>);
+    const doc = new DOMParser().parseFromString(html, "text/html");
+    expect(doc.querySelectorAll("figure img")).toHaveLength(3);
+    for (const o of g.options) for (const l of o.inlineLinks || []) {
+      const link = doc.querySelector(`#option-${o.id} a[href="${l.to}"]`);
+      expect(link).not.toBeNull();
+      expect(link?.closest("p")).not.toBeNull();
+    }
+    expect(doc.querySelector('section[aria-label="Related practical guides"]')).not.toBeNull();
+    expect(doc.querySelector('a[href="/travel-blog/ben-gurion-airport-to-jerusalem/#request-quote"]')).not.toBeNull();
+    expect(doc.body.textContent).not.toMatch(/≈ ₪20–30|≈ ₪300–360/);
   });
 
   it("does not invent live transport fares or claim rail on Shabbat", () => {
