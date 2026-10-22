@@ -140,6 +140,7 @@ export const allNavGroups: NavGroup[] = [
       { label: "Top 10 Israel experiences", to: travelGuidePaths.topTen },
       { label: "Jerusalem travel guide", to: travelGuidePaths.jerusalem },
       { label: "Jerusalem to Bethlehem: travel options", to: travelGuidePaths.bethlehem },
+      { label: "Jerusalem to the Dead Sea: travel options", to: travelGuidePaths.jerusalemDeadSea },
       travelTips.gettingAround,
       { label: "Getting around Tel Aviv", to: travelGuidePaths.telAviv },
       { label: "Taxis in Israel", to: travelGuidePaths.taxis },
