@@ -18,13 +18,12 @@ export function AreaMap({ area, compact = false }: { area: Pick<NeighborhoodStay
         referrerPolicy="strict-origin-when-cross-origin"
         className={`w-full border-0 ${compact ? "h-44" : "h-72 sm:h-80"}`}
       />
-      <figcaption className="bg-card px-3 py-2 text-xs leading-relaxed text-muted-foreground">
+      <figcaption className="flex flex-wrap items-center justify-between gap-x-4 gap-y-1 bg-card px-3 py-2 text-xs text-muted-foreground">
         <span className="flex items-center gap-1.5"><MapPin className="h-3.5 w-3.5 shrink-0" aria-hidden /> {reference}</span>
-        <a href={mapUrl} target="_blank" rel="noopener noreferrer" className="mt-1 inline-flex items-center gap-1 font-semibold text-primary underline underline-offset-2">
+        <a href={mapUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 font-semibold text-primary underline underline-offset-2">
           Open a larger map <ExternalLink className="h-3 w-3" aria-hidden /><span className="sr-only"> (opens in a new tab)</span>
         </a>
-        {!compact && <p className="mt-1">The pin is an area reference point, not a hotel location or a neighborhood boundary.</p>}
-        <p className="mt-1">English names or Latin transliterations. Data © <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener noreferrer" className="underline">OpenStreetMap</a> · <a href="https://openfreemap.org/" target="_blank" rel="noopener noreferrer" className="underline">OpenFreeMap</a> / <a href="https://openmaptiles.org/" target="_blank" rel="noopener noreferrer" className="underline">OpenMapTiles</a> · Style: <a href="https://maputnik.github.io/osm-liberty/" target="_blank" rel="noopener noreferrer" className="underline">OSM Liberty</a> (adapted).</p>
+
       </figcaption>
     </figure>
   );
