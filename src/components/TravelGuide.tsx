@@ -28,10 +28,16 @@ export function GuideTags({ topics }: { topics: GuideTopicId[] }) {
   return <ul className="flex flex-wrap gap-2" aria-label="Guide topics">{topics.map((id) => <li key={id}><Link to="/guides/" search={{ topic: id }} className="inline-block rounded-full border bg-background px-3 py-1 text-xs font-medium text-primary hover:bg-secondary">{guideTopics.find((topic) => topic.id === id)!.label}</Link></li>)}</ul>;
 }
 
-export function GuidePhotoCredit({ photo }: { photo: GuidePhoto }) {
+export function GuidePhotoCredit({ photo, insideDisclosure = false }: { photo: GuidePhoto; insideDisclosure?: boolean }) {
   if (!hasPublicPhotoCredit(photo)) return null;
   const sourceUrl = !isPublisherUrl(photo.sourceUrl) ? photo.sourceUrl : undefined;
-  return <p className="mt-2 text-xs leading-relaxed text-muted-foreground">{sourceUrl ? <a href={sourceUrl} target="_blank" rel="noopener noreferrer" className="underline">{photo.credit || "Photo source"}<span className="sr-only"> (opens in a new tab)</span></a> : photo.credit}{photo.licenseUrl && <> · <a href={photo.licenseUrl} target="_blank" rel="noopener noreferrer" className="underline">Licence<span className="sr-only"> (opens in a new tab)</span></a></>}</p>;
+  const attribution = <p className="mt-2 text-xs leading-relaxed text-muted-foreground">{sourceUrl ? <a href={sourceUrl} target="_blank" rel="noopener noreferrer" className="underline">{photo.credit || "Photo source"}<span className="sr-only"> (opens in a new tab)</span></a> : photo.credit}{photo.licenseUrl && <> · <a href={photo.licenseUrl} target="_blank" rel="noopener noreferrer" className="underline">Licence<span className="sr-only"> (opens in a new tab)</span></a></>}</p>;
+  // Keep attribution and licence links accessible, without showing technical metadata below photos.
+  if (insideDisclosure) return attribution;
+  return <details className="mt-2 text-xs text-muted-foreground">
+    <summary className="w-fit cursor-pointer rounded px-1 py-1 text-xs font-medium underline-offset-2 hover:text-foreground hover:underline focus-visible:outline-2 focus-visible:outline-primary">Photo credits &amp; licence</summary>
+    <div className="pb-2 pl-1">{attribution}</div>
+  </details>;
 }
 
 function SectionReferences({ ids }: { ids: string[] }) {
