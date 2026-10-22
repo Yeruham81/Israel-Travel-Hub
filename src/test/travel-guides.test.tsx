@@ -178,6 +178,80 @@ describe("migrated practical guides", () => {
     }
   });
 
+  it("integrates three taxi guides with in-paragraph links without duplicating section strips", () => {
+    const expected = {
+      taxis: [travelGuidePaths.taxiFares, travelGuidePaths.uber, travelGuidePaths.airportTaxis, travelGuidePaths.shabbat, travelGuidePaths.israel],
+      taxiFares: [travelGuidePaths.sherut, travelGuidePaths.airportTaxis, travelGuidePaths.shabbat, travelGuidePaths.uber, travelGuidePaths.taxis],
+      airportTaxis: [travelGuidePaths.arrival, travelGuidePaths.taxiFares, travelGuidePaths.shabbat],
+    } as const;
+    for (const id of ["taxis", "taxiFares", "airportTaxis"] as const) {
+      const guide = travelGuides[id];
+      const sectionLinks = guide.sections.flatMap((section) => section.inlineLinks || []);
+      expect(sectionLinks.length).toBeGreaterThanOrEqual(5);
+      for (const href of expected[id]) expect(sectionLinks.some((link) => link.to === href)).toBe(true);
+      for (const section of guide.sections) for (const link of section.inlineLinks || []) {
+        expect(section.paragraphs.join(" ").split(link.text), `missing unique anchor in ${id}/${section.id}: ${link.text}`).toHaveLength(2);
+        expect(section.links?.some((extra) => extra.to === link.to) || false).toBe(false);
+      }
+    }
+  });
+
+  it.each([
+    ["taxis", TaxiRoute],
+    ["taxiFares", undefined],
+    ["airportTaxis", undefined],
+  ] as const)("renders contextual taxi guide links for %s", async (id) => {
+    const router = await routerAt(travelGuidePaths[id]);
+    const page = router.routesById[travelGuidePaths[id].replace(/\/$/, "")]?.options.component;
+    expect(page).toBeTruthy();
+    const Page = page!;
+    const { container } = render(<RouterContextProvider router={router}><Page /></RouterContextProvider>);
+    for (const section of travelGuides[id].sections) {
+      const element = container.querySelector(`#${section.id}`)! as HTMLElement;
+      for (const link of section.inlineLinks || []) {
+        expect(within(element).getByRole("link", { name: link.text })).toHaveAttribute("href", link.to);
+      }
+    }
+  });
+
+  it("keeps Getting Around Israel a practical 2026 pillar and delegates specialist detail", () => {
+    const guide = travelGuides.israel;
+    expect(guide.answer).toMatch(/trains between well-connected cities.*buses and light rail.*licensed taxis.*rental car/s);
+    expect(guide.sections.map((s) => s.id)).toEqual([
+      "choose-transport", "intercity-trains", "buses", "paying", "city-transport",
+      "taxis-apps", "sherut", "airport", "weekends", "rental-car", "day-trips",
+    ]);
+    expect(guide.sections.filter((section) => section.photo)).toHaveLength(2);
+    expect(guide.faqs).toHaveLength(14);
+    expect(guide.sourceIds).toEqual(expect.arrayContaining([
+      "guide-public-transport-payments", "guide-select-card-payment", "guide-redline-tickets", "israel-rail",
+    ]));
+    expect(guide.sections.find((s) => s.id === "paying")!.paragraphs.join(" ")).toMatch(/credit-card.*selected bus lines only.*not universally/s);
+    const destinations = guide.sections.flatMap((section) => section.inlineLinks || []).map((link) => link.to);
+    expect(destinations).toEqual(expect.arrayContaining([
+      travelGuidePaths.telAviv, travelGuidePaths.taxis, travelGuidePaths.uber, travelGuidePaths.taxiFares,
+      travelGuidePaths.sherut, travelGuidePaths.airportTaxis, travelGuidePaths.arrival, travelGuidePaths.shabbat,
+      "/car-rental/", "/private-driver/", "/tours/",
+    ]));
+    for (const section of guide.sections) for (const link of section.inlineLinks || []) {
+      expect(section.paragraphs.join(" ").split(link.text), `unique contextual link: ${link.text}`).toHaveLength(2);
+    }
+  });
+
+  it("renders Getting Around Israel's related-guide links within the article text", async () => {
+    const router = await routerAt(travelGuidePaths.israel);
+    const Page = IsraelRoute.options.component!;
+    const { container } = render(<RouterContextProvider router={router}><Page /></RouterContextProvider>);
+    for (const section of travelGuides.israel.sections) {
+      const element = container.querySelector(`#${section.id}`)! as HTMLElement;
+      for (const link of section.inlineLinks || []) {
+        const a = within(element).getByRole("link", { name: link.text });
+        expect(a).toHaveAttribute("href", link.to);
+        expect(a.closest("p")).toBeTruthy();
+      }
+    }
+  });
+
   it("keeps Uber's 2026 unavailability the primary search intent with useful alternatives", () => {
     const guide = travelGuides.uber;
     expect(guide.title).toMatch(/Uber.*Israel.*2026.*Gett.*Yango/);
@@ -328,7 +402,7 @@ describe("migrated practical guides", () => {
       for (const related of guide.related) expect(travelGuides[related]).toBeTruthy();
     }
     expect(travelGuides.arrival.related).toContain("shabbat");
-    expect(travelGuides.israel.related).toContain("jerusalem");
+    expect(travelGuides.israel.related).toEqual(expect.arrayContaining(["taxis", "taxiFares", "uber", "sherut", "airportTaxis", "arrival", "shabbat"]));
   });
 
   it("preserves exactly the publisher's five eSIM links with sponsored attributes and anonymous click attribution", async () => {
