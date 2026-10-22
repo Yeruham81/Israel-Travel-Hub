@@ -38,7 +38,7 @@ export const airportTransferPhotos: Record<string, StayGuidePhoto> = {
 export const airportDestinationCards = airportTransferRates.map((rate) => ({ ...rate, photo: airportTransferPhotos[rate.id]! }));
 
 export const airportTransferBenefits = [
-  { title: "A personal welcome", text: "Arrange your arrivals meeting point with Moshe before you fly." },
+  { title: "A personal welcome", text: "Arrange your arrivals meeting point with me before you fly." },
   { title: "Flight coordination", text: "Share your flight number so pickup can be planned around your arrival." },
   { title: "Your own vehicle", text: "Travel with your party directly to the address agreed in your booking." },
   { title: "Room for your group", text: "Request a suitable car, van or minibus for everyone and their luggage." },
@@ -54,10 +54,10 @@ export const airportTransferTips = [
 ];
 
 export const airportTransferFaqs = [
-  { q: "Is this a private transfer for my party?", a: "This page is for airport transfers arranged in advance for your party. Ask Moshe to confirm the vehicle, pickup and drop-off details in your quote." },
-  { q: "Are the displayed prices per person?", a: "No. They are Moshe Barak's published starting prices per vehicle for up to four passengers on weekdays. Night, weekend and holiday supplements may apply. Your final price and availability are confirmed with the operator." },
+  { q: "Is this a private transfer for my party?", a: "This page is for airport transfers arranged in advance for your party. Ask me to confirm the vehicle, pickup and drop-off details in your quote." },
+  { q: "Are the displayed prices per person?", a: "No. They are my published starting prices per vehicle for up to four passengers on weekdays. Night, weekend and holiday supplements may apply. Your final price and availability are confirmed with the operator." },
   { q: "Can I request a larger vehicle or child seats?", a: "Yes. Include all passengers, luggage and children's ages in the request. The operator will confirm the suitable vehicle and any requested seats before booking." },
-  { q: "How far ahead should I arrange the ride?", a: "Moshe's published service requires at least 24 hours' notice. Request earlier for busy periods, larger groups or special vehicle requirements; sending an inquiry does not confirm availability." },
+  { q: "How far ahead should I arrange the ride?", a: "I ask for at least 24 hours' notice. Request earlier for busy periods, larger groups or special vehicle requirements; sending an inquiry does not confirm availability." },
   { q: "What should I confirm about delays or cancellation?", a: "Ask for the meeting point, included waiting time, delay arrangements, cancellation deadline and payment terms in writing with your final quote. Platform bookings follow the terms of the offer you choose there." },
 ];
 

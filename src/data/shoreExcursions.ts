@@ -57,7 +57,7 @@ const itineraryDetails: Record<string, ItineraryDetails> = {
   },
   "ashdod-jerusalem": {
     photo: airportTransferPhotos["jerusalem"]!,
-    description: "Plan a Jerusalem day around Old City lanes, major religious sites and a viewpoint. Tell Moshe which places matter most so the driving, walking and return can be planned together.",
+    description: "Plan a Jerusalem day around Old City lanes, major religious sites and a viewpoint. Tell me which places matter most so the driving, walking and return can be planned together.",
     bestFor: "A first visit to Jerusalem's historic and religious heart",
     planningNote: "The Old City involves walking, steps and modest dress at holy sites. A licensed guide is a separate arrangement.",
     highlights: ["Old City", "Religious landmarks", "City viewpoints"],
@@ -114,7 +114,7 @@ const sharedFaqs = [
   { q: "Can I request a van, child seats or an accessible vehicle?", a: "Include all passengers, children's ages, mobility needs and any equipment in the inquiry. Vans and minibuses are available by request, subject to confirmation. Do not assume a suitable vehicle or seat is reserved until the operator confirms it." },
   { q: "Where will I meet the driver?", a: "Agree the precise meeting point for your ship, berth and port procedures in writing. Ask whether a terminal transfer or port shuttle is needed; do not assume every driver can wait beside the ship." },
   { q: "What happens if the ship is delayed or cancels the port call?", a: "Send any schedule change to the operator promptly. Ask for written confirmation of the cancellation cutoff, any deposit refund, missed-call policy and revised itinerary. Other operators have their own terms. No return-to-ship guarantee is made by this portal." },
-  { q: "How do I request Moshe's car-and-driver day trip?", a: "Choose an itinerary and complete the form with your ship, date, hours ashore and party details. Press Send excursion request to email the details directly and wait for the on-page confirmation. The excursion is booked only after the operator confirms availability, price, payment and terms. External guided-tour cards open their booking page on GetYourGuide or Viator." },
+  { q: "How do I request your car-and-driver day trip?", a: "Choose an itinerary and complete the form with your ship, date, hours ashore and party details. Press Send excursion request to email the details directly and wait for the on-page confirmation. The excursion is booked only after the operator confirms availability, price, payment and terms. External guided-tour cards open their booking page on GetYourGuide or Viator." },
 ];
 
 const portDetails: Record<ShorePortId, PortDetails> = {
@@ -126,7 +126,7 @@ const portDetails: Record<ShorePortId, PortDetails> = {
     photo: { src: ashdod, alt: "Aerial view of Ashdod Port and its Mediterranean breakwater", credit: "Amos Meron · CC BY-SA 3.0 · cropped and resized WebP", sourceUrl: "https://commons.wikimedia.org/wiki/File:Ashdod_Port_Aerial_View.jpg", licenseUrl: "https://creativecommons.org/licenses/by-sa/3.0/" },
     overview: [
       "Ashdod is the southern cruise-port starting point in this guide. A Tel Aviv–Jaffa day keeps the focus on the coast; Jerusalem puts historic and religious sites first. Masada and the Dead Sea add a longer desert drive, so choose them for a port call that leaves enough time for the return.",
-      "Choose one main experience before adding stops. Tell Moshe if your priority is the Western Wall, Jaffa's old lanes, Masada or time at the Dead Sea. Your quote should name the agreed route, stops, pickup and planned return, rather than promising every attraction in a region.",
+      "Choose one main experience before adding stops. Tell me if your priority is the Western Wall, Jaffa's old lanes, Masada or time at the Dead Sea. Your quote should name the agreed route, stops, pickup and planned return, rather than promising every attraction in a region.",
     ],
     faqs: [
       { q: "Which excursion suits a shorter Ashdod port call?", a: "Discuss Tel Aviv and Jaffa or a more local coastal plan before a long desert itinerary. No route is automatically suitable: give the operator your expected time off the ship and all-aboard deadline so the return buffer can be assessed." },
@@ -161,7 +161,7 @@ export const shoreExcursionBenefits = [
   { title: "Your party, your vehicle", text: "Choose a private day with the vehicle size confirmed for all passengers." },
   { title: "A route around your interests", text: "Share the places that matter most, walking preferences and time for breaks." },
   { title: "A plan around your ship", text: "Agree pickup, realistic stops and the return buffer before confirming." },
-  { title: "Personal coordination", text: "Discuss the details directly with Moshe, including family and mobility requests." },
+  { title: "Personal coordination", text: "Discuss the details directly with me, including family and mobility requests." },
 ];
 
 export function getShorePort(id: ShorePortId) {

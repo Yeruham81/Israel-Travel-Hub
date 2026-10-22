@@ -273,7 +273,7 @@ export const airportTransferRates: AirportTransferRate[] = ([
 ] as const).map(([id, destination, amount, popular]) => ({
   id, destination, popular,
   price: { kind: "published_starting_rate", currency: "ILS", amount, basis: "per_vehicle", maxPartySize: 4,
-    conditions: "One-way weekday transfer for up to 4 passengers. Night, weekend and holiday supplements may apply. Final price and availability confirmed by Moshe Barak; request at least 24 hours ahead.",
+    conditions: "One-way weekday transfer for up to 4 passengers. Night, weekend and holiday supplements may apply. I confirm the final price and availability in writing; request at least 24 hours ahead.",
     sourceId: "moshe-airport-transfers" },
 }));
 
@@ -1817,7 +1817,7 @@ export const providerLinks: ProviderLink[] = [
     id: "private-driver-moshe", pageIds: ["private-driver", "tours-hub"], ...moshe, mode: "provider_inquiry",
     title: "Private driver by the day", summary: "Hire a local driver for multi-stop days or intercity transfers. Itinerary and price agreed by inquiry.",
     ctaLabel: "Request a quote", url: "/private-driver/#request-quote", isAffiliate: false,
-    reentryNote: "Include your date, route and party details. Moshe will confirm the arrangements with you.", confirm: ["Hours included", "Entrance fees not included unless stated", "Guide vs driver only"], sourceId: "owner-private-driver",
+    reentryNote: "Include your date, route and party details. I'll confirm the arrangements with you in writing.", confirm: ["Hours included", "Entrance fees not included unless stated", "Guide vs driver only"], sourceId: "owner-private-driver",
   },
   // Tours
   {
@@ -1830,7 +1830,7 @@ export const providerLinks: ProviderLink[] = [
     id: "private-daytrips-moshe", pageIds: ["tours-hub", "masada"], ...moshe, mode: "provider_inquiry",
     title: "Private day trips", summary: "Private day trips with a local driver, planned around your own itinerary.",
     ctaLabel: "Request a quote", url: "/private-driver/#request-quote", isAffiliate: false,
-    reentryNote: "Include your date, route and party details. Moshe will confirm the arrangements with you.", confirm: ["Exact itinerary and stops", "Whether a licensed guide is included", "Entrance fees", "Travel requirements for crossings"], sourceId: "owner-private-day-trips",
+    reentryNote: "Include your date, route and party details. I'll confirm the arrangements with you in writing.", confirm: ["Exact itinerary and stops", "Whether a licensed guide is included", "Entrance fees", "Travel requirements for crossings"], sourceId: "owner-private-day-trips",
   },
   // Shore excursions (port-specific pages only)
   {
@@ -1862,7 +1862,7 @@ export const providerLinks: ProviderLink[] = [
   ...(["haifa", "ashdod"] as const).flatMap((portId): ProviderLink[] => (["airport", "city"] as const).map((destination) => ({
     id: `${portId}-port-${destination}-transfer`, pageIds: [shorePorts[portId].pageId], ...moshe, mode: "provider_inquiry",
     title: destination === "airport" ? `${shorePorts[portId].name} Port to Ben Gurion Airport` : `${shorePorts[portId].name} Port to your hotel or another city`,
-    summary: destination === "airport" ? "Request a one-way private transfer after your cruise. Share your ship, flight, passengers and luggage so Moshe can assess the pickup, route and price." : "Request a one-way transfer from the port to your hotel or another address in Israel. The route, vehicle, pickup point and price are agreed individually.",
+    summary: destination === "airport" ? "Request a one-way private transfer after your cruise. Share your ship, flight, passengers and luggage so I can assess the pickup, route and price." : "Request a one-way transfer from the port to your hotel or another address in Israel. The route, vehicle, pickup point and price are agreed individually.",
     ctaLabel: "Request a transfer quote", url: `/private-driver/?port=${portId}&transfer=${destination}#request-quote`, isAffiliate: false,
     reentryNote: "A transfer request, not a return shore excursion. Confirm the exact meeting point and destination; no vehicle, port access or availability is reserved by selecting it.",
     confirm: ["Exact port meeting point", "Destination and luggage", "Pickup date and time", "Vehicle and total price", "Cancellation terms"], sourceId: "owner-private-driver",
