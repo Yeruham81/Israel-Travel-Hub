@@ -85,7 +85,7 @@ describe("Accommodation hub editorial upgrade", () => {
       expect(link).toHaveAttribute("target", "_blank");
       expect(link.getAttribute("rel")).toContain("noopener");
     }
-    expect(screen.getByText(/existing Israel-Taxi.com website/)).toBeInTheDocument();
+    expect(screen.getByText(/existing website in a separate tab/)).toBeInTheDocument();
   });
 
   it("keeps internal paths resolvable and self-canonical staging SEO unchanged", async () => {
