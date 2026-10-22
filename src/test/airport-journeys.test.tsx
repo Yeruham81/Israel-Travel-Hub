@@ -155,6 +155,52 @@ describe("four independent airport transportation comparisons", () => {
     expect(doc.body.textContent).not.toMatch(/≈ ₪20–30|≈ ₪300–360/);
   });
 
+  it("covers 2026 Haifa route choices and the narrow bus 905 operating window", () => {
+    const g = airportJourneyGuides.haifa;
+    expect(g.updatedAt).toBe("2026-10-22");
+    expect(g.historicalPrices).toBe(false);
+    expect(g.title).toMatch(/Haifa.*2026.*Train.*Bus.*Taxi/);
+    expect(g.answer).toMatch(/Hof HaCarmel.*Bat Galim.*HaShmona.*HaMifratz/s);
+    expect(g.answer).toMatch(/bus 905.*Saturday-night.*early-Sunday/s);
+    expect(g.stations).toHaveLength(4);
+    expect(g.photos?.station.alt).toContain("Terminal 3");
+    expect(g.photos?.onward.alt).toContain("German Colony");
+    expect(g.sources).toHaveLength(6);
+    expect(g.faqs.length).toBeGreaterThanOrEqual(9);
+    expect(g.weekend.join(" ")).toContain("Amal");
+    expect(g.weekend.join(" ")).toContain("discontinued");
+    expect(g.options.find(o => o.id === "rail")?.cost).not.toContain("₪");
+    expect(g.options.find(o => o.id === "bus")?.cost).not.toContain("₪");
+    expect(g.options.find(o => o.id === "taxi")?.cost).toMatch(/meter/i);
+    expect(g.options.find(o => o.id === "bus")?.paragraphs.join(" ")).toContain("Terminal 3, Level 2");
+    for (const option of g.options) {
+      expect(option.inlineLinks?.length).toBeGreaterThan(0);
+      for (const link of option.inlineLinks || []) {
+        expect(option.paragraphs.join(" ").split(link.text), link.text).toHaveLength(2);
+      }
+    }
+    for (const link of g.weekendLinks || []) {
+      expect(g.weekend.join(" ").split(link.text)).toHaveLength(2);
+    }
+  });
+
+  it("renders Haifa contextual links, images and separate private-booking CTA", async () => {
+    const g = airportJourneyGuides.haifa;
+    const router = createRouter({ routeTree, context: { queryClient: new QueryClient() }, history: createMemoryHistory({ initialEntries: [g.path] }), trailingSlash: "always" });
+    await router.load();
+    const html = renderToString(<RouterContextProvider router={router}><AirportJourneyPage id="haifa" /></RouterContextProvider>);
+    const doc = new DOMParser().parseFromString(html, "text/html");
+    expect(doc.querySelectorAll("figure img")).toHaveLength(3);
+    for (const option of g.options) for (const link of option.inlineLinks || []) {
+      const a = doc.querySelector(`#option-${option.id} a[href="${link.to}"]`);
+      expect(a).not.toBeNull();
+      expect(a?.closest("p")).not.toBeNull();
+    }
+    expect(doc.querySelector('section[aria-label="Related practical guides"]')).not.toBeNull();
+    expect(doc.querySelector('a[href="/travel-blog/ben-gurion-airport-to-haifa/#request-quote"]')).not.toBeNull();
+    expect(doc.body.textContent).not.toMatch(/≈ ₪30–45|≈ ₪20–30|≈ ₪500–600/);
+  });
+
   it("does not invent live transport fares or claim rail on Shabbat", () => {
     for (const id of airportJourneyIds) {
       const g = airportJourneyGuides[id];
