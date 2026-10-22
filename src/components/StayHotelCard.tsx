@@ -5,11 +5,11 @@ import { getSource, isPublisherUrl, type HotelRecommendation, type ProviderLink 
 import { recordOutboundClick, relFor } from "@/lib/outbound";
 import { activeHotelNotice } from "@/lib/hotel-notices";
 
-export function StayHotelCard({ hotel, booking, pageId, editorial, compact = false, photo, fallbackPhoto }: { hotel: HotelRecommendation; booking: ProviderLink | undefined; pageId: string; editorial?: Pick<HotelRecommendation, "summary" | "bestFor" | "watch"> | undefined; compact?: boolean; photo?: HotelIllustration | undefined; fallbackPhoto?: { src: string; alt: string } | undefined }) {
+export function StayHotelCard({ hotel, booking, pageId, editorial, compact = false, tile = false, photo, fallbackPhoto }: { hotel: HotelRecommendation; booking: ProviderLink | undefined; pageId: string; editorial?: Pick<HotelRecommendation, "summary" | "bestFor" | "watch"> | undefined; compact?: boolean; tile?: boolean; photo?: HotelIllustration | undefined; fallbackPhoto?: { src: string; alt: string } | undefined }) {
   const [imageFailed, setImageFailed] = useState(false);
   const notice = activeHotelNotice(hotel);
   const source = getSource(hotel.sourceId);
-  if (compact) {
+  if (tile) {
     return (
       <li id={`hotel-${hotel.id}`} className="flex min-w-0 scroll-mt-32 flex-col overflow-hidden rounded-2xl border bg-card transition-colors hover:border-primary/60" data-testid="hotel-recommendation">
         {photo && <div className="overflow-hidden bg-muted">
