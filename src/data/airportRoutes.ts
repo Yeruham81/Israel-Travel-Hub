@@ -7,6 +7,7 @@ type RouteGuide = {
   journeyTitle: string; journeyText: string; areasTitle: string;
   areas: { title: string; text: string }[];
   planningTitle: string; planningText: string;
+  example: { title: string; situation: string; response: string };
   faqs: { q: string; a: string }[];
   related: { label: string; to: LinkProps["to"] }[];
 };
@@ -25,6 +26,11 @@ const guides: Record<AirportTransferRouteId, RouteGuide> = {
       { title: "Inside or beside the Old City", text: "Confirm the nearest permitted vehicle drop-off with your accommodation and me. Include any walking distance, steps and luggage assistance you need in the request; do not assume a car can reach every doorway." },
       { title: "East Jerusalem & residential neighbourhoods", text: "Send the full street address and a location pin where useful. For an apartment, obtain the building entrance, host contact and check-in arrangements before your flight." },
     ],
+    example: {
+      title: "If your room is inside the Old City",
+      situation: "A hotel's street address may sit inside a lane where ordinary vehicles cannot stop.",
+      response: "Send the hotel name and ask reception which gate and permitted unloading point to use. The quote should identify the practical drop-off; the remaining walk or luggage assistance may need separate arrangements.",
+    },
     planningTitle: "A late arrival needs a hotel plan too",
     planningText: "Include your flight's Israel-local arrival date and time, especially when landing after midnight. Ask your hotel about late reception or key collection, and ask me to confirm any extra charges for night, weekend or holiday trips in the written quote. For an onward appointment or event, leave room for airport formalities and traffic as well as the drive.",
     faqs: [
@@ -49,6 +55,11 @@ const guides: Record<AirportTransferRouteId, RouteGuide> = {
       { title: "Old Jaffa & the port area", text: "Check the nearest drivable meeting or drop-off point with your host. Share any remaining walk, steps and luggage needs before booking, particularly for accommodation on a pedestrian lane." },
       { title: "Neve Tzedek, Florentin & rental apartments", text: "Use the full street and building number, with the entrance or a map pin where helpful. Arrange key collection with your host separately; a transfer booking does not include apartment check-in." },
     ],
+    example: {
+      title: "If four travelers each have a large suitcase",
+      situation: "A car with four passenger seats may not have enough luggage capacity, particularly with hand luggage or a stroller.",
+      response: "Specify the number and size of cases when requesting the quote. A larger vehicle may be needed even when the party is within the published four-person rate category.",
+    },
     planningTitle: "Match the car to the bags, as well as the people",
     planningText: "The published car starting rate is for up to four passengers, but luggage still needs to fit the confirmed vehicle. List large cases, carry-ons, strollers and children's ages. If your party needs a larger vehicle or child seats, request them explicitly so the quote covers the actual journey to Tel Aviv or Jaffa.",
     faqs: [
@@ -73,6 +84,11 @@ const guides: Record<AirportTransferRouteId, RouteGuide> = {
       { title: "Mount Carmel & Carmel Centre", text: "Identify the actual hilltop hotel or apartment. A nearby-looking coastal landmark does not describe the final drive uphill. Ask about steps, reception access or mobility requirements before confirming the vehicle." },
       { title: "Beachfront & Bat Galim", text: "Give the specific property and its preferred drop-off point. Haifa's coastline covers several areas; a beach or neighbourhood name alone can leave the destination unclear." },
     ],
+    example: {
+      title: "If your flight connects with a cruise departure",
+      situation: "A booking for a Haifa city hotel is not the same as confirmed delivery to the cruise passenger terminal.",
+      response: "Provide the ship and boarding deadline. Confirm the correct passenger access point and allow for immigration, baggage, road delays and the walk or terminal access arrangements before check-in.",
+    },
     planningTitle: "Continuing to a cruise? Include the terminal details",
     planningText: "If your destination is a passenger terminal rather than a Haifa hotel, say so in the request and include the ship and boarding details. The operator must confirm the usable drop-off point and access arrangements. Leave a generous margin for flight delays, airport formalities, road traffic and the cruise line's check-in deadline; a transfer request is not a boarding-time guarantee.",
     faqs: [
@@ -97,6 +113,11 @@ const guides: Record<AirportTransferRouteId, RouteGuide> = {
       { title: "Neve Zohar & the southern hotel district", text: "If your booking is outside Ein Bokek, give that address explicitly. Ask for a quote for the actual property rather than assuming that every hotel advertised as Dead Sea has the same destination or transfer price." },
       { title: "Ein Gedi, Masada or a stop along the way", text: "These are separate destinations or additions to the journey. List every intended stop and ask about the extra time and charge. The Ein Bokek starting rate does not establish a price for sightseeing or a different resort area." },
     ],
+    example: {
+      title: "If you want to stop at Masada en route",
+      situation: "The published one-way price is for transport to Ein Bokek, not sightseeing or a different Dead Sea district.",
+      response: "Request a separate multi-stop itinerary, including time for admission and access at Masada, and agree the additional travel time and total before booking. Do not assume the stop is included.",
+    },
     planningTitle: "Coordinate the longer drive with hotel check-in",
     planningText: "For an evening flight, ask the hotel how late reception and any booked meal remain available. Include your flight number and discuss any requested rest stop when arranging the ride. If you also need a return transfer, add the departure flight and hotel pickup details to your message so I can quote and confirm it separately.",
     faqs: [
