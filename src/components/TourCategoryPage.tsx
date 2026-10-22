@@ -45,6 +45,7 @@ export function TourCategoryPage({ id, filters: rawFilters, onChange }: { id: To
     <TourCatalog categoryId={id} filters={filters} onChange={onChange} />
     <section aria-labelledby="planning-day-h" className="mt-14"><h2 id="planning-day-h" className="text-3xl font-semibold">Planning your {category.shortTitle} experience</h2><div className="mt-4 space-y-4 leading-relaxed text-muted-foreground">{category.paragraphs.map(paragraph => <p key={paragraph}>{paragraph}</p>)}</div>
       {id === "bethlehem-jericho" && <p className="mt-4 text-sm"><Link to={travelGuidePaths.bethlehem} className="font-semibold text-primary underline">Read my Jerusalem to Bethlehem travel guide</Link></p>}
+      {id === "masada-dead-sea" && <p className="mt-4 text-sm"><Link to={travelGuidePaths.jerusalemDeadSea} className="font-semibold text-primary underline">Planning the journey independently? Compare buses, driving and private transport from Jerusalem.</Link></p>}
     </section>
     <FaqList faqs={category.faqs} />
     <RelatedGuideCards title="Get to know the places on your itinerary" guides={guides} />
