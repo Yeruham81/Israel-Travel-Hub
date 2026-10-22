@@ -1,4 +1,4 @@
-import { Link, type LinkProps } from "@tanstack/react-router";
+import { Link, useRouterState, type LinkProps } from "@tanstack/react-router";
 import { guideDirectory } from "@/data/travelGuides";
 import type { ReactNode } from "react";
 import { ExtLink } from "@/components/Layout";
@@ -161,13 +161,24 @@ export function ProviderSection({ id = "book", title, intro, links, pageId }: { 
  */
 export function RelatedLinks({ title = "Plan the rest of your trip", items }: { title?: string; items: { label: string; to: LinkProps["to"]; note?: string }[] }) {
   const guideSection = /\bguides?\b/i.test(title);
+  const pathname = useRouterState({ select: (state) => state.location.pathname });
+  const normalized = (path: string) => path.replace(/\/+$/, "");
+  const current = guideDirectory.find((guide) => normalized(String(guide.to)) === normalized(pathname));
+  const titleWords = new Set((current?.title.toLowerCase().match(/[a-z]{4,}/g) || []).map((w) => w.replace(/s$/, "")).filter((w) => !["israel", "travel", "guide", "with", "from", "your", "what", "about", "best"].includes(w)));
   const guideItems = guideSection
-    ? items.flatMap((item) => {
+    ? items.flatMap((item, order) => {
         const guide = guideDirectory.find((candidate) => candidate.to === item.to && Boolean(candidate.photo));
-        return guide ? [{ item, guide }] : [];
-      }).filter(({ guide }, index, all) => all.findIndex((entry) => entry.guide.to === guide.to) === index).slice(0, 6)
+        if (!guide || (current && guide.to === current.to)) return [];
+        const strongTopics = guide.topics.filter((topic) => topic !== "tips" && current?.topics.includes(topic)).length;
+        const words = new Set((guide.title.toLowerCase().match(/[a-z]{4,}/g) || []).map((w) => w.replace(/s$/, "")));
+        const titleOverlap = [...titleWords].filter((word) => words.has(word)).length;
+        // Avoid generic "tips" tag alone making off-topic eSIM/hotel pages appear in a taxi cluster.
+        if (current && current.topics.some((topic) => topic !== "tips") && strongTopics === 0 && titleOverlap === 0) return [];
+        return [{ item, guide, order, score: strongTopics * 3 + titleOverlap * 2 }];
+      }).filter(({ guide }, index, all) => all.findIndex((entry) => entry.guide.to === guide.to) === index)
+        .sort((a, b) => b.score - a.score || a.order - b.order).slice(0, 6)
     : [];
-  // Prefer the author's existing relevance order over automatically filling with unrelated pages.
+  // Show only coherent pairs, never pad the cards with unrelated recommendations.
   const pairedGuides = guideItems.slice(0, guideItems.length - (guideItems.length % 2));
   if (guideSection && pairedGuides.length === 0) return null;
   if (!guideSection && items.length === 0) return null;
