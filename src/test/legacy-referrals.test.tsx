@@ -15,7 +15,13 @@ function routerAt(path: string) {
 }
 
 describe("replacement-site navigation", () => {
-  it("never refers visitors or search engines to legacy pages across all public page routes", async () => {
+  // The only temporary exception is four owner-authored itineraries awaiting migration.
+  // This whitelist MUST be removed when the original slugs are re-created as internal routes.
+  const temporaryItineraryLinks = new Set([3, 5, 7, 10].map(days =>
+    "https://www.israel-taxi.com/travel-blog/israel-itinerary-" + days + "-days/",
+  ));
+
+  it("blocks legacy-site referrals except for the four documented itinerary bridge links", async () => {
     const routes = Object.values(routerAt("/").routesById).filter(route => route.id !== "__root__" && route.options.component);
     expect(routes.length).toBeGreaterThan(90);
     for (const route of routes) {
@@ -28,7 +34,17 @@ describe("replacement-site navigation", () => {
       for (const element of doc.querySelectorAll("[href], [src], [action], [srcset]")) {
         for (const attribute of ["href", "src", "action", "srcset"]) {
           const value = element.getAttribute(attribute);
-          if (value) expect(isPublisherUrl(value), `${path}: ${attribute}=${value}`).toBe(false);
+          if (value) {
+            const temporaryItinerary = path === "/hotels/" && attribute === "href" && temporaryItineraryLinks.has(value);
+            if (temporaryItinerary) {
+              expect(element.tagName, value).toBe("A");
+              expect(element.getAttribute("target"), value).toBe("_blank");
+              expect(element.getAttribute("rel"), value).toContain("noopener");
+              expect(element.getAttribute("rel"), value).toContain("noreferrer");
+            } else {
+              expect(isPublisherUrl(value), `${path}: ${attribute}=${value}`).toBe(false);
+            }
+          }
           if (attribute === "href" && value) expect(value, path).not.toMatch(/^\/about(?:\/|[?#]|$)/);
         }
       }
