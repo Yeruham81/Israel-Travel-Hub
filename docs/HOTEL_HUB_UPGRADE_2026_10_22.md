@@ -1,7 +1,7 @@
 # Accommodation hub upgrade — 22 October 2026
 
 ## Scope
-Updated the existing `/hotels/` accommodation hub. All edits were made directly through GitHub on `main`, not the Lovable agent. Preserved the existing canonical URL, six destination cards and booking-model distinctions. Added dedicated guide-link cards, hotel-style explanations, choice factors, season and holiday planning, and illustrated arrival and itinerary sections.
+Updated the existing `/hotels/` accommodation hub. The final page implementation, fixes and regression verification were completed directly via GitHub on `main`, without further use of the Lovable agent. Preserved the existing canonical URL, six destination cards and booking-model distinctions. Added dedicated guide-link cards, hotel-style explanations, choice factors, season and holiday planning, and illustrated arrival and itinerary sections.
 
 ## Existing internal destination and editorial links
 - Accommodation: Jerusalem, Tel Aviv, Haifa, Tiberias and the Dead Sea destination guides, plus Eilat's already-existing city guide section `/travel-blog/eilat/#arrival-stay`.
