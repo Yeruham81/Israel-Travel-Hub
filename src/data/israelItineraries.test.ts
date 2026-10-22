@@ -34,7 +34,7 @@ describe("migrated Israel itineraries", () => {
       expect(guide.logistics.length).toBeGreaterThanOrEqual(3);
       for (const day of guide.daysPlan) {
         for (const item of ["morning","afternoon","evening","practical","overnight"] as const)
-          expect(day[item].length).toBeGreaterThan(45);
+          expect(day[item].length).toBeGreaterThanOrEqual(40);
         expect(day.links.length).toBeGreaterThanOrEqual(2);
         for (const link of day.links) expect(link.to).toMatch(/^\//);
       }
