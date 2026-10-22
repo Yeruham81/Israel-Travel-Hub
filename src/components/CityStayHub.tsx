@@ -7,6 +7,7 @@ import { GuideHeader, OnThisPage, Section, Checklist, ProviderSection, FaqList, 
 import { AreaPhotoCredit } from "@/components/AreaMap";
 import { TelAvivHotelBrowser } from "@/components/TelAvivHotelBrowser";
 import { CityStayPlanning } from "@/components/CityStayPlanning";
+import { recordOutboundClick, relFor } from "@/lib/outbound";
 
 const sections = [["overview", "Start here"], ["areas", "Explore areas"], ["compare", "Compare areas"], ["checklist", "Booking tips"], ["book", "Find hotels"], ["planning", "Trip planning"], ["faq", "FAQ"], ["sources", "Sources"]] as const;
 
@@ -114,10 +115,22 @@ export function CityStayHub({ g, areas }: { g: CityStayGuide; areas: Neighborhoo
         {g.id === "telaviv" ? (
           <>
             <TelAvivHotelBrowser />
-            <div className="mt-6 rounded-2xl border bg-card p-5 sm:p-6">
-              <h3 className="text-xl">Want to see more Tel Aviv properties?</h3>
-              <p className="mt-2 max-w-3xl text-sm leading-relaxed text-muted-foreground">These are my editorial hotel picks. For a wider search, continue to the booking provider and check the exact location, date, room type and total yourself.</p>
-              <ProviderSection id="more-hotels" title="Explore more Tel Aviv stays" links={linksForPage(`stay-${g.id}`)} pageId={`stay-${g.id}`} />
+            <div id="more-hotels" className="mt-6 flex flex-wrap items-center justify-between gap-5 rounded-2xl border bg-secondary/50 p-5 sm:p-6">
+              <div className="max-w-xl">
+                <h3 className="text-xl">Looking for even more Tel Aviv hotels?</h3>
+                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">My shortlist is a starting point. Compare more properties on the booking site, where you can select exact dates, guests, room types and cancellation conditions.</p>
+              </div>
+              <div className="flex flex-col gap-2">
+                {linksForPage(`stay-${g.id}`).map((booking) => (
+                  <a key={booking.id} href={booking.url} target="_blank" rel={relFor(booking.isAffiliate)}
+                     onClick={() => recordOutboundClick({ pageId: `stay-${g.id}`, productId: booking.id, offerId: booking.id })}
+                     className="btn btn-primary text-center focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
+                    Browse more on {booking.providerName} ↗
+                    <span className="sr-only"> (opens in a new tab)</span>
+                  </a>
+                ))}
+                <p className="text-xs text-muted-foreground">Sponsored booking link · Rates and inventory checked on the provider site.</p>
+              </div>
             </div>
           </>
         ) : (
