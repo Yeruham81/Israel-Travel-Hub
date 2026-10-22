@@ -83,7 +83,7 @@ describe("shore excursions", () => {
     expect(externalSection?.querySelectorAll('[data-testid="shore-service-card"]')).toHaveLength(externalCards.length);
     for (const externalCard of externalCards) {
       expect(within(externalCard).getByRole("img")).toHaveAttribute("alt", expect.any(String));
-      expect(externalCard).toHaveTextContent("Tour operator:");
+      expect(externalCard).toHaveTextContent("Operated by");
       expect(externalCard).toHaveTextContent("Booking platform:");
       expect(externalCard).toMatchObject({ dataset: expect.objectContaining({ serviceKind: "guided-tour" }) });
       const booking = within(externalCard).getByRole("link", { name: /View on (Viator|GetYourGuide)/ });
