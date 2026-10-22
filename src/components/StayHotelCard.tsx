@@ -5,7 +5,7 @@ import { getSource, isPublisherUrl, type HotelRecommendation, type ProviderLink 
 import { recordOutboundClick, relFor } from "@/lib/outbound";
 import { activeHotelNotice } from "@/lib/hotel-notices";
 
-export function StayHotelCard({ hotel, booking, pageId, editorial, compact = false, photo }: { hotel: HotelRecommendation; booking: ProviderLink | undefined; pageId: string; editorial?: Pick<HotelRecommendation, "summary" | "bestFor" | "watch">; compact?: boolean; photo?: HotelIllustration }) {
+export function StayHotelCard({ hotel, booking, pageId, editorial, compact = false, photo, fallbackPhoto }: { hotel: HotelRecommendation; booking: ProviderLink | undefined; pageId: string; editorial?: Pick<HotelRecommendation, "summary" | "bestFor" | "watch">; compact?: boolean; photo?: HotelIllustration; fallbackPhoto?: { src: string; alt: string } }) {
   const [imageFailed, setImageFailed] = useState(false);
   const notice = activeHotelNotice(hotel);
   const source = getSource(hotel.sourceId);
@@ -13,9 +13,9 @@ export function StayHotelCard({ hotel, booking, pageId, editorial, compact = fal
     return (
       <li id={`hotel-${hotel.id}`} className="flex min-w-0 scroll-mt-32 flex-col overflow-hidden rounded-2xl border bg-card transition-colors hover:border-primary/60" data-testid="hotel-recommendation">
         {photo && <div className="overflow-hidden bg-muted">
-          <img src={imageFailed ? undefined : photo.src} alt={photo.alt}
+          <img src={imageFailed ? fallbackPhoto?.src || photo.src : photo.src} alt={imageFailed ? fallbackPhoto?.alt || photo.alt : photo.alt}
                loading="lazy" decoding="async" width={755} height={503}
-               onError={() => setImageFailed(true)}
+               onError={() => { if (!imageFailed) setImageFailed(true); }}
                data-testid="hotel-illustration"
                className="aspect-[16/10] w-full bg-secondary object-cover" />
         </div>}
