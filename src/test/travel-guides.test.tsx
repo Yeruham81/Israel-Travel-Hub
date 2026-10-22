@@ -131,10 +131,51 @@ describe("migrated practical guides", () => {
     expect(travelGuides.arrival.sections.find((section) => section.id === "onward")!.paragraphs.join(" ")).toMatch(/Exit 03.*Level 2, Exit 23/);
     expect(travelGuides.taxis.sections.find((section) => section.id === "airport")!.links?.some((link) => link.to === travelGuidePaths.airportTaxis)).toBe(true);
     expect(travelGuides.airportTaxis.comparison.rows.join(" ")).toMatch(/Exit 03.*Exit 23/);
-    expect(travelGuides.uber.reviewNote).toMatch(/publisher.*not a live/i);
+    expect(travelGuides.uber.answer).toMatch(/Uber is not available for passenger rides in Israel in 2026/);
     expect(travelGuides.sherut.answer).toMatch(/Nesher.*Jerusalem.*Amal.*Haifa.*no longer operating/s);
     expect(travelGuides.esim.sections.find((section) => section.id === "calling")!.paragraphs.join(" ")).toMatch(/US phone number.*different from an Israeli/s);
     expect(travelGuides.esim.answer).toMatch(/unlimited.*does not promise unlimited full-speed/i);
+  });
+
+  it("keeps Uber's 2026 unavailability the primary search intent with useful alternatives", () => {
+    const guide = travelGuides.uber;
+    expect(guide.title).toMatch(/Uber.*Israel.*2026.*Gett.*Yango/);
+    expect(guide.answer.startsWith("No. Uber is not available for passenger rides in Israel in 2026.")).toBe(true);
+    expect(guide.sourceIds).toContain("guide-uber-availability");
+    expect(getSource("guide-uber-availability").url).toBe("https://www.uber.com/il/en/");
+    expect(guide.sections.map((section) => section.id)).toEqual([
+      "uber-status", "gett", "yango", "booking-without-app", "prices-payments",
+      "airport", "locations", "setup-backups", "shabbat",
+    ]);
+    expect(guide.sections.filter((section) => section.photo)).toHaveLength(2);
+    expect(guide.faqs.length).toBeGreaterThanOrEqual(10);
+    expect(guide.comparison.rows.map((row) => row[0])).toEqual([
+      "Gett", "Yango", "Local taxi or hotel dispatcher", "Pre-booked private transfer",
+    ]);
+    expect(guide.sections.find((s) => s.id === "prices-payments")!.inlineLinks?.some((link) => link.to === travelGuidePaths.taxiFares)).toBe(true);
+    expect(guide.sections.find((s) => s.id === "airport")!.inlineLinks?.some((link) => link.to === travelGuidePaths.airportTaxis)).toBe(true);
+    expect(guide.sections.find((s) => s.id === "shabbat")!.inlineLinks?.some((link) => link.to === travelGuidePaths.shabbat)).toBe(true);
+    for (const section of guide.sections) for (const link of section.inlineLinks || []) {
+      expect(section.paragraphs.join(" ").split(link.text), `link text ${link.text} should occur once`).toHaveLength(2);
+    }
+    expect(JSON.stringify(guide)).not.toMatch(/legalization bill|knesset|legislation|no current operator closure notice/i);
+    expect(travelGuides.taxis.sections.find((s) => s.id === "apps")!.paragraphs.join(" ")).toContain("Uber passenger rides are not available in Israel in 2026");
+  });
+
+  it("renders Uber alternatives with relevant inline article links", async () => {
+    const router = await routerAt(travelGuidePaths.uber);
+    const Page = UberRoute.options.component!;
+    const { container } = render(<RouterContextProvider router={router}><Page /></RouterContextProvider>);
+    for (const section of travelGuides.uber.sections) {
+      const element = container.querySelector(`#${section.id}`)! as HTMLElement;
+      for (const link of section.inlineLinks || []) {
+        const a = within(element).getByRole("link", { name: link.text });
+        expect(a).toHaveAttribute("href", link.to);
+        expect(a.closest("p")).toBeTruthy();
+      }
+    }
+    expect(container.querySelector("#uber-status")?.textContent).toContain("Uber does not operate its passenger ride service in Israel");
+    expect(container.querySelector("#airport")?.textContent).toContain("Terminal 3");
   });
 
   it("keeps the Sherut airport guide factual, separate from local shared taxis, and fully linked", () => {
