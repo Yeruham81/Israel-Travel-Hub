@@ -154,6 +154,6 @@ function Shore() {
       <div className="mt-5 flex flex-wrap gap-3"><Link to={shorePorts.ashdod.path} hash="request-quote" className="btn btn-light">Plan my day from Ashdod</Link><Link to={shorePorts.haifa.path} hash="request-quote" className="btn btn-light">Plan my day from Haifa</Link></div>
     </section>
     <SourceList ids={shoreHubSourceIds} intro="Official terminal and national-park information for planning your visit. Your cruise line and the individual operator confirm the arrangements for your actual ship and date." />
-    <details className="mt-8 rounded-xl border p-5"><summary className="cursor-pointer text-sm font-medium">Image credits</summary><ul className="mt-3 space-y-3">{[...new Map(photos.map((photo) => [photo.src, photo])).values()].map((photo) => <li key={photo.src}><p className="text-sm">{photo.alt}</p><GuidePhotoCredit photo={photo} /></li>)}</ul></details>
+    <details className="mt-8 rounded-xl border p-5"><summary className="cursor-pointer text-sm font-medium">Image credits</summary><ul className="mt-3 space-y-3">{[...new Map(photos.map((photo) => [photo.src, photo])).values()].map((photo) => <li key={photo.src}><p className="text-sm">{photo.alt}</p><GuidePhotoCredit photo={photo} insideDisclosure /></li>)}</ul></details>
   </main>;
 }
