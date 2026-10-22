@@ -57,7 +57,7 @@ export function TelAvivHotelBrowser() {
 
         <div className="mt-3 flex flex-wrap items-center gap-2 md:hidden">
           <label htmlFor="telaviv-hotel-area" className="shrink-0 text-sm font-medium">Area</label>
-          <select id="telaviv-hotel-area" aria-label="Filter Tel Aviv hotels by area"
+          <select id="telaviv-hotel-area" aria-label="Choose hotel area"
                   className="min-w-0 flex-1 rounded-lg border bg-card px-2.5 py-1.5 text-sm focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
                   value={areaId} onChange={(event) => setAreaId(event.target.value)}>
             <option value="all">All areas</option>
