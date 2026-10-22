@@ -17,7 +17,7 @@ Implemented 22 October 2026. Existing Lovable project and staging indexing setti
 | Food & markets | `/tours/food-market-tours/` |
 | Eilat & Red Sea | `/tours/eilat-red-sea/` |
 
-The existing `/tours/bethlehem-from-jerusalem/` route is retained as a departure-specific landing, with distinct planning copy and only products advertising Jerusalem departures. Direct external-operator referral buttons were replaced with the catalog's GetYourGuide/Viator offers.
+The former `/tours/bethlehem-from-jerusalem/` route now permanently redirects (301) to `/travel-blog/jerusalem-to-bethlehem/`, the informative guide comparing buses, taxis, private arrangements and organised tours. It appears once in Travel Guides and in the guides sidebar group, rather than under Tours. Topic/product links now point directly to `/tours/bethlehem-jericho-jordan-river/`; the category links back to the transport guide. The redirect-only URL is omitted from the sitemap.
 
 Each category has its own title, description, introduction, comparison content, practical planning, FAQs, four illustrated guide cards and other category links. Metadata uses `pageMeta`, breadcrumbs and a factual `CollectionPage`/`ItemList`. It does not claim live inventory, ratings, product offers or date-specific availability. Canonicals point to the permanent unfiltered URL; no filter permutations are added to the sitemap. Filters are form controls, so the site does not emit crawlable links for every combination. Existing staging `noindex,nofollow` remains unchanged.
 
@@ -29,6 +29,7 @@ The gateway has one illustrated cruise-port callout titled “Arriving in Israel
 - `src/data/tourTypes.ts`: contracts, place taxonomy and interest tags. Products keep origins separate from destinations, plus format, advertised total duration, pickup and inclusion information. Optional owner `price` records use the existing ILS `published_starting_rate` contract, restricted to a per-vehicle basis. The generic Jerusalem day remains individually quoted.
 - `src/data/tours.ts`: editorial category content and image provenance. Category selection rules match destination or interest tags, rather than copying product arrays.
 - `src/lib/tours.ts`: queries, safe search parsing, filtering, sorting, offer resolution and price expiry. `toursForCategory` returns the original shared objects. A Jaffa/Carmel product appears in both Tel Aviv and food categories; a Jerusalem/Bethlehem product appears under both destinations.
+- The tour-category sidebar branch stays expanded on every page, including the mobile drawer, without a toggle. Catalog section headings use “More [category title]” when owner cards precede them, or the category title alone when there are no visible owner trips; provider-type headings are omitted.
 - `TourCatalog` separates owner transport from independently operated experiences even after filtering. Owner itineraries use the same light, bordered image-card style as the shore-excursion pages, with duration, format, departure, inclusions and a direct quote link; there is no dark-blue owner section. All listings appear initially. Optional origin, destination, interest, format, duration, keyword and sort controls persist in the URL. Invalid enum values and unrelated search keys are discarded at the page boundary. Search typing replaces history entries; categorical choices support Back.
 
 Cruise-port products continue to use the existing shore catalog. Ordinary hotel/city departures are not presented as port pickup or ship-return products. No existing shore prices, forms or return arrangements were changed.
@@ -73,6 +74,7 @@ Eilat's new coral photograph is by Yoav95179, CC BY-SA 4.0, resized and converte
 
 ## Validation
 
+- Category-heading and Bethlehem guide/navigation correction: all 334 tests across 41 files, TypeScript and production build passed. Regressions cover category-specific headings with and without owner cards, permanently expanded desktop/mobile tour navigation, the 301 guide redirect, unique guide-directory entry, reciprocal guide/catalog links and sitemap exclusion of the old URL.
 - Departure-specific private days and currency-format update: all 332 tests across 41 files, TypeScript and production build passed. The three category regressions cover owner-first separation, two-column layout, distinct images, six source-backed rates/durations, USD/EUR estimates and disclaimers, quote-prefill identity and Jerusalem-origin filtering.
 - Full suite after the gateway redesign: 322 tests across 40 files passed.
 - TypeScript and production build passed; sitemap contains the eight new permanent category URLs.

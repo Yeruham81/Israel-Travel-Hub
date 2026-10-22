@@ -74,7 +74,7 @@ export const allNavGroups: NavGroup[] = [
   {
     title: "Tours & trips",
     items: [
-      { label: "Tours & day trips", to: "/tours/", childrenLabel: "Tour categories", toggleLabel: "Show tour categories", children: tourCategories.map(category => ({ label: category.shortTitle, to: tourCategoryPaths[category.id] })) },
+      { label: "Tours & day trips", to: "/tours/", childrenLabel: "Tour categories", alwaysExpanded: true, children: tourCategories.map(category => ({ label: category.shortTitle, to: tourCategoryPaths[category.id] })) },
       { label: "Shore excursions", to: "/shore-excursions/", childrenLabel: "Shore excursion ports", alwaysExpanded: true, children: [
         { label: "From Haifa Port", to: "/haifa-shore-excursions/" },
         { label: "From Ashdod Port", to: "/ashdod-shore-excursions/" },
@@ -133,6 +133,7 @@ export const allNavGroups: NavGroup[] = [
       { label: "What to eat in Israel", to: travelGuidePaths.food },
       { label: "Top 10 Israel experiences", to: travelGuidePaths.topTen },
       { label: "Jerusalem travel guide", to: travelGuidePaths.jerusalem },
+      { label: "Jerusalem to Bethlehem: travel options", to: travelGuidePaths.bethlehem },
       travelTips.gettingAround,
       { label: "Getting around Tel Aviv", to: travelGuidePaths.telAviv },
       { label: "Taxis in Israel", to: travelGuidePaths.taxis },

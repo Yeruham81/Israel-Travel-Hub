@@ -3,7 +3,7 @@ import { Clock3, MapPin, Users } from "lucide-react";
 import type { TourProduct } from "@/data/tourTypes";
 import { tourPlaces, tourTags } from "@/data/tourTypes";
 import { operators } from "@/data/registry";
-import { tourPhotos, type TourCategoryId } from "@/data/tours";
+import { getTourCategory, tourPhotos, type TourCategoryId } from "@/data/tours";
 import { filterTours, isOwnerTour, offersForTour, placeLabel, toursForCategory, tourSnapshotPrice, type TourSearch } from "@/lib/tours";
 import { recordOutboundClick, relFor } from "@/lib/outbound";
 import { PriceDisplay } from "@/components/CurrencyRates";
@@ -65,9 +65,9 @@ export function ExternalTourCard({ tour, pageId }: { tour: TourProduct; pageId: 
   </li>;
 }
 
-export function TourCatalog({ categoryId, filters, onChange, originScope }: { categoryId: TourCategoryId; filters: TourSearch; onChange: (next: TourSearch, replace?: boolean) => void; originScope?: TourSearch["origin"] }) {
-  const all = toursForCategory(categoryId).filter(tour => !originScope || tour.originIds.includes(originScope));
-  const visible = filterTours(categoryId, { ...filters, ...(originScope && { origin: originScope }) });
+export function TourCatalog({ categoryId, filters, onChange }: { categoryId: TourCategoryId; filters: TourSearch; onChange: (next: TourSearch, replace?: boolean) => void }) {
+  const all = toursForCategory(categoryId);
+  const visible = filterTours(categoryId, filters);
   const owner = visible.filter(isOwnerTour);
   const external = visible.filter(tour => !isOwnerTour(tour));
   const origins = tourPlaces.filter(place => all.some(tour => tour.originIds.includes(place.id)));
@@ -79,7 +79,7 @@ export function TourCatalog({ categoryId, filters, onChange, originScope }: { ca
     <form role="search" aria-label="Find a tour in this category" onSubmit={event => event.preventDefault()} className="rounded-2xl border bg-secondary/40 p-4 sm:p-5">
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
         <label className="text-xs font-semibold">Search tours<input type="search" value={filters.q || ""} onChange={event => set("q", event.target.value)} placeholder="Place or interest" maxLength={80} className="mt-1.5 w-full rounded-lg border bg-background px-3 py-2.5 text-base font-normal" /></label>
-        {!originScope && <label className="text-xs font-semibold">Start from<select value={filters.origin || ""} onChange={event => set("origin", event.target.value)} className="mt-1.5 w-full rounded-lg border bg-background px-3 py-2.5 text-base font-normal"><option value="">All departures</option>{origins.map(origin => <option key={origin.id} value={origin.id}>{origin.label}</option>)}</select></label>}
+        <label className="text-xs font-semibold">Start from<select value={filters.origin || ""} onChange={event => set("origin", event.target.value)} className="mt-1.5 w-full rounded-lg border bg-background px-3 py-2.5 text-base font-normal"><option value="">All departures</option>{origins.map(origin => <option key={origin.id} value={origin.id}>{origin.label}</option>)}</select></label>
         <label className="text-xs font-semibold">Duration<select value={filters.length || ""} onChange={event => set("length", event.target.value)} className="mt-1.5 w-full rounded-lg border bg-background px-3 py-2.5 text-base font-normal"><option value="">Any duration</option><option value="short">Up to half a day</option><option value="full-day">Full day</option></select></label>
         <label className="text-xs font-semibold">Experience<select value={filters.format || ""} onChange={event => set("format", event.target.value)} className="mt-1.5 w-full rounded-lg border bg-background px-3 py-2.5 text-base font-normal"><option value="">All experiences</option><option value="shared">Shared guided experience</option><option value="private">Private</option><option value="independent">Shared transport & host</option></select></label>
       </div>
@@ -87,14 +87,13 @@ export function TourCatalog({ categoryId, filters, onChange, originScope }: { ca
       {tags.length > 1 && <div className="mt-4"><p className="text-xs font-semibold">Interests</p><div className="mt-2 flex flex-wrap gap-2"><button type="button" className="chip" aria-pressed={!filters.tag} onClick={() => set("tag", "")}>All interests</button>{tags.map(tag => <button key={tag.id} type="button" className="chip" aria-pressed={filters.tag === tag.id} onClick={() => set("tag", filters.tag === tag.id ? "" : tag.id)}>{tag.label}</button>)}</div></div>}
     </form>
     <div className="mt-4 flex flex-wrap items-center justify-between gap-3">
-      <p role="status" aria-live="polite" className="text-sm text-muted-foreground">{visible.length} {visible.length === 1 ? "experience" : "experiences"}{originScope ? ` from ${placeLabel(originScope)}` : ""}</p>
+      <p role="status" aria-live="polite" className="text-sm text-muted-foreground">{visible.length} {visible.length === 1 ? "experience" : "experiences"}</p>
       <div className="flex flex-wrap items-center gap-3">{active && <button type="button" onClick={() => onChange({})} className="text-sm font-semibold text-primary underline">Clear filters</button>}<label className="text-xs text-muted-foreground">Sort by <select aria-label="Sort tours" value={filters.sort || ""} onChange={event => set("sort", event.target.value)} className="ml-1 rounded-lg border bg-background p-2 text-sm text-foreground"><option value="">Featured</option><option value="duration">Shortest duration</option><option value="title">Title A–Z</option></select></label></div>
     </div>
     {visible.length === 0 ? <section className="mt-5 rounded-2xl border p-8 text-center"><h2 className="text-2xl font-semibold">No tours match these choices</h2><p className="mt-3 text-muted-foreground">Try another departure, destination or interest.</p><button type="button" className="btn btn-primary mt-5" onClick={() => onChange({})}>Show all tours in this category</button></section> : <>
       <OwnerTourSection tours={owner} />
       {external.length > 0 && <section id="external-tours" aria-labelledby="external-tours-h" data-section="external-tours" className="mt-12 scroll-mt-24 border-t pt-8">
-        <p className="eyebrow">Independent tour providers</p>
-        <h2 id="external-tours-h" className="mt-2 text-3xl font-semibold">Other operators' tours & experiences</h2>
+        <h2 id="external-tours-h" className="text-3xl font-semibold">{owner.length > 0 ? "More " : ""}{getTourCategory(categoryId).title}</h2>
         <p className="mt-3 max-w-3xl text-sm leading-relaxed text-muted-foreground">Discover guided itineraries, local walks and specialist activities from independent operators. Each card identifies the departure, experience and booking site.</p>
         <ul aria-label="External tours" className="mt-6 grid gap-5 sm:grid-cols-2">{external.map(tour => <ExternalTourCard key={tour.id} tour={tour} pageId={`tours-${categoryId}`} />)}</ul>
         <p className="mt-5 text-xs leading-relaxed text-muted-foreground">External tours have their own prices and terms. Choose the correct date and departure option on the booking site, and confirm guiding, admissions, meeting and return arrangements. Any reference starting prices shown here are approximate listing snapshots, not confirmed quotes.</p>

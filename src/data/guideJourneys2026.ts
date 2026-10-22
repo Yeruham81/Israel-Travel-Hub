@@ -264,7 +264,7 @@ export const journeyDestinationGuides = {
         "links": [
           {
             "label": "Compare Bethlehem tour formats",
-            "to": "/tours/bethlehem-from-jerusalem/"
+            "to": "/tours/bethlehem-jericho-jordan-river/"
           }
         ]
       },
@@ -357,7 +357,7 @@ export const journeyDestinationGuides = {
     "services": [
       {
         "label": "Compare organised Bethlehem tours",
-        "to": "/tours/bethlehem-from-jerusalem/"
+        "to": "/tours/bethlehem-jericho-jordan-river/"
       },
       {
         "label": "Choose a Jerusalem accommodation base",

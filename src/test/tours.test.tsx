@@ -1,12 +1,14 @@
 import { QueryClient } from "@tanstack/react-query";
-import { createMemoryHistory, createRouter, RouterContextProvider } from "@tanstack/react-router";
+import { createMemoryHistory, createRouter, isRedirect, RouterContextProvider } from "@tanstack/react-router";
 import { cleanup, fireEvent, render, screen, waitFor, within } from "@testing-library/react";
 import { renderToString } from "react-dom/server";
 import { afterEach, describe, expect, it } from "vitest";
 import { routeTree } from "@/routeTree.gen";
 import { Route as HubRoute } from "@/routes/tours.index";
+import { Route as LegacyBethlehemRoute } from "@/routes/tours.bethlehem-from-jerusalem";
 import { tourCategoryMeta } from "@/components/TourCategoryPage";
-import { affiliateConfig, operators, sources, tourBookingOffers, tourProducts } from "@/data/registry";
+import { affiliateConfig, operators, sources, tourBookingOffers, tourProducts, travelGuidePaths } from "@/data/registry";
+import { guideDirectory } from "@/data/travelGuides";
 import { tourCategories, tourCategoryPaths, tourPhotos } from "@/data/tours";
 import homepageCruise from "@/assets/home/cruise-port.webp";
 import { parseTourHubSearch, filterTours, isOwnerTour, offersForTour, parseTourSearch, tourSnapshotPrice, toursForCategory } from "@/lib/tours";
@@ -200,6 +202,8 @@ describe("tours hub and SEO category pages", () => {
       expect(more.querySelector(`a[href="${tourCategoryPaths[category.id]}"]`)).toBeNull();
       expect(more.querySelector('a[href="/tours/"]')).not.toBeNull();
       const owner = doc.querySelector('[data-section="moshe-private-tours"]');
+      expect(doc.querySelector("#external-tours-h")?.textContent).toBe(`${owner ? "More " : ""}${category.title}`);
+      expect(doc.body.textContent).not.toMatch(/Other operators' tours & experiences|Independent tour providers/);
       if (owner) {
         expect(owner.className).not.toContain("bg-navy");
         expect(owner.textContent).not.toContain("Arrange directly with me");
@@ -254,16 +258,44 @@ describe("tours hub and SEO category pages", () => {
     expect(screen.getByTestId("tour-card")).toHaveAttribute("data-product-id", "mahane-yehuda-tasting");
   });
 
-  it("loads shared filter links and keeps the legacy Bethlehem departure page restricted to Jerusalem", async () => {
+  it("loads shared filter links and offers Jerusalem departures in the main Bethlehem catalog", async () => {
     await renderPage("/tours/masada-dead-sea/?destination=ein-gedi&format=independent");
     expect(screen.getAllByTestId("tour-card")).toHaveLength(1);
     expect(screen.getByTestId("tour-card")).toHaveAttribute("data-product-id", "masada-ein-gedi-dead-sea");
     cleanup();
-    await renderPage("/tours/bethlehem-from-jerusalem/?origin=tel-aviv");
-    expect(screen.queryByRole("combobox", { name: "Start from" })).not.toBeInTheDocument();
+    await renderPage("/tours/bethlehem-jericho-jordan-river/?origin=jerusalem");
+    expect(screen.getByRole("combobox", { name: "Start from" })).toHaveValue("jerusalem");
     expect(screen.getAllByTestId("tour-card")).toHaveLength(2);
     for (const card of screen.getAllByTestId("tour-card")) expect(tourProducts.find(tour => tour.id === card.getAttribute("data-product-id"))!.originIds).toContain("jerusalem");
     expect(document.querySelector('a[href*="beinharimtours.com"]')).toBeNull();
+    expect(screen.getByRole("heading", { level: 2, name: "Bethlehem, Jericho & Jordan River tours" })).toBeInTheDocument();
+    expect(screen.getByRole("link", { name: "Read my Jerusalem to Bethlehem travel guide" })).toHaveAttribute("href", travelGuidePaths.bethlehem);
+  });
+
+  it("permanently directs the former Bethlehem tour URL to one informative travel guide", async () => {
+    let redirected = false;
+    try {
+      await LegacyBethlehemRoute.options.beforeLoad?.({ search: { origin: "tel-aviv", q: "tour" }, location: { hash: "tour-catalog" } } as never);
+    } catch (error) {
+      if (!isRedirect(error)) throw error;
+      redirected = true;
+      expect(error.status).toBe(301);
+      expect(error.options.to).toBe(travelGuidePaths.bethlehem);
+      expect(error.options.search).toEqual({});
+      expect(error.options.hash).toBe("");
+      expect(error.options.replace).toBe(true);
+    }
+    expect(redirected).toBe(true);
+    expect(guideDirectory.filter(guide => guide.to === travelGuidePaths.bethlehem)).toHaveLength(1);
+    expect(guideDirectory.some(guide => guide.to === "/tours/bethlehem-from-jerusalem/")).toBe(false);
+    await renderPage(travelGuidePaths.bethlehem);
+    expect(screen.getByRole("heading", { level: 1 })).toHaveTextContent("How to get from Jerusalem to Bethlehem");
+    const breadcrumbs = screen.getByRole("navigation", { name: "Breadcrumb" });
+    expect(within(breadcrumbs).getByRole("link", { name: "Travel guides" })).toHaveAttribute("href", "/guides/");
+    expect(document.querySelector("#buses")).not.toBeNull();
+    expect(document.querySelector("#private-taxi")).not.toBeNull();
+    expect(document.querySelector('[data-testid="tour-card"]')).toBeNull();
+    expect(screen.getByRole("link", { name: "Compare organised Bethlehem tours" })).toHaveAttribute("href", tourCategoryPaths["bethlehem-jericho"]);
   });
 
   it("carries a unique owner itinerary into the existing private-driver request without accepting external tours", async () => {

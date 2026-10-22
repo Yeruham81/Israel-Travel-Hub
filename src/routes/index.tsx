@@ -66,7 +66,7 @@ const services: Service[] = [
     text: "How to read an itinerary, what pickup and guide language mean in practice, and when a private driver fits better.",
     feature: { src: guidedTour, alt: "Illustrative small group on a guided walk through old stone streets" },
     cards: [
-      { label: "Bethlehem from Jerusalem", text: "Compare combined day tours", to: "/tours/bethlehem-from-jerusalem/", img: IMG.bethlehem },
+      { label: "Bethlehem, Jericho & Jordan River", text: "Compare guided day trips", to: "/tours/bethlehem-jericho-jordan-river/", img: IMG.bethlehem },
       { label: "Masada & Dead Sea", text: "Plan the desert day", to: "/travel-blog/masada/", img: IMG.masada },
     ],
     hub: { label: "Explore tours & day trips", to: "/tours/" },
@@ -101,7 +101,7 @@ const services: Service[] = [
     cards: [
       { label: "Masada", text: "Cable car or the hiking paths", to: "/travel-blog/masada/", img: IMG.masada },
       { label: "Caesarea", text: "Roman harbour city on the coast", to: "/attractions/caesarea/", img: IMG.caesarea },
-      { label: "Bethlehem", text: "Church of the Nativity & Manger Square", to: "/tours/bethlehem-from-jerusalem/", img: IMG.bethlehem },
+      { label: "Bethlehem", text: "Plan your journey from Jerusalem", to: "/travel-blog/jerusalem-to-bethlehem/", img: IMG.bethlehem },
     ],
     hub: { label: "Explore attractions & experiences", to: "/attractions/" },
   },

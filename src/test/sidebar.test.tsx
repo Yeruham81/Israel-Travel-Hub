@@ -6,6 +6,8 @@ import { GlobalNav, SiteHeader } from "@/components/Layout";
 import { routeTree } from "@/routeTree.gen";
 import { Route as HotelsRoute } from "@/routes/hotels";
 import { accommodationDestinations } from "@/data/content";
+import { tourCategories, tourCategoryPaths } from "@/data/tours";
+import { travelGuidePaths } from "@/data/registry";
 
 afterEach(cleanup);
 
@@ -21,6 +23,25 @@ async function navigationRouter(path = "/") {
 }
 
 describe("shared sidebar navigation", () => {
+  it("always shows all tour categories without a toggle and places the Bethlehem journey under guides", async () => {
+    const router = await navigationRouter();
+    render(<RouterContextProvider router={router}><GlobalNav /></RouterContextProvider>);
+    const trips = screen.getByRole("region", { name: "Tours & trips" });
+    expect(within(trips).queryByRole("button")).not.toBeInTheDocument();
+    const categories = within(trips).getByRole("list", { name: "Tour categories" });
+    expect(categories).toBeVisible();
+    expect(within(categories).getAllByRole("link")).toHaveLength(tourCategories.length);
+    for (const category of tourCategories) {
+      const link = within(categories).getByRole("link", { name: category.shortTitle });
+      expect(link).toBeVisible();
+      expect(link).toHaveAttribute("href", tourCategoryPaths[category.id]);
+    }
+    expect(trips.querySelector('a[href="/tours/bethlehem-from-jerusalem/"]')).toBeNull();
+    expect(trips.querySelector(`a[href="${travelGuidePaths.bethlehem}"]`)).toBeNull();
+    const guides = screen.getByRole("region", { name: "Travel guides & tips" });
+    expect(within(guides).getByRole("link", { name: "Jerusalem to Bethlehem: travel options" })).toHaveAttribute("href", travelGuidePaths.bethlehem);
+  });
+
   it("renders the six topic groups and marks the exact current page", async () => {
     const router = await navigationRouter("/travel-blog/where-to-stay-in-jerusalem/");
     render(<RouterContextProvider router={router}><GlobalNav /></RouterContextProvider>);
@@ -118,6 +139,8 @@ describe("shared sidebar navigation", () => {
     expect(within(nav).getAllByRole("link")[0]).toHaveTextContent("Home");
     expect(within(nav).getAllByRole("link").at(-1)).toHaveTextContent("About");
     expect(within(nav).getByRole("list", { name: "Airport transfer destinations" })).toBeVisible();
+    expect(within(nav).getByRole("list", { name: "Tour categories" })).toBeVisible();
+    expect(within(nav).queryByRole("button", { name: "Show tour categories" })).not.toBeInTheDocument();
     expect(within(nav).queryByText("Popular Links")).not.toBeInTheDocument();
     fireEvent.click(within(nav).getByRole("link", { name: "Private driver service" }));
     await waitFor(() => expect(screen.queryByRole("dialog")).not.toBeInTheDocument());

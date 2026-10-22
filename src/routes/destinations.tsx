@@ -40,7 +40,7 @@ const dests: { id?: string; name: string; text: string; links: L[] }[] = [
       { label: "Day trips from Jerusalem", to: travelGuidePaths.jerusalemDayTrips },
       { label: "Where to stay in Jerusalem", to: "/travel-blog/where-to-stay-in-jerusalem/" },
       { label: "Airport to Jerusalem", to: "/travel-blog/ben-gurion-airport-to-jerusalem/" },
-      { label: "Bethlehem tours", to: "/tours/bethlehem-from-jerusalem/" },
+      { label: "Bethlehem tours", to: "/tours/bethlehem-jericho-jordan-river/" },
       { label: "Jerusalem to Bethlehem: transport", to: travelGuidePaths.bethlehem },
       { label: "Masada day trip", to: "/travel-blog/masada/" },
     ],

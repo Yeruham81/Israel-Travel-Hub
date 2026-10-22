@@ -9,7 +9,6 @@ import esimPhoto from "@/assets/guides/esim-israel.jpeg";
 import tiberias from "@/assets/home/tiberias-lake.webp";
 import masada from "@/assets/home/masada-dead-sea.webp";
 import caesarea from "@/assets/home/caesarea-dusk.webp";
-import bethlehem from "@/assets/home/bethlehem-nativity.webp";
 import { expandedTravelGuides } from "@/data/travelGuideExpansion";
 import { attractionGuides } from "@/data/attractionGuides";
 import { attractionIds, attractionPath } from "@/data/attractionGuideTypes";
@@ -890,7 +889,6 @@ export const guideDirectory: GuideDirectoryEntry[] = [
   { id: "stay-deadsea", title: "Dead Sea hotels", description: "Choose Ein Bokek, a spa stay or a family hotel on the Israeli shore.", to: "/travel-blog/best-dead-sea-hotels/", topics: ["destinations", "accommodation"], photo: airportTransferPhotos["dead-sea"]! },
   { id: "masada", title: "Masada: plan your visit", description: "Cable car, entrance choices and a practical desert day trip.", to: "/travel-blog/masada/", topics: ["attractions", "itineraries", "tips"], photo: { src: masada, alt: "Masada plateau above the Dead Sea", credit: "Godot13 · CC BY-SA 4.0 · resized WebP", sourceUrl: "https://commons.wikimedia.org/wiki/File:Israel-2013-Aerial_13-Masada.jpg", licenseUrl: "https://creativecommons.org/licenses/by-sa/4.0/" } },
   { id: "caesarea", title: "Caesarea: visiting the ancient harbour", description: "Explore the coast, park entry and what to plan before travelling.", to: "/attractions/caesarea/", topics: ["attractions", "destinations"], photo: { src: caesarea, alt: "Caesarea's ancient coastal ruins", credit: "Zeev Stein · CC BY 2.5 · resized WebP", sourceUrl: "https://commons.wikimedia.org/wiki/File:125342_caesarea_national_park_PikiWiki_Israel.jpg", licenseUrl: "https://creativecommons.org/licenses/by/2.5/" } },
-  { id: "tour-bethlehem", title: "Bethlehem from Jerusalem", description: "Read the itinerary and practical requirements of a combined day tour.", to: "/tours/bethlehem-from-jerusalem/", topics: ["itineraries", "attractions"], photo: { src: bethlehem, alt: "Church of the Nativity in Bethlehem", credit: "Britchi Mirela · CC BY-SA 4.0 · resized WebP", sourceUrl: "https://commons.wikimedia.org/wiki/File:Palestine,_Bethlehem,_Church_of_the_Nativity_or_Birthplace_of_Jesus_(Square).jpg", licenseUrl: "https://creativecommons.org/licenses/by-sa/4.0/" } },
 ];
 
 export function isGuideTopic(value: unknown): value is GuideTopicId { return typeof value === "string" && guideTopics.some((topic) => topic.id === value); }

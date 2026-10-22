@@ -257,24 +257,3 @@ export const tourCruisePorts = [
   { id: "haifa", title: "From Haifa Port", to: "/haifa-shore-excursions/", description: "Discover Galilee's sacred sites, Akko's old harbour and the northern coast.", photo: airport["haifa"]! },
   { id: "ashdod", title: "From Ashdod Port", to: "/ashdod-shore-excursions/", description: "Explore Jerusalem, the lively coast of Tel Aviv and Jaffa, or Masada and the Dead Sea.", photo: airport["ashdod"]! },
 ] as const;
-
-/** A departure landing has its own planning copy rather than duplicating the topic page. */
-export const bethlehemJerusalemContent = {
-  intro: "Staying in Jerusalem? Compare private guiding and shared day trips that start in the city, from a Jerusalem–Bethlehem combination to a longer route through Jericho and the lower Jordan.",
-  choices: [
-    { title: "Private guiding from Jerusalem", text: "Combine the Old City and Bethlehem with a privately guided day. Confirm your address pickup and the local guide change in Bethlehem." },
-    { title: "A shared day beyond the city", text: "Join a Jerusalem departure to Bethlehem, Jericho and the lower Jordan. Allow a full day and check the exact meeting point." },
-    { title: "Make the start easy", text: "Choose a departure that fits your Jerusalem accommodation and travel date. Ask for the meeting location and return arrangements in writing." },
-  ],
-  paragraphs: [
-    "Starting in Jerusalem avoids first travelling to a Tel Aviv meeting point, but it does not make every Bethlehem itinerary a short outing. The currently listed options are full-day experiences: one combines Jerusalem and Bethlehem with private guiding, while the other continues to Jericho and the Jordan River area in a shared group.",
-    "Compare the start against your hotel address. An offered address pickup and a fixed meeting-point departure are different services; a Jerusalem listing does not automatically include every hotel. Confirm when to arrive, where the tour finishes and whether the return location is convenient for your evening plans.",
-    "The operator should confirm the crossing arrangements, documents for your nationality and any local guide or vehicle changes. Mention an essential church visit or river stop before booking, since access and operating arrangements can affect the itinerary. If your available time is shorter than the advertised day, ask about a suitable alternative rather than assuming you can leave a shared tour early.",
-  ],
-  faqs: [
-    { q: "Which of these tours starts in Jerusalem?", a: "Every tour shown in this departure selection advertises Jerusalem as its starting city. The broader Bethlehem category also includes Tel Aviv departures, which are listed separately." },
-    { q: "Will the operator collect me from my Jerusalem hotel?", a: "The private itinerary advertises address pickup, subject to confirmation. The shared itinerary has a meeting arrangement to confirm with its operator. Give your exact hotel address rather than assuming pickup is included." },
-    { q: "Can I fit these tours into half a day?", a: "The currently listed experiences are advertised as full days. Compare the duration on each card and ask the operator for a shorter option if that is what you need." },
-    { q: "Does my driver stay with me across the crossing?", a: "Guide and vehicle arrangements can change between Jerusalem and Bethlehem. Ask the tour operator to confirm who meets you, where any change happens and how the return to Jerusalem works." },
-  ],
-};
