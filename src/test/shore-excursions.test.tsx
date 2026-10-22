@@ -89,7 +89,7 @@ describe("shore excursions", () => {
       const booking = within(externalCard).getByRole("link", { name: /View on (Viator|GetYourGuide)/ });
       expect(booking).toHaveAttribute("target", "_blank");
       expect(booking).toHaveAttribute("rel", expect.stringContaining("noopener noreferrer"));
-      expect(externalCard).toHaveTextContent(/Published starting price|Check current price/);
+      expect(externalCard).toHaveTextContent(/Published starting price|See current price/);
       expect(within(externalCard).queryByRole("link", { name: /Request .* from (Ashdod|Haifa)/ })).not.toBeInTheDocument();
     }
     const heroCredit = container.querySelector('header figure details');
