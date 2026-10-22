@@ -51,7 +51,7 @@ describe("October planning, city and heritage guide migration", () => {
     const meta = travelGuideMeta(id);
     const structured = meta.scripts.map(script => JSON.parse(script.children as string));
     const schema = structured.find(item => item["@type"] === "Article");
-    expect(schema).toMatchObject({ headline: guide.title, dateModified: "2026-10-20", author: { "@type": "Person", name: "Moshe Barak" } });
+    expect(schema).toMatchObject({ headline: guide.title, dateModified: guide.updatedAt || "2026-10-20", author: { "@type": "Person", name: "Moshe Barak" } });
     expect(meta.links[0]?.href).toContain(travelGuidePaths[id]);
     expect(meta.meta).toContainEqual({ name: "robots", content: "noindex,nofollow" });
     expect(structured.some(item => item["@type"] === "Offer")).toBe(false);
