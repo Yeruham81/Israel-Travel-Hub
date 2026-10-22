@@ -135,7 +135,7 @@ function MosheAbout() {
     <section className="bg-secondary/40 py-14" aria-labelledby="direct-contact-heading">
       <div className="mx-auto max-w-6xl px-4">
         <div className="mb-7">
-          <h2 id="direct-contact-heading" className="text-3xl">Let's plan your journey</h2>
+          <h2 id="direct-contact-heading" className="text-3xl">Plan your journey with me</h2>
           <p className="mt-3 text-muted-foreground">Tell me where you'd like to go, when you're traveling and what would make the trip comfortable for you.</p>
           <p className="mt-3 flex items-center gap-2 text-sm"><Mail size={17} aria-hidden /> <a className="font-semibold text-primary underline" href={"mailto:" + airportTransferContact.email}>{airportTransferContact.email}</a></p>
         </div>

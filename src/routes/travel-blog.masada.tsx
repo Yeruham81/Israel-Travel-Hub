@@ -69,7 +69,7 @@ function Masada() {
               <li key={t} className="rounded-xl border bg-card p-5"><h3 className="font-serif text-lg">{t}</h3><p className="mt-1 text-sm">{d}</p></li>
             ))}
           </ul>
-          <p className="mt-3 text-sm text-muted-foreground">We don't copy hours or prices here — they change. Use the official page for current details.</p>
+          <p className="mt-3 text-sm text-muted-foreground">I don't reproduce hours or prices here — they change. Use the official page for current details.</p>
         </section>
 
         <Section id="heat" title="Heat and timing">

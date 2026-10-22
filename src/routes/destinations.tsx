@@ -109,7 +109,7 @@ function Destinations() {
         crumbs={[{ name: "Home", to: "/" }, { name: "Destinations", to: "/destinations/" }]}
         eyebrow="Destinations"
         title="Plan by destination"
-        intro="Everything we cover for each base: where to stay, how to get there and what to do nearby."
+        intro="What I cover for each destination: where to stay, how to get there and what to do nearby."
       />
       <div className="mt-10 space-y-6">
         {dests.map((d) => (

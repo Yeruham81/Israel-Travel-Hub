@@ -52,7 +52,7 @@ function Bethlehem() {
       <article className="mx-auto max-w-5xl px-4">
         <Section id="overview" title="Planning a Bethlehem visit">
           <p>Most visitors come for the Church of the Nativity and Manger Square, often as a half or full day from Jerusalem. Going with a tour or private driver avoids arranging transport across the checkpoint yourself.</p>
-          <p>Our <Link to="/travel-blog/jerusalem-to-bethlehem/" className="font-semibold text-primary underline">Jerusalem to Bethlehem guide</Link> explains the options for getting there independently.</p>
+          <p>My <Link to="/travel-blog/jerusalem-to-bethlehem/" className="font-semibold text-primary underline">Jerusalem to Bethlehem guide</Link> explains the options for getting there independently.</p>
         </Section>
 
         <section id="compare" aria-labelledby="compare-h" className="mt-14">
