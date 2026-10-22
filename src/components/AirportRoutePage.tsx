@@ -3,6 +3,7 @@ import { Breadcrumbs, FaqList, RelatedLinks } from "@/components/Guide";
 import { TransferQuoteForm } from "@/components/TransferQuoteForm";
 import { StayPhotoCredits } from "@/components/StayGuideParts";
 import { getAirportRouteGuide } from "@/data/airportRoutes";
+import { airportJourneyGuides } from "@/data/airportJourneyGuides";
 import { airportTransferPhotos } from "@/data/airportTransfers";
 import { airportTransferNav } from "@/data/nav";
 import { AirportBookingPlatforms } from "@/components/AirportBookingPlatforms";
@@ -47,6 +48,7 @@ const focusQuote = () => requestAnimationFrame(() => document.getElementById("re
 
 export function AirportRoutePage({ id }: { id: AirportTransferRouteId }) {
   const guide = getAirportRouteGuide(id);
+  const journeyGuide = airportJourneyGuides[id === "dead-sea" ? "ein-bokek" : id];
   const { price } = guide.rate;
   const faqs = [
     ...guide.faqs,
@@ -89,7 +91,8 @@ export function AirportRoutePage({ id }: { id: AirportTransferRouteId }) {
       <section id="taxi-or-transfer" aria-labelledby="taxi-or-transfer-h" className="mt-10 rounded-2xl border bg-card p-5 sm:p-7">
         <h2 id="taxi-or-transfer-h" className="text-2xl">Private transfer or airport taxi to {guide.city}?</h2>
         <p className="mt-3 leading-relaxed text-muted-foreground">This page is for a private vehicle arranged in advance for your party, with pickup instructions and a quoted total to confirm with Moshe. An on-arrival licensed airport taxi instead uses the authorized taxi queue and a regulated meter. These are different booking arrangements.</p>
-        <p className="mt-3 text-sm leading-relaxed">Compare the options in our <Link to={travelGuidePaths.taxis} className="font-semibold text-primary underline">Israel taxi fares and airport pickup guide</Link>, or read the <a href="https://www.iaa.gov.il/en/airports/ben-gurion/directions/directions-list/?categoryId=10450" target="_blank" rel="noopener noreferrer" className="font-semibold text-primary underline">Israel Airports Authority's official instructions<span className="sr-only"> (opens in a new tab)</span></a>. Recheck the current arrangements for your travel date.</p>
+        <p className="mt-3 text-sm leading-relaxed">For an on-arrival metered ride, read our <Link to={travelGuidePaths.airportTaxis} className="font-semibold text-primary underline">official airport taxi pickup guide</Link> and <Link to={travelGuidePaths.taxiFares} className="font-semibold text-primary underline">regulated taxi fares guide</Link>, or consult the <a href="https://www.iaa.gov.il/en/airports/ben-gurion/directions/directions-list/?categoryId=10450" target="_blank" rel="noopener noreferrer" className="font-semibold text-primary underline">Israel Airports Authority instructions<span className="sr-only"> (opens in a new tab)</span></a>.</p>
+        <p className="mt-3 text-sm leading-relaxed">Want to compare cheaper public transport before requesting a car? The independent <Link to={journeyGuide.path} className="font-semibold text-primary underline">{journeyGuide.title}</Link> explains the relevant trains, buses, official taxis, Shabbat limitations and final hotel connections. This private-transfer page covers only Moshe Barak's separately arranged vehicle and written quote.</p>
       </section>
       <section id="drop-off" aria-labelledby="dropoff-h" className="mt-12">
         <h2 id="dropoff-h" className="text-3xl">{guide.areasTitle}</h2>
@@ -111,7 +114,7 @@ export function AirportRoutePage({ id }: { id: AirportTransferRouteId }) {
         <p className="mt-3 opacity-90">Tell Moshe when you arrive and where you're staying in {guide.city}. Ask for the full price and pickup details before confirming your booking.</p>
         <a href="#request-quote" onClick={focusQuote} className="btn btn-light mt-5">Request a quote from Moshe</a>
       </section>
-      <RelatedLinks title="Plan your stay" items={[...guide.related, { label: "Ben Gurion arrival tips", to: travelGuidePaths.arrival }, { label: "Choosing an eSIM for Israel", to: travelGuidePaths.esim }]} />
+      <RelatedLinks title="Plan your stay" items={[{ label: "Compare train, bus, taxi and private-transfer options", to: journeyGuide.path }, ...guide.related, { label: "Ben Gurion arrival tips", to: travelGuidePaths.arrival }, { label: "Choosing an eSIM for Israel", to: travelGuidePaths.esim }]} />
       <section aria-labelledby="other-routes-h" className="mt-12">
         <h2 id="other-routes-h" className="text-2xl">Other airport transfer routes</h2>
         <ul className="mt-4 flex flex-wrap gap-3">{airportTransferRoutes.filter((route) => route.id !== id).map((route) => <li key={route.id}><Link to={route.path} className="chip inline-block">Ben Gurion to {getAirportRouteGuide(route.id).city}</Link></li>)}<li><Link to="/transfers/" className="chip inline-block">All destinations</Link></li></ul>
