@@ -38,6 +38,34 @@ describe("Israel shore excursion hub", () => {
     expect(router.state.location.search).toEqual({ destination: "masada" });
   });
 
+  it("shows matching destination photos, equal light callout buttons and on-demand photo attribution", async () => {
+    await renderHub();
+    const destinations = screen.getByRole("region", { name: "Where can you go on an Israel shore excursion?" });
+    expect(within(destinations).getAllByRole("img")).toHaveLength(4);
+    for (const experience of shoreHubExperiences) {
+      const card = destinations.querySelector(`[data-experience="${experience.id}"]`);
+      expect(card).not.toBeNull();
+      expect(card?.querySelector("img")?.getAttribute("alt")?.length).toBeGreaterThan(12);
+    }
+    const topChoices = [
+      screen.getByRole("link", { name: "Excursions from Ashdod" }),
+      screen.getByRole("link", { name: "Excursions from Haifa" }),
+    ];
+    const bottomChoices = [
+      screen.getByRole("link", { name: "Plan my day from Ashdod" }),
+      screen.getByRole("link", { name: "Plan my day from Haifa" }),
+    ];
+    for (const choices of [topChoices, bottomChoices]) {
+      expect(choices[0]).toHaveClass("btn-light");
+      expect(choices[1]).toHaveClass("btn-light");
+    }
+    const credits = screen.getByText("Image credits").closest("details");
+    expect(credits).not.toBeNull();
+    expect(credits?.hasAttribute("open")).toBe(false);
+    expect(credits?.querySelectorAll('a[href*="creativecommons.org"]').length).toBeGreaterThan(0);
+    expect(document.querySelectorAll("a[href*='commons.wikimedia.org']").length).toBeGreaterThan(0);
+  });
+
   it("provides six illustrated destination guides, working internal links and port-specific inquiry anchors", async () => {
     const router = await renderHub();
     const guides = screen.getByRole("region", { name: "Get to know the places on your route" });
