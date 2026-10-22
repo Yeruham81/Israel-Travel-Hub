@@ -1,3 +1,5 @@
+import { itineraries, itineraryIds } from "@/data/israelItineraries";
+import { migrationPhotos } from "@/data/guideMigrationPhotos";
 import type { LinkProps } from "@tanstack/react-router";
 import { getShorePort } from "@/data/shoreExcursions";
 import { travelGuidePaths, type TravelGuideId } from "@/data/registry";
@@ -874,6 +876,12 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
 
 export type GuideDirectoryEntry = { id: string; title: string; description: string; to: LinkProps["to"]; topics: GuideTopicId[]; photo?: GuidePhoto };
 export const guideDirectory: GuideDirectoryEntry[] = [
+  ...itineraryIds.map((id): GuideDirectoryEntry => {
+    const g = itineraries[id];
+    return { id: `israel-itinerary-${id}`, title: g.title, description: g.description,
+      to: g.path as LinkProps["to"], topics: ["itineraries", "destinations", "tips"],
+      photo: migrationPhotos[g.hero] };
+  }),
   ...attractionIds.map((id): GuideDirectoryEntry => { const g = attractionGuides[id]; return { id: `attraction-${id}`, title: g.title, description: g.description, to: attractionPath(id), topics: ["attractions","destinations",...(id.includes("mount-") || ["capernaum","tabgha"].includes(id) ? ["religion" as const] : [])], ...(g.image ? {photo:g.image}: {}) }; }),
   { id: "airport-journey-jerusalem", title: "How to get from Ben Gurion Airport to Jerusalem", description: "Compare train, bus, taxi and private-transfer options, travel times, estimated fares and weekend alternatives.", to: "/travel-blog/how-to-get-from-ben-gurion-airport-to-jerusalem/", topics: ["transportation", "tips"], photo: airportTransferPhotos["jerusalem"]! },
   { id: "airport-journey-tel-aviv", title: "How to get from Ben Gurion Airport to Tel Aviv", description: "Compare train, bus, taxi and private-transfer options, travel times, estimated fares and weekend alternatives.", to: "/travel-blog/how-to-get-from-ben-gurion-airport-to-tel-aviv/", topics: ["transportation", "tips"], photo: airportTransferPhotos["tel-aviv"]! },
