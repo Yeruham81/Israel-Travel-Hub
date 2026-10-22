@@ -59,6 +59,9 @@ export function TelAvivHotelBrowser() {
         )}
       </div>
 
+      <p className="mt-4 rounded-xl border bg-card p-4 text-sm leading-relaxed text-muted-foreground">
+        Hotel recommendations are editorial and do not reflect live room availability. Links marked “Sponsored link” may earn me a commission at no extra cost to you. Enter your actual dates, guests and room preferences on the booking site.
+      </p>
       <ul className="mt-5 grid gap-5 sm:grid-cols-2 lg:grid-cols-3" data-testid="tel-aviv-hotels">
         {visible.map((hotel) => <TelAvivHotelTile key={hotel.id} hotel={hotel} />)}
       </ul>
