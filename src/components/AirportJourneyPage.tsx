@@ -3,6 +3,8 @@ import { Breadcrumbs, FaqList, OnThisPage, RelatedLinks, Section } from "@/compo
 import { GuidePhotoCredit, GuideParagraph } from "@/components/TravelGuide";
 import { AuthorCard } from "@/components/AuthorCard";
 import { SourcesDisclosure } from "@/components/SourcesDisclosure";
+import { TransferQuoteForm } from "@/components/TransferQuoteForm";
+import { airportTransferPhotos } from "@/data/airportTransfers";
 import { airportJourneyGuides, airportJourneyIds, type AirportJourneyId, type JourneyOption } from "@/data/airportJourneyGuides";
 import { getAirportRouteGuide } from "@/data/airportRoutes";
 import { authorLd } from "@/lib/author";
@@ -18,9 +20,11 @@ const sources = [
   { title: "Tel Aviv municipality — weekend bus network", url: "https://www.tel-aviv.gov.il/Residents/Transportation/Pages/naimbesofash.aspx" },
 ];
 
+function transferIdFor(id: AirportJourneyId) {
+  return id === "ein-bokek" ? "dead-sea" : id;
+}
 function rateFor(id: AirportJourneyId) {
-  const transferId = id === "ein-bokek" ? "dead-sea" : id;
-  return getAirportRouteGuide(transferId).rate.price;
+  return getAirportRouteGuide(transferIdFor(id)).rate.price;
 }
 function sectionId(id: string) { return "option-" + id; }
 
@@ -44,16 +48,20 @@ export function airportJourneyMeta(id: AirportJourneyId) {
   })] };
 }
 
-function PrivateRideCta({ id, variant = "mid" }: { id: AirportJourneyId; variant?: "mid" | "bottom" }) {
+function PrivateRideCta({ id }: { id: AirportJourneyId }) {
   const guide = airportJourneyGuides[id];
+  const portrait = airportTransferPhotos["moshe"]!;
   return (
-    <aside aria-label={"Private transfer quote for " + guide.city} className={"mt-10 rounded-2xl border p-6 sm:p-8 " + (variant === "bottom" ? "bg-navy text-navy-foreground" : "border-primary/25 bg-secondary/60")}>
-      <p className={"text-xs font-bold uppercase tracking-widest " + (variant === "bottom" ? "opacity-80" : "text-primary")}>When door-to-door travel matters</p>
-      <h2 className="mt-2 text-2xl sm:text-3xl">Would a private ride to {guide.city} be easier?</h2>
-      <p className="mt-3 leading-relaxed">Traveling with children or several suitcases, arriving when trains stop, or simply want a vehicle arranged for your group? I can review your flight and destination and confirm a personal quote.</p>
-      <p className="mt-3 text-sm opacity-85">The private-transfer page lists its own weekday starting price and conditions. Send a quote request directly from the form. A request does not confirm a booking.</p>
-      <Link to={guide.privatePath} hash="request-quote" className={"mt-5 inline-flex rounded-lg px-5 py-3 font-semibold " + (variant === "bottom" ? "bg-white text-slate-900" : "bg-primary text-primary-foreground")}>{guide.privateLabel} →</Link>
-      <p className="mt-3 text-xs opacity-75">I operate the private transport service promoted on this site; this guide also explains cheaper public options.</p>
+    <aside aria-label={"Private transfer quote for " + guide.city} className="mx-auto mt-9 max-w-4xl rounded-xl border border-primary/20 bg-secondary/50 p-4 sm:p-5">
+      <div className="flex items-center gap-4 sm:gap-6">
+        <div className="min-w-0 flex-1">
+          <p className="text-xs font-semibold uppercase tracking-wide text-primary">A comfortable arrival, arranged for you</p>
+          <h2 className="mt-1.5 text-xl font-semibold sm:text-2xl">Prefer a private ride to {guide.city}?</h2>
+          <p className="mt-2 text-sm leading-relaxed text-muted-foreground sm:text-base">I'll help arrange a door-to-door airport pickup that suits your flight, luggage and party. Tell me where you're staying for a personal quote.</p>
+          <a href="#request-quote" className="mt-3 inline-flex items-center justify-center rounded-lg bg-primary px-4 py-2.5 text-sm font-semibold text-primary-foreground hover:bg-primary/90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">{guide.privateLabel} <span aria-hidden="true" className="ml-2">→</span></a>
+        </div>
+        <img src={portrait.src} alt="Moshe Barak" width={112} height={140} loading="lazy" decoding="async" className="h-24 w-20 shrink-0 rounded-lg object-cover object-top sm:h-32 sm:w-24" />
+      </div>
     </aside>
   );
 }
@@ -71,7 +79,7 @@ function OptionSection({ option, guideId }: { option: JourneyOption; guideId: Ai
           {option.checklist.map((item) => <li key={item}>{item}</li>)}
         </ul>
       </div>
-      {option.id === "private" && <p className="mt-4"><Link to={airportJourneyGuides[guideId].privatePath} hash="request-quote" className="font-semibold text-primary underline underline-offset-4">See private-transfer starting rate and send a quote request →</Link></p>}
+      {option.id === "private" && <p className="mt-4"><a href="#request-quote" className="font-semibold text-primary underline underline-offset-4">Ask me for a private-transfer quote →</a></p>}
     </section>
   );
 }
@@ -87,6 +95,7 @@ export function AirportJourneyPage({ id }: { id: AirportJourneyId }) {
     ["tips", "Planning tips"],
     ["faq", "Questions"],
     ["sources", "Sources"],
+    ["request-quote", "Private transfer quote"],
   ] as const;
 
   return (
@@ -154,7 +163,6 @@ export function AirportJourneyPage({ id }: { id: AirportJourneyId }) {
         <p>For first-time arrivals, read my <Link to="/travel-blog/ben-gurion-airport-arrival-tips/" className="text-primary underline">airport arrivals checklist</Link> and save the operator's contact details offline.</p>
       </Section>
       <FaqList faqs={g.faqs}/>
-      <PrivateRideCta id={id} variant="bottom"/>
       <SourcesDisclosure>
         <p className="mt-3 text-sm text-muted-foreground">Schedules, routes, meeting points, fares and access can change. Refer to official provider pages for actual travel dates. {g.historicalPrices === false ? "Displayed rail and bus costs are not price quotes; verify current prices before travel." : "Cost ranges are historical August 2026 editorial estimates, not verified current fares."}</p>
         <ul className="mt-4 grid gap-3 sm:grid-cols-2">{(g.sources || sources).map(s=><li key={s.url}><a className="block rounded-lg border bg-card p-4 font-medium text-primary underline" href={s.url} target="_blank" rel="noopener noreferrer">{s.title} <span className="sr-only">(opens a new tab)</span></a></li>)}
@@ -167,7 +175,7 @@ export function AirportJourneyPage({ id }: { id: AirportJourneyId }) {
         { label: "Ben Gurion Airport arrival tips", to: "/travel-blog/ben-gurion-airport-arrival-tips/" },
       ]} />
       <RelatedLinks title="Other airport journey comparisons" items={airportJourneyIds.filter(other => other !== id).map(other => ({ label: "How to get to " + airportJourneyGuides[other].city, to: airportJourneyGuides[other].path }))} />
-
+      <TransferQuoteForm key={transferIdFor(id)} destinationId={transferIdFor(id)} fixedDestination />
     </main>
   );
 }
