@@ -52,7 +52,7 @@ function Shore() {
           <div className="p-6 sm:p-8 lg:p-9">
             <p className="text-xs font-semibold uppercase tracking-[0.16em] text-sand">One port call. A world of discovery.</p>
             <h1 className="mt-4 text-4xl leading-[1.1] md:text-5xl">{shoreHubTitle}</h1>
-            <p className="mt-5 text-lg leading-relaxed opacity-90">Turn your time ashore into a day to remember: Jerusalem's sacred streets, Galilee's lakeside heritage, old Mediterranean harbours or the desert around Masada and the Dead Sea. Discover guided excursions and private day trips from Ashdod and Haifa, with pickup and return planned around your ship.</p>
+            <p className="mt-5 text-lg leading-relaxed opacity-90">Choose your excursion from the port your ship actually visits. Ashdod suits Jerusalem, Jaffa or a longer desert day; Haifa is a closer starting point for Akko and selected Galilee sites. Compare transport-only and guided offers using your real time ashore and the required return to the ship.</p>
             <div className="mt-6 flex flex-wrap gap-3">
               <Link to={shorePorts.ashdod.path} className="btn btn-light">Excursions from Ashdod</Link>
               <Link to={shorePorts.haifa.path} className="btn btn-light">Excursions from Haifa</Link>
@@ -90,6 +90,7 @@ function Shore() {
               <p className="mt-3 leading-relaxed text-muted-foreground">{details.description}</p>
               <ul className="mt-4 space-y-2 text-sm">{details.highlights.map((highlight) => <li key={highlight} className="flex items-start gap-2"><MapPin className="mt-0.5 h-4 w-4 shrink-0 text-primary" aria-hidden />{highlight}</li>)}</ul>
               <p className="mt-4 border-t pt-4 text-sm leading-relaxed text-muted-foreground">{details.planning}</p>
+              <p className="mt-3 text-sm leading-relaxed"><strong>Meeting point:</strong> {details.pickup}</p>
               <div className="mt-auto pt-5"><Link to={port.path} className="btn btn-primary w-full">Explore {port.name} excursions</Link></div>
             </div>
           </li>;
