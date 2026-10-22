@@ -26,6 +26,13 @@ describe("independent author identity and page credits", () => {
       const cards = screen.getAllByTestId("author-card");
       expect(cards, path).toHaveLength(1);
       const card = cards[0]!;
+      // Narrow layouts must give the biography most of the row; the button
+      // belongs BELOW the copy instead of taking a third flex column.
+      expect(card).toHaveClass("grid", "grid-cols-[3.5rem_minmax(0,1fr)]");
+      const portrait = within(card).getByRole("img", { name: "Moshe Barak" });
+      expect(portrait).toHaveClass("row-span-2", "lg:row-span-1");
+      expect(card.children[1]).toHaveClass("col-start-2", "min-w-0");
+      expect(card.children[2]).toHaveClass("col-start-2", "lg:col-start-3", "lg:row-start-1");
       expect(within(card).getByRole("img", { name: "Moshe Barak" })).toHaveAttribute("width", "64");
       expect(card, path).toHaveTextContent("Over 20 years helping travelers get around Israel, discover its highlights, and plan the perfect trip.");
       const reviews = within(card).getByRole("link", { name: /Read traveler reviews on Tripadvisor/ });
