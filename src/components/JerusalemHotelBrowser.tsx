@@ -2,17 +2,17 @@ import { useState } from "react";
 import { Link, type LinkProps } from "@tanstack/react-router";
 import { ArrowRight, ExternalLink, RotateCcw } from "lucide-react";
 import { jerusalemAreaGuides } from "@/data/content";
-import { hotelRecommendations, linksForPage, type HotelRecommendation } from "@/data/registry";
+import { linksForPage, type HotelRecommendation } from "@/data/registry";
+import { cityHotelPhoto, hotelsInCityCatalog } from "@/data/cityHotelCatalog";
 import { activeHotelNotice } from "@/lib/hotel-notices";
-import { jerusalemHotelPhotos } from "@/data/jerusalemHotelPhotos";
 import type { HotelIllustration } from "@/data/telAvivHotelPhotos";
 import { recordOutboundClick, relFor } from "@/lib/outbound";
 
 /**
  * Editorial catalogue, not a live hotel search. Reuses the checked property
- * recommendations and configured booking offers from the existing area pages.
+ * recommendations and configured booking offers from every neighborhood page.
  */
-export const jerusalemHotelCatalog = hotelRecommendations.filter((hotel) => hotel.cityId === "jerusalem");
+export const jerusalemHotelCatalog = hotelsInCityCatalog("jerusalem");
 
 /**
  * Short, property-specific card copy, derived from the existing editorial records.
@@ -68,10 +68,7 @@ export function JerusalemHotelBrowser() {
             </button>
           ))}
         </div>
-        <div className="mt-3 flex flex-wrap items-center justify-between gap-x-3 gap-y-2">
-          <p className="text-xs font-medium text-muted-foreground" role="status" aria-live="polite">
-            {visible.length} {visible.length === 1 ? "hotel" : "hotels"}{selectedArea ? ` in ${selectedArea.shortName}` : " across Jerusalem"}
-          </p>
+        <div className="mt-3 flex justify-end">
           <div className="flex items-center gap-2">
             <label htmlFor="jerusalem-hotel-sort" className="text-xs font-medium">Sort</label>
             <select id="jerusalem-hotel-sort" className="max-w-full rounded-lg border bg-card px-2.5 py-1.5 text-xs focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary" value={sort} onChange={(event) => setSort(event.target.value as "area" | "name")}>
@@ -99,7 +96,7 @@ export function JerusalemHotelBrowser() {
         
         <ul className="mt-3 grid gap-2 sm:grid-cols-2">
           {jerusalemHotelCatalog.map((hotel) => {
-            const photo = jerusalemHotelPhotos[hotel.id];
+            const photo = cityHotelPhoto(hotel);
             if (!photo) return null;
             return (
               <li key={hotel.id}>
@@ -120,8 +117,8 @@ function JerusalemHotelTile({ hotel }: { hotel: HotelRecommendation }) {
   const [photoFailed, setPhotoFailed] = useState(false);
   const area = jerusalemAreaGuides.find((item) => item.id === hotel.areaId);
   if (!area) return null;
-  const photo: HotelIllustration | undefined = jerusalemHotelPhotos[hotel.id];
-  const image = photoFailed || !photo ? area.photo : photo;
+  const photo = cityHotelPhoto(hotel);
+  const image = photoFailed ? area.photo : photo;
   const booking = linksForPage(`stay-area-${area.id}`).find((item) => item.id === `hotel-${hotel.id}-expedia`);
   const notice = activeHotelNotice(hotel);
 
