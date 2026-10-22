@@ -76,6 +76,8 @@ describe.each([
       const imageUrls = cards.map((card) => within(card).getByTestId("hotel-illustration").getAttribute("src"));
       expect(new Set(imageUrls).size).toBe(4);
       expect(screen.getByTestId("neighborhood-hotel-photo-credits")).toBeInTheDocument();
+      expect(within(container.querySelector("#book") as HTMLElement).getByRole("heading", { name: `My top picks in ${area.name}` })).toBeInTheDocument();
+      expect(within(container.querySelector("#book") as HTMLElement).queryByText(/Images are illustrative, not photographs of these hotels/i)).not.toBeInTheDocument();
       expect(screen.queryByText("Who it suits")).not.toBeInTheDocument();
       expect(screen.queryByText("Check before booking")).not.toBeInTheDocument();
       expect(within(screen.getByRole("navigation", { name: "Breadcrumb" })).getByRole("link", { name: g.city })).toHaveAttribute("href", g.path);
@@ -186,7 +188,7 @@ describe("Tel Aviv direct hotel catalog", () => {
     expect(within(catalog).queryByText(/Hotel recommendations are editorial and do not reflect live room availability/)).not.toBeInTheDocument();
     expect(within(catalog).getByLabelText("Choose hotel area")).toBeInTheDocument();
     expect(within(catalog).getByRole("group", { name: "Filter Tel Aviv hotels by area" })).toHaveClass("hidden", "md:flex");
-    expect(within(catalog).getByText(/do not depict the listed hotels/i)).toBeInTheDocument();
+    expect(within(catalog).queryByText(/do not depict the listed hotels|Images are illustrative/i)).not.toBeInTheDocument();
     expect(screen.getByTestId("tel-aviv-hotel-photo-credits")).toBeInTheDocument();
     expect(catalog.textContent).not.toMatch(/ILS\s*\d{2,}|rooms available now|live price/i);
   });
