@@ -147,3 +147,21 @@ export const categoryDecisionExamples: Record<string, { heading: string; situati
     decision: "Compare total travel effort as well as pool facilities: a seafront hotel may be easier for beach days, while Carmel works better when the family plans viewpoints and city outings.",
   },
 };
+
+/** Short arrival distinctions for the city-wide area comparison tables. */
+export const areaArrivalSignals: Record<string, string> = {
+  downtown: "Pedestrian sections of Jaffa Road; confirm vehicle drop-off",
+  mamilla: "Use the hotel street entrance, not the pedestrian avenue",
+  "old-city": "Nearest permitted gate, steps and luggage walk matter",
+  "mahane-yehuda": "Market traffic and late apartment entry require planning",
+  "east-jerusalem": "Pin the actual Nablus Road or Damascus Gate address",
+  "german-colony": "Baka and Emek Refaim are different taxi destinations",
+  "telaviv-beachfront": "HaYarkon frontage may differ from reception entrance",
+  "telaviv-dizengoff": "Check distance from Dizengoff Square, not street name",
+  "telaviv-old-north": "Use the street number, not a generic port pin",
+  "telaviv-neve-tzedek": "Narrow heritage lanes may limit direct unloading",
+  "telaviv-jaffa": "Historic hill often means slopes or steps after drop-off",
+  "telaviv-florentin": "Confirm self-check-in access codes and contact details",
+  "telaviv-kerem": "Inner lanes and market-edge entrances are different",
+  "telaviv-rothschild": "Boulevard is long; identify the correct block and entrance",
+};
