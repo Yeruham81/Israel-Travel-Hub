@@ -83,7 +83,7 @@ export function ShoreServiceCatalog({ portId, filters, onFilterChange, itinerary
       </section>}
       {partnerTours.length > 0 && <section aria-labelledby="partner-tours-h" className={privateTours.length ? "mt-12 border-t pt-10" : "mt-7"}>
             <p className="text-xs font-bold uppercase tracking-widest text-primary">Independent excursion providers</p>
-            <h3 id="partner-tours-h" className="mt-2 text-2xl font-semibold">More guided shore excursions from {port.name}</h3>
+            <h3 id="partner-tours-h" className="mt-2 text-2xl font-semibold">More shore excursions from {port.name}</h3>
             <p className="mt-3 max-w-3xl text-sm leading-relaxed text-muted-foreground">Looking for a guided experience, the company of a group or a different route? Explore these additional shore excursions for memorable places, expert insights and a day that matches your interests and time ashore.</p>
             <ul aria-label={`Other operators' tours from ${port.name} Port`} className="mt-6 grid gap-5 sm:grid-cols-2 xl:grid-cols-3">
               {partnerTours.map((service) => {
