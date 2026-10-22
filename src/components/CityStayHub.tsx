@@ -47,7 +47,7 @@ export function CityStayHub({ g, areas }: { g: CityStayGuide; areas: Neighborhoo
             <div><p className="eyebrow">Get to know the city</p><h2 id="areas-h" className="mt-2 text-3xl md:text-4xl">Explore {g.city}, area by area</h2></div>
             <span className="inline-flex items-center gap-2 rounded-full bg-secondary px-3 py-2 text-xs font-semibold"><Compass className="h-4 w-4" aria-hidden /> {areas.length} area guides</span>
           </div>
-          <p className="mt-3 max-w-3xl leading-relaxed text-muted-foreground">Start with the atmosphere, nearby sights and practical tradeoffs. Open an area guide for the full picture and our hotel shortlist. Map pins mark reference points within each area.</p>
+          <p className="mt-3 max-w-3xl leading-relaxed text-muted-foreground">Start with the atmosphere, nearby sights and practical tradeoffs. Open an area guide for the full picture and my hotel shortlist. Map pins mark reference points within each area.</p>
           <div className="mt-5 flex flex-wrap gap-2" role="group" aria-label="Choose areas by travel style">
             <button type="button" className="chip" aria-pressed={preference === null} onClick={() => setPreference(null)}>All areas</button>
             {preferences.map((pref) => <button key={pref} type="button" className="chip" aria-pressed={preference === pref} onClick={() => setPreference(preference === pref ? null : pref)}>{preferenceLabels[pref]}</button>)}
@@ -106,7 +106,7 @@ export function CityStayHub({ g, areas }: { g: CityStayGuide; areas: Neighborhoo
           </div>
         </Section>
         <div className="mt-8 rounded-xl border bg-secondary/60 p-4 text-sm leading-relaxed">
-          <span className="font-semibold">Booking links:</span> We may earn a commission from links marked “Sponsored link”, at no extra cost to you. Hotel picks are editorial starting points; enter your dates and confirm the property, room and total on the booking site.
+          <span className="font-semibold">Booking links:</span> I may earn a commission from links marked “Sponsored link”, at no extra cost to you. Hotel picks are editorial starting points; enter your dates and confirm the property, room and total on the booking site.
         </div>
         <ProviderSection title={`Already know your dates? Browse ${g.city} stays`} intro="For neighborhood-specific recommendations, open an area guide above. You can also browse the wider city here." links={linksForPage(`stay-${g.id}`)} pageId={`stay-${g.id}`} />
         <FaqList faqs={g.faqs} />

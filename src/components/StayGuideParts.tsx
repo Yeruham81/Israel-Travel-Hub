@@ -34,7 +34,7 @@ export function StayCategoryCard({ guide }: { guide: HotelCategoryGuide }) {
 }
 
 export function StayBookingDisclosure() {
-  return <div className="mt-5 rounded-xl border bg-secondary/60 p-4 text-sm leading-relaxed"><p>Hotels are selected for location, travel style and practical fit, using the properties' own information. These recommendations do not claim personal stays at every property.</p><p className="mt-2">Links marked “Sponsored link” may earn us a commission at no extra cost to you. Prices and availability are confirmed on the booking site; enter your dates and guests there before choosing a room.</p></div>;
+  return <div className="mt-5 rounded-xl border bg-secondary/60 p-4 text-sm leading-relaxed"><p>Hotels are selected for location, travel style and practical fit, using the properties' own information. These recommendations do not claim personal stays at every property.</p><p className="mt-2">Links marked “Sponsored link” may earn me a commission at no extra cost to you. Prices and availability are confirmed on the booking site; enter your dates and guests there before choosing a room.</p></div>;
 }
 
 export function StayBrowseLink({ link, pageId }: { link: ProviderLink | undefined; pageId: string }) {

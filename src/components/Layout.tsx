@@ -175,7 +175,7 @@ export function SiteFooter() {
         </div>
         <div className="text-sm opacity-90">
           <p className="font-semibold">Disclosure</p>
-          <p className="mt-3">Some links on this site may earn us a commission at no extra cost to you. Only links from configured affiliate partners are labeled “Sponsored link”. I explain how I choose travel options on the <Link to="/about-moshe-barak/" hash="methodology" className="underline">About Moshe Barak page</Link>.</p>
+          <p className="mt-3">Some links on this site may earn me a commission at no extra cost to you. Only links from configured affiliate partners are labeled “Sponsored link”. I explain how I choose travel options on the <Link to="/about-moshe-barak/" hash="methodology" className="underline">About Moshe Barak page</Link>.</p>
         </div>
         <nav aria-label="Legal" className="border-t border-white/20 pt-6 text-sm md:col-span-4">
           <ul className="flex flex-wrap gap-x-6 gap-y-3">

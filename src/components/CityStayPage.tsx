@@ -40,7 +40,7 @@ function SimpleCityStayPage({ g }: { g: CityStayGuide }) {
 
         <section id="areas" aria-labelledby="areas-h" className="mt-14">
           <h2 id="areas-h" className="text-3xl">Areas at a glance</h2>
-          <p className="mt-2 text-muted-foreground">Pick what matters to you to highlight matching areas. This only highlights our guidance below — it doesn't search hotels.</p>
+          <p className="mt-2 text-muted-foreground">Pick what matters to you to highlight matching areas. This only highlights my guidance below — it doesn't search hotels.</p>
           <div className="mt-4 flex flex-wrap gap-2" role="group" aria-label="Highlight areas by preference">
             {prefs.map((p) => (
               <button key={p} type="button" className="chip" aria-pressed={pref === p} onClick={() => setPref(pref === p ? null : p)}>{preferenceLabels[p]}</button>
@@ -68,7 +68,7 @@ function SimpleCityStayPage({ g }: { g: CityStayGuide }) {
 
         <ProviderSection
           title={`Find a place to stay in ${g.city}`}
-          intro="We don't list specific properties yet. Use the area advice above, then compare current properties and prices for your dates on the provider's site."
+          intro="I don't list specific properties yet. Use the area advice above, then compare current properties and prices for your dates on the provider's site."
           links={links}
           pageId={pageId}
         />

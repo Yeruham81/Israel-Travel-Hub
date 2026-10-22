@@ -52,8 +52,8 @@ export function AirportRoutePage({ id }: { id: AirportTransferRouteId }) {
   const { price } = guide.rate;
   const faqs = [
     ...guide.faqs,
-    { q: "Is the starting price for the whole vehicle?", a: `The published starting rate of ILS ${price.amount.toLocaleString("en-US")} is a one-way weekday price per vehicle for up to four passengers. Night, weekend and holiday supplements may apply. The vehicle must fit your luggage; larger groups and special requirements need a separate quote. Moshe confirms the final total and availability.` },
-    { q: "How do I send the request and confirm the booking?", a: "Complete the form and press Send quote request to email your details directly to Moshe. Wait for the on-page confirmation. Ask Moshe to confirm your quote and booking in writing before relying on the pickup." },
+    { q: "Is the starting price for the whole vehicle?", a: `The published starting rate of ILS ${price.amount.toLocaleString("en-US")} is a one-way weekday price per vehicle for up to four passengers. Night, weekend and holiday supplements may apply. The vehicle must fit your luggage; larger groups and special requirements need a separate quote. I confirm the final total and availability.` },
+    { q: "How do I send the request and confirm the booking?", a: "Complete the form and press Send quote request to email your details directly to me. Wait for the on-page confirmation. Ask me to confirm your quote and booking in writing before relying on the pickup." },
   ];
   return (
     <main className="mx-auto max-w-5xl px-4 pb-24 lg:pb-8">
@@ -90,9 +90,9 @@ export function AirportRoutePage({ id }: { id: AirportTransferRouteId }) {
       </section>
       <section id="taxi-or-transfer" aria-labelledby="taxi-or-transfer-h" className="mt-10 rounded-2xl border bg-card p-5 sm:p-7">
         <h2 id="taxi-or-transfer-h" className="text-2xl">Private transfer or airport taxi to {guide.city}?</h2>
-        <p className="mt-3 leading-relaxed text-muted-foreground">This page is for a private vehicle arranged in advance for your party, with pickup instructions and a quoted total to confirm with Moshe. An on-arrival licensed airport taxi instead uses the authorized taxi queue and a regulated meter. These are different booking arrangements.</p>
-        <p className="mt-3 text-sm leading-relaxed">For an on-arrival metered ride, read our <Link to={travelGuidePaths.airportTaxis} className="font-semibold text-primary underline">official airport taxi pickup guide</Link> and <Link to={travelGuidePaths.taxiFares} className="font-semibold text-primary underline">regulated taxi fares guide</Link>, or consult the <a href="https://www.iaa.gov.il/en/airports/ben-gurion/directions/directions-list/?categoryId=10450" target="_blank" rel="noopener noreferrer" className="font-semibold text-primary underline">Israel Airports Authority instructions<span className="sr-only"> (opens in a new tab)</span></a>.</p>
-        <p className="mt-3 text-sm leading-relaxed">For an independent overview of other ways to reach your destination, read our <Link to={journeyGuide.path} className="font-semibold text-primary underline">airport-to-{guide.city} travel comparison</Link>. This page is exclusively about a separately arranged private vehicle, its agreed pickup and a written quote from Moshe Barak.</p>
+        <p className="mt-3 leading-relaxed text-muted-foreground">This page is for a private vehicle arranged in advance for your party, with pickup instructions and a quoted total to confirm with me. An on-arrival licensed airport taxi instead uses the authorized taxi queue and a regulated meter. These are different booking arrangements.</p>
+        <p className="mt-3 text-sm leading-relaxed">For an on-arrival metered ride, read my <Link to={travelGuidePaths.airportTaxis} className="font-semibold text-primary underline">official airport taxi pickup guide</Link> and <Link to={travelGuidePaths.taxiFares} className="font-semibold text-primary underline">regulated taxi fares guide</Link>, or consult the <a href="https://www.iaa.gov.il/en/airports/ben-gurion/directions/directions-list/?categoryId=10450" target="_blank" rel="noopener noreferrer" className="font-semibold text-primary underline">Israel Airports Authority instructions<span className="sr-only"> (opens in a new tab)</span></a>.</p>
+        <p className="mt-3 text-sm leading-relaxed">For an independent overview of other ways to reach your destination, read my <Link to={journeyGuide.path} className="font-semibold text-primary underline">airport-to-{guide.city} travel comparison</Link>. This page is exclusively about a separately arranged private vehicle, its agreed pickup and a written quote from me.</p>
       </section>
       <section id="drop-off" aria-labelledby="dropoff-h" className="mt-12">
         <h2 id="dropoff-h" className="text-3xl">{guide.areasTitle}</h2>
@@ -111,8 +111,8 @@ export function AirportRoutePage({ id }: { id: AirportTransferRouteId }) {
       <FaqList faqs={faqs} />
       <section className="mt-14 rounded-2xl bg-navy p-6 text-navy-foreground sm:p-8" aria-labelledby="ready-h">
         <h2 id="ready-h" className="text-3xl">Your flight. Your destination. Your private ride.</h2>
-        <p className="mt-3 opacity-90">Tell Moshe when you arrive and where you're staying in {guide.city}. Ask for the full price and pickup details before confirming your booking.</p>
-        <a href="#request-quote" onClick={focusQuote} className="btn btn-light mt-5">Request a quote from Moshe</a>
+        <p className="mt-3 opacity-90">Tell me when you arrive and where you're staying in {guide.city}. Ask for the full price and pickup details before confirming your booking.</p>
+        <a href="#request-quote" onClick={focusQuote} className="btn btn-light mt-5">Request a personal quote</a>
       </section>
       <RelatedLinks title="Plan your stay" items={[{ label: "Compare other ways to reach your destination", to: journeyGuide.path }, ...guide.related, { label: "Ben Gurion arrival tips", to: travelGuidePaths.arrival }, { label: "Choosing an eSIM for Israel", to: travelGuidePaths.esim }]} />
       <section aria-labelledby="other-routes-h" className="mt-12">

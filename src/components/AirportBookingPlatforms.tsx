@@ -15,7 +15,7 @@ export function AirportBookingPlatforms({ pageId = "airport-private-transfers", 
     <p className="eyebrow">More ways to arrange your ride</p>
     <h2 id="platforms-h" className="mt-2 text-3xl">Prefer to book through a platform?</h2>
     <p className="mt-3 leading-relaxed text-muted-foreground">Explore these booking sites for your airport pickup{destination ? ` to ${destination}` : ""}. The starting prices above belong to Moshe's service; each platform supplies its own offers and terms. Enter your exact route and trip details there.</p>
-    {platforms.some((platform) => platform.isAffiliate) && <p className="mt-3 text-sm">Links marked “Sponsored link” may earn us a commission at no extra cost to you.</p>}
+    {platforms.some((platform) => platform.isAffiliate) && <p className="mt-3 text-sm">Links marked “Sponsored link” may earn me a commission at no extra cost to you.</p>}
     <div className="mt-6 grid gap-4 sm:grid-cols-2">{platforms.map((platform) => {
       const logo = partners.find((partner) => partner.id === platform.partnerId)?.logo;
       return <a key={platform.id} href={platform.url} target="_blank" rel={relFor(platform.isAffiliate)} onClick={() => recordOutboundClick({ pageId, productId: platform.id, offerId: platform.id })} className={`flex h-full min-w-0 flex-col rounded-xl border p-5 transition-shadow hover:shadow-md focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary ${bannerStyles[platform.partnerId!] || "bg-secondary"}`} data-testid="airport-platform-banner">

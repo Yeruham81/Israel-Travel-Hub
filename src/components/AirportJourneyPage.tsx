@@ -50,10 +50,10 @@ function PrivateRideCta({ id, variant = "mid" }: { id: AirportJourneyId; variant
     <aside aria-label={"Private transfer quote for " + guide.city} className={"mt-10 rounded-2xl border p-6 sm:p-8 " + (variant === "bottom" ? "bg-navy text-navy-foreground" : "border-primary/25 bg-secondary/60")}>
       <p className={"text-xs font-bold uppercase tracking-widest " + (variant === "bottom" ? "opacity-80" : "text-primary")}>When door-to-door travel matters</p>
       <h2 className="mt-2 text-2xl sm:text-3xl">Would a private ride to {guide.city} be easier?</h2>
-      <p className="mt-3 leading-relaxed">Traveling with children or several suitcases, arriving when trains stop, or simply want a vehicle arranged for your group? Moshe Barak can review your flight and destination and confirm a personal quote.</p>
+      <p className="mt-3 leading-relaxed">Traveling with children or several suitcases, arriving when trains stop, or simply want a vehicle arranged for your group? I can review your flight and destination and confirm a personal quote.</p>
       <p className="mt-3 text-sm opacity-85">The private-transfer page lists its own weekday starting price and conditions. Send a quote request directly from the form. A request does not confirm a booking.</p>
       <Link to={guide.privatePath} hash="request-quote" className={"mt-5 inline-flex rounded-lg px-5 py-3 font-semibold " + (variant === "bottom" ? "bg-white text-slate-900" : "bg-primary text-primary-foreground")}>{guide.privateLabel} →</Link>
-      <p className="mt-3 text-xs opacity-75">Moshe operates the publisher's own private transport service; this guide also explains cheaper public options.</p>
+      <p className="mt-3 text-xs opacity-75">I operate the private transport service promoted on this site; this guide also explains cheaper public options.</p>
     </aside>
   );
 }
@@ -124,7 +124,7 @@ export function AirportJourneyPage({ id }: { id: AirportJourneyId }) {
             ))}</tbody>
           </table>
         </div>
-        <p className="mt-3 text-sm"><strong>*Price and time note:</strong> {g.historicalPrices === false ? "The train and bus prices must be checked in the official planner for your travel date; this guide does not quote an unverified current fare. " : "₪ ranges are historical editorial estimates from August 2026; they are not current verified fares. " }Train and bus prices are per passenger; official taxis use the regulated meter, and rental totals depend on dates. Moshe's displayed starting price is a one-way weekday <strong>per-vehicle</strong> rate for up to four passengers with possible supplements. All schedules can change. Check the operator and any written quote before you travel.</p>
+        <p className="mt-3 text-sm"><strong>*Price and time note:</strong> {g.historicalPrices === false ? "The train and bus prices must be checked in the official planner for your travel date; this guide does not quote an unverified current fare. " : "₪ ranges are historical editorial estimates from August 2026; they are not current verified fares. " }Train and bus prices are per passenger; official taxis use the regulated meter, and rental totals depend on dates. My displayed starting price is a one-way weekday <strong>per-vehicle</strong> rate for up to four passengers with possible supplements. All schedules can change. Check the operator and any written quote before you travel.</p>
       </Section>
       <PrivateRideCta id={id}/>
       <Section id="station-choice" title={"Train stations, changes and the final journey in " + g.city}>
@@ -147,11 +147,11 @@ export function AirportJourneyPage({ id }: { id: AirportJourneyId }) {
       </section>
       <Section id="shabbat" title="Getting there on Shabbat and Jewish holidays">
         {g.weekend.map(p=><p key={p}><GuideParagraph paragraph={p} inlineLinks={g.weekendLinks} /></p>)}
-        {!g.weekendLinks?.length && <p>For terminal-specific weekend travel, see our <Link to="/travel-blog/from-ben-gurion-airport-on-shabbat/" className="text-primary underline">Ben Gurion Airport Shabbat guide</Link>.</p>}
+        {!g.weekendLinks?.length && <p>For terminal-specific weekend travel, see my <Link to="/travel-blog/from-ben-gurion-airport-on-shabbat/" className="text-primary underline">Ben Gurion Airport Shabbat guide</Link>.</p>}
       </Section>
       <Section id="tips" title="Practical tips to avoid missed connections and extra costs">
         <ul className="list-disc space-y-3 pl-5">{g.advice.map(t=><li key={t}>{t}</li>)}</ul>
-        <p>For first-time arrivals, read our <Link to="/travel-blog/ben-gurion-airport-arrival-tips/" className="text-primary underline">airport arrivals checklist</Link> and save the operator's contact details offline.</p>
+        <p>For first-time arrivals, read my <Link to="/travel-blog/ben-gurion-airport-arrival-tips/" className="text-primary underline">airport arrivals checklist</Link> and save the operator's contact details offline.</p>
       </Section>
       <FaqList faqs={g.faqs}/>
       <PrivateRideCta id={id} variant="bottom"/>

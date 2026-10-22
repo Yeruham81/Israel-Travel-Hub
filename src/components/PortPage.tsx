@@ -75,7 +75,7 @@ export function PortPage({ id, filters: routeSearch, onFilterChange }: { id: Sho
     </Section>
     <Section id="format" title="Private driver, licensed guide or shared excursion?">
       <p><strong>Car-and-driver cards cover private transportation for your party.</strong> A driver is not automatically a licensed guide, and admission or guided visits inside attractions are not included in these starting prices.</p>
-      <p>Guided excursions have their own operator, guide, group format, inclusions and booking conditions. For Moshe's car-and-driver routes, request licensed guiding separately and confirm the extra cost.</p>
+      <p>Guided excursions have their own operator, guide, group format, inclusions and booking conditions. For my car-and-driver routes, request licensed guiding separately and confirm the extra cost.</p>
     </Section>
     <section id="check" aria-labelledby="check-h" className="mt-14 scroll-mt-24">
       <h2 id="check-h" className="text-3xl">Before confirming your excursion</h2>
@@ -85,9 +85,9 @@ export function PortPage({ id, filters: routeSearch, onFilterChange }: { id: Sho
       </div>
     </section>
     <FaqList faqs={port.faqs} />
-    <section aria-labelledby="ready-h" className="mt-14 rounded-2xl bg-navy p-6 text-navy-foreground sm:p-8"><h2 id="ready-h" className="text-3xl">Let's plan your day from {port.name}</h2><p className="mt-3 opacity-90">Share your ship's timetable, party size and favorite itinerary. Moshe will need to confirm the route, vehicle, total and booking terms.</p><a href="#request-quote" onClick={focusQuote} className="btn btn-light mt-5">Request a quote from Moshe</a></section>
+    <section aria-labelledby="ready-h" className="mt-14 rounded-2xl bg-navy p-6 text-navy-foreground sm:p-8"><h2 id="ready-h" className="text-3xl">Plan your day from {port.name} with me</h2><p className="mt-3 opacity-90">Share your ship's timetable, party size and favorite itinerary. I'll review the route, vehicle, total and booking terms and confirm them in writing before booking.</p><a href="#request-quote" onClick={focusQuote} className="btn btn-light mt-5">Request a personal quote</a></section>
     <ShoreReadingGuides guides={port.related} />
-    <SourceList ids={shoreSourceIds(id)} intro="Product pages were checked for itinerary, duration and port pickup/return. External starting prices are dated reference snapshots, not live prices or confirmed availability. Published ILS rates apply only to Moshe's named day trips; external tours are booked on GetYourGuide or Viator under their own terms." />
+    <SourceList ids={shoreSourceIds(id)} intro="Product pages were checked for itinerary, duration and port pickup/return. External starting prices are dated reference snapshots, not live prices or confirmed availability. Published ILS rates apply only to my named day trips; external tours are booked on GetYourGuide or Viator under their own terms." />
     <details className="mt-10 rounded-xl border p-5"><summary className="cursor-pointer text-sm font-medium">Excursion image credits</summary><ul className="mt-3 space-y-3">{[...new Map(photos.map((photo) => [photo.src, photo])).values()].map((photo) => <li key={photo.src}><p className="text-sm">{photo.alt}</p><GuidePhotoCredit photo={photo} /></li>)}</ul></details>
     <div className="fixed inset-x-0 bottom-0 z-30 border-t bg-background/95 px-4 py-3 backdrop-blur lg:hidden"><div className="mx-auto flex max-w-5xl items-center justify-between gap-3"><p className="text-sm font-medium">Private day ashore<br /><span className="text-xs text-muted-foreground">From {port.name} Port</span></p><a href="#request-quote" onClick={focusQuote} className="btn btn-primary shrink-0 text-sm">Request a quote</a></div></div>
   </main>;
