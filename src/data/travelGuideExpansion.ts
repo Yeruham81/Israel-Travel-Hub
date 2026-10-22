@@ -1,5 +1,7 @@
 import type { GuidePhoto, TravelGuide } from "@/data/travelGuides";
 import { airportTransferPhotos } from "@/data/airportTransfers";
+import { travelGuidePaths } from "@/data/registry";
+import airportPickup from "@/assets/home/airport-pickup.webp";
 import hall from "@/assets/home/ben-gurion-t3.webp";
 import panorama from "@/assets/home/jerusalem-old-city.webp";
 import market from "@/assets/jerusalem/mahane-yehuda.webp";
