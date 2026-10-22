@@ -129,7 +129,7 @@ describe("migrated practical guides", () => {
 
   it("keeps current airport pickup distinctions and attributes uncertain operator status", () => {
     expect(travelGuides.arrival.sections.find((section) => section.id === "leave-airport")!.paragraphs.join(" ")).toMatch(/Exit 03.*Level 2, Exit 23/);
-    expect(travelGuides.taxis.sections.find((section) => section.id === "airport")!.links?.some((link) => link.to === travelGuidePaths.airportTaxis)).toBe(true);
+    expect(travelGuides.taxis.sections.find((section) => section.id === "airport")!.inlineLinks?.some((link) => link.to === travelGuidePaths.airportTaxis)).toBe(true);
     expect(travelGuides.airportTaxis.comparison.rows.join(" ")).toMatch(/Exit 03.*Exit 23/);
     expect(travelGuides.uber.answer).toMatch(/Uber is not available for passenger rides in Israel in 2026/);
     expect(travelGuides.sherut.answer).toMatch(/Nesher.*Jerusalem.*Amal.*Haifa.*no longer operating/s);
