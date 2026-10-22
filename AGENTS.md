@@ -20,3 +20,10 @@
 - Non-transfer referrals are `ProviderLink` records with a `BookingMode`; live prices require `isDisplayableLiveQuote` in `src/lib/booking.ts` — so no unverified price can render.
 - Editorial guide content (city stay guides) lives in `src/data/content.ts`; leaf pages use shared components in `src/components/Guide.tsx`, with information sections before provider sections.
 - All contact and quote forms share the gated quote-delivery service and server-only Brevo REST transport; fixed recipients and sanitized diagnostics prevent client-controlled routing or credential leaks.
+
+## Editorial voice (sitewide)
+
+- The website belongs to **Moshe Barak** and its owner-authored public-facing copy speaks in the **first-person singular**: `I`, `me`, `my` (`my guide`, `I can arrange`, `contact me`, `I may earn a commission`). Apply this to guide text, section descriptions, service CTAs, affiliate disclosures, quote-form prompts and error/contact guidance.
+- Avoid referring to the operator as `we` / `our` or as `Moshe` in third person when the sentence is directly addressed from the owner. Named attribution still belongs in SEO metadata, structured data, bylines, external provider records and transparent consent wording.
+- Preserve plural language where it is genuinely another speaker or a collective (e.g. a **visitor's** FAQ question `Will all our suitcases fit?`, a quotation/testimonial, an independent operator's identity, or a truly shared visitor-and-owner planning invitation). Do not modify third-party URLs, organization names or verbatim quotes to satisfy a global string replacement.
+- Keep on-page owner voice and server/system messages semantically honest: a delivery failure may be described neutrally rather than suggesting Moshe himself personally handled the failure. Ensure paragraph `inlineLinks[].text` continues matching the displayed anchor phrase after copy edits.
