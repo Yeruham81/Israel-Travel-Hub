@@ -25,7 +25,7 @@ export function NeighborhoodStayPage({ area }: { area: NeighborhoodStayGuide }) 
   // Additional cards use varied licensed generic photos from the existing city illustration pool.
   // The original two keep their own city-catalog illustration. Neither is a property photo.
   const photoFor = (hotelId: string, index: number) =>
-    photos[hotelId] || cityPhotoList[(areaIndex * 2 + index) % cityPhotoList.length];
+    photos[hotelId] || cityPhotoList[(areaIndex * 2 + index) % cityPhotoList.length]!;
   const shortCopy = area.cityId === "jerusalem" ? jerusalemHotelTileCopy : hotelTileCopy;
 
   return (
