@@ -25,8 +25,8 @@ The gateway has one illustrated cruise-port callout titled “Arriving in Israel
 
 ## Records and queries
 
-- `src/data/registry.ts`: `tourProducts` holds 19 unique products (four owner transport ideas and 15 external experiences); `tourBookingOffers` holds one currently checked marketplace listing per external product. Operators and booking partners remain separate. Source references and `ProviderLink` records are derived by stable offer ID.
-- `src/data/tourTypes.ts`: contracts, place taxonomy and interest tags. Products keep origins separate from destinations, plus format, advertised total duration, pickup and inclusion information. Individually agreed owner transport has no invented fixed duration or rate.
+- `src/data/registry.ts`: `tourProducts` holds 22 unique products (seven owner private days and 15 external experiences); `tourBookingOffers` holds one currently checked marketplace listing per external product. Operators and booking partners remain separate. External source references and `ProviderLink` records are derived by stable offer ID; six owner day-trip source records retain the original departure-specific price pages.
+- `src/data/tourTypes.ts`: contracts, place taxonomy and interest tags. Products keep origins separate from destinations, plus format, advertised total duration, pickup and inclusion information. Optional owner `price` records use the existing ILS `published_starting_rate` contract, restricted to a per-vehicle basis. The generic Jerusalem day remains individually quoted.
 - `src/data/tours.ts`: editorial category content and image provenance. Category selection rules match destination or interest tags, rather than copying product arrays.
 - `src/lib/tours.ts`: queries, safe search parsing, filtering, sorting, offer resolution and price expiry. `toursForCategory` returns the original shared objects. A Jaffa/Carmel product appears in both Tel Aviv and food categories; a Jerusalem/Bethlehem product appears under both destinations.
 - `TourCatalog` separates owner transport from independently operated experiences even after filtering. Owner itineraries use the same light, bordered image-card style as the shore-excursion pages, with duration, format, departure, inclusions and a direct quote link; there is no dark-blue owner section. All listings appear initially. Optional origin, destination, interest, format, duration, keyword and sort controls persist in the URL. Invalid enum values and unrelated search keys are discarded at the page boundary. Search typing replaces history entries; categorical choices support Back.
@@ -49,6 +49,18 @@ To add a genuinely identical tour on another marketplace, verify operator, route
 
 ## Prices and sourcing
 
+The Masada/Dead Sea, Nazareth/Galilee and northern-coast categories each begin with two owner cards, Tel Aviv then Jerusalem, in a responsive two-column grid. Their photographs differ from each other and from external product photographs in the same category. Other operators remain in their own section below. Each departure is a shared product record with its own origins, duration, rate source and quote-prefill URL; existing `my-*-day` IDs are retained for the Tel Aviv versions.
+
+The six original itinerary pages were checked on 22 October 2026:
+
+| Itinerary | Tel Aviv departure | Jerusalem departure |
+| --- | --- | --- |
+| Masada & Dead Sea | ILS 2,100 · 9 hours | ILS 2,100 · 8 hours |
+| Nazareth & Sea of Galilee | ILS 2,300 · 10 hours | ILS 2,900 · 10 hours |
+| Caesarea, Haifa & Acre | ILS 2,000 · 9 hours | ILS 2,700 · 10 hours |
+
+These are weekday transport starting rates per vehicle for up to four passengers, including accommodation pickup and return in the named city. Guiding, admissions, parking, tolls, meals and tips are extra. The original pages' explicit ILS price blocks take precedence over a stale USD sentence in their legacy notes. Cards reuse the shore catalog's `PriceDisplay`, including approximate USD/EUR equivalents and charged-in-ILS wording. No cruise-port rates are reused. Availability, extra hours and weekend/holiday pricing still require confirmation. Owner source URLs remain internal provenance under the site's existing publisher-source filtering.
+
 All 15 marketplace product URLs were reviewed on 22 October 2026 for identity and advertised details. No travel date was selected or availability confirmed. Two products have explicitly observed USD reference starting-price snapshots (Eilat boat US$24/person; northern-coast small group US$279/person). Other cards direct the visitor to current dates/prices. Never manufacture an amount from a different tour, recommendation tile, currency or departure option.
 
 `tourSnapshotPrice` verifies positive amount, allowed currency/basis, matching offer/source/check date and a maximum 30-day age. Expired or invalid snapshots disappear in favour of current-price links. These prices are editorial references; no live-price/API or checkout schema was introduced.
@@ -61,6 +73,7 @@ Eilat's new coral photograph is by Yoav95179, CC BY-SA 4.0, resized and converte
 
 ## Validation
 
+- Departure-specific private days and currency-format update: all 332 tests across 41 files, TypeScript and production build passed. The three category regressions cover owner-first separation, two-column layout, distinct images, six source-backed rates/durations, USD/EUR estimates and disclaimers, quote-prefill identity and Jerusalem-origin filtering.
 - Full suite after the gateway redesign: 322 tests across 40 files passed.
 - TypeScript and production build passed; sitemap contains the eight new permanent category URLs.
 - Catalog integration tests verify shared identity, category matches, origin/destination distinction, compound filtering, multiword search, URL/history behaviour, no-results reset, booking channels, affiliate resolution, click tracking, price expiry, internal links and collection metadata.

@@ -13,6 +13,9 @@ import cruiseShip from "@/assets/home/cruise-port.webp";
 import roadTrip from "@/assets/home/road-trip.webp";
 import esim from "@/assets/guides/esim-israel.jpeg";
 import hotelRoom from "@/assets/home/hotel-room.webp";
+import masadaCableCar from "@/assets/home/masada-cable-car.webp";
+import caesareaAqueduct from "@/assets/home/caesarea-aqueduct.webp";
+import capernaum from "@/assets/guides/capernaum.jpg";
 
 export const tourCategoryPaths = {
   jerusalem: "/tours/jerusalem/",
@@ -29,8 +32,11 @@ export type TourCategoryId = keyof typeof tourCategoryPaths;
 export const tourPhotos: Record<string, GuidePhoto> = {
   "my-jerusalem-day": airport["jerusalem"]!,
   "my-masada-day": airport["dead-sea"]!,
+  "my-masada-jerusalem": { src: masadaCableCar, alt: "A cable-car cabin below Masada's desert cliffs", sourceUrl: "https://commons.wikimedia.org/wiki/File:Masada_Cable_Car_1438_(511094328).jpg", credit: "James Emery · CC BY 2.0 · resized and converted to WebP", licenseUrl: "https://creativecommons.org/licenses/by/2.0/" },
   "my-north-coast-day": airport["haifa"]!,
+  "my-north-coast-jerusalem": { src: caesareaAqueduct, alt: "The ancient aqueduct beside the Mediterranean beach at Caesarea", sourceUrl: "https://commons.wikimedia.org/wiki/File:125359_caesarea_national_park_PikiWiki_Israel.jpg", credit: "זאב שטיין (Zeev Stein) · CC BY 2.5 · resized and converted to WebP", licenseUrl: "https://creativecommons.org/licenses/by/2.5/" },
   "my-galilee-day": airport["nazareth"]!,
+  "my-galilee-jerusalem": { src: capernaum, alt: "Archaeological remains and the ancient synagogue at Capernaum beside the Sea of Galilee", sourceUrl: "https://www.israel-taxi.com/wp-content/uploads/2025/08/capernaum_.jpg" },
   "jerusalem-day-tel-aviv": migration["EXISTING:jerusalem"],
   "jerusalem-bethlehem-private": migration["jerusalem-to-bethlehem"],
   "jaffa-carmel-walk": { src: jaffa, alt: "Old Jaffa's historic buildings above the Mediterranean harbour", sourceUrl: "https://www.israel-taxi.com/wp-content/uploads/2025/08/jaffa_panorama2.jpg" },

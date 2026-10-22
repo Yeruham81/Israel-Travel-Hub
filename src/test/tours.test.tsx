@@ -11,7 +11,7 @@ import { tourCategories, tourCategoryPaths, tourPhotos } from "@/data/tours";
 import homepageCruise from "@/assets/home/cruise-port.webp";
 import { parseTourHubSearch, filterTours, isOwnerTour, offersForTour, parseTourSearch, tourSnapshotPrice, toursForCategory } from "@/lib/tours";
 import { CANONICAL_ORIGIN } from "@/lib/site";
-import { parsePrivateDriverSearch } from "@/lib/private-driver-search";
+import { parsePrivateDriverSearch, privateTourPrefill } from "@/lib/private-driver-search";
 import { readOutboundClicks } from "@/lib/outbound";
 
 const historySubscriptions: (() => void)[] = [];
@@ -93,6 +93,50 @@ describe("shared ordinary tour catalog", () => {
 });
 
 describe("tours hub and SEO category pages", () => {
+  it.each([
+    { category: "masada-dead-sea", ids: ["my-masada-day", "my-masada-jerusalem"], prices: [2100, 2100], minutes: [540, 480] },
+    { category: "nazareth-galilee", ids: ["my-galilee-day", "my-galilee-jerusalem"], prices: [2300, 2900], minutes: [600, 600] },
+    { category: "northern-coast", ids: ["my-north-coast-day", "my-north-coast-jerusalem"], prices: [2000, 2700], minutes: [540, 600] },
+  ] as const)("shows the two departure-specific private days before external tours in $category", async ({ category, ids, prices, minutes }) => {
+    await renderPage(tourCategoryPaths[category]);
+    const owner = screen.getByRole("region", { name: "My private day trips" });
+    const cards = within(owner).getAllByTestId("owner-tour-card");
+    expect(cards.map(card => card.getAttribute("data-product-id"))).toEqual(ids);
+    expect(owner.querySelector("ul")?.className).toContain("sm:grid-cols-2");
+    expect(new Set(cards.map(card => within(card).getByRole("img").getAttribute("src"))).size).toBe(2);
+    const external = document.querySelector('[data-section="external-tours"]')!;
+    expect(owner.compareDocumentPosition(external) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
+    expect(external.querySelector('[data-testid="owner-tour-card"]')).toBeNull();
+    expect(owner.textContent).toContain("on weekdays");
+    for (const [index, card] of cards.entries()) {
+      const tour = tourProducts.find(tour => tour.id === ids[index])!;
+      const city = index === 0 ? "Tel Aviv" : "Jerusalem";
+      expect(tour.originIds).toEqual([index === 0 ? "tel-aviv" : "jerusalem"]);
+      expect(tour.durationMinutes).toBe(minutes[index]);
+      expect(tour.price).toMatchObject({ kind: "published_starting_rate", amount: prices[index], currency: "ILS", basis: "per_vehicle", maxPartySize: 4 });
+      expect(within(card).getByRole("heading", { level: 3 }).textContent).toContain(`from ${city}`);
+      expect(card.textContent).toContain(`Accommodation pickup and return in ${city}`);
+      expect(within(card).getByTestId("currency-price")).toHaveAttribute("data-ils", String(prices[index]));
+      const equivalents = within(card).getByLabelText("Approximate foreign-currency equivalents");
+      expect(equivalents.querySelector('[data-currency="USD"]')?.textContent).toMatch(/≈ USD [\d,]+/);
+      expect(equivalents.querySelector('[data-currency="EUR"]')?.textContent).toMatch(/≈ EUR [\d,]+/);
+      expect(card.textContent).toContain("Estimates only · charged in ILS");
+      expect(card.textContent).toContain("Per vehicle · up to 4 · transport only");
+      expect(card.textContent).not.toContain("Personal quote for your itinerary");
+      const link = within(card).getByRole("link", { name: `Request a quote for ${tour.title}` });
+      const url = new URL(link.getAttribute("href")!, CANONICAL_ORIGIN);
+      expect(url.searchParams.get("tour")).toBe(tour.id);
+      expect(url.hash).toBe("#request-quote");
+      expect(privateTourPrefill(parsePrivateDriverSearch({ tour: tour.id }))?.itinerary).toContain(`from ${city}`);
+      const source = sources.find(source => source.id === tour.price!.sourceId)!;
+      expect(source).toMatchObject({ publisher: "Israel-Taxi.com (Moshe Barak)", checkedAt: "2026-10-22" });
+      expect(new URL(source.url).pathname).toContain(index === 0 ? "from-tel-aviv/" : "from-jerusalem/");
+    }
+    cleanup();
+    await renderPage(`${tourCategoryPaths[category]}?origin=jerusalem`);
+    expect(screen.getAllByTestId("owner-tour-card").map(card => card.getAttribute("data-product-id"))).toEqual([ids[1]]);
+  });
+
   it("shows a category gateway with two linked examples each and no owner-promotion block", async () => {
     const router = await renderPage("/tours/");
     expect(screen.getAllByRole("heading", { level: 1 })).toHaveLength(1);
@@ -226,7 +270,7 @@ describe("tours hub and SEO category pages", () => {
     await renderPage("/private-driver/?tour=my-masada-day#request-quote");
     const form = screen.getByRole("form", { name: "Private driver quote request" });
     expect(form.querySelector('select[name="service"]')).toHaveValue("day-hire");
-    expect(form.querySelector('textarea[name="itinerary"]')).toHaveValue("A private day at Masada & the Dead Sea\nPreferred destinations: Masada, Dead Sea.");
+    expect(form.querySelector('textarea[name="itinerary"]')).toHaveValue("Masada & Dead Sea private day from Tel Aviv\nPreferred destinations: Masada, Dead Sea.");
     expect(form.querySelector('input[name="pickup"]')).toHaveValue("");
     expect(parsePrivateDriverSearch({ tour: "eilat-snorkeling" })).toEqual({});
     expect(parsePrivateDriverSearch({ tour: "my-masada-day", port: "haifa", transfer: "airport" })).toEqual({ port: "haifa", transfer: "airport" });

@@ -6,6 +6,7 @@ import { operators } from "@/data/registry";
 import { tourPhotos, type TourCategoryId } from "@/data/tours";
 import { filterTours, isOwnerTour, offersForTour, placeLabel, toursForCategory, tourSnapshotPrice, type TourSearch } from "@/lib/tours";
 import { recordOutboundClick, relFor } from "@/lib/outbound";
+import { PriceDisplay } from "@/components/CurrencyRates";
 
 export function OwnerTourSection({ tours }: { tours: TourProduct[] }) {
   if (!tours.length) return null;
@@ -22,17 +23,17 @@ export function OwnerTourSection({ tours }: { tours: TourProduct[] }) {
           <dl className="mt-4 grid grid-cols-2 gap-x-3 gap-y-2 text-sm">
             <div><dt className="sr-only">Duration</dt><dd className="flex items-start gap-2"><Clock3 aria-hidden className="mt-0.5 size-4 shrink-0 text-primary" />{tour.duration}</dd></div>
             <div><dt className="sr-only">Tour format</dt><dd className="flex items-start gap-2"><Users aria-hidden className="mt-0.5 size-4 shrink-0 text-primary" />{tour.formatLabel}</dd></div>
-            <div className="col-span-2"><dt className="sr-only">Departure</dt><dd className="flex items-start gap-2"><MapPin aria-hidden className="mt-0.5 size-4 shrink-0 text-primary" />From {tour.originIds.map(placeLabel).join(" or ")}</dd></div>
+            <div className="col-span-2"><dt className="sr-only">Departure</dt><dd className="flex items-start gap-2"><MapPin aria-hidden className="mt-0.5 size-4 shrink-0 text-primary" /><span><strong className="font-medium">From {tour.originIds.map(placeLabel).join(" or ")}</strong><br /><span className="text-xs text-muted-foreground">{tour.pickup}</span></span></dd></div>
             <div className="col-span-2"><dt className="inline font-medium">Includes: </dt><dd className="inline text-muted-foreground">{tour.inclusions}</dd></div>
           </dl>
           <p className="mt-3 text-xs text-primary">{tour.destinationIds.map(placeLabel).join(" · ")}</p>
-          <div className="mt-auto pt-4"><div className="border-t pt-4"><p className="text-lg font-semibold">Personal quote for your itinerary</p><p className="mt-1 text-xs text-muted-foreground">Route, vehicle and full price agreed before booking</p></div>
+          <div className="mt-auto pt-4"><div className="border-t pt-4">{tour.price ? <><PriceDisplay amount={tour.price.amount} /><p className="mt-2 text-xs text-muted-foreground">Per vehicle · up to {tour.price.maxPartySize} · transport only</p></> : <><p className="text-lg font-semibold">Personal quote for your itinerary</p><p className="mt-1 text-xs text-muted-foreground">Route, vehicle and full price agreed before booking</p></>}</div>
             <Link to="/private-driver/" search={{ tour: tour.id }} hash="request-quote" className="btn btn-primary mt-4 w-full" aria-label={`Request a quote for ${tour.title}`}>Request this day trip</Link>
           </div>
         </article>
       </li>)}
     </ul>
-    <p className="mt-5 max-w-3xl text-xs leading-relaxed text-muted-foreground">My quotes cover the agreed private transport service. Guiding, admissions, meals and any extra charges are confirmed separately in writing. Send me your date, pickup city, party size and preferred stops; booking follows my confirmation.</p>
+    <p className="mt-5 max-w-3xl text-xs leading-relaxed text-muted-foreground">{tours.some(tour => tour.price) ? "My published starting rates are in ILS per vehicle for up to four passengers on weekdays, covering transportation only. Licensed guiding, admission fees, parking, tolls, meals and tips are extra. Extra charges may apply for weekends, holidays or additional hours. I'll confirm the itinerary, availability and full price before booking." : "My quotes cover the agreed private transport service. Guiding, admissions, meals and any extra charges are confirmed separately in writing. Send me your date, pickup city, party size and preferred stops; booking follows my confirmation."}</p>
   </section>;
 }
 

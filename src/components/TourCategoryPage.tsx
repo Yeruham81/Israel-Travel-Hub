@@ -34,7 +34,7 @@ export function TourCategoryPage({ id, filters: rawFilters, onChange, departureP
   const editorial = departurePage ? bethlehemJerusalemContent : category;
   const products = toursForCategory(id).filter(tour => !departurePage || tour.originIds.includes("jerusalem"));
   const guides = tourReadingGuides(id);
-  const sourceIds = products.flatMap(tour => offersForTour(tour.id).map(offer => offer.id));
+  const sourceIds = products.flatMap(tour => [...(tour.price ? [tour.price.sourceId] : []), ...offersForTour(tour.id).map(offer => offer.id)]);
   return <main className="mx-auto max-w-5xl px-4 pb-12">
     <div className="pt-6"><Breadcrumbs items={[{ name: "Home", to: "/" }, { name: "Tours & day trips", to: "/tours/" }, { name: title, to: path }]} /></div>
     <header className="mt-6 overflow-hidden rounded-3xl border bg-secondary/30">
@@ -50,7 +50,7 @@ export function TourCategoryPage({ id, filters: rawFilters, onChange, departureP
     <RelatedGuideCards title="Get to know the places on your itinerary" guides={guides} />
     <MoreTourCategories currentId={id} />
     <TourCruiseCallout />
-    <SourceList ids={sourceIds} intro="Product listings were reviewed for advertised itinerary, operator and duration. Confirm actual-date operation, price and arrangements with the booking provider." />
+    <SourceList ids={sourceIds} intro="Product listings were reviewed for advertised itinerary, operator and duration. Confirm the date, availability, full price and arrangements with me for my private days, or with the booking provider for external tours." />
     <TourPhotoCredits photos={[tourCruisePhoto, ...tourCategories.map(category => category.photo), ...products.map(tour => tourPhotos[tour.id]!), ...guides.map(guide => guide.photo)]} />
   </main>;
 }

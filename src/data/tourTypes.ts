@@ -1,4 +1,5 @@
 /** Shared catalog contracts; the records themselves live in registry.ts. */
+import type { IndicativePrice } from "@/data/registry";
 export const tourPlaces = [
   { id: "jerusalem", label: "Jerusalem" }, { id: "tel-aviv", label: "Tel Aviv & Jaffa" },
   { id: "masada", label: "Masada" }, { id: "dead-sea", label: "Dead Sea" },
@@ -34,6 +35,8 @@ export interface TourProduct {
   formatLabel: string;
   pickup: string;
   inclusions: string;
+  /** Owner-published transport rate; external listing snapshots belong to booking offers. */
+  price?: IndicativePrice & { basis: "per_vehicle" };
   note?: string;
 }
 export interface TourBookingOffer {

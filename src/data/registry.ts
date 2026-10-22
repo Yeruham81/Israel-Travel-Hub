@@ -682,11 +682,77 @@ const haifaHotelSources: SourceReference[] = [
  * Port pickup and return products remain in the dedicated shore catalog.
  */
 export const TOUR_CATALOG_CHECK_DATE: ISODate = "2026-10-22";
+
+/** Published owner rates are transport-only weekday starting prices, not date-specific quotes. */
+function ownerDayTripRate(amount: number, sourceId: string): IndicativePrice & { basis: "per_vehicle" } {
+  return { kind: "published_starting_rate", currency: "ILS", amount, basis: "per_vehicle", maxPartySize: 4,
+    conditions: "Weekdays, up to four passengers, private transport only. Guiding, admissions, parking, tolls, meals and tips extra. Confirm the full price and any weekend, holiday or extra-hour charges before booking.", sourceId };
+}
+const ownerDayTripSources: SourceReference[] = [
+  { id: "owner-masada-tel-aviv", title: "Masada & Dead Sea private day from Tel Aviv", path: "dead-sea-masada-day-trip-from-tel-aviv" },
+  { id: "owner-masada-jerusalem", title: "Masada & Dead Sea private day from Jerusalem", path: "dead-sea-masada-day-trip-from-jerusalem" },
+  { id: "owner-north-coast-tel-aviv", title: "Caesarea, Haifa & Acre private day from Tel Aviv", path: "caesarea-haifa-akko-day-trip-from-tel-aviv" },
+  { id: "owner-north-coast-jerusalem", title: "Caesarea, Haifa & Acre private day from Jerusalem", path: "caesarea-haifa-akko-day-trip-from-jerusalem" },
+  { id: "owner-galilee-tel-aviv", title: "Nazareth & Sea of Galilee private day from Tel Aviv", path: "nazareth-sea-of-galilee-day-trip-from-tel-aviv" },
+  { id: "owner-galilee-jerusalem", title: "Nazareth & Sea of Galilee private day from Jerusalem", path: "nazareth-sea-of-galilee-day-trip-from-jerusalem" },
+].map(({ id, title, path }) => ({ id, title, publisher: "Israel-Taxi.com (Moshe Barak)", url: `${OWNER_BASE}/private-day-trips/${path}/`, checkedAt: TOUR_CATALOG_CHECK_DATE,
+  note: "Owner's original itinerary page checked for the explicit ILS price block, duration, pickup and return city, weekday basis and up-to-four-passenger limit. The legacy notes still contain an outdated USD sentence; the explicit ILS price block is used. Transportation only; guiding, admissions, parking, tolls, meals and tips excluded. Availability and the full price require confirmation." }));
 export const tourProducts: TourProduct[] = [
   { id: "my-jerusalem-day", status: "published", operatorId: "moshe-barak", originIds: ["tel-aviv", "jerusalem"], destinationIds: ["jerusalem"], tagIds: ["heritage", "christian"], title: "Jerusalem at your own pace", summary: "Build a private day around Jerusalem's Old City, viewpoints and the places that matter to your party. I arrange the driving around your agreed stops.", duration: "Full day · agreed individually", length: "full-day", format: "private", formatLabel: "Private car & driver", pickup: "Hotel pickup and final drop-off agreed in advance", inclusions: "Private transportation; licensed guiding quoted separately" },
-  { id: "my-masada-day", status: "published", operatorId: "moshe-barak", originIds: ["tel-aviv", "jerusalem"], destinationIds: ["masada", "dead-sea"], tagIds: ["heritage", "nature"], title: "A private day at Masada & the Dead Sea", summary: "Pair the desert fortress with time at a designated Dead Sea beach. I help you agree a realistic route, time for each stop and the return journey.", duration: "Full day · agreed individually", length: "full-day", format: "private", formatLabel: "Private car & driver", pickup: "Hotel pickup and final drop-off agreed in advance", inclusions: "Private transportation; tickets, meals and guiding extra" },
-  { id: "my-north-coast-day", status: "published", operatorId: "moshe-barak", originIds: ["tel-aviv", "haifa"], destinationIds: ["caesarea", "haifa", "akko"], tagIds: ["heritage", "nature"], title: "Your northern coast itinerary", summary: "Choose compatible stops along the Mediterranean: Caesarea's ruins, Haifa's viewpoints or Akko's old harbour. I tailor the transport plan to your starting point.", duration: "Full day · agreed individually", length: "full-day", format: "private", formatLabel: "Private car & driver", pickup: "Hotel pickup and final drop-off agreed in advance", inclusions: "Private transportation; licensed guiding quoted separately" },
-  { id: "my-galilee-day", status: "published", operatorId: "moshe-barak", originIds: ["tel-aviv", "haifa"], destinationIds: ["nazareth", "galilee"], tagIds: ["christian", "nature"], title: "Nazareth & Galilee, your way", summary: "Plan a private journey to selected churches, lakeside sites and Galilee viewpoints. Tell me your priorities and walking preferences so I can shape the day with you.", duration: "Full day · agreed individually", length: "full-day", format: "private", formatLabel: "Private car & driver", pickup: "Pickup, route and return timing confirmed in your quote", inclusions: "Private transportation; admissions and licensed guiding extra" },
+  {
+    id: "my-masada-day", status: "published", operatorId: "moshe-barak",
+    originIds: ["tel-aviv"], destinationIds: ["masada", "dead-sea"], tagIds: ["heritage", "nature"],
+    title: "Masada & Dead Sea private day from Tel Aviv",
+    summary: "Leave the coast for Masada's dramatic desert setting and a relaxing Dead Sea beach stop. I arrange your private drive around your preferred pace, with a return to Tel Aviv at the end of the day.",
+    duration: "9 hours", durationMinutes: 540, length: "full-day", format: "private", formatLabel: "Private car & driver",
+    pickup: "Accommodation pickup and return in Tel Aviv", inclusions: "Private vehicle and dedicated driver; guiding and admissions extra",
+    price: ownerDayTripRate(2100, "owner-masada-tel-aviv"),
+  },
+  {
+    id: "my-masada-jerusalem", status: "published", operatorId: "moshe-barak",
+    originIds: ["jerusalem"], destinationIds: ["masada", "dead-sea"], tagIds: ["heritage", "nature"],
+    title: "Masada & Dead Sea private day from Jerusalem",
+    summary: "Head down from Jerusalem into the Judean Desert for Masada and time beside the Dead Sea. I help you balance the fortress visit and beach stop, then arrange the drive back to your accommodation.",
+    duration: "8 hours", durationMinutes: 480, length: "full-day", format: "private", formatLabel: "Private car & driver",
+    pickup: "Accommodation pickup and return in Jerusalem", inclusions: "Private vehicle and dedicated driver; guiding and admissions extra",
+    price: ownerDayTripRate(2100, "owner-masada-jerusalem"),
+  },
+  {
+    id: "my-north-coast-day", status: "published", operatorId: "moshe-barak",
+    originIds: ["tel-aviv"], destinationIds: ["caesarea", "haifa", "akko"], tagIds: ["heritage", "nature"],
+    title: "Caesarea, Haifa & Acre private day from Tel Aviv",
+    summary: "Follow the Mediterranean north to Caesarea's Roman remains, Haifa's viewpoints and Acre's historic lanes. I plan the driving around your chosen stops, with pickup and return in Tel Aviv.",
+    duration: "9 hours", durationMinutes: 540, length: "full-day", format: "private", formatLabel: "Private car & driver",
+    pickup: "Accommodation pickup and return in Tel Aviv", inclusions: "Private vehicle and dedicated driver; guiding and admissions extra",
+    price: ownerDayTripRate(2000, "owner-north-coast-tel-aviv"),
+  },
+  {
+    id: "my-north-coast-jerusalem", status: "published", operatorId: "moshe-barak",
+    originIds: ["jerusalem"], destinationIds: ["caesarea", "haifa", "akko"], tagIds: ["heritage", "nature"],
+    title: "Caesarea, Haifa & Acre private day from Jerusalem",
+    summary: "Trade Jerusalem's hills for a day of coastal ruins, sea views and Acre's Old City. I shape a realistic route through Caesarea and Haifa, allowing for the longer drive and your return to Jerusalem.",
+    duration: "10 hours", durationMinutes: 600, length: "full-day", format: "private", formatLabel: "Private car & driver",
+    pickup: "Accommodation pickup and return in Jerusalem", inclusions: "Private vehicle and dedicated driver; guiding and admissions extra",
+    price: ownerDayTripRate(2700, "owner-north-coast-jerusalem"),
+  },
+  {
+    id: "my-galilee-day", status: "published", operatorId: "moshe-barak",
+    originIds: ["tel-aviv"], destinationIds: ["nazareth", "galilee"], tagIds: ["christian", "nature"],
+    title: "Nazareth & Sea of Galilee private day from Tel Aviv",
+    summary: "Explore Nazareth's Christian heritage and the peaceful landscapes around the Sea of Galilee. I help you choose the churches and lakeside stops that matter most, with private transport back to Tel Aviv.",
+    duration: "10 hours", durationMinutes: 600, length: "full-day", format: "private", formatLabel: "Private car & driver",
+    pickup: "Accommodation pickup and return in Tel Aviv", inclusions: "Private vehicle and dedicated driver; guiding and admissions extra",
+    price: ownerDayTripRate(2300, "owner-galilee-tel-aviv"),
+  },
+  {
+    id: "my-galilee-jerusalem", status: "published", operatorId: "moshe-barak",
+    originIds: ["jerusalem"], destinationIds: ["nazareth", "galilee"], tagIds: ["christian", "nature"],
+    title: "Nazareth & Sea of Galilee private day from Jerusalem",
+    summary: "Journey north from Jerusalem to Nazareth and selected sites around the Sea of Galilee. I plan a focused day around your interests, from ancient Capernaum to lakeside churches, before returning you to Jerusalem.",
+    duration: "10 hours", durationMinutes: 600, length: "full-day", format: "private", formatLabel: "Private car & driver",
+    pickup: "Accommodation pickup and return in Jerusalem", inclusions: "Private vehicle and dedicated driver; guiding and admissions extra",
+    price: ownerDayTripRate(2900, "owner-galilee-jerusalem"),
+  },
   { id: "jerusalem-day-tel-aviv", status: "published", operatorId: "bein-harim", originIds: ["tel-aviv"], destinationIds: ["jerusalem"], tagIds: ["heritage", "christian"], title: "Jerusalem full-day tour from Tel Aviv", summary: "Travel to Jerusalem for Old City landmarks and panoramic views, combining coach transport with guided walking.", duration: "About 10 hours", durationMinutes: 600, length: "full-day", format: "shared", formatLabel: "Shared guided day trip", pickup: "Selected central Tel Aviv hotels; confirm your meeting hotel", inclusions: "Guide and air-conditioned transportation", note: "The itinerary varies by operating day; check the exact stops and admissions." },
   { id: "jerusalem-bethlehem-private", status: "published", operatorId: "bein-harim", originIds: ["jerusalem"], destinationIds: ["jerusalem", "bethlehem"], tagIds: ["heritage", "christian"], title: "Private Jerusalem & Bethlehem tour", summary: "Explore the Old City and Bethlehem's Nativity Church with private guiding, including a local guide change in Bethlehem.", duration: "About 10 hours", durationMinutes: 600, length: "full-day", format: "private", formatLabel: "Private guided tour", pickup: "Jerusalem address pickup; confirm the address with the operator", inclusions: "Private guiding and arranged transportation", note: "Confirm documents, crossing arrangements and the current church itinerary." },
   { id: "jaffa-carmel-walk", status: "published", operatorId: "tourist-israel", originIds: ["tel-aviv"], destinationIds: ["tel-aviv"], tagIds: ["heritage", "food", "art"], title: "Jaffa, Tel Aviv & Carmel Market walking tour", summary: "Walk from Old Jaffa through city neighborhoods and finish with local flavours at Carmel Market.", duration: "About 6 hours", durationMinutes: 360, length: "full-day", format: "shared", formatLabel: "Guided walking & tasting tour", pickup: "Meet at The Setai in Jaffa; walking tour", inclusions: "Guide and Carmel Market tastings" },
@@ -730,6 +796,7 @@ export const tourBookingOffers: TourBookingOffer[] = ([
 });
 
 export const sources: SourceReference[] = [
+  ...ownerDayTripSources,
   ...tourBookingOffers.map((offer): SourceReference => ({ id: offer.id, title: tourProducts.find((tour) => tour.id === offer.productId)!.title, publisher: offer.partnerId === "viator" ? "Viator" : "GetYourGuide", url: offer.publicUrl, checkedAt: offer.checkedAt, note: "Product identity, operator, advertised itinerary and duration reviewed. No date-specific availability is confirmed. Starting prices, when present, are short-lived editorial snapshots, not live quotes. Confirm pickup, inclusions, access and cancellation with the booking provider." })),
   { id: "shore-haifa-terminal", title: "Haifa Port cruise terminal", publisher: "Haifa Port", url: "https://www.haifaport.co.il/en/terminal/", checkedAt: null, note: "Official passenger-terminal information and downtown access. Consult the port, cruise line and operator for the arrangements applying to your ship; no current sailing schedule or dockside vehicle access is asserted." },
   { id: "shore-ashdod-terminal", title: "Ashdod Port passenger cruises", publisher: "Ashdod Port Company", url: "https://www.ashdodport.co.il/english/aboutashdodport/pages/passengers-cruises.aspx", checkedAt: null, note: "Official passenger-terminal information. Confirm the terminal, meeting point and any shuttle arrangements for the actual port call; no current cruise schedule or general access permission is asserted." },
