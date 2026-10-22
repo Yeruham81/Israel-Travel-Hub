@@ -25,52 +25,56 @@ export function TelAvivHotelBrowser() {
 
   return (
     <section id="book" aria-labelledby="hotel-catalog-h" className="mt-8 scroll-mt-32">
-      <div className="rounded-3xl border bg-secondary/40 p-5 sm:p-7">
-        <p className="eyebrow">A quicker way to choose</p>
-        <h2 id="hotel-catalog-h" className="mt-2 text-3xl md:text-4xl">Already know your dates? Browse Tel Aviv stays</h2>
-        <p className="mt-3 max-w-3xl leading-relaxed text-muted-foreground">
-          Browse selected hotels without opening every neighborhood guide. Filter by area, then open the provider's booking page to enter your dates, guest count and room preferences.
+      <div className="rounded-2xl border bg-secondary/30 px-4 py-4 sm:px-5">
+        <h2 id="hotel-catalog-h" className="text-2xl sm:text-3xl">Choose a Tel Aviv hotel</h2>
+        <p className="mt-1 text-sm leading-relaxed text-muted-foreground">
+          Browse my hotel picks and narrow your choice by neighborhood.
         </p>
 
-        <div className="mt-5 flex flex-wrap gap-2" role="group" aria-label="Filter Tel Aviv hotels by area">
-          <button type="button" className="chip" aria-pressed={areaId === "all"} onClick={() => setAreaId("all")}>All areas <span aria-hidden="true">({telAvivHotelCatalog.length})</span></button>
+        <div className="mt-3 flex flex-wrap items-center gap-2 md:hidden">
+          <label htmlFor="telaviv-hotel-area" className="shrink-0 text-sm font-medium">Area</label>
+          <select id="telaviv-hotel-area" aria-label="Filter Tel Aviv hotels by area"
+                  className="min-w-0 flex-1 rounded-lg border bg-card px-2.5 py-1.5 text-sm focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+                  value={areaId} onChange={(event) => setAreaId(event.target.value)}>
+            <option value="all">All areas</option>
+            {telAvivAreaGuides.map((area) => <option key={area.id} value={area.id}>{area.shortName}</option>)}
+          </select>
+        </div>
+        <div className="mt-3 hidden flex-wrap items-center gap-1.5 md:flex" role="group" aria-label="Filter Tel Aviv hotels by area">
+          <button type="button" className="chip px-2.5! py-1! text-xs!" aria-pressed={areaId === "all"} onClick={() => setAreaId("all")}>All areas</button>
           {telAvivAreaGuides.map((area) => (
-            <button key={area.id} type="button" className="chip" aria-pressed={areaId === area.id} onClick={() => setAreaId(area.id)}>
-              {area.shortName} <span aria-hidden="true">({telAvivHotelCatalog.filter((hotel) => hotel.areaId === area.id).length})</span>
+            <button key={area.id} type="button" className="chip px-2.5! py-1! text-xs!" aria-pressed={areaId === area.id} onClick={() => setAreaId(area.id)}>
+              {area.shortName}
             </button>
           ))}
         </div>
-        <div className="mt-5 flex flex-wrap items-center justify-between gap-3">
-          <p className="text-sm font-medium" role="status" aria-live="polite">
+        <div className="mt-3 flex flex-wrap items-center justify-between gap-x-3 gap-y-2">
+          <p className="text-xs font-medium text-muted-foreground" role="status" aria-live="polite">
             {visible.length} {visible.length === 1 ? "hotel" : "hotels"}{selectedArea ? ` in ${selectedArea.shortName}` : " across Tel Aviv"}
           </p>
           <div className="flex items-center gap-2">
-            <label htmlFor="telaviv-hotel-sort" className="text-sm font-medium">Sort</label>
-            <select id="telaviv-hotel-sort" className="max-w-full rounded-lg border bg-card px-3 py-2 text-sm focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary" value={sort} onChange={(event) => setSort(event.target.value as "area" | "name")}>
+            <label htmlFor="telaviv-hotel-sort" className="text-xs font-medium">Sort</label>
+            <select id="telaviv-hotel-sort" className="max-w-full rounded-lg border bg-card px-2.5 py-1.5 text-xs focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary" value={sort} onChange={(event) => setSort(event.target.value as "area" | "name")}>
               <option value="area">By area</option>
               <option value="name">Hotel name A–Z</option>
             </select>
           </div>
         </div>
         {selectedArea && (
-          <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-            {selectedArea.summary}{" "}
-            <Link to={selectedArea.path as LinkProps["to"]} className="font-semibold text-primary underline underline-offset-2">Explore the {selectedArea.shortName} area guide</Link>
-          </p>
+          <Link to={selectedArea.path as LinkProps["to"]} className="mt-2 inline-flex items-center gap-1 text-xs font-semibold text-primary underline underline-offset-2 focus-visible:outline-2 focus-visible:outline-primary">
+            Explore the {selectedArea.shortName} guide <ArrowRight className="h-3.5 w-3.5" aria-hidden />
+          </Link>
         )}
       </div>
 
-      <p className="mt-4 rounded-xl border bg-card p-4 text-sm leading-relaxed text-muted-foreground">
-        Hotel recommendations are editorial and do not reflect live room availability. Links marked “Sponsored link” may earn me a commission at no extra cost to you. Enter your actual dates, guests and room preferences on the booking site.
-      </p>
-      <ul className="mt-5 grid gap-5 sm:grid-cols-2 lg:grid-cols-3" data-testid="tel-aviv-hotels">
+      <ul className="mt-4 grid gap-5 sm:grid-cols-2 lg:grid-cols-3" data-testid="tel-aviv-hotels">
         {visible.map((hotel) => <TelAvivHotelTile key={hotel.id} hotel={hotel} />)}
       </ul>
-      <p className="mt-5 text-sm leading-relaxed text-muted-foreground">
-        Images are illustrative photographs of hotel rooms, hospitality spaces or Tel Aviv, <strong>not photographs of the listed hotels</strong>. Check each property’s real photo gallery, room types, prices and availability on the booking site. My shortlist is based on location and published hotel information, not a live ranking or a claim that I have stayed at every property.
+      <p className="mt-4 text-xs leading-relaxed text-muted-foreground">
+        Images illustrate Tel Aviv or accommodation in general; they do not depict the listed hotels. Some booking links may earn me a commission at no extra cost to you.
       </p>
       {areaId !== "all" && <button type="button" onClick={() => setAreaId("all")} className="mt-3 inline-flex items-center gap-2 font-semibold text-primary underline underline-offset-4"><RotateCcw className="h-4 w-4" aria-hidden /> View all Tel Aviv hotels</button>}
-      <details className="mt-5 rounded-xl border bg-card p-4 text-xs text-muted-foreground" data-testid="tel-aviv-hotel-photo-credits">
+      <details className="mt-4 rounded-xl border bg-card p-3 text-xs text-muted-foreground" data-testid="tel-aviv-hotel-photo-credits">
         <summary className="cursor-pointer font-semibold text-foreground">Illustrative photo credits & licenses</summary>
         <p className="mt-2 leading-relaxed">These images were selected as general travel or accommodation illustrations. They do not depict the corresponding listed properties.</p>
         <ul className="mt-3 grid gap-2 sm:grid-cols-2">
@@ -98,7 +102,6 @@ function TelAvivHotelTile({ hotel }: { hotel: HotelRecommendation }) {
   if (!area) return null;
   const photo: HotelIllustration | undefined = telAvivHotelPhotos[hotel.id];
   const image = photoFailed || !photo ? area.photo : photo;
-  const label = photoFailed || !photo ? "Neighborhood photograph" : photo.label;
   const booking = linksForPage(`stay-area-${area.id}`).find((item) => item.id === `hotel-${hotel.id}-expedia`);
   const notice = activeHotelNotice(hotel);
 
@@ -108,7 +111,6 @@ function TelAvivHotelTile({ hotel }: { hotel: HotelRecommendation }) {
         <img src={image.src} alt={image.alt} onError={() => { if (!photoFailed) setPhotoFailed(true); }}
              width={755} height={503} loading="lazy" decoding="async" data-testid="hotel-illustration"
              className="aspect-[16/10] w-full object-cover" />
-        <span className="absolute bottom-2 left-3 rounded-lg bg-card/95 px-2.5 py-1 text-[11px] font-medium text-foreground">{label}</span>
       </div>
       <div className="flex flex-1 flex-col p-5">
         <p className="text-xs font-semibold uppercase tracking-wide text-primary">{area.shortName} · {hotel.style}</p>
@@ -121,7 +123,7 @@ function TelAvivHotelTile({ hotel }: { hotel: HotelRecommendation }) {
         </Link>
       </div>
       {booking && (
-        <div className="border-t bg-secondary/40 p-4">
+        <div className="border-t bg-secondary/40 p-3.5">
           <a href={booking.url} target="_blank" rel={relFor(booking.isAffiliate)}
              onClick={() => recordOutboundClick({ pageId: "stay-telaviv", productId: hotel.id, offerId: booking.id })}
              className="btn btn-primary flex w-full items-center justify-center gap-2 text-center"
@@ -129,7 +131,6 @@ function TelAvivHotelTile({ hotel }: { hotel: HotelRecommendation }) {
             {booking.ctaLabel} <ExternalLink className="h-4 w-4 shrink-0" aria-hidden />
             <span className="sr-only"> (opens in a new tab)</span>
           </a>
-          <p className="mt-2 text-center text-xs leading-relaxed text-muted-foreground">{booking.isAffiliate ? "Sponsored link · " : ""}Confirm dates, guests and final price on {booking.providerName}.</p>
         </div>
       )}
     </li>
