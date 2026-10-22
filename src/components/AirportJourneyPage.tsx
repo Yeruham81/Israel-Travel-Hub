@@ -110,7 +110,7 @@ export function AirportJourneyPage({ id }: { id: AirportJourneyId }) {
         <p>Choose by the full journey to your address, not only the lowest fare or the fastest station-to-station time. The figures below are planning estimates, not real-time quotes.</p>
         <div role="region" aria-label={"Travel options to " + g.city} tabIndex={0} className="mt-5 max-w-full overflow-x-auto rounded-xl border bg-card">
           <table className="min-w-[760px] w-full text-left text-sm">
-            <caption className="sr-only">Compare estimated duration, historical cost, suitability and door-to-door service</caption>
+            <caption className="sr-only">Compare estimated duration, fare basis, suitability and door-to-door service</caption>
             <thead className="bg-secondary">
               <tr>{["Option", "Typical time", "Indicative cost", "Best for", "To your door?", "Service"].map(t=><th key={t} scope="col" className="p-3 font-semibold">{t}</th>)}</tr>
             </thead>
@@ -161,14 +161,12 @@ export function AirportJourneyPage({ id }: { id: AirportJourneyId }) {
 
         </ul>
       </SourcesDisclosure>
-      {(id === "tel-aviv" || id === "jerusalem" || id === "haifa") ? <>
-        <RelatedLinks title="Related practical guides" items={[
-          ...g.related,
-          { label: "Taxi fares in Israel", to: "/travel-blog/taxi-fares-in-israel/" },
-          { label: "Ben Gurion Airport arrival tips", to: "/travel-blog/ben-gurion-airport-arrival-tips/" },
-        ]} />
-        <RelatedLinks title="Other airport journey comparisons" items={airportJourneyIds.filter(other=>other!==id).map(other=>({label:"How to get to "+airportJourneyGuides[other].city,to:airportJourneyGuides[other].path}))} />
-      </> : <RelatedLinks title="Plan your next step" items={[...g.related, ...airportJourneyIds.filter(other=>other!==id).map(other=>({label:"How to get to "+airportJourneyGuides[other].city,to:airportJourneyGuides[other].path}))]}/>}
+      <RelatedLinks title="Related practical guides" items={[
+        ...g.related,
+        { label: "Taxi fares in Israel", to: "/travel-blog/taxi-fares-in-israel/" },
+        { label: "Ben Gurion Airport arrival tips", to: "/travel-blog/ben-gurion-airport-arrival-tips/" },
+      ]} />
+      <RelatedLinks title="Other airport journey comparisons" items={airportJourneyIds.filter(other => other !== id).map(other => ({ label: "How to get to " + airportJourneyGuides[other].city, to: airportJourneyGuides[other].path }))} />
 
     </main>
   );
