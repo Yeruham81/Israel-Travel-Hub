@@ -95,12 +95,12 @@ export function TelAvivHotelBrowser() {
         {visible.map((hotel) => <TelAvivHotelTile key={hotel.id} hotel={hotel} />)}
       </ul>
       <p className="mt-4 text-xs leading-relaxed text-muted-foreground">
-        Images illustrate Tel Aviv or accommodation in general; they do not depict the listed hotels. Some booking links may earn me a commission at no extra cost to you.
+        Some booking links may earn me a commission at no extra cost to you.
       </p>
       {areaId !== "all" && <button type="button" onClick={() => setAreaId("all")} className="mt-3 inline-flex items-center gap-2 font-semibold text-primary underline underline-offset-4"><RotateCcw className="h-4 w-4" aria-hidden /> View all Tel Aviv hotels</button>}
       <details className="mt-4 rounded-xl border bg-card p-3 text-xs text-muted-foreground" data-testid="tel-aviv-hotel-photo-credits">
         <summary className="cursor-pointer font-semibold text-foreground">Illustrative photo credits & licenses</summary>
-        <p className="mt-2 leading-relaxed">These images were selected as general travel or accommodation illustrations. They do not depict the corresponding listed properties.</p>
+        
         <ul className="mt-3 grid gap-2 sm:grid-cols-2">
           {telAvivHotelCatalog.map((hotel) => {
             const photo = telAvivHotelPhotos[hotel.id];
