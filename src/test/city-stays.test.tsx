@@ -51,6 +51,8 @@ describe.each([
       expect(within(card).getByText("Explore Area & Hotels")).toBeInTheDocument();
       expect(card.textContent).not.toMatch(/Area guide & [0-9]+ hotel picks/);
     }
+    expect(screen.getByRole("heading", { name: `Compare areas in ${g.city}` })).toBeInTheDocument();
+    expect(screen.queryByRole("heading", { name: /Compare (the six|all [0-9]+) areas/ })).not.toBeInTheDocument();
     expect(screen.queryByText(/We don't list specific properties yet/)).not.toBeInTheDocument();
   });
 
