@@ -23,7 +23,7 @@ Modified content files:
 - Do not fabricate firsthand anecdotes or add new unverified facts.
 
 ## QA and remaining work
-- Inspected exact source text before replacement. All 48 planned literal replacements across eight changed files were successful except for one redundant phrase already removed by a larger replacement; no files were changed as a result of unsuccessful patterns.
+- Inspected exact source text before replacement. All 52 applied text edits across eight changed files succeeded; one additional redundant pattern was no longer present after a larger replacement; no files were changed as a result of unsuccessful patterns.
 - Refetched edited files from GitHub and verified no '24 hours' / '24-hour' strings remain in those eight files.
 - Did not run local typecheck, tests, lint, production build or browser E2E in this connector-based pass; these remain unverified.
 - This is a prose-only first pass, not the later round of original local insights, new route matrices, hotel-specific fact verification, port timing tables or layout changes.
