@@ -177,8 +177,25 @@ export function RelatedLinks({ title = "Plan the rest of your trip", items, curr
       }).filter(({ guide }, index, all) => all.findIndex((entry) => entry.guide.to === guide.to) === index)
         .sort((a, b) => b.score - a.score || a.order - b.order).slice(0, 6)
     : [];
-  // Show only coherent pairs, never pad the cards with unrelated recommendations.
-  const pairedGuides = guideItems.slice(0, guideItems.length - (guideItems.length % 2));
+  // When an editorial list is odd, prefer a genuinely related additional guide.
+  // If none qualifies, show the strongest complete pairs rather than inventing relevance.
+  const supplemental = current && guideItems.length > 0 && guideItems.length % 2 === 1 && guideItems.length < 6
+    ? guideDirectory
+        .filter((candidate) => String(candidate.to).startsWith("/travel-blog/") && candidate.photo && candidate.to !== current.to && !guideItems.some((entry) => entry.guide.to === candidate.to))
+        .map((candidate) => {
+          const shared = candidate.topics.filter((topic) => topic !== "tips" && current.topics.includes(topic));
+          const words = new Set((candidate.title.toLowerCase().match(/[a-z]{4,}/g) || []).map((word) => word.replace(/s$/, "")));
+          const overlap = [...titleWords].filter((word) => words.has(word)).length;
+          const specificTopic = shared.some((topic) => !["destinations", "attractions"].includes(topic));
+          return { guide: candidate, score: shared.length * 3 + overlap * 2, relevant: specificTopic || overlap > 0 };
+        })
+        .filter((candidate) => candidate.relevant && candidate.score >= 3)
+        .sort((a, b) => b.score - a.score)[0]
+    : undefined;
+  const completedGuides = supplemental
+    ? [...guideItems, { item: { label: supplemental.guide.title, to: supplemental.guide.to }, guide: supplemental.guide, score: supplemental.score, order: items.length }]
+    : guideItems;
+  const pairedGuides = completedGuides.slice(0, completedGuides.length - (completedGuides.length % 2));
   if (guideSection && pairedGuides.length === 0) return null;
   if (!guideSection && items.length === 0) return null;
 
