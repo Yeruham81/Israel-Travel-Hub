@@ -48,7 +48,7 @@ export function ShoreServiceCatalog({ portId, filters, onFilterChange, itinerary
       {privateTours.length > 0 && <section aria-labelledby="owner-tours-h" data-section="moshe-private-tours">
         <p className="text-xs font-bold uppercase tracking-widest text-primary">Personally arranged with Moshe Barak</p>
         <h3 id="owner-tours-h" className="mt-2 text-2xl font-semibold">My private day trips from {port.name} Port</h3>
-        <p className="mt-3 max-w-3xl text-sm leading-relaxed text-muted-foreground">Choose a private car-and-driver itinerary, then send me your ship's schedule and party details for a tailored quote. Licensed guiding and site admissions are arranged separately.</p>
+        <p className="mt-3 max-w-3xl text-sm leading-relaxed text-muted-foreground">Choose a private car-and-driver itinerary, then send me your ship's schedule and party details for a tailored quote.</p>
         <ul aria-label={`My private day trips from ${port.name} Port`} className="mt-5 grid gap-5 sm:grid-cols-2">
       {privateTours.map((service) => {
         const itinerary = service.itinerary;
@@ -80,11 +80,12 @@ export function ShoreServiceCatalog({ portId, filters, onFilterChange, itinerary
         </li>;
       })}
     </ul>
+        <p className="mt-5 text-xs leading-relaxed text-muted-foreground" data-testid="owner-price-terms">My published starting rates are in ILS per vehicle for up to four passengers on weekdays, covering transportation only. Licensed guiding, admission fees, meals and tips are extra. Night, weekend or holiday supplements may apply; I'll confirm the itinerary, availability and full price before booking.</p>
       </section>}
       {partnerTours.length > 0 && <section aria-labelledby="partner-tours-h" className={privateTours.length ? "mt-12 border-t pt-10" : "mt-7"}>
             <p className="text-xs font-bold uppercase tracking-widest text-primary">Independent excursion providers</p>
             <h3 id="partner-tours-h" className="mt-2 text-2xl font-semibold">More guided shore excursions from {port.name}</h3>
-            <p className="mt-3 max-w-3xl text-sm leading-relaxed text-muted-foreground">These tours are offered by independent operators and booked on their own booking platforms. Check the exact price, what is included and the port-return arrangements before paying.</p>
+            <p className="mt-3 max-w-3xl text-sm leading-relaxed text-muted-foreground">Looking for a guided experience, the company of a group or a different route? Explore these additional shore excursions for memorable places, expert insights and a day that matches your interests and time ashore.</p>
             <ul aria-label={`Other operators' tours from ${port.name} Port`} className="mt-6 grid gap-5 sm:grid-cols-2 xl:grid-cols-3">
               {partnerTours.map((service) => {
                 const provider = service.provider;
@@ -118,9 +119,9 @@ export function ShoreServiceCatalog({ portId, filters, onFilterChange, itinerary
                 </li>;
               })}
             </ul>
+            <p className="mt-5 text-xs leading-relaxed text-muted-foreground" data-testid="partner-price-terms">External starting prices are dated published reference prices, not live quotes. Your travel date, party size, options and booking currency can change the final total. Check the current price, inclusions, port pickup and return, and cancellation terms on the booking platform before booking.</p>
           </section>}
     </> : <div className="mt-5 rounded-xl border p-6"><h3 className="text-2xl">No tours match this destination</h3><p className="mt-2 text-muted-foreground">Choose another destination or clear the filter to see all tours from {port.name} Port.</p></div>}
-    <p className="mt-5 text-xs leading-relaxed text-muted-foreground">External starting prices are dated reference prices, not live quotes. Your date, party size, options and booking currency can change the total; check current prices, inclusions and cancellation terms on the booking site. My ILS rates are per vehicle for up to four on weekdays, transport only; guiding, admission, meals and tips are extra.</p>
     <p className="mt-5 text-sm text-muted-foreground">Prefer another return itinerary? <a href="#request-quote" onClick={() => onSelectItinerary("other")} className="font-medium text-primary underline">Ask for a custom itinerary</a>.</p>
   </section>;
 }
