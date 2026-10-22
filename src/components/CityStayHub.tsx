@@ -6,6 +6,7 @@ import { INFO_CHECK_DATE, linksForPage, publicSources } from "@/data/registry";
 import { GuideHeader, OnThisPage, Section, Checklist, ProviderSection, FaqList, SourceList } from "@/components/Guide";
 import { AreaPhotoCredit } from "@/components/AreaMap";
 import { TelAvivHotelBrowser } from "@/components/TelAvivHotelBrowser";
+import { JerusalemHotelBrowser } from "@/components/JerusalemHotelBrowser";
 import { CityStayPlanning } from "@/components/CityStayPlanning";
 import { recordOutboundClick, relFor } from "@/lib/outbound";
 
@@ -112,12 +113,12 @@ export function CityStayHub({ g, areas }: { g: CityStayGuide; areas: Neighborhoo
             <div className="rounded-xl border bg-card p-5"><h3 className="text-lg">Room & booking conditions</h3><ul className="mt-2 space-y-2 text-sm">{["Compare the final total, taxes and fees for your dates", "Read the cancellation deadline and payment conditions", "Confirm the exact room, beds and occupancy", "Check current access, parking and any street works"].map((tip) => <li key={tip} className="flex gap-2"><Check className="mt-0.5 h-4 w-4 shrink-0 text-primary" aria-hidden />{tip}</li>)}</ul></div>
           </div>
         </Section>
-        {g.id === "telaviv" ? (
+        {g.id === "telaviv" || g.id === "jerusalem" ? (
           <>
-            <TelAvivHotelBrowser />
+            {g.id === "telaviv" ? <TelAvivHotelBrowser /> : <JerusalemHotelBrowser />}
             <div id="more-hotels" className="mt-6 flex flex-wrap items-center justify-between gap-5 rounded-2xl border bg-secondary/50 p-5 sm:p-6">
               <div className="max-w-xl">
-                <h3 className="text-xl">Looking for even more Tel Aviv hotels?</h3>
+                <h3 className="text-xl">Looking for even more {g.city} hotels?</h3>
                 <p className="mt-2 text-sm leading-relaxed text-muted-foreground">My shortlist is a starting point. Compare more properties on the booking site, where you can select exact dates, guests, room types and cancellation conditions.</p>
               </div>
               <div className="flex flex-col gap-2">
