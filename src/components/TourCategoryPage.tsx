@@ -1,9 +1,10 @@
 import { Link } from "@tanstack/react-router";
-import { Breadcrumbs, FaqList, RelatedLinks, SourceList } from "@/components/Guide";
+import { Breadcrumbs, FaqList, SourceList } from "@/components/Guide";
 import { RelatedGuideCards } from "@/components/ShoreReadingGuides";
 import { GuidePhotoCredit } from "@/components/TravelGuide";
+import { MoreTourCategories, TourCruiseCallout } from "@/components/TourDiscovery";
 import { TourCatalog } from "@/components/TourCatalog";
-import { bethlehemJerusalemContent, getTourCategory, tourCategories, tourCategoryPaths, tourPhotos, tourReadingGuides, type TourCategoryId } from "@/data/tours";
+import { bethlehemJerusalemContent, getTourCategory, tourCategories, tourCategoryPaths, tourCruisePhoto, tourPhotos, tourReadingGuides, type TourCategoryId } from "@/data/tours";
 import { offersForTour, parseTourSearch, toursForCategory, type TourSearch } from "@/lib/tours";
 import { CANONICAL_ORIGIN, jsonLd, pageMeta } from "@/lib/site";
 import { hasPublicPhotoCredit } from "@/lib/photo-credits";
@@ -47,9 +48,9 @@ export function TourCategoryPage({ id, filters: rawFilters, onChange, departureP
     </section>
     <FaqList faqs={editorial.faqs} />
     <RelatedGuideCards title="Get to know the places on your itinerary" guides={guides} />
-    <RelatedLinks title="Explore more tour categories" items={tourCategories.filter(item => item.id !== id).map(item => ({ label: item.shortTitle, to: tourCategoryPaths[item.id] }))} />
-    <section className="mt-10 rounded-2xl border bg-secondary/30 p-6"><h2 className="text-2xl font-semibold">Arriving by cruise ship?</h2><p className="mt-3 text-sm leading-relaxed text-muted-foreground">Choose a port-specific excursion with meeting and return arrangements for your ship's schedule.</p><div className="mt-4 flex flex-wrap gap-4"><Link to="/haifa-shore-excursions/" className="font-semibold text-primary underline">From Haifa Port</Link><Link to="/ashdod-shore-excursions/" className="font-semibold text-primary underline">From Ashdod Port</Link></div></section>
+    <MoreTourCategories currentId={id} />
+    <TourCruiseCallout />
     <SourceList ids={sourceIds} intro="Product listings were reviewed for advertised itinerary, operator and duration. Confirm actual-date operation, price and arrangements with the booking provider." />
-    <TourPhotoCredits photos={[category.photo, ...products.map(tour => tourPhotos[tour.id]!), ...guides.map(guide => guide.photo)]} />
+    <TourPhotoCredits photos={[tourCruisePhoto, ...tourCategories.map(category => category.photo), ...products.map(tour => tourPhotos[tour.id]!), ...guides.map(guide => guide.photo)]} />
   </main>;
 }

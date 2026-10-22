@@ -92,16 +92,15 @@ describe("shared ordinary tour catalog", () => {
 });
 
 describe("tours hub and SEO category pages", () => {
-  it("shows eight real categories with two linked examples each and a separate direct-service area", async () => {
+  it("shows a category gateway with two linked examples each and no owner-promotion block", async () => {
     const router = await renderPage("/tours/");
     expect(screen.getAllByRole("heading", { level: 1 })).toHaveLength(1);
-    const direct = document.querySelector('[data-section="moshe-private-tours"]')!;
-    expect(direct.querySelectorAll("[data-product-id]")).toHaveLength(4);
-    const inquiryLinks = [...direct.querySelectorAll('a[href^="/private-driver/?tour="]')];
-    expect(inquiryLinks).toHaveLength(4);
-    expect(new Set(inquiryLinks.map(link => link.getAttribute("href"))).size).toBe(4);
-    for (const link of inquiryLinks) expect(link.getAttribute("href")).toContain("#request-quote");
-    expect(direct.querySelectorAll('a[href^="https:"]')).toHaveLength(0);
+    expect(document.querySelector('[data-section="moshe-private-tours"]')).toBeNull();
+    expect(screen.queryByRole("link", { name: "Plan a private day with me" })).not.toBeInTheDocument();
+    expect(screen.queryByRole("link", { name: "Explore tour categories" })).not.toBeInTheDocument();
+    expect(document.querySelector("main header a")).toBeNull();
+    expect(document.querySelector("main")!.textContent).not.toContain("GetYourGuide");
+    expect(document.querySelector("main")!.textContent).not.toContain("Viator");
     const categories = document.querySelectorAll("[data-category-id]");
     expect(categories).toHaveLength(8);
     for (const category of categories) {
@@ -116,6 +115,16 @@ describe("tours hub and SEO category pages", () => {
     }
     expect(document.querySelector("a a")).toBeNull();
     expect(screen.getByRole("region", { name: "Inspiration for your next day out" }).querySelectorAll("article")).toHaveLength(4);
+    const planning = screen.getByRole("region", { name: "More help planning your trip" });
+    expect(within(planning).getAllByRole("article")).toHaveLength(6);
+    expect(within(planning).getAllByRole("img")).toHaveLength(6);
+    expect(within(planning).getAllByRole("link").every(link => link.textContent === "Read More")).toBe(true);
+    expect(planning.querySelector('a[href*="shore-excursions"]')).toBeNull();
+    for (const link of planning.querySelectorAll("a")) expect(router.matchRoutes(link.getAttribute("href")!).at(-1)?.routeId.replace(/\/$/, "")).toBe(link.getAttribute("href")!.replace(/\/$/, ""));
+    const cruise = screen.getByRole("region", { name: "A day ashore starts at your cruise port" });
+    expect(within(cruise).getByRole("img")).toHaveAttribute("alt", expect.stringMatching(/cruise ship.*Haifa/i));
+    expect(within(cruise).getAllByRole("link").map(link => link.getAttribute("href"))).toEqual(["/haifa-shore-excursions/", "/ashdod-shore-excursions/"]);
+
   });
 
   it("renders every complete category and resolves all guide, category and product-anchor links", async () => {
@@ -140,8 +149,40 @@ describe("tours hub and SEO category pages", () => {
         expect(card.textContent).toContain("Operated by");
         for (const link of card.querySelectorAll('a[target="_blank"]')) expect(link.getAttribute("rel")).toBe("noopener noreferrer");
       }
+      const more = doc.querySelector('section[aria-labelledby="more-tour-categories-h"]')!;
+      expect(more.querySelectorAll("article")).toHaveLength(8);
+      expect(more.querySelectorAll("img")).toHaveLength(8);
+      expect(more.querySelector(`a[href="${tourCategoryPaths[category.id]}"]`)).toBeNull();
+      expect(more.querySelector('a[href="/tours/"]')).not.toBeNull();
+      const owner = doc.querySelector('[data-section="moshe-private-tours"]');
+      if (owner) {
+        expect(owner.className).not.toContain("bg-navy");
+        expect(owner.textContent).not.toContain("Arrange directly with me");
+        for (const card of owner.querySelectorAll('[data-testid="owner-tour-card"]')) {
+          const link = card.querySelector('a[href^="/private-driver/?tour="]')!;
+          expect(new URL(link.getAttribute("href")!, CANONICAL_ORIGIN).searchParams.get("tour")).toBe(card.getAttribute("data-product-id"));
+          expect(card.querySelector("dl")?.textContent).toContain("Includes:");
+        }
+      }
       expect(doc.querySelector("a a")).toBeNull();
     }
+  });
+
+  it("searches the gateway by interest and departure, forwards choices and restores all categories", async () => {
+    const router = await renderPage("/tours/?q=food");
+    expect(screen.getByRole("searchbox")).toHaveValue("food");
+    expect([...document.querySelectorAll("[data-category-id]")].map(card => card.getAttribute("data-category-id"))).toEqual(["jerusalem", "tel-aviv-jaffa", "food-markets"]);
+    fireEvent.change(screen.getByRole("combobox", { name: "Start from" }), { target: { value: "jerusalem" } });
+    await waitFor(() => expect(router.state.location.search).toEqual({ q: "food", origin: "jerusalem" }));
+    expect(document.querySelectorAll("[data-category-id]")).toHaveLength(2);
+    for (const example of document.querySelectorAll("[data-product-id]")) expect(tourProducts.find(tour => tour.id === example.getAttribute("data-product-id"))!.originIds).toContain("jerusalem");
+    const foodLink = document.querySelector('[data-category-id="food-markets"] a.btn')!;
+    expect(new URL(foodLink.getAttribute("href")!, CANONICAL_ORIGIN).searchParams.get("origin")).toBe("jerusalem");
+    fireEvent.change(screen.getByRole("searchbox"), { target: { value: "no-such-experience-xyz" } });
+    await waitFor(() => expect(screen.getByRole("heading", { name: "No categories match your search" })).toBeInTheDocument());
+    fireEvent.click(screen.getByRole("button", { name: "Show all categories" }));
+    await waitFor(() => expect(document.querySelectorAll("[data-category-id]")).toHaveLength(8));
+    expect(router.state.location.search).toEqual({});
   });
 
   it("updates the URL, empty state and results, preserves search words, and restores browser history", async () => {

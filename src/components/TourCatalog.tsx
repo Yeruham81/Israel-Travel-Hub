@@ -7,27 +7,32 @@ import { tourPhotos, type TourCategoryId } from "@/data/tours";
 import { filterTours, isOwnerTour, offersForTour, placeLabel, toursForCategory, tourSnapshotPrice, type TourSearch } from "@/lib/tours";
 import { recordOutboundClick, relFor } from "@/lib/outbound";
 
-export function OwnerTourSection({ tours, hub = false }: { tours: TourProduct[]; hub?: boolean }) {
+export function OwnerTourSection({ tours }: { tours: TourProduct[] }) {
   if (!tours.length) return null;
-  return <section id="my-private-days" aria-labelledby="my-private-days-h" data-section="moshe-private-tours" className="mt-10 scroll-mt-24 rounded-3xl bg-navy p-5 text-navy-foreground sm:p-8">
-    <p className="text-xs font-bold uppercase tracking-widest text-amber-200">Arrange directly with me</p>
-    <h2 id="my-private-days-h" className="mt-2 text-3xl font-semibold">My private car-and-driver days</h2>
-    <p className="mt-3 max-w-3xl text-sm leading-relaxed opacity-90">Your party, your priorities and a transport plan agreed with me. I arrange private driving around your chosen stops, with licensed guiding quoted separately when requested.</p>
-    <ul className="mt-6 grid gap-4 sm:grid-cols-2" aria-label="My private day trips">
-      {tours.map(tour => <li key={tour.id} id={tour.id} data-product-id={tour.id} className="scroll-mt-24 overflow-hidden rounded-2xl border border-white/20 bg-white/5">
-        <article className="flex h-full flex-col">
-          <img src={tourPhotos[tour.id]!.src} alt={tourPhotos[tour.id]!.alt} width={640} height={360} loading="lazy" decoding="async" className={`w-full object-cover ${hub ? "aspect-[16/7]" : "aspect-[16/9]"}`} />
-          <div className="flex flex-1 flex-col p-5">
-            <h3 className="text-xl font-semibold leading-snug">{tour.title}</h3>
-            <p className="mt-2 text-sm leading-relaxed opacity-85">{tour.summary}</p>
-            <p className="mt-3 text-xs opacity-85">From {tour.originIds.map(placeLabel).join(" or ")} · {tour.duration}</p>
-            <p className="mt-auto pt-4 text-sm font-semibold">Personal quote for your itinerary</p>
-            <Link to="/private-driver/" search={{ tour: tour.id }} hash="request-quote" className="btn btn-light mt-3 w-full" aria-label={`Request a quote for ${tour.title}`}>Request a personal quote</Link>
+  return <section id="my-private-days" aria-labelledby="my-private-days-h" data-section="moshe-private-tours" className="mt-10 scroll-mt-24">
+    <p className="text-xs font-bold uppercase tracking-widest text-primary">Personally arranged with Moshe Barak</p>
+    <h2 id="my-private-days-h" className="mt-2 text-3xl font-semibold">My private day trips</h2>
+    <p className="mt-3 max-w-3xl text-sm leading-relaxed text-muted-foreground">Choose a private car-and-driver itinerary, then send me your date, pickup city and party details for a tailored quote. Licensed guiding can be requested separately.</p>
+    <ul className="mt-5 grid gap-5 sm:grid-cols-2" aria-label="My private day trips">
+      {tours.map(tour => <li key={tour.id} id={tour.id} data-product-id={tour.id} data-operator-id="moshe-barak" data-testid="owner-tour-card" className="flex min-w-0 scroll-mt-24 flex-col overflow-hidden rounded-2xl border bg-card">
+        <img src={tourPhotos[tour.id]!.src} alt={tourPhotos[tour.id]!.alt} width={720} height={480} loading="lazy" decoding="async" className="aspect-[16/9] w-full object-cover" />
+        <article className="flex flex-1 flex-col p-4">
+          <h3 className="text-xl font-semibold leading-snug text-foreground">{tour.title}</h3>
+          <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{tour.summary}</p>
+          <dl className="mt-4 grid grid-cols-2 gap-x-3 gap-y-2 text-sm">
+            <div><dt className="sr-only">Duration</dt><dd className="flex items-start gap-2"><Clock3 aria-hidden className="mt-0.5 size-4 shrink-0 text-primary" />{tour.duration}</dd></div>
+            <div><dt className="sr-only">Tour format</dt><dd className="flex items-start gap-2"><Users aria-hidden className="mt-0.5 size-4 shrink-0 text-primary" />{tour.formatLabel}</dd></div>
+            <div className="col-span-2"><dt className="sr-only">Departure</dt><dd className="flex items-start gap-2"><MapPin aria-hidden className="mt-0.5 size-4 shrink-0 text-primary" />From {tour.originIds.map(placeLabel).join(" or ")}</dd></div>
+            <div className="col-span-2"><dt className="inline font-medium">Includes: </dt><dd className="inline text-muted-foreground">{tour.inclusions}</dd></div>
+          </dl>
+          <p className="mt-3 text-xs text-primary">{tour.destinationIds.map(placeLabel).join(" · ")}</p>
+          <div className="mt-auto pt-4"><div className="border-t pt-4"><p className="text-lg font-semibold">Personal quote for your itinerary</p><p className="mt-1 text-xs text-muted-foreground">Route, vehicle and full price agreed before booking</p></div>
+            <Link to="/private-driver/" search={{ tour: tour.id }} hash="request-quote" className="btn btn-primary mt-4 w-full" aria-label={`Request a quote for ${tour.title}`}>Request this day trip</Link>
           </div>
         </article>
       </li>)}
     </ul>
-    <p className="mt-5 max-w-3xl text-xs leading-relaxed opacity-85">My quotes cover the agreed private transport service. Guiding, admissions, meals and any extra charges are confirmed separately in writing. Send me your date, pickup city, party size and preferred stops; booking follows my confirmation.</p>
+    <p className="mt-5 max-w-3xl text-xs leading-relaxed text-muted-foreground">My quotes cover the agreed private transport service. Guiding, admissions, meals and any extra charges are confirmed separately in writing. Send me your date, pickup city, party size and preferred stops; booking follows my confirmation.</p>
   </section>;
 }
 
@@ -87,7 +92,7 @@ export function TourCatalog({ categoryId, filters, onChange, originScope }: { ca
     {visible.length === 0 ? <section className="mt-5 rounded-2xl border p-8 text-center"><h2 className="text-2xl font-semibold">No tours match these choices</h2><p className="mt-3 text-muted-foreground">Try another departure, destination or interest.</p><button type="button" className="btn btn-primary mt-5" onClick={() => onChange({})}>Show all tours in this category</button></section> : <>
       <OwnerTourSection tours={owner} />
       {external.length > 0 && <section id="external-tours" aria-labelledby="external-tours-h" data-section="external-tours" className="mt-12 scroll-mt-24 border-t pt-8">
-        <p className="eyebrow">Book through GetYourGuide or Viator</p>
+        <p className="eyebrow">Independent tour providers</p>
         <h2 id="external-tours-h" className="mt-2 text-3xl font-semibold">Other operators' tours & experiences</h2>
         <p className="mt-3 max-w-3xl text-sm leading-relaxed text-muted-foreground">Discover guided itineraries, local walks and specialist activities from independent operators. Each card identifies the departure, experience and booking site.</p>
         <ul aria-label="External tours" className="mt-6 grid gap-5 sm:grid-cols-2">{external.map(tour => <ExternalTourCard key={tour.id} tour={tour} pageId={`tours-${categoryId}`} />)}</ul>

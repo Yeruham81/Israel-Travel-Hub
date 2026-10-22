@@ -1,5 +1,5 @@
 import { affiliateConfig, operators, partners, providerLinks, sources, tourBookingOffers, tourProducts } from "@/data/registry";
-import { getTourCategory, tourCategoryPaths, type TourCategoryId } from "@/data/tours";
+import { getTourCategory, tourCategories, tourCategoryPaths, type TourCategoryId } from "@/data/tours";
 import { tourPlaces, tourTags, type TourFormat, type TourLength, type TourPlaceId, type TourTagId, type TourProduct, type TourBookingOffer } from "@/data/tourTypes";
 
 export type TourSearch = { origin?: TourPlaceId; destination?: TourPlaceId; tag?: TourTagId; format?: TourFormat; length?: TourLength; q?: string; sort?: "duration" | "title" };
@@ -57,4 +57,24 @@ export function tourSnapshotPrice(offer: TourBookingOffer, now = new Date()) {
   if (source?.id !== offer.id || source.checkedAt !== price.checkedAt || price.checkedAt !== offer.checkedAt || !Number.isFinite(age) || age < 0 || age > 30 * 86_400_000) return undefined;
   if (new Date(checked).toISOString().slice(0, 10) !== price.checkedAt) return undefined;
   return price;
+}
+
+/** Gateway filters find categories and reuse the matching product records for examples. */
+export type TourHubSearch = Pick<TourSearch, "q" | "origin">;
+export function parseTourHubSearch(raw: Record<string, unknown>): TourHubSearch {
+  const { q, origin } = parseTourSearch(raw);
+  return { ...(q && { q }), ...(origin && { origin }) };
+}
+export function tourCategoryResults(raw: TourHubSearch = {}) {
+  const search = parseTourHubSearch(raw);
+  const terms = search.q?.trim().toLocaleLowerCase("en").split(/\s+/) || [];
+  return tourCategories.flatMap(category => {
+    const categoryText = [category.title, category.shortTitle, category.intro].join(" ").toLocaleLowerCase("en");
+    const topicMatch = terms.every(term => categoryText.includes(term));
+    const nextSearch = parseTourHubSearch(topicMatch ? { origin: search.origin } : search);
+    const matches = filterTours(category.id, nextSearch);
+    if (!matches.length) return [];
+    const examples = [...matches.filter(tour => !isOwnerTour(tour)), ...matches.filter(isOwnerTour)].slice(0, 2);
+    return [{ category, examples, search: nextSearch }];
+  });
 }

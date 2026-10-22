@@ -1,4 +1,3 @@
-import type { LinkProps } from "@tanstack/react-router";
 import type { TourPlaceId, TourTagId } from "@/data/tourTypes";
 import type { GuidePhoto } from "@/data/travelGuides";
 import type { ShoreReadingGuide } from "@/data/shoreReading";
@@ -10,6 +9,10 @@ import jaffa from "@/assets/tel-aviv/jaffa.webp";
 import akko from "@/assets/shore-excursions/akko-port.jpg";
 import holySepulchre from "@/assets/guides/holy-sepulchre.jpg";
 import coralReef from "@/assets/eilat/coral-reef.webp";
+import cruiseShip from "@/assets/shore-excursions/cruise-ship-haifa.webp";
+import roadTrip from "@/assets/home/road-trip.webp";
+import esim from "@/assets/guides/esim-israel.jpeg";
+import hotelRoom from "@/assets/home/hotel-room.webp";
 
 export const tourCategoryPaths = {
   jerusalem: "/tours/jerusalem/",
@@ -222,20 +225,34 @@ export function getTourCategory(id: TourCategoryId) { return tourCategories.find
 export function tourReadingGuides(id: TourCategoryId) { return getTourCategory(id).reading.map(key => reading[key]); }
 export const toursHubGuides = [reading.jerusalem, reading.masada, reading.jaffa, reading.galilee];
 export const toursHubTitle = "Tours & day trips in Israel";
-export const toursHubDescription = "Explore Israel tours by destination and interest: Jerusalem, Tel Aviv, Masada, Galilee, food tours and Eilat. Choose my private car-and-driver days or external guided experiences.";
+export const toursHubDescription = "Explore Israel tours by destination and interest: Jerusalem, Tel Aviv, Masada, Galilee, food tours and Eilat. Find guided day trips, private experiences, food walks and Red Sea activities.";
 export const toursHubFaqs = [
-  { q: "What is the difference between your trips and the other tours?", a: "My private days are car-and-driver services arranged directly with me, with the route and total agreed in a personal quote. The other cards are independently operated experiences booked through GetYourGuide or Viator, with their own guiding, inclusions and terms." },
+  { q: "Can I find both shared and private experiences?", a: "Yes. The category pages bring together shared guided trips, local activities and private options where available. A private driver handles transportation; licensed guiding is a separate inclusion to confirm on the specific experience." },
   { q: "How do I choose the right departure city?", a: "Each tour card identifies where it starts. A destination page can include different departures, so check that the selected option starts where you will be staying." },
   { q: "Are prices and dates confirmed here?", a: "No. External starting prices, where shown, are reference snapshots. Open the booking page for the current price, date, group size and inclusions. I confirm my own private transport quotes directly." },
   { q: "Where are the tours from cruise ports?", a: "Use the separate shore-excursion pages for Haifa and Ashdod. Ordinary city departures do not promise port pickup or a return matched to your ship's schedule." },
 ];
 
-export const tourPlanningLinks: { label: string; to: LinkProps["to"] }[] = [
-  { label: "Day trips from Jerusalem", to: travelGuidePaths.jerusalemDayTrips },
-  { label: "Day trips from Tel Aviv", to: travelGuidePaths.telAvivDayTrips },
-  { label: "Haifa shore excursions", to: "/haifa-shore-excursions/" },
-  { label: "Ashdod shore excursions", to: "/ashdod-shore-excursions/" },
+export const tourPlanningGuides: ShoreReadingGuide[] = [
+  { title: "Israel travel tips", description: "Prepare for a smoother visit, from everyday essentials to planning your days. Keep the practical details in hand before you set out.", to: travelGuidePaths.travelTips, photo: migration["EXISTING:coast"] },
+  { title: "Best time to visit Israel", description: "Find a season that suits the trip you have in mind. Plan around the weather, daylight and the experiences you most want to enjoy.", to: travelGuidePaths.bestTime, photo: migration["best-time-to-visit-israel"] },
+  { title: "Holidays & events", description: "Make the calendar part of your planning. Understand how holidays and local events can shape opening times, travel and the feel of your visit.", to: travelGuidePaths.calendar, photo: migration["calendar-of-events"] },
+  { title: "Getting around Israel", description: "Connect your destinations with a transport plan that fits your pace. Compare the practical options for travelling between cities and attractions.", to: travelGuidePaths.israel, photo: { src: roadTrip, alt: "Illustration of a road trip through Israel's countryside" } },
+  { title: "Choose an eSIM for Israel", description: "Stay connected for maps, messages and bookings. Compare mobile-data options and check what your phone needs before you arrive.", to: travelGuidePaths.esim, photo: { src: esim, alt: "A phone displaying an eSIM graphic", sourceUrl: "https://www.israel-taxi.com/wp-content/uploads/2025/08/best_esim_for_israel.jpeg" } },
+  { title: "Find the right place to stay", description: "Choose a base that works with your itinerary. Explore accommodation areas and styles, from a city break to a relaxing resort stay.", to: "/hotels/", photo: { src: hotelRoom, alt: "Illustration of a welcoming hotel room" } },
 ];
+
+export const tourCruisePhoto: GuidePhoto = {
+  src: cruiseShip, alt: "Royal Iris cruise ship moored alongside a quay at Haifa Port",
+  sourceUrl: "https://commons.wikimedia.org/wiki/File:Haifa_6666-1_(Royal_Iris).jpg",
+  credit: "Zvi Roger · crop by Angelgreat · CC BY 3.0 · converted to WebP",
+  licenseUrl: "https://creativecommons.org/licenses/by/3.0/",
+};
+
+export const tourCruisePorts = [
+  { id: "haifa", title: "From Haifa Port", to: "/haifa-shore-excursions/", description: "Discover Galilee's sacred sites, Akko's old harbour and the northern coast.", photo: airport["haifa"]! },
+  { id: "ashdod", title: "From Ashdod Port", to: "/ashdod-shore-excursions/", description: "Explore Jerusalem, the lively coast of Tel Aviv and Jaffa, or Masada and the Dead Sea.", photo: airport["ashdod"]! },
+] as const;
 
 /** A departure landing has its own planning copy rather than duplicating the topic page. */
 export const bethlehemJerusalemContent = {

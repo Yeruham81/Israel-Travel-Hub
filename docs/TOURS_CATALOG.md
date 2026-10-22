@@ -4,7 +4,7 @@ Implemented 22 October 2026. Existing Lovable project and staging indexing setti
 
 ## Visitor pages
 
-`/tours/` is the hub. It separates four owner-operated private transport ideas from eight external-tour topics. Every topic shows two examples linked to the same product's anchor in its complete category catalog.
+`/tours/` is a category gateway with eight illustrated topics and two product examples per topic initially. It has no owner-promotion block or hero buttons. Instant keyword and optional departure-city search narrows the categories and examples, keeps the choices in the URL and carries applicable filters into the category page. Every example links to the shared product's anchor in its full category catalog.
 
 | Category | Permanent URL |
 | --- | --- |
@@ -21,13 +21,15 @@ The existing `/tours/bethlehem-from-jerusalem/` route is retained as a departure
 
 Each category has its own title, description, introduction, comparison content, practical planning, FAQs, four illustrated guide cards and other category links. Metadata uses `pageMeta`, breadcrumbs and a factual `CollectionPage`/`ItemList`. It does not claim live inventory, ratings, product offers or date-specific availability. Canonicals point to the permanent unfiltered URL; no filter permutations are added to the sitemap. Filters are form controls, so the site does not emit crawlable links for every combination. Existing staging `noindex,nofollow` remains unchanged.
 
+The gateway has one illustrated cruise-port callout with a photograph of a moored cruise ship and distinct Haifa/Ashdod entry cards. Its separate six-card “More help planning your trip” section covers general travel tips, seasons, holidays, nationwide transport, eSIM and accommodation; it does not repeat shore-excursion links or destination guides. Category pages use illustrated cards for the other seven categories plus the full hub, retaining an even eight-card layout.
+
 ## Records and queries
 
 - `src/data/registry.ts`: `tourProducts` holds 19 unique products (four owner transport ideas and 15 external experiences); `tourBookingOffers` holds one currently checked marketplace listing per external product. Operators and booking partners remain separate. Source references and `ProviderLink` records are derived by stable offer ID.
 - `src/data/tourTypes.ts`: contracts, place taxonomy and interest tags. Products keep origins separate from destinations, plus format, advertised total duration, pickup and inclusion information. Individually agreed owner transport has no invented fixed duration or rate.
 - `src/data/tours.ts`: editorial category content and image provenance. Category selection rules match destination or interest tags, rather than copying product arrays.
 - `src/lib/tours.ts`: queries, safe search parsing, filtering, sorting, offer resolution and price expiry. `toursForCategory` returns the original shared objects. A Jaffa/Carmel product appears in both Tel Aviv and food categories; a Jerusalem/Bethlehem product appears under both destinations.
-- `TourCatalog` visually separates owner transport from independently operated experiences even after filtering. All listings appear initially. Optional origin, destination, interest, format, duration, keyword and sort controls persist in the URL. Invalid enum values and unrelated search keys are discarded at the page boundary. Search typing replaces history entries; categorical choices support Back.
+- `TourCatalog` separates owner transport from independently operated experiences even after filtering. Owner itineraries use the same light, bordered image-card style as the shore-excursion pages, with duration, format, departure, inclusions and a direct quote link; there is no dark-blue owner section. All listings appear initially. Optional origin, destination, interest, format, duration, keyword and sort controls persist in the URL. Invalid enum values and unrelated search keys are discarded at the page boundary. Search typing replaces history entries; categorical choices support Back.
 
 Cruise-port products continue to use the existing shore catalog. Ordinary hotel/city departures are not presented as port pickup or ship-return products. No existing shore prices, forms or return arrangements were changed.
 
@@ -53,11 +55,13 @@ All 15 marketplace product URLs were reviewed on 22 October 2026 for identity an
 
 Some source text is inconsistent: Mahane Yehuda's meeting map and prose disagree; the card asks for written confirmation of the Jerusalem address. Coastal listings mention multiple route versions, so Rosh Hanikra is not tagged as a guaranteed stop. Advertised total duration is distinguished from time actually snorkeling. Provider pages must be rechecked when refreshing these facts.
 
+The gateway cruise photograph is Zvi Roger's Haifa Royal Iris image, with the upstream crop credited to Angelgreat, CC BY 3.0, converted to WebP. Its source, licence and changes are shown in each page's image-credit disclosure. It illustrates a port destination without asserting a current ship call.
+
 Eilat's new coral photograph is by Yoav95179, CC BY-SA 4.0, resized and converted to WebP. Its source, licence and modification credit are in the photo record and the page's image-credit disclosure. Existing photographs retain their established provenance.
 
 ## Validation
 
-- Full suite after implementation: 321 tests across 40 files passed.
+- Full suite after the gateway redesign: 322 tests across 40 files passed.
 - TypeScript and production build passed; sitemap contains the eight new permanent category URLs.
 - Catalog integration tests verify shared identity, category matches, origin/destination distinction, compound filtering, multiword search, URL/history behaviour, no-results reset, booking channels, affiliate resolution, click tracking, price expiry, internal links and collection metadata.
 - Cloud-browser visual QA could not run: the managed preview hostname `terminal.local` was rejected by this existing project's Vite host configuration. No hosting/security settings were changed for optional QA.

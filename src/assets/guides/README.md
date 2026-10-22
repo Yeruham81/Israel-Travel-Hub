@@ -60,3 +60,7 @@ The following publisher-owned photographs were resized and converted to WebP. Co
 ## Ordinary tour catalog — 22 October 2026
 
 `src/assets/eilat/coral-reef.webp` is a resized 1200 × 675 WebP of [Corals in Eilat coral reef nature reserve 1.jpg](https://commons.wikimedia.org/wiki/File:Corals_in_Eilat_coral_reef_nature_reserve_1.jpg), by **Yoav95179**, licensed [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/). Original photographic content retained; resized and converted to WebP. Attribution, source and licence are retained in `tourPhotos` and the Eilat category's image-credit disclosure. It illustrates the destination and is not a photograph of a particular operator's snorkeling session.
+
+## Tours gateway cruise photograph — 22 October 2026
+
+`src/assets/shore-excursions/cruise-ship-haifa.webp` shows Royal Iris moored at Haifa Port. Source: [Haifa 6666-1 (Royal Iris).jpg](https://commons.wikimedia.org/wiki/File:Haifa_6666-1_(Royal_Iris).jpg), photograph by **Zvi Roger**, upstream crop by **Angelgreat**, [CC BY 3.0](https://creativecommons.org/licenses/by/3.0/). The 973 × 850 source crop was converted to WebP; no photographic content was added. This is destination illustration, not a claim that a particular ship currently calls at the port. Credit, source and licence are retained in `tourCruisePhoto` and every page displaying the callout.
