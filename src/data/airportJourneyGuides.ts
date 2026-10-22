@@ -23,7 +23,7 @@ export type AirportJourneyGuide = {
   stations: { name: string; time: string; usefulFor: string }[];
   connections: string[]; weekend: string[]; advice: string[]; faqs: { q: string; a: string }[];
   related: { label: string; to: LinkProps["to"] }[];
-  photos?: { station: StayGuidePhoto; onward: StayGuidePhoto };
+  photos?: { station: Pick<StayGuidePhoto, "src" | "alt">; onward: Pick<StayGuidePhoto, "src" | "alt"> };
   stationLinks?: { text: string; to: LinkProps["to"] }[];
   weekendLinks?: { text: string; to: LinkProps["to"] }[];
   sources?: { title: string; url: string }[];
