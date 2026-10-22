@@ -8,18 +8,21 @@ export const shoreHubPorts: Record<ShorePortId, {
   description: string;
   highlights: string[];
   planning: string;
+  pickup: string;
 }> = {
   ashdod: {
     location: "Southern Mediterranean coast",
     description: "From Ashdod, compare a relatively close Tel Aviv–Jaffa outing, a Jerusalem visit with substantial walking, or a longer desert day to Masada and the Dead Sea.",
     highlights: ["Jerusalem & Bethlehem", "Tel Aviv & Old Jaffa", "Masada & the Dead Sea"],
     planning: "A coastal outing can offer a gentler day. Jerusalem involves walking and steps; desert routes need a longer port call and time on the road.",
+    pickup: "This secure port is not a pedestrian city-center terminal. The ship's shuttle and authorized pickup point must be confirmed for the actual call.",
   },
   haifa: {
     location: "Northern Mediterranean coast",
     description: "From Haifa, nearby Akko and northern Galilee routes preserve more sightseeing time than the longer journeys south to Tel Aviv or Jerusalem.",
     highlights: ["Haifa & Akko", "Nazareth & Sea of Galilee", "Jerusalem on a longer call"],
     planning: "Northern routes keep more of the day in the region. Jerusalem and Tel Aviv mean longer drives south, so plan a selective itinerary.",
+    pickup: "The passenger-terminal public access is via a pedestrian bridge near 65 HaAtsmaut Street; confirm any ship-specific meeting instructions.",
   },
 };
 
