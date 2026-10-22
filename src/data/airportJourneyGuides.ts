@@ -1,6 +1,8 @@
 import type { LinkProps } from "@tanstack/react-router";
 import { airportTransferPhotos } from "@/data/airportTransfers";
 import type { StayGuidePhoto } from "@/data/content";
+import telAvivOldJaffa from "@/assets/tel-aviv/jaffa.webp";
+import airportTerminalHall from "@/assets/home/ben-gurion-t3.webp";
 
 /**
  * Informational journey-choice pages. They deliberately do NOT use the route
@@ -11,7 +13,7 @@ export type AirportJourneyId = "jerusalem" | "tel-aviv" | "haifa" | "ein-bokek";
 export type JourneyOption = {
   id: string; name: string; time: string; cost: string;
   bestFor: string; doorToDoor: string; availability: string;
-  heading: string; paragraphs: string[]; checklist: string[];
+  heading: string; paragraphs: string[]; checklist: string[]; inlineLinks?: { text: string; to: LinkProps["to"] }[];
 };
 export type AirportJourneyGuide = {
   id: AirportJourneyId; city: string; path: LinkProps["to"]; title: string; description: string;
@@ -21,6 +23,12 @@ export type AirportJourneyGuide = {
   stations: { name: string; time: string; usefulFor: string }[];
   connections: string[]; weekend: string[]; advice: string[]; faqs: { q: string; a: string }[];
   related: { label: string; to: LinkProps["to"] }[];
+  photos?: { station: StayGuidePhoto; onward: StayGuidePhoto };
+  stationLinks?: { text: string; to: LinkProps["to"] }[];
+  weekendLinks?: { text: string; to: LinkProps["to"] }[];
+  sources?: { title: string; url: string }[];
+  updatedAt?: string;
+  historicalPrices?: boolean;
 };
 
 const commonTaxi = [
@@ -96,42 +104,58 @@ const byId: Record<AirportJourneyId, AirportJourneyGuide> = {
   "tel-aviv": {
     id: "tel-aviv", city: "Tel Aviv & Jaffa",
     path: "/travel-blog/how-to-get-from-ben-gurion-airport-to-tel-aviv/",
-    title: "How to get from Ben Gurion Airport to Tel Aviv: train, bus or taxi?",
-    description: "Compare TLV airport trains, bus 445, taxis and pre-booked rides to Tel Aviv. See indicative fares, four railway stations, weekend line 711 and hotel tips.",
+    title: "How to Get from Ben Gurion Airport to Tel Aviv (2026): Train, Bus or Taxi?",
+    description: "Ben Gurion Airport to Tel Aviv in 2026: compare train, bus 445, official taxis, private transfers, all four stations and Shabbat bus 711.",
     distance: "Approximately 20–25 km to central Tel Aviv, depending on the address",
-    intro: "A quick rail ride to Tel Aviv does not always mean a quick journey to a beachfront hotel or Jaffa apartment. Compare every practical arrival option, including the weekend exception that calls at Terminal 1.",
-    answer: "The train is usually the easiest low-cost choice when it is running, but choose the correct Tel Aviv station and plan the final connection. Bus 445 may suit hotels along its route. In the main Shabbat break, check the limited free 711 at Terminal 1, or choose an airport taxi or a pre-booked door-to-door ride.",
-    trainIntro: "Trains depart from below Terminal 3; use the airport shuttle to Terminal 3 if you land at Terminal 1. Depending on your route and service, travel to a Tel Aviv station can take around 11–30 minutes. None of the four stations is directly on the beachfront.",
+    intro: "Choose the best way from Ben Gurion Airport (TLV) to your actual Tel Aviv or Jaffa address. Compare trains, bus 445, official taxis, a confirmed private pickup and the limited Shabbat alternative.",
+    answer: "The airport train is often the quickest low-cost option for Tel Aviv while it is operating: choose among HaHagana, HaShalom, Savidor Center and University based on the hotel address, and plan the last connection. Kavim bus 445 also serves Tel Aviv from Terminal 3, Level 2, Exit 21, but check its actual stops and times. A licensed airport taxi or confirmed private transfer goes directly to an accessible address. On Shabbat, regular trains stop; the limited free weekend bus 711 serves Terminal 1 on its own timetable.",
+    trainIntro: "Ben Gurion Airport railway station is below Terminal 3. Under the airport’s published 2026 arrangement, international arrivals use Terminal 3; always follow current airport and airline instructions. Tel Aviv has four mainline stations: HaHagana, HaShalom, Savidor Center and University. Journey times and stopping patterns vary by train; none of the four stations is on the beachfront. The Ben Gurion Airport arrival guide explains the steps from passport control to onward transport.",
     photo: airportTransferPhotos["tel-aviv"]!,
+    updatedAt: "2026-10-22",
+    historicalPrices: false,
+    photos: {
+      station: { src: airportTerminalHall, alt: "Ben Gurion Airport Terminal 3 arrivals hall and access to onward transport" },
+      onward: { src: telAvivOldJaffa, alt: "Old Jaffa waterfront and streets, where the final hotel pickup point may differ from a train station" },
+    },
+    stationLinks: [{ text: "Ben Gurion Airport arrival guide", to: "/travel-blog/ben-gurion-airport-arrival-tips/" }],
+    weekendLinks: [{ text: "dedicated airport Shabbat guide", to: "/travel-blog/from-ben-gurion-airport-on-shabbat/" }],
+    sources: [
+      { title: "Israel Railways — check trains and ticket prices", url: "https://www.rail.co.il/" },
+      { title: "Israel Airports Authority — Line 445, taxis and internal shuttle", url: "https://www.iaa.gov.il/en/airports/ben-gurion/directions/directions-list/?categoryId=10450" },
+      { title: "Tel Aviv visitor information — four railway stations and airport transport", url: "https://visit.tel-aviv.gov.il/move/airport" },
+      { title: "Tel Aviv municipality — free weekend Line 711", url: "https://www.tel-aviv.gov.il/Residents/Transportation/Pages/naimbesofash.aspx" },
+      { title: "Gett — official airport taxi ordering and pickup", url: "https://www.gett.com/il/airport-en/" },
+      { title: "National public transport planner — bus 445 timetable", url: "https://bus.gov.il/" },
+    ],
     privatePath: "/travel-blog/ben-gurion-airport-to-tel-aviv/",
     privateLabel: "Request a private Tel Aviv or Jaffa transfer",
     options: [
-      { id: "rail", name: "Train to Tel Aviv", time: "About 11–30 min to a station", cost: "≈ ₪10–15 per person*", bestFor: "Quick, lower-cost weekday arrival", doorToDoor: "No", availability: "Not during the main Shabbat break", heading: "Choosing the right Tel Aviv railway station", paragraphs: [
-        "Check whether HaHagana, HaShalom, Savidor Central or University best fits the actual street of your destination. HaShalom is convenient for Azrieli/Sarona, while Savidor has intercity and local connections. HaHagana can suit southern-city onward travel.",
-        "For the beach, Jaffa, Neve Tzedek or most western hotels, you will normally need to walk further or take a bus, taxi or light-rail connection. A station with 'Tel Aviv' in its name is not automatically the closest to your hotel."
-      ], checklist: ["Use the full hotel address when choosing the station.", "Check the last train and late-night stopping pattern.", "Include the onward fare and bags in the total comparison."] },
-      { id: "bus", name: "Bus 445", time: "About 40–70+ min, depending on stop", cost: "≈ ₪8–15 per person*", bestFor: "Addresses near its city stops", doorToDoor: "No", availability: "Timetable dependent; Shabbat restrictions", heading: "Bus 445: useful for some central Tel Aviv hotels", paragraphs: [
-        "The Airports Authority identifies Kavim line 445 from Terminal 3, Level 2, Exit 21 to Tel Aviv. Its city corridor has included central streets such as Dizengoff, Ben Yehuda and HaYarkon. Check the direction and every stop with the operator.",
-        "A bus may reduce your final walk if your hotel is close to a stop, but travel time is more traffic-sensitive than rail and luggage must be carried on and off the service. Do not assume a particular frequency or late-night departure."
-      ], checklist: ["Verify line 445's dated timetable with Kavim.", "Check Terminal 3 Level 2, Exit 21 and direction.", "Map the bus stop to the actual hotel entrance."] },
-      { id: "taxi", name: "Official airport taxi", time: "About 20–40+ min after pickup", cost: "Meter; ≈ ₪150–230+*", bestFor: "Direct on-demand hotel ride", doorToDoor: "Yes, where accessible", availability: "Usually around the clock", heading: "Getting a licensed airport taxi to Tel Aviv or Jaffa", paragraphs: [
-        ...commonTaxi, "For a beachfront hotel or an Old Jaffa address, provide the name and closest permitted car entrance. Traffic near the city centre or seafront can make an airport taxi slower or more expensive than the distance suggests."
-      ], checklist: ["Follow the official Gett kiosk/queue system.", "Provide the exact Jaffa or Tel Aviv address.", "Ask about a large vehicle if the party carries multiple cases."] },
+      { id: "rail", name: "Train to Tel Aviv", time: "Varies by Tel Aviv station and service", cost: "Current rail fare: check planner", bestFor: "Quick, lower-cost weekday arrival", doorToDoor: "No", availability: "Not during the main Shabbat break", heading: "Choosing the right Tel Aviv railway station", paragraphs: [
+        "Check whether HaHagana, HaShalom, Savidor Center or University best fits the actual street of your destination. HaShalom is useful for Azrieli and Sarona, Savidor for major onward connections, HaHagana for parts of the south, and University for Ramat Aviv. An arrival rail platform and the station entrance may still require a walk.",
+        "For the beach, Jaffa, Neve Tzedek or most western hotels, you will normally need to walk further or take a bus, taxi or light-rail connection. A station with 'Tel Aviv' in its name is not automatically the closest to your hotel. To plan the final leg, consult our getting around Tel Aviv guide."
+      ], inlineLinks: [{ text: "getting around Tel Aviv guide", to: "/travel-blog/getting-around-tel-aviv/" }], checklist: ["Use the full hotel address when choosing the station.", "Check the last train and late-night stopping pattern.", "Include the onward fare and bags in the total comparison."] },
+      { id: "bus", name: "Bus 445", time: "About 40–70+ min, depending on stop", cost: "Current bus fare: check planner", bestFor: "Addresses near its city stops", doorToDoor: "No", availability: "Timetable dependent; Shabbat restrictions", heading: "Bus 445: useful for some central Tel Aviv hotels", paragraphs: [
+        "The Israel Airports Authority lists Kavim route 445 to Tel Aviv from Terminal 3, Level 2, Exit 21. Check the operator’s dated timetable, boarding stop, direction and stops close to your hotel; do not rely on old lists of city streets or assume that every departure follows the same route.",
+        "A bus may reduce your final walk if your hotel is close to a stop, but travel time is more traffic-sensitive than rail and luggage must be carried on and off the service. Do not assume a particular frequency or late-night departure. For ticketing and validation basics, see our getting around Israel guide."
+      ], inlineLinks: [{ text: "getting around Israel guide", to: "/travel-blog/getting-around-israel/" }], checklist: ["Verify line 445's dated timetable with Kavim.", "Check Terminal 3 Level 2, Exit 21 and direction.", "Map the bus stop to the actual hotel entrance."] },
+      { id: "taxi", name: "Official airport taxi", time: "About 20–40+ min after pickup", cost: "Regulated meter; no fixed fare", bestFor: "Direct on-demand hotel ride", doorToDoor: "Yes, where accessible", availability: "Usually around the clock", heading: "Getting a licensed airport taxi to Tel Aviv or Jaffa", paragraphs: [
+        ...commonTaxi, "For a beachfront hotel or an Old Jaffa address, provide the name and closest permitted car entrance. Traffic near the city centre or seafront can make an airport taxi slower or more expensive than the distance suggests. Read the official airport taxi guide for pickup and ride-code instructions, and the 2026 taxi fares guide for meter tariffs."
+      ], inlineLinks: [{ text: "official airport taxi guide", to: "/travel-blog/ben-gurion-airport-taxis/" }, { text: "2026 taxi fares guide", to: "/travel-blog/taxi-fares-in-israel/" }], checklist: ["Follow the official Gett kiosk/queue system.", "Provide the exact Jaffa or Tel Aviv address.", "Ask about a large vehicle if the party carries multiple cases."] },
       { id: "private", name: "Advance private transfer", time: "About 20–40+ min after pickup", cost: "Written quote; weekday starting rate on booking page", bestFor: "Families, extra luggage, planned meeting", doorToDoor: "To confirmed address", availability: "By confirmation", heading: "Should you pre-book a private ride to Tel Aviv?", paragraphs: [
-        ...commonTransfer, "Private pickup is particularly useful for a family, multiple checked bags, a child seat, a flight arriving after regular public transport or accommodation in a narrow Jaffa street where the drop-off must be agreed."
-      ], checklist: ["Send flight number, passengers, bags and children's ages.", "Confirm the vehicle and all supplements.", "Agree Jaffa's exact vehicle-accessible drop-off."] },
+        ...commonTransfer, "Private pickup is particularly useful for a family, multiple checked bags, a child seat, a flight arriving after regular public transport or accommodation in a narrow Jaffa street where the drop-off must be agreed. The dedicated private transfer to Tel Aviv page provides the starting rate and quote request, rather than offering a second route comparison."
+      ], inlineLinks: [{ text: "private transfer to Tel Aviv page", to: "/travel-blog/ben-gurion-airport-to-tel-aviv/" }], checklist: ["Send flight number, passengers, bags and children's ages.", "Confirm the vehicle and all supplements.", "Agree Jaffa's exact vehicle-accessible drop-off."] },
       { id: "weekend", name: "Weekend line 711", time: "Variable with stop and departure", cost: "Free where operating", bestFor: "Flexible weekend traveler with light luggage", doorToDoor: "No", availability: "Limited Friday/Saturday timetable, Terminal 1", heading: "The free weekend 711 is a limited exception", paragraphs: [
         "Tel Aviv's municipality lists the free Naim Busofash line 711 via Ben Gurion Airport Terminal 1 between Shoham and central Tel Aviv. It is not a frequent Terminal 3 service tied to flight arrivals.",
-        "If arriving at Terminal 3, check the internal shuttle to Terminal 1 and then the actual 711 stop, schedule and final walk. If the journey does not match your flight, you need a different plan."
-      ], checklist: ["Check the city weekend route planner, not a weekday bus schedule.", "Allow time between Terminal 3 and Terminal 1.", "Confirm your last city connection or walk."] },
+        "If arriving at Terminal 3, use the free internal shuttle from Level G near Gate 01 toward Terminal 1 (opposite Gate 4 on the return), then check the actual 711 stop, schedule and final walk. The dedicated airport Shabbat guide covers the interchange and Saturday-night train restart in detail."
+      ], inlineLinks: [{ text: "dedicated airport Shabbat guide", to: "/travel-blog/from-ben-gurion-airport-on-shabbat/" }], checklist: ["Check the city weekend route planner, not a weekday bus schedule.", "Allow time between Terminal 3 and Terminal 1.", "Confirm your last city connection or walk."] },
       { id: "rental", name: "Rental car", time: "About 20–40+ min plus collection", cost: "Rental + parking, insurance and fuel", bestFor: "Journey beyond Tel Aviv", doorToDoor: "Yes, where permitted", availability: "Desk-hours dependent", heading: "When to rent a car at the airport", paragraphs: [
-        ...commonRental, "Central Tel Aviv and Jaffa have limited and potentially expensive parking. If you intend to spend the first few days walking around the city, consider renting only when you leave."
-      ], checklist: ["Check your hotel's parking arrangements.", "Compare city and airport pickup costs.", "Confirm any toll or one-way charges."] },
+        ...commonRental, "Central Tel Aviv and Jaffa have limited and potentially expensive parking. If you intend to spend the first few days walking around the city, consider renting only when you leave. Compare vehicle options on the car rental page."
+      ], inlineLinks: [{ text: "car rental page", to: "/car-rental/" }], checklist: ["Check your hotel's parking arrangements.", "Compare city and airport pickup costs.", "Confirm any toll or one-way charges."] },
     ],
     stations: [
       { name: "Tel Aviv–HaHagana", time: "≈ 11–15 min", usefulFor: "Southern city connections and the Levinsky/Florentin area." },
       { name: "Tel Aviv–HaShalom", time: "≈ 15–20 min", usefulFor: "Azrieli, Sarona and the business centre." },
-      { name: "Tel Aviv–Savidor Central", time: "≈ 20–25 min", usefulFor: "Arlozorov, northern/central onward buses." },
+      { name: "Tel Aviv–Savidor Center", time: "≈ 20–25 min", usefulFor: "Arlozorov, northern/central onward buses." },
       { name: "Tel Aviv–University", time: "Up to ≈ 30 min", usefulFor: "Ramat Aviv, university and Expo Tel Aviv." },
     ],
     connections: [
@@ -148,14 +172,19 @@ const byId: Record<AirportJourneyId, AirportJourneyGuide> = {
       "Make your station choice based on the hotel address and not only the train's station name.",
       "Compare the total for the whole party: four separate rail/bus tickets plus last-mile taxi may narrow the gap with a vehicle quote.",
       "Check how your group will reach a beachfront or Jaffa entrance with suitcases after dark.",
-      "On Shabbat, line 711 is a limited Terminal 1 option, not an airport-wide replacement for train services."
+      "On Shabbat, line 711 is a limited Terminal 1 option, not an airport-wide replacement for train services.",
+      "For a first-time visitor, keep the airport arrival checklist and a fallback for flight or baggage delays.",
     ],
     faqs: [
       { q: "Which train station is closest to Tel Aviv's beach?", a: "None is directly on the promenade. Compare the exact beachfront hotel with onward connections from HaHagana, HaShalom or Savidor Central." },
       { q: "How can I reach Tel Aviv on Shabbat?", a: "Check the limited free line 711 at Terminal 1 for the actual departure and city stop. If it does not work, compare an authorized metered taxi or a confirmed private transfer." },
       { q: "What is bus 445 and where does it leave?", a: "Kavim's airport-to-Tel Aviv bus is listed by the Airports Authority from Terminal 3 Level 2 Exit 21. Check the live timetable, route and direction before relying on it." },
       { q: "What if my hotel is in Jaffa?", a: "Treat Jaffa as a specific address rather than a central Tel Aviv rail station. Work out the last leg or provide a drivable hotel/host meeting point for a taxi or transfer." },
-      { q: "Will the airport train take me straight to the hotel?", a: "No. It serves four railway stations. Most hotels need a further walk or local connection." }
+      { q: "Will the airport train take me straight to the hotel?", a: "No. It serves four railway stations. Most hotels need a further walk or local connection." },
+      { q: "How do I pay for a train or bus to Tel Aviv?", a: "Check the current fare and valid ticket or payment method before travel. Rav-Kav and supported ticketing apps are common; do not assume that an overseas credit card can be tapped on every bus or at any rail gate." },
+      { q: "Can I get an Uber from Ben Gurion Airport to Tel Aviv?", a: "No. Uber passenger rides are not available in Israel in 2026. The official airport taxi system uses Gett, or you can arrange a separate private transfer." },
+      { q: "Do trains run from the airport late at night?", a: "Service and stopping patterns vary by date and hour. Check the actual Israel Railways journey for your flight and hotel; a late-night train may not stop at every Tel Aviv station." },
+      { q: "Can I walk from Tel Aviv railway station to the beach?", a: "The four mainline Tel Aviv stations are inland. Walking may be possible for some addresses, but for many beach hotels or Old Jaffa the last leg is better planned by bus or taxi." }
     ],
     related: [{ label: "Official Ben Gurion Airport taxi booking and pickup", to: "/travel-blog/ben-gurion-airport-taxis/" }, { label: "Where to stay in Tel Aviv", to: "/travel-blog/where-to-stay-in-tel-aviv/" }, { label: "Getting around Tel Aviv", to: "/travel-blog/getting-around-tel-aviv/" }, { label: "Airport transport on Shabbat", to: "/travel-blog/from-ben-gurion-airport-on-shabbat/" }]
   },
