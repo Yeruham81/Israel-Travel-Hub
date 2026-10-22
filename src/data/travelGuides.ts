@@ -228,7 +228,7 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
         title: "What should I do if I land during Shabbat or a holiday?",
         paragraphs: [
           "Do not treat the former shared airport taxi services as a weekend fallback; Nesher and Amal no longer run. On Shabbat, regular rail and bus services are restricted, so check your actual arrival date before choosing public transport.",
-          "The limited free weekend bus 711 runs via Terminal 1 toward central Tel Aviv, subject to its operating timetable. An authorized airport taxi or a pre-confirmed transfer may work when the bus route or timing does not. For how to change terminals, check Line 711 and plan Saturday-night train restarts, consult the full airport Shabbat transport guide.",
+          "The limited free weekend bus 711 runs via Terminal 1 toward central Tel Aviv, subject to its operating timetable. An authorized airport taxi or a pre-confirmed transfer may work when the bus route or timing does not. For terminal changes, Line 711 instructions and Saturday-night train restart planning, consult the full airport Shabbat transport guide.",
         ],
         inlineLinks: [
           { text: "airport Shabbat transport guide", to: travelGuidePaths.shabbat },
