@@ -588,7 +588,7 @@ export const cityStayGuides: Record<CityStayGuide["id"], CityStayGuide> = {
     faqs: [
       { q: "Is it better to stay inside or outside the Old City?", a: "Inside is atmospheric and close to the sights but has limited vehicle access, steps and fewer amenities. Outside, the city centre or East Jerusalem keeps you walkable with easier taxi access." },
       { q: "What changes on Shabbat?", a: "From Friday afternoon to Saturday evening many West Jerusalem businesses and most public transport pause. Ask your accommodation about check-in, elevators and meals, and plan transfers in advance." },
-      { q: "Where can I find hotel recommendations for each area?", a: "Open any of the six neighborhood guides above. Each explains the area, arrival considerations and two selected places to stay, with links to check current room options on Expedia. Prices and availability are confirmed on the booking site." },
+      { q: "Where can I find hotel recommendations for each area?", a: "Open any of the six neighborhood guides above. Each explains the area, arrival considerations and selected places to stay, with links to check current room options on Expedia. Prices and availability are confirmed on the booking site." },
       { q: "How do I get from Ben Gurion Airport to my hotel?", a: "Use my private airport-to-Jerusalem transfer page for hotel drop-offs and a quote request. For neutral transport choices, read Getting around Israel; for a Friday-night or Saturday arrival, read my airport-on-Shabbat guide." },
     ],
     sourceIds: ["owner-stay-jerusalem"],
@@ -630,7 +630,7 @@ export const cityStayGuides: Record<CityStayGuide["id"], CityStayGuide> = {
     faqs: [
       { q: "Beach or city centre for a first visit?", a: "Both work; the city is compact. Beachfront suits relaxed days and families, while Rothschild and Dizengoff suit food and nightlife. Jaffa adds historic atmosphere." },
       { q: "Do I need a car in Tel Aviv?", a: "Usually not. Walking, bikes, buses and taxis cover most needs and parking is difficult. Rent a car when you leave the city instead." },
-      { q: "Where can I find hotel recommendations for each area?", a: "Open any of the eight neighborhood guides above. Each explains the area's character, nearby sights and practical arrival considerations, followed by two selected places to stay. Check current room options, prices and booking terms on Expedia." },
+      { q: "Where can I find hotel recommendations for each area?", a: "Open any of the eight neighborhood guides above. Each explains the area's character, nearby sights and practical arrival considerations, followed by my selected places to stay. You can also compare Tel Aviv hotels here using the area filters; check actual rates and booking terms on the provider site." },
       { q: "How do I get from Ben Gurion Airport?", a: "Use my private airport-to-Tel Aviv transfer page for an arranged hotel pickup. For walking, buses, rail and taxis during your stay, read Getting around Tel Aviv; check the airport-on-Shabbat guide for weekend arrivals." },
     ],
     sourceIds: ["owner-stay-telaviv"],
