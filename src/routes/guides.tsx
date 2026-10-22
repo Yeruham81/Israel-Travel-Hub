@@ -31,10 +31,10 @@ function Guides() {
   const photos = [...new Map(guideDirectory.flatMap(guide => guide.photo ? [[guide.photo.src, guide.photo] as const] : [])).values()].filter(hasPublicPhotoCredit);
   return <main className="mx-auto max-w-6xl px-4 pb-8">
     <HubHeader crumbs={[{ name: "Home", to: "/" }, { name: "Travel guides", to: "/guides/" }]} eyebrow="Useful answers for your Israel trip" title="Travel guides & practical tips" intro="Prepare for arrival, choose how to get around and explore destinations, day trips, religious heritage and local markets. Browse by topic or search for the question you need answered." />
-    <div className="mt-8 rounded-2xl border bg-secondary/50 p-5 sm:p-7">
-      <form onSubmit={(event) => { event.preventDefault(); void navigate({ search: searchFor(topic), replace: true }); }} role="search" className="flex flex-wrap gap-3"><label className="min-w-0 flex-1 text-sm font-medium">Search travel guides<input value={query} maxLength={120} onChange={(event) => setQuery(event.target.value)} type="search" placeholder="Try airport, eSIM, Tel Aviv or hotels" className="mt-2 h-12 w-full rounded-lg border bg-background px-4 text-base" /></label><button type="submit" className="btn btn-primary self-end">Search</button></form>
-      <nav aria-label="Filter guides by topic" className="mt-5">
-        <ul className="flex flex-wrap gap-2">
+    <div className="mt-6 rounded-2xl border bg-secondary/50 p-3.5 sm:mt-8 sm:p-7">
+      <form onSubmit={(event) => { event.preventDefault(); void navigate({ search: searchFor(topic), replace: true }); }} role="search" className="flex flex-wrap items-end gap-2 sm:gap-3"><label className="min-w-0 flex-1 text-xs font-medium sm:text-sm">Search travel guides<input value={query} maxLength={120} onChange={(event) => setQuery(event.target.value)} type="search" placeholder="City, airport or eSIM" className="mt-1.5 h-10 w-full rounded-lg border bg-background px-3 text-base sm:mt-2 sm:h-12 sm:px-4" /></label><button type="submit" className="btn btn-primary h-10 shrink-0 px-3 py-2 text-sm sm:h-auto sm:px-5 sm:py-3">Search</button></form>
+      <nav aria-label="Filter guides by topic" className="mt-3 sm:mt-5">
+        <ul className="flex flex-wrap gap-1.5 sm:gap-2">
           <li><a href={topicHref()} onClick={(event) => selectTopic(event)} className="chip inline-block" aria-current={!topic ? "true" : undefined}>All topics</a></li>
           {guideTopics.map((item) => <li key={item.id}><a href={topicHref(item.id)} onClick={(event) => selectTopic(event, item.id)} className="chip inline-block" aria-current={topic === item.id ? "true" : undefined}>{item.label}</a></li>)}
         </ul>
