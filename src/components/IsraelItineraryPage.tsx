@@ -1,5 +1,5 @@
 import { Link, type LinkProps } from "@tanstack/react-router";
-import { ArrowRight, MapPin, TrainFront, CalendarDays, BedDouble, Route as RouteIcon } from "lucide-react";
+import { ArrowRight, TrainFront, CalendarDays, BedDouble, Route as RouteIcon } from "lucide-react";
 import { Breadcrumbs, OnThisPage, FaqList } from "@/components/Guide";
 import { GuidePhotoCredit } from "@/components/TravelGuide";
 import { AuthorCard } from "@/components/AuthorCard";
