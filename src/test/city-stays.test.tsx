@@ -114,7 +114,7 @@ describe("Tel Aviv direct hotel catalog", () => {
     expect(telAvivHotelCatalog).toHaveLength(16);
     const { container } = render(<CityStayPage g={cityStayGuides.telaviv} />);
     const catalog = container.querySelector("#book") as HTMLElement;
-    expect(within(catalog).getByRole("heading", { name: "Already know your dates? Browse Tel Aviv stays" })).toBeInTheDocument();
+    expect(within(catalog).getByRole("heading", { name: "Choose a Tel Aviv hotel" })).toBeInTheDocument();
     expect(within(catalog).getAllByTestId("tel-aviv-hotel-card")).toHaveLength(16);
     for (const hotel of telAvivHotelCatalog) {
       const booking = linksForPage(`stay-area-${hotel.areaId}`).find((link) => link.id === `hotel-${hotel.id}-expedia`)!;
@@ -128,8 +128,12 @@ describe("Tel Aviv direct hotel catalog", () => {
     expect(displayedImages).toHaveLength(16);
     expect(new Set(displayedImages.map((img) => img.src)).size).toBe(16);
     expect(new Set(telAvivHotelCatalog.map((hotel) => telAvivHotelPhotos[hotel.id]?.src)).size).toBe(16);
-    expect(within(catalog).getAllByText(/Illustrative hotel photograph|Tel Aviv city photograph/)).toHaveLength(16);
-    expect(within(catalog).getByText(/not photographs of the listed hotels/i)).toBeInTheDocument();
+    expect(within(catalog).queryByText(/Neighborhood photograph|Illustrative hotel photograph|Tel Aviv city photograph/)).not.toBeInTheDocument();
+    expect(within(catalog).queryByText(/Confirm dates, guests and final price on Expedia/)).not.toBeInTheDocument();
+    expect(within(catalog).queryByText(/Hotel recommendations are editorial and do not reflect live room availability/)).not.toBeInTheDocument();
+    expect(within(catalog).getByLabelText("Filter Tel Aviv hotels by area")).toBeInTheDocument();
+    expect(within(catalog).getByRole("group", { name: "Filter Tel Aviv hotels by area" })).toHaveClass("hidden", "md:flex");
+    expect(within(catalog).getByText(/do not depict the listed hotels/i)).toBeInTheDocument();
     expect(screen.getByTestId("tel-aviv-hotel-photo-credits")).toBeInTheDocument();
     expect(catalog.textContent).not.toMatch(/ILS\s*\d{2,}|rooms available now|live price/i);
   });
@@ -167,6 +171,19 @@ describe("Tel Aviv direct hotel catalog", () => {
     fireEvent.change(within(catalog).getByLabelText("Sort"), { target: { value: "name" } });
     const visibleNames = within(catalog).getAllByTestId("tel-aviv-hotel-card").map((card) => card.querySelector("h3")!.textContent!);
     expect(visibleNames).toEqual([...visibleNames].sort((a, b) => a.localeCompare(b)));
+  });
+
+  it("supports the compact mobile area selector and clears the choice", () => {
+    const { container } = render(<CityStayPage g={cityStayGuides.telaviv} />);
+    const catalog = container.querySelector("#book") as HTMLElement;
+    const select = within(catalog).getByLabelText("Filter Tel Aviv hotels by area") as HTMLSelectElement;
+    fireEvent.change(select, { target: { value: "telaviv-florentin" } });
+    expect(select.value).toBe("telaviv-florentin");
+    expect(within(catalog).getAllByTestId("tel-aviv-hotel-card")).toHaveLength(2);
+    expect(within(catalog).getByRole("status")).toHaveTextContent("2 hotels in Florentin");
+    fireEvent.click(within(catalog).getByRole("button", { name: "View all Tel Aviv hotels" }));
+    expect(select.value).toBe("all");
+    expect(within(catalog).getAllByTestId("tel-aviv-hotel-card")).toHaveLength(16);
   });
 
   it("records actual hotel outbound clicks without claiming bookings", () => {
