@@ -67,7 +67,7 @@ describe("ten search-intent landing pages", () => {
   });
 
   it("keeps Shabbat terminal and restart coverage on the dedicated guide", () => {
-    expect(travelGuides.shabbat.sections.map((section) => section.id)).toEqual(expect.arrayContaining(["weekend-711", "restart", "beyond-tel-aviv"]));
+    expect(travelGuides.shabbat.sections.map((section) => section.id)).toEqual(expect.arrayContaining(["weekend-711", "terminal-transfer", "destinations", "restart"]));
     expect(travelGuides.shabbat.nextSteps?.map((link) => link.to)).toContain(landingPaths[0]);
     expect(travelGuides.israel.related).toContain("shabbat");
     expect(travelGuides.taxis.nextSteps?.map((link) => link.to)).toContain(landingPaths[4]);
