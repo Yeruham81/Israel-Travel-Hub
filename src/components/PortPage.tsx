@@ -51,7 +51,7 @@ export function PortPage({ id, filters: routeSearch, onFilterChange }: { id: Sho
           <p className="mt-4 text-lg leading-relaxed text-muted-foreground">{port.intro}</p>
           <div className="mt-5"><a href="#request-quote" onClick={focusQuote} className="btn btn-primary">Request a private day trip</a></div>
         </div>
-        <figure><img src={port.photo.src} alt={port.photo.alt} width={900} height={600} fetchPriority="high" decoding="async" className="aspect-[3/2] w-full rounded-2xl object-cover" /><GuidePhotoCredit photo={port.photo} /></figure>
+        <figure><img src={port.photo.src} alt={port.photo.alt} width={900} height={600} fetchPriority="high" decoding="async" className="aspect-[3/2] w-full rounded-2xl object-cover" /></figure>
       </div>
       <PageUpdated date={SHORE_EXCURSION_CHECK_DATE} />
       <AuthorCard />
