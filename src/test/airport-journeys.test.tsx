@@ -201,6 +201,36 @@ describe("four independent airport transportation comparisons", () => {
     expect(doc.body.textContent).not.toMatch(/≈ ₪30–45|≈ ₪20–30|≈ ₪500–600/);
   });
 
+  it("renders upgraded Ein Bokek advice, contextual links, two supporting photos and guide cards", async () => {
+    const g = airportJourneyGuides["ein-bokek"];
+    const router = createRouter({
+      routeTree,
+      context: { queryClient: new QueryClient() },
+      history: createMemoryHistory({ initialEntries: [g.path] }),
+      trailingSlash: "always",
+    });
+    await router.load();
+    const html = renderToString(<RouterContextProvider router={router}><AirportJourneyPage id="ein-bokek" /></RouterContextProvider>);
+    const doc = new DOMParser().parseFromString(html, "text/html");
+    expect(doc.querySelectorAll("h1")).toHaveLength(1);
+    expect(doc.querySelectorAll("figure img")).toHaveLength(3);
+    expect(doc.querySelectorAll("table")).toHaveLength(2);
+    expect(doc.querySelector("#option-alternative")).toBeNull();
+    for (const option of g.options) for (const link of option.inlineLinks || []) {
+      const anchor = doc.querySelector(`#option-${option.id} a[href="${link.to}"]`);
+      expect(anchor, option.id + " link " + link.text).not.toBeNull();
+      expect(anchor?.closest("p")).not.toBeNull();
+    }
+    for (const link of g.weekendLinks || []) {
+      expect(doc.querySelector(`#shabbat a[href="${link.to}"]`)).not.toBeNull();
+    }
+    expect(doc.querySelector('a[href="/travel-blog/ben-gurion-airport-to-ein-bokek/#request-quote"]')).not.toBeNull();
+    expect(doc.querySelector('section[aria-label="Related practical guides"]')).not.toBeNull();
+    expect(doc.querySelector('section[aria-label="Other airport journey comparisons"]')).not.toBeNull();
+    expect(doc.querySelectorAll("#sources a")).toHaveLength(6);
+    expect(doc.body.textContent).not.toMatch(/≈ ₪35–50|≈ ₪800–1,100/);
+  });
+
   it("does not invent live transport fares or claim rail on Shabbat", () => {
     for (const id of airportJourneyIds) {
       const g = airportJourneyGuides[id];
