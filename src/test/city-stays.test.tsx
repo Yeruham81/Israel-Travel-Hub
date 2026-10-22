@@ -55,7 +55,7 @@ describe.each([
     fireEvent.click(screen.getByRole("button", { name: filter }));
     expect(screen.getAllByTestId("neighborhood-card")).toHaveLength(matches);
     expect(within(container.querySelector("#areas") as HTMLElement).getByRole("status")).toHaveTextContent(`${matches} areas for ${filter.toLowerCase()}`);
-    fireEvent.click(screen.getByRole("button", { name: "All areas" }));
+    fireEvent.click(within(container.querySelector("#areas") as HTMLElement).getByRole("button", { name: "All areas" }));
     expect(screen.getAllByTestId("neighborhood-card")).toHaveLength(areas.length);
   });
 
