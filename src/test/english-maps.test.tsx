@@ -55,7 +55,15 @@ describe("free English maps throughout the accommodation guides", () => {
         cooperativeGestures: true,
       }));
       expect(result.marker.setLngLat).toHaveBeenCalledWith([area.map.lon, area.map.lat]);
-      expect(container.querySelector('a[href="https://openmaptiles.org/"]')).toBeInTheDocument();
+      const caption = container.querySelector("figcaption")!;
+      expect(caption).toHaveTextContent(area.map.reference);
+      expect(caption).toHaveTextContent("Open a larger map");
+      expect(caption).not.toHaveTextContent(/The pin is an area reference|English names or Latin transliterations|Data ©|Style: OSM Liberty/);
+      expect(caption.querySelectorAll("a")).toHaveLength(1);
+      // Supplier attribution is shown by the embedded MapLibre control, not
+      // repeated in a bulky block below the map.
+      expect(html).toContain("new maplibregl.AttributionControl({ compact: true");
+      expect(html).toContain("OSM Liberty");
       unmount();
     }
   });
