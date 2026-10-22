@@ -22,7 +22,7 @@ describe("intent-specific taxi guide cluster", () => {
     expect(taxiFares.sourceIds).toContain("taxi-fares-2026");
     expect(airportTaxis.sections.some((section) => section.id === "terminal3")).toBe(true);
     expect(airportTaxis.sourceIds).toContain("guide-gett");
-    expect(taxis.sections.find((section) => section.id === "holidays")?.links?.map((item) => item.to)).toContain(travelGuidePaths.calendar);
+    expect(taxis.sections.find((section) => section.id === "holidays")?.inlineLinks?.map((item) => item.to)).toContain(travelGuidePaths.calendar);
   });
 
   it("shows A/B/C consumer rates and never repeats the first ten kilometers", () => {
@@ -47,10 +47,10 @@ describe("intent-specific taxi guide cluster", () => {
   });
 
   it("provides context-specific links without a conflicting guide purpose", () => {
-    expect(taxiGuideCluster.taxis.sections.find((section) => section.id === "fares")?.links?.[0]?.to).toBe(travelGuidePaths.taxiFares);
-    expect(taxiGuideCluster.taxis.sections.find((section) => section.id === "airport")?.links?.[0]?.to).toBe(travelGuidePaths.airportTaxis);
-    expect(taxiGuideCluster.taxiFares.sections.find((section) => section.id === "extras")?.links?.[0]?.to).toBe(travelGuidePaths.airportTaxis);
-    expect(taxiGuideCluster.airportTaxis.sections.find((section) => section.id === "fares")?.links?.[0]?.to).toBe(travelGuidePaths.taxiFares);
-    expect(taxiGuideCluster.airportTaxis.sections.find((section) => section.id === "weekend")?.links?.some((link) => link.to === travelGuidePaths.calendar)).toBe(true);
+    expect(taxiGuideCluster.taxis.sections.find((section) => section.id === "fares")?.inlineLinks?.[0]?.to).toBe(travelGuidePaths.taxiFares);
+    expect(taxiGuideCluster.taxis.sections.find((section) => section.id === "airport")?.inlineLinks?.[0]?.to).toBe(travelGuidePaths.airportTaxis);
+    expect(taxiGuideCluster.taxiFares.sections.find((section) => section.id === "extras")?.inlineLinks?.[0]?.to).toBe(travelGuidePaths.airportTaxis);
+    expect(taxiGuideCluster.airportTaxis.sections.find((section) => section.id === "fares")?.inlineLinks?.[0]?.to).toBe(travelGuidePaths.taxiFares);
+    expect(taxiGuideCluster.airportTaxis.sections.find((section) => section.id === "weekend")?.inlineLinks?.some((link) => link.to === travelGuidePaths.calendar)).toBe(true);
   });
 });
