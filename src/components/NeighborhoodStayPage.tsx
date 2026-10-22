@@ -1,6 +1,7 @@
 import { Link, type LinkProps } from "@tanstack/react-router";
 import { ArrowLeft, ArrowRight, MapPin } from "lucide-react";
 import { cityStayGuides, neighborhoodGuidesForCity, type NeighborhoodStayGuide } from "@/data/content";
+import { areaDecisionNotes } from "@/data/localEditorialInsights";
 import { getSource, hotelsForArea, INFO_CHECK_DATE, linksForPage } from "@/data/registry";
 import { StayHotelCard } from "@/components/StayHotelCard";
 import { telAvivHotelPhotos } from "@/data/telAvivHotelPhotos";
@@ -14,6 +15,7 @@ const sections = [["overview", "The area"], ["highlights", "Nearby sights"], ["l
 
 export function NeighborhoodStayPage({ area }: { area: NeighborhoodStayGuide }) {
   const city = cityStayGuides[area.cityId];
+  const localInsight = areaDecisionNotes[area.id];
   const hotels = hotelsForArea(area.id, area.cityId);
   const bookings = linksForPage(`stay-area-${area.id}`);
   const otherAreas = neighborhoodGuidesForCity(area.cityId).filter((other) => other.id !== area.id);
@@ -48,6 +50,12 @@ export function NeighborhoodStayPage({ area }: { area: NeighborhoodStayGuide }) 
         </dl>
         <Section id="overview" title={`What is it like to stay in ${area.name}?`} className="scroll-mt-32">
           {area.overview.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
+          {localInsight && <aside className="mt-6 rounded-2xl border bg-secondary/40 p-5 sm:p-6">
+            <h3 className="text-xl font-semibold">{localInsight.heading}</h3>
+            <p className="mt-3 text-sm leading-relaxed"><strong>Why stay here:</strong> {localInsight.choose}</p>
+            <p className="mt-2 text-sm leading-relaxed"><strong>Worth comparing:</strong> {localInsight.compare}</p>
+            <p className="mt-2 text-sm leading-relaxed"><strong>Arriving with luggage:</strong> {localInsight.arrival}</p>
+          </aside>}
         </Section>
         <Section id="highlights" title="Nearby sights & local character" className="scroll-mt-32">
           <div className="mt-5 grid gap-4 sm:grid-cols-3">{area.highlights.map((highlight) => <div key={highlight.name} className="rounded-2xl border bg-card p-5"><MapPin className="h-5 w-5 text-primary" aria-hidden /><h3 className="mt-3 text-xl">{highlight.name}</h3><p className="mt-2 text-sm! text-muted-foreground">{highlight.text}</p></div>)}</div>
