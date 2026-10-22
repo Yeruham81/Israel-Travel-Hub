@@ -4,6 +4,7 @@ import type { StayGuidePhoto } from "@/data/content";
 import telAvivOldJaffa from "@/assets/tel-aviv/jaffa.webp";
 import airportTerminalHall from "@/assets/home/ben-gurion-t3.webp";
 import jerusalemMamilla from "@/assets/jerusalem/mamilla.webp";
+import haifaColony from "@/assets/haifa/colony.webp";
 
 /**
  * Informational journey-choice pages. They deliberately do NOT use the route
@@ -216,39 +217,58 @@ const byId: Record<AirportJourneyId, AirportJourneyGuide> = {
   haifa: {
     id: "haifa", city: "Haifa",
     path: "/travel-blog/how-to-get-from-ben-gurion-airport-to-haifa/",
-    title: "How to get from Ben Gurion Airport to Haifa: train, bus or taxi?",
-    description: "Compare TLV airport to Haifa trains, limited bus 905, taxi and private transfer. See indicative fares, best Haifa stations, Shabbat and hotel access.",
+    title: "How to get from Ben Gurion Airport to Haifa (2026): Train, Bus or Taxi?",
+    description: "Ben Gurion Airport to Haifa in 2026: compare train, limited bus 905, taxis and private rides, with the best Haifa station, Shabbat and cruise tips.",
     distance: "Approximately 100–110 km to central Haifa",
-    intro: "Haifa stretches from the coastline to Mount Carmel. Choosing a station or road drop-off for your exact neighbourhood matters as much as choosing between rail, taxi and a private transfer.",
-    answer: "When the service is running, direct trains toward Haifa are normally the lowest-cost practical choice. Choose Hof HaCarmel, Bat Galim, Center HaShmona or HaMifrats for the right final connection. For night, Shabbat or a hilltop hotel with heavy luggage, compare an authorized metered taxi or a pre-booked driver.",
-    trainIntro: "The airport railway station is below Terminal 3; Terminal 1 arrivals connect by internal shuttle. Many services run directly north to Haifa, but stops vary by train. Check the current timetable, station and whether a change is needed.",
+    intro: "Haifa stretches from the coastline to Mount Carmel. Compare train, limited bus 905, official metered taxis and confirmed transfers, then plan the final journey to your exact neighborhood or cruise terminal.",
+    answer: "The airport train is generally a practical low-cost way to reach Haifa while regular rail services operate. Compare Haifa Hof HaCarmel, Bat Galim, Center HaShmona and Lev HaMifratz for your final address, especially for Mount Carmel hotels. Egged bus 905 operates only on a very limited published Saturday-night and early-Sunday timetable, not throughout the week. An authorized metered taxi or confirmed private transfer may be easier for a late arrival, luggage or a cruise connection.",
+    trainIntro: "Ben Gurion Airport railway station is below Terminal 3, where international flights arrive under the airport’s published 2026 arrangement. Depending on the schedule, Haifa rail journeys may be direct or require a change. Check actual stops and the station nearest your destination; the railway follows the coast, and hilltop hotels can be a separate uphill journey. Our Ben Gurion Airport arrival guide covers the steps from landing to the station.",
     photo: airportTransferPhotos["haifa"]!,
+    updatedAt: "2026-10-22",
+    historicalPrices: false,
+    photos: {
+      station: { src: airportTerminalHall, alt: "Ben Gurion Airport Terminal 3 arrivals and onward transport area" },
+      onward: { src: haifaColony, alt: "Haifa German Colony and Mount Carmel above the lower city" },
+    },
+    stationLinks: [{ text: "Ben Gurion Airport arrival guide", to: "/travel-blog/ben-gurion-airport-arrival-tips/" }],
+    weekendLinks: [
+      { text: "airport Shabbat transport guide", to: "/travel-blog/from-ben-gurion-airport-on-shabbat/" },
+      { text: "Sherut in Israel guide", to: "/travel-blog/sherut-in-israel/" },
+    ],
+    sources: [
+      { title: "Israel Railways — current Haifa departures and ticket prices", url: "https://www.rail.co.il/" },
+      { title: "Israel Railways — Haifa Bat Galim station", url: "https://www.rail.co.il/en/stations/haifa-bat-galim" },
+      { title: "Egged bus 905 route and schedules (updated 2026)", url: "https://moovitapp.com/index/en/public_transit-line-905-Israel-1-1-81823102-0" },
+      { title: "Israel Airports Authority — train, taxis and terminal directions", url: "https://www.iaa.gov.il/en/airports/ben-gurion/directions/directions-list/?categoryId=10038" },
+      { title: "Gett — official airport taxi booking", url: "https://www.gett.com/il/airport-en/" },
+      { title: "National public transport journey planner — current 905 departures", url: "https://bus.gov.il/" },
+    ],
     privatePath: "/travel-blog/ben-gurion-airport-to-haifa/",
     privateLabel: "Request a private Haifa transfer",
     options: [
-      { id: "rail", name: "Train to Haifa", time: "About 80–110 min to a station", cost: "≈ ₪30–45 per person*", bestFor: "Budget-minded intercity travel", doorToDoor: "No", availability: "Varies; not during the main Shabbat break", heading: "Direct rail to Haifa: which station should you choose?", paragraphs: [
+      { id: "rail", name: "Train to Haifa", time: "About 80–110 min to a station", cost: "Current train fare: check planner", bestFor: "Budget-minded intercity travel", doorToDoor: "No", availability: "Varies; not during the main Shabbat break", heading: "Direct rail to Haifa: which station should you choose?", paragraphs: [
         "Depending on the service, the journey may take about 80 minutes to Hof HaCarmel or roughly 90–100 minutes to Center HaShmona. Trains do not always serve the same stops.",
-        "Haifa's hills change the last leg. A station along the coast is not necessarily a comfortable walk to a Mount Carmel hotel, even if it looks close on a flat map. Allow for a bus, taxi or other local transport."
-      ], checklist: ["Check whether the chosen train actually calls at your station.", "Measure the uphill journey to the hotel.", "Look up late-night and Saturday-evening trains separately."] },
-      { id: "taxi", name: "Official airport taxi", time: "About 75–110+ min after pickup", cost: "Meter; ≈ ₪500–600+*", bestFor: "On-demand arrival at a hotel", doorToDoor: "Yes, where accessible", availability: "Usually around the clock", heading: "Licensed airport taxi to Haifa", paragraphs: [
-        ...commonTaxi, "The final distance depends strongly on whether the destination is in the German Colony, Carmel Centre, Bat Galim, a beach hotel or the passenger port. Confirm the exact street or port terminal."
-      ], checklist: ["Use Gett or the authorized kiosk and queue.", "Specify the destination neighbourhood and building.", "Allow extra margin for a cruise connection."] },
+        "Haifa's hills change the last leg. A station along the coast is not necessarily a comfortable walk to a Mount Carmel hotel, even if it looks close on a flat map. Allow for a bus, taxi or other local transport. Our getting around Israel guide explains ticketing and onward connections."
+      ], inlineLinks: [{ text: "getting around Israel guide", to: "/travel-blog/getting-around-israel/" }, checklist: ["Check whether the chosen train actually calls at your station.", "Measure the uphill journey to the hotel.", "Look up late-night and Saturday-evening trains separately."] },
+      { id: "taxi", name: "Official airport taxi", time: "About 75–110+ min after pickup", cost: "Regulated meter; no fixed fare", bestFor: "On-demand arrival at a hotel", doorToDoor: "Yes, where accessible", availability: "Usually around the clock", heading: "Licensed airport taxi to Haifa", paragraphs: [
+        ...commonTaxi, "The final distance depends strongly on whether the destination is in the German Colony, Carmel Centre, Bat Galim, a beach hotel or the passenger port. Confirm the exact street or port terminal. Read the official airport taxi guide for pickup procedures and the taxi fares guide for regulated tariffs."
+      ], inlineLinks: [{ text: "official airport taxi guide", to: "/travel-blog/ben-gurion-airport-taxis/" }, { text: "taxi fares guide", to: "/travel-blog/taxi-fares-in-israel/" }, checklist: ["Use Gett or the authorized kiosk and queue.", "Specify the destination neighbourhood and building.", "Allow extra margin for a cruise connection."] },
       { id: "private", name: "Pre-booked private transfer", time: "About 75–110+ min after pickup", cost: "Written quote; starting rate on booking page", bestFor: "Large parties, bags, timed connections", doorToDoor: "To agreed point", availability: "By confirmation", heading: "When a private transfer to Haifa is a better fit", paragraphs: [
-        ...commonTransfer, "It can be useful for Mount Carmel accommodation, larger parties or a cruise departure. If travelling to a port, give the ship name, terminal, check-in deadline and required drop-off. Flight-delay and road contingencies matter."
-      ], checklist: ["Confirm luggage and vehicle size.", "If travelling to a ship, share boarding deadlines.", "Request the exact Haifa hotel or terminal entrance."] },
-      { id: "bus", name: "Bus 905 (limited)", time: "About 110–125+ min when available", cost: "≈ ₪20–30 per person*", bestFor: "Flexible arrivals within its window", doorToDoor: "No", availability: "Very restricted weekend/night window; verify", heading: "What about airport-to-Haifa bus 905?", paragraphs: [
-        "Bus 905 appears in route listings for airport–Haifa, but it is not a full-day bus alternative to the train. Historical descriptions of a narrow Saturday-night/early-Sunday operating window need date-specific confirmation in the public journey planner.",
-        "Verify the stop served by your particular bus and whether it matches your hotel. If it ends at HaMifrats or another major station you may still need a local connection."
-      ], checklist: ["Confirm a real departure for your landing date.", "Check the exact Terminal 3 boarding stop and city destination.", "Plan a second option if the timing does not work."] },
+        ...commonTransfer, "It can be useful for Mount Carmel accommodation, larger parties or a cruise departure. If travelling to a port, give the ship name, terminal, check-in deadline and required drop-off. Flight-delay and road contingencies matter. The separate private transfer to Haifa page covers the dedicated service and quote request."
+      ], inlineLinks: [{ text: "private transfer to Haifa page", to: "/travel-blog/ben-gurion-airport-to-haifa/" }, checklist: ["Confirm luggage and vehicle size.", "If travelling to a ship, share boarding deadlines.", "Request the exact Haifa hotel or terminal entrance."] },
+      { id: "bus", name: "Bus 905 (limited)", time: "About 110–125+ min when available", cost: "Current bus fare: check planner", bestFor: "Flexible arrivals within its window", doorToDoor: "No", availability: "Limited Saturday night / early Sunday; check actual departure", heading: "What about airport-to-Haifa bus 905?", paragraphs: [
+        "The current Egged 905 listings show service from Ben Gurion Airport Terminal 3, Level 2, toward Haifa on a narrow Saturday-night and early-Sunday schedule. The route is not a normal daily alternative to the train, so verify a specific departure after clearing passport control and baggage.",
+        "The listed route stops include MATAM, Haifa Hof HaCarmel and HaMifratz Central Station. Check which stop serves your hotel and whether you can complete the final journey after dark. For fares and ticket validation, see the getting around Israel guide."
+      ], inlineLinks: [{ text: "getting around Israel guide", to: "/travel-blog/getting-around-israel/" }, checklist: ["Confirm a real departure for your landing date.", "Check the exact Terminal 3 boarding stop and city destination.", "Plan a second option if the timing does not work."] },
       { id: "rental", name: "Rental car", time: "About 75–110+ min driving plus collection", cost: "Rental + insurance, tolls, fuel and parking", bestFor: "A northern Israel road trip", doorToDoor: "Yes, where permitted", availability: "Collection hours vary", heading: "Renting for Haifa and northern Israel", paragraphs: [
-        ...commonRental, "A rental can be useful if Haifa is a base for Akko, Galilee or several rural stops, but less so for a brief city-only stay. Carmel slopes and some central streets complicate parking."
-      ], checklist: ["Ask about parking at your Haifa hotel.", "Compare Highway 6 toll handling.", "Check desk hours if arriving on Shabbat."] },
+        ...commonRental, "A rental can be useful if Haifa is a base for Akko, Galilee or several rural stops, but less so for a brief city-only stay. Carmel slopes and some central streets complicate parking. Check the car rental page for vehicle choices and conditions."
+      ], inlineLinks: [{ text: "car rental page", to: "/car-rental/" }, checklist: ["Ask about parking at your Haifa hotel.", "Compare Highway 6 toll handling.", "Check desk hours if arriving on Shabbat."] },
     ],
     stations: [
       { name: "Haifa Hof HaCarmel", time: "≈ 80–85 min", usefulFor: "Southern Haifa, Carmel Beach and local bus connections." },
       { name: "Haifa Bat Galim", time: "≈ 85–90 min", usefulFor: "Bat Galim, Rambam Hospital and cable-car area." },
       { name: "Haifa Center HaShmona", time: "≈ 90–100 min", usefulFor: "Downtown, German Colony and Haifa Port vicinity." },
-      { name: "HaMifrats Central", time: "≈ 100–110 min", usefulFor: "Eastern/northern connections and regional buses." },
+      { name: "Lev HaMifratz / HaMifratz Central", time: "Check actual service", usefulFor: "Haifa Bay hub, intercity buses and northern onward connections." },
     ],
     connections: [
       "German Colony and downtown: Center HaShmona is often a sensible place to start, but confirm how to reach your specific hotel.",
@@ -256,9 +276,9 @@ const byId: Record<AirportJourneyId, AirportJourneyGuide> = {
       "Cruise departure: verify the correct passenger-terminal entrance, boarding deadline and access rules rather than using 'Haifa Port' as the only destination."
     ],
     weekend: [
-      "Rail service normally pauses during the main Shabbat period and most Jewish holidays. Bus 905 has historically had a limited weekend-night service but must be checked for your exact day.",
+      "Rail service normally pauses during the main Shabbat period and most Jewish holidays. Published bus 905 service is limited to Saturday night and early Sunday, and must be checked for your specific date.",
       "If no operating rail/bus connection suits the flight, compare the official airport taxi queue with an advance private transfer. Price, vehicle size and meeting instructions differ.",
-      "The former Amal airport sherut to Haifa is reported discontinued. Do not rely on older travel articles listing it as an operating shared minibus."
+      "The former Amal shared airport taxi to Haifa has been discontinued. The Sherut in Israel guide explains why old Amal listings cannot be relied upon; the airport Shabbat transport guide covers currently available weekend options."
     ],
     advice: [
       "Pick your station by hotel elevation and actual bus connection, not by the first Haifa station on the railway line.",
@@ -270,8 +290,12 @@ const byId: Record<AirportJourneyId, AirportJourneyGuide> = {
       { q: "Is there a direct train from Ben Gurion Airport to Haifa?", a: "Direct trains are generally available during regular rail operation, but stops, frequency and service disruptions vary. Check Israel Railways for your destination station and travel date." },
       { q: "Which station is best for Haifa's German Colony?", a: "Haifa Center HaShmona often works well for downtown and the German Colony. Confirm your hotel's actual street and the remaining walk or taxi ride." },
       { q: "Can I use bus 905 on a weekday?", a: "Do not assume it runs through the day or every weekday. Its operation has been limited; use a dated public-transport planner and have a train/taxi alternative." },
-      { q: "Are there airport sheruts to Haifa?", a: "The former Amal shared airport taxi service is reported discontinued. A historical phone number or forum recommendation is not proof of an active service." },
-      { q: "How should I plan an airport-to-cruise-port connection?", a: "Supply the exact Haifa passenger terminal, ship and check-in deadline. Leave a wide margin and confirm meeting/drop-off access and delay arrangements." }
+      { q: "Are there airport sheruts to Haifa?", a: "No. The former Amal airport shared-taxi service has been discontinued. Historical listings and contact details are not a current transport option." },
+      { q: "How should I plan an airport-to-cruise-port connection?", a: "Supply the exact Haifa passenger terminal, ship and check-in deadline. Leave a wide margin and confirm meeting/drop-off access and delay arrangements." },
+      { q: "Which Haifa railway station should I use for a Mount Carmel hotel?", a: "The rail corridor is on the coast; most Mount Carmel hotels require an onward uphill bus or taxi. Compare the actual hotel address and a practical connection." },
+      { q: "Is airport bus 905 available every day?", a: "No. The checked late-2026 timetable shows limited Saturday-night and early-Sunday service, not a regular daily route. Verify the actual departure before depending on it." },
+      { q: "Can I get an Uber from Ben Gurion Airport to Haifa?", a: "No. Uber passenger rides are not available in Israel in 2026. Use an official airport taxi or a confirmed private transfer." },
+      { q: "How do I travel from TLV to Haifa Port for a cruise?", a: "Confirm the ship, passenger-terminal entrance and boarding deadline. Consider the railway connection, final walk and baggage; for a timed arrival a direct confirmed vehicle may be easier." },
     ],
     related: [{ label: "Official Ben Gurion Airport taxi booking and pickup", to: "/travel-blog/ben-gurion-airport-taxis/" }, { label: "Where to stay in Haifa", to: "/travel-blog/best-hotels-in-haifa/" }, { label: "Haifa shore excursions", to: "/haifa-shore-excursions/" }, { label: "Getting around Israel", to: "/travel-blog/getting-around-israel/" }]
   },
