@@ -54,7 +54,7 @@ export const taxiGuideCluster: Record<"taxis" | "taxiFares" | "airportTaxis", Tr
         paragraphs: [
           "Licensed Israeli taxis operate under transport regulations. Look for the proper taxi identification, a roof sign bearing the Hebrew word monit (מונית), and the vehicle's licensing details. White taxis are common, but color alone does not prove that a vehicle is licensed.",
           "If you have booked through an app, match the license plate and driver information shown in your booking. At an airport or major transport hub, follow the official taxi signage instead of accepting an unsolicited approach inside a terminal.",
-          "If you plan to cross between Israel, East Jerusalem and Palestinian Authority areas, ask in advance whether the driver and vehicle are permitted to complete the entire route; availability and access can differ by area. For other transport modes, see our getting around Israel guide.",
+          "If you plan to cross between Israel, East Jerusalem and Palestinian Authority areas, ask in advance whether the driver and vehicle are permitted to complete the entire route; availability and access can differ by area. For other transport modes, see my getting around Israel guide.",
         ],
         inlineLinks: [{ text: "getting around Israel guide", to: travelGuidePaths.israel }],
         sourceIds: ["taxi-passenger-rights"],
@@ -65,7 +65,7 @@ export const taxiGuideCluster: Record<"taxis" | "taxiFares" | "airportTaxis", Tr
         paragraphs: [
           "In central Tel Aviv, Jerusalem, Haifa and other busy areas, you may be able to hail an available licensed taxi on the street. Tell the driver the actual address and confirm the payment method and regulated meter before departure. At peak hours, late at night or in remote places, street hailing may not be practical.",
           "Taxi stands are found near major hotels, railway stations, hospitals and shopping areas. A hotel or local dispatcher can also arrange a pickup; ask whether a regulated ordering addition applies and keep a dispatcher's phone number or your hotel address available offline.",
-          "Taxi apps can display your pickup point, driver and vehicle information, and booking history. Enter a precise street address or entrance pin, verify that the driver accepts the ride, and do not assume that an estimated fare is necessarily fixed. For choosing an app, see our Uber, Gett and Yango guide.",
+          "Taxi apps can display your pickup point, driver and vehicle information, and booking history. Enter a precise street address or entrance pin, verify that the driver accepts the ride, and do not assume that an estimated fare is necessarily fixed. For choosing an app, see my Uber, Gett and Yango guide.",
           "Private transfers are a different booking product: a particular vehicle, route and pickup may be agreed in advance under a written quote. Check what is included and when the arrangement becomes a confirmed reservation.",
         ],
         inlineLinks: [{ text: "Uber, Gett and Yango guide", to: travelGuidePaths.uber }],
@@ -87,7 +87,7 @@ export const taxiGuideCluster: Record<"taxis" | "taxiFares" | "airportTaxis", Tr
         paragraphs: [
           "Gett is a major licensed-taxi booking option in Israel. Yango may provide another local app-based choice, but coverage and available features should be checked for your pickup location. Register in advance and keep a backup if a driver is unavailable.",
           "Uber passenger rides are not available in Israel in 2026. Gett and Yango are local taxi-booking alternatives; the separate Uber guide compares their practical use, while this article covers how licensed taxis operate.",
-          "For an airport pickup, the official Gett taxi procedure uses a code and a physical authorized queue; the detailed airport instructions are covered in our airport taxi guide.",
+          "For an airport pickup, the official Gett taxi procedure uses a code and a physical authorized queue; the detailed airport instructions are covered in my airport taxi guide.",
         ],
         inlineLinks: [{ text: "separate Uber guide", to: travelGuidePaths.uber }, { text: "airport taxi guide", to: travelGuidePaths.airportTaxis }],
         sourceIds: ["guide-gett"],
@@ -107,10 +107,10 @@ export const taxiGuideCluster: Record<"taxis" | "taxiFares" | "airportTaxis", Tr
         id: "holidays", title: "Taxis on Shabbat and Jewish Holidays",
         paragraphs: [
           "Taxis can operate during Shabbat and on many Jewish holidays even when most regular train and bus services are suspended. That does not guarantee an available car: local driver supply, demand and the particular holiday can all affect your options.",
-          "Regulated nighttime, weekend and holiday tariff periods are defined by the tariff schedule, not simply by sunset. For the applicable A, B and C hours and prices, use our fares guide. For travel from the airport during the main Shabbat break, see the separate airport weekend transport guide.",
-          "Jewish holidays, national observances and special events can affect transport schedules, traffic and availability. For help planning your travel dates, see our Israel's Calendar of Events, covering important holidays, observances and events throughout the year. Yom Kippur requires particularly careful advance planning; do not assume ordinary road travel is available.",
+          "Regulated nighttime, weekend and holiday tariff periods are defined by the tariff schedule, not simply by sunset. For the applicable A, B and C hours and prices, use my fares guide. For travel from the airport during the main Shabbat break, see the separate airport weekend transport guide.",
+          "Jewish holidays, national observances and special events can affect transport schedules, traffic and availability. For help planning your travel dates, see my Israel's Calendar of Events, covering important holidays, observances and events throughout the year. Yom Kippur requires particularly careful advance planning; do not assume ordinary road travel is available.",
         ],
-        inlineLinks: [{ text: "our fares guide", to: travelGuidePaths.taxiFares }, { text: "airport weekend transport guide", to: travelGuidePaths.shabbat }, { text: "Israel's Calendar of Events", to: travelGuidePaths.calendar }],
+        inlineLinks: [{ text: "my fares guide", to: travelGuidePaths.taxiFares }, { text: "airport weekend transport guide", to: travelGuidePaths.shabbat }, { text: "Israel's Calendar of Events", to: travelGuidePaths.calendar }],
         sourceIds: ["taxi-tariff-hours"],
       },
       {
@@ -284,7 +284,7 @@ export const taxiGuideCluster: Record<"taxis" | "taxiFares" | "airportTaxis", Tr
         id: "holidays", title: "Shabbat, Holidays and Late-Night Taxi Prices",
         paragraphs: [
           "Shabbat and legally recognized holidays fall into designated higher tariff periods. The price may rise even for a journey of identical distance and duration. Taxi availability and longer waiting times are separate from the regulated fare.",
-          "Our Israel events calendar helps you identify dates on which roads, attractions and public transport may change, but you must still check whether a specific date legally triggers holiday taxi tariffs. Yom Kippur needs exceptional advance planning. For the airport-specific options, read our airport Shabbat transport guide.",
+          "My Israel events calendar helps you identify dates on which roads, attractions and public transport may change, but you must still check whether a specific date legally triggers holiday taxi tariffs. Yom Kippur needs exceptional advance planning. For the airport-specific options, read my airport Shabbat transport guide.",
         ],
         inlineLinks: [{ text: "Israel events calendar", to: travelGuidePaths.calendar }, { text: "airport Shabbat transport guide", to: travelGuidePaths.shabbat }],
         sourceIds: ["taxi-tariff-hours"],
@@ -376,7 +376,7 @@ export const taxiGuideCluster: Record<"taxis" | "taxiFares" | "airportTaxis", Tr
         id: "terminal3", title: "Terminal 3: Exit 03 for Immediate Taxis",
         photo: terminalHallPhoto,
         paragraphs: [
-          "After passport control, baggage collection and customs, follow signs for the authorized taxi queue at Terminal 3's ground floor, Exit 03. Keep the Gett ride code ready before joining the line. Our airport arrival guide explains passport control, baggage and customs before reaching this point.",
+          "After passport control, baggage collection and customs, follow signs for the authorized taxi queue at Terminal 3's ground floor, Exit 03. Keep the Gett ride code ready before joining the line. My airport arrival guide explains passport control, baggage and customs before reaching this point.",
           "Do not mistake the scheduled-ride pickup point on Level 2 for the on-demand queue on the ground floor. These are different services with different meeting instructions.",
           "Ignore unsolicited approaches inside the terminal when they cannot be matched to a confirmed service. The dispatcher at the authorized taxi line can help you find the next vehicle.",
         ],
@@ -433,7 +433,7 @@ export const taxiGuideCluster: Record<"taxis" | "taxiFares" | "airportTaxis", Tr
         paragraphs: [
           "The airport authority publishes the authorized taxi service as available around the clock, but a 24-hour operation is not a promise of no waiting. Vehicle availability can fluctuate at busy times and on holidays.",
           "For arriving passengers during Shabbat, taxis are one option when much scheduled public transport is suspended. The dedicated Shabbat guide compares other possible transport arrangements and advises checking the exact travel date.",
-          "Jewish holidays, national observances and special dates can affect schedules and travel planning. Our Israel's Calendar of Events helps you identify those dates; Yom Kippur deserves special advance caution.",
+          "Jewish holidays, national observances and special dates can affect schedules and travel planning. My Israel's Calendar of Events helps you identify those dates; Yom Kippur deserves special advance caution.",
         ],
         inlineLinks: [{ text: "dedicated Shabbat guide", to: travelGuidePaths.shabbat }, { text: "Israel's Calendar of Events", to: travelGuidePaths.calendar }],
         sourceIds: ["guide-iaa"],
@@ -476,7 +476,7 @@ export const taxiGuideCluster: Record<"taxis" | "taxiFares" | "airportTaxis", Tr
         id: "support", title: "Lost Property, Receipts and Gett Support",
         paragraphs: [
           "Keep your ride code, booking details, fare receipt, driver or plate number and travel time. These help Gett or the operator identify a particular journey if luggage or personal property was left in the vehicle.",
-          "Gett publishes support through its app and website and lists the short number *2299 for assistance following an order made at a self-service kiosk. For a formal complaint about a licensed taxi service, the Ministry of Transport also offers an official process. For airline baggage problems before leaving the terminal, see our airport arrival and baggage guide.",
+          "Gett publishes support through its app and website and lists the short number *2299 for assistance following an order made at a self-service kiosk. For a formal complaint about a licensed taxi service, the Ministry of Transport also offers an official process. For airline baggage problems before leaving the terminal, see my airport arrival and baggage guide.",
         ],
         inlineLinks: [{ text: "airport arrival and baggage guide", to: travelGuidePaths.arrival }],
         sourceIds: ["guide-gett", "taxi-complaints"],
