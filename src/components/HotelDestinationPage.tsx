@@ -1,6 +1,7 @@
 import { Link, type LinkProps } from "@tanstack/react-router";
 import { ArrowRight, MapPin } from "lucide-react";
 import { hotelCategoryGuides, type HotelStayDestination } from "@/data/content";
+import { destinationBaseChoices } from "@/data/localEditorialInsights";
 import { linksForPage } from "@/data/registry";
 import { AreaMap } from "@/components/AreaMap";
 import { GuideHeader, OnThisPage, Section, Checklist, FaqList, ProviderSection, SourceList, RelatedLinks } from "@/components/Guide";
@@ -12,6 +13,7 @@ const sections = [["overview", "Start here"], ["categories", "Choose your stay"]
 export function HotelDestinationPage({ guide: g }: { guide: HotelStayDestination }) {
   const categories = hotelCategoryGuides.filter((guide) => guide.destinationId === g.id);
   const hotelIds = g.groups.flatMap((group) => group.hotelIds);
+  const baseChoices = destinationBaseChoices[g.id] || [];
   const pageId = `stay-${g.id}`;
   return (
     <main className="pb-8">
@@ -34,6 +36,14 @@ export function HotelDestinationPage({ guide: g }: { guide: HotelStayDestination
           <div className="mt-5"><AreaMap area={{ name: `${g.name} hotel region`, map: g.map }} /></div>
           <div className="mt-5 grid gap-4 md:grid-cols-3">{g.locations.map((location) => <div key={location.name} className="rounded-2xl border bg-card p-5"><MapPin className="h-5 w-5 text-primary" aria-hidden /><h3 className="mt-3 text-xl">{location.name}</h3><p className="mt-2 text-sm! leading-relaxed text-muted-foreground">{location.text}</p></div>)}</div>
           {g.arrival.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
+          {baseChoices.length > 0 && <div className="mt-7">
+            <h3 className="text-xl font-semibold">Choose a base for the way you will travel</h3>
+            <div className="mt-4 grid gap-3 md:grid-cols-3">{baseChoices.map((choice) => <article key={choice.visitor} className="rounded-xl border bg-secondary/40 p-4">
+              <p className="text-sm font-semibold">{choice.visitor}</p>
+              <h4 className="mt-2 text-lg font-semibold text-primary">{choice.base}</h4>
+              <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{choice.reason}</p>
+            </article>)}</div>
+          </div>}
         </Section>
         <div id="book" className="mt-14 scroll-mt-32"><p className="eyebrow">Your accommodation shortlist</p><h2 className="mt-2 text-3xl">Hotels by travel style</h2><p className="mt-3 text-muted-foreground">Start with a category, compare the individual properties and check room options on the booking site.</p><StayBookingDisclosure /></div>
         {g.groups.map((group) => <section id={group.id} key={group.id} aria-labelledby={`${group.id}-h`} className="mt-14 scroll-mt-32" data-testid="stay-hotel-group">
