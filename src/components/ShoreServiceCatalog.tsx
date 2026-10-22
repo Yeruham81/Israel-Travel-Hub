@@ -47,7 +47,7 @@ export function ShoreServiceCatalog({ portId, filters, onFilterChange, itinerary
     {visible.length > 0 ? <>
       {privateTours.length > 0 && <section aria-labelledby="owner-tours-h" data-section="moshe-private-tours">
         <p className="text-xs font-bold uppercase tracking-widest text-primary">Personally arranged with Moshe Barak</p>
-        <h3 id="owner-tours-h" className="mt-2 text-2xl font-semibold">My four private day trips from {port.name} Port</h3>
+        <h3 id="owner-tours-h" className="mt-2 text-2xl font-semibold">My private day trips from {port.name} Port</h3>
         <p className="mt-3 max-w-3xl text-sm leading-relaxed text-muted-foreground">Choose a private car-and-driver itinerary, then send me your ship's schedule and party details for a tailored quote. Licensed guiding and site admissions are arranged separately.</p>
         <ul aria-label={`My private day trips from ${port.name} Port`} className="mt-5 grid gap-5 sm:grid-cols-2">
       {privateTours.map((service) => {
@@ -81,7 +81,7 @@ export function ShoreServiceCatalog({ portId, filters, onFilterChange, itinerary
       })}
     </ul>
       </section>}
-      {partnerTours.length > 0 &&           <section aria-labelledby="partner-tours-h" className={privateTours.length ? "mt-12 border-t pt-10" : "mt-7"}>
+      {partnerTours.length > 0 && <section aria-labelledby="partner-tours-h" className={privateTours.length ? "mt-12 border-t pt-10" : "mt-7"}>
             <p className="text-xs font-bold uppercase tracking-widest text-primary">Independent excursion providers</p>
             <h3 id="partner-tours-h" className="mt-2 text-2xl font-semibold">More guided shore excursions from {port.name}</h3>
             <p className="mt-3 max-w-3xl text-sm leading-relaxed text-muted-foreground">These tours are offered by independent operators and booked on their own booking platforms. Check the exact price, what is included and the port-return arrangements before paying.</p>
