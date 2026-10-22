@@ -31,7 +31,7 @@ export function shorePortMeta(id: ShorePortId) {
   }] };
 }
 
-const sections = [["itineraries", "Tours & day trips"], ["request-quote", "Request a quote"], ["timing", "Ship timing"], ["format", "Driver or guide"], ["check", "Before booking"], ["faq", "FAQ"], ["sources", "Sources"]] as const;
+const sections = [["itineraries", "Tours & day trips"], ["request-quote", "Request a quote"], ["route-fit", "Which route fits?"], ["port-access", "Port access"], ["timing", "Ship timing"], ["format", "Driver or guide"], ["check", "Before booking"], ["faq", "FAQ"], ["sources", "Sources"]] as const;
 const focusQuote = () => requestAnimationFrame(() => document.getElementById("request-quote")?.focus({ preventScroll: true }));
 
 export function PortPage({ id, filters: routeSearch, onFilterChange }: { id: ShorePortId; filters: ShoreServiceSearch; onFilterChange: (filters: ShoreServiceSearch) => void }) {
@@ -66,6 +66,21 @@ export function PortPage({ id, filters: routeSearch, onFilterChange }: { id: Sho
 
     <Section id="overview" title={`Make the most of your day from ${port.name}`}>
       {port.overview.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
+    </Section>
+    <Section id="route-fit" title={`Which excursion fits your ${port.name} port call?`}>
+      <p>These are planning tradeoffs, not promised journey durations. Count from your permitted disembarkation and actual pickup until the return deadline, allowing time for traffic, walking and port entry.</p>
+      <div role="region" aria-label={`Route choices from ${port.name} Port`} tabIndex={0} className="mt-5 overflow-x-auto rounded-xl border">
+        <table className="w-full min-w-[680px] text-left text-sm">
+          <caption className="sr-only">Destination, who it suits and the main time or access constraint</caption>
+          <thead className="bg-secondary"><tr><th scope="col" className="p-3">Route</th><th scope="col" className="p-3">A good fit for</th><th scope="col" className="p-3">Main constraint</th></tr></thead>
+          <tbody className="divide-y">{port.routeFit.map((choice) => <tr key={choice.route}><th scope="row" className="p-3 font-semibold">{choice.route}</th><td className="p-3">{choice.goodFor}</td><td className="p-3">{choice.constraint}</td></tr>)}</tbody>
+        </table>
+      </div>
+      {id === "ashdod" && <p className="mt-4 text-sm">For Masada, the <a href="https://en.parks.org.il/reserve-park/masada-national-park" target="_blank" rel="noopener noreferrer" className="font-semibold text-primary underline">official park page</a> lists advance visit coordination and the last cable-car ascent one hour before closing. Check the current visit slot before treating it as a cruise-day stop.</p>}
+    </Section>
+    <Section id="port-access" title={port.portAccess.heading}>
+      {port.portAccess.paragraphs.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
+      <p className="text-sm"><a href={port.portAccess.source.url} target="_blank" rel="noopener noreferrer" className="font-semibold text-primary underline">{port.portAccess.source.title} (official source)</a></p>
     </Section>
     <section aria-labelledby="benefits-h" className="mt-12"><h2 id="benefits-h" className="text-3xl">What a private car and driver covers</h2><ul className="mt-5 grid gap-4 sm:grid-cols-2">{shoreExcursionBenefits.map((benefit) => <li key={benefit.title} className="rounded-xl border bg-card p-5"><h3 className="text-xl">{benefit.title}</h3><p className="mt-3 text-sm leading-relaxed text-muted-foreground">{benefit.text}</p></li>)}</ul></section>
 
