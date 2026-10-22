@@ -36,7 +36,7 @@ export const taxiGuideCluster: Record<"taxis" | "taxiFares" | "airportTaxis", Tr
       { label: "Official taxi fares and tariff hours", to: travelGuidePaths.taxiFares },
       { label: "Official Ben Gurion Airport taxis", to: travelGuidePaths.airportTaxis },
       { label: "Uber, Gett and Yango alternatives", to: travelGuidePaths.uber },
-      { label: "Jewish holidays and events", to: travelGuidePaths.calendar },
+      { label: "Airport transport on Shabbat", to: travelGuidePaths.shabbat },
     ],
     comparison: {
       caption: "Choose the right taxi booking method",
