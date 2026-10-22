@@ -275,7 +275,7 @@ export const airportTransferRates: AirportTransferRate[] = ([
 ] as const).map(([id, destination, amount, popular]) => ({
   id, destination, popular,
   price: { kind: "published_starting_rate", currency: "ILS", amount, basis: "per_vehicle", maxPartySize: 4,
-    conditions: "One-way weekday transfer for up to 4 passengers. Extra charges may apply for night, weekend or holiday trips. I confirm the final price and availability in writing; request at least 24 hours ahead.",
+    conditions: "One-way weekday transfer for up to 4 passengers. Extra charges may apply for night, weekend or holiday trips. I confirm the final price and availability in writing; contact me in advance, preferably early for larger parties or special vehicle needs.",
     sourceId: "moshe-airport-transfers" },
 }));
 
@@ -884,7 +884,7 @@ export const sources: SourceReference[] = [
     publisher: "Israel-Taxi.com (Moshe Barak)",
     url: `${OWNER_BASE}/airport-transfers/`,
     checkedAt: AIRPORT_TRANSFER_CHECK_DATE,
-    note: "Publisher's starting fares for eleven Ben Gurion airport destinations, for up to 4 passengers on weekdays. Extra charges may apply for night, weekend or holiday trips; at least 24 hours' notice; final price and availability by quote. Not live inventory.",
+    note: "Publisher's starting fares for eleven Ben Gurion airport destinations, for up to 4 passengers on weekdays. Extra charges may apply for night, weekend or holiday trips; advance contact recommended; final price and availability by quote. Not live inventory.",
   },
   {
     id: "intui-airport",
@@ -1670,7 +1670,7 @@ export const offers: Offer[] = [
       amount: 550,
       basis: "per_vehicle",
       maxPartySize: 4,
-      conditions: "Published weekday starting fare for up to 4 passengers. Extra charges may apply for night, weekend or holiday trips. Minimum 24 hours' notice. Not a live quote.",
+      conditions: "Published weekday starting fare for up to 4 passengers. Extra charges may apply for night, weekend or holiday trips. Please inquire in advance. Not a live quote.",
       sourceId: "moshe-airport-transfers",
     },
     maxPassengersKnown: 4,
