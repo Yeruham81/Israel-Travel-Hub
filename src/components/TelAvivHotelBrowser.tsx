@@ -23,10 +23,10 @@ export function TelAvivHotelBrowser() {
       : telAvivAreaGuides.findIndex((area) => area.id === a.areaId) - telAvivAreaGuides.findIndex((area) => area.id === b.areaId) || a.name.localeCompare(b.name));
 
   return (
-    <section id="hotel-catalog" aria-labelledby="hotel-catalog-h" className="mt-8 scroll-mt-32">
+    <section id="book" aria-labelledby="hotel-catalog-h" className="mt-8 scroll-mt-32">
       <div className="rounded-3xl border bg-secondary/40 p-5 sm:p-7">
         <p className="eyebrow">A quicker way to choose</p>
-        <h2 id="hotel-catalog-h" className="mt-2 text-3xl md:text-4xl">Browse Tel Aviv hotels by area</h2>
+        <h2 id="hotel-catalog-h" className="mt-2 text-3xl md:text-4xl">Already know your dates? Browse Tel Aviv stays</h2>
         <p className="mt-3 max-w-3xl leading-relaxed text-muted-foreground">
           My selected hotels are available to compare here without opening every neighborhood guide. Choose an area to narrow the cards, or view all stays and open the hotel's booking page to enter your travel dates.
         </p>
