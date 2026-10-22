@@ -148,6 +148,41 @@ describe("migrated practical guides", () => {
     expect(JSON.stringify(shabbat)).not.toMatch(/guaranteed pickup|150–230|300–360|500–600/);
   });
 
+  it("covers distinct Shabbat airport search intents with cited facts and topic-specific images", () => {
+    const guide = travelGuides.shabbat;
+    expect(guide.sections.map((section) => section.id)).toEqual([
+      "shabbat-hours", "weekend-711", "terminal-transfer", "taxis-transfers",
+      "destinations", "luggage-accessibility", "rental-car", "restart", "to-the-airport",
+    ]);
+    expect(guide.sections.filter((section) => section.photo)).toHaveLength(2);
+    expect(guide.faqs.length).toBeGreaterThanOrEqual(12);
+    expect(guide.sections.find((section) => section.id === "terminal-transfer")!.paragraphs.join(" ")).toMatch(/Level G near Gate 01.*opposite Gate 4.*15-minute frequency/s);
+    expect(guide.sections.find((section) => section.id === "taxis-transfers")!.paragraphs.join(" ")).toMatch(/24 hours a day.*Exit 03.*Exit 23/s);
+    expect(guide.sections.find((section) => section.id === "destinations")!.tables?.[0]?.rows).toHaveLength(5);
+    for (const section of guide.sections) for (const link of section.inlineLinks || []) {
+      expect(section.paragraphs.join(" ").split(link.text)).toHaveLength(2);
+    }
+    expect(guide.sections.find((section) => section.id === "taxis-transfers")!.inlineLinks?.map((link) => link.to)).toEqual([
+      travelGuidePaths.airportTaxis, travelGuidePaths.taxiFares, "/transfers/",
+    ]);
+  });
+
+  it("renders contextual Shabbat article links inside the relevant paragraphs rather than only related cards", async () => {
+    const router = await routerAt(travelGuidePaths.shabbat);
+    const Page = ShabbatRoute.options.component!;
+    const { container } = render(<RouterContextProvider router={router}><Page /></RouterContextProvider>);
+    for (const section of travelGuides.shabbat.sections) {
+      const element = container.querySelector(`#${section.id}`)! as HTMLElement;
+      for (const link of section.inlineLinks || []) {
+        const withinParagraph = within(element).getByRole("link", { name: link.text });
+        expect(withinParagraph).toHaveAttribute("href", link.to);
+        expect(withinParagraph.closest("p")).toBeTruthy();
+      }
+    }
+    expect(container.querySelector("#weekend-711")?.textContent).toMatch(/free.*Terminal 1.*timetable/is);
+    expect(container.querySelector("#taxis-transfers")?.textContent).toMatch(/meter.*regulated/is);
+  });
+
   it("distinguishes baptism sites, church clusters and region-specific Dead Sea planning without blanket operating claims", () => {
     expect(travelGuides.baptism.answer).toMatch(/Yardenit.*Sea of Galilee.*Qasr el-Yahud.*near Jericho/s);
     expect(travelGuides.baptism.reviewNote).toMatch(/different hour sets|differing hour|different hours/i);
