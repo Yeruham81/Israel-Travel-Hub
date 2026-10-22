@@ -1,10 +1,11 @@
 import { createFileRoute, Link, type LinkProps } from "@tanstack/react-router";
-import { ArrowRight, BedDouble, CalendarDays, CarFront, CheckCircle2, MapPin, ReceiptText, Utensils, Accessibility, ExternalLink } from "lucide-react";
+import { ArrowRight, BedDouble, CalendarDays, CheckCircle2, MapPin, ReceiptText, Utensils, Accessibility, ExternalLink } from "lucide-react";
 import { AccommodationCard } from "@/components/AccommodationCard";
 import { HubHeader, OnThisPage, FaqList } from "@/components/Guide";
 import { accommodationDestinations } from "@/data/content";
 import { arrivalCards, choiceTips, eventsPhoto, hotelHubFaqs, hotelStyles, itineraryCards, seasonPhoto, seasons, type HubPhoto } from "@/data/hotelHub";
 import { pageMeta } from "@/lib/site";
+import { isPublisherUrl } from "@/data/registry";
 
 export const Route = createFileRoute("/hotels")({
   head: () =>
@@ -35,7 +36,7 @@ const tipIcons = {
   calendar: CalendarDays,
 };
 
-const internalCardClass = "group block h-full rounded-2xl border bg-card transition-colors hover:border-primary focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary";
+const internalCardClass = "group h-full rounded-2xl border bg-card transition-colors hover:border-primary focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary";
 const actionClass = "mt-4 inline-flex items-center gap-2 font-semibold text-primary underline underline-offset-4 group-hover:text-primary/80";
 
 function HotelPhoto({ photo, className = "aspect-[16/9]" }: { photo: HubPhoto; className?: string }) {
@@ -53,7 +54,7 @@ function HotelPhoto({ photo, className = "aspect-[16/9]" }: { photo: HubPhoto; c
 }
 
 function PhotoCredits({ photos }: { photos: HubPhoto[] }) {
-  const unique = [...new Map(photos.filter((p) => p.sourceUrl).map((p) => [p.sourceUrl!, p])).values()];
+  const unique = [...new Map(photos.filter((p) => p.sourceUrl && !isPublisherUrl(p.sourceUrl)).map((p) => [p.sourceUrl!, p])).values()];
   if (!unique.length) return null;
   return (
     <details className="mt-12 rounded-xl border bg-card p-4 text-xs text-muted-foreground">
