@@ -19,7 +19,7 @@ const routes = {
       { id: "buses", icon: Bus, name: "Public bus", benefit: "For independent travellers", detail: "South Buses 231 and 234 take different routes. Confirm where you leave the bus and how you reach Manger Square." },
       { id: "tours", icon: Users, name: "Organised tour", benefit: "For a managed itinerary", detail: "Ask which Bethlehem sites are included, where you meet and how the operator handles the journey across the boundary." },
       { id: "private-taxi", icon: CarFront, name: "Private arrangement", benefit: "For a tailored visit", detail: "Check the driver's permissions and insurance on every leg. A taxi to the crossing is not a taxi through to Bethlehem." },
-      { id: "documents-car", icon: Route, name: "Taxi + crossing", benefit: "For an individually planned trip", detail: "Allow time to cross and arrange the onward ride and Jerusalem return before setting out." },
+      { id: "documents-car", icon: Route, name: "Documents & access", benefit: "Check before travelling", detail: "Check your entry status, any checkpoint rules and the legal and insurance limits on a rental car." },
     ],
     detailsTitle: "Getting to Bethlehem independently",
     details: [
