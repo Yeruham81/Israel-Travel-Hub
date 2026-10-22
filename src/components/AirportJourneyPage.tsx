@@ -161,7 +161,7 @@ export function AirportJourneyPage({ id }: { id: AirportJourneyId }) {
 
         </ul>
       </SourcesDisclosure>
-      {id === "tel-aviv" ? <>
+      {(id === "tel-aviv" || id === "jerusalem") ? <>
         <RelatedLinks title="Related practical guides" items={[
           ...g.related,
           { label: "Taxi fares in Israel", to: "/travel-blog/taxi-fares-in-israel/" },
