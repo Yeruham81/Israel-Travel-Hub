@@ -1,4 +1,5 @@
 import { Link } from "@tanstack/react-router";
+import type { ReactNode } from "react";
 import { Breadcrumbs, Checklist, FaqList, OnThisPage, ProviderCard, RelatedLinks, SourceList } from "@/components/Guide";
 import { guideTopics, travelGuides, type GuideDirectoryEntry, type GuidePhoto, type GuideTopicId, type GuideSection, type GuideTable, type TravelGuide } from "@/data/travelGuides";
 import { publicSources, isPublisherUrl, linksForPage, travelGuidePaths, TRAVEL_GUIDE_CHECK_DATE, type TravelGuideId } from "@/data/registry";
@@ -64,6 +65,25 @@ function GuideDataTable({ table }: { table: GuideTable }) {
   </div>;
 }
 
+/** Link a specific phrase inside a paragraph, keeping all other article text as plain text. */
+function GuideParagraph({ paragraph, inlineLinks }: { paragraph: string; inlineLinks?: GuideSection["inlineLinks"] }) {
+  if (!inlineLinks?.length) return <>{paragraph}</>;
+  const matches = inlineLinks
+    .map(({ text, to }) => ({ text, to, index: paragraph.indexOf(text) }))
+    .filter(({ index }) => index >= 0)
+    .sort((a, b) => a.index - b.index);
+  const parts: ReactNode[] = [];
+  let pos = 0;
+  for (const { text, to, index } of matches) {
+    if (index < pos) continue;
+    parts.push(paragraph.slice(pos, index));
+    parts.push(<Link key={`${index}-${text}`} to={to} className="font-medium text-primary underline underline-offset-4 hover:text-primary/80 focus-visible:outline-2 focus-visible:outline-primary">{text}</Link>);
+    pos = index + text.length;
+  }
+  parts.push(paragraph.slice(pos));
+  return <>{parts}</>;
+}
+
 export function TravelGuidePage({ id }: { id: TravelGuideId }) {
   const guide = travelGuides[id];
   const providers = guide.providerPageId ? linksForPage(guide.providerPageId) : [];
@@ -91,7 +111,7 @@ export function TravelGuidePage({ id }: { id: TravelGuideId }) {
         <h2 id="comparison-h" className="text-3xl">{guide.comparison.caption}</h2>
         <div className="mt-5 max-w-full overflow-x-auto rounded-xl border"><table className="w-full min-w-[560px] text-left text-sm"><caption className="sr-only">{guide.comparison.caption}</caption><thead className="bg-secondary"><tr>{guide.comparison.headers.map((heading) => <th key={heading} scope="col" className="p-4 font-semibold">{heading}</th>)}</tr></thead><tbody className="divide-y">{guide.comparison.rows.map((row, index) => <tr key={index} className="bg-card">{row.map((cell, cellIndex) => cellIndex === 0 ? <th key={cellIndex} scope="row" className="p-4 font-medium">{cell}</th> : <td key={cellIndex} className="p-4 leading-relaxed text-muted-foreground">{cell}</td>)}</tr>)}</tbody></table></div>
       </section>
-      {guide.sections.map((section) => <section key={section.id} id={section.id} aria-labelledby={`${section.id}-h`} className="mt-12 scroll-mt-24"><h2 id={`${section.id}-h`} className="text-3xl">{section.title}</h2>{section.photo && <figure className="mt-5 max-w-3xl"><img src={section.photo.src} alt={section.photo.alt} width={755} height={503} loading="lazy" decoding="async" className="aspect-[3/2] max-h-96 w-full rounded-xl object-cover" /><GuidePhotoCredit photo={section.photo} /></figure>}<div className="mt-4 max-w-4xl space-y-4 leading-relaxed text-muted-foreground">{section.paragraphs.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}</div>{section.tables?.map((table) => <GuideDataTable key={table.caption} table={table} />)}{section.bullets && <ul className="mt-4 list-disc space-y-2 pl-5 leading-relaxed">{section.bullets.map((bullet) => <li key={bullet}>{bullet}</li>)}</ul>}{section.links && <ul className="mt-4 flex flex-wrap gap-x-5 gap-y-2 text-sm">{section.links.map((link) => <li key={link.to}><Link to={link.to} className="font-medium text-primary underline underline-offset-4">{link.label}</Link></li>)}</ul>}<SectionReferences ids={section.sourceIds || []} /></section>)}
+      {guide.sections.map((section) => <section key={section.id} id={section.id} aria-labelledby={`${section.id}-h`} className="mt-12 scroll-mt-24"><h2 id={`${section.id}-h`} className="text-3xl">{section.title}</h2>{section.photo && <figure className="mt-5 max-w-3xl"><img src={section.photo.src} alt={section.photo.alt} width={755} height={503} loading="lazy" decoding="async" className="aspect-[3/2] max-h-96 w-full rounded-xl object-cover" /><GuidePhotoCredit photo={section.photo} /></figure>}<div className="mt-4 max-w-4xl space-y-4 leading-relaxed text-muted-foreground">{section.paragraphs.map((paragraph) => <p key={paragraph}><GuideParagraph paragraph={paragraph} inlineLinks={section.inlineLinks} /></p>)}</div>{section.tables?.map((table) => <GuideDataTable key={table.caption} table={table} />)}{section.bullets && <ul className="mt-4 list-disc space-y-2 pl-5 leading-relaxed">{section.bullets.map((bullet) => <li key={bullet}>{bullet}</li>)}</ul>}{section.links && <ul className="mt-4 flex flex-wrap gap-x-5 gap-y-2 text-sm">{section.links.map((link) => <li key={link.to}><Link to={link.to} className="font-medium text-primary underline underline-offset-4">{link.label}</Link></li>)}</ul>}<SectionReferences ids={section.sourceIds || []} /></section>)}
       <section id="checklist" aria-label="Travel checklist" className="mt-12 scroll-mt-24"><Checklist title="Before you go" items={guide.checklist} /></section>
       {providers.length > 0 && <section id="provider-options" aria-labelledby="providers-h" className="mt-14"><h2 id="providers-h" className="text-3xl">Compare current eSIM plans</h2><p className="mt-3 leading-relaxed text-muted-foreground">These options are based on published product information, not an on-location speed test or a cheapest-price ranking. Links marked “Sponsored link” may earn us a commission at no extra cost to you. Select Israel and verify the exact package before paying.</p><ul className="mt-5 grid gap-4 md:grid-cols-2">{providers.map((link) => <ProviderCard key={link.id} link={link} pageId={guide.providerPageId!} />)}</ul></section>}
       <FaqList faqs={guide.faqs} />
