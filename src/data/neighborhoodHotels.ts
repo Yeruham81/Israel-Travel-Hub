@@ -1,6 +1,6 @@
 /** 28 added neighborhood hotel skeleton records with direct, verified Expedia property URLs.
  * NOT affiliate links: replace only after obtaining per-hotel approved tracking links.
- * City-wide shortlists are intentionally unchanged; additions render on neighborhood pages.
+ * These records feed both the neighborhood pages and the complete city hotel galleries.
  */
 import type { HotelRecommendation, SourceReference } from "@/data/registry";
 
