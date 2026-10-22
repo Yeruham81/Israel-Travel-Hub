@@ -10,7 +10,7 @@ import { travelGuides } from "@/data/travelGuides";
 
 afterEach(cleanup);
 
-async function renderGuide(path: string, component: () => JSX.Element) {
+async function renderGuide(path: string, component: NonNullable<typeof BethlehemRoute.options.component>) {
   const router = createRouter({ routeTree, context: { queryClient: new QueryClient() }, history: createMemoryHistory({ initialEntries: [path] }), trailingSlash: "always" });
   await router.load();
   const Page = component;
@@ -70,7 +70,7 @@ describe("Jerusalem independent day-trip planning guides", () => {
       }
       const head = await route.options.head?.({} as never);
       expect(head?.meta).toContainEqual(expect.objectContaining({ title: expect.stringContaining(guide.title) }));
-      const canonical = head?.links?.find((link) => link.rel === "canonical");
+      const canonical = head?.links?.find((link) => link?.rel === "canonical");
       expect(canonical?.href).toContain(travelGuidePaths[id]);
     }
   });
