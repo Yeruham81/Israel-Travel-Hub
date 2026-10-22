@@ -5,7 +5,7 @@ import { getSource, isPublisherUrl, type HotelRecommendation, type ProviderLink 
 import { recordOutboundClick, relFor } from "@/lib/outbound";
 import { activeHotelNotice } from "@/lib/hotel-notices";
 
-export function StayHotelCard({ hotel, booking, pageId, editorial, compact = false, photo, fallbackPhoto }: { hotel: HotelRecommendation; booking: ProviderLink | undefined; pageId: string; editorial?: Pick<HotelRecommendation, "summary" | "bestFor" | "watch">; compact?: boolean; photo?: HotelIllustration; fallbackPhoto?: { src: string; alt: string } }) {
+export function StayHotelCard({ hotel, booking, pageId, editorial, compact = false, photo, fallbackPhoto }: { hotel: HotelRecommendation; booking: ProviderLink | undefined; pageId: string; editorial?: Pick<HotelRecommendation, "summary" | "bestFor" | "watch"> | undefined; compact?: boolean; photo?: HotelIllustration | undefined; fallbackPhoto?: { src: string; alt: string } | undefined }) {
   const [imageFailed, setImageFailed] = useState(false);
   const notice = activeHotelNotice(hotel);
   const source = getSource(hotel.sourceId);
