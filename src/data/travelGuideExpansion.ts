@@ -39,6 +39,7 @@ export const expandedTravelGuides = {
       { label: "Official airport taxi pickup instructions", to: travelGuidePaths.airportTaxis },
       { label: "Ben Gurion Airport arrival essentials", to: travelGuidePaths.arrival },
       { label: "Are airport sherut services still operating?", to: travelGuidePaths.sherut },
+      { label: "Private airport journey to Jerusalem", to: "/travel-blog/ben-gurion-airport-to-jerusalem/" },
     ],
     comparison: {
       caption: "How to leave Ben Gurion Airport on Shabbat",
