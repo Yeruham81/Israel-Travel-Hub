@@ -72,6 +72,30 @@ describe("shore excursions", () => {
     expect(services).toHaveLength(servicesForPort(id).length);
     const cards = services.filter((card) => card.dataset["serviceKind"] === "private-driver");
     expect(cards).toHaveLength(4);
+    const ownerSection = container.querySelector('[data-section="moshe-private-tours"]');
+    const externalSection = container.querySelector('#partner-tours-h')?.closest('section');
+    expect(ownerSection).not.toBeNull();
+    expect(ownerSection?.querySelector('ul[aria-label^="My private day trips"]')).toHaveClass("sm:grid-cols-2");
+    expect(ownerSection?.querySelectorAll('[data-testid="shore-service-card"]')).toHaveLength(4);
+    expect(externalSection).not.toBeNull();
+    expect(ownerSection!.compareDocumentPosition(externalSection!)).toBe(Node.DOCUMENT_POSITION_FOLLOWING);
+    const externalCards = services.filter((card) => card.dataset["serviceKind"] === "guided-tour");
+    expect(externalSection?.querySelectorAll('[data-testid="shore-service-card"]')).toHaveLength(externalCards.length);
+    for (const externalCard of externalCards) {
+      expect(within(externalCard).getByRole("img")).toHaveAttribute("alt", expect.any(String));
+      expect(externalCard).toHaveTextContent("Tour operator:");
+      expect(externalCard).toHaveTextContent("Booking platform:");
+      expect(externalCard).toMatchObject({ dataset: expect.objectContaining({ serviceKind: "guided-tour" }) });
+      const booking = within(externalCard).getByRole("link", { name: /View on (Viator|GetYourGuide)/ });
+      expect(booking).toHaveAttribute("target", "_blank");
+      expect(booking).toHaveAttribute("rel", expect.stringContaining("noopener noreferrer"));
+      expect(externalCard).toHaveTextContent(/Published starting price|Check current price/);
+      expect(within(externalCard).queryByRole("link", { name: /Request .* from (Ashdod|Haifa)/ })).not.toBeInTheDocument();
+    }
+    const heroCredit = container.querySelector('header figure details');
+    expect(heroCredit).not.toBeNull();
+    expect(heroCredit).not.toHaveAttribute("open");
+    expect(heroCredit?.querySelector("summary")?.textContent).toContain("Photo credits");
     cards.forEach((card, index) => {
       const itinerary = port.itineraries[index]!;
       expect(within(card).getByRole("heading", { level: 3 })).toHaveTextContent(itinerary.destination);
