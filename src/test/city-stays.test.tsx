@@ -118,7 +118,7 @@ describe.each([
 
   it("city gallery matches the complete four-per-area inventory with no missing or duplicate hotel IDs", () => {
     const expected = areas.flatMap((area) => hotelsForArea(area.id, g.id));
-    const inCity = hotelsInCityCatalog(g.id);
+    const inCity = hotelsInCityCatalog(g.id as "jerusalem" | "telaviv");
     expect(inCity).toHaveLength(areas.length * 4);
     expect(new Set(inCity.map((hotel) => hotel.id)).size).toBe(inCity.length);
     expect(inCity.map((hotel) => hotel.id)).toEqual(expected.map((hotel) => hotel.id));
