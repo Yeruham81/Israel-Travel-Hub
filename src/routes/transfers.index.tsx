@@ -61,6 +61,15 @@ function Airport() {
 
     <TransferQuoteForm destinationId={destinationId} onDestinationChange={setDestinationId} />
 
+    <aside className="mt-7 rounded-2xl border bg-secondary/40 p-5 sm:p-6" aria-labelledby="after-request-h">
+      <h2 id="after-request-h" className="text-xl font-semibold">What happens after you send a request?</h2>
+      <ol className="mt-4 grid gap-4 sm:grid-cols-3">
+        <li><strong>1. Route and party details</strong><p className="mt-1 text-sm leading-relaxed text-muted-foreground">I review your flight, hotel address, passenger count and luggage needs.</p></li>
+        <li><strong>2. Written offer</strong><p className="mt-1 text-sm leading-relaxed text-muted-foreground">Vehicle availability, the full quoted price and pickup terms need to be agreed.</p></li>
+        <li><strong>3. Booking confirmation</strong><p className="mt-1 text-sm leading-relaxed text-muted-foreground">Your ride is reserved only after confirmation; save the agreed meeting instructions for your arrival.</p></li>
+      </ol>
+    </aside>
+
     <section id="benefits" aria-labelledby="benefits-h" className="mt-16">
       <p className="eyebrow">Travel with a plan</p><h2 id="benefits-h" className="mt-2 text-3xl">Why arrange your airport pickup with me?</h2>
       <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">{airportTransferBenefits.map((benefit, index) => { const Icon = benefitIcons[index]!; return <div key={benefit.title} className="rounded-xl border bg-card p-5"><Icon className="h-6 w-6 text-primary" aria-hidden /><h3 className="mt-4 text-xl">{benefit.title}</h3><p className="mt-2 text-sm leading-relaxed text-muted-foreground">{benefit.text}</p></div>; })}</div>
