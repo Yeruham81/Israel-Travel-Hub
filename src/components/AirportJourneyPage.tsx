@@ -148,6 +148,12 @@ export function AirportJourneyPage({ id }: { id: AirportJourneyId }) {
         </div>
         <h3 className="mt-6 text-xl font-semibold">Reaching the exact hotel</h3>
         <ul className="mt-3 list-disc space-y-2 pl-5">{g.connections.map(p=><li key={p}>{p}</li>)}</ul>
+        <aside className="mt-7 rounded-2xl border bg-secondary/40 p-5 sm:p-6" aria-label={g.exampleJourney.title}>
+          <h3 className="text-xl font-semibold">{g.exampleJourney.title}</h3>
+          <p className="mt-2 text-sm text-muted-foreground">Illustrative planning example, not a live timetable or reserved connection.</p>
+          <ol className="mt-4 space-y-3">{g.exampleJourney.steps.map((step, index) => <li key={step.label} className="flex gap-3"><span className="font-semibold text-primary">{index + 1}.</span><div><strong>{step.label}</strong><p className="mt-1 text-sm leading-relaxed text-muted-foreground">{step.detail}</p></div></li>)}</ol>
+          <p className="mt-4 border-t pt-4 text-sm leading-relaxed"><strong>Practical choice:</strong> {g.exampleJourney.takeaway}</p>
+        </aside>
       </Section>
       <section id="options" aria-labelledby="options-h" className="mt-14 scroll-mt-28">
         <h2 id="options-h" className="text-3xl">How each transport option works</h2>
