@@ -299,7 +299,7 @@ export const journeyDestinationGuides = {
         "title": "Bus 231 or 234: where to board and what happens next",
         "paragraphs": [
           "The Arab bus station is outside Damascus Gate; the nearby Prophets Terminal is listed by South Buses for both 231 and 234. This is not Jerusalem's western Central Bus Station. Confirm the exact boarding bay, direction and stops with the operator on the travel day.",
-          "Line 231 is labelled Beit Jala. Ask which stop best suits your Bethlehem destination, including any local taxi or onward connection. Line 234 is labelled Bethlehem, but its Checkpoint 300 approach is not a bus all the way to Manger Square: allow for crossing formalities and onward local transport.",
+          "South Buses lists 231 as Beit Jala and 234 as Bethlehem. The first may need a local ride to the centre; the second serves the Checkpoint 300 approach rather than a bus all the way to Manger Square. Plan any crossing formalities and onward local transport.",
           "Check the return stop and the last suitable departure before leaving Jerusalem. South Buses publishes a Rav-Kav payment system; confirm whether cash is accepted on your selected journey and the applicable fare rather than relying on older quoted amounts."
         ],
         "sourceIds": [
@@ -399,7 +399,7 @@ export const journeyDestinationGuides = {
     ],
     "services": [
       {
-        "label": "Bethlehem, Jericho & Jordan River tours",
+        "label": "Compare organised Bethlehem tours",
         "to": "/tours/bethlehem-jericho-jordan-river/"
       },
       {
