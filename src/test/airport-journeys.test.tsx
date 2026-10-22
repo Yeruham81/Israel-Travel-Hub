@@ -112,7 +112,7 @@ describe("four independent airport transportation comparisons", () => {
     expect(g.historicalPrices).toBe(false);
     expect(g.title).toMatch(/Ben Gurion Airport to Jerusalem.*2026.*Train.*Bus.*Taxi/i);
     expect(g.answer).toMatch(/Yitzhak Navon.*free personal travel voucher.*bus 485.*Level 2.*Exit 21/s);
-    expect(g.stations[0].name).toBe("Jerusalem–Yitzhak Navon");
+    expect(g.stations[0]?.name).toBe("Jerusalem–Yitzhak Navon");
     expect(g.options.find(o => o.id === "rail")!.cost).not.toContain("₪");
     expect(g.options.find(o => o.id === "bus")!.cost).not.toContain("₪");
     expect(g.options.find(o => o.id === "taxi")!.cost).toMatch(/meter/i);
