@@ -132,9 +132,51 @@ describe("migrated practical guides", () => {
     expect(travelGuides.taxis.sections.find((section) => section.id === "airport")!.links?.some((link) => link.to === travelGuidePaths.airportTaxis)).toBe(true);
     expect(travelGuides.airportTaxis.comparison.rows.join(" ")).toMatch(/Exit 03.*Exit 23/);
     expect(travelGuides.uber.reviewNote).toMatch(/publisher.*not a live/i);
-    expect(travelGuides.sherut.reviewNote).toMatch(/no current operator closure notice/i);
+    expect(travelGuides.sherut.answer).toMatch(/Nesher.*Jerusalem.*Amal.*Haifa.*no longer operating/s);
     expect(travelGuides.esim.sections.find((section) => section.id === "calling")!.paragraphs.join(" ")).toMatch(/US phone number.*different from an Israeli/s);
     expect(travelGuides.esim.answer).toMatch(/unlimited.*does not promise unlimited full-speed/i);
+  });
+
+  it("keeps the Sherut airport guide factual, separate from local shared taxis, and fully linked", () => {
+    const guide = travelGuides.sherut;
+    expect(guide.title).toMatch(/Nesher.*Amal.*No Longer Operate/);
+    expect(guide.answer).toMatch(/As of 2026.*Nesher.*Amal.*no longer operating/s);
+    expect(guide.facts.map((fact) => fact.text).join(" ")).toMatch(/discontinued.*discontinued/);
+    expect(guide.sections.map((section) => section.id)).toEqual([
+      "nesher-amal", "what-is-sherut", "airport-alternatives", "where-to-go", "official-taxi",
+      "airport-shuttle", "local-sherut", "booked-shared", "weekend",
+    ]);
+    expect(guide.sections.filter((section) => section.photo)).toHaveLength(2);
+    expect(guide.faqs).toHaveLength(11);
+    expect(guide.sections.find((s) => s.id === "where-to-go")!.tables?.[0]?.rows).toHaveLength(4);
+    expect(guide.sections.find((s) => s.id === "official-taxi")!.inlineLinks?.map((link) => link.to)).toEqual([
+      travelGuidePaths.airportTaxis, travelGuidePaths.taxiFares,
+    ]);
+    expect(guide.sections.find((s) => s.id === "weekend")!.inlineLinks?.[0]?.to).toEqual(travelGuidePaths.shabbat);
+    expect(guide.sections.find((s) => s.id === "local-sherut")!.inlineLinks?.map((link) => link.to)).toEqual([
+      travelGuidePaths.israel, travelGuidePaths.telAviv,
+    ]);
+    for (const section of guide.sections) for (const link of section.inlineLinks || []) {
+      expect(section.paragraphs.join(" ").split(link.text), `link text ${link.text} must occur once`).toHaveLength(2);
+    }
+    expect(JSON.stringify(guide)).not.toMatch(/no current operator closure notice|reported discontinued|might still run as Nesher/i);
+    expect(guide.related).toContain("shabbat");
+    expect(guide.related).toContain("airportTaxis");
+  });
+
+  it("renders Sherut's cross-guide links in their article paragraphs", async () => {
+    const router = await routerAt(travelGuidePaths.sherut);
+    const Page = SherutRoute.options.component!;
+    const { container } = render(<RouterContextProvider router={router}><Page /></RouterContextProvider>);
+    for (const section of travelGuides.sherut.sections) {
+      const element = container.querySelector(`#${section.id}`)! as HTMLElement;
+      for (const link of section.inlineLinks || []) {
+        const a = within(element).getByRole("link", { name: link.text });
+        expect(a).toHaveAttribute("href", link.to);
+        expect(a.closest("p")).toBeTruthy();
+      }
+    }
+    expect(container.querySelector("#nesher-amal")?.textContent).toMatch(/Nesher.*stopped.*Amal.*stopped/s);
   });
 
   it("retains the limited Terminal 1 weekend option without copying old fares or treating it as a universal airport shuttle", () => {
