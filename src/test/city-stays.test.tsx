@@ -10,6 +10,7 @@ import { affiliateConfig, getSource, hotelsForArea, linksForPage } from "@/data/
 import { telAvivHotelCatalog } from "@/components/TelAvivHotelBrowser";
 import { readOutboundClicks } from "@/lib/outbound";
 import { telAvivHotelPhotos } from "@/data/telAvivHotelPhotos";
+import { hotelTileCopy } from "@/components/TelAvivHotelBrowser";
 import { routeTree } from "@/routeTree.gen";
 
 // Keep router matching real, while making isolated page renders independent of
@@ -123,6 +124,17 @@ describe("Tel Aviv direct hotel catalog", () => {
       expect(link).toHaveAttribute("href", booking.url);
       expect(link).toHaveAttribute("target", "_blank");
       expect(link.getAttribute("rel")).toContain(booking.isAffiliate ? "sponsored" : "noopener");
+      const card = within(catalog).getAllByTestId("tel-aviv-hotel-card").find((item) => within(item).queryByRole("heading", { name: hotel.name }))!;
+      expect(card).toBeDefined();
+      expect(within(card).getByRole("heading", { name: hotel.name, level: 3 })).toBeInTheDocument();
+      const area = telAvivAreaGuides.find((item) => item.id === hotel.areaId)!;
+      expect(within(card).getByRole("link", { name: `Explore ${area.shortName} area guide` })).toHaveAttribute("href", area.path);
+      expect(within(card).getByTestId("hotel-short-description")).toHaveTextContent(hotelTileCopy[hotel.id]!.description);
+      expect(within(card).getByTestId("hotel-best-for")).toHaveTextContent(`Best for: ${hotelTileCopy[hotel.id]!.bestFor}`);
+      expect(hotelTileCopy[hotel.id]!.bestFor.split(" ").length).toBeLessThanOrEqual(5);
+      expect(hotelTileCopy[hotel.id]!.description.split(" ").length).toBeLessThanOrEqual(24);
+      expect(within(card).getAllByRole("link")).toHaveLength(2);
+      expect(within(card).queryByText("Explore the area")).not.toBeInTheDocument();
     }
     const displayedImages = within(catalog).getAllByTestId("hotel-illustration") as HTMLImageElement[];
     expect(displayedImages).toHaveLength(16);
