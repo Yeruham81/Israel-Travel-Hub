@@ -63,7 +63,7 @@ describe("four independent airport transportation comparisons", () => {
     expect(g.answer).toMatch(/HaHagana.*HaShalom.*Savidor Center.*University/s);
     expect(g.options.find(o => o.id === "rail")?.cost).not.toContain("₪");
     expect(g.options.find(o => o.id === "bus")?.cost).not.toContain("₪");
-    expect(g.options.find(o => o.id === "taxi")?.cost).toContain("Meter");
+    expect(g.options.find(o => o.id === "taxi")?.cost).toMatch(/meter/i);
     expect(g.stations).toHaveLength(4);
     expect(g.photos?.station.alt).toMatch(/Terminal 3/);
     expect(g.photos?.onward.alt).toMatch(/Old Jaffa/);
@@ -111,7 +111,7 @@ describe("four independent airport transportation comparisons", () => {
       const g = airportJourneyGuides[id];
       expect(g.weekend.join(" ")).toMatch(/Shabbat/);
       expect(g.options.find(o => o.id === "private")?.cost).toContain("quote");
-      expect(g.options.find(o => o.id === "taxi")?.cost).toMatch(/Meter/);
+      expect(g.options.find(o => o.id === "taxi")?.cost).toMatch(/meter/i);
     }
     expect(airportJourneyGuides["ein-bokek"].answer).toContain("connection");
     expect(airportJourneyGuides["tel-aviv"].options.find(o => o.id === "weekend")?.name).toContain("711");
