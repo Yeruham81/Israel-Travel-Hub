@@ -4,8 +4,7 @@ import { cityStayGuides, neighborhoodGuidesForCity, type NeighborhoodStayGuide }
 import { areaDecisionNotes } from "@/data/localEditorialInsights";
 import { getSource, hotelsForArea, INFO_CHECK_DATE, linksForPage } from "@/data/registry";
 import { StayHotelCard } from "@/components/StayHotelCard";
-import { telAvivHotelPhotos } from "@/data/telAvivHotelPhotos";
-import { jerusalemHotelPhotos } from "@/data/jerusalemHotelPhotos";
+import { cityHotelPhoto } from "@/data/cityHotelCatalog";
 import { hotelTileCopy } from "@/components/TelAvivHotelBrowser";
 import { jerusalemHotelTileCopy } from "@/components/JerusalemHotelBrowser";
 import { AreaMap, AreaPhotoCredit } from "@/components/AreaMap";
@@ -21,14 +20,7 @@ export function NeighborhoodStayPage({ area }: { area: NeighborhoodStayGuide }) 
   const otherAreas = neighborhoodGuidesForCity(area.cityId).filter((other) => other.id !== area.id);
   const pageId = `stay-area-${area.id}`;
   const airportGuide = city.related.find((item) => item.label.startsWith("Ben Gurion Airport"));
-  const photos = area.cityId === "jerusalem" ? jerusalemHotelPhotos : telAvivHotelPhotos;
-  const areaIndex = neighborhoodGuidesForCity(area.cityId).findIndex((item) => item.id === area.id);
-  const cityPhotoList = Object.values(photos);
-  // Additional cards use varied licensed generic photos from the existing city illustration pool.
-  // The original two keep their own city-catalog illustration. Neither is a property photo.
-  const photoFor = (hotelId: string, index: number) =>
-    photos[hotelId] || cityPhotoList[(areaIndex * 2 + index) % cityPhotoList.length]!;
-  const shortCopy = area.cityId === "jerusalem" ? jerusalemHotelTileCopy : hotelTileCopy;
+   const shortCopy = area.cityId === "jerusalem" ? jerusalemHotelTileCopy : hotelTileCopy;
 
   return (
     <main className="pb-8">
@@ -73,11 +65,11 @@ export function NeighborhoodStayPage({ area }: { area: NeighborhoodStayGuide }) 
             Compare four different places to stay in this area. Use Expedia to check rooms, total prices and availability for your dates.
           </p>
           <ul className="mt-5 grid gap-4 sm:grid-cols-2" data-testid="neighborhood-hotel-grid">
-            {hotels.map((hotel, index) => (
+            {hotels.map((hotel) => (
               <StayHotelCard key={hotel.id} tile hotel={hotel}
                 booking={bookings.find((booking) => booking.id === `hotel-${hotel.id}-expedia`)}
                 editorial={shortCopy[hotel.id] ? { summary: shortCopy[hotel.id]!.description, bestFor: shortCopy[hotel.id]!.bestFor, watch: hotel.watch } : undefined}
-                photo={photoFor(hotel.id, index)}
+                photo={cityHotelPhoto(hotel)}
                 fallbackPhoto={area.photo}
                 pageId={pageId} />
             ))}
@@ -88,8 +80,8 @@ export function NeighborhoodStayPage({ area }: { area: NeighborhoodStayGuide }) 
           <details className="mt-3 rounded-xl border bg-card p-3 text-xs text-muted-foreground" data-testid="neighborhood-hotel-photo-credits">
             <summary className="cursor-pointer font-semibold text-foreground">Illustrative photo credits & licenses</summary>
             <ul className="mt-3 grid gap-2 sm:grid-cols-2">
-              {hotels.map((hotel, index) => {
-                const image = photoFor(hotel.id, index);
+              {hotels.map((hotel) => {
+                const image = cityHotelPhoto(hotel);
                 return <li key={hotel.id}><span className="font-medium text-foreground">{hotel.name}: </span>
                   {image.sourceUrl ? <a href={image.sourceUrl} target="_blank" rel="noopener noreferrer" className="underline underline-offset-2">{image.credit}<span className="sr-only"> (opens in a new tab)</span></a> : image.credit}
                   {image.licenseUrl && <> · <a href={image.licenseUrl} target="_blank" rel="noopener noreferrer" className="underline underline-offset-2">License<span className="sr-only"> (opens in a new tab)</span></a></>}
