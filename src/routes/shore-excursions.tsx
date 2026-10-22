@@ -128,7 +128,6 @@ function Shore() {
         <p className="mt-3 text-sm leading-relaxed"><span className="font-semibold">What to expect: </span>{format.includes}.</p>
         <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{format.tradeoff}</p>
       </article>)}</div>
-      <p className="mt-5 text-sm leading-relaxed text-muted-foreground">Moshe Barak's car-and-driver days are requested directly through the port-page form. External guided excursions are booked on GetYourGuide or Viator, with the actual operator and booking channel identified on each tour card.</p>
     </section>
 
     <section id="planning" aria-labelledby="planning-h" className="mt-14 scroll-mt-24">
