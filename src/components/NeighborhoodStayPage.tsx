@@ -66,7 +66,7 @@ export function NeighborhoodStayPage({ area }: { area: NeighborhoodStayGuide }) 
           </p>
           <ul className="mt-5 grid gap-4 sm:grid-cols-2" data-testid="neighborhood-hotel-grid">
             {hotels.map((hotel, index) => (
-              <StayHotelCard key={hotel.id} compact hotel={hotel}
+              <StayHotelCard key={hotel.id} tile hotel={hotel}
                 booking={bookings.find((booking) => booking.id === `hotel-${hotel.id}-expedia`)}
                 editorial={shortCopy[hotel.id] ? { summary: shortCopy[hotel.id]!.description, bestFor: shortCopy[hotel.id]!.bestFor, watch: hotel.watch } : undefined}
                 photo={photoFor(hotel.id, index)}
@@ -75,7 +75,7 @@ export function NeighborhoodStayPage({ area }: { area: NeighborhoodStayGuide }) 
             ))}
           </ul>
           <p className="mt-4 text-xs leading-relaxed text-muted-foreground">
-            Images are illustrative, not photographs of these hotels. Some existing Expedia links are sponsored and may earn me a commission at no extra cost; new hotel links are direct, non-affiliate Expedia links until they are updated.
+            Images are illustrative, not photographs of these hotels. I may earn a commission from some existing Expedia booking links at no extra cost to you; new hotel links are direct, non-affiliate Expedia links until they are updated.
           </p>
           <details className="mt-3 rounded-xl border bg-card p-3 text-xs text-muted-foreground" data-testid="neighborhood-hotel-photo-credits">
             <summary className="cursor-pointer font-semibold text-foreground">Illustrative photo credits & licenses</summary>
