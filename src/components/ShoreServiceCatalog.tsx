@@ -98,7 +98,8 @@ export function ShoreServiceCatalog({ portId, filters, onFilterChange, itinerary
                     <h3 className="text-xl font-semibold leading-snug">{service.title}</h3>
                     <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{service.description}</p>
                     <p className="mt-3 flex items-start gap-2 text-sm"><Clock3 className="mt-0.5 h-4 w-4 shrink-0 text-primary" aria-hidden />{service.duration}</p>
-                    <p className="mt-3 text-sm"><span className="font-medium">Tour operator:</span> {service.operator?.name || provider.providerName}</p>
+                    <p className="mt-3 flex items-start gap-2 text-xs text-muted-foreground"><MapPin className="mt-0.5 h-4 w-4 shrink-0 text-primary" aria-hidden />{port.name} Port · pickup &amp; return</p>
+                    <p className="mt-3 text-sm">Operated by {service.operator?.name || provider.providerName}</p>
                     <p className="mt-1 text-xs text-muted-foreground">Booking platform: {service.partner?.name || provider.providerName}{provider.isAffiliate && " · Sponsored link"}</p>
                     <div className="mt-auto pt-5">
                       <div className="border-t pt-4">
@@ -107,8 +108,8 @@ export function ShoreServiceCatalog({ portId, filters, onFilterChange, itinerary
                           <p className="mt-1 text-2xl font-bold text-primary">US${service.listedPrice.amount.toLocaleString("en-US")}</p>
                           <p className="mt-1 text-xs text-muted-foreground">{service.listedPrice.basis === "per_group" ? `Per group · up to ${service.listedPrice.maxPartySize}` : "Per person"} · Confirm the total on the booking site</p>
                         </> : <>
-                          <p className="text-lg font-semibold">Check current price</p>
-                          <p className="mt-1 text-xs text-muted-foreground">No verified current price to display · See the booking site</p>
+                          <p className="text-lg font-semibold">See current price</p>
+                          <p className="mt-1 text-xs text-muted-foreground">No verified current price to display · Confirm on the booking site</p>
                         </>}
                       </div>
                       <a href={provider.url} target={external ? "_blank" : undefined} rel={external ? relFor(provider.isAffiliate) : undefined} onClick={external ? () => recordOutboundClick({ pageId: port.pageId, productId: service.productId, offerId: provider.id }) : undefined} className="btn btn-primary mt-4 w-full">{provider.ctaLabel}{external && <><span aria-hidden> ↗</span><span className="sr-only"> (opens in a new tab)</span></>}</a>
