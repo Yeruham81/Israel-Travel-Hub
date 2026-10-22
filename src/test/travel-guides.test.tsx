@@ -128,13 +128,54 @@ describe("migrated practical guides", () => {
   });
 
   it("keeps current airport pickup distinctions and attributes uncertain operator status", () => {
-    expect(travelGuides.arrival.sections.find((section) => section.id === "onward")!.paragraphs.join(" ")).toMatch(/Exit 03.*Level 2, Exit 23/);
+    expect(travelGuides.arrival.sections.find((section) => section.id === "leave-airport")!.paragraphs.join(" ")).toMatch(/Exit 03.*Level 2, Exit 23/);
     expect(travelGuides.taxis.sections.find((section) => section.id === "airport")!.links?.some((link) => link.to === travelGuidePaths.airportTaxis)).toBe(true);
     expect(travelGuides.airportTaxis.comparison.rows.join(" ")).toMatch(/Exit 03.*Exit 23/);
     expect(travelGuides.uber.answer).toMatch(/Uber is not available for passenger rides in Israel in 2026/);
     expect(travelGuides.sherut.answer).toMatch(/Nesher.*Jerusalem.*Amal.*Haifa.*no longer operating/s);
     expect(travelGuides.esim.sections.find((section) => section.id === "calling")!.paragraphs.join(" ")).toMatch(/US phone number.*different from an Israeli/s);
     expect(travelGuides.esim.answer).toMatch(/unlimited.*does not promise unlimited full-speed/i);
+  });
+
+  it("covers the complete 2026 airport arrival sequence without duplicating specialty transport guides", () => {
+    const guide = travelGuides.arrival;
+    expect(guide.title).toMatch(/Ben Gurion Airport Arrivals Guide.*2026/);
+    expect(guide.answer).toMatch(/Terminal 3.*passport control.*customs.*arrivals hall/s);
+    expect(guide.sections.map((s) => s.id)).toEqual([
+      "before-you-fly", "arrival-terminal", "passport-control", "baggage", "customs",
+      "arrivals-hall", "phones-money", "leave-airport", "arrival-timing", "shabbat", "assistance",
+    ]);
+    expect(guide.sections.filter((s) => s.photo)).toHaveLength(2);
+    expect(guide.faqs).toHaveLength(15);
+    expect(guide.sections.find((s) => s.id === "leave-airport")!.tables?.[0]?.rows).toHaveLength(5);
+    expect(guide.sourceIds).toEqual(expect.arrayContaining([
+      "guide-entry", "guide-iaa-terminal-2026", "guide-customs-tourists",
+      "guide-lost-property", "guide-iaa-accessibility", "guide-gett",
+    ]));
+    expect(guide.sections.find((s) => s.id === "arrival-terminal")!.paragraphs.join(" ")).toMatch(/international arriving flights continue to use Terminal 3.*Domestic flights arriving from Ramon Airport use Terminal 1/s);
+    expect(guide.sections.find((s) => s.id === "customs")!.paragraphs.join(" ")).toMatch(/red and green channels.*red channel and ask/s);
+    expect(guide.sections.find((s) => s.id === "leave-airport")!.inlineLinks?.map((l) => l.to)).toEqual([
+      travelGuidePaths.airportTaxis, "/transfers/", travelGuidePaths.sherut, travelGuidePaths.taxiFares,
+    ]);
+    expect(guide.sections.find((s) => s.id === "shabbat")!.inlineLinks?.[0]?.to).toBe(travelGuidePaths.shabbat);
+    expect(guide.sections.find((s) => s.id === "assistance")!.inlineLinks?.[0]?.to).toBe(travelGuidePaths.taxis);
+    for (const section of guide.sections) for (const link of section.inlineLinks || []) {
+      expect(section.paragraphs.join(" ").split(link.text), `inline text ${link.text} must occur once`).toHaveLength(2);
+    }
+  });
+
+  it("renders arrival-guide links within the paragraphs where travelers need them", async () => {
+    const router = await routerAt(travelGuidePaths.arrival);
+    const Page = ArrivalRoute.options.component!;
+    const { container } = render(<RouterContextProvider router={router}><Page /></RouterContextProvider>);
+    for (const section of travelGuides.arrival.sections) {
+      const element = container.querySelector(`#${section.id}`)! as HTMLElement;
+      for (const link of section.inlineLinks || []) {
+        const a = within(element).getByRole("link", { name: link.text });
+        expect(a).toHaveAttribute("href", link.to);
+        expect(a.closest("p")).toBeTruthy();
+      }
+    }
   });
 
   it("keeps Uber's 2026 unavailability the primary search intent with useful alternatives", () => {
