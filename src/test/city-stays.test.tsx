@@ -70,7 +70,14 @@ describe.each([
       expect(container.querySelectorAll("main")).toHaveLength(1);
       expect(container.querySelector("main main")).toBeNull();
       expect(container.querySelector("#location")!.compareDocumentPosition(container.querySelector("#book")!)).toBe(Node.DOCUMENT_POSITION_FOLLOWING);
-      expect(screen.getAllByTestId("hotel-recommendation")).toHaveLength(2);
+      const cards = screen.getAllByTestId("hotel-recommendation");
+      expect(cards).toHaveLength(4);
+      expect(container.querySelector("#book [data-testid='neighborhood-hotel-grid']")).toHaveClass("sm:grid-cols-2");
+      const imageUrls = cards.map((card) => within(card).getByTestId("hotel-illustration").getAttribute("src"));
+      expect(new Set(imageUrls).size).toBe(4);
+      expect(screen.getByTestId("neighborhood-hotel-photo-credits")).toBeInTheDocument();
+      expect(screen.queryByText("Who it suits")).not.toBeInTheDocument();
+      expect(screen.queryByText("Check before booking")).not.toBeInTheDocument();
       expect(within(screen.getByRole("navigation", { name: "Breadcrumb" })).getByRole("link", { name: g.city })).toHaveAttribute("href", g.path);
       expect(container.querySelector(`a[href="${g.related[0]!.to}"]`)).toBeInTheDocument();
       expect(container.querySelector(`a[href="${otherCity.related[0]!.to}"]`)).toBeNull();
@@ -80,13 +87,45 @@ describe.each([
         expect(hotel.cityId).toBe(g.id);
         const booking = linksForPage(`stay-area-${area.id}`).find((link) => link.id === `hotel-${hotel.id}-expedia`)!;
         expect(getSource(hotel.sourceId).url).toMatch(/^https:\/\//);
-        expect(booking.url).toBe(affiliateConfig[booking.id]?.trackingUrl);
         const link = screen.getByRole("link", { name: `${booking.ctaLabel} for ${hotel.name}` });
         expect(link).toHaveAttribute("href", booking.url);
-        expect(link).toHaveAttribute("rel", expect.stringContaining("sponsored"));
         expect(link).toHaveAttribute("target", "_blank");
+        if (booking.isAffiliate) {
+          expect(booking.url).toBe(affiliateConfig[booking.id]?.trackingUrl);
+          expect(link).toHaveAttribute("rel", expect.stringContaining("sponsored"));
+          expect(booking.ctaLabel).toBe("Check rooms on Expedia");
+        } else {
+          expect(affiliateConfig[booking.id]?.trackingUrl).toBeUndefined();
+          expect(booking.url).toBe(getSource(hotel.sourceId).url);
+          expect(booking.url).toMatch(/^https:\/\/www\.expedia\.com\/.+\.Hotel-Information$/);
+          expect(booking.ctaLabel).toBe("View hotel on Expedia");
+          expect(link.getAttribute("rel")).not.toContain("sponsored");
+        }
+        const card = cards.find((entry) => within(entry).queryByRole("heading", { name: hotel.name }))!;
+        expect(card).toBeDefined();
+        expect(within(card).getByTestId("hotel-short-description").textContent!.split(" ").length).toBeLessThanOrEqual(25);
+        expect(within(card).getByTestId("hotel-best-for").textContent).toMatch(/^Best for:/);
+        expect(within(card).getAllByRole("link")).toHaveLength(1);
       }
       unmount();
+    }
+  });
+
+  it("each area has a balanced mix of two existing affiliate hotels and two new direct Expedia pages", () => {
+    for (const area of areas) {
+      const hotels = hotelsForArea(area.id, g.id);
+      expect(hotels).toHaveLength(4);
+      const bookings = linksForPage(`stay-area-${area.id}`).filter((link) => link.id.startsWith("hotel-"));
+      expect(bookings).toHaveLength(4);
+      expect(bookings.filter((link) => link.isAffiliate)).toHaveLength(2);
+      expect(bookings.filter((link) => !link.isAffiliate)).toHaveLength(2);
+      for (const offer of bookings.filter((link) => !link.isAffiliate)) {
+        expect(offer.url).toContain("expedia.com/");
+        expect(offer.url).toContain(".Hotel-Information");
+        expect(offer.providerName).toBe("Expedia");
+        expect(offer.ctaLabel).toBe("View hotel on Expedia");
+        expect(offer.relationship).toBe("booking_platform");
+      }
     }
   });
 
