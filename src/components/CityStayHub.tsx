@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link, type LinkProps } from "@tanstack/react-router";
 import { ArrowRight, MapPin, Check, Compass } from "lucide-react";
 import { type CityStayGuide, type NeighborhoodStayGuide, type StayPreference, preferenceLabels } from "@/data/content";
+import { areaArrivalSignals } from "@/data/localEditorialInsights";
 import { INFO_CHECK_DATE, linksForPage, publicSources } from "@/data/registry";
 import { GuideHeader, OnThisPage, Section, Checklist, ProviderSection, FaqList, SourceList } from "@/components/Guide";
 import { AreaPhotoCredit } from "@/components/AreaMap";
@@ -98,10 +99,10 @@ export function CityStayHub({ g, areas }: { g: CityStayGuide; areas: Neighborhoo
           <h2 id="compare-h" className="text-3xl">Compare {areas.length === 6 ? "the six" : `all ${areas.length}`} areas</h2>
           <p className="mt-2 text-sm text-muted-foreground">These are relative accommodation styles, not live room rates. The exact hotel and street matter as much as the area name.</p>
           <div className="mt-5 overflow-x-auto rounded-2xl border bg-card" role="region" aria-label={`${g.city} area comparison`} tabIndex={0}>
-            <table className="w-full min-w-[620px] text-left text-sm">
-              <caption className="sr-only">{g.city} neighborhoods, travel styles, accommodation levels and main tradeoffs</caption>
-              <thead className="bg-secondary"><tr>{["Area", "Best for", "Accommodation", "Keep in mind"].map((label) => <th scope="col" key={label} className="px-4 py-3 font-semibold">{label}</th>)}</tr></thead>
-              <tbody className="divide-y">{areas.map((area) => <tr key={area.id}><th scope="row" className="px-4 py-4 font-semibold"><Link to={area.path as LinkProps["to"]} className="text-primary underline underline-offset-2">{area.shortName}</Link></th><td className="px-4 py-4">{area.bestFor}</td><td className="px-4 py-4">{area.priceLevel}</td><td className="max-w-64 px-4 py-4 text-muted-foreground">{area.watch}</td></tr>)}</tbody>
+            <table className="w-full min-w-[850px] text-left text-sm">
+              <caption className="sr-only">{g.city} neighborhoods, travel styles, accommodation levels, arrival practicalities and main tradeoffs</caption>
+              <thead className="bg-secondary"><tr>{["Area", "Best for", "Accommodation", "Arriving with bags", "Keep in mind"].map((label) => <th scope="col" key={label} className="px-4 py-3 font-semibold">{label}</th>)}</tr></thead>
+              <tbody className="divide-y">{areas.map((area) => <tr key={area.id}><th scope="row" className="px-4 py-4 font-semibold"><Link to={area.path as LinkProps["to"]} className="text-primary underline underline-offset-2">{area.shortName}</Link></th><td className="px-4 py-4">{area.bestFor}</td><td className="px-4 py-4">{area.priceLevel}</td><td className="max-w-64 px-4 py-4">{areaArrivalSignals[area.id] || area.arrivalTips[0]}</td><td className="max-w-64 px-4 py-4 text-muted-foreground">{area.watch}</td></tr>)}</tbody>
             </table>
           </div>
         </section>
