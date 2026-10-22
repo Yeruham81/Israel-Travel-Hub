@@ -123,6 +123,13 @@ export function TravelGuidePage({ id }: { id: TravelGuideId }) {
       <FaqList faqs={guide.faqs} />
       <SourceList ids={sourcesFor(guide)} />
       <RelatedLinks title="Related practical guides" currentPath={travelGuidePaths[id]} items={guide.related.map((guideId) => ({ label: travelGuides[guideId].title, to: travelGuidePaths[guideId] }))} />
+      {(id === "jerusalem" || id === "deadSea" || id === "israel" || id === "travelTips") &&
+        <RelatedLinks title="Build a multi-day itinerary" items={[
+          { label: "A practical 3-day route", to: "/travel-blog/israel-itinerary-3-days/" },
+          { label: "A classic 5-day route", to: "/travel-blog/israel-itinerary-5-days/" },
+          { label: "A 7-day trip with the Galilee", to: "/travel-blog/israel-itinerary-7-days/" },
+          { label: "An extended 10-day trip", to: "/travel-blog/israel-itinerary-10-days/" },
+        ]} />}
       <RelatedLinks title="Plan the next part of your trip" items={guide.services} />
       {guide.reading && <section aria-labelledby="reading-h" className="mt-12"><h2 id="reading-h" className="text-2xl">More on this topic</h2><ul className="mt-4 space-y-3">{guide.reading.map((reading) => <li key={reading.href} className="rounded-xl border p-4"><a href={reading.href} target="_blank" rel="noopener noreferrer" className="font-medium text-primary underline">{reading.label}<span className="sr-only"> (opens in a new tab)</span></a><p className="mt-1 text-sm text-muted-foreground">{reading.note}</p></li>)}</ul></section>}
       <div className="mt-12 rounded-2xl bg-navy p-6 text-navy-foreground"><h2 className="text-2xl">Explore more Israel travel guides</h2><p className="mt-2 opacity-85">Find practical advice by topic, from airport arrivals to places to stay and days out.</p><Link to="/guides/" className="btn btn-light mt-4">Browse all guides</Link></div>
