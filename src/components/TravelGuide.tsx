@@ -8,6 +8,7 @@ import { authorLd } from "@/lib/author";
 import { hasPublicPhotoCredit } from "@/lib/photo-credits";
 import { AuthorCard } from "@/components/AuthorCard";
 import { PageUpdated } from "@/components/PageUpdated";
+import { JerusalemJourneyOptions, JerusalemJourneyBooking, JerusalemJourneyResources } from "@/components/JerusalemJourneyPlanner";
 
 function sourcesFor(guide: TravelGuide) { return [...new Set([...guide.sourceIds, ...guide.sections.flatMap((section) => section.sourceIds || [])])]; }
 
@@ -93,6 +94,7 @@ export function GuideParagraph({ paragraph, inlineLinks }: { paragraph: string; 
 export function TravelGuidePage({ id }: { id: TravelGuideId }) {
   const guide = travelGuides[id];
   const providers = guide.providerPageId ? linksForPage(guide.providerPageId) : [];
+  const isJerusalemDayJourney = id === "bethlehem" || id === "jerusalemDeadSea";
   return <main className="mx-auto max-w-5xl px-4 pb-8">
     <article>
       <header className="pt-6">
@@ -111,16 +113,21 @@ export function TravelGuidePage({ id }: { id: TravelGuideId }) {
         {guide.reviewNote && <p className="mt-4 border-t border-primary/20 pt-3 text-sm leading-relaxed text-muted-foreground">{guide.reviewNote}</p>}
       </section>
       {guide.nextSteps && <RelatedLinks title="Choose your next step" items={guide.nextSteps} />}
-      <dl className="mt-5 grid gap-3 sm:grid-cols-3">{guide.facts.map((fact) => <div key={fact.label} className="rounded-xl border bg-card p-4"><dt className="text-xs font-semibold uppercase tracking-wide text-primary">{fact.label}</dt><dd className="mt-2 text-sm leading-relaxed">{fact.text}</dd></div>)}</dl>
-      <OnThisPage sections={[["at-a-glance", "At a glance"], ...guide.sections.map((section) => [section.id, section.title] as const), ["checklist", "Checklist"], ["faq", "FAQ"], ["sources", "Sources"]]} />
-      <section id="at-a-glance" aria-labelledby="comparison-h" className="mt-10 scroll-mt-24">
+      {isJerusalemDayJourney && <JerusalemJourneyOptions id={id} />}
+      {!isJerusalemDayJourney && <dl className="mt-5 grid gap-3 sm:grid-cols-3">{guide.facts.map((fact) => <div key={fact.label} className="rounded-xl border bg-card p-4"><dt className="text-xs font-semibold uppercase tracking-wide text-primary">{fact.label}</dt><dd className="mt-2 text-sm leading-relaxed">{fact.text}</dd></div>)}</dl>}
+      <OnThisPage sections={isJerusalemDayJourney
+        ? [["journey-options", "Compare transport"], ["journey-destinations", "Stops & destinations"], ...guide.sections.map((section) => [section.id, section.title] as const), ["journey-booking", "Tours & private trips"], ["checklist", "Checklist"], ["faq", "FAQ"], ["sources", "Sources"]]
+        : [["at-a-glance", "At a glance"], ...guide.sections.map((section) => [section.id, section.title] as const), ["checklist", "Checklist"], ["faq", "FAQ"], ["sources", "Sources"]]} />
+      {!isJerusalemDayJourney && <section id="at-a-glance" aria-labelledby="comparison-h" className="mt-10 scroll-mt-24">
         <h2 id="comparison-h" className="text-3xl">{guide.comparison.caption}</h2>
         <div className="mt-5 max-w-full overflow-x-auto rounded-xl border"><table className="w-full min-w-[560px] text-left text-sm"><caption className="sr-only">{guide.comparison.caption}</caption><thead className="bg-secondary"><tr>{guide.comparison.headers.map((heading) => <th key={heading} scope="col" className="p-4 font-semibold">{heading}</th>)}</tr></thead><tbody className="divide-y">{guide.comparison.rows.map((row, index) => <tr key={index} className="bg-card">{row.map((cell, cellIndex) => cellIndex === 0 ? <th key={cellIndex} scope="row" className="p-4 font-medium">{cell}</th> : <td key={cellIndex} className="p-4 leading-relaxed text-muted-foreground">{cell}</td>)}</tr>)}</tbody></table></div>
-      </section>
+      </section>}
       {guide.sections.map((section) => <section key={section.id} id={section.id} aria-labelledby={`${section.id}-h`} className="mt-12 scroll-mt-24"><h2 id={`${section.id}-h`} className="text-3xl">{section.title}</h2>{section.photo && <figure className="mt-5 max-w-3xl"><img src={section.photo.src} alt={section.photo.alt} width={755} height={503} loading="lazy" decoding="async" className="aspect-[3/2] max-h-96 w-full rounded-xl object-cover" /><GuidePhotoCredit photo={section.photo} /></figure>}<div className="mt-4 max-w-4xl space-y-4 leading-relaxed text-muted-foreground">{section.paragraphs.map((paragraph) => <p key={paragraph}><GuideParagraph paragraph={paragraph} inlineLinks={section.inlineLinks} /></p>)}</div>{section.tables?.map((table) => <GuideDataTable key={table.caption} table={table} />)}{section.bullets && <ul className="mt-4 list-disc space-y-2 pl-5 leading-relaxed">{section.bullets.map((bullet) => <li key={bullet}>{bullet}</li>)}</ul>}{section.links && <ul className="mt-4 flex flex-wrap gap-x-5 gap-y-2 text-sm">{section.links.map((link) => <li key={link.to}><Link to={link.to} className="font-medium text-primary underline underline-offset-4">{link.label}</Link></li>)}</ul>}<SectionReferences ids={section.sourceIds || []} /></section>)}
+      {isJerusalemDayJourney && <JerusalemJourneyBooking id={id} />}
       <section id="checklist" aria-label="Travel checklist" className="mt-12 scroll-mt-24"><Checklist title="Before you go" items={guide.checklist} /></section>
       {providers.length > 0 && <section id="provider-options" aria-labelledby="providers-h" className="mt-14"><h2 id="providers-h" className="text-3xl">Compare current eSIM plans</h2><p className="mt-3 leading-relaxed text-muted-foreground">These options are based on published product information, not an on-location speed test or a cheapest-price ranking. Links marked “Sponsored link” may earn me a commission at no extra cost to you. Select Israel and verify the exact package before paying.</p><ul className="mt-5 grid gap-4 md:grid-cols-2">{providers.map((link) => <ProviderCard key={link.id} link={link} pageId={guide.providerPageId!} />)}</ul></section>}
       <FaqList faqs={guide.faqs} />
+      {isJerusalemDayJourney && <JerusalemJourneyResources id={id} />}
       <SourceList ids={sourcesFor(guide)} />
       <RelatedLinks title="Related practical guides" currentPath={travelGuidePaths[id]} items={guide.related.map((guideId) => ({ label: travelGuides[guideId].title, to: travelGuidePaths[guideId] }))} />
       {(id === "jerusalem" || id === "deadSea" || id === "israel" || id === "travelTips") &&
