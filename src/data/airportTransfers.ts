@@ -38,10 +38,10 @@ export const airportTransferPhotos: Record<string, StayGuidePhoto> = {
 export const airportDestinationCards = airportTransferRates.map((rate) => ({ ...rate, photo: airportTransferPhotos[rate.id]! }));
 
 export const airportTransferBenefits = [
-  { title: "A personal welcome", text: "Arrange your arrivals meeting point with me before you fly." },
-  { title: "Flight coordination", text: "Share your flight number so pickup can be planned around your arrival." },
-  { title: "Your own vehicle", text: "Travel with your party directly to the address agreed in your booking." },
-  { title: "Room for your group", text: "Request a suitable car, van or minibus for everyone and their luggage." },
+  { title: "A personal welcome", text: "Agree where to meet at the airport before departure, so you know where to go after collecting your bags." },
+  { title: "Flight coordination", text: "Provide the flight number and landing date so we can agree how arrival delays will be handled." },
+  { title: "Your own vehicle", text: "Your party travels in the vehicle arranged for the confirmed drop-off address." },
+  { title: "Room for your group", text: "A four-passenger car does not necessarily fit four large suitcases; describe all bags before selecting a vehicle." },
   { title: "Family arrangements", text: "Request child seats in advance, with children's ages and any special needs." },
   { title: "A price agreed ahead", text: "Confirm your full quote and booking conditions before committing to the ride." },
 ];
@@ -57,14 +57,14 @@ export const airportTransferFaqs = [
   { q: "Is this a private transfer for my party?", a: "This page is for airport transfers arranged in advance for your party. Ask me to confirm the vehicle, pickup and drop-off details in your quote." },
   { q: "Are the displayed prices per person?", a: "No. They are my published starting prices per vehicle for up to four passengers on weekdays. Extra charges may apply for night, weekend or holiday trips. Your final price and availability are confirmed with the operator." },
   { q: "Can I request a larger vehicle or child seats?", a: "Yes. Include all passengers, luggage and children's ages in the request. The operator will confirm the suitable vehicle and any requested seats before booking." },
-  { q: "How far ahead should I arrange the ride?", a: "I ask for at least 24 hours' notice. Request earlier for busy periods, larger groups or special vehicle requirements; sending an inquiry does not confirm availability." },
+  { q: "How far ahead should I arrange the ride?", a: "Please contact me in advance, preferably as early as possible for busy dates, larger groups or special vehicle requests. An inquiry does not confirm availability." },
   { q: "What should I confirm about delays or cancellation?", a: "Ask for the meeting point, included waiting time, delay arrangements, cancellation deadline and payment terms in writing with your final quote. Platform bookings follow the terms of the offer you choose there." },
 ];
 
 export const airportRelatedLinks = [
   {
     label: "Ben Gurion arrival tips", to: travelGuidePaths.arrival,
-    description: "Feel ready for your first moments in Israel. Plan passport control, baggage collection, useful arrival essentials and the meeting with your driver.",
+    description: "Follow the arrival sequence from passport control to baggage claim, customs and the public arrivals hall.",
     photo: { src: airportHall, alt: "Arrivals reception hall at Ben Gurion Airport Terminal 3", credit: "GeorgeDement · CC BY-SA 2.0 · resized WebP", sourceUrl: "https://commons.wikimedia.org/wiki/File:Ben_Gurion_Airport_terminal_3_reception_hall.jpg", licenseUrl: "https://creativecommons.org/licenses/by-sa/2.0/" },
   },
   {
@@ -94,7 +94,7 @@ export const airportRelatedLinks = [
   },
   {
     label: "Dead Sea hotels", to: "/travel-blog/best-dead-sea-hotels/" as const,
-    description: "Plan a relaxing stay by the Dead Sea. Compare Ein Bokek, spa facilities and family options, with attention to beach access and location.",
+    description: "Compare Ein Bokek resorts, southern hotel districts and Ein Gedi stays; beach access and mineral pools are not interchangeable.",
     photo: airportTransferPhotos["dead-sea"]!,
   },
   {
