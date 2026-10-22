@@ -143,7 +143,7 @@ describe("Tel Aviv direct hotel catalog", () => {
     expect(within(catalog).queryByText(/Neighborhood photograph|Illustrative hotel photograph|Tel Aviv city photograph/)).not.toBeInTheDocument();
     expect(within(catalog).queryByText(/Confirm dates, guests and final price on Expedia/)).not.toBeInTheDocument();
     expect(within(catalog).queryByText(/Hotel recommendations are editorial and do not reflect live room availability/)).not.toBeInTheDocument();
-    expect(within(catalog).getByLabelText("Filter Tel Aviv hotels by area")).toBeInTheDocument();
+    expect(within(catalog).getByLabelText("Choose hotel area")).toBeInTheDocument();
     expect(within(catalog).getByRole("group", { name: "Filter Tel Aviv hotels by area" })).toHaveClass("hidden", "md:flex");
     expect(within(catalog).getByText(/do not depict the listed hotels/i)).toBeInTheDocument();
     expect(screen.getByTestId("tel-aviv-hotel-photo-credits")).toBeInTheDocument();
@@ -188,7 +188,7 @@ describe("Tel Aviv direct hotel catalog", () => {
   it("supports the compact mobile area selector and clears the choice", () => {
     const { container } = render(<CityStayPage g={cityStayGuides.telaviv} />);
     const catalog = container.querySelector("#book") as HTMLElement;
-    const select = within(catalog).getByLabelText("Filter Tel Aviv hotels by area") as HTMLSelectElement;
+    const select = within(catalog).getByLabelText("Choose hotel area") as HTMLSelectElement;
     fireEvent.change(select, { target: { value: "telaviv-florentin" } });
     expect(select.value).toBe("telaviv-florentin");
     expect(within(catalog).getAllByTestId("tel-aviv-hotel-card")).toHaveLength(2);
