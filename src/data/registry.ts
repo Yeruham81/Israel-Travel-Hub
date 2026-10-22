@@ -121,7 +121,7 @@ export const mosheBarakAuthor: AuthorProfile = {
   name: "Moshe Barak",
   role: "Private transport operator & local travel expert",
   experience: "Over 20 years helping visitors travel around Israel.",
-  bio: "Practical, first-hand advice on taxis, airport pickups and exploring Israel.",
+  bio: "Practical, first-hand advice on getting around Israel, exploring the best of it, and planning the best trip.",
   reviewsUrl: "https://www.tripadvisor.com/Attraction_Review-g293984-d14803612-Reviews-Moshe_Barak-Tel_Aviv_Tel_Aviv_District.html",
   sourceIds: ["moshe-author-profile"],
 };
