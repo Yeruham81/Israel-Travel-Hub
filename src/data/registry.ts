@@ -4,6 +4,7 @@
  */
 import type { TourProduct, TourBookingOffer } from "@/data/tourTypes";
 import { migrationSources } from "@/data/guideMigrationSources";
+import { neighborhoodHotelAdditions, neighborhoodHotelSources } from "@/data/neighborhoodHotels";
 import kiwitaxiLogo from "@/assets/providers/kiwitaxi.svg";
 import welcomePickupsLogo from "@/assets/providers/welcome-pickups.svg";
 import intuiLogo from "@/assets/providers/intui.webp";
@@ -796,6 +797,7 @@ export const tourBookingOffers: TourBookingOffer[] = ([
 });
 
 export const sources: SourceReference[] = [
+  ...neighborhoodHotelSources,
   ...ownerDayTripSources,
   ...tourBookingOffers.map((offer): SourceReference => ({ id: offer.id, title: tourProducts.find((tour) => tour.id === offer.productId)!.title, publisher: offer.partnerId === "viator" ? "Viator" : "GetYourGuide", url: offer.publicUrl, checkedAt: offer.checkedAt, note: "Product identity, operator, advertised itinerary and duration reviewed. No date-specific availability is confirmed. Starting prices, when present, are short-lived editorial snapshots, not live quotes. Confirm pickup, inclusions, access and cancellation with the booking provider." })),
   { id: "shore-haifa-terminal", title: "Haifa Port cruise terminal", publisher: "Haifa Port", url: "https://www.haifaport.co.il/en/terminal/", checkedAt: null, note: "Official passenger-terminal information and downtown access. Consult the port, cruise line and operator for the arrangements applying to your ship; no current sailing schedule or dockside vehicle access is asserted." },
@@ -1632,7 +1634,7 @@ export const hotelRecommendations: HotelRecommendation[] = [
   ...haifaHotelRecommendations,
 ];
 
-export const hotelsForArea = (areaId: string, cityId?: HotelRecommendation["cityId"]) => hotelRecommendations.filter((hotel) => hotel.areaId === areaId && (!cityId || hotel.cityId === cityId));
+export const hotelsForArea = (areaId: string, cityId?: HotelRecommendation["cityId"]) => [...hotelRecommendations, ...neighborhoodHotelAdditions].filter((hotel) => hotel.areaId === areaId && (!cityId || hotel.cityId === cityId));
 
 export const tlvToJerusalem: RouteRecord = {
   id: "tlv-jerusalem",
@@ -1856,14 +1858,15 @@ export const providerLinks: ProviderLink[] = [
       reentryNote: "Enter Ben Gurion Airport, your exact destination, date, passengers and luggage on the provider's site.",
       confirm: ["Route and pickup time", "Vehicle and luggage allowance", "Total price and waiting policy", "Cancellation terms"], sourceId };
   }),
-  ...hotelRecommendations.map((hotel): ProviderLink => {
+  ...[...hotelRecommendations, ...neighborhoodHotelAdditions].map((hotel): ProviderLink => {
     const id = `hotel-${hotel.id}-expedia`;
     const trackingUrl = affiliateConfig[id]?.trackingUrl;
     const officialUrl = sources.find((source) => source.id === hotel.sourceId)!.url;
+    const isUntrackedExpedia = neighborhoodHotelAdditions.some((addition) => addition.id === hotel.id);
     return {
-      id, pageIds: [hotel.cityId === "deadsea" || hotel.cityId === "tiberias" || hotel.cityId === "haifa" ? `stay-${hotel.cityId}` : `stay-area-${hotel.areaId}`], providerName: trackingUrl ? "Expedia" : hotel.name,
-      relationship: trackingUrl ? "booking_platform" : "official", ...(trackingUrl ? { partnerId: "expedia" } : {}), mode: "provider_redirect",
-      title: hotel.name, summary: hotel.summary, ctaLabel: trackingUrl ? "Check rooms on Expedia" : "Visit the hotel's website",
+      id, pageIds: [hotel.cityId === "deadsea" || hotel.cityId === "tiberias" || hotel.cityId === "haifa" ? `stay-${hotel.cityId}` : `stay-area-${hotel.areaId}`], providerName: trackingUrl || isUntrackedExpedia ? "Expedia" : hotel.name,
+      relationship: trackingUrl || isUntrackedExpedia ? "booking_platform" : "official", ...(trackingUrl || isUntrackedExpedia ? { partnerId: "expedia" } : {}), mode: "provider_redirect",
+      title: hotel.name, summary: hotel.summary, ctaLabel: trackingUrl ? "Check rooms on Expedia" : isUntrackedExpedia ? "View hotel on Expedia" : "Visit the hotel's website",
       url: trackingUrl || officialUrl, isAffiliate: Boolean(trackingUrl), sourceId: hotel.sourceId,
       confirm: ["Property name and location", "Dates and room category", "Total including taxes and fees", "Cancellation deadline"],
     };
