@@ -56,6 +56,16 @@ export function HotelDestinationPage({ guide: g }: { guide: HotelStayDestination
         <FaqList faqs={g.faqs} />
         <SourceList ids={[...new Set([...g.sourceIds, ...hotelIds.map((id) => resortHotel(id).sourceId)])]} />
         <RelatedLinks items={g.related} />
+        <RelatedLinks title="Build a multi-day itinerary from this destination" items={g.id === "deadsea" ? [
+          { label: "Three days: Jerusalem, Masada and Tel Aviv", to: "/travel-blog/israel-itinerary-3-days/" },
+          { label: "Five days: include a Dead Sea excursion", to: "/travel-blog/israel-itinerary-5-days/" },
+        ] : g.id === "tiberias" ? [
+          { label: "Seven days: two nights in the Galilee", to: "/travel-blog/israel-itinerary-7-days/" },
+          { label: "Ten days: an unhurried northern stay", to: "/travel-blog/israel-itinerary-10-days/" },
+        ] : [
+          { label: "Five days: Caesarea and Haifa coastal day", to: "/travel-blog/israel-itinerary-5-days/" },
+          { label: "Ten days: Akko, Haifa and the coast", to: "/travel-blog/israel-itinerary-10-days/" },
+        ]} />
         <StayPhotoCredits photos={[g.photo, ...g.groups.map((group) => group.photo)]} />
       </article>
     </main>
