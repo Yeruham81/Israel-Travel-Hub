@@ -1,4 +1,5 @@
-import { Link, type LinkProps } from "@tanstack/react-router";
+import { Link } from "@tanstack/react-router";
+import type { ReactNode } from "react";
 import { ArrowRight, ExternalLink, Bus, CarFront, MapPinned, Route, Users } from "lucide-react";
 import { affiliateConfig, tourBookingOffers, tourProducts } from "@/data/registry";
 import { recordOutboundClick, relFor } from "@/lib/outbound";
@@ -61,7 +62,7 @@ const routes = {
   },
 } as const;
 
-function RegularExternal({ url, children, className = "" }: { url: string; children: React.ReactNode; className?: string }) {
+function RegularExternal({ url, children, className = "" }: { url: string; children: ReactNode; className?: string }) {
   return <a href={url} target="_blank" rel="noopener noreferrer" className={className}>{children}<ExternalLink className="h-3.5 w-3.5 shrink-0" aria-hidden /><span className="sr-only"> (opens in a new tab)</span></a>;
 }
 
@@ -129,9 +130,12 @@ export function JerusalemJourneyBooking({ id }: { id: string }) {
         <p className="text-xs font-semibold text-primary">{offer.partnerId === "viator" ? "Viator" : "GetYourGuide"} · {product.formatLabel}</p>
         <h3 className="mt-2 text-xl font-semibold">{product.title}</h3>
         <p className="mt-2 flex-1 text-sm leading-relaxed text-muted-foreground">{product.summary} Check the itinerary, guide handovers and booking terms for your chosen date.</p>
-        <RegularExternal url={url} className="btn btn-primary mt-4 inline-flex w-fit items-center gap-2" >
-          <span onClick={undefined}>{`View on ${offer.partnerId === "viator" ? "Viator" : "GetYourGuide"}`}</span>
-        </RegularExternal>
+        <a href={url} target="_blank" rel={relFor(sponsored)}
+           onClick={() => recordOutboundClick({ pageId: `journey-${id}`, productId: product.id, offerId: offer.id })}
+           className="btn btn-primary mt-4 inline-flex w-fit items-center gap-2">
+          View on {offer.partnerId === "viator" ? "Viator" : "GetYourGuide"} <ExternalLink className="h-4 w-4" aria-hidden />
+          <span className="sr-only"> (opens in a new tab)</span>
+        </a>
         {sponsored && <p className="mt-2 text-xs text-muted-foreground">Sponsored link; I may earn a commission at no extra cost to you.</p>}
       </article>)}
       <article className="flex flex-col rounded-2xl border bg-secondary/30 p-5">
