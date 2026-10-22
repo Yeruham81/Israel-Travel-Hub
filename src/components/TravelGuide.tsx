@@ -66,7 +66,7 @@ function GuideDataTable({ table }: { table: GuideTable }) {
 }
 
 /** Link a specific phrase inside a paragraph, keeping all other article text as plain text. */
-function GuideParagraph({ paragraph, inlineLinks }: { paragraph: string; inlineLinks?: GuideSection["inlineLinks"] }) {
+export function GuideParagraph({ paragraph, inlineLinks }: { paragraph: string; inlineLinks?: GuideSection["inlineLinks"] }) {
   if (!inlineLinks?.length) return <>{paragraph}</>;
   const matches = inlineLinks
     .map(({ text, to }) => ({ text, to, index: paragraph.indexOf(text) }))
