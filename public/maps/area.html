@@ -16,6 +16,7 @@
       #status p { margin: 0 0 8px; }
       a { color: #155e75; }
       .maplibregl-ctrl-attrib { font: 10px/1.5 system-ui, sans-serif; }
+      .route-pin { display: grid; place-content: center; width: 27px; height: 27px; border: 2px solid white; border-radius: 50%; background: #155e75; color: white; box-shadow: 0 1px 5px #17364866; font: bold 12px system-ui,sans-serif; cursor: help; }
       .maplibregl-ctrl-attrib a { color: #173648; }
     </style>
   </head>
@@ -44,6 +45,19 @@
           return result.every(Number.isFinite) ? result : null;
         };
         const params = new URLSearchParams(window.location.search);
+        // The optional destination pins are waypoints, not a road route. Keep
+        // the original single-area marker contract unchanged for hotel maps.
+        let waypoints = [];
+        try {
+          const raw = params.get("waypoints");
+          if (raw && raw.length < 2500) {
+            const parsed = JSON.parse(raw);
+            if (Array.isArray(parsed) && parsed.length <= 12 &&
+                parsed.every((p) => typeof p.name === "string" && p.name.length <= 80 &&
+                  Number.isFinite(p.lat) && Number.isFinite(p.lon) &&
+                  Math.abs(p.lat) <= 85 && Math.abs(p.lon) <= 180)) waypoints = parsed;
+          }
+        } catch { /* Ignore an invalid optional list; keep the reference map. */ }
         const point = numbers(params.get("marker"), 2);
         const box = numbers(params.get("bbox"), 4);
         if (!point || !box || Math.abs(point[0]) > 85 || Math.abs(point[1]) > 180 ||
@@ -88,9 +102,24 @@
           map.touchZoomRotate.disableRotation();
           map.addControl(new maplibregl.NavigationControl({ showCompass: false }), "top-right");
           map.addControl(new maplibregl.AttributionControl({ compact: true, customAttribution: '<a href="https://maputnik.github.io/osm-liberty/" target="_blank" rel="noopener noreferrer">OSM Liberty</a> (English labels)' }));
-          const marker = new maplibregl.Marker({ color: "#155e75" }).setLngLat([point[1], point[0]]).addTo(map);
-          marker.getElement().setAttribute("aria-label", `${name}: area reference point`);
-          marker.getElement().setAttribute("role", "img");
+          if (waypoints.length) {
+            waypoints.forEach((place, index) => {
+              // textContent (rather than HTML) prevents data in the URL from
+              // becoming executable markup. Labels are offered as tooltips.
+              const el = document.createElement("span");
+              el.className = "route-pin";
+              el.textContent = String(index + 1);
+              el.title = place.name;
+              el.setAttribute("aria-label", `Stop ${index + 1}: ${place.name}`);
+              el.setAttribute("role", "img");
+              new maplibregl.Marker({ element: el, anchor: "bottom" })
+                .setLngLat([place.lon, place.lat]).addTo(map);
+            });
+          } else {
+            const marker = new maplibregl.Marker({ color: "#155e75" }).setLngLat([point[1], point[0]]).addTo(map);
+            marker.getElement().setAttribute("aria-label", `${name}: area reference point`);
+            marker.getElement().setAttribute("role", "img");
+          }
           map.once("load", () => {
             ready = true;
             window.clearTimeout(timer);
