@@ -59,6 +59,7 @@ describe("owner voice throughout the public site", () => {
     expect(source("src/routes/transfers.index.tsx")).toContain("Why arrange your airport pickup with me?");
     expect(source("src/routes/terms-of-use.tsx")).toContain("contact me at {email}");
     expect(source("src/components/AirportRoutePage.tsx")).toContain("I confirm the final total and availability.");
-    expect(source("src/components/PortPage.tsx")).toContain("Plan your day from {port.name} with me");
+    expect(source("src/components/PortPage.tsx")).toContain("Request an itinerary from {port.name}");
+    expect(source("src/components/PortPage.tsx")).toContain("I will reply with an itinerary and quote for your review.");
   });
 });
