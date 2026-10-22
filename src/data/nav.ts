@@ -122,6 +122,12 @@ export const allNavGroups: NavGroup[] = [
     title: "Travel guides & tips",
     items: [
       { label: "All travel guides", to: "/guides/" },
+      { label: "Israel itineraries", to: "/guides/", childrenLabel: "Trip lengths", alwaysExpanded: true, children: [
+        { label: "Israel in 3 days", to: "/travel-blog/israel-itinerary-3-days/" },
+        { label: "Israel in 5 days", to: "/travel-blog/israel-itinerary-5-days/" },
+        { label: "Israel in 7 days", to: "/travel-blog/israel-itinerary-7-days/" },
+        { label: "Israel in 10 days", to: "/travel-blog/israel-itinerary-10-days/" },
+      ] },
       { label: "Airport to Jerusalem: all options", to: "/travel-blog/how-to-get-from-ben-gurion-airport-to-jerusalem/" },
       { label: "Airport to Tel Aviv: all options", to: "/travel-blog/how-to-get-from-ben-gurion-airport-to-tel-aviv/" },
       { label: "Airport to Haifa: all options", to: "/travel-blog/how-to-get-from-ben-gurion-airport-to-haifa/" },
