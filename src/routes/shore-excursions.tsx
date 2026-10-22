@@ -8,6 +8,7 @@ import { ShoreReadingGuides } from "@/components/ShoreReadingGuides";
 import { getShorePort } from "@/data/shoreExcursions";
 import { shoreHubGuides } from "@/data/shoreReading";
 import { migrationPhotos } from "@/data/guideMigrationPhotos";
+import akkoHarbour from "@/assets/shore-excursions/akko-port.jpg";
 import { shoreHubDescription, shoreHubExperiences, shoreHubFaqs, shoreHubPorts, shoreHubSourceIds, shoreHubTitle, shorePlanningSteps, shoreTourFormats } from "@/data/shoreHub";
 import { publicSources, SHORE_EXCURSION_CHECK_DATE, shorePorts, travelGuidePaths } from "@/data/registry";
 import { authorLd } from "@/lib/author";
@@ -19,6 +20,12 @@ const heroPhoto = migrationPhotos["EXISTING:jerusalem"];
 const crumbs = [{ name: "Home", path: "/" }, { name: "Shore excursions", path: "/shore-excursions/" }] as const;
 const sections = [["ports", "Compare the ports"], ["destinations", "Destinations"], ["tour-formats", "Private or guided"], ["planning", "Plan your day"], ["faq", "FAQ"]] as const;
 const experienceIcons = { history: Landmark, galilee: Church, coast: Waves, desert: Sun };
+const experiencePhotos = {
+  history: migrationPhotos["EXISTING:jerusalem"],
+  galilee: migrationPhotos["EXISTING:galilee"],
+  coast: { src: akkoHarbour, alt: "Fishing boats and historic stone buildings beside Akko's old harbour", sourceUrl: "https://www.israel-taxi.com/wp-content/uploads/2025/08/akko_port_2.jpg", credit: "Akko harbour · photograph from the original Haifa shore-excursion guide" },
+  desert: migrationPhotos["EXISTING:masada"],
+};
 
 export const Route = createFileRoute("/shore-excursions")({
   head: () => {
@@ -36,7 +43,7 @@ export const Route = createFileRoute("/shore-excursions")({
 });
 
 function Shore() {
-  const photos = [heroPhoto, ...portIds.map((id) => getShorePort(id).photo), ...shoreHubGuides.map((guide) => guide.photo)].filter(hasPublicPhotoCredit);
+  const photos = [heroPhoto, ...portIds.map((id) => getShorePort(id).photo), ...Object.values(experiencePhotos), ...shoreHubGuides.map((guide) => guide.photo)].filter(hasPublicPhotoCredit);
   return <main className="mx-auto max-w-5xl px-4 pb-10">
     <header className="pt-6">
       <Breadcrumbs items={crumbs.map((crumb) => ({ name: crumb.name, to: crumb.path }))} />
@@ -48,7 +55,7 @@ function Shore() {
             <p className="mt-5 text-lg leading-relaxed opacity-90">Turn your time ashore into a day to remember: Jerusalem's sacred streets, Galilee's lakeside heritage, old Mediterranean harbours or the desert around Masada and the Dead Sea. Discover guided excursions and private day trips from Ashdod and Haifa, with pickup and return planned around your ship.</p>
             <div className="mt-6 flex flex-wrap gap-3">
               <Link to={shorePorts.ashdod.path} className="btn btn-light">Excursions from Ashdod</Link>
-              <Link to={shorePorts.haifa.path} className="btn border border-white/40 text-white hover:bg-white/10">Excursions from Haifa</Link>
+              <Link to={shorePorts.haifa.path} className="btn btn-light">Excursions from Haifa</Link>
             </div>
           </div>
           <figure className="relative min-h-64 lg:min-h-full">
@@ -97,11 +104,15 @@ function Shore() {
       <div className="mt-6 grid gap-5 sm:grid-cols-2">
         {shoreHubExperiences.map((experience) => {
           const Icon = experienceIcons[experience.id];
-          return <article key={experience.id} className="rounded-2xl border bg-card p-5 sm:p-6">
-            <div className="flex items-center gap-3"><span className="rounded-xl bg-secondary p-3 text-primary"><Icon className="h-5 w-5" aria-hidden /></span><h3 className="text-2xl font-semibold">{experience.title}</h3></div>
-            <p className="mt-4 text-sm leading-relaxed text-muted-foreground">{experience.description}</p>
-            <p className="mt-3 text-sm"><span className="font-semibold">A great fit for: </span>{experience.bestFor}</p>
-            <ul className="mt-5 flex flex-wrap gap-x-4 gap-y-2">{experience.links.map((link) => <li key={`${link.portId}-${link.destination}`}><Link to={shorePorts[link.portId].path} search={{ destination: link.destination }} className="text-sm font-semibold text-primary underline underline-offset-4">{link.label}</Link></li>)}</ul>
+          const image = experiencePhotos[experience.id];
+          return <article key={experience.id} data-experience={experience.id} className="flex min-w-0 flex-col overflow-hidden rounded-2xl border bg-card">
+            <img src={image.src} alt={image.alt} width={800} height={450} loading="lazy" decoding="async" className="aspect-[16/9] w-full object-cover" />
+            <div className="flex flex-1 flex-col p-5 sm:p-6">
+              <div className="flex items-center gap-3"><span className="shrink-0 rounded-xl bg-secondary p-2.5 text-primary"><Icon className="h-5 w-5" aria-hidden /></span><h3 className="text-2xl font-semibold">{experience.title}</h3></div>
+              <p className="mt-4 text-sm leading-relaxed text-muted-foreground">{experience.description}</p>
+              <p className="mt-3 text-sm"><span className="font-semibold">A great fit for: </span>{experience.bestFor}</p>
+              <ul className="mt-auto flex flex-wrap gap-x-4 gap-y-2 pt-5">{experience.links.map((link) => <li key={`${link.portId}-${link.destination}`}><Link to={shorePorts[link.portId].path} search={{ destination: link.destination }} className="text-sm font-semibold text-primary underline underline-offset-4">{link.label}</Link></li>)}</ul>
+            </div>
           </article>;
         })}
       </div>
@@ -140,7 +151,7 @@ function Shore() {
     <section aria-labelledby="shore-ready-h" className="mt-14 rounded-3xl bg-navy p-6 text-navy-foreground sm:p-8">
       <h2 id="shore-ready-h" className="text-3xl">Make your day in Israel your own</h2>
       <p className="mt-3 max-w-3xl leading-relaxed opacity-90">Choose your port to discover the day trips and guided excursions, or share your ship's schedule and favorite places for a personal car-and-driver plan. A memorable day starts with the right route for you.</p>
-      <div className="mt-5 flex flex-wrap gap-3"><Link to={shorePorts.ashdod.path} hash="request-quote" className="btn btn-light">Plan my day from Ashdod</Link><Link to={shorePorts.haifa.path} hash="request-quote" className="btn border border-white/40 text-white hover:bg-white/10">Plan my day from Haifa</Link></div>
+      <div className="mt-5 flex flex-wrap gap-3"><Link to={shorePorts.ashdod.path} hash="request-quote" className="btn btn-light">Plan my day from Ashdod</Link><Link to={shorePorts.haifa.path} hash="request-quote" className="btn btn-light">Plan my day from Haifa</Link></div>
     </section>
     <SourceList ids={shoreHubSourceIds} intro="Official terminal and national-park information for planning your visit. Your cruise line and the individual operator confirm the arrangements for your actual ship and date." />
     <details className="mt-8 rounded-xl border p-5"><summary className="cursor-pointer text-sm font-medium">Image credits</summary><ul className="mt-3 space-y-3">{[...new Map(photos.map((photo) => [photo.src, photo])).values()].map((photo) => <li key={photo.src}><p className="text-sm">{photo.alt}</p><GuidePhotoCredit photo={photo} /></li>)}</ul></details>
