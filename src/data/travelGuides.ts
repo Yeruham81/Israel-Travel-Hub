@@ -33,7 +33,7 @@ export const guideTopics = [
 export type GuideTopicId = typeof guideTopics[number]["id"];
 export type GuidePhoto = { src: string; alt: string; sourceUrl?: string; credit?: string; licenseUrl?: string };
 export type GuideTable = { caption: string; headers: string[]; rows: string[][]; note?: string };
-export type GuideSection = { id: string; title: string; paragraphs: string[]; bullets?: string[]; sourceIds?: string[]; photo?: GuidePhoto; links?: { label: string; to: LinkProps["to"] }[]; tables?: GuideTable[] };
+export type GuideSection = { id: string; title: string; paragraphs: string[]; bullets?: string[]; sourceIds?: string[]; photo?: GuidePhoto; links?: { label: string; to: LinkProps["to"] }[]; inlineLinks?: { text: string; to: LinkProps["to"] }[]; tables?: GuideTable[] };
 export type GuideReading = { label: string; href: string; note: string };
 export type TravelGuide = {
   id: TravelGuideId; title: string; description: string; intro: string; answer: string; updatedAt?: string;
