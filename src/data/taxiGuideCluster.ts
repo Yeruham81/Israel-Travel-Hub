@@ -100,7 +100,7 @@ export const taxiGuideCluster: Record<"taxis" | "taxiFares" | "airportTaxis", Tr
           "Because airport exit levels and procedures are service-specific, use the dedicated airport taxi guide before you land rather than treating a generic map pin as pickup instructions.",
         ],
         inlineLinks: [{ text: "dedicated airport taxi guide", to: travelGuidePaths.airportTaxis }],
-        links: [{ label: "Compare private airport transfer services", to: "/transfers/ben-gurion-airport/" }],
+        links: [{ label: "Compare private airport transfer services", to: "/transfers/" }],
         sourceIds: ["guide-gett", "guide-iaa"],
       },
       {
@@ -297,7 +297,7 @@ export const taxiGuideCluster: Record<"taxis" | "taxiFares" | "airportTaxis", Tr
           "For an introduction to licensed taxi booking, see the taxis in Israel guide. For specific airport-to-city alternatives, consult the destination-specific journey comparisons rather than treating the national meter guide as a guaranteed route-price list.",
         ],
         inlineLinks: [{ text: "Uber, Gett and Yango guide", to: travelGuidePaths.uber }, { text: "taxis in Israel guide", to: travelGuidePaths.taxis }],
-        links: [{ label: "Private airport transportation", to: "/transfers/ben-gurion-airport/" }],
+        links: [{ label: "Private airport transportation", to: "/transfers/" }],
         sourceIds: ["guide-gett"],
       },
       {
@@ -334,7 +334,7 @@ export const taxiGuideCluster: Record<"taxis" | "taxiFares" | "airportTaxis", Tr
     ],
     sourceIds: ["taxi-fares-2026", "taxi-tariff-hours", "taxi-passenger-rights", "taxi-complaints"],
     related: ["taxis", "airportTaxis", "shabbat", "uber"],
-    services: [{ label: "Compare separately booked airport transfers", to: "/transfers/ben-gurion-airport/" }],
+    services: [{ label: "Compare separately booked airport transfers", to: "/transfers/" }],
   },
 
   airportTaxis: {
@@ -456,7 +456,7 @@ export const taxiGuideCluster: Record<"taxis" | "taxiFares" | "airportTaxis", Tr
             ["Waiting and changes", "According to the taxi service rules", "According to the confirmed transfer terms"],
           ],
         }],
-        inlineLinks: [{ text: "private transfer quote", to: "/transfers/ben-gurion-airport/" }],
+        inlineLinks: [{ text: "private transfer quote", to: "/transfers/" }],
         sourceIds: ["guide-gett"],
       },
       {
@@ -507,6 +507,6 @@ export const taxiGuideCluster: Record<"taxis" | "taxiFares" | "airportTaxis", Tr
     ],
     sourceIds: ["guide-gett", "guide-iaa", "taxi-fares-2026", "taxi-complaints"],
     related: ["taxis", "taxiFares", "arrival", "shabbat", "sherut", "uber"],
-    services: [{ label: "See private airport transfer options", to: "/transfers/ben-gurion-airport/" }],
+    services: [{ label: "See private airport transfer options", to: "/transfers/" }],
   },
 };
