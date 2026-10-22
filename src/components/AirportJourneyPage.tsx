@@ -66,7 +66,7 @@ function PrivateRideCta({ id }: { id: AirportJourneyId }) {
   );
 }
 
-function OptionSection({ option, guideId }: { option: JourneyOption; guideId: AirportJourneyId }) {
+function OptionSection({ option }: { option: JourneyOption }) {
   return (
     <section id={sectionId(option.id)} aria-labelledby={sectionId(option.id) + "-h"} className="mt-12 scroll-mt-28">
       <h3 id={sectionId(option.id) + "-h"} className="text-2xl font-semibold">{option.heading}</h3>
@@ -152,7 +152,7 @@ export function AirportJourneyPage({ id }: { id: AirportJourneyId }) {
       <section id="options" aria-labelledby="options-h" className="mt-14 scroll-mt-28">
         <h2 id="options-h" className="text-3xl">How each transport option works</h2>
         {g.photos?.onward && <figure className="mt-6 max-w-3xl"><img src={g.photos.onward.src} alt={g.photos.onward.alt} width={755} height={503} loading="lazy" decoding="async" className="aspect-[3/2] max-h-96 w-full rounded-xl object-cover" /><GuidePhotoCredit photo={g.photos.onward} /></figure>}
-        {g.options.map(o=><OptionSection key={o.id} option={o} guideId={id}/>)}
+        {g.options.map(o=><OptionSection key={o.id} option={o}/>)}
       </section>
       <Section id="shabbat" title="Getting there on Shabbat and Jewish holidays">
         {g.weekend.map(p=><p key={p}><GuideParagraph paragraph={p} inlineLinks={g.weekendLinks} /></p>)}
