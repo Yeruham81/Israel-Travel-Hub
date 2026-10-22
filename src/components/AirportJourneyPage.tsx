@@ -175,7 +175,7 @@ export function AirportJourneyPage({ id }: { id: AirportJourneyId }) {
         { label: "Ben Gurion Airport arrival tips", to: "/travel-blog/ben-gurion-airport-arrival-tips/" },
       ]} />
       <RelatedLinks title="Other airport journey comparisons" items={airportJourneyIds.filter(other => other !== id).map(other => ({ label: "How to get to " + airportJourneyGuides[other].city, to: airportJourneyGuides[other].path }))} />
-      <TransferQuoteForm key={transferIdFor(id)} destinationId={transferIdFor(id)} fixedDestination />
+      <TransferQuoteForm key={transferIdFor(id)} destinationId={transferIdFor(id)} fixedDestination fixedDestinationLabel={g.city} />
     </main>
   );
 }
