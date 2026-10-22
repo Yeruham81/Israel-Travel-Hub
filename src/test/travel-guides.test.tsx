@@ -58,7 +58,7 @@ describe("migrated practical guides", () => {
     expect(container.querySelector("time")).toHaveTextContent("October 2026");
     const authorCard = screen.getByRole("complementary", { name: "About the author" });
     expect(authorCard).toHaveTextContent("Written by Moshe Barak");
-    expect(authorCard).toHaveTextContent("more than 20 years");
+    expect(authorCard).toHaveTextContent("Over 20 years");
     expect(within(authorCard).getByRole("link", { name: /reviews on Tripadvisor/ })).toHaveAttribute("href", mosheBarakAuthor.reviewsUrl);
     expect(authorCard.compareDocumentPosition(screen.getByRole("region", { name: "Quick answer" }))).toBe(Node.DOCUMENT_POSITION_FOLLOWING);
     expect(container.textContent).not.toMatch(/editorial team|Adapted from|Source checks and limitations below|Image from the original publisher/);
@@ -86,8 +86,8 @@ describe("migrated practical guides", () => {
     const router = await routerAt("/guides/");
     const Hub = HubRoute.options.component!;
     const html = renderToString(<RouterContextProvider router={router}><Hub /></RouterContextProvider>);
-    expect(guideDirectory).toHaveLength(63);
-    expect(new Set(guideDirectory.map((guide) => guide.to)).size).toBe(63);
+    expect(guideDirectory).toHaveLength(65);
+    expect(new Set(guideDirectory.map((guide) => guide.to)).size).toBe(65);
     for (const guide of guideDirectory) {
       expect(html).toContain(`href="${guide.to}"`);
       expect(router.matchRoutes(String(guide.to)).at(-1)?.routeId).toBe(String(guide.to).replace(/\/$/, ""));
@@ -129,7 +129,8 @@ describe("migrated practical guides", () => {
 
   it("keeps current airport pickup distinctions and attributes uncertain operator status", () => {
     expect(travelGuides.arrival.sections.find((section) => section.id === "onward")!.paragraphs.join(" ")).toMatch(/Exit 03.*Level 2, Exit 23/);
-    expect(travelGuides.taxis.sections.find((section) => section.id === "airport")!.paragraphs.join(" ")).toMatch(/Exit 03.*Level 2, Exit 23/);
+    expect(travelGuides.taxis.sections.find((section) => section.id === "airport")!.links?.some((link) => link.to === travelGuidePaths.airportTaxis)).toBe(true);
+    expect(travelGuides.airportTaxis.comparison.rows.join(" ")).toMatch(/Exit 03.*Exit 23/);
     expect(travelGuides.uber.reviewNote).toMatch(/publisher.*not a live/i);
     expect(travelGuides.sherut.reviewNote).toMatch(/no current operator closure notice/i);
     expect(travelGuides.esim.sections.find((section) => section.id === "calling")!.paragraphs.join(" ")).toMatch(/US phone number.*different from an Israeli/s);
