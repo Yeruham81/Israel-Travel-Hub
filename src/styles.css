@@ -95,5 +95,9 @@
   .field { width: 100%; border: 1px solid var(--color-input); background: var(--color-card); border-radius: .5rem; padding: .55rem .75rem; font-size: 1rem; }
   .chip { border: 1px solid var(--color-border); border-radius: 999px; padding: .4rem .9rem; font-size: .875rem; font-weight: 500; }
   .chip[aria-pressed="true"], .chip[aria-current="true"] { background: var(--color-navy); color: var(--color-navy-foreground); border-color: var(--color-navy); }
+  /* Compact mobile-only topic/destination filters used across guides, tours and shore excursions. */
+  @media (max-width: 639px) {
+    .chip { display: inline-flex; align-items: center; justify-content: center; min-height: 2.125rem; padding: .325rem .625rem; font-size: .8125rem; line-height: 1.25; white-space: nowrap; }
+  }
 }
 @media (prefers-reduced-motion: reduce) { .photo-card img { transition: none !important; transform: none !important; } }
