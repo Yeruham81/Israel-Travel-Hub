@@ -1,5 +1,5 @@
 import { createFileRoute, Link, type LinkProps } from "@tanstack/react-router";
-import { ArrowRight, BedDouble, CalendarDays, CheckCircle2, MapPin, ReceiptText, Utensils, Accessibility, ExternalLink } from "lucide-react";
+import { ArrowRight, BedDouble, CalendarDays, CheckCircle2, MapPin, ReceiptText, Utensils, Accessibility } from "lucide-react";
 import { AccommodationCard } from "@/components/AccommodationCard";
 import { HubHeader, OnThisPage, FaqList } from "@/components/Guide";
 import { accommodationDestinations } from "@/data/content";
@@ -218,7 +218,7 @@ function Hotels() {
         </p>
         <div className="mt-6 grid gap-4 md:grid-cols-2">
           {itineraryCards.map((trip) => (
-            <a key={trip.id} href={trip.href} target="_blank" rel="noopener noreferrer" className={internalCardClass + " flex min-w-0 flex-col overflow-hidden sm:flex-row"} data-testid="hotel-itinerary-card">
+            <Link key={trip.id} to={trip.to} className={internalCardClass + " flex min-w-0 flex-col overflow-hidden sm:flex-row"} data-testid="hotel-itinerary-card">
               <div className="w-full shrink-0 sm:w-40 md:w-36 lg:w-44">
                 <HotelPhoto photo={trip.photo} className="aspect-[16/9] h-full sm:aspect-auto sm:min-h-48" />
               </div>
@@ -227,12 +227,11 @@ function Hotels() {
                 <h3 className="mt-1 text-xl">{trip.title}</h3>
                 <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{trip.route}</p>
                 <p className="mt-2 flex-1 text-sm leading-relaxed"><strong>Hotel bases:</strong> {trip.bases}</p>
-                <span className={actionClass}>Read the itinerary <ExternalLink className="h-4 w-4 shrink-0" aria-hidden /><span className="sr-only"> (opens in a new tab)</span></span>
+                <span className={actionClass}>Read the itinerary <ArrowRight className="h-4 w-4 shrink-0" aria-hidden /></span>
               </div>
-            </a>
+            </Link>
           ))}
         </div>
-        <p className="mt-3 text-xs leading-relaxed text-muted-foreground">These four full itineraries currently open on my existing website in a separate tab. They will be incorporated into this travel hub.</p>
       </section>
 
       <section id="arrival" aria-labelledby="arrival-h" className="mt-14 scroll-mt-28">
