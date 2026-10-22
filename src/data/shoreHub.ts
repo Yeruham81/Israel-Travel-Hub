@@ -11,13 +11,13 @@ export const shoreHubPorts: Record<ShorePortId, {
 }> = {
   ashdod: {
     location: "Southern Mediterranean coast",
-    description: "Walk Jerusalem's historic lanes, discover Jaffa and Tel Aviv, or trade the coast for the desert scenery of Masada and the Dead Sea.",
+    description: "From Ashdod, compare a relatively close Tel Aviv–Jaffa outing, a Jerusalem visit with substantial walking, or a longer desert day to Masada and the Dead Sea.",
     highlights: ["Jerusalem & Bethlehem", "Tel Aviv & Old Jaffa", "Masada & the Dead Sea"],
     planning: "A coastal outing can offer a gentler day. Jerusalem involves walking and steps; desert routes need a longer port call and time on the road.",
   },
   haifa: {
     location: "Northern Mediterranean coast",
-    description: "Explore Haifa and Akko, follow Christian heritage through Nazareth and the Galilee, or make Jerusalem the focus of a longer day ashore.",
+    description: "From Haifa, nearby Akko and northern Galilee routes preserve more sightseeing time than the longer journeys south to Tel Aviv or Jerusalem.",
     highlights: ["Haifa & Akko", "Nazareth & Sea of Galilee", "Jerusalem on a longer call"],
     planning: "Northern routes keep more of the day in the region. Jerusalem and Tel Aviv mean longer drives south, so plan a selective itinerary.",
   },
@@ -32,7 +32,7 @@ export const shoreHubExperiences: {
 }[] = [
   {
     id: "history", title: "Jerusalem & Bethlehem",
-    description: "Bring the Holy Land's history into focus with Jerusalem's Old City and, on a combined guided itinerary, Bethlehem. Choose the sites that matter to you rather than rushing between every landmark. Church access, walking pace and time for the return shape the day.",
+    description: "Jerusalem's Old City involves walking and site-specific access. A combined Bethlehem itinerary also requires its own operator arrangements; compare the remaining time at each stop after the return drive.",
     bestFor: "First-time visitors, history lovers and pilgrims",
     links: [{ portId: "ashdod", destination: "jerusalem", label: "Jerusalem from Ashdod" }, { portId: "haifa", destination: "jerusalem", label: "Jerusalem from Haifa" }],
   },
@@ -50,7 +50,7 @@ export const shoreHubExperiences: {
   },
   {
     id: "desert", title: "Masada & the Dead Sea",
-    description: "Discover Masada's ancient fortress above a remarkable desert landscape, with a Dead Sea stop if your itinerary allows. Ashdod is the starting point for the listed desert excursions. Agree the balance between archaeology, cable-car access and beach time before booking.",
+    description: "From Ashdod, Masada and a designated Dead Sea beach make a longer day. Confirm Masada admission and cable-car operating times, then decide how much time is left for the beach and port return.",
     bestFor: "Dramatic landscapes and a full day of discovery",
     links: [{ portId: "ashdod", destination: "masada", label: "Masada from Ashdod" }, { portId: "ashdod", destination: "dead-sea", label: "Dead Sea from Ashdod" }],
   },
