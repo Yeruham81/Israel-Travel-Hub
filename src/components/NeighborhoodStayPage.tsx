@@ -68,7 +68,7 @@ export function NeighborhoodStayPage({ area }: { area: NeighborhoodStayGuide }) 
         </Section>
 
         <section id="book" aria-labelledby="book-h" className="mt-14 scroll-mt-32">
-          <h2 id="book-h" className="text-3xl">Places to stay in {area.name}</h2>
+          <h2 id="book-h" className="text-3xl">My top picks in {area.name}</h2>
           <p className="mt-2 max-w-3xl text-sm leading-relaxed text-muted-foreground">
             Compare four different places to stay in this area. Use Expedia to check rooms, total prices and availability for your dates.
           </p>
@@ -83,7 +83,7 @@ export function NeighborhoodStayPage({ area }: { area: NeighborhoodStayGuide }) 
             ))}
           </ul>
           <p className="mt-4 text-xs leading-relaxed text-muted-foreground">
-            Images are illustrative, not photographs of these hotels. I may earn a commission from some existing Expedia booking links at no extra cost to you; new hotel links are direct, non-affiliate Expedia links until they are updated.
+            I may earn a commission from some existing Expedia booking links at no extra cost to you; new hotel links are direct, non-affiliate Expedia links until they are updated.
           </p>
           <details className="mt-3 rounded-xl border bg-card p-3 text-xs text-muted-foreground" data-testid="neighborhood-hotel-photo-credits">
             <summary className="cursor-pointer font-semibold text-foreground">Illustrative photo credits & licenses</summary>
