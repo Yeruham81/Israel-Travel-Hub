@@ -30,7 +30,6 @@ export function ShoreServiceCatalog({ portId, filters, onFilterChange, itinerary
 
   return <section id="itineraries" aria-labelledby="itineraries-h" className="mt-10 scroll-mt-24">
     <h2 id="itineraries-h" className="text-3xl">Shore excursions & day trips from {port.name} Port</h2>
-    <p className="mt-3 max-w-4xl leading-relaxed text-muted-foreground">Compare the route, duration, tour format and starting price. External tours open on GetYourGuide or Viator; you can request my private transport directly.</p>
     <div className="mt-6 rounded-2xl border bg-secondary/50 p-4">
       <nav aria-label="Filter port services by destination">
         <p className="mb-2 text-sm font-semibold">Destination</p>
