@@ -193,7 +193,7 @@ export function RelatedLinks({ title = "Plan the rest of your trip", items, curr
         .sort((a, b) => b.score - a.score)[0]
     : undefined;
   const completedGuides = supplemental
-    ? [...guideItems, { item: { label: supplemental.guide.title, to: supplemental.guide.to }, guide: supplemental.guide, score: supplemental.score, order: items.length }]
+    ? [...guideItems, { item: { label: supplemental.guide.title, to: supplemental.guide.to, note: supplemental.guide.description }, guide: supplemental.guide, score: supplemental.score, order: items.length }]
     : guideItems;
   const pairedGuides = completedGuides.slice(0, completedGuides.length - (completedGuides.length % 2));
   if (guideSection && pairedGuides.length === 0) return null;
