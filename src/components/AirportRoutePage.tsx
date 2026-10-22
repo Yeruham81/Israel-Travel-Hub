@@ -39,7 +39,7 @@ export function airportRouteMeta(id: AirportTransferRouteId) {
 }
 
 const pickupSteps = [
-  { title: "Send your arrival details", text: "Use the flight's arrival date and time in Israel local time. Add the flight number, exact hotel or address, all passengers, luggage and children's ages. Request at least 24 hours ahead." },
+  { title: "Send your arrival details", text: "Use the flight's arrival date and time in Israel local time. Add the flight number, exact hotel or address, all passengers, luggage and children's ages. Contact me in advance, preferably early for special vehicle needs." },
   { title: "Agree the full quote", text: "Confirm vehicle and luggage capacity, requested child seats, any extra charges for night, weekend or holiday trips, included waiting, flight-delay arrangements, payment and cancellation terms. Your ride is booked only after confirmation." },
   { title: "Save the meeting instructions", text: "Use the meeting point and contact number in your booking confirmation for the terminal where you actually arrive. Keep them available offline and contact the operator if airport formalities take longer than expected." },
 ];
@@ -70,7 +70,7 @@ export function AirportRoutePage({ id }: { id: AirportTransferRouteId }) {
           <p className="mt-2 text-xs leading-relaxed text-muted-foreground">Weekday starting rate. Extra charges may apply for night, weekend or holiday trips. Final price and availability by confirmation; larger groups need a quote.</p>
           <ExchangeRateNote className="mt-3" />
           <a href="#request-quote" onClick={focusQuote} className="btn btn-primary mt-5">Request your airport transfer</a>
-          <p className="mt-3 text-sm text-muted-foreground">Private vehicle for your party · Exact hotel or address · Request at least 24 hours ahead</p>
+          <p className="mt-3 text-sm text-muted-foreground">Private vehicle for your party · Exact hotel or address · Contact me in advance</p>
           <PageUpdated date={AIRPORT_TRANSFER_CHECK_DATE} />
         </div>
         <img src={guide.photo.src} alt={guide.photo.alt} width={900} height={675} fetchPriority="high" decoding="async" className="aspect-[4/3] w-full rounded-2xl object-cover lg:aspect-[3/4] lg:max-h-[560px]" />
@@ -97,6 +97,11 @@ export function AirportRoutePage({ id }: { id: AirportTransferRouteId }) {
       <section id="drop-off" aria-labelledby="dropoff-h" className="mt-12">
         <h2 id="dropoff-h" className="text-3xl">{guide.areasTitle}</h2>
         <div className="mt-5 grid gap-4 md:grid-cols-3">{guide.areas.map((area) => <article key={area.title} className="rounded-xl border bg-card p-5"><h3 className="text-xl">{area.title}</h3><p className="mt-3 text-sm leading-relaxed text-muted-foreground">{area.text}</p></article>)}</div>
+        <aside className="mt-6 rounded-xl border-l-4 border-primary bg-secondary/40 px-5 py-4">
+          <h3 className="text-lg font-semibold">{guide.example.title}</h3>
+          <p className="mt-2 text-sm leading-relaxed">{guide.example.situation}</p>
+          <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{guide.example.response}</p>
+        </aside>
       </section>
       <section aria-labelledby="planning-h" className="mt-10 rounded-2xl bg-secondary/60 p-6 sm:p-8">
         <h2 id="planning-h" className="text-3xl">{guide.planningTitle}</h2>
