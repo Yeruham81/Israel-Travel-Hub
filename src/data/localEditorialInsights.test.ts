@@ -9,7 +9,7 @@ describe("round two original planning content", () => {
     const areas = [...jerusalemAreaGuides, ...telAvivAreaGuides];
     expect(areas).toHaveLength(14);
     for (const area of areas) {
-      const note = areaDecisionNotes[area.id];
+      const note = areaDecisionNotes[area.id]!;
       expect(note, area.id).toBeDefined();
       expect(note.heading.length, area.id).toBeGreaterThan(15);
       expect(note.choose.length, area.id).toBeGreaterThan(45);
@@ -22,7 +22,7 @@ describe("round two original planning content", () => {
   it("covers every destination's separate base-choice scenarios", () => {
     for (const id of ["deadsea", "tiberias", "haifa"] as const) {
       expect(destinationBaseChoices[id], id).toHaveLength(3);
-      for (const choice of destinationBaseChoices[id]) {
+      for (const choice of destinationBaseChoices[id]!) {
         expect(choice.visitor).toBeTruthy();
         expect(choice.base).toBeTruthy();
         expect(choice.reason.length).toBeGreaterThan(50);
@@ -34,7 +34,7 @@ describe("round two original planning content", () => {
     const focused = hotelCategoryGuides.filter((guide) => ["deadsea", "tiberias", "haifa"].includes(guide.destinationId));
     expect(focused).toHaveLength(6);
     for (const guide of focused) {
-      const example = categoryDecisionExamples[`${guide.destinationId}:${guide.id}`];
+      const example = categoryDecisionExamples[`${guide.destinationId}:${guide.id}`]!;
       expect(example, guide.title).toBeDefined();
       expect(example.situation.length).toBeGreaterThan(40);
       expect(example.decision.length).toBeGreaterThan(50);
