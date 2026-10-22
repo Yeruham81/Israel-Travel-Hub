@@ -30,6 +30,8 @@ type PortDetails = {
   faqs: { q: string; a: string }[];
   related: ShoreReadingGuide[];
   alternativeSourceId: string;
+  portAccess: { heading: string; paragraphs: string[]; source: { title: string; url: string } };
+  routeFit: { route: string; goodFor: string; constraint: string }[];
 };
 
 const masadaPhoto: GuidePhoto = { src: masada, alt: "Masada's desert plateau and ancient fortress seen from the air", credit: "Godot13 · CC BY-SA 4.0 · resized WebP", sourceUrl: "https://commons.wikimedia.org/wiki/File:Israel-2013-Aerial_13-Masada.jpg", licenseUrl: "https://creativecommons.org/licenses/by-sa/4.0/" };
@@ -135,6 +137,19 @@ const portDetails: Record<ShorePortId, PortDetails> = {
     ],
     related: portShoreGuides.ashdod,
     alternativeSourceId: "beinharim-ashdod-jlm-bethlehem",
+    portAccess: {
+      heading: "Ashdod Port: arrange the meeting point before disembarking",
+      paragraphs: [
+        "Ashdod is a secure commercial port, not a pedestrian city-center terminal. The port's passenger guidance restricts walking within the port and ordinary private-vehicle entry. For a visiting cruise ship, follow your cruise line's current instructions about any internal shuttle and the authorized shore-excursion meeting area.",
+        "When arranging an independent driver, share the ship's name, disembarkation instructions and all-aboard deadline. Confirm whether the pickup is inside an authorized area or outside the port after a shuttle: those are not interchangeable locations.",
+      ],
+      source: { title: "Ashdod Port — passenger and cruise access guidance", url: "https://www.ashdodport.co.il/serviceslist/passengers/Pages/passengers-cruises.aspx" },
+    },
+    routeFit: [
+      { route: "Tel Aviv and Old Jaffa", goodFor: "A city-and-coast day with flexibility for lunch and shorter walks", constraint: "Old Jaffa's lanes may require walking away from the vehicle; road traffic still needs a return margin." },
+      { route: "Jerusalem", goodFor: "Travelers prioritizing one or two historic or religious sites", constraint: "The Old City involves walking and site queues, so a full checklist of landmarks is not realistic on every port call." },
+      { route: "Masada and the Dead Sea", goodFor: "A long call dedicated to desert scenery and a limited number of stops", constraint: "Masada requires visit coordination and has last-entry and cable-car cutoffs; beach access is a separate timed stop." },
+    ],
   },
   haifa: {
     title: "Haifa shore excursions: tours & private day trips",
@@ -154,6 +169,19 @@ const portDetails: Record<ShorePortId, PortDetails> = {
     ],
     related: portShoreGuides.haifa,
     alternativeSourceId: "beinharim-haifa-jlm-bethlehem",
+    portAccess: {
+      heading: "Haifa Port: the pedestrian bridge and the driver meeting point",
+      paragraphs: [
+        "Haifa Port's public passenger-terminal entrance connects to downtown by a pedestrian-only bridge near 65 HaAtsmaut Street, close to Haifa Center HaShmona railway station. Vehicles cannot enter the bridge; do not assume that a driver can meet you at the ship's gangway.",
+        "Your cruise company may specify a different disembarkation or tour-group meeting arrangement. Follow that instruction first, then agree with your driver exactly which side of the terminal access route to meet on and when to return.",
+      ],
+      source: { title: "Haifa Port — passenger terminal and downtown access", url: "https://www.haifaport.co.il/en/terminal/" },
+    },
+    routeFit: [
+      { route: "Akko (Acre) and Haifa", goodFor: "More sightseeing time close to the northern port", constraint: "Akko's historic streets are walked on foot, and any Rosh Hanikra extension needs a separate operating-status check." },
+      { route: "Nazareth and Sea of Galilee", goodFor: "Christian heritage with selected northern landscape stops", constraint: "The sites are spread around the region; choose a few rather than assuming all churches and lake stops fit." },
+      { route: "Jerusalem or Tel Aviv–Jaffa", goodFor: "A specific must-see destination on a generously timed call", constraint: "The long southbound journey reduces time at the destination; agree a selective itinerary and return margin." },
+    ],
   },
 };
 
