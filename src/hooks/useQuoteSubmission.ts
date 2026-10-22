@@ -43,23 +43,23 @@ export function useQuoteSubmission() {
         return;
       }
       if (response.status === 403 || response.status === 404) {
-        setResult({ state: "failed", requestId, httpStatus: response.status, deliveryCode: response.status === 403 ? "HTTP_403" : "HTTP_404", error: response.status === 403 ? "This page could not validate your submission. Please refresh the page and try again." : "The message service could not be found. Please refresh the page or contact Moshe." });
+        setResult({ state: "failed", requestId, httpStatus: response.status, deliveryCode: response.status === 403 ? "HTTP_403" : "HTTP_404", error: response.status === 403 ? "This page could not validate your submission. Please refresh the page and try again." : "The message service could not be found. Please refresh the page or contact me." });
         return;
       }
       let body: { accepted?: boolean; requestId?: string; deliveryCode?: unknown };
       try { body = await response.json() as typeof body; }
       catch {
-        setResult({ state: "failed", requestId, httpStatus: response.status, deliveryCode: response.ok ? "BAD_RESPONSE" : "HTTP_ERROR", error: "The message service returned an unexpected response. We could not confirm email delivery." });
+        setResult({ state: "failed", requestId, httpStatus: response.status, deliveryCode: response.ok ? "BAD_RESPONSE" : "HTTP_ERROR", error: "The message service returned an unexpected response. Email delivery could not be confirmed." });
         return;
       }
       if (!response.ok || body?.accepted !== true || body.requestId !== requestId) {
-        setResult({ state: "failed", requestId, httpStatus: response.status, deliveryCode: knownDeliveryErrorCode(body?.deliveryCode) ?? (response.ok ? "BAD_RESPONSE" : "HTTP_ERROR"), error: "We could not confirm email delivery. Please check with Moshe before sending the same message again." });
+        setResult({ state: "failed", requestId, httpStatus: response.status, deliveryCode: knownDeliveryErrorCode(body?.deliveryCode) ?? (response.ok ? "BAD_RESPONSE" : "HTTP_ERROR"), error: "Email delivery could not be confirmed. Please contact me before sending the same message again." });
         return;
       }
       attempt.current!.accepted = true;
       setResult({ state: "sent", requestId });
     } catch {
-      setResult({ state: "failed", ...(attempt.current ? { requestId: attempt.current.requestId } : {}), deliveryCode: controller.signal.aborted ? "REQUEST_TIMEOUT" : "REQUEST_NETWORK", error: "We could not confirm email delivery. Please check with Moshe before sending the same message again." });
+      setResult({ state: "failed", ...(attempt.current ? { requestId: attempt.current.requestId } : {}), deliveryCode: controller.signal.aborted ? "REQUEST_TIMEOUT" : "REQUEST_NETWORK", error: "Email delivery could not be confirmed. Please contact me before sending the same message again." });
     } finally { clearTimeout(timer); sending.current = false; }
   }
 

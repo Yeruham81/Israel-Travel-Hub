@@ -65,7 +65,7 @@ const sections: LegalSection[] = [
   { id: "law-changes-contact", title: "Applicable law, updates and contact", content: <>
     <p>Israeli law applies to these website terms, subject to mandatory protections or jurisdiction rules that may apply to you. Disputes may be brought before a court with lawful jurisdiction; these terms do not require you to waive a forum or remedy that the law guarantees.</p>
     <p>The date at the top identifies this version. Updates address future use and new features. Updating a web page does not by itself retrospectively change the price or conditions of an already confirmed booking; any change must have a valid contractual or legal basis.</p>
-    <p>For a question, correction, service issue or cancellation, contact Moshe Barak at {email}. Include enough information to identify the relevant enquiry or booking, and keep a copy of important correspondence.</p>
+    <p>For a question, correction, service issue or cancellation, contact me at {email}. Include enough information to identify the relevant enquiry or booking, and keep a copy of important correspondence.</p>
   </> },
 ];
 

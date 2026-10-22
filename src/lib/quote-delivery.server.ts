@@ -137,7 +137,7 @@ export function createQuoteDeliveryService({
         const failure = deliveryFailure(error, payload.requestId);
         try { reportFailure(failure); } catch { /* Logging must not change the delivery result. */ }
         // A timeout after sending the API request can be ambiguous. Never retry automatically.
-        return { status: 502, body: { error: "We could not confirm email delivery. Please check with Moshe before sending the same message again.", requestId: payload.requestId, deliveryCode: failure.deliveryCode } };
+        return { status: 502, body: { error: "Email delivery could not be confirmed. Please contact me before sending the same message again.", requestId: payload.requestId, deliveryCode: failure.deliveryCode } };
       } finally { inFlight--; }
     });
     recent.set(payload.requestId, { fingerprint, expires: timestamp + windowMs, result });
