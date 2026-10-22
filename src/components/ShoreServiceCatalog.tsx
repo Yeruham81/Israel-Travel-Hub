@@ -18,6 +18,8 @@ export function ShoreServiceCatalog({ portId, filters, onFilterChange, itinerary
   const port = shorePorts[portId];
   const catalog = getShoreCatalog(portId);
   const visible = getShoreCatalog(portId, filters);
+  const privateTours = visible.filter((service) => Boolean(service.itinerary));
+  const partnerTours = visible.filter((service) => !service.itinerary);
   const destinations = shoreDestinations.filter((destination) => catalog.some((service) => service.destinationIds.includes(destination.id)));
   const withoutDestination = parseShoreServiceSearch({ ...filters, destination: undefined });
   function filter(event: MouseEvent<HTMLAnchorElement>, next: ShoreServiceSearch) {
@@ -42,8 +44,13 @@ export function ShoreServiceCatalog({ portId, filters, onFilterChange, itinerary
       <p role="status" aria-live="polite" className="text-sm text-muted-foreground">{visible.length} {visible.length === 1 ? "tour" : "tours"}{filters.destination ? ` · ${shoreDestinations.find((destination) => destination.id === filters.destination)?.label}` : ""}</p>
       {filters.destination && <a href={shoreServiceHref(portId, {})} onClick={(event) => filter(event, {})} className="text-sm font-medium text-primary underline">Clear filters</a>}
     </div>
-    {visible.length > 0 ? <ul aria-label={`Tours from ${port.name} Port`} className="mt-5 grid gap-5 sm:grid-cols-2 xl:grid-cols-3">
-      {visible.map((service) => {
+    {visible.length > 0 ? <>
+      {privateTours.length > 0 && <section aria-labelledby="owner-tours-h" data-section="moshe-private-tours">
+        <p className="text-xs font-bold uppercase tracking-widest text-primary">Personally arranged with Moshe Barak</p>
+        <h3 id="owner-tours-h" className="mt-2 text-2xl font-semibold">My four private day trips from {port.name} Port</h3>
+        <p className="mt-3 max-w-3xl text-sm leading-relaxed text-muted-foreground">Choose a private car-and-driver itinerary, then send me your ship's schedule and party details for a tailored quote. Licensed guiding and site admissions are arranged separately.</p>
+        <ul aria-label={`My private day trips from ${port.name} Port`} className="mt-5 grid gap-5 sm:grid-cols-2">
+      {privateTours.map((service) => {
         const itinerary = service.itinerary;
         const provider = service.provider;
         const external = !provider.url.startsWith("/");
@@ -72,7 +79,46 @@ export function ShoreServiceCatalog({ portId, filters, onFilterChange, itinerary
           </div>
         </li>;
       })}
-    </ul> : <div className="mt-5 rounded-xl border p-6"><h3 className="text-2xl">No tours match this destination</h3><p className="mt-2 text-muted-foreground">Choose another destination or clear the filter to see all tours from {port.name} Port.</p></div>}
+    </ul>
+      </section>}
+      {partnerTours.length > 0 &&           <section aria-labelledby="partner-tours-h" className={privateTours.length ? "mt-12 border-t pt-10" : "mt-7"}>
+            <p className="text-xs font-bold uppercase tracking-widest text-primary">Independent excursion providers</p>
+            <h3 id="partner-tours-h" className="mt-2 text-2xl font-semibold">More guided shore excursions from {port.name}</h3>
+            <p className="mt-3 max-w-3xl text-sm leading-relaxed text-muted-foreground">These tours are offered by independent operators and booked on their own booking platforms. Check the exact price, what is included and the port-return arrangements before paying.</p>
+            <ul aria-label={`Other operators' tours from ${port.name} Port`} className="mt-6 grid gap-5 sm:grid-cols-2 xl:grid-cols-3">
+              {partnerTours.map((service) => {
+                const provider = service.provider;
+                const external = !provider.url.startsWith("/");
+                return <li key={service.id} data-testid="shore-service-card" data-service-id={service.id} data-product-id={service.productId} data-operator-id={service.operator?.id} data-booking-platform={service.partner?.id || "direct"} data-service-kind={service.kind} className="flex min-w-0 flex-col overflow-hidden rounded-2xl border bg-card">
+                  <div className="relative">
+                    <img src={service.photo.src} alt={service.photo.alt} width={720} height={540} loading="lazy" decoding="async" className="aspect-[4/3] w-full object-cover" />
+                    <span className="absolute bottom-3 left-3 rounded-full bg-navy/90 px-3 py-1.5 text-xs font-semibold text-navy-foreground">{service.groupLabel}</span>
+                  </div>
+                  <div className="flex flex-1 flex-col p-5">
+                    <h3 className="text-xl font-semibold leading-snug">{service.title}</h3>
+                    <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{service.description}</p>
+                    <p className="mt-3 flex items-start gap-2 text-sm"><Clock3 className="mt-0.5 h-4 w-4 shrink-0 text-primary" aria-hidden />{service.duration}</p>
+                    <p className="mt-3 text-sm"><span className="font-medium">Tour operator:</span> {service.operator?.name || provider.providerName}</p>
+                    <p className="mt-1 text-xs text-muted-foreground">Booking platform: {service.partner?.name || provider.providerName}{provider.isAffiliate && " · Sponsored link"}</p>
+                    <div className="mt-auto pt-5">
+                      <div className="border-t pt-4">
+                        {service.listedPrice ? <>
+                          <p className="text-xs text-muted-foreground">Published starting price · checked {service.listedPrice.checkedAt}</p>
+                          <p className="mt-1 text-2xl font-bold text-primary">US${service.listedPrice.amount.toLocaleString("en-US")}</p>
+                          <p className="mt-1 text-xs text-muted-foreground">{service.listedPrice.basis === "per_group" ? `Per group · up to ${service.listedPrice.maxPartySize}` : "Per person"} · Confirm the total on the booking site</p>
+                        </> : <>
+                          <p className="text-lg font-semibold">Check current price</p>
+                          <p className="mt-1 text-xs text-muted-foreground">No verified current price to display · See the booking site</p>
+                        </>}
+                      </div>
+                      <a href={provider.url} target={external ? "_blank" : undefined} rel={external ? relFor(provider.isAffiliate) : undefined} onClick={external ? () => recordOutboundClick({ pageId: port.pageId, productId: service.productId, offerId: provider.id }) : undefined} className="btn btn-primary mt-4 w-full">{provider.ctaLabel}{external && <><span aria-hidden> ↗</span><span className="sr-only"> (opens in a new tab)</span></>}</a>
+                    </div>
+                  </div>
+                </li>;
+              })}
+            </ul>
+          </section>}
+    </> : <div className="mt-5 rounded-xl border p-6"><h3 className="text-2xl">No tours match this destination</h3><p className="mt-2 text-muted-foreground">Choose another destination or clear the filter to see all tours from {port.name} Port.</p></div>}
     <p className="mt-5 text-xs leading-relaxed text-muted-foreground">External starting prices are dated reference prices, not live quotes. Your date, party size, options and booking currency can change the total; check current prices, inclusions and cancellation terms on the booking site. My ILS rates are per vehicle for up to four on weekdays, transport only; guiding, admission, meals and tips are extra.</p>
     <p className="mt-5 text-sm text-muted-foreground">Prefer another return itinerary? <a href="#request-quote" onClick={() => onSelectItinerary("other")} className="font-medium text-primary underline">Ask for a custom itinerary</a>.</p>
   </section>;
