@@ -9,6 +9,7 @@ import { cityStayGuides, jerusalemAreaGuides, telAvivAreaGuides, neighborhoodGui
 import { affiliateConfig, getSource, hotelsForArea, linksForPage } from "@/data/registry";
 import { telAvivHotelCatalog } from "@/components/TelAvivHotelBrowser";
 import { readOutboundClicks } from "@/lib/outbound";
+import { telAvivHotelPhotos } from "@/data/telAvivHotelPhotos";
 import { routeTree } from "@/routeTree.gen";
 
 // Keep router matching real, while making isolated page renders independent of
@@ -123,8 +124,33 @@ describe("Tel Aviv direct hotel catalog", () => {
       expect(link).toHaveAttribute("target", "_blank");
       expect(link.getAttribute("rel")).toContain(booking.isAffiliate ? "sponsored" : "noopener");
     }
-    expect(within(catalog).getAllByText("Neighborhood photograph")).toHaveLength(16);
+    const displayedImages = within(catalog).getAllByTestId("hotel-illustration") as HTMLImageElement[];
+    expect(displayedImages).toHaveLength(16);
+    expect(new Set(displayedImages.map((img) => img.src)).size).toBe(16);
+    expect(new Set(telAvivHotelCatalog.map((hotel) => telAvivHotelPhotos[hotel.id]?.src)).size).toBe(16);
+    expect(within(catalog).getAllByText(/Illustrative hotel photograph|Tel Aviv city photograph/)).toHaveLength(16);
+    expect(within(catalog).getByText(/not photographs of the listed hotels/i)).toBeInTheDocument();
+    expect(screen.getByTestId("tel-aviv-hotel-photo-credits")).toBeInTheDocument();
     expect(catalog.textContent).not.toMatch(/ILS\s*\d{2,}|rooms available now|live price/i);
+  });
+
+  it("allows all sixteen property-independent photo licences to be inspected", () => {
+    const { container } = render(<CityStayPage g={cityStayGuides.telaviv} />);
+    const credits = screen.getByTestId("tel-aviv-hotel-photo-credits");
+    const sources = within(credits).getAllByRole("link", { hidden: true });
+    expect(sources.length).toBeGreaterThanOrEqual(12);
+    for (const hotel of telAvivHotelCatalog) {
+      const photo = telAvivHotelPhotos[hotel.id]!;
+      expect(photo.alt).not.toContain(hotel.name);
+      expect(photo.src).toBeTruthy();
+      expect(photo.credit).toBeTruthy();
+      if (photo.src.startsWith("https://")) {
+        expect(photo.src).toMatch(/^https:\/\/images\.unsplash\.com\/photo-/);
+        expect(photo.sourceUrl).toMatch(/^https:\/\/unsplash\.com\/photos\//);
+        expect(photo.licenseUrl).toBe("https://unsplash.com/license");
+      }
+    }
+    expect(container.querySelectorAll("#book [data-testid='tel-aviv-hotel-card']")).toHaveLength(16);
   });
 
   it("filters by individual area, resets to all, and sorts cards by hotel name", () => {
