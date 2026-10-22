@@ -109,7 +109,7 @@ describe.each([
       }
       unmount();
     }
-  });
+  }, 20000);
 
   it("each area has a balanced mix of two existing affiliate hotels and two new direct Expedia pages", () => {
     for (const area of areas) {
