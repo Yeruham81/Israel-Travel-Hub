@@ -77,6 +77,24 @@ export function AttractionGuidePage({ id }: {id:AttractionId}) {
       <ul className="mt-4 grid gap-3 sm:grid-cols-2">{a.official.map(o=><li key={o.url}><a href={o.url} target="_blank" rel="noopener noreferrer" className="block rounded-xl border bg-card p-4 font-semibold text-primary underline underline-offset-4">{o.label} <span className="sr-only">(opens in a new tab)</span>↗</a></li>)}</ul>
     </Section>
     <FaqList faqs={a.faqs}/>
+    <RelatedLinks title="Plan a multi-day Israel itinerary" items={
+      a.region === "Jerusalem" ? [
+        { label: "Israel in 3 days: Jerusalem and more", to: "/travel-blog/israel-itinerary-3-days/" },
+        { label: "5-day Israel route with Jerusalem time", to: "/travel-blog/israel-itinerary-5-days/" },
+      ] : a.region === "Sea of Galilee" ? [
+        { label: "7 days: Jerusalem, Galilee and coast", to: "/travel-blog/israel-itinerary-7-days/" },
+        { label: "10 days: a longer Galilee stay", to: "/travel-blog/israel-itinerary-10-days/" },
+      ] : a.region === "Haifa & northern coast" ? [
+        { label: "5-day coast and Jerusalem itinerary", to: "/travel-blog/israel-itinerary-5-days/" },
+        { label: "10 days: Akko and northern coast", to: "/travel-blog/israel-itinerary-10-days/" },
+      ] : a.region === "Dead Sea & Negev" ? [
+        { label: "3-day itinerary with Masada and Dead Sea", to: "/travel-blog/israel-itinerary-3-days/" },
+        { label: "7-day itinerary and desert day", to: "/travel-blog/israel-itinerary-7-days/" },
+      ] : [
+        { label: "3 days in Jerusalem and Tel Aviv", to: "/travel-blog/israel-itinerary-3-days/" },
+        { label: "7 days across Israel", to: "/travel-blog/israel-itinerary-7-days/" },
+      ]
+    }/>
     <RelatedLinks title="Continue exploring" items={[
       ...nearby.map(other=>({label:attractionGuides[other].title,to:attractionPath(other)})),
       {label:areaLinks[a.region]!.label,to:areaLinks[a.region]!.to},
