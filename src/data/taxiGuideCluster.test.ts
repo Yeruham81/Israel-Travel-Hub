@@ -47,10 +47,10 @@ describe("intent-specific taxi guide cluster", () => {
   });
 
   it("provides context-specific links without a conflicting guide purpose", () => {
-    expect(taxiGuideCluster.taxis.sections.find((section) => section.id === "fares")?.links?.[0].to).toBe(travelGuidePaths.taxiFares);
-    expect(taxiGuideCluster.taxis.sections.find((section) => section.id === "airport")?.links?.[0].to).toBe(travelGuidePaths.airportTaxis);
-    expect(taxiGuideCluster.taxiFares.sections.find((section) => section.id === "extras")?.links?.[0].to).toBe(travelGuidePaths.airportTaxis);
-    expect(taxiGuideCluster.airportTaxis.sections.find((section) => section.id === "fares")?.links?.[0].to).toBe(travelGuidePaths.taxiFares);
+    expect(taxiGuideCluster.taxis.sections.find((section) => section.id === "fares")?.links?.[0]?.to).toBe(travelGuidePaths.taxiFares);
+    expect(taxiGuideCluster.taxis.sections.find((section) => section.id === "airport")?.links?.[0]?.to).toBe(travelGuidePaths.airportTaxis);
+    expect(taxiGuideCluster.taxiFares.sections.find((section) => section.id === "extras")?.links?.[0]?.to).toBe(travelGuidePaths.airportTaxis);
+    expect(taxiGuideCluster.airportTaxis.sections.find((section) => section.id === "fares")?.links?.[0]?.to).toBe(travelGuidePaths.taxiFares);
     expect(taxiGuideCluster.airportTaxis.sections.find((section) => section.id === "weekend")?.links?.some((link) => link.to === travelGuidePaths.calendar)).toBe(true);
   });
 });
