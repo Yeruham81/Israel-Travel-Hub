@@ -155,6 +155,14 @@ function Hotels() {
             );
           })}
         </div>
+        <aside className="mt-7 rounded-xl border bg-card p-5" aria-labelledby="hotel-bases-h">
+          <h3 id="hotel-bases-h" className="text-xl font-semibold">One hotel base or several?</h3>
+          <div className="mt-4 grid gap-4 md:grid-cols-3">
+            <p className="text-sm leading-relaxed"><strong>Mostly Jerusalem or Tel Aviv:</strong> Stay in the city where you will spend most evenings; account for the final airport-to-hotel connection rather than choosing solely by the flight distance.</p>
+            <p className="text-sm leading-relaxed"><strong>Several days in the north:</strong> Compare Haifa as a coastal city base with Tiberias for activities around the Sea of Galilee. The specific sights and whether you have a car change the better choice.</p>
+            <p className="text-sm leading-relaxed"><strong>A Dead Sea resort break:</strong> Consider separate nights near Ein Bokek if beach, spa or pool time is the goal. Ein Gedi is a different inland base, not an interchangeable resort address.</p>
+          </div>
+        </aside>
         <div className="mt-5 flex items-start gap-3 rounded-xl border border-primary/20 bg-secondary/50 p-4">
           <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-primary" aria-hidden />
           <p className="text-sm leading-relaxed">Hotel prices and room availability depend on the dates, guests and rate conditions you enter on the actual booking site. Information here is planning guidance, not a live room quote.</p>
