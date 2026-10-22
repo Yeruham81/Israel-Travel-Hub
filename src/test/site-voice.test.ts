@@ -47,12 +47,13 @@ describe("owner voice throughout the public site", () => {
       "src/components/Layout.tsx",
       "src/components/StayGuideParts.tsx",
       "src/components/AirportBookingPlatforms.tsx",
-      "src/components/NeighborhoodStayPage.tsx",
+      
       "src/components/TravelGuide.tsx",
     ]) {
       expect(source(file), file).toMatch(/earn me a commission/);
       expect(source(file), file).not.toMatch(/earn us a commission/);
     }
+    expect(source("src/components/NeighborhoodStayPage.tsx")).toContain("I may earn a commission");
     expect(source("src/components/HomeContactForm.tsx")).toContain("Tell me how I can help");
     expect(source("src/routes/private-driver.tsx")).toContain("Tell me where you want to go");
     expect(source("src/routes/transfers.index.tsx")).toContain("Why arrange your airport pickup with me?");

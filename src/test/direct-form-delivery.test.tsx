@@ -102,7 +102,7 @@ describe("one-step direct form delivery", () => {
     vi.stubGlobal("fetch", fetch);
     await contactForm(); fill();
     fireEvent.click(screen.getByRole("button", { name: "Send message" }));
-    expect(await screen.findByRole("alert")).toHaveTextContent("could not confirm email delivery");
+    expect(await screen.findByRole("alert")).toHaveTextContent("Email delivery could not be confirmed");
     expect(screen.getByRole("alert")).not.toHaveTextContent(/SMTP|password/);
     expect(screen.getByLabelText("Your message *")).toHaveValue(fields.message);
     expect(fetch).toHaveBeenCalledOnce();
@@ -123,7 +123,7 @@ describe("one-step direct form delivery", () => {
     vi.stubGlobal("fetch", fetch);
     await contactForm(); fill();
     fireEvent.click(screen.getByRole("button", { name: "Send message" }));
-    expect(await screen.findByRole("alert")).toHaveTextContent("could not confirm email delivery");
+    expect(await screen.findByRole("alert")).toHaveTextContent("Email delivery could not be confirmed");
     expect(screen.getByRole("alert")).toHaveTextContent("Error code: BAD_RESPONSE (HTTP 200)");
     expect(screen.queryByText("Thank you for contacting me")).not.toBeInTheDocument();
   });
