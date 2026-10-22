@@ -26,11 +26,11 @@ const guides: Record<AirportTransferRouteId, RouteGuide> = {
       { title: "East Jerusalem & residential neighbourhoods", text: "Send the full street address and a location pin where useful. For an apartment, obtain the building entrance, host contact and check-in arrangements before your flight." },
     ],
     planningTitle: "A late arrival needs a hotel plan too",
-    planningText: "Include your flight's Israel-local arrival date and time, especially when landing after midnight. Ask your hotel about late reception or key collection, and request any night, weekend or holiday supplement in the written quote. For an onward appointment or event, leave room for airport formalities and traffic as well as the drive.",
+    planningText: "Include your flight's Israel-local arrival date and time, especially when landing after midnight. Ask your hotel about late reception or key collection, and ask me to confirm any extra charges for night, weekend or holiday trips in the written quote. For an onward appointment or event, leave room for airport formalities and traffic as well as the drive.",
     faqs: [
       { q: "How long is the private transfer to Jerusalem?", a: "Allow approximately 45–60 minutes or more after pickup, as a planning estimate. Your hotel location and traffic can make it longer. This is a road-time estimate, not a promise of reaching your hotel within an hour of landing." },
       { q: "Can the driver take me to a hotel inside the Old City?", a: "Provide the exact hotel and ask for the nearest permitted drop-off. Confirm any remaining walk, steps and luggage arrangements with the hotel and me before booking." },
-      { q: "Can I request a Friday-night or holiday arrival?", a: "Yes. Include your actual flight date and time in the request. I must confirm availability, pickup arrangements and any supplement; submitting a request does not reserve a driver." },
+      { q: "Can I request a Friday-night or holiday arrival?", a: "Yes. Include your actual flight date and time in the request. I must confirm availability, pickup arrangements and any extra charges; submitting a request does not reserve a driver." },
     ],
     related: [
       { label: "Find your Jerusalem hotel area", to: "/travel-blog/where-to-stay-in-jerusalem/" },

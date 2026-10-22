@@ -40,7 +40,7 @@ export function airportRouteMeta(id: AirportTransferRouteId) {
 
 const pickupSteps = [
   { title: "Send your arrival details", text: "Use the flight's arrival date and time in Israel local time. Add the flight number, exact hotel or address, all passengers, luggage and children's ages. Request at least 24 hours ahead." },
-  { title: "Agree the full quote", text: "Confirm vehicle and luggage capacity, requested child seats, night or holiday supplements, included waiting, flight-delay arrangements, payment and cancellation terms. Your ride is booked only after confirmation." },
+  { title: "Agree the full quote", text: "Confirm vehicle and luggage capacity, requested child seats, any extra charges for night, weekend or holiday trips, included waiting, flight-delay arrangements, payment and cancellation terms. Your ride is booked only after confirmation." },
   { title: "Save the meeting instructions", text: "Use the meeting point and contact number in your booking confirmation for the terminal where you actually arrive. Keep them available offline and contact the operator if airport formalities take longer than expected." },
 ];
 
@@ -52,7 +52,7 @@ export function AirportRoutePage({ id }: { id: AirportTransferRouteId }) {
   const { price } = guide.rate;
   const faqs = [
     ...guide.faqs,
-    { q: "Is the starting price for the whole vehicle?", a: `The published starting rate of ILS ${price.amount.toLocaleString("en-US")} is a one-way weekday price per vehicle for up to four passengers. Night, weekend and holiday supplements may apply. The vehicle must fit your luggage; larger groups and special requirements need a separate quote. I confirm the final total and availability.` },
+    { q: "Is the starting price for the whole vehicle?", a: `The published starting rate of ILS ${price.amount.toLocaleString("en-US")} is a one-way weekday price per vehicle for up to four passengers. Extra charges may apply for night, weekend or holiday trips. The vehicle must fit your luggage; larger groups and special requirements need a separate quote. I confirm the final total and availability.` },
     { q: "How do I send the request and confirm the booking?", a: "Complete the form and press Send quote request to email your details directly to me. Wait for the on-page confirmation. Ask me to confirm your quote and booking in writing before relying on the pickup." },
   ];
   return (
@@ -67,7 +67,7 @@ export function AirportRoutePage({ id }: { id: AirportTransferRouteId }) {
             <div><p className="text-xs font-medium text-muted-foreground">Published starting rate</p><PriceDisplay amount={price.amount} size="hero" className="mt-1" /><p className="mt-2 text-xs text-muted-foreground">One way · per vehicle · up to 4</p></div>
             <div><p className="text-xs font-medium text-muted-foreground">Drive after pickup</p><p className="mt-1 font-semibold">{guide.driveTime}</p><p className="mt-1 text-xs text-muted-foreground">Guide estimate · traffic can add time</p></div>
           </div>
-          <p className="mt-2 text-xs leading-relaxed text-muted-foreground">Weekday starting rate. Night, weekend and holiday supplements may apply. Final price and availability by confirmation; larger groups need a quote.</p>
+          <p className="mt-2 text-xs leading-relaxed text-muted-foreground">Weekday starting rate. Extra charges may apply for night, weekend or holiday trips. Final price and availability by confirmation; larger groups need a quote.</p>
           <ExchangeRateNote className="mt-3" />
           <a href="#request-quote" onClick={focusQuote} className="btn btn-primary mt-5">Request your airport transfer</a>
           <p className="mt-3 text-sm text-muted-foreground">Private vehicle for your party · Exact hotel or address · Request at least 24 hours ahead</p>

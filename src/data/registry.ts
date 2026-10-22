@@ -273,7 +273,7 @@ export const airportTransferRates: AirportTransferRate[] = ([
 ] as const).map(([id, destination, amount, popular]) => ({
   id, destination, popular,
   price: { kind: "published_starting_rate", currency: "ILS", amount, basis: "per_vehicle", maxPartySize: 4,
-    conditions: "One-way weekday transfer for up to 4 passengers. Night, weekend and holiday supplements may apply. I confirm the final price and availability in writing; request at least 24 hours ahead.",
+    conditions: "One-way weekday transfer for up to 4 passengers. Extra charges may apply for night, weekend or holiday trips. I confirm the final price and availability in writing; request at least 24 hours ahead.",
     sourceId: "moshe-airport-transfers" },
 }));
 
@@ -320,7 +320,7 @@ export const shoreExcursionRates: ShoreExcursionRate[] = ([
 ] as const).map(([id, portId, destination, amount]) => ({
   id, portId, destination,
   price: { kind: "published_starting_rate", currency: "ILS", amount, basis: "per_vehicle", maxPartySize: 4,
-    conditions: "Full-day return transportation with a private driver for up to 4 passengers on weekdays. Licensed guiding, admission, meals and tips are excluded. Night, weekend and holiday supplements may apply. Final itinerary, price and availability require confirmation.",
+    conditions: "Full-day return transportation with a private driver for up to 4 passengers on weekdays. Licensed guiding, admission, meals and tips are excluded. Extra charges may apply for night, weekend or holiday trips. Final itinerary, price and availability require confirmation.",
     sourceId: shorePorts[portId].sourceId },
 }));
 
@@ -762,7 +762,7 @@ export const sources: SourceReference[] = [
     publisher: "Israel-Taxi.com (Moshe Barak)",
     url: `${OWNER_BASE}/airport-transfers/`,
     checkedAt: AIRPORT_TRANSFER_CHECK_DATE,
-    note: "Publisher's starting fares for eleven Ben Gurion airport destinations, for up to 4 passengers on weekdays. Night/weekend/holiday supplements may apply; at least 24 hours' notice; final price and availability by quote. Not live inventory.",
+    note: "Publisher's starting fares for eleven Ben Gurion airport destinations, for up to 4 passengers on weekdays. Extra charges may apply for night, weekend or holiday trips; at least 24 hours' notice; final price and availability by quote. Not live inventory.",
   },
   {
     id: "intui-airport",
@@ -1545,7 +1545,7 @@ export const offers: Offer[] = [
       amount: 550,
       basis: "per_vehicle",
       maxPartySize: 4,
-      conditions: "Published weekday starting fare for up to 4 passengers. Night, weekend and holiday surcharges may apply. Minimum 24 hours' notice. Not a live quote.",
+      conditions: "Published weekday starting fare for up to 4 passengers. Extra charges may apply for night, weekend or holiday trips. Minimum 24 hours' notice. Not a live quote.",
       sourceId: "moshe-airport-transfers",
     },
     maxPassengersKnown: 4,
@@ -1632,7 +1632,7 @@ export const routeFaqs: { q: string; a: string }[] = [
   },
   {
     q: "Is ILS 550 the price I will pay?",
-    a: "No. ILS 550 is my published weekday starting rate for up to four passengers. Night, weekend and holiday surcharges may apply, and the final amount is set in a quote. Other providers set their own prices on their sites.",
+    a: "No. ILS 550 is my published weekday starting rate for up to four passengers. Extra charges may apply for night, weekend or holiday trips. I'll confirm the final amount in a personal quote. Other providers set their own prices on their sites.",
   },
   {
     q: "What happens if my flight is delayed?",
@@ -1792,7 +1792,7 @@ export const providerLinks: ProviderLink[] = [
     title: "Private pre-booked transfer", summary: "Local driver business. Ask for a quote for your Tel Aviv or Jaffa address, party size and arrival time.",
     ctaLabel: "Request a quote", url: "/travel-blog/ben-gurion-airport-to-tel-aviv/#request-quote", isAffiliate: false,
     reentryNote: "Your details are not passed on. Include flight time, passengers, luggage and address in your request.",
-    confirm: ["Final price and surcharges", "Vehicle size", "Meeting point and waiting time", "Child seats"], sourceId: "moshe-airport-transfers",
+    confirm: ["Final price and any extra charges", "Vehicle size", "Meeting point and waiting time", "Child seats"], sourceId: "moshe-airport-transfers",
   },
   {
     id: "tlv-ta-intui", pageIds: ["tlv-telaviv"], providerName: "Intui.travel", relationship: "booking_platform", partnerId: "intui", mode: "provider_redirect",

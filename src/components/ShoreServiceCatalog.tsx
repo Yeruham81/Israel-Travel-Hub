@@ -79,7 +79,7 @@ export function ShoreServiceCatalog({ portId, filters, onFilterChange, itinerary
         </li>;
       })}
     </ul>
-        <p className="mt-5 text-xs leading-relaxed text-muted-foreground" data-testid="owner-price-terms">My published starting rates are in ILS per vehicle for up to four passengers on weekdays, covering transportation only. Licensed guiding, admission fees, meals and tips are extra. Night, weekend or holiday supplements may apply; I'll confirm the itinerary, availability and full price before booking.</p>
+        <p className="mt-5 text-xs leading-relaxed text-muted-foreground" data-testid="owner-price-terms">My published starting rates are in ILS per vehicle for up to four passengers on weekdays, covering transportation only. Licensed guiding, admission fees, meals and tips are extra. Extra charges may apply for night, weekend or holiday trips. I'll confirm the itinerary, availability and full price before booking.</p>
       </section>}
       {partnerTours.length > 0 && <section aria-labelledby="partner-tours-h" className={privateTours.length ? "mt-12 border-t pt-10" : "mt-7"}>
             <p className="text-xs font-bold uppercase tracking-widest text-primary">Independent excursion providers</p>

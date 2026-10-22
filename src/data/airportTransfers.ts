@@ -55,7 +55,7 @@ export const airportTransferTips = [
 
 export const airportTransferFaqs = [
   { q: "Is this a private transfer for my party?", a: "This page is for airport transfers arranged in advance for your party. Ask me to confirm the vehicle, pickup and drop-off details in your quote." },
-  { q: "Are the displayed prices per person?", a: "No. They are my published starting prices per vehicle for up to four passengers on weekdays. Night, weekend and holiday supplements may apply. Your final price and availability are confirmed with the operator." },
+  { q: "Are the displayed prices per person?", a: "No. They are my published starting prices per vehicle for up to four passengers on weekdays. Extra charges may apply for night, weekend or holiday trips. Your final price and availability are confirmed with the operator." },
   { q: "Can I request a larger vehicle or child seats?", a: "Yes. Include all passengers, luggage and children's ages in the request. The operator will confirm the suitable vehicle and any requested seats before booking." },
   { q: "How far ahead should I arrange the ride?", a: "I ask for at least 24 hours' notice. Request earlier for busy periods, larger groups or special vehicle requirements; sending an inquiry does not confirm availability." },
   { q: "What should I confirm about delays or cancellation?", a: "Ask for the meeting point, included waiting time, delay arrangements, cancellation deadline and payment terms in writing with your final quote. Platform bookings follow the terms of the offer you choose there." },
