@@ -1,3 +1,4 @@
+import { tourCategories, tourCategoryPaths } from "@/data/tours";
 import type { LinkProps } from "@tanstack/react-router";
 import { airportTransferRates, airportTransferRoutes, travelGuidePaths } from "@/data/registry";
 
@@ -73,8 +74,7 @@ export const allNavGroups: NavGroup[] = [
   {
     title: "Tours & trips",
     items: [
-      { label: "Tours & day trips", to: "/tours/" },
-      { label: "Bethlehem tours", to: "/tours/bethlehem-from-jerusalem/" },
+      { label: "Tours & day trips", to: "/tours/", childrenLabel: "Tour categories", toggleLabel: "Show tour categories", children: tourCategories.map(category => ({ label: category.shortTitle, to: tourCategoryPaths[category.id] })) },
       { label: "Shore excursions", to: "/shore-excursions/", childrenLabel: "Shore excursion ports", alwaysExpanded: true, children: [
         { label: "From Haifa Port", to: "/haifa-shore-excursions/" },
         { label: "From Ashdod Port", to: "/ashdod-shore-excursions/" },

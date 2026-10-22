@@ -56,3 +56,7 @@ The following publisher-owned photographs were resized and converted to WebP. Co
 | `2026-10/annunciation-interior.webp` | https://www.israel-taxi.com/wp-content/uploads/2025/08/inside_Basilica_of_Annunciation_nazareth_.jpg | Publisher guide photograph |
 | `2026-10/magdala-archaeology.webp` | https://www.israel-taxi.com/wp-content/uploads/2025/08/Magdala.jpg | Publisher guide photograph |
 | `2026-10/eretz-israel-museum.webp` | https://www.israel-taxi.com/wp-content/uploads/2025/08/Eretz_Israel_Museum_Tel_Aviv.jpg | Publisher guide photograph |
+
+## Ordinary tour catalog — 22 October 2026
+
+`src/assets/eilat/coral-reef.webp` is a resized 1200 × 675 WebP of [Corals in Eilat coral reef nature reserve 1.jpg](https://commons.wikimedia.org/wiki/File:Corals_in_Eilat_coral_reef_nature_reserve_1.jpg), by **Yoav95179**, licensed [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/). Original photographic content retained; resized and converted to WebP. Attribution, source and licence are retained in `tourPhotos` and the Eilat category's image-credit disclosure. It illustrates the destination and is not a photograph of a particular operator's snorkeling session.

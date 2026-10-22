@@ -10,10 +10,11 @@ import { PRIVATE_DRIVER_CHECK_DATE } from "@/data/registry";
 import { pageMeta } from "@/lib/site";
 import { AuthorCard } from "@/components/AuthorCard";
 import { PageUpdated } from "@/components/PageUpdated";
-import { parsePortTransferSearch, portTransferPrefill } from "@/lib/shore-services";
+import { portTransferPrefill } from "@/lib/shore-services";
+import { parsePrivateDriverSearch, privateTourPrefill } from "@/lib/private-driver-search";
 
 export const Route = createFileRoute("/private-driver")({
-  validateSearch: parsePortTransferSearch,
+  validateSearch: parsePrivateDriverSearch,
   head: () => pageMeta({
     title: "Private driver in Israel: intercity transfers and day hire",
     description: "Hire a private driver in Israel for hotel-to-hotel journeys, full-day itineraries and multiple stops. Share your route and request a written quote.",
@@ -28,12 +29,14 @@ const focusQuote = () => requestAnimationFrame(() => document.getElementById("re
 
 function PrivateDriver() {
   const transfer = Route.useSearch();
-  return <PrivateDriverContent key={`${transfer.port || ""}-${transfer.transfer || ""}`} transfer={transfer} />;
+  return <PrivateDriverContent key={`${transfer.port || ""}-${transfer.transfer || ""}-${transfer.tour || ""}`} transfer={transfer} />;
 }
 
-function PrivateDriverContent({ transfer }: { transfer: ReturnType<typeof parsePortTransferSearch> }) {
-  const initialFields = portTransferPrefill(transfer);
-  const [serviceId, setServiceId] = useState(initialFields ? "intercity" : "");
+function PrivateDriverContent({ transfer }: { transfer: ReturnType<typeof parsePrivateDriverSearch> }) {
+  const portFields = portTransferPrefill(transfer);
+  const tourFields = privateTourPrefill(transfer);
+  const initialFields = portFields || tourFields;
+  const [serviceId, setServiceId] = useState(portFields ? "intercity" : tourFields ? "day-hire" : "");
   return <main className="mx-auto max-w-5xl px-4 pb-24 lg:pb-8">
     <div className="pt-6"><Breadcrumbs items={[{ name: "Home", to: "/" }, { name: "Private driver", to: "/private-driver/" }]} /></div>
     <header className="mt-7 grid items-center gap-7 lg:grid-cols-[1.2fr_1fr]">
@@ -52,7 +55,8 @@ function PrivateDriverContent({ transfer }: { transfer: ReturnType<typeof parseP
         <div className="flex flex-1 flex-col p-5"><h3 className="text-2xl">{journey.title}</h3><p className="mt-3 flex-1 text-sm leading-relaxed text-muted-foreground">{journey.text}</p><a href="#request-quote" onClick={() => { setServiceId(journey.id); focusQuote(); }} className="mt-5 inline-flex items-center gap-2 font-semibold text-primary underline underline-offset-4">Plan this journey<ArrowRight className="h-4 w-4" aria-hidden /></a></div>
       </article>)}</div>
     </section>
-    {initialFields && <p className="mt-8 rounded-xl border bg-secondary/50 p-5 text-sm">Your one-way transfer request starts at {initialFields.pickup}{initialFields.dropoff ? ` and goes to ${initialFields.dropoff}` : "; add your hotel or final address below"}. Please include the cruise ship and disembarkation details, and any flight details for an airport transfer. I must confirm the meeting point, timing, vehicle and price before booking.</p>}
+    {portFields && <p className="mt-8 rounded-xl border bg-secondary/50 p-5 text-sm">Your one-way transfer request starts at {portFields.pickup}{portFields.dropoff ? ` and goes to ${portFields.dropoff}` : "; add your hotel or final address below"}. Please include the cruise ship and disembarkation details, and any flight details for an airport transfer. I must confirm the meeting point, timing, vehicle and price before booking.</p>}
+    {tourFields && <p className="mt-8 rounded-xl border bg-secondary/50 p-5 text-sm">Your preferred day trip is included in the request below. Add your date, exact pickup and final drop-off, and any changes you would like. I will confirm the route, availability and full price with you.</p>}
     <PrivateDriverQuoteForm serviceId={serviceId} onServiceChange={setServiceId} initialFields={initialFields} />
     <section id="benefits" aria-labelledby="benefits-h" className="mt-14">
       <p className="eyebrow">Make the day work for you</p><h2 id="benefits-h" className="mt-2 text-3xl">What to arrange with your private driver</h2>

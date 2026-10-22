@@ -48,6 +48,14 @@ import { Route as TiberiasFamilyHotelsRouteImport } from './routes/tiberias.fami
 import { Route as TiberiasLuxuryHotelsRouteImport } from './routes/tiberias.luxury-hotels'
 import { Route as ToursIndexRouteImport } from './routes/tours.index'
 import { Route as ToursBethlehemFromJerusalemRouteImport } from './routes/tours.bethlehem-from-jerusalem'
+import { Route as ToursBethlehemJerichoJordanRiverRouteImport } from './routes/tours.bethlehem-jericho-jordan-river'
+import { Route as ToursCaesareaHaifaAcreRouteImport } from './routes/tours.caesarea-haifa-acre'
+import { Route as ToursEilatRedSeaRouteImport } from './routes/tours.eilat-red-sea'
+import { Route as ToursFoodMarketToursRouteImport } from './routes/tours.food-market-tours'
+import { Route as ToursJerusalemRouteImport } from './routes/tours.jerusalem'
+import { Route as ToursMasadaDeadSeaRouteImport } from './routes/tours.masada-dead-sea'
+import { Route as ToursNazarethSeaOfGalileeRouteImport } from './routes/tours.nazareth-sea-of-galilee'
+import { Route as ToursTelAvivJaffaRouteImport } from './routes/tours.tel-aviv-jaffa'
 import { Route as TransfersIndexRouteImport } from './routes/transfers.index'
 import { Route as TransfersBenGurionAirportRouteImport } from './routes/transfers.ben-gurion-airport'
 import { Route as TravelBlogAkkoAcreRouteImport } from './routes/travel-blog.akko-acre'
@@ -56,6 +64,7 @@ import { Route as TravelBlogBaptismInTheJordanRiverRouteImport } from './routes/
 import { Route as TravelBlogBasilicaOfTheAnnunciationRouteImport } from './routes/travel-blog.basilica-of-the-annunciation'
 import { Route as TravelBlogBeachesInTelAvivRouteImport } from './routes/travel-blog.beaches-in-tel-aviv'
 import { Route as TravelBlogBenGurionAirportArrivalTipsRouteImport } from './routes/travel-blog.ben-gurion-airport-arrival-tips'
+import { Route as TravelBlogBenGurionAirportTaxisRouteImport } from './routes/travel-blog.ben-gurion-airport-taxis'
 import { Route as TravelBlogBenGurionAirportToEinBokekRouteImport } from './routes/travel-blog.ben-gurion-airport-to-ein-bokek'
 import { Route as TravelBlogBenGurionAirportToHaifaRouteImport } from './routes/travel-blog.ben-gurion-airport-to-haifa'
 import { Route as TravelBlogBenGurionAirportToJerusalemRouteImport } from './routes/travel-blog.ben-gurion-airport-to-jerusalem'
@@ -104,9 +113,8 @@ import { Route as TravelBlogSeaOfGalileeRouteImport } from './routes/travel-blog
 import { Route as TravelBlogSherutInIsraelRouteImport } from './routes/travel-blog.sherut-in-israel'
 import { Route as TravelBlogShoppingInJerusalemRouteImport } from './routes/travel-blog.shopping-in-jerusalem'
 import { Route as TravelBlogTabghaRouteImport } from './routes/travel-blog.tabgha'
-import { Route as TravelBlogTaxisInIsraelRouteImport } from './routes/travel-blog.taxis-in-israel'
 import { Route as TravelBlogTaxiFaresInIsraelRouteImport } from './routes/travel-blog.taxi-fares-in-israel'
-import { Route as TravelBlogBenGurionAirportTaxisRouteImport } from './routes/travel-blog.ben-gurion-airport-taxis'
+import { Route as TravelBlogTaxisInIsraelRouteImport } from './routes/travel-blog.taxis-in-israel'
 import { Route as TravelBlogTelMegiddoRouteImport } from './routes/travel-blog.tel-megiddo'
 import { Route as TravelBlogTheDeadSeaRouteImport } from './routes/travel-blog.the-dead-sea'
 import { Route as TravelBlogTop10ThingsToDoInIsraelRouteImport } from './routes/travel-blog.top-10-things-to-do-in-israel'
@@ -320,6 +328,48 @@ const ToursBethlehemFromJerusalemRoute =
     path: '/tours/bethlehem-from-jerusalem',
     getParentRoute: () => rootRouteImport,
   } as any)
+const ToursBethlehemJerichoJordanRiverRoute =
+  ToursBethlehemJerichoJordanRiverRouteImport.update({
+    id: '/tours/bethlehem-jericho-jordan-river',
+    path: '/tours/bethlehem-jericho-jordan-river',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const ToursCaesareaHaifaAcreRoute = ToursCaesareaHaifaAcreRouteImport.update({
+  id: '/tours/caesarea-haifa-acre',
+  path: '/tours/caesarea-haifa-acre',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ToursEilatRedSeaRoute = ToursEilatRedSeaRouteImport.update({
+  id: '/tours/eilat-red-sea',
+  path: '/tours/eilat-red-sea',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ToursFoodMarketToursRoute = ToursFoodMarketToursRouteImport.update({
+  id: '/tours/food-market-tours',
+  path: '/tours/food-market-tours',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ToursJerusalemRoute = ToursJerusalemRouteImport.update({
+  id: '/tours/jerusalem',
+  path: '/tours/jerusalem',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ToursMasadaDeadSeaRoute = ToursMasadaDeadSeaRouteImport.update({
+  id: '/tours/masada-dead-sea',
+  path: '/tours/masada-dead-sea',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ToursNazarethSeaOfGalileeRoute =
+  ToursNazarethSeaOfGalileeRouteImport.update({
+    id: '/tours/nazareth-sea-of-galilee',
+    path: '/tours/nazareth-sea-of-galilee',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const ToursTelAvivJaffaRoute = ToursTelAvivJaffaRouteImport.update({
+  id: '/tours/tel-aviv-jaffa',
+  path: '/tours/tel-aviv-jaffa',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const TransfersIndexRoute = TransfersIndexRouteImport.update({
   id: '/transfers/',
   path: '/transfers/',
@@ -364,6 +414,12 @@ const TravelBlogBenGurionAirportArrivalTipsRoute =
   TravelBlogBenGurionAirportArrivalTipsRouteImport.update({
     id: '/travel-blog/ben-gurion-airport-arrival-tips',
     path: '/travel-blog/ben-gurion-airport-arrival-tips',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const TravelBlogBenGurionAirportTaxisRoute =
+  TravelBlogBenGurionAirportTaxisRouteImport.update({
+    id: '/travel-blog/ben-gurion-airport-taxis',
+    path: '/travel-blog/ben-gurion-airport-taxis',
     getParentRoute: () => rootRouteImport,
   } as any)
 const TravelBlogBenGurionAirportToEinBokekRoute =
@@ -640,19 +696,15 @@ const TravelBlogTabghaRoute = TravelBlogTabghaRouteImport.update({
   path: '/travel-blog/tabgha',
   getParentRoute: () => rootRouteImport,
 } as any)
+const TravelBlogTaxiFaresInIsraelRoute =
+  TravelBlogTaxiFaresInIsraelRouteImport.update({
+    id: '/travel-blog/taxi-fares-in-israel',
+    path: '/travel-blog/taxi-fares-in-israel',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const TravelBlogTaxisInIsraelRoute = TravelBlogTaxisInIsraelRouteImport.update({
   id: '/travel-blog/taxis-in-israel',
   path: '/travel-blog/taxis-in-israel',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const TravelBlogTaxiFaresInIsraelRoute = TravelBlogTaxiFaresInIsraelRouteImport.update({
-  id: '/travel-blog/taxi-fares-in-israel',
-  path: '/travel-blog/taxi-fares-in-israel',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const TravelBlogBenGurionAirportTaxisRoute = TravelBlogBenGurionAirportTaxisRouteImport.update({
-  id: '/travel-blog/ben-gurion-airport-taxis',
-  path: '/travel-blog/ben-gurion-airport-taxis',
   getParentRoute: () => rootRouteImport,
 } as any)
 const TravelBlogTelMegiddoRoute = TravelBlogTelMegiddoRouteImport.update({
@@ -738,6 +790,14 @@ export interface FileRoutesByFullPath {
   '/tiberias/family-hotels': typeof TiberiasFamilyHotelsRoute
   '/tiberias/luxury-hotels': typeof TiberiasLuxuryHotelsRoute
   '/tours/bethlehem-from-jerusalem': typeof ToursBethlehemFromJerusalemRoute
+  '/tours/bethlehem-jericho-jordan-river': typeof ToursBethlehemJerichoJordanRiverRoute
+  '/tours/caesarea-haifa-acre': typeof ToursCaesareaHaifaAcreRoute
+  '/tours/eilat-red-sea': typeof ToursEilatRedSeaRoute
+  '/tours/food-market-tours': typeof ToursFoodMarketToursRoute
+  '/tours/jerusalem': typeof ToursJerusalemRoute
+  '/tours/masada-dead-sea': typeof ToursMasadaDeadSeaRoute
+  '/tours/nazareth-sea-of-galilee': typeof ToursNazarethSeaOfGalileeRoute
+  '/tours/tel-aviv-jaffa': typeof ToursTelAvivJaffaRoute
   '/transfers/ben-gurion-airport': typeof TransfersBenGurionAirportRoute
   '/travel-blog/akko-acre': typeof TravelBlogAkkoAcreRoute
   '/travel-blog/attractions-in-tel-aviv': typeof TravelBlogAttractionsInTelAvivRoute
@@ -745,6 +805,7 @@ export interface FileRoutesByFullPath {
   '/travel-blog/basilica-of-the-annunciation': typeof TravelBlogBasilicaOfTheAnnunciationRoute
   '/travel-blog/beaches-in-tel-aviv': typeof TravelBlogBeachesInTelAvivRoute
   '/travel-blog/ben-gurion-airport-arrival-tips': typeof TravelBlogBenGurionAirportArrivalTipsRoute
+  '/travel-blog/ben-gurion-airport-taxis': typeof TravelBlogBenGurionAirportTaxisRoute
   '/travel-blog/ben-gurion-airport-to-ein-bokek': typeof TravelBlogBenGurionAirportToEinBokekRoute
   '/travel-blog/ben-gurion-airport-to-haifa': typeof TravelBlogBenGurionAirportToHaifaRoute
   '/travel-blog/ben-gurion-airport-to-jerusalem': typeof TravelBlogBenGurionAirportToJerusalemRoute
@@ -793,9 +854,8 @@ export interface FileRoutesByFullPath {
   '/travel-blog/sherut-in-israel': typeof TravelBlogSherutInIsraelRoute
   '/travel-blog/shopping-in-jerusalem': typeof TravelBlogShoppingInJerusalemRoute
   '/travel-blog/tabgha': typeof TravelBlogTabghaRoute
-  '/travel-blog/taxis-in-israel': typeof TravelBlogTaxisInIsraelRoute
   '/travel-blog/taxi-fares-in-israel': typeof TravelBlogTaxiFaresInIsraelRoute
-  '/travel-blog/ben-gurion-airport-taxis': typeof TravelBlogBenGurionAirportTaxisRoute
+  '/travel-blog/taxis-in-israel': typeof TravelBlogTaxisInIsraelRoute
   '/travel-blog/tel-megiddo': typeof TravelBlogTelMegiddoRoute
   '/travel-blog/the-dead-sea': typeof TravelBlogTheDeadSeaRoute
   '/travel-blog/top-10-things-to-do-in-israel': typeof TravelBlogTop10ThingsToDoInIsraelRoute
@@ -846,6 +906,14 @@ export interface FileRoutesByTo {
   '/tiberias/family-hotels': typeof TiberiasFamilyHotelsRoute
   '/tiberias/luxury-hotels': typeof TiberiasLuxuryHotelsRoute
   '/tours/bethlehem-from-jerusalem': typeof ToursBethlehemFromJerusalemRoute
+  '/tours/bethlehem-jericho-jordan-river': typeof ToursBethlehemJerichoJordanRiverRoute
+  '/tours/caesarea-haifa-acre': typeof ToursCaesareaHaifaAcreRoute
+  '/tours/eilat-red-sea': typeof ToursEilatRedSeaRoute
+  '/tours/food-market-tours': typeof ToursFoodMarketToursRoute
+  '/tours/jerusalem': typeof ToursJerusalemRoute
+  '/tours/masada-dead-sea': typeof ToursMasadaDeadSeaRoute
+  '/tours/nazareth-sea-of-galilee': typeof ToursNazarethSeaOfGalileeRoute
+  '/tours/tel-aviv-jaffa': typeof ToursTelAvivJaffaRoute
   '/transfers/ben-gurion-airport': typeof TransfersBenGurionAirportRoute
   '/travel-blog/akko-acre': typeof TravelBlogAkkoAcreRoute
   '/travel-blog/attractions-in-tel-aviv': typeof TravelBlogAttractionsInTelAvivRoute
@@ -853,6 +921,7 @@ export interface FileRoutesByTo {
   '/travel-blog/basilica-of-the-annunciation': typeof TravelBlogBasilicaOfTheAnnunciationRoute
   '/travel-blog/beaches-in-tel-aviv': typeof TravelBlogBeachesInTelAvivRoute
   '/travel-blog/ben-gurion-airport-arrival-tips': typeof TravelBlogBenGurionAirportArrivalTipsRoute
+  '/travel-blog/ben-gurion-airport-taxis': typeof TravelBlogBenGurionAirportTaxisRoute
   '/travel-blog/ben-gurion-airport-to-ein-bokek': typeof TravelBlogBenGurionAirportToEinBokekRoute
   '/travel-blog/ben-gurion-airport-to-haifa': typeof TravelBlogBenGurionAirportToHaifaRoute
   '/travel-blog/ben-gurion-airport-to-jerusalem': typeof TravelBlogBenGurionAirportToJerusalemRoute
@@ -901,9 +970,8 @@ export interface FileRoutesByTo {
   '/travel-blog/sherut-in-israel': typeof TravelBlogSherutInIsraelRoute
   '/travel-blog/shopping-in-jerusalem': typeof TravelBlogShoppingInJerusalemRoute
   '/travel-blog/tabgha': typeof TravelBlogTabghaRoute
-  '/travel-blog/taxis-in-israel': typeof TravelBlogTaxisInIsraelRoute
   '/travel-blog/taxi-fares-in-israel': typeof TravelBlogTaxiFaresInIsraelRoute
-  '/travel-blog/ben-gurion-airport-taxis': typeof TravelBlogBenGurionAirportTaxisRoute
+  '/travel-blog/taxis-in-israel': typeof TravelBlogTaxisInIsraelRoute
   '/travel-blog/tel-megiddo': typeof TravelBlogTelMegiddoRoute
   '/travel-blog/the-dead-sea': typeof TravelBlogTheDeadSeaRoute
   '/travel-blog/top-10-things-to-do-in-israel': typeof TravelBlogTop10ThingsToDoInIsraelRoute
@@ -955,6 +1023,14 @@ export interface FileRoutesById {
   '/tiberias/family-hotels': typeof TiberiasFamilyHotelsRoute
   '/tiberias/luxury-hotels': typeof TiberiasLuxuryHotelsRoute
   '/tours/bethlehem-from-jerusalem': typeof ToursBethlehemFromJerusalemRoute
+  '/tours/bethlehem-jericho-jordan-river': typeof ToursBethlehemJerichoJordanRiverRoute
+  '/tours/caesarea-haifa-acre': typeof ToursCaesareaHaifaAcreRoute
+  '/tours/eilat-red-sea': typeof ToursEilatRedSeaRoute
+  '/tours/food-market-tours': typeof ToursFoodMarketToursRoute
+  '/tours/jerusalem': typeof ToursJerusalemRoute
+  '/tours/masada-dead-sea': typeof ToursMasadaDeadSeaRoute
+  '/tours/nazareth-sea-of-galilee': typeof ToursNazarethSeaOfGalileeRoute
+  '/tours/tel-aviv-jaffa': typeof ToursTelAvivJaffaRoute
   '/transfers/ben-gurion-airport': typeof TransfersBenGurionAirportRoute
   '/travel-blog/akko-acre': typeof TravelBlogAkkoAcreRoute
   '/travel-blog/attractions-in-tel-aviv': typeof TravelBlogAttractionsInTelAvivRoute
@@ -962,6 +1038,7 @@ export interface FileRoutesById {
   '/travel-blog/basilica-of-the-annunciation': typeof TravelBlogBasilicaOfTheAnnunciationRoute
   '/travel-blog/beaches-in-tel-aviv': typeof TravelBlogBeachesInTelAvivRoute
   '/travel-blog/ben-gurion-airport-arrival-tips': typeof TravelBlogBenGurionAirportArrivalTipsRoute
+  '/travel-blog/ben-gurion-airport-taxis': typeof TravelBlogBenGurionAirportTaxisRoute
   '/travel-blog/ben-gurion-airport-to-ein-bokek': typeof TravelBlogBenGurionAirportToEinBokekRoute
   '/travel-blog/ben-gurion-airport-to-haifa': typeof TravelBlogBenGurionAirportToHaifaRoute
   '/travel-blog/ben-gurion-airport-to-jerusalem': typeof TravelBlogBenGurionAirportToJerusalemRoute
@@ -1010,9 +1087,8 @@ export interface FileRoutesById {
   '/travel-blog/sherut-in-israel': typeof TravelBlogSherutInIsraelRoute
   '/travel-blog/shopping-in-jerusalem': typeof TravelBlogShoppingInJerusalemRoute
   '/travel-blog/tabgha': typeof TravelBlogTabghaRoute
-  '/travel-blog/taxis-in-israel': typeof TravelBlogTaxisInIsraelRoute
   '/travel-blog/taxi-fares-in-israel': typeof TravelBlogTaxiFaresInIsraelRoute
-  '/travel-blog/ben-gurion-airport-taxis': typeof TravelBlogBenGurionAirportTaxisRoute
+  '/travel-blog/taxis-in-israel': typeof TravelBlogTaxisInIsraelRoute
   '/travel-blog/tel-megiddo': typeof TravelBlogTelMegiddoRoute
   '/travel-blog/the-dead-sea': typeof TravelBlogTheDeadSeaRoute
   '/travel-blog/top-10-things-to-do-in-israel': typeof TravelBlogTop10ThingsToDoInIsraelRoute
@@ -1065,6 +1141,14 @@ export interface FileRouteTypes {
     | '/tiberias/family-hotels'
     | '/tiberias/luxury-hotels'
     | '/tours/bethlehem-from-jerusalem'
+    | '/tours/bethlehem-jericho-jordan-river'
+    | '/tours/caesarea-haifa-acre'
+    | '/tours/eilat-red-sea'
+    | '/tours/food-market-tours'
+    | '/tours/jerusalem'
+    | '/tours/masada-dead-sea'
+    | '/tours/nazareth-sea-of-galilee'
+    | '/tours/tel-aviv-jaffa'
     | '/transfers/ben-gurion-airport'
     | '/travel-blog/akko-acre'
     | '/travel-blog/attractions-in-tel-aviv'
@@ -1072,6 +1156,7 @@ export interface FileRouteTypes {
     | '/travel-blog/basilica-of-the-annunciation'
     | '/travel-blog/beaches-in-tel-aviv'
     | '/travel-blog/ben-gurion-airport-arrival-tips'
+    | '/travel-blog/ben-gurion-airport-taxis'
     | '/travel-blog/ben-gurion-airport-to-ein-bokek'
     | '/travel-blog/ben-gurion-airport-to-haifa'
     | '/travel-blog/ben-gurion-airport-to-jerusalem'
@@ -1120,9 +1205,8 @@ export interface FileRouteTypes {
     | '/travel-blog/sherut-in-israel'
     | '/travel-blog/shopping-in-jerusalem'
     | '/travel-blog/tabgha'
-    | '/travel-blog/taxis-in-israel'
     | '/travel-blog/taxi-fares-in-israel'
-    | '/travel-blog/ben-gurion-airport-taxis'
+    | '/travel-blog/taxis-in-israel'
     | '/travel-blog/tel-megiddo'
     | '/travel-blog/the-dead-sea'
     | '/travel-blog/top-10-things-to-do-in-israel'
@@ -1173,6 +1257,14 @@ export interface FileRouteTypes {
     | '/tiberias/family-hotels'
     | '/tiberias/luxury-hotels'
     | '/tours/bethlehem-from-jerusalem'
+    | '/tours/bethlehem-jericho-jordan-river'
+    | '/tours/caesarea-haifa-acre'
+    | '/tours/eilat-red-sea'
+    | '/tours/food-market-tours'
+    | '/tours/jerusalem'
+    | '/tours/masada-dead-sea'
+    | '/tours/nazareth-sea-of-galilee'
+    | '/tours/tel-aviv-jaffa'
     | '/transfers/ben-gurion-airport'
     | '/travel-blog/akko-acre'
     | '/travel-blog/attractions-in-tel-aviv'
@@ -1180,6 +1272,7 @@ export interface FileRouteTypes {
     | '/travel-blog/basilica-of-the-annunciation'
     | '/travel-blog/beaches-in-tel-aviv'
     | '/travel-blog/ben-gurion-airport-arrival-tips'
+    | '/travel-blog/ben-gurion-airport-taxis'
     | '/travel-blog/ben-gurion-airport-to-ein-bokek'
     | '/travel-blog/ben-gurion-airport-to-haifa'
     | '/travel-blog/ben-gurion-airport-to-jerusalem'
@@ -1228,9 +1321,8 @@ export interface FileRouteTypes {
     | '/travel-blog/sherut-in-israel'
     | '/travel-blog/shopping-in-jerusalem'
     | '/travel-blog/tabgha'
-    | '/travel-blog/taxis-in-israel'
     | '/travel-blog/taxi-fares-in-israel'
-    | '/travel-blog/ben-gurion-airport-taxis'
+    | '/travel-blog/taxis-in-israel'
     | '/travel-blog/tel-megiddo'
     | '/travel-blog/the-dead-sea'
     | '/travel-blog/top-10-things-to-do-in-israel'
@@ -1281,6 +1373,14 @@ export interface FileRouteTypes {
     | '/tiberias/family-hotels'
     | '/tiberias/luxury-hotels'
     | '/tours/bethlehem-from-jerusalem'
+    | '/tours/bethlehem-jericho-jordan-river'
+    | '/tours/caesarea-haifa-acre'
+    | '/tours/eilat-red-sea'
+    | '/tours/food-market-tours'
+    | '/tours/jerusalem'
+    | '/tours/masada-dead-sea'
+    | '/tours/nazareth-sea-of-galilee'
+    | '/tours/tel-aviv-jaffa'
     | '/transfers/ben-gurion-airport'
     | '/travel-blog/akko-acre'
     | '/travel-blog/attractions-in-tel-aviv'
@@ -1288,6 +1388,7 @@ export interface FileRouteTypes {
     | '/travel-blog/basilica-of-the-annunciation'
     | '/travel-blog/beaches-in-tel-aviv'
     | '/travel-blog/ben-gurion-airport-arrival-tips'
+    | '/travel-blog/ben-gurion-airport-taxis'
     | '/travel-blog/ben-gurion-airport-to-ein-bokek'
     | '/travel-blog/ben-gurion-airport-to-haifa'
     | '/travel-blog/ben-gurion-airport-to-jerusalem'
@@ -1336,9 +1437,8 @@ export interface FileRouteTypes {
     | '/travel-blog/sherut-in-israel'
     | '/travel-blog/shopping-in-jerusalem'
     | '/travel-blog/tabgha'
-    | '/travel-blog/taxis-in-israel'
     | '/travel-blog/taxi-fares-in-israel'
-    | '/travel-blog/ben-gurion-airport-taxis'
+    | '/travel-blog/taxis-in-israel'
     | '/travel-blog/tel-megiddo'
     | '/travel-blog/the-dead-sea'
     | '/travel-blog/top-10-things-to-do-in-israel'
@@ -1390,6 +1490,14 @@ export interface RootRouteChildren {
   TiberiasFamilyHotelsRoute: typeof TiberiasFamilyHotelsRoute
   TiberiasLuxuryHotelsRoute: typeof TiberiasLuxuryHotelsRoute
   ToursBethlehemFromJerusalemRoute: typeof ToursBethlehemFromJerusalemRoute
+  ToursBethlehemJerichoJordanRiverRoute: typeof ToursBethlehemJerichoJordanRiverRoute
+  ToursCaesareaHaifaAcreRoute: typeof ToursCaesareaHaifaAcreRoute
+  ToursEilatRedSeaRoute: typeof ToursEilatRedSeaRoute
+  ToursFoodMarketToursRoute: typeof ToursFoodMarketToursRoute
+  ToursJerusalemRoute: typeof ToursJerusalemRoute
+  ToursMasadaDeadSeaRoute: typeof ToursMasadaDeadSeaRoute
+  ToursNazarethSeaOfGalileeRoute: typeof ToursNazarethSeaOfGalileeRoute
+  ToursTelAvivJaffaRoute: typeof ToursTelAvivJaffaRoute
   TransfersBenGurionAirportRoute: typeof TransfersBenGurionAirportRoute
   TravelBlogAkkoAcreRoute: typeof TravelBlogAkkoAcreRoute
   TravelBlogAttractionsInTelAvivRoute: typeof TravelBlogAttractionsInTelAvivRoute
@@ -1397,6 +1505,7 @@ export interface RootRouteChildren {
   TravelBlogBasilicaOfTheAnnunciationRoute: typeof TravelBlogBasilicaOfTheAnnunciationRoute
   TravelBlogBeachesInTelAvivRoute: typeof TravelBlogBeachesInTelAvivRoute
   TravelBlogBenGurionAirportArrivalTipsRoute: typeof TravelBlogBenGurionAirportArrivalTipsRoute
+  TravelBlogBenGurionAirportTaxisRoute: typeof TravelBlogBenGurionAirportTaxisRoute
   TravelBlogBenGurionAirportToEinBokekRoute: typeof TravelBlogBenGurionAirportToEinBokekRoute
   TravelBlogBenGurionAirportToHaifaRoute: typeof TravelBlogBenGurionAirportToHaifaRoute
   TravelBlogBenGurionAirportToJerusalemRoute: typeof TravelBlogBenGurionAirportToJerusalemRoute
@@ -1445,9 +1554,8 @@ export interface RootRouteChildren {
   TravelBlogSherutInIsraelRoute: typeof TravelBlogSherutInIsraelRoute
   TravelBlogShoppingInJerusalemRoute: typeof TravelBlogShoppingInJerusalemRoute
   TravelBlogTabghaRoute: typeof TravelBlogTabghaRoute
-  TravelBlogTaxisInIsraelRoute: typeof TravelBlogTaxisInIsraelRoute
   TravelBlogTaxiFaresInIsraelRoute: typeof TravelBlogTaxiFaresInIsraelRoute
-  TravelBlogBenGurionAirportTaxisRoute: typeof TravelBlogBenGurionAirportTaxisRoute
+  TravelBlogTaxisInIsraelRoute: typeof TravelBlogTaxisInIsraelRoute
   TravelBlogTelMegiddoRoute: typeof TravelBlogTelMegiddoRoute
   TravelBlogTheDeadSeaRoute: typeof TravelBlogTheDeadSeaRoute
   TravelBlogTop10ThingsToDoInIsraelRoute: typeof TravelBlogTop10ThingsToDoInIsraelRoute
@@ -1736,6 +1844,62 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ToursBethlehemFromJerusalemRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/tours/bethlehem-jericho-jordan-river': {
+      id: '/tours/bethlehem-jericho-jordan-river'
+      path: '/tours/bethlehem-jericho-jordan-river'
+      fullPath: '/tours/bethlehem-jericho-jordan-river'
+      preLoaderRoute: typeof ToursBethlehemJerichoJordanRiverRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/tours/caesarea-haifa-acre': {
+      id: '/tours/caesarea-haifa-acre'
+      path: '/tours/caesarea-haifa-acre'
+      fullPath: '/tours/caesarea-haifa-acre'
+      preLoaderRoute: typeof ToursCaesareaHaifaAcreRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/tours/eilat-red-sea': {
+      id: '/tours/eilat-red-sea'
+      path: '/tours/eilat-red-sea'
+      fullPath: '/tours/eilat-red-sea'
+      preLoaderRoute: typeof ToursEilatRedSeaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/tours/food-market-tours': {
+      id: '/tours/food-market-tours'
+      path: '/tours/food-market-tours'
+      fullPath: '/tours/food-market-tours'
+      preLoaderRoute: typeof ToursFoodMarketToursRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/tours/jerusalem': {
+      id: '/tours/jerusalem'
+      path: '/tours/jerusalem'
+      fullPath: '/tours/jerusalem'
+      preLoaderRoute: typeof ToursJerusalemRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/tours/masada-dead-sea': {
+      id: '/tours/masada-dead-sea'
+      path: '/tours/masada-dead-sea'
+      fullPath: '/tours/masada-dead-sea'
+      preLoaderRoute: typeof ToursMasadaDeadSeaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/tours/nazareth-sea-of-galilee': {
+      id: '/tours/nazareth-sea-of-galilee'
+      path: '/tours/nazareth-sea-of-galilee'
+      fullPath: '/tours/nazareth-sea-of-galilee'
+      preLoaderRoute: typeof ToursNazarethSeaOfGalileeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/tours/tel-aviv-jaffa': {
+      id: '/tours/tel-aviv-jaffa'
+      path: '/tours/tel-aviv-jaffa'
+      fullPath: '/tours/tel-aviv-jaffa'
+      preLoaderRoute: typeof ToursTelAvivJaffaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/transfers/': {
       id: '/transfers/'
       path: '/transfers'
@@ -1790,6 +1954,13 @@ declare module '@tanstack/react-router' {
       path: '/travel-blog/ben-gurion-airport-arrival-tips'
       fullPath: '/travel-blog/ben-gurion-airport-arrival-tips'
       preLoaderRoute: typeof TravelBlogBenGurionAirportArrivalTipsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/travel-blog/ben-gurion-airport-taxis': {
+      id: '/travel-blog/ben-gurion-airport-taxis'
+      path: '/travel-blog/ben-gurion-airport-taxis'
+      fullPath: '/travel-blog/ben-gurion-airport-taxis'
+      preLoaderRoute: typeof TravelBlogBenGurionAirportTaxisRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/travel-blog/ben-gurion-airport-to-ein-bokek': {
@@ -2128,13 +2299,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof TravelBlogTabghaRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/travel-blog/taxis-in-israel': {
-      id: '/travel-blog/taxis-in-israel'
-      path: '/travel-blog/taxis-in-israel'
-      fullPath: '/travel-blog/taxis-in-israel'
-      preLoaderRoute: typeof TravelBlogTaxisInIsraelRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/travel-blog/taxi-fares-in-israel': {
       id: '/travel-blog/taxi-fares-in-israel'
       path: '/travel-blog/taxi-fares-in-israel'
@@ -2142,11 +2306,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof TravelBlogTaxiFaresInIsraelRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/travel-blog/ben-gurion-airport-taxis': {
-      id: '/travel-blog/ben-gurion-airport-taxis'
-      path: '/travel-blog/ben-gurion-airport-taxis'
-      fullPath: '/travel-blog/ben-gurion-airport-taxis'
-      preLoaderRoute: typeof TravelBlogBenGurionAirportTaxisRouteImport
+    '/travel-blog/taxis-in-israel': {
+      id: '/travel-blog/taxis-in-israel'
+      path: '/travel-blog/taxis-in-israel'
+      fullPath: '/travel-blog/taxis-in-israel'
+      preLoaderRoute: typeof TravelBlogTaxisInIsraelRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/travel-blog/tel-megiddo': {
@@ -2247,6 +2411,14 @@ const rootRouteChildren: RootRouteChildren = {
   TiberiasFamilyHotelsRoute: TiberiasFamilyHotelsRoute,
   TiberiasLuxuryHotelsRoute: TiberiasLuxuryHotelsRoute,
   ToursBethlehemFromJerusalemRoute: ToursBethlehemFromJerusalemRoute,
+  ToursBethlehemJerichoJordanRiverRoute: ToursBethlehemJerichoJordanRiverRoute,
+  ToursCaesareaHaifaAcreRoute: ToursCaesareaHaifaAcreRoute,
+  ToursEilatRedSeaRoute: ToursEilatRedSeaRoute,
+  ToursFoodMarketToursRoute: ToursFoodMarketToursRoute,
+  ToursJerusalemRoute: ToursJerusalemRoute,
+  ToursMasadaDeadSeaRoute: ToursMasadaDeadSeaRoute,
+  ToursNazarethSeaOfGalileeRoute: ToursNazarethSeaOfGalileeRoute,
+  ToursTelAvivJaffaRoute: ToursTelAvivJaffaRoute,
   TransfersBenGurionAirportRoute: TransfersBenGurionAirportRoute,
   TravelBlogAkkoAcreRoute: TravelBlogAkkoAcreRoute,
   TravelBlogAttractionsInTelAvivRoute: TravelBlogAttractionsInTelAvivRoute,
@@ -2257,6 +2429,7 @@ const rootRouteChildren: RootRouteChildren = {
   TravelBlogBeachesInTelAvivRoute: TravelBlogBeachesInTelAvivRoute,
   TravelBlogBenGurionAirportArrivalTipsRoute:
     TravelBlogBenGurionAirportArrivalTipsRoute,
+  TravelBlogBenGurionAirportTaxisRoute: TravelBlogBenGurionAirportTaxisRoute,
   TravelBlogBenGurionAirportToEinBokekRoute:
     TravelBlogBenGurionAirportToEinBokekRoute,
   TravelBlogBenGurionAirportToHaifaRoute:
@@ -2314,9 +2487,8 @@ const rootRouteChildren: RootRouteChildren = {
   TravelBlogSherutInIsraelRoute: TravelBlogSherutInIsraelRoute,
   TravelBlogShoppingInJerusalemRoute: TravelBlogShoppingInJerusalemRoute,
   TravelBlogTabghaRoute: TravelBlogTabghaRoute,
-  TravelBlogTaxisInIsraelRoute: TravelBlogTaxisInIsraelRoute,
   TravelBlogTaxiFaresInIsraelRoute: TravelBlogTaxiFaresInIsraelRoute,
-  TravelBlogBenGurionAirportTaxisRoute: TravelBlogBenGurionAirportTaxisRoute,
+  TravelBlogTaxisInIsraelRoute: TravelBlogTaxisInIsraelRoute,
   TravelBlogTelMegiddoRoute: TravelBlogTelMegiddoRoute,
   TravelBlogTheDeadSeaRoute: TravelBlogTheDeadSeaRoute,
   TravelBlogTop10ThingsToDoInIsraelRoute:
