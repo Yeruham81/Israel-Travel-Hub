@@ -76,7 +76,7 @@ export const expandedTravelGuides = {
       {
         id: "terminal-transfer",
         title: "How do I reach Line 711 from Terminal 3?",
-        photo: airportTransferPhotos["other"],
+        photo: airportTransferPhotos["other"]!,
         paragraphs: [
           "Line 711's airport stop is at Terminal 1, not Terminal 3. After collecting your luggage at Terminal 3, follow signs to the free internal airport shuttle. The Israel Airports Authority places the Terminal 3 shuttle stop on Level G near Gate 01. It arrives at the Terminal 1 frontage; the return shuttle stop at Terminal 1 is opposite Gate 4.",
           "The airport authority publishes an approximately 15-minute frequency for the inter-terminal shuttle, 24 hours a day throughout the week, including Shabbat. This shuttle travels within the airport; it is not the same as bus 711 and does not take you to Tel Aviv.",
