@@ -1,11 +1,43 @@
-import { Building2 } from "lucide-react";
+import { useState } from "react";
+import { Building2, ExternalLink } from "lucide-react";
+import type { HotelIllustration } from "@/data/telAvivHotelPhotos";
 import { getSource, isPublisherUrl, type HotelRecommendation, type ProviderLink } from "@/data/registry";
 import { recordOutboundClick, relFor } from "@/lib/outbound";
 import { activeHotelNotice } from "@/lib/hotel-notices";
 
-export function StayHotelCard({ hotel, booking, pageId, editorial, compact = false }: { hotel: HotelRecommendation; booking: ProviderLink | undefined; pageId: string; editorial?: Pick<HotelRecommendation, "summary" | "bestFor" | "watch">; compact?: boolean }) {
+export function StayHotelCard({ hotel, booking, pageId, editorial, compact = false, photo }: { hotel: HotelRecommendation; booking: ProviderLink | undefined; pageId: string; editorial?: Pick<HotelRecommendation, "summary" | "bestFor" | "watch">; compact?: boolean; photo?: HotelIllustration }) {
+  const [imageFailed, setImageFailed] = useState(false);
   const notice = activeHotelNotice(hotel);
   const source = getSource(hotel.sourceId);
+  if (compact) {
+    return (
+      <li id={`hotel-${hotel.id}`} className="flex min-w-0 scroll-mt-32 flex-col overflow-hidden rounded-2xl border bg-card transition-colors hover:border-primary/60" data-testid="hotel-recommendation">
+        {photo && <div className="overflow-hidden bg-muted">
+          <img src={imageFailed ? undefined : photo.src} alt={photo.alt}
+               loading="lazy" decoding="async" width={755} height={503}
+               onError={() => setImageFailed(true)}
+               data-testid="hotel-illustration"
+               className="aspect-[16/10] w-full bg-secondary object-cover" />
+        </div>}
+        <div className="flex flex-1 flex-col p-4 sm:p-5">
+          <p className="text-xs font-medium text-primary">{hotel.style}</p>
+          <h3 className="mt-1.5 text-xl font-semibold leading-snug">{hotel.name}</h3>
+          <p className="mt-3 line-clamp-2 flex-1 text-sm leading-relaxed text-muted-foreground" data-testid="hotel-short-description">{editorial?.summary || hotel.summary}</p>
+          <p className="mt-3 text-sm leading-snug" data-testid="hotel-best-for"><span className="font-semibold">Best for:</span> {editorial?.bestFor || hotel.bestFor}</p>
+          {notice && <p className="mt-3 rounded-lg border border-primary/25 bg-secondary/70 p-3 text-xs leading-relaxed" data-testid="hotel-operating-notice">{notice.message}</p>}
+        </div>
+        {booking && <div className="border-t bg-secondary/40 p-3.5">
+          <a href={booking.url} target="_blank" rel={relFor(booking.isAffiliate)}
+             onClick={() => recordOutboundClick({ pageId, productId: hotel.id, offerId: booking.id })}
+             className="btn btn-primary flex w-full items-center justify-center gap-2 text-center"
+             aria-label={`${booking.ctaLabel} for ${hotel.name}`}>
+            {booking.ctaLabel} <ExternalLink className="h-4 w-4 shrink-0" aria-hidden />
+            <span className="sr-only"> (opens in a new tab)</span>
+          </a>
+        </div>}
+      </li>
+    );
+  }
   return (
     <li id={`hotel-${hotel.id}`} className="scroll-mt-32 overflow-hidden rounded-2xl border bg-card" data-testid="hotel-recommendation">
       <div className="p-5 sm:p-7">
