@@ -99,7 +99,7 @@ describe("migrated practical guides", () => {
     const router = await routerAt("/guides/");
     const Hub = HubRoute.options.component!;
     render(<RouterContextProvider router={router}><Hub /></RouterContextProvider>);
-    expect(screen.getAllByTestId("guide-directory-card")).toHaveLength(63);
+    expect(screen.getAllByTestId("guide-directory-card")).toHaveLength(65);
     fireEvent.change(screen.getByRole("searchbox"), { target: { value: "eSIM" } });
     expect(screen.getAllByTestId("guide-directory-card")).toHaveLength(1);
     fireEvent.submit(screen.getByRole("search"));
@@ -108,7 +108,7 @@ describe("migrated practical guides", () => {
     fireEvent.click(within(topics).getByRole("link", { name: "Attractions" }));
     await screen.findByRole("heading", { name: "No guides match this search" });
     fireEvent.click(screen.getByRole("button", { name: "Clear filters" }));
-    await waitFor(() => expect(screen.getAllByTestId("guide-directory-card")).toHaveLength(63));
+    await waitFor(() => expect(screen.getAllByTestId("guide-directory-card")).toHaveLength(65));
     expect(screen.getByRole("searchbox")).toHaveValue("");
     await act(async () => { await router.navigate({ to: "/guides/", search: { topic: "attractions" } }); });
     expect(screen.getAllByTestId("guide-directory-card")).toHaveLength(filterGuides("", "attractions").length);
