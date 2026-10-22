@@ -49,7 +49,8 @@ describe("port service catalog", () => {
   it.each([{ port: "haifa" }, { port: "ashdod" }] as const)("shows all $port return tours with destination tags and preserves the inquiry while filtering", async ({ port }) => {
     const { router, history, container } = await pageAt(shorePorts[port].path);
     expect(cards()).toHaveLength(catalogSizes[port]);
-    expect(cards().slice(0, catalogSizes[port] - 4).every((card) => ["getyourguide", "viator"].includes(card.dataset["bookingPlatform"]!))).toBe(true);
+    expect(cards().slice(0, 4).every((card) => card.dataset["serviceKind"] === "private-driver" && card.dataset["bookingPlatform"] === "direct")).toBe(true);
+    expect(cards().slice(4).every((card) => ["getyourguide", "viator"].includes(card.dataset["bookingPlatform"]!))).toBe(true);
     expect(screen.queryByRole("search")).not.toBeInTheDocument();
     expect(screen.queryByRole("navigation", { name: "Filter port services by type" })).not.toBeInTheDocument();
     expect(screen.queryByRole("navigation", { name: "Filter port services by booking site" })).not.toBeInTheDocument();
@@ -184,7 +185,7 @@ describe("port service catalog", () => {
     expect(JSON.parse(localStorage.getItem("itt_outbound_clicks_v1")!)[0]).toMatchObject({ pageId: "shore-haifa", productId: "shore-gyg-haifa-akko", offerId: "shore-gyg-haifa-akko" });
   });
 
-  it("shows duration, pickup, format and the price basis without a price-check date", async () => {
+  it("shows duration, port pickup, tour format and a dated published price basis", async () => {
     await pageAt("/ashdod-shore-excursions/?platform=getyourguide");
     const card = cards().find((card) => card.dataset["productId"] === "shore-gyg-ashdod-jerusalem-bethlehem")!;
     expect(card).toHaveTextContent("9–11 hours");
@@ -192,7 +193,8 @@ describe("port service catalog", () => {
     expect(card).toHaveTextContent("Ashdod Port · pickup & return");
     expect(card).toHaveTextContent("US$1,009");
     expect(card).toHaveTextContent("Per group · up to 3");
-    expect(card).not.toHaveTextContent("Price checked");
+    expect(card).toHaveTextContent("Published starting price");
+    expect(card).toHaveTextContent("2026-10-21");
     expect(card).not.toHaveTextContent(/Per person|Best for:|Published car-and-driver starting rate|Check the actual ship date/);
     const masada = cards().find((card) => card.dataset["productId"] === "shore-gyg-ashdod-masada")!;
     expect(masada).toHaveTextContent("US$130");
