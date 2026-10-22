@@ -96,7 +96,7 @@ export function CityStayHub({ g, areas }: { g: CityStayGuide; areas: Neighborhoo
         </section>
 
         <section id="compare" aria-labelledby="compare-h" className="mt-14 scroll-mt-32">
-          <h2 id="compare-h" className="text-3xl">Compare {areas.length === 6 ? "the six" : `all ${areas.length}`} areas</h2>
+          <h2 id="compare-h" className="text-3xl">Compare areas in {g.city}</h2>
           <p className="mt-2 text-sm text-muted-foreground">These are relative accommodation styles, not live room rates. The exact hotel and street matter as much as the area name.</p>
           <div className="mt-5 overflow-x-auto rounded-2xl border bg-card" role="region" aria-label={`${g.city} area comparison`} tabIndex={0}>
             <table className="w-full min-w-[850px] text-left text-sm">
