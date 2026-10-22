@@ -40,7 +40,7 @@ describe("four independent airport transportation comparisons", () => {
       expect(doc.querySelectorAll("h1")).toHaveLength(1);
       expect(doc.querySelectorAll("table")).toHaveLength(2);
       expect(doc.querySelector('a[href*="#request-quote"]')).not.toBeNull();
-      expect(doc.querySelector('a[href*="#request-quote"]')?.getAttribute("href")).toContain(privateGuide.path);
+      expect(doc.querySelector('aside a[href="#request-quote"]')?.getAttribute("href")).toBe("#request-quote");
       if (g.historicalPrices === false) expect(doc.body.textContent).toContain("this guide does not quote an unverified current fare");
       else expect(doc.body.textContent).toContain("historical editorial estimates");
       const sourceDisclosure = doc.querySelector("#sources details");
@@ -102,7 +102,7 @@ describe("four independent airport transportation comparisons", () => {
       }
     }
     expect(doc.querySelectorAll('section[aria-label="Related practical guides"] img').length).toBeGreaterThanOrEqual(4);
-    expect(doc.querySelector('a[href="/travel-blog/ben-gurion-airport-to-tel-aviv/#request-quote"]')).not.toBeNull();
+    expect(doc.querySelector('aside a[href="#request-quote"]')).not.toBeNull();
     expect(doc.body.textContent).not.toMatch(/≈ ₪10–15|≈ ₪8–15|≈ ₪150–230/);
   });
 
@@ -151,7 +151,7 @@ describe("four independent airport transportation comparisons", () => {
       expect(link?.closest("p")).not.toBeNull();
     }
     expect(doc.querySelector('section[aria-label="Related practical guides"]')).not.toBeNull();
-    expect(doc.querySelector('a[href="/travel-blog/ben-gurion-airport-to-jerusalem/#request-quote"]')).not.toBeNull();
+    expect(doc.querySelector('aside a[href="#request-quote"]')).not.toBeNull();
     expect(doc.body.textContent).not.toMatch(/≈ ₪20–30|≈ ₪300–360/);
   });
 
@@ -197,7 +197,7 @@ describe("four independent airport transportation comparisons", () => {
       expect(a?.closest("p")).not.toBeNull();
     }
     expect(doc.querySelector('section[aria-label="Related practical guides"]')).not.toBeNull();
-    expect(doc.querySelector('a[href="/travel-blog/ben-gurion-airport-to-haifa/#request-quote"]')).not.toBeNull();
+    expect(doc.querySelector('aside a[href="#request-quote"]')).not.toBeNull();
     expect(doc.body.textContent).not.toMatch(/≈ ₪30–45|≈ ₪20–30|≈ ₪500–600/);
   });
 
@@ -224,12 +224,50 @@ describe("four independent airport transportation comparisons", () => {
     for (const link of g.weekendLinks || []) {
       expect(doc.querySelector(`#shabbat a[href="${link.to}"]`)).not.toBeNull();
     }
-    expect(doc.querySelector('a[href="/travel-blog/ben-gurion-airport-to-ein-bokek/#request-quote"]')).not.toBeNull();
+    expect(doc.querySelector('aside a[href="#request-quote"]')).not.toBeNull();
     expect(doc.querySelector('section[aria-label="Related practical guides"]')).not.toBeNull();
     expect(doc.querySelector('section[aria-label="Other airport journey comparisons"]')).not.toBeNull();
     expect(doc.querySelectorAll("#sources a")).toHaveLength(6);
     expect(doc.body.textContent).not.toMatch(/≈ ₪35–50|≈ ₪800–1,100/);
   });
+
+  it("uses one compact private-ride callout linking to an in-page fixed-destination quote form on all four guides", async () => {
+    for (const id of airportJourneyIds) {
+      const g = airportJourneyGuides[id];
+      const rateId = id === "ein-bokek" ? "dead-sea" : id;
+      const router = createRouter({
+        routeTree,
+        context: { queryClient: new QueryClient() },
+        history: createMemoryHistory({ initialEntries: [g.path] }),
+        trailingSlash: "always",
+      });
+      await router.load();
+      const html = renderToString(<RouterContextProvider router={router}><AirportJourneyPage id={id} /></RouterContextProvider>);
+      const doc = new DOMParser().parseFromString(html, "text/html");
+      const callouts = doc.querySelectorAll('aside[aria-label="Private transfer quote for ' + g.city + '"]');
+      expect(callouts, id).toHaveLength(1);
+      const cta = callouts[0]!;
+      expect(cta.querySelector('a[href="#request-quote"]')?.textContent).toContain(g.privateLabel);
+      expect(cta.querySelector('img[alt="Moshe Barak"]')).not.toBeNull();
+      expect(cta.textContent).toContain("I'll help arrange a door-to-door airport pickup");
+      expect(cta.compareDocumentPosition(doc.querySelector("#station-choice")!)).toBe(Node.DOCUMENT_POSITION_FOLLOWING);
+      expect(doc.querySelector('#option-private a[href="#request-quote"]')).not.toBeNull();
+      const quote = doc.querySelector("section#request-quote");
+      expect(quote, id + ": missing form section").not.toBeNull();
+      expect(doc.querySelectorAll('form[aria-label="Private airport transfer quote request"]')).toHaveLength(1);
+      expect(quote?.querySelector('input[name="destination"][readonly]')?.getAttribute("value")).toBe(g.city);
+      expect(quote?.querySelector('input[name="date"]')).not.toBeNull();
+      expect(quote?.querySelector('input[name="flight"]')).not.toBeNull();
+      expect(quote?.querySelector('button[type="submit"]')).not.toBeNull();
+      expect(doc.querySelector("main")?.lastElementChild?.id).toBe("request-quote");
+      expect(doc.querySelector('nav[aria-label="On this page"] a[href="#request-quote"]')).not.toBeNull();
+      expect(doc.body.textContent).not.toContain("The private-transfer page lists its own weekday starting price and conditions.");
+      expect(doc.body.textContent).not.toContain("I operate the private transport service promoted on this site;");
+      expect(doc.querySelectorAll('aside[aria-label^="Private transfer quote"]')).toHaveLength(1);
+      expect(rateId === "dead-sea" ? g.city.includes("Ein Bokek") : g.city.length > 0).toBe(true);
+      expect(doc.querySelectorAll("#sources details")).toHaveLength(1);
+    }
+  }, 30000);
 
   it("does not invent live transport fares or claim rail on Shabbat", () => {
     for (const id of airportJourneyIds) {
