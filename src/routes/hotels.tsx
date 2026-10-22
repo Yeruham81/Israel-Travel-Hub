@@ -224,7 +224,7 @@ function Hotels() {
             </a>
           ))}
         </div>
-        <p className="mt-3 text-xs leading-relaxed text-muted-foreground">These four full itineraries currently open on my existing Israel-Taxi.com website; they will be incorporated into this travel hub.</p>
+        <p className="mt-3 text-xs leading-relaxed text-muted-foreground">These four full itineraries currently open on my existing website in a separate tab. They will be incorporated into this travel hub.</p>
       </section>
 
       <section id="arrival" aria-labelledby="arrival-h" className="mt-14 scroll-mt-28">
