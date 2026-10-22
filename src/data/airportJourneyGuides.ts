@@ -43,13 +43,16 @@ const commonTransfer = [
 const commonRental = [
   "A rental car helps if you will continue to several out-of-town destinations. Compare the full rental price, insurance excess, credit-card deposit, fuel, parking, toll handling and pick-up desk hours.",
   "For a city-only break, parking and urban traffic can erase the benefit of collecting a car after a flight. Check whether your hotel has a place to park and whether the rental company's service is available when you land.",
-]  jerusalem: {
+];
+
+const byId: Record<AirportJourneyId, AirportJourneyGuide> = {
+  jerusalem: {
     id: "jerusalem", city: "Jerusalem",
     path: "/travel-blog/how-to-get-from-ben-gurion-airport-to-jerusalem/",
     title: "How to get from Ben Gurion Airport to Jerusalem (2026): Train, Bus or Taxi?",
     description: "Ben Gurion Airport to Jerusalem in 2026: compare the direct train, bus 485, official taxis and private rides, with station, Old City and Shabbat tips.",
     distance: "Approximately 45–55 km by road, depending on your address",
-    intro: "Compare the direct airport train, bus 485, authorized taxis and pre-booked transfers to Jerusalem — including the last connection from Yitzhak Navon station to your actual accommodation."
+    intro: "Compare the direct airport train, bus 485, authorized taxis and pre-booked transfers to Jerusalem — including the last connection from Yitzhak Navon station to your actual accommodation.",
     answer: "The direct train from Ben Gurion Airport to Jerusalem–Yitzhak Navon is often the fastest lower-cost choice when operating; allow roughly 26–30 minutes on the train plus the transfer to your hotel. Check Israel Railways for the actual ticket, departure and any required free personal travel voucher. The airport also lists bus 485 from Terminal 3, Level 2, Exit 21, but verify a real departure. Licensed metered taxis and confirmed private transfers offer direct travel, especially for Shabbat arrivals or Old City accommodation."
     trainIntro: "The airport railway station is below Terminal 3; follow the rail signs from international arrivals. The direct journey to Jerusalem–Yitzhak Navon is commonly about 26–30 minutes when scheduled. Yitzhak Navon is a deep underground terminal near the central bus station and the light rail, not the Old City. Check Israel Railways for the service, price, platform and its current free travel-voucher requirement. The Ben Gurion Airport arrival guide explains immigration, baggage and reaching your onward transport."
     photo: airportTransferPhotos["jerusalem"]!,
@@ -122,8 +125,6 @@ const commonRental = [
       { q: "Can I use Uber to travel from the airport to Jerusalem?", a: "No. Uber passenger rides are not available in Israel in 2026. Use the official airport taxi system or a separately confirmed private transfer." }
     ],
     related: [{ label: "Official Ben Gurion Airport taxi booking and pickup", to: "/travel-blog/ben-gurion-airport-taxis/" }, { label: "Choose a Jerusalem hotel area", to: "/travel-blog/where-to-stay-in-jerusalem/" }, { label: "Arriving on Shabbat", to: "/travel-blog/from-ben-gurion-airport-on-shabbat/" }, { label: "Jerusalem travel guide", to: "/travel-blog/jerusalem-travel-guide/" }],
-  },
-vel guide", to: "/travel-blog/jerusalem-travel-guide/" }],
   },
   "tel-aviv": {
     id: "tel-aviv", city: "Tel Aviv & Jaffa",
