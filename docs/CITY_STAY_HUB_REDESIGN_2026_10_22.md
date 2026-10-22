@@ -21,11 +21,15 @@ The city hubs use `CityStayPlanning` instead of a compact group of text-only rel
 
 Each card draws its editorial name, style, summary and best-for details from the existing registry and derives the corresponding current booking `ProviderLink` for `stay-area-${hotel.areaId}`. The individual property CTA redirects to the configured provider destination, with the existing sponsored `rel` treatment and click-only analytics event. Dates and guests must be entered on the provider site; the preview never claims room availability or payment completion. Any active operating notice is retained.
 
-### Property photo limitation / follow-up
+### Catalog visuals and compact property cards
 
-**No verified individual-property photographs are currently stored for these sixteen Tel Aviv hotel records.** Using an area photograph in a card is an interim *neighborhood illustration*, not a photo of the named hotel. The cards explicitly say **Neighborhood photograph**, and the area images come from the existing locally stored hotel-area-guide photographs. The user-facing catalog discloses the distinction.
+The owner approved **general licensed hotel-room, lobby and Tel Aviv scenery photographs** for the catalog rather than images of the exact named properties. The sixteen current cards use sixteen different selected illustrations from `src/data/telAvivHotelPhotos.ts`; corresponding source, author and license information appears in the collapsed photo-credit disclosure. None is presented as a verified photograph of the hotel named beside it. Direct image sources may fall back to the appropriate area photograph if an image request fails.
 
-For a genuine hotel-specific gallery, source appropriate, authorized individual-property photographs (e.g. approved partner media API or image licences), store property-specific asset/source/usage metadata in the registry, and swap those images into the catalog. Do **not** hotlink arbitrary copyrighted images or invent property photos.
+Each compact card contains only its image, the exact hotel name, a clickable neighborhood name, a property-specific short description, a brief **Best for** phrase, and the existing tracked booking link opening in a new tab. The existing operating notice is retained when applicable; no unsupported availability or price claims are added. The catalog-level disclosure is deliberately concise and does not repeat beneath each card.
+
+Area tags are compact on desktop; mobile uses one labeled area select. Changing a filter does not query a supplier or alter offers. The booking links retain configured affiliate URL, secure new-tab attributes, and outbound click tracking.
+
+If adding genuine property-specific photography later, verify rights and keep full source/usage metadata; do not substitute unlabeled pictures as actual hotel imagery.
 
 ## Validation and release
 
