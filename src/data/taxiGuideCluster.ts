@@ -85,7 +85,7 @@ export const taxiGuideCluster: Record<"taxis" | "taxiFares" | "airportTaxis", Tr
         id: "apps", title: "Taxi Apps in Israel: Gett, Yango and Uber",
         paragraphs: [
           "Gett is a major licensed-taxi booking option in Israel. Yango may provide another local app-based choice, but coverage and available features should be checked for your pickup location. Register in advance and keep a backup if a driver is unavailable.",
-          "Do not assume that the same Uber or Lyft passenger service you have used abroad operates locally. Availability can change, so the separate Uber guide is responsible for the current picture and alternatives rather than duplicating app comparisons here.",
+          "Uber passenger rides are not available in Israel in 2026. Gett and Yango are local taxi-booking alternatives; the separate Uber guide compares their practical use, while this article covers how licensed taxis operate.",
           "For an airport pickup, the official Gett taxi procedure uses a code and a physical authorized queue; the detailed airport instructions are covered in our airport taxi guide.",
         ],
         links: [{ label: "Is Uber available in Israel? App alternatives", to: travelGuidePaths.uber }, { label: "Gett at Ben Gurion Airport: official pickup", to: travelGuidePaths.airportTaxis }],
