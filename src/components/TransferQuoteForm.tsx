@@ -35,7 +35,7 @@ export function TransferQuoteForm({ destinationId, onDestinationChange, fixedDes
         <div className="bg-navy p-6 text-navy-foreground sm:p-8">
           <img src={photo.src} alt={photo.alt} width={150} height={200} loading="lazy" className="h-24 w-20 rounded-xl object-cover" />
           <p className="mt-5 text-xs font-semibold uppercase tracking-widest opacity-75">A local, personal service</p>
-          <h2 id="quote-h" className="mt-3 text-3xl">{fixedDestination && selectedDestination ? `Request your transfer to ${selectedDestination.destination}` : "Request a quote from Moshe Barak"}</h2>
+          <h2 id="quote-h" className="mt-3 text-3xl">{fixedDestination && selectedDestination ? `Request your transfer to ${selectedDestination.destination}` : "Ask me for a personal quote"}</h2>
           <p className="mt-4 leading-relaxed opacity-90">Tell me about your arrival and destination. I'll help arrange a suitable private vehicle for your party and confirm the full price before you book.</p>
           <ul className="mt-6 list-disc space-y-3 pl-5 text-sm text-navy-foreground marker:text-white"><li>One-way pickup from Ben Gurion Airport</li><li>Minivans and minibuses are available for families, groups, and travelers with extra luggage</li><li>Please contact me in advance so I can help arrange the most suitable vehicle for your needs and provide a personal quote</li></ul>
         </div>

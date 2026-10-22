@@ -28,7 +28,7 @@ export function ShoreServiceCatalog({ portId, filters, onFilterChange, itinerary
 
   return <section id="itineraries" aria-labelledby="itineraries-h" className="mt-10 scroll-mt-24">
     <h2 id="itineraries-h" className="text-3xl">Shore excursions & day trips from {port.name} Port</h2>
-    <p className="mt-3 max-w-4xl leading-relaxed text-muted-foreground">Compare the route, duration, tour format and starting price. External tours open on GetYourGuide or Viator; private transport can be requested directly from Moshe.</p>
+    <p className="mt-3 max-w-4xl leading-relaxed text-muted-foreground">Compare the route, duration, tour format and starting price. External tours open on GetYourGuide or Viator; you can request my private transport directly.</p>
     <div className="mt-6 rounded-2xl border bg-secondary/50 p-4">
       <nav aria-label="Filter port services by destination">
         <p className="mb-2 text-sm font-semibold">Destination</p>
@@ -73,7 +73,7 @@ export function ShoreServiceCatalog({ portId, filters, onFilterChange, itinerary
         </li>;
       })}
     </ul> : <div className="mt-5 rounded-xl border p-6"><h3 className="text-2xl">No tours match this destination</h3><p className="mt-2 text-muted-foreground">Choose another destination or clear the filter to see all tours from {port.name} Port.</p></div>}
-    <p className="mt-5 text-xs leading-relaxed text-muted-foreground">External starting prices are dated reference prices, not live quotes. Your date, party size, options and booking currency can change the total; check current prices, inclusions and cancellation terms on the booking site. Moshe's ILS rates are per vehicle for up to four on weekdays, transport only; guiding, admission, meals and tips are extra.</p>
+    <p className="mt-5 text-xs leading-relaxed text-muted-foreground">External starting prices are dated reference prices, not live quotes. Your date, party size, options and booking currency can change the total; check current prices, inclusions and cancellation terms on the booking site. My ILS rates are per vehicle for up to four on weekdays, transport only; guiding, admission, meals and tips are extra.</p>
     <p className="mt-5 text-sm text-muted-foreground">Prefer another return itinerary? <a href="#request-quote" onClick={() => onSelectItinerary("other")} className="font-medium text-primary underline">Ask for a custom itinerary</a>.</p>
   </section>;
 }

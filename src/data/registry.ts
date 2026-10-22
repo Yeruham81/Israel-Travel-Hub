@@ -1632,7 +1632,7 @@ export const routeFaqs: { q: string; a: string }[] = [
   },
   {
     q: "Is ILS 550 the price I will pay?",
-    a: "No. ILS 550 is Moshe Barak's published weekday starting rate for up to four passengers. Night, weekend and holiday surcharges may apply, and the final amount is set in a quote. Other providers set their own prices on their sites.",
+    a: "No. ILS 550 is my published weekday starting rate for up to four passengers. Night, weekend and holiday surcharges may apply, and the final amount is set in a quote. Other providers set their own prices on their sites.",
   },
   {
     q: "What happens if my flight is delayed?",
