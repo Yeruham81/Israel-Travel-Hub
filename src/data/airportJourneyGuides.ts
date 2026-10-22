@@ -166,7 +166,7 @@ const byId: Record<AirportJourneyId, AirportJourneyGuide> = {
     weekend: [
       "Standard rail and many buses do not run during the main Shabbat shutdown. Tel Aviv's 711 weekend line stops at Terminal 1 and has a limited timetable; it does not solve every Saturday airport arrival.",
       "An authorized taxi or confirmed private transfer may be a more practical choice when the 711 does not match your flight, when arriving late or when carrying large bags.",
-      "Check the exact Saturday evening train restart separately. Holiday restrictions and line alterations can change the options."
+      "Check the exact Saturday evening train restart separately. Holiday restrictions and line alterations can change the options. The dedicated airport Shabbat guide includes the Terminal 1 connection and how to plan around the limited bus timetable."
     ],
     advice: [
       "Make your station choice based on the hotel address and not only the train's station name.",
