@@ -48,7 +48,7 @@ describe("Jerusalem independent day-trip planning guides", () => {
     expect(screen.getByTestId("journey-option-cards").children).toHaveLength(4);
     expect(screen.getByTestId("journey-stop-cards").children).toHaveLength(4);
     expect(screen.getByRole("heading", { name: "Ein Bokek" })).toBeInTheDocument();
-    expect(screen.getByText(/Egged 486 serves/)).toBeInTheDocument();
+    expect(screen.getAllByText(/Egged 486 serves/).length).toBeGreaterThanOrEqual(1);
     expect(screen.getByText(/₪2,100 per vehicle/)).toBeInTheDocument();
     expect(screen.getByTestId("journey-owner-trip")).toHaveTextContent("transport");
     expect(screen.getByTestId("journey-owner-trip")).toHaveTextContent("guiding");
