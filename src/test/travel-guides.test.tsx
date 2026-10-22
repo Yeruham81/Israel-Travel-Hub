@@ -180,7 +180,7 @@ describe("migrated practical guides", () => {
       }
     }
     expect(container.querySelector("#weekend-711")?.textContent).toMatch(/free.*Terminal 1.*timetable/is);
-    expect(container.querySelector("#taxis-transfers")?.textContent).toMatch(/meter.*regulated/is);
+    expect(container.querySelector("#taxis-transfers")?.textContent).toMatch(/regulated meter/is);
   });
 
   it("distinguishes baptism sites, church clusters and region-specific Dead Sea planning without blanket operating claims", () => {
