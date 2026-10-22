@@ -32,6 +32,7 @@ export type AirportJourneyGuide = {
   sources?: { title: string; url: string }[];
   updatedAt?: string;
   historicalPrices?: boolean;
+  exampleJourney: { title: string; steps: { label: string; detail: string }[]; takeaway: string };
 };
 
 const commonTaxi = [
@@ -55,6 +56,15 @@ const byId: Record<AirportJourneyId, AirportJourneyGuide> = {
     description: "Ben Gurion Airport to Jerusalem in 2026: compare the direct train, bus 485, official taxis and private rides, with station, Old City and Shabbat tips.",
     distance: "Approximately 45–55 km by road, depending on your address",
     intro: "The airport train reaches Jerusalem–Yitzhak Navon, not the Old City. Compare that final hotel connection with bus 485, an authorized taxi or a pre-booked private ride.",
+    exampleJourney: {
+      title: "Example: landing at TLV and staying near Jaffa Gate",
+      steps: [
+        { label: "Reach the airport railway", detail: "After baggage and customs, follow the train signs at Terminal 3. Check the actual Jerusalem departure and whether a separate free travel voucher is required." },
+        { label: "Travel to Jerusalem–Yitzhak Navon", detail: "The direct rail leg is commonly around 26–30 minutes when scheduled, but the deep station exit and hotel connection take extra time." },
+        { label: "Continue toward Jaffa Gate", detail: "Use the light rail and a suitable final walk, or a local taxi if carrying heavy bags. Ask the hotel which Old City entrance and drop-off are practical." },
+      ],
+      takeaway: "The train can be efficient for a central hotel; a private vehicle is more convenient when several large bags or an Old City luggage walk make the last connection difficult.",
+    },
     answer: "The direct train from Ben Gurion Airport to Jerusalem–Yitzhak Navon is often the fastest lower-cost choice when operating; allow roughly 26–30 minutes on the train plus the transfer to your hotel. Check Israel Railways for the actual ticket, departure and any required free personal travel voucher. The airport also lists bus 485 from Terminal 3, Level 2, Exit 21, but verify a real departure. Licensed metered taxis and confirmed private transfers offer direct travel, especially for Shabbat arrivals or Old City accommodation.",
     trainIntro: "The airport railway station is below Terminal 3; follow the rail signs from international arrivals. The direct journey to Jerusalem–Yitzhak Navon is commonly about 26–30 minutes when scheduled. Yitzhak Navon is a deep underground terminal near the central bus station and the light rail, not the Old City. Check Israel Railways for the service, price, platform and its current free travel-voucher requirement. The Ben Gurion Airport arrival guide explains immigration, baggage and reaching your onward transport.",
     photo: airportTransferPhotos["jerusalem"]!,
@@ -135,6 +145,15 @@ const byId: Record<AirportJourneyId, AirportJourneyGuide> = {
     description: "Ben Gurion Airport to Tel Aviv in 2026: compare train, bus 445, official taxis, private transfers, all four stations and Shabbat bus 711.",
     distance: "Approximately 20–25 km to central Tel Aviv, depending on the address",
     intro: "Tel Aviv's four mainline railway stations are inland; Jaffa and beachfront hotels require another leg. Compare rail, bus 445, taxis and pre-booked rides, plus the limited weekend option.",
+    exampleJourney: {
+      title: "Example: a hotel on the central beachfront",
+      steps: [
+        { label: "Choose the rail service", detail: "From the Terminal 3 railway, compare the actual stops at HaHagana, HaShalom and Savidor Center rather than assuming the first Tel Aviv stop is best." },
+        { label: "Plan the inland-to-coast leg", detail: "None of the mainline stations is on the beach promenade. Check the bus, local taxi or walking route to the hotel's exact HaYarkon Street entrance." },
+        { label: "Recheck a Friday or Saturday arrival", detail: "Regular rail service stops for much of Shabbat. The limited weekend Line 711 runs via Terminal 1, with its own stops and timetable; it is not a direct replacement for the rail service." },
+      ],
+      takeaway: "For a light-bag daytime arrival, train plus local transport may work well. For Old Jaffa, family luggage or late arrivals, compare the whole door-to-door journey.",
+    },
     answer: "The airport train is often the quickest low-cost option for Tel Aviv while it is operating: choose among HaHagana, HaShalom, Savidor Center and University based on the hotel address, and plan the last connection. Kavim bus 445 also serves Tel Aviv from Terminal 3, Level 2, Exit 21, but check its actual stops and times. A licensed airport taxi or confirmed private transfer goes directly to an accessible address. On Shabbat, regular trains stop; the limited free weekend bus 711 serves Terminal 1 on its own timetable.",
     trainIntro: "Ben Gurion Airport railway station is below Terminal 3. Under the airport’s published 2026 arrangement, international arrivals use Terminal 3; always follow current airport and airline instructions. Tel Aviv has four mainline stations: HaHagana, HaShalom, Savidor Center and University. Journey times and stopping patterns vary by train; none of the four stations is on the beachfront. The Ben Gurion Airport arrival guide explains the steps from passport control to onward transport.",
     photo: airportTransferPhotos["tel-aviv"]!,
@@ -222,6 +241,15 @@ const byId: Record<AirportJourneyId, AirportJourneyGuide> = {
     description: "Ben Gurion Airport to Haifa in 2026: compare train, limited bus 905, taxis and private rides, with the best Haifa station, Shabbat and cruise tips.",
     distance: "Approximately 100–110 km to central Haifa",
     intro: "Haifa's railway follows the coast, while many hotels are uphill on Mount Carmel. Choose a station for your address, then compare the final connection with taxis, transfers and limited bus 905.",
+    exampleJourney: {
+      title: "Example: deciding which Haifa station to use",
+      steps: [
+        { label: "Lower City or German Colony", detail: "Haifa Center HaShmona is often a practical starting point for downtown addresses. Match the remaining walk or taxi leg to the street and luggage." },
+        { label: "Mount Carmel hotel", detail: "The rail corridor remains near the coast. Even if a station looks close on the map, the final route to Carmel Center is uphill and usually needs another ride." },
+        { label: "Cruise connection", detail: "Haifa's passenger terminal is a different destination from a city hotel. Confirm the ship, terminal instructions, boarding deadline and how you will reach the pedestrian entrance." },
+      ],
+      takeaway: "Choose by hotel elevation and final access, not by the distance between a station pin and your hotel pin.",
+    },
     answer: "The airport train is generally a practical low-cost way to reach Haifa while regular rail services operate. Compare Haifa Hof HaCarmel, Bat Galim, Center HaShmona and Lev HaMifratz for your final address, especially for Mount Carmel hotels. Egged bus 905 operates only on a very limited published Saturday-night and early-Sunday timetable, not throughout the week. An authorized metered taxi or confirmed private transfer may be easier for a late arrival, luggage or a cruise connection.",
     trainIntro: "Ben Gurion Airport railway station is below Terminal 3, where international flights arrive under the airport’s published 2026 arrangement. Depending on the schedule, Haifa rail journeys may be direct or require a change. Check actual stops and the station nearest your destination; the railway follows the coast, and hilltop hotels can be a separate uphill journey. My Ben Gurion Airport arrival guide covers the steps from landing to the station.",
     photo: airportTransferPhotos["haifa"]!,
@@ -307,6 +335,15 @@ const byId: Record<AirportJourneyId, AirportJourneyGuide> = {
     description: "Ben Gurion Airport to Ein Bokek in 2026: train and bus via Jerusalem, Dead Sea hotel stops, taxi and private transfer options, last buses and Shabbat.",
     distance: "Approximately 155–165 km to the Ein Bokek hotel strip by road",
     intro: "Ein Bokek has no rail station or regular direct airport bus. Public transport usually involves a train to Jerusalem and a timed onward bus; a taxi, private transfer or rental car avoids that connection.",
+    exampleJourney: {
+      title: "Example: a daytime public-transport connection to Ein Bokek",
+      steps: [
+        { label: "Check the last southbound bus first", detail: "Before leaving the airport, look up a dated bus departure serving your named hotel stop from Jerusalem. A late arrival may leave no usable connection." },
+        { label: "Train to Jerusalem–Yitzhak Navon", detail: "Allow time to exit the deep station and reach the intercity platforms at Jerusalem Central Bus Station; check ticket and any Jerusalem-line voucher requirement." },
+        { label: "Continue to the hotel district", detail: "Find the appropriate 486 or 444 service if operating, then verify the specific stop and remaining luggage walk to your Ein Bokek accommodation." },
+      ],
+      takeaway: "This is a connection-dependent itinerary, not a through ticket. If the final bus cannot be reached comfortably, compare a confirmed transfer or a different travel plan before departing.",
+    },
     answer: "For a daytime arrival with a usable connection, take the train from Ben Gurion Airport's Terminal 3 to Jerusalem–Yitzhak Navon (usually about 26–30 minutes), then change at Jerusalem Central Bus Station to an Egged bus serving Ein Bokek, such as 486 or 444 when operating. There is no rail station at the Dead Sea and the last southbound bus can be early. Check both legs, the current Jerusalem-line personal-voucher requirement, the exact hotel stop and any seat reservation before committing. For late arrivals, Shabbat or heavy luggage, compare the regulated airport taxi queue with a private transfer confirmed in advance.",
     trainIntro: "The railway station is beneath Terminal 3. Follow the train signs from arrivals, then travel to Jerusalem–Yitzhak Navon. The deep underground station is next to Jerusalem Central Bus Station, but reaching the street and intercity bus platforms still takes time. A railway ticket does not include the Dead Sea bus. An Israel Railways notice dated 19 August 2026 requires a free personal voucher for each passenger on the Jerusalem line in addition to the rail ticket; check whether it applies to your date. The airport arrival guide explains reaching the station after baggage collection. An occasional bus 421 via Tel Aviv–Savidor is a limited alternative, not the main airport-to-resort route; check a dated departure before considering it.",
     photo: airportTransferPhotos["dead-sea"]!,
