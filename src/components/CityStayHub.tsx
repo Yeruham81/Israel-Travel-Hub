@@ -10,6 +10,7 @@ import { TelAvivHotelBrowser } from "@/components/TelAvivHotelBrowser";
 import { JerusalemHotelBrowser } from "@/components/JerusalemHotelBrowser";
 import { CityStayPlanning } from "@/components/CityStayPlanning";
 import { recordOutboundClick, relFor } from "@/lib/outbound";
+import { JerusalemClusterLinks } from "@/components/JerusalemClusterLinks";
 
 export const quickPickPhotos: Record<string, { src: string; alt: string; sourceFilename: string }> = {
   downtown: { src: "/images/city-stays/jerusalem-downtown.webp", alt: "Ben Yehuda pedestrian street in central Jerusalem", sourceFilename: "Jerusalem_Ben_Yehuda_Pedestrian_Mall.jpg.webp" },
@@ -148,6 +149,7 @@ export function CityStayHub({ g, areas }: { g: CityStayGuide; areas: Neighborhoo
           <ProviderSection id="book" title={`Already know your dates? Browse ${g.city} stays`} intro="Open an area guide above for recommended properties, or browse a wider range of rooms on the provider's website." links={linksForPage(`stay-${g.id}`)} pageId={`stay-${g.id}`} />
         )}
         <section id="planning" className="scroll-mt-32"><CityStayPlanning city={g.id} /></section>
+        {g.id === "jerusalem" && <JerusalemClusterLinks pageKey="stay-jerusalem" />}
         <FaqList faqs={g.faqs} />
         <SourceList ids={g.sourceIds} />
         <AreaPhotoCredit areas={areas} />

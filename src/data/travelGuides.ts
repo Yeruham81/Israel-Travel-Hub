@@ -19,6 +19,7 @@ import { cityCultureGuides } from "@/data/guideCities2026";
 import { heritageGuides } from "@/data/guideHeritage2026";
 import { journeyDestinationGuides } from "@/data/guideJourneys2026";
 import { taxiGuideCluster } from "@/data/taxiGuideCluster";
+import { applyJerusalemGuideEditorial } from "@/data/jerusalemClusterEditorial";
 
 export const guideTopics = [
   { id: "transportation", label: "Transportation" },
@@ -873,6 +874,9 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
   },
   ...taxiGuideCluster,
 };
+
+// Enrich the already-migrated Jerusalem pages while retaining their full sections.
+applyJerusalemGuideEditorial(travelGuides);
 
 export type GuideDirectoryEntry = { id: string; title: string; description: string; to: LinkProps["to"]; topics: GuideTopicId[]; photo?: GuidePhoto };
 export const guideDirectory: GuideDirectoryEntry[] = [

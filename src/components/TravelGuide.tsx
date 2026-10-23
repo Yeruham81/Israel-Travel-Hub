@@ -9,6 +9,8 @@ import { hasPublicPhotoCredit } from "@/lib/photo-credits";
 import { AuthorCard } from "@/components/AuthorCard";
 import { PageUpdated } from "@/components/PageUpdated";
 import { JerusalemJourneyOptions, JerusalemJourneyBooking, JerusalemJourneyResources } from "@/components/JerusalemJourneyPlanner";
+import { JerusalemClusterLinks, type JerusalemClusterKey } from "@/components/JerusalemClusterLinks";
+import { JerusalemPartnerOffers } from "@/components/JerusalemPartnerOffers";
 
 function sourcesFor(guide: TravelGuide) { return [...new Set([...guide.sourceIds, ...guide.sections.flatMap((section) => section.sourceIds || [])])]; }
 
@@ -126,6 +128,8 @@ export function TravelGuidePage({ id }: { id: TravelGuideId }) {
       {isJerusalemDayJourney && <JerusalemJourneyBooking id={id} />}
       <section id="checklist" aria-label="Travel checklist" className="mt-12 scroll-mt-24"><Checklist title="Before you go" items={guide.checklist} /></section>
       {providers.length > 0 && <section id="provider-options" aria-labelledby="providers-h" className="mt-14"><h2 id="providers-h" className="text-3xl">Compare current eSIM plans</h2><p className="mt-3 leading-relaxed text-muted-foreground">These options are based on published product information, not an on-location speed test or a cheapest-price ranking. Links marked “Sponsored link” may earn me a commission at no extra cost to you. Select Israel and verify the exact package before paying.</p><ul className="mt-5 grid gap-4 md:grid-cols-2">{providers.map((link) => <ProviderCard key={link.id} link={link} pageId={guide.providerPageId!} />)}</ul></section>}
+      <JerusalemPartnerOffers id={id} />
+      {(["jerusalem", "jerusalemChurches", "jerusalemShopping", "jerusalemDayTrips", "bethlehem", "jerusalemDeadSea"] as string[]).includes(id) && <JerusalemClusterLinks pageKey={id as JerusalemClusterKey} />}
       <FaqList faqs={guide.faqs} />
       {isJerusalemDayJourney && <JerusalemJourneyResources id={id} />}
       <SourceList ids={sourcesFor(guide)} />

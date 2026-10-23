@@ -1,3 +1,4 @@
+import { JerusalemClusterLinks, type JerusalemClusterKey } from "@/components/JerusalemClusterLinks";
 import { Link } from "@tanstack/react-router";
 import { travelGuidePaths } from "@/data/registry";
 import { Breadcrumbs, FaqList, SourceList } from "@/components/Guide";
@@ -47,6 +48,7 @@ export function TourCategoryPage({ id, filters: rawFilters, onChange }: { id: To
       {id === "bethlehem-jericho" && <p className="mt-4 text-sm"><Link to={travelGuidePaths.bethlehem} className="font-semibold text-primary underline">Read my Jerusalem to Bethlehem travel guide</Link></p>}
       {id === "masada-dead-sea" && <p className="mt-4 text-sm"><Link to={travelGuidePaths.jerusalemDeadSea} className="font-semibold text-primary underline">Planning the journey independently? Compare buses, driving and private transport from Jerusalem.</Link></p>}
     </section>
+    {(["jerusalem", "bethlehem-jericho", "masada-dead-sea", "food-markets"] as string[]).includes(id) && <JerusalemClusterLinks pageKey={("tour-" + id) as JerusalemClusterKey} />}
     <FaqList faqs={category.faqs} />
     <RelatedGuideCards title="Get to know the places on your itinerary" guides={guides} />
     <MoreTourCategories currentId={id} />

@@ -14,6 +14,7 @@ import { hasPublicPhotoCredit } from "@/lib/photo-credits";
 import { ShoreServiceCatalog } from "@/components/ShoreServiceCatalog";
 import { ShoreReadingGuides } from "@/components/ShoreReadingGuides";
 import { parseShoreServiceSearch, shoreSourceIds, type ShoreServiceSearch } from "@/lib/shore-services";
+import { JerusalemClusterLinks } from "@/components/JerusalemClusterLinks";
 
 function crumbsFor(id: ShorePortId) {
   return [{ name: "Home", path: "/" as const }, { name: "Shore excursions", path: "/shore-excursions/" as const }, { name: `From ${shorePorts[id].name} Port`, path: shorePorts[id].path }];
@@ -101,6 +102,7 @@ export function PortPage({ id, filters: routeSearch, onFilterChange }: { id: Sho
     </section>
     <FaqList faqs={port.faqs} />
     <section aria-labelledby="ready-h" className="mt-14 rounded-2xl bg-navy p-6 text-navy-foreground sm:p-8"><h2 id="ready-h" className="text-3xl">Request an itinerary from {port.name}</h2><p className="mt-3 opacity-90">Send your ship's arrival and all-aboard times, party size and preferred route. I will reply with an itinerary and quote for your review.</p><a href="#request-quote" onClick={focusQuote} className="btn btn-light mt-5">Request a personal quote</a></section>
+    {id === "ashdod" && <JerusalemClusterLinks pageKey="shore-ashdod" />}
     <ShoreReadingGuides guides={port.related} />
     <SourceList ids={shoreSourceIds(id)} intro="Product pages were checked for itinerary, duration and port pickup/return. External starting prices are dated reference snapshots, not live prices or confirmed availability. Published ILS rates apply only to my named day trips; external tours are booked on GetYourGuide or Viator under their own terms." />
     <details className="mt-10 rounded-xl border p-5"><summary className="cursor-pointer text-sm font-medium">Excursion image credits</summary><ul className="mt-3 space-y-3">{[...new Map(photos.map((photo) => [photo.src, photo])).values()].map((photo) => <li key={photo.src}><p className="text-sm">{photo.alt}</p><GuidePhotoCredit photo={photo} insideDisclosure /></li>)}</ul></details>

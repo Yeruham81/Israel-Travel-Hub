@@ -5,6 +5,7 @@ import { attractionGuides } from "@/data/attractionGuides";
 import { attractionPath, type AttractionId } from "@/data/attractionGuideTypes";
 import { CANONICAL_ORIGIN, SITE_NAME, jsonLd, pageMeta } from "@/lib/site";
 import { authorLd } from "@/lib/author";
+import { JerusalemClusterLinks, type JerusalemClusterKey } from "@/components/JerusalemClusterLinks";
 
 export function attractionMeta(id: AttractionId) {
   const a = attractionGuides[id];
@@ -21,7 +22,7 @@ export function attractionMeta(id: AttractionId) {
   return { ...base, scripts: [...base.scripts, jsonLd({
     "@context":"https://schema.org", "@type":"Article",
     "@id": url + "#article", mainEntityOfPage: url, headline:a.title,
-    description:a.description, inLanguage:"en", dateModified:"2026-10-18",
+    description:a.description, inLanguage:"en", dateModified: a.region === "Jerusalem" ? "2026-10-24" : "2026-10-18",
     author:authorLd(), publisher:{"@type":"Organization",name:SITE_NAME,url:CANONICAL_ORIGIN},
     ...(a.image ? {image:new URL(a.image.src,CANONICAL_ORIGIN).href}:{}),
     citation:a.official.map(o=>o.url),
@@ -76,6 +77,7 @@ export function AttractionGuidePage({ id }: {id:AttractionId}) {
       <p>Use the relevant attraction or managing body's current website to confirm opening hours, reservations, accessibility and seasonal restrictions.</p>
       <ul className="mt-4 grid gap-3 sm:grid-cols-2">{a.official.map(o=><li key={o.url}><a href={o.url} target="_blank" rel="noopener noreferrer" className="block rounded-xl border bg-card p-4 font-semibold text-primary underline underline-offset-4">{o.label} <span className="sr-only">(opens in a new tab)</span>↗</a></li>)}</ul>
     </Section>
+    {a.region === "Jerusalem" && <JerusalemClusterLinks pageKey={id as JerusalemClusterKey} />}
     <FaqList faqs={a.faqs}/>
     <RelatedLinks title="Plan a multi-day Israel itinerary" items={
       a.region === "Jerusalem" ? [

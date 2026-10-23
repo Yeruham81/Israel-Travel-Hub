@@ -9,6 +9,7 @@ import { airportJourneyGuides, airportJourneyIds, type AirportJourneyId, type Jo
 import { getAirportRouteGuide } from "@/data/airportRoutes";
 import { authorLd } from "@/lib/author";
 import { CANONICAL_ORIGIN, SITE_NAME, jsonLd, pageMeta } from "@/lib/site";
+import { JerusalemClusterLinks } from "@/components/JerusalemClusterLinks";
 
 const PUBLISHED_REVIEW = "2026-10-18";
 const sources = [
@@ -181,6 +182,7 @@ export function AirportJourneyPage({ id }: { id: AirportJourneyId }) {
         { label: "Ben Gurion Airport arrival tips", to: "/travel-blog/ben-gurion-airport-arrival-tips/" },
       ]} />
       <RelatedLinks title="Other airport journey comparisons" items={airportJourneyIds.filter(other => other !== id).map(other => ({ label: "How to get to " + airportJourneyGuides[other].city, to: airportJourneyGuides[other].path }))} />
+      {id === "jerusalem" && <JerusalemClusterLinks pageKey="airport-jerusalem" />}
       <TransferQuoteForm key={transferIdFor(id)} destinationId={transferIdFor(id)} fixedDestination fixedDestinationLabel={g.city} />
     </main>
   );
