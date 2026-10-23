@@ -202,8 +202,10 @@ export function IsraelHolidaysPage() {
         <h2 className="text-2xl">Holiday calendars and travel resources</h2>
         <p className="mt-2 text-sm text-muted-foreground">Calendar updated: {HOLIDAY_COVERAGE.checkedAt}. School breaks differ by school sector; Muslim holiday dates can shift with local announcements.</p>
         <ul className="mt-4 list-disc space-y-2 pl-5 text-sm">
-          <li><a className="text-primary underline" href={"https://www.hebcal.com/holidays/"+today.slice(0,4)+"?i=on"} target="_blank" rel="noopener noreferrer">Hebcal — Jewish holidays (Israel setting)</a></li>
-          <li><a className="text-primary underline" href={"https://www.timeanddate.com/holidays/israel/"+today.slice(0,4)} target="_blank" rel="noopener noreferrer">Time and Date — Israel holidays and estimated observances</a></li>
+          <li><a className="text-primary underline" href={"https://www.hebcal.com/holidays/"+today.slice(0,4)+"?i=on"} target="_blank" rel="noopener noreferrer">Hebcal — Israeli Jewish holidays ({today.slice(0,4)})</a></li>
+          <li><a className="text-primary underline" href={"https://www.hebcal.com/holidays/"+(Number(today.slice(0,4))+1)+"?i=on"} target="_blank" rel="noopener noreferrer">Hebcal — Israeli Jewish holidays ({Number(today.slice(0,4))+1})</a></li>
+          <li><a className="text-primary underline" href={"https://www.timeanddate.com/holidays/israel/"+today.slice(0,4)} target="_blank" rel="noopener noreferrer">Time and Date — Israeli holidays and observances ({today.slice(0,4)})</a></li>
+          <li><a className="text-primary underline" href={"https://www.timeanddate.com/holidays/israel/"+(Number(today.slice(0,4))+1)} target="_blank" rel="noopener noreferrer">Time and Date — next year ({Number(today.slice(0,4))+1})</a></li>
           <li><a className="text-primary underline" href="https://aladhan.com/islamic-calendar-api" target="_blank" rel="noopener noreferrer">AlAdhan — calculated Islamic dates (tentative until locally confirmed)</a></li>
           <li><a className="text-primary underline" href="https://parents.education.gov.il/gov-education/vacations-camps-leisure/schedule/" target="_blank" rel="noopener noreferrer">Israel Ministry of Education — school vacation calendar</a></li>
           <li><a className="text-primary underline" href="https://bus.gov.il/" target="_blank" rel="noopener noreferrer">Israel Ministry of Transport — check current bus services</a></li>
