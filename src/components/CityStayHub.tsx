@@ -47,7 +47,7 @@ export function CityStayHub({ g, areas }: { g: CityStayGuide; areas: Neighborhoo
           {quickPicks.map(({ area, label, description }) => area && (
             <li key={label} className="min-w-0">
               <Link to={area.path as LinkProps["to"]} className="group flex h-full flex-col overflow-hidden rounded-2xl border bg-card transition-colors hover:border-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
-                {quickPickPhotos[area.id] && <img src={quickPickPhotos[area.id].src} alt={quickPickPhotos[area.id].alt} width={600} height={375} loading="lazy" decoding="async" className="aspect-[16/10] w-full object-cover" />}
+                {quickPickPhotos[area.id] && <img src={quickPickPhotos[area.id]!.src} alt={quickPickPhotos[area.id]!.alt} width={600} height={375} loading="lazy" decoding="async" className="aspect-[16/10] w-full object-cover" />}
                 <span className="flex flex-1 flex-col p-4">
                   <span className="eyebrow">{label}</span>
                   <span className="mt-2 text-lg font-semibold text-foreground">{area.shortName}</span>
