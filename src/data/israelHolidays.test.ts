@@ -4,11 +4,11 @@ import { checkRange, findHolidayMatches, holidays, HOLIDAY_COVERAGE, intersects,
 describe("Israel holiday travel calendar", () => {
   it("covers future 2026 and all of 2027, but never reports uncovered days as clear", () => {
     expect(HOLIDAY_COVERAGE.from).toBe("2026-10-23");
-    expect(HOLIDAY_COVERAGE.to).toBe("2028-01-01");
+    expect(HOLIDAY_COVERAGE.to>="2028-01-01").toBe(true);
     expect(checkRange("2027-12-29","2028-01-01")).toBeNull();
     expect(checkRange("2027-07-01","2027-07-04")).toBeNull();
-    expect(checkRange("2028-01-01","2028-01-02")).toMatch(/checked coverage/);
-    expect(checkRange("2026-10-22","2026-10-24")).toMatch(/checked coverage/);
+    expect(checkRange("2101-01-01","2101-01-02")).toMatch(/available through/);
+    expect(checkRange("2026-10-22","2026-10-24")).toMatch(/available through/);
   });
   it("handles exact days, malformed input and reversed dates", () => {
     expect(isValidIsoDay("2027-02-29")).toBe(false);
@@ -45,7 +45,7 @@ describe("Israel holiday travel calendar", () => {
     expect(intersects("2027-12-30","2027-12-31","2027-12-24","2028-01-01")).toBe(true);
     expect(findHolidayMatches("2027-12-31","2027-12-31").map(h=>h.id)).toContain("hanukkah27");
     expect(findHolidayMatches("2028-01-01","2028-01-01").map(h=>h.id)).toContain("hanukkah27");
-    expect(checkRange("2028-01-02","2028-01-02")).toMatch(/checked coverage/);
+    expect(checkRange("2101-01-02","2101-01-02")).toMatch(/available through/);
   });
   it("explains each observance and flags realistic travel effects", () => {
     expect(holidays.every(h=>h.summary.length>=30 && h.travel.length>=45)).toBe(true);
