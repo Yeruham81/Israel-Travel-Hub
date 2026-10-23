@@ -12,6 +12,8 @@ import {
 import { useEffect, type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
+import siteSansUrl from "@/assets/fonts/instrument-sans-latin-wght-normal.woff2?url";
+import siteSerifUrl from "@/assets/fonts/newsreader-latin-400.woff2?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 import { SiteHeader, SiteFooter, SiteSidebar } from "@/components/Layout";
 import { HomeHero } from "@/components/HomeHero";
@@ -89,8 +91,8 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     links: [
       // Fonts are served by this origin. Preload only the two faces used at first paint.
       // This avoids a render-blocking cross-origin stylesheet and its font request chain.
-      { rel: "preload", href: "/fonts/instrument-sans-latin-wght-normal.woff2", as: "font", type: "font/woff2", crossOrigin: "anonymous" },
-      { rel: "preload", href: "/fonts/newsreader-latin-400.woff2", as: "font", type: "font/woff2", crossOrigin: "anonymous" },
+      { rel: "preload", href: siteSansUrl, as: "font", type: "font/woff2", crossOrigin: "anonymous" },
+      { rel: "preload", href: siteSerifUrl, as: "font", type: "font/woff2", crossOrigin: "anonymous" },
       {
         rel: "stylesheet",
         href: appCss,
