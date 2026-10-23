@@ -39,10 +39,18 @@ jobs:
       - name: Set up Bun
         uses: oven-sh/setup-bun@v2
         with:
-          bun-version: latest
+          bun-version: "1.4.4"
+
+      - name: Restore Bun download cache
+        uses: actions/cache@v4
+        with:
+          path: ~/.bun/install/cache
+          key: bun-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('bun.lock') }}
+          restore-keys: |
+            bun-${{ runner.os }}-${{ runner.arch }}-
 
       - name: Install dependencies
-        run: bun install --frozen-lockfile
+        run: bash scripts/install-ci-dependencies.sh
 
       # TanStack Router regenerates routeTree.gen.ts at build time.
       # Build first so type-checking sees any newly added file routes.
