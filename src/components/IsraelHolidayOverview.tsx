@@ -44,7 +44,8 @@ export function CompactHolidayRow({ holiday }: { holiday: Holiday }) {
     <p className="text-sm font-semibold tabular-nums text-foreground">{shortDate(holiday.from)}{holiday.from !== holiday.to && <> – {shortDate(holiday.to)}</>}</p>
     <div className="min-w-0">
       <h4 className="text-sm font-semibold leading-snug">{holiday.name}</h4>
-      <p className="mt-0.5 text-xs text-muted-foreground">{holiday.community}{holiday.certainty === "tentative" ? " · Dates tentative" : ""}{holiday.startsAt === "sunset" ? " · Starts at sunset" : ""}</p>
+      <p className="mt-1 text-xs leading-relaxed text-muted-foreground">{holiday.summary}</p>
+      <p className="mt-1 text-xs text-muted-foreground">{holiday.community}{holiday.certainty === "tentative" ? " · Dates tentative" : ""}{holiday.startsAt === "sunset" ? " · Starts at sunset" : ""}</p>
     </div>
     <div className="min-w-0 sm:col-start-2 lg:col-auto">
       <p className="flex items-center gap-1.5 text-xs font-medium text-foreground"><span aria-hidden="true" className={"h-2 w-2 shrink-0 rounded-full " + dotStyles[holiday.impact]} />{impactLabels[holiday.impact]}</p>
@@ -101,6 +102,6 @@ export function IsraelHolidayOverview() {
           </div>)}
         </div>}
     </div>
-    <p className="mt-3 text-xs leading-relaxed text-muted-foreground">Dates include the preceding evening when an observance begins at sunset. These are practical planning notes, not live opening hours, ticket availability or price forecasts. For an exact visit, select your arrival and departure on the calendar above.</p>
+    <p className="mt-3 text-xs leading-relaxed text-muted-foreground">Jewish holidays begin at sunset unless stated otherwise. Muslim dates may change with local announcements.</p>
   </section>;
 }
