@@ -37,7 +37,7 @@ export function secureEventUrl(value:string|undefined):string|null {
 }
 export function eventLinks(id:string){
   const item=EVENT_LINKS[id];
-  if(!item)return {official:null,ticket:null};
+  if(!item)return {official:null,ticket:null,affiliate:false,provider:null};
   const official=secureEventUrl(item.officialUrl);
   const offered=item.ticket;
   const ticket=offered&&offered.provider.trim()&&/^\d{4}-\d{2}-\d{2}$/.test(offered.verifiedAt)
