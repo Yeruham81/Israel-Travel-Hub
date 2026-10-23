@@ -16,8 +16,8 @@ export const Route = createFileRoute("/attractions/")({
       title: TITLE,
       description: DESCRIPTION,
       path: PATH,
-      image: attractionHubPhotos.jerusalem.src,
-      imageAlt: attractionHubPhotos.jerusalem.alt,
+      image: attractionHubPhotos.hero.src,
+      imageAlt: attractionHubPhotos.hero.alt,
       crumbs: [{ name: "Home", path: "/" }, { name: "Attractions", path: PATH }],
     });
     return {
@@ -87,7 +87,7 @@ function Attractions() {
             <Link to={travelGuidePaths.topTen} className="btn border inline-flex items-center gap-2">Israel highlights <ArrowUpRight size={17} aria-hidden="true" /></Link>
           </div>
         </div>
-        <img src={attractionHubPhotos.jerusalem.src} alt={attractionHubPhotos.jerusalem.alt} width={755} height={405} fetchPriority="high" decoding="async" className="aspect-[4/3] w-full rounded-3xl object-cover md:aspect-[5/4]" />
+        <img src={attractionHubPhotos.hero.src} alt={attractionHubPhotos.hero.alt} width={755} height={405} fetchPriority="high" decoding="async" className="aspect-[4/3] w-full rounded-3xl object-cover md:aspect-[5/4]" />
       </header>
       <AuthorCard />
 

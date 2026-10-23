@@ -3,6 +3,15 @@ import lcpHeroMobile from "@/assets/home/hero-jerusalem-sm-optimized.webp";
 import lcpHeroMedium from "@/assets/home/hero-jerusalem-medium.webp";
 import lcpHeroLarge from "@/assets/home/hero-jerusalem-large.webp";
 import jerusalem from "@/assets/home/jerusalem-old-city.webp";
+import jerusalemMamilla from "@/assets/jerusalem/mamilla.webp";
+import jerusalemOldCityNeighborhood from "@/assets/jerusalem/old-city.webp";
+import telAvivBeachfront from "@/assets/tel-aviv/beachfront.webp";
+import telAvivNeveTzedek from "@/assets/tel-aviv/neve-tzedek.webp";
+import haifaColony from "@/assets/haifa/colony.webp";
+import tiberiasSunrise from "@/assets/tiberias/sunrise.webp";
+import deadSeaLandscape from "@/assets/dead-sea/landscape.webp";
+import masadaCableCar from "@/assets/home/masada-cable-car.webp";
+import airportTransportPhoto from "@/assets/airport-transfers/airport.webp";
 import telAviv from "@/assets/home/tel-aviv-coast.webp";
 import tiberias from "@/assets/home/tiberias-lake.webp";
 import t3 from "@/assets/home/ben-gurion-t3.webp";
@@ -88,7 +97,7 @@ const IMG = {
   caesarea: { src: caesareaAqueduct, thumb: caesareaAqueductCard, tile: caesareaTile, alt: "Roman aqueduct along the beach at Caesarea" },
 } satisfies Record<string, Img>;
 
-const services: Service[] = [
+export const services: Service[] = [
   {
     id: "transfers", eyebrow: "Airport Transfers", tagline: "Plan a Smooth Arrival in Israel", title: "Airport Transfers",
     text: "Arrange a comfortable private pickup from Ben Gurion Airport to Jerusalem, Tel Aviv or Haifa, with a vehicle and meeting point tailored to your needs.",
@@ -125,11 +134,11 @@ const services: Service[] = [
     text: "Choose a neighborhood or hotel style, then compare practical details such as beach access, family facilities, spa entry and arrival before booking.",
     feature: { src: hotelRoom, alt: "Illustrative bright hotel room with a made bed by the window (not a specific property)" },
     cards: [
-      { label: "Jerusalem", text: "Old City, German Colony or city centre?", to: "/travel-blog/where-to-stay-in-jerusalem/", img: IMG.jerusalem },
-      { label: "Tel Aviv", text: "Beachfront, Jaffa or the White City", to: "/travel-blog/where-to-stay-in-tel-aviv/", img: IMG.telAviv },
+      { label: "Jerusalem", text: "Old City, German Colony or city centre?", to: "/travel-blog/where-to-stay-in-jerusalem/", img: { src: jerusalemMamilla, alt: "Mamilla area in Jerusalem" } },
+      { label: "Tel Aviv", text: "Beachfront, Jaffa or the White City", to: "/travel-blog/where-to-stay-in-tel-aviv/", img: { src: telAvivBeachfront, alt: "Tel Aviv beachfront near the hotels" } },
       { label: "Tiberias & Galilee", text: "Family, luxury & lakeside hotels", to: "/travel-blog/best-hotels-in-tiberias/", img: IMG.tiberias },
       { label: "Dead Sea", text: "Spa breaks, family resorts & luxury stays", to: "/travel-blog/best-dead-sea-hotels/", img: IMG.deadSea },
-      { label: "Haifa", text: "Boutique, family & Carmel hotels", to: "/travel-blog/best-hotels-in-haifa/", img: IMG.haifa },
+      { label: "Haifa", text: "Boutique, family & Carmel hotels", to: "/travel-blog/best-hotels-in-haifa/", img: { src: haifaColony, alt: "Historic German Colony area of Haifa" } },
     ],
     hub: { label: "Explore accommodation", to: "/hotels/" },
   },
@@ -138,14 +147,29 @@ const services: Service[] = [
     text: "Desert fortresses, seaside ruins and holy places — what to expect and how long to allow.",
     feature: { src: caesareaDusk, alt: "Ancient ruins on the shore at Caesarea at dusk" },
     cards: [
-      { label: "Masada", text: "Cable car or the hiking paths", to: "/travel-blog/masada/", img: IMG.masada },
+      { label: "Masada", text: "Cable car or the hiking paths", to: "/travel-blog/masada/", img: { src: masadaCableCar, alt: "Cable car approaching Masada" } },
       { label: "Caesarea", text: "Roman harbour city on the coast", to: "/attractions/caesarea/", img: IMG.caesarea },
-      { label: "Bethlehem", text: "Plan your journey from Jerusalem", to: "/travel-blog/jerusalem-to-bethlehem/", img: IMG.bethlehem },
+      { label: "Bethlehem", text: "Plan your journey from Jerusalem", to: "/travel-blog/jerusalem-to-bethlehem/", img: { src: "/images/home/bethlehem-alternative.webp", alt: "Manger Square in Bethlehem" } },
     ],
     hub: { label: "Explore attractions & experiences", to: "/attractions/" },
   },
 
 ];
+
+export const popularDestinationCards: Card[] = [
+  { label: "Jerusalem", text: "Old City, Bethlehem & Masada trips", to: "/travel-blog/where-to-stay-in-jerusalem/", img: { src: jerusalemOldCityNeighborhood, alt: "Jerusalem Old City and surrounding neighbourhood" } },
+  { label: "Tel Aviv & Jaffa", text: "Beaches, food and the coast", to: "/travel-blog/where-to-stay-in-tel-aviv/", img: { src: telAvivNeveTzedek, alt: "Neve Tzedek historic neighbourhood in Tel Aviv" } },
+  { label: "Tiberias & Galilee", text: "Lakeside base for the north", to: "/travel-blog/best-hotels-in-tiberias/", img: { src: tiberiasSunrise, alt: "Sunrise over Tiberias and the Sea of Galilee" } },
+  { label: "Dead Sea", text: "Spa, family and resort stays", to: "/travel-blog/best-dead-sea-hotels/", img: { src: deadSeaLandscape, alt: "Dead Sea desert landscape" } },
+  { label: "Haifa", text: "Carmel views, boutique & beach stays", to: "/travel-blog/best-hotels-in-haifa/", img: { src: "/images/attractions/haifa-coast.webp", alt: "Haifa and the Mediterranean coast" } },
+];
+
+export const homeGuideCards = {
+  first: guideDirectory.filter((guide) => ["uber", "esim", "arrival"].includes(guide.id)).map((guide) =>
+    guide.id === "uber" ? { ...guide, photo: { src: airportTransportPhoto, alt: "Ben Gurion Airport transport area" } } : guide),
+  second: guideDirectory.filter((guide) => ["israel", "travelTips", "airport-journey-jerusalem"].includes(guide.id)).map((guide) =>
+    guide.id === "travelTips" ? { ...guide, photo: { src: "/images/attractions/ramon-crater.webp", alt: "Landscape of Ramon Crater in Israel" } } : guide),
+};
 
 function PhotoCard({ c }: { c: Card }) {
   return (
@@ -251,8 +275,8 @@ function Home() {
 
       <section id="guides" aria-labelledby="guides-h" className="home-offscreen mx-auto mt-16 max-w-6xl scroll-mt-6 px-4">
         <div><p className="eyebrow">Before You Travel</p><h2 id="guides-h" className="mt-2 text-3xl">Practical Israel Travel Guides</h2><p className="mt-3 max-w-2xl text-muted-foreground">Clear answers about arrival, getting connected and choosing how to get around.</p></div>
-        <div className="mt-6 grid gap-5 sm:grid-cols-2 xl:grid-cols-3" data-testid="guide-row-one">{guideDirectory.filter((guide) => ["uber", "esim", "arrival"].includes(guide.id)).map((guide) => <GuideCard key={guide.id} guide={guide} headingLevel={3} />)}</div>
-        <div className="mt-5 grid gap-5 sm:grid-cols-2 xl:grid-cols-3" data-testid="guide-row-two">{guideDirectory.filter((guide) => ["israel", "travelTips", "airport-journey-jerusalem"].includes(guide.id)).map((guide) => <GuideCard key={guide.id} guide={guide} headingLevel={3} />)}</div>
+        <div className="mt-6 grid gap-5 sm:grid-cols-2 xl:grid-cols-3" data-testid="guide-row-one">{homeGuideCards.first.map((guide) => <GuideCard key={guide.id} guide={guide} headingLevel={3} />)}</div>
+        <div className="mt-5 grid gap-5 sm:grid-cols-2 xl:grid-cols-3" data-testid="guide-row-two">{homeGuideCards.second.map((guide) => <GuideCard key={guide.id} guide={guide} headingLevel={3} />)}</div>
         <div className="mt-7 flex justify-center"><Link to="/guides/" className="btn btn-primary">Browse all guides →</Link></div>
       </section>
       <section aria-labelledby="dest-h" className="home-offscreen mx-auto mt-20 max-w-6xl px-4">
@@ -260,11 +284,7 @@ function Home() {
           <p className="text-xs font-semibold uppercase tracking-[0.14em] opacity-80">Where to Base Yourself</p>
           <h2 id="dest-h" className="mt-2 text-3xl">Popular Destinations</h2>
           <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
-            <PhotoCard c={{ label: "Jerusalem", text: "Old City, Bethlehem & Masada trips", to: "/travel-blog/where-to-stay-in-jerusalem/", img: IMG.jerusalem }} />
-            <PhotoCard c={{ label: "Tel Aviv & Jaffa", text: "Beaches, food and the coast", to: "/travel-blog/where-to-stay-in-tel-aviv/", img: IMG.telAviv }} />
-            <PhotoCard c={{ label: "Tiberias & Galilee", text: "Lakeside base for the north", to: "/travel-blog/best-hotels-in-tiberias/", img: IMG.tiberias }} />
-            <PhotoCard c={{ label: "Dead Sea", text: "Spa, family and resort stays", to: "/travel-blog/best-dead-sea-hotels/", img: IMG.deadSea }} />
-            <PhotoCard c={{ label: "Haifa", text: "Carmel views, boutique & beach stays", to: "/travel-blog/best-hotels-in-haifa/", img: IMG.haifa }} />
+            {popularDestinationCards.map((card) => <PhotoCard key={card.label} c={card} />)}
           </div>
           <Link to="/destinations/" className="btn btn-light mt-6">Explore all destinations →</Link>
         </div>

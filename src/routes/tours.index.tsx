@@ -3,12 +3,11 @@ import { Breadcrumbs, FaqList } from "@/components/Guide";
 import { RelatedGuideCards } from "@/components/ShoreReadingGuides";
 import { TourCategoryExplorer, TourCruiseCallout } from "@/components/TourDiscovery";
 import { TourPhotoCredits } from "@/components/TourCategoryPage";
-import { tourCategories, tourCategoryPaths, tourCruisePhoto, tourPlanningGuides, toursHubDescription, toursHubFaqs, toursHubGuides, toursHubTitle } from "@/data/tours";
+import { tourCategories, tourCategoryPaths, tourCruisePhoto, toursHubHero, tourPlanningGuides, toursHubDescription, toursHubFaqs, toursHubGuides, toursHubTitle } from "@/data/tours";
 import { parseTourHubSearch } from "@/lib/tours";
 import { CANONICAL_ORIGIN, jsonLd, pageMeta } from "@/lib/site";
-import { migrationPhotos } from "@/data/guideMigrationPhotos";
-
-const hero = migrationPhotos["EXISTING:masada"];
+ 
+const hero = toursHubHero;
 export const Route = createFileRoute("/tours/")({
   validateSearch: parseTourHubSearch,
   head: () => {

@@ -71,7 +71,7 @@ const reading: Record<ReadingId, ShoreReadingGuide> = {
   caesarea: { title: "Caesarea by the sea", description: "Explore the Roman harbour, theatre and coastal remains. Understand the site layout before choosing how long to spend there.", to: "/attractions/caesarea/", photo: airport["caesarea"]! },
   food: { title: "What to eat in Israel", description: "Discover dishes, snacks and market favourites. Arrive at your tasting walk with a few flavours you would love to try.", to: travelGuidePaths.food, photo: migration["what-to-eat-in-israel"] },
   eilat: { title: "Eilat & the Red Sea", description: "Plan your stay around the waterfront, beaches and nearby desert. Leave time between activities to enjoy the southern coast.", to: travelGuidePaths.eilat, photo: airport["eilat"]! },
-  tips: { title: "Israel travel tips", description: "Prepare the everyday essentials for a smoother visit. Find practical advice for planning your days and moving between destinations.", to: travelGuidePaths.travelTips, photo: migration["EXISTING:coast"] },
+  tips: { title: "Israel travel tips", description: "Prepare the everyday essentials for a smoother visit. Find practical advice for planning your days and moving between destinations.", to: travelGuidePaths.travelTips, photo: { src: "/images/attractions/ramon-crater.webp", alt: "Desert mountains and crater in southern Israel" } },
 };
 
 export type TourCategory = {
@@ -229,7 +229,13 @@ export const tourCategories: TourCategory[] = [
 
 export function getTourCategory(id: TourCategoryId) { return tourCategories.find(category => category.id === id)!; }
 export function tourReadingGuides(id: TourCategoryId) { return getTourCategory(id).reading.map(key => reading[key]); }
-export const toursHubGuides = [reading.jerusalem, reading.masada, reading.jaffa, reading.galilee];
+export const toursHubHero = { src: "/images/attractions/hero-jerusalem.webp", alt: "Jerusalem's historic skyline overlooking the Old City" };
+export const toursHubGuides = [
+  { ...reading.jerusalem, photo: { src: "/images/attractions/jerusalem.webp", alt: "The Old City of Jerusalem viewed across its hills" } },
+  { ...reading.masada, photo: { src: "/images/tours/masada-ruins.webp", alt: "Ancient ruins at Masada" } },
+  { ...reading.jaffa, photo: { src: "/images/attractions/tel-aviv-jaffa.webp", alt: "Boats in Jaffa's old harbour" } },
+  { ...reading.galilee, photo: { src: "/images/attractions/sea-of-galilee.webp", alt: "View of the Sea of Galilee" } },
+];
 export const toursHubTitle = "Tours & day trips in Israel";
 export const toursHubDescription = "Explore Israel tours by destination and interest: Jerusalem, Tel Aviv, Masada, Galilee, food tours and Eilat. Find guided day trips, private experiences, food walks and Red Sea activities.";
 export const toursHubFaqs = [

@@ -24,6 +24,8 @@ export type AttractionHubRegion = {
 };
 
 export const attractionHubPhotos = {
+  hero: { src: "/images/attractions/hero-jerusalem.webp", alt: "Jerusalem's ancient walls and skyline in daylight", sourceFilename: "skyline-jerusalem-panorama.webp" },
+  olives: { src: "/images/attractions/mount-of-olives.webp", alt: "Mount of Olives and its hillside buildings overlooking Jerusalem", sourceFilename: "mount_of_olives__.jpg.webp" },
   jerusalem: { src: "/images/attractions/jerusalem.webp", alt: "View of Jerusalem's Old City and the Dome of the Rock", sourceFilename: "The_Old_City_of_Jerusalem_3.jpg.webp" },
   telAviv: { src: "/images/attractions/tel-aviv-jaffa.webp", alt: "Fishing boats and historic stone buildings in Jaffa harbour", sourceFilename: "jaffa1.jpg.webp" },
   haifa: { src: "/images/attractions/haifa-coast.webp", alt: "View across Haifa and its Mediterranean coastline", sourceFilename: "haifa_panorama_1.jpg.webp" },
@@ -35,11 +37,11 @@ export const attractionHubPhotos = {
   shopping: { src: "/images/attractions/jerusalem-shopping.webp", alt: "Shops and street life near Mahane Yehuda Market in Jerusalem", sourceFilename: "mahane_yehuda_jerusalem.webp" },
 } as const;
 
-const attraction = (id: AttractionId, title: string, description: string, fallback: string): AttractionHubCard => {
+const attraction = (id: AttractionId, title: string, description: string, fallback: string, photoOverride?: { src: string; alt: string }): AttractionHubCard => {
   const item = attractionGuides[id];
   return {
     id, title, description, to: attractionPath(id),
-    photo: item.image ?? { src: fallback, alt: title },
+    photo: photoOverride ?? item.image ?? { src: fallback, alt: title },
     category: "Visitor guide",
   };
 };
@@ -57,7 +59,7 @@ export const attractionHubRegions: AttractionHubRegion[] = [
     image: attractionHubPhotos.jerusalem,
     cards: [
       attraction("old-city-jerusalem", "Jerusalem's Old City", "Quarters, historic gates, holy sites and practical walking advice.", attractionHubPhotos.jerusalem.src),
-      attraction("mount-of-olives", "Mount of Olives", "Panoramic views, churches and historic pilgrimage sites.", attractionHubPhotos.jerusalem.src),
+      attraction("mount-of-olives", "Mount of Olives", "Panoramic views, churches and historic pilgrimage sites.", attractionHubPhotos.jerusalem.src, attractionHubPhotos.olives),
       attraction("mount-zion", "Mount Zion", "Churches, the Last Supper tradition and places just outside the walls.", attractionHubPhotos.jerusalem.src),
       attraction("museums-in-jerusalem", "Museums in Jerusalem", "Choose between major collections, archaeology and city history.", attractionHubPhotos.jerusalem.src),
       guide("jerusalemChurches", "Churches in Jerusalem", "Key Christian landmarks, visiting etiquette and planning a route."),

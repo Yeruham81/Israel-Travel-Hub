@@ -39,7 +39,7 @@ describe("Attractions hub redesign", () => {
   });
 
   it("uses locally hosted selected WordPress photographs rather than live legacy image URLs", () => {
-    expect(Object.values(attractionHubPhotos)).toHaveLength(9);
+    expect(Object.values(attractionHubPhotos)).toHaveLength(11);
     for (const photo of Object.values(attractionHubPhotos)) {
       expect(photo.src).toMatch(/^\/images\/attractions\/.*\.webp$/);
       expect(photo.alt).toBeTruthy();
