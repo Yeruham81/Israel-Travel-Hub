@@ -398,35 +398,199 @@ export const planningGuides = {
   },
   "calendar": {
     "id": "calendar",
-    "updatedAt": "2026-10-23",
-    "title": "Israel Events Calendar: Festivals & Things to Do",
-    "description": "Find Israel's festivals, concerts, films and cultural events. Browse confirmed dates, filter by city and discover annual festivals.",
-    "intro": "Find upcoming events in Israel and explore recurring festivals with official organiser links.",
-    "answer": "Use the interactive event calendar to narrow confirmed listings by date, region and type. Annual festivals are shown separately until their next dates are announced.",
-    "topics": ["tips", "attractions", "itineraries"],
+    "updatedAt": "2026-10-20",
+    "title": "Israel holidays and events: plan your visit in 2027",
+    "description": "Plan around Israel’s Jewish, Christian and Muslim observances, memorial days and city events. Includes checked 2027 Jewish holiday dates and transport planning.",
+    "intro": "A holiday can add meaning to a visit and change its logistics at the same time. Services, opening hours, worship access and accommodation demand depend on the specific date and place. This guide explains the recurring calendar and provides a checked starting point for 2027; individual festivals and performances still need their organiser’s current programme.",
+    "answer": "Check the calendar for your exact travel year, including the preceding evening. Many Jewish observances begin at sunset, and some Israel dates differ from diaspora calendars. Christian communities follow different calendars, while Muslim festival dates need local confirmation. Verify each venue and your complete outward and return transport separately.",
+    "topics": [
+      "tips",
+      "religion",
+      "itineraries"
+    ],
     "photo": P["calendar-of-events"],
     "facts": [
-      {"label": "Dates", "text": "Specific dates appear only when checked against a named source"},
-      {"label": "Festival editions", "text": "Recurring events do not imply confirmed future dates"},
-      {"label": "Tickets", "text": "Follow the organiser for current ticket and entry information"}
+      {
+        "label": "Travel-year example",
+        "text": "2027 dates below use the Israel calendar"
+      },
+      {
+        "label": "Evening matters",
+        "text": "Many observances begin the previous sunset"
+      },
+      {
+        "label": "Live programme",
+        "text": "Confirm concerts and festivals with the organiser"
+      }
     ],
-    "comparison": {"caption": "Use the events calendar", "headers": ["Section", "Best use"], "rows": [
-      ["Confirmed events", "Find activities with published dates"],
-      ["Annual festivals", "Discover recurring cultural events and check upcoming editions"]
-    ]},
+    "comparison": {
+      "caption": "Selected Jewish holidays in Israel · 2027",
+      "headers": [
+        "Observance",
+        "Begins at sunset",
+        "Ends at nightfall"
+      ],
+      "rows": [
+        [
+          "Passover",
+          "21 April 2027",
+          "28 April 2027"
+        ],
+        [
+          "Shavuot",
+          "10 June 2027",
+          "11 June 2027"
+        ],
+        [
+          "Rosh Hashanah",
+          "1 October 2027",
+          "3 October 2027"
+        ],
+        [
+          "Yom Kippur",
+          "10 October 2027",
+          "11 October 2027"
+        ],
+        [
+          "Sukkot",
+          "15 October 2027",
+          "22 October 2027"
+        ],
+        [
+          "Shemini Atzeret / Simchat Torah",
+          "22 October 2027",
+          "23 October 2027"
+        ],
+        [
+          "Hanukkah",
+          "24 December 2027",
+          "1 January 2028"
+        ]
+      ]
+    },
     "sections": [
-      {"id": "event-discovery", "title": "Find events during your visit", "paragraphs": [
-        "Select your travel dates and filter by region and type. These listings are checked examples, not a complete national events database.",
-        "For each event, check the exact performance time, venue, language and booking conditions with the organiser."
-      ]}
+      {
+        "id": "jewish-holidays",
+        "title": "Jewish holidays: look at the whole period",
+        "paragraphs": [
+          "Passover and Sukkot combine festival days with intermediate days; they do not create one identical closure pattern for the entire week. Shavuot, Rosh Hashanah and Yom Kippur need their own arrangements. Check the particular hotel meal, museum session, airport connection or private pickup rather than applying a blanket rule.",
+          "Purim celebrations vary by city, including Jerusalem’s Shushan Purim. Hanukkah brings candle lighting and family activities, but it is not a uniform week-long shutdown. Use the Israel setting when checking a Hebrew calendar and remember that the sunset beginning can affect the previous evening’s plans."
+        ],
+        "links": [
+          {
+            "label": "Plan a weekend or holiday arrival",
+            "to": "/travel-blog/from-ben-gurion-airport-on-shabbat/"
+          }
+        ]
+      },
+      {
+        "id": "memorial-national-days",
+        "title": "Memorial and national days have different atmospheres",
+        "paragraphs": [
+          "Yom HaShoah and Yom HaZikaron are solemn memorial observances. Respect ceremonies and local instructions; entertainment and dining arrangements may differ from an ordinary evening. Independence Day follows the memorial period and has a different public atmosphere.",
+          "Published events, municipal road changes and venue programmes are separate from the date of the observance itself. Do not assume there will be fireworks, a street performance or access to a particular ceremony merely because an older travel article described one."
+        ]
+      },
+      {
+        "id": "christian-muslim",
+        "title": "Christian and Muslim observances",
+        "paragraphs": [
+          "For Easter and Holy Week, identify the denomination and the specific church or procession you want to attend. Western and Orthodox dates can differ. Jerusalem, Nazareth and Bethlehem each have local worship arrangements; a church’s normal visitor timetable does not guarantee admission during a major service.",
+          "Christmas observances also vary by community. Ramadan, Eid al-Fitr and Eid al-Adha affect different communities and businesses in different ways, with dates subject to the relevant local calendar and announcements. Ask the business or organiser about meal availability, worship access and transport for the actual day."
+        ],
+        "links": [
+          {
+            "label": "Plan Jerusalem church visits",
+            "to": "/travel-blog/churches-in-jerusalem/"
+          },
+          {
+            "label": "Visit the Annunciation basilica",
+            "to": "/travel-blog/basilica-of-the-annunciation/"
+          },
+          {
+            "label": "Plan the journey to Bethlehem",
+            "to": "/travel-blog/jerusalem-to-bethlehem/"
+          }
+        ]
+      },
+      {
+        "id": "city-events",
+        "title": "Find current festivals, exhibitions and performances",
+        "paragraphs": [
+          "Use municipal tourism calendars and the venue’s own programme for concerts, exhibitions, markets and festivals. Tel Aviv’s city events directory, Jerusalem’s tourism listings and Haifa Museums are useful starting points. Check the event year, venue address, ticket language and whether the listing is an archive.",
+          "A recurring event’s name is not a confirmed date for the next edition. Book through the organiser’s current ticket page, then check transport and any published road restrictions. Keep a different activity available if an outdoor programme changes."
+        ],
+        "links": [
+          {
+            "label": "Explore Tel Aviv museums",
+            "to": "/travel-blog/museums-in-tel-aviv/"
+          },
+          {
+            "label": "Explore Haifa museums",
+            "to": "/travel-blog/museums-in-haifa/"
+          }
+        ]
+      },
+      {
+        "id": "practical-calendar",
+        "title": "Turn the calendar into a workable itinerary",
+        "paragraphs": [
+          "Mark your arrival, departure and any fixed booking first. Add the evening before each observance, then check hotel reception, meals, site reservations and the return from day trips. Businesses in different parts of the same city can follow different patterns.",
+          "Save confirmations and the organiser’s update channel. For an important transfer, agree the date and time explicitly in local time. The 2027 table is a calendar reference, not a timetable for public transport or a guarantee that any business will operate."
+        ],
+        "links": [
+          {
+            "label": "Choose a season",
+            "to": "/travel-blog/best-time-to-visit-israel/"
+          },
+          {
+            "label": "Plan markets and meals",
+            "to": "/travel-blog/what-to-eat-in-israel/"
+          }
+        ]
+      }
     ],
-    "checklist": ["Check the exact performance date and venue", "Check the language and registration requirements", "Plan transport after the event"],
+    "checklist": [
+      "Use the correct year and Israel holiday setting",
+      "Check the previous evening as well as the daytime date",
+      "Identify the relevant church or community calendar",
+      "Verify venue programmes and event-year labels",
+      "Arrange meals and both directions of transport",
+      "Save the organiser’s latest update link"
+    ],
     "faqs": [
-      {"q": "Are these all events taking place in Israel?", "a": "No. The calendar lists checked events and links to municipal event programmes for additional listings."},
-      {"q": "Can I book every event here?", "a": "Only events with verified ticket links will show ticket options. The official organiser's page remains available."}
+      {
+        "q": "Do holidays always begin at midnight?",
+        "a": "Many Jewish observances begin at sunset the previous evening. Use the dates and local times for the specific observance rather than assuming midnight."
+      },
+      {
+        "q": "Are all events in an old festival calendar repeated next year?",
+        "a": "No. A recurring name does not confirm the next edition’s dates, location or programme. Check the organiser’s current announcement."
+      },
+      {
+        "q": "Does a holiday date tell me whether buses run?",
+        "a": "No. Check the actual operator and journey for that date, including the return and any local connection."
+      }
     ],
-    "related": ["bestTime", "travelTips"],
-    "services": [{"label": "Israel Holidays Calendar", "to": "/travel-blog/israel-holidays/"}],
-    "sourceIds": ["m26-tlv-events", "guide-jerusalem-tourism", "m26-haifa-museums"]
+    "related": [
+      "bestTime",
+      "travelTips",
+      "food",
+      "bethlehem"
+    ],
+    "services": [
+      {
+        "label": "Browse all travel guides",
+        "to": "/guides/"
+      }
+    ],
+    "sourceIds": [
+      "m26-original-calendar-of-events",
+      "m26-hebcal",
+      "m26-cicts",
+      "m26-tlv-events",
+      "guide-jerusalem-tourism",
+      "m26-haifa-museums"
+    ]
   }
 } satisfies Record<string, TravelGuide>;

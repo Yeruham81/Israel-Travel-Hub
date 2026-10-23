@@ -213,7 +213,6 @@ export function IsraelHolidaysPage() {
           <li><a className="text-primary underline" href="https://www.iaa.gov.il/en/airports/ben-gurion/" target="_blank" rel="noopener noreferrer">Israel Airports Authority — airport information</a></li>
         </ul>
       </section>
-      <p className="mt-8 text-sm">Looking for festivals, concerts and performances? Visit the <Link to="/travel-blog/calendar-of-events/" className="font-medium text-primary underline">Israel Events Calendar</Link>.</p>
       <p className="mt-8 text-sm"><Link to="/guides/" className="font-medium text-primary underline">Explore more travel guides →</Link></p>
     </article>
   </main>;

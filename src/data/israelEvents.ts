@@ -132,7 +132,7 @@ export function filterConfirmedEvents(events:readonly ConfirmedEvent[],options:{
   today:string;start?:string|null;end?:string|null;region?:"all"|EventRegion;category?:"all"|EventCategory;
 }):ConfirmedEvent[] {
   const {today,start,end,region="all",category="all"}=options;
-  if(start&&(!isValidEventDay(start)||Boolean(end&&(!isValidEventDay(end)||end<start))))return [];
+  if(start&&(!isValidEventDay(start)||(typeof end==="string"&&end!==""&&(!isValidEventDay(end)||end<start))))return [];
   return events.filter(e=>isValidEventDay(e.from)&&isValidEventDay(e.to)&&e.from<=e.to)
     .filter(e=>e.to>=today)
     .filter(e=>!start||e.to>=start)
