@@ -12,12 +12,12 @@ export type AttractionHubCard = {
   description: string;
   to: LinkProps["to"];
   photo: { src: string; alt: string };
-  category: string;
 };
 export type AttractionHubRegion = {
   id: string;
   title: string;
   summary: string;
+  navLabel?: string;
   image: { src: string; alt: string; sourceFilename: string };
   cards: AttractionHubCard[];
   planning: { label: string; to: LinkProps["to"] }[];
@@ -42,20 +42,18 @@ const attraction = (id: AttractionId, title: string, description: string, fallba
   return {
     id, title, description, to: attractionPath(id),
     photo: photoOverride ?? item.image ?? { src: fallback, alt: title },
-    category: "Visitor guide",
   };
 };
 const guide = (id: TravelGuideId, title: string, description: string, photoOverride?: { src: string; alt: string }): AttractionHubCard => ({
   id, title, description, to: travelGuidePaths[id],
   photo: photoOverride ?? travelGuides[id].photo,
-  category: "Travel guide",
 });
 
 export const attractionHubRegions: AttractionHubRegion[] = [
   {
     id: "jerusalem",
     title: "Jerusalem",
-    summary: "Walk the Old City's quarters, discover sacred places and museums, or explore markets and shopping streets.",
+    summary: "Wander Jerusalem’s ancient quarters, explore remarkable museums and sacred places, and discover atmospheric markets and local shopping streets.",
     image: attractionHubPhotos.jerusalem,
     cards: [
       attraction("old-city-jerusalem", "Jerusalem's Old City", "Quarters, historic gates, holy sites and practical walking advice.", attractionHubPhotos.jerusalem.src),
@@ -75,7 +73,7 @@ export const attractionHubRegions: AttractionHubRegion[] = [
   {
     id: "tel-aviv-jaffa",
     title: "Tel Aviv & Jaffa",
-    summary: "A Mediterranean mix of historic Jaffa, beaches, galleries, markets and modern city life.",
+    summary: "Find your favourite beach for a day in the sun, explore Tel Aviv’s museums and neighbourhoods, and wander through Old Jaffa’s lively market lanes.",
     image: attractionHubPhotos.telAviv,
     cards: [
       attraction("attractions-in-tel-aviv", "Things to see in Tel Aviv", "Markets, neighbourhoods, architecture and favourite city sights.", attractionHubPhotos.telAviv.src),
@@ -93,12 +91,13 @@ export const attractionHubRegions: AttractionHubRegion[] = [
   {
     id: "haifa-coast",
     title: "Haifa & the Mediterranean coast",
-    summary: "Gardens and hillside views in Haifa, the ancient streets of Acre, Roman Caesarea and the far northern coast.",
+    summary: "Take in Haifa’s sweeping views, roam Acre’s old alleys, and discover Roman Caesarea and the sea grottoes at Rosh Hanikra.",
+    navLabel: "Haifa & Coast",
     image: attractionHubPhotos.haifa,
     cards: [
       attraction("haifa", "Haifa", "Bahá'í Gardens, the German Colony, Mount Carmel and city viewpoints.", attractionHubPhotos.haifa.src),
       attraction("akko-acre", "Akko (Acre)", "Crusader halls, Ottoman streets, markets and a working harbour.", attractionHubPhotos.haifa.src),
-      { id: "caesarea", title: "Caesarea National Park", description: "Roman ruins, an ancient harbour and archaeology beside the sea.", to: "/attractions/caesarea/", photo: { src: caesareaPhoto, alt: "Ruins and Mediterranean coast at Caesarea" }, category: "National park" },
+      { id: "caesarea", title: "Caesarea National Park", description: "Roman ruins, an ancient harbour and archaeology beside the sea.", to: "/attractions/caesarea/", photo: { src: caesareaPhoto, alt: "Ruins and Mediterranean coast at Caesarea" } },
       attraction("rosh-hanikra", "Rosh Hanikra", "Sea grottoes, coastal cliffs and views near the Lebanese border.", attractionHubPhotos.haifa.src),
       guide("haifaMuseums", "Museums in Haifa", "Find art, science, maritime history and other collections."),
     ],
@@ -111,8 +110,8 @@ export const attractionHubRegions: AttractionHubRegion[] = [
   },
   {
     id: "nazareth-lower-galilee",
-    title: "Nazareth & the Lower Galilee",
-    summary: "Churches, hilltop panoramas and archaeological sites between Nazareth and the Jezreel Valley.",
+    title: "Nazareth & Galilee",
+    summary: "Discover Nazareth’s historic churches, take in the views from Mount Tabor, and explore ancient Megiddo in the heart of Galilee.",
     image: attractionHubPhotos.nazareth,
     cards: [
       guide("annunciation", "Basilica of the Annunciation", "Explore Nazareth's major Christian landmark and its history."),
@@ -129,7 +128,8 @@ export const attractionHubRegions: AttractionHubRegion[] = [
   {
     id: "sea-of-galilee",
     title: "Sea of Galilee & the Jordan River",
-    summary: "Lakeside archaeology, pilgrimage churches, sweeping views and Jordan River baptism sites.",
+    summary: "Follow the Sea of Galilee’s shore to ancient sites, lakeside churches and meaningful pilgrimage stops along the Jordan River.",
+    navLabel: "Sea of Galilee & Jordan",
     image: attractionHubPhotos.galilee,
     cards: [
       attraction("sea-of-galilee", "Sea of Galilee", "Where to visit around the lake and how to plan your stops.", attractionHubPhotos.galilee.src),
@@ -148,11 +148,11 @@ export const attractionHubRegions: AttractionHubRegion[] = [
   {
     id: "dead-sea-masada",
     title: "Dead Sea & Masada",
-    summary: "Desert fortresses, an extraordinary salt lake, nature reserves and historic sites along the Jordan Valley.",
+    summary: "Float in the Dead Sea, explore Masada’s desert fortress, and find the springs, nature reserves and landscapes that make this region so distinctive.",
     image: attractionHubPhotos.deadSea,
     cards: [
       attraction("dead-sea-attractions", "Dead Sea attractions", "Swimming areas, desert landscapes and nearby stops.", attractionHubPhotos.deadSea.src),
-      { id: "masada", title: "Masada National Park", description: "The mountain fortress, cable car, desert trails and visit planning.", to: "/travel-blog/masada/", photo: migrationPhotos["EXISTING:masada"], category: "National park" },
+      { id: "masada", title: "Masada National Park", description: "The mountain fortress, cable car, desert trails and visit planning.", to: "/travel-blog/masada/", photo: migrationPhotos["EXISTING:masada"] },
       attraction("ein-gedi", "Ein Gedi Nature Reserve", "Desert springs, wildlife and trail-access considerations.", attractionHubPhotos.deadSea.src),
       guide("qasr", "Qasr el-Yahud", "The Jordan River pilgrimage site near Jericho."),
     ],
@@ -166,7 +166,8 @@ export const attractionHubRegions: AttractionHubRegion[] = [
   {
     id: "negev-eilat",
     title: "Negev Desert & Eilat",
-    summary: "Dramatic desert geology, viewpoints and stargazing, with Red Sea beaches and marine life farther south.",
+    summary: "Take in the dramatic scenery of Ramon Crater, plan a stargazing escape, and enjoy Eilat’s Red Sea beaches and marine life.",
+    navLabel: "Negev & Eilat",
     image: attractionHubPhotos.negev,
     cards: [
       attraction("mitzpe-ramon-crater", "Mitzpe Ramon & Ramon Crater", "Desert lookouts, geology, trails and stargazing.", attractionHubPhotos.negev.src),

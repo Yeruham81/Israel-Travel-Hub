@@ -7,9 +7,13 @@ describe("Attractions hub redesign", () => {
   it("provides seven navigable areas with a picture, genuine guides and onward planning", () => {
     expect(attractionHubRegions).toHaveLength(7);
     expect(new Set(attractionHubRegions.map((region) => region.id)).size).toBe(7);
+    expect(attractionHubRegions.find((region) => region.id === "nazareth-lower-galilee")?.title).toBe("Nazareth & Galilee");
+    expect(new Set(attractionHubRegions.map((region) => region.summary)).size).toBe(7);
     for (const region of attractionHubRegions) {
       expect(region.title.length).toBeGreaterThan(4);
       expect(region.summary.length).toBeGreaterThan(35);
+      expect(region.summary).toMatch(/^(Wander|Find|Take|Discover|Follow|Float)\b/);
+      expect((region.navLabel ?? region.title).length).toBeLessThan(27);
       expect(region.image.src).toMatch(/^\/images\/attractions\/.*\.webp$/);
       expect(region.cards.length).toBeGreaterThanOrEqual(2);
       expect(region.planning.length).toBeGreaterThanOrEqual(3);
@@ -47,6 +51,7 @@ describe("Attractions hub redesign", () => {
     }
     for (const card of attractionHubCards) {
       expect(card.title).toBeTruthy();
+      expect("category" in card).toBe(false);
       expect(card.description.length).toBeGreaterThan(20);
       expect(card.photo.src).toBeTruthy();
       expect(card.photo.src).not.toContain("israel-taxi.com");

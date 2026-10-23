@@ -1,14 +1,13 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowDownRight, ArrowRight, ArrowUpRight } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
 import { AuthorCard } from "@/components/AuthorCard";
 import { Breadcrumbs } from "@/components/Guide";
 import { attractionHubCards, attractionHubPhotos, attractionHubRegions, type AttractionHubCard } from "@/data/attractionsHub";
-import { travelGuidePaths } from "@/data/registry";
 import { CANONICAL_ORIGIN, jsonLd, pageMeta } from "@/lib/site";
 
 const PATH = "/attractions/";
 const TITLE = "Best attractions in Israel: places to visit & things to see";
-const DESCRIPTION = "Discover attractions in Israel by area: Jerusalem, Tel Aviv, Jaffa, Haifa, Galilee, the Dead Sea, Negev and Eilat. Explore local visitor guides and day-trip ideas.";
+const DESCRIPTION = "From Jerusalem's Old City and Tel Aviv's beaches to Masada, the Galilee and Eilat, discover memorable attractions and places to visit across Israel.";
 
 export const Route = createFileRoute("/attractions/")({
   head: () => {
@@ -57,10 +56,8 @@ function AttractionCard({ card }: { card: AttractionHubCard }) {
           <img src={card.photo.src} alt={card.photo.alt} width={755} height={503} loading="lazy" decoding="async" className="h-full w-full object-cover transition-transform duration-300 motion-safe:group-hover:scale-[1.03]" />
         </div>
         <div className="flex flex-1 flex-col p-4 sm:p-5">
-          <p className="text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">{card.category}</p>
-          <h3 className="mt-1.5 font-serif text-xl font-semibold leading-snug group-hover:text-primary sm:text-2xl">{card.title}</h3>
+          <h3 className="font-serif text-xl font-semibold leading-snug group-hover:text-primary group-hover:underline group-hover:underline-offset-4 sm:text-2xl">{card.title}</h3>
           <p className="mt-2 flex-1 text-sm leading-relaxed text-muted-foreground">{card.description}</p>
-          <span className="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-primary">Read more <ArrowRight aria-hidden="true" size={15} /></span>
         </div>
       </Link>
     </article>
@@ -79,27 +76,23 @@ function Attractions() {
           <p className="eyebrow">Discover the places that make Israel memorable</p>
           <h1 className="mt-3 text-4xl font-semibold leading-tight sm:text-5xl">Attractions & places to visit in Israel</h1>
           <p className="mt-5 max-w-2xl text-lg leading-relaxed text-muted-foreground">
-            Historic cities, ancient ruins, sacred places, beaches and desert landscapes.
-            Start with a region, then explore individual visitor guides for what to see, how to get there and what to plan ahead.
+            Explore Jerusalem’s historic quarters and lively markets, enjoy Tel Aviv’s beaches and culture,
+            or follow the Mediterranean coast to ancient ports and dramatic sea cliffs. Beyond the cities,
+            discover the Sea of Galilee, Masada, the Dead Sea and desert landscapes stretching to Eilat.
           </p>
-          <div className="mt-6 flex flex-wrap gap-3">
-            <a href="#browse-regions" className="btn btn-primary inline-flex items-center gap-2">Browse by region <ArrowDownRight size={17} aria-hidden="true" /></a>
-            <Link to={travelGuidePaths.topTen} className="btn border inline-flex items-center gap-2">Israel highlights <ArrowUpRight size={17} aria-hidden="true" /></Link>
-          </div>
         </div>
         <img src={attractionHubPhotos.hero.src} alt={attractionHubPhotos.hero.alt} width={755} height={405} fetchPriority="high" decoding="async" className="aspect-[4/3] w-full rounded-3xl object-cover md:aspect-[5/4]" />
       </header>
       <AuthorCard />
 
-      <section id="browse-regions" aria-labelledby="browse-regions-heading" className="mt-10 scroll-mt-24 rounded-2xl border bg-secondary/35 p-4 sm:p-6">
-        <h2 id="browse-regions-heading" className="text-2xl font-semibold">Explore by region</h2>
-        <p className="mt-2 text-sm leading-relaxed text-muted-foreground">Choose an area to jump straight to its sights and visitor guides.</p>
-        <nav aria-label="Jump to an attraction region" className="mt-4">
-          <ul className="grid gap-2 sm:grid-cols-2 lg:grid-cols-4">
+      <section id="browse-regions" aria-labelledby="browse-regions-heading" className="mt-8 scroll-mt-24 border-y py-4 sm:mt-10 sm:py-5">
+        <h2 id="browse-regions-heading" className="text-lg font-semibold sm:text-xl">Explore by region</h2>
+        <nav aria-label="Jump to an attraction region" className="mt-3">
+          <ul className="grid grid-cols-2 gap-1.5 sm:grid-cols-3 sm:gap-2 lg:grid-cols-4">
             {attractionHubRegions.map((region) => (
               <li key={region.id}>
-                <a href={"#" + region.id} className="flex h-full items-center justify-between gap-3 rounded-xl border bg-card px-4 py-3 text-sm font-semibold leading-snug transition-colors hover:border-primary hover:text-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
-                  {region.title} <ArrowDownRight aria-hidden="true" size={17} className="shrink-0 text-primary" />
+                <a href={"#" + region.id} className="flex min-h-10 items-center rounded-lg bg-secondary/60 px-3 py-2 text-xs font-semibold leading-snug transition-colors hover:bg-secondary hover:text-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary sm:text-sm">
+                  {region.navLabel ?? region.title}
                 </a>
               </li>
             ))}
@@ -108,28 +101,26 @@ function Attractions() {
       </section>
 
       {attractionHubRegions.map((region) => (
-        <section key={region.id} id={region.id} aria-labelledby={region.id + "-heading"} className="mt-12 scroll-mt-24 sm:mt-14">
-          <div className="grid overflow-hidden rounded-2xl border bg-secondary/25 sm:grid-cols-[220px_1fr] lg:grid-cols-[300px_1fr]">
-            <img src={region.image.src} alt="" width={755} height={503} loading="lazy" decoding="async" className="aspect-[16/9] h-full max-h-[220px] w-full object-cover sm:aspect-auto sm:max-h-none" />
-            <div className="flex flex-col justify-center p-5 sm:p-7">
-              <p className="eyebrow">Explore the area</p>
-              <h2 id={region.id + "-heading"} className="mt-2 text-2xl font-semibold leading-tight sm:text-3xl">{region.title}</h2>
-              <p className="mt-2 max-w-2xl leading-relaxed text-muted-foreground">{region.summary}</p>
+        <section key={region.id} id={region.id} aria-labelledby={region.id + "-heading"} className="mt-10 scroll-mt-24 sm:mt-12">
+          <div className="flex items-start gap-3 border-b border-l-4 border-l-primary bg-secondary/20 py-3 pl-3 pr-2 sm:items-center sm:gap-5 sm:py-4 sm:pl-5 sm:pr-4">
+            <img src={region.image.src} alt="" width={240} height={160} loading="lazy" decoding="async" className="h-20 w-20 shrink-0 rounded-md object-cover sm:h-24 sm:w-36" />
+            <div className="min-w-0 flex-1">
+              <h2 id={region.id + "-heading"} className="text-2xl font-bold leading-tight tracking-tight sm:text-3xl">{region.title}</h2>
+              <p className="mt-1.5 max-w-3xl text-sm leading-relaxed text-muted-foreground sm:text-base">{region.summary}</p>
             </div>
           </div>
-          <div className="mt-5 grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
+          <div className="mt-3 grid gap-3 sm:mt-4 sm:grid-cols-2 sm:gap-4 xl:grid-cols-3">
             {region.cards.map((card) => <AttractionCard key={card.id} card={card} />)}
           </div>
-          <div className="mt-5 rounded-xl border bg-card px-4 py-4 sm:px-5">
-            <p className="text-xs font-bold uppercase tracking-wide text-muted-foreground">Continue planning your visit</p>
-            <ul className="mt-2 flex flex-wrap gap-x-6 gap-y-2">
+          <nav aria-label={"More ways to explore " + region.title} className="mt-4 border-t pt-3">
+            <ul className="flex flex-wrap gap-x-5 gap-y-2">
               {region.planning.map((link) => (
                 <li key={link.label}>
                   <Link to={link.to} className="inline-flex items-center gap-1 text-sm font-semibold text-primary underline-offset-4 hover:underline">{link.label} <ArrowUpRight size={14} aria-hidden="true" /></Link>
                 </li>
               ))}
             </ul>
-          </div>
+          </nav>
           <div className="mt-3 text-right">
             <a href="#browse-regions" className="text-xs font-semibold text-primary underline-offset-4 hover:underline">Back to regions ↑</a>
           </div>
@@ -147,7 +138,6 @@ function Attractions() {
             <Link key={item.title} to={item.to} className="group rounded-2xl border bg-card p-5 transition-colors hover:border-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
               <h3 className="text-xl font-semibold group-hover:text-primary">{item.title}</h3>
               <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{item.text}</p>
-              <span className="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-primary">Explore <ArrowRight size={15} aria-hidden="true" /></span>
             </Link>
           ))}
         </div>
