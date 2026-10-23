@@ -73,9 +73,23 @@ jobs:
           git add src/data/israelHolidayFuture.generated.json
           git commit -m "chore: refresh future Israel holiday dates"
 
+          # Build and tests can modify tracked files (e.g. sitemap.xml) and
+          # create untracked files. They were not part of the calendar commit.
+          # A rebase requires a clean worktree, even though those files are
+          # irrelevant to the snapshot being published.
+          echo "Working-tree changes left by validation:"
+          git status --short
+          git stash push --include-untracked -m "Temporary CI validation outputs"
+          if [ -n "$(git status --porcelain)" ]; then
+            echo "::error::CI working tree is not clean after stashing validation outputs."
+            exit 1
+          fi
+
           # Other code changes may reach main while calendar validation runs.
-          # Rebase our calendar-only commit onto the latest remote history.
-          # Never force-push; a conflict in the generated file must fail safely.
+          # Rebase the calendar-only commit onto the latest remote history.
+          # The stash belongs to this disposable Actions runner and is not
+          # reapplied: unrelated generated files must never be published.
+          # Never force-push; a conflict in the snapshot must fail safely.
           for attempt in 1 2 3 4 5; do
             git fetch origin main
             if ! git rebase origin/main; then
