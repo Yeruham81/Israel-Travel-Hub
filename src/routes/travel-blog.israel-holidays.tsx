@@ -107,7 +107,6 @@ export function IsraelHolidaysPage() {
       return {start:current.start,end:day};
     });
   };
-  const selectedMonth=months[monthOffset]!;
   return <main className="mx-auto max-w-6xl px-4 pb-12">
     <article>
       <header className="pt-6">
@@ -133,7 +132,7 @@ export function IsraelHolidaysPage() {
       ]}/>
       <section id="trip-calendar" className="mt-10 scroll-mt-24" aria-labelledby="trip-calendar-heading">
         <div className="flex flex-wrap items-end justify-between gap-3">
-          <div><h2 id="trip-calendar-heading" className="text-3xl">Choose your travel dates</h2><p className="mt-2 max-w-3xl leading-relaxed text-muted-foreground">Tap your arrival date, then your departure date. You can move between months or jump to a month. Holiday dots show potential disruptions even before you choose dates.</p></div>
+          <div><h2 id="trip-calendar-heading" className="text-3xl">Choose your travel dates</h2><p className="mt-2 max-w-3xl leading-relaxed text-muted-foreground">Select your arrival and departure dates to see which holidays fall during your visit and how they may affect transport, opening hours and crowds.</p></div>
           <button type="button" onClick={()=>setSelection({start:null,end:null})} className="rounded-lg border bg-background px-4 py-2 text-sm font-semibold hover:bg-secondary">Clear dates</button>
         </div>
         <div className="mt-5 rounded-2xl border bg-secondary/40 p-3 sm:p-5">
@@ -146,7 +145,7 @@ export function IsraelHolidaysPage() {
             </label>
             <button type="button" disabled={monthOffset===months.length-1} aria-label="Next month" onClick={()=>setMonthOffset(n=>Math.min(months.length-1,n+1))} className="rounded-lg border bg-background p-2 disabled:opacity-40"><ChevronRight size={22}/></button>
           </div>
-          <p className="mt-3 text-center text-sm text-muted-foreground" role="status" aria-live="polite">{!start?"1. Choose your arrival date":!end?"2. Now choose your departure date (in this or a later month)":fmt(start)+" → "+fmt(end)}. {selectedMonth.label} {monthOffset+1<months.length?"and the following month are visible on wide screens.":""}</p>
+          <p className="mt-3 text-center text-sm text-muted-foreground" role="status" aria-live="polite">{!start?"Choose your arrival date":!end?"Choose your departure date":fmt(start)+" → "+fmt(end)}</p>
           <div className="mt-4 grid gap-4 lg:grid-cols-2">
             <MonthCalendar offset={monthOffset} selection={selection} onSelect={selectDate}/>
             {monthOffset+1<months.length && <div className="hidden lg:block"><MonthCalendar offset={monthOffset+1} selection={selection} onSelect={selectDate}/></div>}
