@@ -23,9 +23,13 @@ function storeRates(data: StoredRates) {
 }
 
 /** One request shared by every price on a page, with daily refresh across navigation and reloads. */
-export function CurrencyRatesProvider({ children }: { children: ReactNode }) {
+export function CurrencyRatesProvider({ children, enabled = true }: { children: ReactNode; enabled?: boolean }) {
   const [state, setState] = useState(bootstrap);
   useEffect(() => {
+    // The homepage has no exchange-rate displays. Avoid an unnecessary fetch
+    // and context update while its initial image/HTML are becoming visible.
+    // Route navigation enables the shared refresh automatically when needed.
+    if (!enabled) return;
     let active = true;
     let timer: ReturnType<typeof setTimeout> | undefined;
     let controller: AbortController | null = null;
@@ -82,7 +86,7 @@ export function CurrencyRatesProvider({ children }: { children: ReactNode }) {
     window.addEventListener("focus", resume);
     document.addEventListener("visibilitychange", resume);
     return () => { active = false; clearTimeout(timer); controller?.abort(); window.removeEventListener("focus", resume); document.removeEventListener("visibilitychange", resume); };
-  }, []);
+  }, [enabled]);
   return <CurrencyRatesContext.Provider value={state}>{children}</CurrencyRatesContext.Provider>;
 }
 
