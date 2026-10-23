@@ -76,7 +76,8 @@ export function IsraelHolidayOverview() {
   const matches=overviewHolidays(year,quarter,community,today);
   const availableFrom=today.slice(0,7)+"-01";
   const groups=matches.reduce<Array<{month:string;entries:Holiday[]}>>((list,holiday)=>{
-    const shown=holiday.from<availableFrom?availableFrom:holiday.from;
+    const periodStart=quarterRange(year,quarter).from;
+    const shown=[holiday.from,availableFrom,periodStart].sort().at(-1)!;
     const key=shown.slice(0,7);
     const previous=list[list.length-1];
     if(previous?.month===key) previous.entries.push(holiday);
