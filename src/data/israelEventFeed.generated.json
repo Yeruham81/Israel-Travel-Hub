@@ -766,21 +766,6 @@
       "checkedAt": "2026-10-23",
       "sourceName": "Ticketmaster",
       "startTime": "21:30"
-    },
-    {
-      "id": "ticketmaster-Z8HyzZmzMZGCK45vv7",
-      "title": "Winter 345",
-      "from": "2027-12-31",
-      "to": "2027-12-31",
-      "region": "other",
-      "location": "GR, Yesud HaMa'ala",
-      "category": "music",
-      "description": "An event listed by Ticketmaster for GR in Yesud HaMa'ala.",
-      "visitorNote": "Check the organiser's event page for language, door times, accessibility and ticket conditions.",
-      "sourceUrl": "https://www.ticketmaster.co.il/event/BDIKA/ALL/en",
-      "checkedAt": "2026-10-23",
-      "sourceName": "Ticketmaster",
-      "startTime": "22:00"
     }
   ]
 }
