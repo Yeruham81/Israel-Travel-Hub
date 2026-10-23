@@ -14,6 +14,7 @@ describe("compact holidays reference", () => {
     expect(screen.getByRole("heading", {name: "Purim"})).toBeInTheDocument();
     const purim = screen.getByRole("heading", {name:"Purim"}).closest("li")!;
     expect(purim).toHaveTextContent("22 Mar");
+    expect(purim).toHaveTextContent("A joyful Jewish holiday");
     expect(purim).toHaveTextContent("Changes and crowds");
     expect(purim).toHaveTextContent("Parties and processions");
     expect(screen.queryByRole("heading", {name: /Passover — first festival day/})).toBeNull();
