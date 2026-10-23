@@ -3,6 +3,7 @@ import { createRouter, rootRouteId } from "@tanstack/react-router";
 import { describe, expect, it } from "vitest";
 import { routeTree } from "@/routeTree.gen";
 import { allNavGroups, hotelNav, serviceNav, utilityNav, footerNav } from "@/data/nav";
+import { attractionHubRegions } from "@/data/attractionsHub";
 import { providerLinks, offers, sources, linksForPage, affiliateConfig, partners } from "@/data/registry";
 import { isDisplayableLiveQuote, type LiveQuote } from "@/lib/booking";
 
@@ -23,8 +24,17 @@ describe("portal navigation", () => {
       "Transportation", "Tours & trips", "Accommodation", "Attractions", "Religious sites", "Travel guides & tips",
     ]);
     const attractions = allNavGroups.find((group) => group.title === "Attractions")!.items;
-    for (const path of ["mitzpe-ramon-crater", "rosh-hanikra", "masada", "old-city-jerusalem", "jaffa", "ein-gedi", "akko-acre", "the-dead-sea"]) {
-      expect(attractions).toContainEqual(expect.objectContaining({ to: `/travel-blog/${path}/` }));
+    expect(attractions).toHaveLength(8);
+    expect(attractions[0]).toMatchObject({ label: "All attractions", to: "/attractions/" });
+    for (const [index, region] of attractionHubRegions.entries()) {
+      const group = attractions[index + 1];
+      expect(group).toMatchObject({
+        label: region.navLabel ?? region.title,
+        toggleOnly: true,
+        childrenLabel: `${region.title} guides`,
+      });
+      if (!("children" in group!) || !group.children) throw new Error("Attraction region has no guide links");
+      expect(group.children.map((child) => child.to)).toEqual(region.cards.map((card) => card.to));
     }
     const religiousSites = allNavGroups.find((group) => group.title === "Religious sites")!.items;
     for (const path of ["mount-zion", "mount-of-olives", "basilica-of-the-annunciation", "mount-precipice", "mount-tabor", "magdala", "capernaum", "tabgha", "mount-of-beatitudes", "yardenit", "qasr-el-yahud"]) {
