@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowUpRight, BedDouble, CalendarDays, CarFront, Compass, MapPinned, TrainFront, type LucideIcon } from "lucide-react";
+import { ArrowUpRight, BedDouble, CalendarDays, CarFront, Compass, Ship, TrainFront, type LucideIcon } from "lucide-react";
 import { AuthorCard } from "@/components/AuthorCard";
 import { Breadcrumbs } from "@/components/Guide";
 import { attractionHubCards, attractionHubPhotos, attractionHubRegions, attractionPlanningPaths, type AttractionHubCard } from "@/data/attractionsHub";
@@ -47,7 +47,7 @@ export const Route = createFileRoute("/attractions/")({
 
 const planningIcons: Record<string, LucideIcon> = {
   tours: Compass,
-  destinations: MapPinned,
+  "shore-excursions": Ship,
   hotels: BedDouble,
   transport: TrainFront,
   "private-days": CarFront,

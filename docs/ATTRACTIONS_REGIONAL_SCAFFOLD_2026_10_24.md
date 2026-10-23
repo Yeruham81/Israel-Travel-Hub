@@ -5,7 +5,7 @@ Last structural review: 2026-10-24. This file documents NAVIGATION AND PRESENTAT
 ## Publication state
 
 - **Hub structure**: seven geographic sections, currently 32 real article cards (including the Jordan River baptism comparison), area-specific trip-planning links and unique local photos. All 17 original attraction article URLs survive.
-- **Reciprocal discovery**: region links in Tours category pages and Destinations, using the precise `/attractions/#region-id` targets. The guide articles' detailed editorial rewrite is NOT part of this phase.
+- **Reciprocal discovery**: region links in Tours category pages; the standalone Destinations directory was retired in favour of Accommodation, using the precise `/attractions/#region-id` targets. The guide articles' detailed editorial rewrite is NOT part of this phase.
 - **Guide content quality**: pending individual legacy-to-new comparisons in every region. The Jerusalem guides remain explicitly **not approved as comprehensive**. Code-level passing checks do not certify depth or accuracy.
 - **Images**: existing local media and a new visually inspected Jordan River baptism photograph copied from the owner's WordPress Drive archive. Reuse on separate pages is okay; two identical photos on the *same* page is not.
 

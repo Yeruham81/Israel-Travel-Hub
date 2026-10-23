@@ -24,11 +24,3 @@ export const attractionRegionsForTours: Partial<Record<TourCategoryId, readonly 
   // Bethlehem / Jericho has no matching Attractions region; avoid a misleading link.
 };
 
-export const attractionRegionsForDestinations = {
-  "dead-sea": regionalAttractionLinks.deadSea,
-  jerusalem: regionalAttractionLinks.jerusalem,
-  "tel-aviv-jaffa": regionalAttractionLinks.telAviv,
-  haifa: regionalAttractionLinks.coast,
-  "tiberias-galilee": regionalAttractionLinks.lake,
-  eilat: regionalAttractionLinks.negev,
-} as const;

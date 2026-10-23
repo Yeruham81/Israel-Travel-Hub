@@ -285,7 +285,7 @@ function Home() {
           <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
             {popularDestinationCards.map((card) => <PhotoCard key={card.label} c={card} />)}
           </div>
-          <Link to="/destinations/" className="btn btn-light mt-6">Explore all destinations →</Link>
+          <Link to="/hotels/" className="btn btn-light mt-6">Explore all accommodation →</Link>
         </div>
       </section>
       <div className="home-offscreen home-offscreen-reviews"><PersonalTestimonialsSection /></div>

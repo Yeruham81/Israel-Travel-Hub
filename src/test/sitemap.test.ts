@@ -26,6 +26,7 @@ describe("generated XML sitemap and robots.txt", () => {
     expect(paths).toContain("/transfers/");
     expect(paths).toContain("/tours/");
     expect(paths).not.toContain("/tours/bethlehem-from-jerusalem/");
+    expect(paths).not.toContain("/destinations/");
     expect(paths).toContain("/travel-blog/jerusalem-to-bethlehem/");
     expect(paths).toContain("/attractions/");
     const router = createRouter({ routeTree, context: { queryClient: new QueryClient() }, trailingSlash: "always" });

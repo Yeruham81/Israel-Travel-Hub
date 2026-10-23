@@ -205,13 +205,13 @@ export const attractionPlanningPaths: {
     ],
   },
   {
-    id: "destinations",
-    title: "Choose a destination",
-    description: "Put together a visit around the places that interest you, with ideas for nearby sights and how to connect them.",
-    to: "/destinations/",
+    id: "shore-excursions",
+    title: "Shore excursions",
+    description: "Arriving by cruise ship? Find day-trip ideas from Haifa or Ashdod that fit your port call, with enough time for your return to the ship.",
+    to: "/shore-excursions/",
     links: [
-      { label: "Jerusalem guide", to: travelGuidePaths.jerusalem },
-      { label: "Sea of Galilee guide", to: "/travel-blog/sea-of-galilee/" },
+      { label: "From Haifa Port", to: "/haifa-shore-excursions/" },
+      { label: "From Ashdod Port", to: "/ashdod-shore-excursions/" },
     ],
   },
   {

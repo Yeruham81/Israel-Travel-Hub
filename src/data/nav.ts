@@ -148,7 +148,6 @@ export const allNavGroups: NavGroup[] = [
       travelTips.uber,
       travelTips.esim,
       travelTips.arrival,
-      { label: "Destinations & city guides", to: "/destinations/" },
     ],
   },
 ];

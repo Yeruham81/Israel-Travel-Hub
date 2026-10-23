@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { attractionHubRegions, attractionHubCards } from "@/data/attractionsHub";
-import { attractionRegionsForDestinations, attractionRegionsForTours, regionalAttractionLinks } from "@/data/attractionRegionLinks";
+import { attractionRegionsForTours, regionalAttractionLinks } from "@/data/attractionRegionLinks";
 import { tourCategoryPaths } from "@/data/tours";
 import { travelGuidePaths } from "@/data/registry";
 import { repeatedPhotos } from "@/lib/photo-uniqueness";
@@ -21,15 +21,6 @@ describe("Attractions regional scaffold and reciprocal navigation", () => {
       expect(region.planning.every(link => String(link.to).startsWith("/"))).toBe(true);
       expect(region.planning.every(link => !region.cards.some(card => link.to === card.to))).toBe(true);
     }
-  });
-
-  it("connects every destination section back to the exact corresponding Attractions anchor", () => {
-    const all = Object.values(attractionRegionsForDestinations);
-    expect(all).toHaveLength(6);
-    expect(all.every(region => ids.includes(region.hash))).toBe(true);
-    expect(attractionRegionsForDestinations["tiberias-galilee"].hash).toBe("sea-of-galilee");
-    expect(attractionRegionsForDestinations.eilat.hash).toBe("negev-eilat");
-    expect(attractionRegionsForDestinations["tel-aviv-jaffa"].hash).toBe("tel-aviv-jaffa");
   });
 
   it("links each appropriate tour category to its real attraction region without creating tour routes", () => {
