@@ -1,5 +1,5 @@
 import { createFileRoute, Link, type LinkProps } from "@tanstack/react-router";
-import lcpHeroMobile from "@/assets/home/hero-jerusalem-sm.webp";
+import lcpHeroMobile from "@/assets/home/hero-jerusalem-sm-optimized.webp";
 import lcpHeroMedium from "@/assets/home/hero-jerusalem-medium.webp";
 import lcpHeroLarge from "@/assets/home/hero-jerusalem-large.webp";
 import jerusalem from "@/assets/home/jerusalem-old-city.webp";
