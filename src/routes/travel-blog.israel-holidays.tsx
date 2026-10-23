@@ -1,14 +1,15 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useMemo, useState } from "react";
-import { ChevronLeft, ChevronRight, CalendarDays, MapPin, Bus, AlertCircle } from "lucide-react";
+import { useState } from "react";
+import { ChevronLeft, ChevronRight, CalendarDays } from "lucide-react";
 import { Breadcrumbs, OnThisPage } from "@/components/Guide";
 import { AuthorCard } from "@/components/AuthorCard";
 import { PageUpdated } from "@/components/PageUpdated";
 import { CANONICAL_ORIGIN, SITE_NAME, jsonLd, pageMeta } from "@/lib/site";
 import { authorLd } from "@/lib/author";
 import { migrationPhotos } from "@/data/guideMigrationPhotos";
-import { holidays, HOLIDAY_COVERAGE, findHolidayMatches, checkRange, shabbatDates, intersects, type Holiday, type Impact } from "@/data/israelHolidays";
+import { holidays, HOLIDAY_COVERAGE, intersects, type Impact } from "@/data/israelHolidays";
 import { IsraelHolidayOverview } from "@/components/IsraelHolidayOverview";
+import { TripHolidayResults } from "@/components/TripHolidayResults";
 
 const PATH = "/travel-blog/israel-holidays/";
 const TITLE = "Israel Holidays Calendar 2027: Dates & Travel Planning";
@@ -33,7 +34,6 @@ export const Route = createFileRoute("/travel-blog/israel-holidays")({
   component: IsraelHolidaysPage,
 });
 
-type TripStyle = "public" | "car" | "private" | "mixed";
 type DateSelection = { start:string|null; end:string|null };
 const monthStart = { year: 2026, month: 9 }; // October 2026; month is zero based.
 const months = Array.from({length:15},(_,i)=>{
@@ -54,28 +54,6 @@ const impactColor:Record<Impact,string> = {
   local:"bg-sky-600",
   awareness:"bg-emerald-600",
 };
-const impactBorder:Record<Impact,string> = {
-  major:"border-rose-300/70",
-  mixed:"border-amber-300/70",
-  local:"border-sky-300/70",
-  awareness:"border-emerald-300/70",
-};
-
-function displayDates(h:Holiday) {
-  return h.from===h.to ? fmt(h.from) : fmt(h.from)+" – "+fmt(h.to);
-}
-function travelTip(style:TripStyle, matches:Holiday[], hasShabbat:boolean):string|null {
-  if(style==="public") {
-    if(matches.some(h=>h.impact==="major") || hasShabbat) return "Because you plan to use buses or trains, verify the exact LAST service before each festival or Friday evening and the FIRST service after it. Some regular routes may not run at all.";
-    return "Check each bus and rail operator for the dates of your trip, including the return connection.";
-  }
-  if(style==="private") return matches.some(h=>h.impact==="major") || hasShabbat
-    ? "Pre-arrange any taxi or private transfer needed during Shabbat or major festivals. Availability and holiday pricing must be confirmed by the provider for your journey."
-    : "Confirm pickup availability, local traffic restrictions and the actual quoted fare with your provider.";
-  if(style==="car") return "Having a car does not guarantee access: ceremonies, local festivals and some religious areas can restrict roads or parking. On Yom Kippur, avoid driving except when necessary.";
-  if(matches.some(h=>h.impact==="major") || hasShabbat) return "Check how you will get from the airport and back during Shabbat or a major festival. Public transport may be unavailable even while some private services operate.";
-  return null;
-}
 function HolidayDot({ impact }: {impact:Impact}) {
   return <span className={"inline-block h-1.5 w-1.5 rounded-full "+impactColor[impact]} aria-hidden="true"/>;
 }
@@ -117,31 +95,11 @@ function MonthCalendar({offset,selection,onSelect}:{offset:number;selection:Date
     </div>
   </div>;
 }
-function HolidayItem({holiday,compact=false}:{holiday:Holiday;compact?:boolean}) {
-  return <article className={"rounded-xl border bg-card p-4 "+impactBorder[holiday.impact]}>
-    <div className="flex flex-wrap items-start justify-between gap-2">
-      <h4 className="text-base font-semibold leading-snug">{holiday.name}</h4>
-      <span className="inline-flex items-center gap-1 rounded-md bg-secondary px-2 py-1 text-xs font-medium"><HolidayDot impact={holiday.impact}/>{impactLabel[holiday.impact]}</span>
-    </div>
-    <p className="mt-2 text-sm font-medium">{displayDates(holiday)}{holiday.startsAt==="sunset"?" · begins at sunset":""}{holiday.certainty==="tentative"?" · tentative":""}</p>
-    {holiday.location && <p className="mt-1 flex items-center gap-1 text-xs text-muted-foreground"><MapPin size={13}/>{holiday.location}</p>}
-    <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{holiday.summary}</p>
-    <p className="mt-2 text-sm leading-relaxed"><strong>For visitors:</strong> {holiday.travel}</p>
-    {!compact && <a href={holiday.source} target="_blank" rel="noopener noreferrer" className="mt-2 inline-block text-xs font-medium text-primary underline underline-offset-4">Check calendar source <span className="sr-only">(opens in new tab)</span></a>}
-  </article>;
-}
-
 export function IsraelHolidaysPage() {
   const [monthOffset,setMonthOffset]=useState(3); // Jan 2027
   const [selection,setSelection]=useState<DateSelection>({start:null,end:null});
-  const [style,setStyle]=useState<TripStyle>("mixed");
   const start=selection.start;
   const end=selection.end;
-  const error=start && end ? checkRange(start,end) : null;
-  const matched=useMemo(()=>start&&end&&!error ? findHolidayMatches(start,end):[],[start,end,error]);
-  const shabbat=useMemo(()=>start&&end&&!error ? shabbatDates(start,end):[],[start,end,error]);
-  const hasShabbat=shabbat.length>0;
-  const tripAdvice=start&&end&&!error ? travelTip(style,matched,hasShabbat) : null;
   const selectDate=(day:string)=>{
     setSelection(current=>{
       if(!current.start || current.end) return {start:day,end:null};
@@ -200,35 +158,7 @@ export function IsraelHolidaysPage() {
           <p className="mt-3 text-xs text-muted-foreground">Israel dates; many Jewish observances begin the previous sunset. Dates for Muslim observances remain tentative until local confirmation. Calendar days are shown in local date format without promising precise opening or closing hours.</p>
         </div>
       </section>
-      <section id="trip-results" className="mt-8 scroll-mt-24" aria-labelledby="trip-heading">
-        <h2 id="trip-heading" className="text-2xl">How could your trip be affected?</h2>
-        {!start || !end ? <div className="mt-4 rounded-xl border bg-card p-5 text-muted-foreground">Select arrival and departure on the calendar above to see holiday-by-holiday travel advice for those dates.</div>
-          : error ? <div role="alert" className="mt-4 flex items-start gap-2 rounded-xl border bg-card p-5"><AlertCircle size={20}/><p>{error}</p></div>
-          : <div className="mt-4 space-y-4" aria-live="polite">
-            <div className="rounded-xl border bg-card p-5">
-              <p className="font-semibold">{fmt(start)} – {fmt(end)}</p>
-              <p className="mt-2 text-sm text-muted-foreground">{matched.length} relevant holiday {matched.length===1?"period":"periods"} found, plus {shabbat.length} Friday/Saturday dates to consider. These are planning flags, not live transport or booking availability.</p>
-              {(start && end) && ([
-                {label:"Arrival",day:start},
-                {label:"Departure",day:end},
-              ] as const).map(({label,day})=>{
-                const major=matched.filter(h=>h.impact==="major" && intersects(day,day,h.from,h.to));
-                const dow=new Date(day+"T12:00:00Z").getUTCDay();
-                if(!major.length && dow!==5 && dow!==6) return null;
-                return <p key={label} className="mt-3 rounded-lg border border-amber-300/60 bg-secondary p-3 text-sm leading-relaxed"><strong>{label} date alert ({fmt(day)}):</strong> {major.length?"Overlaps "+major.map(h=>h.name).join(", ")+". Check flight, rail, bus and pickup arrangements at the relevant times. ":""}{dow===5?"Shabbat begins Friday evening; check the last available departure before sunset.":dow===6?"Saturday Shabbat may limit buses and trains until after nightfall.":""}</p>;
-              })}
-              <label className="mt-4 block text-sm font-medium">How do you expect to get around?
-                <select value={style} onChange={e=>setStyle(e.target.value as TripStyle)} className="mt-2 block w-full max-w-sm rounded-lg border bg-background px-3 py-2.5 text-base">
-                  <option value="mixed">Not decided / mixed transport</option><option value="public">Buses and trains</option><option value="private">Taxi or private driver</option><option value="car">Rental car</option>
-                </select>
-              </label>
-              {tripAdvice && <p className="mt-4 flex items-start gap-2 rounded-lg bg-secondary p-3 text-sm leading-relaxed"><Bus className="mt-0.5 shrink-0" size={18}/>{tripAdvice}</p>}
-              {hasShabbat && <p className="mt-3 text-sm leading-relaxed"><strong>Weekly Shabbat:</strong> Your dates include Friday afternoon/evening or Saturday ({shabbat.slice(0,8).map(fmt).join(", ")}{shabbat.length>8?` and ${shabbat.length-8} more dates`:""}). Many buses and trains stop before sunset Friday and resume after nightfall Saturday; exact services and local exceptions vary. <Link to="/travel-blog/from-ben-gurion-airport-on-shabbat/" className="text-primary underline">Read the airport arrival options</Link>.</p>}
-              {!matched.length && <p className="mt-3 text-sm">No listed holiday overlaps the selected dates. That does not guarantee normal opening hours, low hotel prices or uninterrupted services; check Shabbat and your particular venue or operator.</p>}
-            </div>
-            {matched.length>0 && <div className="grid gap-3 md:grid-cols-2">{matched.map(h=><HolidayItem key={h.id} holiday={h}/>)}</div>}
-          </div>}
-      </section>
+      <TripHolidayResults start={start} end={end} />
       <IsraelHolidayOverview />
       <section id="what-changes" className="mt-12 scroll-mt-24">
         <h2 className="text-3xl">What actually changes on Israeli holidays?</h2>
