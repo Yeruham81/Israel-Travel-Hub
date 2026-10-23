@@ -33,6 +33,9 @@ jobs:
         with:
           node-version: "24"
 
+      - name: Test holiday source title normalization
+        run: node --test scripts/holiday-source-labels.test.mjs
+
       - name: Download and validate future holiday calendars
         run: node scripts/sync-israel-holidays.mjs
 
