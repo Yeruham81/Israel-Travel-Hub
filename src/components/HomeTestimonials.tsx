@@ -11,7 +11,7 @@ export function TripadvisorReviewsSection({ personal = false }: { personal?: boo
         <h2 id="reviews-h" className="mt-2 text-3xl sm:text-4xl">{personal ? "What travelers say about their journeys with me" : "Kind Words from Satisfied Travelers"}</h2>
         <div className="mt-7 flex flex-wrap items-center gap-4 rounded-2xl border border-white/20 bg-white/10 p-5">
           <a href={tripadvisorProfileUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 text-xl font-bold tracking-tight text-white" aria-label={personal ? "Tripadvisor reviews of my transport service" : "Tripadvisor reviews for Moshe Barak"}>
-            <img src="https://cdn.simpleicons.org/tripadvisor/34E0A1" alt="" width={36} height={36} loading="lazy" className="size-9" />
+            <img src="/images/tripadvisor.svg" alt="" width={36} height={36} loading="lazy" className="size-9" />
             Tripadvisor <ExternalLink size={15} aria-hidden />
           </a>
           <span className="flex items-center gap-1 text-[#34e0a1]" aria-label="Five out of five stars">
