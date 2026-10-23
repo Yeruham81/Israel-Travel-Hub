@@ -18,7 +18,7 @@ export type EventLinkConfig = {
 export const EVENT_LINKS:Record<string,EventLinkConfig> = {
   "open-house-jerusalem-2026": {officialUrl:"https://batim.itraveljerusalem.com/en/"},
   "tel-aviv-festival-2026": {officialUrl:"https://telavivfestival.co.il/"},
-  "red-sea-jazz-2026": {officialUrl:"https://redseajazz.co.il/faq/"},
+  "red-sea-jazz-2026": {officialUrl:"https://redseajazz.co.il/"},
   "red-sea-bridge-2026": {officialUrl:"https://www.bridgeredsea.com/"},
   "jerusalem-film-festival": {officialUrl:"https://jff.org.il/en"},
   "haifa-film-festival": {officialUrl:"https://www.haifaff.co.il/eng"},
