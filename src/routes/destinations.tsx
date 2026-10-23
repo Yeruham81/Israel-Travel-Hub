@@ -2,6 +2,8 @@ import { createFileRoute, Link, type LinkProps } from "@tanstack/react-router";
 import { HubHeader } from "@/components/Guide";
 import { pageMeta } from "@/lib/site";
 import { travelGuidePaths } from "@/data/registry";
+import { AttractionRegionTrail } from "@/components/AttractionRegionTrail";
+import { attractionRegionsForDestinations } from "@/data/attractionRegionLinks";
 
 export const Route = createFileRoute("/destinations")({
   head: () =>
@@ -15,7 +17,7 @@ export const Route = createFileRoute("/destinations")({
 });
 
 type L = { label: string; to: LinkProps["to"] };
-const dests: { id: string; name: string; text: string; links: L[] }[] = [
+const dests: { id: keyof typeof attractionRegionsForDestinations; name: string; text: string; links: L[] }[] = [
   {
     id: "dead-sea", name: "Dead Sea & Ein Bokek",
     text: "Compare spa breaks, family resorts, luxury stays and nature-focused alternatives near Ein Gedi on the Israeli shore.",
@@ -129,6 +131,7 @@ function Destinations() {
             <ul className="mt-4 grid gap-2 sm:grid-cols-2">
               {d.links.map((l) => <li key={l.label}><Link to={l.to} className="font-medium text-primary underline-offset-4 hover:underline">{l.label} →</Link></li>)}
             </ul>
+            <AttractionRegionTrail links={[attractionRegionsForDestinations[d.id]]} />
           </section>
         ))}
       </div>

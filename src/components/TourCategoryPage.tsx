@@ -1,4 +1,6 @@
 import { JerusalemClusterLinks, type JerusalemClusterKey } from "@/components/JerusalemClusterLinks";
+import { AttractionRegionTrail } from "@/components/AttractionRegionTrail";
+import { attractionRegionsForTours } from "@/data/attractionRegionLinks";
 import { Link } from "@tanstack/react-router";
 import { travelGuidePaths } from "@/data/registry";
 import { Breadcrumbs, FaqList, SourceList } from "@/components/Guide";
@@ -35,6 +37,7 @@ export function TourCategoryPage({ id, filters: rawFilters, onChange }: { id: To
   const title = category.title;
   const products = toursForCategory(id);
   const guides = tourReadingGuides(id);
+  const attractionRegions = attractionRegionsForTours[id] ?? [];
   const sourceIds = products.flatMap(tour => [...(tour.price ? [tour.price.sourceId] : []), ...offersForTour(tour.id).map(offer => offer.id)]);
   return <main className="mx-auto max-w-5xl px-4 pb-12">
     <div className="pt-6"><Breadcrumbs items={[{ name: "Home", to: "/" }, { name: "Tours & day trips", to: "/tours/" }, { name: title, to: path }]} /></div>
@@ -42,6 +45,7 @@ export function TourCategoryPage({ id, filters: rawFilters, onChange }: { id: To
       <img src={category.photo.src} alt={category.photo.alt} width={1200} height={450} fetchPriority="high" className="aspect-[16/7] w-full object-cover sm:aspect-[3/1]" />
       <div className="p-6 sm:p-8"><p className="eyebrow">Tours & day trips · {category.shortTitle}</p><h1 className="mt-3 text-4xl font-semibold leading-tight sm:text-5xl">{title}</h1><p className="mt-4 max-w-3xl text-lg leading-relaxed text-muted-foreground">{category.intro}</p><a href="#tour-catalog" className="btn btn-primary mt-5">Explore {category.shortTitle} experiences</a></div>
     </header>
+    <AttractionRegionTrail links={attractionRegions} />
     <section aria-labelledby="choose-day-h" className="mt-10"><h2 id="choose-day-h" className="text-3xl font-semibold">Find the right day for your trip</h2><div className="mt-5 grid gap-4 md:grid-cols-3">{category.choices.map(choice => <article key={choice.title} className="rounded-2xl border bg-card p-5"><h3 className="text-xl font-semibold">{choice.title}</h3><p className="mt-2 text-sm leading-relaxed text-muted-foreground">{choice.text}</p></article>)}</div></section>
     <TourCatalog categoryId={id} filters={filters} onChange={onChange} />
     <section aria-labelledby="planning-day-h" className="mt-14"><h2 id="planning-day-h" className="text-3xl font-semibold">Planning your {category.shortTitle} experience</h2><div className="mt-4 space-y-4 leading-relaxed text-muted-foreground">{category.paragraphs.map(paragraph => <p key={paragraph}>{paragraph}</p>)}</div>

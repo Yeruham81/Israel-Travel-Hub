@@ -40,7 +40,7 @@ describe("Attractions hub redesign", () => {
 
   it("keeps all original attraction guides without duplicated cards or changed routes", () => {
     const paths = attractionHubCards.map((card) => String(card.to));
-    expect(attractionHubCards).toHaveLength(31);
+    expect(attractionHubCards).toHaveLength(32);
     expect(new Set(paths).size).toBe(paths.length);
     expect(paths.every((path) => path.startsWith("/"))).toBe(true);
     for (const id of attractionIds) {
@@ -56,11 +56,14 @@ describe("Attractions hub redesign", () => {
     expect(jerusalem.cards.find((card) => card.to === travelGuidePaths.jerusalemShopping)?.photo.src)
       .toBe(attractionHubPhotos.shopping.src);
     expect(jerusalem.planning.some((item) => item.to === "/tours/jerusalem/")).toBe(true);
+    const galilee = attractionHubRegions.find(region => region.id === "sea-of-galilee")!;
+    expect(galilee.cards.some(card => card.to === travelGuidePaths.baptism)).toBe(true);
+    expect(galilee.cards.find(card => card.to === travelGuidePaths.baptism)?.photo.src).toBe(attractionHubPhotos.baptism.src);
     expect(attractionHubRegions.find((region) => region.id === "haifa-coast")?.planning.some((link) => link.to === "/haifa-shore-excursions/")).toBe(true);
   });
 
   it("uses locally hosted selected WordPress photographs rather than live legacy image URLs", () => {
-    expect(Object.values(attractionHubPhotos)).toHaveLength(11);
+    expect(Object.values(attractionHubPhotos)).toHaveLength(12);
     for (const photo of Object.values(attractionHubPhotos)) {
       expect(photo.src).toMatch(/^\/images\/attractions\/.*\.webp$/);
       expect(photo.alt).toBeTruthy();

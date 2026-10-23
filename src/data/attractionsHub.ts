@@ -34,6 +34,7 @@ export const attractionHubPhotos = {
   deadSea: { src: "/images/attractions/dead-sea.webp", alt: "Bather in the shallow waters of the Dead Sea", sourceFilename: "dead-sea-israel.jpg.webp" },
   negev: { src: "/images/attractions/ramon-crater.webp", alt: "Clouds above the layered desert cliffs of Ramon Crater", sourceFilename: "clouds_at_ramon_crater.jpg.webp" },
   eilat: { src: "/images/attractions/eilat.webp", alt: "Visitors relaxing beside the Red Sea in Eilat", sourceFilename: "Eilat_Village_Beach.jpg.webp" },
+  baptism: { src: "/images/attractions/jordan-river-baptism.webp", alt: "Pilgrims gathered for a baptism ceremony beside the Jordan River", sourceFilename: "pilgrims_baptism_jordan_river1.jpg.webp" },
   shopping: { src: "/images/attractions/jerusalem-shopping.webp", alt: "Shops and street life near Mahane Yehuda Market in Jerusalem", sourceFilename: "mahane_yehuda_jerusalem.webp" },
 } as const;
 
@@ -86,6 +87,8 @@ export const attractionHubRegions: AttractionHubRegion[] = [
       { label: "Food & market tours", to: "/tours/food-market-tours/" },
       { label: "Hotels in Tel Aviv", to: "/travel-blog/where-to-stay-in-tel-aviv/" },
       { label: "Getting around Tel Aviv", to: travelGuidePaths.telAviv },
+      { label: "Day trips from Tel Aviv", to: travelGuidePaths.telAvivDayTrips },
+      { label: "Airport to Tel Aviv: all options", to: "/travel-blog/how-to-get-from-ben-gurion-airport-to-tel-aviv/" },
     ],
   },
   {
@@ -123,6 +126,7 @@ export const attractionHubRegions: AttractionHubRegion[] = [
       { label: "Nazareth & Galilee tours", to: "/tours/nazareth-sea-of-galilee/" },
       { label: "Shore excursions from Haifa", to: "/haifa-shore-excursions/" },
       { label: "Explore the Sea of Galilee", to: "/travel-blog/sea-of-galilee/" },
+      { label: "Private driver service", to: "/private-driver/" },
     ],
   },
   {
@@ -138,10 +142,11 @@ export const attractionHubRegions: AttractionHubRegion[] = [
       attraction("mount-of-beatitudes", "Mount of Beatitudes", "A peaceful hilltop church and lake panorama.", attractionHubPhotos.galilee.src),
       guide("magdala", "Magdala", "Archaeology and pilgrimage on the western shore."),
       guide("yardenit", "Yardenit", "Plan a visit to this Jordan River baptism site."),
+      guide("baptism", "Jordan River baptism sites", "Compare Yardenit and Qasr el-Yahud before choosing a pilgrimage stop.", attractionHubPhotos.baptism),
     ],
     planning: [
       { label: "Nazareth & Sea of Galilee tours", to: "/tours/nazareth-sea-of-galilee/" },
-      { label: "Jordan River baptism sites", to: travelGuidePaths.baptism },
+      { label: "Getting around Israel", to: travelGuidePaths.israel },
       { label: "Hotels in Tiberias", to: "/travel-blog/best-hotels-in-tiberias/" },
     ],
   },
@@ -161,6 +166,7 @@ export const attractionHubRegions: AttractionHubRegion[] = [
       { label: "Dead Sea visitor guide", to: travelGuidePaths.deadSea },
       { label: "Jerusalem to the Dead Sea", to: travelGuidePaths.jerusalemDeadSea },
       { label: "Dead Sea hotels", to: "/travel-blog/best-dead-sea-hotels/" },
+      { label: "Airport to Ein Bokek: all options", to: "/travel-blog/how-to-get-from-ben-gurion-airport-to-ein-bokek/" },
     ],
   },
   {
