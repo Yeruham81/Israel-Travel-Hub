@@ -220,7 +220,7 @@ export function IsraelHolidaysPage() {
                 </select>
               </label>
               {tripAdvice && <p className="mt-4 flex items-start gap-2 rounded-lg bg-secondary p-3 text-sm leading-relaxed"><Bus className="mt-0.5 shrink-0" size={18}/>{tripAdvice}</p>}
-              {hasShabbat && <p className="mt-3 text-sm leading-relaxed"><strong>Weekly Shabbat:</strong> Your dates include Friday afternoon/evening or Saturday. Many buses and trains stop before sunset Friday and resume after nightfall Saturday; exact services and local exceptions vary. <Link to="/travel-blog/from-ben-gurion-airport-on-shabbat/" className="text-primary underline">Read the airport arrival options</Link>.</p>}
+              {hasShabbat && <p className="mt-3 text-sm leading-relaxed"><strong>Weekly Shabbat:</strong> Your dates include Friday afternoon/evening or Saturday ({shabbat.slice(0,8).map(fmt).join(", ")}{shabbat.length>8?` and ${shabbat.length-8} more dates`:""}). Many buses and trains stop before sunset Friday and resume after nightfall Saturday; exact services and local exceptions vary. <Link to="/travel-blog/from-ben-gurion-airport-on-shabbat/" className="text-primary underline">Read the airport arrival options</Link>.</p>}
               {!matched.length && <p className="mt-3 text-sm">No listed holiday overlaps the selected dates. That does not guarantee normal opening hours, low hotel prices or uninterrupted services; check Shabbat and your particular venue or operator.</p>}
             </div>
             {matched.length>0 && <div className="grid gap-3 md:grid-cols-2">{matched.map(h=><HolidayItem key={h.id} holiday={h}/>)}</div>}
