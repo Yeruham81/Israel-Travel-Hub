@@ -41,3 +41,8 @@ test("deduplicates same venue/date/time but preserves distinct performances",()=
  assert.equal(result.length,2);
  assert.ok(result.some(e=>e.startTime==="21:30"));
 });
+
+test("removes test inventory even if it has a valid event date and Israeli venue",()=>{
+ assert.equal(normalizeTicketmasterEvent(valid({name:"Winter 345",url:"https://www.ticketmaster.co.il/event/BDIKA/ALL/en"}),"2026-10-23"),null);
+ assert.equal(normalizeTicketmasterEvent(valid({url:"https://www.ticketmaster.co.il/event/TEST/ALL/en"}),"2026-10-23"),null);
+});
