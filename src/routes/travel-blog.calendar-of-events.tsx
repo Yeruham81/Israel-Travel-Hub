@@ -10,6 +10,8 @@ import { migrationPhotos } from "@/data/guideMigrationPhotos";
 import { israelToday, rollingMonths, type Month } from "@/data/holidayRolling";
 import { CONFIRMED_EVENTS, RECURRING_FESTIVALS, EVENT_CATEGORIES, EVENT_REGIONS, EVENT_CHECK_DATE, EVENT_FEED_CHECK_DATE, publishedEvents, filterConfirmedEvents, filterRecurringFestivals, type EventCategory, type EventRegion, type ConfirmedEvent, type RecurringFestival } from "@/data/israelEvents";
 import { eventLinks } from "@/data/eventTicketLinks";
+import { groupEventCards, eventScheduleRows, type EventDisplayGroup } from "@/data/eventDisplayGroups";
+import { EVENT_RELATED_GUIDES } from "@/data/eventRelatedGuides";
 import { recordOutboundClick, relFor } from "@/lib/outbound";
 
 const PATH="/travel-blog/calendar-of-events/";
@@ -50,21 +52,45 @@ function ExternalEventLink({id,label,tickets=false,sourceUrl}:{id:string;label?:
     {tickets&&<Ticket size={15} aria-hidden="true"/>}{title}<ExternalLink size={14} aria-hidden="true"/>
   </a>;
 }
-function EventListItem({event}:{event:ConfirmedEvent}) {
+function EventListItem({group}:{group:EventDisplayGroup}) {
+  const event=group.events[0]!;
+  const multiple=group.events.length>1;
+  const rows=multiple?eventScheduleRows(group.events):[];
   const links=eventLinks(event.id,event.sourceUrl);
+  const uniqueDays=new Set(group.events.map(show=>show.from)).size;
   return <li className="grid min-w-0 gap-2 border-b px-3 py-4 last:border-0 sm:grid-cols-[120px_minmax(0,1fr)] sm:gap-4 sm:px-4">
-    <div className="text-sm font-semibold tabular-nums">{shortDate(event.from)}{event.from!==event.to&&<> – {shortDate(event.to)}</>}</div>
+    <div className="text-sm font-semibold tabular-nums">
+      {shortDate(group.from)}{group.from!==group.to&&<> – {shortDate(group.to)}</>}
+      {multiple&&<span className="mt-1 block text-xs font-normal text-muted-foreground">{group.events.length} performances · {uniqueDays} {uniqueDays===1?"date":"dates"}</span>}
+    </div>
     <div className="min-w-0">
-      <h3 className="text-base font-semibold">{event.title}</h3>
-      <p className="mt-1 flex items-start gap-1.5 text-xs text-muted-foreground"><MapPin size={14} className="mt-0.5 shrink-0" aria-hidden="true"/>{event.location} · {labels[event.region]}{event.startTime?" · "+event.startTime:""}</p>
-      <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{event.description}</p>
-      <p className="mt-2 text-sm leading-relaxed"><strong>Good to know:</strong> {event.visitorNote}</p>
-      {event.sourceName&&<p className="mt-1 text-xs text-muted-foreground">Listing source: {event.sourceName} · checked {shortDate(event.checkedAt)}. Check the provider for latest status.</p>}
-      {event.languageNote&&<p className="mt-1 text-xs text-muted-foreground">{event.languageNote}</p>}
-      <div className="mt-3 flex flex-wrap items-center gap-x-4 gap-y-2">
+      <h3 className="text-base font-semibold">{group.title}</h3>
+      {!multiple&&<p className="mt-1 flex items-start gap-1.5 text-xs text-muted-foreground"><MapPin size={14} className="mt-0.5 shrink-0" aria-hidden="true"/>{event.location} · {labels[event.region]}{event.startTime?" · "+event.startTime:""}</p>}
+      {!multiple&&!event.sourceName&&<p className="mt-2 text-sm leading-relaxed text-muted-foreground">{event.description}</p>}
+      {multiple&&<ul className="mt-3 divide-y rounded-lg border" aria-label={group.title+" performance dates"}>
+        {rows.map(row=>{
+          const first=row.events[0]!;
+          const rowLinks=eventLinks(first.id,first.sourceUrl);
+          return <li key={row.key} className="flex min-w-0 flex-wrap items-start justify-between gap-3 px-3 py-2.5 text-sm">
+            <div className="min-w-0 flex-1">
+              <p className="font-medium">{row.location}</p>
+              <p className="mt-1 text-xs text-muted-foreground">{row.events.map(show=>shortDate(show.from)+(show.startTime?" · "+show.startTime:"")).join("  |  ")}</p>
+            </div>
+            <div className="flex flex-wrap gap-x-3 gap-y-1">
+              {rowLinks.ticket&&<ExternalEventLink id={first.id} tickets label="Tickets"/>}
+              <ExternalEventLink id={first.id} sourceUrl={first.sourceUrl} label="Event details"/>
+            </div>
+          </li>;
+        })}
+      </ul>}
+      <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{event.visitorNote}</p>
+      {event.languageNote&&<p className="mt-1 text-sm text-muted-foreground">{event.languageNote}</p>}
+      {event.sourceName&&<p className="mt-2 text-xs text-muted-foreground">{event.sourceName} · information checked {shortDate(event.checkedAt)}. Confirm changes with the provider.</p>}
+      {!multiple&&<div className="mt-3 flex flex-wrap items-center gap-x-4 gap-y-2">
         {links.ticket&&<ExternalEventLink id={event.id} tickets/>}
         <ExternalEventLink id={event.id} sourceUrl={event.sourceUrl} label={event.sourceName?"Event details on "+event.sourceName:undefined}/>
-      </div>
+      </div>}
+      {multiple&&<p className="mt-2 text-xs text-muted-foreground">Dates shown match your current search and location filters. Check the specific performance before booking.</p>}
     </div>
   </li>;
 }
@@ -75,7 +101,7 @@ function RecurringListItem({festival}:{festival:RecurringFestival}) {
       <h3 className="text-base font-semibold">{festival.title}</h3>
       <p className="mt-1 text-xs text-muted-foreground">{labels[festival.region]}</p>
       <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{festival.description}</p>
-      <p className="mt-1 text-sm"><strong>Before you go:</strong> {festival.visitorNote}</p>
+      <p className="mt-2 text-sm text-muted-foreground">{festival.visitorNote}</p>
       <div className="mt-2"><ExternalEventLink id={festival.id} label="Check the organiser's next edition"/></div>
     </div>
   </li>;
@@ -132,6 +158,7 @@ export function IsraelEventsPage() {
   const upcoming=useMemo(()=>filterConfirmedEvents(events,{
     today, start:complete?selection.start:null,end:complete?selection.end:null,region,category
   }),[events,today,selection.start,selection.end,complete,region,category]);
+  const groupedUpcoming=useMemo(()=>groupEventCards(upcoming),[upcoming]);
   const recurring=useMemo(()=>filterRecurringFestivals(RECURRING_FESTIVALS,region,category)
     .filter(item=>!events.some(event=>event.id.startsWith(item.id+"-")&&event.to>=today)),[region,category,events,today]);
   return <main className="mx-auto max-w-6xl px-4 pb-12">
@@ -150,7 +177,7 @@ export function IsraelEventsPage() {
         <AuthorCard/>
       </header>
       <OnThisPage sections={[
-        ["event-planner","Find events"],["confirmed-events","Confirmed events"],["annual-festivals","Annual festivals"],["event-advice","Before you go"],["event-sources","Event calendars"]
+        ["event-planner","Find events"],["confirmed-events","Confirmed events"],["annual-festivals","Annual festivals"],["event-advice","Before you go"],["event-sources","Event calendars"],["related-guides","Related guides"]
       ]}/>
       <section id="event-planner" className="mt-10 scroll-mt-24" aria-labelledby="event-planner-heading">
         <div className="flex flex-wrap items-end justify-between gap-3">
@@ -190,8 +217,8 @@ export function IsraelEventsPage() {
       </section>
       <section id="confirmed-events" className="mt-10 scroll-mt-24">
         <h2 className="text-3xl">Upcoming confirmed events</h2>
-        <p className="mt-2 text-sm text-muted-foreground">{complete?dateFormat(selection.start!)+" – "+dateFormat(selection.end!):"Visitor-relevant events with published dates from today onwards"} · {upcoming.length} {upcoming.length===1?"event":"events"} in our selected listings. This is not a complete concert directory.</p>
-        {upcoming.length>0?<ul className="mt-4 overflow-hidden rounded-xl border bg-card" aria-label="Confirmed events">{upcoming.map(event=><EventListItem key={event.id} event={event}/>)}</ul>:
+        <p className="mt-2 text-sm text-muted-foreground">{complete?dateFormat(selection.start!)+" – "+dateFormat(selection.end!):"Visitor-relevant events with published dates from today onwards"} · {groupedUpcoming.length} {groupedUpcoming.length===1?"event":"events"} in our selected listings. This is not a complete concert directory.</p>
+        {upcoming.length>0?<ul className="mt-4 overflow-hidden rounded-xl border bg-card" aria-label="Confirmed events">{groupedUpcoming.map(group=><EventListItem key={group.key} group={group}/>)}</ul>:
           <div className="mt-4 rounded-xl border bg-card p-4">
             <p className="text-sm font-medium">No verified events are currently listed for {complete?"these dates and filters":"these filters"}.</p>
             <p className="mt-2 text-sm text-muted-foreground">This does not mean there are no events. Check the city event calendars linked below; additional programmes may be announced later.</p>
@@ -220,7 +247,22 @@ export function IsraelEventsPage() {
         </ul>
         <p className="mt-3 text-xs text-muted-foreground">Editorial events checked {dateFormat(EVENT_CHECK_DATE)}. {EVENT_FEED_CHECK_DATE?"Ticketmaster data last checked "+dateFormat(EVENT_FEED_CHECK_DATE)+". Only reviewed highlights and one listing per confirmed festival edition are shown.":"Additional event data will appear after a licensed source is connected and reviewed."}</p>
       </section>
-      <p className="mt-8 text-sm"><Link to="/guides/" className="font-medium text-primary underline">Explore more travel guides →</Link></p>
+      <section id="related-guides" className="mt-12 scroll-mt-24" aria-labelledby="related-guides-heading">
+        <h2 id="related-guides-heading" className="text-2xl font-bold sm:text-3xl">More guides for planning your visit</h2>
+        <p className="mt-2 text-sm text-muted-foreground">Plan around festivals, museums, holiday schedules and transport between events.</p>
+        <ul className="mt-5 grid gap-3 sm:grid-cols-2">
+          {EVENT_RELATED_GUIDES.map(guide=><li key={guide.id} className="min-w-0">
+            <Link to={guide.to} className="group flex h-full min-w-0 items-start gap-3 rounded-xl border bg-card p-3 transition-colors hover:border-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
+              <img src={guide.photo.src} alt={guide.photo.alt} loading="lazy" decoding="async" width={128} height={112} className="h-24 w-28 shrink-0 rounded-lg object-cover sm:h-28 sm:w-32"/>
+              <span className="flex min-w-0 flex-1 flex-col self-stretch">
+                <span className="text-sm font-bold leading-snug text-foreground group-hover:text-primary">{guide.title}</span>
+                <span className="mt-1 line-clamp-3 text-xs leading-relaxed text-muted-foreground">{guide.note}</span>
+                <span className="mt-auto pt-2 text-sm font-semibold text-primary">Read more →</span>
+              </span>
+            </Link>
+          </li>)}
+        </ul>
+      </section>
     </article>
   </main>;
 }
