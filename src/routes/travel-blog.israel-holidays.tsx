@@ -95,6 +95,7 @@ export function IsraelHolidaysPage() {
   const [today,setToday]=useState(()=>israelToday());
   const [monthOffset,setMonthOffset]=useState(0);
   const months=useMemo(()=>rollingMonths(today,HOLIDAY_COVERAGE.to),[today]);
+  const shownOffset=Math.min(monthOffset,Math.max(0,months.length-1));
   useEffect(()=>{
     const refresh=()=>{const day=israelToday();setToday(old=>old===day?old:day);};
     const id=window.setInterval(refresh,60*60*1000);
@@ -139,18 +140,18 @@ export function IsraelHolidaysPage() {
         </div>
         {months.length===0 ? <p className="mt-4 rounded-xl border bg-card p-5 text-sm">Upcoming holiday dates are being updated. Check back after the calendar refresh.</p> : <div className="mt-5 rounded-2xl border bg-secondary/40 p-3 sm:p-5">
           <div className="flex flex-wrap items-center justify-between gap-3">
-            <button type="button" disabled={monthOffset===0} aria-label="Previous month" onClick={()=>setMonthOffset(n=>Math.max(0,n-1))} className="rounded-lg border bg-background p-2 disabled:opacity-40"><ChevronLeft size={22}/></button>
+            <button type="button" disabled={shownOffset===0} aria-label="Previous month" onClick={()=>setMonthOffset(n=>Math.max(0,n-1))} className="rounded-lg border bg-background p-2 disabled:opacity-40"><ChevronLeft size={22}/></button>
             <label className="flex items-center gap-2 text-sm font-semibold"><CalendarDays size={18}/><span className="sr-only">Jump to month</span>
-              <select value={monthOffset} aria-label="Choose a month" onChange={e=>setMonthOffset(Number(e.target.value))} className="max-w-[220px] rounded-lg border bg-background px-3 py-2 text-sm">
+              <select value={shownOffset} aria-label="Choose a month" onChange={e=>setMonthOffset(Number(e.target.value))} className="max-w-[220px] rounded-lg border bg-background px-3 py-2 text-sm">
                 {months.map((m,i)=><option key={m.label} value={i}>{m.label}</option>)}
               </select>
             </label>
-            <button type="button" disabled={monthOffset===months.length-1} aria-label="Next month" onClick={()=>setMonthOffset(n=>Math.min(months.length-1,n+1))} className="rounded-lg border bg-background p-2 disabled:opacity-40"><ChevronRight size={22}/></button>
+            <button type="button" disabled={shownOffset===months.length-1} aria-label="Next month" onClick={()=>setMonthOffset(n=>Math.min(months.length-1,n+1))} className="rounded-lg border bg-background p-2 disabled:opacity-40"><ChevronRight size={22}/></button>
           </div>
           <p className="mt-3 text-center text-sm text-muted-foreground" role="status" aria-live="polite">{!start?"Choose your arrival date":!end?"Choose your departure date":fmt(start)+" → "+fmt(end)}</p>
           <div className="mt-4 grid gap-4 lg:grid-cols-2">
-            <MonthCalendar shownMonth={months[monthOffset]!} today={today} selection={selection} onSelect={selectDate}/>
-            {monthOffset+1<months.length && <div className="hidden lg:block"><MonthCalendar shownMonth={months[monthOffset+1]!} today={today} selection={selection} onSelect={selectDate}/></div>}
+            <MonthCalendar shownMonth={months[shownOffset]!} today={today} selection={selection} onSelect={selectDate}/>
+            {shownOffset+1<months.length && <div className="hidden lg:block"><MonthCalendar shownMonth={months[shownOffset+1]!} today={today} selection={selection} onSelect={selectDate}/></div>}
           </div>
           <div className="mt-4 flex flex-wrap gap-x-4 gap-y-2 text-xs text-muted-foreground" aria-label="Calendar symbols">
             {(Object.keys(impactLabel) as Impact[]).map(key=><span key={key} className="inline-flex items-center gap-1.5"><HolidayDot impact={key}/>{impactLabel[key]}</span>)}
