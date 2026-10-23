@@ -72,7 +72,7 @@ export function IsraelHolidayOverview() {
     <div className="flex flex-wrap items-start justify-between gap-3">
       <div>
         <h2 id="year-heading" className="text-3xl">Holiday dates at a glance</h2>
-        <p className="mt-2 max-w-3xl leading-relaxed text-muted-foreground">See the date, type of holiday and likely effect on your visit without opening individual entries. Select a period to keep the list short. Jewish festival dates follow the calendar in Israel; Muslim dates are tentative.</p>
+        <p className="mt-2 max-w-3xl leading-relaxed text-muted-foreground">Browse holiday dates and their likely effects on travel. Jewish festival dates follow the calendar in Israel; Muslim dates are tentative.</p>
       </div>
       <div role="group" aria-label="Holiday calendar year" className="inline-flex rounded-xl border bg-secondary/40 p-1">
         {([2026, 2027] as const).map(value => <button type="button" key={value} aria-pressed={year === value} onClick={() => chooseYear(value)} className={"rounded-lg px-4 py-2 text-sm font-semibold focus-visible:outline-2 focus-visible:outline-primary " + (year === value ? "bg-primary text-primary-foreground" : "hover:bg-background")}>{value}</button>)}
