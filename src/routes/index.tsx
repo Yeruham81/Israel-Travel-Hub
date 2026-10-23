@@ -15,6 +15,21 @@ import ashdodPort from "@/assets/home/ashdod-port.webp";
 import haifaPort from "@/assets/home/haifa-port.webp";
 import haifaHotels from "@/assets/haifa/panorama.webp";
 import deadSeaBeach from "@/assets/dead-sea/beach.webp";
+import jerusalemCard from "@/assets/home/jerusalem-old-city-card.webp";
+import telAvivCard from "@/assets/home/tel-aviv-coast-card.webp";
+import tiberiasCard from "@/assets/home/tiberias-lake-card.webp";
+import bethlehemCard from "@/assets/home/bethlehem-nativity-card.webp";
+import masadaCard from "@/assets/home/masada-dead-sea-card.webp";
+import caesareaDuskCard from "@/assets/home/caesarea-dusk-card.webp";
+import caesareaAqueductCard from "@/assets/home/caesarea-aqueduct-card.webp";
+import hotelRoomCard from "@/assets/home/hotel-room-card.webp";
+import airportPickupCard from "@/assets/home/airport-pickup-card.webp";
+import guidedTourCard from "@/assets/home/guided-tour-card.webp";
+import cruisePortCard from "@/assets/home/cruise-port-card.webp";
+import ashdodPortCard from "@/assets/home/ashdod-port-card.webp";
+import haifaPortCard from "@/assets/home/haifa-port-card.webp";
+import haifaHotelsCard from "@/assets/haifa/panorama-card.webp";
+import deadSeaBeachCard from "@/assets/dead-sea/beach-card.webp";
 import { pageMeta } from "@/lib/site";
 import { photoCredits } from "@/data/photoCredits";
 import { GuideCard } from "@/components/TravelGuide";
@@ -34,19 +49,19 @@ export const Route = createFileRoute("/")({
   component: Home,
 });
 
-type Img = { src: string; alt: string; pos?: string };
+type Img = { src: string; alt: string; thumb?: string; pos?: string };
 type Card = { label: string; text: string; to: LinkProps["to"]; img: Img };
 type Service = { id: string; eyebrow: string; tagline: string; title: string; text: string; feature: Img; cards: Card[]; hub: { label: string; to: LinkProps["to"] } };
 
 const IMG = {
-  jerusalem: { src: jerusalem, alt: "Jerusalem's Old City and the Dome of the Rock seen from the Mount of Olives" },
-  telAviv: { src: telAviv, alt: "Tel Aviv's beachfront skyline seen from Jaffa" },
-  tiberias: { src: tiberias, alt: "Tiberias on the shore of the Sea of Galilee, seen from the water" },
-  deadSea: { src: deadSeaBeach, alt: "Ein Bokek's beach and palm-lined promenade beside the Dead Sea" },
-  haifa: { src: haifaHotels, alt: "Haifa Bay and the Bahá'í Gardens seen from Mount Carmel" },
-  bethlehem: { src: bethlehem, alt: "Church of the Nativity on Manger Square, Bethlehem" },
-  masada: { src: masada, alt: "Masada plateau from the air with the Dead Sea behind" },
-  caesarea: { src: caesareaAqueduct, alt: "Roman aqueduct along the beach at Caesarea" },
+  jerusalem: { src: jerusalem, thumb: jerusalemCard, alt: "Jerusalem's Old City and the Dome of the Rock seen from the Mount of Olives" },
+  telAviv: { src: telAviv, thumb: telAvivCard, alt: "Tel Aviv's beachfront skyline seen from Jaffa" },
+  tiberias: { src: tiberias, thumb: tiberiasCard, alt: "Tiberias on the shore of the Sea of Galilee, seen from the water" },
+  deadSea: { src: deadSeaBeach, thumb: deadSeaBeachCard, alt: "Ein Bokek's beach and palm-lined promenade beside the Dead Sea" },
+  haifa: { src: haifaHotels, thumb: haifaHotelsCard, alt: "Haifa Bay and the Bahá'í Gardens seen from Mount Carmel" },
+  bethlehem: { src: bethlehem, thumb: bethlehemCard, alt: "Church of the Nativity on Manger Square, Bethlehem" },
+  masada: { src: masada, thumb: masadaCard, alt: "Masada plateau from the air with the Dead Sea behind" },
+  caesarea: { src: caesareaAqueduct, thumb: caesareaAqueductCard, alt: "Roman aqueduct along the beach at Caesarea" },
 } satisfies Record<string, Img>;
 
 const services: Service[] = [
@@ -76,8 +91,8 @@ const services: Service[] = [
     text: "Arriving by cruise ship? Plan a day ashore around your all-aboard time, then choose a private driver, guide or port-specific tour.",
     feature: { src: cruisePort, alt: "Illustrative cruise passengers walking along a harbour quay toward a waiting minivan (not a specific ship or operator)" },
     cards: [
-      { label: "From Ashdod Port", text: "Jerusalem, Tel Aviv–Jaffa or the Dead Sea", to: "/ashdod-shore-excursions/", img: { src: ashdodPort, alt: "Aerial view of Ashdod Port" } },
-      { label: "From Haifa Port", text: "Akko, the Galilee or a long day to Jerusalem", to: "/haifa-shore-excursions/", img: { src: haifaPort, alt: "Haifa Port and Haifa Bay seen from Mount Carmel" } },
+      { label: "From Ashdod Port", text: "Jerusalem, Tel Aviv–Jaffa or the Dead Sea", to: "/ashdod-shore-excursions/", img: { src: ashdodPort, thumb: ashdodPortCard, alt: "Aerial view of Ashdod Port" } },
+      { label: "From Haifa Port", text: "Akko, the Galilee or a long day to Jerusalem", to: "/haifa-shore-excursions/", img: { src: haifaPort, thumb: haifaPortCard, alt: "Haifa Port and Haifa Bay seen from Mount Carmel" } },
     ],
     hub: { label: "Explore shore excursions", to: "/shore-excursions/" },
   },
@@ -126,7 +141,7 @@ function CompactCard({ c }: { c: Card }) {
     <li>
       <Link to={c.to} className="photo-card group grid grid-cols-[96px_minmax(0,1fr)] items-center gap-4 rounded-xl border bg-background p-2.5 pr-4 transition-colors hover:border-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring sm:grid-cols-[112px_minmax(0,1fr)]">
         <span className="block overflow-hidden rounded-lg">
-          <img src={c.img.src} alt={c.img.alt} loading="lazy" decoding="async" width={224} height={160} className="aspect-[7/5] w-full object-cover transition-transform duration-500 group-hover:scale-105" />
+          <img src={c.img.thumb ?? c.img.src} alt={c.img.alt} loading="lazy" decoding="async" width={224} height={160} className="aspect-[7/5] w-full object-cover transition-transform duration-500 group-hover:scale-105" />
         </span>
         <div className="min-w-0">
           <h3 className="font-serif text-lg leading-tight group-hover:text-primary">{c.label}</h3>
