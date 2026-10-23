@@ -27,7 +27,7 @@ describe("Accommodation URL and deleted Destinations directory", () => {
     const routeTree = readFileSync("src/routeTree.gen.ts", "utf8");
     const source = readFileSync("src/routes/accommodation.tsx", "utf8");
     expect(routeTree).toContain("AccommodationRoute");
-    expect(routeTree).not.toContain("HotelsRoute");
+    expect(routeTree).not.toMatch(/\bHotelsRoute\b/);
     expect(routeTree).not.toContain("DestinationsRoute");
     expect(source).toContain('createFileRoute("/accommodation")');
     expect(source).toContain('path: "/accommodation/"');

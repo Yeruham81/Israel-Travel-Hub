@@ -20,7 +20,7 @@ async function pageAt(path: string) {
 
 describe("independent author identity and page credits", () => {
   it("shows one real portrait, experience statement and exact review profile across the page families", async () => {
-    const paths = ["/", "/guides/", "/hotels/", "/transfers/", "/private-driver/", "/haifa-shore-excursions/", "/travel-blog/ben-gurion-airport-to-jerusalem/", "/travel-blog/where-to-stay-in-jerusalem/", "/tel-aviv/jaffa-hotels/", "/travel-blog/best-hotels-in-haifa/", "/dead-sea/spa-hotels/", "/attractions/caesarea/"];
+    const paths = ["/", "/guides/", "/accommodation/", "/transfers/", "/private-driver/", "/haifa-shore-excursions/", "/travel-blog/ben-gurion-airport-to-jerusalem/", "/travel-blog/where-to-stay-in-jerusalem/", "/tel-aviv/jaffa-hotels/", "/travel-blog/best-hotels-in-haifa/", "/dead-sea/spa-hotels/", "/attractions/caesarea/"];
     for (const path of paths) {
       const { container, unmount } = await pageAt(path);
       const cards = screen.getAllByTestId("author-card");

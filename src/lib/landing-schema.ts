@@ -4,14 +4,14 @@ import { publicSources } from "@/data/registry";
 
 /** Individual hotel/neighborhood guide with the appropriate destination breadcrumb. */
 export function hotelSubguideMeta(guide: { title: string; metaDescription: string; path: string }, destination: { name: string; path: string; reviewedAt?: string | undefined; sourceIds?: string[] }, label: string, image: string) {
-  const crumbs: Crumb[] = [{ name: "Home", path: "/" }, { name: "Accommodation", path: "/hotels/" }, { name: destination.name, path: destination.path }, { name: label, path: guide.path }];
+  const crumbs: Crumb[] = [{ name: "Home", path: "/" }, { name: "Accommodation", path: "/accommodation/" }, { name: destination.name, path: destination.path }, { name: label, path: guide.path }];
   return hotelGuideMeta({ ...guide, ...(destination.reviewedAt ? { reviewedAt: destination.reviewedAt } : {}), sourceIds: destination.sourceIds || [] }, label, image, crumbs);
 }
 
 
 /** Metadata for the substantial hotel guides, not a product or live offer. */
 export function hotelGuideMeta(guide: { title: string; metaDescription: string; path: string; reviewedAt?: string; sourceIds: string[] }, name: string, image: string, crumbsOverride?: Crumb[]) {
-  const crumbs: Crumb[] = [{ name: "Home", path: "/" }, { name: "Accommodation", path: "/hotels/" }, { name, path: guide.path }];
+  const crumbs: Crumb[] = [{ name: "Home", path: "/" }, { name: "Accommodation", path: "/accommodation/" }, { name, path: guide.path }];
   const head = pageMeta({ title: guide.title, description: guide.metaDescription, path: guide.path, type: "article", crumbs: crumbsOverride || crumbs, image });
   const url = CANONICAL_ORIGIN + guide.path;
   return { ...head, scripts: [...head.scripts, jsonLd({

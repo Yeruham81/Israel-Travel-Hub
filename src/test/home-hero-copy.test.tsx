@@ -53,7 +53,7 @@ describe("homepage marketing copy and top navigation", () => {
       ["transfers", "Explore Airport Transfers", "/transfers/"],
       ["tours", "Explore tours & day trips", "/tours/"],
       ["shore-excursions", "Explore Shore Excursions", "/shore-excursions/"],
-      ["accommodation", "Explore Accommodation", "/hotels/"],
+      ["accommodation", "Explore Accommodation", "/accommodation/"],
       ["attractions", "Explore attractions & experiences", "/attractions/"],
     ] as const) {
       const section = document.getElementById(sectionId)!;

@@ -12,7 +12,7 @@ describe("removed Destinations directory", () => {
     expect(existsSync("src/lib/retired-route-redirects.server.ts")).toBe(false);
     const tree = readFileSync("src/routeTree.gen.ts", "utf8");
     expect(tree).not.toContain("DestinationsRoute");
-    expect(tree).not.toContain("HotelsRoute");
+    expect(tree).not.toMatch(/\bHotelsRoute\b/);
     expect(tree).toContain("AccommodationRoute");
     expect(tree).not.toContain("'/destinations'");
     const server = readFileSync("src/server.ts", "utf8");
@@ -26,9 +26,9 @@ describe("removed Destinations directory", () => {
     const home = readFileSync("src/routes/index.tsx", "utf8");
     expect(home).toContain('to="/accommodation/" className="btn btn-light mt-6">Explore all accommodation');
     expect(home).not.toContain('to="/destinations/"');
-    expect(home).not.toContain('to="/accommodation/"');
+    expect(home).not.toContain('to="/hotels/"');
     expect(readFileSync("public/sitemap.xml", "utf8")).not.toContain("/destinations/");
-    expect(readFileSync("public/sitemap.xml", "utf8")).not.toContain("/accommodation/");
+    expect(readFileSync("public/sitemap.xml", "utf8")).not.toContain("/hotels/");
     expect(readFileSync("public/sitemap.xml", "utf8")).toContain("/accommodation/");
     expect(await collectSitemapPaths()).not.toContain("/destinations/");
   });

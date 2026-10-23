@@ -69,7 +69,7 @@ describe("migrated Israel itineraries", () => {
       expect(itineraryCards.find(card => card.id === id)?.to).toBe(itineraries[id].path);
       expect(guideDirectory.find(item => item.id === `israel-itinerary-${id}`)?.to).toBe(itineraries[id].path);
     }
-    expect(file("src/routes/hotels.tsx")).not.toContain("trip.href");
+    expect(file("src/routes/accommodation.tsx")).not.toContain("trip.href");
     expect(file("src/data/hotelHub.ts")).not.toContain("LEGACY_ITINERARY_ORIGIN");
   });
 

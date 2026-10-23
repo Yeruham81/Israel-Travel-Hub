@@ -200,7 +200,7 @@ describe("accommodation destination hub", () => {
     const head = await HotelsRoute.options.head?.({} as never);
     expect(head).toMatchObject({
       meta: expect.arrayContaining([expect.objectContaining({ name: "description", content: expect.stringContaining("Eilat") })]),
-      links: expect.arrayContaining([expect.objectContaining({ rel: "canonical", href: expect.stringMatching(/\/hotels\/$/) })]),
+      links: expect.arrayContaining([expect.objectContaining({ rel: "canonical", href: expect.stringMatching(/\/accommodation\/$/) })]),
     });
     expect(new Set(accommodationDestinations.map((destination) => destination.photo.src)).size).toBe(6);
   });

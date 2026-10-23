@@ -34,7 +34,7 @@ describe("Attractions hub redesign", () => {
       expect(item.links.every(link => String(link.to).startsWith("/"))).toBe(true);
       expect(item.links.every(link => link.to !== item.to)).toBe(true);
     }
-    expect(attractionPlanningPaths.find(item => item.id === "hotels")?.to).toBe("/hotels/");
+    expect(attractionPlanningPaths.find(item => item.id === "hotels")?.to).toBe("/accommodation/");
     expect(attractionPlanningPaths.find(item => item.id === "transport")?.links.some(link => link.to === "/travel-blog/getting-around-israel/")).toBe(true);
   });
 
