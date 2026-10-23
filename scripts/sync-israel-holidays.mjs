@@ -62,7 +62,7 @@ async function hebcal(year) {
   const p1 = find(/^Pesach I$/i);
   const p7 = find(/^Pesach VII$/i);
   const sukkot = find(/^Sukkot I$/i);
-  const simchat = find(/^(Shmini Atzeret|Shmini Atzeret|Simchat Torah)$/i);
+  const simchat = find(/^(Shmini Atzeret|Shemini Atzeret|Simchat Torah)$/i);
   const rosh = find(/^Rosh Hashana(h)? (?!II\b)/i);
   const kippur = find(/^Yom Kippur$/i);
   const shavuot = find(/^Shavuot$/i);
@@ -167,8 +167,10 @@ function validate(holidays, start, end) {
 }
 async function run() {
   if(process.argv.some(arg=>arg!=="--check" && arg.startsWith("--"))) throw new Error("Unknown CLI argument");
-  const startYear=Math.max(2028,new Date().getUTCFullYear());
-  const endYear=startYear+2;
+  const thisYear=new Date().getUTCFullYear();
+  // Keep the preceding year for festivals crossing New Year (such as Hanukkah).
+  const startYear=Math.max(2028,thisYear-1);
+  const endYear=Math.max(startYear+2,thisYear+2);
   if(endYear>=2100) throw new Error("Easter conversion requires extension past 2099");
   const years=Array.from({length:endYear-startYear+1},(_,i)=>startYear+i);
   const batches=[];
