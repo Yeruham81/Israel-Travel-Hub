@@ -35,7 +35,7 @@ export function overviewHolidays(year: Year, quarter: Quarter, community: "All" 
   return holidays
     .filter(h => h.from.startsWith(String(year)))
     .filter(h => quarter === "all" || Math.floor((Number(h.from.slice(5, 7)) - 1) / 3) === quarter)
-    .filter(h => community === "All" || h.community === community)
+    .filter(h => community === "All" || (h.community === community || h.otherCommunities?.includes(community)))
     .sort((a, b) => a.from.localeCompare(b.from) || a.name.localeCompare(b.name));
 }
 
@@ -45,7 +45,7 @@ export function CompactHolidayRow({ holiday }: { holiday: Holiday }) {
     <div className="min-w-0">
       <h4 className="text-sm font-semibold leading-snug">{holiday.name}</h4>
       <p className="mt-1 text-xs leading-relaxed text-muted-foreground">{holiday.summary}</p>
-      <p className="mt-1 text-xs text-muted-foreground">{holiday.community}{holiday.certainty === "tentative" ? " · Dates tentative" : ""}{holiday.startsAt === "sunset" ? " · Starts at sunset" : ""}</p>
+      <p className="mt-1 text-xs text-muted-foreground">{[holiday.community, ...(holiday.otherCommunities || [])].join(" · ")}{holiday.certainty === "tentative" ? " · Dates tentative" : ""}{holiday.startsAt === "sunset" ? " · Starts at sunset" : ""}</p>
     </div>
     <div className="min-w-0 sm:col-start-2 lg:col-auto">
       <p className="flex items-center gap-1.5 text-xs font-medium text-foreground"><span aria-hidden="true" className={"h-2 w-2 shrink-0 rounded-full " + dotStyles[holiday.impact]} />{impactLabels[holiday.impact]}</p>
