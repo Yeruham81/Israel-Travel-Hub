@@ -102,6 +102,5 @@ export function IsraelHolidayOverview() {
           </div>)}
         </div>}
     </div>
-    <p className="mt-3 text-xs leading-relaxed text-muted-foreground">Jewish holidays begin at sunset unless stated otherwise. Muslim dates may change with local announcements.</p>
   </section>;
 }
