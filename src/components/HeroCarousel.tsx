@@ -62,14 +62,15 @@ export function HeroCarousel({ slides, children }: { slides: HeroSlide[]; childr
   const autoplayOn = playing && (!reduced || userChosePlay);
   const running = autoplayOn && !hovered && !focused && !hidden;
 
-  // Let the first high-priority hero photo complete before competing with
-  // another full-screen image download. Autoplay remains at 6 seconds.
+  // Defer speculative loading of slide two until after the initial mobile
+  // load window. Autoplay remains at six seconds and manual navigation can
+  // still load an image on demand, showing the current slide until ready.
   // Other slide changes warm their next image sooner, but still off the
   // critical first-paint network path.
   useEffect(() => {
     const timeout = window.setTimeout(() => {
       ensure((index + 1) % n).catch(() => undefined);
-    }, index === 0 ? 2800 : 350);
+    }, index === 0 ? 4800 : 350);
     return () => window.clearTimeout(timeout);
   }, [index, n, ensure]);
 
