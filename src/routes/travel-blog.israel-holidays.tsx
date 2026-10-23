@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { ChevronLeft, ChevronRight, CalendarDays } from "lucide-react";
 import { Breadcrumbs, OnThisPage } from "@/components/Guide";
 import { AuthorCard } from "@/components/AuthorCard";
@@ -10,6 +10,7 @@ import { migrationPhotos } from "@/data/guideMigrationPhotos";
 import { holidays, HOLIDAY_COVERAGE, intersects, type Impact } from "@/data/israelHolidays";
 import { IsraelHolidayOverview } from "@/components/IsraelHolidayOverview";
 import { TripHolidayResults } from "@/components/TripHolidayResults";
+import { israelToday, rollingMonths, type Month } from "@/data/holidayRolling";
 
 const PATH = "/travel-blog/israel-holidays/";
 const TITLE = "Israel Holidays Calendar: Dates & Travel Planning";
@@ -35,11 +36,6 @@ export const Route = createFileRoute("/travel-blog/israel-holidays")({
 });
 
 type DateSelection = { start:string|null; end:string|null };
-const monthStart = { year: 2026, month: 9 }; // October 2026; month is zero based.
-const months = Array.from({length:16},(_,i)=>{
-  const d=new Date(Date.UTC(monthStart.year,monthStart.month+i,1));
-  return { year:d.getUTCFullYear(),month:d.getUTCMonth(),label:d.toLocaleDateString("en-GB",{month:"long",year:"numeric",timeZone:"UTC"}) };
-});
 const week = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"];
 const fmt = (iso:string) => new Date(iso+"T12:00:00Z").toLocaleDateString("en-GB",{day:"numeric",month:"short",year:"numeric",timeZone:"UTC"});
 const impactLabel:Record<Impact,string> = {
@@ -57,8 +53,8 @@ const impactColor:Record<Impact,string> = {
 function HolidayDot({ impact }: {impact:Impact}) {
   return <span className={"inline-block h-1.5 w-1.5 rounded-full "+impactColor[impact]} aria-hidden="true"/>;
 }
-function MonthCalendar({offset,selection,onSelect}:{offset:number;selection:DateSelection;onSelect:(date:string)=>void}) {
-  const {year,month,label}=months[offset]!;
+function MonthCalendar({shownMonth,today,selection,onSelect}:{shownMonth:Month;today:string;selection:DateSelection;onSelect:(date:string)=>void}) {
+  const {year,month,label}=shownMonth;
   const leading=new Date(Date.UTC(year,month,1)).getUTCDay();
   const days=new Date(Date.UTC(year,month+1,0)).getUTCDate();
   return <div className="min-w-0 rounded-2xl border bg-card p-3 sm:p-4">
@@ -68,7 +64,7 @@ function MonthCalendar({offset,selection,onSelect}:{offset:number;selection:Date
       {Array.from({length:leading},(_,i)=><span key={"leading-"+i} aria-hidden="true" />)}
       {Array.from({length:days},(_,i)=>{
         const date=[year,String(month+1).padStart(2,"0"),String(i+1).padStart(2,"0")].join("-");
-        const isValid=date>=HOLIDAY_COVERAGE.from && date<=HOLIDAY_COVERAGE.to;
+        const isValid=date>=today && date>=HOLIDAY_COVERAGE.from && date<=HOLIDAY_COVERAGE.to;
         const isStart=selection.start===date;
         const isEnd=selection.end===date;
         const between=!!(selection.start && selection.end && date>selection.start && date<selection.end);
@@ -96,7 +92,17 @@ function MonthCalendar({offset,selection,onSelect}:{offset:number;selection:Date
   </div>;
 }
 export function IsraelHolidaysPage() {
-  const [monthOffset,setMonthOffset]=useState(3); // Jan 2027
+  const [today,setToday]=useState(()=>israelToday());
+  const [monthOffset,setMonthOffset]=useState(0);
+  const months=useMemo(()=>rollingMonths(today,HOLIDAY_COVERAGE.to),[today]);
+  useEffect(()=>{
+    const refresh=()=>{const day=israelToday();setToday(old=>old===day?old:day);};
+    const id=window.setInterval(refresh,60*60*1000);
+    window.addEventListener("focus",refresh);
+    document.addEventListener("visibilitychange",refresh);
+    return ()=>{window.clearInterval(id);window.removeEventListener("focus",refresh);document.removeEventListener("visibilitychange",refresh);};
+  },[]);
+  useEffect(()=>setMonthOffset(0),[today.slice(0,7)]);
   const [selection,setSelection]=useState<DateSelection>({start:null,end:null});
   const start=selection.start;
   const end=selection.end;
@@ -131,7 +137,7 @@ export function IsraelHolidaysPage() {
           <div><h2 id="trip-calendar-heading" className="text-3xl">Choose your travel dates</h2><p className="mt-2 max-w-3xl leading-relaxed text-muted-foreground">Select your arrival and departure dates to see which holidays fall during your visit and how they may affect transport, opening hours and crowds.</p></div>
           <button type="button" onClick={()=>setSelection({start:null,end:null})} className="rounded-lg border bg-background px-4 py-2 text-sm font-semibold hover:bg-secondary">Clear dates</button>
         </div>
-        <div className="mt-5 rounded-2xl border bg-secondary/40 p-3 sm:p-5">
+        {months.length===0 ? <p className="mt-4 rounded-xl border bg-card p-5 text-sm">Upcoming holiday dates are being updated. Check back after the calendar refresh.</p> : <div className="mt-5 rounded-2xl border bg-secondary/40 p-3 sm:p-5">
           <div className="flex flex-wrap items-center justify-between gap-3">
             <button type="button" disabled={monthOffset===0} aria-label="Previous month" onClick={()=>setMonthOffset(n=>Math.max(0,n-1))} className="rounded-lg border bg-background p-2 disabled:opacity-40"><ChevronLeft size={22}/></button>
             <label className="flex items-center gap-2 text-sm font-semibold"><CalendarDays size={18}/><span className="sr-only">Jump to month</span>
@@ -143,15 +149,15 @@ export function IsraelHolidaysPage() {
           </div>
           <p className="mt-3 text-center text-sm text-muted-foreground" role="status" aria-live="polite">{!start?"Choose your arrival date":!end?"Choose your departure date":fmt(start)+" → "+fmt(end)}</p>
           <div className="mt-4 grid gap-4 lg:grid-cols-2">
-            <MonthCalendar offset={monthOffset} selection={selection} onSelect={selectDate}/>
-            {monthOffset+1<months.length && <div className="hidden lg:block"><MonthCalendar offset={monthOffset+1} selection={selection} onSelect={selectDate}/></div>}
+            <MonthCalendar shownMonth={months[monthOffset]!} today={today} selection={selection} onSelect={selectDate}/>
+            {monthOffset+1<months.length && <div className="hidden lg:block"><MonthCalendar shownMonth={months[monthOffset+1]!} today={today} selection={selection} onSelect={selectDate}/></div>}
           </div>
           <div className="mt-4 flex flex-wrap gap-x-4 gap-y-2 text-xs text-muted-foreground" aria-label="Calendar symbols">
             {(Object.keys(impactLabel) as Impact[]).map(key=><span key={key} className="inline-flex items-center gap-1.5"><HolidayDot impact={key}/>{impactLabel[key]}</span>)}
             <span><strong>eve</strong> = Shabbat begins Friday evening; <strong>Sh</strong> = Saturday</span>
           </div>
-          <p className="mt-3 text-xs text-muted-foreground">Jewish holidays begin at sunset; Muslim dates are provisional. The calendar currently extends through 1 January 2028, when Hanukkah ends.</p>
-        </div>
+          <p className="mt-3 text-xs text-muted-foreground">Jewish holidays begin at sunset; Muslim dates are provisional. Available dates extend through {new Date(HOLIDAY_COVERAGE.to+"T12:00:00Z").toLocaleDateString("en-GB",{day:"numeric",month:"long",year:"numeric",timeZone:"UTC"})}.</p>
+        </div>}
       </section>
       <TripHolidayResults start={start} end={end} />
       <IsraelHolidayOverview />
@@ -187,16 +193,16 @@ export function IsraelHolidaysPage() {
             ["Why do some overseas calendars show extra Jewish festival days?","Israel follows seven days of Passover and one day of Shavuot. Shemini Atzeret and Simchat Torah also share one day. Some communities outside Israel observe additional festival days."],
             ["Why do some holiday dates start the evening before?","Jewish festivals usually begin at sunset, so travel or restaurant plans on the preceding evening can already be affected. The calendar shows that starting date."],
             ["Are Ramadan and Eid dates fixed?","The Islamic calendar follows lunar observations. Dates shown for Ramadan and Eid are estimates until relevant local religious authorities confirm them."],
-            ["When is Easter celebrated in Jerusalem in 2027?","Western Easter Sunday is 28 March. Orthodox Easter Sunday is 2 May; the Holy Fire ceremony takes place on Orthodox Holy Saturday, 1 May. Religious services can affect access around the Old City."],
+            ["Why do Western and Orthodox churches celebrate Easter on different dates?","They use different methods to calculate Easter. Processions, church services and the Holy Fire ceremony on Orthodox Holy Saturday can affect access around Jerusalem's Old City."],
           ].map(([q,a])=><details key={q} className="p-4"><summary className="cursor-pointer font-semibold">{q}</summary><p className="mt-2 leading-relaxed text-muted-foreground">{a}</p></details>)}
         </div>
       </section>
       <section id="sources" className="mt-12 scroll-mt-24">
         <h2 className="text-2xl">Holiday calendars and travel resources</h2>
-        <p className="mt-2 text-sm text-muted-foreground">Dates reviewed: 23 October 2026. School breaks differ by school sector; Muslim holiday dates can shift with local announcements.</p>
+        <p className="mt-2 text-sm text-muted-foreground">Calendar updated: {HOLIDAY_COVERAGE.checkedAt}. School breaks differ by school sector; Muslim holiday dates can shift with local announcements.</p>
         <ul className="mt-4 list-disc space-y-2 pl-5 text-sm">
-          <li><a className="text-primary underline" href="https://www.hebcal.com/holidays/2027?i=on" target="_blank" rel="noopener noreferrer">Hebcal — Jewish holidays (Israel setting)</a></li>
-          <li><a className="text-primary underline" href="https://www.timeanddate.com/holidays/israel/2027" target="_blank" rel="noopener noreferrer">Time and Date — Israel holidays and estimated observances</a></li>
+          <li><a className="text-primary underline" href={"https://www.hebcal.com/holidays/"+today.slice(0,4)+"?i=on"} target="_blank" rel="noopener noreferrer">Hebcal — Jewish holidays (Israel setting)</a></li>
+          <li><a className="text-primary underline" href={"https://www.timeanddate.com/holidays/israel/"+today.slice(0,4)} target="_blank" rel="noopener noreferrer">Time and Date — Israel holidays and estimated observances</a></li>
           <li><a className="text-primary underline" href="https://parents.education.gov.il/gov-education/vacations-camps-leisure/schedule/" target="_blank" rel="noopener noreferrer">Israel Ministry of Education — school vacation calendar</a></li>
           <li><a className="text-primary underline" href="https://bus.gov.il/" target="_blank" rel="noopener noreferrer">Israel Ministry of Transport — check current bus services</a></li>
           <li><a className="text-primary underline" href="https://www.rail.co.il/" target="_blank" rel="noopener noreferrer">Israel Railways — train schedules</a></li>
