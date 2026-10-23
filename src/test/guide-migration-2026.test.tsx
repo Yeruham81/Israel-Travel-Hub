@@ -82,9 +82,13 @@ describe("October planning, city and heritage guide migration", () => {
     const router = await routerAt("/attractions/");
     const Hub = AttractionsRoute.options.component!;
     const html = renderToString(<RouterContextProvider router={router}><Hub /></RouterContextProvider>);
-    for (const id of [...Object.keys(cityCultureGuides), ...Object.keys(heritageGuides), "deadSea", "topTen"] as TravelGuideId[]) {
+    for (const id of [...Object.keys(cityCultureGuides), ...Object.keys(heritageGuides), "deadSea"] as TravelGuideId[]) {
       expect(html).toContain(`href="${travelGuidePaths[id]}"`);
     }
+    expect(html).toContain('id="browse-regions-heading"');
+    expect(html).toContain('href="#nazareth-lower-galilee"');
+    expect(html).toContain("Nazareth &amp; Galilee");
+    expect(html).not.toContain(`href="${travelGuidePaths.topTen}"`);
     expect(Object.values(travelGuidePaths)).not.toContain("/travel-blog/israel-safe-to-travel/");
     expect(travelGuides.telAvivMuseums.sections.some(section => section.id === "independence")).toBe(true);
     expect(travelGuides.haifaMuseums.sections.find(section => section.id === "outdoors")?.paragraphs.join(" ")).toContain("not a museum");
