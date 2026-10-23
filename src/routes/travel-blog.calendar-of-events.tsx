@@ -8,7 +8,7 @@ import { CANONICAL_ORIGIN, SITE_NAME, jsonLd, pageMeta } from "@/lib/site";
 import { authorLd } from "@/lib/author";
 import { migrationPhotos } from "@/data/guideMigrationPhotos";
 import { israelToday, rollingMonths, type Month } from "@/data/holidayRolling";
-import { CONFIRMED_EVENTS, RECURRING_FESTIVALS, EVENT_CATEGORIES, EVENT_REGIONS, EVENT_CHECK_DATE, EVENT_FEED_CHECK_DATE, publishedEvents, publishedFestivalProgramme, filterConfirmedEvents, filterRecurringFestivals, type EventCategory, type EventRegion, type ConfirmedEvent, type RecurringFestival } from "@/data/israelEvents";
+import { CONFIRMED_EVENTS, RECURRING_FESTIVALS, EVENT_CATEGORIES, EVENT_REGIONS, EVENT_CHECK_DATE, EVENT_FEED_CHECK_DATE, publishedEvents, filterConfirmedEvents, filterRecurringFestivals, type EventCategory, type EventRegion, type ConfirmedEvent, type RecurringFestival } from "@/data/israelEvents";
 import { eventLinks } from "@/data/eventTicketLinks";
 import { recordOutboundClick, relFor } from "@/lib/outbound";
 
@@ -50,7 +50,7 @@ function ExternalEventLink({id,label,tickets=false,sourceUrl}:{id:string;label?:
     {tickets&&<Ticket size={15} aria-hidden="true"/>}{title}<ExternalLink size={14} aria-hidden="true"/>
   </a>;
 }
-function EventListItem({event,programme=[]}:{event:ConfirmedEvent;programme?:ConfirmedEvent[]}) {
+function EventListItem({event}:{event:ConfirmedEvent}) {
   const links=eventLinks(event.id,event.sourceUrl);
   return <li className="grid min-w-0 gap-2 border-b px-3 py-4 last:border-0 sm:grid-cols-[120px_minmax(0,1fr)] sm:gap-4 sm:px-4">
     <div className="text-sm font-semibold tabular-nums">{shortDate(event.from)}{event.from!==event.to&&<> – {shortDate(event.to)}</>}</div>
@@ -61,14 +61,6 @@ function EventListItem({event,programme=[]}:{event:ConfirmedEvent;programme?:Con
       <p className="mt-2 text-sm leading-relaxed"><strong>Good to know:</strong> {event.visitorNote}</p>
       {event.sourceName&&<p className="mt-1 text-xs text-muted-foreground">Listing source: {event.sourceName} · checked {shortDate(event.checkedAt)}. Check the provider for latest status.</p>}
       {event.languageNote&&<p className="mt-1 text-xs text-muted-foreground">{event.languageNote}</p>}
-      {programme.length>0&&<details className="mt-3 rounded-lg border bg-secondary/30 p-3">
-        <summary className="cursor-pointer text-sm font-semibold text-primary">Explore {programme.length} festival performances and dates</summary>
-        <p className="mt-2 text-xs text-muted-foreground">Individual shows are part of the festival programme, not separate festival editions. Check availability, performance language and admission terms with the organiser.</p>
-        <ul className="mt-2 max-h-80 divide-y overflow-y-auto" aria-label="Festival performance programme">{programme.map(show=><li key={show.id} className="flex flex-wrap items-start justify-between gap-x-4 gap-y-1 py-2 text-sm">
-          <span className="min-w-0 flex-1"><strong>{show.title}</strong><span className="block text-xs text-muted-foreground">{shortDate(show.from)}{show.startTime?" · "+show.startTime:""} · {show.location}</span></span>
-          <ExternalEventLink id={show.id} sourceUrl={show.sourceUrl} label="Show details"/>
-        </li>)}</ul>
-      </details>}
       <div className="mt-3 flex flex-wrap items-center gap-x-4 gap-y-2">
         {links.ticket&&<ExternalEventLink id={event.id} tickets/>}
         <ExternalEventLink id={event.id} sourceUrl={event.sourceUrl} label={event.sourceName?"Event details on "+event.sourceName:undefined}/>
@@ -137,12 +129,11 @@ export function IsraelEventsPage() {
     return d<old.start?{start:d,end:old.start}:{start:old.start,end:d};
   });
   const complete=Boolean(selection.start&&selection.end);
-  const programme=useMemo(()=>publishedFestivalProgramme(today,"red-sea-jazz-2026")
-    .filter(e=>!complete||Boolean(selection.start&&selection.end&&e.to>=selection.start&&e.from<=selection.end)),[today,complete,selection.start,selection.end]);
   const upcoming=useMemo(()=>filterConfirmedEvents(events,{
     today, start:complete?selection.start:null,end:complete?selection.end:null,region,category
   }),[events,today,selection.start,selection.end,complete,region,category]);
-  const recurring=useMemo(()=>filterRecurringFestivals(RECURRING_FESTIVALS,region,category),[region,category]);
+  const recurring=useMemo(()=>filterRecurringFestivals(RECURRING_FESTIVALS,region,category)
+    .filter(item=>!events.some(event=>event.id.startsWith(item.id+"-")&&event.to>=today)),[region,category,events,today]);
   return <main className="mx-auto max-w-6xl px-4 pb-12">
     <article>
       <header className="pt-6">
@@ -200,7 +191,7 @@ export function IsraelEventsPage() {
       <section id="confirmed-events" className="mt-10 scroll-mt-24">
         <h2 className="text-3xl">Upcoming confirmed events</h2>
         <p className="mt-2 text-sm text-muted-foreground">{complete?dateFormat(selection.start!)+" – "+dateFormat(selection.end!):"Visitor-relevant events with published dates from today onwards"} · {upcoming.length} {upcoming.length===1?"event":"events"} in our selected listings. This is not a complete concert directory.</p>
-        {upcoming.length>0?<ul className="mt-4 overflow-hidden rounded-xl border bg-card" aria-label="Confirmed events">{upcoming.map(event=><EventListItem key={event.id} event={event} programme={event.id==="red-sea-jazz-2026"?programme:[]}/>)}</ul>:
+        {upcoming.length>0?<ul className="mt-4 overflow-hidden rounded-xl border bg-card" aria-label="Confirmed events">{upcoming.map(event=><EventListItem key={event.id} event={event}/>)}</ul>:
           <div className="mt-4 rounded-xl border bg-card p-4">
             <p className="text-sm font-medium">No verified events are currently listed for {complete?"these dates and filters":"these filters"}.</p>
             <p className="mt-2 text-sm text-muted-foreground">This does not mean there are no events. Check the city event calendars linked below; additional programmes may be announced later.</p>
@@ -227,7 +218,7 @@ export function IsraelEventsPage() {
           <li><a href="https://www.haifa.muni.il/culture/city-events/" target="_blank" rel="noopener noreferrer" className="text-primary underline">Haifa municipality — cultural events</a></li>
           <li><a href="https://www.eilat.muni.il/events/" target="_blank" rel="noopener noreferrer" className="text-primary underline">Eilat municipality — events calendar</a></li>
         </ul>
-        <p className="mt-3 text-xs text-muted-foreground">Editorial events checked {dateFormat(EVENT_CHECK_DATE)}. {EVENT_FEED_CHECK_DATE?"Ticketmaster data last checked "+dateFormat(EVENT_FEED_CHECK_DATE)+". Only reviewed highlights and festival programme entries are included.":"Additional event data will appear after a licensed source is connected and reviewed."}</p>
+        <p className="mt-3 text-xs text-muted-foreground">Editorial events checked {dateFormat(EVENT_CHECK_DATE)}. {EVENT_FEED_CHECK_DATE?"Ticketmaster data last checked "+dateFormat(EVENT_FEED_CHECK_DATE)+". Only reviewed highlights and one listing per confirmed festival edition are shown.":"Additional event data will appear after a licensed source is connected and reviewed."}</p>
       </section>
       <p className="mt-8 text-sm"><Link to="/guides/" className="font-medium text-primary underline">Explore more travel guides →</Link></p>
     </article>
