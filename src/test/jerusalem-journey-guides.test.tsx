@@ -62,7 +62,7 @@ describe("Jerusalem independent day-trip planning guides", () => {
   it("retains original SEO URLs, updated metadata and real source references", async () => {
     for (const [id, route] of [["bethlehem", BethlehemRoute], ["jerusalemDeadSea", DeadSeaRoute]] as const) {
       const guide = travelGuides[id];
-      expect(guide.updatedAt).toBe("2026-10-23");
+      expect(guide.updatedAt).toBe("2026-10-24");
       expect(guide.faqs.length).toBeGreaterThanOrEqual(7);
       expect(guide.sourceIds.every((sourceId) => getSource(sourceId)?.url.startsWith("https://"))).toBe(true);
       for (const section of guide.sections) for (const link of section.inlineLinks || []) {

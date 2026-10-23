@@ -6,6 +6,7 @@ import { attractionPath, type AttractionId } from "@/data/attractionGuideTypes";
 import { CANONICAL_ORIGIN, SITE_NAME, jsonLd, pageMeta } from "@/lib/site";
 import { authorLd } from "@/lib/author";
 import { JerusalemClusterLinks, type JerusalemClusterKey } from "@/components/JerusalemClusterLinks";
+import { JerusalemPartnerOffers } from "@/components/JerusalemPartnerOffers";
 
 export function attractionMeta(id: AttractionId) {
   const a = attractionGuides[id];
@@ -77,8 +78,10 @@ export function AttractionGuidePage({ id }: {id:AttractionId}) {
       <p>Use the relevant attraction or managing body's current website to confirm opening hours, reservations, accessibility and seasonal restrictions.</p>
       <ul className="mt-4 grid gap-3 sm:grid-cols-2">{a.official.map(o=><li key={o.url}><a href={o.url} target="_blank" rel="noopener noreferrer" className="block rounded-xl border bg-card p-4 font-semibold text-primary underline underline-offset-4">{o.label} <span className="sr-only">(opens in a new tab)</span>↗</a></li>)}</ul>
     </Section>
+    {a.region === "Jerusalem" && <JerusalemPartnerOffers id={id} />}
     {a.region === "Jerusalem" && <JerusalemClusterLinks pageKey={id as JerusalemClusterKey} />}
     <FaqList faqs={a.faqs}/>
+    {a.region !== "Jerusalem" && <>
     <RelatedLinks title="Plan a multi-day Israel itinerary" items={
       a.region === "Jerusalem" ? [
         { label: "Israel in 3 days: Jerusalem and more", to: "/travel-blog/israel-itinerary-3-days/" },
@@ -102,5 +105,6 @@ export function AttractionGuidePage({ id }: {id:AttractionId}) {
       {label:areaLinks[a.region]!.label,to:areaLinks[a.region]!.to},
       {label:"All attractions",to:"/attractions/" as const},
     ]}/>
+    </>}
   </main>;
 }

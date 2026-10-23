@@ -97,6 +97,7 @@ export function TravelGuidePage({ id }: { id: TravelGuideId }) {
   const guide = travelGuides[id];
   const providers = guide.providerPageId ? linksForPage(guide.providerPageId) : [];
   const isJerusalemDayJourney = id === "bethlehem" || id === "jerusalemDeadSea";
+  const isJerusalemCluster = (["jerusalem", "jerusalemChurches", "jerusalemShopping", "jerusalemDayTrips", "bethlehem", "jerusalemDeadSea"] as string[]).includes(id);
   return <main className="mx-auto max-w-5xl px-4 pb-8">
     <article>
       <header className="pt-6">
@@ -129,19 +130,19 @@ export function TravelGuidePage({ id }: { id: TravelGuideId }) {
       <section id="checklist" aria-label="Travel checklist" className="mt-12 scroll-mt-24"><Checklist title="Before you go" items={guide.checklist} /></section>
       {providers.length > 0 && <section id="provider-options" aria-labelledby="providers-h" className="mt-14"><h2 id="providers-h" className="text-3xl">Compare current eSIM plans</h2><p className="mt-3 leading-relaxed text-muted-foreground">These options are based on published product information, not an on-location speed test or a cheapest-price ranking. Links marked “Sponsored link” may earn me a commission at no extra cost to you. Select Israel and verify the exact package before paying.</p><ul className="mt-5 grid gap-4 md:grid-cols-2">{providers.map((link) => <ProviderCard key={link.id} link={link} pageId={guide.providerPageId!} />)}</ul></section>}
       <JerusalemPartnerOffers id={id} />
-      {(["jerusalem", "jerusalemChurches", "jerusalemShopping", "jerusalemDayTrips", "bethlehem", "jerusalemDeadSea"] as string[]).includes(id) && <JerusalemClusterLinks pageKey={id as JerusalemClusterKey} />}
+      {isJerusalemCluster && <JerusalemClusterLinks pageKey={id as JerusalemClusterKey} />}
       <FaqList faqs={guide.faqs} />
       {isJerusalemDayJourney && <JerusalemJourneyResources id={id} />}
       <SourceList ids={sourcesFor(guide)} />
-      <RelatedLinks title="Related practical guides" currentPath={travelGuidePaths[id]} items={guide.related.map((guideId) => ({ label: travelGuides[guideId].title, to: travelGuidePaths[guideId] }))} />
-      {(id === "jerusalem" || id === "deadSea" || id === "israel" || id === "travelTips") &&
+      {!isJerusalemCluster && <RelatedLinks title="Related practical guides" currentPath={travelGuidePaths[id]} items={guide.related.map((guideId) => ({ label: travelGuides[guideId].title, to: travelGuidePaths[guideId] }))} />}
+      {(id === "deadSea" || id === "israel" || id === "travelTips") &&
         <RelatedLinks title="Build a multi-day itinerary" items={[
           { label: "A practical 3-day route", to: "/travel-blog/israel-itinerary-3-days/" },
           { label: "A classic 5-day route", to: "/travel-blog/israel-itinerary-5-days/" },
           { label: "A 7-day trip with the Galilee", to: "/travel-blog/israel-itinerary-7-days/" },
           { label: "An extended 10-day trip", to: "/travel-blog/israel-itinerary-10-days/" },
         ]} />}
-      <RelatedLinks title="Plan the next part of your trip" items={guide.services} />
+      {!isJerusalemCluster && <RelatedLinks title="Plan the next part of your trip" items={guide.services} />}
       {guide.reading && <section aria-labelledby="reading-h" className="mt-12"><h2 id="reading-h" className="text-2xl">More on this topic</h2><ul className="mt-4 space-y-3">{guide.reading.map((reading) => <li key={reading.href} className="rounded-xl border p-4"><a href={reading.href} target="_blank" rel="noopener noreferrer" className="font-medium text-primary underline">{reading.label}<span className="sr-only"> (opens in a new tab)</span></a><p className="mt-1 text-sm text-muted-foreground">{reading.note}</p></li>)}</ul></section>}
       <div className="mt-12 rounded-2xl bg-navy p-6 text-navy-foreground"><h2 className="text-2xl">Explore more Israel travel guides</h2><p className="mt-2 opacity-85">Find practical advice by topic, from airport arrivals to places to stay and days out.</p><Link to="/guides/" className="btn btn-light mt-4">Browse all guides</Link></div>
     </article>

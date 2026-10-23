@@ -82,7 +82,7 @@ describe("Jerusalem content and reciprocal guide cluster", () => {
 
   it("prepares independent, non-displayed offer slots rather than unapproved affiliate links", () => {
     const slots = Object.values(jerusalemAffiliatePageIds);
-    expect(slots.length).toBe(6);
+    expect(slots.length).toBe(10);
     expect(new Set(slots).size).toBe(slots.length);
     expect(slots.every(slot => /^jerusalem-/.test(slot!))).toBe(true);
   });

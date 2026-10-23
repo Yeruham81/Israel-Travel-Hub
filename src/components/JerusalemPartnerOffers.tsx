@@ -1,6 +1,8 @@
 import { ProviderCard } from "@/components/Guide";
 import { linksForPage } from "@/data/registry";
 import type { TravelGuideId } from "@/data/registry";
+import type { AttractionId } from "@/data/attractionGuideTypes";
+type JerusalemOfferTarget = TravelGuideId | AttractionId;
 
 /**
  * Reserved editorial-to-booking placements for approved affiliate/provider offers.
@@ -8,18 +10,22 @@ import type { TravelGuideId } from "@/data/registry";
  * Offers are enabled only by adding fully reviewed ProviderLink records to the
  * existing registry using these pageIds.
  */
-const pageIds: Partial<Record<TravelGuideId, string>> = {
+const pageIds: Partial<Record<JerusalemOfferTarget, string>> = {
   jerusalem: "jerusalem-city-activities",
   jerusalemChurches: "jerusalem-church-guided-walks",
   jerusalemShopping: "jerusalem-market-experiences",
   jerusalemDayTrips: "jerusalem-departure-tours",
   bethlehem: "jerusalem-bethlehem-tours",
   jerusalemDeadSea: "jerusalem-deadsea-excursions",
+  "old-city-jerusalem": "jerusalem-old-city-walks",
+  "mount-of-olives": "jerusalem-mount-olives-guides",
+  "mount-zion": "jerusalem-mount-zion-guides",
+  "museums-in-jerusalem": "jerusalem-museum-admission",
 };
 
 export const jerusalemAffiliatePageIds = pageIds;
 
-export function JerusalemPartnerOffers({ id }: { id: TravelGuideId }) {
+export function JerusalemPartnerOffers({ id }: { id: JerusalemOfferTarget }) {
   const pageId = pageIds[id];
   if (!pageId) return null;
   const offers = linksForPage(pageId);
