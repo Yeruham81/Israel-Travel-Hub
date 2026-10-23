@@ -14,8 +14,8 @@ describe("Accommodation URL and deleted Destinations directory", () => {
     const oldLinks: string[] = [];
     for (const file of [...sources("src"), ...sources("scripts")]) {
       const content = readFileSync(file, "utf8");
-      // Allow historic URLs ONLY inside this regression test's own test patterns.
-      if (file.endsWith("accommodation-paths.test.ts")) continue;
+      // Tests intentionally assert that legacy paths are absent; inspect only production sources.
+      if (file.includes("src/test/") || /\.test\.[jt]sx?$/.test(file)) continue;
       if (/["'\x60]\/(?:hotels|destinations)\/?["'\x60]/.test(content) ||
           /@\/routes\/hotels\b/.test(content) ||
           /\/routes\/destinations(?:\.tsx?)?["'\x60]/.test(content)) oldLinks.push(file);
