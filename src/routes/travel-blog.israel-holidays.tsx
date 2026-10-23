@@ -214,6 +214,15 @@ export function IsraelHolidaysPage() {
             <div className="rounded-xl border bg-card p-5">
               <p className="font-semibold">{fmt(start)} – {fmt(end)}</p>
               <p className="mt-2 text-sm text-muted-foreground">{matched.length} relevant holiday {matched.length===1?"period":"periods"} found, plus {shabbat.length} Friday/Saturday dates to consider. These are planning flags, not live transport or booking availability.</p>
+              {(start && end) && ([
+                {label:"Arrival",day:start},
+                {label:"Departure",day:end},
+              ] as const).map(({label,day})=>{
+                const major=matched.filter(h=>h.impact==="major" && intersects(day,day,h.from,h.to));
+                const dow=new Date(day+"T12:00:00Z").getUTCDay();
+                if(!major.length && dow!==5 && dow!==6) return null;
+                return <p key={label} className="mt-3 rounded-lg border border-amber-300/60 bg-secondary p-3 text-sm leading-relaxed"><strong>{label} date alert ({fmt(day)}):</strong> {major.length?"Overlaps "+major.map(h=>h.name).join(", ")+". Check flight, rail, bus and pickup arrangements at the relevant times. ":""}{dow===5?"Shabbat begins Friday evening; check the last available departure before sunset.":dow===6?"Saturday Shabbat may limit buses and trains until after nightfall.":""}</p>;
+              })}
               <label className="mt-4 block text-sm font-medium">How do you expect to get around?
                 <select value={style} onChange={e=>setStyle(e.target.value as TripStyle)} className="mt-2 block w-full max-w-sm rounded-lg border bg-background px-3 py-2.5 text-base">
                   <option value="mixed">Not decided / mixed transport</option><option value="public">Buses and trains</option><option value="private">Taxi or private driver</option><option value="car">Rental car</option>
