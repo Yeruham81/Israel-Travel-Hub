@@ -28,7 +28,14 @@ export function withSecurityHeaders(response: Response, request: Request): Respo
   }
 
   const contentType = headers.get("content-type") ?? "";
-  if (isLiveWebsite(request) && /^text\/html(?:;|$)/i.test(contentType)) {
+  const html = /^text\/html(?:;|$)/i.test(contentType);
+  if (html && !headers.has("Content-Security-Policy")) {
+    // Enforce two low-risk protections that do not block inline hydration,
+    // external map widgets, or Lovable's editor iframe. A full script/style
+    // CSP requires a separate nonce-based rollout and browser validation.
+    headers.set("Content-Security-Policy", "base-uri 'self'; object-src 'none'");
+  }
+  if (isLiveWebsite(request) && html) {
     // Clickjacking protection only for independently hosted production pages.
     // Do not apply to JSON APIs, static assets, or Lovable's iframe preview.
     if (!headers.has("X-Frame-Options")) headers.set("X-Frame-Options", "SAMEORIGIN");
