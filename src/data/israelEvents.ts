@@ -92,7 +92,7 @@ export const CONFIRMED_EVENTS:ConfirmedEvent[] = [
     location:"Eilat port festival venues",category:"music",
     description:"A four-day festival featuring jazz performances by Israeli and international musicians.",
     visitorNote:"Concerts have individual doors and start times; check the festival timetable and return transport.",
-    sourceUrl:"https://redseajazz.co.il/faq/",checkedAt:EVENT_CHECK_DATE,
+    sourceUrl:"https://redseajazz.co.il/",checkedAt:EVENT_CHECK_DATE,
   },
   {
     id:"red-sea-bridge-2026",title:"Red Sea International Bridge Festival 2026",
