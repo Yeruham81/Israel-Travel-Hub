@@ -41,8 +41,8 @@ describe("Attractions regional scaffold and reciprocal navigation", () => {
     expect(attractionRegionsForTours["nazareth-galilee"]?.map(link => link.hash)).toEqual([
       "nazareth-lower-galilee", "sea-of-galilee",
     ]);
-    expect(attractionRegionsForTours["northern-coast"]?.[0].hash).toBe("haifa-coast");
-    expect(attractionRegionsForTours["eilat-red-sea"]?.[0].hash).toBe("negev-eilat");
+    expect(attractionRegionsForTours["northern-coast"]?.[0]?.hash).toBe("haifa-coast");
+    expect(attractionRegionsForTours["eilat-red-sea"]?.[0]?.hash).toBe("negev-eilat");
     expect(attractionRegionsForTours["bethlehem-jericho"]).toBeUndefined();
   });
 
