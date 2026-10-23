@@ -150,7 +150,7 @@ export function IsraelHolidaysPage() {
             {(Object.keys(impactLabel) as Impact[]).map(key=><span key={key} className="inline-flex items-center gap-1.5"><HolidayDot impact={key}/>{impactLabel[key]}</span>)}
             <span><strong>eve</strong> = Shabbat begins Friday evening; <strong>Sh</strong> = Saturday</span>
           </div>
-          <p className="mt-3 text-xs text-muted-foreground">Israel dates; many Jewish observances begin the previous sunset. Dates for Muslim observances remain tentative until local confirmation. Calendar days are shown in local date format without promising precise opening or closing hours.</p>
+          <p className="mt-3 text-xs text-muted-foreground">Jewish holidays begin at sunset; Muslim dates are provisional. The calendar currently extends through 1 January 2028, when Hanukkah ends.</p>
         </div>
       </section>
       <TripHolidayResults start={start} end={end} />
