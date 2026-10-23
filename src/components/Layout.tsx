@@ -1,7 +1,7 @@
 import { Link, useRouterState } from "@tanstack/react-router";
-import { useEffect, useId, useState, type ReactNode } from "react";
+import { lazy, Suspense, useEffect, useId, useState, type ReactNode } from "react";
 import { ChevronDown, Compass } from "lucide-react";
-import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetDescription } from "@/components/ui/sheet";
+
 import { allNavGroups, serviceNav, serviceDomains, hotelNav, utilityNav, footerNav, legalNav, type SidebarNavItem } from "@/data/nav";
 import { relFor } from "@/lib/outbound";
 
@@ -107,8 +107,12 @@ export function GlobalNav({ onNavigate }: { onNavigate?: () => void }) {
 
 const headerNav = serviceDomains;
 
+// Keep Radix dialog code off the initial mobile bundle until Menu is clicked.
+const MobileNavigationSheet = lazy(() => import("@/components/MobileNavigationSheet"));
+
 export function SiteHeader() {
   const [open, setOpen] = useState(false);
+  const [hasOpened, setHasOpened] = useState(false);
   const pathname = useRouterState({ select: (s) => s.location.pathname });
   useEffect(() => setOpen(false), [pathname]);
   return (
@@ -122,18 +126,16 @@ export function SiteHeader() {
             ))}
           </ul>
         </nav>
-        <button type="button" onClick={() => setOpen(true)} className="btn btn-primary shrink-0 whitespace-nowrap gap-1 px-3 py-2 text-sm lg:hidden" aria-haspopup="dialog" aria-expanded={open}>
+        <button type="button" onClick={() => { setHasOpened(true); setOpen(true); }} className="btn btn-primary shrink-0 whitespace-nowrap gap-1 px-3 py-2 text-sm lg:hidden" aria-haspopup="dialog" aria-expanded={open}>
           <Compass className="h-4 w-4" aria-hidden /> Menu
         </button>
-        <Sheet open={open} onOpenChange={setOpen}>
-          <SheetContent side="left" className="w-[85vw] max-w-sm overflow-y-auto">
-            <SheetHeader className="mb-4 text-left">
-              <SheetTitle className="font-serif text-2xl">Explore Israel</SheetTitle>
-              <SheetDescription>Transportation, tours, accommodation, attractions, religious sites and travel tips for your trip.</SheetDescription>
-            </SheetHeader>
-            <GlobalNav onNavigate={() => setOpen(false)} />
-          </SheetContent>
-        </Sheet>
+        <Suspense fallback={null}>
+          {hasOpened && (
+            <MobileNavigationSheet open={open} onOpenChange={setOpen}>
+              <GlobalNav onNavigate={() => setOpen(false)} />
+            </MobileNavigationSheet>
+          )}
+        </Suspense>
       </div>
     </header>
   );
