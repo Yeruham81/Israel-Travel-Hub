@@ -88,7 +88,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     ],
     links: [
       // Fonts are served by this origin. Preload only the two faces used at first paint.
-      // This avoids the blocking Google Fonts CSS -> fonts.gstatic.com request chain.
+      // This avoids a render-blocking cross-origin stylesheet and its font request chain.
       { rel: "preload", href: "/fonts/instrument-sans-latin-wght-normal.woff2", as: "font", type: "font/woff2", crossOrigin: "anonymous" },
       { rel: "preload", href: "/fonts/newsreader-latin-400.woff2", as: "font", type: "font/woff2", crossOrigin: "anonymous" },
       {
