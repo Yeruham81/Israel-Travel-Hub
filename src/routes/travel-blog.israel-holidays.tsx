@@ -204,6 +204,7 @@ export function IsraelHolidaysPage() {
         <ul className="mt-4 list-disc space-y-2 pl-5 text-sm">
           <li><a className="text-primary underline" href={"https://www.hebcal.com/holidays/"+today.slice(0,4)+"?i=on"} target="_blank" rel="noopener noreferrer">Hebcal — Jewish holidays (Israel setting)</a></li>
           <li><a className="text-primary underline" href={"https://www.timeanddate.com/holidays/israel/"+today.slice(0,4)} target="_blank" rel="noopener noreferrer">Time and Date — Israel holidays and estimated observances</a></li>
+          <li><a className="text-primary underline" href="https://aladhan.com/islamic-calendar-api" target="_blank" rel="noopener noreferrer">AlAdhan — calculated Islamic dates (tentative until locally confirmed)</a></li>
           <li><a className="text-primary underline" href="https://parents.education.gov.il/gov-education/vacations-camps-leisure/schedule/" target="_blank" rel="noopener noreferrer">Israel Ministry of Education — school vacation calendar</a></li>
           <li><a className="text-primary underline" href="https://bus.gov.il/" target="_blank" rel="noopener noreferrer">Israel Ministry of Transport — check current bus services</a></li>
           <li><a className="text-primary underline" href="https://www.rail.co.il/" target="_blank" rel="noopener noreferrer">Israel Railways — train schedules</a></li>
