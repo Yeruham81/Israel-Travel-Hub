@@ -69,6 +69,7 @@ jobs:
           # Builds may regenerate a route tree or sitemap. Never commit those
           # unrelated outputs, and ensure they cannot break the rebase.
           git stash push --include-untracked -m 'CI build output not part of security patch'
-          git fetch origin main
-          git rebase origin/main
+          # We are already based on the remote security branch's workflow
+          # commit. Do NOT rebase this temporary branch onto main here, because
+          # that rewrites its history and the safe non-force push is rejected.
           git push origin HEAD:security/lockfile-patches-oct-2026
