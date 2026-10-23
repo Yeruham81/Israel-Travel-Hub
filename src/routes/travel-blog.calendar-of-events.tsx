@@ -8,7 +8,7 @@ import { CANONICAL_ORIGIN, SITE_NAME, jsonLd, pageMeta } from "@/lib/site";
 import { authorLd } from "@/lib/author";
 import { migrationPhotos } from "@/data/guideMigrationPhotos";
 import { israelToday, rollingMonths, type Month } from "@/data/holidayRolling";
-import { CONFIRMED_EVENTS, RECURRING_FESTIVALS, EVENT_CATEGORIES, EVENT_REGIONS, EVENT_CHECK_DATE, filterConfirmedEvents, filterRecurringFestivals, type EventCategory, type EventRegion, type ConfirmedEvent, type RecurringFestival } from "@/data/israelEvents";
+import { CONFIRMED_EVENTS, RECURRING_FESTIVALS, EVENT_CATEGORIES, EVENT_REGIONS, EVENT_CHECK_DATE, EVENT_FEED_CHECK_DATE, publishedEvents, filterConfirmedEvents, filterRecurringFestivals, type EventCategory, type EventRegion, type ConfirmedEvent, type RecurringFestival } from "@/data/israelEvents";
 import { eventLinks } from "@/data/eventTicketLinks";
 import { recordOutboundClick, relFor } from "@/lib/outbound";
 
@@ -38,8 +38,8 @@ export const Route=createFileRoute("/travel-blog/calendar-of-events")({
   component:IsraelEventsPage,
 });
 
-function ExternalEventLink({id,label,tickets=false}:{id:string;label?:string;tickets?:boolean}) {
-  const links=eventLinks(id);
+function ExternalEventLink({id,label,tickets=false,sourceUrl}:{id:string;label?:string;tickets?:boolean;sourceUrl?:string}) {
+  const links=eventLinks(id,sourceUrl);
   const href=tickets?links.ticket:links.official;
   if(!href)return null;
   const affiliate=tickets&&links.affiliate;
@@ -51,18 +51,19 @@ function ExternalEventLink({id,label,tickets=false}:{id:string;label?:string;tic
   </a>;
 }
 function EventListItem({event}:{event:ConfirmedEvent}) {
-  const links=eventLinks(event.id);
+  const links=eventLinks(event.id,event.sourceUrl);
   return <li className="grid min-w-0 gap-2 border-b px-3 py-4 last:border-0 sm:grid-cols-[120px_minmax(0,1fr)] sm:gap-4 sm:px-4">
     <div className="text-sm font-semibold tabular-nums">{shortDate(event.from)}{event.from!==event.to&&<> – {shortDate(event.to)}</>}</div>
     <div className="min-w-0">
       <h3 className="text-base font-semibold">{event.title}</h3>
-      <p className="mt-1 flex items-start gap-1.5 text-xs text-muted-foreground"><MapPin size={14} className="mt-0.5 shrink-0" aria-hidden="true"/>{event.location} · {labels[event.region]}</p>
+      <p className="mt-1 flex items-start gap-1.5 text-xs text-muted-foreground"><MapPin size={14} className="mt-0.5 shrink-0" aria-hidden="true"/>{event.location} · {labels[event.region]}{event.startTime?" · "+event.startTime:""}</p>
       <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{event.description}</p>
       <p className="mt-2 text-sm leading-relaxed"><strong>Good to know:</strong> {event.visitorNote}</p>
+      {event.sourceName&&<p className="mt-1 text-xs text-muted-foreground">Listing source: {event.sourceName} · checked {shortDate(event.checkedAt)}. Check the provider for latest status.</p>}
       {event.languageNote&&<p className="mt-1 text-xs text-muted-foreground">{event.languageNote}</p>}
       <div className="mt-3 flex flex-wrap items-center gap-x-4 gap-y-2">
         {links.ticket&&<ExternalEventLink id={event.id} tickets/>}
-        <ExternalEventLink id={event.id}/>
+        <ExternalEventLink id={event.id} sourceUrl={event.sourceUrl} label={event.sourceName?"Event details on "+event.sourceName:undefined}/>
       </div>
     </div>
   </li>;
@@ -80,7 +81,7 @@ function RecurringListItem({festival}:{festival:RecurringFestival}) {
   </li>;
 }
 const weekdays=["Sun","Mon","Tue","Wed","Thu","Fri","Sat"];
-function MonthGrid({month,today,selection,onChoose}:{month:Month;today:string;selection:Selection;onChoose:(date:string)=>void}){
+function MonthGrid({month,today,events,selection,onChoose}:{month:Month;today:string;events:readonly ConfirmedEvent[];selection:Selection;onChoose:(date:string)=>void}){
   const lead=new Date(Date.UTC(month.year,month.month,1)).getUTCDay();
   const count=new Date(Date.UTC(month.year,month.month+1,0)).getUTCDate();
   return <div className="min-w-0 rounded-xl border bg-card p-3 sm:p-4">
@@ -92,7 +93,7 @@ function MonthGrid({month,today,selection,onChoose}:{month:Month;today:string;se
         const d=month.key+"-"+String(i+1).padStart(2,"0");
         const selected=d===selection.start||d===selection.end;
         const between=Boolean(selection.start&&selection.end&&d>selection.start&&d<selection.end);
-        const includes=CONFIRMED_EVENTS.some(e=>e.from<=d&&e.to>=d);
+        const includes=events.some(e=>e.from<=d&&e.to>=d&&e.to>=today);
         return <button type="button" key={d} disabled={d<today} onClick={()=>onChoose(d)}
           aria-label={dateFormat(d)+(includes?" — event listed":"")+(d===selection.start?" — arrival":d===selection.end?" — departure":"")}
           aria-pressed={selected||between}
@@ -112,6 +113,7 @@ export function IsraelEventsPage() {
   const [monthOffset,setMonthOffset]=useState(0);
   const offset=Math.min(monthOffset,Math.max(0,months.length-1));
   const [selection,setSelection]=useState<Selection>({start:null,end:null});
+  const events=useMemo(()=>publishedEvents(today),[today]);
   const [region,setRegion]=useState<Place>("all");
   const [category,setCategory]=useState<Kind>("all");
   useEffect(()=>{
@@ -127,9 +129,9 @@ export function IsraelEventsPage() {
     return d<old.start?{start:d,end:old.start}:{start:old.start,end:d};
   });
   const complete=Boolean(selection.start&&selection.end);
-  const upcoming=useMemo(()=>filterConfirmedEvents(CONFIRMED_EVENTS,{
+  const upcoming=useMemo(()=>filterConfirmedEvents(events,{
     today, start:complete?selection.start:null,end:complete?selection.end:null,region,category
-  }),[today,selection.start,selection.end,complete,region,category]);
+  }),[events,today,selection.start,selection.end,complete,region,category]);
   const recurring=useMemo(()=>filterRecurringFestivals(RECURRING_FESTIVALS,region,category),[region,category]);
   return <main className="mx-auto max-w-6xl px-4 pb-12">
     <article>
@@ -169,8 +171,8 @@ export function IsraelEventsPage() {
           </div>
           <p className="mt-3 text-center text-sm text-muted-foreground" role="status" aria-live="polite">{!selection.start?"Choose your arrival date":!selection.end?"Choose your departure date":dateFormat(selection.start)+" – "+dateFormat(selection.end)}</p>
           <div className="mt-4 grid gap-4 lg:grid-cols-2">
-            {months[offset]&&<MonthGrid month={months[offset]} today={today} selection={selection} onChoose={chooseDate}/>}
-            {offset+1<months.length&&<div className="hidden lg:block"><MonthGrid month={months[offset+1]!} today={today} selection={selection} onChoose={chooseDate}/></div>}
+            {months[offset]&&<MonthGrid month={months[offset]} today={today} events={events} selection={selection} onChoose={chooseDate}/>}
+            {offset+1<months.length&&<div className="hidden lg:block"><MonthGrid month={months[offset+1]!} today={today} events={events} selection={selection} onChoose={chooseDate}/></div>}
           </div>
           <p className="mt-3 text-xs text-muted-foreground"><span aria-hidden="true" className="mr-1 inline-block h-1.5 w-1.5 rounded-full bg-primary"/>Dots indicate events currently listed for those dates, not a complete schedule of everything happening in Israel.</p>
         </div>
@@ -215,7 +217,7 @@ export function IsraelEventsPage() {
           <li><a href="https://www.haifa.muni.il/culture/city-events/" target="_blank" rel="noopener noreferrer" className="text-primary underline">Haifa municipality — cultural events</a></li>
           <li><a href="https://www.eilat.muni.il/events/" target="_blank" rel="noopener noreferrer" className="text-primary underline">Eilat municipality — events calendar</a></li>
         </ul>
-        <p className="mt-3 text-xs text-muted-foreground">Event dates and descriptions checked {dateFormat(EVENT_CHECK_DATE)}. Our next stage is to expand the data sources and automate updates.</p>
+        <p className="mt-3 text-xs text-muted-foreground">Editorial events checked {dateFormat(EVENT_CHECK_DATE)}. {EVENT_FEED_CHECK_DATE&&publishedEvents(today).length>CONFIRMED_EVENTS.length?"Automated source last checked "+dateFormat(EVENT_FEED_CHECK_DATE)+".":"Additional automatically verified events appear when a licensed source feed is connected."}</p>
       </section>
       <p className="mt-8 text-sm"><Link to="/guides/" className="font-medium text-primary underline">Explore more travel guides →</Link></p>
     </article>
