@@ -42,6 +42,18 @@ The separate `officialUrl` remains available even when ticketing is unavailable.
 - Ticketmaster API terms: https://www.developer.ticketmaster.com/support/terms-of-use/
 - Tel Aviv data terms (do not collect automatically without verifying permission): https://opendata.tel-aviv.gov.il/he/terms
 
+## Visitor relevance editorial policy
+
+The page is a **travel guide, not a catalogue of all Israeli concerts**. Ticketmaster's first 52 confirmed Israel entries consisted exclusively of music, including 33 performances at Eilat Port during the 2026 Red Sea Jazz Festival. Showing every artist in the main list was not useful for most visitors.
+
+- `src/data/touristEventSelection.ts` holds edition-specific visitor selections with an editorial reason. The policy is about visitor accessibility and the event format, **never the artist's nationality**. Language-dependent local shows are not automatically shown, but distinctive Israeli productions can be included following an individual editorial review.
+- The main list retains manually checked festival/cultural records and only **editor-reviewed individual source events** (initially Boy George and Celtic Throne's announced 2026 productions). Matching the artist name alone does not approve a new year's concert.
+- Performances confirmed at Eilat Port within the published 11–14 November 2026 Red Sea Jazz edition are accessible only in the festival's expandable **festival programme**. Each performance retains its own time, venue and provider details link. Avoid inventing links to tickets or applying this edition's dates to future years.
+- The raw provider snapshot is retained for audit and may contain local concerts not shown publicly. The site does not automatically treat all API entries as visitor-relevant.
+- Provider test or placeholder inventory, including URLs containing `/event/BDIKA/`, is rejected during normalization and by a display-time safeguard.
+- Prefer future data sources for visitor-friendly activities: architecture weekends, food festivals, cinema with English subtitles, international music/dance, museums and city festivals. Confirm each programme's dates, organiser links, language and allowed API/data reuse first.
+- Keep the public wording clear that the list is curated, not exhaustive. Avoid implying the event is in English unless verified.
+
 ## Maintenance
 
 - Check ticket status and organiser announcements before linking a specific offer.
