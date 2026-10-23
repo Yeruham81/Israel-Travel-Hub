@@ -1,0 +1,25 @@
+# Dependabot opens reviewable pull requests; it does not deploy to the website
+# or automatically merge updates into main. This site uses bun.lock.
+version: 2
+updates:
+  - package-ecosystem: "bun"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "07:15"
+      timezone: "Asia/Jerusalem"
+    open-pull-requests-limit: 5
+    labels:
+      - "dependencies"
+
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "07:30"
+      timezone: "Asia/Jerusalem"
+    open-pull-requests-limit: 3
+    labels:
+      - "dependencies"
