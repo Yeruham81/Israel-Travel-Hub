@@ -11,7 +11,7 @@ describe("compact holidays reference", () => {
     expect(screen.getByRole("button", {name: "Jan–Mar"})).toHaveAttribute("aria-pressed", "true");
     expect(container.querySelector("#year-calendar details")).toBeNull();
     expect(screen.getByRole("heading", {name: "March 2027"})).toBeInTheDocument();
-    expect(screen.getByRole("heading", {name: /Purim/})).toBeInTheDocument();
+    expect(screen.getByRole("heading", {name: "Purim"})).toBeInTheDocument();
     const purim = screen.getByRole("heading", {name:"Purim"}).closest("li")!;
     expect(purim).toHaveTextContent("22 Mar");
     expect(purim).toHaveTextContent("Changes and crowds");
