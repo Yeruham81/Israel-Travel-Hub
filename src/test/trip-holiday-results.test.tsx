@@ -56,8 +56,8 @@ describe("holiday results for selected travel dates", () => {
   });
 
   it("keeps validation for unsupported date ranges", async () => {
-    await renderResults("2028-01-01", "2028-01-05");
-    expect(screen.getByRole("alert")).toHaveTextContent(/checked coverage only/);
+    await renderResults("2101-01-01", "2101-01-05");
+    expect(screen.getByRole("alert")).toHaveTextContent(/available through/);
   });
   it("includes the end of Hanukkah after New Year without claiming broader 2028 coverage", async () => {
     await renderResults("2027-12-31", "2028-01-01");
