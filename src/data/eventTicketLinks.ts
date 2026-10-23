@@ -35,9 +35,16 @@ export function secureEventUrl(value:string|undefined):string|null {
     return parsed.toString();
   }catch{return null;}
 }
-export function eventLinks(id:string){
+export function eventLinks(id:string,sourceUrl?:string){
   const item=EVENT_LINKS[id];
-  if(!item)return {official:null,ticket:null,affiliate:false,provider:null};
+  // Only a source-confirmed Ticketmaster listing may use its API event URL
+  // as a fallback. This remains an event-details link, NOT an affiliate offer.
+  if(!item){
+    const fallback=secureEventUrl(sourceUrl);
+    const host=fallback?new URL(fallback).hostname.toLowerCase():"";
+    const providerHost=host==="ticketmaster.com"||host.endsWith(".ticketmaster.com")||host==="universe.com"||host.endsWith(".universe.com");
+    return {official:id.startsWith("ticketmaster-")&&providerHost?fallback:null,ticket:null,affiliate:false,provider:null};
+  }
   const official=secureEventUrl(item.officialUrl);
   const offered=item.ticket;
   const ticket=offered&&offered.provider.trim()&&/^\d{4}-\d{2}-\d{2}$/.test(offered.verifiedAt)
