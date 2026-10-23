@@ -8,9 +8,6 @@ on:
     branches: [main]
     paths:
       - ".github/workflows/published-security-headers.yml"
-      - "src/server.ts"
-      - "src/lib/security-headers.server.ts"
-      - "public/_headers"
 
 permissions:
   contents: read
@@ -69,18 +66,6 @@ jobs:
                           failures.append(f"Quote endpoint returned unexpected {status} status")
                   elif status != 200:
                       failures.append(f"Home route returned HTTP {status}")
-          # The project preview tracks GitHub edits before the public
-          # lovable.app URL is republished. Probe it read-only to distinguish
-          # a rollout lag from hosting-layer header suppression.
-          preview = "https://id-preview--7cd7aae9-57c0-4ced-b1fa-2f0691483fee.lovable.app/"
-          try:
-              with urlopen(Request(preview, headers={"User-Agent": "IsraelTravelHub-security-header-check/1.0"}), timeout=25) as result:
-                  headers = {k.lower():v for k,v in result.headers.items()}
-                  print(f"project preview: HTTP {result.status}, csp={headers.get('content-security-policy', '[missing]')}")
-                  print(f"project preview: nosniff={headers.get('x-content-type-options', '[missing]')}")
-          except (HTTPError, URLError) as exc:
-              print(f"::warning::Cannot inspect project preview: {exc}")
-
           if failures:
               for item in failures:
                   print("::error::" + item)
