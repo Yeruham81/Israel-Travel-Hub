@@ -1,4 +1,7 @@
 import { createFileRoute, Link, type LinkProps } from "@tanstack/react-router";
+import lcpHeroMobile from "@/assets/home/hero-jerusalem-sm.webp";
+import lcpHeroMedium from "@/assets/home/hero-jerusalem-medium.webp";
+import lcpHeroLarge from "@/assets/home/hero-jerusalem-large.webp";
 import jerusalem from "@/assets/home/jerusalem-old-city.webp";
 import telAviv from "@/assets/home/tel-aviv-coast.webp";
 import tiberias from "@/assets/home/tiberias-lake.webp";
@@ -48,12 +51,25 @@ import { TripadvisorReviewsSection, PersonalTestimonialsSection } from "@/compon
 import { HomeContactForm } from "@/components/HomeContactForm";
 
 export const Route = createFileRoute("/")({
-  head: () =>
-    pageMeta({
+  head: () => {
+    const meta = pageMeta({
       title: "Israel Travel Guides: Airport Transfers, Tours, Hotels & Attractions",
       description: "Plan Israel airport transfers, tours, shore excursions, accommodation and attractions with practical local travel guides and clear booking options.",
       path: "/",
-    }),
+    });
+    // HTML head discovery rather than waiting for the <picture> far below the
+    // global navigation. The media constraints match HeroCarousel's sources:
+    // the browser fetches ONE asset at the viewport's appropriate size.
+    return {
+      ...meta,
+      links: [
+        ...meta.links,
+        { rel: "preload", as: "image", type: "image/webp", href: lcpHeroMobile, media: "(max-width: 767px)", fetchPriority: "high" },
+        { rel: "preload", as: "image", type: "image/webp", href: lcpHeroMedium, media: "(min-width: 768px) and (max-width: 1800px)", fetchPriority: "high" },
+        { rel: "preload", as: "image", type: "image/webp", href: lcpHeroLarge, media: "(min-width: 1801px)", fetchPriority: "high" },
+      ],
+    };
+  },
   component: Home,
 });
 
