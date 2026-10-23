@@ -49,5 +49,6 @@ jobs:
           git add src/assets/home/*-tile.webp src/assets/home/*-feature.webp src/assets/haifa/*-tile.webp src/assets/dead-sea/*-tile.webp
           if ! git diff --cached --quiet; then
             git commit -m 'Add right-sized WebP images for homepage photo tiles and service features'
+            git pull --rebase origin main
             git push origin HEAD:main
           fi
