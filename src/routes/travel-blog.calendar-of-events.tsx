@@ -170,7 +170,7 @@ export function IsraelEventsPage() {
           <p className="mt-3 text-center text-sm text-muted-foreground" role="status" aria-live="polite">{!selection.start?"Choose your arrival date":!selection.end?"Choose your departure date":dateFormat(selection.start)+" – "+dateFormat(selection.end)}</p>
           <div className="mt-4 grid gap-4 lg:grid-cols-2">
             {months[offset]&&<MonthGrid month={months[offset]} today={today} selection={selection} onChoose={chooseDate}/>}
-            {offset+1<months.length&&<div className="hidden lg:block"><MonthGrid month={months[offset+1]} today={today} selection={selection} onChoose={chooseDate}/></div>}
+            {offset+1<months.length&&<div className="hidden lg:block"><MonthGrid month={months[offset+1]!} today={today} selection={selection} onChoose={chooseDate}/></div>}
           </div>
           <p className="mt-3 text-xs text-muted-foreground"><span aria-hidden="true" className="mr-1 inline-block h-1.5 w-1.5 rounded-full bg-primary"/>Dots indicate events currently listed for those dates, not a complete schedule of everything happening in Israel.</p>
         </div>
