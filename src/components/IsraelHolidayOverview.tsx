@@ -39,7 +39,7 @@ export function overviewHolidays(year: Year, quarter: Quarter, community: "All" 
     .sort((a, b) => a.from.localeCompare(b.from) || a.name.localeCompare(b.name));
 }
 
-function CompactHolidayRow({ holiday }: { holiday: Holiday }) {
+export function CompactHolidayRow({ holiday }: { holiday: Holiday }) {
   return <li className="grid min-w-0 gap-x-4 gap-y-1 border-b border-border/70 px-3 py-3 last:border-0 sm:grid-cols-[115px_minmax(0,1fr)] sm:px-4 lg:grid-cols-[115px_minmax(160px,0.9fr)_minmax(0,1.5fr)] lg:items-start">
     <p className="text-sm font-semibold tabular-nums text-foreground">{shortDate(holiday.from)}{holiday.from !== holiday.to && <> – {shortDate(holiday.to)}</>}</p>
     <div className="min-w-0">
