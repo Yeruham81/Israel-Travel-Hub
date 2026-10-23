@@ -83,10 +83,7 @@ export function AttractionGuidePage({ id }: {id:AttractionId}) {
     <FaqList faqs={a.faqs}/>
     {a.region !== "Jerusalem" && <>
     <RelatedLinks title="Plan a multi-day Israel itinerary" items={
-      a.region === "Jerusalem" ? [
-        { label: "Israel in 3 days: Jerusalem and more", to: "/travel-blog/israel-itinerary-3-days/" },
-        { label: "5-day Israel route with Jerusalem time", to: "/travel-blog/israel-itinerary-5-days/" },
-      ] : a.region === "Sea of Galilee" ? [
+      a.region === "Sea of Galilee" ? [
         { label: "7 days: Jerusalem, Galilee and coast", to: "/travel-blog/israel-itinerary-7-days/" },
         { label: "10 days: a longer Galilee stay", to: "/travel-blog/israel-itinerary-10-days/" },
       ] : a.region === "Haifa & northern coast" ? [
