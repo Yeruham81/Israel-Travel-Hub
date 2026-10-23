@@ -86,8 +86,8 @@ export const planningGuides = {
         ],
         "links": [
           {
-            "label": "Check holidays and events",
-            "to": "/travel-blog/calendar-of-events/"
+            "label": "Check Israel holiday dates",
+            "to": "/travel-blog/israel-holidays/"
           },
           {
             "label": "Explore Jerusalem",
