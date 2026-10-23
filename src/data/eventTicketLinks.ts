@@ -42,7 +42,7 @@ export function eventLinks(id:string,sourceUrl?:string){
   if(!item){
     const fallback=secureEventUrl(sourceUrl);
     const host=fallback?new URL(fallback).hostname.toLowerCase():"";
-    const providerHost=host==="ticketmaster.com"||host.endsWith(".ticketmaster.com")||host==="universe.com"||host.endsWith(".universe.com");
+    const providerHost=host==="ticketmaster.com"||host.endsWith(".ticketmaster.com")||host==="ticketmaster.co.il"||host.endsWith(".ticketmaster.co.il")||host==="universe.com"||host.endsWith(".universe.com");
     return {official:id.startsWith("ticketmaster-")&&providerHost?fallback:null,ticket:null,affiliate:false,provider:null};
   }
   const official=secureEventUrl(item.officialUrl);
