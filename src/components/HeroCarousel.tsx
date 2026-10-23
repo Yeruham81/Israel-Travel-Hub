@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useRef, useState, type ReactNode } from "react";
 
-export type HeroSlide = { src: string; srcSm: string; alt: string; caption: string; pos?: string };
+export type HeroSlide = { src: string; srcSm: string; srcMedium: string; alt: string; caption: string; pos?: string };
 
 const INTERVAL = 6000;
 
@@ -116,6 +116,7 @@ export function HeroCarousel({ slides, children }: { slides: HeroSlide[]; childr
             {(mounted.has(i) || i === index) && (
               <picture>
                 <source media="(max-width: 767px)" srcSet={s.srcSm} />
+                <source media="(max-width: 1800px)" srcSet={s.srcMedium} />
                 <img src={s.src} alt={s.alt} width={1920} height={872} fetchPriority={i === 0 ? "high" : "auto"} decoding="async" onLoad={(e) => onImgLoad(i, e.currentTarget)} onError={() => onImgError(i)} className="h-full w-full object-cover" style={{ objectPosition: s.pos ?? "center" }} />
               </picture>
             )}
