@@ -123,7 +123,11 @@ describe("home mobile performance optimizations", () => {
     expect(rules).toContain("/images/*");
     expect(rules).toContain("/assets/*");
     expect(rules).toContain("immutable");
-    expect(rules).not.toMatch(/^\/(api\/\*|\*)\s*$/m);
+    // Global hardening headers may use /*. Never apply a blanket cache
+    // policy to HTML documents or JSON APIs through that catch-all rule.
+    const globalHeaderBlock = rules.match(/^\/\*\s*\n((?:[ \t]+[^\n]*\n)*)/m)?.[1] ?? "";
+    expect(globalHeaderBlock).not.toMatch(/cache-control/i);
+    expect(rules).not.toMatch(/^\/api\/\*\s*$/m);
   });
 
   it("does not fetch the Tripadvisor icon from a third-party CDN", () => {
