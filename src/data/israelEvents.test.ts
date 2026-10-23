@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
-import { CONFIRMED_EVENTS, RECURRING_FESTIVALS, filterConfirmedEvents, filterRecurringFestivals, isValidEventDay, publishedEvents, publishedFestivalProgramme } from "./israelEvents";
-import { touristHighlights, festivalProgramme } from "./touristEventSelection";
+import { CONFIRMED_EVENTS, RECURRING_FESTIVALS, filterConfirmedEvents, filterRecurringFestivals, isValidEventDay, publishedEvents } from "./israelEvents";
+import { touristHighlights } from "./touristEventSelection";
 import publishedFeed from "./israelEventFeed.generated.json";
 import { EVENT_LINKS, eventLinks, secureEventUrl } from "./eventTicketLinks";
 
@@ -60,16 +60,15 @@ describe("Israel events first-release content",()=>{
     expect(publishedEvents("2026-10-23").some(e=>e.title==="Lior Narkis")).toBe(false);
     expect(publishedEvents("2026-10-23").some(e=>e.id==="red-sea-jazz-2026")).toBe(true);
   });
-  it("groups individual Red Sea Jazz acts only under the verified festival edition",()=>{
+  it("shows a single Red Sea Jazz Festival edition instead of its performances",()=>{
     const imported=publishedFeed.events as typeof CONFIRMED_EVENTS;
-    const programme=festivalProgramme(imported,"red-sea-jazz-2026");
-    expect(programme.length).toBeGreaterThan(20);
-    expect(programme.every(e=>e.region==="eilat-south"&&e.from>="2026-11-11"&&e.to<="2026-11-14")).toBe(true);
-    expect(programme.some(e=>e.title==="Idan Raichel")).toBe(true);
-    expect(programme.some(e=>e.title==="Winter 345")).toBe(false);
-    expect(festivalProgramme(imported,"red-sea-jazz-2027")).toEqual([]);
-    expect(publishedFestivalProgramme("2026-10-23","red-sea-jazz-2026").length).toBe(programme.length);
-    expect(publishedFestivalProgramme("2027-01-01","red-sea-jazz-2026")).toEqual([]);
+    const highlights=touristHighlights(imported);
+    expect(imported.filter(e=>e.location.toLowerCase().includes("eilat port")).length).toBeGreaterThan(20);
+    expect(highlights.some(e=>e.location.toLowerCase().includes("eilat port"))).toBe(false);
+    const main=publishedEvents("2026-10-23");
+    expect(main.filter(e=>e.id==="red-sea-jazz-2026")).toHaveLength(1);
+    expect(main.some(e=>e.title==="Idan Raichel")).toBe(false);
+    expect(main.some(e=>e.title==="Winter 345")).toBe(false);
   });
   it("does not automatically approve an artist's unreviewed future edition",()=>{
     const seed=publishedFeed.events.find(e=>e.title==="Boy George");
