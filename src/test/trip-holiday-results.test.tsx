@@ -59,4 +59,10 @@ describe("holiday results for selected travel dates", () => {
     await renderResults("2028-01-01", "2028-01-05");
     expect(screen.getByRole("alert")).toHaveTextContent(/checked coverage only/);
   });
+  it("includes the end of Hanukkah after New Year without claiming broader 2028 coverage", async () => {
+    await renderResults("2027-12-31", "2028-01-01");
+    expect(screen.getByRole("heading", {name: "Hanukkah"})).toBeInTheDocument();
+    expect(screen.getByRole("heading", {name: "Shabbat"})).toBeInTheDocument();
+  });
+
 });
