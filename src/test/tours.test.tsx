@@ -7,7 +7,8 @@ import { routeTree } from "@/routeTree.gen";
 import { Route as HubRoute } from "@/routes/tours.index";
 import { Route as LegacyBethlehemRoute } from "@/routes/tours.bethlehem-from-jerusalem";
 import { tourCategoryMeta } from "@/components/TourCategoryPage";
-import { affiliateConfig, operators, sources, tourBookingOffers, tourProducts, travelGuidePaths } from "@/data/registry";
+import { CurrencyRatesContext } from "@/components/CurrencyRates";
+import { affiliateConfig, initialReferenceFx, operators, sources, tourBookingOffers, tourProducts, travelGuidePaths } from "@/data/registry";
 import { guideDirectory } from "@/data/travelGuides";
 import { tourCategories, tourCategoryPaths, tourPhotos } from "@/data/tours";
 import homepageCruise from "@/assets/home/cruise-port.webp";
@@ -28,7 +29,11 @@ async function renderPage(path: string) {
   historySubscriptions.push(router.history.subscribe(router.load));
   const routeId = router.matchRoutes(router.state.location.pathname).at(-1)!.routeId;
   const Page = router.routesById[routeId]!.options.component!;
-  render(<RouterContextProvider router={router}><Page /></RouterContextProvider>);
+  // Use valid, deterministic exchange-rate values for rendering assertions.
+  // The app deliberately hides USD/EUR estimates if its cached rates expire.
+  const now = new Date().toISOString();
+  const testRates = { ...initialReferenceFx, publishedAt: now.slice(0, 10), checkedAt: now };
+  render(<RouterContextProvider router={router}><CurrencyRatesContext.Provider value={{ rates: testRates, status: "fresh", loading: false }}><Page /></CurrencyRatesContext.Provider></RouterContextProvider>);
   return router;
 }
 
