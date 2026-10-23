@@ -6,7 +6,7 @@
  * Do not infer live schedules, tariffs or venue availability from these records.
  * 2027 Jewish dates use the ISRAEL calendar, not Diaspora dates.
  */
-export type Community = "Jewish" | "Christian" | "Muslim" | "National";
+export type Community = "Jewish" | "Christian" | "Muslim" | "Druze" | "National";
 export type Impact = "major" | "mixed" | "local" | "awareness";
 export type Certainty = "confirmed" | "tentative";
 export type Holiday = {
@@ -27,7 +27,7 @@ export type Holiday = {
 export const HOLIDAY_COVERAGE = { from: "2026-10-23", to: "2027-12-31", checkedAt: "2026-10-23" } as const;
 const HEB = "https://www.hebcal.com/holidays/2027?i=on";
 const HEB26 = "https://www.hebcal.com/holidays/2026?i=on";
-const CHRISTIAN = "https://cicts.org/en/feast-2027";
+const CHRISTIAN = "https://www.timeanddate.com/holidays/israel/2027";
 const ISRAEL2027 = "https://www.timeanddate.com/holidays/israel/2027";
 
 export const holidays: Holiday[] = [
@@ -44,7 +44,7 @@ export const holidays: Holiday[] = [
   {id:"western-holy-week",name:"Western Holy Week and Easter",from:"2027-03-21",to:"2027-03-28",startsAt:"day",community:"Christian",impact:"local",location:"Jerusalem, Nazareth and Bethlehem",certainty:"confirmed",summary:"Palm Sunday 21 March, Good Friday 26 March, Easter Sunday 28 March.",travel:"Processions, services and security arrangements may limit church access or streets; confirm with each sanctuary.",source:CHRISTIAN},
   {id:"passover-first",name:"Passover — first festival day",from:"2027-04-21",to:"2027-04-22",startsAt:"sunset",community:"Jewish",impact:"major",certainty:"confirmed",summary:"The Seder is on the evening of 21 April; 22 April is a major festival day in Israel.",travel:"Regular public transport generally stops on the festival day. Many Jewish-run shops and visitor venues close; arrange meals and pickups in advance.",source:HEB},
   {id:"passover-intermediate",name:"Passover — intermediate days (Chol HaMoed)",from:"2027-04-23",to:"2027-04-27",startsAt:"day",community:"Jewish",impact:"mixed",certainty:"confirmed",summary:"The festival continues, but these are not all full closure days. Saturday 24 April is Shabbat.",travel:"Many attractions and services operate, sometimes with special hours and heavy family demand. Friday evenings and Saturday still follow Shabbat restrictions.",source:HEB},
-  {id:"druze-nabi-shuayb",name:"Nabi Shu'ayb pilgrimage (Druze)",from:"2027-04-24",to:"2027-04-28",startsAt:"day",community:"National",impact:"local",location:"Hittin / Mount Arbel area and Druze communities",certainty:"confirmed",summary:"Important Druze pilgrimage and religious observance.",travel:"Some Druze-owned businesses may adjust hours; local pilgrim traffic can be busy. Check venue-specific arrangements.",source:ISRAEL2027},
+  {id:"druze-nabi-shuayb",name:"Nabi Shu'ayb pilgrimage (Druze)",from:"2027-04-24",to:"2027-04-28",startsAt:"day",community:"Druze",impact:"local",location:"Hittin / Mount Arbel area and Druze communities",certainty:"confirmed",summary:"Important Druze pilgrimage and religious observance.",travel:"Some Druze-owned businesses may adjust hours; local pilgrim traffic can be busy. Check venue-specific arrangements.",source:ISRAEL2027},
   {id:"passover-last",name:"Passover — final festival day",from:"2027-04-27",to:"2027-04-28",startsAt:"sunset",community:"Jewish",impact:"major",certainty:"confirmed",summary:"The final day of Passover in Israel is 28 April.",travel:"Regular public transport generally stops and many Jewish-run businesses close. Do not confuse Israeli 7-day Passover with the 8-day Diaspora calendar.",source:HEB},
   {id:"orthodox-holy-week",name:"Orthodox / Armenian Holy Week and Easter",from:"2027-04-25",to:"2027-05-02",startsAt:"day",community:"Christian",impact:"local",location:"Jerusalem, Bethlehem and Orthodox / Armenian churches",certainty:"confirmed",summary:"Palm Sunday 25 April, Good Friday 30 April, Easter Sunday 2 May.",travel:"Churches and Old City approaches can be very busy or subject to access arrangements. The organiser sets the actual service schedule.",source:CHRISTIAN},
   {id:"holocaust-memorial",name:"Yom HaShoah — Holocaust Remembrance Day",from:"2027-05-03",to:"2027-05-04",startsAt:"sunset",community:"National",impact:"mixed",certainty:"confirmed",summary:"Solemn national Holocaust remembrance, including a morning siren.",travel:"Entertainment venues may close or change hours and ceremonies affect access. It is not the same full transport stoppage as Yom Kippur.",source:HEB},
