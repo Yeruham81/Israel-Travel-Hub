@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useMemo, useState } from "react";
-import { ChevronLeft, ChevronRight, CalendarDays, MapPin, Bus, Clock3, AlertCircle } from "lucide-react";
+import { ChevronLeft, ChevronRight, CalendarDays, MapPin, Bus, AlertCircle } from "lucide-react";
 import { Breadcrumbs, OnThisPage } from "@/components/Guide";
 import { AuthorCard } from "@/components/AuthorCard";
 import { PageUpdated } from "@/components/PageUpdated";
@@ -95,7 +95,7 @@ function MonthCalendar({offset,selection,onSelect}:{offset:number;selection:Date
         const between=!!(selection.start && selection.end && date>selection.start && date<selection.end);
         const dayHolidays=holidays.filter(h=>intersects(date,date,h.from,h.to));
         const dow=new Date(Date.UTC(year,month,i+1)).getUTCDay();
-        const shabbat=dow===6;
+        const shabbat=dow===5 || dow===6;
         const tags=dayHolidays.map(h=>h.name).join(", ");
         const classes=(isStart || isEnd)
           ? "border-primary bg-primary text-primary-foreground font-bold"
@@ -105,12 +105,12 @@ function MonthCalendar({offset,selection,onSelect}:{offset:number;selection:Date
         return <button type="button" key={date} disabled={!isValid} onClick={()=>onSelect(date)}
           aria-label={fmt(date)+(tags?" — "+tags:"")+(shabbat?" — Shabbat":"")+(isStart?" — arrival":isEnd?" — departure":between?" — within selected trip":"")}
           aria-pressed={isStart||isEnd||between}
-          title={tags || (shabbat?"Shabbat; public transport generally limited":"Select travel date")}
+          title={tags || (shabbat?(dow===5?"Shabbat begins Friday evening":"Saturday Shabbat; public transport generally limited"):"Select travel date")}
           className={"relative flex aspect-square min-h-9 min-w-0 flex-col items-center justify-center gap-0.5 rounded-lg border text-sm transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary disabled:cursor-not-allowed sm:min-h-10 "+classes}>
           <span>{i+1}</span>
           {dayHolidays.length>0
             ? <span className="flex max-w-full items-center gap-0.5">{[...new Set(dayHolidays.map(h=>h.impact))].slice(0,3).map(impact=><HolidayDot key={impact} impact={impact}/>)}</span>
-            : shabbat ? <span className={"text-[9px] leading-none "+(isStart||isEnd?"text-primary-foreground":"text-muted-foreground")}>Sh</span> : null}
+            : shabbat ? <span className={"text-[9px] leading-none "+(isStart||isEnd?"text-primary-foreground":"text-muted-foreground")}>{dow===5?"eve":"Sh"}</span> : null}
         </button>;
       })}
     </div>
@@ -201,7 +201,7 @@ export function IsraelHolidaysPage() {
           </div>
           <div className="mt-4 flex flex-wrap gap-x-4 gap-y-2 text-xs text-muted-foreground" aria-label="Calendar symbols">
             {(Object.keys(impactLabel) as Impact[]).map(key=><span key={key} className="inline-flex items-center gap-1.5"><HolidayDot impact={key}/>{impactLabel[key]}</span>)}
-            <span><strong>Sh</strong> = Saturday / Shabbat</span>
+            <span><strong>eve</strong> = Shabbat begins Friday evening; <strong>Sh</strong> = Saturday</span>
           </div>
           <p className="mt-3 text-xs text-muted-foreground">Israel dates; many Jewish observances begin the previous sunset. Dates for Muslim observances remain tentative until local confirmation. Calendar days are shown in local date format without promising precise opening or closing hours.</p>
         </div>
@@ -213,7 +213,7 @@ export function IsraelHolidaysPage() {
           : <div className="mt-4 space-y-4" aria-live="polite">
             <div className="rounded-xl border bg-card p-5">
               <p className="font-semibold">{fmt(start)} – {fmt(end)}</p>
-              <p className="mt-2 text-sm text-muted-foreground">{matched.length} relevant holiday {matched.length===1?"period":"periods"} found, plus {Math.floor(shabbat.length/2)} or more weekly Shabbat periods to consider. These are planning flags, not live transport or booking availability.</p>
+              <p className="mt-2 text-sm text-muted-foreground">{matched.length} relevant holiday {matched.length===1?"period":"periods"} found, plus {shabbat.length} Friday/Saturday dates to consider. These are planning flags, not live transport or booking availability.</p>
               <label className="mt-4 block text-sm font-medium">How do you expect to get around?
                 <select value={style} onChange={e=>setStyle(e.target.value as TripStyle)} className="mt-2 block w-full max-w-sm rounded-lg border bg-background px-3 py-2.5 text-base">
                   <option value="mixed">Not decided / mixed transport</option><option value="public">Buses and trains</option><option value="private">Taxi or private driver</option><option value="car">Rental car</option>
@@ -230,7 +230,7 @@ export function IsraelHolidaysPage() {
         <h2 id="year-heading" className="text-3xl">Holiday dates: late 2026 and 2027</h2>
         <p className="mt-2 leading-relaxed text-muted-foreground">Browse the holidays without selecting a trip. Full Jewish festival dates here follow practice in Israel, not the longer Diaspora schedules. Muslim dates are provisional. Dates shown include the preceding evening where relevant.</p>
         <div className="mt-4 flex flex-wrap gap-2" role="group" aria-label="Filter holidays by tradition">
-          {(["All","Jewish","Christian","Muslim","National"] as const).map(item=><button key={item} type="button" aria-pressed={community===item} onClick={()=>setCommunity(item)} className={"rounded-full border px-3 py-1.5 text-sm font-medium "+(community===item?"border-primary bg-primary text-primary-foreground":"bg-background hover:bg-secondary")}>{item==="All"?"All holidays":item}</button>)}
+          {(["All","Jewish","Christian","Muslim","Druze","National"] as const).map(item=><button key={item} type="button" aria-pressed={community===item} onClick={()=>setCommunity(item)} className={"rounded-full border px-3 py-1.5 text-sm font-medium "+(community===item?"border-primary bg-primary text-primary-foreground":"bg-background hover:bg-secondary")}>{item==="All"?"All holidays":item}</button>)}
         </div>
         <div className="mt-5 space-y-4">{grouped.map(([month,items])=><details key={month} className="rounded-xl border bg-card p-4" open={month==="2026-12" || month==="2027-04" || month==="2027-10" ? true : undefined}>
           <summary className="cursor-pointer text-lg font-semibold">{new Date(month+"-15T12:00:00Z").toLocaleDateString("en-GB",{month:"long",year:"numeric",timeZone:"UTC"})} <span className="text-sm font-normal text-muted-foreground">({items.length})</span></summary>
@@ -279,7 +279,7 @@ export function IsraelHolidaysPage() {
         </ul>
       </section>
       <div className="mt-10 rounded-2xl bg-secondary/50 p-6">
-        <h2 className="text-xl font-semibold">Also planning when to visit?</h2><p className="mt-2 text-sm">The holiday calendar helps with closures and dates. For concerts, exhibitions and festivals, see the separate <Link to="/travel-blog/calendar-of-events/" className="text-primary underline">Israel events calendar</Link>.</p>
+        <h2 className="text-xl font-semibold">Also planning when to visit?</h2><p className="mt-2 text-sm">The holiday calendar helps with closures and dates. For festivals and concerts, check current organiser programmes; our dedicated events guide will be expanded separately.</p>
         <Link to="/guides/" className="mt-4 inline-block font-medium text-primary underline">Explore more travel guides →</Link>
       </div>
     </article>
