@@ -79,7 +79,7 @@ function HolidayDot({ impact }: {impact:Impact}) {
   return <span className={"inline-block h-1.5 w-1.5 rounded-full "+impactColor[impact]} aria-hidden="true"/>;
 }
 function MonthCalendar({offset,selection,onSelect}:{offset:number;selection:DateSelection;onSelect:(date:string)=>void}) {
-  const {year,month,label}=months[offset];
+  const {year,month,label}=months[offset]!;
   const leading=new Date(Date.UTC(year,month,1)).getUTCDay();
   const days=new Date(Date.UTC(year,month+1,0)).getUTCDate();
   return <div className="min-w-0 rounded-2xl border bg-card p-3 sm:p-4">
