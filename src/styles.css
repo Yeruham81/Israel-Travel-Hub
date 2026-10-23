@@ -133,3 +133,21 @@
   }
 }
 @media (prefers-reduced-motion: reduce) { .photo-card img { transition: none !important; transform: none !important; } }
+
+/*
+ * The home page is long and card-heavy. On phones, let Chromium/WebKit/Firefox
+ * skip style/layout/paint for sections that are still far below the viewport.
+ * The markup (including destination links and editorial text) remains in SSR
+ * and in the accessibility tree; no JS gating or deferred SEO content.
+ * Preserve intrinsic block space to reduce scroll jumps when users navigate.
+ * Do not apply this to the hero, site header, or first service section.
+ */
+@media (max-width: 767px) {
+  .home-offscreen {
+    content-visibility: auto;
+    contain-intrinsic-size: auto 850px;
+  }
+  .home-offscreen-reviews {
+    contain-intrinsic-size: auto 650px;
+  }
+}
