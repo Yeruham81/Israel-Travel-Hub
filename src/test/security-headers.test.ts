@@ -25,6 +25,7 @@ describe("SSR response security headers", () => {
       expect(secured.headers.get(key)).toBe(value);
     }
     expect(secured.headers.get("x-frame-options")).toBe("SAMEORIGIN");
+    expect(secured.headers.get("content-security-policy")).toBe("base-uri 'self'; object-src 'none'");
     expect(response.headers.get("x-frame-options")).toBeNull();
   });
 
@@ -53,6 +54,7 @@ describe("SSR response security headers", () => {
       expect(api.headers.get("x-frame-options")).toBeNull();
       expect(api.headers.get("cache-control")).toBe("no-store");
       expect(api.headers.get("x-content-type-options")).toBe("nosniff");
+      expect(api.headers.get("content-security-policy")).toBeNull();
     }
   });
 
@@ -77,11 +79,24 @@ describe("SSR response security headers", () => {
     expect(await noContent.text()).toBe("");
   });
 
-  it("protects normal and error responses at the server entrypoint and avoids premature CSP/HSTS", () => {
+  it("preserves a pre-existing stricter CSP without overwriting it", () => {
+    const response = withSecurityHeaders(new Response("hi", {
+      headers: {
+        "Content-Type": "text/html",
+        "Content-Security-Policy": "default-src 'self'; object-src 'none'",
+      },
+    }), request("israel-taxi-travel.lovable.app"));
+    expect(response.headers.get("content-security-policy")).toBe("default-src 'self'; object-src 'none'");
+    expect(response.headers.get("x-frame-options")).toBeNull();
+  });
+
+  it("protects normal and error responses at the server entrypoint without premature strict script CSP or HSTS", () => {
     const server = readFileSync("src/server.ts", "utf8");
     expect(server).toContain("withSecurityHeaders(await normalizeCatastrophicSsrResponse(response), request)");
     expect(server).toContain("withSecurityHeaders(new Response(renderErrorPage()");
     const headers = readFileSync("src/lib/security-headers.server.ts", "utf8");
-    expect(headers).not.toMatch(/headers\.set\(["'](?:content-security-policy|strict-transport-security)["']/i);
+    expect(headers).toContain("base-uri 'self'; object-src 'none'");
+    expect(headers).not.toMatch(/headers\.set\(["']strict-transport-security["']/i);
+    expect(headers).not.toMatch(/headers\.set\(["']content-security-policy["'],\s*["'][^"'\n]*(?:script-src|default-src)/i);
   });
 });
