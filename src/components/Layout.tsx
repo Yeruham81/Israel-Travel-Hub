@@ -66,6 +66,24 @@ function SidebarBranch({ item, onNavigate }: { item: SidebarNavItem; onNavigate:
   const id = useId();
   useEffect(() => { if (isChildPage) setExpanded(true); }, [isChildPage]);
   if (!children) return <SidebarLink item={item} onNavigate={onNavigate} />;
+  if (branch?.toggleOnly) {
+    return <>
+      <button
+        type="button"
+        aria-label={branch.toggleLabel ?? `Toggle ${item.label} guides`}
+        aria-expanded={expanded}
+        aria-controls={id}
+        onClick={() => setExpanded((open) => !open)}
+        className="flex w-full items-center justify-between gap-2 rounded-lg px-3 py-2 text-left text-sm font-semibold text-foreground transition-colors hover:bg-secondary/75 hover:text-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+      >
+        <span>{item.label}</span>
+        <ChevronDown aria-hidden="true" className={`h-4 w-4 shrink-0 transition-transform ${expanded ? "rotate-180" : ""}`} />
+      </button>
+      <ul id={id} hidden={!expanded} aria-label={branch.childrenLabel ?? `${item.label} guides`} className="ml-3 mt-0.5 space-y-0.5 border-l border-border/80 pl-2">
+        {children.map((child) => <li key={String(child.to)}><SidebarLink item={child} onNavigate={onNavigate} /></li>)}
+      </ul>
+    </>;
+  }
   return <>
     <div className="flex items-center gap-1">
       <div className="min-w-0 flex-1"><SidebarLink item={item} onNavigate={onNavigate} /></div>

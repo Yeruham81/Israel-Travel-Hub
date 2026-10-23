@@ -1,9 +1,10 @@
 import { tourCategories, tourCategoryPaths } from "@/data/tours";
+import { attractionHubRegions } from "@/data/attractionsHub";
 import type { LinkProps } from "@tanstack/react-router";
 import { airportTransferRates, airportTransferRoutes, travelGuidePaths } from "@/data/registry";
 
 export type NavItem = { label: string; to: LinkProps["to"] };
-export type SidebarNavItem = (NavItem & { children?: NavItem[]; childrenLabel?: string; toggleLabel?: string; alwaysExpanded?: boolean }) | { label: string; href: string };
+export type SidebarNavItem = (NavItem & { children?: NavItem[]; childrenLabel?: string; toggleLabel?: string; alwaysExpanded?: boolean; toggleOnly?: boolean }) | { label: string; href: string };
 export type NavGroup = { title: string; items: SidebarNavItem[] };
 
 export const airportTransferNav = {
@@ -61,6 +62,54 @@ export const legalNav: NavItem[] = [
   { label: "Terms of Use", to: "/terms-of-use/" },
 ];
 
+/** Short, readable guide names in the area accordion; URLs come from the Attractions hub. */
+export const attractionSidebarGuideLabels: Record<string, string> = {
+  "old-city-jerusalem": "Old City",
+  "mount-of-olives": "Mount of Olives",
+  "mount-zion": "Mount Zion",
+  "museums-in-jerusalem": "Museums",
+  jerusalemChurches: "Churches",
+  jerusalemShopping: "Shopping",
+  "attractions-in-tel-aviv": "Tel Aviv sights",
+  jaffa: "Old Jaffa",
+  telAvivBeaches: "Beaches",
+  telAvivMuseums: "Museums",
+  haifa: "Haifa",
+  "akko-acre": "Akko (Acre)",
+  caesarea: "Caesarea",
+  "rosh-hanikra": "Rosh Hanikra",
+  haifaMuseums: "Museums",
+  annunciation: "Annunciation",
+  "mount-tabor": "Mount Tabor",
+  precipice: "Mount Precipice",
+  megiddo: "Tel Megiddo",
+  "sea-of-galilee": "Sea of Galilee",
+  capernaum: "Capernaum",
+  tabgha: "Tabgha",
+  "mount-of-beatitudes": "Mount of Beatitudes",
+  magdala: "Magdala",
+  yardenit: "Yardenit",
+  baptism: "Baptism sites",
+  "dead-sea-attractions": "Dead Sea sights",
+  masada: "Masada",
+  "ein-gedi": "Ein Gedi",
+  qasr: "Qasr el-Yahud",
+  "mitzpe-ramon-crater": "Ramon Crater",
+  eilat: "Eilat & Red Sea",
+};
+
+export const attractionSidebarRegions: SidebarNavItem[] = attractionHubRegions.map((region) => ({
+  label: region.navLabel ?? region.title,
+  to: "/attractions/" as const, // The heading toggles; only "All attractions" navigates to this URL.
+  toggleOnly: true,
+  childrenLabel: `${region.title} guides`,
+  toggleLabel: `Toggle ${region.title} guides`,
+  children: region.cards.map((card) => ({
+    label: attractionSidebarGuideLabels[card.id] ?? card.title,
+    to: card.to,
+  })),
+}));
+
 /** Shared desktop/mobile menu; labels use sentence case, retaining proper names. */
 export const allNavGroups: NavGroup[] = [
   {
@@ -89,17 +138,7 @@ export const allNavGroups: NavGroup[] = [
     title: "Attractions",
     items: [
       { label: "All attractions", to: "/attractions/" },
-      { label: "Old City of Jerusalem", to: "/travel-blog/old-city-jerusalem/" },
-      { label: "Jaffa", to: "/travel-blog/jaffa/" },
-      { label: "Akko (Acre)", to: "/travel-blog/akko-acre/" },
-      { label: "Caesarea", to: "/attractions/caesarea/" },
-      { label: "Rosh Hanikra", to: "/travel-blog/rosh-hanikra/" },
-      { label: "Sea of Galilee", to: "/travel-blog/sea-of-galilee/" },
-      { label: "Tel Megiddo", to: travelGuidePaths.megiddo },
-      { label: "Mitzpe Ramon & Ramon Crater", to: "/travel-blog/mitzpe-ramon-crater/" },
-      { label: "Masada", to: "/travel-blog/masada/" },
-      { label: "Ein Gedi", to: "/travel-blog/ein-gedi/" },
-      { label: "The Dead Sea", to: travelGuidePaths.deadSea },
+      ...attractionSidebarRegions,
     ],
   },
   {

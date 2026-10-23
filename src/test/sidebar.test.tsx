@@ -8,6 +8,8 @@ import { Route as HotelsRoute } from "@/routes/accommodation";
 import { accommodationDestinations } from "@/data/content";
 import { tourCategories, tourCategoryPaths } from "@/data/tours";
 import { travelGuidePaths } from "@/data/registry";
+import { attractionHubRegions } from "@/data/attractionsHub";
+import { attractionSidebarGuideLabels } from "@/data/nav";
 
 afterEach(cleanup);
 
@@ -23,6 +25,46 @@ async function navigationRouter(path = "/") {
 }
 
 describe("shared sidebar navigation", () => {
+  it("shows All attractions and exactly seven collapsible geographic areas", async () => {
+    const router = await navigationRouter();
+    render(<RouterContextProvider router={router}><GlobalNav /></RouterContextProvider>);
+    const section = screen.getByRole("region", { name: "Attractions" });
+    const all = within(section).getByRole("link", { name: "All attractions" });
+    expect(all).toHaveAttribute("href", "/attractions/");
+    const buttons = within(section).getAllByRole("button");
+    expect(buttons).toHaveLength(7);
+    expect(buttons.map(button => button.textContent?.trim())).toEqual(
+      attractionHubRegions.map(region => region.navLabel ?? region.title),
+    );
+    expect(within(section).getAllByRole("link")).toHaveLength(1);
+    for (const region of attractionHubRegions) {
+      const button = within(section).getByRole("button", { name: `Toggle ${region.title} guides` });
+      expect(button).toHaveAttribute("aria-expanded", "false");
+      fireEvent.click(button);
+      expect(button).toHaveAttribute("aria-expanded", "true");
+      const list = within(section).getByRole("list", { name: `${region.title} guides` });
+      expect(list).toBeVisible();
+      expect(within(list).getAllByRole("link")).toHaveLength(region.cards.length);
+      region.cards.forEach(card => {
+        const label = attractionSidebarGuideLabels[card.id] ?? card.title;
+        expect(within(list).getByRole("link", { name: label })).toHaveAttribute("href", String(card.to));
+      });
+      fireEvent.click(button);
+      expect(button).toHaveAttribute("aria-expanded", "false");
+      expect(list).not.toBeVisible();
+    }
+  });
+
+  it("automatically opens an area's guide list on a matching article", async () => {
+    const router = await navigationRouter("/travel-blog/mount-zion/");
+    render(<RouterContextProvider router={router}><GlobalNav /></RouterContextProvider>);
+    const section = screen.getByRole("region", { name: "Attractions" });
+    const jerusalem = within(section).getByRole("button", { name: "Toggle Jerusalem guides" });
+    expect(jerusalem).toHaveAttribute("aria-expanded", "true");
+    const links = within(section).getByRole("list", { name: "Jerusalem guides" });
+    expect(within(links).getByRole("link", { name: "Mount Zion" })).toHaveAttribute("aria-current", "page");
+    expect(within(section).getByRole("button", { name: "Toggle Tel Aviv & Jaffa guides" })).toHaveAttribute("aria-expanded", "false");
+  });
   it("always shows all tour categories without a toggle and places the Bethlehem journey under guides", async () => {
     const router = await navigationRouter();
     render(<RouterContextProvider router={router}><GlobalNav /></RouterContextProvider>);
