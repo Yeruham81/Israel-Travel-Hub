@@ -60,6 +60,20 @@ describe("international price estimates", () => {
     }
   });
 
+  it("does not fetch on the price-free homepage and activates after navigation to priced routes", async () => {
+    const fetchImpl = vi.fn<typeof fetch>().mockImplementation(async () => Response.json({ rates: rates(), status: "fresh" }));
+    vi.stubGlobal("fetch", fetchImpl);
+    const page = (enabled: boolean) => <CurrencyRatesProvider enabled={enabled}><PriceDisplay amount={550} /></CurrencyRatesProvider>;
+    const rendered = render(page(false));
+    await flush();
+    expect(fetchImpl).not.toHaveBeenCalled();
+    expect(screen.getByTestId("currency-price")).toHaveTextContent("ILS 550");
+    rendered.rerender(page(true));
+    await flush();
+    expect(fetchImpl).toHaveBeenCalledTimes(1);
+    expect(screen.getByTestId("currency-price").querySelector('[data-currency="USD"]')).toHaveTextContent("138");
+  });
+
   it("shares one request across prices, persists public rates across reloads and refreshes after 24 hours", async () => {
     const fetchImpl = vi.fn<typeof fetch>().mockImplementation(async () => Response.json({ rates: rates(), status: "fresh" }));
     vi.stubGlobal("fetch", fetchImpl);
