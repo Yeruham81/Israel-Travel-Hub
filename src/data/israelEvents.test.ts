@@ -1,5 +1,7 @@
 import { describe, expect, it } from "vitest";
-import { CONFIRMED_EVENTS, RECURRING_FESTIVALS, filterConfirmedEvents, filterRecurringFestivals, isValidEventDay } from "./israelEvents";
+import { CONFIRMED_EVENTS, RECURRING_FESTIVALS, filterConfirmedEvents, filterRecurringFestivals, isValidEventDay, publishedEvents, publishedFestivalProgramme } from "./israelEvents";
+import { touristHighlights, festivalProgramme } from "./touristEventSelection";
+import publishedFeed from "./israelEventFeed.generated.json";
 import { EVENT_LINKS, eventLinks, secureEventUrl } from "./eventTicketLinks";
 
 describe("Israel events first-release content",()=>{
@@ -47,4 +49,33 @@ describe("Israel events first-release content",()=>{
     expect(secureEventUrl("javascript:alert(1)")).toBeNull();
     expect(secureEventUrl("https://example.com/event")).toContain("https://example.com/event");
   });
+  it("keeps the main calendar focused on reviewed, visitor-friendly source events",()=>{
+    const imported=publishedFeed.events as typeof CONFIRMED_EVENTS;
+    const chosen=touristHighlights(imported);
+    expect(chosen.length).toBeGreaterThan(0);
+    expect(chosen.every(e=>["Boy George","Celtic Throne"].includes(e.title))).toBe(true);
+    expect(chosen.some(e=>e.title==="Lior Narkis")).toBe(false);
+    expect(chosen.some(e=>e.title==="Winter 345")).toBe(false);
+    expect(publishedEvents("2026-10-23").some(e=>e.title==="Boy George")).toBe(true);
+    expect(publishedEvents("2026-10-23").some(e=>e.title==="Lior Narkis")).toBe(false);
+    expect(publishedEvents("2026-10-23").some(e=>e.id==="red-sea-jazz-2026")).toBe(true);
+  });
+  it("groups individual Red Sea Jazz acts only under the verified festival edition",()=>{
+    const imported=publishedFeed.events as typeof CONFIRMED_EVENTS;
+    const programme=festivalProgramme(imported,"red-sea-jazz-2026");
+    expect(programme.length).toBeGreaterThan(20);
+    expect(programme.every(e=>e.region==="eilat-south"&&e.from>="2026-11-11"&&e.to<="2026-11-14")).toBe(true);
+    expect(programme.some(e=>e.title==="Idan Raichel")).toBe(true);
+    expect(programme.some(e=>e.title==="Winter 345")).toBe(false);
+    expect(festivalProgramme(imported,"red-sea-jazz-2027")).toEqual([]);
+    expect(publishedFestivalProgramme("2026-10-23","red-sea-jazz-2026").length).toBe(programme.length);
+    expect(publishedFestivalProgramme("2027-01-01","red-sea-jazz-2026")).toEqual([]);
+  });
+  it("does not automatically approve an artist's unreviewed future edition",()=>{
+    const seed=publishedFeed.events.find(e=>e.title==="Boy George");
+    expect(seed).toBeDefined();
+    const future={...seed!,id:"ticketmaster-future-boy",from:"2027-11-04",to:"2027-11-04"};
+    expect(touristHighlights([future])).toEqual([]);
+  });
+
 });
