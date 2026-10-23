@@ -49,7 +49,7 @@ jobs:
                   final_url = result.geturl()
                   headers = {k.lower():v for k,v in result.headers.items()}
                   print(f"{label}: HTTP {status}, host={urlparse(final_url).hostname}")
-                  for key in [*expected, "cache-control", "x-frame-options", "content-type"]:
+                  for key in [*expected, "cache-control", "x-frame-options", "content-security-policy", "content-type"]:
                       print(f"  {key}: {headers.get(key, '[missing]')}")
                   if urlparse(final_url).hostname != "israel-taxi-travel.lovable.app":
                       failures.append(f"{label}: unexpected redirect host")
@@ -58,6 +58,8 @@ jobs:
                           failures.append(f"{label}: missing {key}")
                   if headers.get("x-content-type-options", "").lower() != "nosniff":
                       failures.append(f"{label}: nosniff not set")
+                  if path == "/" and "base-uri 'self'; object-src 'none'" not in headers.get("content-security-policy", ""):
+                      failures.append("Home SSR is missing the non-disruptive baseline CSP")
                   if path == "/" and "x-frame-options" in headers:
                       failures.append("Lovable preview must remain embeddable (unexpected X-Frame-Options)")
                   if path.startswith("/api/"):
