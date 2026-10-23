@@ -1,0 +1,75 @@
+name: Published Site Security Header Check
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "37 6 * * 1"
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/published-security-headers.yml"
+      - "src/server.ts"
+      - "src/lib/security-headers.server.ts"
+      - "public/_headers"
+
+permissions:
+  contents: read
+
+jobs:
+  headers:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Inspect published pages without submitting forms
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          import sys
+          from urllib.request import Request, urlopen
+          from urllib.error import HTTPError, URLError
+          from urllib.parse import urlparse
+
+          origin = "https://israel-taxi-travel.lovable.app"
+          failures = []
+          expected = ["x-content-type-options", "referrer-policy", "permissions-policy"]
+
+          for path, label in [("/", "home SSR"), ("/api/quote-request/", "quote API GET")]:
+              url = origin + path
+              req = Request(url, headers={"Accept": "text/html" if path == "/" else "application/json", "User-Agent": "IsraelTravelHub-security-header-check/1.0"})
+              try:
+                  result = urlopen(req, timeout=25)
+              except HTTPError as exc:
+                  result = exc
+              except URLError as exc:
+                  failures.append(f"{label}: network error {exc.reason}")
+                  continue
+
+              with result:
+                  status = result.status
+                  final_url = result.geturl()
+                  headers = {k.lower():v for k,v in result.headers.items()}
+                  print(f"{label}: HTTP {status}, host={urlparse(final_url).hostname}")
+                  for key in [*expected, "cache-control", "x-frame-options", "content-type"]:
+                      print(f"  {key}: {headers.get(key, '[missing]')}")
+                  if urlparse(final_url).hostname != "israel-taxi-travel.lovable.app":
+                      failures.append(f"{label}: unexpected redirect host")
+                  for key in expected:
+                      if key not in headers:
+                          failures.append(f"{label}: missing {key}")
+                  if headers.get("x-content-type-options", "").lower() != "nosniff":
+                      failures.append(f"{label}: nosniff not set")
+                  if path == "/" and "x-frame-options" in headers:
+                      failures.append("Lovable preview must remain embeddable (unexpected X-Frame-Options)")
+                  if path.startswith("/api/"):
+                      if "no-store" not in headers.get("cache-control", ""):
+                          failures.append("Quote endpoint GET response must not be publicly cached")
+                      if status not in (200, 405):
+                          failures.append(f"Quote endpoint returned unexpected {status} status")
+                  elif status != 200:
+                      failures.append(f"Home route returned HTTP {status}")
+          if failures:
+              for item in failures:
+                  print("::error::" + item)
+              sys.exit(1)
+          print("Published header check passed")
+          PY
