@@ -182,7 +182,11 @@ async function run() {
   const existing=await readFile(OUTPUT,"utf8");
   const old=JSON.parse(existing);
   const comparable={...snapshot,generatedAt:old.generatedAt};
-  if(JSON.stringify(comparable)===JSON.stringify(old)) { console.log("Holiday data unchanged");return; }
+  // Record a genuine monthly source re-check even when calendar dates have not moved.
+  // This keeps the review timestamp meaningful and avoids months of inactivity.
+  const lastReview=old.generatedAt ? Date.parse(old.generatedAt+"T00:00:00Z") : 0;
+  const reviewDue=!Number.isFinite(lastReview) || Date.now()-lastReview>=28*86400000;
+  if(JSON.stringify(comparable)===JSON.stringify(old) && !reviewDue) { console.log("Holiday data unchanged");return; }
   if(process.argv.includes("--check")) throw new Error("Holiday data requires refresh");
   await writeFile(OUTPUT,output);
   console.log("Generated "+holidays.length+" holiday periods through "+snapshot.through);
