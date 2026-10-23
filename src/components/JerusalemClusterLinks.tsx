@@ -71,7 +71,7 @@ export const jerusalemConnections: Record<JerusalemClusterKey, Destination[]> = 
     L("Jerusalem accommodation", "/travel-blog/where-to-stay-in-jerusalem/", "Pick a starting base"),
   ],
   bethlehem: [
-    L("Bethlehem, Jericho and Jordan River tours", "/tours/bethlehem-jericho-jordan-river/", "Guided options are separate from an independent bus trip"),
+    L("Compare organised Bethlehem tours", "/tours/bethlehem-jericho-jordan-river/", "Guided options are separate from an independent bus trip"),
     L("Day trips from Jerusalem", "/travel-blog/day-trips-from-jerusalem/", "Compare the destinations and time commitments"),
     L("Churches in Jerusalem", "/travel-blog/churches-in-jerusalem/", "Connect a Nativity trip with city pilgrimage sites"),
     L("Old City and Damascus Gate", "/travel-blog/old-city-jerusalem/", "Plan the bus approach near Damascus Gate"),
@@ -129,8 +129,10 @@ export const jerusalemConnections: Record<JerusalemClusterKey, Destination[]> = 
 export function JerusalemClusterLinks({ pageKey }: { pageKey: JerusalemClusterKey }) {
   const links = jerusalemConnections[pageKey];
   if (!links?.length) return null;
+  const guideKey = (["jerusalem", "jerusalemChurches", "jerusalemShopping", "jerusalemDayTrips", "bethlehem", "jerusalemDeadSea"] as string[]).includes(pageKey);
+  const title = guideKey ? "Related practical guides" : "Explore more around Jerusalem";
   return <section aria-labelledby="jerusalem-connections-h" className="mt-12 border-t pt-8" data-testid="jerusalem-cluster-links">
-    <h2 id="jerusalem-connections-h" className="text-2xl font-semibold sm:text-3xl">Explore more around Jerusalem</h2>
+    <h2 id="jerusalem-connections-h" className="text-2xl font-semibold sm:text-3xl">{title}</h2>
     <p className="mt-2 max-w-3xl text-sm leading-relaxed text-muted-foreground">Find the practical guide, related place or booking options relevant to the next part of your visit.</p>
     <ul className="mt-5 grid gap-3 sm:grid-cols-2">
       {links.map(item => <li key={String(item.to)}>
