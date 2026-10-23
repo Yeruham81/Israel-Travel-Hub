@@ -220,10 +220,10 @@ function Home() {
           </section>
         ))}
       </div>
-      <TripadvisorReviewsSection />
+      <div className="home-offscreen home-offscreen-reviews"><TripadvisorReviewsSection /></div>
       <div className="mx-auto mt-14 max-w-6xl space-y-8 px-4">
         {services.slice(1).map((s, i) => (
-          <section key={s.id} id={s.id} aria-labelledby={`${s.id}-h`} className={`scroll-mt-6 rounded-2xl border p-5 md:p-8 ${(i + 1) % 2 ? "bg-accent/40" : "bg-card"}`}>
+          <section key={s.id} id={s.id} aria-labelledby={`${s.id}-h`} className={`home-offscreen scroll-mt-6 rounded-2xl border p-5 md:p-8 ${(i + 1) % 2 ? "bg-accent/40" : "bg-card"}`}>
             <header className="border-b pb-5">
               <div className="min-w-0">
                 <p className="eyebrow">{s.tagline}</p>
@@ -249,13 +249,13 @@ function Home() {
         ))}
       </div>
 
-      <section id="guides" aria-labelledby="guides-h" className="mx-auto mt-16 max-w-6xl scroll-mt-6 px-4">
+      <section id="guides" aria-labelledby="guides-h" className="home-offscreen mx-auto mt-16 max-w-6xl scroll-mt-6 px-4">
         <div><p className="eyebrow">Before You Travel</p><h2 id="guides-h" className="mt-2 text-3xl">Practical Israel Travel Guides</h2><p className="mt-3 max-w-2xl text-muted-foreground">Clear answers about arrival, getting connected and choosing how to get around.</p></div>
         <div className="mt-6 grid gap-5 sm:grid-cols-2 xl:grid-cols-3" data-testid="guide-row-one">{guideDirectory.filter((guide) => ["uber", "esim", "arrival"].includes(guide.id)).map((guide) => <GuideCard key={guide.id} guide={guide} headingLevel={3} />)}</div>
         <div className="mt-5 grid gap-5 sm:grid-cols-2 xl:grid-cols-3" data-testid="guide-row-two">{guideDirectory.filter((guide) => ["israel", "travelTips", "airport-journey-jerusalem"].includes(guide.id)).map((guide) => <GuideCard key={guide.id} guide={guide} headingLevel={3} />)}</div>
         <div className="mt-7 flex justify-center"><Link to="/guides/" className="btn btn-primary">Browse all guides →</Link></div>
       </section>
-      <section aria-labelledby="dest-h" className="mx-auto mt-20 max-w-6xl px-4">
+      <section aria-labelledby="dest-h" className="home-offscreen mx-auto mt-20 max-w-6xl px-4">
         <div className="rounded-2xl bg-navy p-6 text-navy-foreground md:p-8">
           <p className="text-xs font-semibold uppercase tracking-[0.14em] opacity-80">Where to Base Yourself</p>
           <h2 id="dest-h" className="mt-2 text-3xl">Popular Destinations</h2>
@@ -269,9 +269,9 @@ function Home() {
           <Link to="/destinations/" className="btn btn-light mt-6">Explore all destinations →</Link>
         </div>
       </section>
-      <PersonalTestimonialsSection />
-      <div className="mx-auto mt-10 max-w-6xl px-4"><AuthorCard introduction /></div>
-      <div className="mx-auto mt-14 max-w-6xl px-4"><HomeContactForm /></div>
+      <div className="home-offscreen home-offscreen-reviews"><PersonalTestimonialsSection /></div>
+      <div className="home-offscreen mx-auto mt-10 max-w-6xl px-4"><AuthorCard introduction /></div>
+      <div className="home-offscreen mx-auto mt-14 max-w-6xl px-4"><HomeContactForm /></div>
       <details className="mx-auto mb-10 mt-10 max-w-6xl px-4 text-sm text-muted-foreground">
         <summary className="inline-block cursor-pointer rounded px-1 font-medium hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring">Photo credits</summary>
         <ul className="mt-3 space-y-1.5">
