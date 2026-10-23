@@ -188,7 +188,7 @@ export function IsraelHolidaysPage() {
             ["Why do some holiday dates start the evening before?","Jewish festivals usually begin at sunset, so travel or restaurant plans on the preceding evening can already be affected. The calendar shows that starting date."],
             ["Are Ramadan and Eid dates fixed?","The Islamic calendar follows lunar observations. Dates shown for Ramadan and Eid are estimates until relevant local religious authorities confirm them."],
             ["When is Easter celebrated in Jerusalem in 2027?","Western Easter Sunday is 28 March. Orthodox Easter Sunday is 2 May; the Holy Fire ceremony takes place on Orthodox Holy Saturday, 1 May. Religious services can affect access around the Old City."],
-                    ].map(([q,a])=><details key={q} className="p-4"><summary className="cursor-pointer font-semibold">{q}</summary><p className="mt-2 leading-relaxed text-muted-foreground">{a}</p></details>)}
+          ].map(([q,a])=><details key={q} className="p-4"><summary className="cursor-pointer font-semibold">{q}</summary><p className="mt-2 leading-relaxed text-muted-foreground">{a}</p></details>)}
         </div>
       </section>
       <section id="sources" className="mt-12 scroll-mt-24">
