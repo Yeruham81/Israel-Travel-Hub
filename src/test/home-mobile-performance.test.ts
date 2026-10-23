@@ -75,7 +75,7 @@ describe("home mobile performance optimizations", () => {
 
   it("defers second hero image until after initial render", () => {
     const carousel = read("src/components/HeroCarousel.tsx");
-    expect(carousel).toContain("index === 0 ? 2800 : 350");
+    expect(carousel).toContain("index === 0 ? 4800 : 350");
     expect(carousel).toContain('fetchPriority={i === 0 ? "high" : "auto"}');
     expect(carousel).toContain("prefers-reduced-motion: reduce");
   });
@@ -84,8 +84,14 @@ describe("home mobile performance optimizations", () => {
     const slides = read("src/components/HomeHero.tsx");
     const carousel = read("src/components/HeroCarousel.tsx");
     expect(slides).toContain("hero-jerusalem-medium.webp");
+    expect(slides).toContain("hero-jerusalem-sm-optimized.webp");
     expect(slides).toContain("hero-jerusalem-large.webp");
     expect(carousel).toContain('media="(max-width: 767px)"');
+    for (const place of ["jerusalem", "haifa", "tel-aviv", "masada", "caesarea", "galilee"]) {
+      const full = bytes(`src/assets/home/hero-${place}-sm.webp`);
+      const smaller = bytes(`src/assets/home/hero-${place}-sm-optimized.webp`);
+      expect(smaller, place).toBeLessThan(full);
+    }
     expect(carousel).toContain('media="(max-width: 1800px)"');
     expect(carousel).toContain('fetchPriority={i === 0 ? "high" : "auto"}');
     for (const place of ["jerusalem", "haifa", "tel-aviv", "masada", "caesarea", "galilee"]) {
