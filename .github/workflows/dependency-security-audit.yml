@@ -30,5 +30,9 @@ jobs:
         with:
           bun-version: "1.4.4"
 
-      - name: Audit locked dependencies (high and critical advisories)
+      - name: Audit production dependencies (high and critical)
+        run: bun audit --prod --audit-level=high
+
+      - name: Audit all dependencies including developer tooling
+        if: always()
         run: bun audit --audit-level=high
