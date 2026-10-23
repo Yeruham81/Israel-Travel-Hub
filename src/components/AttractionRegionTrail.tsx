@@ -7,14 +7,16 @@ import type { AttractionRegionLink } from "@/data/attractionRegionLinks";
  */
 export function AttractionRegionTrail({
   links,
+  compact = false,
 }: {
   links: readonly AttractionRegionLink[];
+  compact?: boolean;
 }) {
   if (!links.length) return null;
   return (
-    <nav aria-label="Attractions and sights in these areas" className="mt-5 border-y py-4">
-      <p className="text-sm font-semibold">Explore the sights before planning your route</p>
-      <ul className="mt-2 flex flex-wrap gap-2">
+    <nav aria-label="Attractions and sights in these areas" className={compact ? "mt-4 border-t pt-3" : "mt-5 border-y py-4"}>
+      {!compact && <p className="text-sm font-semibold">Explore the sights before planning your route</p>}
+      <ul className={(compact ? "" : "mt-2 ") + "flex flex-wrap gap-2"}>
         {links.map((item) => (
           <li key={item.hash}>
             <Link to="/attractions/" hash={item.hash} className="chip">

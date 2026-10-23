@@ -131,7 +131,7 @@ function Destinations() {
             <ul className="mt-4 grid gap-2 sm:grid-cols-2">
               {d.links.map((l) => <li key={l.label}><Link to={l.to} className="font-medium text-primary underline-offset-4 hover:underline">{l.label} →</Link></li>)}
             </ul>
-            <AttractionRegionTrail links={[attractionRegionsForDestinations[d.id]]} />
+            <AttractionRegionTrail links={[attractionRegionsForDestinations[d.id]]} compact />
           </section>
         ))}
       </div>
