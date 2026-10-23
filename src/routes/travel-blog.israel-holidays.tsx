@@ -7,7 +7,8 @@ import { PageUpdated } from "@/components/PageUpdated";
 import { CANONICAL_ORIGIN, SITE_NAME, jsonLd, pageMeta } from "@/lib/site";
 import { authorLd } from "@/lib/author";
 import { migrationPhotos } from "@/data/guideMigrationPhotos";
-import { holidays, HOLIDAY_COVERAGE, findHolidayMatches, checkRange, shabbatDates, intersects, type Holiday, type Community, type Impact } from "@/data/israelHolidays";
+import { holidays, HOLIDAY_COVERAGE, findHolidayMatches, checkRange, shabbatDates, intersects, type Holiday, type Impact } from "@/data/israelHolidays";
+import { IsraelHolidayOverview } from "@/components/IsraelHolidayOverview";
 
 const PATH = "/travel-blog/israel-holidays/";
 const TITLE = "Israel Holidays Calendar 2027: Dates & Travel Planning";
@@ -134,7 +135,6 @@ export function IsraelHolidaysPage() {
   const [monthOffset,setMonthOffset]=useState(3); // Jan 2027
   const [selection,setSelection]=useState<DateSelection>({start:null,end:null});
   const [style,setStyle]=useState<TripStyle>("mixed");
-  const [community,setCommunity]=useState<"All"|Community>("All");
   const start=selection.start;
   const end=selection.end;
   const error=start && end ? checkRange(start,end) : null;
@@ -142,12 +142,6 @@ export function IsraelHolidaysPage() {
   const shabbat=useMemo(()=>start&&end&&!error ? shabbatDates(start,end):[],[start,end,error]);
   const hasShabbat=shabbat.length>0;
   const tripAdvice=start&&end&&!error ? travelTip(style,matched,hasShabbat) : null;
-  const fullList=community==="All"?holidays:holidays.filter(h=>h.community===community);
-  const grouped=Object.entries(fullList.reduce<Record<string,Holiday[]>>((acc,h)=>{
-    const key=h.from.slice(0,7);
-    (acc[key] ||= []).push(h);
-    return acc;
-  },{})).sort(([a],[b])=>a.localeCompare(b));
   const selectDate=(day:string)=>{
     setSelection(current=>{
       if(!current.start || current.end) return {start:day,end:null};
@@ -235,17 +229,7 @@ export function IsraelHolidaysPage() {
             {matched.length>0 && <div className="grid gap-3 md:grid-cols-2">{matched.map(h=><HolidayItem key={h.id} holiday={h}/>)}</div>}
           </div>}
       </section>
-      <section id="year-calendar" className="mt-12 scroll-mt-24" aria-labelledby="year-heading">
-        <h2 id="year-heading" className="text-3xl">Holiday dates: late 2026 and 2027</h2>
-        <p className="mt-2 leading-relaxed text-muted-foreground">Browse the holidays without selecting a trip. Full Jewish festival dates here follow practice in Israel, not the longer Diaspora schedules. Muslim dates are provisional. Dates shown include the preceding evening where relevant.</p>
-        <div className="mt-4 flex flex-wrap gap-2" role="group" aria-label="Filter holidays by tradition">
-          {(["All","Jewish","Christian","Muslim","Druze","National"] as const).map(item=><button key={item} type="button" aria-pressed={community===item} onClick={()=>setCommunity(item)} className={"rounded-full border px-3 py-1.5 text-sm font-medium "+(community===item?"border-primary bg-primary text-primary-foreground":"bg-background hover:bg-secondary")}>{item==="All"?"All holidays":item}</button>)}
-        </div>
-        <div className="mt-5 space-y-4">{grouped.map(([month,items])=><details key={month} className="rounded-xl border bg-card p-4" open={month==="2026-12" || month==="2027-04" || month==="2027-10" ? true : undefined}>
-          <summary className="cursor-pointer text-lg font-semibold">{new Date(month+"-15T12:00:00Z").toLocaleDateString("en-GB",{month:"long",year:"numeric",timeZone:"UTC"})} <span className="text-sm font-normal text-muted-foreground">({items.length})</span></summary>
-          <div className="mt-4 grid gap-3 md:grid-cols-2">{items.map(h=><HolidayItem key={h.id} holiday={h} />)}</div>
-        </details>)}</div>
-      </section>
+      <IsraelHolidayOverview />
       <section id="what-changes" className="mt-12 scroll-mt-24">
         <h2 className="text-3xl">What actually changes on Israeli holidays?</h2>
         <div className="mt-5 grid gap-4 sm:grid-cols-2">
