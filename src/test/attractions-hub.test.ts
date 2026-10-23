@@ -1,5 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { attractionHubCards, attractionHubPhotos, attractionHubRegions, attractionPlanningPaths } from "@/data/attractionsHub";
+import { readFileSync } from "node:fs";
 import { attractionIds, attractionPath } from "@/data/attractionGuideTypes";
 import { travelGuidePaths } from "@/data/registry";
 
@@ -19,6 +20,14 @@ describe("Attractions hub redesign", () => {
       expect(region.planning.length).toBeGreaterThanOrEqual(3);
       expect(region.planning.every((link) => String(link.to).startsWith("/"))).toBe(true);
     }
+  });
+
+  it("keeps internal image provenance out of the public Attractions page", () => {
+    const page = readFileSync("src/routes/attractions.index.tsx", "utf8");
+    expect(page).not.toContain("WordPress");
+    expect(page).not.toContain("original WordPress media library");
+    expect(page).not.toContain("<details");
+    expect(page).toContain("border border-border/75 bg-secondary/30");
   });
 
   it("offers six distinct planning pathways with relevant, real internal next steps", () => {

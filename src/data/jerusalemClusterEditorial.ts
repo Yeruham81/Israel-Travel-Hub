@@ -6,7 +6,7 @@ import { travelGuidePaths } from "@/data/registry";
 /**
  * 2026 Jerusalem editorial refresh.  Supplements the existing material rather
  * than replacing historically useful guide sections or changing URLs.
- * The old WordPress pages were reviewed for subjects lost in the migration.
+ * Earlier editions of the guides were reviewed for subjects lost in the migration.
  * Dynamic fares, hours, admissions, site closures and live tour inventory are
  * never sourced from old articles.
  */
@@ -135,7 +135,7 @@ const articles: Partial<Record<TravelGuideId, Upgrade>> = {
         id: "bezalel-independent-design",
         title: "Bezalel Street, independent designers and temporary fairs",
         paragraphs: [
-          "The Bezalel Street area, downtown studios and occasional arts fairs can be good for handmade jewellery, prints and contemporary design. The old WordPress guide described a recurring Friday fair, but its precise location and current operation require verification; do not plan around a past schedule without an organiser's current announcement.",
+          "The Bezalel Street area, downtown studios and occasional arts fairs can be good for handmade jewellery, prints and contemporary design. Older accounts mention a Friday artists’ fair, but its current location and schedule require verification; do not plan around a past schedule without an organiser's current announcement.",
           "For an easy city-centre browse, combine Ben Yehuda's pedestrian streets with shops on Jaffa Road. If shopping is secondary to sightseeing, Mamilla is a logical stop before or after Jaffa Gate, whereas Mahane Yehuda is a more food-focused experience.",
         ],
       },

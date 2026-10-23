@@ -84,11 +84,9 @@ export const attractionHubRegions: AttractionHubRegion[] = [
     ],
     planning: [
       { label: "Tel Aviv & Jaffa tours", to: "/tours/tel-aviv-jaffa/" },
-      { label: "Food & market tours", to: "/tours/food-market-tours/" },
-      { label: "Hotels in Tel Aviv", to: "/travel-blog/where-to-stay-in-tel-aviv/" },
-      { label: "Getting around Tel Aviv", to: travelGuidePaths.telAviv },
       { label: "Day trips from Tel Aviv", to: travelGuidePaths.telAvivDayTrips },
-      { label: "Airport to Tel Aviv: all options", to: "/travel-blog/how-to-get-from-ben-gurion-airport-to-tel-aviv/" },
+      { label: "Hotels in Tel Aviv", to: "/travel-blog/where-to-stay-in-tel-aviv/" },
+      { label: "Airport to Tel Aviv", to: "/travel-blog/how-to-get-from-ben-gurion-airport-to-tel-aviv/" },
     ],
   },
   {
@@ -166,7 +164,6 @@ export const attractionHubRegions: AttractionHubRegion[] = [
       { label: "Dead Sea visitor guide", to: travelGuidePaths.deadSea },
       { label: "Jerusalem to the Dead Sea", to: travelGuidePaths.jerusalemDeadSea },
       { label: "Dead Sea hotels", to: "/travel-blog/best-dead-sea-hotels/" },
-      { label: "Airport to Ein Bokek: all options", to: "/travel-blog/how-to-get-from-ben-gurion-airport-to-ein-bokek/" },
     ],
   },
   {

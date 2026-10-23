@@ -121,11 +121,17 @@ function Attractions() {
           <div className="mt-3 grid gap-3 sm:mt-4 sm:grid-cols-2 sm:gap-4 xl:grid-cols-3">
             {region.cards.map((card) => <AttractionCard key={card.id} card={card} />)}
           </div>
-          <nav aria-label={"More ways to explore " + region.title} className="mt-4 border-t pt-3">
-            <ul className="flex flex-wrap gap-x-5 gap-y-2">
+          <nav aria-label={"More ways to explore " + region.title} className="mt-4 border-t border-border/70 pt-3">
+            <ul className="flex flex-wrap gap-2">
               {region.planning.map((link) => (
                 <li key={link.label}>
-                  <Link to={link.to} className="inline-flex items-center gap-1 text-sm font-semibold text-primary underline-offset-4 hover:underline">{link.label} <ArrowUpRight size={14} aria-hidden="true" /></Link>
+                  <Link
+                    to={link.to}
+                    className="group inline-flex min-h-9 items-center gap-1.5 rounded-lg border border-border/75 bg-secondary/30 px-3 py-1.5 text-xs font-semibold leading-snug text-foreground/85 transition-colors hover:border-primary/40 hover:bg-secondary/65 hover:text-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary sm:text-sm"
+                  >
+                    {link.label}
+                    <ArrowUpRight className="size-3.5 shrink-0 text-muted-foreground/75 transition-colors group-hover:text-primary" aria-hidden="true" />
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -171,13 +177,6 @@ function Attractions() {
         </div>
       </section>
 
-      <details className="mt-12 rounded-xl border bg-card p-4 text-xs text-muted-foreground">
-        <summary className="cursor-pointer font-semibold text-foreground">Images from the original WordPress media library</summary>
-        <p className="mt-3 leading-relaxed">Region and Jerusalem shopping photographs were selected from the original site's archived media. Original filenames are listed here for attribution and rights-review tracking. Other guide-card images retain their existing source metadata in the guide library.</p>
-        <ul className="mt-3 grid gap-x-6 gap-y-1.5 sm:grid-cols-2">
-          {Object.values(attractionHubPhotos).map((photo) => <li key={photo.sourceFilename}>{photo.sourceFilename}</li>)}
-        </ul>
-      </details>
     </main>
   );
 }

@@ -13,7 +13,7 @@ The existing /attractions/ directory has been redesigned in place without changi
 - New media are hosted under public/images/attractions and never hotlink to the legacy WordPress site. Other existing guide photos remain imported from existing assets.
 
 ## Media provenance
-Images selected visually from the owner's existing WordPress uploads mirrored to connected Google Drive /ChatGPT/{year}/{month}. The selected source filenames and paths are declared in src/data/attractionsHub.ts and displayed in a compact disclosure on the hub for tracking. This import does not establish independent copyright/photographer/license attribution; any third-party credit requirements need original-file rights review prior to broader repurposing.
+Images selected visually from the owner's existing WordPress uploads mirrored to connected Google Drive /ChatGPT/{year}/{month}. The selected source filenames and paths are declared in src/data/attractionsHub.ts for internal tracking only; they are not displayed on the public page. This import does not establish independent copyright/photographer/license attribution; any third-party credit requirements need original-file rights review prior to broader repurposing.
 
 Selected media filenames:
 - The_Old_City_of_Jerusalem_3.jpg.webp
@@ -31,3 +31,7 @@ This first phase does not rewrite any guide. For each regional cluster, subseque
 
 ## Checks
 src/test/attractions-hub.test.ts verifies region structure, all 17 existing attraction paths, no duplicated card paths, Jerusalem shopping, topical planning links, and no reliance on remote legacy photos. Run the existing workflow (TypeScript, unit tests and production build) on main and inspect desktop/mobile layouts.
+
+## 2026-10-24 compact follow-up links
+
+The seven areas show a maximum of four lightweight, subdued secondary links below their editorial guide cards. These small bordered chips are deliberately lower-contrast than primary guide cards. The public disclosure of imported image filenames was removed; ownership and credit review remains internal.

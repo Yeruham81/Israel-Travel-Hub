@@ -18,6 +18,7 @@ describe("Attractions regional scaffold and reciprocal navigation", () => {
       expect(region.cards.length).toBeGreaterThanOrEqual(2);
       expect(region.cards.every(card => String(card.to).startsWith("/"))).toBe(true);
       expect(new Set(region.cards.map(card => String(card.to))).size).toBe(region.cards.length);
+      expect(region.planning.length).toBeLessThanOrEqual(4);
       expect(region.planning.every(link => String(link.to).startsWith("/"))).toBe(true);
       expect(region.planning.every(link => !region.cards.some(card => link.to === card.to))).toBe(true);
     }
@@ -41,7 +42,7 @@ describe("Attractions regional scaffold and reciprocal navigation", () => {
     const byId = Object.fromEntries(attractionHubRegions.map(region => [region.id, region]));
     expect(byId["tel-aviv-jaffa"]!.planning.some(link => String(link.to).includes("how-to-get-from-ben-gurion-airport-to-tel-aviv"))).toBe(true);
     expect(byId["nazareth-lower-galilee"]!.planning.some(link => link.to === "/private-driver/")).toBe(true);
-    expect(byId["dead-sea-masada"]!.planning.some(link => String(link.to).includes("how-to-get-from-ben-gurion-airport-to-ein-bokek"))).toBe(true);
+    expect(byId["dead-sea-masada"]!.planning.some(link => link.to === "/travel-blog/best-dead-sea-hotels/")).toBe(true);
     expect(byId["tel-aviv-jaffa"]!.planning.some(link => link.to === travelGuidePaths.telAvivDayTrips)).toBe(true);
     expect(byId["sea-of-galilee"]!.cards.some(card => card.to === travelGuidePaths.baptism)).toBe(true);
   });
