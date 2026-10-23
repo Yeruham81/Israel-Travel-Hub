@@ -18,11 +18,10 @@ export const TOURIST_EVENT_EDITION_APPROVALS: readonly {
   { title:"Celtic Throne", from:"2026-11-04", to:"2026-11-19", reason:"Dance-led touring production" },
 ];
 
-/** A confirmed editorially listed festival can optionally reveal its verified
- * individual performances on demand instead of flooding the general list.
- * These rules are valid for the named edition only, not future years.
+/** Suppress individual shows when one verified festival event provides the
+ * official programme. Do not infer approval for future editions.
  */
-export const EVENT_PROGRAMME_GROUPS: readonly {
+export const FESTIVAL_EDITION_SUPPRESSIONS: readonly {
   festivalId:string;
   from:string;
   to:string;
@@ -37,7 +36,7 @@ const isTestListing=(event:ConfirmedEvent)=>
   /(?:\/event\/)(?:bdika|test|dummy)(?:\/|$)/i.test(event.sourceUrl) ||
   /^(?:test(?: event)?|dummy|winter \d{3,})$/i.test(event.title.trim());
 
-const withinProgramme=(event:ConfirmedEvent, group:(typeof EVENT_PROGRAMME_GROUPS)[number])=>
+const withinFestival=(event:ConfirmedEvent, group:(typeof FESTIVAL_EDITION_SUPPRESSIONS)[number])=>
   event.from>=group.from&&event.to<=group.to&&event.region===group.region&&
   key(event.location).includes(group.venueContains);
 
@@ -45,16 +44,8 @@ const withinProgramme=(event:ConfirmedEvent, group:(typeof EVENT_PROGRAMME_GROUP
 export function touristHighlights(imported:readonly ConfirmedEvent[]):ConfirmedEvent[] {
   return imported.filter(e=>
     !isTestListing(e)&&
-    !EVENT_PROGRAMME_GROUPS.some(g=>withinProgramme(e,g))&&
+    !FESTIVAL_EDITION_SUPPRESSIONS.some(g=>withinFestival(e,g))&&
     TOURIST_EVENT_EDITION_APPROVALS.some(a=>key(e.title)===key(a.title)&&e.from>=a.from&&e.to<=a.to)
   );
 }
 
-/** Festival programme is an on-demand expansion of an editorial festival.
- * Never treat a Ticketmaster performance as evidence for an unannounced edition.
- */
-export function festivalProgramme(imported:readonly ConfirmedEvent[],festivalId:string):ConfirmedEvent[]{
-  const group=EVENT_PROGRAMME_GROUPS.find(g=>g.festivalId===festivalId);
-  return group?imported.filter(e=>!isTestListing(e)&&withinProgramme(e,group))
-    .sort((a,b)=>a.from.localeCompare(b.from)||(a.startTime||"").localeCompare(b.startTime||"")||a.title.localeCompare(b.title)):[];
-}
