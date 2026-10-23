@@ -1,0 +1,98 @@
+name: Refresh Israel event listings
+
+on:
+  workflow_dispatch:
+  schedule:
+    # Daily, using UTC; dates in the importer are interpreted in Israel.
+    - cron: "41 4 * * *"
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/refresh-israel-events.yml"
+      - "scripts/sync-israel-events.mjs"
+      - "scripts/israel-events-source.mjs"
+      - "scripts/israel-events-source.test.mjs"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: events-feed-refresh
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 18
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+
+      - name: Validate source normalizer
+        run: node --test scripts/israel-events-source.test.mjs
+
+      - name: Sync licensed source listings
+        env:
+          TICKETMASTER_API_KEY: ${{ secrets.TICKETMASTER_API_KEY }}
+        run: node scripts/sync-israel-events.mjs
+
+      - name: Check for meaningful data changes
+        id: changed
+        run: |
+          if git diff --quiet -- src/data/israelEventFeed.generated.json; then
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Set up Bun
+        if: steps.changed.outputs.changed == 'true'
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+
+      - name: Install dependencies
+        if: steps.changed.outputs.changed == 'true'
+        run: bun install --frozen-lockfile
+
+      - name: Validate site before publishing new events
+        if: steps.changed.outputs.changed == 'true'
+        run: |
+          bun run build
+          npx tsc --noEmit
+          bun run test
+
+      - name: Publish only verified event data, without overwriting other edits
+        if: steps.changed.outputs.changed == 'true'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add src/data/israelEventFeed.generated.json
+          git commit -m "chore: refresh verified Israel event listings"
+          # Build and tests may change unrelated generated files. A rebase
+          # requires a clean tree; never publish these unrelated outputs.
+          git stash push --include-untracked -m "Temporary CI validation outputs"
+          if [ -n "$(git status --porcelain)" ]; then
+            echo "::error::CI worktree is not clean; no changes published"
+            exit 1
+          fi
+          for attempt in 1 2 3 4 5; do
+            git fetch origin main
+            if ! git rebase origin/main; then
+              git rebase --abort || true
+              echo "::error::Concurrent changes conflict with the event snapshot. No remote files overwritten."
+              exit 1
+            fi
+            if git push origin HEAD:main; then
+              echo "Validated Israel event feed published."
+              exit 0
+            fi
+            sleep $((attempt * 2))
+          done
+          echo "::error::Main moved too frequently; retry the workflow."
+          exit 1
