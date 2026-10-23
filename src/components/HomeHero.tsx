@@ -1,20 +1,20 @@
 import { HeroCarousel, type HeroSlide } from "@/components/HeroCarousel";
-import hJerSm from "@/assets/home/hero-jerusalem-sm.webp";
+import hJerSm from "@/assets/home/hero-jerusalem-sm-optimized.webp";
 import hJerMedium from "@/assets/home/hero-jerusalem-medium.webp";
 import hJerLarge from "@/assets/home/hero-jerusalem-large.webp";
-import hTaSm from "@/assets/home/hero-tel-aviv-sm.webp";
+import hTaSm from "@/assets/home/hero-tel-aviv-sm-optimized.webp";
 import hTaMedium from "@/assets/home/hero-tel-aviv-medium.webp";
 import hTaLarge from "@/assets/home/hero-tel-aviv-large.webp";
-import hHfSm from "@/assets/home/hero-haifa-sm.webp";
+import hHfSm from "@/assets/home/hero-haifa-sm-optimized.webp";
 import hHfMedium from "@/assets/home/hero-haifa-medium.webp";
 import hHfLarge from "@/assets/home/hero-haifa-large.webp";
-import hMsSm from "@/assets/home/hero-masada-sm.webp";
+import hMsSm from "@/assets/home/hero-masada-sm-optimized.webp";
 import hMsMedium from "@/assets/home/hero-masada-medium.webp";
 import hMsLarge from "@/assets/home/hero-masada-large.webp";
-import hCsSm from "@/assets/home/hero-caesarea-sm.webp";
+import hCsSm from "@/assets/home/hero-caesarea-sm-optimized.webp";
 import hCsMedium from "@/assets/home/hero-caesarea-medium.webp";
 import hCsLarge from "@/assets/home/hero-caesarea-large.webp";
-import hGlSm from "@/assets/home/hero-galilee-sm.webp";
+import hGlSm from "@/assets/home/hero-galilee-sm-optimized.webp";
 import hGlMedium from "@/assets/home/hero-galilee-medium.webp";
 import hGlLarge from "@/assets/home/hero-galilee-large.webp";
 
