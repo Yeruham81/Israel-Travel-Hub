@@ -53,7 +53,7 @@ async function hebcal(year) {
   const url = HEB_API + "?v=1&cfg=json&i=on&year=" + year + "&maj=on&min=on&mod=on&mf=on";
   const response = await requestJSON(url);
   if (!Array.isArray(response.items) || response.items.length < 25) throw new Error("Incomplete Hebcal calendar for " + year);
-  const items = response.items.filter((item) => item && typeof item.title === "string" && typeof item.date === "string").map((item) => ({ title: item.title, date: assertDay(item.date.slice(0, 10)) }));
+  const items = response.items.filter((item) => item && typeof item.title === "string" && typeof item.date === "string").map((item) => ({ title: item.title.replace(/[’‘]/g, "'"), date: assertDay(item.date.slice(0, 10)) }));
   const find = (pattern, required = true) => {
     const item = items.find(item => pattern.test(item.title));
     if (!item && required) throw new Error("Hebcal missing " + pattern + " for " + year);
@@ -68,9 +68,9 @@ async function hebcal(year) {
   const shavuot = find(/^Shavuot$/i);
   const purim = find(/^Purim$/i);
   const shushan = find(/^Shushan Purim$/i);
-  const tubishvat = find(/^(Tu B'Shvat|Tu BiShvat)$/i);
-  const lag = find(/^Lag B'Omer$/i);
-  const fast = find(/^(Tish'a B'Av|Tisha B'Av)$/i);
+  const tubishvat = find(/^Tu B(?:i|')Shvat$/i);
+  const lag = find(/^Lag B(?:a|')Omer$/i);
+  const fast = find(/^Tish'?a B'Av$/i);
   const hanukkah = find(/^Chanukah: 1 Candle$/i);
   const sigd = find(/^Sigd$/i);
   const yshoah = find(/^Yom HaShoah$/i);
