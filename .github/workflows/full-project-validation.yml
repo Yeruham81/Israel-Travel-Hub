@@ -44,11 +44,13 @@ jobs:
       - name: Install dependencies
         run: bun install --frozen-lockfile
 
+      # TanStack Router regenerates routeTree.gen.ts at build time.
+      # Build first so type-checking sees any newly added file routes.
+      - name: Build production version
+        run: bun run build
+
       - name: Check TypeScript
         run: npx tsc --noEmit
 
       - name: Run all tests
         run: bun run test
-
-      - name: Build production version
-        run: bun run build
