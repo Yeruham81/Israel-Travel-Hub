@@ -1,7 +1,7 @@
 # Attractions hub redesign — 23 October 2026
 
 ## Scope
-The existing /attractions/ directory has been redesigned in place without changing any existing guide route or modifying guide bodies. It remains a discovery directory rather than replacing /hotels/ (accommodation and hotel areas), /tours/ (bookable tour categories), or /guides/ (practical travel articles). The standalone /destinations/ directory was retired and redirects to /hotels/.
+The existing /attractions/ directory has been redesigned in place without changing any existing guide route or modifying guide bodies. It remains a discovery directory rather than replacing /accommodation/ (accommodation and hotel areas), /tours/ (bookable tour categories), or /guides/ (practical travel articles). The standalone /destinations/ directory was deleted; no legacy redirect exists. Active navigation points to /accommodation/ instead.
 
 ## New page structure
 - Compact illustrated hero with a direct region jump and one optional Israel-highlights guide.

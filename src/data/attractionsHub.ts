@@ -218,7 +218,7 @@ export const attractionPlanningPaths: {
     id: "hotels",
     title: "Find the right place to stay",
     description: "Compare neighbourhoods, coastal resorts and hotel areas to find a practical base for sightseeing and day trips.",
-    to: "/hotels/",
+    to: "/accommodation/",
     links: [
       { label: "Where to stay in Jerusalem", to: "/travel-blog/where-to-stay-in-jerusalem/" },
       { label: "Where to stay in Tel Aviv", to: "/travel-blog/where-to-stay-in-tel-aviv/" },

@@ -24,7 +24,7 @@ export const serviceNav: NavItem[] = [
   { label: "Airport transfers", to: "/transfers/" },
   { label: "Tours & Day Trips", to: "/tours/" },
   { label: "Shore excursions", to: "/shore-excursions/" },
-  { label: "Accommodation", to: "/hotels/" },
+  { label: "Accommodation", to: "/accommodation/" },
   { label: "Attractions", to: "/attractions/" },
   { label: "Travel guides", to: "/guides/" },
 ];
@@ -83,7 +83,7 @@ export const allNavGroups: NavGroup[] = [
   },
   {
     title: "Accommodation",
-    items: [{ label: "All accommodation", to: "/hotels/" }, ...hotelNav],
+    items: [{ label: "All accommodation", to: "/accommodation/" }, ...hotelNav],
   },
   {
     title: "Attractions",

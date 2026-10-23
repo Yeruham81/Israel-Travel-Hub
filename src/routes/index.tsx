@@ -139,7 +139,7 @@ export const services: Service[] = [
       { label: "Dead Sea", text: "Spa breaks, family resorts & luxury stays", to: "/travel-blog/best-dead-sea-hotels/", img: IMG.deadSea },
       { label: "Haifa", text: "Boutique, family & Carmel hotels", to: "/travel-blog/best-hotels-in-haifa/", img: { src: haifaColony, alt: "Historic German Colony area of Haifa" } },
     ],
-    hub: { label: "Explore accommodation", to: "/hotels/" },
+    hub: { label: "Explore accommodation", to: "/accommodation/" },
   },
   {
     id: "attractions", eyebrow: "Attractions & Experiences", tagline: "Discover Israel’s Must-See Places", title: "Attractions & Experiences",
@@ -285,7 +285,7 @@ function Home() {
           <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
             {popularDestinationCards.map((card) => <PhotoCard key={card.label} c={card} />)}
           </div>
-          <Link to="/hotels/" className="btn btn-light mt-6">Explore all accommodation →</Link>
+          <Link to="/accommodation/" className="btn btn-light mt-6">Explore all accommodation →</Link>
         </div>
       </section>
       <div className="home-offscreen home-offscreen-reviews"><PersonalTestimonialsSection /></div>

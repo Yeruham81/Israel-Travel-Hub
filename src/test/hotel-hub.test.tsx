@@ -4,7 +4,7 @@ import { createRouter, rootRouteId } from "@tanstack/react-router";
 import { cleanup, render, screen, within } from "@testing-library/react";
 import { afterEach, describe, expect, it, vi } from "vitest";
 import { routeTree } from "@/routeTree.gen";
-import { Route as HotelHubRoute } from "@/routes/hotels";
+import { Route as HotelHubRoute } from "@/routes/accommodation";
 import { accommodationDestinations } from "@/data/content";
 import { arrivalCards, hotelStyles, itineraryCards, seasons } from "@/data/hotelHub";
 import { CANONICAL_ORIGIN } from "@/lib/site";
@@ -109,7 +109,7 @@ describe("Accommodation hub editorial upgrade", () => {
     const meta = await HotelHubRoute.options.head?.({} as never);
     expect(meta).toMatchObject({
       meta: expect.arrayContaining([{ name: "robots", content: "noindex,nofollow" }]),
-      links: [{ rel: "canonical", href: CANONICAL_ORIGIN + "/hotels/" }],
+      links: [{ rel: "canonical", href: CANONICAL_ORIGIN + "/accommodation/" }],
     });
   });
 

@@ -1,35 +1,35 @@
 import { describe, expect, it } from "vitest";
-import { redirectRetiredDestinations } from "@/lib/retired-route-redirects.server";
+import { existsSync, readFileSync } from "node:fs";
 import { attractionPlanningPaths } from "@/data/attractionsHub";
 import { allNavGroups } from "@/data/nav";
-import { readFile } from "node:fs/promises";
+import { collectSitemapPaths } from "../../scripts/generate-sitemap.mjs";
 
-describe("retired Destinations directory", () => {
-  it.each(["/destinations", "/destinations/", "/destinations/?ref=old-bookmark"])(
-    "permanently redirects %s to the accommodation directory",
-    (path) => {
-      const response = redirectRetiredDestinations(new Request("https://example.org" + path));
-      expect(response?.status).toBe(301);
-      expect(response?.headers.get("Location")).toBe("https://example.org/hotels/");
-    },
-  );
-  it("does not redirect functioning pages or change non-navigation requests", () => {
-    for (const path of ["/", "/hotels/", "/attractions/", "/travel-blog/where-to-stay-in-jerusalem/"]) {
-      expect(redirectRetiredDestinations(new Request("https://example.org" + path))).toBeNull();
-    }
-    expect(redirectRetiredDestinations(new Request("https://example.org/destinations/", { method: "POST" }))).toBeNull();
-    expect(redirectRetiredDestinations(new Request("https://example.org/destinations/", { method: "HEAD" }))?.status).toBe(301);
+describe("removed Destinations directory", () => {
+  it("has no route file, server redirect, or generated route registration", () => {
+    expect(existsSync("src/routes/destinations.tsx")).toBe(false);
+    expect(existsSync("src/routes/hotels.tsx")).toBe(false);
+    expect(existsSync("src/routes/accommodation.tsx")).toBe(true);
+    expect(existsSync("src/lib/retired-route-redirects.server.ts")).toBe(false);
+    const tree = readFileSync("src/routeTree.gen.ts", "utf8");
+    expect(tree).not.toContain("DestinationsRoute");
+    expect(tree).not.toContain("HotelsRoute");
+    expect(tree).toContain("AccommodationRoute");
+    expect(tree).not.toContain("'/destinations'");
+    const server = readFileSync("src/server.ts", "utf8");
+    expect(server).not.toContain("redirectRetiredDestinations");
   });
-  it("keeps the old path out of active navigation and the sitemap", async () => {
-    const all = allNavGroups.flatMap(group => group.items.flatMap(item =>
+  it("keeps navigation, homepage, planning links and XML sitemap free of the removed URL", async () => {
+    const nav = allNavGroups.flatMap(group => group.items.flatMap(item =>
       "to" in item ? [item.to, ...((item.children ?? []).map(child => child.to))] : []));
-    expect(all).not.toContain("/destinations/");
+    expect(nav).not.toContain("/destinations/");
     expect(attractionPlanningPaths.some(item => item.to === "/destinations/")).toBe(false);
-    expect(attractionPlanningPaths.find(item => item.id === "shore-excursions")?.to).toBe("/shore-excursions/");
-    const home = await readFile("src/routes/index.tsx", "utf8");
-    expect(home).toContain('to="/hotels/" className="btn btn-light mt-6">Explore all accommodation');
+    const home = readFileSync("src/routes/index.tsx", "utf8");
+    expect(home).toContain('to="/accommodation/" className="btn btn-light mt-6">Explore all accommodation');
     expect(home).not.toContain('to="/destinations/"');
-    const sitemap = await readFile("public/sitemap.xml", "utf8");
-    expect(sitemap).not.toContain("/destinations/");
+    expect(home).not.toContain('to="/hotels/"');
+    expect(readFileSync("public/sitemap.xml", "utf8")).not.toContain("/destinations/");
+    expect(readFileSync("public/sitemap.xml", "utf8")).not.toContain("/hotels/");
+    expect(readFileSync("public/sitemap.xml", "utf8")).toContain("/accommodation/");
+    expect(await collectSitemapPaths()).not.toContain("/destinations/");
   });
 });

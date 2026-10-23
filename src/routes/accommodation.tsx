@@ -7,13 +7,13 @@ import { arrivalCards, choiceTips, eventsPhoto, hotelHubFaqs, hotelStyles, itine
 import { pageMeta } from "@/lib/site";
 import { isPublisherUrl } from "@/data/registry";
 
-export const Route = createFileRoute("/hotels")({
+export const Route = createFileRoute("/accommodation")({
   head: () =>
     pageMeta({
       title: "Where to stay in Israel: hotel destinations, styles & planning tips",
       description: "Choose where to stay in Israel: Jerusalem, Tel Aviv, Haifa, Tiberias, the Dead Sea or Eilat. Compare hotel styles, seasons, holidays and airport journeys.",
-      path: "/hotels/",
-      crumbs: [{ name: "Home", path: "/" }, { name: "Accommodation", path: "/hotels/" }],
+      path: "/accommodation/",
+      crumbs: [{ name: "Home", path: "/" }, { name: "Accommodation", path: "/accommodation/" }],
     }),
   component: Hotels,
 });
@@ -88,7 +88,7 @@ function Hotels() {
   return (
     <main className="mx-auto max-w-5xl px-4 pb-10">
       <HubHeader
-        crumbs={[{ name: "Home", to: "/" }, { name: "Accommodation", to: "/hotels/" }]}
+        crumbs={[{ name: "Home", to: "/" }, { name: "Accommodation", to: "/accommodation/" }]}
         eyebrow="Accommodation"
         title="Where to stay in Israel"
         intro="Your hotel shapes the way you experience Israel. Compare historic city neighborhoods, walkable beachfront bases, lakeside hotels and quieter desert resorts, then match your location, travel dates and room type to your plans. My destination guides help you narrow down the right area before checking a property's current offers."

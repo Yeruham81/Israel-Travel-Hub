@@ -7,7 +7,7 @@ import airportPickupPhoto from "@/assets/home/airport-pickup.webp";
 import roadTripPhoto from "@/assets/home/road-trip.webp";
 import caesareaPhoto from "@/assets/home/caesarea-aqueduct.webp";
 
-/** Editorial content for the /hotels/ hub. Photos are existing local assets with their recorded provenance. */
+/** Editorial content for the /accommodation/ hub. Photos are existing local assets with their recorded provenance. */
 export type HubPhoto = GuidePhoto & { label: string };
 type InternalTo = NonNullable<LinkProps["to"]>;
 
