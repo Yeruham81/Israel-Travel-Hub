@@ -40,7 +40,7 @@ describe("visitor event card grouping",()=>{
   it("never merges separately curated festivals or different years sharing the same title",()=>{
     const sample=reviewed.find(x=>x.title==="Boy George")!;
     const later:ConfirmedEvent={...sample,id:"ticketmaster-later",from:"2027-11-04",to:"2027-11-04"};
-    const editorial:ConfirmedEvent={...sample,id:"manual-festival-2026",sourceName:undefined};
+    const editorial:ConfirmedEvent={...sample,id:"manual-festival-2026",sourceName:"Editorial"};
     const cards=groupEventCards([sample,later,editorial]);
     expect(cards).toHaveLength(3);
   });
