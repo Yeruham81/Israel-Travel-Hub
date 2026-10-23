@@ -5,13 +5,16 @@
  */
 export function photoIdentity(src: string): string {
   const withoutQuery = src.split(/[?#]/)[0]!.replaceAll("\\", "/").toLowerCase();
-  const basename = withoutQuery.split("/").at(-1) || withoutQuery;
-  return basename
+  const lastSlash = withoutQuery.lastIndexOf("/");
+  const directory = withoutQuery.slice(0, lastSlash + 1);
+  const basename = withoutQuery.slice(lastSlash + 1);
+  const stem = basename
     .replace(/\.(?:webp|avif|jpe?g|png)$/i, "")
     .replace(/\.(?:jpe?g|png)$/i, "")
     .replace(/(?:[-_]\d+x\d+|[-_](?:card|tile|feature|thumb|thumbnail|small|medium|large|sm)(?:[-_]optimized)?)+$/gi, "")
     .replace(/(?:[-_]optimized)$/i, "")
     .replace(/[-_]+/g, "-");
+  return directory + stem;
 }
 
 export function repeatedPhotos(sources: readonly string[]): string[] {

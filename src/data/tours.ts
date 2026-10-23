@@ -246,7 +246,7 @@ export const toursHubFaqs = [
 ];
 
 export const tourPlanningGuides: ShoreReadingGuide[] = [
-  { title: "Israel travel tips", description: "Prepare for a smoother visit, from everyday essentials to planning your days. Keep the practical details in hand before you set out.", to: travelGuidePaths.travelTips, photo: migration["EXISTING:coast"] },
+  { title: "Israel travel tips", description: "Prepare for a smoother visit, from everyday essentials to planning your days. Keep the practical details in hand before you set out.", to: travelGuidePaths.travelTips, photo: { src: "/images/attractions/ramon-crater.webp", alt: "Desert landscape at Ramon Crater in southern Israel" } },
   { title: "Best time to visit Israel", description: "Find a season that suits the trip you have in mind. Plan around the weather, daylight and the experiences you most want to enjoy.", to: travelGuidePaths.bestTime, photo: migration["best-time-to-visit-israel"] },
   { title: "Holidays & events", description: "Make the calendar part of your planning. Understand how holidays and local events can shape opening times, travel and the feel of your visit.", to: travelGuidePaths.calendar, photo: migration["calendar-of-events"] },
   { title: "Getting around Israel", description: "Connect your destinations with a transport plan that fits your pace. Compare the practical options for travelling between cities and attractions.", to: travelGuidePaths.israel, photo: { src: roadTrip, alt: "Illustration of a road trip through Israel's countryside" } },

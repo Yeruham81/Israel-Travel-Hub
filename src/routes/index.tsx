@@ -4,7 +4,6 @@ import lcpHeroMedium from "@/assets/home/hero-jerusalem-medium.webp";
 import lcpHeroLarge from "@/assets/home/hero-jerusalem-large.webp";
 import jerusalem from "@/assets/home/jerusalem-old-city.webp";
 import jerusalemMamilla from "@/assets/jerusalem/mamilla.webp";
-import jerusalemOldCityNeighborhood from "@/assets/jerusalem/old-city.webp";
 import telAvivBeachfront from "@/assets/tel-aviv/beachfront.webp";
 import telAvivNeveTzedek from "@/assets/tel-aviv/neve-tzedek.webp";
 import haifaColony from "@/assets/haifa/colony.webp";
@@ -157,7 +156,7 @@ export const services: Service[] = [
 ];
 
 export const popularDestinationCards: Card[] = [
-  { label: "Jerusalem", text: "Old City, Bethlehem & Masada trips", to: "/travel-blog/where-to-stay-in-jerusalem/", img: { src: jerusalemOldCityNeighborhood, alt: "Jerusalem Old City and surrounding neighbourhood" } },
+  { label: "Jerusalem", text: "Old City, Bethlehem & Masada trips", to: "/travel-blog/where-to-stay-in-jerusalem/", img: { src: "/images/attractions/jerusalem.webp", alt: "Jerusalem's Old City seen across the eastern hills" } },
   { label: "Tel Aviv & Jaffa", text: "Beaches, food and the coast", to: "/travel-blog/where-to-stay-in-tel-aviv/", img: { src: telAvivNeveTzedek, alt: "Neve Tzedek historic neighbourhood in Tel Aviv" } },
   { label: "Tiberias & Galilee", text: "Lakeside base for the north", to: "/travel-blog/best-hotels-in-tiberias/", img: { src: tiberiasSunrise, alt: "Sunrise over Tiberias and the Sea of Galilee" } },
   { label: "Dead Sea", text: "Spa, family and resort stays", to: "/travel-blog/best-dead-sea-hotels/", img: { src: deadSeaLandscape, alt: "Dead Sea desert landscape" } },

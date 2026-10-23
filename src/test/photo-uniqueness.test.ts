@@ -11,7 +11,8 @@ describe("One photograph per page — site-wide editorial policy", () => {
   it("treats responsive copies and renamed-format variants of a photograph as duplicates", () => {
     expect(photoIdentity("/assets/haifa-panorama-card.webp")).toBe(photoIdentity("/assets/haifa-panorama-tile.webp"));
     expect(photoIdentity("/images/market-300x200.jpg.webp")).toBe(photoIdentity("/images/market.jpg"));
-    expect(repeatedPhotos(["/home/masada.webp", "/home/masada-card.webp"])).toEqual(["masada"]);
+    expect(repeatedPhotos(["/home/masada.webp", "/home/masada-card.webp"])).toEqual(["/home/masada"]);
+    expect(photoIdentity("/assets/tiberias/waterfront.webp")).not.toBe(photoIdentity("/assets/eilat/waterfront.webp"));
   });
 
   it("keeps every displayed Attractions image distinct (hero, region headers and guide cards)", () => {
