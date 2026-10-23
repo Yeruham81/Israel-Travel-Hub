@@ -36,7 +36,7 @@ export const Route = createFileRoute("/travel-blog/israel-holidays")({
 
 type DateSelection = { start:string|null; end:string|null };
 const monthStart = { year: 2026, month: 9 }; // October 2026; month is zero based.
-const months = Array.from({length:15},(_,i)=>{
+const months = Array.from({length:16},(_,i)=>{
   const d=new Date(Date.UTC(monthStart.year,monthStart.month+i,1));
   return { year:d.getUTCFullYear(),month:d.getUTCMonth(),label:d.toLocaleDateString("en-GB",{month:"long",year:"numeric",timeZone:"UTC"}) };
 });
@@ -115,17 +115,13 @@ export function IsraelHolidaysPage() {
           <div>
             <p className="text-sm font-semibold tracking-wide text-primary">TRAVEL PLANNING GUIDE</p>
             <h1 className="mt-2 text-4xl leading-tight md:text-5xl">{TITLE}</h1>
-            <p className="mt-4 text-lg leading-relaxed text-muted-foreground">Find out what changes during Jewish, Christian and Muslim holidays and Israel's national observances. Pick your travel dates directly on the calendar to see the holidays that may affect your plans.</p>
+            <p className="mt-4 text-lg leading-relaxed text-muted-foreground">Public transport can pause, attractions can get busy and religious celebrations can change access to particular places. Use this 2027 calendar to see which dates matter for your visit.</p>
             <PageUpdated date={HOLIDAY_COVERAGE.checkedAt}/>
           </div>
           <figure><img src={photo.src} alt={photo.alt} width={900} height={600} fetchPriority="high" decoding="async" className="aspect-[3/2] w-full rounded-2xl object-cover"/></figure>
         </div>
         <AuthorCard/>
       </header>
-      <section className="mt-8 rounded-2xl border bg-secondary/50 p-5 sm:p-6">
-        <h2 className="text-2xl">What visitors should know</h2>
-        <p className="mt-3 leading-relaxed">Not every holiday means the country closes. Major Jewish festival days and weekly Shabbat can interrupt buses, trains and many services. Passover and Sukkot include intermediate days when attractions are often open but busier. Christian and Muslim celebrations mostly affect particular communities, churches and neighbourhoods. Your dates, destination and mode of travel matter more than the holiday name alone.</p>
-      </section>
       <OnThisPage sections={[
         ["trip-calendar","Choose your dates"],["trip-results","Your trip"],["year-calendar","Holiday dates"],
         ["what-changes","What may change"],["travel-advice","Planning advice"],["questions","Questions"],["sources","Sources"]
@@ -160,50 +156,54 @@ export function IsraelHolidaysPage() {
       <TripHolidayResults start={start} end={end} />
       <IsraelHolidayOverview />
       <section id="what-changes" className="mt-12 scroll-mt-24">
-        <h2 className="text-3xl">What actually changes on Israeli holidays?</h2>
+        <h2 className="text-3xl">What changes during Israeli holidays?</h2>
         <div className="mt-5 grid gap-4 sm:grid-cols-2">
-          <div className="rounded-xl border p-5"><h3 className="text-lg font-semibold">Shabbat and major Jewish festivals</h3><p className="mt-2 text-sm leading-relaxed text-muted-foreground">Many intercity buses and trains stop before sunset on Friday or a major festival eve and restart after the observance ends. Some taxis, private transfers and services in non-Jewish areas can still operate. Never infer your own route's timetable from a national rule.</p></div>
-          <div className="rounded-xl border p-5"><h3 className="text-lg font-semibold">Passover and Sukkot: not one long closure</h3><p className="mt-2 text-sm leading-relaxed text-muted-foreground">The first and final festival days carry stronger restrictions. On intermediate days (Chol HaMoed), many tourist attractions, restaurants and transport services operate, sometimes with special hours or heavy domestic holiday crowds. Shabbat in the middle remains distinct.</p></div>
-          <div className="rounded-xl border p-5"><h3 className="text-lg font-semibold">Yom Kippur is different</h3><p className="mt-2 text-sm leading-relaxed text-muted-foreground">Commercial activity and transportation are much more widely suspended, and scheduled flight operations at Ben Gurion Airport are normally paused. Do not plan travel into or out of the country without checking the actual airport schedule.</p></div>
-          <div className="rounded-xl border p-5"><h3 className="text-lg font-semibold">Local religious and memorial observances</h3><p className="mt-2 text-sm leading-relaxed text-muted-foreground">Easter, Christmas, Ramadan and Eid have especially local impacts. Memorial days involve moments of silence, closures of entertainment venues and solemn public ceremonies. Independence Day and city celebrations may create traffic restrictions rather than uniform shutdowns.</p></div>
-          <div className="rounded-xl border p-5"><h3 className="text-lg font-semibold">Hotels and prices</h3><p className="mt-2 text-sm leading-relaxed text-muted-foreground">Hotel, flight and tour demand can rise at Passover, Sukkot, school breaks or major local events, but price changes are not guaranteed and depend on each booking. Check refundable room terms and the actual total before booking.</p></div>
-          <div className="rounded-xl border p-5"><h3 className="text-lg font-semibold">Restaurants, museums and worship sites</h3><p className="mt-2 text-sm leading-relaxed text-muted-foreground">A Jewish-run shop may close while a nearby restaurant stays open; churches may stop sightseeing admissions for services. Check the named venue, including whether reservation times and the evening before are affected.</p></div>
+          <div className="rounded-xl border p-5">
+            <h3 className="text-lg font-semibold">Buses, trains and airport journeys</h3>
+            <p className="mt-2 text-sm leading-relaxed text-muted-foreground">Regular buses and trains generally stop for Shabbat and major Jewish festival days. Yom Kippur also affects scheduled flights. Private transport and some local services may operate differently; see the <Link className="text-primary underline" to="/travel-blog/from-ben-gurion-airport-on-shabbat/">Shabbat airport transport guide</Link>.</p>
+          </div>
+          <div className="rounded-xl border p-5">
+            <h3 className="text-lg font-semibold">Churches and religious sites</h3>
+            <p className="mt-2 text-sm leading-relaxed text-muted-foreground">Christian Holy Week services can restrict sightseeing access, especially in Jerusalem's Old City. Ramadan and Eid may change local opening hours. Read about <Link className="text-primary underline" to="/travel-blog/churches-in-jerusalem/">Jerusalem's churches</Link> and <Link className="text-primary underline" to="/travel-blog/jerusalem-to-bethlehem/">visiting Bethlehem</Link>.</p>
+          </div>
+          <div className="rounded-xl border p-5">
+            <h3 className="text-lg font-semibold">Restaurants, shops and attractions</h3>
+            <p className="mt-2 text-sm leading-relaxed text-muted-foreground">Opening hours depend on the holiday and the individual business. Passover may bring special menus at kosher restaurants and hotels. Many attractions remain open on Chol HaMoed, even while transport stops for Shabbat or full festival days.</p>
+          </div>
+          <div className="rounded-xl border p-5">
+            <h3 className="text-lg font-semibold">Hotels and domestic holiday crowds</h3>
+            <p className="mt-2 text-sm leading-relaxed text-muted-foreground">School breaks around Passover, Sukkot and other holidays can make family attractions and accommodation busier. Hotel and tour prices vary by place and date; a holiday does not automatically mean a higher rate.</p>
+          </div>
         </div>
       </section>
       <section id="travel-advice" className="mt-12 scroll-mt-24">
-        <h2 className="text-3xl">Plan around the full journey</h2>
-        <p className="mt-3 leading-relaxed">Start by marking your arrival and departure dates. Check not only the holiday itself but the <strong>previous afternoon or evening</strong>, when public transport may already be winding down. Then confirm your airport journey, hotel check-in, restaurant reservations and the return journey from any day trip. Build flexibility into itineraries around holidays and processions.</p>
-        <p className="mt-4 leading-relaxed">For the practical differences between trains, buses, licensed taxis and private drivers, read <Link className="font-medium text-primary underline" to="/travel-blog/getting-around-israel/">Getting Around Israel</Link> and <Link className="font-medium text-primary underline" to="/travel-blog/from-ben-gurion-airport-on-shabbat/">Ben Gurion Airport on Shabbat</Link>. Travelling for Easter or Christmas? See <Link className="font-medium text-primary underline" to="/travel-blog/churches-in-jerusalem/">Jerusalem churches</Link> and <Link className="font-medium text-primary underline" to="/travel-blog/jerusalem-to-bethlehem/">Jerusalem to Bethlehem</Link>. For weather and seasonal choices, use <Link className="font-medium text-primary underline" to="/travel-blog/best-time-to-visit-israel/">Best Time to Visit Israel</Link>.</p>
-        <div className="mt-5 rounded-xl border bg-secondary/40 p-5"><h3 className="font-semibold">Important limitation</h3><p className="mt-2 text-sm leading-relaxed">This is an editorial calendar, not a live schedule, fare calculator or venue availability feed. Exact sunset times vary by city and date. Islamic dates may shift with local moon-sighting announcements. Closures, demand, roads and prices need checking for the actual provider and date, especially during emergency restrictions.</p></div>
+        <h2 className="text-3xl">Plan around your arrival and departure</h2>
+        <p className="mt-3 leading-relaxed">A flight or transfer that falls near Friday sunset or a major festival can be harder to arrange than a sightseeing day. Check how you will reach your hotel and return to the airport; our <Link className="font-medium text-primary underline" to="/travel-blog/getting-around-israel/">Getting Around Israel</Link> guide covers the transport options. For weather and seasonal demand, see <Link className="font-medium text-primary underline" to="/travel-blog/best-time-to-visit-israel/">Best Time to Visit Israel</Link>.</p>
       </section>
       <section id="questions" className="mt-12 scroll-mt-24">
         <h2 className="text-3xl">Common questions</h2>
         <div className="mt-4 divide-y rounded-xl border">
           {[
-            ["Do all shops and restaurants close on Israeli holidays?","No. It depends on the specific holiday, the neighbourhood and who runs the business. Most change on the major Jewish festival days or Yom Kippur, while Christian and Muslim holidays have more local effects."],
-            ["Are trains and buses available on Jewish holidays?","Regular public transport is generally suspended during Shabbat and major Jewish festival days, but some local exceptions exist. Chol HaMoed is not uniformly a closure period. Verify your exact route."],
-            ["Do Jewish holidays begin the evening before?","Yes, many begin at sunset. That previous evening can be important for transport, dinner plans and access to venues. The calendar intentionally marks the starting evening."],
-            ["Do Jewish holidays in Israel last as long as overseas?","Not always. Passover lasts seven days, Shavuot one festival day, and Shemini Atzeret and Simchat Torah coincide in Israel. Many overseas Jewish calendars list additional festival days."],
-            ["Can holiday dates change?","Jewish dates on the Hebrew calendar are predictable, though observances may be shifted in particular years. Christian dates vary by church tradition. Muslim dates shown here are estimates until locally confirmed."],
-            ["Are hotels always more expensive during festivals?","Not necessarily. Demand and rates can change by city, day, room type and cancellation terms. Compare real prices for your exact dates; this calendar does not predict rates."],
-          ].map(([q,a])=><details key={q} className="p-4"><summary className="cursor-pointer font-semibold">{q}</summary><p className="mt-2 leading-relaxed text-muted-foreground">{a}</p></details>)}
+            ["Why do some overseas calendars show extra Jewish festival days?","Israel follows seven days of Passover and one day of Shavuot. Shemini Atzeret and Simchat Torah also share one day. Some communities outside Israel observe additional festival days."],
+            ["Why do some holiday dates start the evening before?","Jewish festivals usually begin at sunset, so travel or restaurant plans on the preceding evening can already be affected. The calendar shows that starting date."],
+            ["Are Ramadan and Eid dates fixed?","The Islamic calendar follows lunar observations. Dates shown for Ramadan and Eid are estimates until relevant local religious authorities confirm them."],
+            ["When is Easter celebrated in Jerusalem in 2027?","Western Easter Sunday is 28 March. Orthodox Easter Sunday is 2 May; the Holy Fire ceremony takes place on Orthodox Holy Saturday, 1 May. Religious services can affect access around the Old City."],
+                    ].map(([q,a])=><details key={q} className="p-4"><summary className="cursor-pointer font-semibold">{q}</summary><p className="mt-2 leading-relaxed text-muted-foreground">{a}</p></details>)}
         </div>
       </section>
       <section id="sources" className="mt-12 scroll-mt-24">
-        <h2 className="text-2xl">Calendar and official travel resources</h2>
-        <p className="mt-2 text-sm text-muted-foreground">Review date: 23 October 2026. Check your city, denomination and route again before travel.</p>
+        <h2 className="text-2xl">Holiday calendars and travel resources</h2>
+        <p className="mt-2 text-sm text-muted-foreground">Dates reviewed: 23 October 2026. School breaks differ by school sector; Muslim holiday dates can shift with local announcements.</p>
         <ul className="mt-4 list-disc space-y-2 pl-5 text-sm">
           <li><a className="text-primary underline" href="https://www.hebcal.com/holidays/2027?i=on" target="_blank" rel="noopener noreferrer">Hebcal — Jewish holidays (Israel setting)</a></li>
           <li><a className="text-primary underline" href="https://www.timeanddate.com/holidays/israel/2027" target="_blank" rel="noopener noreferrer">Time and Date — Israel holidays and estimated observances</a></li>
+          <li><a className="text-primary underline" href="https://parents.education.gov.il/gov-education/vacations-camps-leisure/schedule/" target="_blank" rel="noopener noreferrer">Israel Ministry of Education — school vacation calendar</a></li>
           <li><a className="text-primary underline" href="https://bus.gov.il/" target="_blank" rel="noopener noreferrer">Israel Ministry of Transport — check current bus services</a></li>
           <li><a className="text-primary underline" href="https://www.rail.co.il/" target="_blank" rel="noopener noreferrer">Israel Railways — train schedules</a></li>
           <li><a className="text-primary underline" href="https://www.iaa.gov.il/en/airports/ben-gurion/" target="_blank" rel="noopener noreferrer">Israel Airports Authority — airport information</a></li>
         </ul>
       </section>
-      <div className="mt-10 rounded-2xl bg-secondary/50 p-6">
-        <h2 className="text-xl font-semibold">Also planning when to visit?</h2><p className="mt-2 text-sm">The holiday calendar helps with closures and dates. For festivals and concerts, check current organiser programmes; our dedicated events guide will be expanded separately.</p>
-        <Link to="/guides/" className="mt-4 inline-block font-medium text-primary underline">Explore more travel guides →</Link>
-      </div>
+      <p className="mt-8 text-sm"><Link to="/guides/" className="font-medium text-primary underline">Explore more travel guides →</Link></p>
     </article>
   </main>;
 }
