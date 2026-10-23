@@ -13,7 +13,7 @@ function ReviewCard({ review }: { review: TripadvisorReview }) {
           {review.author.slice(0, 1).toUpperCase()}
         </div>
         <span className="inline-flex items-center gap-1.5 text-xs font-semibold text-emerald-800">
-          <img src="https://cdn.simpleicons.org/tripadvisor/00AA6C" alt="" width={20} height={20} loading="lazy" className="size-5" />
+          <img src="/images/tripadvisor.svg" alt="" width={20} height={20} loading="lazy" className="size-5" />
           Tripadvisor
         </span>
       </div>
