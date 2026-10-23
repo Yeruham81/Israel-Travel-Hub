@@ -3,6 +3,15 @@
 # static-assets handler. SSR responses and routes such as /api/* are excluded.
 # Do not cache HTML responses, contact forms, or API data.
 #
+# Hardening for static files. This file is read only on platforms that
+# support _headers for static assets; SSR pages and API responses are secured
+# independently by src/server.ts. Do not add an iframe policy here, because
+# Lovable's editor embeds the preview in an iframe.
+/*
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  X-Permitted-Cross-Domain-Policies: none
+
 # Vite fingerprints imported production /assets/ filenames; immutable caching
 # is safe for those build outputs because a content change changes the URL.
 /assets/*
