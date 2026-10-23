@@ -9,6 +9,7 @@
  * External endpoints are called only by GitHub Actions, not site visitors.
  */
 import { readFile, writeFile } from "node:fs/promises";
+import { normalizeHebcalTitle } from "./holiday-source-labels.mjs";
 
 const OUTPUT = new URL("../src/data/israelHolidayFuture.generated.json", import.meta.url);
 const HEB_API = "https://www.hebcal.com/hebcal";
@@ -53,10 +54,10 @@ async function hebcal(year) {
   const url = HEB_API + "?v=1&cfg=json&i=on&year=" + year + "&maj=on&min=on&mod=on&mf=on";
   const response = await requestJSON(url);
   if (!Array.isArray(response.items) || response.items.length < 25) throw new Error("Incomplete Hebcal calendar for " + year);
-  const items = response.items.filter((item) => item && typeof item.title === "string" && typeof item.date === "string").map((item) => ({ title: item.title.replace(/[’‘]/g, "'"), date: assertDay(item.date.slice(0, 10)) }));
+  const items = response.items.filter((item) => item && typeof item.title === "string" && typeof item.date === "string").map((item) => ({ title: normalizeHebcalTitle(item.title), date: assertDay(item.date.slice(0, 10)) }));
   const find = (pattern, required = true) => {
     const item = items.find(item => pattern.test(item.title));
-    if (!item && required) throw new Error("Hebcal missing " + pattern + " for " + year);
+    if (!item && required) throw new Error("Hebcal missing " + pattern + " for " + year + ". Related titles: " + items.filter(i => /(?:av|shoah|zikaron|atzeret|rosh|purim|omer|sigd)/i.test(i.title)).map(i => i.title).join(", "));
     return item?.date;
   };
   const p1 = find(/^Pesach I$/i);
