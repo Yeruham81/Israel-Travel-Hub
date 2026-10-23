@@ -39,6 +39,9 @@ describe("Israel events first-release content",()=>{
     expect(eventLinks("red-sea-jazz-2026").ticket).toBeNull();
     expect(eventLinks("red-sea-jazz-2026").affiliate).toBe(false);
     expect(eventLinks("nonexistent").ticket).toBeNull();
+    expect(eventLinks("ticketmaster-G5ABC","https://www.ticketmaster.co.il/event/123").official).toContain("ticketmaster.co.il");
+    expect(eventLinks("ticketmaster-G5ABC","https://bad.example/event/123").official).toBeNull();
+    expect(eventLinks("ticketmaster-G5ABC","https://www.ticketmaster.co.il/event/123").ticket).toBeNull();
     expect(secureEventUrl("http://insecure.example/event")).toBeNull();
     expect(secureEventUrl("https://user:pass@example.com/event")).toBeNull();
     expect(secureEventUrl("javascript:alert(1)")).toBeNull();
