@@ -38,7 +38,7 @@ export const Route=createFileRoute("/travel-blog/calendar-of-events")({
   component:IsraelEventsPage,
 });
 
-function ExternalEventLink({id,label,tickets=false,sourceUrl}:{id:string;label?:string;tickets?:boolean;sourceUrl?:string}) {
+function ExternalEventLink({id,label,tickets=false,sourceUrl}:{id:string;label?:string|undefined;tickets?:boolean;sourceUrl?:string}) {
   const links=eventLinks(id,sourceUrl);
   const href=tickets?links.ticket:links.official;
   if(!href)return null;
