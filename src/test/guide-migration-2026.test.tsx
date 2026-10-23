@@ -9,6 +9,7 @@ import { routeTree } from "@/routeTree.gen";
 import { Route as HubRoute } from "@/routes/guides";
 import { Route as AttractionsRoute } from "@/routes/attractions.index";
 import { TravelGuidePage, travelGuideMeta } from "@/components/TravelGuide";
+import { IsraelEventsPage } from "@/routes/travel-blog.calendar-of-events";
 import { planningGuides } from "@/data/guidePlanning2026";
 import { cityCultureGuides } from "@/data/guideCities2026";
 import { heritageGuides } from "@/data/guideHeritage2026";
@@ -18,7 +19,7 @@ import { filterGuides, guideDirectory, travelGuides } from "@/data/travelGuides"
 import { getSource, isPublisherUrl, publicSources, travelGuidePaths, type TravelGuideId } from "@/data/registry";
 
 afterEach(cleanup);
-const ids = Object.keys({ ...planningGuides, ...cityCultureGuides, ...heritageGuides, ...journeyDestinationGuides }) as TravelGuideId[];
+const ids = Object.keys({ ...planningGuides, ...cityCultureGuides, ...heritageGuides, ...journeyDestinationGuides }).filter(id => id !== "calendar") as TravelGuideId[];
 async function routerAt(url: string) {
   const router = createRouter({ routeTree, context: { queryClient: new QueryClient() }, history: createMemoryHistory({ initialEntries: [url] }), trailingSlash: "always" });
   await router.load();
@@ -58,7 +59,7 @@ describe("October planning, city and heritage guide migration", () => {
   });
 
   it("makes every guide discoverable in the directory, with real local photographs", async () => {
-    expect(ids).toHaveLength(17);
+    expect(ids).toHaveLength(16);
     expect(guideDirectory).toHaveLength(69);
     expect(guideDirectory.some(guide => guide.id === "israel-holidays" && guide.to === "/travel-blog/israel-holidays/")).toBe(true);
     expect(new Set(guideDirectory.map(guide => guide.id)).size).toBe(guideDirectory.length);
@@ -92,6 +93,18 @@ describe("October planning, city and heritage guide migration", () => {
     expect(travelGuides.qasr.comparison.rows).toHaveLength(3);
     expect(travelGuides.topTen.sections).toHaveLength(10);
     expect(travelGuides.food.sections.filter(section => section.photo)).toHaveLength(10);
-    expect(travelGuides.calendar.comparison.rows[0]).toEqual(["Passover", "21 April 2027", "28 April 2027"]);
+    expect(travelGuides.calendar.comparison.rows[0]).toEqual(["Confirmed events", "Find activities with published dates"]);
   });
+  it("keeps the events guide on its original route with a dedicated interactive calendar", async () => {
+    const path = "/travel-blog/calendar-of-events/";
+    const router = await routerAt(path);
+    expect(router.matchRoutes(path).at(-1)?.routeId).not.toBe(rootRouteId);
+    const { container } = render(<RouterContextProvider router={router}><IsraelEventsPage /></RouterContextProvider>);
+    expect(within(container).getByRole("heading", {level:1,name:"Israel Events Calendar: Festivals & Things to Do"})).toBeInTheDocument();
+    expect(within(container).getByRole("heading", {name:"Find events during your visit"})).toBeInTheDocument();
+    expect(within(container).getByRole("heading", {name:"Upcoming confirmed events"})).toBeInTheDocument();
+    expect(within(container).getByRole("heading", {name:"Annual festivals worth knowing about"})).toBeInTheDocument();
+    expect(within(container).queryByRole("heading", {name:"Selected Jewish holidays in Israel · 2027"})).toBeNull();
+  });
+
 });
