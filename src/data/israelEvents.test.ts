@@ -71,7 +71,7 @@ describe("Israel events first-release content",()=>{
     expect(main.some(e=>e.title==="Winter 345")).toBe(false);
   });
   it("does not automatically approve an artist's unreviewed future edition",()=>{
-    const seed=publishedFeed.events.find(e=>e.title==="Boy George");
+    const seed=(publishedFeed.events as typeof CONFIRMED_EVENTS).find(e=>e.title==="Boy George");
     expect(seed).toBeDefined();
     const future={...seed!,id:"ticketmaster-future-boy",from:"2027-11-04",to:"2027-11-04"};
     expect(touristHighlights([future])).toEqual([]);
