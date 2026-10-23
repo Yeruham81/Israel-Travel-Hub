@@ -21,7 +21,7 @@ concurrency:
 jobs:
   refresh:
     runs-on: ubuntu-latest
-    timeout-minutes: 8
+    timeout-minutes: 15
     steps:
       - name: Checkout the default branch
         uses: actions/checkout@v4
@@ -36,12 +36,35 @@ jobs:
       - name: Download and validate future holiday calendars
         run: node scripts/sync-israel-holidays.mjs
 
-      - name: Commit snapshot only when the data changed
+      - name: Check whether the verified calendar changed
+        id: changed
         run: |
           if git diff --quiet -- src/data/israelHolidayFuture.generated.json; then
-            echo "Holiday snapshot already current."
-            exit 0
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "changed=true" >> "$GITHUB_OUTPUT"
           fi
+
+      - name: Set up Bun
+        if: steps.changed.outputs.changed == 'true'
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+
+      - name: Install dependencies
+        if: steps.changed.outputs.changed == 'true'
+        run: bun install --frozen-lockfile
+
+      - name: Validate site build, types and tests before publication
+        if: steps.changed.outputs.changed == 'true'
+        run: |
+          bun run build
+          npx tsc --noEmit
+          bun run test
+
+      - name: Commit snapshot only after successful validation
+        if: steps.changed.outputs.changed == 'true'
+        run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add src/data/israelHolidayFuture.generated.json
