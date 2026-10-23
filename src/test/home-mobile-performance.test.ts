@@ -52,10 +52,53 @@ describe("home mobile performance optimizations", () => {
     expect(carousel).toContain("prefers-reduced-motion: reduce");
   });
 
+  it("uses right-sized first hero on mobile and standard desktop viewports", () => {
+    const slides = read("src/components/HomeHero.tsx");
+    const carousel = read("src/components/HeroCarousel.tsx");
+    expect(slides).toContain("hero-jerusalem-medium.webp");
+    expect(slides).toContain("hero-jerusalem-large.webp");
+    expect(carousel).toContain('media="(max-width: 767px)"');
+    expect(carousel).toContain('media="(max-width: 1800px)"');
+    expect(carousel).toContain('fetchPriority={i === 0 ? "high" : "auto"}');
+    for (const place of ["jerusalem", "haifa", "tel-aviv", "masada", "caesarea", "galilee"]) {
+      const original = bytes(`src/assets/home/hero-${place}.webp`);
+      const medium = bytes(`src/assets/home/hero-${place}-medium.webp`);
+      expect(medium, place).toBeLessThan(original);
+    }
+    expect(bytes("src/assets/home/hero-jerusalem-medium.webp")).toBeLessThan(250000);
+  });
+
+  it("uses resized hero-adjacent service images and destination tiles", () => {
+    const home = read("src/routes/index.tsx");
+    for (const name of ["airport-pickup", "guided-tour", "cruise-port", "hotel-room", "caesarea-dusk"]) {
+      const base = `src/assets/home/${name}`;
+      expect(bytes(`${base}-feature.webp`)).toBeLessThan(bytes(`${base}.webp`));
+      expect(home).toContain(`${name}-feature.webp`);
+    }
+    for (const name of ["jerusalem-old-city", "tel-aviv-coast", "tiberias-lake", "bethlehem-nativity", "masada-dead-sea", "caesarea-aqueduct"]) {
+      const base = `src/assets/home/${name}`;
+      expect(bytes(`${base}-tile.webp`)).toBeLessThan(bytes(`${base}.webp`));
+      expect(home).toContain(`${name}-tile.webp`);
+    }
+    expect(home).toContain("c.img.tile ?? c.img.src");
+  });
+
+  it("sets cache rules for static resources without caching HTML or API responses", () => {
+    const rules = read("public/_headers");
+    expect(rules).toContain("/fonts/*");
+    expect(rules).toContain("/images/*");
+    expect(rules).toContain("/assets/*");
+    expect(rules).toContain("immutable");
+    expect(rules).not.toMatch(/^\/(api\/\*|\*)\s*$/m);
+  });
+
   it("does not fetch the Tripadvisor icon from a third-party CDN", () => {
     const reviews = read("src/components/HomeTestimonials.tsx");
     expect(reviews).toContain('src="/images/tripadvisor.svg"');
     expect(reviews).not.toContain("cdn.simpleicons.org");
     expect(read("public/images/tripadvisor.svg")).toContain('<svg');
+    const carousel = read("src/components/TripadvisorReviewCarousel.tsx");
+    expect(carousel).toContain('src="/images/tripadvisor.svg"');
+    expect(carousel).not.toContain("cdn.simpleicons.org");
   });
 });
