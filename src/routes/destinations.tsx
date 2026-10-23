@@ -15,9 +15,9 @@ export const Route = createFileRoute("/destinations")({
 });
 
 type L = { label: string; to: LinkProps["to"] };
-const dests: { id?: string; name: string; text: string; links: L[] }[] = [
+const dests: { id: string; name: string; text: string; links: L[] }[] = [
   {
-    name: "Dead Sea & Ein Bokek",
+    id: "dead-sea", name: "Dead Sea & Ein Bokek",
     text: "Compare spa breaks, family resorts, luxury stays and nature-focused alternatives near Ein Gedi on the Israeli shore.",
     links: [
       { label: "All Dead Sea hotels", to: "/travel-blog/best-dead-sea-hotels/" },
@@ -31,7 +31,7 @@ const dests: { id?: string; name: string; text: string; links: L[] }[] = [
     ],
   },
   {
-    name: "Jerusalem",
+    id: "jerusalem", name: "Jerusalem",
     text: "The Old City, holy sites and museums, with Bethlehem and Masada as popular day trips.",
     links: [
       { label: "Jerusalem travel guide", to: travelGuidePaths.jerusalem },
@@ -46,7 +46,7 @@ const dests: { id?: string; name: string; text: string; links: L[] }[] = [
     ],
   },
   {
-    name: "Tel Aviv & Jaffa",
+    id: "tel-aviv-jaffa", name: "Tel Aviv & Jaffa",
     text: "Beaches, Bauhaus streets, food and nightlife; a base for the coast.",
     links: [
       { label: "Day trips from Tel Aviv", to: travelGuidePaths.telAvivDayTrips },
@@ -59,7 +59,7 @@ const dests: { id?: string; name: string; text: string; links: L[] }[] = [
     ],
   },
   {
-    name: "Haifa & Mount Carmel",
+    id: "haifa", name: "Haifa & Mount Carmel",
     text: "Compare German Colony boutique stays, Carmel views and beachfront family hotels, with connections to shore excursions and northern day trips.",
     links: [
       { label: "All Haifa hotels", to: "/travel-blog/best-hotels-in-haifa/" },
@@ -73,7 +73,7 @@ const dests: { id?: string; name: string; text: string; links: L[] }[] = [
     ],
   },
   {
-    name: "Tiberias & the Sea of Galilee",
+    id: "tiberias-galilee", name: "Tiberias & the Sea of Galilee",
     text: "Lakeside town and Christian sites, with the Golan and northern Israel nearby.",
     links: [
       { label: "Jordan River baptism sites", to: travelGuidePaths.baptism },
@@ -111,7 +111,17 @@ function Destinations() {
         title="Plan by destination"
         intro="What I cover for each destination: where to stay, how to get there and what to do nearby."
       />
-      <div className="mt-10 space-y-6">
+      <nav aria-label="Browse destinations" className="mt-8 border-y py-4">
+        <h2 className="text-lg font-semibold sm:text-xl">Explore by destination</h2>
+        <ul className="mt-3 grid grid-cols-2 gap-1.5 sm:grid-cols-3 sm:gap-2">
+          {dests.map((destination) => (
+            <li key={destination.id}>
+              <a href={"#" + destination.id} className="chip h-full w-full text-left">{destination.name}</a>
+            </li>
+          ))}
+        </ul>
+      </nav>
+      <div className="mt-8 space-y-6">
         {dests.map((d) => (
           <section key={d.name} id={d.id} aria-label={d.name} className="scroll-mt-24 rounded-2xl border bg-card p-6 md:p-8">
             <h2 className="text-3xl">{d.name}</h2>

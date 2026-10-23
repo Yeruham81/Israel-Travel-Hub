@@ -50,7 +50,7 @@ export function OnThisPage({ sections, sticky = false }: { sections: readonly (r
         {sections.map(([id, label], index) => {
           const visibility = index >= 15 ? "hidden" : index >= 12 ? "hidden xl:block" : index >= 9 ? "hidden lg:block" : index >= 6 ? "hidden sm:block" : "";
           return <li key={id} className={`min-w-0 ${visibility}`}>
-            <a href={`#${id}`} title={label} aria-label={label} className="block w-full truncate rounded-md border border-border bg-secondary/60 px-2.5 py-1.5 text-xs font-medium leading-tight text-foreground transition-colors hover:border-primary hover:text-primary focus-visible:outline-2 focus-visible:outline-primary">{label}</a>
+            <a href={`#${id}`} title={label} aria-label={label} className="chip chip-dense w-full truncate">{label}</a>
           </li>;
         })}
       </ul>

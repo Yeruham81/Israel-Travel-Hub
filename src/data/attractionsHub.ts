@@ -181,4 +181,73 @@ export const attractionHubRegions: AttractionHubRegion[] = [
   },
 ];
 
+export const attractionPlanningPaths: {
+  id: string;
+  title: string;
+  description: string;
+  to: LinkProps["to"];
+  links: { label: string; to: LinkProps["to"] }[];
+}[] = [
+  {
+    id: "tours",
+    title: "Tours & day trips",
+    description: "Discover guided city walks, archaeological sites and full-day excursions, with options for different interests and starting points.",
+    to: "/tours/",
+    links: [
+      { label: "Jerusalem tours", to: "/tours/jerusalem/" },
+      { label: "Masada & Dead Sea tours", to: "/tours/masada-dead-sea/" },
+    ],
+  },
+  {
+    id: "destinations",
+    title: "Choose a destination",
+    description: "Put together a visit around the places that interest you, with ideas for nearby sights and how to connect them.",
+    to: "/destinations/",
+    links: [
+      { label: "Jerusalem guide", to: travelGuidePaths.jerusalem },
+      { label: "Sea of Galilee guide", to: "/travel-blog/sea-of-galilee/" },
+    ],
+  },
+  {
+    id: "hotels",
+    title: "Find the right place to stay",
+    description: "Compare neighbourhoods, coastal resorts and hotel areas to find a practical base for sightseeing and day trips.",
+    to: "/hotels/",
+    links: [
+      { label: "Where to stay in Jerusalem", to: "/travel-blog/where-to-stay-in-jerusalem/" },
+      { label: "Where to stay in Tel Aviv", to: "/travel-blog/where-to-stay-in-tel-aviv/" },
+    ],
+  },
+  {
+    id: "transport",
+    title: "Arrive and get around",
+    description: "Make sense of airport journeys, trains, buses and taxis, including that last leg from the station to your hotel.",
+    to: "/transfers/",
+    links: [
+      { label: "Airport to Jerusalem", to: "/travel-blog/how-to-get-from-ben-gurion-airport-to-jerusalem/" },
+      { label: "Getting around Israel", to: travelGuidePaths.israel },
+    ],
+  },
+  {
+    id: "private-days",
+    title: "Explore with a private driver",
+    description: "Build a flexible sightseeing day around your priorities and ask for a personal transport quote, with guiding arranged separately.",
+    to: "/private-driver/",
+    links: [
+      { label: "Caesarea, Haifa & Acre", to: "/tours/caesarea-haifa-acre/" },
+      { label: "Nazareth & Galilee tours", to: "/tours/nazareth-sea-of-galilee/" },
+    ],
+  },
+  {
+    id: "practical-guides",
+    title: "Plan around dates and local customs",
+    description: "Check seasonal conditions, religious holidays and public-transport patterns before setting your itinerary.",
+    to: "/guides/",
+    links: [
+      { label: "Best time to visit", to: travelGuidePaths.bestTime },
+      { label: "Airport travel on Shabbat", to: travelGuidePaths.shabbat },
+    ],
+  },
+];
+
 export const attractionHubCards = attractionHubRegions.flatMap((region) => region.cards);

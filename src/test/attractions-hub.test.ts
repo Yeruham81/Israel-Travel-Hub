@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { attractionHubCards, attractionHubPhotos, attractionHubRegions } from "@/data/attractionsHub";
+import { attractionHubCards, attractionHubPhotos, attractionHubRegions, attractionPlanningPaths } from "@/data/attractionsHub";
 import { attractionIds, attractionPath } from "@/data/attractionGuideTypes";
 import { travelGuidePaths } from "@/data/registry";
 
@@ -19,6 +19,23 @@ describe("Attractions hub redesign", () => {
       expect(region.planning.length).toBeGreaterThanOrEqual(3);
       expect(region.planning.every((link) => String(link.to).startsWith("/"))).toBe(true);
     }
+  });
+
+  it("offers six distinct planning pathways with relevant, real internal next steps", () => {
+    expect(attractionPlanningPaths).toHaveLength(6);
+    expect(new Set(attractionPlanningPaths.map(item => item.id)).size).toBe(6);
+    expect(new Set(attractionPlanningPaths.map(item => item.to)).size).toBe(6);
+    for (const item of attractionPlanningPaths) {
+      expect(item.title.length).toBeGreaterThan(12);
+      expect(item.description.length).toBeGreaterThan(75);
+      expect(String(item.to).startsWith("/") && String(item.to).endsWith("/")).toBe(true);
+      expect(item.links).toHaveLength(2);
+      expect(new Set(item.links.map(link => link.to)).size).toBe(2);
+      expect(item.links.every(link => String(link.to).startsWith("/"))).toBe(true);
+      expect(item.links.every(link => link.to !== item.to)).toBe(true);
+    }
+    expect(attractionPlanningPaths.find(item => item.id === "hotels")?.to).toBe("/hotels/");
+    expect(attractionPlanningPaths.find(item => item.id === "transport")?.links.some(link => link.to === "/travel-blog/getting-around-israel/")).toBe(true);
   });
 
   it("keeps all original attraction guides without duplicated cards or changed routes", () => {
