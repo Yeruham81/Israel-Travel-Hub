@@ -1,0 +1,17 @@
+# Cloudflare Workers static-asset response headers.
+# Applied only when the deployment serves these requests through Workers'
+# static-assets handler. SSR responses and routes such as /api/* are excluded.
+# Do not cache HTML responses, contact forms, or API data.
+#
+# Vite fingerprints imported production /assets/ filenames; immutable caching
+# is safe for those build outputs because a content change changes the URL.
+/assets/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# These public/ filenames do NOT include content hashes. Keep a shorter
+# expiry so a future replacement can be refreshed without renaming the URL.
+/fonts/*
+  Cache-Control: public, max-age=604800
+
+/images/*
+  Cache-Control: public, max-age=604800
