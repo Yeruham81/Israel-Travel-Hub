@@ -1,8 +1,9 @@
 # Basic website security baseline — 23 October 2026
 
 Scope: Israel Taxi & Travel (TanStack Start/React SSR, hosted on Lovable).
-This is a code and dependency configuration review, not a penetration test and
-not proof of which HTTP headers the deployed platform is actually serving.
+This is a code and dependency configuration review, not a penetration test.
+Live header checks on 23 October confirmed the core headers and the limited CSP
+on the published lovable.app website; future hosting changes require rechecking.
 
 ## Implemented in this change
 
@@ -41,14 +42,13 @@ not proof of which HTTP headers the deployed platform is actually serving.
 
 ## Findings requiring separate fixes or account access
 
-- The first Bun dependency audit reported **14 high/critical advisories** in
-  the full dependency graph (13 high + 1 critical), and **5 high** in the
-  production-reachable dependency graph. Transitive packages include
-  `js-yaml`, `nanoid`, `source-map-js`, `vite`; developer tooling additionally
-  includes `shell-quote` and `brace-expansion`. These are advisory matches,
-  not proof of exploitable flaws on the live site. Review available fixed
-  versions and test upgrades in a separate controlled dependency PR. Never
-  silently disable or ignore the audit to show a green workflow.
+- **Resolved (PR #9 merged on 2026-10-23):** The first Bun audit reported
+  14 high/critical advisories overall (13 high + 1 critical), including
+  5 high in production dependencies. A tested lockfile patch and Vite 8.1.6
+  update now result in **zero high/critical** on both the production and full
+  audit. Four lower-severity advisories remain for normal review.
+  Evidence: https://github.com/Yeruham81/Israel-Travel-Hub/actions/runs/40015391540
+  and https://github.com/Yeruham81/Israel-Travel-Hub/pull/9.
 - No shared rate limiter at the hosting/WAF layer is confirmed; memory-based
   throttles work only per server instance. Add an edge/WAF rule for
   `POST /api/quote-request/` in the actual hosting control panel if available.
@@ -58,13 +58,17 @@ not proof of which HTTP headers the deployed platform is actually serving.
   GitHub, Brevo, QUIC.cloud DNS and Hostinger account security.
 - `Strict-Transport-Security` is deliberately NOT enabled until all production
   hostnames/redirects/certificates are tested after domain cutover.
-- A strict script/style CSP is NOT enabled: TanStack Start uses inline hydration
-  and the Lovable preview may be framed. First measure CSP violations using an
-  environment-appropriate Report-Only policy, then implement nonce/hash support
-  and test every page, map, quote form and booking link.
-- It is not confirmed that Lovable's platform honors `public/_headers` or uses
-  exactly the `src/server.ts` Worker entry in the live deployment; verify the
-  live HTTP response headers after publishing.
+- A minimal CSP (`base-uri 'self'; object-src 'none'`) has been deployed and
+  verified on the live site. A **full script/style CSP** is NOT yet enforced:
+  TanStack Start uses inline hydration and the Lovable preview may be framed.
+  First measure CSP violations in Report-Only mode, then implement nonce/hash
+  support and test pages, maps, quote forms and booking links.
+- **Verified for the published lovable.app URL:** HTML replies include
+  nosniff, Referrer-Policy, Permissions-Policy and the minimal CSP; quote API
+  replies also include `Cache-Control: no-store`. See
+  https://github.com/Yeruham81/Israel-Travel-Hub/actions/runs/40015718758.
+  Platform treatment of every static `_headers` rule and future production
+  domain headers remain to be verified after cutover.
 
 ## Verify after publishing
 
