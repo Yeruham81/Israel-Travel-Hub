@@ -172,7 +172,7 @@ export function IsraelHolidaysPage() {
           </div>
           <div className="rounded-xl border p-5">
             <h3 className="text-lg font-semibold">Hotels and domestic holiday crowds</h3>
-            <p className="mt-2 text-sm leading-relaxed text-muted-foreground">School breaks around Passover, Sukkot and other holidays can make family attractions and accommodation busier. Hotel and tour prices vary by place and date; a holiday does not automatically mean a higher rate.</p>
+            <p className="mt-2 text-sm leading-relaxed text-muted-foreground">School breaks around Passover and Sukkot, as well as the summer vacation, can make family attractions and accommodation busier. Hotel and tour prices vary by place and date; a holiday does not automatically mean a higher rate.</p>
           </div>
         </div>
       </section>
