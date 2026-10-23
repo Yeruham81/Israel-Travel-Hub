@@ -62,8 +62,16 @@ export function HeroCarousel({ slides, children }: { slides: HeroSlide[]; childr
   const autoplayOn = playing && (!reduced || userChosePlay);
   const running = autoplayOn && !hovered && !focused && !hidden;
 
-  // Prefetch one slide ahead of the visible one.
-  useEffect(() => { ensure((index + 1) % n).catch(() => undefined); }, [index, n, ensure]);
+  // Let the first high-priority hero photo complete before competing with
+  // another full-screen image download. Autoplay remains at 6 seconds.
+  // Other slide changes warm their next image sooner, but still off the
+  // critical first-paint network path.
+  useEffect(() => {
+    const timeout = window.setTimeout(() => {
+      ensure((index + 1) % n).catch(() => undefined);
+    }, index === 0 ? 2800 : 350);
+    return () => window.clearTimeout(timeout);
+  }, [index, n, ensure]);
 
   /** Request a slide; the current photo/caption stay until the target is ready. Newest request wins. */
   const go = useCallback((i: number) => {
