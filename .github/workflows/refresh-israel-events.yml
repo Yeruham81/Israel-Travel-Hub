@@ -54,11 +54,20 @@ jobs:
         if: steps.changed.outputs.changed == 'true'
         uses: oven-sh/setup-bun@v2
         with:
-          bun-version: latest
+          bun-version: "1.4.4"
+
+      - name: Restore Bun download cache
+        if: steps.changed.outputs.changed == 'true'
+        uses: actions/cache@v4
+        with:
+          path: ~/.bun/install/cache
+          key: bun-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('bun.lock') }}
+          restore-keys: |
+            bun-${{ runner.os }}-${{ runner.arch }}-
 
       - name: Install dependencies
         if: steps.changed.outputs.changed == 'true'
-        run: bun install --frozen-lockfile
+        run: bash scripts/install-ci-dependencies.sh
 
       - name: Validate site before publishing new events
         if: steps.changed.outputs.changed == 'true'
