@@ -175,7 +175,7 @@ export const planningGuides = {
       },
       {
         "label": "Choose your accommodation",
-        "to": "/hotels/"
+        "to": "/accommodation/"
       }
     ],
     "sourceIds": [
@@ -387,7 +387,7 @@ export const planningGuides = {
       },
       {
         "label": "Choose a hotel neighbourhood",
-        "to": "/hotels/"
+        "to": "/accommodation/"
       }
     ],
     "sourceIds": [

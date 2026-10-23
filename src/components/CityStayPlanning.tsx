@@ -15,7 +15,7 @@ const choices: Record<"jerusalem" | "telaviv", PlanningItem[]> = {
     { title: "Plan a visit to Masada", description: "Pair your Jerusalem hotel base with an early desert outing and the right transport.", to: "/travel-blog/masada/" },
     { title: "Day trips from Jerusalem", description: "Plan worthwhile excursions without changing your accommodation every night.", to: "/travel-blog/day-trips-from-jerusalem/" },
     { title: "Choosing the best season", description: "Understand how Jerusalem's weather and other regional conditions shape your visit.", to: "/travel-blog/best-time-to-visit-israel/" },
-    { title: "Explore all accommodation", description: "Compare other city, lakeside, beach and Dead Sea hotel destinations.", to: "/hotels/", image: { src: hotelRoom, alt: "Illustration of a guest room, representing accommodation choices" } },
+    { title: "Explore all accommodation", description: "Compare other city, lakeside, beach and Dead Sea hotel destinations.", to: "/accommodation/", image: { src: hotelRoom, alt: "Illustration of a guest room, representing accommodation choices" } },
   ],
   telaviv: [
     { title: "From Ben Gurion Airport to Tel Aviv", description: "Pick the most practical arrival route and final connection to your chosen hotel area.", to: "/travel-blog/how-to-get-from-ben-gurion-airport-to-tel-aviv/" },

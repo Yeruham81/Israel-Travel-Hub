@@ -251,7 +251,7 @@ export const tourPlanningGuides: ShoreReadingGuide[] = [
   { title: "Holidays & events", description: "Make the calendar part of your planning. Understand how holidays and local events can shape opening times, travel and the feel of your visit.", to: travelGuidePaths.calendar, photo: migration["calendar-of-events"] },
   { title: "Getting around Israel", description: "Connect your destinations with a transport plan that fits your pace. Compare the practical options for travelling between cities and attractions.", to: travelGuidePaths.israel, photo: { src: roadTrip, alt: "Illustration of a road trip through Israel's countryside" } },
   { title: "Choose an eSIM for Israel", description: "Stay connected for maps, messages and bookings. Compare mobile-data options and check what your phone needs before you arrive.", to: travelGuidePaths.esim, photo: { src: esim, alt: "A phone displaying an eSIM graphic", sourceUrl: "https://www.israel-taxi.com/wp-content/uploads/2025/08/best_esim_for_israel.jpeg" } },
-  { title: "Find the right place to stay", description: "Choose a base that works with your itinerary. Explore accommodation areas and styles, from a city break to a relaxing resort stay.", to: "/hotels/", photo: { src: hotelRoom, alt: "Illustration of a welcoming hotel room" } },
+  { title: "Find the right place to stay", description: "Choose a base that works with your itinerary. Explore accommodation areas and styles, from a city break to a relaxing resort stay.", to: "/accommodation/", photo: { src: hotelRoom, alt: "Illustration of a welcoming hotel room" } },
 ];
 
 /** Reuse the homepage's cruise illustration without implying a particular ship or operator. */

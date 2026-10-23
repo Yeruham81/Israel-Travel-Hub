@@ -4,7 +4,7 @@ import { cleanup, fireEvent, render, screen, waitFor, within } from "@testing-li
 import { afterEach, describe, expect, it, vi } from "vitest";
 import { GlobalNav, SiteHeader } from "@/components/Layout";
 import { routeTree } from "@/routeTree.gen";
-import { Route as HotelsRoute } from "@/routes/hotels";
+import { Route as HotelsRoute } from "@/routes/accommodation";
 import { accommodationDestinations } from "@/data/content";
 import { tourCategories, tourCategoryPaths } from "@/data/tours";
 import { travelGuidePaths } from "@/data/registry";
@@ -172,7 +172,7 @@ describe("shared sidebar navigation", () => {
 
 describe("accommodation destination hub", () => {
   it("presents six illustrated destinations with real guide links and inviting copy", async () => {
-    const router = await navigationRouter("/hotels/");
+    const router = await navigationRouter("/accommodation/");
     const Hotels = HotelsRoute.options.component!;
     render(<RouterContextProvider router={router}><Hotels /></RouterContextProvider>);
     const cards = screen.getAllByTestId("accommodation-destination-card");

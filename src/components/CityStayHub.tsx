@@ -32,7 +32,7 @@ export function CityStayHub({ g, areas }: { g: CityStayGuide; areas: Neighborhoo
   return (
     <main className="pb-8">
       <GuideHeader
-        crumbs={[{ name: "Home", to: "/" }, { name: "Accommodation", to: "/hotels/" }, { name: g.city, to: g.path as LinkProps["to"] }]}
+        crumbs={[{ name: "Home", to: "/" }, { name: "Accommodation", to: "/accommodation/" }, { name: g.city, to: g.path as LinkProps["to"] }]}
         eyebrow={`Where to stay · ${g.city}`}
         title={g.title}
         intro={g.intro}

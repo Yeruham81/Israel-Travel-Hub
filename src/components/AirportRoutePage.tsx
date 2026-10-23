@@ -80,7 +80,7 @@ export function AirportRoutePage({ id }: { id: AirportTransferRouteId }) {
       <nav aria-label="Transfer planning next steps" className="mt-5 flex flex-wrap gap-4 text-sm">
         <a href="#journey-details" className="font-semibold text-primary underline">Drive time & destination</a>
         <Link to={travelGuidePaths.shabbat} className="text-primary underline">Friday-night or Saturday arrival?</Link>
-        <Link to={guide.related[0]?.to || "/hotels/"} className="text-primary underline">Choose your hotel area</Link>
+        <Link to={guide.related[0]?.to || "/accommodation/"} className="text-primary underline">Choose your hotel area</Link>
       </nav>
 
       <section id="journey-details" aria-labelledby="journey-h" className="mt-14 scroll-mt-24">

@@ -166,7 +166,7 @@ export function IsraelItineraryPage({ id }: { id: ItineraryId }) {
     </section>
     <nav className="mt-12 flex flex-wrap gap-4 border-t pt-6" aria-label="Continue trip planning">
       <Link to="/guides/" className="font-semibold text-primary underline">All travel guides</Link>
-      <Link to="/hotels/" className="font-semibold text-primary underline">Accommodation by region</Link>
+      <Link to="/accommodation/" className="font-semibold text-primary underline">Accommodation by region</Link>
       <Link to="/tours/" className="font-semibold text-primary underline">Tours and day trips</Link>
       <Link to="/transfers/" className="font-semibold text-primary underline">Airport transfers</Link>
     </nav>

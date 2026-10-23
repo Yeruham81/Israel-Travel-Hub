@@ -14,7 +14,7 @@ export function HotelCategoryPage({ guide: g, destination }: { guide: HotelCateg
   const otherGuides = hotelCategoryGuides.filter((guide) => guide.destinationId === destination.id && guide.id !== g.id);
   return (
     <main className="pb-8">
-      <GuideHeader crumbs={[{ name: "Home", to: "/" }, { name: "Accommodation", to: "/hotels/" }, { name: destination.name, to: destination.path as LinkProps["to"] }, { name: g.shortTitle, to: g.path as LinkProps["to"] }]} eyebrow={`${destination.name}, Israel · ${g.shortTitle}`} title={g.title} intro={g.summary} image={g.photo} checkedAt={destination.reviewedAt} />
+      <GuideHeader crumbs={[{ name: "Home", to: "/" }, { name: "Accommodation", to: "/accommodation/" }, { name: destination.name, to: destination.path as LinkProps["to"] }, { name: g.shortTitle, to: g.path as LinkProps["to"] }]} eyebrow={`${destination.name}, Israel · ${g.shortTitle}`} title={g.title} intro={g.summary} image={g.photo} checkedAt={destination.reviewedAt} />
       <OnThisPage sections={sections} />
       <article className="mx-auto max-w-5xl px-4">
         <Link to={destination.path as LinkProps["to"]} className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-primary"><ArrowLeft className="h-4 w-4" aria-hidden /> Compare all {destination.name} stays</Link>

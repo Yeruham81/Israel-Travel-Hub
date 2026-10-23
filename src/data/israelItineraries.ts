@@ -309,7 +309,7 @@ export const itineraries: Record<ItineraryId, ItineraryGuide> = {
       { title: "More resort time?", text: "Add a Dead Sea overnight only by removing time elsewhere. Ein Bokek resort hotels are not interchangeable with the Ein Gedi nature base.", to: "/travel-blog/best-dead-sea-hotels/", label: "Dead Sea hotel comparison" },
     ],
     logistics: [
-      { heading: "Two hotels instead of five", text: "Jerusalem and Tel Aviv are the most straightforward bases for this route. Avoid a separate Haifa night unless you plan to continue into the north.", to: "/hotels/", label: "Compare accommodation bases" },
+      { heading: "Two hotels instead of five", text: "Jerusalem and Tel Aviv are the most straightforward bases for this route. Avoid a separate Haifa night unless you plan to continue into the north.", to: "/accommodation/", label: "Compare accommodation bases" },
       { heading: "When public transport works", text: "Rail suits the city-to-city journey when scheduled; Caesarea's national park and Haifa's hillside viewpoints require extra onward connections.", to: "/travel-blog/getting-around-israel/", label: "Getting around Israel" },
       { heading: "What a guided day trip includes", text: "Check the named itinerary, pickup point, licensed guiding, park admission, cancellation and return. A private car-and-driver service does not automatically include a guide.", to: "/tours/", label: "Compare tours and day trips" },
     ],

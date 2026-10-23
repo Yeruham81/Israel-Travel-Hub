@@ -113,7 +113,7 @@ export const cityCultureGuides = {
         "links": [
           {
             "label": "Compare accommodation across Israel",
-            "to": "/hotels/"
+            "to": "/accommodation/"
           },
           {
             "label": "Arrange a private intercity journey",

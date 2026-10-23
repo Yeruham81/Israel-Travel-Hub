@@ -25,7 +25,7 @@ export function NeighborhoodStayPage({ area }: { area: NeighborhoodStayGuide }) 
   return (
     <main className="pb-8">
       <GuideHeader
-        crumbs={[{ name: "Home", to: "/" }, { name: "Accommodation", to: "/hotels/" }, { name: city.city, to: city.path as LinkProps["to"] }, { name: area.shortName, to: area.path as LinkProps["to"] }]}
+        crumbs={[{ name: "Home", to: "/" }, { name: "Accommodation", to: "/accommodation/" }, { name: city.city, to: city.path as LinkProps["to"] }, { name: area.shortName, to: area.path as LinkProps["to"] }]}
         eyebrow={`${city.city} area guide · Where to stay`}
         title={area.title}
         intro={area.summary}

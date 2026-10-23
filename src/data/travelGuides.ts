@@ -849,7 +849,7 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
       { label: "Rent a car for a regional itinerary", to: "/car-rental/" },
       { label: "Private driver and intercity journeys", to: "/private-driver/" },
       { label: "Tours & day trips", to: "/tours/" },
-      { label: "Destinations and city guides", to: "/destinations/" },
+      { label: "Travel guides by topic", to: "/guides/" },
     ],
   },
   telAviv: {

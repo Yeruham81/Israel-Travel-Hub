@@ -697,7 +697,7 @@ export const journeyDestinationGuides = {
     "services": [
       {
         "label": "Browse destinations and accommodation bases",
-        "to": "/destinations/"
+        "to": "/accommodation/"
       },
       {
         "label": "Compare tours and day trips",

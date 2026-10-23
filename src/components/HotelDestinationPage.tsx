@@ -17,7 +17,7 @@ export function HotelDestinationPage({ guide: g }: { guide: HotelStayDestination
   const pageId = `stay-${g.id}`;
   return (
     <main className="pb-8">
-      <GuideHeader crumbs={[{ name: "Home", to: "/" }, { name: "Accommodation", to: "/hotels/" }, { name: g.name, to: g.path as LinkProps["to"] }]} eyebrow={`Where to stay · ${g.name}, Israel`} title={g.title} intro={g.intro} image={g.photo} checkedAt={g.reviewedAt} />
+      <GuideHeader crumbs={[{ name: "Home", to: "/" }, { name: "Accommodation", to: "/accommodation/" }, { name: g.name, to: g.path as LinkProps["to"] }]} eyebrow={`Where to stay · ${g.name}, Israel`} title={g.title} intro={g.intro} image={g.photo} checkedAt={g.reviewedAt} />
       <OnThisPage sections={sections} />
       <article className="mx-auto max-w-5xl px-4">
         <Section id="overview" title="Choose the holiday, then the hotel" className="scroll-mt-32">{g.overview.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}{g.id === "deadsea" && <><h3 className="mt-6 text-xl">Ein Bokek, Neve Zohar or Ein Gedi?</h3>{g.locations.map((location) => <p key={location.name}><strong>{location.name}:</strong> {location.text}</p>)}<a href="#location" className="font-semibold text-primary underline">Check the map & arrival route</a></>}</Section>

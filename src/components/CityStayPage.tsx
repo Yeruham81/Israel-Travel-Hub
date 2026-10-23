@@ -27,7 +27,7 @@ function SimpleCityStayPage({ g }: { g: CityStayGuide }) {
   return (
     <main>
       <GuideHeader
-        crumbs={[{ name: "Home", to: "/" }, { name: "Accommodation", to: "/hotels/" }, { name: g.city, to: g.path as UiCrumb["to"] }]}
+        crumbs={[{ name: "Home", to: "/" }, { name: "Accommodation", to: "/accommodation/" }, { name: g.city, to: g.path as UiCrumb["to"] }]}
         eyebrow={`Accommodation · ${g.city}`}
         title={g.title}
         intro={g.intro}
