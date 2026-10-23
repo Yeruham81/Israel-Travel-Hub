@@ -58,5 +58,6 @@ describe("compact holidays reference", () => {
     expect(overviewHolidays(2026,3,"All").some(h=>h.id==="hanukkah26")).toBe(true);
     expect(overviewHolidays(2027,3,"All").some(h=>h.id==="yomkippur")).toBe(true);
     expect(overviewHolidays(2027,0,"Muslim").every(h=>h.community==="Muslim")).toBe(true);
+    expect(overviewHolidays(2027,1,"Druze").some(h=>h.id==="eid-adha")).toBe(true);
   });
 });
