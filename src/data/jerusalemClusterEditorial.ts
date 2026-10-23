@@ -91,6 +91,7 @@ const articles: Partial<Record<TravelGuideId, Upgrade>> = {
       {
         id: "christian-tradition-context",
         title: "Understand tradition, history and site access",
+        photo: { src: "/images/jerusalem/church-of-all-nations.webp", alt: "Church of All Nations by Gethsemane on the Mount of Olives" },
         paragraphs: [
           "A church's association with a biblical event is a matter of religious tradition and sometimes differs from what archaeology can establish. State this distinction when comparing sites: the Cenacle, Dormition Abbey and St Peter in Gallicantu tell related but separate stories on Mount Zion. The Mount Zion guide explains the short walk between them and the visitor limitations.",
           "On the Mount of Olives, the Church of All Nations and Garden of Gethsemane lie near the foot of the hill, while Dominus Flevit, Pater Noster and the Church of the Ascension require more climbing. Use the Mount of Olives guide for access, downhill route planning and suitable vehicle pickup points. Ein Karem, with the Church of the Visitation and St John the Baptist, is a separate neighbourhood journey.",
@@ -123,6 +124,7 @@ const articles: Partial<Record<TravelGuideId, Upgrade>> = {
       {
         id: "artists-colony",
         title: "Hutzot Hayotzer artists' workshops and craft shopping",
+        photo: { src: "/images/jerusalem/hutzot-hayotzer.webp", alt: "Art and craft displays at Hutzot Hayotzer artists' colony in Jerusalem" },
         paragraphs: [
           "Hutzot Hayotzer, the artists' colony by the Old City walls, has long been associated with pottery, metalwork, painting and local craft studios. It is not interchangeable with the Old City souvenir market: come here if you want to look closely at the maker and the object, rather than simply purchase a memento.",
           "Individual workshops and cultural events are not open on one shared timetable. Before making a special trip, confirm the specific studio or fair. The seasonal arts-and-crafts festival is a separate event with its own dates and admission, so check the Jerusalem events calendar rather than assuming a workshop is running.",
@@ -140,6 +142,7 @@ const articles: Partial<Record<TravelGuideId, Upgrade>> = {
       {
         id: "shopping-cardo-and-first-station",
         title: "The Cardo and the First Station: two very different stops",
+        photo: { src: "/images/jerusalem/first-station.webp", alt: "The restored First Station in Jerusalem, with shops and restaurants" },
         paragraphs: [
           "The Cardo in the Jewish Quarter is an archaeological street with small shops and galleries. Combine it with the Jewish Quarter and Western Wall rather than visiting as a standalone modern shopping centre. For crafts and religious gifts, ask about provenance, materials, packaging and how delicate purchases will travel.",
           "The First Station is a restored railway complex for restaurants, events and occasional small businesses; it is not a substitute for a large indoor mall. Emek Refaim nearby has a slower neighbourhood shopping-and-café feel. Each venue's Friday and Saturday schedule varies independently.",
@@ -260,6 +263,10 @@ export function applyJerusalemGuideEditorial(guides: Record<TravelGuideId, Trave
     if (changes.related) guide.related = [...new Set([...guide.related, ...changes.related])].filter(other => other !== id);
     if (changes.services) guide.services = [...changes.services, ...guide.services.filter(service => !changes.services?.some(added => added.to === service.to))];
     if (changes.reading) guide.reading = [...(guide.reading || []), ...changes.reading];
+    if (id === "jerusalemChurches") {
+      const einKarem = guide.sections.find(section => section.id === "ein-karem");
+      if (einKarem && !einKarem.photo) einKarem.photo = { src: "/images/jerusalem/church-of-visitation.webp", alt: "Church of the Visitation in the hillside Ein Karem neighbourhood" };
+    }
     guide.updatedAt = "2026-10-24";
   }
 }
