@@ -11,10 +11,12 @@ describe("home mobile performance optimizations", () => {
     const css = read("src/styles.css");
     expect(root).not.toContain("fonts.googleapis.com");
     expect(root).not.toContain("fonts.gstatic.com");
-    expect(root).toContain('rel: "preload", href: "/fonts/instrument-sans-latin-wght-normal.woff2"');
+    expect(root).toContain('rel: "preload", href: siteSansUrl');
+    expect(root).toContain('rel: "preload", href: siteSerifUrl');
     for (const filename of ["instrument-sans-latin-wght-normal.woff2", "newsreader-latin-400.woff2", "newsreader-latin-600.woff2", "newsreader-latin-400-italic.woff2"]) {
-      expect(bytes(`public/fonts/${filename}`)).toBeGreaterThan(5000);
-      expect(css).toContain(`/fonts/${filename}`);
+      expect(bytes(`src/assets/fonts/${filename}`)).toBeGreaterThan(5000);
+      expect(css).toContain(`./assets/fonts/${filename}`);
+      expect(css).not.toContain(`url("/fonts/${filename}")`);
     }
     expect(css).toMatch(/font-display:\s*swap/);
     expect(bytes("public/fonts/LICENSE-instrument-sans.txt")).toBeGreaterThan(100);
@@ -43,6 +45,32 @@ describe("home mobile performance optimizations", () => {
     for (const name of ["jerusalemCard", "telAvivCard", "tiberiasCard", "bethlehemCard", "masadaCard", "caesareaAqueductCard", "deadSeaBeachCard", "haifaHotelsCard"]) {
       expect(homepage).toContain(`thumb: ${name}`);
     }
+  });
+
+  it("provides a head preload for the exact LCP image variant, not every slide", () => {
+    const page = read("src/routes/index.tsx");
+    for (const key of ["lcpHeroMobile", "lcpHeroMedium", "lcpHeroLarge"]) {
+      expect(page).toContain(`href: ${key}`);
+    }
+    expect(page).toContain('media: "(max-width: 767px)"');
+    expect(page).toContain('media: "(min-width: 768px) and (max-width: 1800px)"');
+    expect(page).toContain('media: "(min-width: 1801px)"');
+    expect(page).toContain('fetchPriority: "high"');
+    expect(page.match(/rel: "preload", as: "image"/g)).toHaveLength(3);
+  });
+
+  it("skips expensive offscreen paint on phones but does not hide SEO content", () => {
+    const page = read("src/routes/index.tsx");
+    const css = read("src/styles.css");
+    expect(page).toContain('className="home-offscreen');
+    expect(page).toContain('<TripadvisorReviewsSection />');
+    expect(page).toContain('<PersonalTestimonialsSection />');
+    expect(page).toContain('<HomeContactForm />');
+    // The first transfer/service section remains on the normal rendering path.
+    expect(page).toContain('className={`scroll-mt-6 rounded-2xl border p-5 md:p-8');
+    expect(css).toContain('content-visibility: auto;');
+    expect(css).toContain('contain-intrinsic-size: auto 850px;');
+    expect(css).toContain('@media (max-width: 767px)');
   });
 
   it("defers second hero image until after initial render", () => {
