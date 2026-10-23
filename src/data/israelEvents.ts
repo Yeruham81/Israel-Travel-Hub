@@ -1,4 +1,5 @@
 import autoFeed from "./israelEventFeed.generated.json";
+import { festivalProgramme, touristHighlights } from "./touristEventSelection";
 
 /**
  * Editorial events seed for the first release. Entries require a specific year,
@@ -36,13 +37,21 @@ export type RecurringFestival = {
 export const EVENT_CHECK_DATE = "2026-10-23";
 export const EVENT_FEED_CHECK_DATE:string|null = autoFeed.checkedAt;
 /** Source listings expire after 8 days without a successful provider update. */
-export function publishedEvents(today:string):ConfirmedEvent[]{
+function freshImportedEvents(today:string):ConfirmedEvent[]{
   const verified=EVENT_FEED_CHECK_DATE;
   const diff=verified?Date.parse(today+"T12:00:00Z")-Date.parse(verified+"T12:00:00Z"):Infinity;
   const feedCurrent=verified&&Number.isFinite(diff)&&diff>=0&&diff<=8*86400000;
-  const imported=feedCurrent?(autoFeed.events as ConfirmedEvent[]):[];
+  return feedCurrent?(autoFeed.events as ConfirmedEvent[]):[];
+}
+/** The main view is curated for overseas visitors, not a raw concert feed. */
+export function publishedEvents(today:string):ConfirmedEvent[]{
+  const highlights=touristHighlights(freshImportedEvents(today));
   const fingerprints=new Set(CONFIRMED_EVENTS.map(e=>[e.title.toLowerCase().replace(/[^a-z0-9]/g,""),e.from,e.location.toLowerCase()].join("|")));
-  return [...CONFIRMED_EVENTS,...imported.filter(e=>!fingerprints.has([e.title.toLowerCase().replace(/[^a-z0-9]/g,""),e.from,e.location.toLowerCase()].join("|")))];
+  return [...CONFIRMED_EVENTS,...highlights.filter(e=>!fingerprints.has([e.title.toLowerCase().replace(/[^a-z0-9]/g,""),e.from,e.location.toLowerCase()].join("|")))];
+}
+/** Individual festival performances appear only after opening its programme. */
+export function publishedFestivalProgramme(today:string,festivalId:string):ConfirmedEvent[]{
+  return festivalProgramme(freshImportedEvents(today),festivalId).filter(e=>e.to>=today);
 }
 
 export const EVENT_REGIONS:readonly {id:"all"|EventRegion;label:string}[] = [
