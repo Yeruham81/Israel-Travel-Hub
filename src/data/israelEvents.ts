@@ -1,5 +1,5 @@
 import autoFeed from "./israelEventFeed.generated.json";
-import { festivalProgramme, touristHighlights } from "./touristEventSelection";
+import { touristHighlights } from "./touristEventSelection";
 
 /**
  * Editorial events seed for the first release. Entries require a specific year,
@@ -48,10 +48,6 @@ export function publishedEvents(today:string):ConfirmedEvent[]{
   const highlights=touristHighlights(freshImportedEvents(today));
   const fingerprints=new Set(CONFIRMED_EVENTS.map(e=>[e.title.toLowerCase().replace(/[^a-z0-9]/g,""),e.from,e.location.toLowerCase()].join("|")));
   return [...CONFIRMED_EVENTS,...highlights.filter(e=>!fingerprints.has([e.title.toLowerCase().replace(/[^a-z0-9]/g,""),e.from,e.location.toLowerCase()].join("|")))];
-}
-/** Individual festival performances appear only after opening its programme. */
-export function publishedFestivalProgramme(today:string,festivalId:string):ConfirmedEvent[]{
-  return festivalProgramme(freshImportedEvents(today),festivalId).filter(e=>e.to>=today);
 }
 
 export const EVENT_REGIONS:readonly {id:"all"|EventRegion;label:string}[] = [
