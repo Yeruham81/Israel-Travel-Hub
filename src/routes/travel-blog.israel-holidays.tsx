@@ -12,8 +12,8 @@ import { IsraelHolidayOverview } from "@/components/IsraelHolidayOverview";
 import { TripHolidayResults } from "@/components/TripHolidayResults";
 
 const PATH = "/travel-blog/israel-holidays/";
-const TITLE = "Israel Holidays Calendar 2027: Dates & Travel Planning";
-const DESCRIPTION = "Explore Israel's holidays in 2027. Select your travel dates on a visual calendar to see possible closures, transport changes, busy periods and local observances.";
+const TITLE = "Israel Holidays Calendar: Dates & Travel Planning";
+const DESCRIPTION = "Explore Israel's holidays and their impact on travel. Select your dates on an interactive calendar to check transport changes, opening hours, crowds and local observances.";
 const photo = migrationPhotos["calendar-of-events"];
 const crumbs = [{name:"Home",path:"/"},{name:"Travel guides",path:"/guides/"},{name:"Israel holidays",path:PATH}];
 
@@ -115,7 +115,7 @@ export function IsraelHolidaysPage() {
           <div>
             <p className="text-sm font-semibold tracking-wide text-primary">TRAVEL PLANNING GUIDE</p>
             <h1 className="mt-2 text-4xl leading-tight md:text-5xl">{TITLE}</h1>
-            <p className="mt-4 text-lg leading-relaxed text-muted-foreground">Public transport can pause, attractions can get busy and religious celebrations can change access to particular places. Use this 2027 calendar to see which dates matter for your visit.</p>
+            <p className="mt-4 text-lg leading-relaxed text-muted-foreground">Public transport can pause, attractions can get busy and religious celebrations can change access to particular places. Use this calendar to see which dates matter for your visit.</p>
             <PageUpdated date={HOLIDAY_COVERAGE.checkedAt}/>
           </div>
           <figure><img src={photo.src} alt={photo.alt} width={900} height={600} fetchPriority="high" decoding="async" className="aspect-[3/2] w-full rounded-2xl object-cover"/></figure>
