@@ -34,13 +34,15 @@ export function normalizeTicketmasterEvent(raw,checkedAt){
  const city=compact(venue?.city?.name);
  const place=compact(venue?.name);
  const officialUrl=secureUrl(raw.url);
+ // Exclude provider test inventory even when the record has otherwise valid metadata.
+ const testRecord=/\/event\/(?:bdika|test|dummy)(?:\/|$)/i.test(officialUrl||"")||/^(?:test(?: event)?|dummy|winter \d{3,})$/i.test(title);
  const status=compact(raw.dates?.status?.code).toLowerCase();
  const tba=raw.dates?.start?.dateTBA===true||raw.dates?.start?.dateTBD===true;
  const time=compact(raw.dates?.start?.localTime);
  // Never infer a country from a missing venue. Skip events whose dates or
  // status are not confirmed; explicit cancellations do not reach the listing.
  if(!/^[a-zA-Z0-9_-]{3,85}$/.test(tmId)||title.length<5||title.length>150||
-    !/[A-Za-z]{3}/.test(title)||!isDay(date)||!officialUrl||!place||!city||
+    !/[A-Za-z]{3}/.test(title)||testRecord||!isDay(date)||!officialUrl||!place||!city||
     place.length>120||city.length>65||country!=="IL"||tba||
     status==="canceled"||status==="cancelled"||status==="postponed"||
     !["onsale","offsale","rescheduled"].includes(status))return null;
