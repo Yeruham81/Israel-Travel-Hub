@@ -215,21 +215,19 @@ describe("Tel Aviv direct hotel catalog", () => {
     expect(catalog.textContent).not.toMatch(/ILS\s*\d{2,}|rooms available now|live price/i);
   }, 20000);
 
-  it("keeps licensed photo credits for all 32 hotel cards", () => {
+  it("keeps attributions and locally hosted images for all 32 hotel cards", () => {
     const { container } = render(<CityStayPage g={cityStayGuides.telaviv} />);
     const credits = screen.getByTestId("tel-aviv-hotel-photo-credits");
     const sources = within(credits).getAllByRole("link", { hidden: true });
-    expect(sources.length).toBeGreaterThanOrEqual(12);
+    // Licensed local files can retain source links, but images never load from those links.
+    expect(sources.length).toBeGreaterThanOrEqual(2);
     for (const hotel of telAvivHotelCatalog) {
       const photo = cityHotelPhoto(hotel);
       expect(photo.alt).not.toContain(hotel.name);
       expect(photo.src).toBeTruthy();
       expect(photo.credit).toBeTruthy();
-      if (photo.src.startsWith("https://")) {
-        expect(photo.src).toMatch(/^https:\/\/images\.unsplash\.com\/photo-/);
-        expect(photo.sourceUrl).toMatch(/^https:\/\/unsplash\.com\/photos\//);
-        expect(photo.licenseUrl).toBe("https://unsplash.com/license");
-      }
+      expect(photo.src).not.toMatch(/^https?:\/\//i);
+      if (photo.sourceUrl) expect(photo.sourceUrl).toMatch(/^https:\/\//);
     }
     expect(container.querySelectorAll("#book [data-testid='tel-aviv-hotel-card']")).toHaveLength(32);
   });
