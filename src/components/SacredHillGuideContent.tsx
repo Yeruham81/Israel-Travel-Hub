@@ -19,7 +19,9 @@ export function SacredHillGuideContent({ id }: { id: SacredHillId }) {
     ["getting-there", "Getting there"],
     ["visitor-advice", "Practical advice"],
     ["history", "History & faith"],
+    ["official", "Opening hours"],
     ["visit-options", "Tours & transport"],
+    ["faq", "Questions"],
   ] as const;
 
   return <>
