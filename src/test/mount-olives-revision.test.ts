@@ -1,4 +1,6 @@
 import { describe, expect, it } from "vitest";
+import { existsSync } from "node:fs";
+import { resolve } from "node:path";
 import { sacredHillEditorial, sacredHillOverrides } from "@/data/sacredHillGuides";
 import { mountOlivesAttractionUpdate } from "@/data/mountOlivesRevision";
 
@@ -28,9 +30,27 @@ describe("Mount of Olives practical visitor revision", () => {
     expect(guide.stops).toHaveLength(8);
     const photos = guide.stops.flatMap(stop => stop.image ? [stop.image] : []);
     // Do not replace missing site-specific photographs with misleading generic pictures.
-    expect(photos.length).toBeGreaterThanOrEqual(4);
+    expect(photos).toHaveLength(8);
     expect(photos.every(photo => Boolean(photo.alt))).toBe(true);
     expect(new Set(photos.map(photo => photo.src)).size).toBe(photos.length);
+    for (const stop of guide.stops) {
+      const src = stop.image!.src;
+      // URL-based public assets have to exist in the local repository.
+      if (src.startsWith("/images/")) {
+        expect(existsSync(resolve(process.cwd(), "public", src.slice(1))), stop.name).toBe(true);
+      }
+    }
+    const newlyImported: Record<string, string> = {
+      "Pater Noster Church": "pater-noster.webp",
+      "Chapel of the Ascension": "chapel-of-ascension.webp",
+      "Dominus Flevit": "dominus-flevit.webp",
+      "Church of St Mary Magdalene": "mary-magdalene-church.webp",
+      "Tomb of the Virgin Mary": "tomb-of-virgin-mary.webp",
+    };
+    for (const [name, filename] of Object.entries(newlyImported)) {
+      expect(guide.stops.find(stop => stop.name === name)?.image?.src)
+        .toBe(`/images/jerusalem/mount-of-olives/${filename}`);
+    }
     expect(new Set(guide.stops.map(stop => stop.tipLabel)).size).toBeGreaterThanOrEqual(5);
     const imageUrls = [attraction.image?.src, ...photos.map(photo => photo.src)];
     expect(imageUrls.every(src => typeof src === "string" && !/^https?:\/\//i.test(src))).toBe(true);
