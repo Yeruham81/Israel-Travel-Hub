@@ -172,4 +172,7 @@ export const sacredHillEditorial: Record<SacredHillId, SacredHillEditorial> = {
     relatedHotel: { text: "Where to stay in Jerusalem", to: "/travel-blog/where-to-stay-in-jerusalem/" },
   },
 };
-\n// The two sacred hills keep distinct editorial voices and visitor needs.\nObject.assign(sacredHillOverrides["mount-of-olives"], mountOlivesAttractionUpdate);\nsacredHillEditorial["mount-of-olives"] = mountOlivesEditorialUpdate;\n
+
+// The two sacred hills keep distinct editorial voices and visitor needs.
+Object.assign(sacredHillOverrides["mount-of-olives"], mountOlivesAttractionUpdate);
+sacredHillEditorial["mount-of-olives"] = mountOlivesEditorialUpdate;
