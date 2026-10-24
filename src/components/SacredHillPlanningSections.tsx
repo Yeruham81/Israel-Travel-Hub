@@ -41,7 +41,10 @@ export function SacredHillSiteHours({ id }: { id: SacredHillId }) {
             <td className="w-[34%] p-3 leading-relaxed">{row.hours}</td>
             <td className="w-[22%] p-3 leading-relaxed">{row.admission}</td>
             <td className="p-3 leading-relaxed">
-              <a href={row.sourceUrl} target="_blank" rel="noopener noreferrer" className="font-semibold text-primary underline underline-offset-4">{row.source} <span aria-hidden="true">↗</span><span className="sr-only"> (opens in a new tab)</span></a>
+              <div className="flex flex-col gap-2">
+                <a href={row.sourceUrl} target="_blank" rel="noopener noreferrer" className="font-semibold text-primary underline underline-offset-4">{row.source} <span aria-hidden="true">↗</span><span className="sr-only"> (opens in a new tab)</span></a>
+                <a href={mapsSearchUrl(row.mapQuery)} target="_blank" rel="noopener noreferrer" className="text-primary underline underline-offset-4">Find on map <span aria-hidden="true">↗</span><span className="sr-only"> (opens in a new tab)</span></a>
+              </div>
             </td>
           </tr>)}
         </tbody>
