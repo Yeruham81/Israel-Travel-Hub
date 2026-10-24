@@ -15,14 +15,17 @@ export function SacredHillDayPlanning({ id }: { id: SacredHillId }) {
     <h3 id="choose-day-h" className="text-xl font-semibold">Choose the right day for your route</h3>
     <p className="mt-2 text-sm text-muted-foreground">Some churches have shorter visiting windows. Open the option that matches your visit to see how I'd arrange the stops.</p>
     <div className="mt-3 grid gap-3 sm:grid-cols-2">
-      {options.map((option, index) => <details key={option.title} className="group self-start rounded-xl border bg-card p-4" open={index === 0 ? true : undefined}>
-        <summary className="cursor-pointer font-semibold leading-snug text-foreground marker:text-primary">{option.title}</summary>
-        <p className="mt-3 text-sm leading-relaxed">{option.summary}</p>
-        <ol className="mt-3 list-decimal space-y-2 pl-5 text-sm leading-relaxed marker:font-semibold marker:text-primary">
-          {option.steps.map(step => <li key={step}>{step}</li>)}
-        </ol>
-        {option.caution && <p className="mt-3 border-t pt-3 text-xs leading-relaxed text-muted-foreground">{option.caution}</p>}
-      </details>)}
+      {options.map(option => <div key={option.title} className="self-start rounded-xl border bg-card p-4">
+        <h4 className="font-semibold leading-snug">{option.title}</h4>
+        <p className="mt-2 text-sm leading-relaxed">{option.summary}</p>
+        <details className="mt-3">
+          <summary className="cursor-pointer text-sm font-semibold text-primary">See a suggested sequence</summary>
+          <ol className="mt-3 list-decimal space-y-2 pl-5 text-sm leading-relaxed marker:font-semibold marker:text-primary">
+            {option.steps.map(step => <li key={step}>{step}</li>)}
+          </ol>
+          {option.caution && <p className="mt-3 border-t pt-3 text-xs leading-relaxed text-muted-foreground">{option.caution}</p>}
+        </details>
+      </div>)}
     </div>
   </div>;
 }
