@@ -1,5 +1,6 @@
 import { Link, type LinkProps } from "@tanstack/react-router";
 import { FaqList, OnThisPage, Section } from "@/components/Guide";
+import { AuthorCard } from "@/components/AuthorCard";
 import { JerusalemPartnerOffers } from "@/components/JerusalemPartnerOffers";
 import { MountOlivesRelatedGuides } from "@/components/MountOlivesRelatedGuides";
 import { MountZionRelatedGuides } from "@/components/MountZionRelatedGuides";
@@ -37,6 +38,7 @@ export function SacredHillGuideContent({ id }: { id: SacredHillId }) {
         <p className="mt-1 text-sm font-medium leading-relaxed">{fact.value}</p>
       </div>)}
     </div>
+    <AuthorCard />
     <OnThisPage sections={nav} />
 
     <Section id="places-to-see" title={id === "mount-zion" ? "What to See on Mount Zion" : "What to See on the Mount of Olives"}>
