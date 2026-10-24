@@ -3,6 +3,8 @@ import { FaqList, OnThisPage, Section } from "@/components/Guide";
 import { JerusalemPartnerOffers } from "@/components/JerusalemPartnerOffers";
 import { MountOlivesRelatedGuides } from "@/components/MountOlivesRelatedGuides";
 import { MountZionRelatedGuides } from "@/components/MountZionRelatedGuides";
+import { SacredHillDayPlanning, SacredHillSiteHours, SacredHillWalkingMaps } from "@/components/SacredHillPlanningSections";
+import { SacredHillContactForm } from "@/components/SacredHillContactForm";
 import { sacredHillEditorial, sacredHillOverrides, type SacredHillId } from "@/data/sacredHillGuides";
 
 /**
@@ -16,12 +18,13 @@ export function SacredHillGuideContent({ id }: { id: SacredHillId }) {
   const nav = [
     ["walking-route", "Walking routes"],
     ["places-to-see", "Sites to visit"],
+    ["visit-facts", "Hours & entry"],
     ["getting-there", "Getting there"],
     ["visitor-advice", "Practical advice"],
     ["history", "History & faith"],
-    ["official", "Opening hours"],
-    ["visit-options", "Tours & transport"],
     ["faq", "Questions"],
+    ["visit-options", "Tours & transport"],
+    ["contact-moshe", "Message Moshe"],
   ] as const;
 
   return <>
@@ -45,6 +48,7 @@ export function SacredHillGuideContent({ id }: { id: SacredHillId }) {
           <p className="mt-5 border-t pt-4 text-sm leading-relaxed text-muted-foreground">{route.note}</p>
         </article>)}
       </div>
+      <SacredHillDayPlanning id={id} />
       {id === "mount-of-olives" ? <div className="mt-6 rounded-xl border border-primary/20 bg-secondary/40 p-5">
         <h3 className="text-xl font-semibold">Combine the viewpoint with a day in the Old City</h3>
         <p className="mt-2 leading-relaxed"><strong>Start with the panorama:</strong> arrive at Seven Arches in the morning, visit the hill's churches and continue from Gethsemane through Lion's Gate. This gives you an introduction to Jerusalem before you explore its streets.</p>
@@ -83,6 +87,7 @@ export function SacredHillGuideContent({ id }: { id: SacredHillId }) {
         </article>)}
       </div>
     </Section>
+    <SacredHillSiteHours id={id} />
 
     <Section id="getting-there" title={id === "mount-zion" ? "How to get to Mount Zion" : "How to reach the Mount of Olives viewpoint"}>
       <p className="mt-3 max-w-3xl leading-relaxed">{guide.transportIntro}</p>
@@ -93,6 +98,7 @@ export function SacredHillGuideContent({ id }: { id: SacredHillId }) {
           {mode.links && <p className="mt-2 flex flex-wrap gap-x-4 gap-y-1 text-sm">{mode.links.map(item => <a key={item.url} href={item.url} target="_blank" rel="noopener noreferrer" className="font-medium text-primary underline underline-offset-4">{item.label} <span aria-hidden="true">↗</span></a>)}</p>}
         </div>)}
       </div>
+      <SacredHillWalkingMaps id={id} />
     </Section>
 
     <Section id="visitor-advice" title="Practical advice before you go">
@@ -110,15 +116,9 @@ export function SacredHillGuideContent({ id }: { id: SacredHillId }) {
       {guide.history.map(paragraph => <p key={paragraph} className="mt-3 max-w-3xl leading-relaxed">{paragraph}</p>)}
     </Section>
 
-    <Section id="official" title="Current opening hours and visitor information">
-      {id === "mount-of-olives" ? <>
-        <p className="mt-3 max-w-3xl leading-relaxed">Before setting out, I recommend checking the <a href="https://www.cicts.org/en/updated-opening-hours-holy-places-tourist-sites-holy-land" target="_blank" rel="noopener noreferrer" className="text-primary underline underline-offset-4">Christian Information Center's current opening hours</a> for Pater Noster, Dominus Flevit, St Mary Magdalene and the churches around Gethsemane. Each site has its own schedule, and religious services or feast days may affect admission.</p>
-        <p className="mt-3 max-w-3xl leading-relaxed">For the Jewish cemetery, the <a href="https://cityofdavid.org.il/en/sites/mount-of-olives-eng/" target="_blank" rel="noopener noreferrer" className="text-primary underline underline-offset-4">Mount of Olives visitor information</a> includes transport approaches and group-tour arrangements. For buses, use <a href="https://moovitapp.com/index/en/public_transit-%D7%9E%D7%A6%D7%A4%D7%94_%D7%94%D7%A8_%D7%94%D7%96%D7%99%D7%AA%D7%99%D7%9D_%D7%9E%D7%9C%D7%95%D7%9F_%D7%A9%D7%91%D7%A2_%D7%94%D7%A7%D7%A9%D7%AA%D7%95%D7%AA-Israel-stop_34625826-1" target="_blank" rel="noopener noreferrer" className="text-primary underline underline-offset-4">the Seven Arches viewpoint stop in Moovit</a> to see routes and times for your chosen date.</p>
-      </> : <>
-        <p className="mt-3 max-w-3xl leading-relaxed">Before arranging your visit, I recommend the <a href="https://www.cicts.org/en/updated-opening-hours-holy-places-tourist-sites-holy-land" target="_blank" rel="noopener noreferrer" className="text-primary underline underline-offset-4">Christian Information Center's current opening-hours guide</a> for the Cenacle, David's Tomb, St Peter in Gallicantu and the Catholic cemetery. The sites are managed separately, especially around services and religious holidays.</p>
-        <p className="mt-3 max-w-3xl leading-relaxed">For Dormition Abbey, use the Benedictine community's <a href="https://dormitio.net/abtei/gottesdienst-oeffnungszeiten/" target="_blank" rel="noopener noreferrer" className="text-primary underline underline-offset-4">church and worship timetable</a>. The <a href="https://www.mountzion.org.il/" target="_blank" rel="noopener noreferrer" className="text-primary underline underline-offset-4">Window to Mount Zion heritage site</a> also provides a useful map and descriptions of lesser-known places around the hill.</p>
-      </>}
-    </Section>
+
+
+    <FaqList faqs={place.faqs || []} />
 
     <section id="visit-options" aria-labelledby="visit-options-h" className="mt-14 border-t pt-8">
       <h2 id="visit-options-h" className="text-3xl">{id === "mount-of-olives" ? "Include the Mount of Olives in your Jerusalem visit" : "Include Mount Zion in your Jerusalem visit"}</h2>
@@ -128,8 +128,9 @@ export function SacredHillGuideContent({ id }: { id: SacredHillId }) {
         <Link to="/tours/jerusalem/" className="btn btn-outline">Explore Jerusalem tours</Link>
       </div>
     </section>
+    <SacredHillContactForm id={id} />
     <JerusalemPartnerOffers id={id} />
     {id === "mount-of-olives" ? <MountOlivesRelatedGuides /> : <MountZionRelatedGuides />}
-    <FaqList faqs={place.faqs || []} />
+
   </>;
 }
