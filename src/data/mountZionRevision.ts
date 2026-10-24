@@ -73,20 +73,20 @@ export const mountZionEditorialUpdate: SacredHillEditorial = {
     {
       name: "Room of the Last Supper (Cenacle)",
       description: "The Upper Room is among the best-known Christian sites on Mount Zion. Pilgrims visit this vaulted chamber to remember Jesus' Last Supper with his disciples; the site is also associated with Pentecost. Its arches and stone details reflect the long history of worship here.",
-      visit: "The entrance is upstairs in the David's Tomb complex. The Christian Information Center currently lists the Cenacle from 08:00 to 18:00, except on Yom Kippur. Use its latest schedule if your visit falls near a religious holiday.",
+      visit: "The Upper Room is reached by a staircase from the historic complex shared with David's Tomb. Look up at the ribbed stone vaults and allow a moment to take in the room before moving downstairs.",
       tipLabel: "Finding the entrance",
       image: { src: "/images/jerusalem/mount-zion/cenacle-upper-room.webp", alt: "Gothic arches and visitors inside the Cenacle, the traditional Room of the Last Supper on Mount Zion" },
     },
     {
       name: "David's Tomb",
       description: "Directly below the Upper Room is the traditional Tomb of King David. The site is a place of Jewish prayer and a meaningful stop for visitors interested in the many traditions that meet on Mount Zion.",
-      visit: "The published visiting window generally runs from 09:00 until sunset. There are separate prayer sections, and men should bring a head covering. Allow a quiet few minutes, particularly when people are praying.",
+      visit: "There are separate Jewish prayer sections here, and men should bring a head covering. Allow a quiet few minutes, particularly when people are praying, before moving back towards Dormition Abbey.",
       tipLabel: "A respectful visit",
     },
     {
       name: "Dormition Abbey",
       description: "The round basilica and its tall bell tower make Dormition Abbey the most recognisable building on Mount Zion. This Benedictine church commemorates Mary's Dormition, or falling asleep. Inside, look for the mosaics and the atmospheric crypt.",
-      visit: "I would include both the main church and the crypt when they are open. The abbey lists 09:00–17:00 visits on weekdays and Saturdays. On Sundays it opens later, around midday; check the abbey's current timetable before planning a morning visit.",
+      visit: "I would include both the mosaics in the main church and the crypt when they are open. The round architecture is easier to appreciate when you also walk around the exterior.",
       tipLabel: "Don't miss",
       image: { src: "/images/jerusalem/mount-zion/dormition-abbey-and-bell-tower.webp", alt: "Dormition Abbey basilica and bell tower rising above Mount Zion in Jerusalem" },
       link: { label: "Dormition Abbey visiting hours", url: "https://dormitio.net/abtei/gottesdienst-oeffnungszeiten/" },
@@ -94,7 +94,7 @@ export const mountZionEditorialUpdate: SacredHillEditorial = {
     {
       name: "St Peter in Gallicantu",
       description: "St Peter in Gallicantu commemorates the tradition of Peter's denial of Jesus and the site associated with the house of High Priest Caiaphas. Inside and around the church are chapels, archaeological remains and views over the valley.",
-      visit: "Allow at least half an hour for the church and grounds rather than a hurried photograph. The current holy-site schedule lists 08:30–17:00, Monday to Saturday, with Sunday closure.",
+      visit: "Allow time for the sanctuary, the underground spaces and the ancient stone stairway beside the church, traditionally associated with the events of Holy Thursday. The hillside setting also offers a different perspective on Jerusalem.",
       tipLabel: "Allow extra time",
       link: { label: "St Peter in Gallicantu official visitor information", url: "https://www.stpeter-gallicantu.org/?lang=en" },
       image: { src: "/images/jerusalem/mount-zion/st-peter-in-gallicantu.webp", alt: "Stone church of St Peter in Gallicantu overlooking Jerusalem's Kidron Valley" },
@@ -108,13 +108,13 @@ export const mountZionEditorialUpdate: SacredHillEditorial = {
     {
       name: "Oskar Schindler's grave",
       description: "Oskar Schindler, honoured as Righteous Among the Nations for rescuing Jews during the Holocaust, is buried in Mount Zion's Catholic cemetery. Visitors often leave a small stone on his grave as a sign of remembrance.",
-      visit: "The Catholic cemetery currently lists visiting hours of 09:00–16:00. Check access before walking down from the central sites; if the gate is locked during those hours, use the contact number posted there.",
+      visit: "The grave is in the lower Catholic cemetery, not beside the three main Mount Zion churches. Find the cemetery entrance first and treat this as a quiet memorial visit, allowing extra time to return.",
       tipLabel: "Before going down",
     },
     {
       name: "The Chamber of the Holocaust",
       description: "This small memorial museum on Mount Zion remembers Jewish communities destroyed during the Holocaust. Its collection and atmosphere offer a different kind of visit from the religious landmarks nearby.",
-      visit: "The museum currently lists Sunday–Thursday visiting hours of 09:00–14:00, excluding Jewish holidays. It is a worthwhile addition for visitors interested in the hill's modern history; check the museum website before setting out.",
+      visit: "Its historical memorials offer a meaningful contrast to the older religious places on the hill. Allow a separate visit rather than adding it as a hurried final stop.",
       tipLabel: "An additional stop",
       link: { label: "Chamber of the Holocaust visiting information", url: "https://martefhashoa.org/" },
     },
