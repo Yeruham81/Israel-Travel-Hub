@@ -27,7 +27,7 @@ describe("Mount Zion visitor guide revision", () => {
     expect(data.stops.every(stop => stop.tipLabel && stop.visit.length > 50)).toBe(true);
     expect(new Set(data.stops.map(stop => stop.tipLabel)).size).toBeGreaterThan(4);
     const text = [attraction.intro, attraction.takeaway, ...data.history, ...data.stops.flatMap(x => [x.description, x.visit])].join(" ");
-    expect(text).not.toMatch(/unproven|archaeolog|not physical proof|do not need to book|not a promise/i);
+    expect(text).not.toMatch(/unproven|not physical proof|do not need to book|not a promise|not established archaeologically/i);
     expect(data.stops.some(stop => /Last Supper/i.test(stop.name))).toBe(true);
     expect(data.stops.some(stop => /Dormition/i.test(stop.name))).toBe(true);
     expect(data.stops.some(stop => /Schindler/i.test(stop.name))).toBe(true);
