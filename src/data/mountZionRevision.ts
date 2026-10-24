@@ -75,6 +75,7 @@ export const mountZionEditorialUpdate: SacredHillEditorial = {
       description: "The Upper Room is among the best-known Christian sites on Mount Zion. Pilgrims visit this vaulted chamber to remember Jesus' Last Supper with his disciples; the site is also associated with Pentecost. Its arches and stone details reflect the long history of worship here.",
       visit: "The entrance is upstairs in the David's Tomb complex. The Christian Information Center currently lists the Cenacle from 08:00 to 18:00, except on Yom Kippur. Use its latest schedule if your visit falls near a religious holiday.",
       tipLabel: "Finding the entrance",
+      image: { src: "/images/jerusalem/mount-zion/cenacle-upper-room.webp", alt: "Gothic arches and visitors inside the Cenacle, the traditional Room of the Last Supper on Mount Zion" },
     },
     {
       name: "David's Tomb",
@@ -87,7 +88,7 @@ export const mountZionEditorialUpdate: SacredHillEditorial = {
       description: "The round basilica and its tall bell tower make Dormition Abbey the most recognisable building on Mount Zion. This Benedictine church commemorates Mary's Dormition, or falling asleep. Inside, look for the mosaics and the atmospheric crypt.",
       visit: "I would include both the main church and the crypt when they are open. The abbey lists visitor hours of 09:00–17:00 on weekdays and Saturdays, and 11:30–17:00 on Sundays, subject to special services.",
       tipLabel: "Don't miss",
-      image: { src: mountZionPhoto, alt: "The round limestone basilica of Dormition Abbey on Mount Zion" },
+      image: { src: "/images/jerusalem/mount-zion/dormition-abbey-and-bell-tower.webp", alt: "Dormition Abbey basilica and bell tower rising above Mount Zion in Jerusalem" },
       link: { label: "Dormition Abbey visiting hours", url: "https://dormitio.net/abtei/gottesdienst-oeffnungszeiten/" },
     },
     {
@@ -95,6 +96,7 @@ export const mountZionEditorialUpdate: SacredHillEditorial = {
       description: "St Peter in Gallicantu commemorates the tradition of Peter's denial of Jesus and the site associated with the house of High Priest Caiaphas. Inside and around the church are chapels, archaeological remains and views over the valley.",
       visit: "Allow at least half an hour for the church and grounds rather than a hurried photograph. The current holy-site schedule lists 08:30–17:00, Monday to Saturday, with Sunday closure.",
       tipLabel: "Allow extra time",
+      image: { src: "/images/jerusalem/mount-zion/st-peter-in-gallicantu.webp", alt: "Stone church of St Peter in Gallicantu overlooking Jerusalem's Kidron Valley" },
     },
     {
       name: "Zion Gate",
