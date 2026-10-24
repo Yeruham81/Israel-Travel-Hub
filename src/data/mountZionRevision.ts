@@ -73,19 +73,19 @@ export const mountZionEditorialUpdate: SacredHillEditorial = {
     {
       name: "Room of the Last Supper (Cenacle)",
       description: "The Upper Room is among the best-known Christian sites on Mount Zion. Pilgrims visit this vaulted chamber to remember Jesus' Last Supper with his disciples; the site is also associated with Pentecost. Its arches and stone details reflect the long history of worship here.",
-      visit: "The entrance is upstairs in the David's Tomb complex. The published visitor schedule generally allows daytime visits; check the Christian Information Center for holidays and special access.",
+      visit: "The entrance is upstairs in the David's Tomb complex. The Christian Information Center currently lists the Cenacle from 08:00 to 18:00, except on Yom Kippur. Use its latest schedule if your visit falls near a religious holiday.",
       tipLabel: "Finding the entrance",
     },
     {
       name: "David's Tomb",
       description: "Directly below the Upper Room is the traditional Tomb of King David. The site is a place of Jewish prayer and a meaningful stop for visitors interested in the many traditions that meet on Mount Zion.",
-      visit: "There are separate prayer sections, and men should bring a head covering. Allow a quiet few minutes, particularly when people are praying.",
+      visit: "The published visiting window generally runs from 09:00 until sunset. There are separate prayer sections, and men should bring a head covering. Allow a quiet few minutes, particularly when people are praying.",
       tipLabel: "A respectful visit",
     },
     {
       name: "Dormition Abbey",
       description: "The round basilica and its tall bell tower make Dormition Abbey the most recognisable building on Mount Zion. This Benedictine church commemorates Mary's Dormition, or falling asleep. Inside, look for the mosaics and the atmospheric crypt.",
-      visit: "I would include both the main church and the crypt when they are open. Sunday sightseeing hours begin later than on weekdays; the abbey's own website has the current schedule and worship times.",
+      visit: "I would include both the main church and the crypt when they are open. The abbey lists visitor hours of 09:00–17:00 on weekdays and Saturdays, and 11:30–17:00 on Sundays, subject to special services.",
       tipLabel: "Don't miss",
       image: { src: mountZionPhoto, alt: "The round limestone basilica of Dormition Abbey on Mount Zion" },
       link: { label: "Dormition Abbey visiting hours", url: "https://dormitio.net/abtei/gottesdienst-oeffnungszeiten/" },
@@ -93,7 +93,7 @@ export const mountZionEditorialUpdate: SacredHillEditorial = {
     {
       name: "St Peter in Gallicantu",
       description: "St Peter in Gallicantu commemorates the tradition of Peter's denial of Jesus and the site associated with the house of High Priest Caiaphas. Inside and around the church are chapels, archaeological remains and views over the valley.",
-      visit: "Allow at least half an hour for the church and grounds rather than a hurried photograph. Visitor entry is generally available Monday to Saturday, with Sunday closure.",
+      visit: "Allow at least half an hour for the church and grounds rather than a hurried photograph. The current holy-site schedule lists 08:30–17:00, Monday to Saturday, with Sunday closure.",
       tipLabel: "Allow extra time",
     },
     {
