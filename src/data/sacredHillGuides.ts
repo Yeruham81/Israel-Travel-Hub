@@ -1,12 +1,15 @@
 import mountZion from "@/assets/guides/mount-zion.jpg";
+import { mountOlivesAttractionUpdate, mountOlivesEditorialUpdate } from "@/data/mountOlivesRevision";
 import type { Attraction } from "@/data/attractionGuideTypes";
 
 export type SacredHillId = "mount-zion" | "mount-of-olives";
 
-type Stop = {
+export type Stop = {
   name: string;
   description: string;
   visit: string;
+  tipLabel?: string;
+  image?: { src: string; alt: string; credit?: { label: string; url: string; licenseUrl: string } };
   link?: { label: string; url: string };
 };
 type WalkingRoute = {
@@ -16,7 +19,7 @@ type WalkingRoute = {
   steps: string[];
   note: string;
 };
-type PracticalNote = { title: string; text: string };
+type PracticalNote = { title: string; text: string; links?: { label: string; url: string }[] };
 export type SacredHillEditorial = {
   eyebrow: string;
   snapshot: { label: string; value: string }[];
@@ -169,3 +172,4 @@ export const sacredHillEditorial: Record<SacredHillId, SacredHillEditorial> = {
     relatedHotel: { text: "Where to stay in Jerusalem", to: "/travel-blog/where-to-stay-in-jerusalem/" },
   },
 };
+\n// The two sacred hills keep distinct editorial voices and visitor needs.\nObject.assign(sacredHillOverrides["mount-of-olives"], mountOlivesAttractionUpdate);\nsacredHillEditorial["mount-of-olives"] = mountOlivesEditorialUpdate;\n
