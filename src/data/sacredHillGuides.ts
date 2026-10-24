@@ -1,3 +1,4 @@
+import mountZion from "@/assets/guides/mount-zion.jpg";
 import type { Attraction } from "@/data/attractionGuideTypes";
 
 export type SacredHillId = "mount-zion" | "mount-of-olives";
@@ -39,7 +40,7 @@ export const sacredHillOverrides: Record<SacredHillId, Partial<Attraction>> = {
     intro: "Mount Zion is immediately south of Jerusalem's Old City walls, beside Zion Gate. The traditional Room of the Last Supper and David's Tomb are in the same building; Dormition Abbey stands a few minutes away, and St Peter in Gallicantu is lower down the eastern slope. You can see the central sites on foot without crossing the whole city.",
     takeaway: "For a short visit, enter from Zion Gate and see Dormition Abbey, the Cenacle and David's Tomb. Add St Peter in Gallicantu and the Catholic cemetery if you have more time. Check access before setting out: the sites are administered separately and do not share one opening schedule.",
     duration: "About 1–2 hours for the central sites; 2–3 hours with Gallicantu and the cemetery",
-    image: { src: "/images/attractions/jerusalem.webp", alt: "Jerusalem's Old City walls and stone buildings near Mount Zion" },
+    image: { src: mountZion, alt: "Dormition Abbey on Mount Zion near Jerusalem Old City" },
     official: [
       { label: "Holy-site opening hours — Christian Information Center", url: "https://www.cicts.org/en/updated-opening-hours-holy-places-tourist-sites-holy-land" },
       { label: "Window to Mount Zion — heritage and access", url: "https://www.mountzion.org.il/" },
