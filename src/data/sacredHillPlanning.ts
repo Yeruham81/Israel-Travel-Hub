@@ -10,7 +10,7 @@ export type SiteVisitFact = {
   admission: string;
   source: string;
   sourceUrl: string;
-  mapQuery?: string;
+  mapQuery: string;
 };
 
 type DayPlan = {
@@ -38,7 +38,7 @@ const cic = "https://www.cicts.org/en/updated-opening-hours-holy-places-tourist-
 const dormition = "https://dormitio.net/abtei/gottesdienst-oeffnungszeiten/";
 const gallicantu = "https://www.stpeter-gallicantu.org/?lang=en";
 const museum = "https://martefhashoa.org/";
-const visit = (site: string, hours: string, admission: string, mapQuery?: string, sourceUrl = cic, source = "Opening hours") =>
+const visit = (site: string, hours: string, admission: string, mapQuery: string, sourceUrl = cic, source = "Opening hours") =>
   ({ site, hours, admission, source, sourceUrl, mapQuery }) satisfies SiteVisitFact;
 
 export const sacredHillPlanning: Record<SacredHillId, SacredHillPlanning> = {
