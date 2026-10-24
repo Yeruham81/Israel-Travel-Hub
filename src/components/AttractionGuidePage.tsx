@@ -50,7 +50,22 @@ export function AttractionGuidePage({ id }: {id:AttractionId}) {
       <h1 className="mt-3 text-4xl leading-tight md:text-5xl">{a.title}</h1>
       <p className="mt-4 max-w-3xl text-lg leading-relaxed text-muted-foreground">{a.intro}</p>
       <p className="mt-4 text-sm text-muted-foreground"><strong>Suggested time:</strong> {a.duration}</p>
-      {a.image && <img src={a.image.src} alt={a.image.alt} width={1200} height={675} fetchPriority="high" decoding="async" className="mt-7 aspect-[16/9] max-h-[450px] w-full rounded-2xl object-cover"/>}
+      {a.image && (id === "mount-of-olives" ? (
+        <figure className="mx-auto mt-7 max-w-4xl">
+          <img
+            src={a.image.src}
+            srcSet={[`https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f1/Jerusalem_from_the_Mount_of_Olives_%2853714451089%29.jpg/1280px-Jerusalem_from_the_Mount_of_Olives_%2853714451089%29.jpg 1280w`, `https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f1/Jerusalem_from_the_Mount_of_Olives_%2853714451089%29.jpg/3840px-Jerusalem_from_the_Mount_of_Olives_%2853714451089%29.jpg 3840w`].join(", ")}
+            sizes="(max-width: 768px) calc(100vw - 32px), (max-width: 1100px) calc(100vw - 48px), 896px"
+            alt={a.image.alt}
+            width={1280}
+            height={397}
+            fetchPriority="high"
+            decoding="async"
+            className="block h-auto w-full rounded-xl"
+          />
+          <figcaption className="mt-2 text-right text-xs text-muted-foreground">Jerusalem from the Mount of Olives · <a className="underline underline-offset-2" href="https://commons.wikimedia.org/wiki/File:Jerusalem_from_the_Mount_of_Olives_(53714451089).jpg" target="_blank" rel="noopener noreferrer">Photo: Mustang Joe, Wikimedia Commons (CC0)</a></figcaption>
+        </figure>
+      ) : <img src={a.image.src} alt={a.image.alt} width={1200} height={675} fetchPriority="high" decoding="async" className="mt-7 aspect-[16/9] max-h-[450px] w-full rounded-2xl object-cover"/> )}
       <AuthorCard/>
     </header>
     <div className="mt-8 rounded-2xl border border-primary/20 bg-secondary/40 p-6">
