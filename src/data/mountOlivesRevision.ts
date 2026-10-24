@@ -81,25 +81,28 @@ export const mountOlivesEditorialUpdate: SacredHillEditorial = {
       description: "On the upper ridge, the Carmelite compound commemorates Jesus teaching the Lord's Prayer. Its cloisters are lined with ceramic versions of the prayer in languages from around the world, making this one of the hill's most distinctive stops.",
       visit: "The church currently lists restricted morning visiting sessions on selected days. If Pater Noster is on your must-see list, check its opening before choosing your travel date.",
       tipLabel: "Plan around",
+      image: { src: "/images/jerusalem/mount-of-olives/pater-noster.webp", alt: "Stone courtyard and cloister at Pater Noster Church on the Mount of Olives" },
     },
     {
       name: "Chapel of the Ascension",
       description: "This small domed chapel in At-Tur is a traditional site of the Ascension of Jesus. It stands within a modest walled enclosure, a short distance from Pater Noster; other Christian denominations also maintain Ascension traditions on the hill.",
       visit: "It is best visited together with Pater Noster rather than as a separate trip to the upper ridge. The chapel has its own entrance and admission arrangements.",
       tipLabel: "Good to pair with",
+      image: { src: "/images/jerusalem/mount-of-olives/chapel-of-ascension.webp", alt: "Small stone-domed Chapel of the Ascension in a walled courtyard on the Mount of Olives" },
     },
     {
       name: "Dominus Flevit",
       description: "The teardrop-shaped Franciscan church marks the Gospel tradition of Jesus weeping over Jerusalem. Architect Antonio Barluzzi designed its altar window to frame a view of the Old City. The small garden and setting invite a quieter pause.",
       visit: "I recommend leaving enough time to go inside rather than treating this as a photo stop. The window behind the altar is one of the memorable views on the walk.",
       tipLabel: "Worth making time for",
+      image: { src: "/images/jerusalem/mount-of-olives/dominus-flevit.webp", alt: "Teardrop-shaped Dominus Flevit Church amid trees on Jerusalem's Mount of Olives" },
     },
     {
       name: "Church of St Mary Magdalene",
       description: "The Russian Orthodox church's golden onion domes are among the best-known features of the Mount of Olives skyline. Dedicated to Mary Magdalene, it stands above Gethsemane among terraced gardens and trees.",
       visit: "The church currently opens to general visitors on selected mornings, so it is a worthwhile addition when the visiting window fits your day.",
       tipLabel: "When to go",
-      image: { src: "/images/attractions/mount-of-olives.webp", alt: "The golden domes of St Mary Magdalene Church on the Mount of Olives hillside" },
+      image: { src: "/images/jerusalem/mount-of-olives/mary-magdalene-church.webp", alt: "Russian Orthodox St Mary Magdalene Church with distinctive golden domes and garden" },
     },
     {
       name: "Garden of Gethsemane & Church of All Nations",
@@ -113,6 +116,7 @@ export const mountOlivesEditorialUpdate: SacredHillEditorial = {
       description: "Near Gethsemane, a long stone stairway leads down to the traditional Tomb of Mary, an important pilgrimage church in Eastern Christian tradition. Lamps, icons and the underground setting give it a different atmosphere from the basilica nearby.",
       visit: "It is only a short addition to a Gethsemane visit. The staircase is substantial, so visitors who prefer to stay at street level may want to enjoy the adjacent sites instead.",
       tipLabel: "Nearby",
+      image: { src: "/images/jerusalem/mount-of-olives/tomb-of-virgin-mary.webp", alt: "Ancient stone staircase leading down to the Tomb of the Virgin Mary near Gethsemane" },
     },
     {
       name: "Mount of Olives Jewish cemetery",
