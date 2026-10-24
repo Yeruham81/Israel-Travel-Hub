@@ -30,9 +30,9 @@ describe("Mount Zion and Mount of Olives route-first visitor pages", () => {
   it("distinguishes the hills and their different access needs", () => {
     const zion = sacredHillEditorial["mount-zion"];
     const olives = sacredHillEditorial["mount-of-olives"];
-    expect(zion.routes[0].steps.join(" ")).toMatch(/Zion Gate/);
+    expect(zion.routes[0]!.steps.join(" ")).toMatch(/Zion Gate/);
     expect(zion.stops.some(stop => /Schindler/.test(stop.name))).toBe(true);
-    expect(olives.routes[0].steps.join(" ")).toMatch(/Seven Arches/);
+    expect(olives.routes[0]!.steps.join(" ")).toMatch(/Seven Arches/);
     expect(olives.stops.some(stop => /Pater Noster/.test(stop.name))).toBe(true);
     expect(olives.stops.some(stop => /Jewish cemetery/.test(stop.name))).toBe(true);
     expect(sacredHillOverrides["mount-zion"].faqs?.some(f => /archaeolog/.test(f.a))).toBe(true);
