@@ -7,6 +7,7 @@ import { CANONICAL_ORIGIN, SITE_NAME, jsonLd, pageMeta } from "@/lib/site";
 import { authorLd } from "@/lib/author";
 import { JerusalemClusterLinks, type JerusalemClusterKey } from "@/components/JerusalemClusterLinks";
 import { JerusalemPartnerOffers } from "@/components/JerusalemPartnerOffers";
+import { SacredHillGuideContent } from "@/components/SacredHillGuideContent";
 
 export function attractionMeta(id: AttractionId) {
   const a = attractionGuides[id];
@@ -56,6 +57,7 @@ export function AttractionGuidePage({ id }: {id:AttractionId}) {
       <h2 className="text-2xl">Plan your visit</h2>
       <p className="mt-3 leading-relaxed">{a.takeaway}</p>
     </div>
+    {(id === "mount-zion" || id === "mount-of-olives") ? <SacredHillGuideContent id={id} /> : <>
     <OnThisPage sections={sections}/>
     <Section id="highlights" title="What to see and do">
       <div className="mt-5 grid gap-4 sm:grid-cols-2">
@@ -102,6 +104,7 @@ export function AttractionGuidePage({ id }: {id:AttractionId}) {
       {label:areaLinks[a.region]!.label,to:areaLinks[a.region]!.to},
       {label:"All attractions",to:"/attractions/" as const},
     ]}/>
+    </>}
     </>}
   </main>;
 }
