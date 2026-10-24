@@ -42,6 +42,7 @@ const areaLinks: Record<string,{label:string;to:"/travel-blog/jerusalem-travel-g
 
 export function AttractionGuidePage({ id }: {id:AttractionId}) {
   const a=attractionGuides[id];
+  const sacred = id === "mount-zion" || id === "mount-of-olives";
   const ids=Object.keys(attractionGuides) as AttractionId[];
   const nearby=ids.filter(other=>other!==id && attractionGuides[other].region===a.region).slice(0,4);
   const sections=[["highlights","What to see"],["getting-there","Getting there"],["tips","Practical tips"],["official","Official visitor information"],["faq","Questions"]] as const;
@@ -51,7 +52,7 @@ export function AttractionGuidePage({ id }: {id:AttractionId}) {
       <p className="eyebrow mt-6">{a.region} · Visitor guide</p>
       <h1 className="mt-3 text-4xl leading-tight md:text-5xl">{a.title}</h1>
       <p className="mt-4 max-w-3xl text-lg leading-relaxed text-muted-foreground">{a.intro}</p>
-      <p className="mt-4 text-sm text-muted-foreground"><strong>Suggested time:</strong> {a.duration}</p>
+      {!sacred && <p className="mt-4 text-sm text-muted-foreground"><strong>Suggested time:</strong> {a.duration}</p>}
       {a.image && (id === "mount-of-olives" ? (
         <figure className="mx-auto mt-7 max-w-4xl">
           <img
@@ -83,11 +84,11 @@ export function AttractionGuidePage({ id }: {id:AttractionId}) {
       ) : <img src={a.image.src} alt={a.image.alt} width={1200} height={675} fetchPriority="high" decoding="async" className="mt-7 aspect-[16/9] max-h-[450px] w-full rounded-2xl object-cover"/> )}
       <AuthorCard/>
     </header>
-    <div className="mt-8 rounded-2xl border border-primary/20 bg-secondary/40 p-6">
+    {!sacred && <div className="mt-8 rounded-2xl border border-primary/20 bg-secondary/40 p-6">
       <h2 className="text-2xl">Plan your visit</h2>
       <p className="mt-3 leading-relaxed">{a.takeaway}</p>
-    </div>
-    {(id === "mount-zion" || id === "mount-of-olives") ? <SacredHillGuideContent id={id} /> : <>
+    </div>}
+    {sacred ? <SacredHillGuideContent id={id as "mount-zion" | "mount-of-olives"} /> : <>
     <OnThisPage sections={sections}/>
     <Section id="highlights" title="What to see and do">
       <div className="mt-5 grid gap-4 sm:grid-cols-2">
