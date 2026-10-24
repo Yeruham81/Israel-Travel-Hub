@@ -73,7 +73,7 @@ describe("sacred hill visit planning", () => {
       expect(sectionNodes[i]!.compareDocumentPosition(sectionNodes[i + 1]!) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
     }
     expect(screen.getByRole("form", { name: `Message Moshe about ${labelFor(id)}` })).toBeInTheDocument();
-    expect(screen.getAllByRole("link", { name: "Contact Moshe" }).some(link => link.getAttribute("href") === "#contact-moshe")).toBe(true);
+    expect(screen.getAllByRole("link", { name: "Contact Moshe" }).some(link => link.getAttribute("href") === "#visit-options")).toBe(true);
     expect(screen.getByText("Choosing your visit day")).toBeInTheDocument();
     expect(main.querySelectorAll('a[href*="google.com/maps/dir/"]')).toHaveLength(3);
   });
