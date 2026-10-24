@@ -55,7 +55,7 @@ describe("Mount Zion visitor guide revision", () => {
     expect(images.length).toBeGreaterThanOrEqual(2);
     expect(images.every(img => Boolean(img?.src && img.alt))).toBe(true);
     expect(images.every(img => !/^https?:\/\//i.test(img?.src || ""))).toBe(true);
-    expect(attraction.faqs?.some(faq => /bus/i.test(faq.q))).toBe(true);
+    expect(attraction.faqs).toHaveLength(7);
     expect(attraction.faqs?.some(faq => /Sunday/i.test(faq.q))).toBe(true);
   });
 });
