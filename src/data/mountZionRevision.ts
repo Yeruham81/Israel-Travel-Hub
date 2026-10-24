@@ -86,7 +86,7 @@ export const mountZionEditorialUpdate: SacredHillEditorial = {
     {
       name: "Dormition Abbey",
       description: "The round basilica and its tall bell tower make Dormition Abbey the most recognisable building on Mount Zion. This Benedictine church commemorates Mary's Dormition, or falling asleep. Inside, look for the mosaics and the atmospheric crypt.",
-      visit: "I would include both the main church and the crypt when they are open. The abbey lists visitor hours of 09:00–17:00 on weekdays and Saturdays, and 11:30–17:00 on Sundays, subject to special services.",
+      visit: "I would include both the main church and the crypt when they are open. The abbey lists 09:00–17:00 visits on weekdays and Saturdays. On Sundays it opens later, around midday; check the abbey's current timetable before planning a morning visit.",
       tipLabel: "Don't miss",
       image: { src: "/images/jerusalem/mount-zion/dormition-abbey-and-bell-tower.webp", alt: "Dormition Abbey basilica and bell tower rising above Mount Zion in Jerusalem" },
       link: { label: "Dormition Abbey visiting hours", url: "https://dormitio.net/abtei/gottesdienst-oeffnungszeiten/" },
