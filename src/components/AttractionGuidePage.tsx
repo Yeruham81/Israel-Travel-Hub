@@ -67,6 +67,19 @@ export function AttractionGuidePage({ id }: {id:AttractionId}) {
           />
           <figcaption className="mt-2 text-right text-xs text-muted-foreground">Jerusalem from the Mount of Olives</figcaption>
         </figure>
+      ) : id === "mount-zion" ? (
+        <figure className="mx-auto mt-7 max-w-[755px]">
+          <img
+            src={a.image.src}
+            alt={a.image.alt}
+            width={755}
+            height={503}
+            fetchPriority="high"
+            decoding="async"
+            className="block h-auto w-full rounded-xl object-contain"
+          />
+          <figcaption className="mt-2 text-right text-xs text-muted-foreground">Dormition Abbey on Mount Zion</figcaption>
+        </figure>
       ) : <img src={a.image.src} alt={a.image.alt} width={1200} height={675} fetchPriority="high" decoding="async" className="mt-7 aspect-[16/9] max-h-[450px] w-full rounded-2xl object-cover"/> )}
       <AuthorCard/>
     </header>
