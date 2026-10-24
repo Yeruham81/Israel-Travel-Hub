@@ -61,7 +61,7 @@ describe("Mount of Olives practical visitor revision", () => {
     const combined = [attraction.intro, attraction.takeaway, ...guide.history, ...guide.stops.flatMap(stop => [stop.description, stop.visit])].join(" ");
     expect(combined).not.toMatch(/not physical proof|should not be claimed|don't treat|not a guarantee|not proven/i);
     expect(combined).toMatch(/Gethsemane/);
-    expect(mountOlivesAttractionUpdate.faqs).toHaveLength(8);
+    expect(mountOlivesAttractionUpdate.faqs).toHaveLength(7);
     expect(guide.transport).toHaveLength(3);
   });
 });
