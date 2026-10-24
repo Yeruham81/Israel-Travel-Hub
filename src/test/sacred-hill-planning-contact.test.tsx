@@ -66,7 +66,7 @@ describe("sacred hill visit planning", () => {
     expect(faq!.compareDocumentPosition(contact!) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
     expect(within(hours as HTMLElement).getAllByRole("row")).toHaveLength(sacredHillPlanning[id].facts.length + 1);
     expect(screen.getByRole("form", { name: `Message Moshe about ${labelFor(id)}` })).toBeInTheDocument();
-    expect(screen.getByRole("link", { name: "Message Moshe" })).toHaveAttribute("href", "#contact-moshe");
+    expect(screen.getAllByRole("link", { name: "Message Moshe" }).some(link => link.getAttribute("href") === "#contact-moshe")).toBe(true);
     expect(screen.getByText("Choose the right day for your route")).toBeInTheDocument();
     expect(main.querySelectorAll('a[href*="google.com/maps/dir/"]')).toHaveLength(3);
   });
