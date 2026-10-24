@@ -1,0 +1,61 @@
+name: Import legacy Mount Zion photographs
+
+# One-time migration: preserve the owner's existing WordPress image files locally.
+# The workflow is removed once image assets are successfully imported.
+on:
+  push:
+    branches: [main]
+    paths: [.github/workflows/import-zion-local-images.yml]
+
+permissions:
+  contents: write
+
+jobs:
+  import:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+      - name: Download and verify four existing WordPress image files
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          from urllib.request import Request, urlopen
+          from urllib.error import URLError
+          import time
+
+          base = "https://www.israel-taxi.com/wp-content/uploads/2025/08/"
+          pictures = {
+            "cenacle-upper-room.webp": "The_Cenacle_upper_room_jerusalem-1.jpg.webp",
+            "st-peter-in-gallicantu.webp": "Church_of_St_Peter_in_Gallicantu_Jerusalem.jpg.webp",
+            "dormition-abbey-and-bell-tower.webp": "Abbey_of_the_Dormition_Mt_Zion_Jerusalem_1.jpg.webp",
+            "mount-zion-hillside.webp": "mount_zion_Jerusalem_Israel_1.jpg.webp",
+          }
+          target = Path("public/images/jerusalem/mount-zion")
+          target.mkdir(parents=True, exist_ok=True)
+          for local, origin in pictures.items():
+            req = Request(base + origin, headers={"User-Agent":"Mozilla/5.0 (compatible; Israel-Travel-Hub migration)", "Accept":"image/webp,image/*;q=0.9"})
+            for attempt in range(3):
+              try:
+                with urlopen(req, timeout=25) as response:
+                  data = response.read(2000001)
+                break
+              except (OSError, URLError) as e:
+                if attempt == 2: raise
+                time.sleep(2)
+            if not (len(data) >= 10000 and len(data) < 2000000 and data[:4] == b"RIFF" and data[8:12] == b"WEBP"):
+              raise RuntimeError(f"{origin}: not a valid nonempty WEBP file ({len(data)} bytes)")
+            (target / local).write_bytes(data)
+            print(f"Saved {target/local}: {len(data)} bytes from original WordPress media")
+          PY
+      - name: Commit local image assets
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add public/images/jerusalem/mount-zion/
+          if ! git diff --cached --quiet; then
+            git commit -m "Restore locally hosted Mount Zion site photographs from owner's legacy WordPress media"
+            git push origin HEAD:main
+          fi
