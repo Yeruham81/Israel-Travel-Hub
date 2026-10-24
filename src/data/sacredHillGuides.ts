@@ -1,5 +1,6 @@
 import mountZion from "@/assets/guides/mount-zion.jpg";
 import { mountOlivesAttractionUpdate, mountOlivesEditorialUpdate } from "@/data/mountOlivesRevision";
+import { mountZionAttractionUpdate, mountZionEditorialUpdate } from "@/data/mountZionRevision";
 import type { Attraction } from "@/data/attractionGuideTypes";
 
 export type SacredHillId = "mount-zion" | "mount-of-olives";
@@ -174,5 +175,7 @@ export const sacredHillEditorial: Record<SacredHillId, SacredHillEditorial> = {
 };
 
 // The two sacred hills keep distinct editorial voices and visitor needs.
+Object.assign(sacredHillOverrides["mount-zion"], mountZionAttractionUpdate);
+sacredHillEditorial["mount-zion"] = mountZionEditorialUpdate;
 Object.assign(sacredHillOverrides["mount-of-olives"], mountOlivesAttractionUpdate);
 sacredHillEditorial["mount-of-olives"] = mountOlivesEditorialUpdate;
