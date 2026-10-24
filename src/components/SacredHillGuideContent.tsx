@@ -60,7 +60,7 @@ export function SacredHillGuideContent({ id }: { id: SacredHillId }) {
 
     <Section id="places-to-see" title={id === "mount-zion" ? "What to see on Mount Zion" : "Viewpoint, churches and other sites"}>
       <p className="mt-3 max-w-3xl leading-relaxed">{guide.stopIntro}</p>
-      <div className="mt-6 grid gap-4 sm:grid-cols-2">
+      <div className="mt-6 grid gap-4 lg:grid-cols-2">
         {guide.stops.map((stop, index) => <article key={stop.name} className="min-w-0 rounded-xl border bg-card p-4 sm:p-5">
           <header className="flex min-w-0 items-center gap-3">
             {stop.image && <figure className="w-20 shrink-0 sm:w-24">
