@@ -2,6 +2,7 @@ import { Link, type LinkProps } from "@tanstack/react-router";
 import { FaqList, OnThisPage, Section } from "@/components/Guide";
 import { JerusalemClusterLinks } from "@/components/JerusalemClusterLinks";
 import { JerusalemPartnerOffers } from "@/components/JerusalemPartnerOffers";
+import { MountOlivesRelatedGuides } from "@/components/MountOlivesRelatedGuides";
 import { sacredHillEditorial, sacredHillOverrides, type SacredHillId } from "@/data/sacredHillGuides";
 
 /**
@@ -42,22 +43,36 @@ export function SacredHillGuideContent({ id }: { id: SacredHillId }) {
           <p className="mt-5 border-t pt-4 text-sm leading-relaxed text-muted-foreground">{route.note}</p>
         </article>)}
       </div>
-      <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
-        Visiting the Old City too? Read my <Link to="/travel-blog/old-city-jerusalem/" className="text-primary underline underline-offset-4">Old City walking guide</Link> for gates and onward routes. If you want to visit the other hill as well, use my <Link to={id === "mount-zion" ? "/travel-blog/mount-of-olives/" : "/travel-blog/mount-zion/"} className="text-primary underline underline-offset-4">{id === "mount-zion" ? "Mount of Olives guide" : "Mount Zion guide"}</Link> to plan the separate stop.
-      </p>
+      {id === "mount-of-olives" ? <div className="mt-6 rounded-xl border border-primary/20 bg-secondary/40 p-5">
+        <h3 className="text-xl font-semibold">Combine the viewpoint with a day in the Old City</h3>
+        <p className="mt-2 leading-relaxed"><strong>Start with the panorama:</strong> arrive at Seven Arches in the morning, visit the hill's churches and continue from Gethsemane through Lion's Gate. This gives you an introduction to Jerusalem before you explore its streets.</p>
+        <p className="mt-3 leading-relaxed"><strong>Finish with the panorama:</strong> explore the Old City first, then take a car or taxi up to the viewpoint for a final look across the city. This works especially well if you prefer not to walk the entire hillside route.</p>
+        <p className="mt-3 text-sm">See my <Link to="/travel-blog/old-city-jerusalem/" className="font-semibold text-primary underline underline-offset-4">Old City walking guide</Link> for suggested gates and landmarks, or explore <Link to="/tours/jerusalem/" className="font-semibold text-primary underline underline-offset-4">Jerusalem tours</Link> to combine several areas.</p>
+      </div> : <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
+        Visiting the Old City too? Read my <Link to="/travel-blog/old-city-jerusalem/" className="text-primary underline underline-offset-4">Old City walking guide</Link> for gates and onward routes. If you want to visit the other hill as well, use my <Link to="/travel-blog/mount-of-olives/" className="text-primary underline underline-offset-4">Mount of Olives guide</Link> to plan the separate stop.
+      </p>}
     </Section>
 
     <Section id="places-to-see" title={id === "mount-zion" ? "What to see on Mount Zion" : "Viewpoint, churches and other sites"}>
       <p className="mt-3 max-w-3xl leading-relaxed">{guide.stopIntro}</p>
       <div className="mt-6 grid gap-4 sm:grid-cols-2">
-        {guide.stops.map((stop, index) => <article key={stop.name} className="rounded-xl border bg-card p-5">
-          <div className="flex items-baseline gap-3">
-            <span aria-hidden="true" className="text-sm font-semibold tabular-nums text-muted-foreground">{String(index + 1).padStart(2, "0")}</span>
-            <h3 className="text-xl font-semibold leading-snug">{stop.name}</h3>
+        {guide.stops.map((stop, index) => <article key={stop.name} className="rounded-xl border bg-card p-4 sm:p-5">
+          <div className="flex items-start gap-3">
+            {stop.image && <figure className="w-28 shrink-0">
+              <img src={stop.image.src} alt={stop.image.alt} loading="lazy" decoding="async" width={112} height={100} className="h-[100px] w-28 rounded-lg bg-secondary object-cover"/>
+              {stop.image.credit && <figcaption className="mt-1 text-[10px] leading-tight text-muted-foreground">
+                <a href={stop.image.credit.url} target="_blank" rel="noopener noreferrer" className="underline underline-offset-2" title={stop.image.credit.label + " (opens in new tab)"}>Photo: {stop.image.credit.label}</a>
+                {" · "}<a href={stop.image.credit.licenseUrl} target="_blank" rel="noopener noreferrer" className="underline underline-offset-2">License</a>
+              </figcaption>}
+            </figure>}
+            <div className="min-w-0 flex-1">
+              <span aria-hidden="true" className="text-xs font-semibold tabular-nums text-muted-foreground">{String(index + 1).padStart(2, "0")}</span>
+              <h3 className="mt-0.5 text-lg font-semibold leading-snug sm:text-xl">{stop.name}</h3>
+              <p className="mt-3 leading-relaxed">{stop.description}</p>
+              <p className="mt-3 text-sm leading-relaxed text-muted-foreground"><strong className="text-foreground">{stop.tipLabel || "Visiting"}:</strong> {stop.visit}</p>
+              {stop.link && <a href={stop.link.url} target="_blank" rel="noopener noreferrer" className="mt-3 inline-block text-sm font-semibold text-primary underline underline-offset-4">{stop.link.label} <span aria-hidden="true">↗</span><span className="sr-only"> (opens in a new tab)</span></a>}
+            </div>
           </div>
-          <p className="mt-3 leading-relaxed">{stop.description}</p>
-          <p className="mt-3 text-sm leading-relaxed text-muted-foreground"><strong className="text-foreground">Visiting:</strong> {stop.visit}</p>
-          {stop.link && <a href={stop.link.url} target="_blank" rel="noopener noreferrer" className="mt-3 inline-block text-sm font-semibold text-primary underline underline-offset-4">{stop.link.label} <span aria-hidden="true">↗</span><span className="sr-only"> (opens in a new tab)</span></a>}
         </article>)}
       </div>
     </Section>
@@ -68,9 +83,10 @@ export function SacredHillGuideContent({ id }: { id: SacredHillId }) {
         {guide.transport.map(mode => <div key={mode.title} className="border-l-2 border-primary/40 pl-4">
           <h3 className="text-lg font-semibold">{mode.title}</h3>
           <p className="mt-1 leading-relaxed">{mode.text}</p>
+          {mode.links && <p className="mt-2 flex flex-wrap gap-x-4 gap-y-1 text-sm">{mode.links.map(item => <a key={item.url} href={item.url} target="_blank" rel="noopener noreferrer" className="font-medium text-primary underline underline-offset-4">{item.label} <span aria-hidden="true">↗</span></a>)}</p>}
         </div>)}
       </div>
-      <p className="mt-5 leading-relaxed">If you are arriving from Ben Gurion Airport, the <Link to="/travel-blog/how-to-get-from-ben-gurion-airport-to-jerusalem/" className="text-primary underline underline-offset-4">airport-to-Jerusalem guide</Link> compares trains, buses and direct transport. It is a separate journey from getting around the city's historic sites.</p>
+      {id === "mount-zion" && <p className="mt-5 leading-relaxed">If you are arriving from Ben Gurion Airport, the <Link to="/travel-blog/how-to-get-from-ben-gurion-airport-to-jerusalem/" className="text-primary underline underline-offset-4">airport-to-Jerusalem guide</Link> compares trains, buses and direct transport. It is a separate journey from getting around the city's historic sites.</p>}
     </Section>
 
     <Section id="visitor-advice" title="Practical advice before you go">
@@ -88,26 +104,31 @@ export function SacredHillGuideContent({ id }: { id: SacredHillId }) {
       {guide.history.map(paragraph => <p key={paragraph} className="mt-3 max-w-3xl leading-relaxed">{paragraph}</p>)}
     </Section>
 
-    <Section id="official" title="Check opening hours before visiting">
-      <p className="mt-3 max-w-3xl leading-relaxed">The Christian Information Center's published holy-site list was updated on 15 September 2026. It is useful for individual churches and visiting rules, but religious services, holidays, security restrictions and exceptional closures may change access without notice. Check the latest notice for each site; do not rely on old admission prices or a single timetable for the whole hill.</p>
-      <ul className="mt-5 grid gap-3 sm:grid-cols-2">
-        {place.official?.map(source => <li key={source.url}>
-          <a href={source.url} target="_blank" rel="noopener noreferrer" className="block h-full rounded-xl border bg-card p-4 font-semibold leading-snug text-primary underline underline-offset-4 hover:border-primary">{source.label} <span aria-hidden="true">↗</span><span className="sr-only"> (opens in a new tab)</span></a>
-        </li>)}
-      </ul>
+    <Section id="official" title="Current opening hours and visitor information">
+      {id === "mount-of-olives" ? <>
+        <p className="mt-3 max-w-3xl leading-relaxed">Before setting out, I recommend checking the <a href="https://www.cicts.org/en/updated-opening-hours-holy-places-tourist-sites-holy-land" target="_blank" rel="noopener noreferrer" className="text-primary underline underline-offset-4">Christian Information Center's current opening hours</a> for Pater Noster, Dominus Flevit, St Mary Magdalene and the churches around Gethsemane. Each site has its own schedule, and religious services or feast days may affect admission.</p>
+        <p className="mt-3 max-w-3xl leading-relaxed">For the Jewish cemetery, the <a href="https://cityofdavid.org.il/en/sites/mount-of-olives-eng/" target="_blank" rel="noopener noreferrer" className="text-primary underline underline-offset-4">Mount of Olives visitor information</a> includes transport approaches and group-tour arrangements. For buses, use <a href="https://moovitapp.com/index/en/public_transit-%D7%9E%D7%A6%D7%A4%D7%94_%D7%94%D7%A8_%D7%94%D7%96%D7%99%D7%AA%D7%99%D7%9D_%D7%9E%D7%9C%D7%95%D7%9F_%D7%A9%D7%91%D7%A2_%D7%94%D7%A7%D7%A9%D7%AA%D7%95%D7%AA-Israel-stop_34625826-1" target="_blank" rel="noopener noreferrer" className="text-primary underline underline-offset-4">the Seven Arches viewpoint stop in Moovit</a> to see routes and times for your chosen date.</p>
+      </> : <>
+        <p className="mt-3 max-w-3xl leading-relaxed">For the latest opening hours and arrangements, use the links below. Religious services, holidays, security restrictions and occasional closures can change access.</p>
+        <ul className="mt-5 grid gap-3 sm:grid-cols-2">
+          {place.official?.map(source => <li key={source.url}>
+            <a href={source.url} target="_blank" rel="noopener noreferrer" className="block h-full rounded-xl border bg-card p-4 font-semibold leading-snug text-primary underline underline-offset-4 hover:border-primary">{source.label} <span aria-hidden="true">↗</span><span className="sr-only"> (opens in a new tab)</span></a>
+          </li>)}
+        </ul>
+      </>}
     </Section>
 
     <section id="visit-options" aria-labelledby="visit-options-h" className="mt-14 border-t pt-8">
-      <h2 id="visit-options-h" className="text-3xl">Visit independently or arrange a tour</h2>
-      <p className="mt-3 max-w-3xl leading-relaxed">You do not need to book a tour just to see the public parts of the hill. If you would rather not organise the journey between stops, I can help arrange private transport and a route that fits your time. My driver service is transport, not a promise of a licensed guide or of entry to religious buildings. For interpretation and guided walks, check the individual tour operator's itinerary and inclusions.</p>
+      <h2 id="visit-options-h" className="text-3xl">{id === "mount-of-olives" ? "Include the Mount of Olives in your Jerusalem visit" : "Visit independently or arrange a tour"}</h2>
+      <p className="mt-3 max-w-3xl leading-relaxed">{id === "mount-of-olives" ? "A panoramic stop on the Mount of Olives can be a memorable beginning or ending to your day in Jerusalem. I can arrange private transport from your hotel to the lookout, with time for the churches that interest you and an agreed pickup near Gethsemane or the Old City. Tell me what you would like to see and how much time you have, and I will help you plan a practical route. You can also explore guided tours for a visit with a local guide." : "You do not need to book a tour just to see the public parts of the hill. If you would rather not organise the journey between stops, I can help arrange private transport and a route that fits your time. My driver service is transport, not a promise of a licensed guide or of entry to religious buildings. For interpretation and guided walks, check the individual tour operator's itinerary and inclusions."}</p>
       <div className="mt-5 flex flex-wrap gap-3">
         <Link to="/private-driver/" className="btn btn-primary">Request private transport</Link>
         <Link to="/tours/jerusalem/" className="btn btn-outline">Explore Jerusalem tours</Link>
       </div>
-      <p className="mt-4 text-sm leading-relaxed text-muted-foreground">For a journey starting from Ashdod port, the <Link to="/ashdod-shore-excursions/" className="text-primary underline underline-offset-4">Ashdod shore excursions</Link> page explains how a Jerusalem visit can fit around your ship's return time.</p>
+      {id === "mount-zion" && <p className="mt-4 text-sm leading-relaxed text-muted-foreground">For a journey starting from Ashdod port, the <Link to="/ashdod-shore-excursions/" className="text-primary underline underline-offset-4">Ashdod shore excursions</Link> page explains how a Jerusalem visit can fit around your ship's return time.</p>}
     </section>
     <JerusalemPartnerOffers id={id} />
-    <JerusalemClusterLinks pageKey={id} />
+    {id === "mount-of-olives" ? <MountOlivesRelatedGuides /> : <JerusalemClusterLinks pageKey={id} />}
     <FaqList faqs={place.faqs || []} />
   </>;
 }
