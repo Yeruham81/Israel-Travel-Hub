@@ -11,6 +11,7 @@ export const mountOlivesAttractionUpdate: Partial<Attraction> = {
   intro: "From the Mount of Olives, Jerusalem's Old City spreads out before you, with the Dome of the Rock, ancient walls and church towers rising beyond the Jewish cemetery. Just below the lookout are places closely associated with the life of Jesus, from Dominus Flevit to the Garden of Gethsemane. Here's how to choose the stops and fit the hill into your time in Jerusalem.",
   takeaway: "For a first visit, begin at the lookout near the Seven Arches Hotel, then follow the Palm Sunday road to Dominus Flevit and Gethsemane. Allow about two to three hours if you want to enter churches. You can continue from the foot of the hill to the Old City, or make the viewpoint a final stop after exploring Jerusalem.",
   duration: "30–45 minutes for the panorama; around 2–3 hours with Gethsemane and selected churches",
+  image: { src: "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f1/Jerusalem_from_the_Mount_of_Olives_%2853714451089%29.jpg/1280px-Jerusalem_from_the_Mount_of_Olives_%2853714451089%29.jpg", alt: "Wide panoramic view from the Mount of Olives over Jerusalem's Old City, Temple Mount, historic walls and hillside cemetery" },
   official: [
     { label: "Christian Information Center — church hours", url: "https://www.cicts.org/en/updated-opening-hours-holy-places-tourist-sites-holy-land" },
     { label: "City of David — Mount of Olives access and buses", url: "https://cityofdavid.org.il/en/sites/mount-of-olives-eng/" },
