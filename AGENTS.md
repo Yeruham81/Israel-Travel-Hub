@@ -26,6 +26,7 @@
 - Non-transfer referrals are `ProviderLink` records with a `BookingMode`; live prices require `isDisplayableLiveQuote` in `src/lib/booking.ts` — so no unverified price can render.
 - Editorial guide content (city stay guides) lives in `src/data/content.ts`; leaf pages use shared components in `src/components/Guide.tsx`, with information sections before provider sections.
 - All contact and quote forms share the gated quote-delivery service and server-only Brevo REST transport; fixed recipients and sanitized diagnostics prevent client-controlled routing or credential leaks.
+- **All displayed image assets must be stored locally in this GitHub project** (`src/assets/` or `public/images/`). Never hotlink images via remote `src`, `srcSet`, CSS `url()`, or metadata, including Wikimedia/Unsplash/CDN images. External source/licence links are fine as text links. For a missing site-specific image, acquire and commit an appropriately licensed local file first; otherwise omit the image rather than showing an unrelated photograph. Preserve truthful alt text, sensible dimensions, and lazy loading for below-the-fold images.
 
 ## Editorial voice (sitewide)
 
