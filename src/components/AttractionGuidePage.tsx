@@ -8,6 +8,8 @@ import { authorLd } from "@/lib/author";
 import { JerusalemClusterLinks, type JerusalemClusterKey } from "@/components/JerusalemClusterLinks";
 import { JerusalemPartnerOffers } from "@/components/JerusalemPartnerOffers";
 import { SacredHillGuideContent } from "@/components/SacredHillGuideContent";
+import heroJerusalemMedium from "@/assets/home/hero-jerusalem-medium.webp";
+import heroJerusalemLarge from "@/assets/home/hero-jerusalem-large.webp";
 
 export function attractionMeta(id: AttractionId) {
   const a = attractionGuides[id];
@@ -54,16 +56,16 @@ export function AttractionGuidePage({ id }: {id:AttractionId}) {
         <figure className="mx-auto mt-7 max-w-4xl">
           <img
             src={a.image.src}
-            srcSet={[`https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f1/Jerusalem_from_the_Mount_of_Olives_%2853714451089%29.jpg/1280px-Jerusalem_from_the_Mount_of_Olives_%2853714451089%29.jpg 1280w`, `https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f1/Jerusalem_from_the_Mount_of_Olives_%2853714451089%29.jpg/3840px-Jerusalem_from_the_Mount_of_Olives_%2853714451089%29.jpg 3840w`].join(", ")}
+            srcSet={`${heroJerusalemMedium} 1440w, ${heroJerusalemLarge} 1920w`}
             sizes="(max-width: 768px) calc(100vw - 32px), (max-width: 1100px) calc(100vw - 48px), 896px"
             alt={a.image.alt}
-            width={1280}
-            height={397}
+            width={1920}
+            height={872}
             fetchPriority="high"
             decoding="async"
             className="block h-auto w-full rounded-xl"
           />
-          <figcaption className="mt-2 text-right text-xs text-muted-foreground">Jerusalem from the Mount of Olives · <a className="underline underline-offset-2" href="https://commons.wikimedia.org/wiki/File:Jerusalem_from_the_Mount_of_Olives_(53714451089).jpg" target="_blank" rel="noopener noreferrer">Photo: Mustang Joe, Wikimedia Commons (CC0)</a></figcaption>
+          <figcaption className="mt-2 text-right text-xs text-muted-foreground">Jerusalem from the Mount of Olives</figcaption>
         </figure>
       ) : <img src={a.image.src} alt={a.image.alt} width={1200} height={675} fetchPriority="high" decoding="async" className="mt-7 aspect-[16/9] max-h-[450px] w-full rounded-2xl object-cover"/> )}
       <AuthorCard/>
