@@ -24,17 +24,17 @@ describe("Mount of Olives practical visitor revision", () => {
     expect(bus?.links?.some(link => link.url.includes("cityofdavid.org.il"))).toBe(true);
   });
 
-  it("uses distinct photo-led site cards with attribution and varied advice", () => {
+  it("uses only project-local images with no external hotlinks", () => {
     expect(guide.stops).toHaveLength(8);
-    expect(guide.stops.every(stop => Boolean(stop.image?.src && stop.image.alt))).toBe(true);
-    expect(new Set(guide.stops.map(stop => stop.image?.src)).size).toBe(8);
+    const photos = guide.stops.flatMap(stop => stop.image ? [stop.image] : []);
+    // Do not replace missing site-specific photographs with misleading generic pictures.
+    expect(photos.length).toBeGreaterThanOrEqual(4);
+    expect(photos.every(photo => Boolean(photo.alt))).toBe(true);
+    expect(new Set(photos.map(photo => photo.src)).size).toBe(photos.length);
     expect(new Set(guide.stops.map(stop => stop.tipLabel)).size).toBeGreaterThanOrEqual(5);
-    for (const stop of guide.stops) {
-      if (stop.image?.src.startsWith("https://")) {
-        expect(stop.image.credit?.url).toMatch(/^https:\/\/commons\.wikimedia\.org\/wiki\/File:/);
-        expect(stop.image.credit?.licenseUrl).toMatch(/^https:\/\//);
-      }
-    }
+    const imageUrls = [attraction.image?.src, ...photos.map(photo => photo.src)];
+    expect(imageUrls.every(src => typeof src === "string" && !/^https?:\/\//i.test(src))).toBe(true);
+    expect(imageUrls.every(src => src?.startsWith("/"))).toBe(true);
   });
 
   it("uses a respectful pilgrimage voice without combative archaeology disclaimers", () => {
