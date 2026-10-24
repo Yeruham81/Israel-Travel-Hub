@@ -39,9 +39,8 @@ export function SacredHillContactForm({ id }: { id: SacredHillId }) {
     <div className="grid md:grid-cols-[0.85fr_1.4fr]">
       <div className="bg-navy p-6 text-navy-foreground sm:p-8">
         <p className="text-xs font-semibold uppercase tracking-widest opacity-80">Plan a Jerusalem visit</p>
-        <h2 id="sacred-hill-contact-heading" className="mt-3 text-2xl leading-tight sm:text-3xl">Send me a message</h2>
-        <p className="mt-3 leading-relaxed opacity-90">Thinking about including {id === "mount-zion" ? "Mount Zion" : "the Mount of Olives"} in your Jerusalem day? Tell me when you are visiting, where you are staying and which places interest you. I'll reply personally and help with transport arrangements or a practical itinerary.</p>
-        <p className="mt-4 text-sm leading-relaxed opacity-85">You can ask a question before deciding on a route. The message form is not an automatic booking.</p>
+        <h3 id="sacred-hill-contact-heading" className="mt-3 text-2xl leading-tight sm:text-3xl">Send me a message</h3>
+        <p className="mt-3 leading-relaxed opacity-90">Have a question about visiting {id === "mount-zion" ? "Mount Zion" : "the Mount of Olives"}? Share your travel date, pickup area and the places you hope to see. I'll reply personally and help you plan what works for your visit.</p>
       </div>
       <div className="p-5 sm:p-7">
         <form onSubmit={send} noValidate aria-label={`Message Moshe about ${id === "mount-zion" ? "Mount Zion" : "the Mount of Olives"}`} aria-busy={submission.isSending}>
