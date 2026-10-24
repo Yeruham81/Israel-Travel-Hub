@@ -79,14 +79,14 @@ export const mountOlivesEditorialUpdate: SacredHillEditorial = {
     {
       name: "Pater Noster Church",
       description: "On the upper ridge, the Carmelite compound commemorates Jesus teaching the Lord's Prayer. Its cloisters are lined with ceramic versions of the prayer in languages from around the world, making this one of the hill's most distinctive stops.",
-      visit: "The church currently lists restricted morning visiting sessions on selected days. If Pater Noster is on your must-see list, check its opening before choosing your travel date.",
+      visit: "Pater Noster currently lists public visits on Tuesday, Thursday and Saturday mornings, 08:00–12:00. If the church is a priority, plan the day around that window and check the latest schedule before travelling.",
       tipLabel: "Plan around",
       image: { src: "/images/jerusalem/mount-of-olives/pater-noster.webp", alt: "Stone courtyard and cloister at Pater Noster Church on the Mount of Olives" },
     },
     {
       name: "Chapel of the Ascension",
       description: "This small domed chapel in At-Tur is a traditional site of the Ascension of Jesus. It stands within a modest walled enclosure, a short distance from Pater Noster; other Christian denominations also maintain Ascension traditions on the hill.",
-      visit: "It is best visited together with Pater Noster rather than as a separate trip to the upper ridge. The chapel has its own entrance and admission arrangements.",
+      visit: "It pairs naturally with nearby Pater Noster. The Chapel of the Ascension currently lists 08:00–17:00 visiting hours and an entrance fee of about 10 ILS; check at the gate for changes.",
       tipLabel: "Good to pair with",
       image: { src: "/images/jerusalem/mount-of-olives/chapel-of-ascension.webp", alt: "Small stone-domed Chapel of the Ascension in a walled courtyard on the Mount of Olives" },
     },
@@ -100,7 +100,7 @@ export const mountOlivesEditorialUpdate: SacredHillEditorial = {
     {
       name: "Church of St Mary Magdalene",
       description: "The Russian Orthodox church's golden onion domes are among the best-known features of the Mount of Olives skyline. Dedicated to Mary Magdalene, it stands above Gethsemane among terraced gardens and trees.",
-      visit: "The church currently opens to general visitors on selected mornings, so it is a worthwhile addition when the visiting window fits your day.",
+      visit: "General visitor hours are currently Tuesday, Thursday and Saturday, 10:00–12:00. Check the latest schedule before adding it to your route, especially around Orthodox feasts.",
       tipLabel: "When to go",
       image: { src: "/images/jerusalem/mount-of-olives/mary-magdalene-church.webp", alt: "Russian Orthodox St Mary Magdalene Church with distinctive golden domes and garden" },
     },
