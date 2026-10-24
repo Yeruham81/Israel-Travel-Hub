@@ -35,7 +35,7 @@ describe("Mount Zion and Mount of Olives route-first visitor pages", () => {
     expect(olives.routes[0]!.steps.join(" ")).toMatch(/Seven Arches/);
     expect(olives.stops.some(stop => /Pater Noster/.test(stop.name))).toBe(true);
     expect(olives.stops.some(stop => /Jewish cemetery/.test(stop.name))).toBe(true);
-    expect(sacredHillOverrides["mount-zion"].faqs?.some(f => /archaeolog/.test(f.a))).toBe(true);
+    expect(sacredHillOverrides["mount-zion"].faqs?.some(f => /Last Supper|Cenacle/.test(f.a))).toBe(true);
     expect(sacredHillOverrides["mount-of-olives"].faqs?.some(f => /limited mobility/.test(f.q))).toBe(true);
   });
 });
