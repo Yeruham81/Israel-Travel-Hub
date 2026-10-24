@@ -62,7 +62,7 @@ export function SacredHillGuideContent({ id }: { id: SacredHillId }) {
         {guide.stops.map((stop, index) => <article key={stop.name} className="rounded-xl border bg-card p-4 sm:p-5">
           <div className="flex items-start gap-3">
             {stop.image && <figure className="w-28 shrink-0">
-              <img src={stop.image.src} alt={stop.image.alt} loading="lazy" decoding="async" width={112} height={100} className="h-[100px] w-28 rounded-lg bg-secondary object-cover"/>
+              <img src={stop.image.src} alt={stop.image.alt} loading="lazy" decoding="async" width={112} height={100} className="h-[100px] w-28 rounded-lg bg-secondary object-contain"/>
               {stop.image.credit && <figcaption className="mt-1 text-[10px] leading-tight text-muted-foreground">
                 <a href={stop.image.credit.url} target="_blank" rel="noopener noreferrer" className="underline underline-offset-2" title={stop.image.credit.label + " (opens in new tab)"}>Photo: {stop.image.credit.label}</a>
                 {" · "}<a href={stop.image.credit.licenseUrl} target="_blank" rel="noopener noreferrer" className="underline underline-offset-2">License</a>
