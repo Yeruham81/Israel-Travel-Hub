@@ -1,93 +1,41 @@
 /**
- * Twelve distinct illustrative images for the twelve Jerusalem hotel recommendations.
- * Photos show Jerusalem or other accommodation spaces, never the named property.
- * Free Unsplash license for the eleven external photos was verified 22 Oct 2026.
- * Credits and source URLs are exposed in the city catalogue's photo disclosure.
+ * Hotel card photographs are local illustrative views of Jerusalem districts.
+ * They are not claims about the named hotel's rooms, facilities or exterior.
+ * Image assets live in src/assets or public/images and are served by this site.
  */
-import jerusalemOldCity from "@/assets/home/jerusalem-old-city.webp";
 import type { HotelIllustration } from "@/data/telAvivHotelPhotos";
+import jerusalemOldCity from "@/assets/home/jerusalem-old-city.webp";
+import downtown from "@/assets/jerusalem/downtown.webp";
+import eastJerusalem from "@/assets/jerusalem/east-jerusalem.webp";
+import germanColony from "@/assets/jerusalem/german-colony.webp";
+import mamilla from "@/assets/jerusalem/mamilla.webp";
+import mahaneYehuda from "@/assets/jerusalem/mahane-yehuda.webp";
+import oldCity from "@/assets/jerusalem/old-city.webp";
 
-const unsplash = (id: string, url: string, alt: string, photographer: string): HotelIllustration => ({
-  src: `https://images.unsplash.com/${id}?auto=format&fit=crop&w=900&h=562&q=76`,
+const neighbourhood = (src: string, alt: string): HotelIllustration => ({
+  src,
   alt,
-  label: "Illustrative photograph",
-  credit: `Photo: ${photographer} / Unsplash`,
-  sourceUrl: url,
-  licenseUrl: "https://unsplash.com/license",
+  label: "Illustrative Jerusalem area photograph",
+  credit: "Photograph from the site's local Jerusalem image collection",
 });
 
 export const jerusalemHotelPhotos: Record<string, HotelIllustration> = {
-  "herbert-samuel": unsplash(
-    "photo-1725962479542-1be0a6b0d444",
-    "https://unsplash.com/photos/a-hotel-room-with-a-large-bed-and-a-flat-screen-tv-xMbzmWROWxE",
-    "Bright contemporary guest room with a bed, window and writing desk",
-    "ikhbale",
-  ),
-  "arthur": unsplash(
-    "photo-1702014859878-5d4743176d28",
-    "https://unsplash.com/photos/a-hotel-room-with-a-bed-desk-chairs-and-a-television-1EJXSLUfqU0",
-    "Boutique-style guest room with warm timber finishes and tall windows",
-    "Aquilion Property",
-  ),
-  "mamilla": unsplash(
-    "photo-1772665762866-8dcfff65b3f3",
-    "https://unsplash.com/photos/four-armchairs-around-a-white-coffee-table-in-a-lobby-D12XNAze8SY",
-    "Inviting contemporary hospitality lounge with armchairs and a coffee table",
-    "Josh Hild",
-  ),
-  "king-david": unsplash(
-    "photo-1575667456742-4269014e68aa",
-    "https://unsplash.com/photos/a-view-of-the-old-city-of-jerusalem-Kltv_Kh0j7g",
-    "Jerusalem Old City stone walls and domes at sunset",
-    "David Holifield",
-  ),
+  "herbert-samuel": neighbourhood(downtown, "View of central Jerusalem streets and buildings"),
+  "arthur": neighbourhood("/images/city-stays/jerusalem-downtown.webp", "Downtown Jerusalem neighbourhood"),
+  "mamilla": neighbourhood(mamilla, "Mamilla and the historic city surroundings"),
+  "king-david": neighbourhood("/images/city-stays/jerusalem-mamilla.webp", "Mamilla and King David Street area of Jerusalem"),
   "new-imperial": {
     src: jerusalemOldCity,
-    alt: "Historic skyline and stone buildings in Jerusalem's Old City",
-    label: "Jerusalem city photograph",
+    alt: "Historic Jerusalem Old City skyline and stone buildings",
+    label: "Illustrative Jerusalem city photograph",
     credit: "Berthold Werner · Public domain",
     sourceUrl: "https://commons.wikimedia.org/wiki/File:Jerusalem_Dome_of_the_rock_BW_14.JPG",
   },
-  "sephardic-house": unsplash(
-    "photo-1675409145919-277c0fc2aa7d",
-    "https://unsplash.com/photos/a-bedroom-with-a-large-bed-and-a-large-window-EYoK3eVKIiQ",
-    "Warm guest bedroom with a large bed and timber detailing",
-    "Natalia Gusakova",
-  ),
-  "bezalel": unsplash(
-    "photo-1652161854125-1f5289c13eac",
-    "https://unsplash.com/photos/a-bed-in-a-hotel-room-GOzvLXx4E-E",
-    "Hotel bedroom with neutral furnishings and a comfortable bed",
-    "Kin Shing Lai",
-  ),
-  "market-courtyard": unsplash(
-    "photo-1669664863985-ac4a81e7483e",
-    "https://unsplash.com/photos/a-hotel-room-with-two-beds-nJ98PzYapKM",
-    "Guest room with two beds, representing an apartment-style accommodation option",
-    "Mky Moody",
-  ),
-  "american-colony": unsplash(
-    "photo-1677129667171-92abd8740fa3",
-    "https://unsplash.com/photos/a-hotel-lobby-with-a-chandelier-hanging-from-the-ceiling-WR1bkBstInw",
-    "Elegant hotel lobby with decorative lighting and seating",
-    "Quang Nguyen Vinh",
-  ),
-  "jerusalem-hotel": unsplash(
-    "photo-1631015108968-ba3b87f89005",
-    "https://unsplash.com/photos/white-soap-on-white-towel-COp-kDF4RWs",
-    "Freshly folded bath towels arranged on a guest bed",
-    "Vije Vijendranath",
-  ),
-  "orient": unsplash(
-    "photo-1716667282993-cd8f2bffb91f",
-    "https://unsplash.com/photos/a-hotel-pool-with-lounge-chairs-and-umbrellas-O2--QA3GljY",
-    "Hotel swimming pool with loungers and umbrellas",
-    "Olha",
-  ),
-  "rafael-residence": unsplash(
-    "photo-1587874522487-fe10e954d035",
-    "https://unsplash.com/photos/white-bed-linen-on-bed-pHcLOc_RzQ0",
-    "Comfortable guest bedroom with a wide bed and soft lighting",
-    "Pranav Kumar Jain",
-  ),
+  "sephardic-house": neighbourhood(oldCity, "Stone buildings and narrow streets of Jerusalem Old City"),
+  "bezalel": neighbourhood("/images/attractions/jerusalem-shopping.webp", "Jerusalem market streets and shopping area"),
+  "market-courtyard": neighbourhood(mahaneYehuda, "Market surroundings in Jerusalem"),
+  "american-colony": neighbourhood(eastJerusalem, "Jerusalem's eastern districts"),
+  "jerusalem-hotel": neighbourhood("/images/hotels/jerusalem-night.webp", "Jerusalem skyline at night"),
+  "orient": neighbourhood(germanColony, "Jerusalem's German Colony neighbourhood"),
+  "rafael-residence": neighbourhood("/images/jerusalem/first-station.webp", "Historic First Station area of Jerusalem near Baka"),
 };
