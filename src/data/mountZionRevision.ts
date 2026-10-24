@@ -96,6 +96,7 @@ export const mountZionEditorialUpdate: SacredHillEditorial = {
       description: "St Peter in Gallicantu commemorates the tradition of Peter's denial of Jesus and the site associated with the house of High Priest Caiaphas. Inside and around the church are chapels, archaeological remains and views over the valley.",
       visit: "Allow at least half an hour for the church and grounds rather than a hurried photograph. The current holy-site schedule lists 08:30–17:00, Monday to Saturday, with Sunday closure.",
       tipLabel: "Allow extra time",
+      link: { label: "St Peter in Gallicantu official visitor information", url: "https://www.stpeter-gallicantu.org/?lang=en" },
       image: { src: "/images/jerusalem/mount-zion/st-peter-in-gallicantu.webp", alt: "Stone church of St Peter in Gallicantu overlooking Jerusalem's Kidron Valley" },
     },
     {
@@ -107,15 +108,15 @@ export const mountZionEditorialUpdate: SacredHillEditorial = {
     {
       name: "Oskar Schindler's grave",
       description: "Oskar Schindler, honoured as Righteous Among the Nations for rescuing Jews during the Holocaust, is buried in Mount Zion's Catholic cemetery. Visitors often leave a small stone on his grave as a sign of remembrance.",
-      visit: "The cemetery has its own gate and visitor hours. Check access before walking down from the central sites, and allow time to find the grave.",
+      visit: "The Catholic cemetery currently lists visiting hours of 09:00–16:00. Check access before walking down from the central sites; if the gate is locked during those hours, use the contact number posted there.",
       tipLabel: "Before going down",
     },
     {
       name: "The Chamber of the Holocaust",
       description: "This small memorial museum on Mount Zion remembers Jewish communities destroyed during the Holocaust. Its collection and atmosphere offer a different kind of visit from the religious landmarks nearby.",
-      visit: "Opening arrangements and any admission fee are separate from those of David's Tomb. Consider it if you want to explore the hill's modern history, and check the Mount Zion heritage information first.",
+      visit: "The museum currently lists Sunday–Thursday visiting hours of 09:00–14:00, excluding Jewish holidays. It is a worthwhile addition for visitors interested in the hill's modern history; check the museum website before setting out.",
       tipLabel: "An additional stop",
-      link: { label: "Mount Zion heritage information", url: "https://www.mountzion.org.il/" },
+      link: { label: "Chamber of the Holocaust visiting information", url: "https://martefhashoa.org/" },
     },
   ],
   transportIntro: "Zion Gate is the easiest landmark to use when arranging a drop-off or checking a bus. From there, the main sites are a short walk from one another.",
