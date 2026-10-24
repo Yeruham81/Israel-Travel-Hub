@@ -49,17 +49,7 @@ export function SacredHillGuideContent({ id }: { id: SacredHillId }) {
         </article>)}
       </div>
       <SacredHillDayPlanning id={id} />
-      {id === "mount-of-olives" ? <div className="mt-6 rounded-xl border border-primary/20 bg-secondary/40 p-5">
-        <h3 className="text-xl font-semibold">Combine the viewpoint with a day in the Old City</h3>
-        <p className="mt-2 leading-relaxed"><strong>Start with the panorama:</strong> arrive at Seven Arches in the morning, visit the hill's churches and continue from Gethsemane through Lion's Gate. This gives you an introduction to Jerusalem before you explore its streets.</p>
-        <p className="mt-3 leading-relaxed"><strong>Finish with the panorama:</strong> explore the Old City first, then take a car or taxi up to the viewpoint for a final look across the city. This works especially well if you prefer not to walk the entire hillside route.</p>
-        <p className="mt-3 text-sm">See my <Link to="/travel-blog/old-city-jerusalem/" className="font-semibold text-primary underline underline-offset-4">Old City walking guide</Link> for suggested gates and landmarks, or explore <Link to="/tours/jerusalem/" className="font-semibold text-primary underline underline-offset-4">Jerusalem tours</Link> to combine several areas.</p>
-      </div> : <div className="mt-6 rounded-xl border border-primary/20 bg-secondary/40 p-5">
-        <h3 className="text-xl font-semibold">Combine Mount Zion with a day in the Old City</h3>
-        <p className="mt-2 leading-relaxed"><strong>Finish your Old City walk here:</strong> explore the Armenian or Jewish Quarter, leave through Zion Gate, then visit Dormition Abbey, the Upper Room and David's Tomb. It's a straightforward continuation without another cross-city journey.</p>
-        <p className="mt-3 leading-relaxed"><strong>Start here instead:</strong> ask for a drop-off near Mount Zion, visit the central sites and walk back through Zion Gate to continue towards the Jewish Quarter, Western Wall or Christian Quarter.</p>
-        <p className="mt-3 text-sm">My <Link to="/travel-blog/old-city-jerusalem/" className="font-semibold text-primary underline underline-offset-4">Old City guide</Link> helps you plan the next section, while the <Link to="/travel-blog/mount-of-olives/" className="font-semibold text-primary underline underline-offset-4">Mount of Olives guide</Link> covers a separate group of pilgrimage sites across the Kidron Valley.</p>
-      </div>}
+
     </Section>
 
     <Section id="places-to-see" title={id === "mount-zion" ? "What to see on Mount Zion" : "Viewpoint, churches and other sites"}>
