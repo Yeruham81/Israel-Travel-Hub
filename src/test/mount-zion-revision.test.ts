@@ -1,4 +1,6 @@
 import { describe, expect, it } from "vitest";
+import { existsSync } from "node:fs";
+import { resolve } from "node:path";
 import { sacredHillEditorial, sacredHillOverrides } from "@/data/sacredHillGuides";
 
 describe("Mount Zion visitor guide revision", () => {
@@ -31,6 +33,21 @@ describe("Mount Zion visitor guide revision", () => {
     expect(data.stops.some(stop => /Last Supper/i.test(stop.name))).toBe(true);
     expect(data.stops.some(stop => /Dormition/i.test(stop.name))).toBe(true);
     expect(data.stops.some(stop => /Schindler/i.test(stop.name))).toBe(true);
+  });
+
+  it("uses accurate site-specific image files migrated from the original guide", () => {
+    const expected = new Map([
+      ["Room of the Last Supper (Cenacle)", "cenacle-upper-room.webp"],
+      ["Dormition Abbey", "dormition-abbey-and-bell-tower.webp"],
+      ["St Peter in Gallicantu", "st-peter-in-gallicantu.webp"],
+    ]);
+    for (const [name, filename] of expected) {
+      const stop = data.stops.find(s => s.name === name);
+      expect(stop?.image?.src).toBe(`/images/jerusalem/mount-zion/${filename}`);
+      expect(stop?.image?.alt.length).toBeGreaterThan(30);
+      expect(existsSync(resolve(process.cwd(), "public", stop!.image!.src.slice(1)))).toBe(true);
+    }
+    expect(data.stops.filter(s => s.image).length).toBeGreaterThanOrEqual(3);
   });
 
   it("uses local photos only, with a natural aspect ratio in the page", () => {
