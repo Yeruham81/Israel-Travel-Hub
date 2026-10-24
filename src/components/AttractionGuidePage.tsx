@@ -82,7 +82,7 @@ export function AttractionGuidePage({ id }: {id:AttractionId}) {
           <figcaption className="mt-2 text-right text-xs text-muted-foreground">Dormition Abbey on Mount Zion</figcaption>
         </figure>
       ) : <img src={a.image.src} alt={a.image.alt} width={1200} height={675} fetchPriority="high" decoding="async" className="mt-7 aspect-[16/9] max-h-[450px] w-full rounded-2xl object-cover"/> )}
-      <AuthorCard/>
+      {!sacred && <AuthorCard/>}
     </header>
     {!sacred && <div className="mt-8 rounded-2xl border border-primary/20 bg-secondary/40 p-6">
       <h2 className="text-2xl">Plan your visit</h2>
