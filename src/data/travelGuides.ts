@@ -267,7 +267,7 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
           "You may still find old hotel instructions, university arrival guides, directory entries, forum posts and historical price tables naming Nesher or Amal. Those pages describe earlier operations. An old telephone number, listed fare or airport stop is not evidence that you can catch either service today.",
           "This does not mean that every shared-taxi route across Israel has disappeared. The discontinued Nesher and Amal airport services are a specific case; local monit sherut routes and independently booked shuttle products must be evaluated separately.",
         ],
-        sourceIds: ["guide-original-sherut"],
+        sourceIds: [],
       },
       {
         id: "what-is-sherut",
@@ -277,7 +277,7 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
           "Airport shared taxis historically offered a seat rather than a private car, sometimes dropping passengers at multiple addresses. That is why older visitor guides associate the word sherut with arriving at Ben Gurion Airport. Those descriptions should not be applied to today's airport arrangements.",
           "The English word shuttle is also used for completely different services: a free shuttle within an airport, a scheduled coach, or a commercial shared transfer sold per seat. A vehicle advertised as a shuttle is not automatically a licensed monit sherut or a working successor to Nesher or Amal.",
         ],
-        sourceIds: ["guide-original-sherut"],
+        sourceIds: [],
       },
       {
         id: "airport-alternatives",
@@ -318,7 +318,7 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
           ],
           note: "These are transport categories, not live seat availability, departures or price quotations.",
         }],
-        sourceIds: ["guide-iaa", "israel-rail", "guide-original-sherut"],
+        sourceIds: ["guide-iaa", "israel-rail", ],
       },
       {
         id: "official-taxi",
@@ -360,7 +360,7 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
           { text: "getting around Israel guide", to: travelGuidePaths.israel },
           { text: "getting around Tel Aviv guide", to: travelGuidePaths.telAviv },
         ],
-        sourceIds: ["guide-original-sherut", "guide-telaviv-transit"],
+        sourceIds: ["guide-telaviv-transit"],
       },
       {
         id: "booked-shared",
@@ -373,7 +373,7 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
         inlineLinks: [
           { text: "dedicated airport transfer", to: "/transfers/" },
         ],
-        sourceIds: ["guide-original-sherut"],
+        sourceIds: [],
       },
       {
         id: "weekend",
@@ -410,7 +410,7 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
       { q: "Do airport sheruts run on Shabbat?", a: "Nesher and Amal airport sheruts no longer run on any day. For current Shabbat airport options, check limited Line 711, the authorized taxi service and confirmed private transfers." },
       { q: "How can I travel from Ben Gurion Airport to Haifa now?", a: "Check the current train route, a licensed airport taxi or an advance-confirmed private transfer. The former Amal airport sherut is not available." },
     ],
-    sourceIds: ["guide-original-sherut", "guide-iaa", "guide-gett", "israel-rail", "guide-weekend-711"],
+    sourceIds: ["guide-iaa", "guide-gett", "israel-rail", "guide-weekend-711"],
     related: ["shabbat", "airportTaxis", "taxis", "arrival", "israel", "taxiFares"],
     services: [
       { label: "Private airport transfer to Jerusalem", to: "/travel-blog/ben-gurion-airport-to-jerusalem/" },
@@ -435,7 +435,7 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
     ],
     checklist: ["Confirm the exact phone is compatible and unlocked", "Match data, days, countries and hotspot needs", "Distinguish data calling from a phone number and SMS", "Read activation, renewal, refunds and fair-use rules", "Test connectivity before leaving the airport"],
     faqs: [{ q: "Which eSIM is cheapest for Israel?", a: "Compare the current total for the same data and travel period, including setup or usage charges. I do not publish a live cheapest-price ranking; provider packages, currencies and promotions change." }, { q: "Does unlimited mean maximum speed all day?", a: "No. Read the provider's fair-use and speed policy, plus any hotspot restriction. Yesim's published guidance explicitly describes potential throttling." }, { q: "Can I keep WhatsApp and my home number?", a: "A data connection can support your existing messaging apps. Keeping the home SIM active depends on the device and your carrier; control home-line roaming to avoid unintended charges." }, { q: "Will every eSIM give me an Israeli number?", a: "No. Check whether it is data-only or includes phone services, and which country's number is supplied. An optional US number is not an Israeli number." }],
-    sourceIds: ["guide-original-esim", "guide-esim-airalo", "guide-esim-saily", "guide-esim-yesim", "guide-esim-gigsky", "guide-esim-drimsim"], related: ["arrival", "uber", "israel"], services: [{ label: "Arrange your airport pickup", to: "/transfers/" }], providerPageId: "guide-esim",
+    sourceIds: ["guide-esim-airalo", "guide-esim-saily", "guide-esim-yesim", "guide-esim-gigsky", "guide-esim-drimsim"], related: ["arrival", "uber", "israel"], services: [{ label: "Arrange your airport pickup", to: "/transfers/" }], providerPageId: "guide-esim",
   },
   arrival: {
     id: "arrival",
@@ -477,7 +477,7 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
           "Have your passport, any required visa or ETA-IL confirmation, the address of your first accommodation, onward flight or return details and a way to contact your host accessible offline. Apply through the official portal rather than an intermediary that could add charges or provide outdated eligibility information.",
           "Check your flight's actual status and destination terminal on the airline and Israel Airports Authority websites shortly before travel. Tell a pre-booked driver the flight number and the arrival date in Israel, especially when a flight lands after midnight.",
         ],
-        sourceIds: ["guide-entry", "guide-iaa", "guide-original-arrival"],
+        sourceIds: ["guide-entry", "guide-iaa", ],
       },
       {
         id: "arrival-terminal",
@@ -498,7 +498,7 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
           "You may be asked about the reason for your trip, accommodation and travel arrangements. Answer accurately and have your documents accessible. An approved ETA-IL or valid visa does not automatically guarantee admission; the entry decision is made at the border.",
           "Retain any entry card or record issued to you, including a printed slip if you receive one, with your passport. You may need the record during your stay. If you are unsure what was issued or need to resolve an entry-record problem, ask the issuing authority rather than relying on an online description of a universal procedure.",
         ],
-        sourceIds: ["guide-entry", "guide-original-arrival"],
+        sourceIds: ["guide-entry", ],
       },
       {
         id: "baggage",
@@ -508,7 +508,7 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
           "If your checked suitcase has not arrived, or is visibly damaged, contact your airline or its ground handling company and complete a baggage report before leaving the reclaim area where possible. Obtain the file or report reference, keep your baggage tags, and provide a reachable phone number and delivery address in Israel.",
           "The airport separates airline-handled baggage problems from general items lost elsewhere in the terminal. Its lost property page directs questions about checked baggage and items lost on board or around the carousel to the airline's ground handler. If you only discover a problem after leaving, contact the airline or handler promptly and follow its procedures.",
         ],
-        sourceIds: ["guide-lost-property", "guide-original-arrival"],
+        sourceIds: ["guide-lost-property", ],
       },
       {
         id: "customs",
@@ -528,7 +528,7 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
           "If a private driver is collecting you, read the actual confirmed meeting point rather than assuming every pickup takes place at the same exit. Notify the operator if passport control or baggage claim delays you, and check the agreed waiting policy. An inquiry for a quote is not itself a confirmed booking.",
           "Keep your passport, phone and luggage secure, and use signed airport services rather than accepting unsolicited transport approaches. If your pickup instructions are unclear, contact the provider or ask at an official airport information point.",
         ],
-        sourceIds: ["guide-iaa", "guide-original-arrival"],
+        sourceIds: ["guide-iaa", ],
       },
       {
         id: "phones-money",
@@ -568,7 +568,7 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
           ],
           note: "This comparison is general guidance, not live departures or confirmed ride availability.",
         }],
-        sourceIds: ["guide-iaa", "guide-gett", "israel-rail", "guide-original-arrival"],
+        sourceIds: ["guide-iaa", "guide-gett", "israel-rail", ],
       },
       {
         id: "arrival-timing",
@@ -578,7 +578,7 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
           "Do not arrange a tight onward train or bus connection solely from the published landing time. For a private pickup, supply the flight number and check the agreed arrival monitoring, free waiting period, extra charges and what happens if immigration takes longer. Contact the operator after collecting bags if that is what the confirmation instructs.",
           "For a same-day onward journey, include time to reach the railway station, the official taxi line or a different terminal. The published airport flight status can change, so refresh it close to your arrival and keep an alternative for late-night transport.",
         ],
-        sourceIds: ["guide-iaa", "guide-original-arrival"],
+        sourceIds: ["guide-iaa", ],
       },
       {
         id: "shabbat",
@@ -633,7 +633,7 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
       { q: "Is there help for wheelchair users or travelers with reduced mobility?", a: "Yes. Request assistance with your airline in advance. Ground handlers provide arrival support, and the airport publishes accessible facility and internal shuttle information." },
     ],
     sourceIds: [
-      "guide-original-arrival", "guide-entry", "guide-iaa-terminal-2026", "guide-iaa",
+      "guide-entry", "guide-iaa-terminal-2026", "guide-iaa",
       "guide-lost-property", "guide-customs-tourists", "guide-iaa-arrival-services",
       "guide-iaa-accessibility", "guide-gett", "israel-rail", "guide-weekend-711",
     ],
@@ -687,7 +687,7 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
           "If you have several suitcases, a stroller, mobility needs or a late-night arrival, a direct licensed taxi or a confirmed transfer may be worth comparing with several public transport changes. For remote nature sites or multiple stops in one day, a rental car, private driver or organized tour may be more practical.",
           "You can travel in Tel Aviv, Jerusalem and other cities without keeping a rental car all week. Pick your accommodation with the places you will actually visit in mind, and check the return journey before settling on a route.",
         ],
-        sourceIds: ["guide-original-israel", "guide-bus-planner"],
+        sourceIds: ["guide-bus-planner"],
       },
       {
         id: "intercity-trains",
@@ -699,7 +699,7 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
           "Check the latest Israel Railways timetable for planned engineering work, holiday restrictions and the final departure. For airport-specific baggage, terminal and pickup details, see the Ben Gurion Airport arrival guide; this national guide focuses on choosing the right transport mode.",
         ],
         inlineLinks: [{ text: "Ben Gurion Airport arrival guide", to: travelGuidePaths.arrival }],
-        sourceIds: ["israel-rail", "guide-iaa", "guide-original-israel"],
+        sourceIds: ["israel-rail", "guide-iaa", ],
       },
       {
         id: "buses",
@@ -731,7 +731,7 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
           "In Haifa, distance is only part of the trip: the climb from the coast up Mount Carmel can make a bus or taxi more useful than walking. In all three cities, group nearby attractions by area and keep a realistic return route, especially after dark or with luggage.",
         ],
         inlineLinks: [{ text: "getting around Tel Aviv guide", to: travelGuidePaths.telAviv }],
-        sourceIds: ["guide-red-line", "guide-telaviv-transit", "guide-original-israel"],
+        sourceIds: ["guide-red-line", "guide-telaviv-transit", ],
       },
       {
         id: "taxis-apps",
@@ -757,7 +757,7 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
           "If you want a predictable flight connection or travel with several bags, compare the whole journey with a licensed taxi, train or confirmed direct transfer rather than relying on an unverified shared-vehicle route.",
         ],
         inlineLinks: [{ text: "Sherut in Israel guide", to: travelGuidePaths.sherut }],
-        sourceIds: ["guide-original-sherut", "guide-telaviv-transit"],
+        sourceIds: ["guide-telaviv-transit"],
       },
       {
         id: "airport",
@@ -797,7 +797,7 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
           { text: "car rental page", to: "/car-rental/" },
           { text: "private driver page", to: "/private-driver/" },
         ],
-        sourceIds: ["guide-original-israel"],
+        sourceIds: [],
       },
       {
         id: "day-trips",
@@ -808,7 +808,7 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
           "Save the destination and return pickup point offline. For travelers with mobility limitations or substantial baggage, stairs, hills, uneven surfaces and vehicle access may matter as much as the distance shown on the map.",
         ],
         inlineLinks: [{ text: "tours and day trips directory", to: "/tours/" }],
-        sourceIds: ["guide-original-israel"],
+        sourceIds: [],
       },
     ],
     checklist: [
@@ -840,10 +840,9 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
       { q: "Is a private driver the same as a guided tour?", a: "No. A driver-only service does not automatically include a licensed guide or attraction tickets. Check the quote, route, included hours, passenger and luggage capacity." },
     ],
     sourceIds: [
-      "guide-original-israel", "guide-bus-planner", "guide-public-transport-payments",
+      "guide-bus-planner", "guide-public-transport-payments",
       "guide-select-card-payment", "guide-redline-tickets", "israel-rail", "guide-telaviv-transit",
-      "guide-red-line", "guide-iaa", "guide-gett", "guide-uber-availability", "guide-original-sherut",
-    ],
+      "guide-red-line", "guide-iaa", "guide-gett", "guide-uber-availability", ],
     related: ["telAviv", "taxis", "taxiFares", "uber", "sherut", "airportTaxis", "arrival", "shabbat"],
     services: [
       { label: "Rent a car for a regional itinerary", to: "/car-rental/" },
@@ -862,15 +861,15 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
     facts: [{ label: "Light rail", text: "Use the operating Red Line map, not future-line plans" }, { label: "National rail", text: "Include the final journey to the beach or hotel" }, { label: "Weekend", text: "Municipal routes have a separate map and schedule" }],
     comparison: { caption: "Choose how to move around Tel Aviv", headers: ["Journey", "Start by considering", "Check"], rows: [["Nearby central sights", "Walking", "Actual distance, heat, steps and street crossings"], ["A longer city trip", "Bus or Red Line", "Route coverage, stop and last departure"], ["Airport or another city", "National rail or an agreed transfer", "Station, date, luggage and last leg"], ["Luggage or awkward connections", "Licensed taxi", "Exact entrance, fare basis and capacity"], ["Shabbat outing", "Municipal weekend route, walking or taxi", "The separate weekend network and return time"]] },
     sections: [
-      { id: "walking", title: "Can I walk between the main neighbourhoods?", paragraphs: ["Use walking for genuinely nearby stops and group sights by area. The promenade, central streets, Neve Tzedek and Jaffa can form useful parts of a walking day, but check the whole distance instead of assuming every attraction is close to your hotel.", "Account for heat, shade, crossings and steps. With luggage or limited mobility, check the exact entrance and an alternative vehicle drop-off. A pleasant daytime walk does not automatically suit a late-night arrival with suitcases. Choose a convenient base using my where to stay in Tel Aviv guide."], inlineLinks: [{ text: "where to stay in Tel Aviv guide", to: "/travel-blog/where-to-stay-in-tel-aviv/" }], sourceIds: ["guide-original-telAviv"] },
+      { id: "walking", title: "Can I walk between the main neighbourhoods?", paragraphs: ["Use walking for genuinely nearby stops and group sights by area. The promenade, central streets, Neve Tzedek and Jaffa can form useful parts of a walking day, but check the whole distance instead of assuming every attraction is close to your hotel.", "Account for heat, shade, crossings and steps. With luggage or limited mobility, check the exact entrance and an alternative vehicle drop-off. A pleasant daytime walk does not automatically suit a late-night arrival with suitcases. Choose a convenient base using my where to stay in Tel Aviv guide."], inlineLinks: [{ text: "where to stay in Tel Aviv guide", to: "/travel-blog/where-to-stay-in-tel-aviv/" }], sourceIds: [] },
       { id: "buses-light-rail", title: "When should I use a bus or the Red Line?", paragraphs: ["Look up the actual destination on the live route map. The Red Line is operating, but it does not serve every beach, hotel or northern tourist area. A bus or another connection may be more direct. Construction or a future-network drawing is not proof that another line is carrying passengers.", "Check the supported Rav-Kav, mobile-payment or other ticket option for your journey. Validate as instructed on boarding or entering the system; a transfer arrangement does not remove the need to follow validation rules. My getting around Israel guide explains Rav-Kav and intercity ticketing in more detail."], inlineLinks: [{ text: "getting around Israel guide", to: travelGuidePaths.israel }], sourceIds: ["guide-red-line", "guide-telaviv-transit"] },
-      { id: "rail", title: "Which Tel Aviv train station should I use?", paragraphs: ["National rail stations serve different parts of the Ayalon corridor, rather than lining the beachfront. Choose the station from the full door-to-door route to your hotel, university, business address or onward city. Do not select a station only because it contains the words Tel Aviv.", "For an airport journey, check date-specific service and luggage access. Compare the final walk or taxi with an agreed direct transfer if several connections would be awkward. The Ben Gurion Airport to Tel Aviv journey guide compares the complete airport-to-hotel choices."], inlineLinks: [{ text: "Ben Gurion Airport to Tel Aviv journey guide", to: "/travel-blog/how-to-get-from-ben-gurion-airport-to-tel-aviv/" }], sourceIds: ["israel-rail", "guide-original-telAviv"] },
-      { id: "weekend-and-bikes", title: "What changes on Shabbat, and what about bikes?", paragraphs: ["The municipality publishes a separate free weekend network. Check its route, operating window and return direction; it is not a replacement for every normal bus or an assumed airport service. Taxis remain another option subject to actual availability and the fare terms. Read the taxis in Israel guide for authorized taxi use, and the airport Shabbat transport guide if your trip starts at Ben Gurion Airport.", "Shared bikes or scooters may suit a confident rider on an appropriate route. Before renting, check the operator's age and eligibility rules, helmet requirements, permitted riding areas and parking instructions. Do not assume that a short map distance makes a pavement or pedestrian area suitable for riding."], inlineLinks: [{ text: "taxis in Israel guide", to: travelGuidePaths.taxis }, { text: "airport Shabbat transport guide", to: travelGuidePaths.shabbat }], sourceIds: ["guide-telaviv-transit", "guide-original-telAviv"] },
+      { id: "rail", title: "Which Tel Aviv train station should I use?", paragraphs: ["National rail stations serve different parts of the Ayalon corridor, rather than lining the beachfront. Choose the station from the full door-to-door route to your hotel, university, business address or onward city. Do not select a station only because it contains the words Tel Aviv.", "For an airport journey, check date-specific service and luggage access. Compare the final walk or taxi with an agreed direct transfer if several connections would be awkward. The Ben Gurion Airport to Tel Aviv journey guide compares the complete airport-to-hotel choices."], inlineLinks: [{ text: "Ben Gurion Airport to Tel Aviv journey guide", to: "/travel-blog/how-to-get-from-ben-gurion-airport-to-tel-aviv/" }], sourceIds: ["israel-rail", ] },
+      { id: "weekend-and-bikes", title: "What changes on Shabbat, and what about bikes?", paragraphs: ["The municipality publishes a separate free weekend network. Check its route, operating window and return direction; it is not a replacement for every normal bus or an assumed airport service. Taxis remain another option subject to actual availability and the fare terms. Read the taxis in Israel guide for authorized taxi use, and the airport Shabbat transport guide if your trip starts at Ben Gurion Airport.", "Shared bikes or scooters may suit a confident rider on an appropriate route. Before renting, check the operator's age and eligibility rules, helmet requirements, permitted riding areas and parking instructions. Do not assume that a short map distance makes a pavement or pedestrian area suitable for riding."], inlineLinks: [{ text: "taxis in Israel guide", to: travelGuidePaths.taxis }, { text: "airport Shabbat transport guide", to: travelGuidePaths.shabbat }], sourceIds: ["guide-telaviv-transit", ] },
     ],
     nextSteps: [{ label: "Airport to Tel Aviv: train, bus or taxi?", to: "/travel-blog/how-to-get-from-ben-gurion-airport-to-tel-aviv/" }, { label: "Official Ben Gurion Airport taxi pickup", to: travelGuidePaths.airportTaxis }],
     checklist: ["Choose your hotel area around the places you will visit", "Group nearby attractions into a walking route", "Check current Red Line and bus maps", "Include the last leg from national rail", "Check the separate weekend service and return trip", "Read taxi or bike/scooter terms before starting"],
     faqs: [{ q: "Is Tel Aviv easy to visit without a car?", a: "A central stay can work well with walking, buses, the Red Line and occasional taxis. The right hotel location and actual daily routes matter more than having a car for every day." }, { q: "Does the Red Line go to every beach hotel?", a: "No. Check the current route and remaining walk. A bus or taxi may suit a particular hotel better." }, { q: "Are Tel Aviv weekend buses the same as weekday buses?", a: "No. The municipal weekend network has its own map, stops and timetable. Check the return journey and do not assume it provides your airport connection." }, { q: "Which railway station is closest to the Tel Aviv beach?", a: "The mainline stations are inland. Compare the final bus, taxi or walk from HaHagana, HaShalom, Savidor Center or University to your specific hotel rather than treating a station as a beachfront stop." }, { q: "Can I pay cash on Tel Aviv buses?", a: "Ordinary bus services generally require a validated Rav-Kav or supported payment app rather than cash to the driver. Contactless credit card acceptance is limited to selected services; confirm the current route-specific rules." }, { q: "Does the Red Line light rail serve Jaffa?", a: "Yes, its southern corridor reaches Jaffa-area stations, but the stop may still be a walk or onward connection from Old Jaffa or your accommodation. Check the live map before traveling." }, { q: "Is there an Uber car service in Tel Aviv?", a: "Uber passenger rides are not available in Israel in 2026. Use a licensed taxi, an available local app such as Gett, or a separately confirmed private transfer." }],
-    sourceIds: ["guide-original-telAviv", "guide-telaviv-transit", "guide-red-line", "israel-rail"], related: ["israel", "uber", "taxis", "esim", "telAvivDayTrips", "shabbat"], services: [{ label: "Choose your Tel Aviv hotel area", to: "/travel-blog/where-to-stay-in-tel-aviv/" }, { label: "Jaffa hotel guide", to: "/tel-aviv/jaffa-hotels/" }, { label: "Private airport transfer to Tel Aviv", to: "/travel-blog/ben-gurion-airport-to-tel-aviv/" }],
+    sourceIds: ["guide-telaviv-transit", "guide-red-line", "israel-rail"], related: ["israel", "uber", "taxis", "esim", "telAvivDayTrips", "shabbat"], services: [{ label: "Choose your Tel Aviv hotel area", to: "/travel-blog/where-to-stay-in-tel-aviv/" }, { label: "Jaffa hotel guide", to: "/tel-aviv/jaffa-hotels/" }, { label: "Private airport transfer to Tel Aviv", to: "/travel-blog/ben-gurion-airport-to-tel-aviv/" }],
   },
   ...taxiGuideCluster,
 };
