@@ -1,0 +1,42 @@
+name: Hostinger PHP bridge live readiness probe (READ ONLY)
+on:
+  push:
+    branches: [experiment/hostinger-premium-static]
+    paths: [".github/workflows/hostinger-php-readiness.yml"]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 4
+    steps:
+      - name: Check public API GETs and blocked internal files (no messages sent)
+        run: |
+          python3 - <<'PY'
+          from urllib.request import Request, urlopen
+          from urllib.error import HTTPError, URLError
+          import json
+          domain='https://saddlebrown-guanaco-454061.hostingersite.com'
+          for path in ['/api/quote-request/','/api/exchange-rates/','/api/_internal/form-options.json']:
+              req=Request(domain+path,headers={'Accept':'application/json','User-Agent':'IsraelTravelHub-ReadOnly-PHP-Check'})
+              try: resp=urlopen(req,timeout=17)
+              except HTTPError as ex: resp=ex
+              except URLError as ex:
+                  print(path,'network error:',ex.reason);continue
+              with resp:
+                  code=resp.status;typ=resp.headers.get('Content-Type','')
+                  raw=resp.read(900)
+                  data=None
+                  if 'json' in typ:
+                      try:data=json.loads(raw)
+                      except ValueError:pass
+                  print(path,'status',code,'type',typ,'no-store',resp.headers.get('Cache-Control',''))
+                  if path=='/api/quote-request/' and isinstance(data,dict):
+                      print('Quote service available:',data.get('available'),'No email sent.')
+                  if path=='/api/exchange-rates/' and isinstance(data,dict):
+                      print('FX service status:',data.get('status'),'rates present:',bool(data.get('rates')))
+                  if path.endswith('form-options.json') and code==200:
+                      raise SystemExit('Unsafe: internal JSON publicly accessible')
+          print('Read-only API readiness probe complete.')
+          PY
