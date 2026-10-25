@@ -1,0 +1,156 @@
+name: Deploy static website to Hostinger Premium
+
+# Do not publish broken code. Automatic deployments only follow successful
+# Full Project Validation runs on main; credentials never enter Lovable/Vite.
+on:
+  workflow_run:
+    workflows: ["Full Project Validation"]
+    types: [completed]
+    branches: [main]
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: "Verify SSH/target and show changes without uploading"
+        type: boolean
+        required: true
+        default: true
+
+permissions:
+  contents: read
+
+concurrency:
+  group: hostinger-premium-website
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    if: >-
+      ${{ github.event_name == 'workflow_dispatch'
+          || (github.event.workflow_run.conclusion == 'success' && vars.HOSTINGER_AUTO_DEPLOY == 'true') }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 22
+    env:
+      CI: "true"
+      HOSTINGER_STATIC_BUILD: "true"
+      VITE_CANONICAL_ORIGIN: ${{ vars.HOSTINGER_CANONICAL_ORIGIN || 'https://saddlebrown-guanaco-454061.hostingersite.com' }}
+      VITE_INDEXABLE: ${{ vars.HOSTINGER_INDEXABLE || 'false' }}
+      TARGET_SHA: ${{ github.event_name == 'workflow_run' && github.event.workflow_run.head_sha || github.sha }}
+      HOSTINGER_SSH_HOST: ${{ secrets.HOSTINGER_SSH_HOST }}
+      HOSTINGER_SSH_USER: ${{ secrets.HOSTINGER_SSH_USER }}
+      HOSTINGER_SSH_PRIVATE_KEY: ${{ secrets.HOSTINGER_SSH_PRIVATE_KEY }}
+      HOSTINGER_SSH_KNOWN_HOSTS: ${{ secrets.HOSTINGER_SSH_KNOWN_HOSTS }}
+      HOSTINGER_REMOTE_PATH: ${{ secrets.HOSTINGER_REMOTE_PATH }}
+      HOSTINGER_SSH_PORT: ${{ vars.HOSTINGER_SSH_PORT || '65002' }}
+      DRY_RUN: ${{ github.event_name == 'workflow_dispatch' && inputs.dry_run && 'true' || 'false' }}
+      GH_TOKEN: ${{ github.token }}
+
+    steps:
+      - name: Checkout exactly the commit verified by CI
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ env.TARGET_SHA }}
+          persist-credentials: false
+
+      - name: Ensure this is still the latest main commit
+        id: freshness
+        shell: bash
+        run: |
+          set -euo pipefail
+          latest="$(gh api "repos/${GITHUB_REPOSITORY}/git/ref/heads/main" --jq '.object.sha')"
+          if [[ "$latest" != "$TARGET_SHA" ]]; then
+            echo "A newer main commit exists. Skip this obsolete deployment."
+            echo "current=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "current=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Set up Node.js and Bun
+        if: steps.freshness.outputs.current == 'true'
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: "1.4.4"
+
+      - name: Install locked dependencies
+        if: steps.freshness.outputs.current == 'true'
+        run: bash scripts/install-ci-dependencies.sh
+
+      - name: Build all routes as HTML for Premium hosting
+        if: steps.freshness.outputs.current == 'true'
+        run: bun run build
+
+      - name: Reject missing pages, wrong canonical, or indexable trial
+        if: steps.freshness.outputs.current == 'true'
+        run: node scripts/verify-hostinger-static-export.mjs
+
+      - name: Check required SSH secrets and safe remote path
+        if: steps.freshness.outputs.current == 'true'
+        shell: bash
+        run: |
+          set -euo pipefail
+          for name in HOSTINGER_SSH_HOST HOSTINGER_SSH_USER HOSTINGER_SSH_PRIVATE_KEY HOSTINGER_SSH_KNOWN_HOSTS HOSTINGER_REMOTE_PATH; do
+            [[ -n "${!name}" ]] || { echo "::error::Missing GitHub secret: $name"; exit 1; }
+          done
+          [[ "$HOSTINGER_REMOTE_PATH" =~ ^/home/[A-Za-z0-9_-]+/domains/[A-Za-z0-9.-]+/public_html/?$ ]] ||
+            { echo "::error::Remote path must be the exact Hostinger temporary site's /home/.../domains/.../public_html"; exit 1; }
+          [[ "$HOSTINGER_SSH_PORT" =~ ^[0-9]{2,5}$ ]] || exit 1
+          [[ "$HOSTINGER_SSH_HOST" =~ ^[A-Za-z0-9.:-]+$ ]] || exit 1
+          [[ "$HOSTINGER_SSH_USER" =~ ^[A-Za-z0-9_-]+$ ]] || exit 1
+
+      - name: Install verified SSH key and pinned host fingerprint
+        if: steps.freshness.outputs.current == 'true'
+        shell: bash
+        run: |
+          set -euo pipefail
+          install -d -m 700 "$HOME/.ssh"
+          printf '%s\n' "$HOSTINGER_SSH_PRIVATE_KEY" > "$HOME/.ssh/hostinger_deploy"
+          printf '%s\n' "$HOSTINGER_SSH_KNOWN_HOSTS" > "$HOME/.ssh/known_hosts"
+          chmod 600 "$HOME/.ssh/hostinger_deploy" "$HOME/.ssh/known_hosts"
+
+      - name: Verify website marker and existing PHP endpoints on Hostinger
+        if: steps.freshness.outputs.current == 'true'
+        shell: bash
+        run: |
+          set -euo pipefail
+          ssh -p "$HOSTINGER_SSH_PORT" -i "$HOME/.ssh/hostinger_deploy" -o BatchMode=yes -o StrictHostKeyChecking=yes \
+            -o UserKnownHostsFile="$HOME/.ssh/known_hosts" \
+            "$HOSTINGER_SSH_USER@$HOSTINGER_SSH_HOST" \
+            "test -f '$HOSTINGER_REMOTE_PATH/.ith-static-deploy-ok' && test -f '$HOSTINGER_REMOTE_PATH/index.html' && test ! -e '$HOSTINGER_REMOTE_PATH/wp-config.php' && test -f '$HOSTINGER_REMOTE_PATH/api/quote-request/index.php' && test -f '$HOSTINGER_REMOTE_PATH/api/exchange-rates/index.php'" ||
+            { echo "::error::Hostinger deployment marker or expected PHP endpoints are missing; no files were changed"; exit 1; }
+
+      - name: Upload only built static files using rsync over SSH
+        if: steps.freshness.outputs.current == 'true'
+        shell: bash
+        run: |
+          set -euo pipefail
+          args=()
+          if [[ "$DRY_RUN" == "true" ]]; then
+            args+=(--dry-run)
+            echo "DRY RUN: no files will be changed on Hostinger."
+          fi
+          # NEVER add --delete. Keep manually configured PHP, .htaccess,
+          # host configuration, upload directories and unpublished backups.
+          rsync -rltvz --delay-updates --no-perms --no-owner --no-group \
+            --exclude='/.htaccess' \
+            --exclude='/api/***' \
+            --exclude='/.well-known/***' \
+            --exclude='/.user.ini' \
+            --exclude='/.ith-static-deploy-ok' \
+            --exclude='/wp-content/***' \
+            --exclude='/wp-admin/***' \
+            --exclude='/wp-includes/***' \
+            --exclude='*.php' \
+            "${args[@]}" \
+            -e "ssh -p $HOSTINGER_SSH_PORT -i $HOME/.ssh/hostinger_deploy -o BatchMode=yes -o StrictHostKeyChecking=yes -o UserKnownHostsFile=$HOME/.ssh/known_hosts" \
+            .output/public/ "$HOSTINGER_SSH_USER@$HOSTINGER_SSH_HOST:$HOSTINGER_REMOTE_PATH/"
+
+      - name: Read-only public smoke test
+        if: steps.freshness.outputs.current == 'true' && env.DRY_RUN != 'true'
+        shell: bash
+        run: |
+          set -euo pipefail
+          for path in / /guides/ /api/quote-request/ /api/exchange-rates/; do
+            status="$(curl --retry 2 --retry-delay 2 --max-time 20 -L -sS -o /dev/null -w '%{http_code}' "$VITE_CANONICAL_ORIGIN$path")"
+            echo "$path -> HTTP $status"
+            [[ "$status" == "200" ]] || { echo "::error::Website smoke test failed for $path"; exit 1; }
+          done
+          echo "Static files published; manually maintained PHP APIs still respond to GET."
