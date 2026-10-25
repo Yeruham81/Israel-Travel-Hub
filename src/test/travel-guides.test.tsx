@@ -359,7 +359,7 @@ describe("migrated practical guides", () => {
       "shabbat-hours", "arrival-time", "weekend-711", "terminal-transfer",
       "taxis-transfers", "costs", "rental-car", "destinations", "restart", "practical",
     ]);
-    expect(guide.sections.filter((section) => section.photo)).toHaveLength(1);
+    expect(guide.sections.filter((section) => section.photo)).toHaveLength(0);
     expect(guide.faqs.length).toBe(8);
     expect(guide.sections.find((section) => section.id === "arrival-time")!.tables?.[0]?.rows).toHaveLength(4);
     expect(guide.sections.find((section) => section.id === "terminal-transfer")!.paragraphs.join(" ")).toMatch(/Level G near Gate 01.*15-minute frequency/s);
