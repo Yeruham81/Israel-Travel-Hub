@@ -1,0 +1,48 @@
+name: Verify Hostinger static export in pull requests
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - "vite.config.ts"
+      - "scripts/verify-hostinger-static-export.mjs"
+      - ".github/workflows/deploy-hostinger-premium.yml"
+      - ".github/workflows/hostinger-static-export-check.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  static-export:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      CI: "true"
+      HOSTINGER_STATIC_BUILD: "true"
+      VITE_INDEXABLE: "false"
+      VITE_CANONICAL_ORIGIN: "https://saddlebrown-guanaco-454061.hostingersite.com"
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: "1.4.4"
+      - name: Install locked project dependencies
+        run: bash scripts/install-ci-dependencies.sh
+      - name: Build all static site pages
+        run: bun run build
+      - name: Verify sitemap coverage, canonical links and trial noindex
+        run: node scripts/verify-hostinger-static-export.mjs
+      - name: Verify deployment is non-destructive
+        run: |
+          node - <<'NODE'
+          const fs = require('node:fs')
+          const s = fs.readFileSync('.github/workflows/deploy-hostinger-premium.yml','utf8')
+          for (const rule of ["--exclude='/api/***'", "--exclude='/.htaccess'", "--exclude='*.php'", "--exclude='/.well-known/***'", "StrictHostKeyChecking=yes", "test -f '$HOSTINGER_REMOTE_PATH/.ith-static-deploy-ok'"]) {
+            if (!s.includes(rule)) throw new Error('Missing deployment safety control: ' + rule)
+          }
+          if (/rsync[^\n]*--delete/.test(s)) throw new Error('Unsafe rsync deletion flag')
+          console.log('Hostinger static deployment safety rules verified')
+          NODE
