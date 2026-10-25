@@ -1,0 +1,103 @@
+name: Build and test Hostinger Premium PHP API trial (NO DEPLOYMENT)
+
+on:
+  push:
+    branches:
+      - experiment/hostinger-premium-static
+    paths:
+      - ".github/workflows/hostinger-php-bridge-trial.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  php-trial:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      CI: "true"
+      VITE_INDEXABLE: "false"
+      VITE_CANONICAL_ORIGIN: "https://static-trial.invalid"
+    steps:
+      - name: Check out isolated trial branch
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+
+      - name: Install Bun for build ONLY, not required on Hostinger
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: "1.4.4"
+
+      - name: Install dependencies
+        run: bun install --frozen-lockfile
+
+      - name: Generate PHP form option snapshot from the existing registry
+        run: bun scripts/hostinger/generate-php-options.ts
+
+      - name: Set up temporary prerendering
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          p=Path("vite.config.ts")
+          s=p.read_text()
+          a='  tanstackStart: {\n    // Redirect TanStack Start'
+          b='  tanstackStart: {\n    prerender: { enabled: true, autoSubfolderIndex: true, autoStaticPathsDiscovery: true, crawlLinks: true, failOnError: false, concurrency: 5 },\n    // Redirect TanStack Start'
+          assert s.count(a)==1
+          p.write_text(s.replace(a,b))
+          PY
+
+      - name: Produce static HTML and assets
+        run: bun run build
+
+      - name: Package safe PHP endpoint files next to the site
+        run: bash scripts/hostinger/package-php-trial.sh
+
+      - name: Verify PHP availability and syntax
+        run: |
+          php -v
+          php -m | grep -i '^curl$'
+          find .output/public/api -name '*.php' -print0 | xargs -0 -n1 php -l
+          php -l scripts/hostinger/test-php-bridge.php
+
+      - name: Run PHP quote and FX parity tests (no outbound requests)
+        run: php scripts/hostinger/test-php-bridge.php
+
+      - name: Verify every existing sitemap page remains in output
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          from urllib.parse import urlparse
+          from xml.etree import ElementTree as ET
+          root=Path('.output/public')
+          paths=[urlparse(v.text).path for v in ET.parse('public/sitemap.xml').findall('.//{*}loc') if v.text]
+          bad=[p for p in paths if not (root / p.lstrip('/') / 'index.html').exists()]
+          print(f'PHP-enabled trial keeps static pages: {len(paths)-len(bad)}/{len(paths)}')
+          print('Unbuilt routes:',bad)
+          assert not bad
+          assert (root/'api/quote-request/index.php').exists()
+          assert (root/'api/exchange-rates/index.php').exists()
+          assert (root/'api/_internal/.htaccess').exists()
+          assert not (root/'api/_internal/hostinger-config.php').exists()
+          PY
+
+      - name: Create safe temporary-domain .htaccess with noindex
+        run: |
+          cat > .output/public/.htaccess <<'EOF'
+          Options -Indexes
+          DirectoryIndex index.html
+          <IfModule mod_headers.c>
+            Header always set X-Robots-Tag "noindex, nofollow"
+            Header always set X-Content-Type-Options "nosniff"
+          </IfModule>
+          EOF
+
+      - name: Upload PHP-enabled static trial bundle
+        uses: actions/upload-artifact@v4
+        with:
+          name: hostinger-premium-php-bridge-trial
+          path: .output/public/
+          include-hidden-files: true
+          if-no-files-found: error
+          retention-days: 7
