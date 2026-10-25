@@ -17,7 +17,8 @@ export default defineConfig({
             autoSubfolderIndex: true,
             autoStaticPathsDiscovery: true,
             crawlLinks: true,
-            failOnError: false,
+            // Do not publish incomplete HTML when any route fails to render.
+            failOnError: true,
             concurrency: 5,
           },
         }
