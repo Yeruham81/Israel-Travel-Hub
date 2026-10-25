@@ -348,7 +348,7 @@ describe("migrated practical guides", () => {
     expect(shabbat.answer).toContain("Terminal 1");
     expect(shabbat.sourceIds).toContain("guide-weekend-711");
     expect(getSource("guide-weekend-711").url).toContain("tel-aviv.gov.il");
-    expect(shabbat.sections.find((section) => section.id === "weekend-711")!.paragraphs.join(" ")).toMatch(/not a frequent.*shuttle/);
+    expect(shabbat.sections.find((section) => section.id === "weekend-711")!.paragraphs.join(" ")).toMatch(/not timed to flights/);
     expect(shabbat.sections.find((section) => section.id === "restart")!.paragraphs.join(" ")).toContain("actual Saturday date");
     expect(JSON.stringify(shabbat)).not.toMatch(/guaranteed pickup|150–230|300–360|500–600/);
   });
@@ -372,7 +372,7 @@ describe("migrated practical guides", () => {
       travelGuidePaths.airportTaxis, "/transfers/", travelGuidePaths.taxiFares, travelGuidePaths.uber,
     ]);
     const costs = guide.sections.find((section) => section.id === "costs")!;
-    expect(costs.paragraphs.join(" ")).toMatch(/₪12.46/);
+    expect(costs.paragraphs.join(" ")).toMatch(/rounded 2026 estimates/);
     expect(costs.tables?.[0]?.headers).toEqual(["Destination", "Approx. taxi fare", "Typical driving time"]);
     expect(costs.tables?.[0]?.rows).toEqual([
       ["Tel Aviv", "₪180–230", "30–40 min"],
