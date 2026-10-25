@@ -6,6 +6,9 @@ on:
       - experiment/hostinger-premium-static
     paths:
       - ".github/workflows/hostinger-php-bridge-trial.yml"
+      - "hostinger-php/**"
+      - "scripts/hostinger/**"
+      - "src/routes/guides.tsx"
   workflow_dispatch:
 
 permissions:
@@ -63,6 +66,18 @@ jobs:
 
       - name: Run PHP quote and FX parity tests (no outbound requests)
         run: php scripts/hostinger/test-php-bridge.php
+
+      - name: Exercise actual PHP GET endpoints locally (disabled by default)
+        run: |
+          php -S 127.0.0.1:8765 -t .output/public > /tmp/ith-php-server.log 2>&1 &
+          server_pid=$!
+          trap 'kill "$server_pid" || true' EXIT
+          sleep 1
+          curl --fail --silent --show-error -D /tmp/api_headers http://127.0.0.1:8765/api/quote-request/ -o /tmp/api_body
+          grep -Eiq '^Content-Type: application/json' /tmp/api_headers
+          grep -Eiq '^Cache-Control: no-store' /tmp/api_headers
+          php -r '$j=json_decode(file_get_contents("/tmp/api_body"),true); if (($j["available"] ?? null)!==false) exit(1);'
+          echo "GET /api/quote-request/ correctly reports available:false with no configured key"
 
       - name: Verify every existing sitemap page remains in output
         run: |
