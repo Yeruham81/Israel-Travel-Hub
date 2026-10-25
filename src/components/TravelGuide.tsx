@@ -134,7 +134,7 @@ export function TravelGuidePage({ id }: { id: TravelGuideId }) {
       {isJerusalemCluster && <JerusalemClusterLinks pageKey={id as JerusalemClusterKey} />}
       <FaqList faqs={guide.faqs} />
       {isJerusalemDayJourney && <JerusalemJourneyResources id={id} />}
-      {id === "shabbat" ? <SourceList ids={sourcesFor(guide)} intro="Official route, airport and tariff references. Check departures, prices and pickup instructions for your own date before travelling." /> : <SourceList ids={sourcesFor(guide)} />}
+      {id === "shabbat" ? <SourceList ids={sourcesFor(guide)} intro="Airport and public-transport references, plus independent taxi fare calculations. Confirm timetables, charges and pickup instructions for your date." /> : <SourceList ids={sourcesFor(guide)} />}
       {!isJerusalemCluster && id !== "shabbat" && <RelatedLinks title="Related practical guides" currentPath={travelGuidePaths[id]} items={guide.related.map((guideId) => ({ label: travelGuides[guideId].title, to: travelGuidePaths[guideId] }))} />}
       {(id === "deadSea" || id === "israel" || id === "travelTips") &&
         <RelatedLinks title="Build a multi-day itinerary" items={[
