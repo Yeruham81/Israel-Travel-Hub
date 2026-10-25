@@ -179,7 +179,6 @@ export const planningGuides = {
       }
     ],
     "sourceIds": [
-      "m26-original-best-time-to-visit-israel",
       "m26-ims",
       "m26-hebcal",
       "guide-jerusalem-tourism"
@@ -391,7 +390,6 @@ export const planningGuides = {
       }
     ],
     "sourceIds": [
-      "m26-original-what-to-eat-in-israel",
       "guide-mahane-yehuda",
       "m26-tlv-city"
     ]
