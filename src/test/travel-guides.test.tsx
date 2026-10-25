@@ -369,9 +369,20 @@ describe("migrated practical guides", () => {
       expect(section.paragraphs.join(" ").split(link.text)).toHaveLength(2);
     }
     expect(guide.sections.find((section) => section.id === "taxis-transfers")!.inlineLinks?.map((link) => link.to)).toEqual([
-      travelGuidePaths.airportTaxis, "/transfers/", travelGuidePaths.taxiFares,
+      travelGuidePaths.airportTaxis, "/transfers/", travelGuidePaths.taxiFares, travelGuidePaths.uber,
     ]);
-    expect(guide.sections.find((section) => section.id === "costs")!.paragraphs.join(" ")).toMatch(/₪12.46/);
+    const costs = guide.sections.find((section) => section.id === "costs")!;
+    expect(costs.paragraphs.join(" ")).toMatch(/₪12.46/);
+    expect(costs.tables?.[0]?.headers).toHaveLength(3);
+    expect(costs.tables?.[0]?.rows).toEqual([
+      ["Tel Aviv", "174–204", "194–230"],
+      ["Jerusalem", "309–361", "346–406"],
+      ["Haifa", "665–735", "740–822"],
+    ]);
+    expect(costs.tables?.[0]?.note).toMatch(/booking fee.*airport departure surcharge.*not live prices/is);
+    expect(costs.sourceIds).toContain("guide-meter-route-estimates");
+    expect(guide.sections.find((section) => section.id === "taxis-transfers")!.paragraphs.join(" ")).toMatch(/do not need the Gett app/);
+    expect(JSON.stringify(guide)).not.toMatch(/I have not carried over|comparison below/);
   });
 
   it("renders contextual Shabbat article links inside the relevant paragraphs rather than only related cards", async () => {
@@ -388,6 +399,18 @@ describe("migrated practical guides", () => {
     }
     expect(container.querySelector("#weekend-711")?.textContent).toMatch(/free.*Terminal 1.*timetable/is);
     expect(container.querySelector("#taxis-transfers")?.textContent).toMatch(/regulated meter/is);
+    for (const [label, url] of [
+      ["Look up Shabbat times on MyZmanim", "https://www.myzmanim.com/"],
+      ["Israel Railways — official timetable", "https://rail.co.il/?lan=en"],
+      ["National Public Transport Authority — route planner", "https://route.bus.gov.il/?saveParams=true&tab=source-destination"],
+      ["Tel Aviv calculation", "https://taxitariff.co.il/ben-gurion-airport/tel-aviv-yafo"],
+      ["Jerusalem calculation", "https://taxitariff.co.il/ben-gurion-airport/jerusalem"],
+      ["Haifa calculation", "https://taxitariff.co.il/ben-gurion-airport/haifa"],
+    ]) {
+      const link = within(container).getByRole("link", { name: new RegExp(label) });
+      expect(link).toHaveAttribute("href", url);
+      expect(link).toHaveAttribute("rel", "noopener noreferrer");
+    }
   });
 
   it("distinguishes baptism sites, church clusters and region-specific Dead Sea planning without blanket operating claims", () => {
