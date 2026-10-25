@@ -72,14 +72,95 @@ describe("migrated practical guides", () => {
     expect(container.textContent).not.toMatch(/editorial team|Adapted from|Source checks and limitations below|Image from the original publisher/);
     expect(container.querySelector('a[href*="israel-taxi.com"]')).toBeNull();
     expect(container.querySelector("a a")).toBeNull();
-    const related = screen.getByRole("region", { name: "Related practical guides" });
+    const related = screen.getByRole("region", { name: id === "shabbat" ? "More airport travel guides" : "Related practical guides" });
     for (const link of within(related).getAllByRole("link")) {
       const href = link.getAttribute("href")!;
       expect(router.matchRoutes(href).at(-1)?.routeId).toBe(href.replace(/\/$/, ""));
       expect(link).not.toHaveAttribute("target");
     }
     const head = await route.options.head?.({} as never);
-    expect(head).toMatchObject({ meta: expect.arrayContaining([{ title: guide.title }, { name: "description", content: guide.description }, { name: "robots", content: "noindex,nofollow" }]), links: [{ rel: "canonical", href: expect.stringMatching(new RegExp(`${path}$`)) }] });
+    expect(head).toMatchObject({ meta: expect.arrayContaining([{ title: id === "shabbat" ? "Ben Gurion Airport on Shabbat: Bus 711, Taxis & Trains" : guide.title }, { name: "description", content: guide.description }, { name: "robots", content: "noindex,nofollow" }]), links: [{ rel: "canonical", href: expect.stringMatching(new RegExp(`${path}import { QueryClient } from "@tanstack/react-query";
+import { createMemoryHistory, createRouter, RouterContextProvider } from "@tanstack/react-router";
+import { act, cleanup, fireEvent, render, screen, waitFor, within } from "@testing-library/react";
+import { renderToString } from "react-dom/server";
+import { afterEach, describe, expect, it } from "vitest";
+import { routeTree } from "@/routeTree.gen";
+import { Route as HubRoute } from "@/routes/guides";
+import { Route as UberRoute } from "@/routes/travel-blog.uber-in-israel";
+import { Route as SherutRoute } from "@/routes/travel-blog.sherut-in-israel";
+import { Route as EsimRoute } from "@/routes/travel-blog.best-esim-for-israel";
+import { Route as ArrivalRoute } from "@/routes/travel-blog.ben-gurion-airport-arrival-tips";
+import { Route as IsraelRoute } from "@/routes/travel-blog.getting-around-israel";
+import { Route as TelAvivRoute } from "@/routes/travel-blog.getting-around-tel-aviv";
+import { Route as TaxiRoute } from "@/routes/travel-blog.taxis-in-israel";
+import { Route as TaxiFaresRoute } from "@/routes/travel-blog.taxi-fares-in-israel";
+import { Route as AirportTaxisRoute } from "@/routes/travel-blog.ben-gurion-airport-taxis";
+import { Route as ShabbatRoute } from "@/routes/travel-blog.from-ben-gurion-airport-on-shabbat";
+import { Route as TipsRoute } from "@/routes/travel-blog.israel-travel-tips";
+import { Route as JerusalemRoute } from "@/routes/travel-blog.jerusalem-travel-guide";
+import { Route as DeadSeaRoute } from "@/routes/travel-blog.jerusalem-to-the-dead-sea";
+import { Route as BaptismRoute } from "@/routes/travel-blog.baptism-in-the-jordan-river";
+import { Route as JerusalemDayTripsRoute } from "@/routes/travel-blog.day-trips-from-jerusalem";
+import { Route as ChurchesRoute } from "@/routes/travel-blog.churches-in-jerusalem";
+import { Route as ShoppingRoute } from "@/routes/travel-blog.shopping-in-jerusalem";
+import { Route as TelAvivDayTripsRoute } from "@/routes/travel-blog.day-trips-from-tel-aviv";
+import { filterGuides, guideDirectory, guideTopics, travelGuides } from "@/data/travelGuides";
+import { affiliateConfig, getSource, isPublisherUrl, linksForPage, mosheBarakAuthor, travelGuidePaths, TRAVEL_GUIDE_CHECK_DATE } from "@/data/registry";
+import { readOutboundClicks } from "@/lib/outbound";
+
+afterEach(() => { cleanup(); localStorage.clear(); });
+const cases = [{ id: "uber", route: UberRoute }, { id: "sherut", route: SherutRoute }, { id: "esim", route: EsimRoute }, { id: "arrival", route: ArrivalRoute }, { id: "israel", route: IsraelRoute }, { id: "telAviv", route: TelAvivRoute }, { id: "taxis", route: TaxiRoute },
+  { id: "shabbat", route: ShabbatRoute }, { id: "travelTips", route: TipsRoute }, { id: "jerusalem", route: JerusalemRoute }, { id: "jerusalemDeadSea", route: DeadSeaRoute }, { id: "baptism", route: BaptismRoute }, { id: "jerusalemDayTrips", route: JerusalemDayTripsRoute }, { id: "jerusalemChurches", route: ChurchesRoute }, { id: "jerusalemShopping", route: ShoppingRoute }, { id: "telAvivDayTrips", route: TelAvivDayTripsRoute },
+] as const;
+async function routerAt(path: string) {
+  const router = createRouter({ routeTree, context: { queryClient: new QueryClient() }, history: createMemoryHistory({ initialEntries: [path] }), trailingSlash: "always" });
+  await router.load();
+  return router;
+}
+
+describe("migrated practical guides", () => {
+  it.each(cases)("renders $id as a complete, sourced internal article with matching metadata", async ({ id, route }) => {
+    const guide = travelGuides[id];
+    const path = travelGuidePaths[id];
+    const router = await routerAt(path);
+    const Page = route.options.component!;
+    const { container } = render(<RouterContextProvider router={router}><Page /></RouterContextProvider>);
+    expect(router.matchRoutes(path).at(-1)?.routeId).toBe(path.replace(/\/$/, ""));
+    expect(screen.getAllByRole("heading", { level: 1 })).toHaveLength(1);
+    expect(screen.getByRole("heading", { level: 1 })).toHaveTextContent(guide.title);
+    expect(screen.getByRole("region", { name: "Quick answer" })).toHaveTextContent(guide.answer);
+    if (id === "jerusalemDeadSea") {
+      expect(screen.getByTestId("journey-option-cards").children).toHaveLength(4);
+      expect(screen.getByTestId("journey-stop-cards").children).toHaveLength(4);
+      expect(screen.queryByRole("table", { name: guide.comparison.caption })).not.toBeInTheDocument();
+    } else {
+      expect(screen.getByRole("table", { name: guide.comparison.caption })).toBeInTheDocument();
+    }
+    expect(screen.getByRole("region", { name: "Travel checklist" })).toHaveTextContent("Before you go");
+    for (const section of guide.sections) expect(screen.getByRole("heading", { name: section.title })).toBeInTheDocument();
+    for (const section of guide.sections) if ("photo" in section && section.photo) {
+      expect(within(container.querySelector(`#${section.id}`)! as HTMLElement).getByRole("img", { name: section.photo.alt })).toHaveAttribute("src", section.photo.src);
+      if (section.photo.sourceUrl && !isPublisherUrl(section.photo.sourceUrl)) expect(container.querySelector(`#${section.id} a[href="${section.photo.sourceUrl}"]`)).not.toBeNull();
+    }
+    for (const sourceId of guide.sourceIds) expect(getSource(sourceId)?.url).toMatch(/^https:\/\//);
+    expect(container.querySelector("time")).toHaveAttribute("datetime", guide.updatedAt || TRAVEL_GUIDE_CHECK_DATE);
+    expect(container.querySelector("time")).toHaveTextContent("October 2026");
+    const authorCard = screen.getByRole("complementary", { name: "About the author" });
+    expect(authorCard).toHaveTextContent("Written by Moshe Barak");
+    expect(authorCard).toHaveTextContent("Over 20 years");
+    expect(within(authorCard).getByRole("link", { name: /reviews on Tripadvisor/ })).toHaveAttribute("href", mosheBarakAuthor.reviewsUrl);
+    expect(authorCard.compareDocumentPosition(screen.getByRole("region", { name: "Quick answer" }))).toBe(Node.DOCUMENT_POSITION_FOLLOWING);
+    expect(container.textContent).not.toMatch(/editorial team|Adapted from|Source checks and limitations below|Image from the original publisher/);
+    expect(container.querySelector('a[href*="israel-taxi.com"]')).toBeNull();
+    expect(container.querySelector("a a")).toBeNull();
+    const related = screen.getByRole("region", { name: id === "shabbat" ? "More airport travel guides" : "Related practical guides" });
+    for (const link of within(related).getAllByRole("link")) {
+      const href = link.getAttribute("href")!;
+      expect(router.matchRoutes(href).at(-1)?.routeId).toBe(href.replace(/\/$/, ""));
+      expect(link).not.toHaveAttribute("target");
+    }
+    const head = await route.options.head?.({} as never);
+    )) }] });
     const structured = head!.scripts!.flatMap((script) => typeof script?.children === "string" ? [JSON.parse(script.children)] : []);
     const article = structured.find((item) => item["@type"] === "Article");
     expect(article).toMatchObject({ headline: guide.title, dateModified: guide.updatedAt || TRAVEL_GUIDE_CHECK_DATE, inLanguage: "en", author: { "@type": "Person", name: "Moshe Barak", sameAs: [mosheBarakAuthor.reviewsUrl] } });
