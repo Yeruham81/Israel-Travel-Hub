@@ -1,5 +1,5 @@
 import { Link } from "@tanstack/react-router";
-import type { ReactNode } from "react";
+import { Fragment, type ReactNode } from "react";
 import { Breadcrumbs, Checklist, FaqList, OnThisPage, ProviderCard, RelatedLinks, SourceList } from "@/components/Guide";
 import { guideTopics, travelGuides, type GuideDirectoryEntry, type GuidePhoto, type GuideTopicId, type GuideSection, type GuideTable, type TravelGuide } from "@/data/travelGuides";
 import { publicSources, isPublisherUrl, linksForPage, travelGuidePaths, TRAVEL_GUIDE_CHECK_DATE, type TravelGuideId } from "@/data/registry";
@@ -11,6 +11,7 @@ import { PageUpdated } from "@/components/PageUpdated";
 import { JerusalemJourneyOptions, JerusalemJourneyBooking, JerusalemJourneyResources } from "@/components/JerusalemJourneyPlanner";
 import { JerusalemClusterLinks, type JerusalemClusterKey } from "@/components/JerusalemClusterLinks";
 import { JerusalemPartnerOffers } from "@/components/JerusalemPartnerOffers";
+import { ShabbatBusLinks, ShabbatTerminalSteps, ShabbatQuoteForm } from "@/components/ShabbatGuideExtras";
 
 function sourcesFor(guide: TravelGuide) { return [...new Set([...guide.sourceIds, ...guide.sections.flatMap((section) => section.sourceIds || [])])]; }
 
@@ -18,7 +19,7 @@ export function travelGuideMeta(id: TravelGuideId) {
   const guide = travelGuides[id];
   const updatedAt = guide.updatedAt || TRAVEL_GUIDE_CHECK_DATE;
   const path = travelGuidePaths[id];
-  const meta = pageMeta({ title: guide.title, description: guide.description, path, type: "article", crumbs: [{ name: "Home", path: "/" }, { name: "Travel guides", path: "/guides/" }, { name: guide.title, path }], image: guide.photo.src, imageAlt: guide.photo.alt });
+  const meta = pageMeta({ title: id === "shabbat" ? "Ben Gurion Airport on Shabbat: Bus 711, Taxis & Trains" : guide.title, description: guide.description, path, type: "article", crumbs: [{ name: "Home", path: "/" }, { name: "Travel guides", path: "/guides/" }, { name: guide.title, path }], image: guide.photo.src, imageAlt: guide.photo.alt });
   const imageUrl = new URL(guide.photo.src, CANONICAL_ORIGIN).href;
   return { ...meta, scripts: [...meta.scripts, jsonLd(
     { "@context": "https://schema.org", "@type": "Article", "@id": `${CANONICAL_ORIGIN}${path}#article`, headline: guide.title, description: guide.description, mainEntityOfPage: `${CANONICAL_ORIGIN}${path}`, inLanguage: "en", dateModified: updatedAt,
@@ -120,12 +121,12 @@ export function TravelGuidePage({ id }: { id: TravelGuideId }) {
       {!isJerusalemDayJourney && <dl className="mt-5 grid gap-3 sm:grid-cols-3">{guide.facts.map((fact) => <div key={fact.label} className="rounded-xl border bg-card p-4"><dt className="text-xs font-semibold uppercase tracking-wide text-primary">{fact.label}</dt><dd className="mt-2 text-sm leading-relaxed">{fact.text}</dd></div>)}</dl>}
       <OnThisPage sections={isJerusalemDayJourney
         ? [["journey-options", "Compare transport"], ["journey-destinations", "Stops & destinations"], ...guide.sections.map((section) => [section.id, section.title] as const), ["journey-booking", "Tours & private trips"], ["checklist", "Checklist"], ["faq", "FAQ"], ["sources", "Sources"]]
-        : [["at-a-glance", "At a glance"], ...guide.sections.map((section) => [section.id, section.title] as const), ["checklist", "Checklist"], ["faq", "FAQ"], ["sources", "Sources"]]} />
+        : [["at-a-glance", "At a glance"], ...guide.sections.flatMap((section) => id === "shabbat" && section.id === "taxis-transfers" ? [[section.id, section.title] as const, ["request-quote", "Request transfer"] as const] : [[section.id, section.title] as const]), ["checklist", "Checklist"], ["faq", "FAQ"], ["sources", "Sources"]]} />
       {!isJerusalemDayJourney && <section id="at-a-glance" aria-labelledby="comparison-h" className="mt-10 scroll-mt-24">
         <h2 id="comparison-h" className="text-3xl">{guide.comparison.caption}</h2>
         <div className="mt-5 max-w-full overflow-x-auto rounded-xl border"><table className="w-full min-w-[560px] text-left text-sm"><caption className="sr-only">{guide.comparison.caption}</caption><thead className="bg-secondary"><tr>{guide.comparison.headers.map((heading) => <th key={heading} scope="col" className="p-4 font-semibold">{heading}</th>)}</tr></thead><tbody className="divide-y">{guide.comparison.rows.map((row, index) => <tr key={index} className="bg-card">{row.map((cell, cellIndex) => cellIndex === 0 ? <th key={cellIndex} scope="row" className="p-4 font-medium">{cell}</th> : <td key={cellIndex} className="p-4 leading-relaxed text-muted-foreground">{cell}</td>)}</tr>)}</tbody></table></div>
       </section>}
-      {guide.sections.map((section) => <section key={section.id} id={section.id} aria-labelledby={`${section.id}-h`} className="mt-12 scroll-mt-24"><h2 id={`${section.id}-h`} className="text-3xl">{section.title}</h2>{section.photo && <figure className="mt-5 max-w-3xl"><img src={section.photo.src} alt={section.photo.alt} width={755} height={503} loading="lazy" decoding="async" className="aspect-[3/2] max-h-96 w-full rounded-xl object-cover" /><GuidePhotoCredit photo={section.photo} /></figure>}<div className="mt-4 max-w-4xl space-y-4 leading-relaxed text-muted-foreground">{section.paragraphs.map((paragraph) => <p key={paragraph}><GuideParagraph paragraph={paragraph} inlineLinks={section.inlineLinks} /></p>)}</div>{section.tables?.map((table) => <GuideDataTable key={table.caption} table={table} />)}{section.bullets && <ul className="mt-4 list-disc space-y-2 pl-5 leading-relaxed">{section.bullets.map((bullet) => <li key={bullet}>{bullet}</li>)}</ul>}{section.links && <ul className="mt-4 flex flex-wrap gap-x-5 gap-y-2 text-sm">{section.links.map((link) => <li key={link.to}><Link to={link.to} className="font-medium text-primary underline underline-offset-4">{link.label}</Link></li>)}</ul>}<SectionReferences ids={section.sourceIds || []} /></section>)}
+      {guide.sections.map((section) => <Fragment key={section.id}><section id={section.id} aria-labelledby={`${section.id}-h`} className="mt-12 scroll-mt-24"><h2 id={`${section.id}-h`} className="text-3xl">{section.title}</h2>{section.photo && <figure className="mt-5 max-w-3xl"><img src={section.photo.src} alt={section.photo.alt} width={755} height={503} loading="lazy" decoding="async" className="aspect-[3/2] max-h-96 w-full rounded-xl object-cover" /><GuidePhotoCredit photo={section.photo} /></figure>}<div className="mt-4 max-w-4xl space-y-4 leading-relaxed text-muted-foreground">{section.paragraphs.map((paragraph) => <p key={paragraph}><GuideParagraph paragraph={paragraph} inlineLinks={section.inlineLinks} /></p>)}</div>{section.tables?.map((table) => <GuideDataTable key={table.caption} table={table} />)}{section.bullets && <ul className="mt-4 list-disc space-y-2 pl-5 leading-relaxed">{section.bullets.map((bullet) => <li key={bullet}>{bullet}</li>)}</ul>}{section.links && <ul className="mt-4 flex flex-wrap gap-x-5 gap-y-2 text-sm">{section.links.map((link) => <li key={link.to}><Link to={link.to} className="font-medium text-primary underline underline-offset-4">{link.label}</Link></li>)}</ul>}<SectionReferences ids={section.sourceIds || []} /></section>{id === "shabbat" && section.id === "weekend-711" && <ShabbatBusLinks />}{id === "shabbat" && section.id === "terminal-transfer" && <ShabbatTerminalSteps />}{id === "shabbat" && section.id === "taxis-transfers" && <ShabbatQuoteForm />}</Fragment>)}
       {isJerusalemDayJourney && <JerusalemJourneyBooking id={id} />}
       <section id="checklist" aria-label="Travel checklist" className="mt-12 scroll-mt-24"><Checklist title="Before you go" items={guide.checklist} /></section>
       {providers.length > 0 && <section id="provider-options" aria-labelledby="providers-h" className="mt-14"><h2 id="providers-h" className="text-3xl">Compare current eSIM plans</h2><p className="mt-3 leading-relaxed text-muted-foreground">These options are based on published product information, not an on-location speed test or a cheapest-price ranking. Links marked “Sponsored link” may earn me a commission at no extra cost to you. Select Israel and verify the exact package before paying.</p><ul className="mt-5 grid gap-4 md:grid-cols-2">{providers.map((link) => <ProviderCard key={link.id} link={link} pageId={guide.providerPageId!} />)}</ul></section>}
@@ -133,8 +134,8 @@ export function TravelGuidePage({ id }: { id: TravelGuideId }) {
       {isJerusalemCluster && <JerusalemClusterLinks pageKey={id as JerusalemClusterKey} />}
       <FaqList faqs={guide.faqs} />
       {isJerusalemDayJourney && <JerusalemJourneyResources id={id} />}
-      <SourceList ids={sourcesFor(guide)} />
-      {!isJerusalemCluster && <RelatedLinks title="Related practical guides" currentPath={travelGuidePaths[id]} items={guide.related.map((guideId) => ({ label: travelGuides[guideId].title, to: travelGuidePaths[guideId] }))} />}
+      <SourceList ids={sourcesFor(guide)} intro={id === "shabbat" ? "Official route, airport and tariff references. Check departures, prices and pickup instructions for your own date before travelling." : undefined} />
+      {!isJerusalemCluster && id !== "shabbat" && <RelatedLinks title="Related practical guides" currentPath={travelGuidePaths[id]} items={guide.related.map((guideId) => ({ label: travelGuides[guideId].title, to: travelGuidePaths[guideId] }))} />}
       {(id === "deadSea" || id === "israel" || id === "travelTips") &&
         <RelatedLinks title="Build a multi-day itinerary" items={[
           { label: "A practical 3-day route", to: "/travel-blog/israel-itinerary-3-days/" },
@@ -142,9 +143,17 @@ export function TravelGuidePage({ id }: { id: TravelGuideId }) {
           { label: "A 7-day trip with the Galilee", to: "/travel-blog/israel-itinerary-7-days/" },
           { label: "An extended 10-day trip", to: "/travel-blog/israel-itinerary-10-days/" },
         ]} />}
-      {!isJerusalemCluster && <RelatedLinks title="Plan the next part of your trip" items={guide.services} />}
+      {!isJerusalemCluster && id !== "shabbat" && <RelatedLinks title="Plan the next part of your trip" items={guide.services} />}
+      {id === "shabbat" && <RelatedLinks title="More airport travel guides" currentPath={travelGuidePaths.shabbat} items={[
+        { label: "Ben Gurion Airport to Tel Aviv", to: "/travel-blog/how-to-get-from-ben-gurion-airport-to-tel-aviv/" },
+        { label: "Ben Gurion Airport to Jerusalem", to: "/travel-blog/how-to-get-from-ben-gurion-airport-to-jerusalem/" },
+        { label: "Ben Gurion Airport to Haifa", to: "/travel-blog/how-to-get-from-ben-gurion-airport-to-haifa/" },
+        { label: "Ben Gurion Airport to Ein Bokek", to: "/travel-blog/how-to-get-from-ben-gurion-airport-to-ein-bokek/" },
+        { label: "Official airport taxi pickup", to: travelGuidePaths.airportTaxis },
+        { label: "Ben Gurion Airport arrival tips", to: travelGuidePaths.arrival },
+      ]} />}
       {guide.reading && <section aria-labelledby="reading-h" className="mt-12"><h2 id="reading-h" className="text-2xl">More on this topic</h2><ul className="mt-4 space-y-3">{guide.reading.map((reading) => <li key={reading.href} className="rounded-xl border p-4"><a href={reading.href} target="_blank" rel="noopener noreferrer" className="font-medium text-primary underline">{reading.label}<span className="sr-only"> (opens in a new tab)</span></a><p className="mt-1 text-sm text-muted-foreground">{reading.note}</p></li>)}</ul></section>}
-      <div className="mt-12 rounded-2xl bg-navy p-6 text-navy-foreground"><h2 className="text-2xl">Explore more Israel travel guides</h2><p className="mt-2 opacity-85">Find practical advice by topic, from airport arrivals to places to stay and days out.</p><Link to="/guides/" className="btn btn-light mt-4">Browse all guides</Link></div>
+      {id !== "shabbat" && <div className="mt-12 rounded-2xl bg-navy p-6 text-navy-foreground"><h2 className="text-2xl">Explore more Israel travel guides</h2><p className="mt-2 opacity-85">Find practical advice by topic, from airport arrivals to places to stay and days out.</p><Link to="/guides/" className="btn btn-light mt-4">Browse all guides</Link></div>}
     </article>
   </main>;
 }
