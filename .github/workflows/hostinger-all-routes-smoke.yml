@@ -1,0 +1,60 @@
+name: Verify all 114 Hostinger trial routes (READ ONLY)
+
+on:
+  push:
+    branches:
+      - experiment/hostinger-premium-static
+    paths:
+      - ".github/workflows/hostinger-all-routes-smoke.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Check every published HTML URL without loading pages or forms
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          from urllib.request import Request, urlopen
+          from urllib.error import HTTPError, URLError
+          from urllib.parse import urlparse
+          from xml.etree import ElementTree as ET
+          from concurrent.futures import ThreadPoolExecutor
+          from collections import Counter
+
+          host="https://saddlebrown-guanaco-454061.hostingersite.com"
+          xml=ET.parse("public/sitemap.xml")
+          paths=[urlparse(e.text).path for e in xml.findall(".//{*}loc") if e.text]
+          assert len(paths)==len(set(paths)), "Duplicate paths in sitemap"
+          def test(path):
+              try:
+                  req=Request(host+path,method="HEAD",headers={"User-Agent":"IsraelTravelHub-Static-Audit/1.0"})
+                  with urlopen(req,timeout=18) as res:
+                      return path,res.status,res.headers.get("Content-Type",""),res.headers.get("X-Robots-Tag","")
+              except HTTPError as e:
+                  return path,e.code,e.headers.get("Content-Type",""),e.headers.get("X-Robots-Tag","")
+              except Exception as e:
+                  return path,0,str(e),""
+
+          # Four read-only HEAD requests at a time avoids high traffic or form writes.
+          with ThreadPoolExecutor(max_workers=4) as pool:
+              results=list(pool.map(test,paths))
+          statuses=Counter(x[1] for x in results)
+          failures=[x for x in results if x[1]!=200]
+          noindex_missing=[x[0] for x in results if x[1]==200 and "noindex" not in x[3].lower()]
+          print(f"Published route HEAD coverage: {len(paths)-len(failures)}/{len(paths)}")
+          print("HTTP status distribution:",dict(statuses))
+          print("Failures (first 30):",failures[:30])
+          print("noindex header missing (first 30):",noindex_missing[:30])
+          if failures or noindex_missing:
+              raise SystemExit("External static route verification failed")
+          print("All published routes return HTTP 200 and remain noindex for trial.")
+          PY
