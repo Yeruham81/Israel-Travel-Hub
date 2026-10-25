@@ -159,7 +159,6 @@ export const heritageGuides = {
       }
     ],
     "sourceIds": [
-      "m26-original-tel-megiddo",
       "m26-megiddo",
       "m26-unesco-tels"
     ]
@@ -307,7 +306,6 @@ export const heritageGuides = {
       }
     ],
     "sourceIds": [
-      "m26-original-mount-precipice",
       "m26-annunciation",
       "m26-ims"
     ]
@@ -475,7 +473,6 @@ export const heritageGuides = {
       }
     ],
     "sourceIds": [
-      "m26-original-basilica-of-the-annunciation",
       "m26-annunciation",
       "m26-cicts"
     ]
@@ -633,7 +630,6 @@ export const heritageGuides = {
       }
     ],
     "sourceIds": [
-      "m26-original-magdala",
       "m26-magdala",
       "m26-magdala-duc"
     ]
@@ -790,7 +786,6 @@ export const heritageGuides = {
       }
     ],
     "sourceIds": [
-      "m26-original-yardenit",
       "m26-yardenit-qa",
       "guide-yardenit",
       "guide-yardenit-about"
@@ -943,7 +938,6 @@ export const heritageGuides = {
       }
     ],
     "sourceIds": [
-      "m26-original-qasr-el-yahud",
       "guide-qasr",
       "m26-qasr",
       "m26-unesco-baptism"
