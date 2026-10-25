@@ -373,16 +373,33 @@ describe("migrated practical guides", () => {
     ]);
     const costs = guide.sections.find((section) => section.id === "costs")!;
     expect(costs.paragraphs.join(" ")).toMatch(/₪12.46/);
-    expect(costs.tables?.[0]?.headers).toHaveLength(3);
+    expect(costs.tables?.[0]?.headers).toEqual(["Destination", "Approx. taxi fare", "Typical driving time"]);
     expect(costs.tables?.[0]?.rows).toEqual([
-      ["Tel Aviv", "174–204", "194–230"],
-      ["Jerusalem", "309–361", "346–406"],
-      ["Haifa", "665–735", "740–822"],
+      ["Tel Aviv", "₪180–230", "30–40 min"],
+      ["Jerusalem", "₪310–410", "45–65 min"],
+      ["Haifa", "₪670–830", "75–105 min"],
     ]);
-    expect(costs.tables?.[0]?.note).toMatch(/booking fee.*airport departure surcharge.*not live prices/is);
+    expect(costs.tables?.[0]?.note).toMatch(/time and day.*traffic.*actual route.*additional charges/is);
+    expect(costs.paragraphs.join(" ")).not.toMatch(/Tariff [ABC]|16:01|21:01/);
+    expect(guide.sections.find((section) => section.id === "weekend-711")!.paragraphs.join(" ")).toMatch(/Friday 17:30 to 01:30.*Saturday 10:30 to 16:30.*every two hours/is);
+    expect(guide.sections.find((section) => section.id === "weekend-711")!.sourceIds).toContain("guide-711-hours");
+    expect(guide.sections.find((section) => section.id === "shabbat-hours")!.paragraphs.join(" ")).toMatch(/Yom Kippur is a special exception/);
+    expect(guide.sections.find((section) => section.id === "destinations")!.paragraphs.join(" ")).toMatch(/no regular walk-up airport sherut service/);
+    expect(guide.sections.find((section) => section.id === "taxis-transfers")!.paragraphs.join(" ")).toMatch(/at least two hours before pickup/);
+    expect(guide.sections.find((section) => section.id === "taxis-transfers")!.paragraphs.join(" ")).toMatch(/Ordinary Uber rides are not available/);
     expect(costs.sourceIds).toContain("guide-meter-route-estimates");
     expect(guide.sections.find((section) => section.id === "taxis-transfers")!.paragraphs.join(" ")).toMatch(/do not need the Gett app/);
     expect(JSON.stringify(guide)).not.toMatch(/I have not carried over|comparison below/);
+  });
+
+  it("never cites or points to legacy travel guides from new guide content", () => {
+    for (const guide of Object.values(travelGuides)) {
+      const ids = [...guide.sourceIds, ...guide.sections.flatMap((section) => section.sourceIds || [])];
+      expect(ids.some((id) => /^(?:guide-original-|m26-original-)/.test(id)), guide.id).toBe(false);
+      const prose = [guide.intro, guide.answer, ...guide.sections.flatMap((section) => section.paragraphs)].join(" ");
+      expect(prose, guide.id).not.toMatch(/\b(?:the original guide|the previous guide|our old guide)\b/i);
+      expect(guide.sections.flatMap((section) => section.inlineLinks || []).every((link) => !String(link.to).includes("israel-taxi.com")), guide.id).toBe(true);
+    }
   });
 
   it("renders contextual Shabbat article links inside the relevant paragraphs rather than only related cards", async () => {
