@@ -1,0 +1,77 @@
+name: Hostinger Premium PHP APIs (TEST, NO DEPLOYMENT)
+
+on:
+  push:
+    branches: [experiment/hostinger-premium-static]
+    paths:
+      - ".github/workflows/hostinger-php-trial.yml"
+      - "hostinger-php/**"
+      - "scripts/hostinger/php-parity-test.php"
+      - "scripts/hostinger/generate-php-options.ts"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  php-api:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - name: Checkout isolated experiment
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Set up PHP 8.3 with curl and mbstring
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: "8.3"
+          extensions: curl, mbstring, json, openssl
+          coverage: none
+      - name: Install Bun for build-time registry only
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: "1.4.4"
+      - name: Install locked dependencies
+        run: bun install --frozen-lockfile
+      - name: Generate server-only PHP allowed form values
+        run: |
+          bun scripts/hostinger/generate-php-options.ts
+          cp .output/hostinger-build-meta/options.json hostinger-php/form-options.json
+      - name: Lint PHP and exercise validation, mock mail and FX
+        run: |
+          php -v
+          php -m | grep -Ei '^(curl|json|mbstring|openssl)$'
+          find hostinger-php -type f -name '*.php' -print0 | xargs -0 -n1 php -l
+          php scripts/hostinger/php-parity-test.php
+      - name: Assemble only public-facing PHP endpoints plus Apache-protected internal code
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          from shutil import copyfile
+          root=Path(".output/hostinger-php/public_html/api")
+          internal=root/"_internal"
+          quote=root/"quote-request"
+          currency=root/"exchange-rates"
+          for directory in [internal,quote,currency]:directory.mkdir(parents=True,exist_ok=True)
+          for name in ["shared.php","quote.php","fx.php","form-options.json"]:
+              copyfile(Path("hostinger-php")/name,internal/name)
+          copyfile("hostinger-php/internal.htaccess",internal/".htaccess")
+          for where,entry in [(quote,"quote-entry.php"),(currency,"fx-entry.php")]:
+              copyfile(Path("hostinger-php")/entry,where/"index.php")
+              copyfile("hostinger-php/endpoint.htaccess",where/".htaccess")
+          files=sorted(p.relative_to(root.parent.parent).as_posix() for p in root.rglob("*") if p.is_file())
+          print("Files included under public_html:",files)
+          assert len(files)==9,files
+          assert not list(root.rglob("*config*")), "Configuration must not ship to public_html"
+          assert (internal/".htaccess").read_text().find("Require all denied")>=0
+          assert (quote/"index.php").exists() and (currency/"index.php").exists()
+          PY
+      - name: Upload PHP-only patch for existing Hostinger trial website
+        uses: actions/upload-artifact@v4
+        with:
+          name: hostinger-premium-php-api-trial
+          path: .output/hostinger-php/public_html/
+          include-hidden-files: true
+          if-no-files-found: error
+          retention-days: 7
