@@ -399,14 +399,14 @@ describe("migrated practical guides", () => {
     }
     expect(container.querySelector("#weekend-711")?.textContent).toMatch(/free.*Terminal 1.*timetable/is);
     expect(container.querySelector("#taxis-transfers")?.textContent).toMatch(/regulated meter/is);
-    for (const [label, url] of [
+    for (const [label, url] of ([
       ["Look up Shabbat times on MyZmanim", "https://www.myzmanim.com/"],
       ["Israel Railways — official timetable", "https://rail.co.il/?lan=en"],
       ["National Public Transport Authority — route planner", "https://route.bus.gov.il/?saveParams=true&tab=source-destination"],
       ["Tel Aviv calculation", "https://taxitariff.co.il/ben-gurion-airport/tel-aviv-yafo"],
       ["Jerusalem calculation", "https://taxitariff.co.il/ben-gurion-airport/jerusalem"],
       ["Haifa calculation", "https://taxitariff.co.il/ben-gurion-airport/haifa"],
-    ]) {
+    ] as const)) {
       const link = within(container).getByRole("link", { name: new RegExp(label) });
       expect(link).toHaveAttribute("href", url);
       expect(link).toHaveAttribute("rel", "noopener noreferrer");
