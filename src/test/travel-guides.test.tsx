@@ -356,20 +356,22 @@ describe("migrated practical guides", () => {
   it("covers distinct Shabbat airport search intents with cited facts and topic-specific images", () => {
     const guide = travelGuides.shabbat;
     expect(guide.sections.map((section) => section.id)).toEqual([
-      "shabbat-hours", "weekend-711", "terminal-transfer", "taxis-transfers",
-      "destinations", "luggage-accessibility", "rental-car", "restart", "to-the-airport",
+      "shabbat-hours", "arrival-time", "weekend-711", "terminal-transfer",
+      "taxis-transfers", "costs", "rental-car", "destinations", "restart", "practical",
     ]);
-    expect(guide.sections.filter((section) => section.photo)).toHaveLength(2);
-    expect(guide.faqs.length).toBeGreaterThanOrEqual(12);
-    expect(guide.sections.find((section) => section.id === "terminal-transfer")!.paragraphs.join(" ")).toMatch(/Level G near Gate 01.*opposite Gate 4.*15-minute frequency/s);
+    expect(guide.sections.filter((section) => section.photo)).toHaveLength(1);
+    expect(guide.faqs.length).toBe(8);
+    expect(guide.sections.find((section) => section.id === "arrival-time")!.tables?.[0]?.rows).toHaveLength(4);
+    expect(guide.sections.find((section) => section.id === "terminal-transfer")!.paragraphs.join(" ")).toMatch(/Level G near Gate 01.*15-minute frequency/s);
     expect(guide.sections.find((section) => section.id === "taxis-transfers")!.paragraphs.join(" ")).toMatch(/24 hours a day.*Exit 03.*Exit 23/s);
     expect(guide.sections.find((section) => section.id === "destinations")!.tables?.[0]?.rows).toHaveLength(5);
     for (const section of guide.sections) for (const link of section.inlineLinks || []) {
       expect(section.paragraphs.join(" ").split(link.text)).toHaveLength(2);
     }
     expect(guide.sections.find((section) => section.id === "taxis-transfers")!.inlineLinks?.map((link) => link.to)).toEqual([
-      travelGuidePaths.airportTaxis, travelGuidePaths.taxiFares, "/transfers/",
+      travelGuidePaths.airportTaxis, "/transfers/", travelGuidePaths.taxiFares,
     ]);
+    expect(guide.sections.find((section) => section.id === "costs")!.paragraphs.join(" ")).toMatch(/₪12.46/);
   });
 
   it("renders contextual Shabbat article links inside the relevant paragraphs rather than only related cards", async () => {
