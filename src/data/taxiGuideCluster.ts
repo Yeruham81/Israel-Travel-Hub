@@ -174,7 +174,7 @@ export const taxiGuideCluster: Record<"taxis" | "taxiFares" | "airportTaxis", Tr
       { q: "What if I lose something in a taxi?", a: "Contact the taxi app or dispatcher with the receipt, ride code, vehicle number, date and time. Keep a record of the journey for follow-up." },
       { q: "Are ordinary airport taxis the same as private airport transfers?", a: "No. The authorized airport taxi follows Gett's booking process and the regulated meter. Private transfers follow a separately agreed vehicle, pickup and booking confirmation." },
     ],
-    sourceIds: ["guide-original-taxis", "guide-gett", "guide-iaa", "taxi-fares-2026", "taxi-passenger-rights", "taxi-complaints"],
+    sourceIds: ["guide-gett", "guide-iaa", "taxi-fares-2026", "taxi-passenger-rights", "taxi-complaints"],
     related: ["taxiFares", "airportTaxis", "uber", "sherut", "shabbat", "israel"],
     services: [{ label: "Airport transfers and vehicle requests", to: "/transfers/" }, { label: "Private driver for a planned itinerary", to: "/private-driver/" }],
   },
