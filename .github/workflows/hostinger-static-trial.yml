@@ -85,13 +85,29 @@ jobs:
               raise SystemExit(f"Prerender incomplete: {len(missing)} routes missing; keep existing live site untouched.")
           PY
 
-      - name: Upload export bundle for a temporary Hostinger test website
+      - name: Add temporary-site protections (experiment only)
+        if: success()
+        shell: bash
+        run: |
+          cat > .output/public/.htaccess <<'EOF'
+          Options -Indexes
+          DirectoryIndex index.html
+          <IfModule mod_headers.c>
+            Header always set X-Robots-Tag "noindex, nofollow"
+            Header always set X-Content-Type-Options "nosniff"
+          </IfModule>
+          EOF
+          # This static experiment is not the final production build.
+          # Keep it out of indexes, and do not expose the quote form API.
+          test -f .output/public/index.html
+          test -f .output/public/travel-blog/masada/index.html
+
+      - name: Upload public_html-ready output (no source code or server secrets)
         if: success()
         uses: actions/upload-artifact@v4
         with:
           name: hostinger-premium-static-trial
-          path: |
-            .output/public/
-            hostinger-static-audit.txt
+          path: .output/public/
+          include-hidden-files: true
           if-no-files-found: error
           retention-days: 7
