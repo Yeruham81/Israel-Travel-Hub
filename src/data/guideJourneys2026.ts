@@ -182,7 +182,6 @@ export const journeyDestinationGuides = {
       }
     ],
     "sourceIds": [
-      "m26-original-the-dead-sea",
       "m26-ein-bokek",
       "m26-deadsea-beaches",
       "inpa-masada",
@@ -412,7 +411,6 @@ export const journeyDestinationGuides = {
       }
     ],
     "sourceIds": [
-      "m26-original-jerusalem-to-bethlehem",
       "m26-south-buses",
       "m26-bethlehem-entry",
       "m26-cicts",
@@ -436,7 +434,7 @@ export const journeyDestinationGuides = {
     "updatedAt": "2026-10-20",
     "title": "Top 10 things to do in Israel: build a trip around experiences",
     "description": "Choose ten Israel experiences: beaches, Jerusalem, food, Tel Aviv evenings, Masada, the Dead Sea, Haifa, Galilee, Eilat and the Ramon Crater night sky.",
-    "intro": "A memorable trip is more than a list of sights. These ten experiences preserve the range of the original guide while helping you choose a realistic mix of cities, coast, sacred places and desert. You do not need to do all ten on one trip: start with the experiences that matter most and let geography shape the route.",
+    "intro": "A memorable trip is more than a list of sights. These ten experiences offer a realistic mix of cities, coast, sacred places and desert. You do not need to do all ten on one trip: start with the experiences that matter most and let geography shape the route.",
     "answer": "For a first visit, choose a manageable combination of Jerusalem, the coast and one regional excursion, then add Galilee, Eilat or the Negev if your time allows. Group nearby experiences and give each a clear purpose. Transport, admission and seasonal conditions matter more than completing a ranking.",
     "topics": [
       "attractions",
@@ -705,7 +703,6 @@ export const journeyDestinationGuides = {
       }
     ],
     "sourceIds": [
-      "m26-original-top-10-things-to-do-in-israel",
       "m26-tlv-beaches",
       "guide-jerusalem-tourism",
       "inpa-masada",
@@ -982,7 +979,6 @@ export const journeyDestinationGuides = {
       }
     ],
     "sourceIds": [
-      "m26-original-jerusalem-to-the-dead-sea",
       "m26-egged",
       "m26-ein-bokek",
       "guide-ein-gedi",
