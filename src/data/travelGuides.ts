@@ -904,7 +904,17 @@ export const guideDirectory: GuideDirectoryEntry[] = [
 ];
 
 export function isGuideTopic(value: unknown): value is GuideTopicId { return typeof value === "string" && guideTopics.some((topic) => topic.id === value); }
-export function filterGuides(query: string, topic?: GuideTopicId) {
+
+/** Unknown URL parameters must not crash server-side prerendering. */
+export function getGuideTopicLabel(value: unknown): string | undefined {
+  return guideTopics.find((item) => item.id === value)?.label;
+}
+
+export function filterGuides(query: string, topic?: unknown) {
+  const activeTopic = isGuideTopic(topic) ? topic : undefined;
   const terms = query.trim().toLocaleLowerCase("en").split(/\s+/).filter(Boolean);
-  return guideDirectory.filter((guide) => (!topic || guide.topics.includes(topic)) && terms.every((term) => `${guide.title} ${guide.description} ${guide.topics.map((id) => guideTopics.find((item) => item.id === id)!.label).join(" ")}`.toLocaleLowerCase("en").includes(term)));
+  return guideDirectory.filter((guide) =>
+    (!activeTopic || guide.topics.includes(activeTopic)) &&
+    terms.every((term) => `${guide.title} ${guide.description} ${guide.topics.map((id) => getGuideTopicLabel(id) ?? "").join(" ")}`.toLocaleLowerCase("en").includes(term))
+  );
 }

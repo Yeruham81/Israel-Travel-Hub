@@ -62,3 +62,14 @@ jobs:
 
       - name: Run all tests
         run: bun run test
+
+      # Match the same static build that will be published to Premium hosting.
+      # Running only the ordinary SSR build can miss prerender-specific failures.
+      - name: Validate Hostinger prerender before any deployment is eligible
+        env:
+          HOSTINGER_STATIC_BUILD: "true"
+          VITE_CANONICAL_ORIGIN: ${{ vars.HOSTINGER_CANONICAL_ORIGIN || 'https://saddlebrown-guanaco-454061.hostingersite.com' }}
+          VITE_INDEXABLE: ${{ vars.HOSTINGER_INDEXABLE || 'false' }}
+        run: |
+          bash scripts/build-validated-static.sh
+          node scripts/verify-hostinger-static-export.mjs

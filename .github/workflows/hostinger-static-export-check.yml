@@ -32,7 +32,7 @@ jobs:
       - name: Install locked project dependencies
         run: bash scripts/install-ci-dependencies.sh
       - name: Build all static site pages
-        run: bun run build
+        run: bash scripts/build-validated-static.sh
       - name: Verify sitemap coverage, canonical links and trial noindex
         run: node scripts/verify-hostinger-static-export.mjs
       - name: Verify deployment is non-destructive
