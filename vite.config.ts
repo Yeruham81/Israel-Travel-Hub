@@ -17,6 +17,9 @@ export default defineConfig({
             autoSubfolderIndex: true,
             autoStaticPathsDiscovery: true,
             crawlLinks: true,
+            // The interactive /maps/*.html assets are served as files, not router pages.
+            // A crawler can misinterpret their iframe query strings as broken routes.
+            filter: ({ path }) => !path.startsWith("/maps/") && !path.startsWith("/api/"),
             // Do not publish incomplete HTML when any route fails to render.
             failOnError: true,
             concurrency: 5,
