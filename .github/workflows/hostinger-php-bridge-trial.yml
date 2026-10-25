@@ -33,9 +33,6 @@ jobs:
       - name: Install dependencies
         run: bun install --frozen-lockfile
 
-      - name: Generate PHP form option snapshot from the existing registry
-        run: bun scripts/hostinger/generate-php-options.ts
-
       - name: Set up temporary prerendering
         run: |
           python3 - <<'PY'
@@ -50,6 +47,9 @@ jobs:
 
       - name: Produce static HTML and assets
         run: bun run build
+
+      - name: Generate PHP form option snapshot from the existing registry
+        run: bun scripts/hostinger/generate-php-options.ts
 
       - name: Package safe PHP endpoint files next to the site
         run: bash scripts/hostinger/package-php-trial.sh
