@@ -1739,7 +1739,7 @@ export const offers: Offer[] = [
 
 export const getSource = (id: string) => sources.find((s) => s.id === id)!;
 
-export const publicSources = (ids: string[]) => [...new Set(ids)].map(getSource).filter((source) => !isPublisherUrl(source.url));
+export const publicSources = (ids: string[]) => [...new Set(ids)].map(getSource).filter((source): source is SourceReference => Boolean(source) && !isPublisherUrl(source.url));
 
 export function formatCheckDate(d: ISODate) {
   return new Date(d + "T12:00:00Z").toLocaleDateString("en-GB", {
