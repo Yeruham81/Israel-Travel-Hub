@@ -93,7 +93,6 @@ export const expandedTravelGuides = {
           "From Terminal 3 arrivals, go to Level G near Gate 01 for the airport's free shuttle to Terminal 1. The Israel Airports Authority publishes an approximately 15-minute frequency, 24 hours a day, including Shabbat. At Terminal 1, the shuttle stop for the return journey is opposite Gate 4; follow airport signs to the separate Line 711 stop.",
           "Leave time to exit arrivals, find the shuttle, travel between terminals and reach bus stop 34609. The internal shuttle runs within the airport; Line 711 is the separate city-bound service. If your scheduled 711 departure is too close to your landing, have a fallback.",
         ],
-        photo: airportTransferPhotos["other"]!,
         sourceIds: ["guide-iaa", "guide-weekend-711"],
       },
       {
