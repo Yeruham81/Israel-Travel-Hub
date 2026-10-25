@@ -164,7 +164,6 @@ export const cityCultureGuides = {
       }
     ],
     "sourceIds": [
-      "m26-original-eilat",
       "m26-coral",
       "m26-observatory",
       "m26-dolphin",
@@ -322,7 +321,7 @@ export const cityCultureGuides = {
         "id": "beyond-city",
         "title": "Beaches beyond Tel Aviv need their own plan",
         "paragraphs": [
-          "Gaash, Palmachim, Dor/Tantura, Sidna Ali near Herzliya and Caesarea are separate coastal outings mentioned in the original guide. They are not additional stops on the central Tel Aviv promenade. Check the particular managing authority, parking, supervised beach and return transport.",
+          "Gaash, Palmachim, Dor/Tantura, Sidna Ali near Herzliya and Caesarea are separate coastal outings beyond the central Tel Aviv beachfront. They are not additional stops on the central Tel Aviv promenade. Check the particular managing authority, parking, supervised beach and return transport.",
           "Choose one based on the experience you want, rather than a promise that leaving the city guarantees a quieter or better beach. For a sightseeing combination, the Caesarea archaeological park and nearby beach access have separate visitor arrangements."
         ],
         "links": [
@@ -375,7 +374,6 @@ export const cityCultureGuides = {
       }
     ],
     "sourceIds": [
-      "m26-original-beaches-in-tel-aviv",
       "m26-tlv-beaches",
       "m26-tlv-beach-status",
       "m26-tlv-city"
@@ -591,7 +589,6 @@ export const cityCultureGuides = {
       }
     ],
     "sourceIds": [
-      "m26-original-museums-in-tel-aviv",
       "m26-tamuseum",
       "m26-muza",
       "m26-anu",
@@ -703,7 +700,7 @@ export const cityCultureGuides = {
         "title": "Railways and specialist collections",
         "paragraphs": [
           "The Israel Railway Museum is a separate railway-history venue with its own visitor arrangements. Check Israel Railways’ current museum information; passing through a working city railway station is not the same as arriving at the museum entrance.",
-          "The original guide also listed the Israeli Personal Computer Museum. Treat specialist collections as visits to arrange directly: confirm that public visits are currently offered, the address and any appointment requirement before travelling. Do not rely on a general city-museum timetable for them."
+          "For specialist collections such as the Israeli Personal Computer Museum, arrange visits directly: confirm that public visits are currently offered, the address and any appointment requirement before travelling. Do not rely on a general city-museum timetable for them."
         ]
       },
       {
@@ -782,7 +779,6 @@ export const cityCultureGuides = {
       }
     ],
     "sourceIds": [
-      "m26-original-museums-in-haifa",
       "m26-haifa-museums",
       "m26-haifa-hours",
       "m26-madatech",
