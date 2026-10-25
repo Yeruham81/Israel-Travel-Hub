@@ -38,3 +38,35 @@ export function ShabbatQuoteForm() {
   const [destinationId, setDestinationId] = useState("");
   return <TransferQuoteForm destinationId={destinationId} onDestinationChange={setDestinationId} />;
 }
+
+/** Keep practical timetable checks beside the paragraph where a visitor needs them. */
+export function ShabbatTimesLink() {
+  return <div className="mt-4 rounded-xl border bg-secondary/40 p-4 text-sm">
+    <p className="font-semibold text-foreground">Check the date, not just the day of the week</p>
+    <p className="mt-1 leading-relaxed text-muted-foreground">Find local Friday and Saturday Shabbat times. These do not tell you when the first train will run.</p>
+    <a href="https://www.myzmanim.com/" target="_blank" rel="noopener noreferrer" className="mt-2 inline-block font-medium text-primary underline underline-offset-4">Look up Shabbat times on MyZmanim<span className="sr-only"> (opens in a new tab)</span></a>
+  </div>;
+}
+
+export function ShabbatPublicTransportLinks() {
+  return <div className="mt-4 rounded-xl border bg-secondary/40 p-4 text-sm" aria-label="Official rail and bus journey planners">
+    <p className="font-semibold text-foreground">Check your first available Saturday-night departure</p>
+    <p className="mt-1 leading-relaxed text-muted-foreground">Enter your actual travel date, origin and destination; then check any final connection to your accommodation.</p>
+    <div className="mt-3 flex flex-wrap gap-x-6 gap-y-2">
+      <a href="https://rail.co.il/?lan=en" target="_blank" rel="noopener noreferrer" className="font-medium text-primary underline underline-offset-4">Israel Railways — official timetable<span className="sr-only"> (opens in a new tab)</span></a>
+      <a href="https://route.bus.gov.il/?saveParams=true&tab=source-destination" target="_blank" rel="noopener noreferrer" className="font-medium text-primary underline underline-offset-4">National Public Transport Authority — route planner<span className="sr-only"> (opens in a new tab)</span></a>
+    </div>
+  </div>;
+}
+
+export function ShabbatTaxiFareLinks() {
+  return <div className="mt-4 rounded-xl border bg-secondary/40 p-4 text-sm" aria-label="Taxi fare calculation sources">
+    <p className="font-semibold text-foreground">Check the fare calculation</p>
+    <p className="mt-1 leading-relaxed text-muted-foreground">These independent route calculations use the April 2026 regulated meter rates. They are estimates, not operator quotes.</p>
+    <div className="mt-3 flex flex-wrap gap-x-5 gap-y-2">
+      <a href="https://taxitariff.co.il/ben-gurion-airport/tel-aviv-yafo" target="_blank" rel="noopener noreferrer" className="font-medium text-primary underline underline-offset-4">Tel Aviv calculation<span className="sr-only"> (opens in a new tab)</span></a>
+      <a href="https://taxitariff.co.il/ben-gurion-airport/jerusalem" target="_blank" rel="noopener noreferrer" className="font-medium text-primary underline underline-offset-4">Jerusalem calculation<span className="sr-only"> (opens in a new tab)</span></a>
+      <a href="https://taxitariff.co.il/ben-gurion-airport/haifa" target="_blank" rel="noopener noreferrer" className="font-medium text-primary underline underline-offset-4">Haifa calculation<span className="sr-only"> (opens in a new tab)</span></a>
+    </div>
+  </div>;
+}
