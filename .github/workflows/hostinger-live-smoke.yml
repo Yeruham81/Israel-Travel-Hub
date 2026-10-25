@@ -1,0 +1,94 @@
+name: Hostinger Premium external smoke test (READ ONLY)
+
+on:
+  push:
+    branches:
+      - experiment/hostinger-premium-static
+    paths:
+      - ".github/workflows/hostinger-live-smoke.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify-hostinger:
+    runs-on: ubuntu-latest
+    timeout-minutes: 6
+    steps:
+      - name: Verify live temporary Hostinger domain and critical paths
+        run: |
+          python3 - <<'PY'
+          from urllib.request import Request, urlopen
+          from urllib.error import HTTPError, URLError
+          from urllib.parse import urlparse
+          from html.parser import HTMLParser
+          import re, ssl
+
+          root="https://saddlebrown-guanaco-454061.hostingersite.com"
+          paths=[
+            "/", "/guides/", "/travel-blog/masada/", "/accommodation/",
+            "/travel-blog/israel-itinerary-3-days/", "/tours/", "/private-driver/",
+            "/api/quote-request/", "/api/exchange-rates/", "/this-route-must-not-exist-hostinger-test/"
+          ]
+          class Page(HTMLParser):
+            def __init__(self):
+              super().__init__()
+              self.title=False
+              self.title_text=""
+              self.canonical=[]
+              self.robots=[]
+              self.assets=[]
+              self.js=[]
+              self.description=[]
+            def handle_starttag(self,tag,attrs):
+              a=dict(attrs)
+              if tag=="title": self.title=True
+              if tag=="link" and a.get("rel")=="canonical": self.canonical.append(a.get("href",""))
+              if tag=="meta" and a.get("name","").lower()=="robots": self.robots.append(a.get("content",""))
+              if tag=="meta" and a.get("name","").lower()=="description": self.description.append(a.get("content",""))
+              if tag=="link" and a.get("rel")=="stylesheet": self.assets.append(a.get("href",""))
+              if tag=="script" and a.get("src"): self.js.append(a.get("src",""))
+            def handle_endtag(self,tag):
+              if tag=="title": self.title=False
+            def handle_data(self,data):
+              if self.title: self.title_text+=data
+
+          pages={}
+          for path in paths:
+            req=Request(root+path,headers={"User-Agent":"IsraelTravelHub-Static-Smoke/1.0","Accept":"text/html"})
+            try:
+              r=urlopen(req,timeout=22)
+            except HTTPError as exc:
+              r=exc
+            except URLError as exc:
+              print("NETWORK ERROR:",path,str(exc.reason))
+              raise
+            with r:
+              code=r.status
+              raw=r.read(400000)
+              h={k.lower():v for k,v in r.headers.items()}
+              page=Page()
+              if "text/html" in h.get("content-type",""): page.feed(raw.decode("utf-8","replace"))
+              pages[path]=(code,h,page)
+              print(f"PATH {path} status={code} bytes={len(raw)} type={h.get('content-type','')} final={urlparse(r.url).path}")
+              print(f" TITLE={page.title_text.strip()[:95]!r} canonical={page.canonical[:1]} robots={page.robots} x-robots={h.get('x-robots-tag','')!r}")
+              print(f" CSS={page.assets[:2]} SCRIPT={page.js[:2]} cache={h.get('cache-control','')} x-content-type-options={h.get('x-content-type-options','')}")
+
+          for path in paths[:7]:
+            if pages[path][0]!=200: print(f"::warning::Expected page HTTP 200: {path} -> {pages[path][0]}")
+          if pages["/"][0]==200:
+            main=pages["/"][2]
+            sources=list(dict.fromkeys(main.assets+main.js))[:4]
+            for src in sources:
+              if not src.startswith("/"): continue
+              try:
+                with urlopen(Request(root+src,headers={"User-Agent":"IsraelTravelHub-Static-Smoke/1.0"}),timeout=20) as response:
+                  print("STATIC ASSET",src,"HTTP",response.status,"type",response.headers.get("Content-Type"),"cache",response.headers.get("Cache-Control"),"bytes",len(response.read()))
+              except (HTTPError,URLError) as e:
+                print("::warning::Asset unreachable:",src,str(e))
+
+          if any(pages[p][0]>=500 for p in paths):
+            raise SystemExit("Critical HTTP 5xx response found")
+          print("External read-only Hostinger smoke probe finished")
+          PY
