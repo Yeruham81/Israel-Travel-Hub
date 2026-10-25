@@ -3,7 +3,7 @@ import { useEffect, useState, type MouseEvent } from "react";
 import { GuideCard, GuidePhotoCredit } from "@/components/TravelGuide";
 import { hasPublicPhotoCredit } from "@/lib/photo-credits";
 import { HubHeader } from "@/components/Guide";
-import { filterGuides, guideDirectory, guideTopics, isGuideTopic, type GuideTopicId } from "@/data/travelGuides";
+import { filterGuides, getGuideTopicLabel, guideDirectory, guideTopics, isGuideTopic, type GuideTopicId } from "@/data/travelGuides";
 import { pageMeta } from "@/lib/site";
 
 export const Route = createFileRoute("/guides")({
@@ -17,7 +17,11 @@ function Guides() {
   const navigate = Route.useNavigate();
   const [query, setQuery] = useState(q);
   useEffect(() => setQuery(q), [q]);
-  const guides = filterGuides(query, topic);
+  // The prerenderer can reach a query string before router validation completes.
+  // Always validate it at the rendering boundary too.
+  const activeTopic = isGuideTopic(topic) ? topic : undefined;
+  const activeTopicLabel = getGuideTopicLabel(activeTopic);
+  const guides = filterGuides(query, activeTopic);
   const searchFor = (nextTopic?: GuideTopicId) => ({ ...(query.trim() ? { q: query.trim().slice(0, 120) } : {}), ...(nextTopic ? { topic: nextTopic } : {}) });
   const topicHref = (nextTopic?: GuideTopicId) => {
     const params = new URLSearchParams(searchFor(nextTopic));
@@ -32,15 +36,15 @@ function Guides() {
   return <main className="mx-auto max-w-6xl px-4 pb-8">
     <HubHeader crumbs={[{ name: "Home", to: "/" }, { name: "Travel guides", to: "/guides/" }]} eyebrow="Useful answers for your Israel trip" title="Travel guides & practical tips" intro="Prepare for arrival, choose how to get around and explore destinations, day trips, religious heritage and local markets. Browse by topic or search for the question you need answered." />
     <div className="mt-6 rounded-2xl border bg-secondary/50 p-3.5 sm:mt-8 sm:p-7">
-      <form onSubmit={(event) => { event.preventDefault(); void navigate({ search: searchFor(topic), replace: true }); }} role="search" className="flex flex-wrap items-end gap-2 sm:gap-3"><label className="min-w-0 flex-1 text-xs font-medium sm:text-sm">Search travel guides<input value={query} maxLength={120} onChange={(event) => setQuery(event.target.value)} type="search" placeholder="City, airport or eSIM" className="mt-1.5 h-10 w-full rounded-lg border bg-background px-3 text-base sm:mt-2 sm:h-12 sm:px-4" /></label><button type="submit" className="btn btn-primary h-10 shrink-0 px-3 py-2 text-sm sm:h-auto sm:px-5 sm:py-3">Search</button></form>
+      <form onSubmit={(event) => { event.preventDefault(); void navigate({ search: searchFor(activeTopic), replace: true }); }} role="search" className="flex flex-wrap items-end gap-2 sm:gap-3"><label className="min-w-0 flex-1 text-xs font-medium sm:text-sm">Search travel guides<input value={query} maxLength={120} onChange={(event) => setQuery(event.target.value)} type="search" placeholder="City, airport or eSIM" className="mt-1.5 h-10 w-full rounded-lg border bg-background px-3 text-base sm:mt-2 sm:h-12 sm:px-4" /></label><button type="submit" className="btn btn-primary h-10 shrink-0 px-3 py-2 text-sm sm:h-auto sm:px-5 sm:py-3">Search</button></form>
       <nav aria-label="Filter guides by topic" className="mt-3 sm:mt-5">
         <ul className="flex flex-wrap gap-1.5 sm:gap-2">
-          <li><a href={topicHref()} onClick={(event) => selectTopic(event)} className="chip inline-block" aria-current={!topic ? "true" : undefined}>All topics</a></li>
-          {guideTopics.map((item) => <li key={item.id}><a href={topicHref(item.id)} onClick={(event) => selectTopic(event, item.id)} className="chip inline-block" aria-current={topic === item.id ? "true" : undefined}>{item.label}</a></li>)}
+          <li><a href={topicHref()} onClick={(event) => selectTopic(event)} className="chip inline-block" aria-current={!activeTopic ? "true" : undefined}>All topics</a></li>
+          {guideTopics.map((item) => <li key={item.id}><a href={topicHref(item.id)} onClick={(event) => selectTopic(event, item.id)} className="chip inline-block" aria-current={activeTopic === item.id ? "true" : undefined}>{item.label}</a></li>)}
         </ul>
       </nav>
     </div>
-    <div className="mt-7 flex flex-wrap items-center justify-between gap-3"><p role="status" aria-live="polite" className="text-sm text-muted-foreground">{guides.length} {guides.length === 1 ? "guide" : "guides"}{topic ? ` · ${guideTopics.find((item) => item.id === topic)!.label}` : ""}</p>{(query || topic) && <button type="button" onClick={() => { setQuery(""); void navigate({ search: {}, replace: true }); }} className="text-sm font-medium text-primary underline">Clear filters</button>}</div>
+    <div className="mt-7 flex flex-wrap items-center justify-between gap-3"><p role="status" aria-live="polite" className="text-sm text-muted-foreground">{guides.length} {guides.length === 1 ? "guide" : "guides"}{activeTopicLabel ? ` · ${activeTopicLabel}` : ""}</p>{(query || activeTopic) && <button type="button" onClick={() => { setQuery(""); void navigate({ search: {}, replace: true }); }} className="text-sm font-medium text-primary underline">Clear filters</button>}</div>
     {guides.length > 0 ? <div className="mt-5 grid gap-5 sm:grid-cols-2 xl:grid-cols-3">{guides.map((guide) => <GuideCard key={guide.id} guide={guide} />)}</div> : <div className="mt-5 rounded-xl border p-8"><h2 className="text-2xl">No guides match this search</h2><p className="mt-2 text-muted-foreground">Try fewer words or choose another topic. Clear the filters to browse every guide.</p></div>}
     <details className="mt-10 rounded-xl border p-5"><summary className="cursor-pointer text-sm font-medium">Guide image credits</summary><ul className="mt-3 space-y-3">{photos.map((photo) => <li key={photo.src}><span className="text-sm">{photo.alt}</span><GuidePhotoCredit photo={photo} /></li>)}</ul></details>
   </main>;
