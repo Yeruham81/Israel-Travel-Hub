@@ -76,7 +76,7 @@ jobs:
 
       - name: Build all routes as HTML for Premium hosting
         if: steps.freshness.outputs.current == 'true'
-        run: bun run build
+        run: bash scripts/build-validated-static.sh
 
       - name: Reject missing pages, wrong canonical, or indexable trial
         if: steps.freshness.outputs.current == 'true'
