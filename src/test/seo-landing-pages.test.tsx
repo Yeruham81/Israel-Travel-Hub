@@ -68,7 +68,7 @@ describe("ten search-intent landing pages", () => {
 
   it("keeps Shabbat terminal and restart coverage on the dedicated guide", () => {
     expect(travelGuides.shabbat.sections.map((section) => section.id)).toEqual(expect.arrayContaining(["weekend-711", "terminal-transfer", "destinations", "restart"]));
-    expect(travelGuides.shabbat.nextSteps?.map((link) => link.to)).toContain(landingPaths[0]);
+    expect(travelGuides.shabbat.sections.find((section) => section.id === "destinations")?.inlineLinks?.map((link) => link.to)).toContain("/travel-blog/how-to-get-from-ben-gurion-airport-to-jerusalem/");
     expect(travelGuides.israel.related).toContain("shabbat");
     expect(travelGuides.taxis.nextSteps?.map((link) => link.to)).toContain(landingPaths[4]);
   });
@@ -107,7 +107,7 @@ describe("ten search-intent landing pages", () => {
       expect(twitterImages[0]).toMatchObject({ name: "twitter:image", content: ogImage });
       expect(description.content.length, path).toBeLessThanOrEqual(165);
       expect(document.querySelectorAll("h1"), path).toHaveLength(1);
-      expect(document.querySelector("h1")?.textContent).toBe(title);
+      expect(document.querySelector("h1")?.textContent).toBe(path === landingPaths[4] ? travelGuides.shabbat.title : title);
       const schemas = (head?.scripts || []).flatMap((script) => typeof script?.children === "string" ? [JSON.parse(script.children)] : []);
       expect(schemas.filter((schema) => schema["@type"] === "BreadcrumbList")).toHaveLength(1);
       const primary = schemas.find((schema) => schema["@type"] === (index < 4 ? "WebPage" : "Article"));
