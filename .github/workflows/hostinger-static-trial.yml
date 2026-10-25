@@ -1,0 +1,97 @@
+name: Trial Hostinger Premium static export (NO DEPLOYMENT)
+
+on:
+  push:
+    branches:
+      - experiment/hostinger-premium-static
+    paths:
+      - ".github/workflows/hostinger-static-trial.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build-static:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    env:
+      VITE_INDEXABLE: "false"
+      VITE_CANONICAL_ORIGIN: "https://static-trial.invalid"
+      CI: "true"
+    steps:
+      - name: Check out isolated experiment branch
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+
+      - name: Set up Bun (only for building; no Node.js on Hostinger)
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: "1.4.4"
+
+      - name: Install exact existing dependencies
+        run: bun install --frozen-lockfile
+
+      - name: Enable TanStack Start static prerendering in the temporary CI workspace
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          p=Path("vite.config.ts")
+          source=p.read_text()
+          old='  tanstackStart: {\n    // Redirect TanStack Start'
+          new='  tanstackStart: {\n    prerender: { enabled: true, autoSubfolderIndex: true, autoStaticPathsDiscovery: true, crawlLinks: true, failOnError: false, concurrency: 5 },\n    // Redirect TanStack Start'
+          if source.count(old) != 1: raise SystemExit("Cannot safely patch TanStack config")
+          p.write_text(source.replace(old,new))
+          print(p.read_text())
+          PY
+
+      - name: Build routes to static HTML (no Hostinger credentials)
+        run: bun run build
+
+      - name: Audit static export against current sitemap
+        shell: bash
+        run: |
+          echo '--- Candidate output roots ---'
+          find . -maxdepth 3 -type d \( -name public -o -name client -o -name dist \) -print | head -30
+          echo '--- Prerendered files ---'
+          find .output/public -type f -name '*.html' | head -30 || true
+          python3 - <<'PY'
+          from pathlib import Path
+          from urllib.parse import urlparse
+          from xml.etree import ElementTree as ET
+          root=Path(".output/public")
+          if not root.exists():
+              raise SystemExit("STATIC EXPORT FAILED: .output/public missing")
+          xml=ET.parse("public/sitemap.xml").getroot()
+          urls=[x.text for x in xml.findall(".//{*}loc") if x.text]
+          paths=[urlparse(u).path for u in urls]
+          missing=[]
+          found=[]
+          for path in paths:
+              target=root/(path.lstrip("/") or "index.html")
+              target=(target/"index.html") if path!="/" else target
+              if target.exists() and target.stat().st_size>100:
+                  found.append((path,target.stat().st_size))
+              else: missing.append(path)
+          print(f"SEO route static HTML coverage: {len(found)}/{len(paths)}")
+          print("Missing (first 35):",missing[:35])
+          print("Present (first 15):",found[:15])
+          print("API HTML static artifacts:", list(root.glob("api/**/*.html"))[:5])
+          summary=Path("hostinger-static-audit.txt")
+          summary.write_text(f"SEO static HTML: {len(found)}/{len(paths)}\nMISSING:\n" + "\n".join(missing) + "\n")
+          if missing:
+              raise SystemExit(f"Prerender incomplete: {len(missing)} routes missing; keep existing live site untouched.")
+          PY
+
+      - name: Upload export bundle for a temporary Hostinger test website
+        if: success()
+        uses: actions/upload-artifact@v4
+        with:
+          name: hostinger-premium-static-trial
+          path: |
+            .output/public/
+            hostinger-static-audit.txt
+          if-no-files-found: error
+          retention-days: 7
