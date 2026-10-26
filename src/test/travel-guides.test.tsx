@@ -372,14 +372,15 @@ describe("migrated practical guides", () => {
       travelGuidePaths.airportTaxis, "/transfers/", travelGuidePaths.taxiFares, travelGuidePaths.uber,
     ]);
     const costs = guide.sections.find((section) => section.id === "costs")!;
-    expect(costs.paragraphs.join(" ")).toMatch(/rounded 2026 estimates/);
+    expect(costs.paragraphs.join(" ")).toContain("based on Israel's official April 2026 taxi tariff");
     expect(costs.tables?.[0]?.headers).toEqual(["Destination", "Approx. taxi fare", "Typical driving time"]);
     expect(costs.tables?.[0]?.rows).toEqual([
       ["Tel Aviv", "₪180–230", "30–40 min"],
       ["Jerusalem", "₪310–410", "45–65 min"],
       ["Haifa", "₪670–830", "75–105 min"],
     ]);
-    expect(costs.tables?.[0]?.note).toMatch(/time and day.*traffic.*actual route.*additional charges/is);
+    expect(costs.tables?.[0]?.note).toMatch(/general estimates.*destination.*pickup time.*traffic.*route/is);
+    expect(costs.paragraphs.join(" ") + costs.tables?.[0]?.note).not.toMatch(/₪5\.78|airport.departure charge|example routes of/i);
     expect(costs.paragraphs.join(" ")).not.toMatch(/Tariff [ABC]|16:01|21:01/);
     expect(guide.sections.find((section) => section.id === "weekend-711")!.paragraphs.join(" ")).toMatch(/Friday 17:30 to 01:30.*Saturday 10:30 to 16:30.*every two hours/is);
     expect(guide.sections.find((section) => section.id === "weekend-711")!.sourceIds).toContain("guide-711-hours");
@@ -387,6 +388,12 @@ describe("migrated practical guides", () => {
     expect(guide.sections.find((section) => section.id === "destinations")!.paragraphs.join(" ")).toMatch(/no regular walk-up airport sherut service/);
     expect(guide.sections.find((section) => section.id === "taxis-transfers")!.paragraphs.join(" ")).toMatch(/at least two hours before pickup/);
     expect(guide.sections.find((section) => section.id === "taxis-transfers")!.paragraphs.join(" ")).toMatch(/Ordinary Uber rides are not available/);
+    expect(guide.sections.find((section) => section.id === "arrival-time")!.tables?.[0]?.note)
+      .toBe("Friday and Saturday service varies with season, destination and holidays.");
+    expect(guide.sections.find((section) => section.id === "destinations")!.paragraphs.join(" "))
+      .toContain("For Dead Sea hotels, read my Ben Gurion Airport to Ein Bokek guide.");
+    expect(guide.sections.find((section) => section.id === "destinations")!.paragraphs.join(" "))
+      .not.toContain("The former Amal airport sherut is discontinued.");
     expect(costs.sourceIds).toContain("guide-meter-route-estimates");
     expect(guide.sections.find((section) => section.id === "taxis-transfers")!.paragraphs.join(" ")).toMatch(/do not need the Gett app/);
     expect(JSON.stringify(guide)).not.toMatch(/I have not carried over|comparison below/);
