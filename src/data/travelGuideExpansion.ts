@@ -147,7 +147,7 @@ export const expandedTravelGuides = {
         paragraphs: [
           "Line 711 serves parts of central Tel Aviv, but not individual hotels or destinations elsewhere in Israel. Check the last walk or connection from its nearest stop. My Ben Gurion Airport to Tel Aviv guide covers the route in more detail.",
           "For Jerusalem or destinations in northern Israel, compare a licensed taxi, confirmed private transfer or suitable rental car during the main Shabbat transport break, and check trains again after services restart. See the Ben Gurion Airport to Jerusalem guide or Ben Gurion Airport to Haifa guide for destination-specific planning.",
-          "There is no regular walk-up airport sherut service to Tel Aviv, Jerusalem or Haifa. The former Nesher service to Jerusalem and Amal service to Haifa/the north have stopped operating; do not rely on old shared-airport-taxi advertisements. For other shared-taxi routes in Israel, see the sherut guide.",
+          "There is no regular walk-up airport sherut service to Tel Aviv, Jerusalem or Haifa. The former Nesher service to Jerusalem and Amal service to Haifa have stopped operating; do not rely on old information. For other shared-taxi routes in Israel, see the sherut guide.",
           "For Dead Sea hotels, read my Ben Gurion Airport to Ein Bokek guide. The table below compares the main practical choices during the public-transport break.",
         ],
         inlineLinks: [
