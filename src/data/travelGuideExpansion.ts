@@ -73,7 +73,7 @@ export const expandedTravelGuides = {
             ["Saturday morning or afternoon", "Line 711 for central Tel Aviv, or a direct ride to your destination"],
             ["Saturday evening", "The first actual train or regular bus and the last connection to your accommodation"],
           ],
-          note: "These are decisions to check, not a live schedule. Friday and Saturday service varies with season, destination and holidays.",
+          note: "Friday and Saturday service varies with season, destination and holidays.",
         }],
         sourceIds: ["israel-rail", "guide-weekend-timetable"],
       },
@@ -117,9 +117,7 @@ export const expandedTravelGuides = {
         id: "costs",
         title: "How much does it cost to leave the airport on Shabbat?",
         paragraphs: [
-          "Line 711 is free. Licensed airport taxis use a regulated meter: the fare depends on the time and day of pickup, the route, distance and driving time. Instead of complex meter-rate categories, the table gives rounded 2026 estimates for a regular taxi during the main Friday-evening, Saturday and Saturday-night transport break.",
-          "Actual taxi fares can be higher or lower for a specific hotel, arrival time, traffic delays, road tolls or other permitted additions. These ranges are based on example route calculations, not fixed prices or guaranteed maximum fares. The calculator includes an assumed ₪5.78 booking charge, while airport-departure and some other charges are not included; a walk-up taxi may not have the same booking charge. Busy roads can also make journeys longer than the indicative driving times.",
-          "For a private transfer, ask for a written total quote covering your exact destination and pickup time, luggage, waiting and any extras. To understand how licensed taxi fares are calculated, see my taxi fares guide.",
+          "Line 711 is free. The estimated taxi prices below are based on Israel's official April 2026 taxi tariff.",
         ],
         tables: [{
           caption: "Approximate taxi prices and travel times from Ben Gurion Airport",
@@ -129,9 +127,8 @@ export const expandedTravelGuides = {
             ["Jerusalem", "₪310–410", "45–65 min"],
             ["Haifa", "₪670–830", "75–105 min"],
           ],
-          note: "Rounded estimates for a standard metered taxi using April 2026 example route calculations during Friday evening, Shabbat and Saturday night, not a fare quote. Your final address, time and day, traffic, actual route and additional charges affect the total; heavy traffic can make the journey take longer. Confirm an actual quote for pre-booked transfers.",
+          note: "These are general estimates, not fixed fares. The final price and driving time can vary with your destination, pickup time, traffic and route.",
         }],
-        inlineLinks: [{ text: "taxi fares guide", to: travelGuidePaths.taxiFares }],
         sourceIds: ["taxi-fares-2026", "guide-meter-route-estimates"],
       },
       {
@@ -151,7 +148,7 @@ export const expandedTravelGuides = {
           "Line 711 serves parts of central Tel Aviv, but not individual hotels or destinations elsewhere in Israel. Check the last walk or connection from its nearest stop. My Ben Gurion Airport to Tel Aviv guide covers the route in more detail.",
           "For Jerusalem or destinations in northern Israel, compare a licensed taxi, confirmed private transfer or suitable rental car during the main Shabbat transport break, and check trains again after services restart. See the Ben Gurion Airport to Jerusalem guide or Ben Gurion Airport to Haifa guide for destination-specific planning.",
           "There is no regular walk-up airport sherut service to Tel Aviv, Jerusalem or Haifa. The former Nesher service to Jerusalem and Amal service to Haifa/the north have stopped operating; do not rely on old shared-airport-taxi advertisements. For other shared-taxi routes in Israel, see the sherut guide.",
-          "For Dead Sea hotels, use the Ben Gurion Airport to Ein Bokek guide and specify your exact resort address. The table below compares the main practical choices during the public-transport break.",
+          "For Dead Sea hotels, read my Ben Gurion Airport to Ein Bokek guide. The table below compares the main practical choices during the public-transport break.",
         ],
         inlineLinks: [
           { text: "Ben Gurion Airport to Tel Aviv guide", to: "/travel-blog/how-to-get-from-ben-gurion-airport-to-tel-aviv/" },
