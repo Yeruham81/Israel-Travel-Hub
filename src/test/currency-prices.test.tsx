@@ -116,6 +116,21 @@ describe("international price estimates", () => {
     expect(screen.getByTestId("currency-price").querySelector('[data-currency="EUR"]')).toHaveTextContent("≈ EUR 110");
   });
 
+  it("uses the built-in same-origin snapshot when GitHub cannot be reached by the browser", async () => {
+    vi.setSystemTime(checkTime + 8 * referenceFxConfig.refreshMs);
+    const live = { ...initialReferenceFx, publishedAt: "2026-10-25", checkedAt: new Date().toISOString(), ilsPerUnit: { USD: 4, EUR: 5 } };
+    const mockedFetch = vi.fn<typeof fetch>()
+      .mockResolvedValueOnce(new Response("Unavailable", { status: 503 }))
+      .mockRejectedValueOnce(new TypeError("Cross-origin request blocked"))
+      .mockResolvedValueOnce(Response.json({ rates: live, status: "cached" }));
+    vi.stubGlobal("fetch", mockedFetch);
+    render(<CurrencyRatesProvider><PriceDisplay amount={550} /></CurrencyRatesProvider>);
+    await flush();
+    expect(mockedFetch).toHaveBeenCalledTimes(3);
+    expect(mockedFetch).toHaveBeenNthCalledWith(3, referenceFxConfig.localSnapshotUrl, expect.objectContaining({ credentials: "omit" }));
+    expect(screen.getByTestId("currency-price").querySelector('[data-currency="USD"]')).toHaveTextContent("≈ USD 138");
+  });
+
   it("rejects a stale public snapshot after a Lovable 503", async () => {
     vi.setSystemTime(checkTime + 8 * referenceFxConfig.refreshMs);
     const mockedFetch = vi.fn<typeof fetch>()
@@ -124,7 +139,8 @@ describe("international price estimates", () => {
     vi.stubGlobal("fetch", mockedFetch);
     render(<CurrencyRatesProvider><PriceDisplay amount={550} /></CurrencyRatesProvider>);
     await flush();
-    expect(mockedFetch).toHaveBeenCalledTimes(2);
+    expect(mockedFetch).toHaveBeenCalledTimes(3);
+    expect(mockedFetch).toHaveBeenNthCalledWith(3, referenceFxConfig.localSnapshotUrl, expect.objectContaining({ credentials: "omit" }));
     const price = screen.getByTestId("currency-price");
     expect(price).toHaveTextContent("USD/EUR estimates unavailable");
     expect(price.querySelector('[data-currency="USD"]')).toBeNull();
