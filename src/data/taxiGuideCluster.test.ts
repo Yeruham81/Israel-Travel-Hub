@@ -37,6 +37,16 @@ describe("intent-specific taxi guide cluster", () => {
     expect(after10).toMatch(/Do not add this higher full per-kilometer rate again/);
   });
 
+  it("retains useful standalone answers and original images in the general taxi guide", () => {
+    const guide = taxiGuideCluster.taxis;
+    expect(guide.photo.src).toBe("/images/guides/taxi-in-tel-aviv.webp");
+    expect(guide.sections.find((s) => s.id === "fares")?.tables?.[0]?.rows[0]).toEqual(["Starting meter (initial charge)", "₪12.46", "₪12.46", "₪12.46"]);
+    expect(guide.sections.find((s) => s.id === "airport")?.paragraphs.join(" ")).toContain("Exit 23");
+    expect(guide.sections.find((s) => s.id === "airport")?.paragraphs.join(" ")).toContain("Exit 03");
+    expect(guide.sections.find((s) => s.id === "sherut")?.paragraphs.join(" ")).toContain("Nesher");
+    expect(guide.sections.find((s) => s.id === "payment")?.paragraphs.join(" ")).toContain("luggage");
+    expect(guide.sections.find((s) => s.id === "intercity")?.paragraphs.join(" ")).toContain("Mitzpe Ramon");
+  });
   it("differentiates Gett on-demand, scheduled and Terminal 1 pickup points", () => {
     const guide = taxiGuideCluster.airportTaxis;
     const rows = guide.comparison.rows;
