@@ -84,12 +84,12 @@ describe("shared sidebar navigation", () => {
     expect(within(guides).getByRole("link", { name: "Jerusalem to Bethlehem: travel options" })).toHaveAttribute("href", travelGuidePaths.bethlehem);
   });
 
-  it("renders the six topic groups and marks the exact current page", async () => {
+  it("renders the five topic groups and marks the exact current page", async () => {
     const router = await navigationRouter("/travel-blog/where-to-stay-in-jerusalem/");
     render(<RouterContextProvider router={router}><GlobalNav /></RouterContextProvider>);
     const nav = screen.getByRole("navigation", { name: "Explore Israel" });
     expect(within(nav).getAllByRole("heading").map((heading) => heading.textContent)).toEqual([
-      "Transportation", "Tours & trips", "Accommodation", "Attractions", "Religious sites", "Travel guides & tips",
+      "Transportation", "Tours & trips", "Accommodation", "Attractions", "Travel guides & tips",
     ]);
     expect(within(nav).queryByRole("region", { name: "Popular Links" })).not.toBeInTheDocument();
     expect(within(nav).getByRole("link", { name: "Hotels in Jerusalem" })).toHaveAttribute("aria-current", "page");
@@ -110,6 +110,23 @@ describe("shared sidebar navigation", () => {
       ["Private driver service", "/private-driver/"],
       ["Rent a car in Israel", "/car-rental/"],
     ]);
+  });
+
+  it("groups the four Ben Gurion Airport arrival guides under Travel guides & tips", async () => {
+    const router = await navigationRouter();
+    render(<RouterContextProvider router={router}><GlobalNav /></RouterContextProvider>);
+    const guides = screen.getByRole("region", { name: "Travel guides & tips" });
+    expect(within(guides).getByRole("link", { name: "From Ben Gurion Airport" })).toHaveAttribute("href", "/guides/");
+    const airportGuides = within(guides).getByRole("list", { name: "Ben Gurion Airport arrival guides" });
+    expect(airportGuides).toBeVisible();
+    const expected = [
+      ["Airport to Jerusalem: all options", "/travel-blog/how-to-get-from-ben-gurion-airport-to-jerusalem/"],
+      ["Airport to Tel Aviv: all options", "/travel-blog/how-to-get-from-ben-gurion-airport-to-tel-aviv/"],
+      ["Airport to Haifa: all options", "/travel-blog/how-to-get-from-ben-gurion-airport-to-haifa/"],
+      ["Airport to Ein Bokek: all options", "/travel-blog/how-to-get-from-ben-gurion-airport-to-ein-bokek/"],
+    ];
+    expect(within(airportGuides).getAllByRole("link").map(link => [link.textContent, link.getAttribute("href")])).toEqual(expected);
+    expect(within(guides).getByRole("list", { name: "Trip lengths" })).toBeVisible();
   });
 
   it("opens the migrated practical guides inside the portal", async () => {
@@ -177,7 +194,7 @@ describe("shared sidebar navigation", () => {
     fireEvent.click(trigger);
     let dialog = await screen.findByRole("dialog");
     let nav = within(dialog).getByRole("navigation", { name: "Explore Israel" });
-    expect(within(nav).getAllByRole("region")).toHaveLength(6);
+    expect(within(nav).getAllByRole("region")).toHaveLength(5);
     expect(within(nav).getAllByRole("link")[0]).toHaveTextContent("Home");
     expect(within(nav).getAllByRole("link").at(-1)).toHaveTextContent("About");
     expect(within(nav).getByRole("list", { name: "Airport transfer destinations" })).toBeVisible();
@@ -204,11 +221,12 @@ describe("shared sidebar navigation", () => {
 
     fireEvent.click(trigger);
     dialog = await screen.findByRole("dialog");
-    const religiousSites = within(dialog).getByRole("region", { name: "Religious sites" });
-    expect(within(religiousSites).getAllByRole("link")).toHaveLength(11);
-    fireEvent.click(within(religiousSites).getByRole("link", { name: "Yardenit" }));
+    nav = within(dialog).getByRole("navigation", { name: "Explore Israel" });
+    expect(within(nav).queryByRole("region", { name: "Religious sites" })).not.toBeInTheDocument();
+    const airportGuides = within(nav).getByRole("list", { name: "Ben Gurion Airport arrival guides" });
+    fireEvent.click(within(airportGuides).getByRole("link", { name: "Airport to Ein Bokek: all options" }));
     await waitFor(() => expect(screen.queryByRole("dialog")).not.toBeInTheDocument());
-    await waitFor(() => expect(router.state.location.pathname).toBe("/travel-blog/yardenit/"));
+    await waitFor(() => expect(router.state.location.pathname).toBe("/travel-blog/how-to-get-from-ben-gurion-airport-to-ein-bokek/"));
   });
 });
 
