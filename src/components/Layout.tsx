@@ -2,7 +2,7 @@ import { Link, useRouterState } from "@tanstack/react-router";
 import { lazy, Suspense, useEffect, useId, useState, type ReactNode } from "react";
 import { ChevronDown, Compass } from "lucide-react";
 
-import { allNavGroups, serviceNav, serviceDomains, hotelNav, utilityNav, footerNav, legalNav, type SidebarNavItem } from "@/data/nav";
+import { allNavGroups, serviceNav, serviceDomains, hotelNav, utilityNav, footerNav, legalNav, type NavItem, type SidebarNavItem } from "@/data/nav";
 import { relFor } from "@/lib/outbound";
 
 export function ExtLink({ href, children, className }: { href: string; children: ReactNode; className?: string }) {
@@ -32,7 +32,7 @@ export function Wordmark() {
   );
 }
 
-function SidebarLink({ item, onNavigate }: { item: SidebarNavItem; onNavigate: (() => void) | undefined }) {
+function SidebarLink({ item, onNavigate }: { item: NavItem | { label: string; href: string }; onNavigate: (() => void) | undefined }) {
   const className = "block rounded-lg px-3 py-1.5 font-medium focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary";
   if ("href" in item) {
     return (
@@ -65,6 +65,14 @@ function SidebarBranch({ item, onNavigate }: { item: SidebarNavItem; onNavigate:
   const [expanded, setExpanded] = useState(isChildPage);
   const id = useId();
   useEffect(() => { if (isChildPage) setExpanded(true); }, [isChildPage]);
+  if ("headingOnly" in item && item.headingOnly) {
+    return <>
+      <div className="px-3 py-1.5 text-sm font-semibold text-foreground">{item.label}</div>
+      <ul aria-label={item.childrenLabel ?? `${item.label} guides`} className="ml-3 mt-1 space-y-0.5 border-l pl-2">
+        {item.children.map((child) => <li key={String(child.to)}><SidebarLink item={child} onNavigate={onNavigate} /></li>)}
+      </ul>
+    </>;
+  }
   if (!children) return <SidebarLink item={item} onNavigate={onNavigate} />;
   if (branch?.toggleOnly) {
     return <>
