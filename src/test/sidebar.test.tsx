@@ -80,7 +80,7 @@ describe("shared sidebar navigation", () => {
     }
     expect(trips.querySelector('a[href="/tours/bethlehem-from-jerusalem/"]')).toBeNull();
     expect(trips.querySelector(`a[href="${travelGuidePaths.bethlehem}"]`)).toBeNull();
-    const guides = screen.getByRole("region", { name: "Travel guides & tips" });
+    const guides = screen.getByRole("region", { name: "Travel guides" });
     expect(within(guides).getByRole("link", { name: "Jerusalem to Bethlehem: travel options" })).toHaveAttribute("href", travelGuidePaths.bethlehem);
   });
 
@@ -89,7 +89,7 @@ describe("shared sidebar navigation", () => {
     render(<RouterContextProvider router={router}><GlobalNav /></RouterContextProvider>);
     const nav = screen.getByRole("navigation", { name: "Explore Israel" });
     expect(within(nav).getAllByRole("heading").map((heading) => heading.textContent)).toEqual([
-      "Transportation", "Tours & trips", "Accommodation", "Attractions", "Travel guides & tips",
+      "Transportation", "Tours & trips", "Accommodation", "Attractions", "Travel guides",
     ]);
     expect(within(nav).queryByRole("region", { name: "Popular Links" })).not.toBeInTheDocument();
     expect(within(nav).getByRole("link", { name: "Hotels in Jerusalem" })).toHaveAttribute("aria-current", "page");
@@ -112,10 +112,10 @@ describe("shared sidebar navigation", () => {
     ]);
   });
 
-  it("groups the four Ben Gurion Airport arrival guides under Travel guides & tips", async () => {
+  it("groups the four Ben Gurion Airport arrival guides under Travel guides", async () => {
     const router = await navigationRouter();
     render(<RouterContextProvider router={router}><GlobalNav /></RouterContextProvider>);
-    const guides = screen.getByRole("region", { name: "Travel guides & tips" });
+    const guides = screen.getByRole("region", { name: "Travel guides" });
     expect(within(guides).getByRole("link", { name: "From Ben Gurion Airport" })).toHaveAttribute("href", "/guides/");
     const airportGuides = within(guides).getByRole("list", { name: "Ben Gurion Airport arrival guides" });
     expect(airportGuides).toBeVisible();
@@ -133,7 +133,7 @@ describe("shared sidebar navigation", () => {
     const router = await navigationRouter();
     const onNavigate = vi.fn();
     render(<RouterContextProvider router={router}><GlobalNav onNavigate={onNavigate} /></RouterContextProvider>);
-    const guides = screen.getByRole("region", { name: "Travel guides & tips" });
+    const guides = screen.getByRole("region", { name: "Travel guides" });
     for (const [label, path] of [
       ["Is there Uber in Israel?", "uber-in-israel"],
       ["Choosing an eSIM for Israel", "best-esim-for-israel"],
@@ -208,7 +208,7 @@ describe("shared sidebar navigation", () => {
     fireEvent.click(trigger);
     dialog = await screen.findByRole("dialog");
     nav = within(dialog).getByRole("navigation", { name: "Explore Israel" });
-    const guides = within(nav).getByRole("region", { name: "Travel guides & tips" });
+    const guides = within(nav).getByRole("region", { name: "Travel guides" });
     fireEvent.click(within(guides).getByRole("link", { name: /Choosing an eSIM for Israel/ }));
     await waitFor(() => expect(screen.queryByRole("dialog")).not.toBeInTheDocument());
     await waitFor(() => expect(router.state.location.pathname).toBe("/travel-blog/best-esim-for-israel/"));
