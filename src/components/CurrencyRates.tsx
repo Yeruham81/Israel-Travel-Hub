@@ -57,11 +57,31 @@ export function CurrencyRatesProvider({ children, enabled = true }: { children: 
       const usable = isUsableExchangeRates(current.rates);
       setState({ rates: usable ? current.rates : null, status: usable ? "cached" : "unavailable", loading: true });
       try {
-        const response = await fetch(referenceFxConfig.endpoint, { headers: { Accept: "application/json" }, credentials: "omit", signal: request.signal });
-        if (!response.ok) throw new Error("Currency estimates unavailable");
-        const text = await response.text();
-        if (text.length > 16384) throw new Error("Invalid currency response");
-        const data = parseExchangeRateResult(JSON.parse(text));
+        async function loadRates(url: string): Promise<ExchangeRateResult> {
+          const response = await fetch(url, {
+            headers: { Accept: "application/json" },
+            credentials: "omit",
+            cache: "no-store",
+            signal: request.signal,
+          });
+          if (!response.ok) throw new Error("Currency estimates unavailable");
+          const body = await response.text();
+          if (body.length > 16384) throw new Error("Invalid currency response");
+          const data = parseExchangeRateResult(JSON.parse(body));
+          if (!data.rates) throw new Error("No usable currency data");
+          return data;
+        }
+        let data: ExchangeRateResult;
+        try {
+          data = await loadRates(referenceFxConfig.endpoint);
+        } catch (error) {
+          // When the Lovable server cannot reach an external API, read the
+          // independently updated public snapshot directly from the browser.
+          // Do not overwrite a still-valid cached quote merely because the
+          // API check failed.
+          if (isUsableExchangeRates(current.rates)) throw error;
+          data = await loadRates(referenceFxConfig.publicSnapshotUrl);
+        }
         if (!data.rates) throw new Error("No usable currency data");
         if (isUsableExchangeRates(current.rates) && data.rates.publishedAt < current.rates.publishedAt) throw new Error("Older currency publication");
         if (!active) return;
