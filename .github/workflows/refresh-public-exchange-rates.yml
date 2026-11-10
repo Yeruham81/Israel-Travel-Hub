@@ -2,8 +2,16 @@ name: Refresh public Bank of Israel FX snapshot
 
 on:
   schedule:
-    # Allow for the local daily publication and summer/winter time changes.
-    - cron: '30 15,19 * * *'
+    # Multiple off-peak checks so a delayed/dropped scheduled run is less
+    # likely to leave the website without the latest published reference rates.
+    - cron: '17 10,13,16,19 * * *'
+  # Validate updater changes immediately without requiring a manual dispatch.
+  # Data-only commits are excluded to avoid a refresh loop.
+  push:
+    branches: [main]
+    paths:
+      - 'scripts/refresh-public-exchange-rates.mjs'
+      - '.github/workflows/refresh-public-exchange-rates.yml'
   workflow_dispatch:
 
 permissions:
