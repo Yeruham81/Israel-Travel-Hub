@@ -32,8 +32,8 @@ export function Wordmark() {
   );
 }
 
-function SidebarLink({ item, onNavigate }: { item: NavItem | { label: string; href: string }; onNavigate: (() => void) | undefined }) {
-  const className = "block rounded-lg px-3 py-1.5 font-medium focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary";
+function SidebarLink({ item, onNavigate, emphasized = false }: { item: NavItem | { label: string; href: string }; onNavigate: (() => void) | undefined; emphasized?: boolean }) {
+  const className = `block rounded-lg px-3 py-1.5 ${emphasized ? "font-semibold text-foreground" : "font-medium"} focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary`;
   if ("href" in item) {
     return (
       <a href={item.href} target="_blank" rel={relFor(false)} onClick={onNavigate} className={`${className} hover:bg-muted`}>
@@ -94,7 +94,7 @@ function SidebarBranch({ item, onNavigate }: { item: SidebarNavItem; onNavigate:
   }
   return <>
     <div className="flex items-center gap-1">
-      <div className="min-w-0 flex-1"><SidebarLink item={item} onNavigate={onNavigate} /></div>
+      <div className="min-w-0 flex-1"><SidebarLink item={item} onNavigate={onNavigate} emphasized={alwaysExpanded} /></div>
       {!alwaysExpanded && <button type="button" aria-label={branch?.toggleLabel ?? `Show ${item.label} pages`} aria-expanded={expanded} aria-controls={id} onClick={() => setExpanded(!expanded)} className="rounded-lg p-2 hover:bg-muted focus-visible:outline-2 focus-visible:outline-primary">
         <ChevronDown aria-hidden className={`h-4 w-4 transition-transform ${expanded ? "rotate-180" : ""}`} />
       </button>}
