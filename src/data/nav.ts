@@ -142,22 +142,6 @@ export const allNavGroups: NavGroup[] = [
     ],
   },
   {
-    title: "Religious sites",
-    items: [
-      { label: "Mount Zion", to: "/travel-blog/mount-zion/" },
-      { label: "Mount of Olives", to: "/travel-blog/mount-of-olives/" },
-      { label: "Basilica of the Annunciation", to: travelGuidePaths.annunciation },
-      { label: "Mount Precipice", to: travelGuidePaths.precipice },
-      { label: "Mount Tabor", to: "/travel-blog/mount-tabor/" },
-      { label: "Magdala", to: travelGuidePaths.magdala },
-      { label: "Capernaum", to: "/travel-blog/capernaum/" },
-      { label: "Tabgha", to: "/travel-blog/tabgha/" },
-      { label: "Mount of Beatitudes", to: "/travel-blog/mount-of-beatitudes/" },
-      { label: "Yardenit", to: travelGuidePaths.yardenit },
-      { label: "Qasr el-Yahud", to: travelGuidePaths.qasr },
-    ],
-  },
-  {
     title: "Travel guides & tips",
     items: [
       { label: "All travel guides", to: "/guides/" },
@@ -167,10 +151,12 @@ export const allNavGroups: NavGroup[] = [
         { label: "Israel in 7 days", to: "/travel-blog/israel-itinerary-7-days/" },
         { label: "Israel in 10 days", to: "/travel-blog/israel-itinerary-10-days/" },
       ] },
-      { label: "Airport to Jerusalem: all options", to: "/travel-blog/how-to-get-from-ben-gurion-airport-to-jerusalem/" },
-      { label: "Airport to Tel Aviv: all options", to: "/travel-blog/how-to-get-from-ben-gurion-airport-to-tel-aviv/" },
-      { label: "Airport to Haifa: all options", to: "/travel-blog/how-to-get-from-ben-gurion-airport-to-haifa/" },
-      { label: "Airport to Ein Bokek: all options", to: "/travel-blog/how-to-get-from-ben-gurion-airport-to-ein-bokek/" },
+      { label: "From Ben Gurion Airport", to: "/guides/", childrenLabel: "Ben Gurion Airport arrival guides", alwaysExpanded: true, children: [
+        { label: "Airport to Jerusalem: all options", to: "/travel-blog/how-to-get-from-ben-gurion-airport-to-jerusalem/" },
+        { label: "Airport to Tel Aviv: all options", to: "/travel-blog/how-to-get-from-ben-gurion-airport-to-tel-aviv/" },
+        { label: "Airport to Haifa: all options", to: "/travel-blog/how-to-get-from-ben-gurion-airport-to-haifa/" },
+        { label: "Airport to Ein Bokek: all options", to: "/travel-blog/how-to-get-from-ben-gurion-airport-to-ein-bokek/" },
+      ] },
 
       { label: "Israel travel tips", to: travelGuidePaths.travelTips },
       { label: "Best time to visit Israel", to: travelGuidePaths.bestTime },
