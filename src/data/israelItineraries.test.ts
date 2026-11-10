@@ -87,7 +87,7 @@ describe("migrated Israel itineraries", () => {
   });
 
   it("has contextual navigation and a generated route-tree entry for every itinerary", () => {
-    const sidebar = allNavGroups.find(g => g.title === "Travel guides & tips");
+    const sidebar = allNavGroups.find(g => g.title === "Travel guides");
     expect(sidebar?.items.some(item => item.label === "Israel itineraries")).toBe(true);
     const tree = file("src/routeTree.gen.ts");
     for (const id of itineraryIds) {
