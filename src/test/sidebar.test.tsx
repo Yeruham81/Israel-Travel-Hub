@@ -112,6 +112,30 @@ describe("shared sidebar navigation", () => {
     ]);
   });
 
+  it("emphasizes linked sidebar parents while preserving destinations and visible child guides", async () => {
+    const router = await navigationRouter();
+    render(<RouterContextProvider router={router}><GlobalNav /></RouterContextProvider>);
+
+    const linkedParents = [
+      { section: "Transportation", label: "Airport transfers", path: "/transfers/", list: "Airport transfer destinations", count: 5 },
+      { section: "Tours & trips", label: "Tours & day trips", path: "/tours/", list: "Tour categories", count: tourCategories.length },
+      { section: "Tours & trips", label: "Shore excursions", path: "/shore-excursions/", list: "Shore excursion ports", count: 2 },
+    ];
+    const guides = screen.getByRole("region", { name: "Travel guides" });
+    const nonLinkHeading = within(guides).getByText("Israel itineraries");
+    expect(nonLinkHeading).toHaveClass("font-semibold", "text-foreground");
+
+    for (const parent of linkedParents) {
+      const section = screen.getByRole("region", { name: parent.section });
+      const link = within(section).getByRole("link", { name: parent.label });
+      expect(link).toHaveAttribute("href", parent.path);
+      expect(link).toHaveClass("font-semibold", "text-foreground");
+      const children = within(section).getByRole("list", { name: parent.list });
+      expect(children).toBeVisible();
+      expect(within(children).getAllByRole("link")).toHaveLength(parent.count);
+    }
+  });
+
   it("groups the four Ben Gurion Airport arrival guides under Travel guides", async () => {
     const router = await navigationRouter();
     render(<RouterContextProvider router={router}><GlobalNav /></RouterContextProvider>);
@@ -211,6 +235,9 @@ describe("shared sidebar navigation", () => {
     expect(within(nav).getAllByRole("link").at(-1)).toHaveTextContent("About");
     expect(within(nav).getByRole("list", { name: "Airport transfer destinations" })).toBeVisible();
     expect(within(nav).getByRole("list", { name: "Tour categories" })).toBeVisible();
+    for (const label of ["Airport transfers", "Tours & day trips", "Shore excursions"]) {
+      expect(within(nav).getByRole("link", { name: label })).toHaveClass("font-semibold", "text-foreground");
+    }
     expect(within(nav).queryByRole("button", { name: "Show tour categories" })).not.toBeInTheDocument();
     expect(within(nav).queryByText("Popular Links")).not.toBeInTheDocument();
     fireEvent.click(within(nav).getByRole("link", { name: "Private driver service" }));
