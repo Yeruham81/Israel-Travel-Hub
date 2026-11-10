@@ -51,7 +51,9 @@ export function CurrencyRatesProvider({ children, enabled = true }: { children: 
       if (Date.now() < nextCheckAt && (!current.rates || isUsableExchangeRates(current.rates))) { schedule(); return; }
       controller = new AbortController();
       const request = controller;
-      const timeout = setTimeout(() => request.abort(), referenceFxConfig.timeoutMs + 2000);
+      // The server can try both Bank of Israel and the Hostinger fallback.
+      // Allow both bounded upstream attempts to finish before aborting the client request.
+      const timeout = setTimeout(() => request.abort(), referenceFxConfig.timeoutMs * 2 + 4000);
       const usable = isUsableExchangeRates(current.rates);
       setState({ rates: usable ? current.rates : null, status: usable ? "cached" : "unavailable", loading: true });
       try {
