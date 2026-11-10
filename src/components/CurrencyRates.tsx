@@ -80,7 +80,13 @@ export function CurrencyRatesProvider({ children, enabled = true }: { children: 
           // Do not overwrite a still-valid cached quote merely because the
           // API check failed.
           if (isUsableExchangeRates(current.rates)) throw error;
-          data = await loadRates(referenceFxConfig.publicSnapshotUrl);
+          try {
+            data = await loadRates(referenceFxConfig.publicSnapshotUrl);
+          } catch {
+            // This built-in snapshot does not need CORS or any backend.
+            // It is only accepted while the original publication is valid.
+            data = await loadRates(referenceFxConfig.localSnapshotUrl);
+          }
         }
         if (!data.rates) throw new Error("No usable currency data");
         if (isUsableExchangeRates(current.rates) && data.rates.publishedAt < current.rates.publishedAt) throw new Error("Older currency publication");
