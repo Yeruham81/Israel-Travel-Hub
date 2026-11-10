@@ -58,7 +58,15 @@ describe("migrated practical guides", () => {
     expect(screen.getByRole("region", { name: "Travel checklist" })).toHaveTextContent("Before you go");
     for (const section of guide.sections) expect(screen.getByRole("heading", { name: section.title })).toBeInTheDocument();
     for (const section of guide.sections) if ("photo" in section && section.photo) {
-      expect(within(container.querySelector(`#${section.id}`)! as HTMLElement).getByRole("img", { name: section.photo.alt })).toHaveAttribute("src", section.photo.src);
+      const sectionElement = container.querySelector(`#${section.id}`)! as HTMLElement;
+      const photo = within(sectionElement).getByRole("img", { name: section.photo.alt });
+      expect(photo).toHaveAttribute("src", section.photo.src);
+      const body = sectionElement.querySelector(":scope > div");
+      if (section.paragraphs.length > 0) {
+        expect(body?.children[0]?.tagName).toBe("P");
+        expect(body?.children[1]?.tagName).toBe("FIGURE");
+        expect(body?.children[1]).toContainElement(photo);
+      }
       if (section.photo.sourceUrl && !isPublisherUrl(section.photo.sourceUrl)) expect(container.querySelector(`#${section.id} a[href="${section.photo.sourceUrl}"]`)).not.toBeNull();
     }
     for (const sourceId of guide.sourceIds) expect(getSource(sourceId)?.url).toMatch(/^https:\/\//);
