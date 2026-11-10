@@ -152,6 +152,7 @@ export const referenceFxConfig = {
   // Browser-readable official-rate snapshot, refreshed independently by GitHub Actions.
   // This avoids relying on server-to-server access from Lovable's runtime.
   publicSnapshotUrl: "https://raw.githubusercontent.com/Yeruham81/Israel-Travel-Hub/main/public/data/boi-exchange-rates.json",
+  localSnapshotUrl: "/data/boi-exchange-rates.json",
   endpoint: "/api/exchange-rates/", refreshMs: 24 * 60 * 60 * 1000,
   retryMs: 15 * 60 * 1000, maxAgeMs: 7 * 24 * 60 * 60 * 1000,
   timeoutMs: 6000, storageKey: "ith_reference_fx_v1",
