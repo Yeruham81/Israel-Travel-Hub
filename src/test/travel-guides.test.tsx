@@ -63,7 +63,8 @@ describe("migrated practical guides", () => {
     }
     for (const sourceId of guide.sourceIds) expect(getSource(sourceId)?.url).toMatch(/^https:\/\//);
     expect(container.querySelector("time")).toHaveAttribute("datetime", guide.updatedAt || TRAVEL_GUIDE_CHECK_DATE);
-    expect(container.querySelector("time")).toHaveTextContent("October 2026");
+    const displayedMonth = new Date(`${guide.updatedAt || TRAVEL_GUIDE_CHECK_DATE}T12:00:00Z`).toLocaleDateString("en-US", { month: "long", year: "numeric", timeZone: "UTC" });
+    expect(container.querySelector("time")).toHaveTextContent(displayedMonth);
     const authorCard = screen.getByRole("complementary", { name: "About the author" });
     expect(authorCard).toHaveTextContent("Written by Moshe Barak");
     expect(authorCard).toHaveTextContent("Over 20 years");
