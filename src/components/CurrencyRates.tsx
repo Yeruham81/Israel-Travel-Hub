@@ -74,12 +74,10 @@ export function CurrencyRatesProvider({ children, enabled = true }: { children: 
         let data: ExchangeRateResult;
         try {
           data = await loadRates(referenceFxConfig.endpoint);
-        } catch (error) {
-          // When the Lovable server cannot reach an external API, read the
-          // independently updated public snapshot directly from the browser.
-          // Do not overwrite a still-valid cached quote merely because the
-          // API check failed.
-          if (isUsableExchangeRates(current.rates)) throw error;
+        } catch {
+          // Always check the independently updated public snapshot if Lovable's
+          // own API fails, even when an older cached quote is still usable.
+          // The publication-date guard below prevents any downgrade.
           try {
             data = await loadRates(referenceFxConfig.publicSnapshotUrl);
           } catch {
