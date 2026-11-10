@@ -1,0 +1,40 @@
+name: Refresh public Bank of Israel FX snapshot
+
+on:
+  schedule:
+    # Allow for the local daily publication and summer/winter time changes.
+    - cron: '30 15,19 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: public-fx-snapshot-refresh
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - name: Validate and refresh published reference rates
+        run: node scripts/refresh-public-exchange-rates.mjs
+      - name: Commit new official data only if publication changed
+        run: |
+          if git diff --quiet -- public/data/boi-exchange-rates.json; then
+            echo "No new published rates. Nothing to commit."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add public/data/boi-exchange-rates.json
+          git commit -m "Refresh public Bank of Israel currency rates"
+          git pull --rebase origin main
+          git push origin HEAD:main
