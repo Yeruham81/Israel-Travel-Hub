@@ -60,12 +60,11 @@ function SidebarBranch({ item, onNavigate }: { item: SidebarNavItem; onNavigate:
   const pathname = useRouterState({ select: (state) => state.location.pathname });
   const branch = "children" in item ? item : undefined;
   const children = branch?.children;
-  const alwaysExpanded = branch?.alwaysExpanded ?? false;
   const isChildPage = children?.some((child) => child.to === pathname) ?? false;
   const [expanded, setExpanded] = useState(isChildPage);
   const id = useId();
   useEffect(() => { if (isChildPage) setExpanded(true); }, [isChildPage]);
-  if ("headingOnly" in item && item.headingOnly) {
+  if ("headingOnly" in item) {
     return <>
       <div className="px-3 py-1.5 text-sm font-semibold text-foreground">{item.label}</div>
       <ul aria-label={item.childrenLabel ?? `${item.label} guides`} className="ml-3 mt-1 space-y-0.5 border-l pl-2">
@@ -73,12 +72,14 @@ function SidebarBranch({ item, onNavigate }: { item: SidebarNavItem; onNavigate:
       </ul>
     </>;
   }
+  if ("href" in item) return <SidebarLink item={item} onNavigate={onNavigate} />;
   if (!children) return <SidebarLink item={item} onNavigate={onNavigate} />;
-  if (branch?.toggleOnly) {
+  const alwaysExpanded = item.alwaysExpanded ?? false;
+  if (item.toggleOnly) {
     return <>
       <button
         type="button"
-        aria-label={branch.toggleLabel ?? `Toggle ${item.label} guides`}
+        aria-label={item.toggleLabel ?? `Toggle ${item.label} guides`}
         aria-expanded={expanded}
         aria-controls={id}
         onClick={() => setExpanded((open) => !open)}
@@ -95,7 +96,7 @@ function SidebarBranch({ item, onNavigate }: { item: SidebarNavItem; onNavigate:
   return <>
     <div className="flex items-center gap-1">
       <div className="min-w-0 flex-1"><SidebarLink item={item} onNavigate={onNavigate} emphasized={alwaysExpanded} /></div>
-      {!alwaysExpanded && <button type="button" aria-label={branch?.toggleLabel ?? `Show ${item.label} pages`} aria-expanded={expanded} aria-controls={id} onClick={() => setExpanded(!expanded)} className="rounded-lg p-2 hover:bg-muted focus-visible:outline-2 focus-visible:outline-primary">
+      {!alwaysExpanded && <button type="button" aria-label={item.toggleLabel ?? `Show ${item.label} pages`} aria-expanded={expanded} aria-controls={id} onClick={() => setExpanded(!expanded)} className="rounded-lg p-2 hover:bg-muted focus-visible:outline-2 focus-visible:outline-primary">
         <ChevronDown aria-hidden className={`h-4 w-4 transition-transform ${expanded ? "rotate-180" : ""}`} />
       </button>}
     </div>
