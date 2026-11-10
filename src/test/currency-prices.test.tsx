@@ -185,7 +185,9 @@ describe("international price estimates", () => {
     expect(screen.getByTestId("exchange-rate-note")).toHaveTextContent("Charged in ILS. USD and EUR amounts are approximate estimates only.");
     expect(JSON.parse(localStorage.getItem(referenceFxConfig.storageKey)!).rates.checkedAt).toBe(initialReferenceFx.checkedAt);
     await act(async () => { await vi.advanceTimersByTimeAsync(referenceFxConfig.retryMs); });
-    expect(fetch).toHaveBeenCalledTimes(2);
+    // Each failed refresh attempts the same-origin API, the live public
+    // GitHub snapshot, and finally the bundled same-origin snapshot.
+    expect(fetch).toHaveBeenCalledTimes(6);
   });
 
   it("hides expired conversions and never shows zero or NaN estimates when data is unavailable", async () => {
