@@ -19,7 +19,7 @@ export default function MobileNavigationSheet({
       <SheetContent side="left" className="w-[85vw] max-w-sm overflow-y-auto">
         <SheetHeader className="mb-4 text-left">
           <SheetTitle className="font-serif text-2xl">Explore Israel</SheetTitle>
-          <SheetDescription>Transportation, tours, accommodation, attractions, religious sites and travel tips for your trip.</SheetDescription>
+          <SheetDescription>Transportation, tours, accommodation, attractions and travel tips for your trip.</SheetDescription>
         </SheetHeader>
         {children}
       </SheetContent>
