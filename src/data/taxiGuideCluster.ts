@@ -27,7 +27,7 @@ export const taxiGuideCluster: Record<"taxis" | "taxiFares" | "airportTaxis", Tr
     intro: "Taxis are useful for door-to-door travel in Israel, especially with luggage, at night, on Shabbat or where public transport is limited. Learn how to book a licensed cab, check fares and travel with confidence.",
     answer: "You can hail a licensed taxi in a major city, find one at an official stand, order from a local dispatcher or use Gett or another available taxi app. Confirm your destination, the meter or approved fare basis, and payment method. The regulated meter charges for time and distance, with higher tariffs at some times. At Ben Gurion Airport, use the authorized Gett app or kiosk and follow the designated taxi queue.",
     topics: ["transportation", "tips"],
-    updatedAt: "2026-11-10",
+    updatedAt: "2026-11-11",
     photo: { src: "/images/guides/taxi-in-tel-aviv.webp", alt: "Two white licensed taxis with yellow roof signs on a street in Tel Aviv" },
     facts: [
       { label: "Fare", text: "Regulated meter for an ordinary taxi; time, distance and tariff affect the total" },
@@ -54,7 +54,7 @@ export const taxiGuideCluster: Record<"taxis" | "taxiFares" | "airportTaxis", Tr
       {
         id: "recognize", title: "How to Recognize a Licensed Taxi in Israel",
         paragraphs: [
-          "Licensed Israeli taxis operate under transport regulations. Look for the proper taxi identification, a roof sign bearing the Hebrew word monit (מונית), and the vehicle's licensing details. White taxis are common, but color alone does not prove that a vehicle is licensed.",
+          "Licensed Israeli taxis have identifying marks, including a roof sign with the Hebrew word monit (מונית) and a license number displayed on the vehicle. Inside the taxi, look for the identification plate showing the owner's details; you can record these if you need to make a complaint. White taxis are common, but color alone does not establish that a vehicle is licensed.",
           "If you have booked through an app, match the license plate and driver information shown in your booking. At an airport or major transport hub, follow the official taxi signage instead of accepting an unsolicited approach inside a terminal.",
           "If you plan to cross between Israel, East Jerusalem and Palestinian Authority areas, ask in advance whether the driver and vehicle are permitted to complete the entire route; availability and access can differ by area. For other transport modes, see my getting around Israel guide.",
         ],
@@ -78,7 +78,7 @@ export const taxiGuideCluster: Record<"taxis" | "taxiFares" | "airportTaxis", Tr
         id: "fares", title: "How Much Do Taxis Cost in Israel?",
         paragraphs: [
           "For an ordinary licensed taxi ride, the regulated meter combines the opening amount, travel time, distance and the applicable A, B or C tariff. Traffic can increase the fare even on a short journey. An approved fixed tariff may be available for certain intercity trips under the applicable regulations.",
-          "Under the regulations effective from 1 April 2026, the opening meter amount is ₪12.46 including VAT outside Eilat. Daytime Tariff A adds ₪1.95 per minute AND ₪1.95 per kilometer for the first 10 km; tariffs B and C are higher. The per-kilometer rate also increases after 10 km. The short table below gives a useful snapshot, not a route-specific quote.",
+          "Under the regulations effective from 1 April 2026, the opening meter amount is ₪12.46 including VAT outside Eilat. Daytime Tariff A adds both ₪1.95 per minute and ₪1.95 per kilometer for the first 10 km; time and distance are charged together. Tariffs B and C are higher, and the per-kilometer rate increases after 10 km. The table below is a useful snapshot, not a route-specific quote.",
           `An app, phone or dispatcher booking may carry the regulated ₪${taxiFaresWithVat.orderedTaxi.toFixed(2)} ordering supplement. Airport departures, tolls and other permitted items may cost extra. Consult the national tariff guide for the legal time windows, full additions, price examples and any subsequent changes.`,
           "A separately contracted private transfer can instead have a confirmed written price. Check whether waiting, tolls and extra stops are included before you book.",
         ],
@@ -94,20 +94,21 @@ export const taxiGuideCluster: Record<"taxis" | "taxiFares" | "airportTaxis", Tr
       {
         id: "apps", title: "Taxi Apps in Israel: Gett, Yango and Uber",
         paragraphs: [
-          "Gett is a major licensed-taxi booking option in Israel. Yango may provide another local app-based choice, but coverage and available features should be checked for your pickup location. Register in advance and keep a backup if a driver is unavailable.",
+          "Gett and Yango let you request licensed taxis through an app, subject to driver availability in your area. You can use the official Gett and Yango Israel rider websites linked below to learn about the services or get their apps. Set up a usable payment method before travel, check the pickup pin and keep an alternative if no driver accepts the request.",
           "Uber passenger rides are not available in Israel in 2026. Gett and Yango are local taxi-booking alternatives; the separate Uber guide compares their practical use, while this article covers how licensed taxis operate.",
           "For an airport pickup, the official Gett taxi procedure uses a code and a physical authorized queue; the detailed airport instructions are covered in my airport taxi guide.",
         ],
         inlineLinks: [{ text: "separate Uber guide", to: travelGuidePaths.uber }, { text: "airport taxi guide", to: travelGuidePaths.airportTaxis }],
-        sourceIds: ["guide-gett"],
+        externalLinks: [{ label: "Gett Israel — official website and app", href: "https://www.gett.com/il/" }, { label: "Yango Israel — official rider information", href: "https://appli.taxi/rider/" }],
+        sourceIds: ["guide-gett-app", "guide-yango-israel"],
       },
       {
         id: "airport", title: "Taking a Taxi from Ben Gurion Airport",
         photo: { src: "/images/guides/airport-taxi-sign.webp", alt: "Yellow Taxi Entrance sign inside an airport terminal" },
         paragraphs: [
           "Gett operates the official authorized taxi dispatch at Ben Gurion Airport (TLV). For an immediate ride, order via the Gett app or an airport self-service kiosk, which works without installing the app. Keep the ride code and proceed to the physical taxi queue. A code does not let you skip the line.",
-          "For Terminal 3 on-demand taxis, the pickup point is the ground-floor arrivals level at Exit 03. Rides scheduled in advance through the Gett app use Level 2, Exit 23. At Terminal 1, follow the signs to the main arrivals exit. Check the booking instructions before travel, since airport procedures can change.",
-          "The authorized taxi normally charges the regulated meter and lawful extras. A separately pre-booked private airport transfer uses its own confirmed vehicle, written price and meeting point: do not expect your private driver at the official taxi queue.",
+          "For Terminal 3 on-demand taxis, go to the ground-floor arrivals level at Exit 03. A scheduled Gett ride must be booked at least two hours before pickup and uses Level 2, Exit 23. Gett says entering your flight number lets the app update your pickup time according to flight changes. At Terminal 1, follow the signs to the main arrivals exit. Check your booking instructions before travel, since procedures can change.",
+          "An authorized taxi departing Ben Gurion Airport uses the regulated meter, with an additional ₪5 airport departure charge under the April 2026 fares; this supplement is not charged merely for a trip to the airport. Gett lists cash or card payment directly to the driver, as well as supported in-app payment. A separately booked private transfer has its own confirmed price, vehicle and meeting point: do not expect your private driver at the official taxi queue.",
           "For detailed procedures, see the airport taxi guide. The Ben Gurion Airport arrival guide covers immigration, baggage and other onward-transport choices.",
         ],
         inlineLinks: [{ text: "airport taxi guide", to: travelGuidePaths.airportTaxis }, { text: "Ben Gurion Airport arrival guide", to: travelGuidePaths.arrival }],
@@ -116,7 +117,7 @@ export const taxiGuideCluster: Record<"taxis" | "taxiFares" | "airportTaxis", Tr
           { label: "From Ben Gurion Airport to Jerusalem", to: "/travel-blog/how-to-get-from-ben-gurion-airport-to-jerusalem/" },
           { label: "From Ben Gurion Airport to Haifa", to: "/travel-blog/how-to-get-from-ben-gurion-airport-to-haifa/" },
           { label: "From Ben Gurion Airport to Ein Bokek", to: "/travel-blog/how-to-get-from-ben-gurion-airport-to-ein-bokek/" },
-          { label: "Compare private airport transfers", to: "/transfers/" },
+          { label: "Need a confirmed airport pickup? Request a private transfer quote", to: "/transfers/" },
         ],
         sourceIds: ["guide-gett", "guide-iaa", "taxi-fares-2026"],
       },
@@ -134,7 +135,7 @@ export const taxiGuideCluster: Record<"taxis" | "taxiFares" | "airportTaxis", Tr
         id: "holidays", title: "Taxis on Shabbat and Jewish Holidays",
         paragraphs: [
           "Licensed taxis can operate on Shabbat and on many Jewish holidays, even when trains and most ordinary buses stop. However, fewer drivers may be working and a taxi may be harder to find outside busy areas. Arrange time-sensitive or long-distance pickups in advance.",
-          "Taxi tariff hours follow legal clock times, not the exact sunset. On Friday and holiday eves, Tariff B starts at 16:00 and Tariff C at 21:00. On Shabbat and recognized holidays, Tariff B applies from 06:00 to 19:00 and Tariff C afterwards overnight. See the fares guide for the complete weekday timetable and rates.",
+          "Taxi tariffs follow fixed local clock times rather than the exact sunset. On Fridays and holiday eves, Tariff A runs until 16:00, Tariff B from 16:01 to 21:00 and Tariff C from 21:01 overnight. On Shabbat and recognized holidays, Tariff B applies from 06:00 to 19:00 and Tariff C from 19:01 overnight. See the fares guide for the remaining weekdays, full hours and rates.",
           "Yom Kippur requires special care: ordinary road travel is severely limited, and travelers should not assume normal taxi service. For airport transport on a regular Shabbat, consult the airport weekend transport guide, and check Israel's Calendar of Events when planning your trip.",
         ],
         inlineLinks: [{ text: "fares guide", to: travelGuidePaths.taxiFares }, { text: "airport weekend transport guide", to: travelGuidePaths.shabbat }, { text: "Israel's Calendar of Events", to: travelGuidePaths.calendar }],
@@ -164,7 +165,7 @@ export const taxiGuideCluster: Record<"taxis" | "taxiFares" | "airportTaxis", Tr
         paragraphs: [
           "A taxi can take you directly to a hotel or attraction, but a train or bus may be much cheaper when service is available. Compare the whole door-to-door route, not only a railway-station journey; the getting around Israel guide compares the options.",
           "The Dead Sea and Ein Bokek, Mitzpe Ramon, the Golan Heights, desert nature reserves and the crossings to Jordan and Egypt may have limited taxi availability. Do not assume a return taxi will be waiting: arrange the return pickup or a planned driver in advance.",
-          "A journey from Jerusalem to Bethlehem may require a vehicle change near Checkpoint 300 (Rachel Crossing). Israeli-plated taxis generally cannot enter Palestinian Authority Area A without special permission. Check current crossing restrictions and the driver's authorization before traveling; see the Jerusalem to Bethlehem guide.",
+          "Getting from Jerusalem to Bethlehem may require a change of vehicle near Checkpoint 300 (Rachel Crossing): if the crossing is open for your journey, you may need to leave your Israeli taxi, complete the pedestrian crossing with the required travel documents and take a local Palestinian taxi on the other side. Israeli-plated taxis generally cannot enter Palestinian Authority Area A without authorization. Check the current security situation, opening arrangements and your eligibility to cross before setting out; see the Jerusalem to Bethlehem guide.",
           "If you are traveling to the Dead Sea, consider reserving both directions or arranging a driver for several stops. The Jerusalem to the Dead Sea guide explains practical choices.",
         ],
         inlineLinks: [
@@ -180,9 +181,10 @@ export const taxiGuideCluster: Record<"taxis" | "taxiFares" | "airportTaxis", Tr
           "Travel with a licensed taxi, verify the driver and plate shown in the app, and ignore unsolicited approaches inside an airport terminal. Save an accurate destination pin, confirm the meter or legal price basis, and check the final receipt.",
           "Common mistakes include expecting Uber or an old airport sherut, joining the wrong Gett pickup line, assuming every taxi takes credit cards, using an estimated app price as a fixed fare, not specifying oversized luggage and leaving a remote destination without a return plan.",
           "You can follow your route in a map app and share trip details if traveling alone. If you leave a wallet or bag behind, contact the operator quickly with the vehicle number, date, route and ride code.",
-          "The Ministry of Transport provides an official complaints process for taxi fares and driver conduct. Save your receipt and booking record. The taxi fares guide explains regulated meter charges and lawful additions.",
+          "For overcharging, refusal of service or driver conduct, use the Ministry of Transport's official taxi complaint service linked below. Keep the receipt, vehicle registration or license number, date, route, driver or owner details and any booking messages. The taxi fares guide explains lawful meter charges and extras.",
         ],
         inlineLinks: [{ text: "taxi fares guide", to: travelGuidePaths.taxiFares }],
+        externalLinks: [{ label: "File a taxi-service complaint — Ministry of Transport", href: "https://www.gov.il/en/service/complaint_about_conduct_in_public_transportation" }],
         sourceIds: ["taxi-passenger-rights", "taxi-complaints"],
       },
     ],
@@ -212,7 +214,7 @@ export const taxiGuideCluster: Record<"taxis" | "taxiFares" | "airportTaxis", Tr
     ],
     sourceIds: ["guide-gett", "guide-iaa", "taxi-fares-2026", "taxi-tariff-hours", "taxi-passenger-rights", "taxi-complaints"],
     related: ["taxiFares", "airportTaxis", "uber", "sherut", "shabbat", "israel"],
-    services: [{ label: "Airport transfers and vehicle requests", to: "/transfers/" }, { label: "Private driver for a planned itinerary", to: "/private-driver/" }],
+    services: [{ label: "Request a quote for a pre-booked airport transfer", to: "/transfers/" }, { label: "Arrange a private driver for a day trip", to: "/private-driver/" }],
   },
 
   taxiFares: {

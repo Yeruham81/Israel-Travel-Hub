@@ -47,6 +47,19 @@ describe("intent-specific taxi guide cluster", () => {
     expect(guide.sections.find((s) => s.id === "payment")?.paragraphs.join(" ")).toContain("luggage");
     expect(guide.sections.find((s) => s.id === "intercity")?.paragraphs.join(" ")).toContain("Mitzpe Ramon");
   });
+  it("preserves the final editorial refinements and verified official help links", () => {
+    const guide = taxiGuideCluster.taxis;
+    expect(guide.updatedAt).toBe("2026-11-11");
+    const apps = guide.sections.find((section) => section.id === "apps")!;
+    expect(apps.externalLinks?.map((link) => link.href)).toEqual(["https://www.gett.com/il/", "https://appli.taxi/rider/"]);
+    expect(guide.sections.find((section) => section.id === "airport")?.paragraphs.join(" ")).toContain("at least two hours");
+    expect(guide.sections.find((section) => section.id === "airport")?.paragraphs.join(" ")).toContain("₪5");
+    expect(guide.sections.find((section) => section.id === "holidays")?.paragraphs.join(" ")).toContain("16:01");
+    expect(guide.sections.find((section) => section.id === "intercity")?.paragraphs.join(" ")).toContain("pedestrian crossing");
+    expect(guide.sections.find((section) => section.id === "safety")?.externalLinks?.[0]?.href).toContain("complaint_about_conduct_in_public_transportation");
+    expect(guide.services[0].label).toContain("Request a quote");
+  });
+
   it("differentiates Gett on-demand, scheduled and Terminal 1 pickup points", () => {
     const guide = taxiGuideCluster.airportTaxis;
     const rows = guide.comparison.rows;
