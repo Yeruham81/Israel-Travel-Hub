@@ -62,6 +62,42 @@ describe("daily reference exchange rates", () => {
     expect(fetchImpl).toHaveBeenCalledWith(referenceFxConfig.upstreamUrl, expect.objectContaining({ credentials: "omit", redirect: "error" }));
   });
 
+  it("uses the validated Hostinger PHP endpoint when the primary source fails, without browser CORS", async () => {
+    const fetched = vi.fn<typeof fetch>()
+      .mockRejectedValueOnce(new Error("Primary source blocked"))
+      .mockResolvedValueOnce(Response.json({
+        rates: { ...initialReferenceFx, checkedAt: new Date(checkTime).toISOString() },
+        status: "fresh",
+      }));
+    const service = createExchangeRateService({
+      fetchImpl: fetched,
+      now: () => checkTime,
+      seed: null,
+      fallbackUrl: referenceFxConfig.fallbackUrl,
+    });
+    const result = await service.get();
+    expect(result.status).toBe("fresh");
+    expect(result.rates?.ilsPerUnit).toEqual({ USD: 3.089, EUR: 3.4769 });
+    expect(fetched).toHaveBeenCalledTimes(2);
+    expect(fetched).toHaveBeenNthCalledWith(2, referenceFxConfig.fallbackUrl, expect.objectContaining({
+      credentials: "omit", redirect: "error", signal: expect.anything(),
+    }));
+  });
+
+  it("rejects an invalid or expired Hostinger fallback when primary source is unavailable", async () => {
+    const fetched = vi.fn<typeof fetch>()
+      .mockResolvedValueOnce(new Response("Unavailable", { status: 503 }))
+      .mockResolvedValueOnce(Response.json({ status: "unavailable", rates: null }));
+    const service = createExchangeRateService({
+      fetchImpl: fetched,
+      now: () => checkTime + 8 * referenceFxConfig.refreshMs,
+      seed: null,
+      fallbackUrl: referenceFxConfig.fallbackUrl,
+    });
+    expect(await service.get()).toEqual({ rates: null, status: "unavailable" });
+    expect(fetched).toHaveBeenCalledTimes(2);
+  });
+
   it("uses a dated last-good fallback on source failure without pretending it was updated, then retries after backoff", async () => {
     let time = checkTime;
     const fetchImpl = vi.fn<typeof fetch>().mockResolvedValueOnce(new Response("Unavailable", { status: 503 })).mockImplementation(async () => Response.json(payload()));
