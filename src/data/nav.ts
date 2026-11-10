@@ -4,7 +4,10 @@ import type { LinkProps } from "@tanstack/react-router";
 import { airportTransferRates, airportTransferRoutes, travelGuidePaths } from "@/data/registry";
 
 export type NavItem = { label: string; to: LinkProps["to"] };
-export type SidebarNavItem = (NavItem & { children?: NavItem[]; childrenLabel?: string; toggleLabel?: string; alwaysExpanded?: boolean; toggleOnly?: boolean }) | { label: string; href: string };
+export type SidebarNavItem =
+  | (NavItem & { children?: NavItem[]; childrenLabel?: string; toggleLabel?: string; alwaysExpanded?: boolean; toggleOnly?: boolean })
+  | { label: string; href: string }
+  | { label: string; headingOnly: true; children: NavItem[]; childrenLabel?: string };
 export type NavGroup = { title: string; items: SidebarNavItem[] };
 
 export const airportTransferNav = {
@@ -145,13 +148,13 @@ export const allNavGroups: NavGroup[] = [
     title: "Travel guides",
     items: [
       { label: "All travel guides", to: "/guides/" },
-      { label: "Israel itineraries", to: "/guides/", childrenLabel: "Trip lengths", alwaysExpanded: true, children: [
+      { label: "Israel itineraries", headingOnly: true, childrenLabel: "Trip lengths", children: [
         { label: "Israel in 3 days", to: "/travel-blog/israel-itinerary-3-days/" },
         { label: "Israel in 5 days", to: "/travel-blog/israel-itinerary-5-days/" },
         { label: "Israel in 7 days", to: "/travel-blog/israel-itinerary-7-days/" },
         { label: "Israel in 10 days", to: "/travel-blog/israel-itinerary-10-days/" },
       ] },
-      { label: "From Ben Gurion Airport", to: "/guides/", childrenLabel: "Ben Gurion Airport arrival guides", alwaysExpanded: true, children: [
+      { label: "From Ben Gurion Airport", headingOnly: true, childrenLabel: "Ben Gurion Airport arrival guides", children: [
         { label: "How to get to Jerusalem", to: "/travel-blog/how-to-get-from-ben-gurion-airport-to-jerusalem/" },
         { label: "How to get to Tel Aviv", to: "/travel-blog/how-to-get-from-ben-gurion-airport-to-tel-aviv/" },
         { label: "How to get to Haifa", to: "/travel-blog/how-to-get-from-ben-gurion-airport-to-haifa/" },
