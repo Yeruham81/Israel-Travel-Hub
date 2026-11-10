@@ -146,6 +146,36 @@ describe("international price estimates", () => {
     expect(price.querySelector('[data-currency="USD"]')).toBeNull();
   });
 
+  it("refreshes a still-valid older cached quote from GitHub when the Lovable API returns 503", async () => {
+    vi.setSystemTime(Date.parse("2026-10-20T20:00:00Z"));
+    const previouslySaved = {
+      ...initialReferenceFx,
+      publishedAt: "2026-10-18",
+      checkedAt: "2026-10-18T20:00:00Z",
+      ilsPerUnit: { USD: 4, EUR: 5 },
+    };
+    const newer = {
+      ...previouslySaved,
+      publishedAt: "2026-10-20",
+      checkedAt: "2026-10-20T19:30:00Z",
+      ilsPerUnit: { USD: 3.5, EUR: 4 },
+    };
+    localStorage.setItem(referenceFxConfig.storageKey, JSON.stringify({
+      rates: previouslySaved, status: "cached", nextCheckAt: Date.now() - 1000,
+    }));
+    const fetched = vi.fn<typeof fetch>()
+      .mockResolvedValueOnce(new Response("Unavailable", { status: 503 }))
+      .mockResolvedValueOnce(Response.json({ rates: newer, status: "fresh" }));
+    vi.stubGlobal("fetch", fetched);
+    render(<CurrencyRatesProvider><PriceDisplay amount={560} /></CurrencyRatesProvider>);
+    await flush();
+    expect(fetched).toHaveBeenCalledTimes(2);
+    expect(fetched).toHaveBeenNthCalledWith(2, referenceFxConfig.publicSnapshotUrl, expect.anything());
+    expect(screen.getByTestId("currency-price").querySelector('[data-currency="USD"]')).toHaveTextContent("≈ USD 160");
+    expect(screen.getByTestId("currency-price").querySelector('[data-currency="EUR"]')).toHaveTextContent("≈ EUR 140");
+    expect(JSON.parse(localStorage.getItem(referenceFxConfig.storageKey)!).rates.publishedAt).toBe("2026-10-20");
+  });
+
   it("keeps a dated saved estimate after a failed check and retries without changing the ILS amount", async () => {
     vi.stubGlobal("fetch", vi.fn<typeof fetch>().mockRejectedValue(new Error("Offline")));
     render(<CurrencyRatesProvider><PriceDisplay amount={550} /><ExchangeRateNote /></CurrencyRatesProvider>);
