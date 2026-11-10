@@ -142,7 +142,7 @@ export const allNavGroups: NavGroup[] = [
     ],
   },
   {
-    title: "Travel guides & tips",
+    title: "Travel guides",
     items: [
       { label: "All travel guides", to: "/guides/" },
       { label: "Israel itineraries", to: "/guides/", childrenLabel: "Trip lengths", alwaysExpanded: true, children: [
