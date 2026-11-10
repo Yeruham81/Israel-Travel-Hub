@@ -120,10 +120,10 @@ describe("shared sidebar navigation", () => {
     const airportGuides = within(guides).getByRole("list", { name: "Ben Gurion Airport arrival guides" });
     expect(airportGuides).toBeVisible();
     const expected = [
-      ["Airport to Jerusalem: all options", "/travel-blog/how-to-get-from-ben-gurion-airport-to-jerusalem/"],
-      ["Airport to Tel Aviv: all options", "/travel-blog/how-to-get-from-ben-gurion-airport-to-tel-aviv/"],
-      ["Airport to Haifa: all options", "/travel-blog/how-to-get-from-ben-gurion-airport-to-haifa/"],
-      ["Airport to Ein Bokek: all options", "/travel-blog/how-to-get-from-ben-gurion-airport-to-ein-bokek/"],
+      ["How to get to Jerusalem", "/travel-blog/how-to-get-from-ben-gurion-airport-to-jerusalem/"],
+      ["How to get to Tel Aviv", "/travel-blog/how-to-get-from-ben-gurion-airport-to-tel-aviv/"],
+      ["How to get to Haifa", "/travel-blog/how-to-get-from-ben-gurion-airport-to-haifa/"],
+      ["How to get to Ein Bokek", "/travel-blog/how-to-get-from-ben-gurion-airport-to-ein-bokek/"],
     ];
     expect(within(airportGuides).getAllByRole("link").map(link => [link.textContent, link.getAttribute("href")])).toEqual(expected);
     expect(within(guides).getByRole("list", { name: "Trip lengths" })).toBeVisible();
@@ -224,7 +224,7 @@ describe("shared sidebar navigation", () => {
     nav = within(dialog).getByRole("navigation", { name: "Explore Israel" });
     expect(within(nav).queryByRole("region", { name: "Religious sites" })).not.toBeInTheDocument();
     const airportGuides = within(nav).getByRole("list", { name: "Ben Gurion Airport arrival guides" });
-    fireEvent.click(within(airportGuides).getByRole("link", { name: "Airport to Ein Bokek: all options" }));
+    fireEvent.click(within(airportGuides).getByRole("link", { name: "How to get to Ein Bokek" }));
     await waitFor(() => expect(screen.queryByRole("dialog")).not.toBeInTheDocument());
     await waitFor(() => expect(router.state.location.pathname).toBe("/travel-blog/how-to-get-from-ben-gurion-airport-to-ein-bokek/"));
   });
