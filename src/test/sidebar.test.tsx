@@ -116,7 +116,19 @@ describe("shared sidebar navigation", () => {
     const router = await navigationRouter();
     render(<RouterContextProvider router={router}><GlobalNav /></RouterContextProvider>);
     const guides = screen.getByRole("region", { name: "Travel guides" });
-    expect(within(guides).getByRole("link", { name: "From Ben Gurion Airport" })).toHaveAttribute("href", "/guides/");
+    expect(within(guides).getByRole("link", { name: "All travel guides" })).toHaveAttribute("href", "/guides/");
+    for (const label of ["Israel itineraries", "From Ben Gurion Airport"]) {
+      expect(within(guides).getByText(label)).toBeVisible();
+      expect(within(guides).queryByRole("link", { name: label })).not.toBeInTheDocument();
+      expect(within(guides).queryByRole("button", { name: label })).not.toBeInTheDocument();
+    }
+    const itineraries = within(guides).getByRole("list", { name: "Trip lengths" });
+    expect(within(itineraries).getAllByRole("link").map(link => [link.textContent, link.getAttribute("href")])).toEqual([
+      ["Israel in 3 days", "/travel-blog/israel-itinerary-3-days/"],
+      ["Israel in 5 days", "/travel-blog/israel-itinerary-5-days/"],
+      ["Israel in 7 days", "/travel-blog/israel-itinerary-7-days/"],
+      ["Israel in 10 days", "/travel-blog/israel-itinerary-10-days/"],
+    ]);
     const airportGuides = within(guides).getByRole("list", { name: "Ben Gurion Airport arrival guides" });
     expect(airportGuides).toBeVisible();
     const expected = [
@@ -209,6 +221,12 @@ describe("shared sidebar navigation", () => {
     dialog = await screen.findByRole("dialog");
     nav = within(dialog).getByRole("navigation", { name: "Explore Israel" });
     const guides = within(nav).getByRole("region", { name: "Travel guides" });
+    expect(within(guides).getByRole("link", { name: "All travel guides" })).toHaveAttribute("href", "/guides/");
+    for (const label of ["Israel itineraries", "From Ben Gurion Airport"]) {
+      expect(within(guides).getByText(label)).toBeVisible();
+      expect(within(guides).queryByRole("link", { name: label })).not.toBeInTheDocument();
+      expect(within(guides).queryByRole("button", { name: label })).not.toBeInTheDocument();
+    }
     fireEvent.click(within(guides).getByRole("link", { name: /Choosing an eSIM for Israel/ }));
     await waitFor(() => expect(screen.queryByRole("dialog")).not.toBeInTheDocument());
     await waitFor(() => expect(router.state.location.pathname).toBe("/travel-blog/best-esim-for-israel/"));
