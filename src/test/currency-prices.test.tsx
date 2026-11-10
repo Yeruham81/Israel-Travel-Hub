@@ -95,6 +95,41 @@ describe("international price estimates", () => {
     expect(screen.getByTestId("exchange-rate-note")).not.toHaveTextContent("unavailable");
   });
 
+  it("falls back to the daily public Bank of Israel snapshot after a Lovable 503", async () => {
+    vi.setSystemTime(checkTime + 8 * referenceFxConfig.refreshMs);
+    const live = {
+      ...initialReferenceFx,
+      publishedAt: "2026-10-25",
+      checkedAt: new Date().toISOString(),
+      ilsPerUnit: { USD: 4, EUR: 5 },
+    };
+    const mockedFetch = vi.fn<typeof fetch>()
+      .mockResolvedValueOnce(new Response("Unavailable", { status: 503 }))
+      .mockResolvedValueOnce(Response.json({ rates: live, status: "fresh" }));
+    vi.stubGlobal("fetch", mockedFetch);
+    render(<CurrencyRatesProvider><PriceDisplay amount={550} /></CurrencyRatesProvider>);
+    await flush();
+    expect(mockedFetch).toHaveBeenCalledTimes(2);
+    expect(mockedFetch).toHaveBeenNthCalledWith(1, referenceFxConfig.endpoint, expect.objectContaining({ credentials: "omit" }));
+    expect(mockedFetch).toHaveBeenNthCalledWith(2, referenceFxConfig.publicSnapshotUrl, expect.objectContaining({ credentials: "omit" }));
+    expect(screen.getByTestId("currency-price").querySelector('[data-currency="USD"]')).toHaveTextContent("≈ USD 138");
+    expect(screen.getByTestId("currency-price").querySelector('[data-currency="EUR"]')).toHaveTextContent("≈ EUR 110");
+  });
+
+  it("rejects a stale public snapshot after a Lovable 503", async () => {
+    vi.setSystemTime(checkTime + 8 * referenceFxConfig.refreshMs);
+    const mockedFetch = vi.fn<typeof fetch>()
+      .mockResolvedValueOnce(new Response("Unavailable", { status: 503 }))
+      .mockResolvedValueOnce(Response.json({ rates: initialReferenceFx, status: "fresh" }));
+    vi.stubGlobal("fetch", mockedFetch);
+    render(<CurrencyRatesProvider><PriceDisplay amount={550} /></CurrencyRatesProvider>);
+    await flush();
+    expect(mockedFetch).toHaveBeenCalledTimes(2);
+    const price = screen.getByTestId("currency-price");
+    expect(price).toHaveTextContent("USD/EUR estimates unavailable");
+    expect(price.querySelector('[data-currency="USD"]')).toBeNull();
+  });
+
   it("keeps a dated saved estimate after a failed check and retries without changing the ILS amount", async () => {
     vi.stubGlobal("fetch", vi.fn<typeof fetch>().mockRejectedValue(new Error("Offline")));
     render(<CurrencyRatesProvider><PriceDisplay amount={550} /><ExchangeRateNote /></CurrencyRatesProvider>);
