@@ -57,7 +57,7 @@ describe("intent-specific taxi guide cluster", () => {
     expect(guide.sections.find((section) => section.id === "holidays")?.paragraphs.join(" ")).toContain("16:01");
     expect(guide.sections.find((section) => section.id === "intercity")?.paragraphs.join(" ")).toContain("pedestrian crossing");
     expect(guide.sections.find((section) => section.id === "safety")?.externalLinks?.[0]?.href).toContain("complaint_about_conduct_in_public_transportation");
-    expect(guide.services[0].label).toContain("Request a quote");
+    expect(guide.services[0]?.label).toContain("Request a quote");
   });
 
   it("differentiates Gett on-demand, scheduled and Terminal 1 pickup points", () => {
