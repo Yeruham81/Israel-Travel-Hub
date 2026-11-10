@@ -152,10 +152,10 @@ export const allNavGroups: NavGroup[] = [
         { label: "Israel in 10 days", to: "/travel-blog/israel-itinerary-10-days/" },
       ] },
       { label: "From Ben Gurion Airport", to: "/guides/", childrenLabel: "Ben Gurion Airport arrival guides", alwaysExpanded: true, children: [
-        { label: "Airport to Jerusalem: all options", to: "/travel-blog/how-to-get-from-ben-gurion-airport-to-jerusalem/" },
-        { label: "Airport to Tel Aviv: all options", to: "/travel-blog/how-to-get-from-ben-gurion-airport-to-tel-aviv/" },
-        { label: "Airport to Haifa: all options", to: "/travel-blog/how-to-get-from-ben-gurion-airport-to-haifa/" },
-        { label: "Airport to Ein Bokek: all options", to: "/travel-blog/how-to-get-from-ben-gurion-airport-to-ein-bokek/" },
+        { label: "How to get to Jerusalem", to: "/travel-blog/how-to-get-from-ben-gurion-airport-to-jerusalem/" },
+        { label: "How to get to Tel Aviv", to: "/travel-blog/how-to-get-from-ben-gurion-airport-to-tel-aviv/" },
+        { label: "How to get to Haifa", to: "/travel-blog/how-to-get-from-ben-gurion-airport-to-haifa/" },
+        { label: "How to get to Ein Bokek", to: "/travel-blog/how-to-get-from-ben-gurion-airport-to-ein-bokek/" },
       ] },
 
       { label: "Israel travel tips", to: travelGuidePaths.travelTips },
