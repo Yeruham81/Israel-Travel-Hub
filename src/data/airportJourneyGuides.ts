@@ -325,15 +325,15 @@ const byId: Record<AirportJourneyId, AirportJourneyGuide> = {
       ], inlineLinks: [{ text: "Akko travel guide", to: "/travel-blog/akko-acre/" }, { text: "car rental page", to: "/car-rental/" } ], checklist: ["Ask about parking at your Haifa hotel.", "Compare Highway 6 toll handling.", "Check desk hours if arriving on Shabbat."] },
     ],
     stations: [
-      { name: "Haifa Hof HaCarmel", time: "≈ 80–85 min", usefulFor: "Southern Haifa, Carmel Beach and local bus connections." },
-      { name: "Haifa Bat Galim", time: "≈ 85–90 min", usefulFor: "Bat Galim, Rambam Hospital and cable-car area." },
-      { name: "Haifa Center HaShmona", time: "≈ 90–100 min", usefulFor: "Downtown, German Colony and Haifa Port vicinity." },
-      { name: "Lev HaMifratz / HaMifratz Central", time: "Check actual service", usefulFor: "Haifa Bay hub, intercity buses and northern onward connections." },
+      { name: "Haifa Hof HaCarmel", time: "About 80–85 min", usefulFor: "Southern Haifa, Carmel Beach, MATAM and bus connections." },
+      { name: "Haifa Bat Galim", time: "About 85–90 min", usefulFor: "Bat Galim, Rambam Hospital and the cable car toward Stella Maris." },
+      { name: "Haifa Center HaShmona", time: "About 90–100 min", usefulFor: "Downtown, German Colony, the port district and lower Bahá’í Gardens." },
+      { name: "HaMifratz Central (Lev HaMifratz)", time: "Check train stops", usefulFor: "Haifa Bay, intercity buses, the Krayot and northern connections." },
     ],
     connections: [
-      "German Colony and downtown: Center HaShmona is often a sensible place to start, but confirm how to reach your specific hotel.",
-      "Carmel Centre and hilltop accommodation: plan a bus or taxi uphill. Straight-line distance from a coastal station is misleading.",
-      "Cruise departure: verify the correct passenger-terminal entrance, boarding deadline and access rules rather than using 'Haifa Port' as the only destination."
+      "Downtown, German Colony and lower Bahá’í Gardens: Center HaShmona is often a practical station, but check the walk and your hotel entrance.",
+      "Carmel Center and hilltop accommodation: plan an uphill bus or taxi. A nearby coastal station may still require a steep climb.",
+      "Cruise departures: Center HaShmona is near the port district, but the passenger entrance and baggage route are distinct; verify the ship, check-in deadline and access rules."
     ],
     weekend: [
       "Rail service normally pauses during the main Shabbat period and most Jewish holidays. Published bus 905 service is limited to Saturday night and early Sunday, and must be checked for your specific date.",
@@ -344,9 +344,14 @@ const byId: Record<AirportJourneyId, AirportJourneyGuide> = {
       "Pick your station by hotel elevation and actual bus connection, not by the first Haifa station on the railway line.",
       "If connecting to a cruise, avoid a narrow margin between airport arrival and ship check-in.",
       "Review the number of bags and passenger count before choosing a standard taxi.",
-      "For a wider northern trip, compare rail-plus-driver days with the full cost of a rental vehicle."
+      "For a wider northern trip, compare rail-plus-driver days with the full cost of a rental vehicle.",
+      "For bus 905, check the actual terminal stop, departure and Haifa destination instead of relying on an old timetable.",
+      "Arrange mobile data for live timetables, payment apps and driver communications if you need it after landing."
     ],
     faqs: [
+      { q: "Can I buy a train ticket at the airport without a Rav-Kav?", a: "Normally yes. You can buy a single journey ticket at the station beneath Terminal 3; a Rav-Kav or supported app can be convenient for further travel. Check the current fare and accepted methods." },
+      { q: "How do I pay for airport bus 905?", a: "Regular buses generally take a loaded Rav-Kav or a supported public-transport payment app, not cash passed to the driver. Check current ticketing rules before you board." },
+      { q: "Does bus 905 stop in the German Colony?", a: "No. The published route serves MATAM, Hof HaCarmel and HaMifratz Central rather than Haifa Center HaShmona or the German Colony. Plan the last part of the trip separately." },
       { q: "Is there a direct train from Ben Gurion Airport to Haifa?", a: "Direct trains are generally available during regular rail operation, but stops, frequency and service disruptions vary. Check Israel Railways for your destination station and travel date." },
       { q: "Which station is best for Haifa's German Colony?", a: "Haifa Center HaShmona often works well for downtown and the German Colony. Confirm your hotel's actual street and the remaining walk or taxi ride." },
       { q: "Can I use bus 905 on a weekday?", a: "Do not assume it runs through the day or every weekday. Its operation has been limited; use a dated public-transport planner and have a train/taxi alternative." },
@@ -357,7 +362,20 @@ const byId: Record<AirportJourneyId, AirportJourneyGuide> = {
       { q: "Can I get an Uber from Ben Gurion Airport to Haifa?", a: "No. Uber passenger rides are not available in Israel in 2026. Use an official airport taxi or a confirmed private transfer." },
       { q: "How do I travel from TLV to Haifa Port for a cruise?", a: "Confirm the ship, passenger-terminal entrance and boarding deadline. Consider the railway connection, final walk and baggage; for a timed arrival a direct confirmed vehicle may be easier." },
     ],
-    related: [{ label: "Official Ben Gurion Airport taxi booking and pickup", to: "/travel-blog/ben-gurion-airport-taxis/" }, { label: "Where to stay in Haifa", to: "/travel-blog/best-hotels-in-haifa/" }, { label: "Haifa shore excursions", to: "/haifa-shore-excursions/" }, { label: "Getting around Israel", to: "/travel-blog/getting-around-israel/" }]
+    related: [
+      { label: "Official airport taxi booking and pickup", to: "/travel-blog/ben-gurion-airport-taxis/" },
+      { label: "Where to stay in Haifa", to: "/travel-blog/best-hotels-in-haifa/" },
+      { label: "Haifa shore excursions and port planning", to: "/haifa-shore-excursions/" },
+      { label: "Getting around Israel", to: "/travel-blog/getting-around-israel/" },
+      { label: "Ben Gurion Airport on Shabbat", to: "/travel-blog/from-ben-gurion-airport-on-shabbat/" },
+      { label: "Sherut in Israel: former Amal airport service", to: "/travel-blog/sherut-in-israel/" },
+    ],
+    planNext: [
+      { label: "Haifa travel guide", to: "/travel-blog/haifa/", note: "Plan the German Colony, Mount Carmel and the waterfront." },
+      { label: "Museums in Haifa", to: "/travel-blog/museums-in-haifa/", note: "Discover museums and cultural sights on Mount Carmel and downtown." },
+      { label: "Akko (Acre) travel guide", to: "/travel-blog/akko-acre/", note: "Explore the historic walled coastal city near Haifa." },
+      { label: "Nazareth and the Basilica of the Annunciation", to: "/travel-blog/basilica-of-the-annunciation/", note: "Plan an excursion into the Galilee." },
+    ]
   },
   "ein-bokek": {
     id: "ein-bokek", city: "Ein Bokek (Dead Sea)",
