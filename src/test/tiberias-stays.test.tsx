@@ -11,6 +11,7 @@ import { affiliateConfig, getSource, providerLinks, tiberiasHotelRecommendations
 import { activeHotelNotice } from "@/lib/hotel-notices";
 import { CANONICAL_ORIGIN } from "@/lib/site";
 import { readOutboundClicks } from "@/lib/outbound";
+import { hotelAffiliateUrl } from "@/lib/hotel-affiliate";
 import { routeTree } from "@/routeTree.gen";
 import { Route as DestinationRoute } from "@/routes/travel-blog.best-hotels-in-tiberias";
 import { Route as FamilyRoute } from "@/routes/tiberias.family-hotels";
@@ -98,7 +99,7 @@ describe("Tiberias destination and distinct hotel intents", () => {
         const card = screen.getAllByTestId("hotel-recommendation").find((card) => card.id === `hotel-${id}`)!;
         expect(card).toHaveTextContent("Sponsored link");
         const link = within(card).getByRole("link", { name: `${booking.ctaLabel} for ${hotel(id).name}` });
-        expect(link).toHaveAttribute("href", affiliateConfig[booking.id]!.trackingUrl);
+        expect(link).toHaveAttribute("href", hotelAffiliateUrl(booking, page.pageId, id));
         expect(link).toHaveAttribute("rel", "sponsored noopener noreferrer");
         link.addEventListener("click", (event) => event.preventDefault());
         fireEvent.click(link);
