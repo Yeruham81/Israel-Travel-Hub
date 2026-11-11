@@ -189,6 +189,7 @@ export function AirportJourneyPage({ id }: { id: AirportJourneyId }) {
           <ul className="mt-4 grid gap-3 sm:grid-cols-2">{(g.sources || sources).map(s=><li key={s.url}><a className="block rounded-lg border bg-card p-4 font-medium text-primary underline" href={s.url} target="_blank" rel="noopener noreferrer">{s.title} <span className="sr-only">(opens a new tab)</span></a></li>)}
   
           </ul>
+          {id === "jerusalem" && hasPublicPhotoCredit(g.photo) && <div className="mt-3"><GuidePhotoCredit photo={g.photo} insideDisclosure /></div>}
         </SourcesDisclosure>
   );
 
@@ -275,7 +276,6 @@ export function AirportJourneyPage({ id }: { id: AirportJourneyId }) {
       </>}
       <TransferQuoteForm key={transferIdFor(id)} destinationId={transferIdFor(id)} fixedDestination fixedDestinationLabel={g.city} />
       {id === "jerusalem" && sourceBlock}
-      {id === "jerusalem" && hasPublicPhotoCredit(g.photo) && <aside className="mt-5" aria-label="Photo credits"><GuidePhotoCredit photo={g.photo} /></aside>}
     </main>
   );
 }
