@@ -32,7 +32,7 @@ export const jerusalemHotelPhotos: Record<string, HotelIllustration> = {
     sourceUrl: "https://commons.wikimedia.org/wiki/File:Jerusalem_Dome_of_the_rock_BW_14.JPG",
   },
   "sephardic-house": neighbourhood(oldCity, "Stone buildings and narrow streets of Jerusalem Old City"),
-  "bezalel": neighbourhood("/images/hotel-cards/bezalel.webp", "Nachlaot neighborhood streets near Bezalel Hotel"),
+  "bezalel": neighbourhood("/images/hotel-cards/bezalel.webp", "Nachlaot neighborhood streets in central Jerusalem"),
   "market-courtyard": neighbourhood(mahaneYehuda, "Market surroundings in Jerusalem"),
   "american-colony": neighbourhood(eastJerusalem, "Jerusalem's eastern districts"),
   "jerusalem-hotel": neighbourhood("/images/hotels/jerusalem-night.webp", "Jerusalem skyline at night"),
