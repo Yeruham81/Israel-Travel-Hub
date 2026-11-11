@@ -175,7 +175,7 @@ const byId: Record<AirportJourneyId, AirportJourneyGuide> = {
     updatedAt: "2026-11-11",
     historicalPrices: false,
     photos: {
-      station: { src: airportTerminalHall, alt: "Ben Gurion Airport Terminal 3 arrivals hall and access to onward transport" },
+      station: { src: benGurionRailPlatform, alt: "Ben Gurion Airport railway platform below Terminal 3, where trains depart toward Tel Aviv" },
       onward: { src: telAvivOldJaffa, alt: "Old Jaffa waterfront and streets, where the final hotel pickup point may differ from a train station" },
     },
     stationLinks: [{ text: "Ben Gurion Airport arrival guide", to: "/travel-blog/ben-gurion-airport-arrival-tips/" }, { text: "getting around Tel Aviv guide", to: "/travel-blog/getting-around-tel-aviv/" }],
@@ -250,7 +250,20 @@ const byId: Record<AirportJourneyId, AirportJourneyGuide> = {
       { q: "Do trains run from the airport late at night?", a: "Service and stopping patterns vary by date and hour. Check the actual Israel Railways journey for your flight and hotel; a late-night train may not stop at every Tel Aviv station." },
       { q: "Can I walk from Tel Aviv railway station to the beach?", a: "The four mainline Tel Aviv stations are inland. Walking may be possible for some addresses, but for many beach hotels or Old Jaffa the last leg is better planned by bus or taxi." }
     ],
-    related: [{ label: "Official Ben Gurion Airport taxi booking and pickup", to: "/travel-blog/ben-gurion-airport-taxis/" }, { label: "Where to stay in Tel Aviv", to: "/travel-blog/where-to-stay-in-tel-aviv/" }, { label: "Getting around Tel Aviv", to: "/travel-blog/getting-around-tel-aviv/" }, { label: "Airport transport on Shabbat", to: "/travel-blog/from-ben-gurion-airport-on-shabbat/" }]
+    related: [
+      { label: "Official airport taxi booking and pickup", to: "/travel-blog/ben-gurion-airport-taxis/" },
+      { label: "Getting around Tel Aviv", to: "/travel-blog/getting-around-tel-aviv/" },
+      { label: "Airport transport on Shabbat", to: "/travel-blog/from-ben-gurion-airport-on-shabbat/" },
+      { label: "Sherut in Israel: what still operates", to: "/travel-blog/sherut-in-israel/" },
+      { label: "Uber, Gett and Yango in Israel", to: "/travel-blog/uber-in-israel/" },
+      { label: "Ben Gurion Airport arrival tips", to: "/travel-blog/ben-gurion-airport-arrival-tips/" },
+    ],
+    planNext: [
+      { label: "Choose where to stay in Tel Aviv", to: "/travel-blog/where-to-stay-in-tel-aviv/", note: "Match the hotel area to your arrival station or bus stop." },
+      { label: "Beachfront hotels in Tel Aviv", to: "/tel-aviv/beachfront-hotels/", note: "Find a hotel close to the promenade and check its access." },
+      { label: "Beaches in Tel Aviv", to: "/travel-blog/beaches-in-tel-aviv/", note: "Plan your first day near the coast." },
+      { label: "Day trips from Tel Aviv", to: "/travel-blog/day-trips-from-tel-aviv/", note: "Explore destinations beyond the city once you have settled in." },
+    ]
   },
   haifa: {
     id: "haifa", city: "Haifa",
