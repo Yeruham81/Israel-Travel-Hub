@@ -6,6 +6,7 @@ import { jerusalemAreaGuides, telAvivAreaGuides } from "@/data/content";
 import { hotelsForArea, type HotelRecommendation } from "@/data/registry";
 import { jerusalemHotelPhotos } from "@/data/jerusalemHotelPhotos";
 import { telAvivHotelPhotos, type HotelIllustration } from "@/data/telAvivHotelPhotos";
+import { supplementalHotelPhotos } from "@/data/supplementalHotelPhotos";
 
 type CatalogCity = "jerusalem" | "telaviv";
 
@@ -22,21 +23,15 @@ export function hotelsInCityCatalog(cityId: CatalogCity): HotelRecommendation[] 
   return areaGuides(cityId).flatMap((area) => hotelsForArea(area.id, cityId));
 }
 
-/** Exactly the same licensed illustrative photo as on the property's neighborhood card.
- * The supplemental properties use the established illustration pool; no image is
- * represented as a photograph of the named hotel.
+/** One dedicated photo per hotel, shared between its city and neighborhood cards.
+ * No modulo-based fallback that reuses another hotel's illustration.
+ * All photographic scenes are explicitly illustrative, not actual hotel photos.
  */
 export function cityHotelPhoto(hotel: HotelRecommendation): HotelIllustration {
   if (hotel.cityId !== "jerusalem" && hotel.cityId !== "telaviv") {
     throw new Error("City hotel photos are only defined for Jerusalem and Tel Aviv");
   }
-  const photos = photoLibrary(hotel.cityId);
-  if (photos[hotel.id]) return photos[hotel.id]!;
-  const areaIndex = areaGuides(hotel.cityId).findIndex((area) => area.id === hotel.areaId);
-  const index = hotelsForArea(hotel.areaId, hotel.cityId).findIndex((entry) => entry.id === hotel.id);
-  const library = Object.values(photos);
-  if (areaIndex < 0 || index < 0 || library.length === 0) {
-    throw new Error(`Missing city hotel illustration for ${hotel.id}`);
-  }
-  return library[(areaIndex * 2 + index) % library.length]!;
+  const photo = photoLibrary(hotel.cityId)[hotel.id] ?? supplementalHotelPhotos[hotel.id];
+  if (!photo) throw new Error(`Missing unique city hotel illustration for ${hotel.id}`);
+  return photo;
 }
