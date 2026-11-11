@@ -28,16 +28,16 @@ export function Breadcrumbs({ items }: { items: UiCrumb[] }) {
 }
 
 /**
- * Up to three rows of slightly larger jump-link chips at every breakpoint.
- * Overflow is available in a native disclosure menu, without sideways scrolling.
+ * Display up to ten jump links in two columns on narrow screens (five rows).
+ * More links appear at wider breakpoints, with the rest in an accessible disclosure menu.
  */
 export function OnThisPage({ sections, sticky = false, compactLabels }: { sections: readonly (readonly [string, string])[]; sticky?: boolean; compactLabels?: Readonly<Record<string, string>> | undefined }) {
-  const overflowVisibility = sections.length <= 9 ? "sm:hidden" : sections.length <= 12 ? "lg:hidden" : sections.length <= 15 ? "xl:hidden" : "";
+  const overflowVisibility = sections.length <= 10 ? "hidden" : sections.length <= 12 ? "lg:hidden" : sections.length <= 15 ? "xl:hidden" : "";
   return (
     <nav aria-label="On this page" className={`${sticky ? "sticky top-[57px] z-30" : ""} relative mt-4 min-w-0 border-y bg-background/95 backdrop-blur`}>
       <div className="flex flex-wrap items-center justify-between gap-x-3 gap-y-1 px-1 pb-1 pt-2">
         <span className="shrink-0 text-[11px] font-bold uppercase tracking-wide text-muted-foreground">On this page</span>
-        {sections.length > 6 && <details className={`group relative ${overflowVisibility}`}>
+        {sections.length > 10 && <details className={`group relative ${overflowVisibility}`}>
           <summary className="cursor-pointer list-none rounded-md px-2 py-1 text-xs font-semibold text-primary underline-offset-4 hover:underline focus-visible:outline-2 focus-visible:outline-primary">
             All sections <span aria-hidden="true" className="inline-block transition-transform group-open:rotate-180">⌄</span>
           </summary>
@@ -48,7 +48,7 @@ export function OnThisPage({ sections, sticky = false, compactLabels }: { sectio
       </div>
       <ul className="grid min-w-0 grid-cols-2 gap-x-2 gap-y-1.5 px-1 pb-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
         {sections.map(([id, label], index) => {
-          const visibility = index >= 15 ? "hidden" : index >= 12 ? "hidden xl:block" : index >= 9 ? "hidden lg:block" : index >= 6 ? "hidden sm:block" : "";
+          const visibility = index >= 15 ? "hidden" : index >= 12 ? "hidden xl:block" : index >= 10 ? "hidden lg:block" : "";
           return <li key={id} className={`min-w-0 ${visibility}`}>
             <a href={`#${id}`} title={label} aria-label={label} className="chip chip-dense w-full truncate">{compactLabels?.[id] ?? label}</a>
           </li>;
