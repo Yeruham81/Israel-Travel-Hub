@@ -157,7 +157,8 @@ function TelAvivRailDetails({ guide }: { guide: AirportJourneyGuide }) {
 }
 
 function OptionSection({ option, guideId }: { option: JourneyOption; guideId: AirportJourneyId }) {
-  const jerusalemPrivate = guideId === "jerusalem" && option.id === "private";
+  const conciseGuide = guideId === "jerusalem" || guideId === "tel-aviv";
+  const inlinePrivate = conciseGuide && option.id === "private";
   return (
     <section id={sectionId(option.id)} aria-labelledby={sectionId(option.id) + "-h"} className="mt-12 scroll-mt-28">
       <h3 id={sectionId(option.id) + "-h"} className="text-2xl font-semibold">{option.heading}</h3>
@@ -165,16 +166,21 @@ function OptionSection({ option, guideId }: { option: JourneyOption; guideId: Ai
         {option.paragraphs.map((paragraph) => <p key={paragraph}><GuideParagraph paragraph={paragraph} inlineLinks={option.inlineLinks} /></p>)}
       </div>
       {guideId === "jerusalem" && option.id === "rail" && <JerusalemRailDetails guide={airportJourneyGuides.jerusalem} />}
+      {guideId === "tel-aviv" && option.id === "rail" && <TelAvivRailDetails guide={airportJourneyGuides["tel-aviv"]} />}
       {guideId === "jerusalem" && option.id === "taxi" && <UsefulJourneyLink label="Official airport taxi pickup instructions" href="https://www.gett.com/il/airport-en/" context="Check the ride-code procedure and the pickup point for your terminal." />}
       {guideId === "jerusalem" && option.id === "bus" && <UsefulJourneyLink label="Check bus 485 departures" href="https://bus.gov.il/" context="Find the actual timetable and boarding stop for your travel date." />}
-      {jerusalemPrivate && <UsefulJourneyLink label="Send me a message using the form below" href="#request-quote" context="Share your flight, destination and luggage details. I'll confirm availability and the price before you book." />}
-      {guideId !== "jerusalem" && <div className="mt-4 rounded-xl bg-secondary/50 p-5">
+      {inlinePrivate && <UsefulJourneyLink label="Send me a message using the form below" href="#request-quote" context="Share your flight, destination and luggage details. I'll confirm availability and the price before you book." />}
+      {guideId === "tel-aviv" && option.id === "rail" && <UsefulJourneyLink label="Check train times and fares" href="https://www.rail.co.il/" context="Select the Tel Aviv station closest to your hotel and recheck the timetable for your arrival date, especially after November 14, 2026." />}
+      {guideId === "tel-aviv" && option.id === "taxi" && <UsefulJourneyLink label="Official Gett airport taxi instructions" href="https://www.gett.com/il/airport-en/" context="Get your ride code and confirm the correct taxi queue at the terminal." />}
+      {guideId === "tel-aviv" && option.id === "bus" && <UsefulJourneyLink label="Check bus 445 stops and departures" href="https://bus.gov.il/" context="Find the actual route, fare and closest stop to your hotel; board at Terminal 3, Level 2, Exit 21." />}
+      {guideId === "tel-aviv" && option.id === "weekend" && <UsefulJourneyLink label="Free Line 711 — stop-by-stop timetable" href="https://busofash.co.il/?lines=711" context="Check Terminal 1 stop 34609 and the Tel Aviv-bound departure on your Friday or Saturday." />}
+      {!conciseGuide && <div className="mt-4 rounded-xl bg-secondary/50 p-5">
         <h4 className="font-semibold">Before choosing this option</h4>
         <ul className="mt-2 list-disc space-y-1 pl-5 text-sm leading-relaxed">
           {option.checklist.map((item) => <li key={item}>{item}</li>)}
         </ul>
       </div>}
-      {option.id === "private" && !jerusalemPrivate && <p className="mt-4"><a href="#request-quote" className="font-semibold text-primary underline underline-offset-4">Ask me for a private-transfer quote →</a>.</p>}
+      {option.id === "private" && !inlinePrivate && <p className="mt-4"><a href="#request-quote" className="font-semibold text-primary underline underline-offset-4">Ask me for a private-transfer quote →</a>.</p>}
     </section>
   );
 }
