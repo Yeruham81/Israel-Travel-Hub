@@ -1,30 +1,25 @@
 import type { ProviderLink } from "@/data/registry";
 
 /**
- * Travelpayouts supports an overriding ?sub_id= parameter on its short links.
- * Keep one verified deep link per property; add the source page at render time.
- * Never add query parameters to a hotel operator's official, non-affiliate URL.
- *
- * Examples:
- *   itt_stay_area_mamilla_jlm_waldorf
- *   itt_stay_jerusalem_jlm_waldorf
- *
- * Source: https://support.travelpayouts.com/hc/en-us/articles/12729746524050-
- * How-to-dynamically-change-SubID-in-short-affiliate-links
+ * Track source-page + destination for Travelpayouts' short links.
+ * Travelpayouts documents that ?sub_id= overrides a short link's existing SubID:
+ * https://support.travelpayouts.com/hc/en-us/articles/12729746524050-How-to-dynamically-change-SubID-in-short-affiliate-links
  */
-export function hotelClickSubId(pageId: string, hotelId: string): string {
-  const normalize = (value: string) =>
-    value.toLowerCase().replace(/[^a-z0-9]+/g, "_").replace(/^_+|_+$/g, "");
-  const page = normalize(pageId);
-  const hotel = normalize(hotelId);
-  if (!page || !hotel) throw new Error("Source page and hotel ID are required for affiliate tracking");
-  return `itt_${page}_${hotel}`;
+function normalizeTrackingId(value: string): string {
+  return value.toLowerCase().replace(/[^a-z0-9]+/g, "_").replace(/^_+|_+$/g, "");
 }
 
-export function hotelAffiliateUrl(
+function subId(parts: string[]): string {
+  const normalized = parts.map(normalizeTrackingId);
+  if (normalized.some((value) => value.length === 0)) {
+    throw new Error("Tracking ID requires a source page and a destination");
+  }
+  return `itt_${normalized.join("_")}`;
+}
+
+function withTravelpayoutsSubId(
   booking: Pick<ProviderLink, "url" | "isAffiliate">,
-  pageId: string,
-  hotelId: string,
+  value: string,
 ): string {
   if (!booking.isAffiliate) return booking.url;
   let url: URL;
@@ -33,11 +28,41 @@ export function hotelAffiliateUrl(
   } catch {
     return booking.url;
   }
-  // Limit this behavior to Travelpayouts short links, whose documented
-  // ?sub_id= override is supported. Never rewrite unrelated partner URLs.
+  // Keep official and unrelated affiliate URLs untouched.
   if (url.protocol !== "https:" || !(
     url.hostname === "tp.st" || url.hostname.endsWith(".tpm.li")
   )) return booking.url;
-  url.searchParams.set("sub_id", hotelClickSubId(pageId, hotelId));
+  url.searchParams.set("sub_id", value);
   return url.toString();
+}
+
+/** Exactly one identifiable hotel and one source page. */
+export function hotelClickSubId(pageId: string, hotelId: string): string {
+  return subId([pageId, hotelId]);
+}
+
+export function hotelAffiliateUrl(
+  booking: Pick<ProviderLink, "url" | "isAffiliate">,
+  pageId: string,
+  hotelId: string,
+): string {
+  return withTravelpayoutsSubId(booking, hotelClickSubId(pageId, hotelId));
+}
+
+/**
+ * For searches covering a city, area or category, track the source page and
+ * the search offer. Never mislabel these clicks as individual hotel bookings.
+ */
+export function hotelBrowseSubId(pageId: string, offerId: string): string {
+  return subId([pageId, offerId]);
+}
+
+export function hotelBrowseAffiliateUrl(
+  booking: Pick<ProviderLink, "id" | "url" | "isAffiliate">,
+  pageId: string,
+): string {
+  if (!/^(?:hotels|area|category)-[a-z0-9-]+-expedia$/.test(booking.id)) {
+    return booking.url;
+  }
+  return withTravelpayoutsSubId(booking, hotelBrowseSubId(pageId, booking.id));
 }
