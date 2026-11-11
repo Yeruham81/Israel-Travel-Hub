@@ -620,4 +620,38 @@ describe("migrated practical guides", () => {
     fireEvent.click(first);
     expect(readOutboundClicks()).toEqual([expect.objectContaining({ pageId: "guide-esim", productId: "esim-airalo", offerId: "esim-airalo" })]);
   });
+  it.each([
+    { id: "taxis", route: TaxiRoute, count: 3 },
+    { id: "uber", route: UberRoute, count: 2 },
+    { id: "sherut", route: SherutRoute, count: 3 },
+    { id: "shabbat", route: ShabbatRoute, count: 3 },
+  ] as const)("renders descriptive lightbulb links on $id without generic labels", async ({ id, route, count }) => {
+    const router = await routerAt(travelGuidePaths[id]);
+    const Page = route.options.component!;
+    const { container } = render(<RouterContextProvider router={router}><Page /></RouterContextProvider>);
+    const cards = [...container.querySelectorAll('[data-testid="highlighted-useful-link"]')];
+    expect(cards).toHaveLength(count);
+    for (const card of cards) {
+      expect(card.querySelector('svg[aria-hidden="true"]')).not.toBeNull();
+      expect(card.querySelector("a[href]")).not.toBeNull();
+      expect(card.textContent).not.toMatch(/Useful link/i);
+      expect(card.querySelectorAll("p")).toHaveLength(2);
+    }
+    if (id === "sherut") {
+      expect(container.querySelector("header p.text-lg")?.textContent).toMatch(/^Shared shuttle taxis once operated from Ben Gurion Airport to Jerusalem and Haifa, but those regular airport services have been discontinued/);
+      expect(container.querySelector("#airport-alternatives")?.querySelectorAll('[data-testid="highlighted-useful-link"]')).toHaveLength(2);
+    }
+    if (id === "shabbat") {
+      for (const sectionId of ["shabbat-hours", "weekend-711", "restart"]) {
+        expect(container.querySelector(`#${sectionId}`)?.querySelectorAll('[data-testid="highlighted-useful-link"]')).toHaveLength(1);
+      }
+    } else {
+      for (const section of travelGuides[id].sections) for (const link of section.highlightedLinks || []) {
+        const sectionNode = container.querySelector(`#${section.id}`)!;
+        expect(sectionNode.querySelector(`aside[data-testid="highlighted-useful-link"] a[href="${link.href}"]`)).not.toBeNull();
+        expect(sectionNode.querySelector(`ul[aria-label="Official resources"] a[href="${link.href}"]`)).toBeNull();
+      }
+    }
+  });
+
 });
