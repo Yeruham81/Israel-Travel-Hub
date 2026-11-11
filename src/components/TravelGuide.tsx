@@ -1,5 +1,6 @@
 import { Link } from "@tanstack/react-router";
 import { Fragment, type ReactNode } from "react";
+import { BookOpen } from "lucide-react";
 import { Breadcrumbs, Checklist, FaqList, OnThisPage, ProviderCard, RelatedLinks, SourceList } from "@/components/Guide";
 import { guideTopics, travelGuides, type GuideDirectoryEntry, type GuidePhoto, type GuideTopicId, type GuideSection, type GuideTable, type TravelGuide } from "@/data/travelGuides";
 import { publicSources, isPublisherUrl, linksForPage, travelGuidePaths, TRAVEL_GUIDE_CHECK_DATE, type TravelGuideId } from "@/data/registry";
@@ -102,11 +103,12 @@ function SectionReferences({ ids }: { ids: string[] }) {
   return <p className="mt-4 text-xs text-muted-foreground">References: {sources.map((source, index) => <span key={source.id}>{index > 0 && " · "}<a href={source.url} target="_blank" rel="noopener noreferrer" className="underline">{source.publisher}<span className="sr-only"> (opens in a new tab)</span></a></span>)}</p>;
 }
 
-export function GuideCard({ guide, headingLevel = 2 }: { guide: GuideDirectoryEntry; headingLevel?: 2 | 3 }) {
+export function GuideCard({ guide, headingLevel = 2, cardPhoto }: { guide: GuideDirectoryEntry; headingLevel?: 2 | 3; cardPhoto?: { src: string; alt: string } | null }) {
   const Heading = headingLevel === 3 ? "h3" : "h2";
+  const displayedPhoto = cardPhoto === undefined ? guide.photo : cardPhoto;
   return <article className="flex h-full min-w-0 flex-col overflow-hidden rounded-2xl border bg-card" data-testid="guide-directory-card">
     <Link to={guide.to} className="group flex flex-1 flex-col focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-primary">
-      {guide.photo && <img src={guide.photo.src} alt={guide.photo.alt} width={600} height={400} loading="lazy" decoding="async" className="aspect-[3/2] w-full object-cover" />}
+      {displayedPhoto ? <img src={displayedPhoto.src} alt={displayedPhoto.alt} width={600} height={400} loading="lazy" decoding="async" className="aspect-[3/2] w-full object-cover" /> : <span aria-hidden="true" className="flex aspect-[3/2] w-full items-center justify-center bg-secondary/50 text-muted-foreground"><BookOpen className="h-10 w-10 opacity-50" /></span>}
       <div className="flex flex-1 flex-col p-5"><Heading className="text-2xl font-semibold leading-tight group-hover:text-primary">{guide.title}</Heading><p className="mt-3 flex-1 text-sm leading-relaxed text-muted-foreground">{guide.description}</p><span className="mt-4 text-sm font-semibold text-primary">Read more →</span></div>
     </Link>
     <div className="px-5 pb-5"><GuideTags topics={guide.topics} /></div>
