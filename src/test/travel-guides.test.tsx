@@ -150,7 +150,7 @@ describe("migrated practical guides", () => {
     expect(travelGuides.taxis.sections.find((section) => section.id === "airport")!.inlineLinks?.some((link) => link.to === travelGuidePaths.airportTaxis)).toBe(true);
     expect(travelGuides.airportTaxis.comparison.rows.join(" ")).toMatch(/Exit 03.*Exit 23/);
     expect(travelGuides.uber.answer).toMatch(/Uber does not currently offer passenger rides in Israel/);
-    expect(travelGuides.sherut.answer).toMatch(/Nesher.*Jerusalem.*Amal.*Haifa.*no longer operating/s);
+    expect(travelGuides.sherut.answer).toMatch(/Jerusalem \(Nesher\).*Haifa.*\(Amal\).*no longer operate/s);
     expect(travelGuides.esim.sections.find((section) => section.id === "calling")!.paragraphs.join(" ")).toMatch(/US phone number.*different from an Israeli/s);
     expect(travelGuides.esim.answer).toMatch(/unlimited.*does not promise unlimited full-speed/i);
   });
