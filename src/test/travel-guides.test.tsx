@@ -448,7 +448,7 @@ describe("migrated practical guides", () => {
       .not.toContain("The former Amal airport sherut is discontinued.");
     expect(costs.sourceIds).toContain("guide-meter-route-estimates");
     expect(costs.inlineLinks?.[0]?.to).toBe(travelGuidePaths.taxiFares);
-    expect(guide.services).toHaveLength(3);
+    expect(guide.services).toHaveLength(4);
     expect(guide.updatedAt).toBe("2026-11-11");
     expect(getSource("guide-711-hours").note).toContain("Saturday 10:30–18:30");
     expect(guide.sections.find((section) => section.id === "taxis-transfers")!.paragraphs.join(" ")).toMatch(/do not need the Gett app/);
@@ -465,7 +465,7 @@ describe("migrated practical guides", () => {
     }
   });
 
-  it("ends the Shabbat guide with six related guides, three relevant next steps and one personal contact form", async () => {
+  it("ends the Shabbat guide with six related guides, four complementary next steps and one personal contact form", async () => {
     const router = await routerAt(travelGuidePaths.shabbat);
     const Page = ShabbatRoute.options.component!;
     const { container } = render(<RouterContextProvider router={router}><Page /></RouterContextProvider>);
@@ -473,7 +473,16 @@ describe("migrated practical guides", () => {
     const next = within(container).getByRole("region", { name: "Plan the next part of your trip" });
     const contact = within(container).getByRole("form", { name: "Guide contact message" });
     expect(related.querySelectorAll("li")).toHaveLength(6);
-    expect(next.querySelectorAll("li")).toHaveLength(3);
+    expect(next.querySelectorAll("li")).toHaveLength(4);
+    const nextPaths = Array.from(next.querySelectorAll("a")).map((link) => link.getAttribute("href"));
+    expect(nextPaths).toEqual([
+      "/car-rental/",
+      "/travel-blog/where-to-stay-in-tel-aviv/",
+      "/travel-blog/getting-around-tel-aviv/",
+      "/travel-blog/beaches-in-tel-aviv/",
+    ]);
+    expect(nextPaths).not.toContain("/transfers/");
+    expect(new Set(nextPaths).size).toBe(4);
     expect(container.querySelectorAll("#contact")).toHaveLength(1);
     expect(container.querySelector("#request-quote")).toBeNull();
     const taxiSection = container.querySelector("#taxis-transfers") as HTMLElement;
