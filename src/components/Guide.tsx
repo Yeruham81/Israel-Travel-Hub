@@ -295,8 +295,55 @@ export function ProviderSection({ id = "book", title, intro, links, pageId }: { 
  * Guide cards are capped at six and kept in complete pairs on all devices.
  * Service/action links keep their own compact link-card presentation.
  */
-export function RelatedLinks({ title = "Plan the rest of your trip", items, currentPath }: { title?: string; items: { label: string; to: LinkProps["to"]; note?: string }[]; currentPath?: string }) {
-  const guideSection = /\bguides?\b/i.test(title);
+export function RelatedLinks({ title = "Plan the rest of your trip", items, currentPath, illustrated = false }: { title?: string; items: { label: string; to: LinkProps["to"]; note?: string }[]; currentPath?: string; illustrated?: boolean }) {
+  // Use the same licensed, locally stored guide photographs as the taxi and Shabbat
+  // recommendation cards. Only explicitly selected related links are illustrated.
+  // Keep service/directory links as compact secondary navigation rather than dropping them.
+  if (illustrated) {
+    const normalized = (path: string) => path.replace(/\\/+$/, "");
+    const seen = new Set<string>();
+    const unique = items.filter((item) => {
+      const path = normalized(String(item.to));
+      if (path === normalized(currentPath ?? "") || seen.has(path)) return false;
+      seen.add(path);
+      return true;
+    });
+    const withPhoto = unique.flatMap((item) => {
+      const guide = guideDirectory.find((entry) => normalized(String(entry.to)) === normalized(String(item.to)) && entry.photo);
+      return guide ? [{ item, guide }] : [];
+    });
+    const pictured = withPhoto.slice(0, 4);
+    const picturedPaths = new Set(pictured.map(({ item }) => normalized(String(item.to))));
+    const remaining = unique.filter((item) => !picturedPaths.has(normalized(String(item.to))));
+    if (!pictured.length && !remaining.length) return null;
+    return <section aria-label={title} className="mt-12" data-testid="stay-trip-planning">
+      <h2 className="text-2xl font-bold leading-tight sm:text-3xl">{title}</h2>
+      {pictured.length > 0 && <ul className="mt-4 grid gap-4 sm:grid-cols-2" data-testid="stay-trip-photo-grid">
+        {pictured.map(({ item, guide }) => <li key={String(item.to)} className="min-w-0">
+          <Link to={item.to} className="group flex h-full min-w-0 flex-col overflow-hidden rounded-xl border bg-card transition-colors hover:border-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
+            <img src={guide.photo!.src} alt={guide.photo!.alt} loading="lazy" decoding="async" width={600} height={340} className="aspect-[16/9] w-full object-cover" />
+            <span className="flex flex-1 flex-col p-4">
+              <span className="text-base font-bold leading-snug text-foreground group-hover:text-primary">{item.label}</span>
+              <span className="mt-2 line-clamp-3 flex-1 text-sm leading-relaxed text-muted-foreground">{item.note || guide.description}</span>
+              <span className="mt-3 text-sm font-semibold text-primary">Read more</span>
+            </span>
+          </Link>
+        </li>)}
+      </ul>}
+      {remaining.length > 0 && <nav aria-label="More trip planning options" className="mt-5">
+        <p className="text-sm font-semibold text-muted-foreground">More ways to plan your stay</p>
+        <ul className="mt-3 grid gap-2 sm:grid-cols-2">
+          {remaining.map((item) => <li key={String(item.to)}>
+            <Link to={item.to} className="group flex h-full flex-col justify-center rounded-xl border bg-card px-4 py-3 text-sm transition-colors hover:border-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
+              <span className="font-semibold text-foreground group-hover:text-primary">{item.label}</span>
+              {item.note && <span className="mt-1 text-xs leading-relaxed text-muted-foreground">{item.note}</span>}
+            </Link>
+          </li>)}
+        </ul>
+      </nav>}
+    </section>;
+  }
+  const guideSection = /\\bguides?\\b/i.test(title);
   const normalized = (path: string) => path.replace(/\/+$/, "");
   const current = currentPath ? guideDirectory.find((guide) => normalized(String(guide.to)) === normalized(currentPath)) : undefined;
   const titleWords = new Set((current?.title.toLowerCase().match(/[a-z]{4,}/g) || []).map((w) => w.replace(/s$/, "")).filter((w) => !["israel", "travel", "guide", "with", "from", "your", "what", "about", "best"].includes(w)));
