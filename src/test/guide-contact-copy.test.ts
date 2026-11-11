@@ -3,7 +3,7 @@ import { guideContactCopy, type GuideContactKind } from "@/lib/guide-contact";
 
 describe("contextual personal guide contact", () => {
   it("uses distinct first-person descriptions and subject lines for every guide theme", () => {
-    const kinds: GuideContactKind[] = ["airport", "shabbat", "transport", "attraction", "itinerary", "accommodation", "connectivity", "general"];
+    const kinds: GuideContactKind[] = ["airport", "shabbat", "sherut", "transport", "attraction", "itinerary", "accommodation", "connectivity", "general"];
     const descriptions = new Set<string>();
     for (const kind of kinds) {
       const c = guideContactCopy("Test travel guide", kind, "Jerusalem");
