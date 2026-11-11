@@ -8,6 +8,7 @@ import { StayTripLinks } from "@/components/StayTripLinks";
 import { HomeContactForm } from "@/components/HomeContactForm";
 import { guideContactCopy } from "@/lib/guide-contact";
 import { StayHotelCard } from "@/components/StayHotelCard";
+import { resortHotelPhoto } from "@/data/resortHotelPhotos";
 import { StayComparison, StayBookingDisclosure, StayPhotoCredits, resortHotel, hotelBooking } from "@/components/StayGuideParts";
 
 export function HotelCategoryPage({ guide: g, destination }: { guide: HotelCategoryGuide; destination: HotelStayDestination }) {
@@ -28,7 +29,7 @@ export function HotelCategoryPage({ guide: g, destination }: { guide: HotelCateg
         </aside>}</Section>
         <Section id="compare" title={`Compare ${g.picks.length} ${destination.name} ${g.shortTitle.toLowerCase()}`} className="scroll-mt-32"><p>These are published property features and practical tradeoffs. Confirm current operation and your exact room offer for the travel dates; this table does not show live prices or available rooms.</p><StayComparison hotelIds={g.picks.map((pick) => pick.hotelId)} columns={g.comparison} caption={`${destination.name} ${g.shortTitle.toLowerCase()}: practical comparison`} /></Section>
         <Section id="details" title={g.detailTitle} className="scroll-mt-32">{g.details.map((detail) => <div key={detail.title} className="mt-6"><h3 className="text-2xl">{detail.title}</h3><p>{detail.text}</p></div>)}<p><Link to={destination.path as LinkProps["to"]} hash="location">{destination.locationLinkText}</Link></p></Section>
-        <section id="book" aria-labelledby="book-h" className="mt-14 scroll-mt-32"><p className="eyebrow">A shortlist for your trip</p><h2 id="book-h" className="mt-2 text-3xl">{g.shortTitle}: which stay suits you?</h2><StayBookingDisclosure /><ul className="mt-6 space-y-5">{g.picks.map((pick) => <StayHotelCard key={pick.hotelId} hotel={resortHotel(pick.hotelId)} booking={hotelBooking(pick.hotelId)} pageId={pageId} editorial={pick} />)}</ul></section>
+        <section id="book" aria-labelledby="book-h" className="mt-14 scroll-mt-32"><p className="eyebrow">A shortlist for your trip</p><h2 id="book-h" className="mt-2 text-3xl">{g.shortTitle}: which stay suits you?</h2><StayBookingDisclosure /><ul className="mt-6 space-y-5">{g.picks.map((pick) => <StayHotelCard key={pick.hotelId} hotel={resortHotel(pick.hotelId)} booking={hotelBooking(pick.hotelId)} pageId={pageId} editorial={pick} photo={resortHotelPhoto(pick.hotelId)} />)}</ul></section>
         <Section id="checklist" title="Confirm before paying" className="scroll-mt-32"><div className="mt-5 grid gap-4 sm:grid-cols-2"><Checklist title={g.checklistTitle} items={g.checklist.slice(0, 3)} /><Checklist title="The total & the travel dates" items={g.checklist.slice(3)} /></div></Section>
         <ProviderSection id="more-stays" title={`Browse more ${g.shortTitle.toLowerCase()}`} intro="Explore other options, then check the country, property, room and package carefully on the booking site." links={linksForPage(`${pageId}-browse`)} pageId={pageId} />
         <FaqList faqs={g.faqs} />
