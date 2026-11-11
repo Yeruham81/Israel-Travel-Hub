@@ -24,7 +24,7 @@ export type JourneyOption = {
 export type AirportJourneyGuide = {
   id: AirportJourneyId; city: string; path: LinkProps["to"]; title: string; description: string;
   distance: string; intro: string; answer: string; trainIntro: string;
-  privatePath: LinkProps["to"]; privateLabel: string; photo: StayGuidePhoto;
+  privatePath: LinkProps["to"]; privateLabel: string; photo: StayGuidePhoto & { credit?: string; licenseUrl?: string };
   options: JourneyOption[];
   stations: { name: string; time: string; usefulFor: string }[];
   connections: string[]; weekend: string[]; advice: string[]; faqs: { q: string; a: string }[];
