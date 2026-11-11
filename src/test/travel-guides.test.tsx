@@ -223,6 +223,22 @@ describe("migrated practical guides", () => {
     expect(within(container).queryByText("Explore more Israel travel guides")).not.toBeInTheDocument();
   });
 
+  it("applies the readable taxi-guide layout and personal inquiry footer to other guides", async () => {
+    for (const id of ["uber", "esim", "israel"] as const) {
+      const route = cases.find((item) => item.id === id)!.route;
+      const router = await routerAt(travelGuidePaths[id]);
+      const Page = route.options.component!;
+      const { container, unmount } = render(<RouterContextProvider router={router}><Page /></RouterContextProvider>);
+      expect(container.textContent).not.toContain("Choose your next step");
+      expect(container.textContent).not.toContain("Explore more Israel travel guides");
+      expect(within(container).getByRole("form", { name: "Guide contact message" })).toBeInTheDocument();
+      expect(within(container).getByRole("textbox", { name: /Subject/ })).toHaveValue(expect.stringContaining(travelGuides[id].title));
+      expect(container.querySelector("#" + travelGuides[id].sections[0]!.id + " > div")).toHaveClass("text-foreground");
+      expect(container.querySelector('nav[aria-label="On this page"] a[href="#contact"]')).not.toBeNull();
+      unmount();
+    }
+  });
+
   it("integrates three taxi guides with in-paragraph links without duplicating section strips", () => {
     const expected = {
       taxis: [travelGuidePaths.taxiFares, travelGuidePaths.uber, travelGuidePaths.airportTaxis, travelGuidePaths.shabbat, travelGuidePaths.israel],
