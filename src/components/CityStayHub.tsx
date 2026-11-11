@@ -9,12 +9,10 @@ import { AreaPhotoCredit } from "@/components/AreaMap";
 import { TelAvivHotelBrowser } from "@/components/TelAvivHotelBrowser";
 import { JerusalemHotelBrowser } from "@/components/JerusalemHotelBrowser";
 import { StayTripLinks } from "@/components/StayTripLinks";
-import { CityStayPlanning } from "@/components/CityStayPlanning";
 import { HomeContactForm } from "@/components/HomeContactForm";
 import { guideContactCopy } from "@/lib/guide-contact";
 import { recordOutboundClick, relFor } from "@/lib/outbound";
 import { hotelBrowseAffiliateUrl } from "@/lib/hotel-affiliate";
-import { JerusalemClusterLinks } from "@/components/JerusalemClusterLinks";
 
 export const quickPickPhotos: Record<string, { src: string; alt: string; sourceFilename: string }> = {
   downtown: { src: "/images/city-stays/jerusalem-downtown.webp", alt: "Ben Yehuda pedestrian street in central Jerusalem", sourceFilename: "Jerusalem_Ben_Yehuda_Pedestrian_Mall.jpg.webp" },
@@ -25,7 +23,7 @@ export const quickPickPhotos: Record<string, { src: string; alt: string; sourceF
   "telaviv-jaffa": { src: "/images/city-stays/tel-aviv-jaffa.webp", alt: "Jaffa's lively flea market", sourceFilename: "flea_market_in_jaffa1.jpg.webp" },
 };
 
-const sections = [["overview", "Start here"], ["areas", "Explore areas"], ["compare", "Compare areas"], ["checklist", "Booking tips"], ["book", "Find hotels"], ["planning", "Trip planning"], ["faq", "FAQ"], ["sources", "Sources"], ["contact", "Contact Moshe"]] as const;
+const sections = [["overview", "Start here"], ["areas", "Explore areas"], ["compare", "Compare areas"], ["checklist", "Booking tips"], ["book", "Find hotels"], ["faq", "FAQ"], ["explore", "Local guides"], ["trip-planning", "Trip planning"], ["contact", "Contact Moshe"], ["sources", "Sources"]] as const;
 
 export function CityStayHub({ g, areas }: { g: CityStayGuide; areas: NeighborhoodStayGuide[] }) {
   const [preference, setPreference] = useState<StayPreference | null>(null);
@@ -152,13 +150,11 @@ export function CityStayHub({ g, areas }: { g: CityStayGuide; areas: Neighborhoo
         ) : (
           <ProviderSection id="book" title={`Already know your dates? Browse ${g.city} stays`} intro="Open an area guide above for recommended properties, or browse a wider range of rooms on the provider's website." links={linksForPage(`stay-${g.id}`)} pageId={`stay-${g.id}`} />
         )}
-        <section id="planning" className="scroll-mt-32"><CityStayPlanning city={g.id} /></section>
-        {g.id === "jerusalem" && <JerusalemClusterLinks pageKey="stay-jerusalem" />}
         <FaqList faqs={g.faqs} />
-        <SourceList ids={g.sourceIds} />
-        <StayTripLinks region={g.id} extras={g.related} currentPath={g.path} />
-        <AreaPhotoCredit areas={areas} />
+        <StayTripLinks region={g.id} currentPath={g.path} />
         <HomeContactForm key={g.id} guide={guideContactCopy(g.title, "accommodation", g.city)} />
+        <SourceList ids={g.sourceIds} />
+        <AreaPhotoCredit areas={areas} />
       </article>
     </main>
   );
