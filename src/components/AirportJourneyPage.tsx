@@ -3,6 +3,7 @@ import { Breadcrumbs, FaqList, OnThisPage, RelatedLinks, Section } from "@/compo
 import { GuidePhotoCredit, GuideParagraph } from "@/components/TravelGuide";
 import { hasPublicPhotoCredit } from "@/lib/photo-credits";
 import { AuthorCard } from "@/components/AuthorCard";
+import { PageUpdated } from "@/components/PageUpdated";
 import { SourcesDisclosure } from "@/components/SourcesDisclosure";
 import { TransferQuoteForm } from "@/components/TransferQuoteForm";
 import { airportTransferPhotos } from "@/data/airportTransfers";
@@ -91,7 +92,6 @@ function JerusalemRailDetails({ guide }: { guide: AirportJourneyGuide }) {
       <ul className="mt-4 list-disc space-y-2 pl-5 leading-relaxed">{guide.connections.map((connection) => <li key={connection}>{connection}</li>)}</ul>
       <aside className="mt-7 rounded-2xl border bg-secondary/40 p-5 sm:p-6" aria-label={guide.exampleJourney.title}>
         <h4 className="text-xl font-semibold">{guide.exampleJourney.title}</h4>
-        <p className="mt-2 text-sm text-muted-foreground">Illustrative planning example, not a live timetable or reserved connection.</p>
         <ol className="mt-4 space-y-3">{guide.exampleJourney.steps.map((step, index) => <li key={step.label} className="flex gap-3"><span className="font-semibold text-primary">{index + 1}.</span><div><strong>{step.label}</strong><p className="mt-1 text-sm leading-relaxed text-muted-foreground">{step.detail}</p></div></li>)}</ol>
         <p className="mt-4 border-t pt-4 text-sm leading-relaxed"><strong>Practical choice:</strong> {guide.exampleJourney.takeaway}</p>
       </aside>
@@ -109,12 +109,12 @@ function OptionSection({ option, guideId }: { option: JourneyOption; guideId: Ai
       </div>
       {guideId === "jerusalem" && option.id === "rail" && <JerusalemRailDetails guide={airportJourneyGuides.jerusalem} />}
       {jerusalemPrivate && <p className="mt-5 leading-relaxed">To arrange a pickup for your flight and the right vehicle for your luggage, <a href="#request-quote" className="font-semibold text-primary underline underline-offset-4">send me a message using the form at the bottom of this guide</a>. I'll confirm the details and price before you book.</p>}
-      <div className="mt-4 rounded-xl bg-secondary/50 p-5">
+      {guideId !== "jerusalem" && <div className="mt-4 rounded-xl bg-secondary/50 p-5">
         <h4 className="font-semibold">Before choosing this option</h4>
         <ul className="mt-2 list-disc space-y-1 pl-5 text-sm leading-relaxed">
           {option.checklist.map((item) => <li key={item}>{item}</li>)}
         </ul>
-      </div>
+      </div>}
       {option.id === "private" && !jerusalemPrivate && <p className="mt-4"><a href="#request-quote" className="font-semibold text-primary underline underline-offset-4">Ask me for a private-transfer quote →</a>.</p>}
     </section>
   );
@@ -173,19 +173,32 @@ export function AirportJourneyPage({ id }: { id: AirportJourneyId }) {
         <p className="eyebrow mt-6">Independent transport comparison · Ben Gurion Airport (TLV)</p>
         <h1 className="mt-3 max-w-4xl text-4xl leading-[1.1] md:text-5xl">{g.title}</h1>
         <p className="mt-4 max-w-3xl text-lg leading-relaxed text-foreground">{g.intro}</p>
-        <p className="mt-3 text-sm text-muted-foreground">Approximate distance: {g.distance} · Editorial review: {g.updatedAt || PUBLISHED_REVIEW}</p>
+        {id === "jerusalem" ? <PageUpdated date={g.updatedAt || PUBLISHED_REVIEW} /> : <p className="mt-3 text-sm text-muted-foreground">Approximate distance: {g.distance} · Editorial review: {g.updatedAt || PUBLISHED_REVIEW}</p>}
         <figure className="mt-7"><img src={g.photo.src} alt={g.photo.alt} width={1200} height={675} fetchPriority="high" decoding="async" className="aspect-[16/9] max-h-[450px] w-full rounded-2xl object-cover"/>{id !== "jerusalem" && <GuidePhotoCredit photo={g.photo} />}</figure>
         <AuthorCard />
       </header>
       <section id="quick-answer" aria-labelledby="quick-answer-h" className="mt-8 rounded-2xl border border-primary/20 bg-secondary/60 p-6">
         <h2 id="quick-answer-h" className="text-2xl">Quick answer: what is the best way to get there?</h2>
         <p className="mt-3 leading-relaxed">{g.answer}</p>
-        <p className="mt-3 text-sm text-muted-foreground">This is an independent transport comparison, not a confirmed booking or fixed-price offer. Compare total costs to your actual address.</p>
+        {id !== "jerusalem" && <p className="mt-3 text-sm text-muted-foreground">This is an independent transport comparison, not a confirmed booking or fixed-price offer. Compare total costs to your actual address.</p>}
       </section>
       <OnThisPage sections={links} />
       <Section id="comparison" title={"Compare all ways from TLV Airport to " + g.city}>
-        <p>Choose by the full journey to your address, not only the lowest fare or the fastest station-to-station time. The figures below are planning estimates, not real-time quotes.</p>
+        <p>{id === "jerusalem" ? "Compare the main options, including the onward journey to your hotel." : "Choose by the full journey to your address, not only the lowest fare or the fastest station-to-station time. The figures below are planning estimates, not real-time quotes."}</p>
         <div role="region" aria-label={"Travel options to " + g.city} tabIndex={0} className="mt-5 max-w-full overflow-x-auto rounded-xl border bg-card">
+          {id === "jerusalem" ? (
+            <table className="min-w-[660px] w-full text-left text-sm">
+              <caption className="sr-only">Airport to Jerusalem: travel time, estimated cost, advantages and drawbacks</caption>
+              <thead className="bg-secondary"><tr>{["Option", "Travel time", "Estimated cost", "Advantages", "Drawbacks"].map(t => <th key={t} scope="col" className="p-3 font-semibold">{t}</th>)}</tr></thead>
+              <tbody className="divide-y">{g.options.map(option => <tr key={option.id}>
+                <th scope="row" className="p-3 font-semibold"><a href={"#" + sectionId(option.id)} className="text-primary underline underline-offset-2">{option.name}</a></th>
+                <td className="p-3 whitespace-nowrap">{option.time}</td>
+                <td className="p-3 whitespace-nowrap">{option.id === "private" ? `From ₪${privateRate.amount.toLocaleString("en-US")}` : option.comparison?.cost}</td>
+                <td className="p-3">{option.comparison?.advantages}</td>
+                <td className="p-3">{option.comparison?.drawbacks}</td>
+              </tr>)}</tbody>
+            </table>
+          ) : (
           <table className="min-w-[760px] w-full text-left text-sm">
             <caption className="sr-only">Compare estimated duration, fare basis, suitability and door-to-door service</caption>
             <thead className="bg-secondary">
@@ -200,8 +213,11 @@ export function AirportJourneyPage({ id }: { id: AirportJourneyId }) {
               </tr>
             ))}</tbody>
           </table>
+          )}
         </div>
-        <p className="mt-3 text-sm"><strong>*Price and time note:</strong> {id === "jerusalem" ? "The roughly ₪21 one-way standard train fare and ₪270–410+ metered taxi range are planning estimates, not guaranteed live prices. The taxi amount depends on the regulated tariff period, actual distance, journey time, traffic and lawful extras; bus fare must be confirmed in the journey planner. " : g.historicalPrices === false ? "The train and bus prices must be checked in the official planner for your travel date; this guide does not quote an unverified current fare. " : "₪ ranges are historical editorial estimates from August 2026; they are not current verified fares. "}Train and bus prices are per passenger; official taxis use the regulated meter, and rental totals depend on dates. My displayed starting price is a one-way weekday <strong>per-vehicle</strong> rate for up to four passengers with possible extra charges. All schedules can change. Check the operator and any written quote before you travel.</p>
+        {id === "jerusalem" ? (
+          <p className="mt-3 text-sm text-muted-foreground">Final taxi fares depend on the regulated tariff period, distance, journey time, traffic and extras. Schedules may change; check the journey planner for actual train and bus times and fares. My listed private-transfer starting price is for a one-way weekday trip per vehicle for up to four passengers, with possible extra charges.</p>
+        ) : (        <p className="mt-3 text-sm"><strong>*Price and time note:</strong> {g.historicalPrices === false ? "The train and bus prices must be checked in the official planner for your travel date; this guide does not quote an unverified current fare. " : "₪ ranges are historical editorial estimates from August 2026; they are not current verified fares. "}Train and bus prices are per passenger; official taxis use the regulated meter, and rental totals depend on dates. My displayed starting price is a one-way weekday <strong>per-vehicle</strong> rate for up to four passengers with possible extra charges. All schedules can change. Check the operator and any written quote before you travel.</p>)}
       </Section>
       {id !== "jerusalem" && <PrivateRideCta id={id}/>}
       {id !== "jerusalem" && stationSection}
