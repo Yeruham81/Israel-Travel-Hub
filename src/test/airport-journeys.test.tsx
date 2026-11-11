@@ -49,7 +49,7 @@ describe("four independent airport transportation comparisons", () => {
       expect(sourceDisclosure).not.toBeNull();
       expect(sourceDisclosure!.hasAttribute("open")).toBe(false);
       expect(sourceDisclosure!.querySelector("summary")?.textContent).toContain("Sources");
-      expect(sourceDisclosure!.querySelectorAll("a")).toHaveLength(6);
+      expect(sourceDisclosure!.querySelectorAll("a")).toHaveLength(id === "jerusalem" ? 7 : 6);
       expect(article.citation).toHaveLength(6);
       expect(JSON.stringify(article.citation)).not.toContain("israel-taxi.com");
     }
@@ -163,6 +163,8 @@ describe("four independent airport transportation comparisons", () => {
     expect(doc.querySelector('header time[datetime="2026-11-11"]')?.textContent).toBe("November 2026");
     expect(doc.querySelector("header")?.textContent).not.toMatch(/Approximate distance|Editorial review|45–55 km/);
     expect(doc.querySelector("header figure img")?.getAttribute("alt")).toMatch(/Panoramic view.*Jerusalem/i);
+    expect(doc.querySelector("#sources a[href*=\"wikimedia.org/wiki/File:Jerusalem_Dome_of_the_rock\"]")).not.toBeNull();
+    expect(doc.querySelector("main")?.lastElementChild?.id).toBe("sources");
     expect(doc.querySelector("#quick-answer")?.textContent).not.toContain("This is an independent transport comparison");
     const comparison = doc.querySelector("#comparison table")!;
     expect(comparison.querySelectorAll("thead th")).toHaveLength(5);
