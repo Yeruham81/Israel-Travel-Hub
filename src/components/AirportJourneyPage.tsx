@@ -1,11 +1,12 @@
 import { Link } from "@tanstack/react-router";
 import { Breadcrumbs, FaqList, OnThisPage, RelatedLinks, Section } from "@/components/Guide";
 import { GuidePhotoCredit, GuideParagraph } from "@/components/TravelGuide";
+import { hasPublicPhotoCredit } from "@/lib/photo-credits";
 import { AuthorCard } from "@/components/AuthorCard";
 import { SourcesDisclosure } from "@/components/SourcesDisclosure";
 import { TransferQuoteForm } from "@/components/TransferQuoteForm";
 import { airportTransferPhotos } from "@/data/airportTransfers";
-import { airportJourneyGuides, airportJourneyIds, type AirportJourneyId, type JourneyOption } from "@/data/airportJourneyGuides";
+import { airportJourneyGuides, airportJourneyIds, type AirportJourneyId, type AirportJourneyGuide, type JourneyOption } from "@/data/airportJourneyGuides";
 import { getAirportRouteGuide } from "@/data/airportRoutes";
 import { authorLd } from "@/lib/author";
 import { CANONICAL_ORIGIN, SITE_NAME, jsonLd, pageMeta } from "@/lib/site";
@@ -66,20 +67,55 @@ function PrivateRideCta({ id }: { id: AirportJourneyId }) {
   );
 }
 
+/** Keep the complete Jerusalem train journey, voucher, station exit and hotel leg together. */
+function JerusalemRailDetails({ guide }: { guide: AirportJourneyGuide }) {
+  return (
+    <>
+      {guide.photos?.onward && <figure className="mt-6 max-w-3xl">
+        <img src={guide.photos.onward.src} alt={guide.photos.onward.alt} width={755} height={503} loading="lazy" decoding="async" className="aspect-[3/2] max-h-96 w-full rounded-xl object-cover" />
+      </figure>}
+      <aside aria-label="Important Jerusalem train ticket information" className="mt-6 rounded-xl border border-primary/25 bg-secondary/45 p-5 leading-relaxed">
+        <h4 className="text-xl font-semibold">Jerusalem train: free personal voucher</h4>
+        <p className="mt-2">Israel Railways' August 19, 2026 notice requires each passenger to obtain a <strong>free personal voucher for the selected Jerusalem train, in addition to a valid ticket</strong>. Check the current requirement before travelling.</p>
+        <p className="mt-3 flex flex-wrap gap-x-5 gap-y-2 text-sm">
+          <a href="https://rail.co.il/?lan=en&page=vouchers-jerusalem" className="font-semibold text-primary underline underline-offset-4" target="_blank" rel="noopener noreferrer">Official voucher instructions</a>
+          <a href="https://www.rail.co.il/" className="font-semibold text-primary underline underline-offset-4" target="_blank" rel="noopener noreferrer">Check the train timetable and fare</a>
+        </p>
+        <p className="mt-2 text-sm">A revised Israel Railways timetable is scheduled to start on November 14, 2026. Use the date-specific planner rather than a fixed departure interval.</p>
+      </aside>
+      <h4 className="mt-8 text-xl font-semibold">From Jerusalem–Yitzhak Navon station to your hotel</h4>
+      <p className="mt-3 leading-relaxed"><GuideParagraph paragraph={guide.trainIntro} inlineLinks={guide.stationLinks} /></p>
+      {guide.photos?.station && <figure className="mt-5 max-w-3xl">
+        <img src={guide.photos.station.src} alt={guide.photos.station.alt} width={755} height={503} loading="lazy" decoding="async" className="aspect-[3/2] max-h-96 w-full rounded-xl object-cover" />
+      </figure>}
+      <ul className="mt-4 list-disc space-y-2 pl-5 leading-relaxed">{guide.connections.map((connection) => <li key={connection}>{connection}</li>)}</ul>
+      <aside className="mt-7 rounded-2xl border bg-secondary/40 p-5 sm:p-6" aria-label={guide.exampleJourney.title}>
+        <h4 className="text-xl font-semibold">{guide.exampleJourney.title}</h4>
+        <p className="mt-2 text-sm text-muted-foreground">Illustrative planning example, not a live timetable or reserved connection.</p>
+        <ol className="mt-4 space-y-3">{guide.exampleJourney.steps.map((step, index) => <li key={step.label} className="flex gap-3"><span className="font-semibold text-primary">{index + 1}.</span><div><strong>{step.label}</strong><p className="mt-1 text-sm leading-relaxed text-muted-foreground">{step.detail}</p></div></li>)}</ol>
+        <p className="mt-4 border-t pt-4 text-sm leading-relaxed"><strong>Practical choice:</strong> {guide.exampleJourney.takeaway}</p>
+      </aside>
+    </>
+  );
+}
+
 function OptionSection({ option, guideId }: { option: JourneyOption; guideId: AirportJourneyId }) {
+  const jerusalemPrivate = guideId === "jerusalem" && option.id === "private";
   return (
     <section id={sectionId(option.id)} aria-labelledby={sectionId(option.id) + "-h"} className="mt-12 scroll-mt-28">
       <h3 id={sectionId(option.id) + "-h"} className="text-2xl font-semibold">{option.heading}</h3>
       <div className="mt-3 space-y-3 leading-relaxed text-foreground">
         {option.paragraphs.map((paragraph) => <p key={paragraph}><GuideParagraph paragraph={paragraph} inlineLinks={option.inlineLinks} /></p>)}
       </div>
+      {guideId === "jerusalem" && option.id === "rail" && <JerusalemRailDetails guide={airportJourneyGuides.jerusalem} />}
+      {jerusalemPrivate && <p className="mt-5 leading-relaxed">To arrange a pickup for your flight and the right vehicle for your luggage, <a href="#request-quote" className="font-semibold text-primary underline underline-offset-4">send me a message using the form at the bottom of this guide</a>. I'll confirm the details and price before you book.</p>}
       <div className="mt-4 rounded-xl bg-secondary/50 p-5">
         <h4 className="font-semibold">Before choosing this option</h4>
         <ul className="mt-2 list-disc space-y-1 pl-5 text-sm leading-relaxed">
           {option.checklist.map((item) => <li key={item}>{item}</li>)}
         </ul>
       </div>
-      {option.id === "private" && <p className="mt-4">{guideId === "jerusalem" && "Prefer an arranged pickup to your Jerusalem address? "}<a href="#request-quote" className="font-semibold text-primary underline underline-offset-4">{guideId === "jerusalem" ? "Send me your journey details using the form below" : "Ask me for a private-transfer quote →"}</a>.</p>}
+      {option.id === "private" && !jerusalemPrivate && <p className="mt-4"><a href="#request-quote" className="font-semibold text-primary underline underline-offset-4">Ask me for a private-transfer quote →</a>.</p>}
     </section>
   );
 }
@@ -90,13 +126,14 @@ export function AirportJourneyPage({ id }: { id: AirportJourneyId }) {
   const links = [
     ["comparison", "At-a-glance comparison"],
     ...(id === "jerusalem"
-      ? [["options", "All transport options"] as const, ["station-choice", "Stations & connections"] as const]
+      ? [["options", "All transport options"] as const, ["option-rail", "Train & final connection"] as const]
       : [["station-choice", "Stations & connections"] as const, ["options", "All transport options"] as const]),
     ["shabbat", "Shabbat & holidays"],
     ["tips", "Planning tips"],
     ["faq", "Questions"],
-    ["sources", "Sources"],
-    ["request-quote", "Private transfer quote"],
+    ...(id === "jerusalem"
+      ? [["request-quote", "Send a message"] as const, ["sources", "Sources"] as const]
+      : [["sources", "Sources"] as const, ["request-quote", "Private transfer quote"] as const]),
   ] as const;
   const stationSection = (
 <Section id="station-choice" title={"Train stations, changes and the final journey in " + g.city}>
@@ -120,6 +157,15 @@ export function AirportJourneyPage({ id }: { id: AirportJourneyId }) {
       </Section>
   );
 
+  const sourceBlock = (
+  <SourcesDisclosure>
+          <p className="mt-3 text-sm text-muted-foreground">Schedules, routes, meeting points, fares and access can change. Refer to official provider pages for actual travel dates. {id === "jerusalem" ? "Train and taxi figures are indicative estimates; check the live train fare, voucher and regulated metered tariff before travelling." : g.historicalPrices === false ? "Displayed rail and bus costs are not price quotes; verify current prices before travel." : "Cost ranges are historical August 2026 editorial estimates, not verified current fares."}</p>
+          <ul className="mt-4 grid gap-3 sm:grid-cols-2">{(g.sources || sources).map(s=><li key={s.url}><a className="block rounded-lg border bg-card p-4 font-medium text-primary underline" href={s.url} target="_blank" rel="noopener noreferrer">{s.title} <span className="sr-only">(opens a new tab)</span></a></li>)}
+  
+          </ul>
+        </SourcesDisclosure>
+  );
+
   return (
     <main className="mx-auto max-w-5xl px-4 pb-16">
       <header className="pt-6">
@@ -128,7 +174,7 @@ export function AirportJourneyPage({ id }: { id: AirportJourneyId }) {
         <h1 className="mt-3 max-w-4xl text-4xl leading-[1.1] md:text-5xl">{g.title}</h1>
         <p className="mt-4 max-w-3xl text-lg leading-relaxed text-foreground">{g.intro}</p>
         <p className="mt-3 text-sm text-muted-foreground">Approximate distance: {g.distance} · Editorial review: {g.updatedAt || PUBLISHED_REVIEW}</p>
-        <figure className="mt-7"><img src={g.photo.src} alt={g.photo.alt} width={1200} height={675} fetchPriority="high" decoding="async" className="aspect-[16/9] max-h-[450px] w-full rounded-2xl object-cover"/><GuidePhotoCredit photo={g.photo} /></figure>
+        <figure className="mt-7"><img src={g.photo.src} alt={g.photo.alt} width={1200} height={675} fetchPriority="high" decoding="async" className="aspect-[16/9] max-h-[450px] w-full rounded-2xl object-cover"/>{id !== "jerusalem" && <GuidePhotoCredit photo={g.photo} />}</figure>
         <AuthorCard />
       </header>
       <section id="quick-answer" aria-labelledby="quick-answer-h" className="mt-8 rounded-2xl border border-primary/20 bg-secondary/60 p-6">
@@ -136,12 +182,6 @@ export function AirportJourneyPage({ id }: { id: AirportJourneyId }) {
         <p className="mt-3 leading-relaxed">{g.answer}</p>
         <p className="mt-3 text-sm text-muted-foreground">This is an independent transport comparison, not a confirmed booking or fixed-price offer. Compare total costs to your actual address.</p>
       </section>
-      {id === "jerusalem" && <aside aria-label="Important Jerusalem train ticket information" className="mt-6 rounded-xl border border-primary/25 bg-secondary/45 p-5 leading-relaxed">
-        <h2 className="text-xl font-semibold">Jerusalem train: book your free personal voucher</h2>
-        <p className="mt-2 text-foreground">Israel Railways' notice of August 19, 2026 requires each passenger to hold a free voucher for their selected Jerusalem train <strong>in addition to a valid ticket</strong>. Get the voucher when choosing your train and recheck the requirement before travelling.</p>
-        <p className="mt-3 flex flex-wrap gap-x-5 gap-y-2 text-sm"><a href="https://rail.co.il/?lan=en&page=vouchers-jerusalem" className="font-semibold text-primary underline underline-offset-4" target="_blank" rel="noopener noreferrer">Official voucher instructions</a><a href="https://www.rail.co.il/" className="font-semibold text-primary underline underline-offset-4" target="_blank" rel="noopener noreferrer">Check train times and fare</a></p>
-        <p className="mt-2 text-sm text-foreground">A revised Israel Railways timetable is scheduled to start on November 14, 2026. Check the date-specific service rather than relying on fixed departure intervals.</p>
-      </aside>}
       <OnThisPage sections={links} />
       <Section id="comparison" title={"Compare all ways from TLV Airport to " + g.city}>
         <p>Choose by the full journey to your address, not only the lowest fare or the fastest station-to-station time. The figures below are planning estimates, not real-time quotes.</p>
@@ -167,10 +207,9 @@ export function AirportJourneyPage({ id }: { id: AirportJourneyId }) {
       {id !== "jerusalem" && stationSection}
       <section id="options" aria-labelledby="options-h" className="mt-14 scroll-mt-28">
         <h2 id="options-h" className="text-3xl">How each transport option works</h2>
-        {g.photos?.onward && <figure className="mt-6 max-w-3xl"><img src={g.photos.onward.src} alt={g.photos.onward.alt} width={755} height={503} loading="lazy" decoding="async" className="aspect-[3/2] max-h-96 w-full rounded-xl object-cover" /><GuidePhotoCredit photo={g.photos.onward} /></figure>}
+        {id !== "jerusalem" && g.photos?.onward && <figure className="mt-6 max-w-3xl"><img src={g.photos.onward.src} alt={g.photos.onward.alt} width={755} height={503} loading="lazy" decoding="async" className="aspect-[3/2] max-h-96 w-full rounded-xl object-cover" /><GuidePhotoCredit photo={g.photos.onward} /></figure>}
         {g.options.map(o=><OptionSection key={o.id} option={o} guideId={id} />)}
       </section>
-      {id === "jerusalem" && stationSection}
       <Section id="shabbat" title="Getting there on Shabbat and Jewish holidays">
         {g.weekend.map(p=><p key={p}><GuideParagraph paragraph={p} inlineLinks={g.weekendLinks} /></p>)}
         {!g.weekendLinks?.length && <p>For terminal-specific weekend travel, see my <Link to="/travel-blog/from-ben-gurion-airport-on-shabbat/" className="text-primary underline">Ben Gurion Airport Shabbat guide</Link>.</p>}
@@ -180,12 +219,7 @@ export function AirportJourneyPage({ id }: { id: AirportJourneyId }) {
         <p>For first-time arrivals, read my <Link to="/travel-blog/ben-gurion-airport-arrival-tips/" className="text-primary underline">airport arrivals checklist</Link> and save the operator's contact details offline.</p>
       </Section>
       <FaqList faqs={g.faqs}/>
-      <SourcesDisclosure>
-        <p className="mt-3 text-sm text-muted-foreground">Schedules, routes, meeting points, fares and access can change. Refer to official provider pages for actual travel dates. {id === "jerusalem" ? "Train and taxi figures are indicative estimates; check the live train fare, voucher and regulated metered tariff before travelling." : g.historicalPrices === false ? "Displayed rail and bus costs are not price quotes; verify current prices before travel." : "Cost ranges are historical August 2026 editorial estimates, not verified current fares."}</p>
-        <ul className="mt-4 grid gap-3 sm:grid-cols-2">{(g.sources || sources).map(s=><li key={s.url}><a className="block rounded-lg border bg-card p-4 font-medium text-primary underline" href={s.url} target="_blank" rel="noopener noreferrer">{s.title} <span className="sr-only">(opens a new tab)</span></a></li>)}
-
-        </ul>
-      </SourcesDisclosure>
+      {id !== "jerusalem" && sourceBlock}
       {id === "jerusalem" ? <>
         <RelatedLinks title="Related practical guides" currentPath={g.path} items={g.related} />
         <RelatedLinks title="Plan the next part of your trip" items={g.planNext || []} />
@@ -198,6 +232,8 @@ export function AirportJourneyPage({ id }: { id: AirportJourneyId }) {
         <RelatedLinks title="Other airport journey comparisons" items={airportJourneyIds.filter(other => other !== id).map(other => ({ label: "How to get to " + airportJourneyGuides[other].city, to: airportJourneyGuides[other].path }))} />
       </>}
       <TransferQuoteForm key={transferIdFor(id)} destinationId={transferIdFor(id)} fixedDestination fixedDestinationLabel={g.city} />
+      {id === "jerusalem" && sourceBlock}
+      {id === "jerusalem" && hasPublicPhotoCredit(g.photo) && <aside className="mt-5" aria-label="Photo credits"><GuidePhotoCredit photo={g.photo} /></aside>}
     </main>
   );
 }
