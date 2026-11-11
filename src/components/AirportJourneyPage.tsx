@@ -76,7 +76,7 @@ function PrivateRideCta({ id }: { id: AirportJourneyId }) {
 function UsefulJourneyLink({ label, href, context }: { label: string; href: string; context: string }) {
   const external = /^https?:\/\//.test(href);
   return (
-    <aside aria-label={label} className="mt-5 flex items-start gap-3 rounded-xl border border-amber-300/60 bg-amber-50/60 p-4 dark:border-amber-700/40 dark:bg-amber-950/20">
+    <aside aria-label={label} data-testid="useful-journey-link" className="mt-5 flex items-start gap-3 rounded-xl border border-amber-300/60 bg-amber-50/60 p-4 dark:border-amber-700/40 dark:bg-amber-950/20">
       <Lightbulb aria-hidden="true" className="mt-0.5 h-5 w-5 shrink-0 fill-amber-200/70 text-amber-600 dark:fill-amber-500/25 dark:text-amber-400" />
       <div className="min-w-0">
         <p className="text-sm leading-relaxed">
