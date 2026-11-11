@@ -36,7 +36,7 @@ export function HotelCategoryPage({ guide: g, destination }: { guide: HotelCateg
           <p className="text-sm font-semibold">Compare other {destination.name} accommodation styles</p>
           <div className="mt-3 flex flex-wrap gap-2">
             <Link to={destination.path as LinkProps["to"]} className="chip">All {destination.name} hotels <ArrowRight className="ml-1 inline h-3.5 w-3.5" aria-hidden /></Link>
-            {otherGuides.map((other) => <Link key={other.id} to={other.path as LinkProps["to"]} className="chip">{other.shortTitle} <ArrowRight className="ml-1 inline h-3.5 w-3.5" aria-hidden /></Link>)}
+            {otherGuides.map((other) => <Link key={other.id} to={other.path as LinkProps["to"]} className="chip">{other.title} <ArrowRight className="ml-1 inline h-3.5 w-3.5" aria-hidden /></Link>)}
           </div>
         </nav>
         <FaqList faqs={g.faqs} />
