@@ -1,12 +1,16 @@
+import { UsefulLinkCallout } from "@/components/UsefulLinkCallout";
+
 /** Additional wayfinding belongs to this guide; shared articles keep their default layout. */
 export function ShabbatBusLinks() {
-  return <div className="mt-5 rounded-xl border bg-secondary/40 p-4 sm:p-5">
-    <p className="font-semibold text-foreground">Before relying on Line 711</p>
-    <p className="mt-2 text-sm leading-relaxed text-muted-foreground">Check the timetable for Terminal 1, stop 34609, in the Tel Aviv-bound direction on your travel date. Route-wide hours are not departures at the airport.</p>
-    <div className="mt-3 flex flex-wrap gap-x-6 gap-y-2 text-sm">
-      <a className="font-medium text-primary underline underline-offset-4" href="https://busofash.co.il/?lines=711" target="_blank" rel="noopener noreferrer">Line 711 stop-by-stop timetable <span className="sr-only">(opens in a new tab)</span></a>
-      <a className="font-medium text-primary underline underline-offset-4" href="https://busofash.co.il/" target="_blank" rel="noopener noreferrer">Timetable, accessibility and service updates <span className="sr-only">(opens in a new tab)</span></a>
-    </div>
+  return <div>
+    <UsefulLinkCallout
+      label="Line 711 stop-by-stop timetable"
+      href="https://busofash.co.il/?lines=711"
+      context="Check Terminal 1 stop 34609 in the Tel Aviv-bound direction for your actual travel date. Route-wide operating hours are not departure times at the airport."
+    />
+    <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+      For accessibility arrangements and service changes, see the <a className="font-medium text-primary underline underline-offset-4" href="https://busofash.co.il/" target="_blank" rel="noopener noreferrer">weekend bus operator updates<span className="sr-only"> (opens in a new tab)</span></a>.
+    </p>
   </div>;
 }
 
@@ -33,21 +37,22 @@ export function ShabbatTerminalSteps() {
 
 /** Keep practical timetable checks beside the paragraph where a visitor needs them. */
 export function ShabbatTimesLink() {
-  return <div className="mt-4 rounded-xl border bg-secondary/40 p-4 text-sm">
-    <p className="font-semibold text-foreground">Check the date, not just the day of the week</p>
-    <p className="mt-1 leading-relaxed text-muted-foreground">Find local Friday and Saturday Shabbat times. These do not tell you when the first train will run.</p>
-    <a href="https://www.myzmanim.com/" target="_blank" rel="noopener noreferrer" className="mt-2 inline-block font-medium text-primary underline underline-offset-4">Look up Shabbat times on MyZmanim<span className="sr-only"> (opens in a new tab)</span></a>
-  </div>;
+  return <UsefulLinkCallout
+    label="Look up Shabbat times on MyZmanim"
+    href="https://www.myzmanim.com/"
+    context="Check the local Friday and Saturday start and end times. These are not train or bus operating times."
+  />;
 }
 
 export function ShabbatPublicTransportLinks() {
-  return <div className="mt-4 rounded-xl border bg-secondary/40 p-4 text-sm" aria-label="Official rail and bus journey planners">
-    <p className="font-semibold text-foreground">Check your first available Saturday-night departure</p>
-    <p className="mt-1 leading-relaxed text-muted-foreground">Enter your actual travel date, origin and destination; then check any final connection to your accommodation.</p>
-    <div className="mt-3 flex flex-wrap gap-x-6 gap-y-2">
-      <a href="https://rail.co.il/?lan=en" target="_blank" rel="noopener noreferrer" className="font-medium text-primary underline underline-offset-4">Israel Railways — official timetable<span className="sr-only"> (opens in a new tab)</span></a>
-      <a href="https://route.bus.gov.il/?saveParams=true&tab=source-destination" target="_blank" rel="noopener noreferrer" className="font-medium text-primary underline underline-offset-4">National Public Transport Authority — route planner<span className="sr-only"> (opens in a new tab)</span></a>
-    </div>
+  return <div>
+    <UsefulLinkCallout
+      label="Israel Railways — official timetable"
+      href="https://rail.co.il/?lan=en"
+      context="Enter your actual date, departure station and destination to check the first train after Shabbat and your onward connection."
+    />
+    <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+      For bus journeys, check the <a href="https://route.bus.gov.il/?saveParams=true&tab=source-destination" target="_blank" rel="noopener noreferrer" className="font-medium text-primary underline underline-offset-4">National Public Transport Authority — route planner<span className="sr-only"> (opens in a new tab)</span></a> for the date and exact route.
+    </p>
   </div>;
 }
-
