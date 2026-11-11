@@ -7,6 +7,7 @@ import { CANONICAL_ORIGIN, SITE_NAME, jsonLd, pageMeta } from "@/lib/site";
 import { authorLd } from "@/lib/author";
 import { hasPublicPhotoCredit } from "@/lib/photo-credits";
 import { AuthorCard } from "@/components/AuthorCard";
+import { HomeContactForm } from "@/components/HomeContactForm";
 import { PageUpdated } from "@/components/PageUpdated";
 import { JerusalemJourneyOptions, JerusalemJourneyBooking, JerusalemJourneyResources } from "@/components/JerusalemJourneyPlanner";
 import { JerusalemClusterLinks, type JerusalemClusterKey } from "@/components/JerusalemClusterLinks";
@@ -14,6 +15,25 @@ import { JerusalemPartnerOffers } from "@/components/JerusalemPartnerOffers";
 import { ShabbatBusLinks, ShabbatTerminalSteps, ShabbatQuoteForm, ShabbatTimesLink, ShabbatTaxiFareLinks, ShabbatPublicTransportLinks } from "@/components/ShabbatGuideExtras";
 
 function sourcesFor(guide: TravelGuide) { return [...new Set([...guide.sourceIds, ...guide.sections.flatMap((section) => section.sourceIds || [])])]; }
+
+const taxiNavCompactLabels: Readonly<Record<string, string>> = {
+  "at-a-glance": "Overview",
+  recognize: "Licensed taxis",
+  booking: "Booking",
+  fares: "Fares",
+  apps: "Apps",
+  airport: "Airport taxis",
+  sherut: "Sherut",
+  holidays: "Shabbat & holidays",
+  payment: "Payment",
+  "special-needs": "Luggage & access",
+  intercity: "Long-distance",
+  safety: "Safety",
+  checklist: "Checklist",
+  faq: "FAQ",
+  sources: "Sources",
+  contact: "Contact Moshe",
+};
 
 export function travelGuideMeta(id: TravelGuideId) {
   const guide = travelGuides[id];
@@ -131,13 +151,13 @@ export function TravelGuidePage({ id }: { id: TravelGuideId }) {
       {!isJerusalemDayJourney && id !== "taxis" && <dl className="mt-5 grid gap-3 sm:grid-cols-3">{guide.facts.map((fact) => <div key={fact.label} className="rounded-xl border bg-card p-4"><dt className="text-xs font-semibold uppercase tracking-wide text-primary">{fact.label}</dt><dd className="mt-2 text-sm leading-relaxed">{fact.text}</dd></div>)}</dl>}
       <OnThisPage sections={isJerusalemDayJourney
         ? [["journey-options", "Compare transport"], ["journey-destinations", "Stops & destinations"], ...guide.sections.map((section) => [section.id, section.title] as const), ["journey-booking", "Tours & private trips"], ["checklist", "Checklist"], ["faq", "FAQ"], ["sources", "Sources"]]
-        : [["at-a-glance", "At a glance"], ...guide.sections.flatMap((section) => id === "shabbat" && section.id === "taxis-transfers" ? [[section.id, section.title] as const, ["request-quote", "Request transfer"] as const] : [[section.id, section.title] as const]), ["checklist", "Checklist"], ["faq", "FAQ"], ["sources", "Sources"]]} />
+        : [["at-a-glance", "At a glance"], ...guide.sections.flatMap((section) => id === "shabbat" && section.id === "taxis-transfers" ? [[section.id, section.title] as const, ["request-quote", "Request transfer"] as const] : [[section.id, section.title] as const]), ["checklist", "Checklist"], ["faq", "FAQ"], ["sources", "Sources"], ...(id === "taxis" ? [["contact", "Contact Moshe"] as const] : [])]} compactLabels={id === "taxis" ? taxiNavCompactLabels : undefined} />
       {!isJerusalemDayJourney && <section id="at-a-glance" aria-labelledby="comparison-h" className="mt-10 scroll-mt-24">
         <h2 id="comparison-h" className="text-3xl">{guide.comparison.caption}</h2>
         <div className="mt-5 max-w-full overflow-x-auto rounded-xl border"><table className="w-full min-w-[560px] text-left text-sm"><caption className="sr-only">{guide.comparison.caption}</caption><thead className="bg-secondary"><tr>{guide.comparison.headers.map((heading) => <th key={heading} scope="col" className="p-4 font-semibold">{heading}</th>)}</tr></thead><tbody className="divide-y">{guide.comparison.rows.map((row, index) => <tr key={index} className="bg-card">{row.map((cell, cellIndex) => cellIndex === 0 ? <th key={cellIndex} scope="row" className="p-4 font-medium">{cell}</th> : <td key={cellIndex} className="p-4 leading-relaxed text-muted-foreground">{cell}</td>)}</tr>)}</tbody></table></div>
       </section>}
       {guide.sections.map((section) => <Fragment key={section.id}><section id={section.id} aria-labelledby={`${section.id}-h`} className="mt-12 scroll-mt-24"><h2 id={`${section.id}-h`} className="text-3xl">{section.title}</h2>
-        <div className="mt-4 max-w-4xl space-y-4 leading-relaxed text-muted-foreground">
+        <div className={`mt-4 max-w-4xl space-y-4 leading-relaxed ${id === "taxis" ? "text-foreground" : "text-muted-foreground"}`}>
           {section.paragraphs.map((paragraph, paragraphIndex) => (
             <Fragment key={paragraphIndex}>
               <p><GuideParagraph paragraph={paragraph} inlineLinks={section.inlineLinks} /></p>
@@ -172,7 +192,8 @@ export function TravelGuidePage({ id }: { id: TravelGuideId }) {
         { label: "Ben Gurion Airport arrival tips", to: travelGuidePaths.arrival },
       ]} />}
       {guide.reading && <section aria-labelledby="reading-h" className="mt-12"><h2 id="reading-h" className="text-2xl">More on this topic</h2><ul className="mt-4 space-y-3">{guide.reading.map((reading) => <li key={reading.href} className="rounded-xl border p-4"><a href={reading.href} target="_blank" rel="noopener noreferrer" className="font-medium text-primary underline">{reading.label}<span className="sr-only"> (opens in a new tab)</span></a><p className="mt-1 text-sm text-muted-foreground">{reading.note}</p></li>)}</ul></section>}
-      {id !== "shabbat" && <div className="mt-12 rounded-2xl bg-navy p-6 text-navy-foreground"><h2 className="text-2xl">Explore more Israel travel guides</h2><p className="mt-2 opacity-85">Find practical advice by topic, from airport arrivals to places to stay and days out.</p><Link to="/guides/" className="btn btn-light mt-4">Browse all guides</Link></div>}
+      {id === "taxis" && <HomeContactForm context="taxis" />}
+      {id !== "shabbat" && id !== "taxis" && <div className="mt-12 rounded-2xl bg-navy p-6 text-navy-foreground"><h2 className="text-2xl">Explore more Israel travel guides</h2><p className="mt-2 opacity-85">Find practical advice by topic, from airport arrivals to places to stay and days out.</p><Link to="/guides/" className="btn btn-light mt-4">Browse all guides</Link></div>}
     </article>
   </main>;
 }

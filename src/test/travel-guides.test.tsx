@@ -196,6 +196,22 @@ describe("migrated practical guides", () => {
     }
   });
 
+  it("uses concise taxi navigation, stronger body contrast and a contextual owner contact form", async () => {
+    const router = await routerAt(travelGuidePaths.taxis);
+    const Page = TaxiRoute.options.component!;
+    const { container } = render(<RouterContextProvider router={router}><Page /></RouterContextProvider>);
+    const nav = within(container).getByRole("navigation", { name: "On this page" });
+    const airportJump = nav.querySelector('a[href="#airport"].chip');
+    expect(airportJump).toHaveTextContent("Airport taxis");
+    expect(airportJump).toHaveAttribute("aria-label", "Taking a Taxi from Ben Gurion Airport");
+    expect(nav.querySelector('a[href="#contact"]')).toHaveTextContent("Contact Moshe");
+    expect(container.querySelector("#booking > div")).toHaveClass("text-foreground");
+    expect(within(container).getByRole("heading", { name: "Ask me about your journey in Israel" })).toBeInTheDocument();
+    expect(within(container).getByRole("form", { name: "Taxi guide contact message" })).toBeInTheDocument();
+    expect(within(container).getByRole("textbox", { name: /Subject/ })).toHaveValue("Taxis and private transport in Israel");
+    expect(within(container).queryByText("Explore more Israel travel guides")).not.toBeInTheDocument();
+  });
+
   it("integrates three taxi guides with in-paragraph links without duplicating section strips", () => {
     const expected = {
       taxis: [travelGuidePaths.taxiFares, travelGuidePaths.uber, travelGuidePaths.airportTaxis, travelGuidePaths.shabbat, travelGuidePaths.israel],

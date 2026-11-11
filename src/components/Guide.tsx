@@ -31,7 +31,7 @@ export function Breadcrumbs({ items }: { items: UiCrumb[] }) {
  * Up to three rows of slightly larger jump-link chips at every breakpoint.
  * Overflow is available in a native disclosure menu, without sideways scrolling.
  */
-export function OnThisPage({ sections, sticky = false }: { sections: readonly (readonly [string, string])[]; sticky?: boolean }) {
+export function OnThisPage({ sections, sticky = false, compactLabels }: { sections: readonly (readonly [string, string])[]; sticky?: boolean; compactLabels?: Readonly<Record<string, string>> | undefined }) {
   const overflowVisibility = sections.length <= 9 ? "sm:hidden" : sections.length <= 12 ? "lg:hidden" : sections.length <= 15 ? "xl:hidden" : "";
   return (
     <nav aria-label="On this page" className={`${sticky ? "sticky top-[57px] z-30" : ""} relative mt-4 min-w-0 border-y bg-background/95 backdrop-blur`}>
@@ -50,7 +50,7 @@ export function OnThisPage({ sections, sticky = false }: { sections: readonly (r
         {sections.map(([id, label], index) => {
           const visibility = index >= 15 ? "hidden" : index >= 12 ? "hidden xl:block" : index >= 9 ? "hidden lg:block" : index >= 6 ? "hidden sm:block" : "";
           return <li key={id} className={`min-w-0 ${visibility}`}>
-            <a href={`#${id}`} title={label} aria-label={label} className="chip chip-dense w-full truncate">{label}</a>
+            <a href={`#${id}`} title={label} aria-label={label} className="chip chip-dense w-full truncate">{compactLabels?.[id] ?? label}</a>
           </li>;
         })}
       </ul>
