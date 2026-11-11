@@ -102,7 +102,7 @@ export const expandedTravelGuides = {
         paragraphs: [
           "Authorized airport taxis operate 24 hours a day on Shabbat and use the regulated meter. For an immediate taxi, obtain a ride code through Gett or an airport self-service kiosk, then join the official queue at Terminal 3 ground-floor Exit 03 (or the main arrivals exit at Terminal 1). You do not need the Gett app if you use the kiosk, and the code does not let you skip the queue. My official Ben Gurion Airport taxi guide explains the pickup procedure.",
           "Gett lists cash, card and in-app payment for its authorized airport taxis. A scheduled Gett ride is separate from the on-demand queue: book through the app at least two hours before pickup and follow the confirmation to Terminal 3 Level 2, Exit 23.",
-          "A separately booked private transfer has its own agreed meeting point, vehicle and price. When contacting me, include your flight number, final address, passenger count, luggage and any child-seat or accessibility needs. Ask about waiting, payment and cancellation before confirming. You can compare private airport-transfer options, or use my contact form at the end of this guide to ask about your journey.",
+          "A separately booked private transfer has its own agreed meeting point, vehicle and price. When contacting me, include your flight number, final address, passenger count, luggage and any child-seat or accessibility needs. Ask about waiting, payment and cancellation before confirming. You can also compare private airport-transfer options.",
         ],
         inlineLinks: [
           { text: "official Ben Gurion Airport taxi guide", to: travelGuidePaths.airportTaxis },

@@ -476,6 +476,11 @@ describe("migrated practical guides", () => {
     expect(next.querySelectorAll("li")).toHaveLength(3);
     expect(container.querySelectorAll("#contact")).toHaveLength(1);
     expect(container.querySelector("#request-quote")).toBeNull();
+    const taxiSection = container.querySelector("#taxis-transfers") as HTMLElement;
+    const contactJump = within(taxiSection).getByRole("link", { name: /Send me your arrival details using the contact form below/i });
+    expect(contactJump).toHaveAttribute("href", "#contact");
+    expect(contactJump.closest("p")).not.toBeNull();
+    expect(taxiSection.querySelector("form")).toBeNull();
     expect(container.querySelector('nav[aria-label="On this page"] a[href="#contact"]')).not.toBeNull();
     expect(container.querySelector('nav[aria-label="On this page"] a[href="#request-quote"]')).toBeNull();
     expect(within(container).getByRole("heading", { name: "Questions about arriving on Shabbat?" })).toBeInTheDocument();
