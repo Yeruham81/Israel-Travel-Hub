@@ -1,6 +1,7 @@
-/** 28 added neighborhood hotel skeleton records with direct, verified Expedia property URLs.
- * NOT affiliate links: replace only after obtaining per-hotel approved tracking links.
- * These records feed both the neighborhood pages and the complete city hotel galleries.
+/** 28 supplemental neighborhood hotel records with direct Expedia property SOURCE URLs.
+ * Editorial citations remain non-affiliate, while the separate booking offers in
+ * registry.ts carry approved property-specific Travelpayouts affiliate links.
+ * These records feed both neighborhood pages and the complete city galleries.
  */
 import type { HotelRecommendation, SourceReference } from "@/data/registry";
 
@@ -351,5 +352,5 @@ export const neighborhoodHotelSources: SourceReference[] = supplemental.map((hot
   publisher: "Expedia",
   url: hotel.expediaUrl,
   checkedAt: "2026-10-22",
-  note: "Direct Expedia property page checked against its property name. This is not an affiliate link; actual room inventory, final prices and cancellation rules are checked on Expedia at the time of booking.",
+  note: "Direct non-affiliate Expedia property source, separate from the tracked booking link. Actual room inventory, final prices and cancellation rules are confirmed on Expedia when booking.",
 }));
