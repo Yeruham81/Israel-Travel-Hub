@@ -77,7 +77,7 @@ export function NeighborhoodStayPage({ area }: { area: NeighborhoodStayGuide }) 
             ))}
           </ul>
           <p className="mt-4 text-xs leading-relaxed text-muted-foreground">
-            I may earn a commission from some existing Expedia booking links at no extra cost to you; new hotel links are direct, non-affiliate Expedia links until they are updated.
+            Some Expedia booking links are affiliate links and may earn me a commission at no additional cost to you. Hotel prices, availability and booking terms are confirmed on Expedia.
           </p>
           <details className="mt-3 rounded-xl border bg-card p-3 text-xs text-muted-foreground" data-testid="neighborhood-hotel-photo-credits">
             <summary className="cursor-pointer font-semibold text-foreground">Illustrative photo credits & licenses</summary>
