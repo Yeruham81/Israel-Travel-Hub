@@ -1,0 +1,51 @@
+name: Travelpayouts hotel affiliate-link pilot
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'scripts/travelpayouts/**'
+      - '.github/workflows/travelpayouts-link-pilot.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  validate-input:
+    name: Validate the pilot URLs without credentials
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - name: Validate generator syntax
+        run: node --check scripts/travelpayouts/generate-links.mjs
+      - name: Check affiliate link source list
+        run: node scripts/travelpayouts/generate-links.mjs --validate
+
+  generate-links:
+    name: Generate candidate links for review (never edits site)
+    if: github.event_name == 'workflow_dispatch'
+    needs: validate-input
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - name: Generate candidates with Travelpayouts partner-link API
+        env:
+          TRAVELPAYOUTS_API_TOKEN: ${{ secrets.TRAVELPAYOUTS_API_TOKEN }}
+        run: node scripts/travelpayouts/generate-links.mjs
+      - name: Upload generated link candidates for human review
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: travelpayouts-jerusalem-hotel-links
+          path: |
+            artifacts/travelpayouts-pilot.json
+            artifacts/travelpayouts-pilot.csv
+          if-no-files-found: warn
+          retention-days: 14
