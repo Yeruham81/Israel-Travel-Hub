@@ -178,14 +178,14 @@ describe("four independent airport transportation comparisons", () => {
     expect(priceNote.length).toBeLessThan(370);
     expect(doc.querySelectorAll("#options h4").length).toBeGreaterThanOrEqual(1);
     expect(doc.querySelector("#options")?.textContent).not.toContain("Before choosing this option");
-    const usefulLinks = [...doc.querySelectorAll('#options aside[aria-label^="Useful link:"]')];
+    const usefulLinks = [...doc.querySelectorAll('#options aside[data-testid="useful-journey-link"]')];
     expect(usefulLinks).toHaveLength(3);
     expect(usefulLinks.every(box => box.querySelector('svg[aria-hidden="true"]') && box.querySelector("a[href]"))).toBe(true);
     expect(doc.querySelector('#option-rail aside[aria-label="Important Jerusalem train ticket information"] svg[aria-hidden="true"]')).not.toBeNull();
-    expect(doc.querySelector('#option-taxi aside[aria-label^="Useful link:"] a[href="https://www.gett.com/il/airport-en/"]')).not.toBeNull();
-    expect(doc.querySelector('#option-bus aside[aria-label^="Useful link:"] a[href="https://bus.gov.il/"]')).not.toBeNull();
-    expect(doc.querySelector('#option-private aside[aria-label^="Useful link:"] a[href="#request-quote"]')).not.toBeNull();
-    expect(doc.querySelector('#option-rental aside[aria-label^="Useful link:"]')).toBeNull();
+    expect(doc.querySelector('#option-taxi aside[data-testid="useful-journey-link"] a[href="https://www.gett.com/il/airport-en/"]')).not.toBeNull();
+    expect(doc.querySelector('#option-bus aside[data-testid="useful-journey-link"] a[href="https://bus.gov.il/"]')).not.toBeNull();
+    expect(doc.querySelector('#option-private aside[data-testid="useful-journey-link"] a[href="#request-quote"]')).not.toBeNull();
+    expect(doc.querySelector('#option-rental aside[data-testid="useful-journey-link"]')).toBeNull();
     for (const o of g.options) for (const l of o.inlineLinks || []) {
       const link = doc.querySelector(`#option-${o.id} a[href="${l.to}"]`);
       expect(link).not.toBeNull();
