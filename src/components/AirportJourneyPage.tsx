@@ -198,7 +198,7 @@ function HaifaRailDetails({ guide }: { guide: AirportJourneyGuide }) {
 }
 
 function OptionSection({ option, guideId }: { option: JourneyOption; guideId: AirportJourneyId }) {
-  const conciseGuide = guideId === "jerusalem" || guideId === "tel-aviv";
+  const conciseGuide = guideId === "jerusalem" || guideId === "tel-aviv" || guideId === "haifa";
   const inlinePrivate = conciseGuide && option.id === "private";
   return (
     <section id={sectionId(option.id)} aria-labelledby={sectionId(option.id) + "-h"} className="mt-12 scroll-mt-28">
@@ -208,6 +208,7 @@ function OptionSection({ option, guideId }: { option: JourneyOption; guideId: Ai
       </div>
       {guideId === "jerusalem" && option.id === "rail" && <JerusalemRailDetails guide={airportJourneyGuides.jerusalem} />}
       {guideId === "tel-aviv" && option.id === "rail" && <TelAvivRailDetails guide={airportJourneyGuides["tel-aviv"]} />}
+      {guideId === "haifa" && option.id === "rail" && <HaifaRailDetails guide={airportJourneyGuides.haifa} />}
       {guideId === "jerusalem" && option.id === "taxi" && <UsefulJourneyLink label="Official airport taxi pickup instructions" href="https://www.gett.com/il/airport-en/" context="Check the ride-code procedure and the pickup point for your terminal." />}
       {guideId === "jerusalem" && option.id === "bus" && <UsefulJourneyLink label="Check bus 485 departures" href="https://bus.gov.il/" context="Find the actual timetable and boarding stop for your travel date." />}
       {inlinePrivate && <UsefulJourneyLink label="Send me a message using the form below" href="#request-quote" context="Share your flight, destination and luggage details. I'll confirm availability and the price before you book." />}
@@ -215,6 +216,9 @@ function OptionSection({ option, guideId }: { option: JourneyOption; guideId: Ai
       {guideId === "tel-aviv" && option.id === "taxi" && <UsefulJourneyLink label="Official Gett airport taxi instructions" href="https://www.gett.com/il/airport-en/" context="Get your ride code and confirm the correct taxi queue at the terminal." />}
       {guideId === "tel-aviv" && option.id === "bus" && <UsefulJourneyLink label="Check bus 445 stops and departures" href="https://bus.gov.il/" context="Find the actual route, fare and closest stop to your hotel; board at Terminal 3, Level 2, Exit 21." />}
       {guideId === "tel-aviv" && option.id === "weekend" && <UsefulJourneyLink label="Free Line 711 — stop-by-stop timetable" href="https://busofash.co.il/?lines=711" context="Check Terminal 1 stop 34609 and the Tel Aviv-bound departure on your Friday or Saturday." />}
+      {guideId === "haifa" && option.id === "rail" && <UsefulJourneyLink label="Israel Railways — check trains and fares" href="https://www.rail.co.il/" context="Check the exact Haifa station, ticket cost and live service, particularly with the nationwide timetable change planned for November 14, 2026." />}
+      {guideId === "haifa" && option.id === "taxi" && <UsefulJourneyLink label="Official Gett airport taxi pickup" href="https://www.gett.com/il/airport-en/" context="Get the ride code and follow the authorized taxi queue: Terminal 3 Exit 03, or the main arrivals exit at Terminal 1." />}
+      {guideId === "haifa" && option.id === "bus" && <UsefulJourneyLink label="Verify Egged bus 905 departures" href="https://bus.gov.il/" context="Check the dated Saturday-night or early-Sunday timetable, Terminal 3 Level 2 or Terminal 1 stop, and your Haifa drop-off." />}
       {!conciseGuide && <div className="mt-4 rounded-xl bg-secondary/50 p-5">
         <h4 className="font-semibold">Before choosing this option</h4>
         <ul className="mt-2 list-disc space-y-1 pl-5 text-sm leading-relaxed">
@@ -229,7 +233,7 @@ function OptionSection({ option, guideId }: { option: JourneyOption; guideId: Ai
 export function AirportJourneyPage({ id }: { id: AirportJourneyId }) {
   const g = airportJourneyGuides[id];
   const privateRate = rateFor(id);
-  const focusedLayout = id === "jerusalem" || id === "tel-aviv";
+  const focusedLayout = id === "jerusalem" || id === "tel-aviv" || id === "haifa";
   const displayOptions = id === "tel-aviv"
     ? ["rail", "taxi", "private", "bus", "weekend", "rental"].map(optionId => g.options.find(option => option.id === optionId)!)
     : g.options;
