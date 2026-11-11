@@ -163,13 +163,21 @@ describe.each([
       expect(affiliateLinks[0]!.sourceId).toBe(sourceId);
     }
   });
-  it("replaces the plain planning links with six illustrated, route-specific reading cards", () => {
+  it("shows one properly ordered four-plus-six illustrated guide footer", () => {
     const { container } = render(<CityStayPage g={g} />);
-    const planning = container.querySelector("#planning")!;
+    const local = container.querySelector("#explore")!;
+    const planning = container.querySelector("#trip-planning")!;
+    const faq = container.querySelector("#faq")!;
+    const contact = container.querySelector("#contact")!;
+    const sources = container.querySelector("#sources");
+    expect(within(local as HTMLElement).getByRole("heading", { name: `Explore more around ${g.city}` })).toBeInTheDocument();
     expect(within(planning as HTMLElement).getByRole("heading", { name: "Plan the rest of your trip" })).toBeInTheDocument();
-    expect(planning.querySelectorAll("img")).toHaveLength(6);
-    expect(planning.querySelectorAll('a[href^="/"]')).toHaveLength(6);
-    expect(planning.querySelectorAll('a[href^="/"] img')).toHaveLength(6);
+    expect(local.querySelectorAll("a img")).toHaveLength(4);
+    expect(planning.querySelectorAll("a img")).toHaveLength(6);
+    expect(faq.compareDocumentPosition(local) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
+    expect(local.compareDocumentPosition(planning) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
+    expect(planning.compareDocumentPosition(contact) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
+    if (sources) expect(contact.compareDocumentPosition(sources) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
   });
 
 });
