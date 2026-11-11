@@ -62,7 +62,7 @@ describe("Haifa accommodation: location and travel intent before booking", () =>
     expect(map.searchParams.get("lang")).toBe("en");
     expect(map.searchParams.get("marker")).toBe(`${destination.map.lat},${destination.map.lon}`);
     expect(container.querySelector("#location")!.compareDocumentPosition(container.querySelector("#book")!)).toBe(Node.DOCUMENT_POSITION_FOLLOWING);
-    expect(screen.getByRole("link", { name: /Shore excursions from Haifa Port/ })).toHaveAttribute("href", "/haifa-shore-excursions/");
+    expect(container.querySelector('#explore a[href="/haifa-shore-excursions/"]')).toBeInTheDocument();
     expect(container.querySelectorAll("main")).toHaveLength(1);
   });
 
