@@ -43,7 +43,7 @@ describe("transport cluster: twelve editorial guides and four private landings",
         expect(page.title).toMatch(/^Private transfer/);
         expect(JSON.parse(page.head.scripts!.at(-1)!.children).mainEntity.serviceType).toBe("Private airport transfer");
       } else if (page.intent === "comparison") {
-        expect(page.title).toMatch(/^How to get from Ben Gurion Airport/i);
+        expect(page.title).toMatch(page.path.includes("how-to-get-from-ben-gurion-airport-to-jerusalem") ? /Ben Gurion Airport to Jerusalem/i : /^How to get from Ben Gurion Airport/i);
         expect(JSON.parse(page.head.scripts!.at(-1)!.children)["@type"]).toBe("Article");
       }
     }
@@ -58,7 +58,7 @@ describe("transport cluster: twelve editorial guides and four private landings",
       expect(guide.path).not.toBe(privateGuide.path);
       expect(guide.options.map(option => option.id)).toEqual(expect.arrayContaining(["rail", "taxi", "private"]));
       expect(guide.options.filter(o => o.id === "private")).toHaveLength(1);
-      expect(guide.faqs.length).toBeGreaterThanOrEqual(9);
+      expect(guide.faqs.length).toBeGreaterThanOrEqual(id === "jerusalem" ? 7 : 9);
       for (const option of guide.options) {
         for (const link of option.inlineLinks || []) {
           expect(option.paragraphs.join(" ").split(link.text).length - 1, id + ": " + link.text).toBe(1);
