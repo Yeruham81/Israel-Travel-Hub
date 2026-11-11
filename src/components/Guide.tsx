@@ -152,7 +152,7 @@ export function compactOnThisPageLabel(id: string, label: string): string {
  * Display up to ten jump links in two columns on narrow screens (five rows).
  * More links appear at wider breakpoints, with the rest in an accessible disclosure menu.
  */
-export function OnThisPage({ sections, sticky = false, compactLabels }: { sections: readonly (readonly [string, string])[]; sticky?: boolean; compactLabels?: Readonly<Record<string, string>> | undefined }) {
+export function OnThisPage({ sections, sticky = false, compactLabels, fullLabels = false }: { sections: readonly (readonly [string, string])[]; sticky?: boolean; compactLabels?: Readonly<Record<string, string>> | undefined; fullLabels?: boolean }) {
   const overflowVisibility = sections.length <= 10 ? "hidden" : sections.length <= 12 ? "lg:hidden" : sections.length <= 15 ? "xl:hidden" : "";
   return (
     <nav aria-label="On this page" className={`${sticky ? "sticky top-[57px] z-30" : ""} relative mt-4 min-w-0 border-y bg-background/95 backdrop-blur`}>
@@ -171,7 +171,7 @@ export function OnThisPage({ sections, sticky = false, compactLabels }: { sectio
         {sections.map(([id, label], index) => {
           const visibility = index >= 15 ? "hidden" : index >= 12 ? "hidden xl:block" : index >= 10 ? "hidden lg:block" : "";
           return <li key={id} className={`min-w-0 ${visibility}`}>
-            <a href={`#${id}`} title={label} aria-label={label} className="chip chip-dense w-full truncate">{compactLabels?.[id] ?? compactOnThisPageLabel(id, label)}</a>
+            <a href={`#${id}`} title={label} aria-label={label} className="chip chip-dense w-full truncate">{fullLabels ? label : (compactLabels?.[id] ?? compactOnThisPageLabel(id, label))}</a>
           </li>;
         })}
       </ul>

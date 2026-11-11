@@ -27,7 +27,7 @@ export function LegalPage({ title, path, intro, sections, otherDocument }: {
       <p className="mt-4 text-sm text-muted-foreground">Last updated: <time dateTime={LEGAL_UPDATED_AT}>21 October 2026</time></p>
       <div className="prose-guide mt-5 text-muted-foreground">{intro}</div>
     </header>
-    <OnThisPage sections={sections.map(section => [section.id, section.title] as const)} />
+    <OnThisPage sections={sections.map(section => [section.id, section.title] as const)} fullLabels />
     <article>
       {sections.map((section, index) => <section key={section.id} id={section.id} aria-labelledby={`${section.id}-h`} className="mt-10 scroll-mt-24">
         <h2 id={`${section.id}-h`} className="text-2xl font-semibold">{index + 1}. {section.title}</h2>
