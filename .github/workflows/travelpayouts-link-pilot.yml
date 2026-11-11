@@ -1,7 +1,15 @@
-name: Travelpayouts hotel affiliate-link pilot
+name: Travelpayouts hotel affiliate-link generator
 
 on:
   workflow_dispatch:
+    inputs:
+      batch:
+        description: Select hotel batch
+        type: choice
+        default: remaining
+        options:
+          - remaining
+          - pilot
   push:
     branches: [main]
     paths:
@@ -13,7 +21,7 @@ permissions:
 
 jobs:
   validate-input:
-    name: Validate the pilot URLs without credentials
+    name: Validate hotel input URLs without credentials
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -22,12 +30,16 @@ jobs:
           node-version: '24'
       - name: Validate generator syntax
         run: node --check scripts/travelpayouts/generate-links.mjs
-      - name: Check affiliate link source list
-        run: node scripts/travelpayouts/generate-links.mjs --validate
+      - name: Check pilot and remaining affiliate link source lists
+        run: |
+          node scripts/travelpayouts/generate-links.mjs --validate
+          node scripts/travelpayouts/generate-links.mjs scripts/travelpayouts/remaining-hotels.json --validate
 
   generate-links:
     name: Generate candidate links for review (never edits site)
-    if: github.event_name == 'workflow_dispatch'
+    # API credentials are only accessed for manual runs or a deliberately tagged
+    # config commit, never for unrelated workflow changes.
+    if: github.event_name == 'workflow_dispatch' || (github.event_name == 'push' && contains(github.event.head_commit.message, '[generate-hotel-links]'))
     needs: validate-input
     runs-on: ubuntu-latest
     steps:
@@ -38,12 +50,17 @@ jobs:
       - name: Generate candidates with Travelpayouts partner-link API
         env:
           TRAVELPAYOUTS_API_TOKEN: ${{ secrets.TRAVELPAYOUTS_API_TOKEN }}
-        run: node scripts/travelpayouts/generate-links.mjs
+        run: |
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ] && [ "${{ inputs.batch }}" = "pilot" ]; then
+            node scripts/travelpayouts/generate-links.mjs
+          else
+            node scripts/travelpayouts/generate-links.mjs scripts/travelpayouts/remaining-hotels.json
+          fi
       - name: Upload generated link candidates for human review
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: travelpayouts-jerusalem-hotel-links
+          name: travelpayouts-hotel-link-candidates
           path: |
             artifacts/travelpayouts-pilot.json
             artifacts/travelpayouts-pilot.csv
