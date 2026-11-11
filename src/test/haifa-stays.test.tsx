@@ -10,6 +10,7 @@ import { affiliateConfig, getSource, providerLinks, haifaHotelRecommendations as
 import { hotelNav } from "@/data/nav";
 import { CANONICAL_ORIGIN } from "@/lib/site";
 import { readOutboundClicks } from "@/lib/outbound";
+import { hotelAffiliateUrl } from "@/lib/hotel-affiliate";
 import { routeTree } from "@/routeTree.gen";
 import { Route as DestinationRoute } from "@/routes/travel-blog.best-hotels-in-haifa";
 import { Route as FamilyRoute } from "@/routes/haifa.family-hotels";
@@ -94,7 +95,7 @@ describe("Haifa accommodation: location and travel intent before booking", () =>
         const card = container.querySelector(`#hotel-${id}`) as HTMLElement;
         expect(card).toHaveTextContent("Sponsored link");
         const link = within(card).getByRole("link", { name: `${booking.ctaLabel} for ${hotel.name}` });
-        expect(link).toHaveAttribute("href", affiliateConfig[booking.id]!.trackingUrl);
+        expect(link).toHaveAttribute("href", hotelAffiliateUrl(booking, page.pageId, id));
         expect(link).toHaveAttribute("rel", "sponsored noopener noreferrer");
         expect(link).toHaveAttribute("target", "_blank");
         link.addEventListener("click", (event) => event.preventDefault());
