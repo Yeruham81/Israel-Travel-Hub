@@ -26,6 +26,7 @@ import { Route as TelAvivDayTripsRoute } from "@/routes/travel-blog.day-trips-fr
 import { filterGuides, guideDirectory, guideTopics, travelGuides } from "@/data/travelGuides";
 import { affiliateConfig, getSource, isPublisherUrl, linksForPage, mosheBarakAuthor, travelGuidePaths, TRAVEL_GUIDE_CHECK_DATE } from "@/data/registry";
 import { readOutboundClicks } from "@/lib/outbound";
+import { repeatedPhotos } from "@/lib/photo-uniqueness";
 
 afterEach(() => { cleanup(); localStorage.clear(); });
 const cases = [{ id: "uber", route: UberRoute }, { id: "sherut", route: SherutRoute }, { id: "esim", route: EsimRoute }, { id: "arrival", route: ArrivalRoute }, { id: "israel", route: IsraelRoute }, { id: "telAviv", route: TelAvivRoute }, { id: "taxis", route: TaxiRoute },
@@ -82,6 +83,9 @@ describe("migrated practical guides", () => {
     expect(container.querySelector('a[href*="israel-taxi.com"]')).toBeNull();
     expect(container.querySelector("a a")).toBeNull();
     const related = screen.getByRole("region", { name: "Related practical guides" });
+    const relatedPhotos = [...related.querySelectorAll("li img")].map(photo => photo.getAttribute("src") || "");
+    expect(repeatedPhotos(relatedPhotos)).toEqual([]);
+    if (related.querySelectorAll("li").length === 6) expect(related.querySelector("ul")).toHaveClass("lg:grid-cols-3");
     for (const link of within(related).getAllByRole("link")) {
       const href = link.getAttribute("href")!;
       expect(router.matchRoutes(href).at(-1)?.routeId).toBe(href.replace(/\/$/, ""));
@@ -104,6 +108,9 @@ describe("migrated practical guides", () => {
     const Hub = HubRoute.options.component!;
     const html = renderToString(<RouterContextProvider router={router}><Hub /></RouterContextProvider>);
     expect(guideDirectory).toHaveLength(69);
+    const doc = new DOMParser().parseFromString(html, "text/html");
+    const cardPhotos = [...doc.querySelectorAll('[data-testid="guide-directory-card"] img')].map(photo => photo.getAttribute("src") || "");
+    expect(repeatedPhotos(cardPhotos)).toEqual([]);
     expect(new Set(guideDirectory.map((guide) => guide.to)).size).toBe(69);
     expect(guideDirectory.some(guide => guide.id === "israel-holidays" && guide.to === "/travel-blog/israel-holidays/")).toBe(true);
     for (const guide of guideDirectory) {
