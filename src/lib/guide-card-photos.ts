@@ -2,6 +2,7 @@ import { travelGuides, type GuideDirectoryEntry } from "@/data/travelGuides";
 import { airportJourneyGuides, type AirportJourneyId } from "@/data/airportJourneyGuides";
 import { photoIdentity } from "@/lib/photo-uniqueness";
 import telAvivDizengoff from "@/assets/tel-aviv/dizengoff.webp";
+import haifaBotanica from "@/assets/haifa/botanica.webp";
 
 /** Editorially verified local alternatives when two guides share a cover image. */
 const guideCardAlternatives: Record<string, { src: string; alt: string }[]> = {
@@ -10,6 +11,7 @@ const guideCardAlternatives: Record<string, { src: string; alt: string }[]> = {
   uber: [{ src: "/images/guides/taxi-in-tel-aviv.webp", alt: "Licensed white taxis with yellow roof signs in Tel Aviv" }],
   taxiFares: [{ src: "/images/guides/taxi-in-tel-aviv.webp", alt: "Licensed white taxis in Tel Aviv" }],
   telAviv: [{ src: telAvivDizengoff, alt: "Dizengoff area streets in central Tel Aviv, useful for exploring the city" }],
+  "stay-haifa": [{ src: haifaBotanica, alt: "Boutique hotel in Haifa, illustrating accommodation options in the city" }],
 };
 
 /**
