@@ -1,6 +1,8 @@
 import { Link, type LinkProps } from "@tanstack/react-router";
 import { ArrowRight, TrainFront, CalendarDays, BedDouble, Route as RouteIcon } from "lucide-react";
 import { Breadcrumbs, OnThisPage, FaqList } from "@/components/Guide";
+import { HomeContactForm } from "@/components/HomeContactForm";
+import { guideContactCopy } from "@/lib/guide-contact";
 import { GuidePhotoCredit } from "@/components/TravelGuide";
 import { AuthorCard } from "@/components/AuthorCard";
 import { PageUpdated } from "@/components/PageUpdated";
@@ -55,7 +57,7 @@ function RouteMap({ guide }: { guide: ItineraryGuide }) {
 const guideSections = (g: ItineraryGuide): [string, string][] => [
   ["overview", "Trip overview"], ["days", "Daily itinerary"],
   ...g.daysPlan.map((_, index): [string, string] => [`day-${index + 1}`, `Day ${index + 1}`]),
-  ["transport", "Transport & hotels"], ["alternatives", "Adapt the route"], ["faq", "FAQ"], ["sources", "Sources"],
+  ["transport", "Transport & hotels"], ["alternatives", "Adapt the route"], ["faq", "FAQ"], ["sources", "Sources"], ["contact", "Contact Moshe"],
 ];
 
 export function IsraelItineraryPage({ id }: { id: ItineraryId }) {
@@ -66,7 +68,7 @@ export function IsraelItineraryPage({ id }: { id: ItineraryId }) {
       <Breadcrumbs items={[{ name: "Home", to: "/" }, { name: "Travel guides", to: "/guides/" }, { name: g.title, to: internal(g.path as LinkProps["to"]) }]} />
       <p className="eyebrow mt-6">Israel itineraries · Independent trip planning</p>
       <h1 className="mt-3 max-w-4xl text-4xl leading-tight md:text-5xl">{g.title}</h1>
-      <p className="mt-4 max-w-3xl text-lg leading-relaxed text-muted-foreground">{g.intro}</p>
+      <p className="mt-4 max-w-3xl text-lg leading-relaxed text-foreground">{g.intro}</p>
       <div className="mt-5 flex flex-wrap gap-2 text-xs font-medium">
         <span className="rounded-full bg-secondary px-3 py-2">{g.days} full sightseeing days</span>
         <span className="rounded-full bg-secondary px-3 py-2">Realistic hotel bases</span>
@@ -164,11 +166,6 @@ export function IsraelItineraryPage({ id }: { id: ItineraryId }) {
       <p className="mt-2 text-sm text-muted-foreground">Use these for date-specific park opening, garden reservations and public-transport timetables. Links are independent editorial references, not evidence that any particular time slot is currently available.</p>
       <ul className="mt-4 grid gap-3 sm:grid-cols-2">{itinerarySources.map((source) => <li key={source.url}><a href={source.url} target="_blank" rel="noopener noreferrer" className="block h-full rounded-lg border bg-card p-4 text-sm font-semibold text-primary underline">{source.label} <span className="sr-only">(opens in a new tab)</span></a></li>)}</ul>
     </section>
-    <nav className="mt-12 flex flex-wrap gap-4 border-t pt-6" aria-label="Continue trip planning">
-      <Link to="/guides/" className="font-semibold text-primary underline">All travel guides</Link>
-      <Link to="/accommodation/" className="font-semibold text-primary underline">Accommodation by region</Link>
-      <Link to="/tours/" className="font-semibold text-primary underline">Tours and day trips</Link>
-      <Link to="/transfers/" className="font-semibold text-primary underline">Airport transfers</Link>
-    </nav>
+    <HomeContactForm key={id} guide={guideContactCopy(g.title, "itinerary")} />
   </main>;
 }

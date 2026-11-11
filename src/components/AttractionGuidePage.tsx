@@ -8,6 +8,8 @@ import { authorLd } from "@/lib/author";
 import { JerusalemClusterLinks, type JerusalemClusterKey } from "@/components/JerusalemClusterLinks";
 import { JerusalemPartnerOffers } from "@/components/JerusalemPartnerOffers";
 import { SacredHillGuideContent } from "@/components/SacredHillGuideContent";
+import { HomeContactForm } from "@/components/HomeContactForm";
+import { guideContactCopy } from "@/lib/guide-contact";
 import heroJerusalemMedium from "@/assets/home/hero-jerusalem-medium.webp";
 import heroJerusalemLarge from "@/assets/home/hero-jerusalem-large.webp";
 
@@ -45,13 +47,13 @@ export function AttractionGuidePage({ id }: {id:AttractionId}) {
   const sacred = id === "mount-zion" || id === "mount-of-olives";
   const ids=Object.keys(attractionGuides) as AttractionId[];
   const nearby=ids.filter(other=>other!==id && attractionGuides[other].region===a.region).slice(0,4);
-  const sections=[["highlights","What to see"],["getting-there","Getting there"],["tips","Practical tips"],["official","Official visitor information"],["faq","Questions"]] as const;
+  const sections=[["highlights","What to see"],["getting-there","Getting there"],["tips","Practical tips"],["official","Official visitor information"],["faq","Questions"],["contact","Contact Moshe"]] as const;
   return <main className="mx-auto max-w-5xl px-4 pb-16">
     <header className="pt-6">
       <Breadcrumbs items={[{name:"Home",to:"/"},{name:"Attractions",to:"/attractions/"},{name:a.title,to:attractionPath(id)}]}/>
       <p className="eyebrow mt-6">{a.region} · Visitor guide</p>
       <h1 className="mt-3 text-4xl leading-tight md:text-5xl">{a.title}</h1>
-      <p className="mt-4 max-w-3xl text-lg leading-relaxed text-muted-foreground">{a.intro}</p>
+      <p className="mt-4 max-w-3xl text-lg leading-relaxed text-foreground">{a.intro}</p>
       {!sacred && <p className="mt-4 text-sm text-muted-foreground"><strong>Suggested time:</strong> {a.duration}</p>}
       {a.image && (id === "mount-of-olives" ? (
         <figure className="mx-auto mt-7 max-w-4xl">
@@ -136,6 +138,7 @@ export function AttractionGuidePage({ id }: {id:AttractionId}) {
       {label:"All attractions",to:"/attractions/" as const},
     ]}/>
     </>}
+    <HomeContactForm key={id} guide={guideContactCopy(a.title, "attraction", a.title.split(":")[0])} />
     </>}
   </main>;
 }

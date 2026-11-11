@@ -71,7 +71,7 @@ function OptionSection({ option }: { option: JourneyOption }) {
   return (
     <section id={sectionId(option.id)} aria-labelledby={sectionId(option.id) + "-h"} className="mt-12 scroll-mt-28">
       <h3 id={sectionId(option.id) + "-h"} className="text-2xl font-semibold">{option.heading}</h3>
-      <div className="mt-3 space-y-3 leading-relaxed text-muted-foreground">
+      <div className="mt-3 space-y-3 leading-relaxed text-foreground">
         {option.paragraphs.map((paragraph) => <p key={paragraph}><GuideParagraph paragraph={paragraph} inlineLinks={option.inlineLinks} /></p>)}
       </div>
       <div className="mt-4 rounded-xl bg-secondary/50 p-5">
@@ -105,7 +105,7 @@ export function AirportJourneyPage({ id }: { id: AirportJourneyId }) {
         <Breadcrumbs items={[{ name: "Home", to: "/" }, { name: "Travel guides", to: "/guides/" }, { name: "How to get to " + g.city, to: g.path }]} />
         <p className="eyebrow mt-6">Independent transport comparison · Ben Gurion Airport (TLV)</p>
         <h1 className="mt-3 max-w-4xl text-4xl leading-[1.1] md:text-5xl">{g.title}</h1>
-        <p className="mt-4 max-w-3xl text-lg leading-relaxed text-muted-foreground">{g.intro}</p>
+        <p className="mt-4 max-w-3xl text-lg leading-relaxed text-foreground">{g.intro}</p>
         <p className="mt-3 text-sm text-muted-foreground">Approximate distance: {g.distance} · Editorial review: {g.updatedAt || PUBLISHED_REVIEW}</p>
         <figure className="mt-7"><img src={g.photo.src} alt={g.photo.alt} width={1200} height={675} fetchPriority="high" decoding="async" className="aspect-[16/9] max-h-[450px] w-full rounded-2xl object-cover"/><GuidePhotoCredit photo={g.photo} /></figure>
         <AuthorCard />
