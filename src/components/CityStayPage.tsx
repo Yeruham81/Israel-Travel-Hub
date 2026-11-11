@@ -3,7 +3,9 @@ import type { CityStayGuide, StayPreference } from "@/data/content";
 import { preferenceLabels, neighborhoodGuidesForCity } from "@/data/content";
 import { CityStayHub } from "@/components/CityStayHub";
 import { linksForPage } from "@/data/registry";
-import { type UiCrumb, Checklist, EndCta, FaqList, GuideHeader, OnThisPage, ProviderSection, RelatedLinks, Section, SourceList } from "@/components/Guide";
+import { type UiCrumb, Checklist, FaqList, GuideHeader, OnThisPage, ProviderSection, RelatedLinks, Section, SourceList } from "@/components/Guide";
+import { HomeContactForm } from "@/components/HomeContactForm";
+import { guideContactCopy } from "@/lib/guide-contact";
 
 const sections = [
   ["overview", "Overview"],
@@ -12,6 +14,7 @@ const sections = [
   ["book", "Find a place to stay"],
   ["faq", "FAQ"],
   ["sources", "Sources"],
+  ["contact", "Contact Moshe"],
 ] as const;
 
 export function CityStayPage({ g }: { g: CityStayGuide }) {
@@ -76,7 +79,7 @@ function SimpleCityStayPage({ g }: { g: CityStayGuide }) {
         <FaqList faqs={g.faqs} />
         <SourceList ids={g.sourceIds} />
         <RelatedLinks items={g.related} />
-        <EndCta title={`Ready to compare ${g.city} stays?`} links={links} pageId={pageId} />
+        <HomeContactForm key={g.id} guide={guideContactCopy(g.title, "accommodation", g.city)} />
       </article>
     </main>
   );

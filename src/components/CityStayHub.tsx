@@ -9,6 +9,8 @@ import { AreaPhotoCredit } from "@/components/AreaMap";
 import { TelAvivHotelBrowser } from "@/components/TelAvivHotelBrowser";
 import { JerusalemHotelBrowser } from "@/components/JerusalemHotelBrowser";
 import { CityStayPlanning } from "@/components/CityStayPlanning";
+import { HomeContactForm } from "@/components/HomeContactForm";
+import { guideContactCopy } from "@/lib/guide-contact";
 import { recordOutboundClick, relFor } from "@/lib/outbound";
 import { JerusalemClusterLinks } from "@/components/JerusalemClusterLinks";
 
@@ -21,7 +23,7 @@ export const quickPickPhotos: Record<string, { src: string; alt: string; sourceF
   "telaviv-jaffa": { src: "/images/city-stays/tel-aviv-jaffa.webp", alt: "Jaffa's lively flea market", sourceFilename: "flea_market_in_jaffa1.jpg.webp" },
 };
 
-const sections = [["overview", "Start here"], ["areas", "Explore areas"], ["compare", "Compare areas"], ["checklist", "Booking tips"], ["book", "Find hotels"], ["planning", "Trip planning"], ["faq", "FAQ"], ["sources", "Sources"]] as const;
+const sections = [["overview", "Start here"], ["areas", "Explore areas"], ["compare", "Compare areas"], ["checklist", "Booking tips"], ["book", "Find hotels"], ["planning", "Trip planning"], ["faq", "FAQ"], ["sources", "Sources"], ["contact", "Contact Moshe"]] as const;
 
 export function CityStayHub({ g, areas }: { g: CityStayGuide; areas: NeighborhoodStayGuide[] }) {
   const [preference, setPreference] = useState<StayPreference | null>(null);
@@ -153,6 +155,7 @@ export function CityStayHub({ g, areas }: { g: CityStayGuide; areas: Neighborhoo
         <FaqList faqs={g.faqs} />
         <SourceList ids={g.sourceIds} />
         <AreaPhotoCredit areas={areas} />
+        <HomeContactForm key={g.id} guide={guideContactCopy(g.title, "accommodation", g.city)} />
       </article>
     </main>
   );
