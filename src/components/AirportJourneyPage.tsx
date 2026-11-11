@@ -122,6 +122,40 @@ function JerusalemRailDetails({ guide }: { guide: AirportJourneyGuide }) {
   );
 }
 
+/** Keep Tel Aviv's four stations and the actual hotel connection inside the train section. */
+function TelAvivRailDetails({ guide }: { guide: AirportJourneyGuide }) {
+  return (
+    <>
+      {guide.photos?.station && <figure className="mt-6 max-w-3xl">
+        <img src={guide.photos.station.src} alt={guide.photos.station.alt} width={755} height={503} loading="lazy" decoding="async" className="aspect-[3/2] max-h-96 w-full rounded-xl object-cover" />
+      </figure>}
+      <h4 className="mt-8 text-xl font-semibold">Which Tel Aviv train station is best for your hotel?</h4>
+      <p className="mt-3 leading-relaxed"><GuideParagraph paragraph={guide.trainIntro} inlineLinks={guide.stationLinks} /></p>
+      <div role="region" aria-label="Tel Aviv railway station comparison" tabIndex={0} className="mt-5 max-w-full overflow-x-auto rounded-xl border">
+        <table className="w-full min-w-[540px] text-left text-sm">
+          <caption className="sr-only">Travel time from Ben Gurion Airport and useful Tel Aviv neighborhoods by station</caption>
+          <thead className="bg-secondary"><tr><th scope="col" className="p-3">Station</th><th scope="col" className="p-3">Train time</th><th scope="col" className="p-3">Where it helps</th></tr></thead>
+          <tbody className="divide-y">{guide.stations.map(station => <tr key={station.name}>
+            <th scope="row" className="p-3 font-semibold">{station.name}</th><td className="p-3">{station.time}</td><td className="p-3">{station.usefulFor}</td>
+          </tr>)}</tbody>
+        </table>
+      </div>
+      <h4 className="mt-8 text-xl font-semibold">From the station to the beach, your hotel or Old Jaffa</h4>
+      {guide.photos?.onward && <figure className="mt-5 max-w-3xl">
+        <img src={guide.photos.onward.src} alt={guide.photos.onward.alt} width={755} height={503} loading="lazy" decoding="async" className="aspect-[3/2] max-h-96 w-full rounded-xl object-cover" />
+      </figure>}
+      <ul className="mt-4 list-disc space-y-2 pl-5 leading-relaxed">{guide.connections.map(connection => <li key={connection}>{connection}</li>)}</ul>
+      <aside className="mt-7 rounded-2xl border bg-secondary/40 p-5 sm:p-6" aria-label={guide.exampleJourney.title}>
+        <h4 className="text-xl font-semibold">{guide.exampleJourney.title}</h4>
+        <ol className="mt-4 space-y-3">{guide.exampleJourney.steps.map((step, index) => <li key={step.label} className="flex gap-3">
+          <span className="font-semibold text-primary">{index + 1}.</span><div><strong>{step.label}</strong><p className="mt-1 text-sm leading-relaxed text-muted-foreground">{step.detail}</p></div>
+        </li>)}</ol>
+        <p className="mt-4 border-t pt-4 text-sm leading-relaxed"><strong>Practical choice:</strong> {guide.exampleJourney.takeaway}</p>
+      </aside>
+    </>
+  );
+}
+
 function OptionSection({ option, guideId }: { option: JourneyOption; guideId: AirportJourneyId }) {
   const jerusalemPrivate = guideId === "jerusalem" && option.id === "private";
   return (
