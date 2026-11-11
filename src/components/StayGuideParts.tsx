@@ -3,6 +3,7 @@ import { Link, type LinkProps } from "@tanstack/react-router";
 import type { HotelCategoryGuide, StayGuidePhoto } from "@/data/content";
 import { deadSeaHotelRecommendations, tiberiasHotelRecommendations, haifaHotelRecommendations, providerLinks, type ResortHotelFacts, type ProviderLink } from "@/data/registry";
 import { recordOutboundClick, relFor } from "@/lib/outbound";
+import { hotelBrowseAffiliateUrl } from "@/lib/hotel-affiliate";
 import { isPublisherUrl } from "@/data/registry";
 
 const resortHotels = [...deadSeaHotelRecommendations, ...tiberiasHotelRecommendations, ...haifaHotelRecommendations];
@@ -39,7 +40,7 @@ export function StayBookingDisclosure() {
 
 export function StayBrowseLink({ link, pageId }: { link: ProviderLink | undefined; pageId: string }) {
   if (!link) return null;
-  return <div className="mt-5 flex flex-wrap items-center gap-3"><a href={link.url} target="_blank" rel={relFor(link.isAffiliate)} onClick={() => recordOutboundClick({ pageId, productId: link.id, offerId: link.id })} className="btn btn-outline">{link.title} <ExternalLink className="h-4 w-4" aria-hidden /><span className="sr-only"> (opens in a new tab)</span></a><p className="text-xs text-muted-foreground">{link.isAffiliate ? "Sponsored link · " : ""}Enter dates on {link.providerName} and confirm the location.</p></div>;
+  return <div className="mt-5 flex flex-wrap items-center gap-3"><a href={hotelBrowseAffiliateUrl(link, pageId)} target="_blank" rel={relFor(link.isAffiliate)} onClick={() => recordOutboundClick({ pageId, productId: link.id, offerId: link.id })} className="btn btn-outline">{link.title} <ExternalLink className="h-4 w-4" aria-hidden /><span className="sr-only"> (opens in a new tab)</span></a><p className="text-xs text-muted-foreground">{link.isAffiliate ? "Sponsored link · " : ""}Enter dates on {link.providerName} and confirm the location.</p></div>;
 }
 
 export function StayPhotoCredits({ photos }: { photos: StayGuidePhoto[] }) {
