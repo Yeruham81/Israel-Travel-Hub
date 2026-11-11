@@ -4,7 +4,8 @@ import { hotelCategoryGuides, type HotelStayDestination } from "@/data/content";
 import { destinationBaseChoices } from "@/data/localEditorialInsights";
 import { linksForPage } from "@/data/registry";
 import { AreaMap } from "@/components/AreaMap";
-import { GuideHeader, OnThisPage, Section, Checklist, FaqList, ProviderSection, SourceList, RelatedLinks } from "@/components/Guide";
+import { GuideHeader, OnThisPage, Section, Checklist, FaqList, ProviderSection, SourceList } from "@/components/Guide";
+import { StayTripLinks } from "@/components/StayTripLinks";
 import { HomeContactForm } from "@/components/HomeContactForm";
 import { guideContactCopy } from "@/lib/guide-contact";
 import { StayHotelCard } from "@/components/StayHotelCard";
@@ -57,17 +58,7 @@ export function HotelDestinationPage({ guide: g }: { guide: HotelStayDestination
         <ProviderSection id="more-stays" title={`Browse more ${g.name} stays`} intro="Check the exact location, room offer and cancellation terms on the booking site. Enter your dates and all guests there; no booking is made on this page." links={linksForPage(`stay-${g.id}-browse`)} pageId={pageId} />
         <FaqList faqs={g.faqs} />
         <SourceList ids={[...new Set([...g.sourceIds, ...hotelIds.map((id) => resortHotel(id).sourceId)])]} />
-        <RelatedLinks items={g.related} />
-        <RelatedLinks title="Build a multi-day itinerary from this destination" items={g.id === "deadsea" ? [
-          { label: "Three days: Jerusalem, Masada and Tel Aviv", to: "/travel-blog/israel-itinerary-3-days/" },
-          { label: "Five days: include a Dead Sea excursion", to: "/travel-blog/israel-itinerary-5-days/" },
-        ] : g.id === "tiberias" ? [
-          { label: "Seven days: two nights in the Galilee", to: "/travel-blog/israel-itinerary-7-days/" },
-          { label: "Ten days: an unhurried northern stay", to: "/travel-blog/israel-itinerary-10-days/" },
-        ] : [
-          { label: "Five days: Caesarea and Haifa coastal day", to: "/travel-blog/israel-itinerary-5-days/" },
-          { label: "Ten days: Akko, Haifa and the coast", to: "/travel-blog/israel-itinerary-10-days/" },
-        ]} />
+        <StayTripLinks region={g.id} extras={g.related} currentPath={g.path} />
         <StayPhotoCredits photos={[g.photo, ...g.groups.map((group) => group.photo)]} />
         <HomeContactForm key={g.id} guide={guideContactCopy(g.title, "accommodation", g.name)} />
       </article>
