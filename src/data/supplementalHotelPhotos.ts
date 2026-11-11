@@ -26,7 +26,7 @@ export const supplementalHotelPhotos: Record<string, HotelIllustration> = {
   "jlm-holy-land": scene("jlm-holy-land", "webp", "Jerusalem Old City illuminated after dark"),
   "jlm-st-george": scene("jlm-st-george", "webp", "East Jerusalem residential streets"),
   "jlm-templer-inn": scene("jlm-templer-inn", "webp", "Panoramic view of Jerusalem"),
-  "jlm-little-house-baka": scene("jlm-little-house-baka", "webp", "Jerusalem First Station shops and restaurants near Baka"),
+  "jlm-little-house-baka": scene("jlm-little-house-baka", "webp", "Illustrative Jerusalem city view near southern neighborhoods"),
 
   "tlv-dan": scene("tlv-dan", "webp", "Tel Aviv Mediterranean promenade and beachfront"),
   "tlv-royal-beach": scene("tlv-royal-beach", "webp", "Tel Aviv coastline viewed from Jaffa"),
@@ -42,6 +42,6 @@ export const supplementalHotelPhotos: Record<string, HotelIllustration> = {
   "tlv-mulan": scene("tlv-mulan", "webp", "Tel Aviv skyline and urban neighborhoods"),
   "tlv-carmel-beach-house": scene("tlv-carmel-beach-house", "jpg", "HaCarmel Market in Tel Aviv"),
   "tlv-fabric": scene("tlv-fabric", "webp", "Illustrative image of Carmel Market and its surroundings"),
-  "tlv-rothschild22": scene("tlv-rothschild22", "webp", "Illustrative Tel Aviv city skyline"),
+  "tlv-rothschild22": scene("tlv-rothschild22", "webp", "Illustrative Tel Aviv streets and urban cycling"),
   "tlv-rothschild71": scene("tlv-rothschild71", "webp", "Modern Tel Aviv architecture and city culture"),
 };
