@@ -8,6 +8,7 @@ import { GuideHeader, OnThisPage, Section, Checklist, ProviderSection, FaqList, 
 import { AreaPhotoCredit } from "@/components/AreaMap";
 import { TelAvivHotelBrowser } from "@/components/TelAvivHotelBrowser";
 import { JerusalemHotelBrowser } from "@/components/JerusalemHotelBrowser";
+import { StayTripLinks } from "@/components/StayTripLinks";
 import { CityStayPlanning } from "@/components/CityStayPlanning";
 import { HomeContactForm } from "@/components/HomeContactForm";
 import { guideContactCopy } from "@/lib/guide-contact";
@@ -155,6 +156,7 @@ export function CityStayHub({ g, areas }: { g: CityStayGuide; areas: Neighborhoo
         {g.id === "jerusalem" && <JerusalemClusterLinks pageKey="stay-jerusalem" />}
         <FaqList faqs={g.faqs} />
         <SourceList ids={g.sourceIds} />
+        <StayTripLinks region={g.id} extras={g.related} currentPath={g.path} />
         <AreaPhotoCredit areas={areas} />
         <HomeContactForm key={g.id} guide={guideContactCopy(g.title, "accommodation", g.city)} />
       </article>
