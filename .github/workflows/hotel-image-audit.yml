@@ -6,6 +6,11 @@ on:
     branches: [main]
     paths:
       - 'scripts/audit-hotel-card-photos.py'
+      - 'src/data/*HotelPhotos.ts'
+      - 'src/data/supplementalHotelPhotos.ts'
+      - 'src/data/resortHotelPhotos.ts'
+      - 'public/images/hotel-cards/**'
+      - '.github/workflows/hotel-image-audit.yml'
 
 permissions:
   contents: read
