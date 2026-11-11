@@ -328,7 +328,7 @@ describe("migrated practical guides", () => {
     expect(guide.sections.find((s) => s.id === "gett")!.photo).toBeUndefined();
     expect(guide.faqs).toHaveLength(7);
     expect(guide.comparison.rows.map((row) => row[0])).toEqual([
-      "Gett", "Yango", "Local taxi or hotel dispatcher", "Pre-booked private transfer",
+      "Gett", "Yango", "Licensed taxi or hotel dispatcher", "Confirmed private transfer",
     ]);
     expect(guide.sections.find((s) => s.id === "prices-payments")!.inlineLinks?.some((link) => link.to === travelGuidePaths.taxiFares)).toBe(true);
     expect(guide.sections.find((s) => s.id === "airport")!.inlineLinks?.some((link) => link.to === travelGuidePaths.airportTaxis)).toBe(true);
