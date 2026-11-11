@@ -1,9 +1,10 @@
 import { useState } from "react";
 import type { CityStayGuide, StayPreference } from "@/data/content";
 import { preferenceLabels, neighborhoodGuidesForCity } from "@/data/content";
+import { StayTripLinks } from "@/components/StayTripLinks";
 import { CityStayHub } from "@/components/CityStayHub";
 import { linksForPage } from "@/data/registry";
-import { type UiCrumb, Checklist, FaqList, GuideHeader, OnThisPage, ProviderSection, RelatedLinks, Section, SourceList } from "@/components/Guide";
+import { type UiCrumb, Checklist, FaqList, GuideHeader, OnThisPage, ProviderSection, Section, SourceList } from "@/components/Guide";
 import { HomeContactForm } from "@/components/HomeContactForm";
 import { guideContactCopy } from "@/lib/guide-contact";
 
@@ -78,7 +79,7 @@ function SimpleCityStayPage({ g }: { g: CityStayGuide }) {
 
         <FaqList faqs={g.faqs} />
         <SourceList ids={g.sourceIds} />
-        <RelatedLinks items={g.related} />
+        <StayTripLinks region={g.id} extras={g.related} currentPath={g.path} />
         <HomeContactForm key={g.id} guide={guideContactCopy(g.title, "accommodation", g.city)} />
       </article>
     </main>
