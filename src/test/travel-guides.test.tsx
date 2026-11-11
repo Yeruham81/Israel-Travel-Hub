@@ -401,7 +401,7 @@ describe("migrated practical guides", () => {
     expect(shabbat.sourceIds).toContain("guide-weekend-711");
     expect(getSource("guide-weekend-711").url).toContain("tel-aviv.gov.il");
     expect(shabbat.sections.find((section) => section.id === "weekend-711")!.paragraphs.join(" ")).toMatch(/not timed to flights/);
-    expect(shabbat.sections.find((section) => section.id === "restart")!.paragraphs.join(" ")).toContain("actual Saturday date");
+    expect(shabbat.sections.find((section) => section.id === "restart")!.paragraphs.join(" ")).toMatch(/Saturday evening arrival.*first actual train or bus for your date and destination/);
     expect(JSON.stringify(shabbat)).not.toMatch(/guaranteed pickup|150–230|300–360|500–600/);
   });
 
@@ -439,7 +439,7 @@ describe("migrated practical guides", () => {
     expect(guide.sections.find((section) => section.id === "shabbat-hours")!.paragraphs.join(" ")).toMatch(/Yom Kippur is a special exception/);
     expect(guide.sections.find((section) => section.id === "destinations")!.paragraphs.join(" ")).toMatch(/no regular walk-up airport sherut service/);
     expect(guide.sections.find((section) => section.id === "taxis-transfers")!.paragraphs.join(" ")).toMatch(/at least two hours before pickup/);
-    expect(guide.sections.find((section) => section.id === "taxis-transfers")!.paragraphs.join(" ")).toMatch(/Ordinary Uber rides are not available/);
+    expect(guide.sections.find((section) => section.id === "taxis-transfers")!.paragraphs.join(" ")).toContain("contact form at the end of this guide");
     expect(guide.sections.find((section) => section.id === "arrival-time")!.tables?.[0]?.note)
       .toBe("Friday and Saturday service varies with season, destination and holidays.");
     expect(guide.sections.find((section) => section.id === "destinations")!.paragraphs.join(" "))
