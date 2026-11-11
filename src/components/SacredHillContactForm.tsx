@@ -2,6 +2,7 @@ import { useState, type FormEvent } from "react";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { PrivacyInformationLink } from "@/components/PrivacyInformationLink";
+import { airportTransferPhotos } from "@/data/airportTransfers";
 import { QuoteSubmissionControls } from "@/components/QuoteSubmissionControls";
 import { useQuoteSubmission } from "@/hooks/useQuoteSubmission";
 import { validateContactMessage } from "@/lib/contact-message";
@@ -38,7 +39,8 @@ export function SacredHillContactForm({ id }: { id: SacredHillId }) {
   return <section id="contact-moshe" aria-labelledby="sacred-hill-contact-heading" className="mt-12 scroll-mt-24 overflow-hidden rounded-2xl border bg-card shadow-sm">
     <div className="grid md:grid-cols-[0.85fr_1.4fr]">
       <div className="bg-navy p-6 text-navy-foreground sm:p-8">
-        <p className="text-xs font-semibold uppercase tracking-widest opacity-80">Plan a Jerusalem visit</p>
+        <img src={airportTransferPhotos["moshe"]!.src} alt={airportTransferPhotos["moshe"]!.alt} width={150} height={200} loading="lazy" decoding="async" className="h-24 w-20 rounded-xl object-cover" />
+        <p className="mt-5 text-xs font-semibold uppercase tracking-widest opacity-80">Plan a Jerusalem visit</p>
         <h3 id="sacred-hill-contact-heading" className="mt-3 text-2xl leading-tight sm:text-3xl">Send me a message</h3>
         <p className="mt-3 leading-relaxed opacity-90">Have a question about visiting {id === "mount-zion" ? "Mount Zion" : "the Mount of Olives"}? Share your travel date, pickup area and the places you hope to see. I'll reply personally and help you plan what works for your visit.</p>
       </div>
