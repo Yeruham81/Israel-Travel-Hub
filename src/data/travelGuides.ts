@@ -35,7 +35,7 @@ export const guideTopics = [
 export type GuideTopicId = typeof guideTopics[number]["id"];
 export type GuidePhoto = { src: string; alt: string; sourceUrl?: string; credit?: string; licenseUrl?: string };
 export type GuideTable = { caption: string; headers: string[]; rows: string[][]; note?: string };
-export type GuideSection = { id: string; title: string; paragraphs: string[]; bullets?: string[]; sourceIds?: string[]; photo?: GuidePhoto; links?: { label: string; to: LinkProps["to"] }[]; inlineLinks?: { text: string; to: LinkProps["to"] }[]; externalLinks?: { label: string; href: string }[]; tables?: GuideTable[] };
+export type GuideSection = { id: string; title: string; paragraphs: string[]; bullets?: string[]; sourceIds?: string[]; photo?: GuidePhoto; links?: { label: string; to: LinkProps["to"] }[]; inlineLinks?: { text: string; to: LinkProps["to"] }[]; externalLinks?: { label: string; href: string }[]; highlightedLinks?: { label: string; href: string; context: string }[]; tables?: GuideTable[] };
 export type GuideReading = { label: string; href: string; note: string };
 export type TravelGuide = {
   id: TravelGuideId; title: string; description: string; intro: string; answer: string; updatedAt?: string;
@@ -108,6 +108,7 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
         externalLinks: [
           { label: "Official Gett app and service information", href: "https://www.gett.com/il/" },
         ],
+        highlightedLinks: [{ label: "Gett Israel — official app and booking information", href: "https://www.gett.com/il/", context: "Check the current service and app details before requesting a licensed taxi." }],
         sourceIds: ["guide-gett-app", "guide-gett"],
       },
       {
@@ -120,6 +121,7 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
         externalLinks: [
           { label: "Official Yango Israel rider information", href: "https://appli.taxi/rider/" },
         ],
+        highlightedLinks: [{ label: "Yango Israel — rider information", href: "https://appli.taxi/rider/", context: "Review the app, payment options and availability for your pickup area." }],
         sourceIds: ["guide-yango-israel", "guide-telaviv-apps"],
       },
       {
@@ -222,7 +224,7 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
     id: "sherut",
     title: "Is There Still a Sherut from Ben Gurion Airport? Current Options",
     description: "The former Nesher and Amal shared airport taxis to Jerusalem and Haifa no longer run as regular airport sherut routes. Learn the difference between sherut and shuttle and which alternatives to use.",
-    intro: "Older travel guides still describe shared taxis from Ben Gurion Airport to Jerusalem and Haifa. Here is what happened to those airport services, what a sherut means today and how to choose a dependable onward journey.",
+    intro: "Shared shuttle taxis once operated from Ben Gurion Airport to Jerusalem and Haifa, but those regular airport services have been discontinued. Read on to discover the transport alternatives available today, including trains, buses and taxis, and how local sherut services differ.",
     answer: "No. The former regular shared-taxi services from Ben Gurion Airport to Jerusalem (Nesher) and to Haifa and the north (Amal) no longer operate as the airport sheruts described in older travel guides. Do not plan around their old boarding points, prices or contact details. Local monit sherut routes elsewhere in Israel are separate services, and independently advertised shared shuttles must be checked individually. For your airport journey, compare current trains or buses, the authorized taxi system or a private transfer confirmed in advance.",
     topics: ["transportation", "tips"],
     updatedAt: "2026-11-11",
@@ -273,6 +275,10 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
         inlineLinks: [
           { text: "guide to airport travel on Shabbat", to: travelGuidePaths.shabbat },
         ],
+        highlightedLinks: [
+          { label: "Israel Railways — check train times", href: "https://www.rail.co.il/", context: "Enter your travel date and destination, and check the final leg from the station." },
+          { label: "National public transport journey planner", href: "https://bus.gov.il/", context: "Check available bus routes and connections for the day you arrive." },
+        ],
         sourceIds: ["guide-iaa", "israel-rail", "guide-gett"],
       },
       {
@@ -312,6 +318,7 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
           { text: "Ben Gurion Airport taxis guide", to: travelGuidePaths.airportTaxis },
           { text: "taxi fares in Israel guide", to: travelGuidePaths.taxiFares },
         ],
+        highlightedLinks: [{ label: "Gett — official airport taxi instructions", href: "https://www.gett.com/il/airport-en/", context: "Check how to obtain a ride code and where to join the authorized taxi queue." }],
         sourceIds: ["guide-gett", "guide-iaa"],
       },
       {
