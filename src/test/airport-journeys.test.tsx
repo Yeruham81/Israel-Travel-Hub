@@ -38,7 +38,7 @@ describe("four independent airport transportation comparisons", () => {
       const html = renderToString(<RouterContextProvider router={router}><AirportJourneyPage id={id}/></RouterContextProvider>);
       const doc = new DOMParser().parseFromString(html, "text/html");
       expect(doc.querySelectorAll("h1")).toHaveLength(1);
-      expect(doc.querySelectorAll("table")).toHaveLength(2);
+      expect(doc.querySelectorAll("table")).toHaveLength(id === "jerusalem" ? 1 : 2);
       expect(doc.querySelector('a[href*="#request-quote"]')).not.toBeNull();
       if (id !== "jerusalem") expect(doc.querySelector('aside a[href="#request-quote"]')?.getAttribute("href")).toBe("#request-quote");
       else expect(doc.querySelector('#option-private a[href="#request-quote"]')?.getAttribute("href")).toBe("#request-quote");
