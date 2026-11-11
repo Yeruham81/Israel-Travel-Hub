@@ -12,6 +12,7 @@ import { CityStayPlanning } from "@/components/CityStayPlanning";
 import { HomeContactForm } from "@/components/HomeContactForm";
 import { guideContactCopy } from "@/lib/guide-contact";
 import { recordOutboundClick, relFor } from "@/lib/outbound";
+import { hotelBrowseAffiliateUrl } from "@/lib/hotel-affiliate";
 import { JerusalemClusterLinks } from "@/components/JerusalemClusterLinks";
 
 export const quickPickPhotos: Record<string, { src: string; alt: string; sourceFilename: string }> = {
@@ -136,7 +137,7 @@ export function CityStayHub({ g, areas }: { g: CityStayGuide; areas: Neighborhoo
               </div>
               <div className="flex flex-col gap-2">
                 {linksForPage(`stay-${g.id}`).map((booking) => (
-                  <a key={booking.id} href={booking.url} target="_blank" rel={relFor(booking.isAffiliate)}
+                  <a key={booking.id} href={hotelBrowseAffiliateUrl(booking, `stay-${g.id}`)} target="_blank" rel={relFor(booking.isAffiliate)}
                      onClick={() => recordOutboundClick({ pageId: `stay-${g.id}`, productId: booking.id, offerId: booking.id })}
                      className="btn btn-primary text-center focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
                     Browse more on {booking.providerName} ↗
