@@ -48,7 +48,7 @@ describe("compact On this page navigation", () => {
       ["booking-without-app", "How can I get a taxi without Gett or Yango?", "Without an app"],
       ["new-topic", "An unusually long heading about the local area", "New topic"],
     ] as const;
-    const { container } = render(<OnThisPage sections={pairs} />);
+    const { container } = render(<OnThisPage sections={pairs.map(([id, full]) => [id, full] as const)} />);
     const nav = screen.getByRole("navigation", { name: "On this page" });
     for (const [id, full, short] of pairs) {
       const chip = nav.querySelector(`ul.grid a[href="#${id}"]`);
