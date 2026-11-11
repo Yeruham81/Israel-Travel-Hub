@@ -14,8 +14,10 @@ const sections = [
   ["checklist", "Booking checklist"],
   ["book", "Find a place to stay"],
   ["faq", "FAQ"],
-  ["sources", "Sources"],
+  ["explore", "Local guides"],
+  ["trip-planning", "Trip planning"],
   ["contact", "Contact Moshe"],
+  ["sources", "Sources"],
 ] as const;
 
 export function CityStayPage({ g }: { g: CityStayGuide }) {
@@ -78,9 +80,9 @@ function SimpleCityStayPage({ g }: { g: CityStayGuide }) {
         />
 
         <FaqList faqs={g.faqs} />
-        <SourceList ids={g.sourceIds} />
-        <StayTripLinks region={g.id} extras={g.related} currentPath={g.path} />
+        <StayTripLinks region={g.id} currentPath={g.path} />
         <HomeContactForm key={g.id} guide={guideContactCopy(g.title, "accommodation", g.city)} />
+        <SourceList ids={g.sourceIds} />
       </article>
     </main>
   );
