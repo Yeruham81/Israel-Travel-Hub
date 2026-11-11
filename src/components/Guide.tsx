@@ -8,6 +8,7 @@ import { PageUpdated } from "@/components/PageUpdated";
 import { SourcesDisclosure } from "@/components/SourcesDisclosure";
 import { modeNote, relationshipLabel } from "@/lib/booking";
 import { recordOutboundClick, relFor } from "@/lib/outbound";
+import { hotelBrowseAffiliateUrl } from "@/lib/hotel-affiliate";
 
 export type UiCrumb = { name: string; to: LinkProps["to"] };
 
@@ -251,7 +252,7 @@ export function SourceList({ ids, intro = "“Checked” dates refer to the fact
 function ProviderAction({ link: l, pageId, className, children }: { link: ProviderLink; pageId: string; className: string; children: ReactNode }) {
   const internal = l.url.startsWith("/");
   return <a
-    href={l.url}
+    href={hotelBrowseAffiliateUrl(l, pageId)}
     target={internal ? undefined : "_blank"}
     rel={internal ? undefined : relFor(l.isAffiliate)}
     onClick={internal ? undefined : () => recordOutboundClick({ pageId, productId: l.id, offerId: l.id })}
