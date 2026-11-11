@@ -92,23 +92,7 @@ export function JerusalemHotelBrowser() {
         Some booking links may earn me a commission at no extra cost to you.
       </p>
       {areaId !== "all" && <button type="button" onClick={() => setAreaId("all")} className="mt-3 inline-flex items-center gap-2 font-semibold text-primary underline underline-offset-4"><RotateCcw className="h-4 w-4" aria-hidden /> View all Jerusalem hotels</button>}
-      <details className="mt-4 rounded-xl border bg-card p-3 text-xs text-muted-foreground" data-testid="jerusalem-hotel-photo-credits">
-        <summary className="cursor-pointer font-semibold text-foreground">Illustrative photo credits & licenses</summary>
-        
-        <ul className="mt-3 grid gap-2 sm:grid-cols-2">
-          {jerusalemHotelCatalog.map((hotel) => {
-            const photo = cityHotelPhoto(hotel);
-            if (!photo) return null;
-            return (
-              <li key={hotel.id}>
-                <span className="font-medium text-foreground">{hotel.name}: </span>
-                {photo.sourceUrl ? <a href={photo.sourceUrl} target="_blank" rel="noopener noreferrer" className="underline underline-offset-2">{photo.credit}<span className="sr-only"> (opens in a new tab)</span></a> : photo.credit}
-                {photo.licenseUrl && <> · <a href={photo.licenseUrl} target="_blank" rel="noopener noreferrer" className="underline underline-offset-2">License<span className="sr-only"> (opens in a new tab)</span></a></>}
-              </li>
-            );
-          })}
-        </ul>
-      </details>
+
 
     </section>
   );
