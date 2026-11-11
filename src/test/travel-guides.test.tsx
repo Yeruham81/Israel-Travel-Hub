@@ -149,7 +149,7 @@ describe("migrated practical guides", () => {
     expect(travelGuides.arrival.sections.find((section) => section.id === "leave-airport")!.paragraphs.join(" ")).toMatch(/Exit 03.*Level 2, Exit 23/);
     expect(travelGuides.taxis.sections.find((section) => section.id === "airport")!.inlineLinks?.some((link) => link.to === travelGuidePaths.airportTaxis)).toBe(true);
     expect(travelGuides.airportTaxis.comparison.rows.join(" ")).toMatch(/Exit 03.*Exit 23/);
-    expect(travelGuides.uber.answer).toMatch(/Uber is not available for passenger rides in Israel in 2026/);
+    expect(travelGuides.uber.answer).toMatch(/Uber does not currently offer passenger rides in Israel/);
     expect(travelGuides.sherut.answer).toMatch(/Nesher.*Jerusalem.*Amal.*Haifa.*no longer operating/s);
     expect(travelGuides.esim.sections.find((section) => section.id === "calling")!.paragraphs.join(" ")).toMatch(/US phone number.*different from an Israeli/s);
     expect(travelGuides.esim.answer).toMatch(/unlimited.*does not promise unlimited full-speed/i);
@@ -311,18 +311,22 @@ describe("migrated practical guides", () => {
     }
   });
 
-  it("keeps Uber's 2026 unavailability the primary search intent with useful alternatives", () => {
+  it("keeps the current Uber and Lyft status with useful licensed-taxi alternatives", () => {
     const guide = travelGuides.uber;
-    expect(guide.title).toMatch(/Uber.*Israel.*2026.*Gett.*Yango/);
-    expect(guide.answer.startsWith("No. Uber is not available for passenger rides in Israel in 2026.")).toBe(true);
+    expect(guide.title).toMatch(/Uber.*Israel.*Gett.*Yango/);
+    expect(guide.title).not.toMatch(/2026|2027/);
+    expect(guide.updatedAt).toBe("2026-11-11");
+    expect(guide.answer).toMatch(/^No\. Uber does not currently offer passenger rides in Israel/);
+    expect(guide.answer).toContain("Lyft");
     expect(guide.sourceIds).toContain("guide-uber-availability");
     expect(getSource("guide-uber-availability").url).toBe("https://www.uber.com/il/en/");
     expect(guide.sections.map((section) => section.id)).toEqual([
       "uber-status", "gett", "yango", "booking-without-app", "prices-payments",
       "airport", "locations", "setup-backups", "shabbat",
     ]);
-    expect(guide.sections.filter((section) => section.photo)).toHaveLength(2);
-    expect(guide.faqs.length).toBeGreaterThanOrEqual(10);
+    expect(guide.sections.filter((section) => section.photo)).toHaveLength(1);
+    expect(guide.sections.find((s) => s.id === "gett")!.photo).toBeUndefined();
+    expect(guide.faqs).toHaveLength(7);
     expect(guide.comparison.rows.map((row) => row[0])).toEqual([
       "Gett", "Yango", "Local taxi or hotel dispatcher", "Pre-booked private transfer",
     ]);
@@ -332,7 +336,15 @@ describe("migrated practical guides", () => {
     for (const section of guide.sections) for (const link of section.inlineLinks || []) {
       expect(section.paragraphs.join(" ").split(link.text), `link text ${link.text} should occur once`).toHaveLength(2);
     }
-    expect(JSON.stringify(guide)).not.toMatch(/legalization bill|knesset|legislation|no current operator closure notice/i);
+    expect(guide.sections.find((s) => s.id === "uber-status")!.paragraphs.join(" ")).toContain("March 24, 2026");
+    expect(guide.sourceIds).toEqual(expect.arrayContaining(["guide-lyft-cities", "guide-ridesharing-bill-2026"]));
+    expect(getSource("guide-lyft-cities").url).toBe("https://www.lyft.com/rider/cities");
+    expect(getSource("guide-ridesharing-bill-2026").url).toContain("main.knesset.gov.il");
+    expect(guide.services.map((service) => service.to)).toEqual([
+      travelGuidePaths.esim, "/car-rental/", travelGuidePaths.jerusalem, "/travel-blog/where-to-stay-in-tel-aviv/",
+    ]);
+    expect(guide.sections.find((s) => s.id === "gett")!.externalLinks?.[0]?.href).toBe("https://www.gett.com/il/");
+    expect(guide.sections.find((s) => s.id === "yango")!.externalLinks?.[0]?.href).toBe("https://appli.taxi/rider/");
     expect(travelGuides.taxis.sections.find((s) => s.id === "apps")!.paragraphs.join(" ")).toContain("Uber passenger rides are not available in Israel in 2026");
   });
 
@@ -348,7 +360,13 @@ describe("migrated practical guides", () => {
         expect(a.closest("p")).toBeTruthy();
       }
     }
-    expect(container.querySelector("#uber-status")?.textContent).toContain("Uber does not operate its passenger ride service in Israel");
+    expect(container.querySelector("#uber-status")?.textContent).toContain("Uber's Israel-facing website");
+    const next = within(container).getByRole("region", { name: "Plan the next part of your trip" });
+    expect(next.querySelectorAll("li")).toHaveLength(4);
+    expect(Array.from(next.querySelectorAll("a")).map((link) => link.getAttribute("href"))).not.toContain("/transfers/");
+    for (const [id, url] of [["gett", "https://www.gett.com/il/"], ["yango", "https://appli.taxi/rider/"]] as const) {
+      expect(container.querySelector(`#${id} a[href="${url}"]`)).not.toBeNull();
+    }
     expect(container.querySelector("#airport")?.textContent).toContain("Terminal 3");
   });
 
