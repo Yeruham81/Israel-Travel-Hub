@@ -5,10 +5,12 @@ import { destinationBaseChoices } from "@/data/localEditorialInsights";
 import { linksForPage } from "@/data/registry";
 import { AreaMap } from "@/components/AreaMap";
 import { GuideHeader, OnThisPage, Section, Checklist, FaqList, ProviderSection, SourceList, RelatedLinks } from "@/components/Guide";
+import { HomeContactForm } from "@/components/HomeContactForm";
+import { guideContactCopy } from "@/lib/guide-contact";
 import { StayHotelCard } from "@/components/StayHotelCard";
 import { StayCategoryCard, StayComparison, StayBookingDisclosure, StayBrowseLink, StayPhotoCredits, resortHotel, hotelBooking } from "@/components/StayGuideParts";
 
-const sections = [["overview", "Start here"], ["categories", "Choose your stay"], ["compare", "Compare stays"], ["location", "Map & arrival"], ["book", "Hotel picks"], ["checklist", "Booking tips"], ["faq", "FAQ"], ["sources", "Sources"]] as const;
+const sections = [["overview", "Start here"], ["categories", "Choose your stay"], ["compare", "Compare stays"], ["location", "Map & arrival"], ["book", "Hotel picks"], ["checklist", "Booking tips"], ["faq", "FAQ"], ["sources", "Sources"], ["contact", "Contact Moshe"]] as const;
 
 export function HotelDestinationPage({ guide: g }: { guide: HotelStayDestination }) {
   const categories = hotelCategoryGuides.filter((guide) => guide.destinationId === g.id);
@@ -67,6 +69,7 @@ export function HotelDestinationPage({ guide: g }: { guide: HotelStayDestination
           { label: "Ten days: Akko, Haifa and the coast", to: "/travel-blog/israel-itinerary-10-days/" },
         ]} />
         <StayPhotoCredits photos={[g.photo, ...g.groups.map((group) => group.photo)]} />
+        <HomeContactForm key={g.id} guide={guideContactCopy(g.title, "accommodation", g.name)} />
       </article>
     </main>
   );
