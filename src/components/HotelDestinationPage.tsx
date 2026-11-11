@@ -9,6 +9,7 @@ import { StayTripLinks } from "@/components/StayTripLinks";
 import { HomeContactForm } from "@/components/HomeContactForm";
 import { guideContactCopy } from "@/lib/guide-contact";
 import { StayHotelCard } from "@/components/StayHotelCard";
+import { resortHotelPhoto } from "@/data/resortHotelPhotos";
 import { StayCategoryCard, StayComparison, StayBookingDisclosure, StayBrowseLink, StayPhotoCredits, resortHotel, hotelBooking } from "@/components/StayGuideParts";
 
 const sections = [["overview", "Start here"], ["categories", "Choose your stay"], ["compare", "Compare stays"], ["location", "Map & arrival"], ["book", "Hotel picks"], ["checklist", "Booking tips"], ["faq", "FAQ"], ["sources", "Sources"], ["contact", "Contact Moshe"]] as const;
@@ -51,7 +52,7 @@ export function HotelDestinationPage({ guide: g }: { guide: HotelStayDestination
         <div id="book" className="mt-14 scroll-mt-32"><p className="eyebrow">Your accommodation shortlist</p><h2 className="mt-2 text-3xl">Hotels by travel style</h2><p className="mt-3 text-muted-foreground">Start with a category, compare the individual properties and check room options on the booking site.</p><StayBookingDisclosure /></div>
         {g.groups.map((group) => <section id={group.id} key={group.id} aria-labelledby={`${group.id}-h`} className="mt-14 scroll-mt-32" data-testid="stay-hotel-group">
           <div className="grid items-center gap-5 sm:grid-cols-[1.5fr_1fr]"><div><h2 id={`${group.id}-h`} className="text-3xl">{group.title}</h2><p className="mt-3 leading-relaxed text-muted-foreground">{group.intro}</p>{group.guidePath && <Link to={group.guidePath as LinkProps["to"]} className="mt-4 inline-flex items-center gap-2 font-semibold text-primary underline underline-offset-4">{group.guideLabel}<ArrowRight className="h-4 w-4" aria-hidden /></Link>}</div><img src={group.photo.src} alt={group.photo.alt} width={755} height={503} loading="lazy" decoding="async" className="aspect-[16/9] w-full rounded-2xl object-cover" /></div>
-          <ul className={`mt-6 grid gap-4 ${group.hotelIds.length === 3 ? "lg:grid-cols-3" : "md:grid-cols-2"}`}>{group.hotelIds.map((id) => <StayHotelCard key={id} hotel={resortHotel(id)} booking={hotelBooking(id)} pageId={pageId} compact />)}</ul>
+          <ul className={`mt-6 grid gap-4 ${group.hotelIds.length === 3 ? "lg:grid-cols-3" : "md:grid-cols-2"}`}>{group.hotelIds.map((id) => <StayHotelCard key={id} hotel={resortHotel(id)} booking={hotelBooking(id)} pageId={pageId} compact photo={resortHotelPhoto(id)} />)}</ul>
           {group.browsePageId && <StayBrowseLink link={linksForPage(group.browsePageId)[0]} pageId={pageId} />}
         </section>)}
         <Section id="checklist" title={`Before you book your ${g.name} stay`} className="scroll-mt-32"><div className="mt-5 grid gap-4 sm:grid-cols-2"><Checklist title="Location, rooms & guest ages" items={g.checklist.slice(0, 3)} /><Checklist title="Facilities & the final total" items={g.checklist.slice(3)} /></div></Section>
