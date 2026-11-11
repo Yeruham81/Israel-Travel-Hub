@@ -100,6 +100,10 @@ export const taxiGuideCluster: Record<"taxis" | "taxiFares" | "airportTaxis", Tr
         ],
         inlineLinks: [{ text: "separate Uber guide", to: travelGuidePaths.uber }, { text: "airport taxi guide", to: travelGuidePaths.airportTaxis }],
         externalLinks: [{ label: "Gett Israel — official website and app", href: "https://www.gett.com/il/" }, { label: "Yango Israel — official rider information", href: "https://appli.taxi/rider/" }],
+        highlightedLinks: [
+          { label: "Gett Israel — official app and service information", href: "https://www.gett.com/il/", context: "Check how to set up the app and request a licensed taxi before your trip." },
+          { label: "Yango Israel — rider information", href: "https://appli.taxi/rider/", context: "Review service details, payments and availability for your pickup location." },
+        ],
         sourceIds: ["guide-gett-app", "guide-yango-israel"],
       },
       {
@@ -187,6 +191,7 @@ export const taxiGuideCluster: Record<"taxis" | "taxiFares" | "airportTaxis", Tr
         ],
         inlineLinks: [{ text: "taxi fares guide", to: travelGuidePaths.taxiFares }],
         externalLinks: [{ label: "File a taxi-service complaint — Ministry of Transport", href: "https://www.gov.il/en/service/complaint_about_conduct_in_public_transportation" }],
+        highlightedLinks: [{ label: "File a taxi complaint — Ministry of Transport", href: "https://www.gov.il/en/service/complaint_about_conduct_in_public_transportation", context: "Use the official complaint service if you have a fare, refusal-of-service or driver-conduct issue. Keep your receipt and vehicle details." }],
         sourceIds: ["taxi-passenger-rights", "taxi-complaints"],
       },
     ],
