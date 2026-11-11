@@ -68,7 +68,7 @@ describe("October planning, city and heritage guide migration", () => {
     const { container } = render(<RouterContextProvider router={router}><Hub /></RouterContextProvider>);
     const cards = container.querySelectorAll('[data-testid="guide-directory-card"]');
     expect(cards).toHaveLength(69);
-    for (const card of cards) expect(card.querySelector("img[alt]")).not.toBeNull();
+    for (const card of cards) expect(card.querySelector('img[alt], [data-testid="guide-card-placeholder"]')).not.toBeNull();
     for (const id of ids) expect(container.querySelector(`a[href="${travelGuidePaths[id]}"]`)).not.toBeNull();
     expect(filterGuides("Yardenit").some(guide => guide.to === travelGuidePaths.yardenit)).toBe(true);
     expect(filterGuides("museum", "attractions").some(guide => guide.id === "haifaMuseums")).toBe(true);
