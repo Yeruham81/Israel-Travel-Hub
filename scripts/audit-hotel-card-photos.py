@@ -4,7 +4,8 @@ Run with Pillow installed: python3 scripts/audit-hotel-card-photos.py
 
 Photos are illustrative unless explicitly verified as the actual property.
 Only one photo may belong to each different hotel. A hotel may reuse its own
-photo across its city and neighborhood/category pages.
+photo across its city and neighborhood/category pages. This checks both
+byte-identical uploads and distinct crops of the same underlying photograph.
 """
 from pathlib import Path
 from PIL import Image
