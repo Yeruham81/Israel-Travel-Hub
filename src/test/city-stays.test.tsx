@@ -323,7 +323,8 @@ describe("Jerusalem direct hotel catalog", () => {
       }
     }
     expect(new Set(Object.values(jerusalemHotelPhotos).map((photo) => photo.src)).size).toBe(12);
-    expect(within(catalog).getByTestId("jerusalem-hotel-photo-credits")).toBeInTheDocument();
+    expect(screen.getByTestId("jerusalem-hotel-photo-credits")).toBeInTheDocument();
+    expect(catalog.querySelector('[data-testid="jerusalem-hotel-photo-credits"]')).toBeNull();
     expect(within(catalog).queryByText(/Neighborhood photograph|Illustrative hotel photograph/)).not.toBeInTheDocument();
     expect(within(catalog).queryByText(/Already know your dates|Confirm dates, guests and final price/)).not.toBeInTheDocument();
     expect(catalog.textContent).not.toMatch(/ILS\s*\d{2,}|rooms available now|live price/i);
