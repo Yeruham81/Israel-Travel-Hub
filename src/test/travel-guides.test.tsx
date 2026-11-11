@@ -439,7 +439,7 @@ describe("migrated practical guides", () => {
     expect(guide.sections.find((section) => section.id === "shabbat-hours")!.paragraphs.join(" ")).toMatch(/Yom Kippur is a special exception/);
     expect(guide.sections.find((section) => section.id === "destinations")!.paragraphs.join(" ")).toMatch(/no regular walk-up airport sherut service/);
     expect(guide.sections.find((section) => section.id === "taxis-transfers")!.paragraphs.join(" ")).toMatch(/at least two hours before pickup/);
-    expect(guide.sections.find((section) => section.id === "taxis-transfers")!.paragraphs.join(" ")).toContain("contact form at the end of this guide");
+    expect(guide.sections.find((section) => section.id === "taxis-transfers")!.paragraphs.join(" ")).toContain("You can also compare private airport-transfer options.");
     expect(guide.sections.find((section) => section.id === "arrival-time")!.tables?.[0]?.note)
       .toBe("Friday and Saturday service varies with season, destination and holidays.");
     expect(guide.sections.find((section) => section.id === "destinations")!.paragraphs.join(" "))
