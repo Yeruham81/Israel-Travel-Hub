@@ -8,7 +8,8 @@ import { cityHotelPhoto } from "@/data/cityHotelCatalog";
 import { hotelTileCopy } from "@/components/TelAvivHotelBrowser";
 import { jerusalemHotelTileCopy } from "@/components/JerusalemHotelBrowser";
 import { AreaMap, AreaPhotoCredit } from "@/components/AreaMap";
-import { GuideHeader, OnThisPage, Section, Checklist, FaqList, ProviderSection, RelatedLinks, SourceList } from "@/components/Guide";
+import { GuideHeader, OnThisPage, Section, Checklist, FaqList, ProviderSection, SourceList } from "@/components/Guide";
+import { StayTripLinks } from "@/components/StayTripLinks";
 import { HomeContactForm } from "@/components/HomeContactForm";
 import { guideContactCopy } from "@/lib/guide-contact";
 
@@ -106,7 +107,7 @@ export function NeighborhoodStayPage({ area }: { area: NeighborhoodStayGuide }) 
           <p className="mt-2 text-muted-foreground">Compare a different side of {city.city} before you decide.</p>
           <ul className="mt-5 grid gap-3 sm:grid-cols-2">{otherAreas.map((other) => <li key={other.id}><Link to={other.path as LinkProps["to"]} className="group flex h-full items-center justify-between gap-3 rounded-xl border bg-card p-4 hover:border-primary"><div><h3 className="text-xl">{other.shortName}</h3><p className="mt-1 text-xs text-muted-foreground">{other.bestFor}</p></div><ArrowRight className="h-4 w-4 shrink-0 text-primary" aria-hidden /></Link></li>)}</ul>
         </section>
-        <RelatedLinks items={city.related} />
+        <StayTripLinks region={area.cityId} extras={city.related} currentPath={area.path} />
         <AreaPhotoCredit areas={[area]} />
         <HomeContactForm key={area.id} guide={guideContactCopy(area.title, "accommodation", `${area.shortName}, ${city.city}`)} />
       </article>
