@@ -1,4 +1,5 @@
 import { Link } from "@tanstack/react-router";
+import { Lightbulb } from "lucide-react";
 import { Breadcrumbs, FaqList, OnThisPage, RelatedLinks, Section } from "@/components/Guide";
 import { GuidePhotoCredit, GuideParagraph } from "@/components/TravelGuide";
 import { hasPublicPhotoCredit } from "@/lib/photo-credits";
@@ -68,6 +69,26 @@ function PrivateRideCta({ id }: { id: AirportJourneyId }) {
   );
 }
 
+/**
+ * A selective, action-oriented link rather than a repeated checklist.
+ * Keep the warm highlight subtle and the link itself prominent.
+ */
+function UsefulJourneyLink({ label, href, context }: { label: string; href: string; context: string }) {
+  const external = /^https?:\/\//.test(href);
+  return (
+    <aside aria-label={"Useful link: " + label} className="mt-5 flex items-start gap-3 rounded-xl border border-amber-300/60 bg-amber-50/60 p-4 dark:border-amber-700/40 dark:bg-amber-950/20">
+      <Lightbulb aria-hidden="true" className="mt-0.5 h-5 w-5 shrink-0 fill-amber-200/70 text-amber-600 dark:fill-amber-500/25 dark:text-amber-400" />
+      <div className="min-w-0">
+        <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">Useful link</p>
+        <p className="mt-1 text-sm leading-relaxed">
+          <a href={href} className="font-semibold text-primary underline underline-offset-4 hover:text-primary/80" {...(external ? { target: "_blank", rel: "noopener noreferrer" } : {})}>{label}</a>
+        </p>
+        <p className="mt-1 text-sm leading-relaxed text-muted-foreground">{context}</p>
+      </div>
+    </aside>
+  );
+}
+
 /** Keep the complete Jerusalem train journey, voucher, station exit and hotel leg together. */
 function JerusalemRailDetails({ guide }: { guide: AirportJourneyGuide }) {
   return (
@@ -75,8 +96,11 @@ function JerusalemRailDetails({ guide }: { guide: AirportJourneyGuide }) {
       {guide.photos?.onward && <figure className="mt-6 max-w-3xl">
         <img src={guide.photos.onward.src} alt={guide.photos.onward.alt} width={755} height={503} loading="lazy" decoding="async" className="aspect-[3/2] max-h-96 w-full rounded-xl object-cover" />
       </figure>}
-      <aside aria-label="Important Jerusalem train ticket information" className="mt-6 rounded-xl border border-primary/25 bg-secondary/45 p-5 leading-relaxed">
-        <h4 className="text-xl font-semibold">Jerusalem train: free personal voucher</h4>
+      <aside aria-label="Important Jerusalem train ticket information" className="mt-6 rounded-xl border border-amber-300/60 bg-amber-50/60 p-5 leading-relaxed dark:border-amber-700/40 dark:bg-amber-950/20">
+        <div className="flex items-start gap-3">
+          <Lightbulb aria-hidden="true" className="mt-0.5 h-5 w-5 shrink-0 fill-amber-200/70 text-amber-600 dark:fill-amber-500/25 dark:text-amber-400" />
+          <h4 className="text-xl font-semibold">Jerusalem train: free personal voucher</h4>
+        </div>
         <p className="mt-2">Israel Railways' August 19, 2026 notice requires each passenger to obtain a <strong>free personal voucher for the selected Jerusalem train, in addition to a valid ticket</strong>. Check the current requirement before travelling.</p>
         <p className="mt-3 flex flex-wrap gap-x-5 gap-y-2 text-sm">
           <a href="https://rail.co.il/?lan=en&page=vouchers-jerusalem" className="font-semibold text-primary underline underline-offset-4" target="_blank" rel="noopener noreferrer">Official voucher instructions</a>
@@ -108,7 +132,9 @@ function OptionSection({ option, guideId }: { option: JourneyOption; guideId: Ai
         {option.paragraphs.map((paragraph) => <p key={paragraph}><GuideParagraph paragraph={paragraph} inlineLinks={option.inlineLinks} /></p>)}
       </div>
       {guideId === "jerusalem" && option.id === "rail" && <JerusalemRailDetails guide={airportJourneyGuides.jerusalem} />}
-      {jerusalemPrivate && <p className="mt-5 leading-relaxed">To arrange a pickup for your flight and the right vehicle for your luggage, <a href="#request-quote" className="font-semibold text-primary underline underline-offset-4">send me a message using the form at the bottom of this guide</a>. I'll confirm the details and price before you book.</p>}
+      {guideId === "jerusalem" && option.id === "taxi" && <UsefulJourneyLink label="Official airport taxi pickup instructions" href="https://www.gett.com/il/airport-en/" context="Check the ride-code procedure and the pickup point for your terminal." />}
+      {guideId === "jerusalem" && option.id === "bus" && <UsefulJourneyLink label="Check bus 485 departures" href="https://bus.gov.il/" context="Find the actual timetable and boarding stop for your travel date." />}
+      {jerusalemPrivate && <UsefulJourneyLink label="Send me a message using the form below" href="#request-quote" context="Share your flight, destination and luggage details. I'll confirm availability and the price before you book." />}
       {guideId !== "jerusalem" && <div className="mt-4 rounded-xl bg-secondary/50 p-5">
         <h4 className="font-semibold">Before choosing this option</h4>
         <ul className="mt-2 list-disc space-y-1 pl-5 text-sm leading-relaxed">
