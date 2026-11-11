@@ -4,7 +4,7 @@
  * Source and licence links remain outbound information, never image hotlinks.
  */
 import heroTelAviv from "@/assets/home/hero-tel-aviv.webp";
-import heroTelAvivLarge from "@/assets/home/hero-tel-aviv-large.webp";
+
 import telAvivCoast from "@/assets/home/tel-aviv-coast.webp";
 import beachesTelAviv from "@/assets/guides/2026-10/beaches-in-tel-aviv.webp";
 import beachfront from "@/assets/tel-aviv/beachfront.webp";
@@ -43,7 +43,7 @@ export const telAvivHotelPhotos: Record<string, HotelIllustration> = {
   },
   "tlv-embassy": district(beachfront, "Tel Aviv's beachfront and Mediterranean promenade"),
   "tlv-backstage": district(dizengoff, "Dizengoff district streets in Tel Aviv"),
-  "tlv-cinema": district("/images/city-stays/tel-aviv-dizengoff.webp", "Dizengoff neighbourhood in central Tel Aviv"),
+  "tlv-cinema": district("/images/hotel-cards/tlv-cinema.webp", "Illustrative urban architecture and culture in central Tel Aviv"),
   "tlv-port-tower": {
     src: telAvivCoast,
     alt: "Tel Aviv's coastline photographed from Jaffa",
@@ -67,5 +67,5 @@ export const telAvivHotelPhotos: Record<string, HotelIllustration> = {
   "tlv-poli-house": district("/images/attractions/tel-aviv-jaffa.webp", "Historic Jaffa waterfront and city"),
   "tlv-assemblage": district("/images/city-stays/tel-aviv-beachfront.webp", "Tel Aviv's Mediterranean beachfront district"),
   "tlv-the-norman": district(rothschild, "Rothschild Boulevard and the surrounding Tel Aviv streets"),
-  "tlv-65-rothschild": district(heroTelAvivLarge, "Tel Aviv skyline and coastal neighbourhoods"),
+  "tlv-65-rothschild": district("/images/hotel-cards/tlv-65-rothschild.webp", "Tel Aviv beachfront and city skyline, illustrative of the broader city"),
 };
