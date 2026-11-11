@@ -350,7 +350,7 @@ export function AirportJourneyPage({ id }: { id: AirportJourneyId }) {
       <Section id="tips" title="Practical tips to avoid missed connections and extra costs">
         <ul className="list-disc space-y-3 pl-5">{g.advice.map(t=><li key={t}>{t}</li>)}</ul>
         <p>For first-time arrivals, read my <Link to="/travel-blog/ben-gurion-airport-arrival-tips/" className="text-primary underline">airport arrivals checklist</Link> and save the operator's contact details offline.</p>
-        {id === "tel-aviv" && <p className="mt-4 text-sm leading-relaxed">Need mobile data for railway updates, maps or taxi apps? Compare activation and coverage options in my <Link to="/travel-blog/best-esim-for-israel/" className="font-semibold text-primary underline underline-offset-4">Israel eSIM guide</Link> before you land.</p>}
+        {(id === "tel-aviv" || id === "haifa") && <p className="mt-4 text-sm leading-relaxed">Need mobile data for railway updates, maps or taxi apps? Compare activation and coverage options in my <Link to="/travel-blog/best-esim-for-israel/" className="font-semibold text-primary underline underline-offset-4">Israel eSIM guide</Link> before you land.</p>}
       </Section>
       <FaqList faqs={g.faqs}/>
       {!focusedLayout && sourceBlock}
