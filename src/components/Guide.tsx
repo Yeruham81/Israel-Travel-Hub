@@ -292,7 +292,7 @@ export function ProviderSection({ id = "book", title, intro, links, pageId }: { 
   );
 }
 
-function GuideCardPhoto({ photo }: { photo?: { src: string; alt: string } }) {
+function GuideCardPhoto({ photo }: { photo?: { src: string; alt: string } | null }) {
   return photo
     ? <img src={photo.src} alt={photo.alt} loading="lazy" decoding="async" width={600} height={340} className="aspect-[16/9] w-full object-cover" />
     : <span aria-hidden="true" className="flex aspect-[16/9] w-full items-center justify-center bg-secondary/50 text-muted-foreground"><BookOpen className="h-10 w-10 opacity-50" /></span>;
@@ -329,7 +329,7 @@ export function RelatedLinks({ title = "Plan the rest of your trip", items, curr
       {pictured.length > 0 && <ul className="mt-4 grid gap-4 sm:grid-cols-2" data-testid="stay-trip-photo-grid">
         {pictured.map(({ item, guide, cardPhoto }) => <li key={String(item.to)} className="min-w-0">
           <Link to={item.to} className="group flex h-full min-w-0 flex-col overflow-hidden rounded-xl border bg-card transition-colors hover:border-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
-            <GuideCardPhoto photo={cardPhoto} />
+            <GuideCardPhoto photo={cardPhoto ?? null} />
             <span className="flex flex-1 flex-col p-4">
               <span className="text-base font-bold leading-snug text-foreground group-hover:text-primary">{item.label}</span>
               <span className="mt-2 line-clamp-3 flex-1 text-sm leading-relaxed text-muted-foreground">{item.note || guide.description}</span>
@@ -405,7 +405,7 @@ export function RelatedLinks({ title = "Plan the rest of your trip", items, curr
       <ul className={pairedGuides.length === 6 ? "mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-3" : "mt-4 grid gap-4 sm:grid-cols-2"}>
         {pairedGuides.map(({ item, guide, cardPhoto }) => <li key={String(guide.to)} className="min-w-0">
           <Link to={guide.to} className="group flex h-full min-w-0 flex-col overflow-hidden rounded-xl border bg-card transition-colors hover:border-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
-            <GuideCardPhoto photo={cardPhoto} />
+            <GuideCardPhoto photo={cardPhoto ?? null} />
             <span className="flex flex-1 flex-col p-4">
               <span className="text-base font-bold leading-snug text-foreground group-hover:text-primary">{item.label}</span>
               <span className="mt-2 line-clamp-3 flex-1 text-sm leading-relaxed text-muted-foreground">{item.note || guide.description}</span>
