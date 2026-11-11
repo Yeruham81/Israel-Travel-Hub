@@ -6,6 +6,7 @@ import { routeTree } from "@/routeTree.gen";
 import { airportJourneyGuides, airportJourneyIds } from "@/data/airportJourneyGuides";
 import { airportJourneyMeta, AirportJourneyPage } from "@/components/AirportJourneyPage";
 import { getAirportRouteGuide } from "@/data/airportRoutes";
+import { repeatedPhotos } from "@/lib/photo-uniqueness";
 
 describe("four independent airport transportation comparisons", () => {
   it("separates informational search intent and self canonical from private booking", async () => {
@@ -375,6 +376,34 @@ describe("four independent airport transportation comparisons", () => {
       expect(doc.querySelectorAll('aside[aria-label^="Private transfer quote"]')).toHaveLength(id === "jerusalem" || id === "tel-aviv" ? 0 : 1);
       expect(rateId === "dead-sea" ? g.city.includes("Ein Bokek") : g.city.length > 0).toBe(true);
       expect(doc.querySelectorAll("#sources details")).toHaveLength(1);
+    }
+  }, 30000);
+
+  it("links holiday planning and keeps editorial images below their section introductions", async () => {
+    for (const id of airportJourneyIds) {
+      const g = airportJourneyGuides[id];
+      const router = createRouter({ routeTree, context: { queryClient: new QueryClient() }, history: createMemoryHistory({ initialEntries: [g.path] }), trailingSlash: "always" });
+      await router.load();
+      const html = renderToString(<RouterContextProvider router={router}><AirportJourneyPage id={id} /></RouterContextProvider>);
+      const doc = new DOMParser().parseFromString(html, "text/html");
+      expect(doc.querySelectorAll('#shabbat a[href="/travel-blog/israel-holidays/"]'), id).toHaveLength(1);
+      if (id === "tel-aviv") {
+        const hotelTitle = [...doc.querySelectorAll("#option-rail h4")].find(el => el.textContent?.includes("From the station to the beach"))!;
+        expect(hotelTitle.nextElementSibling?.tagName).toBe("P");
+        expect(hotelTitle.nextElementSibling?.nextElementSibling?.tagName).toBe("FIGURE");
+        expect(doc.querySelectorAll("#option-rail figure img")).toHaveLength(2);
+      }
+      if (id === "haifa" || id === "ein-bokek") {
+        expect(doc.querySelector("#station-choice h2")?.nextElementSibling?.tagName).toBe("P");
+        expect(doc.querySelector("#options > h2")?.nextElementSibling?.tagName).toBe("P");
+      }
+      const related = doc.querySelector('section[aria-label="Related practical guides"]');
+      if (related) {
+        const cards = [...related.querySelectorAll("ul > li")];
+        if (cards.length === 6) expect(related.querySelector("ul")).toHaveClass("lg:grid-cols-3");
+        const photos = [...related.querySelectorAll("li img")].map(img => img.getAttribute("src") || "");
+        expect(repeatedPhotos(photos), id).toEqual([]);
+      }
     }
   }, 30000);
 
