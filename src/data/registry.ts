@@ -1116,6 +1116,13 @@ export const affiliateConfig: Record<string, { trackingUrl: string } | undefined
   "area-mahane-yehuda-expedia": { trackingUrl: "https://expedia.tpm.li/7P1ejkhT" },
   "area-east-jerusalem-expedia": { trackingUrl: "https://expedia.tpm.li/7eDNY552" },
   "area-german-colony-expedia": { trackingUrl: "https://expedia.tpm.li/3mkMeHGv" },
+  // Direct property links generated and verified by Travelpayouts (11 Nov 2026).
+  // The page+hotel SubID is added by hotelAffiliateUrl() at render time.
+  "hotel-jlm-ibis-expedia": { trackingUrl: "https://expedia.tpm.li/nKcakttc" },
+  "hotel-jlm-ibis-styles-expedia": { trackingUrl: "https://expedia.tpm.li/cfGgqry4" },
+  "hotel-jlm-david-citadel-expedia": { trackingUrl: "https://expedia.tpm.li/BvIrC40X" },
+  "hotel-jlm-waldorf-expedia": { trackingUrl: "https://expedia.tpm.li/sYbVC6QM" },
+  "hotel-jlm-hashimi-expedia": { trackingUrl: "https://expedia.tpm.li/WU93VyPL" },
   "hotel-herbert-samuel-expedia": { trackingUrl: "https://expedia.tpm.li/BYoR4PfJ" },
   "hotel-arthur-expedia": { trackingUrl: "https://expedia.tpm.li/j0N17qRs" },
   "hotel-mamilla-expedia": { trackingUrl: "https://expedia.tpm.li/3aaGDgYM" },
