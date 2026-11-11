@@ -1,0 +1,31 @@
+{
+  "project_id": 406243,
+  "partner_id": 622032,
+  "links": [
+    {
+      "id": "jlm-ibis",
+      "name": "ibis Jerusalem City Center",
+      "url": "https://www.expedia.com/Jerusalem-Hotels-Ibis-Jerusalem-City-Center-An-AccorHotels-Brand.h17228236.Hotel-Information"
+    },
+    {
+      "id": "jlm-ibis-styles",
+      "name": "ibis Styles Jerusalem City Center",
+      "url": "https://www.expedia.com/Jerusalem-Hotels-Ibis-Styles-Jerusalem-City-Center-An-AccorHotels-Brand.h27464110.Hotel-Information"
+    },
+    {
+      "id": "jlm-david-citadel",
+      "name": "The David Citadel",
+      "url": "https://www.expedia.com/Jerusalem-Hotels-The-David-Citadel-Jerusalem.h71571.Hotel-Information"
+    },
+    {
+      "id": "jlm-waldorf",
+      "name": "Waldorf Astoria Jerusalem",
+      "url": "https://www.expedia.com/Jerusalem-Hotels-Waldorf-Astoria-Jerusalem.h6368804.Hotel-Information"
+    },
+    {
+      "id": "jlm-hashimi",
+      "name": "Hashimi Hotel",
+      "url": "https://www.expedia.com/Jerusalem-Hotels-Hashimi-Hotel.h2539297.Hotel-Information"
+    }
+  ]
+}
