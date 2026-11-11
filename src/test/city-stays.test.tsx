@@ -9,6 +9,7 @@ import { cityStayGuides, jerusalemAreaGuides, telAvivAreaGuides, neighborhoodGui
 import { affiliateConfig, getSource, hotelsForArea, linksForPage } from "@/data/registry";
 import { telAvivHotelCatalog } from "@/components/TelAvivHotelBrowser";
 import { readOutboundClicks } from "@/lib/outbound";
+import { hotelAffiliateUrl } from "@/lib/hotel-affiliate";
 import { telAvivHotelPhotos } from "@/data/telAvivHotelPhotos";
 import { hotelTileCopy } from "@/components/TelAvivHotelBrowser";
 import { cityHotelPhoto, hotelsInCityCatalog } from "@/data/cityHotelCatalog";
@@ -93,7 +94,7 @@ describe.each([
         const booking = linksForPage(`stay-area-${area.id}`).find((link) => link.id === `hotel-${hotel.id}-expedia`)!;
         expect(getSource(hotel.sourceId).url).toMatch(/^https:\/\//);
         const link = screen.getByRole("link", { name: `${booking.ctaLabel} for ${hotel.name}` });
-        expect(link).toHaveAttribute("href", booking.url);
+        expect(link).toHaveAttribute("href", hotelAffiliateUrl(booking, `stay-area-${area.id}`, hotel.id));
         expect(link).toHaveAttribute("target", "_blank");
         if (booking.isAffiliate) {
           expect(booking.url).toBe(affiliateConfig[booking.id]?.trackingUrl);
@@ -132,14 +133,15 @@ describe.each([
     }
   });
 
-  it("each area has a balanced mix of two existing affiliate hotels and two new direct Expedia pages", () => {
+  it("keeps four distinct hotels per neighborhood while gradually upgrading approved Expedia links", () => {
     for (const area of areas) {
       const hotels = hotelsForArea(area.id, g.id);
       expect(hotels).toHaveLength(4);
       const bookings = linksForPage(`stay-area-${area.id}`).filter((link) => link.id.startsWith("hotel-"));
       expect(bookings).toHaveLength(4);
-      expect(bookings.filter((link) => link.isAffiliate)).toHaveLength(2);
-      expect(bookings.filter((link) => !link.isAffiliate)).toHaveLength(2);
+      const configured = bookings.filter((link) => affiliateConfig[link.id]?.trackingUrl);
+      expect(bookings.filter((link) => link.isAffiliate)).toHaveLength(configured.length);
+      expect(configured.length).toBeGreaterThanOrEqual(2);
       for (const offer of bookings.filter((link) => !link.isAffiliate)) {
         expect(offer.url).toContain("expedia.com/");
         expect(offer.url).toContain(".Hotel-Information");
@@ -186,7 +188,7 @@ describe("Tel Aviv direct hotel catalog", () => {
       expect(booking, hotel.name).toBeDefined();
       const card = cards.find((item) => item.querySelector("h3")?.textContent === hotel.name)!;
       const link = within(card).getByRole("link", { name: `${booking.ctaLabel} for ${hotel.name}` });
-      expect(link).toHaveAttribute("href", booking.url);
+      expect(link).toHaveAttribute("href", hotelAffiliateUrl(booking, "stay-telaviv", hotel.id));
       expect(link).toHaveAttribute("target", "_blank");
       expect(link.getAttribute("rel")).toContain(booking.isAffiliate ? "sponsored" : "noopener");
 
@@ -299,7 +301,7 @@ describe("Jerusalem direct hotel catalog", () => {
       expect(copy.description.split(" ").length).toBeLessThanOrEqual(25);
       expect(within(card).getAllByRole("link")).toHaveLength(2);
       const book = within(card).getByRole("link", { name: `${booking.ctaLabel} for ${hotel.name}` });
-      expect(book).toHaveAttribute("href", booking.url);
+      expect(book).toHaveAttribute("href", hotelAffiliateUrl(booking, "stay-jerusalem", hotel.id));
       expect(book).toHaveAttribute("target", "_blank");
       expect(book.getAttribute("rel")).toContain(booking.isAffiliate ? "sponsored" : "noopener");
       const photo = cityHotelPhoto(hotel);
