@@ -42,7 +42,7 @@ describe("four independent airport transportation comparisons", () => {
       expect(doc.querySelector('a[href*="#request-quote"]')).not.toBeNull();
       if (id !== "jerusalem") expect(doc.querySelector('aside a[href="#request-quote"]')?.getAttribute("href")).toBe("#request-quote");
       else expect(doc.querySelector('#option-private a[href="#request-quote"]')?.getAttribute("href")).toBe("#request-quote");
-      if (id === "jerusalem") expect(doc.body.textContent).toContain("planning estimates, not guaranteed live prices");
+      if (id === "jerusalem") expect(doc.querySelector("#comparison")?.textContent).toContain("Final taxi fares depend");
       else if (g.historicalPrices === false) expect(doc.body.textContent).toContain("this guide does not quote an unverified current fare");
       else expect(doc.body.textContent).toContain("historical editorial estimates");
       const sourceDisclosure = doc.querySelector("#sources details");
@@ -114,7 +114,12 @@ describe("four independent airport transportation comparisons", () => {
     expect(g.historicalPrices).toBe(false);
     expect(g.title).toMatch(/Ben Gurion Airport to Jerusalem.*Train.*Taxi.*Bus/i);
     expect(g.title).not.toMatch(/2026|2027/);
-    expect(g.answer).toMatch(/Yitzhak Navon.*ticket and voucher instructions.*Bus 485.*Level 2.*Exit 21/s);
+    expect(g.answer).toMatch(/Yitzhak Navon.*Bus 485.*limited departures/s);
+    expect(g.intro).toMatch(/In this guide, I compare/);
+    expect(g.intro).not.toMatch(/26–30|bus 485|fare/i);
+    expect(g.photo.alt).toMatch(/Panoramic view.*Jerusalem.*Dome of the Rock/i);
+    expect(g.photo.credit).toMatch(/Public domain/);
+    expect(g.options.every(o => Boolean(o.comparison?.advantages && o.comparison?.drawbacks))).toBe(true);
     expect(g.stations[0]?.name).toBe("Jerusalem–Yitzhak Navon");
     expect(g.options.find(o => o.id === "rail")!.cost).toContain("₪21");
     expect(g.options.find(o => o.id === "bus")!.cost).not.toContain("₪");
@@ -153,6 +158,24 @@ describe("four independent airport transportation comparisons", () => {
     const html = renderToString(<RouterContextProvider router={router}><AirportJourneyPage id="jerusalem" /></RouterContextProvider>);
     const doc = new DOMParser().parseFromString(html, "text/html");
     expect(doc.querySelectorAll("figure img")).toHaveLength(3);
+    const intro = doc.querySelector("header p.text-lg")?.textContent || "";
+    expect(intro).toContain("In this guide, I compare");
+    expect(doc.querySelector('header time[datetime="2026-11-11"]')?.textContent).toBe("November 2026");
+    expect(doc.querySelector("header")?.textContent).not.toMatch(/Approximate distance|Editorial review|45–55 km/);
+    expect(doc.querySelector("header figure img")?.getAttribute("alt")).toMatch(/Panoramic view.*Jerusalem/i);
+    expect(doc.querySelector("#quick-answer")?.textContent).not.toContain("This is an independent transport comparison");
+    const comparison = doc.querySelector("#comparison table")!;
+    expect(comparison.querySelectorAll("thead th")).toHaveLength(5);
+    expect([...comparison.querySelectorAll("thead th")].map(th => th.textContent)).toEqual(["Option", "Travel time", "Estimated cost", "Advantages", "Drawbacks"]);
+    expect(comparison.querySelectorAll("tbody tr")).toHaveLength(5);
+    expect(comparison.textContent).not.toMatch(/written quote required|illustrative|after pickup|per.vehicle on weekdays/i);
+    expect(comparison.textContent).toContain("Varies");
+    expect(comparison.textContent).toContain("From ₪");
+    const priceNote = comparison.parentElement?.nextElementSibling?.textContent || "";
+    expect(priceNote).toMatch(/^Final taxi fares depend/);
+    expect(priceNote.length).toBeLessThan(370);
+    expect(doc.querySelectorAll("#options h4").length).toBeGreaterThanOrEqual(1);
+    expect(doc.querySelector("#options")?.textContent).not.toContain("Before choosing this option");
     for (const o of g.options) for (const l of o.inlineLinks || []) {
       const link = doc.querySelector(`#option-${o.id} a[href="${l.to}"]`);
       expect(link).not.toBeNull();
