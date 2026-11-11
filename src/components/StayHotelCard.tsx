@@ -4,6 +4,7 @@ import type { HotelIllustration } from "@/data/telAvivHotelPhotos";
 import { getSource, isPublisherUrl, type HotelRecommendation, type ProviderLink } from "@/data/registry";
 import { recordOutboundClick, relFor } from "@/lib/outbound";
 import { activeHotelNotice } from "@/lib/hotel-notices";
+import { hotelAffiliateUrl } from "@/lib/hotel-affiliate";
 
 export function StayHotelCard({ hotel, booking, pageId, editorial, compact = false, tile = false, photo, fallbackPhoto }: { hotel: HotelRecommendation; booking: ProviderLink | undefined; pageId: string; editorial?: Pick<HotelRecommendation, "summary" | "bestFor" | "watch"> | undefined; compact?: boolean; tile?: boolean; photo?: HotelIllustration | undefined; fallbackPhoto?: { src: string; alt: string } | undefined }) {
   const [imageFailed, setImageFailed] = useState(false);
@@ -27,7 +28,7 @@ export function StayHotelCard({ hotel, booking, pageId, editorial, compact = fal
           {notice && <p className="mt-3 rounded-lg border border-primary/25 bg-secondary/70 p-3 text-xs leading-relaxed" data-testid="hotel-operating-notice">{notice.message}</p>}
         </div>
         {booking && <div className="border-t bg-secondary/40 p-3.5">
-          <a href={booking.url} target="_blank" rel={relFor(booking.isAffiliate)}
+          <a href={hotelAffiliateUrl(booking, pageId, hotel.id)} target="_blank" rel={relFor(booking.isAffiliate)}
              onClick={() => recordOutboundClick({ pageId, productId: hotel.id, offerId: booking.id })}
              className="btn btn-primary flex w-full items-center justify-center gap-2 text-center"
              aria-label={`${booking.ctaLabel} for ${hotel.name}`}>
@@ -55,7 +56,7 @@ export function StayHotelCard({ hotel, booking, pageId, editorial, compact = fal
       </div>
       {booking && <div className="flex flex-wrap items-center justify-between gap-4 border-t bg-secondary/50 px-5 py-4 sm:px-7">
         <div><p className="text-sm font-semibold">Check room options for your dates</p><p className="mt-1 text-xs text-muted-foreground">{booking.isAffiliate ? "Sponsored link · " : ""}{booking.providerName} · Price and availability on the booking site</p></div>
-        <a href={booking.url} target="_blank" rel={relFor(booking.isAffiliate)} onClick={() => recordOutboundClick({ pageId, productId: hotel.id, offerId: booking.id })} className="btn btn-primary" aria-label={`${booking.ctaLabel} for ${hotel.name}`}>
+        <a href={hotelAffiliateUrl(booking, pageId, hotel.id)} target="_blank" rel={relFor(booking.isAffiliate)} onClick={() => recordOutboundClick({ pageId, productId: hotel.id, offerId: booking.id })} className="btn btn-primary" aria-label={`${booking.ctaLabel} for ${hotel.name}`}>
           {booking.ctaLabel} <span aria-hidden>↗</span><span className="sr-only"> (opens in a new tab)</span>
         </a>
       </div>}
