@@ -23,7 +23,7 @@ LEGACY = [
  "public/images/city-stays/jerusalem-mamilla.webp",
  "src/assets/home/jerusalem-old-city.webp",
  "src/assets/jerusalem/old-city.webp",
- "public/images/attractions/jerusalem-shopping.webp",
+ "public/images/hotel-cards/bezalel.webp",
  "src/assets/jerusalem/mahane-yehuda.webp",
  "src/assets/jerusalem/east-jerusalem.webp",
  "public/images/hotels/jerusalem-night.webp",
@@ -32,7 +32,7 @@ LEGACY = [
  "src/assets/home/hero-tel-aviv.webp",
  "src/assets/tel-aviv/beachfront.webp",
  "src/assets/tel-aviv/dizengoff.webp",
- "public/images/city-stays/tel-aviv-dizengoff.webp",
+ "public/images/hotel-cards/tlv-cinema.webp",
  "src/assets/home/tel-aviv-coast.webp",
  "src/assets/tel-aviv/old-north.webp",
  "src/assets/tel-aviv/neve-tzedek.webp",
@@ -44,7 +44,7 @@ LEGACY = [
  "public/images/attractions/tel-aviv-jaffa.webp",
  "public/images/city-stays/tel-aviv-beachfront.webp",
  "src/assets/tel-aviv/rothschild.webp",
- "src/assets/home/hero-tel-aviv-large.webp",
+ "public/images/hotel-cards/tlv-65-rothschild.webp",
 ]
 RESORT_LOCAL = [
  "src/assets/haifa/panorama.webp",   # Haifa Golden Crown
@@ -67,6 +67,7 @@ def ahash(path: Path):
 def main():
     files = [ROOT / p for p in LEGACY + RESORT_LOCAL]
     files += sorted(p for p in CARDS.iterdir() if p.suffix.lower() in {".jpg", ".webp", ".jpeg", ".png"} and p.name not in IGNORED)
+    files = list(dict.fromkeys(files))  # A few older cards now use photo assets in CARDS.
     assert len(files) == 87, f"Expected 87 used hotel photos; found {len(files)}."
     for p in files:
         if not p.is_file():
