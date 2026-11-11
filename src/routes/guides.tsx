@@ -5,6 +5,7 @@ import { hasPublicPhotoCredit } from "@/lib/photo-credits";
 import { HubHeader } from "@/components/Guide";
 import { filterGuides, getGuideTopicLabel, guideDirectory, guideTopics, isGuideTopic, type GuideTopicId } from "@/data/travelGuides";
 import { pageMeta } from "@/lib/site";
+import { uniqueGuideCardPhotos } from "@/lib/guide-card-photos";
 
 export const Route = createFileRoute("/guides")({
   validateSearch: (search: Record<string, unknown>): { q?: string; topic?: GuideTopicId } => ({ ...(typeof search["q"] === "string" && search["q"].trim() ? { q: search["q"].trim().slice(0, 120) } : {}), ...(isGuideTopic(search["topic"]) ? { topic: search["topic"] } : {}) }),
@@ -22,6 +23,7 @@ function Guides() {
   const activeTopic = isGuideTopic(topic) ? topic : undefined;
   const activeTopicLabel = getGuideTopicLabel(activeTopic);
   const guides = filterGuides(query, activeTopic);
+  const picturedGuides = uniqueGuideCardPhotos(guides.map(guide => ({ guide })));
   const searchFor = (nextTopic?: GuideTopicId) => ({ ...(query.trim() ? { q: query.trim().slice(0, 120) } : {}), ...(nextTopic ? { topic: nextTopic } : {}) });
   const topicHref = (nextTopic?: GuideTopicId) => {
     const params = new URLSearchParams(searchFor(nextTopic));
@@ -45,7 +47,7 @@ function Guides() {
       </nav>
     </div>
     <div className="mt-7 flex flex-wrap items-center justify-between gap-3"><p role="status" aria-live="polite" className="text-sm text-muted-foreground">{guides.length} {guides.length === 1 ? "guide" : "guides"}{activeTopicLabel ? ` · ${activeTopicLabel}` : ""}</p>{(query || activeTopic) && <button type="button" onClick={() => { setQuery(""); void navigate({ search: {}, replace: true }); }} className="text-sm font-medium text-primary underline">Clear filters</button>}</div>
-    {guides.length > 0 ? <div className="mt-5 grid gap-5 sm:grid-cols-2 xl:grid-cols-3">{guides.map((guide) => <GuideCard key={guide.id} guide={guide} />)}</div> : <div className="mt-5 rounded-xl border p-8"><h2 className="text-2xl">No guides match this search</h2><p className="mt-2 text-muted-foreground">Try fewer words or choose another topic. Clear the filters to browse every guide.</p></div>}
+    {guides.length > 0 ? <div className="mt-5 grid gap-5 sm:grid-cols-2 xl:grid-cols-3">{picturedGuides.map(({ guide, cardPhoto }) => <GuideCard key={guide.id} guide={guide} cardPhoto={cardPhoto || null} />)}</div> : <div className="mt-5 rounded-xl border p-8"><h2 className="text-2xl">No guides match this search</h2><p className="mt-2 text-muted-foreground">Try fewer words or choose another topic. Clear the filters to browse every guide.</p></div>}
     <details className="mt-10 rounded-xl border p-5"><summary className="cursor-pointer text-sm font-medium">Guide image credits</summary><ul className="mt-3 space-y-3">{photos.map((photo) => <li key={photo.src}><span className="text-sm">{photo.alt}</span><GuidePhotoCredit photo={photo} /></li>)}</ul></details>
   </main>;
 }
