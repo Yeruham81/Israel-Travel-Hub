@@ -232,7 +232,7 @@ describe("migrated practical guides", () => {
       expect(container.textContent).not.toContain("Choose your next step");
       expect(container.textContent).not.toContain("Explore more Israel travel guides");
       expect(within(container).getByRole("form", { name: "Guide contact message" })).toBeInTheDocument();
-      expect(within(container).getByRole("textbox", { name: /Subject/ })).toHaveValue(expect.stringContaining(travelGuides[id].title));
+      expect((within(container).getByRole("textbox", { name: /Subject/ }) as HTMLInputElement).value).toContain(travelGuides[id].title);
       expect(container.querySelector("#" + travelGuides[id].sections[0]!.id + " > div")).toHaveClass("text-foreground");
       expect(container.querySelector('nav[aria-label="On this page"] a[href="#contact"]')).not.toBeNull();
       unmount();
