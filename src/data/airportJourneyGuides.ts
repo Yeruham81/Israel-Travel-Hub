@@ -5,7 +5,6 @@ import telAvivOldJaffa from "@/assets/tel-aviv/jaffa.webp";
 import jerusalemNavonPlatform from "@/assets/airport-journeys/jerusalem-navon-platform.webp";
 import benGurionRailPlatform from "@/assets/airport-journeys/ben-gurion-rail-platform.webp";
 import airportTerminalHall from "@/assets/home/ben-gurion-t3.webp";
-import jerusalemMamilla from "@/assets/jerusalem/mamilla.webp";
 import haifaColony from "@/assets/haifa/colony.webp";
 import deadSeaLandscape from "@/assets/dead-sea/landscape.webp";
 
