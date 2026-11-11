@@ -54,14 +54,14 @@ const itineraryExtras: Partial<Record<Region, TripLink[]>> = {
 export function StayTripLinks({
   region, extras = [], currentPath,
 }: {
-  region: Region;
+  region: string;
   extras?: TripLink[];
-  currentPath?: LinkProps["to"];
+  currentPath?: string;
 }) {
   return <RelatedLinks
     title="Plan the rest of your trip"
     illustrated
-    currentPath={currentPath ? String(currentPath) : undefined}
-    items={[...recommended[region], ...extras, ...(itineraryExtras[region] ?? [])]}
+    {...(currentPath ? { currentPath } : {})}
+    items={[...(recommended[region as Region] ?? []), ...extras, ...(itineraryExtras[region as Region] ?? [])]}
   />;
 }
