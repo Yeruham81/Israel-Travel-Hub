@@ -108,7 +108,7 @@ export function GuideCard({ guide, headingLevel = 2, cardPhoto }: { guide: Guide
   const displayedPhoto = cardPhoto === undefined ? guide.photo : cardPhoto;
   return <article className="flex h-full min-w-0 flex-col overflow-hidden rounded-2xl border bg-card" data-testid="guide-directory-card">
     <Link to={guide.to} className="group flex flex-1 flex-col focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-primary">
-      {displayedPhoto ? <img src={displayedPhoto.src} alt={displayedPhoto.alt} width={600} height={400} loading="lazy" decoding="async" className="aspect-[3/2] w-full object-cover" /> : <span aria-hidden="true" className="flex aspect-[3/2] w-full items-center justify-center bg-secondary/50 text-muted-foreground"><BookOpen className="h-10 w-10 opacity-50" /></span>}
+      {displayedPhoto ? <img src={displayedPhoto.src} alt={displayedPhoto.alt} width={600} height={400} loading="lazy" decoding="async" className="aspect-[3/2] w-full object-cover" /> : <span aria-hidden="true" data-testid="guide-card-placeholder" className="flex aspect-[3/2] w-full items-center justify-center bg-secondary/50 text-muted-foreground"><BookOpen className="h-10 w-10 opacity-50" /></span>}
       <div className="flex flex-1 flex-col p-5"><Heading className="text-2xl font-semibold leading-tight group-hover:text-primary">{guide.title}</Heading><p className="mt-3 flex-1 text-sm leading-relaxed text-muted-foreground">{guide.description}</p><span className="mt-4 text-sm font-semibold text-primary">Read more →</span></div>
     </Link>
     <div className="px-5 pb-5"><GuideTags topics={guide.topics} /></div>
