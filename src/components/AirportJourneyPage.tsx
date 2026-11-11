@@ -145,6 +145,7 @@ function TelAvivRailDetails({ guide }: { guide: AirportJourneyGuide }) {
         <img src={guide.photos.onward.src} alt={guide.photos.onward.alt} width={755} height={503} loading="lazy" decoding="async" className="aspect-[3/2] max-h-96 w-full rounded-xl object-cover" />
       </figure>}
       <ul className="mt-4 list-disc space-y-2 pl-5 leading-relaxed">{guide.connections.map(connection => <li key={connection}>{connection}</li>)}</ul>
+      <p className="mt-4 text-sm leading-relaxed">Staying in the historic port area? My <Link to="/travel-blog/jaffa/" className="font-semibold text-primary underline underline-offset-4">Old Jaffa guide</Link> explains the lanes, attractions and local access before you decide where a driver can leave you.</p>
       <aside className="mt-7 rounded-2xl border bg-secondary/40 p-5 sm:p-6" aria-label={guide.exampleJourney.title}>
         <h4 className="text-xl font-semibold">{guide.exampleJourney.title}</h4>
         <ol className="mt-4 space-y-3">{guide.exampleJourney.steps.map((step, index) => <li key={step.label} className="flex gap-3">
@@ -303,6 +304,7 @@ export function AirportJourneyPage({ id }: { id: AirportJourneyId }) {
       <Section id="tips" title="Practical tips to avoid missed connections and extra costs">
         <ul className="list-disc space-y-3 pl-5">{g.advice.map(t=><li key={t}>{t}</li>)}</ul>
         <p>For first-time arrivals, read my <Link to="/travel-blog/ben-gurion-airport-arrival-tips/" className="text-primary underline">airport arrivals checklist</Link> and save the operator's contact details offline.</p>
+        {id === "tel-aviv" && <p className="mt-4 text-sm leading-relaxed">Need mobile data for railway updates, maps or taxi apps? Compare activation and coverage options in my <Link to="/travel-blog/best-esim-for-israel/" className="font-semibold text-primary underline underline-offset-4">Israel eSIM guide</Link> before you land.</p>}
       </Section>
       <FaqList faqs={g.faqs}/>
       {!focusedLayout && sourceBlock}
