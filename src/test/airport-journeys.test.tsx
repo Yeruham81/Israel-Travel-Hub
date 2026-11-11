@@ -114,14 +114,16 @@ describe("four independent airport transportation comparisons", () => {
     expect(g.historicalPrices).toBe(false);
     expect(g.title).toMatch(/Ben Gurion Airport to Jerusalem.*Train.*Taxi.*Bus/i);
     expect(g.title).not.toMatch(/2026|2027/);
-    expect(g.answer).toMatch(/Yitzhak Navon.*free personal train voucher.*Bus 485.*Level 2.*Exit 21/s);
+    expect(g.answer).toMatch(/Yitzhak Navon.*ticket and voucher instructions.*Bus 485.*Level 2.*Exit 21/s);
     expect(g.stations[0]?.name).toBe("Jerusalem–Yitzhak Navon");
     expect(g.options.find(o => o.id === "rail")!.cost).toContain("₪21");
     expect(g.options.find(o => o.id === "bus")!.cost).not.toContain("₪");
     expect(g.options.find(o => o.id === "taxi")!.cost).toMatch(/₪270–410.*meter/i);
     expect(g.options.find(o => o.id === "bus")!.paragraphs.join(" ")).toContain("Terminal 3, Level 2, Exit 21");
-    expect(g.options.find(o => o.id === "rail")!.paragraphs.join(" ")).toContain("19 August 2026");
+    expect(g.options.find(o => o.id === "rail")!.paragraphs.join(" ")).toContain("The Jerusalem-line voucher instructions");
+    expect(g.options.find(o => o.id === "rail")!.paragraphs.join(" ")).not.toContain("near the beginning of this guide");
     expect(g.weekend.join(" ")).toMatch(/Nesher.*no longer runs/);
+    expect(g.weekendLinks).toContainEqual({ text: "Israel's calendar of events", to: "/travel-blog/israel-holidays/" });
     expect(g.photos?.station.alt).toMatch(/Yitzhak Navon/);
     expect(g.photos?.onward.alt).toMatch(/Ben Gurion Airport railway station/);
     expect(g.faqs).toHaveLength(7);
@@ -157,14 +159,30 @@ describe("four independent airport transportation comparisons", () => {
       expect(link?.closest("p")).not.toBeNull();
     }
     expect(doc.querySelector('section[aria-label="Related practical guides"]')).not.toBeNull();
-    expect(doc.querySelector('aside[aria-label="Important Jerusalem train ticket information"]')).not.toBeNull();
+    const rail = doc.querySelector("#option-rail")!;
+    const voucher = rail.querySelector('aside[aria-label="Important Jerusalem train ticket information"]')!;
+    expect(voucher).not.toBeNull();
+    expect(voucher.textContent).toContain("August 19, 2026");
+    expect(voucher.querySelector('a[href*="vouchers-jerusalem"]')).not.toBeNull();
+    expect(voucher.querySelector('a[href="https://www.rail.co.il/"]')).not.toBeNull();
+    expect(rail.querySelectorAll("figure img")).toHaveLength(2);
+    expect(rail.querySelector("h3 + figure")).toBeNull();
+    expect(doc.querySelector("#options > h2 + figure")).toBeNull();
+    expect(doc.querySelector("#station-choice")).toBeNull();
+    expect(doc.querySelector("#quick-answer + aside")).toBeNull();
+    expect(doc.querySelector('#shabbat a[href="/travel-blog/israel-holidays/"]')).not.toBeNull();
+    expect(doc.querySelector('#option-private a[href="#request-quote"]')?.textContent).toMatch(/send me a message using the form/i);
     expect(doc.querySelector('aside[aria-label="Private transfer quote for Jerusalem"]')).toBeNull();
     expect(doc.querySelector('#option-private a[href="#request-quote"]')).not.toBeNull();
     expect(doc.querySelector('section[aria-label="Related practical guides"]')?.querySelectorAll("li")).toHaveLength(6);
     expect(doc.querySelector('section[aria-label="Plan the next part of your trip"]')?.querySelectorAll("li")).toHaveLength(4);
     expect(doc.querySelector('section[aria-label="Other airport journey comparisons"]')).toBeNull();
     expect(doc.querySelectorAll('form[aria-label="Private airport transfer quote request"]')).toHaveLength(1);
-    expect(doc.querySelector("#options")!.compareDocumentPosition(doc.querySelector("#station-choice")!)).toBe(Node.DOCUMENT_POSITION_FOLLOWING);
+    expect(doc.querySelector("#options")!.compareDocumentPosition(rail) & Node.DOCUMENT_POSITION_CONTAINED_BY).toBeTruthy();
+    expect(rail.compareDocumentPosition(doc.querySelector("#option-taxi")!) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
+    expect(doc.querySelector("#request-quote")!.compareDocumentPosition(doc.querySelector("#sources")!) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
+    expect(doc.querySelector("nav[aria-label='On this page'] a[href='#option-rail']")).not.toBeNull();
+    expect(doc.querySelector("nav[aria-label='On this page'] a[href='#station-choice']")).toBeNull();
     expect(doc.body.textContent).not.toMatch(/≈ ₪20–30|≈ ₪300–360/);
   });
 
@@ -260,7 +278,7 @@ describe("four independent airport transportation comparisons", () => {
       const callouts = doc.querySelectorAll('aside[aria-label="Private transfer quote for ' + g.city + '"]');
       if (id === "jerusalem") {
         expect(callouts).toHaveLength(0);
-        expect(doc.querySelector('aside[aria-label="Important Jerusalem train ticket information"]')).not.toBeNull();
+        expect(doc.querySelector('#option-rail aside[aria-label="Important Jerusalem train ticket information"]')).not.toBeNull();
       } else {
         expect(callouts, id).toHaveLength(1);
         const cta = callouts[0]!;
@@ -277,7 +295,12 @@ describe("four independent airport transportation comparisons", () => {
       expect(quote?.querySelector('input[name="date"]')).not.toBeNull();
       expect(quote?.querySelector('input[name="flight"]')).not.toBeNull();
       expect(quote?.querySelector('button[type="submit"]')).not.toBeNull();
-      expect(doc.querySelector("main")?.lastElementChild?.id).toBe("request-quote");
+      if (id === "jerusalem") {
+        expect(doc.querySelector("main")?.lastElementChild?.id).toBe("sources");
+        expect(doc.querySelector('#sources details:not([open])')).not.toBeNull();
+      } else {
+        expect(doc.querySelector("main")?.lastElementChild?.id).toBe("request-quote");
+      }
       expect(doc.querySelector('nav[aria-label="On this page"] a[href="#request-quote"]')).not.toBeNull();
       expect(doc.body.textContent).not.toContain("The private-transfer page lists its own weekday starting price and conditions.");
       expect(doc.body.textContent).not.toContain("I operate the private transport service promoted on this site;");
