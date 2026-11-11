@@ -85,7 +85,7 @@ describe("migrated practical guides", () => {
     const related = screen.getByRole("region", { name: "Related practical guides" });
     const relatedPhotos = [...related.querySelectorAll("li img")].map(photo => photo.getAttribute("src") || "");
     expect(repeatedPhotos(relatedPhotos)).toEqual([]);
-    if (related.querySelectorAll("li").length === 6) expect(related.querySelector("ul")).toHaveClass("lg:grid-cols-3");
+    if (related.querySelectorAll("li").length === 6) expect(related.querySelector("ul")?.classList.contains("lg:grid-cols-3")).toBe(true);
     for (const link of within(related).getAllByRole("link")) {
       const href = link.getAttribute("href")!;
       expect(router.matchRoutes(href).at(-1)?.routeId).toBe(href.replace(/\/$/, ""));
