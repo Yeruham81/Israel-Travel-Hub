@@ -394,7 +394,7 @@ describe("four independent airport transportation comparisons", () => {
         expect(doc.querySelectorAll("#option-rail figure img")).toHaveLength(2);
       }
       if (id === "haifa" || id === "ein-bokek") {
-        expect(doc.querySelector("#station-choice h2")?.nextElementSibling?.tagName).toBe("P");
+        expect(doc.querySelector("#station-choice h2")?.nextElementSibling?.firstElementChild?.tagName).toBe("P");
         expect(doc.querySelector("#options > h2")?.nextElementSibling?.tagName).toBe("P");
       }
       const related = doc.querySelector('section[aria-label="Related practical guides"]');
