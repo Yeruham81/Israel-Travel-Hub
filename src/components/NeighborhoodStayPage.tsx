@@ -13,7 +13,7 @@ import { StayTripLinks } from "@/components/StayTripLinks";
 import { HomeContactForm } from "@/components/HomeContactForm";
 import { guideContactCopy } from "@/lib/guide-contact";
 
-const sections = [["overview", "The area"], ["highlights", "Nearby sights"], ["location", "Map & arrival"], ["book", "Hotel picks"], ["checklist", "Booking tips"], ["faq", "FAQ"], ["sources", "Sources"], ["contact", "Contact Moshe"]] as const;
+const sections = [["overview", "The area"], ["highlights", "Nearby sights"], ["location", "Map & arrival"], ["book", "Hotel picks"], ["checklist", "Booking tips"], ["other-areas", "More areas"], ["faq", "FAQ"], ["explore", "Local guides"], ["trip-planning", "Trip planning"], ["contact", "Contact Moshe"], ["sources", "Sources"]] as const;
 
 export function NeighborhoodStayPage({ area }: { area: NeighborhoodStayGuide }) {
   const city = cityStayGuides[area.cityId];
@@ -80,7 +80,33 @@ export function NeighborhoodStayPage({ area }: { area: NeighborhoodStayGuide }) 
           <p className="mt-4 text-xs leading-relaxed text-muted-foreground">
             I may earn a commission from the Expedia booking links marked as sponsored, at no additional cost to you. Hotel prices, availability and booking terms are confirmed on Expedia.
           </p>
-          <details className="mt-3 rounded-xl border bg-card p-3 text-xs text-muted-foreground" data-testid="neighborhood-hotel-photo-credits">
+        </section>
+        <Section id="checklist" title="Before you book" className="scroll-mt-32">
+          <div className="mt-5 grid gap-4 sm:grid-cols-2">
+            <Checklist title="For this area" items={area.bookingTips} />
+            <Checklist title={`For any ${city.city} stay`} items={["Confirm the final total including taxes, fees and extras", "Read cancellation and payment conditions for your exact room offer", "Ask about Shabbat check-in, meals and transport if relevant", "Check recent room-specific feedback and accessibility requirements"]} />
+          </div>
+        </Section>
+        <ProviderSection id="more-hotels" title={`See more options in ${area.shortName}`} intro="Want a different room style or budget? Browse other properties, and check each one's exact map location before booking." links={linksForPage(`stay-area-${area.id}-browse`)} pageId={pageId} />
+        <section id="other-areas" aria-labelledby="other-areas-h" className="mt-14 scroll-mt-32">
+          <h2 id="other-areas-h" className="text-3xl">Explore Other Areas to Stay</h2>
+          <p className="mt-2 text-muted-foreground">Compare a different side of {city.city} before you decide.</p>
+          <ul className="mt-5 grid gap-4 sm:grid-cols-2">{otherAreas.map((other) => <li key={other.id} className="min-w-0">
+            <Link to={other.path as LinkProps["to"]} className="group flex h-full flex-col overflow-hidden rounded-xl border bg-card hover:border-primary">
+              <img src={other.photo.src} alt={other.photo.alt} width={600} height={375} loading="lazy" decoding="async" className="aspect-[16/10] w-full object-cover" />
+              <span className="flex flex-1 items-center justify-between gap-3 p-4">
+                <span><span className="block text-xl font-semibold">{other.shortName}</span><span className="mt-1 block text-xs text-muted-foreground">{other.bestFor}</span></span>
+                <ArrowRight className="h-4 w-4 shrink-0 text-primary" aria-hidden />
+              </span>
+            </Link>
+          </li>)}</ul>
+        </section>
+        <FaqList faqs={area.faqs} />
+        <StayTripLinks region={area.cityId} currentPath={area.path} />
+        <HomeContactForm key={area.id} guide={guideContactCopy(area.title, "accommodation", `${area.shortName}, ${city.city}`)} />
+        <SourceList ids={[...city.sourceIds, ...hotels.map((hotel) => hotel.sourceId)]} />
+        <AreaPhotoCredit areas={[area]} />
+        <div className="mt-5"><details className="mt-3 rounded-xl border bg-card p-3 text-xs text-muted-foreground" data-testid="neighborhood-hotel-photo-credits">
             <summary className="cursor-pointer font-semibold text-foreground">Illustrative photo credits & licenses</summary>
             <ul className="mt-3 grid gap-2 sm:grid-cols-2">
               {hotels.map((hotel) => {
@@ -91,25 +117,7 @@ export function NeighborhoodStayPage({ area }: { area: NeighborhoodStayGuide }) 
                 </li>;
               })}
             </ul>
-          </details>
-        </section>
-        <Section id="checklist" title="Before you book" className="scroll-mt-32">
-          <div className="mt-5 grid gap-4 sm:grid-cols-2">
-            <Checklist title="For this area" items={area.bookingTips} />
-            <Checklist title={`For any ${city.city} stay`} items={["Confirm the final total including taxes, fees and extras", "Read cancellation and payment conditions for your exact room offer", "Ask about Shabbat check-in, meals and transport if relevant", "Check recent room-specific feedback and accessibility requirements"]} />
-          </div>
-        </Section>
-        <ProviderSection id="more-hotels" title={`See more options in ${area.shortName}`} intro="Want a different room style or budget? Browse other properties, and check each one's exact map location before booking." links={linksForPage(`stay-area-${area.id}-browse`)} pageId={pageId} />
-        <FaqList faqs={area.faqs} />
-        <SourceList ids={[...city.sourceIds, ...hotels.map((hotel) => hotel.sourceId)]} />
-        <section aria-labelledby="other-areas-h" className="mt-14">
-          <h2 id="other-areas-h" className="text-3xl">Explore Other Areas to Stay</h2>
-          <p className="mt-2 text-muted-foreground">Compare a different side of {city.city} before you decide.</p>
-          <ul className="mt-5 grid gap-3 sm:grid-cols-2">{otherAreas.map((other) => <li key={other.id}><Link to={other.path as LinkProps["to"]} className="group flex h-full items-center justify-between gap-3 rounded-xl border bg-card p-4 hover:border-primary"><div><h3 className="text-xl">{other.shortName}</h3><p className="mt-1 text-xs text-muted-foreground">{other.bestFor}</p></div><ArrowRight className="h-4 w-4 shrink-0 text-primary" aria-hidden /></Link></li>)}</ul>
-        </section>
-        <StayTripLinks region={area.cityId} extras={city.related} currentPath={area.path} />
-        <AreaPhotoCredit areas={[area]} />
-        <HomeContactForm key={area.id} guide={guideContactCopy(area.title, "accommodation", `${area.shortName}, ${city.city}`)} />
+          </details></div>
       </article>
     </main>
   );
