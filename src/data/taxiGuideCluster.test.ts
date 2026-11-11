@@ -60,6 +60,22 @@ describe("intent-specific taxi guide cluster", () => {
     expect(guide.services[0]?.label).toContain("Request a quote");
   });
 
+  it("places airport destination and private-transfer links naturally inside one explanatory paragraph", () => {
+    const airport = taxiGuideCluster.taxis.sections.find((section) => section.id === "airport")!;
+    expect(airport.links).toBeUndefined();
+    const paragraph = airport.paragraphs.at(-1)!;
+    const contextualLinks = airport.inlineLinks!.slice(-5);
+    expect(contextualLinks.map((link) => link.to)).toEqual([
+      "/travel-blog/how-to-get-from-ben-gurion-airport-to-tel-aviv/",
+      "/travel-blog/how-to-get-from-ben-gurion-airport-to-jerusalem/",
+      "/travel-blog/how-to-get-from-ben-gurion-airport-to-haifa/",
+      "/travel-blog/how-to-get-from-ben-gurion-airport-to-ein-bokek/",
+      "/transfers/",
+    ]);
+    for (const link of contextualLinks) expect(paragraph.split(link.text)).toHaveLength(2);
+    expect(paragraph).toContain("To compare transport choices");
+  });
+
   it("differentiates Gett on-demand, scheduled and Terminal 1 pickup points", () => {
     const guide = taxiGuideCluster.airportTaxis;
     const rows = guide.comparison.rows;
