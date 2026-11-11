@@ -329,7 +329,7 @@ describe("Jerusalem direct hotel catalog", () => {
     expect(within(catalog).queryByText(/Already know your dates|Confirm dates, guests and final price/)).not.toBeInTheDocument();
     expect(catalog.textContent).not.toMatch(/ILS\s*\d{2,}|rooms available now|live price/i);
     expect(container.querySelector("#more-hotels")).toBeInTheDocument();
-    expect(container.querySelector("#planning")).toBeInTheDocument();
+    expect(container.querySelector("#trip-planning")).toBeInTheDocument();
   }, 20000);
 
   it("filters to Mamilla on desktop, sorts by hotel name and resets the catalog", () => {
