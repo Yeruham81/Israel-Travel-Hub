@@ -400,7 +400,7 @@ describe("four independent airport transportation comparisons", () => {
       const related = doc.querySelector('section[aria-label="Related practical guides"]');
       if (related) {
         const cards = [...related.querySelectorAll("ul > li")];
-        if (cards.length === 6) expect(related.querySelector("ul")).toHaveClass("lg:grid-cols-3");
+        if (cards.length === 6) expect(related.querySelector("ul")?.classList.contains("lg:grid-cols-3")).toBe(true);
         const photos = [...related.querySelectorAll("li img")].map(img => img.getAttribute("src") || "");
         expect(repeatedPhotos(photos), id).toEqual([]);
       }
