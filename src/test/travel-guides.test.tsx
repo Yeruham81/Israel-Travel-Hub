@@ -643,7 +643,9 @@ describe("migrated practical guides", () => {
     }
     if (id === "shabbat") {
       for (const sectionId of ["shabbat-hours", "weekend-711", "restart"]) {
-        expect(container.querySelector(`#${sectionId}`)?.querySelectorAll('[data-testid="highlighted-useful-link"]')).toHaveLength(1);
+        const extra = container.querySelector(`#${sectionId}`)?.nextElementSibling;
+        const isCallout = extra?.matches('[data-testid="highlighted-useful-link"]');
+        expect(isCallout ? 1 : extra?.querySelectorAll('[data-testid="highlighted-useful-link"]').length).toBe(1);
       }
     } else {
       for (const section of travelGuides[id].sections) for (const link of section.highlightedLinks || []) {
