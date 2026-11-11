@@ -12,7 +12,7 @@ import { StayHotelCard } from "@/components/StayHotelCard";
 import { resortHotelPhoto } from "@/data/resortHotelPhotos";
 import { StayCategoryCard, StayComparison, StayBookingDisclosure, StayBrowseLink, StayPhotoCredits, resortHotel, hotelBooking } from "@/components/StayGuideParts";
 
-const sections = [["overview", "Start here"], ["categories", "Choose your stay"], ["compare", "Compare stays"], ["location", "Map & arrival"], ["book", "Hotel picks"], ["checklist", "Booking tips"], ["faq", "FAQ"], ["sources", "Sources"], ["contact", "Contact Moshe"]] as const;
+const sections = [["overview", "Start here"], ["categories", "Choose your stay"], ["compare", "Compare stays"], ["location", "Map & arrival"], ["book", "Hotel picks"], ["checklist", "Booking tips"], ["faq", "FAQ"], ["explore", "Local guides"], ["trip-planning", "Trip planning"], ["contact", "Contact Moshe"], ["sources", "Sources"]] as const;
 
 export function HotelDestinationPage({ guide: g }: { guide: HotelStayDestination }) {
   const categories = hotelCategoryGuides.filter((guide) => guide.destinationId === g.id);
@@ -58,10 +58,10 @@ export function HotelDestinationPage({ guide: g }: { guide: HotelStayDestination
         <Section id="checklist" title={`Before you book your ${g.name} stay`} className="scroll-mt-32"><div className="mt-5 grid gap-4 sm:grid-cols-2"><Checklist title="Location, rooms & guest ages" items={g.checklist.slice(0, 3)} /><Checklist title="Facilities & the final total" items={g.checklist.slice(3)} /></div></Section>
         <ProviderSection id="more-stays" title={`Browse more ${g.name} stays`} intro="Check the exact location, room offer and cancellation terms on the booking site. Enter your dates and all guests there; no booking is made on this page." links={linksForPage(`stay-${g.id}-browse`)} pageId={pageId} />
         <FaqList faqs={g.faqs} />
-        <SourceList ids={[...new Set([...g.sourceIds, ...hotelIds.map((id) => resortHotel(id).sourceId)])]} />
-        <StayTripLinks region={g.id} extras={g.related} currentPath={g.path} />
-        <StayPhotoCredits photos={[g.photo, ...g.groups.map((group) => group.photo)]} />
+        <StayTripLinks region={g.id} currentPath={g.path} />
         <HomeContactForm key={g.id} guide={guideContactCopy(g.title, "accommodation", g.name)} />
+        <SourceList ids={[...new Set([...g.sourceIds, ...hotelIds.map((id) => resortHotel(id).sourceId)])]} />
+        <StayPhotoCredits photos={[g.photo, ...g.groups.map((group) => group.photo)]} />
       </article>
     </main>
   );
