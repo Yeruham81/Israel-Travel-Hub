@@ -207,9 +207,10 @@ export const expandedTravelGuides = {
     sourceIds: ["guide-weekend-711", "guide-weekend-timetable", "guide-gett", "guide-iaa", "israel-rail", "taxi-fares-2026", "guide-meter-route-estimates"],
     related: ["airportTaxis", "taxiFares", "arrival", "sherut"],
     services: [
-      { label: "Arrange a private airport transfer", to: "/transfers/", note: "Ask about a confirmed pickup suited to your flight, passengers and luggage." },
       { label: "Explore car rental options", to: "/car-rental/", note: "Check Saturday counter hours and collection arrangements before paying." },
       { label: "Choose where to stay in Tel Aviv", to: "/travel-blog/where-to-stay-in-tel-aviv/", note: "Plan your neighbourhood and the final journey from your Line 711 stop." },
+      { label: "Getting around Tel Aviv", to: "/travel-blog/getting-around-tel-aviv/", note: "Compare local transport after you arrive, including weekend alternatives." },
+      { label: "Explore the beaches of Tel Aviv", to: "/travel-blog/beaches-in-tel-aviv/", note: "Find a suitable beach and plan a relaxed first day by the Mediterranean." },
     ],
   },
   travelTips: {
