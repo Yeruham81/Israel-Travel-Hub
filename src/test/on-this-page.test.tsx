@@ -10,7 +10,7 @@ const sections = Array.from({ length: 17 }, (_, index) => [
 ] as const);
 
 describe("compact On this page navigation", () => {
-  it("never needs more than three link rows at any responsive breakpoint", () => {
+  it("shows ten links in five mobile rows and more at wider breakpoints", () => {
     const { container } = render(<OnThisPage sections={sections} />);
     const nav = screen.getByRole("navigation", { name: "On this page" });
     const grid = nav.querySelector("ul.grid") as HTMLElement;
@@ -18,9 +18,11 @@ describe("compact On this page navigation", () => {
     const chips = [...grid.children] as HTMLElement[];
     expect(chips).toHaveLength(17);
     for (const [index, chip] of chips.entries()) {
-      const expected = index >= 15 ? "hidden" : index >= 12 ? "xl:block" : index >= 9 ? "lg:block" : index >= 6 ? "sm:block" : "min-w-0";
+      const expected = index >= 15 ? "hidden" : index >= 12 ? "xl:block" : index >= 10 ? "lg:block" : "min-w-0";
       expect(chip).toHaveClass(expected);
     }
+    expect(chips.slice(0, 10).every((chip) => !chip.classList.contains("hidden"))).toBe(true);
+    expect(chips[10]).toHaveClass("hidden", "lg:block");
     expect(container.querySelector('nav[aria-label="On this page"]')).not.toHaveClass("overflow-x-auto");
   });
 
@@ -37,10 +39,10 @@ describe("compact On this page navigation", () => {
     expect(menu.querySelector('a[href="#section-17"]')).toHaveTextContent("Long descriptive section title number 17");
   });
 
-  it("does not show the overflow menu for six or fewer links", () => {
-    render(<OnThisPage sections={sections.slice(0, 6)} />);
+  it("does not show the overflow menu for ten or fewer links", () => {
+    render(<OnThisPage sections={sections.slice(0, 10)} />);
     const nav = screen.getByRole("navigation", { name: "On this page" });
     expect(nav.querySelector("details")).toBeNull();
-    expect(nav.querySelector("ul.grid")?.children).toHaveLength(6);
+    expect(nav.querySelector("ul.grid")?.children).toHaveLength(10);
   });
 });
