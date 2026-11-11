@@ -9,6 +9,7 @@ import { deadSeaStayGuide, hotelCategoryGuides } from "@/data/content";
 import { affiliateConfig, deadSeaHotelRecommendations, providerLinks } from "@/data/registry";
 import { CANONICAL_ORIGIN } from "@/lib/site";
 import { readOutboundClicks } from "@/lib/outbound";
+import { hotelAffiliateUrl } from "@/lib/hotel-affiliate";
 import { routeTree } from "@/routeTree.gen";
 import { Route as DestinationRoute } from "@/routes/travel-blog.best-dead-sea-hotels";
 import { Route as SpaRoute } from "@/routes/dead-sea.spa-hotels";
@@ -86,7 +87,7 @@ describe("Dead Sea destination → travel intent → booking", () => {
         const hotel = deadSeaHotelRecommendations.find((hotel) => hotel.id === pick.hotelId)!;
         const booking = providerLinks.find((link) => link.id === `hotel-${hotel.id}-expedia`)!;
         const link = screen.getByRole("link", { name: `${booking.ctaLabel} for ${hotel.name}` });
-        expect(link).toHaveAttribute("href", affiliateConfig[booking.id]!.trackingUrl);
+        expect(link).toHaveAttribute("href", hotelAffiliateUrl(booking, `stay-deadsea-${guide.id}`, hotel.id));
         expect(link).toHaveAttribute("rel", "sponsored noopener noreferrer");
         expect(link).toHaveAttribute("target", "_blank");
         link.addEventListener("click", (event) => event.preventDefault());
