@@ -213,7 +213,7 @@ describe("Tel Aviv direct hotel catalog", () => {
     }
     const displayedImages = within(catalog).getAllByTestId("hotel-illustration") as HTMLImageElement[];
     expect(displayedImages).toHaveLength(32);
-    expect(new Set(displayedImages.map((img) => img.src)).size).toBe(16); // one unique photo per original recommendation; new photos are reused licensed illustrations
+    expect(new Set(displayedImages.map((img) => img.src)).size).toBe(32); // every listed Tel Aviv hotel has its own image
     expect(new Set(Object.values(telAvivHotelPhotos).map((photo) => photo.src)).size).toBe(16);
     expect(within(catalog).queryByText(/Neighborhood photograph|Illustrative hotel photograph|Tel Aviv city photograph/)).not.toBeInTheDocument();
     expect(within(catalog).queryByText(/Confirm dates, guests and final price on Expedia/)).not.toBeInTheDocument();
