@@ -1,0 +1,23 @@
+name: Hotel image visual uniqueness audit
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'scripts/audit-hotel-card-photos.py'
+
+permissions:
+  contents: read
+
+jobs:
+  unique-photos:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install Pillow==11.3.0
+      - name: Confirm every assigned hotel has a distinct photographic image
+        run: python scripts/audit-hotel-card-photos.py
