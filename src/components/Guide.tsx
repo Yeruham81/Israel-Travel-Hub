@@ -1,5 +1,8 @@
 import { Link, type LinkProps } from "@tanstack/react-router";
-import { guideDirectory } from "@/data/travelGuides";
+import { guideDirectory, travelGuides, type GuideDirectoryEntry } from "@/data/travelGuides";
+import { airportJourneyGuides, type AirportJourneyId } from "@/data/airportJourneyGuides";
+import { photoIdentity } from "@/lib/photo-uniqueness";
+import { BookOpen } from "lucide-react";
 import type { ReactNode } from "react";
 import { ExtLink } from "@/components/Layout";
 import { publicSources, formatCheckDate, INFO_CHECK_DATE, type ProviderLink } from "@/data/registry";
@@ -291,8 +294,43 @@ export function ProviderSection({ id = "book", title, intro, links, pageId }: { 
 }
 
 /**
+ * Use different photos inside one recommendation grid, including when image
+ * paths are alternate sizes/formats of the same underlying photograph.
+ * Prefer another relevant photo from that guide; never use a different subject
+ * merely to fill an image slot. If no distinct photo exists, keep a text card.
+ */
+function uniqueGuideCardPhotos<T extends { guide: GuideDirectoryEntry }>(
+  entries: T[],
+  reservedPhotos: string[] = [],
+): Array<T & { cardPhoto?: { src: string; alt: string } }> {
+  const used = new Set(reservedPhotos.filter(Boolean).map(photoIdentity));
+  return entries.map(entry => {
+    const article = travelGuides[entry.guide.id as keyof typeof travelGuides];
+    const journeyId = entry.guide.id.startsWith("airport-journey-")
+      ? entry.guide.id.replace("airport-journey-", "") as AirportJourneyId
+      : undefined;
+    const journey = journeyId ? airportJourneyGuides[journeyId] : undefined;
+    const candidates = [
+      entry.guide.photo,
+      ...(article?.sections.map(section => section.photo) || []),
+      journey?.photos?.station,
+      journey?.photos?.onward,
+    ];
+    const cardPhoto = candidates.find(photo => photo?.src && !used.has(photoIdentity(photo.src)));
+    if (cardPhoto) used.add(photoIdentity(cardPhoto.src));
+    return { ...entry, ...(cardPhoto ? { cardPhoto } : {}) };
+  });
+}
+
+function GuideCardPhoto({ photo }: { photo?: { src: string; alt: string } }) {
+  return photo
+    ? <img src={photo.src} alt={photo.alt} loading="lazy" decoding="async" width={600} height={340} className="aspect-[16/9] w-full object-cover" />
+    : <span aria-hidden="true" className="flex aspect-[16/9] w-full items-center justify-center bg-secondary/50 text-muted-foreground"><BookOpen className="h-10 w-10 opacity-50" /></span>;
+}
+
+/**
  * Illustrate and describe only genuine, editorially selected guide links.
- * Guide cards are capped at six and kept in complete pairs on all devices.
+ * Six guide cards use two desktop rows of three; smaller groups use pairs.
  * Service/action links keep their own compact link-card presentation.
  */
 export function RelatedLinks({ title = "Plan the rest of your trip", items, currentPath, illustrated = false }: { title?: string; items: { label: string; to: LinkProps["to"]; note?: string }[]; currentPath?: string; illustrated?: boolean }) {
@@ -312,16 +350,16 @@ export function RelatedLinks({ title = "Plan the rest of your trip", items, curr
       const guide = guideDirectory.find((entry) => normalized(String(entry.to)) === normalized(String(item.to)) && entry.photo);
       return guide ? [{ item, guide }] : [];
     });
-    const pictured = withPhoto.slice(0, 4);
+    const pictured = uniqueGuideCardPhotos(withPhoto.slice(0, 4), [guideDirectory.find(guide => normalized(String(guide.to)) === normalized(currentPath || ""))?.photo?.src || ""]);
     const picturedPaths = new Set(pictured.map(({ item }) => normalized(String(item.to))));
     const remaining = unique.filter((item) => !picturedPaths.has(normalized(String(item.to))));
     if (!pictured.length && !remaining.length) return null;
     return <section aria-label={title} className="mt-12" data-testid="stay-trip-planning">
       <h2 className="text-2xl font-bold leading-tight sm:text-3xl">{title}</h2>
       {pictured.length > 0 && <ul className="mt-4 grid gap-4 sm:grid-cols-2" data-testid="stay-trip-photo-grid">
-        {pictured.map(({ item, guide }) => <li key={String(item.to)} className="min-w-0">
+        {pictured.map(({ item, guide, cardPhoto }) => <li key={String(item.to)} className="min-w-0">
           <Link to={item.to} className="group flex h-full min-w-0 flex-col overflow-hidden rounded-xl border bg-card transition-colors hover:border-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
-            <img src={guide.photo!.src} alt={guide.photo!.alt} loading="lazy" decoding="async" width={600} height={340} className="aspect-[16/9] w-full object-cover" />
+            <GuideCardPhoto photo={cardPhoto} />
             <span className="flex flex-1 flex-col p-4">
               <span className="text-base font-bold leading-snug text-foreground group-hover:text-primary">{item.label}</span>
               <span className="mt-2 line-clamp-3 flex-1 text-sm leading-relaxed text-muted-foreground">{item.note || guide.description}</span>
@@ -384,17 +422,20 @@ export function RelatedLinks({ title = "Plan the rest of your trip", items, curr
   const completedGuides = supplemental
     ? [...selectedGuides, { item: { label: supplemental.guide.title, to: supplemental.guide.to, note: supplemental.guide.description }, guide: supplemental.guide, score: supplemental.score, order: items.length }]
     : selectedGuides;
-  const pairedGuides = completedGuides.slice(0, completedGuides.length - (completedGuides.length % 2));
+  const pairedGuides = uniqueGuideCardPhotos(
+    completedGuides.slice(0, completedGuides.length - (completedGuides.length % 2)),
+    current?.photo?.src ? [current.photo.src] : [],
+  );
   if (guideSection && pairedGuides.length === 0) return null;
   if (!guideSection && items.length === 0) return null;
 
   return <section aria-label={title} className="mt-12">
     <h2 className="text-2xl font-bold leading-tight sm:text-3xl">{title}</h2>
     {guideSection ? (
-      <ul className="mt-4 grid gap-4 sm:grid-cols-2">
-        {pairedGuides.map(({ item, guide }) => <li key={String(guide.to)} className="min-w-0">
+      <ul className={pairedGuides.length === 6 ? "mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-3" : "mt-4 grid gap-4 sm:grid-cols-2"}>
+        {pairedGuides.map(({ item, guide, cardPhoto }) => <li key={String(guide.to)} className="min-w-0">
           <Link to={guide.to} className="group flex h-full min-w-0 flex-col overflow-hidden rounded-xl border bg-card transition-colors hover:border-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
-            <img src={guide.photo!.src} alt={guide.photo!.alt} loading="lazy" decoding="async" width={600} height={340} className="aspect-[16/9] w-full object-cover" />
+            <GuideCardPhoto photo={cardPhoto} />
             <span className="flex flex-1 flex-col p-4">
               <span className="text-base font-bold leading-snug text-foreground group-hover:text-primary">{item.label}</span>
               <span className="mt-2 line-clamp-3 flex-1 text-sm leading-relaxed text-muted-foreground">{item.note || guide.description}</span>
