@@ -67,5 +67,5 @@ export const telAvivHotelPhotos: Record<string, HotelIllustration> = {
   "tlv-poli-house": district("/images/attractions/tel-aviv-jaffa.webp", "Historic Jaffa waterfront and city"),
   "tlv-assemblage": district("/images/city-stays/tel-aviv-beachfront.webp", "Tel Aviv's Mediterranean beachfront district"),
   "tlv-the-norman": district(rothschild, "Rothschild Boulevard and the surrounding Tel Aviv streets"),
-  "tlv-65-rothschild": district("/images/hotel-cards/tlv-65-rothschild.webp", "Tel Aviv beachfront and city skyline, illustrative of the broader city"),
+  "tlv-65-rothschild": district("/images/hotel-cards/tlv-65-rothschild.webp", "Illustrative historical city architecture of Tel Aviv-Yafo"),
 };
