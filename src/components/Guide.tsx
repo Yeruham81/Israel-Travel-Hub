@@ -28,6 +28,127 @@ export function Breadcrumbs({ items }: { items: UiCrumb[] }) {
 }
 
 /**
+ * Compact guide navigation labels for narrow screens.
+ * Article headings, link titles, accessible names and the All sections list
+ * always preserve the full wording. Author-provided compactLabels take priority.
+ */
+const conciseSectionNames: Readonly<Record<string, string>> = {
+  "at-a-glance": "Overview",
+  "uber-status": "Uber availability",
+  "booking-without-app": "Without an app",
+  "prices-payments": "Prices & payment",
+  "setup-backups": "Setup & backups",
+  "nesher-amal": "Nesher & Amal",
+  "where-to-go": "Airport destinations",
+  "booked-shared": "Shared shuttle offers",
+  "what-is-sherut": "What is sherut?",
+  "airport-shuttle": "Terminal shuttle",
+  "official-taxi": "Official airport taxis",
+  "local-sherut": "Local sherut",
+  "plan": "Data plans",
+  "calling": "Phone calls & SMS",
+  "compatibility": "Phone compatibility",
+  "before-you-fly": "Before you fly",
+  "arrival-terminal": "Arrival terminal",
+  "passport-control": "Passport control",
+  "arrivals-hall": "Arrivals hall",
+  "phones-money": "Phones & money",
+  "leave-airport": "Leaving the airport",
+  "arrival-timing": "Arrival timing",
+  "city-transport": "City transport",
+  "intercity-trains": "Intercity trains",
+  "taxis-apps": "Taxis & apps",
+  "day-trips": "Day trips",
+  "weekend-and-bikes": "Weekends & bikes",
+  "buses-light-rail": "Buses & light rail",
+  "shabbat-hours": "Shabbat hours",
+  "arrival-time": "Arrival time",
+  "weekend-711": "Weekend bus 711",
+  "terminal-transfer": "Terminal transfer",
+  "taxis-transfers": "Taxis & transfers",
+  "restart": "Transport restart",
+  "before-booking": "Before booking",
+  "arrival-and-travel": "Arrival & transport",
+  "everyday-essentials": "Travel essentials",
+  "respectful-visits": "Respectful visits",
+  "first-itinerary": "Trip length",
+  "hillsides-and-heritage": "Mounts & Ein Karem",
+  "museums-and-market": "Museums & market",
+  "staying-and-arriving": "Staying & arriving",
+  "beyond-city": "Beyond the city",
+  "choose-shore": "Choose your shore",
+  "tour-or-driver": "Tour or driver",
+  "driving-and-stops": "Driving & stops",
+  "beach-plan": "Beach planning",
+  "ceremony-and-kit": "Ceremony & kit",
+  "baptism-itinerary": "Baptism day plan",
+  "old-city-churches": "Old City churches",
+  "mount-olives": "Mount of Olives",
+  "mount-zion": "Mount Zion",
+  "church-visit-plan": "Church visit tips",
+  "old-city-shopping": "Old City shopping",
+  "market-food": "Mahane Yehuda",
+  "central-shopping": "Central shopping",
+  "malha-and-neighbourhoods": "Malha & Emek Refaim",
+  "crafts-and-practicalities": "Crafts & shopping",
+  "northern-coast": "Northern coast",
+  "choose-format": "Choose a tour format",
+  "northern-pilgrimage": "Nazareth & Galilee",
+  "coastal-day": "Coastal day trips",
+  "trip-format": "Day-trip formats",
+  "scope": "Fare coverage",
+  "time-distance": "Meter calculations",
+  "tariff-hours": "Tariff hours",
+  "extras": "Extra charges",
+  "estimates": "Fare estimates",
+  "disputes": "Fare disputes",
+  "steps": "Ordering a taxi",
+  "terminal3": "Terminal 3",
+  "terminal1": "Terminal 1",
+  "scheduled": "Scheduled pickup",
+  "versus-transfer": "Taxi or transfer",
+  "destinations": "Destinations",
+  "support": "Receipts & support",
+  "special-needs": "Luggage & access",
+  "getting-there": "Getting there",
+  "choose-site": "Choose your site",
+  "fees-hours": "Hours & admission",
+  "day-plan": "Plan the day",
+  "airport-alternatives": "Airport alternatives",
+  "airport-journey-jerusalem": "Airport to Jerusalem",
+  "airport-journey-tel-aviv": "Airport to Tel Aviv",
+  "airport-journey-ein-bokek": "Airport to Ein Bokek",
+};
+
+export function compactOnThisPageLabel(id: string, label: string): string {
+  if (label.length <= 22) return label;
+  const known = conciseSectionNames[id];
+  if (known) return known;
+
+  // Section IDs are written as concise, human-readable topic slugs. Use those
+  // instead of chopping full article headings in the middle of a word.
+  const slug = id
+    .replace(/([a-z])([A-Z])/g, "$1 $2")
+    .replace(/([a-z])([0-9])/g, "$1 $2")
+    .replace(/-/g, " ")
+    .replace(/\band\b/gi, "&")
+    .trim();
+  if (!slug || /^section \d+$/i.test(slug)) {
+    return label.slice(0, 21).trimEnd() + "…";
+  }
+  const readable = slug.charAt(0).toUpperCase() + slug.slice(1);
+  if (readable.length <= 22) return readable;
+  const words = readable.split(/\s+/);
+  let short = "";
+  for (const word of words) {
+    const candidate = short ? `${short} ${word}` : word;
+    if (candidate.length > 21) break;
+    short = candidate;
+  }
+  return short && short !== readable ? `${short}…` : readable.slice(0, 21).trimEnd() + "…";
+}
+
+/**
  * Display up to ten jump links in two columns on narrow screens (five rows).
  * More links appear at wider breakpoints, with the rest in an accessible disclosure menu.
  */
@@ -50,7 +171,7 @@ export function OnThisPage({ sections, sticky = false, compactLabels }: { sectio
         {sections.map(([id, label], index) => {
           const visibility = index >= 15 ? "hidden" : index >= 12 ? "hidden xl:block" : index >= 10 ? "hidden lg:block" : "";
           return <li key={id} className={`min-w-0 ${visibility}`}>
-            <a href={`#${id}`} title={label} aria-label={label} className="chip chip-dense w-full truncate">{compactLabels?.[id] ?? label}</a>
+            <a href={`#${id}`} title={label} aria-label={label} className="chip chip-dense w-full truncate">{compactLabels?.[id] ?? compactOnThisPageLabel(id, label)}</a>
           </li>;
         })}
       </ul>

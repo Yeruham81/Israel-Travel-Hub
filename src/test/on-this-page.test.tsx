@@ -1,6 +1,7 @@
 import { cleanup, fireEvent, render, screen, within } from "@testing-library/react";
 import { afterEach, describe, expect, it } from "vitest";
-import { OnThisPage } from "@/components/Guide";
+import { OnThisPage, compactOnThisPageLabel } from "@/components/Guide";
+import { travelGuides } from "@/data/travelGuides";
 
 afterEach(cleanup);
 
@@ -37,6 +38,35 @@ describe("compact On this page navigation", () => {
     const menu = details.querySelector("ul")!;
     expect(menu.querySelectorAll("a")).toHaveLength(17);
     expect(menu.querySelector('a[href="#section-17"]')).toHaveTextContent("Long descriptive section title number 17");
+  });
+
+  it("shows short, meaningful labels while keeping full accessible titles and the overflow list", () => {
+    const pairs = [
+      ["passport-control", "What happens at passport control in Ben Gurion Airport?", "Passport control"],
+      ["intercity-trains", "How can tourists use Israel Railways between cities?", "Intercity trains"],
+      ["hillsides-and-heritage", "Add the Mount of Olives, Mount Zion or Ein Karem", "Mounts & Ein Karem"],
+      ["booking-without-app", "How can I get a taxi without Gett or Yango?", "Without an app"],
+      ["new-topic", "An unusually long heading about the local area", "New topic"],
+    ] as const;
+    const { container } = render(<OnThisPage sections={pairs} />);
+    const nav = screen.getByRole("navigation", { name: "On this page" });
+    for (const [id, full, short] of pairs) {
+      const chip = nav.querySelector(`ul.grid a[href="#${id}"]`);
+      expect(chip).toHaveTextContent(short);
+      expect(chip).toHaveAttribute("aria-label", full);
+      expect(chip).toHaveAttribute("title", full);
+    }
+    expect(container.querySelector("ul.grid")).not.toHaveClass("overflow-x-auto");
+  });
+
+  it("derives compact navigation labels for every travel guide without truncating the heading", () => {
+    for (const guide of Object.values(travelGuides)) {
+      for (const section of guide.sections) {
+        const short = compactOnThisPageLabel(section.id, section.title);
+        expect(short.length, `${guide.id}/${section.id}: ${short}`).toBeLessThanOrEqual(23);
+        expect(short.length).toBeGreaterThan(0);
+      }
+    }
   });
 
   it("does not show the overflow menu for ten or fewer links", () => {
