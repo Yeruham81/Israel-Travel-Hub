@@ -158,6 +158,45 @@ function TelAvivRailDetails({ guide }: { guide: AirportJourneyGuide }) {
   );
 }
 
+/** Haifa decisions hinge on the coastal station and the full uphill or port approach. */
+function HaifaRailDetails({ guide }: { guide: AirportJourneyGuide }) {
+  return (
+    <>
+      <h4 className="mt-8 text-xl font-semibold">Airport train: tickets, terminal and route</h4>
+      <p className="mt-3 leading-relaxed"><GuideParagraph paragraph={guide.trainIntro} inlineLinks={guide.stationLinks} /></p>
+      {guide.photos?.station && <figure className="mt-5 max-w-3xl">
+        <img src={guide.photos.station.src} alt={guide.photos.station.alt} width={755} height={503} loading="lazy" decoding="async" className="aspect-[3/2] max-h-96 w-full rounded-xl object-cover" />
+      </figure>}
+      <h4 className="mt-8 text-xl font-semibold">Which Haifa railway station should you use?</h4>
+      <p className="mt-3 leading-relaxed">Haifa's main railway stations serve very different neighborhoods. Check where your train actually stops, then compare the final bus, taxi or walk to your accommodation rather than choosing the first station with “Haifa” in its name.</p>
+      <div role="region" aria-label="Haifa railway station comparison" tabIndex={0} className="mt-5 max-w-full overflow-x-auto rounded-xl border">
+        <table className="w-full min-w-[580px] text-left text-sm">
+          <caption className="sr-only">Ben Gurion Airport to Haifa train stations and onward destinations</caption>
+          <thead className="bg-secondary"><tr><th scope="col" className="p-3">Station</th><th scope="col" className="p-3">Typical train time</th><th scope="col" className="p-3">Useful destinations</th></tr></thead>
+          <tbody className="divide-y">{guide.stations.map(station => <tr key={station.name}>
+            <th scope="row" className="p-3 font-semibold">{station.name}</th><td className="p-3">{station.time}</td><td className="p-3">{station.usefulFor}</td>
+          </tr>)}</tbody>
+        </table>
+      </div>
+      <h4 className="mt-8 text-xl font-semibold">From the station to your hotel, Mount Carmel or Haifa Port</h4>
+      <p className="mt-3 leading-relaxed">The railway follows the coastline, while much of Haifa rises steeply up Mount Carmel. Your last connection may matter more than the difference between two train stops, particularly with luggage or a cruise departure.</p>
+      {guide.photos?.onward && <figure className="mt-5 max-w-3xl">
+        <img src={guide.photos.onward.src} alt={guide.photos.onward.alt} width={755} height={503} loading="lazy" decoding="async" className="aspect-[3/2] max-h-96 w-full rounded-xl object-cover" />
+      </figure>}
+      <ul className="mt-4 list-disc space-y-2 pl-5 leading-relaxed">{guide.connections.map(connection => <li key={connection}>{connection}</li>)}</ul>
+      <p className="mt-4 text-sm leading-relaxed">For specific neighborhood and hotel choices, read my <Link to="/travel-blog/best-hotels-in-haifa/" className="font-semibold text-primary underline underline-offset-4">where to stay in Haifa guide</Link>. If you are boarding a cruise, see the <Link to="/haifa-shore-excursions/" className="font-semibold text-primary underline underline-offset-4">Haifa port and shore excursions guide</Link> and verify the ship's check-in instructions.</p>
+      <aside className="mt-7 rounded-2xl border bg-secondary/40 p-5 sm:p-6" aria-label={guide.exampleJourney.title}>
+        <h4 className="text-xl font-semibold">{guide.exampleJourney.title}</h4>
+        <p className="mt-2 text-sm text-muted-foreground">An illustrative planning example, not a guaranteed connection or live timetable.</p>
+        <ol className="mt-4 space-y-3">{guide.exampleJourney.steps.map((step, index) => <li key={step.label} className="flex gap-3">
+          <span className="font-semibold text-primary">{index + 1}.</span><div><strong>{step.label}</strong><p className="mt-1 text-sm leading-relaxed text-muted-foreground">{step.detail}</p></div>
+        </li>)}</ol>
+        <p className="mt-4 border-t pt-4 text-sm leading-relaxed"><strong>Practical choice:</strong> {guide.exampleJourney.takeaway}</p>
+      </aside>
+    </>
+  );
+}
+
 function OptionSection({ option, guideId }: { option: JourneyOption; guideId: AirportJourneyId }) {
   const conciseGuide = guideId === "jerusalem" || guideId === "tel-aviv";
   const inlinePrivate = conciseGuide && option.id === "private";
