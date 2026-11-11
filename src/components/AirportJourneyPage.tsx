@@ -141,6 +141,7 @@ function TelAvivRailDetails({ guide }: { guide: AirportJourneyGuide }) {
         </table>
       </div>
       <h4 className="mt-8 text-xl font-semibold">From the station to the beach, your hotel or Old Jaffa</h4>
+      <p className="mt-3 leading-relaxed">All four mainline railway stations are inland. Check the complete connection to your hotel, especially if you are carrying luggage or staying near the beach or in Old Jaffa.</p>
       {guide.photos?.onward && <figure className="mt-5 max-w-3xl">
         <img src={guide.photos.onward.src} alt={guide.photos.onward.alt} width={755} height={503} loading="lazy" decoding="async" className="aspect-[3/2] max-h-96 w-full rounded-xl object-cover" />
       </figure>}
@@ -207,8 +208,8 @@ export function AirportJourneyPage({ id }: { id: AirportJourneyId }) {
   ] as const;
   const stationSection = (
 <Section id="station-choice" title={"Train stations, changes and the final journey in " + g.city}>
-        {g.photos?.station && <figure className="mb-6 max-w-3xl"><img src={g.photos.station.src} alt={g.photos.station.alt} width={755} height={503} loading="lazy" decoding="async" className="aspect-[3/2] max-h-96 w-full rounded-xl object-cover" /><GuidePhotoCredit photo={g.photos.station} /></figure>}
         <p><GuideParagraph paragraph={g.trainIntro} inlineLinks={g.stationLinks} /></p>
+        {g.photos?.station && <figure className="mt-5 mb-6 max-w-3xl"><img src={g.photos.station.src} alt={g.photos.station.alt} width={755} height={503} loading="lazy" decoding="async" className="aspect-[3/2] max-h-96 w-full rounded-xl object-cover" /><GuidePhotoCredit photo={g.photos.station} /></figure>}
         <div className="mt-4 max-w-full overflow-x-auto rounded-xl border">
           <table className="w-full min-w-[540px] text-left text-sm">
             <caption className="sr-only">Useful stations and connections</caption>
@@ -294,12 +295,14 @@ export function AirportJourneyPage({ id }: { id: AirportJourneyId }) {
       {!focusedLayout && stationSection}
       <section id="options" aria-labelledby="options-h" className="mt-14 scroll-mt-28">
         <h2 id="options-h" className="text-3xl">How each transport option works</h2>
+        {!focusedLayout && <p className="mt-3 leading-relaxed">Compare each option's actual pickup, onward connection and limitations before choosing what works for your destination.</p>}
         {!focusedLayout && g.photos?.onward && <figure className="mt-6 max-w-3xl"><img src={g.photos.onward.src} alt={g.photos.onward.alt} width={755} height={503} loading="lazy" decoding="async" className="aspect-[3/2] max-h-96 w-full rounded-xl object-cover" /><GuidePhotoCredit photo={g.photos.onward} /></figure>}
         {displayOptions.map(o=><OptionSection key={o.id} option={o} guideId={id} />)}
       </section>
       <Section id="shabbat" title="Getting there on Shabbat and Jewish holidays">
         {g.weekend.map(p=><p key={p}><GuideParagraph paragraph={p} inlineLinks={g.weekendLinks} /></p>)}
         {!g.weekendLinks?.length && <p>For terminal-specific weekend travel, see my <Link to="/travel-blog/from-ben-gurion-airport-on-shabbat/" className="text-primary underline">Ben Gurion Airport Shabbat guide</Link>.</p>}
+        {!g.weekendLinks?.some(link => link.to === "/travel-blog/israel-holidays/") && <p>Before planning a trip during a Jewish holiday, check <Link to="/travel-blog/israel-holidays/" className="font-medium text-primary underline underline-offset-4">Israel's calendar of events</Link> for holiday dates and possible changes to transport and opening hours. Verify the timetable for your exact travel day.</p>}
       </Section>
       <Section id="tips" title="Practical tips to avoid missed connections and extra costs">
         <ul className="list-disc space-y-3 pl-5">{g.advice.map(t=><li key={t}>{t}</li>)}</ul>
