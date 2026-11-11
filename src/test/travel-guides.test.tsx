@@ -205,6 +205,17 @@ describe("migrated practical guides", () => {
     expect(airportJump).toHaveTextContent("Airport taxis");
     expect(airportJump).toHaveAttribute("aria-label", "Taking a Taxi from Ben Gurion Airport");
     expect(nav.querySelector('a[href="#contact"]')).toHaveTextContent("Contact Moshe");
+    const jumpItems = Array.from(nav.querySelectorAll("ul.grid > li"));
+    expect(jumpItems).toHaveLength(16);
+    expect(jumpItems.slice(0, 10).every((item) => !item.classList.contains("hidden"))).toBe(true);
+    expect(jumpItems[9]).not.toHaveClass("hidden");
+    expect(jumpItems[10]).toHaveClass("hidden", "lg:block");
+    expect(jumpItems[12]).toHaveClass("hidden", "xl:block");
+    expect(jumpItems[15]).toHaveClass("hidden");
+    const disclosure = nav.querySelector("details");
+    expect(disclosure).not.toBeNull();
+    expect(within(disclosure! as HTMLElement).getByText("All sections", { exact: false })).toBeInTheDocument();
+    expect(disclosure?.querySelectorAll("a[href^='#']")).toHaveLength(16);
     expect(container.querySelector("#booking > div")).toHaveClass("text-foreground");
     expect(within(container).getByRole("heading", { name: "Ask me about your journey in Israel" })).toBeInTheDocument();
     expect(within(container).getByRole("form", { name: "Taxi guide contact message" })).toBeInTheDocument();
