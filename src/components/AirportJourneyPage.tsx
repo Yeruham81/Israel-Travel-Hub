@@ -188,15 +188,19 @@ function OptionSection({ option, guideId }: { option: JourneyOption; guideId: Ai
 export function AirportJourneyPage({ id }: { id: AirportJourneyId }) {
   const g = airportJourneyGuides[id];
   const privateRate = rateFor(id);
+  const focusedLayout = id === "jerusalem" || id === "tel-aviv";
+  const displayOptions = id === "tel-aviv"
+    ? ["rail", "taxi", "private", "bus", "weekend", "rental"].map(optionId => g.options.find(option => option.id === optionId)!)
+    : g.options;
   const links = [
     ["comparison", "At-a-glance comparison"],
-    ...(id === "jerusalem"
+    ...(focusedLayout
       ? [["options", "All transport options"] as const, ["option-rail", "Train & final connection"] as const]
       : [["station-choice", "Stations & connections"] as const, ["options", "All transport options"] as const]),
     ["shabbat", "Shabbat & holidays"],
     ["tips", "Planning tips"],
     ["faq", "Questions"],
-    ...(id === "jerusalem"
+    ...(focusedLayout
       ? [["request-quote", "Send a message"] as const, ["sources", "Sources"] as const]
       : [["sources", "Sources"] as const, ["request-quote", "Private transfer quote"] as const]),
   ] as const;
@@ -228,7 +232,7 @@ export function AirportJourneyPage({ id }: { id: AirportJourneyId }) {
           <ul className="mt-4 grid gap-3 sm:grid-cols-2">{(g.sources || sources).map(s=><li key={s.url}><a className="block rounded-lg border bg-card p-4 font-medium text-primary underline" href={s.url} target="_blank" rel="noopener noreferrer">{s.title} <span className="sr-only">(opens a new tab)</span></a></li>)}
   
           </ul>
-          {id === "jerusalem" && hasPublicPhotoCredit(g.photo) && <div className="mt-3"><GuidePhotoCredit photo={g.photo} insideDisclosure /></div>}
+          {focusedLayout && hasPublicPhotoCredit(g.photo) && <div className="mt-3"><GuidePhotoCredit photo={g.photo} insideDisclosure /></div>}
         </SourcesDisclosure>
   );
 
@@ -239,24 +243,24 @@ export function AirportJourneyPage({ id }: { id: AirportJourneyId }) {
         <p className="eyebrow mt-6">Independent transport comparison · Ben Gurion Airport (TLV)</p>
         <h1 className="mt-3 max-w-4xl text-4xl leading-[1.1] md:text-5xl">{g.title}</h1>
         <p className="mt-4 max-w-3xl text-lg leading-relaxed text-foreground">{g.intro}</p>
-        {id === "jerusalem" ? <PageUpdated date={g.updatedAt || PUBLISHED_REVIEW} /> : <p className="mt-3 text-sm text-muted-foreground">Approximate distance: {g.distance} · Editorial review: {g.updatedAt || PUBLISHED_REVIEW}</p>}
-        <figure className="mt-7"><img src={g.photo.src} alt={g.photo.alt} width={1200} height={675} fetchPriority="high" decoding="async" className="aspect-[16/9] max-h-[450px] w-full rounded-2xl object-cover"/>{id !== "jerusalem" && <GuidePhotoCredit photo={g.photo} />}</figure>
+        {focusedLayout ? <PageUpdated date={g.updatedAt || PUBLISHED_REVIEW} /> : <p className="mt-3 text-sm text-muted-foreground">Approximate distance: {g.distance} · Editorial review: {g.updatedAt || PUBLISHED_REVIEW}</p>}
+        <figure className="mt-7"><img src={g.photo.src} alt={g.photo.alt} width={1200} height={675} fetchPriority="high" decoding="async" className="aspect-[16/9] max-h-[450px] w-full rounded-2xl object-cover"/>{!focusedLayout && <GuidePhotoCredit photo={g.photo} />}</figure>
         <AuthorCard />
       </header>
       <section id="quick-answer" aria-labelledby="quick-answer-h" className="mt-8 rounded-2xl border border-primary/20 bg-secondary/60 p-6">
         <h2 id="quick-answer-h" className="text-2xl">Quick answer: what is the best way to get there?</h2>
         <p className="mt-3 leading-relaxed">{g.answer}</p>
-        {id !== "jerusalem" && <p className="mt-3 text-sm text-muted-foreground">This is an independent transport comparison, not a confirmed booking or fixed-price offer. Compare total costs to your actual address.</p>}
+        {!focusedLayout && <p className="mt-3 text-sm text-muted-foreground">This is an independent transport comparison, not a confirmed booking or fixed-price offer. Compare total costs to your actual address.</p>}
       </section>
       <OnThisPage sections={links} />
       <Section id="comparison" title={"Compare all ways from TLV Airport to " + g.city}>
-        <p>{id === "jerusalem" ? "Compare the main options, including the onward journey to your hotel." : "Choose by the full journey to your address, not only the lowest fare or the fastest station-to-station time. The figures below are planning estimates, not real-time quotes."}</p>
+        <p>{focusedLayout ? "Compare the main options, including the onward journey to your hotel." : "Choose by the full journey to your address, not only the lowest fare or the fastest station-to-station time. The figures below are planning estimates, not real-time quotes."}</p>
         <div role="region" aria-label={"Travel options to " + g.city} tabIndex={0} className="mt-5 max-w-full overflow-x-auto rounded-xl border bg-card">
-          {id === "jerusalem" ? (
+          {focusedLayout ? (
             <table className="min-w-[660px] w-full text-left text-sm">
-              <caption className="sr-only">Airport to Jerusalem: travel time, estimated cost, advantages and drawbacks</caption>
+              <caption className="sr-only">Airport to {g.city}: travel time, estimated cost, advantages and drawbacks</caption>
               <thead className="bg-secondary"><tr>{["Option", "Travel time", "Estimated cost", "Advantages", "Drawbacks"].map(t => <th key={t} scope="col" className="p-3 font-semibold">{t}</th>)}</tr></thead>
-              <tbody className="divide-y">{g.options.map(option => <tr key={option.id}>
+              <tbody className="divide-y">{displayOptions.map(option => <tr key={option.id}>
                 <th scope="row" className="p-3 font-semibold"><a href={"#" + sectionId(option.id)} className="text-primary underline underline-offset-2">{option.name}</a></th>
                 <td className="p-3 whitespace-nowrap">{option.time}</td>
                 <td className="p-3 whitespace-nowrap">{option.id === "private" ? `From ₪${privateRate.amount.toLocaleString("en-US")}` : option.comparison?.cost}</td>
@@ -281,16 +285,16 @@ export function AirportJourneyPage({ id }: { id: AirportJourneyId }) {
           </table>
           )}
         </div>
-        {id === "jerusalem" ? (
+        {focusedLayout ? (
           <p className="mt-3 text-sm text-muted-foreground">Final taxi fares depend on the regulated tariff period, distance, journey time, traffic and extras. Schedules may change; check the journey planner for actual train and bus times and fares. My listed private-transfer starting price is for a one-way weekday trip per vehicle for up to four passengers, with possible extra charges.</p>
         ) : (        <p className="mt-3 text-sm"><strong>*Price and time note:</strong> {g.historicalPrices === false ? "The train and bus prices must be checked in the official planner for your travel date; this guide does not quote an unverified current fare. " : "₪ ranges are historical editorial estimates from August 2026; they are not current verified fares. "}Train and bus prices are per passenger; official taxis use the regulated meter, and rental totals depend on dates. My displayed starting price is a one-way weekday <strong>per-vehicle</strong> rate for up to four passengers with possible extra charges. All schedules can change. Check the operator and any written quote before you travel.</p>)}
       </Section>
-      {id !== "jerusalem" && <PrivateRideCta id={id}/>}
-      {id !== "jerusalem" && stationSection}
+      {!focusedLayout && <PrivateRideCta id={id}/>}
+      {!focusedLayout && stationSection}
       <section id="options" aria-labelledby="options-h" className="mt-14 scroll-mt-28">
         <h2 id="options-h" className="text-3xl">How each transport option works</h2>
-        {id !== "jerusalem" && g.photos?.onward && <figure className="mt-6 max-w-3xl"><img src={g.photos.onward.src} alt={g.photos.onward.alt} width={755} height={503} loading="lazy" decoding="async" className="aspect-[3/2] max-h-96 w-full rounded-xl object-cover" /><GuidePhotoCredit photo={g.photos.onward} /></figure>}
-        {g.options.map(o=><OptionSection key={o.id} option={o} guideId={id} />)}
+        {!focusedLayout && g.photos?.onward && <figure className="mt-6 max-w-3xl"><img src={g.photos.onward.src} alt={g.photos.onward.alt} width={755} height={503} loading="lazy" decoding="async" className="aspect-[3/2] max-h-96 w-full rounded-xl object-cover" /><GuidePhotoCredit photo={g.photos.onward} /></figure>}
+        {displayOptions.map(o=><OptionSection key={o.id} option={o} guideId={id} />)}
       </section>
       <Section id="shabbat" title="Getting there on Shabbat and Jewish holidays">
         {g.weekend.map(p=><p key={p}><GuideParagraph paragraph={p} inlineLinks={g.weekendLinks} /></p>)}
@@ -301,8 +305,8 @@ export function AirportJourneyPage({ id }: { id: AirportJourneyId }) {
         <p>For first-time arrivals, read my <Link to="/travel-blog/ben-gurion-airport-arrival-tips/" className="text-primary underline">airport arrivals checklist</Link> and save the operator's contact details offline.</p>
       </Section>
       <FaqList faqs={g.faqs}/>
-      {id !== "jerusalem" && sourceBlock}
-      {id === "jerusalem" ? <>
+      {!focusedLayout && sourceBlock}
+      {focusedLayout ? <>
         <RelatedLinks title="Related practical guides" currentPath={g.path} items={g.related} />
         <RelatedLinks title="Plan the next part of your trip" items={g.planNext || []} />
       </> : <>
@@ -314,7 +318,7 @@ export function AirportJourneyPage({ id }: { id: AirportJourneyId }) {
         <RelatedLinks title="Other airport journey comparisons" items={airportJourneyIds.filter(other => other !== id).map(other => ({ label: "How to get to " + airportJourneyGuides[other].city, to: airportJourneyGuides[other].path }))} />
       </>}
       <TransferQuoteForm key={transferIdFor(id)} destinationId={transferIdFor(id)} fixedDestination fixedDestinationLabel={g.city} />
-      {id === "jerusalem" && sourceBlock}
+      {focusedLayout && sourceBlock}
     </main>
   );
 }
