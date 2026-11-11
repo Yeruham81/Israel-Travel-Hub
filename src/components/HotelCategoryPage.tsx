@@ -14,7 +14,7 @@ import { StayComparison, StayBookingDisclosure, StayPhotoCredits, resortHotel, h
 export function HotelCategoryPage({ guide: g, destination }: { guide: HotelCategoryGuide; destination: HotelStayDestination }) {
   const pageId = `stay-${destination.id}-${g.id}`;
   const practicalExample = categoryDecisionExamples[`${destination.id}:${g.id}`];
-  const sections = [["overview", "How to choose"], ["compare", "Compare hotels"], ["details", g.detailNavLabel], ["book", "Hotel picks"], ["checklist", "Booking tips"], ["faq", "FAQ"], ["sources", "Sources"], ["contact", "Contact Moshe"]] as const;
+  const sections = [["overview", "How to choose"], ["compare", "Compare hotels"], ["details", g.detailNavLabel], ["book", "Hotel picks"], ["checklist", "Booking tips"], ["faq", "FAQ"], ["explore", "Local guides"], ["trip-planning", "Trip planning"], ["contact", "Contact Moshe"], ["sources", "Sources"]] as const;
   const otherGuides = hotelCategoryGuides.filter((guide) => guide.destinationId === destination.id && guide.id !== g.id);
   return (
     <main className="pb-8">
@@ -32,12 +32,18 @@ export function HotelCategoryPage({ guide: g, destination }: { guide: HotelCateg
         <section id="book" aria-labelledby="book-h" className="mt-14 scroll-mt-32"><p className="eyebrow">A shortlist for your trip</p><h2 id="book-h" className="mt-2 text-3xl">{g.shortTitle}: which stay suits you?</h2><StayBookingDisclosure /><ul className="mt-6 space-y-5">{g.picks.map((pick) => <StayHotelCard key={pick.hotelId} hotel={resortHotel(pick.hotelId)} booking={hotelBooking(pick.hotelId)} pageId={pageId} editorial={pick} photo={resortHotelPhoto(pick.hotelId)} />)}</ul></section>
         <Section id="checklist" title="Confirm before paying" className="scroll-mt-32"><div className="mt-5 grid gap-4 sm:grid-cols-2"><Checklist title={g.checklistTitle} items={g.checklist.slice(0, 3)} /><Checklist title="The total & the travel dates" items={g.checklist.slice(3)} /></div></Section>
         <ProviderSection id="more-stays" title={`Browse more ${g.shortTitle.toLowerCase()}`} intro="Explore other options, then check the country, property, room and package carefully on the booking site." links={linksForPage(`${pageId}-browse`)} pageId={pageId} />
+        <nav aria-label="Other accommodation styles" className="mt-10 border-t pt-6">
+          <p className="text-sm font-semibold">Compare other {destination.name} accommodation styles</p>
+          <div className="mt-3 flex flex-wrap gap-2">
+            <Link to={destination.path as LinkProps["to"]} className="chip">All {destination.name} hotels <ArrowRight className="ml-1 inline h-3.5 w-3.5" aria-hidden /></Link>
+            {otherGuides.map((other) => <Link key={other.id} to={other.path as LinkProps["to"]} className="chip">{other.shortTitle} <ArrowRight className="ml-1 inline h-3.5 w-3.5" aria-hidden /></Link>)}
+          </div>
+        </nav>
         <FaqList faqs={g.faqs} />
-        <SourceList ids={[...new Set([destination.sourceIds[0]!, ...g.sourceIds, ...g.picks.map((pick) => resortHotel(pick.hotelId).sourceId)])]} />
-        <section aria-labelledby="other-stays-h" className="mt-14"><h2 id="other-stays-h" className="text-3xl">Explore another way to stay</h2><ul className="mt-5 grid gap-3 sm:grid-cols-2"><li><Link to={destination.path as LinkProps["to"]} className="flex h-full items-center justify-between gap-3 rounded-xl border bg-card p-5 hover:border-primary"><span>All {destination.name} hotels & travel styles</span><ArrowRight className="h-4 w-4 shrink-0 text-primary" aria-hidden /></Link></li>{otherGuides.map((other) => <li key={other.id}><Link to={other.path as LinkProps["to"]} className="flex h-full items-center justify-between gap-3 rounded-xl border bg-card p-5 hover:border-primary"><span>{other.title}</span><ArrowRight className="h-4 w-4 shrink-0 text-primary" aria-hidden /></Link></li>)}</ul></section>
-        <StayTripLinks region={destination.id} extras={destination.related} currentPath={g.path} />
-        <StayPhotoCredits photos={[g.photo]} />
+        <StayTripLinks region={destination.id} currentPath={g.path} />
         <HomeContactForm key={pageId} guide={guideContactCopy(g.title, "accommodation", destination.name)} />
+        <SourceList ids={[...new Set([destination.sourceIds[0]!, ...g.sourceIds, ...g.picks.map((pick) => resortHotel(pick.hotelId).sourceId)])]} />
+        <StayPhotoCredits photos={[g.photo]} />
       </article>
     </main>
   );
