@@ -69,8 +69,8 @@ describe("four independent airport transportation comparisons", () => {
     expect(g.stations).toHaveLength(4);
     expect(g.photos?.station.alt).toMatch(/Terminal 3/);
     expect(g.photos?.onward.alt).toMatch(/Old Jaffa/);
-    expect(g.sources).toHaveLength(6);
-    expect(g.faqs.length).toBeGreaterThanOrEqual(9);
+    expect(g.sources).toHaveLength(7);
+    expect(g.faqs.length).toBeGreaterThanOrEqual(11);
     expect(g.weekend.join(" ")).toMatch(/Shabbat|Saturday/);
     expect(g.weekend.join(" ")).toContain("dedicated airport Shabbat guide");
     const links = g.options.flatMap(option => option.inlineLinks || []);
@@ -106,6 +106,40 @@ describe("four independent airport transportation comparisons", () => {
     expect(doc.querySelectorAll('section[aria-label="Related practical guides"] img').length).toBeGreaterThanOrEqual(4);
     expect(doc.querySelector('aside a[href="#request-quote"]')).not.toBeNull();
     expect(doc.body.textContent).not.toMatch(/≈ ₪10–15|≈ ₪8–15|≈ ₪150–230/);
+  });
+
+
+  it("matches Jerusalem's decision-first layout while preserving Tel Aviv-specific details", async () => {
+    const g = airportJourneyGuides["tel-aviv"];
+    const router = createRouter({ routeTree, context: { queryClient: new QueryClient() }, history: createMemoryHistory({ initialEntries: [g.path] }), trailingSlash: "always" });
+    await router.load();
+    const html = renderToString(<RouterContextProvider router={router}><AirportJourneyPage id="tel-aviv" /></RouterContextProvider>);
+    const doc = new DOMParser().parseFromString(html, "text/html");
+    expect(doc.querySelector("header time")?.getAttribute("datetime")).toBe("2026-11-11");
+    expect(doc.querySelector("header")?.textContent).not.toMatch(/Approximate distance|Editorial review/);
+    expect(doc.querySelector("#quick-answer")?.textContent).not.toContain("This is an independent transport comparison");
+    const comparison = doc.querySelector("#comparison table")!;
+    expect([...comparison.querySelectorAll("thead th")].map(el => el.textContent)).toEqual(["Option", "Travel time", "Estimated cost", "Advantages", "Drawbacks"]);
+    expect([...comparison.querySelectorAll("tbody th")].map(el => el.textContent)).toEqual([
+      "Train to Tel Aviv", "Official airport taxi", "Advance private transfer", "Bus 445", "Weekend line 711", "Rental car",
+    ]);
+    expect(doc.querySelector("#station-choice")).toBeNull();
+    expect(doc.querySelectorAll("#option-rail table tbody tr")).toHaveLength(4);
+    expect(doc.querySelectorAll("#option-rail figure img")).toHaveLength(2);
+    expect(doc.querySelectorAll("figure img")).toHaveLength(3);
+    expect(doc.querySelectorAll('#options aside[data-testid="useful-journey-link"]')).toHaveLength(5);
+    expect(doc.querySelector("#options")?.textContent).not.toContain("Before choosing this option");
+    expect(doc.querySelector('#option-rail a[href="https://www.rail.co.il/"]')).not.toBeNull();
+    expect(doc.querySelector('#option-bus a[href="https://bus.gov.il/"]')).not.toBeNull();
+    expect(doc.querySelector('#option-taxi a[href="https://www.gett.com/il/airport-en/"]')).not.toBeNull();
+    expect(doc.querySelector('#option-weekend a[href="https://busofash.co.il/?lines=711"]')).not.toBeNull();
+    expect(doc.querySelector('#option-rail a[href="/travel-blog/where-to-stay-in-tel-aviv/"]')).not.toBeNull();
+    expect(doc.querySelector('#shabbat a[href="/travel-blog/sherut-in-israel/"]')).not.toBeNull();
+    expect(doc.querySelector('section[aria-label="Related practical guides"]')?.querySelectorAll("li")).toHaveLength(6);
+    expect(doc.querySelector('section[aria-label="Plan the next part of your trip"]')?.querySelectorAll("li")).toHaveLength(4);
+    expect(doc.querySelector('section[aria-label="Other airport journey comparisons"]')).toBeNull();
+    expect(doc.querySelector("main")?.lastElementChild?.id).toBe("sources");
+    expect(doc.querySelectorAll("#sources a")).toHaveLength(7);
   });
 
   it("keeps the upgraded Jerusalem journey focused on rail, current voucher requirements, bus 485 and hotel connections", () => {
