@@ -127,7 +127,7 @@ export const expandedTravelGuides = {
           note: "These are general estimates, not fixed fares. The final price and driving time can vary with your destination, pickup time, traffic and route.",
         }],
         inlineLinks: [{ text: "Israeli taxi fares guide", to: travelGuidePaths.taxiFares }],
-        sourceIds: ["taxi-fares-2026", "guide-meter-route-estimates"],
+        sourceIds: ["taxi-fares-2026"],
       },
       {
         id: "rental-car",
@@ -204,13 +204,13 @@ export const expandedTravelGuides = {
       { q: "Can I take a train after Shabbat ends?", a: "Possibly. Check the first actual departure for your Saturday date and route, allowing enough time to leave arrivals and make your final connection." },
       { q: "Can I travel to Ben Gurion Airport during Shabbat?", a: "Yes. Check Line 711 toward Shoham and the free transfer from Terminal 1 to Terminal 3, or arrange a licensed taxi or confirmed private ride." },
     ],
-    sourceIds: ["guide-weekend-711", "guide-weekend-timetable", "guide-gett", "guide-iaa", "israel-rail", "taxi-fares-2026", "guide-meter-route-estimates"],
+    sourceIds: ["guide-weekend-711", "guide-weekend-timetable", "guide-gett", "guide-iaa", "israel-rail", "taxi-fares-2026"],
     related: ["airportTaxis", "taxiFares", "arrival", "sherut"],
     services: [
       { label: "Explore car rental options", to: "/car-rental/", note: "Check Saturday counter hours and collection arrangements before paying." },
       { label: "Choose where to stay in Tel Aviv", to: "/travel-blog/where-to-stay-in-tel-aviv/", note: "Plan your neighbourhood and the final journey from your Line 711 stop." },
-      { label: "Getting around Tel Aviv", to: "/travel-blog/getting-around-tel-aviv/", note: "Compare local transport after you arrive, including weekend alternatives." },
-      { label: "Explore the beaches of Tel Aviv", to: "/travel-blog/beaches-in-tel-aviv/", note: "Find a suitable beach and plan a relaxed first day by the Mediterranean." },
+      { label: "Plan a visit to Jerusalem", to: "/travel-blog/jerusalem-travel-guide/", note: "Explore the capital’s main sights and plan a visit after your airport arrival." },
+      { label: "Discover Dead Sea attractions", to: "/travel-blog/dead-sea-attractions/", note: "Explore natural sights and activities beyond the airport for a longer Israel trip." },
     ],
   },
   travelTips: {

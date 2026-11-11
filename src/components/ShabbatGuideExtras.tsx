@@ -51,14 +51,3 @@ export function ShabbatPublicTransportLinks() {
   </div>;
 }
 
-export function ShabbatTaxiFareLinks() {
-  return <div className="mt-4 rounded-xl border bg-secondary/40 p-4 text-sm" aria-label="Taxi fare calculation sources">
-    <p className="font-semibold text-foreground">Check the fare calculation</p>
-    <p className="mt-1 leading-relaxed text-muted-foreground">These independent route calculations use the April 2026 regulated meter rates. They are estimates, not operator quotes.</p>
-    <div className="mt-3 flex flex-wrap gap-x-5 gap-y-2">
-      <a href="https://taxitariff.co.il/ben-gurion-airport/tel-aviv-yafo" target="_blank" rel="noopener noreferrer" className="font-medium text-primary underline underline-offset-4">Tel Aviv calculation<span className="sr-only"> (opens in a new tab)</span></a>
-      <a href="https://taxitariff.co.il/ben-gurion-airport/jerusalem" target="_blank" rel="noopener noreferrer" className="font-medium text-primary underline underline-offset-4">Jerusalem calculation<span className="sr-only"> (opens in a new tab)</span></a>
-      <a href="https://taxitariff.co.il/ben-gurion-airport/haifa" target="_blank" rel="noopener noreferrer" className="font-medium text-primary underline underline-offset-4">Haifa calculation<span className="sr-only"> (opens in a new tab)</span></a>
-    </div>
-  </div>;
-}

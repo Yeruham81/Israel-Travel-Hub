@@ -446,7 +446,7 @@ describe("migrated practical guides", () => {
       .toContain("Ben Gurion Airport to Ein Bokek guide");
     expect(guide.sections.find((section) => section.id === "destinations")!.paragraphs.join(" "))
       .not.toContain("The former Amal airport sherut is discontinued.");
-    expect(costs.sourceIds).toContain("guide-meter-route-estimates");
+    expect(costs.sourceIds).toEqual(["taxi-fares-2026"]);
     expect(costs.inlineLinks?.[0]?.to).toBe(travelGuidePaths.taxiFares);
     expect(guide.services).toHaveLength(4);
     expect(guide.updatedAt).toBe("2026-11-11");
@@ -478,10 +478,13 @@ describe("migrated practical guides", () => {
     expect(nextPaths).toEqual([
       "/car-rental/",
       "/travel-blog/where-to-stay-in-tel-aviv/",
-      "/travel-blog/getting-around-tel-aviv/",
-      "/travel-blog/beaches-in-tel-aviv/",
+      "/travel-blog/jerusalem-travel-guide/",
+      "/travel-blog/dead-sea-attractions/",
     ]);
     expect(nextPaths).not.toContain("/transfers/");
+    expect(nextPaths.filter((path) => path?.includes("tel-aviv"))).toHaveLength(1);
+    expect(nextPaths).toContain("/travel-blog/jerusalem-travel-guide/");
+    expect(nextPaths).toContain("/travel-blog/dead-sea-attractions/");
     expect(new Set(nextPaths).size).toBe(4);
     expect(container.querySelectorAll("#contact")).toHaveLength(1);
     expect(container.querySelector("#request-quote")).toBeNull();
@@ -518,9 +521,6 @@ describe("migrated practical guides", () => {
       ["Look up Shabbat times on MyZmanim", "https://www.myzmanim.com/"],
       ["Israel Railways — official timetable", "https://rail.co.il/?lan=en"],
       ["National Public Transport Authority — route planner", "https://route.bus.gov.il/?saveParams=true&tab=source-destination"],
-      ["Tel Aviv calculation", "https://taxitariff.co.il/ben-gurion-airport/tel-aviv-yafo"],
-      ["Jerusalem calculation", "https://taxitariff.co.il/ben-gurion-airport/jerusalem"],
-      ["Haifa calculation", "https://taxitariff.co.il/ben-gurion-airport/haifa"],
     ] as const)) {
       const link = within(container).getByRole("link", { name: new RegExp(label) });
       expect(link).toHaveAttribute("href", url);
