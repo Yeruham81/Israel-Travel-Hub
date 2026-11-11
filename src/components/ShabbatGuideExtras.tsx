@@ -1,13 +1,10 @@
-import { useState } from "react";
-import { TransferQuoteForm } from "@/components/TransferQuoteForm";
-
 /** Additional wayfinding belongs to this guide; shared articles keep their default layout. */
 export function ShabbatBusLinks() {
   return <div className="mt-5 rounded-xl border bg-secondary/40 p-4 sm:p-5">
     <p className="font-semibold text-foreground">Before relying on Line 711</p>
-    <p className="mt-2 text-sm leading-relaxed text-muted-foreground">The airport stop is Terminal 1, stop 34609. Use the operator's current timetable, select the direction toward Tel Aviv and check your exact travel date. Network-wide hours are not the departure time at the airport.</p>
+    <p className="mt-2 text-sm leading-relaxed text-muted-foreground">Check the timetable for Terminal 1, stop 34609, in the Tel Aviv-bound direction on your travel date. Route-wide hours are not departures at the airport.</p>
     <div className="mt-3 flex flex-wrap gap-x-6 gap-y-2 text-sm">
-      <a className="font-medium text-primary underline underline-offset-4" href="https://busofash.co.il/?lines=711" target="_blank" rel="noopener noreferrer">Official Line 711 stops and route <span className="sr-only">(opens in a new tab)</span></a>
+      <a className="font-medium text-primary underline underline-offset-4" href="https://busofash.co.il/?lines=711" target="_blank" rel="noopener noreferrer">Line 711 stop-by-stop timetable <span className="sr-only">(opens in a new tab)</span></a>
       <a className="font-medium text-primary underline underline-offset-4" href="https://busofash.co.il/" target="_blank" rel="noopener noreferrer">Timetable, accessibility and service updates <span className="sr-only">(opens in a new tab)</span></a>
     </div>
   </div>;
@@ -32,11 +29,6 @@ export function ShabbatTerminalSteps() {
     </ol>
     <p className="mt-3 text-xs leading-relaxed text-muted-foreground">This is a sequence of steps, not a map or a guarantee of a timed connection.</p>
   </div>;
-}
-
-export function ShabbatQuoteForm() {
-  const [destinationId, setDestinationId] = useState("");
-  return <TransferQuoteForm destinationId={destinationId} onDestinationChange={setDestinationId} />;
 }
 
 /** Keep practical timetable checks beside the paragraph where a visitor needs them. */

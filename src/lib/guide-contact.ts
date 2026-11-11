@@ -1,13 +1,17 @@
 /** Subject and personal message copy for informational travel-guide inquiries.
  * No form submission constitutes a confirmed booking.
  */
-export type GuideContactKind = "transport" | "airport" | "attraction" | "itinerary" | "accommodation" | "connectivity" | "general";
+export type GuideContactKind = "transport" | "airport" | "shabbat" | "attraction" | "itinerary" | "accommodation" | "connectivity" | "general";
 export type GuideContactCopy = { heading: string; introduction: string; subject: string; placeholder: string };
 
 export function guideContactCopy(title: string, kind: GuideContactKind, place?: string): GuideContactCopy {
   const destination = place?.trim() || "Israel";
   const base = { subject: `Question about: ${title}`.slice(0, 160) };
   switch (kind) {
+    case "shabbat":
+      return { ...base, heading: "Questions about arriving on Shabbat?",
+        introduction: "Landing at Ben Gurion Airport on Friday evening or Saturday? Tell me your flight, destination and any luggage or accessibility needs, or ask about Line 711 and onward transport. I'll reply personally and can discuss an arranged airport pickup where appropriate.",
+        placeholder: "Flight date and time, destination, passengers, bags or your question…" };
     case "airport":
       return { ...base, heading: "Questions about your airport arrival?",
         introduction: "Have a question about Ben Gurion Airport, your onward journey or an airport pickup? Tell me your arrival date, destination and what you'd like to clarify. I'll reply personally and can discuss private transport when appropriate.",

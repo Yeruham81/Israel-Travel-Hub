@@ -13,12 +13,13 @@ import { guideContactCopy, type GuideContactKind } from "@/lib/guide-contact";
 import { JerusalemJourneyOptions, JerusalemJourneyBooking, JerusalemJourneyResources } from "@/components/JerusalemJourneyPlanner";
 import { JerusalemClusterLinks, type JerusalemClusterKey } from "@/components/JerusalemClusterLinks";
 import { JerusalemPartnerOffers } from "@/components/JerusalemPartnerOffers";
-import { ShabbatBusLinks, ShabbatTerminalSteps, ShabbatQuoteForm, ShabbatTimesLink, ShabbatTaxiFareLinks, ShabbatPublicTransportLinks } from "@/components/ShabbatGuideExtras";
+import { ShabbatBusLinks, ShabbatTerminalSteps, ShabbatTimesLink, ShabbatTaxiFareLinks, ShabbatPublicTransportLinks } from "@/components/ShabbatGuideExtras";
 
 function sourcesFor(guide: TravelGuide) { return [...new Set([...guide.sourceIds, ...guide.sections.flatMap((section) => section.sourceIds || [])])]; }
 
 function guideContactKind(guide: TravelGuide): GuideContactKind {
-  if (["arrival", "airportTaxis", "shabbat", "sherut"].includes(guide.id)) return "airport";
+  if (guide.id === "shabbat") return "shabbat";
+  if (["arrival", "airportTaxis", "sherut"].includes(guide.id)) return "airport";
   if (guide.id === "esim") return "connectivity";
   if (guide.topics.includes("transportation")) return "transport";
   if (guide.topics.includes("accommodation")) return "accommodation";
@@ -83,6 +84,14 @@ function GuideSectionPhoto({ photo }: { photo: GuidePhoto }) {
       <GuidePhotoCredit photo={photo} />
     </figure>
   );
+}
+
+/** Show links beside time-sensitive claims without repeating every reference
+ * under each Shabbat paragraph; all cited sources remain in the source list. */
+function showSectionReferences(guideId: TravelGuideId, sectionId: string) {
+  if (guideId === "shabbat") return ["terminal-transfer", "taxis-transfers", "practical"].includes(sectionId);
+  if (guideId === "taxis") return ["fares", "airport", "sherut", "safety"].includes(sectionId);
+  return true;
 }
 
 function SectionReferences({ ids }: { ids: string[] }) {
@@ -160,7 +169,7 @@ export function TravelGuidePage({ id }: { id: TravelGuideId }) {
       {isJerusalemDayJourney && <JerusalemJourneyOptions id={id} />}
       <OnThisPage sections={isJerusalemDayJourney
         ? [["journey-options", "Compare transport"], ["journey-destinations", "Stops & destinations"], ...guide.sections.map((section) => [section.id, section.title] as const), ["journey-booking", "Tours & private trips"], ["checklist", "Checklist"], ["faq", "FAQ"], ["sources", "Sources"], ["contact", "Contact Moshe"]]
-        : [["at-a-glance", "At a glance"], ...guide.sections.flatMap((section) => id === "shabbat" && section.id === "taxis-transfers" ? [[section.id, section.title] as const, ["request-quote", "Request transfer"] as const] : [[section.id, section.title] as const]), ["checklist", "Checklist"], ["faq", "FAQ"], ["sources", "Sources"], ...(id !== "shabbat" ? [["contact", "Contact Moshe"] as const] : [])]} compactLabels={id === "taxis" ? taxiNavCompactLabels : undefined} />
+        : [["at-a-glance", "At a glance"], ...guide.sections.map((section) => [section.id, section.title] as const), ["checklist", "Checklist"], ["faq", "FAQ"], ["sources", "Sources"], ["contact", "Contact Moshe"] as const]} compactLabels={id === "taxis" ? taxiNavCompactLabels : undefined} />
       {!isJerusalemDayJourney && <section id="at-a-glance" aria-labelledby="comparison-h" className="mt-10 scroll-mt-24">
         <h2 id="comparison-h" className="text-3xl">{guide.comparison.caption}</h2>
         <div className="mt-5 max-w-full overflow-x-auto rounded-xl border"><table className="w-full min-w-[560px] text-left text-sm"><caption className="sr-only">{guide.comparison.caption}</caption><thead className="bg-secondary"><tr>{guide.comparison.headers.map((heading) => <th key={heading} scope="col" className="p-4 font-semibold">{heading}</th>)}</tr></thead><tbody className="divide-y">{guide.comparison.rows.map((row, index) => <tr key={index} className="bg-card">{row.map((cell, cellIndex) => cellIndex === 0 ? <th key={cellIndex} scope="row" className="p-4 font-medium">{cell}</th> : <td key={cellIndex} className="p-4 leading-relaxed text-muted-foreground">{cell}</td>)}</tr>)}</tbody></table></div>
@@ -174,7 +183,7 @@ export function TravelGuidePage({ id }: { id: TravelGuideId }) {
             </Fragment>
           ))}
           {section.paragraphs.length === 0 && section.photo && <GuideSectionPhoto photo={section.photo} />}
-        </div>{section.tables?.map((table) => <GuideDataTable key={table.caption} table={table} />)}{section.bullets && <ul className="mt-4 list-disc space-y-2 pl-5 leading-relaxed">{section.bullets.map((bullet) => <li key={bullet}>{bullet}</li>)}</ul>}{section.links && <ul className="mt-4 flex flex-wrap gap-x-5 gap-y-2 text-sm">{section.links.map((link) => <li key={link.to}><Link to={link.to} className="font-medium text-primary underline underline-offset-4">{link.label}</Link></li>)}</ul>}{section.externalLinks && <ul aria-label="Official resources" className="mt-4 flex flex-wrap gap-x-5 gap-y-2 text-sm">{section.externalLinks.map((link) => <li key={link.href}><a href={link.href} target="_blank" rel="noopener noreferrer" className="font-medium text-primary underline underline-offset-4">{link.label}<span className="sr-only"> (opens in a new tab)</span></a></li>)}</ul>}{(id !== "taxis" || ["fares", "airport", "sherut", "safety"].includes(section.id)) && <SectionReferences ids={section.sourceIds || []} />}</section>{id === "shabbat" && section.id === "shabbat-hours" && <ShabbatTimesLink />}{id === "shabbat" && section.id === "weekend-711" && <ShabbatBusLinks />}{id === "shabbat" && section.id === "terminal-transfer" && <ShabbatTerminalSteps />}{id === "shabbat" && section.id === "costs" && <ShabbatTaxiFareLinks />}{id === "shabbat" && section.id === "restart" && <ShabbatPublicTransportLinks />}{id === "shabbat" && section.id === "taxis-transfers" && <ShabbatQuoteForm />}</Fragment>)}
+        </div>{section.tables?.map((table) => <GuideDataTable key={table.caption} table={table} />)}{section.bullets && <ul className="mt-4 list-disc space-y-2 pl-5 leading-relaxed">{section.bullets.map((bullet) => <li key={bullet}>{bullet}</li>)}</ul>}{section.links && <ul className="mt-4 flex flex-wrap gap-x-5 gap-y-2 text-sm">{section.links.map((link) => <li key={link.to}><Link to={link.to} className="font-medium text-primary underline underline-offset-4">{link.label}</Link></li>)}</ul>}{section.externalLinks && <ul aria-label="Official resources" className="mt-4 flex flex-wrap gap-x-5 gap-y-2 text-sm">{section.externalLinks.map((link) => <li key={link.href}><a href={link.href} target="_blank" rel="noopener noreferrer" className="font-medium text-primary underline underline-offset-4">{link.label}<span className="sr-only"> (opens in a new tab)</span></a></li>)}</ul>}{showSectionReferences(id, section.id) && <SectionReferences ids={section.sourceIds || []} />}</section>{id === "shabbat" && section.id === "shabbat-hours" && <ShabbatTimesLink />}{id === "shabbat" && section.id === "weekend-711" && <ShabbatBusLinks />}{id === "shabbat" && section.id === "terminal-transfer" && <ShabbatTerminalSteps />}{id === "shabbat" && section.id === "costs" && <ShabbatTaxiFareLinks />}{id === "shabbat" && section.id === "restart" && <ShabbatPublicTransportLinks />}</Fragment>)}
       {isJerusalemDayJourney && <JerusalemJourneyBooking id={id} />}
       <section id="checklist" aria-label="Travel checklist" className="mt-12 scroll-mt-24"><Checklist title="Before you go" items={guide.checklist} /></section>
       {providers.length > 0 && <section id="provider-options" aria-labelledby="providers-h" className="mt-14"><h2 id="providers-h" className="text-3xl">Compare current eSIM plans</h2><p className="mt-3 leading-relaxed text-muted-foreground">These options are based on published product information, not an on-location speed test or a cheapest-price ranking. Links marked “Sponsored link” may earn me a commission at no extra cost to you. Select Israel and verify the exact package before paying.</p><ul className="mt-5 grid gap-4 md:grid-cols-2">{providers.map((link) => <ProviderCard key={link.id} link={link} pageId={guide.providerPageId!} />)}</ul></section>}
@@ -185,7 +194,7 @@ export function TravelGuidePage({ id }: { id: TravelGuideId }) {
       {id === "shabbat" ? <SourceList ids={sourcesFor(guide)} intro="Airport and public-transport references, plus independent taxi fare calculations. Confirm timetables, charges and pickup instructions for your date." /> : <SourceList ids={sourcesFor(guide)} />}
       {!isJerusalemCluster && id !== "shabbat" && <RelatedLinks title="Related practical guides" currentPath={travelGuidePaths[id]} items={guide.related.map((guideId) => ({ label: travelGuides[guideId].title, to: travelGuidePaths[guideId] }))} />}
       {!isJerusalemCluster && id !== "shabbat" && <RelatedLinks title="Plan the next part of your trip" items={guide.services} />}
-      {id === "shabbat" && <RelatedLinks title="More airport travel guides" currentPath={travelGuidePaths.shabbat} items={[
+      {id === "shabbat" && <RelatedLinks title="Related practical guides" currentPath={travelGuidePaths.shabbat} items={[
         { label: "Ben Gurion Airport to Tel Aviv", to: "/travel-blog/how-to-get-from-ben-gurion-airport-to-tel-aviv/" },
         { label: "Ben Gurion Airport to Jerusalem", to: "/travel-blog/how-to-get-from-ben-gurion-airport-to-jerusalem/" },
         { label: "Ben Gurion Airport to Haifa", to: "/travel-blog/how-to-get-from-ben-gurion-airport-to-haifa/" },
@@ -193,9 +202,10 @@ export function TravelGuidePage({ id }: { id: TravelGuideId }) {
         { label: "Official airport taxi pickup", to: travelGuidePaths.airportTaxis },
         { label: "Ben Gurion Airport arrival tips", to: travelGuidePaths.arrival },
       ]} />}
+      {id === "shabbat" && <RelatedLinks title="Plan the next part of your trip" items={guide.services} />}
       {guide.reading && <section aria-labelledby="reading-h" className="mt-12"><h2 id="reading-h" className="text-2xl">More on this topic</h2><ul className="mt-4 space-y-3">{guide.reading.map((reading) => <li key={reading.href} className="rounded-xl border p-4"><a href={reading.href} target="_blank" rel="noopener noreferrer" className="font-medium text-primary underline">{reading.label}<span className="sr-only"> (opens in a new tab)</span></a><p className="mt-1 text-sm text-muted-foreground">{reading.note}</p></li>)}</ul></section>}
       {id === "taxis" && <HomeContactForm context="taxis" />}
-      {id !== "taxis" && id !== "shabbat" && <HomeContactForm key={id} guide={guideContactCopy(guide.title, guideContactKind(guide), guide.title.split(":")[0])} />}
+      {id !== "taxis" && <HomeContactForm key={id} guide={guideContactCopy(guide.title, guideContactKind(guide), guide.title.split(":")[0])} />}
     </article>
   </main>;
 }
