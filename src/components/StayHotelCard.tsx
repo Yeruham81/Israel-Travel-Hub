@@ -41,6 +41,15 @@ export function StayHotelCard({ hotel, booking, pageId, editorial, compact = fal
   }
   return (
     <li id={`hotel-${hotel.id}`} className="scroll-mt-32 overflow-hidden rounded-2xl border bg-card" data-testid="hotel-recommendation">
+      {photo && <figure className="overflow-hidden bg-muted">
+        <img src={imageFailed ? fallbackPhoto?.src || photo.src : photo.src}
+             alt={imageFailed ? fallbackPhoto?.alt || photo.alt : photo.alt}
+             width={755} height={503} loading="lazy" decoding="async"
+             onError={() => { if (!imageFailed) setImageFailed(true); }}
+             data-testid="hotel-illustration"
+             className={`w-full bg-secondary object-cover ${compact ? "aspect-[16/9]" : "aspect-[16/8]"}`} />
+        <figcaption className="border-b px-4 py-1.5 text-[11px] text-muted-foreground">Illustrative photo · check the property's own listing for current rooms and facilities</figcaption>
+      </figure>}
       <div className="p-5 sm:p-7">
         <div className="flex items-start gap-4">
           <span className="grid h-12 w-12 shrink-0 place-items-center rounded-2xl bg-secondary text-primary"><Building2 className="h-6 w-6" aria-hidden /></span>
