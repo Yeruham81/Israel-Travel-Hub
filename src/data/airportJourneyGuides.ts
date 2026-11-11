@@ -2,6 +2,8 @@ import type { LinkProps } from "@tanstack/react-router";
 import { airportTransferPhotos } from "@/data/airportTransfers";
 import type { StayGuidePhoto } from "@/data/content";
 import telAvivOldJaffa from "@/assets/tel-aviv/jaffa.webp";
+import jerusalemNavonPlatform from "@/assets/airport-journeys/jerusalem-navon-platform.webp";
+import benGurionRailPlatform from "@/assets/airport-journeys/ben-gurion-rail-platform.webp";
 import airportTerminalHall from "@/assets/home/ben-gurion-t3.webp";
 import jerusalemMamilla from "@/assets/jerusalem/mamilla.webp";
 import haifaColony from "@/assets/haifa/colony.webp";
@@ -26,6 +28,7 @@ export type AirportJourneyGuide = {
   stations: { name: string; time: string; usefulFor: string }[];
   connections: string[]; weekend: string[]; advice: string[]; faqs: { q: string; a: string }[];
   related: { label: string; to: LinkProps["to"] }[];
+  planNext?: { label: string; to: LinkProps["to"]; note?: string }[];
   photos?: { station: Pick<StayGuidePhoto, "src" | "alt">; onward: Pick<StayGuidePhoto, "src" | "alt"> };
   stationLinks?: { text: string; to: LinkProps["to"] }[];
   weekendLinks?: { text: string; to: LinkProps["to"] }[];
@@ -52,27 +55,27 @@ const byId: Record<AirportJourneyId, AirportJourneyGuide> = {
   jerusalem: {
     id: "jerusalem", city: "Jerusalem",
     path: "/travel-blog/how-to-get-from-ben-gurion-airport-to-jerusalem/",
-    title: "How to get from Ben Gurion Airport to Jerusalem (2026): Train, Bus or Taxi?",
-    description: "Ben Gurion Airport to Jerusalem in 2026: compare the direct train, bus 485, official taxis and private rides, with station, Old City and Shabbat tips.",
+    title: "Ben Gurion Airport to Jerusalem: Train, Taxi, Bus & Transfers",
+    description: "Compare train, metered taxi, private transfer, limited bus 485 and rental car from Ben Gurion Airport to Jerusalem, with current rail voucher rules and hotel connections.",
     distance: "Approximately 45–55 km by road, depending on your address",
-    intro: "The airport train reaches Jerusalem–Yitzhak Navon, not the Old City. Compare that final hotel connection with bus 485, an authorized taxi or a pre-booked private ride.",
+    intro: "The direct train reaches Jerusalem–Yitzhak Navon in around 26–30 minutes, but not your hotel or the Old City. Compare the complete trip, including the last connection, with a metered taxi or an arranged transfer; bus 485 has limited departures.",
     exampleJourney: {
       title: "Example: landing at TLV and staying near Jaffa Gate",
       steps: [
-        { label: "Reach the airport railway", detail: "After baggage and customs, follow the train signs at Terminal 3. Check the actual Jerusalem departure and whether a separate free travel voucher is required." },
-        { label: "Travel to Jerusalem–Yitzhak Navon", detail: "The direct rail leg is commonly around 26–30 minutes when scheduled, but the deep station exit and hotel connection take extra time." },
+        { label: "Reach the airport railway", detail: "After baggage and customs, follow the train signs at Terminal 3; use the train and personal voucher booked for your departure." },
+        { label: "Travel to Jerusalem–Yitzhak Navon", detail: "Allow roughly 26–30 minutes on the train, then extra time to reach street level." },
         { label: "Continue toward Jaffa Gate", detail: "Use the light rail and a suitable final walk, or a local taxi if carrying heavy bags. Ask the hotel which Old City entrance and drop-off are practical." },
       ],
       takeaway: "The train can be efficient for a central hotel; a private vehicle is more convenient when several large bags or an Old City luggage walk make the last connection difficult.",
     },
-    answer: "The direct train from Ben Gurion Airport to Jerusalem–Yitzhak Navon is often the fastest lower-cost choice when operating; allow roughly 26–30 minutes on the train plus the transfer to your hotel. Check Israel Railways for the actual ticket, departure and any required free personal travel voucher. The airport also lists bus 485 from Terminal 3, Level 2, Exit 21, but verify a real departure. Licensed metered taxis and confirmed private transfers offer direct travel, especially for Shabbat arrivals or Old City accommodation.",
-    trainIntro: "The airport railway station is below Terminal 3; follow the rail signs from international arrivals. The direct journey to Jerusalem–Yitzhak Navon is commonly about 26–30 minutes when scheduled. Yitzhak Navon is a deep underground terminal near the central bus station and the light rail, not the Old City. Check Israel Railways for the service, price, platform and its current free travel-voucher requirement. The Ben Gurion Airport arrival guide explains immigration, baggage and reaching your onward transport.",
+    answer: "When trains are running, the direct train to Jerusalem–Yitzhak Navon is usually the best-value choice: approximately 26–30 minutes aboard and around ₪21 for a regular one-way ticket, plus travel to your hotel. A free personal train voucher is currently required in addition to the ticket; check the official notice below. An authorized taxi or a confirmed private transfer can take you nearer your address. Bus 485 is listed at Terminal 3, Level 2, Exit 21 but has very limited departures, so verify a service on your date rather than assuming a frequent airport bus.",
+    trainIntro: "Follow the rail signs from Terminal 3 to the airport station. The direct train reaches the deep underground Jerusalem–Yitzhak Navon station beside the central bus station and Jaffa Road light rail, not the Old City. Allow for lifts or escalators and the final walk, tram or taxi. Check the official train planner for your date and the separate free travel voucher described above. My Ben Gurion Airport arrival guide covers the airport procedures.",
     photo: airportTransferPhotos["jerusalem"]!,
-    updatedAt: "2026-10-22",
+    updatedAt: "2026-11-11",
     historicalPrices: false,
     photos: {
-      station: { src: airportTerminalHall, alt: "Ben Gurion Airport Terminal 3 arrivals hall before the train to Jerusalem" },
-      onward: { src: jerusalemMamilla, alt: "Jerusalem Mamilla area and buildings near Old City hotel approaches" },
+      station: { src: jerusalemNavonPlatform, alt: "Israel Railways train beside the deep underground platform at Jerusalem Yitzhak Navon station" },
+      onward: { src: benGurionRailPlatform, alt: "Ben Gurion Airport railway station platform used to board trains toward Jerusalem" },
     },
     stationLinks: [{ text: "Ben Gurion Airport arrival guide", to: "/travel-blog/ben-gurion-airport-arrival-tips/" }],
     weekendLinks: [{ text: "airport Shabbat transport guide", to: "/travel-blog/from-ben-gurion-airport-on-shabbat/" }, { text: "Sherut in Israel guide", to: "/travel-blog/sherut-in-israel/" }],
@@ -82,23 +85,23 @@ const byId: Record<AirportJourneyId, AirportJourneyGuide> = {
       { title: "Israel Airports Authority — route 485, airport rail and taxi directions", url: "https://www.iaa.gov.il/en/airports/ben-gurion/directions/directions-list/?categoryId=10450" },
       { title: "Gett — authorized taxi queue and ride-code process", url: "https://www.gett.com/il/airport-en/" },
       { title: "National public transport planner — bus 485 service dates", url: "https://bus.gov.il/" },
-      { title: "Israel Railways — Yitzhak Navon station and Jerusalem rail project", url: "https://rail.co.il/?lan=en&page=jerusalem-project" },
+      { title: "Israel Railways — timetable changes from November 14, 2026", url: "https://rail.co.il/?page=new-schedule-141126" },
     ],
     privatePath: "/travel-blog/ben-gurion-airport-to-jerusalem/",
     privateLabel: "Request a private Jerusalem transfer",
     options: [
-      { id: "rail", name: "Direct train", time: "About 26–30 min to Navon station", cost: "Current train fare: check planner", bestFor: "Solo/couples, light luggage", doorToDoor: "No", availability: "Not during the main Shabbat break", heading: "Taking the direct train to Jerusalem–Yitzhak Navon", paragraphs: [
+      { id: "rail", name: "Direct train", time: "About 26–30 min to Navon station", cost: "About ₪21/adult, one way; check current fare", bestFor: "Solo/couples, light luggage", doorToDoor: "No", availability: "Not during the main Shabbat break", heading: "Taking the direct train to Jerusalem–Yitzhak Navon", paragraphs: [
         "The rail journey is generally faster than driving in highway traffic. Jerusalem–Yitzhak Navon station sits next to the central bus station and near Jaffa Road light rail, not in the Old City or outside every hotel.",
-        "The platforms are deep underground. Include lifts or escalators, the way to street level and the final bus, light-rail trip, taxi or walk in your door-to-door estimate. As of the Israel Railways notice dated 19 August 2026, this line requires a free personal travel voucher for each passenger in addition to the train ticket. Check the official Israel Railways voucher notice linked in Sources when selecting your departure. For ordinary ticketing and validation, see the getting around Israel guide."
+        "The rail line is subject to the free personal voucher requirement set out by Israel Railways on 19 August 2026: each passenger must obtain a voucher for the selected train as well as a valid ticket. The official voucher and timetable links are near the beginning of this guide. For ticket validation and public transport connections, see the getting around Israel guide."
       ], inlineLinks: [{ text: "getting around Israel guide", to: "/travel-blog/getting-around-israel/" }], checklist: ["Choose a hotel-to-station connection before landing.", "Check trains for Friday, Saturday evening and holidays.", "Allow additional time for the deep underground station."] },
-      { id: "taxi", name: "Official airport taxi", time: "About 45–60+ min after pickup", cost: "Regulated meter; no fixed fare", bestFor: "Immediate ride to the address", doorToDoor: "Yes", availability: "Usually around the clock", heading: "Using the authorized metered taxi to Jerusalem", paragraphs: [
-        ...commonTaxi, "For a Jerusalem hotel, confirm the right door or nearest vehicle-accessible Old City gate. Some historic streets cannot be reached by car, and a final walk with luggage may remain. See the official airport taxi guide for ordering and pickup, and the 2026 taxi fares guide for the regulated tariff periods."
-      ], inlineLinks: [{ text: "official airport taxi guide", to: "/travel-blog/ben-gurion-airport-taxis/" }, { text: "2026 taxi fares guide", to: "/travel-blog/taxi-fares-in-israel/" }], checklist: ["Order with Gett or use the airport kiosk, then follow the queue instructions.", "Confirm payment and the regulated meter.", "For Old City lodging, save the recommended drop-off point."] },
+      { id: "taxi", name: "Official airport taxi", time: "About 45–60+ min after pickup", cost: "About ₪270–410+ on the regulated meter (illustrative)", bestFor: "Immediate ride to the address", doorToDoor: "Yes", availability: "Usually around the clock", heading: "Using the authorized metered taxi to Jerusalem", paragraphs: [
+        ...commonTaxi, "For a Jerusalem hotel, confirm the right door or nearest vehicle-accessible Old City gate. Some historic streets cannot be reached by car, and a final walk with luggage may remain. See the official airport taxi guide for ordering and pickup, and the taxi fares in Israel guide for the regulated tariff periods."
+      ], inlineLinks: [{ text: "official airport taxi guide", to: "/travel-blog/ben-gurion-airport-taxis/" }, { text: "taxi fares in Israel guide", to: "/travel-blog/taxi-fares-in-israel/" }], checklist: ["Order with Gett or use the airport kiosk, then follow the queue instructions.", "Confirm payment and the regulated meter.", "For Old City lodging, save the recommended drop-off point."] },
       { id: "private", name: "Private transfer arranged ahead", time: "About 45–60+ min after pickup", cost: "Written quote; published weekday starting rate on booking page", bestFor: "Family, groups and special pickup needs", doorToDoor: "To agreed vehicle-accessible point", availability: "By confirmation", heading: "When is a pre-booked private pickup worthwhile?", paragraphs: [
         ...commonTransfer, "It can be especially helpful when you are arriving with children, multiple suitcases or a late-night hotel check-in. Confirm an Old City meeting/drop-off point rather than assuming the vehicle can enter every historic lane. The separate private transfer to Jerusalem page covers the quoted vehicle, included service and booking request."
       ], inlineLinks: [{ text: "private transfer to Jerusalem page", to: "/travel-blog/ben-gurion-airport-to-jerusalem/" }], checklist: ["Request the vehicle size and child seats that you actually need.", "Share the hotel entrance and flight number.", "Check waiting time and flight-delay terms in writing."] },
-      { id: "bus", name: "Limited airport bus", time: "Around 55–60+ min when a direct service exists", cost: "Current bus fare: check planner", bestFor: "Flexible traveler with a suitable departure", doorToDoor: "No", availability: "Route 485: verify actual dated departure", heading: "Is there a direct bus from the airport to Jerusalem?", paragraphs: [
-        "The Israel Airports Authority lists Jerusalem bus 485 at Terminal 3, Level 2, Exit 21. However, a published route and boarding point do not guarantee that a departure fits your specific flight. Check the current bus 485 timetable and operator details in the national journey planner before relying on it.",
+      { id: "bus", name: "Bus 485 (very limited)", time: "About 55–60+ min if a departure runs", cost: "Current bus fare: check planner", bestFor: "Only if its timetable fits your flight", doorToDoor: "No", availability: "Sparse departures; confirm date and operator", heading: "Is there a direct bus from the airport to Jerusalem?", paragraphs: [
+        "The Israel Airports Authority still lists bus 485 to Jerusalem at Terminal 3, Level 2, Exit 21. Published timetable data indicates only sparse departures, not a dependable frequent service. Confirm the actual day, operator and departure in the official national public-transport planner rather than relying on the airport stop listing alone.",
         "If line 485 has a usable departure, verify its Jerusalem destination stop and onward local trip. A bus to a city stop is not a door-to-door hotel transfer. For boarding payment and ticket validation, read the getting around Israel guide."
       ], inlineLinks: [{ text: "getting around Israel guide", to: "/travel-blog/getting-around-israel/" }], checklist: ["Confirm line 485's actual operation with the national journey planner.", "Check the terminal and boarding area.", "Have rail or a confirmed ride as your fallback."] },
       { id: "rental", name: "Rental car", time: "About 45–60+ min driving, plus collection", cost: "Rental + insurance, fuel and parking", bestFor: "Onward multi-city road trip", doorToDoor: "Yes, where driving is allowed", availability: "Depends on collection hours", heading: "Does renting at TLV make sense for Jerusalem?", paragraphs: [
@@ -114,29 +117,39 @@ const byId: Record<AirportJourneyId, AirportJourneyGuide> = {
     weekend: [
       "Israel Railways and most regular buses normally stop during the main Shabbat period and many Jewish holidays. The exact last/first departure depends on the date, so check the journey planner rather than assuming Saturday night trains start at a fixed time.",
       "For an arrival without a usable rail connection, compare the airport's authorized metered taxi with a confirmed private transfer. A rental car is another possibility only if collection is operating.",
-      "The former Nesher shared airport taxi to Jerusalem has been discontinued. Old listings and telephone numbers are not current airport transport choices; the Sherut in Israel guide distinguishes those old airport services from local shared routes. The airport Shabbat transport guide explains what still works during the weekend."
+      "The regular Nesher airport-to-Jerusalem shared-taxi route described in older guides no longer runs. Do not rely on old pickup details. My Sherut in Israel guide explains the distinction, and the airport Shabbat transport guide covers current weekend options."
     ],
     advice: [
       "Compare the total from landing to hotel: immigration and baggage, getting to the station, the train and the final leg.",
       "Save the hotel address in English and Hebrew if possible, plus the vehicle entrance or nearest Old City gate.",
       "For four travelers with large cases, request the precise luggage capacity rather than assuming a four-seat sedan fits everything.",
-      "For the direct Jerusalem rail line, check whether a free personal travel voucher is still required in addition to the ticket.",
-      "Verify the bus 485 departure before counting on it; keep a rail or confirmed taxi alternative.",
+      "For the Jerusalem train, obtain the free personal voucher required by the current railway notice, plus your ticket.",
+      "Expect limited bus 485 departures and check your actual day; keep a rail or confirmed taxi alternative.",
       "Consider a private pickup when a fixed quote or an agreed larger vehicle matters more than the lowest individual fare.",
     ],
     faqs: [
-      { q: "What is the cheapest way to Jerusalem from Ben Gurion Airport?", a: "For many arrivals outside Shabbat, the direct train is usually the lowest-cost practical choice. Add local transport from Yitzhak Navon to your hotel and check today's fare." },
-      { q: "Can I reach the Old City directly by train?", a: "No. The airport train arrives at Yitzhak Navon near Jerusalem Central Bus Station; continue by light rail, taxi or on foot as appropriate. Some Old City addresses require walking from a permitted vehicle drop-off." },
-      { q: "Do trains run from TLV to Jerusalem on Saturday?", a: "Not during the main Shabbat shutdown. Check the specific Saturday evening and holiday timetable rather than assuming a particular restart time." },
-      { q: "Is the old Nesher airport sherut still running?", a: "No. The former Nesher shared-taxi airport service to Jerusalem has been discontinued. Old contact details and fares are not valid travel options." },
-      { q: "Taxi or private transfer to a Jerusalem hotel?", a: "The official airport taxi offers a metered on-demand ride. A private transfer requires advance confirmation of a suitable vehicle, meeting point and total quote. Compare the full terms, not only an indicative price." },
-      { q: "Do I need a travel voucher for the Ben Gurion Airport to Jerusalem train?", a: "An Israel Railways notice dated 19 August 2026 requires a free personal voucher per passenger on the Jerusalem line in addition to a valid ticket. Check the official current procedure and request the voucher for your selected train when required." },
-      { q: "Where does airport bus 485 leave from?", a: "The Israel Airports Authority lists Line 485 for Jerusalem from Terminal 3, Level 2, Exit 21. Check the current departure, route, operator and final stop in the national public transport planner." },
-      { q: "How do I get to Mamilla or the Old City from Yitzhak Navon?", a: "Yitzhak Navon is near the central bus station and light rail, not inside the Old City. Use the appropriate light-rail stop, a licensed taxi or the walk recommended by your accommodation and confirm the nearest accessible entrance." },
-      { q: "Does the train run from Ben Gurion Airport to Jerusalem late at night?", a: "There may be late trains on some dates, but schedules and service changes matter. Check the exact date and departure with Israel Railways, including any voucher requirement, before planning your hotel arrival." },
-      { q: "Can I use Uber to travel from the airport to Jerusalem?", a: "No. Uber passenger rides are not available in Israel in 2026. Use the official airport taxi system or a separately confirmed private transfer." }
+      { q: "What is the cheapest way from Ben Gurion Airport to Jerusalem?", a: "When running, the direct train is usually the lowest-cost practical option, approximately ₪21 per adult one way before any onward city transport. Check the live fare and obtain the additional free personal voucher required on the Jerusalem line." },
+      { q: "Do I need a free voucher for the Jerusalem train?", a: "Israel Railways currently requires a personal voucher for the selected Jerusalem train in addition to a valid ticket, following its August 19, 2026 notice. Check the official voucher page before travelling." },
+      { q: "Can the train take me directly to the Old City or Mamilla?", a: "No. The train stops at Jerusalem–Yitzhak Navon near the central bus station. Continue by light rail, suitable taxi or a walk; check the gate and hotel entrance if carrying luggage." },
+      { q: "How much is a taxi from the airport to Jerusalem?", a: "A general metered planning range is about ₪270–410 or more for a standard taxi, depending on pickup time, traffic, address and legal extras. The final regulated meter fare is not a fixed-price promise." },
+      { q: "Does bus 485 still run directly to Jerusalem?", a: "The airport still lists it from Terminal 3, Level 2, Exit 21, but scheduled departures are very limited. Confirm an actual departure and final stop on your date before relying on it." },
+      { q: "Do trains run to Jerusalem on Shabbat or late at night?", a: "Trains usually stop during the main Shabbat break, while some late-night or Saturday-evening departures may be scheduled. Always check your exact date, including timetable revisions and voucher rules." },
+      { q: "Should I book a taxi or a private transfer for an Old City hotel?", a: "An authorized taxi runs on the regulated meter. A private ride requires a confirmed quote and agreed vehicle. For either one, ask your accommodation for its nearest vehicle-accessible entrance or gate." },
     ],
-    related: [{ label: "Official Ben Gurion Airport taxi booking and pickup", to: "/travel-blog/ben-gurion-airport-taxis/" }, { label: "Choose a Jerusalem hotel area", to: "/travel-blog/where-to-stay-in-jerusalem/" }, { label: "Arriving on Shabbat", to: "/travel-blog/from-ben-gurion-airport-on-shabbat/" }, { label: "Jerusalem travel guide", to: "/travel-blog/jerusalem-travel-guide/" }],
+    related: [
+      { label: "Ben Gurion Airport taxis and pickup", to: "/travel-blog/ben-gurion-airport-taxis/" },
+      { label: "Travelling from Ben Gurion Airport on Shabbat", to: "/travel-blog/from-ben-gurion-airport-on-shabbat/" },
+      { label: "Sherut and shared airport shuttle options", to: "/travel-blog/sherut-in-israel/" },
+      { label: "Getting around Israel by train, bus or taxi", to: "/travel-blog/getting-around-israel/" },
+      { label: "Taxi fares and metered rates in Israel", to: "/travel-blog/taxi-fares-in-israel/" },
+      { label: "Ben Gurion Airport arrival tips", to: "/travel-blog/ben-gurion-airport-arrival-tips/" },
+    ],
+    planNext: [
+      { label: "Choose where to stay in Jerusalem", to: "/travel-blog/where-to-stay-in-jerusalem/", note: "Find a hotel area that fits your arrival and sightseeing plans." },
+      { label: "Explore Jerusalem's Old City", to: "/travel-blog/old-city-jerusalem/", note: "Check the gates, walking routes and practical access." },
+      { label: "Discover day trips from Jerusalem", to: "/travel-blog/day-trips-from-jerusalem/", note: "See options beyond the city once you have settled in." },
+      { label: "Choose an Israel eSIM", to: "/travel-blog/best-esim-for-israel/", note: "Keep maps, rail timetables and arrival messages at hand." },
+    ],
   },
   "tel-aviv": {
     id: "tel-aviv", city: "Tel Aviv & Jaffa",

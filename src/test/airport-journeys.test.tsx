@@ -15,7 +15,7 @@ describe("four independent airport transportation comparisons", () => {
       const privateId = id === "ein-bokek" ? "dead-sea" : id;
       const privateGuide = getAirportRouteGuide(privateId);
       expect(g.path).not.toBe(privateGuide.path);
-      expect(g.title).toMatch(/^How to get from Ben Gurion Airport/i);
+      expect(g.title).toMatch(id === "jerusalem" ? /Ben Gurion Airport to Jerusalem/i : /^How to get from Ben Gurion Airport/i);
       expect(privateGuide.title).toMatch(/^Private transfer/i);
       expect(g.options.some(o => o.id === "rail")).toBe(true);
       expect(g.options.some(o => o.id === "taxi")).toBe(true);
@@ -40,8 +40,10 @@ describe("four independent airport transportation comparisons", () => {
       expect(doc.querySelectorAll("h1")).toHaveLength(1);
       expect(doc.querySelectorAll("table")).toHaveLength(2);
       expect(doc.querySelector('a[href*="#request-quote"]')).not.toBeNull();
-      expect(doc.querySelector('aside a[href="#request-quote"]')?.getAttribute("href")).toBe("#request-quote");
-      if (g.historicalPrices === false) expect(doc.body.textContent).toContain("this guide does not quote an unverified current fare");
+      if (id !== "jerusalem") expect(doc.querySelector('aside a[href="#request-quote"]')?.getAttribute("href")).toBe("#request-quote");
+      else expect(doc.querySelector('#option-private a[href="#request-quote"]')?.getAttribute("href")).toBe("#request-quote");
+      if (id === "jerusalem") expect(doc.body.textContent).toContain("planning estimates, not guaranteed live prices");
+      else if (g.historicalPrices === false) expect(doc.body.textContent).toContain("this guide does not quote an unverified current fare");
       else expect(doc.body.textContent).toContain("historical editorial estimates");
       const sourceDisclosure = doc.querySelector("#sources details");
       expect(sourceDisclosure).not.toBeNull();
@@ -108,22 +110,26 @@ describe("four independent airport transportation comparisons", () => {
 
   it("keeps the upgraded Jerusalem journey focused on rail, current voucher requirements, bus 485 and hotel connections", () => {
     const g = airportJourneyGuides.jerusalem;
-    expect(g.updatedAt).toBe("2026-10-22");
+    expect(g.updatedAt).toBe("2026-11-11");
     expect(g.historicalPrices).toBe(false);
-    expect(g.title).toMatch(/Ben Gurion Airport to Jerusalem.*2026.*Train.*Bus.*Taxi/i);
-    expect(g.answer).toMatch(/Yitzhak Navon.*free personal travel voucher.*bus 485.*Level 2.*Exit 21/s);
+    expect(g.title).toMatch(/Ben Gurion Airport to Jerusalem.*Train.*Taxi.*Bus/i);
+    expect(g.title).not.toMatch(/2026|2027/);
+    expect(g.answer).toMatch(/Yitzhak Navon.*free personal train voucher.*Bus 485.*Level 2.*Exit 21/s);
     expect(g.stations[0]?.name).toBe("Jerusalem–Yitzhak Navon");
-    expect(g.options.find(o => o.id === "rail")!.cost).not.toContain("₪");
+    expect(g.options.find(o => o.id === "rail")!.cost).toContain("₪21");
     expect(g.options.find(o => o.id === "bus")!.cost).not.toContain("₪");
-    expect(g.options.find(o => o.id === "taxi")!.cost).toMatch(/meter/i);
+    expect(g.options.find(o => o.id === "taxi")!.cost).toMatch(/₪270–410.*meter/i);
     expect(g.options.find(o => o.id === "bus")!.paragraphs.join(" ")).toContain("Terminal 3, Level 2, Exit 21");
     expect(g.options.find(o => o.id === "rail")!.paragraphs.join(" ")).toContain("19 August 2026");
-    expect(g.weekend.join(" ")).toMatch(/Nesher.*discontinued/);
-    expect(g.photos?.station.alt).toMatch(/Terminal 3/);
-    expect(g.photos?.onward.alt).toMatch(/Mamilla/);
-    expect(g.faqs).toHaveLength(10);
+    expect(g.weekend.join(" ")).toMatch(/Nesher.*no longer runs/);
+    expect(g.photos?.station.alt).toMatch(/Yitzhak Navon/);
+    expect(g.photos?.onward.alt).toMatch(/Ben Gurion Airport railway station/);
+    expect(g.faqs).toHaveLength(7);
+    expect(g.related).toHaveLength(6);
+    expect(g.planNext).toHaveLength(4);
     expect(g.sources).toHaveLength(6);
     expect(g.sources?.some(x => x.url.includes("vouchers-jerusalem"))).toBe(true);
+    expect(g.sources?.some(x => x.url.includes("new-schedule-141126"))).toBe(true);
     const inline = g.options.flatMap(option => option.inlineLinks || []);
     expect(inline.map(x => x.to)).toEqual(expect.arrayContaining([
       "/travel-blog/getting-around-israel/",
@@ -151,7 +157,14 @@ describe("four independent airport transportation comparisons", () => {
       expect(link?.closest("p")).not.toBeNull();
     }
     expect(doc.querySelector('section[aria-label="Related practical guides"]')).not.toBeNull();
-    expect(doc.querySelector('aside a[href="#request-quote"]')).not.toBeNull();
+    expect(doc.querySelector('aside[aria-label="Important Jerusalem train ticket information"]')).not.toBeNull();
+    expect(doc.querySelector('aside[aria-label="Private transfer quote for Jerusalem"]')).toBeNull();
+    expect(doc.querySelector('#option-private a[href="#request-quote"]')).not.toBeNull();
+    expect(doc.querySelector('section[aria-label="Related practical guides"]')?.querySelectorAll("li")).toHaveLength(6);
+    expect(doc.querySelector('section[aria-label="Plan the next part of your trip"]')?.querySelectorAll("li")).toHaveLength(4);
+    expect(doc.querySelector('section[aria-label="Other airport journey comparisons"]')).toBeNull();
+    expect(doc.querySelectorAll('form[aria-label="Private airport transfer quote request"]')).toHaveLength(1);
+    expect(doc.querySelector("#options")!.compareDocumentPosition(doc.querySelector("#station-choice")!)).toBe(Node.DOCUMENT_POSITION_FOLLOWING);
     expect(doc.body.textContent).not.toMatch(/≈ ₪20–30|≈ ₪300–360/);
   });
 
@@ -245,12 +258,17 @@ describe("four independent airport transportation comparisons", () => {
       const html = renderToString(<RouterContextProvider router={router}><AirportJourneyPage id={id} /></RouterContextProvider>);
       const doc = new DOMParser().parseFromString(html, "text/html");
       const callouts = doc.querySelectorAll('aside[aria-label="Private transfer quote for ' + g.city + '"]');
-      expect(callouts, id).toHaveLength(1);
-      const cta = callouts[0]!;
-      expect(cta.querySelector('a[href="#request-quote"]')?.textContent).toContain(g.privateLabel);
-      expect(cta.querySelector('img[alt="Moshe Barak"]')).not.toBeNull();
-      expect(cta.textContent).toContain("I'll help arrange a door-to-door airport pickup");
-      expect(cta.compareDocumentPosition(doc.querySelector("#station-choice")!)).toBe(Node.DOCUMENT_POSITION_FOLLOWING);
+      if (id === "jerusalem") {
+        expect(callouts).toHaveLength(0);
+        expect(doc.querySelector('aside[aria-label="Important Jerusalem train ticket information"]')).not.toBeNull();
+      } else {
+        expect(callouts, id).toHaveLength(1);
+        const cta = callouts[0]!;
+        expect(cta.querySelector('a[href="#request-quote"]')?.textContent).toContain(g.privateLabel);
+        expect(cta.querySelector('img[alt="Moshe Barak"]')).not.toBeNull();
+        expect(cta.textContent).toContain("I'll help arrange a door-to-door airport pickup");
+        expect(cta.compareDocumentPosition(doc.querySelector("#station-choice")!)).toBe(Node.DOCUMENT_POSITION_FOLLOWING);
+      }
       expect(doc.querySelector('#option-private a[href="#request-quote"]')).not.toBeNull();
       const quote = doc.querySelector("section#request-quote");
       expect(quote, id + ": missing form section").not.toBeNull();
@@ -263,7 +281,7 @@ describe("four independent airport transportation comparisons", () => {
       expect(doc.querySelector('nav[aria-label="On this page"] a[href="#request-quote"]')).not.toBeNull();
       expect(doc.body.textContent).not.toContain("The private-transfer page lists its own weekday starting price and conditions.");
       expect(doc.body.textContent).not.toContain("I operate the private transport service promoted on this site;");
-      expect(doc.querySelectorAll('aside[aria-label^="Private transfer quote"]')).toHaveLength(1);
+      expect(doc.querySelectorAll('aside[aria-label^="Private transfer quote"]')).toHaveLength(id === "jerusalem" ? 0 : 1);
       expect(rateId === "dead-sea" ? g.city.includes("Ein Bokek") : g.city.length > 0).toBe(true);
       expect(doc.querySelectorAll("#sources details")).toHaveLength(1);
     }
