@@ -300,7 +300,7 @@ export function RelatedLinks({ title = "Plan the rest of your trip", items, curr
   // recommendation cards. Only explicitly selected related links are illustrated.
   // Keep service/directory links as compact secondary navigation rather than dropping them.
   if (illustrated) {
-    const normalized = (path: string) => path.replace(/\\/+$/, "");
+    const normalized = (path: string) => path.replace(/\/+$/, "");
     const seen = new Set<string>();
     const unique = items.filter((item) => {
       const path = normalized(String(item.to));
@@ -343,7 +343,7 @@ export function RelatedLinks({ title = "Plan the rest of your trip", items, curr
       </nav>}
     </section>;
   }
-  const guideSection = /\\bguides?\\b/i.test(title);
+  const guideSection = /\bguides?\b/i.test(title);
   const normalized = (path: string) => path.replace(/\/+$/, "");
   const current = currentPath ? guideDirectory.find((guide) => normalized(String(guide.to)) === normalized(currentPath)) : undefined;
   const titleWords = new Set((current?.title.toLowerCase().match(/[a-z]{4,}/g) || []).map((w) => w.replace(/s$/, "")).filter((w) => !["israel", "travel", "guide", "with", "from", "your", "what", "about", "best"].includes(w)));
