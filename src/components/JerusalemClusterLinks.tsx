@@ -134,7 +134,7 @@ export function JerusalemClusterLinks({ pageKey }: { pageKey: JerusalemClusterKe
   return <section aria-labelledby="jerusalem-connections-h" className="mt-12 border-t pt-8" data-testid="jerusalem-cluster-links">
     <h2 id="jerusalem-connections-h" className="text-2xl font-semibold sm:text-3xl">{title}</h2>
     <p className="mt-2 max-w-3xl text-sm leading-relaxed text-muted-foreground">Find the practical guide, related place or booking options relevant to the next part of your visit.</p>
-    <ul className="mt-5 grid gap-3 sm:grid-cols-2">
+    <ul className={links.length === 6 ? "mt-5 grid gap-3 sm:grid-cols-2 lg:grid-cols-3" : "mt-5 grid gap-3 sm:grid-cols-2"}>
       {links.map(item => <li key={String(item.to)}>
         <Link to={item.to} aria-label={item.label} className="group block h-full rounded-xl border bg-card p-4 hover:border-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
           <span className="block font-semibold leading-snug group-hover:text-primary">{item.label} <span aria-hidden="true">→</span></span>
