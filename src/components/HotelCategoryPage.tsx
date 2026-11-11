@@ -3,7 +3,8 @@ import { ArrowLeft, ArrowRight } from "lucide-react";
 import { hotelCategoryGuides, type HotelStayDestination, type HotelCategoryGuide } from "@/data/content";
 import { categoryDecisionExamples } from "@/data/localEditorialInsights";
 import { linksForPage } from "@/data/registry";
-import { GuideHeader, OnThisPage, Section, Checklist, FaqList, ProviderSection, SourceList, RelatedLinks } from "@/components/Guide";
+import { GuideHeader, OnThisPage, Section, Checklist, FaqList, ProviderSection, SourceList } from "@/components/Guide";
+import { StayTripLinks } from "@/components/StayTripLinks";
 import { HomeContactForm } from "@/components/HomeContactForm";
 import { guideContactCopy } from "@/lib/guide-contact";
 import { StayHotelCard } from "@/components/StayHotelCard";
@@ -33,7 +34,7 @@ export function HotelCategoryPage({ guide: g, destination }: { guide: HotelCateg
         <FaqList faqs={g.faqs} />
         <SourceList ids={[...new Set([destination.sourceIds[0]!, ...g.sourceIds, ...g.picks.map((pick) => resortHotel(pick.hotelId).sourceId)])]} />
         <section aria-labelledby="other-stays-h" className="mt-14"><h2 id="other-stays-h" className="text-3xl">Explore another way to stay</h2><ul className="mt-5 grid gap-3 sm:grid-cols-2"><li><Link to={destination.path as LinkProps["to"]} className="flex h-full items-center justify-between gap-3 rounded-xl border bg-card p-5 hover:border-primary"><span>All {destination.name} hotels & travel styles</span><ArrowRight className="h-4 w-4 shrink-0 text-primary" aria-hidden /></Link></li>{otherGuides.map((other) => <li key={other.id}><Link to={other.path as LinkProps["to"]} className="flex h-full items-center justify-between gap-3 rounded-xl border bg-card p-5 hover:border-primary"><span>{other.title}</span><ArrowRight className="h-4 w-4 shrink-0 text-primary" aria-hidden /></Link></li>)}</ul></section>
-        <RelatedLinks items={destination.related} />
+        <StayTripLinks region={destination.id} extras={destination.related} currentPath={g.path} />
         <StayPhotoCredits photos={[g.photo]} />
         <HomeContactForm key={pageId} guide={guideContactCopy(g.title, "accommodation", destination.name)} />
       </article>
