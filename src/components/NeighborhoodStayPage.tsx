@@ -102,7 +102,7 @@ export function NeighborhoodStayPage({ area }: { area: NeighborhoodStayGuide }) 
         <FaqList faqs={area.faqs} />
         <SourceList ids={[...city.sourceIds, ...hotels.map((hotel) => hotel.sourceId)]} />
         <section aria-labelledby="other-areas-h" className="mt-14">
-          <h2 id="other-areas-h" className="text-3xl">Still choosing your area?</h2>
+          <h2 id="other-areas-h" className="text-3xl">Explore Other Areas to Stay</h2>
           <p className="mt-2 text-muted-foreground">Compare a different side of {city.city} before you decide.</p>
           <ul className="mt-5 grid gap-3 sm:grid-cols-2">{otherAreas.map((other) => <li key={other.id}><Link to={other.path as LinkProps["to"]} className="group flex h-full items-center justify-between gap-3 rounded-xl border bg-card p-4 hover:border-primary"><div><h3 className="text-xl">{other.shortName}</h3><p className="mt-1 text-xs text-muted-foreground">{other.bestFor}</p></div><ArrowRight className="h-4 w-4 shrink-0 text-primary" aria-hidden /></Link></li>)}</ul>
         </section>
