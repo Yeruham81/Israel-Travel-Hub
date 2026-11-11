@@ -6,6 +6,7 @@ import { linksForPage, type HotelRecommendation } from "@/data/registry";
 import { cityHotelPhoto, hotelsInCityCatalog } from "@/data/cityHotelCatalog";
 import { activeHotelNotice } from "@/lib/hotel-notices";
 import { recordOutboundClick, relFor } from "@/lib/outbound";
+import { hotelAffiliateUrl } from "@/lib/hotel-affiliate";
 
 /**
  * Editorial catalogue, not a live hotel search. Reuses the checked property
@@ -149,7 +150,7 @@ function TelAvivHotelTile({ hotel }: { hotel: HotelRecommendation }) {
       </div>
       {booking && (
         <div className="border-t bg-secondary/40 p-3.5">
-          <a href={booking.url} target="_blank" rel={relFor(booking.isAffiliate)}
+          <a href={hotelAffiliateUrl(booking, "stay-telaviv", hotel.id)} target="_blank" rel={relFor(booking.isAffiliate)}
              onClick={() => recordOutboundClick({ pageId: "stay-telaviv", productId: hotel.id, offerId: booking.id })}
              className="btn btn-primary flex w-full items-center justify-center gap-2 text-center"
              aria-label={`${booking.ctaLabel} for ${hotel.name}`}>
