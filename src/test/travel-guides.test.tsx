@@ -280,6 +280,76 @@ describe("migrated practical guides", () => {
     }
   });
 
+
+  it("expands Getting Around Tel Aviv into a verifiable city transport guide", () => {
+    const guide = travelGuides.telAviv;
+    expect(guide.title).toMatch(/^Getting Around Tel Aviv: Buses, Red Line/);
+    expect(guide.title).not.toMatch(/2026|2027/);
+    expect(guide.updatedAt).toBe("2026-11-12");
+    expect(guide.sections.map(section => section.id)).toEqual([
+      "choose", "paying", "walking", "city-buses", "red-line", "national-rail",
+      "taxis", "shared-taxis", "bikes", "shabbat", "driving", "accessibility",
+    ]);
+    expect(guide.comparison.headers).toHaveLength(5);
+    expect(guide.comparison.rows).toHaveLength(9);
+    expect(guide.sections.find(section => section.id === "red-line")?.tables?.[0]?.rows).toHaveLength(8);
+    expect(guide.sections.find(section => section.id === "national-rail")?.tables?.[0]?.rows).toHaveLength(4);
+    expect(guide.sections.find(section => section.id === "paying")?.subsections?.map(sub => sub.id)).toEqual([
+      "ta-ravkav", "ta-mobile-payment", "ta-bank-card",
+    ]);
+    expect(guide.sections.find(section => section.id === "shabbat")?.paragraphs.join(" ")).toMatch(/Terminal 1/);
+    expect(guide.sections.find(section => section.id === "bikes")?.paragraphs.join(" ")).toMatch(/minimum age of 16/);
+    expect(guide.photo.src).toMatch(/^\/(?:src\/)?assets\//);
+    expect(guide.photo.licenseUrl).toBe("https://creativecommons.org/licenses/by/2.5/");
+    expect(guide.faqs).toHaveLength(15);
+    expect(guide.faqGroups).toHaveLength(3);
+    expect(guide.faqGroups!.flatMap(group => group.indexes).sort((a, b) => a - b)).toEqual([...Array(15).keys()]);
+    expect(guide.related).toHaveLength(6);
+    expect(guide.related).not.toContain("esim");
+    expect(guide.services).toHaveLength(4);
+    expect(getSource("guide-dan-bank-card-2026").url).toContain("dan.co.il");
+    expect(getSource("guide-telaviv-weekend-hours").url).toBe("https://busofash.co.il/");
+  });
+
+  it("renders Tel Aviv topics, photo-backed recommendations, tables, FAQs and final sources", async () => {
+    const router = await routerAt(travelGuidePaths.telAviv);
+    const Page = TelAvivRoute.options.component!;
+    const { container } = render(<RouterContextProvider router={router}><Page /></RouterContextProvider>);
+    const guide = travelGuides.telAviv;
+    expect(container.querySelector('header figure img')?.getAttribute("src")).toBe(guide.photo.src);
+    expect(container.querySelector('section[aria-label="Transport planning essentials"]')?.children).toHaveLength(3);
+    const jumpNav = container.querySelector('nav[aria-label="Quick transport topics"]')!;
+    expect(jumpNav.querySelectorAll('a[href^="#"]')).toHaveLength(4);
+    for (const anchor of jumpNav.querySelectorAll<HTMLAnchorElement>('a[href^="#"]')) {
+      expect(container.querySelector(anchor.getAttribute("href")!)).not.toBeNull();
+    }
+    const overview = screen.getByRole("table", { name: guide.comparison.caption });
+    expect(overview.querySelectorAll("tbody th a")).toHaveLength(9);
+    for (const anchor of overview.querySelectorAll<HTMLAnchorElement>('tbody th a[href^="#"]')) {
+      expect(container.querySelector(anchor.getAttribute("href")!)).not.toBeNull();
+    }
+    expect(container.querySelectorAll('[role="region"] table th.sticky').length).toBeGreaterThanOrEqual(3);
+    expect(container.querySelectorAll('.sm\\:hidden')).not.toHaveLength(0);
+    expect(container.querySelector('[aria-label="Red Line stations useful to visitors"]')).not.toBeNull();
+    expect(container.querySelector('[aria-label="Tel Aviv\\'s four mainline railway stations"]')).not.toBeNull();
+    const faqs = container.querySelector("#faq")!;
+    expect(faqs.querySelectorAll("h3")).toHaveLength(3);
+    expect(faqs.querySelectorAll("details")).toHaveLength(15);
+    const related = container.querySelector('section[aria-label="Related practical guides"]')!;
+    expect(related.querySelectorAll(":scope > ul > li")).toHaveLength(6);
+    const cards = [...related.querySelectorAll("li img")];
+    expect(cards).toHaveLength(6);
+    expect(repeatedPhotos(cards.map(image => image.getAttribute("src") || ""))).toEqual([]);
+    const next = container.querySelector('section[aria-label="Plan the next part of your trip"]')!;
+    expect(next.querySelectorAll(":scope > ul > li")).toHaveLength(4);
+    const form = container.querySelector('form[aria-label="Guide contact message"]')!;
+    expect(form).not.toBeNull();
+    expect(related.compareDocumentPosition(next) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
+    expect(next.compareDocumentPosition(form) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
+    expect(container.querySelector("article")?.lastElementChild?.id).toBe("sources");
+    expect(container.querySelector('#sources details:not([open])')).not.toBeNull();
+  });
+
   it("makes Getting Around Israel a usable national transport guide with eight chapters and a complete payment comparison", () => {
     const guide = travelGuides.israel;
     expect(guide.updatedAt).toBe("2026-11-12");
