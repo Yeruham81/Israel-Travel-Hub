@@ -1119,6 +1119,7 @@ telAviv: {
         ],
         photo: { src: telAvivDizengoff, alt: "Pedestrian-friendly streets in Tel Aviv's Dizengoff area" },
         inlineLinks: [
+          { text: "northern museums", to: travelGuidePaths.telAvivMuseums },
           { text: "Tel Aviv beaches guide", to: travelGuidePaths.telAvivBeaches },
           { text: "Jaffa travel guide", to: "/travel-blog/jaffa/" },
         ],
