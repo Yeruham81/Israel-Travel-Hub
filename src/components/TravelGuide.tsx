@@ -17,7 +17,7 @@ import { JerusalemPartnerOffers } from "@/components/JerusalemPartnerOffers";
 import { ShabbatBusLinks, ShabbatTerminalSteps, ShabbatTimesLink, ShabbatPublicTransportLinks } from "@/components/ShabbatGuideExtras";
 import { UsefulLinkCallout } from "@/components/UsefulLinkCallout";
 
-function sourcesFor(guide: TravelGuide) { return [...new Set([...guide.sourceIds, ...guide.sections.flatMap((section) => section.sourceIds || [])])]; }
+function sourcesFor(guide: TravelGuide) { return [...new Set([...guide.sourceIds, ...guide.sections.flatMap(section => [...(section.sourceIds || []), ...(section.subsections || []).flatMap(sub => sub.sourceIds || [])])])]; }
 
 function guideContactKind(guide: TravelGuide): GuideContactKind {
   if (guide.id === "shabbat") return "shabbat";
@@ -94,6 +94,7 @@ function GuideSectionPhoto({ photo }: { photo: GuidePhoto }) {
 function showSectionReferences(guideId: TravelGuideId, sectionId: string) {
   if (guideId === "shabbat") return ["terminal-transfer", "taxis-transfers", "practical"].includes(sectionId);
   if (guideId === "taxis") return ["fares", "airport", "sherut", "safety"].includes(sectionId);
+  if (guideId === "israel") return false; // Official sources appear at the end of this national guide.
   return true;
 }
 
@@ -153,23 +154,39 @@ export function TravelGuidePage({ id }: { id: TravelGuideId }) {
   const providers = guide.providerPageId ? linksForPage(guide.providerPageId) : [];
   const isJerusalemDayJourney = id === "bethlehem" || id === "jerusalemDeadSea";
   const isJerusalemCluster = (["jerusalem", "jerusalemChurches", "jerusalemShopping", "jerusalemDayTrips", "bethlehem", "jerusalemDeadSea"] as string[]).includes(id);
+  const isNationalGuide = id === "israel";
   return <main className="mx-auto max-w-5xl px-4 pb-8">
     <article>
       <header className="pt-6">
         <Breadcrumbs items={[{ name: "Home", to: "/" }, { name: "Travel guides", to: "/guides/" }, { name: guide.title, to: travelGuidePaths[id] }]} />
         <div className="mt-6"><GuideTags topics={guide.topics} /></div>
-        <div className="mt-5 grid items-center gap-6 lg:grid-cols-[1.2fr_1fr]">
+        {isNationalGuide ? (
+          <div className="mt-6">
+            <h1 className="max-w-4xl text-4xl leading-[1.1] md:text-5xl">{guide.title}</h1>
+            <p className="mt-4 max-w-3xl text-lg leading-relaxed text-foreground">{guide.intro}</p>
+            <PageUpdated date={guide.updatedAt || TRAVEL_GUIDE_CHECK_DATE} />
+            <figure className="mt-7">
+              <img src={guide.photo.src} alt={guide.photo.alt} width={1200} height={675} fetchPriority="high" decoding="async" className="aspect-[16/9] max-h-[450px] w-full rounded-2xl object-cover" />
+              <GuidePhotoCredit photo={guide.photo} />
+            </figure>
+          </div>
+        ) : (
+          <div className="mt-5 grid items-center gap-6 lg:grid-cols-[1.2fr_1fr]">
           <div><h1 className="text-4xl leading-[1.1] md:text-5xl">{guide.title}</h1><p className="mt-4 text-lg leading-relaxed text-foreground">{guide.intro}</p>
             <PageUpdated date={guide.updatedAt || TRAVEL_GUIDE_CHECK_DATE} />
           </div>
           <figure><img src={guide.photo.src} alt={guide.photo.alt} width={900} height={600} fetchPriority="high" decoding="async" className="aspect-[3/2] w-full rounded-2xl object-cover" /><GuidePhotoCredit photo={guide.photo} /></figure>
         </div>
-        <AuthorCard />
+        )}
+                <AuthorCard />
       </header>
       <section id="quick-answer" aria-labelledby="answer-h" className="mt-8 scroll-mt-24 rounded-2xl border border-primary/20 bg-secondary/60 p-5 sm:p-7">
         <h2 id="answer-h" className="text-2xl">Quick answer</h2><p className="mt-3 text-lg leading-relaxed">{guide.answer}</p>
         {guide.reviewNote && <p className="mt-4 border-t border-primary/20 pt-3 text-sm leading-relaxed text-muted-foreground">{guide.reviewNote}</p>}
       </section>
+      {isNationalGuide && <section aria-label="Transport planning essentials" className="mt-5 grid gap-3 sm:grid-cols-3">
+        {guide.facts.map(fact => <div key={fact.label} className="rounded-xl border bg-card p-4"><p className="text-xs font-semibold uppercase tracking-wide text-primary">{fact.label}</p><p className="mt-2 text-sm leading-relaxed">{fact.text}</p></div>)}
+      </section>}
       {isJerusalemDayJourney && <JerusalemJourneyOptions id={id} />}
       <OnThisPage sections={isJerusalemDayJourney
         ? [["journey-options", "Compare transport"], ["journey-destinations", "Stops & destinations"], ...guide.sections.map((section) => [section.id, section.title] as const), ["journey-booking", "Tours & private trips"], ["checklist", "Checklist"], ["faq", "FAQ"], ["sources", "Sources"], ["contact", "Contact Moshe"]]
