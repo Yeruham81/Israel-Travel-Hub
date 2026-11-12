@@ -1120,7 +1120,7 @@ telAviv: {
         photo: { src: telAvivDizengoff, alt: "Pedestrian-friendly streets in Tel Aviv's Dizengoff area" },
         inlineLinks: [
           { text: "Tel Aviv beaches guide", to: travelGuidePaths.telAvivBeaches },
-          { text: "Jaffa travel guide", to: travelGuidePaths.jaffa },
+          { text: "Jaffa travel guide", to: "/travel-blog/jaffa/" },
         ],
         tables: [{
           caption: "Practical walking clusters for visitors",
@@ -1350,7 +1350,7 @@ telAviv: {
     related: ["israel", "taxis", "sherut", "shabbat", "airportTaxis", "telAvivDayTrips"],
     services: [
       { label: "Where to stay in Tel Aviv", to: "/travel-blog/where-to-stay-in-tel-aviv/", note: "Compare neighborhoods by the places you plan to visit and your transit options." },
-      { label: "Explore Old Jaffa", to: travelGuidePaths.jaffa, note: "Plan the old streets, port and connections to the rest of the city." },
+      { label: "Explore Old Jaffa", to: "/travel-blog/jaffa/", note: "Plan the old streets, port and connections to the rest of the city." },
       { label: "Tel Aviv beaches guide", to: travelGuidePaths.telAvivBeaches, note: "Choose a stretch of shoreline and plan walking or onward transport." },
       { label: "Day trips from Tel Aviv", to: travelGuidePaths.telAvivDayTrips, note: "Decide when train, bus, tour or private car makes most sense beyond the city." },
     ],
