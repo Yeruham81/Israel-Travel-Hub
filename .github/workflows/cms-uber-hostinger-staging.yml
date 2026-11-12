@@ -1,0 +1,179 @@
+name: CMS - Verify and publish Uber draft to Hostinger staging
+
+on:
+  push:
+    branches: ['feature/sanity-uber-hostinger-release-20261112']
+
+permissions:
+  contents: read
+
+# Share the deployment lock with the website's existing deployment workflow.
+concurrency:
+  group: hostinger-premium-website
+  cancel-in-progress: false
+
+jobs:
+  stage:
+    name: Validate Uber and optionally deploy to temporary Hostinger site
+    runs-on: ubuntu-latest
+    timeout-minutes: 27
+    env:
+      CI: 'true'
+      HOSTINGER_STATIC_BUILD: 'true'
+      VITE_CANONICAL_ORIGIN: 'https://saddlebrown-guanaco-454061.hostingersite.com'
+      VITE_INDEXABLE: 'false'
+      BASE_MAIN_SHA: '08f734356389b6fead2151af3aa34004e69c750b'
+      HOSTINGER_SSH_HOST: ${{ secrets.HOSTINGER_SSH_HOST }}
+      HOSTINGER_SSH_USER: ${{ secrets.HOSTINGER_SSH_USER }}
+      HOSTINGER_SSH_PRIVATE_KEY: ${{ secrets.HOSTINGER_SSH_PRIVATE_KEY }}
+      HOSTINGER_SSH_KNOWN_HOSTS: ${{ secrets.HOSTINGER_SSH_KNOWN_HOSTS }}
+      HOSTINGER_REMOTE_PATH: ${{ secrets.HOSTINGER_REMOTE_PATH }}
+      HOSTINGER_SSH_PORT: ${{ vars.HOSTINGER_SSH_PORT || '65002' }}
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - name: Checkout exact branch revision
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+
+      - name: Set up Bun
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: '1.4.4'
+
+      - name: Install pinned dependencies
+        run: bash scripts/install-ci-dependencies.sh
+
+      - name: Test Sanity content conversion
+        run: node --test scripts/sanity/uber-adapter.test.mjs
+
+      - name: Fetch authorized Uber draft at build time
+        env:
+          SANITY_UBER_SOURCE: drafts
+          SANITY_READ_TOKEN: ${{ secrets.SANITY_READ_TOKEN || secrets.SANITY_IMPORT_TOKEN }}
+        run: |
+          set -euo pipefail
+          test -n "$SANITY_READ_TOKEN" || { echo "::error::Missing SANITY_READ_TOKEN / SANITY_IMPORT_TOKEN"; exit 1; }
+          node scripts/sanity/fetch-uber.mjs
+          grep -Fq 'export const sanityUberGuide: TravelGuide | null = {' src/data/generated/sanityUberSnapshot.ts
+
+      - name: Build all routes as static HTML from the selected snapshot
+        run: bash scripts/build-validated-static.sh
+
+      - name: Validate all routes, SEO and non-indexable temporary site
+        run: node scripts/verify-hostinger-static-export.mjs
+
+      - name: Confirm Uber HTML contains the Sanity image and article
+        run: |
+          set -euo pipefail
+          test -s .output/public/travel-blog/uber-in-israel/index.html
+          grep -Fq 'Is Uber Available in Israel' .output/public/travel-blog/uber-in-israel/index.html
+          grep -Fq 'cdn.sanity.io/images/ekfs0mfw/production/' .output/public/travel-blog/uber-in-israel/index.html
+
+      - name: Attach a short-lived HTML evidence artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: uber-sanity-staging-${{ github.run_id }}
+          path: |
+            .output/public/travel-blog/uber-in-israel/index.html
+            src/data/generated/sanityUberSnapshot.ts
+          if-no-files-found: error
+          retention-days: 3
+
+      # A normal push only validates. A commit with [deploy-uber-staging]
+      # authorizes exactly one staging publication of the verified build.
+      - name: Refuse release if main gained new editorial changes
+        if: contains(github.event.head_commit.message, '[deploy-uber-staging]')
+        shell: bash
+        run: |
+          set -euo pipefail
+          MAIN_SHA="$(gh api "repos/$GITHUB_REPOSITORY/git/ref/heads/main" --jq '.object.sha')"
+          if [[ "$MAIN_SHA" != "$BASE_MAIN_SHA" ]]; then
+            echo "::error::main moved since this staging branch was created. Refusing to overwrite newer editorial improvements."
+            exit 1
+          fi
+
+      - name: Verify staging-only SSH credentials, path and existing site
+        if: contains(github.event.head_commit.message, '[deploy-uber-staging]')
+        shell: bash
+        run: |
+          set -euo pipefail
+          for name in HOSTINGER_SSH_HOST HOSTINGER_SSH_USER HOSTINGER_SSH_PRIVATE_KEY HOSTINGER_SSH_KNOWN_HOSTS HOSTINGER_REMOTE_PATH; do
+            [[ -n "${!name}" ]] || { echo "::error::Missing Hostinger credential $name"; exit 1; }
+          done
+          [[ "$HOSTINGER_REMOTE_PATH" =~ ^/home/[A-Za-z0-9_-]+/domains/[A-Za-z0-9.-]+/public_html/?$ ]] || {
+            echo "::error::Invalid staging path"; exit 1;
+          }
+          [[ "$HOSTINGER_REMOTE_PATH" != *'/domains/israel-taxi.com/'* ]] || {
+            echo "::error::Refusing to deploy to the currently active israel-taxi.com website"; exit 1;
+          }
+          [[ "$HOSTINGER_SSH_PORT" =~ ^[0-9]{2,5}$ ]] || exit 1
+          [[ "$HOSTINGER_SSH_HOST" =~ ^[A-Za-z0-9.:-]+$ ]] || exit 1
+          [[ "$HOSTINGER_SSH_USER" =~ ^[A-Za-z0-9_-]+$ ]] || exit 1
+          install -d -m 700 "$HOME/.ssh"
+          printf '%s\n' "$HOSTINGER_SSH_PRIVATE_KEY" > "$HOME/.ssh/hostinger_deploy"
+          printf '%s\n' "$HOSTINGER_SSH_KNOWN_HOSTS" > "$HOME/.ssh/known_hosts"
+          chmod 600 "$HOME/.ssh/hostinger_deploy" "$HOME/.ssh/known_hosts"
+          ssh -p "$HOSTINGER_SSH_PORT" -i "$HOME/.ssh/hostinger_deploy" -o BatchMode=yes -o StrictHostKeyChecking=yes -o UserKnownHostsFile="$HOME/.ssh/known_hosts" \
+            "$HOSTINGER_SSH_USER@$HOSTINGER_SSH_HOST" \
+            "test -f '$HOSTINGER_REMOTE_PATH/.ith-static-deploy-ok' && test -f '$HOSTINGER_REMOTE_PATH/index.html' && test ! -e '$HOSTINGER_REMOTE_PATH/wp-config.php' && test -f '$HOSTINGER_REMOTE_PATH/api/quote-request/index.php' && test -f '$HOSTINGER_REMOTE_PATH/api/exchange-rates/index.php'" || {
+              echo "::error::Expected staging site marker or PHP APIs are missing. No upload performed."; exit 1;
+            }
+
+      - name: Verify incremental upload list without writing
+        if: contains(github.event.head_commit.message, '[deploy-uber-staging]')
+        shell: bash
+        run: |
+          set -euo pipefail
+          rsync -rltvz --dry-run --delay-updates --no-perms --no-owner --no-group \
+            --exclude='/.htaccess' --exclude='/api/***' --exclude='/.well-known/***' \
+            --exclude='/.user.ini' --exclude='/.ith-static-deploy-ok' \
+            --exclude='/wp-content/***' --exclude='/wp-admin/***' --exclude='/wp-includes/***' \
+            --exclude='*.php' \
+            -e "ssh -p $HOSTINGER_SSH_PORT -i $HOME/.ssh/hostinger_deploy -o BatchMode=yes -o StrictHostKeyChecking=yes -o UserKnownHostsFile=$HOME/.ssh/known_hosts" \
+            .output/public/ "$HOSTINGER_SSH_USER@$HOSTINGER_SSH_HOST:$HOSTINGER_REMOTE_PATH/"
+
+      - name: Recheck main freshness immediately before upload
+        if: contains(github.event.head_commit.message, '[deploy-uber-staging]')
+        shell: bash
+        run: |
+          set -euo pipefail
+          MAIN_SHA="$(gh api "repos/$GITHUB_REPOSITORY/git/ref/heads/main" --jq '.object.sha')"
+          [[ "$MAIN_SHA" == "$BASE_MAIN_SHA" ]] || {
+            echo "::error::main advanced during validation; staging upload cancelled."; exit 1;
+          }
+
+      - name: Backup overwritten files and publish staging HTML and assets
+        if: contains(github.event.head_commit.message, '[deploy-uber-staging]')
+        shell: bash
+        run: |
+          set -euo pipefail
+          BACKUP_DIR="$(dirname "$HOSTINGER_REMOTE_PATH")/cms-uber-backups/$GITHUB_RUN_ID"
+          ssh -p "$HOSTINGER_SSH_PORT" -i "$HOME/.ssh/hostinger_deploy" -o BatchMode=yes -o StrictHostKeyChecking=yes -o UserKnownHostsFile="$HOME/.ssh/known_hosts" \
+            "$HOSTINGER_SSH_USER@$HOSTINGER_SSH_HOST" \
+            "umask 077 && mkdir -p '$BACKUP_DIR'"
+          rsync -rltvz --backup --backup-dir="$BACKUP_DIR" --delay-updates \
+            --no-perms --no-owner --no-group \
+            --exclude='/.htaccess' --exclude='/api/***' --exclude='/.well-known/***' \
+            --exclude='/.user.ini' --exclude='/.ith-static-deploy-ok' \
+            --exclude='/wp-content/***' --exclude='/wp-admin/***' --exclude='/wp-includes/***' \
+            --exclude='*.php' \
+            -e "ssh -p $HOSTINGER_SSH_PORT -i $HOME/.ssh/hostinger_deploy -o BatchMode=yes -o StrictHostKeyChecking=yes -o UserKnownHostsFile=$HOME/.ssh/known_hosts" \
+            .output/public/ "$HOSTINGER_SSH_USER@$HOSTINGER_SSH_HOST:$HOSTINGER_REMOTE_PATH/"
+          echo "Previous overwritten files backed up outside public_html at cms-uber-backups/$GITHUB_RUN_ID."
+
+      - name: Test staging site and preserve existing PHP APIs
+        if: contains(github.event.head_commit.message, '[deploy-uber-staging]')
+        shell: bash
+        run: |
+          set -euo pipefail
+          for path in / /travel-blog/uber-in-israel/ /api/quote-request/ /api/exchange-rates/; do
+            status="$(curl --retry 2 --retry-delay 2 --max-time 20 -L -sS -o /dev/null -w '%{http_code}' "$VITE_CANONICAL_ORIGIN$path")"
+            echo "$path -> HTTP $status"
+            [[ "$status" == "200" ]] || { echo "::error::Staging smoke test failed at $path"; exit 1; }
+          done
+          html="$(curl --retry 2 --max-time 20 -fsSL "$VITE_CANONICAL_ORIGIN/travel-blog/uber-in-israel/")"
+          grep -Fq 'cdn.sanity.io/images/ekfs0mfw/production/' <<< "$html" || {
+            echo "::error::The new Sanity hero image is not visible in the served HTML"; exit 1;
+          }
+          echo "Sanity Uber staging publication verified; legacy israel-taxi.com unchanged."
