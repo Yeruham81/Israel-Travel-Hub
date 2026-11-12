@@ -36,8 +36,8 @@ export const guideTopics = [
 ] as const;
 export type GuideTopicId = typeof guideTopics[number]["id"];
 export type GuidePhoto = { src: string; alt: string; sourceUrl?: string; credit?: string; licenseUrl?: string };
-export type GuideTable = { caption: string; headers: string[]; rows: string[][]; note?: string };
-export type GuideSubsection = { id: string; title: string; paragraphs: string[]; bullets?: string[]; sourceIds?: string[]; photo?: GuidePhoto; links?: { label: string; to: LinkProps["to"] }[]; inlineLinks?: { text: string; to: LinkProps["to"] }[]; externalLinks?: { label: string; href: string }[]; highlightedLinks?: { label: string; href: string; context: string }[]; tables?: GuideTable[] };
+export type GuideTable = { caption: string; headers: string[]; rows: string[][]; note?: string; rowLinks?: ({ to: LinkProps["to"]; label?: string } | { href: string; label?: string } | null)[] };
+export type GuideSubsection = { id: string; title: string; paragraphs: string[]; bullets?: string[]; steps?: string[]; sourceIds?: string[]; photo?: GuidePhoto; links?: { label: string; to: LinkProps["to"] }[]; inlineLinks?: { text: string; to: LinkProps["to"] }[]; externalLinks?: { label: string; href: string }[]; highlightedLinks?: { label: string; href: string; context: string }[]; tables?: GuideTable[] };
 export type GuideSection = GuideSubsection & { subsections?: GuideSubsection[] };
 export type GuideReading = { label: string; href: string; note: string };
 export type TravelGuide = {
@@ -45,6 +45,7 @@ export type TravelGuide = {
   topics: GuideTopicId[]; photo: GuidePhoto; facts: { label: string; text: string }[];
   comparison: { caption: string; headers: string[]; rows: string[][] };
   sections: GuideSection[]; checklist: string[]; faqs: { q: string; a: string }[];
+  faqGroups?: { title: string; indexes: number[] }[];
   sourceIds: string[]; related: TravelGuideId[];
   services: { label: string; to: LinkProps["to"]; note?: string }[];
   reading?: GuideReading[]; reviewNote?: string; providerPageId?: string;
@@ -629,7 +630,13 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
     answer: "For rail-connected cities such as Tel Aviv, Jerusalem and Haifa, start by comparing trains and buses for your full door-to-door trip. Use city buses, operating light rail, the Haifa Metronit and walking for local journeys. Tourists can generally pay with a preloaded anonymous Rav-Kav card or an approved mobile payment app; ordinary bus drivers do not accept cash, and direct bank-card taps are not yet universal. Licensed taxis and confirmed transfers help with awkward last-mile connections or Shabbat, while a rental car suits more remote or multi-stop itineraries. Always check your exact route, payment method and return departure.",
     topics: ["transportation", "destinations", "itineraries", "tips"],
     updatedAt: "2026-11-12",
-    photo: { src: railPlatform, alt: "A real railway platform at Ben Gurion Airport, part of Israel's public transport network" },
+    photo: {
+      src: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/25/Israel_Tel_Aviv_Egged_buses.jpg/1280px-Israel_Tel_Aviv_Egged_buses.jpg",
+      alt: "Green Egged buses alongside one another at a bus stop in central Tel Aviv",
+      credit: "Eurovaran · CC BY-SA 4.0 · Wikimedia Commons · displayed as a resized image",
+      sourceUrl: "https://commons.wikimedia.org/wiki/File:Israel_Tel_Aviv_Egged_buses.jpg",
+      licenseUrl: "https://creativecommons.org/licenses/by-sa/4.0/",
+    },
     facts: [
       { label: "Between cities", text: "Compare the train and direct bus for your actual station and address" },
       { label: "How to pay", text: "Bring a loaded Rav-Kav or set up an approved app before boarding" },
@@ -674,13 +681,18 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
             paragraphs: [
               "Israel Railways connects Ben Gurion Airport and many destinations including Tel Aviv, Jerusalem, Haifa, Akko and Be'er Sheva. Choose the real railway station closest to your destination; Tel Aviv's mainline stations are inland, Jerusalem–Yitzhak Navon is near the central bus station rather than the Old City, and Haifa's coastal railway stops can be far below Mount Carmel hotels.",
               "From Saturday night, November 14, 2026, Israel Railways is introducing a revised timetable, including longer through services from Jerusalem via Tel Aviv to several northern stations. Check the train planner for your actual date and whether a change of train is required, rather than relying on a fixed service frequency.",
-              "Travel to or from Jerusalem–Yitzhak Navon may also require a free personal travel voucher for a particular train in addition to its valid ticket under the published August 2026 instructions. Verify whether this rule still applies before travelling; the voucher is not a replacement ticket. For flight-specific terminal access, see the airport arrival guide.",
+              "As of the August 2026 Israel Railways notice, travel to or from Jerusalem–Yitzhak Navon requires a separate free personal voucher for the selected train, in addition to a valid rail ticket. You can request the voucher starting 72 hours before departure. Check the latest instructions for your date: the voucher is not a replacement ticket. For flight-specific terminal access, see the airport arrival guide.",
+            ],
+            steps: [
+              "Up to 72 hours before the journey, search from or to Jerusalem–Yitzhak Navon on the official Israel Railways planner and select your exact train.",
+              "Choose “Order Travel Voucher” for that departure (under “Actions” on mobile). Enter a phone number able to receive an SMS verification code, complete verification and choose a voucher for each passenger.",
+              "Keep the voucher code sent by SMS, show it to station staff alongside your valid rail ticket and retain it until the journey ends. A voucher is valid only for the train selected.",
             ],
             photo: { src: navonPlatform, alt: "Jerusalem–Yitzhak Navon railway platforms on the deep intercity station" },
             inlineLinks: [{ text: "airport arrival guide", to: travelGuidePaths.arrival }],
             highlightedLinks: [
               { label: "Israel Railways — search a journey and check fares", href: "https://www.rail.co.il/", context: "Select the real travel date, stations, train changes and last departure. Check disruption notices before leaving." },
-              { label: "Jerusalem line — free passenger voucher", href: "https://rail.co.il/?lan=en&page=vouchers-jerusalem", context: "Official August 2026 instructions: confirm whether the extra free voucher is required for your selected Jerusalem train." },
+              { label: "Jerusalem line — free passenger voucher", href: "https://rail.co.il/?lan=en&page=vouchers-jerusalem", context: "The August 2026 rule requires a free voucher for the selected train. Apply from 72 hours before departure, verify by SMS and bring both voucher and rail ticket; confirm the current rule." },
             ],
             sourceIds: ["israel-rail", "guide-train-nov-2026", "guide-jerusalem-train-voucher"],
           },
@@ -690,6 +702,13 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
               "City buses reach neighborhoods beyond railway stations; intercity services connect Tiberias, Safed, Nazareth, Eilat, Dead Sea resorts and many other destinations without direct rail. Some long-distance departures require seat reservations, and remote attractions may be far from the nearest bus stop.",
               "Use the national journey planner with your actual start and end addresses. Check the boarding side of the street, whether you need to change vehicles, ticket acceptance and the last return bus. Public transport information may be incomplete during diversions, holidays or security-related changes.",
             ],
+            photo: {
+              src: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a9/PikiWiki_Israel_74165_egged_bus.jpg/960px-PikiWiki_Israel_74165_egged_bus.jpg",
+              alt: "Egged public bus operating in Tel Aviv",
+              credit: "Davidi Vardi · PikiWiki Israel · CC BY 2.5 · resized",
+              sourceUrl: "https://commons.wikimedia.org/wiki/File:PikiWiki_Israel_74165_egged_bus.jpg",
+              licenseUrl: "https://creativecommons.org/licenses/by/2.5/",
+            },
             highlightedLinks: [
               { label: "National public transport route planner", href: "https://route.bus.gov.il/", context: "Search buses and light rail by the exact travel date, stop and direction. Verify important departures with the operator." },
               { label: "Egged — seat reservations for selected routes", href: "https://www.egged.co.il/en/information-for-passengers/tickets-information", context: "Some intercity services such as selected Eilat routes use seat reservations; check before travelling." },
@@ -702,6 +721,13 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
               "Jerusalem's light rail is useful along its operating corridor, including parts of the center and approaches to the Old City. Greater Tel Aviv's operating Red Line serves parts of Tel Aviv–Jaffa, Ramat Gan, Bnei Brak, Petah Tikva and Bat Yam; it does not reach every beach or hotel. Do not confuse future rail lines with those already running.",
               "Haifa also has the Metronit bus rapid transit network and the Carmelit underground funicular between the Lower City and Carmel Center. The university-bound Rakbalit cable-car transit is a separate service from the tourist cable car near Bat Galim. Always check operating hours and ticket acceptance for the specific system.",
             ],
+            photo: {
+              src: "https://commons.wikimedia.org/wiki/Special:FilePath/%D7%93%D7%A0%D7%A7%D7%9C%20%E2%80%93%20%D7%94%D7%A7%D7%95%20%D7%94%D7%90%D7%93%D7%95%D7%9D%2C%20%D7%AA%D7%9C%20%D7%90%D7%91%D7%99%D7%91-%D7%99%D7%A4%D7%95%2C%20%D7%99%D7%A0%D7%95%D7%90%D7%A8%202025%2002.jpg?width=1000",
+              alt: "A light rail train on the operating Red Line in Tel Aviv–Yafo",
+              credit: "מקף־עברי · CC BY-SA 4.0 · Wikimedia Commons · resized",
+              sourceUrl: "https://commons.wikimedia.org/wiki/File:דנקל_–_הקו_האדום,_תל_אביב-יפו,_ינואר_2025_02.jpg",
+              licenseUrl: "https://creativecommons.org/licenses/by-sa/4.0/",
+            },
             highlightedLinks: [{ label: "DANKAL Red Line — ticketing and validation", href: "https://www.nta.co.il/en/buying-tickets-and-validation-machines/", context: "Validate your Rav-Kav or app journey before boarding the Red Line, including when connecting from another service." }],
             sourceIds: ["guide-red-line", "guide-urban-transit-validation", "guide-haifa-carmelit"],
           },
@@ -718,7 +744,7 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
           rows: [
             ["Anonymous Rav-Kav", "Buy at a supported counter, machine or retailer and preload value or a day pass", "Tourists wanting a physical card and offline backup", "Card must be loaded and validated; no personalized concessions"],
             ["Approved mobile app", "Install, register and add an accepted payment method before travel", "Flexible bus and rail use without preloading a card", "Data, battery and supported payment method required; follow QR/validation instructions"],
-            ["Direct contactless bank card", "Tap only on lines explicitly showing support", "A simple single ride on an enabled service", "Not nationwide and may not include normal transfer or combined-rail benefits"],
+            ["Direct contactless bank card", "Tap only where Egged explicitly supports payment (including selected lines in Eilat, Jerusalem and Haifa)", "A simple single full-fare ride on an enabled service", "Not nationwide; no personal concessions or normal Rav-Kav/app fare benefits"],
           ],
           note: "Transport fares and integrated ticket products vary by route and date. These are payment methods, not fixed-price quotations.",
         }],
@@ -748,10 +774,11 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
           {
             id: "israel-ticket-rules", title: "Cash, contactless cards, transfers and children",
             paragraphs: [
-              "Ordinary buses do not normally sell tickets for cash onboard. A railway station may offer ticket machines or staffed counters, with payment options varying by location. Contactless bank-card or phone-wallet payment exists on selected bus services only; do not rely on it for a cross-country itinerary.",
-              "A transfer or day-pass benefit depends on the fare system, distance, transport mode and validation. Not every payment method provides the same connection benefits. Rules for children's fares and fare concessions also vary; check ages, eligibility documents and how to validate for each traveler.",
+              "Ordinary buses do not normally sell tickets for cash onboard. A railway station may offer ticket machines or staffed counters, with payment options varying by location. Egged introduced contactless credit-card and digital-wallet validation in January 2026 on supported lines in Eilat, Jerusalem and metropolitan Haifa. This does not mean all Israeli buses or operators accept direct bank-card taps.",
+              "Egged's supported contactless validators accept international Visa and Mastercard cards, but do not apply passenger profile discounts or the standard Rav-Kav/app fare benefits. They are intended for a full-fare single journey. Carry a loaded Rav-Kav or supported app as a backup; transfer or day-pass benefits vary by payment system, distance and mode. Check child fares and how to validate each passenger.",
             ],
-            sourceIds: ["guide-select-card-payment", "guide-ravkav-2026", "guide-urban-transit-validation"],
+            highlightedLinks: [{ label: "Egged — where credit-card taps work", href: "https://www.egged.co.il/en/information-for-passengers/rav-kav-and-payment-apps", context: "Egged specifies the pilot areas, supported international cards and its full-fare single-journey rules. Do not assume other operators use the same system." }],
+            sourceIds: ["guide-select-card-payment", "guide-ravkav-2026", "guide-urban-transit-validation", "guide-egged-card-payment-2026"],
           },
         ],
       },
@@ -919,7 +946,13 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
                 ["Jerusalem → Ein Bokek", "Scheduled Dead Sea bus", "Last southbound departure and the correct hotel stop"],
                 ["Tel Aviv → Tiberias", "Intercity bus or planned regional trip", "Arrival terminal, total time and final return bus"],
               ],
-              note: "Route examples are indicative; they are not live timetable searches.",
+              rowLinks: [
+                { to: "/travel-blog/how-to-get-from-ben-gurion-airport-to-jerusalem/", label: "Airport-to-Jerusalem guide (for the main rail connection)" },
+                { to: "/travel-blog/how-to-get-from-ben-gurion-airport-to-haifa/", label: "Ben Gurion Airport to Haifa" },
+                { to: "/travel-blog/jerusalem-to-the-dead-sea/", label: "Jerusalem to the Dead Sea" },
+                { href: "https://route.bus.gov.il/", label: "Plan Tel Aviv–Tiberias on the national public transport planner" },
+              ],
+              note: "Route examples are indicative; they are not live timetable searches. Each journey links to a guide or dated route planner.",
             }],
           },
           {
@@ -960,9 +993,9 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
       { q: "Do I need an Israeli ID to buy an anonymous Rav-Kav?", a: "No. Anonymous Rav-Kav cards generally do not require a personal ID or photo. Buy from an authorized machine or retailer and load a valid fare product before boarding." },
       { q: "Where can I buy or load Rav-Kav for the first time?", a: "Designated service centers, kiosks, some transit ticket machines and Rav-Kav Online with a compatible NFC device offer purchase or loading options. Check the current location and opening hours." },
       { q: "Can I pay cash to a bus driver?", a: "Not normally. Use a loaded Rav-Kav or an approved mobile payment app. A rail station may sell a separate ticket at machines or staffed counters." },
-      { q: "Can I tap a foreign credit card on every Israeli bus?", a: "No. Direct bank-card payment is available only on selected routes, and it may not include the same transfer benefits as Rav-Kav or an approved app. Carry a backup method." },
+      { q: "Can I tap a foreign credit card on every Israeli bus?", a: "No. Egged accepts contactless international Visa and Mastercard on supported buses in Eilat, Jerusalem and metropolitan Haifa, but this is not nationwide. Card taps charge a full-fare single ride without usual passenger-profile discounts or integrated fare benefits. Carry a Rav-Kav or approved payment app as a backup." },
       { q: "How do I pay for light rail?", a: "On operating light-rail lines, buy or load an accepted ticket and validate it before boarding using the station's Rav-Kav equipment or the relevant payment app process. The exact procedure depends on the line and station." },
-      { q: "Do travelers need a free voucher for the Jerusalem train?", a: "Israel Railways announced a free personal voucher requirement in August 2026 for each selected train on the Jerusalem line, in addition to the train ticket. Check whether the requirement applies to your planned departure." },
+      { q: "Do travelers need a free voucher for the Jerusalem train?", a: "As of the August 2026 notice, yes: request a free voucher for your selected Jerusalem–Yitzhak Navon train starting 72 hours before departure on Israel Railways' planner. Verify your mobile number by SMS and save the voucher code. Carry it together with a separate valid rail ticket; reconfirm the requirement before travelling." },
       { q: "Which apps are useful for public transport in Israel?", a: "The official planner, Moovit and other supported route apps can help plan trips; approved ticketing apps such as Moovit or Rav-Pass can also validate and pay for many public transit journeys. Check current app support and card acceptance." },
       { q: "Does Israel have a metro or light rail?", a: "Jerusalem and greater Tel Aviv operate light rail along designated corridors. Haifa has the Carmelit underground funicular and Metronit rapid bus network. Future metro plans are not current operating services." },
       { q: "What is the best way to get around Haifa?", a: "Combine buses and Metronit with the Carmelit where its hillside corridor helps. The Rakbalit transit cable car serves another corridor. Check climbs between coastal rail stations and Mount Carmel hotels." },
@@ -974,9 +1007,14 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
       { q: "Can a rented car enter Bethlehem or Palestinian Authority areas?", a: "Rental contracts can prohibit some territories and invalidate insurance coverage. For example, Hertz Israel's contract prohibits driving into Area A. Check your own rental agreement and the legal route before travel." },
       { q: "Is a private driver the same as a guided tour?", a: "No. A driver-only service does not automatically include a licensed guide, tickets or unlimited sightseeing time. Confirm the itinerary, hours, pickup and full quote." },
     ],
+    faqGroups: [
+      { title: "Tickets & payments", indexes: [2, 3, 4, 5, 6, 7, 8] },
+      { title: "Choosing transport", indexes: [0, 1, 9, 10, 11, 12, 14] },
+      { title: "Shabbat, access & practical planning", indexes: [13, 15, 16, 17] },
+    ],
     sourceIds: [
       "guide-bus-planner", "guide-public-transport-payments", "guide-select-card-payment",
-      "guide-ravkav-2026", "guide-ravkav-visitor", "guide-urban-transit-validation",
+      "guide-ravkav-2026", "guide-ravkav-visitor", "guide-urban-transit-validation", "guide-egged-card-payment-2026",
       "israel-rail", "guide-train-nov-2026", "guide-jerusalem-train-voucher",
       "guide-weekend-network", "guide-egged-accessibility", "guide-egged-seat-reservations",
       "guide-rental-territory", "guide-haifa-carmelit", "guide-red-line",
