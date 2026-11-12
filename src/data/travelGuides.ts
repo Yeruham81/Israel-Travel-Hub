@@ -701,10 +701,6 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
               "City buses reach neighborhoods beyond railway stations; intercity services connect Tiberias, Safed, Nazareth, Eilat, Dead Sea resorts and many other destinations without direct rail. Some long-distance departures require seat reservations, and remote attractions may be far from the nearest bus stop.",
               "Use the national journey planner with your actual start and end addresses. Check the boarding side of the street, whether you need to change vehicles, ticket acceptance and the last return bus. Public transport information may be incomplete during diversions, holidays or security-related changes.",
             ],
-            photo: {
-              src: archivedBuses,
-              alt: "Buses at a transport terminal in the Tel Aviv metropolitan area",
-            },
             highlightedLinks: [
               { label: "National public transport route planner", href: "https://route.bus.gov.il/", context: "Search buses and light rail by the exact travel date, stop and direction. Verify important departures with the operator." },
               { label: "Egged — seat reservations for selected routes", href: "https://www.egged.co.il/en/information-for-passengers/tickets-information", context: "Some intercity services such as selected Eilat routes use seat reservations; check before travelling." },
