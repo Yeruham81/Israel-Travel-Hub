@@ -116,12 +116,17 @@ describe("transport cluster: twelve editorial guides and four private landings",
 
   it("keeps the Tel Aviv local transport hub distinct from the airport-only article", () => {
     const guide = travelGuides.telAviv;
-    expect(guide.title).toMatch(/Getting Around Tel Aviv.*2026/);
-    expect(guide.sections.map(section => section.id)).toEqual(["walking", "buses-light-rail", "rail", "weekend-and-bikes"]);
-    expect(guide.sections.filter(section => (section.inlineLinks?.length || 0) > 0)).toHaveLength(4);
-    expect(guide.faqs.length).toBeGreaterThanOrEqual(7);
-    expect(guide.sections.find(section => section.id === "rail")?.inlineLinks).toEqual(expect.arrayContaining([
-      { text: "Ben Gurion Airport to Tel Aviv journey guide", to: "/travel-blog/how-to-get-from-ben-gurion-airport-to-tel-aviv/" },
+    expect(guide.title).toMatch(/^Getting Around Tel Aviv: Buses, Red Line/);
+    expect(guide.title).not.toMatch(/2026|2027/);
+    expect(guide.updatedAt).toBe("2026-11-12");
+    expect(guide.sections.map(section => section.id)).toEqual([
+      "choose", "paying", "walking", "city-buses", "red-line", "national-rail",
+      "taxis", "shared-taxis", "bikes", "shabbat", "driving", "accessibility",
+    ]);
+    expect(guide.sections.filter(section => (section.inlineLinks?.length || 0) > 0).length).toBeGreaterThanOrEqual(5);
+    expect(guide.faqs).toHaveLength(15);
+    expect(guide.sections.find(section => section.id === "national-rail")?.inlineLinks).toEqual(expect.arrayContaining([
+      { text: "Ben Gurion Airport to Tel Aviv guide", to: "/travel-blog/how-to-get-from-ben-gurion-airport-to-tel-aviv/" },
     ]));
   });
 });
