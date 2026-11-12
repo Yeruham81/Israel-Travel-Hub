@@ -32,6 +32,9 @@ jobs:
     env:
       CI: "true"
       HOSTINGER_STATIC_BUILD: "true"
+      # Always use editorially published Sanity content for routine site releases.
+      # If Uber has no published document, fail before touching Hostinger.
+      SANITY_UBER_SOURCE: published
       VITE_CANONICAL_ORIGIN: ${{ vars.HOSTINGER_CANONICAL_ORIGIN || 'https://saddlebrown-guanaco-454061.hostingersite.com' }}
       VITE_INDEXABLE: ${{ vars.HOSTINGER_INDEXABLE || 'false' }}
       TARGET_SHA: ${{ github.event_name == 'workflow_run' && github.event.workflow_run.head_sha || github.sha }}
@@ -78,6 +81,16 @@ jobs:
         if: steps.freshness.outputs.current == 'true'
         run: bash scripts/build-validated-static.sh
 
+      - name: Assert the release contains the published Sanity Uber guide
+        if: steps.freshness.outputs.current == 'true'
+        shell: bash
+        run: |
+          set -euo pipefail
+          grep -Fq 'Perspective at build: published.' src/data/generated/sanityUberSnapshot.ts
+          grep -Fq 'export const sanityUberGuide: TravelGuide | null = {' src/data/generated/sanityUberSnapshot.ts
+          test -s .output/public/travel-blog/uber-in-israel/index.html
+          grep -Fq 'cdn.sanity.io/images/ekfs0mfw/production/' .output/public/travel-blog/uber-in-israel/index.html
+
       - name: Reject missing pages, wrong canonical, or indexable trial
         if: steps.freshness.outputs.current == 'true'
         run: node scripts/verify-hostinger-static-export.mjs
@@ -92,6 +105,8 @@ jobs:
           done
           [[ "$HOSTINGER_REMOTE_PATH" =~ ^/home/[A-Za-z0-9_-]+/domains/[A-Za-z0-9.-]+/public_html/?$ ]] ||
             { echo "::error::Remote path must be the exact Hostinger temporary site's /home/.../domains/.../public_html"; exit 1; }
+          [[ "$HOSTINGER_REMOTE_PATH" != *'/domains/israel-taxi.com/'* ]] ||
+            { echo "::error::Refusing the legacy live domain israel-taxi.com"; exit 1; }
           [[ "$HOSTINGER_SSH_PORT" =~ ^[0-9]{2,5}$ ]] || exit 1
           [[ "$HOSTINGER_SSH_HOST" =~ ^[A-Za-z0-9.:-]+$ ]] || exit 1
           [[ "$HOSTINGER_SSH_USER" =~ ^[A-Za-z0-9_-]+$ ]] || exit 1
@@ -117,6 +132,19 @@ jobs:
             "test -f '$HOSTINGER_REMOTE_PATH/.ith-static-deploy-ok' && test -f '$HOSTINGER_REMOTE_PATH/index.html' && test ! -e '$HOSTINGER_REMOTE_PATH/wp-config.php' && test -f '$HOSTINGER_REMOTE_PATH/api/quote-request/index.php' && test -f '$HOSTINGER_REMOTE_PATH/api/exchange-rates/index.php'" ||
             { echo "::error::Hostinger deployment marker or expected PHP endpoints are missing; no files were changed"; exit 1; }
 
+      - name: Check transfer plan before changing Hostinger
+        if: steps.freshness.outputs.current == 'true'
+        shell: bash
+        run: |
+          set -euo pipefail
+          rsync -rltvz --dry-run --delay-updates --no-perms --no-owner --no-group \
+            --exclude='/.htaccess' --exclude='/api/***' --exclude='/.well-known/***' \
+            --exclude='/.user.ini' --exclude='/.ith-static-deploy-ok' \
+            --exclude='/wp-content/***' --exclude='/wp-admin/***' --exclude='/wp-includes/***' \
+            --exclude='*.php' \
+            -e "ssh -p $HOSTINGER_SSH_PORT -i $HOME/.ssh/hostinger_deploy -o BatchMode=yes -o StrictHostKeyChecking=yes -o UserKnownHostsFile=$HOME/.ssh/known_hosts" \
+            .output/public/ "$HOSTINGER_SSH_USER@$HOSTINGER_SSH_HOST:$HOSTINGER_REMOTE_PATH/"
+
       - name: Upload only built static files using rsync over SSH
         if: steps.freshness.outputs.current == 'true'
         shell: bash
@@ -129,6 +157,13 @@ jobs:
           fi
           # NEVER add --delete. Keep manually configured PHP, .htaccess,
           # host configuration, upload directories and unpublished backups.
+          # Maintain a private backup of overwritten HTML/assets outside public_html.
+          BACKUP_DIR="$(dirname "$HOSTINGER_REMOTE_PATH")/cms-static-backups/$GITHUB_RUN_ID"
+          if [[ "$DRY_RUN" == "false" ]]; then
+            ssh -p "$HOSTINGER_SSH_PORT" -i "$HOME/.ssh/hostinger_deploy" -o BatchMode=yes -o StrictHostKeyChecking=yes -o UserKnownHostsFile="$HOME/.ssh/known_hosts" \
+              "$HOSTINGER_SSH_USER@$HOSTINGER_SSH_HOST" "umask 077 && mkdir -p '$BACKUP_DIR'"
+            args+=(--backup --backup-dir="$BACKUP_DIR")
+          fi
           rsync -rltvz --delay-updates --no-perms --no-owner --no-group \
             --exclude='/.htaccess' \
             --exclude='/api/***' \
@@ -148,9 +183,14 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          for path in / /guides/ /api/quote-request/ /api/exchange-rates/; do
+          for path in / /guides/ /travel-blog/uber-in-israel/ /api/quote-request/ /api/exchange-rates/; do
             status="$(curl --retry 2 --retry-delay 2 --max-time 20 -L -sS -o /dev/null -w '%{http_code}' "$VITE_CANONICAL_ORIGIN$path")"
             echo "$path -> HTTP $status"
             [[ "$status" == "200" ]] || { echo "::error::Website smoke test failed for $path"; exit 1; }
           done
-          echo "Static files published; manually maintained PHP APIs still respond to GET."
+          uber_html="$(curl --retry 2 --max-time 20 -fsSL "$VITE_CANONICAL_ORIGIN/travel-blog/uber-in-israel/")"
+          if ! grep -Fq 'cdn.sanity.io/images/ekfs0mfw/production/' <<< "$uber_html"; then
+            echo "::error::The published Uber HTML does not contain its Sanity image"
+            exit 1
+          fi
+          echo "Static files published from Sanity; existing PHP APIs still respond to GET."
