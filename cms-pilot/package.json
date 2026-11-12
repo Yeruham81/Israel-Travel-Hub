@@ -7,12 +7,15 @@
     "dev": "sanity dev",
     "build": "sanity build",
     "deploy:studio": "sanity deploy",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "check:uber": "node scripts/import-uber.mjs --dry-run",
+    "import:uber": "node scripts/import-uber.mjs --apply"
   },
   "dependencies": {
     "sanity": "^4.0.0",
     "react": "^19.2.0",
-    "react-dom": "^19.2.0"
+    "react-dom": "^19.2.0",
+    "@sanity/client": "^7.0.0"
   },
   "devDependencies": {
     "@types/react": "^19.2.0",
