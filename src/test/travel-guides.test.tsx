@@ -659,7 +659,7 @@ describe("migrated practical guides", () => {
       for (const related of guide.related) expect(travelGuides[related]).toBeTruthy();
     }
     expect(travelGuides.arrival.related).toContain("shabbat");
-    expect(travelGuides.israel.related).toEqual(expect.arrayContaining(["taxis", "taxiFares", "uber", "sherut", "airportTaxis", "arrival", "shabbat"]));
+    expect(travelGuides.israel.related).toEqual(["telAviv", "taxis", "sherut", "shabbat", "airportTaxis", "arrival"]);
   });
 
   it("preserves exactly the publisher's five eSIM links with sponsored attributes and anonymous click attribution", async () => {
