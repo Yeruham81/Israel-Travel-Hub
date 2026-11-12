@@ -243,7 +243,7 @@ function EinBokekPublicTransportDetails({ guide }: { guide: AirportJourneyGuide 
 }
 
 function OptionSection({ option, guideId }: { option: JourneyOption; guideId: AirportJourneyId }) {
-  const conciseGuide = guideId === "jerusalem" || guideId === "tel-aviv" || guideId === "haifa";
+  const conciseGuide = guideId === "jerusalem" || guideId === "tel-aviv" || guideId === "haifa" || guideId === "ein-bokek";
   const inlinePrivate = conciseGuide && option.id === "private";
   return (
     <section id={sectionId(option.id)} aria-labelledby={sectionId(option.id) + "-h"} className="mt-12 scroll-mt-28">
@@ -254,6 +254,7 @@ function OptionSection({ option, guideId }: { option: JourneyOption; guideId: Ai
       {guideId === "jerusalem" && option.id === "rail" && <JerusalemRailDetails guide={airportJourneyGuides.jerusalem} />}
       {guideId === "tel-aviv" && option.id === "rail" && <TelAvivRailDetails guide={airportJourneyGuides["tel-aviv"]} />}
       {guideId === "haifa" && option.id === "rail" && <HaifaRailDetails guide={airportJourneyGuides.haifa} />}
+      {guideId === "ein-bokek" && option.id === "rail" && <EinBokekPublicTransportDetails guide={airportJourneyGuides["ein-bokek"]} />}
       {guideId === "jerusalem" && option.id === "taxi" && <UsefulJourneyLink label="Official airport taxi pickup instructions" href="https://www.gett.com/il/airport-en/" context="Check the ride-code procedure and the pickup point for your terminal." />}
       {guideId === "jerusalem" && option.id === "bus" && <UsefulJourneyLink label="Check bus 485 departures" href="https://bus.gov.il/" context="Find the actual timetable and boarding stop for your travel date." />}
       {inlinePrivate && <UsefulJourneyLink label="Send me a message using the form below" href="#request-quote" context="Share your flight, destination and luggage details. I'll confirm availability and the price before you book." />}
@@ -264,6 +265,8 @@ function OptionSection({ option, guideId }: { option: JourneyOption; guideId: Ai
       {guideId === "haifa" && option.id === "rail" && <UsefulJourneyLink label="Israel Railways — check trains and fares" href="https://www.rail.co.il/" context="Check the exact Haifa station, ticket cost and live service, particularly with the nationwide timetable change planned for November 14, 2026." />}
       {guideId === "haifa" && option.id === "taxi" && <UsefulJourneyLink label="Official Gett airport taxi pickup" href="https://www.gett.com/il/airport-en/" context="Get the ride code and follow the authorized taxi queue: Terminal 3 Exit 03, or the main arrivals exit at Terminal 1." />}
       {guideId === "haifa" && option.id === "bus" && <UsefulJourneyLink label="Verify Egged bus 905 departures" href="https://bus.gov.il/" context="Check the dated Saturday-night or early-Sunday timetable, Terminal 3 Level 2 or Terminal 1 stop, and your Haifa drop-off." />}
+      {guideId === "ein-bokek" && option.id === "taxi" && <UsefulJourneyLink label="Official Gett airport taxi pickup instructions" href="https://www.gett.com/il/airport-en/" context="Get your ride code at the airport and follow the official queue; ask the driver to confirm the exact Ein Bokek or Neve Zohar hotel." />}
+      {guideId === "ein-bokek" && option.id === "rental" && <UsefulJourneyLink label="Israel Meteorological Service — flood and weather warnings" href="https://ims.gov.il/en/warning" context="Check warnings for the Judean Desert and Dead Sea, plus official road closures, before driving on Route 90. Do not drive through flooded roads." />}
       {!conciseGuide && <div className="mt-4 rounded-xl bg-secondary/50 p-5">
         <h4 className="font-semibold">Before choosing this option</h4>
         <ul className="mt-2 list-disc space-y-1 pl-5 text-sm leading-relaxed">
@@ -278,7 +281,7 @@ function OptionSection({ option, guideId }: { option: JourneyOption; guideId: Ai
 export function AirportJourneyPage({ id }: { id: AirportJourneyId }) {
   const g = airportJourneyGuides[id];
   const privateRate = rateFor(id);
-  const focusedLayout = id === "jerusalem" || id === "tel-aviv" || id === "haifa";
+  const focusedLayout = id === "jerusalem" || id === "tel-aviv" || id === "haifa" || id === "ein-bokek";
   const displayOptions = id === "tel-aviv"
     ? ["rail", "taxi", "private", "bus", "weekend", "rental"].map(optionId => g.options.find(option => option.id === optionId)!)
     : g.options;
@@ -395,7 +398,7 @@ export function AirportJourneyPage({ id }: { id: AirportJourneyId }) {
       <Section id="tips" title="Practical tips to avoid missed connections and extra costs">
         <ul className="list-disc space-y-3 pl-5">{g.advice.map(t=><li key={t}>{t}</li>)}</ul>
         <p>For first-time arrivals, read my <Link to="/travel-blog/ben-gurion-airport-arrival-tips/" className="text-primary underline">airport arrivals checklist</Link> and save the operator's contact details offline.</p>
-        {(id === "tel-aviv" || id === "haifa") && <p className="mt-4 text-sm leading-relaxed">Need mobile data for railway updates, maps or taxi apps? Compare activation and coverage options in my <Link to="/travel-blog/best-esim-for-israel/" className="font-semibold text-primary underline underline-offset-4">Israel eSIM guide</Link> before you land.</p>}
+        {(id === "tel-aviv" || id === "haifa" || id === "ein-bokek") && <p className="mt-4 text-sm leading-relaxed">Need mobile data for railway updates, maps or taxi apps? Compare activation and coverage options in my <Link to="/travel-blog/best-esim-for-israel/" className="font-semibold text-primary underline underline-offset-4">Israel eSIM guide</Link> before you land.</p>}
       </Section>
       <FaqList faqs={g.faqs}/>
       {!focusedLayout && sourceBlock}
