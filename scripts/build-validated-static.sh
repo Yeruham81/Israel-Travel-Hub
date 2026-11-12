@@ -8,6 +8,14 @@ if [[ "${HOSTINGER_STATIC_BUILD:-}" != "true" ]]; then
   exit 1
 fi
 
+# Only on explicit opt-in does this read the selected Sanity perspective and
+# generate a local, typed snapshot. No browser API calls or Sanity writes.
+# An absent or invalid approved document fails closed instead of deploying
+# stale/mixed content after SANITY_UBER_SOURCE was requested.
+if [[ -n "${SANITY_UBER_SOURCE:-}" ]]; then
+  node scripts/sanity/fetch-uber.mjs
+fi
+
 log="$(mktemp)"
 trap 'rm -f "$log"' EXIT
 
