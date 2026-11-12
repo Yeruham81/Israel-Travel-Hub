@@ -93,7 +93,7 @@ describe("October planning, city and heritage guide migration", () => {
     }
     for (const [id, journey] of Object.entries(airportJourneyGuides)) {
       const options = journey.related.flatMap(link => guideDirectory.filter(entry => entry.to === link.to)).map(guide => ({ guide }));
-      const cards = uniqueGuideCardPhotos(options, [journey.hero.src]);
+      const cards = uniqueGuideCardPhotos(options, [journey.photo.src]);
       for (const card of cards) if (!card.cardPhoto) problems.push(id + " → " + card.guide.id);
       if (repeatedPhotos(cards.map(card => card.cardPhoto?.src || "")).length) problems.push(id + " → repeated photos");
     }
