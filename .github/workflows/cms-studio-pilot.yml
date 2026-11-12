@@ -49,6 +49,8 @@ jobs:
         run: npm run typecheck
       - name: Validate Uber guide import (read-only)
         run: npm run check:uber
+      - name: Test static Uber content adapter (no network)
+        run: node ../scripts/sanity/uber-adapter.test.mjs
       - name: Build Studio assets
         run: npm run build
 
