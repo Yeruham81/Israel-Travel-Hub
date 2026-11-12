@@ -1027,7 +1027,7 @@ telAviv: {
     photo: migrationPhotos["EXISTING:coast"],
     facts: [
       { label: "Best starting point", text: "Walk locally; check buses and the Red Line light rail for cross-town trips" },
-      { label: "How to pay", text: "Rav-Kav or an authorized app; card taps are not universal" },
+      { label: "How to pay", text: "Rav-Kav card or an authorized app; card taps are not yet universal" },
       { label: "Weekend travel", text: "Normal services pause; check the free municipal weekend map" },
     ],
     comparison: {
