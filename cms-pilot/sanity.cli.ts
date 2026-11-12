@@ -1,13 +1,14 @@
 import {defineCliConfig} from 'sanity/cli'
 
 /**
- * For Sanity-hosted Studio deployments only.
- * Deployment authorization is provided by the CLI session locally or
- * SANITY_AUTH_TOKEN in CI. Never commit tokens into this file.
+ * First hosted deployment: explicitly set a Studio hostname so CI never
+ * asks an interactive question. This only deploys the editorial interface,
+ * not the public website or its Hostinger release.
  */
 export default defineCliConfig({
   api: {
     projectId: 'ekfs0mfw',
     dataset: 'production',
   },
+  studioHost: 'israel-taxi-travel-ekfs0mfw',
 })
