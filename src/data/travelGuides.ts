@@ -46,7 +46,7 @@ export type GuideSection = GuideSubsection & { subsections?: GuideSubsection[] }
 export type GuideReading = { label: string; href: string; note: string };
 export type TravelGuide = {
   id: TravelGuideId; title: string; description: string; intro: string; answer: string; updatedAt?: string;
-  topics: GuideTopicId[]; photo: GuidePhoto; facts: { label: string; text: string }[];
+  topics: GuideTopicId[]; photo: GuidePhoto; facts: { label: string; text: string; link?: { text: string; href: string } }[];
   comparison: { caption: string; headers: string[]; rows: string[][] };
   sections: GuideSection[]; checklist: string[]; faqs: { q: string; a: string }[];
   faqGroups?: { title: string; indexes: number[] }[];
@@ -1028,7 +1028,7 @@ telAviv: {
     facts: [
       { label: "Best starting point", text: "Walk locally; check buses and the Red Line light rail for cross-town trips" },
       { label: "How to pay", text: "Rav-Kav card or an authorized app; card taps are not yet universal" },
-      { label: "Weekend travel", text: "Normal services pause; check the free municipal weekend map" },
+      { label: "Weekend travel", text: "Normal services pause; check the free municipal weekend map", link: { text: "weekend map", href: "https://experience.arcgis.com/experience/9f4b2c7f7143485a887e8576a15ce8e7/" } },
     ],
     comparison: {
       caption: "Getting around Tel Aviv at a glance",
