@@ -703,7 +703,7 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
               "Use the national journey planner with your actual start and end addresses. Check the boarding side of the street, whether you need to change vehicles, ticket acceptance and the last return bus. Public transport information may be incomplete during diversions, holidays or security-related changes.",
             ],
             photo: {
-              src: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a9/PikiWiki_Israel_74165_egged_bus.jpg/960px-PikiWiki_Israel_74165_egged_bus.jpg",
+              src: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cc/PikiWiki_Israel_74165_egged_bus.jpg/960px-PikiWiki_Israel_74165_egged_bus.jpg",
               alt: "Egged public bus operating in Tel Aviv",
               credit: "Davidi Vardi · PikiWiki Israel · CC BY 2.5 · resized",
               sourceUrl: "https://commons.wikimedia.org/wiki/File:PikiWiki_Israel_74165_egged_bus.jpg",
