@@ -22,6 +22,7 @@ import { heritageGuides } from "@/data/guideHeritage2026";
 import { journeyDestinationGuides } from "@/data/guideJourneys2026";
 import { taxiGuideCluster } from "@/data/taxiGuideCluster";
 import { applyJerusalemGuideEditorial } from "@/data/jerusalemClusterEditorial";
+import { sanityUberGuide } from "@/data/generated/sanityUberSnapshot";
 
 export const guideTopics = [
   { id: "transportation", label: "Transportation" },
@@ -37,7 +38,8 @@ export const guideTopics = [
 export type GuideTopicId = typeof guideTopics[number]["id"];
 export type GuidePhoto = { src: string; alt: string; sourceUrl?: string; credit?: string; licenseUrl?: string };
 export type GuideTable = { caption: string; headers: string[]; rows: string[][]; note?: string; rowLinks?: ({ to: LinkProps["to"]; label?: string } | { href: string; label?: string } | null)[] };
-export type GuideSubsection = { id: string; title: string; paragraphs: string[]; bullets?: string[]; steps?: string[]; sourceIds?: string[]; photo?: GuidePhoto; links?: { label: string; to: LinkProps["to"] }[]; inlineLinks?: { text: string; to: LinkProps["to"] }[]; externalLinks?: { label: string; href: string }[]; highlightedLinks?: { label: string; href: string; context: string }[]; tables?: GuideTable[] };
+export type GuideInlineSpan = { text: string; to?: LinkProps["to"]; href?: string; marks?: ("strong" | "em" | "underline" | "code")[] };
+export type GuideSubsection = { id: string; title: string; paragraphs: string[]; richParagraphs?: GuideInlineSpan[][]; bullets?: string[]; steps?: string[]; sourceIds?: string[]; photo?: GuidePhoto; links?: { label: string; to: LinkProps["to"] }[]; inlineLinks?: { text: string; to: LinkProps["to"] }[]; externalLinks?: { label: string; href: string }[]; highlightedLinks?: { label: string; href: string; context: string }[]; tables?: GuideTable[] };
 export type GuideSection = GuideSubsection & { subsections?: GuideSubsection[] };
 export type GuideReading = { label: string; href: string; note: string };
 export type TravelGuide = {
@@ -1053,6 +1055,10 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
 
 // Enrich the already-migrated Jerusalem pages while retaining their full sections.
 applyJerusalemGuideEditorial(travelGuides);
+
+// Only the selected, validated Sanity build snapshot overrides the Uber guide.
+// Ordinary builds continue using the source-controlled content.
+if (sanityUberGuide) travelGuides.uber = sanityUberGuide;
 
 export type GuideDirectoryEntry = { id: string; title: string; description: string; to: LinkProps["to"]; topics: GuideTopicId[]; photo?: GuidePhoto };
 export const guideDirectory: GuideDirectoryEntry[] = [
