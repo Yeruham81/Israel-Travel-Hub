@@ -2,7 +2,7 @@ import { Link, type LinkProps } from "@tanstack/react-router";
 import { Fragment, type ReactNode } from "react";
 import { BookOpen } from "lucide-react";
 import { Breadcrumbs, Checklist, FaqList, OnThisPage, ProviderCard, RelatedLinks, SourceList } from "@/components/Guide";
-import { guideTopics, travelGuides, type GuideDirectoryEntry, type GuidePhoto, type GuideTopicId, type GuideSection, type GuideTable, type TravelGuide } from "@/data/travelGuides";
+import { guideTopics, travelGuides, type GuideDirectoryEntry, type GuidePhoto, type GuideTopicId, type GuideSection, type GuideInlineSpan, type GuideTable, type TravelGuide } from "@/data/travelGuides";
 import { publicSources, isPublisherUrl, linksForPage, travelGuidePaths, TRAVEL_GUIDE_CHECK_DATE, type TravelGuideId } from "@/data/registry";
 import { CANONICAL_ORIGIN, SITE_NAME, jsonLd, pageMeta } from "@/lib/site";
 import { authorLd } from "@/lib/author";
@@ -155,6 +155,21 @@ export function GuideParagraph({ paragraph, inlineLinks }: { paragraph: string; 
   return <>{parts}</>;
 }
 
+
+/** Preserve Portable Text link spans and inline emphasis within the original guide layout. */
+function GuideRichParagraph({ spans }: { spans: GuideInlineSpan[] }) {
+  return <>{spans.map((span, index) => {
+    let node: ReactNode = span.text;
+    if (span.marks?.includes("code")) node = <code className="rounded bg-secondary px-1 py-0.5 text-sm">{node}</code>;
+    if (span.marks?.includes("strong")) node = <strong>{node}</strong>;
+    if (span.marks?.includes("em")) node = <em>{node}</em>;
+    if (span.marks?.includes("underline")) node = <u>{node}</u>;
+    if (span.to) node = <Link to={span.to} className="font-medium text-primary underline underline-offset-4 hover:text-primary/80 focus-visible:outline-2 focus-visible:outline-primary">{node}</Link>;
+    if (span.href) node = <a href={span.href} target="_blank" rel="noopener noreferrer" className="font-medium text-primary underline underline-offset-4 hover:text-primary/80">{node}<span className="sr-only"> (opens in a new tab)</span></a>;
+    return <Fragment key={index}>{node}</Fragment>;
+  })}</>;
+}
+
 export function TravelGuidePage({ id }: { id: TravelGuideId }) {
   const guide = travelGuides[id];
   const providers = guide.providerPageId ? linksForPage(guide.providerPageId) : [];
@@ -216,7 +231,7 @@ export function TravelGuidePage({ id }: { id: TravelGuideId }) {
         <div className="mt-4 max-w-4xl space-y-4 leading-relaxed text-foreground">
           {section.paragraphs.map((paragraph, paragraphIndex) => (
             <Fragment key={paragraphIndex}>
-              <p><GuideParagraph paragraph={paragraph} inlineLinks={section.inlineLinks} /></p>
+              <p>{section.richParagraphs?.[paragraphIndex] ? <GuideRichParagraph spans={section.richParagraphs[paragraphIndex]} /> : <GuideParagraph paragraph={paragraph} inlineLinks={section.inlineLinks} />}</p>
               {paragraphIndex === 0 && section.photo && <GuideSectionPhoto photo={section.photo} />}
             </Fragment>
           ))}
