@@ -5,6 +5,13 @@ on:
     types: [opened, synchronize, reopened, labeled]
     paths:
       - 'cms-pilot/**'
+      - 'scripts/sanity/**'
+      - 'scripts/build-validated-static.sh'
+      - 'src/data/travelGuides.ts'
+      - 'src/data/registry.ts'
+      - 'src/data/generated/sanityUberSnapshot.ts'
+      - 'src/components/TravelGuide.tsx'
+      - '.github/workflows/cms-uber-static-preview.yml'
       - '.github/workflows/cms-studio-pilot.yml'
   workflow_dispatch:
     inputs:
