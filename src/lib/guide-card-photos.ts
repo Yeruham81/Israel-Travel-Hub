@@ -5,6 +5,22 @@ import { itineraries, type ItineraryId } from "@/data/israelItineraries";
 import { migrationPhotos } from "@/data/guideMigrationPhotos";
 import telAvivDizengoff from "@/assets/tel-aviv/dizengoff.webp";
 import haifaBotanica from "@/assets/haifa/botanica.webp";
+import jerusalemMamilla from "@/assets/jerusalem/mamilla.webp";
+import telAvivRothschild from "@/assets/tel-aviv/rothschild.webp";
+import tiberiasWaterfront from "@/assets/tiberias/waterfront.webp";
+import haifaPort from "@/assets/home/haifa-port.webp";
+import roadTrip from "@/assets/home/road-trip.webp";
+import jerusalemDowntown from "@/assets/jerusalem/downtown.webp";
+import tiberiasSunrise from "@/assets/tiberias/sunrise.webp";
+import deadSeaSunbeds from "@/assets/dead-sea/sunbeds.webp";
+import caesareaHero from "@/assets/home/hero-caesarea.webp";
+import jerusalemNavon from "@/assets/airport-journeys/jerusalem-navon-platform.webp";
+import airportArrival from "@/assets/airport-transfers/airport.webp";
+import jerusalemGermanColony from "@/assets/jerusalem/german-colony.webp";
+import telAvivNorth from "@/assets/tel-aviv/old-north.webp";
+import tiberiasHeritage from "@/assets/tiberias/heritage.webp";
+import deadSeaPool from "@/assets/dead-sea/pool.webp";
+import masadaCableCar from "@/assets/home/masada-cable-car.webp";
 
 /** Editorially verified local alternatives when two guides share a cover image. */
 const guideCardAlternatives: Record<string, { src: string; alt: string }[]> = {
@@ -14,6 +30,22 @@ const guideCardAlternatives: Record<string, { src: string; alt: string }[]> = {
   taxiFares: [{ src: "/images/guides/taxi-in-tel-aviv.webp", alt: "Licensed white taxis in Tel Aviv" }],
   telAviv: [{ src: telAvivDizengoff, alt: "Dizengoff area streets in central Tel Aviv, useful for exploring the city" }],
   "stay-haifa": [{ src: haifaBotanica, alt: "Boutique hotel in Haifa, illustrating accommodation options in the city" }],
+  "attraction-old-city-jerusalem": [{ src: jerusalemMamilla, alt: "Mamilla district at the approach to Jerusalem's Old City" }],
+  "attraction-attractions-in-tel-aviv": [{ src: telAvivRothschild, alt: "Rothschild Boulevard, an area for exploring Tel Aviv's city attractions" }],
+  "attraction-sea-of-galilee": [{ src: tiberiasWaterfront, alt: "Tiberias waterfront on the Sea of Galilee" }],
+  "attraction-haifa": [{ src: haifaPort, alt: "Haifa port and waterfront district" }],
+  travelTips: [{ src: roadTrip, alt: "Road trip through Israel, illustrating practical trip planning" }],
+  calendar: [{ src: jerusalemDowntown, alt: "Downtown Jerusalem, a setting for local events and city activities" }],
+  yardenit: [{ src: tiberiasSunrise, alt: "Sunrise over the Sea of Galilee near the southern Jordan River region" }],
+  deadSea: [{ src: deadSeaSunbeds, alt: "Sun loungers along the Dead Sea hotel coast" }],
+  topTen: [{ src: caesareaHero, alt: "Ancient coastal ruins at Caesarea, one of Israel's visitor attractions" }],
+  israel: [{ src: jerusalemNavon, alt: "Train platform at Jerusalem Yitzhak Navon station for travel in Israel" }],
+  airportTaxis: [{ src: airportArrival, alt: "Ben Gurion Airport pickup and transport area" }],
+  "stay-jerusalem": [{ src: jerusalemGermanColony, alt: "German Colony neighborhood, a Jerusalem accommodation area" }],
+  "stay-telaviv": [{ src: telAvivNorth, alt: "Old North neighborhood of Tel Aviv with nearby accommodation" }],
+  "stay-tiberias": [{ src: tiberiasHeritage, alt: "Tiberias historic center near hotel districts" }],
+  "stay-deadsea": [{ src: deadSeaPool, alt: "Resort pool in the Dead Sea hotel region" }],
+  masada: [{ src: masadaCableCar, alt: "Cable car at Masada overlooking the desert region" }],
 };
 
 /**
