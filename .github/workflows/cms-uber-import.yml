@@ -15,7 +15,7 @@ jobs:
   import-uber-draft:
     name: Create Uber guide draft (one time, never overwrite)
     if: >-
-      \${{ github.event.action == 'labeled'
+      ${{ github.event.action == 'labeled'
           && github.event.label.name == 'cms-import-uber'
           && github.event.pull_request.number == 12
           && github.event.pull_request.head.repo.full_name == github.repository
@@ -29,7 +29,7 @@ jobs:
       - name: Checkout selected pilot commit
         uses: actions/checkout@v4
         with:
-          ref: \${{ github.event.pull_request.head.sha }}
+          ref: ${{ github.event.pull_request.head.sha }}
           persist-credentials: false
       - name: Setup Node
         uses: actions/setup-node@v4
@@ -41,7 +41,7 @@ jobs:
         run: npm run check:uber
       - name: Create draft and required public source references
         env:
-          SANITY_IMPORT_TOKEN: \${{ secrets.SANITY_IMPORT_TOKEN }}
+          SANITY_IMPORT_TOKEN: ${{ secrets.SANITY_IMPORT_TOKEN }}
         run: |
           if [ -z "$SANITY_IMPORT_TOKEN" ]; then
             echo "SANITY_IMPORT_TOKEN secret is not configured." >&2
