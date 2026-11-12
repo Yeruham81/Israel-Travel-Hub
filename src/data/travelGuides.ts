@@ -629,7 +629,7 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
     id: "israel",
     title: "Getting Around Israel: Trains, Buses, Taxis & Travel Tips",
     description: "Getting around Israel: trains, buses, Rav-Kav, mobile payments, taxis, Shabbat travel, rental cars and practical routes between major cities.",
-    intro: "You can explore much of Israel without renting a car for your entire visit. Learn which transport works for different regions, how to pay for it, and what to check before you set off—especially with luggage, children or Shabbat travel.",
+    intro: "Getting around Israel is easier with a well-planned itinerary and transport choices that suit each region. Compare trains, buses, light rail, taxis and other available options, considering connections between destinations, payment methods and Shabbat services.",
     answer: "For rail-connected cities such as Tel Aviv, Jerusalem and Haifa, start by comparing trains and buses for your full door-to-door trip. Use city buses, operating light rail, the Haifa Metronit and walking for local journeys. Tourists can generally pay with a preloaded anonymous Rav-Kav card or an approved mobile payment app; ordinary bus drivers do not accept cash, and direct bank-card taps are not yet universal. Licensed taxis and confirmed transfers help with awkward last-mile connections or Shabbat, while a rental car suits more remote or multi-stop itineraries. Always check your exact route, payment method and return departure.",
     topics: ["transportation", "destinations", "itineraries", "tips"],
     updatedAt: "2026-11-12",
@@ -639,7 +639,7 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
     },
     facts: [
       { label: "Between cities", text: "Compare the train and direct bus for your actual station and address" },
-      { label: "How to pay", text: "Bring a loaded Rav-Kav or set up an approved app before boarding" },
+      { label: "How to pay", text: "Bring a loaded Rav-Kav card or set up an approved app before boarding" },
       { label: "Shabbat & holidays", text: "Plan a separate itinerary; regular services often pause" },
     ],
     comparison: {
@@ -680,8 +680,8 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
             id: "israel-trains", title: "Israel Railways: intercity trains and airport connections",
             paragraphs: [
               "Israel Railways connects Ben Gurion Airport and many destinations including Tel Aviv, Jerusalem, Haifa, Akko and Be'er Sheva. Choose the real railway station closest to your destination; Tel Aviv's mainline stations are inland, Jerusalem–Yitzhak Navon is near the central bus station rather than the Old City, and Haifa's coastal railway stops can be far below Mount Carmel hotels.",
-              "From Saturday night, November 14, 2026, Israel Railways is introducing a revised timetable, including longer through services from Jerusalem via Tel Aviv to several northern stations. Check the train planner for your actual date and whether a change of train is required, rather than relying on a fixed service frequency.",
-              "As of the August 2026 Israel Railways notice, travel to or from Jerusalem–Yitzhak Navon requires a separate free personal voucher for the selected train, in addition to a valid rail ticket. You can request the voucher starting 72 hours before departure. Check the latest instructions for your date: the voucher is not a replacement ticket. For flight-specific terminal access, see the airport arrival guide.",
+              "From November 2026, Israel Railways' revised timetable includes longer through services from Jerusalem via Tel Aviv to several northern stations. Some journeys still require a change of trains.",
+              "As of the August 2026 Israel Railways notice, travel to or from Jerusalem–Yitzhak Navon requires a separate free personal voucher for the selected train, in addition to a valid rail ticket. You can request the voucher starting 72 hours before departure. Check the latest instructions for your date: the voucher is not a replacement ticket. For flight-specific terminal access, see my airport arrival guide.",
             ],
             steps: [
               "Up to 72 hours before the journey, search from or to Jerusalem–Yitzhak Navon on the official Israel Railways planner and select your exact train.",
@@ -763,7 +763,7 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
           {
             id: "israel-ticket-rules", title: "Cash, contactless cards, transfers and children",
             paragraphs: [
-              "Ordinary buses do not normally sell tickets for cash onboard. A railway station may offer ticket machines or staffed counters, with payment options varying by location. Egged introduced contactless credit-card and digital-wallet validation in January 2026 on supported lines in Eilat, Jerusalem and metropolitan Haifa. This does not mean all Israeli buses or operators accept direct bank-card taps.",
+              "Ordinary buses do not normally sell tickets for cash onboard. A railway station may offer ticket machines or staffed counters, with payment options varying by location. Egged introduced contactless credit-card and digital-wallet validation in January 2026 on supported lines in Eilat, Jerusalem and metropolitan Haifa. Coverage is expected to expand gradually, but as of November 2026, direct bank-card taps are not yet universally accepted across Israeli buses and operators.",
               "Egged's supported contactless validators accept international Visa and Mastercard cards, but do not apply passenger profile discounts or the standard Rav-Kav/app fare benefits. They are intended for a full-fare single journey. Carry a loaded Rav-Kav or supported app as a backup; transfer or day-pass benefits vary by payment system, distance and mode. Check child fares and how to validate each passenger.",
             ],
             highlightedLinks: [{ label: "Egged — where credit-card taps work", href: "https://www.egged.co.il/en/information-for-passengers/rav-kav-and-payment-apps", context: "Egged specifies the pilot areas, supported international cards and its full-fare single-journey rules. Do not assume other operators use the same system." }],
@@ -803,7 +803,7 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
             id: "israel-airport-options", title: "Arriving at Ben Gurion Airport",
             paragraphs: [
               "From Terminal 3, use the airport railway where it serves your destination. For door-to-door travel, the authorized airport taxis use the official Gett or self-service kiosk ride code and a designated queue; a privately arranged airport transfer is separate and must be confirmed in advance.",
-              "The airport arrival guide explains passport control, baggage and reaching the transport areas. The Ben Gurion Airport taxi guide covers the authorized pickup procedure. Before an early flight or a Shabbat arrival, also check the airport Shabbat guide for operating-day limitations.",
+              "My airport arrival guide explains passport control, baggage and reaching the transport areas. My Ben Gurion Airport taxi guide covers the authorized pickup procedure. Before an early flight or a Shabbat arrival, also check the airport Shabbat guide for operating-day limitations.",
             ],
             inlineLinks: [
               { text: "airport arrival guide", to: travelGuidePaths.arrival },
