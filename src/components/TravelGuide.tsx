@@ -1,4 +1,4 @@
-import { Link } from "@tanstack/react-router";
+import { Link, type LinkProps } from "@tanstack/react-router";
 import { Fragment, type ReactNode } from "react";
 import { BookOpen } from "lucide-react";
 import { Breadcrumbs, Checklist, FaqList, OnThisPage, ProviderCard, RelatedLinks, SourceList } from "@/components/Guide";
@@ -127,7 +127,7 @@ function GuideDataTable({ table, nested = false, mobileGuidance = false }: { tab
         <thead className="bg-secondary"><tr>{table.headers.map((h, i) => <th key={h} scope="col" className={"p-3 font-semibold " + (mobileGuidance && i === 0 ? "sticky left-0 z-10 bg-secondary shadow-[1px_0_0_0_var(--border)]" : "")}>{h}</th>)}</tr></thead>
         <tbody className="divide-y">{table.rows.map((row, i) => <tr key={i} className="bg-card">{row.map((cell, j) => j === 0
           ? <th scope="row" key={j} className={"p-3 font-medium " + (mobileGuidance ? "sticky left-0 z-10 bg-card shadow-[1px_0_0_0_var(--border)]" : "")}>
-              {table.rowLinks?.[i] ? ("to" in table.rowLinks[i]! ? <Link to={(table.rowLinks[i]! as { to: string }).to as GuideSection["links"][number]["to"]} className="font-medium text-primary underline underline-offset-4">{cell}</Link> : <a href={(table.rowLinks[i]! as { href: string }).href} target="_blank" rel="noopener noreferrer" aria-label={(table.rowLinks[i]! as { href: string; label?: string }).label || cell} className="font-medium text-primary underline underline-offset-4">{cell}<span className="sr-only"> (opens in a new tab)</span></a>) : cell}
+              {table.rowLinks?.[i] ? ("to" in table.rowLinks[i]! ? <Link to={(table.rowLinks[i]! as { to: string }).to as LinkProps["to"]} className="font-medium text-primary underline underline-offset-4">{cell}</Link> : <a href={(table.rowLinks[i]! as { href: string }).href} target="_blank" rel="noopener noreferrer" aria-label={(table.rowLinks[i]! as { href: string; label?: string }).label || cell} className="font-medium text-primary underline underline-offset-4">{cell}<span className="sr-only"> (opens in a new tab)</span></a>) : cell}
             </th>
           : <td key={j} className="p-3 leading-relaxed">{cell}</td>)}</tr>)}</tbody>
       </table>
