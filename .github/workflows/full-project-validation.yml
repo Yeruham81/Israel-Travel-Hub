@@ -63,6 +63,9 @@ jobs:
       - name: Run all tests
         run: bun run test
 
+      - name: Verify Sanity Uber guide conversion and source integrity
+        run: node --test scripts/sanity/uber-adapter.test.mjs
+
       # Match the same static build that will be published to Premium hosting.
       # Running only the ordinary SSR build can miss prerender-specific failures.
       - name: Validate Hostinger prerender before any deployment is eligible
