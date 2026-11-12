@@ -83,3 +83,26 @@ specification from the planning conversation.
 **Security:** Never commit secrets, browser-visible write tokens or
 contact submissions. The root `.gitignore` already excludes local `.env*`
 files other than `.env.example`.
+
+
+## Optional GitHub Actions deployment (prepared, not yet active)
+
+The draft branch includes `.github/workflows/cms-studio-pilot.yml`.
+It validates the Studio and can deploy **only the editor** to
+`<studio_hostname>.sanity.studio` after an explicit workflow dispatch.
+
+This workflow is on a **draft branch**, so it is not available as a normal
+manual Action until the workflow file is present on GitHub's default branch.
+
+Once the schema has been validated and the workflow is approved:
+
+1. In Sanity Manage → Israel Taxi & Travel → API → Tokens, create a token
+   with the **Deploy Studio** grant (not an administrator/content-write token).
+2. Store it directly in the GitHub repository at
+   Settings → Secrets and variables → Actions as the repository secret
+   `SANITY_AUTH_TOKEN`. **Never send the token in chat**.
+3. Run the `CMS pilot - Validate or deploy Sanity Studio` workflow
+   with `deploy_studio = true`, using an unused studio hostname.
+
+Studio deployment does not affect Hostinger. It also does not automatically
+publish or migrate content to the site's public HTML.
