@@ -304,6 +304,20 @@ describe("migrated practical guides", () => {
       { text: "airport Shabbat transport guide", to: travelGuidePaths.shabbat },
     ]));
     expect(guide.faqs).toHaveLength(18);
+    expect(guide.faqGroups).toHaveLength(3);
+    expect(guide.faqGroups!.flatMap(group => group.indexes).sort((a, b) => a - b)).toEqual([...Array(18).keys()]);
+    expect(guide.photo.src).toContain("Israel_Tel_Aviv_Egged_buses.jpg");
+    expect(guide.photo.credit).toMatch(/Eurovaran.*CC BY-SA 4.0/);
+    expect(guide.photo.licenseUrl).toBe("https://creativecommons.org/licenses/by-sa/4.0/");
+    const rail = guide.sections.find(section => section.id === "public-transport")!.subsections!.find(sub => sub.id === "israel-trains")!;
+    expect(rail.steps).toHaveLength(3);
+    expect(rail.steps!.join(" ")).toMatch(/72 hours.*SMS verification.*valid rail ticket/s);
+    const bankCard = payment.subsections!.find(sub => sub.id === "israel-ticket-rules")!;
+    expect(bankCard.paragraphs.join(" ")).toMatch(/Eilat, Jerusalem and metropolitan Haifa/);
+    expect(bankCard.paragraphs.join(" ")).toMatch(/international Visa and Mastercard/);
+    expect(bankCard.sourceIds).toContain("guide-egged-card-payment-2026");
+    const popular = guide.sections.find(section => section.id === "planning")!.subsections!.find(sub => sub.id === "israel-popular-journeys")!;
+    expect(popular.tables?.[0]?.rowLinks).toHaveLength(4);
     expect(guide.related).toHaveLength(6);
     expect(guide.services).toHaveLength(4);
     expect(guide.sourceIds).toEqual(expect.arrayContaining([
@@ -334,6 +348,23 @@ describe("migrated practical guides", () => {
     const { container } = render(<RouterContextProvider router={router}><Page /></RouterContextProvider>);
     const guide = travelGuides.israel;
     expect(container.querySelector('section[aria-label="Transport planning essentials"]')?.children).toHaveLength(3);
+    expect(container.querySelector('header figure img')?.getAttribute("src")).toBe(guide.photo.src);
+    expect(container.querySelector('header figure details a[href="https://creativecommons.org/licenses/by-sa/4.0/"]')).not.toBeNull();
+    const topicsNav = container.querySelector('nav[aria-label="Quick transport topics"]')!;
+    expect(topicsNav.querySelectorAll('a[href^="#"]')).toHaveLength(4);
+    for (const link of topicsNav.querySelectorAll<HTMLAnchorElement>('a[href^="#"]')) {
+      expect(container.querySelector(link.getAttribute("href")!)).not.toBeNull();
+    }
+    const voucher = container.querySelector('#israel-trains [aria-label="Step-by-step instructions"]')!;
+    expect(voucher.querySelectorAll("ol > li")).toHaveLength(3);
+    expect(voucher.textContent).toMatch(/72 hours/);
+    const routeTable = container.querySelector('[aria-label="Common trips: the first option to compare"]')!;
+    expect(routeTable.querySelectorAll("tbody th a")).toHaveLength(4);
+    expect(container.querySelectorAll('[role="region"] table th.sticky').length).toBeGreaterThanOrEqual(2);
+    expect(container.querySelectorAll('.sm\\:hidden')).not.toHaveLength(0);
+    const faq = container.querySelector("#faq")!;
+    expect(faq.querySelectorAll("h3")).toHaveLength(3);
+    expect(faq.querySelectorAll("details")).toHaveLength(18);
     const table = screen.getByRole("table", { name: guide.comparison.caption });
     expect(within(table).getAllByRole("columnheader")).toHaveLength(5);
     expect(within(table).getAllByRole("row")).toHaveLength(8);
