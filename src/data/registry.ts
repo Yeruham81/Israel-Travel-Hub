@@ -4,6 +4,7 @@
  */
 import type { TourProduct, TourBookingOffer } from "@/data/tourTypes";
 import { migrationSources } from "@/data/guideMigrationSources";
+import { sanityUberSources } from "@/data/generated/sanityUberSnapshot";
 import { neighborhoodHotelAdditions, neighborhoodHotelSources } from "@/data/neighborhoodHotels";
 import kiwitaxiLogo from "@/assets/providers/kiwitaxi.svg";
 import welcomePickupsLogo from "@/assets/providers/welcome-pickups.svg";
@@ -1778,7 +1779,9 @@ export const offers: Offer[] = [
   },
 ];
 
-export const getSource = (id: string) => sources.find((s) => s.id === id)!;
+// Published Sanity source metadata takes precedence after an explicitly selected build snapshot.
+// Without that snapshot, all source references keep their existing registry values.
+export const getSource = (id: string) => sanityUberSources.find((s) => s.id === id) || sources.find((s) => s.id === id)!;
 
 export const publicSources = (ids: string[]) => [...new Set(ids)].map(getSource).filter((source): source is SourceReference => Boolean(source) && !isPublisherUrl(source.url));
 
