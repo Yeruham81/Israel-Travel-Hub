@@ -6,7 +6,6 @@ import { travelGuidePaths, type TravelGuideId } from "@/data/registry";
 import { airportTransferPhotos } from "@/data/airportTransfers";
 import airportPickup from "@/assets/home/airport-pickup.webp";
 import airportHall from "@/assets/home/ben-gurion-t3.webp";
-import roadTrip from "@/assets/home/road-trip.webp";
 import railPlatform from "@/assets/airport-journeys/ben-gurion-rail-platform.webp";
 import navonPlatform from "@/assets/airport-journeys/jerusalem-navon-platform.webp";
 import telAvivDizengoff from "@/assets/tel-aviv/dizengoff.webp";
@@ -739,12 +738,12 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
           {
             id: "israel-payment-apps", title: "Using a supported ticketing app",
             paragraphs: [
-              "Approved public transport payment apps can include Moovit and Rav-Pass; other supported apps and features can change. Register while you have working data, add a compatible payment method and learn how to validate your journey before boarding. App payments can be settled after travel under applicable fare caps and ticket rules.",
+              "Approved public transport payment apps can include Moovit and Rav-Pass; other supported apps and features can change. Register while you have working data, add a compatible payment method and learn how to validate your journey before boarding. App payments can be settled after travel under applicable fare caps and ticket rules. My Israel eSIM guide explains how to arrange mobile data for these services.",
               "On a city bus, follow the app's QR or location instructions for the correct vehicle or stop. On Israel Railways, use the app's train-trip procedure at the entrance and exit gates; on the Tel Aviv Red Line, validation happens before boarding. Avoid assuming a screenshot or an unused app session counts as a valid ticket.",
             ],
             inlineLinks: [{ text: "Israel eSIM guide", to: travelGuidePaths.esim }],
             sourceIds: ["guide-public-transport-payments", "guide-redline-tickets"],
-            highlightedLinks: [{ label: "Israel eSIM guide — keep access to route and payment apps", href: "https://www.gov.il/he/Departments/Topics/routes-public-transportion", context: "The official Ministry of Transport page lists supported trip-planning options. Set up your data plan and payment app before the first journey." }],
+            highlightedLinks: [{ label: "Official route-planning apps and public transit tools", href: "https://www.gov.il/he/Departments/Topics/routes-public-transportion", context: "The Ministry of Transport lists approved trip-planning tools; prepare your preferred ticketing app and payment method before travel." }],
           },
           {
             id: "israel-ticket-rules", title: "Cash, contactless cards, transfers and children",
