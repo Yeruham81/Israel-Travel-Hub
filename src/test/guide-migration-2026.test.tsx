@@ -16,6 +16,7 @@ import { heritageGuides } from "@/data/guideHeritage2026";
 import { journeyDestinationGuides } from "@/data/guideJourneys2026";
 import { migrationPhotos } from "@/data/guideMigrationPhotos";
 import { filterGuides, guideDirectory, travelGuides } from "@/data/travelGuides";
+import { uniqueGuideCardPhotos } from "@/lib/guide-card-photos";
 import { getSource, isPublisherUrl, publicSources, travelGuidePaths, type TravelGuideId } from "@/data/registry";
 
 afterEach(cleanup);
@@ -68,7 +69,9 @@ describe("October planning, city and heritage guide migration", () => {
     const { container } = render(<RouterContextProvider router={router}><Hub /></RouterContextProvider>);
     const cards = container.querySelectorAll('[data-testid="guide-directory-card"]');
     expect(cards).toHaveLength(69);
-    for (const card of cards) expect(card.querySelector('img[alt], [data-testid="guide-card-placeholder"]')).not.toBeNull();
+    const missing = uniqueGuideCardPhotos(guideDirectory.map(guide => ({ guide }))).filter(entry => !entry.cardPhoto).map(entry => entry.guide.id);
+    expect(missing, "Every directory card must display a suitable actual image").toEqual([]);
+    for (const card of cards) expect(card.querySelector('img[alt]')).not.toBeNull();
     for (const id of ids) expect(container.querySelector(`a[href="${travelGuidePaths[id]}"]`)).not.toBeNull();
     expect(filterGuides("Yardenit").some(guide => guide.to === travelGuidePaths.yardenit)).toBe(true);
     expect(filterGuides("museum", "attractions").some(guide => guide.id === "haifaMuseums")).toBe(true);
