@@ -247,7 +247,7 @@ export function TravelGuidePage({ id }: { id: TravelGuideId }) {
       {providers.length > 0 && <section id="provider-options" aria-labelledby="providers-h" className="mt-14"><h2 id="providers-h" className="text-3xl">Compare current eSIM plans</h2><p className="mt-3 leading-relaxed text-muted-foreground">These options are based on published product information, not an on-location speed test or a cheapest-price ranking. Links marked “Sponsored link” may earn me a commission at no extra cost to you. Select Israel and verify the exact package before paying.</p><ul className="mt-5 grid gap-4 md:grid-cols-2">{providers.map((link) => <ProviderCard key={link.id} link={link} pageId={guide.providerPageId!} />)}</ul></section>}
       <JerusalemPartnerOffers id={id} />
       {isJerusalemCluster && <JerusalemClusterLinks pageKey={id as JerusalemClusterKey} />}
-      <FaqList faqs={guide.faqs} groups={isNationalGuide ? guide.faqGroups : undefined} />
+      <FaqList faqs={guide.faqs} {...(isNationalGuide && guide.faqGroups ? { groups: guide.faqGroups } : {})} />
       {isJerusalemDayJourney && <JerusalemJourneyResources id={id} />}
       {!isNationalGuide && (id === "shabbat" ? <SourceList ids={sourcesFor(guide)} intro="Official airport, public-transport and taxi-tariff references. Confirm timetables, charges and pickup instructions for your date." /> : <SourceList ids={sourcesFor(guide)} />)}
       {!isJerusalemCluster && id !== "shabbat" && <RelatedLinks title="Related practical guides" currentPath={travelGuidePaths[id]} items={guide.related.map((guideId) => ({ label: travelGuides[guideId].title, to: travelGuidePaths[guideId] }))} />}
