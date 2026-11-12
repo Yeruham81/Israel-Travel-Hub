@@ -26,6 +26,16 @@ These rules apply to every travel guide and to future guide updates, not only th
 - Compare routes by the user's whole journey, including terminal, station, final address, bags, Shabbat and real-world access; do not turn informational comparisons into private-transfer advertisements.
 - Verify current timetable, prices, official links and service status before describing them as current. If figures are estimates, label them as such.
 
+## Editorial economy and reader respect
+- **Assume the reader is capable.** Do not explain self-evident facts, add defensive qualifications to ordinary descriptions, or repeat points already made in a paragraph, table or caption.
+- **Every note must add new practical value.** Keep a note only when it clarifies a material exception, legally important restriction, specific accessibility issue, time-sensitive figure or a non-obvious action that changes a travel decision. Otherwise delete the note instead of rephrasing it.
+- Tables should prioritize **useful comparisons and destinations**, not repetitive “check the stop / confirm the exit / verify the schedule” cells. If a column mostly contains generic warnings, remove the column.
+- Do not state that an operator lists the very stations or routes already shown in a sourced table, or remind readers that nearby attractions are not necessarily at the station entrance.
+- Generic advice to check current timetables and return services belongs in one suitable planning section, where it has value; do not repeat it below each transit mode or table.
+- Preserve substantive safety, fare, booking, legal and accessibility caveats **where they make a real difference**. Removing redundant boilerplate must not remove an actual limitation or imply that an unverified service exists.
+- Prefer a short, confident, helpful editorial voice over formulaic hedging. Source references remain available at the end without announcing each source again in body text.
+- Where an as-of date matters to prices or operating rules, express it reader-first (e.g. “Information current as of November 2026”), not as a report of the editor's checking action. Keep exact effective dates when important to planning.
+
 ## Regression and quality gates
 - Maintain tests for a single holiday-calendar link, first paragraph preceding a section image, three-column layout for six cards and unique image identities within card collections.
 - Before publishing, run the full production build, TypeScript checks, all tests and static prerender validation; review the pages visually in mobile and desktop widths.
