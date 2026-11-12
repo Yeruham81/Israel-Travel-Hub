@@ -197,6 +197,51 @@ function HaifaRailDetails({ guide }: { guide: AirportJourneyGuide }) {
   );
 }
 
+/** Dead Sea journeys require two distinct public-transport legs; keep the full connection together. */
+function EinBokekPublicTransportDetails({ guide }: { guide: AirportJourneyGuide }) {
+  return (
+    <>
+      <h4 className="mt-8 text-xl font-semibold">Step 1: Take the airport train to Jerusalem–Yitzhak Navon</h4>
+      <p className="mt-3 leading-relaxed"><GuideParagraph paragraph={guide.trainIntro} inlineLinks={guide.stationLinks} /></p>
+      {guide.photos?.station && <figure className="mt-5 max-w-3xl">
+        <img src={guide.photos.station.src} alt={guide.photos.station.alt} width={755} height={503} loading="lazy" decoding="async" className="aspect-[3/2] max-h-96 w-full rounded-xl object-cover" />
+      </figure>}
+      <UsefulJourneyLink label="Jerusalem train: free personal voucher instructions" href="https://rail.co.il/?lan=en&page=vouchers-jerusalem" context="Israel Railways' August 2026 notice requires a separate, free voucher for each passenger on the selected Jerusalem train, in addition to a valid ticket. Check the current rule before travelling." />
+      <h4 className="mt-8 text-xl font-semibold">Step 2: Change to an Egged bus at Jerusalem Central Bus Station</h4>
+      <p className="mt-3 leading-relaxed">Jerusalem–Yitzhak Navon railway station is deep underground. Allow time for lifts, the walk to Jerusalem Central Bus Station and its intercity platforms. Bus 486 serves the Dead Sea hotel area; reserved-seat bus 444 to Eilat may offer another departure. Neither is a guaranteed connection with the airport train. Check the last southbound departure before choosing your flight-to-train itinerary.</p>
+      <div role="region" aria-label="Airport-to-Ein-Bokek public transport legs" tabIndex={0} className="mt-5 max-w-full overflow-x-auto rounded-xl border">
+        <table className="w-full min-w-[590px] text-left text-sm">
+          <caption className="sr-only">Ben Gurion Airport to Ein Bokek: train, transfer and bus journey stages</caption>
+          <thead className="bg-secondary"><tr><th scope="col" className="p-3">Journey leg</th><th scope="col" className="p-3">Typical duration</th><th scope="col" className="p-3">What to check</th></tr></thead>
+          <tbody className="divide-y">{guide.stations.map(stage => <tr key={stage.name}>
+            <th scope="row" className="p-3 font-semibold">{stage.name}</th><td className="p-3">{stage.time}</td><td className="p-3">{stage.usefulFor}</td>
+          </tr>)}</tbody>
+        </table>
+      </div>
+      <UsefulJourneyLink label="Check the last 486 or 444 bus to the Dead Sea" href="https://bus.gov.il/" context="Select your actual travel date and the stop nearest your hotel; work backwards to the airport train with a generous transfer margin." />
+      <UsefulJourneyLink label="Egged — reserve seats on bus 444 (or limited 421)" href="https://www.egged.co.il/en/information-for-passengers/tickets-information" context="The operator lists these as reserved-seat services. Check seat availability and the correct departure stop before depending on either route." />
+      <h4 className="mt-8 text-xl font-semibold">Step 3: Get off at the correct Dead Sea hotel stop</h4>
+      <p className="mt-3 leading-relaxed">Ein Bokek, Hamei Zohar and Neve Zohar have different stops along the hotel area; Ein Gedi and Masada are separate destinations. Confirm the exact stop for your hotel and the final walk with luggage, especially during the hottest hours of the day.</p>
+      {guide.photos?.onward && <figure className="mt-5 max-w-3xl">
+        <img src={guide.photos.onward.src} alt={guide.photos.onward.alt} width={755} height={503} loading="lazy" decoding="async" className="aspect-[3/2] max-h-96 w-full rounded-xl object-cover" />
+      </figure>}
+      <ul className="mt-4 list-disc space-y-2 pl-5 leading-relaxed">{guide.connections.map(connection => <li key={connection}>{connection}</li>)}</ul>
+      <p className="mt-4 text-sm leading-relaxed">For the exact resort location, compare my <Link to="/travel-blog/best-dead-sea-hotels/" className="font-semibold text-primary underline underline-offset-4">Dead Sea hotels guide</Link>. If you are starting your trip in Jerusalem instead of changing trains there, consult <Link to="/travel-blog/jerusalem-to-the-dead-sea/" className="font-semibold text-primary underline underline-offset-4">Jerusalem to the Dead Sea</Link>.</p>
+      <h4 className="mt-8 text-xl font-semibold">A limited alternative: bus 421 via Tel Aviv–Savidor</h4>
+      <p className="mt-3 leading-relaxed">Egged also lists the reserved-seat bus 421 from Tel Aviv toward the Dead Sea. This is not a direct airport bus: you would first travel by train to Tel Aviv–Savidor and arrange the separately booked 421 departure. Its timetable is limited, so use it only when the connection is confirmed and better than the Jerusalem route. See my <Link to="/travel-blog/how-to-get-from-ben-gurion-airport-to-tel-aviv/" className="font-semibold text-primary underline underline-offset-4">airport-to-Tel-Aviv guide</Link> for the rail arrival leg.</p>
+      <aside className="mt-7 rounded-2xl border bg-secondary/40 p-5 sm:p-6" aria-label={guide.exampleJourney.title}>
+        <h4 className="text-xl font-semibold">{guide.exampleJourney.title}</h4>
+        <p className="mt-2 text-sm text-muted-foreground">Illustrative planning sequence, not a confirmed timetable, through ticket or guaranteed connection.</p>
+        <ol className="mt-4 space-y-3">{guide.exampleJourney.steps.map((step, index) => <li key={step.label} className="flex gap-3">
+          <span className="font-semibold text-primary">{index + 1}.</span>
+          <div><strong>{step.label}</strong><p className="mt-1 text-sm leading-relaxed text-muted-foreground">{step.detail}</p></div>
+        </li>)}</ol>
+        <p className="mt-4 border-t pt-4 text-sm leading-relaxed"><strong>Practical choice:</strong> {guide.exampleJourney.takeaway}</p>
+      </aside>
+    </>
+  );
+}
+
 function OptionSection({ option, guideId }: { option: JourneyOption; guideId: AirportJourneyId }) {
   const conciseGuide = guideId === "jerusalem" || guideId === "tel-aviv" || guideId === "haifa";
   const inlinePrivate = conciseGuide && option.id === "private";
