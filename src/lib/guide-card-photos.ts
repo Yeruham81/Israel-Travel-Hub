@@ -82,13 +82,18 @@ export function uniqueGuideCardPhotos<T extends { guide: GuideDirectoryEntry }>(
       ...(guideCardAlternatives[guide.id] || []),
     ];
     const seen = new Set<string>();
-    return candidates.filter((photo): photo is { src: string; alt: string } => {
+    const valid = candidates.filter((photo): photo is { src: string; alt: string } => {
       if (!photo?.src) return false;
       const key = photoIdentity(photo.src);
-      if (reserved.has(key) || seen.has(key)) return false;
+      if (seen.has(key)) return false;
       seen.add(key);
       return true;
     });
+    // Avoid reusing the page hero when another genuine image is available.
+    // But displaying the guide's real cover is better than a blank card when
+    // it is the only option. Matching still prevents repeats between cards.
+    return [...valid.filter(photo => !reserved.has(photoIdentity(photo.src))),
+      ...valid.filter(photo => reserved.has(photoIdentity(photo.src)))];
   });
 
   const ownerByPhoto = new Map<string, number>();
