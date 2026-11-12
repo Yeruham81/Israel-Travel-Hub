@@ -1,0 +1,75 @@
+name: CMS pilot - Render Uber draft as static HTML (no deployment)
+
+on:
+  pull_request:
+    types: [labeled]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: sanity-uber-static-preview
+  cancel-in-progress: false
+
+jobs:
+  preview:
+    name: Build and verify offline Uber preview
+    if: >-
+      ${{ github.event.action == 'labeled'
+          && github.event.label.name == 'cms-preview-uber'
+          && github.event.pull_request.number == 12
+          && github.event.pull_request.head.repo.full_name == github.repository
+          && github.event.pull_request.head.ref == 'feature/sanity-uber-pilot-20261112' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 22
+    env:
+      CI: "true"
+      HOSTINGER_STATIC_BUILD: "true"
+      VITE_INDEXABLE: "false"
+      VITE_CANONICAL_ORIGIN: "https://saddlebrown-guanaco-454061.hostingersite.com"
+    steps:
+      - name: Checkout pilot branch commit
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          persist-credentials: false
+      - name: Set up Bun
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: "1.4.4"
+      - name: Install locked site dependencies
+        run: bash scripts/install-ci-dependencies.sh
+      - name: Test Sanity content conversion
+        run: node --test scripts/sanity/uber-adapter.test.mjs
+      - name: Fetch authorized draft, locally, once
+        env:
+          SANITY_UBER_SOURCE: drafts
+          SANITY_IMPORT_TOKEN: ${{ secrets.SANITY_IMPORT_TOKEN }}
+        run: |
+          if [ -z "$SANITY_IMPORT_TOKEN" ]; then
+            echo "::error::Configure SANITY_IMPORT_TOKEN or a separate read-only token first."
+            exit 1
+          fi
+          node scripts/sanity/fetch-uber.mjs
+      - name: Verify the selected guide is not the fallback
+        run: |
+          grep -q 'export const sanityUberGuide: TravelGuide | null = {' src/data/generated/sanityUberSnapshot.ts
+          echo "Sanity draft converted to a static content snapshot"
+      - name: Build complete static site with the snapshot
+        run: bash scripts/build-validated-static.sh
+      - name: Validate prerendered HTML, canonical URLs, noindex and sitemap
+        run: node scripts/verify-hostinger-static-export.mjs
+      - name: Check Uber page static HTML exists
+        run: |
+          test -s .output/public/travel-blog/uber-in-israel/index.html
+          grep -q 'Is Uber Available in Israel' .output/public/travel-blog/uber-in-israel/index.html
+          echo "Uber guide rendered as static HTML; not deployed"
+      - name: Attach preview evidence for review
+        uses: actions/upload-artifact@v4
+        with:
+          name: cms-uber-static-preview-evidence
+          path: |
+            .output/public/travel-blog/uber-in-israel/index.html
+            src/data/generated/sanityUberSnapshot.ts
+          retention-days: 3
+          if-no-files-found: error
