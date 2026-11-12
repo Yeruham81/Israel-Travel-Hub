@@ -157,6 +157,29 @@ const sharedFact = defineType({
   ],
 })
 
+const externalResource = defineType({
+  name: 'externalResource',
+  title: 'External resource',
+  type: 'object',
+  fields: [
+    defineField({name: 'label', title: 'Link label', type: 'string', validation: Rule => Rule.required()}),
+    defineField({name: 'href', title: 'URL', type: 'url', validation: Rule => Rule.required().uri({scheme: ['http', 'https']})}),
+  ],
+  preview: {select: {title: 'label', subtitle: 'href'}},
+})
+
+const highlightedResource = defineType({
+  name: 'highlightedResource',
+  title: 'Highlighted resource link',
+  type: 'object',
+  fields: [
+    defineField({name: 'label', title: 'Link label', type: 'string', validation: Rule => Rule.required()}),
+    defineField({name: 'href', title: 'URL', type: 'url', validation: Rule => Rule.required().uri({scheme: ['http', 'https']})}),
+    defineField({name: 'context', title: 'Context', type: 'text', rows: 2, validation: Rule => Rule.required()}),
+  ],
+  preview: {select: {title: 'label', subtitle: 'href'}},
+})
+
 const guideSection = defineType({
   name: 'guideSection',
   title: 'Guide section',
@@ -177,6 +200,8 @@ const guideSection = defineType({
       of: [defineArrayMember({type: 'reference', to: [{type: 'sharedFact'}]})],
     }),
     defineField({name: 'links', title: 'Related internal links', type: 'array', of: [defineArrayMember({type: 'pageLink'})]}),
+    defineField({name: 'externalLinks', title: 'Official external links', type: 'array', of: [defineArrayMember({type: 'externalResource'})]}),
+    defineField({name: 'highlightedLinks', title: 'Highlighted links / callouts', type: 'array', of: [defineArrayMember({type: 'highlightedResource'})]}),
   ],
   preview: {select: {title: 'title', subtitle: 'sectionId'}},
 })
@@ -227,6 +252,8 @@ export const schemaTypes = [
   comparisonRow,
   comparisonTable,
   guideSection,
+  externalResource,
+  highlightedResource,
   sourceReference,
   sharedFact,
   travelGuide,
