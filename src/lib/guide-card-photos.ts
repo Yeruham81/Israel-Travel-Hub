@@ -25,7 +25,7 @@ import masadaCableCar from "@/assets/home/masada-cable-car.webp";
 /** Editorially verified local alternatives when two guides share a cover image. */
 const guideCardAlternatives: Record<string, { src: string; alt: string }[]> = {
   arrival: [{ src: "/images/guides/airport-taxi-sign.webp", alt: "Airport taxi entrance sign at Ben Gurion Airport" }],
-  airportTaxis: [{ src: "/images/guides/airport-taxi-sign.webp", alt: "Taxi wayfinding sign at Ben Gurion Airport" }],
+  airportTaxis: [{ src: "/images/guides/airport-taxi-sign.webp", alt: "Taxi wayfinding sign at Ben Gurion Airport" }, { src: airportArrival, alt: "Ben Gurion Airport pickup and transport area" }],
   uber: [{ src: "/images/guides/taxi-in-tel-aviv.webp", alt: "Licensed white taxis with yellow roof signs in Tel Aviv" }],
   taxiFares: [{ src: "/images/guides/taxi-in-tel-aviv.webp", alt: "Licensed white taxis in Tel Aviv" }],
   telAviv: [{ src: telAvivDizengoff, alt: "Dizengoff area streets in central Tel Aviv, useful for exploring the city" }],
@@ -40,7 +40,7 @@ const guideCardAlternatives: Record<string, { src: string; alt: string }[]> = {
   deadSea: [{ src: deadSeaSunbeds, alt: "Sun loungers along the Dead Sea hotel coast" }],
   topTen: [{ src: caesareaHero, alt: "Ancient coastal ruins at Caesarea, one of Israel's visitor attractions" }],
   israel: [{ src: jerusalemNavon, alt: "Train platform at Jerusalem Yitzhak Navon station for travel in Israel" }],
-  airportTaxis: [{ src: airportArrival, alt: "Ben Gurion Airport pickup and transport area" }],
+
   "stay-jerusalem": [{ src: jerusalemGermanColony, alt: "German Colony neighborhood, a Jerusalem accommodation area" }],
   "stay-telaviv": [{ src: telAvivNorth, alt: "Old North neighborhood of Tel Aviv with nearby accommodation" }],
   "stay-tiberias": [{ src: tiberiasHeritage, alt: "Tiberias historic center near hotel districts" }],
