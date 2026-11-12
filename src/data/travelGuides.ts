@@ -947,7 +947,7 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
                 ["Tel Aviv → Tiberias", "Intercity bus or planned regional trip", "Arrival terminal, total time and final return bus"],
               ],
               rowLinks: [
-                { to: "/travel-blog/how-to-get-from-ben-gurion-airport-to-jerusalem/", label: "Airport-to-Jerusalem guide (for the main rail connection)" },
+                { href: "https://route.bus.gov.il/", label: "Plan Tel Aviv–Jerusalem on the national public transport planner" },
                 { to: "/travel-blog/how-to-get-from-ben-gurion-airport-to-haifa/", label: "Ben Gurion Airport to Haifa" },
                 { to: "/travel-blog/jerusalem-to-the-dead-sea/", label: "Jerusalem to the Dead Sea" },
                 { href: "https://route.bus.gov.il/", label: "Plan Tel Aviv–Tiberias on the national public transport planner" },
