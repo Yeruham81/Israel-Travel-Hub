@@ -233,7 +233,7 @@ export const taxiGuideCluster: Record<"taxis" | "taxiFares" | "airportTaxis", Tr
     topics: ["transportation", "tips"],
     updatedAt: "2026-10-22",
     photo: pickup,
-    reviewNote: "Official figures checked October 2026. The April 2026 temporary tariff schedule is specified through March 31, 2027 unless amended. Prices shown include 18% VAT where applicable and are rounded to two decimals; the official order lists base amounts before VAT.",
+    reviewNote: "Official fare figures shown are current as of October 2026. The April 2026 temporary tariff schedule is specified through March 31, 2027 unless amended. Prices shown include 18% VAT where applicable and are rounded to two decimals; the official order lists base amounts before VAT.",
     facts: [
       { label: "Meter start", text: "₪12.46 with 18% VAT, where applicable" },
       { label: "A / B / C", text: "Tariff depends on day and hour; time AND distance are charged" },
