@@ -1091,7 +1091,7 @@ telAviv: {
           {
             id: "ta-bank-card", title: "Can I tap a foreign credit card on a bus?",
             paragraphs: [
-              "Dan publishes contactless Visa and Mastercard acceptance on its own bus services, including international-issued cards and compatible wallets. According to its official guidance checked in November 2026, this charges NIS 8 for a full-fare single ride, covers one person per card and does not include a free 90-minute transfer or the usual discounts. Check for later fare updates before your journey.",
+              "Dan publishes contactless Visa and Mastercard acceptance on its own bus services, including international-issued cards and compatible wallets. As of November 2026, Dan's official guidance lists NIS 8 for a full-fare single ride, covers one person per card and does not include a free 90-minute transfer or the usual discounts. Check for later fare updates before your journey.",
               "Do not assume the same bank-card rules apply on every bus operator, the DANKAL Red Line or Israel Railways. For transfers, several travelers or reduced fares, use a suitable Rav-Kav or approved ticketing app instead.",
             ],
             tables: [{
@@ -1103,7 +1103,7 @@ telAviv: {
                 ["Contactless bank card", "Dan and certain other supported buses only", "Do not rely on it", "Single full-fare ride; Dan card taps have no 90-minute transfer"],
                 ["Cash to the driver", "Not the normal ticketing method", "Not accepted onboard", "Arrange a valid ticket or payment app first"],
               ],
-              note: "Dan's NIS 8 single-ride information was checked in November 2026. Other operators and fare products have different conditions.",
+              note: "Fare information shown is current as of November 2026. Other operators and fare products have different conditions.",
             }],
             externalLinks: [{ label: "Dan — official contactless card payment rules", href: "https://www.dan.co.il/faq/credit-card-ride-validation" }],
             sourceIds: ["guide-dan-bank-card-2026", "guide-public-transport-payments", "guide-redline-tickets"],
@@ -1214,7 +1214,7 @@ telAviv: {
         id: "taxis", title: "Licensed taxis and taxi-booking apps",
         paragraphs: [
           "A licensed taxi is useful for a late return, a journey with suitcases, travel during Shabbat or any route where connections are inconvenient. You can arrange one through a local taxi-booking app such as Gett where available, use a taxi stand or ask your accommodation to call a licensed driver.",
-          "Confirm the exact pickup point, whether the displayed fare is an estimate or an agreed total, how the meter applies and which payment methods are accepted. Ask about luggage or child seats in advance, and request a suitable accessible vehicle if required. Uber and Lyft passenger booking are not operating services in Israel as checked in November 2026; the Uber alternatives guide explains the distinction.",
+          "Confirm the exact pickup point, whether the displayed fare is an estimate or an agreed total, how the meter applies and which payment methods are accepted. Ask about luggage or child seats in advance, and request a suitable accessible vehicle if required. As of November 2026, Uber and Lyft passenger booking services are not operating in Israel; the Uber alternatives guide explains the distinction.",
         ],
         inlineLinks: [
           { text: "Uber alternatives guide", to: travelGuidePaths.uber },
@@ -1253,7 +1253,7 @@ telAviv: {
         id: "shabbat", title: "Getting around Tel Aviv on Shabbat and holidays",
         paragraphs: [
           "Regular Israeli buses, Israel Railways and the DANKAL Red Line generally do not run during Shabbat. Tel Aviv and partner municipalities operate a separate free weekend network called Na'im Busofash on selected routes. It does not cover all weekday destinations, and its stops and schedule must be checked independently.",
-          "According to the operator's information checked in November 2026, the network has 17 lines and generally runs Friday from 16:30 to 02:00 and Saturday from 09:00 to 17:30. Service hours, holiday operation and routes can change, so use the official live map or journey apps before departing. The municipality lists Line 711 between Shoham and central Tel Aviv via Ben Gurion Airport Terminal 1; do not assume that this stops at Terminal 3 or replaces ordinary airport transfers.",
+          "As of November 2026, the operator lists 17 weekend lines and general service hours of Friday from 16:30 to 02:00 and Saturday from 09:00 to 17:30. Service hours, holiday operation and routes can change, so use the official live map or journey apps before departing. The municipality lists Line 711 between Shoham and central Tel Aviv via Ben Gurion Airport Terminal 1; do not assume that this stops at Terminal 3 or replaces ordinary airport transfers.",
           "If the free weekend network does not fit the journey, consider a licensed taxi, walking or a prearranged ride. For flights, see the dedicated Ben Gurion Airport on Shabbat guide and confirm terminal access and luggage requirements separately.",
         ],
         inlineLinks: [{ text: "Ben Gurion Airport on Shabbat guide", to: travelGuidePaths.shabbat }],
