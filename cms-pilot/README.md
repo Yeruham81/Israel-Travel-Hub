@@ -149,3 +149,41 @@ A safe importer is implemented at `cms-pilot/scripts/import-uber.mjs`.
 publicly readable from Sanity's `production` dataset. It still does **not**
 rebuild or update the Hostinger test site. Until an adapter and safe
 `Publish to Hostinger` workflow exist, keep the article as a draft.
+
+
+## Pilot website integration: Uber page only
+
+The existing page template (`src/components/TravelGuide.tsx`) remains the renderer.
+An explicitly selected Sanity snapshot is converted to the site's
+`TravelGuide` shape **before** the static site build:
+
+- `SANITY_UBER_SOURCE=published`: fetches approved published content.
+  Public dataset reads need no API token.
+- `SANITY_UBER_SOURCE=drafts`: previews the latest draft inside a temporary
+  static-build workspace. Use a server-only `SANITY_READ_TOKEN` or the existing
+  temporary `SANITY_IMPORT_TOKEN`; never expose it in a `VITE_*` variable.
+- Without `SANITY_UBER_SOURCE`, nothing is fetched from Sanity and the existing
+  static article continues to render unchanged.
+- A missing guide, missing source reference, invalid link, wrong canonical
+  URL, unsupported Portable Text block, or inconsistent table **fails the
+  selected build** rather than silently discarding content.
+
+Implementation: `scripts/sanity/uber-adapter.mjs`,
+`scripts/sanity/fetch-uber.mjs`,
+`src/data/generated/sanityUberSnapshot.ts`, and
+`scripts/build-validated-static.sh`.
+
+The generated snapshot file is temporary CI working data and contains public
+site text and citations, not authorization tokens. It must not be committed
+from a draft preview. No queries or tokens are sent to site visitors.
+
+### Trial static preview without deploying
+
+On draft PR #12, add the `cms-preview-uber` label to run
+`.github/workflows/cms-uber-static-preview.yml`. It reads the draft using
+the existing GitHub secret, renders a complete static export in GitHub Actions,
+runs SEO and route checks, and attaches the Uber HTML plus a conversion snapshot
+as a short-lived artifact. **It does not change Hostinger**.
+
+This preview must pass before integrating a user-initiated Hostinger publishing
+pipeline. Keep `israel-taxi.com` untouched throughout the pilot.
