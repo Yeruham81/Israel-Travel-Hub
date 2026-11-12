@@ -624,7 +624,7 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
   israel: {
     id: "israel",
     title: "Getting Around Israel: Trains, Buses, Taxis & Travel Tips",
-    description: "Practical guide to transportation in Israel: compare trains, buses, Rav-Kav, mobile payments, taxis, Shabbat travel, city transit, rentals and routes between destinations.",
+    description: "Getting around Israel: trains, buses, Rav-Kav, mobile payments, taxis, Shabbat travel, rental cars and practical routes between major cities.",
     intro: "You can explore much of Israel without renting a car for your entire visit. Learn which transport works for different regions, how to pay for it, and what to check before you set off—especially with luggage, children or Shabbat travel.",
     answer: "For rail-connected cities such as Tel Aviv, Jerusalem and Haifa, start by comparing trains and buses for your full door-to-door trip. Use city buses, operating light rail, the Haifa Metronit and walking for local journeys. Tourists can generally pay with a preloaded anonymous Rav-Kav card or an approved mobile payment app; ordinary bus drivers do not accept cash, and direct bank-card taps are not yet universal. Licensed taxis and confirmed transfers help with awkward last-mile connections or Shabbat, while a rental car suits more remote or multi-stop itineraries. Always check your exact route, payment method and return departure.",
     topics: ["transportation", "destinations", "itineraries", "tips"],
