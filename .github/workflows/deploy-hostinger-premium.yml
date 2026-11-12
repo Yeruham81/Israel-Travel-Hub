@@ -188,7 +188,9 @@ jobs:
             echo "$path -> HTTP $status"
             [[ "$status" == "200" ]] || { echo "::error::Website smoke test failed for $path"; exit 1; }
           done
-          curl --retry 2 --max-time 20 -fsSL "$VITE_CANONICAL_ORIGIN/travel-blog/uber-in-israel/" |
-            grep -Fq 'cdn.sanity.io/images/ekfs0mfw/production/' ||
-            { echo "::error::The published Uber HTML does not contain its Sanity image"; exit 1; }
+          uber_html="$(curl --retry 2 --max-time 20 -fsSL "$VITE_CANONICAL_ORIGIN/travel-blog/uber-in-israel/")"
+          if ! grep -Fq 'cdn.sanity.io/images/ekfs0mfw/production/' <<< "$uber_html"; then
+            echo "::error::The published Uber HTML does not contain its Sanity image"
+            exit 1
+          fi
           echo "Static files published from Sanity; existing PHP APIs still respond to GET."
