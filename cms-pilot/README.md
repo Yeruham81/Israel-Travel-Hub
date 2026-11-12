@@ -106,3 +106,46 @@ Once the schema has been validated and the workflow is approved:
 
 Studio deployment does not affect Hostinger. It also does not automatically
 publish or migrate content to the site's public HTML.
+
+
+## First real content import — Uber in Israel
+
+A safe importer is implemented at `cms-pilot/scripts/import-uber.mjs`.
+
+- `npm run check:uber` parses `travelGuides.uber` from the source repository,
+  verifies all article and section source records, detects the two local
+  image assets, builds rich-text annotations from the editorial inline links
+  and validates comparison table lengths. **No network or writes.**
+- `npm run import:uber` requires a distinct write-scoped
+  `SANITY_IMPORT_TOKEN`. It creates **one Sanity draft** using the stable
+  document ID `drafts.travelGuide.uber` and creates missing public
+  `sourceReference.*` records, then uploads the article's image assets.
+- The importer **refuses to overwrite** either an existing draft or a
+  published `travelGuide.uber`. It never deletes any documents, does not
+  mark the guide as published, and does not update Hostinger.
+- Media uploads may create asset records even if a later step fails. Re-running
+  after an interrupted import can reuse existing source records, but do not
+  reuse after manually editing or publishing the guide without inspecting it.
+
+### One-time GitHub Actions import procedure
+
+1. Create a **separate content-write token** in Sanity Manage for this pilot.
+   The existing `SANITY_AUTH_TOKEN` deploy credential is *not* enough to
+   create or upload content. Use a project permission suitable for content
+   creation and image upload; do not grant organizational administration.
+2. Save this token directly to GitHub → repository Settings → Secrets and
+   variables → Actions as **`SANITY_IMPORT_TOKEN`**. Do not share it in chat.
+3. Run and review the dry-run validation on PR #12. Only after it passes,
+   add the `cms-import-uber` label to PR #12 to trigger
+   `.github/workflows/cms-uber-import.yml`. This workflow can **only create**
+   the named Uber draft and source records in the configured project/dataset.
+4. Open Sanity Studio → **Travel guide (pilot)** and inspect the
+   unpublished **Uber** draft. Pay particular attention to the two images,
+   table cells, section link callouts and sources.
+5. Remove the import label after execution to prevent accidental reruns,
+   and revoke/delete the one-time write token when import is confirmed.
+
+**Important:** The button **Publish** inside Sanity makes the document
+publicly readable from Sanity's `production` dataset. It still does **not**
+rebuild or update the Hostinger test site. Until an adapter and safe
+`Publish to Hostinger` workflow exist, keep the article as a draft.
