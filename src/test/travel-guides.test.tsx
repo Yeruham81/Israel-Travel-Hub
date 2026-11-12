@@ -331,7 +331,7 @@ describe("migrated practical guides", () => {
     expect(container.querySelectorAll('[role="region"] table th.sticky').length).toBeGreaterThanOrEqual(3);
     expect(container.querySelectorAll('.sm\\:hidden')).not.toHaveLength(0);
     expect(container.querySelector('[aria-label="Red Line stations useful to visitors"]')).not.toBeNull();
-    expect(container.querySelector('[aria-label="Tel Aviv\\'s four mainline railway stations"]')).not.toBeNull();
+    expect(container.querySelector(`[aria-label="Tel Aviv's four mainline railway stations"]`)).not.toBeNull();
     const faqs = container.querySelector("#faq")!;
     expect(faqs.querySelectorAll("h3")).toHaveLength(3);
     expect(faqs.querySelectorAll("details")).toHaveLength(15);
