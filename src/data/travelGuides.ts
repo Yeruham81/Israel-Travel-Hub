@@ -1020,7 +1020,7 @@ telAviv: {
     id: "telAviv",
     title: "Getting Around Tel Aviv: Buses, Red Line, Taxis & Shabbat Travel",
     description: "Practical Tel Aviv transport guide: how to pay for buses and the Red Line, which train station to use, weekend buses, taxis, bikes and accessible travel.",
-    intro: "Tel Aviv is easy to explore without a rental car when you choose the right mode for each part of the city. Here is how to connect the beach, Jaffa, neighborhoods and railway stations, pay correctly and plan around Shabbat.",
+    intro: "Tel Aviv is easy to explore when you choose the right mode for each part of the city. Here is how to connect the beach, Jaffa, neighborhoods and railway stations, handle payments correctly and plan around Shabbat.",
     answer: "For most central Tel Aviv visits, walk between nearby sights, use city buses for wider coverage and take the Red Line of Tel Aviv's light rail (locally called Dankal) when its stops match your journey. Israel Railways is mainly for Ben Gurion Airport and other cities, not the beachfront. A licensed taxi is useful with luggage, after a late arrival or on Shabbat. Regular buses and rail normally stop for Shabbat, but the separate free Na'im Busofash network covers selected weekend routes. Confirm the last leg, boarding direction, validation method and return trip before you leave.",
     updatedAt: "2026-11-12",
     topics: ["transportation", "destinations", "tips"],
