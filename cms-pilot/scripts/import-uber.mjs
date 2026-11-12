@@ -244,6 +244,7 @@ function validateAsset(photo) {
 validateAsset(uber.photo);
 uber.sections.forEach(section => validateAsset(section.photo));
 for (const section of uber.sections) portableSections(section);
+for (const id of uber.related) relatedGuideTitle(id);
 
 function sourceDoc(id) {
   const source = availableSources.get(id);
