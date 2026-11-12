@@ -1140,7 +1140,7 @@ telAviv: {
       {
         id: "city-buses", title: "Using city buses in Tel Aviv",
         paragraphs: [
-          "Buses serve far more streets than the Red Line. They can connect hotels, beaches, markets, museums, university areas and neighborhoods away from the rail corridor. Routes and boarding locations change during roadworks and events, so search by your exact starting address, destination and travel time.",
+          "City buses serve far more streets than the Red Line of Tel Aviv's light rail system. They can connect hotels, beaches, markets, museums, university areas and neighborhoods away from the rail corridor. Routes and boarding locations change during roadworks and events, so search by your exact starting address, destination and travel time.",
           "At the stop, check the route number and direction, not just the destination name in a map result. Have a validated Rav-Kav, approved payment app or another payment method explicitly accepted by the operator. On Fridays and holidays, the final regular departure may be much earlier than you expect.",
         ],
         photo: { src: archivedBuses, alt: "City buses at a Tel Aviv metropolitan transport terminal" },
