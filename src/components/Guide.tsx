@@ -370,7 +370,16 @@ export function RelatedLinks({ title = "Plan the rest of your trip", items, curr
     : [];
   // For broad planning topics (e.g. eSIM), retain a compact pair from the editor's
   // explicitly selected guides when taxonomy alone cannot find two matches.
-  const selectedGuides = guideItems.length >= 2 ? guideItems : items.flatMap((item, order) => {
+  // When editors explicitly choose exactly six practical guides, keep all six
+  // instead of letting generic topic-ranking remove a locally relevant guide.
+  // Only use this override when all six distinct guide routes are valid.
+  const curatedSix = guideSection && items.length === 6
+    ? items.flatMap((item, order) => {
+        const guide = guideDirectory.find((candidate) => candidate.to === item.to && Boolean(candidate.photo));
+        return guide && (!current || guide.to !== current.to) ? [{ item, guide, order, score: 0 }] : [];
+      }).filter(({ guide }, index, all) => all.findIndex((entry) => entry.guide.to === guide.to) === index)
+    : [];
+  const selectedGuides = curatedSix.length === 6 ? curatedSix : guideItems.length >= 2 ? guideItems : items.flatMap((item, order) => {
     const guide = guideDirectory.find((candidate) => candidate.to === item.to && Boolean(candidate.photo));
     return guide && (!current || guide.to !== current.to) ? [{ item, guide, order, score: 0 }] : [];
   }).filter(({ guide }, index, all) => all.findIndex((entry) => entry.guide.to === guide.to) === index).slice(0, 6);
