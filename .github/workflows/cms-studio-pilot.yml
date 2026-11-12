@@ -1,0 +1,54 @@
+name: CMS pilot - Validate or deploy Sanity Studio
+
+on:
+  workflow_dispatch:
+    inputs:
+      deploy_studio:
+        description: 'Deploy EDITOR only to Sanity hosting (never to Hostinger)'
+        type: boolean
+        required: true
+        default: false
+      studio_hostname:
+        description: 'Sanity studio subdomain (without .sanity.studio)'
+        type: string
+        required: true
+        default: 'israel-taxi-travel-ekfs0mfw'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: sanity-studio-pilot
+  cancel-in-progress: false
+
+jobs:
+  validate:
+    name: Validate Studio schema and build
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: cms-pilot
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v4
+      - name: Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install dependencies
+        run: npm install --no-audit --no-fund
+      - name: Typecheck
+        run: npm run typecheck
+      - name: Build Studio assets
+        run: npm run build
+      - name: Deploy Studio to Sanity (opt-in only)
+        if: ${{ inputs.deploy_studio == true }}
+        env:
+          SANITY_AUTH_TOKEN: ${{ secrets.SANITY_AUTH_TOKEN }}
+          STUDIO_HOSTNAME: ${{ inputs.studio_hostname }}
+        run: |
+          if [ -z "$SANITY_AUTH_TOKEN" ]; then
+            echo "Missing SANITY_AUTH_TOKEN GitHub Actions secret." >&2
+            exit 1
+          fi
+          npx sanity deploy --url "$STUDIO_HOSTNAME" --yes --schema-required
