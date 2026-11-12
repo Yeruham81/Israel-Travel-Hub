@@ -17,6 +17,8 @@ import { journeyDestinationGuides } from "@/data/guideJourneys2026";
 import { migrationPhotos } from "@/data/guideMigrationPhotos";
 import { filterGuides, guideDirectory, travelGuides } from "@/data/travelGuides";
 import { uniqueGuideCardPhotos } from "@/lib/guide-card-photos";
+import { repeatedPhotos } from "@/lib/photo-uniqueness";
+import { airportJourneyGuides } from "@/data/airportJourneyGuides";
 import { getSource, isPublisherUrl, publicSources, travelGuidePaths, type TravelGuideId } from "@/data/registry";
 
 afterEach(cleanup);
@@ -79,6 +81,23 @@ describe("October planning, city and heritage guide migration", () => {
       const relative = photo.src.replace(/^\//, "").split("?")[0]!;
       expect(existsSync(path.resolve(process.cwd(), relative)), relative).toBe(true);
     }
+  });
+
+  it("keeps real, nonrepeating photographs in every article's related guide cards", () => {
+    const problems: string[] = [];
+    for (const article of Object.values(travelGuides)) {
+      const options = article.related.flatMap(id => guideDirectory.filter(entry => entry.id === id)).map(guide => ({ guide }));
+      const cards = uniqueGuideCardPhotos(options, [article.photo.src]);
+      for (const card of cards) if (!card.cardPhoto) problems.push(article.id + " → " + card.guide.id);
+      if (repeatedPhotos(cards.map(card => card.cardPhoto?.src || "")).length) problems.push(article.id + " → repeated photos");
+    }
+    for (const [id, journey] of Object.entries(airportJourneyGuides)) {
+      const options = journey.related.flatMap(link => guideDirectory.filter(entry => entry.to === link.to)).map(guide => ({ guide }));
+      const cards = uniqueGuideCardPhotos(options, [journey.hero.src]);
+      for (const card of cards) if (!card.cardPhoto) problems.push(id + " → " + card.guide.id);
+      if (repeatedPhotos(cards.map(card => card.cardPhoto?.src || "")).length) problems.push(id + " → repeated photos");
+    }
+    expect(problems, "Related guide cards must show distinct real photos").toEqual([]);
   });
 
   it("links regional attractions and Eilat internally without importing the excluded safety article", async () => {
