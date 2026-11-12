@@ -425,10 +425,10 @@ const byId: Record<AirportJourneyId, AirportJourneyGuide> = {
     privateLabel: "Request a private Ein Bokek transfer",
     options: [
       { id: "rail", name: "Train + bus via Jerusalem", time: "Roughly 3–4+ hours with connections", cost: "Check current train + bus fares per person", bestFor: "Daytime arrivals, light luggage", doorToDoor: "No", availability: "Requires a usable onward bus", comparison: { cost: "Check rail + bus fares", advantages: "Usually the least expensive option", drawbacks: "Train–bus transfer, early last bus, hotel-stop walk" }, heading: "Train and bus via Jerusalem: the budget option", paragraphs: [
-        "From Terminal 3, take the train to Jerusalem–Yitzhak Navon. Allow roughly 26–30 minutes on the train when scheduled, plus time to reach street level from the deep station, locate Jerusalem Central Bus Station and find the correct intercity platform. Check the getting around Israel guide for ticket and public-transport payment basics.",
-        "The Tamar Regional Council lists Egged buses 486 and 444 from Jerusalem for the Dead Sea area. Their actual schedules, intermediate stops, operator rules and any advance seat booking vary: a line number on a map is not a confirmed departure. Consult the current national journey planner and Egged before buying tickets, and leave a realistic transfer margin.",
-        "Select the stop for your named Ein Bokek hotel, not simply the first stop marked Dead Sea. Masada, Ein Gedi and Neve Zohar have different stops and are not interchangeable with the Ein Bokek hotel strip. The Jerusalem to the Dead Sea guide explains the onward intercity journey in greater detail.",
-        "Work backward from the last usable southbound bus, especially on Fridays and holidays. A late flight, passport queue or delayed train can make the public-transport route unworkable even when trains are still running."
+        "There is no train station at the Dead Sea. The train from Terminal 3 reaches Jerusalem–Yitzhak Navon in about 26–30 minutes when scheduled. Jerusalem Central Bus Station is beside Navon, but its intercity platforms are above ground and the railway platforms are deep below street level. Allow time for lifts, walking and finding the correct bus departure. My getting around Israel guide explains ticketing and bus payment.",
+        "For the Jerusalem-to-Ein Bokek leg, Egged bus 486 is usually the more frequent service and bus 444 toward Eilat may help with some later connections. Bus 444 is a reserved-seat service; check its available seats and book in advance through Egged. The bus leg is normally roughly 1 hour 45 minutes to 2 hours 15 minutes, depending on stops and traffic. Check the exact dated departure before purchasing a train ticket.",
+        "Choose the stop closest to your named Ein Bokek hotel, not just one marked Dead Sea. Neve Zohar and Hamei Zohar properties, Masada and Ein Gedi are separate destinations. The Jerusalem to the Dead Sea guide explains the onward intercity journey and the hotel-stop differences in more detail.",
+        "Plan from the last usable southbound bus backwards: airport formalities can take one or two hours, the Navon-to-bus transfer needs a margin, and the last bus often leaves much earlier than the last train. A late flight or a missed connection can leave no usable public transport to the hotel that day. A very limited reserved-seat bus 421 from Tel Aviv–Savidor is another possible route, but it requires a separate airport train and a date-specific bus reservation."
       ], inlineLinks: [
         { text: "getting around Israel guide", to: "/travel-blog/getting-around-israel/" },
         { text: "Jerusalem to the Dead Sea guide", to: "/travel-blog/jerusalem-to-the-dead-sea/" },
@@ -436,36 +436,38 @@ const byId: Record<AirportJourneyId, AirportJourneyGuide> = {
       { id: "taxi", name: "Official airport taxi", time: "About 1h 45m–2h 30m+ after pickup", cost: "Regulated meter; check current tariff", bestFor: "On-arrival direct ride to a resort", doorToDoor: "To accessible hotel entrance", availability: "Subject to available licensed taxis", comparison: { cost: "Regulated meter", advantages: "Direct airport-to-hotel ride, including Shabbat", drawbacks: "High and variable long-distance meter fare" }, heading: "Official airport taxi to Ein Bokek or Neve Zohar", paragraphs: [
         ...commonTaxi,
         "A metered taxi is not the same as a vehicle booked beforehand for a fixed quote. The total on this longer journey depends on the regulated tariff, time, distance and permitted extras. The official airport taxi guide explains how to obtain the ride code and find the authorized queue; my taxi fares in Israel guide covers current meter rules rather than an unverified route-specific price.",
-        "Give the driver the full hotel name and address, and distinguish Ein Bokek from Ein Gedi or Neve Zohar. Confirm enough luggage capacity, a suitable payment method and the intended route before setting off."
+        "Give the driver your complete hotel name, not just “Dead Sea”: Ein Bokek, Hamei Zohar, Neve Zohar and Ein Gedi are not interchangeable drop-offs. Check luggage space, payment, any planned stop and hotel access before leaving the airport. There is no Uber passenger-car service in Israel; my Uber alternatives guide explains available apps."
       ], inlineLinks: [
         { text: "official airport taxi guide", to: "/travel-blog/ben-gurion-airport-taxis/" },
         { text: "taxi fares in Israel guide", to: "/travel-blog/taxi-fares-in-israel/" },
+        { text: "Uber alternatives guide", to: "/travel-blog/uber-in-israel/" },
       ], checklist: ["Order through the official airport process, keeping the ride code and receipt.", "Check your hotel's actual entrance and suitcase capacity.", "Budget for a long metered journey without assuming a fixed fare."] },
       { id: "private", name: "Pre-booked private transfer", time: "About 1h 45m–2h 30m+ after pickup", cost: "Published weekday vehicle starting rate; written quote", bestFor: "Families, several bags, late arrival", doorToDoor: "To agreed hotel entrance", availability: "Only after confirmation", comparison: { advantages: "Confirmed vehicle and agreed meeting point", drawbacks: "Must be booked and confirmed; costlier than public transport" }, heading: "When a pre-booked transfer is useful", paragraphs: [
         ...commonTransfer,
         "For a long resort journey, a confirmed vehicle and written total can make planning easier for families, late arrivals or larger parties. Provide the hotel, flight details and full luggage list. The separate private transfer to Ein Bokek page shows the weekday per-vehicle starting rate and the request form; the form submission is not a booking.",
-        "If you also want to visit Masada, Ein Gedi or a second hotel, request a separate itinerary and price. A direct transfer quote does not automatically include sightseeing stops, waiting time or the return to the airport."
+        "If you want to stop at Masada, Ein Gedi or another hotel, request a separate itinerary and price. A direct airport-to-resort transfer does not automatically include sightseeing, waiting time or a return journey. See the Masada visitor guide to understand access and visiting time before proposing an extra stop."
       ], inlineLinks: [
         { text: "private transfer to Ein Bokek page", to: "/travel-blog/ben-gurion-airport-to-ein-bokek/" },
+        { text: "Masada visitor guide", to: "/travel-blog/masada/" },
       ], checklist: ["Share the exact Dead Sea hotel, landing time, passenger count and luggage.", "Ask about child seats, waiting, flight delays, night/weekend charges and cancellation.", "Confirm any sightseeing stop or return transfer separately in writing."] },
       { id: "rental", name: "Rental car", time: "About 1h 45m–2h 30m+ driving plus collection", cost: "Rental, insurance, fuel and parking", bestFor: "Independent Masada/Dead Sea touring", doorToDoor: "To accessible parking area", availability: "Check desk hours and road access", comparison: { cost: "Rental + extras", advantages: "Freedom for Masada and other Dead Sea stops", drawbacks: "Collection time, parking and flood-related road closures" }, heading: "Should you rent a car at the airport?", paragraphs: [
         ...commonRental,
         "A rental car can make sense when Ein Bokek is one stop in a wider itinerary that includes Masada or Ein Gedi. Compare the total rental cost and available vehicle with my car rental in Israel page before committing to several days of parking at one resort.",
-        "Check current travel and road alerts, especially after rain in the desert. Route 90 and access roads can be affected by flash-flood warnings or closures. Confirm hotel parking, the pickup desk's operating hours and driving arrangements for the actual arrival date."
+        "Check current police, weather and road notices before the drive, particularly after rain in the Judean Desert. Flash floods can temporarily close Route 90; never drive into water covering the road. Check pickup hours, parking and insurance terms, especially if you are landing on Shabbat or a Jewish holiday."
       ], inlineLinks: [
         { text: "car rental in Israel page", to: "/car-rental/" },
       ], checklist: ["Check route and flood-related closures before starting the drive.", "Confirm hotel parking, rental coverage and pickup hours.", "Avoid assuming a self-drive detour is included in a simple airport transfer comparison."] },
     ],
     stations: [
-      { name: "Ben Gurion Airport (Terminal 3)", time: "Train typically about 26–30 min to Jerusalem", usefulFor: "Start of the lower-cost journey; check the free personal voucher requirement." },
-      { name: "Jerusalem–Yitzhak Navon", time: "Allow extra time for deep station exit", usefulFor: "Walk to Jerusalem Central Bus Station for the onward intercity bus." },
-      { name: "Egged line 486", time: "Dead Sea segment around 1h 45m–2h+ when scheduled", usefulFor: "Confirm the southbound departure and your precise Ein Bokek hotel stop." },
-      { name: "Egged line 444", time: "Journey time and stops depend on schedule", usefulFor: "Possible alternative Jerusalem departure; verify stop and any seat requirement." },
+      { name: "Airport train → Jerusalem–Yitzhak Navon", time: "About 26–30 min by train", usefulFor: "Starts below Terminal 3; check rail fare and separate Jerusalem-line voucher." },
+      { name: "Navon → Jerusalem Central Bus Station", time: "Allow extra transfer time", usefulFor: "Exit the deep rail station, walk to the bus station and find intercity platforms." },
+      { name: "Egged bus 486 → Ein Bokek", time: "About 1h 45m–2h 15m", usefulFor: "Check the last southbound departure and the stop nearest your hotel." },
+      { name: "Egged bus 444 → Ein Bokek", time: "Check actual itinerary", usefulFor: "Reserved-seat Jerusalem–Eilat bus; book in advance and verify the hotel stop." },
     ],
     connections: [
-      "Ein Bokek is a hotel strip, not a single rail or bus terminal. Choose the stop closest to your specific property and check the walk with luggage in desert heat.",
-      "The bus stop called Ein Bokek may not be the closest stop to your hotel. Neve Zohar, Masada and Ein Gedi are separate destinations; do not use an estimate for one as though it covers another.",
-      "If your flight lands in the afternoon or evening, calculate passport control, baggage, train waiting, the Navon exit and the last southbound bus. Arrange a practical fallback before leaving the airport.",
+      "Ein Bokek has multiple hotel-area bus stops. Enter your full hotel name in the journey planner and confirm the exact stop, walking distance and direction before boarding.",
+      "Neve Zohar and Hamei Zohar hotels may have different stops from central Ein Bokek. Masada and Ein Gedi are separate destinations farther north; use their own journey plans.",
+      "If your flight arrives in the afternoon or evening, allow for immigration, baggage, waiting for the airport train, exiting Navon and the last southbound bus. Check whether the final arrival stop is a safe and practical walk with bags or whether another ride is needed.",
     ],
     weekend: [
       "Most regular rail and intercity bus services stop for the main Shabbat period and many Jewish holidays. The 486 and 444 are not reliable Friday-night or Saturday daytime transfers; verify the precise last and first departures in the official planner. My airport Shabbat transport guide covers practical alternatives from TLV.",
@@ -479,8 +481,14 @@ const byId: Record<AirportJourneyId, AirportJourneyGuide> = {
       "Bring water for any outdoor transfer and consider daytime desert heat when estimating a walk with bags.",
       "If you miss the last bus, a long-distance metered taxi may cost far more than your original train-plus-bus plan.",
       "For any private or rental vehicle, confirm the actual hotel address, luggage space and any itinerary detours or restrictions.",
+      "If you use bus 444 or the limited bus 421 from Tel Aviv, check the seat-reservation system and arrive at the boarding stop early.",
+      "Check Route 90 and desert weather warnings before an onward drive; flash floods can affect roads even when it is not raining at the hotel."
     ],
     faqs: [
+      { q: "Do I need to reserve a seat on bus 444 or 421?", a: "Egged lists routes 444 and 421 as reserved-seat services. Check availability and the current reservation instructions before travel, and allow time to reach the correct departure platform." },
+      { q: "How do I pay for the airport train and Dead Sea bus?", a: "Train tickets are available at Ben Gurion Airport railway station, with accepted Rav-Kav or payment-app options where supported. The bus fare is separate; use an accepted bus payment method or Egged's advance seat-booking process where required." },
+      { q: "Is bus 421 via Tel Aviv a good alternative?", a: "Only occasionally. Bus 421 is a limited reserved-seat service from Tel Aviv–Savidor toward the Dead Sea, so you first need a suitable airport train and then a reliably timed, separately booked bus. Jerusalem is usually the more practical interchange." },
+      { q: "What if road 90 is closed because of flooding?", a: "Check police and official road notices, and follow closures. Flash floods can make the road dangerous; do not drive through a flooded roadway or assume a hired vehicle can legally bypass a closure." },
       { q: "Is there a direct train from Ben Gurion Airport to Ein Bokek?", a: "No. There is no railway station in Ein Bokek. A common lower-cost route is the train to Jerusalem–Yitzhak Navon followed by a scheduled Dead Sea bus, when both services operate." },
       { q: "Is there a direct bus from Ben Gurion Airport to the Dead Sea?", a: "Do not count on a regular direct airport-to-Ein Bokek bus. The usual public-transport plan is a train to Jerusalem and an onward Egged bus, subject to the actual dated timetable." },
       { q: "Which Jerusalem buses reach Ein Bokek hotels?", a: "Tamar Regional Council lists routes 486 and 444 for the Dead Sea from Jerusalem. Confirm the current departure, direction, hotel-stop list and any seat-booking requirement with the operator or journey planner." },
