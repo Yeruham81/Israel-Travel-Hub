@@ -9,6 +9,8 @@ import airportHall from "@/assets/home/ben-gurion-t3.webp";
 import railPlatform from "@/assets/airport-journeys/ben-gurion-rail-platform.webp";
 import navonPlatform from "@/assets/airport-journeys/jerusalem-navon-platform.webp";
 import telAvivDizengoff from "@/assets/tel-aviv/dizengoff.webp";
+import archivedBuses from "@/assets/guides/2026-11/buses-in-tel-aviv.webp";
+import jerusalemLightRail from "@/assets/guides/2026-11/jerusalem-light-rail.webp";
 import esimPhoto from "@/assets/guides/esim-israel.jpeg";
 import tiberias from "@/assets/home/tiberias-lake.webp";
 import masada from "@/assets/home/masada-dead-sea.webp";
@@ -631,11 +633,8 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
     topics: ["transportation", "destinations", "itineraries", "tips"],
     updatedAt: "2026-11-12",
     photo: {
-      src: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/25/Israel_Tel_Aviv_Egged_buses.jpg/1280px-Israel_Tel_Aviv_Egged_buses.jpg",
-      alt: "Green Egged buses alongside one another at a bus stop in central Tel Aviv",
-      credit: "Eurovaran · CC BY-SA 4.0 · Wikimedia Commons · displayed as a resized image",
-      sourceUrl: "https://commons.wikimedia.org/wiki/File:Israel_Tel_Aviv_Egged_buses.jpg",
-      licenseUrl: "https://creativecommons.org/licenses/by-sa/4.0/",
+      src: archivedBuses,
+      alt: "Buses waiting at a transport terminal in the Tel Aviv metropolitan area",
     },
     facts: [
       { label: "Between cities", text: "Compare the train and direct bus for your actual station and address" },
@@ -703,11 +702,8 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
               "Use the national journey planner with your actual start and end addresses. Check the boarding side of the street, whether you need to change vehicles, ticket acceptance and the last return bus. Public transport information may be incomplete during diversions, holidays or security-related changes.",
             ],
             photo: {
-              src: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cc/PikiWiki_Israel_74165_egged_bus.jpg/960px-PikiWiki_Israel_74165_egged_bus.jpg",
-              alt: "Egged public bus operating in Tel Aviv",
-              credit: "Davidi Vardi · PikiWiki Israel · CC BY 2.5 · resized",
-              sourceUrl: "https://commons.wikimedia.org/wiki/File:PikiWiki_Israel_74165_egged_bus.jpg",
-              licenseUrl: "https://creativecommons.org/licenses/by/2.5/",
+              src: archivedBuses,
+              alt: "Buses at a transport terminal in the Tel Aviv metropolitan area",
             },
             highlightedLinks: [
               { label: "National public transport route planner", href: "https://route.bus.gov.il/", context: "Search buses and light rail by the exact travel date, stop and direction. Verify important departures with the operator." },
@@ -722,11 +718,8 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
               "Haifa also has the Metronit bus rapid transit network and the Carmelit underground funicular between the Lower City and Carmel Center. The university-bound Rakbalit cable-car transit is a separate service from the tourist cable car near Bat Galim. Always check operating hours and ticket acceptance for the specific system.",
             ],
             photo: {
-              src: "https://commons.wikimedia.org/wiki/Special:FilePath/%D7%93%D7%A0%D7%A7%D7%9C%20%E2%80%93%20%D7%94%D7%A7%D7%95%20%D7%94%D7%90%D7%93%D7%95%D7%9D%2C%20%D7%AA%D7%9C%20%D7%90%D7%91%D7%99%D7%91-%D7%99%D7%A4%D7%95%2C%20%D7%99%D7%A0%D7%95%D7%90%D7%A8%202025%2002.jpg?width=1000",
-              alt: "A light rail train on the operating Red Line in Tel Aviv–Yafo",
-              credit: "מקף־עברי · CC BY-SA 4.0 · Wikimedia Commons · resized",
-              sourceUrl: "https://commons.wikimedia.org/wiki/File:דנקל_–_הקו_האדום,_תל_אביב-יפו,_ינואר_2025_02.jpg",
-              licenseUrl: "https://creativecommons.org/licenses/by-sa/4.0/",
+              src: jerusalemLightRail,
+              alt: "Jerusalem light rail train alongside a street-level platform",
             },
             highlightedLinks: [{ label: "DANKAL Red Line — ticketing and validation", href: "https://www.nta.co.il/en/buying-tickets-and-validation-machines/", context: "Validate your Rav-Kav or app journey before boarding the Red Line, including when connecting from another service." }],
             sourceIds: ["guide-red-line", "guide-urban-transit-validation", "guide-haifa-carmelit"],
