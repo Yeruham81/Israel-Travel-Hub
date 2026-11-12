@@ -1,6 +1,9 @@
 name: CMS pilot - Render Uber draft as static HTML (no deployment)
 
 on:
+  push:
+    branches: ['feature/sanity-uber-pilot-20261112']
+    paths: ['.github/workflows/cms-uber-static-preview.yml']
   pull_request:
     types: [labeled, synchronize]
 
@@ -15,11 +18,13 @@ jobs:
   preview:
     name: Build and verify offline Uber preview
     if: >-
-      ${{ (github.event.action == 'labeled' && github.event.label.name == 'cms-preview-uber'
-              || github.event.action == 'synchronize' && contains(github.event.pull_request.labels.*.name, 'cms-preview-uber'))
-          && github.event.pull_request.number == 12
-          && github.event.pull_request.head.repo.full_name == github.repository
-          && github.event.pull_request.head.ref == 'feature/sanity-uber-pilot-20261112' }}
+      ${{ (github.event_name == 'push' && github.ref == 'refs/heads/feature/sanity-uber-pilot-20261112')
+          || (github.event_name == 'pull_request'
+              && (github.event.action == 'labeled' && github.event.label.name == 'cms-preview-uber'
+                  || github.event.action == 'synchronize' && contains(github.event.pull_request.labels.*.name, 'cms-preview-uber'))
+              && github.event.pull_request.number == 12
+              && github.event.pull_request.head.repo.full_name == github.repository
+              && github.event.pull_request.head.ref == 'feature/sanity-uber-pilot-20261112') }}
     runs-on: ubuntu-latest
     timeout-minutes: 22
     env:
@@ -31,7 +36,7 @@ jobs:
       - name: Checkout pilot branch commit
         uses: actions/checkout@v4
         with:
-          ref: ${{ github.event.pull_request.head.sha }}
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
           persist-credentials: false
       - name: Set up Bun
         uses: oven-sh/setup-bun@v2
