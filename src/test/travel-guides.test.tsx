@@ -306,7 +306,7 @@ describe("migrated practical guides", () => {
     expect(guide.faqs).toHaveLength(18);
     expect(guide.faqGroups).toHaveLength(3);
     expect(guide.faqGroups!.flatMap(group => group.indexes).sort((a, b) => a - b)).toEqual([...Array(18).keys()]);
-    expect(guide.photo.src).toMatch(/^\/assets\/.*buses-in-tel-aviv.*\.webp$/);
+    expect(guide.photo.src).toMatch(/^\/(?:src\/)?assets\/.*buses-in-tel-aviv.*\.webp$/);
     expect(guide.photo.licenseUrl).toBeUndefined();
     expect(guide.photo.sourceUrl).toBeUndefined();
     const rail = guide.sections.find(section => section.id === "public-transport")!.subsections!.find(sub => sub.id === "israel-trains")!;
@@ -352,7 +352,7 @@ describe("migrated practical guides", () => {
     expect(container.querySelector('header figure img[src^="https://"]')).toBeNull();
     const modePhotos = guide.sections.flatMap(section => section.subsections || []).flatMap(section => section.photo ? [section.photo.src] : []);
     expect(modePhotos).toContain(guide.sections.find(section => section.id === "public-transport")!.subsections!.find(sub => sub.id === "israel-light-rail")!.photo!.src);
-    expect(modePhotos.every(src => src.startsWith("/assets/"))).toBe(true);
+    expect(modePhotos.every(src => /^\/(?:src\/)?assets\//.test(src))).toBe(true);
     const topicsNav = container.querySelector('nav[aria-label="Quick transport topics"]')!;
     expect(topicsNav.querySelectorAll('a[href^="#"]')).toHaveLength(4);
     for (const link of topicsNav.querySelectorAll<HTMLAnchorElement>('a[href^="#"]')) {
