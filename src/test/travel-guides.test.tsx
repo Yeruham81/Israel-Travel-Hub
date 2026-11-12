@@ -280,42 +280,98 @@ describe("migrated practical guides", () => {
     }
   });
 
-  it("keeps Getting Around Israel a practical 2026 pillar and delegates specialist detail", () => {
+  it("makes Getting Around Israel a usable national transport guide with eight chapters and a complete payment comparison", () => {
     const guide = travelGuides.israel;
-    expect(guide.answer).toMatch(/trains between well-connected cities.*buses and light rail.*licensed taxis.*rental car/is);
-    expect(guide.sections.map((s) => s.id)).toEqual([
-      "choose-transport", "intercity-trains", "buses", "paying", "city-transport",
-      "taxis-apps", "sherut", "airport", "weekends", "rental-car", "day-trips",
+    expect(guide.updatedAt).toBe("2026-11-12");
+    expect(guide.title).toMatch(/^Getting Around Israel: Trains, Buses, Taxis/);
+    expect(guide.title).not.toMatch(/2026|2027/);
+    expect(guide.sections.map(section => section.id)).toEqual([
+      "choose-transport", "public-transport", "paying", "taxis-and-sherut",
+      "destinations", "rental-car", "weekends", "planning",
     ]);
-    expect(guide.sections.filter((section) => section.photo)).toHaveLength(2);
-    expect(guide.faqs).toHaveLength(14);
+    expect(guide.comparison.headers).toEqual(["Transport", "Best for", "Cost level", "On Shabbat?", "Main limitation"]);
+    expect(guide.comparison.rows).toHaveLength(7);
+    expect(guide.facts).toHaveLength(3);
+    const payment = guide.sections.find(section => section.id === "paying")!;
+    expect(payment.tables?.[0]?.rows).toHaveLength(3);
+    expect(payment.subsections?.map(sub => sub.id)).toEqual(["israel-ravkav", "israel-payment-apps", "israel-ticket-rules"]);
+    expect(guide.sections.find(section => section.id === "destinations")?.subsections?.map(sub => sub.id)).toEqual([
+      "israel-tel-aviv", "israel-jerusalem", "israel-haifa", "israel-galilee", "israel-eilat",
+    ]);
+    expect(guide.sections.find(section => section.id === "planning")?.subsections?.some(sub => sub.id === "israel-accessibility")).toBe(true);
+    expect(guide.sections.find(section => section.id === "weekends")?.inlineLinks).toEqual(expect.arrayContaining([
+      { text: "Israel's calendar of events", to: "/travel-blog/israel-holidays/" },
+      { text: "airport Shabbat transport guide", to: travelGuidePaths.shabbat },
+    ]));
+    expect(guide.faqs).toHaveLength(18);
+    expect(guide.related).toHaveLength(6);
+    expect(guide.services).toHaveLength(4);
     expect(guide.sourceIds).toEqual(expect.arrayContaining([
-      "guide-public-transport-payments", "guide-select-card-payment", "guide-redline-tickets", "israel-rail",
+      "guide-ravkav-2026", "guide-rental-territory", "guide-egged-accessibility",
+      "guide-jerusalem-train-voucher", "guide-weekend-network",
     ]));
-    expect(guide.sections.find((s) => s.id === "paying")!.paragraphs.join(" ")).toMatch(/credit-card.*selected bus lines only.*not universally/s);
-    const destinations = guide.sections.flatMap((section) => section.inlineLinks || []).map((link) => link.to);
-    expect(destinations).toEqual(expect.arrayContaining([
-      travelGuidePaths.telAviv, travelGuidePaths.taxis, travelGuidePaths.uber, travelGuidePaths.taxiFares,
-      travelGuidePaths.sherut, travelGuidePaths.airportTaxis, travelGuidePaths.arrival, travelGuidePaths.shabbat,
-      "/car-rental/", "/private-driver/", "/tours/",
-    ]));
-    for (const section of guide.sections) for (const link of section.inlineLinks || []) {
-      expect(section.paragraphs.join(" ").split(link.text), `unique contextual link: ${link.text}`).toHaveLength(2);
+    const subsections = guide.sections.flatMap(section => section.subsections || []);
+    const links = [...guide.sections, ...subsections].flatMap(section => section.inlineLinks || []);
+    for (const link of links) {
+      const section = [...guide.sections, ...subsections].find(section => section.inlineLinks?.includes(link))!;
+      expect(section.paragraphs.join(" ").split(link.text), link.text).toHaveLength(2);
     }
+    expect(links.map(link => link.to)).toEqual(expect.arrayContaining([
+      travelGuidePaths.telAviv, travelGuidePaths.taxis, travelGuidePaths.uber,
+      travelGuidePaths.taxiFares, travelGuidePaths.sherut, travelGuidePaths.airportTaxis,
+      travelGuidePaths.arrival, travelGuidePaths.shabbat, travelGuidePaths.esim,
+      "/car-rental/", "/private-driver/", "/tours/",
+      "/travel-blog/how-to-get-from-ben-gurion-airport-to-tel-aviv/",
+      "/travel-blog/how-to-get-from-ben-gurion-airport-to-jerusalem/",
+      "/travel-blog/how-to-get-from-ben-gurion-airport-to-haifa/",
+      "/travel-blog/how-to-get-from-ben-gurion-airport-to-ein-bokek/",
+    ]));
   });
 
-  it("renders Getting Around Israel's related-guide links within the article text", async () => {
+  it("renders national transport subchapters, linked comparisons, relevant images, guide cards and bottom sources", async () => {
     const router = await routerAt(travelGuidePaths.israel);
     const Page = IsraelRoute.options.component!;
     const { container } = render(<RouterContextProvider router={router}><Page /></RouterContextProvider>);
-    for (const section of travelGuides.israel.sections) {
-      const element = container.querySelector(`#${section.id}`)! as HTMLElement;
-      for (const link of section.inlineLinks || []) {
-        const a = within(element).getByRole("link", { name: link.text });
-        expect(a).toHaveAttribute("href", link.to);
-        expect(a.closest("p")).toBeTruthy();
+    const guide = travelGuides.israel;
+    expect(container.querySelector('section[aria-label="Transport planning essentials"]')?.children).toHaveLength(3);
+    const table = screen.getByRole("table", { name: guide.comparison.caption });
+    expect(within(table).getAllByRole("columnheader")).toHaveLength(5);
+    expect(within(table).getAllByRole("row")).toHaveLength(8);
+    const tableLinks = [...table.querySelectorAll('tbody th a[href^="#"]')];
+    expect(tableLinks).toHaveLength(7);
+    for (const anchor of tableLinks) expect(container.querySelector(anchor.getAttribute("href")!)).not.toBeNull();
+    for (const section of guide.sections) {
+      const el = container.querySelector(`#${section.id}`)! as HTMLElement;
+      expect(el).toBeTruthy();
+      for (const sub of section.subsections || []) {
+        const subEl = el.querySelector(`#${sub.id}`)! as HTMLElement;
+        expect(subEl, sub.id).not.toBeNull();
+        expect(subEl.querySelector("h3")?.nextElementSibling?.firstElementChild?.tagName).toBe("P");
+        if (sub.photo) {
+          const first = subEl.querySelector(":scope > div")!;
+          expect(first.children[1]?.tagName).toBe("FIGURE");
+          expect(subEl.querySelector("figure img")?.getAttribute("src")).toBe(sub.photo.src);
+        }
+        for (const link of sub.inlineLinks || []) {
+          const elink = within(subEl).getByRole("link", { name: link.text });
+          expect(elink).toHaveAttribute("href", link.to);
+          expect(elink.closest("p")).toBeTruthy();
+        }
       }
     }
+    const related = container.querySelector('section[aria-label="Related practical guides"]')!;
+    expect(related.querySelectorAll(":scope > ul > li")).toHaveLength(6);
+    expect(related.querySelector("ul")?.classList.contains("lg:grid-cols-3")).toBe(true);
+    expect(repeatedPhotos([...related.querySelectorAll("li img")].map(img => img.getAttribute("src") || ""))).toEqual([]);
+    const next = container.querySelector('section[aria-label="Plan the next part of your trip"]')!;
+    expect(next.querySelectorAll(":scope > ul > li")).toHaveLength(4);
+    const form = container.querySelector('form[aria-label="Guide contact message"]')!;
+    expect(form).not.toBeNull();
+    expect(related.compareDocumentPosition(next) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
+    expect(next.compareDocumentPosition(form) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
+    expect(container.querySelector("article")?.lastElementChild?.id).toBe("sources");
+    expect(container.querySelector('#sources details:not([open])')).not.toBeNull();
+    expect(container.querySelector('#sources a[href="https://www.hertz.co.il/en/GoodToKnow/IsraelContract/"]')).not.toBeNull();
   });
 
   it("keeps the current Uber and Lyft status with useful licensed-taxi alternatives", () => {
