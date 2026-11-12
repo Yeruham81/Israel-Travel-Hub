@@ -372,6 +372,9 @@ describe("migrated practical guides", () => {
     expect(guide.comparison.headers).toEqual(["Transport", "Best for", "Cost level", "On Shabbat?", "Main limitation"]);
     expect(guide.comparison.rows).toHaveLength(7);
     expect(guide.facts).toHaveLength(3);
+    expect(guide.intro).toMatch(/well-planned itinerary.*each region/s);
+    expect(guide.intro).not.toMatch(/renting a car/);
+    expect(guide.facts.find(fact => fact.label === "How to pay")?.text).toContain("Rav-Kav card");
     const payment = guide.sections.find(section => section.id === "paying")!;
     expect(payment.tables?.[0]?.rows).toHaveLength(3);
     expect(payment.subsections?.map(sub => sub.id)).toEqual(["israel-ravkav", "israel-payment-apps", "israel-ticket-rules"]);
@@ -390,11 +393,18 @@ describe("migrated practical guides", () => {
     expect(guide.photo.licenseUrl).toBeUndefined();
     expect(guide.photo.sourceUrl).toBeUndefined();
     const rail = guide.sections.find(section => section.id === "public-transport")!.subsections!.find(sub => sub.id === "israel-trains")!;
+    expect(rail.paragraphs.join(" ")).toMatch(/From November 2026, Israel Railways' revised timetable/);
+    expect(rail.paragraphs.join(" ")).not.toMatch(/November 14, 2026/);
+    expect(rail.paragraphs.join(" ")).toContain("my airport arrival guide");
     expect(rail.steps).toHaveLength(3);
     expect(rail.steps!.join(" ")).toMatch(/72 hours.*SMS verification.*valid rail ticket/s);
     const bankCard = payment.subsections!.find(sub => sub.id === "israel-ticket-rules")!;
     expect(bankCard.paragraphs.join(" ")).toMatch(/Eilat, Jerusalem and metropolitan Haifa/);
     expect(bankCard.paragraphs.join(" ")).toMatch(/international Visa and Mastercard/);
+    expect(bankCard.paragraphs.join(" ")).toMatch(/expand gradually, but as of November 2026/);
+    const airport = guide.sections.find(section => section.id === "public-transport")!.subsections!.find(sub => sub.id === "israel-airport-options")!;
+    expect(airport.paragraphs.join(" ")).toContain("My airport arrival guide");
+    expect(airport.paragraphs.join(" ")).toContain("My Ben Gurion Airport taxi guide");
     expect(bankCard.sourceIds).toContain("guide-egged-card-payment-2026");
     const popular = guide.sections.find(section => section.id === "planning")!.subsections!.find(sub => sub.id === "israel-popular-journeys")!;
     expect(popular.tables?.[0]?.rowLinks).toHaveLength(4);
@@ -435,6 +445,8 @@ describe("migrated practical guides", () => {
     expect(modePhotos.every(src => /^\/(?:src\/)?assets\//.test(src))).toBe(true);
     const topicsNav = container.querySelector('nav[aria-label="Quick transport topics"]')!;
     expect(topicsNav.querySelectorAll('a[href^="#"]')).toHaveLength(4);
+    expect(topicsNav).toHaveTextContent("Jump to a popular topic");
+    expect(topicsNav).not.toHaveTextContent("Jump to a practical topic");
     for (const link of topicsNav.querySelectorAll<HTMLAnchorElement>('a[href^="#"]')) {
       expect(container.querySelector(link.getAttribute("href")!)).not.toBeNull();
     }
