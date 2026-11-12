@@ -30,7 +30,7 @@ jobs:
       VITE_CANONICAL_ORIGIN: "https://saddlebrown-guanaco-454061.hostingersite.com"
     steps:
       - name: Checkout pilot branch commit
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
         with:
           ref: ${{ github.event.pull_request.head.sha || github.sha }}
           persist-credentials: false
