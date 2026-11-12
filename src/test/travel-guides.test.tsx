@@ -330,7 +330,11 @@ describe("migrated practical guides", () => {
     }
     expect(container.querySelectorAll('[role="region"] table th.sticky').length).toBeGreaterThanOrEqual(3);
     expect(container.querySelectorAll('.sm\\:hidden')).not.toHaveLength(0);
-    expect(container.querySelector('[aria-label="Red Line stations useful to visitors"]')).not.toBeNull();
+    const redLineStations = container.querySelector('[aria-label="Red Line stations and nearby places"]')!;
+    expect(redLineStations).not.toBeNull();
+    expect(redLineStations.querySelectorAll("thead th")).toHaveLength(2);
+    expect(redLineStations.querySelectorAll("tbody tr")).toHaveLength(8);
+    expect(redLineStations.textContent).not.toMatch(/nearby interests are orientation cues|confirm live service and exits/i);
     expect(container.querySelector(`[aria-label="Tel Aviv's four mainline railway stations"]`)).not.toBeNull();
     const faqs = container.querySelector("#faq")!;
     expect(faqs.querySelectorAll("h3")).toHaveLength(3);
