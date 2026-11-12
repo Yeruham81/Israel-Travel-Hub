@@ -210,7 +210,18 @@ export function TravelGuidePage({ id }: { id: TravelGuideId }) {
         {guide.reviewNote && <p className="mt-4 border-t border-primary/20 pt-3 text-sm leading-relaxed text-muted-foreground">{guide.reviewNote}</p>}
       </section>
       {isTransportOverview && <section aria-label="Transport planning essentials" className="mt-5 grid gap-3 sm:grid-cols-3">
-        {guide.facts.map(fact => <div key={fact.label} className="rounded-xl border bg-card p-4"><p className="text-xs font-semibold uppercase tracking-wide text-primary">{fact.label}</p><p className="mt-2 text-sm leading-relaxed">{fact.text}</p></div>)}
+        {guide.facts.map(fact => <div key={fact.label} className="rounded-xl border bg-card p-4">
+          <p className="text-xs font-semibold uppercase tracking-wide text-primary">{fact.label}</p>
+          <p className="mt-2 text-sm leading-relaxed">
+            {fact.link && fact.text.includes(fact.link.text) ? <>
+              {fact.text.slice(0, fact.text.indexOf(fact.link.text))}
+              <a href={fact.link.href} target="_blank" rel="noopener noreferrer" className="font-medium text-primary underline underline-offset-4 hover:text-primary/80 focus-visible:outline-2 focus-visible:outline-primary">
+                {fact.link.text}<span className="sr-only"> (opens in a new tab)</span>
+              </a>
+              {fact.text.slice(fact.text.indexOf(fact.link.text) + fact.link.text.length)}
+            </> : fact.text}
+          </p>
+        </div>)}
       </section>}
       {isJerusalemDayJourney && <JerusalemJourneyOptions id={id} />}
       <OnThisPage sections={isJerusalemDayJourney
