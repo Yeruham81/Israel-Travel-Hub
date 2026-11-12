@@ -1,0 +1,50 @@
+name: CMS pilot - One-time Uber draft import
+
+on:
+  pull_request:
+    types: [labeled]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: sanity-uber-one-time-import
+  cancel-in-progress: false
+
+jobs:
+  import-uber-draft:
+    name: Create Uber guide draft (one time, never overwrite)
+    if: >-
+      \${{ github.event.action == 'labeled'
+          && github.event.label.name == 'cms-import-uber'
+          && github.event.pull_request.number == 12
+          && github.event.pull_request.head.repo.full_name == github.repository
+          && github.event.pull_request.head.ref == 'feature/sanity-uber-pilot-20261112' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    defaults:
+      run:
+        working-directory: cms-pilot
+    steps:
+      - name: Checkout selected pilot commit
+        uses: actions/checkout@v4
+        with:
+          ref: \${{ github.event.pull_request.head.sha }}
+          persist-credentials: false
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install dependencies
+        run: npm install --no-audit --no-fund
+      - name: Validate guide and source references without API writes
+        run: npm run check:uber
+      - name: Create draft and required public source references
+        env:
+          SANITY_IMPORT_TOKEN: \${{ secrets.SANITY_IMPORT_TOKEN }}
+        run: |
+          if [ -z "$SANITY_IMPORT_TOKEN" ]; then
+            echo "SANITY_IMPORT_TOKEN secret is not configured." >&2
+            exit 1
+          fi
+          npm run import:uber
