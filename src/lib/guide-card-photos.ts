@@ -21,11 +21,12 @@ import telAvivNorth from "@/assets/tel-aviv/old-north.webp";
 import tiberiasHeritage from "@/assets/tiberias/heritage.webp";
 import deadSeaPool from "@/assets/dead-sea/pool.webp";
 import masadaCableCar from "@/assets/home/masada-cable-car.webp";
+import airportDriver from "@/assets/airport-transfers/moshe.webp";
 
 /** Editorially verified local alternatives when two guides share a cover image. */
 const guideCardAlternatives: Record<string, { src: string; alt: string }[]> = {
   arrival: [{ src: "/images/guides/airport-taxi-sign.webp", alt: "Airport taxi entrance sign at Ben Gurion Airport" }],
-  airportTaxis: [{ src: "/images/guides/airport-taxi-sign.webp", alt: "Taxi wayfinding sign at Ben Gurion Airport" }, { src: airportArrival, alt: "Ben Gurion Airport pickup and transport area" }],
+  airportTaxis: [{ src: "/images/guides/airport-taxi-sign.webp", alt: "Taxi wayfinding sign at Ben Gurion Airport" }, { src: airportArrival, alt: "Ben Gurion Airport pickup and transport area" }, { src: airportDriver, alt: "Airport transportation driver, illustrating an arranged vehicle pickup" }],
   uber: [{ src: "/images/guides/taxi-in-tel-aviv.webp", alt: "Licensed white taxis with yellow roof signs in Tel Aviv" }],
   taxiFares: [{ src: "/images/guides/taxi-in-tel-aviv.webp", alt: "Licensed white taxis in Tel Aviv" }],
   telAviv: [{ src: telAvivDizengoff, alt: "Dizengoff area streets in central Tel Aviv, useful for exploring the city" }],
