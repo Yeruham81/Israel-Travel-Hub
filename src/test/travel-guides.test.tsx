@@ -306,9 +306,9 @@ describe("migrated practical guides", () => {
     expect(guide.faqs).toHaveLength(18);
     expect(guide.faqGroups).toHaveLength(3);
     expect(guide.faqGroups!.flatMap(group => group.indexes).sort((a, b) => a - b)).toEqual([...Array(18).keys()]);
-    expect(guide.photo.src).toContain("Israel_Tel_Aviv_Egged_buses.jpg");
-    expect(guide.photo.credit).toMatch(/Eurovaran.*CC BY-SA 4.0/);
-    expect(guide.photo.licenseUrl).toBe("https://creativecommons.org/licenses/by-sa/4.0/");
+    expect(guide.photo.src).toMatch(/^\/assets\/.*buses-in-tel-aviv.*\.webp$/);
+    expect(guide.photo.licenseUrl).toBeUndefined();
+    expect(guide.photo.sourceUrl).toBeUndefined();
     const rail = guide.sections.find(section => section.id === "public-transport")!.subsections!.find(sub => sub.id === "israel-trains")!;
     expect(rail.steps).toHaveLength(3);
     expect(rail.steps!.join(" ")).toMatch(/72 hours.*SMS verification.*valid rail ticket/s);
@@ -349,7 +349,10 @@ describe("migrated practical guides", () => {
     const guide = travelGuides.israel;
     expect(container.querySelector('section[aria-label="Transport planning essentials"]')?.children).toHaveLength(3);
     expect(container.querySelector('header figure img')?.getAttribute("src")).toBe(guide.photo.src);
-    expect(container.querySelector('header figure details a[href="https://creativecommons.org/licenses/by-sa/4.0/"]')).not.toBeNull();
+    expect(container.querySelector('header figure img[src^="https://"]')).toBeNull();
+    const modePhotos = guide.sections.flatMap(section => section.subsections || []).flatMap(section => section.photo ? [section.photo.src] : []);
+    expect(modePhotos).toContain(guide.sections.find(section => section.id === "public-transport")!.subsections!.find(sub => sub.id === "israel-light-rail")!.photo!.src);
+    expect(modePhotos.every(src => src.startsWith("/assets/"))).toBe(true);
     const topicsNav = container.querySelector('nav[aria-label="Quick transport topics"]')!;
     expect(topicsNav.querySelectorAll('a[href^="#"]')).toHaveLength(4);
     for (const link of topicsNav.querySelectorAll<HTMLAnchorElement>('a[href^="#"]')) {
