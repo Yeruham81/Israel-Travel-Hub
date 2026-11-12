@@ -16,7 +16,7 @@ describe("four independent airport transportation comparisons", () => {
       const privateId = id === "ein-bokek" ? "dead-sea" : id;
       const privateGuide = getAirportRouteGuide(privateId);
       expect(g.path).not.toBe(privateGuide.path);
-      expect(g.title).toMatch(id === "jerusalem" || id === "tel-aviv" || id === "haifa" ? /Ben Gurion Airport to (?:Jerusalem|Tel Aviv|Haifa)/i : /^How to get from Ben Gurion Airport/i);
+      expect(g.title).toMatch(/Ben Gurion Airport to (?:Jerusalem|Tel Aviv|Haifa|Ein Bokek)/i);
       expect(privateGuide.title).toMatch(/^Private transfer/i);
       expect(g.options.some(o => o.id === "rail")).toBe(true);
       expect(g.options.some(o => o.id === "taxi")).toBe(true);
@@ -43,15 +43,13 @@ describe("four independent airport transportation comparisons", () => {
       expect(doc.querySelector('a[href*="#request-quote"]')).not.toBeNull();
       if (id !== "jerusalem") expect(doc.querySelector('aside a[href="#request-quote"]')?.getAttribute("href")).toBe("#request-quote");
       else expect(doc.querySelector('#option-private a[href="#request-quote"]')?.getAttribute("href")).toBe("#request-quote");
-      if (id === "jerusalem" || id === "tel-aviv" || id === "haifa") expect(doc.querySelector("#comparison")?.textContent).toContain("Final taxi fares depend");
-      else if (g.historicalPrices === false) expect(doc.body.textContent).toContain("this guide does not quote an unverified current fare");
-      else expect(doc.body.textContent).toContain("historical editorial estimates");
+      expect(doc.querySelector("#comparison")?.textContent).toContain("Final taxi fares depend");
       const sourceDisclosure = doc.querySelector("#sources details");
       expect(sourceDisclosure).not.toBeNull();
       expect(sourceDisclosure!.hasAttribute("open")).toBe(false);
       expect(sourceDisclosure!.querySelector("summary")?.textContent).toContain("Sources");
-      expect(sourceDisclosure!.querySelectorAll("a")).toHaveLength(id === "jerusalem" || id === "tel-aviv" ? 7 : 6);
-      expect(article.citation).toHaveLength(id === "tel-aviv" ? 7 : 6);
+      expect(sourceDisclosure!.querySelectorAll("a")).toHaveLength(id === "ein-bokek" ? 9 : id === "tel-aviv" ? 7 : 6);
+      expect(article.citation).toHaveLength(id === "ein-bokek" ? 9 : id === "tel-aviv" ? 7 : 6);
       expect(JSON.stringify(article.citation)).not.toContain("israel-taxi.com");
     }
     expect(new Set(titles).size).toBe(4);
@@ -327,6 +325,26 @@ describe("four independent airport transportation comparisons", () => {
     expect(doc.querySelectorAll("figure img")).toHaveLength(3);
     expect(doc.querySelectorAll("table")).toHaveLength(2);
     expect(doc.querySelector("#option-alternative")).toBeNull();
+    expect(g.updatedAt).toBe("2026-11-12");
+    expect(g.title).toMatch(/^Ben Gurion Airport to Ein Bokek/);
+    expect(g.related).toHaveLength(6);
+    expect(g.planNext).toHaveLength(4);
+    expect(g.faqs.length).toBeGreaterThanOrEqual(14);
+    expect(g.options.every(option => Boolean(option.comparison?.advantages && option.comparison?.drawbacks))).toBe(true);
+    expect(doc.querySelector("#station-choice")).toBeNull();
+    expect(doc.querySelector("#comparison table thead tr")?.children).toHaveLength(5);
+    expect(doc.querySelectorAll("#option-rail table tbody tr")).toHaveLength(4);
+    expect(doc.querySelectorAll('#option-rail aside[data-testid="useful-journey-link"]')).toHaveLength(3);
+    expect(doc.querySelectorAll('#options aside[data-testid="useful-journey-link"]')).toHaveLength(6);
+    expect(doc.querySelector('#option-rail a[href="https://rail.co.il/?lan=en&page=vouchers-jerusalem"]')).not.toBeNull();
+    expect(doc.querySelector('#option-rail a[href="https://www.egged.co.il/en/information-for-passengers/tickets-information"]')).not.toBeNull();
+    expect(doc.querySelector('#option-rental a[href="https://ims.gov.il/en/warning"]')).not.toBeNull();
+    expect(doc.querySelector('#option-rail a[href="/travel-blog/best-dead-sea-hotels/"]')).not.toBeNull();
+    expect(doc.querySelector('#option-rail a[href="/travel-blog/how-to-get-from-ben-gurion-airport-to-tel-aviv/"]')).not.toBeNull();
+    expect(doc.querySelector('section[aria-label="Related practical guides"]')?.querySelectorAll("li")).toHaveLength(6);
+    expect(doc.querySelector('section[aria-label="Plan the next part of your trip"]')?.querySelectorAll("li")).toHaveLength(4);
+    expect(doc.querySelector("main")?.lastElementChild?.id).toBe("sources");
+
     for (const option of g.options) for (const link of option.inlineLinks || []) {
       const anchor = doc.querySelector(`#option-${option.id} a[href="${link.to}"]`);
       expect(anchor, option.id + " link " + link.text).not.toBeNull();
@@ -337,8 +355,8 @@ describe("four independent airport transportation comparisons", () => {
     }
     expect(doc.querySelector('aside a[href="#request-quote"]')).not.toBeNull();
     expect(doc.querySelector('section[aria-label="Related practical guides"]')).not.toBeNull();
-    expect(doc.querySelector('section[aria-label="Other airport journey comparisons"]')).not.toBeNull();
-    expect(doc.querySelectorAll("#sources a")).toHaveLength(6);
+    expect(doc.querySelector('section[aria-label="Other airport journey comparisons"]')).toBeNull();
+    expect(doc.querySelectorAll("#sources a")).toHaveLength(9);
     expect(doc.body.textContent).not.toMatch(/≈ ₪35–50|≈ ₪800–1,100/);
   });
 
@@ -356,7 +374,7 @@ describe("four independent airport transportation comparisons", () => {
       const html = renderToString(<RouterContextProvider router={router}><AirportJourneyPage id={id} /></RouterContextProvider>);
       const doc = new DOMParser().parseFromString(html, "text/html");
       const callouts = doc.querySelectorAll('aside[aria-label="Private transfer quote for ' + g.city + '"]');
-      if (id === "jerusalem" || id === "tel-aviv" || id === "haifa") {
+      if (id === "jerusalem" || id === "tel-aviv" || id === "haifa" || id === "ein-bokek") {
         expect(callouts).toHaveLength(0);
         if (id === "jerusalem") expect(doc.querySelector('#option-rail aside[aria-label="Important Jerusalem train ticket information"]')).not.toBeNull();
         else expect(doc.querySelectorAll('#option-rail table tbody tr')).toHaveLength(4);
@@ -376,7 +394,7 @@ describe("four independent airport transportation comparisons", () => {
       expect(quote?.querySelector('input[name="date"]')).not.toBeNull();
       expect(quote?.querySelector('input[name="flight"]')).not.toBeNull();
       expect(quote?.querySelector('button[type="submit"]')).not.toBeNull();
-      if (id === "jerusalem" || id === "tel-aviv" || id === "haifa") {
+      if (id === "jerusalem" || id === "tel-aviv" || id === "haifa" || id === "ein-bokek") {
         expect(doc.querySelector("main")?.lastElementChild?.id).toBe("sources");
         expect(doc.querySelector('#sources details:not([open])')).not.toBeNull();
       } else {
@@ -385,7 +403,7 @@ describe("four independent airport transportation comparisons", () => {
       expect(doc.querySelector('nav[aria-label="On this page"] a[href="#request-quote"]')).not.toBeNull();
       expect(doc.body.textContent).not.toContain("The private-transfer page lists its own weekday starting price and conditions.");
       expect(doc.body.textContent).not.toContain("I operate the private transport service promoted on this site;");
-      expect(doc.querySelectorAll('aside[aria-label^="Private transfer quote"]')).toHaveLength(id === "jerusalem" || id === "tel-aviv" || id === "haifa" ? 0 : 1);
+      expect(doc.querySelectorAll('aside[aria-label^="Private transfer quote"]')).toHaveLength(0);
       expect(rateId === "dead-sea" ? g.city.includes("Ein Bokek") : g.city.length > 0).toBe(true);
       expect(doc.querySelectorAll("#sources details")).toHaveLength(1);
     }
@@ -412,8 +430,11 @@ describe("four independent airport transportation comparisons", () => {
         expect(doc.querySelectorAll("#option-rail figure img")).toHaveLength(2);
       }
       if (id === "ein-bokek") {
-        expect(doc.querySelector("#station-choice h2")?.nextElementSibling?.firstElementChild?.tagName).toBe("P");
-        expect(doc.querySelector("#options > h2")?.nextElementSibling?.tagName).toBe("P");
+        expect(doc.querySelector("#station-choice")).toBeNull();
+        const hotelHeading = [...doc.querySelectorAll("#option-rail h4")].find(el => el.textContent?.includes("Get off at the correct Dead Sea hotel stop"))!;
+        expect(hotelHeading.nextElementSibling?.tagName).toBe("P");
+        expect(hotelHeading.nextElementSibling?.nextElementSibling?.tagName).toBe("FIGURE");
+        expect(doc.querySelectorAll("#option-rail figure img")).toHaveLength(2);
       }
       const related = doc.querySelector('section[aria-label="Related practical guides"]');
       if (related) {
