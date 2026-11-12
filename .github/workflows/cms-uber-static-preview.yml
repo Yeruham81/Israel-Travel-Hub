@@ -2,7 +2,7 @@ name: CMS pilot - Render Uber draft as static HTML (no deployment)
 
 on:
   pull_request:
-    types: [labeled]
+    types: [labeled, synchronize]
 
 permissions:
   contents: read
@@ -15,8 +15,8 @@ jobs:
   preview:
     name: Build and verify offline Uber preview
     if: >-
-      ${{ github.event.action == 'labeled'
-          && github.event.label.name == 'cms-preview-uber'
+      ${{ (github.event.action == 'labeled' && github.event.label.name == 'cms-preview-uber'
+              || github.event.action == 'synchronize' && contains(github.event.pull_request.labels.*.name, 'cms-preview-uber'))
           && github.event.pull_request.number == 12
           && github.event.pull_request.head.repo.full_name == github.repository
           && github.event.pull_request.head.ref == 'feature/sanity-uber-pilot-20261112' }}
