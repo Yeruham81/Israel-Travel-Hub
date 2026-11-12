@@ -93,21 +93,24 @@ describe("transport cluster: twelve editorial guides and four private landings",
 
   it("retains Ein Bokek's Jerusalem-first route, current-fare caution and full guide design", () => {
     const guide = airportJourneyGuides["ein-bokek"];
-    expect(guide.updatedAt).toBe("2026-10-22");
+    expect(guide.updatedAt).toBe("2026-11-12");
     expect(guide.historicalPrices).toBe(false);
-    expect(guide.title).toMatch(/2026.*Bus.*Taxi.*Car/);
+    expect(guide.title).toMatch(/^Ben Gurion Airport to Ein Bokek.*Train.*Bus.*Taxi/);
     expect(guide.answer).toMatch(/Jerusalem.*486.*444/s);
     expect(guide.answer).toMatch(/voucher/);
     expect(guide.options.map(o => o.id)).not.toContain("alternative");
-    expect(guide.trainIntro).toMatch(/421.*limited alternative/);
+    expect(guide.options.find(o => o.id === "rail")?.paragraphs.join(" ")).toMatch(/421.*limited/i);
     expect(guide.options.find(o => o.id === "rail")?.cost).not.toContain("₪");
     expect(guide.options.find(o => o.id === "taxi")?.cost).toMatch(/meter/i);
     expect(guide.options.every(option => (option.inlineLinks?.length || 0) > 0)).toBe(true);
     expect(guide.photos?.station.alt).toContain("Terminal 3");
     expect(guide.photos?.onward.alt).toContain("Dead Sea");
-    expect(guide.sources).toHaveLength(6);
-    expect(guide.faqs).toHaveLength(10);
+    expect(guide.sources).toHaveLength(9);
+    expect(guide.faqs).toHaveLength(14);
     expect(guide.weekend.join(" ")).toMatch(/Shabbat/);
+    expect(guide.related).toHaveLength(6);
+    expect(guide.planNext).toHaveLength(4);
+    expect(guide.options.every(option => Boolean(option.comparison?.advantages && option.comparison?.drawbacks))).toBe(true);
     expect(guide.related.some(link => link.to === "/travel-blog/jerusalem-to-the-dead-sea/")).toBe(true);
   });
 
