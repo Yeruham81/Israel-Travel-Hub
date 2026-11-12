@@ -719,7 +719,7 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
               src: jerusalemLightRail,
               alt: "Jerusalem light rail train alongside a street-level platform",
             },
-            highlightedLinks: [{ label: "DANKAL Red Line — ticketing and validation", href: "https://www.nta.co.il/en/buying-tickets-and-validation-machines/", context: "Validate your Rav-Kav or app journey before boarding the Red Line, including when connecting from another service." }],
+            highlightedLinks: [{ label: "Tel Aviv light rail Red Line — ticketing and validation", href: "https://www.nta.co.il/en/buying-tickets-and-validation-machines/", context: "Validate your Rav-Kav or app journey before boarding the Red Line, including when connecting from another service." }],
             sourceIds: ["guide-red-line", "guide-urban-transit-validation", "guide-haifa-carmelit"],
           },
         ],
@@ -1024,7 +1024,7 @@ telAviv: {
     title: "Getting Around Tel Aviv: Buses, Red Line, Taxis & Shabbat Travel",
     description: "Practical Tel Aviv transport guide: how to pay for buses and the Red Line, which train station to use, weekend buses, taxis, bikes and accessible travel.",
     intro: "Tel Aviv is easy to explore without a rental car when you choose the right mode for each part of the city. Here is how to connect the beach, Jaffa, neighborhoods and railway stations, pay correctly and plan around Shabbat.",
-    answer: "For most central Tel Aviv visits, walk between nearby sights, use city buses for wider coverage and take the DANKAL Red Line when its stops match your journey. Israel Railways is mainly for Ben Gurion Airport and other cities, not the beachfront. A licensed taxi is useful with luggage, after a late arrival or on Shabbat. Regular buses and rail normally stop for Shabbat, but the separate free Na'im Busofash network covers selected weekend routes. Confirm the last leg, boarding direction, validation method and return trip before you leave.",
+    answer: "For most central Tel Aviv visits, walk between nearby sights, use city buses for wider coverage and take the Red Line of Tel Aviv's light rail (locally called Dankal) when its stops match your journey. Israel Railways is mainly for Ben Gurion Airport and other cities, not the beachfront. A licensed taxi is useful with luggage, after a late arrival or on Shabbat. Regular buses and rail normally stop for Shabbat, but the separate free Na'im Busofash network covers selected weekend routes. Confirm the last leg, boarding direction, validation method and return trip before you leave.",
     updatedAt: "2026-11-12",
     topics: ["transportation", "destinations", "tips"],
     photo: migrationPhotos["EXISTING:coast"],
@@ -1075,7 +1075,7 @@ telAviv: {
             id: "ta-ravkav", title: "Rav-Kav: a practical choice for visitors",
             paragraphs: [
               "An anonymous Rav-Kav is a reusable public-transport card that tourists can obtain and load at supported points. Plan where to obtain it before you arrive at a stop; not every station or shop issues a new card. A supported NFC smartphone and card-loading service can be convenient for top-ups.",
-              "Tap your card on the bus validator after boarding. On DANKAL, validate before entering the train, including for a valid pass or a qualifying transfer. Inspectors may ask to see the card used for validation.",
+              "Tap your card on the bus validator after boarding. On the Red Line light rail, validate before entering the train, including for a valid pass or a qualifying transfer. Inspectors may ask to see the card used for validation.",
             ],
             externalLinks: [{ label: "Rav-Kav Online — card information and top-up", href: "https://ravkavonline.co.il/en/" }],
             sourceIds: ["guide-public-transport-payments", "guide-redline-tickets"],
@@ -1092,7 +1092,7 @@ telAviv: {
             id: "ta-bank-card", title: "Can I tap a foreign credit card on a bus?",
             paragraphs: [
               "Dan publishes contactless Visa and Mastercard acceptance on its own bus services, including international-issued cards and compatible wallets. As of November 2026, Dan's official guidance lists NIS 8 for a full-fare single ride, covers one person per card and does not include a free 90-minute transfer or the usual discounts. Check for later fare updates before your journey.",
-              "Do not assume the same bank-card rules apply on every bus operator, the DANKAL Red Line or Israel Railways. For transfers, several travelers or reduced fares, use a suitable Rav-Kav or approved ticketing app instead.",
+              "Do not assume the same bank-card rules apply on every bus operator, the Red Line light rail or Israel Railways. For transfers, several travelers or reduced fares, use a suitable Rav-Kav or approved ticketing app instead.",
             ],
             tables: [{
               caption: "Which ticketing method should I choose?",
@@ -1154,7 +1154,7 @@ telAviv: {
         sourceIds: ["guide-telaviv-transit", "guide-bus-planner", "guide-public-transport-payments"],
       },
       {
-        id: "red-line", title: "DANKAL Red Line: useful Tel Aviv stops and how it works",
+        id: "red-line", title: "Tel Aviv light rail: Red Line stops and how it works",
         paragraphs: [
           "The operating Red Line links parts of Tel Aviv–Jaffa with Bat Yam, Ramat Gan, Bnei Brak and Petah Tikva. It is particularly useful along the Ayalon/Begin corridor and in parts of Jaffa, but it does not run along the beachfront or directly reach many northern hotels. Future Green and Purple Line maps should not be mistaken for services already running.",
           "The Red Line has different service patterns (R1, R2 and R3, with R2 described by the operator as partially operated). Read the electronic destination signs before boarding; not every train has the same terminus. Underground and street-level stations use different layouts.",
@@ -1178,7 +1178,7 @@ telAviv: {
           id: "ta-redline-validation", title: "Validate before you board",
           paragraphs: [
             "The Red Line requires ticketing and validation before boarding—not inside the tram. At a street-level platform, use the designated validator or ticket machine; at underground stations, follow the gate, Rav-Kav or app QR instructions. Retain the validated card or app journey for inspection.",
-            "Even with a travel pass or an eligible connecting trip, validate the new leg. On leaving an underground station, follow the exit-gate process for your Rav-Kav or app. A normal bank-card tap on a Dan bus is not a DANKAL ticket.",
+            "Even with a travel pass or an eligible connecting trip, validate the new leg. On leaving an underground station, follow the exit-gate process for your Rav-Kav or app. A normal bank-card tap on a Dan bus is not a light-rail ticket.",
           ],
           externalLinks: [
             { label: "NTA — the Red Line and its stations", href: "https://www.nta.co.il/en/light-rail/red-line/" },
@@ -1253,7 +1253,7 @@ telAviv: {
       {
         id: "shabbat", title: "Getting around Tel Aviv on Shabbat and holidays",
         paragraphs: [
-          "Regular Israeli buses, Israel Railways and the DANKAL Red Line generally do not run during Shabbat. Tel Aviv and partner municipalities operate a separate free weekend network called Na'im Busofash on selected routes. It does not cover all weekday destinations, and its stops and schedule must be checked independently.",
+          "Regular Israeli buses, Israel Railways and the Red Line light rail generally do not run during Shabbat. Tel Aviv and partner municipalities operate a separate free weekend network called Na'im Busofash on selected routes. It does not cover all weekday destinations, and its stops and schedule must be checked independently.",
           "As of November 2026, the operator lists 17 weekend lines and general service hours of Friday from 16:30 to 02:00 and Saturday from 09:00 to 17:30. Service hours, holiday operation and routes can change, so use the official live map or journey apps before departing. The municipality lists Line 711 between Shoham and central Tel Aviv via Ben Gurion Airport Terminal 1; do not assume that this stops at Terminal 3 or replaces ordinary airport transfers.",
           "If the free weekend network does not fit the journey, consider a licensed taxi, walking or a prearranged ride. For flights, see the dedicated Ben Gurion Airport on Shabbat guide and confirm terminal access and luggage requirements separately.",
         ],
@@ -1263,7 +1263,7 @@ telAviv: {
           headers: ["Service", "General weekend position", "Important caveat"],
           rows: [
             ["Normal city bus lines", "Generally suspended", "Do not confuse with municipal weekend lines"],
-            ["DANKAL Red Line", "No normal Shabbat service", "Check holiday and reopening notices"],
+            ["Red Line light rail", "No normal Shabbat service", "Check holiday and reopening notices"],
             ["Israel Railways", "No regular Shabbat service", "Verify last and first train at each station"],
             ["Na'im Busofash", "Free on its selected weekend routes", "Separate map, schedule and stops"],
             ["Licensed taxis", "Usually bookable", "Availability, tariff and pickup vary"],
@@ -1297,7 +1297,7 @@ telAviv: {
           rows: [
             ["Moovit or Google Maps", "Comparing walking, bus and light-rail paths", "Live disruptions, payment and stop direction"],
             ["Israel Railways planner", "Rail station and departure planning", "Final hotel connection and current service changes"],
-            ["DANKAL and route operator sites", "Red Line stations, routes and service notices", "Correct platform, payment and accessibility"],
+            ["Light-rail and transit operator sites", "Red Line stations, routes and service notices", "Correct platform, payment and accessibility"],
             ["Rav-Kav or authorized payment app", "Paying and validating eligible journeys", "Account compatibility and the exact fare product"],
             ["Taxi-booking app", "Requesting a licensed taxi", "Accepted driver, fare basis and vehicle requirements"],
           ],
@@ -1323,7 +1323,7 @@ telAviv: {
       { q: "Do I need a car to see Tel Aviv?", a: "Usually not for a central stay. Combine walking with buses, the Red Line when convenient, and taxis for luggage or awkward connections. A car can make more sense for multiple rural day-trip stops." },
       { q: "How do tourists pay for city buses?", a: "Use a loaded Rav-Kav, an approved payment app or a bank card only where the operator specifically supports it. Cash to the driver is not the normal method. Validate each journey." },
       { q: "Can I use a foreign Visa or Mastercard on Dan buses?", a: "Dan's November 2026 guidance accepts qualifying international Visa and Mastercard contactless cards and wallets. The listed NIS 8 charge is a full-fare single ride, for one passenger, with no free 90-minute transfer. Verify current rules and your exact operator." },
-      { q: "Is my Dan bus bank-card tap valid on the Red Line?", a: "No. A contactless bank-card ride on Dan is separate from DANKAL ticketing. Use a valid Rav-Kav or approved app and validate before boarding the tram." },
+      { q: "Is my Dan bus bank-card tap valid on the Red Line?", a: "No. A contactless bank-card ride on Dan is separate from light-rail ticketing. Use a valid Rav-Kav or approved app and validate before boarding the tram." },
       { q: "Do I need to validate again when transferring?", a: "Yes. Revalidate each bus or Red Line leg even when an eligible pass or transfer means no additional payment. Direct bank-card taps on Dan do not include the usual 90-minute free transfer." },
       { q: "Does the Red Line reach Tel Aviv's beaches?", a: "Not directly along the beachfront. It serves central and southern corridors, including parts of Jaffa. Compare the final walk or a bus connection with a direct bus or taxi." },
       { q: "Which Red Line station is best for Jaffa?", a: "Shalma, Bloomfield or another southern stop may help, depending on your exact destination, but Old Jaffa and the port can require additional walking. Check the route and station exit." },
