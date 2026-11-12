@@ -402,7 +402,7 @@ describe("migrated practical guides", () => {
     expect(bankCard.paragraphs.join(" ")).toMatch(/Eilat, Jerusalem and metropolitan Haifa/);
     expect(bankCard.paragraphs.join(" ")).toMatch(/international Visa and Mastercard/);
     expect(bankCard.paragraphs.join(" ")).toMatch(/expand gradually, but as of November 2026/);
-    const airport = guide.sections.find(section => section.id === "public-transport")!.subsections!.find(sub => sub.id === "israel-airport-options")!;
+    const airport = guide.sections.find(section => section.id === "taxis-and-sherut")!.subsections!.find(sub => sub.id === "israel-airport-options")!;
     expect(airport.paragraphs.join(" ")).toContain("My airport arrival guide");
     expect(airport.paragraphs.join(" ")).toContain("My Ben Gurion Airport taxi guide");
     expect(bankCard.sourceIds).toContain("guide-egged-card-payment-2026");
