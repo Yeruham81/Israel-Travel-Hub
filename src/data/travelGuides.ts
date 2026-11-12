@@ -1158,10 +1158,10 @@ telAviv: {
           caption: "Red Line stations and nearby places",
           headers: ["Station", "Nearby places and connections"],
           rows: [
-            ["Arlosoroff", "Tel Aviv Savidor Center railway station and major bus connections"],
+            ["Arlozorov", "Tel Aviv Savidor Center railway station and major bus connections"],
             ["Sha'ul HaMelekh", "Tel Aviv Museum of Art and government offices"],
             ["Yehudit", "Sarona and the Begin business district"],
-            ["Carlebach", "Central business district and onward bus connections"],
+            ["Karlibach", "Central business district and onward bus connections"],
             ["Allenby", "Allenby Street, Rothschild Boulevard and Carmel Market area"],
             ["Elifelet", "Neve Tzedek and the southern city"],
             ["Shalma (Salame)", "Southern Jaffa and the theater district"],
@@ -1193,7 +1193,7 @@ telAviv: {
           headers: ["Station", "Practical orientation", "Typical reason to choose it"],
           rows: [
             ["Tel Aviv University", "North Tel Aviv, university and Expo area", "Northern destination or suitable onward local connection"],
-            ["Tel Aviv Savidor Center", "Central-northern Ayalon corridor; bus connections", "Transferring to a bus or Red Line at Arlosoroff"],
+            ["Tel Aviv Savidor Center", "Central-northern Ayalon corridor; bus connections", "Transferring to a bus or Red Line at Arlozorov"],
             ["Tel Aviv HaShalom", "Azrieli area and central business district", "Nearby offices, shopping or cross-town onward travel"],
             ["Tel Aviv HaHagana", "Southern Ayalon corridor", "Southern-area journey or an appropriate bus transfer"],
           ],
