@@ -60,6 +60,8 @@ function unwrap(node) {
 }
 const registry = sourceFile('src/data/registry.ts');
 const guides = sourceFile('src/data/travelGuides.ts');
+const taxiCluster = sourceFile('src/data/taxiGuideCluster.ts');
+const expandedGuides = sourceFile('src/data/travelGuideExpansion.ts');
 function evaluate(input, file, visited = new Set()) {
   const node = unwrap(input);
   if (ts.isStringLiteral(node) || ts.isNoSubstitutionTemplateLiteral(node)) return node.text;
@@ -111,6 +113,24 @@ const uber = evaluate(uberAst, guides);
 const pathMap = evaluate(findVariable(registry, 'travelGuidePaths'), registry);
 if (uber.id !== 'uber' || pathMap.uber !== '/travel-blog/uber-in-israel/') {
   throw new Error('Wrong target guide or canonical path: refusing import.');
+}
+
+function relatedGuideTitle(id) {
+  const sources = [
+    [guides, 'travelGuides'],
+    [taxiCluster, 'taxiGuideCluster'],
+    [expandedGuides, 'expandedTravelGuides'],
+  ];
+  for (const [file, variable] of sources) {
+    try {
+      const record = getField(findVariable(file, variable), id, file);
+      const title = evaluate(getField(record, 'title', file), file);
+      if (typeof title === 'string' && title.length) return title;
+    } catch {
+      // This guide is defined by another module: try the next known collection.
+    }
+  }
+  throw new Error('Cannot resolve editorial title of related guide ' + id);
 }
 
 function sourceRecords() {
@@ -303,7 +323,7 @@ async function guideDraft(client) {
       _type: 'faqItem', _key: 'faq-' + i, question: faq.q, answer: faq.a,
     })),
     sources: uber.sourceIds.map(ref),
-    related: links(uber.related.map(id => ({label: id, to: pathMap[id]}))),
+    related: links(uber.related.map(id => ({label: relatedGuideTitle(id), to: pathMap[id]}))),
     services: links(uber.services),
     ...(uber.nextSteps ? {nextSteps: links(uber.nextSteps)} : {}),
     // factCheckedAt is deliberately not inferred from editorial updatedAt.
@@ -339,6 +359,7 @@ const client = createClient({
   dataset,
   apiVersion: '2026-03-01',
   useCdn: false,
+  perspective: 'raw',
   token: process.env.SANITY_IMPORT_TOKEN,
 });
 const existing = await client.fetch('*[_id in $ids]{_id}', {ids: [guideId, draftId]});
