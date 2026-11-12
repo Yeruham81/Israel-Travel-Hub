@@ -43,7 +43,7 @@ describe("transport cluster: twelve editorial guides and four private landings",
         expect(page.title).toMatch(/^Private transfer/);
         expect(JSON.parse(page.head.scripts!.at(-1)!.children).mainEntity.serviceType).toBe("Private airport transfer");
       } else if (page.intent === "comparison") {
-        expect(page.title).toMatch(["jerusalem", "tel-aviv", "haifa"].some(city => page.path.includes("how-to-get-from-ben-gurion-airport-to-" + city)) ? /Ben Gurion Airport to (?:Jerusalem|Tel Aviv|Haifa)/i : /^How to get from Ben Gurion Airport/i);
+        expect(page.title).toMatch(/Ben Gurion Airport to (?:Jerusalem|Tel Aviv|Haifa|Ein Bokek)/i);
         expect(JSON.parse(page.head.scripts!.at(-1)!.children)["@type"]).toBe("Article");
       }
     }
