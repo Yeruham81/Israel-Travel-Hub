@@ -1,6 +1,10 @@
 name: CMS pilot - Validate or deploy Sanity Studio
 
 on:
+  pull_request:
+    paths:
+      - 'cms-pilot/**'
+      - '.github/workflows/cms-studio-pilot.yml'
   workflow_dispatch:
     inputs:
       deploy_studio:
