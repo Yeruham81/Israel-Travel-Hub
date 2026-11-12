@@ -216,18 +216,25 @@ export function Checklist({ title, items }: { title: string; items: string[] }) 
   );
 }
 
-export function FaqList({ faqs }: { faqs: { q: string; a: string }[] }) {
+export function FaqList({
+  faqs, groups,
+}: {
+  faqs: { q: string; a: string }[];
+  groups?: { title: string; indexes: number[] }[];
+}) {
+  const renderAnswer = (f: { q: string; a: string }) => <details key={f.q} className="group p-5">
+    <summary className="flex cursor-pointer list-none justify-between gap-4 font-semibold">{f.q}<span aria-hidden className="text-primary transition-transform group-open:rotate-45">+</span></summary>
+    <p className="mt-3 leading-relaxed text-foreground">{f.a}</p>
+  </details>;
   return (
     <section id="faq" aria-labelledby="faq-h" className="mt-14">
       <h2 id="faq-h" className="text-3xl">Frequently asked questions</h2>
-      <div className="mt-4 divide-y rounded-2xl border bg-card">
-        {faqs.map((f) => (
-          <details key={f.q} className="group p-5">
-            <summary className="flex cursor-pointer list-none justify-between gap-4 font-semibold">{f.q}<span aria-hidden className="text-primary transition-transform group-open:rotate-45">+</span></summary>
-            <p className="mt-3 leading-relaxed text-foreground">{f.a}</p>
-          </details>
-        ))}
-      </div>
+      {groups?.length ? <div className="mt-5 space-y-7">
+        {groups.map(group => <section key={group.title} aria-label={group.title}>
+          <h3 className="mb-3 text-xl font-semibold">{group.title}</h3>
+          <div className="divide-y rounded-2xl border bg-card">{group.indexes.map(i => faqs[i]).filter((f): f is { q: string; a: string } => Boolean(f)).map(renderAnswer)}</div>
+        </section>)}
+      </div> : <div className="mt-4 divide-y rounded-2xl border bg-card">{faqs.map(renderAnswer)}</div>}
     </section>
   );
 }
