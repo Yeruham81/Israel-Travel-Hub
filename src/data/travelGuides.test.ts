@@ -1,5 +1,6 @@
 import { describe, expect, it } from "vitest";
-import { filterGuides, getGuideTopicLabel, guideDirectory, guideTopics, isGuideTopic } from "@/data/travelGuides";
+import { filterGuides, getGuideTopicLabel, guideDirectory, guideTopics, isGuideTopic, travelGuides } from "@/data/travelGuides";
+import { formatCheckDate } from "@/data/registry";
 
 describe("travel guide topic filters and prerender safety", () => {
   it("defines a label for every directory topic and accepts every valid topic", () => {
@@ -22,6 +23,14 @@ describe("travel guide topic filters and prerender safety", () => {
       expect(getGuideTopicLabel(topic)).toBeUndefined();
       expect(filterGuides("", topic)).toEqual(guideDirectory);
       expect(filterGuides("airport", topic)).toEqual(filterGuides("airport"));
+    }
+  });
+
+  it("displays editorial check and update dates by month and year across travel guides", () => {
+    expect(formatCheckDate("2026-11-12")).toBe("November 2026");
+    const exactDayCheck = /\b(?:checked|reviewed|verified|updated)\s+(?:on\s+|in\s+)?(?:January|February|March|April|May|June|July|August|September|October|November|December)\s+\d{1,2},\s+20\d{2}\b/i;
+    for (const guide of Object.values(travelGuides)) {
+      expect(JSON.stringify(guide), guide.id).not.toMatch(exactDayCheck);
     }
   });
 
