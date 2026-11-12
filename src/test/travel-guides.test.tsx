@@ -318,6 +318,12 @@ describe("migrated practical guides", () => {
     const guide = travelGuides.telAviv;
     expect(container.querySelector('header figure img')?.getAttribute("src")).toBe(guide.photo.src);
     expect(container.querySelector('section[aria-label="Transport planning essentials"]')?.children).toHaveLength(3);
+    const weekendMap = container.querySelector<HTMLAnchorElement>('section[aria-label="Transport planning essentials"] a');
+    expect(weekendMap).not.toBeNull();
+    expect(weekendMap?.textContent).toContain("weekend map");
+    expect(weekendMap?.href).toBe("https://experience.arcgis.com/experience/9f4b2c7f7143485a887e8576a15ce8e7/");
+    expect(weekendMap).toHaveAttribute("target", "_blank");
+    expect(weekendMap).toHaveAttribute("rel", "noopener noreferrer");
     const jumpNav = container.querySelector('nav[aria-label="Quick transport topics"]')!;
     expect(jumpNav.querySelectorAll('a[href^="#"]')).toHaveLength(4);
     for (const anchor of jumpNav.querySelectorAll<HTMLAnchorElement>('a[href^="#"]')) {
