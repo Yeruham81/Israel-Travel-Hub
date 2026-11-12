@@ -100,7 +100,7 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
         id: "uber-status",
         title: "Does Uber work in Israel in 2026?",
         paragraphs: [
-          "As checked on November 11, 2026, Uber's Israel-facing website says passenger rides are unavailable here. An app download or local landing page is not evidence that you can book a driver. Lyft's official rider-city list likewise does not include Israel.",
+          "As of November 2026, Uber's Israel-facing website says passenger rides are unavailable here. An app download or local landing page is not evidence that you can book a driver. Lyft's official rider-city list likewise does not include Israel.",
           "On March 24, 2026, a proposal to allow paid app-based rides in private cars passed its first Knesset reading and was sent to the Economic Affairs Committee. A first reading is not a law in force or a launch announcement; do not assume Uber or Lyft will be operating for your trip.",
         ],
         sourceIds: ["guide-uber-availability","guide-lyft-cities","guide-ridesharing-bill-2026"],
@@ -1091,7 +1091,7 @@ telAviv: {
           {
             id: "ta-bank-card", title: "Can I tap a foreign credit card on a bus?",
             paragraphs: [
-              "Dan publishes contactless Visa and Mastercard acceptance on its own bus services, including international-issued cards and compatible wallets. According to its official guidance checked on November 12, 2026, this charges NIS 8 for a full-fare single ride, covers one person per card and does not include a free 90-minute transfer or the usual discounts. Check for later fare updates before your journey.",
+              "Dan publishes contactless Visa and Mastercard acceptance on its own bus services, including international-issued cards and compatible wallets. According to its official guidance checked in November 2026, this charges NIS 8 for a full-fare single ride, covers one person per card and does not include a free 90-minute transfer or the usual discounts. Check for later fare updates before your journey.",
               "Do not assume the same bank-card rules apply on every bus operator, the DANKAL Red Line or Israel Railways. For transfers, several travelers or reduced fares, use a suitable Rav-Kav or approved ticketing app instead.",
             ],
             tables: [{
@@ -1253,7 +1253,7 @@ telAviv: {
         id: "shabbat", title: "Getting around Tel Aviv on Shabbat and holidays",
         paragraphs: [
           "Regular Israeli buses, Israel Railways and the DANKAL Red Line generally do not run during Shabbat. Tel Aviv and partner municipalities operate a separate free weekend network called Na'im Busofash on selected routes. It does not cover all weekday destinations, and its stops and schedule must be checked independently.",
-          "As published by the operator when checked on November 12, 2026, the network has 17 lines and generally runs Friday from 16:30 to 02:00 and Saturday from 09:00 to 17:30. Service hours, holiday operation and routes can change, so use the official live map or journey apps before departing. The municipality lists Line 711 between Shoham and central Tel Aviv via Ben Gurion Airport Terminal 1; do not assume that this stops at Terminal 3 or replaces ordinary airport transfers.",
+          "According to the operator's information checked in November 2026, the network has 17 lines and generally runs Friday from 16:30 to 02:00 and Saturday from 09:00 to 17:30. Service hours, holiday operation and routes can change, so use the official live map or journey apps before departing. The municipality lists Line 711 between Shoham and central Tel Aviv via Ben Gurion Airport Terminal 1; do not assume that this stops at Terminal 3 or replaces ordinary airport transfers.",
           "If the free weekend network does not fit the journey, consider a licensed taxi, walking or a prearranged ride. For flights, see the dedicated Ben Gurion Airport on Shabbat guide and confirm terminal access and luggage requirements separately.",
         ],
         inlineLinks: [{ text: "Ben Gurion Airport on Shabbat guide", to: travelGuidePaths.shabbat }],
