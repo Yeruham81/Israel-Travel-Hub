@@ -8,6 +8,12 @@ if [[ "${HOSTINGER_STATIC_BUILD:-}" != "true" ]]; then
   exit 1
 fi
 
+# Read the Sanity snapshot only when an explicit build mode is requested.
+# The fetcher fails closed on missing draft / sources and does not mutate Sanity.
+if [[ -n "${SANITY_UBER_SOURCE:-}" ]]; then
+  node scripts/sanity/fetch-uber.mjs
+fi
+
 log="$(mktemp)"
 trap 'rm -f "$log"' EXIT
 
