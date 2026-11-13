@@ -74,6 +74,34 @@ describe("homepage marketing copy and service sections", () => {
       expect(section.lastElementChild).toContainElement(button);
       expect(section.querySelector('[data-testid="service-layout-' + sectionId + '"]')!.compareDocumentPosition(button) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
     }
+    // Six distinct destinations link directly to the matching tour-category pages.
+    const toursSection = document.getElementById("tours")!;
+    const tourList = within(toursSection).getByRole("list", { name: "Tour destinations" });
+    const tourTiles = within(tourList).getAllByRole("link");
+    expect(tourTiles).toHaveLength(6);
+    expect(tourTiles.map(tile => tile.getAttribute("href"))).toEqual([
+      "/tours/jerusalem/",
+      "/tours/tel-aviv-jaffa/",
+      "/tours/masada-dead-sea/",
+      "/tours/bethlehem-jericho-jordan-river/",
+      "/tours/nazareth-sea-of-galilee/",
+      "/tours/caesarea-haifa-acre/",
+    ]);
+    expect(tourTiles.map(tile => tile.textContent?.trim())).toEqual([
+      "Jerusalem",
+      "Tel Aviv & Jaffa",
+      "Masada & Dead Sea",
+      "Bethlehem & Jericho",
+      "Nazareth & Galilee",
+      "Caesarea, Haifa & Acre",
+    ]);
+    for (const tile of tourTiles) {
+      expect(within(tile).getByRole("img")).toHaveAttribute("loading", "lazy");
+      expect(tile).toHaveClass("group", "relative");
+    }
+    expect(within(toursSection).getAllByRole("img")).toHaveLength(7); // Guide photo + six destinations
+    expect(toursSection.querySelector('[data-testid="service-layout-tours"]')).toHaveClass("lg:grid-cols-[minmax(0,2fr)_minmax(0,3fr)]");
+
     // The former bottom destination strip is consolidated into the accommodation section.
     const accommodationSection = document.getElementById("accommodation")!;
     const destinationLinks = within(accommodationSection).getAllByRole("link").filter(link => link.getAttribute("href")?.startsWith("/travel-blog/"));
