@@ -45,7 +45,7 @@ headline full width. The main homepage slideshow is a **separate** design.
 ## Recommended body order
 
 1. Brief **Quick answer** or **At a glance**: directly answer the search intent.
-2. **On this page** navigation for longer guides; only real headings.
+2. **On this page** navigation for longer guides; only real headings. Never show **Sources** in this navigation or its **All sections** menu. Keep the existing **Sources** disclosure at the bottom of the guide, closed by default and expandable on demand.
 3. Primary information and comparisons, in order of reader importance.
 4. Practical logistics (transport, costs, opening times, accessibility, border
    considerations where relevant) without duplicating the quick answer.
