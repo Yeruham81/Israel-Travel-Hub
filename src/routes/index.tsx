@@ -103,9 +103,10 @@ export const services: Service[] = [
     text: "Start your visit to Israel with a smooth, comfortable arrival. Arrange a private transfer from Ben Gurion Airport to Jerusalem, Tel Aviv, Haifa, or any other destination across the country.",
     feature: { src: "/images/travel-blog/taxi-in-tel-aviv.webp", alt: "Licensed Israeli taxis on a street in Tel Aviv" },
     cards: [
-      { label: "Private Transfer to Jerusalem", text: "Book a private pickup to your Jerusalem hotel", to: "/airport-transfers/ben-gurion-airport-to-jerusalem/", img: IMG.jerusalem },
-      { label: "Private Transfer to Tel Aviv", text: "Airport pickup for Tel Aviv hotels and Jaffa", to: "/airport-transfers/ben-gurion-airport-to-tel-aviv/", img: IMG.telAviv },
-      { label: "Private Transfer to Haifa", text: "Door-to-door travel to Haifa and Mount Carmel", to: "/airport-transfers/ben-gurion-airport-to-haifa/", img: IMG.haifa },
+      { label: "To Jerusalem", to: "/airport-transfers/ben-gurion-airport-to-jerusalem/", img: IMG.jerusalem },
+      { label: "To Tel Aviv", to: "/airport-transfers/ben-gurion-airport-to-tel-aviv/", img: IMG.telAviv },
+      { label: "To Haifa", to: "/airport-transfers/ben-gurion-airport-to-haifa/", img: IMG.haifa },
+      { label: "To Ein Bokek", to: "/airport-transfers/ben-gurion-airport-to-ein-bokek/", img: IMG.deadSea },
     ],
     hub: { label: "Explore airport transfers", to: "/airport-transfers/" },
   },
@@ -195,12 +196,22 @@ function CompactCard({ c }: { c: Card }) {
 }
 
 /** Compact destination tile shared by the homepage tours and attractions sections. */
-function DestinationImageCard({ c }: { c: Card }) {
+function DestinationImageCard({ c, prominent = false }: { c: Card; prominent?: boolean }) {
   return (
     <Link to={c.to} aria-label={c.label} className="group relative block min-w-0 overflow-hidden rounded-lg bg-navy shadow-sm focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-ring">
-      <img src={c.img.thumb ?? c.img.src} alt={c.img.alt} loading="lazy" decoding="async" width={400} height={300} className="aspect-[4/3] w-full object-cover transition-transform duration-500 group-hover:scale-105" />
+      <img
+        src={prominent ? c.img.src : (c.img.thumb ?? c.img.src)}
+        srcSet={prominent && c.img.thumb ? `${c.img.thumb} 360w, ${c.img.src} 720w` : undefined}
+        sizes={prominent ? "(min-width: 1024px) 270px, 45vw" : undefined}
+        alt={c.img.alt}
+        loading="lazy"
+        decoding="async"
+        width={720}
+        height={540}
+        className="aspect-[4/3] w-full object-cover transition-transform duration-500 group-hover:scale-105"
+      />
       <span className="pointer-events-none absolute inset-0 bg-gradient-to-t from-navy/90 via-navy/15 to-transparent" aria-hidden="true" />
-      <span className="absolute inset-x-0 bottom-0 px-2.5 pb-2.5 pt-6 font-serif text-sm font-semibold leading-tight text-navy-foreground sm:px-3 sm:pb-3 sm:text-base">{c.label}</span>
+      <span className={`absolute inset-x-0 bottom-0 px-2.5 pb-2.5 pt-6 font-serif font-semibold leading-tight text-navy-foreground sm:px-3 sm:pb-3 ${prominent ? "text-base sm:text-lg" : "text-sm sm:text-base"}`}>{c.label}</span>
     </Link>
   );
 }
@@ -238,14 +249,9 @@ function Home() {
             </header>
             <div className="mt-6 grid min-w-0 grid-cols-1 gap-4 lg:grid-cols-2 lg:items-stretch" data-testid={`service-layout-${s.id}`}>
               {s.feature && <img src={s.feature.src} alt={s.feature.alt} loading="lazy" decoding="async" width={1400} height={880} className="aspect-[16/10] h-full min-h-64 w-full min-w-0 rounded-xl object-cover lg:max-h-[410px]" />}
-              <ul className="grid min-w-0 grid-cols-1 content-start gap-3" aria-label={`${s.eyebrow} choices`}>
-                {s.cards.slice(0, 3).map((c) => <CompactCard key={c.label} c={c} />)}
+              <ul className="grid min-w-0 grid-cols-2 gap-3 sm:gap-4" aria-label="Airport transfer destinations">
+                {s.cards.map((c) => <li key={c.label} className="min-w-0"><DestinationImageCard c={c} prominent /></li>)}
               </ul>
-              {s.cards.length > 3 && (
-                <ul className="grid gap-3 sm:grid-cols-2 lg:col-span-2" aria-label={`More ${s.eyebrow.toLowerCase()} choices`} data-testid={`service-more-${s.id}`}>
-                  {s.cards.slice(3).map((c) => <CompactCard key={c.label} c={c} />)}
-                </ul>
-              )}
             </div>
             <div className="mt-6 flex justify-center">
               <Link to={s.hub.to} className="btn btn-primary">{s.hub.label} →</Link>
