@@ -46,7 +46,8 @@ describe("Jerusalem content and reciprocal guide cluster", () => {
       if (id === "bethlehem") {
         // The rebuilt travel guide places official operator links next to the relevant transport advice
         // and uses dedicated linked tour and follow-up cards instead of duplicating an editorial appendix.
-        expect(sections.some(section => (section.externalLinks?.length || 0) > 0 || (section.links?.length || 0) > 0)).toBe(true);
+        expect(sections.some(section => section.richParagraphs?.some(spans => spans.some(span => Boolean(span.href))) || (section.externalLinks?.length || 0) > 0 || (section.links?.length || 0) > 0)).toBe(true);
+        expect(sections.find(section => section.id === "private-taxi")?.links).toBeUndefined();
       } else {
         expect(sections.some(section => section.inlineLinks?.some(link => section.paragraphs.some(text => text.includes(link.text))))).toBe(true);
       }
