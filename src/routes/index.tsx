@@ -103,10 +103,10 @@ export const services: Service[] = [
     text: "Start your visit to Israel with a smooth, comfortable arrival. Arrange a private transfer from Ben Gurion Airport to Jerusalem, Tel Aviv, Haifa, or any other destination across the country.",
     feature: { src: "/images/travel-blog/taxi-in-tel-aviv.webp", alt: "Licensed Israeli taxis on a street in Tel Aviv" },
     cards: [
-      { label: "To Jerusalem", to: "/airport-transfers/ben-gurion-airport-to-jerusalem/", img: IMG.jerusalem },
-      { label: "To Tel Aviv", to: "/airport-transfers/ben-gurion-airport-to-tel-aviv/", img: IMG.telAviv },
-      { label: "To Haifa", to: "/airport-transfers/ben-gurion-airport-to-haifa/", img: IMG.haifa },
-      { label: "To Ein Bokek", to: "/airport-transfers/ben-gurion-airport-to-ein-bokek/", img: IMG.deadSea },
+      { label: "To Jerusalem", to: "/airport-transfers/ben-gurion-airport-to-jerusalem/", img: { src: "/images/home/transfer-jerusalem-tower-of-david.webp", alt: "Tower of David citadel beside Jerusalem’s Old City" } },
+      { label: "To Tel Aviv", to: "/airport-transfers/ben-gurion-airport-to-tel-aviv/", img: { src: "/images/home/transfer-tel-aviv-beach-skyline.webp", alt: "Tel Aviv Mediterranean beach and modern skyline" } },
+      { label: "To Haifa", to: "/airport-transfers/ben-gurion-airport-to-haifa/", img: { src: "/images/home/transfer-haifa-bahai-gardens.webp", alt: "Bahá’í Gardens staircase and Shrine in Haifa" } },
+      { label: "To Ein Bokek", to: "/airport-transfers/ben-gurion-airport-to-ein-bokek/", img: { src: "/images/home/transfer-ein-bokek-aerial.webp", alt: "Aerial view of Ein Bokek Dead Sea resort area and turquoise water" } },
     ],
     hub: { label: "Explore airport transfers", to: "/airport-transfers/" },
   },
@@ -195,23 +195,26 @@ function CompactCard({ c }: { c: Card }) {
   );
 }
 
+/** Large-photo route tiles in a two-row grid matching the compact shore-excursion layout. */
+function AirportTransferCard({ c }: { c: Card }) {
+  return (
+    <li className="min-h-0">
+      <Link to={c.to} aria-label={c.label} className="group relative block aspect-[16/9] min-w-0 overflow-hidden rounded-lg bg-navy shadow-sm focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-ring lg:aspect-auto lg:h-full">
+        <img src={c.img.src} alt={c.img.alt} loading="lazy" decoding="async" width={720} height={480} className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" />
+        <span className="pointer-events-none absolute inset-0 bg-gradient-to-t from-navy/90 via-navy/15 to-transparent" aria-hidden="true" />
+        <span className="absolute inset-x-0 bottom-0 px-2.5 pb-2.5 pt-6 font-serif text-sm font-semibold leading-tight text-navy-foreground sm:px-3 sm:pb-3 sm:text-base">{c.label}</span>
+      </Link>
+    </li>
+  );
+}
+
 /** Compact destination tile shared by the homepage tours and attractions sections. */
-function DestinationImageCard({ c, prominent = false }: { c: Card; prominent?: boolean }) {
+function DestinationImageCard({ c }: { c: Card }) {
   return (
     <Link to={c.to} aria-label={c.label} className="group relative block min-w-0 overflow-hidden rounded-lg bg-navy shadow-sm focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-ring">
-      <img
-        src={prominent ? c.img.src : (c.img.thumb ?? c.img.src)}
-        srcSet={prominent && c.img.thumb ? `${c.img.thumb} 360w, ${c.img.src} 720w` : undefined}
-        sizes={prominent ? "(min-width: 1024px) 270px, 45vw" : undefined}
-        alt={c.img.alt}
-        loading="lazy"
-        decoding="async"
-        width={720}
-        height={540}
-        className="aspect-[4/3] w-full object-cover transition-transform duration-500 group-hover:scale-105"
-      />
+      <img src={c.img.thumb ?? c.img.src} alt={c.img.alt} loading="lazy" decoding="async" width={400} height={300} className="aspect-[4/3] w-full object-cover transition-transform duration-500 group-hover:scale-105" />
       <span className="pointer-events-none absolute inset-0 bg-gradient-to-t from-navy/90 via-navy/15 to-transparent" aria-hidden="true" />
-      <span className={`absolute inset-x-0 bottom-0 px-2.5 pb-2.5 pt-6 font-serif font-semibold leading-tight text-navy-foreground sm:px-3 sm:pb-3 ${prominent ? "text-base sm:text-lg" : "text-sm sm:text-base"}`}>{c.label}</span>
+      <span className="absolute inset-x-0 bottom-0 px-2.5 pb-2.5 pt-6 font-serif text-sm font-semibold leading-tight text-navy-foreground sm:px-3 sm:pb-3 sm:text-base">{c.label}</span>
     </Link>
   );
 }
@@ -247,10 +250,10 @@ function Home() {
                 <p className="mt-2 max-w-2xl text-muted-foreground">{s.text}</p>
               </div>
             </header>
-            <div className="mt-6 grid min-w-0 grid-cols-1 gap-4 lg:grid-cols-2 lg:items-stretch" data-testid={`service-layout-${s.id}`}>
-              {s.feature && <img src={s.feature.src} alt={s.feature.alt} loading="lazy" decoding="async" width={1400} height={880} className="aspect-[16/10] h-full min-h-64 w-full min-w-0 rounded-xl object-cover lg:max-h-[410px]" />}
-              <ul className="grid min-w-0 grid-cols-2 gap-3 sm:gap-4" aria-label="Airport transfer destinations">
-                {s.cards.map((c) => <li key={c.label} className="min-w-0"><DestinationImageCard c={c} prominent /></li>)}
+            <div className="mt-6 grid min-w-0 grid-cols-1 gap-4 lg:h-[280px] lg:grid-cols-2 lg:items-stretch" data-testid={`service-layout-${s.id}`}>
+              {s.feature && <img src={s.feature.src} alt={s.feature.alt} loading="lazy" decoding="async" width={1400} height={880} className="aspect-[16/9] max-h-[260px] w-full min-w-0 rounded-xl object-cover lg:aspect-auto lg:h-full lg:max-h-none" />}
+              <ul className="grid min-w-0 grid-cols-2 gap-3 lg:h-full lg:grid-rows-2" aria-label="Airport transfer destinations">
+                {s.cards.map((c) => <AirportTransferCard key={c.label} c={c} />)}
               </ul>
             </div>
             <div className="mt-6 flex justify-center">
