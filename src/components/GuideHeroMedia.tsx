@@ -8,7 +8,7 @@ import type { ReactNode } from "react";
 export function GuideHeroLayout({ children, image }: { children: ReactNode; image?: ReactNode }) {
   return (
     <div
-      className="guide-hero-layout mt-6 grid min-w-0 items-start gap-5 lg:grid-cols-[minmax(0,1.85fr)_minmax(0,0.9fr)] lg:gap-7"
+      className={`guide-hero-layout mt-6 grid min-w-0 items-start gap-5 ${image ? "lg:grid-cols-[minmax(0,1.85fr)_minmax(0,0.9fr)] lg:gap-7" : ""}`}
       data-testid="guide-hero-layout"
     >
       <div className="min-w-0">{children}</div>
