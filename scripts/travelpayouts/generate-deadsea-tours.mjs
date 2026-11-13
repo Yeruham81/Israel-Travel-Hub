@@ -13,14 +13,19 @@ const projectId = 406243;
 const partnerId = 622032;
 const targets = [
   {
-    id: "deadsea-jerusalem-viator",
-    url: "https://www.viator.com/Jerusalem-attractions/Dead-Sea/d921-a2919",
-    sub_id: "jslm_dead_sea_viator",
+    id: "jslm-deadsea-beach-viator",
+    url: "https://www.viator.com/tours/Jerusalem/Dead-Sea-Chill-Out-Day-Trip-from-Jerusalem/d921-6540P70",
+    sub_id: "jslm_dead_sea_beach_viator",
   },
   {
-    id: "deadsea-jerusalem-getyourguide",
-    url: "https://www.getyourguide.com/dead-sea-l214?departsFrom=97",
-    sub_id: "jslm_dead_sea_getyourguide",
+    id: "jslm-deadsea-masada-viator",
+    url: "https://www.viator.com/tours/Jerusalem/Masada-and-the-Dead-Sea-Day-Trip-from-Jerusalem/d921-5209MASDSJ",
+    sub_id: "jslm_dead_sea_masada_viator",
+  },
+  {
+    id: "jslm-deadsea-masada-eingedi-viator",
+    url: "https://www.viator.com/tours/Jerusalem/Masada-Ein-Gedi-and-Dead-Sea-Tour-from-Jerusalem/d921-6540P7",
+    sub_id: "jslm_dead_sea_masada_eingedi_viator",
   },
 ];
 
@@ -29,7 +34,7 @@ for (const item of targets) {
   if (u.protocol !== "https:" || !["www.viator.com", "www.getyourguide.com"].includes(u.hostname)) {
     throw new Error("Unapproved source URL");
   }
-  if (!/^jslm_dead_sea_(viator|getyourguide)$/.test(item.sub_id)) throw new Error("Invalid page SubID");
+  if (!/^jslm_dead_sea_(beach|masada|masada_eingedi)_viator$/.test(item.sub_id)) throw new Error("Invalid page SubID");
 }
 if (process.argv.includes("--validate")) {
   console.log("Validated " + targets.length + " direct destination URLs for page " + pageId);
@@ -76,6 +81,7 @@ const results = targets.map(item => {
 await mkdir("artifacts", { recursive: true });
 await writeFile("artifacts/travelpayouts-jerusalem-to-the-dead-sea.json",
   JSON.stringify({ pageId, projectId, partnerId, generatedAt: new Date().toISOString(), results }, null, 2) + "\n");
+for (const item of results) if (item.partner_url) console.log("APPROVED_CANDIDATE_LINK " + item.id + " " + item.partner_url);
 console.log("Travelpayouts Jerusalem to the Dead Sea: " + results.filter(item => item.partner_url).length
   + "/" + targets.length + " candidate links generated; review artifact before publication");
 if (results.some(item => !item.partner_url)) process.exitCode = 1;
