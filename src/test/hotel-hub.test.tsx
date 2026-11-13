@@ -115,7 +115,10 @@ describe("Accommodation hub editorial upgrade", () => {
 
   it("uses meaningful images and gives credits for externally sourced photography", () => {
     const { container } = page();
-    expect(container.querySelectorAll('img[alt=""]')).toHaveLength(0);
+    // This test concerns editorial hotel photos, not decorative app-shell icons
+    // (which correctly use empty alt text so screen readers skip them).
+    const editorialPhotos = container.querySelectorAll("#destinations img, #styles img, #when img, #itineraries img, #arrival img");
+    expect([...editorialPhotos].filter((img) => !img.getAttribute("alt")?.trim())).toHaveLength(0);
     expect(container.querySelectorAll("#styles img")).toHaveLength(6);
     expect(container.querySelectorAll("#when img")).toHaveLength(2);
     expect(container.querySelectorAll("#arrival img")).toHaveLength(8);
