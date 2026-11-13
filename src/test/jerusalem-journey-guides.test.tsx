@@ -111,8 +111,7 @@ describe("Jerusalem independent day-trip planning guides", () => {
       expect(card).toHaveAttribute("href", expectedLinks[index]);
       expect(card.getAttribute("rel")).toContain("sponsored");
       expect(within(card).getByRole("img")).toBeInTheDocument();
-      if (tour.fromUsd !== undefined) expect(card).toHaveTextContent("From US$");
-      else expect(card).toHaveTextContent("See current price");
+      expect(card).toHaveTextContent("From US$" + tour.fromUsd);
       expect(card).toHaveTextContent(tour.duration);
       expect(card).toHaveTextContent(tour.rating.toFixed(1));
       expect(card).not.toHaveTextContent("affiliate link");
