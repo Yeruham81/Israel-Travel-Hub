@@ -247,7 +247,7 @@ describe("migrated Israel itineraries", () => {
       "/travel-blog/beaches-in-tel-aviv/",
       "/travel-blog/museums-in-tel-aviv/",
     ];
-    const internalLinks = new Set(guide.dayInlineLinks?.map(link => link.to));
+    const internalLinks = new Set<string>(guide.dayInlineLinks?.map(link => link.to as string) ?? []);
     const router = createRouter({ routeTree, context: { queryClient: new QueryClient() }, trailingSlash: "always" });
     for (const link of expectedLinks) {
       expect(internalLinks.has(link), link).toBe(true);
@@ -271,7 +271,7 @@ describe("migrated Israel itineraries", () => {
     }
 
     const view = file("src/components/IsraelItineraryPage.tsx");
-    expect(view).toContain("day-\${index + 1}-stop-order");
+    expect(view).toContain("day-${index + 1}-stop-order");
     expect(view).toContain("Suggested stop order");
     expect(view).toContain('data-testid="departure-scenarios"');
     expect(view).toContain("Getting around");
