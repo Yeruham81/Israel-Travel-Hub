@@ -141,7 +141,7 @@ export function TourCatalog({ categoryId, filters, onChange }: { categoryId: Tou
         <h2 id="external-tours-h" className={categoryId === "jerusalem" ? "text-2xl font-semibold" : "text-3xl font-semibold"}>{owner.length > 0 && categoryId !== "jerusalem" ? "More " : ""}{getTourCategory(categoryId).title}</h2>
         <p className="mt-3 max-w-3xl text-sm leading-relaxed text-muted-foreground">Discover guided itineraries, local walks and specialist activities from independent operators. Each card identifies the departure, experience and booking site.</p>
         <ul aria-label="External tours" className={categoryId === "jerusalem" ? "mt-5 grid gap-3 md:grid-cols-2" : "mt-6 grid gap-5 sm:grid-cols-2"}>{external.map(tour => <ExternalTourCard key={tour.id} tour={tour} pageId={`tours-${categoryId}`} compact={categoryId === "jerusalem"} />)}</ul>
-        <p className="mt-5 text-xs leading-relaxed text-muted-foreground">External tours have their own prices and terms. Choose the correct date and departure option on the booking site, and confirm guiding, admissions, meeting and return arrangements. Any reference starting prices shown here are approximate listing snapshots, not confirmed quotes.</p>
+        <p className="mt-5 text-xs leading-relaxed text-muted-foreground">Tour details, availability, prices and booking conditions are set by the tour operators and may change. Before booking, check the current departure date and location, itinerary, guiding, admissions, meeting and return arrangements, and cancellation policy directly with the booking provider. Each tour is subject to the operator's own terms and conditions.</p>
       </section>}
       {categoryId === "jerusalem" && <OwnerTourSection tours={owner} compact />}
     </>}
