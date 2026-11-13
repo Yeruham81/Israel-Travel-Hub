@@ -38,7 +38,7 @@ describe("migrated Israel itineraries", () => {
     expect(itineraries["3"].hotelBases).not.toEqual(itineraries["7"].hotelBases);
     expect(itineraries["7"].hotelBases).not.toEqual(itineraries["10"].hotelBases);
     for (const guide of Object.values(itineraries)) {
-      expect(guide.alternatives.length).toBeGreaterThanOrEqual(3);
+      expect(guide.alternatives.length).toBe(guide.id === "3" ? 0 : 3);
       expect(guide.logistics.length).toBeGreaterThanOrEqual(3);
       for (const day of guide.daysPlan) {
         for (const item of ["morning", "afternoon", "practical"] as const)
@@ -207,6 +207,20 @@ describe("migrated Israel itineraries", () => {
       expect(guide.logistics[item.index]?.text).toContain(item.phrase);
       expect(router.matchRoutes(item.to as string).at(-1)?.routeId, item.to as string).not.toBe(rootRouteId);
     }
+  });
+
+  it("removes redundant route-adjustment cards and navigation from the three-day guide only", () => {
+    expect(itineraries["3"].alternatives).toEqual([]);
+    for (const id of ["5", "7", "10"] as const) {
+      expect(itineraries[id].alternatives.length).toBeGreaterThanOrEqual(3);
+    }
+    const view = file("src/components/IsraelItineraryPage.tsx");
+    expect(view).toContain('g.alternatives.length > 0 && (');
+    expect(view).toContain('...(g.alternatives.length ? [["alternatives", "Adjust the route"]');
+    expect(view).toContain('id="alternatives"');
+    expect(view).toContain("Adjust this itinerary to your trip");
+    expect(view).toContain('id="transport"');
+    expect(view).toContain("<FaqList faqs={g.faqs} />");
   });
 
   it("turns the three-day guide into a travel-ready plan without changing longer itineraries", () => {
