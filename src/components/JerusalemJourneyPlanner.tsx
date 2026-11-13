@@ -69,6 +69,19 @@ function RegularExternal({ url, children, className = "" }: { url: string; child
 export function JerusalemJourneyOptions({ id }: { id: string }) {
   if (!isJourney(id)) return null;
   const route = routes[id];
+  // The Dead Sea guide needs the four actual destinations, not a second set of
+  // transport-option cards that repeats the article immediately below.
+  if (id === "jerusalemDeadSea") return <section id="journey-destinations" aria-labelledby="journey-destinations-h" className="mt-9 scroll-mt-28">
+    <h2 id="journey-destinations-h" className="text-2xl font-semibold">Choose your Dead Sea destination</h2>
+    <p className="mt-2 max-w-3xl leading-relaxed text-muted-foreground">For floating, choose a managed beach such as Ein Bokek. Masada and Ein Gedi are separate visits with different entrances and tickets.</p>
+    <div className="mt-4 grid gap-3 sm:grid-cols-2" data-testid="journey-stop-cards">
+      {route.details.map(item => <article key={item.title} className="rounded-xl border bg-card p-4">
+        <h3 className="text-lg font-semibold">{item.title}</h3>
+        <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{item.description}</p>
+        <RegularExternal url={item.href} className="mt-3 inline-flex items-center gap-1.5 text-sm font-semibold text-primary underline underline-offset-4">{item.link}</RegularExternal>
+      </article>)}
+    </div>
+  </section>;
   return <>
     <section id="journey-options" aria-labelledby="journey-options-h" className="mt-10 scroll-mt-28">
       <h2 id="journey-options-h" className="text-3xl">{route.heading}</h2>
