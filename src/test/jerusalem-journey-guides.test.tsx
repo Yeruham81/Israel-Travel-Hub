@@ -52,8 +52,8 @@ describe("Jerusalem independent day-trip planning guides", () => {
     expect(rentalLink.getAttribute("rel")).toContain("sponsored");
     expect(screen.getByRole("heading", { name: /visit Bethlehem on Saturday or Sunday/ })).toBeInTheDocument();
     const localTaxi = container.querySelector("#private-taxi") as HTMLElement;
-    expect(localTaxi.querySelector("p")?.textContent?.startsWith("An appropriately authorised and insured Palestinian taxi driver")).toBe(true);
-    expect(localTaxi.querySelector("p")).toHaveTextContent("Palestinian taxis can generally be found in East Jerusalem.");
+    expect(localTaxi.querySelector("p")?.textContent?.startsWith("A Palestinian taxi driver with the necessary authorisations and insurance")).toBe(true);
+    expect(localTaxi.querySelector("p")).toHaveTextContent("Such taxis can generally be found or arranged in East Jerusalem");
     expect((container.querySelector("#visit-return") as HTMLElement).querySelectorAll("p")[0]).not.toHaveTextContent("Manger Square");
     expect((container.querySelector("#bethlehem-sites") as HTMLElement)).toHaveTextContent("Manger Square");
     expect(screen.getByTestId("bethlehem-tour-options")).toHaveTextContent("prices shown are subject to change by tour operators");

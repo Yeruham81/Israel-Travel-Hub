@@ -6,6 +6,7 @@ import nativityInterior from "@/assets/guides/dead-sea-excursions/bethlehem-nati
 import catholicGrottos from "@/assets/guides/bethlehem/catholic-grottos.jpg";
 import jordanRiver from "@/assets/guides/dead-sea-excursions/jordan-river-qasr-al-yahud.webp";
 import eastJerusalem from "@/assets/jerusalem/east-jerusalem.webp";
+import nativityCourtyard from "@/assets/guides/bethlehem/nativity-courtyard.jpg";
 import bethlehemView from "@/assets/home/bethlehem-nativity.webp";
 
 
@@ -15,7 +16,7 @@ const tourPhotos = {
   "jordan-river": { src: jordanRiver, alt: "Pilgrimage site beside the Jordan River" },
   "jerusalem-damascus-gate": { src: eastJerusalem, alt: "Damascus Gate in East Jerusalem, a departure area for Bethlehem tours" },
   bethlehem: { src: bethlehemView, alt: "Church of the Nativity and surrounding Bethlehem buildings" },
-  "shepherds-field": { src: "https://commons.wikimedia.org/wiki/Special:FilePath/Shepherds_Field_Chapel%2C_Roman_Catholic_%28Beit_Sahour%29-interior_%282%29.jpg?width=640", alt: "Interior of Shepherds’ Field Chapel in Beit Sahour near Bethlehem" },
+  "shepherds-field": { src: nativityCourtyard, alt: "Church of the Nativity and its stone courtyard in Bethlehem" },
 } as const;
 
 /** Same compact price, duration and review cards as the Dead Sea guide.
@@ -62,9 +63,5 @@ export function BethlehemTourOptions() {
         </a>;
       })}
     </div>
-    <details className="mt-2 text-xs text-muted-foreground">
-      <summary className="w-fit cursor-pointer underline-offset-2 hover:underline">Photo credit</summary>
-      <span>Shepherds’ Field Chapel: <a href="https://commons.wikimedia.org/wiki/File:Shepherds_Field_Chapel,_Roman_Catholic_(Beit_Sahour)-interior_(2).jpg" target="_blank" rel="noopener noreferrer" className="underline">Armineaghayan / Wikimedia Commons</a> · <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener noreferrer" className="underline">CC BY-SA 4.0</a> (displayed at reduced size).</span>
-    </details>
   </section>;
 }
