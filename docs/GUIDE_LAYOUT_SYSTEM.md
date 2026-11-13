@@ -8,25 +8,33 @@ content-specific modules.
 ## Universal header
 
 1. Breadcrumbs (with the current guide).
-2. Small contextual eyebrow / category label (where relevant).
-3. One `h1` using `.guide-page-title`. Full available text width; do not
-   constrain it to a narrow half-column beside an image.
-4. Concise practical introduction (ideally 1–3 sentences).
-5. Editorial update date, when available.
-6. Relevant, authentic lead photo using `GuideHeroMedia` **below** the text:
-   - Image container: `max-w-4xl` inside the normal `max-w-5xl` content.
-   - Display ratio: 16:9, capped at 360px tall on larger screens.
-   - On mobile: stacked after the title and summary, fluid width.
-   - `object-cover` normally; `fit="contain"` where a landmark, inscription,
-     sign, or other important composition must not be cut off.
-   - Keep legitimate image attribution where needed; do not expose internal
-     file names or editorial/source metadata.
-   - No giant full-bleed image or image-before-title promotional header.
-7. Compact `AuthorCard`, where the guide has author attribution.
+2. A **two-column introduction on desktop**, using `GuideHeroLayout`:
+   - Left, approximately two-thirds of the available content width:
+     contextual eyebrow/category (where relevant), one `h1` using
+     `.guide-page-title`, a concise practical introduction (ideally
+     1–3 sentences), and the editorial update date when available.
+   - Right, approximately one-third of the width: a **small authentic main
+     photo** using `GuideHeroMedia`, aligned near the title.
+   - The title may wrap naturally and remains readable; at desktop widths
+     the split-layout title is subtly reduced to 38px.
+3. **Phone and tablet layouts** stack the image **beneath the introduction**.
+   The heading must not be squeezed beside an image on narrow screens.
+4. Editorial image rules:
+   - Consistent 4:3 composition on desktop; 16:9 on smaller screens.
+   - Desktop height capped at 260px; mobile/tablet cap 300px.
+   - `object-cover` normally; `fit="contain"` when a landmark, sign,
+     inscription or other important subject must not be cropped.
+   - Keep required image attribution. Do not show internal file names.
+   - Never use full-width giant banners or image-before-title layouts on
+     individual guide pages.
+5. Compact `AuthorCard` directly after the combined heading-and-image
+   block, where the guide has author attribution.
 
-Use `src/components/GuideHeroMedia.tsx` and shared H1 style in
-`src/styles.css`; do not independently specify other dimensions. The main
-homepage slideshow is a **separate** design and should not use this component.
+Use `GuideHeroLayout` and `GuideHeroMedia` from
+`src/components/GuideHeroMedia.tsx` and the shared H1 style in
+`src/styles.css`. Do not independently assign other cover-photo dimensions.
+An image-free guide can use the layout without an image, keeping the
+headline full width. The main homepage slideshow is a **separate** design.
 
 ## Recommended body order
 
@@ -48,11 +56,11 @@ logical search-intent order, avoid changing meaning merely to match the layout.
 
 ## Page-type allowances
 
-- **Commercial service landings** (e.g., airport transfer quote pages) can show
-  their price/CTA panel before the lead image, while keeping title/intro before
-  the image and using the same image component.
-- **Tour catalogue/category pages** can show a focused CTA after the intro and
-  before the image; catalog filters and booking cards follow the header.
+- **Commercial service landings** (e.g., airport transfer quote pages) can
+  retain their price/CTA panel in the left column, with the smaller image on
+  the right. The copy and price disclosures remain accurate.
+- **Tour catalogue/category pages** can show a focused CTA beneath the intro
+  in the left column; catalog filters and booking cards follow the header.
 - **Landmark photos** may use `fit="contain"` and a descriptive caption to
   preserve the full subject.
 - **Pages without a suitable licensed hero image** should omit the image
@@ -65,5 +73,6 @@ logical search-intent order, avoid changing meaning merely to match the layout.
 ## Regression coverage
 
 `src/test/guide-hero-layout.test.tsx` asserts shared image properties,
-text-before-image ordering, uncropped exceptions and homepage independence.
+desktop image-to-title placement, mobile stacking, uncropped exceptions
+and homepage independence.
 `src/test/guide-title-scale.test.ts` protects the H1 typography.
