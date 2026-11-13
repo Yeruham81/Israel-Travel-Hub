@@ -92,6 +92,7 @@ describe("Jerusalem independent day-trip planning guides", () => {
     const privateTourLink = within(privateSection as HTMLElement).getByRole("link", { name: "private Masada and Dead Sea tour" });
     expect(privateTourLink).toHaveAttribute("href", "/tours/masada-dead-sea/");
     expect(privateSection).toHaveTextContent("₪2,100 per vehicle");
+    expect(tourSection).not.toHaveTextContent("The tours below offer different combinations of sightseeing and beach time.");
     const cards = within(tourSection as HTMLElement).getAllByTestId("deadsea-bookable-tour");
     expect(cards).toHaveLength(6);
     expect(deadSeaTourCards.filter(tour => tour.provider === "Viator")).toHaveLength(4);
@@ -136,6 +137,9 @@ describe("Jerusalem independent day-trip planning guides", () => {
     expect(new Set(within(relatedGuides).getAllByRole("link").map(link => link.getAttribute("href"))).size).toBe(6);
     const nextSteps = screen.getByTestId("deadsea-next-steps");
     expect(within(nextSteps).getAllByRole("link")).toHaveLength(4);
+    expect(within(nextSteps).getByRole("link", { name: /Israel's Calendar of Events/ }))
+      .toHaveAttribute("href", "/travel-blog/calendar-of-events/");
+    expect(nextSteps).not.toHaveTextContent("Arriving from Ben Gurion Airport?");
     expect(nextSteps).not.toHaveTextContent("affiliate");
     const contact = container.querySelector("#contact");
     const sources = container.querySelector("#sources");
@@ -155,8 +159,12 @@ describe("Jerusalem independent day-trip planning guides", () => {
     for (const [id, route] of [["bethlehem", BethlehemRoute], ["jerusalemDeadSea", DeadSeaRoute]] as const) {
       const guide = travelGuides[id];
       expect(guide.updatedAt).toBe(id === "jerusalemDeadSea" ? "2026-11-13" : "2026-10-24");
-      if (id === "jerusalemDeadSea") expect(guide.faqs).toHaveLength(5);
-      else expect(guide.faqs.length).toBeGreaterThanOrEqual(7);
+      if (id === "jerusalemDeadSea") {
+        expect(guide.faqs).toHaveLength(5);
+        expect(guide.faqs.some(faq => faq.q === "Is the public beach at Ein Bokek wheelchair-accessible?")).toBe(true);
+        expect(guide.faqs.some(faq => faq.a.includes("beach wheelchairs can be borrowed"))).toBe(true);
+        expect(guide.faqs.some(faq => faq.q === "Can I make a Dead Sea day trip without a car?")).toBe(false);
+      } else expect(guide.faqs.length).toBeGreaterThanOrEqual(7);
       expect(guide.sourceIds.every((sourceId) => getSource(sourceId)?.url.startsWith("https://"))).toBe(true);
       for (const section of guide.sections) for (const link of section.inlineLinks || []) {
         expect(section.paragraphs.join(" ")).toContain(link.text);
