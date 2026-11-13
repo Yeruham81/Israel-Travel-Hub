@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { act, cleanup, fireEvent, render, screen } from "@testing-library/react";
+import { act, cleanup, fireEvent, render, screen, within } from "@testing-library/react";
 import { afterEach, vi } from "vitest";
 import { HomeTestimonials } from "@/components/HomeTestimonials";
 import { serviceDomains, allNavGroups } from "@/data/nav";
@@ -28,7 +28,7 @@ describe("homepage navigation and review sources", () => {
     expect(tripadvisorSnapshot).toMatchObject({ rating: 5, reviewCount: 11 });
     expect(tripadvisorProfileUrl).toMatch(/^https:\/\/www\.tripadvisor\.com\//);
   });
-  it("shows three Tripadvisor cards, rotates every six seconds and honors pause and navigation", () => {
+  it("shows three Tripadvisor cards with compact dot-only navigation and stops rotation after selection", () => {
     vi.useFakeTimers();
     render(<HomeTestimonials />);
     const cards = screen.getByTestId("tripadvisor-review-cards");
@@ -36,25 +36,27 @@ describe("homepage navigation and review sources", () => {
     expect(cards).toHaveTextContent("Kaye L");
     expect(cards).toHaveTextContent("Lilach T");
     expect(cards).toHaveTextContent("Janet");
-    expect(screen.getByRole("heading", { name: "Kind Words from Satisfied Travelers" })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "What Travelers Say" })).toBeInTheDocument();
+
+    const reviewSection = screen.getByRole("heading", { name: "What Travelers Say" }).closest("section")!;
+    expect(reviewSection.querySelector(".bg-navy")).toBeNull();
+    const controls = screen.getByRole("group", { name: "Choose a Tripadvisor review" });
+    expect(within(controls).getAllByRole("button")).toHaveLength(tripadvisorReviews.length);
+    expect(screen.queryByRole("button", { name: /Previous Tripadvisor reviews|Next Tripadvisor reviews|Pause Tripadvisor reviews|Play Tripadvisor reviews/ })).not.toBeInTheDocument();
 
     act(() => vi.advanceTimersByTime(6000));
     expect(cards).toHaveTextContent("Yaniv B");
     expect(cards).not.toHaveTextContent("Kaye L");
 
-    fireEvent.click(screen.getByRole("button", { name: "Pause Tripadvisor reviews" }));
+    const dot = screen.getByRole("button", { name: "Show Tripadvisor review from Marc" });
+    fireEvent.click(dot);
+    expect(dot).toHaveAttribute("aria-pressed", "true");
+    expect(cards).toHaveTextContent("Marc");
     act(() => vi.advanceTimersByTime(18000));
-    expect(cards).not.toHaveTextContent("Marc");
-
-    fireEvent.click(screen.getByRole("button", { name: "Next Tripadvisor reviews" }));
     expect(cards).toHaveTextContent("Marc");
-    fireEvent.click(screen.getByRole("button", { name: "Previous Tripadvisor reviews" }));
-    expect(cards).toHaveTextContent("Yaniv B");
-
-    fireEvent.click(screen.getByRole("button", { name: "Play Tripadvisor reviews" }));
-    act(() => vi.advanceTimersByTime(6000));
-    expect(cards).toHaveTextContent("Marc");
+    expect(dot).toHaveAttribute("aria-pressed", "true");
   });
+
 
   it("renders the correct uploaded image for every client and changes images with the carousel", () => {
     render(<HomeTestimonials />);
