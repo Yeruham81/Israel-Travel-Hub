@@ -20,7 +20,7 @@ describe("intent-specific taxi guide cluster", () => {
     expect(taxis.sections.some((section) => section.id === "booking")).toBe(true);
     expect(taxiFares.sections.some((section) => section.id === "tariff-hours")).toBe(true);
     expect(taxiFares.sourceIds).toContain("taxi-fares-2026");
-    expect(taxiFares.title).not.toMatch(/20\\d{2}/);
+    expect(taxiFares.title).not.toMatch(/20\d{2}/);
     expect(taxiFares.sections.map((section) => section.id)).toEqual([
       "time-distance", "tariff-hours", "extras", "examples", "estimates", "disputes",
     ]);
