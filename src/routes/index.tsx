@@ -9,7 +9,7 @@ import tiberias from "@/assets/home/tiberias-lake.webp";
 import t3 from "@/assets/home/ben-gurion-t3.webp";
 import bethlehem from "@/assets/home/bethlehem-nativity.webp";
 import masada from "@/assets/home/masada-dead-sea.webp";
-import caesareaDusk from "@/assets/home/caesarea-dusk-feature.webp";
+import roshHanikraGrottos from "@/assets/home/rosh-hanikra-grottos.jpg";
 import caesareaAqueduct from "@/assets/home/caesarea-aqueduct.webp";
 import guidedTour from "@/assets/home/guided-tour-feature.webp";
 import cruisePort from "@/assets/home/cruise-port-feature.webp";
@@ -143,7 +143,7 @@ export const services: Service[] = [
   {
     id: "attractions", eyebrow: "Attractions & Experiences", tagline: "Discover Israel’s Must-See Places", title: "Attractions & Experiences",
     text: "Discover Israel’s most memorable attractions, from ancient landmarks and historic cities to breathtaking natural wonders.",
-    feature: { src: caesareaDusk, alt: "Ancient ruins on the shore at Caesarea at dusk" },
+    feature: { src: roshHanikraGrottos, alt: "Turquoise Mediterranean water inside the limestone sea grottoes at Rosh Hanikra" },
     cards: [
       { label: "Rosh Hanikra", to: "/travel-blog/rosh-hanikra/", img: { src: roshHanikraPhoto, alt: "Sea grottoes and white limestone cliffs at Rosh Hanikra" } },
       { label: "Ramon Crater", to: "/travel-blog/mitzpe-ramon-crater/", img: { src: ramonCraterPhoto, alt: "Layered desert landscape of Ramon Crater" } },
