@@ -46,7 +46,7 @@ export function TourCategoryPage({ id, filters: rawFilters, onChange }: { id: To
       <GuideHeroLayout image={<GuideHeroMedia src={category.photo.src} alt={category.photo.alt} width={1200} height={450} />}>
         <p className="eyebrow">Tours & day trips · {category.shortTitle}</p>
         <h1 className="guide-page-title mt-3 font-semibold">{title}</h1>
-        <p className="mt-4 max-w-3xl text-lg leading-relaxed text-muted-foreground">{category.intro}</p>
+        <p data-guide-intro className="mt-4 max-w-3xl text-lg leading-relaxed text-muted-foreground">{category.intro}</p>
         <a href="#tour-catalog" className="btn btn-primary mt-5">Explore {category.shortTitle} experiences</a>
       </GuideHeroLayout>
     </header>
