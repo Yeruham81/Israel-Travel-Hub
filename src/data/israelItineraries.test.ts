@@ -163,7 +163,7 @@ describe("migrated Israel itineraries", () => {
   it("has a focused, bookable-through-guides three-day plan without intrusive affiliate links", () => {
     const three = itineraries["3"];
     expect(three.overviewRows).toHaveLength(3);
-    expect(three.beforeYouGo?.length).toBeGreaterThanOrEqual(4);
+    expect(three.beforeYouGo).toHaveLength(3);
     expect(three.relatedGuides).toHaveLength(6);
     expect(three.hero).not.toEqual(three.daysPlan[0]?.image);
 
@@ -194,7 +194,7 @@ describe("migrated Israel itineraries", () => {
 
   it("links natural phrases in the three-day text instead of showing a link tray after every day", () => {
     const guide = itineraries["3"];
-    expect(guide.dayInlineLinks).toHaveLength(14);
+    expect(guide.dayInlineLinks).toHaveLength(15);
     expect(guide.logisticsInlineLinks).toHaveLength(4);
     const router = createRouter({ routeTree, context: { queryClient: new QueryClient() }, trailingSlash: "always" });
     for (const item of guide.dayInlineLinks ?? []) {
@@ -229,7 +229,8 @@ describe("migrated Israel itineraries", () => {
     expect(guide.hotelBases).toContain("A Tel Aviv night after Day 3");
     expect(guide.daySequences?.map(day => day.day)).toEqual([1, 2, 3]);
     for (const day of guide.daySequences ?? []) {
-      expect(day.steps).toHaveLength(4);
+      expect(day.steps).toHaveLength(3);
+      expect(day.steps.some(step => /return to jerusalem|leave jerusalem|lunch and|jerusalem → tel aviv/i.test(step.stop))).toBe(false);
       for (const step of day.steps) {
         expect(step.stop.length).toBeGreaterThan(12);
         expect(step.time.length).toBeGreaterThan(5);
@@ -237,12 +238,19 @@ describe("migrated Israel itineraries", () => {
     }
     expect(guide.daySequences?.[0]?.steps.some(step => /Israel Museum/.test(step.stop) && step.optional)).toBe(true);
     expect(guide.daySequences?.[1]?.steps.some(step => /Ein Bokek/.test(step.stop))).toBe(true);
+    expect(guide.daySequences?.[1]?.steps.some(step => /Ein Gedi/.test(step.stop) && step.optional)).toBe(true);
+    expect(guide.dayInlineLinks?.find(link => link.phrase === "Ben Gurion Airport connections")?.to).toBe("/airport-transfers/");
+    expect(guide.dayInlineLinks?.some(link => link.to === "/travel-blog/how-to-get-from-ben-gurion-airport-to-tel-aviv/")).toBe(false);
+    expect(guide.description).toContain("day-by-day highlights");
+    expect(guide.beforeYouGo?.some(tip => tip.heading === "Count your usable days")).toBe(false);
+    expect(guide.beforeYouGoOfficialLinks?.[0]?.index).toBe(0);
     expect(guide.daySequences?.[2]?.steps.some(step => /Old Jaffa/.test(step.stop))).toBe(true);
     expect(guide.overviewRows?.every(row => row.travel)).toBe(true);
     expect(guide.day3Options?.map(option => option.heading)).toEqual([
       "Flying home on Day 3?", "Staying another night?",
     ]);
-    expect(guide.daysPlan[2]?.practical).toMatch(/luggage/i);
+    expect(guide.daysPlan[2]?.practical).toBe("Before leaving Jerusalem, confirm where you can store and collect your luggage in Tel Aviv, including opening hours and transport from the storage location to the airport. Do not assume every rail station has lockers. Consult Ben Gurion Airport connections before deciding how late to sightsee.");
+    expect(guide.day3Options?.[0]?.text).toContain("confirm a luggage-storage solution");
     expect(guide.daysPlan[2]?.morning).toMatch(/no trains run/i);
     for (const id of ["5", "7", "10"] as const) {
       expect(itineraries[id].daySequences).toBeUndefined();
@@ -254,6 +262,8 @@ describe("migrated Israel itineraries", () => {
       "/travel-blog/old-city-jerusalem/",
       "/travel-blog/shopping-in-jerusalem/",
       "/travel-blog/masada/",
+      "/travel-blog/jerusalem-to-the-dead-sea/",
+      "/airport-transfers/",
       "/travel-blog/the-dead-sea/",
       "/travel-blog/dead-sea-attractions/",
       "/travel-blog/ein-gedi/",
@@ -285,8 +295,10 @@ describe("migrated Israel itineraries", () => {
     }
 
     const view = file("src/components/IsraelItineraryPage.tsx");
-    expect(view).toContain("day-${index + 1}-stop-order");
+    expect(view).toContain("day-${index + 1}-highlights");
     expect(view).toContain("Suggested highlights");
+    expect(view).toContain('<ul className="mt-3 space-y-2">');
+    expect(view).not.toContain("approximate times</span>");
     expect(view).toContain('data-testid="departure-scenarios"');
     expect(view).toContain("Getting around");
     expect(view).toContain("dayTextLinks(g, index + 1");
@@ -308,6 +320,7 @@ describe("migrated Israel itineraries", () => {
       guide.relatedGuides!.find(item => item.to === "/travel-blog/old-city-jerusalem/")!.image,
     ];
     expect(new Set(cityImageKeys).size).toBe(3);
+    expect(file("src/data/guideMigrationPhotos.ts")).toContain("Church_of_the_Holy_Sepulchre_Jerusalem_israel.jpg");
 
     const view = file("src/components/IsraelItineraryPage.tsx");
     expect(view).not.toContain('id="before-you-go"');
