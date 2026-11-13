@@ -33,10 +33,10 @@ export function HomeHero() {
     <section aria-labelledby="home-title">
       <HeroCarousel slides={heroSlides}>
         <div className="max-w-3xl px-6 pb-8 pt-16 text-navy-foreground md:px-12 md:pb-10 md:pt-24">
-          <p className="text-xs font-semibold uppercase tracking-[0.17em] opacity-90">Your Israel journey starts here</p>
-          <h1 id="home-title" className="mt-4 max-w-2xl text-4xl leading-[1.08] md:text-6xl">Explore Israel with confidence.</h1>
+          <p className="text-xs font-semibold uppercase tracking-[0.17em] opacity-90">Your journey starts here</p>
+          <h1 id="home-title" className="mt-4 max-w-2xl text-4xl leading-[1.08] md:text-6xl">Discover Israel, Travel Smarter</h1>
           <p className="mt-5 max-w-2xl text-lg leading-relaxed opacity-95 md:text-xl">
-            From airport arrivals and private day trips to beautiful places to stay and unforgettable sights, discover local insights that make every journey easier and more rewarding.
+            From airport arrivals and getting around to memorable day trips, places to stay and must-see sights, find practical local advice to make the most of your time in Israel.
           </p>
         </div>
       </HeroCarousel>
