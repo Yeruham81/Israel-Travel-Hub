@@ -214,7 +214,7 @@ export function IsraelItineraryPage({ id }: { id: ItineraryId }) {
                 <span className="mt-2 inline-flex items-center gap-1 text-xs font-semibold text-primary">Read guide <ArrowRight className="h-3 w-3" aria-hidden /></span>
               </span>
             </Link>
-            {picture.credit && <div className="px-3 pb-2"><GuidePhotoCredit photo={picture} /></div>}
+            {"credit" in picture && picture.credit && <div className="px-3 pb-2"><GuidePhotoCredit photo={picture} /></div>}
           </article>;
         })}
       </div>
@@ -234,7 +234,7 @@ export function IsraelItineraryPage({ id }: { id: ItineraryId }) {
                 <span className="mt-1.5 block text-xs leading-relaxed text-muted-foreground">{choice.description}</span>
               </span>
             </Link>
-            {choicePhoto.credit && <div className="px-4 pb-2"><GuidePhotoCredit photo={choicePhoto} /></div>}
+            {"credit" in choicePhoto && choicePhoto.credit && <div className="px-4 pb-2"><GuidePhotoCredit photo={choicePhoto} /></div>}
           </article>;
         })}
       </div>
