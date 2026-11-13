@@ -26,7 +26,7 @@ describe("owner voice throughout the public site", () => {
     }
     expect(source("src/data/content.ts")).toContain("open on our dates?");
     expect(getAirportRouteGuide("jerusalem").intro).toContain("Send me your flight");
-    expect(airportJourneyGuides["ein-bokek"].options.find(o => o.id === "rental")?.paragraphs.join(" ")).toContain("my car rental in Israel page");
+    expect(airportJourneyGuides["ein-bokek"].options.find(o => o.id === "rental")?.paragraphs.join(" ")).toContain("on DiscoverCars' Israel rental search");
   });
 
   it("keeps contextual link anchor phrases synchronized after first-person edits", () => {
