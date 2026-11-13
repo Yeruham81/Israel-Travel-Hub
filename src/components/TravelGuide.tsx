@@ -211,7 +211,7 @@ export function TravelGuidePage({ id }: { id: TravelGuideId }) {
           </GuideHeroMedia>
         }>
           <h1 className="guide-page-title">{guide.title}</h1>
-          <p className="mt-4 max-w-3xl text-lg leading-relaxed text-foreground">{guide.intro}</p>
+          <p data-guide-intro className="mt-4 max-w-3xl text-lg leading-relaxed text-foreground">{guide.intro}</p>
           <PageUpdated date={guide.updatedAt || TRAVEL_GUIDE_CHECK_DATE} />
         </GuideHeroLayout>
         <AuthorCard />
