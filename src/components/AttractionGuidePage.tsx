@@ -60,7 +60,6 @@ export function AttractionGuidePage({ id }: {id:AttractionId}) {
         sizes={id === "mount-of-olives" ? "(min-width: 1024px) 340px, (min-width: 768px) 672px, calc(100vw - 32px)" : undefined}
         width={id === "mount-of-olives" ? 1920 : id === "mount-zion" ? 755 : 1200}
         height={id === "mount-of-olives" ? 872 : id === "mount-zion" ? 503 : 675}
-        caption={id === "mount-of-olives" ? "Jerusalem from the Mount of Olives" : id === "mount-zion" ? "Dormition Abbey on Mount Zion" : undefined}
       />}>
         <p className="eyebrow">{a.region} · Visitor guide</p>
         <h1 className="guide-page-title mt-3">{a.title}</h1>
