@@ -38,6 +38,8 @@ export interface TourProduct {
   /** Owner-published transport rate; external listing snapshots belong to booking offers. */
   price?: IndicativePrice & { basis: "per_vehicle" };
   note?: string;
+  /** Verified public booking-platform rating; never a live feed. */
+  rating?: { value: number; count: number; checkedAt: string; sourceUrl: string };
 }
 export interface TourBookingOffer {
   id: string;
