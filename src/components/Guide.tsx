@@ -487,7 +487,7 @@ export function HubHeader({ crumbs, eyebrow, title, intro, actions, checkedAt, s
   showAuthor?: boolean;
 }) {
   return (
-    <header className="mx-auto max-w-5xl px-4 pt-6" data-testid="hub-header">
+    <header className="hub-header mx-auto max-w-5xl px-4 pt-6" data-testid="hub-header">
       <Breadcrumbs items={crumbs} />
       <p className="eyebrow mt-6">{eyebrow}</p>
       <h1 className="guide-page-title mt-3 max-w-4xl">{title}</h1>
