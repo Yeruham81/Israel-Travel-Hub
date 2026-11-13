@@ -1,7 +1,7 @@
 import { Clock3, ExternalLink, Star } from "lucide-react";
 import { affiliateConfig } from "@/data/registry";
-import { deadSeaTourCards } from "@/data/deadSeaTourOffers";
-import { bethlehemTourCards } from "@/data/bethlehemTourOffers";
+import { deadSeaTourCards, type DeadSeaTourCard } from "@/data/deadSeaTourOffers";
+import { bethlehemTourCards, type BethlehemTourCard } from "@/data/bethlehemTourOffers";
 import { recordOutboundClick, relFor } from "@/lib/outbound";
 
 import deadSeaMud from "@/assets/guides/dead-sea-excursions/dead-sea-mud-bathing.webp";
@@ -28,7 +28,9 @@ export const threeDayJerusalemTourSelections = [
   { id: "jslm-deadsea-jericho-jordan-viator", area: "Jericho & Dead Sea", image: qasrAlYahud, alt: "Qasr al-Yahud baptism site on the Jordan River" },
 ] as const;
 
-const tourCatalog = new Map([...deadSeaTourCards, ...bethlehemTourCards].map(tour => [tour.id, tour]));
+const tourCatalog = new Map<string, DeadSeaTourCard | BethlehemTourCard>(
+  [...deadSeaTourCards, ...bethlehemTourCards].map(tour => [tour.id, tour] as const),
+);
 
 function trackedItineraryTourUrl(url: string, tourId: string): string {
   // Travelpayouts allows a short link's SubID to be replaced per source page.
