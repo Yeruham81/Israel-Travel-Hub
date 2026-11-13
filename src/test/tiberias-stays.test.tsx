@@ -90,14 +90,14 @@ describe("Tiberias destination and distinct hotel intents", () => {
     expect(container.querySelector('a[href^="/dead-sea/"]')).toBeNull();
   });
 
-  it("preserves every configured property booking, sponsored label and destination-specific click attribution", () => {
+  it("preserves every configured property booking without visible link labels and with click attribution", () => {
     const pages = [{ element: <HotelDestinationPage guide={destination} />, ids: hotels.map((hotel) => hotel.id), pageId: "stay-tiberias" }, ...categories.map((guide) => ({ element: <HotelCategoryPage guide={guide} destination={destination} />, ids: guide.picks.map((pick) => pick.hotelId), pageId: `stay-tiberias-${guide.id}` }))];
     for (const page of pages) {
       const { unmount } = render(page.element);
       for (const id of page.ids) {
         const booking = providerLinks.find((link) => link.id === `hotel-${id}-expedia`)!;
         const card = screen.getAllByTestId("hotel-recommendation").find((card) => card.id === `hotel-${id}`)!;
-        expect(card).toHaveTextContent("Sponsored link");
+        expect(card).not.toHaveTextContent("Sponsored link");
         const link = within(card).getByRole("link", { name: `${booking.ctaLabel} for ${hotel(id).name}` });
         expect(link).toHaveAttribute("href", hotelAffiliateUrl(booking, page.pageId, id));
         expect(link).toHaveAttribute("rel", "sponsored noopener noreferrer");
