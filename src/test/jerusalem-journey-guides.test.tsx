@@ -48,9 +48,15 @@ describe("Jerusalem independent day-trip planning guides", () => {
     expect(screen.getByRole("heading", { level: 1 })).toHaveTextContent("Bus, Taxi, Tours & Car");
     expect(screen.queryByTestId("journey-option-cards")).not.toBeInTheDocument();
     expect(screen.getByTestId("journey-stop-cards").children).toHaveLength(4);
-    expect(screen.getByText(/For floating, choose the free public beach at Ein Bokek/)).toBeInTheDocument();
-    expect(screen.getByText(/Discover a desert oasis of flowing streams/)).toBeInTheDocument();
-    expect(screen.getByRole("heading", { name: "A beach-only day at Ein Bokek" })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: /Jerusalem to the Dead Sea: ways to travel/ })).toBeInTheDocument();
+    expect(screen.getByRole("table", { name: /Jerusalem to the Dead Sea: ways to travel/ })).toBeInTheDocument();
+    expect(screen.getByText(/Masada, Ein Gedi, Qumran and Qasr al-Yahud can each add something different/)).toBeInTheDocument();
+    expect(screen.getByText(/Walk among springs, waterfalls, green vegetation/)).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "Qumran" })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "Qasr al-Yahud" })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "Where to go for a Dead Sea beach day" })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "By public bus: Egged 486 and 444" })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "By taxi or private driver: direct travel from your hotel" })).toBeInTheDocument();
     expect(screen.getAllByText(/Egged 486/).length).toBeGreaterThanOrEqual(1);
 
     const tourSection = container.querySelector("#tours");
@@ -96,8 +102,13 @@ describe("Jerusalem independent day-trip planning guides", () => {
     expect(contact).not.toBeNull();
     expect(sources).not.toBeNull();
     expect(contact!.compareDocumentPosition(sources!) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
-    expect(screen.getByRole("link", { name: /Ein Gedi Nature Reserve — opening hours and tickets/ }))
+    expect(screen.getByRole("link", { name: /Plan an Ein Gedi visit/ }))
       .toHaveAttribute("href", "https://en.parks.org.il/reserve-park/en-gedi-nature-reserve/");
+    const compare = container.querySelector("#at-a-glance")!;
+    const bus = container.querySelector("#bus")!;
+    const attractions = container.querySelector("#journey-destinations")!;
+    expect(compare.compareDocumentPosition(bus) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
+    expect(bus.compareDocumentPosition(attractions) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
   }, 15000);
 
   it("retains original SEO URLs, updated metadata and real source references", async () => {
