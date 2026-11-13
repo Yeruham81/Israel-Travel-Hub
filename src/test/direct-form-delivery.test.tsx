@@ -39,6 +39,8 @@ describe("one-step direct form delivery", () => {
     const send = vi.fn().mockResolvedValue(undefined);
     const fetch = connectServer(createQuoteDeliveryService({ environment: enabled, send, now }));
     const { path, title } = await contactForm(context);
+    // Shared forms retain the portrait by default; only the actual home page suppresses it.
+    expect(document.getElementById("contact")?.querySelector("img")).not.toBeNull();
     expect(fetch).not.toHaveBeenCalled();
     fireEvent.click(screen.getByRole("button", { name: "Send message" }));
     expect(screen.getByRole("alert")).toBeInTheDocument();
