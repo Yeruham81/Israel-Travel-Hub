@@ -118,6 +118,21 @@
   .prose-guide ul { margin-top: 0.75rem; padding-left: 1.25rem; list-style: disc; line-height: 1.7; }
   .prose-guide li { margin-top: 0.35rem; }
   .prose-guide a { color: var(--color-primary); text-decoration: underline; text-underline-offset: 3px; }
+  /* Guide and itinerary H1s: slightly more compact than promotional headings.
+     Balanced wrapping keeps long destination names readable on narrow screens. */
+  .guide-page-title {
+    font-size: 2rem;
+    line-height: 1.14;
+    letter-spacing: -0.015em;
+    text-wrap: balance;
+    overflow-wrap: break-word;
+  }
+  @media (min-width: 640px) {
+    .guide-page-title { font-size: 2.25rem; }
+  }
+  @media (min-width: 768px) {
+    .guide-page-title { font-size: 2.625rem; }
+  }
   .eyebrow { font-size: 0.75rem; letter-spacing: 0.14em; text-transform: uppercase; font-weight: 600; color: var(--color-primary); }
   .btn { display: inline-flex; align-items: center; justify-content: center; gap: .5rem; border-radius: 999px; padding: .7rem 1.25rem; font-weight: 600; font-size: .95rem; transition: background-color .2s, color .2s, border-color .2s; }
   .btn-primary { background: var(--color-primary); color: var(--color-primary-foreground); }
