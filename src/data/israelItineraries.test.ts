@@ -193,7 +193,7 @@ describe("migrated Israel itineraries", () => {
       "A smoother airport connection",
     ]);
     expect(new Set(itineraries["3"].dayTipHeadings).size).toBe(3);
-    for (const id of ["5", "7", "10"] as const) expect(itineraries[id].dayTipHeadings).toBeUndefined();
+    for (const id of ["7", "10"] as const) expect(itineraries[id].dayTipHeadings).toBeUndefined();
     expect(view).toContain("My practical planning tips");
     expect(guide.noCarAdvice).toContain("different budgets, group sizes and travel styles");
     expect(guide.noCarAdvice).not.toContain("Choose an organized tour");
@@ -363,9 +363,10 @@ describe("migrated Israel itineraries", () => {
     }
   });
 
-  it("removes redundant route-adjustment cards and navigation from the three-day guide only", () => {
+  it("removes redundant adjustment cards from the three- and five-day guides", () => {
     expect(itineraries["3"].alternatives).toEqual([]);
-    for (const id of ["5", "7", "10"] as const) {
+    expect(itineraries["5"].alternatives).toEqual([]);
+    for (const id of ["7", "10"] as const) {
       expect(itineraries[id].alternatives.length).toBeGreaterThanOrEqual(3);
     }
     const view = file("src/components/IsraelItineraryPage.tsx");
