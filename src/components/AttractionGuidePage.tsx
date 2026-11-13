@@ -57,7 +57,7 @@ export function AttractionGuidePage({ id }: {id:AttractionId}) {
         alt={a.image.alt}
         fit={sacred ? "contain" : "cover"}
         srcSet={id === "mount-of-olives" ? `${heroJerusalemMedium} 1440w, ${heroJerusalemLarge} 1920w` : undefined}
-        sizes={id === "mount-of-olives" ? "(max-width: 768px) calc(100vw - 32px), (max-width: 1100px) calc(100vw - 48px), 896px" : undefined}
+        sizes={id === "mount-of-olives" ? "(min-width: 1024px) 340px, (min-width: 768px) 672px, calc(100vw - 32px)" : undefined}
         width={id === "mount-of-olives" ? 1920 : id === "mount-zion" ? 755 : 1200}
         height={id === "mount-of-olives" ? 872 : id === "mount-zion" ? 503 : 675}
         caption={id === "mount-of-olives" ? "Jerusalem from the Mount of Olives" : id === "mount-zion" ? "Dormition Abbey on Mount Zion" : undefined}
