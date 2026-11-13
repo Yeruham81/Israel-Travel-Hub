@@ -78,6 +78,19 @@ describe("homepage marketing copy and top navigation", () => {
     const accommodationSection = document.getElementById("accommodation")!;
     const destinationLinks = within(accommodationSection).getAllByRole("link").filter(link => link.getAttribute("href")?.startsWith("/travel-blog/"));
     expect(destinationLinks).toHaveLength(5);
+    // Only the destination name appears over each accommodation image.
+    for (const [link, destination] of destinationLinks.map((link, i) => [link, ["Jerusalem", "Tel Aviv & Jaffa", "Tiberias & Galilee", "Dead Sea", "Haifa"][i]!] as const)) {
+      expect(link.textContent?.trim()).toBe(destination);
+    }
+    for (const removedDescription of [
+      "Old City, city centre & boutique hotels",
+      "Beachfront, Jaffa & city hotels",
+      "Lakeside, luxury & family hotels",
+      "Spa retreats & beachfront resorts",
+      "Carmel views, boutique & family hotels",
+    ]) {
+      expect(accommodationSection).not.toHaveTextContent(removedDescription);
+    }
     expect(destinationLinks.map(link => link.getAttribute("href"))).toEqual([
       "/travel-blog/where-to-stay-in-jerusalem/",
       "/travel-blog/where-to-stay-in-tel-aviv/",
