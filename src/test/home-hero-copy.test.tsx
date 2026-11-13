@@ -102,6 +102,32 @@ describe("homepage marketing copy and service sections", () => {
     expect(within(toursSection).getAllByRole("img")).toHaveLength(7); // Guide photo + six destinations
     expect(toursSection.querySelector('[data-testid="service-layout-tours"]')).toHaveClass("lg:grid-cols-[minmax(0,2fr)_minmax(0,3fr)]");
 
+    // On desktop the ship photo and the two port cards occupy matching-height columns.
+    const shoreSection = document.getElementById("shore-excursions")!;
+    const shoreLayout = shoreSection.querySelector('[data-testid="service-layout-shore-excursions"]')!;
+    expect(shoreLayout).toHaveClass("lg:h-[390px]", "lg:items-stretch");
+    const shorePhoto = shoreLayout.querySelector(":scope > img")!;
+    expect(shorePhoto).toHaveClass("lg:h-full", "lg:object-cover");
+    const portList = within(shoreSection).getByRole("list", { name: "Shore excursions by port" });
+    expect(portList).toHaveClass("lg:h-full", "lg:grid-rows-2");
+    const portLinks = within(portList).getAllByRole("link");
+    expect(portLinks).toHaveLength(2);
+    expect(portLinks.map(link => link.getAttribute("href"))).toEqual([
+      "/ashdod-shore-excursions/", "/haifa-shore-excursions/",
+    ]);
+    expect(portLinks.map(link => link.textContent)).toEqual([
+      expect.stringContaining("Explore Ashdod excursions"),
+      expect.stringContaining("Explore Haifa excursions"),
+    ]);
+    expect(portLinks[0]).toHaveTextContent("Jerusalem’s Old City");
+    expect(portLinks[1]).toHaveTextContent("Nazareth and the Sea of Galilee");
+    for (const portLink of portLinks) {
+      expect(portLink).toHaveClass("h-full");
+      expect(within(portLink).getByRole("img")).toHaveClass("h-full", "object-cover");
+      expect(portLink.textContent).not.toContain("→");
+    }
+    expect(within(shoreSection).getAllByRole("img")).toHaveLength(3);
+
     // The former bottom destination strip is consolidated into the accommodation section.
     const accommodationSection = document.getElementById("accommodation")!;
     const destinationLinks = within(accommodationSection).getAllByRole("link").filter(link => link.getAttribute("href")?.startsWith("/travel-blog/"));
