@@ -88,7 +88,7 @@ export function TripadvisorReviewCarousel() {
             onClick={() => { setIndex(i); setManuallySelected(true); }}
             aria-label={"Show Tripadvisor review from " + review.author}
             aria-pressed={index === i}
-            className="grid size-8 place-items-center rounded-full focus-visible:ring-2 focus-visible:ring-ring"
+            className="group grid size-8 place-items-center rounded-full focus-visible:ring-2 focus-visible:ring-ring"
           >
             <span aria-hidden="true" className={"h-2.5 rounded-full transition-all " + (index === i ? "w-6 bg-primary" : "w-2.5 bg-muted-foreground/40 group-hover:bg-primary/60")} />
           </button>
