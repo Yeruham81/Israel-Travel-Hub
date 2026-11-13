@@ -1,8 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { Church, Clock3, Landmark, MapPin, Ship, Sun, Waves } from "lucide-react";
-import { Breadcrumbs, FaqList, OnThisPage, Section, SourceList } from "@/components/Guide";
-import { AuthorCard } from "@/components/AuthorCard";
-import { PageUpdated } from "@/components/PageUpdated";
+import { Church, Landmark, MapPin, Sun, Waves } from "lucide-react";
+import { FaqList, HubHeader, OnThisPage, Section, SourceList } from "@/components/Guide";
 import { GuidePhotoCredit } from "@/components/TravelGuide";
 import { ShoreReadingGuides } from "@/components/ShoreReadingGuides";
 import { getShorePort } from "@/data/shoreExcursions";
@@ -45,33 +43,17 @@ export const Route = createFileRoute("/shore-excursions")({
 function Shore() {
   const photos = [heroPhoto, ...portIds.map((id) => getShorePort(id).photo), ...Object.values(experiencePhotos), ...shoreHubGuides.map((guide) => guide.photo)].filter(hasPublicPhotoCredit);
   return <main className="mx-auto max-w-5xl px-4 pb-10">
-    <header className="pt-6">
-      <Breadcrumbs items={crumbs.map((crumb) => ({ name: crumb.name, to: crumb.path }))} />
-      <div className="mt-6 overflow-hidden rounded-3xl bg-navy text-navy-foreground">
-        <div className="grid lg:grid-cols-[1.2fr_1fr]">
-          <div className="p-6 sm:p-8 lg:p-9">
-            <p className="text-xs font-semibold uppercase tracking-[0.16em] text-sand">One port call. A world of discovery.</p>
-            <h1 className="mt-4 text-4xl leading-[1.1] md:text-5xl">{shoreHubTitle}</h1>
-            <p className="mt-5 text-lg leading-relaxed opacity-90">Choose your excursion from the port your ship actually visits. Ashdod suits Jerusalem, Jaffa or a longer desert day; Haifa is a closer starting point for Akko and selected Galilee sites. Compare transport-only and guided offers using your real time ashore and the required return to the ship.</p>
-            <div className="mt-6 flex flex-wrap gap-3">
-              <Link to={shorePorts.ashdod.path} className="btn btn-light">Excursions from Ashdod</Link>
-              <Link to={shorePorts.haifa.path} className="btn btn-light">Excursions from Haifa</Link>
-            </div>
-          </div>
-          <figure className="relative min-h-64 lg:min-h-full">
-            <img src={heroPhoto.src} alt={heroPhoto.alt} width={900} height={700} fetchPriority="high" decoding="async" className="h-full min-h-64 w-full object-cover lg:absolute lg:inset-0" />
-            <figcaption className="absolute bottom-4 left-4 rounded-full bg-navy/80 px-4 py-2 text-xs font-medium backdrop-blur">Jerusalem · The Old City</figcaption>
-          </figure>
-        </div>
-        <ul className="flex flex-wrap gap-x-6 gap-y-3 border-t border-white/15 px-6 py-4 text-sm sm:px-8">
-          <li className="flex items-center gap-2"><Ship className="h-4 w-4" aria-hidden />Ashdod & Haifa ports</li>
-          <li className="flex items-center gap-2"><MapPin className="h-4 w-4" aria-hidden />Port pickup & return</li>
-          <li className="flex items-center gap-2"><Clock3 className="h-4 w-4" aria-hidden />Private & guided day trips</li>
-        </ul>
-      </div>
-      <PageUpdated date={SHORE_EXCURSION_CHECK_DATE} />
-      <AuthorCard />
-    </header>
+    <HubHeader
+      crumbs={crumbs.map((crumb) => ({ name: crumb.name, to: crumb.path }))}
+      eyebrow="Shore excursions · Ashdod & Haifa"
+      title={shoreHubTitle}
+      intro="Plan a day ashore from Ashdod or Haifa, with practical guidance on destinations, transport, guided tours and returning to your ship on time."
+      checkedAt={SHORE_EXCURSION_CHECK_DATE}
+      actions={<>
+        <Link to={shorePorts.ashdod.path} className="btn btn-primary">Excursions from Ashdod</Link>
+        <Link to={shorePorts.haifa.path} className="btn btn-outline">Excursions from Haifa</Link>
+      </>}
+    />
     <OnThisPage sections={sections} />
 
     <section id="ports" aria-labelledby="ports-h" className="mt-10 scroll-mt-24">
