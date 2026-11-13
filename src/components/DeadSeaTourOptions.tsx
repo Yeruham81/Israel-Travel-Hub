@@ -7,7 +7,7 @@ import masadaPalacePhoto from "@/assets/guides/dead-sea-excursions/masada-palace
 import einGediPhoto from "@/assets/guides/dead-sea-excursions/ein-gedi-oasis.webp";
 import saltShorePhoto from "@/assets/guides/dead-sea-excursions/dead-sea-salt-shore.webp";
 import sunrisePhoto from "@/assets/guides/dead-sea-excursions/masada-snake-path.webp";
-import bethlehemNativityPhoto from "@/assets/guides/dead-sea-excursions/bethlehem-nativity.webp";
+import jordanRiverPhoto from "@/assets/guides/dead-sea-excursions/jordan-river-qasr-al-yahud.webp";
 
 const tourPhotos = {
   "beach-mud": { src: beachMudPhoto, alt: "Dead Sea mud bathing on the shore" },
@@ -15,7 +15,7 @@ const tourPhotos = {
   "ein-gedi": { src: einGediPhoto, alt: "Desert oasis and natural scenery at Ein Gedi" },
   "salt-shore": { src: saltShorePhoto, alt: "Salt deposits on the Dead Sea shoreline" },
   sunrise: { src: sunrisePhoto, alt: "The Snake Path climbing toward Masada" },
-  "bethlehem-nativity": { src: bethlehemNativityPhoto, alt: "Interior of the Church of the Nativity in Bethlehem" },
+  "jordan-river": { src: jordanRiverPhoto, alt: "The Jordan River and palms at Qasr al-Yahud baptismal site" },
 } as const;
 
 /** Compact manually curated cards, with vendor data separated from affiliate URLs.
