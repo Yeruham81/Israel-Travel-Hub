@@ -103,6 +103,7 @@ const guideSections = (g: ItineraryGuide): [string, string][] => [
 export function IsraelItineraryPage({ id }: { id: ItineraryId }) {
   const g = itineraries[id];
   const photo = migrationPhotos[g.hero];
+  const compactOverview = id === "3" || id === "5";
   const showTravel = g.overviewRows?.some(row => Boolean(row.travel));
   const shownImages: { label: string; photo: GuidePhoto }[] = [
     { label: "Cover", photo },
@@ -136,15 +137,15 @@ export function IsraelItineraryPage({ id }: { id: ItineraryId }) {
     <section id="overview" aria-labelledby="overview-h" className="mt-10 scroll-mt-28">
       <h2 id="overview-h" className="text-3xl">The route at a glance</h2>
       <p className="mt-3 max-w-3xl leading-relaxed">{g.reality}</p>
-{id === "3" ? <div className="mt-4 space-y-2 text-sm leading-relaxed text-muted-foreground">
+{compactOverview ? <div className="mt-4 space-y-2 text-sm leading-relaxed text-muted-foreground">
         <p><strong className="text-foreground">Best for:</strong> {g.idealFor}</p>
         <p><strong className="text-foreground">Arrival and hotel nights:</strong> {g.hotelBases}</p>
       </div> : <dl className="mt-5 grid gap-3 sm:grid-cols-2">
         <div className="rounded-xl border bg-card p-5"><dt className="flex items-center gap-2 text-sm font-semibold"><CalendarDays className="h-4 w-4 text-primary" aria-hidden /> Who this suits</dt><dd className="mt-2 text-sm leading-relaxed text-muted-foreground">{g.idealFor}</dd></div>
         <div className="rounded-xl border bg-card p-5"><dt className="flex items-center gap-2 text-sm font-semibold"><BedDouble className="h-4 w-4 text-primary" aria-hidden /> Suggested hotel bases</dt><dd className="mt-2 text-sm leading-relaxed text-muted-foreground">{g.hotelBases}</dd></div>
       </dl>}
-      <h3 className="mt-7 text-xl font-semibold">{id === "3" ? "Daily route, transport and overnight stays" : "Daily route and hotel bases"}</h3>
-      <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{id === "3" ? "One continuous trip: two Jerusalem hotel nights, followed by a coastal day and either departure or an optional Tel Aviv stay." : "This plan groups nearby stops and limits hotel changes. Suggested overnight locations depend on your arrival and departure times."}</p>
+      <h3 className="mt-7 text-xl font-semibold">{compactOverview ? "Daily route, transport and overnight stays" : "Daily route and hotel bases"}</h3>
+      <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{id === "3" ? "One continuous trip: two Jerusalem hotel nights, followed by a coastal day and either departure or an optional Tel Aviv stay." : id === "5" ? "Five sightseeing days with three Jerusalem hotel nights, a move to Tel Aviv after Day 3, and a flexible departure plan after the final coastal day." : "This plan groups nearby stops and limits hotel changes. Suggested overnight locations depend on your arrival and departure times."}</p>
       <ol className="mt-4 space-y-2 sm:hidden" aria-label="Day-by-day route and overnight stays">
         {g.daysPlan.map((day, index) => <li key={index} className="rounded-xl border bg-card p-4">
           <p className="text-xs font-bold uppercase tracking-wide text-primary">Day {index + 1}</p>
@@ -218,6 +219,16 @@ export function IsraelItineraryPage({ id }: { id: ItineraryId }) {
                     <p className="mt-1 text-muted-foreground">{option.text}</p>
                   </div>)}
                 </div> : null}
+                {g.dayChoices?.find(choice => choice.day === index + 1) && (
+                  <div className="mt-5 grid gap-4 border-t pt-4 sm:grid-cols-2" data-testid={`day-${index + 1}-route-choices`}>
+                    {g.dayChoices.find(choice => choice.day === index + 1)!.options.map(option => (
+                      <div key={option.heading} className="min-w-0 text-sm leading-relaxed">
+                        <h4 className="font-semibold">{option.heading}</h4>
+                        <p className="mt-1 text-muted-foreground">{option.text}</p>
+                      </div>
+                    ))}
+                  </div>
+                )}
                 {!g.dayInlineLinks?.some(link => link.day === index + 1) && <nav aria-label={`Read more about day ${index + 1}`} className="mt-5 flex flex-wrap gap-x-5 gap-y-2">
                   {day.links.map((link) => <Link key={link.label} to={link.to} className="inline-flex items-center gap-1.5 text-sm font-semibold text-primary underline underline-offset-2">{link.label} <ArrowRight className="h-3.5 w-3.5" aria-hidden /></Link>)}
                 </nav>}
@@ -228,7 +239,7 @@ export function IsraelItineraryPage({ id }: { id: ItineraryId }) {
             </div>
             {g.jerusalemTourOptionsDay === index + 1 && (
               <div className="border-t bg-secondary/10 px-5 py-4 sm:px-7">
-                <JerusalemItineraryTourOptions />
+                <JerusalemItineraryTourOptions days={id === "5" ? 5 : 3} />
               </div>
             )}
             {g.activityWidgets?.filter(widget => widget.day === index + 1).map(widget =>
@@ -293,8 +304,8 @@ export function IsraelItineraryPage({ id }: { id: ItineraryId }) {
       </div>
     </section> : null}
     <section id="other-durations" aria-labelledby="other-duration-h" className="mt-14 scroll-mt-28">
-      <h2 id="other-duration-h" className="text-3xl">{id === "3" ? "Have more than 3 days in Israel?" : "Plan the rest of your trip"}</h2>
-      <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{id === "3" ? "Explore my 5-, 7- and 10-day itineraries for more time in Jerusalem and other regions, with realistic routes and hotel bases." : "Have more or fewer days? Compare the routes, hotel bases and travel commitments before choosing a different trip length."}</p>
+      <h2 id="other-duration-h" className="text-3xl">{id === "3" ? "Have more than 3 days in Israel?" : id === "5" ? "Have more or fewer than 5 days in Israel?" : "Plan the rest of your trip"}</h2>
+      <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{id === "3" ? "Explore my 5-, 7- and 10-day itineraries for more time in Jerusalem and other regions, with realistic routes and hotel bases." : id === "5" ? "Explore a shorter 3-day route or discover the 7- and 10-day itineraries for more time in Israel and its different regions." : "Have more or fewer days? Compare the routes, hotel bases and travel commitments before choosing a different trip length."}</p>
       <div className="mt-5 grid gap-4 sm:grid-cols-3">
         {itineraryIds.filter((other) => other !== id).map((other) => {
           const choice = itineraries[other];
