@@ -4,24 +4,35 @@ import { customerTestimonials, tripadvisorProfileUrl, tripadvisorSnapshot } from
 import { TripadvisorReviewCarousel } from "@/components/TripadvisorReviewCarousel";
 
 export function TripadvisorReviewsSection({ personal = false }: { personal?: boolean } = {}) {
-  return <section aria-labelledby="reviews-h" className="mx-auto mt-16 max-w-6xl px-4">
-    <div className="overflow-hidden rounded-3xl border bg-card shadow-sm">
-      <div className="bg-navy px-6 py-9 text-navy-foreground sm:px-10">
-        <p className="text-xs font-semibold uppercase tracking-widest opacity-80">{personal ? "From travelers I've helped" : "Real Traveler Experiences"}</p>
-        <h2 id="reviews-h" className="mt-2 text-3xl sm:text-4xl">{personal ? "What travelers say about their journeys with me" : "Kind Words from Satisfied Travelers"}</h2>
-        <div className="mt-7 flex flex-wrap items-center gap-4 rounded-2xl border border-white/20 bg-white/10 p-5">
-          <a href={tripadvisorProfileUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 text-xl font-bold tracking-tight text-white" aria-label={personal ? "Tripadvisor reviews of my transport service" : "Tripadvisor reviews for Moshe Barak"}>
-            <img src="/images/tripadvisor.svg" alt="" width={36} height={36} loading="lazy" className="size-9" />
-            Tripadvisor <ExternalLink size={15} aria-hidden />
-          </a>
-          <span className="flex items-center gap-1 text-[#34e0a1]" aria-label="Five out of five stars">
-            {Array.from({length: 5},(_,i)=><Star key={i} size={20} fill="currentColor" aria-hidden />)}
-          </span>
-          <span className="text-2xl font-semibold tabular-nums">{tripadvisorSnapshot.rating.toFixed(1)} / 5</span>
+  return <section aria-labelledby="reviews-h" className="mx-auto mt-8 max-w-6xl px-4 sm:mt-10">
+    <div className="overflow-hidden rounded-2xl border bg-card shadow-sm">
+      <div className="flex flex-wrap items-start justify-between gap-3 px-4 pt-5 sm:px-6 sm:pt-6">
+        <div className="min-w-0">
+          <p className="eyebrow">{personal ? "From Travelers I've Helped" : "Real Traveler Experiences"}</p>
+          <h2 id="reviews-h" className="mt-1 text-2xl leading-tight sm:text-[1.625rem]">{personal ? "What Travelers Say About Their Journeys" : "What Travelers Say"}</h2>
         </div>
+        <a
+          href={tripadvisorProfileUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label={personal ? "Tripadvisor reviews of my transport service, rated five out of five" : "Tripadvisor reviews for Moshe Barak, rated five out of five"}
+          className="inline-flex flex-wrap items-center gap-x-2 gap-y-1 rounded-lg border bg-background px-3 py-2 text-sm transition-colors hover:border-primary focus-visible:ring-2 focus-visible:ring-ring"
+        >
+          <img src="/images/tripadvisor.svg" alt="" width={20} height={20} loading="lazy" className="size-5" />
+          <span className="font-semibold">Tripadvisor</span>
+          <span className="flex items-center gap-0.5 text-[#00AA6C]" aria-hidden="true">
+            {Array.from({ length: 5 }, (_, i) => <Star key={i} size={13} fill="currentColor" />)}
+          </span>
+          <span className="font-semibold tabular-nums">{tripadvisorSnapshot.rating.toFixed(1)} / 5</span>
+          <ExternalLink size={13} className="text-muted-foreground" aria-hidden />
+        </a>
       </div>
       <TripadvisorReviewCarousel />
-      <div className="flex justify-center px-6 pb-8 sm:px-10"><a href={tripadvisorProfileUrl} target="_blank" rel="noopener noreferrer" className="btn btn-primary">{personal ? "Explore all my Tripadvisor reviews" : "Explore all Tripadvisor reviews"} <ExternalLink size={16} aria-hidden /></a></div>
+      <div className="flex justify-center px-4 pb-4 sm:px-6">
+        <a href={tripadvisorProfileUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 text-sm font-semibold text-primary underline-offset-4 hover:underline focus-visible:ring-2 focus-visible:ring-ring">
+          {personal ? "Read all my Tripadvisor reviews" : "Read all Tripadvisor reviews"} <ExternalLink size={13} aria-hidden />
+        </a>
+      </div>
     </div>
   </section>;
 }
