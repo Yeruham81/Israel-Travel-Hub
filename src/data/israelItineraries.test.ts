@@ -272,7 +272,7 @@ describe("migrated Israel itineraries", () => {
 
     const view = file("src/components/IsraelItineraryPage.tsx");
     expect(view).toContain("day-${index + 1}-stop-order");
-    expect(view).toContain("Suggested stop order");
+    expect(view).toContain("Suggested highlights");
     expect(view).toContain('data-testid="departure-scenarios"');
     expect(view).toContain("Getting around");
     expect(view).toContain("dayTextLinks(g, index + 1");

@@ -189,7 +189,7 @@ export function IsraelItineraryPage({ id }: { id: ItineraryId }) {
               <div className="min-w-0">
                 {g.daySequences?.find(sequence => sequence.day === index + 1) && (
                   <div className="mb-6 border-b pb-5" data-testid={`day-${index + 1}-stop-order`}>
-                    <h4 className="text-sm font-semibold">Suggested stop order <span className="font-normal text-muted-foreground">· approximate times</span></h4>
+                    <h4 className="text-sm font-semibold">Suggested highlights <span className="font-normal text-muted-foreground">· approximate times</span></h4>
                     <ol className="mt-3 space-y-2">
                       {g.daySequences.find(sequence => sequence.day === index + 1)!.steps.map((step, stepIndex) => (
                         <li key={stepIndex} className="grid grid-cols-[1.25rem_minmax(0,1fr)] gap-2 text-sm leading-snug">
