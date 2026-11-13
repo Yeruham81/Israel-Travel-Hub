@@ -23,7 +23,7 @@ export const taxiGuideCluster: Record<"taxis" | "taxiFares" | "airportTaxis", Tr
   taxis: {
     id: "taxis",
     title: "Taxis in Israel: The Complete Guide for Tourists",
-    description: "How to use taxis in Israel: booking apps, licensed cabs, 2026 meter fares, Ben Gurion Airport pickup, Shabbat, payment, luggage and safety.",
+    description: "How to use taxis in Israel: booking apps, licensed cabs, regulated meter fares, Ben Gurion Airport pickup, Shabbat, payment, luggage and safety.",
     intro: "Taxis are useful for door-to-door travel in Israel, especially with luggage, at night, on Shabbat or where public transport is limited. Learn how to book a licensed cab, check fares and travel with confidence.",
     answer: "You can hail a licensed taxi in a major city, find one at an official stand, order from a local dispatcher or use Gett or another available taxi app. Confirm your destination, the meter or approved fare basis, and payment method. The regulated meter charges for time and distance, with higher tariffs at some times. At Ben Gurion Airport, use the authorized Gett app or kiosk and follow the designated taxi queue.",
     topics: ["transportation", "tips"],
@@ -95,7 +95,7 @@ export const taxiGuideCluster: Record<"taxis" | "taxiFares" | "airportTaxis", Tr
         id: "apps", title: "Taxi Apps in Israel: Gett, Yango and Uber",
         paragraphs: [
           "Gett and Yango let you request licensed taxis through an app, subject to driver availability in your area. You can use the official Gett and Yango Israel rider websites linked below to learn about the services or get their apps. Set up a usable payment method before travel, check the pickup pin and keep an alternative if no driver accepts the request.",
-          "Uber passenger rides are not available in Israel in 2026. Gett and Yango are local taxi-booking alternatives; the separate Uber guide compares their practical use, while this article covers how licensed taxis operate.",
+          "Uber passenger rides are not available in Israel as of November 2026. Gett and Yango are local taxi-booking alternatives; the separate Uber guide compares their practical use, while this article covers how licensed taxis operate.",
           "For an airport pickup, the official Gett taxi procedure uses a code and a physical authorized queue; the detailed airport instructions are covered in my airport taxi guide.",
         ],
         inlineLinks: [{ text: "separate Uber guide", to: travelGuidePaths.uber }, { text: "airport taxi guide", to: travelGuidePaths.airportTaxis }],
@@ -226,8 +226,8 @@ export const taxiGuideCluster: Record<"taxis" | "taxiFares" | "airportTaxis", Tr
 
   taxiFares: {
     id: "taxiFares",
-    title: "Taxi Fares in Israel (2026): Official Rates, Night Tariffs & Price Estimates",
-    description: "Official Israel taxi fares for 2026: A/B/C meter rates, time and distance, price after 10 km, Shabbat hours, booking supplements and example calculations.",
+    title: "Taxi Fares in Israel: Official Rates, Night Tariffs & Price Estimates",
+    description: "Official Israel taxi fares: A/B/C meter rates, time and distance, price after 10 km, Shabbat hours, booking supplements and example calculations.",
     intro: "Understand what the taxi meter charges, when higher rates apply and how to check legitimate extras. These are official regulated fare components, not live quotations for individual routes.",
     answer: "From April 1, 2026, the regulated meter starting amount is approximately ₪12.46 including 18% VAT where applicable. Time and distance are charged together; for the first 10 km the A/B/C rates are about ₪1.95/₪2.34/₪2.73 per minute and per kilometer. Each kilometer beyond 10 km costs more. Additional lawful charges may apply.",
     topics: ["transportation", "tips"],
@@ -241,7 +241,7 @@ export const taxiGuideCluster: Record<"taxis" | "taxiFares" | "airportTaxis", Tr
     ],
     nextSteps: [{ label: "Using licensed taxis: full guide", to: travelGuidePaths.taxis }, { label: "Airport taxi ordering and pickup", to: travelGuidePaths.airportTaxis }, { label: "Holiday calendar", to: travelGuidePaths.calendar }],
     comparison: {
-      caption: "Official regulated taxi meter rates — 2026 (₪, including 18% VAT where applicable)",
+      caption: "Official regulated taxi meter rates — effective April 2026 (₪, including 18% VAT where applicable)",
       headers: ["Meter component", "Tariff A", "Tariff B", "Tariff C"],
       rows: [
         ["Starting amount", "₪12.46", "₪12.46", "₪12.46"],
@@ -308,7 +308,7 @@ export const taxiGuideCluster: Record<"taxis" | "taxiFares" | "airportTaxis", Tr
           "Passenger waiting that qualifies for a separate waiting charge should not be confused with being stopped in normal traffic, which is reflected in the ordinary meter time component.",
         ],
         tables: [{
-          caption: "Specific 2026 additions — including 18% VAT where applicable",
+          caption: "Regulated fare additions — April 2026 rates, including 18% VAT where applicable",
           headers: ["Charge", "Amount / method"],
           rows: [
             ["Taxi ordered to your address", "₪5.78, when the regulated dispatch addition applies"],
@@ -356,7 +356,7 @@ export const taxiGuideCluster: Record<"taxis" | "taxiFares" | "airportTaxis", Tr
       },
     ],
     checklist: [
-      "Check the fare order date before relying on 2026 figures",
+      "Check the effective dates of the applicable taxi fare order",
       "Find the correct A/B/C time period",
       "Include the initial amount AND both time and distance charges",
       "Apply the higher rate only to kilometers beyond the first 10",
@@ -365,7 +365,7 @@ export const taxiGuideCluster: Record<"taxis" | "taxiFares" | "airportTaxis", Tr
       "Keep the receipt and app booking reference",
     ],
     faqs: [
-      { q: "What is the starting taxi fare in Israel in 2026?", a: "The regulated meter begins at ₪10.56 before VAT, approximately ₪12.46 including 18% VAT where it applies. That is a starting component, not the complete cost of a ride." },
+      { q: "What is the regulated taxi meter starting fare in Israel?", a: "Under the tariff effective from April 2026, the regulated meter begins at ₪10.56 before VAT, approximately ₪12.46 including 18% VAT where it applies. That is a starting component, not the complete cost of a ride." },
       { q: "Does the meter charge by time or distance?", a: "Both accumulate during the ride, along with the starting amount and permitted additions." },
       { q: "What changes after 10 kilometers?", a: "The per-kilometer distance rate increases only for kilometers beyond the first 10. The regular per-minute charge continues." },
       { q: "Why is the same route more expensive at night?", a: "The legally assigned tariff can change from A to B or C; traffic time and legitimate additions can also differ." },
@@ -396,7 +396,7 @@ export const taxiGuideCluster: Record<"taxis" | "taxiFares" | "airportTaxis", Tr
       { label: "Scheduled · T3", text: "Level 2, Exit 23 — follow your Gett confirmation" },
       { label: "On-demand · T1", text: "Arrivals main exit — authorized taxi pickup" },
     ],
-    nextSteps: [{ label: "Official 2026 taxi meter rates", to: travelGuidePaths.taxiFares }, { label: "Airport arrival process", to: travelGuidePaths.arrival }, { label: "Shabbat airport transport", to: travelGuidePaths.shabbat }],
+    nextSteps: [{ label: "Official taxi meter rates", to: travelGuidePaths.taxiFares }, { label: "Airport arrival process", to: travelGuidePaths.arrival }, { label: "Shabbat airport transport", to: travelGuidePaths.shabbat }],
     comparison: {
       caption: "Airport taxi pickup points — check your booking type",
       headers: ["Booking", "Where to go", "What to bring"],
