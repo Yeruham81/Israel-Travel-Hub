@@ -40,6 +40,7 @@ import caesareaTile from "@/assets/home/caesarea-aqueduct-tile.webp";
 import haifaTile from "@/assets/haifa/panorama-tile.webp";
 import deadSeaTile from "@/assets/dead-sea/beach-tile.webp";
 import { pageMeta } from "@/lib/site";
+import { tourCategoryPaths } from "@/data/tours";
 import { photoCredits } from "@/data/photoCredits";
 import { GuideCard } from "@/components/TravelGuide";
 import { guideDirectory } from "@/data/travelGuides";
@@ -72,7 +73,7 @@ export const Route = createFileRoute("/")({
 });
 
 type Img = { src: string; alt: string; thumb?: string; tile?: string; pos?: string };
-type Card = { label: string; text: string; to: LinkProps["to"]; img: Img };
+type Card = { label: string; text?: string; to: LinkProps["to"]; img: Img };
 type Service = { id: string; eyebrow: string; tagline: string; title: string; text: string; feature?: Img; cards: Card[]; hub: { label: string; to: LinkProps["to"] } };
 
 const IMG = {
@@ -111,8 +112,12 @@ export const services: Service[] = [
     text: "Explore Israel’s top destinations with guided tours and day trips, and find the experiences that best match your interests and travel style.",
     feature: { src: guidedTour, alt: "Illustrative small group on a guided walk through old stone streets" },
     cards: [
-      { label: "Bethlehem, Jericho & Jordan River", text: "Compare guided day trips", to: "/tours/bethlehem-jericho-jordan-river/", img: IMG.bethlehem },
-      { label: "Masada & Dead Sea", text: "Plan the desert day", to: "/travel-blog/masada/", img: IMG.masada },
+      { label: "Jerusalem", to: tourCategoryPaths.jerusalem, img: { src: "/images/attractions/jerusalem.webp", alt: "Jerusalem’s Old City and the Dome of the Rock" } },
+      { label: "Tel Aviv & Jaffa", to: tourCategoryPaths["tel-aviv-jaffa"], img: { src: "/images/attractions/tel-aviv-jaffa.webp", alt: "Fishing boats and old stone buildings around Jaffa harbour" } },
+      { label: "Masada & Dead Sea", to: tourCategoryPaths["masada-dead-sea"], img: { src: "/images/tours/masada-ruins.webp", alt: "Ancient stone ruins on the Masada plateau" } },
+      { label: "Bethlehem & Jericho", to: tourCategoryPaths["bethlehem-jericho"], img: { src: "/images/home/bethlehem-alternative.webp", alt: "Manger Square and the Church of the Nativity in Bethlehem" } },
+      { label: "Nazareth & Galilee", to: tourCategoryPaths["nazareth-galilee"], img: { src: "/images/attractions/sea-of-galilee.webp", alt: "The Sea of Galilee and green hills overlooking the lake" } },
+      { label: "Caesarea, Haifa & Acre", to: tourCategoryPaths["northern-coast"], img: { src: "/images/attractions/haifa-coast.webp", alt: "Haifa’s cityscape and Mediterranean coastline" } },
     ],
     hub: { label: "Explore tours & day trips", to: "/tours/" },
   },
@@ -181,10 +186,21 @@ function CompactCard({ c }: { c: Card }) {
         </span>
         <div className="min-w-0">
           <h3 className="font-serif text-lg leading-tight group-hover:text-primary">{c.label}</h3>
-          <span className="mt-0.5 block text-sm text-muted-foreground">{c.text} <span aria-hidden>→</span></span>
+          {c.text && <span className="mt-0.5 block text-sm text-muted-foreground">{c.text} <span aria-hidden>→</span></span>}
         </div>
       </Link>
     </li>
+  );
+}
+
+/** Compact image-only destination tile used exclusively by the six tour categories. */
+function TourDestinationCard({ c }: { c: Card }) {
+  return (
+    <Link to={c.to} aria-label={c.label} className="group relative block min-w-0 overflow-hidden rounded-lg bg-navy shadow-sm focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-ring">
+      <img src={c.img.thumb ?? c.img.src} alt={c.img.alt} loading="lazy" decoding="async" width={400} height={300} className="aspect-[4/3] w-full object-cover transition-transform duration-500 group-hover:scale-105" />
+      <span className="pointer-events-none absolute inset-0 bg-gradient-to-t from-navy/90 via-navy/15 to-transparent" aria-hidden="true" />
+      <span className="absolute inset-x-0 bottom-0 px-2.5 pb-2.5 pt-6 font-serif text-sm font-semibold leading-tight text-navy-foreground sm:px-3 sm:pb-3 sm:text-base">{c.label}</span>
+    </Link>
   );
 }
 
@@ -228,7 +244,14 @@ function Home() {
                 <p className="mt-2 max-w-2xl text-muted-foreground">{s.text}</p>
               </div>
             </header>
-            {s.id === "accommodation" ? (
+            {s.id === "tours" ? (
+              <div className="mt-6 grid min-w-0 gap-4 lg:grid-cols-[minmax(0,2fr)_minmax(0,3fr)] lg:items-stretch" data-testid={`service-layout-${s.id}`}>
+                {s.feature && <img src={s.feature.src} alt={s.feature.alt} loading="lazy" decoding="async" width={900} height={560} className="aspect-[16/9] max-h-[320px] w-full min-w-0 rounded-xl object-cover lg:aspect-auto lg:h-full lg:max-h-none" />}
+                <ul className="grid min-w-0 grid-cols-2 gap-3 sm:grid-cols-3" aria-label="Tour destinations">
+                  {s.cards.map((card) => <li key={card.label} className="min-w-0"><TourDestinationCard c={card} /></li>)}
+                </ul>
+              </div>
+            ) : s.id === "accommodation" ? (
               <div>
                 <ul
                 className="mt-6 grid min-w-0 grid-cols-1 gap-4 min-[480px]:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5"
