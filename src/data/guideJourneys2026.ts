@@ -851,7 +851,7 @@ export const journeyDestinationGuides = {
           "title": "Where to go for a Dead Sea beach day",
           "paragraphs": [
             "For an uncomplicated day of swimming and floating, choose the free public beach at Ein Bokek in the southern hotel area. Tamar Regional Council provides public showers, changing rooms, toilets, shade, chairs and umbrellas; no entrance ticket is required. The promenade has places to eat and buy basic supplies.",
-            "You may reach this beach by bus, taxi or rental car, or choose a tour that specifically stops there. Beaches in the northern Dead Sea are closer to Jerusalem but may have an entrance fee; check the beach named in your tour itinerary rather than assuming every tour visits Ein Bokek.",
+            "You can reach the free public beach at Ein Bokek by bus, taxi or rental car, or choose a tour that stops there. Northern-shore bathing beaches such as Kalia are closer to Jerusalem, but charge admission; depending on the ticket, parking, shuttles and beach equipment can cost extra. If you join a tour, check which beach it visits.",
             "Bring water, sun protection, swimwear, a towel and water shoes. Enter the water at a supervised bathing area, float gently and avoid getting the very salty water in your eyes. For more detail about beaches and facilities, see my Dead Sea visitor guide."
           ],
           "inlineLinks": [
@@ -861,15 +861,20 @@ export const journeyDestinationGuides = {
             }
           ],
           "sourceIds": [
-            "m26-deadsea-ein-bokek-council"
+            "m26-deadsea-ein-bokek-council",
+            "m26-kalia-beach-prices"
           ],
           "externalLinks": [
             {
               "label": "Tamar Regional Council — free Ein Bokek public beach",
               "href": "https://www.deadsea.co.il/attractions/ein-bokek-central-beach/?lang=en"
+            },
+            {
+              "label": "Kalia Beach — admission and facilities",
+              "href": "https://kaliadeadsea.com/en/kalia-beach-en/"
             }
           ],
-          "tip": "Ask for Ein Bokek Central Beach or the public beach in the hotel district, not just 'the Dead Sea'. The shoreline stretches for many kilometres."
+          "tip": "From my experience, the shorter drive to a northern Dead Sea beach rarely makes up for the difference in value. I find the free public beach at Ein Bokek better maintained and more enjoyable, while some privately run northern beaches can feel expensive for the facilities offered. Unless saving travel time is your priority, I generally recommend continuing south to Ein Bokek."
         },
         {
           "id": "day-plan",
