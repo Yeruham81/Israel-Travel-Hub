@@ -804,9 +804,13 @@ export const journeyDestinationGuides = {
           "paragraphs": [
             "A taxi or pre-booked private transfer takes you from your Jerusalem hotel straight to the free public beach in the Ein Bokek hotel district, without carrying bags to the central bus station. It is an easy choice for families, visitors with luggage or anyone travelling when bus services are limited.",
             "For a simple drop-off, arrange a one-way transfer and plan separately how you will return. If you want a full sightseeing day, book a driver who will stay with you and take you between the beach and any attractions. A driver-only service does not automatically include a licensed tour guide or entrance tickets.",
-            "The main drawback is price, but a private vehicle can be more practical for a small group splitting the cost. Tell me your pickup location, number of passengers, intended stops and return time when requesting a quote through my private driver service."
+            "The main drawback is price, but a private vehicle can be more practical for a small group splitting the cost. For a ready-made full-day option, see my private Masada and Dead Sea tour from Jerusalem, starting at ₪2,100 per vehicle for up to four travellers (admission and guiding are extra). For a different itinerary, tell me your pickup location, passenger count, planned stops and return time when requesting a quote through my private driver service."
           ],
           "inlineLinks": [
+            {
+              "text": "private Masada and Dead Sea tour",
+              "to": "/tours/masada-dead-sea/"
+            },
             {
               "text": "private driver service",
               "to": "/private-driver/"
@@ -820,7 +824,7 @@ export const journeyDestinationGuides = {
           "paragraphs": [
             "A group tour departing from Jerusalem is convenient when you want more than a beach visit, especially a combination of Masada, Ein Gedi and the Dead Sea. Transport and the day's stops are arranged for you, making this easier than trying to connect several bus journeys.",
             "The trade-off is a fixed departure, set time at each stop and less freedom to change the plan. Some excursions focus entirely on swimming; others spend much of the day at archaeological or nature sites. A beach stop may be at a paid northern-shore facility rather than the free public beach at Ein Bokek.",
-            "Compare the following Jerusalem departures. The private Masada and Dead Sea option with Moshe Barak also appears here because it offers a different way to organise the same day."
+            "Compare the following organised group excursions departing from Jerusalem. Each offers a different balance of beach time and sightseeing."
           ],
           "tip": "If you mainly want to float in the sea, choose a beach-focused trip; for Masada and Ein Gedi, a full-day itinerary is more realistic. Check how long the tour actually stops at the beach."
         },
