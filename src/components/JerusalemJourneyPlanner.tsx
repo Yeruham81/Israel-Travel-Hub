@@ -132,12 +132,13 @@ const deadSeaPartnerOptions = [
   },
 ] as const;
 
-function attributedDeadSeaTourLink(id: string, subId: string): string | null {
+function attributedDeadSeaTourLink(id: string): string | null {
+  // The Travelpayouts API created this short URL with its U017 SubID already
+  // encoded; appending it again would be redundant.
   const approved = affiliateConfig[id]?.trackingUrl;
   if (!approved) return null;
   const url = new URL(approved);
   if (url.protocol !== "https:" || !["viator.tpm.li", "getyourguide.tpm.li"].includes(url.hostname)) return null;
-  url.searchParams.set("sub_id", subId);
   return url.toString();
 }
 
@@ -182,14 +183,14 @@ export function JerusalemJourneyBooking({ id }: { id: string }) {
         {sponsored && <p className="mt-2 text-xs text-muted-foreground">Sponsored link; I may earn a commission at no extra cost to you.</p>}
       </article>)}
       {!isBethlehem && deadSeaPartnerOptions.map(option => {
-        const url = attributedDeadSeaTourLink(option.id, option.subId);
+        const url = attributedDeadSeaTourLink(option.id);
         if (!url) return null;
         return <article key={option.id} className="flex flex-col rounded-2xl border bg-card p-5" data-testid="deadsea-affiliate-tour-card">
           <p className="text-xs font-semibold text-primary">{option.label} · independent operator listings</p>
           <h3 className="mt-2 text-xl font-semibold">{option.title}</h3>
           <p className="mt-2 flex-1 text-sm leading-relaxed text-muted-foreground">{option.description} Check current departure city, dates, what's included and cancellation terms.</p>
           <a href={url} target="_blank" rel={relFor(true)}
-             onClick={() => recordOutboundClick({ pageId: "journey-jerusalemDeadSea-U017", productId: option.id, offerId: option.id })}
+             onClick={() => recordOutboundClick({ pageId: "journey-jerusalemDeadSea-U017", productId: option.id, offerId: option.subId })}
              className="mt-4 inline-flex w-fit items-center gap-2 text-sm font-semibold text-primary underline underline-offset-4">
             Browse on {option.label} <ExternalLink className="h-4 w-4" aria-hidden /><span className="sr-only"> (opens in a new tab)</span>
           </a>
