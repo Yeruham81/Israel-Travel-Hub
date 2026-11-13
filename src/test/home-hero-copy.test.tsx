@@ -15,6 +15,12 @@ describe("homepage marketing copy and top navigation", () => {
     expect(screen.getByText("Your journey starts here")).toBeInTheDocument();
     expect(container.textContent).toContain("From airport arrivals and getting around to memorable day trips");
     expect(container.textContent).toContain("make the most of your time in Israel.");
+    const headline = screen.getByRole("heading", { level: 1, name: "Discover Israel, Travel Smarter" });
+    expect(headline).toHaveClass("md:text-5xl", "lg:max-w-none", "lg:whitespace-nowrap");
+    expect(headline.nextElementSibling).toHaveClass("mt-3");
+    const caption = screen.getByText("Jerusalem Old City from the Mount of Olives");
+    expect(caption).toHaveClass("text-[10px]", "text-navy-foreground/60");
+    expect(caption.parentElement).toHaveClass("mt-16", "md:mt-24");
     expect(screen.queryByRole("link", { name: "Find where to stay" })).not.toBeInTheDocument();
     expect(screen.queryByRole("link", { name: "Browse destinations" })).not.toBeInTheDocument();
     expect(container.querySelectorAll("a")).toHaveLength(0);
