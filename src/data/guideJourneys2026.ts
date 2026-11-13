@@ -200,7 +200,7 @@ export const journeyDestinationGuides = {
   "title": "How to Get from Jerusalem to Bethlehem: Bus, Taxi & Tours",
   "description": "Compare bus 231 and 234, licensed private drivers, taxis to Checkpoint 300 and Bethlehem tours. Plan your final stop, documents and the return to Jerusalem.",
   "intro": "Planning a trip from Jerusalem to Bethlehem? Despite the short distance, checkpoints and local travel arrangements can complicate the journey. This guide explains the different ways to get there and what to know before you go.",
-  "answer": "For most independent visitors heading toward central Bethlehem, bus 231 is the more convenient budget starting point; bus 234 serves the Checkpoint 300 approach and usually requires a pedestrian crossing and onward local transport. A guided tour or a properly authorised private driver can simplify the trip. Check current entry eligibility, service and return arrangements before setting off.",
+  "answer": "For an independent visit, bus 231 is generally the more direct low-cost approach towards central Bethlehem, while bus 234 takes you to Checkpoint 300 for a pedestrian crossing and onward local transport. A guided tour or an authorised private driver can simplify the return journey.",
   "topics": [
     "transportation",
     "destinations",
@@ -257,8 +257,8 @@ export const journeyDestinationGuides = {
       ],
       [
         "Rental car",
-        "Generally not a practical default",
-        "Written rental, insurance and legal permission for the entire route"
+        "Usually restricted by rental agreements",
+        "Most rental companies prohibit this route; written authorisation would be required"
       ]
     ]
   },
@@ -267,9 +267,33 @@ export const journeyDestinationGuides = {
       "id": "buses",
       "title": "By bus: choose line 231 or 234",
       "paragraphs": [
-        "East Jerusalem buses serving the Bethlehem area depart near Damascus Gate and the Prophets Terminal / Arab bus station area—not Jerusalem's western Central Bus Station. The precise bay, direction and stop can change; check the operator's current route details on the day of travel.",
-        "South Buses lists 231 as Beit Jala and 234 as Bethlehem. The two routes are not interchangeable: bus 231 can take you towards central Bethlehem, whereas bus 234 is useful when you intend to pass through Checkpoint 300 and arrange a second ride.",
-        "These are route descriptions, not live departures. Check the actual fare, payment method, first and last usable buses, and your Jerusalem-bound return before you leave."
+        "Buses serving the Bethlehem area leave from East Jerusalem near Damascus Gate and the Prophets Terminal / Arab bus station, not Jerusalem's western Central Bus Station.",
+        "Line 231 passes through the Bab al-Zaqaq / Beit Jala area and is generally better for reaching central Bethlehem. Line 234 serves the Checkpoint 300 approach, where you cross on foot and arrange a local ride.",
+        "For current fares, payment methods, departure times and the last practical bus back to Jerusalem, consult South Buses' route and station listings before you travel."
+      ],
+      "richParagraphs": [
+        [
+          {
+            "text": "Buses serving the Bethlehem area leave from East Jerusalem near Damascus Gate and the Prophets Terminal / Arab bus station, not Jerusalem's western Central Bus Station."
+          }
+        ],
+        [
+          {
+            "text": "Line 231 passes through the Bab al-Zaqaq / Beit Jala area and is generally better for reaching central Bethlehem. Line 234 serves the Checkpoint 300 approach, where you cross on foot and arrange a local ride."
+          }
+        ],
+        [
+          {
+            "text": "For current fares, payment methods, departure times and the last practical bus back to Jerusalem, consult "
+          },
+          {
+            "text": "South Buses' route and station listings",
+            "href": "https://south-buses.com/lines-and-stations/?lang=en"
+          },
+          {
+            "text": " before you travel."
+          }
+        ]
       ],
       "subsections": [
         {
@@ -277,7 +301,7 @@ export const journeyDestinationGuides = {
           "title": "Bus 231: the Bab al-Zaqaq approach",
           "paragraphs": [
             "The East Jerusalem bus information published by the Christian Information Center describes line 231 travelling toward Beit Jala via the Bab al-Zaqaq area. This is generally a more convenient approach for independent visitors heading to central Bethlehem than first travelling to Checkpoint 300.",
-            "Ask the driver which stop best serves the Church of the Nativity. You may still need to walk or use a local taxi to reach Manger Square. Confirm the Jerusalem-bound stop while you are there; the return boarding point may not be obvious."
+            "Ask the driver which stop best serves the Church of the Nativity. You may still need to walk or take a local taxi to reach Manger Square."
           ]
         },
         {
@@ -287,26 +311,9 @@ export const journeyDestinationGuides = {
             "Line 234 serves the Rachel's Tomb / Checkpoint 300 approach. It does not take you straight to Manger Square. If the crossing is operating and you are eligible to pass, follow the designated pedestrian route, complete any checks and arrange a local vehicle on the Bethlehem side.",
             "Confirm where a driver or guide will meet you and what happens if the checkpoint is delayed or inaccessible. On the way back, allow time to cross toward Jerusalem before boarding the return bus."
           ]
-        },
-        {
-          "id": "bus-payment-return",
-          "title": "Tickets, payment and returning to Jerusalem",
-          "paragraphs": [
-            "South Buses publishes its own route and ticket information, including Rav-Kav guidance. Do not rely on an older published cash fare or assume all routes accept identical payment; verify the exact price and accepted methods before boarding.",
-            "Save the relevant stop and check the last practical Jerusalem-bound service in advance. Leave a substantial time buffer rather than depending on the final bus, particularly before onward travel."
-          ]
         }
       ],
-      "externalLinks": [
-        {
-          "label": "South Buses — routes and stations",
-          "href": "https://south-buses.com/lines-and-stations/?lang=en"
-        },
-        {
-          "label": "Christian Information Center — East Jerusalem buses",
-          "href": "https://www.cicts.org/en/east-jerusalem-bus-lines"
-        }
-      ],
+      "tip": "Photograph the stop sign and a nearby landmark when you get off at Bab al-Zaqaq. It can be much easier to recognise the correct return boarding point from a photo than from the street name alone.",
       "sourceIds": [
         "m26-south-buses",
         "m26-cicts-buses"
@@ -316,9 +323,9 @@ export const journeyDestinationGuides = {
       "id": "private-taxi",
       "title": "Private driver or taxi: check where the ride ends",
       "paragraphs": [
-        "A properly authorised and insured Palestinian driver may be able to collect eligible travellers in Jerusalem, take them to Bethlehem, wait during the visit and return them to the agreed Jerusalem address. This is a permitted-service question, not a guarantee that any particular driver or vehicle can complete the journey.",
-        "Before booking, ask for written confirmation of the Jerusalem pickup address, vehicle and driver permissions, insurance on every leg, included sightseeing stops, waiting time, total price, any guide, and the return arrangements. A driver is not necessarily a licensed tour guide.",
-        "An Israeli taxi can take you to the Checkpoint 300 approach, but an Israeli-citizen driver cannot provide an ordinary through journey into Area A. If you take a taxi only to the checkpoint, plan the pedestrian crossing and a separately arranged Palestinian taxi or guide on the other side. Confirm access and your return route before departure."
+        "Palestinian taxis can generally be found in East Jerusalem. Some appropriately authorised and insured Palestinian drivers can take eligible visitors from Jerusalem to Bethlehem, wait during sightseeing and return to a prearranged address.",
+        "A private booking should specify your pickup point, whether the vehicle may travel on the entire route, insurance, waiting time, included stops, the agreed total fare and the return arrangements. A driver is not necessarily a licensed tour guide.",
+        "An Israeli taxi can take you to the Checkpoint 300 approach, but it is not normally a through-service into Bethlehem. For a journey via the checkpoint, arrange the walk across and a separate Palestinian taxi or guide on the Bethlehem side."
       ],
       "photo": {
         "src": palestinianTaxiPhoto,
@@ -330,6 +337,7 @@ export const journeyDestinationGuides = {
           "to": "/private-driver/"
         }
       ],
+      "tip": "For a local taxi on the Bethlehem side of Checkpoint 300, agree on the total fare and the currency before getting in—not just the destination at Manger Square.",
       "sourceIds": [
         "m26-bethlehem-entry"
       ]
@@ -338,11 +346,9 @@ export const journeyDestinationGuides = {
       "id": "tours",
       "title": "Organised day trips and guided Bethlehem visits",
       "paragraphs": [
-        "For a first visit, a Bethlehem-focused half-day tour may be easier than coordinating bus stops, checkpoint arrangements and local transport yourself. A private tour offers more flexibility; a Bethlehem-and-Jericho day takes longer and allows less time at the Nativity sites.",
-        "Compare the actual Jerusalem pickup or meeting point, operator, language, group size, Church of the Nativity access, local guide or vehicle changes, shopping stops, return location and cancellation terms. Some tours require a passport and valid entry documentation, and may exclude Israeli passport holders."
+        "A Bethlehem-focused half-day tour can be easier than coordinating bus stops and separate local transfers. Private tours offer more flexibility, while full-day excursions combine Bethlehem with Jerusalem, Jericho or the Jordan River.",
+        "The linked tour cards below lead to the operators' booking pages, where you can compare the departure point, itinerary, group size, guide arrangements and cancellation terms."
       ],
-      "links": [{ "label": "Compare organised Bethlehem tours", "to": "/tours/bethlehem-jericho-jordan-river/" }],
-      
       "sourceIds": [
         "m26-bethlehem-entry"
       ]
@@ -351,15 +357,33 @@ export const journeyDestinationGuides = {
       "id": "documents-car",
       "title": "Checkpoint, passports, legal entry and rental cars",
       "paragraphs": [
-        "Bethlehem is in Palestinian Authority Area A. Israeli citizens are generally prohibited from entering Area A, including when they also hold another passport. Other travellers need to confirm the rules applying to their nationality and permission to travel; an accessible road or advertised tour does not grant admission.",
-        "Carry your original passport and any relevant Israeli entry card, visa or other immigration document. Check official advice for your nationality and any operator-specific conditions. Checkpoint procedures, transport and security conditions may change at short notice, and an itinerary may need to be cancelled.",
-        "Driving an ordinary Israeli rental car into Bethlehem is usually not a sensible default. The rental contract, insurance, roadside assistance and legal entry rules may restrict the route. Do not drive into Area A unless the rental company has given explicit written authorisation and you have verified personal and vehicle eligibility."
+        "Bethlehem is in Palestinian Authority Area A, which Israeli citizens are generally prohibited from entering, including dual citizens. The entry rules for foreign visitors depend on nationality and immigration status.",
+        "Carry your original passport and any relevant Israeli entry card or visa. US visitors can consult the State Department's Israel, West Bank and Gaza travel guidance for official entry and security advice.",
+        "Most Israeli rental-car agreements prohibit driving into Palestinian Authority areas, including Bethlehem. Doing so may also invalidate insurance coverage. If you are considering a rental car for this journey, obtain explicit written permission and insurance confirmation from your rental company first."
       ],
-      "externalLinks": [
-        {
-          "label": "US State Department — Israel, the West Bank and Gaza",
-          "href": "https://travel.state.gov/content/travel/en/international-travel/International-Travel-Country-Information-Pages/IsraeltheWestBankandGaza.html"
-        }
+      "richParagraphs": [
+        [
+          {
+            "text": "Bethlehem is in Palestinian Authority Area A, which Israeli citizens are generally prohibited from entering, including dual citizens. The entry rules for foreign visitors depend on nationality and immigration status."
+          }
+        ],
+        [
+          {
+            "text": "Carry your original passport and any relevant Israeli entry card or visa. US visitors can consult the "
+          },
+          {
+            "text": "State Department's Israel, West Bank and Gaza travel guidance",
+            "href": "https://travel.state.gov/content/travel/en/international-travel/International-Travel-Country-Information-Pages/IsraeltheWestBankandGaza.html"
+          },
+          {
+            "text": " for official entry and security advice."
+          }
+        ],
+        [
+          {
+            "text": "Most Israeli rental-car agreements prohibit driving into Palestinian Authority areas, including Bethlehem. Doing so may also invalidate insurance coverage. If you are considering a rental car for this journey, obtain explicit written permission and insurance confirmation from your rental company first."
+          }
+        ]
       ],
       "sourceIds": [
         "m26-bethlehem-entry"
@@ -369,9 +393,40 @@ export const journeyDestinationGuides = {
       "id": "visit-return",
       "title": "Plan a half-day visit and the journey back",
       "paragraphs": [
-        "For a focused visit, prioritise the Church of the Nativity and Manger Square; Star Street and the Milk Grotto are also in the central area. A half-day may be enough for a few central stops when crossings, church access and traffic cooperate. Shepherds' Field is in nearby Beit Sahour and normally needs additional transport.",
-        "The Church of the Nativity is part of a UNESCO World Heritage site. Worship services, queues and restoration works can limit access to the Grotto of the Nativity independently of the basilica itself. Check the Custody of the Holy Land's latest notice and your tour operator rather than assuming a grotto visit is guaranteed.",
-        "Agree a return time and pickup point with your guide or driver, or locate your Jerusalem-bound bus stop before sightseeing. Allow extra time for checkpoints, changes of vehicle, traffic and major religious dates."
+        "For a focused visit, prioritise the Church of the Nativity and Manger Square; Star Street and the Milk Grotto are also in the central area. Shepherds' Field is in nearby Beit Sahour and normally needs additional transport.",
+        "The Church of the Nativity is part of a UNESCO World Heritage site. Worship and restoration work can affect access to its Grotto of the Nativity. See the Custody of the Holy Land's restoration notice and sanctuary opening hours, which list a Sunday-morning closure for the grotto.",
+        "Set a clear meeting time and pickup location for your journey back to Jerusalem. Checkpoint crossings and connections can take longer than the road distance suggests."
+      ],
+      "richParagraphs": [
+        [
+          {
+            "text": "For a focused visit, prioritise the Church of the Nativity and Manger Square; Star Street and the Milk Grotto are also in the central area. Shepherds' Field is in nearby Beit Sahour and normally needs additional transport."
+          }
+        ],
+        [
+          {
+            "text": "The Church of the Nativity is part of a UNESCO World Heritage site. Worship and restoration work can affect access to its Grotto of the Nativity. See the "
+          },
+          {
+            "text": "Custody of the Holy Land's restoration notice",
+            "href": "https://www.custodia.org/en/news/preserving-the-site-of-christs-birth-the-restoration-of-the-grotto-of-the-nativity/"
+          },
+          {
+            "text": " and "
+          },
+          {
+            "text": "sanctuary opening hours",
+            "href": "https://www.custodia.org/en/sanctuaries/bethlehem-basilica-of-the-nativity/"
+          },
+          {
+            "text": ", which list a Sunday-morning closure for the grotto."
+          }
+        ],
+        [
+          {
+            "text": "Set a clear meeting time and pickup location for your journey back to Jerusalem. Checkpoint crossings and connections can take longer than the road distance suggests."
+          }
+        ]
       ],
       "photo": {
         "src": mangerSquarePhoto,
@@ -390,16 +445,7 @@ export const journeyDestinationGuides = {
           }
         }
       ],
-      "externalLinks": [
-        {
-          "label": "Church of the Nativity — Custody of the Holy Land",
-          "href": "https://www.custodia.org/en/sanctuaries/bethlehem-basilica-of-the-nativity/"
-        },
-        {
-          "label": "UNESCO — Birthplace of Jesus: Church of the Nativity",
-          "href": "https://whc.unesco.org/en/list/1433/"
-        }
-      ],
+      "tip": "If the Grotto of the Nativity has a long queue, you can visit the nearby Milk Grotto or walk part of Star Street and return later if your schedule allows.",
       "sourceIds": [
         "m26-custodia-nativity-restoration",
         "m26-unesco-nativity"
@@ -409,8 +455,34 @@ export const journeyDestinationGuides = {
       "id": "shabbat",
       "title": "Can you visit Bethlehem on Saturday or Sunday?",
       "paragraphs": [
-        "A Saturday visit may be possible: East Jerusalem's local bus network is separate from most Israeli intercity bus services, and some guided tours and authorised private vehicles also operate. Do not assume that either bus line, the checkpoint or a tour runs at the same times every weekend.",
-        "Check the date-specific outward and return timetables, religious services, church visiting hours and any holiday or security-related changes. On Sundays, church services may also affect access to individual chapels and the Nativity Grotto."
+        "East Jerusalem buses can operate on Saturday even when many other Israeli transport services are reduced. South Buses publishes departures by day for routes 231 and 234.",
+        "Sunday worship affects access to the Grotto of the Nativity, which the Custody of the Holy Land lists as closed on Sunday mornings. Use the sanctuary's visiting-hours page when planning a Sunday visit."
+      ],
+      "richParagraphs": [
+        [
+          {
+            "text": "East Jerusalem buses can operate on Saturday even when many other Israeli transport services are reduced. "
+          },
+          {
+            "text": "South Buses publishes departures by day",
+            "href": "https://south-buses.com/lines-and-stations/?lang=en"
+          },
+          {
+            "text": " for routes 231 and 234."
+          }
+        ],
+        [
+          {
+            "text": "Sunday worship affects access to the Grotto of the Nativity, which the Custody of the Holy Land lists as closed on Sunday mornings. Use the "
+          },
+          {
+            "text": "sanctuary's visiting-hours page",
+            "href": "https://www.custodia.org/en/sanctuaries/bethlehem-basilica-of-the-nativity/"
+          },
+          {
+            "text": " when planning a Sunday visit."
+          }
+        ]
       ],
       "sourceIds": [
         "m26-south-buses",
@@ -465,7 +537,7 @@ export const journeyDestinationGuides = {
     },
     {
       "q": "Can I drive an Israeli rental car into Bethlehem?",
-      "a": "Do not assume so. You would need personal and vehicle permission plus written coverage from the rental company for the exact route. For most visitors, another option is simpler."
+      "a": "Most Israeli rental companies prohibit taking their vehicles into Palestinian Authority areas such as Bethlehem. The rental contract and insurance may not cover the journey; ask your provider for explicit written permission before considering this route."
     },
     {
       "q": "Is the Grotto of the Nativity open to visitors?",
@@ -486,7 +558,6 @@ export const journeyDestinationGuides = {
     "m26-custodia-nativity-restoration",
     "m26-unesco-nativity"
   ],
-  "reviewNote": "Entry eligibility, checkpoint arrangements, routes and church access can change with little notice. Confirm the current situation with official sources and your operator before making the trip.",
   "nextSteps": []
 },
     "topTen": {

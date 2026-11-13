@@ -18,6 +18,7 @@ const next: {title:string;description:string;to:LinkProps["to"];action:string}[]
   { title:"Getting Around Israel", description:"Plan buses, tickets, taxis and onward travel elsewhere in Israel.", to:"/travel-blog/getting-around-israel/", action:"Read the transport guide" },
   { title:"Israel's Calendar of Events", description:"Check religious dates and holidays that may affect visiting hours.", to:"/travel-blog/calendar-of-events/", action:"Check important dates" },
   { title:"Jerusalem Tours", description:"Explore other locally arranged guided visits in Jerusalem.", to:"/tours/jerusalem/", action:"Browse Jerusalem tours" },
+  { title:"Best Time to Visit Israel", description:"Plan around seasonal weather, holidays and busy travel periods.", to:"/travel-blog/best-time-to-visit-israel/", action:"Choose your travel season" },
 ];
 
 export function BethlehemGuideFollowUps() {

@@ -46,6 +46,14 @@ describe("Jerusalem independent day-trip planning guides", () => {
     const cards = screen.getAllByTestId("bethlehem-tour-card");
     expect(cards).toHaveLength(6);
     expect(new Set(cards.map(card => within(card).getByRole("img").getAttribute("src"))).size).toBe(6);
+    expect(cards.map(card => within(card).getByRole("img").getAttribute("src")).join(" ")).not.toMatch(/palestinian-taxi|mamilla/);
+    expect(container.querySelectorAll("#buses [role='note'], #private-taxi [role='note'], #visit-return [role='note']")).toHaveLength(3);
+    expect(container.textContent).not.toContain("These are route descriptions, not live departures.");
+    expect(container.textContent).not.toContain("Compare organised Bethlehem tours");
+    expect(container.textContent).not.toContain("Prices, reviews and itinerary details are snapshots");
+    expect(container.textContent).not.toContain("Starting prices and ratings were checked");
+    expect(within(buses as HTMLElement).getByRole("link", { name: /South Buses' route and station listings/ }).closest("p")).toHaveTextContent("last practical bus back to Jerusalem");
+    expect(within(container.querySelector("#visit-return") as HTMLElement).getByRole("link", { name: /restoration notice/ }).closest("p")).toHaveTextContent("Grotto of the Nativity");
     for (const card of cards) {
       expect(card.tagName).toBe("A");
       expect(card.getAttribute("href")).toMatch(/^https:\/\/(viator|getyourguide)\.tpm\.li\//);
@@ -60,7 +68,7 @@ describe("Jerusalem independent day-trip planning guides", () => {
     const related = screen.getByTestId("bethlehem-related-guides");
     expect(within(related).getAllByRole("img")).toHaveLength(6);
     expect(new Set(within(related).getAllByRole("link").map(link => link.getAttribute("href"))).size).toBe(6);
-    expect(within(screen.getByTestId("bethlehem-next-steps")).getAllByRole("link")).toHaveLength(3);
+    expect(within(screen.getByTestId("bethlehem-next-steps")).getAllByRole("link")).toHaveLength(4);
     const faq = container.querySelector("#faq")!;
     const contact = container.querySelector("#contact")!;
     const sources = container.querySelector("#sources")!;

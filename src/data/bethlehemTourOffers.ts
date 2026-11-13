@@ -18,7 +18,7 @@ export type BethlehemTourCard = {
   reviewCount: number;
   checkedAt: string;
   sourceUrl: string;
-  photoId: "nativity-interior" | "catholic-grottos" | "jordan-river" | "jerusalem-mamilla" | "bethlehem" | "palestinian-taxi";
+  photoId: "nativity-interior" | "catholic-grottos" | "jordan-river" | "manger-square" | "bethlehem" | "milk-grotto";
 };
 export const bethlehemTourCards: BethlehemTourCard[] = [
   {
@@ -39,7 +39,7 @@ export const bethlehemTourCards: BethlehemTourCard[] = [
     id: "jslm-bethlehem-halfday-gyg",
     provider: "GetYourGuide",
     title: "Bethlehem Half-Day Guided Tour",
-    subtitle: "Four-hour visit from Jerusalem; alternative booking platform",
+    subtitle: "A guided visit to Bethlehem’s principal Nativity sites",
     duration: "4 hrs",
     fromUsd: 75,
     priceUnit: "person",
@@ -75,7 +75,7 @@ export const bethlehemTourCards: BethlehemTourCard[] = [
     reviewCount: 68,
     checkedAt: "2026-11-13",
     sourceUrl: "https://www.getyourguide.com/jerusalem-l97/full-day-tour-of-the-holy-land-from-jerusalem-t22125/",
-    photoId: "jerusalem-mamilla",
+    photoId: "manger-square",
   },
   {
     id: "jslm-bethlehem-private-gyg",
@@ -103,6 +103,6 @@ export const bethlehemTourCards: BethlehemTourCard[] = [
     reviewCount: 55,
     checkedAt: "2026-11-13",
     sourceUrl: "https://www.viator.com/tours/Jerusalem/Bethlehem-Half-Day-Private-Tour-Free-Hotel-Pick-up-and-Drop-Off-from-Tel-Aviv/d921-115730P7",
-    photoId: "palestinian-taxi",
+    photoId: "milk-grotto",
   },
 ];

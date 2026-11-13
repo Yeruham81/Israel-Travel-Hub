@@ -5,17 +5,17 @@ import { recordOutboundClick, relFor } from "@/lib/outbound";
 import nativityInterior from "@/assets/guides/dead-sea-excursions/bethlehem-nativity.webp";
 import catholicGrottos from "@/assets/guides/bethlehem/catholic-grottos.jpg";
 import jordanRiver from "@/assets/guides/dead-sea-excursions/jordan-river-qasr-al-yahud.webp";
-import jerusalemMamilla from "@/assets/jerusalem/mamilla.webp";
+import mangerSquare from "@/assets/guides/bethlehem/manger-square.jpg";
 import bethlehemView from "@/assets/home/bethlehem-nativity.webp";
-import palestinianTaxi from "@/assets/guides/bethlehem/palestinian-taxi.jpg";
+import milkGrotto from "@/assets/guides/bethlehem/milk-grotto.jpg";
 
 const tourPhotos = {
   "nativity-interior": { src: nativityInterior, alt: "Interior of the Church of the Nativity in Bethlehem" },
   "catholic-grottos": { src: catholicGrottos, alt: "The Catholic grottos below Bethlehem's Church of the Nativity" },
   "jordan-river": { src: jordanRiver, alt: "Pilgrimage site beside the Jordan River" },
-  "jerusalem-mamilla": { src: jerusalemMamilla, alt: "Jerusalem architecture near the Old City" },
+  "manger-square": { src: mangerSquare, alt: "Christmas decorations and historic buildings in Bethlehem’s Manger Square" },
   bethlehem: { src: bethlehemView, alt: "Church of the Nativity and surrounding Bethlehem buildings" },
-  "palestinian-taxi": { src: palestinianTaxi, alt: "Yellow Palestinian taxi used for local transport" },
+  "milk-grotto": { src: milkGrotto, alt: "Stone arches and religious interior at the Milk Grotto in Bethlehem" },
 } as const;
 
 /** Same compact price, duration and review cards as the Dead Sea guide.
@@ -24,7 +24,7 @@ const tourPhotos = {
 export function BethlehemTourOptions() {
   return <section aria-labelledby="bethlehem-tour-options-h" className="mt-6 scroll-mt-24" data-testid="bethlehem-tour-options">
     <h3 id="bethlehem-tour-options-h" className="text-2xl font-semibold">Compare tours starting in Jerusalem</h3>
-    <p className="mt-2 max-w-3xl text-sm leading-relaxed text-muted-foreground">Half-day tours concentrate on Bethlehem. Full-day trips add Jerusalem or Jericho and the Jordan River. Prices, reviews and itinerary details are snapshots—not date-specific quotes. Check departure, eligibility and church access before booking.</p>
+    <p className="mt-2 max-w-3xl text-sm leading-relaxed text-muted-foreground">Half-day tours focus on Bethlehem, while longer excursions add Jerusalem or Jericho. Tour operators may change their prices; the booking pages below show the final price, meeting point and inclusions for your selected date.</p>
     <div className="mt-5 grid gap-3 sm:grid-cols-2 xl:grid-cols-3">
       {bethlehemTourCards.map(tour => {
         const url = affiliateConfig[tour.id]?.trackingUrl;
@@ -62,6 +62,5 @@ export function BethlehemTourOptions() {
         </a>;
       })}
     </div>
-    <p className="mt-3 text-xs leading-relaxed text-muted-foreground">Starting prices and ratings were checked on November 13, 2026 and may change. The two half-day group listings and two private listings use the same tour operator on different booking platforms; compare the exact terms and availability. Israeli passport holders are not eligible for these Area A tours.</p>
   </section>;
 }
