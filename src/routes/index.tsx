@@ -98,7 +98,7 @@ export const services: Service[] = [
   {
     id: "transfers", eyebrow: "Airport Transfers", tagline: "Plan a Smooth Arrival in Israel", title: "Airport Transfers",
     text: "Arrange a comfortable private pickup from Ben Gurion Airport to Jerusalem, Tel Aviv or Haifa, with a vehicle and meeting point tailored to your needs.",
-    feature: { src: "/images/travel-blog/taxi-in-tel-aviv.webp", alt: "Licensed Israeli taxis on a street in Tel Aviv" },
+    feature: { src: "/images/guides/taxi-in-tel-aviv.webp", alt: "Licensed Israeli taxis on a street in Tel Aviv" },
     cards: [
       { label: "Private Transfer to Jerusalem", text: "Book a private pickup to your Jerusalem hotel", to: "/airport-transfers/ben-gurion-airport-to-jerusalem/", img: IMG.jerusalem },
       { label: "Private Transfer to Tel Aviv", text: "Airport pickup for Tel Aviv hotels and Jaffa", to: "/airport-transfers/ben-gurion-airport-to-tel-aviv/", img: IMG.telAviv },
@@ -188,8 +188,8 @@ function PhotoCard({ c }: { c: Card }) {
 
 function CompactCard({ c }: { c: Card }) {
   return (
-    <li>
-      <Link to={c.to} className="photo-card group grid grid-cols-[96px_minmax(0,1fr)] items-center gap-4 rounded-xl border bg-background p-2.5 pr-4 transition-colors hover:border-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring sm:grid-cols-[112px_minmax(0,1fr)]">
+    <li className="min-w-0">
+      <Link to={c.to} className="photo-card group grid w-full min-w-0 grid-cols-[96px_minmax(0,1fr)] items-center gap-4 rounded-xl border bg-background p-2.5 pr-4 transition-colors hover:border-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring sm:grid-cols-[112px_minmax(0,1fr)]">
         <span className="block overflow-hidden rounded-lg">
           <img src={c.img.thumb ?? c.img.src} alt={c.img.alt} loading="lazy" decoding="async" width={224} height={160} className="aspect-[7/5] w-full object-cover transition-transform duration-500 group-hover:scale-105" />
         </span>
@@ -224,9 +224,9 @@ function Home() {
                 <p className="mt-2 max-w-2xl text-muted-foreground">{s.text}</p>
               </div>
             </header>
-            <div className="mt-6 grid gap-4 lg:grid-cols-2 lg:items-stretch" data-testid={`service-layout-${s.id}`}>
-              <img src={s.feature.src} alt={s.feature.alt} loading="lazy" decoding="async" width={1400} height={880} className="aspect-[16/10] h-full min-h-64 w-full rounded-xl object-cover lg:max-h-[410px]" />
-              <ul className="grid content-start gap-3" aria-label={`${s.eyebrow} choices`}>
+            <div className="mt-6 grid min-w-0 grid-cols-1 gap-4 lg:grid-cols-2 lg:items-stretch" data-testid={`service-layout-${s.id}`}>
+              <img src={s.feature.src} alt={s.feature.alt} loading="lazy" decoding="async" width={1400} height={880} className="aspect-[16/10] h-full min-h-64 w-full min-w-0 rounded-xl object-cover lg:max-h-[410px]" />
+              <ul className="grid min-w-0 grid-cols-1 content-start gap-3" aria-label={`${s.eyebrow} choices`}>
                 {s.cards.slice(0, 3).map((c) => <CompactCard key={c.label} c={c} />)}
               </ul>
               {s.cards.length > 3 && (
@@ -252,9 +252,9 @@ function Home() {
                 <p className="mt-2 max-w-2xl text-muted-foreground">{s.text}</p>
               </div>
             </header>
-            <div className="mt-6 grid gap-4 lg:grid-cols-2 lg:items-stretch" data-testid={`service-layout-${s.id}`}>
-              <img src={s.feature.src} alt={s.feature.alt} loading="lazy" decoding="async" width={1400} height={880} className="aspect-[16/10] h-full min-h-64 w-full rounded-xl object-cover lg:max-h-[410px]" />
-              <ul className="grid content-start gap-3" aria-label={`${s.eyebrow} choices`}>
+            <div className="mt-6 grid min-w-0 grid-cols-1 gap-4 lg:grid-cols-2 lg:items-stretch" data-testid={`service-layout-${s.id}`}>
+              <img src={s.feature.src} alt={s.feature.alt} loading="lazy" decoding="async" width={1400} height={880} className="aspect-[16/10] h-full min-h-64 w-full min-w-0 rounded-xl object-cover lg:max-h-[410px]" />
+              <ul className="grid min-w-0 grid-cols-1 content-start gap-3" aria-label={`${s.eyebrow} choices`}>
                 {s.cards.slice(0, 3).map((c) => <CompactCard key={c.label} c={c} />)}
               </ul>
               {s.cards.length > 3 && (
