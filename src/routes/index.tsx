@@ -118,7 +118,7 @@ export const services: Service[] = [
   },
   {
     id: "shore-excursions", eyebrow: "Shore Excursions", tagline: "Make the Most of Your Time Ashore", title: "Shore Excursions",
-    text: "Arriving by cruise ship? Plan a day ashore around your all-aboard time, then choose a private driver, guide or port-specific tour.",
+    text: "Make the most of your time ashore with excursions from Israel’s cruise ports, from historic landmarks and cultural highlights to unforgettable day trips.",
     feature: { src: cruisePort, alt: "Illustrative cruise passengers walking along a harbour quay toward a waiting minivan (not a specific ship or operator)" },
     cards: [
       { label: "From Ashdod Port", text: "Jerusalem, Tel Aviv–Jaffa or the Dead Sea", to: "/ashdod-shore-excursions/", img: { src: ashdodPort, thumb: ashdodPortCard, alt: "Aerial view of Ashdod Port" } },
