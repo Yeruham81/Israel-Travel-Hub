@@ -58,18 +58,35 @@ describe("homepage navigation and review sources", () => {
   });
 
 
-  it("renders the correct uploaded image for every client and changes images with the carousel", () => {
+  it("shows compact, dot-only personal testimonials with the correct photograph for each client", () => {
     render(<HomeTestimonials />);
+    const personal = screen.getByRole("heading", { name: "Personal Messages from Past Clients" }).closest("section")!;
+    const tripadvisor = screen.getByRole("heading", { name: "What Travelers Say" }).closest("section")!;
+    expect(personal).toHaveClass("mt-8", "sm:mt-10");
+    expect(personal.firstElementChild).toHaveClass("rounded-2xl", "bg-card", "shadow-sm");
+    expect(tripadvisor.firstElementChild).toHaveClass("rounded-2xl", "bg-card", "shadow-sm");
+    expect(personal.querySelector(".bg-secondary\\/30")).toBeNull();
+    expect(screen.queryByRole("button", { name: "Previous testimonial" })).not.toBeInTheDocument();
+    expect(screen.queryByRole("button", { name: "Next testimonial" })).not.toBeInTheDocument();
+
+    const controls = within(personal).getByRole("group", { name: "Choose testimonial" });
+    const dots = within(controls).getAllByRole("button");
+    expect(dots).toHaveLength(customerTestimonials.length);
     for (const client of customerTestimonials) {
-      fireEvent.click(screen.getByRole("button", { name: "Show testimonial from " + client.author }));
+      const dot = within(controls).getByRole("button", { name: "Show testimonial from " + client.author });
+      fireEvent.click(dot);
+      expect(dot).toHaveAttribute("aria-pressed", "true");
       const carousel = screen.getByTestId("original-testimonial-carousel");
+      expect(carousel).toHaveClass("gap-4", "p-4", "bg-background");
       const photo = carousel.querySelector("img");
       expect(photo).toHaveAttribute("src", client.photo);
       expect(photo).toHaveAttribute("alt", "Photo featured alongside the testimonial from " + client.author);
+      expect(photo).toHaveClass("max-w-[160px]");
+      expect(carousel.querySelector("blockquote")).toHaveClass("text-[0.9375rem]", "leading-relaxed");
       expect(carousel).toHaveTextContent(client.author);
       expect(carousel).toHaveTextContent(client.quote);
     }
-    fireEvent.click(screen.getByRole("button", { name: "Next testimonial" }));
+    fireEvent.click(within(controls).getByRole("button", { name: "Show testimonial from " + customerTestimonials[0]!.author }));
     expect(screen.getByTestId("original-testimonial-carousel").querySelector("img")).toHaveAttribute("src", customerTestimonials[0]!.photo);
   });
 
