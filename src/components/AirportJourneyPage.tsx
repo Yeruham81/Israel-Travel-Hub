@@ -341,7 +341,7 @@ export function AirportJourneyPage({ id }: { id: AirportJourneyId }) {
         }>
           <p className="eyebrow">Independent transport comparison · Ben Gurion Airport (TLV)</p>
           <h1 className="guide-page-title mt-3">{g.title}</h1>
-          <p className="mt-4 max-w-3xl text-lg leading-relaxed text-foreground">{g.intro}</p>
+          <p data-guide-intro className="mt-4 max-w-3xl text-lg leading-relaxed text-foreground">{g.intro}</p>
           {focusedLayout ? <PageUpdated date={g.updatedAt || PUBLISHED_REVIEW} /> : <p className="mt-3 text-sm text-muted-foreground">Approximate distance: {g.distance} · Editorial review: {g.updatedAt || PUBLISHED_REVIEW}</p>}
         </GuideHeroLayout>
         <AuthorCard />
