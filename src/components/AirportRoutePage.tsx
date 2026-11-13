@@ -61,7 +61,7 @@ export function AirportRoutePage({ id }: { id: AirportTransferRouteId }) {
       <header className="mt-7 grid items-center gap-7 lg:grid-cols-[1.2fr_1fr]">
         <div className="min-w-0">
           <p className="eyebrow">Your private airport pickup · TLV</p>
-          <h1 className="mt-3 text-4xl leading-[1.1] md:text-5xl">{guide.title}</h1>
+          <h1 className="guide-page-title mt-3">{guide.title}</h1>
           <p className="mt-4 text-lg leading-relaxed text-muted-foreground">{guide.intro}</p>
           <div className="mt-5 flex flex-wrap items-end gap-x-6 gap-y-3 rounded-xl border bg-secondary/50 p-4" data-testid="route-starting-rate">
             <div><p className="text-xs font-medium text-muted-foreground">Published starting rate</p><PriceDisplay amount={price.amount} size="hero" className="mt-1" /><p className="mt-2 text-xs text-muted-foreground">One way · per vehicle · up to 4</p></div>
