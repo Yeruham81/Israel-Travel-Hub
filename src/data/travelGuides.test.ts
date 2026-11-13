@@ -36,6 +36,10 @@ describe("travel guide topic filters and prerender safety", () => {
 
   it("keeps travel guide titles, descriptions, intros, section headings and FAQ questions evergreen", () => {
     const year = /\b20\d{2}\b/;
+    for (const entry of guideDirectory) {
+      expect(entry.title, `Directory card: ${entry.id}`).not.toMatch(year);
+      expect(entry.description, `Directory card: ${entry.id}`).not.toMatch(year);
+    }
     for (const guide of Object.values(travelGuides)) {
       for (const [field, copy] of [
         ["title", guide.title],
