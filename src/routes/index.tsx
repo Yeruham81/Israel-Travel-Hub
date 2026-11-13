@@ -249,7 +249,6 @@ function Home() {
                   <li key={card.label} className="min-w-0"><PhotoCard c={card} /></li>
                 ))}
                 </ul>
-                <p className="mt-3 text-center text-xs text-muted-foreground">Destination illustrations generated with AI; not photographs of actual locations or hotels.</p>
               </div>
             ) : (
               <div className="mt-6 grid min-w-0 grid-cols-1 gap-4 lg:grid-cols-2 lg:items-stretch" data-testid={`service-layout-${s.id}`}>
