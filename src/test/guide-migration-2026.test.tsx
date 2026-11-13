@@ -114,7 +114,8 @@ describe("October planning, city and heritage guide migration", () => {
     expect(Object.values(travelGuidePaths)).not.toContain("/travel-blog/israel-safe-to-travel/");
     expect(travelGuides.telAvivMuseums.sections.some(section => section.id === "independence")).toBe(true);
     expect(travelGuides.haifaMuseums.sections.find(section => section.id === "outdoors")?.paragraphs.join(" ")).toContain("not a museum");
-    expect(travelGuides.bethlehem.sections.find(section => section.id === "buses")?.paragraphs.join(" ")).toContain("231 as Beit Jala and 234 as Bethlehem");
+    expect(travelGuides.bethlehem.sections.find(section => section.id === "buses")?.paragraphs.join(" ")).toContain("Line 231 passes through the Bab al-Zaqaq / Beit Jala area");
+    expect(travelGuides.bethlehem.sections.find(section => section.id === "buses")?.paragraphs.join(" ")).toContain("Line 234 serves the Checkpoint 300 approach");
     expect(travelGuides.yardenit.answer).toContain("no resident priest");
     expect(travelGuides.qasr.comparison.rows).toHaveLength(3);
     expect(travelGuides.topTen.sections).toHaveLength(10);

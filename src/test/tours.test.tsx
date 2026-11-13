@@ -300,7 +300,8 @@ describe("tours hub and SEO category pages", () => {
     expect(document.querySelector("#buses")).not.toBeNull();
     expect(document.querySelector("#private-taxi")).not.toBeNull();
     expect(document.querySelector('[data-testid="tour-card"]')).toBeNull();
-    expect(screen.getByRole("link", { name: "Compare organised Bethlehem tours" })).toHaveAttribute("href", tourCategoryPaths["bethlehem-jericho"]);
+    expect(screen.queryByRole("link", { name: "Compare organised Bethlehem tours" })).not.toBeInTheDocument();
+    expect(screen.getAllByTestId("bethlehem-tour-card")).toHaveLength(6);
   });
 
   it("carries a unique owner itinerary into the existing private-driver request without accepting external tours", async () => {
