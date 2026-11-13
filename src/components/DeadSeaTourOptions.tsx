@@ -7,6 +7,7 @@ import masadaPalacePhoto from "@/assets/guides/dead-sea-excursions/masada-palace
 import einGediPhoto from "@/assets/guides/dead-sea-excursions/ein-gedi-oasis.webp";
 import saltShorePhoto from "@/assets/guides/dead-sea-excursions/dead-sea-salt-shore.webp";
 import sunrisePhoto from "@/assets/guides/dead-sea-excursions/masada-snake-path.webp";
+import masadaRuinsPhoto from "@/assets/guides/dead-sea-excursions/masada-ruins.webp";
 
 const tourPhotos = {
   "beach-mud": { src: beachMudPhoto, alt: "Dead Sea mud bathing on the shore" },
@@ -14,6 +15,7 @@ const tourPhotos = {
   "ein-gedi": { src: einGediPhoto, alt: "Desert oasis and natural scenery at Ein Gedi" },
   "salt-shore": { src: saltShorePhoto, alt: "Salt deposits on the Dead Sea shoreline" },
   sunrise: { src: sunrisePhoto, alt: "The Snake Path climbing toward Masada" },
+  "masada-ruins": { src: masadaRuinsPhoto, alt: "Archaeological ruins at the Masada fortress" },
 } as const;
 
 /** Compact manually curated cards, with vendor data separated from affiliate URLs.
@@ -38,7 +40,7 @@ export function DeadSeaTourOptions() {
         >
           <img src={photo.src} alt={photo.alt} width={480} height={280} loading="lazy" decoding="async" className="h-32 w-full object-cover" />
           <span className="flex flex-1 flex-col p-3.5">
-            <span className="text-[11px] font-semibold uppercase tracking-wide text-primary">{tour.provider} · Jerusalem departure</span>
+            <span className="text-[11px] font-semibold uppercase tracking-wide text-primary">{tour.provider}</span>
             <span className="mt-1 text-base font-semibold leading-snug text-foreground group-hover:text-primary">{tour.title}</span>
             <span className="mt-1.5 line-clamp-2 text-sm text-muted-foreground">{tour.subtitle}</span>
             <span className="mt-3 flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-muted-foreground">
