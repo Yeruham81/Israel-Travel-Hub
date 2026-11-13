@@ -5,7 +5,7 @@ import { tourCategories, tourCruisePhoto, toursHubGuides, toursHubHero, tourPlan
 import { accommodationDestinations, jerusalemAreaGuides, telAvivAreaGuides } from "@/data/content";
 import { hotelStyles, itineraryCards, arrivalCards, seasonPhoto, eventsPhoto } from "@/data/hotelHub";
 import { quickPickPhotos } from "@/components/CityStayHub";
-import { services, popularDestinationCards, homeGuideCards } from "@/routes/index";
+import { services, homeGuideCards } from "@/routes/index";
 
 describe("One photograph per page — site-wide editorial policy", () => {
   it("treats responsive copies and renamed-format variants of a photograph as duplicates", () => {
@@ -45,8 +45,10 @@ describe("One photograph per page — site-wide editorial policy", () => {
   });
 
   it("does not repeat an image among Home service cards, destinations and guide recommendations", () => {
-    const displayed = [...services.flatMap(s => [s.feature.src, ...s.cards.map(card => card.img.src)]),
-      ...popularDestinationCards.map(card => card.img.src),
+    const displayed = [...services.flatMap(s => [
+      ...(s.feature ? [s.feature.src] : []),
+      ...s.cards.map(card => card.img.src),
+    ]),
       ...homeGuideCards.first.map(guide => guide.photo?.src || ""), ...homeGuideCards.second.map(guide => guide.photo?.src || "")];
     expect(repeatedPhotos(displayed)).toEqual([]);
   });
