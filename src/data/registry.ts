@@ -1097,6 +1097,11 @@ export const affiliateConfig: Record<string, { trackingUrl: string } | undefined
   // Keep the guide slug and provider in each SubID for readable Performance reports.
   "deadsea-jerusalem-viator": { trackingUrl: "https://viator.tpm.li/46DdjwVr?sub_id=jslm_dead_sea_viator" },
   "deadsea-jerusalem-getyourguide": { trackingUrl: "https://getyourguide.tpm.li/wEfa7dYc?sub_id=jslm_dead_sea_getyourguide" },
+  // Product-specific Viator deeplinks generated through the Travelpayouts API.
+  // Each URL was generated for its exact product page, using distinct page SubIDs.
+  "jslm-deadsea-beach-viator": { trackingUrl: "https://viator.tpm.li/mFyULbRB" },
+  "jslm-deadsea-masada-viator": { trackingUrl: "https://viator.tpm.li/ccE2RHo7" },
+  "jslm-deadsea-masada-eingedi-viator": { trackingUrl: "https://viator.tpm.li/2OUbWPvV" },
   // Configure an approved product-specific affiliate URL once; all category appearances use it.
   ...Object.fromEntries(tourBookingOffers.map((offer) => [offer.id, undefined])),
   "shore-viator-haifa-jerusalem-bethlehem": undefined,
