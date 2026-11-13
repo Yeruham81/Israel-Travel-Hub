@@ -10,6 +10,7 @@ import kiwitaxiLogo from "@/assets/providers/kiwitaxi.svg";
 import welcomePickupsLogo from "@/assets/providers/welcome-pickups.svg";
 import intuiLogo from "@/assets/providers/intui.webp";
 import gettransferLogo from "@/assets/providers/gettransfer.svg";
+import { DISCOVERCARS_ISRAEL_AFFILIATE_URL } from "@/lib/car-rental-affiliate";
 
 export type ISODate = string; // YYYY-MM-DD
 
@@ -1090,6 +1091,7 @@ export const operators: Operator[] = [
 
 /** Existing publisher-owned tracking links copied exactly from the supplied destination guides. */
 export const affiliateConfig: Record<string, { trackingUrl: string } | undefined> = {
+  "cars-discovercars": { trackingUrl: DISCOVERCARS_ISRAEL_AFFILIATE_URL },
   // Configure an approved product-specific affiliate URL once; all category appearances use it.
   ...Object.fromEntries(tourBookingOffers.map((offer) => [offer.id, undefined])),
   "shore-viator-haifa-jerusalem-bethlehem": undefined,
@@ -1262,7 +1264,7 @@ export const partners: BookingPartner[] = [
   { id: "gett", name: "Gett", capability: "editorial_only", homepage: "https://www.gett.com/il/airport-en/" },
   { id: "booking", name: "Booking.com", capability: "editorial_only", homepage: "https://www.booking.com/" },
   { id: "expedia", name: "Expedia", capability: "affiliate_link", homepage: "https://www.expedia.com/" },
-  { id: "discovercars", name: "DiscoverCars", capability: "editorial_only", homepage: "https://www.discovercars.com/" },
+  { id: "discovercars", name: "DiscoverCars", capability: affiliateConfig["cars-discovercars"] ? "affiliate_link" : "editorial_only", homepage: "https://www.discovercars.com/" },
 ];
 
 export interface ResortHotelFacts {
@@ -2087,7 +2089,7 @@ export const providerLinks: ProviderLink[] = [
   {
     id: "cars-discovercars", pageIds: ["car-rental"], providerName: "DiscoverCars", relationship: "booking_platform", partnerId: "discovercars", mode: "provider_redirect",
     title: "Compare rental cars in Israel", summary: "Rental search where you set pickup and return location and dates on their site.",
-    ctaLabel: "Check prices on DiscoverCars", url: "https://www.discovercars.com/israel", isAffiliate: false,
+    ctaLabel: "Check prices on DiscoverCars", url: affiliateConfig["cars-discovercars"]?.trackingUrl || "https://www.discovercars.com/israel", isAffiliate: Boolean(affiliateConfig["cars-discovercars"]?.trackingUrl),
     reentryNote: "Pickup location and dates chosen here are not passed on. Enter them on DiscoverCars.",
     confirm: ["Insurance and excess for your specific offer", "Deposit and credit-card requirements", "Driver age and licence rules", "Areas the rental terms allow you to drive", "Cancellation terms"], sourceId: "discovercars-israel",
   },

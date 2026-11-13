@@ -1,3 +1,4 @@
+import { carRentalAffiliateUrl, isCarRentalRoute } from "@/lib/car-rental-affiliate";
 import { QueryClient } from "@tanstack/react-query";
 import { createMemoryHistory, createRouter, RouterContextProvider } from "@tanstack/react-router";
 import { act, cleanup, fireEvent, render, screen, waitFor, within } from "@testing-library/react";
@@ -482,7 +483,7 @@ describe("migrated practical guides", () => {
         }
         for (const link of sub.inlineLinks || []) {
           const elink = within(subEl).getByRole("link", { name: link.text });
-          expect(elink).toHaveAttribute("href", link.to);
+          expect(elink).toHaveAttribute("href", isCarRentalRoute(link.to) ? carRentalAffiliateUrl(travelGuidePaths.israel) : link.to);
           expect(elink.closest("p")).toBeTruthy();
         }
       }
@@ -714,7 +715,7 @@ describe("migrated practical guides", () => {
     expect(next.querySelectorAll("li")).toHaveLength(4);
     const nextPaths = Array.from(next.querySelectorAll("a")).map((link) => link.getAttribute("href"));
     expect(nextPaths).toEqual([
-      "/car-rental/",
+      carRentalAffiliateUrl(travelGuidePaths.shabbat),
       "/travel-blog/where-to-stay-in-tel-aviv/",
       "/travel-blog/jerusalem-travel-guide/",
       "/travel-blog/dead-sea-attractions/",
@@ -749,7 +750,7 @@ describe("migrated practical guides", () => {
       const element = container.querySelector(`#${section.id}`)! as HTMLElement;
       for (const link of section.inlineLinks || []) {
         const withinParagraph = within(element).getByRole("link", { name: link.text });
-        expect(withinParagraph).toHaveAttribute("href", link.to);
+        expect(withinParagraph).toHaveAttribute("href", isCarRentalRoute(link.to) ? carRentalAffiliateUrl(travelGuidePaths.shabbat) : link.to);
         expect(withinParagraph.closest("p")).toBeTruthy();
       }
     }

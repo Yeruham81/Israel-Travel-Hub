@@ -1,0 +1,47 @@
+import { Link as RouterLink, useRouterState } from "@tanstack/react-router";
+import type { ComponentProps, MouseEventHandler } from "react";
+import { carRentalAffiliateUrl, isCarRentalRoute } from "@/lib/car-rental-affiliate";
+import { relFor, recordOutboundClick } from "@/lib/outbound";
+
+/**
+ * Sitewide link component: only the temporary car-rental landing destination
+ * becomes a DiscoverCars affiliate deep link. Everything else retains native
+ * TanStack Router link behavior.
+ */
+type Props = ComponentProps<typeof RouterLink>;
+
+export function SiteLink(props: Props) {
+  if (!isCarRentalRoute(props.to)) return <RouterLink {...props} />;
+  return <CarRentalLink {...props} />;
+}
+
+function CarRentalLink(props: Props) {
+  const pathname = useRouterState({ select: (state) => state.location.pathname });
+
+  const onClick: MouseEventHandler<HTMLAnchorElement> = (event) => {
+    recordOutboundClick({
+      pageId: pathname,
+      productId: "cars-discovercars",
+      offerId: "cars-discovercars",
+    });
+    props.onClick?.(event);
+  };
+
+  return (
+    <a
+      href={carRentalAffiliateUrl(pathname)}
+      target="_blank"
+      rel={relFor(true)}
+      className={typeof props.className === "string" ? props.className : undefined}
+      id={props.id}
+      style={props.style}
+      title={props.title}
+      tabIndex={props.tabIndex}
+      aria-label={props["aria-label"]}
+      aria-hidden={props["aria-hidden"]}
+      onClick={onClick}
+    >
+      {typeof props.children === "function" ? props.children({ isActive: false }) : props.children}
+    </a>
+  );
+}

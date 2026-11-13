@@ -1,4 +1,5 @@
-import { Link, type LinkProps } from "@tanstack/react-router";
+import { type LinkProps } from "@tanstack/react-router";
+import { SiteLink as Link } from "@/components/SiteLink";
 import { ArrowRight, TrainFront, CalendarDays, BedDouble, Route as RouteIcon } from "lucide-react";
 import { Breadcrumbs, OnThisPage, FaqList } from "@/components/Guide";
 import { HomeContactForm } from "@/components/HomeContactForm";

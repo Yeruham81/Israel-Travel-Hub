@@ -1,4 +1,5 @@
-import { Link, useRouterState } from "@tanstack/react-router";
+import { useRouterState } from "@tanstack/react-router";
+import { SiteLink as Link } from "@/components/SiteLink";
 import { lazy, Suspense, useEffect, useId, useState, type ReactNode } from "react";
 import { ChevronDown, Compass } from "lucide-react";
 

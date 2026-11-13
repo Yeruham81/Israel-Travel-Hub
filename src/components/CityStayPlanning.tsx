@@ -1,4 +1,5 @@
-import { Link, type LinkProps } from "@tanstack/react-router";
+import { type LinkProps } from "@tanstack/react-router";
+import { SiteLink as Link } from "@/components/SiteLink";
 import { ArrowRight } from "lucide-react";
 import { guideDirectory } from "@/data/travelGuides";
 import { isPublisherUrl } from "@/data/registry";
