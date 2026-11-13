@@ -21,7 +21,7 @@ export const Route = createFileRoute("/about-moshe-barak")({
 });
 
 const services = [
-  { title: "Airport transfers", detail: "I arrange pickups and drop-offs at Ben Gurion Airport, with your flight arrival time, luggage and destination in mind.", to: "/transfers/" as const, action: "Explore airport transfers" },
+  { title: "Airport transfers", detail: "I arrange pickups and drop-offs at Ben Gurion Airport, with your flight arrival time, luggage and destination in mind.", to: "/airport-transfers/" as const, action: "Explore airport transfers" },
   { title: "Private day trips", detail: "I help you plan a flexible day around the places that interest you, with time to enjoy the journey at your own pace.", to: "/tours/" as const, action: "Explore day-trip options" },
   { title: "Private driver service", detail: "I help individuals, couples, families and small groups with door-to-door journeys, agreeing on the route, vehicle and arrangements before travel.", to: "/private-driver/" as const, action: "Learn about my driving service" },
 ];
@@ -37,7 +37,7 @@ function MosheAbout() {
           <p className="mt-5 leading-relaxed">I was born and raised in Israel, and I enjoy helping people discover it in a way that feels comfortable and personal. Whether it's your first visit or you're returning to familiar places, I want the practical details to feel straightforward so you can enjoy your time here.</p>
           <div className="mt-7 flex flex-wrap gap-3">
             <a href="#contact" className="btn btn-primary">Contact me <ArrowRight size={17} aria-hidden /></a>
-            <Link to="/transfers/" className="btn btn-outline">Explore airport transfers</Link>
+            <Link to="/airport-transfers/" className="btn btn-outline">Explore airport transfers</Link>
           </div>
           <p className="mt-5 inline-flex items-center gap-2 text-sm text-muted-foreground"><MapPin size={16} aria-hidden /> I'm based in Israel and welcome travelers from around the world.</p>
         </div>
@@ -144,7 +144,7 @@ function MosheAbout() {
     </section>
 
     <section className="mx-auto max-w-6xl px-4 py-8 text-sm text-muted-foreground">
-      <p>I share more practical local advice in my <Link to="/guides/" className="font-semibold text-primary underline">Israel travel guides</Link>.</p>
+      <p>I share more practical local advice in my <Link to="/travel-blog/" className="font-semibold text-primary underline">Israel travel guides</Link>.</p>
     </section>
   </main>;
 }
