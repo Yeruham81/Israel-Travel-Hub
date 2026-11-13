@@ -118,6 +118,39 @@ describe("migrated Israel itineraries", () => {
     expect(view.indexOf("<HomeContactForm")).toBeLessThan(view.indexOf("<SourcesDisclosure>"));
   });
 
+  it("links natural phrases in the three-day text instead of showing a link tray after every day", () => {
+    const guide = itineraries["3"];
+    expect(guide.dayInlineLinks).toHaveLength(9);
+    expect(guide.logisticsInlineLinks).toHaveLength(4);
+    const router = createRouter({ routeTree, context: { queryClient: new QueryClient() }, trailingSlash: "always" });
+    for (const item of guide.dayInlineLinks ?? []) {
+      const text = guide.daysPlan[item.day - 1]?.[item.field] ?? "";
+      expect(text, `Day ${item.day} ${item.field}: ${item.phrase}`).toContain(item.phrase);
+      expect(text.indexOf(item.phrase)).toBeGreaterThanOrEqual(0);
+      expect(router.matchRoutes(item.to as string).at(-1)?.routeId, item.to as string).not.toBe(rootRouteId);
+    }
+    for (const item of guide.logisticsInlineLinks ?? []) {
+      expect(guide.logistics[item.index]?.text).toContain(item.phrase);
+      expect(router.matchRoutes(item.to as string).at(-1)?.routeId, item.to as string).not.toBe(rootRouteId);
+    }
+  });
+
+  it("keeps map and photo-credit clutter out of the shared itinerary layout", () => {
+    const view = file("src/components/IsraelItineraryPage.tsx");
+    expect(view).not.toContain("<RouteMap");
+    expect(view).not.toContain("This sample route assumes");
+    expect(view).not.toContain("Practical planning note");
+    expect(view).not.toContain("Use these focused guides");
+    expect(view).not.toContain("GuidePhotoCredit");
+    expect(view).toContain("My practical planning tip");
+    expect(view).toContain("Tips for transport and hotel planning");
+    expect(view).toContain("Adjust this itinerary to your trip");
+    expect(view).toContain("Photo credits &amp; licences");
+    expect(view).toContain("hasPublicPhotoCredit");
+    expect(view).toContain("list-disc space-y-4");
+    expect(view.indexOf("<SourcesDisclosure>")).toBeLessThan(view.indexOf("Photo credits &amp; licences"));
+  });
+
   it("has contextual navigation and a generated route-tree entry for every itinerary", () => {
     const sidebar = allNavGroups.find(g => g.title === "Travel guides");
     expect(sidebar?.items.some(item => item.label === "Israel itineraries")).toBe(true);

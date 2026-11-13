@@ -22,6 +22,8 @@ export type ItineraryGuide = {
   logistics: { heading: string; text: string; to?: InternalPath; label?: string }[];
   faqs: { q: string; a: string }[];
   hero: keyof typeof migrationPhotos;
+  dayInlineLinks?: { day: number; field: "morning" | "afternoon" | "evening" | "practical" | "overnight"; phrase: string; to: InternalPath }[];
+  logisticsInlineLinks?: { index: number; phrase: string; to: InternalPath }[];
   reviewedAt?: string;
   overviewRows?: { focus: string; night: string }[];
   beforeYouGo?: { heading: string; text: string; to?: InternalPath; label?: string }[];
@@ -48,19 +50,19 @@ const baptism = L("Qasr el-Yahud visit guide", "/travel-blog/qasr-el-yahud/");
 const days3: ItineraryDay[] = [
   {
     name: "Jerusalem: one well-planned Old City day", region: "Jerusalem", image: "itinerary-jerusalem-old-city",
-    morning: "Start near Jaffa Gate and choose a coherent walking route. A Christian Quarter visit can include the Church of the Holy Sepulchre; a Jewish Quarter route can lead to the Western Wall. Both are worthwhile, but do not try to cover every quarter and sacred site in one morning.",
-    afternoon: "Continue exploring your chosen Old City area or visit the Israel Museum as a separate cross-city outing. Allow a substantial block of time for the museum, including the journey there; it is not a quick stop on an Old City walking loop.",
+    morning: "Start your Old City walk near Jaffa Gate and choose a coherent route. A Christian Quarter visit can include the Church of the Holy Sepulchre; a Jewish Quarter route can lead to the Western Wall. Both are worthwhile, but do not try to cover every quarter and sacred site in one morning.",
+    afternoon: "Continue exploring your chosen Old City area or visit the Israel Museum as a separate cross-city outing. For Jerusalem museums, allow enough time for the exhibition and the journey; they are not quick stops on an Old City walking loop.",
     evening: "Explore Jaffa Road or eat around Mahane Yehuda when businesses are operating. Friday and Saturday opening patterns differ from an ordinary weekday.",
     practical: "Old City streets have steps and uneven surfaces. Check site-specific entry rules and religious-service times; access to the Temple Mount/Haram al-Sharif cannot be assumed.",
-    overnight: "Jerusalem — keep the same hotel for the first two nights.",
+    overnight: "Jerusalem — keep one hotel for the first two nights. Compare where to stay in Jerusalem before choosing a neighborhood.",
     links: [jerusalem, jerusalemHotels, L("Jerusalem museum choices", "/travel-blog/museums-in-jerusalem/")],
   },
   {
-    name: "Masada and a managed Dead Sea beach", region: "Judean Desert", image: "EXISTING:masada",
-    morning: "Leave Jerusalem early for Masada's eastern entrance via Road 90. The cable car and Snake Path start on this side; the Roman Ramp is reached from the separate western entrance via Arad. Allow approximately two to three hours to explore Masada, plus the actual drive and any queues, and check the park's entry and heat restrictions before setting off.",
+    name: "Masada and floating in the Dead Sea", region: "Judean Desert", image: "EXISTING:masada",
+    morning: "Leave Jerusalem early for Masada National Park's eastern entrance via Road 90. The cable car and Snake Path start on this side; the Roman Ramp is reached from the separate western entrance via Arad. Allow approximately two to three hours to explore Masada, plus the actual drive and any queues, and check the park's entry and heat restrictions before setting off.",
     afternoon: "Continue to the designated beach area at Ein Bokek. A relaxed beach stop commonly needs another one to two hours for changing, bathing where permitted and showering, before the journey back to Jerusalem. Use only an officially designated bathing area and follow local safety instructions.",
     evening: "Return to your Jerusalem hotel rather than changing accommodation for a single resort night. A Dead Sea overnight makes sense only if you deliberately replace part of this short itinerary with more beach or spa time.",
-    practical: "Carry drinking water and sun protection. Hiking routes can close or restrict last ascent during extreme heat; the cable car has its own operating window. Ein Gedi Nature Reserve is a separate, conditional visit, not a guaranteed bonus stop.",
+    practical: "Carry drinking water and sun protection. Check heat restrictions and the last cable-car ascent. If you prefer not to drive, compare Masada and Dead Sea day tours that include both stops; Ein Gedi is a separate alternative, not an automatic extra.",
     overnight: "Jerusalem — second night, in the same hotel.",
     links: [masada, L("Jerusalem to Dead Sea travel options", "/travel-blog/jerusalem-to-the-dead-sea/"), L("Masada & Dead Sea day tours", "/tours/masada-dead-sea/")],
   },
@@ -69,8 +71,8 @@ const days3: ItineraryDay[] = [
     morning: "Travel from Jerusalem to Tel Aviv, allowing time for the station-to-neighborhood connection, then explore Old Jaffa's historic hill, lanes and port. The flea-market district is nearby but its shops do not operate on the same schedule every day.",
     afternoon: "Continue toward Neve Tzedek and the seafront promenade. If you prefer food and markets, choose the Carmel Market instead of trying to fit in every neighborhood; check market opening days and hours, particularly around Shabbat.",
     evening: "Enjoy a meal near your hotel if staying longer, or leave for Ben Gurion Airport according to your flight's check-in and security requirements.",
-    practical: "If your international flight is on day three, this is a shortened sightseeing day, not a guaranteed full-day program. Plan the Jerusalem–Tel Aviv transfer, luggage storage and airport connection before choosing the final stops.",
-    overnight: "Tel Aviv only if extending your stay or departing the following day; otherwise plan your airport departure separately.",
+    practical: "If you fly home on day three, shorten the sightseeing plan. Check your Jerusalem–Tel Aviv transfer, luggage storage and Ben Gurion Airport connections before choosing the final stops.",
+    overnight: "If you are staying another night, compare where to stay in Tel Aviv. Otherwise, plan your airport departure without another hotel check-in.",
     links: [telaviv, telavivHotels, L("Tel Aviv and Ben Gurion Airport connection", "/travel-blog/how-to-get-from-ben-gurion-airport-to-tel-aviv/")],
   },
 ];
@@ -274,10 +276,27 @@ export const itineraries: Record<ItineraryId, ItineraryGuide> = {
     idealFor: "First-time visitors with three usable days, comfortable with one full excursion day",
     reality: "Two hotel bases at most; an optional Dead Sea day means an early start and a full return journey. If flights eat into your three days, skip a region rather than race through three.",
     hotelBases: "Two nights in Jerusalem. Stay in Tel Aviv after day three only if your return flight is on a later day; otherwise go to the airport with enough time.",
-    noCarAdvice: "Jerusalem and Tel Aviv work without a rental car. For Masada and the Dead Sea, compare a date-specific tour, an agreed private driver or a carefully checked bus itinerary; do not assume a single easy public connection covers both sites.",
+    noCarAdvice: "You can explore much of Jerusalem and Tel Aviv on foot, by public transport or with a short local taxi ride. For Masada and the Dead Sea, compare an organized day tour, a rental car or a prearranged driver; public transport requires checking the exact connections.",
     route: ["Jerusalem", "Masada & Dead Sea", "Tel Aviv–Jaffa"],
     map: { center: [31.55, 35.04], bounds: [34.57, 30.97, 35.69, 32.37], points: [{ name: "Jerusalem", lat: 31.78, lon: 35.23 }, { name: "Masada", lat: 31.31, lon: 35.35 }, { name: "Ein Bokek", lat: 31.2, lon: 35.36 }, { name: "Tel Aviv–Jaffa", lat: 32.065, lon: 34.76 }] },
     daysPlan: days3,
+    dayInlineLinks: [
+      { day: 1, field: "morning", phrase: "Old City", to: "/travel-blog/old-city-jerusalem/" },
+      { day: 1, field: "afternoon", phrase: "Jerusalem museums", to: "/travel-blog/museums-in-jerusalem/" },
+      { day: 1, field: "overnight", phrase: "where to stay in Jerusalem", to: "/travel-blog/where-to-stay-in-jerusalem/" },
+      { day: 2, field: "morning", phrase: "Masada National Park", to: "/travel-blog/masada/" },
+      { day: 2, field: "afternoon", phrase: "Ein Bokek", to: "/travel-blog/dead-sea-attractions/" },
+      { day: 2, field: "practical", phrase: "Masada and Dead Sea day tours", to: "/tours/masada-dead-sea/" },
+      { day: 3, field: "morning", phrase: "Old Jaffa", to: "/travel-blog/jaffa/" },
+      { day: 3, field: "practical", phrase: "Ben Gurion Airport connections", to: "/travel-blog/how-to-get-from-ben-gurion-airport-to-tel-aviv/" },
+      { day: 3, field: "overnight", phrase: "where to stay in Tel Aviv", to: "/travel-blog/where-to-stay-in-tel-aviv/" },
+    ],
+    logisticsInlineLinks: [
+      { index: 0, phrase: "Jerusalem accommodation", to: "/travel-blog/where-to-stay-in-jerusalem/" },
+      { index: 1, phrase: "Masada and Dead Sea excursions", to: "/tours/masada-dead-sea/" },
+      { index: 2, phrase: "rental cars in Israel", to: "/car-rental/" },
+      { index: 3, phrase: "Israel transport options", to: "/travel-blog/getting-around-israel/" },
+    ],
     reviewedAt: "2026-11-13",
     overviewRows: [
       { focus: "Jerusalem Old City", night: "Jerusalem · night 1" },
@@ -304,10 +323,10 @@ export const itineraries: Record<ItineraryId, ItineraryGuide> = {
       { title: "Traveling on Friday or Saturday?", text: "Arrange the intercity journey around the actual Shabbat timetable. Regular rail and many buses do not run for much of the period.", to: "/travel-blog/from-ben-gurion-airport-on-shabbat/", label: "Shabbat transport" },
     ],
     logistics: [
-      { heading: "Choose your hotel bases", text: "Keep the first two nights in Jerusalem to avoid repeated check-ins and to make the desert day a return excursion. A Tel Aviv room is useful only when staying after day three.", to: "/travel-blog/where-to-stay-in-jerusalem/", label: "Compare Jerusalem hotel areas" },
-      { heading: "Book the desert day sensibly", text: "For both Masada and Ein Bokek in a single day, compare an actual organized excursion, a self-drive plan or a clearly agreed private ride. Check exactly what is included.", to: "/tours/masada-dead-sea/", label: "Explore Masada & Dead Sea tours" },
-      { heading: "Consider rental cars only where useful", text: "City-center Jerusalem and Tel Aviv are usually easier without a car. A rental may help on the desert day, but check parking, permitted driving areas and collection hours before booking.", to: "/car-rental/", label: "Compare Israel car rentals" },
-      { heading: "Connect cities and the airport", text: "An operating train can be useful between Jerusalem and Tel Aviv, but it is not door to door. Account for your hotel, station, luggage and international flight check-in.", to: "/travel-blog/getting-around-israel/", label: "Compare transport options" },
+      { heading: "Choose your hotel bases", text: "Keep one Jerusalem hotel for the first two nights to make the desert outing a return trip. Compare Jerusalem accommodation before booking; move to Tel Aviv only if staying beyond the third day.", to: "/travel-blog/where-to-stay-in-jerusalem/", label: "Compare Jerusalem hotel areas" },
+      { heading: "Book the desert day sensibly", text: "Compare Masada and Dead Sea excursions with a self-drive plan or agreed private ride. For a tour, check whether pickup, site admission and time at Ein Bokek are included.", to: "/tours/masada-dead-sea/", label: "Explore Masada & Dead Sea tours" },
+      { heading: "Consider rental cars only where useful", text: "For the desert day, compare rental cars in Israel if you prefer independent stops. Check pickup hours, parking and permitted driving areas before booking.", to: "/car-rental/", label: "Compare Israel car rentals" },
+      { heading: "Connect cities and the airport", text: "The train can be useful between Jerusalem and Tel Aviv, but it is not door to door. Consider your hotel's location, its distance from the nearest station, the amount of luggage and international flight check-in. Compare Israel transport options for the rest of the trip.", to: "/travel-blog/getting-around-israel/", label: "Compare transport options" },
     ],
     faqs: [
       { q: "Is three days enough to visit Israel?", a: "Three full sightseeing days are enough for a focused first visit to Jerusalem, a desert excursion and Tel Aviv–Jaffa. They are not enough to see every region; arrival and departure hours can reduce the usable time." },
