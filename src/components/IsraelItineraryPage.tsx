@@ -22,7 +22,7 @@ export function itineraryMeta(id: ItineraryId) {
   const head = pageMeta({
     title: g.title, description: g.description, path: g.path, type: "article",
     image: photo.src, imageAlt: photo.alt,
-    crumbs: [{ name: "Home", path: "/" }, { name: "Travel guides", path: "/guides/" }, { name: g.title, path: g.path }],
+    crumbs: [{ name: "Home", path: "/" }, { name: "Travel guides", path: "/travel-blog/" }, { name: g.title, path: g.path }],
   });
   return { ...head, scripts: [...head.scripts, jsonLd({
     "@context": "https://schema.org", "@type": "Article",
@@ -67,7 +67,7 @@ export function IsraelItineraryPage({ id }: { id: ItineraryId }) {
   const photo = migrationPhotos[g.hero];
   return <main className="mx-auto max-w-5xl px-4 pb-16">
     <header className="pt-6">
-      <Breadcrumbs items={[{ name: "Home", to: "/" }, { name: "Travel guides", to: "/guides/" }, { name: g.title, to: internal(g.path as LinkProps["to"]) }]} />
+      <Breadcrumbs items={[{ name: "Home", to: "/" }, { name: "Travel guides", to: "/travel-blog/" }, { name: g.title, to: internal(g.path as LinkProps["to"]) }]} />
       <GuideHeroLayout image={
         <GuideHeroMedia src={photo.src} alt={photo.alt}>
           <GuidePhotoCredit photo={photo} />
