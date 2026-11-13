@@ -32,7 +32,7 @@ export function JerusalemPartnerOffers({ id }: { id: JerusalemOfferTarget }) {
   if (!offers.length) return null;
   return <section className="mt-12" aria-labelledby="jerusalem-partner-offers-h">
     <h2 id="jerusalem-partner-offers-h" className="text-2xl font-semibold sm:text-3xl">Tours, tickets and experiences</h2>
-    <p className="mt-2 max-w-3xl text-sm leading-relaxed text-muted-foreground">Check the operator, dates, inclusions, departure point, cancellation and current total on the provider's booking site. Sponsored offers are identified separately from my own transport services.</p>
+    <p className="mt-2 max-w-3xl text-sm leading-relaxed text-muted-foreground">Check the operator, dates, inclusions, departure point, cancellation conditions and final price on the provider's booking site.</p>
     <ul className="mt-5 grid gap-4 sm:grid-cols-2">
       {offers.map(offer => <ProviderCard key={offer.id} link={offer} pageId={pageId} />)}
     </ul>
