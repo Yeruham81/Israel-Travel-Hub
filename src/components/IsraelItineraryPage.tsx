@@ -187,16 +187,37 @@ export function IsraelItineraryPage({ id }: { id: ItineraryId }) {
             </header>
             <div className="grid gap-6 p-5 sm:p-7 lg:grid-cols-[minmax(0,1fr)_250px]">
               <div className="min-w-0">
+                {g.daySequences?.find(sequence => sequence.day === index + 1) && (
+                  <div className="mb-6 border-b pb-5" data-testid={`day-${index + 1}-stop-order`}>
+                    <h4 className="text-sm font-semibold">Suggested stop order <span className="font-normal text-muted-foreground">· approximate times</span></h4>
+                    <ol className="mt-3 space-y-2">
+                      {g.daySequences.find(sequence => sequence.day === index + 1)!.steps.map((step, stepIndex) => (
+                        <li key={stepIndex} className="grid grid-cols-[1.25rem_minmax(0,1fr)] gap-2 text-sm leading-snug">
+                          <span className="font-semibold tabular-nums text-primary">{stepIndex + 1}.</span>
+                          <span><span className="font-medium">{step.stop}</span>{step.optional && <span className="ml-1.5 text-xs text-muted-foreground">(optional alternative)</span>}
+                            <span className="block text-xs text-muted-foreground">{step.time}</span>
+                          </span>
+                        </li>
+                      ))}
+                    </ol>
+                  </div>
+                )}
                 <dl className="space-y-5">
-                  <div><dt className="text-sm font-semibold text-primary">Morning</dt><dd className="mt-1 leading-relaxed"><LinkedCopy value={day.morning} links={g.dayInlineLinks?.filter(link => link.day === index + 1 && link.field === "morning")} /></dd></div>
-                  <div><dt className="text-sm font-semibold text-primary">Afternoon</dt><dd className="mt-1 leading-relaxed"><LinkedCopy value={day.afternoon} links={g.dayInlineLinks?.filter(link => link.day === index + 1 && link.field === "afternoon")} /></dd></div>
-                  <div><dt className="text-sm font-semibold text-primary">Evening</dt><dd className="mt-1 leading-relaxed"><LinkedCopy value={day.evening} links={g.dayInlineLinks?.filter(link => link.day === index + 1 && link.field === "evening")} /></dd></div>
+                  <div><dt className="text-sm font-semibold text-primary">Morning</dt><dd className="mt-1 leading-relaxed"><LinkedCopy value={day.morning} links={dayTextLinks(g, index + 1, "morning")} /></dd></div>
+                  <div><dt className="text-sm font-semibold text-primary">Afternoon</dt><dd className="mt-1 leading-relaxed"><LinkedCopy value={day.afternoon} links={dayTextLinks(g, index + 1, "afternoon")} /></dd></div>
+                  <div><dt className="text-sm font-semibold text-primary">Evening</dt><dd className="mt-1 leading-relaxed"><LinkedCopy value={day.evening} links={dayTextLinks(g, index + 1, "evening")} /></dd></div>
                 </dl>
                 <div className="mt-6 border-l-4 border-primary bg-secondary/50 px-4 py-3">
                   <h4 className="font-semibold">My practical planning tip</h4>
-                  <p className="mt-1 text-sm leading-relaxed"><LinkedCopy value={day.practical} links={g.dayInlineLinks?.filter(link => link.day === index + 1 && link.field === "practical")} /></p>
+                  <p className="mt-1 text-sm leading-relaxed"><LinkedCopy value={day.practical} links={dayTextLinks(g, index + 1, "practical")} /></p>
                 </div>
-                <p className="mt-4 text-sm leading-relaxed"><strong>Where to stay:</strong> <LinkedCopy value={day.overnight} links={g.dayInlineLinks?.filter(link => link.day === index + 1 && link.field === "overnight")} /></p>
+                <p className="mt-4 text-sm leading-relaxed"><strong>Where to stay:</strong> <LinkedCopy value={day.overnight} links={dayTextLinks(g, index + 1, "overnight")} /></p>
+                {index + 1 === 3 && g.day3Options?.length ? <div className="mt-5 grid gap-3 border-t pt-4 sm:grid-cols-2" data-testid="departure-scenarios">
+                  {g.day3Options.map(option => <div key={option.heading} className="text-sm leading-relaxed">
+                    <h4 className="font-semibold">{option.heading}</h4>
+                    <p className="mt-1 text-muted-foreground">{option.text}</p>
+                  </div>)}
+                </div> : null}
                 {!g.dayInlineLinks?.some(link => link.day === index + 1) && <nav aria-label={`Read more about day ${index + 1}`} className="mt-5 flex flex-wrap gap-x-5 gap-y-2">
                   {day.links.map((link) => <Link key={link.label} to={link.to} className="inline-flex items-center gap-1.5 text-sm font-semibold text-primary underline underline-offset-2">{link.label} <ArrowRight className="h-3.5 w-3.5" aria-hidden /></Link>)}
                 </nav>}
@@ -233,9 +254,9 @@ export function IsraelItineraryPage({ id }: { id: ItineraryId }) {
       {g.beforeYouGo?.length ? <div className="mt-7 border-t pt-6">
         <h3 className="text-xl font-semibold">Before you book</h3>
         <ul className="mt-4 list-disc space-y-3 pl-6 marker:text-primary">
-          {g.beforeYouGo.map(tip => <li key={tip.heading} className="pl-1 leading-relaxed">
+          {g.beforeYouGo.map((tip, index) => <li key={tip.heading} className="pl-1 leading-relaxed">
             <strong className="font-semibold">{tip.heading}.</strong>{" "}
-            <LinkedCopy value={tip.text} links={tip.to && tip.label ? [{ phrase: tip.label, to: tip.to }] : []} />
+            <LinkedCopy value={tip.text} links={beforeBookingLinks(g, index)} />
             {tip.to && tip.label && !tip.text.includes(tip.label) && <>{" "}<Link to={tip.to} className="font-semibold text-primary underline underline-offset-2">{tip.label}</Link></>}
           </li>)}
         </ul>
