@@ -58,8 +58,8 @@ describe("current legal documents", () => {
     expect(doc.getElementById("storage")?.textContent).toContain("continuing to browse, is not a substitute");
     const planned = doc.getElementById("analytics-advertising")?.textContent || "";
     expect(planned).toContain("Google Analytics is planned");
-    expect(planned).toMatch(/Advertisements, sponsored banners, affiliate links.*widgets may also be added/);
-    expect(planned).toContain("before you click or book");
+    expect(planned).toContain("The website may include outbound booking links");
+    expect(planned).toContain("when it loads");
     expect(planned).toContain("change or withdraw");
     expect(planned).toContain("Google Fonts is currently used");
     expect(doc.getElementById("payments")?.textContent).toContain("does not currently process online payments");
