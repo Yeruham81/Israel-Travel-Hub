@@ -125,7 +125,7 @@ describe("home mobile performance optimizations", () => {
     const home = read("src/routes/index.tsx");
     expect(home.match(/grid min-w-0 grid-cols-1 gap-4 lg:grid-cols-2 lg:items-stretch/g)).toHaveLength(2);
     expect(home.match(/grid min-w-0 grid-cols-1 content-start gap-3/g)).toHaveLength(2);
-    expect(home.match(/aspect-\\[16\\/10\\] h-full min-h-64 w-full min-w-0/g)).toHaveLength(2);
+    expect(home.split('aspect-[16/10] h-full min-h-64 w-full min-w-0')).toHaveLength(3);
     expect(home).toContain('<li className="min-w-0">');
     expect(home).toContain('grid w-full min-w-0 grid-cols-[96px_minmax(0,1fr)]');
   });
