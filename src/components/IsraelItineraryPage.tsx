@@ -5,6 +5,7 @@ import { Breadcrumbs, OnThisPage, FaqList } from "@/components/Guide";
 import { HomeContactForm } from "@/components/HomeContactForm";
 import { guideContactCopy } from "@/lib/guide-contact";
 import { GuidePhotoCredit } from "@/components/TravelGuide";
+import { GuideHeroMedia } from "@/components/GuideHeroMedia";
 import { AuthorCard } from "@/components/AuthorCard";
 import { PageUpdated } from "@/components/PageUpdated";
 import { itineraries, itineraryIds, itinerarySources, type ItineraryId, type ItineraryGuide } from "@/data/israelItineraries";
@@ -75,11 +76,9 @@ export function IsraelItineraryPage({ id }: { id: ItineraryId }) {
         <span className="rounded-full bg-secondary px-3 py-2">Realistic hotel bases</span>
         <span className="rounded-full bg-secondary px-3 py-2">Public / private transport choices</span>
       </div>
-      <figure className="mt-7">
-        <img src={photo.src} alt={photo.alt} width={1200} height={675} fetchPriority="high" decoding="async"
-          className="aspect-[16/9] max-h-[440px] w-full rounded-2xl object-cover" />
+      <GuideHeroMedia src={photo.src} alt={photo.alt}>
         <GuidePhotoCredit photo={photo} />
-      </figure>
+      </GuideHeroMedia>
       <PageUpdated date={REVIEWED_AT} />
       <AuthorCard />
     </header>
