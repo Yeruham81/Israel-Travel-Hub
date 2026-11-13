@@ -11,9 +11,10 @@ afterEach(cleanup);
 describe("homepage marketing copy and top navigation", () => {
   it("shows a welcoming hero introduction without redundant marketing buttons", () => {
     const { container } = render(<HomeHero />);
-    expect(screen.getByRole("heading", { level: 1, name: "Explore Israel with confidence." })).toBeInTheDocument();
-    expect(screen.getByText("Your Israel journey starts here")).toBeInTheDocument();
-    expect(container.textContent).toContain("From airport arrivals and private day trips");
+    expect(screen.getByRole("heading", { level: 1, name: "Discover Israel, Travel Smarter" })).toBeInTheDocument();
+    expect(screen.getByText("Your journey starts here")).toBeInTheDocument();
+    expect(container.textContent).toContain("From airport arrivals and getting around to memorable day trips");
+    expect(container.textContent).toContain("make the most of your time in Israel.");
     expect(screen.queryByRole("link", { name: "Find where to stay" })).not.toBeInTheDocument();
     expect(screen.queryByRole("link", { name: "Browse destinations" })).not.toBeInTheDocument();
     expect(container.querySelectorAll("a")).toHaveLength(0);
