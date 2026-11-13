@@ -37,6 +37,9 @@ import image34 from "@/assets/guides/mitzpe-ramon-crater.jpg";
 import itineraryOldCity from "@/assets/jerusalem/old-city.webp";
 import itineraryTrain from "@/assets/airport-journeys/jerusalem-navon-platform.webp";
 import itineraryAirport from "@/assets/home/ben-gurion-t3.webp";
+import itineraryMasadaCar from "@/assets/home/masada-cable-car.webp";
+import itineraryDeadSeaShore from "@/assets/guides/dead-sea-ein-bokek-shore.webp";
+import itineraryJaffaStreets from "@/assets/tel-aviv/jaffa.webp";
 
 export const migrationPhotos = {
   "best-time-to-visit-israel": {
@@ -232,5 +235,17 @@ export const migrationPhotos = {
   "itinerary-airport": {
     "src": itineraryAirport,
     "alt": "Ben Gurion Airport Terminal 3 exterior"
+  },
+  "itinerary-masada-car": {
+    "src": itineraryMasadaCar,
+    "alt": "Cable car ascending to the Masada plateau"
+  },
+  "itinerary-dead-sea-shore": {
+    "src": itineraryDeadSeaShore,
+    "alt": "Designated Ein Bokek shoreline at the Dead Sea"
+  },
+  "itinerary-jaffa-streets": {
+    "src": itineraryJaffaStreets,
+    "alt": "Historic streets and buildings in Old Jaffa"
   }
 } satisfies Record<string, GuidePhoto>;
