@@ -103,7 +103,7 @@ describe("compact On this page navigation", () => {
     const details = sources.querySelector("details")!;
     expect(details).not.toHaveAttribute("open");
     expect(sources).toHaveTextContent("Official reference");
-    fireEvent.click(within(sources as HTMLElement).getByText("Sources"));
+    fireEvent.click(sources.querySelector("summary")!);
     expect(details).toHaveAttribute("open");
     expect(within(sources as HTMLElement).getByRole("link", { name: "Official reference" })).toHaveAttribute("href", "https://example.org/reference");
   });
