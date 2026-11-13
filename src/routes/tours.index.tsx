@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { Breadcrumbs, FaqList } from "@/components/Guide";
+import { FaqList, HubHeader } from "@/components/Guide";
 import { RelatedGuideCards } from "@/components/ShoreReadingGuides";
 import { TourCategoryExplorer, TourCruiseCallout } from "@/components/TourDiscovery";
 import { TourPhotoCredits } from "@/components/TourCategoryPage";
@@ -24,11 +24,13 @@ function Tours() {
   const filters = parseTourHubSearch(Route.useSearch());
   const navigate = Route.useNavigate();
   return <main className="mx-auto max-w-5xl px-4 pb-12">
-    <div className="pt-6"><Breadcrumbs items={[{ name: "Home", to: "/" }, { name: "Tours & day trips", to: "/tours/" }]} /></div>
-    <header className="mt-7 grid items-center gap-7 md:grid-cols-[1.1fr_1fr]">
-      <div><p className="eyebrow">Great places. A day that fits you.</p><h1 className="mt-3 text-4xl font-semibold leading-tight sm:text-5xl">{toursHubTitle}</h1><p className="mt-5 text-lg leading-relaxed text-muted-foreground">Ancient cities, desert views, market flavours and the Red Sea. Discover remarkable places, inspiring stories and local experiences that turn a day out into a highlight of your visit.</p></div>
-      <img src={hero.src} alt={hero.alt} width={1200} height={800} fetchPriority="high" className="aspect-[4/3] w-full rounded-3xl object-cover" />
-    </header>
+    <HubHeader
+      crumbs={[{ name: "Home", to: "/" }, { name: "Tours & day trips", to: "/tours/" }]}
+      eyebrow="Great places. A day that fits you."
+      title={toursHubTitle}
+      intro="Discover Israel's historic cities, dramatic landscapes and local experiences. Browse day trips and activities, then choose a tour that fits your interests and schedule."
+      showAuthor={false}
+    />
     <TourCategoryExplorer filters={filters} onChange={(search, replace) => { void navigate({ search: parseTourHubSearch(search), resetScroll: false, replace: Boolean(replace) }); }} />
     <section aria-labelledby="choose-format-h" className="mt-14"><h2 id="choose-format-h" className="text-3xl font-semibold">Choose how you want to spend the day</h2><div className="mt-5 grid gap-4 md:grid-cols-3">{[
       { title: "A private experience", text: "For families, friends and travellers who want a more individual day. Choose a privately guided visit or tailored transport, and agree the pace and inclusions before booking." },
