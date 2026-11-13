@@ -1,5 +1,4 @@
 import { Link, type LinkProps } from "@tanstack/react-router";
-import { SiteLink } from "@/components/SiteLink";
 import deadSeaBeach from "@/assets/dead-sea/beach.webp";
 import masada from "@/assets/home/masada-dead-sea.webp";
 import einGedi from "@/assets/dead-sea/ein-gedi.webp";
@@ -64,28 +63,28 @@ const related: {
 
 const nextSteps: { title: string; description: string; to: LinkProps["to"]; action: string }[] = [
   {
-    title: "Explore Masada & Dead Sea tours",
-    description: "Compare itineraries and check pickup city, tickets and beach time.",
-    to: "/tours/masada-dead-sea/",
-    action: "Compare tours",
+    title: "Arriving from Ben Gurion Airport?",
+    description: "Find ways to reach the Ein Bokek hotel area directly from the airport.",
+    to: "/travel-blog/how-to-get-from-ben-gurion-airport-to-ein-bokek/",
+    action: "Airport to Ein Bokek",
   },
   {
-    title: "Arrange a private driver",
-    description: "Request a quote for hotel pickup, sightseeing stops and the return.",
-    to: "/private-driver/",
-    action: "Request a quote",
+    title: "Spend a night at the Dead Sea",
+    description: "See the spa hotel areas if you would rather stay overnight.",
+    to: "/dead-sea/spa-hotels/",
+    action: "Explore spa hotels",
   },
   {
-    title: "Consider renting a car",
-    description: "Compare Israel rental offers if you prefer to plan the drive yourself.",
-    to: "/car-rental/",
-    action: "Compare rental cars",
+    title: "Plan more of Jerusalem",
+    description: "Find places to visit before or after your Dead Sea excursion.",
+    to: "/travel-blog/jerusalem-travel-guide/",
+    action: "Read Jerusalem guide",
   },
   {
-    title: "Plan your Jerusalem stay",
-    description: "Choose a hotel area that works with your departure and return.",
+    title: "Choose a Jerusalem hotel area",
+    description: "Consider where to stay for an early departure or late return.",
     to: "/travel-blog/where-to-stay-in-jerusalem/",
-    action: "Read the hotel guide",
+    action: "Where to stay in Jerusalem",
   },
 ];
 
@@ -108,17 +107,16 @@ export function DeadSeaGuideFollowUps() {
     </section>
     <section aria-labelledby="deadsea-next-h" className="mt-12" data-testid="deadsea-next-steps">
       <h2 id="deadsea-next-h" className="text-2xl font-bold leading-tight sm:text-3xl">Plan the next part of your trip</h2>
-      <p className="mt-2 max-w-3xl text-sm leading-relaxed text-muted-foreground">Choose a practical next step once you know which Dead Sea destination you want to visit.</p>
+
       <ul className="mt-4 grid gap-3 sm:grid-cols-2">
         {nextSteps.map(item => <li key={String(item.to)}>
-          <SiteLink to={item.to} className="group flex h-full flex-col rounded-xl border bg-card p-4 transition-colors hover:border-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
+          <Link to={item.to} className="group flex h-full flex-col rounded-xl border bg-card p-4 transition-colors hover:border-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
             <span className="font-semibold text-foreground group-hover:text-primary">{item.title}</span>
             <span className="mt-2 flex-1 text-sm leading-relaxed text-muted-foreground">{item.description}</span>
             <span className="mt-3 text-sm font-semibold text-primary">{item.action} →</span>
-          </SiteLink>
+          </Link>
         </li>)}
       </ul>
-      <p className="mt-3 text-xs text-muted-foreground">The car-rental comparison is an affiliate link. I may earn a commission at no extra cost to you.</p>
     </section>
   </>;
 }
