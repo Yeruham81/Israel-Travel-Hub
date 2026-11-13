@@ -83,8 +83,8 @@ describe("Jerusalem independent day-trip planning guides", () => {
     expect(privateTourLink).toHaveAttribute("href", "/tours/masada-dead-sea/");
     expect(privateSection).toHaveTextContent("₪2,100 per vehicle");
     const cards = within(tourSection as HTMLElement).getAllByTestId("deadsea-bookable-tour");
-    expect(cards).toHaveLength(5);
-    expect(deadSeaTourCards.filter(tour => tour.provider === "Viator")).toHaveLength(3);
+    expect(cards).toHaveLength(6);
+    expect(deadSeaTourCards.filter(tour => tour.provider === "Viator")).toHaveLength(4);
     expect(deadSeaTourCards.filter(tour => tour.provider === "GetYourGuide")).toHaveLength(2);
     const expectedLinks = [
       "https://viator.tpm.li/mFyULbRB",
@@ -92,6 +92,7 @@ describe("Jerusalem independent day-trip planning guides", () => {
       "https://viator.tpm.li/2OUbWPvV",
       "https://getyourguide.tpm.li/htf3XviP",
       "https://getyourguide.tpm.li/BcWk9QKl",
+      "https://viator.tpm.li/YTemW7aC",
     ];
     expect(deadSeaTourCards.map(tour => affiliateConfig[tour.id]?.trackingUrl)).toEqual(expectedLinks);
     for (const [index, card] of cards.entries()) {
@@ -105,9 +106,10 @@ describe("Jerusalem independent day-trip planning guides", () => {
       expect(card).toHaveTextContent(tour.rating.toFixed(1));
       expect(card).not.toHaveTextContent("affiliate link");
       expect(card).not.toHaveTextContent("Sponsored link");
+      expect(card).not.toHaveTextContent("Jerusalem departure");
     }
     const allTourPhotos = cards.map(card => within(card).getByRole("img").getAttribute("src"));
-    expect(new Set(allTourPhotos).size).toBe(5);
+    expect(new Set(allTourPhotos).size).toBe(6);
     expect(allTourPhotos.every(photo => !stopCards.some(stop => within(stop).getByRole("img").getAttribute("src") === photo))).toBe(true);
     expect(container.querySelector("#journey-booking")).toBeNull();
     expect(screen.getAllByRole("note")).toHaveLength(6);
