@@ -47,6 +47,22 @@ describe("home mobile performance optimizations", () => {
     }
   });
 
+  it("uses optimized and clearly labeled AI destination illustrations only in the accommodation gallery", () => {
+    const home = read("src/routes/index.tsx");
+    const section = home.slice(home.indexOf("export const accommodationDestinationCards"), home.indexOf("export const services"));
+    for (const place of ["jerusalem", "tel-aviv-jaffa", "tiberias-galilee", "dead-sea", "haifa"]) {
+      for (const suffix of ["", "-tile"]) {
+        const relativePath = `public/images/home/accommodation-${place}-ai${suffix}.webp`;
+        expect(bytes(relativePath), relativePath).toBeGreaterThan(5000);
+        expect(bytes(relativePath), relativePath).toBeLessThan(110000);
+        expect(section, relativePath).toContain(`/images/home/accommodation-${place}-ai${suffix}.webp`);
+      }
+    }
+    expect(section.match(/AI-generated illustration/g)).toHaveLength(5);
+    expect(home).toContain("Destination illustrations generated with AI; not photographs");
+    expect(home).toContain('media="(min-width: 1280px)" srcSet={c.img.thumb}');
+  });
+
   it("provides a head preload for the exact LCP image variant, not every slide", () => {
     const page = read("src/routes/index.tsx");
     for (const key of ["lcpHeroMobile", "lcpHeroMedium", "lcpHeroLarge"]) {

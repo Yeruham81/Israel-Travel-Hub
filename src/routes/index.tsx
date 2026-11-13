@@ -3,9 +3,6 @@ import lcpHeroMobile from "@/assets/home/hero-jerusalem-sm-optimized.webp";
 import lcpHeroMedium from "@/assets/home/hero-jerusalem-medium.webp";
 import lcpHeroLarge from "@/assets/home/hero-jerusalem-large.webp";
 import jerusalem from "@/assets/home/jerusalem-old-city.webp";
-import telAvivNeveTzedek from "@/assets/tel-aviv/neve-tzedek.webp";
-import tiberiasSunrise from "@/assets/tiberias/sunrise.webp";
-import deadSeaLandscape from "@/assets/dead-sea/landscape.webp";
 import masadaCableCar from "@/assets/home/masada-cable-car.webp";
 import airportTransportPhoto from "@/assets/airport-transfers/airport.webp";
 import telAviv from "@/assets/home/tel-aviv-coast.webp";
@@ -90,11 +87,11 @@ const IMG = {
 } satisfies Record<string, Img>;
 
 export const accommodationDestinationCards: Card[] = [
-  { label: "Jerusalem", text: "Old City, city centre & boutique hotels", to: "/travel-blog/where-to-stay-in-jerusalem/", img: { src: "/images/attractions/jerusalem.webp", alt: "Jerusalem's Old City seen across the eastern hills" } },
-  { label: "Tel Aviv & Jaffa", text: "Beachfront, Jaffa & city hotels", to: "/travel-blog/where-to-stay-in-tel-aviv/", img: { src: telAvivNeveTzedek, alt: "Neve Tzedek historic neighbourhood in Tel Aviv" } },
-  { label: "Tiberias & Galilee", text: "Lakeside, luxury & family hotels", to: "/travel-blog/best-hotels-in-tiberias/", img: { src: tiberiasSunrise, alt: "Sunrise over Tiberias and the Sea of Galilee" } },
-  { label: "Dead Sea", text: "Spa retreats & beachfront resorts", to: "/travel-blog/best-dead-sea-hotels/", img: { src: deadSeaLandscape, alt: "Dead Sea desert landscape" } },
-  { label: "Haifa", text: "Carmel views, boutique & family hotels", to: "/travel-blog/best-hotels-in-haifa/", img: { src: "/images/attractions/haifa-coast.webp", alt: "Haifa and the Mediterranean coast" } },
+  { label: "Jerusalem", text: "Old City, city centre & boutique hotels", to: "/travel-blog/where-to-stay-in-jerusalem/", img: { src: "/images/home/accommodation-jerusalem-ai.webp", thumb: "/images/home/accommodation-jerusalem-ai-tile.webp", alt: "AI-generated illustration of Jerusalem's Old City walls and skyline" } },
+  { label: "Tel Aviv & Jaffa", text: "Beachfront, Jaffa & city hotels", to: "/travel-blog/where-to-stay-in-tel-aviv/", img: { src: "/images/home/accommodation-tel-aviv-jaffa-ai.webp", thumb: "/images/home/accommodation-tel-aviv-jaffa-ai-tile.webp", alt: "AI-generated illustration of Old Jaffa and the Tel Aviv coast" } },
+  { label: "Tiberias & Galilee", text: "Lakeside, luxury & family hotels", to: "/travel-blog/best-hotels-in-tiberias/", img: { src: "/images/home/accommodation-tiberias-galilee-ai.webp", thumb: "/images/home/accommodation-tiberias-galilee-ai-tile.webp", alt: "AI-generated illustration of the Tiberias waterfront beside the Sea of Galilee" } },
+  { label: "Dead Sea", text: "Spa retreats & beachfront resorts", to: "/travel-blog/best-dead-sea-hotels/", img: { src: "/images/home/accommodation-dead-sea-ai.webp", thumb: "/images/home/accommodation-dead-sea-ai-tile.webp", alt: "AI-generated illustration of Dead Sea resort hotels, salt shore and desert mountains" } },
+  { label: "Haifa", text: "Carmel views, boutique & family hotels", to: "/travel-blog/best-hotels-in-haifa/", img: { src: "/images/home/accommodation-haifa-ai.webp", thumb: "/images/home/accommodation-haifa-ai-tile.webp", alt: "AI-generated illustration of Haifa's Bahá'í Gardens and Mediterranean bay" } },
 ];
 
 export const services: Service[] = [
@@ -242,7 +239,8 @@ function Home() {
               </div>
             </header>
             {s.id === "accommodation" ? (
-              <ul
+              <div>
+                <ul
                 className="mt-6 grid min-w-0 grid-cols-1 gap-4 min-[480px]:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5"
                 data-testid={`service-layout-${s.id}`}
                 aria-label="Where to stay in Israel"
@@ -250,7 +248,9 @@ function Home() {
                 {s.cards.map((card) => (
                   <li key={card.label} className="min-w-0"><PhotoCard c={card} /></li>
                 ))}
-              </ul>
+                </ul>
+                <p className="mt-3 text-center text-xs text-muted-foreground">Destination illustrations generated with AI; not photographs of actual locations or hotels.</p>
+              </div>
             ) : (
               <div className="mt-6 grid min-w-0 grid-cols-1 gap-4 lg:grid-cols-2 lg:items-stretch" data-testid={`service-layout-${s.id}`}>
                 {s.feature && <img src={s.feature.src} alt={s.feature.alt} loading="lazy" decoding="async" width={1400} height={880} className="aspect-[16/10] h-full min-h-64 w-full min-w-0 rounded-xl object-cover lg:max-h-[410px]" />}
