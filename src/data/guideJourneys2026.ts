@@ -856,7 +856,7 @@ export const journeyDestinationGuides = {
           "paragraphs": [
             "For a relaxed day of floating, choose the free public beach at Ein Bokek in the southern hotel district. Tamar Regional Council provides showers, changing rooms, toilets, shade, chairs and umbrellas without an admission fee. The nearby promenade has drinking-water fountains, food and shops.",
             "Parking near Ein Bokek's central beach is regulated and paid, and the closest spaces can fill up on busy days. Float only while lifeguards are on duty; supervised beach hours are shorter in winter. Northern-shore beaches such as Kalia are closer to Jerusalem but charge admission, and optional facilities can add to the price. Check the exact beach in any organised tour itinerary.",
-            "Bring water, sun protection, swimwear, a towel and water shoes. Enter the water at a supervised bathing area, float gently and avoid getting the very salty water in your eyes. For more detail about beaches and facilities, see my Dead Sea visitor guide."
+            "Bring water, sun protection, swimwear and a towel. Float gently, keep the very salty water away from your eyes, and see my Dead Sea visitor guide for more beach and safety advice."
           ],
           "photo": { "src": einBokekShorePhoto, "alt": "Ein Bokek shoreline and the Dead Sea landscape" },
           "inlineLinks": [
@@ -884,10 +884,9 @@ export const journeyDestinationGuides = {
 
       ],
             "checklist": [
-        "Bring drinking water, sun protection and footwear suitable for hot ground and rocky access.",
-        "Leave extra time for the drive back; desert roads and access routes can be slower than expected.",
-        "If combining the beach with a national park, allow for the time spent getting between entrances.",
-        "Do not enter unsupervised water or cross a desert road flooded by rainfall."
+        "Pack a bag for wet swimwear and a change of clothes for your return to Jerusalem.",
+        "Wear sturdy walking shoes rather than beach sandals if you plan to explore Masada or Ein Gedi.",
+        "Have a payment card available for national-park admission and regulated parking."
       ],
       "faqs": [
         {
