@@ -1,8 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { SiteLink as Link } from "@/components/SiteLink";
 import { ArrowUpRight, BedDouble, CalendarDays, CarFront, Compass, Ship, TrainFront, type LucideIcon } from "lucide-react";
-import { AuthorCard } from "@/components/AuthorCard";
-import { Breadcrumbs } from "@/components/Guide";
+import { HubHeader } from "@/components/Guide";
 import { attractionHubCards, attractionHubPhotos, attractionHubRegions, attractionPlanningPaths, type AttractionHubCard } from "@/data/attractionsHub";
 import { CANONICAL_ORIGIN, jsonLd, pageMeta } from "@/lib/site";
 
@@ -77,23 +76,12 @@ function AttractionCard({ card }: { card: AttractionHubCard }) {
 function Attractions() {
   return (
     <main className="mx-auto max-w-6xl px-4 pb-16">
-      <div className="pt-6">
-        <Breadcrumbs items={[{ name: "Home", to: "/" }, { name: "Attractions", to: PATH }]} />
-      </div>
-
-      <header className="mt-7 grid items-center gap-7 md:grid-cols-[1.05fr_1fr] lg:gap-10">
-        <div>
-          <p className="eyebrow">Discover the places that make Israel memorable</p>
-          <h1 className="mt-3 text-4xl font-semibold leading-tight sm:text-5xl">Attractions & places to visit in Israel</h1>
-          <p className="mt-5 max-w-2xl text-lg leading-relaxed text-muted-foreground">
-            Explore Jerusalem’s historic quarters and lively markets, enjoy Tel Aviv’s beaches and culture,
-            or follow the Mediterranean coast to ancient ports and dramatic sea cliffs. Beyond the cities,
-            discover the Sea of Galilee, Masada, the Dead Sea and desert landscapes stretching to Eilat.
-          </p>
-        </div>
-        <img src={attractionHubPhotos.hero.src} alt={attractionHubPhotos.hero.alt} width={755} height={405} fetchPriority="high" decoding="async" className="aspect-[4/3] w-full rounded-3xl object-cover md:aspect-[5/4]" />
-      </header>
-      <AuthorCard />
+      <HubHeader
+        crumbs={[{ name: "Home", to: "/" }, { name: "Attractions", to: PATH }]}
+        eyebrow="Discover the places that make Israel memorable"
+        title="Attractions & places to visit in Israel"
+        intro="Explore Israel's historic cities, beaches and ancient sites, from Jerusalem and Tel Aviv to Masada, the Dead Sea and the Galilee. Find places worth visiting and tips for planning your route."
+      />
 
       <section id="browse-regions" aria-labelledby="browse-regions-heading" className="mt-8 scroll-mt-24 border-y py-4 sm:mt-10 sm:py-5">
         <h2 id="browse-regions-heading" className="text-lg font-semibold sm:text-xl">Explore by region</h2>
