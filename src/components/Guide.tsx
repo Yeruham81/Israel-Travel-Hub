@@ -9,6 +9,7 @@ import { carRentalAffiliateUrl } from "@/lib/car-rental-affiliate";
 import { publicSources, formatCheckDate, INFO_CHECK_DATE, type ProviderLink } from "@/data/registry";
 import { AuthorCard } from "@/components/AuthorCard";
 import { PageUpdated } from "@/components/PageUpdated";
+import { GuideHeroMedia } from "@/components/GuideHeroMedia";
 import { SourcesDisclosure } from "@/components/SourcesDisclosure";
 import { modeNote, relationshipLabel } from "@/lib/booking";
 import { recordOutboundClick, relFor } from "@/lib/outbound";
@@ -192,7 +193,7 @@ export function GuideHeader({ crumbs, eyebrow, title, intro, image, checkedAt = 
       <h1 className="guide-page-title mt-3 max-w-4xl">{title}</h1>
       <div className="mt-4 max-w-3xl text-lg leading-relaxed text-foreground">{intro}</div>
       <PageUpdated date={checkedAt} />
-      {image && <img src={image.src} alt={image.alt} width={1600} height={900} className="mt-8 aspect-[21/9] w-full rounded-2xl object-cover" />}
+      {image && <GuideHeroMedia src={image.src} alt={image.alt} />}
       <AuthorCard />
     </header>
   );
