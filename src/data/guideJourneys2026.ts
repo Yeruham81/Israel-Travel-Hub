@@ -716,8 +716,8 @@ export const journeyDestinationGuides = {
       "updatedAt": "2026-11-13",
       "title": "How to Get from Jerusalem to the Dead Sea: Bus, Taxi, Tours & Car",
       "description": "From Jerusalem to Ein Bokek, Masada and Ein Gedi: compare Egged 486/444 buses, private transfers, tours and rental cars, with return and beach tips.",
-      "intro": "Want to visit the Dead Sea from Jerusalem? Choose Ein Bokek for a beach day, Masada for sightseeing or Ein Gedi for hiking. The best transport depends on your destination, budget and return time.",
-      "answer": "For the cheapest option, take Egged bus 486 from Jerusalem Central Bus Station to a stop such as Ein Bokek, Masada or Ein Gedi. Bus 444 also serves the Dead Sea corridor but has seat-reservation rules. Allow around 1½–2 hours to Ein Bokek, depending on traffic and your stop. For Masada plus a beach, a tour or private car is often more practical. Always check your last return bus.",
+      "intro": "Planning a Dead Sea day trip from Jerusalem? Enjoy a swim at the free public beach in Ein Bokek, or combine the coast with Masada and Ein Gedi. Choose between public buses, guided tours, private transport and a rental car.",
+      "answer": "For a budget-friendly beach day, take Egged bus 486 from Jerusalem Central Bus Station to the free public beach in the Ein Bokek hotel district. Bus 444 also serves the area but has seat-reservation requirements. The journey to Ein Bokek takes roughly 1½–2 hours. For Masada, Ein Gedi and a beach in one day, choose a Jerusalem-departure tour, a private driver or a rental car.",
       "topics": [
         "transportation",
         "destinations",
@@ -731,7 +731,7 @@ export const journeyDestinationGuides = {
         },
         {
           "label": "Beach day",
-          "text": "Ein Bokek public beach and promenade"
+          "text": "Free public beach in the Ein Bokek hotel district"
         },
         {
           "label": "Multiple stops",
@@ -770,12 +770,37 @@ export const journeyDestinationGuides = {
       },
       "sections": [
         {
-          "id": "bus",
-          "title": "Bus from Jerusalem to the Dead Sea: 486 and 444",
+          "id": "beach",
+          "title": "A beach-only day at Ein Bokek",
           "paragraphs": [
-            "Egged 486 departs from Jerusalem Central Bus Station and serves the Dead Sea corridor, including Ein Gedi, Masada and the Ein Bokek hotel district. Bus 444 continues toward Eilat and also serves the area; Egged lists it among its seat-reservation routes.",
-            "Check the correct platform, the fare, your exact stop and the current timetable on Egged. The bus ride to Ein Bokek is usually about 1½–2 hours. A stop on Highway 90 may be a long walk from the beach or reserve entrance, especially in hot weather.",
-            "Friday, Saturday and holiday schedules can be much more limited than weekday services. A same-day trip only works if there is a suitable bus back to Jerusalem."
+            "If your main goal is to float in the Dead Sea, head to the free public beach at Ein Bokek, in the southern hotel district. The Tamar Regional Council maintains the central beach and provides showers, changing rooms, toilets, shade, chairs and umbrellas without an entrance fee. The nearby promenade has places to eat and buy supplies.",
+            "From Jerusalem you can use a direct Egged bus to the Ein Bokek hotel area, arrange a return taxi or private transfer, rent a car, or book a beach-focused day tour. Choose the public beach itself as your destination rather than a general Dead Sea map pin.",
+            "Parking and private hotel spa services are separate charges. My Dead Sea visitor guide covers the beaches and facilities in more detail."
+          ],
+          "inlineLinks": [
+            {
+              "text": "Dead Sea visitor guide",
+              "to": "/travel-blog/the-dead-sea/"
+            }
+          ],
+          "sourceIds": [
+            "m26-deadsea-ein-bokek-council"
+          ],
+          "externalLinks": [
+            {
+              "label": "Free public Ein Bokek beach — council facilities",
+              "href": "https://www.deadsea.co.il/attractions/ein-bokek-central-beach/?lang=en"
+            }
+          ],
+          "tip": "For the council-run free public beach, head to Ein Bokek Central Beach. Other hotel-operated stretches can charge for loungers or services."
+        },
+        {
+          "id": "bus",
+          "title": "Public bus from Jerusalem: Egged 486 and 444",
+          "paragraphs": [
+            "Egged bus 486 runs from Jerusalem Central Bus Station along the Dead Sea corridor, serving stops near Ein Gedi, Masada and the Ein Bokek hotel area. Bus 444 also runs via the Dead Sea on its way to Eilat; Egged lists it as a service requiring a seat reservation.",
+            "Check the bus stop closest to your chosen entrance or the free public beach at Ein Bokek, and confirm the departure time and fare on the current timetable. Attractions and beaches are spread along Highway 90, so the wrong stop can leave you with a long walk in the heat.",
+            "For a same-day return, check the last suitable Jerusalem-bound bus before leaving the city. Friday, Shabbat and holiday schedules may be very limited."
           ],
           "sourceIds": [
             "m26-egged",
@@ -783,41 +808,31 @@ export const journeyDestinationGuides = {
           ],
           "externalLinks": [
             {
-              "label": "Egged — current routes and tickets",
+              "label": "Egged — current bus routes and schedules",
               "href": "https://www.egged.co.il/en"
             },
             {
-              "label": "Egged — route 444 reservations",
-              "href": "https://www.egged.co.il/en/information-for-passengers/tickets-information"
-            },
-            {
-              "label": "National public transport planner",
+              "label": "Israel's official public transport journey planner",
               "href": "https://bus.gov.il/"
             }
           ],
-          "tip": "Check the last Jerusalem-bound bus from your actual stop before booking a beach day or Masada admission."
+          "tip": "Save the return bus time and exact boarding stop on your phone before you set off; the last service can be earlier than expected."
         },
         {
           "id": "tours",
           "title": "Organised Dead Sea tours from Jerusalem",
           "paragraphs": [
-            "A guided or organised tour can combine Masada with a Dead Sea beach without coordinating several buses. Check the departure city carefully: some tours advertised for the Dead Sea start in Tel Aviv, not Jerusalem.",
-            "Compare the meeting place, actual beach time, guide, entrance fees, Masada cable car, lunch and return arrangements. The Masada & Dead Sea tours catalogue is a starting point; the independent tour links further down this page lead to supplier listings, not live prices."
+            "An organised excursion is convenient if you want to visit Masada, explore Ein Gedi and enjoy the shore without arranging separate buses. The options below range from a beach-only trip to full-day combinations, with departures in Jerusalem.",
+            "Beach stops vary by operator: some tours visit a paid beach on the northern shore instead of the free public beach at Ein Bokek. Compare the actual stops and time at each site when choosing your itinerary."
           ],
-          "inlineLinks": [
-            {
-              "text": "Masada & Dead Sea tours catalogue",
-              "to": "/tours/masada-dead-sea/"
-            }
-          ],
-          "tip": "Choose a tour by the amount of time at the beach and what is included—not only by its total duration."
+          "tip": "For a beach-focused visit, choose a shorter bathing excursion. For Masada and Ein Gedi, allow a full day and start early in summer."
         },
         {
           "id": "private",
           "title": "Private taxi or driver from Jerusalem",
           "paragraphs": [
-            "A prearranged taxi or private driver provides hotel pickup and a flexible departure time. It is useful for families, luggage or a multi-stop outing; a one-way transfer to an Ein Bokek hotel is different from a round-trip sightseeing day.",
-            "Ask for a written total covering the pickup, exact stops, waiting time, return journey and any extras. Driver-only transport does not automatically include a licensed guide or admission tickets. You can request a tailored quote through my private driver service."
+            "A private taxi or driver can collect you from your Jerusalem hotel and take you directly to the free public beach in the Ein Bokek hotel area. It is particularly useful for families, small groups and travellers carrying beach equipment.",
+            "For a sightseeing day, arrange your exact stops at Masada, Ein Gedi and the beach, along with waiting time and the return to Jerusalem. A one-way transfer to an Ein Bokek hotel is a different service from a driver staying with you throughout the day. You can request a tailored quote through my private driver service."
           ],
           "inlineLinks": [
             {
@@ -825,15 +840,15 @@ export const journeyDestinationGuides = {
               "to": "/private-driver/"
             }
           ],
-          "tip": "If you want to return to Jerusalem on the same day, confirm whether the driver will wait or come back for you."
+          "tip": "Ask for a round-trip total that includes waiting at each stop if you do not want to coordinate a separate ride back."
         },
         {
           "id": "driving",
           "title": "Driving from Jerusalem or renting a car",
           "paragraphs": [
-            "For Ein Bokek and Masada, a common route follows Highway 1 east from Jerusalem and Highway 90 south along the Dead Sea. Use the exact beach, hotel or park entrance in your navigation rather than a general Dead Sea location.",
-            "Check your rental agreement, insurance and permitted roads. Parking can cost extra. Compare rental offers and conditions with DiscoverCars' Israel rental comparison (affiliate link).",
-            "Flash floods may close desert roads and hiking trails even when the weather is clear in Jerusalem. Never drive through floodwater or approach an unregulated shoreline with sinkhole risks."
+            "Driving lets you start early, visit more than one site and stop at the free public beach at Ein Bokek on your own schedule. The usual approach follows Highway 1 east from Jerusalem, then Highway 90 south. Navigate to the actual beach or park entrance.",
+            "If you need a vehicle for the day, compare rental offers and conditions with DiscoverCars' Israel rental comparison. Review insurance, permitted roads, pickup hours and parking before booking.",
+            "In the desert, heavy rain can cause sudden flash floods and road closures. Check the current weather warnings and road conditions before travelling."
           ],
           "inlineLinks": [
             {
@@ -847,92 +862,84 @@ export const journeyDestinationGuides = {
               "href": "https://ims.gov.il/en"
             }
           ],
-          "tip": "Check desert weather and route closures on the day of travel, especially after rain."
+          "tip": "Book a rental car with enough time for the Jerusalem pickup and return, not just the driving time to the Dead Sea."
         },
         {
           "id": "day-plan",
-          "title": "Practical tips for a Dead Sea day trip",
+          "title": "Planning a full day: Masada, Ein Gedi and the beach",
           "paragraphs": [
-            "For an easy first visit, go directly to the public beach at Ein Bokek. Tamar Regional Council lists free access, showers, changing rooms, toilets and shade. Hotel spas and parking are separate. Bring water, sunscreen, a hat, swimwear, a towel and water shoes.",
-            "If Masada is your main attraction, visit earlier in the day and leave separate time for the beach. Ein Gedi is a nature reserve rather than a bathing beach; check the exact open trails and entry arrangements after floods. Read my Dead Sea visitor guide for beaches and facilities.",
-            "Use only supervised beaches. Float gently rather than swimming or diving, and keep the salty water away from your eyes and mouth."
+            "Masada is an archaeological national park with a dramatic desert viewpoint and a cable car; Ein Gedi is a green oasis known for streams, waterfalls, desert wildlife and hiking. Both are close enough to the Dead Sea to add to a day trip, but each is a separate visit with its own entrance, opening hours and admission fee.",
+            "In summer, visit outdoor attractions early and allow extra time for crowds at the park entrances and cable car. You could start at Masada, visit Ein Gedi if your schedule allows, and finish at the free public beach in the Ein Bokek hotel district. If you are using buses, a single main attraction plus the beach is usually more comfortable.",
+            "Bring drinking water, a hat, sunscreen, a towel and water shoes. At the Dead Sea, enter only at supervised beaches, float gently and keep salty water away from your face."
           ],
           "links": [
             {
-              "label": "Plan Masada",
+              "label": "Masada visitor guide",
               "to": "/travel-blog/masada/"
             },
             {
-              "label": "Check Ein Gedi trails",
+              "label": "Ein Gedi Nature Reserve guide",
               "to": "/travel-blog/ein-gedi/"
-            },
-            {
-              "label": "Compare Dead Sea hotels",
-              "to": "/travel-blog/best-dead-sea-hotels/"
-            }
-          ],
-          "inlineLinks": [
-            {
-              "text": "Dead Sea visitor guide",
-              "to": "/travel-blog/the-dead-sea/"
             }
           ],
           "sourceIds": [
-            "m26-deadsea-ein-bokek-council",
-            "m26-inpa-ein-gedi-2026"
+            "inpa-masada",
+            "m26-inpa-ein-gedi-2026",
+            "m26-deadsea-ein-bokek-council"
           ],
           "externalLinks": [
             {
-              "label": "Official Ein Bokek beach facilities",
-              "href": "https://www.deadsea.co.il/attractions/ein-bokek-central-beach/?lang=en"
+              "label": "Masada National Park — opening hours and tickets",
+              "href": "https://en.parks.org.il/reserve-park/masada-national-park/"
             },
             {
-              "label": "Ein Gedi Nature Reserve trail updates",
+              "label": "Ein Gedi Nature Reserve — opening hours and tickets",
               "href": "https://en.parks.org.il/reserve-park/en-gedi-nature-reserve/"
             }
           ],
-          "tip": "For a bus-only day, choose either a relaxed beach visit or one major sightseeing stop rather than trying to fit in everything."
+          "tip": "When travelling in summer, leave the exposed walks for the morning and keep the hottest part of the day for the beach or shaded stops."
         }
       ],
       "checklist": [
-        "Choose the exact beach, hotel or park entrance—not just “Dead Sea.”",
-        "Check the outbound and last return bus, fare and any line 444 reservation.",
-        "Confirm return, waiting and ticket inclusions on tours and private rides.",
-        "Check desert weather and current national-park access.",
-        "Take water, sun protection, swimwear, a towel and suitable shoes."
+        "Choose the free public beach at Ein Bokek or the exact park entrance you plan to visit.",
+        "Check Egged routes, line 444 reservations and the final return bus if travelling independently.",
+        "For a tour, select an itinerary that matches your preferred beach and sightseeing stops.",
+        "For a private ride, confirm the waiting time and return to Jerusalem.",
+        "Check Masada and Ein Gedi opening hours, admission and summer weather.",
+        "Pack water, sun protection, suitable shoes, a swimsuit and a towel."
       ],
       "faqs": [
         {
-          "q": "What is the cheapest way to get from Jerusalem to the Dead Sea?",
-          "a": "Egged public buses 486 and 444 are generally the lowest-cost option. Verify the fare, departure, reservation rules and last return."
+          "q": "What is the cheapest way to reach the Dead Sea from Jerusalem?",
+          "a": "Egged buses 486 and 444 are usually the lowest-cost option. Check the departure that stops nearest the free public beach at Ein Bokek and plan the return before setting out."
         },
         {
-          "q": "Is there a direct bus from Jerusalem to Ein Bokek?",
-          "a": "Yes. Egged 486 serves Ein Bokek, and 444 also serves Dead Sea stops. Check the exact stop closest to your hotel or beach."
+          "q": "Is there a direct bus from Jerusalem to the free public beach at Ein Bokek?",
+          "a": "Yes. Egged 486 serves the Ein Bokek hotel district, and 444 serves Dead Sea stops too. Choose the stop closest to Ein Bokek Central Beach."
         },
         {
-          "q": "How long does it take to reach the Dead Sea from Jerusalem?",
-          "a": "The northern shore is closer. Allow about 1½–2 hours to Ein Bokek by bus or car, depending on the exact destination, traffic and service."
+          "q": "How long does it take to get from Jerusalem to the Dead Sea?",
+          "a": "The northern shore is closer to Jerusalem. Allow roughly 1½–2 hours to Ein Bokek by bus or car, depending on traffic and the exact stop."
         },
         {
           "q": "Can I visit the Dead Sea from Jerusalem in one day?",
-          "a": "Yes. Ein Bokek is a straightforward beach day. For a visit that includes Masada, a tour or private driver is often easier than arranging buses between stops."
+          "a": "Yes. A day at the free public beach at Ein Bokek is straightforward. Add Masada or Ein Gedi if you have enough time, ideally with a tour, private driver or car."
         },
         {
-          "q": "Is there a free beach at the Dead Sea?",
-          "a": "Yes. The public beach at Ein Bokek offers free access and facilities such as showers and changing rooms. Parking and hotel services may cost extra."
+          "q": "Do I need to pay to enter the public beach at Ein Bokek?",
+          "a": "No. Ein Bokek Central Beach, maintained by Tamar Regional Council, is free to enter. Public showers, changing rooms, chairs and umbrellas are available; parking and private hotel services may cost extra."
         },
         {
-          "q": "Can I travel from Jerusalem to the Dead Sea on Shabbat?",
-          "a": "Regular public buses generally stop or run with major restrictions around Shabbat and holidays. Check the actual date; a licensed taxi, private arrangement or rental car may be necessary."
+          "q": "Can I visit Masada and Ein Gedi on the same day as the Dead Sea?",
+          "a": "Yes, with an early start and a realistic schedule. The two attractions have separate opening hours and admission tickets, and queues can be longer in summer."
         },
         {
-          "q": "Is Ein Gedi a beach or a nature reserve?",
-          "a": "Ein Gedi is a nature reserve with hiking trails. If you want to float in the Dead Sea, choose a managed bathing beach such as Ein Bokek."
+          "q": "Can I travel to the Dead Sea on Shabbat?",
+          "a": "Regular Egged service is limited or unavailable around Shabbat and holidays. A private transfer, taxi, arranged tour or rental car is more practical on dates without a suitable bus."
         },
         {
-          "q": "What should I check when booking a Dead Sea tour?",
-          "a": "Confirm that it starts in Jerusalem, the actual stops, beach time, guide, admission tickets, meals and return point. Different tours include different services."
+          "q": "What is Ein Gedi Nature Reserve known for?",
+          "a": "Ein Gedi is a desert oasis of springs, waterfalls, greenery and wildlife, with walking trails through the Judean Desert. Check visitor hours and choose a walking route that suits your group."
         }
       ],
       "related": [
