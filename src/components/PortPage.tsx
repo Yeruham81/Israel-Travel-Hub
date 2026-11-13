@@ -49,7 +49,7 @@ export function PortPage({ id, filters: routeSearch, onFilterChange }: { id: Sho
       <GuideHeroLayout image={<GuideHeroMedia src={port.photo.src} alt={port.photo.alt} />}>
         <p className="eyebrow">Your ship. Your day ashore.</p>
         <h1 className="guide-page-title mt-3">{port.title}</h1>
-        <p className="mt-4 max-w-3xl text-lg leading-relaxed text-muted-foreground">{port.intro}</p>
+        <p data-guide-intro className="mt-4 max-w-3xl text-lg leading-relaxed text-muted-foreground">{port.intro}</p>
         <div className="mt-5"><a href="#request-quote" onClick={focusQuote} className="btn btn-primary">Request a private day trip</a></div>
         <PageUpdated date={SHORE_EXCURSION_CHECK_DATE} />
       </GuideHeroLayout>
