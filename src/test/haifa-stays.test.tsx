@@ -93,7 +93,7 @@ describe("Haifa accommodation: location and travel intent before booking", () =>
         const hotel = hotels.find((hotel) => hotel.id === id)!;
         const booking = providerLinks.find((link) => link.id === `hotel-${id}-expedia`)!;
         const card = container.querySelector(`#hotel-${id}`) as HTMLElement;
-        expect(card).toHaveTextContent("Sponsored link");
+        expect(card).not.toHaveTextContent("Sponsored link");
         const link = within(card).getByRole("link", { name: `${booking.ctaLabel} for ${hotel.name}` });
         expect(link).toHaveAttribute("href", hotelAffiliateUrl(booking, page.pageId, id));
         expect(link).toHaveAttribute("rel", "sponsored noopener noreferrer");
