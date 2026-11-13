@@ -78,7 +78,7 @@ function PrivateDriverContent({ transfer }: { transfer: ReturnType<typeof parseP
       <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">{privateDriverGuides.map((guide) => <Link key={guide.to} to={guide.to} className="flex h-full flex-col overflow-hidden rounded-xl border bg-card hover:border-primary focus-visible:outline-2 focus-visible:outline-primary" data-testid="driver-guide-card"><img src={guide.photo.src} alt={guide.photo.alt} width={360} height={240} loading="lazy" decoding="async" className="aspect-[16/9] w-full object-cover" /><div className="flex flex-1 flex-col p-5"><h3 className="text-2xl">{guide.title}</h3><p className="mt-2 flex-1 text-sm leading-relaxed text-muted-foreground">{guide.text}</p><span className="mt-4 text-sm font-semibold text-primary">Read the guide <span aria-hidden>→</span></span></div></Link>)}</div>
     </section>
     <RelatedLinks title="More ways to travel in Israel" items={[
-      { label: "Airport transfers", to: "/transfers/", note: "Private Ben Gurion pickups and destination starting rates" },
+      { label: "Airport transfers", to: "/airport-transfers/", note: "Private Ben Gurion pickups and destination starting rates" },
       { label: "Car rental", to: "/car-rental/", note: "For an independent driving itinerary" },
       { label: "Tours & day trips", to: "/tours/", note: "Explore organised visits and day-trip options" },
       { label: "Shore excursions", to: "/shore-excursions/", note: "Plan around a Haifa or Ashdod port call" },
