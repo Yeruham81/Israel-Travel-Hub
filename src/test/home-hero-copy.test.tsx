@@ -3,7 +3,7 @@ import { createMemoryHistory, createRouter, RouterContextProvider } from "@tanst
 import { cleanup, render, screen, within } from "@testing-library/react";
 import { afterEach, describe, expect, it } from "vitest";
 import { HomeHero } from "@/components/HomeHero";
-import { Route as HomeRoute } from "@/routes/index";
+import { Route as HomeRoute, services, homeGuideCards } from "@/routes/index";
 import { routeTree } from "@/routeTree.gen";
 
 afterEach(cleanup);
@@ -104,6 +104,8 @@ describe("homepage marketing copy and service sections", () => {
     ]);
     const transferHeroPhoto = transferSection.querySelector('[data-testid="service-layout-transfers"] > img');
     expect(transferHeroPhoto).toHaveClass("aspect-[16/9]", "lg:h-full");
+    expect(transferHeroPhoto).toHaveAttribute("src", services.find(s => s.id === "transfers")?.feature?.src);
+    expect(transferHeroPhoto).toHaveAttribute("alt", expect.stringContaining("BEN GURION AIRPORT"));
 
     // Homepage overview buttons and guide card prompts have no trailing arrows.
     for (const label of [
@@ -261,6 +263,8 @@ describe("homepage marketing copy and service sections", () => {
     expect(screen.queryByRole("heading", { name: "Popular Destinations" })).not.toBeInTheDocument();
 
     const guidesSection = document.getElementById("guides")!;
+    expect(homeGuideCards.first.find(guide => guide.id === "uber")?.photo?.src).toBe("/images/home/uber-in-israel-phone-question.webp");
+    expect(within(guidesSection).getByRole("img", { name: /Phone displaying UBER IN ISRAEL/ })).toHaveAttribute("src", "/images/home/uber-in-israel-phone-question.webp");
     const guideButton = within(guidesSection).getByRole("link", { name: /Browse all guides/i });
     expect(guideButton).toHaveAttribute("href", "/travel-blog/");
     expect(guidesSection.lastElementChild).toContainElement(guideButton);
