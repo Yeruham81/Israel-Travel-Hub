@@ -8,14 +8,26 @@ import { filterTours, isOwnerTour, offersForTour, placeLabel, toursForCategory, 
 import { recordOutboundClick, relFor } from "@/lib/outbound";
 import { PriceDisplay } from "@/components/CurrencyRates";
 
-export function OwnerTourSection({ tours }: { tours: TourProduct[] }) {
+export function OwnerTourSection({ tours, compact = false }: { tours: TourProduct[]; compact?: boolean }) {
   if (!tours.length) return null;
   return <section id="my-private-days" aria-labelledby="my-private-days-h" data-section="moshe-private-tours" className="mt-10 scroll-mt-24">
     <p className="text-xs font-bold uppercase tracking-widest text-primary">Personally arranged with Moshe Barak</p>
     <h2 id="my-private-days-h" className="mt-2 text-3xl font-semibold">My private day trips</h2>
     <p className="mt-3 max-w-3xl text-sm leading-relaxed text-muted-foreground">Choose a private car-and-driver itinerary, then send me your date, pickup city and party details for a tailored quote. Licensed guiding can be requested separately.</p>
-    <ul className="mt-5 grid gap-5 sm:grid-cols-2" aria-label="My private day trips">
-      {tours.map(tour => <li key={tour.id} id={tour.id} data-product-id={tour.id} data-operator-id="moshe-barak" data-testid="owner-tour-card" className="flex min-w-0 scroll-mt-24 flex-col overflow-hidden rounded-2xl border bg-card">
+    <ul className={compact ? "mt-4 grid gap-3" : "mt-5 grid gap-5 sm:grid-cols-2"} aria-label="My private day trips">
+      {tours.map(tour => compact ? <li key={tour.id} id={tour.id} data-product-id={tour.id} data-operator-id="moshe-barak" data-testid="owner-tour-card" className="flex min-w-0 gap-3 rounded-xl border bg-card p-3 sm:gap-4">
+        <img src={tourPhotos[tour.id]!.src} alt={tourPhotos[tour.id]!.alt} width={140} height={180} loading="lazy" decoding="async" className="h-40 w-[96px] shrink-0 rounded-lg object-cover sm:h-44 sm:w-[124px]" />
+        <div className="flex min-w-0 flex-1 flex-col">
+          <span className="text-xs font-semibold text-primary">Personally arranged with Moshe Barak</span>
+          <h3 className="mt-1.5 text-base font-semibold leading-snug">{tour.title}</h3>
+          <p className="mt-1 text-sm leading-relaxed text-muted-foreground">{tour.summary}</p>
+          <p className="mt-2 text-xs text-muted-foreground">{tour.duration} · Private car &amp; driver · Guiding separate</p>
+          <div className="mt-auto flex flex-wrap items-center justify-between gap-2 pt-3">
+            <span className="text-xs font-medium">Personal quote</span>
+            <Link to="/private-driver/" search={{ tour: tour.id }} hash="request-quote" className="inline-flex min-h-9 items-center rounded-lg bg-primary px-3 py-2 text-xs font-semibold text-primary-foreground">Request a quote</Link>
+          </div>
+        </div>
+      </li> : <li key={tour.id} id={tour.id} data-product-id={tour.id} data-operator-id="moshe-barak" data-testid="owner-tour-card" className="flex min-w-0 scroll-mt-24 flex-col overflow-hidden rounded-2xl border bg-card">
         <img src={tourPhotos[tour.id]!.src} alt={tourPhotos[tour.id]!.alt} width={720} height={480} loading="lazy" decoding="async" className="aspect-[16/9] w-full object-cover" />
         <article className="flex flex-1 flex-col p-4">
           <h3 className="text-xl font-semibold leading-snug text-foreground">{tour.title}</h3>
@@ -112,7 +124,7 @@ export function TourCatalog({ categoryId, filters, onChange }: { categoryId: Tou
         <ul aria-label="External tours" className={categoryId === "jerusalem" ? "mt-5 grid gap-3 md:grid-cols-2" : "mt-6 grid gap-5 sm:grid-cols-2"}>{external.map(tour => <ExternalTourCard key={tour.id} tour={tour} pageId={`tours-${categoryId}`} compact={categoryId === "jerusalem"} />)}</ul>
         <p className="mt-5 text-xs leading-relaxed text-muted-foreground">External tours have their own prices and terms. Choose the correct date and departure option on the booking site, and confirm guiding, admissions, meeting and return arrangements. Any reference starting prices shown here are approximate listing snapshots, not confirmed quotes.</p>
       </section>}
-      {categoryId === "jerusalem" && <OwnerTourSection tours={owner} />}
+      {categoryId === "jerusalem" && <OwnerTourSection tours={owner} compact />}
     </>}
   </div>;
 }
