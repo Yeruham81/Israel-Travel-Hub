@@ -65,7 +65,7 @@ export function ShoreServiceCatalog({ portId, filters, onFilterChange, itinerary
               <div className="col-span-2"><dt className="inline font-medium">Includes: </dt><dd className="inline text-muted-foreground">{service.includesLabel}</dd></div>
             </dl>
             <ul aria-label="Destinations" className="mt-3 flex flex-wrap gap-x-3 gap-y-1">{service.destinationIds.map((id) => <li key={id}><a href={shoreServiceHref(portId, { ...filters, destination: id })} onClick={(event) => filter(event, { ...filters, destination: id })} className="text-xs text-primary underline underline-offset-2">{shoreDestinations.find((destination) => destination.id === id)!.label}</a></li>)}</ul>
-            <p className="mt-3 text-xs text-muted-foreground">Operated by {service.operator?.name || provider.providerName}{service.partner && ` · Book on ${service.partner.name}`}{provider.isAffiliate && " · Affiliate link"}</p>
+            <p className="mt-3 text-xs text-muted-foreground">Operated by {service.operator?.name || provider.providerName}{service.partner && ` · Book on ${service.partner.name}`}</p>
             <div className="mt-auto pt-4">
               <div className="border-t pt-4">
                 {itinerary ? <><PriceDisplay amount={itinerary.price.amount} /><p className="mt-2 text-xs text-muted-foreground">Per vehicle · up to 4 · transport only</p></>
@@ -100,7 +100,7 @@ export function ShoreServiceCatalog({ portId, filters, onFilterChange, itinerary
                     <p className="mt-3 flex items-start gap-2 text-sm"><Clock3 className="mt-0.5 h-4 w-4 shrink-0 text-primary" aria-hidden />{service.duration}</p>
                     <p className="mt-3 flex items-start gap-2 text-xs text-muted-foreground"><MapPin className="mt-0.5 h-4 w-4 shrink-0 text-primary" aria-hidden />{port.name} Port · pickup &amp; return</p>
                     <p className="mt-3 text-sm">Operated by {service.operator?.name || provider.providerName}</p>
-                    <p className="mt-1 text-xs text-muted-foreground">Booking platform: {service.partner?.name || provider.providerName}{provider.isAffiliate && " · Sponsored link"}</p>
+                    <p className="mt-1 text-xs text-muted-foreground">Booking platform: {service.partner?.name || provider.providerName}</p>
                     <div className="mt-auto pt-5">
                       <div className="border-t pt-4">
                         {service.listedPrice ? <>
