@@ -97,9 +97,6 @@ export function JerusalemItineraryTourOptions() {
           </a>;
         })}
       </div>
-      <p className="mt-3 text-xs leading-relaxed text-muted-foreground">
-        Affiliate links: I may earn a commission if you book. Starting prices, ratings and review counts are indicative snapshots, not live quotes. Check availability, current prices, inclusions, entry requirements and cancellation terms on the provider's site for your date.
-      </p>
     </div>
   </details>;
 }
