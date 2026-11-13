@@ -599,10 +599,10 @@ export const shoreServices: ShoreServiceRecord[] = [
 
 /** Only these four airport destinations have individual transfer guides. */
 export const airportTransferRoutes = [
-  { id: "jerusalem", path: "/travel-blog/ben-gurion-airport-to-jerusalem/", sourceId: "owner-route-guide", driveTime: "45–60+ minutes" },
-  { id: "tel-aviv", path: "/travel-blog/ben-gurion-airport-to-tel-aviv/", sourceId: "owner-airport-tel-aviv", driveTime: "20–40+ minutes" },
-  { id: "haifa", path: "/travel-blog/ben-gurion-airport-to-haifa/", sourceId: "owner-airport-haifa", driveTime: "75–110+ minutes" },
-  { id: "dead-sea", path: "/travel-blog/ben-gurion-airport-to-ein-bokek/", sourceId: "owner-airport-ein-bokek", driveTime: "1 hr 45 min–2 hr 30 min+" },
+  { id: "jerusalem", path: "/airport-transfers/ben-gurion-airport-to-jerusalem/", sourceId: "owner-route-guide", driveTime: "45–60+ minutes" },
+  { id: "tel-aviv", path: "/airport-transfers/ben-gurion-airport-to-tel-aviv/", sourceId: "owner-airport-tel-aviv", driveTime: "20–40+ minutes" },
+  { id: "haifa", path: "/airport-transfers/ben-gurion-airport-to-haifa/", sourceId: "owner-airport-haifa", driveTime: "75–110+ minutes" },
+  { id: "dead-sea", path: "/airport-transfers/ben-gurion-airport-to-ein-bokek/", sourceId: "owner-airport-ein-bokek", driveTime: "1 hr 45 min–2 hr 30 min+" },
 ] as const;
 export type AirportTransferRouteId = typeof airportTransferRoutes[number]["id"];
 
@@ -954,7 +954,7 @@ export const sources: SourceReference[] = [
     id: "owner-route-guide",
     title: "Ben Gurion Airport to Jerusalem (existing guide)",
     publisher: "Israel-Taxi.com",
-    url: `${OWNER_BASE}/travel-blog/ben-gurion-airport-to-jerusalem/`,
+    url: `${OWNER_BASE}/airport-transfers/ben-gurion-airport-to-jerusalem/`,
     checkedAt: AIRPORT_TRANSFER_CHECK_DATE,
     note: "Moshe Barak's original Jerusalem guide gives local planning context and an approximate 45–60+ minute drive after pickup. Airport formalities are additional; the final Jerusalem address and road traffic can extend the journey. The estimate is not a live traffic forecast.",
   },
@@ -1716,7 +1716,7 @@ export const hotelsForArea = (areaId: string, cityId?: HotelRecommendation["city
 
 export const tlvToJerusalem: RouteRecord = {
   id: "tlv-jerusalem",
-  path: "/travel-blog/ben-gurion-airport-to-jerusalem/",
+  path: "/airport-transfers/ben-gurion-airport-to-jerusalem/",
   origin: { code: "TLV", name: "Ben Gurion Airport" },
   destination: { name: "Jerusalem" },
   status: "published",
@@ -1753,7 +1753,7 @@ export const offers: Offer[] = [
     },
     maxPassengersKnown: 4,
     ctaLabel: "Request a quote",
-    url: "/travel-blog/ben-gurion-airport-to-jerusalem/#request-quote",
+    url: "/airport-transfers/ben-gurion-airport-to-jerusalem/#request-quote",
     isAffiliate: false,
     isInformational: false,
     confirmOnOffer: commonConfirm,
@@ -2003,7 +2003,7 @@ export const providerLinks: ProviderLink[] = [
   {
     id: "tlv-ta-moshe", pageIds: ["tlv-telaviv"], ...moshe, mode: "provider_inquiry",
     title: "Private pre-booked transfer", summary: "Local driver business. Ask for a quote for your Tel Aviv or Jaffa address, party size and arrival time.",
-    ctaLabel: "Request a quote", url: "/travel-blog/ben-gurion-airport-to-tel-aviv/#request-quote", isAffiliate: false,
+    ctaLabel: "Request a quote", url: "/airport-transfers/ben-gurion-airport-to-tel-aviv/#request-quote", isAffiliate: false,
     reentryNote: "Your details are not passed on. Include flight time, passengers, luggage and address in your request.",
     confirm: ["Final price and any extra charges", "Vehicle size", "Meeting point and waiting time", "Child seats"], sourceId: "moshe-airport-transfers",
   },
