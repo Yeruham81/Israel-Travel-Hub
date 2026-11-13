@@ -593,7 +593,7 @@ export const cityStayGuides: Record<CityStayGuide["id"], CityStayGuide> = {
     ],
     sourceIds: ["owner-stay-jerusalem"],
     related: [
-      { label: "Ben Gurion Airport to Jerusalem", to: "/travel-blog/ben-gurion-airport-to-jerusalem/", note: "Private pickup and Old City hotel access" },
+      { label: "Ben Gurion Airport to Jerusalem", to: "/airport-transfers/ben-gurion-airport-to-jerusalem/", note: "Private pickup and Old City hotel access" },
       { label: "Airport arrivals on Shabbat", to: "/travel-blog/from-ben-gurion-airport-on-shabbat/" },
       { label: "Masada visit & tickets", to: "/travel-blog/masada/" },
       { label: "All accommodation", to: "/accommodation/" },
@@ -635,7 +635,7 @@ export const cityStayGuides: Record<CityStayGuide["id"], CityStayGuide> = {
     ],
     sourceIds: ["owner-stay-telaviv"],
     related: [
-      { label: "Ben Gurion Airport to Tel Aviv", to: "/travel-blog/ben-gurion-airport-to-tel-aviv/" },
+      { label: "Ben Gurion Airport to Tel Aviv", to: "/airport-transfers/ben-gurion-airport-to-tel-aviv/" },
       { label: "Getting around Tel Aviv", to: "/travel-blog/getting-around-tel-aviv/" },
       { label: "Car rental in Israel", to: "/car-rental/" },
       { label: "All accommodation", to: "/accommodation/" },
@@ -806,7 +806,7 @@ export const deadSeaStayGuide: HotelStayDestination = {
   sourceIds: ["owner-hotels-deadsea", "ds-nevo-spa", "ds-noga-spa", "ds-herods-spa", "ds-ein-gedi-spa"],
   related: [
     { label: "Masada: plan your visit", to: "/travel-blog/masada/", note: "Tickets, cable car and practical visit information" },
-    { label: "Airport transfer to Ein Bokek", to: "/travel-blog/ben-gurion-airport-to-ein-bokek/", note: "Arrange your arrival from Ben Gurion Airport" },
+    { label: "Airport transfer to Ein Bokek", to: "/airport-transfers/ben-gurion-airport-to-ein-bokek/", note: "Arrange your arrival from Ben Gurion Airport" },
     { label: "Private driver", to: "/private-driver/", note: "Plan hotel transfers and multi-stop days" },
     { label: "Car rental in Israel", to: "/car-rental/" },
     { label: "All accommodation", to: "/accommodation/" },
@@ -863,7 +863,7 @@ export const tiberiasStayGuide: HotelStayDestination = {
   sourceIds: ["owner-hotels-tiberias"],
   related: [
     { label: "Tours & day trips", to: "/tours/", note: "Plan outings around the Galilee" },
-    { label: "Airport transfers", to: "/transfers/", note: "Arrange your arrival from Ben Gurion Airport" },
+    { label: "Airport transfers", to: "/airport-transfers/", note: "Arrange your arrival from Ben Gurion Airport" },
     { label: "Private driver", to: "/private-driver/", note: "Plan hotel transfers and journeys around the Galilee" },
     { label: "Car rental in Israel", to: "/car-rental/" },
     { label: "All accommodation", to: "/accommodation/" },
@@ -1007,7 +1007,7 @@ export const haifaStayGuide: HotelStayDestination = {
   sourceIds: ["owner-hotels-haifa", "haifa-botanica-facilities", "haifa-dan-carmel-rooms"],
   related: [
     { label: "Shore excursions from Haifa Port", to: "/haifa-shore-excursions/", note: "Plan the day around your ship's schedule" },
-    { label: "Airport transfer to Haifa", to: "/travel-blog/ben-gurion-airport-to-haifa/", note: "Arrange your arrival from Ben Gurion Airport" },
+    { label: "Airport transfer to Haifa", to: "/airport-transfers/ben-gurion-airport-to-haifa/", note: "Arrange your arrival from Ben Gurion Airport" },
     { label: "Private driver", to: "/private-driver/", note: "Plan hotel transfers and intercity journeys" },
     { label: "Tours & day trips", to: "/tours/" },
     { label: "Car rental in Israel", to: "/car-rental/" },
