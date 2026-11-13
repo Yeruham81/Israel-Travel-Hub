@@ -1,4 +1,3 @@
-import { carRentalAffiliateUrl } from "@/lib/car-rental-affiliate";
 import { QueryClient } from "@tanstack/react-query";
 import { createMemoryHistory, createRouter, RouterContextProvider } from "@tanstack/react-router";
 import { afterEach, describe, expect, it } from "vitest";
