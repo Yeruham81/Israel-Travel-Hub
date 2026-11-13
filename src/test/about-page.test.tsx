@@ -44,7 +44,7 @@ describe("one personal About Moshe Barak page", () => {
     expect(head!.links).toContainEqual({ rel: "canonical", href: expect.stringMatching(/\/about-moshe-barak\/$/) });
   });
 
-  it("uses the homepage carousel with six-second rotation and reader controls", async () => {
+  it("uses the shared six-second Tripadvisor carousel with dot-only navigation", async () => {
     const router = await aboutRouter();
     vi.useFakeTimers();
     renderAbout(router);
@@ -55,13 +55,15 @@ describe("one personal About Moshe Barak page", () => {
     act(() => vi.advanceTimersByTime(6000));
     expect(cards).toHaveTextContent(tripadvisorReviews[3]!.excerpt);
     expect(cards).not.toHaveTextContent(tripadvisorReviews[0]!.excerpt);
-    fireEvent.click(within(carousel).getByRole("button", { name: "Pause Tripadvisor reviews" }));
+    const dots = within(carousel).getByRole("group", { name: "Choose a Tripadvisor review" });
+    expect(within(dots).getAllByRole("button")).toHaveLength(6);
+    expect(within(carousel).queryByRole("button", { name: "Pause Tripadvisor reviews" })).not.toBeInTheDocument();
+    fireEvent.click(within(dots).getByRole("button", { name: "Show Tripadvisor review from Marc" }));
+    expect(cards).toHaveTextContent(tripadvisorReviews[4]!.excerpt);
     const paused = cards.textContent;
     act(() => vi.advanceTimersByTime(18000));
     expect(cards.textContent).toBe(paused);
-    fireEvent.click(within(carousel).getByRole("button", { name: "Next Tripadvisor reviews" }));
-    expect(cards).toHaveTextContent(tripadvisorReviews[4]!.excerpt);
-    expect(screen.getByRole("link", { name: "Explore all my Tripadvisor reviews" })).toHaveAttribute("href", tripadvisorProfileUrl);
+    expect(screen.getByRole("link", { name: "Read all my Tripadvisor reviews" })).toHaveAttribute("href", tripadvisorProfileUrl);
   });
 
   it("removes the retired route without redirecting old addresses", async () => {
