@@ -21,7 +21,7 @@ export type DeadSeaTourCard = {
   reviewCount: number;
   checkedAt: string;
   sourceUrl: string;
-  photoId: "beach-mud" | "masada-palace" | "ein-gedi" | "salt-shore" | "sunrise";
+  photoId: "beach-mud" | "masada-palace" | "ein-gedi" | "salt-shore" | "sunrise" | "masada-ruins";
 };
 
 export const deadSeaTourCards: DeadSeaTourCard[] = [
@@ -89,5 +89,18 @@ export const deadSeaTourCards: DeadSeaTourCard[] = [
     checkedAt: "2026-11-13",
     sourceUrl: "https://www.getyourguide.com/jerusalem-l97/from-jerusalem-masada-at-sunrise-ein-gedi-dead-sea-tour-t23458/",
     photoId: "sunrise",
+  },
+  {
+    id: "jslm-deadsea-qumran-viator",
+    provider: "Viator",
+    title: "Masada, Qumran & Dead Sea",
+    subtitle: "Dead Sea Scrolls site, mountain fortress and beach",
+    duration: "8 hrs",
+    fromUsd: 110,
+    rating: 3.7,
+    reviewCount: 11,
+    checkedAt: "2026-11-13",
+    sourceUrl: "https://www.viator.com/tours/Jerusalem/Tour-of-Masada-Dead-Sea-From-Jerusalem/d921-6803P3",
+    photoId: "masada-ruins",
   },
 ];
