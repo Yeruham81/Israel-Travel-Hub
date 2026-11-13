@@ -377,7 +377,7 @@ export const taxiGuideCluster: Record<"taxis" | "taxiFares" | "airportTaxis", Tr
     services: [
       { label: "Compare pre-booked airport transfers", to: "/transfers/", note: "Choose a planned airport pickup with a confirmed provider price and meeting point instead of an on-arrival metered taxi." },
       { label: "Request a private driver quote", to: "/private-driver/", note: "Arrange a longer intercity journey, multi-stop route or group vehicle to suit your itinerary." },
-      { label: "Compare car rentals in Israel", to: "/car-rental/", note: "For a multi-day trip, compare rental offers with DiscoverCars. This affiliate link opens the booking partner's website." },
+      { label: "Compare car rentals in Israel", to: "/car-rental/", note: "For a multi-day itinerary with stops beyond the main cities, compare rental options and choose a pickup location that suits your route." },
       { label: "Compare trains, buses and taxis around Israel", to: travelGuidePaths.israel, note: "Find less expensive public-transport options and decide when a taxi is worth the extra cost." },
     ],
   },
