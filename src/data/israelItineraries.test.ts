@@ -194,7 +194,7 @@ describe("migrated Israel itineraries", () => {
 
   it("links natural phrases in the three-day text instead of showing a link tray after every day", () => {
     const guide = itineraries["3"];
-    expect(guide.dayInlineLinks).toHaveLength(9);
+    expect(guide.dayInlineLinks).toHaveLength(14);
     expect(guide.logisticsInlineLinks).toHaveLength(4);
     const router = createRouter({ routeTree, context: { queryClient: new QueryClient() }, trailingSlash: "always" });
     for (const item of guide.dayInlineLinks ?? []) {
@@ -207,6 +207,79 @@ describe("migrated Israel itineraries", () => {
       expect(guide.logistics[item.index]?.text).toContain(item.phrase);
       expect(router.matchRoutes(item.to as string).at(-1)?.routeId, item.to as string).not.toBe(rootRouteId);
     }
+  });
+
+  it("turns the three-day guide into a travel-ready plan without changing longer itineraries", () => {
+    const guide = itineraries["3"];
+    expect(guide.hotelBases).toContain("nights 1 and 2");
+    expect(guide.hotelBases).toContain("A Tel Aviv night after Day 3");
+    expect(guide.daySequences?.map(day => day.day)).toEqual([1, 2, 3]);
+    for (const day of guide.daySequences ?? []) {
+      expect(day.steps).toHaveLength(4);
+      for (const step of day.steps) {
+        expect(step.stop.length).toBeGreaterThan(12);
+        expect(step.time.length).toBeGreaterThan(5);
+      }
+    }
+    expect(guide.daySequences?.[0]?.steps.some(step => /Israel Museum/.test(step.stop) && step.optional)).toBe(true);
+    expect(guide.daySequences?.[1]?.steps.some(step => /Ein Bokek/.test(step.stop))).toBe(true);
+    expect(guide.daySequences?.[2]?.steps.some(step => /Old Jaffa/.test(step.stop))).toBe(true);
+    expect(guide.overviewRows?.every(row => row.travel)).toBe(true);
+    expect(guide.day3Options?.map(option => option.heading)).toEqual([
+      "Flying home on Day 3?", "Staying another night?",
+    ]);
+    expect(guide.daysPlan[2]?.practical).toMatch(/luggage/i);
+    expect(guide.daysPlan[2]?.morning).toMatch(/no trains run/i);
+    for (const id of ["5", "7", "10"] as const) {
+      expect(itineraries[id].daySequences).toBeUndefined();
+      expect(itineraries[id].day3Options).toBeUndefined();
+      expect(itineraries[id].dayOfficialLinks).toBeUndefined();
+      expect(itineraries[id].beforeYouGoOfficialLinks).toBeUndefined();
+    }
+    const expectedLinks = [
+      "/travel-blog/old-city-jerusalem/",
+      "/travel-blog/shopping-in-jerusalem/",
+      "/travel-blog/masada/",
+      "/travel-blog/the-dead-sea/",
+      "/travel-blog/dead-sea-attractions/",
+      "/travel-blog/ein-gedi/",
+      "/travel-blog/jaffa/",
+      "/travel-blog/beaches-in-tel-aviv/",
+      "/travel-blog/museums-in-tel-aviv/",
+    ];
+    const internalLinks = new Set<string>(guide.dayInlineLinks?.map(link => link.to as string) ?? []);
+    const router = createRouter({ routeTree, context: { queryClient: new QueryClient() }, trailingSlash: "always" });
+    for (const link of expectedLinks) {
+      expect(internalLinks.has(link), link).toBe(true);
+      expect(router.matchRoutes(link).at(-1)?.routeId, link).not.toBe(rootRouteId);
+    }
+    const seenLinkTargets = new Set<string>();
+    for (const link of guide.dayInlineLinks ?? []) {
+      const key = `${link.day}|${link.field}|${link.phrase}`;
+      expect(seenLinkTargets.has(key), key).toBe(false);
+      seenLinkTargets.add(key);
+    }
+    expect(guide.dayOfficialLinks?.map(link => new URL(link.href).host)).toEqual([
+      "en.parks.org.il", "www.rail.co.il",
+    ]);
+    for (const link of guide.dayOfficialLinks ?? []) {
+      expect(guide.daysPlan[link.day - 1]?.[link.field]).toContain(link.phrase);
+    }
+    for (const link of guide.beforeYouGoOfficialLinks ?? []) {
+      expect(guide.beforeYouGo?.[link.index]?.text).toContain(link.phrase);
+      expect(link.href).toMatch(/^https:\/\//);
+    }
+
+    const view = file("src/components/IsraelItineraryPage.tsx");
+    expect(view).toContain("day-${index + 1}-stop-order");
+    expect(view).toContain("Suggested stop order");
+    expect(view).toContain('data-testid="departure-scenarios"');
+    expect(view).toContain("Getting around");
+    expect(view).toContain("dayTextLinks(g, index + 1");
+    expect(view).toContain("beforeBookingLinks(g, index)");
+    expect(view).toContain('rel="noopener noreferrer"');
+    expect(view).toContain("g.daySequences?.find");
+    expect(view).not.toContain("<RouteMap");
   });
 
   it("integrates pre-booking checks with transport tips after the itinerary and keeps distinct Old City photos", () => {
@@ -235,7 +308,7 @@ describe("migrated Israel itineraries", () => {
     expect(view.indexOf("Before you book")).toBeLessThan(view.indexOf('id="alternatives"'));
     expect(view.indexOf('id="alternatives"')).toBeLessThan(view.indexOf('id="other-durations"'));
     expect(view.indexOf("Before you book")).toBeLessThan(view.indexOf("<HomeContactForm"));
-    expect(view).toContain("g.beforeYouGo.map(tip =>");
+    expect(view).toContain("g.beforeYouGo.map((tip, index) =>");
     expect(view).toContain("g.logistics.map((tip, index) =>");
   });
 
