@@ -964,7 +964,7 @@ export const sources: SourceReference[] = [
     publisher: "Israel-Taxi.com",
     url: `${OWNER_BASE}/travel-blog/where-to-stay-in-jerusalem/`,
     checkedAt: JERUSALEM_STAY_REVIEW_DATE,
-    note: "Publisher's original six-area Jerusalem guide, used for neighborhood descriptions, practical advice, selected accommodation and existing Expedia affiliate links. Property identity and style also checked against hotel sources; live rates and availability are not displayed.",
+    note: "Publisher's original six-area Jerusalem guide, used for neighborhood descriptions, practical advice, selected accommodation and existing Expedia booking links. Property identity and style also checked against hotel sources; live rates and availability are not displayed.",
   },
   {
     id: "owner-stay-telaviv",
@@ -972,7 +972,7 @@ export const sources: SourceReference[] = [
     publisher: "Israel-Taxi.com",
     url: `${OWNER_BASE}/travel-blog/where-to-stay-in-tel-aviv/`,
     checkedAt: TELAVIV_STAY_REVIEW_DATE,
-    note: "Editorial basis for the eight neighborhood guides and selected stays. Existing publisher-owned Expedia affiliate links and neighborhood photographs are reused from this guide; hotel identity and accommodation style were cross-checked with primary property sources. No live prices or availability are supplied.",
+    note: "Editorial basis for the eight neighborhood guides and selected stays. Existing Expedia booking links and neighborhood photographs are reused from this guide; hotel identity and accommodation style were cross-checked with primary property sources. No live prices or availability are supplied.",
   },
   {
     id: "owner-hotels-tiberias",
