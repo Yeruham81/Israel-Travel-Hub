@@ -130,6 +130,7 @@
   /* Split guide covers leave the headline most of the horizontal space. */
   @media (min-width: 1024px) {
     .guide-hero-layout .guide-page-title { font-size: 2.375rem; }
+    .hub-header .guide-page-title { font-size: 2.375rem; }
   }
   @media (min-width: 640px) {
     .guide-page-title { font-size: 2.25rem; }
