@@ -152,7 +152,9 @@ describe("migrated Israel itineraries", () => {
     expect(cards).toContain("<details");
     expect(cards).toContain("More day trips from Jerusalem");
     expect(cards).toContain("rel={relFor(true)}");
-    expect(cards).toContain("not live quotes");
+    expect(cards).not.toContain("Affiliate links: I may earn a commission if you book.");
+    expect(cards).not.toContain("indicative snapshots, not live quotes.");
+    expect(cards).not.toContain("Check availability, current prices, inclusions, entry requirements");
     expect(cards).toContain('sub_id');
   });
 
