@@ -121,7 +121,7 @@ export function IsraelHolidaysPage() {
         <div className="mt-6 grid items-center gap-6 lg:grid-cols-[1.25fr_1fr]">
           <div>
             <p className="text-sm font-semibold tracking-wide text-primary">TRAVEL PLANNING GUIDE</p>
-            <h1 className="mt-2 text-4xl leading-tight md:text-5xl">{TITLE}</h1>
+            <h1 className="guide-page-title mt-2">{TITLE}</h1>
             <p className="mt-4 text-lg leading-relaxed text-muted-foreground">Public transport can pause, attractions can get busy and religious celebrations can change access to particular places. Use this calendar to see which dates matter for your visit.</p>
             <PageUpdated date={HOLIDAY_COVERAGE.checkedAt}/>
           </div>
