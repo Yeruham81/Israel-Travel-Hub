@@ -65,11 +65,11 @@ export function GetYourGuideCityWidget({
         data-testid="gyg-third-party-mount"
       />
       {failed && <p role="status" className="mt-3 text-sm text-muted-foreground">
-        The activity widget could not load. You can still explore the local tour guide below.
+        The activity widget could not load. You can still explore the tours page linked below.
       </p>}
       <p className="mt-3 text-sm">
         Or explore my <Link to={config.toursPath} className="font-semibold text-primary underline underline-offset-2">
-          {config.name} tours guide
+          {config.name} tours page
         </Link>.
       </p>
     </div>
