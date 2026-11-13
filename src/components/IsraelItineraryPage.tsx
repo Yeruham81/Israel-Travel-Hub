@@ -5,7 +5,7 @@ import { Breadcrumbs, OnThisPage, FaqList } from "@/components/Guide";
 import { HomeContactForm } from "@/components/HomeContactForm";
 import { guideContactCopy } from "@/lib/guide-contact";
 import { GuidePhotoCredit } from "@/components/TravelGuide";
-import { GuideHeroMedia } from "@/components/GuideHeroMedia";
+import { GuideHeroLayout, GuideHeroMedia } from "@/components/GuideHeroMedia";
 import { AuthorCard } from "@/components/AuthorCard";
 import { PageUpdated } from "@/components/PageUpdated";
 import { itineraries, itineraryIds, itinerarySources, type ItineraryId, type ItineraryGuide } from "@/data/israelItineraries";
@@ -68,18 +68,21 @@ export function IsraelItineraryPage({ id }: { id: ItineraryId }) {
   return <main className="mx-auto max-w-5xl px-4 pb-16">
     <header className="pt-6">
       <Breadcrumbs items={[{ name: "Home", to: "/" }, { name: "Travel guides", to: "/guides/" }, { name: g.title, to: internal(g.path as LinkProps["to"]) }]} />
-      <p className="eyebrow mt-6">Israel itineraries · Independent trip planning</p>
-      <h1 className="guide-page-title mt-3 max-w-4xl">{g.title}</h1>
-      <p className="mt-4 max-w-3xl text-lg leading-relaxed text-foreground">{g.intro}</p>
-      <div className="mt-5 flex flex-wrap gap-2 text-xs font-medium">
-        <span className="rounded-full bg-secondary px-3 py-2">{g.days} full sightseeing days</span>
-        <span className="rounded-full bg-secondary px-3 py-2">Realistic hotel bases</span>
-        <span className="rounded-full bg-secondary px-3 py-2">Public / private transport choices</span>
-      </div>
-      <PageUpdated date={REVIEWED_AT} />
-      <GuideHeroMedia src={photo.src} alt={photo.alt}>
-        <GuidePhotoCredit photo={photo} />
-      </GuideHeroMedia>
+      <GuideHeroLayout image={
+        <GuideHeroMedia src={photo.src} alt={photo.alt}>
+          <GuidePhotoCredit photo={photo} />
+        </GuideHeroMedia>
+      }>
+        <p className="eyebrow">Israel itineraries · Independent trip planning</p>
+        <h1 className="guide-page-title mt-3">{g.title}</h1>
+        <p className="mt-4 max-w-3xl text-lg leading-relaxed text-foreground">{g.intro}</p>
+        <div className="mt-5 flex flex-wrap gap-2 text-xs font-medium">
+          <span className="rounded-full bg-secondary px-3 py-2">{g.days} full sightseeing days</span>
+          <span className="rounded-full bg-secondary px-3 py-2">Realistic hotel bases</span>
+          <span className="rounded-full bg-secondary px-3 py-2">Public / private transport choices</span>
+        </div>
+        <PageUpdated date={REVIEWED_AT} />
+      </GuideHeroLayout>
       <AuthorCard />
     </header>
     <OnThisPage sections={guideSections(g)} />
