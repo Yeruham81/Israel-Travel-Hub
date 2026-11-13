@@ -39,7 +39,7 @@ describe("airport transfers and private driver separation", () => {
     }
     expect(screen.getByTestId("airport-rate-terms")).toHaveTextContent(/weekday.*up to four.*Night, weekend and holiday/s);
     const head = await TransfersRoute.options.head?.({} as never);
-    expect(head).toMatchObject({ meta: expect.arrayContaining([{ name: "robots", content: "noindex,nofollow" }, { title: expect.stringContaining("Airport transfers") }]), links: [{ rel: "canonical", href: expect.stringMatching(/\/transfers\/$/) }] });
+    expect(head).toMatchObject({ meta: expect.arrayContaining([{ name: "robots", content: "noindex,nofollow" }, { title: expect.stringContaining("Airport transfers") }]), links: [{ rel: "canonical", href: expect.stringMatching(/\/airport-transfers\/$/) }] });
   });
 
   it("preselects a destination directly on the consolidated page and retains contact details during selection", async () => {
@@ -82,7 +82,7 @@ describe("airport transfers and private driver separation", () => {
     for (const route of [TransfersRoute, JerusalemRoute, TelAvivRoute]) {
       const head = await route.options.head?.({} as never);
       const breadcrumbs = head!.scripts!.flatMap((script) => typeof script?.children === "string" ? [JSON.parse(script.children)] : []).find((script) => script["@type"] === "BreadcrumbList");
-      expect(breadcrumbs.itemListElement[1]).toMatchObject({ name: "Airport transfers", item: expect.stringMatching(/\/transfers\/$/) });
+      expect(breadcrumbs.itemListElement[1]).toMatchObject({ name: "Airport transfers", item: expect.stringMatching(/\/airport-transfers\/$/) });
     }
   });
 });

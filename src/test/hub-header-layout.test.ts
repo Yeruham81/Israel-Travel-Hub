@@ -5,7 +5,7 @@ import { describe, expect, it } from "vitest";
 const read = (file: string) => readFileSync(resolve(process.cwd(), file), "utf8");
 
 const broadHubs = [
-  "src/routes/transfers.index.tsx",
+  "src/routes/airport-transfers.index.tsx",
   "src/routes/tours.index.tsx",
   "src/routes/attractions.index.tsx",
   "src/routes/shore-excursions.tsx",

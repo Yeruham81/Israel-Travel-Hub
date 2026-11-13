@@ -73,7 +73,7 @@ describe("private Ben Gurion transfers", () => {
       expect(router.matchRoutes(path).at(-1)?.routeId.replace(/\/$/, "")).toBe(path.replace(/\/$/, ""));
     }
     const head = await AirportRoute.options.head?.({} as never);
-    expect(head).toMatchObject({ meta: expect.arrayContaining([{ name: "robots", content: "noindex,nofollow" }, { title: expect.stringContaining("Airport transfers") }]), links: [{ rel: "canonical", href: expect.stringMatching(/\/transfers\/$/) }] });
+    expect(head).toMatchObject({ meta: expect.arrayContaining([{ name: "robots", content: "noindex,nofollow" }, { title: expect.stringContaining("Airport transfers") }]), links: [{ rel: "canonical", href: expect.stringMatching(/\/airport-transfers\/$/) }] });
   });
 
   it("selects the clicked destination in the form and handles groups and other addresses", async () => {

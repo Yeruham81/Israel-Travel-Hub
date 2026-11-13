@@ -93,7 +93,7 @@ describe("server-side quote delivery", () => {
     expect(send.mock.calls[0]![0].text).toContain("Destination: Ein Gedi");
     const legacy = { ...payload(), sourceTitle: undefined };
     expect((await handle(post(legacy))).status).toBe(200);
-    expect(send.mock.calls[1]![0].text).toMatch(/^Sent from page: \/transfers\/\n\nName: Jamie & Alex/);
+    expect(send.mock.calls[1]![0].text).toMatch(/^Sent from page: \/airport-transfers\/\n\nName: Jamie & Alex/);
     expect((await handle(post({ ...data, sourceTitle: "Changed page title" }))).status).toBe(409);
     expect(send).toHaveBeenCalledTimes(2);
   });
