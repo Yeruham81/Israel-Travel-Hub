@@ -104,12 +104,13 @@ describe("home mobile performance optimizations", () => {
 
   it("uses resized hero-adjacent service images and destination tiles", () => {
     const home = read("src/routes/index.tsx");
-    for (const name of ["guided-tour", "cruise-port", "hotel-room", "caesarea-dusk"]) {
+    for (const name of ["guided-tour", "cruise-port", "caesarea-dusk"]) {
       const base = `src/assets/home/${name}`;
       expect(bytes(`${base}-feature.webp`)).toBeLessThan(bytes(`${base}.webp`));
       expect(home).toContain(`${name}-feature.webp`);
     }
     expect(home).toContain('feature: { src: "/images/travel-blog/taxi-in-tel-aviv.webp"');
+    expect(home).not.toContain("hotel-room-feature.webp");
     expect(home).not.toContain("/images/guides/taxi-in-tel-aviv.webp");
     expect(bytes("public/images/travel-blog/taxi-in-tel-aviv.webp")).toBeGreaterThan(1000);
     expect(home).not.toContain("airport-pickup");
@@ -119,6 +120,8 @@ describe("home mobile performance optimizations", () => {
       expect(home).toContain(`${name}-tile.webp`);
     }
     expect(home).toContain("c.img.tile ?? c.img.src");
+    expect(home).toContain("xl:aspect-[4/5]");
+    expect(home).toContain("min-[480px]:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5");
   });
 
   it("keeps homepage service images and cards within the mobile grid even if an image fails", () => {
