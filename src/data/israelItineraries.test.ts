@@ -178,7 +178,8 @@ describe("migrated Israel itineraries", () => {
     expect(guide.noCarAdvice).not.toContain("Choose an organized tour");
 
     expect(messageCopy).toContain("Have a question about your itinerary, or need to arrange an airport transfer or private journey in Israel?");
-    expect(contact).toContain('const [subject, setSubject] = useState("");');
+    expect(contact).toContain("useState(guide?.subject");
+    expect(messageCopy).toContain('return { ...base, subject: "", heading: "Questions about planning your Israel itinerary?"');
     expect(contact).toContain('name="subject" required');
     expect(contact).toContain("update(setSubject, e.target.value)");
 
