@@ -38,7 +38,7 @@ export function SiteLink(props: Props) {
       aria-hidden={props["aria-hidden"]}
       onClick={onClick}
     >
-      {props.children}
+      {typeof props.children === "function" ? props.children({ isActive: false }) : props.children}
       <span className="sr-only"> (opens in a new tab, sponsored link)</span>
     </a>
   );
