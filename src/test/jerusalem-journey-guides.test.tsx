@@ -68,6 +68,20 @@ describe("Jerusalem independent day-trip planning guides", () => {
       expect(card).toHaveTextContent("Sponsored link");
     }
     expect(screen.getAllByRole("note")).toHaveLength(5);
+    const relatedGuides = screen.getByTestId("deadsea-related-guides");
+    expect(relatedGuides.children).toHaveLength(6);
+    expect(within(relatedGuides).getAllByRole("img")).toHaveLength(6);
+    const relatedDestinations = within(relatedGuides).getAllByRole("link").map(link => link.getAttribute("href"));
+    expect(new Set(relatedDestinations).size).toBe(6);
+    const nextSteps = screen.getByTestId("deadsea-next-steps");
+    expect(within(nextSteps).getAllByRole("link")).toHaveLength(4);
+    expect(within(nextSteps).getByRole("link", { name: /Compare rental cars/ }))
+      .toHaveAttribute("href", carRentalAffiliateUrl(travelGuidePaths.jerusalemDeadSea));
+    const contact = container.querySelector("#contact");
+    const sources = container.querySelector("#sources");
+    expect(contact).not.toBeNull();
+    expect(sources).not.toBeNull();
+    expect(contact!.compareDocumentPosition(sources!) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
     expect(screen.queryByRole("heading", { name: /A beach visit, an archaeological park/ })).not.toBeInTheDocument();
     expect(container.querySelector('#bus p')).toHaveTextContent("486");
     expect(container.querySelector('#driving p a[href="' + carRentalAffiliateUrl(travelGuidePaths.jerusalemDeadSea) + '"]')).toBeInTheDocument();
