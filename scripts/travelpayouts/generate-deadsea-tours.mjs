@@ -79,7 +79,7 @@ const results = targets.map(item => {
   return { ...item, status: allowed ? "generated_pending_review" : "failed", partner_url: allowed ? parsed.toString() : null };
 });
 await mkdir("artifacts", { recursive: true });
-await writeFile("artifacts/travelpayouts-jerusalem-to-the-dead-sea.json",
+await writeFile("artifacts/travelpayouts-deadsea-jerusalem-to-the-dead-sea.json",
   JSON.stringify({ pageId, projectId, partnerId, generatedAt: new Date().toISOString(), results }, null, 2) + "\n");
 for (const item of results) if (item.partner_url) console.log("APPROVED_CANDIDATE_LINK " + item.id + " " + item.partner_url);
 console.log("Travelpayouts Jerusalem to the Dead Sea: " + results.filter(item => item.partner_url).length
