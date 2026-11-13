@@ -184,6 +184,18 @@ describe("homepage marketing copy and service sections", () => {
       "/travel-blog/best-hotels-in-haifa/",
     ]);
     expect(within(accommodationSection).getAllByRole("img")).toHaveLength(5);
+    // The five landscape source images keep more of each destination view than the old portrait crops.
+    const stayImages = within(accommodationSection).getAllByRole("img");
+    expect(stayImages.map(image => image.getAttribute("src"))).toEqual([
+      "/images/home/accommodation-jerusalem-ai.webp",
+      "/images/home/accommodation-tel-aviv-jaffa-ai.webp",
+      "/images/home/accommodation-tiberias-galilee-ai.webp",
+      "/images/home/accommodation-dead-sea-ai.webp",
+      "/images/home/accommodation-haifa-ai.webp",
+    ]);
+    for (const image of stayImages) {
+      expect(image).toHaveClass("aspect-[3/2]", "xl:aspect-[6/5]", "object-cover");
+    }
     expect(within(accommodationSection).getByRole("link", { name: /Explore all accommodation/i })).toHaveAttribute("href", "/accommodation/");
     expect(screen.queryByText("Where to Base Yourself")).not.toBeInTheDocument();
     expect(screen.queryByRole("heading", { name: "Popular Destinations" })).not.toBeInTheDocument();
