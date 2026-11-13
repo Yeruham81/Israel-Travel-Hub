@@ -29,7 +29,6 @@ function Tours() {
       eyebrow="Great places. A day that fits you."
       title={toursHubTitle}
       intro="Discover Israel's historic cities, dramatic landscapes and local experiences. Browse day trips and activities, then choose a tour that fits your interests and schedule."
-      showAuthor={false}
     />
     <TourCategoryExplorer filters={filters} onChange={(search, replace) => { void navigate({ search: parseTourHubSearch(search), resetScroll: false, replace: Boolean(replace) }); }} />
     <section aria-labelledby="choose-format-h" className="mt-14"><h2 id="choose-format-h" className="text-3xl font-semibold">Choose how you want to spend the day</h2><div className="mt-5 grid gap-4 md:grid-cols-3">{[
