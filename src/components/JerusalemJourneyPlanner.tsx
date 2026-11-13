@@ -111,9 +111,8 @@ export function JerusalemJourneyOptions({ id }: { id: string }) {
   </>;
 }
 
-/** Source-page-level attribution for approved Travelpayouts tour links.
- * U017 is the Jerusalem-to-Dead-Sea editorial page ID; these are supplier
- * category pages, not promises of particular products, fares or availability.
+/** Descriptive page-and-provider SubIDs for approved Travelpayouts tour links.
+ * These are supplier catalogues, not guaranteed departures, prices or availability.
  */
 const deadSeaPartnerOptions = [
   {
@@ -121,20 +120,20 @@ const deadSeaPartnerOptions = [
     label: "Viator",
     title: "Browse Dead Sea day trips departing Jerusalem",
     description: "Compare published Jerusalem departures, group sizes and stops on Viator.",
-    subId: "itt_u017_jerusalem_dead_sea_viator",
+    subId: "itt_jerusalem_to_the_dead_sea_viator",
   },
   {
     id: "deadsea-jerusalem-getyourguide",
     label: "GetYourGuide",
     title: "Compare Dead Sea tours on GetYourGuide",
     description: "Browse Dead Sea and Masada outings and confirm your Jerusalem pickup before booking.",
-    subId: "itt_u017_jerusalem_dead_sea_gyg",
+    subId: "itt_jerusalem_to_the_dead_sea_getyourguide",
   },
 ] as const;
 
 function attributedDeadSeaTourLink(id: string): string | null {
-  // The Travelpayouts API created this short URL with its U017 SubID already
-  // encoded; appending it again would be redundant.
+  // The original short URL was created by the Travelpayouts API. The registry
+  // adds a descriptive ?sub_id= override supported by Travelpayouts.
   const approved = affiliateConfig[id]?.trackingUrl;
   if (!approved) return null;
   const url = new URL(approved);
@@ -190,7 +189,7 @@ export function JerusalemJourneyBooking({ id }: { id: string }) {
           <h3 className="mt-2 text-xl font-semibold">{option.title}</h3>
           <p className="mt-2 flex-1 text-sm leading-relaxed text-muted-foreground">{option.description} Check current departure city, dates, what's included and cancellation terms.</p>
           <a href={url} target="_blank" rel={relFor(true)}
-             onClick={() => recordOutboundClick({ pageId: "journey-jerusalemDeadSea-U017", productId: option.id, offerId: option.subId })}
+             onClick={() => recordOutboundClick({ pageId: "jerusalem-to-the-dead-sea", productId: option.id, offerId: option.subId })}
              className="mt-4 inline-flex w-fit items-center gap-2 text-sm font-semibold text-primary underline underline-offset-4">
             Browse on {option.label} <ExternalLink className="h-4 w-4" aria-hidden /><span className="sr-only"> (opens in a new tab)</span>
           </a>
