@@ -366,11 +366,7 @@ export const itineraries: Record<ItineraryId, ItineraryGuide> = {
       { title: "Getting around Israel", description: "Compare rail, buses, taxis and longer day trips.", to: "/travel-blog/getting-around-israel/", image: "itinerary-train" },
       { title: "Ben Gurion Airport tips", description: "Arrival, luggage and planning a departure connection.", to: "/travel-blog/ben-gurion-airport-arrival-tips/", image: "itinerary-airport" },
     ],
-    alternatives: [
-      { title: "Only two sightseeing days after flights?", text: "Stay with Jerusalem and Tel Aviv, or choose one city and a booked day trip. Do not attempt all three regions with two partially usable days.", to: "/travel-blog/getting-around-israel/", label: "Compare transport choices" },
-      { title: "Prefer cities over a desert excursion?", text: "Replace the Masada–Dead Sea day with museums and viewpoints in Jerusalem or a fuller Tel Aviv–Jaffa day.", to: "/travel-blog/museums-in-jerusalem/", label: "Jerusalem museum options" },
-      { title: "Traveling on Friday or Saturday?", text: "Arrange the intercity journey around the actual Shabbat timetable. Regular rail and many buses do not run for much of the period.", to: "/travel-blog/from-ben-gurion-airport-on-shabbat/", label: "Shabbat transport" },
-    ],
+    alternatives: [],
     logistics: [
       { heading: "Choose your hotel bases", text: "Choose a convenient area for both Jerusalem nights and the early desert departure. Compare Jerusalem accommodation before booking; avoid unnecessary hotel changes.", to: "/travel-blog/where-to-stay-in-jerusalem/", label: "Compare Jerusalem hotel areas" },
       { heading: "Book the desert day sensibly", text: "Compare Masada and Dead Sea excursions with a self-drive plan or agreed private ride. For a tour, check whether pickup, site admission and time at Ein Bokek are included.", to: "/tours/masada-dead-sea/", label: "Explore Masada & Dead Sea tours" },
