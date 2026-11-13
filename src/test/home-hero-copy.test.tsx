@@ -270,6 +270,13 @@ describe("homepage marketing copy and service sections", () => {
     expect(guidesSection.lastElementChild).toContainElement(guideButton);
     expect(guidesSection.querySelector('[data-testid="guide-row-two"]')!.compareDocumentPosition(guideButton) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
 
+    const aboutMoshe = screen.getByRole("complementary", { name: "About Moshe Barak" });
+    expect(within(aboutMoshe).getByRole("img", { name: "Moshe Barak" })).toBeInTheDocument();
+    const homepageContact = document.getElementById("contact")!;
+    expect(homepageContact).toBeInTheDocument();
+    expect(homepageContact.querySelector("img")).toBeNull();
+    expect(within(homepageContact).getByRole("form", { name: "Homepage contact message" })).toBeInTheDocument();
+
     expect(screen.queryByRole("heading", { name: /Airport Transfers & Private Drivers/i })).not.toBeInTheDocument();
 
   });
