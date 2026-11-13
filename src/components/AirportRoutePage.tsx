@@ -13,6 +13,7 @@ import { authorLd } from "@/lib/author";
 import { ExchangeRateNote, PriceDisplay } from "@/components/CurrencyRates";
 import { AuthorCard } from "@/components/AuthorCard";
 import { PageUpdated } from "@/components/PageUpdated";
+import { GuideHeroMedia } from "@/components/GuideHeroMedia";
 
 function crumbsFor(id: AirportTransferRouteId) {
   const guide = getAirportRouteGuide(id);
@@ -58,8 +59,8 @@ export function AirportRoutePage({ id }: { id: AirportTransferRouteId }) {
   return (
     <main className="mx-auto max-w-5xl px-4 pb-24 lg:pb-8">
       <div className="pt-6"><Breadcrumbs items={crumbsFor(id).map((crumb) => ({ name: crumb.name, to: crumb.path }))} /></div>
-      <header className="mt-7 grid items-center gap-7 lg:grid-cols-[1.2fr_1fr]">
-        <div className="min-w-0">
+      <header className="mt-7">
+        <div className="min-w-0 max-w-4xl">
           <p className="eyebrow">Your private airport pickup · TLV</p>
           <h1 className="guide-page-title mt-3">{guide.title}</h1>
           <p className="mt-4 text-lg leading-relaxed text-muted-foreground">{guide.intro}</p>
@@ -73,7 +74,7 @@ export function AirportRoutePage({ id }: { id: AirportTransferRouteId }) {
           <p className="mt-3 text-sm text-muted-foreground">Private vehicle for your party · Exact hotel or address · Contact me in advance</p>
           <PageUpdated date={AIRPORT_TRANSFER_CHECK_DATE} />
         </div>
-        <img src={guide.photo.src} alt={guide.photo.alt} width={900} height={675} fetchPriority="high" decoding="async" className="aspect-[4/3] w-full rounded-2xl object-cover lg:aspect-[3/4] lg:max-h-[560px]" />
+        <GuideHeroMedia src={guide.photo.src} alt={guide.photo.alt} />
       </header>
 
       <AuthorCard />
