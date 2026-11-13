@@ -51,7 +51,7 @@ function Shore() {
       checkedAt={SHORE_EXCURSION_CHECK_DATE}
       actions={<>
         <Link to={shorePorts.ashdod.path} className="btn btn-primary">Excursions from Ashdod</Link>
-        <Link to={shorePorts.haifa.path} className="btn btn-outline">Excursions from Haifa</Link>
+        <Link to={shorePorts.haifa.path} className="btn btn-primary">Excursions from Haifa</Link>
       </>}
     />
     <OnThisPage sections={sections} />
