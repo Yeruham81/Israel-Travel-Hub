@@ -259,8 +259,9 @@ describe("migrated Israel itineraries", () => {
     expect(g.daysPlan[4]?.image).not.toBe(itineraries["10"].hero);
     const illustrated = [g.hero, ...g.daysPlan.map(day => day.image), ...(g.relatedGuides ?? []).map(item => item.image)];
     expect(new Set(illustrated.map(key => migrationPhotos[key].src)).size).toBe(illustrated.length);
-    expect(migrationPhotos[g.daysPlan[4]!.image].sourceUrl).toContain("commons.wikimedia.org");
-    expect(migrationPhotos[g.daysPlan[4]!.image].licenseUrl).toContain("creativecommons.org");
+    expect(g.daysPlan[4]!.image).toBe("itinerary-5day-caesarea");
+    expect(migrationPhotos["itinerary-5day-caesarea"].sourceUrl).toContain("commons.wikimedia.org");
+    expect(migrationPhotos["itinerary-5day-caesarea"].licenseUrl).toContain("creativecommons.org");
   });
 
   it("keeps five-day travel links contextual and the original other itineraries unchanged", () => {
