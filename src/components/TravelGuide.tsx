@@ -1,4 +1,5 @@
-import { Link, type LinkProps } from "@tanstack/react-router";
+import { type LinkProps } from "@tanstack/react-router";
+import { SiteLink as Link } from "@/components/SiteLink";
 import { Fragment, type ReactNode } from "react";
 import { BookOpen } from "lucide-react";
 import { Breadcrumbs, Checklist, FaqList, OnThisPage, ProviderCard, RelatedLinks, SourceList } from "@/components/Guide";
