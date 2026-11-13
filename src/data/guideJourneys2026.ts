@@ -804,12 +804,6 @@ export const journeyDestinationGuides = {
             "A guided or organised tour can combine Masada with a Dead Sea beach without coordinating several buses. Check the departure city carefully: some tours advertised for the Dead Sea start in Tel Aviv, not Jerusalem.",
             "Compare the meeting place, actual beach time, guide, entrance fees, Masada cable car, lunch and return arrangements. The Masada & Dead Sea tours catalogue is a starting point; the independent tour links further down this page lead to supplier listings, not live prices."
           ],
-          "links": [
-            {
-              "label": "Explore Masada & Dead Sea tour options",
-              "to": "/tours/masada-dead-sea/"
-            }
-          ],
           "inlineLinks": [
             {
               "text": "Masada & Dead Sea tours catalogue",
@@ -825,12 +819,6 @@ export const journeyDestinationGuides = {
             "A prearranged taxi or private driver provides hotel pickup and a flexible departure time. It is useful for families, luggage or a multi-stop outing; a one-way transfer to an Ein Bokek hotel is different from a round-trip sightseeing day.",
             "Ask for a written total covering the pickup, exact stops, waiting time, return journey and any extras. Driver-only transport does not automatically include a licensed guide or admission tickets. You can request a tailored quote through my private driver service."
           ],
-          "links": [
-            {
-              "label": "Ask for a private transport quote",
-              "to": "/private-driver/"
-            }
-          ],
           "inlineLinks": [
             {
               "text": "private driver service",
@@ -844,7 +832,7 @@ export const journeyDestinationGuides = {
           "title": "Driving from Jerusalem or renting a car",
           "paragraphs": [
             "For Ein Bokek and Masada, a common route follows Highway 1 east from Jerusalem and Highway 90 south along the Dead Sea. Use the exact beach, hotel or park entrance in your navigation rather than a general Dead Sea location.",
-            "Check your rental agreement, insurance and permitted roads. Parking can cost extra. Compare rental offers and conditions with DiscoverCars' Israel rental comparison.",
+            "Check your rental agreement, insurance and permitted roads. Parking can cost extra. Compare rental offers and conditions with DiscoverCars' Israel rental comparison (affiliate link).",
             "Flash floods may close desert roads and hiking trails even when the weather is clear in Jerusalem. Never drive through floodwater or approach an unregulated shoreline with sinkhole risks."
           ],
           "inlineLinks": [
