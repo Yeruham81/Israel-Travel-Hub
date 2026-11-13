@@ -1,5 +1,11 @@
 import { useLayoutEffect, useRef, type ReactNode } from "react";
 
+export function introFitsFourLines(height: number, lineHeight: number): boolean {
+  return Number.isFinite(height) && height > 0 &&
+    Number.isFinite(lineHeight) && lineHeight > 0 &&
+    height <= lineHeight * 4 + 1;
+}
+
 /**
  * The shared guide introduction: readable title and copy on the left, a small
  * photo on the right on desktop. On phones and tablets the photo stacks below
@@ -26,7 +32,7 @@ export function GuideHeroLayout({ children, image }: { children: ReactNode; imag
       const introHeight = intro.getBoundingClientRect().height;
       layout.classList.toggle(
         "guide-hero-photo-expanded",
-        Number.isFinite(lineHeight) && lineHeight > 0 && introHeight <= lineHeight * 4 + 1,
+        introFitsFourLines(introHeight, lineHeight),
       );
     };
 
