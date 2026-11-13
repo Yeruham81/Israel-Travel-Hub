@@ -1,11 +1,11 @@
 import type { TravelGuide } from "@/data/travelGuides";
 import { carRentalAffiliateUrl } from "@/lib/car-rental-affiliate";
 import { migrationPhotos as P } from "@/data/guideMigrationPhotos";
-import palestinianTaxiPhoto from "@/assets/guides/bethlehem/palestinian-taxi.jpg";
-import mangerSquarePhoto from "@/assets/guides/bethlehem/manger-square.jpg";
-import milkGrottoPhoto from "@/assets/guides/bethlehem/milk-grotto.jpg";
-import deadSeaSaltIslandPhoto from "@/assets/guides/dead-sea-salt-island.webp";
-import einBokekShorePhoto from "@/assets/guides/dead-sea-ein-bokek-shore.webp";
+import palestinianTaxiPhoto from "@/assets/travel-blog/bethlehem/palestinian-taxi.jpg";
+import mangerSquarePhoto from "@/assets/travel-blog/bethlehem/manger-square.jpg";
+import milkGrottoPhoto from "@/assets/travel-blog/bethlehem/milk-grotto.jpg";
+import deadSeaSaltIslandPhoto from "@/assets/travel-blog/dead-sea-salt-island.webp";
+import einBokekShorePhoto from "@/assets/travel-blog/dead-sea-ein-bokek-shore.webp";
 
 export const journeyDestinationGuides = {
   "deadSea": {
@@ -184,7 +184,7 @@ export const journeyDestinationGuides = {
       },
       {
         "label": "Plan airport transport to Ein Bokek",
-        "to": "/travel-blog/ben-gurion-airport-to-ein-bokek/"
+        "to": "/airport-transfers/ben-gurion-airport-to-ein-bokek/"
       }
     ],
     "sourceIds": [
