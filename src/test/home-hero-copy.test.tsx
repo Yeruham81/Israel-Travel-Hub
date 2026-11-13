@@ -42,17 +42,22 @@ describe("homepage marketing copy and top navigation", () => {
     expect(within(nav).getByRole("link", { name: "Tours & Day Trips" })).toHaveAttribute("href", "#tours");
     const sectionHeadings = [
       "Airport Transfers",
-      "Kind Words from Satisfied Travelers",
       "Tours & Day Trips",
       "Shore Excursions",
       "Where to Stay in Israel",
       "Attractions & Experiences",
+      "What Travelers Say",
       "Practical Israel Travel Guides",
       "Personal Messages from Past Clients",
       "Send me a message",
     ];
     const actualHeadings = screen.getAllByRole("heading", { level: 2 }).map(heading => heading.textContent);
     expect(actualHeadings).toEqual(sectionHeadings);
+    const attractionSection = document.getElementById("attractions")!;
+    const tripadvisorSection = screen.getByRole("heading", { name: "What Travelers Say" }).closest("section")!;
+    const guidesSectionForOrder = document.getElementById("guides")!;
+    expect(attractionSection.compareDocumentPosition(tripadvisorSection) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
+    expect(tripadvisorSection.compareDocumentPosition(guidesSectionForOrder) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
 
     // Every broad-category CTA follows its own cards rather than preceding them.
     for (const [sectionId, linkName, target] of [
