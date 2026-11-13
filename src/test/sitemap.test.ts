@@ -14,16 +14,19 @@ describe("generated XML sitemap and robots.txt", () => {
     expect(paths[0]).toBe("/");
     expect(paths).not.toContain("/api/exchange-rates/");
     expect(paths).not.toContain("/about/");
-    expect(paths).not.toContain("/transfers/ben-gurion-airport/");
+    expect(paths).not.toContain("/airport-transfers/ben-gurion-airport/");
     expect(paths).toContain("/about-moshe-barak/");
     expect(paths).toContain("/privacy-policy/");
     expect(paths).toContain("/terms-of-use/");
     for (const city of ["jerusalem", "tel-aviv", "haifa", "ein-bokek"]) {
       expect(paths).toContain("/travel-blog/how-to-get-from-ben-gurion-airport-to-" + city + "/");
-      expect(paths).toContain("/travel-blog/ben-gurion-airport-to-" + city + "/");
+      expect(paths).toContain("/airport-transfers/ben-gurion-airport-to-" + city + "/");
     }
-    expect(paths).toContain("/guides/");
-    expect(paths).toContain("/transfers/");
+    expect(paths).toContain("/travel-blog/");
+    expect(paths).toContain("/airport-transfers/");
+    expect(paths).not.toContain("/transfers/");
+    expect(paths).not.toContain("/guides/");
+    expect(paths).not.toContain("/travel-blog/ben-gurion-airport-to-jerusalem/");
     expect(paths).toContain("/tours/");
     expect(paths).not.toContain("/tours/bethlehem-from-jerusalem/");
     expect(paths).not.toContain("/destinations/");
@@ -67,10 +70,10 @@ describe("generated XML sitemap and robots.txt", () => {
     expect(robots).not.toContain("Disallow:");
     expect(siteConfig({}).origin).toBe(DEFAULT_CANONICAL_ORIGIN);
     const expectedOrigin = normalizeOrigin(CANONICAL_ORIGIN);
-    const canonical = pageMeta({ title: "Test", description: "Test", path: "/guides/" }).links[0]?.href;
-    expect(canonical).toBe(expectedOrigin + "/guides/");
+    const canonical = pageMeta({ title: "Test", description: "Test", path: "/travel-blog/" }).links[0]?.href;
+    expect(canonical).toBe(expectedOrigin + "/travel-blog/");
     // Development/indexing policy is not changed by adding an XML sitemap.
-    expect(pageMeta({ title: "Test", description: "Test", path: "/guides/" }, siteConfig({})).meta).toContainEqual({ name: "robots", content: "noindex,nofollow" });
+    expect(pageMeta({ title: "Test", description: "Test", path: "/travel-blog/" }, siteConfig({})).meta).toContainEqual({ name: "robots", content: "noindex,nofollow" });
     expect(urls.every(url => url.startsWith(sitemapOrigin + "/"))).toBe(true);
   });
 });
