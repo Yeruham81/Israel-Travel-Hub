@@ -172,7 +172,7 @@ export const allNavGroups: NavGroup[] = [
       travelTips.gettingAround,
       { label: "Getting around Tel Aviv", to: travelGuidePaths.telAviv },
       { label: "Taxis in Israel", to: travelGuidePaths.taxis },
-      { label: "Airport sherut: current status", to: travelGuidePaths.sherut },
+      { label: "Sherut from Ben Gurion Airport", to: travelGuidePaths.sherut },
       travelTips.uber,
       travelTips.esim,
       travelTips.arrival,
