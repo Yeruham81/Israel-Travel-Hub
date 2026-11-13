@@ -150,7 +150,8 @@ describe("tours hub and SEO category pages", () => {
     expect(document.querySelector('[data-section="moshe-private-tours"]')).toBeNull();
     expect(screen.queryByRole("link", { name: "Plan a private day with me" })).not.toBeInTheDocument();
     expect(screen.queryByRole("link", { name: "Explore tour categories" })).not.toBeInTheDocument();
-    expect(document.querySelector("main header a")).toBeNull();
+    expect(document.querySelector("main header .btn")).toBeNull();
+    expect(screen.getByTestId("hub-header").querySelector("img")).toBeNull();
     expect(document.querySelector("main")!.textContent).not.toContain("GetYourGuide");
     expect(document.querySelector("main")!.textContent).not.toContain("Viator");
     const categories = document.querySelectorAll("[data-category-id]");
