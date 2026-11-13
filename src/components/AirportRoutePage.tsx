@@ -122,7 +122,7 @@ export function AirportRoutePage({ id }: { id: AirportTransferRouteId }) {
       <RelatedLinks title="Plan your stay" items={[{ label: "Compare other ways to reach your destination", to: journeyGuide.path }, ...guide.related, { label: "Ben Gurion arrival tips", to: travelGuidePaths.arrival }, { label: "Choosing an eSIM for Israel", to: travelGuidePaths.esim }]} />
       <section aria-labelledby="other-routes-h" className="mt-12">
         <h2 id="other-routes-h" className="text-2xl">Other airport transfer routes</h2>
-        <ul className="mt-4 flex flex-wrap gap-3">{airportTransferRoutes.filter((route) => route.id !== id).map((route) => <li key={route.id}><Link to={route.path} className="chip inline-block">Ben Gurion to {getAirportRouteGuide(route.id).city}</Link></li>)}<li><Link to="/transfers/" className="chip inline-block">All destinations</Link></li></ul>
+        <ul className="mt-4 flex flex-wrap gap-3">{airportTransferRoutes.filter((route) => route.id !== id).map((route) => <li key={route.id}><Link to={route.path} className="chip inline-block">Ben Gurion to {getAirportRouteGuide(route.id).city}</Link></li>)}<li><Link to="/airport-transfers/" className="chip inline-block">All destinations</Link></li></ul>
       </section>
       <details className="mt-10 rounded-xl border p-5 text-sm text-muted-foreground">
         <summary className="cursor-pointer font-medium text-foreground">Route planning notes</summary>
