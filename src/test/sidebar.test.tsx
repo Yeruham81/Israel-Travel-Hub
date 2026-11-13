@@ -102,12 +102,12 @@ describe("shared sidebar navigation", () => {
     expect(nav.textContent).not.toMatch(/[↗→]/);
     const transportation = within(nav).getByRole("region", { name: "Transportation" });
     expect(within(transportation).getAllByRole("link").map((link) => [link.textContent, link.getAttribute("href")])).toEqual([
-      ["Airport transfers", "/transfers/"],
-      ["To Jerusalem", "/travel-blog/ben-gurion-airport-to-jerusalem/"],
-      ["To Tel Aviv & Jaffa", "/travel-blog/ben-gurion-airport-to-tel-aviv/"],
-      ["To Haifa", "/travel-blog/ben-gurion-airport-to-haifa/"],
-      ["To Ein Bokek at the Dead Sea", "/travel-blog/ben-gurion-airport-to-ein-bokek/"],
-      ["To other destinations", "/transfers/"],
+      ["Airport transfers", "/airport-transfers/"],
+      ["To Jerusalem", "/airport-transfers/ben-gurion-airport-to-jerusalem/"],
+      ["To Tel Aviv & Jaffa", "/airport-transfers/ben-gurion-airport-to-tel-aviv/"],
+      ["To Haifa", "/airport-transfers/ben-gurion-airport-to-haifa/"],
+      ["To Ein Bokek at the Dead Sea", "/airport-transfers/ben-gurion-airport-to-ein-bokek/"],
+      ["To other destinations", "/airport-transfers/"],
       ["Private driver service", "/private-driver/"],
       ["Rent a car in Israel", "https://discovercars.tpm.li/w2RwEsmb?sub_id=itt_car_where_to_stay_in_jerusalem"],
     ]);
@@ -118,7 +118,7 @@ describe("shared sidebar navigation", () => {
     render(<RouterContextProvider router={router}><GlobalNav /></RouterContextProvider>);
 
     const linkedParents = [
-      { section: "Transportation", label: "Airport transfers", path: "/transfers/", list: "Airport transfer destinations", count: 5 },
+      { section: "Transportation", label: "Airport transfers", path: "/airport-transfers/", list: "Airport transfer destinations", count: 5 },
       { section: "Tours & trips", label: "Tours & day trips", path: "/tours/", list: "Tour categories", count: tourCategories.length },
       { section: "Tours & trips", label: "Shore excursions", path: "/shore-excursions/", list: "Shore excursion ports", count: 2 },
     ];
@@ -141,7 +141,7 @@ describe("shared sidebar navigation", () => {
     const router = await navigationRouter();
     render(<RouterContextProvider router={router}><GlobalNav /></RouterContextProvider>);
     const guides = screen.getByRole("region", { name: "Travel guides" });
-    expect(within(guides).getByRole("link", { name: "All travel guides" })).toHaveAttribute("href", "/guides/");
+    expect(within(guides).getByRole("link", { name: "All travel guides" })).toHaveAttribute("href", "/travel-blog/");
     for (const label of ["Israel itineraries", "From Ben Gurion Airport"]) {
       expect(within(guides).getByText(label)).toBeVisible();
       expect(within(guides).queryByRole("link", { name: label })).not.toBeInTheDocument();
@@ -190,19 +190,19 @@ describe("shared sidebar navigation", () => {
     const result = render(<RouterContextProvider router={router}><GlobalNav /></RouterContextProvider>);
     const transportation = screen.getByRole("region", { name: "Transportation" });
     expect(within(transportation).queryByRole("button")).not.toBeInTheDocument();
-    expect(within(transportation).getByRole("link", { name: "Airport transfers" })).toHaveAttribute("href", "/transfers/");
+    expect(within(transportation).getByRole("link", { name: "Airport transfers" })).toHaveAttribute("href", "/airport-transfers/");
     const destinations = within(transportation).getByRole("list", { name: "Airport transfer destinations" });
     expect(destinations).toBeVisible();
     expect(within(destinations).getAllByRole("link")).toHaveLength(5);
     expect(within(destinations).getAllByRole("link").at(-1)).toHaveTextContent("To other destinations");
     fireEvent.click(within(destinations).getByRole("link", { name: "To Haifa" }));
-    await waitFor(() => expect(router.state.location.pathname).toBe("/travel-blog/ben-gurion-airport-to-haifa/"));
+    await waitFor(() => expect(router.state.location.pathname).toBe("/airport-transfers/ben-gurion-airport-to-haifa/"));
     result.unmount();
     render(<RouterContextProvider router={router}><GlobalNav /></RouterContextProvider>);
     expect(screen.getByRole("list", { name: "Airport transfer destinations" })).toBeVisible();
     expect(screen.getByRole("link", { name: "To Haifa" })).toHaveAttribute("aria-current", "page");
     fireEvent.click(screen.getByRole("link", { name: "To other destinations" }));
-    await waitFor(() => expect(router.state.location.pathname).toBe("/transfers/"));
+    await waitFor(() => expect(router.state.location.pathname).toBe("/airport-transfers/"));
     expect(screen.getByRole("list", { name: "Airport transfer destinations" })).toBeVisible();
 
     expect(screen.queryByRole("button", { name: "Choose a shore excursion port" })).not.toBeInTheDocument();
@@ -249,7 +249,7 @@ describe("shared sidebar navigation", () => {
     dialog = await screen.findByRole("dialog");
     nav = within(dialog).getByRole("navigation", { name: "Explore Israel" });
     const guides = within(nav).getByRole("region", { name: "Travel guides" });
-    expect(within(guides).getByRole("link", { name: "All travel guides" })).toHaveAttribute("href", "/guides/");
+    expect(within(guides).getByRole("link", { name: "All travel guides" })).toHaveAttribute("href", "/travel-blog/");
     for (const label of ["Israel itineraries", "From Ben Gurion Airport"]) {
       expect(within(guides).getByText(label)).toBeVisible();
       expect(within(guides).queryByRole("link", { name: label })).not.toBeInTheDocument();
@@ -263,7 +263,7 @@ describe("shared sidebar navigation", () => {
     dialog = await screen.findByRole("dialog");
     fireEvent.click(within(dialog).getByRole("link", { name: "To Jerusalem" }));
     await waitFor(() => expect(screen.queryByRole("dialog")).not.toBeInTheDocument());
-    await waitFor(() => expect(router.state.location.pathname).toBe("/travel-blog/ben-gurion-airport-to-jerusalem/"));
+    await waitFor(() => expect(router.state.location.pathname).toBe("/airport-transfers/ben-gurion-airport-to-jerusalem/"));
 
     fireEvent.click(trigger);
     dialog = await screen.findByRole("dialog");
