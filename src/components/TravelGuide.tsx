@@ -185,7 +185,7 @@ function GuideRichParagraph({ spans }: { spans: GuideInlineSpan[] }) {
     if (span.marks?.includes("em")) node = <em>{node}</em>;
     if (span.marks?.includes("underline")) node = <u>{node}</u>;
     if (span.to) node = <Link to={span.to} className="font-medium text-primary underline underline-offset-4 hover:text-primary/80 focus-visible:outline-2 focus-visible:outline-primary">{node}</Link>;
-    if (span.href) node = <a href={span.href} target="_blank" rel="noopener noreferrer" className="font-medium text-primary underline underline-offset-4 hover:text-primary/80">{node}<span className="sr-only"> (opens in a new tab)</span></a>;
+    if (span.href) node = <a href={span.href} target="_blank" rel={/^https:\/\/[a-z0-9-]+\.tpm\.li\//i.test(span.href) ? "sponsored noopener noreferrer" : "noopener noreferrer"} className="font-medium text-primary underline underline-offset-4 hover:text-primary/80">{node}<span className="sr-only"> (opens in a new tab)</span></a>;
     return <Fragment key={index}>{node}</Fragment>;
   })}</>;
 }

@@ -9,6 +9,7 @@ import { Route as DeadSeaRoute } from "@/routes/travel-blog.jerusalem-to-the-dea
 import { affiliateConfig, tourBookingOffers, travelGuidePaths, getSource } from "@/data/registry";
 import { travelGuides } from "@/data/travelGuides";
 import { deadSeaTourCards } from "@/data/deadSeaTourOffers";
+import { carRentalAffiliateUrl } from "@/lib/car-rental-affiliate";
 
 afterEach(cleanup);
 
@@ -35,8 +36,24 @@ describe("Jerusalem independent day-trip planning guides", () => {
     expect(buses).toHaveTextContent("Checkpoint 300");
     expect(within(buses as HTMLElement).getByRole("link", { name: /South Buses/ }))
       .toHaveAttribute("href", "https://south-buses.com/lines-and-stations/?lang=en");
-    expect(screen.getByRole("heading", { name: "Checkpoint, passports, legal entry and rental cars" })).toBeInTheDocument();
+    const entry = container.querySelector("#entry-rules") as HTMLElement;
+    const rental = container.querySelector("#rental-car") as HTMLElement;
+    expect(screen.getByRole("heading", { name: "Before you go: Area A, entry rules and checkpoints" })).toBeInTheDocument();
+    expect(entry).toHaveTextContent("Bethlehem is in Palestinian Authority Area A");
+    expect(entry).toHaveTextContent("including dual citizens");
+    expect(entry).not.toHaveTextContent("rental-car agreements");
+    expect(entry.compareDocumentPosition(buses!) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
+    expect(screen.getByRole("heading", { name: "Can you drive a rental car to Bethlehem?" })).toBeInTheDocument();
+    const rentalLink = within(rental).getByRole("link", { name: /^rental car/i });
+    expect(rentalLink).toHaveAttribute("href", carRentalAffiliateUrl(travelGuidePaths.bethlehem));
+    expect(rentalLink.getAttribute("rel")).toContain("sponsored");
     expect(screen.getByRole("heading", { name: /visit Bethlehem on Saturday or Sunday/ })).toBeInTheDocument();
+    const localTaxi = container.querySelector("#private-taxi") as HTMLElement;
+    expect(localTaxi.querySelector("p")?.textContent?.startsWith("An appropriately authorised and insured Palestinian taxi driver")).toBe(true);
+    expect(localTaxi.querySelector("p")).toHaveTextContent("Palestinian taxis can generally be found in East Jerusalem.");
+    expect((container.querySelector("#visit-return") as HTMLElement).querySelectorAll("p")[0]).not.toHaveTextContent("Manger Square");
+    expect((container.querySelector("#bethlehem-sites") as HTMLElement)).toHaveTextContent("Manger Square");
+    expect(screen.getByTestId("bethlehem-tour-options")).toHaveTextContent("prices shown are subject to change by tour operators");
     expect(within(container.querySelector("#private-taxi") as HTMLElement)
       .getByRole("img", { name: /Yellow Palestinian taxi/ })).toBeInTheDocument();
     expect(within(container.querySelector("#visit-return") as HTMLElement)

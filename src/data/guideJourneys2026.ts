@@ -1,4 +1,5 @@
 import type { TravelGuide } from "@/data/travelGuides";
+import { carRentalAffiliateUrl } from "@/lib/car-rental-affiliate";
 import { migrationPhotos as P } from "@/data/guideMigrationPhotos";
 import palestinianTaxiPhoto from "@/assets/guides/bethlehem/palestinian-taxi.jpg";
 import mangerSquarePhoto from "@/assets/guides/bethlehem/manger-square.jpg";
@@ -264,6 +265,36 @@ export const journeyDestinationGuides = {
   },
   "sections": [
     {
+      "id": "entry-rules",
+      "title": "Before you go: Area A, entry rules and checkpoints",
+      "paragraphs": [
+        "Bethlehem is in Palestinian Authority Area A, which Israeli citizens are generally prohibited from entering, including dual citizens. The entry rules for foreign visitors depend on nationality and immigration status. These restrictions explain why not every driver or vehicle can take you from Jerusalem into Bethlehem.",
+        "Carry your original passport and any relevant Israeli entry card or visa. US visitors can consult the State Department's Israel, West Bank and Gaza travel guidance for official entry and security advice."
+      ],
+      "richParagraphs": [
+        [
+          {
+            "text": "Bethlehem is in Palestinian Authority Area A, which Israeli citizens are generally prohibited from entering, including dual citizens. The entry rules for foreign visitors depend on nationality and immigration status. These restrictions explain why not every driver or vehicle can take you from Jerusalem into Bethlehem."
+          }
+        ],
+        [
+          {
+            "text": "Carry your original passport and any relevant Israeli entry card or visa. US visitors can consult the "
+          },
+          {
+            "text": "State Department's Israel, West Bank and Gaza travel guidance",
+            "href": "https://travel.state.gov/content/travel/en/international-travel/International-Travel-Country-Information-Pages/IsraeltheWestBankandGaza.html"
+          },
+          {
+            "text": " for official entry and security advice."
+          }
+        ]
+      ],
+      "sourceIds": [
+        "m26-bethlehem-entry"
+      ]
+    },
+    {
       "id": "buses",
       "title": "By bus: choose line 231 or 234",
       "paragraphs": [
@@ -323,8 +354,8 @@ export const journeyDestinationGuides = {
       "id": "private-taxi",
       "title": "Private driver or taxi: check where the ride ends",
       "paragraphs": [
-        "Palestinian taxis can generally be found in East Jerusalem. Some appropriately authorised and insured Palestinian drivers can take eligible visitors from Jerusalem to Bethlehem, wait during sightseeing and return to a prearranged address.",
-        "A private booking should specify your pickup point, whether the vehicle may travel on the entire route, insurance, waiting time, included stops, the agreed total fare and the return arrangements. A driver is not necessarily a licensed tour guide.",
+        "An appropriately authorised and insured Palestinian taxi driver may be able to take eligible visitors from Jerusalem into Bethlehem, wait during sightseeing and return them to the agreed address. Palestinian taxis can generally be found in East Jerusalem.",
+        "Before booking, agree on the pickup point, permissions and insurance for the complete journey, waiting time, sightseeing stops, total fare and return arrangements. A driver is not necessarily a licensed tour guide.",
         "An Israeli taxi can take you to the Checkpoint 300 approach, but it is not normally a through-service into Bethlehem. For a journey via the checkpoint, arrange the walk across and a separate Palestinian taxi or guide on the Bethlehem side."
       ],
       "photo": {
@@ -347,41 +378,35 @@ export const journeyDestinationGuides = {
       "title": "Organised day trips and guided Bethlehem visits",
       "paragraphs": [
         "A Bethlehem-focused half-day tour can be easier than coordinating bus stops and separate local transfers. Private tours offer more flexibility, while full-day excursions combine Bethlehem with Jerusalem, Jericho or the Jordan River.",
-        "The linked tour cards below lead to the operators' booking pages, where you can compare the departure point, itinerary, group size, guide arrangements and cancellation terms."
+        "Depending on the operator, the journey from Jerusalem and the Bethlehem sightseeing portion may involve different drivers or guides."
       ],
       "sourceIds": [
         "m26-bethlehem-entry"
       ]
     },
     {
-      "id": "documents-car",
-      "title": "Checkpoint, passports, legal entry and rental cars",
+      "id": "rental-car",
+      "title": "Can you drive a rental car to Bethlehem?",
       "paragraphs": [
-        "Bethlehem is in Palestinian Authority Area A, which Israeli citizens are generally prohibited from entering, including dual citizens. The entry rules for foreign visitors depend on nationality and immigration status.",
-        "Carry your original passport and any relevant Israeli entry card or visa. US visitors can consult the State Department's Israel, West Bank and Gaza travel guidance for official entry and security advice.",
-        "Most Israeli rental-car agreements prohibit driving into Palestinian Authority areas, including Bethlehem. Doing so may also invalidate insurance coverage. If you are considering a rental car for this journey, obtain explicit written permission and insurance confirmation from your rental company first."
+        "A rental car is generally not recommended for the Jerusalem–Bethlehem journey. Most Israeli rental companies prohibit driving into Palestinian Authority Area A, including Bethlehem, and the insurance may not cover such a trip.",
+        "If you're considering a rental car for other parts of your visit, you can compare available offers, but check the specific provider's restrictions and get written confirmation of any permission to drive into Bethlehem and the applicable insurance terms before booking."
       ],
       "richParagraphs": [
         [
           {
-            "text": "Bethlehem is in Palestinian Authority Area A, which Israeli citizens are generally prohibited from entering, including dual citizens. The entry rules for foreign visitors depend on nationality and immigration status."
+            "text": "A rental car is generally not recommended for the Jerusalem–Bethlehem journey. Most Israeli rental companies prohibit driving into Palestinian Authority Area A, including Bethlehem, and the insurance may not cover such a trip."
           }
         ],
         [
           {
-            "text": "Carry your original passport and any relevant Israeli entry card or visa. US visitors can consult the "
+            "text": "If you're considering a "
           },
           {
-            "text": "State Department's Israel, West Bank and Gaza travel guidance",
-            "href": "https://travel.state.gov/content/travel/en/international-travel/International-Travel-Country-Information-Pages/IsraeltheWestBankandGaza.html"
+            "text": "rental car",
+            "href": carRentalAffiliateUrl("/travel-blog/jerusalem-to-bethlehem/")
           },
           {
-            "text": " for official entry and security advice."
-          }
-        ],
-        [
-          {
-            "text": "Most Israeli rental-car agreements prohibit driving into Palestinian Authority areas, including Bethlehem. Doing so may also invalidate insurance coverage. If you are considering a rental car for this journey, obtain explicit written permission and insurance confirmation from your rental company first."
+            "text": " for other parts of your visit, you can compare available offers, but check the specific provider's restrictions and get written confirmation of any permission to drive into Bethlehem and the applicable insurance terms before booking."
           }
         ]
       ],
@@ -393,14 +418,14 @@ export const journeyDestinationGuides = {
       "id": "visit-return",
       "title": "Plan a half-day visit and the journey back",
       "paragraphs": [
-        "For a focused visit, prioritise the Church of the Nativity and Manger Square; Star Street and the Milk Grotto are also in the central area. Shepherds' Field is in nearby Beit Sahour and normally needs additional transport.",
+        "A half-day is often enough for a focused visit to central Bethlehem, but church queues, travel arrangements and any additional stops should be factored into your plans.",
         "The Church of the Nativity is part of a UNESCO World Heritage site. Worship and restoration work can affect access to its Grotto of the Nativity. See the Custody of the Holy Land's restoration notice and sanctuary opening hours, which list a Sunday-morning closure for the grotto.",
         "Set a clear meeting time and pickup location for your journey back to Jerusalem. Checkpoint crossings and connections can take longer than the road distance suggests."
       ],
       "richParagraphs": [
         [
           {
-            "text": "For a focused visit, prioritise the Church of the Nativity and Manger Square; Star Street and the Milk Grotto are also in the central area. Shepherds' Field is in nearby Beit Sahour and normally needs additional transport."
+            "text": "A half-day is often enough for a focused visit to central Bethlehem, but church queues, travel arrangements and any additional stops should be factored into your plans."
           }
         ],
         [
@@ -437,7 +462,7 @@ export const journeyDestinationGuides = {
           "id": "bethlehem-sites",
           "title": "What to see around the Church of the Nativity",
           "paragraphs": [
-            "The Milk Grotto is close to the Nativity precinct; the old streets around Manger Square and Star Street provide an easy central walking focus. Add Shepherds' Field only if you have sufficient time and a transport plan. Modest clothing and comfortable walking shoes are useful at active worship sites."
+            "Start with the Church of the Nativity and Manger Square. The Milk Grotto and Star Street are within walking distance of the Nativity precinct, while Shepherds' Field in nearby Beit Sahour generally requires a separate ride. Modest clothing and comfortable walking shoes are useful at active worship sites."
           ],
           "photo": {
             "src": milkGrottoPhoto,
