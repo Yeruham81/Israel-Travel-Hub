@@ -45,7 +45,7 @@ const sections: LegalSection[] = [
     <p>Information about my own transport prices, reviews or cancellation terms should not be assumed to apply to a different operator. I remain responsible for my own statements and legal obligations; describing another business as independent does not remove obligations the law places on me.</p>
   </> },
   { id: "commercial-features", title: "External booking services and widgets", content: <>
-    <p>The website may include external booking links, advertisements and third-party booking or information widgets. The companies operating those services set their own prices, booking conditions and privacy practices. See the website footer for the sitewide commercial disclosure.</p>
+    <p>The website may include external booking links, advertisements and third-party booking or information widgets. The companies operating those services set their own prices, booking conditions and privacy practices.</p>
     <p>A commercial placement does not promise the lowest price, availability, a particular result or independent endorsement. Confirm the actual offer with the identified provider. An advertisement or widget may load resources from an outside provider before you click; the <Link to="/privacy-policy/" hash="analytics-advertising">Privacy Policy</Link> explains tracking and consent choices for these features.</p>
     <p>Google Analytics and additional commercial integrations are planned or optional. Their mention in these terms is not a statement that they are all currently active. Any required notices and consent controls must be in place when the relevant features are enabled.</p>
   </> },
