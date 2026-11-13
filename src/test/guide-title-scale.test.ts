@@ -35,10 +35,12 @@ describe("guide page title typography", () => {
     expect(source("src/components/HomeHero.tsx")).not.toContain("guide-page-title");
   });
 
-  it("keeps article titles full-width above their images rather than in a split-column header", () => {
+  it("maintains readable headings in the shared side-by-side guide layout", () => {
     const guide = source("src/components/TravelGuide.tsx");
-    expect(guide).not.toContain("lg:grid-cols-[1.35fr_1fr]");
-    expect(guide).toContain('<h1 className="guide-page-title max-w-4xl">');
+    expect(guide).toContain("<GuideHeroLayout");
+    expect(guide).toContain('<h1 className="guide-page-title">');
     expect(guide).toContain("<GuideHeroMedia src={guide.photo.src}");
+    const css = source("src/styles.css");
+    expect(css).toContain(".guide-hero-layout .guide-page-title { font-size: 2.375rem; }");
   });
 });
