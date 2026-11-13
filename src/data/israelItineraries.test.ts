@@ -172,7 +172,14 @@ describe("migrated Israel itineraries", () => {
 
     expect(view).toContain("Each day offers a different side of Israel");
     expect(view).not.toContain("Each day distinguishes a workable core");
-    expect(view).toContain('>Worth knowing</h4>');
+    expect(view).toContain('{g.dayTipHeadings?.[index] ?? "Worth knowing"}');
+    expect(itineraries["3"].dayTipHeadings).toEqual([
+      "Old City access and walking",
+      "Desert-day essentials",
+      "A smoother airport connection",
+    ]);
+    expect(new Set(itineraries["3"].dayTipHeadings).size).toBe(3);
+    for (const id of ["5", "7", "10"] as const) expect(itineraries[id].dayTipHeadings).toBeUndefined();
     expect(view).toContain("My practical planning tips");
     expect(guide.noCarAdvice).toContain("different budgets, group sizes and travel styles");
     expect(guide.noCarAdvice).not.toContain("Choose an organized tour");
@@ -379,7 +386,8 @@ describe("migrated Israel itineraries", () => {
     expect(view).not.toContain("Practical planning note");
     expect(view).not.toContain("Use these focused guides");
     expect(view).not.toContain("GuidePhotoCredit");
-    expect(view).toContain("Worth knowing");
+    expect(view).toContain('g.dayTipHeadings?.[index] ?? "Worth knowing"');
+    expect(view).not.toContain('>Worth knowing</h4>');
     expect(view).not.toContain('<h4 className="font-semibold">My practical planning tip</h4>');
     expect(view).toContain("Tips for transport and hotel planning");
     expect(view).toContain("Adjust this itinerary to your trip");
