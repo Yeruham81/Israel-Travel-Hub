@@ -1104,6 +1104,7 @@ export const affiliateConfig: Record<string, { trackingUrl: string } | undefined
   "jslm-deadsea-masada-eingedi-viator": { trackingUrl: "https://viator.tpm.li/2OUbWPvV" },
   "jslm-deadsea-masada-gyg": { trackingUrl: "https://getyourguide.tpm.li/htf3XviP" },
   "jslm-deadsea-sunrise-gyg": { trackingUrl: "https://getyourguide.tpm.li/BcWk9QKl" },
+  "jslm-deadsea-qumran-viator": { trackingUrl: "https://viator.tpm.li/YTemW7aC" },
   // Configure an approved product-specific affiliate URL once; all category appearances use it.
   ...Object.fromEntries(tourBookingOffers.map((offer) => [offer.id, undefined])),
   "shore-viator-haifa-jerusalem-bethlehem": undefined,
