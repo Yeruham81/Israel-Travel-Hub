@@ -38,18 +38,19 @@ export function OwnerTourSection({ tours }: { tours: TourProduct[] }) {
 }
 
 export function ExternalTourCard({ tour, pageId, compact = false }: { tour: TourProduct; pageId: string; compact?: boolean }) {
-  const offers = offersForTour(tour.id);
+  const offers = offersForTour(tour.id, pageId);
   const price = offers.map(offer => tourSnapshotPrice(offer)).find(Boolean);
+  const primaryOffer = offers[0];
   if (compact) return <li id={tour.id} data-product-id={tour.id} data-testid="tour-card" className="min-w-0 scroll-mt-24">
     <article className="flex h-full min-w-0 gap-3 rounded-xl border bg-card p-3 shadow-sm sm:gap-4">
       <img src={tourPhotos[tour.id]!.src} alt={tourPhotos[tour.id]!.alt} width={140} height={180} loading="lazy" decoding="async" className="h-40 w-[96px] shrink-0 rounded-lg object-cover sm:h-44 sm:w-[124px]" />
       <div className="flex min-w-0 flex-1 flex-col">
-        <div className="flex flex-wrap items-center justify-between gap-x-2 gap-y-1 text-xs text-muted-foreground"><span className="font-semibold">Booked on {offers[0]?.partner?.name || "booking platform"}</span>{tour.rating && <span aria-label={`Rating ${tour.rating.value} out of 5 from ${tour.rating.count} reviews`} className="font-semibold text-foreground">★ {tour.rating.value.toFixed(1)} <span className="font-normal text-muted-foreground">({tour.rating.count})</span></span>}</div>
+        <div className="flex flex-wrap items-center justify-between gap-x-2 gap-y-1 text-xs text-muted-foreground"><span className="font-semibold">Booked on {offers[0]?.partner?.name || "booking platform"}</span>{tour.rating && <span aria-label={`Rating ${tour.rating.value} out of 5 from ${tour.rating.count} reviews`} title={`Booking-platform reviews checked ${tour.rating.checkedAt}; ratings may change`} className="font-semibold text-foreground">★ {tour.rating.value.toFixed(1)} <span className="font-normal text-muted-foreground">({tour.rating.count})</span></span>}</div>
         <h3 className="mt-1.5 line-clamp-2 text-base font-semibold leading-snug">{tour.title}</h3>
         <p className="mt-1 line-clamp-2 text-xs leading-relaxed text-muted-foreground sm:text-sm">{tour.summary}</p>
         <div className="mt-2 flex flex-wrap gap-x-3 gap-y-1 text-xs text-muted-foreground"><span>◷ {tour.duration}</span><span>From {tour.originIds.map(placeLabel).join(" / ")}</span></div>
         <div className="mt-auto flex flex-wrap items-end justify-between gap-2 pt-3"><div>{price ? <><span className="block text-[11px] text-muted-foreground">Reference price · per {price.basis === "per_person" ? "person" : "group"}</span><span className="font-bold text-primary">US${price.amount.toLocaleString("en-US")}</span></> : <span className="text-xs font-medium text-muted-foreground">Check current price</span>}</div>
-          {offers[0] && <a href={offers[0].provider.url} target="_blank" rel={relFor(offers[0].provider.isAffiliate)} onClick={() => recordOutboundClick({ pageId, productId: tour.id, offerId: offers[0].id })} className="inline-flex min-h-9 items-center justify-center rounded-lg bg-primary px-3 py-2 text-xs font-semibold text-primary-foreground hover:bg-primary/90">View tour ↗</a>}
+          {primaryOffer && <a href={primaryOffer.provider.url} target="_blank" rel={relFor(primaryOffer.provider.isAffiliate)} onClick={() => recordOutboundClick({ pageId, productId: tour.id, offerId: primaryOffer.id })} className="inline-flex min-h-9 items-center justify-center rounded-lg bg-primary px-3 py-2 text-xs font-semibold text-primary-foreground hover:bg-primary/90">View tour ↗</a>}
         </div>
       </div>
     </article>

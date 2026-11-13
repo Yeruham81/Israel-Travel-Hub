@@ -15,13 +15,13 @@ export function parseTourSearch(raw: Record<string, unknown>): TourSearch {
 }
 export function placeLabel(id: TourPlaceId) { return tourPlaces.find(place => place.id === id)!.label; }
 export function isOwnerTour(tour: TourProduct) { return tour.operatorId === "moshe-barak"; }
-export function offersForTour(productId: string) {
+export function offersForTour(productId: string, pageId?: string) {
   return tourBookingOffers.filter(offer => offer.productId === productId).flatMap(offer => {
     const partner = partners.find(partner => partner.id === offer.partnerId);
     const provider = providerLinks.find(provider => provider.id === offer.id);
     if (!partner || !provider || !provider.url) return [];
     // Resolve from the one configuration, including edits made before a future DB query.
-    const trackingUrl = affiliateConfig[offer.id]?.trackingUrl;
+    const trackingUrl = (pageId && affiliateConfig[`${offer.id}@${pageId}`]?.trackingUrl) || affiliateConfig[offer.id]?.trackingUrl;
     return [{ ...offer, partner, provider: { ...provider, url: trackingUrl || offer.publicUrl, isAffiliate: Boolean(trackingUrl) } }];
   });
 }

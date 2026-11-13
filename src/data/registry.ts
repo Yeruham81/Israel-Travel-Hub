@@ -1121,6 +1121,15 @@ export const affiliateConfig: Record<string, { trackingUrl: string } | undefined
   "jslm-bethlehem-jerusalem-gyg": { trackingUrl: "https://getyourguide.tpm.li/w41ymA9k" },
   "jslm-bethlehem-private-gyg": { trackingUrl: "https://getyourguide.tpm.li/afbPwokh" },
   "jslm-bethlehem-private-viator": { trackingUrl: "https://viator.tpm.li/cDb7VoHk" },
+  // Verified Travelpayouts project 406243 deep links generated for the Jerusalem tours page (2026-11-14).
+  // Each source-page-specific link has its own SubID; do not reuse on other category pages.
+  "tour-jerusalem-old-city-walk-viator@tours-jerusalem": { trackingUrl: "https://viator.tpm.li/NfTH03Dg" },
+  "tour-jerusalem-private-oldcity-walk-viator@tours-jerusalem": { trackingUrl: "https://viator.tpm.li/WFfLsF8z" },
+  "tour-jerusalem-beyond-walls-viator@tours-jerusalem": { trackingUrl: "https://viator.tpm.li/UWEBkSk3" },
+  "tour-jerusalem-day-tel-aviv-viator@tours-jerusalem": { trackingUrl: "https://viator.tpm.li/qw5niivo" },
+  "tour-jerusalem-bethlehem-private-getyourguide@tours-jerusalem": { trackingUrl: "https://getyourguide.tpm.li/uIfr7roD" },
+  "tour-jerusalem-bethlehem-shared-getyourguide@tours-jerusalem": { trackingUrl: "https://getyourguide.tpm.li/1EkRnvUr" },
+  "tour-mahane-yehuda-tasting-viator@tours-jerusalem": { trackingUrl: "https://viator.tpm.li/uPW9NNSa" },
   // Configure an approved product-specific affiliate URL once; all category appearances use it.
   ...Object.fromEntries(tourBookingOffers.map((offer) => [offer.id, undefined])),
   "shore-viator-haifa-jerusalem-bethlehem": undefined,
