@@ -242,7 +242,7 @@ export function TravelGuidePage({ id }: { id: TravelGuideId }) {
       </section>}
       {isJerusalemDayJourney && id !== "jerusalemDeadSea" && <JerusalemJourneyOptions id={id} />}
       <OnThisPage sections={id === "jerusalemDeadSea"
-        ? [["at-a-glance", "Compare travel options"], ["bus", "Public bus"], ["private", "Taxi & driver"], ["tours", "Organised tours"], ["driving", "Rental car"], ["beach", "Free public beach"], ["day-plan", "Extra stops"], ["journey-destinations", "Nearby attractions"], ["faq", "FAQ"], ["contact", "Contact"], ["sources", "Sources"]]
+        ? [["at-a-glance", "Compare travel options"], ["bus", "Public bus"], ["private", "Taxi & driver"], ["tours", "Organised tours"], ["driving", "Rental car"], ["beach", "Free public beach"], ["journey-destinations", "Optional stops"], ["faq", "FAQ"], ["contact", "Contact"], ["sources", "Sources"]]
         : isJerusalemDayJourney
         ? [["journey-options", "Compare transport"], ["journey-destinations", "Stops & destinations"], ...guide.sections.map((section) => [section.id, section.title] as const), ["journey-booking", "Tours & private trips"], ["checklist", "Checklist"], ["faq", "FAQ"], ["sources", "Sources"], ["contact", "Contact Moshe"]]
         : isTaxiFareGuide
