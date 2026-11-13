@@ -21,7 +21,7 @@ export type DeadSeaTourCard = {
   reviewCount: number;
   checkedAt: string;
   sourceUrl: string;
-  photoId: "beach-mud" | "masada-palace" | "ein-gedi" | "salt-shore" | "sunrise" | "bethlehem-nativity";
+  photoId: "beach-mud" | "masada-palace" | "ein-gedi" | "salt-shore" | "sunrise" | "jordan-river";
 };
 
 export const deadSeaTourCards: DeadSeaTourCard[] = [
@@ -91,15 +91,16 @@ export const deadSeaTourCards: DeadSeaTourCard[] = [
     photoId: "sunrise",
   },
   {
-    id: "jslm-deadsea-bethlehem-viator",
+    id: "jslm-deadsea-jericho-jordan-viator",
     provider: "Viator",
-    title: "Bethlehem & Dead Sea",
-    subtitle: "Nativity sites and beach (admission extra)",
-    duration: "8–11 hrs",
-    rating: 4.8,
-    reviewCount: 132,
+    title: "Jericho, Jordan River & Dead Sea",
+    subtitle: "Jericho, Qasr al-Yahud and time to float",
+    duration: "10–12 hrs",
+    fromUsd: 116,
+    rating: 4.2,
+    reviewCount: 16,
     checkedAt: "2026-11-13",
-    sourceUrl: "https://www.viator.com/tours/Jerusalem/Bethlehem-and-Dead-Sea-Full-Day-Tour/d921-115730P3",
-    photoId: "bethlehem-nativity",
+    sourceUrl: "https://www.viator.com/tours/Jerusalem/Jericho-the-Jordan-river-and-the-Dead-Sea-from-Jerusalem/d921-5209P97",
+    photoId: "jordan-river",
   },
 ];
