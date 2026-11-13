@@ -5,7 +5,7 @@ import { act, cleanup, fireEvent, render, screen, waitFor, within } from "@testi
 import { renderToString } from "react-dom/server";
 import { afterEach, describe, expect, it } from "vitest";
 import { routeTree } from "@/routeTree.gen";
-import { Route as HubRoute } from "@/routes/guides";
+import { Route as HubRoute } from "@/routes/travel-blog.index";
 import { Route as UberRoute } from "@/routes/travel-blog.uber-in-israel";
 import { Route as SherutRoute } from "@/routes/travel-blog.sherut-in-israel";
 import { Route as EsimRoute } from "@/routes/travel-blog.best-esim-for-israel";
@@ -105,7 +105,7 @@ describe("migrated practical guides", () => {
   });
 
   it("makes all directory guides discoverable in server-rendered markup and every topic useful", async () => {
-    const router = await routerAt("/guides/");
+    const router = await routerAt("/travel-blog/");
     const Hub = HubRoute.options.component!;
     const html = renderToString(<RouterContextProvider router={router}><Hub /></RouterContextProvider>);
     expect(guideDirectory).toHaveLength(69);
@@ -122,7 +122,7 @@ describe("migrated practical guides", () => {
   });
 
   it("combines search with topic filters, shares the URL and recovers from an empty result", async () => {
-    const router = await routerAt("/guides/");
+    const router = await routerAt("/travel-blog/");
     const Hub = HubRoute.options.component!;
     render(<RouterContextProvider router={router}><Hub /></RouterContextProvider>);
     expect(screen.getAllByTestId("guide-directory-card")).toHaveLength(69);
@@ -136,7 +136,7 @@ describe("migrated practical guides", () => {
     fireEvent.click(screen.getByRole("button", { name: "Clear filters" }));
     await waitFor(() => expect(screen.getAllByTestId("guide-directory-card")).toHaveLength(69));
     expect(screen.getByRole("searchbox")).toHaveValue("");
-    await act(async () => { await router.navigate({ to: "/guides/", search: { topic: "attractions" } }); });
+    await act(async () => { await router.navigate({ to: "/travel-blog/", search: { topic: "attractions" } }); });
     expect(screen.getAllByTestId("guide-directory-card")).toHaveLength(filterGuides("", "attractions").length);
     expect(within(topics).getByRole("link", { name: "Attractions" })).toHaveAttribute("aria-current", "true");
     expect(within(topics).getByRole("link", { name: "All topics" })).not.toHaveAttribute("aria-current");
@@ -149,7 +149,7 @@ describe("migrated practical guides", () => {
     render(<RouterContextProvider router={router}><Page /></RouterContextProvider>);
     const tags = screen.getByRole("list", { name: "Guide topics" });
     fireEvent.click(within(tags).getByRole("link", { name: "Mobile & connectivity" }));
-    await waitFor(() => expect(router.state.location.pathname).toBe("/guides/"));
+    await waitFor(() => expect(router.state.location.pathname).toBe("/travel-blog/"));
     expect(router.state.location.search).toEqual({ topic: "connectivity" });
   });
 
@@ -183,7 +183,7 @@ describe("migrated practical guides", () => {
     expect(guide.sections.find((s) => s.id === "arrival-terminal")!.paragraphs.join(" ")).toMatch(/international arriving flights continue to use Terminal 3.*Domestic flights arriving from Ramon Airport use Terminal 1/s);
     expect(guide.sections.find((s) => s.id === "customs")!.paragraphs.join(" ")).toMatch(/red and green channels.*red channel and ask/s);
     expect(guide.sections.find((s) => s.id === "leave-airport")!.inlineLinks?.map((l) => l.to)).toEqual([
-      travelGuidePaths.airportTaxis, "/transfers/", travelGuidePaths.sherut, travelGuidePaths.taxiFares,
+      travelGuidePaths.airportTaxis, "/airport-transfers/", travelGuidePaths.sherut, travelGuidePaths.taxiFares,
     ]);
     expect(guide.sections.find((s) => s.id === "shabbat")!.inlineLinks?.[0]?.to).toBe(travelGuidePaths.shabbat);
     expect(guide.sections.find((s) => s.id === "assistance")!.inlineLinks?.[0]?.to).toBe(travelGuidePaths.taxis);
@@ -555,7 +555,7 @@ describe("migrated practical guides", () => {
     expect(container.querySelector("#uber-status")?.textContent).toContain("Uber's Israel-facing website");
     const next = within(container).getByRole("region", { name: "Plan the next part of your trip" });
     expect(next.querySelectorAll("li")).toHaveLength(4);
-    expect(Array.from(next.querySelectorAll("a")).map((link) => link.getAttribute("href"))).not.toContain("/transfers/");
+    expect(Array.from(next.querySelectorAll("a")).map((link) => link.getAttribute("href"))).not.toContain("/airport-transfers/");
     for (const [id, url] of [["gett", "https://www.gett.com/il/"], ["yango", "https://appli.taxi/rider/"]] as const) {
       expect(container.querySelector(`#${id} a[href="${url}"]`)).not.toBeNull();
     }
@@ -586,7 +586,7 @@ describe("migrated practical guides", () => {
       travelGuidePaths.israel, travelGuidePaths.telAviv,
     ]);
     expect(guide.sections.find((s) => s.id === "where-to-go")!.inlineLinks?.map((link) => link.to)).toEqual([
-      "/travel-blog/ben-gurion-airport-to-jerusalem/", "/travel-blog/ben-gurion-airport-to-haifa/", travelGuidePaths.shabbat,
+      "/airport-transfers/ben-gurion-airport-to-jerusalem/", "/airport-transfers/ben-gurion-airport-to-haifa/", travelGuidePaths.shabbat,
     ]);
     expect(guide.sections.find((s) => s.id === "local-sherut")!.paragraphs.join(" ")).toMatch(/pay individually.*Shabbat/s);
     expect(guide.services.map((item) => item.to)).toEqual([
@@ -660,7 +660,7 @@ describe("migrated practical guides", () => {
       expect(section.paragraphs.join(" ").split(link.text)).toHaveLength(2);
     }
     expect(guide.sections.find((section) => section.id === "taxis-transfers")!.inlineLinks?.map((link) => link.to)).toEqual([
-      travelGuidePaths.airportTaxis, "/transfers/",
+      travelGuidePaths.airportTaxis, "/airport-transfers/",
     ]);
     const costs = guide.sections.find((section) => section.id === "costs")!;
     expect(costs.paragraphs.join(" ")).toContain("based on Israel's official April 2026 taxi tariff");
@@ -720,7 +720,7 @@ describe("migrated practical guides", () => {
       "/travel-blog/jerusalem-travel-guide/",
       "/travel-blog/dead-sea-attractions/",
     ]);
-    expect(nextPaths).not.toContain("/transfers/");
+    expect(nextPaths).not.toContain("/airport-transfers/");
     expect(nextPaths.filter((path) => path?.includes("tel-aviv"))).toHaveLength(1);
     expect(nextPaths).toContain("/travel-blog/jerusalem-travel-guide/");
     expect(nextPaths).toContain("/travel-blog/dead-sea-attractions/");
