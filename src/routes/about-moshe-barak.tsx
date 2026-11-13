@@ -107,9 +107,9 @@ function MosheAbout() {
             <p>I link to providers so you can check your dates, current prices and terms on their own websites. For my transport service, I confirm arrangements directly with you; my prices, reviews and cancellation terms relate to my own service. I don't take payments or complete reservations through this website.</p>
           </div>
           <div className="prose-guide">
-            <h3 className="text-xl">How affiliate links work</h3>
-            <p>I may earn a commission from some links at no extra cost to you. I mark links covered by an affiliate arrangement as “Sponsored link”; other links are ordinary links. I identify my own local transport business separately, so you can see when I'm describing a service I operate.</p>
-            <p>I explain alternatives in the guides so you can decide what fits your plans. When you book through another provider, I ask you to check that provider's inclusions, conditions and payment arrangements.</p>
+            <h3 className="text-xl">Understanding the different providers</h3>
+            <p>I distinguish services I arrange personally from transport, hotels and experiences offered by independent operators and booking platforms.</p>
+            <p>Where there are useful alternatives, I describe them so you can choose what fits your plans. For external bookings, check the provider's inclusions, cancellation terms and payment arrangements.</p>
           </div>
           <div id="privacy" className="prose-guide scroll-mt-24">
             <h3 className="text-xl">How I handle your enquiry</h3>
