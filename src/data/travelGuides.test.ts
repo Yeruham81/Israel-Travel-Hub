@@ -34,6 +34,28 @@ describe("travel guide topic filters and prerender safety", () => {
     }
   });
 
+  it("keeps travel guide titles, descriptions, intros, section headings and FAQ questions evergreen", () => {
+    const year = /\\b20\\d{2}\\b/;
+    for (const guide of Object.values(travelGuides)) {
+      for (const [field, copy] of [
+        ["title", guide.title],
+        ["description", guide.description],
+        ["intro", guide.intro],
+      ] as const) {
+        expect(copy, `${guide.id}.${field}`).not.toMatch(year);
+      }
+      for (const section of guide.sections) {
+        expect(section.title, `${guide.id} / ${section.id}`).not.toMatch(year);
+        for (const subsection of section.subsections ?? []) {
+          expect(subsection.title, `${guide.id} / ${subsection.id}`).not.toMatch(year);
+        }
+      }
+      for (const faq of guide.faqs) {
+        expect(faq.q, `${guide.id} / FAQ`).not.toMatch(year);
+      }
+    }
+  });
+
   it("matches localized topic labels in searches without unsafe non-null assertions", () => {
     expect(filterGuides("transportation").length).toBeGreaterThan(0);
     expect(filterGuides("itineraries").length).toBeGreaterThan(0);
