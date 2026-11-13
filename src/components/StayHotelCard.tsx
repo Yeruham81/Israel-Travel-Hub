@@ -64,7 +64,7 @@ export function StayHotelCard({ hotel, booking, pageId, editorial, compact = fal
         {!isPublisherUrl(source.url) && <a href={source.url} target="_blank" rel="noopener noreferrer" className="mt-4 inline-block text-xs text-muted-foreground underline underline-offset-2">Hotel information source ↗<span className="sr-only"> (opens in a new tab)</span></a>}
       </div>
       {booking && <div className="flex flex-wrap items-center justify-between gap-4 border-t bg-secondary/50 px-5 py-4 sm:px-7">
-        <div><p className="text-sm font-semibold">Check room options for your dates</p><p className="mt-1 text-xs text-muted-foreground">{booking.isAffiliate ? "Sponsored link · " : ""}{booking.providerName} · Price and availability on the booking site</p></div>
+        <div><p className="text-sm font-semibold">Check room options for your dates</p><p className="mt-1 text-xs text-muted-foreground">{booking.providerName} · Price and availability on the booking site</p></div>
         <a href={hotelAffiliateUrl(booking, pageId, hotel.id)} target="_blank" rel={relFor(booking.isAffiliate)} onClick={() => recordOutboundClick({ pageId, productId: hotel.id, offerId: booking.id })} className="btn btn-primary" aria-label={`${booking.ctaLabel} for ${hotel.name}`}>
           {booking.ctaLabel} <span aria-hidden>↗</span><span className="sr-only"> (opens in a new tab)</span>
         </a>
