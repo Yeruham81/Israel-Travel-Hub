@@ -27,15 +27,15 @@ import israeliTaxiRoofSign from "@/assets/guides/israeli-taxi-roof-sign.webp";
 
 /** Editorially verified local alternatives when two guides share a cover image. */
 const guideCardAlternatives: Record<string, { src: string; alt: string }[]> = {
-  arrival: [{ src: "/images/guides/airport-taxi-sign.webp", alt: "Airport taxi entrance sign at Ben Gurion Airport" }],
-  airportTaxis: [{ src: "/images/guides/airport-taxi-sign.webp", alt: "Taxi wayfinding sign at Ben Gurion Airport" }, { src: airportArrival, alt: "Ben Gurion Airport pickup and transport area" }, { src: airportDriver, alt: "Airport transportation driver, illustrating an arranged vehicle pickup" }],
+  arrival: [{ src: "/images/travel-blog/airport-taxi-sign.webp", alt: "Airport taxi entrance sign at Ben Gurion Airport" }],
+  airportTaxis: [{ src: "/images/travel-blog/airport-taxi-sign.webp", alt: "Taxi wayfinding sign at Ben Gurion Airport" }, { src: airportArrival, alt: "Ben Gurion Airport pickup and transport area" }, { src: airportDriver, alt: "Airport transportation driver, illustrating an arranged vehicle pickup" }],
   uber: [
     { src: israeliTaxiRoofSign, alt: "Illuminated Hebrew taxi roof sign on an Israeli cab" },
-    { src: "/images/guides/taxi-in-tel-aviv.webp", alt: "Licensed white taxis with yellow roof signs in Tel Aviv" },
+    { src: "/images/travel-blog/taxi-in-tel-aviv.webp", alt: "Licensed white taxis with yellow roof signs in Tel Aviv" },
   ],
   taxiFares: [
     { src: israeliTaxiCabs, alt: "A line of licensed white taxis on an Israeli city street" },
-    { src: "/images/guides/taxi-in-tel-aviv.webp", alt: "Licensed taxis waiting in Tel Aviv" },
+    { src: "/images/travel-blog/taxi-in-tel-aviv.webp", alt: "Licensed taxis waiting in Tel Aviv" },
   ],
   shabbat: [
     { src: "/images/hotels/jerusalem-night.webp", alt: "Jerusalem city lights after dark, illustrating Shabbat evening travel" },
