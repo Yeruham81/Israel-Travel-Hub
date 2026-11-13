@@ -6,7 +6,7 @@ const source = (path: string) => readFileSync(resolve(process.cwd(), path), "utf
 
 const guideTemplates = [
   ["src/components/Guide.tsx", 2],
-  ["src/components/TravelGuide.tsx", 2],
+  ["src/components/TravelGuide.tsx", 1],
   ["src/components/AirportJourneyPage.tsx", 1],
   ["src/components/AirportRoutePage.tsx", 1],
   ["src/components/AttractionGuidePage.tsx", 1],

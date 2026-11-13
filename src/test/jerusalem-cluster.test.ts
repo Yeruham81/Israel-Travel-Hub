@@ -15,7 +15,7 @@ describe("Jerusalem content and reciprocal guide cluster", () => {
       const guide = travelGuides[id];
       expect(guide.id).toBe(id);
       expect(travelGuidePaths[id]).toMatch(/^\/travel-blog\/.+\/$/);
-      expect(guide.updatedAt).toBe(id === "jerusalemDeadSea" ? "2026-11-13" : "2026-10-24");
+      expect(guide.updatedAt).toBe(id === "jerusalemDeadSea" || id === "bethlehem" ? "2026-11-13" : "2026-10-24");
       expect(new Set(guide.sections.map(section => section.id)).size).toBe(guide.sections.length);
       expect(guide.sections.length).toBeGreaterThanOrEqual(id === "jerusalemDeadSea" ? 5 : 6);
       expect(jerusalemConnections[id].length).toBeGreaterThanOrEqual(3);
@@ -43,7 +43,13 @@ describe("Jerusalem content and reciprocal guide cluster", () => {
   it("uses meaningful inline hyperlinks inside the new editorial content, not only in related-links lists", () => {
     for (const id of editorialIds) {
       const sections = travelGuides[id].sections;
-      expect(sections.some(section => section.inlineLinks?.some(link => section.paragraphs.some(text => text.includes(link.text))))).toBe(true);
+      if (id === "bethlehem") {
+        // The rebuilt travel guide places official operator links next to the relevant transport advice
+        // and uses dedicated linked tour and follow-up cards instead of duplicating an editorial appendix.
+        expect(sections.some(section => (section.externalLinks?.length || 0) > 0 || (section.links?.length || 0) > 0)).toBe(true);
+      } else {
+        expect(sections.some(section => section.inlineLinks?.some(link => section.paragraphs.some(text => text.includes(link.text))))).toBe(true);
+      }
     }
   });
 

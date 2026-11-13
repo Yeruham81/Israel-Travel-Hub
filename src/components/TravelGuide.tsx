@@ -113,6 +113,7 @@ function showSectionReferences(guideId: TravelGuideId, sectionId: string) {
   if (guideId === "taxis") return ["fares", "airport", "sherut", "safety"].includes(sectionId);
   if (guideId === "taxiFares") return false; // Single authoritative list at the end, not repeated under each paragraph.
   if (guideId === "jerusalemDeadSea") return false; // Official links sit beside advice; a single full source list follows the contact form.
+  if (guideId === "bethlehem") return false; // Official links appear in sections, with the complete source list after contact.
   if (guideId === "israel" || guideId === "telAviv") return false; // Overview guide sources appear at the end.
   return true;
 }
