@@ -63,10 +63,10 @@ const related: {
 
 const nextSteps: { title: string; description: string; to: LinkProps["to"]; action: string }[] = [
   {
-    title: "Arriving from Ben Gurion Airport?",
-    description: "Find ways to reach the Ein Bokek hotel area directly from the airport.",
-    to: "/travel-blog/how-to-get-from-ben-gurion-airport-to-ein-bokek/",
-    action: "Airport to Ein Bokek",
+    title: "Israel's Calendar of Events",
+    description: "Check festivals, holidays and events that may shape your travel plans.",
+    to: "/travel-blog/calendar-of-events/",
+    action: "Explore Israel's events",
   },
   {
     title: "When is the best time to visit Israel?",
