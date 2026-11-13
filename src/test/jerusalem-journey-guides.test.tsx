@@ -52,7 +52,7 @@ describe("Jerusalem independent day-trip planning guides", () => {
     expect(screen.getByRole("heading", { name: /Jerusalem to the Dead Sea: ways to travel/ })).toBeInTheDocument();
     expect(screen.getByRole("table", { name: /Jerusalem to the Dead Sea: ways to travel/ })).toBeInTheDocument();
     expect(screen.getByText(/Masada, Ein Gedi, Qumran and Qasr al-Yahud can each add something different/)).toBeInTheDocument();
-    expect(screen.getByText(/Walk among springs, waterfalls, green vegetation/)).toBeInTheDocument();
+    expect(screen.getByText(/Hike among springs, waterfalls, green vegetation/)).toBeInTheDocument();
     expect(screen.getByRole("heading", { name: "Qumran" })).toBeInTheDocument();
     expect(screen.getByRole("heading", { name: "Qasr al-Yahud" })).toBeInTheDocument();
     expect(screen.getByRole("heading", { name: "Where to go for a Dead Sea beach day" })).toBeInTheDocument();
