@@ -318,8 +318,11 @@ function Home() {
       <div className="home-offscreen home-offscreen-tripadvisor"><TripadvisorReviewsSection /></div>
       <section id="guides" aria-labelledby="guides-h" className="home-offscreen mx-auto mt-12 max-w-6xl scroll-mt-6 px-4">
         <div><p className="eyebrow">Before You Travel</p><h2 id="guides-h" className="mt-2 text-3xl">Practical Israel Travel Guides</h2><p className="mt-3 max-w-2xl text-muted-foreground">Plan your trip with practical local advice on transportation, travel essentials and exploring Israel with confidence.</p></div>
-        <div className="mt-6 grid gap-5 sm:grid-cols-2 xl:grid-cols-3" data-testid="guide-row-one">{homeGuideCards.first.map((guide) => <GuideCard key={guide.id} guide={guide} headingLevel={3} showReadMoreArrow={false} compactHomeLayout />)}</div>
-        <div className="mt-5 grid gap-5 sm:grid-cols-2 xl:grid-cols-3" data-testid="guide-row-two">{homeGuideCards.second.map((guide) => <GuideCard key={guide.id} guide={guide} headingLevel={3} showReadMoreArrow={false} compactHomeLayout />)}</div>
+        <div className="mt-6 grid gap-5 sm:grid-cols-2 xl:grid-cols-3" data-testid="home-guide-grid">
+          {[...homeGuideCards.first, ...homeGuideCards.second].map((guide) => (
+            <GuideCard key={guide.id} guide={guide} headingLevel={3} showReadMoreArrow={false} compactHomeLayout />
+          ))}
+        </div>
         <div className="mt-7 flex justify-center"><Link to="/travel-blog/" className="btn btn-primary">Browse all guides</Link></div>
       </section>
       <div className="home-offscreen home-offscreen-reviews"><PersonalTestimonialsSection /></div>
