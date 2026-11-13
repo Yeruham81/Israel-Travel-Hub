@@ -21,7 +21,7 @@ describe("travel guide topic filters and prerender safety", () => {
     const guide = travelGuides.sherut;
     const card = guideDirectory.find(entry => entry.id === "sherut");
     expect(card).toBeDefined();
-    expect(card?.photo?.src).toMatch(/sherut-nesher-airport\\.webp$/);
+    expect(card?.photo?.src).toMatch(/sherut-nesher-airport\.webp$/);
     expect(card?.photo?.alt).toMatch(/Former Nesher.*shuttle van.*Ben Gurion Airport/);
     expect(card?.photo?.src).toBe(guide.cardPhoto?.src);
     expect(card?.photo?.src).not.toBe(guide.photo.src);
