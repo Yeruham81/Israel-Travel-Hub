@@ -2,6 +2,8 @@ import { describe, expect, it } from "vitest";
 import { taxiGuideCluster } from "@/data/taxiGuideCluster";
 import { guideDirectory, travelGuides } from "@/data/travelGuides";
 import { travelGuidePaths } from "@/data/registry";
+import { uniqueGuideCardPhotos } from "@/lib/guide-card-photos";
+import { photoIdentity } from "@/lib/photo-uniqueness";
 
 describe("intent-specific taxi guide cluster", () => {
   it("keeps the legacy pillar route and registers both independent guide paths", () => {
@@ -28,6 +30,39 @@ describe("intent-specific taxi guide cluster", () => {
     expect(airportTaxis.sections.some((section) => section.id === "terminal3")).toBe(true);
     expect(airportTaxis.sourceIds).toContain("guide-gett");
     expect(taxis.sections.find((section) => section.id === "holidays")?.inlineLinks?.map((item) => item.to)).toContain(travelGuidePaths.calendar);
+  });
+
+  it("uses surcharge terminology and keeps six distinct, photographed related guides", () => {
+    const { taxiFares } = taxiGuideCluster;
+    expect(taxiFares.title).toContain("Surcharges");
+    const text = [
+      taxiFares.title, taxiFares.description, taxiFares.intro, taxiFares.answer,
+      ...taxiFares.sections.flatMap((section) => [
+        section.title, ...section.paragraphs, ...(section.tables || []).flatMap((table) => [table.caption, ...table.headers, ...table.rows.flat()]),
+      ]),
+      ...taxiFares.faqs.map((faq) => faq.a),
+    ].join(" ");
+    expect(text).not.toMatch(/supplements?/i);
+    expect(taxiFares.related).toEqual(["taxis", "airportTaxis", "uber", "sherut", "shabbat", "arrival"]);
+
+    const cards = taxiFares.related.map((id) => ({
+      guide: guideDirectory.find((candidate) => candidate.to === travelGuidePaths[id])!,
+    }));
+    expect(cards.every(({ guide }) => Boolean(guide?.photo))).toBe(true);
+    const illustrated = uniqueGuideCardPhotos(cards, [taxiFares.photo.src]);
+    expect(illustrated).toHaveLength(6);
+    expect(illustrated.every((card) => Boolean(card.cardPhoto?.src))).toBe(true);
+    expect(new Set(illustrated.map((card) => photoIdentity(card.cardPhoto!.src))).size).toBe(6);
+  });
+
+  it("keeps onward planning focused and the rental referral routed through the affiliate-aware link", () => {
+    const services = taxiGuideCluster.taxiFares.services;
+    expect(services.map((item) => item.to)).toEqual([
+      "/transfers/", "/private-driver/", "/car-rental/", travelGuidePaths.israel,
+    ]);
+    expect(new Set(services.map((item) => item.to)).size).toBe(4);
+    expect(services.every((item) => Boolean(item.note?.trim()))).toBe(true);
+    expect(services.find((item) => item.to === "/car-rental/")?.label).toMatch(/sponsored link/i);
   });
 
   it("shows A/B/C consumer rates and never repeats the first ten kilometers", () => {
