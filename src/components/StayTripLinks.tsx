@@ -7,7 +7,6 @@ import airportHall from "@/assets/home/ben-gurion-t3.webp";
 import bethlehemTravel from "@/assets/guides/2026-10/jerusalem-to-bethlehem.webp";
 import deadSeaTravel from "@/assets/guides/2026-10/jerusalem-to-the-dead-sea.webp";
 import roadTrip from "@/assets/home/road-trip.webp";
-import airportPickup from "@/assets/home/airport-pickup.webp";
 import masadaCable from "@/assets/home/masada-cable-car.webp";
 import museumTelAviv from "@/assets/guides/2026-10/museums-in-tel-aviv.webp";
 import beachesTelAviv from "@/assets/guides/2026-10/beaches-in-tel-aviv.webp";
@@ -72,7 +71,7 @@ export const stayGuideGroups: Record<Region, GuideGroups> = {
       card("Jerusalem to Bethlehem", "/travel-blog/jerusalem-to-bethlehem/", "Plan a practical journey to Bethlehem from the city.", bethlehemTravel, "Road and buildings on the way to Bethlehem"),
       card("Jerusalem to the Dead Sea", "/travel-blog/jerusalem-to-the-dead-sea/", "Compare routes for a desert and Dead Sea excursion.", deadSeaTravel, "Road through the Judean Desert"),
       card("Day trips from Jerusalem", "/travel-blog/day-trips-from-jerusalem/", "Compare destinations you can visit without changing hotels.", roadTrip, "Scenic road trip in Israel"),
-      card("Airport travel on Shabbat", "/travel-blog/from-ben-gurion-airport-on-shabbat/", "Understand arrivals when regular public transport is limited.", airportPickup, "Airport pickup with vehicle and luggage"),
+      card("Airport travel on Shabbat", "/travel-blog/from-ben-gurion-airport-on-shabbat/", "Understand arrivals when regular public transport is limited.", airportTransfers, "Ben Gurion Airport terminal and aircraft"),
       card("Visiting Masada", "/travel-blog/masada/", "Plan the fortress and cable car for an early desert visit.", masadaCable, "Cable car travelling toward Masada"),
     ],
   },
