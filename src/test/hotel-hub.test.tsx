@@ -72,7 +72,7 @@ describe("Accommodation hub editorial upgrade", () => {
     for (const place of ["jerusalem", "tel-aviv", "haifa", "ein-bokek"]) {
       expect(arrivalCards.map((c) => c.to)).toContain("/travel-blog/how-to-get-from-ben-gurion-airport-to-" + place + "/");
     }
-    expect(arrivalCards.filter((card) => card.to.startsWith("/travel-blog/ben-gurion-airport-to-"))).toHaveLength(0);
+    expect(arrivalCards.filter((card) => card.to.startsWith("/airport-transfers/ben-gurion-airport-to-"))).toHaveLength(0);
   });
 
   it("links the four migrated itineraries internally at their original URLs", () => {
