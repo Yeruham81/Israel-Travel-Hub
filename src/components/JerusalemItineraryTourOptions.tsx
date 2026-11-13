@@ -73,7 +73,7 @@ export function JerusalemItineraryTourOptions() {
           >
             <img src={item.image} alt={item.alt} width={480} height={280} loading="lazy" decoding="async" className="h-40 w-full object-cover" />
             <span className="flex flex-1 flex-col p-3.5">
-              <span className="text-[11px] font-semibold uppercase tracking-wide text-primary">{item.area} · {tour.provider}</span>
+              <span className="text-[11px] font-semibold uppercase tracking-wide text-primary">{tour.provider}</span>
               <span className="mt-1 text-base font-semibold leading-snug text-foreground group-hover/card:text-primary">{tour.title}</span>
               <span className="mt-1.5 line-clamp-2 text-sm text-muted-foreground">{tour.subtitle}</span>
               <span className="mt-3 flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-muted-foreground">
@@ -97,9 +97,6 @@ export function JerusalemItineraryTourOptions() {
           </a>;
         })}
       </div>
-      <p className="mt-3 text-xs leading-relaxed text-muted-foreground">
-        Affiliate links: I may earn a commission if you book. Starting prices, ratings and review counts are indicative snapshots, not live quotes. Check availability, current prices, inclusions, entry requirements and cancellation terms on the provider's site for your date.
-      </p>
     </div>
   </details>;
 }

@@ -67,12 +67,11 @@ const guideSections = (g: ItineraryGuide): [string, string][] => [
   ["overview", "Trip overview"],
   ["days", "Daily itinerary"],
   ...g.daysPlan.map((_, index): [string, string] => [`day-${index + 1}`, `Day ${index + 1}`]),
-  ["transport", "Transport & hotels"],
+  ["transport", g.beforeYouGo?.length ? "Planning tips" : "Transport & hotels"],
   ["alternatives", "Adjust the route"],
   ["faq", "FAQ"],
   ...(g.relatedGuides?.length ? [["related-guides", "Related guides"] as [string, string]] : []),
   ["other-durations", g.id === "3" ? "Longer itineraries" : "More itineraries"],
-  ...(g.beforeYouGo?.length ? [["planning-checklist", "Planning checklist"] as [string, string]] : []),
   ["contact", "Contact"],
 ];
 
@@ -189,15 +188,26 @@ export function IsraelItineraryPage({ id }: { id: ItineraryId }) {
       </div>
     </section>
     <section id="transport" aria-labelledby="transport-h" className="mt-14 scroll-mt-28">
-      <h2 id="transport-h" className="text-3xl">Tips for transport and hotel planning</h2>
+      <h2 id="transport-h" className="text-3xl">{g.beforeYouGo?.length ? "My practical planning tips" : "Tips for transport and hotel planning"}</h2>
       <p className="mt-3 leading-relaxed">{g.noCarAdvice}</p>
-      <ul className="mt-6 list-disc space-y-4 pl-6 marker:text-primary">
+      {g.beforeYouGo?.length ? <h3 className="mt-6 text-xl font-semibold">Transport and hotel planning</h3> : null}
+      <ul className="mt-4 list-disc space-y-4 pl-6 marker:text-primary">
         {g.logistics.map((tip, index) => <li key={tip.heading} className="pl-1 leading-relaxed">
           <strong className="font-semibold">{tip.heading}.</strong>{" "}
           <LinkedCopy value={tip.text} links={g.logisticsInlineLinks?.filter(link => link.index === index)} />
           {!g.logisticsInlineLinks?.some(link => link.index === index) && tip.to && tip.label && <>{" "}<Link to={tip.to} className="text-sm font-semibold text-primary underline underline-offset-2">{tip.label}</Link></>}
         </li>)}
       </ul>
+      {g.beforeYouGo?.length ? <div className="mt-7 border-t pt-6">
+        <h3 className="text-xl font-semibold">Before you book</h3>
+        <ul className="mt-4 list-disc space-y-3 pl-6 marker:text-primary">
+          {g.beforeYouGo.map(tip => <li key={tip.heading} className="pl-1 leading-relaxed">
+            <strong className="font-semibold">{tip.heading}.</strong>{" "}
+            <LinkedCopy value={tip.text} links={tip.to && tip.label ? [{ phrase: tip.label, to: tip.to }] : []} />
+            {tip.to && tip.label && !tip.text.includes(tip.label) && <>{" "}<Link to={tip.to} className="font-semibold text-primary underline underline-offset-2">{tip.label}</Link></>}
+          </li>)}
+        </ul>
+      </div> : null}
     </section>
     <section id="alternatives" aria-labelledby="alternatives-h" className="mt-14 scroll-mt-28">
       <h2 id="alternatives-h" className="text-3xl">Adjust this itinerary to your trip</h2>
@@ -246,16 +256,6 @@ export function IsraelItineraryPage({ id }: { id: ItineraryId }) {
         })}
       </div>
     </section>
-    {g.beforeYouGo?.length ? <section id="planning-checklist" aria-labelledby="planning-checklist-h" className="mt-14 scroll-mt-28">
-      <h2 id="planning-checklist-h" className="text-3xl">My final planning checklist</h2>
-      <ul className="mt-5 list-disc space-y-3 pl-6 marker:text-primary">
-        {g.beforeYouGo.map((tip) => <li key={tip.heading} className="pl-1 leading-relaxed">
-          <strong className="font-semibold">{tip.heading}.</strong>{" "}
-          <LinkedCopy value={tip.text} links={tip.to && tip.label ? [{ phrase: tip.label, to: tip.to }] : []} />
-          {tip.to && tip.label && !tip.text.includes(tip.label) && <>{" "}<Link to={tip.to} className="font-semibold text-primary underline underline-offset-2">{tip.label}</Link></>}
-        </li>)}
-      </ul>
-    </section> : null}
     <HomeContactForm key={id} guide={guideContactCopy(g.title, "itinerary")} />
     <SourcesDisclosure>
       <p className="text-sm leading-relaxed text-muted-foreground">Official planning references for this itinerary. Verify schedules, entry conditions and openings for your exact dates; these sources do not imply live availability.</p>
