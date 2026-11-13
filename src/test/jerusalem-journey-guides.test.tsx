@@ -93,13 +93,16 @@ describe("Jerusalem independent day-trip planning guides", () => {
     expect(cards).toHaveLength(6);
     expect(deadSeaTourCards.filter(tour => tour.provider === "Viator")).toHaveLength(4);
     expect(deadSeaTourCards.filter(tour => tour.provider === "GetYourGuide")).toHaveLength(2);
+    const regionalTour = deadSeaTourCards.find(tour => tour.id === "jslm-deadsea-jericho-jordan-viator");
+    expect(regionalTour).toMatchObject({ fromUsd: 116, rating: 4.2, reviewCount: 16, photoId: "jordan-river" });
+    expect(deadSeaTourCards.some(tour => tour.title.includes("Bethlehem"))).toBe(false);
     const expectedLinks = [
       "https://viator.tpm.li/mFyULbRB",
       "https://viator.tpm.li/ccE2RHo7",
       "https://viator.tpm.li/2OUbWPvV",
       "https://getyourguide.tpm.li/htf3XviP",
       "https://getyourguide.tpm.li/BcWk9QKl",
-      "https://viator.tpm.li/ct3lXhvh",
+      "https://viator.tpm.li/OVUPYDvw",
     ];
     expect(deadSeaTourCards.map(tour => affiliateConfig[tour.id]?.trackingUrl)).toEqual(expectedLinks);
     for (const [index, card] of cards.entries()) {
@@ -149,7 +152,8 @@ describe("Jerusalem independent day-trip planning guides", () => {
     for (const [id, route] of [["bethlehem", BethlehemRoute], ["jerusalemDeadSea", DeadSeaRoute]] as const) {
       const guide = travelGuides[id];
       expect(guide.updatedAt).toBe(id === "jerusalemDeadSea" ? "2026-11-13" : "2026-10-24");
-      expect(guide.faqs.length).toBeGreaterThanOrEqual(7);
+      if (id === "jerusalemDeadSea") expect(guide.faqs).toHaveLength(5);
+      else expect(guide.faqs.length).toBeGreaterThanOrEqual(7);
       expect(guide.sourceIds.every((sourceId) => getSource(sourceId)?.url.startsWith("https://"))).toBe(true);
       for (const section of guide.sections) for (const link of section.inlineLinks || []) {
         expect(section.paragraphs.join(" ")).toContain(link.text);
