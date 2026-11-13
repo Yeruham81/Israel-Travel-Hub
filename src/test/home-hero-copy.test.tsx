@@ -77,7 +77,8 @@ describe("homepage marketing copy and service sections", () => {
     // Four airport routes use bold, full-photo destination tiles rather than compact text rows.
     const transferSection = document.getElementById("transfers")!;
     const transferDestinations = within(transferSection).getByRole("list", { name: "Airport transfer destinations" });
-    expect(transferDestinations).toHaveClass("grid-cols-2");
+    expect(transferDestinations).toHaveClass("grid-cols-2", "lg:grid-rows-2", "lg:h-full");
+    expect(transferSection.querySelector('[data-testid="service-layout-transfers"]')).toHaveClass("lg:h-[280px]", "lg:items-stretch");
     const transferCards = within(transferDestinations).getAllByRole("link");
     expect(transferCards).toHaveLength(4);
     expect(transferCards.map(card => card.textContent?.trim())).toEqual([
@@ -91,9 +92,18 @@ describe("homepage marketing copy and service sections", () => {
     ]);
     for (const card of transferCards) {
       expect(card).toHaveClass("relative", "group");
-      expect(within(card).getByRole("img")).toHaveClass("aspect-[4/3]", "object-cover");
+      expect(card).toHaveClass("aspect-[16/9]", "lg:h-full");
+      expect(within(card).getByRole("img")).toHaveClass("h-full", "w-full", "object-cover");
     }
     expect(within(transferSection).getAllByRole("img")).toHaveLength(5);
+    expect(transferCards.map(card => within(card).getByRole("img").getAttribute("src"))).toEqual([
+      "/images/home/transfer-jerusalem-tower-of-david.webp",
+      "/images/home/transfer-tel-aviv-beach-skyline.webp",
+      "/images/home/transfer-haifa-bahai-gardens.webp",
+      "/images/home/transfer-ein-bokek-aerial.webp",
+    ]);
+    const transferHeroPhoto = transferSection.querySelector('[data-testid="service-layout-transfers"] > img');
+    expect(transferHeroPhoto).toHaveClass("aspect-[16/9]", "lg:h-full");
 
     // Homepage overview buttons and guide card prompts have no trailing arrows.
     for (const label of [
