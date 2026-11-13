@@ -477,13 +477,22 @@ export function HubCard({ to, eyebrow, title, text, cta }: { to: LinkProps["to"]
   );
 }
 
-export function HubHeader({ crumbs, eyebrow, title, intro }: { crumbs: UiCrumb[]; eyebrow: string; title: string; intro: ReactNode }) {
+export function HubHeader({ crumbs, eyebrow, title, intro, actions, checkedAt }: {
+  crumbs: UiCrumb[];
+  eyebrow: string;
+  title: string;
+  intro: ReactNode;
+  actions?: ReactNode;
+  checkedAt?: string;
+}) {
   return (
-    <header className="mx-auto max-w-5xl px-4 pt-6">
+    <header className="mx-auto max-w-5xl px-4 pt-6" data-testid="hub-header">
       <Breadcrumbs items={crumbs} />
       <p className="eyebrow mt-6">{eyebrow}</p>
       <h1 className="guide-page-title mt-3 max-w-4xl">{title}</h1>
-      <div className="mt-4 max-w-3xl text-lg leading-relaxed text-muted-foreground">{intro}</div>
+      <div data-guide-intro className="mt-4 max-w-3xl text-lg leading-relaxed text-muted-foreground">{intro}</div>
+      {actions && <div className="mt-5 flex flex-wrap gap-3">{actions}</div>}
+      {checkedAt && <PageUpdated date={checkedAt} />}
       <AuthorCard />
     </header>
   );
