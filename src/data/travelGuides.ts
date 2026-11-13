@@ -8,10 +8,10 @@ import airportHall from "@/assets/home/ben-gurion-t3.webp";
 import railPlatform from "@/assets/airport-journeys/ben-gurion-rail-platform.webp";
 import navonPlatform from "@/assets/airport-journeys/jerusalem-navon-platform.webp";
 import telAvivDizengoff from "@/assets/tel-aviv/dizengoff.webp";
-import archivedBuses from "@/assets/guides/2026-11/buses-in-tel-aviv.webp";
-import sherutNesherCardPhoto from "@/assets/guides/sherut-nesher-airport.webp";
-import jerusalemLightRail from "@/assets/guides/2026-11/jerusalem-light-rail.webp";
-import esimPhoto from "@/assets/guides/esim-israel.jpeg";
+import archivedBuses from "@/assets/travel-blog/2026-11/buses-in-tel-aviv.webp";
+import sherutNesherCardPhoto from "@/assets/travel-blog/sherut-nesher-airport.webp";
+import jerusalemLightRail from "@/assets/travel-blog/2026-11/jerusalem-light-rail.webp";
+import esimPhoto from "@/assets/travel-blog/esim-israel.jpeg";
 import tiberias from "@/assets/home/tiberias-lake.webp";
 import masada from "@/assets/home/masada-dead-sea.webp";
 import caesarea from "@/assets/home/caesarea-dusk.webp";
@@ -72,7 +72,7 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
     answer: "No. Uber does not currently offer passenger rides in Israel, and Lyft does not list Israel among its rider cities. Uber's official Israel page confirms that its service is unavailable here. Gett and Yango can help you request licensed taxis, while a taxi stand, hotel dispatcher or confirmed transfer may work better for some journeys. Check the actual pickup, fare terms and payment method.",
     topics: ["transportation", "tips"],
     updatedAt: "2026-11-11",
-    photo: { src: "/images/guides/taxi-in-tel-aviv.webp", alt: "Licensed taxis on a street in Tel Aviv" },
+    photo: { src: "/images/travel-blog/taxi-in-tel-aviv.webp", alt: "Licensed taxis on a street in Tel Aviv" },
     facts: [
       { label: "Uber & Lyft", text: "No passenger ride-booking service in Israel as of November 2026" },
       { label: "Taxi-booking apps", text: "Gett and Yango; check availability for your address and time" },
@@ -161,7 +161,7 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
         ],
         inlineLinks: [
           { text: "official airport taxi guide", to: travelGuidePaths.airportTaxis },
-          { text: "private airport transfer", to: "/transfers/" },
+          { text: "private airport transfer", to: "/airport-transfers/" },
         ],
         sourceIds: ["guide-uber-availability", "guide-gett", "guide-iaa"],
       },
@@ -298,8 +298,8 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
           "The comparison below is a starting point, not a live timetable or price quote. Confirm any connection on the actual travel date before relying on it."
         ],
         inlineLinks: [
-          { text: "airport-to-Jerusalem guide", to: "/travel-blog/ben-gurion-airport-to-jerusalem/" },
-          { text: "airport-to-Haifa guide", to: "/travel-blog/ben-gurion-airport-to-haifa/" },
+          { text: "airport-to-Jerusalem guide", to: "/airport-transfers/ben-gurion-airport-to-jerusalem/" },
+          { text: "airport-to-Haifa guide", to: "/airport-transfers/ben-gurion-airport-to-haifa/" },
           { text: "Shabbat guide", to: travelGuidePaths.shabbat },
         ],
         tables: [{
@@ -359,7 +359,7 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
           "A commercial provider may sell seats on a specific shared shuttle. That is a separately booked product, not a continuation of the old airport sherut routes. A website listing by itself does not establish that a departure is running on your date.",
           "Before paying, verify the actual operator, per-seat or per-vehicle price, pickup location, departure time, luggage allowance, flight-delay waiting rules, final drop-off and cancellation policy. Obtain written confirmation; otherwise compare a confirmed dedicated airport transfer instead."
         ],
-        inlineLinks: [{ text: "dedicated airport transfer", to: "/transfers/" }],
+        inlineLinks: [{ text: "dedicated airport transfer", to: "/airport-transfers/" }],
         sourceIds: [],
       },
       {
@@ -416,7 +416,7 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
     ],
     checklist: ["Confirm the exact phone is compatible and unlocked", "Match data, days, countries and hotspot needs", "Distinguish data calling from a phone number and SMS", "Read activation, renewal, refunds and fair-use rules", "Test connectivity before leaving the airport"],
     faqs: [{ q: "Which eSIM is cheapest for Israel?", a: "Compare the current total for the same data and travel period, including setup or usage charges. I do not publish a live cheapest-price ranking; provider packages, currencies and promotions change." }, { q: "Does unlimited mean maximum speed all day?", a: "No. Read the provider's fair-use and speed policy, plus any hotspot restriction. Yesim's published guidance explicitly describes potential throttling." }, { q: "Can I keep WhatsApp and my home number?", a: "A data connection can support your existing messaging apps. Keeping the home SIM active depends on the device and your carrier; control home-line roaming to avoid unintended charges." }, { q: "Will every eSIM give me an Israeli number?", a: "No. Check whether it is data-only or includes phone services, and which country's number is supplied. An optional US number is not an Israeli number." }],
-    sourceIds: ["guide-esim-airalo", "guide-esim-saily", "guide-esim-yesim", "guide-esim-gigsky", "guide-esim-drimsim"], related: ["arrival", "uber", "israel"], services: [{ label: "Arrange your airport pickup", to: "/transfers/" }], providerPageId: "guide-esim",
+    sourceIds: ["guide-esim-airalo", "guide-esim-saily", "guide-esim-yesim", "guide-esim-gigsky", "guide-esim-drimsim"], related: ["arrival", "uber", "israel"], services: [{ label: "Arrange your airport pickup", to: "/airport-transfers/" }], providerPageId: "guide-esim",
   },
   arrival: {
     id: "arrival",
@@ -525,7 +525,7 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
       {
         id: "leave-airport",
         title: "How do I get from Ben Gurion Airport to my hotel?",
-        photo: { src: "/images/guides/airport-taxi-sign.webp", alt: "Taxi entrance sign at Ben Gurion Airport" },
+        photo: { src: "/images/travel-blog/airport-taxi-sign.webp", alt: "Taxi entrance sign at Ben Gurion Airport" },
         paragraphs: [
           "Choose your route based on the complete journey to the hotel, not just the first train or bus. Israel Railways serves the airport at Terminal 3 and can be useful for destinations connected to the railway, while buses may fit other journeys when they are operating. Check the actual date, station and final connection with bags.",
           "For an on-demand authorized airport taxi, Gett operates the official order and queue process: request a ride using its app or an airport self-service kiosk, obtain a ride code and join the physical taxi queue. Terminal 3 immediate taxis depart at ground-floor Exit 03; a scheduled Gett pickup is different and is listed at Level 2, Exit 23. The official Ben Gurion Airport taxi guide provides the complete pickup procedure.",
@@ -533,7 +533,7 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
         ],
         inlineLinks: [
           { text: "official Ben Gurion Airport taxi guide", to: travelGuidePaths.airportTaxis },
-          { text: "private airport transfer", to: "/transfers/" },
+          { text: "private airport transfer", to: "/airport-transfers/" },
           { text: "sherut guide", to: travelGuidePaths.sherut },
           { text: "Israeli taxi fares guide", to: travelGuidePaths.taxiFares },
         ],
@@ -619,10 +619,10 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
     ],
     related: ["airportTaxis", "shabbat", "sherut", "taxiFares", "esim", "taxis", "israel", "uber"],
     services: [
-      { label: "Airport transfer destinations and personal quote", to: "/transfers/" },
-      { label: "Private airport transfer to Tel Aviv", to: "/travel-blog/ben-gurion-airport-to-tel-aviv/" },
-      { label: "Private airport transfer to Jerusalem", to: "/travel-blog/ben-gurion-airport-to-jerusalem/" },
-      { label: "Private airport transfer to Haifa", to: "/travel-blog/ben-gurion-airport-to-haifa/" },
+      { label: "Airport transfer destinations and personal quote", to: "/airport-transfers/" },
+      { label: "Private airport transfer to Tel Aviv", to: "/airport-transfers/ben-gurion-airport-to-tel-aviv/" },
+      { label: "Private airport transfer to Jerusalem", to: "/airport-transfers/ben-gurion-airport-to-jerusalem/" },
+      { label: "Private airport transfer to Haifa", to: "/airport-transfers/ben-gurion-airport-to-haifa/" },
     ],
   },
   israel: {
