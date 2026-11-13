@@ -3,7 +3,6 @@ import lcpHeroMobile from "@/assets/home/hero-jerusalem-sm-optimized.webp";
 import lcpHeroMedium from "@/assets/home/hero-jerusalem-medium.webp";
 import lcpHeroLarge from "@/assets/home/hero-jerusalem-large.webp";
 import jerusalem from "@/assets/home/jerusalem-old-city.webp";
-import masadaCableCar from "@/assets/home/masada-cable-car.webp";
 import airportTransportPhoto from "@/assets/airport-transfers/airport.webp";
 import telAviv from "@/assets/home/tel-aviv-coast.webp";
 import tiberias from "@/assets/home/tiberias-lake.webp";
@@ -40,6 +39,10 @@ import deadSeaTile from "@/assets/dead-sea/beach-tile.webp";
 import { pageMeta } from "@/lib/site";
 import { tourCategoryPaths } from "@/data/tours";
 import bethlehemTourPhoto from "@/assets/guides/2026-10/jerusalem-to-bethlehem.webp";
+import roshHanikraPhoto from "@/assets/guides/rosh-hanikra.jpg";
+import ramonCraterPhoto from "@/assets/guides/mitzpe-ramon-crater.jpg";
+import capernaumPhoto from "@/assets/guides/capernaum.jpg";
+import mountTaborPhoto from "@/assets/guides/mount-tabor.jpg";
 import { photoCredits } from "@/data/photoCredits";
 import { GuideCard } from "@/components/TravelGuide";
 import { guideDirectory } from "@/data/travelGuides";
@@ -125,8 +128,8 @@ export const services: Service[] = [
     text: "Make the most of your time ashore with excursions from Israel’s cruise ports, from historic landmarks and cultural highlights to unforgettable day trips.",
     feature: { src: cruisePort, alt: "Illustrative cruise passengers walking along a harbour quay toward a waiting minivan (not a specific ship or operator)" },
     cards: [
-      { label: "From Ashdod Port", text: "Discover Jerusalem’s Old City, the streets of Tel Aviv and Jaffa, or Masada and the Dead Sea. Find ideas for a day ashore that fits your ship’s schedule.", cta: "Explore Ashdod excursions", to: "/ashdod-shore-excursions/", img: { src: ashdodPort, alt: "Aerial view of Ashdod Port" } },
-      { label: "From Haifa Port", text: "Explore Akko’s historic harbour, Nazareth and the Sea of Galilee, or consider a longer day trip to Jerusalem. Compare options for your port call.", cta: "Explore Haifa excursions", to: "/haifa-shore-excursions/", img: { src: haifaPort, alt: "Haifa Port and Haifa Bay seen from Mount Carmel" } },
+      { label: "From Ashdod Port", text: "Explore Jerusalem, Tel Aviv–Jaffa, Masada or the Dead Sea from Ashdod.", cta: "Explore Ashdod excursions", to: "/ashdod-shore-excursions/", img: { src: ashdodPort, alt: "Aerial view of Ashdod Port" } },
+      { label: "From Haifa Port", text: "Discover Akko, Nazareth and the Galilee, or visit Jerusalem from Haifa.", cta: "Explore Haifa excursions", to: "/haifa-shore-excursions/", img: { src: haifaPort, alt: "Haifa Port and Haifa Bay seen from Mount Carmel" } },
     ],
     hub: { label: "Explore shore excursions", to: "/shore-excursions/" },
   },
@@ -141,9 +144,12 @@ export const services: Service[] = [
     text: "Discover Israel’s most memorable attractions, from ancient landmarks and historic cities to breathtaking natural wonders.",
     feature: { src: caesareaDusk, alt: "Ancient ruins on the shore at Caesarea at dusk" },
     cards: [
-      { label: "Masada", text: "Cable car or the hiking paths", to: "/travel-blog/masada/", img: { src: masadaCableCar, alt: "Cable car approaching Masada" } },
-      { label: "Caesarea", text: "Roman harbour city on the coast", to: "/attractions/caesarea/", img: IMG.caesarea },
-      { label: "Bethlehem", text: "Plan your journey from Jerusalem", to: "/travel-blog/jerusalem-to-bethlehem/", img: { src: "/images/home/bethlehem-alternative.webp", alt: "Manger Square in Bethlehem" } },
+      { label: "Rosh Hanikra", to: "/travel-blog/rosh-hanikra/", img: { src: roshHanikraPhoto, alt: "Sea grottoes and white limestone cliffs at Rosh Hanikra" } },
+      { label: "Ramon Crater", to: "/travel-blog/mitzpe-ramon-crater/", img: { src: ramonCraterPhoto, alt: "Layered desert landscape of Ramon Crater" } },
+      { label: "Capernaum", to: "/travel-blog/capernaum/", img: { src: capernaumPhoto, alt: "Ancient ruins at Capernaum beside the Sea of Galilee" } },
+      { label: "Mount Tabor", to: "/travel-blog/mount-tabor/", img: { src: mountTaborPhoto, alt: "Mount Tabor rising above the Lower Galilee" } },
+      { label: "Mount of Olives", to: "/travel-blog/mount-of-olives/", img: { src: "/images/attractions/mount-of-olives.webp", alt: "Churches and historic sites on the Mount of Olives in Jerusalem" } },
+      { label: "Eilat", to: "/travel-blog/eilat/", img: { src: "/images/attractions/eilat.webp", alt: "The Red Sea shoreline at Eilat" } },
     ],
     hub: { label: "Explore attractions & experiences", to: "/attractions/" },
   },
@@ -192,8 +198,8 @@ function CompactCard({ c }: { c: Card }) {
   );
 }
 
-/** Compact image-only destination tile used exclusively by the six tour categories. */
-function TourDestinationCard({ c }: { c: Card }) {
+/** Compact destination tile shared by the homepage tours and attractions sections. */
+function DestinationImageCard({ c }: { c: Card }) {
   return (
     <Link to={c.to} aria-label={c.label} className="group relative block min-w-0 overflow-hidden rounded-lg bg-navy shadow-sm focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-ring">
       <img src={c.img.thumb ?? c.img.src} alt={c.img.alt} loading="lazy" decoding="async" width={400} height={300} className="aspect-[4/3] w-full object-cover transition-transform duration-500 group-hover:scale-105" />
@@ -203,18 +209,18 @@ function TourDestinationCard({ c }: { c: Card }) {
   );
 }
 
-/** Full-photo port cards fill two equal-height rows beside the shore-excursion feature image. */
+/** Landscape port cards fill two short, equal-height rows beside the ship photograph. */
 function ShoreExcursionCard({ c }: { c: Card }) {
   return (
     <li className="min-h-0">
-      <Link to={c.to} className="photo-card group grid h-full min-w-0 grid-cols-[minmax(108px,35%)_minmax(0,1fr)] overflow-hidden rounded-xl border bg-background transition-colors hover:border-primary focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-ring">
-        <span className="relative block min-h-[175px] overflow-hidden lg:min-h-0">
+      <Link to={c.to} className="photo-card group grid h-full min-w-0 grid-cols-1 overflow-hidden rounded-xl border bg-background transition-colors min-[480px]:grid-cols-[43%_minmax(0,1fr)] hover:border-primary focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-ring">
+        <span className="relative block aspect-[16/9] overflow-hidden min-[480px]:aspect-auto">
           <img src={c.img.src} alt={c.img.alt} loading="lazy" decoding="async" width={600} height={420} className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" />
         </span>
-        <span className="flex min-w-0 flex-col gap-1.5 p-3 sm:p-4 lg:p-3.5">
+        <span className="flex min-w-0 flex-col gap-1 p-3">
           <span className="font-serif text-base font-semibold leading-tight text-foreground sm:text-lg">{c.label}</span>
-          <span className="text-sm leading-snug text-muted-foreground">{c.text}</span>
-          <span className="mt-auto pt-1 text-sm font-semibold text-primary underline-offset-4 group-hover:underline group-focus-visible:underline">{c.cta}</span>
+          <span className="line-clamp-2 text-sm leading-snug text-muted-foreground">{c.text}</span>
+          <span className="mt-auto pt-0.5 text-xs font-semibold text-primary underline-offset-4 group-hover:underline group-focus-visible:underline sm:text-sm">{c.cta}</span>
         </span>
       </Link>
     </li>
@@ -261,17 +267,17 @@ function Home() {
                 <p className="mt-2 max-w-2xl text-muted-foreground">{s.text}</p>
               </div>
             </header>
-            {s.id === "tours" ? (
+            {s.id === "tours" || s.id === "attractions" ? (
               <div className="mt-6 grid min-w-0 gap-4 lg:grid-cols-[minmax(0,2fr)_minmax(0,3fr)] lg:items-stretch" data-testid={`service-layout-${s.id}`}>
                 {s.feature && <img src={s.feature.src} alt={s.feature.alt} loading="lazy" decoding="async" width={900} height={560} className="aspect-[16/9] max-h-[320px] w-full min-w-0 rounded-xl object-cover lg:aspect-auto lg:h-full lg:max-h-none" />}
-                <ul className="grid min-w-0 grid-cols-2 gap-3 sm:grid-cols-3" aria-label="Tour destinations">
-                  {s.cards.map((card) => <li key={card.label} className="min-w-0"><TourDestinationCard c={card} /></li>)}
+                <ul className="grid min-w-0 grid-cols-2 gap-3 sm:grid-cols-3" aria-label={s.id === "tours" ? "Tour destinations" : "Featured attractions"}>
+                  {s.cards.map((card) => <li key={card.label} className="min-w-0"><DestinationImageCard c={card} /></li>)}
                 </ul>
               </div>
             ) : s.id === "shore-excursions" ? (
-              <div className="mt-6 grid min-w-0 gap-4 lg:h-[390px] lg:grid-cols-[minmax(0,2fr)_minmax(0,3fr)] lg:items-stretch" data-testid={`service-layout-${s.id}`}>
-                {s.feature && <img src={s.feature.src} alt={s.feature.alt} loading="lazy" decoding="async" width={1400} height={880} className="aspect-[16/10] max-h-[300px] w-full min-w-0 rounded-xl object-cover lg:aspect-auto lg:h-full lg:max-h-none" />}
-                <ul className="grid min-w-0 gap-4 lg:h-full lg:grid-rows-2" aria-label="Shore excursions by port">
+              <div className="mt-6 grid min-w-0 gap-4 lg:h-[280px] lg:grid-cols-2 lg:items-stretch" data-testid={`service-layout-${s.id}`}>
+                {s.feature && <img src={s.feature.src} alt={s.feature.alt} loading="lazy" decoding="async" width={1400} height={880} className="aspect-[16/9] max-h-[250px] w-full min-w-0 rounded-xl object-cover lg:aspect-auto lg:h-full lg:max-h-none" />}
+                <ul className="grid min-w-0 gap-3 lg:h-full lg:grid-rows-2" aria-label="Shore excursions by port">
                   {s.cards.map((card) => <ShoreExcursionCard key={card.label} c={card} />)}
                 </ul>
               </div>
