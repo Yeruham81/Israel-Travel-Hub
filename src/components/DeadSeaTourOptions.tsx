@@ -1,9 +1,7 @@
-import { Link } from "@tanstack/react-router";
 import { Clock3, ExternalLink, Star } from "lucide-react";
 import { affiliateConfig } from "@/data/registry";
 import { deadSeaTourCards } from "@/data/deadSeaTourOffers";
 import { recordOutboundClick, relFor } from "@/lib/outbound";
-import ownerTourPhoto from "@/assets/guides/dead-sea-excursions/private-masada-dead-sea.webp";
 import beachMudPhoto from "@/assets/guides/dead-sea-excursions/dead-sea-mud-bathing.webp";
 import masadaPalacePhoto from "@/assets/guides/dead-sea-excursions/masada-palace.webp";
 import einGediPhoto from "@/assets/guides/dead-sea-excursions/ein-gedi-oasis.webp";
@@ -25,26 +23,6 @@ const tourPhotos = {
 export function DeadSeaTourOptions() {
   return <>
     <div className="mt-5 grid gap-3 sm:grid-cols-2 xl:grid-cols-3" data-testid="deadsea-tour-options">
-      <Link
-        to="/tours/masada-dead-sea/"
-        className="group flex min-w-0 flex-col overflow-hidden rounded-xl border border-primary/30 bg-card transition-all hover:-translate-y-0.5 hover:border-primary hover:shadow-md focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
-        data-testid="deadsea-moshe-tour"
-      >
-        <img src={ownerTourPhoto} alt="Masada and Dead Sea landscapes on a private day trip" width={480} height={280} loading="lazy" decoding="async" className="h-32 w-full object-cover" />
-        <span className="flex flex-1 flex-col p-3.5">
-          <span className="text-[11px] font-semibold uppercase tracking-wide text-primary">Private tour · Moshe Barak</span>
-          <span className="mt-1 text-base font-semibold leading-snug text-foreground group-hover:text-primary">Private Masada & Dead Sea day trip</span>
-          <span className="mt-1.5 line-clamp-2 text-sm text-muted-foreground">Your Jerusalem pickup, a dedicated driver and flexible sightseeing stops.</span>
-          <span className="mt-3 flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-muted-foreground">
-            <span className="inline-flex items-center gap-1"><Clock3 size={13} aria-hidden="true" />Full day</span>
-            <span>Up to 4 travellers</span>
-          </span>
-          <span className="mt-auto flex items-end justify-between gap-2 border-t pt-3 text-sm">
-            <span><span className="text-xs text-muted-foreground">From</span> <strong>₪2,100</strong><span className="block text-[11px] text-muted-foreground">per vehicle</span></span>
-            <span className="inline-flex items-center gap-1 font-semibold text-primary">See tour & price <ExternalLink size={13} aria-hidden="true" /></span>
-          </span>
-        </span>
-      </Link>
       {deadSeaTourCards.map(tour => {
         const trackingUrl = affiliateConfig[tour.id]?.trackingUrl;
         if (!trackingUrl) return null;
