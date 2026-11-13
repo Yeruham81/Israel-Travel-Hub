@@ -83,7 +83,7 @@ describe("four independent airport transportation comparisons", () => {
       "/travel-blog/getting-around-israel/",
       "/travel-blog/ben-gurion-airport-taxis/",
       "/travel-blog/taxi-fares-in-israel/",
-      "/travel-blog/ben-gurion-airport-to-tel-aviv/",
+      "/airport-transfers/ben-gurion-airport-to-tel-aviv/",
       "/travel-blog/from-ben-gurion-airport-on-shabbat/",
     ]));
   });
@@ -179,7 +179,7 @@ describe("four independent airport transportation comparisons", () => {
       "/travel-blog/getting-around-israel/",
       "/travel-blog/ben-gurion-airport-taxis/",
       "/travel-blog/taxi-fares-in-israel/",
-      "/travel-blog/ben-gurion-airport-to-jerusalem/",
+      "/airport-transfers/ben-gurion-airport-to-jerusalem/",
       "/car-rental/",
     ]));
     for (const option of g.options) for (const link of option.inlineLinks || []) {
