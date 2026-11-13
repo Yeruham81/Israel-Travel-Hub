@@ -4,7 +4,7 @@ import { Breadcrumbs, OnThisPage } from "@/components/Guide";
 import { airportTransferContact } from "@/data/registry";
 import { pageMeta, SITE_NAME } from "@/lib/site";
 
-export const LEGAL_UPDATED_AT = "2026-10-21";
+export const LEGAL_UPDATED_AT = "2026-11-13";
 
 export type LegalSection = { id: string; title: string; content: ReactNode };
 
@@ -24,7 +24,7 @@ export function LegalPage({ title, path, intro, sections, otherDocument }: {
     <header className="pt-8">
       <p className="eyebrow">Website &amp; services</p>
       <h1 className="mt-3 text-4xl leading-tight md:text-5xl">{title}</h1>
-      <p className="mt-4 text-sm text-muted-foreground">Last updated: <time dateTime={LEGAL_UPDATED_AT}>21 October 2026</time></p>
+      <p className="mt-4 text-sm text-muted-foreground">Last updated: <time dateTime={LEGAL_UPDATED_AT}>13 November 2026</time></p>
       <div className="prose-guide mt-5 text-muted-foreground">{intro}</div>
     </header>
     <OnThisPage sections={sections.map(section => [section.id, section.title] as const)} fullLabels />
