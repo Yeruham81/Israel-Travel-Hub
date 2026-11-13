@@ -97,14 +97,14 @@ export function JerusalemJourneyOptions({ id }: { id: string }) {
           data-testid="deadsea-attraction-card"
         >
           {photo && <img src={photo.src} alt={photo.alt} width={180} height={180} loading="lazy" decoding="async" className="h-auto min-h-40 w-28 shrink-0 object-cover sm:w-32" />}
-          <span className="flex min-w-0 flex-1 flex-col justify-between gap-2 p-3.5">
-            <span>
+          <div className="flex min-w-0 flex-1 flex-col justify-between gap-2 p-3.5">
+            <div>
               <span className="text-[11px] font-semibold uppercase tracking-wide text-primary">{item.tag}</span>
-              <span className="mt-0.5 block text-lg font-semibold text-foreground group-hover:text-primary">{item.title}</span>
-              <span className="mt-1.5 block text-sm leading-snug text-muted-foreground">{item.description}</span>
-            </span>
+              <h3 className="mt-0.5 text-lg font-semibold text-foreground group-hover:text-primary">{item.title}</h3>
+              <p className="mt-1.5 text-sm leading-snug text-muted-foreground">{item.description}</p>
+            </div>
             <span className="inline-flex items-center gap-1.5 text-sm font-semibold text-primary">{item.link}<ExternalLink className="h-3.5 w-3.5" aria-hidden="true" /></span>
-          </span>
+          </div>
           <span className="sr-only"> (opens in a new tab)</span>
         </a>;
       })}
