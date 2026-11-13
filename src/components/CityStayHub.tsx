@@ -144,7 +144,7 @@ export function CityStayHub({ g, areas }: { g: CityStayGuide; areas: Neighborhoo
                     <span className="sr-only"> (opens in a new tab)</span>
                   </a>
                 ))}
-                <p className="text-xs text-muted-foreground">Sponsored booking link · Rates and inventory checked on the provider site.</p>
+                <p className="text-xs text-muted-foreground">Check room rates and availability on the provider site.</p>
               </div>
             </div>
           </>
