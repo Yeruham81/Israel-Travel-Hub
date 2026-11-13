@@ -65,7 +65,7 @@ describe("homepage marketing copy and service sections", () => {
       ["tours", "Explore all tours & day trips", "/tours/"],
       ["shore-excursions", "Explore all shore excursions", "/shore-excursions/"],
       ["accommodation", "Explore all accommodation", "/accommodation/"],
-      ["attractions", "Explore attractions & experiences", "/attractions/"],
+      ["attractions", "Explore all attractions & experiences", "/attractions/"],
     ] as const) {
       const section = document.getElementById(sectionId)!;
       const button = within(section).getByRole("link", { name: new RegExp(linkName, "i") });
@@ -113,7 +113,7 @@ describe("homepage marketing copy and service sections", () => {
       "Explore all tours & day trips",
       "Explore all shore excursions",
       "Explore all accommodation",
-      "Explore attractions & experiences",
+      "Explore all attractions & experiences",
       "Browse all guides",
     ]) {
       const button = screen.getByRole("link", { name: new RegExp("^" + label + "$", "i") });
