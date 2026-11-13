@@ -108,7 +108,7 @@ export const services: Service[] = [
       { label: "To Haifa", to: "/airport-transfers/ben-gurion-airport-to-haifa/", img: { src: "/images/home/transfer-haifa-bahai-gardens.webp", alt: "Bahá’í Gardens staircase and Shrine in Haifa" } },
       { label: "To Ein Bokek", to: "/airport-transfers/ben-gurion-airport-to-ein-bokek/", img: { src: "/images/home/transfer-ein-bokek-aerial.webp", alt: "Aerial view of Ein Bokek Dead Sea resort area and turquoise water" } },
     ],
-    hub: { label: "Explore airport transfers", to: "/airport-transfers/" },
+    hub: { label: "Explore all airport transfers", to: "/airport-transfers/" },
   },
   {
     id: "tours", eyebrow: "Tours & Day Trips", tagline: "See the Best of Israel in a Day", title: "Tours & Day Trips",
@@ -122,7 +122,7 @@ export const services: Service[] = [
       { label: "Nazareth & Galilee", to: tourCategoryPaths["nazareth-galilee"], img: { src: "/images/attractions/sea-of-galilee.webp", alt: "The Sea of Galilee and green hills overlooking the lake" } },
       { label: "Caesarea, Haifa & Acre", to: tourCategoryPaths["northern-coast"], img: { src: "/images/attractions/haifa-coast.webp", alt: "Haifa’s cityscape and Mediterranean coastline" } },
     ],
-    hub: { label: "Explore tours & day trips", to: "/tours/" },
+    hub: { label: "Explore all tours & day trips", to: "/tours/" },
   },
   {
     id: "shore-excursions", eyebrow: "Shore Excursions", tagline: "Make the Most of Your Time Ashore", title: "Shore Excursions",
@@ -132,7 +132,7 @@ export const services: Service[] = [
       { label: "From Ashdod Port", text: "Explore Jerusalem, Tel Aviv–Jaffa, Masada or the Dead Sea from Ashdod.", cta: "Explore Ashdod excursions", to: "/ashdod-shore-excursions/", img: { src: ashdodPort, alt: "Aerial view of Ashdod Port" } },
       { label: "From Haifa Port", text: "Discover Akko, Nazareth and the Galilee, or visit Jerusalem from Haifa.", cta: "Explore Haifa excursions", to: "/haifa-shore-excursions/", img: { src: haifaPort, alt: "Haifa Port and Haifa Bay seen from Mount Carmel" } },
     ],
-    hub: { label: "Explore shore excursions", to: "/shore-excursions/" },
+    hub: { label: "Explore all shore excursions", to: "/shore-excursions/" },
   },
   {
     id: "accommodation", eyebrow: "Accommodation", tagline: "Find Your Perfect Base", title: "Where to Stay in Israel",
@@ -166,12 +166,14 @@ export const homeGuideCards = {
     guide.id === "travelTips" ? { ...guide, photo: { src: "/images/attractions/ramon-crater.webp", alt: "Landscape of Ramon Crater in Israel" } } : guide),
 };
 
+const photoTitleShadow = "0 1px 3px rgba(0, 0, 0, 0.95), 0 2px 8px rgba(0, 0, 0, 0.75)";
+
 function PhotoCard({ c }: { c: Card }) {
   return (
     <Link to={c.to} className="photo-card group relative block overflow-hidden rounded-xl bg-navy shadow-md focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-ring">
       {/* Use the original 3:2 landscape artwork instead of portrait-cropped desktop tiles. */}
       <img src={c.img.src} alt={c.img.alt} loading="lazy" decoding="async" width={720} height={480} className="aspect-[3/2] w-full object-cover transition-transform duration-500 group-hover:scale-105 xl:aspect-[6/5]" />
-      <span className="absolute bottom-2 left-2 max-w-[calc(100%-1rem)] rounded-md bg-background/95 px-3 py-1.5 font-serif text-base font-semibold leading-tight text-foreground shadow-sm sm:bottom-3 sm:left-3 sm:text-lg">{c.label}</span>
+      <span className="absolute bottom-2 left-2 max-w-[calc(100%-1rem)] font-serif text-base font-semibold leading-tight text-white sm:bottom-3 sm:left-3 sm:text-lg" style={{ textShadow: photoTitleShadow }}>{c.label}</span>
     </Link>
   );
 }
@@ -198,7 +200,7 @@ function AirportTransferCard({ c }: { c: Card }) {
     <li className="min-h-0">
       <Link to={c.to} aria-label={c.label} className="group relative block aspect-[16/9] min-w-0 overflow-hidden rounded-lg bg-navy shadow-sm focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-ring lg:aspect-auto lg:h-full">
         <img src={c.img.src} alt={c.img.alt} loading="lazy" decoding="async" width={720} height={480} className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" />
-        <span className="absolute bottom-2 left-2 max-w-[calc(100%-1rem)] rounded-md bg-background/95 px-2.5 py-1.5 font-serif text-sm font-semibold leading-tight text-foreground shadow-sm sm:bottom-3 sm:left-3 sm:px-3 sm:text-base">{c.label}</span>
+        <span className="absolute bottom-2 left-2 max-w-[calc(100%-1rem)] font-serif text-sm font-semibold leading-tight text-white sm:bottom-3 sm:left-3 sm:text-base" style={{ textShadow: photoTitleShadow }}>{c.label}</span>
       </Link>
     </li>
   );
@@ -209,7 +211,7 @@ function DestinationImageCard({ c }: { c: Card }) {
   return (
     <Link to={c.to} aria-label={c.label} className="group relative block min-w-0 overflow-hidden rounded-lg bg-navy shadow-sm focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-ring">
       <img src={c.img.thumb ?? c.img.src} alt={c.img.alt} loading="lazy" decoding="async" width={400} height={300} className="aspect-[4/3] w-full object-cover transition-transform duration-500 group-hover:scale-105" />
-      <span className="absolute bottom-2 left-2 max-w-[calc(100%-1rem)] rounded-md bg-background/95 px-2.5 py-1.5 font-serif text-sm font-semibold leading-tight text-foreground shadow-sm sm:bottom-3 sm:left-3 sm:px-3 sm:text-base">{c.label}</span>
+      <span className="absolute bottom-2 left-2 max-w-[calc(100%-1rem)] font-serif text-sm font-semibold leading-tight text-white sm:bottom-3 sm:left-3 sm:text-base" style={{ textShadow: photoTitleShadow }}>{c.label}</span>
     </Link>
   );
 }
