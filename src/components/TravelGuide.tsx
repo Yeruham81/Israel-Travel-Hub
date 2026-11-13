@@ -323,7 +323,7 @@ export function TravelGuidePage({ id }: { id: TravelGuideId }) {
       {isTransportOverview && <SourceList ids={sourcesFor(guide)} intro="Official operator and government references checked on the indicated dates. Routes, fares, ticket rules and accessibility can change; verify your exact journey before departure." />}
       {isTaxiFareGuide && <SourceList ids={sourcesFor(guide)} intro="Official taxi tariffs, applicable times and passenger-rights references." />}
       {id === "jerusalemDeadSea" && <SourceList ids={sourcesFor(guide)} intro="Official transport, beach and national-park information. Confirm schedules and conditions for your travel date." />}
-      {id === "bethlehem" && <SourceList ids={sourcesFor(guide)} intro="Official bus, church and entry references. Check routes, site access and travel advice again for your date." />}
+      {id === "bethlehem" && <SourceList ids={sourcesFor(guide)} intro="Official bus, church and entry references." />}
     </article>
   </main>;
 }

@@ -33,8 +33,12 @@ describe("Jerusalem independent day-trip planning guides", () => {
     expect(buses).not.toBeNull();
     expect(buses).toHaveTextContent("Bab al-Zaqaq");
     expect(buses).toHaveTextContent("Checkpoint 300");
-    expect(within(buses as HTMLElement).getByRole("link", { name: /South Buses/ }))
+    expect(within(buses as HTMLElement).getByRole("link", { name: /South Buses' routes and timetables/ }))
       .toHaveAttribute("href", "https://south-buses.com/lines-and-stations/?lang=en");
+    expect(within(buses as HTMLElement).getByRole("link", { name: /fares and payment information/ }))
+      .toHaveAttribute("href", "https://south-buses.com/?lang=en");
+    expect(within(buses as HTMLElement).getByRole("link", { name: /Christian Information Center's East Jerusalem bus guide/ }))
+      .toHaveAttribute("href", "https://www.cicts.org/en/east-jerusalem-bus-lines");
     const entry = container.querySelector("#entry-rules") as HTMLElement;
     const rental = container.querySelector("#rental-car") as HTMLElement;
     expect(screen.getByRole("heading", { name: "Before you go: Area A, entry rules and checkpoints" })).toBeInTheDocument();
@@ -62,14 +66,19 @@ describe("Jerusalem independent day-trip planning guides", () => {
     const cards = screen.getAllByTestId("bethlehem-tour-card");
     expect(cards).toHaveLength(6);
     expect(new Set(cards.map(card => within(card).getByRole("img").getAttribute("src"))).size).toBe(6);
-    expect(cards.map(card => within(card).getByRole("img").getAttribute("src")).join(" ")).not.toMatch(/palestinian-taxi|mamilla/);
+    expect(cards.map(card => within(card).getByRole("img").getAttribute("src")).join(" ")).not.toMatch(/palestinian-taxi|mamilla|manger-square|milk-grotto/);
     expect(container.querySelectorAll("#buses [role='note'], #private-taxi [role='note'], #visit-return [role='note']")).toHaveLength(3);
     expect(container.textContent).not.toContain("These are route descriptions, not live departures.");
     expect(container.textContent).not.toContain("Compare organised Bethlehem tours");
     expect(container.textContent).not.toContain("Prices, reviews and itinerary details are snapshots");
     expect(container.textContent).not.toContain("Starting prices and ratings were checked");
-    expect(within(buses as HTMLElement).getByRole("link", { name: /South Buses' route and station listings/ }).closest("p")).toHaveTextContent("last practical bus back to Jerusalem");
-    expect(within(container.querySelector("#visit-return") as HTMLElement).getByRole("link", { name: /restoration notice/ }).closest("p")).toHaveTextContent("Grotto of the Nativity");
+    expect(within(buses as HTMLElement).getByRole("link", { name: /South Buses' routes and timetables/ }).closest("p")).toHaveTextContent("last practical bus back to Jerusalem");
+    expect(within(container.querySelector("#visit-return") as HTMLElement).getByRole("link", { name: /October 2026 notice/ })).toHaveAttribute("href", "https://www.cicts.org/bethlehem-basilica-of-the-nativity-cts/");
+    expect(within(container.querySelector("#visit-return") as HTMLElement).getByRole("link", { name: /October 2026 notice/ }).closest("p")).toHaveTextContent("12:30 to 14:30");
+    expect(container.querySelector("#shabbat")).toHaveTextContent("11:00 to 15:00");
+    expect(container.querySelector("#checklist")?.querySelectorAll("li")).toHaveLength(4);
+    const bodyPhotos = [...container.querySelectorAll("#private-taxi img, #visit-return img")].map(img => img.getAttribute("src"));
+    expect(cards.some(card => bodyPhotos.includes(within(card).getByRole("img").getAttribute("src")))).toBe(false);
     for (const card of cards) {
       expect(card.tagName).toBe("A");
       expect(card.getAttribute("href")).toMatch(/^https:\/\/(viator|getyourguide)\.tpm\.li\//);
