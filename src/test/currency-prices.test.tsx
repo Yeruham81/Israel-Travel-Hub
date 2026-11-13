@@ -6,8 +6,8 @@ import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { CurrencyRatesContext, CurrencyRatesProvider, ExchangeRateNote, PriceDisplay } from "@/components/CurrencyRates";
 import { initialReferenceFx, referenceFxConfig, type ExchangeRateSnapshot } from "@/data/registry";
 import { routeTree } from "@/routeTree.gen";
-import { Route as TransfersRoute } from "@/routes/transfers.index";
-import { Route as JerusalemRoute } from "@/routes/travel-blog.ben-gurion-airport-to-jerusalem";
+import { Route as TransfersRoute } from "@/routes/airport-transfers.index";
+import { Route as JerusalemRoute } from "@/routes/airport-transfers.ben-gurion-airport-to-jerusalem";
 import { Route as HaifaShoreRoute } from "@/routes/haifa-shore-excursions";
 
 const checkTime = Date.parse("2026-10-17T20:00:00Z");
@@ -36,8 +36,8 @@ describe("international price estimates", () => {
   });
 
   it.each([
-    { label: "airport hub", path: "/transfers/", route: TransfersRoute, count: 11 },
-    { label: "dedicated airport route", path: "/travel-blog/ben-gurion-airport-to-jerusalem/", route: JerusalemRoute, count: 1 },
+    { label: "airport hub", path: "/airport-transfers/", route: TransfersRoute, count: 11 },
+    { label: "dedicated airport route", path: "/airport-transfers/ben-gurion-airport-to-jerusalem/", route: JerusalemRoute, count: 1 },
     { label: "shore-excursion cards", path: "/haifa-shore-excursions/", route: HaifaShoreRoute, count: 4 },
   ])("shows consistent estimates on $label while retaining ILS fares and unpriced inquiries", async ({ path, route, count }) => {
     const router = createRouter({ routeTree, context: { queryClient: new QueryClient() }, history: createMemoryHistory({ initialEntries: [path] }), trailingSlash: "always" });
@@ -53,7 +53,7 @@ describe("international price estimates", () => {
       expect(price.querySelector('[data-currency="EUR"]')).toHaveTextContent(`≈ EUR ${Math.round(amount / 5).toLocaleString("en-US")}`);
       expect(price).toHaveTextContent("charged in ILS");
     }
-    if (path === "/transfers/") {
+    if (path === "/airport-transfers/") {
       const other = container.querySelector('[data-destination="other"]')!;
       expect(other).toHaveTextContent("Ask for a quote");
       expect(other.querySelector('[data-testid="currency-price"]')).toBeNull();
