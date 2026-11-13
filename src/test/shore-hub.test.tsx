@@ -55,10 +55,11 @@ describe("Israel shore excursion hub", () => {
       screen.getByRole("link", { name: "Plan my day from Ashdod" }),
       screen.getByRole("link", { name: "Plan my day from Haifa" }),
     ];
-    for (const choices of [topChoices, bottomChoices]) {
-      expect(choices[0]).toHaveClass("btn-light");
-      expect(choices[1]).toHaveClass("btn-light");
-    }
+    expect(topChoices[0]).toHaveClass("btn-primary");
+    expect(topChoices[1]).toHaveClass("btn-outline");
+    expect(bottomChoices[0]).toHaveClass("btn-light");
+    expect(bottomChoices[1]).toHaveClass("btn-light");
+    expect(screen.getByTestId("hub-header").querySelector("img")).toBeNull();
     const credits = screen.getByText("Image credits").closest("details");
     expect(credits).not.toBeNull();
     expect(credits?.hasAttribute("open")).toBe(false);
