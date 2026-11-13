@@ -376,12 +376,6 @@ export const journeyDestinationGuides = {
         "src": palestinianTaxiPhoto,
         "alt": "Yellow Palestinian taxi photographed on a local street"
       },
-      "links": [
-        {
-          "label": "Enquire about a legally permitted private journey",
-          "to": "/private-driver/"
-        }
-      ],
       "tip": "For a local taxi on the Bethlehem side of Checkpoint 300, agree on the total fare and the currency before getting in—not just the destination at Manger Square.",
       "sourceIds": [
         "m26-bethlehem-entry"
@@ -477,7 +471,7 @@ export const journeyDestinationGuides = {
           }
         }
       ],
-      "tip": "If the Grotto of the Nativity has a long queue, you can visit the nearby Milk Grotto or walk part of Star Street and return later if your schedule allows.",
+      "tip": "If visiting the Grotto of the Nativity is a priority, plan the rest of your day around its limited entry hours and allow time for the queue. Visit nearby sites before or after, rather than counting on being able to return to the grotto later.",
       "sourceIds": [
         "m26-cicts-grotto-hours",
         "m26-custodia-nativity-restoration",

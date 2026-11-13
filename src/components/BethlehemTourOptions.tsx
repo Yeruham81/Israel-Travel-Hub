@@ -6,7 +6,7 @@ import nativityInterior from "@/assets/guides/dead-sea-excursions/bethlehem-nati
 import catholicGrottos from "@/assets/guides/bethlehem/catholic-grottos.jpg";
 import jordanRiver from "@/assets/guides/dead-sea-excursions/jordan-river-qasr-al-yahud.webp";
 import eastJerusalem from "@/assets/jerusalem/east-jerusalem.webp";
-import nativityCourtyard from "@/assets/guides/bethlehem/nativity-courtyard.jpg";
+import shepherdsFieldChapel from "@/assets/guides/bethlehem/shepherds-field-chapel.webp";
 import bethlehemView from "@/assets/home/bethlehem-nativity.webp";
 
 
@@ -16,7 +16,7 @@ const tourPhotos = {
   "jordan-river": { src: jordanRiver, alt: "Pilgrimage site beside the Jordan River" },
   "jerusalem-damascus-gate": { src: eastJerusalem, alt: "Damascus Gate in East Jerusalem, a departure area for Bethlehem tours" },
   bethlehem: { src: bethlehemView, alt: "Church of the Nativity and surrounding Bethlehem buildings" },
-  "shepherds-field": { src: nativityCourtyard, alt: "Church of the Nativity and its stone courtyard in Bethlehem" },
+  "shepherds-field": { src: shepherdsFieldChapel, alt: "Shepherds’ Field Chapel mural in Beit Sahour near Bethlehem" },
 } as const;
 
 /** Same compact price, duration and review cards as the Dead Sea guide.
@@ -63,5 +63,8 @@ export function BethlehemTourOptions() {
         </a>;
       })}
     </div>
+    <p className="mt-2 text-xs leading-relaxed text-muted-foreground">
+      Shepherds’ Field Chapel photo: <a href="https://commons.wikimedia.org/wiki/File:Shepherds_Field_Chapel,_Roman_Catholic_(Beit_Sahour)-interior_(2).jpg" target="_blank" rel="noopener noreferrer" className="underline underline-offset-2">Armineaghayan / Wikimedia Commons</a> · <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener noreferrer" className="underline underline-offset-2">CC BY-SA 4.0</a> (resized).
+    </p>
   </section>;
 }

@@ -61,6 +61,8 @@ describe("Jerusalem independent day-trip planning guides", () => {
     const localTaxi = container.querySelector("#private-taxi") as HTMLElement;
     expect(localTaxi.querySelector("p")?.textContent?.startsWith("A Palestinian taxi driver with the necessary authorisations and insurance")).toBe(true);
     expect(localTaxi.querySelector("p")).toHaveTextContent("Such taxis can generally be found or arranged in East Jerusalem");
+    expect(within(localTaxi).queryByRole("link", { name: /Enquire about a legally permitted private journey/ })).not.toBeInTheDocument();
+    expect(localTaxi.querySelector('a[href="/private-driver/"]')).toBeNull();
     expect((container.querySelector("#visit-return") as HTMLElement).querySelectorAll("p")[0]).not.toHaveTextContent("Manger Square");
     expect((container.querySelector("#bethlehem-sites") as HTMLElement)).toHaveTextContent("Manger Square");
     expect(screen.getByTestId("bethlehem-tour-options")).toHaveTextContent("prices shown are subject to change by tour operators");
@@ -73,7 +75,9 @@ describe("Jerusalem independent day-trip planning guides", () => {
     const cards = screen.getAllByTestId("bethlehem-tour-card");
     expect(cards).toHaveLength(6);
     expect(new Set(cards.map(card => within(card).getByRole("img").getAttribute("src"))).size).toBe(6);
-    expect(cards.map(card => within(card).getByRole("img").getAttribute("src")).join(" ")).not.toMatch(/palestinian-taxi|mamilla|manger-square|milk-grotto/);
+    expect(cards.map(card => within(card).getByRole("img").getAttribute("src")).join(" ")).not.toMatch(/palestinian-taxi|mamilla|manger-square|milk-grotto|nativity-courtyard/);
+    expect(within(cards[5]!).getByRole("img", { name: /Shepherds’ Field Chapel mural/ }).getAttribute("src")).toMatch(/shepherds-field-chapel/);
+    expect(within(screen.getByTestId("bethlehem-tour-options")).getByRole("link", { name: /Armineaghayan \/ Wikimedia Commons/ })).toHaveAttribute("href", expect.stringContaining("commons.wikimedia.org"));
     expect(container.querySelectorAll("#buses [role='note'], #private-taxi [role='note'], #visit-return [role='note']")).toHaveLength(3);
     expect(container.textContent).not.toContain("These are route descriptions, not live departures.");
     expect(container.textContent).not.toContain("Compare organised Bethlehem tours");
@@ -84,6 +88,9 @@ describe("Jerusalem independent day-trip planning guides", () => {
     expect(within(container.querySelector("#visit-return") as HTMLElement).getByRole("link", { name: /October 2026 notice/ }).closest("p")).toHaveTextContent("12:30 to 14:30");
     expect(container.querySelector("#shabbat")).toHaveTextContent("11:00 to 15:00");
     expect(container.querySelector("#checklist")?.querySelectorAll("li")).toHaveLength(4);
+    expect(within(container.querySelector("#checklist") as HTMLElement).getByRole("heading", { name: "Travel checklist" })).toBeInTheDocument();
+    expect(within(container.querySelector("#visit-return") as HTMLElement).getByRole("note")).toHaveTextContent("plan the rest of your day around its limited entry hours");
+    expect(container.textContent).not.toContain("return later if your schedule allows");
     const bodyPhotos = [...container.querySelectorAll("#private-taxi img, #visit-return img")].map(img => img.getAttribute("src"));
     expect(cards.some(card => bodyPhotos.includes(within(card).getByRole("img").getAttribute("src")))).toBe(false);
     for (const card of cards) {
