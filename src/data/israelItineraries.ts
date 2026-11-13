@@ -76,7 +76,7 @@ const days3: ItineraryDay[] = [
   },
   {
     name: "Tel Aviv and Old Jaffa on the coast", region: "Tel Aviv–Jaffa", image: "EXISTING:coast",
-    morning: "Travel from Jerusalem Yitzhak Navon station to Tel Aviv by train, then use local public transport or a short taxi ride to reach Old Jaffa: the train is not door to door. Check the Israel Railways journey planner for your date. Walk through Jaffa’s historic hill, lanes and port, with the flea-market district nearby when its shops are open.",
+    morning: "On a normal rail-service day, travel from Jerusalem Yitzhak Navon station to Tel Aviv by train, then take a local bus or short taxi ride to Old Jaffa: the train is not door to door. Check the Israel Railways journey planner for your date; plan a different transfer if no trains run. Walk through Jaffa’s historic hill, lanes and port, with the flea-market district nearby when its shops are open.",
     afternoon: "Continue toward Neve Tzedek and the seafront promenade, or pause at the beaches in Tel Aviv. If art and culture matter more than the coast, choose Tel Aviv museums instead. Carmel Market is another alternative on its operating days; do not squeeze every option into a short afternoon.",
     evening: "Enjoy dinner in Tel Aviv if staying overnight. If flying home today, end sightseeing in time for your confirmed Ben Gurion Airport connection, your airline’s check-in window and security procedures.",
     practical: "Before leaving Jerusalem, confirm where you can store and collect your luggage in Tel Aviv, including opening hours and transport from the storage location to the airport. Do not assume every rail station has lockers. Consult Ben Gurion Airport connections before deciding how late to sightsee.",
@@ -299,7 +299,6 @@ export const itineraries: Record<ItineraryId, ItineraryGuide> = {
       { day: 1, field: "evening", phrase: "shopping in Jerusalem", to: "/travel-blog/shopping-in-jerusalem/" },
       { day: 1, field: "overnight", phrase: "where to stay in Jerusalem", to: "/travel-blog/where-to-stay-in-jerusalem/" },
       { day: 2, field: "morning", phrase: "Masada National Park", to: "/travel-blog/masada/" },
-      { day: 2, field: "afternoon", phrase: "Ein Bokek", to: "/travel-blog/dead-sea-attractions/" },
       { day: 2, field: "afternoon", phrase: "Dead Sea visitor guide", to: "/travel-blog/the-dead-sea/" },
       { day: 2, field: "afternoon", phrase: "Dead Sea attractions", to: "/travel-blog/dead-sea-attractions/" },
       { day: 2, field: "practical", phrase: "Masada and Dead Sea day tours", to: "/tours/masada-dead-sea/" },
@@ -320,7 +319,7 @@ export const itineraries: Record<ItineraryId, ItineraryGuide> = {
     overviewRows: [
       { focus: "Jerusalem Old City", travel: "Walk / short local ride", night: "Jerusalem · night 1" },
       { focus: "Masada and Ein Bokek", travel: "Tour / car / driver", night: "Jerusalem · night 2" },
-      { focus: "Old Jaffa and Tel Aviv", travel: "Train + local transport", night: "Airport / optional Tel Aviv stay" },
+      { focus: "Old Jaffa and Tel Aviv", travel: "Train when running + local ride", night: "Airport / optional Tel Aviv stay" },
     ],
     daySequences: [
       { day: 1, steps: [
@@ -336,7 +335,7 @@ export const itineraries: Record<ItineraryId, ItineraryGuide> = {
         { stop: "Return to Jerusalem", time: "Allow for the return journey" },
       ] },
       { day: 3, steps: [
-        { stop: "Jerusalem → Tel Aviv → Old Jaffa", time: "Train + local ride; check schedules" },
+        { stop: "Jerusalem → Tel Aviv → Old Jaffa", time: "Train when running + local ride" },
         { stop: "Old Jaffa, port and historic lanes", time: "About 1½–2 hrs" },
         { stop: "Neve Tzedek & waterfront", time: "About 1–2 hrs" },
         { stop: "Market or museum instead of extra beach time", time: "Optional; check hours", optional: true },
