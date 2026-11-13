@@ -1,35 +1,53 @@
 import { readFileSync } from "node:fs";
 import { resolve } from "node:path";
-import { cleanup, render, screen } from "@testing-library/react";
+import { cleanup, render, screen, within } from "@testing-library/react";
 import { afterEach, describe, expect, it } from "vitest";
-import { GuideHeroMedia } from "@/components/GuideHeroMedia";
+import { GuideHeroLayout, GuideHeroMedia } from "@/components/GuideHeroMedia";
 
 const source = (path: string) => readFileSync(resolve(process.cwd(), path), "utf8");
 
 afterEach(cleanup);
 
 describe("shared guide hero layout", () => {
-  it("uses a height-limited local cover image, useful alt text, and optional credits", () => {
+  it("keeps the title and introduction alongside a small photo on desktop", () => {
     render(
-      <GuideHeroMedia src="/images/jerusalem.webp" alt="View across Jerusalem" caption="Jerusalem from above">
-        <p>Image credit</p>
-      </GuideHeroMedia>
+      <GuideHeroLayout image={
+        <GuideHeroMedia src="/images/jerusalem.webp" alt="View across Jerusalem" caption="Jerusalem from above">
+          <p>Image credit</p>
+        </GuideHeroMedia>
+      }>
+        <h1>Travel to Jerusalem</h1>
+        <p>A practical guide for visitors.</p>
+      </GuideHeroLayout>
     );
-    const photo = screen.getByRole("img", { name: "View across Jerusalem" });
-    expect(photo).toHaveAttribute("src", "/images/jerusalem.webp");
-    expect(photo).toHaveAttribute("fetchpriority", "high");
-    expect(photo).toHaveClass("aspect-[16/9]", "max-h-[360px]", "w-full", "object-cover");
+    const layout = screen.getByTestId("guide-hero-layout");
+    const titleColumn = layout.children[0] as HTMLElement;
+    const photoColumn = layout.children[1] as HTMLElement;
+    expect(layout).toHaveClass("grid", "lg:grid-cols-[minmax(0,1.85fr)_minmax(0,0.9fr)]");
+    expect(within(titleColumn).getByRole("heading", { level: 1 })).toHaveTextContent("Travel to Jerusalem");
+    expect(within(titleColumn).getByText("A practical guide for visitors.")).toBeInTheDocument();
+    expect(within(photoColumn).getByRole("img", { name: "View across Jerusalem" })).toBeInTheDocument();
     expect(screen.getByText("Jerusalem from above")).toBeInTheDocument();
     expect(screen.getByText("Image credit")).toBeInTheDocument();
-    expect(screen.getByTestId("guide-hero-media")).toHaveClass("max-w-4xl");
+    const photo = screen.getByRole("img", { name: "View across Jerusalem" });
+    expect(photo).toHaveAttribute("fetchpriority", "high");
+    expect(photo).toHaveClass("aspect-[16/9]", "lg:aspect-[4/3]", "max-h-[300px]", "lg:max-h-[260px]", "w-full", "object-cover");
+    expect(screen.getByTestId("guide-hero-media")).toHaveClass("max-w-2xl", "lg:max-w-none");
   });
 
-  it("preserves the full subject in exceptional landmark photos", () => {
+  it("allows image-free guides to retain full headline width", () => {
+    render(<GuideHeroLayout><h1>Guide without a photograph</h1></GuideHeroLayout>);
+    const layout = screen.getByTestId("guide-hero-layout");
+    expect(layout.children).toHaveLength(1);
+    expect(layout.className).not.toContain("lg:grid-cols-");
+  });
+
+  it("preserves the whole subject in exceptional landmark images", () => {
     render(<GuideHeroMedia src="/images/landmark.webp" alt="Historic building" fit="contain" />);
     expect(screen.getByRole("img", { name: "Historic building" })).toHaveClass("object-contain");
   });
 
-  it("places the article headline and introduction before the shared image in all guide templates", () => {
+  it("uses the shared side-by-side cover in all image-bearing guide templates", () => {
     const paths = [
       "src/components/Guide.tsx",
       "src/components/TravelGuide.tsx",
@@ -42,16 +60,14 @@ describe("shared guide hero layout", () => {
     ];
     for (const path of paths) {
       const copy = source(path);
+      expect(copy, path).toContain("<GuideHeroLayout");
       expect(copy, path).toContain("<GuideHeroMedia");
-      const titleStart = copy.indexOf("<h1");
-      const heroStart = copy.indexOf("<GuideHeroMedia");
-      expect(titleStart, path).toBeGreaterThan(-1);
-      expect(heroStart, path).toBeGreaterThan(titleStart);
+      expect(copy, path).toContain("guide-page-title");
     }
   });
 
-  it("preserves the homepage as a distinct photographic slideshow", () => {
+  it("preserves the homepage as an independent photographic slideshow", () => {
     expect(source("src/components/HomeHero.tsx")).toContain("<HeroCarousel");
-    expect(source("src/components/HomeHero.tsx")).not.toContain("GuideHeroMedia");
+    expect(source("src/components/HomeHero.tsx")).not.toContain("GuideHeroLayout");
   });
 });
