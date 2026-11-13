@@ -297,7 +297,7 @@ describe("tours hub and SEO category pages", () => {
     await renderPage(travelGuidePaths.bethlehem);
     expect(screen.getByRole("heading", { level: 1 })).toHaveTextContent(/How to get from Jerusalem to Bethlehem/i);
     const breadcrumbs = screen.getByRole("navigation", { name: "Breadcrumb" });
-    expect(within(breadcrumbs).getByRole("link", { name: "Travel guides" })).toHaveAttribute("href", "/guides/");
+    expect(within(breadcrumbs).getByRole("link", { name: "Travel guides" })).toHaveAttribute("href", "/travel-blog/");
     expect(document.querySelector("#buses")).not.toBeNull();
     expect(document.querySelector("#private-taxi")).not.toBeNull();
     expect(document.querySelector('[data-testid="tour-card"]')).toBeNull();
