@@ -51,7 +51,7 @@ const baptism = L("Qasr el-Yahud visit guide", "/travel-blog/qasr-el-yahud/");
 
 const days3: ItineraryDay[] = [
   {
-    name: "Jerusalem: one well-planned Old City day", region: "Jerusalem", image: "itinerary-jerusalem-old-city",
+    name: "Jerusalem: one well-planned Old City day", region: "Jerusalem", image: "itinerary-3day-holy-sepulchre",
     morning: "Start your Old City walk near Jaffa Gate and choose a coherent route. A Christian Quarter visit can include the Church of the Holy Sepulchre; a Jewish Quarter route can lead to the Western Wall. Both are worthwhile, but do not try to cover every quarter and sacred site in one morning.",
     afternoon: "Continue exploring your chosen Old City area or visit the Israel Museum as a separate cross-city outing. For Jerusalem museums, allow enough time for the exhibition and the journey; they are not quick stops on an Old City walking loop.",
     evening: "Explore Jaffa Road or eat around Mahane Yehuda when businesses are operating. Friday and Saturday opening patterns differ from an ordinary weekday.",
@@ -310,10 +310,10 @@ export const itineraries: Record<ItineraryId, ItineraryGuide> = {
       { focus: "Old Jaffa and Tel Aviv", night: "Tel Aviv if extending; otherwise depart" },
     ],
     beforeYouGo: [
-      { heading: "Count full sightseeing days", text: "The route assumes you arrive before day one and do not lose most of day three to your departure flight. With fewer usable hours, drop a region rather than compress every stop." },
-      { heading: "Check entry requirements and current advice", text: "Verify visa or ETA-IL requirements for your passport and review current official travel advice before making non-refundable plans. Visa-exempt visitors generally need ETA-IL authorization.", to: "/travel-blog/israel-travel-tips/", label: "Israel travel essentials" },
-      { heading: "Plan around Shabbat and holidays", text: "Regular train services and many buses stop for much of Shabbat, from Friday afternoon until Saturday evening, with variation by route and date. Check the actual timetable.", to: "/travel-blog/getting-around-israel/", label: "Transport guide" },
-      { heading: "Check Masada and Dead Sea conditions", text: "Confirm park reservations, current opening hours, trail heat restrictions and the availability of a designated supervised beach. Bring water and sun protection.", to: "/travel-blog/masada/", label: "Masada planning guide" },
+      { heading: "Count your usable days", text: "Check arrival and departure times before planning three full sightseeing days. If the flight takes most of a day, remove a destination rather than rush the entire route." },
+      { heading: "Check entry requirements", text: "Verify visa or ETA-IL requirements for your passport and read current official travel advice before paying for non-refundable plans. My Israel travel essentials guide explains other preparations.", to: "/travel-blog/israel-travel-tips/", label: "Israel travel essentials" },
+      { heading: "Plan around Shabbat and holidays", text: "Trains and many buses stop for much of Shabbat, with dates and service times varying by route. Consult the Transport guide and check the actual timetable.", to: "/travel-blog/getting-around-israel/", label: "Transport guide" },
+      { heading: "Confirm your desert stops", text: "Check Masada opening hours, any trail heat restrictions and the availability of a designated Dead Sea bathing beach. Bring water and sun protection, and consult my Masada planning guide.", to: "/travel-blog/masada/", label: "Masada planning guide" },
     ],
     relatedGuides: [
       { title: "Jerusalem Old City", description: "Choose a practical walking route through the historic quarters.", to: "/travel-blog/old-city-jerusalem/", image: "itinerary-jerusalem-old-city" },
@@ -342,7 +342,7 @@ export const itineraries: Record<ItineraryId, ItineraryGuide> = {
       { q: "What changes if my three days include Friday or Saturday?", a: "Check the route's train and bus schedules, as regular services often stop for much of Shabbat. Markets, restaurants, religious sites and tours also follow different schedules. Adjust the order or choose a confirmed transport option." },
       { q: "Should I start in Tel Aviv instead of Jerusalem?", a: "You can reverse the route to suit your arrival or departure, but keep the desert excursion next to your Jerusalem stay and avoid planning a long drive plus a flight on the same day." },
     ],
-    hero: "EXISTING:jerusalem",
+    hero: "itinerary-3day-jerusalem-cover",
   },
   "5": {
     id: "5", days: 5, path: "/travel-blog/israel-itinerary-5-days/",
