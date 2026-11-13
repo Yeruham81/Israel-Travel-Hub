@@ -26,7 +26,7 @@ describe("current legal documents", () => {
     const { doc, route } = await legalDocument(path);
     expect(doc.querySelectorAll("h1")).toHaveLength(1);
     expect(doc.querySelector("h1")?.textContent).toBe(title);
-    expect(doc.querySelector("time")?.getAttribute("datetime")).toBe("2026-10-21");
+    expect(doc.querySelector("time")?.getAttribute("datetime")).toBe("2026-11-13");
     expect(doc.querySelector(`a[href="${other}"]`)).not.toBeNull();
     expect(doc.querySelector(`a[href="mailto:${airportTransferContact.email}"]`)).not.toBeNull();
     const contents = doc.querySelectorAll('nav[aria-label="On this page"] a');
