@@ -5,9 +5,9 @@ import hall from "@/assets/home/ben-gurion-t3.webp";
 import panorama from "@/assets/home/jerusalem-old-city.webp";
 import market from "@/assets/jerusalem/mahane-yehuda.webp";
 import masada from "@/assets/home/masada-dead-sea.webp";
-import yardenit from "@/assets/guides/yardenit.jpg";
-import qasr from "@/assets/guides/qasr-el-yahud.jpg";
-import sepulchre from "@/assets/guides/holy-sepulchre.jpg";
+import yardenit from "@/assets/travel-blog/yardenit.jpg";
+import qasr from "@/assets/travel-blog/qasr-el-yahud.jpg";
+import sepulchre from "@/assets/travel-blog/holy-sepulchre.jpg";
 
 const photos = {
   hall: { src: hall, alt: "Ben Gurion Airport Terminal 3 arrivals hall", credit: "GeorgeDement · CC BY-SA 2.0 · resized WebP", sourceUrl: "https://commons.wikimedia.org/wiki/File:Ben_Gurion_Airport_terminal_3_reception_hall.jpg", licenseUrl: "https://creativecommons.org/licenses/by-sa/2.0/" },
@@ -105,7 +105,7 @@ export const expandedTravelGuides = {
         ],
         inlineLinks: [
           { text: "official Ben Gurion Airport taxi guide", to: travelGuidePaths.airportTaxis },
-          { text: "private airport-transfer options", to: "/transfers/" },
+          { text: "private airport-transfer options", to: "/airport-transfers/" },
         ],
         sourceIds: ["guide-gett", "guide-iaa", "taxi-fares-2026"],
       },
@@ -231,7 +231,7 @@ export const expandedTravelGuides = {
     checklist: ["Check passport-specific entry requirements", "Read current official advice and booking-change terms", "Choose a manageable number of hotel bases", "Check Shabbat/holiday arrivals and transfers", "Prepare data, offline maps and payment backup", "Confirm opening/reservation and access arrangements", "Keep time for meals, walking and the return journey"],
     faqs: [{ q: "Should I stay in Jerusalem or Tel Aviv?", a: "Choose around the places you most want to visit. A split stay can suit a trip focused on both cities; a single base can avoid hotel changes when you only want a brief visit to the other." }, { q: "Do I need a rental car for the entire trip?", a: "Compare actual daily routes. City stays can work with walking, transit and taxis; a rental or driver may be more useful for a particular rural or multi-stop segment." }, { q: "What should I arrange before a Shabbat arrival?", a: "Plan the complete airport-to-hotel journey, any terminal transfer and late check-in. Use the separate Shabbat guide to compare the limited weekend bus, taxis, private transfers and rental collection." }],
     sourceIds: ["guide-entry", "guide-iaa", "guide-weekend-711", "israel-rail", "guide-jerusalem-tourism"], related: ["bestTime", "calendar", "food", "topTen", "arrival", "shabbat", "israel", "esim", "jerusalem"],
-    services: [{ label: "Accommodation by destination", to: "/accommodation/" }, { label: "Private airport transfers", to: "/transfers/" }, { label: "Private driver for your itinerary", to: "/private-driver/" }, { label: "Tours & day trips", to: "/tours/" }],
+    services: [{ label: "Accommodation by destination", to: "/accommodation/" }, { label: "Private airport transfers", to: "/airport-transfers/" }, { label: "Private driver for your itinerary", to: "/private-driver/" }, { label: "Tours & day trips", to: "/tours/" }],
   },
   jerusalem: {
     id: "jerusalem", title: "Jerusalem travel guide: Old City sights and itinerary ideas",
@@ -252,7 +252,7 @@ export const expandedTravelGuides = {
     checklist: ["Choose your top interests before choosing a hotel", "Group Old City, hillside and neighbourhood visits sensibly", "Check site reservations, worship and visitor windows", "Prepare for hills, steps and exact vehicle access", "Plan Shabbat meals and transport together", "Keep a day trip distinct from your city sightseeing"],
     faqs: [{ q: "Can I see Jerusalem on a day trip?", a: "You can make a focused visit, especially to the Old City and one nearby area. Overnight stays allow more time for museums, markets, evening atmosphere and different neighbourhoods." }, { q: "Is Jerusalem walkable?", a: "Many central sights can be combined on foot, but hills, steps and stone surfaces matter. Check the whole route and individual access arrangements for mobility needs." }, { q: "Where should a first-time visitor stay?", a: "Compare Mamilla/city centre, Old City surroundings, Mahane Yehuda/Nachlaot and the German Colony against your priorities. Use the area guide for the trade-offs and exact hotel-access questions." }],
     sourceIds: ["guide-jerusalem-tourism", "guide-holy-sepulchre", "guide-mahane-yehuda", "israel-rail"], related: ["jerusalemChurches", "jerusalemShopping", "jerusalemDayTrips", "jerusalemDeadSea", "travelTips", "shabbat"],
-    services: [{ label: "Compare Jerusalem hotel areas", to: "/travel-blog/where-to-stay-in-jerusalem/" }, { label: "Private airport transfer to Jerusalem", to: "/travel-blog/ben-gurion-airport-to-jerusalem/" }, { label: "Private driver for a planned day", to: "/private-driver/" }, { label: "Compare Bethlehem & Jericho tours", to: "/tours/bethlehem-jericho-jordan-river/" }],
+    services: [{ label: "Compare Jerusalem hotel areas", to: "/travel-blog/where-to-stay-in-jerusalem/" }, { label: "Private airport transfer to Jerusalem", to: "/airport-transfers/ben-gurion-airport-to-jerusalem/" }, { label: "Private driver for a planned day", to: "/private-driver/" }, { label: "Compare Bethlehem & Jericho tours", to: "/tours/bethlehem-jericho-jordan-river/" }],
   },
   jerusalemDeadSea: {
     id: "jerusalemDeadSea", title: "Jerusalem to the Dead Sea: bus, car, tour or private driver?",
@@ -313,7 +313,7 @@ export const expandedTravelGuides = {
     checklist: ["Choose your priorities and geographic cluster", "Check each site's own visitor and worship arrangements", "Prepare appropriate dress and follow photography instructions", "Include queues, steps and steep walking in the route", "Confirm guiding and ceremony permissions separately", "Save the exact pickup/meeting point and a shorter alternative"],
     faqs: [{ q: "Can I visit every major church in one day?", a: "A full checklist can leave little time on site and may conflict with different visit windows. Choose one or two geographic clusters and the sites most important to you." }, { q: "Are all churches free and open all day?", a: "No universal rule applies. Churches, archaeological areas, towers and special visits can have different terms, breaks and charges. Check the actual place rather than relying on a general list." }, { q: "Can I join services or arrange group prayer?", a: "Ask the responsible church or organiser about permission, timing, language and group arrangements. Ordinary visitor access does not settle those questions." }],
     sourceIds: ["guide-holy-sepulchre", "guide-jerusalem-tourism"], related: ["jerusalem", "baptism", "jerusalemDayTrips", "jerusalemShopping", "travelTips"],
-    services: [{ label: "Choose a Jerusalem hotel area", to: "/travel-blog/where-to-stay-in-jerusalem/" }, { label: "Plan transport with a private driver", to: "/private-driver/" }, { label: "Compare Bethlehem & Jericho tours", to: "/tours/bethlehem-jericho-jordan-river/" }, { label: "Airport transfer to Jerusalem", to: "/travel-blog/ben-gurion-airport-to-jerusalem/" }],
+    services: [{ label: "Choose a Jerusalem hotel area", to: "/travel-blog/where-to-stay-in-jerusalem/" }, { label: "Plan transport with a private driver", to: "/private-driver/" }, { label: "Compare Bethlehem & Jericho tours", to: "/tours/bethlehem-jericho-jordan-river/" }, { label: "Airport transfer to Jerusalem", to: "/airport-transfers/ben-gurion-airport-to-jerusalem/" }],
   },
   jerusalemShopping: {
     id: "jerusalemShopping", title: "Shopping in Jerusalem: Mahane Yehuda, Old City and malls",
