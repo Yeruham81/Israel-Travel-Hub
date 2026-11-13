@@ -5,9 +5,9 @@ import hall from "@/assets/home/ben-gurion-t3.webp";
 import panorama from "@/assets/home/jerusalem-old-city.webp";
 import market from "@/assets/jerusalem/mahane-yehuda.webp";
 import masada from "@/assets/home/masada-dead-sea.webp";
-import yardenit from "@/assets/travel-blog/yardenit.jpg";
-import qasr from "@/assets/travel-blog/qasr-el-yahud.jpg";
-import sepulchre from "@/assets/travel-blog/holy-sepulchre.jpg";
+import yardenit from "@/assets/guides/yardenit.jpg";
+import qasr from "@/assets/guides/qasr-el-yahud.jpg";
+import sepulchre from "@/assets/guides/holy-sepulchre.jpg";
 
 const photos = {
   hall: { src: hall, alt: "Ben Gurion Airport Terminal 3 arrivals hall", credit: "GeorgeDement · CC BY-SA 2.0 · resized WebP", sourceUrl: "https://commons.wikimedia.org/wiki/File:Ben_Gurion_Airport_terminal_3_reception_hall.jpg", licenseUrl: "https://creativecommons.org/licenses/by-sa/2.0/" },
