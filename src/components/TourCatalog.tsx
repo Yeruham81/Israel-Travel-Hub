@@ -114,7 +114,8 @@ export function TourCatalog({ categoryId, filters, onChange }: { categoryId: Tou
           { label: "Private", search: { format: "private" } },
           { label: "Food & markets", search: { tag: "food" } },
           { label: "History & heritage", search: { tag: "heritage" } },
-          { label: "Art & architecture", search: { tag: "art" } }
+          { label: "Art & architecture", search: { tag: "art" } },
+          { label: "Shortest first", search: { sort: "duration" } }
         ] as const).map(item => {
           const selected = Object.entries(item.search).length === Object.entries(filters).length && Object.entries(item.search).every(([key, value]) => filters[key as keyof TourSearch] === value);
           return <button key={item.label} type="button" className="chip text-xs" aria-pressed={selected} onClick={() => onChange(item.search)}>{item.label}</button>;
