@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { ChevronLeft, ChevronRight, ExternalLink, Star } from "lucide-react";
+import { ExternalLink, Star } from "lucide-react";
 import { customerTestimonials, tripadvisorProfileUrl, tripadvisorSnapshot } from "@/data/homeReviews";
 import { TripadvisorReviewCarousel } from "@/components/TripadvisorReviewCarousel";
 
@@ -40,24 +40,28 @@ export function TripadvisorReviewsSection({ personal = false }: { personal?: boo
 export function PersonalTestimonialsSection() {
   const [active, setActive] = useState(0);
   const current = customerTestimonials[active]!;
-  const change = (delta: number) => setActive(index => (index + delta + customerTestimonials.length) % customerTestimonials.length);
-  return <section aria-labelledby="personal-reviews-h" className="mx-auto mt-20 max-w-6xl px-4">
-    <div className="overflow-hidden rounded-3xl border bg-card shadow-sm">
-      <div className="bg-secondary/30 px-6 py-9 sm:px-10">
-        <div className="flex flex-wrap items-end justify-between gap-4">
-          <div><p className="eyebrow">More Stories from My Travelers</p><h2 id="personal-reviews-h" className="mt-2 text-2xl sm:text-3xl">Personal Messages from Past Clients</h2></div>
-          <div className="flex gap-2"><button type="button" onClick={()=>change(-1)} aria-label="Previous testimonial" className="grid size-11 place-items-center rounded-full border bg-background hover:border-primary"><ChevronLeft aria-hidden /></button><button type="button" onClick={()=>change(1)} aria-label="Next testimonial" className="grid size-11 place-items-center rounded-full border bg-background hover:border-primary"><ChevronRight aria-hidden /></button></div>
-        </div>
-        <div className="mt-6 grid gap-6 rounded-2xl border bg-card p-6 shadow-sm md:grid-cols-[minmax(150px,220px)_minmax(0,1fr)] md:items-center sm:p-8" data-testid="original-testimonial-carousel" aria-live="polite">
-          <img src={current.photo} alt={"Photo featured alongside the testimonial from " + current.author} width={440} height={330} loading="lazy" decoding="async" className="mx-auto aspect-[4/3] w-full max-w-[220px] rounded-2xl border border-border object-cover shadow-md" />
-          <figure>
-            <blockquote className="mt-3 whitespace-pre-line font-serif text-lg leading-relaxed sm:text-xl">“{current.quote}”</blockquote>
-            <figcaption className="mt-5 font-semibold">{current.author}<span className="ml-2 font-normal text-muted-foreground">· {current.location}</span></figcaption>
+  return <section aria-labelledby="personal-reviews-h" className="mx-auto mt-8 max-w-6xl px-4 sm:mt-10">
+    <div className="overflow-hidden rounded-2xl border bg-card shadow-sm">
+      <div className="px-4 pt-5 sm:px-6 sm:pt-6">
+        <p className="eyebrow">More Stories from My Travelers</p>
+        <h2 id="personal-reviews-h" className="mt-1 text-2xl leading-tight sm:text-[1.625rem]">Personal Messages from Past Clients</h2>
+      </div>
+      <div className="px-4 pb-2 pt-4 sm:px-6">
+        <div className="grid gap-4 rounded-xl border bg-background p-4 sm:grid-cols-[minmax(120px,160px)_minmax(0,1fr)] sm:items-center" data-testid="original-testimonial-carousel" aria-live="polite">
+          <img src={current.photo} alt={"Photo featured alongside the testimonial from " + current.author} width={320} height={240} loading="lazy" decoding="async" className="mx-auto aspect-[4/3] w-full max-w-[160px] rounded-lg object-cover" />
+          <figure className="min-w-0">
+            <blockquote className="whitespace-pre-line text-[0.9375rem] leading-relaxed sm:text-base">“{current.quote}”</blockquote>
+            <figcaption className="mt-3 text-sm font-semibold">{current.author}<span className="ml-2 font-normal text-muted-foreground">· {current.location}</span></figcaption>
           </figure>
         </div>
-        <div className="mt-4 flex justify-center gap-2" aria-label="Choose testimonial">
-          {customerTestimonials.map((person,i)=><button key={person.author} type="button" aria-label={"Show testimonial from "+person.author} aria-pressed={i===active} onClick={()=>setActive(i)} className={"h-2.5 rounded-full transition-all "+(i===active?"w-9 bg-primary":"w-2.5 bg-muted-foreground/40 hover:bg-primary/60")} />)}
-        </div>
+      </div>
+      <div className="flex justify-center gap-1 px-4 pb-3 sm:px-6" role="group" aria-label="Choose testimonial">
+        {customerTestimonials.map((person, i) => (
+          <button key={person.author} type="button" aria-label={"Show testimonial from " + person.author} aria-pressed={i === active} onClick={() => setActive(i)}
+            className="group grid size-8 place-items-center rounded-full focus-visible:ring-2 focus-visible:ring-ring">
+            <span aria-hidden="true" className={"h-2.5 rounded-full transition-all " + (i === active ? "w-6 bg-primary" : "w-2.5 bg-muted-foreground/40 group-hover:bg-primary/60")} />
+          </button>
+        ))}
       </div>
     </div>
   </section>;
