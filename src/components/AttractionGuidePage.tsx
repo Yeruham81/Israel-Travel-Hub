@@ -52,7 +52,7 @@ export function AttractionGuidePage({ id }: {id:AttractionId}) {
     <header className="pt-6">
       <Breadcrumbs items={[{name:"Home",to:"/"},{name:"Attractions",to:"/attractions/"},{name:a.title,to:attractionPath(id)}]}/>
       <p className="eyebrow mt-6">{a.region} · Visitor guide</p>
-      <h1 className="mt-3 text-4xl leading-tight md:text-5xl">{a.title}</h1>
+      <h1 className="guide-page-title mt-3">{a.title}</h1>
       <p className="mt-4 max-w-3xl text-lg leading-relaxed text-foreground">{a.intro}</p>
       {!sacred && <p className="mt-4 text-sm text-muted-foreground"><strong>Suggested time:</strong> {a.duration}</p>}
       {a.image && (id === "mount-of-olives" ? (
