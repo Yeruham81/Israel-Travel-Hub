@@ -20,6 +20,11 @@ describe("intent-specific taxi guide cluster", () => {
     expect(taxis.sections.some((section) => section.id === "booking")).toBe(true);
     expect(taxiFares.sections.some((section) => section.id === "tariff-hours")).toBe(true);
     expect(taxiFares.sourceIds).toContain("taxi-fares-2026");
+    expect(taxiFares.title).not.toMatch(/20\d{2}/);
+    expect(taxiFares.sections.map((section) => section.id)).toEqual([
+      "time-distance", "tariff-hours", "extras", "examples", "estimates", "disputes",
+    ]);
+    expect(taxiFares.sections.some((section) => (section.highlightedLinks?.length ?? 0) > 0)).toBe(true);
     expect(airportTaxis.sections.some((section) => section.id === "terminal3")).toBe(true);
     expect(airportTaxis.sourceIds).toContain("guide-gett");
     expect(taxis.sections.find((section) => section.id === "holidays")?.inlineLinks?.map((item) => item.to)).toContain(travelGuidePaths.calendar);
@@ -34,7 +39,7 @@ describe("intent-specific taxi guide cluster", () => {
     expect(examples).toContain("₪51.40");
     expect(examples).toContain("₪102.59");
     const after10 = taxiGuideCluster.taxiFares.sections.find((section) => section.id === "time-distance")!.paragraphs.join(" ");
-    expect(after10).toMatch(/Do not add this higher full per-kilometer rate again/);
+    expect(after10).toContain("instead of the standard kilometre rate");
   });
 
   it("retains useful standalone answers and original images in the general taxi guide", () => {
