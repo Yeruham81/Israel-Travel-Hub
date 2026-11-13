@@ -192,6 +192,8 @@ function GuideRichParagraph({ spans }: { spans: GuideInlineSpan[] }) {
 
 export function TravelGuidePage({ id }: { id: TravelGuideId }) {
   const guide = travelGuides[id];
+  // Area A entry rules introduce the Bethlehem route choices before the comparison.
+  const bethlehemEntryRules = id === "bethlehem" ? guide.sections.find((section) => section.id === "entry-rules") : undefined;
   const providers = guide.providerPageId ? linksForPage(guide.providerPageId) : [];
   const isJerusalemDayJourney = id === "bethlehem" || id === "jerusalemDeadSea";
   const isJerusalemCluster = (["jerusalem", "jerusalemChurches", "jerusalemShopping", "jerusalemDayTrips", "bethlehem", "jerusalemDeadSea"] as string[]).includes(id);
@@ -239,12 +241,22 @@ export function TravelGuidePage({ id }: { id: TravelGuideId }) {
       <OnThisPage sections={id === "jerusalemDeadSea"
         ? [["at-a-glance", "Compare travel options"], ["bus", "Public bus"], ["private", "Taxi & driver"], ["tours", "Organised tours"], ["driving", "Rental car"], ["beach", "Free public beach"], ["journey-destinations", "Optional stops"], ["faq", "FAQ"], ["contact", "Contact"], ["sources", "Sources"]]
         : id === "bethlehem"
-        ? [["at-a-glance", "Compare travel options"], ...guide.sections.map((section) => [section.id, section.title] as const), ["checklist", "Checklist"], ["faq", "FAQ"], ["contact", "Contact"], ["sources", "Sources"]]
+        ? [["entry-rules", "Area A & entry rules"], ["at-a-glance", "Compare travel options"], ...guide.sections.filter((section) => section.id !== "entry-rules").map((section) => [section.id, section.title] as const), ["checklist", "Checklist"], ["faq", "FAQ"], ["contact", "Contact"], ["sources", "Sources"]]
         : isJerusalemDayJourney
         ? [["journey-options", "Compare transport"], ["journey-destinations", "Stops & destinations"], ...guide.sections.map((section) => [section.id, section.title] as const), ["journey-booking", "Tours & private trips"], ["checklist", "Checklist"], ["faq", "FAQ"], ["sources", "Sources"], ["contact", "Contact Moshe"]]
         : isTaxiFareGuide
           ? [["at-a-glance", "Meter rates"], ...guide.sections.map((section) => [section.id, section.title] as const), ["faq", "FAQ"], ["contact", "Contact"], ["sources", "Sources"]]
           : [["at-a-glance", "At a glance"], ...guide.sections.map((section) => [section.id, section.title] as const), ["checklist", "Checklist"], ["faq", "FAQ"], ...(isTransportOverview ? [["contact", "Contact Moshe"], ["sources", "Sources"]] as const : [["sources", "Sources"], ["contact", "Contact Moshe"]] as const)]} compactLabels={id === "taxis" ? taxiNavCompactLabels : isTaxiFareGuide ? fareNavCompactLabels : undefined} />
+      {bethlehemEntryRules && <section id={bethlehemEntryRules.id} aria-labelledby="entry-rules-h" className="mt-10 scroll-mt-24">
+        <h2 id="entry-rules-h" className="text-3xl">{bethlehemEntryRules.title}</h2>
+        <div className="mt-4 max-w-4xl space-y-4 leading-relaxed text-foreground">
+          {bethlehemEntryRules.paragraphs.map((paragraph, index) => <p key={index}>
+            {bethlehemEntryRules.richParagraphs?.[index]
+              ? <GuideRichParagraph spans={bethlehemEntryRules.richParagraphs[index]} />
+              : <GuideParagraph paragraph={paragraph} inlineLinks={bethlehemEntryRules.inlineLinks} />}
+          </p>)}
+        </div>
+      </section>}
       {(!isJerusalemDayJourney || id === "jerusalemDeadSea" || id === "bethlehem") && <section id="at-a-glance" aria-labelledby="comparison-h" className="mt-10 scroll-mt-24">
         <h2 id="comparison-h" className="text-3xl">{guide.comparison.caption}</h2>
         {isTransportOverview && <p className="mt-3 max-w-3xl leading-relaxed">Compare the entire trip to your final address. Cost labels are relative, not live fares; operating hours depend on your date and route.</p>}
@@ -266,7 +278,7 @@ export function TravelGuidePage({ id }: { id: TravelGuideId }) {
           ["weekends", "Shabbat & holidays"],
         ]).map(([anchor, label]) => <a key={anchor} href={"#" + anchor} className="rounded-full border bg-card px-3 py-2 text-sm font-medium text-primary hover:bg-secondary focus-visible:outline-2 focus-visible:outline-primary">{label}</a>)}</div>
       </nav>}
-      {guide.sections.map((section) => <Fragment key={section.id}><section id={section.id} aria-labelledby={`${section.id}-h`} className="mt-12 scroll-mt-24"><h2 id={`${section.id}-h`} className="text-3xl">{section.title}</h2>
+      {guide.sections.filter((section) => !(id === "bethlehem" && section.id === "entry-rules")).map((section) => <Fragment key={section.id}><section id={section.id} aria-labelledby={`${section.id}-h`} className="mt-12 scroll-mt-24"><h2 id={`${section.id}-h`} className="text-3xl">{section.title}</h2>
         <div className="mt-4 max-w-4xl space-y-4 leading-relaxed text-foreground">
           {section.paragraphs.map((paragraph, paragraphIndex) => (
             <Fragment key={paragraphIndex}>

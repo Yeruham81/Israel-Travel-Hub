@@ -45,7 +45,14 @@ describe("Jerusalem independent day-trip planning guides", () => {
     expect(entry).toHaveTextContent("Bethlehem is in Palestinian Authority Area A");
     expect(entry).toHaveTextContent("including dual citizens");
     expect(entry).not.toHaveTextContent("rental-car agreements");
-    expect(entry.compareDocumentPosition(buses!) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
+    expect(entry.compareDocumentPosition(comparison) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
+    expect(comparison.compareDocumentPosition(buses!) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
+    expect(container.querySelectorAll("#entry-rules")).toHaveLength(1);
+    const entryNavLink = container.querySelector('a[href="#entry-rules"]') as HTMLAnchorElement;
+    const comparisonNavLink = container.querySelector('a[href="#at-a-glance"]') as HTMLAnchorElement;
+    expect(entryNavLink).toBeInTheDocument();
+    expect(comparisonNavLink).toBeInTheDocument();
+    expect(entryNavLink.compareDocumentPosition(comparisonNavLink) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
     expect(screen.getByRole("heading", { name: "Can you drive a rental car to Bethlehem?" })).toBeInTheDocument();
     const rentalLink = within(rental).getByRole("link", { name: /^rental car/i });
     expect(rentalLink).toHaveAttribute("href", carRentalAffiliateUrl(travelGuidePaths.bethlehem));
