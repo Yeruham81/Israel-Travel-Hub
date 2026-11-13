@@ -71,7 +71,7 @@ export function travelGuideMeta(id: TravelGuideId) {
   const guide = travelGuides[id];
   const updatedAt = guide.updatedAt || TRAVEL_GUIDE_CHECK_DATE;
   const path = travelGuidePaths[id];
-  const meta = pageMeta({ title: id === "shabbat" ? "Ben Gurion Airport on Shabbat: Bus 711, Taxis & Trains" : guide.title, description: guide.description, path, type: "article", crumbs: [{ name: "Home", path: "/" }, { name: "Travel guides", path: "/guides/" }, { name: guide.title, path }], image: guide.photo.src, imageAlt: guide.photo.alt });
+  const meta = pageMeta({ title: id === "shabbat" ? "Ben Gurion Airport on Shabbat: Bus 711, Taxis & Trains" : guide.title, description: guide.description, path, type: "article", crumbs: [{ name: "Home", path: "/" }, { name: "Travel guides", path: "/travel-blog/" }, { name: guide.title, path }], image: guide.photo.src, imageAlt: guide.photo.alt });
   const imageUrl = new URL(guide.photo.src, CANONICAL_ORIGIN).href;
   return { ...meta, scripts: [...meta.scripts, jsonLd(
     { "@context": "https://schema.org", "@type": "Article", "@id": `${CANONICAL_ORIGIN}${path}#article`, headline: guide.title, description: guide.description, mainEntityOfPage: `${CANONICAL_ORIGIN}${path}`, inLanguage: "en", dateModified: updatedAt,
@@ -81,7 +81,7 @@ export function travelGuideMeta(id: TravelGuideId) {
 }
 
 export function GuideTags({ topics }: { topics: GuideTopicId[] }) {
-  return <ul className="flex flex-wrap gap-2" aria-label="Guide topics">{topics.map((id) => <li key={id}><RouterLink to="/guides/" search={{ topic: id }} className="inline-block rounded-full border bg-background px-3 py-1 text-xs font-medium text-primary hover:bg-secondary">{guideTopics.find((topic) => topic.id === id)!.label}</RouterLink></li>)}</ul>;
+  return <ul className="flex flex-wrap gap-2" aria-label="Guide topics">{topics.map((id) => <li key={id}><RouterLink to="/travel-blog/" search={{ topic: id }} className="inline-block rounded-full border bg-background px-3 py-1 text-xs font-medium text-primary hover:bg-secondary">{guideTopics.find((topic) => topic.id === id)!.label}</RouterLink></li>)}</ul>;
 }
 
 export function GuidePhotoCredit({ photo, insideDisclosure = false }: { photo: GuidePhoto; insideDisclosure?: boolean }) {
@@ -204,7 +204,7 @@ export function TravelGuidePage({ id }: { id: TravelGuideId }) {
   return <main className="mx-auto max-w-5xl px-4 pb-8">
     <article>
       <header className="pt-6">
-        <Breadcrumbs items={[{ name: "Home", to: "/" }, { name: "Travel guides", to: "/guides/" }, { name: guide.title, to: travelGuidePaths[id] }]} />
+        <Breadcrumbs items={[{ name: "Home", to: "/" }, { name: "Travel guides", to: "/travel-blog/" }, { name: guide.title, to: travelGuidePaths[id] }]} />
         <div className="mt-6"><GuideTags topics={guide.topics} /></div>
         <GuideHeroLayout image={
           <GuideHeroMedia src={guide.photo.src} alt={guide.photo.alt}>
