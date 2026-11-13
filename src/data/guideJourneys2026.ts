@@ -199,7 +199,7 @@ export const journeyDestinationGuides = {
   "updatedAt": "2026-11-13",
   "title": "How to Get from Jerusalem to Bethlehem: Bus, Taxi & Tours",
   "description": "Compare bus 231 and 234, licensed private drivers, taxis to Checkpoint 300 and Bethlehem tours. Plan your final stop, documents and the return to Jerusalem.",
-  "intro": "Visiting Bethlehem from Jerusalem? Compare buses, private drivers and tours to the Church of the Nativity, with checkpoint and return tips.",
+  "intro": "Reach Bethlehem's Church of the Nativity from Jerusalem by bus, private driver or tour, with checkpoint and return tips.",
   "answer": "For most independent visitors heading toward central Bethlehem, bus 231 is the more convenient budget starting point; bus 234 serves the Checkpoint 300 approach and usually requires a pedestrian crossing and onward local transport. A guided tour or a properly authorised private driver can simplify the trip. Check current entry eligibility, service and return arrangements before setting off.",
   "topics": [
     "transportation",
