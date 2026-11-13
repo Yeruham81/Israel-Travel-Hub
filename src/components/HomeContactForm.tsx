@@ -50,7 +50,7 @@ export function HomeContactForm({ context = "homepage", guide }: { context?: "ho
           <label className="block text-sm font-medium">Your message *<Textarea name="message" required maxLength={4000} rows={5} value={message} onChange={e => update(setMessage, e.target.value)} placeholder={guide?.placeholder ?? (context === "taxis" ? "Your route, travel date, passengers, luggage or question…" : "Tell me how I can help…")} className="mt-2 bg-background" /></label>
           <label className="flex items-start gap-3 text-sm leading-relaxed"><input type="checkbox" name="consent" checked={consent} onChange={e => { setConsent(e.target.checked); submission.reset(); }} required className="mt-1 size-4 shrink-0 accent-primary" /><span>I agree to share these details with Moshe Barak to respond to my enquiry. <PrivacyInformationLink />.</span></label>
           <QuoteSubmissionControls submission={submission} label="Send message" message />
-          <p className="text-xs text-muted-foreground">{guide ? "This is an inquiry, not a confirmed booking. Private transport requires a separate quote and confirmation." : context === "taxis" ? "This is an inquiry, not a confirmed taxi booking. Private transport is subject to a separate quote and confirmation." : "All bookings require confirmation."}</p>
+          <p className="text-xs text-muted-foreground">All bookings require confirmation.</p>
           </fieldset>
         </form>
       </div>
