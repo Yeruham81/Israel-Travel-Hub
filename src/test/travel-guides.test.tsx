@@ -804,7 +804,7 @@ describe("migrated practical guides", () => {
       expect(affiliateConfig[link.id]!.trackingUrl).toBe(expected[link.id as keyof typeof expected]);
       expect(within(cards[index]!).getByRole("link")).toHaveAttribute("href", expected[link.id as keyof typeof expected]);
       expect(within(cards[index]!).getByRole("link")).toHaveAttribute("rel", "sponsored noopener noreferrer");
-      expect(cards[index]).toHaveTextContent("Sponsored link");
+      expect(cards[index]).not.toHaveTextContent("Sponsored link");
       expect(link.mode).toBe("provider_redirect");
     }
     const first = within(cards[0]!).getByRole("link");
