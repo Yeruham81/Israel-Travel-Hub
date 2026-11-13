@@ -1,3 +1,4 @@
+import { carRentalAffiliateUrl, isCarRentalRoute } from "@/lib/car-rental-affiliate";
 import { QueryClient } from "@tanstack/react-query";
 import { createMemoryHistory, createRouter, RouterContextProvider } from "@tanstack/react-router";
 import { renderToString } from "react-dom/server";
@@ -97,7 +98,7 @@ describe("four independent airport transportation comparisons", () => {
     expect(doc.querySelectorAll("figure img")).toHaveLength(3);
     for (const option of g.options) {
       for (const link of option.inlineLinks || []) {
-        const el = doc.querySelector(`#option-${option.id} a[href="${link.to}"]`);
+        const el = doc.querySelector(`#option-${option.id} a[href="${isCarRentalRoute(link.to) ? carRentalAffiliateUrl(g.path) : link.to}"]`);
         expect(el, `Missing in-paragraph link ${link.text}`).not.toBeNull();
         expect(el?.closest("p")).not.toBeNull();
       }
@@ -223,7 +224,7 @@ describe("four independent airport transportation comparisons", () => {
     expect(doc.querySelector('#option-private aside[data-testid="useful-journey-link"] a[href="#request-quote"]')).not.toBeNull();
     expect(doc.querySelector('#option-rental aside[data-testid="useful-journey-link"]')).toBeNull();
     for (const o of g.options) for (const l of o.inlineLinks || []) {
-      const link = doc.querySelector(`#option-${o.id} a[href="${l.to}"]`);
+      const link = doc.querySelector(`#option-${o.id} a[href="${isCarRentalRoute(l.to) ? carRentalAffiliateUrl(g.path) : l.to}"]`);
       expect(link).not.toBeNull();
       expect(link?.closest("p")).not.toBeNull();
     }
@@ -295,7 +296,7 @@ describe("four independent airport transportation comparisons", () => {
     const doc = new DOMParser().parseFromString(html, "text/html");
     expect(doc.querySelectorAll("figure img")).toHaveLength(3);
     for (const option of g.options) for (const link of option.inlineLinks || []) {
-      const a = doc.querySelector(`#option-${option.id} a[href="${link.to}"]`);
+      const a = doc.querySelector(`#option-${option.id} a[href="${isCarRentalRoute(link.to) ? carRentalAffiliateUrl(g.path) : link.to}"]`);
       expect(a).not.toBeNull();
       expect(a?.closest("p")).not.toBeNull();
     }
@@ -346,12 +347,12 @@ describe("four independent airport transportation comparisons", () => {
     expect(doc.querySelector("main")?.lastElementChild?.id).toBe("sources");
 
     for (const option of g.options) for (const link of option.inlineLinks || []) {
-      const anchor = doc.querySelector(`#option-${option.id} a[href="${link.to}"]`);
+      const anchor = doc.querySelector(`#option-${option.id} a[href="${isCarRentalRoute(link.to) ? carRentalAffiliateUrl(g.path) : link.to}"]`);
       expect(anchor, option.id + " link " + link.text).not.toBeNull();
       expect(anchor?.closest("p")).not.toBeNull();
     }
     for (const link of g.weekendLinks || []) {
-      expect(doc.querySelector(`#shabbat a[href="${link.to}"]`)).not.toBeNull();
+      expect(doc.querySelector(`#shabbat a[href="${isCarRentalRoute(link.to) ? carRentalAffiliateUrl(g.path) : link.to}"]`)).not.toBeNull();
     }
     expect(doc.querySelector('aside a[href="#request-quote"]')).not.toBeNull();
     expect(doc.querySelector('section[aria-label="Related practical guides"]')).not.toBeNull();
