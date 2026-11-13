@@ -29,6 +29,7 @@ export type ItineraryGuide = {
   overviewRows?: { focus: string; night: string }[];
   beforeYouGo?: { heading: string; text: string; to?: InternalPath; label?: string }[];
   relatedGuides?: { title: string; description: string; to: InternalPath; image: keyof typeof migrationPhotos }[];
+  jerusalemTourOptionsDay?: number;
   activityWidgets?: { day: number; city: GetYourGuideWidgetCity }[];
 };
 
@@ -286,6 +287,7 @@ export const itineraries: Record<ItineraryId, ItineraryGuide> = {
       { day: 1, city: "jerusalem" },
       { day: 3, city: "telAviv" },
     ],
+    jerusalemTourOptionsDay: 2,
     dayInlineLinks: [
       { day: 1, field: "morning", phrase: "Old City", to: "/travel-blog/old-city-jerusalem/" },
       { day: 1, field: "afternoon", phrase: "Jerusalem museums", to: "/travel-blog/museums-in-jerusalem/" },
