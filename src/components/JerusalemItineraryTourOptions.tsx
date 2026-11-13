@@ -73,7 +73,7 @@ export function JerusalemItineraryTourOptions() {
           >
             <img src={item.image} alt={item.alt} width={480} height={280} loading="lazy" decoding="async" className="h-40 w-full object-cover" />
             <span className="flex flex-1 flex-col p-3.5">
-              <span className="text-[11px] font-semibold uppercase tracking-wide text-primary">{item.area} · {tour.provider}</span>
+              <span className="text-[11px] font-semibold uppercase tracking-wide text-primary">{tour.provider}</span>
               <span className="mt-1 text-base font-semibold leading-snug text-foreground group-hover/card:text-primary">{tour.title}</span>
               <span className="mt-1.5 line-clamp-2 text-sm text-muted-foreground">{tour.subtitle}</span>
               <span className="mt-3 flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-muted-foreground">
