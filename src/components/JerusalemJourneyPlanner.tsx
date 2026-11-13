@@ -204,7 +204,7 @@ export function JerusalemJourneyBooking({ id }: { id: string }) {
         <Link to={isBethlehem ? "/tours/bethlehem-jericho-jordan-river/" : "/tours/masada-dead-sea/"} className="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-primary underline underline-offset-4">Compare tours <ArrowRight className="h-4 w-4" aria-hidden /></Link>
       </article>}
     </div>
-    <p className="mt-3 text-xs leading-relaxed text-muted-foreground">The external tour links lead to individual supplier listings. They are not live price or availability quotes. The booking partner's final screen controls availability, inclusions and cancellation. I only use affiliate attribution when an approved tracking link is configured.</p>
+    <p className="mt-3 text-xs leading-relaxed text-muted-foreground">{isBethlehem ? "The linked tours are individual supplier listings." : "The linked tour platforms open supplier catalogues, not guaranteed Jerusalem departures."} These are not live price or availability quotes. Check the final operator, itinerary, inclusions and cancellation terms before booking.</p>
   </section>;
 }
 
