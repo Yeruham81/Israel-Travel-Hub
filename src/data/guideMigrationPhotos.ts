@@ -40,6 +40,7 @@ import itineraryAirport from "@/assets/home/ben-gurion-t3.webp";
 import itineraryMasadaCar from "@/assets/home/masada-cable-car.webp";
 import itineraryDeadSeaShore from "@/assets/guides/dead-sea-ein-bokek-shore.webp";
 import itineraryJaffaStreets from "@/assets/tel-aviv/jaffa.webp";
+import itineraryChurchHolySepulchre from "@/assets/guides/holy-sepulchre.jpg";
 
 export const migrationPhotos = {
   "best-time-to-visit-israel": {
@@ -223,6 +224,14 @@ export const migrationPhotos = {
   "EXISTING:ramon": {
     "src": image34,
     "alt": "Desert cliffs and the landscape of Ramon Crater"
+  },
+  "itinerary-3day-jerusalem-cover": {
+    "src": "/images/attractions/hero-jerusalem.webp",
+    "alt": "Wide panorama of the Old City of Jerusalem, its ancient walls and the Dome of the Rock"
+  },
+  "itinerary-3day-holy-sepulchre": {
+    "src": itineraryChurchHolySepulchre,
+    "alt": "Entrance courtyard of the Church of the Holy Sepulchre in Jerusalem’s Old City"
   },
   "itinerary-jerusalem-old-city": {
     "src": itineraryOldCity,

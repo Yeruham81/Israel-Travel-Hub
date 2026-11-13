@@ -79,7 +79,10 @@ describe("October planning, city and heritage guide migration", () => {
     expect(filterGuides("museum", "attractions").some(guide => guide.id === "haifaMuseums")).toBe(true);
     for (const photo of Object.values(migrationPhotos)) {
       const relative = photo.src.replace(/^\//, "").split("?")[0]!;
-      expect(existsSync(path.resolve(process.cwd(), relative)), relative).toBe(true);
+      // Public URLs resolve under public/, while bundled imports resolve to source assets.
+      const isPresent = existsSync(path.resolve(process.cwd(), relative))
+        || (photo.src.startsWith("/images/") && existsSync(path.resolve(process.cwd(), "public", relative)));
+      expect(isPresent, relative).toBe(true);
     }
   });
 

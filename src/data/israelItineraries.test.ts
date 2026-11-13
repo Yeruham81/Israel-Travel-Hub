@@ -96,7 +96,7 @@ describe("migrated Israel itineraries", () => {
     expect(getYourGuideCityWidgetSrc("telAviv", "3_day")).toBe(
       "https://tpwgt.com/content?trs=406243&shmarker=622032.3_day&iata=TLV&locale=en-US&powered_by=false&campaign_id=108&promo_id=4040"
     );
-    expect(new URL(getYourGuideCityWidgetSrc("jerusalem", "3_day")).searchParams.get("iata")).toBe("JLM");
+    expect(new URL(getYourGuideCityWidgetSrc("jerusalem", "3_day")).searchParams.get("iata")).toBe("JRS");
     expect(new URL(getYourGuideCityWidgetSrc("haifa", "5_day")).searchParams.get("iata")).toBe("HFA");
     expect(new URL(getYourGuideCityWidgetSrc("jerusalem", "3_day")).searchParams.get("shmarker")).toBe("622032.3_day");
     for (const guide of Object.values(itineraries)) {
@@ -160,6 +160,28 @@ describe("migrated Israel itineraries", () => {
       expect(guide.logistics[item.index]?.text).toContain(item.phrase);
       expect(router.matchRoutes(item.to as string).at(-1)?.routeId, item.to as string).not.toBe(rootRouteId);
     }
+  });
+
+  it("places final planning checks after the itinerary and shows distinct Old City photos", () => {
+    const guide = itineraries["3"];
+    expect(guide.hero).toBe("itinerary-3day-jerusalem-cover");
+    expect(guide.daysPlan[0]?.image).toBe("itinerary-3day-holy-sepulchre");
+    expect(guide.relatedGuides?.find(item => item.to === "/travel-blog/old-city-jerusalem/")?.image)
+      .toBe("itinerary-jerusalem-old-city");
+    const cityImageKeys = [
+      guide.hero,
+      guide.daysPlan[0]!.image,
+      guide.relatedGuides!.find(item => item.to === "/travel-blog/old-city-jerusalem/")!.image,
+    ];
+    expect(new Set(cityImageKeys).size).toBe(3);
+
+    const view = file("src/components/IsraelItineraryPage.tsx");
+    expect(view).not.toContain('id="before-you-go"');
+    expect(view).toContain('id="planning-checklist"');
+    expect(view).toContain("My final planning checklist");
+    expect(view).toContain("Have more than 3 days in Israel?");
+    expect(view.indexOf('id="other-durations"')).toBeLessThan(view.indexOf('id="planning-checklist"'));
+    expect(view.indexOf('id="planning-checklist"')).toBeLessThan(view.indexOf("<HomeContactForm"));
   });
 
   it("keeps map and photo-credit clutter out of the shared itinerary layout", () => {
