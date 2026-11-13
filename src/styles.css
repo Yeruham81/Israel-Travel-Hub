@@ -202,6 +202,9 @@
     content-visibility: auto;
     contain-intrinsic-size: auto 850px;
   }
+  .home-offscreen-tripadvisor {
+    contain-intrinsic-size: auto 425px;
+  }
   .home-offscreen-reviews {
     contain-intrinsic-size: auto 650px;
   }
