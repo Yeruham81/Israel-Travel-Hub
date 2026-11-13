@@ -1,5 +1,6 @@
 import { Link } from "@tanstack/react-router";
 import { AuthorCard } from "@/components/AuthorCard";
+import { GuideHeroMedia } from "@/components/GuideHeroMedia";
 import { Breadcrumbs, FaqList, OnThisPage, RelatedLinks, Section } from "@/components/Guide";
 import { attractionGuides } from "@/data/attractionGuides";
 import { attractionPath, type AttractionId } from "@/data/attractionGuideTypes";
@@ -55,35 +56,16 @@ export function AttractionGuidePage({ id }: {id:AttractionId}) {
       <h1 className="guide-page-title mt-3">{a.title}</h1>
       <p className="mt-4 max-w-3xl text-lg leading-relaxed text-foreground">{a.intro}</p>
       {!sacred && <p className="mt-4 text-sm text-muted-foreground"><strong>Suggested time:</strong> {a.duration}</p>}
-      {a.image && (id === "mount-of-olives" ? (
-        <figure className="mx-auto mt-7 max-w-4xl">
-          <img
-            src={a.image.src}
-            srcSet={`${heroJerusalemMedium} 1440w, ${heroJerusalemLarge} 1920w`}
-            sizes="(max-width: 768px) calc(100vw - 32px), (max-width: 1100px) calc(100vw - 48px), 896px"
-            alt={a.image.alt}
-            width={1920}
-            height={872}
-            fetchPriority="high"
-            decoding="async"
-            className="block h-auto w-full rounded-xl"
-          />
-          <figcaption className="mt-2 text-right text-xs text-muted-foreground">Jerusalem from the Mount of Olives</figcaption>
-        </figure>
-      ) : id === "mount-zion" ? (
-        <figure className="mx-auto mt-7 max-w-[755px]">
-          <img
-            src={a.image.src}
-            alt={a.image.alt}
-            width={755}
-            height={503}
-            fetchPriority="high"
-            decoding="async"
-            className="block h-auto w-full rounded-xl object-contain"
-          />
-          <figcaption className="mt-2 text-right text-xs text-muted-foreground">Dormition Abbey on Mount Zion</figcaption>
-        </figure>
-      ) : <img src={a.image.src} alt={a.image.alt} width={1200} height={675} fetchPriority="high" decoding="async" className="mt-7 aspect-[16/9] max-h-[450px] w-full rounded-2xl object-cover"/> )}
+      {a.image && <GuideHeroMedia
+        src={a.image.src}
+        alt={a.image.alt}
+        fit={sacred ? "contain" : "cover"}
+        srcSet={id === "mount-of-olives" ? `${heroJerusalemMedium} 1440w, ${heroJerusalemLarge} 1920w` : undefined}
+        sizes={id === "mount-of-olives" ? "(max-width: 768px) calc(100vw - 32px), (max-width: 1100px) calc(100vw - 48px), 896px" : undefined}
+        width={id === "mount-of-olives" ? 1920 : id === "mount-zion" ? 755 : 1200}
+        height={id === "mount-of-olives" ? 872 : id === "mount-zion" ? 503 : 675}
+        caption={id === "mount-of-olives" ? "Jerusalem from the Mount of Olives" : id === "mount-zion" ? "Dormition Abbey on Mount Zion" : undefined}
+      />}
       {!sacred && <AuthorCard/>}
     </header>
     {!sacred && <div className="mt-8 rounded-2xl border border-primary/20 bg-secondary/40 p-6">
