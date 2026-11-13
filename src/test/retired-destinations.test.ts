@@ -24,7 +24,7 @@ describe("removed Destinations directory", () => {
     expect(nav).not.toContain("/destinations/");
     expect(attractionPlanningPaths.some(item => String(item.to) === "/destinations/")).toBe(false);
     const home = readFileSync("src/routes/index.tsx", "utf8");
-    expect(home).toContain('to="/accommodation/" className="btn btn-light mt-6">Explore all accommodation');
+    expect(home).toContain('hub: { label: "Explore all accommodation", to: "/accommodation/" }');
     expect(home).not.toContain('to="/destinations/"');
     expect(home).not.toContain('to="/hotels/"');
     expect(readFileSync("public/sitemap.xml", "utf8")).not.toContain("/destinations/");
