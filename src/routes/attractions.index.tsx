@@ -1,4 +1,5 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute } from "@tanstack/react-router";
+import { SiteLink as Link } from "@/components/SiteLink";
 import { ArrowUpRight, BedDouble, CalendarDays, CarFront, Compass, Ship, TrainFront, type LucideIcon } from "lucide-react";
 import { AuthorCard } from "@/components/AuthorCard";
 import { Breadcrumbs } from "@/components/Guide";
