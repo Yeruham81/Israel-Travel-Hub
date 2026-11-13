@@ -824,8 +824,7 @@ export const journeyDestinationGuides = {
           "title": "By organised tour: transport plus sightseeing",
           "paragraphs": [
             "A group tour departing from Jerusalem is convenient when you want more than a beach visit, especially a combination of Masada, Ein Gedi and the Dead Sea. Transport and the day's stops are arranged for you, making this easier than trying to connect several bus journeys.",
-            "The trade-off is a fixed departure, set time at each stop and less freedom to change the plan. Some excursions focus entirely on swimming; others spend much of the day at archaeological or nature sites. A beach stop may be at a paid northern-shore facility rather than the free public beach at Ein Bokek.",
-            "The tours below offer different combinations of sightseeing and beach time."
+            "The trade-off is a fixed departure, set time at each stop and less freedom to change the plan. Some excursions focus entirely on swimming; others spend much of the day at archaeological or nature sites. A beach stop may be at a paid northern-shore facility rather than the free public beach at Ein Bokek."
           ],
         },
         {
@@ -894,8 +893,8 @@ export const journeyDestinationGuides = {
           "a": "The northern shore is closer, but allow roughly 1½–2 hours to Ein Bokek, depending on traffic and your starting point. Add time if you plan to visit Masada or another attraction."
         },
         {
-          "q": "Can I make a Dead Sea day trip without a car?",
-          "a": "Yes. A direct public bus works for one destination, while a group tour or a pre-arranged driver is more convenient for a day with several stops. Plan your return before leaving Jerusalem."
+          "q": "Is the public beach at Ein Bokek wheelchair-accessible?",
+          "a": "Yes. Tamar Regional Council provides an accessible route into the water at Ein Bokek Central Beach, and beach wheelchairs can be borrowed from the lifeguard station. If you need assistance or a particular facility, check with the council before your visit."
         },
         {
           "q": "Do buses run to the Dead Sea on Shabbat?",
