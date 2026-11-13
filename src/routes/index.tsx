@@ -171,10 +171,7 @@ function PhotoCard({ c }: { c: Card }) {
     <Link to={c.to} className="photo-card group relative block overflow-hidden rounded-xl bg-navy shadow-md focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-ring">
       {/* Use the original 3:2 landscape artwork instead of portrait-cropped desktop tiles. */}
       <img src={c.img.src} alt={c.img.alt} loading="lazy" decoding="async" width={720} height={480} className="aspect-[3/2] w-full object-cover transition-transform duration-500 group-hover:scale-105 xl:aspect-[6/5]" />
-      <span className="absolute inset-0 bg-gradient-to-t from-navy/90 via-navy/30 to-transparent" aria-hidden />
-      <span className="absolute inset-x-0 bottom-0 p-4 text-navy-foreground">
-        <span className="block font-serif text-lg leading-tight">{c.label}</span>
-      </span>
+      <span className="absolute bottom-2 left-2 max-w-[calc(100%-1rem)] rounded-md bg-background/95 px-3 py-1.5 font-serif text-base font-semibold leading-tight text-foreground shadow-sm sm:bottom-3 sm:left-3 sm:text-lg">{c.label}</span>
     </Link>
   );
 }
@@ -201,8 +198,7 @@ function AirportTransferCard({ c }: { c: Card }) {
     <li className="min-h-0">
       <Link to={c.to} aria-label={c.label} className="group relative block aspect-[16/9] min-w-0 overflow-hidden rounded-lg bg-navy shadow-sm focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-ring lg:aspect-auto lg:h-full">
         <img src={c.img.src} alt={c.img.alt} loading="lazy" decoding="async" width={720} height={480} className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" />
-        <span className="pointer-events-none absolute inset-0 bg-gradient-to-t from-navy/90 via-navy/15 to-transparent" aria-hidden="true" />
-        <span className="absolute inset-x-0 bottom-0 px-2.5 pb-2.5 pt-6 font-serif text-sm font-semibold leading-tight text-navy-foreground sm:px-3 sm:pb-3 sm:text-base">{c.label}</span>
+        <span className="absolute bottom-2 left-2 max-w-[calc(100%-1rem)] rounded-md bg-background/95 px-2.5 py-1.5 font-serif text-sm font-semibold leading-tight text-foreground shadow-sm sm:bottom-3 sm:left-3 sm:px-3 sm:text-base">{c.label}</span>
       </Link>
     </li>
   );
@@ -213,8 +209,7 @@ function DestinationImageCard({ c }: { c: Card }) {
   return (
     <Link to={c.to} aria-label={c.label} className="group relative block min-w-0 overflow-hidden rounded-lg bg-navy shadow-sm focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-ring">
       <img src={c.img.thumb ?? c.img.src} alt={c.img.alt} loading="lazy" decoding="async" width={400} height={300} className="aspect-[4/3] w-full object-cover transition-transform duration-500 group-hover:scale-105" />
-      <span className="pointer-events-none absolute inset-0 bg-gradient-to-t from-navy/90 via-navy/15 to-transparent" aria-hidden="true" />
-      <span className="absolute inset-x-0 bottom-0 px-2.5 pb-2.5 pt-6 font-serif text-sm font-semibold leading-tight text-navy-foreground sm:px-3 sm:pb-3 sm:text-base">{c.label}</span>
+      <span className="absolute bottom-2 left-2 max-w-[calc(100%-1rem)] rounded-md bg-background/95 px-2.5 py-1.5 font-serif text-sm font-semibold leading-tight text-foreground shadow-sm sm:bottom-3 sm:left-3 sm:px-3 sm:text-base">{c.label}</span>
     </Link>
   );
 }
