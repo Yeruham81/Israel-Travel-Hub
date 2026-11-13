@@ -30,7 +30,8 @@ describe("one personal About Moshe Barak page", () => {
     expect(screen.getByPlaceholderText("Tell me how I can help…")).toBeInTheDocument();
 
     const methodology = screen.getByRole("region", { name: "How I put this website together" });
-    expect(methodology).toHaveTextContent("Sponsored link");
+    expect(methodology).toHaveTextContent("Understanding the different providers");
+    expect(methodology).not.toHaveTextContent("Sponsored link");
     expect(methodology).toHaveTextContent("I currently don't display live prices or availability");
     expect(methodology).toHaveTextContent("I haven't personally stayed at every property");
     expect(methodology).toHaveTextContent("I don't attach your personal details or flight information");
