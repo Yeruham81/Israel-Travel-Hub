@@ -287,7 +287,7 @@ export const taxiGuideCluster: Record<"taxis" | "taxiFares" | "airportTaxis", Tr
         id: "extras",
         title: "Booking fees, airport supplements and tolls",
         paragraphs: [
-          "Some additional charges are regulated. A dispatch fee may apply when a taxi is sent to collect you; it is separate from the meter's starting charge. Airport supplements apply to departures from the specified airport, not simply because you are travelling towards it.",
+          "Some additional charges are regulated. A dispatch fee may apply when a taxi is sent to collect you; it is separate from the meter's starting charge. Airport supplements apply when leaving specified airports, not simply when travelling towards them. See my airport taxi pickup guide for Ben Gurion ordering details.",
           "Tolls and separately requested passenger waiting are chargeable only under the applicable rules. Ordinary traffic delays are already reflected in the meter's time component. There is no separate standard surcharge just for luggage or for being a tourist.",
         ],
         tables: [{
