@@ -95,13 +95,14 @@ describe("Jerusalem independent day-trip planning guides", () => {
     ];
     expect(deadSeaTourCards.map(tour => affiliateConfig[tour.id]?.trackingUrl)).toEqual(expectedLinks);
     for (const [index, card] of cards.entries()) {
+      const tour = deadSeaTourCards[index]!;
       expect(card.tagName).toBe("A");
       expect(card).toHaveAttribute("href", expectedLinks[index]);
       expect(card.getAttribute("rel")).toContain("sponsored");
       expect(within(card).getByRole("img")).toBeInTheDocument();
       expect(card).toHaveTextContent("From US$");
-      expect(card).toHaveTextContent(deadSeaTourCards[index].duration);
-      expect(card).toHaveTextContent(deadSeaTourCards[index].rating.toFixed(1));
+      expect(card).toHaveTextContent(tour.duration);
+      expect(card).toHaveTextContent(tour.rating.toFixed(1));
       expect(card).not.toHaveTextContent("affiliate link");
       expect(card).not.toHaveTextContent("Sponsored link");
     }
