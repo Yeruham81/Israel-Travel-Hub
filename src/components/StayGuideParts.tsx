@@ -35,12 +35,12 @@ export function StayCategoryCard({ guide }: { guide: HotelCategoryGuide }) {
 }
 
 export function StayBookingDisclosure() {
-  return <div className="mt-5 rounded-xl border bg-secondary/60 p-4 text-sm leading-relaxed"><p>Hotels are selected for location, travel style and practical fit, using the properties' own information. These recommendations do not claim personal stays at every property.</p><p className="mt-2">Links marked “Sponsored link” may earn me a commission at no extra cost to you. Prices and availability are confirmed on the booking site; enter your dates and guests there before choosing a room.</p></div>;
+  return <div className="mt-5 rounded-xl border bg-secondary/60 p-4 text-sm leading-relaxed"><p>Hotels are selected for location, travel style and practical fit, using the properties' own information. These recommendations do not claim personal stays at every property.</p><p className="mt-2">Check prices and availability on the booking site for your dates and guests before choosing a room.</p></div>;
 }
 
 export function StayBrowseLink({ link, pageId }: { link: ProviderLink | undefined; pageId: string }) {
   if (!link) return null;
-  return <div className="mt-5 flex flex-wrap items-center gap-3"><a href={hotelBrowseAffiliateUrl(link, pageId)} target="_blank" rel={relFor(link.isAffiliate)} onClick={() => recordOutboundClick({ pageId, productId: link.id, offerId: link.id })} className="btn btn-outline">{link.title} <ExternalLink className="h-4 w-4" aria-hidden /><span className="sr-only"> (opens in a new tab)</span></a><p className="text-xs text-muted-foreground">{link.isAffiliate ? "Sponsored link · " : ""}Enter dates on {link.providerName} and confirm the location.</p></div>;
+  return <div className="mt-5 flex flex-wrap items-center gap-3"><a href={hotelBrowseAffiliateUrl(link, pageId)} target="_blank" rel={relFor(link.isAffiliate)} onClick={() => recordOutboundClick({ pageId, productId: link.id, offerId: link.id })} className="btn btn-outline">{link.title} <ExternalLink className="h-4 w-4" aria-hidden /><span className="sr-only"> (opens in a new tab)</span></a><p className="text-xs text-muted-foreground">Enter dates on {link.providerName} and confirm the location.</p></div>;
 }
 
 export function StayPhotoCredits({ photos }: { photos: StayGuidePhoto[] }) {
