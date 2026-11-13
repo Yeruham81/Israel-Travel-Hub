@@ -12,7 +12,6 @@ import nazareth from "@/assets/airport-transfers/nazareth.webp";
 import airport from "@/assets/airport-transfers/airport.webp";
 import moshe from "@/assets/airport-transfers/moshe.webp";
 import airportHall from "@/assets/home/ben-gurion-t3.webp";
-import airportPickup from "@/assets/home/airport-pickup.webp";
 import esim from "@/assets/guides/esim-israel.jpeg";
 import roadTrip from "@/assets/home/road-trip.webp";
 import { airportTransferRates, OWNER_BASE, travelGuidePaths } from "@/data/registry";
@@ -75,7 +74,7 @@ export const airportRelatedLinks = [
   {
     label: "Taxis in Israel", to: travelGuidePaths.taxis,
     description: "Make everyday journeys easier after your airport ride. Learn about taxi apps, payment, receipts and the details to confirm before setting off.",
-    photo: { src: airportPickup, alt: "Illustration of a traveler meeting a driver beside a car" },
+    photo: { src: "/images/guides/taxi-in-tel-aviv.webp", alt: "Licensed taxis in Tel Aviv" },
   },
   {
     label: "Where to stay in Jerusalem", to: "/travel-blog/where-to-stay-in-jerusalem/" as const,

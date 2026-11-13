@@ -19,7 +19,6 @@ import masada from "@/assets/home/masada-dead-sea.webp";
 import caesareaDusk from "@/assets/home/caesarea-dusk-feature.webp";
 import caesareaAqueduct from "@/assets/home/caesarea-aqueduct.webp";
 import hotelRoom from "@/assets/home/hotel-room-feature.webp";
-import airportPickup from "@/assets/home/airport-pickup-feature.webp";
 import guidedTour from "@/assets/home/guided-tour-feature.webp";
 import cruisePort from "@/assets/home/cruise-port-feature.webp";
 import ashdodPort from "@/assets/home/ashdod-port.webp";
@@ -34,7 +33,6 @@ import masadaCard from "@/assets/home/masada-dead-sea-card.webp";
 import caesareaDuskCard from "@/assets/home/caesarea-dusk-card.webp";
 import caesareaAqueductCard from "@/assets/home/caesarea-aqueduct-card.webp";
 import hotelRoomCard from "@/assets/home/hotel-room-card.webp";
-import airportPickupCard from "@/assets/home/airport-pickup-card.webp";
 import guidedTourCard from "@/assets/home/guided-tour-card.webp";
 import cruisePortCard from "@/assets/home/cruise-port-card.webp";
 import ashdodPortCard from "@/assets/home/ashdod-port-card.webp";
@@ -100,7 +98,7 @@ export const services: Service[] = [
   {
     id: "transfers", eyebrow: "Airport Transfers", tagline: "Plan a Smooth Arrival in Israel", title: "Airport Transfers",
     text: "Arrange a comfortable private pickup from Ben Gurion Airport to Jerusalem, Tel Aviv or Haifa, with a vehicle and meeting point tailored to your needs.",
-    feature: { src: airportPickup, alt: "Illustrative driver loading luggage for arriving travellers" },
+    feature: { src: "/images/guides/taxi-in-tel-aviv.webp", alt: "Licensed Israeli taxis on a street in Tel Aviv" },
     cards: [
       { label: "Private Transfer to Jerusalem", text: "Book a private pickup to your Jerusalem hotel", to: "/travel-blog/ben-gurion-airport-to-jerusalem/", img: IMG.jerusalem },
       { label: "Private Transfer to Tel Aviv", text: "Airport pickup for Tel Aviv hotels and Jaffa", to: "/travel-blog/ben-gurion-airport-to-tel-aviv/", img: IMG.telAviv },

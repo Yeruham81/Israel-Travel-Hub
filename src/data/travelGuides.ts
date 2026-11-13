@@ -4,7 +4,6 @@ import type { LinkProps } from "@tanstack/react-router";
 import { getShorePort } from "@/data/shoreExcursions";
 import { travelGuidePaths, type TravelGuideId } from "@/data/registry";
 import { airportTransferPhotos } from "@/data/airportTransfers";
-import airportPickup from "@/assets/home/airport-pickup.webp";
 import airportHall from "@/assets/home/ben-gurion-t3.webp";
 import railPlatform from "@/assets/airport-journeys/ben-gurion-rail-platform.webp";
 import navonPlatform from "@/assets/airport-journeys/jerusalem-navon-platform.webp";
@@ -57,7 +56,6 @@ export type TravelGuide = {
   nextSteps?: { label: string; to: LinkProps["to"] }[];
 };
 
-const pickupPhoto: GuidePhoto = { src: airportPickup, alt: "Illustration of an airport pickup with driver and luggage" };
 const hallPhoto: GuidePhoto = { src: airportHall, alt: "Ben Gurion Airport Terminal 3 arrivals hall", credit: "GeorgeDement · CC BY-SA 2.0 · resized WebP", sourceUrl: "https://commons.wikimedia.org/wiki/File:Ben_Gurion_Airport_terminal_3_reception_hall.jpg", licenseUrl: "https://creativecommons.org/licenses/by-sa/2.0/" };
 
 export const travelGuides: Record<TravelGuideId, TravelGuide> = {
@@ -74,7 +72,7 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
     answer: "No. Uber does not currently offer passenger rides in Israel, and Lyft does not list Israel among its rider cities. Uber's official Israel page confirms that its service is unavailable here. Gett and Yango can help you request licensed taxis, while a taxi stand, hotel dispatcher or confirmed transfer may work better for some journeys. Check the actual pickup, fare terms and payment method.",
     topics: ["transportation", "tips"],
     updatedAt: "2026-11-11",
-    photo: pickupPhoto,
+    photo: { src: "/images/guides/taxi-in-tel-aviv.webp", alt: "Licensed taxis on a street in Tel Aviv" },
     facts: [
       { label: "Uber & Lyft", text: "No passenger ride-booking service in Israel as of November 2026" },
       { label: "Taxi-booking apps", text: "Gett and Yango; check availability for your address and time" },
@@ -260,6 +258,7 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
       {
         id: "nesher-amal",
         title: "Do the old Nesher and Amal airport sherut routes still operate?",
+        photo: { src: sherutNesherCardPhoto, alt: "Historic yellow-and-white Nesher airport sherut serving Jerusalem" },
         paragraphs: [
           "No. The regular shared airport-taxi routes formerly associated with Nesher (Ben Gurion Airport–Jerusalem) and Amal (Ben Gurion Airport–Haifa and the north) are no longer operating as those services. Do not arrive expecting to join one of their old airport shared-taxi departures.",
           "Older websites, hotel directions and published fares may still describe the former pickup arrangements. They are not reliable instructions for a current journey. The airport's present ground-transport information instead directs travellers to trains, buses, authorized taxis and its internal shuttle, with pre-booked transfers a separate option."
@@ -319,7 +318,6 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
       {
         id: "official-taxi",
         title: "How do official airport taxis work instead?",
-        photo: pickupPhoto,
         paragraphs: [
           "A licensed airport taxi is reserved for your journey rather than sold by the seat. At Ben Gurion Airport, obtain a ride code using Gett or a self-service kiosk and join the official taxi queue. At Terminal 3, the immediate taxi pickup is on Level G at Exit 03. The airport taxi service operates around the clock with a regulated meter.",
           "Advance Gett pickups can use different instructions. My Ben Gurion Airport taxis guide explains the full procedure; the taxi fares in Israel guide covers tariff periods and lawful additions without repeating those details here."
@@ -527,7 +525,7 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
       {
         id: "leave-airport",
         title: "How do I get from Ben Gurion Airport to my hotel?",
-        photo: pickupPhoto,
+        photo: { src: "/images/guides/airport-taxi-sign.webp", alt: "Taxi entrance sign at Ben Gurion Airport" },
         paragraphs: [
           "Choose your route based on the complete journey to the hotel, not just the first train or bus. Israel Railways serves the airport at Terminal 3 and can be useful for destinations connected to the railway, while buses may fit other journeys when they are operating. Check the actual date, station and final connection with bags.",
           "For an on-demand authorized airport taxi, Gett operates the official order and queue process: request a ride using its app or an airport self-service kiosk, obtain a ride code and join the physical taxi queue. Terminal 3 immediate taxis depart at ground-floor Exit 03; a scheduled Gett pickup is different and is listed at Level 2, Exit 23. The official Ben Gurion Airport taxi guide provides the complete pickup procedure.",
