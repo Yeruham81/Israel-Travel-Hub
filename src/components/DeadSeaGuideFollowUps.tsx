@@ -19,7 +19,7 @@ const related: {
 }[] = [
   {
     title: "Dead Sea visitor guide",
-    description: "Find managed beaches, facilities and useful arrival tips.",
+    description: "Explore beaches, facilities, floating tips and useful visitor information.",
     to: "/travel-blog/the-dead-sea/",
     photo: deadSeaBeach,
     alt: "Dead Sea beach and water",
@@ -33,7 +33,7 @@ const related: {
   },
   {
     title: "Ein Gedi Nature Reserve",
-    description: "Check which trails are open before planning a hike.",
+    description: "Discover the reserve's waterfalls, green trails and desert wildlife.",
     to: "/travel-blog/ein-gedi/",
     photo: einGedi,
     alt: "Green oasis landscape at Ein Gedi",
@@ -69,10 +69,10 @@ const nextSteps: { title: string; description: string; to: LinkProps["to"]; acti
     action: "Airport to Ein Bokek",
   },
   {
-    title: "Spend a night at the Dead Sea",
-    description: "See the spa hotel areas if you would rather stay overnight.",
-    to: "/dead-sea/spa-hotels/",
-    action: "Explore spa hotels",
+    title: "When is the best time to visit Israel?",
+    description: "Plan around seasonal weather, holidays and major travel periods.",
+    to: "/travel-blog/best-time-to-visit-israel/",
+    action: "Israel travel seasons",
   },
   {
     title: "Plan more of Jerusalem",
