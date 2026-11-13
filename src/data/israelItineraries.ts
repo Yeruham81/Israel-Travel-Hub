@@ -50,7 +50,7 @@ const baptism = L("Qasr el-Yahud visit guide", "/travel-blog/qasr-el-yahud/");
 const days3: ItineraryDay[] = [
   {
     name: "Jerusalem: one well-planned Old City day", region: "Jerusalem", image: "itinerary-jerusalem-old-city",
-    morning: "Start near Jaffa Gate and choose a coherent walking route. A Christian Quarter visit can include the Church of the Holy Sepulchre; a Jewish Quarter route can lead to the Western Wall. Both are worthwhile, but do not try to cover every quarter and sacred site in one morning.",
+    morning: "Start your Old City walk near Jaffa Gate and choose a coherent route. A Christian Quarter visit can include the Church of the Holy Sepulchre; a Jewish Quarter route can lead to the Western Wall. Both are worthwhile, but do not try to cover every quarter and sacred site in one morning.",
     afternoon: "Continue exploring your chosen Old City area or visit the Israel Museum as a separate cross-city outing. For Jerusalem museums, allow enough time for the exhibition and the journey; they are not quick stops on an Old City walking loop.",
     evening: "Explore Jaffa Road or eat around Mahane Yehuda when businesses are operating. Friday and Saturday opening patterns differ from an ordinary weekday.",
     practical: "Old City streets have steps and uneven surfaces. Check site-specific entry rules and religious-service times; access to the Temple Mount/Haram al-Sharif cannot be assumed.",
