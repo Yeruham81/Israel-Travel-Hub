@@ -4,7 +4,7 @@ import { QueryClient } from "@tanstack/react-query";
 import { routeTree } from "@/routeTree.gen";
 import { readFileSync } from "node:fs";
 import { resolve } from "node:path";
-import { itineraryIds, itineraries } from "@/data/israelItineraries";
+import { itineraryIds, itineraries, itinerarySourcesByGuide } from "@/data/israelItineraries";
 import { itineraryCards } from "@/data/hotelHub";
 import { guideDirectory } from "@/data/travelGuides";
 import { allNavGroups } from "@/data/nav";
@@ -84,6 +84,38 @@ describe("migrated Israel itineraries", () => {
         expect(router.matchRoutes(info.to as string).at(-1)?.routeId, `${guide.id}: ${info.to}`).not.toBe(rootRouteId);
       }
     }
+  });
+
+  it("has a focused, bookable-through-guides three-day plan without intrusive affiliate links", () => {
+    const three = itineraries["3"];
+    expect(three.overviewRows).toHaveLength(3);
+    expect(three.beforeYouGo?.length).toBeGreaterThanOrEqual(4);
+    expect(three.relatedGuides).toHaveLength(6);
+    expect(three.hero).not.toEqual(three.daysPlan[0]?.image);
+
+    const related = three.relatedGuides ?? [];
+    expect(new Set(related.map(item => item.to)).size).toBe(related.length);
+    expect(new Set(related.map(item => item.image)).size).toBe(related.length);
+    expect(three.daysPlan[1]?.links.some(link => link.to === "/tours/masada-dead-sea/")).toBe(true);
+    expect(three.logistics.some(tip => tip.to === "/car-rental/")).toBe(true);
+    expect(three.logistics.some(tip => tip.to === "/travel-blog/where-to-stay-in-jerusalem/")).toBe(true);
+
+    const router = createRouter({ routeTree, context: { queryClient: new QueryClient() }, trailingSlash: "always" });
+    for (const link of [...related, ...(three.beforeYouGo ?? [])].filter(item => item.to)) {
+      const path = link.to as string;
+      expect(router.matchRoutes(path).at(-1)?.routeId, path).not.toBe(rootRouteId);
+    }
+    expect(itinerarySourcesByGuide["3"].some(item => /Bahá/i.test(item.label))).toBe(false);
+    expect(itinerarySourcesByGuide["3"].some(item => /Masada/i.test(item.label))).toBe(true);
+    for (const id of itineraryIds) {
+      expect(itinerarySourcesByGuide[id].length).toBeGreaterThanOrEqual(3);
+    }
+
+    const view = file("src/components/IsraelItineraryPage.tsx");
+    expect(view).toContain("Related practical guides");
+    expect(view).toContain("Daily route and hotel bases");
+    expect(view).toContain("<SourcesDisclosure>");
+    expect(view.indexOf("<HomeContactForm")).toBeLessThan(view.indexOf("<SourcesDisclosure>"));
   });
 
   it("has contextual navigation and a generated route-tree entry for every itinerary", () => {
