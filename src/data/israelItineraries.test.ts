@@ -205,7 +205,7 @@ describe("migrated Israel itineraries", () => {
     }
   });
 
-  it("places final planning checks after the itinerary and shows distinct Old City photos", () => {
+  it("integrates pre-booking checks with transport tips after the itinerary and keeps distinct Old City photos", () => {
     const guide = itineraries["3"];
     expect(guide.hero).toBe("itinerary-3day-jerusalem-cover");
     expect(guide.daysPlan[0]?.image).toBe("itinerary-3day-holy-sepulchre");
@@ -220,11 +220,19 @@ describe("migrated Israel itineraries", () => {
 
     const view = file("src/components/IsraelItineraryPage.tsx");
     expect(view).not.toContain('id="before-you-go"');
-    expect(view).toContain('id="planning-checklist"');
-    expect(view).toContain("My final planning checklist");
+    expect(view).not.toContain('id="planning-checklist"');
+    expect(view).toContain("My practical planning tips");
+    expect(view).toContain("Transport and hotel planning");
+    expect(view).toContain("Before you book");
     expect(view).toContain("Have more than 3 days in Israel?");
-    expect(view.indexOf('id="other-durations"')).toBeLessThan(view.indexOf('id="planning-checklist"'));
-    expect(view.indexOf('id="planning-checklist"')).toBeLessThan(view.indexOf("<HomeContactForm"));
+    expect(view.indexOf('id="days"')).toBeLessThan(view.indexOf('id="transport"'));
+    expect(view.indexOf('id="transport"')).toBeLessThan(view.indexOf('id="alternatives"'));
+    expect(view.indexOf("Transport and hotel planning")).toBeLessThan(view.indexOf("Before you book"));
+    expect(view.indexOf("Before you book")).toBeLessThan(view.indexOf('id="alternatives"'));
+    expect(view.indexOf('id="alternatives"')).toBeLessThan(view.indexOf('id="other-durations"'));
+    expect(view.indexOf("Before you book")).toBeLessThan(view.indexOf("<HomeContactForm"));
+    expect(view).toContain("g.beforeYouGo.map(tip =>");
+    expect(view).toContain("g.logistics.map((tip, index) =>");
   });
 
   it("keeps map and photo-credit clutter out of the shared itinerary layout", () => {
