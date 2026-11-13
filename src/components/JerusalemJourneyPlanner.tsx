@@ -161,7 +161,7 @@ export function JerusalemJourneyBooking({ id }: { id: string }) {
     <h2 id="journey-booking-h" className="text-3xl">{isBethlehem ? "Bethlehem tours that start in Jerusalem" : "Book a Dead Sea tour or private ride"}</h2>
     <p className="mt-2 max-w-3xl text-sm leading-relaxed text-muted-foreground">{isBethlehem
       ? "These are different itineraries, not interchangeable transfers to the Church of the Nativity. Confirm the crossing arrangements, site access and exact Jerusalem departure point."
-      : "A private car and driver can be arranged for a Masada and Dead Sea day from Jerusalem. For group tours, choose a product that actually departs from Jerusalem."}</p>
+      : "A private car and driver can be arranged for a Masada and Dead Sea day from Jerusalem. For group tours, compare the Jerusalem departure and the full inclusions before choosing a supplier."}</p>
     <div className="mt-5 grid gap-4 md:grid-cols-2">
       {!isBethlehem && <article className="flex flex-col rounded-2xl border border-primary/25 bg-card p-5" data-testid="journey-owner-trip">
         <p className="text-xs font-semibold text-primary">Moshe Barak · private transport</p>
@@ -196,7 +196,7 @@ export function JerusalemJourneyBooking({ id }: { id: string }) {
           <p className="mt-2 text-xs text-muted-foreground">Sponsored link; I may earn a commission at no extra cost to you.</p>
         </article>;
       })}
-      {isBethlehem &&       <article className="flex flex-col rounded-2xl border bg-secondary/30 p-5">
+      {isBethlehem && <article className="flex flex-col rounded-2xl border bg-secondary/30 p-5">
         <p className="text-xs font-semibold text-primary">Other options</p>
         <h3 className="mt-2 text-xl font-semibold">{isBethlehem ? "More Bethlehem, Jericho & Jordan River tours" : "More Masada & Dead Sea tours"}</h3>
         <p className="mt-2 flex-1 text-sm leading-relaxed text-muted-foreground">Browse the tour catalogue and choose the departure city, actual stops and tour format before following a supplier link.</p>
