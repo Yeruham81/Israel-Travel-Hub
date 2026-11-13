@@ -1,4 +1,4 @@
-import type { ReactNode } from "react";
+import { useLayoutEffect, useRef, type ReactNode } from "react";
 
 /**
  * The shared guide introduction: readable title and copy on the left, a small
@@ -6,8 +6,53 @@ import type { ReactNode } from "react";
  * the text, without narrowing the heading.
  */
 export function GuideHeroLayout({ children, image }: { children: ReactNode; image?: ReactNode }) {
+  const layoutRef = useRef<HTMLDivElement>(null);
+
+  useLayoutEffect(() => {
+    const layout = layoutRef.current;
+    const intro = layout?.querySelector<HTMLElement>("[data-guide-intro]");
+    if (!layout || !image || !intro) return;
+
+    // A slightly wider photo is allowed only when the COMPLETE introduction
+    // still fits into four lines. Do not truncate the text to make it fit.
+    const measure = () => {
+      const desktop = window.matchMedia?.("(min-width: 1024px)").matches ?? window.innerWidth >= 1024;
+      if (!desktop) {
+        layout.classList.remove("guide-hero-photo-expanded");
+        return;
+      }
+      layout.classList.add("guide-hero-photo-expanded");
+      const lineHeight = Number.parseFloat(window.getComputedStyle(intro).lineHeight);
+      const introHeight = intro.getBoundingClientRect().height;
+      layout.classList.toggle(
+        "guide-hero-photo-expanded",
+        Number.isFinite(lineHeight) && lineHeight > 0 && introHeight <= lineHeight * 4 + 1,
+      );
+    };
+
+    measure();
+    let lastWidth = -1;
+    const observer = typeof ResizeObserver === "undefined" ? null : new ResizeObserver(([entry]) => {
+      const width = entry?.contentRect.width ?? 0;
+      if (Math.abs(width - lastWidth) < 1) return;
+      lastWidth = width;
+      measure();
+    });
+    observer?.observe(layout);
+    window.addEventListener("resize", measure);
+    let mounted = true;
+    document.fonts?.ready.then(() => { if (mounted) measure(); });
+    return () => {
+      mounted = false;
+      observer?.disconnect();
+      window.removeEventListener("resize", measure);
+      layout.classList.remove("guide-hero-photo-expanded");
+    };
+  });
+
   return (
     <div
+      ref={layoutRef}
       className={`guide-hero-layout mt-6 grid min-w-0 items-start gap-5 ${image ? "lg:grid-cols-[minmax(0,1.85fr)_minmax(0,0.9fr)] lg:gap-7" : ""}`}
       data-testid="guide-hero-layout"
     >
