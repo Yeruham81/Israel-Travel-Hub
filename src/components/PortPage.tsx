@@ -48,7 +48,7 @@ export function PortPage({ id, filters: routeSearch, onFilterChange }: { id: Sho
       <div className="mt-6 grid items-center gap-7 lg:grid-cols-[1.2fr_1fr]">
         <div>
           <p className="eyebrow">Your ship. Your day ashore.</p>
-          <h1 className="mt-3 text-4xl leading-[1.1] md:text-5xl">{port.title}</h1>
+          <h1 className="guide-page-title mt-3">{port.title}</h1>
           <p className="mt-4 text-lg leading-relaxed text-muted-foreground">{port.intro}</p>
           <div className="mt-5"><a href="#request-quote" onClick={focusQuote} className="btn btn-primary">Request a private day trip</a></div>
         </div>
