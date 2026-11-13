@@ -11,26 +11,26 @@ export type SidebarNavItem =
 export type NavGroup = { title: string; items: SidebarNavItem[] };
 
 export const airportTransferNav = {
-  label: "Airport transfers", to: "/transfers/" as const,
+  label: "Airport transfers", to: "/airport-transfers/" as const,
   childrenLabel: "Airport transfer destinations", alwaysExpanded: true,
   children: [
     ...airportTransferRoutes.map((route) => ({
       label: route.id === "dead-sea" ? "To Ein Bokek at the Dead Sea" : `To ${airportTransferRates.find((rate) => rate.id === route.id)!.destination}`,
       to: route.path,
     })),
-    { label: "To other destinations", to: "/transfers/" },
+    { label: "To other destinations", to: "/airport-transfers/" },
   ],
 } satisfies SidebarNavItem;
 
 /** Six primary links: shared by desktop header and footer, in homepage order. */
 export const serviceNav: NavItem[] = [
   { label: "Home", to: "/" },
-  { label: "Airport transfers", to: "/transfers/" },
+  { label: "Airport transfers", to: "/airport-transfers/" },
   { label: "Tours & Day Trips", to: "/tours/" },
   { label: "Shore excursions", to: "/shore-excursions/" },
   { label: "Accommodation", to: "/accommodation/" },
   { label: "Attractions", to: "/attractions/" },
-  { label: "Travel guides", to: "/guides/" },
+  { label: "Travel guides", to: "/travel-blog/" },
 ];
 
 /** Desktop top navigation: exactly the six primary sections. */
@@ -147,7 +147,7 @@ export const allNavGroups: NavGroup[] = [
   {
     title: "Travel guides",
     items: [
-      { label: "All travel guides", to: "/guides/" },
+      { label: "All travel guides", to: "/travel-blog/" },
       { label: "Israel itineraries", headingOnly: true, childrenLabel: "Trip lengths", children: [
         { label: "Israel in 3 days", to: "/travel-blog/israel-itinerary-3-days/" },
         { label: "Israel in 5 days", to: "/travel-blog/israel-itinerary-5-days/" },
