@@ -323,12 +323,13 @@ export const taxiGuideCluster: Record<"taxis" | "taxiFares" | "airportTaxis", Tr
         id: "estimates",
         title: "Metered taxis, app estimates and pre-booked transfers",
         paragraphs: [
-          "A taxi app may show an estimated price, but that is not necessarily a fixed fare. Check the service terms before confirming and keep the ride record. My taxis in Israel guide explains how to recognize and book licensed cabs.",
+          "A taxi app may show an estimated price, but that is not necessarily a fixed fare. Check the service terms before confirming and keep the ride record. My taxis in Israel guide explains how to book licensed cabs; the guide to Uber alternatives in Israel compares Gett, Yango and current ridesharing availability.",
           "For a pre-arranged airport pickup, extra luggage, a large group or a longer journey, a separately quoted private transfer may be more convenient. Check the total price, vehicle capacity, pickup point, waiting time, tolls and cancellation conditions rather than comparing only the headline price.",
           "For practical route choices, compare Ben Gurion Airport to Tel Aviv, Jerusalem, Haifa or Ein Bokek. Those guides cover trains and other alternatives as well as taxis.",
         ],
         inlineLinks: [
           { text: "taxis in Israel guide", to: travelGuidePaths.taxis },
+          { text: "guide to Uber alternatives in Israel", to: travelGuidePaths.uber },
           { text: "Ben Gurion Airport to Tel Aviv", to: "/travel-blog/how-to-get-from-ben-gurion-airport-to-tel-aviv/" },
           { text: "Jerusalem", to: "/travel-blog/how-to-get-from-ben-gurion-airport-to-jerusalem/" },
           { text: "Haifa", to: "/travel-blog/how-to-get-from-ben-gurion-airport-to-haifa/" },
