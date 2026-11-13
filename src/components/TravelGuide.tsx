@@ -65,7 +65,7 @@ export function travelGuideMeta(id: TravelGuideId) {
 }
 
 export function GuideTags({ topics }: { topics: GuideTopicId[] }) {
-  return <ul className="flex flex-wrap gap-2" aria-label="Guide topics">{topics.map((id) => <li key={id}><RouterLink to="/guides/" search={{ topic: id }} className="inline-block rounded-full border bg-background px-3 py-1 text-xs font-medium text-primary hover:bg-secondary">{guideTopics.find((topic) => topic.id === id)!.label}</Link></li>)}</ul>;
+  return <ul className="flex flex-wrap gap-2" aria-label="Guide topics">{topics.map((id) => <li key={id}><RouterLink to="/guides/" search={{ topic: id }} className="inline-block rounded-full border bg-background px-3 py-1 text-xs font-medium text-primary hover:bg-secondary">{guideTopics.find((topic) => topic.id === id)!.label}</RouterLink></li>)}</ul>;
 }
 
 export function GuidePhotoCredit({ photo, insideDisclosure = false }: { photo: GuidePhoto; insideDisclosure?: boolean }) {
