@@ -27,6 +27,16 @@ const targets = [
     url: "https://www.viator.com/tours/Jerusalem/Masada-Ein-Gedi-and-Dead-Sea-Tour-from-Jerusalem/d921-6540P7",
     sub_id: "jslm_dead_sea_masada_eingedi_viator",
   },
+  {
+    id: "jslm-deadsea-masada-gyg",
+    url: "https://www.getyourguide.com/jerusalem-l97/masada-the-dead-sea-full-day-tour-from-jerusalem-t21495/",
+    sub_id: "jslm_dead_sea_masada_gyg",
+  },
+  {
+    id: "jslm-deadsea-sunrise-gyg",
+    url: "https://www.getyourguide.com/jerusalem-l97/from-jerusalem-masada-at-sunrise-ein-gedi-dead-sea-tour-t23458/",
+    sub_id: "jslm_dead_sea_sunrise_gyg",
+  },
 ];
 
 for (const item of targets) {
@@ -34,7 +44,7 @@ for (const item of targets) {
   if (u.protocol !== "https:" || !["www.viator.com", "www.getyourguide.com"].includes(u.hostname)) {
     throw new Error("Unapproved source URL");
   }
-  if (!/^jslm_dead_sea_(beach|masada|masada_eingedi)_viator$/.test(item.sub_id)) throw new Error("Invalid page SubID");
+  if (!/^jslm_dead_sea_((beach|masada|masada_eingedi)_viator|(masada|sunrise)_gyg)$/.test(item.sub_id)) throw new Error("Invalid page SubID");
 }
 if (process.argv.includes("--validate")) {
   console.log("Validated " + targets.length + " direct destination URLs for page " + pageId);
