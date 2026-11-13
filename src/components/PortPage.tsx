@@ -2,7 +2,7 @@ import { Link } from "@tanstack/react-router";
 import { useState } from "react";
 import { Breadcrumbs, Checklist, FaqList, OnThisPage, Section, SourceList } from "@/components/Guide";
 import { GuidePhotoCredit } from "@/components/TravelGuide";
-import { GuideHeroMedia } from "@/components/GuideHeroMedia";
+import { GuideHeroLayout, GuideHeroMedia } from "@/components/GuideHeroMedia";
 import { ShoreQuoteForm } from "@/components/ShoreQuoteForm";
 import { airportTransferPhotos } from "@/data/airportTransfers";
 import { getShoreCatalog, getShorePort, shoreExcursionBenefits } from "@/data/shoreExcursions";
@@ -46,14 +46,13 @@ export function PortPage({ id, filters: routeSearch, onFilterChange }: { id: Sho
     <header className="pt-6">
       <Breadcrumbs items={crumbsFor(id).map((crumb) => ({ name: crumb.name, to: crumb.path }))} />
       <nav aria-label="Choose your cruise port" className="mt-5 flex flex-wrap gap-2">{(Object.keys(shorePorts) as ShorePortId[]).map((portId) => <Link key={portId} to={shorePorts[portId].path} className="chip inline-block" activeProps={{ "aria-current": "page", className: "bg-navy text-navy-foreground" }}>{shorePorts[portId].name} Port</Link>)}</nav>
-      <div className="mt-6">
+      <GuideHeroLayout image={<GuideHeroMedia src={port.photo.src} alt={port.photo.alt} />}>
         <p className="eyebrow">Your ship. Your day ashore.</p>
-        <h1 className="guide-page-title mt-3 max-w-4xl">{port.title}</h1>
+        <h1 className="guide-page-title mt-3">{port.title}</h1>
         <p className="mt-4 max-w-3xl text-lg leading-relaxed text-muted-foreground">{port.intro}</p>
         <div className="mt-5"><a href="#request-quote" onClick={focusQuote} className="btn btn-primary">Request a private day trip</a></div>
         <PageUpdated date={SHORE_EXCURSION_CHECK_DATE} />
-        <GuideHeroMedia src={port.photo.src} alt={port.photo.alt} />
-      </div>
+      </GuideHeroLayout>
       <AuthorCard />
     </header>
 
