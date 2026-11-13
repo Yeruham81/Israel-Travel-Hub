@@ -231,14 +231,13 @@ export const taxiGuideCluster: Record<"taxis" | "taxiFares" | "airportTaxis", Tr
     topics: ["transportation", "tips"],
     updatedAt: "2026-11-13",
     photo: { src: "/images/guides/taxi-in-tel-aviv.webp", alt: "Licensed white taxis with yellow roof signs on a street in Tel Aviv" },
-    reviewNote: "Rates effective April 2026 and specified through March 2027 unless amended. Consumer figures include 18% VAT outside Eilat; the official order lists amounts before VAT.",
     facts: [
       { label: "Meter starts at", text: "₪12.46 including VAT outside Eilat" },
       { label: "Day / night", text: "Tariffs A, B and C change with the day and hour" },
       { label: "Price calculation", text: "Time + distance, with higher kilometre rates after 10 km" },
     ],
     comparison: {
-      caption: "Taxi meter rates at a glance — from April 2026",
+      caption: "Taxi meter rates at a glance",
       headers: ["Meter charge", "Tariff A", "Tariff B", "Tariff C"],
       rows: [
         ["Starting amount", "₪12.46", "₪12.46", "₪12.46"],
