@@ -152,7 +152,8 @@ describe("home mobile performance optimizations", () => {
     expect(reviews).not.toContain("cdn.simpleicons.org");
     expect(read("public/images/tripadvisor.svg")).toContain('<svg');
     const carousel = read("src/components/TripadvisorReviewCarousel.tsx");
-    expect(carousel).toContain('src="/images/tripadvisor.svg"');
+    // Individual cards no longer repeat the Tripadvisor logo; the compact header does.
+    expect(carousel).toContain("tripadvisorProfileUrl");
     expect(carousel).not.toContain("cdn.simpleicons.org");
   });
 });
