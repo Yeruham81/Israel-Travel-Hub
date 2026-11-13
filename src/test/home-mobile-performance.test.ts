@@ -109,7 +109,9 @@ describe("home mobile performance optimizations", () => {
       expect(bytes(`${base}-feature.webp`)).toBeLessThan(bytes(`${base}.webp`));
       expect(home).toContain(`${name}-feature.webp`);
     }
-    expect(home).toContain('feature: { src: "/images/travel-blog/taxi-in-tel-aviv.webp"');
+    expect(home).toContain('feature: { src: "/images/guides/taxi-in-tel-aviv.webp"');
+    expect(home).not.toContain("/images/travel-blog/taxi-in-tel-aviv.webp");
+    expect(bytes("public/images/guides/taxi-in-tel-aviv.webp")).toBeGreaterThan(1000);
     expect(home).not.toContain("airport-pickup");
     for (const name of ["jerusalem-old-city", "tel-aviv-coast", "tiberias-lake", "bethlehem-nativity", "masada-dead-sea", "caesarea-aqueduct"]) {
       const base = `src/assets/home/${name}`;
@@ -117,6 +119,15 @@ describe("home mobile performance optimizations", () => {
       expect(home).toContain(`${name}-tile.webp`);
     }
     expect(home).toContain("c.img.tile ?? c.img.src");
+  });
+
+  it("keeps homepage service images and cards within the mobile grid even if an image fails", () => {
+    const home = read("src/routes/index.tsx");
+    expect(home.match(/grid min-w-0 grid-cols-1 gap-4 lg:grid-cols-2 lg:items-stretch/g)).toHaveLength(2);
+    expect(home.match(/grid min-w-0 grid-cols-1 content-start gap-3/g)).toHaveLength(2);
+    expect(home.match(/aspect-\\[16\\/10\\] h-full min-h-64 w-full min-w-0/g)).toHaveLength(2);
+    expect(home).toContain('<li className="min-w-0">');
+    expect(home).toContain('grid w-full min-w-0 grid-cols-[96px_minmax(0,1fr)]');
   });
 
   it("sets cache rules for static resources without caching HTML or API responses", () => {
