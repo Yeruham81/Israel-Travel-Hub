@@ -44,6 +44,7 @@ describe("owner voice throughout the public site", () => {
 
   it("keeps the affiliate disclosure in the footer, not inside editorial or provider cards", () => {
     expect(source("src/components/Layout.tsx")).toContain("Some links on this page are affiliate links, meaning I may earn a small commission");
+    expect(source("src/components/Layout.tsx")).toContain("Some images on this website were generated using artificial intelligence.");
     for (const file of [
       "src/components/StayGuideParts.tsx",
       "src/components/AirportBookingPlatforms.tsx",
