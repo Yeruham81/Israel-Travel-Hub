@@ -1,6 +1,7 @@
 import { cleanup, fireEvent, render, screen, within } from "@testing-library/react";
 import { afterEach, describe, expect, it } from "vitest";
 import { OnThisPage, compactOnThisPageLabel } from "@/components/Guide";
+import { SourcesDisclosure } from "@/components/SourcesDisclosure";
 import { travelGuides } from "@/data/travelGuides";
 
 afterEach(cleanup);
@@ -83,6 +84,28 @@ describe("compact On this page navigation", () => {
     expect(details.querySelector('a[href="#sources"]')).toBeNull();
     expect(details.querySelectorAll("a")).toHaveLength(17);
     expect(container.querySelector('a[href="#section-17"]')).toBeInTheDocument();
+  });
+
+  it("keeps the bottom Sources disclosure collapsed and user-expandable", () => {
+    render(
+      <>
+        <OnThisPage sections={[["overview", "Overview"], ["sources", "Sources"]]} />
+        <main>
+          <section aria-label="Overview">Guide details</section>
+          <SourcesDisclosure><a href="https://example.org/reference">Official reference</a></SourcesDisclosure>
+        </main>
+      </>
+    );
+    const nav = screen.getByRole("navigation", { name: "On this page" });
+    expect(within(nav).getAllByRole("link")).toHaveLength(1);
+    expect(within(nav).queryByRole("link", { name: "Sources" })).not.toBeInTheDocument();
+    const sources = document.querySelector("#sources")!;
+    const details = sources.querySelector("details")!;
+    expect(details).not.toHaveAttribute("open");
+    expect(sources).toHaveTextContent("Official reference");
+    fireEvent.click(within(sources as HTMLElement).getByText("Sources"));
+    expect(details).toHaveAttribute("open");
+    expect(within(sources as HTMLElement).getByRole("link", { name: "Official reference" })).toHaveAttribute("href", "https://example.org/reference");
   });
 
   it("filters Sources before computing the compact menu overflow threshold", () => {
