@@ -118,6 +118,18 @@ describe("migrated Israel itineraries", () => {
     expect(guideComponent).toContain("<GetYourGuideCityWidget");
   });
 
+  it("gives curated three-column partner tour cards consistent breathing room", () => {
+    for (const path of [
+      "src/components/JerusalemItineraryTourOptions.tsx",
+      "src/components/BethlehemTourOptions.tsx",
+      "src/components/DeadSeaTourOptions.tsx",
+    ]) {
+      const cards = file(path);
+      expect(cards, path).toContain("grid gap-5 sm:grid-cols-2 xl:grid-cols-3");
+      expect(cards, path).not.toContain("grid gap-3 sm:grid-cols-2 xl:grid-cols-3");
+    }
+  });
+
   it("shows six approved Jerusalem day-trip alternatives under day two", () => {
     expect(itineraries["3"].jerusalemTourOptionsDay).toBe(2);
     for (const id of ["5", "7", "10"] as const) {

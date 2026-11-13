@@ -24,7 +24,7 @@ const tourPhotos = {
  */
 export function DeadSeaTourOptions() {
   return <>
-    <div className="mt-5 grid gap-3 sm:grid-cols-2 xl:grid-cols-3" data-testid="deadsea-tour-options">
+    <div className="mt-5 grid gap-5 sm:grid-cols-2 xl:grid-cols-3" data-testid="deadsea-tour-options">
       {deadSeaTourCards.map(tour => {
         const trackingUrl = affiliateConfig[tour.id]?.trackingUrl;
         if (!trackingUrl) return null;
