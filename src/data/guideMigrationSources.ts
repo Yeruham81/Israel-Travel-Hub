@@ -298,6 +298,14 @@ export const migrationSources: SourceReference[] = [
     "note": "Official page identifies line 231 as Beit Jala and 234 as Bethlehem. Confirm actual boarding and destination stops, timetable and return for the date."
   },
   {
+    "id": "m26-unesco-nativity",
+    "title": "Birthplace of Jesus: Church of the Nativity and the Pilgrimage Route, Bethlehem",
+    "publisher": "UNESCO World Heritage Centre",
+    "url": "https://whc.unesco.org/en/list/1433/",
+    "checkedAt": "2026-11-13",
+    "note": "World Heritage listing for the Church of the Nativity and pilgrimage route in Bethlehem; this does not establish current visitor access or opening hours."
+  },
+  {
     "id": "m26-bethlehem-entry",
     "title": "Israel, the West Bank and Gaza: entry and local requirements",
     "publisher": "U.S. Department of State",

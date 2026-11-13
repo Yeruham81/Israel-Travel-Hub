@@ -216,20 +216,7 @@ const articles: Partial<Record<TravelGuideId, Upgrade>> = {
       { label: "Caesarea, Haifa and Acre tours", to: "/tours/caesarea-haifa-acre/" },
     ],
   },
-  bethlehem: {
-    sections: [
-      {
-        id: "bethlehem-before-you-book",
-        title: "Bethlehem tickets, local visits and the correct return route",
-        paragraphs: [
-          "The Church of the Nativity, Manger Square, Milk Grotto and Shepherds' Field do not all require the same visit time or transport. Decide on two or three priorities, then check whether your guide or local driver includes them. The church's worship and restoration arrangements can affect access to individual areas. Confirm up-to-date information before travel.",
-          "A Jerusalem to Bethlehem transport guide answers how to get there and back; a guided tour is a different product. Compare independent tour offers on the Bethlehem, Jericho and Jordan River page, and check the departure city, site list, group format, documents and return before paying.",
-        ],
-        inlineLinks: [{ text: "Bethlehem, Jericho and Jordan River page", to: "/tours/bethlehem-jericho-jordan-river/" }],
-      },
-    ],
-    related: ["jerusalem", "jerusalemChurches", "jerusalemDayTrips"],
-  },
+
 
 };
 

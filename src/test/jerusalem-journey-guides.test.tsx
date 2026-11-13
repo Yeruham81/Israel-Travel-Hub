@@ -21,27 +21,48 @@ async function renderGuide(path: string, component: NonNullable<typeof Bethlehem
 }
 
 describe("Jerusalem independent day-trip planning guides", () => {
-  it("Bethlehem distinguishes bus lines, crossing and tour products without asserting affiliate status", async () => {
+  it("Bethlehem compares complete transport choices, authentic photos, relevant tours and return planning", async () => {
     const { container } = await renderGuide(travelGuidePaths.bethlehem, BethlehemRoute.options.component!);
     expect(screen.getByRole("heading", { level: 1 })).toHaveTextContent("Bus, Taxi & Tours");
-    expect(screen.getByTestId("journey-option-cards").children).toHaveLength(4);
-    expect(screen.getByTestId("journey-stop-cards").children).toHaveLength(3);
-    expect(screen.getByText("Bus 231")).toBeInTheDocument();
-    expect(screen.getByText("Bus 234")).toBeInTheDocument();
-    expect(screen.getByRole("link", { name: /Check the operator's stops/ })).toHaveAttribute("href", "https://south-buses.com/lines-and-stations/?lang=en");
-    expect(screen.getByRole("heading", { name: "Checkpoint, passports and rental cars" })).toBeInTheDocument();
-    expect(screen.getByText(/Star Street and the Milk Grotto/)).toBeInTheDocument();
-    const cards = screen.getAllByTestId("journey-tour-card");
-    expect(cards).toHaveLength(2);
+    expect(screen.queryByTestId("journey-option-cards")).not.toBeInTheDocument();
+    expect(screen.queryByTestId("journey-stop-cards")).not.toBeInTheDocument();
+    const comparison = screen.getByRole("table", { name: /Compare ways to reach Bethlehem/ });
+    expect(comparison).toBeInTheDocument();
+    expect(within(comparison).getByRole("rowheader", { name: "Bus 231" })).toBeInTheDocument();
+    const buses = container.querySelector("#buses");
+    expect(buses).not.toBeNull();
+    expect(buses).toHaveTextContent("Bab al-Zaqaq");
+    expect(buses).toHaveTextContent("Checkpoint 300");
+    expect(within(buses as HTMLElement).getByRole("link", { name: /South Buses/ }))
+      .toHaveAttribute("href", "https://south-buses.com/lines-and-stations/?lang=en");
+    expect(screen.getByRole("heading", { name: "Checkpoint, passports, legal entry and rental cars" })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: /visit Bethlehem on Saturday or Sunday/ })).toBeInTheDocument();
+    expect(within(container.querySelector("#private-taxi") as HTMLElement)
+      .getByRole("img", { name: /Yellow Palestinian taxi/ })).toBeInTheDocument();
+    expect(within(container.querySelector("#visit-return") as HTMLElement)
+      .getByRole("img", { name: /Christmas lights/ })).toBeInTheDocument();
+    expect(within(container.querySelector("#bethlehem-sites") as HTMLElement)
+      .getByRole("img", { name: /Milk Grotto/ })).toBeInTheDocument();
+    const cards = screen.getAllByTestId("bethlehem-tour-card");
+    expect(cards).toHaveLength(3);
+    expect(new Set(cards.map(card => within(card).getByRole("img").getAttribute("src"))).size).toBe(3);
     for (const card of cards) {
-      const link = within(card).getByRole("link", { name: /View on (Viator|GetYourGuide)/ });
-      const product = tourBookingOffers.find((offer) => offer.publicUrl === link.getAttribute("href"));
-      expect(product, link.getAttribute("href") || "").toBeDefined();
-      expect(affiliateConfig[product!.id]?.trackingUrl).toBeUndefined();
-      expect(link.getAttribute("rel")).not.toContain("sponsored");
+      expect(card.tagName).toBe("A");
+      expect(card.getAttribute("href")).toMatch(/^https:\/\/(www\.getyourguide|www\.viator)\.com\//);
+      expect(card.getAttribute("rel")).not.toContain("sponsored");
     }
-    expect(container.querySelector('#visit-return p a[href="/travel-blog/day-trips-from-jerusalem/"]')).toBeInTheDocument();
-    expect(screen.queryByRole("table", { name: /Compare ways to reach Bethlehem/ })).not.toBeInTheDocument();
+    expect(screen.queryByRole("heading", { name: /Bethlehem tickets, local visits and the correct return route/ })).not.toBeInTheDocument();
+    expect(screen.queryByTestId("journey-tour-card")).not.toBeInTheDocument();
+    const related = screen.getByTestId("bethlehem-related-guides");
+    expect(within(related).getAllByRole("img")).toHaveLength(6);
+    expect(new Set(within(related).getAllByRole("link").map(link => link.getAttribute("href"))).size).toBe(6);
+    expect(within(screen.getByTestId("bethlehem-next-steps")).getAllByRole("link")).toHaveLength(3);
+    const faq = container.querySelector("#faq")!;
+    const contact = container.querySelector("#contact")!;
+    const sources = container.querySelector("#sources")!;
+    expect(faq.compareDocumentPosition(related) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
+    expect(contact.compareDocumentPosition(sources) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
+    expect(comparison.compareDocumentPosition(buses!) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
   }, 15000);
 
   it("Dead Sea puts useful beach guidance and real booking options beside the relevant sections", async () => {
@@ -158,7 +179,7 @@ describe("Jerusalem independent day-trip planning guides", () => {
   it("retains original SEO URLs, updated metadata and real source references", async () => {
     for (const [id, route] of [["bethlehem", BethlehemRoute], ["jerusalemDeadSea", DeadSeaRoute]] as const) {
       const guide = travelGuides[id];
-      expect(guide.updatedAt).toBe(id === "jerusalemDeadSea" ? "2026-11-13" : "2026-10-24");
+      expect(guide.updatedAt).toBe("2026-11-13");
       if (id === "jerusalemDeadSea") {
         expect(guide.faqs).toHaveLength(5);
         expect(guide.faqs.some(faq => faq.q === "Is the public beach at Ein Bokek wheelchair-accessible?")).toBe(true);
