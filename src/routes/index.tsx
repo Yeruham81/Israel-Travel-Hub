@@ -191,16 +191,7 @@ function CompactCard({ c }: { c: Card }) {
 function Home() {
   return (
     <div>
-      <div className="mx-auto max-w-6xl px-4 pt-6">
-        <nav aria-label="Services" className="grid grid-cols-2 gap-2 rounded-2xl border bg-card p-3 shadow-lg sm:grid-cols-3 lg:grid-cols-6">
-          {services.map((s) => (
-            <a key={s.id} href={`#${s.id}`} className="rounded-lg px-3 py-2 text-center text-sm font-semibold hover:bg-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring">{s.id === "tours" ? "Tours & Day Trips" : s.eyebrow.split(" &")[0]}</a>
-          ))}
-          <a href="#guides" className="rounded-lg px-3 py-2 text-center text-sm font-semibold hover:bg-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring">Travel Guides</a>
-        </nav>
-      </div>
-
-      <div className="mx-auto mt-14 max-w-6xl space-y-8 px-4">
+      <div className="mx-auto mt-8 max-w-6xl space-y-8 px-4">
         {services.slice(0, 1).map((s, i) => (
           <section key={s.id} id={s.id} aria-labelledby={`${s.id}-h`} className={`scroll-mt-6 rounded-2xl border p-5 md:p-8 ${i % 2 ? "bg-accent/40" : "bg-card"}`}>
             <header className="border-b pb-5">
