@@ -159,22 +159,25 @@ export function compactOnThisPageLabel(id: string, label: string): string {
  * More links appear at wider breakpoints, with the rest in an accessible disclosure menu.
  */
 export function OnThisPage({ sections, sticky = false, compactLabels, fullLabels = false }: { sections: readonly (readonly [string, string])[]; sticky?: boolean; compactLabels?: Readonly<Record<string, string>> | undefined; fullLabels?: boolean }) {
-  const overflowVisibility = sections.length <= 10 ? "hidden" : sections.length <= 12 ? "lg:hidden" : sections.length <= 15 ? "xl:hidden" : "";
+  // Sources remain at the end of each guide in their own collapsed disclosure.
+  // They are deliberately excluded from both the visible jump links and All sections.
+  const visibleSections = sections.filter(([id, label]) => id.toLowerCase() !== "sources" && label.trim().toLowerCase() !== "sources");
+  const overflowVisibility = visibleSections.length <= 10 ? "hidden" : visibleSections.length <= 12 ? "lg:hidden" : visibleSections.length <= 15 ? "xl:hidden" : "";
   return (
     <nav aria-label="On this page" className={`${sticky ? "sticky top-[57px] z-30" : ""} relative mt-4 min-w-0 border-y bg-background/95 backdrop-blur`}>
       <div className="flex flex-wrap items-center justify-between gap-x-3 gap-y-1 px-1 pb-1 pt-2">
         <span className="shrink-0 text-[11px] font-bold uppercase tracking-wide text-muted-foreground">On this page</span>
-        {sections.length > 10 && <details className={`group relative ${overflowVisibility}`}>
+        {visibleSections.length > 10 && <details className={`group relative ${overflowVisibility}`}>
           <summary className="cursor-pointer list-none rounded-md px-2 py-1 text-xs font-semibold text-primary underline-offset-4 hover:underline focus-visible:outline-2 focus-visible:outline-primary">
             All sections <span aria-hidden="true" className="inline-block transition-transform group-open:rotate-180">⌄</span>
           </summary>
           <ul className="absolute right-0 top-full z-40 mt-1 max-h-[min(60vh,420px)] w-[min(88vw,340px)] space-y-0.5 overflow-y-auto rounded-xl border bg-card p-2 shadow-lg">
-            {sections.map(([id, label]) => <li key={id}><a href={`#${id}`} className="block rounded-md px-3 py-2 text-sm leading-snug text-foreground hover:bg-secondary focus-visible:outline-2 focus-visible:outline-primary">{label}</a></li>)}
+            {visibleSections.map(([id, label]) => <li key={id}><a href={`#${id}`} className="block rounded-md px-3 py-2 text-sm leading-snug text-foreground hover:bg-secondary focus-visible:outline-2 focus-visible:outline-primary">{label}</a></li>)}
           </ul>
         </details>}
       </div>
       <ul className="grid min-w-0 grid-cols-2 gap-x-2 gap-y-1.5 px-1 pb-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
-        {sections.map(([id, label], index) => {
+        {visibleSections.map(([id, label], index) => {
           const visibility = index >= 15 ? "hidden" : index >= 12 ? "hidden xl:block" : index >= 10 ? "hidden lg:block" : "";
           return <li key={id} className={`min-w-0 ${visibility}`}>
             <a href={`#${id}`} title={label} aria-label={label} className="chip chip-dense w-full truncate">{fullLabels ? label : (compactLabels?.[id] ?? compactOnThisPageLabel(id, label))}</a>
