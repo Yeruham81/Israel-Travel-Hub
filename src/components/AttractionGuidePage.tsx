@@ -64,7 +64,7 @@ export function AttractionGuidePage({ id }: {id:AttractionId}) {
       />}>
         <p className="eyebrow">{a.region} · Visitor guide</p>
         <h1 className="guide-page-title mt-3">{a.title}</h1>
-        <p className="mt-4 max-w-3xl text-lg leading-relaxed text-foreground">{a.intro}</p>
+        <p data-guide-intro className="mt-4 max-w-3xl text-lg leading-relaxed text-foreground">{a.intro}</p>
         {!sacred && <p className="mt-4 text-sm text-muted-foreground"><strong>Suggested time:</strong> {a.duration}</p>}
       </GuideHeroLayout>
       {!sacred && <AuthorCard/>}
