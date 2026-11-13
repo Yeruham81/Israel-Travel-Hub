@@ -1,5 +1,6 @@
 import type { LinkProps } from "@tanstack/react-router";
 import { migrationPhotos } from "@/data/guideMigrationPhotos";
+import type { GetYourGuideWidgetCity } from "@/lib/getyourguide-city-widget";
 
 /**
  * Four separate trip-planning guides adapted from the publisher's legacy guides.
@@ -28,6 +29,7 @@ export type ItineraryGuide = {
   overviewRows?: { focus: string; night: string }[];
   beforeYouGo?: { heading: string; text: string; to?: InternalPath; label?: string }[];
   relatedGuides?: { title: string; description: string; to: InternalPath; image: keyof typeof migrationPhotos }[];
+  activityWidgets?: { day: number; city: GetYourGuideWidgetCity }[];
 };
 
 const L = (label: string, to: InternalPath): ItineraryLink => ({ label, to });
@@ -280,6 +282,10 @@ export const itineraries: Record<ItineraryId, ItineraryGuide> = {
     route: ["Jerusalem", "Masada & Dead Sea", "Tel Aviv–Jaffa"],
     map: { center: [31.55, 35.04], bounds: [34.57, 30.97, 35.69, 32.37], points: [{ name: "Jerusalem", lat: 31.78, lon: 35.23 }, { name: "Masada", lat: 31.31, lon: 35.35 }, { name: "Ein Bokek", lat: 31.2, lon: 35.36 }, { name: "Tel Aviv–Jaffa", lat: 32.065, lon: 34.76 }] },
     daysPlan: days3,
+    activityWidgets: [
+      { day: 1, city: "jerusalem" },
+      { day: 3, city: "telAviv" },
+    ],
     dayInlineLinks: [
       { day: 1, field: "morning", phrase: "Old City", to: "/travel-blog/old-city-jerusalem/" },
       { day: 1, field: "afternoon", phrase: "Jerusalem museums", to: "/travel-blog/museums-in-jerusalem/" },

@@ -5,6 +5,7 @@ import { routeTree } from "@/routeTree.gen";
 import { readFileSync } from "node:fs";
 import { resolve } from "node:path";
 import { itineraryIds, itineraries, itinerarySourcesByGuide } from "@/data/israelItineraries";
+import { getYourGuideCityWidgetSrc, getYourGuideWidgetCities } from "@/lib/getyourguide-city-widget";
 import { itineraryCards } from "@/data/hotelHub";
 import { guideDirectory } from "@/data/travelGuides";
 import { allNavGroups } from "@/data/nav";
@@ -84,6 +85,32 @@ describe("migrated Israel itineraries", () => {
         expect(router.matchRoutes(info.to as string).at(-1)?.routeId, `${guide.id}: ${info.to}`).not.toBe(rootRouteId);
       }
     }
+  });
+
+  it("uses the approved Travelpayouts GetYourGuide widgets only on relevant city days", () => {
+    expect(itineraries["3"].activityWidgets).toEqual([
+      { day: 1, city: "jerusalem" },
+      { day: 3, city: "telAviv" },
+    ]);
+    expect(getYourGuideWidgetCities.haifa.code).toBe("HFA");
+    expect(getYourGuideCityWidgetSrc("telAviv", "3_day")).toBe(
+      "https://tpwgt.com/content?trs=406243&shmarker=622032.3_day&iata=TLV&locale=en-US&powered_by=false&campaign_id=108&promo_id=4040"
+    );
+    expect(new URL(getYourGuideCityWidgetSrc("jerusalem", "3_day")).searchParams.get("iata")).toBe("JLM");
+    expect(new URL(getYourGuideCityWidgetSrc("haifa", "5_day")).searchParams.get("iata")).toBe("HFA");
+    expect(new URL(getYourGuideCityWidgetSrc("jerusalem", "3_day")).searchParams.get("shmarker")).toBe("622032.3_day");
+    for (const guide of Object.values(itineraries)) {
+      for (const widget of guide.activityWidgets ?? []) {
+        expect(widget.day).toBeGreaterThanOrEqual(1);
+        expect(widget.day).toBeLessThanOrEqual(guide.days);
+      }
+    }
+    const widgetComponent = file("src/components/GetYourGuideCityWidget.tsx");
+    expect(widgetComponent).toContain("onToggle");
+    expect(widgetComponent).toContain("document.createElement(\"script\")");
+    expect(widgetComponent).toContain("GetYourGuide (affiliate)");
+    const guideComponent = file("src/components/IsraelItineraryPage.tsx");
+    expect(guideComponent).toContain("<GetYourGuideCityWidget");
   });
 
   it("has a focused, bookable-through-guides three-day plan without intrusive affiliate links", () => {
