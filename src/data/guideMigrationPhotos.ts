@@ -231,7 +231,8 @@ export const migrationPhotos = {
   },
   "itinerary-3day-holy-sepulchre": {
     "src": itineraryChurchHolySepulchre,
-    "alt": "Entrance courtyard of the Church of the Holy Sepulchre in Jerusalem’s Old City"
+    "alt": "Entrance courtyard of the Church of the Holy Sepulchre in Jerusalem’s Old City",
+    "sourceUrl": "https://www.israel-taxi.com/wp-content/uploads/2025/08/Church_of_the_Holy_Sepulchre_Jerusalem_israel.jpg"
   },
   "itinerary-jerusalem-old-city": {
     "src": itineraryOldCity,
