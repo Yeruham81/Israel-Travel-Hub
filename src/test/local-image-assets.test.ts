@@ -40,9 +40,9 @@ describe("local-only image asset policy", () => {
   it("has a real public file for every literal /images/ photo reference in authored source", () => {
     const missing: string[] = [];
     const legacy: string[] = [];
-    const imagePathPattern = /\\/images\\/[a-zA-Z0-9_./-]+\\.(?:webp|avif|jpe?g|png|gif|svg)/g;
+    const imagePathPattern = /\/images\/[a-zA-Z0-9_./-]+\.(?:webp|avif|jpe?g|png|gif|svg)/g;
     for (const file of sourceFiles(srcRoot)) {
-      const lines = readFileSync(file, "utf8").split(/\\r?\\n/);
+      const lines = readFileSync(file, "utf8").split(/\r?\n/);
       lines.forEach((line, index) => {
         for (const match of line.matchAll(imagePathPattern)) {
           const url = match[0];
