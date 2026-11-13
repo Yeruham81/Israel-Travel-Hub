@@ -11,9 +11,12 @@ import { relFor, recordOutboundClick } from "@/lib/outbound";
 type Props = ComponentProps<typeof RouterLink>;
 
 export function SiteLink(props: Props) {
-  const pathname = useRouterState({ select: (state) => state.location.pathname });
-
   if (!isCarRentalRoute(props.to)) return <RouterLink {...props} />;
+  return <CarRentalLink {...props} />;
+}
+
+function CarRentalLink(props: Props) {
+  const pathname = useRouterState({ select: (state) => state.location.pathname });
 
   const onClick: MouseEventHandler<HTMLAnchorElement> = (event) => {
     recordOutboundClick({
@@ -39,7 +42,6 @@ export function SiteLink(props: Props) {
       onClick={onClick}
     >
       {typeof props.children === "function" ? props.children({ isActive: false }) : props.children}
-      <span className="sr-only"> (opens in a new tab, sponsored link)</span>
     </a>
   );
 }
