@@ -188,18 +188,18 @@ export function IsraelItineraryPage({ id }: { id: ItineraryId }) {
             <div className="grid gap-6 p-5 sm:p-7 lg:grid-cols-[minmax(0,1fr)_250px]">
               <div className="min-w-0">
                 {g.daySequences?.find(sequence => sequence.day === index + 1) && (
-                  <div className="mb-6 border-b pb-5" data-testid={`day-${index + 1}-stop-order`}>
-                    <h4 className="text-sm font-semibold">Suggested highlights <span className="font-normal text-muted-foreground">· approximate times</span></h4>
-                    <ol className="mt-3 space-y-2">
-                      {g.daySequences.find(sequence => sequence.day === index + 1)!.steps.map((step, stepIndex) => (
-                        <li key={stepIndex} className="grid grid-cols-[1.25rem_minmax(0,1fr)] gap-2 text-sm leading-snug">
-                          <span className="font-semibold tabular-nums text-primary">{stepIndex + 1}.</span>
+                  <div className="mb-4 border-b pb-4" data-testid={`day-${index + 1}-highlights`}>
+                    <h4 className="text-sm font-semibold">Suggested highlights</h4>
+                    <ul className="mt-3 space-y-2">
+                      {g.daySequences.find(sequence => sequence.day === index + 1)!.steps.map((step) => (
+                        <li key={step.stop} className="flex items-start gap-2.5 text-sm leading-snug">
+                          <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-primary" aria-hidden="true" />
                           <span><span className="font-medium">{step.stop}</span>{step.optional && <span className="ml-1.5 text-xs text-muted-foreground">(optional alternative)</span>}
                             <span className="block text-xs text-muted-foreground">{step.time}</span>
                           </span>
                         </li>
                       ))}
-                    </ol>
+                    </ul>
                   </div>
                 )}
                 <dl className="space-y-5">
