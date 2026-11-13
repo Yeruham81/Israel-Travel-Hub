@@ -20,7 +20,7 @@ describe("four dedicated airport transfer routes", () => {
     expect(screen.getAllByRole("heading", { level: 1 })).toHaveLength(1);
     expect(screen.getByRole("heading", { level: 1 })).toHaveTextContent(guide.title);
     const visibleBreadcrumbs = screen.getByRole("navigation", { name: "Breadcrumb" });
-    expect(within(visibleBreadcrumbs).getAllByRole("link").map((link) => [link.textContent, link.getAttribute("href")])).toEqual([["Home", "/"], ["Airport transfers", "/transfers/"]]);
+    expect(within(visibleBreadcrumbs).getAllByRole("link").map((link) => [link.textContent, link.getAttribute("href")])).toEqual([["Home", "/"], ["Airport transfers", "/airport-transfers/"]]);
     expect(within(visibleBreadcrumbs).getByText(guide.city)).toHaveAttribute("aria-current", "page");
     expect(visibleBreadcrumbs).not.toHaveTextContent("Ben Gurion Airport");
     expect(container.querySelector("main")!.textContent).not.toMatch(/taxi rank|\btrain\b|\bbuses\b|live availability|guaranteed pickup/i);
