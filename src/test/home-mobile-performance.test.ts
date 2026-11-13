@@ -128,10 +128,15 @@ describe("home mobile performance optimizations", () => {
       expect(bytes(`${base}-feature.webp`)).toBeLessThan(bytes(`${base}.webp`));
       expect(home).toContain(`${name}-feature.webp`);
     }
-    expect(home).toContain('feature: { src: "/images/travel-blog/taxi-in-tel-aviv.webp"');
+    expect(home).toContain('import benGurionApronPhoto from "@/assets/airport-transfers/airport.webp"');
+    expect(home).toContain('feature: { src: benGurionApronPhoto, alt:');
+    expect(home).not.toContain('feature: { src: "/images/travel-blog/taxi-in-tel-aviv.webp"');
+    expect(bytes("src/assets/airport-transfers/airport.webp")).toBeGreaterThan(10000);
+    expect(bytes("public/images/home/uber-in-israel-phone-question.webp")).toBeGreaterThan(10000);
+    expect(bytes("public/images/home/uber-in-israel-phone-question.webp")).toBeLessThan(30000);
+    expect(home).toContain('src: "/images/home/uber-in-israel-phone-question.webp"');
     expect(home).not.toContain("hotel-room-feature.webp");
     expect(home).not.toContain("/images/guides/taxi-in-tel-aviv.webp");
-    expect(bytes("public/images/travel-blog/taxi-in-tel-aviv.webp")).toBeGreaterThan(1000);
     expect(home).not.toContain("airport-pickup");
     for (const name of ["jerusalem-old-city", "tel-aviv-coast", "tiberias-lake", "bethlehem-nativity", "masada-dead-sea", "caesarea-aqueduct"]) {
       const base = `src/assets/home/${name}`;
