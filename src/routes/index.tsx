@@ -3,7 +3,7 @@ import lcpHeroMobile from "@/assets/home/hero-jerusalem-sm-optimized.webp";
 import lcpHeroMedium from "@/assets/home/hero-jerusalem-medium.webp";
 import lcpHeroLarge from "@/assets/home/hero-jerusalem-large.webp";
 import jerusalem from "@/assets/home/jerusalem-old-city.webp";
-import airportTransportPhoto from "@/assets/airport-transfers/airport.webp";
+import benGurionApronPhoto from "@/assets/airport-transfers/airport.webp";
 import telAviv from "@/assets/home/tel-aviv-coast.webp";
 import tiberias from "@/assets/home/tiberias-lake.webp";
 import t3 from "@/assets/home/ben-gurion-t3.webp";
@@ -101,7 +101,7 @@ export const services: Service[] = [
   {
     id: "transfers", eyebrow: "Airport Transfers", tagline: "Plan a Smooth Arrival in Israel", title: "Airport Transfers",
     text: "Start your visit to Israel with a smooth, comfortable arrival. Arrange a private transfer from Ben Gurion Airport to Jerusalem, Tel Aviv, Haifa, or any other destination across the country.",
-    feature: { src: "/images/travel-blog/taxi-in-tel-aviv.webp", alt: "Licensed Israeli taxis on a street in Tel Aviv" },
+    feature: { src: benGurionApronPhoto, alt: "Parked aircraft at Ben Gurion Airport with the terminal sign reading BEN GURION AIRPORT" },
     cards: [
       { label: "To Jerusalem", to: "/airport-transfers/ben-gurion-airport-to-jerusalem/", img: { src: "/images/home/transfer-jerusalem-tower-of-david.webp", alt: "Tower of David citadel beside Jerusalem’s Old City" } },
       { label: "To Tel Aviv", to: "/airport-transfers/ben-gurion-airport-to-tel-aviv/", img: { src: "/images/home/transfer-tel-aviv-beach-skyline.webp", alt: "Tel Aviv Mediterranean beach and modern skyline" } },
@@ -161,7 +161,7 @@ export const services: Service[] = [
 
 export const homeGuideCards = {
   first: guideDirectory.filter((guide) => ["uber", "esim", "arrival"].includes(guide.id)).map((guide) =>
-    guide.id === "uber" ? { ...guide, photo: { src: airportTransportPhoto, alt: "Ben Gurion Airport transport area" } } : guide),
+    guide.id === "uber" ? { ...guide, photo: { src: "/images/home/uber-in-israel-phone-question.webp", alt: "Phone displaying UBER IN ISRAEL? with a question mark" } } : guide),
   second: guideDirectory.filter((guide) => ["israel", "travelTips", "airport-journey-jerusalem"].includes(guide.id)).map((guide) =>
     guide.id === "travelTips" ? { ...guide, photo: { src: "/images/attractions/ramon-crater.webp", alt: "Landscape of Ramon Crater in Israel" } } : guide),
 };
