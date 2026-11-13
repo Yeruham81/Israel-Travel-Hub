@@ -24,6 +24,8 @@ export type ItineraryGuide = {
   faqs: { q: string; a: string }[];
   /** Optional concise stop order for an explicitly planned route. */
   daySequences?: { day: number; steps: { stop: string; time: string; optional?: boolean }[] }[];
+  /** Optional day-specific headings for the brief practical note; avoid repetitive labels. */
+  dayTipHeadings?: string[];
   day3Options?: { heading: string; text: string }[];
   dayOfficialLinks?: { day: number; field: "morning" | "afternoon" | "evening" | "practical" | "overnight"; phrase: string; href: string }[];
   beforeYouGoOfficialLinks?: { index: number; phrase: string; href: string }[];
@@ -288,6 +290,11 @@ export const itineraries: Record<ItineraryId, ItineraryGuide> = {
     route: ["Jerusalem", "Masada & Dead Sea", "Tel Aviv–Jaffa"],
     map: { center: [31.55, 35.04], bounds: [34.57, 30.97, 35.69, 32.37], points: [{ name: "Jerusalem", lat: 31.78, lon: 35.23 }, { name: "Masada", lat: 31.31, lon: 35.35 }, { name: "Ein Bokek", lat: 31.2, lon: 35.36 }, { name: "Tel Aviv–Jaffa", lat: 32.065, lon: 34.76 }] },
     daysPlan: days3,
+    dayTipHeadings: [
+      "Old City access and walking",
+      "Desert-day essentials",
+      "A smoother airport connection",
+    ],
     activityWidgets: [
       { day: 1, city: "jerusalem" },
       { day: 3, city: "telAviv" },
