@@ -536,7 +536,7 @@ describe("migrated practical guides", () => {
     ]);
     expect(guide.sections.find((s) => s.id === "gett")!.externalLinks?.[0]?.href).toBe("https://www.gett.com/il/");
     expect(guide.sections.find((s) => s.id === "yango")!.externalLinks?.[0]?.href).toBe("https://appli.taxi/rider/");
-    expect(travelGuides.taxis.sections.find((s) => s.id === "apps")!.paragraphs.join(" ")).toContain("Uber passenger rides are not available in Israel in 2026");
+    expect(travelGuides.taxis.sections.find((s) => s.id === "apps")!.paragraphs.join(" ")).toContain("Uber passenger rides are not available in Israel as of November 2026");
   });
 
   it("renders Uber alternatives with relevant inline article links", async () => {
