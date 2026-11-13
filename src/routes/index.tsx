@@ -168,12 +168,8 @@ export const homeGuideCards = {
 function PhotoCard({ c }: { c: Card }) {
   return (
     <Link to={c.to} className="photo-card group relative block overflow-hidden rounded-xl bg-navy shadow-md focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-ring">
-      <picture>
-        {/* Five narrow desktop destination tiles can use the 360px card asset.
-            Other layouts use a 720px variant to remain crisp on mobile. */}
-        {c.img.thumb && <source media="(min-width: 1280px)" srcSet={c.img.thumb} />}
-        <img src={c.img.tile ?? c.img.src} alt={c.img.alt} loading="lazy" decoding="async" width={720} height={480} className="aspect-[3/2] w-full object-cover transition-transform duration-500 group-hover:scale-105 xl:aspect-[4/5]" />
-      </picture>
+      {/* Use the original 3:2 landscape artwork instead of portrait-cropped desktop tiles. */}
+      <img src={c.img.src} alt={c.img.alt} loading="lazy" decoding="async" width={720} height={480} className="aspect-[3/2] w-full object-cover transition-transform duration-500 group-hover:scale-105 xl:aspect-[6/5]" />
       <span className="absolute inset-0 bg-gradient-to-t from-navy/90 via-navy/30 to-transparent" aria-hidden />
       <span className="absolute inset-x-0 bottom-0 p-4 text-navy-foreground">
         <span className="block font-serif text-lg leading-tight">{c.label}</span>
