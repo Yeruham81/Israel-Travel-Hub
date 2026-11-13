@@ -10,6 +10,7 @@ import railPlatform from "@/assets/airport-journeys/ben-gurion-rail-platform.web
 import navonPlatform from "@/assets/airport-journeys/jerusalem-navon-platform.webp";
 import telAvivDizengoff from "@/assets/tel-aviv/dizengoff.webp";
 import archivedBuses from "@/assets/guides/2026-11/buses-in-tel-aviv.webp";
+import sherutNesherCardPhoto from "@/assets/guides/sherut-nesher-airport.webp";
 import jerusalemLightRail from "@/assets/guides/2026-11/jerusalem-light-rail.webp";
 import esimPhoto from "@/assets/guides/esim-israel.jpeg";
 import tiberias from "@/assets/home/tiberias-lake.webp";
@@ -46,7 +47,7 @@ export type GuideSection = GuideSubsection & { subsections?: GuideSubsection[] }
 export type GuideReading = { label: string; href: string; note: string };
 export type TravelGuide = {
   id: TravelGuideId; title: string; description: string; intro: string; answer: string; updatedAt?: string;
-  topics: GuideTopicId[]; photo: GuidePhoto; facts: { label: string; text: string; link?: { text: string; href: string } }[];
+  topics: GuideTopicId[]; photo: GuidePhoto; cardPhoto?: GuidePhoto; facts: { label: string; text: string; link?: { text: string; href: string } }[];
   comparison: { caption: string; headers: string[]; rows: string[][] };
   sections: GuideSection[]; checklist: string[]; faqs: { q: string; a: string }[];
   faqGroups?: { title: string; indexes: number[] }[];
@@ -237,6 +238,7 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
     topics: ["transportation", "tips"],
     updatedAt: "2026-11-11",
     photo: airportTransferPhotos["other"]!,
+    cardPhoto: { src: sherutNesherCardPhoto, alt: "Former Nesher yellow-and-white shared shuttle van at Ben Gurion Airport" },
     facts: [
       { label: "Former Nesher airport sherut", text: "No longer running as the regular shared airport ride to Jerusalem" },
       { label: "Former Amal airport sherut", text: "No longer running as the regular shared airport ride to Haifa and the north" },
@@ -1375,7 +1377,7 @@ export const guideDirectory: GuideDirectoryEntry[] = [
   { id: "airport-journey-ein-bokek", title: "How to get from Ben Gurion Airport to Ein Bokek", description: "Compare train, bus, taxi and private-transfer options, travel times, estimated fares and weekend alternatives.", to: "/travel-blog/how-to-get-from-ben-gurion-airport-to-ein-bokek/", topics: ["transportation", "tips"], photo: airportTransferPhotos["dead-sea"]! },
 
   { id: "israel-holidays", title: "Israel Holidays Calendar: Dates & Travel Planning", description: "Select your trip dates on an interactive calendar to see which holidays could affect transport, opening hours, crowds and prices.", to: "/travel-blog/israel-holidays/" as LinkProps["to"], topics: ["tips","religion","itineraries"], photo: migrationPhotos["calendar-of-events"] },
-  ...Object.values(travelGuides).map((guide) => ({ id: guide.id, title: guide.title, description: guide.description, to: travelGuidePaths[guide.id], topics: guide.topics, photo: guide.photo })),
+  ...Object.values(travelGuides).map((guide) => ({ id: guide.id, title: guide.title, description: guide.description, to: travelGuidePaths[guide.id], topics: guide.topics, photo: guide.cardPhoto ?? guide.photo })),
   ...(["haifa", "ashdod"] as const).map((id): GuideDirectoryEntry => { const port = getShorePort(id); return { id: `shore-${id}`, title: port.title, description: port.description, to: port.path, topics: ["destinations", "itineraries", "transportation"], photo: port.photo }; }),
   { id: "stay-jerusalem", title: "Where to stay in Jerusalem", description: "Choose the neighbourhood and hotel style that fit your visit.", to: "/travel-blog/where-to-stay-in-jerusalem/", topics: ["destinations", "accommodation"], photo: airportTransferPhotos["jerusalem"]! },
   { id: "stay-telaviv", title: "Where to stay in Tel Aviv", description: "Compare beachfront, Jaffa and central neighbourhoods.", to: "/travel-blog/where-to-stay-in-tel-aviv/", topics: ["destinations", "accommodation"], photo: airportTransferPhotos["tel-aviv"]! },

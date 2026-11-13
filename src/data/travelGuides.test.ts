@@ -17,6 +17,16 @@ describe("travel guide topic filters and prerender safety", () => {
     }
   });
 
+  it("uses the historical Nesher sherut photo on guide cards without changing the article image", () => {
+    const guide = travelGuides.sherut;
+    const card = guideDirectory.find(entry => entry.id === "sherut");
+    expect(card).toBeDefined();
+    expect(card?.photo?.src).toMatch(/sherut-nesher-airport\\.webp$/);
+    expect(card?.photo?.alt).toMatch(/Former Nesher.*shuttle van.*Ben Gurion Airport/);
+    expect(card?.photo?.src).toBe(guide.cardPhoto?.src);
+    expect(card?.photo?.src).not.toBe(guide.photo.src);
+  });
+
   it("ignores malformed topic parameters rather than crashing filtered or searched pages", () => {
     for (const topic of ["nonexistent", "Transportation", "", ["transportation"], null, 123, {}, undefined]) {
       expect(isGuideTopic(topic)).toBe(false);
