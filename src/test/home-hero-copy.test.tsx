@@ -57,7 +57,7 @@ describe("homepage marketing copy and top navigation", () => {
 
     // Every broad-category CTA follows its own cards rather than preceding them.
     for (const [sectionId, linkName, target] of [
-      ["transfers", "Explore Airport Transfers", "/transfers/"],
+      ["transfers", "Explore Airport Transfers", "/airport-transfers/"],
       ["tours", "Explore tours & day trips", "/tours/"],
       ["shore-excursions", "Explore Shore Excursions", "/shore-excursions/"],
       ["accommodation", "Explore Accommodation", "/accommodation/"],
@@ -72,7 +72,7 @@ describe("homepage marketing copy and top navigation", () => {
     }
     const guidesSection = document.getElementById("guides")!;
     const guideButton = within(guidesSection).getByRole("link", { name: /Browse all guides/i });
-    expect(guideButton).toHaveAttribute("href", "/guides/");
+    expect(guideButton).toHaveAttribute("href", "/travel-blog/");
     expect(guidesSection.lastElementChild).toContainElement(guideButton);
     expect(guidesSection.querySelector('[data-testid="guide-row-two"]')!.compareDocumentPosition(guideButton) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
 
