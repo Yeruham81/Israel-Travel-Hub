@@ -189,7 +189,7 @@ export function GuideHeader({ crumbs, eyebrow, title, intro, image, checkedAt = 
     <header className="mx-auto max-w-5xl px-4 pt-6">
       <Breadcrumbs items={crumbs} />
       <p className="eyebrow mt-6">{eyebrow}</p>
-      <h1 className="mt-3 max-w-4xl text-4xl leading-[1.1] md:text-5xl">{title}</h1>
+      <h1 className="guide-page-title mt-3 max-w-4xl">{title}</h1>
       <div className="mt-4 max-w-3xl text-lg leading-relaxed text-foreground">{intro}</div>
       <PageUpdated date={checkedAt} />
       {image && <img src={image.src} alt={image.alt} width={1600} height={900} className="mt-8 aspect-[21/9] w-full rounded-2xl object-cover" />}
@@ -477,7 +477,7 @@ export function HubHeader({ crumbs, eyebrow, title, intro }: { crumbs: UiCrumb[]
     <header className="mx-auto max-w-5xl px-4 pt-6">
       <Breadcrumbs items={crumbs} />
       <p className="eyebrow mt-6">{eyebrow}</p>
-      <h1 className="mt-3 max-w-4xl text-4xl leading-[1.1] md:text-5xl">{title}</h1>
+      <h1 className="guide-page-title mt-3 max-w-4xl">{title}</h1>
       <div className="mt-4 max-w-3xl text-lg leading-relaxed text-muted-foreground">{intro}</div>
       <AuthorCard />
     </header>
