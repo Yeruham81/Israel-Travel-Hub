@@ -58,7 +58,7 @@ describe("intent-specific taxi guide cluster", () => {
   it("keeps onward planning focused and the rental referral routed through the affiliate-aware link", () => {
     const services = taxiGuideCluster.taxiFares.services;
     expect(services.map((item) => item.to)).toEqual([
-      "/transfers/", "/private-driver/", "/car-rental/", travelGuidePaths.israel,
+      "/airport-transfers/", "/private-driver/", "/car-rental/", travelGuidePaths.israel,
     ]);
     expect(new Set(services.map((item) => item.to)).size).toBe(4);
     expect(services.every((item) => Boolean(item.note?.trim()))).toBe(true);
@@ -79,7 +79,7 @@ describe("intent-specific taxi guide cluster", () => {
 
   it("retains useful standalone answers and original images in the general taxi guide", () => {
     const guide = taxiGuideCluster.taxis;
-    expect(guide.photo.src).toBe("/images/guides/taxi-in-tel-aviv.webp");
+    expect(guide.photo.src).toBe("/images/travel-blog/taxi-in-tel-aviv.webp");
     expect(guide.sections.find((s) => s.id === "fares")?.tables?.[0]?.rows[0]).toEqual(["Starting meter (initial charge)", "₪12.46", "₪12.46", "₪12.46"]);
     expect(guide.sections.find((s) => s.id === "airport")?.paragraphs.join(" ")).toContain("Exit 23");
     expect(guide.sections.find((s) => s.id === "airport")?.paragraphs.join(" ")).toContain("Exit 03");
@@ -110,7 +110,7 @@ describe("intent-specific taxi guide cluster", () => {
       "/travel-blog/how-to-get-from-ben-gurion-airport-to-jerusalem/",
       "/travel-blog/how-to-get-from-ben-gurion-airport-to-haifa/",
       "/travel-blog/how-to-get-from-ben-gurion-airport-to-ein-bokek/",
-      "/transfers/",
+      "/airport-transfers/",
     ]);
     for (const link of contextualLinks) expect(paragraph.split(link.text)).toHaveLength(2);
     expect(paragraph).toContain("To compare transport choices");
