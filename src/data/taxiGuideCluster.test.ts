@@ -62,7 +62,7 @@ describe("intent-specific taxi guide cluster", () => {
     ]);
     expect(new Set(services.map((item) => item.to)).size).toBe(4);
     expect(services.every((item) => Boolean(item.note?.trim()))).toBe(true);
-    expect(services.find((item) => item.to === "/car-rental/")?.label).toMatch(/sponsored link/i);
+    expect(services.find((item) => item.to === "/car-rental/")?.label).toBe("Compare car rentals in Israel");
   });
 
   it("shows A/B/C consumer rates and never repeats the first ten kilometers", () => {
