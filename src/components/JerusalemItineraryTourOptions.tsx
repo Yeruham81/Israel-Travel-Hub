@@ -16,8 +16,8 @@ import qasrAlYahud from "@/assets/guides/dead-sea-excursions/qasr-al-yahud.webp"
  * provider-specific affiliate links already used in the Bethlehem and Dead Sea
  * guides. No tour price, rating or availability is retrieved or invented here.
  *
- * Show a balanced choice of ALTERNATIVE day trips from Jerusalem. These are not
- * additional stops within the three-day itinerary's Masada/Dead Sea day.
+ * Show a balanced choice of OPTIONAL day trips from Jerusalem, on the
+ * three- and five-day itineraries without duplicating catalog data.
  */
 export const threeDayJerusalemTourSelections = [
   { id: "jslm-deadsea-beach-viator", area: "Dead Sea", image: deadSeaMud, alt: "Mud bathing on the Dead Sea shore" },
@@ -32,18 +32,18 @@ const tourCatalog = new Map<string, DeadSeaTourCard | BethlehemTourCard>(
   [...deadSeaTourCards, ...bethlehemTourCards].map(tour => [tour.id, tour] as const),
 );
 
-function trackedItineraryTourUrl(url: string, tourId: string): string {
+function trackedItineraryTourUrl(url: string, tourId: string, days: 3 | 5): string {
   // Travelpayouts allows a short link's SubID to be replaced per source page.
   // Preserve the approved deep-link destination and partner attribution.
   const parsed = new URL(url);
   if (parsed.protocol === "https:" && parsed.hostname.endsWith(".tpm.li")) {
-    parsed.searchParams.set("sub_id", `itt_3day_${tourId.replace(/[^a-z0-9]+/gi, "_")}`);
+    parsed.searchParams.set("sub_id", `itt_${days}day_${tourId.replace(/[^a-z0-9]+/gi, "_")}`);
   }
   return parsed.toString();
 }
 
 /** Shares the compact Bethlehem/Dead Sea photo, duration, price and review-card visual language. */
-export function JerusalemItineraryTourOptions() {
+export function JerusalemItineraryTourOptions({ days = 3 }: { days?: 3 | 5 }) {
   return <details
     className="group min-w-0 rounded-lg border bg-background"
     data-testid="itinerary-jerusalem-tours"
@@ -65,10 +65,10 @@ export function JerusalemItineraryTourOptions() {
           return <a
             key={tour.id}
             data-testid="itinerary-jerusalem-tour-card"
-            href={trackedItineraryTourUrl(approvedLink, tour.id)}
+            href={trackedItineraryTourUrl(approvedLink, tour.id, days)}
             target="_blank"
             rel={relFor(true)}
-            onClick={() => recordOutboundClick({ pageId: "israel-itinerary-3-days", productId: tour.id, offerId: tour.id })}
+            onClick={() => recordOutboundClick({ pageId: `israel-itinerary-${days}-days`, productId: tour.id, offerId: tour.id })}
             className="group/card flex min-w-0 flex-col overflow-hidden rounded-xl border bg-card transition-all hover:-translate-y-0.5 hover:border-primary hover:shadow-md focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
           >
             <img src={item.image} alt={item.alt} width={480} height={280} loading="lazy" decoding="async" className="h-40 w-full object-cover" />

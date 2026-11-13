@@ -41,6 +41,8 @@ import itineraryMasadaCar from "@/assets/home/masada-cable-car.webp";
 import itineraryDeadSeaShore from "@/assets/guides/dead-sea-ein-bokek-shore.webp";
 import itineraryJaffaStreets from "@/assets/tel-aviv/jaffa.webp";
 import itineraryChurchHolySepulchre from "@/assets/guides/holy-sepulchre.jpg";
+import itineraryCaesareaAqueduct from "@/assets/home/caesarea-aqueduct.webp";
+import itineraryJerusalemMuseum from "@/assets/guides/museums-in-jerusalem.jpg";
 
 export const migrationPhotos = {
   "best-time-to-visit-israel": {
@@ -224,6 +226,17 @@ export const migrationPhotos = {
   "EXISTING:ramon": {
     "src": image34,
     "alt": "Desert cliffs and the landscape of Ramon Crater"
+  },
+  "itinerary-5day-caesarea": {
+    "src": itineraryCaesareaAqueduct,
+    "alt": "Ancient stone aqueduct on the Mediterranean shore near Caesarea",
+    "credit": "זאב שטיין (Zeev Stein) · CC BY 2.5 · resized",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:125359_caesarea_national_park_PikiWiki_Israel.jpg",
+    "licenseUrl": "https://creativecommons.org/licenses/by/2.5/"
+  },
+  "itinerary-5day-jerusalem-museum": {
+    "src": itineraryJerusalemMuseum,
+    "alt": "Rockefeller Museum courtyard and tower in Jerusalem"
   },
   "itinerary-3day-jerusalem-cover": {
     "src": "/images/attractions/hero-jerusalem.webp",
