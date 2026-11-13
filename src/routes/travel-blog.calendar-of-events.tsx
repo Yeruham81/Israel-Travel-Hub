@@ -27,7 +27,7 @@ type Kind="all"|EventCategory;
 
 export const Route=createFileRoute("/travel-blog/calendar-of-events")({
   head:()=>{
-    const crumbs=[{name:"Home",path:"/"},{name:"Travel guides",path:"/guides/"},{name:"Israel events",path:PATH}];
+    const crumbs=[{name:"Home",path:"/"},{name:"Travel guides",path:"/travel-blog/"},{name:"Israel events",path:PATH}];
     const meta=pageMeta({title:TITLE,description:DESCRIPTION,path:PATH,type:"article",crumbs,image:hero.src,imageAlt:hero.alt});
     return {...meta,scripts:[...meta.scripts,jsonLd({
       "@context":"https://schema.org","@type":"Article",headline:TITLE,description:DESCRIPTION,
@@ -164,7 +164,7 @@ export function IsraelEventsPage() {
   return <main className="mx-auto max-w-6xl px-4 pb-12">
     <article>
       <header className="pt-6">
-        <Breadcrumbs items={[{name:"Home",to:"/"},{name:"Travel guides",to:"/guides/"},{name:"Israel events",to:PATH}]}/>
+        <Breadcrumbs items={[{name:"Home",to:"/"},{name:"Travel guides",to:"/travel-blog/"},{name:"Israel events",to:PATH}]}/>
         <div className="mt-6 grid items-center gap-6 lg:grid-cols-[1.25fr_1fr]">
           <div>
             <p className="text-sm font-semibold tracking-wide text-primary">TRAVEL PLANNING GUIDE</p>
