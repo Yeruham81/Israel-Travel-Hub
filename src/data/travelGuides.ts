@@ -98,7 +98,7 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
     sections: [
       {
         id: "uber-status",
-        title: "Does Uber work in Israel in 2026?",
+        title: "Does Uber work in Israel?",
         paragraphs: [
           "As of November 2026, Uber's Israel-facing website says passenger rides are unavailable here. An app download or local landing page is not evidence that you can book a driver. Lyft's official rider-city list likewise does not include Israel.",
           "On March 24, 2026, a proposal to allow paid app-based rides in private cars passed its first Knesset reading and was sent to the Economic Affairs Committee. A first reading is not a law in force or a launch announcement; do not assume Uber or Lyft will be operating for your trip.",
@@ -420,10 +420,10 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
   },
   arrival: {
     id: "arrival",
-    title: "Ben Gurion Airport Arrivals Guide (2026): Passport Control, Bags & Transport",
-    description: "Arriving at Ben Gurion Airport in 2026? Follow Terminal 3 arrivals, passport control, baggage claim, customs and the best way to reach your hotel.",
+    title: "Ben Gurion Airport Arrivals Guide: Passport Control, Bags & Transport",
+    description: "Arriving at Ben Gurion Airport? Follow Terminal 3 arrivals, passport control, baggage claim, customs and the best way to reach your hotel.",
     intro: "From landing at Tel Aviv's Ben Gurion Airport (TLV) to meeting your ride, here is the practical arrival sequence, what to prepare and where to find the right onward transport.",
-    answer: "For an international arrival at Ben Gurion Airport in 2026, follow the signs in Terminal 3 to passport control, collect your checked baggage, use the appropriate customs channel and enter the public arrivals hall. Before flying, check whether your passport requires an ETA-IL or a visa. Once outside, choose a train, bus, authorized airport taxi or confirmed private pickup for your actual arrival date. Allow for variable immigration and baggage delays instead of treating landing time as your pickup time.",
+    answer: "For an international arrival at Ben Gurion Airport, follow the signs in Terminal 3 to passport control, collect your checked baggage, use the appropriate customs channel and enter the public arrivals hall. Before flying, check whether your passport requires an ETA-IL or a visa. Once outside, choose a train, bus, authorized airport taxi or confirmed private pickup for your actual arrival date. Allow for variable immigration and baggage delays instead of treating landing time as your pickup time.",
     topics: ["tips", "transportation"],
     updatedAt: "2026-10-22",
     photo: hallPhoto,
@@ -529,13 +529,13 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
         paragraphs: [
           "Choose your route based on the complete journey to the hotel, not just the first train or bus. Israel Railways serves the airport at Terminal 3 and can be useful for destinations connected to the railway, while buses may fit other journeys when they are operating. Check the actual date, station and final connection with bags.",
           "For an on-demand authorized airport taxi, Gett operates the official order and queue process: request a ride using its app or an airport self-service kiosk, obtain a ride code and join the physical taxi queue. Terminal 3 immediate taxis depart at ground-floor Exit 03; a scheduled Gett pickup is different and is listed at Level 2, Exit 23. The official Ben Gurion Airport taxi guide provides the complete pickup procedure.",
-          "You can instead request a private airport transfer for your party, with a meeting point, suitable vehicle and total price agreed in advance. The former Nesher and Amal airport shared-taxi services have been discontinued; the sherut guide explains the old services and today's alternatives. If you want to compare the national taxi fare rules, use the 2026 taxi fares guide rather than assuming every airport ride has a fixed price.",
+          "You can instead request a private airport transfer for your party, with a meeting point, suitable vehicle and total price agreed in advance. The former Nesher and Amal airport shared-taxi services have been discontinued; the sherut guide explains the old services and today's alternatives. If you want to compare the national taxi fare rules, use my Israeli taxi fares guide rather than assuming every airport ride has a fixed price.",
         ],
         inlineLinks: [
           { text: "official Ben Gurion Airport taxi guide", to: travelGuidePaths.airportTaxis },
           { text: "private airport transfer", to: "/transfers/" },
           { text: "sherut guide", to: travelGuidePaths.sherut },
-          { text: "2026 taxi fares guide", to: travelGuidePaths.taxiFares },
+          { text: "Israeli taxi fares guide", to: travelGuidePaths.taxiFares },
         ],
         tables: [{
           caption: "Airport-to-hotel transport at a glance",
@@ -596,7 +596,7 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
       "Arrange assistance, child seats or suitable vehicle size before travel",
     ],
     faqs: [
-      { q: "Which terminal do international flights arrive at Ben Gurion Airport in 2026?", a: "The airport authority's June 2026 announcement says international arriving flights use Terminal 3. Some international departures use Terminal 1, so always check the latest flight and airport notices." },
+      { q: "Which terminal do international flights arrive at Ben Gurion Airport?", a: "The airport authority's June 2026 announcement says international arriving flights use Terminal 3. Some international departures use Terminal 1, so always check the latest flight and airport notices." },
       { q: "Do I need an ETA-IL to enter Israel?", a: "Many visitors from visa-exempt countries need an approved ETA-IL before travel; others need a visa or fall under an exemption. Check your passport on the official Israel entry portal. Authorization to travel does not guarantee admission." },
       { q: "What happens after landing at Ben Gurion Airport?", a: "Follow the arrivals signs to passport control, collect checked luggage, pass through the appropriate customs channel and enter the public arrivals hall to meet your onward transportation." },
       { q: "How long does passport control take at Ben Gurion Airport?", a: "There is no dependable fixed processing time. Queues and individual document checks vary; allow a flexible margin before arranging onward travel." },
