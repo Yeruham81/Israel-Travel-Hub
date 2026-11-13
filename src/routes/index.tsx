@@ -152,7 +152,7 @@ export const services: Service[] = [
       { label: "Mount of Olives", to: "/travel-blog/mount-of-olives/", img: { src: "/images/attractions/mount-of-olives.webp", alt: "Churches and historic sites on the Mount of Olives in Jerusalem" } },
       { label: "Eilat", to: "/travel-blog/eilat/", img: { src: "/images/attractions/eilat.webp", alt: "The Red Sea shoreline at Eilat" } },
     ],
-    hub: { label: "Explore attractions & experiences", to: "/attractions/" },
+    hub: { label: "Explore all attractions & experiences", to: "/attractions/" },
   },
 
 ];
