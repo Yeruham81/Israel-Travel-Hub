@@ -292,9 +292,9 @@ export const itineraries: Record<ItineraryId, ItineraryGuide> = {
     ],
     relatedGuides: [
       { title: "Jerusalem Old City", description: "Choose a practical walking route through the historic quarters.", to: "/travel-blog/old-city-jerusalem/", image: "itinerary-jerusalem-old-city" },
-      { title: "Visiting Masada", description: "Entrances, cable car, hiking and visiting conditions.", to: "/travel-blog/masada/", image: "EXISTING:masada" },
-      { title: "Dead Sea attractions", description: "Where to stop, float and plan a desert outing.", to: "/travel-blog/dead-sea-attractions/", image: "EXISTING:deadSea" },
-      { title: "Old Jaffa", description: "Historic lanes, port views and neighborhood walks.", to: "/travel-blog/jaffa/", image: "EXISTING:coast" },
+      { title: "Visiting Masada", description: "Entrances, cable car, hiking and visiting conditions.", to: "/travel-blog/masada/", image: "itinerary-masada-car" },
+      { title: "Dead Sea attractions", description: "Where to stop, float and plan a desert outing.", to: "/travel-blog/dead-sea-attractions/", image: "itinerary-dead-sea-shore" },
+      { title: "Old Jaffa", description: "Historic lanes, port views and neighborhood walks.", to: "/travel-blog/jaffa/", image: "itinerary-jaffa-streets" },
       { title: "Getting around Israel", description: "Compare rail, buses, taxis and longer day trips.", to: "/travel-blog/getting-around-israel/", image: "itinerary-train" },
       { title: "Ben Gurion Airport tips", description: "Arrival, luggage and planning a departure connection.", to: "/travel-blog/ben-gurion-airport-arrival-tips/", image: "itinerary-airport" },
     ],
