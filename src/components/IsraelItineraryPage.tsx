@@ -44,7 +44,24 @@ export function itineraryMeta(id: ItineraryId) {
   })] };
 }
 
-type CopyLink = { phrase: string; to: LinkProps["to"] };
+type CopyLink = { phrase: string; to?: LinkProps["to"]; href?: string };
+type DayField = "morning" | "afternoon" | "evening" | "practical" | "overnight";
+
+/** Internal cross-guide references and verified official links share the same inline style. */
+function dayTextLinks(g: ItineraryGuide, day: number, field: DayField): CopyLink[] {
+  return [
+    ...(g.dayInlineLinks ?? []).filter(link => link.day === day && link.field === field),
+    ...(g.dayOfficialLinks ?? []).filter(link => link.day === day && link.field === field),
+  ];
+}
+
+function beforeBookingLinks(g: ItineraryGuide, index: number): CopyLink[] {
+  const tip = g.beforeYouGo?.[index];
+  return [
+    ...(tip?.to && tip.label ? [{ phrase: tip.label, to: tip.to }] : []),
+    ...(g.beforeYouGoOfficialLinks ?? []).filter(link => link.index === index),
+  ];
+}
 
 /** Author-specified phrases become natural in-paragraph guide links. */
 function LinkedCopy({ value, links = [] }: { value: string; links?: CopyLink[] | undefined }) {
@@ -55,8 +72,16 @@ function LinkedCopy({ value, links = [] }: { value: string; links?: CopyLink[] |
   for (const link of mentions) {
     if (link.index < position) continue;
     if (link.index > position) output.push(value.slice(position, link.index));
-    output.push(<Link key={`${link.to}-${link.index}`} to={link.to}
-      className="font-semibold text-primary underline underline-offset-2 hover:opacity-80">{link.phrase}</Link>);
+    const key = `${link.href ?? link.to ?? link.phrase}-${link.index}`;
+    if (link.href) {
+      output.push(<a key={key} href={link.href} target="_blank" rel="noopener noreferrer"
+        className="font-semibold text-primary underline underline-offset-2 hover:opacity-80">{link.phrase}<span className="sr-only"> (opens in new tab)</span></a>);
+    } else if (link.to) {
+      output.push(<Link key={key} to={link.to}
+        className="font-semibold text-primary underline underline-offset-2 hover:opacity-80">{link.phrase}</Link>);
+    } else {
+      output.push(link.phrase);
+    }
     position = link.index + link.phrase.length;
   }
   if (position < value.length) output.push(value.slice(position));
@@ -78,6 +103,7 @@ const guideSections = (g: ItineraryGuide): [string, string][] => [
 export function IsraelItineraryPage({ id }: { id: ItineraryId }) {
   const g = itineraries[id];
   const photo = migrationPhotos[g.hero];
+  const showTravel = g.overviewRows?.some(row => Boolean(row.travel));
   const shownImages: { label: string; photo: GuidePhoto }[] = [
     { label: "Cover", photo },
     ...g.daysPlan.map((day, index) => ({ label: `Day ${index + 1}: ${day.region}`, photo: migrationPhotos[day.image] })),
@@ -110,17 +136,21 @@ export function IsraelItineraryPage({ id }: { id: ItineraryId }) {
     <section id="overview" aria-labelledby="overview-h" className="mt-10 scroll-mt-28">
       <h2 id="overview-h" className="text-3xl">The route at a glance</h2>
       <p className="mt-3 max-w-3xl leading-relaxed">{g.reality}</p>
-      <dl className="mt-5 grid gap-3 sm:grid-cols-2">
+{id === "3" ? <div className="mt-4 space-y-2 text-sm leading-relaxed text-muted-foreground">
+        <p><strong className="text-foreground">Best for:</strong> {g.idealFor}</p>
+        <p><strong className="text-foreground">Arrival and hotel nights:</strong> {g.hotelBases}</p>
+      </div> : <dl className="mt-5 grid gap-3 sm:grid-cols-2">
         <div className="rounded-xl border bg-card p-5"><dt className="flex items-center gap-2 text-sm font-semibold"><CalendarDays className="h-4 w-4 text-primary" aria-hidden /> Who this suits</dt><dd className="mt-2 text-sm leading-relaxed text-muted-foreground">{g.idealFor}</dd></div>
         <div className="rounded-xl border bg-card p-5"><dt className="flex items-center gap-2 text-sm font-semibold"><BedDouble className="h-4 w-4 text-primary" aria-hidden /> Suggested hotel bases</dt><dd className="mt-2 text-sm leading-relaxed text-muted-foreground">{g.hotelBases}</dd></div>
-      </dl>
-      <h3 className="mt-7 text-xl font-semibold">Daily route and hotel bases</h3>
-      <p className="mt-2 text-sm leading-relaxed text-muted-foreground">This plan groups nearby stops and limits hotel changes. Suggested overnight locations depend on your arrival and departure times.</p>
+      </dl>}
+      <h3 className="mt-7 text-xl font-semibold">{id === "3" ? "Daily route, transport and overnight stays" : "Daily route and hotel bases"}</h3>
+      <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{id === "3" ? "One continuous trip: two Jerusalem hotel nights, followed by a coastal day and either departure or an optional Tel Aviv stay." : "This plan groups nearby stops and limits hotel changes. Suggested overnight locations depend on your arrival and departure times."}</p>
       <ol className="mt-4 space-y-2 sm:hidden" aria-label="Day-by-day route and overnight stays">
         {g.daysPlan.map((day, index) => <li key={index} className="rounded-xl border bg-card p-4">
           <p className="text-xs font-bold uppercase tracking-wide text-primary">Day {index + 1}</p>
           <p className="mt-1 font-semibold">{g.overviewRows?.[index]?.focus ?? day.name}</p>
-          <p className="mt-2 text-sm text-muted-foreground"><BedDouble className="mr-1.5 inline h-4 w-4" aria-hidden />{g.overviewRows?.[index]?.night ?? day.overnight}</p>
+          {showTravel && <p className="mt-2 text-sm text-muted-foreground">Getting around: {g.overviewRows?.[index]?.travel}</p>}
+          <p className="mt-1 text-sm text-muted-foreground"><BedDouble className="mr-1.5 inline h-4 w-4" aria-hidden />{g.overviewRows?.[index]?.night ?? day.overnight}</p>
         </li>)}
       </ol>
       <div className="mt-4 hidden overflow-hidden rounded-2xl border sm:block">
@@ -129,6 +159,7 @@ export function IsraelItineraryPage({ id }: { id: ItineraryId }) {
             <tr>
               <th scope="col" className="w-20 px-4 py-3 font-semibold">Day</th>
               <th scope="col" className="px-4 py-3 font-semibold">Main focus</th>
+              {showTravel && <th scope="col" className="px-4 py-3 font-semibold">Getting around</th>}
               <th scope="col" className="px-4 py-3 font-semibold">Overnight plan</th>
             </tr>
           </thead>
@@ -136,6 +167,7 @@ export function IsraelItineraryPage({ id }: { id: ItineraryId }) {
             {g.daysPlan.map((day, index) => <tr key={index}>
               <th scope="row" className="px-4 py-3 align-top font-semibold">{index + 1}</th>
               <td className="px-4 py-3 align-top">{g.overviewRows?.[index]?.focus ?? day.name}</td>
+              {showTravel && <td className="px-4 py-3 align-top text-muted-foreground">{g.overviewRows?.[index]?.travel}</td>}
               <td className="px-4 py-3 align-top text-muted-foreground">{g.overviewRows?.[index]?.night ?? day.overnight}</td>
             </tr>)}
           </tbody>
