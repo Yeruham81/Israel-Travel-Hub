@@ -61,9 +61,9 @@ describe("homepage marketing copy and service sections", () => {
 
     // Every broad-category CTA follows its own cards rather than preceding them.
     for (const [sectionId, linkName, target] of [
-      ["transfers", "Explore Airport Transfers", "/airport-transfers/"],
-      ["tours", "Explore tours & day trips", "/tours/"],
-      ["shore-excursions", "Explore Shore Excursions", "/shore-excursions/"],
+      ["transfers", "Explore all airport transfers", "/airport-transfers/"],
+      ["tours", "Explore all tours & day trips", "/tours/"],
+      ["shore-excursions", "Explore all shore excursions", "/shore-excursions/"],
       ["accommodation", "Explore all accommodation", "/accommodation/"],
       ["attractions", "Explore attractions & experiences", "/attractions/"],
     ] as const) {
@@ -107,9 +107,9 @@ describe("homepage marketing copy and service sections", () => {
 
     // Homepage overview buttons and guide card prompts have no trailing arrows.
     for (const label of [
-      "Explore airport transfers",
-      "Explore tours & day trips",
-      "Explore shore excursions",
+      "Explore all airport transfers",
+      "Explore all tours & day trips",
+      "Explore all shore excursions",
       "Explore all accommodation",
       "Explore attractions & experiences",
       "Browse all guides",
@@ -248,12 +248,13 @@ describe("homepage marketing copy and service sections", () => {
     for (const image of stayImages) {
       expect(image).toHaveClass("aspect-[3/2]", "xl:aspect-[6/5]", "object-cover");
     }
-    // All homepage photo links keep the scenery bright; only the title has a small opaque backing.
+    // Photo cards remain bright; destination titles are white with a text-only shadow, not a background.
     for (const photoLink of [...transferCards, ...tourTiles, ...attractionTiles, ...destinationLinks]) {
       expect(photoLink.querySelector('[class*="bg-gradient-to-t"]')).not.toBeInTheDocument();
-      expect(Array.from(photoLink.querySelectorAll("span")).some(label =>
-        label.classList.contains("bg-background/95") && label.classList.contains("text-foreground")
-      )).toBe(true);
+      const photoTitle = Array.from(photoLink.querySelectorAll("span")).find(label => label.textContent?.trim() === photoLink.textContent?.trim());
+      expect(photoTitle).toHaveClass("text-white");
+      expect(photoTitle).not.toHaveClass("bg-background/95");
+      expect(photoTitle).toHaveStyle({ textShadow: "0 1px 3px rgba(0, 0, 0, 0.95), 0 2px 8px rgba(0, 0, 0, 0.75)" });
     }
     expect(within(accommodationSection).getByRole("link", { name: /Explore all accommodation/i })).toHaveAttribute("href", "/accommodation/");
     expect(screen.queryByText("Where to Base Yourself")).not.toBeInTheDocument();
