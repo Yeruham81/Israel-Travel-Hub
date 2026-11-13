@@ -36,10 +36,10 @@ export function GuideHeroMedia({
   src: string;
   alt: string;
   children?: ReactNode;
-  caption?: string;
+  caption?: string | undefined;
   fit?: "cover" | "contain";
-  srcSet?: string;
-  sizes?: string;
+  srcSet?: string | undefined;
+  sizes?: string | undefined;
   width?: number;
   height?: number;
 }) {
