@@ -176,7 +176,7 @@ export function IsraelItineraryPage({ id }: { id: ItineraryId }) {
     </section>
     <section id="days" aria-labelledby="days-h" className="mt-14 scroll-mt-28">
       <h2 id="days-h" className="text-3xl">Your {g.days}-day itinerary, day by day</h2>
-      <p className="mt-3 text-muted-foreground">Each day distinguishes a workable core from optional extras. Use the linked destination guides for entry information, walking routes and alternatives.</p>
+      <p className="mt-3 text-muted-foreground">Each day offers a different side of Israel, with memorable sights and room for personal interests, whether that means more history, time by the sea or a slower pace.</p>
       <div className="mt-7 space-y-10">
         {g.daysPlan.map((day, index) => {
           const image = migrationPhotos[day.image];
@@ -208,7 +208,7 @@ export function IsraelItineraryPage({ id }: { id: ItineraryId }) {
                   <div><dt className="text-sm font-semibold text-primary">Evening</dt><dd className="mt-1 leading-relaxed"><LinkedCopy value={day.evening} links={dayTextLinks(g, index + 1, "evening")} /></dd></div>
                 </dl>
                 <div className="mt-6 border-l-4 border-primary bg-secondary/50 px-4 py-3">
-                  <h4 className="font-semibold">My practical planning tip</h4>
+                  <h4 className="font-semibold">Worth knowing</h4>
                   <p className="mt-1 text-sm leading-relaxed"><LinkedCopy value={day.practical} links={dayTextLinks(g, index + 1, "practical")} /></p>
                 </div>
                 <p className="mt-4 text-sm leading-relaxed"><strong>Where to stay:</strong> <LinkedCopy value={day.overnight} links={dayTextLinks(g, index + 1, "overnight")} /></p>

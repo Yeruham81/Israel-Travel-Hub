@@ -112,7 +112,8 @@ describe("migrated Israel itineraries", () => {
     const widgetComponent = file("src/components/GetYourGuideCityWidget.tsx");
     expect(widgetComponent).toContain("onToggle");
     expect(widgetComponent).toContain("document.createElement(\"script\")");
-    expect(widgetComponent).toContain("GetYourGuide (affiliate)");
+    expect(widgetComponent).not.toContain("GetYourGuide (affiliate)");
+    expect(widgetComponent).not.toContain("I may earn a commission");
     const guideComponent = file("src/components/IsraelItineraryPage.tsx");
     expect(guideComponent).toContain("<GetYourGuideCityWidget");
   });
@@ -158,6 +159,38 @@ describe("migrated Israel itineraries", () => {
     expect(cards).not.toContain("indicative snapshots, not live quotes.");
     expect(cards).not.toContain("Check availability, current prices, inclusions, entry requirements");
     expect(cards).toContain('sub_id');
+  });
+
+  it("uses natural editorial copy, invites enquiries and leaves subjects blank", () => {
+    const guide = itineraries["3"];
+    const view = file("src/components/IsraelItineraryPage.tsx");
+    const widget = file("src/components/GetYourGuideCityWidget.tsx");
+    const tours = file("src/components/JerusalemItineraryTourOptions.tsx");
+    const contact = file("src/components/HomeContactForm.tsx");
+    const messageCopy = file("src/lib/guide-contact.ts");
+    const footer = file("src/components/Layout.tsx");
+
+    expect(view).toContain("Each day offers a different side of Israel");
+    expect(view).not.toContain("Each day distinguishes a workable core");
+    expect(view).toContain('>Worth knowing</h4>');
+    expect(view).toContain("My practical planning tips");
+    expect(guide.noCarAdvice).toContain("different budgets, group sizes and travel styles");
+    expect(guide.noCarAdvice).not.toContain("Choose an organized tour");
+
+    expect(messageCopy).toContain("Have a question about your itinerary, or need to arrange an airport transfer or private journey in Israel?");
+    expect(contact).toContain("useState(guide?.subject");
+    expect(messageCopy).toContain('return { ...base, subject: "", heading: "Questions about planning your Israel itinerary?"');
+    expect(contact).toContain('name="subject" required');
+    expect(contact).toContain("update(setSubject, e.target.value)");
+
+    expect(widget).not.toContain("Optional tours and activities from GetYourGuide (affiliate).");
+    expect(widget).not.toContain("I may earn a commission if you book through this widget.");
+    expect(widget).toContain("getYourGuideCityWidgetSrc(city, page)");
+    expect(footer).toContain("Some links on this page are affiliate links");
+    expect(tours).toContain("Explore optional day trips from Jerusalem");
+    expect(tours).not.toContain("not additional stops to fit into it");
+    expect(tours).toContain('rel={relFor(true)}');
+    expect(tours).toContain("recordOutboundClick");
   });
 
   it("has a focused, bookable-through-guides three-day plan without intrusive affiliate links", () => {
@@ -346,7 +379,8 @@ describe("migrated Israel itineraries", () => {
     expect(view).not.toContain("Practical planning note");
     expect(view).not.toContain("Use these focused guides");
     expect(view).not.toContain("GuidePhotoCredit");
-    expect(view).toContain("My practical planning tip");
+    expect(view).toContain("Worth knowing");
+    expect(view).not.toContain('<h4 className="font-semibold">My practical planning tip</h4>');
     expect(view).toContain("Tips for transport and hotel planning");
     expect(view).toContain("Adjust this itinerary to your trip");
     expect(view).toContain("Photo credits &amp; licences");

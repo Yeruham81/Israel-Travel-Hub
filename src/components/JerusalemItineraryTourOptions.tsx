@@ -54,7 +54,7 @@ export function JerusalemItineraryTourOptions() {
     </summary>
     <div className="min-w-0 border-t px-4 pb-4 pt-3">
       <p className="text-sm leading-relaxed text-muted-foreground">
-        Considering a different day out? These are alternatives to the planned Masada–Dead Sea day, not additional stops to fit into it. Compare the exact departure point and itinerary before booking.
+        Explore optional day trips from Jerusalem to Masada, the Dead Sea, Bethlehem, Jericho and the Jordan River, with choices for different interests, budgets and amounts of time.
       </p>
       <div className="mt-4 grid gap-3 sm:grid-cols-2 xl:grid-cols-3">
         {threeDayJerusalemTourSelections.map(item => {

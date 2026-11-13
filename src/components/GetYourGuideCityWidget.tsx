@@ -55,9 +55,6 @@ export function GetYourGuideCityWidget({
       <span aria-hidden="true" className="shrink-0 text-sm text-muted-foreground transition-transform group-open:rotate-180">⌄</span>
     </summary>
     <div className="min-w-0 border-t px-4 pb-4 pt-3">
-      <p className="text-xs leading-relaxed text-muted-foreground">
-        Optional tours and activities from GetYourGuide (affiliate). I may earn a commission if you book through this widget.
-      </p>
       <div
         ref={mountRef}
         className="mt-3 min-w-0 max-w-full overflow-hidden"
