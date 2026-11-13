@@ -359,7 +359,7 @@ const byId: Record<AirportJourneyId, AirportJourneyGuide> = {
       { q: "How should I plan an airport-to-cruise-port connection?", a: "Supply the exact Haifa passenger terminal, ship and check-in deadline. Leave a wide margin and confirm meeting/drop-off access and delay arrangements." },
       { q: "Which Haifa railway station should I use for a Mount Carmel hotel?", a: "The rail corridor is on the coast; most Mount Carmel hotels require an onward uphill bus or taxi. Compare the actual hotel address and a practical connection." },
       { q: "Is airport bus 905 available every day?", a: "No. The checked late-2026 timetable shows limited Saturday-night and early-Sunday service, not a regular daily route. Verify the actual departure before depending on it." },
-      { q: "Can I get an Uber from Ben Gurion Airport to Haifa?", a: "No. Uber passenger rides are not available in Israel in 2026. Use an official airport taxi or a confirmed private transfer." },
+      { q: "Can I get an Uber from Ben Gurion Airport to Haifa?", a: "No. Uber passenger rides are not available in Israel as of November 2026. Use an official airport taxi or a confirmed private transfer." },
       { q: "How do I travel from TLV to Haifa Port for a cruise?", a: "Confirm the ship, passenger-terminal entrance and boarding deadline. Consider the railway connection, final walk and baggage; for a timed arrival a direct confirmed vehicle may be easier." },
     ],
     related: [
