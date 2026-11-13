@@ -13,7 +13,7 @@ import { authorLd } from "@/lib/author";
 import { ExchangeRateNote, PriceDisplay } from "@/components/CurrencyRates";
 import { AuthorCard } from "@/components/AuthorCard";
 import { PageUpdated } from "@/components/PageUpdated";
-import { GuideHeroMedia } from "@/components/GuideHeroMedia";
+import { GuideHeroLayout, GuideHeroMedia } from "@/components/GuideHeroMedia";
 
 function crumbsFor(id: AirportTransferRouteId) {
   const guide = getAirportRouteGuide(id);
@@ -59,8 +59,8 @@ export function AirportRoutePage({ id }: { id: AirportTransferRouteId }) {
   return (
     <main className="mx-auto max-w-5xl px-4 pb-24 lg:pb-8">
       <div className="pt-6"><Breadcrumbs items={crumbsFor(id).map((crumb) => ({ name: crumb.name, to: crumb.path }))} /></div>
-      <header className="mt-7">
-        <div className="min-w-0 max-w-4xl">
+      <header className="mt-3">
+        <GuideHeroLayout image={<GuideHeroMedia src={guide.photo.src} alt={guide.photo.alt} />}>
           <p className="eyebrow">Your private airport pickup · TLV</p>
           <h1 className="guide-page-title mt-3">{guide.title}</h1>
           <p className="mt-4 text-lg leading-relaxed text-muted-foreground">{guide.intro}</p>
@@ -73,8 +73,7 @@ export function AirportRoutePage({ id }: { id: AirportTransferRouteId }) {
           <a href="#request-quote" onClick={focusQuote} className="btn btn-primary mt-5">Request your airport transfer</a>
           <p className="mt-3 text-sm text-muted-foreground">Private vehicle for your party · Exact hotel or address · Contact me in advance</p>
           <PageUpdated date={AIRPORT_TRANSFER_CHECK_DATE} />
-        </div>
-        <GuideHeroMedia src={guide.photo.src} alt={guide.photo.alt} />
+        </GuideHeroLayout>
       </header>
 
       <AuthorCard />
