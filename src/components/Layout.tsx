@@ -205,7 +205,7 @@ export function SiteFooter() {
         </div>
         <div className="text-sm opacity-90">
           <p className="font-semibold">Disclosure</p>
-          <p className="mt-3">Some links on this site are affiliate links. If you book through one of them, I may earn a commission at no extra cost to you.</p>
+          <p className="mt-3">Some links on this site may earn me a commission at no extra cost to you.</p>
         </div>
         <nav aria-label="Legal" className="border-t border-white/20 pt-6 text-sm md:col-span-4">
           <ul className="flex flex-wrap gap-x-6 gap-y-3">
