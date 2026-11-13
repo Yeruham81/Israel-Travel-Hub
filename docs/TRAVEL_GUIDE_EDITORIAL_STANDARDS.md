@@ -36,6 +36,13 @@ These rules apply to every travel guide and to future guide updates, not only th
 - Prefer a short, confident, helpful editorial voice over formulaic hedging. Source references remain available at the end without announcing each source again in body text.
 - Where an as-of date matters to prices or operating rules, express it reader-first (e.g. “Information current as of November 2026”), not as a report of the editor's checking action. Keep exact effective dates when important to planning.
 
+## Evergreen titles, summaries and SEO metadata
+- **Do not add calendar years to evergreen guide H1 titles, SEO titles or descriptions, introductory copy, section headings, or FAQ questions.** Phrases such as “Taxi Fares in Israel (2026)”, “2026 travel guide”, and “arriving in 2026?” age the guide unnecessarily.
+- Keep the year when it carries **actual temporal meaning in the article body**: a visible “Updated November 2026” stamp; “Information current as of November 2026”; a service, tariff or legal change effective from a specified month and year; an expiry date or historical event. Make that purpose explicit, not just a decorative year label.
+- Named annual events and source notices may retain their genuine edition/publication dates, because their year identifies the real event or document. Do not suppress meaningful historical dates or alter URLs, reference IDs, SEO slugs or metadata timestamps merely to remove year labels.
+- When a page contains time-sensitive prices or fares, put the applicable effective month/year next to the data or source context instead of dating the overall page title. Review the underlying facts as they change; an evergreen title does not mean the prices are permanently current.
+- Keep navigation cards, internal link text, excerpts, meta descriptions and on-page titles consistent and independent of a year, even where a URL slug must remain unchanged for existing links.
+
 ## Regression and quality gates
 - Maintain tests for a single holiday-calendar link, first paragraph preceding a section image, three-column layout for six cards and unique image identities within card collections.
 - Before publishing, run the full production build, TypeScript checks, all tests and static prerender validation; review the pages visually in mobile and desktop widths.
