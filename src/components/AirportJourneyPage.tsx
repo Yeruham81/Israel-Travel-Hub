@@ -2,6 +2,7 @@ import { Link } from "@tanstack/react-router";
 import { Lightbulb } from "lucide-react";
 import { Breadcrumbs, FaqList, OnThisPage, RelatedLinks, Section } from "@/components/Guide";
 import { GuidePhotoCredit, GuideParagraph } from "@/components/TravelGuide";
+import { GuideHeroMedia } from "@/components/GuideHeroMedia";
 import { hasPublicPhotoCredit } from "@/lib/photo-credits";
 import { AuthorCard } from "@/components/AuthorCard";
 import { PageUpdated } from "@/components/PageUpdated";
@@ -337,7 +338,7 @@ export function AirportJourneyPage({ id }: { id: AirportJourneyId }) {
         <h1 className="guide-page-title mt-3 max-w-4xl">{g.title}</h1>
         <p className="mt-4 max-w-3xl text-lg leading-relaxed text-foreground">{g.intro}</p>
         {focusedLayout ? <PageUpdated date={g.updatedAt || PUBLISHED_REVIEW} /> : <p className="mt-3 text-sm text-muted-foreground">Approximate distance: {g.distance} · Editorial review: {g.updatedAt || PUBLISHED_REVIEW}</p>}
-        <figure className="mt-7"><img src={g.photo.src} alt={g.photo.alt} width={1200} height={675} fetchPriority="high" decoding="async" className="aspect-[16/9] max-h-[450px] w-full rounded-2xl object-cover"/>{!focusedLayout && <GuidePhotoCredit photo={g.photo} />}</figure>
+        <GuideHeroMedia src={g.photo.src} alt={g.photo.alt}>{!focusedLayout && <GuidePhotoCredit photo={g.photo} />}</GuideHeroMedia>
         <AuthorCard />
       </header>
       <section id="quick-answer" aria-labelledby="quick-answer-h" className="mt-8 rounded-2xl border border-primary/20 bg-secondary/60 p-6">
