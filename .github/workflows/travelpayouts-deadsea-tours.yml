@@ -13,7 +13,7 @@ permissions:
 
 jobs:
   generate:
-    name: Generate U017 candidate partner links
+    name: Generate Jerusalem-to-Dead-Sea candidate partner links
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -24,7 +24,7 @@ jobs:
         run: |
           node --check scripts/travelpayouts/generate-deadsea-tours.mjs
           node scripts/travelpayouts/generate-deadsea-tours.mjs --validate
-      - name: Use protected API token to generate U017 links
+      - name: Use protected API token to generate Jerusalem-to-Dead-Sea links
         env:
           TRAVELPAYOUTS_API_TOKEN: ${{ secrets.TRAVELPAYOUTS_API_TOKEN }}
         run: node scripts/travelpayouts/generate-deadsea-tours.mjs
@@ -32,7 +32,7 @@ jobs:
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: travelpayouts-deadsea-u017-links
-          path: artifacts/travelpayouts-deadsea-u017.json
+          name: travelpayouts-deadsea-jerusalem-to-the-dead-sea-links
+          path: artifacts/travelpayouts-deadsea-jerusalem-to-the-dead-sea.json
           if-no-files-found: warn
           retention-days: 14
