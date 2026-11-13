@@ -334,7 +334,7 @@ export function AirportJourneyPage({ id }: { id: AirportJourneyId }) {
       <header className="pt-6">
         <Breadcrumbs items={[{ name: "Home", to: "/" }, { name: "Travel guides", to: "/guides/" }, { name: "How to get to " + g.city, to: g.path }]} />
         <p className="eyebrow mt-6">Independent transport comparison · Ben Gurion Airport (TLV)</p>
-        <h1 className="mt-3 max-w-4xl text-4xl leading-[1.1] md:text-5xl">{g.title}</h1>
+        <h1 className="guide-page-title mt-3 max-w-4xl">{g.title}</h1>
         <p className="mt-4 max-w-3xl text-lg leading-relaxed text-foreground">{g.intro}</p>
         {focusedLayout ? <PageUpdated date={g.updatedAt || PUBLISHED_REVIEW} /> : <p className="mt-3 text-sm text-muted-foreground">Approximate distance: {g.distance} · Editorial review: {g.updatedAt || PUBLISHED_REVIEW}</p>}
         <figure className="mt-7"><img src={g.photo.src} alt={g.photo.alt} width={1200} height={675} fetchPriority="high" decoding="async" className="aspect-[16/9] max-h-[450px] w-full rounded-2xl object-cover"/>{!focusedLayout && <GuidePhotoCredit photo={g.photo} />}</figure>
