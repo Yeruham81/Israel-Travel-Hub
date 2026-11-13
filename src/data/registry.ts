@@ -1092,10 +1092,11 @@ export const operators: Operator[] = [
 /** Existing publisher-owned tracking links copied exactly from the supplied destination guides. */
 export const affiliateConfig: Record<string, { trackingUrl: string } | undefined> = {
   "cars-discovercars": { trackingUrl: DISCOVERCARS_ISRAEL_AFFILIATE_URL },
-  // Travelpayouts API-generated links (Nov 2026) for U017. The project-specific
-  // SubIDs are encoded in these new short links by the API, not appended afterward.
-  "deadsea-jerusalem-viator": { trackingUrl: "https://viator.tpm.li/46DdjwVr" },
-  "deadsea-jerusalem-getyourguide": { trackingUrl: "https://getyourguide.tpm.li/wEfa7dYc" },
+  // API-generated Travelpayouts links for the Jerusalem-to-Dead-Sea guide.
+  // Travelpayouts supports replacing a short link's original SubID via ?sub_id=.
+  // Keep the guide slug and provider in each SubID for readable Performance reports.
+  "deadsea-jerusalem-viator": { trackingUrl: "https://viator.tpm.li/46DdjwVr?sub_id=itt_jerusalem_to_the_dead_sea_viator" },
+  "deadsea-jerusalem-getyourguide": { trackingUrl: "https://getyourguide.tpm.li/wEfa7dYc?sub_id=itt_jerusalem_to_the_dead_sea_getyourguide" },
   // Configure an approved product-specific affiliate URL once; all category appearances use it.
   ...Object.fromEntries(tourBookingOffers.map((offer) => [offer.id, undefined])),
   "shore-viator-haifa-jerusalem-bethlehem": undefined,
