@@ -108,7 +108,7 @@ describe("shared sidebar navigation", () => {
       ["To Ein Bokek at the Dead Sea", "/travel-blog/ben-gurion-airport-to-ein-bokek/"],
       ["To other destinations", "/transfers/"],
       ["Private driver service", "/private-driver/"],
-      ["Rent a car in Israel", "https://discovercars.tpm.li/w2RwEsmb?sub_id=itt_car_home"],
+      ["Rent a car in Israel", "https://discovercars.tpm.li/w2RwEsmb?sub_id=itt_car_where_to_stay_in_jerusalem"],
     ]);
   });
 
