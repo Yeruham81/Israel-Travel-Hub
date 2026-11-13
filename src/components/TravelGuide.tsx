@@ -36,7 +36,7 @@ const fareNavCompactLabels: Readonly<Record<string, string>> = {
   "at-a-glance": "Meter rates",
   "time-distance": "The meter",
   "tariff-hours": "Night & Shabbat",
-  extras: "Extra fees",
+  extras: "Surcharges",
   examples: "Fare examples",
   estimates: "Compare options",
   disputes: "Fare problems",
@@ -243,7 +243,7 @@ export function TravelGuidePage({ id }: { id: TravelGuideId }) {
         : isJerusalemDayJourney
         ? [["journey-options", "Compare transport"], ["journey-destinations", "Stops & destinations"], ...guide.sections.map((section) => [section.id, section.title] as const), ["journey-booking", "Tours & private trips"], ["checklist", "Checklist"], ["faq", "FAQ"], ["sources", "Sources"], ["contact", "Contact Moshe"]]
         : isTaxiFareGuide
-          ? [["at-a-glance", "Meter rates"], ...guide.sections.map((section) => [section.id, section.title] as const), ["faq", "FAQ"]]
+          ? [["at-a-glance", "Meter rates"], ...guide.sections.map((section) => [section.id, section.title] as const), ["faq", "FAQ"], ["contact", "Contact"], ["sources", "Sources"]]
           : [["at-a-glance", "At a glance"], ...guide.sections.map((section) => [section.id, section.title] as const), ["checklist", "Checklist"], ["faq", "FAQ"], ...(isTransportOverview ? [["contact", "Contact Moshe"], ["sources", "Sources"]] as const : [["sources", "Sources"], ["contact", "Contact Moshe"]] as const)]} compactLabels={id === "taxis" ? taxiNavCompactLabels : isTaxiFareGuide ? fareNavCompactLabels : undefined} />
       {!isJerusalemDayJourney && <section id="at-a-glance" aria-labelledby="comparison-h" className="mt-10 scroll-mt-24">
         <h2 id="comparison-h" className="text-3xl">{guide.comparison.caption}</h2>
@@ -303,7 +303,7 @@ export function TravelGuidePage({ id }: { id: TravelGuideId }) {
       {isJerusalemCluster && <JerusalemClusterLinks pageKey={id as JerusalemClusterKey} />}
       <FaqList faqs={guide.faqs} {...(isTransportOverview && guide.faqGroups ? { groups: guide.faqGroups } : {})} />
       {id === "bethlehem" && <JerusalemJourneyResources id={id} />}
-      {!isTransportOverview && (id === "shabbat" ? <SourceList ids={sourcesFor(guide)} intro="Official airport, public-transport and taxi-tariff references. Confirm timetables, charges and pickup instructions for your date." /> : isTaxiFareGuide ? <SourceList ids={sourcesFor(guide)} intro="Official tariff regulations, tariff hours and passenger-rights references." /> : <SourceList ids={sourcesFor(guide)} />)}
+      {!isTransportOverview && !isTaxiFareGuide && (id === "shabbat" ? <SourceList ids={sourcesFor(guide)} intro="Official airport, public-transport and taxi-tariff references. Confirm timetables, charges and pickup instructions for your date." /> : <SourceList ids={sourcesFor(guide)} />)}
       {!isJerusalemCluster && id !== "shabbat" && <RelatedLinks title="Related practical guides" currentPath={travelGuidePaths[id]} items={guide.related.map((guideId) => ({ label: travelGuides[guideId].title, to: travelGuidePaths[guideId] }))} />}
       {!isJerusalemCluster && id !== "shabbat" && <RelatedLinks title="Plan the next part of your trip" items={guide.services} />}
       {id === "shabbat" && <RelatedLinks title="Related practical guides" currentPath={travelGuidePaths.shabbat} items={[
@@ -319,6 +319,7 @@ export function TravelGuidePage({ id }: { id: TravelGuideId }) {
       {id === "taxis" && <HomeContactForm context="taxis" />}
       {id !== "taxis" && <HomeContactForm key={id} guide={guideContactCopy(guide.title, guideContactKind(guide), guide.title.split(":")[0])} />}
       {isTransportOverview && <SourceList ids={sourcesFor(guide)} intro="Official operator and government references checked on the indicated dates. Routes, fares, ticket rules and accessibility can change; verify your exact journey before departure." />}
+      {isTaxiFareGuide && <SourceList ids={sourcesFor(guide)} intro="Official taxi tariffs, applicable times and passenger-rights references." />}
     </article>
   </main>;
 }
