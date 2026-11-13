@@ -36,7 +36,7 @@ export function airportJourneyMeta(id: AirportJourneyId) {
   const guide = airportJourneyGuides[id];
   const crumbs = [
     { name: "Home", path: "/" },
-    { name: "Travel guides", path: "/guides/" },
+    { name: "Travel guides", path: "/travel-blog/" },
     { name: "How to get to " + guide.city, path: guide.path },
   ];
   const head = pageMeta({ title: guide.title, description: guide.description, path: guide.path, type: "article", image: guide.photo.src, imageAlt: guide.photo.alt, crumbs });
@@ -333,7 +333,7 @@ export function AirportJourneyPage({ id }: { id: AirportJourneyId }) {
   return (
     <main className="mx-auto max-w-5xl px-4 pb-16">
       <header className="pt-6">
-        <Breadcrumbs items={[{ name: "Home", to: "/" }, { name: "Travel guides", to: "/guides/" }, { name: "How to get to " + g.city, to: g.path }]} />
+        <Breadcrumbs items={[{ name: "Home", to: "/" }, { name: "Travel guides", to: "/travel-blog/" }, { name: "How to get to " + g.city, to: g.path }]} />
         <GuideHeroLayout image={
           <GuideHeroMedia src={g.photo.src} alt={g.photo.alt}>
             {!focusedLayout && <GuidePhotoCredit photo={g.photo} />}
