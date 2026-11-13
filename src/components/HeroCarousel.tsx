@@ -126,8 +126,8 @@ export function HeroCarousel({ slides, children }: { slides: HeroSlide[]; childr
       </div>
       <div className="absolute inset-0 bg-gradient-to-r from-navy/90 via-navy/60 to-navy/10 max-md:bg-gradient-to-t max-md:from-navy/95 max-md:via-navy/65 max-md:to-navy/25" aria-hidden />
       <div className="relative mx-auto max-w-[90rem]">{children}</div>
-      <div className="relative mx-auto flex max-w-[90rem] flex-wrap items-center justify-between gap-3 px-6 pb-14 md:px-12 md:pb-16">
-        <p className="min-w-0 text-sm font-medium text-navy-foreground/90" aria-live={autoplayOn ? "off" : "polite"}>
+      <div className="relative mx-auto mt-16 flex max-w-[90rem] flex-wrap items-end justify-between gap-3 px-6 pb-8 md:mt-24 md:px-12 md:pb-10">
+        <p className="min-w-0 max-w-xs text-[10px] font-normal leading-snug text-navy-foreground/60 md:text-xs" aria-live={autoplayOn ? "off" : "polite"}>
           {slides[index]?.caption}
         </p>
         <div className="flex shrink-0 items-center gap-2">
