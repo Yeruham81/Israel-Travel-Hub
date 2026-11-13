@@ -75,7 +75,7 @@ export function IsraelItineraryPage({ id }: { id: ItineraryId }) {
       }>
         <p className="eyebrow">Israel itineraries · Independent trip planning</p>
         <h1 className="guide-page-title mt-3">{g.title}</h1>
-        <p className="mt-4 max-w-3xl text-lg leading-relaxed text-foreground">{g.intro}</p>
+        <p data-guide-intro className="mt-4 max-w-3xl text-lg leading-relaxed text-foreground">{g.intro}</p>
         <div className="mt-5 flex flex-wrap gap-2 text-xs font-medium">
           <span className="rounded-full bg-secondary px-3 py-2">{g.days} full sightseeing days</span>
           <span className="rounded-full bg-secondary px-3 py-2">Realistic hotel bases</span>
