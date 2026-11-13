@@ -162,9 +162,11 @@ describe("migrated practical guides", () => {
     expect(travelGuides.esim.answer).toMatch(/unlimited.*does not promise unlimited full-speed/i);
   });
 
-  it("covers the complete 2026 airport arrival sequence without duplicating specialty transport guides", () => {
+  it("covers the complete airport arrival sequence without duplicating specialty transport guides", () => {
     const guide = travelGuides.arrival;
-    expect(guide.title).toMatch(/Ben Gurion Airport Arrivals Guide.*2026/);
+    expect(guide.title).toMatch(/^Ben Gurion Airport Arrivals Guide: Passport Control/);
+    expect(guide.title).not.toMatch(/\b20\d{2}\b/);
+    expect(guide.description).not.toMatch(/\b20\d{2}\b/);
     expect(guide.answer).toMatch(/Terminal 3.*passport control.*customs.*arrivals hall/s);
     expect(guide.sections.map((s) => s.id)).toEqual([
       "before-you-fly", "arrival-terminal", "passport-control", "baggage", "customs",
