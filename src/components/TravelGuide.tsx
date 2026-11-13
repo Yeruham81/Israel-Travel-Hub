@@ -32,6 +32,17 @@ function guideContactKind(guide: TravelGuide): GuideContactKind {
   return "general";
 }
 
+const fareNavCompactLabels: Readonly<Record<string, string>> = {
+  "at-a-glance": "Meter rates",
+  "time-distance": "The meter",
+  "tariff-hours": "Night & Shabbat",
+  extras: "Extra fees",
+  examples: "Fare examples",
+  estimates: "Compare options",
+  disputes: "Fare problems",
+  faq: "FAQ",
+};
+
 const taxiNavCompactLabels: Readonly<Record<string, string>> = {
   "at-a-glance": "Overview",
   recognize: "Licensed taxis",
@@ -95,6 +106,7 @@ function GuideSectionPhoto({ photo }: { photo: GuidePhoto }) {
 function showSectionReferences(guideId: TravelGuideId, sectionId: string) {
   if (guideId === "shabbat") return ["terminal-transfer", "taxis-transfers", "practical"].includes(sectionId);
   if (guideId === "taxis") return ["fares", "airport", "sherut", "safety"].includes(sectionId);
+  if (guideId === "taxiFares") return false; // Single authoritative list at the end, not repeated under each paragraph.
   if (guideId === "israel" || guideId === "telAviv") return false; // Overview guide sources appear at the end.
   return true;
 }
@@ -178,6 +190,7 @@ export function TravelGuidePage({ id }: { id: TravelGuideId }) {
   const isJerusalemCluster = (["jerusalem", "jerusalemChurches", "jerusalemShopping", "jerusalemDayTrips", "bethlehem", "jerusalemDeadSea"] as string[]).includes(id);
   const isNationalGuide = id === "israel";
   const isTransportOverview = isNationalGuide || id === "telAviv";
+  const isTaxiFareGuide = id === "taxiFares";
   const overviewRowAnchors = id === "telAviv"
     ? ["walking", "city-buses", "red-line", "national-rail", "taxis", "shared-taxis", "shabbat", "bikes", "driving"]
     : ["israel-trains", "israel-buses", "israel-light-rail", "israel-taxis", "israel-sherut", "israel-rentals", "israel-drivers"];
@@ -227,12 +240,14 @@ export function TravelGuidePage({ id }: { id: TravelGuideId }) {
       {isJerusalemDayJourney && <JerusalemJourneyOptions id={id} />}
       <OnThisPage sections={isJerusalemDayJourney
         ? [["journey-options", "Compare transport"], ["journey-destinations", "Stops & destinations"], ...guide.sections.map((section) => [section.id, section.title] as const), ["journey-booking", "Tours & private trips"], ["checklist", "Checklist"], ["faq", "FAQ"], ["sources", "Sources"], ["contact", "Contact Moshe"]]
-        : [["at-a-glance", "At a glance"], ...guide.sections.map((section) => [section.id, section.title] as const), ["checklist", "Checklist"], ["faq", "FAQ"], ...(isTransportOverview ? [["contact", "Contact Moshe"], ["sources", "Sources"]] as const : [["sources", "Sources"], ["contact", "Contact Moshe"]] as const)]} compactLabels={id === "taxis" ? taxiNavCompactLabels : undefined} />
+        : isTaxiFareGuide
+          ? [["at-a-glance", "Meter rates"], ...guide.sections.map((section) => [section.id, section.title] as const), ["faq", "FAQ"]]
+          : [["at-a-glance", "At a glance"], ...guide.sections.map((section) => [section.id, section.title] as const), ["checklist", "Checklist"], ["faq", "FAQ"], ...(isTransportOverview ? [["contact", "Contact Moshe"], ["sources", "Sources"]] as const : [["sources", "Sources"], ["contact", "Contact Moshe"]] as const)]} compactLabels={id === "taxis" ? taxiNavCompactLabels : isTaxiFareGuide ? fareNavCompactLabels : undefined} />
       {!isJerusalemDayJourney && <section id="at-a-glance" aria-labelledby="comparison-h" className="mt-10 scroll-mt-24">
         <h2 id="comparison-h" className="text-3xl">{guide.comparison.caption}</h2>
         {isTransportOverview && <p className="mt-3 max-w-3xl leading-relaxed">Compare the entire trip to your final address. Cost labels are relative, not live fares; operating hours depend on your date and route.</p>}
         {isTransportOverview && <p className="mt-3 text-xs text-muted-foreground sm:hidden">Swipe horizontally to view all five columns.</p>}
-        <div role="region" aria-label="Transport comparison table" tabIndex={0} className="mt-5 max-w-full overflow-x-auto rounded-xl border focus-visible:outline-2 focus-visible:outline-primary"><table className={isTransportOverview ? "w-full min-w-[860px] text-left text-sm" : "w-full min-w-[560px] text-left text-sm"}><caption className="sr-only">{guide.comparison.caption}</caption><thead className="bg-secondary"><tr>{guide.comparison.headers.map((heading) => <th key={heading} scope="col" className={"p-4 font-semibold " + (isTransportOverview && heading === guide.comparison.headers[0] ? "sticky left-0 z-10 bg-secondary" : "")}>{heading}</th>)}</tr></thead><tbody className="divide-y">{guide.comparison.rows.map((row, index) => <tr key={index} className="bg-card">{row.map((cell, cellIndex) => cellIndex === 0 ? <th key={cellIndex} scope="row" className={"p-4 font-medium " + (isTransportOverview ? "sticky left-0 z-10 bg-card" : "")}>{isTransportOverview ? <a href={"#" + (overviewRowAnchors[index] || "choose")} className="text-primary underline underline-offset-4">{cell}</a> : cell}</th> : <td key={cellIndex} className="p-4 leading-relaxed text-muted-foreground">{cell}</td>)}</tr>)}</tbody></table></div>
+        <div role="region" aria-label="Transport comparison table" tabIndex={0} className="mt-5 max-w-full overflow-x-auto rounded-xl border focus-visible:outline-2 focus-visible:outline-primary"><table className={isTransportOverview ? "w-full min-w-[860px] text-left text-sm" : isTaxiFareGuide ? "w-full min-w-[640px] text-left text-sm" : "w-full min-w-[560px] text-left text-sm"}><caption className="sr-only">{guide.comparison.caption}</caption><thead className="bg-secondary"><tr>{guide.comparison.headers.map((heading) => <th key={heading} scope="col" className={"p-4 font-semibold " + ((isTransportOverview || isTaxiFareGuide) && heading === guide.comparison.headers[0] ? "sticky left-0 z-10 bg-secondary" : "")}>{heading}</th>)}</tr></thead><tbody className="divide-y">{guide.comparison.rows.map((row, index) => <tr key={index} className="bg-card">{row.map((cell, cellIndex) => cellIndex === 0 ? <th key={cellIndex} scope="row" className={"p-4 font-medium " + ((isTransportOverview || isTaxiFareGuide) ? "sticky left-0 z-10 bg-card" : "")}>{isTransportOverview ? <a href={"#" + (overviewRowAnchors[index] || "choose")} className="text-primary underline underline-offset-4">{cell}</a> : cell}</th> : <td key={cellIndex} className="p-4 leading-relaxed text-muted-foreground">{cell}</td>)}</tr>)}</tbody></table></div>
       </section>}
       {isTransportOverview && <nav aria-label="Quick transport topics" className="mt-4 rounded-xl border bg-secondary/30 p-3">
         <p className="mb-2 text-xs font-semibold uppercase tracking-wide text-muted-foreground">Jump to a popular topic</p>
@@ -257,7 +272,7 @@ export function TravelGuidePage({ id }: { id: TravelGuideId }) {
             </Fragment>
           ))}
           {section.paragraphs.length === 0 && section.photo && <GuideSectionPhoto photo={section.photo} />}
-        </div>{section.tables?.map((table) => <GuideDataTable key={table.caption} table={table} mobileGuidance={isTransportOverview} />)}
+        </div>{section.tables?.map((table) => <GuideDataTable key={table.caption} table={table} mobileGuidance={isTransportOverview || isTaxiFareGuide} />)}
         {section.subsections?.map(sub => <section key={sub.id} id={sub.id} aria-labelledby={sub.id + "-h"} className="mt-9 scroll-mt-24">
           <h3 id={sub.id + "-h"} className="text-2xl font-semibold">{sub.title}</h3>
           <div className="mt-3 max-w-4xl space-y-4 leading-relaxed text-foreground">
