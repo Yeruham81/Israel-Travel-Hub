@@ -7,7 +7,7 @@ import masadaPalacePhoto from "@/assets/guides/dead-sea-excursions/masada-palace
 import einGediPhoto from "@/assets/guides/dead-sea-excursions/ein-gedi-oasis.webp";
 import saltShorePhoto from "@/assets/guides/dead-sea-excursions/dead-sea-salt-shore.webp";
 import sunrisePhoto from "@/assets/guides/dead-sea-excursions/masada-snake-path.webp";
-import masadaRuinsPhoto from "@/assets/guides/dead-sea-excursions/masada-ruins.webp";
+import bethlehemNativityPhoto from "@/assets/guides/dead-sea-excursions/bethlehem-nativity.webp";
 
 const tourPhotos = {
   "beach-mud": { src: beachMudPhoto, alt: "Dead Sea mud bathing on the shore" },
@@ -15,7 +15,7 @@ const tourPhotos = {
   "ein-gedi": { src: einGediPhoto, alt: "Desert oasis and natural scenery at Ein Gedi" },
   "salt-shore": { src: saltShorePhoto, alt: "Salt deposits on the Dead Sea shoreline" },
   sunrise: { src: sunrisePhoto, alt: "The Snake Path climbing toward Masada" },
-  "masada-ruins": { src: masadaRuinsPhoto, alt: "Archaeological ruins at the Masada fortress" },
+  "bethlehem-nativity": { src: bethlehemNativityPhoto, alt: "Interior of the Church of the Nativity in Bethlehem" },
 } as const;
 
 /** Compact manually curated cards, with vendor data separated from affiliate URLs.
@@ -52,7 +52,7 @@ export function DeadSeaTourOptions() {
               </span>
             </span>
             <span className="mt-auto flex items-end justify-between gap-2 border-t pt-3 text-sm">
-              <span><span className="text-xs text-muted-foreground">From</span> <strong>US${tour.fromUsd}</strong><span className="block text-[11px] text-muted-foreground">per person</span></span>
+              <span>{tour.fromUsd !== undefined ? <><span className="text-xs text-muted-foreground">From</span> <strong>US${tour.fromUsd}</strong><span className="block text-[11px] text-muted-foreground">per person</span></> : <strong className="text-xs">See current price</strong>}</span>
               <span className="inline-flex items-center gap-1 font-semibold text-primary">View & book <ExternalLink size={13} aria-hidden="true" /></span>
             </span>
           </span>
