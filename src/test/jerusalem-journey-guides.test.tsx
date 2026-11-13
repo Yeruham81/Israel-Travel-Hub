@@ -1,3 +1,4 @@
+import { carRentalAffiliateUrl } from "@/lib/car-rental-affiliate";
 import { QueryClient } from "@tanstack/react-query";
 import { createMemoryHistory, createRouter, RouterContextProvider } from "@tanstack/react-router";
 import { afterEach, describe, expect, it } from "vitest";
@@ -54,7 +55,7 @@ describe("Jerusalem independent day-trip planning guides", () => {
     expect(screen.getByTestId("journey-owner-trip")).toHaveTextContent("guiding");
     expect(screen.queryAllByTestId("journey-tour-card")).toHaveLength(0);
     expect(container.querySelector('#bus p')).toHaveTextContent("486");
-    expect(container.querySelector('#driving p a[href="/car-rental/"]')).toBeInTheDocument();
+    expect(container.querySelector('#driving p a[href="' + carRentalAffiliateUrl(travelGuidePaths.jerusalemDeadSea) + '"]')).toBeInTheDocument();
     expect(container.querySelector('#day-plan p a[href="/travel-blog/the-dead-sea/"]')).toBeInTheDocument();
     expect(screen.getByRole("link", { name: /Ein Gedi Nature Reserve updates/ })).toHaveAttribute("href", "https://en.parks.org.il/reserve-park/en-gedi-nature-reserve/");
   }, 15000);
