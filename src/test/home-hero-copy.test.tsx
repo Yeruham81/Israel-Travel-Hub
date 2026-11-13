@@ -107,7 +107,7 @@ describe("homepage marketing copy and service sections", () => {
     const shoreLayout = shoreSection.querySelector('[data-testid="service-layout-shore-excursions"]')!;
     expect(shoreLayout).toHaveClass("lg:h-[390px]", "lg:items-stretch");
     const shorePhoto = shoreLayout.querySelector(":scope > img")!;
-    expect(shorePhoto).toHaveClass("lg:h-full", "lg:object-cover");
+    expect(shorePhoto).toHaveClass("lg:h-full", "object-cover");
     const portList = within(shoreSection).getByRole("list", { name: "Shore excursions by port" });
     expect(portList).toHaveClass("lg:h-full", "lg:grid-rows-2");
     const portLinks = within(portList).getAllByRole("link");
