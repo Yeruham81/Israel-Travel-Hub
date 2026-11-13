@@ -6,7 +6,7 @@ import { afterEach, describe, expect, it } from "vitest";
 import { existsSync } from "node:fs";
 import path from "node:path";
 import { routeTree } from "@/routeTree.gen";
-import { Route as HubRoute } from "@/routes/guides";
+import { Route as HubRoute } from "@/routes/travel-blog.index";
 import { Route as AttractionsRoute } from "@/routes/attractions.index";
 import { TravelGuidePage, travelGuideMeta } from "@/components/TravelGuide";
 import { IsraelEventsPage } from "@/routes/travel-blog.calendar-of-events";
@@ -66,7 +66,7 @@ describe("October planning, city and heritage guide migration", () => {
     expect(guideDirectory).toHaveLength(69);
     expect(guideDirectory.some(guide => guide.id === "israel-holidays" && guide.to === "/travel-blog/israel-holidays/")).toBe(true);
     expect(new Set(guideDirectory.map(guide => guide.id)).size).toBe(guideDirectory.length);
-    const router = await routerAt("/guides/");
+    const router = await routerAt("/travel-blog/");
     const Hub = HubRoute.options.component!;
     const { container } = render(<RouterContextProvider router={router}><Hub /></RouterContextProvider>);
     const cards = container.querySelectorAll('[data-testid="guide-directory-card"]');
