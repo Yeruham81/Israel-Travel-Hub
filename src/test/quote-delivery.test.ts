@@ -17,7 +17,7 @@ const shore: QuoteRequest = { kind: "shore", portId: "haifa", fields: { ...empty
 const enquiry: QuoteRequest = { kind: "contact", fields: { name: contact.name, email: contact.email, subject: "Airport trip & a question", message: "שלום Moshe\n" + "x".repeat(3500), consent: true } };
 const payload = (request: QuoteRequest = transfer): QuoteRequestPayload => ({
   requestId: randomUUID(), website: "", request,
-  ...(request.kind === "transfer" ? { sourcePath: "/transfers/", sourceTitle: "Airport transfers" }
+  ...(request.kind === "transfer" ? { sourcePath: "/airport-transfers/", sourceTitle: "Airport transfers" }
     : request.kind === "driver" ? { sourcePath: "/private-driver/", sourceTitle: "Private driver in Israel" }
       : request.kind === "contact" ? { sourcePath: "/about-moshe-barak/", sourceTitle: "About Moshe Barak" }
       : { sourcePath: `/${request.portId}-shore-excursions/`, sourceTitle: `${request.portId === "haifa" ? "Haifa" : "Ashdod"} shore excursions: private day trips & prices` }),
@@ -87,7 +87,7 @@ describe("server-side quote delivery", () => {
   it("uses the actual page title independently of the selected destination and supports older clients without a title", async () => {
     const send = vi.fn().mockResolvedValue(undefined);
     const handle = createQuoteDeliveryService({ environment: enabled, send, now });
-    const data = { ...payload(), sourcePath: "/travel-blog/ben-gurion-airport-to-jerusalem/", sourceTitle: "Private transfer from Ben Gurion Airport to Jerusalem" };
+    const data = { ...payload(), sourcePath: "/airport-transfers/ben-gurion-airport-to-jerusalem/", sourceTitle: "Private transfer from Ben Gurion Airport to Jerusalem" };
     expect((await handle(post(data))).status).toBe(200);
     expect(send.mock.calls[0]![0].text).toMatch(/^Sent from page: Private transfer from Ben Gurion Airport to Jerusalem\n\nName: Jamie & Alex/);
     expect(send.mock.calls[0]![0].text).toContain("Destination: Ein Gedi");
