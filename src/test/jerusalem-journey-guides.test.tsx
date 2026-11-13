@@ -55,6 +55,12 @@ describe("Jerusalem independent day-trip planning guides", () => {
     expect(screen.getByRole("heading", { name: "Qumran" })).toBeInTheDocument();
     expect(screen.getByRole("heading", { name: "Qasr al-Yahud" })).toBeInTheDocument();
     expect(screen.getByRole("heading", { name: "Where to go for a Dead Sea beach day" })).toBeInTheDocument();
+    const beachSection = container.querySelector("#beach");
+    expect(beachSection).not.toBeNull();
+    expect(beachSection).toHaveTextContent("Northern-shore bathing beaches such as Kalia are closer to Jerusalem");
+    expect(beachSection).toHaveTextContent("I generally recommend continuing south to Ein Bokek");
+    expect(within(beachSection as HTMLElement).getByRole("link", { name: /Kalia Beach — admission and facilities/ }))
+      .toHaveAttribute("href", "https://kaliadeadsea.com/en/kalia-beach-en/");
     expect(screen.getByRole("heading", { name: "By public bus: Egged 486 and 444" })).toBeInTheDocument();
     expect(screen.getByRole("heading", { name: "By taxi or private driver: direct travel from your hotel" })).toBeInTheDocument();
     expect(screen.getAllByText(/Egged 486/).length).toBeGreaterThanOrEqual(1);
