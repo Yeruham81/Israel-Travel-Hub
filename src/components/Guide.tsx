@@ -192,7 +192,7 @@ export function GuideHeader({ crumbs, eyebrow, title, intro, image, checkedAt = 
       <GuideHeroLayout image={image && <GuideHeroMedia src={image.src} alt={image.alt} />}>
         <p className="eyebrow">{eyebrow}</p>
         <h1 className="guide-page-title mt-3">{title}</h1>
-        <div className="mt-4 max-w-3xl text-lg leading-relaxed text-foreground">{intro}</div>
+        <div data-guide-intro className="mt-4 max-w-3xl text-lg leading-relaxed text-foreground">{intro}</div>
         <PageUpdated date={checkedAt} />
       </GuideHeroLayout>
       <AuthorCard />
