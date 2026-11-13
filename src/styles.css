@@ -177,6 +177,15 @@
   .chip-dense { min-height: 1.875rem; padding: .3rem .625rem; font-size: .75rem; }
   @media (prefers-reduced-motion: reduce) { .chip { transition: none; } }
 }
+/* Expand a guide's side photo slightly only when JS verifies that its entire
+   opening paragraph fits in four lines at the resulting desktop text width.
+   The default ratio remains readable for longer introductions. */
+@media (min-width: 1024px) {
+  .guide-hero-layout.guide-hero-photo-expanded {
+    grid-template-columns: minmax(0, 1.72fr) minmax(0, 1fr);
+  }
+}
+
 @media (prefers-reduced-motion: reduce) { .photo-card img { transition: none !important; transform: none !important; } }
 
 /*
