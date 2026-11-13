@@ -42,7 +42,7 @@ describe("independent author identity and page credits", () => {
       const labelLines = reviews.querySelectorAll("span.flex.flex-col > span");
       expect(Array.from(labelLines, (line) => line.textContent)).toEqual(["Read Reviews on", "TripAdvisor"]);
       expect(labelLines[1]).toHaveClass("text-sm", "font-bold");
-      expect(reviews.querySelector("span.bg-\\[\\#34E0A1\\]")).not.toBeNull();
+      expect(reviews.querySelector('span[aria-hidden="true"]')).toHaveClass("bg-[#34E0A1]");
       expect(reviews.querySelector('img[src="/images/tripadvisor-owl-black.svg"]')).toHaveAttribute("width", "28");
       expect(within(card).getByRole("link", { name: "Moshe Barak" })).toHaveAttribute("href", "/about-moshe-barak/#moshe-barak");
       expect(card).not.toHaveTextContent(/5\.0|five stars|\d+ reviews|licensed guide/i);
