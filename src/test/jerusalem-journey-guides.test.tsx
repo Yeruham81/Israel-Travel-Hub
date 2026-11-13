@@ -8,6 +8,7 @@ import { Route as BethlehemRoute } from "@/routes/travel-blog.jerusalem-to-bethl
 import { Route as DeadSeaRoute } from "@/routes/travel-blog.jerusalem-to-the-dead-sea";
 import { affiliateConfig, tourBookingOffers, travelGuidePaths, getSource } from "@/data/registry";
 import { travelGuides } from "@/data/travelGuides";
+import { deadSeaTourCards } from "@/data/deadSeaTourOffers";
 
 afterEach(cleanup);
 
@@ -65,32 +66,44 @@ describe("Jerusalem independent day-trip planning guides", () => {
     expect(screen.getByRole("heading", { name: "By taxi or private driver: direct travel from your hotel" })).toBeInTheDocument();
     expect(screen.getAllByText(/Egged 486/).length).toBeGreaterThanOrEqual(1);
 
+    const stopCards = screen.getAllByTestId("deadsea-attraction-card");
+    expect(stopCards).toHaveLength(4);
+    expect(new Set(stopCards.map(card => within(card).getByRole("img").getAttribute("src"))).size).toBe(4);
+    for (const stopCard of stopCards) {
+      expect(stopCard.tagName).toBe("A");
+      expect(stopCard).toHaveAttribute("href", expect.stringMatching(/^https:\/\//));
+    }
     const tourSection = container.querySelector("#tours");
     expect(tourSection).not.toBeNull();
     const ownerCard = within(tourSection as HTMLElement).getByTestId("deadsea-moshe-tour");
     expect(ownerCard).toHaveTextContent("₪2,100");
-    expect(within(ownerCard).getByRole("link", { name: /View private tour and price/ }))
-      .toHaveAttribute("href", "/tours/masada-dead-sea/");
+    expect(ownerCard).toHaveAttribute("href", "/tours/masada-dead-sea/");
     const cards = within(tourSection as HTMLElement).getAllByTestId("deadsea-bookable-tour");
-    expect(cards).toHaveLength(3);
+    expect(cards).toHaveLength(5);
+    expect(deadSeaTourCards.filter(tour => tour.provider === "Viator")).toHaveLength(3);
+    expect(deadSeaTourCards.filter(tour => tour.provider === "GetYourGuide")).toHaveLength(2);
     const expectedLinks = [
-      affiliateConfig["jslm-deadsea-beach-viator"]?.trackingUrl,
-      affiliateConfig["jslm-deadsea-masada-viator"]?.trackingUrl,
-      affiliateConfig["jslm-deadsea-masada-eingedi-viator"]?.trackingUrl,
-    ];
-    expect(expectedLinks).toEqual([
       "https://viator.tpm.li/mFyULbRB",
       "https://viator.tpm.li/ccE2RHo7",
       "https://viator.tpm.li/2OUbWPvV",
-    ]);
+      "https://getyourguide.tpm.li/htf3XviP",
+      "https://getyourguide.tpm.li/BcWk9QKl",
+    ];
+    expect(deadSeaTourCards.map(tour => affiliateConfig[tour.id]?.trackingUrl)).toEqual(expectedLinks);
     for (const [index, card] of cards.entries()) {
-      const link = within(card).getByRole("link", { name: /View dates and book/ });
-      expect(link).toHaveAttribute("href", expectedLinks[index]);
-      expect(link.getAttribute("rel")).toContain("sponsored");
+      expect(card.tagName).toBe("A");
+      expect(card).toHaveAttribute("href", expectedLinks[index]);
+      expect(card.getAttribute("rel")).toContain("sponsored");
       expect(within(card).getByRole("img")).toBeInTheDocument();
+      expect(card).toHaveTextContent("From US$");
+      expect(card).toHaveTextContent(deadSeaTourCards[index].duration);
+      expect(card).toHaveTextContent(deadSeaTourCards[index].rating.toFixed(1));
       expect(card).not.toHaveTextContent("affiliate link");
       expect(card).not.toHaveTextContent("Sponsored link");
     }
+    const allTourPhotos = [ownerCard, ...cards].map(card => within(card).getByRole("img").getAttribute("src"));
+    expect(new Set(allTourPhotos).size).toBe(6);
+    expect(allTourPhotos.every(photo => !stopCards.some(stop => within(stop).getByRole("img").getAttribute("src") === photo))).toBe(true);
     expect(container.querySelector("#journey-booking")).toBeNull();
     expect(screen.getAllByRole("note")).toHaveLength(6);
     expect(container.querySelector('#beach p a[href="/travel-blog/the-dead-sea/"]')).toBeInTheDocument();
