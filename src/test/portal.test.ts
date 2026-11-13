@@ -46,7 +46,7 @@ describe("portal navigation", () => {
   it("links all seven migrated practical guides internally", () => {
     const group = allNavGroups.find((item) => item.title === "Travel guides")!;
     const links = group.items.filter((item) => "to" in item).map((item) => item.to);
-    expect(links).toContain("/guides/");
+    expect(links).toContain("/travel-blog/");
     for (const path of ["uber-in-israel", "sherut-in-israel", "best-esim-for-israel", "ben-gurion-airport-arrival-tips", "getting-around-israel", "getting-around-tel-aviv", "taxis-in-israel"]) expect(links).toContain(`/travel-blog/${path}/`);
     expect(group.items.some((item) => "href" in item)).toBe(false);
   });
