@@ -866,13 +866,13 @@ export const journeyDestinationGuides = {
         "id": "driving",
         "title": "Driving from Jerusalem on Routes 1 and 90",
         "paragraphs": [
-          "A common approach from Jerusalem follows Route 1 east to the Dead Sea corridor and Route 90 south. Use current navigation to the precise entrance, not simply “Dead Sea”, and confirm your rental agreement permits the intended roads and region. My car rental guide covers insurance and collection questions.",
+          "A common approach from Jerusalem follows Route 1 east to the Dead Sea corridor and Route 90 south. Use current navigation to the precise entrance, not simply “Dead Sea”, and confirm your rental agreement permits the intended roads and region. DiscoverCars' Israel rental comparison lets you review cars and their rental conditions.",
           "Plan parking at each stop. The desert has long stretches with little shade, and flash floods can close roads and reserve entrances even when the weather in Jerusalem looks fine. Never leave the road for an informal shore access point or walk through sinkhole-risk areas.",
           "Check park hours and whether any Masada access or Ein Gedi trail is closed. Leave adequate time for the drive back instead of combining every nearby-sounding site."
         ],
         "inlineLinks": [
           {
-            "text": "car rental guide",
+            "text": "DiscoverCars' Israel rental comparison",
             "to": "/car-rental/"
           }
         ]
