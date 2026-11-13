@@ -69,6 +69,33 @@ describe("compact On this page navigation", () => {
     }
   });
 
+  it("omits Sources from visible jump links and All sections, without removing other sections", () => {
+    const withSources = [...sections.slice(0, 12), ["sources", "Sources"] as const, ...sections.slice(12)];
+    const { container } = render(<OnThisPage sections={withSources} />);
+    const nav = screen.getByRole("navigation", { name: "On this page" });
+    expect(within(nav).queryByRole("link", { name: "Sources" })).not.toBeInTheDocument();
+    expect(nav.querySelector('a[href="#sources"]')).toBeNull();
+    expect(nav.querySelector("ul.grid")?.children).toHaveLength(17);
+    const details = nav.querySelector("details")!;
+    expect(details).toBeInTheDocument();
+    fireEvent.click(within(nav).getByText("All sections"));
+    expect(details).toHaveAttribute("open");
+    expect(details.querySelector('a[href="#sources"]')).toBeNull();
+    expect(details.querySelectorAll("a")).toHaveLength(17);
+    expect(container.querySelector('a[href="#section-17"]')).toBeInTheDocument();
+  });
+
+  it("filters Sources before computing the compact menu overflow threshold", () => {
+    const entries = [...sections.slice(0, 10), ["sources", "Sources"] as const];
+    const { rerender } = render(<OnThisPage sections={entries} />);
+    const nav = screen.getByRole("navigation", { name: "On this page" });
+    expect(nav.querySelector("details")).toBeNull();
+    expect(nav.querySelector("ul.grid")?.children).toHaveLength(10);
+    rerender(<OnThisPage sections={[["sources", "Source references"], ...sections.slice(0, 10)]} />);
+    expect(nav.querySelector('a[href="#sources"]')).toBeNull();
+    expect(nav.querySelector("details")).toBeNull();
+  });
+
   it("does not show the overflow menu for ten or fewer links", () => {
     render(<OnThisPage sections={sections.slice(0, 10)} />);
     const nav = screen.getByRole("navigation", { name: "On this page" });
