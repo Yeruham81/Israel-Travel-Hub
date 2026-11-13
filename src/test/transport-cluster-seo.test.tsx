@@ -84,7 +84,7 @@ describe("transport cluster: twelve editorial guides and four private landings",
       for (const { section, link } of contextual) {
         expect(section.paragraphs.join(" ").includes(link.text), id + ": " + link.text).toBe(true);
         expect(link.to).not.toBe(travelGuidePaths[id]);
-        expect(link.to).not.toBe("/transfers/ben-gurion-airport/");
+        expect(link.to).not.toBe("/airport-transfers/ben-gurion-airport/");
       }
       expect(guide.related.length, id + " needs topical links").toBeGreaterThan(0);
       expect(guide.sourceIds.length).toBeGreaterThan(0);
