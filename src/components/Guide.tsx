@@ -1,9 +1,11 @@
-import { Link, type LinkProps } from "@tanstack/react-router";
+import { type LinkProps } from "@tanstack/react-router";
+import { SiteLink as Link } from "@/components/SiteLink";
 import { guideDirectory } from "@/data/travelGuides";
 import { uniqueGuideCardPhotos } from "@/lib/guide-card-photos";
 import { BookOpen } from "lucide-react";
 import type { ReactNode } from "react";
 import { ExtLink } from "@/components/Layout";
+import { carRentalAffiliateUrl } from "@/lib/car-rental-affiliate";
 import { publicSources, formatCheckDate, INFO_CHECK_DATE, type ProviderLink } from "@/data/registry";
 import { AuthorCard } from "@/components/AuthorCard";
 import { PageUpdated } from "@/components/PageUpdated";
@@ -261,7 +263,7 @@ export function SourceList({ ids, intro = "“Checked” dates refer to the fact
 function ProviderAction({ link: l, pageId, className, children }: { link: ProviderLink; pageId: string; className: string; children: ReactNode }) {
   const internal = l.url.startsWith("/");
   return <a
-    href={hotelBrowseAffiliateUrl(l, pageId)}
+    href={l.id === "cars-discovercars" ? carRentalAffiliateUrl(`/${pageId}/`) : hotelBrowseAffiliateUrl(l, pageId)}
     target={internal ? undefined : "_blank"}
     rel={internal ? undefined : relFor(l.isAffiliate)}
     onClick={internal ? undefined : () => recordOutboundClick({ pageId, productId: l.id, offerId: l.id })}
