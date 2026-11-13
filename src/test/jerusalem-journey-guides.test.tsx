@@ -60,11 +60,11 @@ describe("Jerusalem independent day-trip planning guides", () => {
       affiliateConfig["deadsea-jerusalem-viator"]?.trackingUrl,
       affiliateConfig["deadsea-jerusalem-getyourguide"]?.trackingUrl,
     ];
-    expect(generatedApiLinks).toEqual(["https://viator.tpm.li/46DdjwVr?sub_id=itt_jerusalem_to_the_dead_sea_viator", "https://getyourguide.tpm.li/wEfa7dYc?sub_id=itt_jerusalem_to_the_dead_sea_getyourguide"]);
+    expect(generatedApiLinks).toEqual(["https://viator.tpm.li/46DdjwVr?sub_id=jslm_dead_sea_viator", "https://getyourguide.tpm.li/wEfa7dYc?sub_id=jslm_dead_sea_getyourguide"]);
     for (const [index, card] of affiliateCards.entries()) {
       const link = within(card).getByRole("link", { name: /Browse on/ });
       expect(link).toHaveAttribute("href", generatedApiLinks[index]);
-      expect(new URL(link.getAttribute("href")!).searchParams.get("sub_id")).toMatch(/^itt_jerusalem_to_the_dead_sea_(viator|getyourguide)$/);
+      expect(new URL(link.getAttribute("href")!).searchParams.get("sub_id")).toMatch(/^jslm_dead_sea_(viator|getyourguide)$/);
       expect(link.getAttribute("rel")).toContain("sponsored");
       expect(card).toHaveTextContent("Sponsored link");
     }
