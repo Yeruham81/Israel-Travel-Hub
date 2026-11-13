@@ -44,13 +44,17 @@ describe("Jerusalem independent day-trip planning guides", () => {
     expect(within(container.querySelector("#bethlehem-sites") as HTMLElement)
       .getByRole("img", { name: /Milk Grotto/ })).toBeInTheDocument();
     const cards = screen.getAllByTestId("bethlehem-tour-card");
-    expect(cards).toHaveLength(3);
-    expect(new Set(cards.map(card => within(card).getByRole("img").getAttribute("src"))).size).toBe(3);
+    expect(cards).toHaveLength(6);
+    expect(new Set(cards.map(card => within(card).getByRole("img").getAttribute("src"))).size).toBe(6);
     for (const card of cards) {
       expect(card.tagName).toBe("A");
-      expect(card.getAttribute("href")).toMatch(/^https:\/\/(www\.getyourguide|www\.viator)\.com\//);
-      expect(card.getAttribute("rel")).not.toContain("sponsored");
+      expect(card.getAttribute("href")).toMatch(/^https:\/\/(viator|getyourguide)\.tpm\.li\//);
+      expect(card.getAttribute("rel")).toContain("sponsored");
+      expect(within(card).getByText(/US\$\d+/)).toBeInTheDocument();
+      expect(within(card).getByLabelText(/out of 5 from \d+ reviews/)).toBeInTheDocument();
     }
+    expect(cards.filter(card => card.textContent?.includes("per group (up to 4)"))).toHaveLength(2);
+    expect(cards.filter(card => card.textContent?.includes("per person"))).toHaveLength(4);
     expect(screen.queryByRole("heading", { name: /Bethlehem tickets, local visits and the correct return route/ })).not.toBeInTheDocument();
     expect(screen.queryByTestId("journey-tour-card")).not.toBeInTheDocument();
     const related = screen.getByTestId("bethlehem-related-guides");

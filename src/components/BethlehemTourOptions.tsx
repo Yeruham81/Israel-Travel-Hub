@@ -1,47 +1,67 @@
-import { ExternalLink } from "lucide-react";
+import { Clock3, ExternalLink, Star } from "lucide-react";
 import { affiliateConfig } from "@/data/registry";
 import { bethlehemTourCards } from "@/data/bethlehemTourOffers";
 import { recordOutboundClick, relFor } from "@/lib/outbound";
 import nativityInterior from "@/assets/guides/dead-sea-excursions/bethlehem-nativity.webp";
-import bethlehemView from "@/assets/home/bethlehem-nativity.webp";
+import catholicGrottos from "@/assets/guides/bethlehem/catholic-grottos.jpg";
 import jordanRiver from "@/assets/guides/dead-sea-excursions/jordan-river-qasr-al-yahud.webp";
+import jerusalemMamilla from "@/assets/jerusalem/mamilla.webp";
+import bethlehemView from "@/assets/home/bethlehem-nativity.webp";
+import palestinianTaxi from "@/assets/guides/bethlehem/palestinian-taxi.jpg";
 
-const photos = {
+const tourPhotos = {
   "nativity-interior": { src: nativityInterior, alt: "Interior of the Church of the Nativity in Bethlehem" },
-  bethlehem: { src: bethlehemView, alt: "Church of the Nativity and Bethlehem buildings" },
-  "jordan-river": { src: jordanRiver, alt: "Pilgrimage site on the Jordan River at Qasr al-Yahud" },
-};
+  "catholic-grottos": { src: catholicGrottos, alt: "The Catholic grottos below Bethlehem's Church of the Nativity" },
+  "jordan-river": { src: jordanRiver, alt: "Pilgrimage site beside the Jordan River" },
+  "jerusalem-mamilla": { src: jerusalemMamilla, alt: "Jerusalem architecture near the Old City" },
+  bethlehem: { src: bethlehemView, alt: "Church of the Nativity and surrounding Bethlehem buildings" },
+  "palestinian-taxi": { src: palestinianTaxi, alt: "Yellow Palestinian taxi used for local transport" },
+} as const;
 
-/** Product-specific, editorially checked listings; no invented inventory or rates. */
+/** Same compact price, duration and review cards as the Dead Sea guide.
+ * Only publisher-approved product deeplinks can appear as booking cards.
+ */
 export function BethlehemTourOptions() {
-  return <section aria-labelledby="bethlehem-tour-options-h" className="mt-8 scroll-mt-24" data-testid="bethlehem-tour-options">
-    <h3 id="bethlehem-tour-options-h" className="text-2xl font-semibold">Compare Bethlehem tours departing from Jerusalem</h3>
-    <p className="mt-2 max-w-3xl text-sm leading-relaxed text-muted-foreground">Choose a half-day group visit, a private itinerary or a longer Bethlehem–Jericho tour. Product descriptions are not live schedules. Check your date, entry eligibility, actual pickup and included visits before booking.</p>
-    <div className="mt-5 grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
+  return <section aria-labelledby="bethlehem-tour-options-h" className="mt-6 scroll-mt-24" data-testid="bethlehem-tour-options">
+    <h3 id="bethlehem-tour-options-h" className="text-2xl font-semibold">Compare tours starting in Jerusalem</h3>
+    <p className="mt-2 max-w-3xl text-sm leading-relaxed text-muted-foreground">Half-day tours concentrate on Bethlehem. Full-day trips add Jerusalem or Jericho and the Jordan River. Prices, reviews and itinerary details are snapshots—not date-specific quotes. Check departure, eligibility and church access before booking.</p>
+    <div className="mt-5 grid gap-3 sm:grid-cols-2 xl:grid-cols-3">
       {bethlehemTourCards.map(tour => {
-        const tracking = affiliateConfig[tour.id]?.trackingUrl;
-        const photo = photos[tour.photoId];
+        const url = affiliateConfig[tour.id]?.trackingUrl;
+        if (!url) return null;
+        const photo = tourPhotos[tour.photoId];
+        const groupRate = tour.priceUnit === "group-up-to-four";
         return <a
           key={tour.id}
           data-testid="bethlehem-tour-card"
-          href={tracking || tour.publicUrl}
+          href={url}
           target="_blank"
-          rel={relFor(Boolean(tracking))}
-          onClick={() => recordOutboundClick({ pageId: "jerusalem-to-bethlehem", productId: tour.id, offerId: tour.provider })}
-          className="group flex h-full min-w-0 flex-col overflow-hidden rounded-xl border bg-card transition-colors hover:border-primary hover:shadow-sm focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+          rel={relFor(true)}
+          onClick={() => recordOutboundClick({ pageId: "jslm_bethlehem", productId: tour.id, offerId: tour.id })}
+          className="group flex min-w-0 flex-col overflow-hidden rounded-xl border bg-card transition-all hover:-translate-y-0.5 hover:border-primary hover:shadow-md focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
         >
-          <img src={photo.src} alt={photo.alt} width={600} height={380} loading="lazy" decoding="async" className="aspect-[3/2] w-full object-cover" />
-          <div className="flex flex-1 flex-col p-4">
-            <p className="text-xs font-semibold text-primary">{tour.provider} · {tour.format}</p>
-            <h4 className="mt-2 text-lg font-bold leading-snug group-hover:text-primary">{tour.title}</h4>
-            <p className="mt-2 text-xs font-semibold text-muted-foreground">{tour.duration}</p>
-            <p className="mt-3 flex-1 text-sm leading-relaxed text-muted-foreground">{tour.description}</p>
-            <span className="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-primary">View tour details <ExternalLink className="h-4 w-4" aria-hidden /></span>
-            <span className="sr-only">(opens in a new tab)</span>
-          </div>
+          <img src={photo.src} alt={photo.alt} width={480} height={280} loading="lazy" decoding="async" className="h-40 w-full object-cover" />
+          <span className="flex flex-1 flex-col p-3.5">
+            <span className="text-[11px] font-semibold uppercase tracking-wide text-primary">{tour.provider}</span>
+            <span className="mt-1 text-base font-semibold leading-snug text-foreground group-hover:text-primary">{tour.title}</span>
+            <span className="mt-1.5 line-clamp-2 text-sm text-muted-foreground">{tour.subtitle}</span>
+            <span className="mt-3 flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-muted-foreground">
+              <span className="inline-flex items-center gap-1"><Clock3 size={13} aria-hidden="true" />{tour.duration}</span>
+              <span className="inline-flex items-center gap-1" aria-label={tour.rating + " out of 5 from " + tour.reviewCount + " reviews"}>
+                <Star size={13} className="fill-current text-amber-500" aria-hidden="true" />
+                <strong className="font-semibold text-foreground">{tour.rating.toFixed(1)}</strong>
+                <span>({tour.reviewCount.toLocaleString("en-US")})</span>
+              </span>
+            </span>
+            <span className="mt-auto flex items-end justify-between gap-2 border-t pt-3 text-sm">
+              <span><span className="text-xs text-muted-foreground">From</span> <strong>US${tour.fromUsd}</strong><span className="block text-[11px] text-muted-foreground">{groupRate ? "per group (up to 4)" : "per person"}</span></span>
+              <span className="inline-flex items-center gap-1 font-semibold text-primary">View & book <ExternalLink size={13} aria-hidden="true" /></span>
+            </span>
+          </span>
+          <span className="sr-only"> (opens in a new tab)</span>
         </a>;
       })}
     </div>
-    <p className="mt-3 text-xs leading-relaxed text-muted-foreground">These links lead to named supplier listings, not confirmed departures or live price quotes. A link is used for affiliate tracking only when an approved product-specific URL is configured.</p>
+    <p className="mt-3 text-xs leading-relaxed text-muted-foreground">Starting prices and ratings were checked on November 13, 2026 and may change. The two half-day group listings and two private listings use the same tour operator on different booking platforms; compare the exact terms and availability. Israeli passport holders are not eligible for these Area A tours.</p>
   </section>;
 }

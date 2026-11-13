@@ -1105,6 +1105,14 @@ export const affiliateConfig: Record<string, { trackingUrl: string } | undefined
   "jslm-deadsea-masada-gyg": { trackingUrl: "https://getyourguide.tpm.li/htf3XviP" },
   "jslm-deadsea-sunrise-gyg": { trackingUrl: "https://getyourguide.tpm.li/BcWk9QKl" },
   "jslm-deadsea-jericho-jordan-viator": { trackingUrl: "https://viator.tpm.li/OVUPYDvw" },
+  // Six exact Bethlehem product links generated and verified through Travelpayouts API (project 406243).
+  // Each carries a distinct source-page SubID set in scripts/travelpayouts/generate-bethlehem-tours.mjs.
+  "jslm-bethlehem-halfday-viator": { trackingUrl: "https://viator.tpm.li/ax0gfVFu" },
+  "jslm-bethlehem-halfday-gyg": { trackingUrl: "https://getyourguide.tpm.li/fPefqmsH" },
+  "jslm-bethlehem-jericho-viator": { trackingUrl: "https://viator.tpm.li/PrrI1yDu" },
+  "jslm-bethlehem-jerusalem-gyg": { trackingUrl: "https://getyourguide.tpm.li/w41ymA9k" },
+  "jslm-bethlehem-private-gyg": { trackingUrl: "https://getyourguide.tpm.li/afbPwokh" },
+  "jslm-bethlehem-private-viator": { trackingUrl: "https://viator.tpm.li/cDb7VoHk" },
   // Configure an approved product-specific affiliate URL once; all category appearances use it.
   ...Object.fromEntries(tourBookingOffers.map((offer) => [offer.id, undefined])),
   "shore-viator-haifa-jerusalem-bethlehem": undefined,
