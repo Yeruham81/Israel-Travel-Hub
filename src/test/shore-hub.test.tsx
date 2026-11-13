@@ -59,7 +59,7 @@ describe("Israel shore excursion hub", () => {
     expect(topChoices[1]).toHaveClass("btn-outline");
     expect(bottomChoices[0]).toHaveClass("btn-light");
     expect(bottomChoices[1]).toHaveClass("btn-light");
-    expect(screen.getByTestId("hub-header").querySelector("img")).toBeNull();
+    expect(within(screen.getByTestId("hub-header")).getByRole("img", { name: "Moshe Barak" })).toBeInTheDocument();
     const credits = screen.getByText("Image credits").closest("details");
     expect(credits).not.toBeNull();
     expect(credits?.hasAttribute("open")).toBe(false);
