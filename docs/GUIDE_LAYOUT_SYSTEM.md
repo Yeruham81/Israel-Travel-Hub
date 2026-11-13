@@ -15,6 +15,12 @@ content-specific modules.
      1–3 sentences), and the editorial update date when available.
    - Right, approximately one-third of the width: a **small authentic main
      photo** using `GuideHeroMedia`, aligned near the title.
+   - On desktop, `GuideHeroLayout` may give the photo slightly more width
+     (roughly 37% instead of 33%) **only when the full opening text actually
+     fits within four rendered lines at the wider-photo width**. The layout
+     measures the rendered introduction and falls back to the original, wider
+     text column for longer opening paragraphs. It rechecks on viewport/font
+     changes and never truncates or hides editorial text.
    - The title may wrap naturally and remains readable; at desktop widths
      the split-layout title is subtly reduced to 38px.
 3. **Phone and tablet layouts** stack the image **beneath the introduction**.
