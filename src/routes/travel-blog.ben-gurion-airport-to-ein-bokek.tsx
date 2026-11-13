@@ -1,7 +1,8 @@
-import { createFileRoute } from "@tanstack/react-router";
-import { AirportRoutePage, airportRouteMeta } from "@/components/AirportRoutePage";
+import { createFileRoute, redirect } from "@tanstack/react-router";
 
+/** Permanent redirect: private-transfer pages now live under Airport Transfers. */
 export const Route = createFileRoute("/travel-blog/ben-gurion-airport-to-ein-bokek")({
-  head: () => airportRouteMeta("dead-sea"),
-  component: () => <AirportRoutePage id="dead-sea" />,
+  beforeLoad: ({ location }) => {
+    throw redirect({ to: "/airport-transfers/ben-gurion-airport-to-ein-bokek/", search: {}, hash: location.hash, replace: true, statusCode: 301 });
+  },
 });
