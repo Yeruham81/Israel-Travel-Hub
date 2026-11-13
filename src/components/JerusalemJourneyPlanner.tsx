@@ -179,7 +179,6 @@ export function JerusalemJourneyBooking({ id }: { id: string }) {
           View on {offer.partnerId === "viator" ? "Viator" : "GetYourGuide"} <ExternalLink className="h-4 w-4" aria-hidden />
           <span className="sr-only"> (opens in a new tab)</span>
         </a>
-        {sponsored && <p className="mt-2 text-xs text-muted-foreground">Sponsored link; I may earn a commission at no extra cost to you.</p>}
       </article>)}
       {!isBethlehem && deadSeaPartnerOptions.map(option => {
         const url = attributedDeadSeaTourLink(option.id);
@@ -193,7 +192,6 @@ export function JerusalemJourneyBooking({ id }: { id: string }) {
              className="mt-4 inline-flex w-fit items-center gap-2 text-sm font-semibold text-primary underline underline-offset-4">
             Browse on {option.label} <ExternalLink className="h-4 w-4" aria-hidden /><span className="sr-only"> (opens in a new tab)</span>
           </a>
-          <p className="mt-2 text-xs text-muted-foreground">Sponsored link; I may earn a commission at no extra cost to you.</p>
         </article>;
       })}
       {isBethlehem && <article className="flex flex-col rounded-2xl border bg-secondary/30 p-5">
