@@ -9,7 +9,7 @@ import { carRentalAffiliateUrl } from "@/lib/car-rental-affiliate";
 import { publicSources, formatCheckDate, INFO_CHECK_DATE, type ProviderLink } from "@/data/registry";
 import { AuthorCard } from "@/components/AuthorCard";
 import { PageUpdated } from "@/components/PageUpdated";
-import { GuideHeroMedia } from "@/components/GuideHeroMedia";
+import { GuideHeroLayout, GuideHeroMedia } from "@/components/GuideHeroMedia";
 import { SourcesDisclosure } from "@/components/SourcesDisclosure";
 import { modeNote, relationshipLabel } from "@/lib/booking";
 import { recordOutboundClick, relFor } from "@/lib/outbound";
@@ -189,11 +189,12 @@ export function GuideHeader({ crumbs, eyebrow, title, intro, image, checkedAt = 
   return (
     <header className="mx-auto max-w-5xl px-4 pt-6">
       <Breadcrumbs items={crumbs} />
-      <p className="eyebrow mt-6">{eyebrow}</p>
-      <h1 className="guide-page-title mt-3 max-w-4xl">{title}</h1>
-      <div className="mt-4 max-w-3xl text-lg leading-relaxed text-foreground">{intro}</div>
-      <PageUpdated date={checkedAt} />
-      {image && <GuideHeroMedia src={image.src} alt={image.alt} />}
+      <GuideHeroLayout image={image && <GuideHeroMedia src={image.src} alt={image.alt} />}>
+        <p className="eyebrow">{eyebrow}</p>
+        <h1 className="guide-page-title mt-3">{title}</h1>
+        <div className="mt-4 max-w-3xl text-lg leading-relaxed text-foreground">{intro}</div>
+        <PageUpdated date={checkedAt} />
+      </GuideHeroLayout>
       <AuthorCard />
     </header>
   );
