@@ -52,7 +52,7 @@ export function DeadSeaTourOptions() {
               </span>
             </span>
             <span className="mt-auto flex items-end justify-between gap-2 border-t pt-3 text-sm">
-              <span>{tour.fromUsd !== undefined ? <><span className="text-xs text-muted-foreground">From</span> <strong>US${tour.fromUsd}</strong><span className="block text-[11px] text-muted-foreground">per person</span></> : <strong className="text-xs">See current price</strong>}</span>
+              <span><span className="text-xs text-muted-foreground">From</span> <strong>US${tour.fromUsd}</strong><span className="block text-[11px] text-muted-foreground">per person</span></span>
               <span className="inline-flex items-center gap-1 font-semibold text-primary">View & book <ExternalLink size={13} aria-hidden="true" /></span>
             </span>
           </span>
