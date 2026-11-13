@@ -98,13 +98,13 @@ export const services: Service[] = [
   {
     id: "transfers", eyebrow: "Airport Transfers", tagline: "Plan a Smooth Arrival in Israel", title: "Airport Transfers",
     text: "Arrange a comfortable private pickup from Ben Gurion Airport to Jerusalem, Tel Aviv or Haifa, with a vehicle and meeting point tailored to your needs.",
-    feature: { src: "/images/guides/taxi-in-tel-aviv.webp", alt: "Licensed Israeli taxis on a street in Tel Aviv" },
+    feature: { src: "/images/travel-blog/taxi-in-tel-aviv.webp", alt: "Licensed Israeli taxis on a street in Tel Aviv" },
     cards: [
-      { label: "Private Transfer to Jerusalem", text: "Book a private pickup to your Jerusalem hotel", to: "/travel-blog/ben-gurion-airport-to-jerusalem/", img: IMG.jerusalem },
-      { label: "Private Transfer to Tel Aviv", text: "Airport pickup for Tel Aviv hotels and Jaffa", to: "/travel-blog/ben-gurion-airport-to-tel-aviv/", img: IMG.telAviv },
-      { label: "Private Transfer to Haifa", text: "Door-to-door travel to Haifa and Mount Carmel", to: "/travel-blog/ben-gurion-airport-to-haifa/", img: IMG.haifa },
+      { label: "Private Transfer to Jerusalem", text: "Book a private pickup to your Jerusalem hotel", to: "/airport-transfers/ben-gurion-airport-to-jerusalem/", img: IMG.jerusalem },
+      { label: "Private Transfer to Tel Aviv", text: "Airport pickup for Tel Aviv hotels and Jaffa", to: "/airport-transfers/ben-gurion-airport-to-tel-aviv/", img: IMG.telAviv },
+      { label: "Private Transfer to Haifa", text: "Door-to-door travel to Haifa and Mount Carmel", to: "/airport-transfers/ben-gurion-airport-to-haifa/", img: IMG.haifa },
     ],
-    hub: { label: "Explore airport transfers", to: "/transfers/" },
+    hub: { label: "Explore airport transfers", to: "/airport-transfers/" },
   },
   {
     id: "tours", eyebrow: "Tours & Day Trips", tagline: "See the Best of Israel in a Day", title: "Tours & Day Trips",
@@ -274,7 +274,7 @@ function Home() {
         <div><p className="eyebrow">Before You Travel</p><h2 id="guides-h" className="mt-2 text-3xl">Practical Israel Travel Guides</h2><p className="mt-3 max-w-2xl text-muted-foreground">Clear answers about arrival, getting connected and choosing how to get around.</p></div>
         <div className="mt-6 grid gap-5 sm:grid-cols-2 xl:grid-cols-3" data-testid="guide-row-one">{homeGuideCards.first.map((guide) => <GuideCard key={guide.id} guide={guide} headingLevel={3} />)}</div>
         <div className="mt-5 grid gap-5 sm:grid-cols-2 xl:grid-cols-3" data-testid="guide-row-two">{homeGuideCards.second.map((guide) => <GuideCard key={guide.id} guide={guide} headingLevel={3} />)}</div>
-        <div className="mt-7 flex justify-center"><Link to="/guides/" className="btn btn-primary">Browse all guides →</Link></div>
+        <div className="mt-7 flex justify-center"><Link to="/travel-blog/" className="btn btn-primary">Browse all guides →</Link></div>
       </section>
       <section aria-labelledby="dest-h" className="home-offscreen mx-auto mt-20 max-w-6xl px-4">
         <div className="rounded-2xl bg-navy p-6 text-navy-foreground md:p-8">
