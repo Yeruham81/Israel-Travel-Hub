@@ -5,6 +5,10 @@ import { routeTree } from "@/routeTree.gen";
 import { readFileSync } from "node:fs";
 import { resolve } from "node:path";
 import { itineraryIds, itineraries, itinerarySourcesByGuide } from "@/data/israelItineraries";
+import { threeDayJerusalemTourSelections } from "@/components/JerusalemItineraryTourOptions";
+import { deadSeaTourCards } from "@/data/deadSeaTourOffers";
+import { bethlehemTourCards } from "@/data/bethlehemTourOffers";
+import { affiliateConfig } from "@/data/registry";
 import { getYourGuideCityWidgetSrc, getYourGuideWidgetCities } from "@/lib/getyourguide-city-widget";
 import { itineraryCards } from "@/data/hotelHub";
 import { guideDirectory } from "@/data/travelGuides";
@@ -111,6 +115,45 @@ describe("migrated Israel itineraries", () => {
     expect(widgetComponent).toContain("GetYourGuide (affiliate)");
     const guideComponent = file("src/components/IsraelItineraryPage.tsx");
     expect(guideComponent).toContain("<GetYourGuideCityWidget");
+  });
+
+  it("shows six approved Jerusalem day-trip alternatives under day two", () => {
+    expect(itineraries["3"].jerusalemTourOptionsDay).toBe(2);
+    for (const id of ["5", "7", "10"] as const) {
+      expect(itineraries[id].jerusalemTourOptionsDay).toBeUndefined();
+    }
+    const ids = threeDayJerusalemTourSelections.map(item => item.id);
+    expect(ids).toHaveLength(6);
+    expect(new Set(ids).size).toBe(6);
+    const allTours = new Map([...deadSeaTourCards, ...bethlehemTourCards].map(tour => [tour.id, tour] as const));
+    for (const item of threeDayJerusalemTourSelections) {
+      const tour = allTours.get(item.id);
+      expect(tour, item.id).toBeDefined();
+      expect(tour?.duration.length).toBeGreaterThan(0);
+      expect(tour?.subtitle.length).toBeGreaterThan(0);
+      expect(tour?.rating).toBeGreaterThan(0);
+      expect(tour?.reviewCount).toBeGreaterThan(0);
+      expect(tour?.fromUsd).toBeGreaterThan(0);
+      expect(tour?.checkedAt).toBe("2026-11-13");
+      const link = affiliateConfig[item.id]?.trackingUrl;
+      expect(link, item.id).toMatch(/^https:\/\/[a-z0-9.-]+\.tpm\.li\//);
+      expect(item.image).toBeTruthy();
+    }
+    const groups = threeDayJerusalemTourSelections.reduce<Record<string, number>>((counts, item) => {
+      const key = item.area.includes("Jericho") ? "Jericho" : item.area.includes("Bethlehem") ? "Bethlehem" : "Dead Sea";
+      counts[key] = (counts[key] ?? 0) + 1;
+      return counts;
+    }, {});
+    expect(groups).toEqual({ "Dead Sea": 2, Bethlehem: 2, Jericho: 2 });
+    const view = file("src/components/IsraelItineraryPage.tsx");
+    expect(view).toContain("g.jerusalemTourOptionsDay === index + 1");
+    expect(view).toContain("<JerusalemItineraryTourOptions />");
+    const cards = file("src/components/JerusalemItineraryTourOptions.tsx");
+    expect(cards).toContain("<details");
+    expect(cards).toContain("More day trips from Jerusalem");
+    expect(cards).toContain("rel={relFor(true)}");
+    expect(cards).toContain("not live quotes");
+    expect(cards).toContain('sub_id');
   });
 
   it("has a focused, bookable-through-guides three-day plan without intrusive affiliate links", () => {
