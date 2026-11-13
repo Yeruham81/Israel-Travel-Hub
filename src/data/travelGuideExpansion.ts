@@ -134,9 +134,9 @@ export const expandedTravelGuides = {
         title: "Can I collect a rental car on Saturday?",
         paragraphs: [
           "Possibly. Airport rental desks have different Saturday and holiday opening arrangements, and an online booking is not proof that keys can be collected at your arrival time. Confirm the actual counter, hours and late-flight handover procedure directly with the company before paying.",
-          "A rental makes more sense if you are beginning a multi-stop trip than if you simply need a ride to central Tel Aviv. Include fuel, insurance, tolls and parking when comparing it with an airport taxi. More detail is available in my car rental guide.",
+          "A rental makes more sense if you are beginning a multi-stop trip than if you simply need a ride to central Tel Aviv. Include fuel, insurance, tolls and parking when comparing it with an airport taxi. You can compare available cars on DiscoverCars.",
         ],
-        inlineLinks: [{ text: "car rental guide", to: "/car-rental/" }],
+        inlineLinks: [{ text: "DiscoverCars", to: "/car-rental/" }],
         sourceIds: [],
       },
       {
