@@ -1,0 +1,38 @@
+name: Generate Jerusalem Bethlehem Travelpayouts links
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'scripts/travelpayouts/generate-bethlehem-tours.mjs'
+      - '.github/workflows/travelpayouts-bethlehem-tours.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  generate:
+    name: Generate Bethlehem product links for review
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - name: Validate product URLs and generator syntax
+        run: |
+          node --check scripts/travelpayouts/generate-bethlehem-tours.mjs
+          node scripts/travelpayouts/generate-bethlehem-tours.mjs --validate
+      - name: Generate partner links with protected Travelpayouts token
+        env:
+          TRAVELPAYOUTS_API_TOKEN: ${{ secrets.TRAVELPAYOUTS_API_TOKEN }}
+        run: node scripts/travelpayouts/generate-bethlehem-tours.mjs
+      - name: Preserve verified-format affiliate candidates for editorial review
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: travelpayouts-bethlehem-candidates
+          path: artifacts/travelpayouts-bethlehem-tours.json
+          if-no-files-found: warn
+          retention-days: 14
