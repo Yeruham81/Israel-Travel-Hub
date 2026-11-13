@@ -4,6 +4,8 @@ import { SiteLink as Link } from "@/components/SiteLink";
 import { ArrowRight, CalendarDays, BedDouble } from "lucide-react";
 import { Breadcrumbs, OnThisPage, FaqList } from "@/components/Guide";
 import { HomeContactForm } from "@/components/HomeContactForm";
+import { GetYourGuideCityWidget } from "@/components/GetYourGuideCityWidget";
+import type { GetYourGuideWidgetPage } from "@/lib/getyourguide-city-widget";
 import { guideContactCopy } from "@/lib/guide-contact";
 import type { GuidePhoto } from "@/data/travelGuides";
 import { hasPublicPhotoCredit } from "@/lib/photo-credits";
@@ -182,6 +184,11 @@ export function IsraelItineraryPage({ id }: { id: ItineraryId }) {
                 loading="lazy" decoding="async" className="aspect-[16/9] w-full rounded-xl object-cover sm:aspect-[4/3]" />
               </figure>
             </div>
+            {g.activityWidgets?.filter(widget => widget.day === index + 1).map(widget =>
+              <div key={widget.city} className="border-t bg-secondary/10 px-5 py-4 sm:px-7">
+                <GetYourGuideCityWidget city={widget.city} page={`${id}_day` as GetYourGuideWidgetPage} />
+              </div>
+            )}
           </article>;
         })}
       </div>
