@@ -7,6 +7,7 @@ const links = [
   ["tour-jerusalem-old-city-walk-viator", "https://www.viator.com/tours/Jerusalem/Old-Jerusalem-Holy-City-Tour/d921-6540P86"],
   ["tour-jerusalem-private-oldcity-walk-viator", "https://www.viator.com/tours/Jerusalem/Jerusalem-Walking-Tour/d921-254618P1"],
   ["tour-jerusalem-beyond-walls-viator", "https://www.viator.com/tours/Jerusalem/Beyond-the-Walls/d921-41304P1"],
+  ["tour-jerusalem-street-art-walk-viator", "https://www.viator.com/tours/Jerusalem/Graffiti-and-Street-Art-tour-in-the-center-of-Jerusalem/d921-136771P4"],
   ["tour-jerusalem-day-tel-aviv-viator", "https://www.viator.com/tours/Tel-Aviv/Old-and-New-Jerusalem-Day-Trip-from-Tel-Aviv/d920-5209TEL211"],
   ["tour-jerusalem-bethlehem-private-getyourguide", "https://www.getyourguide.com/jerusalem-l97/jerusalem-and-bethlehem-private-tour-t411126/"],
   ["tour-jerusalem-bethlehem-shared-getyourguide", "https://www.getyourguide.com/tel-aviv-l487/jerusalem-and-bethlehem-full-day-trip-from-tel-aviv-t22202/"],
