@@ -46,10 +46,10 @@ const routes = {
     ],
     detailsTitle: "Which stop do you actually need?",
     details: [
-      { title: "Ein Bokek", tag: "Beach and hotels", description: "Choose the hotel district's public beach if your priority is floating, showers and a straightforward beach day. The central beach has free public facilities; parking and hotel services may cost extra.", href: "https://www.deadsea.co.il/attractions/ein-bokek-central-beach/?lang=en", link: "Check public beach facilities" },
-      { title: "Masada", tag: "National park", description: "Allow time for admission, the cable car or the permitted trail. The east-side visitor entrance is a different destination from a Dead Sea hotel.", href: "https://en.parks.org.il/reserve-park/masada-national-park/", link: "Check Masada access" },
-      { title: "Ein Gedi", tag: "Nature reserve", description: "It is not a substitute for a bathing beach. Flood damage and restoration have changed which trails can be visited; reserve and choose a specific open route.", href: "https://en.parks.org.il/reserve-park/en-gedi-nature-reserve/", link: "Check trail status" },
-      { title: "Northern Dead Sea", tag: "Separate beach facilities", description: "The northern shore has privately managed bathing sites and different road stops. Confirm the facility's operating status and ticket arrangements before buying transport.", href: "https://www.google.com/maps/search/?api=1&query=Kalia+Beach+Dead+Sea", link: "Locate the northern shore" },
+      { title: "Ein Bokek", tag: "Beach and hotels", description: "The free public beach at Ein Bokek is in the hotel district, with showers, changing rooms, shade, chairs and umbrellas. Admission is free; parking and hotel services may cost extra.", href: "https://www.deadsea.co.il/attractions/ein-bokek-central-beach/?lang=en", link: "See free public beach facilities" },
+      { title: "Masada", tag: "National park", description: "Explore Herod's ancient mountaintop fortress and dramatic desert views. Check the park's opening hours, entrance fee and cable car before setting out.", href: "https://en.parks.org.il/reserve-park/masada-national-park/", link: "Check Masada access" },
+      { title: "Ein Gedi", tag: "Nature reserve", description: "Discover a desert oasis of flowing streams, waterfalls, greenery and wildlife. Choose a suitable hiking trail and check opening hours and admission.", href: "https://en.parks.org.il/reserve-park/en-gedi-nature-reserve/", link: "Plan an Ein Gedi visit" },
+      { title: "Northern Dead Sea", tag: "Separate beach facilities", description: "Northern-shore bathing sites such as Kalia offer an alternative closer to Jerusalem, usually with an entrance fee. Check the exact beach and opening hours.", href: "https://www.google.com/maps/search/?api=1&query=Kalia+Beach+Dead+Sea", link: "Locate the northern shore" },
     ],
     footnote: "The route through the Dead Sea corridor uses different stops for each destination. Check the live Egged timetable, including the last usable Jerusalem-bound departure, rather than copying a timetable or fare from an older guide.",
     resourceHeading: "Check the journey and site access",
@@ -72,8 +72,8 @@ export function JerusalemJourneyOptions({ id }: { id: string }) {
   // The Dead Sea guide needs the four actual destinations, not a second set of
   // transport-option cards that repeats the article immediately below.
   if (id === "jerusalemDeadSea") return <section id="journey-destinations" aria-labelledby="journey-destinations-h" className="mt-9 scroll-mt-28">
-    <h2 id="journey-destinations-h" className="text-2xl font-semibold">Choose your Dead Sea destination</h2>
-    <p className="mt-2 max-w-3xl leading-relaxed text-muted-foreground">For floating, choose a managed beach such as Ein Bokek. Masada and Ein Gedi are separate visits with different entrances and tickets.</p>
+    <h2 id="journey-destinations-h" className="text-2xl font-semibold">Choose your Dead Sea day trip</h2>
+    <p className="mt-2 max-w-3xl leading-relaxed text-muted-foreground">For floating, choose the free public beach at Ein Bokek. Masada and Ein Gedi are nearby attractions you can add to your trip; allow time for opening hours, admission fees and busy summer periods.</p>
     <div className="mt-4 grid gap-3 sm:grid-cols-2" data-testid="journey-stop-cards">
       {route.details.map(item => <article key={item.title} className="rounded-xl border bg-card p-4">
         <h3 className="text-lg font-semibold">{item.title}</h3>
