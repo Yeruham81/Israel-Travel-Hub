@@ -352,5 +352,5 @@ export const neighborhoodHotelSources: SourceReference[] = supplemental.map((hot
   publisher: "Expedia",
   url: hotel.expediaUrl,
   checkedAt: "2026-10-22",
-  note: "Direct non-affiliate Expedia property source, separate from the tracked booking link. Actual room inventory, final prices and cancellation rules are confirmed on Expedia when booking.",
+  note: "Expedia property information used to check accommodation details. Confirm room availability, final prices and cancellation terms on Expedia before booking.",
 }));
