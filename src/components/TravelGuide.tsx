@@ -14,6 +14,7 @@ import { PageUpdated } from "@/components/PageUpdated";
 import { guideContactCopy, type GuideContactKind } from "@/lib/guide-contact";
 import { JerusalemJourneyOptions, JerusalemJourneyBooking, JerusalemJourneyResources } from "@/components/JerusalemJourneyPlanner";
 import { JerusalemClusterLinks, type JerusalemClusterKey } from "@/components/JerusalemClusterLinks";
+import { DeadSeaGuideFollowUps } from "@/components/DeadSeaGuideFollowUps";
 import { JerusalemPartnerOffers } from "@/components/JerusalemPartnerOffers";
 import { ShabbatBusLinks, ShabbatTerminalSteps, ShabbatTimesLink, ShabbatPublicTransportLinks } from "@/components/ShabbatGuideExtras";
 import { UsefulLinkCallout } from "@/components/UsefulLinkCallout";
@@ -239,7 +240,7 @@ export function TravelGuidePage({ id }: { id: TravelGuideId }) {
       </section>}
       {isJerusalemDayJourney && <JerusalemJourneyOptions id={id} />}
       <OnThisPage sections={id === "jerusalemDeadSea"
-        ? [["bus", "Bus 486 / 444"], ["tours", "Organised tours"], ["private", "Private taxi"], ["driving", "Driving"], ["day-plan", "Practical tips"], ["journey-booking", "Book a trip"]]
+        ? [["journey-destinations", "Destinations"], ["bus", "Bus 486 / 444"], ["tours", "Organised tours"], ["private", "Private driver"], ["driving", "Rental car"], ["day-plan", "Practical tips"], ["journey-booking", "Book a trip"], ["faq", "FAQ"], ["contact", "Contact"]]
         : isJerusalemDayJourney
         ? [["journey-options", "Compare transport"], ["journey-destinations", "Stops & destinations"], ...guide.sections.map((section) => [section.id, section.title] as const), ["journey-booking", "Tours & private trips"], ["checklist", "Checklist"], ["faq", "FAQ"], ["sources", "Sources"], ["contact", "Contact Moshe"]]
         : isTaxiFareGuide
@@ -300,10 +301,11 @@ export function TravelGuidePage({ id }: { id: TravelGuideId }) {
       {!isTaxiFareGuide && <section id="checklist" aria-label="Travel checklist" className="mt-12 scroll-mt-24"><Checklist title="Before you go" items={guide.checklist} /></section>}
       {providers.length > 0 && <section id="provider-options" aria-labelledby="providers-h" className="mt-14"><h2 id="providers-h" className="text-3xl">Compare current eSIM plans</h2><p className="mt-3 leading-relaxed text-muted-foreground">These options are based on published product information, not an on-location speed test or a cheapest-price ranking. Links marked “Sponsored link” may earn me a commission at no extra cost to you. Select Israel and verify the exact package before paying.</p><ul className="mt-5 grid gap-4 md:grid-cols-2">{providers.map((link) => <ProviderCard key={link.id} link={link} pageId={guide.providerPageId!} />)}</ul></section>}
       <JerusalemPartnerOffers id={id} />
-      {isJerusalemCluster && <JerusalemClusterLinks pageKey={id as JerusalemClusterKey} />}
+      {isJerusalemCluster && id !== "jerusalemDeadSea" && <JerusalemClusterLinks pageKey={id as JerusalemClusterKey} />}
       <FaqList faqs={guide.faqs} {...(isTransportOverview && guide.faqGroups ? { groups: guide.faqGroups } : {})} />
+      {id === "jerusalemDeadSea" && <DeadSeaGuideFollowUps />}
       {id === "bethlehem" && <JerusalemJourneyResources id={id} />}
-      {!isTransportOverview && !isTaxiFareGuide && (id === "shabbat" ? <SourceList ids={sourcesFor(guide)} intro="Official airport, public-transport and taxi-tariff references. Confirm timetables, charges and pickup instructions for your date." /> : <SourceList ids={sourcesFor(guide)} />)}
+      {!isTransportOverview && !isTaxiFareGuide && id !== "jerusalemDeadSea" && (id === "shabbat" ? <SourceList ids={sourcesFor(guide)} intro="Official airport, public-transport and taxi-tariff references. Confirm timetables, charges and pickup instructions for your date." /> : <SourceList ids={sourcesFor(guide)} />)}
       {!isJerusalemCluster && id !== "shabbat" && <RelatedLinks title="Related practical guides" currentPath={travelGuidePaths[id]} items={guide.related.map((guideId) => ({ label: travelGuides[guideId].title, to: travelGuidePaths[guideId] }))} />}
       {!isJerusalemCluster && id !== "shabbat" && <RelatedLinks title="Plan the next part of your trip" items={guide.services} />}
       {id === "shabbat" && <RelatedLinks title="Related practical guides" currentPath={travelGuidePaths.shabbat} items={[
@@ -320,6 +322,7 @@ export function TravelGuidePage({ id }: { id: TravelGuideId }) {
       {id !== "taxis" && <HomeContactForm key={id} guide={guideContactCopy(guide.title, guideContactKind(guide), guide.title.split(":")[0])} />}
       {isTransportOverview && <SourceList ids={sourcesFor(guide)} intro="Official operator and government references checked on the indicated dates. Routes, fares, ticket rules and accessibility can change; verify your exact journey before departure." />}
       {isTaxiFareGuide && <SourceList ids={sourcesFor(guide)} intro="Official taxi tariffs, applicable times and passenger-rights references." />}
+      {id === "jerusalemDeadSea" && <SourceList ids={sourcesFor(guide)} intro="Official transport, beach and national-park information. Confirm schedules and conditions for your travel date." />}
     </article>
   </main>;
 }
