@@ -62,7 +62,7 @@ const articles: Partial<Record<TravelGuideId, Upgrade>> = {
         ],
         inlineLinks: [
           { text: "Ben Gurion Airport to Jerusalem guide", to: "/travel-blog/how-to-get-from-ben-gurion-airport-to-jerusalem/" },
-          { text: "airport transfer service", to: "/travel-blog/ben-gurion-airport-to-jerusalem/" },
+          { text: "airport transfer service", to: "/airport-transfers/ben-gurion-airport-to-jerusalem/" },
         ],
       },
     ],
@@ -71,7 +71,7 @@ const articles: Partial<Record<TravelGuideId, Upgrade>> = {
       { label: "Jerusalem walking and guided tours", to: "/tours/jerusalem/", note: "Check the advertised starting city and guiding inclusions" },
       { label: "Where to stay in Jerusalem", to: "/travel-blog/where-to-stay-in-jerusalem/", note: "Neighbourhood and hotel advice" },
       { label: "Airport to Jerusalem: all transport options", to: "/travel-blog/how-to-get-from-ben-gurion-airport-to-jerusalem/" },
-      { label: "Airport to Jerusalem: request a private transfer", to: "/travel-blog/ben-gurion-airport-to-jerusalem/" },
+      { label: "Airport to Jerusalem: request a private transfer", to: "/airport-transfers/ben-gurion-airport-to-jerusalem/" },
       { label: "Day trips from Jerusalem", to: travelGuidePaths.jerusalemDayTrips },
     ],
   },
