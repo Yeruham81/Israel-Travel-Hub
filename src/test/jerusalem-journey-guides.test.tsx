@@ -70,9 +70,12 @@ describe("Jerusalem independent day-trip planning guides", () => {
     expect(screen.getByRole("heading", { name: "By taxi or private driver: direct travel from your hotel" })).toBeInTheDocument();
     expect(screen.getAllByText(/Egged 486/).length).toBeGreaterThanOrEqual(1);
 
-    const drivingPhoto = within(container.querySelector("#driving") as HTMLElement).getByRole("img", { name: /Winding road through the Judean Desert/ });
+    const drivingPhoto = within(container.querySelector("#driving") as HTMLElement).getByRole("img", { name: /Turquoise Dead Sea water and white salt formations/ });
     const einBokekPhoto = within(container.querySelector("#beach") as HTMLElement).getByRole("img", { name: /Ein Bokek shoreline/ });
     expect(drivingPhoto.getAttribute("src")).not.toBe(einBokekPhoto.getAttribute("src"));
+    const mainPhoto = container.querySelector("header figure img");
+    expect(mainPhoto).not.toBeNull();
+    expect(drivingPhoto.getAttribute("src")).not.toBe(mainPhoto?.getAttribute("src"));
     const stopCards = screen.getAllByTestId("deadsea-attraction-card");
     expect(stopCards).toHaveLength(4);
     expect(new Set(stopCards.map(card => within(card).getByRole("img").getAttribute("src"))).size).toBe(4);
@@ -129,6 +132,7 @@ describe("Jerusalem independent day-trip planning guides", () => {
     const relatedGuides = screen.getByTestId("deadsea-related-guides");
     expect(relatedGuides.children).toHaveLength(6);
     expect(within(relatedGuides).getAllByRole("img")).toHaveLength(6);
+    expect(within(relatedGuides).getByRole("img", { name: /Nubian ibex near a stream in Ein Gedi/ })).toBeInTheDocument();
     expect(new Set(within(relatedGuides).getAllByRole("link").map(link => link.getAttribute("href"))).size).toBe(6);
     const nextSteps = screen.getByTestId("deadsea-next-steps");
     expect(within(nextSteps).getAllByRole("link")).toHaveLength(4);
