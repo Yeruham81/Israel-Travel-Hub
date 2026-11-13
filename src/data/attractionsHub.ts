@@ -225,7 +225,7 @@ export const attractionPlanningPaths: {
     id: "transport",
     title: "Arrive and get around",
     description: "Make sense of airport journeys, trains, buses and taxis, including that last leg from the station to your hotel.",
-    to: "/transfers/",
+    to: "/airport-transfers/",
     links: [
       { label: "Airport to Jerusalem", to: "/travel-blog/how-to-get-from-ben-gurion-airport-to-jerusalem/" },
       { label: "Getting around Israel", to: travelGuidePaths.israel },
@@ -245,7 +245,7 @@ export const attractionPlanningPaths: {
     id: "practical-guides",
     title: "Plan around dates and local customs",
     description: "Check seasonal conditions, religious holidays and public-transport patterns before setting your itinerary.",
-    to: "/guides/",
+    to: "/travel-blog/",
     links: [
       { label: "Best time to visit", to: travelGuidePaths.bestTime },
       { label: "Airport travel on Shabbat", to: travelGuidePaths.shabbat },
