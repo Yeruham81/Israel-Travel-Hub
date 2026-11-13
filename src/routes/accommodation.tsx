@@ -91,7 +91,7 @@ function Hotels() {
         crumbs={[{ name: "Home", to: "/" }, { name: "Accommodation", to: "/accommodation/" }]}
         eyebrow="Accommodation"
         title="Where to stay in Israel"
-        intro="Your hotel shapes the way you experience Israel. Compare historic city neighborhoods, walkable beachfront bases, lakeside hotels and quieter desert resorts, then match your location, travel dates and room type to your plans. My destination guides help you narrow down the right area before checking a property's current offers."
+        intro="Find the right base for your trip to Israel. Compare city neighborhoods, beachfront hotels, lakeside stays and Dead Sea resorts, with practical advice on locations, travel dates and hotel choices."
       />
       <OnThisPage sections={sections} />
 
