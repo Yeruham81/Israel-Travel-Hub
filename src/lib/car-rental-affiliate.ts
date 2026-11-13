@@ -10,7 +10,7 @@ export const DISCOVERCARS_ISRAEL_AFFILIATE_URL = "https://discovercars.tpm.li/w2
 
 /** Preserve an identifiable source page in Travelpayouts reports. */
 export function carRentalSubId(sourcePath: string): string {
-  const path = sourcePath.split(/[?#]/, 1)[0].replace(/\/+$/, "").toLowerCase();
+  const path = (sourcePath.split(/[?#]/, 1)[0] ?? "").replace(/\/+$/, "").toLowerCase();
   // Travel guides have unique slugs; trim their shared prefix for shorter IDs.
   const stem = path.replace(/^\/travel-blog\//, "/").replace(/^\/+/, "");
   const source = stem.replace(/[^a-z0-9]+/g, "_").replace(/^_+|_+$/g, "") || "home";
