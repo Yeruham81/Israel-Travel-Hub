@@ -120,14 +120,14 @@ const deadSeaPartnerOptions = [
     label: "Viator",
     title: "Browse Dead Sea day trips departing Jerusalem",
     description: "Compare published Jerusalem departures, group sizes and stops on Viator.",
-    subId: "itt_jerusalem_to_the_dead_sea_viator",
+    subId: "jslm_dead_sea_viator",
   },
   {
     id: "deadsea-jerusalem-getyourguide",
     label: "GetYourGuide",
     title: "Compare Dead Sea tours on GetYourGuide",
     description: "Browse Dead Sea and Masada outings and confirm your Jerusalem pickup before booking.",
-    subId: "itt_jerusalem_to_the_dead_sea_getyourguide",
+    subId: "jslm_dead_sea_getyourguide",
   },
 ] as const;
 
