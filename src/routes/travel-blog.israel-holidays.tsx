@@ -16,7 +16,7 @@ const PATH = "/travel-blog/israel-holidays/";
 const TITLE = "Israel Holidays Calendar: Dates & Travel Planning";
 const DESCRIPTION = "Explore Israel's holidays and their impact on travel. Select your dates on an interactive calendar to check transport changes, opening hours, crowds and local observances.";
 const photo = migrationPhotos["calendar-of-events"];
-const crumbs = [{name:"Home",path:"/"},{name:"Travel guides",path:"/guides/"},{name:"Israel holidays",path:PATH}];
+const crumbs = [{name:"Home",path:"/"},{name:"Travel guides",path:"/travel-blog/"},{name:"Israel holidays",path:PATH}];
 
 export const Route = createFileRoute("/travel-blog/israel-holidays")({
   head: () => {
@@ -117,7 +117,7 @@ export function IsraelHolidaysPage() {
   return <main className="mx-auto max-w-6xl px-4 pb-12">
     <article>
       <header className="pt-6">
-        <Breadcrumbs items={[{name:"Home",to:"/"},{name:"Travel guides",to:"/guides/"},{name:"Israel holidays",to:PATH}]}/>
+        <Breadcrumbs items={[{name:"Home",to:"/"},{name:"Travel guides",to:"/travel-blog/"},{name:"Israel holidays",to:PATH}]}/>
         <div className="mt-6 grid items-center gap-6 lg:grid-cols-[1.25fr_1fr]">
           <div>
             <p className="text-sm font-semibold tracking-wide text-primary">TRAVEL PLANNING GUIDE</p>
@@ -214,7 +214,7 @@ export function IsraelHolidaysPage() {
         </ul>
       </section>
       <p className="mt-8 text-sm">Looking for festivals, concerts and performances? Visit the <Link to="/travel-blog/calendar-of-events/" className="font-medium text-primary underline">Israel Events Calendar</Link>.</p>
-      <p className="mt-8 text-sm"><Link to="/guides/" className="font-medium text-primary underline">Explore more travel guides →</Link></p>
+      <p className="mt-8 text-sm"><Link to="/travel-blog/" className="font-medium text-primary underline">Explore more travel guides →</Link></p>
     </article>
   </main>;
 }
