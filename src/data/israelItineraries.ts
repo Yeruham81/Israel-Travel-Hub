@@ -284,7 +284,7 @@ export const itineraries: Record<ItineraryId, ItineraryGuide> = {
     idealFor: "First-time visitors with three usable days, comfortable with one full excursion day",
     reality: "This route requires three usable sightseeing days, ideally with arrival before Day 1. If your flights take away a day, choose fewer stops or a shorter route.",
     hotelBases: "Jerusalem on nights 1 and 2. A Tel Aviv night after Day 3 makes sense only for a later departure. Count arrival and departure nights separately according to your flights.",
-    noCarAdvice: "The city days are straightforward without a car. Choose an organized tour, rental car or private driver for the desert day according to your dates and preferred pace.",
+    noCarAdvice: "This route can suit different budgets, group sizes and travel styles. Jerusalem and Tel Aviv lend themselves to exploring on foot and by public transport, while the Masada–Dead Sea day can be a self-drive outing, an organized tour or a journey with a private driver.",
     route: ["Jerusalem", "Masada & Dead Sea", "Tel Aviv–Jaffa"],
     map: { center: [31.55, 35.04], bounds: [34.57, 30.97, 35.69, 32.37], points: [{ name: "Jerusalem", lat: 31.78, lon: 35.23 }, { name: "Masada", lat: 31.31, lon: 35.35 }, { name: "Ein Bokek", lat: 31.2, lon: 35.36 }, { name: "Tel Aviv–Jaffa", lat: 32.065, lon: 34.76 }] },
     daysPlan: days3,
