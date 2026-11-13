@@ -204,7 +204,7 @@ export function TravelGuidePage({ id }: { id: TravelGuideId }) {
         <div className="mt-6"><GuideTags topics={guide.topics} /></div>
         {isTransportOverview ? (
           <div className="mt-6">
-            <h1 className="max-w-4xl text-4xl leading-[1.1] md:text-5xl">{guide.title}</h1>
+            <h1 className="guide-page-title max-w-4xl">{guide.title}</h1>
             <p className="mt-4 max-w-3xl text-lg leading-relaxed text-foreground">{guide.intro}</p>
             <PageUpdated date={guide.updatedAt || TRAVEL_GUIDE_CHECK_DATE} />
             <figure className="mt-7">
@@ -213,8 +213,8 @@ export function TravelGuidePage({ id }: { id: TravelGuideId }) {
             </figure>
           </div>
         ) : (
-          <div className="mt-5 grid items-center gap-6 lg:grid-cols-[1.2fr_1fr]">
-          <div><h1 className="text-4xl leading-[1.1] md:text-5xl">{guide.title}</h1><p className="mt-4 text-lg leading-relaxed text-foreground">{guide.intro}</p>
+          <div className="mt-5 grid items-center gap-6 lg:grid-cols-[1.35fr_1fr]">
+          <div><h1 className="guide-page-title">{guide.title}</h1><p className="mt-4 text-lg leading-relaxed text-foreground">{guide.intro}</p>
             <PageUpdated date={guide.updatedAt || TRAVEL_GUIDE_CHECK_DATE} />
           </div>
           <figure><img src={guide.photo.src} alt={guide.photo.alt} width={900} height={600} fetchPriority="high" decoding="async" className="aspect-[3/2] w-full rounded-2xl object-cover" /><GuidePhotoCredit photo={guide.photo} /></figure>
