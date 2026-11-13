@@ -45,10 +45,9 @@ describe("homepage marketing copy and top navigation", () => {
       "Kind Words from Satisfied Travelers",
       "Tours & Day Trips",
       "Shore Excursions",
-      "Accommodation in Israel",
+      "Where to Stay in Israel",
       "Attractions & Experiences",
       "Practical Israel Travel Guides",
-      "Popular Destinations",
       "Personal Messages from Past Clients",
       "Send me a message",
     ];
@@ -60,7 +59,7 @@ describe("homepage marketing copy and top navigation", () => {
       ["transfers", "Explore Airport Transfers", "/airport-transfers/"],
       ["tours", "Explore tours & day trips", "/tours/"],
       ["shore-excursions", "Explore Shore Excursions", "/shore-excursions/"],
-      ["accommodation", "Explore Accommodation", "/accommodation/"],
+      ["accommodation", "Explore all accommodation", "/accommodation/"],
       ["attractions", "Explore attractions & experiences", "/attractions/"],
     ] as const) {
       const section = document.getElementById(sectionId)!;
@@ -70,6 +69,22 @@ describe("homepage marketing copy and top navigation", () => {
       expect(section.lastElementChild).toContainElement(button);
       expect(section.querySelector('[data-testid="service-layout-' + sectionId + '"]')!.compareDocumentPosition(button) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
     }
+    // The former bottom destination strip is consolidated into the accommodation section.
+    const accommodationSection = document.getElementById("accommodation")!;
+    const destinationLinks = within(accommodationSection).getAllByRole("link").filter(link => link.getAttribute("href")?.startsWith("/travel-blog/"));
+    expect(destinationLinks).toHaveLength(5);
+    expect(destinationLinks.map(link => link.getAttribute("href"))).toEqual([
+      "/travel-blog/where-to-stay-in-jerusalem/",
+      "/travel-blog/where-to-stay-in-tel-aviv/",
+      "/travel-blog/best-hotels-in-tiberias/",
+      "/travel-blog/best-dead-sea-hotels/",
+      "/travel-blog/best-hotels-in-haifa/",
+    ]);
+    expect(within(accommodationSection).getAllByRole("img")).toHaveLength(5);
+    expect(within(accommodationSection).getByRole("link", { name: /Explore all accommodation/i })).toHaveAttribute("href", "/accommodation/");
+    expect(screen.queryByText("Where to Base Yourself")).not.toBeInTheDocument();
+    expect(screen.queryByRole("heading", { name: "Popular Destinations" })).not.toBeInTheDocument();
+
     const guidesSection = document.getElementById("guides")!;
     const guideButton = within(guidesSection).getByRole("link", { name: /Browse all guides/i });
     expect(guideButton).toHaveAttribute("href", "/travel-blog/");
