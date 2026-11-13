@@ -1,75 +1,85 @@
 import { Link } from "@tanstack/react-router";
-import { ExternalLink } from "lucide-react";
+import { Clock3, ExternalLink, Star } from "lucide-react";
 import { affiliateConfig } from "@/data/registry";
+import { deadSeaTourCards } from "@/data/deadSeaTourOffers";
 import { recordOutboundClick, relFor } from "@/lib/outbound";
-import deadSeaBeach from "@/assets/dead-sea/beach.webp";
-import masadaDeadSea from "@/assets/home/masada-dead-sea.webp";
-import einGedi from "@/assets/dead-sea/ein-gedi.webp";
-import deadSeaLandscape from "@/assets/dead-sea/landscape.webp";
+import ownerTourPhoto from "@/assets/guides/dead-sea-excursions/private-masada-dead-sea.webp";
+import beachMudPhoto from "@/assets/guides/dead-sea-excursions/dead-sea-mud-bathing.webp";
+import masadaPalacePhoto from "@/assets/guides/dead-sea-excursions/masada-palace.webp";
+import einGediPhoto from "@/assets/guides/dead-sea-excursions/ein-gedi-oasis.webp";
+import saltShorePhoto from "@/assets/guides/dead-sea-excursions/dead-sea-salt-shore.webp";
+import sunrisePhoto from "@/assets/guides/dead-sea-excursions/masada-snake-path.webp";
 
-/** Real Jerusalem-departure product pages, checked on Viator in November 2026.
- * The provider's own listing controls dates and the actual beach visited.
- * Local editorial imagery represents the destination, not the tour vehicles.
- * Affiliate URLs come only from the Travelpayouts API-generated registry.
+const tourPhotos = {
+  "beach-mud": { src: beachMudPhoto, alt: "Dead Sea mud bathing on the shore" },
+  "masada-palace": { src: masadaPalacePhoto, alt: "The ruins of Herod's palace at Masada" },
+  "ein-gedi": { src: einGediPhoto, alt: "Desert oasis and natural scenery at Ein Gedi" },
+  "salt-shore": { src: saltShorePhoto, alt: "Salt deposits on the Dead Sea shoreline" },
+  sunrise: { src: sunrisePhoto, alt: "The Snake Path climbing toward Masada" },
+} as const;
+
+/** Compact manually curated cards, with vendor data separated from affiliate URLs.
+ * The imported images are original files from the site's photo library, not
+ * borrowed supplier product imagery. Each is used once within these cards.
  */
-const tours = [
-  {
-    id: "jslm-deadsea-beach-viator",
-    title: "Dead Sea beach half-day trip",
-    type: "Beach-only excursion",
-    provider: "Viator",
-    description: "Return transport from central Jerusalem and several hours at a Dead Sea bathing beach, without a separate sightseeing stop.",
-    photo: deadSeaBeach,
-    alt: "Dead Sea water and shoreline",
-  },
-  {
-    id: "jslm-deadsea-masada-viator",
-    title: "Masada and the Dead Sea",
-    type: "History and beach",
-    provider: "Viator",
-    description: "A full-day coach tour combining the Masada fortress and time at a Dead Sea beach.",
-    photo: masadaDeadSea,
-    alt: "Masada plateau and Dead Sea landscape",
-  },
-  {
-    id: "jslm-deadsea-masada-eingedi-viator",
-    title: "Masada, Ein Gedi and the Dead Sea",
-    type: "Three stops in one day",
-    provider: "Viator",
-    description: "A full-day trip from Jerusalem covering the archaeological site, desert oasis and a bathing stop.",
-    photo: einGedi,
-    alt: "Green oasis landscape at Ein Gedi",
-  },
-] as const;
-
 export function DeadSeaTourOptions() {
-  return <div className="mt-6 grid gap-4 sm:grid-cols-2" data-testid="deadsea-tour-options">
-    <article className="flex min-w-0 flex-col overflow-hidden rounded-2xl border bg-card" data-testid="deadsea-moshe-tour">
-      <img src={deadSeaLandscape} alt="Desert hills above the Dead Sea" width={600} height={400} loading="lazy" decoding="async" className="aspect-[3/2] w-full object-cover" />
-      <div className="flex flex-1 flex-col p-5">
-        <p className="text-xs font-semibold text-primary">Private day tour · Moshe Barak</p>
-        <h3 className="mt-2 text-xl font-semibold">Private Masada & Dead Sea day trip</h3>
-        <p className="mt-2 flex-1 text-sm leading-relaxed text-muted-foreground">A private car and driver from Jerusalem, with flexible pickup and stops. Published weekday price starts at ₪2,100 for up to four travellers; admission, guiding and meals are extra.</p>
-        <Link to="/tours/masada-dead-sea/" className="btn btn-primary mt-4 inline-flex w-fit items-center gap-2">View private tour and price <ExternalLink className="h-4 w-4" aria-hidden="true" /></Link>
-      </div>
-    </article>
-    {tours.map(tour => {
-      const trackingUrl = affiliateConfig[tour.id]?.trackingUrl;
-      if (!trackingUrl) return null;
-      return <article key={tour.id} className="flex min-w-0 flex-col overflow-hidden rounded-2xl border bg-card" data-testid="deadsea-bookable-tour">
-        <img src={tour.photo} alt={tour.alt} width={600} height={400} loading="lazy" decoding="async" className="aspect-[3/2] w-full object-cover" />
-        <div className="flex flex-1 flex-col p-5">
-          <p className="text-xs font-semibold text-primary">{tour.type} · {tour.provider}</p>
-          <h3 className="mt-2 text-xl font-semibold">{tour.title}</h3>
-          <p className="mt-2 flex-1 text-sm leading-relaxed text-muted-foreground">{tour.description}</p>
-          <a href={trackingUrl} target="_blank" rel={relFor(true)}
-            onClick={() => recordOutboundClick({ pageId: "jslm_dead_sea", productId: tour.id, offerId: tour.id })}
-            className="btn btn-primary mt-4 inline-flex w-fit items-center gap-2">
-            View dates and book <ExternalLink className="h-4 w-4" aria-hidden="true" />
-            <span className="sr-only"> (opens in a new tab)</span>
-          </a>
-        </div>
-      </article>;
-    })}
-  </div>;
+  return <>
+    <div className="mt-5 grid gap-3 sm:grid-cols-2 xl:grid-cols-3" data-testid="deadsea-tour-options">
+      <Link
+        to="/tours/masada-dead-sea/"
+        className="group flex min-w-0 flex-col overflow-hidden rounded-xl border border-primary/30 bg-card transition-all hover:-translate-y-0.5 hover:border-primary hover:shadow-md focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+        data-testid="deadsea-moshe-tour"
+      >
+        <img src={ownerTourPhoto} alt="Masada and Dead Sea landscapes on a private day trip" width={480} height={280} loading="lazy" decoding="async" className="h-32 w-full object-cover" />
+        <span className="flex flex-1 flex-col p-3.5">
+          <span className="text-[11px] font-semibold uppercase tracking-wide text-primary">Private tour · Moshe Barak</span>
+          <span className="mt-1 text-base font-semibold leading-snug text-foreground group-hover:text-primary">Private Masada & Dead Sea day trip</span>
+          <span className="mt-1.5 line-clamp-2 text-sm text-muted-foreground">Your Jerusalem pickup, a dedicated driver and flexible sightseeing stops.</span>
+          <span className="mt-3 flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-muted-foreground">
+            <span className="inline-flex items-center gap-1"><Clock3 size={13} aria-hidden="true" />Full day</span>
+            <span>Up to 4 travellers</span>
+          </span>
+          <span className="mt-auto flex items-end justify-between gap-2 border-t pt-3 text-sm">
+            <span><span className="text-xs text-muted-foreground">From</span> <strong>₪2,100</strong><span className="block text-[11px] text-muted-foreground">per vehicle</span></span>
+            <span className="inline-flex items-center gap-1 font-semibold text-primary">See tour & price <ExternalLink size={13} aria-hidden="true" /></span>
+          </span>
+        </span>
+      </Link>
+      {deadSeaTourCards.map(tour => {
+        const trackingUrl = affiliateConfig[tour.id]?.trackingUrl;
+        if (!trackingUrl) return null;
+        const photo = tourPhotos[tour.photoId];
+        return <a
+          key={tour.id}
+          href={trackingUrl}
+          target="_blank"
+          rel={relFor(true)}
+          onClick={() => recordOutboundClick({ pageId: "jslm_dead_sea", productId: tour.id, offerId: tour.id })}
+          className="group flex min-w-0 flex-col overflow-hidden rounded-xl border bg-card transition-all hover:-translate-y-0.5 hover:border-primary hover:shadow-md focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+          data-testid="deadsea-bookable-tour"
+        >
+          <img src={photo.src} alt={photo.alt} width={480} height={280} loading="lazy" decoding="async" className="h-32 w-full object-cover" />
+          <span className="flex flex-1 flex-col p-3.5">
+            <span className="text-[11px] font-semibold uppercase tracking-wide text-primary">{tour.provider} · Jerusalem departure</span>
+            <span className="mt-1 text-base font-semibold leading-snug text-foreground group-hover:text-primary">{tour.title}</span>
+            <span className="mt-1.5 line-clamp-2 text-sm text-muted-foreground">{tour.subtitle}</span>
+            <span className="mt-3 flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-muted-foreground">
+              <span className="inline-flex items-center gap-1"><Clock3 size={13} aria-hidden="true" />{tour.duration}</span>
+              <span className="inline-flex items-center gap-1" aria-label={tour.rating + " out of 5 from " + tour.reviewCount + " reviews"}>
+                <Star size={13} className="fill-current text-amber-500" aria-hidden="true" />
+                <strong className="font-semibold text-foreground">{tour.rating.toFixed(1)}</strong>
+                <span>({tour.reviewCount.toLocaleString("en-US")})</span>
+              </span>
+            </span>
+            <span className="mt-auto flex items-end justify-between gap-2 border-t pt-3 text-sm">
+              <span><span className="text-xs text-muted-foreground">From</span> <strong>US${tour.fromUsd}</strong><span className="block text-[11px] text-muted-foreground">per person</span></span>
+              <span className="inline-flex items-center gap-1 font-semibold text-primary">View & book <ExternalLink size={13} aria-hidden="true" /></span>
+            </span>
+          </span>
+          <span className="sr-only"> (opens in a new tab)</span>
+        </a>;
+      })}
+    </div>
+    <p className="mt-2.5 text-xs leading-relaxed text-muted-foreground">Starting prices and ratings are indicative; select your date on the booking page for current offers.</p>
+  </>;
 }
