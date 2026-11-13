@@ -1,6 +1,6 @@
 /**
  * Generate project-406243 Travelpayouts deep links with page-specific SubIDs
- * for Jerusalem to the Dead Sea (editorial page U017).
+ * for Jerusalem to the Dead Sea (guide: jerusalem-to-the-dead-sea).
  *
  * Does not overwrite an already published link. Review the Action artifact
  * before replacing any previously verified tracking URLs.
@@ -8,19 +8,19 @@
  */
 import { mkdir, writeFile } from "node:fs/promises";
 
-const pageId = "U017";
+const pageId = "jerusalem-to-the-dead-sea";
 const projectId = 406243;
 const partnerId = 622032;
 const targets = [
   {
     id: "deadsea-jerusalem-viator",
     url: "https://www.viator.com/Jerusalem-attractions/Dead-Sea/d921-a2919",
-    sub_id: "itt_u017_jerusalem_dead_sea_viator",
+    sub_id: "itt_jerusalem_to_the_dead_sea_viator",
   },
   {
     id: "deadsea-jerusalem-getyourguide",
     url: "https://www.getyourguide.com/dead-sea-l214?departsFrom=97",
-    sub_id: "itt_u017_jerusalem_dead_sea_gyg",
+    sub_id: "itt_jerusalem_to_the_dead_sea_getyourguide",
   },
 ];
 
@@ -29,7 +29,7 @@ for (const item of targets) {
   if (u.protocol !== "https:" || !["www.viator.com", "www.getyourguide.com"].includes(u.hostname)) {
     throw new Error("Unapproved source URL");
   }
-  if (!/^itt_u017_[a-z0-9_]+$/.test(item.sub_id)) throw new Error("Invalid page SubID");
+  if (!/^itt_jerusalem_to_the_dead_sea_(viator|getyourguide)$/.test(item.sub_id)) throw new Error("Invalid page SubID");
 }
 if (process.argv.includes("--validate")) {
   console.log("Validated " + targets.length + " direct destination URLs for page " + pageId);
@@ -74,8 +74,8 @@ const results = targets.map(item => {
   return { ...item, status: allowed ? "generated_pending_review" : "failed", partner_url: allowed ? parsed.toString() : null };
 });
 await mkdir("artifacts", { recursive: true });
-await writeFile("artifacts/travelpayouts-deadsea-u017.json",
+await writeFile("artifacts/travelpayouts-jerusalem-to-the-dead-sea.json",
   JSON.stringify({ pageId, projectId, partnerId, generatedAt: new Date().toISOString(), results }, null, 2) + "\n");
-console.log("Travelpayouts Dead Sea (U017): " + results.filter(item => item.partner_url).length
+console.log("Travelpayouts Jerusalem to the Dead Sea: " + results.filter(item => item.partner_url).length
   + "/" + targets.length + " candidate links generated; review artifact before publication");
 if (results.some(item => !item.partner_url)) process.exitCode = 1;
