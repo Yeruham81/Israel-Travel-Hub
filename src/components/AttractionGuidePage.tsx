@@ -1,6 +1,6 @@
 import { Link } from "@tanstack/react-router";
 import { AuthorCard } from "@/components/AuthorCard";
-import { GuideHeroMedia } from "@/components/GuideHeroMedia";
+import { GuideHeroLayout, GuideHeroMedia } from "@/components/GuideHeroMedia";
 import { Breadcrumbs, FaqList, OnThisPage, RelatedLinks, Section } from "@/components/Guide";
 import { attractionGuides } from "@/data/attractionGuides";
 import { attractionPath, type AttractionId } from "@/data/attractionGuideTypes";
@@ -52,11 +52,7 @@ export function AttractionGuidePage({ id }: {id:AttractionId}) {
   return <main className="mx-auto max-w-5xl px-4 pb-16">
     <header className="pt-6">
       <Breadcrumbs items={[{name:"Home",to:"/"},{name:"Attractions",to:"/attractions/"},{name:a.title,to:attractionPath(id)}]}/>
-      <p className="eyebrow mt-6">{a.region} · Visitor guide</p>
-      <h1 className="guide-page-title mt-3">{a.title}</h1>
-      <p className="mt-4 max-w-3xl text-lg leading-relaxed text-foreground">{a.intro}</p>
-      {!sacred && <p className="mt-4 text-sm text-muted-foreground"><strong>Suggested time:</strong> {a.duration}</p>}
-      {a.image && <GuideHeroMedia
+      <GuideHeroLayout image={a.image && <GuideHeroMedia
         src={a.image.src}
         alt={a.image.alt}
         fit={sacred ? "contain" : "cover"}
@@ -65,7 +61,12 @@ export function AttractionGuidePage({ id }: {id:AttractionId}) {
         width={id === "mount-of-olives" ? 1920 : id === "mount-zion" ? 755 : 1200}
         height={id === "mount-of-olives" ? 872 : id === "mount-zion" ? 503 : 675}
         caption={id === "mount-of-olives" ? "Jerusalem from the Mount of Olives" : id === "mount-zion" ? "Dormition Abbey on Mount Zion" : undefined}
-      />}
+      />}>
+        <p className="eyebrow">{a.region} · Visitor guide</p>
+        <h1 className="guide-page-title mt-3">{a.title}</h1>
+        <p className="mt-4 max-w-3xl text-lg leading-relaxed text-foreground">{a.intro}</p>
+        {!sacred && <p className="mt-4 text-sm text-muted-foreground"><strong>Suggested time:</strong> {a.duration}</p>}
+      </GuideHeroLayout>
       {!sacred && <AuthorCard/>}
     </header>
     {!sacred && <div className="mt-8 rounded-2xl border border-primary/20 bg-secondary/40 p-6">
