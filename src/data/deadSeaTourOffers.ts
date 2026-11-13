@@ -16,12 +16,12 @@ export type DeadSeaTourCard = {
   title: string;
   subtitle: string;
   duration: string;
-  fromUsd: number;
+  fromUsd?: number;
   rating: number;
   reviewCount: number;
   checkedAt: string;
   sourceUrl: string;
-  photoId: "beach-mud" | "masada-palace" | "ein-gedi" | "salt-shore" | "sunrise" | "masada-ruins";
+  photoId: "beach-mud" | "masada-palace" | "ein-gedi" | "salt-shore" | "sunrise" | "bethlehem-nativity";
 };
 
 export const deadSeaTourCards: DeadSeaTourCard[] = [
@@ -29,7 +29,7 @@ export const deadSeaTourCards: DeadSeaTourCard[] = [
     id: "jslm-deadsea-beach-viator",
     provider: "Viator",
     title: "Dead Sea Chill Out",
-    subtitle: "Beach-focused half-day trip from Jerusalem",
+    subtitle: "Beach time with return transport",
     duration: "6 hrs",
     fromUsd: 49,
     rating: 4.6,
@@ -91,16 +91,15 @@ export const deadSeaTourCards: DeadSeaTourCard[] = [
     photoId: "sunrise",
   },
   {
-    id: "jslm-deadsea-qumran-viator",
+    id: "jslm-deadsea-bethlehem-viator",
     provider: "Viator",
-    title: "Masada, Qumran & Dead Sea",
-    subtitle: "Dead Sea Scrolls site, mountain fortress and beach",
-    duration: "8 hrs",
-    fromUsd: 110,
-    rating: 3.7,
-    reviewCount: 11,
+    title: "Bethlehem & Dead Sea",
+    subtitle: "Nativity sites and beach (admission extra)",
+    duration: "8–11 hrs",
+    rating: 4.8,
+    reviewCount: 132,
     checkedAt: "2026-11-13",
-    sourceUrl: "https://www.viator.com/tours/Jerusalem/Tour-of-Masada-Dead-Sea-From-Jerusalem/d921-6803P3",
-    photoId: "masada-ruins",
+    sourceUrl: "https://www.viator.com/tours/Jerusalem/Bethlehem-and-Dead-Sea-Full-Day-Tour/d921-115730P3",
+    photoId: "bethlehem-nativity",
   },
 ];
