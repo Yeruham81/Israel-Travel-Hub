@@ -168,7 +168,7 @@ export function IsraelEventsPage() {
         <div className="mt-6 grid items-center gap-6 lg:grid-cols-[1.25fr_1fr]">
           <div>
             <p className="text-sm font-semibold tracking-wide text-primary">TRAVEL PLANNING GUIDE</p>
-            <h1 className="mt-2 text-4xl leading-tight md:text-5xl">{TITLE}</h1>
+            <h1 className="guide-page-title mt-2">{TITLE}</h1>
             <p className="mt-4 text-lg leading-relaxed text-muted-foreground">Find festivals, internationally accessible performances and cultural experiences selected for visitors to Israel. Browse checked dates and explore annual events before their next programme is announced.</p>
             <PageUpdated date={EVENT_CHECK_DATE}/>
           </div>
