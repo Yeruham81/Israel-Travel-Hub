@@ -11,7 +11,7 @@ import { hasPublicPhotoCredit } from "@/lib/photo-credits";
 import { AuthorCard } from "@/components/AuthorCard";
 import { HomeContactForm } from "@/components/HomeContactForm";
 import { PageUpdated } from "@/components/PageUpdated";
-import { GuideHeroMedia } from "@/components/GuideHeroMedia";
+import { GuideHeroLayout, GuideHeroMedia } from "@/components/GuideHeroMedia";
 import { guideContactCopy, type GuideContactKind } from "@/lib/guide-contact";
 import { JerusalemJourneyOptions, JerusalemJourneyBooking, JerusalemJourneyResources } from "@/components/JerusalemJourneyPlanner";
 import { JerusalemClusterLinks, type JerusalemClusterKey } from "@/components/JerusalemClusterLinks";
@@ -203,14 +203,15 @@ export function TravelGuidePage({ id }: { id: TravelGuideId }) {
       <header className="pt-6">
         <Breadcrumbs items={[{ name: "Home", to: "/" }, { name: "Travel guides", to: "/guides/" }, { name: guide.title, to: travelGuidePaths[id] }]} />
         <div className="mt-6"><GuideTags topics={guide.topics} /></div>
-        <div className="mt-6">
-          <h1 className="guide-page-title max-w-4xl">{guide.title}</h1>
-          <p className="mt-4 max-w-3xl text-lg leading-relaxed text-foreground">{guide.intro}</p>
-          <PageUpdated date={guide.updatedAt || TRAVEL_GUIDE_CHECK_DATE} />
+        <GuideHeroLayout image={
           <GuideHeroMedia src={guide.photo.src} alt={guide.photo.alt}>
             <GuidePhotoCredit photo={guide.photo} />
           </GuideHeroMedia>
-        </div>
+        }>
+          <h1 className="guide-page-title">{guide.title}</h1>
+          <p className="mt-4 max-w-3xl text-lg leading-relaxed text-foreground">{guide.intro}</p>
+          <PageUpdated date={guide.updatedAt || TRAVEL_GUIDE_CHECK_DATE} />
+        </GuideHeroLayout>
         <AuthorCard />
       </header>
       <section id="quick-answer" aria-labelledby="answer-h" className="mt-8 scroll-mt-24 rounded-2xl border border-primary/20 bg-secondary/60 p-5 sm:p-7">
