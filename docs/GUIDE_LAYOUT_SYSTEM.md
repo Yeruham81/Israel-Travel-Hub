@@ -42,6 +42,30 @@ Use `GuideHeroLayout` and `GuideHeroMedia` from
 An image-free guide can use the layout without an image, keeping the
 headline full width. The main homepage slideshow is a **separate** design.
 
+## Service and discovery overview pages
+
+Broad **Airport Transfers**, **Tours & Day Trips**, **Attractions**, **Shore
+Excursions** and **Accommodation** hubs use the shared `HubHeader` from
+`src/components/Guide.tsx`. Keep the neutral site background, small eyebrow,
+responsive `.guide-page-title`, and a concise introduction (target four lines
+or fewer on desktop). No primary decorative image is necessary: these pages
+already contain meaningful destination and service photographs in the cards
+below. Do not bring back an oversized full-width banner, dark promotional
+hero, image overlay or image caption to these overview headers.
+
+If the hub needs a primary action or editorial update date, use the optional
+`actions` and `checkedAt` properties so everything remains inside the same
+header structure. Preserve valuable content in the sections below.
+
+**Focused destination, port, route and tour-category pages** retain the
+`GuideHeroLayout` plus `GuideHeroMedia` arrangement, with a compact,
+accurate image beside the title on desktop and stacked below it on narrow
+screens. The subject must match the actual page; avoid generic stock imagery.
+Do not add decorative photo captions or descriptions below the lead image.
+Keep legally required photo credits in an appropriate attribution area.
+
+The homepage is intentionally separate from these hub-page rules.
+
 ## Recommended body order
 
 1. Brief **Quick answer** or **At a glance**: directly answer the search intent.
