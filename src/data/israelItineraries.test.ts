@@ -151,6 +151,8 @@ describe("migrated Israel itineraries", () => {
     const cards = file("src/components/JerusalemItineraryTourOptions.tsx");
     expect(cards).toContain("<details");
     expect(cards).toContain("More day trips from Jerusalem");
+    expect(cards).toContain(">{tour.provider}</span>");
+    expect(cards).not.toContain("{item.area} · {tour.provider}");
     expect(cards).toContain("rel={relFor(true)}");
     expect(cards).not.toContain("Affiliate links: I may earn a commission if you book.");
     expect(cards).not.toContain("indicative snapshots, not live quotes.");
