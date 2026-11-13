@@ -3,7 +3,7 @@ import type { GuidePhoto } from "@/data/travelGuides";
 import { migrationPhotos } from "@/data/guideMigrationPhotos";
 import { hotelCategoryGuides, jerusalemAreaGuides, telAvivAreaGuides } from "@/data/content";
 import benGurionPhoto from "@/assets/home/ben-gurion-t3.webp";
-import airportPickupPhoto from "@/assets/home/airport-pickup.webp";
+import airportExteriorPhoto from "@/assets/airport-transfers/airport.webp";
 import roadTripPhoto from "@/assets/home/road-trip.webp";
 import caesareaPhoto from "@/assets/home/caesarea-aqueduct.webp";
 
@@ -71,7 +71,7 @@ export const arrivalCards: HubCard[] = [
   { id: "haifa", group: "Airport to your city", title: "Airport to Haifa", text: "Rail along the coast or a direct drive — and how to handle Haifa's hills on the last stretch.", cta: "Compare ways to Haifa", to: "/travel-blog/how-to-get-from-ben-gurion-airport-to-haifa/", photo: { src: "/images/attractions/haifa-coast.webp", alt: "Haifa and the Mediterranean coast", label: "Haifa coast" } },
   { id: "einbokek", group: "Airport to your city", title: "Airport to Ein Bokek", text: "Getting to the Dead Sea hotels takes longer; compare buses, connections and a direct drive to your resort.", cta: "Compare ways to Ein Bokek", to: "/travel-blog/how-to-get-from-ben-gurion-airport-to-ein-bokek/", photo: fromMigration("EXISTING:deadSea", "Dead Sea shoreline") },
   { id: "around", group: "Moving between hotels", title: "Getting around Israel", text: "Trains, buses, shared taxis and car rental for moving between hotel bases during your trip.", cta: "Read the transport guide", to: "/travel-blog/getting-around-israel/", photo: { src: roadTripPhoto, alt: "Illustration of a car on an open road", label: "Road trip illustration" } },
-  { id: "transfers", group: "Moving between hotels", title: "Book a private transfer", text: "Prefer to be met and driven straight to your hotel door? See private airport and intercity transfer options.", cta: "See transfer options", to: "/transfers/", photo: { src: airportPickupPhoto, alt: "Illustration of a driver greeting travelers at an airport", label: "Airport pickup illustration" } },
+  { id: "transfers", group: "Moving between hotels", title: "Book a private transfer", text: "Prefer to be met and driven straight to your hotel door? See private airport and intercity transfer options.", cta: "See transfer options", to: "/transfers/", photo: { src: airportExteriorPhoto, alt: "Aircraft beside the terminal at Ben Gurion Airport", label: "Ben Gurion Airport" } },
 ];
 
 /** Internal routes retain the publisher's original four itinerary URL slugs. */

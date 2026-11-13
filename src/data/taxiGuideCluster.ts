@@ -9,11 +9,9 @@ import { consumerFareTable, taxiFaresWithVat } from "@/data/taxiFares";
 import { migrationPhotos } from "@/data/guideMigrationPhotos";
 import { travelGuidePaths } from "@/data/registry";
 import { airportTransferPhotos } from "@/data/airportTransfers";
-import airportPickup from "@/assets/home/airport-pickup.webp";
 import roadTrip from "@/assets/home/road-trip.webp";
 import airportHall from "@/assets/home/ben-gurion-t3.webp";
 
-const pickup = { src: airportPickup, alt: "Illustration of a driver assisting arriving travelers with luggage" };
 const airport = airportTransferPhotos["other"]!;
 const cityPhoto = airportTransferPhotos["tel-aviv"]!;
 const intercityPhoto = { src: roadTrip, alt: "Illustration of a vehicle traveling on a road through the Israeli landscape" };
@@ -232,7 +230,7 @@ export const taxiGuideCluster: Record<"taxis" | "taxiFares" | "airportTaxis", Tr
     answer: "From April 1, 2026, the regulated meter starting amount is approximately ₪12.46 including 18% VAT where applicable. Time and distance are charged together; for the first 10 km the A/B/C rates are about ₪1.95/₪2.34/₪2.73 per minute and per kilometer. Each kilometer beyond 10 km costs more. Additional lawful charges may apply.",
     topics: ["transportation", "tips"],
     updatedAt: "2026-10-22",
-    photo: pickup,
+    photo: { src: "/images/guides/taxi-in-tel-aviv.webp", alt: "Licensed taxis with yellow roof signs in Tel Aviv" },
     reviewNote: "Official fare figures shown are current as of October 2026. The April 2026 temporary tariff schedule is specified through March 31, 2027 unless amended. Prices shown include 18% VAT where applicable and are rounded to two decimals; the official order lists base amounts before VAT.",
     facts: [
       { label: "Meter start", text: "₪12.46 with 18% VAT, where applicable" },
@@ -409,7 +407,7 @@ export const taxiGuideCluster: Record<"taxis" | "taxiFares" | "airportTaxis", Tr
     sections: [
       {
         id: "steps", title: "How to Order an Immediate Official Airport Taxi",
-        photo: pickup,
+        photo: { src: "/images/guides/airport-taxi-sign.webp", alt: "Taxi entrance sign at Ben Gurion Airport" },
         paragraphs: [
           "Step 1 — Create an order using the Gett app or one of the airport's self-service kiosks. Enter the destination and follow the service instructions. The kiosk lets you order without installing Gett on your phone.",
           "Step 2 — Receive the ride code. Save it or retain the SMS so that the driver and dispatcher can identify your journey and you can refer to it if support is needed later.",
