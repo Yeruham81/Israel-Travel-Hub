@@ -34,6 +34,9 @@ import image31 from "@/assets/home/masada-dead-sea.webp";
 import image32 from "@/assets/haifa/panorama.webp";
 import image33 from "@/assets/home/tiberias-lake.webp";
 import image34 from "@/assets/guides/mitzpe-ramon-crater.jpg";
+import itineraryOldCity from "@/assets/jerusalem/old-city.webp";
+import itineraryTrain from "@/assets/airport-journeys/jerusalem-navon-platform.webp";
+import itineraryAirport from "@/assets/home/ben-gurion-t3.webp";
 
 export const migrationPhotos = {
   "best-time-to-visit-israel": {
@@ -217,5 +220,17 @@ export const migrationPhotos = {
   "EXISTING:ramon": {
     "src": image34,
     "alt": "Desert cliffs and the landscape of Ramon Crater"
+  },
+  "itinerary-jerusalem-old-city": {
+    "src": itineraryOldCity,
+    "alt": "Jerusalem Old City architecture and historic streets"
+  },
+  "itinerary-train": {
+    "src": itineraryTrain,
+    "alt": "Rail platform at Jerusalem Yitzhak Navon station"
+  },
+  "itinerary-airport": {
+    "src": itineraryAirport,
+    "alt": "Ben Gurion Airport Terminal 3 exterior"
   }
 } satisfies Record<string, GuidePhoto>;
