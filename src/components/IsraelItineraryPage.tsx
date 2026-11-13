@@ -1,10 +1,13 @@
 import { type LinkProps } from "@tanstack/react-router";
+import type { ReactNode } from "react";
 import { SiteLink as Link } from "@/components/SiteLink";
-import { ArrowRight, TrainFront, CalendarDays, BedDouble, Route as RouteIcon } from "lucide-react";
+import { ArrowRight, CalendarDays, BedDouble } from "lucide-react";
 import { Breadcrumbs, OnThisPage, FaqList } from "@/components/Guide";
 import { HomeContactForm } from "@/components/HomeContactForm";
 import { guideContactCopy } from "@/lib/guide-contact";
-import { GuidePhotoCredit } from "@/components/TravelGuide";
+import type { GuidePhoto } from "@/data/travelGuides";
+import { hasPublicPhotoCredit } from "@/lib/photo-credits";
+import { isPublisherUrl } from "@/data/registry";
 import { GuideHeroLayout, GuideHeroMedia } from "@/components/GuideHeroMedia";
 import { AuthorCard } from "@/components/AuthorCard";
 import { SourcesDisclosure } from "@/components/SourcesDisclosure";
@@ -38,23 +41,23 @@ export function itineraryMeta(id: ItineraryId) {
   })] };
 }
 
-function RouteMap({ guide }: { guide: ItineraryGuide }) {
-  const map = guide.map;
-  const params = new URLSearchParams({
-    bbox: map.bounds.join(","), marker: map.center.join(","),
-    name: `Israel ${guide.days}-day trip regions`, lang: "en",
-    waypoints: JSON.stringify(map.points),
-  });
-  const mapUrl = `/maps/area.html?${params.toString()}`;
-  return <figure className="mt-6 overflow-hidden rounded-2xl border bg-card">
-    <iframe title={`Map of Israel destinations on the ${guide.days}-day itinerary`} src={mapUrl} width={900} height={360}
-      loading="lazy" referrerPolicy="strict-origin-when-cross-origin" className="h-64 w-full border-0 sm:h-80" />
-    <figcaption className="px-4 py-3 text-xs leading-relaxed text-muted-foreground">
-      <span className="font-semibold">Destination map:</span> numbered pins mark stops (not day numbers); they do not show a driven road route or travel-time estimate.
-      {" "}Open the <a className="font-semibold text-primary underline" href={mapUrl} target="_blank" rel="noopener noreferrer">larger map<span className="sr-only"> (opens a new tab)</span></a>.
-      Map data © <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener noreferrer" className="underline">OpenStreetMap</a>.
-    </figcaption>
-  </figure>;
+type CopyLink = { phrase: string; to: LinkProps["to"] };
+
+/** Author-specified phrases become natural in-paragraph guide links. */
+function LinkedCopy({ value, links = [] }: { value: string; links?: CopyLink[] }) {
+  const output: ReactNode[] = [];
+  let position = 0;
+  const mentions = links.map(link => ({ ...link, index: value.indexOf(link.phrase) }))
+    .filter(link => link.index >= 0).sort((a, b) => a.index - b.index);
+  for (const link of mentions) {
+    if (link.index < position) continue;
+    if (link.index > position) output.push(value.slice(position, link.index));
+    output.push(<Link key={`${link.to}-${link.index}`} to={link.to}
+      className="font-semibold text-primary underline underline-offset-2 hover:opacity-80">{link.phrase}</Link>);
+    position = link.index + link.phrase.length;
+  }
+  if (position < value.length) output.push(value.slice(position));
+  return <>{output}</>;
 }
 
 const guideSections = (g: ItineraryGuide): [string, string][] => [
@@ -63,7 +66,7 @@ const guideSections = (g: ItineraryGuide): [string, string][] => [
   ["days", "Daily itinerary"],
   ...g.daysPlan.map((_, index): [string, string] => [`day-${index + 1}`, `Day ${index + 1}`]),
   ["transport", "Transport & hotels"],
-  ["alternatives", "Adapt the route"],
+  ["alternatives", "Adjust the route"],
   ["faq", "FAQ"],
   ...(g.relatedGuides?.length ? [["related-guides", "Related guides"] as [string, string]] : []),
   ["other-durations", "More itineraries"],
@@ -73,14 +76,22 @@ const guideSections = (g: ItineraryGuide): [string, string][] => [
 export function IsraelItineraryPage({ id }: { id: ItineraryId }) {
   const g = itineraries[id];
   const photo = migrationPhotos[g.hero];
+  const shownImages: { label: string; photo: GuidePhoto }[] = [
+    { label: "Cover", photo },
+    ...g.daysPlan.map((day, index) => ({ label: `Day ${index + 1}: ${day.region}`, photo: migrationPhotos[day.image] })),
+    ...(g.relatedGuides ?? []).map(related => ({ label: related.title, photo: migrationPhotos[related.image] })),
+    ...itineraryIds.filter(other => other !== id).map(other => ({ label: `${other}-day itinerary`, photo: migrationPhotos[itineraries[other].hero] })),
+  ];
+  const seenPhotos = new Set<string>();
+  const photoCredits = shownImages.filter(({ photo }) => {
+    if (seenPhotos.has(photo.src)) return false;
+    seenPhotos.add(photo.src);
+    return hasPublicPhotoCredit(photo);
+  });
   return <main className="mx-auto max-w-5xl px-4 pb-16">
     <header className="pt-6">
       <Breadcrumbs items={[{ name: "Home", to: "/" }, { name: "Travel guides", to: "/travel-blog/" }, { name: g.title, to: internal(g.path as LinkProps["to"]) }]} />
-      <GuideHeroLayout image={
-        <GuideHeroMedia src={photo.src} alt={photo.alt}>
-          <GuidePhotoCredit photo={photo} />
-        </GuideHeroMedia>
-      }>
+      <GuideHeroLayout image={<GuideHeroMedia src={photo.src} alt={photo.alt} />}>
         <p className="eyebrow">Israel itineraries · Independent trip planning</p>
         <h1 className="guide-page-title mt-3">{g.title}</h1>
         <p data-guide-intro className="mt-4 max-w-3xl text-lg leading-relaxed text-foreground">{g.intro}</p>
@@ -128,8 +139,6 @@ export function IsraelItineraryPage({ id }: { id: ItineraryId }) {
           </tbody>
         </table>
       </div>
-      <RouteMap guide={g} />
-      <p className="mt-4 text-sm leading-relaxed text-muted-foreground">This sample route assumes <strong>{g.days} usable sightseeing days</strong>, excluding travel days that are substantially lost to arrival or departure. Attraction entry, border/crossing arrangements, walking access and opening hours must be verified for your dates; this is not a bookable package or a guarantee that all locations are open.</p>
     </section>
     {g.beforeYouGo?.length ? <section id="before-you-go" aria-labelledby="before-you-go-h" className="mt-12 scroll-mt-28">
       <h2 id="before-you-go-h" className="text-3xl">Before you go</h2>
@@ -156,22 +165,21 @@ export function IsraelItineraryPage({ id }: { id: ItineraryId }) {
             <div className="grid gap-6 p-5 sm:p-7 lg:grid-cols-[minmax(0,1fr)_250px]">
               <div className="min-w-0">
                 <dl className="space-y-5">
-                  <div><dt className="text-sm font-semibold text-primary">Morning</dt><dd className="mt-1 leading-relaxed">{day.morning}</dd></div>
-                  <div><dt className="text-sm font-semibold text-primary">Afternoon</dt><dd className="mt-1 leading-relaxed">{day.afternoon}</dd></div>
-                  <div><dt className="text-sm font-semibold text-primary">Evening</dt><dd className="mt-1 leading-relaxed">{day.evening}</dd></div>
+                  <div><dt className="text-sm font-semibold text-primary">Morning</dt><dd className="mt-1 leading-relaxed"><LinkedCopy value={day.morning} links={g.dayInlineLinks?.filter(link => link.day === index + 1 && link.field === "morning")} /></dd></div>
+                  <div><dt className="text-sm font-semibold text-primary">Afternoon</dt><dd className="mt-1 leading-relaxed"><LinkedCopy value={day.afternoon} links={g.dayInlineLinks?.filter(link => link.day === index + 1 && link.field === "afternoon")} /></dd></div>
+                  <div><dt className="text-sm font-semibold text-primary">Evening</dt><dd className="mt-1 leading-relaxed"><LinkedCopy value={day.evening} links={g.dayInlineLinks?.filter(link => link.day === index + 1 && link.field === "evening")} /></dd></div>
                 </dl>
                 <div className="mt-6 border-l-4 border-primary bg-secondary/50 px-4 py-3">
-                  <h4 className="font-semibold">Practical planning note</h4>
-                  <p className="mt-1 text-sm leading-relaxed">{day.practical}</p>
+                  <h4 className="font-semibold">My practical planning tip</h4>
+                  <p className="mt-1 text-sm leading-relaxed"><LinkedCopy value={day.practical} links={g.dayInlineLinks?.filter(link => link.day === index + 1 && link.field === "practical")} /></p>
                 </div>
-                <p className="mt-4 text-sm leading-relaxed"><strong>Where to stay:</strong> {day.overnight}</p>
-                <nav aria-label={`Read more about day ${index + 1}`} className="mt-5 flex flex-wrap gap-x-5 gap-y-2">
+                <p className="mt-4 text-sm leading-relaxed"><strong>Where to stay:</strong> <LinkedCopy value={day.overnight} links={g.dayInlineLinks?.filter(link => link.day === index + 1 && link.field === "overnight")} /></p>
+                {!g.dayInlineLinks?.some(link => link.day === index + 1) && <nav aria-label={`Read more about day ${index + 1}`} className="mt-5 flex flex-wrap gap-x-5 gap-y-2">
                   {day.links.map((link) => <Link key={link.label} to={link.to} className="inline-flex items-center gap-1.5 text-sm font-semibold text-primary underline underline-offset-2">{link.label} <ArrowRight className="h-3.5 w-3.5" aria-hidden /></Link>)}
-                </nav>
+                </nav>}
               </div>
               <figure className="order-first self-start lg:order-last"><img src={image.src} alt={image.alt} width={500} height={375}
                 loading="lazy" decoding="async" className="aspect-[16/9] w-full rounded-xl object-cover sm:aspect-[4/3]" />
-                <GuidePhotoCredit photo={image} />
               </figure>
             </div>
           </article>;
@@ -179,18 +187,18 @@ export function IsraelItineraryPage({ id }: { id: ItineraryId }) {
       </div>
     </section>
     <section id="transport" aria-labelledby="transport-h" className="mt-14 scroll-mt-28">
-      <h2 id="transport-h" className="text-3xl">Transport and hotel planning</h2>
+      <h2 id="transport-h" className="text-3xl">Tips for transport and hotel planning</h2>
       <p className="mt-3 leading-relaxed">{g.noCarAdvice}</p>
-      <div className="mt-6 grid gap-4 sm:grid-cols-2">{g.logistics.map((tip) => <article key={tip.heading} className="rounded-xl border bg-card p-5">
-        <TrainFront className="h-5 w-5 text-primary" aria-hidden />
-        <h3 className="mt-3 text-lg font-semibold">{tip.heading}</h3>
-        <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{tip.text}</p>
-        {tip.to && tip.label && <Link to={tip.to} className="mt-3 inline-flex items-center gap-1 text-sm font-semibold text-primary underline">{tip.label} <ArrowRight className="h-3.5 w-3.5" aria-hidden /></Link>}
-      </article>)}</div>
-      <p className="mt-5 text-sm leading-relaxed"><RouteIcon className="mr-2 inline h-4 w-4 text-primary" aria-hidden />Self-drive, public transport, guided excursions and a private car-and-driver are different arrangements. Driving alone does not include licensed guiding or site admissions. Compare your exact route and date before booking.</p>
+      <ul className="mt-6 list-disc space-y-4 pl-6 marker:text-primary">
+        {g.logistics.map((tip, index) => <li key={tip.heading} className="pl-1 leading-relaxed">
+          <strong className="font-semibold">{tip.heading}.</strong>{" "}
+          <LinkedCopy value={tip.text} links={g.logisticsInlineLinks?.filter(link => link.index === index)} />
+          {!g.logisticsInlineLinks?.some(link => link.index === index) && tip.to && tip.label && <>{" "}<Link to={tip.to} className="text-sm font-semibold text-primary underline underline-offset-2">{tip.label}</Link></>}
+        </li>)}
+      </ul>
     </section>
     <section id="alternatives" aria-labelledby="alternatives-h" className="mt-14 scroll-mt-28">
-      <h2 id="alternatives-h" className="text-3xl">Adapt this itinerary to your trip</h2>
+      <h2 id="alternatives-h" className="text-3xl">Adjust this itinerary to your trip</h2>
       <div className="mt-5 grid gap-4 md:grid-cols-2">{g.alternatives.map((item) => <article key={item.title} className="rounded-xl border bg-card p-5">
         <h3 className="text-lg font-semibold">{item.title}</h3>
         <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{item.text}</p>
@@ -200,7 +208,6 @@ export function IsraelItineraryPage({ id }: { id: ItineraryId }) {
     <FaqList faqs={g.faqs} />
     {g.relatedGuides?.length ? <section id="related-guides" aria-labelledby="related-guides-h" className="mt-14 scroll-mt-28">
       <h2 id="related-guides-h" className="text-3xl">Related practical guides</h2>
-      <p className="mt-2 text-sm leading-relaxed text-muted-foreground">Use these focused guides for visiting details and, where relevant, hotel and tour-booking options.</p>
       <div className="mt-5 grid gap-3 sm:grid-cols-2">
         {g.relatedGuides.map((item) => {
           const picture = migrationPhotos[item.image];
@@ -214,7 +221,6 @@ export function IsraelItineraryPage({ id }: { id: ItineraryId }) {
                 <span className="mt-2 inline-flex items-center gap-1 text-xs font-semibold text-primary">Read guide <ArrowRight className="h-3 w-3" aria-hidden /></span>
               </span>
             </Link>
-            {"credit" in picture && picture.credit && <div className="px-3 pb-2"><GuidePhotoCredit photo={picture} /></div>}
           </article>;
         })}
       </div>
@@ -234,7 +240,6 @@ export function IsraelItineraryPage({ id }: { id: ItineraryId }) {
                 <span className="mt-1.5 block text-xs leading-relaxed text-muted-foreground">{choice.description}</span>
               </span>
             </Link>
-            {"credit" in choicePhoto && choicePhoto.credit && <div className="px-4 pb-2"><GuidePhotoCredit photo={choicePhoto} /></div>}
           </article>;
         })}
       </div>
@@ -248,5 +253,18 @@ export function IsraelItineraryPage({ id }: { id: ItineraryId }) {
         </li>)}
       </ul>
     </SourcesDisclosure>
+    {photoCredits.length > 0 && <details className="mt-3 rounded-xl border bg-card text-sm text-muted-foreground" data-testid="itinerary-photo-credits">
+      <summary className="cursor-pointer px-4 py-3 font-semibold text-foreground">Photo credits &amp; licences</summary>
+      <ul className="space-y-2 border-t px-4 py-4">
+        {photoCredits.map(({ label, photo }) => {
+          const source = photo.sourceUrl && !isPublisherUrl(photo.sourceUrl) ? photo.sourceUrl : undefined;
+          return <li key={photo.src}>
+            <strong className="font-medium text-foreground">{label}:</strong>{" "}
+            {source ? <a href={source} target="_blank" rel="noopener noreferrer" className="underline underline-offset-2">{photo.credit || "Photo source"}</a> : (photo.credit || "Photo source")}
+            {photo.licenseUrl && <> · <a href={photo.licenseUrl} target="_blank" rel="noopener noreferrer" className="underline underline-offset-2">Licence</a></>}
+          </li>;
+        })}
+      </ul>
+    </details>}
   </main>;
 }
