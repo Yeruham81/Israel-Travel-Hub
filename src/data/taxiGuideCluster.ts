@@ -26,7 +26,7 @@ export const taxiGuideCluster: Record<"taxis" | "taxiFares" | "airportTaxis", Tr
     answer: "You can hail a licensed taxi in a major city, find one at an official stand, order from a local dispatcher or use Gett or another available taxi app. Confirm your destination, the meter or approved fare basis, and payment method. The regulated meter charges for time and distance, with higher tariffs at some times. At Ben Gurion Airport, use the authorized Gett app or kiosk and follow the designated taxi queue.",
     topics: ["transportation", "tips"],
     updatedAt: "2026-11-11",
-    photo: { src: "/images/guides/taxi-in-tel-aviv.webp", alt: "Two white licensed taxis with yellow roof signs on a street in Tel Aviv" },
+    photo: { src: "/images/travel-blog/taxi-in-tel-aviv.webp", alt: "Two white licensed taxis with yellow roof signs on a street in Tel Aviv" },
     facts: [
       { label: "Fare", text: "Regulated meter for an ordinary taxi; time, distance and tariff affect the total" },
       { label: "Booking", text: "Street, taxi stand, local dispatcher or an available app" },
@@ -106,7 +106,7 @@ export const taxiGuideCluster: Record<"taxis" | "taxiFares" | "airportTaxis", Tr
       },
       {
         id: "airport", title: "Taking a Taxi from Ben Gurion Airport",
-        photo: { src: "/images/guides/airport-taxi-sign.webp", alt: "Yellow Taxi Entrance sign inside an airport terminal" },
+        photo: { src: "/images/travel-blog/airport-taxi-sign.webp", alt: "Yellow Taxi Entrance sign inside an airport terminal" },
         paragraphs: [
           "Gett operates the official authorized taxi dispatch at Ben Gurion Airport (TLV). For an immediate ride, order via the Gett app or an airport self-service kiosk, which works without installing the app. Keep the ride code and proceed to the physical taxi queue. A code does not let you skip the line.",
           "For Terminal 3 on-demand taxis, go to the ground-floor arrivals level at Exit 03. A scheduled Gett ride must be booked at least two hours before pickup and uses Level 2, Exit 23. Gett says entering your flight number lets the app update your pickup time according to flight changes. At Terminal 1, follow the signs to the main arrivals exit. Check your booking instructions before travel, since procedures can change.",
@@ -121,7 +121,7 @@ export const taxiGuideCluster: Record<"taxis" | "taxiFares" | "airportTaxis", Tr
           { text: "Jerusalem", to: "/travel-blog/how-to-get-from-ben-gurion-airport-to-jerusalem/" },
           { text: "Haifa", to: "/travel-blog/how-to-get-from-ben-gurion-airport-to-haifa/" },
           { text: "Ein Bokek", to: "/travel-blog/how-to-get-from-ben-gurion-airport-to-ein-bokek/" },
-          { text: "request a private airport transfer quote", to: "/transfers/" },
+          { text: "request a private airport transfer quote", to: "/airport-transfers/" },
         ],
         sourceIds: ["guide-gett", "guide-iaa", "taxi-fares-2026"],
       },
@@ -219,7 +219,7 @@ export const taxiGuideCluster: Record<"taxis" | "taxiFares" | "airportTaxis", Tr
     ],
     sourceIds: ["guide-gett", "guide-iaa", "taxi-fares-2026", "taxi-tariff-hours", "taxi-passenger-rights", "taxi-complaints"],
     related: ["taxiFares", "airportTaxis", "uber", "sherut", "shabbat", "israel"],
-    services: [{ label: "Request a quote for a pre-booked airport transfer", to: "/transfers/" }, { label: "Arrange a private driver for a day trip", to: "/private-driver/" }],
+    services: [{ label: "Request a quote for a pre-booked airport transfer", to: "/airport-transfers/" }, { label: "Arrange a private driver for a day trip", to: "/private-driver/" }],
   },
 
   taxiFares: {
@@ -230,7 +230,7 @@ export const taxiGuideCluster: Record<"taxis" | "taxiFares" | "airportTaxis", Tr
     answer: "A regular licensed taxi starts at ₪12.46 on the meter outside Eilat, then charges for both travel time and distance. Tariffs A, B and C depend on the day and hour; longer trips cost more per kilometre after 10 km. Booking, airport and certain road surcharges may be added.",
     topics: ["transportation", "tips"],
     updatedAt: "2026-11-13",
-    photo: { src: "/images/guides/taxi-in-tel-aviv.webp", alt: "Licensed white taxis with yellow roof signs on a street in Tel Aviv" },
+    photo: { src: "/images/travel-blog/taxi-in-tel-aviv.webp", alt: "Licensed white taxis with yellow roof signs on a street in Tel Aviv" },
     facts: [
       { label: "Meter starts at", text: "₪12.46 including VAT outside Eilat" },
       { label: "Day / night", text: "Tariffs A, B and C change with the day and hour" },
@@ -337,7 +337,7 @@ export const taxiGuideCluster: Record<"taxis" | "taxiFares" | "airportTaxis", Tr
         ],
         highlightedLinks: [{
           label: "Compare airport transfer options",
-          href: "/transfers/",
+          href: "/airport-transfers/",
           context: "Useful if you want a specified pickup and vehicle rather than an on-arrival metered taxi; compare the actual booking terms.",
         }],
         sourceIds: ["guide-gett", "taxi-fares-2026"],
@@ -376,7 +376,7 @@ export const taxiGuideCluster: Record<"taxis" | "taxiFares" | "airportTaxis", Tr
     sourceIds: ["taxi-fares-2026", "taxi-tariff-hours", "taxi-passenger-rights", "taxi-complaints", "guide-gett"],
     related: ["taxis", "airportTaxis", "uber", "sherut", "shabbat", "arrival"],
     services: [
-      { label: "Compare pre-booked airport transfers", to: "/transfers/", note: "Choose a planned airport pickup with a confirmed provider price and meeting point instead of an on-arrival metered taxi." },
+      { label: "Compare pre-booked airport transfers", to: "/airport-transfers/", note: "Choose a planned airport pickup with a confirmed provider price and meeting point instead of an on-arrival metered taxi." },
       { label: "Request a private driver quote", to: "/private-driver/", note: "Arrange a longer intercity journey, multi-stop route or group vehicle to suit your itinerary." },
       { label: "Compare car rentals in Israel", to: "/car-rental/", note: "For a multi-day itinerary with stops beyond the main cities, compare rental options and choose a pickup location that suits your route." },
       { label: "Compare trains, buses and taxis around Israel", to: travelGuidePaths.israel, note: "Find less expensive public-transport options and decide when a taxi is worth the extra cost." },
@@ -410,7 +410,7 @@ export const taxiGuideCluster: Record<"taxis" | "taxiFares" | "airportTaxis", Tr
     sections: [
       {
         id: "steps", title: "How to Order an Immediate Official Airport Taxi",
-        photo: { src: "/images/guides/airport-taxi-sign.webp", alt: "Taxi entrance sign at Ben Gurion Airport" },
+        photo: { src: "/images/travel-blog/airport-taxi-sign.webp", alt: "Taxi entrance sign at Ben Gurion Airport" },
         paragraphs: [
           "Step 1 — Create an order using the Gett app or one of the airport's self-service kiosks. Enter the destination and follow the service instructions. The kiosk lets you order without installing Gett on your phone.",
           "Step 2 — Receive the ride code. Save it or retain the SMS so that the driver and dispatcher can identify your journey and you can refer to it if support is needed later.",
@@ -502,7 +502,7 @@ export const taxiGuideCluster: Record<"taxis" | "taxiFares" | "airportTaxis", Tr
             ["Waiting and changes", "According to the taxi service rules", "According to the confirmed transfer terms"],
           ],
         }],
-        inlineLinks: [{ text: "private transfer quote", to: "/transfers/" }],
+        inlineLinks: [{ text: "private transfer quote", to: "/airport-transfers/" }],
         sourceIds: ["guide-gett"],
       },
       {
@@ -553,6 +553,6 @@ export const taxiGuideCluster: Record<"taxis" | "taxiFares" | "airportTaxis", Tr
     ],
     sourceIds: ["guide-gett", "guide-iaa", "taxi-fares-2026", "taxi-complaints"],
     related: ["taxis", "taxiFares", "arrival", "shabbat", "sherut", "uber"],
-    services: [{ label: "See private airport transfer options", to: "/transfers/" }],
+    services: [{ label: "See private airport transfer options", to: "/airport-transfers/" }],
   },
 };
