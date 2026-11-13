@@ -68,7 +68,7 @@ export function IsraelItineraryPage({ id }: { id: ItineraryId }) {
     <header className="pt-6">
       <Breadcrumbs items={[{ name: "Home", to: "/" }, { name: "Travel guides", to: "/guides/" }, { name: g.title, to: internal(g.path as LinkProps["to"]) }]} />
       <p className="eyebrow mt-6">Israel itineraries · Independent trip planning</p>
-      <h1 className="mt-3 max-w-4xl text-4xl leading-tight md:text-5xl">{g.title}</h1>
+      <h1 className="guide-page-title mt-3 max-w-4xl">{g.title}</h1>
       <p className="mt-4 max-w-3xl text-lg leading-relaxed text-foreground">{g.intro}</p>
       <div className="mt-5 flex flex-wrap gap-2 text-xs font-medium">
         <span className="rounded-full bg-secondary px-3 py-2">{g.days} full sightseeing days</span>
