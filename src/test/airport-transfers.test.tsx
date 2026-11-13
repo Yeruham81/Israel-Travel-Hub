@@ -2,7 +2,7 @@ import { QueryClient } from "@tanstack/react-query";
 import { createMemoryHistory, createRouter, RouterContextProvider } from "@tanstack/react-router";
 import { cleanup, fireEvent, render, screen, within } from "@testing-library/react";
 import { afterEach, describe, expect, it, vi } from "vitest";
-import { Route as AirportRoute } from "@/routes/transfers.index";
+import { Route as AirportRoute } from "@/routes/airport-transfers.index";
 import { routeTree } from "@/routeTree.gen";
 import { airportTransferRates, affiliateConfig, linksForPage, partners } from "@/data/registry";
 import { airportTransferPhotos } from "@/data/airportTransfers";
@@ -11,7 +11,7 @@ import { readOutboundClicks } from "@/lib/outbound";
 
 afterEach(() => { cleanup(); localStorage.clear(); vi.restoreAllMocks(); });
 async function renderAirport() {
-  const router = createRouter({ routeTree, context: { queryClient: new QueryClient() }, history: createMemoryHistory({ initialEntries: ["/transfers/"] }), trailingSlash: "always" });
+  const router = createRouter({ routeTree, context: { queryClient: new QueryClient() }, history: createMemoryHistory({ initialEntries: ["/airport-transfers/"] }), trailingSlash: "always" });
   await router.load();
   const Airport = AirportRoute.options.component!;
   return { ...render(<RouterContextProvider router={router}><Airport /></RouterContextProvider>), router };
