@@ -40,6 +40,7 @@ export const tourPhotos: Record<string, GuidePhoto> = {
   "jerusalem-old-city-walk": migration["EXISTING:jerusalem"],
   "jerusalem-private-oldcity-walk": { src: holySepulchre, alt: "Church of the Holy Sepulchre in the Old City of Jerusalem" },
   "jerusalem-beyond-walls": jerusalemAreaGuides.find(n => n.id === "mahane-yehuda")!.photo,
+  "jerusalem-street-art-walk": { src: "/images/attractions/jerusalem.webp", alt: "Jerusalem cityscape; the guided tour explores street art in the city center" },
   "jerusalem-day-tel-aviv": migration["EXISTING:jerusalem"],
   "jerusalem-bethlehem-private": migration["jerusalem-to-bethlehem"],
   "jaffa-carmel-walk": { src: jaffa, alt: "Old Jaffa's historic buildings above the Mediterranean harbour", sourceUrl: "https://www.israel-taxi.com/wp-content/uploads/2025/08/jaffa_panorama2.jpg" },
