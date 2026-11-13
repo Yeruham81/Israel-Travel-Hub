@@ -231,7 +231,6 @@ function Home() {
           </section>
         ))}
       </div>
-      <div className="home-offscreen home-offscreen-reviews"><TripadvisorReviewsSection /></div>
       <div className="mx-auto mt-14 max-w-6xl space-y-8 px-4">
         {services.slice(1).map((s, i) => (
           <section key={s.id} id={s.id} aria-labelledby={`${s.id}-h`} className={`home-offscreen scroll-mt-6 rounded-2xl border p-5 md:p-8 ${(i + 1) % 2 ? "bg-accent/40" : "bg-card"}`}>
@@ -272,7 +271,8 @@ function Home() {
         ))}
       </div>
 
-      <section id="guides" aria-labelledby="guides-h" className="home-offscreen mx-auto mt-16 max-w-6xl scroll-mt-6 px-4">
+      <div className="home-offscreen home-offscreen-tripadvisor"><TripadvisorReviewsSection /></div>
+      <section id="guides" aria-labelledby="guides-h" className="home-offscreen mx-auto mt-12 max-w-6xl scroll-mt-6 px-4">
         <div><p className="eyebrow">Before You Travel</p><h2 id="guides-h" className="mt-2 text-3xl">Practical Israel Travel Guides</h2><p className="mt-3 max-w-2xl text-muted-foreground">Clear answers about arrival, getting connected and choosing how to get around.</p></div>
         <div className="mt-6 grid gap-5 sm:grid-cols-2 xl:grid-cols-3" data-testid="guide-row-one">{homeGuideCards.first.map((guide) => <GuideCard key={guide.id} guide={guide} headingLevel={3} />)}</div>
         <div className="mt-5 grid gap-5 sm:grid-cols-2 xl:grid-cols-3" data-testid="guide-row-two">{homeGuideCards.second.map((guide) => <GuideCard key={guide.id} guide={guide} headingLevel={3} />)}</div>
