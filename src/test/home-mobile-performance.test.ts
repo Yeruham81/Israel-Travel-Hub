@@ -59,7 +59,8 @@ describe("home mobile performance optimizations", () => {
       }
     }
     expect(section.match(/AI-generated illustration/g)).toHaveLength(5);
-    expect(home).toContain("Destination illustrations generated with AI; not photographs");
+    expect(home).not.toContain("Destination illustrations generated with AI; not photographs");
+    expect(read("src/components/Layout.tsx")).toContain("Some images on this website were generated using artificial intelligence.");
     expect(home).toContain('media="(min-width: 1280px)" srcSet={c.img.thumb}');
   });
 
