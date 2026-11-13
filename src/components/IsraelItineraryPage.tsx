@@ -76,10 +76,10 @@ export function IsraelItineraryPage({ id }: { id: ItineraryId }) {
         <span className="rounded-full bg-secondary px-3 py-2">Realistic hotel bases</span>
         <span className="rounded-full bg-secondary px-3 py-2">Public / private transport choices</span>
       </div>
+      <PageUpdated date={REVIEWED_AT} />
       <GuideHeroMedia src={photo.src} alt={photo.alt}>
         <GuidePhotoCredit photo={photo} />
       </GuideHeroMedia>
-      <PageUpdated date={REVIEWED_AT} />
       <AuthorCard />
     </header>
     <OnThisPage sections={guideSections(g)} />
