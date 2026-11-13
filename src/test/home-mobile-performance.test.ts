@@ -61,7 +61,9 @@ describe("home mobile performance optimizations", () => {
     expect(section.match(/AI-generated illustration/g)).toHaveLength(5);
     expect(home).not.toContain("Destination illustrations generated with AI; not photographs");
     expect(read("src/components/Layout.tsx")).toContain("Some images on this website were generated using artificial intelligence.");
-    expect(home).toContain('media="(min-width: 1280px)" srcSet={c.img.thumb}');
+    expect(home).not.toContain('media="(min-width: 1280px)" srcSet={c.img.thumb}');
+    expect(home).toContain('xl:aspect-[6/5]');
+    expect(home).not.toContain('xl:aspect-[4/5]');
   });
 
   it("provides a head preload for the exact LCP image variant, not every slide", () => {
@@ -136,8 +138,9 @@ describe("home mobile performance optimizations", () => {
       expect(bytes(`${base}-tile.webp`)).toBeLessThan(bytes(`${base}.webp`));
       expect(home).toContain(`${name}-tile.webp`);
     }
-    expect(home).toContain("c.img.tile ?? c.img.src");
-    expect(home).toContain("xl:aspect-[4/5]");
+    expect(home).toContain('<img src={c.img.src} alt={c.img.alt}');
+    expect(home).not.toContain("c.img.tile ?? c.img.src");
+    expect(home).toContain("xl:aspect-[6/5]");
     expect(home).toContain("min-[480px]:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5");
   });
 
