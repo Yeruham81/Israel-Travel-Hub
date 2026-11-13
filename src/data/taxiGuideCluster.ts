@@ -226,7 +226,7 @@ export const taxiGuideCluster: Record<"taxis" | "taxiFares" | "airportTaxis", Tr
     id: "taxiFares",
     title: "Taxi Fares in Israel: Meter Rates, Night Prices & Surcharges",
     description: "How much does a taxi cost in Israel? Compare official meter fares, night and Shabbat tariffs, booking surcharges, airport fees and transfer options.",
-    intro: "See what a licensed taxi costs in Israel, when higher tariffs apply and which surcharges are allowed. These regulated meter charges are not fixed quotes for individual routes.",
+    intro: "Taxi fares in Israel depend on distance, travel time and the tariff in effect. Compare the official meter rates, see when night and Shabbat prices apply, and understand which surcharges can affect your final fare.",
     answer: "A regular licensed taxi starts at ₪12.46 on the meter outside Eilat, then charges for both travel time and distance. Tariffs A, B and C depend on the day and hour; longer trips cost more per kilometre after 10 km. Booking, airport and certain road surcharges may be added.",
     topics: ["transportation", "tips"],
     updatedAt: "2026-11-13",
