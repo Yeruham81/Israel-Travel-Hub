@@ -167,7 +167,6 @@ function PhotoCard({ c }: { c: Card }) {
       <span className="absolute inset-0 bg-gradient-to-t from-navy/90 via-navy/30 to-transparent" aria-hidden />
       <span className="absolute inset-x-0 bottom-0 p-4 text-navy-foreground">
         <span className="block font-serif text-lg leading-tight">{c.label}</span>
-        <span className="mt-0.5 block text-sm opacity-90">{c.text} <span aria-hidden>→</span></span>
       </span>
     </Link>
   );
