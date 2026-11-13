@@ -230,23 +230,7 @@ const articles: Partial<Record<TravelGuideId, Upgrade>> = {
     ],
     related: ["jerusalem", "jerusalemChurches", "jerusalemDayTrips"],
   },
-  jerusalemDeadSea: {
-    sections: [
-      {
-        id: "choose-the-right-ticket",
-        title: "A beach visit, an archaeological park and a nature reserve need different plans",
-        paragraphs: [
-          "Floating at Ein Bokek is not the same experience as entering Masada National Park or hiking an open route at Ein Gedi. Check beach access, shower facilities, national-park reservations and the permitted trail before committing to a combined day. The Masada guide covers the cable car and park entrances, while the Masada and Dead Sea tours directory lets you compare organised products.",
-          "If you travel independently, pay particular attention to the last return bus and to the walking distance between the stop and your actual destination. Guided transport or a private driver may be practical when combining several stops, but clarify whether park admission and licensed guiding are included.",
-        ],
-        inlineLinks: [
-          { text: "Masada guide", to: "/travel-blog/masada/" },
-          { text: "Masada and Dead Sea tours", to: "/tours/masada-dead-sea/" },
-        ],
-      },
-    ],
-    related: ["jerusalem", "jerusalemDayTrips", "bethlehem"],
-  },
+
 };
 
 export function applyJerusalemGuideEditorial(guides: Record<TravelGuideId, TravelGuide>) {
