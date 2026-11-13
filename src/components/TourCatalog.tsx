@@ -45,7 +45,7 @@ export function OwnerTourSection({ tours, compact = false }: { tours: TourProduc
         </article>
       </li>)}
     </ul>
-    <p className="mt-5 max-w-3xl text-xs leading-relaxed text-muted-foreground">{tours.some(tour => tour.price) ? "My rates cover private transport only, with published starting prices in ILS per vehicle for up to four passengers on weekdays. Send me your travel date, pickup city, group size and preferred stops to get a personalized quote." : "My service covers private transport only. Send me your travel date, pickup city, group size and preferred stops to get a personalized quote."}</p>
+    <p className="mt-5 max-w-3xl text-xs leading-relaxed text-muted-foreground">{tours.some(tour => tour.price) ? "My rates cover private transport only, with published starting prices in ILS per vehicle for up to four passengers on weekdays. Send me your travel date, pickup city, group size and preferred stops to get a personalized quote." : "Looking for a private driver? Send me your travel date, pickup location, group size and preferred stops, and I'll provide a personalized quote."}</p>
   </section>;
 }
 
