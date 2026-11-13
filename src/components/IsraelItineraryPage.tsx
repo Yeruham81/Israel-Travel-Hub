@@ -262,7 +262,7 @@ export function IsraelItineraryPage({ id }: { id: ItineraryId }) {
         </ul>
       </div> : null}
     </section>
-    {g.alternatives.length > 0 ? <>
+    {g.alternatives.length > 0 && (
     <section id="alternatives" aria-labelledby="alternatives-h" className="mt-14 scroll-mt-28">
       <h2 id="alternatives-h" className="text-3xl">Adjust this itinerary to your trip</h2>
       <div className="mt-5 grid gap-4 md:grid-cols-2">{g.alternatives.map((item) => <article key={item.title} className="rounded-xl border bg-card p-5">
@@ -271,7 +271,7 @@ export function IsraelItineraryPage({ id }: { id: ItineraryId }) {
         {item.to && item.label && <Link to={item.to} className="mt-3 inline-flex items-center gap-1 text-sm font-semibold text-primary underline">{item.label} <ArrowRight className="h-3.5 w-3.5" aria-hidden /></Link>}
       </article>)}</div>
     </section>
-    </> : null}
+    )}
     <FaqList faqs={g.faqs} />
     {g.relatedGuides?.length ? <section id="related-guides" aria-labelledby="related-guides-h" className="mt-14 scroll-mt-28">
       <h2 id="related-guides-h" className="text-3xl">Related practical guides</h2>
