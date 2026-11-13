@@ -15,12 +15,12 @@ const targets = [
   {
     id: "deadsea-jerusalem-viator",
     url: "https://www.viator.com/Jerusalem-attractions/Dead-Sea/d921-a2919",
-    sub_id: "itt_jerusalem_to_the_dead_sea_viator",
+    sub_id: "jslm_dead_sea_viator",
   },
   {
     id: "deadsea-jerusalem-getyourguide",
     url: "https://www.getyourguide.com/dead-sea-l214?departsFrom=97",
-    sub_id: "itt_jerusalem_to_the_dead_sea_getyourguide",
+    sub_id: "jslm_dead_sea_getyourguide",
   },
 ];
 
@@ -29,7 +29,7 @@ for (const item of targets) {
   if (u.protocol !== "https:" || !["www.viator.com", "www.getyourguide.com"].includes(u.hostname)) {
     throw new Error("Unapproved source URL");
   }
-  if (!/^itt_jerusalem_to_the_dead_sea_(viator|getyourguide)$/.test(item.sub_id)) throw new Error("Invalid page SubID");
+  if (!/^jslm_dead_sea_(viator|getyourguide)$/.test(item.sub_id)) throw new Error("Invalid page SubID");
 }
 if (process.argv.includes("--validate")) {
   console.log("Validated " + targets.length + " direct destination URLs for page " + pageId);
