@@ -1126,6 +1126,7 @@ export const affiliateConfig: Record<string, { trackingUrl: string } | undefined
   "jslm-bethlehem-private-viator": { trackingUrl: "https://viator.tpm.li/cDb7VoHk" },
   // Verified Travelpayouts project 406243 deep links generated for the Jerusalem tours page (2026-11-14).
   // Each source-page-specific link has its own SubID; do not reuse on other category pages.
+  "tour-jerusalem-street-art-walk-viator@tours-jerusalem": { trackingUrl: "https://viator.tpm.li/y3qMoNFK" },
   "tour-jerusalem-old-city-walk-viator@tours-jerusalem": { trackingUrl: "https://viator.tpm.li/NfTH03Dg" },
   "tour-jerusalem-private-oldcity-walk-viator@tours-jerusalem": { trackingUrl: "https://viator.tpm.li/WFfLsF8z" },
   "tour-jerusalem-beyond-walls-viator@tours-jerusalem": { trackingUrl: "https://viator.tpm.li/UWEBkSk3" },
