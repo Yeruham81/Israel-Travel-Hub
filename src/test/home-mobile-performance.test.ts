@@ -146,14 +146,19 @@ describe("home mobile performance optimizations", () => {
 
   it("keeps homepage service images and cards within the mobile grid even if an image fails", () => {
     const home = read("src/routes/index.tsx");
-    expect(home.match(/grid min-w-0 grid-cols-1 gap-4 lg:grid-cols-2 lg:items-stretch/g)).toHaveLength(2);
+    expect(home.match(/grid min-w-0 grid-cols-1 gap-4 lg:grid-cols-2 lg:items-stretch/g)).toHaveLength(1);
     expect(home.match(/grid min-w-0 grid-cols-1 content-start gap-3/g)).toHaveLength(1);
-    expect(home.split('aspect-[16/10] h-full min-h-64 w-full min-w-0')).toHaveLength(3);
+    expect(home.split('aspect-[16/10] h-full min-h-64 w-full min-w-0')).toHaveLength(2);
     expect(home).toContain('<li className="min-w-0">');
     expect(home).toContain('grid w-full min-w-0 grid-cols-[96px_minmax(0,1fr)]');
     expect(home).toContain('aria-label={s.id === "tours" ? "Tour destinations" : "Featured attractions"}');
     expect(home).toContain('aria-label="Airport transfer destinations"');
-    expect(home).toContain("srcSet={prominent && c.img.thumb");
+    expect(home).toContain('lg:h-[280px] lg:grid-cols-2 lg:items-stretch');
+    for (const name of ["jerusalem-tower-of-david", "tel-aviv-beach-skyline", "haifa-bahai-gardens", "ein-bokek-aerial"]) {
+      const path = `public/images/home/transfer-${name}.webp`;
+      expect(bytes(path), path).toBeGreaterThan(10000);
+      expect(bytes(path), path).toBeLessThan(100000);
+    }
     expect(home).toContain('aspect-[16/9] overflow-hidden min-[480px]:aspect-auto');
     expect(home).toContain('line-clamp-2 text-sm leading-snug text-muted-foreground');
   });
