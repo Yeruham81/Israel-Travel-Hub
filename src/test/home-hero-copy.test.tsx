@@ -248,6 +248,13 @@ describe("homepage marketing copy and service sections", () => {
     for (const image of stayImages) {
       expect(image).toHaveClass("aspect-[3/2]", "xl:aspect-[6/5]", "object-cover");
     }
+    // All homepage photo links keep the scenery bright; only the title has a small opaque backing.
+    for (const photoLink of [...transferCards, ...tourTiles, ...attractionTiles, ...destinationLinks]) {
+      expect(photoLink.querySelector('[class*="bg-gradient-to-t"]')).not.toBeInTheDocument();
+      expect(Array.from(photoLink.querySelectorAll("span")).some(label =>
+        label.classList.contains("bg-background/95") && label.classList.contains("text-foreground")
+      )).toBe(true);
+    }
     expect(within(accommodationSection).getByRole("link", { name: /Explore all accommodation/i })).toHaveAttribute("href", "/accommodation/");
     expect(screen.queryByText("Where to Base Yourself")).not.toBeInTheDocument();
     expect(screen.queryByRole("heading", { name: "Popular Destinations" })).not.toBeInTheDocument();
