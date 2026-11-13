@@ -92,9 +92,6 @@ export function TelAvivHotelBrowser() {
       <ul className="mt-4 grid gap-5 sm:grid-cols-2 lg:grid-cols-3" data-testid="tel-aviv-hotels">
         {visible.map((hotel) => <TelAvivHotelTile key={hotel.id} hotel={hotel} />)}
       </ul>
-      <p className="mt-4 text-xs leading-relaxed text-muted-foreground">
-        Some booking links may earn me a commission at no extra cost to you.
-      </p>
       {areaId !== "all" && <button type="button" onClick={() => setAreaId("all")} className="mt-3 inline-flex items-center gap-2 font-semibold text-primary underline underline-offset-4"><RotateCcw className="h-4 w-4" aria-hidden /> View all Tel Aviv hotels</button>}
 
 
