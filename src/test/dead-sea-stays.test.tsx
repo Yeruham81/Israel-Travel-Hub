@@ -80,7 +80,7 @@ describe("Dead Sea destination → travel intent → booking", () => {
     expect(container.querySelectorAll("main")).toHaveLength(1);
   });
 
-  it("all property bookings preserve publisher tracking, sponsored labels and the correct analytics page", () => {
+  it("all property bookings preserve publisher tracking and the correct analytics page", () => {
     for (const guide of categories) {
       const { unmount } = render(<HotelCategoryPage guide={guide} destination={deadSeaStayGuide} />);
       for (const pick of guide.picks) {
