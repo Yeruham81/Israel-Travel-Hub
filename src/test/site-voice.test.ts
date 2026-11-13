@@ -42,6 +42,15 @@ describe("owner voice throughout the public site", () => {
     }
   });
 
+  it("shows the same concise confirmation notice in all shared contact form contexts", () => {
+    const form = source("src/components/HomeContactForm.tsx");
+    expect(form).toContain("All bookings require confirmation.");
+    expect(form).not.toContain("This is an inquiry, not a confirmed booking.");
+    expect(form).not.toContain("This is an inquiry, not a confirmed taxi booking.");
+    expect(form).not.toContain("Private transport requires a separate quote and confirmation.");
+    expect(form).not.toContain("Private transport is subject to a separate quote and confirmation.");
+  });
+
   it("keeps the affiliate disclosure in the footer, not inside editorial or provider cards", () => {
     expect(source("src/components/Layout.tsx")).toContain("Some links on this page are affiliate links, meaning I may earn a small commission");
     expect(source("src/components/Layout.tsx")).toContain("Some images on this website were generated using artificial intelligence.");
