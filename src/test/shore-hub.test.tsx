@@ -56,7 +56,7 @@ describe("Israel shore excursion hub", () => {
       screen.getByRole("link", { name: "Plan my day from Haifa" }),
     ];
     expect(topChoices[0]).toHaveClass("btn-primary");
-    expect(topChoices[1]).toHaveClass("btn-outline");
+    expect(topChoices[1]).toHaveClass("btn-primary");
     expect(bottomChoices[0]).toHaveClass("btn-light");
     expect(bottomChoices[1]).toHaveClass("btn-light");
     expect(within(screen.getByTestId("hub-header")).getByRole("img", { name: "Moshe Barak" })).toBeInTheDocument();
