@@ -38,7 +38,7 @@ export function DeadSeaTourOptions() {
           className="group flex min-w-0 flex-col overflow-hidden rounded-xl border bg-card transition-all hover:-translate-y-0.5 hover:border-primary hover:shadow-md focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
           data-testid="deadsea-bookable-tour"
         >
-          <img src={photo.src} alt={photo.alt} width={480} height={280} loading="lazy" decoding="async" className="h-32 w-full object-cover" />
+          <img src={photo.src} alt={photo.alt} width={480} height={280} loading="lazy" decoding="async" className="h-40 w-full object-cover" />
           <span className="flex flex-1 flex-col p-3.5">
             <span className="text-[11px] font-semibold uppercase tracking-wide text-primary">{tour.provider}</span>
             <span className="mt-1 text-base font-semibold leading-snug text-foreground group-hover:text-primary">{tour.title}</span>
