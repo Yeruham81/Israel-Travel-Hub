@@ -75,9 +75,13 @@ describe("Jerusalem independent day-trip planning guides", () => {
     }
     const tourSection = container.querySelector("#tours");
     expect(tourSection).not.toBeNull();
-    const ownerCard = within(tourSection as HTMLElement).getByTestId("deadsea-moshe-tour");
-    expect(ownerCard).toHaveTextContent("₪2,100");
-    expect(ownerCard).toHaveAttribute("href", "/tours/masada-dead-sea/");
+    expect(within(tourSection as HTMLElement).queryByTestId("deadsea-moshe-tour")).not.toBeInTheDocument();
+    expect(within(tourSection as HTMLElement).queryByRole("link", { name: /Moshe Barak|private Masada/i })).not.toBeInTheDocument();
+    const privateSection = container.querySelector("#private");
+    expect(privateSection).not.toBeNull();
+    const privateTourLink = within(privateSection as HTMLElement).getByRole("link", { name: "private Masada and Dead Sea tour" });
+    expect(privateTourLink).toHaveAttribute("href", "/tours/masada-dead-sea/");
+    expect(privateSection).toHaveTextContent("₪2,100 per vehicle");
     const cards = within(tourSection as HTMLElement).getAllByTestId("deadsea-bookable-tour");
     expect(cards).toHaveLength(5);
     expect(deadSeaTourCards.filter(tour => tour.provider === "Viator")).toHaveLength(3);
@@ -101,8 +105,8 @@ describe("Jerusalem independent day-trip planning guides", () => {
       expect(card).not.toHaveTextContent("affiliate link");
       expect(card).not.toHaveTextContent("Sponsored link");
     }
-    const allTourPhotos = [ownerCard, ...cards].map(card => within(card).getByRole("img").getAttribute("src"));
-    expect(new Set(allTourPhotos).size).toBe(6);
+    const allTourPhotos = cards.map(card => within(card).getByRole("img").getAttribute("src"));
+    expect(new Set(allTourPhotos).size).toBe(5);
     expect(allTourPhotos.every(photo => !stopCards.some(stop => within(stop).getByRole("img").getAttribute("src") === photo))).toBe(true);
     expect(container.querySelector("#journey-booking")).toBeNull();
     expect(screen.getAllByRole("note")).toHaveLength(6);
