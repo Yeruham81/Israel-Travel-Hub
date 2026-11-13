@@ -81,7 +81,8 @@ describe("shared sidebar navigation", () => {
     expect(trips.querySelector('a[href="/tours/bethlehem-from-jerusalem/"]')).toBeNull();
     expect(trips.querySelector(`a[href="${travelGuidePaths.bethlehem}"]`)).toBeNull();
     const guides = screen.getByRole("region", { name: "Travel guides" });
-    expect(within(guides).getByRole("link", { name: "Jerusalem to Bethlehem: travel options" })).toHaveAttribute("href", travelGuidePaths.bethlehem);
+    expect(within(guides).getByRole("link", { name: "How to get from Jerusalem to Bethlehem" })).toHaveAttribute("href", travelGuidePaths.bethlehem);
+    expect(within(guides).getByRole("link", { name: "How to get from Jerusalem to the Dead Sea" })).toHaveAttribute("href", travelGuidePaths.jerusalemDeadSea);
   });
 
   it("renders the five topic groups and marks the exact current page", async () => {
