@@ -11,10 +11,10 @@ import { travelGuides } from "@/data/travelGuides";
 import { cityStayGuides, deadSeaStayGuide } from "@/data/content";
 
 export const landingPaths = [
-  "/travel-blog/ben-gurion-airport-to-jerusalem/",
-  "/travel-blog/ben-gurion-airport-to-tel-aviv/",
-  "/travel-blog/ben-gurion-airport-to-haifa/",
-  "/travel-blog/ben-gurion-airport-to-ein-bokek/",
+  "/airport-transfers/ben-gurion-airport-to-jerusalem/",
+  "/airport-transfers/ben-gurion-airport-to-tel-aviv/",
+  "/airport-transfers/ben-gurion-airport-to-haifa/",
+  "/airport-transfers/ben-gurion-airport-to-ein-bokek/",
   "/travel-blog/from-ben-gurion-airport-on-shabbat/",
   "/travel-blog/getting-around-israel/",
   "/travel-blog/taxis-in-israel/",
