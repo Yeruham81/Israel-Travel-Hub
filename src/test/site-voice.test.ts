@@ -42,18 +42,24 @@ describe("owner voice throughout the public site", () => {
     }
   });
 
-  it("uses direct ownership in affiliate, contact and service copy", () => {
+  it("keeps the affiliate disclosure in the footer, not inside editorial or provider cards", () => {
+    expect(source("src/components/Layout.tsx")).toContain("Some links on this page are affiliate links, meaning I may earn a small commission");
     for (const file of [
-      "src/components/Layout.tsx",
       "src/components/StayGuideParts.tsx",
       "src/components/AirportBookingPlatforms.tsx",
-      
       "src/components/TravelGuide.tsx",
+      "src/components/NeighborhoodStayPage.tsx",
+      "src/components/Guide.tsx",
+      "src/components/TourCatalog.tsx",
+      "src/components/CityStayHub.tsx",
+      "src/components/StayHotelCard.tsx",
+      "src/components/ShoreServiceCatalog.tsx",
+      "src/components/JerusalemJourneyPlanner.tsx",
+      "src/components/JerusalemPartnerOffers.tsx",
+      "src/routes/about-moshe-barak.tsx",
     ]) {
-      expect(source(file), file).toMatch(/earn me a commission/);
-      expect(source(file), file).not.toMatch(/earn us a commission/);
+      expect(source(file), file).not.toMatch(/Sponsored link|Affiliate link|earn me a commission|sponsored booking link/i);
     }
-    expect(source("src/components/NeighborhoodStayPage.tsx")).toContain("I may earn a commission");
     expect(source("src/components/HomeContactForm.tsx")).toContain("Tell me how I can help");
     expect(source("src/routes/private-driver.tsx")).toContain("Tell me where you want to go");
     expect(source("src/routes/transfers.index.tsx")).toContain("Why arrange your airport pickup with me?");
