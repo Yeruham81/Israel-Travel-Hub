@@ -102,14 +102,42 @@ describe("homepage marketing copy and service sections", () => {
     expect(within(toursSection).getAllByRole("img")).toHaveLength(7); // Guide photo + six destinations
     expect(toursSection.querySelector('[data-testid="service-layout-tours"]')).toHaveClass("lg:grid-cols-[minmax(0,2fr)_minmax(0,3fr)]");
 
-    // On desktop the ship photo and the two port cards occupy matching-height columns.
+    // Six featured attraction destinations use the same image-tile layout as the tour cards.
+    const attractionsSection = document.getElementById("attractions")!;
+    const attractionsList = within(attractionsSection).getByRole("list", { name: "Featured attractions" });
+    const attractionTiles = within(attractionsList).getAllByRole("link");
+    expect(attractionTiles).toHaveLength(6);
+    expect(attractionTiles.map(tile => tile.getAttribute("href"))).toEqual([
+      "/travel-blog/rosh-hanikra/",
+      "/travel-blog/mitzpe-ramon-crater/",
+      "/travel-blog/capernaum/",
+      "/travel-blog/mount-tabor/",
+      "/travel-blog/mount-of-olives/",
+      "/travel-blog/eilat/",
+    ]);
+    expect(attractionTiles.map(tile => tile.textContent?.trim())).toEqual([
+      "Rosh Hanikra",
+      "Ramon Crater",
+      "Capernaum",
+      "Mount Tabor",
+      "Mount of Olives",
+      "Eilat",
+    ]);
+    for (const tile of attractionTiles) {
+      expect(tile).toHaveClass("group", "relative");
+      expect(within(tile).getByRole("img")).toHaveAttribute("loading", "lazy");
+    }
+    expect(attractionsSection.querySelector('[data-testid="service-layout-attractions"]')).toHaveClass("lg:grid-cols-[minmax(0,2fr)_minmax(0,3fr)]");
+    expect(within(attractionsSection).getAllByRole("img")).toHaveLength(7);
+
+    // Shore-port images keep a landscape ratio, and both cards align with the shorter ship photo on desktop.
     const shoreSection = document.getElementById("shore-excursions")!;
     const shoreLayout = shoreSection.querySelector('[data-testid="service-layout-shore-excursions"]')!;
-    expect(shoreLayout).toHaveClass("lg:h-[390px]", "lg:items-stretch");
+    expect(shoreLayout).toHaveClass("lg:h-[280px]", "lg:grid-cols-2", "lg:items-stretch");
     const shorePhoto = shoreLayout.querySelector(":scope > img")!;
-    expect(shorePhoto).toHaveClass("lg:h-full", "object-cover");
+    expect(shorePhoto).toHaveClass("aspect-[16/9]", "lg:h-full", "object-cover");
     const portList = within(shoreSection).getByRole("list", { name: "Shore excursions by port" });
-    expect(portList).toHaveClass("lg:h-full", "lg:grid-rows-2");
+    expect(portList).toHaveClass("gap-3", "lg:h-full", "lg:grid-rows-2");
     const portLinks = within(portList).getAllByRole("link");
     expect(portLinks).toHaveLength(2);
     expect(portLinks.map(link => link.getAttribute("href"))).toEqual([
@@ -119,11 +147,14 @@ describe("homepage marketing copy and service sections", () => {
       expect.stringContaining("Explore Ashdod excursions"),
       expect.stringContaining("Explore Haifa excursions"),
     ]);
-    expect(portLinks[0]).toHaveTextContent("Jerusalem’s Old City");
-    expect(portLinks[1]).toHaveTextContent("Nazareth and the Sea of Galilee");
+    expect(portLinks[0]).toHaveTextContent("Tel Aviv–Jaffa, Masada or the Dead Sea");
+    expect(portLinks[1]).toHaveTextContent("Akko, Nazareth and the Galilee");
     for (const portLink of portLinks) {
       expect(portLink).toHaveClass("h-full");
-      expect(within(portLink).getByRole("img")).toHaveClass("h-full", "object-cover");
+      const photo = within(portLink).getByRole("img");
+      expect(photo).toHaveClass("h-full", "object-cover");
+      expect(photo.parentElement).toHaveClass("aspect-[16/9]", "min-[480px]:aspect-auto");
+      expect(portLink.querySelector(".line-clamp-2")).toBeInTheDocument();
       expect(portLink.textContent).not.toContain("→");
     }
     expect(within(shoreSection).getAllByRole("img")).toHaveLength(3);
