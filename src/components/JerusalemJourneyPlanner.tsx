@@ -3,6 +3,10 @@ import type { ReactNode } from "react";
 import { ArrowRight, ExternalLink, Bus, CarFront, MapPinned, Route, Users } from "lucide-react";
 import { affiliateConfig, tourBookingOffers, tourProducts } from "@/data/registry";
 import { recordOutboundClick, relFor } from "@/lib/outbound";
+import masadaAerial from "@/assets/guides/dead-sea-excursions/masada-aerial.webp";
+import einGediWaterfall from "@/assets/guides/dead-sea-excursions/ein-gedi-waterfall.webp";
+import qumranCaves from "@/assets/guides/dead-sea-excursions/qumran-caves.webp";
+import qasrAlYahud from "@/assets/guides/dead-sea-excursions/qasr-al-yahud.webp";
 
 /** Dedicated decision aids for the Jerusalem departures; only provider-approved URLs
  * configured in affiliateConfig count as referral links. The supplier URLs below are
@@ -62,6 +66,13 @@ const routes = {
   },
 } as const;
 
+const deadSeaStopPhotos: Record<string, { src: string; alt: string }> = {
+  Masada: { src: masadaAerial, alt: "Aerial photograph of the Masada fortress above the Dead Sea" },
+  "Ein Gedi": { src: einGediWaterfall, alt: "Waterfall at Ein Gedi Nature Reserve" },
+  Qumran: { src: qumranCaves, alt: "Rock formations and caves in the Qumran area" },
+  "Qasr al-Yahud": { src: qasrAlYahud, alt: "Qasr al-Yahud baptismal site on the Jordan River" },
+};
+
 function RegularExternal({ url, children, className = "" }: { url: string; children: ReactNode; className?: string }) {
   return <a href={url} target="_blank" rel="noopener noreferrer" className={className}>{children}<ExternalLink className="h-3.5 w-3.5 shrink-0" aria-hidden /><span className="sr-only"> (opens in a new tab)</span></a>;
 }
@@ -75,11 +86,28 @@ export function JerusalemJourneyOptions({ id }: { id: string }) {
     <h2 id="journey-destinations-h" className="text-2xl font-semibold">Add a stop to your Dead Sea day</h2>
     <p className="mt-2 max-w-3xl leading-relaxed text-muted-foreground">Masada, Ein Gedi, Qumran and Qasr al-Yahud can each add something different to your day. Choose one or two that suit your route; a group tour or private driver makes multi-stop visits easier than public buses.</p>
     <div className="mt-4 grid gap-3 sm:grid-cols-2" data-testid="journey-stop-cards">
-      {route.details.map(item => <article key={item.title} className="rounded-xl border bg-card p-4">
-        <h3 className="text-lg font-semibold">{item.title}</h3>
-        <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{item.description}</p>
-        <RegularExternal url={item.href} className="mt-3 inline-flex items-center gap-1.5 text-sm font-semibold text-primary underline underline-offset-4">{item.link}</RegularExternal>
-      </article>)}
+      {route.details.map(item => {
+        const photo = deadSeaStopPhotos[item.title];
+        return <a
+          key={item.title}
+          href={item.href}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="group flex min-w-0 overflow-hidden rounded-xl border bg-card transition-all hover:-translate-y-0.5 hover:border-primary hover:shadow-md focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+          data-testid="deadsea-attraction-card"
+        >
+          {photo && <img src={photo.src} alt={photo.alt} width={180} height={180} loading="lazy" decoding="async" className="h-auto min-h-40 w-28 shrink-0 object-cover sm:w-32" />}
+          <span className="flex min-w-0 flex-1 flex-col justify-between gap-2 p-3.5">
+            <span>
+              <span className="text-[11px] font-semibold uppercase tracking-wide text-primary">{item.tag}</span>
+              <span className="mt-0.5 block text-lg font-semibold text-foreground group-hover:text-primary">{item.title}</span>
+              <span className="mt-1.5 block text-sm leading-snug text-muted-foreground">{item.description}</span>
+            </span>
+            <span className="inline-flex items-center gap-1.5 text-sm font-semibold text-primary">{item.link}<ExternalLink className="h-3.5 w-3.5" aria-hidden="true" /></span>
+          </span>
+          <span className="sr-only"> (opens in a new tab)</span>
+        </a>;
+      })}
     </div>
   </section>;
   return <>
