@@ -16,7 +16,7 @@ export type DeadSeaTourCard = {
   title: string;
   subtitle: string;
   duration: string;
-  fromUsd?: number;
+  fromUsd: number;
   rating: number;
   reviewCount: number;
   checkedAt: string;
