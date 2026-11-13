@@ -5,6 +5,6 @@ import { parseAirportTransferSearch } from "@/lib/transfer-quote";
 export const Route = createFileRoute("/transfers/ben-gurion-airport")({
   validateSearch: parseAirportTransferSearch,
   beforeLoad: ({ search, location }) => {
-    throw redirect({ to: "/transfers/", search: parseAirportTransferSearch(search), hash: location.hash, replace: true, statusCode: 301 });
+    throw redirect({ to: "/airport-transfers/", search: parseAirportTransferSearch(search), hash: location.hash, replace: true, statusCode: 301 });
   },
 });
