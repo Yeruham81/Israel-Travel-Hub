@@ -8,7 +8,7 @@ import { routeTree } from "@/routeTree.gen";
 
 afterEach(cleanup);
 
-describe("homepage marketing copy and top navigation", () => {
+describe("homepage marketing copy and service sections", () => {
   it("shows a welcoming hero introduction without redundant marketing buttons", () => {
     const { container } = render(<HomeHero />);
     expect(screen.getByRole("heading", { level: 1, name: "Discover Israel, Travel Smarter" })).toBeInTheDocument();
@@ -27,7 +27,7 @@ describe("homepage marketing copy and top navigation", () => {
     expect(screen.getByRole("region", { name: "Places in Israel" })).toBeInTheDocument();
     expect(screen.getByRole("button", { name: "Next place" })).toBeInTheDocument();
   });
-  it("labels the homepage Tours shortcut as Tours & Day Trips", async () => {
+  it("shows service sections without the redundant shortcut navigation under the hero", async () => {
     const router = createRouter({
       routeTree, context: { queryClient: new QueryClient() },
       history: createMemoryHistory({ initialEntries: ["/"] }), trailingSlash: "always",
@@ -35,11 +35,11 @@ describe("homepage marketing copy and top navigation", () => {
     await router.load();
     const View = HomeRoute.options.component!;
     render(<RouterContextProvider router={router}><View /></RouterContextProvider>);
-    const nav = screen.getByRole("navigation", { name: "Services" });
-    expect(within(nav).getAllByRole("link").map(link => link.textContent)).toEqual([
-      "Airport Transfers", "Tours & Day Trips", "Shore Excursions", "Accommodation", "Attractions", "Travel Guides",
-    ]);
-    expect(within(nav).getByRole("link", { name: "Tours & Day Trips" })).toHaveAttribute("href", "#tours");
+    expect(screen.queryByRole("navigation", { name: "Services" })).not.toBeInTheDocument();
+    // The first section follows the hero with compact spacing, without a second menu.
+    const firstSection = document.getElementById("transfers")!;
+    expect(firstSection).toBeInTheDocument();
+    expect(firstSection.parentElement).toHaveClass("mt-8");
     const sectionHeadings = [
       "Airport Transfers",
       "Tours & Day Trips",
