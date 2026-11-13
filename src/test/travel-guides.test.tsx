@@ -51,7 +51,7 @@ describe("migrated practical guides", () => {
     expect(screen.getByRole("heading", { level: 1 })).toHaveTextContent(guide.title);
     expect(screen.getByRole("region", { name: "Quick answer" })).toHaveTextContent(guide.answer);
     if (id === "jerusalemDeadSea") {
-      expect(screen.getByTestId("journey-option-cards").children).toHaveLength(4);
+      expect(screen.queryByTestId("journey-option-cards")).not.toBeInTheDocument();
       expect(screen.getByTestId("journey-stop-cards").children).toHaveLength(4);
       expect(screen.queryByRole("table", { name: guide.comparison.caption })).not.toBeInTheDocument();
     } else {
@@ -772,7 +772,7 @@ describe("migrated practical guides", () => {
     expect(travelGuides.baptism.reviewNote).toMatch(/different hour sets|differing hour|different hours/i);
     expect(travelGuides.baptism.sections.find((section) => section.id === "qasr-visit")!.photo?.alt).toContain("Qasr el-Yahud");
     expect(travelGuides.jerusalemChurches.comparison.rows.map((row) => row[0])).toEqual(["Old City", "Mount of Olives / Kidron", "Mount Zion", "Ein Karem"]);
-    expect(travelGuides.jerusalemDeadSea.sections[0]!.paragraphs.join(" ")).toContain("Tamar Regional Council maintains a free public beach");
+    expect(travelGuides.jerusalemDeadSea.sections.find(section => section.id === "day-plan")!.paragraphs.join(" ")).toContain("Tamar Regional Council lists free access");
     expect(travelGuides.jerusalemShopping.sections.find((section) => section.id === "crafts-and-practicalities")!.paragraphs.join(" ")).toContain("not independently confirmed");
     expect(JSON.stringify(travelGuides.jerusalemChurches)).not.toMatch(/10-20 ILS|50-80 ILS|open daily.*8:00/i);
     expect(travelGuides.jerusalemDayTrips.sections.find((section) => section.id === "tel-aviv-jaffa")).toBeTruthy();

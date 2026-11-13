@@ -69,6 +69,19 @@ function RegularExternal({ url, children, className = "" }: { url: string; child
 export function JerusalemJourneyOptions({ id }: { id: string }) {
   if (!isJourney(id)) return null;
   const route = routes[id];
+  // The Dead Sea guide needs the four actual destinations, not a second set of
+  // transport-option cards that repeats the article immediately below.
+  if (id === "jerusalemDeadSea") return <section id="journey-destinations" aria-labelledby="journey-destinations-h" className="mt-9 scroll-mt-28">
+    <h2 id="journey-destinations-h" className="text-2xl font-semibold">Choose your Dead Sea destination</h2>
+    <p className="mt-2 max-w-3xl leading-relaxed text-muted-foreground">For floating, choose a managed beach such as Ein Bokek. Masada and Ein Gedi are separate visits with different entrances and tickets.</p>
+    <div className="mt-4 grid gap-3 sm:grid-cols-2" data-testid="journey-stop-cards">
+      {route.details.map(item => <article key={item.title} className="rounded-xl border bg-card p-4">
+        <h3 className="text-lg font-semibold">{item.title}</h3>
+        <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{item.description}</p>
+        <RegularExternal url={item.href} className="mt-3 inline-flex items-center gap-1.5 text-sm font-semibold text-primary underline underline-offset-4">{item.link}</RegularExternal>
+      </article>)}
+    </div>
+  </section>;
   return <>
     <section id="journey-options" aria-labelledby="journey-options-h" className="mt-10 scroll-mt-28">
       <h2 id="journey-options-h" className="text-3xl">{route.heading}</h2>
@@ -98,6 +111,36 @@ export function JerusalemJourneyOptions({ id }: { id: string }) {
   </>;
 }
 
+/** Source-page-level attribution for approved Travelpayouts tour links.
+ * U017 is the Jerusalem-to-Dead-Sea editorial page ID; these are supplier
+ * category pages, not promises of particular products, fares or availability.
+ */
+const deadSeaPartnerOptions = [
+  {
+    id: "deadsea-jerusalem-viator",
+    label: "Viator",
+    title: "Browse Dead Sea day trips departing Jerusalem",
+    description: "Compare published Jerusalem departures, group sizes and stops on Viator.",
+    subId: "itt_u017_jerusalem_dead_sea_viator",
+  },
+  {
+    id: "deadsea-jerusalem-getyourguide",
+    label: "GetYourGuide",
+    title: "Compare Dead Sea tours on GetYourGuide",
+    description: "Browse Dead Sea and Masada outings and confirm your Jerusalem pickup before booking.",
+    subId: "itt_u017_jerusalem_dead_sea_gyg",
+  },
+] as const;
+
+function attributedDeadSeaTourLink(id: string, subId: string): string | null {
+  const approved = affiliateConfig[id]?.trackingUrl;
+  if (!approved) return null;
+  const url = new URL(approved);
+  if (url.protocol !== "https:" || !["viator.tpm.li", "getyourguide.tpm.li"].includes(url.hostname)) return null;
+  url.searchParams.set("sub_id", subId);
+  return url.toString();
+}
+
 const pickedTours = {
   bethlehem: ["jerusalem-bethlehem-private", "bethlehem-jericho-jordan"],
   jerusalemDeadSea: [] as string[],
@@ -115,10 +158,10 @@ export function JerusalemJourneyBooking({ id }: { id: string }) {
     return { product, offer, url: tracking || offer.publicUrl, sponsored: Boolean(tracking) };
   }).filter((item): item is NonNullable<typeof item> => item !== null);
   return <section id="journey-booking" aria-labelledby="journey-booking-h" className="mt-12 scroll-mt-28">
-    <h2 id="journey-booking-h" className="text-3xl">{isBethlehem ? "Bethlehem tours that start in Jerusalem" : "Dead Sea excursions and private transport"}</h2>
+    <h2 id="journey-booking-h" className="text-3xl">{isBethlehem ? "Bethlehem tours that start in Jerusalem" : "Book a Dead Sea tour or private ride"}</h2>
     <p className="mt-2 max-w-3xl text-sm leading-relaxed text-muted-foreground">{isBethlehem
       ? "These are different itineraries, not interchangeable transfers to the Church of the Nativity. Confirm the crossing arrangements, site access and exact Jerusalem departure point."
-      : "A private car and driver can be arranged for a Masada and Dead Sea day from Jerusalem. For group tours, choose a product that actually departs from Jerusalem."}</p>
+      : "A private car and driver can be arranged for a Masada and Dead Sea day from Jerusalem. For group tours, compare the Jerusalem departure and the full inclusions before choosing a supplier."}</p>
     <div className="mt-5 grid gap-4 md:grid-cols-2">
       {!isBethlehem && <article className="flex flex-col rounded-2xl border border-primary/25 bg-card p-5" data-testid="journey-owner-trip">
         <p className="text-xs font-semibold text-primary">Moshe Barak · private transport</p>
@@ -138,12 +181,27 @@ export function JerusalemJourneyBooking({ id }: { id: string }) {
         </a>
         {sponsored && <p className="mt-2 text-xs text-muted-foreground">Sponsored link; I may earn a commission at no extra cost to you.</p>}
       </article>)}
-      <article className="flex flex-col rounded-2xl border bg-secondary/30 p-5">
+      {!isBethlehem && deadSeaPartnerOptions.map(option => {
+        const url = attributedDeadSeaTourLink(option.id, option.subId);
+        if (!url) return null;
+        return <article key={option.id} className="flex flex-col rounded-2xl border bg-card p-5" data-testid="deadsea-affiliate-tour-card">
+          <p className="text-xs font-semibold text-primary">{option.label} · independent operator listings</p>
+          <h3 className="mt-2 text-xl font-semibold">{option.title}</h3>
+          <p className="mt-2 flex-1 text-sm leading-relaxed text-muted-foreground">{option.description} Check current departure city, dates, what's included and cancellation terms.</p>
+          <a href={url} target="_blank" rel={relFor(true)}
+             onClick={() => recordOutboundClick({ pageId: "journey-jerusalemDeadSea-U017", productId: option.id, offerId: option.id })}
+             className="mt-4 inline-flex w-fit items-center gap-2 text-sm font-semibold text-primary underline underline-offset-4">
+            Browse on {option.label} <ExternalLink className="h-4 w-4" aria-hidden /><span className="sr-only"> (opens in a new tab)</span>
+          </a>
+          <p className="mt-2 text-xs text-muted-foreground">Sponsored link; I may earn a commission at no extra cost to you.</p>
+        </article>;
+      })}
+      {isBethlehem && <article className="flex flex-col rounded-2xl border bg-secondary/30 p-5">
         <p className="text-xs font-semibold text-primary">Other options</p>
         <h3 className="mt-2 text-xl font-semibold">{isBethlehem ? "More Bethlehem, Jericho & Jordan River tours" : "More Masada & Dead Sea tours"}</h3>
         <p className="mt-2 flex-1 text-sm leading-relaxed text-muted-foreground">Browse the tour catalogue and choose the departure city, actual stops and tour format before following a supplier link.</p>
         <Link to={isBethlehem ? "/tours/bethlehem-jericho-jordan-river/" : "/tours/masada-dead-sea/"} className="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-primary underline underline-offset-4">Compare tours <ArrowRight className="h-4 w-4" aria-hidden /></Link>
-      </article>
+      </article>}
     </div>
     <p className="mt-3 text-xs leading-relaxed text-muted-foreground">The external tour links lead to individual supplier listings. They are not live price or availability quotes. The booking partner's final screen controls availability, inclusions and cancellation. I only use affiliate attribution when an approved tracking link is configured.</p>
   </section>;
