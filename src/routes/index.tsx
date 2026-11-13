@@ -108,7 +108,7 @@ export const services: Service[] = [
   },
   {
     id: "tours", eyebrow: "Tours & Day Trips", tagline: "See the Best of Israel in a Day", title: "Tours & Day Trips",
-    text: "How to read an itinerary, what pickup and guide language mean in practice, and when a private driver fits better.",
+    text: "Explore Israel’s top destinations with guided tours and day trips, and find the experiences that best match your interests and travel style.",
     feature: { src: guidedTour, alt: "Illustrative small group on a guided walk through old stone streets" },
     cards: [
       { label: "Bethlehem, Jericho & Jordan River", text: "Compare guided day trips", to: "/tours/bethlehem-jericho-jordan-river/", img: IMG.bethlehem },
@@ -134,7 +134,7 @@ export const services: Service[] = [
   },
   {
     id: "attractions", eyebrow: "Attractions & Experiences", tagline: "Discover Israel’s Must-See Places", title: "Attractions & Experiences",
-    text: "Desert fortresses, seaside ruins and holy places — what to expect and how long to allow.",
+    text: "Discover Israel’s most memorable attractions, from ancient landmarks and historic cities to breathtaking natural wonders.",
     feature: { src: caesareaDusk, alt: "Ancient ruins on the shore at Caesarea at dusk" },
     cards: [
       { label: "Masada", text: "Cable car or the hiking paths", to: "/travel-blog/masada/", img: { src: masadaCableCar, alt: "Cable car approaching Masada" } },
@@ -271,7 +271,7 @@ function Home() {
 
       <div className="home-offscreen home-offscreen-tripadvisor"><TripadvisorReviewsSection /></div>
       <section id="guides" aria-labelledby="guides-h" className="home-offscreen mx-auto mt-12 max-w-6xl scroll-mt-6 px-4">
-        <div><p className="eyebrow">Before You Travel</p><h2 id="guides-h" className="mt-2 text-3xl">Practical Israel Travel Guides</h2><p className="mt-3 max-w-2xl text-muted-foreground">Clear answers about arrival, getting connected and choosing how to get around.</p></div>
+        <div><p className="eyebrow">Before You Travel</p><h2 id="guides-h" className="mt-2 text-3xl">Practical Israel Travel Guides</h2><p className="mt-3 max-w-2xl text-muted-foreground">Plan your trip with practical local advice on transportation, travel essentials and exploring Israel with confidence.</p></div>
         <div className="mt-6 grid gap-5 sm:grid-cols-2 xl:grid-cols-3" data-testid="guide-row-one">{homeGuideCards.first.map((guide) => <GuideCard key={guide.id} guide={guide} headingLevel={3} />)}</div>
         <div className="mt-5 grid gap-5 sm:grid-cols-2 xl:grid-cols-3" data-testid="guide-row-two">{homeGuideCards.second.map((guide) => <GuideCard key={guide.id} guide={guide} headingLevel={3} />)}</div>
         <div className="mt-7 flex justify-center"><Link to="/travel-blog/" className="btn btn-primary">Browse all guides →</Link></div>
