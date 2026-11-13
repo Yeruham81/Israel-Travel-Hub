@@ -13,7 +13,7 @@ export function OwnerTourSection({ tours, compact = false }: { tours: TourProduc
   return <section id="my-private-days" aria-labelledby="my-private-days-h" data-section="moshe-private-tours" className="mt-10 scroll-mt-24">
     <p className="text-xs font-bold uppercase tracking-widest text-primary">Personally arranged with Moshe Barak</p>
     <h2 id="my-private-days-h" className="mt-2 text-3xl font-semibold">My private day trips</h2>
-    <p className="mt-3 max-w-3xl text-sm leading-relaxed text-muted-foreground">Choose a private car-and-driver itinerary, then send me your date, pickup city and party details for a tailored quote. Licensed guiding can be requested separately.</p>
+    <p className="mt-3 max-w-3xl text-sm leading-relaxed text-muted-foreground">Choose a private car and driver for your preferred route, with pickup and return arranged around your plans.</p>
     <ul className={compact ? "mt-4 grid gap-3" : "mt-5 grid gap-5 sm:grid-cols-2"} aria-label="My private day trips">
       {tours.map(tour => compact ? <li key={tour.id} id={tour.id} data-product-id={tour.id} data-operator-id="moshe-barak" data-testid="owner-tour-card" className="flex min-w-0 gap-3 rounded-xl border bg-card p-3 sm:gap-4">
         <img src={tourPhotos[tour.id]!.src} alt={tourPhotos[tour.id]!.alt} width={140} height={180} loading="lazy" decoding="async" className="h-40 w-[96px] shrink-0 rounded-lg object-cover sm:h-44 sm:w-[124px]" />
@@ -21,7 +21,7 @@ export function OwnerTourSection({ tours, compact = false }: { tours: TourProduc
           <span className="text-xs font-semibold text-primary">Personally arranged with Moshe Barak</span>
           <h3 className="mt-1.5 text-base font-semibold leading-snug">{tour.title}</h3>
           <p className="mt-1 text-sm leading-relaxed text-muted-foreground">{tour.summary}</p>
-          <p className="mt-2 text-xs text-muted-foreground">{tour.duration} · Private car &amp; driver · Guiding separate</p>
+          <p className="mt-2 text-xs text-muted-foreground">{tour.duration} · Private car &amp; driver · Transport only</p>
           <div className="mt-auto flex flex-wrap items-center justify-between gap-2 pt-3">
             <span className="text-xs font-medium">Personal quote</span>
             <Link to="/private-driver/" search={{ tour: tour.id }} hash="request-quote" className="inline-flex min-h-9 items-center rounded-lg bg-primary px-3 py-2 text-xs font-semibold text-primary-foreground">Request a quote</Link>
@@ -45,7 +45,7 @@ export function OwnerTourSection({ tours, compact = false }: { tours: TourProduc
         </article>
       </li>)}
     </ul>
-    <p className="mt-5 max-w-3xl text-xs leading-relaxed text-muted-foreground">{tours.some(tour => tour.price) ? "My published starting rates are in ILS per vehicle for up to four passengers on weekdays, covering transportation only. Licensed guiding, admission fees, parking, tolls, meals and tips are extra. Extra charges may apply for weekends, holidays or additional hours. I'll confirm the itinerary, availability and full price before booking." : "My quotes cover the agreed private transport service. Guiding, admissions, meals and any extra charges are confirmed separately in writing. Send me your date, pickup city, party size and preferred stops; booking follows my confirmation."}</p>
+    <p className="mt-5 max-w-3xl text-xs leading-relaxed text-muted-foreground">{tours.some(tour => tour.price) ? "My rates cover private transport only, with published starting prices in ILS per vehicle for up to four passengers on weekdays. Send me your travel date, pickup city, group size and preferred stops to get a personalized quote." : "My service covers private transport only. Send me your travel date, pickup city, group size and preferred stops to get a personalized quote."}</p>
   </section>;
 }
 
