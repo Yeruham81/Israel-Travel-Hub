@@ -41,6 +41,7 @@ import haifaTile from "@/assets/haifa/panorama-tile.webp";
 import deadSeaTile from "@/assets/dead-sea/beach-tile.webp";
 import { pageMeta } from "@/lib/site";
 import { tourCategoryPaths } from "@/data/tours";
+import bethlehemTourPhoto from "@/assets/guides/2026-10/jerusalem-to-bethlehem.webp";
 import { photoCredits } from "@/data/photoCredits";
 import { GuideCard } from "@/components/TravelGuide";
 import { guideDirectory } from "@/data/travelGuides";
@@ -115,7 +116,7 @@ export const services: Service[] = [
       { label: "Jerusalem", to: tourCategoryPaths.jerusalem, img: { src: "/images/attractions/jerusalem.webp", alt: "Jerusalem’s Old City and the Dome of the Rock" } },
       { label: "Tel Aviv & Jaffa", to: tourCategoryPaths["tel-aviv-jaffa"], img: { src: "/images/attractions/tel-aviv-jaffa.webp", alt: "Fishing boats and old stone buildings around Jaffa harbour" } },
       { label: "Masada & Dead Sea", to: tourCategoryPaths["masada-dead-sea"], img: { src: "/images/tours/masada-ruins.webp", alt: "Ancient stone ruins on the Masada plateau" } },
-      { label: "Bethlehem & Jericho", to: tourCategoryPaths["bethlehem-jericho"], img: { src: "/images/home/bethlehem-alternative.webp", alt: "Manger Square and the Church of the Nativity in Bethlehem" } },
+      { label: "Bethlehem & Jericho", to: tourCategoryPaths["bethlehem-jericho"], img: { src: bethlehemTourPhoto, alt: "Church of the Nativity and Manger Square in Bethlehem" } },
       { label: "Nazareth & Galilee", to: tourCategoryPaths["nazareth-galilee"], img: { src: "/images/attractions/sea-of-galilee.webp", alt: "The Sea of Galilee and green hills overlooking the lake" } },
       { label: "Caesarea, Haifa & Acre", to: tourCategoryPaths["northern-coast"], img: { src: "/images/attractions/haifa-coast.webp", alt: "Haifa’s cityscape and Mediterranean coastline" } },
     ],
