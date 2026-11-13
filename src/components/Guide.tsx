@@ -280,7 +280,6 @@ export function ProviderCard({ link: l, pageId }: { link: ProviderLink; pageId: 
       <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">{relationshipLabel[l.relationship]} · {l.providerName}</p>
       <h3 className="mt-1 text-2xl">{l.title}</h3>
       {l.relationship === "publisher_operator" && <p className="mt-1 text-sm font-medium text-warning">Disclosure: operated by the publisher's local transport business.</p>}
-      {l.isAffiliate && <p className="mt-1 text-xs font-semibold">Sponsored link</p>}
       <p className="mt-2 text-muted-foreground">{l.summary}</p>
       <p className="mt-3 text-sm"><span className="font-medium">Confirm on the offer:</span> {l.confirm.join(", ")}.</p>
       <div className="mt-4 flex flex-wrap items-center gap-3">
