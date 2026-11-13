@@ -2,7 +2,7 @@ import { readFileSync } from "node:fs";
 import { resolve } from "node:path";
 import { cleanup, render, screen, within } from "@testing-library/react";
 import { afterEach, describe, expect, it } from "vitest";
-import { GuideHeroLayout, GuideHeroMedia } from "@/components/GuideHeroMedia";
+import { GuideHeroLayout, GuideHeroMedia, introFitsFourLines } from "@/components/GuideHeroMedia";
 
 const source = (path: string) => readFileSync(resolve(process.cwd(), path), "utf8");
 
@@ -17,7 +17,7 @@ describe("shared guide hero layout", () => {
         </GuideHeroMedia>
       }>
         <h1>Travel to Jerusalem</h1>
-        <p>A practical guide for visitors.</p>
+        <p data-guide-intro>A practical guide for visitors.</p>
       </GuideHeroLayout>
     );
     const layout = screen.getByTestId("guide-hero-layout");
@@ -33,6 +33,20 @@ describe("shared guide hero layout", () => {
     expect(photo).toHaveAttribute("fetchpriority", "high");
     expect(photo).toHaveClass("aspect-[16/9]", "lg:aspect-[4/3]", "max-h-[300px]", "lg:max-h-[260px]", "w-full", "object-cover");
     expect(screen.getByTestId("guide-hero-media")).toHaveClass("max-w-2xl", "lg:max-w-none");
+  });
+
+  it("enlarges the photo only when the complete introduction is four lines or fewer", () => {
+    expect(introFitsFourLines(100, 25)).toBe(true);
+    expect(introFitsFourLines(101, 25)).toBe(true); // fractional-pixel tolerance
+    expect(introFitsFourLines(102, 25)).toBe(false);
+    expect(introFitsFourLines(125, 25)).toBe(false);
+    expect(introFitsFourLines(0, 25)).toBe(false);
+    expect(introFitsFourLines(80, Number.NaN)).toBe(false);
+    const css = source("src/styles.css");
+    expect(css).toContain(".guide-hero-layout.guide-hero-photo-expanded");
+    expect(css).toContain("minmax(0, 1.72fr) minmax(0, 1fr)");
+    expect(source("src/components/GuideHeroMedia.tsx")).toContain('layout.classList.toggle(');
+    expect(source("src/components/GuideHeroMedia.tsx")).not.toContain("line-clamp");
   });
 
   it("allows image-free guides to retain full headline width", () => {
@@ -63,6 +77,7 @@ describe("shared guide hero layout", () => {
       expect(copy, path).toContain("<GuideHeroLayout");
       expect(copy, path).toContain("<GuideHeroMedia");
       expect(copy, path).toContain("guide-page-title");
+      expect(copy, path).toContain("data-guide-intro");
     }
   });
 
