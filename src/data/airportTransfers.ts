@@ -74,7 +74,7 @@ export const airportRelatedLinks = [
   {
     label: "Taxis in Israel", to: travelGuidePaths.taxis,
     description: "Make everyday journeys easier after your airport ride. Learn about taxi apps, payment, receipts and the details to confirm before setting off.",
-    photo: { src: "/images/guides/taxi-in-tel-aviv.webp", alt: "Licensed taxis in Tel Aviv" },
+    photo: { src: "/images/travel-blog/taxi-in-tel-aviv.webp", alt: "Licensed taxis in Tel Aviv" },
   },
   {
     label: "Where to stay in Jerusalem", to: "/travel-blog/where-to-stay-in-jerusalem/" as const,

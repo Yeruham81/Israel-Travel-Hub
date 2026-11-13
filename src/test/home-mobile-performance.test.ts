@@ -109,9 +109,9 @@ describe("home mobile performance optimizations", () => {
       expect(bytes(`${base}-feature.webp`)).toBeLessThan(bytes(`${base}.webp`));
       expect(home).toContain(`${name}-feature.webp`);
     }
-    expect(home).toContain('feature: { src: "/images/guides/taxi-in-tel-aviv.webp"');
-    expect(home).not.toContain("/images/travel-blog/taxi-in-tel-aviv.webp");
-    expect(bytes("public/images/guides/taxi-in-tel-aviv.webp")).toBeGreaterThan(1000);
+    expect(home).toContain('feature: { src: "/images/travel-blog/taxi-in-tel-aviv.webp"');
+    expect(home).not.toContain("/images/guides/taxi-in-tel-aviv.webp");
+    expect(bytes("public/images/travel-blog/taxi-in-tel-aviv.webp")).toBeGreaterThan(1000);
     expect(home).not.toContain("airport-pickup");
     for (const name of ["jerusalem-old-city", "tel-aviv-coast", "tiberias-lake", "bethlehem-nativity", "masada-dead-sea", "caesarea-aqueduct"]) {
       const base = `src/assets/home/${name}`;

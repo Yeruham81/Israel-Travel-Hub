@@ -98,7 +98,7 @@ export const services: Service[] = [
   {
     id: "transfers", eyebrow: "Airport Transfers", tagline: "Plan a Smooth Arrival in Israel", title: "Airport Transfers",
     text: "Arrange a comfortable private pickup from Ben Gurion Airport to Jerusalem, Tel Aviv or Haifa, with a vehicle and meeting point tailored to your needs.",
-    feature: { src: "/images/guides/taxi-in-tel-aviv.webp", alt: "Licensed Israeli taxis on a street in Tel Aviv" },
+    feature: { src: "/images/travel-blog/taxi-in-tel-aviv.webp", alt: "Licensed Israeli taxis on a street in Tel Aviv" },
     cards: [
       { label: "Private Transfer to Jerusalem", text: "Book a private pickup to your Jerusalem hotel", to: "/airport-transfers/ben-gurion-airport-to-jerusalem/", img: IMG.jerusalem },
       { label: "Private Transfer to Tel Aviv", text: "Airport pickup for Tel Aviv hotels and Jaffa", to: "/airport-transfers/ben-gurion-airport-to-tel-aviv/", img: IMG.telAviv },
