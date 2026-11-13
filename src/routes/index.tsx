@@ -3,10 +3,7 @@ import lcpHeroMobile from "@/assets/home/hero-jerusalem-sm-optimized.webp";
 import lcpHeroMedium from "@/assets/home/hero-jerusalem-medium.webp";
 import lcpHeroLarge from "@/assets/home/hero-jerusalem-large.webp";
 import jerusalem from "@/assets/home/jerusalem-old-city.webp";
-import jerusalemMamilla from "@/assets/jerusalem/mamilla.webp";
-import telAvivBeachfront from "@/assets/tel-aviv/beachfront.webp";
 import telAvivNeveTzedek from "@/assets/tel-aviv/neve-tzedek.webp";
-import haifaColony from "@/assets/haifa/colony.webp";
 import tiberiasSunrise from "@/assets/tiberias/sunrise.webp";
 import deadSeaLandscape from "@/assets/dead-sea/landscape.webp";
 import masadaCableCar from "@/assets/home/masada-cable-car.webp";
@@ -18,7 +15,6 @@ import bethlehem from "@/assets/home/bethlehem-nativity.webp";
 import masada from "@/assets/home/masada-dead-sea.webp";
 import caesareaDusk from "@/assets/home/caesarea-dusk-feature.webp";
 import caesareaAqueduct from "@/assets/home/caesarea-aqueduct.webp";
-import hotelRoom from "@/assets/home/hotel-room-feature.webp";
 import guidedTour from "@/assets/home/guided-tour-feature.webp";
 import cruisePort from "@/assets/home/cruise-port-feature.webp";
 import ashdodPort from "@/assets/home/ashdod-port.webp";
@@ -32,7 +28,6 @@ import bethlehemCard from "@/assets/home/bethlehem-nativity-card.webp";
 import masadaCard from "@/assets/home/masada-dead-sea-card.webp";
 import caesareaDuskCard from "@/assets/home/caesarea-dusk-card.webp";
 import caesareaAqueductCard from "@/assets/home/caesarea-aqueduct-card.webp";
-import hotelRoomCard from "@/assets/home/hotel-room-card.webp";
 import guidedTourCard from "@/assets/home/guided-tour-card.webp";
 import cruisePortCard from "@/assets/home/cruise-port-card.webp";
 import ashdodPortCard from "@/assets/home/ashdod-port-card.webp";
@@ -81,7 +76,7 @@ export const Route = createFileRoute("/")({
 
 type Img = { src: string; alt: string; thumb?: string; tile?: string; pos?: string };
 type Card = { label: string; text: string; to: LinkProps["to"]; img: Img };
-type Service = { id: string; eyebrow: string; tagline: string; title: string; text: string; feature: Img; cards: Card[]; hub: { label: string; to: LinkProps["to"] } };
+type Service = { id: string; eyebrow: string; tagline: string; title: string; text: string; feature?: Img; cards: Card[]; hub: { label: string; to: LinkProps["to"] } };
 
 const IMG = {
   jerusalem: { src: jerusalem, thumb: jerusalemCard, tile: jerusalemTile, alt: "Jerusalem's Old City and the Dome of the Rock seen from the Mount of Olives" },
@@ -93,6 +88,14 @@ const IMG = {
   masada: { src: masada, thumb: masadaCard, tile: masadaTile, alt: "Masada plateau from the air with the Dead Sea behind" },
   caesarea: { src: caesareaAqueduct, thumb: caesareaAqueductCard, tile: caesareaTile, alt: "Roman aqueduct along the beach at Caesarea" },
 } satisfies Record<string, Img>;
+
+export const accommodationDestinationCards: Card[] = [
+  { label: "Jerusalem", text: "Old City, city centre & boutique hotels", to: "/travel-blog/where-to-stay-in-jerusalem/", img: { src: "/images/attractions/jerusalem.webp", alt: "Jerusalem's Old City seen across the eastern hills" } },
+  { label: "Tel Aviv & Jaffa", text: "Beachfront, Jaffa & city hotels", to: "/travel-blog/where-to-stay-in-tel-aviv/", img: { src: telAvivNeveTzedek, alt: "Neve Tzedek historic neighbourhood in Tel Aviv" } },
+  { label: "Tiberias & Galilee", text: "Lakeside, luxury & family hotels", to: "/travel-blog/best-hotels-in-tiberias/", img: { src: tiberiasSunrise, alt: "Sunrise over Tiberias and the Sea of Galilee" } },
+  { label: "Dead Sea", text: "Spa retreats & beachfront resorts", to: "/travel-blog/best-dead-sea-hotels/", img: { src: deadSeaLandscape, alt: "Dead Sea desert landscape" } },
+  { label: "Haifa", text: "Carmel views, boutique & family hotels", to: "/travel-blog/best-hotels-in-haifa/", img: { src: "/images/attractions/haifa-coast.webp", alt: "Haifa and the Mediterranean coast" } },
+];
 
 export const services: Service[] = [
   {
@@ -127,17 +130,10 @@ export const services: Service[] = [
     hub: { label: "Explore shore excursions", to: "/shore-excursions/" },
   },
   {
-    id: "accommodation", eyebrow: "Accommodation", tagline: "Find the Perfect Place to Stay", title: "Accommodation in Israel",
-    text: "Choose a neighborhood or hotel style, then compare practical details such as beach access, family facilities, spa entry and arrival before booking.",
-    feature: { src: hotelRoom, alt: "Illustrative bright hotel room with a made bed by the window (not a specific property)" },
-    cards: [
-      { label: "Jerusalem", text: "Old City, German Colony or city centre?", to: "/travel-blog/where-to-stay-in-jerusalem/", img: { src: jerusalemMamilla, alt: "Mamilla area in Jerusalem" } },
-      { label: "Tel Aviv", text: "Beachfront, Jaffa or the White City", to: "/travel-blog/where-to-stay-in-tel-aviv/", img: { src: telAvivBeachfront, alt: "Tel Aviv beachfront near the hotels" } },
-      { label: "Tiberias & Galilee", text: "Family, luxury & lakeside hotels", to: "/travel-blog/best-hotels-in-tiberias/", img: IMG.tiberias },
-      { label: "Dead Sea", text: "Spa breaks, family resorts & luxury stays", to: "/travel-blog/best-dead-sea-hotels/", img: IMG.deadSea },
-      { label: "Haifa", text: "Boutique, family & Carmel hotels", to: "/travel-blog/best-hotels-in-haifa/", img: { src: haifaColony, alt: "Historic German Colony area of Haifa" } },
-    ],
-    hub: { label: "Explore accommodation", to: "/accommodation/" },
+    id: "accommodation", eyebrow: "Accommodation", tagline: "Find Your Perfect Base", title: "Where to Stay in Israel",
+    text: "Choose a base that suits your trip, from historic Jerusalem and Tel Aviv's beachfront to lakeside Galilee hotels and Dead Sea resorts.",
+    cards: accommodationDestinationCards,
+    hub: { label: "Explore all accommodation", to: "/accommodation/" },
   },
   {
     id: "attractions", eyebrow: "Attractions & Experiences", tagline: "Discover Israel’s Must-See Places", title: "Attractions & Experiences",
@@ -153,13 +149,7 @@ export const services: Service[] = [
 
 ];
 
-export const popularDestinationCards: Card[] = [
-  { label: "Jerusalem", text: "Old City, Bethlehem & Masada trips", to: "/travel-blog/where-to-stay-in-jerusalem/", img: { src: "/images/attractions/jerusalem.webp", alt: "Jerusalem's Old City seen across the eastern hills" } },
-  { label: "Tel Aviv & Jaffa", text: "Beaches, food and the coast", to: "/travel-blog/where-to-stay-in-tel-aviv/", img: { src: telAvivNeveTzedek, alt: "Neve Tzedek historic neighbourhood in Tel Aviv" } },
-  { label: "Tiberias & Galilee", text: "Lakeside base for the north", to: "/travel-blog/best-hotels-in-tiberias/", img: { src: tiberiasSunrise, alt: "Sunrise over Tiberias and the Sea of Galilee" } },
-  { label: "Dead Sea", text: "Spa, family and resort stays", to: "/travel-blog/best-dead-sea-hotels/", img: { src: deadSeaLandscape, alt: "Dead Sea desert landscape" } },
-  { label: "Haifa", text: "Carmel views, boutique & beach stays", to: "/travel-blog/best-hotels-in-haifa/", img: { src: "/images/attractions/haifa-coast.webp", alt: "Haifa and the Mediterranean coast" } },
-];
+
 
 export const homeGuideCards = {
   first: guideDirectory.filter((guide) => ["uber", "esim", "arrival"].includes(guide.id)).map((guide) =>
@@ -175,7 +165,7 @@ function PhotoCard({ c }: { c: Card }) {
         {/* Five narrow desktop destination tiles can use the 360px card asset.
             Other layouts use a 720px variant to remain crisp on mobile. */}
         {c.img.thumb && <source media="(min-width: 1280px)" srcSet={c.img.thumb} />}
-        <img src={c.img.tile ?? c.img.src} alt={c.img.alt} loading="lazy" decoding="async" width={720} height={480} className="aspect-[3/2] w-full object-cover transition-transform duration-500 group-hover:scale-105" />
+        <img src={c.img.tile ?? c.img.src} alt={c.img.alt} loading="lazy" decoding="async" width={720} height={480} className="aspect-[3/2] w-full object-cover transition-transform duration-500 group-hover:scale-105 xl:aspect-[4/5]" />
       </picture>
       <span className="absolute inset-0 bg-gradient-to-t from-navy/90 via-navy/30 to-transparent" aria-hidden />
       <span className="absolute inset-x-0 bottom-0 p-4 text-navy-foreground">
@@ -225,7 +215,7 @@ function Home() {
               </div>
             </header>
             <div className="mt-6 grid min-w-0 grid-cols-1 gap-4 lg:grid-cols-2 lg:items-stretch" data-testid={`service-layout-${s.id}`}>
-              <img src={s.feature.src} alt={s.feature.alt} loading="lazy" decoding="async" width={1400} height={880} className="aspect-[16/10] h-full min-h-64 w-full min-w-0 rounded-xl object-cover lg:max-h-[410px]" />
+              {s.feature && <img src={s.feature.src} alt={s.feature.alt} loading="lazy" decoding="async" width={1400} height={880} className="aspect-[16/10] h-full min-h-64 w-full min-w-0 rounded-xl object-cover lg:max-h-[410px]" />}
               <ul className="grid min-w-0 grid-cols-1 content-start gap-3" aria-label={`${s.eyebrow} choices`}>
                 {s.cards.slice(0, 3).map((c) => <CompactCard key={c.label} c={c} />)}
               </ul>
@@ -252,17 +242,29 @@ function Home() {
                 <p className="mt-2 max-w-2xl text-muted-foreground">{s.text}</p>
               </div>
             </header>
-            <div className="mt-6 grid min-w-0 grid-cols-1 gap-4 lg:grid-cols-2 lg:items-stretch" data-testid={`service-layout-${s.id}`}>
-              <img src={s.feature.src} alt={s.feature.alt} loading="lazy" decoding="async" width={1400} height={880} className="aspect-[16/10] h-full min-h-64 w-full min-w-0 rounded-xl object-cover lg:max-h-[410px]" />
-              <ul className="grid min-w-0 grid-cols-1 content-start gap-3" aria-label={`${s.eyebrow} choices`}>
-                {s.cards.slice(0, 3).map((c) => <CompactCard key={c.label} c={c} />)}
+            {s.id === "accommodation" ? (
+              <ul
+                className="mt-6 grid min-w-0 grid-cols-1 gap-4 min-[480px]:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5"
+                data-testid={`service-layout-${s.id}`}
+                aria-label="Where to stay in Israel"
+              >
+                {s.cards.map((card) => (
+                  <li key={card.label} className="min-w-0"><PhotoCard c={card} /></li>
+                ))}
               </ul>
-              {s.cards.length > 3 && (
-                <ul className="grid gap-3 sm:grid-cols-2 lg:col-span-2" aria-label={`More ${s.eyebrow.toLowerCase()} choices`} data-testid={`service-more-${s.id}`}>
-                  {s.cards.slice(3).map((c) => <CompactCard key={c.label} c={c} />)}
+            ) : (
+              <div className="mt-6 grid min-w-0 grid-cols-1 gap-4 lg:grid-cols-2 lg:items-stretch" data-testid={`service-layout-${s.id}`}>
+                {s.feature && <img src={s.feature.src} alt={s.feature.alt} loading="lazy" decoding="async" width={1400} height={880} className="aspect-[16/10] h-full min-h-64 w-full min-w-0 rounded-xl object-cover lg:max-h-[410px]" />}
+                <ul className="grid min-w-0 grid-cols-1 content-start gap-3" aria-label={`${s.eyebrow} choices`}>
+                  {s.cards.slice(0, 3).map((c) => <CompactCard key={c.label} c={c} />)}
                 </ul>
-              )}
-            </div>
+                {s.cards.length > 3 && (
+                  <ul className="grid gap-3 sm:grid-cols-2 lg:col-span-2" aria-label={`More ${s.eyebrow.toLowerCase()} choices`} data-testid={`service-more-${s.id}`}>
+                    {s.cards.slice(3).map((c) => <CompactCard key={c.label} c={c} />)}
+                  </ul>
+                )}
+              </div>
+            )}
             <div className="mt-6 flex justify-center">
               <Link to={s.hub.to} className="btn btn-primary">{s.hub.label} →</Link>
             </div>
@@ -275,16 +277,6 @@ function Home() {
         <div className="mt-6 grid gap-5 sm:grid-cols-2 xl:grid-cols-3" data-testid="guide-row-one">{homeGuideCards.first.map((guide) => <GuideCard key={guide.id} guide={guide} headingLevel={3} />)}</div>
         <div className="mt-5 grid gap-5 sm:grid-cols-2 xl:grid-cols-3" data-testid="guide-row-two">{homeGuideCards.second.map((guide) => <GuideCard key={guide.id} guide={guide} headingLevel={3} />)}</div>
         <div className="mt-7 flex justify-center"><Link to="/travel-blog/" className="btn btn-primary">Browse all guides →</Link></div>
-      </section>
-      <section aria-labelledby="dest-h" className="home-offscreen mx-auto mt-20 max-w-6xl px-4">
-        <div className="rounded-2xl bg-navy p-6 text-navy-foreground md:p-8">
-          <p className="text-xs font-semibold uppercase tracking-[0.14em] opacity-80">Where to Base Yourself</p>
-          <h2 id="dest-h" className="mt-2 text-3xl">Popular Destinations</h2>
-          <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
-            {popularDestinationCards.map((card) => <PhotoCard key={card.label} c={card} />)}
-          </div>
-          <Link to="/accommodation/" className="btn btn-light mt-6">Explore all accommodation →</Link>
-        </div>
       </section>
       <div className="home-offscreen home-offscreen-reviews"><PersonalTestimonialsSection /></div>
       <div className="home-offscreen mx-auto mt-10 max-w-6xl px-4"><AuthorCard introduction /></div>
