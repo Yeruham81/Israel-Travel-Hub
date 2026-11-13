@@ -58,7 +58,6 @@ export function ExternalTourCard({ tour, pageId }: { tour: TourProduct; pageId: 
         <div className="border-t pt-4">
           {price ? <><p className="text-xs text-muted-foreground">Reference starting price</p><p className="mt-1 text-2xl font-bold text-primary">US${price.amount.toLocaleString("en-US")}<span className="ml-2 text-xs font-normal text-muted-foreground">{price.basis === "per_person" ? "per person" : `per group · up to ${price.maxPartySize}`}</span></p><p className="mt-1 text-xs text-muted-foreground">Confirm the current total for your date.</p></> : <><p className="font-semibold">Check dates & prices</p><p className="mt-1 text-xs text-muted-foreground">Current price on the booking site</p></>}
           {offers.map(offer => <a key={offer.id} href={offer.provider.url} target="_blank" rel={relFor(offer.provider.isAffiliate)} onClick={() => recordOutboundClick({ pageId, productId: tour.id, offerId: offer.id })} className="btn btn-primary mt-3 w-full" aria-label={`${offer.provider.ctaLabel}: ${tour.title} (opens in a new tab)`}>{offer.provider.ctaLabel}<span aria-hidden className="ml-2">↗</span></a>)}
-          {offers.some(offer => offer.provider.isAffiliate) && <p className="mt-2 text-xs text-muted-foreground">Affiliate link · I may earn a commission.</p>}
         </div>
       </div>
     </article>
