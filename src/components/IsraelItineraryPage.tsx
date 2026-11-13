@@ -64,14 +64,14 @@ function LinkedCopy({ value, links = [] }: { value: string; links?: CopyLink[] |
 
 const guideSections = (g: ItineraryGuide): [string, string][] => [
   ["overview", "Trip overview"],
-  ...(g.beforeYouGo?.length ? [["before-you-go", "Before you go"] as [string, string]] : []),
   ["days", "Daily itinerary"],
   ...g.daysPlan.map((_, index): [string, string] => [`day-${index + 1}`, `Day ${index + 1}`]),
   ["transport", "Transport & hotels"],
   ["alternatives", "Adjust the route"],
   ["faq", "FAQ"],
   ...(g.relatedGuides?.length ? [["related-guides", "Related guides"] as [string, string]] : []),
-  ["other-durations", "More itineraries"],
+  ["other-durations", g.id === "3" ? "Longer itineraries" : "More itineraries"],
+  ...(g.beforeYouGo?.length ? [["planning-checklist", "Planning checklist"] as [string, string]] : []),
   ["contact", "Contact"],
 ];
 
@@ -142,17 +142,6 @@ export function IsraelItineraryPage({ id }: { id: ItineraryId }) {
         </table>
       </div>
     </section>
-    {g.beforeYouGo?.length ? <section id="before-you-go" aria-labelledby="before-you-go-h" className="mt-12 scroll-mt-28">
-      <h2 id="before-you-go-h" className="text-3xl">Before you go</h2>
-      <p className="mt-2 text-muted-foreground">These checks affect the whole trip, so handle them before choosing exact visits and booking transport.</p>
-      <div className="mt-5 grid gap-3 sm:grid-cols-2">
-        {g.beforeYouGo.map((tip) => <article key={tip.heading} className="rounded-xl border bg-card p-5">
-          <h3 className="font-semibold">{tip.heading}</h3>
-          <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{tip.text}</p>
-          {tip.to && tip.label && <Link to={tip.to} className="mt-3 inline-flex items-center gap-1 text-sm font-semibold text-primary underline underline-offset-2">{tip.label} <ArrowRight className="h-3.5 w-3.5" aria-hidden /></Link>}
-        </article>)}
-      </div>
-    </section> : null}
     <section id="days" aria-labelledby="days-h" className="mt-14 scroll-mt-28">
       <h2 id="days-h" className="text-3xl">Your {g.days}-day itinerary, day by day</h2>
       <p className="mt-3 text-muted-foreground">Each day distinguishes a workable core from optional extras. Use the linked destination guides for entry information, walking routes and alternatives.</p>
@@ -233,8 +222,8 @@ export function IsraelItineraryPage({ id }: { id: ItineraryId }) {
       </div>
     </section> : null}
     <section id="other-durations" aria-labelledby="other-duration-h" className="mt-14 scroll-mt-28">
-      <h2 id="other-duration-h" className="text-3xl">Plan the rest of your trip</h2>
-      <p className="mt-2 text-sm leading-relaxed text-muted-foreground">Have more or fewer days? Compare the actual routes, hotel bases and travel commitments rather than adding destinations to an already full day.</p>
+      <h2 id="other-duration-h" className="text-3xl">{id === "3" ? "Have more than 3 days in Israel?" : "Plan the rest of your trip"}</h2>
+      <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{id === "3" ? "Explore my 5-, 7- and 10-day itineraries for more time in Jerusalem and other regions, with realistic routes and hotel bases." : "Have more or fewer days? Compare the routes, hotel bases and travel commitments before choosing a different trip length."}</p>
       <div className="mt-5 grid gap-4 sm:grid-cols-3">
         {itineraryIds.filter((other) => other !== id).map((other) => {
           const choice = itineraries[other];
@@ -251,6 +240,16 @@ export function IsraelItineraryPage({ id }: { id: ItineraryId }) {
         })}
       </div>
     </section>
+    {g.beforeYouGo?.length ? <section id="planning-checklist" aria-labelledby="planning-checklist-h" className="mt-14 scroll-mt-28">
+      <h2 id="planning-checklist-h" className="text-3xl">My final planning checklist</h2>
+      <ul className="mt-5 list-disc space-y-3 pl-6 marker:text-primary">
+        {g.beforeYouGo.map((tip) => <li key={tip.heading} className="pl-1 leading-relaxed">
+          <strong className="font-semibold">{tip.heading}.</strong>{" "}
+          <LinkedCopy value={tip.text} links={tip.to && tip.label ? [{ phrase: tip.label, to: tip.to }] : []} />
+          {tip.to && tip.label && !tip.text.includes(tip.label) && <>{" "}<Link to={tip.to} className="font-semibold text-primary underline underline-offset-2">{tip.label}</Link></>}
+        </li>)}
+      </ul>
+    </section> : null}
     <HomeContactForm key={id} guide={guideContactCopy(g.title, "itinerary")} />
     <SourcesDisclosure>
       <p className="text-sm leading-relaxed text-muted-foreground">Official planning references for this itinerary. Verify schedules, entry conditions and openings for your exact dates; these sources do not imply live availability.</p>
