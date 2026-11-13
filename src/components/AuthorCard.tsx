@@ -14,7 +14,7 @@ export function AuthorCard({ introduction = false }: { introduction?: boolean })
     </div>
     <a href={author.reviewsUrl} target="_blank" rel="noopener noreferrer" aria-label="Read traveler reviews on Tripadvisor for Moshe Barak (opens in new tab)" className="col-start-2 mt-0.5 inline-flex w-fit max-w-full min-w-0 items-center gap-2.5 rounded-lg border border-border bg-background px-3 py-2 text-xs font-semibold text-primary transition-colors hover:border-primary hover:bg-secondary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary lg:col-start-3 lg:row-start-1 lg:mt-0">
       <span aria-hidden="true" className="grid h-9 w-9 shrink-0 place-items-center rounded-md bg-white">
-        <img src="/images/tripadvisor.svg" alt="" width={28} height={28} loading="lazy" decoding="async" className="h-7 w-7 object-contain" />
+        <img src="/images/tripadvisor-owl-black.svg" alt="" width={28} height={28} loading="lazy" decoding="async" className="h-7 w-7 object-contain" />
       </span>
       <span className="flex flex-col items-start whitespace-nowrap leading-tight">
         <span>Read Reviews</span>
