@@ -1,6 +1,6 @@
 import type { TravelGuide } from "@/data/travelGuides";
 import { migrationPhotos as P } from "@/data/guideMigrationPhotos";
-import deadSeaRoadPhoto from "@/assets/guides/dead-sea-route-road.webp";
+import deadSeaSaltIslandPhoto from "@/assets/guides/dead-sea-salt-island.webp";
 import einBokekShorePhoto from "@/assets/guides/dead-sea-ein-bokek-shore.webp";
 
 export const journeyDestinationGuides = {
@@ -836,7 +836,7 @@ export const journeyDestinationGuides = {
             "This option works well for an early start or several stops, but the driver handles navigation, parking, vehicle pickup and the return. Compare rental offers and conditions with DiscoverCars' Israel rental comparison, including insurance coverage, permitted roads, rental pickup hours and fuel policies.",
             "Winter rain can trigger flash floods and close desert roads even when Jerusalem is dry. Check weather and road alerts before driving, never cross flowing floodwater, and avoid unregulated shoreline areas with sinkhole risks."
           ],
-          "photo": { "src": deadSeaRoadPhoto, "alt": "Winding road through the Judean Desert towards the Dead Sea" },
+          "photo": { "src": deadSeaSaltIslandPhoto, "alt": "Turquoise Dead Sea water and white salt formations along the shoreline" },
           "inlineLinks": [
             {
               "text": "DiscoverCars' Israel rental comparison",
