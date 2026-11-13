@@ -115,7 +115,7 @@ export const jerusalemConnections: Record<JerusalemClusterKey, Destination[]> = 
     L("Jerusalem city guide", "/travel-blog/jerusalem-travel-guide/", "Plan the visit once you reach the city"),
     L("Old City visitor guide", "/travel-blog/old-city-jerusalem/", "Pick the correct gate for a hotel or walking route"),
     L("Where to stay", "/travel-blog/where-to-stay-in-jerusalem/", "Check your final hotel approach"),
-    L("Private airport transfer to Jerusalem", "/travel-blog/ben-gurion-airport-to-jerusalem/", "A separate direct booking request"),
+    L("Private airport transfer to Jerusalem", "/airport-transfers/ben-gurion-airport-to-jerusalem/", "A separate direct booking request"),
   ],
   "stay-jerusalem": [
     L("Jerusalem city guide", "/travel-blog/jerusalem-travel-guide/", "Choose a neighbourhood near your planned sites"),
