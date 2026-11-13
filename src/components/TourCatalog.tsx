@@ -57,7 +57,7 @@ export function ExternalTourCard({ tour, pageId, compact = false }: { tour: Tour
     <article className="flex h-full min-w-0 gap-3 rounded-xl border bg-card p-3 shadow-sm sm:gap-4">
       <img src={tourPhotos[tour.id]!.src} alt={tourPhotos[tour.id]!.alt} width={140} height={180} loading="lazy" decoding="async" className="h-40 w-[96px] shrink-0 rounded-lg object-cover sm:h-44 sm:w-[124px]" />
       <div className="flex min-w-0 flex-1 flex-col">
-        <div className="flex flex-wrap items-center justify-between gap-x-2 gap-y-1 text-xs text-muted-foreground"><span className="font-semibold">Booked on {offers[0]?.partner?.name || "booking platform"}</span>{tour.rating && <span aria-label={`Rating ${tour.rating.value} out of 5 from ${tour.rating.count} reviews`} title={`Booking-platform reviews checked ${tour.rating.checkedAt}; ratings may change`} className="font-semibold text-foreground">★ {tour.rating.value.toFixed(1)} <span className="font-normal text-muted-foreground">({tour.rating.count})</span></span>}</div>
+        <div className="flex flex-wrap items-center justify-between gap-x-2 gap-y-1 text-xs text-muted-foreground"><span className="font-semibold">{offers[0]?.partner?.name || "Booking platform"}</span>{tour.rating && <span aria-label={`Rating ${tour.rating.value} out of 5 from ${tour.rating.count} reviews`} title={`Booking-platform reviews checked ${tour.rating.checkedAt}; ratings may change`} className="font-semibold text-foreground">★ {tour.rating.value.toFixed(1)} <span className="font-normal text-muted-foreground">({tour.rating.count})</span></span>}</div>
         <h3 className="mt-1.5 line-clamp-2 text-base font-semibold leading-snug">{tour.title}</h3>
         <p className="mt-1 line-clamp-2 text-xs leading-relaxed text-muted-foreground sm:text-sm">{tour.summary}</p>
         <div className="mt-2 flex flex-wrap gap-x-3 gap-y-1 text-xs text-muted-foreground"><span>◷ {tour.duration}</span><span>From {tour.originIds.map(placeLabel).join(" / ")}</span></div>
@@ -101,8 +101,26 @@ export function TourCatalog({ categoryId, filters, onChange }: { categoryId: Tou
   const tags = tourTags.filter(tag => all.some(tour => tour.tagIds.includes(tag.id)));
   const set = (key: keyof TourSearch, value: string) => onChange({ ...filters, [key]: value || undefined }, key === "q");
   const active = Object.keys(filters).some(key => key !== "sort");
-  return <div id="tour-catalog" className="mt-10 scroll-mt-24">
-    <form role="search" aria-label="Find a tour in this category" onSubmit={event => event.preventDefault()} className="rounded-2xl border bg-secondary/40 p-4 sm:p-5">
+  return <div id="tour-catalog" className={categoryId === "jerusalem" ? "mt-7 scroll-mt-24" : "mt-10 scroll-mt-24"}>
+    {categoryId === "jerusalem" ? <nav aria-label="Filter Jerusalem tours" className="rounded-xl border bg-secondary/25 px-3 py-3 sm:px-4">
+      <div className="flex flex-wrap items-center gap-2">
+        <span className="mr-1 text-xs font-semibold text-muted-foreground">Show:</span>
+        {([
+          { label: "All tours", search: {} },
+          { label: "From Jerusalem", search: { origin: "jerusalem" } },
+          { label: "From Tel Aviv", search: { origin: "tel-aviv" } },
+          { label: "Up to half a day", search: { length: "short" } },
+          { label: "Full day", search: { length: "full-day" } },
+          { label: "Private", search: { format: "private" } },
+          { label: "Food & markets", search: { tag: "food" } },
+          { label: "History & heritage", search: { tag: "heritage" } },
+          { label: "Art & architecture", search: { tag: "art" } }
+        ] as const).map(item => {
+          const selected = Object.entries(item.search).length === Object.entries(filters).length && Object.entries(item.search).every(([key, value]) => filters[key as keyof TourSearch] === value);
+          return <button key={item.label} type="button" className="chip text-xs" aria-pressed={selected} onClick={() => onChange(item.search)}>{item.label}</button>;
+        })}
+      </div>
+    </nav> : <form role="search" aria-label="Find a tour in this category" onSubmit={event => event.preventDefault()} className="rounded-2xl border bg-secondary/40 p-4 sm:p-5">
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
         <label className="text-xs font-semibold">Search tours<input type="search" value={filters.q || ""} onChange={event => set("q", event.target.value)} placeholder="Place or interest" maxLength={80} className="mt-1.5 w-full rounded-lg border bg-background px-3 py-2.5 text-base font-normal" /></label>
         <label className="text-xs font-semibold">Start from<select value={filters.origin || ""} onChange={event => set("origin", event.target.value)} className="mt-1.5 w-full rounded-lg border bg-background px-3 py-2.5 text-base font-normal"><option value="">All departures</option>{origins.map(origin => <option key={origin.id} value={origin.id}>{origin.label}</option>)}</select></label>
@@ -111,15 +129,15 @@ export function TourCatalog({ categoryId, filters, onChange }: { categoryId: Tou
       </div>
       {destinations.length > 1 && <div className="mt-4"><p className="text-xs font-semibold">Destinations</p><div className="mt-2 flex flex-wrap gap-2"><button type="button" className="chip" aria-pressed={!filters.destination} onClick={() => set("destination", "")}>All destinations</button>{destinations.map(place => <button key={place.id} type="button" className="chip" aria-pressed={filters.destination === place.id} onClick={() => set("destination", filters.destination === place.id ? "" : place.id)}>{place.label}</button>)}</div></div>}
       {tags.length > 1 && <div className="mt-4"><p className="text-xs font-semibold">Interests</p><div className="mt-2 flex flex-wrap gap-2"><button type="button" className="chip" aria-pressed={!filters.tag} onClick={() => set("tag", "")}>All interests</button>{tags.map(tag => <button key={tag.id} type="button" className="chip" aria-pressed={filters.tag === tag.id} onClick={() => set("tag", filters.tag === tag.id ? "" : tag.id)}>{tag.label}</button>)}</div></div>}
-    </form>
+    </form>}
     <div className="mt-4 flex flex-wrap items-center justify-between gap-3">
       <p role="status" aria-live="polite" className="text-sm text-muted-foreground">{visible.length} {visible.length === 1 ? "experience" : "experiences"}</p>
-      <div className="flex flex-wrap items-center gap-3">{active && <button type="button" onClick={() => onChange({})} className="text-sm font-semibold text-primary underline">Clear filters</button>}<label className="text-xs text-muted-foreground">Sort by <select aria-label="Sort tours" value={filters.sort || ""} onChange={event => set("sort", event.target.value)} className="ml-1 rounded-lg border bg-background p-2 text-sm text-foreground"><option value="">Featured</option><option value="duration">Shortest duration</option><option value="title">Title A–Z</option></select></label></div>
+      <div className="flex flex-wrap items-center gap-3">{categoryId !== "jerusalem" && active && <button type="button" onClick={() => onChange({})} className="text-sm font-semibold text-primary underline">Clear filters</button>}{categoryId !== "jerusalem" && <label className="text-xs text-muted-foreground">Sort by <select aria-label="Sort tours" value={filters.sort || ""} onChange={event => set("sort", event.target.value)} className="ml-1 rounded-lg border bg-background p-2 text-sm text-foreground"><option value="">Featured</option><option value="duration">Shortest duration</option><option value="title">Title A–Z</option></select></label>}</div>
     </div>
     {visible.length === 0 ? <section className="mt-5 rounded-2xl border p-8 text-center"><h2 className="text-2xl font-semibold">No tours match these choices</h2><p className="mt-3 text-muted-foreground">Try another departure, destination or interest.</p><button type="button" className="btn btn-primary mt-5" onClick={() => onChange({})}>Show all tours in this category</button></section> : <>
       {categoryId !== "jerusalem" && <OwnerTourSection tours={owner} />}
-      {external.length > 0 && <section id="external-tours" aria-labelledby="external-tours-h" data-section="external-tours" className="mt-12 scroll-mt-24 border-t pt-8">
-        <h2 id="external-tours-h" className="text-3xl font-semibold">{owner.length > 0 && categoryId !== "jerusalem" ? "More " : ""}{getTourCategory(categoryId).title}</h2>
+      {external.length > 0 && <section id="external-tours" aria-labelledby="external-tours-h" data-section="external-tours" className={categoryId === "jerusalem" ? "mt-5 scroll-mt-24" : "mt-12 scroll-mt-24 border-t pt-8"}>
+        <h2 id="external-tours-h" className={categoryId === "jerusalem" ? "text-2xl font-semibold" : "text-3xl font-semibold"}>{owner.length > 0 && categoryId !== "jerusalem" ? "More " : ""}{getTourCategory(categoryId).title}</h2>
         <p className="mt-3 max-w-3xl text-sm leading-relaxed text-muted-foreground">Discover guided itineraries, local walks and specialist activities from independent operators. Each card identifies the departure, experience and booking site.</p>
         <ul aria-label="External tours" className={categoryId === "jerusalem" ? "mt-5 grid gap-3 md:grid-cols-2" : "mt-6 grid gap-5 sm:grid-cols-2"}>{external.map(tour => <ExternalTourCard key={tour.id} tour={tour} pageId={`tours-${categoryId}`} compact={categoryId === "jerusalem"} />)}</ul>
         <p className="mt-5 text-xs leading-relaxed text-muted-foreground">External tours have their own prices and terms. Choose the correct date and departure option on the booking site, and confirm guiding, admissions, meeting and return arrangements. Any reference starting prices shown here are approximate listing snapshots, not confirmed quotes.</p>
