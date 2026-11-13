@@ -44,7 +44,7 @@ export function itineraryMeta(id: ItineraryId) {
 type CopyLink = { phrase: string; to: LinkProps["to"] };
 
 /** Author-specified phrases become natural in-paragraph guide links. */
-function LinkedCopy({ value, links = [] }: { value: string; links?: CopyLink[] }) {
+function LinkedCopy({ value, links = [] }: { value: string; links?: CopyLink[] | undefined }) {
   const output: ReactNode[] = [];
   let position = 0;
   const mentions = links.map(link => ({ ...link, index: value.indexOf(link.phrase) }))
