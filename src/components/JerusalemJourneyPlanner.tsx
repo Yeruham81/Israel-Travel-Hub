@@ -46,10 +46,10 @@ const routes = {
     ],
     detailsTitle: "Which stop do you actually need?",
     details: [
-      { title: "Ein Bokek", tag: "Beach and hotels", description: "The free public beach at Ein Bokek is in the hotel district, with showers, changing rooms, shade, chairs and umbrellas. Admission is free; parking and hotel services may cost extra.", href: "https://www.deadsea.co.il/attractions/ein-bokek-central-beach/?lang=en", link: "See free public beach facilities" },
-      { title: "Masada", tag: "National park", description: "Explore Herod's ancient mountaintop fortress and dramatic desert views. Check the park's opening hours, entrance fee and cable car before setting out.", href: "https://en.parks.org.il/reserve-park/masada-national-park/", link: "Check Masada access" },
-      { title: "Ein Gedi", tag: "Nature reserve", description: "Discover a desert oasis of flowing streams, waterfalls, greenery and wildlife. Choose a suitable hiking trail and check opening hours and admission.", href: "https://en.parks.org.il/reserve-park/en-gedi-nature-reserve/", link: "Plan an Ein Gedi visit" },
-      { title: "Northern Dead Sea", tag: "Separate beach facilities", description: "Northern-shore bathing sites such as Kalia offer an alternative closer to Jerusalem, usually with an entrance fee. Check the exact beach and opening hours.", href: "https://www.google.com/maps/search/?api=1&query=Kalia+Beach+Dead+Sea", link: "Locate the northern shore" },
+      { title: "Masada", tag: "Ancient fortress", description: "Explore the mountaintop fortress, desert views and archaeological remains. The east-side cable car and visitor centre are a separate stop from the beach; check opening hours and admission.", href: "https://en.parks.org.il/reserve-park/masada-national-park/", link: "Plan a Masada visit" },
+      { title: "Ein Gedi", tag: "Desert oasis", description: "Walk among springs, waterfalls, green vegetation and desert wildlife. Choose a suitable nature trail and allow for the reserve's opening hours and entrance fee.", href: "https://en.parks.org.il/reserve-park/en-gedi-nature-reserve/", link: "Plan an Ein Gedi visit" },
+      { title: "Qumran", tag: "Dead Sea Scrolls", description: "Visit the archaeological remains near the caves associated with the Dead Sea Scrolls, north of Ein Gedi. The national park has its own entrance and visitor hours.", href: "https://en.parks.org.il/reserve-park/qumran-park", link: "Visit Qumran National Park" },
+      { title: "Qasr al-Yahud", tag: "Jordan River baptism site", description: "Visit the traditional baptism site on the Jordan River north of the Dead Sea. It requires a separate road detour and advance visit registration; check access before planning your route.", href: "https://en.parks.org.il/reserve-park/baptismal-site-on-the-jordan-river-qasr-al-yahud/", link: "Plan a Qasr al-Yahud visit" },
     ],
     footnote: "The route through the Dead Sea corridor uses different stops for each destination. Check the live Egged timetable, including the last usable Jerusalem-bound departure, rather than copying a timetable or fare from an older guide.",
     resourceHeading: "Check the journey and site access",
@@ -72,8 +72,8 @@ export function JerusalemJourneyOptions({ id }: { id: string }) {
   // The Dead Sea guide needs the four actual destinations, not a second set of
   // transport-option cards that repeats the article immediately below.
   if (id === "jerusalemDeadSea") return <section id="journey-destinations" aria-labelledby="journey-destinations-h" className="mt-9 scroll-mt-28">
-    <h2 id="journey-destinations-h" className="text-2xl font-semibold">Choose your Dead Sea day trip</h2>
-    <p className="mt-2 max-w-3xl leading-relaxed text-muted-foreground">For floating, choose the free public beach at Ein Bokek. Masada and Ein Gedi are nearby attractions you can add to your trip; allow time for opening hours, admission fees and busy summer periods.</p>
+    <h2 id="journey-destinations-h" className="text-2xl font-semibold">Add a stop to your Dead Sea day</h2>
+    <p className="mt-2 max-w-3xl leading-relaxed text-muted-foreground">Masada, Ein Gedi, Qumran and Qasr al-Yahud can each add something different to your day. Choose one or two that suit your route; a group tour or private driver makes multi-stop visits easier than public buses.</p>
     <div className="mt-4 grid gap-3 sm:grid-cols-2" data-testid="journey-stop-cards">
       {route.details.map(item => <article key={item.title} className="rounded-xl border bg-card p-4">
         <h3 className="text-lg font-semibold">{item.title}</h3>
