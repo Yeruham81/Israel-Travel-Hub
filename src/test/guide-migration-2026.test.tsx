@@ -117,8 +117,8 @@ describe("October planning, city and heritage guide migration", () => {
     expect(Object.values(travelGuidePaths)).not.toContain("/travel-blog/israel-safe-to-travel/");
     expect(travelGuides.telAvivMuseums.sections.some(section => section.id === "independence")).toBe(true);
     expect(travelGuides.haifaMuseums.sections.find(section => section.id === "outdoors")?.paragraphs.join(" ")).toContain("not a museum");
-    expect(travelGuides.bethlehem.sections.find(section => section.id === "buses")?.paragraphs.join(" ")).toContain("Line 231 passes through the Bab al-Zaqaq / Beit Jala area");
-    expect(travelGuides.bethlehem.sections.find(section => section.id === "buses")?.paragraphs.join(" ")).toContain("Line 234 serves the Checkpoint 300 approach");
+    expect(travelGuides.bethlehem.sections.find(section => section.id === "buses")?.subsections?.find(sub => sub.id === "bus-231")?.paragraphs.join(" ")).toContain("Bab al-Zaqaq area near Beit Jala");
+    expect(travelGuides.bethlehem.sections.find(section => section.id === "buses")?.subsections?.find(sub => sub.id === "bus-234")?.paragraphs.join(" ")).toContain("Bus 234 takes you towards Checkpoint 300");
     expect(travelGuides.yardenit.answer).toContain("no resident priest");
     expect(travelGuides.qasr.comparison.rows).toHaveLength(3);
     expect(travelGuides.topTen.sections).toHaveLength(10);
