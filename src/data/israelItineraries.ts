@@ -425,7 +425,7 @@ export const itineraries: Record<ItineraryId, ItineraryGuide> = {
       { q: "What changes if my three days include Friday or Saturday?", a: "Check the route's train and bus schedules, as regular services often stop for much of Shabbat. Markets, restaurants, religious sites and tours also follow different schedules. Adjust the order or choose a confirmed transport option." },
       { q: "Should I start in Tel Aviv instead of Jerusalem?", a: "You can reverse the route to suit your arrival or departure, but keep the desert excursion next to your Jerusalem stay and avoid planning a long drive plus a flight on the same day." },
     ],
-    hero: "itinerary-3day-jerusalem-cover",
+    hero: "itinerary-3day-holy-sepulchre",
   },
   "5": {
     id: "5", days: 5, path: "/travel-blog/israel-itinerary-5-days/",
@@ -560,7 +560,7 @@ export const itineraries: Record<ItineraryId, ItineraryGuide> = {
       { title: "Old Jaffa", description: "Port views, historic lanes and neighbourhood walks.", to: "/travel-blog/jaffa/", image: "itinerary-jaffa-streets" },
       { title: "Getting around Israel", description: "Rail, buses, taxis and longer day-trip connections.", to: "/travel-blog/getting-around-israel/", image: "itinerary-train" },
     ],
-    hero: "EXISTING:jerusalem",
+    hero: "itinerary-5day-caesarea",
   },
   "7": {
     id: "7", days: 7, path: "/travel-blog/israel-itinerary-7-days/",
@@ -933,7 +933,7 @@ export const itineraries: Record<ItineraryId, ItineraryGuide> = {
       { title: "Haifa", description: "Bahá’í Gardens viewpoints and coastal sights.", to: "/travel-blog/haifa/", image: "EXISTING:haifa" },
       { title: "Getting around Israel", description: "Trains, buses and practical regional transport.", to: "/travel-blog/getting-around-israel/", image: "itinerary-train" },
     ],
-    hero: "itinerary-10day-cover",
+    hero: "itinerary-10day-akko-aerial",
   },
 };
 
