@@ -339,20 +339,20 @@ export const journeyDestinationGuides = {
           "id": "bus-231",
           "title": "Bus 231: via Beit Jala towards central Bethlehem",
           "paragraphs": [
-            "Line 231 serves Bab al-Zaqaq near Beit Jala, which is closer to central Bethlehem than the Checkpoint 300 approach.",
-            "Ask the driver which stop best serves the Church of the Nativity. You may still need to walk or take a local taxi to reach Manger Square."
+            "Bus 231 passes through the Bab al-Zaqaq area near Beit Jala, making it a more convenient option for central Bethlehem.",
+            "Ask the driver where to get off for the Church of the Nativity. From there, you may need to walk or take a short taxi ride to Manger Square."
           ]
         },
         {
           "id": "bus-234",
           "title": "Bus 234: via Checkpoint 300",
           "paragraphs": [
-            "Line 234 serves the Rachel's Tomb / Checkpoint 300 approach. It does not take you straight to Manger Square. If the crossing is operating and you are eligible to pass, follow the designated pedestrian route, complete any checks and arrange a local vehicle on the Bethlehem side.",
-            "Confirm where a driver or guide will meet you and what happens if the checkpoint is delayed or inaccessible. On the way back, allow time to cross toward Jerusalem before boarding the return bus."
+            "Bus 234 takes you towards Checkpoint 300, not directly to Manger Square. If you're eligible to cross and the checkpoint is open, follow the pedestrian route, complete any required checks and arrange a local taxi or pickup on the Bethlehem side.",
+            "Agree on a meeting point with your driver or guide and discuss what happens if the checkpoint is delayed or closed. Allow extra time to cross back before catching your bus to Jerusalem."
           ]
         }
       ],
-      "tip": "Photograph the stop sign and a nearby landmark when you get off at Bab al-Zaqaq. It can be much easier to recognise the correct return boarding point from a photo than from the street name alone.",
+      "tip": "Take a photo of your bus stop and a nearby landmark. It'll make finding the return stop much easier.",
       "sourceIds": [
         "m26-south-buses",
         "m26-cicts-buses"
@@ -362,15 +362,15 @@ export const journeyDestinationGuides = {
       "id": "private-taxi",
       "title": "Private driver or taxi: check where the ride ends",
       "paragraphs": [
-        "A Palestinian taxi driver with the necessary authorisations and insurance may take eligible visitors directly from Jerusalem into Bethlehem, wait during sightseeing and drive them back. Such taxis can generally be found or arranged in East Jerusalem, but the particular driver and vehicle must be permitted to make the complete journey.",
-        "Before booking, agree on the pickup point, route permissions, insurance, waiting time, sightseeing stops, total fare and return arrangements. A driver is not necessarily a licensed tour guide.",
-        "An Israeli taxi can take you to the Checkpoint 300 approach, but it is not normally a through-service into Bethlehem. For a journey via the checkpoint, arrange the walk across and a separate Palestinian taxi or guide on the Bethlehem side."
+        "An appropriately authorised and insured Palestinian taxi may be able to take eligible visitors from Jerusalem to Bethlehem and back, with waiting time for sightseeing. Confirm that both the driver and vehicle are permitted to complete the journey.",
+        "Before booking, confirm the pickup point, permitted route, insurance, sightseeing stops, waiting time and total price, including the return. Remember that a driver may not be a licensed guide.",
+        "An Israeli taxi can take you towards Checkpoint 300, but it will not normally continue into Bethlehem. Eligible visitors can cross on foot when permitted and arrange a Palestinian taxi or guide on the other side."
       ],
       "photo": {
         "src": palestinianTaxiPhoto,
         "alt": "Yellow Palestinian taxi photographed on a local street"
       },
-      "tip": "For a local taxi on the Bethlehem side of Checkpoint 300, agree on the total fare and the currency before getting in—not just the destination at Manger Square.",
+      "tip": "Before entering a local taxi, agree on the total fare, currency and destination.",
       "sourceIds": [
         "m26-bethlehem-entry"
       ]
@@ -379,8 +379,8 @@ export const journeyDestinationGuides = {
       "id": "tours",
       "title": "Organised day trips and guided Bethlehem visits",
       "paragraphs": [
-        "A Bethlehem-focused half-day tour can be easier than coordinating bus stops and separate local transfers. Private tours offer more flexibility, while full-day excursions combine Bethlehem with Jerusalem, Jericho or the Jordan River.",
-        "Depending on the operator, the journey from Jerusalem and the Bethlehem sightseeing portion may involve different drivers or guides."
+        "A half-day tour of Bethlehem avoids the need to arrange local buses and transfers yourself. Private tours offer more flexibility, while full-day tours may include other destinations.",
+        "Some tours use different drivers or guides for the journey and the sightseeing in Bethlehem."
       ],
       "sourceIds": [
         "m26-bethlehem-entry"
@@ -390,13 +390,13 @@ export const journeyDestinationGuides = {
       "id": "rental-car",
       "title": "Can you drive a rental car to Bethlehem?",
       "paragraphs": [
-        "A rental car is generally not recommended for the Jerusalem–Bethlehem journey. Most Israeli rental companies prohibit driving into Palestinian Authority Area A, including Bethlehem, and the insurance may not cover such a trip.",
-        "If you're considering a rental car for other parts of your visit, you can compare available offers, but check the specific provider's restrictions and get written confirmation of any permission to drive into Bethlehem and the applicable insurance terms before booking."
+        "A rental car is generally not suitable for the Jerusalem–Bethlehem journey. Most Israeli rental companies prohibit driving into Area A, including Bethlehem, and the insurance may not cover the trip.",
+        "If you're considering a rental car for other parts of your trip, check the company's restrictions carefully. Do not drive into Bethlehem without written permission and confirmed insurance coverage."
       ],
       "richParagraphs": [
         [
           {
-            "text": "A rental car is generally not recommended for the Jerusalem–Bethlehem journey. Most Israeli rental companies prohibit driving into Palestinian Authority Area A, including Bethlehem, and the insurance may not cover such a trip."
+            "text": "A rental car is generally not suitable for the Jerusalem–Bethlehem journey. Most Israeli rental companies prohibit driving into Area A, including Bethlehem, and the insurance may not cover the trip."
           }
         ],
         [
@@ -408,7 +408,7 @@ export const journeyDestinationGuides = {
             "href": carRentalAffiliateUrl("/travel-blog/jerusalem-to-bethlehem/")
           },
           {
-            "text": " for other parts of your visit, you can compare available offers, but check the specific provider's restrictions and get written confirmation of any permission to drive into Bethlehem and the applicable insurance terms before booking."
+            "text": " for other parts of your trip, check the company's restrictions carefully. Do not drive into Bethlehem without written permission and confirmed insurance coverage."
           }
         ]
       ],
