@@ -4,7 +4,7 @@
 export type GuideContactKind = "transport" | "airport" | "shabbat" | "sherut" | "attraction" | "itinerary" | "accommodation" | "connectivity" | "general";
 export type GuideContactCopy = { heading: string; introduction: string; subject: string; placeholder: string };
 
-export function guideContactCopy(title: string, kind: GuideContactKind, place?: string): GuideContactCopy {
+export function guideContactCopy(_title: string, kind: GuideContactKind, place?: string): GuideContactCopy {
   const destination = place?.trim() || "Israel";
   // Always let the visitor write the subject; page context is attached separately to the submission.
   const base = { subject: "" };
