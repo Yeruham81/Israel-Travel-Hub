@@ -1173,6 +1173,16 @@ export const affiliateConfig: Record<string, { trackingUrl: string } | undefined
   "tour-tel-aviv-cycling-viator@tours-tel-aviv-jaffa": { trackingUrl: "https://viator.tpm.li/Yltp1iqc" },
   "tour-white-city-audio-viator@tours-tel-aviv-jaffa": { trackingUrl: "https://viator.tpm.li/B8Xodhso" },
   "tour-tel-aviv-jaffa-small-group-viator@tours-tel-aviv-jaffa": { trackingUrl: "https://viator.tpm.li/G9Lqmaft" },
+  // Exact API-generated Travelpayouts deeplinks for Masada & Dead Sea tours (project 406243; distinct SubIDs).
+  // Tour details still require the visitor to check current dates, access, inclusions and prices with the provider.
+  "tour-masada-dead-sea-tel-aviv-getyourguide@tours-masada-dead-sea": { trackingUrl: "https://getyourguide.tpm.li/5RL7cxpj" },
+  "tour-masada-ein-gedi-dead-sea-getyourguide@tours-masada-dead-sea": { trackingUrl: "https://getyourguide.tpm.li/vYkSAdLv" },
+  "tour-masada-dead-sea-jerusalem-viator@tours-masada-dead-sea": { trackingUrl: "https://viator.tpm.li/irk1NJgp" },
+  "tour-masada-ein-gedi-jerusalem-viator@tours-masada-dead-sea": { trackingUrl: "https://viator.tpm.li/NPvUsSUU" },
+  "tour-masada-sunrise-tel-aviv-viator@tours-masada-dead-sea": { trackingUrl: "https://viator.tpm.li/tSf9h9q0" },
+  "tour-masada-sunrise-jerusalem-viator@tours-masada-dead-sea": { trackingUrl: "https://viator.tpm.li/aT7XOGAp" },
+  "tour-dead-sea-relax-tel-aviv-viator@tours-masada-dead-sea": { trackingUrl: "https://viator.tpm.li/bSLf7tfv" },
+  "tour-dead-sea-relax-jerusalem-viator@tours-masada-dead-sea": { trackingUrl: "https://viator.tpm.li/rCb6K2nL" },
   // Configure an approved product-specific affiliate URL once; all category appearances use it.
   ...Object.fromEntries(tourBookingOffers.map((offer) => [offer.id, undefined])),
   "shore-viator-haifa-jerusalem-bethlehem": undefined,
