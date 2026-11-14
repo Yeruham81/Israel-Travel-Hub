@@ -8,6 +8,8 @@ export const tourPlaces = [
   { id: "nazareth", label: "Nazareth" }, { id: "galilee", label: "Sea of Galilee" },
   { id: "caesarea", label: "Caesarea" }, { id: "haifa", label: "Haifa" },
   { id: "akko", label: "Akko (Acre)" }, { id: "eilat", label: "Eilat & Red Sea" },
+  { id: "mitzpe-ramon", label: "Mitzpe Ramon" }, { id: "sde-boker", label: "Sde Boker" },
+  { id: "ramon-crater", label: "Ramon Crater & Negev" }, { id: "golan", label: "Golan Heights" },
 ] as const;
 export type TourPlaceId = typeof tourPlaces[number]["id"];
 export const tourTags = [
