@@ -156,8 +156,8 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
         title: "Can I use Uber, Gett or Yango at Ben Gurion Airport?",
         photo: hallPhoto,
         paragraphs: [
-          "Uber is not a passenger pickup option at Ben Gurion Airport. For an immediate official taxi, get a ride code from Gett or an airport self-service kiosk and join the authorized taxi queue. The Terminal 3 taxi line is on the ground floor at Exit 03, while Terminal 1 has a separate arrivals pickup. The kiosk does not require the Gett app.",
-          "An advance Gett booking has different pickup instructions; a standard Yango city pin is not the official airport taxi process. Follow the current guidance in my official airport taxi guide, or arrange a confirmed private airport transfer for a dedicated pickup.",
+          "At Ben Gurion Airport, use Gett or an airport kiosk to obtain a taxi ride code, then join the official queue. At Terminal 3, taxis depart from the ground floor at Exit 03. Terminal 1 has a separate pickup area. You don't need the Gett app to use a kiosk.",
+          "A Gett ride booked in advance may have a different meeting point. Follow the official airport taxi guide for pickup instructions, or book a private airport transfer if you prefer an arranged pickup.",
         ],
         inlineLinks: [
           { text: "official airport taxi guide", to: travelGuidePaths.airportTaxis },
@@ -169,8 +169,8 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
         id: "locations",
         title: "Which taxi app should I use in Tel Aviv, Jerusalem or Haifa?",
         paragraphs: [
-          "In Tel Aviv, Gett and Yango are options to check; use the correct entrance around beach promenades, Old Jaffa and pedestrian streets. In Jerusalem, pay attention to permitted vehicle access around the Old City. In Haifa, the street level of a hillside address can matter.",
-          "Actual driver supply and waiting time need to be checked at your precise location. For longer or more remote journeys, my getting around Israel guide compares buses, rail, rental cars and other options.",
+          "In Tel Aviv, check the correct pickup point near beaches and pedestrian areas. In Jerusalem, some Old City streets restrict vehicle access. In Haifa, steep streets can make a hotel's exact entrance important.",
+          "Check whether drivers are available at your pickup location. For longer trips, compare taxis with trains, buses and rental cars in my getting around Israel guide.",
         ],
         inlineLinks: [{ text: "getting around Israel guide", to: travelGuidePaths.israel }],
         sourceIds: ["guide-telaviv-apps", "guide-gett-app", "guide-yango-israel"],
@@ -179,8 +179,8 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
         id: "setup-backups",
         title: "What should visitors check before booking their first ride?",
         paragraphs: [
-          "Before arrival, complete phone verification for your app, test mobile data and payment, and save your full pickup and destination addresses. An offline screenshot or an address in Hebrew can help if the pickup pin is unclear.",
-          "After driver acceptance, verify the vehicle and license plate. Confirm child seats, wheelchair access, room for luggage or a large group ahead of time. My Israel eSIM guide explains mobile options; a confirmed private driver is a useful backup for time-critical journeys.",
+          "Set up your taxi app before travelling. Save your hotel address, check your mobile connection and payment method, and keep the address available offline. Having it in Hebrew can also help.",
+          "Before getting in, check that the driver and licence plate match your booking. Arrange special vehicle needs in advance. My Israel eSIM guide explains mobile options; a confirmed private driver can be useful for time-critical journeys.",
         ],
         inlineLinks: [
           { text: "Israel eSIM guide", to: travelGuidePaths.esim },
@@ -192,8 +192,8 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
         id: "shabbat",
         title: "Can I book a taxi app ride on Shabbat or late at night?",
         paragraphs: [
-          "Licensed taxis may operate on Shabbat and Jewish holidays while much scheduled public transport is paused. Check Gett or Yango for your location, but app driver acceptance is not guaranteed. For a flight or another important ride, confirm a suitable vehicle in advance.",
-          "Metered fares follow designated night, weekend and holiday tariffs. For journeys starting at Ben Gurion Airport on Shabbat, my airport Shabbat travel guide explains official taxis, private pickups and limited bus 711; there is no need to repeat that timetable here.",
+          "Taxis may be available during Shabbat and Jewish holidays, even when most public transport stops. Check Gett or Yango for your location, but arrange important airport or long-distance rides in advance.",
+          "Night, weekend and holiday taxi fares may be higher. For airport transport during Shabbat, see my airport Shabbat travel guide.",
         ],
         inlineLinks: [{ text: "airport Shabbat travel guide", to: travelGuidePaths.shabbat }],
         sourceIds: ["guide-iaa", "taxi-fares-2026", "guide-weekend-711"],
@@ -201,8 +201,7 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
     ],
     checklist: [
       "Do not rely on Uber or Lyft for passenger rides in Israel",
-      "Set up and test Gett or Yango before your trip",
-      "Confirm phone verification, mobile data and payment",
+      "Install and verify your preferred taxi app, and check your mobile data and payment method",
       "Save exact pickup and destination addresses",
       "Check whether the displayed fare is an estimate or a fixed offer",
       "Verify the driver and vehicle before boarding",
@@ -211,12 +210,12 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
     ],
     faqs: [
       { q: "Does Lyft work in Israel?", a: "No. Lyft does not list Israel among its supported rider cities." },
-      { q: "Does the ride-sharing bill mean Uber will launch soon?", a: "No date is confirmed. The proposal passed a first reading in March 2026; it was not final enactment or an Uber launch." },
+      { q: "Are there plans to bring Uber to Israel?", a: "There have been proposals to allow app-based rides with private drivers, but a proposal does not confirm when—or whether—Uber will launch. Check the latest legal and service status before travelling." },
       { q: "What is the best alternative to Uber in Israel?", a: "Gett and Yango can connect you with licensed taxis where drivers are available. Local dispatch, a taxi stand or a private transfer may suit some trips better." },
       { q: "Do I need Gett to get a taxi at Ben Gurion Airport?", a: "No. Official airport self-service kiosks also issue the ride code needed for the authorized queue." },
-      { q: "Are app fares fixed and do foreign cards work?", a: "Not necessarily. Review whether a price is an estimate or fixed offer and check accepted payment for your actual booking." },
+      { q: "Are app fares fixed and do foreign cards work?", a: "Not always. The app may display an estimated or fixed price, and some foreign-issued cards may not be accepted. Check the payment options before booking." },
       { q: "Can I book an app taxi during Shabbat?", a: "Licensed taxis may operate, but driver availability is not guaranteed. Confirm time-sensitive pickups in advance." },
-      { q: "Can I request a van or child seat in a taxi app?", a: "Do not assume a standard taxi booking includes special equipment or a large vehicle. Arrange and confirm those needs beforehand." },
+      { q: "Can I request a van or child seat in a taxi app?", a: "Not every taxi has child seats or room for extra passengers and luggage. Contact the provider in advance and confirm the vehicle you need." },
     ],
     sourceIds: ["guide-uber-availability", "guide-lyft-cities", "guide-ridesharing-bill-2026", "guide-gett-app", "guide-yango-israel", "guide-telaviv-apps", "guide-gett", "guide-iaa", "taxi-fares-2026"],
     related: ["taxis", "taxiFares", "airportTaxis", "shabbat", "sherut", "israel"],
