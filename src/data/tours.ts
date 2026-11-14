@@ -38,7 +38,7 @@ export const tourCategoryPaths = {
 export type TourCategoryId = keyof typeof tourCategoryPaths;
 
 export const tourPhotos: Record<string, GuidePhoto> = {
-  "my-jerusalem-day": { src: "/images/home/transfer-jerusalem-tower-of-david.webp", alt: "Tower of David and Jerusalem city walls" },
+  "my-jerusalem-day": { src: "/images/jerusalem/mount-zion/mount-zion-hillside.webp", alt: "Green hillside and historic buildings on Jerusalem\'s Mount Zion" },
   "my-masada-day": airport["dead-sea"]!,
   "my-masada-jerusalem": { src: masadaCableCar, alt: "A cable-car cabin below Masada's desert cliffs", sourceUrl: "https://commons.wikimedia.org/wiki/File:Masada_Cable_Car_1438_(511094328).jpg", credit: "James Emery · CC BY 2.0 · resized and converted to WebP", licenseUrl: "https://creativecommons.org/licenses/by/2.0/" },
   "my-north-coast-day": airport["haifa"]!,
