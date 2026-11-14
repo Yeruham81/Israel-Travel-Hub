@@ -1,7 +1,10 @@
 /**
  * Identifies the same photograph when WordPress/Vite creates differently sized copies.
- * Use alongside a visual review: unrelated filenames can still contain the same image,
- * and identical-looking crops are not necessarily byte-identical.
+ * Editorial images should not repeat in one page. The one deliberate exception is
+ * a portrait of Moshe Barak in a top introductory author card and a distant bottom
+ * contact form: those two separately marked roles serve different purposes.
+ * Nearby duplicates remain disallowed. Use visual review as unrelated filenames
+ * can contain the same photograph without being byte-identical.
  */
 export function photoIdentity(src: string): string {
   const withoutQuery = src.split(/[?#]/)[0]!.replaceAll("\\", "/").toLowerCase();
