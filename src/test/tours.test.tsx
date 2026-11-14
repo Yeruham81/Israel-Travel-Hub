@@ -129,7 +129,6 @@ describe("shared ordinary tour catalog", () => {
 
 describe("tours hub and SEO category pages", () => {
   it.each([
-    { category: "nazareth-galilee", ids: ["my-galilee-day", "my-galilee-jerusalem"], prices: [2300, 2900], minutes: [600, 600] },
     { category: "northern-coast", ids: ["my-north-coast-day", "my-north-coast-jerusalem"], prices: [2000, 2700], minutes: [540, 600] },
   ] as const)("shows the two departure-specific private days before external tours in $category", async ({ category, ids, prices, minutes }) => {
     await renderPage(tourCategoryPaths[category]);
@@ -217,9 +216,9 @@ describe("tours hub and SEO category pages", () => {
       const doc = new DOMParser().parseFromString(renderToString(<RouterContextProvider router={router}><Page /></RouterContextProvider>), "text/html");
       expect(doc.querySelectorAll("h1"), category.id).toHaveLength(1);
       expect(doc.querySelectorAll('[data-testid="tour-card"]').length, category.id).toBeGreaterThanOrEqual(2);
-      if (category.id === "jerusalem" || category.id === "tel-aviv-jaffa" || category.id === "masada-dead-sea" || category.id === "bethlehem-jericho") {
-        const localId = category.id === "jerusalem" ? "jerusalem-local-h" : category.id === "tel-aviv-jaffa" ? "tel-aviv-local-h" : category.id === "masada-dead-sea" ? "masada-local-h" : "bethlehem-local-h";
-        const planningId = category.id === "jerusalem" ? "jerusalem-planning-h" : category.id === "tel-aviv-jaffa" ? "tel-aviv-planning-h" : category.id === "masada-dead-sea" ? "masada-planning-h" : "bethlehem-planning-h";
+      if (category.id === "jerusalem" || category.id === "tel-aviv-jaffa" || category.id === "masada-dead-sea" || category.id === "bethlehem-jericho" || category.id === "nazareth-galilee") {
+        const localId = category.id === "jerusalem" ? "jerusalem-local-h" : category.id === "tel-aviv-jaffa" ? "tel-aviv-local-h" : category.id === "masada-dead-sea" ? "masada-local-h" : category.id === "bethlehem-jericho" ? "bethlehem-local-h" : "galilee-local-h";
+        const planningId = category.id === "jerusalem" ? "jerusalem-planning-h" : category.id === "tel-aviv-jaffa" ? "tel-aviv-planning-h" : category.id === "masada-dead-sea" ? "masada-planning-h" : category.id === "bethlehem-jericho" ? "bethlehem-planning-h" : "galilee-planning-h";
         expect(doc.querySelectorAll(`section[aria-labelledby="${localId}"] a.group img`)).toHaveLength(6);
         expect(doc.querySelectorAll(`section[aria-labelledby="${planningId}"] a.group`)).toHaveLength(6);
       } else {
@@ -234,14 +233,14 @@ describe("tours hub and SEO category pages", () => {
         expect(card.id).toBe(id);
         const tour = tourProducts.find(tour => tour.id === id)!;
         expect(tour.operatorId).not.toBe("moshe-barak");
-        if (category.id !== "jerusalem" && category.id !== "tel-aviv-jaffa" && category.id !== "masada-dead-sea" && category.id !== "bethlehem-jericho") expect(card.textContent).toContain("Operated by");
+        if (category.id !== "jerusalem" && category.id !== "tel-aviv-jaffa" && category.id !== "masada-dead-sea" && category.id !== "bethlehem-jericho" && category.id !== "nazareth-galilee") expect(card.textContent).toContain("Operated by");
         else expect(card.textContent).toMatch(/Viator|GetYourGuide/);
         for (const link of card.querySelectorAll('a[target="_blank"]')) {
           expect(link.getAttribute("rel")?.split(/\s+/)).toEqual(expect.arrayContaining(["noopener", "noreferrer"]));
         }
       }
-      if (category.id === "jerusalem" || category.id === "tel-aviv-jaffa" || category.id === "masada-dead-sea" || category.id === "bethlehem-jericho") {
-        const localId = category.id === "jerusalem" ? "jerusalem-local-h" : category.id === "tel-aviv-jaffa" ? "tel-aviv-local-h" : category.id === "masada-dead-sea" ? "masada-local-h" : "bethlehem-local-h";
+      if (category.id === "jerusalem" || category.id === "tel-aviv-jaffa" || category.id === "masada-dead-sea" || category.id === "bethlehem-jericho" || category.id === "nazareth-galilee") {
+        const localId = category.id === "jerusalem" ? "jerusalem-local-h" : category.id === "tel-aviv-jaffa" ? "tel-aviv-local-h" : category.id === "masada-dead-sea" ? "masada-local-h" : category.id === "bethlehem-jericho" ? "bethlehem-local-h" : "galilee-local-h";
         const more = doc.querySelector(`section[aria-labelledby="${localId}"]`)!;
         expect(more).not.toBeNull();
         expect(more.querySelectorAll("a.group img")).toHaveLength(6);
@@ -254,19 +253,19 @@ describe("tours hub and SEO category pages", () => {
         expect(more.querySelector('a[href="/tours/"]')).not.toBeNull();
       }
             const owner = doc.querySelector('[data-section="moshe-private-tours"]');
-      expect(doc.querySelector("#external-tours-h")?.textContent).toBe(category.id === "jerusalem" || category.id === "tel-aviv-jaffa" || category.id === "masada-dead-sea" || category.id === "bethlehem-jericho" ? `Explore ${category.shortTitle} tours` : `${owner ? "More " : ""}${category.title}`);
+      expect(doc.querySelector("#external-tours-h")?.textContent).toBe(category.id === "jerusalem" || category.id === "tel-aviv-jaffa" || category.id === "masada-dead-sea" || category.id === "bethlehem-jericho" || category.id === "nazareth-galilee" ? `Explore ${category.shortTitle} tours` : `${owner ? "More " : ""}${category.title}`);
       expect(doc.body.textContent).not.toMatch(/Other operators' tours & experiences|Independent tour providers/);
       if (owner) {
         expect(owner.className).not.toContain("bg-navy");
         expect(owner.textContent).not.toContain("Arrange directly with me");
         for (const card of owner.querySelectorAll('[data-testid="owner-tour-card"]')) {
-          if (category.id === "jerusalem" || category.id === "tel-aviv-jaffa" || category.id === "masada-dead-sea" || category.id === "bethlehem-jericho") {
+          if (category.id === "jerusalem" || category.id === "tel-aviv-jaffa" || category.id === "masada-dead-sea" || category.id === "bethlehem-jericho" || category.id === "nazareth-galilee") {
             expect(card.querySelector('a[href="#contact"]')).not.toBeNull();
           } else {
             const link = card.querySelector('a[href^="/private-driver/?tour="]')!;
             expect(new URL(link.getAttribute("href")!, CANONICAL_ORIGIN).searchParams.get("tour")).toBe(card.getAttribute("data-product-id"));
           }
-          if (category.id !== "jerusalem" && category.id !== "tel-aviv-jaffa" && category.id !== "masada-dead-sea" && category.id !== "bethlehem-jericho") expect(card.querySelector("dl")?.textContent).toContain("Includes:");
+          if (category.id !== "jerusalem" && category.id !== "tel-aviv-jaffa" && category.id !== "masada-dead-sea" && category.id !== "bethlehem-jericho" && category.id !== "nazareth-galilee") expect(card.querySelector("dl")?.textContent).toContain("Includes:");
           else expect(card.textContent).toContain("Private car & driver");
         }
       }
@@ -389,6 +388,67 @@ describe("tours hub and SEO category pages", () => {
     fireEvent.click(within(nav).getByRole("button", { name: "Private driver" }));
     await waitFor(() => expect(router.state.location.search).toEqual({ format: "private" }));
     expect(screen.queryAllByTestId("tour-card")).toHaveLength(0);
+    expect(screen.getAllByTestId("owner-tour-card")).toHaveLength(2);
+    fireEvent.click(within(nav).getByRole("button", { name: "All tours" }));
+    await waitFor(() => expect(router.state.location.search).toEqual({}));
+    expect(screen.getAllByTestId("tour-card")).toHaveLength(8);
+  });
+
+
+  it("uses the shared compact Galilee layout with eight tracked offers, two owner journeys, six local guides and responsive filters", async () => {
+    const router = await renderPage("/tours/nazareth-sea-of-galilee/");
+    const nav = screen.getByRole("navigation", { name: "Filter Nazareth & Sea of Galilee tours" });
+    const external = screen.getAllByTestId("tour-card");
+    expect(external).toHaveLength(8);
+    const links: string[] = [];
+    for (const card of external) {
+      const id = card.getAttribute("data-product-id")!;
+      const offer = offersForTour(id, "tours-nazareth-galilee")[0]!;
+      const link = within(card).getByRole("link", { name: "View tour ↗" });
+      expect(link).toHaveAttribute("href", offer.provider.url);
+      expect(new URL(offer.provider.url).hostname).toMatch(/^(getyourguide|viator)\.tpm\.li$/);
+      expect(link.getAttribute("rel")).toContain("sponsored");
+      links.push(offer.provider.url);
+    }
+    expect(new Set(links).size).toBe(8);
+    const owner = document.querySelector('[data-section="moshe-private-tours"]')!;
+    expect(owner.querySelectorAll('[data-testid="owner-tour-card"]')).toHaveLength(2);
+    expect(owner.querySelectorAll('a[href="#contact"]')).toHaveLength(2);
+    expect(document.querySelector('[data-section="external-tours"]')!.compareDocumentPosition(owner) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
+    for (const [id, origin, price] of [
+      ["my-galilee-day", "tel-aviv", 2300],
+      ["my-galilee-jerusalem", "jerusalem", 2900],
+    ] as const) {
+      const tour = tourProducts.find(t => t.id === id)!;
+      expect(tour.originIds).toEqual([origin]);
+      expect(tour.price?.amount).toBe(price);
+      expect(tour.formatLabel).toBe("Private car & driver");
+    }
+    expect(screen.getByTestId("author-card")).toBeInTheDocument();
+    const local = document.querySelector('section[aria-labelledby="galilee-local-h"]')!;
+    const planning = document.querySelector('section[aria-labelledby="galilee-planning-h"]')!;
+    expect(local.querySelectorAll("a.group img")).toHaveLength(6);
+    expect(planning.querySelectorAll("a.group")).toHaveLength(6);
+    expect(local.textContent).toContain("Yardenit");
+    const contact = document.querySelector("section#contact")!;
+    expect(contact.querySelector('[data-photo-role="contact-portrait"]')).not.toBeNull();
+    expect(contact.querySelector('input[name="subject"]')).toHaveValue("");
+    expect(contact.querySelector('textarea[name="message"]')).toHaveValue("");
+    expect(repeatedPhotos([...document.querySelectorAll("main img")].filter(img => !img.hasAttribute("data-photo-role")).map(img => img.getAttribute("src") || ""))).toEqual([]);
+    fireEvent.click(within(nav).getByRole("button", { name: "From Jerusalem" }));
+    await waitFor(() => expect(router.state.location.search).toEqual({ origin: "jerusalem" }));
+    expect(screen.getAllByTestId("tour-card")).toHaveLength(4);
+    expect(screen.getAllByTestId("owner-tour-card")).toHaveLength(1);
+    fireEvent.click(within(nav).getByRole("button", { name: "Jordan River stop" }));
+    await waitFor(() => expect(router.state.location.search).toEqual({ destination: "jordan-river" }));
+    expect(screen.getAllByTestId("tour-card")).toHaveLength(7);
+    fireEvent.click(within(nav).getByRole("button", { name: "Magdala" }));
+    await waitFor(() => expect(router.state.location.search).toEqual({ q: "Magdala" }));
+    expect(screen.getAllByTestId("tour-card")).toHaveLength(1);
+    expect(screen.getByTestId("tour-card")).toHaveAttribute("data-product-id", "nazareth-magdala-private");
+    fireEvent.click(within(nav).getByRole("button", { name: "Private tours" }));
+    await waitFor(() => expect(router.state.location.search).toEqual({ format: "private" }));
+    expect(screen.getAllByTestId("tour-card")).toHaveLength(3);
     expect(screen.getAllByTestId("owner-tour-card")).toHaveLength(2);
     fireEvent.click(within(nav).getByRole("button", { name: "All tours" }));
     await waitFor(() => expect(router.state.location.search).toEqual({}));
