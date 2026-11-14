@@ -282,7 +282,7 @@ export const journeyDestinationGuides = {
             "text": "Bring your original passport and any required entry documents. If you're travelling on a US passport, check the "
           },
           {
-            "text": "State Department's Israel, West Bank and Gaza travel guidance",
+            "text": "State Department's travel advice",
             "href": "https://travel.state.gov/content/travel/en/international-travel/International-Travel-Country-Information-Pages/IsraeltheWestBankandGaza.html"
           },
           {
