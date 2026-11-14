@@ -463,7 +463,7 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
         title: "Which terminal do international flights arrive at?",
         photo: airportTransferPhotos["other"]!,
         paragraphs: [
-          "The Israel Airports Authority announced in June 2026 that international arriving flights continue to use Terminal 3, even though some airlines depart internationally from Terminal 1. Domestic flights arriving from Ramon Airport use Terminal 1. This is the airport's published 2026 arrangement, not a guarantee against a later operational change.",
+          "International flights currently arrive at Terminal 3, while some international departures use Terminal 1. Domestic flights from Ramon Airport arrive at Terminal 1. Always check the latest airport information in case arrangements change.",
           "Follow the airline's actual arrival instructions and the latest airport notices. Your airline may use different terminals for arrivals and departures, so check each flight separately. Passengers who need to transfer between Terminals 3 and 1 can use the free internal airport shuttle.",
           "The free airport shuttle connects terminals; it does not travel into the city. The airport lists the Terminal 3 stop on Level G near Gate 01 and the Terminal 1 stop opposite Gate 4, with departures roughly every 15 minutes around the clock. Allow time to find the stop and reach the next connection.",
         ],
@@ -594,11 +594,11 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
       "Arrange assistance, child seats or suitable vehicle size before travel",
     ],
     faqs: [
-      { q: "Which terminal do international flights arrive at Ben Gurion Airport?", a: "The airport authority's June 2026 announcement says international arriving flights use Terminal 3. Some international departures use Terminal 1, so always check the latest flight and airport notices." },
+      { q: "Which terminal do international flights arrive at Ben Gurion Airport?", a: "International flights currently arrive at Terminal 3. Some international departures use Terminal 1, so check your flight's terminal before travelling." },
       { q: "Do I need an ETA-IL to enter Israel?", a: "Many visitors from visa-exempt countries need an approved ETA-IL before travel; others need a visa or fall under an exemption. Check your passport on the official Israel entry portal. Authorization to travel does not guarantee admission." },
       { q: "What happens after landing at Ben Gurion Airport?", a: "Follow the arrivals signs to passport control, collect checked luggage, pass through the appropriate customs channel and enter the public arrivals hall to meet your onward transportation." },
-      { q: "How long does passport control take at Ben Gurion Airport?", a: "There is no dependable fixed processing time. Queues and individual document checks vary; allow a flexible margin before arranging onward travel." },
-      { q: "Do tourists get an entry card at Ben Gurion Airport?", a: "Keep any entry card or record issued to you with your passport. The format can vary by process and traveler, so follow the authority's instructions for your own entry record." },
+      { q: "How long does passport control take at Ben Gurion Airport?", a: "Processing times vary depending on queues and document checks. Allow extra time before arranging onward transport." },
+      { q: "Do tourists get an entry card at Ben Gurion Airport?", a: "Keep any entry card or record issued to you with your passport. Follow border-control instructions for any entry record you receive." },
       { q: "Where can I report luggage missing after an arriving flight?", a: "Contact the airline or ground handling company responsible for your flight, ideally before leaving baggage reclaim. Keep luggage tags and obtain a report reference. The airport has separate lost-property guidance for items misplaced in the terminal." },
       { q: "What is the difference between the red and green customs channels?", a: "Use the green channel only when you have nothing requiring declaration. Use the red channel for declarations; the Israel Tax Authority advises using the red channel if you are unsure." },
       { q: "Is there an ATM at Ben Gurion Airport arrivals?", a: "The airport's Terminal 3 services directory lists ATMs in the arrivals area. Check the current location and fees, and keep a backup payment method." },
@@ -607,7 +607,7 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
       { q: "Can I take a train from Ben Gurion Airport to Tel Aviv?", a: "The airport has an Israel Railways station at Terminal 3. Check the train's actual date and timetable, including Shabbat or holiday interruptions, and plan the connection from your city station to your accommodation." },
       { q: "Do Nesher and Amal sherut vans still pick up airport passengers?", a: "No. The former Nesher and Amal airport sherut services have been discontinued. Use current rail, bus, authorized taxi or confirmed private-transfer options instead." },
       { q: "Can I arrive in Israel on Shabbat?", a: "Flights may arrive during Shabbat, but regular rail and most bus service pauses. Authorized airport taxis, confirmed private transfers and limited Line 711 to Tel Aviv may be options depending on the date." },
-      { q: "What if my flight arrives late or is delayed?", a: "Check current ground-transport service and notify your pickup operator according to the booking instructions. Do not use the original landing estimate as a guarantee of when you will exit passport control and baggage reclaim." },
+      { q: "What if my flight arrives late or is delayed?", a: "Check current ground-transport service and notify your pickup operator according to the booking instructions. Your pickup time may need to change if passport control or luggage collection takes longer than expected." },
       { q: "Is there help for wheelchair users or travelers with reduced mobility?", a: "Yes. Request assistance with your airline in advance. Ground handlers provide arrival support, and the airport publishes accessible facility and internal shuttle information." },
     ],
     sourceIds: [
