@@ -60,6 +60,6 @@ export function DeadSeaTourOptions() {
         </a>;
       })}
     </div>
-    <p className="mt-2.5 text-xs leading-relaxed text-muted-foreground">Starting prices and ratings are indicative; select your date on the booking page for current offers.</p>
+    <p className="mt-2.5 text-xs leading-relaxed text-muted-foreground">Prices, ratings and availability may change. Check the latest details before booking.</p>
   </>;
 }
