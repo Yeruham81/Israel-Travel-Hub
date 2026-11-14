@@ -35,7 +35,6 @@ function PrivateDriver() {
 function PrivateDriverContent({ transfer }: { transfer: ReturnType<typeof parsePrivateDriverSearch> }) {
   const portFields = portTransferPrefill(transfer);
   const tourFields = privateTourPrefill(transfer);
-  const initialFields = portFields || tourFields;
   const [serviceId, setServiceId] = useState(portFields ? "intercity" : tourFields ? "day-hire" : "");
   return <main className="mx-auto max-w-5xl px-4 pb-24 lg:pb-8">
     <div className="pt-6"><Breadcrumbs items={[{ name: "Home", to: "/" }, { name: "Private driver", to: "/private-driver/" }]} /></div>
@@ -57,7 +56,7 @@ function PrivateDriverContent({ transfer }: { transfer: ReturnType<typeof parseP
     </section>
     {portFields && <p className="mt-8 rounded-xl border bg-secondary/50 p-5 text-sm">Your one-way transfer request starts at {portFields.pickup}{portFields.dropoff ? ` and goes to ${portFields.dropoff}` : "; add your hotel or final address below"}. Please include the cruise ship and disembarkation details, and any flight details for an airport transfer. I must confirm the meeting point, timing, vehicle and price before booking.</p>}
     {tourFields && <p className="mt-8 rounded-xl border bg-secondary/50 p-5 text-sm">Your preferred day trip is included in the request below. Add your date, exact pickup and final drop-off, and any changes you would like. I will confirm the route, availability and full price with you.</p>}
-    <PrivateDriverQuoteForm serviceId={serviceId} onServiceChange={setServiceId} initialFields={initialFields} />
+    <PrivateDriverQuoteForm serviceId={serviceId} onServiceChange={setServiceId} />
     <section id="benefits" aria-labelledby="benefits-h" className="mt-14">
       <p className="eyebrow">Make the day work for you</p><h2 id="benefits-h" className="mt-2 text-3xl">What to arrange with your private driver</h2>
       <div className="mt-6 grid gap-4 sm:grid-cols-2">{privateDriverBenefits.map((benefit, index) => { const Icon = benefitIcons[index]!; return <article key={benefit.title} className="rounded-xl border bg-card p-6"><Icon className="h-6 w-6 text-primary" aria-hidden /><h3 className="mt-4 text-2xl">{benefit.title}</h3><p className="mt-3 text-sm leading-relaxed text-muted-foreground">{benefit.text}</p></article>; })}</div>
