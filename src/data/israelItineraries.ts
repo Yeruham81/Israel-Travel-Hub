@@ -716,7 +716,7 @@ export const itineraries: Record<ItineraryId, ItineraryGuide> = {
       { title: "Jerusalem Old City", description: "Historic quarters, gates and practical walking routes.", to: "/travel-blog/old-city-jerusalem/", image: "itinerary-jerusalem-old-city" },
       { title: "Masada and the Dead Sea", description: "Desert sites, bathing advice and travel choices.", to: "/travel-blog/masada/", image: "itinerary-dead-sea-shore" },
       { title: "Magdala and its archaeological remains", description: "A rewarding historical stop on the Galilee shore.", to: "/travel-blog/magdala/", image: "magdala-archaeology" },
-      { title: "Haifa and the Bahá’í Gardens", description: "Viewpoints, neighbourhoods and city highlights.", to: "/travel-blog/haifa/", image: "itinerary-5day-caesarea" },
+      { title: "Haifa city highlights", description: "Viewpoints, the Bahá’í Gardens and museums.", to: "/travel-blog/haifa/", image: "museums-in-haifa" },
       { title: "Getting around Israel", description: "Rail, buses and connections between major regions.", to: "/travel-blog/getting-around-israel/", image: "itinerary-train" },
       { title: "Ben Gurion Airport connections", description: "Plan the final journey to your flight.", to: "/airport-transfers/", image: "itinerary-airport" },
     ],
