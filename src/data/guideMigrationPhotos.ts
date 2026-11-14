@@ -42,7 +42,7 @@ import itineraryDeadSeaShore from "@/assets/guides/dead-sea-ein-bokek-shore.webp
 import itineraryJaffaStreets from "@/assets/tel-aviv/jaffa.webp";
 import itineraryChurchHolySepulchre from "@/assets/guides/holy-sepulchre.jpg";
 import itineraryCaesareaAqueduct from "@/assets/home/caesarea-aqueduct.webp";
-import itineraryJerusalemMuseum from "@/assets/guides/museums-in-jerusalem.jpg";
+
 
 export const migrationPhotos = {
   "best-time-to-visit-israel": {
@@ -234,9 +234,9 @@ export const migrationPhotos = {
     "sourceUrl": "https://commons.wikimedia.org/wiki/File:125359_caesarea_national_park_PikiWiki_Israel.jpg",
     "licenseUrl": "https://creativecommons.org/licenses/by/2.5/"
   },
-  "itinerary-5day-jerusalem-museum": {
-    "src": itineraryJerusalemMuseum,
-    "alt": "Rockefeller Museum courtyard and tower in Jerusalem"
+  "itinerary-5day-mount-of-olives": {
+    "src": "/images/jerusalem/church-of-all-nations.webp",
+    "alt": "Church of All Nations at Gethsemane, below Jerusalem's Mount of Olives"
   },
   "itinerary-3day-jerusalem-cover": {
     "src": "/images/attractions/hero-jerusalem.webp",
