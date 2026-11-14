@@ -119,7 +119,7 @@ const byId: Record<AirportJourneyId, AirportJourneyGuide> = {
       "Israel Railways and most regular buses normally stop during the main Shabbat period and many Jewish holidays. The exact last/first departure depends on the date, so check the journey planner rather than assuming Saturday night trains start at a fixed time.",
       "For an arrival without a usable rail connection, compare the airport's authorized metered taxi with a confirmed private transfer. A rental car is another possibility only if collection is operating.",
       "The regular Nesher airport-to-Jerusalem shared-taxi route described in older guides no longer runs. Do not rely on old pickup details. My Sherut in Israel guide explains the distinction, and the airport Shabbat transport guide covers current weekend options.",
-      "For holiday dates and their potential impact on public transport, see Israel\'s calendar of events, then verify trains and buses for the exact day with their operators."
+      "For holiday dates, see Israel\'s calendar of events."
     ],
     advice: [
       "Compare the total from landing to hotel: immigration and baggage, getting to the station, the train and the final leg.",
@@ -179,7 +179,7 @@ const byId: Record<AirportJourneyId, AirportJourneyGuide> = {
       onward: { src: telAvivOldJaffa, alt: "Old Jaffa waterfront and streets, where the final hotel pickup point may differ from a train station" },
     },
     stationLinks: [{ text: "Ben Gurion Airport arrival guide", to: "/travel-blog/ben-gurion-airport-arrival-tips/" }, { text: "getting around Tel Aviv guide", to: "/travel-blog/getting-around-tel-aviv/" }],
-    weekendLinks: [{ text: "dedicated airport Shabbat guide", to: "/travel-blog/from-ben-gurion-airport-on-shabbat/" }, { text: "sherut in Israel guide", to: "/travel-blog/sherut-in-israel/" }],
+    weekendLinks: [{ text: "dedicated airport Shabbat guide", to: "/travel-blog/from-ben-gurion-airport-on-shabbat/" },],
     sources: [
       { title: "Israel Railways — check trains and ticket prices", url: "https://www.rail.co.il/" },
       { title: "Israel Railways — revised timetable from November 14, 2026", url: "https://rail.co.il/?lan=en&page=new-schedule-141126" },
@@ -193,7 +193,7 @@ const byId: Record<AirportJourneyId, AirportJourneyGuide> = {
     privateLabel: "Request a private Tel Aviv or Jaffa transfer",
     options: [
       { id: "rail", name: "Train to Tel Aviv", time: "About 11–30 min to a station", cost: "Current rail fare: check planner", bestFor: "Quick, lower-cost weekday arrival", doorToDoor: "No", availability: "Not during the main Shabbat break", comparison: { cost: "Check current fare", advantages: "Quick, low-cost and avoids traffic", drawbacks: "Train stops inland; hotel connection often required" }, heading: "Train from Ben Gurion Airport to Tel Aviv", paragraphs: [
-        "Check whether HaHagana, HaShalom, Savidor Center or University best fits the actual street of your destination. HaShalom serves Azrieli and Sarona, Savidor is useful for onward buses, HaHagana serves parts of southern Tel Aviv, and University serves Ramat Aviv. Travel times vary by station and service; compare the station table below.",
+        "Check whether HaHagana, HaShalom, Savidor Center or University best fits the actual street of your destination. HaShalom serves Azrieli and Sarona, Savidor is useful for onward buses, HaHagana serves parts of southern Tel Aviv, and University serves Ramat Aviv. ",
         "To reach the beach, Old Jaffa or Neve Tzedek, you'll usually need another bus, taxi or walk from the railway station. Choose the station based on your exact accommodation address, not just the city name. The where to stay in Tel Aviv guide can help you identify the neighborhood, while the getting around Tel Aviv guide explains local connections."
       ], inlineLinks: [{ text: "where to stay in Tel Aviv guide", to: "/travel-blog/where-to-stay-in-tel-aviv/" }, { text: "getting around Tel Aviv guide", to: "/travel-blog/getting-around-tel-aviv/" }], checklist: ["Use the full hotel address when choosing the station.", "Check the last train and late-night stopping pattern.", "Include the onward fare and bags in the total comparison."] },
       { id: "bus", name: "Bus 445", time: "About 40–70+ min, depending on stop", cost: "Current bus fare: check planner", bestFor: "Addresses near its city stops", doorToDoor: "No", availability: "Timetable dependent; Shabbat restrictions", comparison: { cost: "Check current fare", advantages: "May reach central or beachfront stops", drawbacks: "Slower; timetable and stop dependent" }, heading: "Bus 445: another route into central Tel Aviv", paragraphs: [
@@ -207,7 +207,7 @@ const byId: Record<AirportJourneyId, AirportJourneyGuide> = {
         ...commonTransfer, "Private pickup is particularly useful for a family, multiple checked bags, a child seat, a flight arriving after regular public transport or accommodation in a narrow Jaffa street where the drop-off must be agreed. The private transfer to Tel Aviv page explains the separate service and lists its published starting rate. Send your flight and destination details to receive a personal quote and written booking confirmation."
       ], inlineLinks: [{ text: "private transfer to Tel Aviv page", to: "/airport-transfers/ben-gurion-airport-to-tel-aviv/" }], checklist: ["Send flight number, passengers, bags and children's ages.", "Confirm the vehicle and any extra charges.", "Agree Jaffa's exact vehicle-accessible drop-off."] },
       { id: "weekend", name: "Weekend line 711", time: "Variable with stop and departure", cost: "Free where operating", bestFor: "Flexible weekend traveler with light luggage", doorToDoor: "No", availability: "Limited Friday/Saturday timetable, Terminal 1", comparison: { cost: "Free", advantages: "Free limited Shabbat option", drawbacks: "Terminal 1 only; sparse trips, not door to door" }, heading: "Free weekend bus 711 on Shabbat", paragraphs: [
-        "Tel Aviv's municipality lists the free Naim Busofash line 711 via Ben Gurion Airport Terminal 1 between Shoham and central Tel Aviv. Line 711 runs to Terminal 1 on a limited timetable, not to Terminal 3.",
+        "Tel Aviv's municipality lists the free Naim Busofash line 711 via Ben Gurion Airport Terminal 1 between Shoham and central Tel Aviv. ",
         "If arriving at Terminal 3, take the free internal shuttle from Level G near Gate 01 to Terminal 1. Bus 711 serves airport stop 34609 on its limited timetable; check the Tel Aviv-bound direction and final walk. The dedicated airport Shabbat guide explains the interchange and Saturday-night train restart."
       ], inlineLinks: [{ text: "dedicated airport Shabbat guide", to: "/travel-blog/from-ben-gurion-airport-on-shabbat/" }], checklist: ["Check the city weekend route planner, not a weekday bus schedule.", "Allow time between Terminal 3 and Terminal 1.", "Confirm your last city connection or walk."] },
       { id: "rental", name: "Rental car", time: "About 20–40+ min plus collection", cost: "Rental + parking, insurance and fuel", bestFor: "Journey beyond Tel Aviv", doorToDoor: "Yes, where permitted", availability: "Desk-hours dependent", comparison: { cost: "Rental + extras", advantages: "Flexible for an onward road trip", drawbacks: "Collection time, traffic and city parking" }, heading: "Should you rent a car at the airport?", paragraphs: [
@@ -453,7 +453,7 @@ const byId: Record<AirportJourneyId, AirportJourneyGuide> = {
         "Check current police, weather and road notices before the drive, particularly after rain in the Judean Desert. Flash floods can temporarily close Route 90; never drive into water covering the road. Check pickup hours, parking and insurance terms, especially if you are landing on Shabbat or a Jewish holiday."
       ], inlineLinks: [
         { text: "DiscoverCars' Israel rental search", to: "/car-rental/" },
-      ], checklist: ["Check route and flood-related closures before starting the drive.", "Confirm hotel parking, rental coverage and pickup hours.", "Check which additional stops, if any, are covered by your rental-car or transfer plans."] },
+      ], checklist: ["Check route and flood-related closures before starting the drive.", "Confirm hotel parking, rental coverage and pickup hours."] },
     ],
     stations: [
       { name: "Airport train → Jerusalem–Yitzhak Navon", time: "About 26–30 min by train", usefulFor: "Starts below Terminal 3; check rail fare and separate Jerusalem-line voucher." },
