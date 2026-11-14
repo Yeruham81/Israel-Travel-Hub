@@ -915,9 +915,11 @@ export const tourBookingOffers: TourBookingOffer[] = ([
   ["eilat-snorkeling", "viator", "https://www.viator.com/tours/Eilat/Snorkeling-on-Coral-Reef-in-Eilat/d23242-70978P8"],
 ] as const).map(([productId, partnerId, publicUrl]): TourBookingOffer => {
   const id = `tour-${productId}-${partnerId}`;
+  // The new category products were reviewed on 2026-11-14; preserve earlier products\' original audit dates.
+  const checkedAt: ISODate = /^(?:ramon-|golan-)/.test(productId) ? "2026-11-14" : TOUR_CATALOG_CHECK_DATE;
   // Only prices explicitly observed in USD on the named product's listing are stored.
   const amount = productId === "north-coast-small-group" ? 279 : productId === "eilat-glass-bottom-boat" ? 24 : undefined;
-  return { id, productId, partnerId, publicUrl, checkedAt: TOUR_CATALOG_CHECK_DATE,
+  return { id, productId, partnerId, publicUrl, checkedAt,
     ...(amount ? { listedPrice: { kind: "published_snapshot", amount, currency: "USD", basis: "per_person", checkedAt: TOUR_CATALOG_CHECK_DATE, sourceId: id } } : {}) };
 });
 
