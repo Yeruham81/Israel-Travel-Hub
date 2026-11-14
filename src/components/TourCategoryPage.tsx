@@ -62,7 +62,7 @@ export function TourCategoryPage({ id, filters: rawFilters, onChange }: { id: To
         {id !== "jerusalem" && <a href="#tour-catalog" className="btn btn-primary mt-5">Explore {category.shortTitle} experiences</a>}
       </GuideHeroLayout>
     </header>
-    {id === "jerusalem" ? <div className="mt-4"><AuthorCard introduction showPortrait={false} /></div> : <AttractionRegionTrail links={attractionRegions} />}
+    {id === "jerusalem" ? <div className="mt-4"><AuthorCard introduction /></div> : <AttractionRegionTrail links={attractionRegions} />}
     {id !== "jerusalem" && <section aria-labelledby="choose-day-h" className="mt-10"><h2 id="choose-day-h" className="text-3xl font-semibold">Find the right day for your trip</h2><div className="mt-5 grid gap-4 md:grid-cols-3">{category.choices.map(choice => <article key={choice.title} className="rounded-2xl border bg-card p-5"><h3 className="text-xl font-semibold">{choice.title}</h3><p className="mt-2 text-sm leading-relaxed text-muted-foreground">{choice.text}</p></article>)}</div></section>}
     <TourCatalog categoryId={id} filters={filters} onChange={onChange} />
     <section aria-labelledby="planning-day-h" className="mt-12"><h2 id="planning-day-h" className="text-2xl font-semibold">{id === "jerusalem" ? "Choosing the right Jerusalem tour" : `Planning your ${category.shortTitle} experience`}</h2><div className="mt-4 space-y-4 leading-relaxed text-muted-foreground">{category.paragraphs.map(paragraph => <p key={paragraph}>{paragraph}</p>)}</div>
