@@ -277,7 +277,7 @@ export const tourCategories: TourCategory[] = [
       { q: "Can I depart from Jerusalem or Tel Aviv?", a: "Yes, but not every tour offers both cities. Use the departure filters and confirm the exact meeting point, pickup eligibility and return city with the provider." },
       { q: "Can every traveler enter Bethlehem and Jericho?", a: "No. Entry and transit depend on nationality, travel documents, current security measures and the route. Some booking products explicitly restrict Israeli passport holders. Confirm your circumstances with the operator and current official guidance before purchasing." },
       { q: "Is baptism or entry to the Nativity Grotto guaranteed?", a: "No. A stop at Qasr al-Yahud is not necessarily a baptism ceremony; any ceremony needs separate confirmation. Grotto entry depends on religious services, restoration work, queues and available time." },
-      { q: "Can I book my own driver directly to Bethlehem?", a: "I do not advertise an unrestricted private-driver journey into Bethlehem. Use an operator explicitly authorized to serve the requested route and verify permitted transport, local guiding and border or checkpoint arrangements." },
+      { q: "Do tours use local guides or change vehicles at checkpoints?", a: "Sometimes. Bethlehem trips may involve locally licensed guides, a vehicle change or a checkpoint handover. The arrangements differ by operator, traveler eligibility and date. Ask the provider to confirm the complete pickup, guiding and return plan." },
     ], reading: ["bethlehem", "baptism", "jerusalem", "tips"],
   },
   {
