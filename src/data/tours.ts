@@ -72,12 +72,12 @@ export const tourPhotos: Record<string, GuidePhoto> = {
  */
 /** Six Jerusalem-only editorial links: one distinct photo per card. */
 export const jerusalemTourLocalCards = [
-  { to: "/travel-blog/old-city-jerusalem/", title: "Jerusalem's Old City", description: "Discover the historic quarters, landmarks and streets inside the city walls.", photo: { src: "/images/attractions/jerusalem.webp", alt: "Jerusalem's Old City and historic skyline from across the valley" } },
-  { to: "/travel-blog/where-to-stay-in-jerusalem/", title: "Where to stay in Jerusalem", description: "Compare neighborhoods and find the right base for your visit.", photo: { src: jerusalemMamilla, alt: "Jerusalem's Mamilla neighborhood" } },
-  { to: "/travel-blog/museums-in-jerusalem/", title: "Museums in Jerusalem", description: "Explore art, archaeology, history and culture across the city.", photo: { src: museumsJerusalem, alt: "Rockefeller Archaeological Museum in Jerusalem" } },
-  { to: "/travel-blog/shopping-in-jerusalem/", title: "Shopping in Jerusalem", description: "Browse local markets, crafts, boutiques and shopping streets.", photo: { src: "/images/attractions/jerusalem-shopping.webp", alt: "Historic shopping street in central Jerusalem" } },
-  { to: "/travel-blog/churches-in-jerusalem/", title: "Churches in Jerusalem", description: "Plan visits to important churches and Christian heritage sites.", photo: { src: "/images/jerusalem/church-of-all-nations.webp", alt: "Church of All Nations on the Mount of Olives in Jerusalem" } },
-  { to: "/travel-blog/jerusalem-travel-guide/", title: "Jerusalem travel guide", description: "Discover highlights, neighborhoods and practical visitor advice.", photo: { src: "/images/hotels/jerusalem-night.webp", alt: "Illuminated Jerusalem Old City walls and skyline after dark" } },
+  { to: "/travel-blog/old-city-jerusalem/", cta: "Discover the Old City", title: "Jerusalem's Old City", description: "Discover the historic quarters, landmarks and streets inside the city walls.", photo: { src: "/images/attractions/jerusalem.webp", alt: "Jerusalem's Old City and historic skyline from across the valley" } },
+  { to: "/travel-blog/where-to-stay-in-jerusalem/", cta: "Compare neighborhoods", title: "Where to stay in Jerusalem", description: "Compare neighborhoods and find the right base for your visit.", photo: { src: jerusalemMamilla, alt: "Jerusalem's Mamilla neighborhood" } },
+  { to: "/travel-blog/museums-in-jerusalem/", cta: "Find museums", title: "Museums in Jerusalem", description: "Explore art, archaeology, history and culture across the city.", photo: { src: museumsJerusalem, alt: "Rockefeller Archaeological Museum in Jerusalem" } },
+  { to: "/travel-blog/shopping-in-jerusalem/", cta: "Browse shopping tips", title: "Shopping in Jerusalem", description: "Browse local markets, crafts, boutiques and shopping streets.", photo: { src: "/images/attractions/jerusalem-shopping.webp", alt: "Historic shopping street in central Jerusalem" } },
+  { to: "/travel-blog/churches-in-jerusalem/", cta: "Explore sacred sites", title: "Churches in Jerusalem", description: "Plan visits to important churches and Christian heritage sites.", photo: { src: "/images/jerusalem/church-of-all-nations.webp", alt: "Church of All Nations on the Mount of Olives in Jerusalem" } },
+  { to: "/travel-blog/jerusalem-travel-guide/", cta: "Read the travel guide", title: "Jerusalem travel guide", description: "Discover highlights, neighborhoods and practical visitor advice.", photo: { src: "/images/hotels/jerusalem-night.webp", alt: "Illuminated Jerusalem Old City walls and skyline after dark" } },
 ] as const;
 
 /** General planning guides use icon cards, not photographs, to distinguish them from local sights. */
