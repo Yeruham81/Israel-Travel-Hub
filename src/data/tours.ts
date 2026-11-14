@@ -66,6 +66,22 @@ import deadSeaPool from "@/assets/dead-sea/pool.webp";
 import deadSeaLandscape from "@/assets/dead-sea/landscape.webp";
 import deadSeaRouteRoad from "@/assets/guides/dead-sea-route-road.webp";
 import heroMasada from "@/assets/home/hero-masada.webp";
+import ramonClouds from "@/assets/negev/ramon-clouds.webp";
+import ramonWide from "@/assets/negev/ramon-wide.webp";
+import ramonRocks from "@/assets/negev/ramon-rocks.webp";
+import ramonPanorama from "@/assets/negev/ramon-panorama.webp";
+import ramonJeep from "@/assets/negev/ramon-jeep.webp";
+import ramonIbex from "@/assets/negev/ramon-ibex.webp";
+import ramonIbexes from "@/assets/negev/ramon-ibexes.webp";
+import ramonCamelHill from "@/assets/negev/ramon-camel-hill.webp";
+import golanBentalHill from "@/assets/golan/bental-hill.jpg";
+import golanBentalView from "@/assets/golan/bental-view.jpg";
+import golanNimrod from "@/assets/golan/nimrod-fortress.jpg";
+import golanNimrodRuins from "@/assets/golan/nimrod-ruins.jpg";
+import golanBanias from "@/assets/golan/banias-waterfall.jpg";
+import golanElAl from "@/assets/golan/el-al-waterfall.jpg";
+import golanKatzrin from "@/assets/golan/katzrin.jpg";
+import golanLandscape from "@/assets/golan/golan-landscape.jpg";
 
 export const tourCategoryPaths = {
   jerusalem: "/tours/jerusalem/",
@@ -74,6 +90,8 @@ export const tourCategoryPaths = {
   "bethlehem-jericho": "/tours/bethlehem-jericho-jordan-river/",
   "nazareth-galilee": "/tours/nazareth-sea-of-galilee/",
   "northern-coast": "/tours/caesarea-haifa-acre/",
+  "negev-ramon": "/tours/negev-desert-ramon-crater/",
+  "golan-heights": "/tours/golan-heights/",
   "food-markets": "/tours/food-market-tours/",
   "eilat-red-sea": "/tours/eilat-red-sea/",
 } as const;
@@ -133,6 +151,21 @@ export const tourPhotos: Record<string, GuidePhoto> = {
   "coast-private-jerusalem-tel-aviv": { src: heroHaifa, alt: "Panoramic cityscape of Haifa on the slopes of Mount Carmel" },
   "coast-private-cross-israel": { src: roshHanikraCave, alt: "Natural sea grotto at Rosh Hanikra, subject to access" },
   "coast-private-rosh-hanikra": { src: haifaColony, alt: "Historic stone façade in Haifa’s German Colony district" },
+  "ramon-jeep-adventure": { src: ramonJeep, alt: "4x4 off-road tour in the Ramon Crater in the Negev" },
+  "ramon-guided-jeep": { src: ramonWide, alt: "Rock formations across the Ramon Crater in southern Israel" },
+  "ramon-jeep-hiking": { src: ramonRocks, alt: "Rugged Negev desert hills beside Mitzpe Ramon" },
+  "ramon-twilight-stars": { src: ramonPanorama, alt: "Panoramic view of Makhtesh Ramon and desert horizon" },
+  "ramon-cliff-rappelling": { src: ramonCamelHill, alt: "Camel Hill at Mitzpe Ramon above the crater" },
+  "ramon-geology-private": { src: ramonIbex, alt: "Nubian ibex in the Ramon Crater area" },
+  "negev-desert-private-day": { src: ramonIbexes, alt: "Group of Nubian ibexes in the Negev desert" },
+  "golan-coach-tel-aviv": { src: golanBentalHill, alt: "Mount Bental in the Golan Heights", sourceUrl: "https://commons.wikimedia.org/wiki/File:117531_mount_bental_golan_heights_PikiWiki_Israel.jpg", credit: "PikiWiki Israel · CC license details on Wikimedia Commons" },
+  "golan-coach-jerusalem": { src: golanKatzrin, alt: "Village and landscape around Katzrin in the Golan Heights", sourceUrl: "https://commons.wikimedia.org/wiki/File:Katzrin._Golan_heights._07.jpg", credit: "Wikimedia Commons · CC license and author details on source page" },
+  "golan-click-tel-aviv": { src: golanBanias, alt: "Banias waterfall and forest in the northern Golan region", sourceUrl: "https://commons.wikimedia.org/wiki/File:PikiWiki_Israel_83777_the_banias_waterfall.jpg", credit: "PikiWiki Israel · CC license details on Wikimedia Commons" },
+  "golan-click-jerusalem": { src: golanNimrod, alt: "Nimrod Fortress ruins overlooking the northern Golan", sourceUrl: "https://commons.wikimedia.org/wiki/File:117242_nimrod_fortress_golan_heights_PikiWiki_Israel.jpg", credit: "PikiWiki Israel · CC license details on Wikimedia Commons" },
+  "golan-jeep-private": { src: golanElAl, alt: "Waterfall in the El Al stream nature area in the Golan Heights", sourceUrl: "https://commons.wikimedia.org/wiki/File:PikiWiki_Israel_84194_el_al_waterfall.jpg", credit: "PikiWiki Israel · CC license details on Wikimedia Commons" },
+  "golan-private-tel-aviv": { src: golanLandscape, alt: "Grassy open landscapes of the Golan Heights", sourceUrl: "https://commons.wikimedia.org/wiki/File:Golan_Heights_by_Dainis_Matisons_(3324614867).jpg", credit: "Dainis Matisons · Creative Commons license on Wikimedia Commons" },
+  "golan-heritage-private": { src: golanNimrodRuins, alt: "Stone walls at Nimrod Fortress in the northern Golan area", sourceUrl: "https://commons.wikimedia.org/wiki/File:PikiWiki_Israel_67396_nimrod_fortress.jpg", credit: "PikiWiki Israel · CC license details on Wikimedia Commons" },
+  "golan-north-premium": { src: "/images/attractions/sea-of-galilee.webp", alt: "Sea of Galilee at the foot of the Golan Heights, a scenic route toward the northern plateau" },
   "mahane-yehuda-tasting": jerusalemAreaGuides.find(n => n.id === "mahane-yehuda")!.photo,
   "eilat-glass-bottom-boat": airport["eilat"]!,
   "eilat-snorkeling": { src: coralReef, alt: "Corals and fish in the waters of Eilat's Red Sea reef", sourceUrl: "https://commons.wikimedia.org/wiki/File:Corals_in_Eilat_coral_reef_nature_reserve_1.jpg", credit: "Yoav95179 · CC BY-SA 4.0 · resized and converted to WebP", licenseUrl: "https://creativecommons.org/licenses/by-sa/4.0/" },
@@ -201,6 +234,26 @@ export const northernCoastTourLocalCards = [
   { to: "/travel-blog/rosh-hanikra/", cta: "Check grotto access", title: "Rosh Hanikra grottos", description: "Find out about the coastal cliffs and verify current visitor access before including a stop.", photo: { src: roshHanikraPhoto, alt: "White coastal cliffs and turquoise sea grottoes at Rosh Hanikra" } },
   { to: "/travel-blog/museums-in-haifa/", cta: "Browse local museums", title: "Museums in Haifa", description: "Explore art, archaeology and city museums as options for more time in Haifa.", photo: migration["museums-in-haifa"] },
   { to: "/travel-blog/best-hotels-in-haifa/", cta: "Compare Haifa stays", title: "Where to stay in Haifa", description: "Choose a hotel base near the Lower City, German Colony or Mount Carmel.", photo: { src: "/images/hotel-cards/haifa-nof.webp", alt: "Hotel terrace with a panoramic sunset view over Haifa" } },
+] as const;
+
+/** Mitzpe Ramon editorial guides and related Negev journey planning; never imply that related sites are part of every tour. */
+export const negevTourLocalCards = [
+  { to: "/travel-blog/mitzpe-ramon-crater/", cta: "Explore the crater", title: "Mitzpe Ramon visitor guide", description: "Understand the makhtesh, the viewpoints and the town overlooking the crater.", photo: { src: "/images/attractions/ramon-crater.webp", alt: "The layered rock landscape of Ramon Crater" } },
+  { to: "/travel-blog/masada/", cta: "Read the fortress guide", title: "Masada & desert heritage", description: "Another Negev-region heritage day to consider separately from Mitzpe Ramon.", photo: { src: masadaRuins, alt: "Ancient fortress ruins at Masada" } },
+  { to: "/travel-blog/dead-sea-attractions/", cta: "Discover desert sites", title: "Dead Sea area attractions", description: "Explore possible stops if your wider journey continues east toward the Dead Sea.", photo: { src: qumranCaves, alt: "Desert cliffs and caves at Qumran" } },
+  { to: "/travel-blog/eilat/", cta: "Plan an onward journey", title: "Eilat travel guide", description: "Ideas for a separate trip south, beyond the central Negev and Ramon Crater.", photo: { src: coralReef, alt: "Coral reef and colourful fish in the Red Sea at Eilat" } },
+  { to: "/travel-blog/israel-itinerary-7-days/", cta: "See a week-long route", title: "Seven-day Israel itinerary", description: "Fit a desert experience into a broader Israel trip when the driving distances permit.", photo: { src: roadTrip, alt: "Car travelling a scenic road in the desert" } },
+  { to: "/travel-blog/israel-itinerary-10-days/", cta: "Plan more time", title: "Ten-day Israel itinerary", description: "Compare a longer trip with time for the south, cities and historic destinations.", photo: { src: deadSeaRouteRoad, alt: "Highway winding through the Israeli desert" } },
+] as const;
+
+/** Golan-specific tours with six separate nearby destination-planning guides. */
+export const golanTourLocalCards = [
+  { to: "/travel-blog/sea-of-galilee/", cta: "Explore the lake", title: "Sea of Galilee travel guide", description: "Plan the region below the Golan plateau and its waterfront towns.", photo: { src: tiberiasWaterfront, alt: "Tiberias waterfront on the Sea of Galilee" } },
+  { to: "/travel-blog/capernaum/", cta: "Explore Capernaum", title: "Capernaum archaeological site", description: "Discover a major lakeside heritage stop near the Golan approach roads.", photo: { src: capernaum, alt: "Ancient synagogue ruins at Capernaum" } },
+  { to: "/travel-blog/mount-of-beatitudes/", cta: "Explore a viewpoint", title: "Mount of Beatitudes", description: "A nearby Galilee hillside destination for a separate day in the north.", photo: { src: mountBeatitudes, alt: "Church on the Mount of Beatitudes near the Sea of Galilee" } },
+  { to: "/travel-blog/tabgha/", cta: "Explore Tabgha", title: "Tabgha churches", description: "A complementary lakeside historic site, not an automatic Golan-tour stop.", photo: { src: tabgha, alt: "Church and grounds at Tabgha beside the lake" } },
+  { to: "/travel-blog/mount-tabor/", cta: "Visit Mount Tabor", title: "Mount Tabor guide", description: "Another northern Israel viewpoint and heritage destination for a different itinerary.", photo: { src: mountTabor, alt: "Mount Tabor rising above the Galilee landscape" } },
+  { to: "/travel-blog/best-hotels-in-tiberias/", cta: "Compare nearby hotels", title: "Where to stay in Tiberias", description: "Choose a base for local northbound day trips and lake visits.", photo: { src: tiberiasHeritage, alt: "Historic stone buildings in Tiberias" } },
 ] as const;
 
 /** General planning guides use icon cards, not photographs, to distinguish them from local sights. */
