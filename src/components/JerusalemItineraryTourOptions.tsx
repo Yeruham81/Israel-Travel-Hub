@@ -17,7 +17,7 @@ import qasrAlYahud from "@/assets/guides/dead-sea-excursions/qasr-al-yahud.webp"
  * guides. No tour price, rating or availability is retrieved or invented here.
  *
  * Show a balanced choice of OPTIONAL day trips from Jerusalem, on the
- * three- and five-day itineraries without duplicating catalog data.
+ * three-, five- and seven-day itineraries without duplicating catalog data.
  */
 export const threeDayJerusalemTourSelections = [
   { id: "jslm-deadsea-beach-viator", area: "Dead Sea", image: deadSeaMud, alt: "Mud bathing on the Dead Sea shore" },
@@ -32,7 +32,7 @@ const tourCatalog = new Map<string, DeadSeaTourCard | BethlehemTourCard>(
   [...deadSeaTourCards, ...bethlehemTourCards].map(tour => [tour.id, tour] as const),
 );
 
-function trackedItineraryTourUrl(url: string, tourId: string, days: 3 | 5): string {
+function trackedItineraryTourUrl(url: string, tourId: string, days: 3 | 5 | 7): string {
   // Travelpayouts allows a short link's SubID to be replaced per source page.
   // Preserve the approved deep-link destination and partner attribution.
   const parsed = new URL(url);
@@ -43,7 +43,7 @@ function trackedItineraryTourUrl(url: string, tourId: string, days: 3 | 5): stri
 }
 
 /** Shares the compact Bethlehem/Dead Sea photo, duration, price and review-card visual language. */
-export function JerusalemItineraryTourOptions({ days = 3 }: { days?: 3 | 5 }) {
+export function JerusalemItineraryTourOptions({ days = 3 }: { days?: 3 | 5 | 7 }) {
   return <details
     className="group min-w-0 rounded-lg border bg-background"
     data-testid="itinerary-jerusalem-tours"
