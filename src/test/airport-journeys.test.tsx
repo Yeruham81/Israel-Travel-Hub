@@ -70,7 +70,7 @@ describe("four independent airport transportation comparisons", () => {
     expect(g.photos?.station.alt).toMatch(/Terminal 3/);
     expect(g.photos?.onward.alt).toMatch(/Old Jaffa/);
     expect(g.sources).toHaveLength(7);
-    expect(g.faqs.length).toBeGreaterThanOrEqual(11);
+    expect(g.faqs).toHaveLength(10);
     expect(g.weekend.join(" ")).toMatch(/Shabbat|Saturday/);
     expect(g.weekend.join(" ")).toContain("dedicated airport Shabbat guide");
     const links = g.options.flatMap(option => option.inlineLinks || []);
@@ -137,7 +137,8 @@ describe("four independent airport transportation comparisons", () => {
     expect(doc.querySelector('#option-taxi a[href="https://www.gett.com/il/airport-en/"]')).not.toBeNull();
     expect(doc.querySelector('#option-weekend a[href="https://busofash.co.il/?lines=711"]')).not.toBeNull();
     expect(doc.querySelector('#option-rail a[href="/travel-blog/where-to-stay-in-tel-aviv/"]')).not.toBeNull();
-    expect(doc.querySelector('#shabbat a[href="/travel-blog/sherut-in-israel/"]')).not.toBeNull();
+    expect(doc.querySelector('#shabbat a[href="/travel-blog/sherut-in-israel/"]')).toBeNull();
+    expect(doc.querySelector('section[aria-label="Related practical guides"] a[href="/travel-blog/sherut-in-israel/"]')).not.toBeNull();
     expect(doc.querySelector('section[aria-label="Related practical guides"]')?.querySelectorAll("li")).toHaveLength(6);
     expect(doc.querySelector('section[aria-label="Plan the next part of your trip"]')?.querySelectorAll("li")).toHaveLength(4);
     expect(doc.querySelector('section[aria-label="Other airport journey comparisons"]')).toBeNull();
@@ -151,8 +152,8 @@ describe("four independent airport transportation comparisons", () => {
     expect(g.historicalPrices).toBe(false);
     expect(g.title).toMatch(/Ben Gurion Airport to Jerusalem.*Train.*Taxi.*Bus/i);
     expect(g.title).not.toMatch(/2026|2027/);
-    expect(g.answer).toMatch(/Yitzhak Navon.*Bus 485.*limited departures/s);
-    expect(g.intro).toMatch(/In this guide, I compare/);
+    expect(g.answer).toMatch(/direct train.*Jerusalem.*Bus 485.*infrequently/s);
+    expect(g.intro).toContain("The best option depends on your arrival time");
     expect(g.intro).not.toMatch(/26–30|bus 485|fare/i);
     expect(g.photo.alt).toMatch(/Panoramic view.*Jerusalem.*Dome of the Rock/i);
     expect(g.photo.credit).toMatch(/Public domain/);
@@ -162,7 +163,8 @@ describe("four independent airport transportation comparisons", () => {
     expect(g.options.find(o => o.id === "bus")!.cost).not.toContain("₪");
     expect(g.options.find(o => o.id === "taxi")!.cost).toMatch(/₪270–410.*meter/i);
     expect(g.options.find(o => o.id === "bus")!.paragraphs.join(" ")).toContain("Terminal 3, Level 2, Exit 21");
-    expect(g.options.find(o => o.id === "rail")!.paragraphs.join(" ")).toContain("The Jerusalem-line voucher instructions");
+    expect(g.options.find(o => o.id === "rail")!.paragraphs.join(" ")).toContain("getting around Israel guide");
+    expect(g.options.find(o => o.id === "rail")!.paragraphs.join(" ")).not.toContain("instructions and official railway links follow here");
     expect(g.options.find(o => o.id === "rail")!.paragraphs.join(" ")).not.toContain("near the beginning of this guide");
     expect(g.weekend.join(" ")).toMatch(/Nesher.*no longer runs/);
     expect(g.weekendLinks).toContainEqual({ text: "Israel's calendar of events", to: "/travel-blog/israel-holidays/" });
@@ -232,7 +234,8 @@ describe("four independent airport transportation comparisons", () => {
     const rail = doc.querySelector("#option-rail")!;
     const voucher = rail.querySelector('aside[aria-label="Important Jerusalem train ticket information"]')!;
     expect(voucher).not.toBeNull();
-    expect(voucher.textContent).toContain("August 19, 2026");
+    expect(voucher.textContent).toContain("free personal voucher");
+    expect(voucher.textContent).not.toContain("scheduled to start on November 14, 2026");
     expect(voucher.querySelector('a[href*="vouchers-jerusalem"]')).not.toBeNull();
     expect(voucher.querySelector('a[href="https://www.rail.co.il/"]')).not.toBeNull();
     expect(rail.querySelectorAll("figure img")).toHaveLength(2);
@@ -267,12 +270,12 @@ describe("four independent airport transportation comparisons", () => {
     expect(g.photos?.station.alt).toContain("Terminal 3");
     expect(g.photos?.onward.alt).toContain("German Colony");
     expect(g.sources).toHaveLength(6);
-    expect(g.faqs.length).toBeGreaterThanOrEqual(12);
+    expect(g.faqs).toHaveLength(10);
     expect(g.related).toHaveLength(6);
     expect(g.planNext).toHaveLength(4);
     expect(g.options.every(option => Boolean(option.comparison?.advantages && option.comparison?.drawbacks))).toBe(true);
-    expect(g.weekend.join(" ")).toContain("Amal");
-    expect(g.weekend.join(" ")).toContain("discontinued");
+    expect(g.weekend.join(" ")).toContain("Older airport shared-taxi listings");
+    expect(g.weekend.join(" ")).not.toContain("Amal");
     expect(g.options.find(o => o.id === "rail")?.cost).not.toContain("₪");
     expect(g.options.find(o => o.id === "bus")?.cost).not.toContain("₪");
     expect(g.options.find(o => o.id === "taxi")?.cost).toMatch(/meter/i);
@@ -446,6 +449,37 @@ describe("four independent airport transportation comparisons", () => {
       }
     }
   }, 30000);
+
+  it("keeps the four airport journey guides concise, linked and free of duplicate FAQs", () => {
+    const jerusalem = airportJourneyGuides.jerusalem;
+    const telAviv = airportJourneyGuides["tel-aviv"];
+    const haifa = airportJourneyGuides.haifa;
+    const deadSea = airportJourneyGuides["ein-bokek"];
+
+    expect(jerusalem.intro).toContain("The best option depends on your arrival time");
+    expect(jerusalem.options.find(o => o.id === "rail")?.checklist).toContain("Plan how to get from Yitzhak Navon station to your hotel.");
+    expect(jerusalem.options.find(o => o.id === "rail")?.paragraphs.join(" ")).not.toContain("voucher instructions and official railway links follow here");
+    expect(telAviv.intro).toContain("where you're staying");
+    expect(telAviv.faqs).toHaveLength(10);
+    expect(telAviv.faqs.some(faq => faq.q.includes("Can I walk from Tel Aviv railway station"))).toBe(false);
+    expect(telAviv.weekend.join(" ")).not.toContain("old shared-taxi descriptions");
+    expect(haifa.faqs).toHaveLength(10);
+    expect(haifa.faqs.filter(faq => /bus 905/i.test(faq.q))).toHaveLength(2);
+    expect(haifa.faqs.filter(faq => /cruise|Haifa Port/i.test(faq.q))).toHaveLength(2);
+    expect(haifa.faqs.some(faq => faq.q === "When does airport bus 905 run?")).toBe(true);
+    expect(haifa.faqs.some(faq => faq.q === "How do I get from Ben Gurion Airport to Haifa's cruise terminal?")).toBe(true);
+    expect(deadSea.exampleJourney.takeaway).toContain("The train and bus are separate services");
+    expect(deadSea.options.find(o => o.id === "rail")?.paragraphs.join(" ")).not.toContain("interchange");
+    expect(deadSea.options.find(o => o.id === "rail")?.paragraphs.join(" ")).not.toContain("reserved-seat bus 421");
+    expect(deadSea.faqs.some(faq => faq.q === "Is bus 421 via Tel Aviv a good alternative?")).toBe(true);
+    for (const guide of [jerusalem, telAviv, haifa, deadSea]) {
+      expect(guide.intro).not.toContain("In this guide, I compare");
+      expect(new Set(guide.faqs.map(faq => faq.q)).size).toBe(guide.faqs.length);
+      for (const option of guide.options) for (const link of option.inlineLinks ?? []) {
+        expect(option.paragraphs.join(" ").split(link.text), guide.id + ": " + link.text).toHaveLength(2);
+      }
+    }
+  });
 
   it("does not invent live transport fares or claim rail on Shabbat", () => {
     for (const id of airportJourneyIds) {
