@@ -12,7 +12,7 @@ import { GuidePhotoCredit } from "@/components/TravelGuide";
 import { GuideHeroLayout, GuideHeroMedia } from "@/components/GuideHeroMedia";
 import { MoreTourCategories, TourCruiseCallout } from "@/components/TourDiscovery";
 import { TourCatalog } from "@/components/TourCatalog";
-import { getTourCategory, tourCategories, tourCategoryPaths, tourCruisePhoto, tourPhotos, tourReadingGuides, jerusalemTourLocalCards, jerusalemTourPlanningCards, telAvivTourLocalCards, masadaTourLocalCards, bethlehemTourLocalCards, type TourCategoryId } from "@/data/tours";
+import { getTourCategory, tourCategories, tourCategoryPaths, tourCruisePhoto, tourPhotos, tourReadingGuides, jerusalemTourLocalCards, jerusalemTourPlanningCards, telAvivTourLocalCards, masadaTourLocalCards, bethlehemTourLocalCards, galileeTourLocalCards, type TourCategoryId } from "@/data/tours";
 import { offersForTour, parseTourSearch, toursForCategory, type TourSearch } from "@/lib/tours";
 import { CANONICAL_ORIGIN, jsonLd, pageMeta } from "@/lib/site";
 import { hasPublicPhotoCredit } from "@/lib/photo-credits";
@@ -45,11 +45,11 @@ const jerusalemPlanningIcons = {
 
 export function TourCategoryPage({ id, filters: rawFilters, onChange }: { id: TourCategoryId; filters: TourSearch; onChange: (next: TourSearch, replace?: boolean) => void }) {
   const category = getTourCategory(id);
-  const isCityTemplate = id === "jerusalem" || id === "tel-aviv-jaffa" || id === "masada-dead-sea" || id === "bethlehem-jericho";
-  const localCards = id === "jerusalem" ? jerusalemTourLocalCards : id === "tel-aviv-jaffa" ? telAvivTourLocalCards : id === "masada-dead-sea" ? masadaTourLocalCards : bethlehemTourLocalCards;
-  const cityName = id === "jerusalem" ? "Jerusalem" : id === "tel-aviv-jaffa" ? "Tel Aviv & Jaffa" : id === "masada-dead-sea" ? "Masada & the Dead Sea" : "Bethlehem, Jericho & Qasr al-Yahud";
-  const localHeadingId = id === "jerusalem" ? "jerusalem-local-h" : id === "tel-aviv-jaffa" ? "tel-aviv-local-h" : id === "masada-dead-sea" ? "masada-local-h" : "bethlehem-local-h";
-  const planningHeadingId = id === "jerusalem" ? "jerusalem-planning-h" : id === "tel-aviv-jaffa" ? "tel-aviv-planning-h" : id === "masada-dead-sea" ? "masada-planning-h" : "bethlehem-planning-h";
+  const isCityTemplate = id === "jerusalem" || id === "tel-aviv-jaffa" || id === "masada-dead-sea" || id === "bethlehem-jericho" || id === "nazareth-galilee";
+  const localCards = id === "jerusalem" ? jerusalemTourLocalCards : id === "tel-aviv-jaffa" ? telAvivTourLocalCards : id === "masada-dead-sea" ? masadaTourLocalCards : id === "bethlehem-jericho" ? bethlehemTourLocalCards : galileeTourLocalCards;
+  const cityName = id === "jerusalem" ? "Jerusalem" : id === "tel-aviv-jaffa" ? "Tel Aviv & Jaffa" : id === "masada-dead-sea" ? "Masada & the Dead Sea" : id === "bethlehem-jericho" ? "Bethlehem, Jericho & Qasr al-Yahud" : "Nazareth & the Sea of Galilee";
+  const localHeadingId = id === "jerusalem" ? "jerusalem-local-h" : id === "tel-aviv-jaffa" ? "tel-aviv-local-h" : id === "masada-dead-sea" ? "masada-local-h" : id === "bethlehem-jericho" ? "bethlehem-local-h" : "galilee-local-h";
+  const planningHeadingId = id === "jerusalem" ? "jerusalem-planning-h" : id === "tel-aviv-jaffa" ? "tel-aviv-planning-h" : id === "masada-dead-sea" ? "masada-planning-h" : id === "bethlehem-jericho" ? "bethlehem-planning-h" : "galilee-planning-h";
   const filters = parseTourSearch(rawFilters);
   const path = tourCategoryPaths[id];
   const title = category.title;
@@ -61,7 +61,7 @@ export function TourCategoryPage({ id, filters: rawFilters, onChange }: { id: To
     <div className="pt-6"><Breadcrumbs items={[{ name: "Home", to: "/" }, { name: "Tours & day trips", to: "/tours/" }, { name: title, to: path }]} /></div>
     <header className="mt-2">
       <GuideHeroLayout image={<GuideHeroMedia src={category.photo.src} alt={category.photo.alt} width={1200} height={450} compact={isCityTemplate} />}>
-        <p className="eyebrow">{id === "jerusalem" ? "Guided walks, small groups & private experiences" : id === "tel-aviv-jaffa" ? "Guided walks, food, art & private experiences" : id === "masada-dead-sea" ? "Guided desert days, sunrise hikes & private transport" : id === "bethlehem-jericho" ? "Bethlehem, Jericho & Qasr al-Yahud guided experiences" : `Tours & day trips · ${category.shortTitle}`}</p>
+        <p className="eyebrow">{id === "jerusalem" ? "Guided walks, small groups & private experiences" : id === "tel-aviv-jaffa" ? "Guided walks, food, art & private experiences" : id === "masada-dead-sea" ? "Guided desert days, sunrise hikes & private transport" : id === "bethlehem-jericho" ? "Bethlehem, Jericho & Qasr al-Yahud guided experiences" : id === "nazareth-galilee" ? "Galilee churches, guided day trips & private journeys" : `Tours & day trips · ${category.shortTitle}`}</p>
         <h1 className="guide-page-title mt-3 font-semibold">{title}</h1>
         <p data-guide-intro className="mt-4 max-w-3xl text-lg leading-relaxed text-muted-foreground">{category.intro}</p>
         {!isCityTemplate && <a href="#tour-catalog" className="btn btn-primary mt-5">Explore {category.shortTitle} experiences</a>}
@@ -70,7 +70,7 @@ export function TourCategoryPage({ id, filters: rawFilters, onChange }: { id: To
     {isCityTemplate ? <div className="mt-4"><AuthorCard introduction /></div> : <AttractionRegionTrail links={attractionRegions} />}
     {!isCityTemplate && <section aria-labelledby="choose-day-h" className="mt-10"><h2 id="choose-day-h" className="text-3xl font-semibold">Find the right day for your trip</h2><div className="mt-5 grid gap-4 md:grid-cols-3">{category.choices.map(choice => <article key={choice.title} className="rounded-2xl border bg-card p-5"><h3 className="text-xl font-semibold">{choice.title}</h3><p className="mt-2 text-sm leading-relaxed text-muted-foreground">{choice.text}</p></article>)}</div></section>}
     <TourCatalog categoryId={id} filters={filters} onChange={onChange} />
-    <section aria-labelledby="planning-day-h" className="mt-12"><h2 id="planning-day-h" className="text-2xl font-semibold">{id === "jerusalem" ? "Choosing the right Jerusalem tour" : id === "tel-aviv-jaffa" ? "Choosing the right Tel Aviv & Jaffa tour" : id === "masada-dead-sea" ? "Choosing the right Masada & Dead Sea tour" : id === "bethlehem-jericho" ? "Choosing the right Bethlehem & Jericho tour" : `Planning your ${category.shortTitle} experience`}</h2><div className="mt-4 space-y-4 leading-relaxed text-muted-foreground">{category.paragraphs.map(paragraph => <p key={paragraph}>{paragraph}</p>)}</div>
+    <section aria-labelledby="planning-day-h" className="mt-12"><h2 id="planning-day-h" className="text-2xl font-semibold">{id === "jerusalem" ? "Choosing the right Jerusalem tour" : id === "tel-aviv-jaffa" ? "Choosing the right Tel Aviv & Jaffa tour" : id === "masada-dead-sea" ? "Choosing the right Masada & Dead Sea tour" : id === "bethlehem-jericho" ? "Choosing the right Bethlehem & Jericho tour" : id === "nazareth-galilee" ? "Choosing the right Nazareth & Galilee tour" : `Planning your ${category.shortTitle} experience`}</h2><div className="mt-4 space-y-4 leading-relaxed text-muted-foreground">{category.paragraphs.map(paragraph => <p key={paragraph}>{paragraph}</p>)}</div>
       {id === "bethlehem-jericho" && <p className="mt-4 text-sm text-muted-foreground">For the Qasr al-Yahud portion of the trip, <a href="https://en.parks.org.il/reserve-park/baptismal-site-on-the-jordan-river-qasr-al-yahud/" target="_blank" rel="noopener noreferrer" className="font-semibold text-primary underline">check the official visitor information</a>. Opening, admission and permitted activities can change.</p>}
       {id === "masada-dead-sea" && <p className="mt-4 text-sm text-muted-foreground">Ein Gedi access changes after floods. <a href="https://en.parks.org.il/reserve-park/en-gedi-nature-reserve/" target="_blank" rel="noopener noreferrer" className="font-semibold text-primary underline">Check current routes and advance reservations with the parks authority</a> before relying on a tour itinerary.</p>}
     </section>
@@ -79,7 +79,7 @@ export function TourCategoryPage({ id, filters: rawFilters, onChange }: { id: To
     {isCityTemplate ? <>
       <section aria-labelledby={localHeadingId} className="mt-12">
         <h2 id={localHeadingId} className="text-2xl font-semibold">Explore {cityName} further</h2>
-        <p className="mt-2 text-sm text-muted-foreground">{id === "masada-dead-sea" ? "Plan your fortress visit, check nature-trail access, discover desert attractions and choose a place to stay." : id === "bethlehem-jericho" ? "Plan your Bethlehem visit, understand the Qasr al-Yahud site and check practical travel arrangements for the Jordan Valley." : `Find places to visit, neighborhoods to explore and more ways to enjoy ${cityName}.`}</p>
+        <p className="mt-2 text-sm text-muted-foreground">{id === "masada-dead-sea" ? "Plan your fortress visit, check nature-trail access, discover desert attractions and choose a place to stay." : id === "bethlehem-jericho" ? "Plan your Bethlehem visit, understand the Qasr al-Yahud site and check practical travel arrangements for the Jordan Valley." : id === "nazareth-galilee" ? "Explore Nazareth’s main church, lakeside Christian heritage sites and the Jordan River baptismal stop near the Kinneret." : `Find places to visit, neighborhoods to explore and more ways to enjoy ${cityName}.`}</p>
         <div className="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {localCards.map(item => <Link key={item.to} to={item.to} className="group flex h-full min-w-0 flex-col overflow-hidden rounded-xl border bg-card transition-colors hover:border-primary hover:shadow-sm focus-visible:outline-2 focus-visible:outline-primary">
             <img src={item.photo.src} alt={item.photo.alt} width={320} height={176} loading="lazy" decoding="async" className="aspect-[16/9] w-full object-cover" />
@@ -107,7 +107,7 @@ export function TourCategoryPage({ id, filters: rawFilters, onChange }: { id: To
           })}
         </div>
       </section>
-      <HomeContactForm guide={{ heading: id === "masada-dead-sea" ? "Need help planning a Masada & Dead Sea day?" : id === "bethlehem-jericho" ? "Questions about Bethlehem, Jericho or Qasr al-Yahud?" : `Need help planning your time in ${cityName}?`, introduction: id === "bethlehem-jericho" ? "Tell me your travel date, departure city and which places you hope to visit. I can offer general planning information; check eligibility, permitted transport and booking conditions with the licensed tour operator." : "Have a question about your visit or need a private driver? Tell me your travel dates, preferred stops and transportation needs, and I'll get back to you personally.", subject: "", placeholder: "Dates, number of travelers, places you want to visit or your question…" }} />
+      <HomeContactForm guide={{ heading: id === "masada-dead-sea" ? "Need help planning a Masada & Dead Sea day?" : id === "bethlehem-jericho" ? "Questions about Bethlehem, Jericho or Qasr al-Yahud?" : id === "nazareth-galilee" ? "Need help planning a Nazareth & Galilee day?" : `Need help planning your time in ${cityName}?`, introduction: id === "bethlehem-jericho" ? "Tell me your travel date, departure city and which places you hope to visit. I can offer general planning information; check eligibility, permitted transport and booking conditions with the licensed tour operator." : "Have a question about your visit or need a private driver? Tell me your travel dates, preferred stops and transportation needs, and I'll get back to you personally.", subject: "", placeholder: "Dates, number of travelers, places you want to visit or your question…" }} />
     </> : <>
       <RelatedGuideCards title="Get to know the places on your itinerary" guides={guides} />
       <MoreTourCategories currentId={id} />
