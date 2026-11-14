@@ -932,7 +932,7 @@ export const itineraries: Record<ItineraryId, ItineraryGuide> = {
       { title: "Haifa", description: "Bahá’í Gardens viewpoints and coastal sights.", to: "/travel-blog/haifa/", image: "EXISTING:haifa" },
       { title: "Getting around Israel", description: "Trains, buses and practical regional transport.", to: "/travel-blog/getting-around-israel/", image: "itinerary-train" },
     ],
-    hero: "itinerary-3day-jerusalem-cover",
+    hero: "itinerary-10day-cover",
   },
 };
 
@@ -967,5 +967,15 @@ export const itinerarySourcesByGuide: Record<ItineraryId, { label: string; url: 
     { label: "Caesarea National Park — opening hours and access", url: "https://en.parks.org.il/reserve-park/caesarea-national-park/" },
     { label: "Israel entry and ETA-IL information", url: "https://www.gov.il/en/departments/topics/eta-il/govil-landing-page" },
   ],
-  "10": [itinerarySources[0]!, itinerarySources[1]!, itinerarySources[2]!, itinerarySources[3]!, itinerarySources[4]!],
+  "10": [
+    itinerarySources[0]!, itinerarySources[1]!, itinerarySources[2]!, itinerarySources[3]!, itinerarySources[4]!,
+    { label: "Basilica of the Annunciation — Franciscan visiting details", url: "https://www.custodia.org/en/sanctuaries/nazareth-basilica-of-the-annunciation/" },
+    { label: "Magdala — archaeological park visitor information", url: "https://www.magdala.org/plan-your-visit" },
+    { label: "Capernaum National Park — visitor information", url: "https://en.parks.org.il/reserve-park/kfar-nahum-capernaum-national-park/" },
+    { label: "Old Akko — heritage-site opening times", url: "https://www.akko.org.il/en/activity-time/" },
+    { label: "Haifa Bahá’í Gardens — self-guided viewpoints and guided tours", url: "https://ganbahai.org.il/visit-us-haifa/" },
+    { label: "Caesarea National Park — opening and last-entry times", url: "https://en.parks.org.il/reserve-park/caesarea-national-park/" },
+    { label: "Timna Park — visitor transport and access", url: "https://parktimna.co.il/en/know-before-your-visit/navigating-timna-park/" },
+    { label: "Israel entry and ETA-IL information", url: "https://www.gov.il/en/departments/topics/eta-il/govil-landing-page" },
+  ],
 };
