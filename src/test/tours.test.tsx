@@ -194,6 +194,32 @@ describe("tours hub and SEO category pages", () => {
     }
   });
 
+  it.each([
+    { id: "food-markets" as const, path: "/tours/food-market-tours/", local: "food-local-h", planning: "food-planning-h", chip: "Cooking workshop", expected: "carmel-market-cooking" },
+    { id: "eilat-red-sea" as const, path: "/tours/eilat-red-sea/", local: "eilat-local-h", planning: "eilat-planning-h", chip: "Timna Park", expected: "eilat-timna-jeep" },
+  ])("matches the complete compact $id layout, affiliate links and one-click filters", async ({ id, path, local, planning, chip, expected }) => {
+    const router = await renderPage(path);
+    expect(screen.getByTestId("author-card")).toBeInTheDocument();
+    expect(document.querySelectorAll('[data-testid="tour-card"]')).toHaveLength(8);
+    const hrefs = [...document.querySelectorAll('[data-testid="tour-card"] a[target="_blank"]')].map(a => a.getAttribute("href")!);
+    expect(hrefs).toHaveLength(8);
+    expect(new Set(hrefs).size).toBe(8);
+    hrefs.forEach(href => expect(new URL(href).hostname).toMatch(/^(viator|getyourguide)\.tpm\.li$/));
+    expect(document.querySelector(`section[aria-labelledby="${local}"]`)?.querySelectorAll("a.group img")).toHaveLength(6);
+    expect(document.querySelector(`section[aria-labelledby="${planning}"]`)?.querySelectorAll("a.group")).toHaveLength(6);
+    const contact = document.querySelector("section#contact")!;
+    expect(contact).not.toBeNull();
+    expect(contact.querySelector('input[name="subject"]')).toHaveValue("");
+    expect(contact.querySelector('textarea[name="message"]')).toHaveValue("");
+    const nav = screen.getByRole("navigation", { name: "Filter " + (id === "food-markets" ? "Food & markets" : "Eilat & the Red Sea") + " tours" });
+    fireEvent.click(within(nav).getByRole("button", { name: chip }));
+    await waitFor(() => expect(router.state.location.search).toEqual({ q: id === "food-markets" ? "cooking" : "Timna" }));
+    expect(screen.getByTestId("tour-card")).toHaveAttribute("data-product-id", expected);
+    fireEvent.click(within(nav).getByRole("button", { name: "All experiences" }));
+    await waitFor(() => expect(router.state.location.search).toEqual({}));
+    expect(screen.getAllByTestId("tour-card")).toHaveLength(8);
+  });
+
   it("renders every complete category and resolves all guide, category and product-anchor links", async () => {
     for (const category of tourCategories) {
       const router = routerAt(tourCategoryPaths[category.id]);
