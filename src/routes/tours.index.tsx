@@ -31,7 +31,7 @@ function Tours() {
     <HubHeader
       crumbs={[{ name: "Home", to: "/" }, { name: "Tours & day trips", to: "/tours/" }]}
       title={toursHubTitle}
-      intro="Explore Israel's most fascinating destinations, from Jerusalem and the Dead Sea to the Galilee, Negev and Red Sea. Discover guided tours, private experiences and local activities to suit your interests and travel plans."
+      intro="Explore Israel's highlights, from Jerusalem and the Dead Sea to the Galilee, Negev and Red Sea. Find guided tours, private experiences and local activities to suit your travel plans."
     />
     <div className="mx-auto max-w-5xl px-4">
       <TourCategoryExplorer />
