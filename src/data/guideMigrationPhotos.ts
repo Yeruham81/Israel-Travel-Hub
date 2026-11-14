@@ -43,6 +43,7 @@ import itineraryJaffaStreets from "@/assets/tel-aviv/jaffa.webp";
 import itineraryChurchHolySepulchre from "@/assets/guides/holy-sepulchre.jpg";
 import itineraryCapernaumSynagogue from "@/assets/guides/capernaum.jpg";
 import itineraryCaesareaAqueduct from "@/assets/home/caesarea-aqueduct.webp";
+import itineraryAkkoPort from "@/assets/shore-excursions/akko-port.jpg";
 
 
 export const migrationPhotos = {
@@ -231,6 +232,10 @@ export const migrationPhotos = {
   "itinerary-7day-capernaum": {
     "src": itineraryCapernaumSynagogue,
     "alt": "Archaeological remains at Capernaum on the northern Sea of Galilee shore"
+  },
+  "itinerary-10day-akko-port": {
+    "src": itineraryAkkoPort,
+    "alt": "Stone fortifications and historic harbour at Old Akko on Israel’s Mediterranean coast"
   },
   "itinerary-5day-caesarea": {
     "src": itineraryCaesareaAqueduct,
