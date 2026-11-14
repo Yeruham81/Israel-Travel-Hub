@@ -76,7 +76,7 @@ export const taxiGuideCluster: Record<"taxis" | "taxiFares" | "airportTaxis", Tr
         id: "fares", title: "How Much Do Taxis Cost in Israel?",
         paragraphs: [
           "An ordinary taxi meter calculates the fare using a starting charge, distance, travel time and the applicable tariff. Heavy traffic can increase the fare, even for a short trip. Some intercity journeys have legally approved fixed-fare options. Confirm which pricing method applies before travelling.",
-          "Under the published regulations, the meter starts at ₪12.46 outside Eilat and then increases with both time and distance. Night and weekend tariffs can be higher, and longer rides have a higher rate per kilometre. The table below shows the main charges; for full details see my national tariff guide.",
+          "Under the published regulations, the meter starts at ₪12.46 outside Eilat and then increases with both time and distance. Night and weekend tariffs can be higher, and longer rides have a higher rate per kilometre. The table below summarizes the main regulated charges.",
           `An app, telephone or dispatcher booking may carry a regulated booking fee. Airport departures, tolls and other permitted items may cost extra. Consult the national tariff guide for the legal time windows, full additions, price examples and any subsequent changes.`,
           "A separately contracted private transfer can instead have a confirmed written price. Check whether waiting, tolls and extra stops are included before you book.",
         ],
