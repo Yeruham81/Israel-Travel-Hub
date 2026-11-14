@@ -8,8 +8,9 @@ import { privateDriverServices } from "@/data/registry";
 import { airportTransferPhotos } from "@/data/airportTransfers";
 import { emptyDriverQuote, validateDriverQuote, type DriverQuoteFields } from "@/lib/private-driver-quote";
 
-export function PrivateDriverQuoteForm({ serviceId, onServiceChange, initialFields }: { serviceId: string; onServiceChange: (id: string) => void; initialFields?: Partial<DriverQuoteFields> | undefined }) {
-  const [fields, setFields] = useState(() => ({ ...emptyDriverQuote, ...initialFields }));
+export function PrivateDriverQuoteForm({ serviceId, onServiceChange }: { serviceId: string; onServiceChange: (id: string) => void }) {
+  // Page links may select a journey type, but must never prefill the visitor’s free-text answers.
+  const [fields, setFields] = useState(emptyDriverQuote);
   const [errors, setErrors] = useState<string[]>([]);
   const submission = useQuoteSubmission();
   const { reset } = submission;
