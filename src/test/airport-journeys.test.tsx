@@ -464,7 +464,7 @@ describe("four independent airport transportation comparisons", () => {
     expect(telAviv.faqs.some(faq => faq.q.includes("Can I walk from Tel Aviv railway station"))).toBe(false);
     expect(telAviv.weekend.join(" ")).not.toContain("old shared-taxi descriptions");
     expect(haifa.faqs).toHaveLength(10);
-    expect(haifa.faqs.filter(faq => /bus 905/i.test(faq.q))).toHaveLength(2);
+    expect(haifa.faqs.filter(faq => /bus 905/i.test(faq.q))).toHaveLength(3);
     expect(haifa.faqs.filter(faq => /cruise|Haifa Port/i.test(faq.q))).toHaveLength(1);
     expect(haifa.faqs.some(faq => faq.q === "When does airport bus 905 run?")).toBe(true);
     expect(haifa.faqs.some(faq => faq.q === "How do I get from Ben Gurion Airport to Haifa's cruise terminal?")).toBe(true);
