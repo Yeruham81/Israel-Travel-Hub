@@ -537,6 +537,19 @@ describe("migrated Israel itineraries", () => {
     expect(g.overviewRows?.every(row => Boolean(row.travel))).toBe(true);
     expect(g.hotelBases).toContain("Haifa after Day 7");
     expect(g.daysPlan[6]?.evening).toContain("continue to Tel Aviv instead");
+    expect(g.daysPlan[3]?.afternoon).toContain("Check Magdala’s visiting hours before adding this stop");
+    expect(g.daysPlan[4]?.afternoon).toContain("allow time for short drives and separate entrances");
+    expect(g.daysPlan[5]?.morning).toContain("Arbel National Park");
+    expect(g.daySequences?.[5]?.steps[0]?.stop).toContain("Arbel");
+    expect(g.overviewRows?.[6]?.travel).toContain("Road/bus to Akko");
+    expect(g.daysPlan[6]?.morning).toContain("ticket sales end one hour before closing");
+    expect(g.daysPlan[6]?.afternoon).toContain("Rosh Hanikra lies north of Akko");
+    expect(g.daysPlan[6]?.practical).toContain("no railway station in Tiberias");
+    expect(g.daysPlan[7]?.morning).toContain("61 Yefe Nof Street");
+    expect(g.daysPlan[8]?.morning).toContain("self-guided walking route");
+    expect(g.daysPlan[9]?.afternoon).toContain("If flying on Day 11");
+    expect(g.relatedGuides?.find(item => item.title === "Akko Old City")?.image).toBe("itinerary-10day-akko-aerial");
+    expect(g.relatedGuides?.find(item => item.title === "Akko Old City")?.image).not.toBe(g.daysPlan[6]?.image);
     expect(g.daysPlan[7]?.afternoon).toContain("rather than travelling back to Haifa");
     expect(g.daysPlan[9]?.morning).toContain("skip sightseeing");
     expect(g.daySequences?.map(day => day.day)).toEqual([1,2,3,4,5,6,7,8,9,10]);
@@ -564,9 +577,10 @@ describe("migrated Israel itineraries", () => {
     expect(g.relatedGuides).toHaveLength(6);
     expect(g.faqs).toHaveLength(8);
     expect(g.beforeYouGo).toHaveLength(4);
-    expect(g.dayOfficialLinks).toHaveLength(7);
+    expect(g.dayOfficialLinks).toHaveLength(8);
     expect(g.beforeYouGoOfficialLinks).toHaveLength(2);
     expect(itinerarySourcesByGuide["10"].some(source => source.url.includes("akko.org.il"))).toBe(true);
+    expect(itinerarySourcesByGuide["10"].some(source => source.url.includes("arbel-national-park"))).toBe(true);
     expect(itinerarySourcesByGuide["10"].some(source => source.url.includes("parktimna.co.il"))).toBe(true);
     for (const link of g.dayInlineLinks ?? []) {
       expect(g.daysPlan[link.day - 1]?.[link.field], link.phrase).toContain(link.phrase);
