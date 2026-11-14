@@ -92,7 +92,7 @@ export function ExternalTourCard({ tour, pageId, compact = false }: { tour: Tour
 }
 
 export function TourCatalog({ categoryId, filters, onChange }: { categoryId: TourCategoryId; filters: TourSearch; onChange: (next: TourSearch, replace?: boolean) => void }) {
-  const compact = categoryId === "jerusalem" || categoryId === "tel-aviv-jaffa";
+  const compact = categoryId === "jerusalem" || categoryId === "tel-aviv-jaffa" || categoryId === "masada-dead-sea";
   const compactChips: { label: string; search: TourSearch }[] = categoryId === "jerusalem" ? [
     { label: "All tours", search: {} },
     { label: "From Jerusalem", search: { origin: "jerusalem" } },
@@ -104,7 +104,7 @@ export function TourCatalog({ categoryId, filters, onChange }: { categoryId: Tou
     { label: "History & heritage", search: { tag: "heritage" } },
     { label: "Art & architecture", search: { tag: "art" } },
     { label: "Shortest first", search: { sort: "duration" } },
-  ] : [
+  ] : categoryId === "tel-aviv-jaffa" ? [
     { label: "All tours", search: {} },
     { label: "Up to half a day", search: { length: "short" } },
     { label: "Full day", search: { length: "full-day" } },
@@ -115,6 +115,18 @@ export function TourCatalog({ categoryId, filters, onChange }: { categoryId: Tou
     { label: "Self-guided", search: { format: "independent" } },
     { label: "Shortest first", search: { sort: "duration" } },
     { label: "Title A–Z", search: { sort: "title" } },
+  ] : [
+    { label: "All tours", search: {} },
+    { label: "From Jerusalem", search: { origin: "jerusalem" } },
+    { label: "From Tel Aviv", search: { origin: "tel-aviv" } },
+    { label: "Visit Masada", search: { destination: "masada" } },
+    { label: "Ein Gedi routes", search: { destination: "ein-gedi" } },
+    { label: "Dead Sea only", search: { q: "relaxation" } },
+    { label: "Sunrise hikes", search: { q: "sunrise" } },
+    { label: "Private driver", search: { format: "private" } },
+    { label: "Guided groups", search: { format: "shared" } },
+    { label: "Self-guided", search: { format: "independent" } },
+    { label: "Shortest first", search: { sort: "duration" } },
   ];
   const all = toursForCategory(categoryId);
   const visible = filterTours(categoryId, filters);
@@ -152,7 +164,7 @@ export function TourCatalog({ categoryId, filters, onChange }: { categoryId: Tou
       {!compact && <OwnerTourSection tours={owner} />}
       {external.length > 0 && <section id="external-tours" aria-labelledby="external-tours-h" data-section="external-tours" className={compact ? "mt-5 scroll-mt-24" : "mt-12 scroll-mt-24 border-t pt-8"}>
         <h2 id="external-tours-h" className={compact ? "text-2xl font-semibold" : "text-3xl font-semibold"}>{compact ? `Explore ${getTourCategory(categoryId).shortTitle} tours` : `${owner.length > 0 ? "More " : ""}${getTourCategory(categoryId).title}`}</h2>
-        <p className="mt-3 max-w-3xl text-sm leading-relaxed text-muted-foreground">{compact ? (categoryId === "jerusalem" ? "Compare guided walks, cultural experiences and day trips from Jerusalem or Tel Aviv. Explore the options below to find the right experience for your visit." : "Compare guided walks, food and culture tours, cycling and audio experiences around Tel Aviv & Jaffa.") : "Discover guided itineraries, local walks and specialist activities from independent operators. Each card identifies the departure, experience and booking site."}</p>
+        <p className="mt-3 max-w-3xl text-sm leading-relaxed text-muted-foreground">{compact ? (categoryId === "jerusalem" ? "Compare guided walks, cultural experiences and day trips from Jerusalem or Tel Aviv. Explore the options below to find the right experience for your visit." : categoryId === "tel-aviv-jaffa" ? "Compare guided walks, food and culture tours, cycling and audio experiences around Tel Aviv & Jaffa." : "Compare classic Masada guided tours, sunrise hikes, Ein Gedi combinations and Dead Sea beach days from Jerusalem or Tel Aviv.") : "Discover guided itineraries, local walks and specialist activities from independent operators. Each card identifies the departure, experience and booking site."}</p>
         <ul aria-label="External tours" className={compact ? "mt-5 grid gap-3 md:grid-cols-2" : "mt-6 grid gap-5 sm:grid-cols-2"}>{external.map(tour => <ExternalTourCard key={tour.id} tour={tour} pageId={`tours-${categoryId}`} compact={compact} />)}</ul>
         <p className="mt-5 text-xs leading-relaxed text-muted-foreground">Tour details, availability, prices and booking conditions are set by the tour operators and may change. Before booking, check the current departure date and location, itinerary, guiding, admissions, meeting and return arrangements, and cancellation policy directly with the booking provider. Each tour is subject to the operator's own terms and conditions.</p>
       </section>}
