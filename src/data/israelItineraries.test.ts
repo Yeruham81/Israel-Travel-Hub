@@ -194,7 +194,7 @@ describe("migrated Israel itineraries", () => {
     expect(new Set(itineraries["3"].dayTipHeadings).size).toBe(3);
     expect(itineraries["10"].dayTipHeadings).toBeUndefined();
     expect(view).toContain("My practical planning tips");
-    expect(guide.noCarAdvice).toContain("different budgets, group sizes and travel styles");
+    expect(guide.noCarAdvice).toMatch(/^Jerusalem and Tel Aviv lend themselves to exploring/);
     expect(guide.noCarAdvice).not.toContain("Choose an organized tour");
 
     expect(messageCopy).toContain("Have a question about your itinerary, or need to arrange an airport transfer or private journey in Israel?");
@@ -211,6 +211,27 @@ describe("migrated Israel itineraries", () => {
     expect(tours).not.toContain("not additional stops to fit into it");
     expect(tours).toContain('rel={relFor(true)}');
     expect(tours).toContain("recordOutboundClick");
+  });
+
+  it("keeps 3- and 5-day copy concise and flight-day advice realistic", () => {
+    const three = itineraries["3"];
+    const five = itineraries["5"];
+    expect(three.daysPlan[0]?.afternoon).toContain("see Jerusalem museums for other options");
+    expect(three.daysPlan[2]?.morning).toContain("then continue to Old Jaffa by bus or taxi");
+    expect(three.hotelBases).toContain("your flight is on Day 4 or later");
+    expect(three.day3Options?.[0]?.text).toContain("skip Tel Aviv sightseeing entirely");
+    expect(three.noCarAdvice).not.toContain("different budgets");
+
+    expect(five.noCarAdvice).toMatch(/^Jerusalem and Tel Aviv are comfortable to explore/);
+    expect(five.daysPlan[1]?.evening).toContain("enjoy a relaxed evening after the desert excursion");
+    expect(five.daysPlan[3]?.morning).toContain("Check the Israel Railways journey planner for your travel date");
+    expect(five.dayChoices?.find(choice => choice.day === 5)?.options[1]?.text)
+      .toContain("An early flight may leave no time for the coastal excursion");
+    expect(five.logistics[0]?.text).toContain("Use Jerusalem accommodation as your base for Days 1–3");
+    expect(five.faqs.some(faq => faq.q === "What if I fly home on Day 5?" && faq.a.includes("An early flight"))).toBe(true);
+
+    expect(three.dayInlineLinks?.find(link => link.phrase === "Jerusalem museums")).toBeDefined();
+    expect(five.dayOfficialLinks?.find(link => link.phrase === "Israel Railways journey planner")).toBeDefined();
   });
 
   it("turns the five-day route into a detailed, coherent full-day itinerary", () => {
@@ -537,7 +558,7 @@ describe("migrated Israel itineraries", () => {
   it("turns the three-day guide into a travel-ready plan without changing longer itineraries", () => {
     const guide = itineraries["3"];
     expect(guide.hotelBases).toContain("nights 1 and 2");
-    expect(guide.hotelBases).toContain("A Tel Aviv night after Day 3");
+    expect(guide.hotelBases).toContain("Add a night in Tel Aviv after Day 3");
     expect(guide.daySequences?.map(day => day.day)).toEqual([1, 2, 3]);
     for (const day of guide.daySequences ?? []) {
       expect(day.steps).toHaveLength(3);
@@ -561,7 +582,7 @@ describe("migrated Israel itineraries", () => {
       "Flying home on Day 3?", "Staying another night?",
     ]);
     expect(guide.daysPlan[2]?.practical).toBe("Before leaving Jerusalem, confirm where you can store and collect your luggage in Tel Aviv, including opening hours and transport from the storage location to the airport. Do not assume every rail station has lockers. Consult Ben Gurion Airport connections before deciding how late to sightsee.");
-    expect(guide.day3Options?.[0]?.text).toContain("confirm a luggage-storage solution");
+    expect(guide.day3Options?.[0]?.text).toContain("arrange luggage storage in advance");
     expect(guide.daysPlan[2]?.morning).toMatch(/no trains run/i);
     for (const id of ["7", "10"] as const) expect(itineraries[id].day3Options).toBeUndefined();
     expect(itineraries["10"].daySequences).toBeUndefined();
