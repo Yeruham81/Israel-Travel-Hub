@@ -335,7 +335,7 @@ describe("migrated Israel itineraries", () => {
     expect(view).toContain('const compactOverview = id === "3" || id === "5" || id === "7"');
     expect(view).toContain('data-testid={`day-${index + 1}-route-choices`}');
     expect(view.indexOf('data-testid={`day-${index + 1}-route-choices`}')).toBeLessThan(view.indexOf('<dl className="space-y-5">'));
-    expect(view).toContain('id !== "5" && id !== "7" ? <h3 className="mt-6 text-xl font-semibold">Transport and hotel planning</h3>');
+    expect(view).toContain('id !== "5" && id !== "7" && id !== "10" ? <h3 className="mt-6 text-xl font-semibold">Transport and hotel planning</h3>');
     expect(view).toContain("Have more or fewer than 5 days in Israel?");
     expect(view).toContain("My practical planning tips");
     expect(view).toContain("g.dayTipHeadings?.[index]");
@@ -480,7 +480,7 @@ describe("migrated Israel itineraries", () => {
     expect(view).toContain("Before you book");
     expect(view).toContain("Related practical guides");
     expect(view).toContain('days={id === "10" ? 10 : id === "7" ? 7 : id === "5" ? 5 : 3}');
-    expect(view).toContain('id !== "5" && id !== "7"');
+    expect(view).toContain('id !== "5" && id !== "7" && id !== "10"');
     expect(view.indexOf('data-testid={`day-${index + 1}-route-choices`}')).toBeLessThan(view.indexOf('<dl className="space-y-5">'));
     expect(tours).toContain("days?: 3 | 5 | 7 | 10");
     expect(tours).toContain("days: 3 | 5 | 7 | 10");
