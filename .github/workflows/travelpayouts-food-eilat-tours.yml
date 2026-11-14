@@ -5,8 +5,9 @@ on:
     paths:
       - 'scripts/travelpayouts/generate-food-eilat-tours.mjs'
       - '.github/workflows/travelpayouts-food-eilat-tours.yml'
+      - 'scripts/travelpayouts/apply-food-eilat-tours.mjs'
 permissions:
-  contents: read
+  contents: write
 jobs:
   generate:
     if: contains(github.event.head_commit.message, '[generate-food-eilat-tour-links]')
@@ -22,6 +23,19 @@ jobs:
         env:
           TRAVELPAYOUTS_API_TOKEN: ${{ secrets.TRAVELPAYOUTS_API_TOKEN }}
         run: node scripts/travelpayouts/generate-food-eilat-tours.mjs
+      - name: Validate and stage exact affiliate URLs
+        run: node scripts/travelpayouts/apply-food-eilat-tours.mjs
+      - name: Commit verified links to main
+        run: |
+          if git diff --quiet -- src/data/registry.ts; then
+            echo "No affiliate changes"
+          else
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git add src/data/registry.ts
+            git commit -m "Add 16 exact Food & Eilat category Travelpayouts links"
+            git push origin HEAD:main
+          fi
       - uses: actions/upload-artifact@v4
         if: always()
         with:
