@@ -180,7 +180,7 @@ describe("migrated practical guides", () => {
       "guide-entry", "guide-iaa-terminal-2026", "guide-customs-tourists",
       "guide-lost-property", "guide-iaa-accessibility", "guide-gett",
     ]));
-    expect(guide.sections.find((s) => s.id === "arrival-terminal")!.paragraphs.join(" ")).toMatch(/international arriving flights continue to use Terminal 3.*Domestic flights arriving from Ramon Airport use Terminal 1/s);
+    expect(guide.sections.find((s) => s.id === "arrival-terminal")!.paragraphs.join(" ")).toMatch(/International flights currently arrive at Terminal 3.*Domestic flights from Ramon Airport arrive at Terminal 1/s);
     expect(guide.sections.find((s) => s.id === "customs")!.paragraphs.join(" ")).toMatch(/red and green channels.*red channel and ask/s);
     expect(guide.sections.find((s) => s.id === "leave-airport")!.inlineLinks?.map((l) => l.to)).toEqual([
       travelGuidePaths.airportTaxis, "/airport-transfers/", travelGuidePaths.sherut, travelGuidePaths.taxiFares,
