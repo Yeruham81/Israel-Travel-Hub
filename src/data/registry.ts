@@ -1195,6 +1195,16 @@ export const affiliateConfig: Record<string, { trackingUrl: string } | undefined
   "tour-masada-sunrise-jerusalem-viator@tours-masada-dead-sea": { trackingUrl: "https://viator.tpm.li/aT7XOGAp" },
   "tour-dead-sea-relax-tel-aviv-viator@tours-masada-dead-sea": { trackingUrl: "https://viator.tpm.li/bSLf7tfv" },
   "tour-dead-sea-relax-jerusalem-viator@tours-masada-dead-sea": { trackingUrl: "https://viator.tpm.li/rCb6K2nL" },
+  // API-generated deep links for the Bethlehem, Jericho & Qasr al-Yahud tour category (Travelpayouts project 406243).
+  // Each offer is product-specific and uses its own source-page SubID; never reuse another page's links.
+  "tour-jerusalem-bethlehem-private-getyourguide@tours-bethlehem-jericho": { trackingUrl: "https://getyourguide.tpm.li/4GXisbcl" },
+  "tour-jerusalem-bethlehem-shared-getyourguide@tours-bethlehem-jericho": { trackingUrl: "https://getyourguide.tpm.li/tpjahRNO" },
+  "tour-bethlehem-jericho-jordan-viator@tours-bethlehem-jericho": { trackingUrl: "https://viator.tpm.li/PgiMvL41" },
+  "tour-bethlehem-halfday-jerusalem-getyourguide@tours-bethlehem-jericho": { trackingUrl: "https://getyourguide.tpm.li/gTSCNyuN" },
+  "tour-bethlehem-private-halfday-viator@tours-bethlehem-jericho": { trackingUrl: "https://viator.tpm.li/n8Kk19R2" },
+  "tour-bethlehem-jericho-qasr-small-group-viator@tours-bethlehem-jericho": { trackingUrl: "https://viator.tpm.li/SVmtGeCA" },
+  "tour-bethlehem-jericho-qasr-tel-aviv-viator@tours-bethlehem-jericho": { trackingUrl: "https://viator.tpm.li/fgm6bDD8" },
+  "tour-bethlehem-qasr-dead-sea-viator@tours-bethlehem-jericho": { trackingUrl: "https://viator.tpm.li/p4ze5xww" },
   // Configure an approved product-specific affiliate URL once; all category appearances use it.
   ...Object.fromEntries(tourBookingOffers.map((offer) => [offer.id, undefined])),
   "shore-viator-haifa-jerusalem-bethlehem": undefined,
