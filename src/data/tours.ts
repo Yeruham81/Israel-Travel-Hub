@@ -25,7 +25,7 @@ import bethlehemShepherdsField from "@/assets/guides/bethlehem/shepherds-field-c
 import jordanQasrPhoto from "@/assets/guides/dead-sea-excursions/jordan-river-qasr-al-yahud.webp";
 import qasrPhoto from "@/assets/guides/dead-sea-excursions/qasr-al-yahud.webp";
 import jerusalemQasrPhoto from "@/assets/guides/qasr-el-yahud.jpg";
-import palestinianTaxi from "@/assets/guides/bethlehem/palestinian-taxi.jpg";
+import bethlehemNativity from "@/assets/home/bethlehem-nativity.webp";
 import coralReef from "@/assets/eilat/coral-reef.webp";
 import cruiseShip from "@/assets/home/cruise-port.webp";
 import roadTrip from "@/assets/home/road-trip.webp";
@@ -97,7 +97,7 @@ export const tourPhotos: Record<string, GuidePhoto> = {
   "bethlehem-private-halfday": { src: bethlehemCatholicGrottos, alt: "Ancient stone chapel and grottos in Bethlehem" },
   "bethlehem-jericho-qasr-small-group": { src: qasrPhoto, alt: "Pilgrims at the Qasr al-Yahud baptismal site on the Jordan River" },
   "bethlehem-jericho-qasr-tel-aviv": { src: jordanQasrPhoto, alt: "Jordan River banks at Qasr al-Yahud" },
-  "bethlehem-qasr-dead-sea": { src: palestinianTaxi, alt: "Palestinian taxi on a Bethlehem-area street" },
+  "bethlehem-qasr-dead-sea": { src: deadSeaMud, alt: "Visitors bathing in mineral-rich Dead Sea mud" },
   "nazareth-galilee-tel-aviv": migration["basilica-of-the-annunciation"],
   "galilee-nazareth-jordan": migration["EXISTING:galilee"],
   "caesarea-haifa-akko": airport["caesarea"]!,
@@ -147,7 +147,7 @@ export const bethlehemTourLocalCards = [
   { to: travelGuidePaths.bethlehem, cta: "Plan your Bethlehem visit", title: "Jerusalem to Bethlehem", description: "Learn about checkpoints, travel eligibility, local transport and Nativity Church visits.", photo: { src: bethlehemMilkGrotto, alt: "The Milk Grotto Chapel in Bethlehem" } },
   { to: travelGuidePaths.qasr, cta: "Explore the baptismal site", title: "Qasr al-Yahud", description: "Plan a visit to the Jordan River baptismal site near Jericho, including access and site hours.", photo: { src: jerusalemQasrPhoto, alt: "The Jordan River baptismal area at Qasr al-Yahud" } },
   { to: travelGuidePaths.baptism, cta: "Read baptism guidance", title: "Jordan River baptism visits", description: "Understand the practical arrangements and preparation for visiting the baptismal site.", photo: { src: "/images/attractions/jordan-river-baptism.webp", alt: "Baptismal steps leading into the Jordan River" } },
-  { to: travelGuidePaths.jerusalemDayTrips, cta: "Compare nearby day trips", title: "Day trips from Jerusalem", description: "Explore how to plan a day out from Jerusalem and compare travel arrangements.", photo: { src: bethlehemMangerSquare, alt: "Manger Square in the heart of Bethlehem" } },
+  { to: travelGuidePaths.jerusalemDayTrips, cta: "Compare nearby day trips", title: "Day trips from Jerusalem", description: "Explore how to plan a day out from Jerusalem and compare travel arrangements.", photo: { src: bethlehemNativity, alt: "The Church of the Nativity complex in Bethlehem" } },
   { to: "/travel-blog/dead-sea-attractions/", cta: "Discover the Jordan Valley", title: "Jordan Valley & Dead Sea stops", description: "Learn about nearby historic and desert attractions beyond the main pilgrimage stops.", photo: { src: qumranCaves, alt: "Ancient caves in the Judean Desert near Qumran" } },
   { to: travelGuidePaths.jerusalemDeadSea, cta: "Plan the journey", title: "Jerusalem to the Dead Sea", description: "Compare road travel options if your itinerary continues through the Jordan Valley.", photo: { src: deadSeaRouteRoad, alt: "Desert road winding through the Jordan Valley" } },
 ] as const;
