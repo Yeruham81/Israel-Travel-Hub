@@ -772,7 +772,7 @@ describe("migrated practical guides", () => {
     expect(travelGuides.baptism.reviewNote).toMatch(/different hour sets|differing hour|different hours/i);
     expect(travelGuides.baptism.sections.find((section) => section.id === "qasr-visit")!.photo?.alt).toContain("Qasr el-Yahud");
     expect(travelGuides.jerusalemChurches.comparison.rows.map((row) => row[0])).toEqual(["Old City", "Mount of Olives / Kidron", "Mount Zion", "Ein Karem"]);
-    expect(travelGuides.jerusalemDeadSea.sections.find(section => section.id === "beach")!.paragraphs.join(" ")).toContain("Tamar Regional Council provides showers");
+    expect(travelGuides.jerusalemDeadSea.sections.find(section => section.id === "beach")!.paragraphs.join(" ")).toContain("free access, showers, changing rooms");
     expect(travelGuides.jerusalemShopping.sections.find((section) => section.id === "crafts-and-practicalities")!.paragraphs.join(" ")).toContain("not independently confirmed");
     expect(JSON.stringify(travelGuides.jerusalemChurches)).not.toMatch(/10-20 ILS|50-80 ILS|open daily.*8:00/i);
     expect(travelGuides.jerusalemDayTrips.sections.find((section) => section.id === "tel-aviv-jaffa")).toBeTruthy();
