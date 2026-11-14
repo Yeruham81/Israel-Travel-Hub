@@ -13,16 +13,14 @@ import keremHaTeimanim from "@/assets/tel-aviv/kerem-hateimanim.webp";
 import rothschild from "@/assets/tel-aviv/rothschild.webp";
 import akko from "@/assets/shore-excursions/akko-port.jpg";
 import heroHaifa from "@/assets/home/hero-haifa.webp";
-import haifaPanoramaTile from "@/assets/haifa/panorama-tile.webp";
-import caesareaTheatre from "@/assets/home/caesarea-theatre.webp";
+import haifaBotanica from "@/assets/haifa/botanica.webp";
+import haifaColony from "@/assets/haifa/colony.webp";
+import roshHanikraCave from "@/assets/guides/rosh-hanikra.jpg";
 import caesareaTheatreCard from "@/assets/home/caesarea-theatre-card.webp";
 import caesareaDusk from "@/assets/home/caesarea-dusk.webp";
-import caesareaDuskCard from "@/assets/home/caesarea-dusk-card.webp";
-import caesareaAqueductCard from "@/assets/home/caesarea-aqueduct-card.webp";
 import caesareaAqueductTile from "@/assets/home/caesarea-aqueduct-tile.webp";
 import haifaPortImage from "@/assets/home/haifa-port.webp";
 import roshHanikraPhoto from "@/assets/home/rosh-hanikra-grottos.jpg";
-import heroCaesarea from "@/assets/home/hero-caesarea.webp";
 import holySepulchre from "@/assets/guides/holy-sepulchre.jpg";
 import jerusalemOldCityStreet from "@/assets/jerusalem/old-city.webp";
 import jerusalemDowntown from "@/assets/jerusalem/downtown.webp";
@@ -127,14 +125,14 @@ export const tourPhotos: Record<string, GuidePhoto> = {
   "galilee-private-tel-aviv": { src: tiberiasCentral, alt: "Central streets of Tiberias near the Sea of Galilee" },
   "galilee-private-jerusalem": migration["magdala-archaeology"],
   "nazareth-magdala-private": { src: mountPrecipice, alt: "View from Mount Precipice over Nazareth and the Galilee countryside" },
-  "caesarea-haifa-akko": { src: caesareaTheatre, alt: "Roman theatre ruins at Caesarea beside the Mediterranean" },
-  "north-coast-small-group": { src: caesareaAqueductCard, alt: "Ancient Roman aqueduct at Caesarea on the Mediterranean coast" },
+  "caesarea-haifa-akko": { src: "/images/attractions/haifa-coast.webp", alt: "The Mediterranean coast at Haifa, a stop on the Caesarea and Akko day route" },
+  "north-coast-small-group": { src: "/images/hotel-cards/haifa-port-inn.webp", alt: "Traditional stone architecture in Haifa’s Lower City" },
   "coast-coach-tel-aviv": { src: caesareaDusk, alt: "Historic coastal Caesarea in the evening light" },
   "coast-coach-jerusalem": { src: haifaPortImage, alt: "Port of Haifa with the coastal city rising behind it" },
-  "coast-akko-jerusalem": { src: heroCaesarea, alt: "Historic Caesarea archaeological park by the Mediterranean Sea" },
+  "coast-akko-jerusalem": { src: haifaBotanica, alt: "Evening panorama of Haifa and the illuminated Bahá’í Gardens" },
   "coast-private-jerusalem-tel-aviv": { src: heroHaifa, alt: "Panoramic cityscape of Haifa on the slopes of Mount Carmel" },
-  "coast-private-cross-israel": { src: caesareaDuskCard, alt: "Sunlit Roman-era coastal ruins at Caesarea" },
-  "coast-private-rosh-hanikra": { src: "/images/attractions/haifa-coast.webp", alt: "Northern Israel Mediterranean coastline near Haifa" },
+  "coast-private-cross-israel": { src: roshHanikraCave, alt: "Natural sea grotto at Rosh Hanikra, subject to access" },
+  "coast-private-rosh-hanikra": { src: haifaColony, alt: "Historic stone façade in Haifa’s German Colony district" },
   "mahane-yehuda-tasting": jerusalemAreaGuides.find(n => n.id === "mahane-yehuda")!.photo,
   "eilat-glass-bottom-boat": airport["eilat"]!,
   "eilat-snorkeling": { src: coralReef, alt: "Corals and fish in the waters of Eilat's Red Sea reef", sourceUrl: "https://commons.wikimedia.org/wiki/File:Corals_in_Eilat_coral_reef_nature_reserve_1.jpg", credit: "Yoav95179 · CC BY-SA 4.0 · resized and converted to WebP", licenseUrl: "https://creativecommons.org/licenses/by-sa/4.0/" },
@@ -202,7 +200,7 @@ export const northernCoastTourLocalCards = [
   { to: "/travel-blog/akko-acre/", cta: "Visit historic Akko", title: "Akko (Acre) Old City", description: "Find the Knights’ Halls, markets, harbour and winding Crusader-era streets.", photo: { src: akko, alt: "Fishing boats moored beside Akko's historic stone harbour" } },
   { to: "/travel-blog/rosh-hanikra/", cta: "Check grotto access", title: "Rosh Hanikra grottos", description: "Find out about the coastal cliffs and verify current visitor access before including a stop.", photo: { src: roshHanikraPhoto, alt: "White coastal cliffs and turquoise sea grottoes at Rosh Hanikra" } },
   { to: "/travel-blog/museums-in-haifa/", cta: "Browse local museums", title: "Museums in Haifa", description: "Explore art, archaeology and city museums as options for more time in Haifa.", photo: migration["museums-in-haifa"] },
-  { to: "/travel-blog/best-hotels-in-haifa/", cta: "Compare Haifa stays", title: "Where to stay in Haifa", description: "Choose a hotel base near the Lower City, German Colony or Mount Carmel.", photo: { src: haifaPanoramaTile, alt: "Haifa city panorama and Mount Carmel overlooking the bay" } },
+  { to: "/travel-blog/best-hotels-in-haifa/", cta: "Compare Haifa stays", title: "Where to stay in Haifa", description: "Choose a hotel base near the Lower City, German Colony or Mount Carmel.", photo: { src: "/images/hotel-cards/haifa-nof.webp", alt: "Hotel terrace with a panoramic sunset view over Haifa" } },
 ] as const;
 
 /** General planning guides use icon cards, not photographs, to distinguish them from local sights. */
