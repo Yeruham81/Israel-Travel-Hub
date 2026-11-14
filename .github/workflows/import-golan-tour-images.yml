@@ -46,7 +46,7 @@ jobs:
             const license=(info?.extmetadata?.LicenseShortName?.value||'').replace(/<[^>]*>/g,'');
             if(!/^CC BY(?:-SA)? (?:2\.0|2\.5|3\.0|4\.0)$/.test(license))throw Error('Unverified license for '+slug+': '+license);
             const url=info.thumburl||info.url;
-            if(!url||!(url.startsWith('https://upload.wikimedia.org/')||url.startsWith('https://commons.wikimedia.org/wiki/Special:Redirect/file/')))throw Error('Unexpected file URL '+slug+': '+url);
+            if(!url||!(url.startsWith('https://upload.wikimedia.org/')||url.startsWith('https://thumb.wikimedia.org/')||url.startsWith('https://commons.wikimedia.org/wiki/Special:Redirect/file/')))throw Error('Unexpected file URL '+slug+': '+url);
             const img=await fetch(url,{headers,signal:AbortSignal.timeout(45000)});
             if(!img.ok)throw Error('Photo '+slug+' HTTP '+img.status);
             const bytes=Buffer.from(await img.arrayBuffer());
