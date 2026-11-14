@@ -12,10 +12,9 @@ import type { SacredHillId } from "@/data/sacredHillGuides";
  * Source page/path are attached by useQuoteSubmission. No third-party form embed.
  */
 export function SacredHillContactForm({ id }: { id: SacredHillId }) {
-  const subject = id === "mount-zion" ? "Mount Zion visit" : "Mount of Olives visit";
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
-  const [topic, setTopic] = useState(subject);
+  const [topic, setTopic] = useState("");
   const [message, setMessage] = useState("");
   const [consent, setConsent] = useState(false);
   const [errors, setErrors] = useState<string[]>([]);
