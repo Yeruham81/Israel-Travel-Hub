@@ -1242,6 +1242,16 @@ export const affiliateConfig: Record<string, { trackingUrl: string } | undefined
   "tour-galilee-private-tel-aviv-viator@tours-nazareth-galilee": { trackingUrl: "https://viator.tpm.li/zVWQjSvg" },
   "tour-galilee-private-jerusalem-viator@tours-nazareth-galilee": { trackingUrl: "https://viator.tpm.li/KnyzZJ58" },
   "tour-nazareth-magdala-private-viator@tours-nazareth-galilee": { trackingUrl: "https://viator.tpm.li/thKprWBa" },
+  // Travelpayouts project 406243 product-specific northern-coast links generated on 2026-11-14.
+  // Unique page-specific SubIDs; never replace these with generic category/search landing URLs.
+  "tour-caesarea-haifa-akko-getyourguide@tours-northern-coast": { trackingUrl: "https://getyourguide.tpm.li/RmsDFaIW" },
+  "tour-north-coast-small-group-viator@tours-northern-coast": { trackingUrl: "https://viator.tpm.li/UDuXoXyY" },
+  "tour-coast-coach-tel-aviv-viator@tours-northern-coast": { trackingUrl: "https://viator.tpm.li/wawHwScv" },
+  "tour-coast-coach-jerusalem-viator@tours-northern-coast": { trackingUrl: "https://viator.tpm.li/4xTj4fRx" },
+  "tour-coast-akko-jerusalem-viator@tours-northern-coast": { trackingUrl: "https://viator.tpm.li/jeBd1942" },
+  "tour-coast-private-jerusalem-tel-aviv-viator@tours-northern-coast": { trackingUrl: "https://viator.tpm.li/GYzhPYEF" },
+  "tour-coast-private-cross-israel-viator@tours-northern-coast": { trackingUrl: "https://viator.tpm.li/oCMi2HqB" },
+  "tour-coast-private-rosh-hanikra-viator@tours-northern-coast": { trackingUrl: "https://viator.tpm.li/xqF1QNfY" },
   // Configure an approved product-specific affiliate URL once; all category appearances use it.
   ...Object.fromEntries(tourBookingOffers.map((offer) => [offer.id, undefined])),
   "shore-viator-haifa-jerusalem-bethlehem": undefined,
