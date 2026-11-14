@@ -48,6 +48,8 @@ export function TourCategoryPage({ id, filters: rawFilters, onChange }: { id: To
   const isCityTemplate = id === "jerusalem" || id === "tel-aviv-jaffa";
   const localCards = id === "jerusalem" ? jerusalemTourLocalCards : telAvivTourLocalCards;
   const cityName = id === "jerusalem" ? "Jerusalem" : "Tel Aviv & Jaffa";
+  const localHeadingId = id === "jerusalem" ? "jerusalem-local-h" : "tel-aviv-local-h";
+  const planningHeadingId = id === "jerusalem" ? "jerusalem-planning-h" : "tel-aviv-planning-h";
   const filters = parseTourSearch(rawFilters);
   const path = tourCategoryPaths[id];
   const title = category.title;
@@ -75,8 +77,8 @@ export function TourCategoryPage({ id, filters: rawFilters, onChange }: { id: To
     {id !== "jerusalem" && (["bethlehem-jericho", "masada-dead-sea", "food-markets"] as string[]).includes(id) && <JerusalemClusterLinks pageKey={("tour-" + id) as JerusalemClusterKey} />}
     <FaqList faqs={category.faqs} />
     {isCityTemplate ? <>
-      <section aria-labelledby="city-local-h" className="mt-12">
-        <h2 id="city-local-h" className="text-2xl font-semibold">Explore {cityName} further</h2>
+      <section aria-labelledby={localHeadingId} className="mt-12">
+        <h2 id={localHeadingId} className="text-2xl font-semibold">Explore {cityName} further</h2>
         <p className="mt-2 text-sm text-muted-foreground">Find places to visit, neighborhoods to explore and more ways to enjoy {cityName}.</p>
         <div className="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {localCards.map(item => <Link key={item.to} to={item.to} className="group flex h-full min-w-0 flex-col overflow-hidden rounded-xl border bg-card transition-colors hover:border-primary hover:shadow-sm focus-visible:outline-2 focus-visible:outline-primary">
@@ -89,8 +91,8 @@ export function TourCategoryPage({ id, filters: rawFilters, onChange }: { id: To
           </Link>)}
         </div>
       </section>
-      <section aria-labelledby="city-planning-h" className="mt-12">
-        <h2 id="city-planning-h" className="text-2xl font-semibold">Practical guides for your trip to Israel</h2>
+      <section aria-labelledby={planningHeadingId} className="mt-12">
+        <h2 id={planningHeadingId} className="text-2xl font-semibold">Practical guides for your trip to Israel</h2>
         <p className="mt-2 text-sm text-muted-foreground">Helpful information for planning your visit beyond {cityName}.</p>
         <div className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
           {jerusalemTourPlanningCards.map(item => {
