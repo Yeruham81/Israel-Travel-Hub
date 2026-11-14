@@ -474,7 +474,7 @@ describe("tours hub and SEO category pages", () => {
     await waitFor(() => expect(router.state.location.search).toEqual({ q: "Rosh Hanikra" }));
     expect(screen.getAllByTestId("tour-card")).toHaveLength(3);
     fireEvent.click(within(nav).getByRole("button", { name: "Small groups" }));
-    await waitFor(() => expect(router.state.location.search).toEqual({ q: "Small group" }));
+    await waitFor(() => expect(router.state.location.search).toEqual({ format: "shared", q: "Small group" }));
     expect(screen.getAllByTestId("tour-card")).toHaveLength(1);
     expect(screen.getByTestId("tour-card")).toHaveAttribute("data-product-id", "north-coast-small-group");
     fireEvent.click(within(nav).getByRole("button", { name: "Private tours" }));
