@@ -92,7 +92,7 @@ export function ExternalTourCard({ tour, pageId, compact = false }: { tour: Tour
 }
 
 export function TourCatalog({ categoryId, filters, onChange }: { categoryId: TourCategoryId; filters: TourSearch; onChange: (next: TourSearch, replace?: boolean) => void }) {
-  const compact = categoryId === "jerusalem" || categoryId === "tel-aviv-jaffa" || categoryId === "masada-dead-sea" || categoryId === "bethlehem-jericho" || categoryId === "nazareth-galilee" || categoryId === "northern-coast";
+  const compact = categoryId === "jerusalem" || categoryId === "tel-aviv-jaffa" || categoryId === "masada-dead-sea" || categoryId === "bethlehem-jericho" || categoryId === "nazareth-galilee" || categoryId === "northern-coast" || categoryId === "negev-ramon" || categoryId === "golan-heights";
   const compactChips: { label: string; search: TourSearch }[] = categoryId === "jerusalem" ? [
     { label: "All tours", search: {} },
     { label: "From Jerusalem", search: { origin: "jerusalem" } },
@@ -148,7 +148,7 @@ export function TourCatalog({ categoryId, filters, onChange }: { categoryId: Tou
     { label: "Guided group tours", search: { format: "shared" } },
     { label: "Full day", search: { length: "full-day" } },
     { label: "Shortest first", search: { sort: "duration" } },
-  ] : [
+  ] : categoryId === "northern-coast" ? [
     { label: "All tours", search: {} },
     { label: "From Tel Aviv", search: { origin: "tel-aviv" } },
     { label: "From Jerusalem", search: { origin: "jerusalem" } },
@@ -156,6 +156,26 @@ export function TourCatalog({ categoryId, filters, onChange }: { categoryId: Tou
     { label: "Small groups", search: { format: "shared", q: "Small group" } },
     { label: "Guided groups", search: { format: "shared" } },
     { label: "Private tours", search: { format: "private" } },
+    { label: "Shortest first", search: { sort: "duration" } },
+  ] : categoryId === "negev-ramon" ? [
+    { label: "All experiences", search: {} },
+    { label: "From Mitzpe Ramon", search: { origin: "mitzpe-ramon" } },
+    { label: "Jeep safaris", search: { q: "jeep" } },
+    { label: "Geology tours", search: { q: "geology" } },
+    { label: "Stargazing", search: { q: "stargazing" } },
+    { label: "Rappelling", search: { q: "rappelling" } },
+    { label: "Full-day adventures", search: { length: "full-day" } },
+    { label: "Private tours", search: { format: "private" } },
+    { label: "Shortest first", search: { sort: "duration" } },
+  ] : [
+    { label: "All tours", search: {} },
+    { label: "From Tel Aviv", search: { origin: "tel-aviv" } },
+    { label: "From Jerusalem", search: { origin: "jerusalem" } },
+    { label: "Local northern pickup", search: { origin: "galilee" } },
+    { label: "Mount Bental", search: { q: "Bental" } },
+    { label: "Katzrin", search: { q: "Katzrin" } },
+    { label: "Group tours", search: { format: "shared" } },
+    { label: "Private experiences", search: { format: "private" } },
     { label: "Shortest first", search: { sort: "duration" } },
   ];
   const all = toursForCategory(categoryId);
@@ -194,7 +214,7 @@ export function TourCatalog({ categoryId, filters, onChange }: { categoryId: Tou
       {!compact && <OwnerTourSection tours={owner} />}
       {external.length > 0 && <section id="external-tours" aria-labelledby="external-tours-h" data-section="external-tours" className={compact ? "mt-5 scroll-mt-24" : "mt-12 scroll-mt-24 border-t pt-8"}>
         <h2 id="external-tours-h" className={compact ? "text-2xl font-semibold" : "text-3xl font-semibold"}>{compact ? `Explore ${getTourCategory(categoryId).shortTitle} tours` : `${owner.length > 0 ? "More " : ""}${getTourCategory(categoryId).title}`}</h2>
-        <p className="mt-3 max-w-3xl text-sm leading-relaxed text-muted-foreground">{compact ? (categoryId === "jerusalem" ? "Compare guided walks, cultural experiences and day trips from Jerusalem or Tel Aviv. Explore the options below to find the right experience for your visit." : categoryId === "tel-aviv-jaffa" ? "Compare guided walks, food and culture tours, cycling and audio experiences around Tel Aviv & Jaffa." : categoryId === "masada-dead-sea" ? "Compare classic Masada guided tours, sunrise hikes, Ein Gedi combinations and Dead Sea beach days from Jerusalem or Tel Aviv." : categoryId === "bethlehem-jericho" ? "Compare Bethlehem highlights with longer tours visiting Jericho and the Qasr al-Yahud baptismal site. Each card identifies the actual stops and departure city." : categoryId === "nazareth-galilee" ? "Compare Nazareth, Sea of Galilee churches and day trips with or without a Yardenit Jordan River stop, with both shared and privately guided options." : "Compare guided trips to Caesarea, Haifa and Akko from Tel Aviv or Jerusalem, including small groups, private guiding and routes with an advertised Rosh Hanikra stop.") : "Discover guided itineraries, local walks and specialist activities from independent operators. Each card identifies the departure, experience and booking site."}</p>
+        <p className="mt-3 max-w-3xl text-sm leading-relaxed text-muted-foreground">{compact ? (categoryId === "jerusalem" ? "Compare guided walks, cultural experiences and day trips from Jerusalem or Tel Aviv. Explore the options below to find the right experience for your visit." : categoryId === "tel-aviv-jaffa" ? "Compare guided walks, food and culture tours, cycling and audio experiences around Tel Aviv & Jaffa." : categoryId === "masada-dead-sea" ? "Compare classic Masada guided tours, sunrise hikes, Ein Gedi combinations and Dead Sea beach days from Jerusalem or Tel Aviv." : categoryId === "bethlehem-jericho" ? "Compare Bethlehem highlights with longer tours visiting Jericho and the Qasr al-Yahud baptismal site. Each card identifies the actual stops and departure city." : categoryId === "nazareth-galilee" ? "Compare Nazareth, Sea of Galilee churches and day trips with or without a Yardenit Jordan River stop, with both shared and privately guided options." : categoryId === "northern-coast" ? "Compare guided trips to Caesarea, Haifa and Akko from Tel Aviv or Jerusalem, including small groups, private guiding and routes with an advertised Rosh Hanikra stop." : categoryId === "negev-ramon" ? "Compare Mitzpe Ramon jeep trips, desert geology outings, stargazing and rappelling. Most experiences depart locally, not from Tel Aviv." : "Compare guided Golan Heights day trips and private experiences from Tel Aviv, Jerusalem or locally, with no Safed itineraries.") : "Discover guided itineraries, local walks and specialist activities from independent operators. Each card identifies the departure, experience and booking site."}</p>
         <ul aria-label="External tours" className={compact ? "mt-5 grid gap-3 md:grid-cols-2" : "mt-6 grid gap-5 sm:grid-cols-2"}>{external.map(tour => <ExternalTourCard key={tour.id} tour={tour} pageId={`tours-${categoryId}`} compact={compact} />)}</ul>
         <p className="mt-5 text-xs leading-relaxed text-muted-foreground">Tour details, availability, prices and booking conditions are set by the tour operators and may change. Before booking, check the current departure date and location, itinerary, guiding, admissions, meeting and return arrangements, and cancellation policy directly with the booking provider. Each tour is subject to the operator's own terms and conditions.</p>
       </section>}
