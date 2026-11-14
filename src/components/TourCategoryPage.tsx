@@ -81,7 +81,7 @@ export function TourCategoryPage({ id, filters: rawFilters, onChange }: { id: To
             <span className="flex flex-1 flex-col p-3.5">
               <span className="text-base font-semibold leading-snug text-foreground group-hover:text-primary">{item.title}</span>
               <span className="mt-1.5 line-clamp-2 text-xs leading-relaxed text-muted-foreground">{item.description}</span>
-              <span className="mt-auto pt-2 text-xs font-semibold text-primary">Explore guide →</span>
+              <span className="mt-auto pt-2 text-xs font-semibold text-primary">{item.cta}</span>
             </span>
           </Link>)}
         </div>
