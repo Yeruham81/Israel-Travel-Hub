@@ -201,6 +201,11 @@ export function IsraelItineraryPage({ id }: { id: ItineraryId }) {
                         </li>
                       ))}
                     </ul>
+                    {id === "7" && (index === 3 || index === 5) && (
+                      <p className="mt-3 text-xs leading-relaxed text-muted-foreground" data-testid="seven-day-transfer-times-note">
+                        Visit times cover attractions only, not intercity travel, local transfers, hotel check-in or luggage handling. Public transport can add substantial time.
+                      </p>
+                    )}
                   </div>
                 )}
                 {g.dayChoices?.find(choice => choice.day === index + 1) && (
