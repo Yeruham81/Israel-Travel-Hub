@@ -218,7 +218,9 @@ describe("tours hub and SEO category pages", () => {
         expect(tour.operatorId).not.toBe("moshe-barak");
         if (category.id !== "jerusalem") expect(card.textContent).toContain("Operated by");
         else expect(card.textContent).toMatch(/Viator|GetYourGuide/);
-        for (const link of card.querySelectorAll('a[target="_blank"]')) expect(link.getAttribute("rel")).toBe("noopener noreferrer");
+        for (const link of card.querySelectorAll('a[target="_blank"]')) {
+          expect(link.getAttribute("rel")?.split(/\s+/)).toEqual(expect.arrayContaining(["noopener", "noreferrer"]));
+        }
       }
       if (category.id === "jerusalem") {
         const more = doc.querySelector('section[aria-labelledby="jerusalem-next-h"]')!;
