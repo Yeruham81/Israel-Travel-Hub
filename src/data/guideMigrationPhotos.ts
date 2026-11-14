@@ -41,6 +41,7 @@ import itineraryMasadaCar from "@/assets/home/masada-cable-car.webp";
 import itineraryDeadSeaShore from "@/assets/guides/dead-sea-ein-bokek-shore.webp";
 import itineraryJaffaStreets from "@/assets/tel-aviv/jaffa.webp";
 import itineraryChurchHolySepulchre from "@/assets/guides/holy-sepulchre.jpg";
+import itineraryCapernaumSynagogue from "@/assets/guides/capernaum.jpg";
 import itineraryCaesareaAqueduct from "@/assets/home/caesarea-aqueduct.webp";
 
 
@@ -226,6 +227,10 @@ export const migrationPhotos = {
   "EXISTING:ramon": {
     "src": image34,
     "alt": "Desert cliffs and the landscape of Ramon Crater"
+  },
+  "itinerary-7day-capernaum": {
+    "src": itineraryCapernaumSynagogue,
+    "alt": "Archaeological remains at Capernaum on the northern Sea of Galilee shore"
   },
   "itinerary-5day-caesarea": {
     "src": itineraryCaesareaAqueduct,
