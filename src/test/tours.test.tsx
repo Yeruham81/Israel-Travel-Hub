@@ -489,7 +489,7 @@ describe("tours hub and SEO category pages", () => {
 
   it.each([
     { id: "negev-ramon" as const, path: "/tours/negev-desert-ramon-crater/", local: "negev-local-h", planning: "negev-planning-h", chips: "Filter Negev & Ramon Crater tours", q: "stargazing", qChip: "Stargazing", qCount: 1 },
-    { id: "golan-heights" as const, path: "/tours/golan-heights/", local: "golan-local-h", planning: "golan-planning-h", chips: "Filter Golan Heights tours", q: "Bental", qChip: "Mount Bental", qCount: 4 },
+    { id: "golan-heights" as const, path: "/tours/golan-heights/", local: "golan-local-h", planning: "golan-planning-h", chips: "Filter Golan Heights tours", q: "Bental", qChip: "Mount Bental", qCount: 6 },
   ])("renders the new compact $id catalog with eight unique tracked offers, images and destination-specific filters", async ({ id, path, local, planning, chips, q, qChip, qCount }) => {
     const router = await renderPage(path);
     const nav = screen.getByRole("navigation", { name: chips });
