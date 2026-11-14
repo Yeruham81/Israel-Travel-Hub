@@ -28,6 +28,19 @@ import hotelRoom from "@/assets/home/hotel-room.webp";
 import masadaCableCar from "@/assets/home/masada-cable-car.webp";
 import caesareaAqueduct from "@/assets/home/caesarea-aqueduct.webp";
 import capernaum from "@/assets/guides/capernaum.jpg";
+import masadaAerial from "@/assets/guides/dead-sea-excursions/masada-aerial.webp";
+import masadaPalace from "@/assets/guides/dead-sea-excursions/masada-palace.webp";
+import masadaSnakePath from "@/assets/guides/dead-sea-excursions/masada-snake-path.webp";
+import masadaRuins from "@/assets/guides/dead-sea-excursions/masada-ruins.webp";
+import einGediWaterfall from "@/assets/guides/dead-sea-excursions/ein-gedi-waterfall.webp";
+import einGediOasis from "@/assets/guides/dead-sea-excursions/ein-gedi-oasis.webp";
+import qumranCaves from "@/assets/guides/dead-sea-excursions/qumran-caves.webp";
+import deadSeaMud from "@/assets/guides/dead-sea-excursions/dead-sea-mud-bathing.webp";
+import deadSeaSunbeds from "@/assets/dead-sea/sunbeds.webp";
+import deadSeaPool from "@/assets/dead-sea/pool.webp";
+import deadSeaLandscape from "@/assets/dead-sea/landscape.webp";
+import deadSeaRouteRoad from "@/assets/guides/dead-sea-route-road.webp";
+import heroMasada from "@/assets/home/hero-masada.webp";
 
 export const tourCategoryPaths = {
   jerusalem: "/tours/jerusalem/",
@@ -64,8 +77,14 @@ export const tourPhotos: Record<string, GuidePhoto> = {
   "tel-aviv-cycling": { src: telAvivBeachfront, alt: "Tel Aviv seafront and promenade" },
   "white-city-audio": { src: telAvivDizengoff, alt: "Dizengoff neighborhood streets in central Tel Aviv" },
   "tel-aviv-jaffa-small-group": { src: keremHaTeimanim, alt: "Historic central Tel Aviv neighborhood and streets" },
-  "masada-dead-sea-tel-aviv": migration["EXISTING:masada"],
+  "masada-dead-sea-tel-aviv": { src: masadaPalace, alt: "Ancient palace remains on Masada overlooking the desert" },
   "masada-ein-gedi-dead-sea": migration["jerusalem-to-the-dead-sea"],
+  "masada-dead-sea-jerusalem": { src: masadaAerial, alt: "Masada plateau and the surrounding Judean Desert seen from above" },
+  "masada-ein-gedi-jerusalem": { src: einGediWaterfall, alt: "Waterfall and vegetation in the Ein Gedi oasis" },
+  "masada-sunrise-tel-aviv": { src: masadaSnakePath, alt: "The steep Snake Path leading up Masada in the desert" },
+  "masada-sunrise-jerusalem": { src: heroMasada, alt: "Masada fortress and the Judean Desert landscape" },
+  "dead-sea-relax-tel-aviv": { src: deadSeaSunbeds, alt: "Sun loungers at a designated Dead Sea beach" },
+  "dead-sea-relax-jerusalem": { src: deadSeaMud, alt: "Dead Sea mud bathing experience" },
   "jerusalem-bethlehem-shared": { src: bethlehemMangerSquare, alt: "Manger Square in Bethlehem" },
   "bethlehem-jericho-jordan": migration["EXISTING:qasr"],
   "nazareth-galilee-tel-aviv": migration["basilica-of-the-annunciation"],
@@ -100,6 +119,16 @@ export const telAvivTourLocalCards = [
   { to: "/travel-blog/museums-in-tel-aviv/", cta: "Find museums", title: "Museums in Tel Aviv", description: "Art, design and local history, with practical visitor details.", photo: migration["museums-in-tel-aviv"] },
   { to: "/travel-blog/where-to-stay-in-tel-aviv/", cta: "Compare neighborhoods", title: "Where to stay in Tel Aviv", description: "Find the best base for the seafront, cafés and cultural sites.", photo: { src: "/images/city-stays/tel-aviv-dizengoff.webp", alt: "Central Tel Aviv neighborhood near Dizengoff" } },
   { to: "/travel-blog/getting-around-tel-aviv/", cta: "Plan local transport", title: "Getting around Tel Aviv", description: "Explore walking, light rail, buses and taxi options.", photo: { src: "/images/city-stays/tel-aviv-beachfront.webp", alt: "Tel Aviv beachfront and seafront streets" } },
+] as const;
+
+/** Six destination-specific editorial links for Masada and the Dead Sea. */
+export const masadaTourLocalCards = [
+  { to: "/travel-blog/masada/", cta: "Plan your fortress visit", title: "Masada visitor guide", description: "Understand the fortress, cable car, hiking routes and entry arrangements.", photo: { src: masadaRuins, alt: "Ancient archaeological ruins at Masada" } },
+  { to: "/travel-blog/the-dead-sea/", cta: "Explore the Dead Sea", title: "The Dead Sea travel guide", description: "Find designated bathing areas, facilities and practical safety advice.", photo: { src: deadSeaLandscape, alt: "The Dead Sea and the surrounding desert mountains" } },
+  { to: "/travel-blog/ein-gedi/", cta: "Check reserve access", title: "Ein Gedi Nature Reserve", description: "Plan around changed trail access, advance booking and weather conditions.", photo: { src: einGediOasis, alt: "Green vegetation and water in the Ein Gedi desert oasis" } },
+  { to: "/travel-blog/dead-sea-attractions/", cta: "Discover more stops", title: "Attractions around the Dead Sea", description: "Explore desert viewpoints, historic sites and other possible stops.", photo: { src: qumranCaves, alt: "Caves in the cliffs near Qumran by the Dead Sea" } },
+  { to: "/travel-blog/best-dead-sea-hotels/", cta: "Compare places to stay", title: "Where to stay at the Dead Sea", description: "Compare Ein Bokek hotels, spa facilities and overnight options.", photo: { src: deadSeaPool, alt: "Swimming pool in a Dead Sea resort setting" } },
+  { to: "/travel-blog/jerusalem-to-the-dead-sea/", cta: "Compare travel options", title: "Jerusalem to the Dead Sea", description: "Compare buses, driving and private transport to the Dead Sea.", photo: { src: deadSeaRouteRoad, alt: "A desert highway leading toward the Dead Sea" } },
 ] as const;
 
 /** General planning guides use icon cards, not photographs, to distinguish them from local sights. */
@@ -185,19 +214,25 @@ export const tourCategories: TourCategory[] = [
   },
   {
     id: "masada-dead-sea", title: "Masada & Dead Sea tours", shortTitle: "Masada & the Dead Sea",
-    description: "Compare Masada and Dead Sea day trips, including Ein Gedi combinations, departure cities, guiding, duration and admission arrangements.",
-    intro: "Stand above the desert at Masada, then unwind beside the Dead Sea. Choose a guided fortress-and-beach day or a longer route with an Ein Gedi stop, balancing memorable scenery with time to enjoy each place.",
+    description: "Compare exact Masada and Dead Sea tour options from Jerusalem or Tel Aviv, including guided trips, sunrise hikes, Ein Gedi routes, beach days and private transport.",
+    intro: "Explore Masada's mountain fortress and the extraordinary Dead Sea, with day trips from Jerusalem and Tel Aviv. Compare classic guided tours, sunrise hikes, Ein Gedi combinations and relaxed beach days.",
     photo: migration["EXISTING:masada"], match: { destinations: ["masada", "dead-sea", "ein-gedi"] },
-    paragraphs: ["Masada and the Dead Sea make a natural pairing, but the details change the day considerably. Some tours include a guide at the fortress; others provide shared transportation and a host, leaving site visits independent. Cable-car tickets, park admission and beach facilities may be included or paid separately.", "An Ein Gedi combination adds a nature stop and a longer schedule. The exact walking route depends on current reserve access and conditions. If your priority is a relaxed beach visit, fewer stops may suit you better. For private transport, I can discuss the pickup city, time at each stop and return journey before quoting the day."],
+    paragraphs: [
+      "Choose your departure city first. Classic tours usually pair a guided visit to Masada with time at a designated Dead Sea beach. Sunrise options begin very early and often involve the steep Snake Path hike, while Dead Sea-only trips leave more time for relaxing by the water.",
+      "Look carefully at what is actually included: national-park and cable-car tickets, reserve admission, Dead Sea beach access, meals and any guided visits can be charged separately. An English-speaking host or driver does not necessarily provide professional guiding at the sites.",
+      "Ein Gedi's walking routes have changed following flood damage, and some advertised itineraries may visit an alternative location. Check the current accessible trails with the park authority and confirm the precise stop with the tour operator. For a flexible private day, I can arrange transport from Jerusalem or Tel Aviv, with your stops and return time agreed in advance.",
+    ],
     choices: [
-      { title: "Fortress & beach", text: "A classic first visit combining archaeology, dramatic views and time at a designated Dead Sea bathing area." },
-      { title: "Add an Ein Gedi stop", text: "More variety and nature in a longer day. Check the available trail and how much time is actually allocated to it." },
-      { title: "Guided or independent visits", text: "A guide explains the sites; a host or driver may handle logistics only. Compare the actual inclusions and extra ticket costs." },
+      { title: "Masada and beach", text: "Combine fortress history and dramatic desert views with time at a designated Dead Sea bathing area." },
+      { title: "Sunrise and Ein Gedi", text: "An early, active day with a steep climb on some routes. Confirm reserve access and your fitness for the hike." },
+      { title: "Dead Sea relaxation", text: "Spend more time by the water instead of visiting Masada, or arrange a flexible private itinerary." },
     ],
     faqs: [
-      { q: "Is the Masada cable car included?", a: "It depends on the product and selected option. Check both the national-park admission and cable-car charge before comparing total costs." },
-      { q: "Does every Dead Sea tour visit Ein Gedi?", a: "No. The destination tags show which advertised itineraries include Ein Gedi. The actual route and reserve access still need confirmation for your date." },
-      { q: "Can I choose a private driver instead?", a: "Yes. My private day is quoted for your route and party. The quote separates transportation from admissions, meals and any licensed guiding you request." },
+      { q: "Can I start a Masada and Dead Sea tour from Jerusalem or Tel Aviv?", a: "Yes. The catalog includes departures from both cities. Travel times, meeting points and the time available at each stop differ, so check the exact departure shown on the booking page." },
+      { q: "Is the Masada cable car included in the tour price?", a: "Not always. National-park admission and cable-car tickets may be separate. On sunrise itineraries, the ascent may be a demanding hike on the Snake Path rather than a cable-car ride." },
+      { q: "Can I visit Ein Gedi on a combined day tour?", a: "Some tours advertise Ein Gedi, but floods have changed trail access and operators may substitute another location. Check current reserve information, advance-registration requirements and the operator's confirmed itinerary." },
+      { q: "Are there tours that visit only the Dead Sea?", a: "Yes. Dead Sea relaxation tours focus on beach time without a Masada fortress visit. Confirm the designated beach, bathing facilities, admission fees and pickup location before booking." },
+      { q: "Can I arrange a private car and driver?", a: "Yes. I can arrange a private transport day from Jerusalem or Tel Aviv with a route and stops agreed around your plans. My driving service is separate from licensed guiding, site admissions and meals." },
     ], reading: ["masada", "deadSea", "einGedi", "tips"],
   },
   {
