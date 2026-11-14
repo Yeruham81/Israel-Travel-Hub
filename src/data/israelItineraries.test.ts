@@ -390,7 +390,7 @@ describe("migrated Israel itineraries", () => {
     expect(tourComponent).toContain("These tours replace a planned excursion");
     expect(tourComponent).toContain("in place of the independent Day 3 desert plan");
     expect(itineraryComponent).toContain('id === "7" && (index === 3 || index === 5)');
-    expect(itineraryComponent).toContain("Visit times cover attractions only");
+    expect(itineraryComponent).toContain("The times shown are for sightseeing only.");
     expect(g.daySequences?.[2]?.steps[0]?.stop).toBe("Masada plateau");
     expect(g.daySequences?.[5]?.steps[0]?.stop).toBe("Haifa's German Colony viewpoint");
     expect(g.daysPlan[2]?.morning).not.toContain("Allow about two to three hours at the fortress");
