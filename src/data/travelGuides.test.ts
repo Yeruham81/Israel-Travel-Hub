@@ -3,6 +3,15 @@ import { filterGuides, getGuideTopicLabel, guideDirectory, guideTopics, isGuideT
 import { formatCheckDate } from "@/data/registry";
 
 describe("travel guide topic filters and prerender safety", () => {
+  it("uses different locations in the 3-, 5- and 10-day itinerary directory photos", () => {
+    const byId = (id: string) => guideDirectory.find((guide) => guide.id === `israel-itinerary-${id}`)!.photo!;
+    const photos = ["3", "5", "10"].map(byId);
+    expect(new Set(photos.map((photo) => photo.src)).size).toBe(3);
+    expect(byId("3").alt).toMatch(/Jerusalem/);
+    expect(byId("5").alt).toMatch(/Caesarea/);
+    expect(byId("10").alt).toMatch(/Akko/);
+  });
+
   it("defines a label for every directory topic and accepts every valid topic", () => {
     expect(guideDirectory.length).toBeGreaterThan(50);
     for (const topic of guideTopics) {
