@@ -13,7 +13,7 @@ export function HomeContactForm({ context = "homepage", guide, showPortrait = tr
   const headingId = guide ? "guide-contact-h" : context === "about" ? "about-contact-h" : context === "taxis" ? "taxis-contact-h" : "home-contact-h";
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
-  const [subject, setSubject] = useState(guide?.subject ?? (context === "taxis" ? "Taxis and private transport in Israel" : ""));
+  const [subject, setSubject] = useState("");
   const [message, setMessage] = useState("");
   const [consent, setConsent] = useState(false);
   const [error, setError] = useState("");
