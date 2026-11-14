@@ -15,7 +15,6 @@ import museumsJerusalem from "@/assets/guides/museums-in-jerusalem.jpg";
 import nativityCourtyard from "@/assets/guides/bethlehem/nativity-courtyard.jpg";
 import bethlehemMangerSquare from "@/assets/guides/bethlehem/manger-square.jpg";
 import bethlehemMilkGrotto from "@/assets/guides/bethlehem/milk-grotto.jpg";
-import shepherdsFieldChapel from "@/assets/guides/bethlehem/shepherds-field-chapel.webp";
 import coralReef from "@/assets/eilat/coral-reef.webp";
 import cruiseShip from "@/assets/home/cruise-port.webp";
 import roadTrip from "@/assets/home/road-trip.webp";
