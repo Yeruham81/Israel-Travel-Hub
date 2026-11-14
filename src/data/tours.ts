@@ -67,8 +67,9 @@ export const tourPhotos: Record<string, GuidePhoto> = {
 };
 
 /**
- * Page-specific editorial image choices, with no repeated images across the
- * cover, tour cards, author portrait, related reading and onward links.
+ * Page-specific editorial photography never repeats across a rendered page.
+ * A separated Moshe Barak portrait in the introduction and bottom contact
+ * form is intentional and does not count as duplicate editorial photography.
  */
 /** Six Jerusalem-only editorial links: one distinct photo per card. */
 export const jerusalemTourLocalCards = [
