@@ -1,0 +1,65 @@
+name: Import licensed Golan tour photographs
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/import-golan-tour-images.yml'
+permissions:
+  contents: write
+jobs:
+  import-licensed-photos:
+    if: contains(github.event.head_commit.message, '[import-golan-tour-images]')
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - name: Download verified Wikimedia Commons thumbnails with metadata checks
+        run: |
+          node --input-type=module <<'NODE'
+          import { mkdir, writeFile } from 'node:fs/promises';
+          const photos = [
+            ['bental-view', '131596 views from mount bental in ramat - the golan heigh PikiWiki Israel.jpg'],
+            ['bental-hill', '117531 mount bental golan heights PikiWiki Israel.jpg'],
+            ['nimrod-fortress', '117242 nimrod fortress golan heights PikiWiki Israel.jpg'],
+            ['banias-waterfall', 'PikiWiki Israel 83777 the banias waterfall.jpg'],
+            ['katzrin', 'Katzrin. Golan heights. 07.jpg'],
+            ['el-al-waterfall', 'PikiWiki Israel 84194 el al waterfall.jpg'],
+            ['golan-landscape', 'Golan Heights by Dainis Matisons (3324614867).jpg'],
+            ['nimrod-ruins', 'PikiWiki Israel 67396 nimrod fortress.jpg']
+          ];
+          const headers = {'User-Agent': 'IsraelTravelHub-EditorialPhotoResearch/1.0 (license-compliant attribution)'};
+          await mkdir('src/assets/golan', {recursive:true});
+          for (const [slug,file] of photos) {
+            const u = new URL('https://commons.wikimedia.org/w/api.php');
+            u.searchParams.set('action','query'); u.searchParams.set('format','json');
+            u.searchParams.set('titles','File:'+file); u.searchParams.set('prop','imageinfo');
+            u.searchParams.set('iiprop','url|extmetadata'); u.searchParams.set('iiurlwidth','1000');
+            const r = await fetch(u,{headers,signal:AbortSignal.timeout(20000)});
+            if(!r.ok) throw Error('Metadata for '+slug+': HTTP '+r.status);
+            const json=await r.json();
+            const page=Object.values(json.query.pages)[0];
+            const info=page.imageinfo?.[0];
+            const license=(info?.extmetadata?.LicenseShortName?.value||'').replace(/<[^>]*>/g,'');
+            if(!/^CC BY(?:-SA)? (?:2\.0|2\.5|3\.0|4\.0)$/.test(license))throw Error('Unverified license for '+slug+': '+license);
+            const url=info.thumburl||info.url;
+            if(!url||!url.startsWith('https://upload.wikimedia.org/'))throw Error('Unexpected file URL '+slug);
+            const img=await fetch(url,{headers,signal:AbortSignal.timeout(45000)});
+            if(!img.ok)throw Error('Photo '+slug+' HTTP '+img.status);
+            const bytes=Buffer.from(await img.arrayBuffer());
+            if(bytes.length<10000||bytes.length>2000000)throw Error('Unexpected image size '+slug);
+            await writeFile('src/assets/golan/'+slug+'.jpg',bytes);
+            console.log(slug+' '+bytes.length+' bytes '+license+' '+url);
+          }
+          NODE
+      - name: Commit local photos only
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add src/assets/golan
+          if git diff --cached --quiet; then echo "No binary changes"; exit 0; fi
+          git commit -m "Import licensed Golan Heights photographs from Wikimedia Commons"
+          git push origin HEAD:main
