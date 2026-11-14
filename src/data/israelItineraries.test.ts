@@ -39,7 +39,7 @@ describe("migrated Israel itineraries", () => {
     expect(itineraries["3"].hotelBases).not.toEqual(itineraries["7"].hotelBases);
     expect(itineraries["7"].hotelBases).not.toEqual(itineraries["10"].hotelBases);
     for (const guide of Object.values(itineraries)) {
-      expect(guide.alternatives.length).toBe(guide.id === "3" || guide.id === "5" || guide.id === "7" ? 0 : 3);
+      expect(guide.alternatives.length).toBe(guide.id === "10" ? 2 : 0);
       expect(guide.logistics.length).toBeGreaterThanOrEqual(3);
       for (const day of guide.daysPlan) {
         for (const item of ["morning", "afternoon", "practical"] as const)
@@ -135,7 +135,7 @@ describe("migrated Israel itineraries", () => {
     expect(itineraries["3"].jerusalemTourOptionsDay).toBe(2);
     expect(itineraries["5"].jerusalemTourOptionsDay).toBe(2);
     expect(itineraries["7"].jerusalemTourOptionsDay).toBe(3);
-    expect(itineraries["10"].jerusalemTourOptionsDay).toBeUndefined();
+    expect(itineraries["10"].jerusalemTourOptionsDay).toBe(3);
     const ids = threeDayJerusalemTourSelections.map(item => item.id);
     expect(ids).toHaveLength(6);
     expect(new Set(ids).size).toBe(6);
@@ -161,7 +161,7 @@ describe("migrated Israel itineraries", () => {
     expect(groups).toEqual({ "Dead Sea": 2, Bethlehem: 2, Jericho: 2 });
     const view = file("src/components/IsraelItineraryPage.tsx");
     expect(view).toContain("g.jerusalemTourOptionsDay === index + 1");
-    expect(view).toContain('<JerusalemItineraryTourOptions days={id === "7" ? 7 : id === "5" ? 5 : 3} />');
+    expect(view).toContain('<JerusalemItineraryTourOptions days={id === "10" ? 10 : id === "7" ? 7 : id === "5" ? 5 : 3} />');
     const cards = file("src/components/JerusalemItineraryTourOptions.tsx");
     expect(cards).toContain("<details");
     expect(cards).toContain("More day trips from Jerusalem");
@@ -192,7 +192,7 @@ describe("migrated Israel itineraries", () => {
       "A smoother airport connection",
     ]);
     expect(new Set(itineraries["3"].dayTipHeadings).size).toBe(3);
-    expect(itineraries["10"].dayTipHeadings).toBeUndefined();
+    expect(itineraries["10"].dayTipHeadings).toHaveLength(10);
     expect(view).toContain("My practical planning tips");
     expect(guide.noCarAdvice).toMatch(/^Jerusalem and Tel Aviv lend themselves to exploring/);
     expect(guide.noCarAdvice).not.toContain("Choose an organized tour");
@@ -328,9 +328,9 @@ describe("migrated Israel itineraries", () => {
     }
     expect(itinerarySourcesByGuide["5"].some(source => source.url.includes("caesarea-national-park"))).toBe(true);
     expect(itinerarySourcesByGuide["5"].some(source => source.url.includes("eta-il"))).toBe(true);
-    expect(itineraries["10"].daySequences).toBeUndefined();
-    expect(itineraries["10"].dayChoices).toBeUndefined();
-    expect(itineraries["10"].dayTipHeadings).toBeUndefined();
+    expect(itineraries["10"].daySequences?.map(item => item.day)).toEqual([1,2,3,4,5,6,7,8,9,10]);
+    expect(itineraries["10"].dayChoices?.map(item => item.day)).toEqual([2,6,7,8,10]);
+    expect(itineraries["10"].dayTipHeadings).toHaveLength(10);
     const view = file("src/components/IsraelItineraryPage.tsx");
     expect(view).toContain('const compactOverview = id === "3" || id === "5" || id === "7"');
     expect(view).toContain('data-testid={`day-${index + 1}-route-choices`}');
@@ -340,7 +340,7 @@ describe("migrated Israel itineraries", () => {
     expect(view).toContain("My practical planning tips");
     expect(view).toContain("g.dayTipHeadings?.[index]");
     expect(view).toContain("<GetYourGuideCityWidget");
-    expect(view).toContain('days={id === "7" ? 7 : id === "5" ? 5 : 3}');
+    expect(view).toContain('days={id === "10" ? 10 : id === "7" ? 7 : id === "5" ? 5 : 3}');
     const tours = file("src/components/JerusalemItineraryTourOptions.tsx");
     expect(tours).toContain('export function JerusalemItineraryTourOptions({ days = 3 }');
     expect(tours).toContain('itt_${days}day_');
@@ -407,7 +407,7 @@ describe("migrated Israel itineraries", () => {
     const tourComponent = file("src/components/JerusalemItineraryTourOptions.tsx");
     const itineraryComponent = file("src/components/IsraelItineraryPage.tsx");
 
-    expect(tourComponent).toContain('days === 7 ? "Alternative day tours from Jerusalem"');
+    expect(tourComponent).toContain('days >= 7 ? "Alternative day tours from Jerusalem"');
     expect(tourComponent).toContain("These tours replace a planned excursion");
     expect(tourComponent).toContain("in place of the independent Day 3 desert plan");
     expect(itineraryComponent).toContain('id === "7" && (index === 3 || index === 5)');
@@ -466,9 +466,9 @@ describe("migrated Israel itineraries", () => {
     expect(itinerarySourcesByGuide["7"].some(source => source.url.includes("eta-il"))).toBe(true);
     expect(g.logistics.every(tip => tip.to !== "/travel-blog/how-to-get-from-ben-gurion-airport-to-tel-aviv/")).toBe(true);
     expect(g.logistics.some(tip => tip.to === "/airport-transfers/")).toBe(true);
-    expect(itineraries["10"].daySequences).toBeUndefined();
-    expect(itineraries["10"].dayChoices).toBeUndefined();
-    expect(itineraries["10"].jerusalemTourOptionsDay).toBeUndefined();
+    expect(itineraries["10"].daySequences?.map(item => item.day)).toEqual([1,2,3,4,5,6,7,8,9,10]);
+    expect(itineraries["10"].dayChoices?.map(item => item.day)).toEqual([2,6,7,8,10]);
+    expect(itineraries["10"].jerusalemTourOptionsDay).toBe(3);
   });
 
   it("uses the consistent seven-day responsive layout and correctly attributed partner links", () => {
@@ -479,11 +479,11 @@ describe("migrated Israel itineraries", () => {
     expect(view).toContain("Have more or fewer than 7 days in Israel?");
     expect(view).toContain("Before you book");
     expect(view).toContain("Related practical guides");
-    expect(view).toContain('days={id === "7" ? 7 : id === "5" ? 5 : 3}');
+    expect(view).toContain('days={id === "10" ? 10 : id === "7" ? 7 : id === "5" ? 5 : 3}');
     expect(view).toContain('id !== "5" && id !== "7"');
     expect(view.indexOf('data-testid={`day-${index + 1}-route-choices`}')).toBeLessThan(view.indexOf('<dl className="space-y-5">'));
-    expect(tours).toContain("days?: 3 | 5 | 7");
-    expect(tours).toContain("days: 3 | 5 | 7");
+    expect(tours).toContain("days?: 3 | 5 | 7 | 10");
+    expect(tours).toContain("days: 3 | 5 | 7 | 10");
     expect(tours).toContain('itt_${days}day_');
     expect(tours).toContain('pageId: `israel-itinerary-${days}-days`');
     expect(tours).toContain("grid gap-5 sm:grid-cols-2 xl:grid-cols-3");
@@ -545,7 +545,7 @@ describe("migrated Israel itineraries", () => {
     expect(itineraries["3"].alternatives).toEqual([]);
     expect(itineraries["5"].alternatives).toEqual([]);
     expect(itineraries["7"].alternatives).toEqual([]);
-    expect(itineraries["10"].alternatives.length).toBeGreaterThanOrEqual(3);
+    expect(itineraries["10"].alternatives).toHaveLength(2);
     const view = file("src/components/IsraelItineraryPage.tsx");
     expect(view).toContain('g.alternatives.length > 0 && (');
     expect(view).toContain('...(g.alternatives.length ? [["alternatives", "Adjust the route"]');
@@ -585,9 +585,9 @@ describe("migrated Israel itineraries", () => {
     expect(guide.day3Options?.[0]?.text).toContain("arrange luggage storage in advance");
     expect(guide.daysPlan[2]?.morning).toMatch(/no trains run/i);
     for (const id of ["7", "10"] as const) expect(itineraries[id].day3Options).toBeUndefined();
-    expect(itineraries["10"].daySequences).toBeUndefined();
-    expect(itineraries["10"].dayOfficialLinks).toBeUndefined();
-    expect(itineraries["10"].beforeYouGoOfficialLinks).toBeUndefined();
+    expect(itineraries["10"].daySequences?.map(item => item.day)).toEqual([1,2,3,4,5,6,7,8,9,10]);
+    expect(itineraries["10"].dayOfficialLinks).toHaveLength(7);
+    expect(itineraries["10"].beforeYouGoOfficialLinks).toHaveLength(2);
     const expectedLinks = [
       "/travel-blog/old-city-jerusalem/",
       "/travel-blog/shopping-in-jerusalem/",
