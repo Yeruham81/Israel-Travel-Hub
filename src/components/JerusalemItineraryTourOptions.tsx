@@ -17,7 +17,7 @@ import qasrAlYahud from "@/assets/guides/dead-sea-excursions/qasr-al-yahud.webp"
  * guides. No tour price, rating or availability is retrieved or invented here.
  *
  * Show a balanced choice of OPTIONAL day trips from Jerusalem, on the
- * three-, five- and seven-day itineraries without duplicating catalog data.
+ * three-, five-, seven- and ten-day itineraries without duplicating catalog data.
  */
 export const threeDayJerusalemTourSelections = [
   { id: "jslm-deadsea-beach-viator", area: "Dead Sea", image: deadSeaMud, alt: "Mud bathing on the Dead Sea shore" },
@@ -32,7 +32,7 @@ const tourCatalog = new Map<string, DeadSeaTourCard | BethlehemTourCard>(
   [...deadSeaTourCards, ...bethlehemTourCards].map(tour => [tour.id, tour] as const),
 );
 
-function trackedItineraryTourUrl(url: string, tourId: string, days: 3 | 5 | 7): string {
+function trackedItineraryTourUrl(url: string, tourId: string, days: 3 | 5 | 7 | 10): string {
   // Travelpayouts allows a short link's SubID to be replaced per source page.
   // Preserve the approved deep-link destination and partner attribution.
   const parsed = new URL(url);
@@ -43,19 +43,21 @@ function trackedItineraryTourUrl(url: string, tourId: string, days: 3 | 5 | 7): 
 }
 
 /** Shares the compact Bethlehem/Dead Sea photo, duration, price and review-card visual language. */
-export function JerusalemItineraryTourOptions({ days = 3 }: { days?: 3 | 5 | 7 }) {
+export function JerusalemItineraryTourOptions({ days = 3 }: { days?: 3 | 5 | 7 | 10 }) {
   return <details
     className="group min-w-0 rounded-lg border bg-background"
     data-testid="itinerary-jerusalem-tours"
   >
     <summary className="flex cursor-pointer list-none items-center justify-between gap-3 rounded-lg px-4 py-3 font-semibold text-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary [&::-webkit-details-marker]:hidden">
-      <span>{days === 7 ? "Alternative day tours from Jerusalem" : "More day trips from Jerusalem"}</span>
+      <span>{days >= 7 ? "Alternative day tours from Jerusalem" : "More day trips from Jerusalem"}</span>
       <span aria-hidden="true" className="shrink-0 text-sm text-muted-foreground transition-transform group-open:rotate-180">⌄</span>
     </summary>
     <div className="min-w-0 border-t px-4 pb-4 pt-3">
       <p className="text-sm leading-relaxed text-muted-foreground">
         {days === 7
           ? "These tours replace a planned excursion; they are not extra stops to add to an already full day. For example, choose a Bethlehem or Jericho outing instead of the Jerusalem programme on Day 2, or a Masada and Dead Sea tour in place of the independent Day 3 desert plan."
+          : days === 10
+          ? "These day tours are alternatives to the independent itinerary, not additional sightseeing stops. Choose a Bethlehem or Jericho excursion in place of Jerusalem sightseeing on Day 2, or a Masada and Dead Sea tour instead of the self-planned desert day on Day 3."
           : "Explore optional day trips from Jerusalem to Masada, the Dead Sea, Bethlehem, Jericho and the Jordan River, with choices for different interests, budgets and amounts of time."}
       </p>
       <div className="mt-4 grid gap-5 sm:grid-cols-2 xl:grid-cols-3">
