@@ -12,6 +12,17 @@ import telAvivDizengoff from "@/assets/tel-aviv/dizengoff.webp";
 import keremHaTeimanim from "@/assets/tel-aviv/kerem-hateimanim.webp";
 import rothschild from "@/assets/tel-aviv/rothschild.webp";
 import akko from "@/assets/shore-excursions/akko-port.jpg";
+import haifaPanorama from "@/assets/haifa/panorama.webp";
+import haifaPanoramaTile from "@/assets/haifa/panorama-tile.webp";
+import caesareaTheatre from "@/assets/home/caesarea-theatre.webp";
+import caesareaTheatreCard from "@/assets/home/caesarea-theatre-card.webp";
+import caesareaDusk from "@/assets/home/caesarea-dusk.webp";
+import caesareaDuskCard from "@/assets/home/caesarea-dusk-card.webp";
+import caesareaAqueductCard from "@/assets/home/caesarea-aqueduct-card.webp";
+import caesareaAqueductTile from "@/assets/home/caesarea-aqueduct-tile.webp";
+import haifaPortImage from "@/assets/home/haifa-port.webp";
+import roshHanikraPhoto from "@/assets/home/rosh-hanikra-grottos.jpg";
+import heroCaesarea from "@/assets/home/hero-caesarea.webp";
 import holySepulchre from "@/assets/guides/holy-sepulchre.jpg";
 import jerusalemOldCityStreet from "@/assets/jerusalem/old-city.webp";
 import jerusalemDowntown from "@/assets/jerusalem/downtown.webp";
@@ -116,8 +127,14 @@ export const tourPhotos: Record<string, GuidePhoto> = {
   "galilee-private-tel-aviv": { src: tiberiasCentral, alt: "Central streets of Tiberias near the Sea of Galilee" },
   "galilee-private-jerusalem": migration["magdala-archaeology"],
   "nazareth-magdala-private": { src: mountPrecipice, alt: "View from Mount Precipice over Nazareth and the Galilee countryside" },
-  "caesarea-haifa-akko": airport["caesarea"]!,
-  "north-coast-small-group": { src: akko, alt: "Fishing boats beside the historic stone buildings of Akko harbour", sourceUrl: "https://www.israel-taxi.com/wp-content/uploads/2025/08/akko_port_2.jpg" },
+  "caesarea-haifa-akko": { src: caesareaTheatre, alt: "Roman theatre ruins at Caesarea beside the Mediterranean" },
+  "north-coast-small-group": { src: caesareaAqueductCard, alt: "Ancient Roman aqueduct at Caesarea on the Mediterranean coast" },
+  "coast-coach-tel-aviv": { src: caesareaDusk, alt: "Historic coastal Caesarea in the evening light" },
+  "coast-coach-jerusalem": { src: haifaPortImage, alt: "Port of Haifa with the coastal city rising behind it" },
+  "coast-akko-jerusalem": { src: heroCaesarea, alt: "Historic Caesarea archaeological park by the Mediterranean Sea" },
+  "coast-private-jerusalem-tel-aviv": { src: haifaPanorama, alt: "Panoramic view of Haifa, the gardens and the Mediterranean Sea" },
+  "coast-private-cross-israel": { src: caesareaDuskCard, alt: "Sunlit Roman-era coastal ruins at Caesarea" },
+  "coast-private-rosh-hanikra": { src: "/images/attractions/haifa-coast.webp", alt: "Northern Israel Mediterranean coastline near Haifa" },
   "mahane-yehuda-tasting": jerusalemAreaGuides.find(n => n.id === "mahane-yehuda")!.photo,
   "eilat-glass-bottom-boat": airport["eilat"]!,
   "eilat-snorkeling": { src: coralReef, alt: "Corals and fish in the waters of Eilat's Red Sea reef", sourceUrl: "https://commons.wikimedia.org/wiki/File:Corals_in_Eilat_coral_reef_nature_reserve_1.jpg", credit: "Yoav95179 · CC BY-SA 4.0 · resized and converted to WebP", licenseUrl: "https://creativecommons.org/licenses/by-sa/4.0/" },
@@ -176,6 +193,16 @@ export const galileeTourLocalCards = [
   { to: "/travel-blog/mount-of-beatitudes/", cta: "Visit the hillside", title: "Mount of Beatitudes", description: "Plan a visit to the hilltop church and its views over the Sea of Galilee.", photo: { src: mountBeatitudes, alt: "Church of the Beatitudes on the hillside above the Sea of Galilee" } },
   { to: "/travel-blog/tabgha/", cta: "Explore Tabgha", title: "Tabgha churches", description: "Visit the Church of the Multiplication and nearby lakeside pilgrimage sites.", photo: { src: tabgha, alt: "Church surroundings in Tabgha beside the Sea of Galilee" } },
   { to: travelGuidePaths.yardenit, cta: "Plan a river visit", title: "Yardenit baptismal site", description: "Understand the baptismal visitor site on the Jordan River south of the Sea of Galilee.", photo: { src: yardenitPhoto, alt: "Designated Jordan River baptismal steps and visitors at Yardenit" } },
+] as const;
+
+/** Northern coast guides for the same compact page layout; no image is repeated from the hero or tour thumbnails. */
+export const northernCoastTourLocalCards = [
+  { to: "/attractions/caesarea/", cta: "Explore ancient Caesarea", title: "Caesarea National Park", description: "Plan a visit to the Roman theatre, ancient harbour, aqueduct and coastal ruins.", photo: { src: caesareaTheatreCard, alt: "The Roman theatre at Caesarea National Park" } },
+  { to: "/travel-blog/haifa/", cta: "Discover Haifa", title: "Haifa city travel guide", description: "Explore the Bahá’í Gardens viewpoints, Mount Carmel and the German Colony.", photo: { src: "/images/home/transfer-haifa-bahai-gardens.webp", alt: "The Bahá’í Gardens in Haifa overlooking the port" } },
+  { to: "/travel-blog/akko-acre/", cta: "Visit historic Akko", title: "Akko (Acre) Old City", description: "Find the Knights’ Halls, markets, harbour and winding Crusader-era streets.", photo: { src: akko, alt: "Fishing boats moored beside Akko's historic stone harbour" } },
+  { to: "/travel-blog/rosh-hanikra/", cta: "Check grotto access", title: "Rosh Hanikra grottos", description: "Find out about the coastal cliffs and verify current visitor access before including a stop.", photo: { src: roshHanikraPhoto, alt: "White coastal cliffs and turquoise sea grottoes at Rosh Hanikra" } },
+  { to: "/travel-blog/museums-in-haifa/", cta: "Browse local museums", title: "Museums in Haifa", description: "Explore art, archaeology and city museums as options for more time in Haifa.", photo: migration["museums-in-haifa"] },
+  { to: "/travel-blog/best-hotels-in-haifa/", cta: "Compare Haifa stays", title: "Where to stay in Haifa", description: "Choose a hotel base near the Lower City, German Colony or Mount Carmel.", photo: { src: haifaPanoramaTile, alt: "Haifa city panorama and Mount Carmel overlooking the bay" } },
 ] as const;
 
 /** General planning guides use icon cards, not photographs, to distinguish them from local sights. */
@@ -332,19 +359,27 @@ export const tourCategories: TourCategory[] = [
   },
   {
     id: "northern-coast", title: "Caesarea, Haifa & Acre tours", shortTitle: "Caesarea, Haifa & Acre",
-    description: "Explore northern coast day trips to Caesarea, Haifa and Acre. Compare shared tours, smaller groups, duration, departure and admission inclusions.",
-    intro: "Trace the Mediterranean coast from Roman Caesarea to Haifa's garden views and the old harbour of Acre. Choose a classic shared day, a smaller group or a private transport itinerary built around your favourite stops.",
+    description: "Compare guided day tours from Tel Aviv and Jerusalem to Caesarea, Haifa and Akko (Acre), from shared coach trips and small groups to licensed private guides and private transport.",
+    intro: "Follow Israel’s Mediterranean coast from Roman Caesarea through Haifa’s hillside viewpoints to the historic harbour and markets of Akko (Acre). Compare guided group trips and private experiences from Tel Aviv or Jerusalem, or arrange a flexible day with your own driver.",
     photo: airport["caesarea"]!, match: { destinations: ["caesarea", "haifa", "akko"] },
-    paragraphs: ["Northern coast tours bring several eras together: Roman remains beside the sea, Haifa's terraced garden setting and Acre's layered Old City. Combining them in one day suits a broad first impression, while fewer stops allow more time inside individual sites and for walking through the old streets.", "Group size and admissions make a real difference to the experience and total cost. A small-group listing can still have a minimum departure requirement. Some coastal listings mention Rosh Hanikra in older descriptions; confirm the current route rather than assuming the grottoes are included. Garden viewpoints and access inside Haifa's terraces should also be distinguished."],
+    paragraphs: [
+      "These trips connect three very different places: Caesarea’s Roman theatre and archaeological harbour, Haifa’s Bahá’í Gardens setting and Akko’s UNESCO-listed Old City. Shared tours usually include a brief panoramic stop in Haifa rather than a guided walk inside the garden terraces. Always check the exact visit duration and admission arrangements for Caesarea and Akko’s underground attractions.",
+      "Several advertised itineraries also mention Rosh Hanikra near the Lebanese border. Access to the grottos and the coastal border area can change, so an advertised stop is not a guarantee that the attraction will be accessible on your chosen date. Confirm the operator's actual route, substitutions and refund policy before booking.",
+      "Departure matters: a day trip from Jerusalem is typically longer than one from Tel Aviv. Compare group size, meeting point, included tickets, language and the available time in each city. An external private tour with a licensed guide is different from my private car-and-driver service, where guiding and admissions are arranged separately.",
+    ],
     choices: [
-      { title: "Classic coastal day", text: "Several headline destinations in one planned itinerary, suited to travellers who want an introduction to the region." },
-      { title: "A smaller guided group", text: "Fewer fellow travellers and a different price point. Confirm the group limit, minimum numbers and admission costs." },
-      { title: "Your own coastal route", text: "With my private transport, agree the stops and time at each place. Licensed guiding and attraction tickets are separate." },
+      { title: "Classic coast & archaeology", text: "A full-day shared trip through Caesarea, Haifa and Akko with a guide; verify admissions and the exact stops." },
+      { title: "Small group or private guide", text: "Choose a smaller group or a licensed private guide for more time at your preferred historical sites." },
+      { title: "Flexible driver-only day", text: "Arrange your own transport from Tel Aviv or Jerusalem and agree a practical coastal itinerary before departure." },
     ],
     faqs: [
-      { q: "Is Rosh Hanikra included?", a: "Do not assume so. Product descriptions can mention different versions of the route. Confirm the actual operating itinerary and site access for your date before booking." },
-      { q: "Are Caesarea and Acre admission fees included?", a: "Inclusions vary. The small-group option below specifically lists entry fees as extra. Check each site's admission and the selected option's total." },
-      { q: "Can I use these tours from a cruise ship?", a: "These cards describe ordinary city departures. For port meeting arrangements and a ship's return schedule, use the separate Haifa or Ashdod shore-excursion pages." },
+      { q: "Can I depart from Jerusalem as well as Tel Aviv?", a: "Yes. The catalog lists options from both cities. Journeys from Jerusalem are normally longer; select the correct departure and verify the meeting point, pickup arrangements and duration on the booking page." },
+      { q: "Do all tours visit Caesarea, Haifa and Akko?", a: "These three cities are the core destinations, but time on site, guided walking and stops within each city vary between products. Confirm the current itinerary rather than relying on the title alone." },
+      { q: "Is entry to the Bahá’í Gardens included?", a: "Many tours stop at an outside viewpoint with a view of the terraces. A panoramic stop is not a guided visit inside the gardens. Check official garden visiting rules and the operator's exact plans." },
+      { q: "Can I visit the Rosh Hanikra grottos on the same day?", a: "Some advertised coastal tours include Rosh Hanikra, but its access and operating arrangements near the northern border can change. Do not assume the grottos are open; confirm current access and an alternative plan before booking." },
+      { q: "Are entry tickets for Caesarea and Akko included?", a: "Inclusions vary. Some shared tours include national-park and Crusader-attraction tickets, while small-group and private options may charge separately. Compare the included admissions shown by each operator." },
+      { q: "How does a private driver differ from a private guided tour?", a: "A privately guided tour purchased through an external supplier includes the guiding specified in its listing. My private driving service covers transport and agreed stops; a licensed guide, attraction tickets and meals are separate unless specifically included in the quote." },
+      { q: "Can I use these tours when arriving by cruise ship?", a: "Standard day tours do not guarantee port pickup or timely return to your vessel. Use the dedicated Haifa or Ashdod shore-excursion pages and confirm your ship's arrival, terminal and all-aboard time." },
     ], reading: ["caesarea", "haifa", "akko", "tips"],
   },
   {
