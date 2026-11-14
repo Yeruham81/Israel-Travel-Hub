@@ -8,6 +8,13 @@ import { travelGuidePaths } from "@/data/registry";
 import jaffa from "@/assets/tel-aviv/jaffa.webp";
 import akko from "@/assets/shore-excursions/akko-port.jpg";
 import holySepulchre from "@/assets/guides/holy-sepulchre.jpg";
+import jerusalemOldCityStreet from "@/assets/jerusalem/old-city.webp";
+import jerusalemDowntown from "@/assets/jerusalem/downtown.webp";
+import jerusalemMamilla from "@/assets/jerusalem/mamilla.webp";
+import nativityCourtyard from "@/assets/guides/bethlehem/nativity-courtyard.jpg";
+import bethlehemMangerSquare from "@/assets/guides/bethlehem/manger-square.jpg";
+import bethlehemMilkGrotto from "@/assets/guides/bethlehem/milk-grotto.jpg";
+import shepherdsFieldChapel from "@/assets/guides/bethlehem/shepherds-field-chapel.webp";
 import coralReef from "@/assets/eilat/coral-reef.webp";
 import cruiseShip from "@/assets/home/cruise-port.webp";
 import roadTrip from "@/assets/home/road-trip.webp";
@@ -30,24 +37,24 @@ export const tourCategoryPaths = {
 export type TourCategoryId = keyof typeof tourCategoryPaths;
 
 export const tourPhotos: Record<string, GuidePhoto> = {
-  "my-jerusalem-day": airport["jerusalem"]!,
+  "my-jerusalem-day": { src: "/images/home/transfer-jerusalem-tower-of-david.webp", alt: "Tower of David and Jerusalem city walls" },
   "my-masada-day": airport["dead-sea"]!,
   "my-masada-jerusalem": { src: masadaCableCar, alt: "A cable-car cabin below Masada's desert cliffs", sourceUrl: "https://commons.wikimedia.org/wiki/File:Masada_Cable_Car_1438_(511094328).jpg", credit: "James Emery · CC BY 2.0 · resized and converted to WebP", licenseUrl: "https://creativecommons.org/licenses/by/2.0/" },
   "my-north-coast-day": airport["haifa"]!,
   "my-north-coast-jerusalem": { src: caesareaAqueduct, alt: "The ancient aqueduct beside the Mediterranean beach at Caesarea", sourceUrl: "https://commons.wikimedia.org/wiki/File:125359_caesarea_national_park_PikiWiki_Israel.jpg", credit: "זאב שטיין (Zeev Stein) · CC BY 2.5 · resized and converted to WebP", licenseUrl: "https://creativecommons.org/licenses/by/2.5/" },
   "my-galilee-day": airport["nazareth"]!,
   "my-galilee-jerusalem": { src: capernaum, alt: "Archaeological remains and the ancient synagogue at Capernaum beside the Sea of Galilee", sourceUrl: "https://www.israel-taxi.com/wp-content/uploads/2025/08/capernaum_.jpg" },
-  "jerusalem-old-city-walk": migration["EXISTING:jerusalem"],
+  "jerusalem-old-city-walk": { src: jerusalemOldCityStreet, alt: "Stone street in Jerusalem's Old City", sourceUrl: "https://www.israel-taxi.com/wp-content/uploads/2026/07/Jerusalem_Old_City_street.webp" },
   "jerusalem-private-oldcity-walk": { src: holySepulchre, alt: "Church of the Holy Sepulchre in the Old City of Jerusalem" },
-  "jerusalem-beyond-walls": jerusalemAreaGuides.find(n => n.id === "mahane-yehuda")!.photo,
-  "jerusalem-street-art-walk": { src: "/images/attractions/jerusalem.webp", alt: "Jerusalem cityscape; the guided tour explores street art in the city center" },
-  "jerusalem-day-tel-aviv": migration["EXISTING:jerusalem"],
-  "jerusalem-bethlehem-private": migration["jerusalem-to-bethlehem"],
+  "jerusalem-beyond-walls": { src: jerusalemDowntown, alt: "Pedestrian street in central Jerusalem beyond the Old City walls" },
+  "jerusalem-street-art-walk": { src: "/images/jerusalem/hutzot-hayotzer.webp", alt: "Jerusalem artists' quarter, illustrating the city's creative side" },
+  "jerusalem-day-tel-aviv": { src: "/images/jerusalem/mount-zion/dormition-abbey-and-bell-tower.webp", alt: "Dormition Abbey on Mount Zion in Jerusalem" },
+  "jerusalem-bethlehem-private": { src: nativityCourtyard, alt: "Courtyard of the Church of the Nativity in Bethlehem" },
   "jaffa-carmel-walk": { src: jaffa, alt: "Old Jaffa's historic buildings above the Mediterranean harbour", sourceUrl: "https://www.israel-taxi.com/wp-content/uploads/2025/08/jaffa_panorama2.jpg" },
   "tel-aviv-street-art": telAvivAreaGuides.find(n => n.id === "telaviv-florentin")!.photo,
   "masada-dead-sea-tel-aviv": migration["EXISTING:masada"],
   "masada-ein-gedi-dead-sea": migration["jerusalem-to-the-dead-sea"],
-  "jerusalem-bethlehem-shared": { src: holySepulchre, alt: "The Church of the Holy Sepulchre courtyard and facade in Jerusalem", sourceUrl: "https://www.israel-taxi.com/wp-content/uploads/2025/08/Church_of_the_Holy_Sepulchre_Jerusalem_israel.jpg" },
+  "jerusalem-bethlehem-shared": { src: bethlehemMangerSquare, alt: "Manger Square in Bethlehem" },
   "bethlehem-jericho-jordan": migration["EXISTING:qasr"],
   "nazareth-galilee-tel-aviv": migration["basilica-of-the-annunciation"],
   "galilee-nazareth-jordan": migration["EXISTING:galilee"],
@@ -58,15 +65,26 @@ export const tourPhotos: Record<string, GuidePhoto> = {
   "eilat-snorkeling": { src: coralReef, alt: "Corals and fish in the waters of Eilat's Red Sea reef", sourceUrl: "https://commons.wikimedia.org/wiki/File:Corals_in_Eilat_coral_reef_nature_reserve_1.jpg", credit: "Yoav95179 · CC BY-SA 4.0 · resized and converted to WebP", licenseUrl: "https://creativecommons.org/licenses/by-sa/4.0/" },
 };
 
+/**
+ * Page-specific editorial image choices, with no repeated images across the
+ * cover, tour cards, author portrait, related reading and onward links.
+ */
+export const jerusalemTourMoreCards = [
+  { to: "/tours/masada-dead-sea/", title: "Masada & Dead Sea tours", description: "Discover ancient Masada and the extraordinary landscapes of the Dead Sea.", photo: tourPhotos["my-masada-jerusalem"]! },
+  { to: "/tours/bethlehem-jericho-jordan-river/", title: "Bethlehem & Jericho tours", description: "Explore historic and biblical landmarks beyond Jerusalem.", photo: { src: shepherdsFieldChapel, alt: "Shepherds' Field chapel near Bethlehem" } },
+  { to: "/travel-blog/day-trips-from-jerusalem/", title: "Day trips from Jerusalem", description: "Find inspiring destinations and practical routes for a day beyond the city.", photo: tourPhotos["my-galilee-jerusalem"]! },
+  { to: "/travel-blog/where-to-stay-in-jerusalem/", title: "Where to stay in Jerusalem", description: "Compare neighborhoods and find the best base for your visit.", photo: { src: jerusalemMamilla, alt: "Jerusalem's Mamilla neighborhood" } },
+] as const;
+
 type ReadingId = "jerusalem" | "jaffa" | "telAviv" | "masada" | "deadSea" | "einGedi" | "bethlehem" | "baptism" | "nazareth" | "galilee" | "akko" | "haifa" | "caesarea" | "food" | "eilat" | "tips";
 const reading: Record<ReadingId, ShoreReadingGuide> = {
-  jerusalem: { title: "Jerusalem's Old City", description: "Get to know the quarters, holy sites and viewpoints. Plan time for walking, queues and the places that matter most to you.", to: "/travel-blog/old-city-jerusalem/", photo: migration["EXISTING:jerusalem"] },
+  jerusalem: { title: "Jerusalem's Old City", description: "Get to know the quarters, holy sites and viewpoints. Plan time for walking, queues and the places that matter most to you.", to: "/travel-blog/old-city-jerusalem/", photo: { src: "/images/attractions/jerusalem-shopping.webp", alt: "Market shopping lanes in Jerusalem" } },
   jaffa: { title: "Explore Old Jaffa", description: "Discover the harbour, stone lanes and flea-market area. Add a little background to a guided walk through the old town.", to: "/travel-blog/jaffa/", photo: tourPhotos["jaffa-carmel-walk"]! },
   telAviv: { title: "Getting around Tel Aviv", description: "Connect your hotel, meeting point and seafront plans. Decide where walking fits and when another form of transport helps.", to: travelGuidePaths.telAviv, photo: airport["tel-aviv"]! },
   masada: { title: "Masada visitor guide", description: "Understand the fortress, cable-car access and desert setting. Plan admissions and realistic time on the plateau.", to: "/travel-blog/masada/", photo: migration["EXISTING:masada"] },
   deadSea: { title: "A day at the Dead Sea", description: "Compare designated beach areas and their facilities. Plan a comfortable stop beside the water and a realistic onward journey.", to: travelGuidePaths.deadSea, photo: airport["dead-sea"]! },
   einGedi: { title: "Ein Gedi Nature Reserve", description: "Learn about the oasis and its walking routes. Check which trails are open before including a nature stop in your day.", to: "/travel-blog/ein-gedi/", photo: tourPhotos["masada-ein-gedi-dead-sea"]! },
-  bethlehem: { title: "Jerusalem to Bethlehem", description: "Get to know the Nativity Church and the practical journey. Understand the crossing arrangements to confirm before travelling.", to: travelGuidePaths.bethlehem, photo: migration["jerusalem-to-bethlehem"] },
+  bethlehem: { title: "Jerusalem to Bethlehem", description: "Get to know the Nativity Church and the practical journey. Understand the crossing arrangements to confirm before travelling.", to: travelGuidePaths.bethlehem, photo: { src: bethlehemMilkGrotto, alt: "The Milk Grotto in Bethlehem" } },
   baptism: { title: "Jordan River baptism sites", description: "Understand the difference between Yardenit and Qasr el-Yahud. Match the site on your itinerary to the experience you want.", to: travelGuidePaths.baptism, photo: migration["EXISTING:qasr"] },
   nazareth: { title: "Basilica of the Annunciation", description: "Discover Nazareth's major Christian landmark and its setting. Learn what to consider about access and time inside the church.", to: travelGuidePaths.annunciation, photo: migration["basilica-of-the-annunciation"] },
   galilee: { title: "Sea of Galilee highlights", description: "Explore the lakeside setting of Capernaum, Tabgha and Tiberias. Choose a manageable group of stops for your day in the north.", to: "/travel-blog/sea-of-galilee/", photo: migration["EXISTING:galilee"] },

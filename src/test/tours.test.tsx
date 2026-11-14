@@ -12,6 +12,7 @@ import { affiliateConfig, initialReferenceFx, operators, sources, tourBookingOff
 import { guideDirectory } from "@/data/travelGuides";
 import { tourCategories, tourCategoryPaths, tourPhotos } from "@/data/tours";
 import homepageCruise from "@/assets/home/cruise-port.webp";
+import { repeatedPhotos } from "@/lib/photo-uniqueness";
 import { parseTourHubSearch, filterTours, isOwnerTour, offersForTour, parseTourSearch, tourSnapshotPrice, toursForCategory } from "@/lib/tours";
 import { CANONICAL_ORIGIN } from "@/lib/site";
 import { parsePrivateDriverSearch, privateTourPrefill } from "@/lib/private-driver-search";
@@ -38,6 +39,21 @@ async function renderPage(path: string) {
 }
 
 describe("shared ordinary tour catalog", () => {
+  it("never displays the same photograph twice on the Jerusalem tours page", async () => {
+    const router = routerAt(tourCategoryPaths.jerusalem);
+    await router.load();
+    const matched = router.matchRoutes(tourCategoryPaths.jerusalem).at(-1)!;
+    const Page = router.routesById[matched.routeId]!.options.component!;
+    const doc = new DOMParser().parseFromString(
+      renderToString(<RouterContextProvider router={router}><Page /></RouterContextProvider>),
+      "text/html",
+    );
+    const photos = [...doc.querySelectorAll("main img")].map(img => img.getAttribute("src") || "");
+    // Cover, author, external tours, private driver, related guides and onward cards.
+    expect(photos.length).toBeGreaterThanOrEqual(18);
+    expect(repeatedPhotos(photos)).toEqual([]);
+  });
+
   it("keeps product, operator, booking channel and source identities separate and complete", () => {
     expect(new Set(tourProducts.map(tour => tour.id)).size).toBe(tourProducts.length);
     expect(new Set(tourBookingOffers.map(offer => offer.id)).size).toBe(tourBookingOffers.length);
