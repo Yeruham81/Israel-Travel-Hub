@@ -36,5 +36,8 @@ jobs:
         with:
           bun-version: "1.4.4"
       - run: bash scripts/install-ci-dependencies.sh
+      # Regenerate the TanStack route tree before loading the route-based tests.
+      - name: Generate route tree and build
+        run: bun run build
       - name: Check tour catalog regression tests
         run: bun run test src/test/tours.test.tsx
