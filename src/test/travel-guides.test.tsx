@@ -154,7 +154,7 @@ describe("migrated practical guides", () => {
   });
 
   it("keeps current airport pickup distinctions and attributes uncertain operator status", () => {
-    expect(travelGuides.arrival.sections.find((section) => section.id === "leave-airport")!.paragraphs.join(" ")).toMatch(/Exit 03.*Level 2, Exit 23/);
+    expect(travelGuides.arrival.sections.find((section) => section.id === "leave-airport")!.paragraphs.join(" ")).toMatch(/Exit 03.*separate pickup instructions/);
     expect(travelGuides.taxis.sections.find((section) => section.id === "airport")!.inlineLinks?.some((link) => link.to === travelGuidePaths.airportTaxis)).toBe(true);
     expect(travelGuides.airportTaxis.comparison.rows.join(" ")).toMatch(/Exit 03.*Exit 23/);
     expect(travelGuides.uber.answer).toMatch(/Uber and Lyft do not currently offer passenger rides in Israel/);
@@ -559,7 +559,7 @@ describe("migrated practical guides", () => {
     ]);
     expect(guide.sections.find((s) => s.id === "gett")!.externalLinks?.[0]?.href).toBe("https://www.gett.com/il/");
     expect(guide.sections.find((s) => s.id === "yango")!.externalLinks?.[0]?.href).toBe("https://appli.taxi/rider/");
-    expect(travelGuides.taxis.sections.find((s) => s.id === "apps")!.paragraphs.join(" ")).toContain("Uber passenger rides are not available in Israel as of November 2026");
+    expect(travelGuides.taxis.sections.find((s) => s.id === "apps")!.paragraphs.join(" ")).toContain("Uber passenger rides are not currently available in Israel.");
   });
 
   it("keeps updated Uber and Sherut wording focused, linked and actionable", () => {
