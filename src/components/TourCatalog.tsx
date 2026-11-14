@@ -92,6 +92,30 @@ export function ExternalTourCard({ tour, pageId, compact = false }: { tour: Tour
 }
 
 export function TourCatalog({ categoryId, filters, onChange }: { categoryId: TourCategoryId; filters: TourSearch; onChange: (next: TourSearch, replace?: boolean) => void }) {
+  const compact = categoryId === "jerusalem" || categoryId === "tel-aviv-jaffa";
+  const compactChips: { label: string; search: TourSearch }[] = categoryId === "jerusalem" ? [
+    { label: "All tours", search: {} },
+    { label: "From Jerusalem", search: { origin: "jerusalem" } },
+    { label: "From Tel Aviv", search: { origin: "tel-aviv" } },
+    { label: "Up to half a day", search: { length: "short" } },
+    { label: "Full day", search: { length: "full-day" } },
+    { label: "Private", search: { format: "private" } },
+    { label: "Food & markets", search: { tag: "food" } },
+    { label: "History & heritage", search: { tag: "heritage" } },
+    { label: "Art & architecture", search: { tag: "art" } },
+    { label: "Shortest first", search: { sort: "duration" } },
+  ] : [
+    { label: "All tours", search: {} },
+    { label: "Up to half a day", search: { length: "short" } },
+    { label: "Full day", search: { length: "full-day" } },
+    { label: "Private", search: { format: "private" } },
+    { label: "Food & markets", search: { tag: "food" } },
+    { label: "History & heritage", search: { tag: "heritage" } },
+    { label: "Art & architecture", search: { tag: "art" } },
+    { label: "Self-guided", search: { format: "independent" } },
+    { label: "Shortest first", search: { sort: "duration" } },
+    { label: "Title A–Z", search: { sort: "title" } },
+  ];
   const all = toursForCategory(categoryId);
   const visible = filterTours(categoryId, filters);
   const owner = visible.filter(isOwnerTour);
@@ -101,24 +125,13 @@ export function TourCatalog({ categoryId, filters, onChange }: { categoryId: Tou
   const tags = tourTags.filter(tag => all.some(tour => tour.tagIds.includes(tag.id)));
   const set = (key: keyof TourSearch, value: string) => onChange({ ...filters, [key]: value || undefined }, key === "q");
   const active = Object.keys(filters).some(key => key !== "sort");
-  return <div id="tour-catalog" className={categoryId === "jerusalem" ? "mt-7 scroll-mt-24" : "mt-10 scroll-mt-24"}>
-    {categoryId === "jerusalem" ? <nav aria-label="Filter Jerusalem tours" className="rounded-xl border bg-secondary/25 px-3 py-3 sm:px-4">
-      <div className="flex flex-wrap items-center gap-2">
-        <span className="mr-1 text-xs font-semibold text-muted-foreground">Show:</span>
-        {([
-          { label: "All tours", search: {} },
-          { label: "From Jerusalem", search: { origin: "jerusalem" } },
-          { label: "From Tel Aviv", search: { origin: "tel-aviv" } },
-          { label: "Up to half a day", search: { length: "short" } },
-          { label: "Full day", search: { length: "full-day" } },
-          { label: "Private", search: { format: "private" } },
-          { label: "Food & markets", search: { tag: "food" } },
-          { label: "History & heritage", search: { tag: "heritage" } },
-          { label: "Art & architecture", search: { tag: "art" } },
-          { label: "Shortest first", search: { sort: "duration" } }
-        ] as const).map(item => {
+  return <div id="tour-catalog" className={compact ? "mt-7 scroll-mt-24" : "mt-10 scroll-mt-24"}>
+    {compact ? <nav aria-label={`Filter ${getTourCategory(categoryId).shortTitle} tours`} className="rounded-xl border bg-secondary/25 px-3 py-3 sm:px-4">
+      <div className="flex items-center gap-2 overflow-x-auto pb-1 sm:flex-wrap sm:overflow-visible">
+        <span className="mr-1 shrink-0 text-xs font-semibold text-muted-foreground">Show:</span>
+        {compactChips.map(item => {
           const selected = Object.entries(item.search).length === Object.entries(filters).length && Object.entries(item.search).every(([key, value]) => filters[key as keyof TourSearch] === value);
-          return <button key={item.label} type="button" className="chip text-xs" aria-pressed={selected} onClick={() => onChange(item.search)}>{item.label}</button>;
+          return <button key={item.label} type="button" className="chip shrink-0 text-xs" aria-pressed={selected} onClick={() => onChange(item.search)}>{item.label}</button>;
         })}
       </div>
     </nav> : <form role="search" aria-label="Find a tour in this category" onSubmit={event => event.preventDefault()} className="rounded-2xl border bg-secondary/40 p-4 sm:p-5">
@@ -133,17 +146,17 @@ export function TourCatalog({ categoryId, filters, onChange }: { categoryId: Tou
     </form>}
     <div className="mt-4 flex flex-wrap items-center justify-between gap-3">
       <p role="status" aria-live="polite" className="text-sm text-muted-foreground">{visible.length} {visible.length === 1 ? "experience" : "experiences"}</p>
-      <div className="flex flex-wrap items-center gap-3">{categoryId !== "jerusalem" && active && <button type="button" onClick={() => onChange({})} className="text-sm font-semibold text-primary underline">Clear filters</button>}{categoryId !== "jerusalem" && <label className="text-xs text-muted-foreground">Sort by <select aria-label="Sort tours" value={filters.sort || ""} onChange={event => set("sort", event.target.value)} className="ml-1 rounded-lg border bg-background p-2 text-sm text-foreground"><option value="">Featured</option><option value="duration">Shortest duration</option><option value="title">Title A–Z</option></select></label>}</div>
+      <div className="flex flex-wrap items-center gap-3">{!compact && active && <button type="button" onClick={() => onChange({})} className="text-sm font-semibold text-primary underline">Clear filters</button>}{!compact && <label className="text-xs text-muted-foreground">Sort by <select aria-label="Sort tours" value={filters.sort || ""} onChange={event => set("sort", event.target.value)} className="ml-1 rounded-lg border bg-background p-2 text-sm text-foreground"><option value="">Featured</option><option value="duration">Shortest duration</option><option value="title">Title A–Z</option></select></label>}</div>
     </div>
     {visible.length === 0 ? <section className="mt-5 rounded-2xl border p-8 text-center"><h2 className="text-2xl font-semibold">No tours match these choices</h2><p className="mt-3 text-muted-foreground">Try another departure, destination or interest.</p><button type="button" className="btn btn-primary mt-5" onClick={() => onChange({})}>Show all tours in this category</button></section> : <>
-      {categoryId !== "jerusalem" && <OwnerTourSection tours={owner} />}
-      {external.length > 0 && <section id="external-tours" aria-labelledby="external-tours-h" data-section="external-tours" className={categoryId === "jerusalem" ? "mt-5 scroll-mt-24" : "mt-12 scroll-mt-24 border-t pt-8"}>
-        <h2 id="external-tours-h" className={categoryId === "jerusalem" ? "text-2xl font-semibold" : "text-3xl font-semibold"}>{categoryId === "jerusalem" ? "Explore Jerusalem tours" : `${owner.length > 0 ? "More " : ""}${getTourCategory(categoryId).title}`}</h2>
-        <p className="mt-3 max-w-3xl text-sm leading-relaxed text-muted-foreground">{categoryId === "jerusalem" ? "Compare guided walks, cultural experiences and day trips from Jerusalem or Tel Aviv. Explore the options below to find the right experience for your visit." : "Discover guided itineraries, local walks and specialist activities from independent operators. Each card identifies the departure, experience and booking site."}</p>
-        <ul aria-label="External tours" className={categoryId === "jerusalem" ? "mt-5 grid gap-3 md:grid-cols-2" : "mt-6 grid gap-5 sm:grid-cols-2"}>{external.map(tour => <ExternalTourCard key={tour.id} tour={tour} pageId={`tours-${categoryId}`} compact={categoryId === "jerusalem"} />)}</ul>
+      {!compact && <OwnerTourSection tours={owner} />}
+      {external.length > 0 && <section id="external-tours" aria-labelledby="external-tours-h" data-section="external-tours" className={compact ? "mt-5 scroll-mt-24" : "mt-12 scroll-mt-24 border-t pt-8"}>
+        <h2 id="external-tours-h" className={compact ? "text-2xl font-semibold" : "text-3xl font-semibold"}>{compact ? `Explore ${getTourCategory(categoryId).shortTitle} tours` : `${owner.length > 0 ? "More " : ""}${getTourCategory(categoryId).title}`}</h2>
+        <p className="mt-3 max-w-3xl text-sm leading-relaxed text-muted-foreground">{compact ? (categoryId === "jerusalem" ? "Compare guided walks, cultural experiences and day trips from Jerusalem or Tel Aviv. Explore the options below to find the right experience for your visit." : "Compare guided walks, food and culture tours, cycling and audio experiences around Tel Aviv & Jaffa.") : "Discover guided itineraries, local walks and specialist activities from independent operators. Each card identifies the departure, experience and booking site."}</p>
+        <ul aria-label="External tours" className={compact ? "mt-5 grid gap-3 md:grid-cols-2" : "mt-6 grid gap-5 sm:grid-cols-2"}>{external.map(tour => <ExternalTourCard key={tour.id} tour={tour} pageId={`tours-${categoryId}`} compact={compact} />)}</ul>
         <p className="mt-5 text-xs leading-relaxed text-muted-foreground">Tour details, availability, prices and booking conditions are set by the tour operators and may change. Before booking, check the current departure date and location, itinerary, guiding, admissions, meeting and return arrangements, and cancellation policy directly with the booking provider. Each tour is subject to the operator's own terms and conditions.</p>
       </section>}
-      {categoryId === "jerusalem" && <OwnerTourSection tours={owner} compact />}
+      {compact && <OwnerTourSection tours={owner} compact />}
     </>}
   </div>;
 }
