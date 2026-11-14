@@ -327,6 +327,121 @@ describe("migrated Israel itineraries", () => {
     expect(tours).toContain("grid gap-5 sm:grid-cols-2 xl:grid-cols-3");
   });
 
+  it("provides a coherent seven-day route across three hotel bases with realistic transfer days", () => {
+    const g = itineraries["7"];
+    expect(g.title).toBe("Israel in 7 Days: Jerusalem, Dead Sea, Galilee & Tel Aviv");
+    expect(g.description).toContain("Nazareth");
+    expect(g.intro).toMatch(/a week in Israel/i);
+    expect(g.reviewedAt).toBe("2026-11-14");
+    expect(g.reality).toContain("transfer days");
+    expect(g.hotelBases).toContain("after Days 1–3");
+    expect(g.hotelBases).toContain("after Days 4–5");
+    expect(g.hotelBases).toContain("after Day 6");
+    expect(g.hotelBases).toContain("evening before Day 1");
+    expect(g.hotelBases).toContain("flying on Day 8");
+    expect(g.overviewRows).toHaveLength(7);
+    expect(g.overviewRows?.every(row => Boolean(row.travel))).toBe(true);
+    expect(g.overviewRows?.[3]?.night).toContain("Galilee");
+    expect(g.overviewRows?.[5]?.night).toContain("Tel Aviv");
+    expect(g.overviewRows?.[6]?.night).toContain("Departure");
+    expect(g.daysPlan).toHaveLength(7);
+    expect(g.daysPlan[0]?.morning).toContain("Jaffa Gate");
+    expect(g.daysPlan[1]?.morning).toContain("Israel Museum");
+    expect(g.daysPlan[2]?.morning).toContain("eastern entrance");
+    expect(g.daysPlan[3]?.morning).toContain("Nazareth");
+    expect(g.daysPlan[4]?.morning).toContain("Capernaum");
+    expect(g.daysPlan[5]?.afternoon).toContain("Caesarea National Park");
+    expect(g.daysPlan[6]?.morning).toContain("Old Jaffa");
+    expect(g.daysPlan[5]?.practical).toContain("transfer day with luggage");
+
+    expect(g.daySequences?.map(day => day.day)).toEqual([1, 2, 3, 4, 5, 6, 7]);
+    for (const sequence of g.daySequences ?? []) {
+      expect(sequence.steps).toHaveLength(3);
+      expect(sequence.steps.every(step => step.stop.length > 10 && step.time.length > 10)).toBe(true);
+      expect(sequence.steps.every(step => !/hotel transfer|return to|departure|settl(e|ing) in/i.test(step.stop))).toBe(true);
+    }
+    expect(g.dayTipHeadings).toHaveLength(7);
+    expect(new Set(g.dayTipHeadings).size).toBe(7);
+    expect(g.dayTipHeadings).not.toContain("Worth knowing");
+    expect(g.dayChoices?.map(choice => choice.day)).toEqual([2, 5, 6, 7]);
+    expect(g.dayChoices?.every(choice => choice.options.length === 2)).toBe(true);
+    expect(g.dayChoices?.[2]?.options[1]?.text).toContain("Haifa or Caesarea");
+    expect(g.dayChoices?.[3]?.options[1]?.text).toContain("Ben Gurion Airport");
+    expect(g.alternatives).toEqual([]);
+    expect(g.logistics).toHaveLength(5);
+    expect(g.beforeYouGo).toHaveLength(3);
+    expect(g.faqs).toHaveLength(8);
+    expect(g.relatedGuides).toHaveLength(6);
+    expect(g.activityWidgets).toEqual([{ day: 1, city: "jerusalem" }, { day: 7, city: "telAviv" }]);
+    expect(g.jerusalemTourOptionsDay).toBe(3);
+    expect(g.hero).toBe("EXISTING:galilee");
+    expect(g.daysPlan[4]?.image).toBe("itinerary-7day-capernaum");
+    expect(g.hero).not.toBe(g.daysPlan[4]!.image);
+    const photoKeys = [g.hero, ...g.daysPlan.map(day => day.image), ...(g.relatedGuides ?? []).map(item => item.image)];
+    expect(new Set(photoKeys.map(key => migrationPhotos[key].src)).size).toBe(photoKeys.length);
+  });
+
+  it("links all seven days naturally, cites relevant official sites and preserves other guides", () => {
+    const g = itineraries["7"];
+    const router = createRouter({ routeTree, context: { queryClient: new QueryClient() }, trailingSlash: "always" });
+    expect(g.dayInlineLinks?.length).toBeGreaterThanOrEqual(22);
+    expect(g.dayOfficialLinks).toHaveLength(6);
+    expect(g.beforeYouGoOfficialLinks).toHaveLength(2);
+    expect(g.dayOfficialLinks?.map(link => new URL(link.href).host)).toEqual([
+      "en.parks.org.il", "www.custodia.org", "www.magdala.org",
+      "en.parks.org.il", "ganbahai.org.il", "en.parks.org.il",
+    ]);
+    for (const link of g.dayInlineLinks ?? []) {
+      expect(g.daysPlan[link.day - 1]?.[link.field], link.phrase).toContain(link.phrase);
+      expect(router.matchRoutes(link.to as string).at(-1)?.routeId, link.to as string).not.toBe(rootRouteId);
+    }
+    for (const link of g.dayOfficialLinks ?? []) {
+      expect(g.daysPlan[link.day - 1]?.[link.field], link.phrase).toContain(link.phrase);
+      expect(link.href).toMatch(/^https:\/\//);
+    }
+    for (const link of g.logisticsInlineLinks ?? []) {
+      expect(g.logistics[link.index]?.text, link.phrase).toContain(link.phrase);
+      expect(router.matchRoutes(link.to as string).at(-1)?.routeId, link.to as string).not.toBe(rootRouteId);
+    }
+    for (const link of g.beforeYouGoOfficialLinks ?? []) {
+      expect(g.beforeYouGo?.[link.index]?.text).toContain(link.phrase);
+    }
+    for (const related of g.relatedGuides ?? []) {
+      expect(router.matchRoutes(related.to as string).at(-1)?.routeId, related.to as string).not.toBe(rootRouteId);
+    }
+    expect(new Set(g.relatedGuides?.map(item => item.to)).size).toBe(6);
+    expect(itinerarySourcesByGuide["7"].some(source => source.url.includes("capernaum-national-park"))).toBe(true);
+    expect(itinerarySourcesByGuide["7"].some(source => source.url.includes("magdala.org"))).toBe(true);
+    expect(itinerarySourcesByGuide["7"].some(source => source.url.includes("caesarea-national-park"))).toBe(true);
+    expect(itinerarySourcesByGuide["7"].some(source => source.url.includes("eta-il"))).toBe(true);
+    expect(g.logistics.every(tip => tip.to !== "/travel-blog/how-to-get-from-ben-gurion-airport-to-tel-aviv/")).toBe(true);
+    expect(g.logistics.some(tip => tip.to === "/airport-transfers/")).toBe(true);
+    expect(itineraries["10"].daySequences).toBeUndefined();
+    expect(itineraries["10"].dayChoices).toBeUndefined();
+    expect(itineraries["10"].jerusalemTourOptionsDay).toBeUndefined();
+  });
+
+  it("uses the consistent seven-day responsive layout and correctly attributed partner links", () => {
+    const view = file("src/components/IsraelItineraryPage.tsx");
+    const tours = file("src/components/JerusalemItineraryTourOptions.tsx");
+    expect(view).toContain('const compactOverview = id === "3" || id === "5" || id === "7"');
+    expect(view).toContain("Daily route, transport and overnight stays");
+    expect(view).toContain("Have more or fewer than 7 days in Israel?");
+    expect(view).toContain("Before you book");
+    expect(view).toContain("Related practical guides");
+    expect(view).toContain('days={id === "7" ? 7 : id === "5" ? 5 : 3}');
+    expect(view).toContain('id !== "5" && id !== "7"');
+    expect(view.indexOf('data-testid={`day-${index + 1}-route-choices`}')).toBeLessThan(view.indexOf('<dl className="space-y-5">'));
+    expect(tours).toContain("days?: 3 | 5 | 7");
+    expect(tours).toContain("days: 3 | 5 | 7");
+    expect(tours).toContain('itt_${days}day_');
+    expect(tours).toContain('pageId: `israel-itinerary-${days}-days`');
+    expect(tours).toContain("grid gap-5 sm:grid-cols-2 xl:grid-cols-3");
+    expect(new URL(getYourGuideCityWidgetSrc("jerusalem", "7_day")).searchParams.get("shmarker")).toBe("622032.7_day");
+    expect(new URL(getYourGuideCityWidgetSrc("telAviv", "7_day")).searchParams.get("iata")).toBe("TLV");
+    expect(file("src/components/GetYourGuideCityWidget.tsx")).not.toContain("Optional tours and activities from GetYourGuide (affiliate).");
+  });
+
   it("has a focused, bookable-through-guides three-day plan without intrusive affiliate links", () => {
     const three = itineraries["3"];
     expect(three.overviewRows).toHaveLength(3);
