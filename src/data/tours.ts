@@ -6,6 +6,11 @@ import { airportTransferPhotos as airport } from "@/data/airportTransfers";
 import { jerusalemAreaGuides, telAvivAreaGuides } from "@/data/content";
 import { travelGuidePaths } from "@/data/registry";
 import jaffa from "@/assets/tel-aviv/jaffa.webp";
+import neveTzedek from "@/assets/tel-aviv/neve-tzedek.webp";
+import telAvivBeachfront from "@/assets/tel-aviv/beachfront.webp";
+import telAvivDizengoff from "@/assets/tel-aviv/dizengoff.webp";
+import keremHaTeimanim from "@/assets/tel-aviv/kerem-hateimanim.webp";
+import rothschild from "@/assets/tel-aviv/rothschild.webp";
 import akko from "@/assets/shore-excursions/akko-port.jpg";
 import holySepulchre from "@/assets/guides/holy-sepulchre.jpg";
 import jerusalemOldCityStreet from "@/assets/jerusalem/old-city.webp";
@@ -38,6 +43,7 @@ export type TourCategoryId = keyof typeof tourCategoryPaths;
 
 export const tourPhotos: Record<string, GuidePhoto> = {
   "my-jerusalem-day": { src: "/images/jerusalem/mount-zion/mount-zion-hillside.webp", alt: "Green hillside and historic buildings on Jerusalem\'s Mount Zion" },
+  "my-tel-aviv-day": { src: "/images/travel-blog/taxi-in-tel-aviv.webp", alt: "A taxi on a Tel Aviv street, illustrating private transport" },
   "my-masada-day": airport["dead-sea"]!,
   "my-masada-jerusalem": { src: masadaCableCar, alt: "A cable-car cabin below Masada's desert cliffs", sourceUrl: "https://commons.wikimedia.org/wiki/File:Masada_Cable_Car_1438_(511094328).jpg", credit: "James Emery · CC BY 2.0 · resized and converted to WebP", licenseUrl: "https://creativecommons.org/licenses/by/2.0/" },
   "my-north-coast-day": airport["haifa"]!,
@@ -52,6 +58,12 @@ export const tourPhotos: Record<string, GuidePhoto> = {
   "jerusalem-bethlehem-private": { src: nativityCourtyard, alt: "Courtyard of the Church of the Nativity in Bethlehem" },
   "jaffa-carmel-walk": { src: jaffa, alt: "Old Jaffa's historic buildings above the Mediterranean harbour", sourceUrl: "https://www.israel-taxi.com/wp-content/uploads/2025/08/jaffa_panorama2.jpg" },
   "tel-aviv-street-art": telAvivAreaGuides.find(n => n.id === "telaviv-florentin")!.photo,
+  "old-jaffa-walk": { src: "/images/attractions/tel-aviv-jaffa.webp", alt: "Boats and historic stone buildings in Jaffa harbor" },
+  "neve-tzedek-walk": { src: neveTzedek, alt: "Historic streets and restored homes in Neve Tzedek" },
+  "carmel-market-food-tour": migration["what-to-eat-in-israel"],
+  "tel-aviv-cycling": { src: telAvivBeachfront, alt: "Tel Aviv seafront and promenade" },
+  "white-city-audio": { src: telAvivDizengoff, alt: "Dizengoff neighborhood streets in central Tel Aviv" },
+  "tel-aviv-jaffa-small-group": { src: keremHaTeimanim, alt: "Historic central Tel Aviv neighborhood and streets" },
   "masada-dead-sea-tel-aviv": migration["EXISTING:masada"],
   "masada-ein-gedi-dead-sea": migration["jerusalem-to-the-dead-sea"],
   "jerusalem-bethlehem-shared": { src: bethlehemMangerSquare, alt: "Manger Square in Bethlehem" },
@@ -78,6 +90,16 @@ export const jerusalemTourLocalCards = [
   { to: "/travel-blog/shopping-in-jerusalem/", cta: "Browse shopping tips", title: "Shopping in Jerusalem", description: "Browse local markets, crafts, boutiques and shopping streets.", photo: { src: "/images/attractions/jerusalem-shopping.webp", alt: "Historic shopping street in central Jerusalem" } },
   { to: "/travel-blog/churches-in-jerusalem/", cta: "Explore sacred sites", title: "Churches in Jerusalem", description: "Plan visits to important churches and Christian heritage sites.", photo: { src: "/images/jerusalem/church-of-all-nations.webp", alt: "Church of All Nations on the Mount of Olives in Jerusalem" } },
   { to: "/travel-blog/jerusalem-travel-guide/", cta: "Read the travel guide", title: "Jerusalem travel guide", description: "Discover highlights, neighborhoods and practical visitor advice.", photo: { src: "/images/hotels/jerusalem-night.webp", alt: "Illuminated Jerusalem Old City walls and skyline after dark" } },
+] as const;
+
+/** Six Tel Aviv editorial links, each illustrated with a distinct local image. */
+export const telAvivTourLocalCards = [
+  { to: "/travel-blog/jaffa/", cta: "Explore historic Jaffa", title: "Old Jaffa", description: "Explore the old port, stone alleys, flea market and viewpoints.", photo: { src: "/images/city-stays/tel-aviv-jaffa.webp", alt: "Historic buildings in Old Jaffa" } },
+  { to: "/travel-blog/attractions-in-tel-aviv/", cta: "See city highlights", title: "Tel Aviv attractions", description: "Beaches, markets, Bauhaus architecture and neighborhood highlights.", photo: { src: rothschild, alt: "Rothschild Boulevard and city architecture in Tel Aviv" } },
+  { to: "/travel-blog/beaches-in-tel-aviv/", cta: "Discover the beaches", title: "Tel Aviv beaches", description: "Choose a beach and plan a relaxing walk along the promenade.", photo: migration["beaches-in-tel-aviv"] },
+  { to: "/travel-blog/museums-in-tel-aviv/", cta: "Find museums", title: "Museums in Tel Aviv", description: "Art, design and local history, with practical visitor details.", photo: migration["museums-in-tel-aviv"] },
+  { to: "/travel-blog/where-to-stay-in-tel-aviv/", cta: "Compare neighborhoods", title: "Where to stay in Tel Aviv", description: "Find the best base for the seafront, cafés and cultural sites.", photo: { src: "/images/city-stays/tel-aviv-dizengoff.webp", alt: "Central Tel Aviv neighborhood near Dizengoff" } },
+  { to: "/travel-blog/getting-around-tel-aviv/", cta: "Plan local transport", title: "Getting around Tel Aviv", description: "Explore walking, light rail, buses and taxi options.", photo: { src: "/images/city-stays/tel-aviv-beachfront.webp", alt: "Tel Aviv beachfront and seafront streets" } },
 ] as const;
 
 /** General planning guides use icon cards, not photographs, to distinguish them from local sights. */
@@ -147,16 +169,18 @@ export const tourCategories: TourCategory[] = [
     description: "Discover Tel Aviv and Old Jaffa through guided walks, street art, architecture and Carmel Market tastings. Compare duration, meeting points and inclusions.",
     intro: "Follow Jaffa's lanes down to the sea, explore Tel Aviv's creative neighborhoods or taste your way through the market. These local experiences bring the city to life without a full day on the road.",
     photo: migration["EXISTING:coast"], match: { destinations: ["tel-aviv"] },
-    paragraphs: ["Tel Aviv and Jaffa offer several very different kinds of city tour. A broad walking itinerary connects historic Jaffa with modern neighborhoods and food stops, while a focused street-art walk spends more time on a single creative district. Choose the experience around your interests and the walking time you want.", "Most local walks meet at a fixed point rather than collecting every guest from a hotel. Check the start and finish locations against your other plans, especially for a route that ends in a different neighborhood. Food tastings, architecture commentary and museum admissions are separate inclusions; a city tour title alone does not promise all three."],
+    paragraphs: ["Tel Aviv and Jaffa are best explored in manageable neighborhoods: walk historic Jaffa and Neve Tzedek, discover the White City's architecture, or focus on Florentin street art and Carmel Market's food stalls. Compare the length and format of each tour: cycling, audio tours and guided walks provide different experiences.", "Most guided walks start at a meeting point rather than a hotel. Confirm where your tour ends and whether food, bicycle equipment or museum admission is included. My private-driver service offers flexible transport and stops, not a guided walking tour; professional guiding can be arranged separately when requested."],
     choices: [
       { title: "Old Jaffa & city highlights", text: "A good introduction to the coastal setting and historic neighborhoods, with a longer walk between different areas." },
       { title: "Street art & local stories", text: "A shorter, focused experience around murals and creative streets. Ideal when you already know the city's main landmarks." },
       { title: "Markets & tastings", text: "Combine local history with food. Check the number of tastings and dietary arrangements rather than assuming a full meal." },
     ],
     faqs: [
-      { q: "Are these bus tours or walking tours?", a: "The current city experiences below are walking tours. Their cards show the approximate duration and meeting arrangement; hotel pickup is not assumed." },
-      { q: "Can I combine Jaffa with Carmel Market?", a: "Yes, the combined walking experience below visits both. It is a longer route than a short Jaffa-only visit, so allow time and wear comfortable shoes." },
-      { q: "Are tastings included on every tour?", a: "No. Tastings are included only where the card and booking option say so. A street-art walk is a different experience from a food tour." },
+      { q: "Are these guided walking tours or other experiences?", a: "Most listings are guided walks, but cycling and self-guided audio options are also available. Each tour card gives the duration and format. Check the actual meeting point and mobility requirements on the booking page." },
+      { q: "Can I combine Jaffa with Carmel Market?", a: "Yes. Some longer guided walks connect Jaffa, Neve Tzedek and Carmel Market. For a shorter outing, choose a dedicated Jaffa walk or market tasting, and check whether the tour ends where it began." },
+      { q: "Are food tastings included on every tour?", a: "No. Only dedicated food tours or options that explicitly list tastings include them. Check dietary arrangements, sample quantities and operator conditions before booking." },
+      { q: "Can I explore Tel Aviv & Jaffa with a private driver?", a: "Yes. I can plan a flexible transport itinerary with pickup and stops agreed in advance. My driver service is transport only; if you want a licensed guide, please ask about arranging one separately." },
+      { q: "What should I know about weekends and the weather?", a: "Market stalls, museums and public transport can have different Friday, Saturday and holiday schedules. In hot weather, carry water and plan shade breaks. The historic lanes of Jaffa include slopes, steps and uneven paving." },
     ], reading: ["jaffa", "telAviv", "food", "tips"],
   },
   {
