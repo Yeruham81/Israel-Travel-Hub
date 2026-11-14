@@ -1364,7 +1364,8 @@ export const guideDirectory: GuideDirectoryEntry[] = [
     const g = itineraries[id];
     return { id: `israel-itinerary-${id}`, title: g.title, description: g.description,
       to: g.path as LinkProps["to"], topics: ["itineraries", "destinations", "tips"],
-      photo: migrationPhotos[g.hero] };
+      // Use distinct regional photographs in the itinerary directory without changing each article's hero.
+      photo: migrationPhotos[id === "5" ? "itinerary-5day-caesarea" : id === "10" ? "itinerary-10day-akko-aerial" : g.hero] };
   }),
   ...attractionIds.map((id): GuideDirectoryEntry => { const g = attractionGuides[id]; return { id: `attraction-${id}`, title: g.title, description: g.description, to: attractionPath(id), topics: ["attractions","destinations",...(id.includes("mount-") || ["capernaum","tabgha"].includes(id) ? ["religion" as const] : [])], ...(g.image ? {photo:g.image}: {}) }; }),
   { id: "airport-journey-jerusalem", title: "How to get from Ben Gurion Airport to Jerusalem", description: "Compare train, bus, taxi and private-transfer options, travel times, estimated fares and weekend alternatives.", to: "/travel-blog/how-to-get-from-ben-gurion-airport-to-jerusalem/", topics: ["transportation", "tips"], photo: airportTransferPhotos["jerusalem"]! },
