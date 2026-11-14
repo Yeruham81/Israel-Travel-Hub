@@ -886,7 +886,7 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
             id: "israel-drivers", title: "Private driver versus an organized guided tour",
             paragraphs: [
               "A private driver transports your group according to an agreed itinerary, but does not automatically provide a licensed guide, entrance tickets or unlimited stops. A guided tour may include guiding and specific scheduled visits, yet can be less flexible. Compare the total hours, pickup, admissions, luggage and the return journey.",
-              "See my private driver page for a customised journey, or browse organised tours and day trips. Confirm the itinerary and total price before booking.",
+              "See my private driver page for a customised journey, or browse the tours and day trips directory for organised visits. Confirm the itinerary and total price before booking.",
             ],
             inlineLinks: [{ text: "private driver page", to: "/private-driver/" }, { text: "tours and day trips directory", to: "/tours/" }],
           },
