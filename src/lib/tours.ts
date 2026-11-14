@@ -30,6 +30,8 @@ export function toursForCategory(categoryId?: TourCategoryId) {
   return tourProducts.filter(tour => tour.status === "published" && operators.some(operator => operator.id === tour.operatorId)
     && (isOwnerTour(tour) || offersForTour(tour.id).length > 0)
     && (!match?.destinations?.length || tour.destinationIds.some(id => match.destinations!.includes(id)))
+    // A Bethlehem/Jericho itinerary with a brief Dead Sea stop does not belong in the Masada tour catalog.
+    && (categoryId !== "masada-dead-sea" || !tour.destinationIds.includes("bethlehem"))
     && (!match?.tags?.length || tour.tagIds.some(id => match.tags!.includes(id))));
 }
 export function filterTours(categoryId: TourCategoryId, raw: TourSearch = {}) {
