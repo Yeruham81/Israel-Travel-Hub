@@ -11,6 +11,7 @@ import holySepulchre from "@/assets/guides/holy-sepulchre.jpg";
 import jerusalemOldCityStreet from "@/assets/jerusalem/old-city.webp";
 import jerusalemDowntown from "@/assets/jerusalem/downtown.webp";
 import jerusalemMamilla from "@/assets/jerusalem/mamilla.webp";
+import museumsJerusalem from "@/assets/guides/museums-in-jerusalem.jpg";
 import nativityCourtyard from "@/assets/guides/bethlehem/nativity-courtyard.jpg";
 import bethlehemMangerSquare from "@/assets/guides/bethlehem/manger-square.jpg";
 import bethlehemMilkGrotto from "@/assets/guides/bethlehem/milk-grotto.jpg";
@@ -69,11 +70,24 @@ export const tourPhotos: Record<string, GuidePhoto> = {
  * Page-specific editorial image choices, with no repeated images across the
  * cover, tour cards, author portrait, related reading and onward links.
  */
-export const jerusalemTourMoreCards = [
-  { to: "/tours/masada-dead-sea/", title: "Masada & Dead Sea tours", description: "Discover ancient Masada and the extraordinary landscapes of the Dead Sea.", photo: tourPhotos["my-masada-jerusalem"]! },
-  { to: "/tours/bethlehem-jericho-jordan-river/", title: "Bethlehem & Jericho tours", description: "Explore historic and biblical landmarks beyond Jerusalem.", photo: { src: shepherdsFieldChapel, alt: "Shepherds' Field chapel near Bethlehem" } },
-  { to: "/travel-blog/day-trips-from-jerusalem/", title: "Day trips from Jerusalem", description: "Find inspiring destinations and practical routes for a day beyond the city.", photo: tourPhotos["my-galilee-jerusalem"]! },
-  { to: "/travel-blog/where-to-stay-in-jerusalem/", title: "Where to stay in Jerusalem", description: "Compare neighborhoods and find the best base for your visit.", photo: { src: jerusalemMamilla, alt: "Jerusalem's Mamilla neighborhood" } },
+/** Six Jerusalem-only editorial links: one distinct photo per card. */
+export const jerusalemTourLocalCards = [
+  { to: "/travel-blog/old-city-jerusalem/", title: "Jerusalem's Old City", description: "Discover the historic quarters, landmarks and streets inside the city walls.", photo: { src: "/images/attractions/jerusalem.webp", alt: "Jerusalem's Old City and historic skyline from across the valley" } },
+  { to: "/travel-blog/where-to-stay-in-jerusalem/", title: "Where to stay in Jerusalem", description: "Compare neighborhoods and find the right base for your visit.", photo: { src: jerusalemMamilla, alt: "Jerusalem's Mamilla neighborhood" } },
+  { to: "/travel-blog/museums-in-jerusalem/", title: "Museums in Jerusalem", description: "Explore art, archaeology, history and culture across the city.", photo: { src: museumsJerusalem, alt: "Rockefeller Archaeological Museum in Jerusalem" } },
+  { to: "/travel-blog/shopping-in-jerusalem/", title: "Shopping in Jerusalem", description: "Browse local markets, crafts, boutiques and shopping streets.", photo: { src: "/images/attractions/jerusalem-shopping.webp", alt: "Historic shopping street in central Jerusalem" } },
+  { to: "/travel-blog/churches-in-jerusalem/", title: "Churches in Jerusalem", description: "Plan visits to important churches and Christian heritage sites.", photo: { src: "/images/jerusalem/church-of-all-nations.webp", alt: "Church of All Nations on the Mount of Olives in Jerusalem" } },
+  { to: "/travel-blog/jerusalem-travel-guide/", title: "Jerusalem travel guide", description: "Discover highlights, neighborhoods and practical visitor advice.", photo: { src: "/images/hotels/jerusalem-night.webp", alt: "Illuminated Jerusalem Old City walls and skyline after dark" } },
+] as const;
+
+/** General planning guides use icon cards, not photographs, to distinguish them from local sights. */
+export const jerusalemTourPlanningCards = [
+  { to: travelGuidePaths.israel, title: "Getting around Israel", description: "Trains, buses, taxis and private travel options.", icon: "train" },
+  { to: travelGuidePaths.esim, title: "eSIM & mobile data", description: "Compare mobile connectivity options for your trip.", icon: "smartphone" },
+  { to: travelGuidePaths.bestTime, title: "Weather & seasons", description: "Plan for Israel's different climates and seasons.", icon: "cloud-sun" },
+  { to: travelGuidePaths.calendar, title: "Holidays & events", description: "Check dates that can affect opening times and travel.", icon: "calendar-days" },
+  { to: travelGuidePaths.food, title: "Food in Israel", description: "Discover local dishes, market favorites and flavors.", icon: "utensils" },
+  { to: travelGuidePaths.travelTips, title: "Israel travel tips", description: "Practical advice for a smoother visit.", icon: "lightbulb" },
 ] as const;
 
 type ReadingId = "jerusalem" | "jaffa" | "telAviv" | "masada" | "deadSea" | "einGedi" | "bethlehem" | "baptism" | "nazareth" | "galilee" | "akko" | "haifa" | "caesarea" | "food" | "eilat" | "tips";
