@@ -15,17 +15,18 @@ export function OwnerTourSection({ tours, compact = false }: { tours: TourProduc
     <h2 id="my-private-days-h" className="mt-2 text-3xl font-semibold">My private day trips</h2>
     <p className="mt-3 max-w-3xl text-sm leading-relaxed text-muted-foreground">Enjoy the flexibility of a private driver, with a customized route, convenient pickup and stops of your choice.</p>
     <ul className={compact ? "mt-4 grid gap-3" : "mt-5 grid gap-5 sm:grid-cols-2"} aria-label="My private day trips">
-      {tours.map(tour => compact ? <li key={tour.id} id={tour.id} data-product-id={tour.id} data-operator-id="moshe-barak" data-testid="owner-tour-card" className="flex min-w-0 gap-3 rounded-xl border bg-card p-3 sm:gap-4">
-        <img src={tourPhotos[tour.id]!.src} alt={tourPhotos[tour.id]!.alt} width={140} height={180} loading="lazy" decoding="async" className="h-40 w-[96px] shrink-0 rounded-lg object-cover sm:h-44 sm:w-[124px]" />
-        <div className="flex min-w-0 flex-1 flex-col">
-          <h3 className="mt-1.5 text-base font-semibold leading-snug">{tour.title}</h3>
-          <p className="mt-1 text-sm leading-relaxed text-muted-foreground">{tour.summary}</p>
-          <p className="mt-2 text-xs text-muted-foreground">{tour.duration} · Private car &amp; driver</p>
-          <div className="mt-auto flex flex-wrap items-center justify-between gap-2 pt-3">
-            <span className="text-xs font-medium">Personal quote</span>
-            <Link to="/private-driver/" search={{ tour: tour.id }} hash="request-quote" className="inline-flex min-h-9 items-center rounded-lg bg-primary px-3 py-2 text-xs font-semibold text-primary-foreground">Request a quote</Link>
+      {tours.map(tour => compact ? <li key={tour.id} id={tour.id} data-product-id={tour.id} data-operator-id="moshe-barak" data-testid="owner-tour-card" className="min-w-0 scroll-mt-24 overflow-hidden rounded-xl border bg-card">
+        <article className="flex min-w-0 flex-col sm:flex-row sm:items-stretch">
+          <img src={tourPhotos[tour.id]!.src} alt={tourPhotos[tour.id]!.alt} width={320} height={180} loading="lazy" decoding="async" className="h-36 w-full object-cover sm:h-auto sm:w-48 sm:shrink-0 lg:w-56" />
+          <div className="flex min-w-0 flex-1 flex-col gap-3 p-3.5 lg:flex-row lg:items-center lg:gap-5 lg:px-5">
+            <div className="min-w-0 flex-1">
+              <h3 className="text-base font-semibold leading-snug">{tour.title}</h3>
+              <p className="mt-1 text-sm leading-relaxed text-muted-foreground">{tour.summary}</p>
+              <p className="mt-2 text-xs text-muted-foreground">{tour.duration} · Private car &amp; driver</p>
+            </div>
+            <a href="#contact" aria-label={"Request a quote for " + tour.title} className="inline-flex min-h-10 shrink-0 items-center justify-center self-start rounded-lg bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground hover:bg-primary/90 lg:self-center">Request a quote</a>
           </div>
-        </div>
+        </article>
       </li> : <li key={tour.id} id={tour.id} data-product-id={tour.id} data-operator-id="moshe-barak" data-testid="owner-tour-card" className="flex min-w-0 scroll-mt-24 flex-col overflow-hidden rounded-2xl border bg-card">
         <img src={tourPhotos[tour.id]!.src} alt={tourPhotos[tour.id]!.alt} width={720} height={480} loading="lazy" decoding="async" className="aspect-[16/9] w-full object-cover" />
         <article className="flex flex-1 flex-col p-4">
