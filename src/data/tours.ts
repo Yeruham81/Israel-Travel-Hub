@@ -36,6 +36,7 @@ import qasrPhoto from "@/assets/guides/dead-sea-excursions/qasr-al-yahud.webp";
 import palestinianTaxi from "@/assets/guides/bethlehem/palestinian-taxi.jpg";
 import bethlehemNativity from "@/assets/home/bethlehem-nativity.webp";
 import coralReef from "@/assets/eilat/coral-reef.webp";
+import timnaPark from "@/assets/home/timna-park-feature.jpg";
 import cruiseShip from "@/assets/home/cruise-port.webp";
 import roadTrip from "@/assets/home/road-trip.webp";
 import esim from "@/assets/guides/esim-israel.jpeg";
@@ -117,7 +118,7 @@ export const tourPhotos: Record<string, GuidePhoto> = {
   "tel-aviv-street-art": telAvivAreaGuides.find(n => n.id === "telaviv-florentin")!.photo,
   "old-jaffa-walk": { src: "/images/attractions/tel-aviv-jaffa.webp", alt: "Boats and historic stone buildings in Jaffa harbor" },
   "neve-tzedek-walk": { src: neveTzedek, alt: "Historic streets and restored homes in Neve Tzedek" },
-  "carmel-market-food-tour": migration["what-to-eat-in-israel"],
+  "carmel-market-food-tour": migration["food-5"],
   "tel-aviv-cycling": { src: telAvivBeachfront, alt: "Tel Aviv seafront and promenade" },
   "white-city-audio": { src: telAvivDizengoff, alt: "Dizengoff neighborhood streets in central Tel Aviv" },
   "tel-aviv-jaffa-small-group": { src: keremHaTeimanim, alt: "Historic central Tel Aviv neighborhood and streets" },
@@ -169,8 +170,18 @@ export const tourPhotos: Record<string, GuidePhoto> = {
   "golan-heritage-private": { src: golanNimrodRuins, alt: "Stone walls at Nimrod Fortress in the northern Golan area", sourceUrl: "https://commons.wikimedia.org/wiki/File:PikiWiki_Israel_67396_nimrod_fortress.jpg", credit: "PikiWiki Israel · CC license details on Wikimedia Commons" },
   "golan-north-premium": { src: "/images/attractions/sea-of-galilee.webp", alt: "Sea of Galilee at the foot of the Golan Heights, a scenic route toward the northern plateau" },
   "mahane-yehuda-tasting": jerusalemAreaGuides.find(n => n.id === "mahane-yehuda")!.photo,
-  "eilat-glass-bottom-boat": airport["eilat"]!,
+  "eilat-glass-bottom-boat": { src: "/images/attractions/eilat.webp", alt: "Eilat waterfront and the Red Sea, illustrating a boat cruise" },
   "eilat-snorkeling": { src: coralReef, alt: "Corals and fish in the waters of Eilat's Red Sea reef", sourceUrl: "https://commons.wikimedia.org/wiki/File:Corals_in_Eilat_coral_reef_nature_reserve_1.jpg", credit: "Yoav95179 · CC BY-SA 4.0 · resized and converted to WebP", licenseUrl: "https://creativecommons.org/licenses/by-sa/4.0/" },
+  "levinsky-market-tasting": migration["food-2"],
+  "jerusalem-private-market-food": migration["food-3"],
+  "jerusalem-market-food-walk": migration["food-4"],
+  "carmel-market-cooking": migration["food-6"],
+  "eilat-red-mountains-sea": { src: ramonJeep, alt: "Off-road vehicle in a southern Israel desert setting; illustrative photograph" },
+  "eilat-timna-jeep": { src: timnaPark, alt: "Rock formations in Timna Park north of Eilat" },
+  "eilat-red-canyon-jeep": { src: ramonRocks, alt: "Red-brown desert rocks in the Negev; illustrative photograph" },
+  "eilat-mountains-jeep": { src: ramonPanorama, alt: "Wide desert ridge landscape in southern Israel; illustrative photograph" },
+  "eilat-morning-jeep": { src: ramonClouds, alt: "Negev desert panorama under a clouded sky; illustrative photograph" },
+  "eilat-private-red-canyon": { src: ramonCamelHill, alt: "Sandstone desert slopes in the Negev; illustrative photograph" },
 };
 
 /**
@@ -256,6 +267,27 @@ export const golanTourLocalCards = [
   { to: "/travel-blog/tabgha/", cta: "Explore Tabgha", title: "Tabgha churches", description: "A complementary lakeside historic site, not an automatic Golan-tour stop.", photo: { src: tabgha, alt: "Church and grounds at Tabgha beside the lake" } },
   { to: "/travel-blog/mount-tabor/", cta: "Visit Mount Tabor", title: "Mount Tabor guide", description: "Another northern Israel viewpoint and heritage destination for a different itinerary.", photo: { src: mountTabor, alt: "Mount Tabor rising above the Galilee landscape" } },
   { to: "/travel-blog/best-hotels-in-tiberias/", cta: "Compare nearby hotels", title: "Where to stay in Tiberias", description: "Choose a base for local northbound day trips and lake visits.", photo: { src: tiberiasHeritage, alt: "Historic stone buildings in Tiberias" } },
+] as const;
+
+
+/** Food and market guides: six distinct photos and existing destination-specific guides. */
+export const foodTourLocalCards = [
+  { to: "/travel-blog/what-to-eat-in-israel/", cta: "Discover local dishes", title: "What to eat in Israel", description: "A quick introduction to local food, snacks, desserts and market favourites.", photo: migration["food-9"] },
+  { to: "/travel-blog/shopping-in-jerusalem/", cta: "Explore market streets", title: "Shopping in Jerusalem", description: "Browse Mahane Yehuda, Old City market lanes and local craft shops.", photo: { src: "/images/attractions/jerusalem-shopping.webp", alt: "Shopping lane in Jerusalem" } },
+  { to: "/travel-blog/jaffa/", cta: "Explore Jaffa", title: "Old Jaffa travel guide", description: "Get to know the old port and neighborhoods before a combined walking tour.", photo: { src: "/images/city-stays/tel-aviv-jaffa.webp", alt: "Historic buildings in Old Jaffa" } },
+  { to: "/travel-blog/attractions-in-tel-aviv/", cta: "Explore city highlights", title: "Tel Aviv attractions", description: "Find markets, neighborhoods and cultural sites for the rest of your city stay.", photo: { src: rothschild, alt: "Rothschild Boulevard in Tel Aviv" } },
+  { to: "/travel-blog/where-to-stay-in-tel-aviv/", cta: "Choose a local base", title: "Where to stay in Tel Aviv", description: "Compare neighborhoods for easy access to Carmel and Levinsky markets.", photo: { src: "/images/hotel-cards/tlv-levinski-market.webp", alt: "Market stalls at Levinsky Market in Tel Aviv" } },
+  { to: "/travel-blog/where-to-stay-in-jerusalem/", cta: "Compare neighborhoods", title: "Where to stay in Jerusalem", description: "Find a convenient base for city walks and Mahane Yehuda visits.", photo: { src: jerusalemMamilla, alt: "Jerusalem's Mamilla neighborhood" } },
+] as const;
+
+/** Eilat and wider-south travel guides, with onward destinations described as separate trips. */
+export const eilatTourLocalCards = [
+  { to: "/travel-blog/eilat/", cta: "Explore Eilat", title: "Eilat travel guide", description: "Plan beaches, activities and an easy stay beside the Red Sea.", photo: { src: "/images/attractions/eilat.webp", alt: "Eilat on the Red Sea" } },
+  { to: "/travel-blog/mitzpe-ramon-crater/", cta: "Explore the crater", title: "Mitzpe Ramon guide", description: "Plan a separate desert stop on a longer journey through the Negev.", photo: { src: ramonWide, alt: "Rock formations in Makhtesh Ramon" } },
+  { to: "/tours/negev-desert-ramon-crater/", cta: "Compare crater tours", title: "Ramon Crater experiences", description: "Compare guided jeep and desert activities around Mitzpe Ramon, not Eilat.", photo: { src: ramonIbex, alt: "Nubian ibex in the Ramon Crater region" } },
+  { to: "/travel-blog/masada/", cta: "Plan another desert day", title: "Masada visitor guide", description: "Discover an iconic desert heritage site on a separate Israel itinerary.", photo: { src: masadaRuins, alt: "Ancient archaeological remains at Masada" } },
+  { to: "/travel-blog/the-dead-sea/", cta: "Explore the Dead Sea", title: "Dead Sea travel guide", description: "Consider a separate stop at the Dead Sea when travelling through southern Israel.", photo: { src: deadSeaLandscape, alt: "Dead Sea shoreline and surrounding desert" } },
+  { to: "/travel-blog/israel-itinerary-10-days/", cta: "Plan a longer journey", title: "Ten-day Israel itinerary", description: "See how southern destinations can fit into a longer route with realistic driving time.", photo: { src: roadTrip, alt: "Vehicle travelling a scenic desert road" } },
 ] as const;
 
 /** General planning guides use icon cards, not photographs, to distinguish them from local sights. */
@@ -488,37 +520,53 @@ export const tourCategories: TourCategory[] = [
   },
   {
     id: "food-markets", title: "Food & market tours in Israel", shortTitle: "Food & markets",
-    description: "Compare guided food and market tours in Jerusalem and Tel Aviv, including Mahane Yehuda and Carmel Market tastings, duration and meeting points.",
-    intro: "Taste local favourites, hear the stories behind the stalls and see a city through its food. Choose a focused Jerusalem market walk or combine Jaffa and Tel Aviv sightseeing with Carmel Market flavours.",
+    description: "Compare Jerusalem and Tel Aviv food tours, Mahane Yehuda and Levinsky Market tastings, Carmel Market cooking, and private culinary walks.",
+    intro: "Discover Israeli food through the markets, neighbourhoods and people who make it. Compare tastings in Jerusalem’s Mahane Yehuda Market with culinary walks, market visits and a cooking workshop in Tel Aviv.",
     photo: migration["what-to-eat-in-israel"], match: { tags: ["food"] },
-    paragraphs: ["A food tour can be a focused introduction to a market or one part of a longer city walk. Mahane Yehuda brings Jerusalem's food traditions together in a compact area, while the Jaffa and Carmel experience connects several neighborhoods before its market tastings. Choose by city, walking time and the balance of history and food.", "Check the number and size of tastings, whether drinks are included and how dietary requirements are handled. A tasting selection is not automatically a guaranteed full meal or suitable for every allergy or religious requirement. Market hours, holidays and individual stall opening days can change the food stops."],
+    paragraphs: [
+      "Choose your city and the kind of experience you want. Jerusalem's Mahane Yehuda tours concentrate on the stalls and food traditions of one bustling market; Tel Aviv options range from Levinsky and Carmel Market tastings to a longer Jaffa-to-Carmel walk and a hands-on cooking workshop.",
+      "A focused market walk generally takes two to three hours. A multi-neighbourhood tour may be longer and devote some of its time to history, architecture or walking rather than tasting. A private culinary guide offers flexibility, but check the exact itinerary and whether drinks or a full meal are included.",
+      "Markets and independent stalls follow different Friday, Shabbat and holiday schedules. Tell the supplier about allergies, vegetarian options, kosher needs and any other restrictions before booking; not every food stop can offer substitutions. Most listings start at a city meeting point, not a hotel."
+    ],
     choices: [
-      { title: "Jerusalem market flavours", text: "A shorter, food-focused walk through Mahane Yehuda, with tastings and the market's local stories." },
-      { title: "Jaffa, city streets & Carmel", text: "A longer experience combining historical lanes, architecture and a market tasting stop in Tel Aviv." },
-      { title: "Dietary needs", text: "Tell the operator about allergies and dietary restrictions before booking. Confirm what can actually be accommodated." },
+      { title: "Jerusalem market tastings", text: "A concentrated walk through Mahane Yehuda with local food and stories; confirm the meeting address." },
+      { title: "Tel Aviv's food neighborhoods", text: "Explore Carmel or Levinsky markets, or combine Jaffa's streets with market tastings." },
+      { title: "Cook or go private", text: "Try a market-to-kitchen cooking experience or arrange a private guide focused on your tastes." }
     ],
     faqs: [
-      { q: "Will the tastings replace lunch?", a: "That depends on the experience and your appetite. Read the actual tasting inclusions; drinks and extra purchases may be separate." },
-      { q: "Are all tours suitable for vegetarians or kosher diets?", a: "Do not assume this. Ask the operator about the exact food stops, dietary arrangements and any substitutions before booking." },
-      { q: "Do food tours include hotel pickup?", a: "The current options are local walks with meeting points. Confirm the exact address; the Mahane Yehuda listing has conflicting map and meeting text that needs clarification from its operator." },
-    ], reading: ["food", "jerusalem", "jaffa", "telAviv"],
+      { q: "Where do food tours start?", a: "These are local city tours. Jerusalem experiences meet at agreed city locations; Tel Aviv tours meet near the relevant market or Jaffa. Hotel pickup is not generally included. Confirm the exact address and end point with the operator." },
+      { q: "Do market tastings count as a full meal?", a: "Not necessarily. Some tours provide several substantial samples; others combine small tastes with sightseeing. Check the inclusions, drinks and expected food quantities before booking." },
+      { q: "Are there vegetarian, vegan or kosher options?", a: "Some operators can adapt tastings, but no single dietary option is guaranteed across every stall. Ask about allergies, vegetarian or vegan needs, kosher certification and possible substitutions before purchasing." },
+      { q: "Which market should I choose: Mahane Yehuda, Carmel or Levinsky?", a: "Mahane Yehuda is in Jerusalem and combines an energetic produce market with varied local food traditions. Carmel and Levinsky are different Tel Aviv food areas. Choose by where you are staying, the exact itinerary and the food that interests you." },
+      { q: "Are markets open on Friday or Saturday?", a: "Hours vary by city and stall. Many Jewish-operated stalls close before Shabbat and remain closed on Saturday, with changes around religious holidays. Check your tour's operating date and the actual stops with the operator." },
+      { q: "Is a cooking class the same as a tasting walk?", a: "No. A cooking workshop includes food preparation and a shared meal as described in the selected product. Tasting walks focus on visiting stalls, sampling food and learning from a local guide." }
+    ],
+    reading: ["food", "jerusalem", "jaffa", "telAviv"],
   },
   {
     id: "eilat-red-sea", title: "Eilat & Red Sea activities", shortTitle: "Eilat & the Red Sea",
-    description: "Compare Eilat boat trips and guided snorkeling activities. See duration, meeting arrangements and inclusions for local Red Sea experiences.",
-    intro: "See the Red Sea from above or explore it with a mask and snorkel. A glass-bottom boat keeps the day easy and dry; a guided snorkeling outing brings you closer to Eilat's underwater scenery.",
+    description: "Compare Eilat glass-bottom cruises, guided reef snorkeling, Timna Park jeep tours, Red Canyon hikes and Eilat Mountains desert adventures.",
+    intro: "Enjoy Eilat's Red Sea setting on a glass-bottom boat or guided snorkeling trip, then explore the striking desert beyond the city. Compare boat activities with jeep tours to Timna Park, the Red Canyon and the Eilat Mountains.",
     photo: airport["eilat"]!, match: { destinations: ["eilat"] },
-    paragraphs: ["These activities start locally in Eilat, so they fit naturally into a stay in the city. A glass-bottom cruise offers coastal views and underwater viewing without swimming. Snorkeling involves entering the sea and has different participation requirements, equipment arrangements and weather considerations.", "Compare total activity time with the actual time on the water. A snorkeling outing may include preparation and briefing around a shorter guided session, while the boat listing describes the cruise duration. Confirm the meeting location, equipment and any restrictions directly with the activity provider before booking."],
+    paragraphs: [
+      "Most experiences on this page meet locally in Eilat, rather than including transport from Jerusalem or Tel Aviv. Boat trips and snorkeling focus on the Red Sea. Off-road excursions explore mountain and desert scenery outside town, with some including short guided hikes, viewpoints or local refreshments.",
+      "For a relaxed outing without entering the water, look at a glass-bottom cruise. Guided snorkeling calls for comfort in the sea and appropriate equipment. Check the actual time in the water, swimming requirements, minimum age and what is included; the advertised activity duration can also cover instruction and preparation.",
+      "Timna Park excursions and Red Canyon hikes are different from central Eilat's coastal activities. Walking routes can involve steps or ladders, rough ground and exposure to heat. Confirm your hotel's pickup eligibility, physical requirements, site admissions, the planned route and weather-related cancellation terms directly with the supplier."
+    ],
     choices: [
-      { title: "A relaxed boat outing", text: "A shared cruise with underwater viewing, suited to visitors who prefer to stay aboard rather than swim." },
-      { title: "Guided snorkeling", text: "An active experience with an instructor. Confirm swimming ability, equipment, participant requirements and the actual water time." },
-      { title: "Leave room in your day", text: "Local meeting points make these shorter outings easy to combine with free time. Allow for preparation and the journey from your hotel." },
+      { title: "Red Sea without swimming", text: "Enjoy coastal scenery and underwater viewing aboard a glass-bottom boat." },
+      { title: "In the water", text: "Choose guided reef snorkeling and check swimming ability, equipment and actual time at sea." },
+      { title: "Desert & canyon adventures", text: "Explore Timna, the Red Canyon or the Eilat Mountains by jeep, with hiking requirements that vary by route." }
     ],
     faqs: [
-      { q: "Is transport from Tel Aviv included?", a: "No. The current activities meet locally in Eilat. Intercity travel and accommodation need separate planning." },
-      { q: "Do I need to swim for the glass-bottom boat?", a: "No swimming is part of the advertised boat cruise. Check boarding access and any participant restrictions with the provider." },
-      { q: "Is the whole snorkeling activity spent in the water?", a: "No. The advertised total includes preparation around a shorter guided water session. Confirm the actual water time, equipment and participation requirements with the dive centre." },
-    ], reading: ["eilat", "tips", "deadSea", "food"],
+      { q: "Do activities include transport from Tel Aviv or Jerusalem?", a: "No. The activities listed here depart from Eilat. Arrange travel to Eilat and accommodation separately, then check whether your selected activity offers local hotel pickup." },
+      { q: "Do I need to swim for a glass-bottom boat cruise?", a: "No. Passengers remain on board for the advertised cruise. Confirm boarding access, trip duration and any accessibility requirements before booking." },
+      { q: "How long is the snorkeling session?", a: "The listed total duration can include check-in, instruction and equipment preparation. Ask the dive centre about actual guided water time, swimming ability and what equipment is included or rented." },
+      { q: "Are Timna Park and the Red Canyon the same tour?", a: "No. Timna is a desert park with geological formations and archaeological remains; the Red Canyon is a hiking route with narrow rock passages and, on some routes, ladders. Choose a listing that explicitly names your preferred location." },
+      { q: "Are desert jeep tours suitable for children?", a: "Requirements vary by route and operator. Check ages, child seats, rough-road conditions, hiking or ladder sections and any medical restrictions. A jeep ride alone is different from a combined jeep-and-hike outing." },
+      { q: "Can wind, heat or weather cancel an activity?", a: "Yes. Sea conditions can affect cruises and snorkeling, while floods, heat and access restrictions can affect desert routes. Confirm official safety advice and the operator's cancellation or rescheduling policy close to your date." }
+    ],
+    reading: ["eilat", "tips", "deadSea", "food"],
   },
 ];
 
