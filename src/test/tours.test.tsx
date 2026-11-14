@@ -39,7 +39,7 @@ async function renderPage(path: string) {
 }
 
 describe("shared ordinary tour catalog", () => {
-  it("never displays the same photograph twice on the Jerusalem tours page", async () => {
+  it("avoids repeated editorial photos but retains Moshe portraits at separated top and bottom sections", async () => {
     const router = routerAt(tourCategoryPaths.jerusalem);
     await router.load();
     const matched = router.matchRoutes(tourCategoryPaths.jerusalem).at(-1)!;
@@ -48,10 +48,22 @@ describe("shared ordinary tour catalog", () => {
       renderToString(<RouterContextProvider router={router}><Page /></RouterContextProvider>),
       "text/html",
     );
-    const photos = [...doc.querySelectorAll("main img")].map(img => img.getAttribute("src") || "");
-    // Cover, author, external tours, private driver, related guides and onward cards.
-    expect(photos.length).toBeGreaterThanOrEqual(18);
-    expect(repeatedPhotos(photos)).toEqual([]);
+    const author = doc.querySelector('[data-testid="author-card"]')!;
+    const contact = doc.querySelector("section#contact")!;
+    const topPortrait = author.querySelector('img[data-photo-role="author-portrait"]')!;
+    const bottomPortrait = contact.querySelector('img[data-photo-role="contact-portrait"]')!;
+    expect(topPortrait).not.toBeNull();
+    expect(bottomPortrait).not.toBeNull();
+    expect(topPortrait.getAttribute("src")).toBe(bottomPortrait.getAttribute("src"));
+    const interveningSections = [...doc.querySelectorAll("main section")].filter(section =>
+      !!(author.compareDocumentPosition(section) & Node.DOCUMENT_POSITION_FOLLOWING) &&
+      !!(section.compareDocumentPosition(contact) & Node.DOCUMENT_POSITION_FOLLOWING)
+    );
+    expect(interveningSections.length).toBeGreaterThanOrEqual(3);
+    const allImages = [...doc.querySelectorAll("main img")];
+    expect(allImages.length).toBeGreaterThanOrEqual(18);
+    const editorialSources = allImages.filter(image => !image.hasAttribute("data-photo-role")).map(image => image.getAttribute("src") || "");
+    expect(repeatedPhotos(editorialSources)).toEqual([]);
   });
 
   it("keeps product, operator, booking channel and source identities separate and complete", () => {
@@ -206,7 +218,12 @@ describe("tours hub and SEO category pages", () => {
       const doc = new DOMParser().parseFromString(renderToString(<RouterContextProvider router={router}><Page /></RouterContextProvider>), "text/html");
       expect(doc.querySelectorAll("h1"), category.id).toHaveLength(1);
       expect(doc.querySelectorAll('[data-testid="tour-card"]').length, category.id).toBeGreaterThanOrEqual(2);
-      expect(doc.querySelectorAll(`section[aria-label="${category.id === "jerusalem" ? "Explore Jerusalem further" : "Get to know the places on your itinerary"}"] article`)).toHaveLength(4);
+      if (category.id === "jerusalem") {
+        expect(doc.querySelectorAll('section[aria-labelledby="jerusalem-local-h"] a.group img')).toHaveLength(6);
+        expect(doc.querySelectorAll('section[aria-labelledby="jerusalem-planning-h"] a.group')).toHaveLength(6);
+      } else {
+        expect(doc.querySelectorAll('section[aria-label="Get to know the places on your itinerary"] article')).toHaveLength(4);
+      }
       for (const link of doc.querySelectorAll('main a[href^="/"]')) {
         const url = new URL(link.getAttribute("href")!, CANONICAL_ORIGIN);
         expect(router.matchRoutes(url.pathname).at(-1)?.routeId.replace(/\/$/, ""), link.outerHTML).toBe(url.pathname.replace(/\/$/, ""));
@@ -223,9 +240,9 @@ describe("tours hub and SEO category pages", () => {
         }
       }
       if (category.id === "jerusalem") {
-        const more = doc.querySelector('section[aria-labelledby="jerusalem-next-h"]')!;
+        const more = doc.querySelector('section[aria-labelledby="jerusalem-local-h"]')!;
         expect(more).not.toBeNull();
-        expect(more.querySelectorAll("a.group img")).toHaveLength(4);
+        expect(more.querySelectorAll("a.group img")).toHaveLength(6);
         expect(doc.querySelector('section[aria-labelledby="more-tour-categories-h"]')).toBeNull();
       } else {
         const more = doc.querySelector('section[aria-labelledby="more-tour-categories-h"]')!;
@@ -241,8 +258,12 @@ describe("tours hub and SEO category pages", () => {
         expect(owner.className).not.toContain("bg-navy");
         expect(owner.textContent).not.toContain("Arrange directly with me");
         for (const card of owner.querySelectorAll('[data-testid="owner-tour-card"]')) {
-          const link = card.querySelector('a[href^="/private-driver/?tour="]')!;
-          expect(new URL(link.getAttribute("href")!, CANONICAL_ORIGIN).searchParams.get("tour")).toBe(card.getAttribute("data-product-id"));
+          if (category.id === "jerusalem") {
+            expect(card.querySelector('a[href="#contact"]')).not.toBeNull();
+          } else {
+            const link = card.querySelector('a[href^="/private-driver/?tour="]')!;
+            expect(new URL(link.getAttribute("href")!, CANONICAL_ORIGIN).searchParams.get("tour")).toBe(card.getAttribute("data-product-id"));
+          }
           if (category.id !== "jerusalem") expect(card.querySelector("dl")?.textContent).toContain("Includes:");
           else expect(card.textContent).toContain("Private car & driver");
         }
