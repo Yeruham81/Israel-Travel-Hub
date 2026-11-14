@@ -34,6 +34,16 @@ import hotelRoom from "@/assets/home/hotel-room.webp";
 import masadaCableCar from "@/assets/home/masada-cable-car.webp";
 import caesareaAqueduct from "@/assets/home/caesarea-aqueduct.webp";
 import capernaum from "@/assets/guides/capernaum.jpg";
+import mountBeatitudes from "@/assets/guides/mount-of-beatitudes.jpg";
+import mountTabor from "@/assets/guides/mount-tabor.jpg";
+import tabgha from "@/assets/guides/tabgha.jpg";
+import yardenitPhoto from "@/assets/guides/yardenit.jpg";
+import tiberiasWaterfront from "@/assets/tiberias/waterfront.webp";
+import tiberiasSunrise from "@/assets/tiberias/sunrise.webp";
+import tiberiasCentral from "@/assets/tiberias/central.webp";
+import tiberiasHeritage from "@/assets/tiberias/heritage.webp";
+import tiberiasLake from "@/assets/home/tiberias-lake.webp";
+import galileeHero from "@/assets/home/hero-galilee.webp";
 import masadaAerial from "@/assets/guides/dead-sea-excursions/masada-aerial.webp";
 import masadaPalace from "@/assets/guides/dead-sea-excursions/masada-palace.webp";
 import masadaSnakePath from "@/assets/guides/dead-sea-excursions/masada-snake-path.webp";
@@ -99,7 +109,13 @@ export const tourPhotos: Record<string, GuidePhoto> = {
   "bethlehem-jericho-qasr-tel-aviv": { src: jordanQasrPhoto, alt: "Jordan River banks at Qasr al-Yahud" },
   "bethlehem-qasr-dead-sea": { src: deadSeaMud, alt: "Visitors bathing in mineral-rich Dead Sea mud" },
   "nazareth-galilee-tel-aviv": migration["basilica-of-the-annunciation"],
-  "galilee-nazareth-jordan": migration["EXISTING:galilee"],
+  "galilee-nazareth-jordan": { src: tiberiasSunrise, alt: "Sunrise over the Sea of Galilee and Tiberias waterfront" },
+  "nazareth-galilee-jerusalem": { src: mountTabor, alt: "Mount Tabor rises over the Galilee landscape" },
+  "galilee-christian-jerusalem": { src: tiberiasHeritage, alt: "Historic stone surroundings in Tiberias near the Sea of Galilee" },
+  "nazareth-tiberias-tel-aviv": { src: galileeHero, alt: "Green Galilee hills and countryside near the Sea of Galilee" },
+  "galilee-private-tel-aviv": { src: tiberiasCentral, alt: "Central streets of Tiberias near the Sea of Galilee" },
+  "galilee-private-jerusalem": migration["magdala-archaeology"],
+  "nazareth-magdala-private": { src: tiberiasLake, alt: "View across the Sea of Galilee with hills in the background" },
   "caesarea-haifa-akko": airport["caesarea"]!,
   "north-coast-small-group": { src: akko, alt: "Fishing boats beside the historic stone buildings of Akko harbour", sourceUrl: "https://www.israel-taxi.com/wp-content/uploads/2025/08/akko_port_2.jpg" },
   "mahane-yehuda-tasting": jerusalemAreaGuides.find(n => n.id === "mahane-yehuda")!.photo,
@@ -150,6 +166,16 @@ export const bethlehemTourLocalCards = [
   { to: travelGuidePaths.jerusalemDayTrips, cta: "Compare nearby day trips", title: "Day trips from Jerusalem", description: "Explore how to plan a day out from Jerusalem and compare travel arrangements.", photo: { src: bethlehemNativity, alt: "The Church of the Nativity complex in Bethlehem" } },
   { to: "/travel-blog/dead-sea-attractions/", cta: "Discover the Jordan Valley", title: "Jordan Valley & Dead Sea stops", description: "Learn about nearby historic and desert attractions beyond the main pilgrimage stops.", photo: { src: qumranCaves, alt: "Ancient caves in the Judean Desert near Qumran" } },
   { to: travelGuidePaths.jerusalemDeadSea, cta: "Plan the journey", title: "Jerusalem to the Dead Sea", description: "Compare road travel options if your itinerary continues through the Jordan Valley.", photo: { src: deadSeaRouteRoad, alt: "Desert road winding through the Jordan Valley" } },
+] as const;
+
+/** Six Galilee-specific illustrated guides. Each image differs from the hero and tour thumbnails. */
+export const galileeTourLocalCards = [
+  { to: travelGuidePaths.annunciation, cta: "Explore Nazareth’s basilica", title: "Basilica of the Annunciation", description: "Plan a visit to Nazareth’s landmark church and understand its visiting arrangements.", photo: migration["annunciation-interior"] },
+  { to: "/travel-blog/sea-of-galilee/", cta: "Explore the lake", title: "Sea of Galilee travel guide", description: "Discover Tiberias, lakeside viewpoints and the main visitor stops around the shore.", photo: { src: tiberiasWaterfront, alt: "Waterfront and boats at Tiberias on the Sea of Galilee" } },
+  { to: travelGuidePaths.magdala, cta: "Discover Magdala", title: "Magdala archaeological site", description: "Explore ancient remains and the modern Duc in Altum prayer center.", photo: migration["magdala"] },
+  { to: "/travel-blog/mount-of-beatitudes/", cta: "Visit the hillside", title: "Mount of Beatitudes", description: "Plan a visit to the hilltop church and its views over the Sea of Galilee.", photo: { src: mountBeatitudes, alt: "Church of the Beatitudes on the hillside above the Sea of Galilee" } },
+  { to: "/travel-blog/tabgha/", cta: "Explore Tabgha", title: "Tabgha churches", description: "Visit the Church of the Multiplication and nearby lakeside pilgrimage sites.", photo: { src: tabgha, alt: "Church surroundings in Tabgha beside the Sea of Galilee" } },
+  { to: travelGuidePaths.yardenit, cta: "Plan a river visit", title: "Yardenit baptismal site", description: "Understand the baptismal visitor site on the Jordan River south of the Sea of Galilee.", photo: { src: yardenitPhoto, alt: "Designated Jordan River baptismal steps and visitors at Yardenit" } },
 ] as const;
 
 /** General planning guides use icon cards, not photographs, to distinguish them from local sights. */
@@ -282,19 +308,26 @@ export const tourCategories: TourCategory[] = [
   },
   {
     id: "nazareth-galilee", title: "Nazareth & Sea of Galilee tours", shortTitle: "Nazareth & Sea of Galilee",
-    description: "Compare Nazareth and Sea of Galilee day trips from Tel Aviv and Jerusalem, Christian heritage itineraries and private car-and-driver options.",
-    intro: "Follow the stories of Nazareth and the lakeside sites of Galilee, with time for church visits and sweeping views. A guided itinerary connects the history; a private transport plan lets you agree the stops around your own interests.",
+    description: "Compare verified Nazareth and Sea of Galilee day tours from Tel Aviv and Jerusalem, guided Christian heritage visits and private itineraries via the Galilee's major sites.",
+    intro: "Discover Nazareth's historic churches and the lakeside sites where the Gospel stories unfolded. Compare guided day trips and private tours from Jerusalem or Tel Aviv, or ask me to arrange your own private transport around the Galilee.",
     photo: migration["EXISTING:galilee"], match: { destinations: ["nazareth", "galilee"] },
-    paragraphs: ["Nazareth and the Sea of Galilee cover a wide area, so every full-day itinerary makes choices. Some focus on the Annunciation, Capernaum and Tabgha; others include a Jordan River stop or different lakeside viewpoints. Compare named sites and time on the road, especially when starting in central Israel.", "Shared guided tours offer a planned route and a group. A private car-and-driver day gives you more say in transport timing, with licensed guiding quoted separately. Church access, ceremonies and river arrangements are specific to the site and date, so discuss any essential visit before choosing the day."],
+    paragraphs: [
+      "A typical full-day route connects Nazareth’s Basilica of the Annunciation with selected sites around the Sea of Galilee, such as Capernaum, Tabgha and the Mount of Beatitudes. Different tours make different stops, and some drive past Cana or Mount Tabor without allowing time for a visit. Check the listed itinerary rather than assuming every landmark is included.",
+      "Travel from Jerusalem normally takes longer than from Tel Aviv. On a shared group tour, compare the confirmed pickup location, time available at each site, guiding language, entrance tickets and return arrangements. A private guided tour is different from my own private car-and-driver service: licensed guiding is not automatically included in a transport-only quote.",
+      "Some Galilee tours also stop at Yardenit, the baptismal site on the Jordan River near the southern end of the lake. The river stop is optional or absent on many products, and visiting the site does not mean a baptism ceremony is included. Confirm religious-site opening hours, modest dress, site access and any ceremony requirements before booking.",
+    ],
     choices: [
-      { title: "Christian heritage", text: "A guided introduction to Nazareth and selected Gospel sites around the lake. Check which churches are actually included." },
-      { title: "Galilee & Jordan River", text: "Combine lakeside scenery with a river stop. Confirm the site and arrange any ceremony independently unless explicitly included." },
-      { title: "A tailored northern day", text: "Prioritise fewer stops or a gentler pace with private transportation. I confirm a realistic itinerary and return time in the quote." },
+      { title: "Nazareth and lakeside churches", text: "Combine the Annunciation, Capernaum, Tabgha and selected viewpoints in one guided day." },
+      { title: "Galilee with a Jordan River visit", text: "Choose a route that explicitly includes Yardenit if you want to visit the baptismal site." },
+      { title: "Private guided or driver-only", text: "Choose between a licensed-guide itinerary and a flexible private transport arrangement with stops agreed in advance." },
     ],
     faqs: [
-      { q: "Can I depart from Jerusalem?", a: "One current itinerary offers both Jerusalem and Tel Aviv departure options. Choose the correct option with the provider; the other card is specifically a Tel Aviv departure." },
-      { q: "Is a baptism included?", a: "A river visit is not the same as an arranged baptism. Confirm the site, ceremony, clergy, clothing and any separate charges with the relevant operator or site." },
-      { q: "Is this the same as a Haifa shore excursion?", a: "No. Ordinary city departures do not promise port pickup or return to a ship. Use the dedicated Haifa shore-excursion page for that service." },
+      { q: "Can I join a Nazareth and Sea of Galilee day tour from Jerusalem or Tel Aviv?", a: "Yes. Both departure cities appear in the tour catalog, although each product has its own pickup options and total duration. Select the correct departure on the booking page and confirm the actual pickup point." },
+      { q: "Do all the tours visit Capernaum, Tabgha and the Mount of Beatitudes?", a: "No. Some tours include guided visits, others offer viewpoints or drive past certain sites. Check the stops and ticket inclusions for the product and date you choose." },
+      { q: "Do Galilee tours include a Jordan River baptism?", a: "Not automatically. Some routes stop at Yardenit, near the southern end of the Sea of Galilee. A stop at Yardenit is not the same as booking a baptism ceremony, which requires separate confirmation." },
+      { q: "What is the difference between a private guided tour and a private driver?", a: "An externally listed private guided tour includes the guiding described in that product. My own private car-and-driver service provides transport and an itinerary agreed with you; licensed guiding, admission fees and meals are separate." },
+      { q: "Can I see Nazareth and the Sea of Galilee in one day?", a: "Yes, although the schedule can be long, especially when starting in Jerusalem. Prioritise the sites most important to you and allow for travel, security or access changes and queues at churches." },
+      { q: "Are these the same as Haifa Port shore excursions?", a: "No. Standard day trips do not guarantee cruise terminal pickup or return before sailing. For a cruise visit, use the dedicated Haifa shore-excursion options and confirm the ship's schedule with the operator." },
     ], reading: ["nazareth", "galilee", "baptism", "tips"],
   },
   {
