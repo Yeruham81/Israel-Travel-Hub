@@ -74,6 +74,7 @@ import ramonJeep from "@/assets/negev/ramon-jeep.webp";
 import ramonIbex from "@/assets/negev/ramon-ibex.webp";
 import ramonIbexes from "@/assets/negev/ramon-ibexes.webp";
 import ramonCamelHill from "@/assets/negev/ramon-camel-hill.webp";
+import ramonRappellingPhoto from "@/assets/guides/mitzpe-ramon-crater.jpg";
 import golanBentalHill from "@/assets/golan/bental-hill.jpg";
 import golanBentalView from "@/assets/golan/bental-view.jpg";
 import golanNimrod from "@/assets/golan/nimrod-fortress.jpg";
@@ -157,7 +158,8 @@ export const tourPhotos: Record<string, GuidePhoto> = {
   "ramon-twilight-stars": { src: ramonPanorama, alt: "Panoramic view of Makhtesh Ramon and desert horizon" },
   "ramon-cliff-rappelling": { src: ramonCamelHill, alt: "Camel Hill at Mitzpe Ramon above the crater" },
   "ramon-geology-private": { src: ramonIbex, alt: "Nubian ibex in the Ramon Crater area" },
-  "negev-desert-private-day": { src: ramonIbexes, alt: "Group of Nubian ibexes in the Negev desert" },
+  "ramon-in-depth": { src: ramonIbexes, alt: "Group of Nubian ibexes in the Negev desert" },
+  "ramon-jeep-rappelling": { src: ramonRappellingPhoto, alt: "Ramon Crater geology and cliffs near Mitzpe Ramon" },
   "golan-coach-tel-aviv": { src: golanBentalHill, alt: "Mount Bental in the Golan Heights", sourceUrl: "https://commons.wikimedia.org/wiki/File:117531_mount_bental_golan_heights_PikiWiki_Israel.jpg", credit: "PikiWiki Israel · CC license details on Wikimedia Commons" },
   "golan-coach-jerusalem": { src: golanKatzrin, alt: "Village and landscape around Katzrin in the Golan Heights", sourceUrl: "https://commons.wikimedia.org/wiki/File:Katzrin._Golan_heights._07.jpg", credit: "Wikimedia Commons · CC license and author details on source page" },
   "golan-click-tel-aviv": { src: golanBanias, alt: "Banias waterfall and forest in the northern Golan region", sourceUrl: "https://commons.wikimedia.org/wiki/File:PikiWiki_Israel_83777_the_banias_waterfall.jpg", credit: "PikiWiki Israel · CC license details on Wikimedia Commons" },
