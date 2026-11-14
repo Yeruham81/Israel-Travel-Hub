@@ -1,0 +1,30 @@
+name: Travelpayouts Northern coast tour deep links
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'scripts/travelpayouts/generate-northern-coast-tours.mjs'
+      - '.github/workflows/travelpayouts-northern-coast-tours.yml'
+permissions:
+  contents: read
+jobs:
+  generate:
+    if: contains(github.event.head_commit.message, '[generate-northern-coast-tour-links]')
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - run: node scripts/travelpayouts/generate-northern-coast-tours.mjs --validate
+      - name: Generate exact product-specific partner links
+        env:
+          TRAVELPAYOUTS_API_TOKEN: ${{ secrets.TRAVELPAYOUTS_API_TOKEN }}
+        run: node scripts/travelpayouts/generate-northern-coast-tours.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: northern-coast-tour-link-candidates
+          path: artifacts/travelpayouts-northern-coast-tours.json
+          if-no-files-found: warn
+          retention-days: 14
