@@ -102,7 +102,7 @@ export function TourCategoryPage({ id, filters: rawFilters, onChange }: { id: To
           })}
         </div>
       </section>
-      <HomeContactForm guide={{ heading: "Need help planning your time in Jerusalem?", introduction: "Have a question about your visit or need a private driver? Tell me your travel dates, preferred stops and transportation needs, and I'll get back to you personally.", subject: "Jerusalem tours and private journeys", placeholder: "Dates, number of travelers, places you want to visit or your question…" }} />
+      <HomeContactForm guide={{ heading: "Need help planning your time in Jerusalem?", introduction: "Have a question about your visit or need a private driver? Tell me your travel dates, preferred stops and transportation needs, and I'll get back to you personally.", subject: "", placeholder: "Dates, number of travelers, places you want to visit or your question…" }} />
     </> : <>
       <RelatedGuideCards title="Get to know the places on your itinerary" guides={guides} />
       <MoreTourCategories currentId={id} />
