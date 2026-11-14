@@ -381,6 +381,30 @@ describe("migrated Israel itineraries", () => {
     expect(new Set(photoKeys.map(key => migrationPhotos[key].src)).size).toBe(photoKeys.length);
   });
 
+  it("keeps optional tours, transfer timings and departure decisions clear for the seven-day guide", () => {
+    const g = itineraries["7"];
+    const tourComponent = file("src/components/JerusalemItineraryTourOptions.tsx");
+    const itineraryComponent = file("src/components/IsraelItineraryPage.tsx");
+
+    expect(tourComponent).toContain('days === 7 ? "Alternative day tours from Jerusalem"');
+    expect(tourComponent).toContain("These tours replace a planned excursion");
+    expect(tourComponent).toContain("in place of the independent Day 3 desert plan");
+    expect(itineraryComponent).toContain('id === "7" && (index === 3 || index === 5)');
+    expect(itineraryComponent).toContain("Visit times cover attractions only");
+    expect(g.daySequences?.[2]?.steps[0]?.stop).toBe("Masada plateau");
+    expect(g.daySequences?.[5]?.steps[0]?.stop).toBe("Haifa's German Colony viewpoint");
+    expect(g.daysPlan[2]?.morning).not.toContain("Allow about two to three hours at the fortress");
+    expect(g.daysPlan[3]?.morning).not.toContain("Allow roughly one to two hours for the basilica");
+    expect(g.daysPlan[5]?.afternoon).not.toContain("Allow roughly two to three hours on site");
+
+    expect(g.reality).toContain("fly on Day 8");
+    expect(g.daysPlan[6]?.morning).toContain("morning or midday flight");
+    expect(g.daysPlan[6]?.practical).toContain("travel day");
+    expect(g.dayChoices?.find(choice => choice.day === 7)?.options[1]?.text)
+      .toContain("little or no sightseeing time");
+    expect(g.faqs.some(item => item.q.includes("flight leaves on Day 7") && item.a.includes("no usable sightseeing time"))).toBe(true);
+  });
+
   it("links all seven days naturally, cites relevant official sites and preserves other guides", () => {
     const g = itineraries["7"];
     const router = createRouter({ routeTree, context: { queryClient: new QueryClient() }, trailingSlash: "always" });
