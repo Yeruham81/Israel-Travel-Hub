@@ -282,12 +282,12 @@ export const foodTourLocalCards = [
 
 /** Eilat and wider-south travel guides, with onward destinations described as separate trips. */
 export const eilatTourLocalCards = [
-  { to: "/travel-blog/eilat/", cta: "Explore Eilat", title: "Eilat travel guide", description: "Plan beaches, activities and an easy stay beside the Red Sea.", photo: { src: "/images/attractions/eilat.webp", alt: "Eilat on the Red Sea" } },
+  { to: "/travel-blog/eilat/", cta: "Explore Eilat", title: "Eilat travel guide", description: "Plan the journey south, beaches, activities and a comfortable stay beside the Red Sea.", photo: { src: roadTrip, alt: "Car travelling through scenic desert scenery in southern Israel" } },
   { to: "/travel-blog/mitzpe-ramon-crater/", cta: "Explore the crater", title: "Mitzpe Ramon guide", description: "Plan a separate desert stop on a longer journey through the Negev.", photo: { src: ramonWide, alt: "Rock formations in Makhtesh Ramon" } },
   { to: "/tours/negev-desert-ramon-crater/", cta: "Compare crater tours", title: "Ramon Crater experiences", description: "Compare guided jeep and desert activities around Mitzpe Ramon, not Eilat.", photo: { src: ramonIbex, alt: "Nubian ibex in the Ramon Crater region" } },
   { to: "/travel-blog/masada/", cta: "Plan another desert day", title: "Masada visitor guide", description: "Discover an iconic desert heritage site on a separate Israel itinerary.", photo: { src: masadaRuins, alt: "Ancient archaeological remains at Masada" } },
   { to: "/travel-blog/the-dead-sea/", cta: "Explore the Dead Sea", title: "Dead Sea travel guide", description: "Consider a separate stop at the Dead Sea when travelling through southern Israel.", photo: { src: deadSeaLandscape, alt: "Dead Sea shoreline and surrounding desert" } },
-  { to: "/travel-blog/israel-itinerary-10-days/", cta: "Plan a longer journey", title: "Ten-day Israel itinerary", description: "See how southern destinations can fit into a longer route with realistic driving time.", photo: { src: roadTrip, alt: "Vehicle travelling a scenic desert road" } },
+  { to: "/travel-blog/israel-itinerary-10-days/", cta: "Plan a longer journey", title: "Ten-day Israel itinerary", description: "See how southern destinations can fit into a longer route with realistic driving time.", photo: { src: deadSeaRouteRoad, alt: "A desert road illustrating travel between Israel destinations" } },
 ] as const;
 
 /** General planning guides use icon cards, not photographs, to distinguish them from local sights. */
