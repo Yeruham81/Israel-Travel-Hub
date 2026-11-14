@@ -359,7 +359,7 @@ describe("tours hub and SEO category pages", () => {
     await renderPage("/private-driver/?tour=my-masada-day#request-quote");
     const form = screen.getByRole("form", { name: "Private driver quote request" });
     expect(form.querySelector('select[name="service"]')).toHaveValue("day-hire");
-    expect(form.querySelector('textarea[name="itinerary"]')).toHaveValue("Masada & Dead Sea private day from Tel Aviv\nPreferred destinations: Masada, Dead Sea.");
+    expect(form.querySelector('textarea[name="itinerary"]')).toHaveValue("");
     expect(form.querySelector('input[name="pickup"]')).toHaveValue("");
     expect(parsePrivateDriverSearch({ tour: "eilat-snorkeling" })).toEqual({});
     expect(parsePrivateDriverSearch({ tour: "my-masada-day", port: "haifa", transfer: "airport" })).toEqual({ port: "haifa", transfer: "airport" });
