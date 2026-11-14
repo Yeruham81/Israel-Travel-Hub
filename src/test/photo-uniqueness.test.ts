@@ -7,7 +7,7 @@ import { hotelStyles, itineraryCards, arrivalCards, seasonPhoto, eventsPhoto } f
 import { quickPickPhotos } from "@/components/CityStayHub";
 import { services, homeGuideCards } from "@/routes/index";
 
-describe("One photograph per page — site-wide editorial policy", () => {
+describe("No nearby editorial photo duplicates — separated author/contact portraits allowed", () => {
   it("treats responsive copies and renamed-format variants of a photograph as duplicates", () => {
     expect(photoIdentity("/assets/haifa-panorama-card.webp")).toBe(photoIdentity("/assets/haifa-panorama-tile.webp"));
     expect(photoIdentity("/images/market-300x200.jpg.webp")).toBe(photoIdentity("/images/market.jpg"));
