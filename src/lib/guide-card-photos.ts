@@ -2,7 +2,6 @@ import { travelGuides, type GuideDirectoryEntry } from "@/data/travelGuides";
 import { airportJourneyGuides, type AirportJourneyId } from "@/data/airportJourneyGuides";
 import { photoIdentity } from "@/lib/photo-uniqueness";
 import { itineraries, type ItineraryId } from "@/data/israelItineraries";
-import { migrationPhotos } from "@/data/guideMigrationPhotos";
 import telAvivDizengoff from "@/assets/tel-aviv/dizengoff.webp";
 import haifaBotanica from "@/assets/haifa/botanica.webp";
 import jerusalemMamilla from "@/assets/jerusalem/mamilla.webp";
@@ -83,7 +82,9 @@ export function uniqueGuideCardPhotos<T extends { guide: GuideDirectoryEntry }>(
       ? guide.id.replace("israel-itinerary-", "") as ItineraryId
       : undefined;
     const itinerary = itineraryId ? itineraries[itineraryId] : undefined;
-    const candidates = [
+    // Itinerary cards deliberately show their own editorial hero. Other guide
+    // cards may still choose a different authentic image to avoid collisions.
+    const candidates = itinerary ? [guide.photo] : [
       guide.photo,
       ...(article?.sections.flatMap(section => [
         section.photo,
@@ -91,7 +92,6 @@ export function uniqueGuideCardPhotos<T extends { guide: GuideDirectoryEntry }>(
       ]) || []),
       journey?.photos?.station,
       journey?.photos?.onward,
-      ...(itinerary?.daysPlan.map(day => migrationPhotos[day.image]) || []),
       ...(guideCardAlternatives[guide.id] || []),
     ];
     const seen = new Set<string>();
