@@ -153,7 +153,7 @@ export function TourCatalog({ categoryId, filters, onChange }: { categoryId: Tou
     { label: "From Tel Aviv", search: { origin: "tel-aviv" } },
     { label: "From Jerusalem", search: { origin: "jerusalem" } },
     { label: "Rosh Hanikra routes", search: { q: "Rosh Hanikra" } },
-    { label: "Small groups", search: { q: "Small group" } },
+    { label: "Small groups", search: { format: "shared", q: "Small group" } },
     { label: "Guided groups", search: { format: "shared" } },
     { label: "Private tours", search: { format: "private" } },
     { label: "Shortest first", search: { sort: "duration" } },
