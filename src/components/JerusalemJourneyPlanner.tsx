@@ -50,12 +50,12 @@ const routes = {
     ],
     detailsTitle: "Which stop do you actually need?",
     details: [
-      { title: "Masada", tag: "Ancient fortress", description: "Explore the mountaintop fortress, desert views and archaeological remains. Take the steep cable car ride or hike the challenging trail to the top.", href: "https://en.parks.org.il/reserve-park/masada-national-park/", link: "Plan a Masada visit" },
-      { title: "Ein Gedi", tag: "Desert oasis", description: "Explore a lush desert oasis with springs, waterfalls, scenic trails and wildlife, including ibexes and rock hyraxes.", href: "https://en.parks.org.il/reserve-park/en-gedi-nature-reserve/", link: "Plan an Ein Gedi visit" },
+      { title: "Masada", tag: "Ancient fortress", description: "Explore Masada's ancient fortress and desert views. Take the cable car, or choose a hiking trail if it's open and suitable for the conditions.", href: "https://en.parks.org.il/reserve-park/masada-national-park/", link: "Plan a Masada visit" },
+      { title: "Ein Gedi", tag: "Desert oasis", description: "Discover Ein Gedi's desert oasis, waterfalls, walking trails and wildlife. Check which trails are open before visiting.", href: "https://en.parks.org.il/reserve-park/en-gedi-nature-reserve/", link: "Plan an Ein Gedi visit" },
       { title: "Qumran", tag: "Dead Sea Scrolls", description: "Visit the archaeological remains near the caves associated with the Dead Sea Scrolls, north of Ein Gedi.", href: "https://en.parks.org.il/reserve-park/qumran-park", link: "Visit Qumran National Park" },
-      { title: "Qasr al-Yahud", tag: "Jordan River baptism site", description: "Visit the baptism site on the Jordan River north of the Dead Sea, requiring a separate road detour and advance visit registration.", href: "https://en.parks.org.il/reserve-park/baptismal-site-on-the-jordan-river-qasr-al-yahud/", link: "Plan a Qasr al-Yahud visit" },
+      { title: "Qasr al-Yahud", tag: "Jordan River baptism site", description: "Visit the historic baptism site at Qasr al-Yahud on the Jordan River. Allow time for the detour and check current entry and registration arrangements.", href: "https://en.parks.org.il/reserve-park/baptismal-site-on-the-jordan-river-qasr-al-yahud/", link: "Plan a Qasr al-Yahud visit" },
     ],
-    footnote: "The route through the Dead Sea corridor uses different stops for each destination. Check the live Egged timetable, including the last usable Jerusalem-bound departure, rather than copying a timetable or fare from an older guide.",
+    footnote: "Check the correct bus stop for your destination and the last departure back to Jerusalem.",
     resourceHeading: "Check the journey and site access",
     resources: [
       { name: "Egged: timetables and ticketing", url: "https://www.egged.co.il/en" },
@@ -84,7 +84,7 @@ export function JerusalemJourneyOptions({ id }: { id: string }) {
   // transport-option cards that repeats the article immediately below.
   if (id === "jerusalemDeadSea") return <section id="journey-destinations" aria-labelledby="journey-destinations-h" className="mt-9 scroll-mt-28">
     <h2 id="journey-destinations-h" className="text-2xl font-semibold">Add a stop to your Dead Sea day</h2>
-    <p className="mt-2 max-w-3xl leading-relaxed text-muted-foreground">If you have time beyond the beach, add one or two attractions along the Dead Sea corridor. Masada and Ein Gedi are farther south; Qumran and Qasr al-Yahud are to the north. A tour, private driver or rental car makes multiple stops much easier than using public buses.</p>
+    <p className="mt-2 max-w-3xl leading-relaxed text-muted-foreground">If you have extra time, consider adding Masada, Ein Gedi, Qumran or Qasr al-Yahud. These attractions are spread across the Dead Sea region, so choose stops that fit your route and travel time. A car, driver or organised tour is usually easier than connecting buses.</p>
     <div className="mt-4 grid gap-3 sm:grid-cols-2" data-testid="journey-stop-cards">
       {route.details.map(item => {
         const photo = deadSeaStopPhotos[item.title];
