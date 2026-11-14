@@ -582,10 +582,10 @@ export const toursHubGuides = [
 export const toursHubTitle = "Tours & day trips in Israel";
 export const toursHubDescription = "Explore Israel tours by destination and interest: Jerusalem, Tel Aviv, Masada, Galilee, food tours and Eilat. Find guided day trips, private experiences, food walks and Red Sea activities.";
 export const toursHubFaqs = [
-  { q: "Can I find both shared and private experiences?", a: "Yes. The category pages bring together shared guided trips, local activities and private options where available. A private driver handles transportation; licensed guiding is a separate inclusion to confirm on the specific experience." },
-  { q: "How do I choose the right departure city?", a: "Each tour card identifies where it starts. A destination page can include different departures, so check that the selected option starts where you will be staying." },
-  { q: "Are prices and dates confirmed here?", a: "No. External starting prices, where shown, are reference snapshots. Open the booking page for the current price, date, group size and inclusions. I confirm my own private transport quotes directly." },
-  { q: "Where are the tours from cruise ports?", a: "Use the separate shore-excursion pages for Haifa and Ashdod. Ordinary city departures do not promise port pickup or a return matched to your ship's schedule." },
+  { q: "What's the difference between a guided tour and a private driver?", a: "A guided tour includes guiding only where it is explicitly listed. My private driver service provides transportation and agreed stops; licensed guiding is a separate service to arrange if needed." },
+  { q: "Where do tours start, and is hotel pickup included?", a: "Departure locations vary by tour and operator. Some experiences offer hotel pickup, while others start at a designated meeting point. Always check the departure city, meeting place and pickup inclusions before booking." },
+  { q: "How can I check tour prices and availability?", a: "Open the individual tour's booking page to check current dates, prices, group sizes and inclusions with the operator. Any starting price shown on this site is indicative, not a live booking offer. I provide quotes for my private transport directly." },
+  { q: "Are there tours for cruise passengers?", a: "Yes. Visit the dedicated Haifa or Ashdod shore-excursion pages. Check port pickup and return arrangements against your ship's schedule; an ordinary city tour does not automatically include cruise-port transport." },
 ];
 
 export const tourPlanningGuides: ShoreReadingGuide[] = [
