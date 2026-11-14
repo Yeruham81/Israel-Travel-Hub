@@ -20,6 +20,12 @@ import museumsJerusalem from "@/assets/guides/museums-in-jerusalem.jpg";
 import nativityCourtyard from "@/assets/guides/bethlehem/nativity-courtyard.jpg";
 import bethlehemMangerSquare from "@/assets/guides/bethlehem/manger-square.jpg";
 import bethlehemMilkGrotto from "@/assets/guides/bethlehem/milk-grotto.jpg";
+import bethlehemCatholicGrottos from "@/assets/guides/bethlehem/catholic-grottos.jpg";
+import bethlehemShepherdsField from "@/assets/guides/bethlehem/shepherds-field-chapel.webp";
+import jordanQasrPhoto from "@/assets/guides/dead-sea-excursions/jordan-river-qasr-al-yahud.webp";
+import qasrPhoto from "@/assets/guides/dead-sea-excursions/qasr-al-yahud.webp";
+import jerusalemQasrPhoto from "@/assets/guides/qasr-el-yahud.jpg";
+import palestinianTaxi from "@/assets/guides/bethlehem/palestinian-taxi.jpg";
 import coralReef from "@/assets/eilat/coral-reef.webp";
 import cruiseShip from "@/assets/home/cruise-port.webp";
 import roadTrip from "@/assets/home/road-trip.webp";
@@ -87,6 +93,11 @@ export const tourPhotos: Record<string, GuidePhoto> = {
   "dead-sea-relax-jerusalem": { src: deadSeaMud, alt: "Dead Sea mud bathing experience" },
   "jerusalem-bethlehem-shared": { src: bethlehemMangerSquare, alt: "Manger Square in Bethlehem" },
   "bethlehem-jericho-jordan": migration["EXISTING:qasr"],
+  "bethlehem-halfday-jerusalem": { src: bethlehemShepherdsField, alt: "Chapel at Shepherds' Field near Bethlehem" },
+  "bethlehem-private-halfday": { src: bethlehemCatholicGrottos, alt: "Ancient stone chapel and grottos in Bethlehem" },
+  "bethlehem-jericho-qasr-small-group": { src: qasrPhoto, alt: "Pilgrims at the Qasr al-Yahud baptismal site on the Jordan River" },
+  "bethlehem-jericho-qasr-tel-aviv": { src: jordanQasrPhoto, alt: "Jordan River banks at Qasr al-Yahud" },
+  "bethlehem-qasr-dead-sea": { src: palestinianTaxi, alt: "Palestinian taxi on a Bethlehem-area street" },
   "nazareth-galilee-tel-aviv": migration["basilica-of-the-annunciation"],
   "galilee-nazareth-jordan": migration["EXISTING:galilee"],
   "caesarea-haifa-akko": airport["caesarea"]!,
@@ -129,6 +140,16 @@ export const masadaTourLocalCards = [
   { to: "/travel-blog/dead-sea-attractions/", cta: "Discover more stops", title: "Attractions around the Dead Sea", description: "Explore desert viewpoints, historic sites and other possible stops.", photo: { src: qumranCaves, alt: "Caves in the cliffs near Qumran by the Dead Sea" } },
   { to: "/travel-blog/best-dead-sea-hotels/", cta: "Compare places to stay", title: "Where to stay at the Dead Sea", description: "Compare Ein Bokek hotels, spa facilities and overnight options.", photo: { src: deadSeaPool, alt: "Swimming pool in a Dead Sea resort setting" } },
   { to: "/travel-blog/jerusalem-to-the-dead-sea/", cta: "Compare travel options", title: "Jerusalem to the Dead Sea", description: "Compare buses, driving and private transport to the Dead Sea.", photo: { src: deadSeaRouteRoad, alt: "A desert highway leading toward the Dead Sea" } },
+] as const;
+
+/** Bethlehem, Jericho and Qasr al-Yahud: six unique editorial links to existing local guides. */
+export const bethlehemTourLocalCards = [
+  { to: travelGuidePaths.bethlehem, cta: "Plan your Bethlehem visit", title: "Jerusalem to Bethlehem", description: "Learn about checkpoints, travel eligibility, local transport and Nativity Church visits.", photo: { src: bethlehemMilkGrotto, alt: "The Milk Grotto Chapel in Bethlehem" } },
+  { to: travelGuidePaths.qasr, cta: "Explore the baptismal site", title: "Qasr al-Yahud", description: "Plan a visit to the Jordan River baptismal site near Jericho, including access and site hours.", photo: { src: jerusalemQasrPhoto, alt: "The Jordan River baptismal area at Qasr al-Yahud" } },
+  { to: travelGuidePaths.baptism, cta: "Read baptism guidance", title: "Jordan River baptism visits", description: "Understand the practical arrangements and preparation for visiting the baptismal site.", photo: { src: "/images/attractions/jordan-river-baptism.webp", alt: "Baptismal steps leading into the Jordan River" } },
+  { to: travelGuidePaths.jerusalemDayTrips, cta: "Compare nearby day trips", title: "Day trips from Jerusalem", description: "Explore how to plan a day out from Jerusalem and compare travel arrangements.", photo: { src: bethlehemMangerSquare, alt: "Manger Square in the heart of Bethlehem" } },
+  { to: "/travel-blog/dead-sea-attractions/", cta: "Discover the Jordan Valley", title: "Jordan Valley & Dead Sea stops", description: "Learn about nearby historic and desert attractions beyond the main pilgrimage stops.", photo: { src: qumranCaves, alt: "Ancient caves in the Judean Desert near Qumran" } },
+  { to: travelGuidePaths.jerusalemDeadSea, cta: "Plan the journey", title: "Jerusalem to the Dead Sea", description: "Compare road travel options if your itinerary continues through the Jordan Valley.", photo: { src: deadSeaRouteRoad, alt: "Desert road winding through the Jordan Valley" } },
 ] as const;
 
 /** General planning guides use icon cards, not photographs, to distinguish them from local sights. */
@@ -236,21 +257,28 @@ export const tourCategories: TourCategory[] = [
     ], reading: ["masada", "deadSea", "einGedi", "tips"],
   },
   {
-    id: "bethlehem-jericho", title: "Bethlehem, Jericho & Jordan River tours", shortTitle: "Bethlehem, Jericho & Jordan River",
-    description: "Compare Bethlehem tours, Jerusalem–Bethlehem combinations and Jericho and Jordan River day trips, with clear departure cities and travel-planning advice.",
-    intro: "Discover Bethlehem's Christian heritage, combine it with Jerusalem or continue towards Jericho and the lower Jordan. Choose the places that matter most to you and a route that gives them the time they deserve.",
+    id: "bethlehem-jericho", title: "Bethlehem, Jericho & Qasr al-Yahud tours", shortTitle: "Bethlehem, Jericho & Qasr al-Yahud",
+    description: "Compare Bethlehem, Jericho and Qasr al-Yahud day tours and guided visits from Jerusalem and Tel Aviv, with clear routes, entry requirements and local guiding details.",
+    intro: "Explore Bethlehem, the ancient city of Jericho and Qasr al-Yahud, the Jordan River baptismal site near Jericho. Compare Bethlehem-only visits with full-day tours that include Jericho and the baptismal site, departing from Jerusalem or Tel Aviv.",
     photo: migration["jerusalem-to-bethlehem"], match: { destinations: ["bethlehem", "jericho"] },
-    paragraphs: ["These tours follow different routes. A Jerusalem and Bethlehem combination connects two major pilgrimage destinations; a Bethlehem, Jericho and Jordan River itinerary heads towards the desert and lower river instead. Read the actual destination list rather than treating all Bethlehem tours as interchangeable.", "Crossing arrangements and entry requirements depend on the itinerary and traveller. Ask the operator to confirm documents, meeting points, local guide changes and the return arrangement for your date. A river stop does not automatically include a baptism ceremony, and a church visit does not guarantee access to every chapel or grotto."],
+    paragraphs: [
+      "Not every tour visits all three locations. Short Bethlehem trips usually focus on the Church of the Nativity, Manger Square and Shepherds' Field. Longer day tours can add Jericho's archaeological and biblical sites and, on selected routes, a stop at Qasr al-Yahud on the lower Jordan River.",
+      "Check the detailed itinerary and the named baptismal site: choose a tour that explicitly includes Qasr al-Yahud if that is an essential stop. A Jordan River visit does not automatically include a baptism ceremony. Visits to the Church of the Nativity and its grotto can be affected by services, restoration and queues.",
+      "Bethlehem and parts of Jericho are in Palestinian Authority-administered areas, and entry rules, passport eligibility, checkpoints, local guide and vehicle arrangements depend on the visitor and itinerary. Some operators restrict participation by nationality. Confirm eligibility and permitted access directly with the operator before paying; published tours are not guarantees of access or operation for your travel date.",
+    ],
     choices: [
-      { title: "Jerusalem & Bethlehem", text: "A broad day of religious heritage for visitors who want both cities in one itinerary, with shared and privately guided choices." },
-      { title: "Bethlehem, Jericho & the river", text: "A different full-day route combining church heritage, desert surroundings and a lower-Jordan stop." },
-      { title: "Departing from Jerusalem", text: "Start locally when staying in Jerusalem. The dedicated departure page brings together the matching options." },
+      { title: "Bethlehem highlights", text: "A shorter visit to Nativity Church and nearby Christian heritage sites; no Jericho or river stop unless listed." },
+      { title: "Bethlehem, Jericho and Qasr al-Yahud", text: "A full-day pilgrimage and heritage route; check that all three sites are explicitly included." },
+      { title: "Shared or privately guided", text: "Compare the group size, departure city, local guide handovers, site access and transport inclusions." },
     ],
     faqs: [
-      { q: "Where does my Bethlehem tour start?", a: "The cards distinguish Tel Aviv and Jerusalem departures. Select the departure option you actually need on the booking site and confirm the meeting point." },
-      { q: "Do I need my passport?", a: "Ask the operator what documents are required for your nationality and itinerary on the travel date. Carry the documents they specify and confirm crossing arrangements before booking." },
-      { q: "Which Jordan River site will I visit?", a: "Lower-Jordan itineraries generally differ from Galilee trips visiting Yardenit. Confirm the named site with the operator; do not assume all Jordan River stops are the same." },
-    ], reading: ["bethlehem", "jerusalem", "baptism", "tips"],
+      { q: "Do all tours on this page visit Bethlehem, Jericho and Qasr al-Yahud?", a: "No. Some focus exclusively on Bethlehem; others combine Bethlehem with Jericho and the Qasr al-Yahud baptismal site. Check each product's actual stop list before booking." },
+      { q: "Which Jordan River baptismal site is relevant to these itineraries?", a: "Qasr al-Yahud (also written Kasr el-Yahud), the baptismal site on the lower Jordan River near Jericho. Only select a tour for this purpose when its advertised itinerary identifies that location." },
+      { q: "Can I depart from Jerusalem or Tel Aviv?", a: "Yes, but not every tour offers both cities. Use the departure filters and confirm the exact meeting point, pickup eligibility and return city with the provider." },
+      { q: "Can every traveler enter Bethlehem and Jericho?", a: "No. Entry and transit depend on nationality, travel documents, current security measures and the route. Some booking products explicitly restrict Israeli passport holders. Confirm your circumstances with the operator and current official guidance before purchasing." },
+      { q: "Is baptism or entry to the Nativity Grotto guaranteed?", a: "No. A stop at Qasr al-Yahud is not necessarily a baptism ceremony; any ceremony needs separate confirmation. Grotto entry depends on religious services, restoration work, queues and available time." },
+      { q: "Can I book my own driver directly to Bethlehem?", a: "I do not advertise an unrestricted private-driver journey into Bethlehem. Use an operator explicitly authorized to serve the requested route and verify permitted transport, local guiding and border or checkpoint arrangements." },
+    ], reading: ["bethlehem", "baptism", "jerusalem", "tips"],
   },
   {
     id: "nazareth-galilee", title: "Nazareth & Sea of Galilee tours", shortTitle: "Nazareth & Sea of Galilee",
