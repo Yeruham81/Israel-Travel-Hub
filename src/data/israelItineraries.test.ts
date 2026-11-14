@@ -133,7 +133,7 @@ describe("migrated Israel itineraries", () => {
 
   it("shows six approved Jerusalem day-trip alternatives under day two", () => {
     expect(itineraries["3"].jerusalemTourOptionsDay).toBe(2);
-    expect(itineraries["5"].jerusalemTourOptionsDay).toBe(3);
+    expect(itineraries["5"].jerusalemTourOptionsDay).toBe(2);
     for (const id of ["7", "10"] as const) {
       expect(itineraries[id].jerusalemTourOptionsDay).toBeUndefined();
     }
@@ -219,8 +219,12 @@ describe("migrated Israel itineraries", () => {
     expect(g.title).toBe("Israel in 5 Days: Jerusalem, Dead Sea, Tel Aviv & Haifa");
     expect(g.description).toContain("day-by-day highlights");
     expect(g.reviewedAt).toBe("2026-11-14");
-    expect(g.hotelBases).toContain("nights 1–3");
-    expect(g.hotelBases).toContain("night 4");
+    expect(g.hotelBases).toContain("after Days 1–3");
+    expect(g.hotelBases).toContain("after Day 4");
+    expect(g.hotelBases).toContain("evening before Day 1 adds an arrival night");
+    expect(g.hotelBases).toContain("flying the day after Day 5");
+    expect(g.overviewRows?.[0]?.night).toContain("after Day 1");
+    expect(g.overviewRows?.[3]?.night).toContain("after Day 4");
     expect(g.reality).toContain("five usable sightseeing days");
     expect(g.overviewRows).toHaveLength(5);
     expect(g.overviewRows?.every(row => Boolean(row.travel))).toBe(true);
@@ -232,7 +236,14 @@ describe("migrated Israel itineraries", () => {
     expect(g.daysPlan[3]?.morning).toContain("Old Jaffa");
     expect(g.daysPlan[4]?.morning).toContain("Caesarea National Park");
     expect(g.daysPlan[4]?.afternoon).toContain("German Colony");
-    expect(g.daysPlan[4]?.evening).toContain("flight on Day 5");
+    expect(g.daysPlan[4]?.evening).toContain("southbound journey");
+    expect(g.daysPlan[4]?.afternoon).toContain("German Colony");
+    expect(g.daysPlan[4]?.afternoon).toContain("Yefe Nof Street");
+    expect(g.daysPlan[4]?.afternoon).toContain("upper viewing area");
+    expect(g.daysPlan[4]?.afternoon).toContain("lower Bahá’í Gardens terraces");
+    expect(g.daySequences?.[4]?.steps[2]?.optional).toBe(true);
+    expect(g.daysPlan[2]?.afternoon).not.toContain("Bethlehem");
+    expect(g.daysPlan[2]?.practical).toContain("Bethlehem visit");
 
     expect(g.daySequences?.map(item => item.day)).toEqual([1, 2, 3, 4, 5]);
     for (const item of g.daySequences ?? []) {
@@ -246,14 +257,17 @@ describe("migrated Israel itineraries", () => {
     expect(g.dayChoices?.map(choice => choice.day)).toEqual([3, 5]);
     expect(g.dayChoices?.every(choice => choice.options.length === 2)).toBe(true);
     expect(g.dayChoices?.[0]?.options[1]?.text).toContain("Bethlehem");
-    expect(g.dayChoices?.[1]?.options[1]?.text).toContain("airport");
+    expect(g.dayChoices?.[1]?.options[1]?.text).toMatch(/airport/i);
+    expect(g.dayChoices?.[0]?.options[0]?.text).not.toContain("Bethlehem");
     expect(g.beforeYouGo).toHaveLength(3);
     expect(g.logistics).toHaveLength(4);
     expect(g.alternatives).toEqual([]);
     expect(g.faqs).toHaveLength(8);
     expect(g.relatedGuides).toHaveLength(6);
     expect(g.activityWidgets).toEqual([{ day: 1, city: "jerusalem" }, { day: 4, city: "telAviv" }]);
-    expect(g.jerusalemTourOptionsDay).toBe(3);
+    expect(g.jerusalemTourOptionsDay).toBe(2);
+    expect(g.daysPlan[2]?.image).toBe("itinerary-5day-mount-of-olives");
+    expect(migrationPhotos["itinerary-5day-mount-of-olives"].src).toBe("/images/jerusalem/church-of-all-nations.webp");
     expect(g.day3Options).toBeUndefined();
     expect(g.hero).not.toBe(g.daysPlan[3]!.image);
     expect(g.daysPlan[4]?.image).not.toBe(itineraries["10"].hero);
@@ -302,6 +316,8 @@ describe("migrated Israel itineraries", () => {
     const view = file("src/components/IsraelItineraryPage.tsx");
     expect(view).toContain('const compactOverview = id === "3" || id === "5"');
     expect(view).toContain('data-testid={`day-${index + 1}-route-choices`}');
+    expect(view.indexOf('data-testid={`day-${index + 1}-route-choices`}')).toBeLessThan(view.indexOf('<dl className="space-y-5">'));
+    expect(view).toContain('id !== "5" ? <h3 className="mt-6 text-xl font-semibold">Transport and hotel planning</h3>');
     expect(view).toContain("Have more or fewer than 5 days in Israel?");
     expect(view).toContain("My practical planning tips");
     expect(view).toContain("g.dayTipHeadings?.[index]");
