@@ -1,0 +1,30 @@
+name: Travelpayouts Tel Aviv tour deep links
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'scripts/travelpayouts/generate-tel-aviv-tours.mjs'
+      - '.github/workflows/travelpayouts-tel-aviv-tours.yml'
+permissions:
+  contents: read
+jobs:
+  generate:
+    if: contains(github.event.head_commit.message, '[generate-tel-aviv-tour-links]')
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - run: node scripts/travelpayouts/generate-tel-aviv-tours.mjs --validate
+      - name: Generate exact product link candidates
+        env:
+          TRAVELPAYOUTS_API_TOKEN: ${{ secrets.TRAVELPAYOUTS_API_TOKEN }}
+        run: node scripts/travelpayouts/generate-tel-aviv-tours.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: tel-aviv-tour-link-candidates
+          path: artifacts/travelpayouts-tel-aviv-tours.json
+          if-no-files-found: warn
+          retention-days: 14
