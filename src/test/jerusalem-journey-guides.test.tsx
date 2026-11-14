@@ -42,7 +42,7 @@ describe("Jerusalem independent day-trip planning guides", () => {
     const entry = container.querySelector("#entry-rules") as HTMLElement;
     const rental = container.querySelector("#rental-car") as HTMLElement;
     expect(screen.getByRole("heading", { name: "Before you go: Area A, entry rules and checkpoints" })).toBeInTheDocument();
-    expect(entry).toHaveTextContent("Bethlehem is in Palestinian Authority Area A");
+    expect(entry).toHaveTextContent("Bethlehem is in Area A of the West Bank");
     expect(entry).toHaveTextContent("including dual citizens");
     expect(entry).not.toHaveTextContent("rental-car agreements");
     expect(entry.compareDocumentPosition(comparison) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
@@ -59,13 +59,13 @@ describe("Jerusalem independent day-trip planning guides", () => {
     expect(rentalLink.getAttribute("rel")).toContain("sponsored");
     expect(screen.getByRole("heading", { name: /visit Bethlehem on Saturday or Sunday/ })).toBeInTheDocument();
     const localTaxi = container.querySelector("#private-taxi") as HTMLElement;
-    expect(localTaxi.querySelector("p")?.textContent?.startsWith("A Palestinian taxi driver with the necessary authorisations and insurance")).toBe(true);
-    expect(localTaxi.querySelector("p")).toHaveTextContent("Such taxis can generally be found or arranged in East Jerusalem");
+    expect(localTaxi.querySelector("p")?.textContent?.startsWith("An appropriately authorised and insured Palestinian taxi")).toBe(true);
+    expect(localTaxi.querySelector("p")).toHaveTextContent("Confirm that both the driver and vehicle are permitted");
     expect(within(localTaxi).queryByRole("link", { name: /Enquire about a legally permitted private journey/ })).not.toBeInTheDocument();
     expect(localTaxi.querySelector('a[href="/private-driver/"]')).toBeNull();
     expect((container.querySelector("#visit-return") as HTMLElement).querySelectorAll("p")[0]).not.toHaveTextContent("Manger Square");
     expect((container.querySelector("#bethlehem-sites") as HTMLElement)).toHaveTextContent("Manger Square");
-    expect(screen.getByTestId("bethlehem-tour-options")).toHaveTextContent("prices shown are subject to change by tour operators");
+    expect(screen.getByTestId("bethlehem-tour-options")).toHaveTextContent("Prices and availability can change");
     expect(within(container.querySelector("#private-taxi") as HTMLElement)
       .getByRole("img", { name: /Yellow Palestinian taxi/ })).toBeInTheDocument();
     expect(within(container.querySelector("#visit-return") as HTMLElement)
@@ -83,13 +83,13 @@ describe("Jerusalem independent day-trip planning guides", () => {
     expect(container.textContent).not.toContain("Compare organised Bethlehem tours");
     expect(container.textContent).not.toContain("Prices, reviews and itinerary details are snapshots");
     expect(container.textContent).not.toContain("Starting prices and ratings were checked");
-    expect(within(buses as HTMLElement).getByRole("link", { name: /South Buses' routes and timetables/ }).closest("p")).toHaveTextContent("last practical bus back to Jerusalem");
-    expect(within(container.querySelector("#visit-return") as HTMLElement).getByRole("link", { name: /October 2026 notice/ })).toHaveAttribute("href", "https://www.cicts.org/bethlehem-basilica-of-the-nativity-cts/");
-    expect(within(container.querySelector("#visit-return") as HTMLElement).getByRole("link", { name: /October 2026 notice/ }).closest("p")).toHaveTextContent("12:30 to 14:30");
-    expect(container.querySelector("#shabbat")).toHaveTextContent("11:00 to 15:00");
+    expect(within(buses as HTMLElement).getByRole("link", { name: /South Buses' routes and timetables/ }).closest("p")).toHaveTextContent("departures and return services");
+    expect(within(container.querySelector("#visit-return") as HTMLElement).getByRole("link", { name: /published notice/ })).toHaveAttribute("href", "https://www.cicts.org/bethlehem-basilica-of-the-nativity-cts/");
+    expect(within(container.querySelector("#visit-return") as HTMLElement).getByRole("link", { name: /published notice/ }).closest("p")).toHaveTextContent("12:30–14:30");
+    expect(container.querySelector("#shabbat")).toHaveTextContent("Check both the bus timetable and church visiting hours");
     expect(container.querySelector("#checklist")?.querySelectorAll("li")).toHaveLength(4);
     expect(within(container.querySelector("#checklist") as HTMLElement).getByRole("heading", { name: "Travel checklist" })).toBeInTheDocument();
-    expect(within(container.querySelector("#visit-return") as HTMLElement).getByRole("note")).toHaveTextContent("plan the rest of your day around its limited entry hours");
+    expect(within(container.querySelector("#visit-return") as HTMLElement).getByRole("note")).toHaveTextContent("allow time for the queue");
     expect(container.textContent).not.toContain("return later if your schedule allows");
     const bodyPhotos = [...container.querySelectorAll("#private-taxi img, #visit-return img")].map(img => img.getAttribute("src"));
     expect(cards.some(card => bodyPhotos.includes(within(card).getByRole("img").getAttribute("src")))).toBe(false);
@@ -123,19 +123,19 @@ describe("Jerusalem independent day-trip planning guides", () => {
     expect(screen.getByTestId("journey-stop-cards").children).toHaveLength(4);
     expect(screen.getByRole("heading", { name: /Jerusalem to the Dead Sea: ways to travel/ })).toBeInTheDocument();
     expect(screen.getByRole("table", { name: /Jerusalem to the Dead Sea: ways to travel/ })).toBeInTheDocument();
-    expect(screen.getByText(/If you have time beyond the beach, add one or two attractions/)).toBeInTheDocument();
-    expect(screen.getByText(/Explore a lush desert oasis with springs, waterfalls/)).toBeInTheDocument();
+    expect(screen.getByText(/If you have extra time, consider adding Masada/)).toBeInTheDocument();
+    expect(screen.getByText(/Discover Ein Gedi's desert oasis, waterfalls/)).toBeInTheDocument();
     expect(screen.getByRole("heading", { name: "Qumran" })).toBeInTheDocument();
     expect(screen.getByRole("heading", { name: "Qasr al-Yahud" })).toBeInTheDocument();
     expect(screen.getByRole("heading", { name: "Where to go for a Dead Sea beach day" })).toBeInTheDocument();
     expect(screen.getByRole("heading", { name: "Add a stop to your Dead Sea day" })).toBeInTheDocument();
     expect(container.querySelector("#day-plan")).toBeNull();
     expect(screen.queryByText("Optional stops to add to your Dead Sea day trip")).not.toBeInTheDocument();
-    expect(screen.getByText(/Parking near Ein Bokek.s central beach is regulated and paid/)).toBeInTheDocument();
+    expect(screen.getByText(/Parking near the central beach is paid/)).toBeInTheDocument();
     const beachSection = container.querySelector("#beach");
     expect(beachSection).not.toBeNull();
-    expect(beachSection).toHaveTextContent("Northern-shore beaches such as Kalia are closer to Jerusalem");
-    expect(beachSection).toHaveTextContent("I recommend continuing south to the free public beach at Ein Bokek");
+    expect(beachSection).toHaveTextContent("Northern beaches such as Kalia are closer to Jerusalem");
+    expect(beachSection).toHaveTextContent("I recommend Ein Bokek");
     expect(within(beachSection as HTMLElement).getByRole("link", { name: /Kalia Beach — admission and facilities/ }))
       .toHaveAttribute("href", "https://kaliadeadsea.com/en/kalia-beach-en/");
     expect(screen.getByRole("heading", { name: "By public bus: Egged 486 and 444" })).toBeInTheDocument();
@@ -226,6 +226,32 @@ describe("Jerusalem independent day-trip planning guides", () => {
     expect(compare.compareDocumentPosition(bus) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
     expect(bus.compareDocumentPosition(attractions) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
   }, 15000);
+
+  it("uses concise copy while preserving Bethlehem rich links and Dead Sea booking details", () => {
+    const bethlehem = travelGuides.bethlehem;
+    const deadSea = travelGuides.jerusalemDeadSea;
+    const entry = bethlehem.sections.find(section => section.id === "entry-rules")!;
+    const bus = bethlehem.sections.find(section => section.id === "buses")!;
+    const rental = bethlehem.sections.find(section => section.id === "rental-car")!;
+    const visit = bethlehem.sections.find(section => section.id === "visit-return")!;
+    const weekend = bethlehem.sections.find(section => section.id === "shabbat")!;
+    for (const section of [entry, bus, rental, visit, weekend]) {
+      expect(section.richParagraphs).toHaveLength(section.paragraphs.length);
+      section.richParagraphs?.forEach((spans, index) => {
+        expect(spans.map(span => span.text).join(""), section.id + " paragraph " + index).toBe(section.paragraphs[index]);
+      });
+    }
+    expect(bethlehem.intro).toContain("getting there requires some planning");
+    expect(bus.subsections?.find(sub => sub.id === "bus-231")?.title).toContain("via Beit Jala");
+    expect(bus.paragraphs.join(" ")).not.toContain("Line 231 passes through the Bab al-Zaqaq");
+    expect(visit.paragraphs[1]).toContain("12:30–14:30");
+    expect(weekend.paragraphs.join(" ")).not.toContain("11:00 to 15:00");
+    expect(deadSea.answer).toContain("reserved-seat bus 444");
+    expect(deadSea.sections.find(section => section.id === "beach")?.tip).toContain("I recommend Ein Bokek");
+    expect(deadSea.sections.find(section => section.id === "private")?.paragraphs.join(" ")).toContain("₪2,100");
+    expect(deadSea.sections.find(section => section.id === "driving")?.paragraphs.join(" ")).toContain("Winter rain can trigger flash floods");
+    expect(deadSea.sections.find(section => section.id === "bus")?.paragraphs.join(" ")).toContain("Bus 444 also serves the area");
+  });
 
   it("retains original SEO URLs, updated metadata and real source references", async () => {
     for (const [id, route] of [["bethlehem", BethlehemRoute], ["jerusalemDeadSea", DeadSeaRoute]] as const) {
