@@ -203,7 +203,7 @@ export function IsraelItineraryPage({ id }: { id: ItineraryId }) {
                     </ul>
                     {id === "7" && (index === 3 || index === 5) && (
                       <p className="mt-3 text-xs leading-relaxed text-muted-foreground" data-testid="seven-day-transfer-times-note">
-                        Visit times cover attractions only, not intercity travel, local transfers, hotel check-in or luggage handling. Public transport can add substantial time.
+                        The times shown are for sightseeing only. Allow extra time for travel between stops, hotel check-in and luggage, especially when using public transport.
                       </p>
                     )}
                   </div>
