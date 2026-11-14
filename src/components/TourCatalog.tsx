@@ -13,12 +13,11 @@ export function OwnerTourSection({ tours, compact = false }: { tours: TourProduc
   return <section id="my-private-days" aria-labelledby="my-private-days-h" data-section="moshe-private-tours" className="mt-10 scroll-mt-24">
     <p className="text-xs font-bold uppercase tracking-widest text-primary">Personally arranged with Moshe Barak</p>
     <h2 id="my-private-days-h" className="mt-2 text-3xl font-semibold">My private day trips</h2>
-    <p className="mt-3 max-w-3xl text-sm leading-relaxed text-muted-foreground">Choose a private car and driver for your preferred route, with pickup and return arranged around your plans.</p>
+    <p className="mt-3 max-w-3xl text-sm leading-relaxed text-muted-foreground">Enjoy the flexibility of a private driver, with a customized route, convenient pickup and stops of your choice.</p>
     <ul className={compact ? "mt-4 grid gap-3" : "mt-5 grid gap-5 sm:grid-cols-2"} aria-label="My private day trips">
       {tours.map(tour => compact ? <li key={tour.id} id={tour.id} data-product-id={tour.id} data-operator-id="moshe-barak" data-testid="owner-tour-card" className="flex min-w-0 gap-3 rounded-xl border bg-card p-3 sm:gap-4">
         <img src={tourPhotos[tour.id]!.src} alt={tourPhotos[tour.id]!.alt} width={140} height={180} loading="lazy" decoding="async" className="h-40 w-[96px] shrink-0 rounded-lg object-cover sm:h-44 sm:w-[124px]" />
         <div className="flex min-w-0 flex-1 flex-col">
-          <span className="text-xs font-semibold text-primary">Personally arranged with Moshe Barak</span>
           <h3 className="mt-1.5 text-base font-semibold leading-snug">{tour.title}</h3>
           <p className="mt-1 text-sm leading-relaxed text-muted-foreground">{tour.summary}</p>
           <p className="mt-2 text-xs text-muted-foreground">{tour.duration} · Private car &amp; driver</p>
@@ -138,8 +137,8 @@ export function TourCatalog({ categoryId, filters, onChange }: { categoryId: Tou
     {visible.length === 0 ? <section className="mt-5 rounded-2xl border p-8 text-center"><h2 className="text-2xl font-semibold">No tours match these choices</h2><p className="mt-3 text-muted-foreground">Try another departure, destination or interest.</p><button type="button" className="btn btn-primary mt-5" onClick={() => onChange({})}>Show all tours in this category</button></section> : <>
       {categoryId !== "jerusalem" && <OwnerTourSection tours={owner} />}
       {external.length > 0 && <section id="external-tours" aria-labelledby="external-tours-h" data-section="external-tours" className={categoryId === "jerusalem" ? "mt-5 scroll-mt-24" : "mt-12 scroll-mt-24 border-t pt-8"}>
-        <h2 id="external-tours-h" className={categoryId === "jerusalem" ? "text-2xl font-semibold" : "text-3xl font-semibold"}>{owner.length > 0 && categoryId !== "jerusalem" ? "More " : ""}{getTourCategory(categoryId).title}</h2>
-        <p className="mt-3 max-w-3xl text-sm leading-relaxed text-muted-foreground">Discover guided itineraries, local walks and specialist activities from independent operators. Each card identifies the departure, experience and booking site.</p>
+        <h2 id="external-tours-h" className={categoryId === "jerusalem" ? "text-2xl font-semibold" : "text-3xl font-semibold"}>{categoryId === "jerusalem" ? "Explore Jerusalem tours" : `${owner.length > 0 ? "More " : ""}${getTourCategory(categoryId).title}`}</h2>
+        <p className="mt-3 max-w-3xl text-sm leading-relaxed text-muted-foreground">{categoryId === "jerusalem" ? "Compare guided walks, cultural experiences and day trips from Jerusalem or Tel Aviv. Explore the options below to find the right experience for your visit." : "Discover guided itineraries, local walks and specialist activities from independent operators. Each card identifies the departure, experience and booking site."}</p>
         <ul aria-label="External tours" className={categoryId === "jerusalem" ? "mt-5 grid gap-3 md:grid-cols-2" : "mt-6 grid gap-5 sm:grid-cols-2"}>{external.map(tour => <ExternalTourCard key={tour.id} tour={tour} pageId={`tours-${categoryId}`} compact={categoryId === "jerusalem"} />)}</ul>
         <p className="mt-5 text-xs leading-relaxed text-muted-foreground">Tour details, availability, prices and booking conditions are set by the tour operators and may change. Before booking, check the current departure date and location, itinerary, guiding, admissions, meeting and return arrangements, and cancellation policy directly with the booking provider. Each tour is subject to the operator's own terms and conditions.</p>
       </section>}
