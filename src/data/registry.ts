@@ -1220,6 +1220,15 @@ export const affiliateConfig: Record<string, { trackingUrl: string } | undefined
   "tour-bethlehem-jericho-qasr-small-group-viator@tours-bethlehem-jericho": { trackingUrl: "https://viator.tpm.li/SVmtGeCA" },
   "tour-bethlehem-jericho-qasr-tel-aviv-viator@tours-bethlehem-jericho": { trackingUrl: "https://viator.tpm.li/fgm6bDD8" },
   "tour-bethlehem-qasr-dead-sea-viator@tours-bethlehem-jericho": { trackingUrl: "https://viator.tpm.li/p4ze5xww" },
+  // Eight exact Travelpayouts Galilee tour product links for this destination category, each with a distinct SubID.
+  "tour-nazareth-galilee-tel-aviv-getyourguide@tours-nazareth-galilee": { trackingUrl: "https://getyourguide.tpm.li/k2QS6VE5" },
+  "tour-galilee-nazareth-jordan-viator@tours-nazareth-galilee": { trackingUrl: "https://viator.tpm.li/sYrXNCYu" },
+  "tour-nazareth-galilee-jerusalem-viator@tours-nazareth-galilee": { trackingUrl: "https://viator.tpm.li/njSCxiZa" },
+  "tour-galilee-christian-jerusalem-viator@tours-nazareth-galilee": { trackingUrl: "https://viator.tpm.li/mfXDfsCG" },
+  "tour-nazareth-tiberias-tel-aviv-viator@tours-nazareth-galilee": { trackingUrl: "https://viator.tpm.li/thrOwaSl" },
+  "tour-galilee-private-tel-aviv-viator@tours-nazareth-galilee": { trackingUrl: "https://viator.tpm.li/zVWQjSvg" },
+  "tour-galilee-private-jerusalem-viator@tours-nazareth-galilee": { trackingUrl: "https://viator.tpm.li/KnyzZJ58" },
+  "tour-nazareth-magdala-private-viator@tours-nazareth-galilee": { trackingUrl: "https://viator.tpm.li/thKprWBa" },
   // Configure an approved product-specific affiliate URL once; all category appearances use it.
   ...Object.fromEntries(tourBookingOffers.map((offer) => [offer.id, undefined])),
   "shore-viator-haifa-jerusalem-bethlehem": undefined,
