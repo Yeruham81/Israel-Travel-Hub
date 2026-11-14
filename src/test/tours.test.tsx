@@ -234,7 +234,7 @@ describe("tours hub and SEO category pages", () => {
         expect(card.id).toBe(id);
         const tour = tourProducts.find(tour => tour.id === id)!;
         expect(tour.operatorId).not.toBe("moshe-barak");
-        if (category.id !== "jerusalem" && category.id !== "tel-aviv-jaffa" && category.id !== "masada-dead-sea") expect(card.textContent).toContain("Operated by");
+        if (category.id !== "jerusalem" && category.id !== "tel-aviv-jaffa" && category.id !== "masada-dead-sea" && category.id !== "bethlehem-jericho") expect(card.textContent).toContain("Operated by");
         else expect(card.textContent).toMatch(/Viator|GetYourGuide/);
         for (const link of card.querySelectorAll('a[target="_blank"]')) {
           expect(link.getAttribute("rel")?.split(/\s+/)).toEqual(expect.arrayContaining(["noopener", "noreferrer"]));
@@ -266,7 +266,7 @@ describe("tours hub and SEO category pages", () => {
             const link = card.querySelector('a[href^="/private-driver/?tour="]')!;
             expect(new URL(link.getAttribute("href")!, CANONICAL_ORIGIN).searchParams.get("tour")).toBe(card.getAttribute("data-product-id"));
           }
-          if (category.id !== "jerusalem" && category.id !== "tel-aviv-jaffa" && category.id !== "masada-dead-sea") expect(card.querySelector("dl")?.textContent).toContain("Includes:");
+          if (category.id !== "jerusalem" && category.id !== "tel-aviv-jaffa" && category.id !== "masada-dead-sea" && category.id !== "bethlehem-jericho") expect(card.querySelector("dl")?.textContent).toContain("Includes:");
           else expect(card.textContent).toContain("Private car & driver");
         }
       }
