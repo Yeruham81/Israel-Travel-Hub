@@ -229,7 +229,7 @@ describe("migrated practical guides", () => {
     expect(container.querySelector("#booking > div")).toHaveClass("text-foreground");
     expect(within(container).getByRole("heading", { name: "Ask me about your journey in Israel" })).toBeInTheDocument();
     expect(within(container).getByRole("form", { name: "Taxi guide contact message" })).toBeInTheDocument();
-    expect(within(container).getByRole("textbox", { name: /Subject/ })).toHaveValue("Taxis and private transport in Israel");
+    expect(within(container).getByRole("textbox", { name: /Subject/ })).toHaveValue("");
     expect(within(container).queryByText("Explore more Israel travel guides")).not.toBeInTheDocument();
   });
 
@@ -242,7 +242,7 @@ describe("migrated practical guides", () => {
       expect(container.textContent).not.toContain("Choose your next step");
       expect(container.textContent).not.toContain("Explore more Israel travel guides");
       expect(within(container).getByRole("form", { name: "Guide contact message" })).toBeInTheDocument();
-      expect((within(container).getByRole("textbox", { name: /Subject/ }) as HTMLInputElement).value).toContain(travelGuides[id].title);
+      expect((within(container).getByRole("textbox", { name: /Subject/ }) as HTMLInputElement).value).toBe("");
       expect(container.querySelector("#" + travelGuides[id].sections[0]!.id + " > div")).toHaveClass("text-foreground");
       expect(container.querySelector('nav[aria-label="On this page"] a[href="#contact"]')).not.toBeNull();
       unmount();
@@ -628,7 +628,7 @@ describe("migrated practical guides", () => {
     expect(next.querySelectorAll("li")).toHaveLength(4);
     expect(container.querySelectorAll('form[aria-label="Guide contact message"]')).toHaveLength(1);
     expect(within(container).getByRole("heading", { name: "Questions about leaving Ben Gurion Airport?" })).toBeInTheDocument();
-    expect((within(contact).getByRole("textbox", { name: /Subject/ }) as HTMLInputElement).value).toContain(travelGuides.sherut.title);
+    expect((within(contact).getByRole("textbox", { name: /Subject/ }) as HTMLInputElement).value).toBe("");
     expect(related.compareDocumentPosition(next) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
     expect(next.compareDocumentPosition(contact) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
   });
@@ -735,7 +735,7 @@ describe("migrated practical guides", () => {
     expect(container.querySelector('nav[aria-label="On this page"] a[href="#contact"]')).not.toBeNull();
     expect(container.querySelector('nav[aria-label="On this page"] a[href="#request-quote"]')).toBeNull();
     expect(within(container).getByRole("heading", { name: "Questions about arriving on Shabbat?" })).toBeInTheDocument();
-    expect((within(contact).getByRole("textbox", { name: /Subject/ }) as HTMLInputElement).value).toContain(travelGuides.shabbat.title);
+    expect((within(contact).getByRole("textbox", { name: /Subject/ }) as HTMLInputElement).value).toBe("");
     expect(related.compareDocumentPosition(next) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
     expect(next.compareDocumentPosition(contact) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
     const official = within(container).getByRole("link", { name: /Line 711 stop-by-stop timetable/ });
