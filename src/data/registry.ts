@@ -1151,6 +1151,16 @@ export const affiliateConfig: Record<string, { trackingUrl: string } | undefined
   "tour-jerusalem-bethlehem-private-getyourguide@tours-jerusalem": { trackingUrl: "https://getyourguide.tpm.li/uIfr7roD" },
   "tour-jerusalem-bethlehem-shared-getyourguide@tours-jerusalem": { trackingUrl: "https://getyourguide.tpm.li/1EkRnvUr" },
   "tour-mahane-yehuda-tasting-viator@tours-jerusalem": { trackingUrl: "https://viator.tpm.li/uPW9NNSa" },
+  // Exact Travelpayouts project 406243 product links for Tel Aviv & Jaffa tours (2026-11-14).
+  // Distinct page SubIDs; never substitute another city’s partner links.
+  "tour-jaffa-carmel-walk-getyourguide@tours-tel-aviv-jaffa": { trackingUrl: "https://getyourguide.tpm.li/59K2jHBH" },
+  "tour-tel-aviv-street-art-viator@tours-tel-aviv-jaffa": { trackingUrl: "https://viator.tpm.li/yiY84EiW" },
+  "tour-old-jaffa-walk-viator@tours-tel-aviv-jaffa": { trackingUrl: "https://viator.tpm.li/vgvYfl3O" },
+  "tour-neve-tzedek-walk-getyourguide@tours-tel-aviv-jaffa": { trackingUrl: "https://getyourguide.tpm.li/CjGSmDLb" },
+  "tour-carmel-market-food-tour-viator@tours-tel-aviv-jaffa": { trackingUrl: "https://viator.tpm.li/osmlb2Q1" },
+  "tour-tel-aviv-cycling-viator@tours-tel-aviv-jaffa": { trackingUrl: "https://viator.tpm.li/Yltp1iqc" },
+  "tour-white-city-audio-viator@tours-tel-aviv-jaffa": { trackingUrl: "https://viator.tpm.li/B8Xodhso" },
+  "tour-tel-aviv-jaffa-small-group-viator@tours-tel-aviv-jaffa": { trackingUrl: "https://viator.tpm.li/G9Lqmaft" },
   // Configure an approved product-specific affiliate URL once; all category appearances use it.
   ...Object.fromEntries(tourBookingOffers.map((offer) => [offer.id, undefined])),
   "shore-viator-haifa-jerusalem-bethlehem": undefined,
