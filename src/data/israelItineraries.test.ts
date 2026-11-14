@@ -524,6 +524,65 @@ describe("migrated Israel itineraries", () => {
     expect(view.indexOf("<HomeContactForm")).toBeLessThan(view.indexOf("<SourcesDisclosure>"));
   });
 
+  it("keeps the upgraded ten-day route, hotel choices, affiliate widgets and source links coherent", () => {
+    const g = itineraries["10"];
+    const view = file("src/components/IsraelItineraryPage.tsx");
+    const tours = file("src/components/JerusalemItineraryTourOptions.tsx");
+    expect(g.daysPlan).toHaveLength(10);
+    expect(g.reviewedAt).toBe("2026-11-14");
+    expect(g.hero).toBe("itinerary-10day-cover");
+    expect(g.daysPlan[6]?.image).toBe("itinerary-10day-akko-port");
+    expect(new Set([g.hero, ...g.daysPlan.map(day => day.image)]).size).toBe(11);
+    expect(g.overviewRows).toHaveLength(10);
+    expect(g.overviewRows?.every(row => Boolean(row.travel))).toBe(true);
+    expect(g.hotelBases).toContain("Haifa after Day 7");
+    expect(g.daysPlan[6]?.evening).toContain("continue to Tel Aviv instead");
+    expect(g.daysPlan[7]?.afternoon).toContain("rather than travelling back to Haifa");
+    expect(g.daysPlan[9]?.morning).toContain("skip sightseeing");
+    expect(g.daySequences?.map(day => day.day)).toEqual([1,2,3,4,5,6,7,8,9,10]);
+    for (const sequence of g.daySequences ?? []) {
+      expect(sequence.steps).toHaveLength(3);
+      expect(sequence.steps.every(step => step.stop.length > 10 && step.time.length > 10)).toBe(true);
+    }
+    expect(g.dayChoices?.map(choice => choice.day)).toEqual([2,6,7,8,10]);
+    expect(g.dayChoices?.every(choice => choice.options.length === 2)).toBe(true);
+    expect(g.dayTipHeadings).toHaveLength(10);
+    expect(new Set(g.dayTipHeadings).size).toBe(10);
+    expect(g.jerusalemTourOptionsDay).toBe(3);
+    expect(g.activityWidgets).toEqual([
+      { day: 1, city: "jerusalem" },
+      { day: 8, city: "haifa" },
+      { day: 9, city: "telAviv" },
+    ]);
+    expect(getYourGuideCityWidgetSrc("haifa", "10_day")).toContain("shmarker=622032.10_day");
+    expect(tours).toContain("days?: 3 | 5 | 7 | 10");
+    expect(tours).toContain("These day tours are alternatives to the independent itinerary");
+    expect(view).toContain('id === "10" && (index === 3 || index === 6 || index === 7)');
+    expect(view).toContain('id === "3" || id === "5" || id === "7" || id === "10"');
+    expect(g.alternatives).toHaveLength(2);
+    expect(g.alternatives[0]?.text).toContain("Timna Park");
+    expect(g.relatedGuides).toHaveLength(6);
+    expect(g.faqs).toHaveLength(8);
+    expect(g.beforeYouGo).toHaveLength(4);
+    expect(g.dayOfficialLinks).toHaveLength(7);
+    expect(g.beforeYouGoOfficialLinks).toHaveLength(2);
+    expect(itinerarySourcesByGuide["10"].some(source => source.url.includes("akko.org.il"))).toBe(true);
+    expect(itinerarySourcesByGuide["10"].some(source => source.url.includes("parktimna.co.il"))).toBe(true);
+    for (const link of g.dayInlineLinks ?? []) {
+      expect(g.daysPlan[link.day - 1]?.[link.field], link.phrase).toContain(link.phrase);
+    }
+    for (const link of g.dayOfficialLinks ?? []) {
+      expect(g.daysPlan[link.day - 1]?.[link.field], link.phrase).toContain(link.phrase);
+      expect(link.href).toMatch(/^https:\/\//);
+    }
+    for (const link of g.logisticsInlineLinks ?? []) {
+      expect(g.logistics[link.index]?.text, link.phrase).toContain(link.phrase);
+    }
+    for (const link of g.beforeYouGoOfficialLinks ?? []) {
+      expect(g.beforeYouGo?.[link.index]?.text, link.phrase).toContain(link.phrase);
+    }
+  });
+
   it("links natural phrases in the three-day text instead of showing a link tray after every day", () => {
     const guide = itineraries["3"];
     expect(guide.dayInlineLinks).toHaveLength(15);
