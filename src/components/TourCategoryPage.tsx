@@ -12,7 +12,7 @@ import { GuidePhotoCredit } from "@/components/TravelGuide";
 import { GuideHeroLayout, GuideHeroMedia } from "@/components/GuideHeroMedia";
 import { MoreTourCategories, TourCruiseCallout } from "@/components/TourDiscovery";
 import { TourCatalog } from "@/components/TourCatalog";
-import { getTourCategory, tourCategories, tourCategoryPaths, tourCruisePhoto, tourPhotos, tourReadingGuides, jerusalemTourLocalCards, jerusalemTourPlanningCards, telAvivTourLocalCards, type TourCategoryId } from "@/data/tours";
+import { getTourCategory, tourCategories, tourCategoryPaths, tourCruisePhoto, tourPhotos, tourReadingGuides, jerusalemTourLocalCards, jerusalemTourPlanningCards, telAvivTourLocalCards, masadaTourLocalCards, type TourCategoryId } from "@/data/tours";
 import { offersForTour, parseTourSearch, toursForCategory, type TourSearch } from "@/lib/tours";
 import { CANONICAL_ORIGIN, jsonLd, pageMeta } from "@/lib/site";
 import { hasPublicPhotoCredit } from "@/lib/photo-credits";
@@ -45,11 +45,11 @@ const jerusalemPlanningIcons = {
 
 export function TourCategoryPage({ id, filters: rawFilters, onChange }: { id: TourCategoryId; filters: TourSearch; onChange: (next: TourSearch, replace?: boolean) => void }) {
   const category = getTourCategory(id);
-  const isCityTemplate = id === "jerusalem" || id === "tel-aviv-jaffa";
-  const localCards = id === "jerusalem" ? jerusalemTourLocalCards : telAvivTourLocalCards;
-  const cityName = id === "jerusalem" ? "Jerusalem" : "Tel Aviv & Jaffa";
-  const localHeadingId = id === "jerusalem" ? "jerusalem-local-h" : "tel-aviv-local-h";
-  const planningHeadingId = id === "jerusalem" ? "jerusalem-planning-h" : "tel-aviv-planning-h";
+  const isCityTemplate = id === "jerusalem" || id === "tel-aviv-jaffa" || id === "masada-dead-sea";
+  const localCards = id === "jerusalem" ? jerusalemTourLocalCards : id === "tel-aviv-jaffa" ? telAvivTourLocalCards : masadaTourLocalCards;
+  const cityName = id === "jerusalem" ? "Jerusalem" : id === "tel-aviv-jaffa" ? "Tel Aviv & Jaffa" : "Masada & the Dead Sea";
+  const localHeadingId = id === "jerusalem" ? "jerusalem-local-h" : id === "tel-aviv-jaffa" ? "tel-aviv-local-h" : "masada-local-h";
+  const planningHeadingId = id === "jerusalem" ? "jerusalem-planning-h" : id === "tel-aviv-jaffa" ? "tel-aviv-planning-h" : "masada-planning-h";
   const filters = parseTourSearch(rawFilters);
   const path = tourCategoryPaths[id];
   const title = category.title;
@@ -61,7 +61,7 @@ export function TourCategoryPage({ id, filters: rawFilters, onChange }: { id: To
     <div className="pt-6"><Breadcrumbs items={[{ name: "Home", to: "/" }, { name: "Tours & day trips", to: "/tours/" }, { name: title, to: path }]} /></div>
     <header className="mt-2">
       <GuideHeroLayout image={<GuideHeroMedia src={category.photo.src} alt={category.photo.alt} width={1200} height={450} compact={isCityTemplate} />}>
-        <p className="eyebrow">{id === "jerusalem" ? "Guided walks, small groups & private experiences" : id === "tel-aviv-jaffa" ? "Guided walks, food, art & private experiences" : `Tours & day trips · ${category.shortTitle}`}</p>
+        <p className="eyebrow">{id === "jerusalem" ? "Guided walks, small groups & private experiences" : id === "tel-aviv-jaffa" ? "Guided walks, food, art & private experiences" : id === "masada-dead-sea" ? "Guided desert days, sunrise hikes & private transport" : `Tours & day trips · ${category.shortTitle}`}</p>
         <h1 className="guide-page-title mt-3 font-semibold">{title}</h1>
         <p data-guide-intro className="mt-4 max-w-3xl text-lg leading-relaxed text-muted-foreground">{category.intro}</p>
         {!isCityTemplate && <a href="#tour-catalog" className="btn btn-primary mt-5">Explore {category.shortTitle} experiences</a>}
@@ -70,16 +70,16 @@ export function TourCategoryPage({ id, filters: rawFilters, onChange }: { id: To
     {isCityTemplate ? <div className="mt-4"><AuthorCard introduction /></div> : <AttractionRegionTrail links={attractionRegions} />}
     {!isCityTemplate && <section aria-labelledby="choose-day-h" className="mt-10"><h2 id="choose-day-h" className="text-3xl font-semibold">Find the right day for your trip</h2><div className="mt-5 grid gap-4 md:grid-cols-3">{category.choices.map(choice => <article key={choice.title} className="rounded-2xl border bg-card p-5"><h3 className="text-xl font-semibold">{choice.title}</h3><p className="mt-2 text-sm leading-relaxed text-muted-foreground">{choice.text}</p></article>)}</div></section>}
     <TourCatalog categoryId={id} filters={filters} onChange={onChange} />
-    <section aria-labelledby="planning-day-h" className="mt-12"><h2 id="planning-day-h" className="text-2xl font-semibold">{id === "jerusalem" ? "Choosing the right Jerusalem tour" : id === "tel-aviv-jaffa" ? "Choosing the right Tel Aviv & Jaffa tour" : `Planning your ${category.shortTitle} experience`}</h2><div className="mt-4 space-y-4 leading-relaxed text-muted-foreground">{category.paragraphs.map(paragraph => <p key={paragraph}>{paragraph}</p>)}</div>
+    <section aria-labelledby="planning-day-h" className="mt-12"><h2 id="planning-day-h" className="text-2xl font-semibold">{id === "jerusalem" ? "Choosing the right Jerusalem tour" : id === "tel-aviv-jaffa" ? "Choosing the right Tel Aviv & Jaffa tour" : id === "masada-dead-sea" ? "Choosing the right Masada & Dead Sea tour" : `Planning your ${category.shortTitle} experience`}</h2><div className="mt-4 space-y-4 leading-relaxed text-muted-foreground">{category.paragraphs.map(paragraph => <p key={paragraph}>{paragraph}</p>)}</div>
       {id === "bethlehem-jericho" && <p className="mt-4 text-sm"><Link to={travelGuidePaths.bethlehem} className="font-semibold text-primary underline">Read my Jerusalem to Bethlehem travel guide</Link></p>}
-      {id === "masada-dead-sea" && <p className="mt-4 text-sm"><Link to={travelGuidePaths.jerusalemDeadSea} className="font-semibold text-primary underline">Planning the journey independently? Compare buses, driving and private transport from Jerusalem.</Link></p>}
+      {id === "masada-dead-sea" && <p className="mt-4 text-sm text-muted-foreground">Ein Gedi access changes after floods. <a href="https://en.parks.org.il/reserve-park/en-gedi-nature-reserve/" target="_blank" rel="noopener noreferrer" className="font-semibold text-primary underline">Check current routes and advance reservations with the parks authority</a> before relying on a tour itinerary.</p>}
     </section>
-    {id !== "jerusalem" && (["bethlehem-jericho", "masada-dead-sea", "food-markets"] as string[]).includes(id) && <JerusalemClusterLinks pageKey={("tour-" + id) as JerusalemClusterKey} />}
+    {!isCityTemplate && (["bethlehem-jericho", "masada-dead-sea", "food-markets"] as string[]).includes(id) && <JerusalemClusterLinks pageKey={("tour-" + id) as JerusalemClusterKey} />}
     <FaqList faqs={category.faqs} />
     {isCityTemplate ? <>
       <section aria-labelledby={localHeadingId} className="mt-12">
         <h2 id={localHeadingId} className="text-2xl font-semibold">Explore {cityName} further</h2>
-        <p className="mt-2 text-sm text-muted-foreground">Find places to visit, neighborhoods to explore and more ways to enjoy {cityName}.</p>
+        <p className="mt-2 text-sm text-muted-foreground">{id === "masada-dead-sea" ? "Plan your fortress visit, check nature-trail access, discover desert attractions and choose a place to stay." : `Find places to visit, neighborhoods to explore and more ways to enjoy ${cityName}.`}</p>
         <div className="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {localCards.map(item => <Link key={item.to} to={item.to} className="group flex h-full min-w-0 flex-col overflow-hidden rounded-xl border bg-card transition-colors hover:border-primary hover:shadow-sm focus-visible:outline-2 focus-visible:outline-primary">
             <img src={item.photo.src} alt={item.photo.alt} width={320} height={176} loading="lazy" decoding="async" className="aspect-[16/9] w-full object-cover" />
@@ -107,13 +107,13 @@ export function TourCategoryPage({ id, filters: rawFilters, onChange }: { id: To
           })}
         </div>
       </section>
-      <HomeContactForm guide={{ heading: `Need help planning your time in ${cityName}?`, introduction: "Have a question about your visit or need a private driver? Tell me your travel dates, preferred stops and transportation needs, and I'll get back to you personally.", subject: "", placeholder: "Dates, number of travelers, places you want to visit or your question…" }} />
+      <HomeContactForm guide={{ heading: id === "masada-dead-sea" ? "Need help planning a Masada & Dead Sea day?" : `Need help planning your time in ${cityName}?`, introduction: "Have a question about your visit or need a private driver? Tell me your travel dates, preferred stops and transportation needs, and I'll get back to you personally.", subject: "", placeholder: "Dates, number of travelers, places you want to visit or your question…" }} />
     </> : <>
       <RelatedGuideCards title="Get to know the places on your itinerary" guides={guides} />
       <MoreTourCategories currentId={id} />
       <TourCruiseCallout />
     </>}
     <SourceList ids={sourceIds} intro="Product listings were reviewed for advertised itinerary, operator and duration. Confirm the date, availability, full price and arrangements with me for my private days, or with the booking provider for external tours." />
-    <TourPhotoCredits photos={[tourCruisePhoto, ...tourCategories.map(category => category.photo), ...products.map(tour => tourPhotos[tour.id]!), ...guides.map(guide => guide.photo), ...(isCityTemplate ? localCards.map(card => card.photo) : [])]} />
+    <TourPhotoCredits photos={[category.photo, ...products.map(tour => tourPhotos[tour.id]!), ...(!isCityTemplate ? [tourCruisePhoto, ...tourCategories.map(item => item.photo), ...guides.map(guide => guide.photo)] : []), ...(isCityTemplate ? localCards.map(card => card.photo) : [])]} />
   </main>;
 }
