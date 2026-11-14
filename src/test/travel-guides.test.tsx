@@ -157,8 +157,8 @@ describe("migrated practical guides", () => {
     expect(travelGuides.arrival.sections.find((section) => section.id === "leave-airport")!.paragraphs.join(" ")).toMatch(/Exit 03.*Level 2, Exit 23/);
     expect(travelGuides.taxis.sections.find((section) => section.id === "airport")!.inlineLinks?.some((link) => link.to === travelGuidePaths.airportTaxis)).toBe(true);
     expect(travelGuides.airportTaxis.comparison.rows.join(" ")).toMatch(/Exit 03.*Exit 23/);
-    expect(travelGuides.uber.answer).toMatch(/Uber does not currently offer passenger rides in Israel/);
-    expect(travelGuides.sherut.answer).toMatch(/Jerusalem \(Nesher\).*Haifa.*\(Amal\).*no longer operate/s);
+    expect(travelGuides.uber.answer).toMatch(/Uber and Lyft do not currently offer passenger rides in Israel/);
+    expect(travelGuides.sherut.answer).toMatch(/former Nesher route to Jerusalem or Amal route to Haifa/);
     expect(travelGuides.esim.sections.find((section) => section.id === "calling")!.paragraphs.join(" ")).toMatch(/US phone number.*different from an Israeli/s);
     expect(travelGuides.esim.answer).toMatch(/unlimited.*does not promise unlimited full-speed/i);
   });
@@ -508,7 +508,7 @@ describe("migrated practical guides", () => {
     expect(guide.title).toMatch(/Uber.*Israel.*Gett.*Yango/);
     expect(guide.title).not.toMatch(/2026|2027/);
     expect(guide.updatedAt).toBe("2026-11-11");
-    expect(guide.answer).toMatch(/^No\. Uber does not currently offer passenger rides in Israel/);
+    expect(guide.answer).toMatch(/^Uber and Lyft do not currently offer passenger rides in Israel/);
     expect(guide.answer).toContain("Lyft");
     expect(guide.sourceIds).toContain("guide-uber-availability");
     expect(getSource("guide-uber-availability").url).toBe("https://www.uber.com/il/en/");
@@ -528,7 +528,7 @@ describe("migrated practical guides", () => {
     for (const section of guide.sections) for (const link of section.inlineLinks || []) {
       expect(section.paragraphs.join(" ").split(link.text), `link text ${link.text} should occur once`).toHaveLength(2);
     }
-    expect(guide.sections.find((s) => s.id === "uber-status")!.paragraphs.join(" ")).toContain("March 24, 2026");
+    expect(guide.sections.find((s) => s.id === "uber-status")!.paragraphs.join(" ")).toContain("first Knesset reading in March 2026");
     expect(guide.sourceIds).toEqual(expect.arrayContaining(["guide-lyft-cities", "guide-ridesharing-bill-2026"]));
     expect(getSource("guide-lyft-cities").url).toBe("https://www.lyft.com/rider/cities");
     expect(getSource("guide-ridesharing-bill-2026").url).toContain("main.knesset.gov.il");
@@ -538,6 +538,31 @@ describe("migrated practical guides", () => {
     expect(guide.sections.find((s) => s.id === "gett")!.externalLinks?.[0]?.href).toBe("https://www.gett.com/il/");
     expect(guide.sections.find((s) => s.id === "yango")!.externalLinks?.[0]?.href).toBe("https://appli.taxi/rider/");
     expect(travelGuides.taxis.sections.find((s) => s.id === "apps")!.paragraphs.join(" ")).toContain("Uber passenger rides are not available in Israel as of November 2026");
+  });
+
+  it("keeps updated Uber and Sherut wording focused, linked and actionable", () => {
+    const uber = travelGuides.uber;
+    const sherut = travelGuides.sherut;
+    expect(uber.intro).toContain("Uber and Lyft aren't currently available");
+    expect(uber.sections.find(section => section.id === "shabbat")?.paragraphs.join(" ")).not.toContain("no need to repeat");
+    expect(uber.checklist.some(item => item.includes("Install and verify your preferred taxi app"))).toBe(true);
+    expect(uber.faqs.some(faq => faq.q === "Are there plans to bring Uber to Israel?")).toBe(true);
+    expect(uber.faqs.find(faq => faq.q.includes("foreign cards"))?.a).toContain("foreign-issued cards");
+    expect(sherut.intro).toContain("Nesher and Amal shared taxis");
+    expect(sherut.sections.find(section => section.id === "official-taxi")?.paragraphs.join(" ")).not.toContain("without repeating those details here");
+    const destinations = sherut.sections.find(section => section.id === "where-to-go")!;
+    expect(destinations.inlineLinks?.map(link => link.to)).toEqual([
+      "/travel-blog/how-to-get-from-ben-gurion-airport-to-jerusalem/",
+      "/travel-blog/how-to-get-from-ben-gurion-airport-to-haifa/",
+      travelGuidePaths.shabbat,
+    ]);
+    expect(destinations.tables?.[0]?.rows.find(row => row[0] === "Dead Sea / Ein Bokek")?.[1]).toContain("Train and bus via Jerusalem");
+    expect(sherut.faqs).toHaveLength(7);
+    for (const guide of [uber, sherut]) {
+      for (const section of guide.sections) for (const link of section.inlineLinks ?? []) {
+        expect(section.paragraphs.join(" ").split(link.text), guide.id + " / " + section.id + " / " + link.text).toHaveLength(2);
+      }
+    }
   });
 
   it("renders Uber alternatives with relevant inline article links", async () => {
@@ -552,7 +577,7 @@ describe("migrated practical guides", () => {
         expect(a.closest("p")).toBeTruthy();
       }
     }
-    expect(container.querySelector("#uber-status")?.textContent).toContain("Uber's Israel-facing website");
+    expect(container.querySelector("#uber-status")?.textContent).toContain("Uber does not currently offer passenger rides in Israel");
     const next = within(container).getByRole("region", { name: "Plan the next part of your trip" });
     expect(next.querySelectorAll("li")).toHaveLength(4);
     expect(Array.from(next.querySelectorAll("a")).map((link) => link.getAttribute("href"))).not.toContain("/airport-transfers/");
@@ -567,8 +592,8 @@ describe("migrated practical guides", () => {
     expect(guide.title).toMatch(/sherut.*Ben Gurion Airport/i);
     expect(guide.title).not.toMatch(/2026|2027/);
     expect(guide.updatedAt).toBe("2026-11-11");
-    expect(guide.answer).toContain("no longer operate");
-    expect(guide.answer).toContain("Do not plan around their old boarding points");
+    expect(guide.answer).toContain("No regular airport sherut currently operates");
+    expect(guide.answer).toContain("Local sherut taxis and separately booked shared shuttles are different services");
     expect(guide.sections.map((section) => section.id)).toEqual([
       "nesher-amal", "what-is-sherut", "airport-alternatives", "where-to-go", "official-taxi",
       "airport-shuttle", "local-sherut", "booked-shared", "weekend",
@@ -586,9 +611,9 @@ describe("migrated practical guides", () => {
       travelGuidePaths.israel, travelGuidePaths.telAviv,
     ]);
     expect(guide.sections.find((s) => s.id === "where-to-go")!.inlineLinks?.map((link) => link.to)).toEqual([
-      "/airport-transfers/ben-gurion-airport-to-jerusalem/", "/airport-transfers/ben-gurion-airport-to-haifa/", travelGuidePaths.shabbat,
+      "/travel-blog/how-to-get-from-ben-gurion-airport-to-jerusalem/", "/travel-blog/how-to-get-from-ben-gurion-airport-to-haifa/", travelGuidePaths.shabbat,
     ]);
-    expect(guide.sections.find((s) => s.id === "local-sherut")!.paragraphs.join(" ")).toMatch(/pay individually.*Shabbat/s);
+    expect(guide.sections.find((s) => s.id === "local-sherut")!.paragraphs.join(" ")).toMatch(/pay separately.*Shabbat/s);
     expect(guide.services.map((item) => item.to)).toEqual([
       "/car-rental/", "/travel-blog/where-to-stay-in-jerusalem/", "/travel-blog/haifa/", travelGuidePaths.esim,
     ]);
@@ -616,7 +641,7 @@ describe("migrated practical guides", () => {
         expect(a.closest("p")).toBeTruthy();
       }
     }
-    expect(container.querySelector("#nesher-amal")?.textContent).toMatch(/Nesher.*Amal.*no longer operating/s);
+    expect(container.querySelector("#nesher-amal")?.textContent).toMatch(/Nesher.*Amal.*have ended/s);
     const alternativeSection = container.querySelector("#airport-alternatives") as HTMLElement;
     const contactLink = within(alternativeSection).getByRole("link", { name: /Ask me about your airport journey using the contact form below/ });
     expect(contactLink).toHaveAttribute("href", "#contact");
@@ -830,7 +855,7 @@ describe("migrated practical guides", () => {
       expect(card.querySelectorAll("p")).toHaveLength(2);
     }
     if (id === "sherut") {
-      expect(container.querySelector("header p.text-lg")?.textContent).toMatch(/^Shared shuttle taxis once operated from Ben Gurion Airport to Jerusalem and Haifa, but those regular airport services have been discontinued/);
+      expect(container.querySelector("header p.text-lg")?.textContent).toMatch(/^The regular Nesher and Amal shared taxis from Ben Gurion Airport no longer operate/);
       expect(container.querySelector("#airport-alternatives")?.querySelectorAll('[data-testid="highlighted-useful-link"]')).toHaveLength(2);
     }
     if (id === "shabbat") {
