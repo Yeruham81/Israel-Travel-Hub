@@ -200,8 +200,8 @@ export const journeyDestinationGuides = {
   "updatedAt": "2026-11-13",
   "title": "How to Get from Jerusalem to Bethlehem: Bus, Taxi & Tours",
   "description": "Compare bus 231 and 234, licensed private drivers, taxis to Checkpoint 300 and Bethlehem tours. Plan your final stop, documents and the return to Jerusalem.",
-  "intro": "Planning a trip from Jerusalem to Bethlehem? Despite the short distance, checkpoints and local travel arrangements can complicate the journey. This guide explains the different ways to get there and what to know before you go.",
-  "answer": "For an independent visit, bus 231 is generally the more direct low-cost approach towards central Bethlehem, while bus 234 takes you to Checkpoint 300 for a pedestrian crossing and onward local transport. A guided tour or an authorised private driver can simplify the return journey.",
+  "intro": "Bethlehem is only a short distance from Jerusalem, but getting there requires some planning. Here's how to travel by bus, taxi or organised tour, and what to check before you leave.",
+  "answer": "For independent travellers, bus 231 is generally the easier way to reach central Bethlehem. Bus 234 goes towards Checkpoint 300, where you cross on foot and continue by local transport. A guided tour or an authorised private driver can simplify the return journey.",
   "topics": [
     "transportation",
     "destinations",
@@ -212,7 +212,7 @@ export const journeyDestinationGuides = {
   "facts": [
     {
       "label": "Where to board",
-      "text": "East Jerusalem Arab bus area near Damascus Gate; verify the departure bay"
+      "text": "East Jerusalem bus station near Damascus Gate; check your departure point"
     },
     {
       "label": "Bus 231",
@@ -234,7 +234,7 @@ export const journeyDestinationGuides = {
       [
         "Bus 231",
         "Independent visitors seeking a lower-cost route towards central Bethlehem",
-        "Get off near Bab al-Zaqaq / Beit Jala as advised; allow for a final walk or local ride"
+        "Ask where to get off near Bab al-Zaqaq, then walk or take a local taxi to the centre"
       ],
       [
         "Bus 234",
@@ -244,7 +244,7 @@ export const journeyDestinationGuides = {
       [
         "Authorised private driver",
         "Families and groups wanting a flexible visit",
-        "Written confirmation of Jerusalem pickup, permissions, insurance, waiting and return"
+        "Confirm pickup, route permissions, insurance, waiting time and the return trip"
       ],
       [
         "Taxi to Checkpoint 300",
@@ -268,25 +268,25 @@ export const journeyDestinationGuides = {
       "id": "entry-rules",
       "title": "Before you go: Area A, entry rules and checkpoints",
       "paragraphs": [
-        "Bethlehem is in Palestinian Authority Area A, which Israeli citizens are generally prohibited from entering, including dual citizens. The entry rules for foreign visitors depend on nationality and immigration status. These restrictions explain why not every driver or vehicle can take you from Jerusalem into Bethlehem.",
-        "Carry your original passport and any relevant Israeli entry card or visa. US visitors can consult the State Department's Israel, West Bank and Gaza travel guidance for official entry and security advice."
+        "Bethlehem is in Area A of the West Bank. Israeli citizens, including dual citizens, are generally prohibited from entering. Other visitors should check the entry rules that apply to their nationality and status. Not every driver or vehicle is permitted to make the journey.",
+        "Bring your original passport and any required entry documents. If you're travelling on a US passport, check the State Department's travel advice for current entry and security information."
       ],
       "richParagraphs": [
         [
           {
-            "text": "Bethlehem is in Palestinian Authority Area A, which Israeli citizens are generally prohibited from entering, including dual citizens. The entry rules for foreign visitors depend on nationality and immigration status. These restrictions explain why not every driver or vehicle can take you from Jerusalem into Bethlehem."
+            "text": "Bethlehem is in Area A of the West Bank. Israeli citizens, including dual citizens, are generally prohibited from entering. Other visitors should check the entry rules that apply to their nationality and status. Not every driver or vehicle is permitted to make the journey."
           }
         ],
         [
           {
-            "text": "Carry your original passport and any relevant Israeli entry card or visa. US visitors can consult the "
+            "text": "Bring your original passport and any required entry documents. If you're travelling on a US passport, check the "
           },
           {
             "text": "State Department's Israel, West Bank and Gaza travel guidance",
             "href": "https://travel.state.gov/content/travel/en/international-travel/International-Travel-Country-Information-Pages/IsraeltheWestBankandGaza.html"
           },
           {
-            "text": " for official entry and security advice."
+            "text": " for current entry and security information."
           }
         ]
       ],
@@ -298,14 +298,13 @@ export const journeyDestinationGuides = {
       "id": "buses",
       "title": "By bus: choose line 231 or 234",
       "paragraphs": [
-        "East Jerusalem buses for Bethlehem leave from the Arab bus station beside Damascus Gate, not Jerusalem's western Central Bus Station. The Christian Information Center's East Jerusalem bus guide identifies the boarding area.",
-        "Line 231 passes through the Bab al-Zaqaq / Beit Jala area and is generally better for reaching central Bethlehem. Line 234 serves the Checkpoint 300 approach, where you cross on foot and arrange a local ride.",
-        "Use South Buses' routes and timetables to find departure times and the last practical bus back to Jerusalem, and its fares and payment information to see the current ticket price and accepted payment methods."
+        "Buses to Bethlehem leave from the East Jerusalem bus station near Damascus Gate, not Jerusalem Central Bus Station. The Christian Information Center's East Jerusalem bus guide identifies the boarding area.",
+        "Check South Buses' routes and timetables for departures and return services, and its fares and payment information for ticket prices and payment options."
       ],
       "richParagraphs": [
         [
           {
-            "text": "East Jerusalem buses for Bethlehem leave from the Arab bus station beside Damascus Gate, not Jerusalem's western Central Bus Station. The "
+            "text": "Buses to Bethlehem leave from the East Jerusalem bus station near Damascus Gate, not Jerusalem Central Bus Station. The "
           },
           {
             "text": "Christian Information Center's East Jerusalem bus guide",
@@ -317,33 +316,28 @@ export const journeyDestinationGuides = {
         ],
         [
           {
-            "text": "Line 231 passes through the Bab al-Zaqaq / Beit Jala area and is generally better for reaching central Bethlehem. Line 234 serves the Checkpoint 300 approach, where you cross on foot and arrange a local ride."
-          }
-        ],
-        [
-          {
-            "text": "Use "
+            "text": "Check "
           },
           {
             "text": "South Buses' routes and timetables",
             "href": "https://south-buses.com/lines-and-stations/?lang=en"
           },
           {
-            "text": " to find departure times and the last practical bus back to Jerusalem, and its "
+            "text": " for departures and return services, and its "
           },
           {
             "text": "fares and payment information",
             "href": "https://south-buses.com/?lang=en"
           },
           {
-            "text": " to see the current ticket price and accepted payment methods."
+            "text": " for ticket prices and payment options."
           }
         ]
       ],
       "subsections": [
         {
           "id": "bus-231",
-          "title": "Bus 231: the Bab al-Zaqaq approach",
+          "title": "Bus 231: via Beit Jala towards central Bethlehem",
           "paragraphs": [
             "Line 231 serves Bab al-Zaqaq near Beit Jala, which is closer to central Bethlehem than the Checkpoint 300 approach.",
             "Ask the driver which stop best serves the Church of the Nativity. You may still need to walk or take a local taxi to reach Manger Square."
