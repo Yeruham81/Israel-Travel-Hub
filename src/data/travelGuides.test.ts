@@ -1,6 +1,9 @@
 import { describe, expect, it } from "vitest";
 import { filterGuides, getGuideTopicLabel, guideDirectory, guideTopics, isGuideTopic, travelGuides } from "@/data/travelGuides";
 import { formatCheckDate } from "@/data/registry";
+import { itineraryIds, itineraries } from "@/data/israelItineraries";
+import { migrationPhotos } from "@/data/guideMigrationPhotos";
+import { uniqueGuideCardPhotos } from "@/lib/guide-card-photos";
 
 describe("travel guide topic filters and prerender safety", () => {
   it("uses different locations in the 3-, 5- and 10-day itinerary directory photos", () => {
@@ -10,6 +13,21 @@ describe("travel guide topic filters and prerender safety", () => {
     expect(byId("3").alt).toMatch(/Jerusalem/);
     expect(byId("5").alt).toMatch(/Caesarea/);
     expect(byId("10").alt).toMatch(/Akko/);
+    expect(itineraries["3"].hero).toBe("itinerary-3day-holy-sepulchre");
+    expect(itineraries["5"].hero).toBe("itinerary-5day-caesarea");
+    expect(itineraries["7"].hero).toBe("EXISTING:galilee");
+    expect(itineraries["10"].hero).toBe("itinerary-10day-akko-aerial");
+
+    for (const id of itineraryIds) {
+      expect(byId(id).src).toBe(migrationPhotos[itineraries[id].hero].src);
+    }
+    const cards = itineraryIds.map((id) => ({
+      guide: guideDirectory.find((entry) => entry.id === `israel-itinerary-${id}`)!,
+    }));
+    const rendered = uniqueGuideCardPhotos(cards);
+    expect(rendered.map((entry) => entry.cardPhoto?.src))
+      .toEqual(cards.map((entry) => entry.guide.photo?.src));
+    expect(new Set(rendered.map((entry) => entry.cardPhoto?.src)).size).toBe(4);
   });
 
   it("defines a label for every directory topic and accepts every valid topic", () => {
