@@ -101,12 +101,12 @@ function JerusalemRailDetails({ guide }: { guide: AirportJourneyGuide }) {
           <Lightbulb aria-hidden="true" className="mt-0.5 h-5 w-5 shrink-0 fill-amber-200/70 text-amber-600 dark:fill-amber-500/25 dark:text-amber-400" />
           <h4 className="text-xl font-semibold">Jerusalem train: free personal voucher</h4>
         </div>
-        <p className="mt-2">Israel Railways' August 19, 2026 notice requires each passenger to obtain a <strong>free personal voucher for the selected Jerusalem train, in addition to a valid ticket</strong>. Check the current requirement before travelling.</p>
+        <p className="mt-2">Israel Railways has required a <strong>free personal voucher for the selected Jerusalem train, in addition to a valid ticket</strong>. Check the current requirement and instructions before travelling.</p>
         <p className="mt-3 flex flex-wrap gap-x-5 gap-y-2 text-sm">
           <a href="https://rail.co.il/?lan=en&page=vouchers-jerusalem" className="font-semibold text-primary underline underline-offset-4" target="_blank" rel="noopener noreferrer">Official voucher instructions</a>
           <a href="https://www.rail.co.il/" className="font-semibold text-primary underline underline-offset-4" target="_blank" rel="noopener noreferrer">Check the train timetable and fare</a>
         </p>
-        <p className="mt-2 text-sm">A revised Israel Railways timetable is scheduled to start on November 14, 2026. Use the date-specific planner rather than a fixed departure interval.</p>
+        <p className="mt-2 text-sm">Train times and departure intervals can change. Check the Israel Railways timetable for your travel date.</p>
       </aside>
       <h4 className="mt-8 text-xl font-semibold">From Jerusalem–Yitzhak Navon station to your hotel</h4>
       <p className="mt-3 leading-relaxed"><GuideParagraph paragraph={guide.trainIntro} inlineLinks={guide.stationLinks} /></p>
@@ -180,7 +180,7 @@ function HaifaRailDetails({ guide }: { guide: AirportJourneyGuide }) {
         </table>
       </div>
       <h4 className="mt-8 text-xl font-semibold">From the station to your hotel, Mount Carmel or Haifa Port</h4>
-      <p className="mt-3 leading-relaxed">The railway follows the coastline, while much of Haifa rises steeply up Mount Carmel. Your last connection may matter more than the difference between two train stops, particularly with luggage or a cruise departure.</p>
+      <p className="mt-3 leading-relaxed">The railway follows the coastline, while much of Haifa rises steeply up Mount Carmel. The journey from the station to your hotel or cruise terminal may take longer than expected, especially with luggage.</p>
       {guide.photos?.onward && <figure className="mt-5 max-w-3xl">
         <img src={guide.photos.onward.src} alt={guide.photos.onward.alt} width={755} height={503} loading="lazy" decoding="async" className="aspect-[3/2] max-h-96 w-full rounded-xl object-cover" />
       </figure>}
@@ -188,7 +188,6 @@ function HaifaRailDetails({ guide }: { guide: AirportJourneyGuide }) {
       <p className="mt-4 text-sm leading-relaxed">For specific neighborhood and hotel choices, read my <Link to="/travel-blog/best-hotels-in-haifa/" className="font-semibold text-primary underline underline-offset-4">where to stay in Haifa guide</Link>. If you are boarding a cruise, see the <Link to="/haifa-shore-excursions/" className="font-semibold text-primary underline underline-offset-4">Haifa port and shore excursions guide</Link> and verify the ship's check-in instructions.</p>
       <aside className="mt-7 rounded-2xl border bg-secondary/40 p-5 sm:p-6" aria-label={guide.exampleJourney.title}>
         <h4 className="text-xl font-semibold">{guide.exampleJourney.title}</h4>
-        <p className="mt-2 text-sm text-muted-foreground">An illustrative planning example, not a guaranteed connection or live timetable.</p>
         <ol className="mt-4 space-y-3">{guide.exampleJourney.steps.map((step, index) => <li key={step.label} className="flex gap-3">
           <span className="font-semibold text-primary">{index + 1}.</span><div><strong>{step.label}</strong><p className="mt-1 text-sm leading-relaxed text-muted-foreground">{step.detail}</p></div>
         </li>)}</ol>
@@ -209,7 +208,7 @@ function EinBokekPublicTransportDetails({ guide }: { guide: AirportJourneyGuide 
       </figure>}
       <UsefulJourneyLink label="Jerusalem train: free personal voucher instructions" href="https://rail.co.il/?lan=en&page=vouchers-jerusalem" context="Israel Railways' August 2026 notice requires a separate, free voucher for each passenger on the selected Jerusalem train, in addition to a valid ticket. Check the current rule before travelling." />
       <h4 className="mt-8 text-xl font-semibold">Step 2: Change to an Egged bus at Jerusalem Central Bus Station</h4>
-      <p className="mt-3 leading-relaxed">Jerusalem–Yitzhak Navon railway station is deep underground. Allow time for lifts, the walk to Jerusalem Central Bus Station and its intercity platforms. Bus 486 serves the Dead Sea hotel area; reserved-seat bus 444 to Eilat may offer another departure. Neither is a guaranteed connection with the airport train. Check the last southbound departure before choosing your flight-to-train itinerary.</p>
+      <p className="mt-3 leading-relaxed">Jerusalem–Yitzhak Navon railway station is deep underground. Allow time for lifts, the walk to Jerusalem Central Bus Station and its intercity platforms. Bus 486 serves the Dead Sea hotel area; reserved-seat bus 444 to Eilat may offer another departure. The buses are not coordinated with airport train arrivals. Check the last bus to Ein Bokek and leave enough time to change in Jerusalem.</p>
       <div role="region" aria-label="Airport-to-Ein-Bokek public transport legs" tabIndex={0} className="mt-5 max-w-full overflow-x-auto rounded-xl border">
         <table className="w-full min-w-[590px] text-left text-sm">
           <caption className="sr-only">Ben Gurion Airport to Ein Bokek: train, transfer and bus journey stages</caption>
@@ -219,7 +218,7 @@ function EinBokekPublicTransportDetails({ guide }: { guide: AirportJourneyGuide 
           </tr>)}</tbody>
         </table>
       </div>
-      <UsefulJourneyLink label="Check the last 486 or 444 bus to the Dead Sea" href="https://bus.gov.il/" context="Select your actual travel date and the stop nearest your hotel; work backwards to the airport train with a generous transfer margin." />
+      <UsefulJourneyLink label="Check the last 486 or 444 bus to the Dead Sea" href="https://bus.gov.il/" context="Check the last bus to your hotel, then choose an airport train that leaves enough time for the connection." />
       <UsefulJourneyLink label="Egged — reserve seats on bus 444 (or limited 421)" href="https://www.egged.co.il/en/information-for-passengers/tickets-information" context="The operator lists these as reserved-seat services. Check seat availability and the correct departure stop before depending on either route." />
       <h4 className="mt-8 text-xl font-semibold">Step 3: Get off at the correct Dead Sea hotel stop</h4>
       <p className="mt-3 leading-relaxed">Ein Bokek, Hamei Zohar and Neve Zohar have different stops along the hotel area; Ein Gedi and Masada are separate destinations. Confirm the exact stop for your hotel and the final walk with luggage, especially during the hottest hours of the day.</p>
@@ -229,10 +228,10 @@ function EinBokekPublicTransportDetails({ guide }: { guide: AirportJourneyGuide 
       <ul className="mt-4 list-disc space-y-2 pl-5 leading-relaxed">{guide.connections.map(connection => <li key={connection}>{connection}</li>)}</ul>
       <p className="mt-4 text-sm leading-relaxed">For the exact resort location, compare my <Link to="/travel-blog/best-dead-sea-hotels/" className="font-semibold text-primary underline underline-offset-4">Dead Sea hotels guide</Link>. If you are starting your trip in Jerusalem instead of changing trains there, consult <Link to="/travel-blog/jerusalem-to-the-dead-sea/" className="font-semibold text-primary underline underline-offset-4">Jerusalem to the Dead Sea</Link>.</p>
       <h4 className="mt-8 text-xl font-semibold">A limited alternative: bus 421 via Tel Aviv–Savidor</h4>
-      <p className="mt-3 leading-relaxed">Egged also lists the reserved-seat bus 421 from Tel Aviv toward the Dead Sea. This is not a direct airport bus: you would first travel by train to Tel Aviv–Savidor and arrange the separately booked 421 departure. Its timetable is limited, so use it only when the connection is confirmed and better than the Jerusalem route. See my <Link to="/travel-blog/how-to-get-from-ben-gurion-airport-to-tel-aviv/" className="font-semibold text-primary underline underline-offset-4">airport-to-Tel-Aviv guide</Link> for the rail arrival leg.</p>
+      <p className="mt-3 leading-relaxed">Bus 421 is another limited option from Tel Aviv–Savidor to the Dead Sea. You would first need to reach Savidor by train from the airport and reserve your bus seat separately. Use this route only if the timetable works better than travelling via Jerusalem. See my <Link to="/travel-blog/how-to-get-from-ben-gurion-airport-to-tel-aviv/" className="font-semibold text-primary underline underline-offset-4">airport-to-Tel-Aviv guide</Link> for the rail arrival leg.</p>
       <aside className="mt-7 rounded-2xl border bg-secondary/40 p-5 sm:p-6" aria-label={guide.exampleJourney.title}>
         <h4 className="text-xl font-semibold">{guide.exampleJourney.title}</h4>
-        <p className="mt-2 text-sm text-muted-foreground">Illustrative planning sequence, not a confirmed timetable, through ticket or guaranteed connection.</p>
+        <p className="mt-2 text-sm text-muted-foreground">Example only — check current train and bus times before travelling.</p>
         <ol className="mt-4 space-y-3">{guide.exampleJourney.steps.map((step, index) => <li key={step.label} className="flex gap-3">
           <span className="font-semibold text-primary">{index + 1}.</span>
           <div><strong>{step.label}</strong><p className="mt-1 text-sm leading-relaxed text-muted-foreground">{step.detail}</p></div>
@@ -259,11 +258,11 @@ function OptionSection({ option, guideId }: { option: JourneyOption; guideId: Ai
       {guideId === "jerusalem" && option.id === "taxi" && <UsefulJourneyLink label="Official airport taxi pickup instructions" href="https://www.gett.com/il/airport-en/" context="Check the ride-code procedure and the pickup point for your terminal." />}
       {guideId === "jerusalem" && option.id === "bus" && <UsefulJourneyLink label="Check bus 485 departures" href="https://bus.gov.il/" context="Find the actual timetable and boarding stop for your travel date." />}
       {inlinePrivate && <UsefulJourneyLink label="Send me a message using the form below" href="#request-quote" context="Share your flight, destination and luggage details. I'll confirm availability and the price before you book." />}
-      {guideId === "tel-aviv" && option.id === "rail" && <UsefulJourneyLink label="Check train times and fares" href="https://www.rail.co.il/" context="Select the Tel Aviv station closest to your hotel and recheck the timetable for your arrival date, especially after November 14, 2026." />}
+      {guideId === "tel-aviv" && option.id === "rail" && <UsefulJourneyLink label="Check train times and fares" href="https://www.rail.co.il/" context="Choose the station with the easiest connection to your hotel, and check train times for your arrival date." />}
       {guideId === "tel-aviv" && option.id === "taxi" && <UsefulJourneyLink label="Official Gett airport taxi instructions" href="https://www.gett.com/il/airport-en/" context="Get your ride code and confirm the correct taxi queue at the terminal." />}
       {guideId === "tel-aviv" && option.id === "bus" && <UsefulJourneyLink label="Check bus 445 stops and departures" href="https://bus.gov.il/" context="Find the actual route, fare and closest stop to your hotel; board at Terminal 3, Level 2, Exit 21." />}
       {guideId === "tel-aviv" && option.id === "weekend" && <UsefulJourneyLink label="Free Line 711 — stop-by-stop timetable" href="https://busofash.co.il/?lines=711" context="Check Terminal 1 stop 34609 and the Tel Aviv-bound departure on your Friday or Saturday." />}
-      {guideId === "haifa" && option.id === "rail" && <UsefulJourneyLink label="Israel Railways — check trains and fares" href="https://www.rail.co.il/" context="Check the exact Haifa station, ticket cost and live service, particularly with the nationwide timetable change planned for November 14, 2026." />}
+      {guideId === "haifa" && option.id === "rail" && <UsefulJourneyLink label="Israel Railways — check trains and fares" href="https://www.rail.co.il/" context="Check the Haifa station, ticket price and train service for your travel date." />}
       {guideId === "haifa" && option.id === "taxi" && <UsefulJourneyLink label="Official Gett airport taxi pickup" href="https://www.gett.com/il/airport-en/" context="Get the ride code and follow the authorized taxi queue: Terminal 3 Exit 03, or the main arrivals exit at Terminal 1." />}
       {guideId === "haifa" && option.id === "bus" && <UsefulJourneyLink label="Verify Egged bus 905 departures" href="https://bus.gov.il/" context="Check the dated Saturday-night or early-Sunday timetable, Terminal 3 Level 2 or Terminal 1 stop, and your Haifa drop-off." />}
       {guideId === "ein-bokek" && option.id === "taxi" && <UsefulJourneyLink label="Official Gett airport taxi pickup instructions" href="https://www.gett.com/il/airport-en/" context="Get your ride code at the airport and follow the official queue; ask the driver to confirm the exact Ein Bokek or Neve Zohar hotel." />}
@@ -322,7 +321,7 @@ export function AirportJourneyPage({ id }: { id: AirportJourneyId }) {
 
   const sourceBlock = (
   <SourcesDisclosure>
-          <p className="mt-3 text-sm text-muted-foreground">Schedules, routes, meeting points, fares and access can change. Refer to official provider pages for actual travel dates. {id === "jerusalem" ? "Train and taxi figures are indicative estimates; check the live train fare, voucher and regulated metered tariff before travelling." : g.historicalPrices === false ? "Displayed rail and bus costs are not price quotes; verify current prices before travel." : "Cost ranges are historical August 2026 editorial estimates, not verified current fares."}</p>
+          <p className="mt-3 text-sm text-muted-foreground">Check official schedules, fares and pickup points for your travel date. {id === "jerusalem" ? "Train and taxi figures are indicative estimates; check the live train fare, voucher and regulated metered tariff before travelling." : g.historicalPrices === false ? "Displayed rail and bus costs are not price quotes; verify current prices before travel." : "Cost ranges are historical August 2026 editorial estimates, not verified current fares."}</p>
           <ul className="mt-4 grid gap-3 sm:grid-cols-2">{(g.sources || sources).map(s=><li key={s.url}><a className="block rounded-lg border bg-card p-4 font-medium text-primary underline" href={s.url} target="_blank" rel="noopener noreferrer">{s.title} <span className="sr-only">(opens a new tab)</span></a></li>)}
   
           </ul>
@@ -339,7 +338,6 @@ export function AirportJourneyPage({ id }: { id: AirportJourneyId }) {
             {!focusedLayout && <GuidePhotoCredit photo={g.photo} />}
           </GuideHeroMedia>
         }>
-          <p className="eyebrow">Independent transport comparison · Ben Gurion Airport (TLV)</p>
           <h1 className="guide-page-title mt-3">{g.title}</h1>
           <p data-guide-intro className="mt-4 max-w-3xl text-lg leading-relaxed text-foreground">{g.intro}</p>
           {focusedLayout ? <PageUpdated date={g.updatedAt || PUBLISHED_REVIEW} /> : <p className="mt-3 text-sm text-muted-foreground">Approximate distance: {g.distance} · Editorial review: {g.updatedAt || PUBLISHED_REVIEW}</p>}
@@ -353,7 +351,7 @@ export function AirportJourneyPage({ id }: { id: AirportJourneyId }) {
       </section>
       <OnThisPage sections={links} />
       <Section id="comparison" title={"Compare all ways from TLV Airport to " + g.city}>
-        <p>{focusedLayout ? "Compare the main options, including the onward journey to your hotel." : "Choose by the full journey to your address, not only the lowest fare or the fastest station-to-station time. The figures below are planning estimates, not real-time quotes."}</p>
+        {!focusedLayout && <p>Choose by the full journey to your address, not only the lowest fare or the fastest station-to-station time. The figures below are planning estimates, not real-time quotes.</p>}
         <div role="region" aria-label={"Travel options to " + g.city} tabIndex={0} className="mt-5 max-w-full overflow-x-auto rounded-xl border bg-card">
           {focusedLayout ? (
             <table className="min-w-[660px] w-full text-left text-sm">
@@ -385,7 +383,7 @@ export function AirportJourneyPage({ id }: { id: AirportJourneyId }) {
           )}
         </div>
         {focusedLayout ? (
-          <p className="mt-3 text-sm text-muted-foreground">Final taxi fares depend on the regulated tariff period, distance, journey time, traffic and extras. Schedules may change; check the journey planner for actual train and bus times and fares. My listed private-transfer starting price is for a one-way weekday trip per vehicle for up to four passengers, with possible extra charges.</p>
+          <p className="mt-3 text-sm text-muted-foreground">Taxi fares are metered, and public transport schedules and prices can change. Check current fares and departure times before travelling. My private-transfer starting price is per vehicle, one way, on weekdays for up to four passengers; extra charges may apply.</p>
         ) : (        <p className="mt-3 text-sm"><strong>*Price and time note:</strong> {g.historicalPrices === false ? "The train and bus prices must be checked in the official planner for your travel date; this guide does not quote an unverified current fare. " : "₪ ranges are historical editorial estimates from August 2026; they are not current verified fares. "}Train and bus prices are per passenger; official taxis use the regulated meter, and rental totals depend on dates. My displayed starting price is a one-way weekday <strong>per-vehicle</strong> rate for up to four passengers with possible extra charges. All schedules can change. Check the operator and any written quote before you travel.</p>)}
       </Section>
       {!focusedLayout && <PrivateRideCta id={id}/>}
@@ -404,7 +402,7 @@ export function AirportJourneyPage({ id }: { id: AirportJourneyId }) {
       <Section id="tips" title="Practical tips to avoid missed connections and extra costs">
         <ul className="list-disc space-y-3 pl-5">{g.advice.map(t=><li key={t}>{t}</li>)}</ul>
         <p>For first-time arrivals, read my <Link to="/travel-blog/ben-gurion-airport-arrival-tips/" className="text-primary underline">airport arrivals checklist</Link> and save the operator's contact details offline.</p>
-        {(id === "tel-aviv" || id === "haifa" || id === "ein-bokek") && <p className="mt-4 text-sm leading-relaxed">Need mobile data for railway updates, maps or taxi apps? Compare activation and coverage options in my <Link to="/travel-blog/best-esim-for-israel/" className="font-semibold text-primary underline underline-offset-4">Israel eSIM guide</Link> before you land.</p>}
+        {(id === "tel-aviv" || id === "haifa" || id === "ein-bokek") && <p className="mt-4 text-sm leading-relaxed">Need mobile data for maps and transport apps? See my <Link to="/travel-blog/best-esim-for-israel/" className="font-semibold text-primary underline underline-offset-4">Israel eSIM guide</Link> before you land.</p>}
       </Section>
       <FaqList faqs={g.faqs}/>
       {!focusedLayout && sourceBlock}
