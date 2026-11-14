@@ -659,7 +659,7 @@ describe("migrated Israel itineraries", () => {
     expect(guide.daysPlan[2]?.morning).toMatch(/no trains run/i);
     for (const id of ["7", "10"] as const) expect(itineraries[id].day3Options).toBeUndefined();
     expect(itineraries["10"].daySequences?.map(item => item.day)).toEqual([1,2,3,4,5,6,7,8,9,10]);
-    expect(itineraries["10"].dayOfficialLinks).toHaveLength(7);
+    expect(itineraries["10"].dayOfficialLinks).toHaveLength(8);
     expect(itineraries["10"].beforeYouGoOfficialLinks).toHaveLength(2);
     const expectedLinks = [
       "/travel-blog/old-city-jerusalem/",
