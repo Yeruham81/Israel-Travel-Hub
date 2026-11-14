@@ -25,10 +25,21 @@ export function offersForTour(productId: string, pageId?: string) {
     return [{ ...offer, partner, provider: { ...provider, url: trackingUrl || offer.publicUrl, isAffiliate: Boolean(trackingUrl) } }];
   });
 }
+/** Editorial food additions are featured in the dedicated food catalog; do not silently
+ * expand the already-reviewed Jerusalem and Tel Aviv eight-card city shortlists.
+ * The four previously shared food products retain their city listings.
+ */
+const foodOnlyProductIds = new Set([
+  "levinsky-market-tasting",
+  "jerusalem-private-market-food",
+  "jerusalem-market-food-walk",
+  "carmel-market-cooking",
+]);
 export function toursForCategory(categoryId?: TourCategoryId) {
   const match = categoryId ? getTourCategory(categoryId).match : undefined;
   return tourProducts.filter(tour => tour.status === "published" && operators.some(operator => operator.id === tour.operatorId)
     && (isOwnerTour(tour) || offersForTour(tour.id).length > 0)
+    && (!categoryId || categoryId === "food-markets" || !foodOnlyProductIds.has(tour.id))
     && (!match?.destinations?.length || tour.destinationIds.some(id => match.destinations!.includes(id)))
     // A Bethlehem/Jericho itinerary with a brief Dead Sea stop does not belong in the Masada tour catalog.
     && (categoryId !== "masada-dead-sea" || !tour.destinationIds.includes("bethlehem"))
