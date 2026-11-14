@@ -1205,8 +1205,8 @@ telAviv: {
       {
         id: "taxis", title: "Licensed taxis and taxi-booking apps",
         paragraphs: [
-          "A licensed taxi is useful for a late return, a journey with suitcases, travel during Shabbat or any route where connections are inconvenient. You can arrange one through a local taxi-booking app such as Gett where available, use a taxi stand or ask your accommodation to call a licensed driver.",
-          "Confirm the exact pickup point, whether the displayed fare is an estimate or an agreed total, how the meter applies and which payment methods are accepted. Ask about luggage or child seats in advance, and request a suitable accessible vehicle if required. As of November 2026, Uber and Lyft passenger booking services are not operating in Israel; the Uber alternatives guide explains the distinction.",
+          "A taxi is convenient for late journeys, heavy luggage, Shabbat travel or destinations that are difficult to reach by public transport. Use Gett where available, a taxi stand or your hotel to arrange a licensed driver.",
+          "Confirm your pickup point, fare type and payment method before travelling. Arrange extra luggage space, child seats or an accessible vehicle in advance. Uber and Lyft do not currently offer passenger rides in Israel. See my Uber alternatives guide for local booking options.",
         ],
         inlineLinks: [
           { text: "Uber alternatives guide", to: travelGuidePaths.uber },
@@ -1220,8 +1220,8 @@ telAviv: {
       {
         id: "shared-taxis", title: "Are shared taxis (sherut) useful in Tel Aviv?",
         paragraphs: [
-          "A sherut is a route-based shared vehicle, not the same as an individually booked licensed taxi. Some local corridors may operate when regular buses do not, but the routes, stops, fares and operating times differ. Do not assume that a historic route is still running or that every shared vehicle can be hailed anywhere.",
-          "If you plan to use one, identify the currently operating route, direction and payment method and verify your return. In particular, former airport shared-taxi arrangements should not be presented as a current automatic connection. Read the sherut guide for the wider distinction and alternatives.",
+          "A sherut is a shared taxi or minibus that follows a set route, rather than a private taxi hired for your journey. Some local routes operate when regular buses do not, but stops, fares and hours vary. Check whether the route still operates and where passengers can board.",
+          "Before travelling, confirm the sherut route, direction, fare, payment method and return service. See my sherut guide for more on local routes and airport alternatives.",
         ],
         inlineLinks: [{ text: "sherut guide", to: travelGuidePaths.sherut }],
         sourceIds: ["guide-sherut-regulation"],
@@ -1229,8 +1229,8 @@ telAviv: {
       {
         id: "bikes", title: "Bicycles and electric scooters",
         paragraphs: [
-          "Cycling can be a pleasant way to cover the promenade, selected park routes and streets with proper bicycle infrastructure. Shared bikes and scooters generally require the operator's app, identity/payment setup and compliance with the operator's parking or service-area rules. Availability is not guaranteed at every corner.",
-          "Israeli rules for electric bicycles and scooters include a minimum age of 16 and a qualification requirement. Helmets are mandatory on electric devices, riding on ordinary pedestrian pavements is prohibited, and passengers must not be carried on electric scooters. Use marked bike lanes; where absent, follow the legal road rules and take extra care at junctions. Visitors should check their eligibility before renting, rather than treating a foreign driver's licence as automatic proof.",
+          "Cycling is a convenient way to explore the promenade, parks and streets with designated bike lanes. To rent a shared bike or scooter, you'll usually need the operator's app and a payment method. Check where you're allowed to ride and park.",
+          "Riders of electric bikes and scooters must be at least 16 and meet the applicable Israeli qualification requirements. Helmets are mandatory, riding on ordinary pedestrian pavements is prohibited, and electric scooters cannot carry passengers. Use designated bike lanes where available, follow the road rules and take extra care at junctions. Check the legal requirements before renting; a foreign driving licence may not be enough on its own.",
         ],
         bullets: [
           "Check the app's allowed parking zone and finish the rental correctly.",
@@ -1244,9 +1244,9 @@ telAviv: {
       {
         id: "shabbat", title: "Getting around Tel Aviv on Shabbat and holidays",
         paragraphs: [
-          "Regular Israeli buses, Israel Railways and the Red Line light rail generally do not run during Shabbat. Tel Aviv and partner municipalities operate a separate free weekend network called Na'im Busofash on selected routes. It does not cover all weekday destinations, and its stops and schedule must be checked independently.",
-          "As of November 2026, the operator lists 17 weekend lines and general service hours of Friday from 16:30 to 02:00 and Saturday from 09:00 to 17:30. Service hours, holiday operation and routes can change, so use the official live map or journey apps before departing. The municipality lists Line 711 between Shoham and central Tel Aviv via Ben Gurion Airport Terminal 1; do not assume that this stops at Terminal 3 or replaces ordinary airport transfers.",
-          "If the free weekend network does not fit the journey, consider a licensed taxi, walking or a prearranged ride. For flights, see the dedicated Ben Gurion Airport on Shabbat guide and confirm terminal access and luggage requirements separately.",
+          "Regular buses, trains and the Red Line generally do not operate during Shabbat. Tel Aviv and nearby municipalities provide free weekend buses through the Na'im Busofash network. It covers selected routes only, so check the map and timetable before travelling.",
+          "The weekend bus network operates selected routes on Friday afternoons, Friday nights and Saturdays. Check the official map for current routes and operating hours. Bus 711 serves Ben Gurion Airport Terminal 1 on selected departures, not Terminal 3 directly. Check the timetable and terminal connection before relying on it.",
+          "If the weekend buses don't serve your destination, consider walking, a licensed taxi or a pre-booked ride. For flights, see my Ben Gurion Airport on Shabbat guide and check terminal access and luggage requirements.",
         ],
         inlineLinks: [{ text: "Ben Gurion Airport on Shabbat guide", to: travelGuidePaths.shabbat }],
         tables: [{
@@ -1270,16 +1270,16 @@ telAviv: {
       {
         id: "driving", title: "Should I rent a car or park in Tel Aviv?",
         paragraphs: [
-          "For central sightseeing, a car is often less convenient than walking, local transport and occasional taxis. It becomes more useful when your trip includes several stops outside the city, rural areas or destinations with limited transit.",
-          "Parking in Tel Aviv is constrained and often paid. A blue-and-white curb is not a promise of free parking: read the sign at the actual space for hours, payment and local permit restrictions. Before renting, compare insurance, deposits, allowed roads and pickup/return opening times, especially near holidays.",
+          "You usually don't need a car for sightseeing in central Tel Aviv. Consider renting one if you're visiting several destinations outside the city.",
+          "Parking in Tel Aviv can be difficult and expensive. Blue-and-white street parking is not necessarily free, so check the signs for payment hours and permit restrictions. Before renting, compare insurance, deposits, permitted roads and rental desk hours, especially near holidays.",
         ],
         sourceIds: ["guide-telaviv-transit"],
       },
       {
         id: "accessibility", title: "Accessibility, navigation apps and final planning",
         paragraphs: [
-          "If you travel with a wheelchair, stroller or heavy luggage, check the entire route: pavement, platform entrance, working lift, service vehicle and final destination. Some bus or rail services offer level access, but the route may depend on a particular station exit or vehicle. Request an appropriately equipped licensed taxi in advance rather than assuming every available taxi can carry a wheelchair.",
-          "Route planners help you compare alternatives, but live information can be incomplete during diversions and special events. Google Maps or Moovit can help with walking and route options; use the operator or Israel Railways site for authoritative station, fare and service alerts. For a longer journey beyond Tel Aviv, refer to my getting around Israel guide.",
+          "If you're travelling with a wheelchair, stroller or heavy luggage, check station lifts, accessible entrances and the final route to your destination. Accessibility varies between stations and vehicles. If you need a wheelchair-accessible taxi, book a suitable vehicle in advance.",
+          "Route-planning apps are useful, but may not immediately reflect road closures or special events. Use Google Maps or Moovit to compare routes, and check official transport websites for service changes and fares. For travel beyond Tel Aviv, see my getting around Israel guide.",
         ],
         inlineLinks: [{ text: "getting around Israel guide", to: travelGuidePaths.israel }],
         tables: [{
