@@ -180,6 +180,20 @@ describe("tours hub and SEO category pages", () => {
 
   });
 
+  it("offers eight distinct tours on each newly upgraded category page", () => {
+    for (const id of ["food-markets", "eilat-red-sea"] as const) {
+      const tours = toursForCategory(id).filter(tour => !isOwnerTour(tour));
+      expect(tours, id).toHaveLength(8);
+      expect(new Set(tours.map(tour => tour.id)).size).toBe(8);
+      expect(new Set(tours.map(tour => tourPhotos[tour.id]!.src)).size).toBe(8);
+      for (const tour of tours) {
+        const offer = offersForTour(tour.id, `tours-${id}`)[0]!;
+        expect(offer.publicUrl).toMatch(/^https:\/\/(www\.viator\.com|www\.getyourguide\.com)\//);
+        expect(offer.provider.url).toMatch(/^https:\/\//);
+      }
+    }
+  });
+
   it("renders every complete category and resolves all guide, category and product-anchor links", async () => {
     for (const category of tourCategories) {
       const router = routerAt(tourCategoryPaths[category.id]);
@@ -189,9 +203,9 @@ describe("tours hub and SEO category pages", () => {
       const doc = new DOMParser().parseFromString(renderToString(<RouterContextProvider router={router}><Page /></RouterContextProvider>), "text/html");
       expect(doc.querySelectorAll("h1"), category.id).toHaveLength(1);
       expect(doc.querySelectorAll('[data-testid="tour-card"]').length, category.id).toBeGreaterThanOrEqual(2);
-      if (category.id === "jerusalem" || category.id === "tel-aviv-jaffa" || category.id === "masada-dead-sea" || category.id === "bethlehem-jericho" || category.id === "nazareth-galilee" || category.id === "northern-coast" || category.id === "negev-ramon" || category.id === "golan-heights") {
-        const localId = category.id === "jerusalem" ? "jerusalem-local-h" : category.id === "tel-aviv-jaffa" ? "tel-aviv-local-h" : category.id === "masada-dead-sea" ? "masada-local-h" : category.id === "bethlehem-jericho" ? "bethlehem-local-h" : category.id === "nazareth-galilee" ? "galilee-local-h" : category.id === "northern-coast" ? "northern-coast-local-h" : category.id === "negev-ramon" ? "negev-local-h" : "golan-local-h";
-        const planningId = category.id === "jerusalem" ? "jerusalem-planning-h" : category.id === "tel-aviv-jaffa" ? "tel-aviv-planning-h" : category.id === "masada-dead-sea" ? "masada-planning-h" : category.id === "bethlehem-jericho" ? "bethlehem-planning-h" : category.id === "nazareth-galilee" ? "galilee-planning-h" : category.id === "northern-coast" ? "northern-coast-planning-h" : category.id === "negev-ramon" ? "negev-planning-h" : "golan-planning-h";
+      if (category.id === "jerusalem" || category.id === "tel-aviv-jaffa" || category.id === "masada-dead-sea" || category.id === "bethlehem-jericho" || category.id === "nazareth-galilee" || category.id === "northern-coast" || category.id === "negev-ramon" || category.id === "golan-heights" || category.id === "food-markets" || category.id === "eilat-red-sea") {
+        const localId = category.id === "jerusalem" ? "jerusalem-local-h" : category.id === "tel-aviv-jaffa" ? "tel-aviv-local-h" : category.id === "masada-dead-sea" ? "masada-local-h" : category.id === "bethlehem-jericho" ? "bethlehem-local-h" : category.id === "nazareth-galilee" ? "galilee-local-h" : category.id === "northern-coast" ? "northern-coast-local-h" : category.id === "negev-ramon" ? "negev-local-h" : category.id === "golan-heights" ? "golan-local-h" : category.id === "food-markets" ? "food-local-h" : "eilat-local-h";
+        const planningId = category.id === "jerusalem" ? "jerusalem-planning-h" : category.id === "tel-aviv-jaffa" ? "tel-aviv-planning-h" : category.id === "masada-dead-sea" ? "masada-planning-h" : category.id === "bethlehem-jericho" ? "bethlehem-planning-h" : category.id === "nazareth-galilee" ? "galilee-planning-h" : category.id === "northern-coast" ? "northern-coast-planning-h" : category.id === "negev-ramon" ? "negev-planning-h" : category.id === "golan-heights" ? "golan-planning-h" : category.id === "food-markets" ? "food-planning-h" : "eilat-planning-h";
         expect(doc.querySelectorAll(`section[aria-labelledby="${localId}"] a.group img`)).toHaveLength(6);
         expect(doc.querySelectorAll(`section[aria-labelledby="${planningId}"] a.group`)).toHaveLength(6);
       } else {
@@ -206,14 +220,14 @@ describe("tours hub and SEO category pages", () => {
         expect(card.id).toBe(id);
         const tour = tourProducts.find(tour => tour.id === id)!;
         expect(tour.operatorId).not.toBe("moshe-barak");
-        if (category.id !== "jerusalem" && category.id !== "tel-aviv-jaffa" && category.id !== "masada-dead-sea" && category.id !== "bethlehem-jericho" && category.id !== "nazareth-galilee" && category.id !== "northern-coast" && category.id !== "negev-ramon" && category.id !== "golan-heights") expect(card.textContent).toContain("Operated by");
+        if (category.id !== "jerusalem" && category.id !== "tel-aviv-jaffa" && category.id !== "masada-dead-sea" && category.id !== "bethlehem-jericho" && category.id !== "nazareth-galilee" && category.id !== "northern-coast" && category.id !== "negev-ramon" && category.id !== "golan-heights" && category.id !== "food-markets" && category.id !== "eilat-red-sea") expect(card.textContent).toContain("Operated by");
         else expect(card.textContent).toMatch(/Viator|GetYourGuide/);
         for (const link of card.querySelectorAll('a[target="_blank"]')) {
           expect(link.getAttribute("rel")?.split(/\s+/)).toEqual(expect.arrayContaining(["noopener", "noreferrer"]));
         }
       }
-      if (category.id === "jerusalem" || category.id === "tel-aviv-jaffa" || category.id === "masada-dead-sea" || category.id === "bethlehem-jericho" || category.id === "nazareth-galilee" || category.id === "northern-coast" || category.id === "negev-ramon" || category.id === "golan-heights") {
-        const localId = category.id === "jerusalem" ? "jerusalem-local-h" : category.id === "tel-aviv-jaffa" ? "tel-aviv-local-h" : category.id === "masada-dead-sea" ? "masada-local-h" : category.id === "bethlehem-jericho" ? "bethlehem-local-h" : category.id === "nazareth-galilee" ? "galilee-local-h" : category.id === "northern-coast" ? "northern-coast-local-h" : category.id === "negev-ramon" ? "negev-local-h" : "golan-local-h";
+      if (category.id === "jerusalem" || category.id === "tel-aviv-jaffa" || category.id === "masada-dead-sea" || category.id === "bethlehem-jericho" || category.id === "nazareth-galilee" || category.id === "northern-coast" || category.id === "negev-ramon" || category.id === "golan-heights" || category.id === "food-markets" || category.id === "eilat-red-sea") {
+        const localId = category.id === "jerusalem" ? "jerusalem-local-h" : category.id === "tel-aviv-jaffa" ? "tel-aviv-local-h" : category.id === "masada-dead-sea" ? "masada-local-h" : category.id === "bethlehem-jericho" ? "bethlehem-local-h" : category.id === "nazareth-galilee" ? "galilee-local-h" : category.id === "northern-coast" ? "northern-coast-local-h" : category.id === "negev-ramon" ? "negev-local-h" : category.id === "golan-heights" ? "golan-local-h" : category.id === "food-markets" ? "food-local-h" : "eilat-local-h";
         const more = doc.querySelector(`section[aria-labelledby="${localId}"]`)!;
         expect(more).not.toBeNull();
         expect(more.querySelectorAll("a.group img")).toHaveLength(6);
@@ -226,19 +240,19 @@ describe("tours hub and SEO category pages", () => {
         expect(more.querySelector('a[href="/tours/"]')).not.toBeNull();
       }
             const owner = doc.querySelector('[data-section="moshe-private-tours"]');
-      expect(doc.querySelector("#external-tours-h")?.textContent).toBe(category.id === "jerusalem" || category.id === "tel-aviv-jaffa" || category.id === "masada-dead-sea" || category.id === "bethlehem-jericho" || category.id === "nazareth-galilee" || category.id === "northern-coast" || category.id === "negev-ramon" || category.id === "golan-heights" ? `Explore ${category.shortTitle} tours` : `${owner ? "More " : ""}${category.title}`);
+      expect(doc.querySelector("#external-tours-h")?.textContent).toBe(category.id === "jerusalem" || category.id === "tel-aviv-jaffa" || category.id === "masada-dead-sea" || category.id === "bethlehem-jericho" || category.id === "nazareth-galilee" || category.id === "northern-coast" || category.id === "negev-ramon" || category.id === "golan-heights" || category.id === "food-markets" || category.id === "eilat-red-sea" ? `Explore ${category.shortTitle} tours` : `${owner ? "More " : ""}${category.title}`);
       expect(doc.body.textContent).not.toMatch(/Other operators' tours & experiences|Independent tour providers/);
       if (owner) {
         expect(owner.className).not.toContain("bg-navy");
         expect(owner.textContent).not.toContain("Arrange directly with me");
         for (const card of owner.querySelectorAll('[data-testid="owner-tour-card"]')) {
-          if (category.id === "jerusalem" || category.id === "tel-aviv-jaffa" || category.id === "masada-dead-sea" || category.id === "bethlehem-jericho" || category.id === "nazareth-galilee" || category.id === "northern-coast" || category.id === "negev-ramon" || category.id === "golan-heights") {
+          if (category.id === "jerusalem" || category.id === "tel-aviv-jaffa" || category.id === "masada-dead-sea" || category.id === "bethlehem-jericho" || category.id === "nazareth-galilee" || category.id === "northern-coast" || category.id === "negev-ramon" || category.id === "golan-heights" || category.id === "food-markets" || category.id === "eilat-red-sea") {
             expect(card.querySelector('a[href="#contact"]')).not.toBeNull();
           } else {
             const link = card.querySelector('a[href^="/private-driver/?tour="]')!;
             expect(new URL(link.getAttribute("href")!, CANONICAL_ORIGIN).searchParams.get("tour")).toBe(card.getAttribute("data-product-id"));
           }
-          if (category.id !== "jerusalem" && category.id !== "tel-aviv-jaffa" && category.id !== "masada-dead-sea" && category.id !== "bethlehem-jericho" && category.id !== "nazareth-galilee" && category.id !== "northern-coast" && category.id !== "negev-ramon" && category.id !== "golan-heights") expect(card.querySelector("dl")?.textContent).toContain("Includes:");
+          if (category.id !== "jerusalem" && category.id !== "tel-aviv-jaffa" && category.id !== "masada-dead-sea" && category.id !== "bethlehem-jericho" && category.id !== "nazareth-galilee" && category.id !== "northern-coast" && category.id !== "negev-ramon" && category.id !== "golan-heights" && category.id !== "food-markets" && category.id !== "eilat-red-sea") expect(card.querySelector("dl")?.textContent).toContain("Includes:");
           else expect(card.textContent).toContain("Private car & driver");
         }
       }
@@ -489,7 +503,7 @@ describe("tours hub and SEO category pages", () => {
 
   it.each([
     { id: "negev-ramon" as const, path: "/tours/negev-desert-ramon-crater/", local: "negev-local-h", planning: "negev-planning-h", chips: "Filter Negev & Ramon Crater tours", q: "stargazing", qChip: "Stargazing", qCount: 1 },
-    { id: "golan-heights" as const, path: "/tours/golan-heights/", local: "golan-local-h", planning: "golan-planning-h", chips: "Filter Golan Heights tours", q: "Bental", qChip: "Mount Bental", qCount: 6 },
+    { id: "golan-heights" as const, path: "/tours/golan-heights/", local: category.id === "golan-heights" ? "golan-local-h" : category.id === "food-markets" ? "food-local-h" : "eilat-local-h", planning: category.id === "golan-heights" ? "golan-planning-h" : category.id === "food-markets" ? "food-planning-h" : "eilat-planning-h", chips: "Filter Golan Heights tours", q: "Bental", qChip: "Mount Bental", qCount: 6 },
   ])("renders the new compact $id catalog with eight unique tracked offers, images and destination-specific filters", async ({ id, path, local, planning, chips, q, qChip, qCount }) => {
     const router = await renderPage(path);
     const nav = screen.getByRole("navigation", { name: chips });
