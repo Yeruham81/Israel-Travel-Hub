@@ -98,18 +98,18 @@ describe("port service catalog", () => {
   it.each(["haifa", "ashdod"] as ShorePortId[])("preserves existing $port transfer inquiry links outside the excursion catalog", async (port) => {
     await pageAt(`/private-driver/?port=${port}&transfer=airport#request-quote`);
     expect(screen.getByLabelText("Type of journey *")).toHaveValue("intercity");
-    expect(screen.getByLabelText("Pickup city, hotel or address *")).toHaveValue(`${shorePorts[port].name} Port`);
-    expect(screen.getByLabelText("Final drop-off *")).toHaveValue("Ben Gurion Airport");
+    expect(screen.getByLabelText("Pickup city, hotel or address *")).toHaveValue("");
+    expect(screen.getByLabelText("Final drop-off *")).toHaveValue("");
     expect(screen.queryByLabelText("Driver or licensed guide?")).not.toBeInTheDocument();
     expect(screen.queryByLabelText("Ship's all-aboard time *")).not.toBeInTheDocument();
-    expect((screen.getByLabelText("Additional requests") as HTMLTextAreaElement).value).toContain(`${shorePorts[port].name} Port`);
+    expect(screen.getByLabelText("Additional requests")).toHaveValue("");
   });
 
   it("requires both valid transfer parameters and leaves an unknown hotel address for the traveler", async () => {
     expect(parsePortTransferSearch({ port: "haifa", transfer: "unknown" })).toEqual({});
     expect(parsePortTransferSearch({ port: "unknown", transfer: "airport" })).toEqual({});
     await pageAt("/private-driver/?port=ashdod&transfer=city");
-    expect(screen.getByLabelText("Pickup city, hotel or address *")).toHaveValue("Ashdod Port");
+    expect(screen.getByLabelText("Pickup city, hotel or address *")).toHaveValue("");
     expect(screen.getByLabelText("Final drop-off *")).toHaveValue("");
   });
 
