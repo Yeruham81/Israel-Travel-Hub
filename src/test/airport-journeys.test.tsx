@@ -44,7 +44,7 @@ describe("four independent airport transportation comparisons", () => {
       expect(doc.querySelector('a[href*="#request-quote"]')).not.toBeNull();
       if (id !== "jerusalem") expect(doc.querySelector('aside a[href="#request-quote"]')?.getAttribute("href")).toBe("#request-quote");
       else expect(doc.querySelector('#option-private a[href="#request-quote"]')?.getAttribute("href")).toBe("#request-quote");
-      expect(doc.querySelector("#comparison")?.textContent).toContain("Final taxi fares depend");
+      expect(doc.querySelector("#comparison")?.textContent).toContain("Taxi fares are metered");
       const sourceDisclosure = doc.querySelector("#sources details");
       expect(sourceDisclosure).not.toBeNull();
       expect(sourceDisclosure!.hasAttribute("open")).toBe(false);
@@ -198,7 +198,7 @@ describe("four independent airport transportation comparisons", () => {
     const doc = new DOMParser().parseFromString(html, "text/html");
     expect(doc.querySelectorAll("figure img")).toHaveLength(3);
     const intro = doc.querySelector("header p.text-lg")?.textContent || "";
-    expect(intro).toContain("In this guide, I compare");
+    expect(intro).toContain("The best option depends on your arrival time");
     expect(doc.querySelector('header time[datetime="2026-11-11"]')?.textContent).toBe("November 2026");
     expect(doc.querySelector("header")?.textContent).not.toMatch(/Approximate distance|Editorial review|45–55 km/);
     expect(doc.querySelector("header figure img")?.getAttribute("alt")).toMatch(/Panoramic view.*Jerusalem/i);
@@ -213,7 +213,7 @@ describe("four independent airport transportation comparisons", () => {
     expect(comparison.textContent).toContain("Varies");
     expect(comparison.textContent).toContain("From ₪");
     const priceNote = comparison.parentElement?.nextElementSibling?.textContent || "";
-    expect(priceNote).toMatch(/^Final taxi fares depend/);
+    expect(priceNote).toMatch(/^Taxi fares are metered/);
     expect(priceNote.length).toBeLessThan(370);
     expect(doc.querySelectorAll("#options h4").length).toBeGreaterThanOrEqual(1);
     expect(doc.querySelector("#options")?.textContent).not.toContain("Before choosing this option");
