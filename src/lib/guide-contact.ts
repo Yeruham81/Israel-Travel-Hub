@@ -6,7 +6,8 @@ export type GuideContactCopy = { heading: string; introduction: string; subject:
 
 export function guideContactCopy(title: string, kind: GuideContactKind, place?: string): GuideContactCopy {
   const destination = place?.trim() || "Israel";
-  const base = { subject: `Question about: ${title}`.slice(0, 160) };
+  // Always let the visitor write the subject; page context is attached separately to the submission.
+  const base = { subject: "" };
   switch (kind) {
     case "sherut":
       return { ...base, heading: "Questions about leaving Ben Gurion Airport?",
