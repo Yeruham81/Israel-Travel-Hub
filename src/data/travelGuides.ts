@@ -724,7 +724,7 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
       {
         id: "paying", title: "Tickets, Rav-Kav and mobile payment apps",
         paragraphs: [
-          "For most visitors, the simplest choices are an anonymous Rav-Kav card loaded before travelling or a supported mobile payment app. Do not assume you can pay cash on a public bus or tap any foreign bank card on every route. Choose a method that works even if you lose mobile reception, and check that children have the correct ticket arrangements.",
+          "Most visitors can pay for public transport with a loaded Rav-Kav card or an approved mobile app. Buses don't normally accept cash, and contactless bank-card payments are limited to selected services. If you're relying on an app, keep a backup payment option. Check the ticket rules for children travelling with you.",
         ],
         tables: [{
           caption: "Rav-Kav vs payment app vs bank-card tap",
@@ -739,8 +739,8 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
           {
             id: "israel-ravkav", title: "Buying and loading an anonymous Rav-Kav",
             paragraphs: [
-              "An anonymous Rav-Kav generally does not need an Israeli identity number or photo and can be purchased from designated service centers, kiosks and some ticket machines. Check current locations and card fees before visiting. Load stored value or the relevant daily travel product before boarding; keep enough balance for your planned journey.",
-              "Rav-Kav Online can help users with a compatible NFC phone load the card. Some ticket machines or service points can also load it. Validate each journey when boarding, including transfers when required. Anonymous cards are not a way to claim discounts reserved for verified personal travel profiles.",
+              "Tourists can usually buy an anonymous Rav-Kav without an Israeli ID or photo. Cards are sold at selected service centres, kiosks and ticket machines. Check locations and fees, then add credit or a suitable travel pass before boarding.",
+              "You can top up a Rav-Kav at supported machines or service points, or with a compatible phone using Rav-Kav Online. Validate each journey, including transfers where required. Anonymous cards do not provide discounts that require a personalised passenger profile.",
             ],
             highlightedLinks: [
               { label: "Rav-Kav and ticket types — Ministry of Transport", href: "https://www.gov.il/he/pages/tickets_and_discounts", context: "Check anonymous-card rules, ticket types and discount eligibility; the official information is primarily in Hebrew." },
@@ -751,8 +751,8 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
           {
             id: "israel-payment-apps", title: "Using a supported ticketing app",
             paragraphs: [
-              "Approved public transport payment apps can include Moovit and Rav-Pass; other supported apps and features can change. Register while you have working data, add a compatible payment method and learn how to validate your journey before boarding. App payments can be settled after travel under applicable fare caps and ticket rules. My Israel eSIM guide explains how to arrange mobile data for these services.",
-              "On a city bus, follow the app's QR or location instructions for the correct vehicle or stop. On Israel Railways, use the app's train-trip procedure at the entrance and exit gates; on the Tel Aviv Red Line, validation happens before boarding. Avoid assuming a screenshot or an unused app session counts as a valid ticket.",
+              "Approved apps such as Moovit and Rav-Pass can be used to pay for supported public transport journeys. Set up an accepted payment method and learn how to validate before boarding. Some apps calculate your fare after your journey, applying any eligible discounts or fare limits. My Israel eSIM guide explains mobile-data options.",
+              "On buses, follow the app's instructions to validate your trip using the correct vehicle or stop. On Israel Railways, follow the app's instructions at the entrance and exit gates. On Tel Aviv's Red Line, validate before boarding. Opening an app or saving a screenshot is not enough: make sure your journey has been validated.",
             ],
             inlineLinks: [{ text: "Israel eSIM guide", to: travelGuidePaths.esim }],
             sourceIds: ["guide-public-transport-payments", "guide-redline-tickets"],
@@ -761,8 +761,8 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
           {
             id: "israel-ticket-rules", title: "Cash, contactless cards, transfers and children",
             paragraphs: [
-              "Ordinary buses do not normally sell tickets for cash onboard. A railway station may offer ticket machines or staffed counters, with payment options varying by location. Egged introduced contactless credit-card and digital-wallet validation in January 2026 on supported lines in Eilat, Jerusalem and metropolitan Haifa. Coverage is expected to expand gradually, but as of November 2026, direct bank-card taps are not yet universally accepted across Israeli buses and operators.",
-              "Egged's supported contactless validators accept international Visa and Mastercard cards, but do not apply passenger profile discounts or the standard Rav-Kav/app fare benefits. They are intended for a full-fare single journey. Carry a loaded Rav-Kav or supported app as a backup; transfer or day-pass benefits vary by payment system, distance and mode. Check child fares and how to validate each passenger.",
+              "You generally cannot buy a bus ticket with cash from the driver. Railway stations may have ticket machines or staffed counters. Egged introduced contactless card and digital-wallet payments on selected lines in Eilat, Jerusalem and metropolitan Haifa in January 2026. This payment method is not available across the entire bus network.",
+              "On supported Egged services, contactless payment accepts international Visa and Mastercard cards but generally covers one full-fare journey without passenger-profile discounts or standard transfer benefits. Use a Rav-Kav or approved app if you need a suitable travel pass, and check children's fares and validation rules.",
             ],
             highlightedLinks: [{ label: "Egged — where credit-card taps work", href: "https://www.egged.co.il/en/information-for-passengers/rav-kav-and-payment-apps", context: "Egged specifies the pilot areas, supported international cards and its full-fare single-journey rules. Do not assume other operators use the same system." }],
             sourceIds: ["guide-select-card-payment", "guide-ravkav-2026", "guide-urban-transit-validation", "guide-egged-card-payment-2026"],
@@ -772,14 +772,14 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
       {
         id: "taxis-and-sherut", title: "Taxis, shared taxis and arranged rides",
         paragraphs: [
-          "Taxis and booked transport are useful when the bus or train will not reach the final address, especially with luggage, at night or during Shabbat. A licensed metered taxi, a route-based shared taxi and a confirmed private driver are three different services; their pricing, pickup process and availability should not be confused.",
+          "Taxis and private transfers are useful for direct journeys, especially with luggage, at night or during Shabbat. A regular taxi, a shared sherut taxi and a private driver are different services, with different prices and booking arrangements.",
         ],
         subsections: [
           {
             id: "israel-taxis", title: "Licensed taxis and Gett or Yango",
             paragraphs: [
-              "Licensed Israeli taxis can be booked at a stand, by phone, through a hotel or using Gett or Yango where available. Check the authorized vehicle, exact pickup, fare basis and receipt. Regulated meter fares can vary with traffic, distance, tariff period and permitted extras; an app estimate is not always a fixed price.",
-              "Uber and Lyft do not currently provide ordinary passenger ride-booking services in Israel. My taxis in Israel guide explains safety and how metered trips work, the taxi fares guide explains tariff rules, and the Uber alternatives guide compares available booking apps.",
+              "Licensed taxis can be booked at taxi stands, by phone, through your hotel or using Gett or Yango where available. Confirm the vehicle, pickup point, fare and payment method. Metered fares depend on distance, traffic, time of day and permitted extras. An app estimate may not be the final price.",
+              "Uber and Lyft do not currently offer passenger rides in Israel. For more information, see my taxis in Israel guide, taxi fares guide and Uber alternatives guide for local booking apps.",
             ],
             inlineLinks: [
               { text: "taxis in Israel guide", to: travelGuidePaths.taxis },
@@ -791,7 +791,7 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
           {
             id: "israel-sherut", title: "What about shared-taxi sherut routes?",
             paragraphs: [
-              "A local monit sherut is a shared minibus or taxi that follows a particular urban or intercity corridor. Routes, payment and Shabbat operation depend on the local service. Do not confuse it with an individually booked shuttle that picks up a whole party.",
+              "A monit sherut is a shared taxi or minibus that follows a set route. Fares, stops and Shabbat operation depend on the service. It's different from a private transfer booked for your group.",
               "The former Nesher airport shared service to Jerusalem and Amal service to Haifa have been discontinued. Old directory listings should not be treated as valid airport pickup instructions. See the Sherut in Israel guide for the distinction between current local corridors and former airport operations.",
             ],
             inlineLinks: [{ text: "Sherut in Israel guide", to: travelGuidePaths.sherut }],
@@ -800,8 +800,8 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
           {
             id: "israel-airport-options", title: "Arriving at Ben Gurion Airport",
             paragraphs: [
-              "From Terminal 3, use the airport railway where it serves your destination. For door-to-door travel, the authorized airport taxis use the official Gett or self-service kiosk ride code and a designated queue; a privately arranged airport transfer is separate and must be confirmed in advance.",
-              "My airport arrival guide explains passport control, baggage and reaching the transport areas. My Ben Gurion Airport taxi guide covers the authorized pickup procedure. Before an early flight or a Shabbat arrival, also check the airport Shabbat guide for operating-day limitations.",
+              "The train station at Terminal 3 connects Ben Gurion Airport with several major cities. For an official airport taxi, use Gett or an airport kiosk to obtain a ride code and join the designated queue. Private transfers must be booked separately in advance.",
+              "See my airport arrival guide for terminal information and my Ben Gurion Airport taxi guide for pickup instructions. For an early flight or a Shabbat arrival, also check the airport Shabbat guide.",
             ],
             inlineLinks: [
               { text: "airport arrival guide", to: travelGuidePaths.arrival },
@@ -815,13 +815,13 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
       {
         id: "destinations", title: "Getting around major cities and regions",
         paragraphs: [
-          "Local geography matters as much as distance. Choose accommodation near the places you will visit and plan how to reach the final hotel or attraction after stepping off a train or bus.",
+          "Distances on the map don't always reflect travel time. Choose accommodation with convenient transport connections and check the journey from the station to your hotel.",
         ],
         subsections: [
           {
             id: "israel-tel-aviv", title: "Tel Aviv and Old Jaffa",
             paragraphs: [
-              "Walking, city buses, the operating Red Line and occasional taxis cover most visitor needs, but no single rail stop serves the entire beachfront. Bikeshare or cycling may help on suitable routes. My getting around Tel Aviv guide includes the four mainline rail stations, payment and the separate weekend bus network.",
+              "In Tel Aviv, walking, buses, the Red Line and occasional taxis work well for most visitors. The main railway stations are inland, away from the beach. Cycling is also useful on suitable routes. My getting around Tel Aviv guide covers rail stations, payment and weekend buses.",
             ],
             photo: { src: telAvivDizengoff, alt: "Dizengoff neighborhood streets in Tel Aviv for planning city walks and local transfers" },
             inlineLinks: [{ text: "getting around Tel Aviv guide", to: travelGuidePaths.telAviv }],
@@ -830,7 +830,7 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
           {
             id: "israel-jerusalem", title: "Jerusalem and the Old City",
             paragraphs: [
-              "Use the operating light rail and city buses for the appropriate corridor, then walk or take a taxi near the Old City. Pedestrian gates, hills, stairs and restricted vehicle access can mean that a short map distance is not an easy walk. The Jerusalem travel guide explains where to stay and visit; the airport-to-Jerusalem guide covers the rail arrival and final connection.",
+              "Use light rail and city buses where they serve your destination, then walk or take a taxi near the Old City. Jerusalem's hills, steps and restricted streets can make short distances difficult with luggage. See my Jerusalem travel guide for sightseeing and the airport-to-Jerusalem guide for arrival connections.",
             ],
             inlineLinks: [{ text: "Jerusalem travel guide", to: travelGuidePaths.jerusalem }, { text: "airport-to-Jerusalem guide", to: "/travel-blog/how-to-get-from-ben-gurion-airport-to-jerusalem/" }],
           },
@@ -838,7 +838,7 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
             id: "israel-haifa", title: "Haifa: Metronit, Carmelit and cable cars",
             paragraphs: [
               "Haifa rises steeply from the coast to Mount Carmel. The Metronit bus rapid transit serves several urban corridors and the Krayot; the underground Carmelit climbs between the Lower City and Carmel Center. The Rakbalit transit cable car serves the university and Technion area, while the tourist cable car at Bat Galim is a different operation.",
-              "A coastal railway station is not necessarily an easy walk to a hotel higher on the hill. My Haifa travel guide and airport-to-Haifa guide explain neighborhoods and the final station connection.",
+              "In Haifa, hotels on Mount Carmel may require a bus or taxi uphill from the railway station. See my Haifa travel guide and airport-to-Haifa guide for local connections.",
             ],
             inlineLinks: [{ text: "Haifa travel guide", to: "/travel-blog/haifa/" }, { text: "airport-to-Haifa guide", to: "/travel-blog/how-to-get-from-ben-gurion-airport-to-haifa/" }],
             sourceIds: ["guide-haifa-carmelit", "guide-bus-planner"],
@@ -846,7 +846,7 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
           {
             id: "israel-galilee", title: "Tiberias, the Galilee and the Sea of Galilee",
             paragraphs: [
-              "Intercity and local buses connect Tiberias, Nazareth and other towns, but attractions and viewpoints around the Sea of Galilee are spread out and their nearest stops may be inconvenient. Confirm the return bus and park entrance before departing. A rental car or a properly planned day tour may work better for multiple regional stops.",
+              "Buses connect Tiberias, Nazareth and nearby towns, but many Sea of Galilee attractions are far apart or difficult to reach from bus stops. Check the return bus and attraction entrance. A rental car or organised tour may be easier for several stops.",
               "The Tiberias accommodation guide helps you compare areas near the waterfront and intercity terminals, rather than assuming all hotels have similar connections.",
             ],
             inlineLinks: [{ text: "Tiberias accommodation guide", to: "/travel-blog/best-hotels-in-tiberias/" }],
@@ -854,7 +854,7 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
           {
             id: "israel-eilat", title: "Eilat, the Negev and the Dead Sea",
             paragraphs: [
-              "There is no operating Israel Railways passenger train to Eilat. Long-distance buses can get you there, but selected departures require seat reservation. Ramon Airport also has its own local bus links. For the Negev, the Dead Sea and desert parks, compare the actual last bus and trailhead access with a rental car or organized tour.",
+              "There is no operating Israel Railways passenger train to Eilat. Long-distance buses can get you there, but selected departures require seat reservation. Ramon Airport also has its own local bus links. For desert attractions, check the last bus and the distance to the entrance. A rental car or organised tour may be easier.",
               "The Eilat visitor guide and Jerusalem-to-the-Dead-Sea guide provide destination-specific advice; if arriving from Ben Gurion Airport, the airport-to-Ein-Bokek guide explains the train-and-bus connection and the hotel stops.",
             ],
             inlineLinks: [
@@ -869,13 +869,13 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
       {
         id: "rental-car", title: "Rental cars, private drivers and day trips",
         paragraphs: [
-          "A car can simplify remote, multi-stop itineraries but is often an unnecessary expense for a trip centered on Tel Aviv and Jerusalem. Compare the complete price and practical limitations before deciding.",
+          "A rental car is useful for remote destinations and trips with several stops, but often unnecessary in central Tel Aviv and Jerusalem. Compare the total cost before deciding.",
         ],
         subsections: [
           {
             id: "israel-rentals", title: "When is a rental car worth it?",
             paragraphs: [
-              "For a wider Galilee, Dead Sea or Negev itinerary, a rental car may save time over several buses and taxis. Include insurance, deposit, fuel, highway toll handling, parking, daily mileage limits and pickup/return hours. A rental desk may be closed on Shabbat even though driving itself is possible.",
+              "For a wider Galilee, Dead Sea or Negev trip, a rental car may save time. Compare insurance, deposits, fuel, tolls, parking, mileage limits and rental desk hours. Rental desks may be closed on Shabbat, even when driving is permitted.",
               "Check your signed rental contract before entering restricted areas, including any journey toward Bethlehem or Palestinian Authority territory. Hertz Israel's terms explicitly prohibit entering Area A, and other companies can impose different restrictions. Coverage may not apply to prohibited roads or territory. Compare vehicle choices and booking conditions on DiscoverCars.",
             ],
             inlineLinks: [{ text: "DiscoverCars", to: "/car-rental/" }],
@@ -886,7 +886,7 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
             id: "israel-drivers", title: "Private driver versus an organized guided tour",
             paragraphs: [
               "A private driver transports your group according to an agreed itinerary, but does not automatically provide a licensed guide, entrance tickets or unlimited stops. A guided tour may include guiding and specific scheduled visits, yet can be less flexible. Compare the total hours, pickup, admissions, luggage and the return journey.",
-              "The private driver page describes how to arrange your own route, while the tours and day trips directory lists organized visits. Neither is a substitute for confirming the actual itinerary and total price before booking.",
+              "See my private driver page for a customised journey, or browse organised tours and day trips. Confirm the itinerary and total price before booking.",
             ],
             inlineLinks: [{ text: "private driver page", to: "/private-driver/" }, { text: "tours and day trips directory", to: "/tours/" }],
           },
