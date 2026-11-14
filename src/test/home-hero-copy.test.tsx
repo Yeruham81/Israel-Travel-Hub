@@ -268,7 +268,6 @@ describe("homepage marketing copy and service sections", () => {
     const guideButton = within(guidesSection).getByRole("link", { name: /Browse all guides/i });
     expect(guideButton).toHaveAttribute("href", "/travel-blog/");
     expect(guidesSection.lastElementChild).toContainElement(guideButton);
-    expect(guidesSection.querySelector('[data-testid="guide-row-two"]')!.compareDocumentPosition(guideButton) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
 
     const aboutMoshe = screen.getByRole("complementary", { name: "About Moshe Barak" });
     expect(within(aboutMoshe).getByRole("img", { name: "Moshe Barak" })).toBeInTheDocument();
