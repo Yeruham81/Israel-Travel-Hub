@@ -217,9 +217,9 @@ describe("tours hub and SEO category pages", () => {
       const doc = new DOMParser().parseFromString(renderToString(<RouterContextProvider router={router}><Page /></RouterContextProvider>), "text/html");
       expect(doc.querySelectorAll("h1"), category.id).toHaveLength(1);
       expect(doc.querySelectorAll('[data-testid="tour-card"]').length, category.id).toBeGreaterThanOrEqual(2);
-      if (category.id === "jerusalem" || category.id === "tel-aviv-jaffa" || category.id === "masada-dead-sea") {
-        const localId = category.id === "jerusalem" ? "jerusalem-local-h" : category.id === "tel-aviv-jaffa" ? "tel-aviv-local-h" : "masada-local-h";
-        const planningId = category.id === "jerusalem" ? "jerusalem-planning-h" : category.id === "tel-aviv-jaffa" ? "tel-aviv-planning-h" : "masada-planning-h";
+      if (category.id === "jerusalem" || category.id === "tel-aviv-jaffa" || category.id === "masada-dead-sea" || category.id === "bethlehem-jericho") {
+        const localId = category.id === "jerusalem" ? "jerusalem-local-h" : category.id === "tel-aviv-jaffa" ? "tel-aviv-local-h" : category.id === "masada-dead-sea" ? "masada-local-h" : "bethlehem-local-h";
+        const planningId = category.id === "jerusalem" ? "jerusalem-planning-h" : category.id === "tel-aviv-jaffa" ? "tel-aviv-planning-h" : category.id === "masada-dead-sea" ? "masada-planning-h" : "bethlehem-planning-h";
         expect(doc.querySelectorAll(`section[aria-labelledby="${localId}"] a.group img`)).toHaveLength(6);
         expect(doc.querySelectorAll(`section[aria-labelledby="${planningId}"] a.group`)).toHaveLength(6);
       } else {
@@ -240,8 +240,8 @@ describe("tours hub and SEO category pages", () => {
           expect(link.getAttribute("rel")?.split(/\s+/)).toEqual(expect.arrayContaining(["noopener", "noreferrer"]));
         }
       }
-      if (category.id === "jerusalem" || category.id === "tel-aviv-jaffa" || category.id === "masada-dead-sea") {
-        const localId = category.id === "jerusalem" ? "jerusalem-local-h" : category.id === "tel-aviv-jaffa" ? "tel-aviv-local-h" : "masada-local-h";
+      if (category.id === "jerusalem" || category.id === "tel-aviv-jaffa" || category.id === "masada-dead-sea" || category.id === "bethlehem-jericho") {
+        const localId = category.id === "jerusalem" ? "jerusalem-local-h" : category.id === "tel-aviv-jaffa" ? "tel-aviv-local-h" : category.id === "masada-dead-sea" ? "masada-local-h" : "bethlehem-local-h";
         const more = doc.querySelector(`section[aria-labelledby="${localId}"]`)!;
         expect(more).not.toBeNull();
         expect(more.querySelectorAll("a.group img")).toHaveLength(6);
@@ -260,7 +260,7 @@ describe("tours hub and SEO category pages", () => {
         expect(owner.className).not.toContain("bg-navy");
         expect(owner.textContent).not.toContain("Arrange directly with me");
         for (const card of owner.querySelectorAll('[data-testid="owner-tour-card"]')) {
-          if (category.id === "jerusalem" || category.id === "tel-aviv-jaffa" || category.id === "masada-dead-sea") {
+          if (category.id === "jerusalem" || category.id === "tel-aviv-jaffa" || category.id === "masada-dead-sea" || category.id === "bethlehem-jericho") {
             expect(card.querySelector('a[href="#contact"]')).not.toBeNull();
           } else {
             const link = card.querySelector('a[href^="/private-driver/?tour="]')!;
@@ -414,18 +414,65 @@ describe("tours hub and SEO category pages", () => {
     expect(screen.getByTestId("tour-card")).toHaveAttribute("data-product-id", "jerusalem-street-art-walk");
   });
 
+
+  it("uses the shared Bethlehem template with exact tour links, Qasr al-Yahud filters, six local cards and no unauthorized owner transport offer", async () => {
+    const router = await renderPage("/tours/bethlehem-jericho-jordan-river/");
+    const nav = screen.getByRole("navigation", { name: "Filter Bethlehem, Jericho & Qasr al-Yahud tours" });
+    const cards = screen.getAllByTestId("tour-card");
+    expect(cards).toHaveLength(8);
+    expect(document.querySelector('[data-section="moshe-private-tours"]')).toBeNull();
+    expect(document.querySelector("main")?.textContent).not.toMatch(/Yardenit/i);
+    const hrefs: string[] = [];
+    for (const card of cards) {
+      const id = card.getAttribute("data-product-id")!;
+      const offer = offersForTour(id, "tours-bethlehem-jericho")[0]!;
+      const link = within(card).getByRole("link", { name: "View tour ↗" });
+      expect(link).toHaveAttribute("href", offer.provider.url);
+      expect(new URL(offer.provider.url).hostname).toMatch(/^(getyourguide|viator)\.tpm\.li$/);
+      expect(link.getAttribute("rel")).toContain("sponsored");
+      hrefs.push(offer.provider.url);
+    }
+    expect(new Set(hrefs).size).toBe(8);
+    expect(screen.getByTestId("author-card")).toBeInTheDocument();
+    const local = document.querySelector('section[aria-labelledby="bethlehem-local-h"]')!;
+    const planning = document.querySelector('section[aria-labelledby="bethlehem-planning-h"]')!;
+    expect(local.querySelectorAll("a.group img")).toHaveLength(6);
+    expect(planning.querySelectorAll("a.group")).toHaveLength(6);
+    const contact = document.querySelector("section#contact")!;
+    expect(contact.querySelector('[data-photo-role="contact-portrait"]')).not.toBeNull();
+    expect(contact.querySelector('input[name="subject"]')).toHaveValue("");
+    expect(contact.querySelector('textarea[name="message"]')).toHaveValue("");
+    const photos = [...document.querySelectorAll("main img")].filter(img => !img.hasAttribute("data-photo-role")).map(img => img.getAttribute("src") || "");
+    expect(repeatedPhotos(photos)).toEqual([]);
+    fireEvent.click(within(nav).getByRole("button", { name: "Qasr al-Yahud" }));
+    await waitFor(() => expect(router.state.location.search).toEqual({ destination: "jordan-river" }));
+    const qasrTours = screen.getAllByTestId("tour-card");
+    expect(qasrTours).toHaveLength(4);
+    for (const card of qasrTours) expect(tourProducts.find(t => t.id === card.getAttribute("data-product-id"))!.destinationIds).toContain("jordan-river");
+    fireEvent.click(within(nav).getByRole("button", { name: "Half day" }));
+    await waitFor(() => expect(router.state.location.search).toEqual({ length: "short" }));
+    expect(screen.getAllByTestId("tour-card")).toHaveLength(2);
+    fireEvent.click(within(nav).getByRole("button", { name: "Private guided" }));
+    await waitFor(() => expect(router.state.location.search).toEqual({ format: "private" }));
+    expect(screen.getAllByTestId("tour-card")).toHaveLength(2);
+    fireEvent.click(within(nav).getByRole("button", { name: "All tours" }));
+    await waitFor(() => expect(router.state.location.search).toEqual({}));
+    expect(screen.getAllByTestId("tour-card")).toHaveLength(8);
+  });
+
   it("loads shared filter links and offers Jerusalem departures in the main Bethlehem catalog", async () => {
     await renderPage("/tours/masada-dead-sea/?destination=ein-gedi&format=independent");
     expect(screen.getAllByTestId("tour-card")).toHaveLength(1);
     expect(screen.getByTestId("tour-card")).toHaveAttribute("data-product-id", "masada-ein-gedi-dead-sea");
     cleanup();
     await renderPage("/tours/bethlehem-jericho-jordan-river/?origin=jerusalem");
-    expect(screen.getByRole("combobox", { name: "Start from" })).toHaveValue("jerusalem");
-    expect(screen.getAllByTestId("tour-card")).toHaveLength(2);
+    const nav = screen.getByRole("navigation", { name: "Filter Bethlehem, Jericho & Qasr al-Yahud tours" });
+    expect(within(nav).getByRole("button", { name: "From Jerusalem" })).toHaveAttribute("aria-pressed", "true");
+    expect(screen.getAllByTestId("tour-card")).toHaveLength(5);
     for (const card of screen.getAllByTestId("tour-card")) expect(tourProducts.find(tour => tour.id === card.getAttribute("data-product-id"))!.originIds).toContain("jerusalem");
     expect(document.querySelector('a[href*="beinharimtours.com"]')).toBeNull();
-    expect(screen.getByRole("heading", { level: 2, name: "Bethlehem, Jericho & Jordan River tours" })).toBeInTheDocument();
-    expect(screen.getByRole("link", { name: "Read my Jerusalem to Bethlehem travel guide" })).toHaveAttribute("href", travelGuidePaths.bethlehem);
+    expect(screen.getByRole("heading", { level: 2, name: "Explore Bethlehem, Jericho & Qasr al-Yahud tours" })).toBeInTheDocument();
+    expect(document.querySelector('section[aria-labelledby="bethlehem-local-h"] a[href="' + travelGuidePaths.bethlehem + '"]')).not.toBeNull();
   });
 
   it("permanently directs the former Bethlehem tour URL to one informative travel guide", async () => {
