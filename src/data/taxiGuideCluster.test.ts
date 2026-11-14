@@ -83,7 +83,7 @@ describe("intent-specific taxi guide cluster", () => {
     expect(guide.sections.find((s) => s.id === "fares")?.tables?.[0]?.rows[0]).toEqual(["Starting meter (initial charge)", "₪12.46", "₪12.46", "₪12.46"]);
     expect(guide.sections.find((s) => s.id === "airport")?.paragraphs.join(" ")).toContain("Exit 23");
     expect(guide.sections.find((s) => s.id === "airport")?.paragraphs.join(" ")).toContain("Exit 03");
-    expect(guide.sections.find((s) => s.id === "sherut")?.paragraphs.join(" ")).toContain("Nesher");
+    expect(guide.sections.find((s) => s.id === "sherut")?.paragraphs.join(" ")).toContain("no regular airport sherut");
     expect(guide.sections.find((s) => s.id === "payment")?.paragraphs.join(" ")).toContain("luggage");
     expect(guide.sections.find((s) => s.id === "intercity")?.paragraphs.join(" ")).toContain("Mitzpe Ramon");
   });
