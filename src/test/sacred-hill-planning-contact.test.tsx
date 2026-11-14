@@ -88,13 +88,14 @@ describe("sacred hill visit planning", () => {
     vi.stubGlobal("fetch", fetch);
     const { path, title } = await mountGuide(id);
     const form = screen.getByRole("form", { name: `Message Moshe about ${labelFor(id)}` });
-    expect(within(form).getByLabelText("Subject *")).toHaveValue(id === "mount-zion" ? "Mount Zion visit" : "Mount of Olives visit");
+    expect(within(form).getByLabelText("Subject *")).toHaveValue("");
     fireEvent.submit(form);
     expect(fetch).not.toHaveBeenCalled();
     expect(within(form).getByRole("alert")).toBeInTheDocument();
 
     fireEvent.change(within(form).getByLabelText("Your name *"), { target: { value: "A traveller" } });
     fireEvent.change(within(form).getByLabelText("Email address *"), { target: { value: "guest@example.com" } });
+    fireEvent.change(within(form).getByLabelText("Subject *"), { target: { value: id === "mount-zion" ? "Mount Zion visit" : "Mount of Olives visit" } });
     fireEvent.change(within(form).getByLabelText("Your message *"), { target: { value: "Can you arrange pickup from my hotel and visit the churches?" } });
     fireEvent.click(within(form).getByRole("checkbox"));
     fireEvent.submit(form);
