@@ -44,6 +44,7 @@ import itineraryChurchHolySepulchre from "@/assets/guides/holy-sepulchre.jpg";
 import itineraryCapernaumSynagogue from "@/assets/guides/capernaum.jpg";
 import itineraryCaesareaAqueduct from "@/assets/home/caesarea-aqueduct.webp";
 import itineraryAkkoPort from "@/assets/shore-excursions/akko-port.jpg";
+import itineraryAkkoAerial from "@/assets/guides/old-city-acre-aerial.webp";
 import itineraryTenDayCover from "@/assets/home/hero-jerusalem-large.webp";
 
 
@@ -241,6 +242,10 @@ export const migrationPhotos = {
   "itinerary-10day-akko-port": {
     "src": itineraryAkkoPort,
     "alt": "Stone fortifications and historic harbour at Old Akko on Israel’s Mediterranean coast"
+  },
+  "itinerary-10day-akko-aerial": {
+    "src": itineraryAkkoAerial,
+    "alt": "Aerial view of the walled Old City of Akko and its Mediterranean harbour"
   },
   "itinerary-5day-caesarea": {
     "src": itineraryCaesareaAqueduct,
