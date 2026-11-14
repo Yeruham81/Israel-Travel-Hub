@@ -1,0 +1,59 @@
+name: Food and Eilat tour catalog verification
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/verify-food-eilat-once.yml'
+permissions:
+  contents: write
+jobs:
+  verify:
+    if: contains(github.event.head_commit.message, '[verify-food-eilat]')
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      CI: "true"
+      VITE_INDEXABLE: "false"
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: '1.4.4'
+      - run: bash scripts/install-ci-dependencies.sh
+      - name: Build, run regression, and record outcome
+        shell: bash
+        run: |
+          set +e
+          bun run build > "$RUNNER_TEMP/food-eilat-build.log" 2>&1
+          build_status=$?
+          if [ "$build_status" -eq 0 ]; then
+            bun run test src/test/tours.test.tsx > "$RUNNER_TEMP/food-eilat-tests.log" 2>&1
+            test_status=$?
+          else
+            test_status=99
+            echo "Skipped due to build failure" > "$RUNNER_TEMP/food-eilat-tests.log"
+          fi
+          mkdir -p docs/qa
+          {
+            echo "Food and Eilat Tour Catalog QA"
+            echo "Commit tested: $GITHUB_SHA"
+            echo "Build exit code: $build_status"
+            echo "Tour regression exit code: $test_status"
+            echo
+            echo "=== Build log tail ==="
+            tail -n 45 "$RUNNER_TEMP/food-eilat-build.log"
+            echo
+            echo "=== Tour test log tail ==="
+            tail -n 75 "$RUNNER_TEMP/food-eilat-tests.log"
+          } > docs/qa/food-eilat-tour-qa.txt
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add docs/qa/food-eilat-tour-qa.txt
+          git commit -m "Record food and Eilat tour build and regression outcome"
+          git push origin HEAD:main
+          if [ "$build_status" -ne 0 ] || [ "$test_status" -ne 0 ]; then
+            exit 1
+          fi
