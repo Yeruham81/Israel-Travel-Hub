@@ -42,7 +42,7 @@ import tiberiasWaterfront from "@/assets/tiberias/waterfront.webp";
 import tiberiasSunrise from "@/assets/tiberias/sunrise.webp";
 import tiberiasCentral from "@/assets/tiberias/central.webp";
 import tiberiasHeritage from "@/assets/tiberias/heritage.webp";
-import tiberiasLake from "@/assets/home/tiberias-lake.webp";
+import mountPrecipice from "@/assets/guides/2026-10/mount-precipice.webp";
 import galileeHero from "@/assets/home/hero-galilee.webp";
 import masadaAerial from "@/assets/guides/dead-sea-excursions/masada-aerial.webp";
 import masadaPalace from "@/assets/guides/dead-sea-excursions/masada-palace.webp";
@@ -115,7 +115,7 @@ export const tourPhotos: Record<string, GuidePhoto> = {
   "nazareth-tiberias-tel-aviv": { src: galileeHero, alt: "Green Galilee hills and countryside near the Sea of Galilee" },
   "galilee-private-tel-aviv": { src: tiberiasCentral, alt: "Central streets of Tiberias near the Sea of Galilee" },
   "galilee-private-jerusalem": migration["magdala-archaeology"],
-  "nazareth-magdala-private": { src: tiberiasLake, alt: "View across the Sea of Galilee with hills in the background" },
+  "nazareth-magdala-private": { src: mountPrecipice, alt: "View from Mount Precipice over Nazareth and the Galilee countryside" },
   "caesarea-haifa-akko": airport["caesarea"]!,
   "north-coast-small-group": { src: akko, alt: "Fishing boats beside the historic stone buildings of Akko harbour", sourceUrl: "https://www.israel-taxi.com/wp-content/uploads/2025/08/akko_port_2.jpg" },
   "mahane-yehuda-tasting": jerusalemAreaGuides.find(n => n.id === "mahane-yehuda")!.photo,
