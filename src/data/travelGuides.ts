@@ -1086,8 +1086,8 @@ telAviv: {
           {
             id: "ta-bank-card", title: "Can I tap a foreign credit card on a bus?",
             paragraphs: [
-              "Dan publishes contactless Visa and Mastercard acceptance on its own bus services, including international-issued cards and compatible wallets. As of November 2026, Dan's official guidance lists NIS 8 for a full-fare single ride, covers one person per card and does not include a free 90-minute transfer or the usual discounts. Check for later fare updates before your journey.",
-              "Do not assume the same bank-card rules apply on every bus operator, the Red Line light rail or Israel Railways. For transfers, several travelers or reduced fares, use a suitable Rav-Kav or approved ticketing app instead.",
+              "Dan accepts contactless Visa and Mastercard payments, including supported foreign cards and digital wallets, on participating buses. Under its published rules, a bank-card payment covers one full-fare journey for one passenger, without the usual 90-minute transfer benefit or passenger discounts. Check the current fare before travelling.",
+              "Contactless payment rules vary between operators and are not the same on buses, light rail and Israel Railways. For transfers, group travel or reduced fares, a Rav-Kav or approved payment app may be more suitable.",
             ],
             tables: [{
               caption: "Which ticketing method should I choose?",
@@ -1108,8 +1108,8 @@ telAviv: {
       {
         id: "walking", title: "Walking: which neighborhoods work well together?",
         paragraphs: [
-          "Tel Aviv is especially enjoyable on foot when you group attractions by area. The seafront promenade, neighborhood cafés, markets and low-rise streets invite short walks, but the distances between Old Jaffa, Tel Aviv Port and northern museums add up quickly. Check each route on a map rather than assuming everything labeled central Tel Aviv is close.",
-          "Allow for summer heat, shade, water, busy crossings and step-free access. Walking with luggage or after a flight is very different from sightseeing without bags. The Tel Aviv beaches guide and Jaffa travel guide provide ideas for individual stops.",
+          "Tel Aviv is a great city for walking, especially around the beachfront, markets and central neighbourhoods. However, Old Jaffa, Tel Aviv Port and the northern museums are farther apart than they may appear. Check walking distances before setting out.",
+          "Allow for summer heat, shade, water, crossings and step-free access. With heavy luggage, consider a taxi for longer walks. The Tel Aviv beaches guide and Jaffa travel guide can help you plan individual stops.",
         ],
         photo: { src: telAvivDizengoff, alt: "Pedestrian-friendly streets in Tel Aviv's Dizengoff area" },
         inlineLinks: [
@@ -1133,14 +1133,14 @@ telAviv: {
       {
         id: "city-buses", title: "Using city buses in Tel Aviv",
         paragraphs: [
-          "City buses serve far more streets than the Red Line of Tel Aviv's light rail system. They can connect hotels, beaches, markets, museums, university areas and neighborhoods away from the rail corridor. Routes and boarding locations change during roadworks and events, so search by your exact starting address, destination and travel time.",
-          "At the stop, check the route number and direction, not just the destination name in a map result. Have a validated Rav-Kav, approved payment app or another payment method explicitly accepted by the operator. On Fridays and holidays, the final regular departure may be much earlier than you expect.",
+          "Buses cover more of Tel Aviv than the Red Line light rail, connecting hotels, beaches, markets, museums and university areas. Bus routes and stops may change during roadworks or events. Check your journey using your exact starting point and destination.",
+          "At the bus stop, confirm the route number and direction before boarding. Use a loaded Rav-Kav, approved payment app or another method accepted by the operator, and validate your ride. On Fridays and holidays, check the last departure in advance.",
         ],
         photo: { src: archivedBuses, alt: "City buses at a Tel Aviv metropolitan transport terminal" },
         bullets: [
           "Check the live stop and service direction, especially on one-way streets.",
           "Plan the final walk from the stop, including crossings and stroller access.",
-          "Some night routes run on particular nights; do not assume the normal route is a 24-hour service.",
+          "Some night buses operate only on selected nights. Don't assume your regular route runs around the clock.",
           "Use official operator or route-planner notices to confirm disruptions and the last return.",
         ],
         externalLinks: [{ label: "National public-transport route planner", href: "https://route.bus.gov.il/" }],
@@ -1149,8 +1149,8 @@ telAviv: {
       {
         id: "red-line", title: "Tel Aviv light rail: Red Line stops and how it works",
         paragraphs: [
-          "The operating Red Line links parts of Tel Aviv–Jaffa with Bat Yam, Ramat Gan, Bnei Brak and Petah Tikva. It is particularly useful along the Ayalon/Begin corridor and in parts of Jaffa, but it does not run along the beachfront or directly reach many northern hotels. Future Green and Purple Line maps should not be mistaken for services already running.",
-          "The Red Line has different service patterns (R1, R2 and R3, with R2 described by the operator as partially operated). Read the electronic destination signs before boarding; not every train has the same terminus. Underground and street-level stations use different layouts.",
+          "The Red Line connects parts of Tel Aviv–Jaffa with Bat Yam, Ramat Gan, Bnei Brak and Petah Tikva. It's useful for journeys through central and southern Tel Aviv and parts of Jaffa, but it does not run along the beachfront or serve many northern hotels directly. The planned Green and Purple Lines are separate from the operating Red Line; check which lines are open before travelling.",
+          "Red Line trains may have different final destinations (R1, R2 and R3). Check the electronic signs and make sure your train stops where you need to get off.",
         ],
         tables: [{
           caption: "Red Line stations and nearby places",
@@ -1169,8 +1169,8 @@ telAviv: {
         subsections: [{
           id: "ta-redline-validation", title: "Validate before you board",
           paragraphs: [
-            "The Red Line requires ticketing and validation before boarding—not inside the tram. At a street-level platform, use the designated validator or ticket machine; at underground stations, follow the gate, Rav-Kav or app QR instructions. Retain the validated card or app journey for inspection.",
-            "Even with a travel pass or an eligible connecting trip, validate the new leg. On leaving an underground station, follow the exit-gate process for your Rav-Kav or app. A normal bank-card tap on a Dan bus is not a light-rail ticket.",
+            "Buy or validate your Red Line ticket before boarding the train. At street-level stops, use the ticket machine or validator. At underground stations, follow the signs for Rav-Kav cards or payment apps. Keep the validated card or app ticket for inspection.",
+            "Validate every journey, even if your pass or transfer covers the fare. Follow the exit-gate instructions when leaving underground stations. Paying by bank card on a Dan bus does not give you a valid Red Line ticket.",
           ],
           externalLinks: [
             { label: "NTA — the Red Line and its stations", href: "https://www.nta.co.il/en/light-rail/red-line/" },
@@ -1183,8 +1183,8 @@ telAviv: {
       {
         id: "national-rail", title: "Which Tel Aviv train station should I use?",
         paragraphs: [
-          "Israel Railways is useful for Ben Gurion Airport and other cities, but Tel Aviv's four mainline stations follow the inland Ayalon corridor rather than the shore. The closest station on the map is not necessarily the best one if you need to cross traffic or make an onward bus connection.",
-          "Use the Israel Railways journey planner for the specific travel date. Timetables can change, including service amendments planned for November 2026; check your actual train, airport connection and last departure. My Ben Gurion Airport to Tel Aviv guide compares onward transport to a hotel, not merely the rail journey.",
+          "Israel Railways is useful for airport and intercity trips. Tel Aviv's four main railway stations are inland, away from the beachfront. Choose the station with the easiest bus, taxi or walking connection to your destination.",
+          "Use the Israel Railways planner for your travel date. Train schedules can change, so check departure times, connections and the last service. See my Ben Gurion Airport to Tel Aviv guide for the full journey to your hotel.",
         ],
         tables: [{
           caption: "Tel Aviv's four mainline railway stations",
