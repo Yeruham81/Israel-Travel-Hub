@@ -79,6 +79,7 @@ export function GuideHeroMedia({
   children,
   caption,
   fit = "cover",
+  compact = false,
   srcSet,
   sizes,
   width = 1200,
@@ -89,6 +90,8 @@ export function GuideHeroMedia({
   children?: ReactNode;
   caption?: string | undefined;
   fit?: "cover" | "contain";
+  /** Smaller cover reserved for compact editorial landing-page intros. */
+  compact?: boolean;
   srcSet?: string | undefined;
   sizes?: string | undefined;
   width?: number;
@@ -105,7 +108,7 @@ export function GuideHeroMedia({
         height={height}
         fetchPriority="high"
         decoding="async"
-        className={`block aspect-[16/9] max-h-[300px] w-full rounded-2xl lg:aspect-[4/3] lg:max-h-[260px] ${fit === "contain" ? "bg-secondary/30 object-contain" : "object-cover"}`}
+        className={`block aspect-[16/9] w-full rounded-2xl ${compact ? "max-h-[185px] lg:max-h-[175px]" : "max-h-[300px] lg:aspect-[4/3] lg:max-h-[260px]"} ${fit === "contain" ? "bg-secondary/30 object-contain" : "object-cover"}`}
       />
       {caption && <figcaption className="mt-2 text-xs leading-relaxed text-muted-foreground">{caption}</figcaption>}
       {children}
