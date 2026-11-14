@@ -103,7 +103,7 @@ const guideSections = (g: ItineraryGuide): [string, string][] => [
 export function IsraelItineraryPage({ id }: { id: ItineraryId }) {
   const g = itineraries[id];
   const photo = migrationPhotos[g.hero];
-  const compactOverview = id === "3" || id === "5" || id === "7";
+  const compactOverview = id === "3" || id === "5" || id === "7" || id === "10";
   const showTravel = g.overviewRows?.some(row => Boolean(row.travel));
   const shownImages: { label: string; photo: GuidePhoto }[] = [
     { label: "Cover", photo },
@@ -201,7 +201,7 @@ export function IsraelItineraryPage({ id }: { id: ItineraryId }) {
                         </li>
                       ))}
                     </ul>
-                    {id === "7" && (index === 3 || index === 5) && (
+                    {((id === "7" && (index === 3 || index === 5)) || (id === "10" && (index === 3 || index === 6 || index === 7))) && (
                       <p className="mt-3 text-xs leading-relaxed text-muted-foreground" data-testid="seven-day-transfer-times-note">
                         The times shown are for sightseeing only. Allow extra time for travel between stops, hotel check-in and luggage, especially when using public transport.
                       </p>
@@ -244,7 +244,7 @@ export function IsraelItineraryPage({ id }: { id: ItineraryId }) {
             </div>
             {g.jerusalemTourOptionsDay === index + 1 && (
               <div className="border-t bg-secondary/10 px-5 py-4 sm:px-7">
-                <JerusalemItineraryTourOptions days={id === "7" ? 7 : id === "5" ? 5 : 3} />
+                <JerusalemItineraryTourOptions days={id === "10" ? 10 : id === "7" ? 7 : id === "5" ? 5 : 3} />
               </div>
             )}
             {g.activityWidgets?.filter(widget => widget.day === index + 1).map(widget =>
@@ -259,7 +259,7 @@ export function IsraelItineraryPage({ id }: { id: ItineraryId }) {
     <section id="transport" aria-labelledby="transport-h" className="mt-14 scroll-mt-28">
       <h2 id="transport-h" className="text-3xl">{g.beforeYouGo?.length ? "My practical planning tips" : "Tips for transport and hotel planning"}</h2>
       <p className="mt-3 leading-relaxed">{g.noCarAdvice}</p>
-      {g.beforeYouGo?.length && id !== "5" && id !== "7" ? <h3 className="mt-6 text-xl font-semibold">Transport and hotel planning</h3> : null}
+      {g.beforeYouGo?.length && id !== "5" && id !== "7" && id !== "10" ? <h3 className="mt-6 text-xl font-semibold">Transport and hotel planning</h3> : null}
       <ul className="mt-4 list-disc space-y-4 pl-6 marker:text-primary">
         {g.logistics.map((tip, index) => <li key={tip.heading} className="pl-1 leading-relaxed">
           <strong className="font-semibold">{tip.heading}.</strong>{" "}
@@ -309,8 +309,8 @@ export function IsraelItineraryPage({ id }: { id: ItineraryId }) {
       </div>
     </section> : null}
     <section id="other-durations" aria-labelledby="other-duration-h" className="mt-14 scroll-mt-28">
-      <h2 id="other-duration-h" className="text-3xl">{id === "3" ? "Have more than 3 days in Israel?" : id === "5" ? "Have more or fewer than 5 days in Israel?" : id === "7" ? "Have more or fewer than 7 days in Israel?" : "Plan the rest of your trip"}</h2>
-      <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{id === "3" ? "Explore my 5-, 7- and 10-day itineraries for more time in Jerusalem and other regions, with realistic routes and hotel bases." : id === "5" ? "Explore a shorter 3-day route or discover the 7- and 10-day itineraries for more time in Israel and its different regions." : id === "7" ? "Compare the shorter 3- and 5-day routes or spend longer exploring the country with a 10-day itinerary." : "Have more or fewer days? Compare the routes, hotel bases and travel commitments before choosing a different trip length."}</p>
+      <h2 id="other-duration-h" className="text-3xl">{id === "3" ? "Have more than 3 days in Israel?" : id === "5" ? "Have more or fewer than 5 days in Israel?" : id === "7" ? "Have more or fewer than 7 days in Israel?" : "Have fewer than 10 days in Israel?"}</h2>
+      <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{id === "3" ? "Explore my 5-, 7- and 10-day itineraries for more time in Jerusalem and other regions, with realistic routes and hotel bases." : id === "5" ? "Explore a shorter 3-day route or discover the 7- and 10-day itineraries for more time in Israel and its different regions." : id === "7" ? "Compare the shorter 3- and 5-day routes or spend longer exploring the country with a 10-day itinerary." : "Compare my 3-, 5- and 7-day routes for fewer travel days and a more focused itinerary."}</p>
       <div className="mt-5 grid gap-4 sm:grid-cols-3">
         {itineraryIds.filter((other) => other !== id).map((other) => {
           const choice = itineraries[other];
