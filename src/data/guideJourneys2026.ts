@@ -420,31 +420,31 @@ export const journeyDestinationGuides = {
       "id": "visit-return",
       "title": "Plan a half-day visit and the journey back",
       "paragraphs": [
-        "A half-day is often enough for a focused visit to central Bethlehem, but church queues, travel arrangements and any additional stops should be factored into your plans.",
-        "The Church of the Nativity is part of a UNESCO World Heritage site. Because of restoration work, the Christian Information Center's October 2026 notice lists visits to the Grotto of the Nativity from 12:30 to 14:30 on Monday–Saturday and from 11:00 to 15:00 on Sunday. These are grotto visiting hours, not the basilica's overall opening hours.",
-        "Set a clear meeting time and pickup location for your journey back to Jerusalem. Checkpoint crossings and connections can take longer than the road distance suggests."
+        "Half a day is usually enough to see Bethlehem's main central sites. Allow extra time for church queues, transport and any additional stops.",
+        "The Church of the Nativity is a UNESCO World Heritage site. During restoration, the Christian Information Center's published notice lists grotto visiting hours as 12:30–14:30 Monday–Saturday and 11:00–15:00 Sunday. These hours apply to the grotto, not the whole basilica. Check for updates before visiting.",
+        "Agree on your return pickup time and location in advance. Allow extra time for checkpoints and transport connections."
       ],
       "richParagraphs": [
         [
           {
-            "text": "A half-day is often enough for a focused visit to central Bethlehem, but church queues, travel arrangements and any additional stops should be factored into your plans."
+            "text": "Half a day is usually enough to see Bethlehem's main central sites. Allow extra time for church queues, transport and any additional stops."
           }
         ],
         [
           {
-            "text": "The Church of the Nativity is part of a UNESCO World Heritage site. Because of restoration work, the "
+            "text": "The Church of the Nativity is a UNESCO World Heritage site. During restoration, the "
           },
           {
-            "text": "Christian Information Center's October 2026 notice",
+            "text": "Christian Information Center's published notice",
             "href": "https://www.cicts.org/bethlehem-basilica-of-the-nativity-cts/"
           },
           {
-            "text": " lists visits to the Grotto of the Nativity from 12:30 to 14:30 on Monday–Saturday and from 11:00 to 15:00 on Sunday. These are grotto visiting hours, not the basilica's overall opening hours."
+            "text": " lists grotto visiting hours as 12:30–14:30 Monday–Saturday and 11:00–15:00 Sunday. These hours apply to the grotto, not the whole basilica. Check for updates before visiting."
           }
         ],
         [
           {
-            "text": "Set a clear meeting time and pickup location for your journey back to Jerusalem. Checkpoint crossings and connections can take longer than the road distance suggests."
+            "text": "Agree on your return pickup time and location in advance. Allow extra time for checkpoints and transport connections."
           }
         ]
       ],
@@ -457,7 +457,7 @@ export const journeyDestinationGuides = {
           "id": "bethlehem-sites",
           "title": "What to see around the Church of the Nativity",
           "paragraphs": [
-            "Start with the Church of the Nativity and Manger Square. The Milk Grotto and Star Street are within walking distance of the Nativity precinct, while Shepherds' Field in nearby Beit Sahour generally requires a separate ride. Modest clothing and comfortable walking shoes are useful at active worship sites."
+            "Start at the Church of the Nativity and Manger Square. You can walk to the Milk Grotto and Star Street, but Shepherds' Field in nearby Beit Sahour usually requires a separate ride. Wear modest clothing and comfortable shoes when visiting active places of worship."
           ],
           "photo": {
             "src": milkGrottoPhoto,
@@ -465,7 +465,7 @@ export const journeyDestinationGuides = {
           }
         }
       ],
-      "tip": "If visiting the Grotto of the Nativity is a priority, plan the rest of your day around its limited entry hours and allow time for the queue. Visit nearby sites before or after, rather than counting on being able to return to the grotto later.",
+      "tip": "If the grotto is your priority, allow time for the queue and plan nearby visits around its opening hours.",
       "sourceIds": [
         "m26-cicts-grotto-hours",
         "m26-custodia-nativity-restoration",
@@ -477,7 +477,7 @@ export const journeyDestinationGuides = {
       "title": "Can you visit Bethlehem on Saturday or Sunday?",
       "paragraphs": [
         "East Jerusalem buses can operate on Saturday even when many other Israeli transport services are reduced. South Buses publishes departures by day for routes 231 and 234.",
-        "Sunday visits to the Grotto of the Nativity follow a different schedule from weekdays, with a current visitor window of 11:00 to 15:00 in the Christian Information Center's grotto notice."
+        "Check both the bus timetable and church visiting hours for your date."
       ],
       "richParagraphs": [
         [
@@ -494,14 +494,7 @@ export const journeyDestinationGuides = {
         ],
         [
           {
-            "text": "Sunday visits to the Grotto of the Nativity follow a different schedule from weekdays, with a current visitor window of 11:00 to 15:00 in the "
-          },
-          {
-            "text": "Christian Information Center's grotto notice",
-            "href": "https://www.cicts.org/bethlehem-basilica-of-the-nativity-cts/"
-          },
-          {
-            "text": "."
+            "text": "Check both the bus timetable and church visiting hours for your date."
           }
         ]
       ],
@@ -532,11 +525,11 @@ export const journeyDestinationGuides = {
     },
     {
       "q": "Can a Palestinian driver pick me up in Jerusalem?",
-      "a": "Yes, if the driver and vehicle are appropriately authorised and insured for the complete route. Some Palestinian taxis can be found or arranged in East Jerusalem."
+      "a": "Yes, provided the driver and vehicle are authorised and insured for the full journey. Some suitable taxis can be arranged in East Jerusalem."
     },
     {
       "q": "Can an Israeli taxi take me directly into Bethlehem?",
-      "a": "An Israeli-citizen taxi driver cannot make an ordinary through trip into Area A. A taxi may take you to Checkpoint 300, where eligible visitors can arrange the crossing and a separate local ride."
+      "a": "An Israeli taxi will not normally take you directly into Bethlehem. Eligible visitors can travel to Checkpoint 300, cross on foot when permitted and arrange onward transport."
     },
     {
       "q": "Do I need a passport to visit Bethlehem?",
@@ -544,7 +537,7 @@ export const journeyDestinationGuides = {
     },
     {
       "q": "Is half a day enough to visit Bethlehem?",
-      "a": "A half-day is often enough for the Church of the Nativity, Manger Square and a nearby site, but allow time for the grotto's restricted visiting hours and the return journey."
+      "a": "Usually, yes. Half a day can cover the Church of the Nativity, Manger Square and one nearby site, provided you allow time for the return trip."
     },
     {
       "q": "Is there a train from Jerusalem to Bethlehem?",
@@ -560,7 +553,7 @@ export const journeyDestinationGuides = {
     },
     {
       "q": "Is the Grotto of the Nativity open to visitors?",
-      "a": "Yes, but during restoration the current visiting window is 12:30–14:30 Monday–Saturday and 11:00–15:00 Sunday, according to the Christian Information Center's October 2026 notice."
+      "a": "Yes, but visits to the grotto may be restricted during restoration. Check the Christian Information Center's current notice for visiting hours before you go."
     }
   ],
   "related": [
