@@ -627,8 +627,8 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
     id: "israel",
     title: "Getting Around Israel: Trains, Buses, Taxis & Travel Tips",
     description: "Getting around Israel: trains, buses, Rav-Kav, mobile payments, taxis, Shabbat travel, rental cars and practical routes between major cities.",
-    intro: "Getting around Israel is easier with a well-planned itinerary and transport choices that suit each region. Compare trains, buses, light rail, taxis and other available options, considering connections between destinations, payment methods and Shabbat services.",
-    answer: "For rail-connected cities such as Tel Aviv, Jerusalem and Haifa, start by comparing trains and buses for your full door-to-door trip. Use city buses, operating light rail, the Haifa Metronit and walking for local journeys. Tourists can generally pay with a preloaded anonymous Rav-Kav card or an approved mobile payment app; ordinary bus drivers do not accept cash, and direct bank-card taps are not yet universal. Licensed taxis and confirmed transfers help with awkward last-mile connections or Shabbat, while a rental car suits more remote or multi-stop itineraries. Always check your exact route, payment method and return departure.",
+    intro: "Travelling around Israel is straightforward in many cities, but some destinations require more planning. Here's how to use trains, buses, light rail and taxis, pay for public transport and get around during Shabbat.",
+    answer: "For trips between Tel Aviv, Jerusalem and Haifa, compare train and bus routes, including the journey to your hotel. Within cities, walking, buses and light rail are often the easiest options. Haifa also has its Metronit bus network. Most visitors can use a loaded Rav-Kav card or an approved payment app. Cash isn't normally accepted on buses, and contactless bank-card payments are available only on selected services. Taxis and private transfers are useful for direct journeys or travel during Shabbat. Renting a car can make sense for remote destinations and trips with several stops.",
     topics: ["transportation", "destinations", "itineraries", "tips"],
     updatedAt: "2026-11-12",
     photo: {
@@ -636,9 +636,9 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
       alt: "Buses waiting at a transport terminal in the Tel Aviv metropolitan area",
     },
     facts: [
-      { label: "Between cities", text: "Compare the train and direct bus for your actual station and address" },
+      { label: "Between cities", text: "Compare train and bus routes to your destination" },
       { label: "How to pay", text: "Bring a loaded Rav-Kav card or set up an approved app before boarding" },
-      { label: "Shabbat & holidays", text: "Plan a separate itinerary; regular services often pause" },
+      { label: "Shabbat & holidays", text: "Most regular services stop during Shabbat and holidays" },
     ],
     comparison: {
       caption: "Which transport option suits your journey?",
@@ -646,40 +646,40 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
       rows: [
         ["Train", "Airport and rail-connected cities", "Low", "No regular service", "Stations may be far from your hotel"],
         ["Bus", "City journeys, intercity routes and smaller towns", "Low", "Most routes stop", "Frequency, last bus and final stop"],
-        ["Light rail", "Operating urban corridors in Jerusalem and greater Tel Aviv", "Low", "No regular service", "Only selected corridors; validate before boarding"],
+        ["Light rail", "Operating urban corridors in Jerusalem and greater Tel Aviv", "Low", "No regular service", "Limited routes; validate your ticket before boarding"],
         ["Licensed taxi", "Door-to-door travel and luggage", "Higher, metered", "Usually available", "Fare varies by time, distance and extras"],
-        ["Shared taxi (sherut)", "Specific local shared-vehicle corridors", "Varies", "Some routes may run", "Check the route; former airport services stopped"],
+        ["Shared taxi (sherut)", "Selected local shared-taxi routes", "Varies", "Some routes may run", "Check the route; former airport services stopped"],
         ["Rental car", "Regional road trips and several rural stops", "Variable", "Driving possible", "Rental hours, parking, insurance and permitted roads"],
-        ["Private driver or tour", "Arranged multi-stop travel without self-driving", "Higher", "By confirmation", "Price, scope, inclusions and availability"],
+        ["Private driver or tour", "Arranged multi-stop travel without self-driving", "Higher", "By confirmation", "Total price, included services and availability"],
       ],
     },
     sections: [
       {
         id: "choose-transport", title: "Choose the right transport for your trip",
         paragraphs: [
-          "Do not assume one transport method is best for your whole holiday. A train can work between major cities, a bus or light rail for city neighborhoods, and a taxi for the final connection to your hotel. Compare walking distance, wait time, operating hours and total cost—not only the time spent onboard.",
-          "If your trip focuses on central Tel Aviv and Jerusalem, you can often avoid city-center parking. If you are visiting nature reserves or several sites in one day, a rental car, a private driver or an organized tour may be more realistic. Start with the return journey and the latest service you can safely catch.",
+          "You may need different transport options during your trip. Trains connect many major cities, buses and light rail help within cities, and taxis can take you directly to your hotel. Consider the full journey, including walking, waiting and connections.",
+          "You probably won't need a car for central Tel Aviv or Jerusalem. For nature reserves or several attractions in one day, consider a rental car, private driver or organised tour. Check the last return bus or train before planning your day.",
         ],
         bullets: [
           "Solo travelers and couples: rail and buses usually have the lowest direct cost.",
-          "Families and luggage: include lifts, stairs, stop location and the final taxi or walk.",
-          "Remote destinations: check whether the nearest public-transport stop actually serves the attraction.",
-          "Friday, Saturday or major holiday: plan the operating-day alternative before buying tickets.",
+          "Families and luggage: check station lifts, stairs and the journey to your hotel.",
+          "Remote attractions: check how far the nearest bus stop is from the entrance.",
+          "Fridays and holidays: check service hours and arrange alternative transport if needed.",
         ],
         sourceIds: ["guide-bus-planner", "guide-train-nov-2026"],
       },
       {
         id: "public-transport", title: "Trains, buses and light rail",
         paragraphs: [
-          "These three networks complement each other rather than operating as one continuous door-to-door service. Check your destination station, live route changes, the final connection and the last departure before deciding which is best.",
+          "Trains, buses and light rail can be combined for longer journeys. Check where you need to change services and how to reach your final destination.",
         ],
         subsections: [
           {
             id: "israel-trains", title: "Israel Railways: intercity trains and airport connections",
             paragraphs: [
-              "Israel Railways connects Ben Gurion Airport and many destinations including Tel Aviv, Jerusalem, Haifa, Akko and Be'er Sheva. Choose the real railway station closest to your destination; Tel Aviv's mainline stations are inland, Jerusalem–Yitzhak Navon is near the central bus station rather than the Old City, and Haifa's coastal railway stops can be far below Mount Carmel hotels.",
-              "From November 2026, Israel Railways' revised timetable includes longer through services from Jerusalem via Tel Aviv to several northern stations. Some journeys still require a change of trains.",
-              "As of the August 2026 Israel Railways notice, travel to or from Jerusalem–Yitzhak Navon requires a separate free personal voucher for the selected train, in addition to a valid rail ticket. You can request the voucher starting 72 hours before departure. Check the latest instructions for your date: the voucher is not a replacement ticket. For flight-specific terminal access, see my airport arrival guide.",
+              "Israel Railways connects Ben Gurion Airport and many destinations including Tel Aviv, Jerusalem, Haifa, Akko and Be'er Sheva. Choose your station carefully. Tel Aviv's main railway stations are inland, Jerusalem's Yitzhak Navon station is outside the Old City, and Haifa's stations are below many Mount Carmel hotels.",
+              "Some trains travel directly between Jerusalem, Tel Aviv and northern stations, while others require a change. Check the current timetable for your route.",
+              "Israel Railways has required a separate free personal voucher for travel to or from Jerusalem–Yitzhak Navon, in addition to a train ticket. If the requirement still applies to your journey, request your voucher up to 72 hours before departure and carry it with your train ticket. Check the latest instructions before travelling. For airport terminal details, see my airport arrival guide.",
             ],
             steps: [
               "Up to 72 hours before the journey, search from or to Jerusalem–Yitzhak Navon on the official Israel Railways planner and select your exact train.",
@@ -697,8 +697,8 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
           {
             id: "israel-buses", title: "City buses and intercity buses",
             paragraphs: [
-              "City buses reach neighborhoods beyond railway stations; intercity services connect Tiberias, Safed, Nazareth, Eilat, Dead Sea resorts and many other destinations without direct rail. Some long-distance departures require seat reservations, and remote attractions may be far from the nearest bus stop.",
-              "Use the national journey planner with your actual start and end addresses. Check the boarding side of the street, whether you need to change vehicles, ticket acceptance and the last return bus. Public transport information may be incomplete during diversions, holidays or security-related changes.",
+              "City buses reach areas beyond railway stations. Intercity buses also serve destinations such as Tiberias, Safed, Nazareth, Eilat and the Dead Sea. Some long-distance buses require advance reservations. For remote attractions, check the distance from the nearest bus stop.",
+              "Enter your departure point and destination in the national journey planner. Check the bus stop, connections, payment options and last return service. Schedules can change during holidays, road closures or security-related disruptions.",
             ],
             highlightedLinks: [
               { label: "National public transport route planner", href: "https://route.bus.gov.il/", context: "Search buses and light rail by the exact travel date, stop and direction. Verify important departures with the operator." },
@@ -709,8 +709,8 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
           {
             id: "israel-light-rail", title: "Light rail and bus rapid transit",
             paragraphs: [
-              "Jerusalem's light rail is useful along its operating corridor, including parts of the center and approaches to the Old City. Greater Tel Aviv's operating Red Line serves parts of Tel Aviv–Jaffa, Ramat Gan, Bnei Brak, Petah Tikva and Bat Yam; it does not reach every beach or hotel. Do not confuse future rail lines with those already running.",
-              "Haifa also has the Metronit bus rapid transit network and the Carmelit underground funicular between the Lower City and Carmel Center. The university-bound Rakbalit cable-car transit is a separate service from the tourist cable car near Bat Galim. Always check operating hours and ticket acceptance for the specific system.",
+              "Jerusalem's light rail is useful along its operating corridor, including parts of the center and approaches to the Old City. Greater Tel Aviv's operating Red Line serves parts of Tel Aviv–Jaffa, Ramat Gan, Bnei Brak, Petah Tikva and Bat Yam; it does not reach every beach or hotel. Check which light-rail lines are currently operating.",
+              "Haifa also has the Metronit bus rapid transit network and the Carmelit underground funicular between the Lower City and Carmel Center. Haifa's Rakbalit cable car serves the university area. It's different from the tourist cable car near Bat Galim. Always check operating hours and ticket acceptance for the specific system.",
             ],
             photo: {
               src: jerusalemLightRail,
