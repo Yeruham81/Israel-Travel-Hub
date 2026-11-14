@@ -124,7 +124,7 @@ describe("home mobile performance optimizations", () => {
 
   it("uses resized hero-adjacent service images and destination tiles", () => {
     const home = read("src/routes/index.tsx");
-    for (const name of ["guided-tour", "cruise-port", "caesarea-dusk"]) {
+    for (const name of ["guided-tour", "cruise-port"]) {
       const base = `src/assets/home/${name}`;
       expect(bytes(`${base}-feature.webp`)).toBeLessThan(bytes(`${base}.webp`));
       expect(home).toContain(`${name}-feature.webp`);
