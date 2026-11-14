@@ -860,8 +860,8 @@ export const journeyDestinationGuides = {
       "updatedAt": "2026-11-13",
       "title": "How to Get from Jerusalem to the Dead Sea: Bus, Taxi, Tours & Car",
       "description": "How to travel from Jerusalem to the Dead Sea by bus 486/444, taxi, private driver, group tour or rental car. Compare costs, convenience, return trips and useful stops.",
-      "intro": "Leaving Jerusalem for the Dead Sea takes you from the city's hills into the striking landscapes of the Judean Desert. Whether you're planning a relaxing beach day or a journey with memorable stops along the way, a little planning will help you make the most of the trip.",
-      "answer": "The cheapest way from Jerusalem to the Dead Sea is generally an Egged bus: line 486 runs towards Ein Bokek and line 444 also serves Dead Sea stops, with advance seat reservation requirements. Allow roughly 1½–2 hours to the Ein Bokek hotel area. A taxi or private transfer is more convenient door to door; a guided day tour handles the itinerary, while a rental car offers the most independence. For swimming, head to the free public beach at Ein Bokek. Check your return journey before setting out.",
+      "intro": "The Dead Sea is one of the most popular day trips from Jerusalem. You can travel by bus, taxi, private driver, organised tour or rental car. The best option depends on whether you're visiting a beach or combining several attractions.",
+      "answer": "For a budget-friendly trip, take Egged bus 486 or reserved-seat bus 444 from Jerusalem. Allow around 1½–2 hours to reach the Ein Bokek hotel area. A taxi or private driver takes you directly to your destination. An organised tour includes planned stops, while a rental car lets you explore at your own pace. For swimming, head to the free public beach at Ein Bokek. Check your return journey before setting out.",
       "topics": [
         "transportation",
         "destinations",
@@ -871,7 +871,7 @@ export const journeyDestinationGuides = {
       "facts": [
         {
           "label": "Public bus",
-          "text": "Egged 486; 444 may require advance seat booking"
+          "text": "Egged 486 or reserved-seat bus 444"
         },
         {
           "label": "Beach day",
@@ -893,15 +893,15 @@ export const journeyDestinationGuides = {
         "rows": [
           [
             "Egged bus 486 / 444",
-            "Usually the lowest-cost way to reach one Dead Sea stop",
-            "Fixed timetable; limited return services and awkward connections between attractions",
+            "The cheapest option for a single destination",
+            "Limited departures and difficult connections between attractions",
             "Board at Jerusalem Central Bus Station; check your destination stop and the final bus back"
           ],
           [
             "Taxi or private driver",
             "Direct hotel pickup, comfort and flexible stops",
             "More expensive than a bus, especially for one or two people",
-            "Agree a one-way transfer or a full-day round trip with waiting"
+            "Confirm whether you're booking a one-way ride or a full day with waiting and return transport"
           ],
           [
             "Organised day tour",
@@ -913,7 +913,7 @@ export const journeyDestinationGuides = {
             "Rental car",
             "Choose your own departure time, beach and sightseeing stops",
             "Driving, parking and rental conditions are your responsibility",
-            "Allow time for collecting the car and check desert road and weather conditions"
+            "Allow time to collect the car, and check road and weather conditions"
           ]
         ]
       },
@@ -922,9 +922,9 @@ export const journeyDestinationGuides = {
           "id": "bus",
           "title": "By public bus: Egged 486 and 444",
           "paragraphs": [
-            "Egged 486 leaves Jerusalem Central Bus Station and travels along the Dead Sea corridor, with stops near Ein Gedi, Masada and the Ein Bokek hotel district. Egged 444 also passes through the area on its way to Eilat, but requires advance seat reservation. The bus is generally the most economical choice if you are visiting a single destination.",
-            "For a beach-only visit, select the stop nearest Ein Bokek's public beach and check the platform and fare in Egged's timetable or the national journey planner. There is no train to the Dead Sea, and not every Highway 90 stop is within easy walking distance of a beach or attraction.",
-            "The main disadvantage is the limited flexibility: buses between attractions may be infrequent, and return services to Jerusalem can end early. Friday, Shabbat and holiday timetables are especially restrictive. If you want to visit several sites, compare the total time spent waiting for buses with a guided tour or private ride."
+            "Bus 486 leaves Jerusalem Central Bus Station and stops at several Dead Sea destinations, including Ein Gedi, Masada and Ein Bokek. Bus 444 also serves the area on its way to Eilat but requires an advance seat reservation. Both are affordable options for visiting a single destination.",
+            "For a beach day, choose the stop nearest Ein Bokek's public beach. Check the departure platform, fare and timetable before travelling. There is no train to the Dead Sea. Some bus stops are far from beaches and attractions, so check your exact destination.",
+            "Buses between Dead Sea attractions can be infrequent, and the last return bus to Jerusalem may leave early. Friday, Shabbat and holiday timetables are especially restrictive. If you're visiting several attractions, a guided tour or private driver may save considerable travel and waiting time."
           ],
           "sourceIds": [
             "m26-egged",
@@ -940,14 +940,14 @@ export const journeyDestinationGuides = {
               "href": "https://bus.gov.il/"
             }
           ],
-          "tip": "Start by checking the last bus back from your exact stop in Ein Bokek, Masada or Ein Gedi. That departure determines how much time you really have at the Dead Sea."
+          "tip": "Check the last bus back to Jerusalem from your chosen stop before planning the day's activities."
         },
         {
           "id": "private",
           "title": "By taxi or private driver: direct travel from your hotel",
           "paragraphs": [
-            "A taxi or pre-booked private transfer takes you from your Jerusalem hotel straight to the free public beach in the Ein Bokek hotel district, without carrying bags to the central bus station. It is an easy choice for families, visitors with luggage or anyone travelling when bus services are limited.",
-            "For a simple drop-off, arrange a one-way transfer and plan your return separately. For a full sightseeing day, arrange a driver who stays with you and takes you between sites. Agree one total price covering your stops, waiting and return; driving does not automatically include guiding or admission.",
+            "A taxi or pre-booked transfer takes you directly from your Jerusalem hotel to your chosen Dead Sea destination. This is particularly convenient for families, travellers with luggage and visitors travelling when buses are unavailable.",
+            "Book a one-way transfer if you only need a drop-off. For sightseeing at several locations, arrange a driver who can wait and take you back to Jerusalem. Confirm the total price, including stops, waiting time and return transport. Guiding and attraction tickets may cost extra.",
             "The main drawback is price, but a private vehicle can be more practical for a small group splitting the cost. For a ready-made full-day option, see my private Masada and Dead Sea tour from Jerusalem, starting at ₪2,100 per vehicle for up to four travellers (admission and guiding are extra). For a different itinerary, tell me your pickup location, passenger count, planned stops and return time when requesting a quote through my private driver service."
           ],
           "inlineLinks": [
