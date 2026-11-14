@@ -77,7 +77,7 @@ export const taxiGuideCluster: Record<"taxis" | "taxiFares" | "airportTaxis", Tr
         paragraphs: [
           "An ordinary taxi meter calculates the fare using a starting charge, distance, travel time and the applicable tariff. Heavy traffic can increase the fare, even for a short trip. Some intercity journeys have legally approved fixed-fare options. Confirm which pricing method applies before travelling.",
           "Under the published regulations, the meter starts at ₪12.46 outside Eilat and then increases with both time and distance. Night and weekend tariffs can be higher, and longer rides have a higher rate per kilometre. The table below summarizes the main regulated charges.",
-          `An app, telephone or dispatcher booking may carry a regulated booking fee. Airport departures, tolls and other permitted items may cost extra. Consult the national tariff guide for the legal time windows, full additions, price examples and any subsequent changes.`,
+          `An app, telephone or dispatcher booking may carry a regulated booking fee. Airport departures, tolls and other permitted items may cost extra. For tariff hours, permitted additions and fare examples, see my guide to taxi fares in Israel. Check the latest official tariff updates before travelling.`,
           "A separately contracted private transfer can instead have a confirmed written price. Check whether waiting, tolls and extra stops are included before you book.",
         ],
         tables: [{
@@ -86,7 +86,7 @@ export const taxiGuideCluster: Record<"taxis" | "taxiFares" | "airportTaxis", Tr
           rows: consumerFareTable.rows.slice(0, 4),
           note: "Rates effective 1 April 2026 and scheduled through March 2027 unless amended. Time and distance are charged together. Eilat may use VAT-free rates; tolls and other allowed additions are not included.",
         }],
-        inlineLinks: [{ text: "national tariff guide", to: travelGuidePaths.taxiFares }],
+        inlineLinks: [{ text: "guide to taxi fares in Israel", to: travelGuidePaths.taxiFares }],
         sourceIds: ["taxi-fares-2026", "taxi-passenger-rights"],
       },
       {
