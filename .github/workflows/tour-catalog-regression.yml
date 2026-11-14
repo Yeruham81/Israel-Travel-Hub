@@ -1,0 +1,40 @@
+name: Tour catalog regression
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'src/components/TourCategoryPage.tsx'
+      - 'src/components/TourCatalog.tsx'
+      - 'src/data/tours.ts'
+      - 'src/data/tourTypes.ts'
+      - 'src/data/registry.ts'
+      - 'src/lib/tours.ts'
+      - 'src/test/tours.test.tsx'
+      - '.github/workflows/tour-catalog-regression.yml'
+permissions:
+  contents: read
+concurrency:
+  group: tours-regression-${{ github.ref }}
+  cancel-in-progress: false
+jobs:
+  tests:
+    name: Validate linked tour catalog routes
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      CI: "true"
+      VITE_INDEXABLE: "false"
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: "1.4.4"
+      - run: bash scripts/install-ci-dependencies.sh
+      - name: Check tour catalog regression tests
+        run: bun run test src/test/tours.test.tsx
