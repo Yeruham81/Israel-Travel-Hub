@@ -12,7 +12,7 @@ import telAvivDizengoff from "@/assets/tel-aviv/dizengoff.webp";
 import keremHaTeimanim from "@/assets/tel-aviv/kerem-hateimanim.webp";
 import rothschild from "@/assets/tel-aviv/rothschild.webp";
 import akko from "@/assets/shore-excursions/akko-port.jpg";
-import haifaPanorama from "@/assets/haifa/panorama.webp";
+import heroHaifa from "@/assets/home/hero-haifa.webp";
 import haifaPanoramaTile from "@/assets/haifa/panorama-tile.webp";
 import caesareaTheatre from "@/assets/home/caesarea-theatre.webp";
 import caesareaTheatreCard from "@/assets/home/caesarea-theatre-card.webp";
@@ -132,7 +132,7 @@ export const tourPhotos: Record<string, GuidePhoto> = {
   "coast-coach-tel-aviv": { src: caesareaDusk, alt: "Historic coastal Caesarea in the evening light" },
   "coast-coach-jerusalem": { src: haifaPortImage, alt: "Port of Haifa with the coastal city rising behind it" },
   "coast-akko-jerusalem": { src: heroCaesarea, alt: "Historic Caesarea archaeological park by the Mediterranean Sea" },
-  "coast-private-jerusalem-tel-aviv": { src: haifaPanorama, alt: "Panoramic view of Haifa, the gardens and the Mediterranean Sea" },
+  "coast-private-jerusalem-tel-aviv": { src: heroHaifa, alt: "Panoramic cityscape of Haifa on the slopes of Mount Carmel" },
   "coast-private-cross-israel": { src: caesareaDuskCard, alt: "Sunlit Roman-era coastal ruins at Caesarea" },
   "coast-private-rosh-hanikra": { src: "/images/attractions/haifa-coast.webp", alt: "Northern Israel Mediterranean coastline near Haifa" },
   "mahane-yehuda-tasting": jerusalemAreaGuides.find(n => n.id === "mahane-yehuda")!.photo,
