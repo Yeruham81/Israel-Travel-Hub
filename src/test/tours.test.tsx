@@ -657,7 +657,7 @@ describe("tours hub and SEO category pages", () => {
   it("tracks the product and offer separately on external booking clicks", async () => {
     await renderPage("/tours/eilat-red-sea/");
     const card = screen.getAllByTestId("tour-card").find(card => card.getAttribute("data-product-id") === "eilat-glass-bottom-boat")!;
-    fireEvent.click(within(card).getByRole("link", { name: /View on GetYourGuide/ }));
+    fireEvent.click(within(card).getByRole("link", { name: "View tour ↗" }));
     expect(readOutboundClicks()[0]).toMatchObject({ pageId: "tours-eilat-red-sea", productId: "eilat-glass-bottom-boat", offerId: "tour-eilat-glass-bottom-boat-getyourguide" });
   });
 
