@@ -44,6 +44,7 @@ import itineraryChurchHolySepulchre from "@/assets/guides/holy-sepulchre.jpg";
 import itineraryCapernaumSynagogue from "@/assets/guides/capernaum.jpg";
 import itineraryCaesareaAqueduct from "@/assets/home/caesarea-aqueduct.webp";
 import itineraryAkkoPort from "@/assets/shore-excursions/akko-port.jpg";
+import itineraryTenDayCover from "@/assets/home/hero-jerusalem-large.webp";
 
 
 export const migrationPhotos = {
@@ -232,6 +233,10 @@ export const migrationPhotos = {
   "itinerary-7day-capernaum": {
     "src": itineraryCapernaumSynagogue,
     "alt": "Archaeological remains at Capernaum on the northern Sea of Galilee shore"
+  },
+  "itinerary-10day-cover": {
+    "src": itineraryTenDayCover,
+    "alt": "Panoramic view of Jerusalem and its historic skyline"
   },
   "itinerary-10day-akko-port": {
     "src": itineraryAkkoPort,
