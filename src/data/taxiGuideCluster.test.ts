@@ -74,7 +74,7 @@ describe("intent-specific taxi guide cluster", () => {
     expect(examples).toContain("₪51.40");
     expect(examples).toContain("₪102.59");
     const after10 = taxiGuideCluster.taxiFares.sections.find((section) => section.id === "time-distance")!.paragraphs.join(" ");
-    expect(after10).toContain("instead of the standard kilometre rate");
+    expect(after10).toContain("higher kilometre rate applies");
   });
 
   it("retains useful standalone answers and original images in the general taxi guide", () => {
@@ -93,7 +93,7 @@ describe("intent-specific taxi guide cluster", () => {
     const apps = guide.sections.find((section) => section.id === "apps")!;
     expect(apps.externalLinks?.map((link) => link.href)).toEqual(["https://www.gett.com/il/", "https://appli.taxi/rider/"]);
     expect(guide.sections.find((section) => section.id === "airport")?.paragraphs.join(" ")).toContain("at least two hours");
-    expect(guide.sections.find((section) => section.id === "airport")?.paragraphs.join(" ")).toContain("₪5");
+    expect(guide.sections.find((section) => section.id === "airport")?.paragraphs.join(" ")).toContain("permitted airport departure fee");
     expect(guide.sections.find((section) => section.id === "holidays")?.paragraphs.join(" ")).toContain("16:01");
     expect(guide.sections.find((section) => section.id === "intercity")?.paragraphs.join(" ")).toContain("pedestrian crossing");
     expect(guide.sections.find((section) => section.id === "safety")?.externalLinks?.[0]?.href).toContain("complaint_about_conduct_in_public_transportation");
