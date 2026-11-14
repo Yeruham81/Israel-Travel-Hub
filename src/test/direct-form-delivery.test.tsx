@@ -35,12 +35,21 @@ function connectServer(service: ReturnType<typeof createQuoteDeliveryService>) {
 }
 
 describe("one-step direct form delivery", () => {
+  it("keeps guide inquiry subject blank even if the page suggests a title", async () => {
+    const router = createRouter({ routeTree, context: { queryClient: new QueryClient() }, history: createMemoryHistory({ initialEntries: ["/travel-blog/jerusalem-travel-guide/"] }), trailingSlash: "always" });
+    await router.load();
+    render(<RouterContextProvider router={router}><HomeContactForm guide={{ heading: "Jerusalem enquiry", introduction: "Tell me your plans.", subject: "Automatically suggested", placeholder: "Your question…" }} /></RouterContextProvider>);
+    expect(screen.getByLabelText("Subject *")).toHaveValue("");
+    expect(screen.getByLabelText("Your message *")).toHaveValue("");
+  });
+
   it.each(["homepage", "about"] as const)("delivers the %s contact form through server validation with every field and the source name", async (context) => {
     const send = vi.fn().mockResolvedValue(undefined);
     const fetch = connectServer(createQuoteDeliveryService({ environment: enabled, send, now }));
     const { path, title } = await contactForm(context);
     // Shared forms retain the portrait by default; only the actual home page suppresses it.
     expect(document.getElementById("contact")?.querySelector("img")).not.toBeNull();
+    expect(screen.getByLabelText("Subject *")).toHaveValue("");
     expect(fetch).not.toHaveBeenCalled();
     fireEvent.click(screen.getByRole("button", { name: "Send message" }));
     expect(screen.getByRole("alert")).toBeInTheDocument();
