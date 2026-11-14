@@ -301,7 +301,7 @@ describe("migrated practical guides", () => {
       "ta-ravkav", "ta-mobile-payment", "ta-bank-card",
     ]);
     expect(guide.sections.find(section => section.id === "shabbat")?.paragraphs.join(" ")).toMatch(/Terminal 1/);
-    expect(guide.sections.find(section => section.id === "bikes")?.paragraphs.join(" ")).toMatch(/minimum age of 16/);
+    expect(guide.sections.find(section => section.id === "bikes")?.paragraphs.join(" ")).toMatch(/at least 16.*qualification requirements/s);
     expect(guide.photo.src).toMatch(/^\/(?:src\/)?assets\//);
     expect(guide.photo.licenseUrl).toBe("https://creativecommons.org/licenses/by/2.5/");
     expect(guide.faqs).toHaveLength(15);
@@ -375,7 +375,7 @@ describe("migrated practical guides", () => {
     expect(guide.comparison.headers).toEqual(["Transport", "Best for", "Cost level", "On Shabbat?", "Main limitation"]);
     expect(guide.comparison.rows).toHaveLength(7);
     expect(guide.facts).toHaveLength(3);
-    expect(guide.intro).toMatch(/well-planned itinerary.*each region/s);
+    expect(guide.intro).toContain("some destinations require more planning");
     expect(guide.intro).not.toMatch(/renting a car/);
     expect(guide.facts.find(fact => fact.label === "How to pay")?.text).toContain("Rav-Kav card");
     const payment = guide.sections.find(section => section.id === "paying")!;
@@ -396,7 +396,7 @@ describe("migrated practical guides", () => {
     expect(guide.photo.licenseUrl).toBeUndefined();
     expect(guide.photo.sourceUrl).toBeUndefined();
     const rail = guide.sections.find(section => section.id === "public-transport")!.subsections!.find(sub => sub.id === "israel-trains")!;
-    expect(rail.paragraphs.join(" ")).toMatch(/From November 2026, Israel Railways' revised timetable/);
+    expect(rail.paragraphs.join(" ")).toContain("Check the current timetable for your route");
     expect(rail.paragraphs.join(" ")).not.toMatch(/November 14, 2026/);
     expect(rail.paragraphs.join(" ")).toContain("my airport arrival guide");
     expect(rail.steps).toHaveLength(3);
@@ -404,10 +404,10 @@ describe("migrated practical guides", () => {
     const bankCard = payment.subsections!.find(sub => sub.id === "israel-ticket-rules")!;
     expect(bankCard.paragraphs.join(" ")).toMatch(/Eilat, Jerusalem and metropolitan Haifa/);
     expect(bankCard.paragraphs.join(" ")).toMatch(/international Visa and Mastercard/);
-    expect(bankCard.paragraphs.join(" ")).toMatch(/expand gradually, but as of November 2026/);
+    expect(bankCard.paragraphs.join(" ")).toContain("not available across the entire bus network");
     const airport = guide.sections.find(section => section.id === "taxis-and-sherut")!.subsections!.find(sub => sub.id === "israel-airport-options")!;
-    expect(airport.paragraphs.join(" ")).toContain("My airport arrival guide");
-    expect(airport.paragraphs.join(" ")).toContain("My Ben Gurion Airport taxi guide");
+    expect(airport.paragraphs.join(" ")).toContain("my airport arrival guide");
+    expect(airport.paragraphs.join(" ")).toContain("my Ben Gurion Airport taxi guide");
     expect(bankCard.sourceIds).toContain("guide-egged-card-payment-2026");
     const popular = guide.sections.find(section => section.id === "planning")!.subsections!.find(sub => sub.id === "israel-popular-journeys")!;
     expect(popular.tables?.[0]?.rowLinks).toHaveLength(4);
@@ -433,6 +433,28 @@ describe("migrated practical guides", () => {
       "/travel-blog/how-to-get-from-ben-gurion-airport-to-haifa/",
       "/travel-blog/how-to-get-from-ben-gurion-airport-to-ein-bokek/",
     ]));
+  });
+
+  it("keeps both transport guides concise without losing safety, payment and visitor guidance", () => {
+    const national = travelGuides.israel;
+    const telAviv = travelGuides.telAviv;
+    expect(national.intro).toContain("pay for public transport");
+    expect(national.sections.find(section => section.id === "public-transport")?.subsections?.find(sub => sub.id === "israel-trains")?.steps).toHaveLength(3);
+    expect(national.sections.find(section => section.id === "paying")?.subsections?.find(sub => sub.id === "israel-ticket-rules")?.paragraphs.join(" ")).toContain("contactless");
+    expect(national.sections.find(section => section.id === "rental-car")?.subsections?.find(sub => sub.id === "israel-rentals")?.paragraphs.join(" ")).toContain("Area A");
+    expect(telAviv.sections.find(section => section.id === "red-line")?.subsections?.find(sub => sub.id === "ta-redline-validation")?.paragraphs.join(" ")).toContain("before boarding");
+    expect(telAviv.sections.find(section => section.id === "bikes")?.paragraphs.join(" ")).toContain("passengers");
+    expect(telAviv.sections.find(section => section.id === "shabbat")?.paragraphs.join(" ")).toContain("Terminal 1");
+    expect(telAviv.sections.find(section => section.id === "shared-taxis")?.paragraphs.join(" ")).not.toContain("should not be presented");
+    expect(telAviv.sections.find(section => section.id === "national-rail")?.paragraphs.join(" ")).not.toContain("planned for November 2026");
+    expect(telAviv.faqs.find(faq => faq.q === "Can I use a foreign Visa or Mastercard on Dan buses?")?.a).not.toContain("NIS 8");
+    for (const guide of [national, telAviv]) {
+      for (const section of guide.sections.flatMap(section => [section, ...(section.subsections ?? [])])) {
+        for (const link of section.inlineLinks ?? []) {
+          expect(section.paragraphs.join(" ").split(link.text), guide.id + "/" + section.id + "/" + link.text).toHaveLength(2);
+        }
+      }
+    }
   });
 
   it("renders national transport subchapters, linked comparisons, relevant images, guide cards and bottom sources", async () => {
