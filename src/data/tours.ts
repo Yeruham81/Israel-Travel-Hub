@@ -462,13 +462,13 @@ export const tourCategories: TourCategory[] = [
   },
   {
     id: "golan-heights", title: "Golan Heights tours", shortTitle: "Golan Heights",
-    description: "Compare guided Golan Heights day trips and private tours to Mount Bental, Katzrin, northern nature reserves and archaeological sites, with no Safed itineraries.",
+    description: "Compare guided Golan Heights day trips and private tours to Mount Bental, Katzrin, northern nature reserves and archaeological sites.",
     intro: "Explore the high plateau above the Sea of Galilee, from Mount Bental's expansive views to the ancient sites and scenic valleys of the Golan Heights. Compare group trips from Tel Aviv and Jerusalem with private guiding and selected local tours.",
     photo: { src: golanBentalView, alt: "View from Mount Bental across the Golan Heights", sourceUrl: "https://commons.wikimedia.org/wiki/File:131596_views_from_mount_bental_in_ramat_-_the_golan_heigh_PikiWiki_Israel.jpg", credit: "PikiWiki Israel · CC license and author details on Wikimedia Commons" },
     match: { destinations: ["golan"] },
     paragraphs: [
       "A typical Golan day trip visits Mount Bental, Katzrin or local archaeological sites and overlooks. Longer routes may offer time at Ein Keshatot, Tel Dan, Banias or Nimrod Fortress. These are not universal stops: some tours only view landmarks from the road, while others require separate entrance tickets.",
-      "Shared trips from Tel Aviv and Jerusalem are generally long days. Private guiding may provide more flexibility, but pickup points, route changes, vehicle access and attraction openings still require confirmation with the operator. No itinerary in this selection includes Safed.",
+      "Shared trips from Tel Aviv and Jerusalem are generally long days. Private guiding may provide more flexibility, but pickup points, route changes, vehicle access and attraction openings still require confirmation with the operator. Every listed tour is selected for its Golan Heights itinerary.",
       "Parts of the Golan are close to military zones and the UN-monitored separation area. Current travel warnings, possible minefield areas, weather and temporary park or trail closures can change routes at short notice. Avoid unmarked tracks, heed all signs and check authoritative instructions and the operator's confirmed itinerary before booking.",
     ],
     choices: [
@@ -477,7 +477,7 @@ export const tourCategories: TourCategory[] = [
       { title: "Private guiding & off-road", text: "Compare privately led trips for a more flexible route, while confirming all access and safety restrictions." },
     ],
     faqs: [
-      { q: "Do these Golan Heights tours include Safed?", a: "No. This catalog focuses on Golan Heights destinations and excludes itineraries that include Safed." },
+      { q: "Is this category limited to the Golan Heights?", a: "Yes. It focuses on destinations in the Golan. Some tours approach the plateau via the Sea of Galilee or Tel Dan, but the main sightseeing is in the Golan region." },
       { q: "Can I depart from Jerusalem or Tel Aviv?", a: "Yes. Several tours list pickup from those cities; others meet locally in northern Israel. Check each booking page for the actual departure and return plan." },
       { q: "Are Mount Bental and Katzrin included on every tour?", a: "They are common stops, but not all products visit both. Private routes and jeep tours can focus on different parts of the Golan. Read the detailed stop list." },
       { q: "Can I visit Banias waterfalls or Nimrod Fortress?", a: "Only when the operator lists them and access is permitted. Some trips instead offer viewpoints, and admissions may be separate. Current park and security restrictions can change." },
