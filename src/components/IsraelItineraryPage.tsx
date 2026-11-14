@@ -203,6 +203,16 @@ export function IsraelItineraryPage({ id }: { id: ItineraryId }) {
                     </ul>
                   </div>
                 )}
+                {g.dayChoices?.find(choice => choice.day === index + 1) && (
+                  <div className="mt-5 grid gap-4 border-t pt-4 sm:grid-cols-2" data-testid={`day-${index + 1}-route-choices`}>
+                    {g.dayChoices.find(choice => choice.day === index + 1)!.options.map(option => (
+                      <div key={option.heading} className="min-w-0 text-sm leading-relaxed">
+                        <h4 className="font-semibold">{option.heading}</h4>
+                        <p className="mt-1 text-muted-foreground">{option.text}</p>
+                      </div>
+                    ))}
+                  </div>
+                )}
                 <dl className="space-y-5">
                   <div><dt className="text-sm font-semibold text-primary">Morning</dt><dd className="mt-1 leading-relaxed"><LinkedCopy value={day.morning} links={dayTextLinks(g, index + 1, "morning")} /></dd></div>
                   <div><dt className="text-sm font-semibold text-primary">Afternoon</dt><dd className="mt-1 leading-relaxed"><LinkedCopy value={day.afternoon} links={dayTextLinks(g, index + 1, "afternoon")} /></dd></div>
@@ -219,16 +229,6 @@ export function IsraelItineraryPage({ id }: { id: ItineraryId }) {
                     <p className="mt-1 text-muted-foreground">{option.text}</p>
                   </div>)}
                 </div> : null}
-                {g.dayChoices?.find(choice => choice.day === index + 1) && (
-                  <div className="mt-5 grid gap-4 border-t pt-4 sm:grid-cols-2" data-testid={`day-${index + 1}-route-choices`}>
-                    {g.dayChoices.find(choice => choice.day === index + 1)!.options.map(option => (
-                      <div key={option.heading} className="min-w-0 text-sm leading-relaxed">
-                        <h4 className="font-semibold">{option.heading}</h4>
-                        <p className="mt-1 text-muted-foreground">{option.text}</p>
-                      </div>
-                    ))}
-                  </div>
-                )}
                 {!g.dayInlineLinks?.some(link => link.day === index + 1) && <nav aria-label={`Read more about day ${index + 1}`} className="mt-5 flex flex-wrap gap-x-5 gap-y-2">
                   {day.links.map((link) => <Link key={link.label} to={link.to} className="inline-flex items-center gap-1.5 text-sm font-semibold text-primary underline underline-offset-2">{link.label} <ArrowRight className="h-3.5 w-3.5" aria-hidden /></Link>)}
                 </nav>}
@@ -254,7 +254,7 @@ export function IsraelItineraryPage({ id }: { id: ItineraryId }) {
     <section id="transport" aria-labelledby="transport-h" className="mt-14 scroll-mt-28">
       <h2 id="transport-h" className="text-3xl">{g.beforeYouGo?.length ? "My practical planning tips" : "Tips for transport and hotel planning"}</h2>
       <p className="mt-3 leading-relaxed">{g.noCarAdvice}</p>
-      {g.beforeYouGo?.length ? <h3 className="mt-6 text-xl font-semibold">Transport and hotel planning</h3> : null}
+      {g.beforeYouGo?.length && id !== "5" ? <h3 className="mt-6 text-xl font-semibold">Transport and hotel planning</h3> : null}
       <ul className="mt-4 list-disc space-y-4 pl-6 marker:text-primary">
         {g.logistics.map((tip, index) => <li key={tip.heading} className="pl-1 leading-relaxed">
           <strong className="font-semibold">{tip.heading}.</strong>{" "}
