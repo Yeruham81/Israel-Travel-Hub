@@ -25,7 +25,7 @@ const tourPhotos = {
 export function BethlehemTourOptions() {
   return <section aria-labelledby="bethlehem-tour-options-h" className="mt-6 scroll-mt-24" data-testid="bethlehem-tour-options">
     <h3 id="bethlehem-tour-options-h" className="text-2xl font-semibold">Compare tours starting in Jerusalem</h3>
-    <p className="mt-2 max-w-3xl text-sm leading-relaxed text-muted-foreground">The prices shown are subject to change by tour operators. When booking, confirm availability, the current price, what's included, the Jerusalem departure point and cancellation terms for your selected date.</p>
+    <p className="mt-2 max-w-3xl text-sm leading-relaxed text-muted-foreground">Prices and availability can change. Before booking, confirm your departure point, itinerary, what's included and cancellation terms.</p>
     <div className="mt-5 grid gap-5 sm:grid-cols-2 xl:grid-cols-3">
       {bethlehemTourCards.map(tour => {
         const url = affiliateConfig[tour.id]?.trackingUrl;
