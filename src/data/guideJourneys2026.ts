@@ -948,7 +948,7 @@ export const journeyDestinationGuides = {
           "paragraphs": [
             "A taxi or pre-booked transfer takes you directly from your Jerusalem hotel to your chosen Dead Sea destination. This is particularly convenient for families, travellers with luggage and visitors travelling when buses are unavailable.",
             "Book a one-way transfer if you only need a drop-off. For sightseeing at several locations, arrange a driver who can wait and take you back to Jerusalem. Confirm the total price, including stops, waiting time and return transport. Guiding and attraction tickets may cost extra.",
-            "The main drawback is price, but a private vehicle can be more practical for a small group splitting the cost. For a ready-made full-day option, see my private Masada and Dead Sea tour from Jerusalem, starting at ₪2,100 per vehicle for up to four travellers (admission and guiding are extra). For a different itinerary, tell me your pickup location, passenger count, planned stops and return time when requesting a quote through my private driver service."
+            "Private transport costs more, but sharing the price can make it worthwhile for a family or small group. For a full-day option, see my private Masada and Dead Sea tour, starting at ₪2,100 per vehicle for up to four travellers. Admission and guiding cost extra. For a customised trip, send me your pickup location, group size, preferred stops and return time through my private driver service."
           ],
           "inlineLinks": [
             {
@@ -965,16 +965,16 @@ export const journeyDestinationGuides = {
           "id": "tours",
           "title": "By organised tour: transport plus sightseeing",
           "paragraphs": [
-            "A group tour departing from Jerusalem is convenient when you want more than a beach visit, especially a combination of Masada, Ein Gedi and the Dead Sea. Transport and the day's stops are arranged for you, making this easier than trying to connect several bus journeys.",
-            "The trade-off is a fixed departure, set time at each stop and less freedom to change the plan. Some excursions focus entirely on swimming; others spend much of the day at archaeological or nature sites. A beach stop may be at a paid northern-shore facility rather than the free public beach at Ein Bokek."
+            "An organised tour is a convenient way to combine the Dead Sea with attractions such as Masada or Ein Gedi. Transport and sightseeing stops are arranged in advance, so you don't need to coordinate several buses.",
+            "Tours follow a fixed schedule, with limited time at each stop. Some excursions focus entirely on swimming; others spend much of the day at archaeological or nature sites. A beach stop may be at a paid northern-shore facility rather than the free public beach at Ein Bokek."
           ],
         },
         {
           "id": "driving",
           "title": "By rental car: the most flexible option",
           "paragraphs": [
-            "With a rental car you can leave Jerusalem when you like, drive directly to the free public beach at Ein Bokek and add nearby attractions along the way. The usual route is east on Highway 1 and then south on Highway 90 along the Dead Sea. Use the precise beach, hotel or park entrance in navigation.",
-            "This option works well for an early start or several stops, but the driver handles navigation, parking, vehicle pickup and the return. Compare rental offers and conditions with DiscoverCars' Israel rental comparison, including insurance coverage, permitted roads, rental pickup hours and fuel policies.",
+            "A rental car lets you leave Jerusalem at your preferred time and visit Ein Bokek or other Dead Sea attractions independently. The usual route follows Highway 1 east and Highway 90 south. Enter your exact beach, hotel or attraction into your navigation app.",
+            "Driving is useful for an early start or several stops, but you'll need to arrange parking and handle the return journey yourself. Compare rental prices using DiscoverCars' Israel rental comparison, including insurance, permitted roads, fuel policies and pickup hours.",
             "Winter rain can trigger flash floods and close desert roads even when Jerusalem is dry. Check weather and road alerts before driving, never cross flowing floodwater, and avoid unregulated shoreline areas with sinkhole risks."
           ],
           "photo": { "src": deadSeaSaltIslandPhoto, "alt": "Turquoise Dead Sea water and white salt formations along the shoreline" },
@@ -995,8 +995,8 @@ export const journeyDestinationGuides = {
           "id": "beach",
           "title": "Where to go for a Dead Sea beach day",
           "paragraphs": [
-            "For a relaxed day of floating, choose the free public beach at Ein Bokek in the southern hotel district. Tamar Regional Council provides showers, changing rooms, toilets, shade, chairs and umbrellas without an admission fee. The nearby promenade has drinking-water fountains, food and shops.",
-            "Parking near Ein Bokek's central beach is regulated and paid, and the closest spaces can fill up on busy days. Float only while lifeguards are on duty; supervised beach hours are shorter in winter. Northern-shore beaches such as Kalia are closer to Jerusalem but charge admission, and optional facilities can add to the price. Check the exact beach in any organised tour itinerary.",
+            "For swimming and floating, I recommend the free public beach at Ein Bokek. The beach offers free access, showers, changing rooms, toilets and shaded areas. Chairs and umbrellas are also available, with drinking-water fountains, cafés and shops along the nearby promenade.",
+            "Parking near the central beach is paid, and spaces can fill up quickly on busy days. Float only while lifeguards are on duty; supervised beach hours are shorter in winter. Northern beaches such as Kalia are closer to Jerusalem but charge an entrance fee, sometimes with additional costs for facilities. Check the exact beach in any organised tour itinerary.",
             "Bring water, sun protection, swimwear and a towel. Float gently, keep the very salty water away from your eyes, and see my Dead Sea visitor guide for more beach and safety advice."
           ],
           "photo": { "src": einBokekShorePhoto, "alt": "Ein Bokek shoreline and the Dead Sea landscape" },
@@ -1020,7 +1020,7 @@ export const journeyDestinationGuides = {
               "href": "https://kaliadeadsea.com/en/kalia-beach-en/"
             }
           ],
-          "tip": "From my experience, the shorter journey to a northern beach rarely compensates for the entrance fees and often disappointing facilities. For a more enjoyable beach day and better value, I recommend continuing south to the free public beach at Ein Bokek."
+          "tip": "Northern beaches are closer to Jerusalem, but most charge admission. If you prefer free beach access, showers and a hotel-area promenade, I recommend Ein Bokek."
         },
 
       ],
@@ -1044,11 +1044,11 @@ export const journeyDestinationGuides = {
         },
         {
           "q": "Should I stay at the Dead Sea overnight?",
-          "a": "A day trip is enough for a beach visit or one major attraction. Staying overnight is worth considering if you want a slow morning at the beach, spa time or multiple sightseeing stops without rushing back to Jerusalem."
+          "a": "A day trip is usually enough for the beach or one major attraction. Stay overnight if you'd like more beach time, a spa visit or a relaxed sightseeing schedule."
         },
         {
           "q": "Can I combine Masada, Ein Gedi, Qumran and Qasr al-Yahud in one day?",
-          "a": "Trying to visit all four would be rushed. Choose one major attraction alongside the beach, or two short stops with an early start and a private car or guided itinerary."
+          "a": "Visiting all four in one day would be too rushed. Choose one major attraction with the beach, or two shorter stops if you have suitable transport and an early start."
         }
       ],
       "related": [
