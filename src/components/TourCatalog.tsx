@@ -21,7 +21,7 @@ export function OwnerTourSection({ tours, compact = false }: { tours: TourProduc
           <span className="text-xs font-semibold text-primary">Personally arranged with Moshe Barak</span>
           <h3 className="mt-1.5 text-base font-semibold leading-snug">{tour.title}</h3>
           <p className="mt-1 text-sm leading-relaxed text-muted-foreground">{tour.summary}</p>
-          <p className="mt-2 text-xs text-muted-foreground">{tour.duration} · Private car &amp; driver · Transport only</p>
+          <p className="mt-2 text-xs text-muted-foreground">{tour.duration} · Private car &amp; driver</p>
           <div className="mt-auto flex flex-wrap items-center justify-between gap-2 pt-3">
             <span className="text-xs font-medium">Personal quote</span>
             <Link to="/private-driver/" search={{ tour: tour.id }} hash="request-quote" className="inline-flex min-h-9 items-center rounded-lg bg-primary px-3 py-2 text-xs font-semibold text-primary-foreground">Request a quote</Link>
