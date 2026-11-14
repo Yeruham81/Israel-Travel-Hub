@@ -396,6 +396,11 @@ describe("migrated Israel itineraries", () => {
     expect(g.daysPlan[2]?.morning).not.toContain("Allow about two to three hours at the fortress");
     expect(g.daysPlan[3]?.morning).not.toContain("Allow roughly one to two hours for the basilica");
     expect(g.daysPlan[5]?.afternoon).not.toContain("Allow roughly two to three hours on site");
+    expect(g.noCarAdvice).toMatch(/^Jerusalem and Tel Aviv are easy to explore/);
+    expect(g.daysPlan[3]?.afternoon).toContain("Check the official Magdala visitor information for opening hours");
+    expect(g.daysPlan[3]?.evening).toContain("enjoy a relaxed evening after the journey north");
+    expect(g.daysPlan[4]?.afternoon).toContain("Visit the lakeside churches at Tabgha");
+    expect(g.daysPlan[6]?.evening).toContain("If flying on Day 8, enjoy a final dinner in Tel Aviv");
 
     expect(g.reality).toContain("fly on Day 8");
     expect(g.daysPlan[6]?.morning).toContain("morning or midday flight");
