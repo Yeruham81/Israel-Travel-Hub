@@ -66,6 +66,7 @@ export const shoreTourFormats = [
   { title: "Private car & driver", bestFor: "Families and small groups who value their own pace", includes: "Your party's vehicle and driver; guiding and admissions arranged separately", tradeoff: "Flexible stops and breaks, with the route agreed in advance. Request a licensed guide if you want guided visits inside sites." },
   { title: "Private guided excursion", bestFor: "Travelers who want personal attention and historical context", includes: "A private guided itinerary with the inclusions stated on its booking page", tradeoff: "More personal attention, usually at a higher total cost. Confirm the guide's language, admissions and vehicle capacity." },
   { title: "Shared guided excursion", bestFor: "Solo travelers and couples who prefer a planned group day", includes: "A set route and group format, with transport and guiding as listed", tradeoff: "A potentially lower per-person cost, with less freedom over the pace and stops. Check the departure time and group size." },
+  { title: "Small-group guided excursion", bestFor: "Visitors who prefer a smaller group without booking a private guide", includes: "A guided itinerary with a stated maximum group size, where the operator offers one", tradeoff: "Availability and actual group size vary by departure. Confirm the maximum number of travelers before booking." },
 ];
 
 export const shorePlanningSteps = [

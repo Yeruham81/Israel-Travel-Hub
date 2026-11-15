@@ -108,7 +108,7 @@ function Shore() {
       <p className="eyebrow">Choose how you explore</p>
       <h2 id="tour-formats-h" className="mt-2 text-3xl">Private driver or guided shore excursion?</h2>
       <p className="mt-3 max-w-3xl leading-relaxed text-muted-foreground">Travel at your family's pace, spend the day with a dedicated guide, or join a shared itinerary. Compare the experience and the full cost for your party, as well as the headline price.</p>
-      <div className="mt-6 grid gap-4 lg:grid-cols-3">{shoreTourFormats.map((format) => <article key={format.title} className="rounded-2xl border bg-card p-5">
+      <div className="mt-6 grid gap-4 sm:grid-cols-2">{shoreTourFormats.map((format) => <article key={format.title} className="rounded-2xl border bg-card p-5">
         <h3 className="text-2xl font-semibold">{format.title}</h3>
         <p className="mt-3 text-sm font-medium text-primary">{format.bestFor}</p>
         <p className="mt-3 text-sm leading-relaxed"><span className="font-semibold">What to expect: </span>{format.includes}.</p>

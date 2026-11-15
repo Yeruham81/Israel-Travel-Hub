@@ -1,4 +1,6 @@
 import { useState } from "react";
+import jerusalemOldCity from "@/assets/jerusalem/old-city.webp";
+import telAvivRothschild from "@/assets/tel-aviv/rothschild.webp";
 import { Link, type LinkProps } from "@tanstack/react-router";
 import { ArrowRight, MapPin, Check, Compass } from "lucide-react";
 import { type CityStayGuide, type NeighborhoodStayGuide, type StayPreference, preferenceLabels } from "@/data/content";
@@ -19,9 +21,11 @@ export const quickPickPhotos: Record<string, { src: string; alt: string; sourceF
   downtown: { src: "/images/city-stays/jerusalem-downtown.webp", alt: "Ben Yehuda pedestrian street in central Jerusalem", sourceFilename: "Jerusalem_Ben_Yehuda_Pedestrian_Mall.jpg.webp" },
   mamilla: { src: "/images/city-stays/jerusalem-mamilla.webp", alt: "Shops along Mamilla's pedestrian promenade in Jerusalem", sourceFilename: "mamilla_pedestrian_mall_jerusalem.jpg.webp" },
   "german-colony": { src: "/images/city-stays/jerusalem-german-colony.webp", alt: "Emek Refaim street in Jerusalem's German Colony", sourceFilename: "emek_refaim_street_jerusalem.webp" },
+  "old-city": { src: jerusalemOldCity, alt: "Jerusalem Old City streets and historic architecture", sourceFilename: "jerusalem/old-city.webp" },
   "telaviv-beachfront": { src: "/images/city-stays/tel-aviv-beachfront.webp", alt: "Gordon Beach on Tel Aviv's Mediterranean waterfront", sourceFilename: "gordon_beach_tel_aviv_israel_1.jpg.webp" },
   "telaviv-dizengoff": { src: "/images/city-stays/tel-aviv-dizengoff.webp", alt: "Dizengoff Square in central Tel Aviv", sourceFilename: "dizengoff_square_tel_aviv.webp" },
   "telaviv-jaffa": { src: "/images/city-stays/tel-aviv-jaffa.webp", alt: "Jaffa's lively flea market", sourceFilename: "flea_market_in_jaffa1.jpg.webp" },
+  "telaviv-rothschild": { src: telAvivRothschild, alt: "Tree-lined Rothschild Boulevard in central Tel Aviv", sourceFilename: "tel-aviv/rothschild.webp" },
 };
 
 const sections = [["overview", "Start here"], ["areas", "Explore areas"], ["compare", "Compare areas"], ["checklist", "Booking tips"], ["book", "Find hotels"], ["faq", "FAQ"], ["explore", "Local guides"], ["trip-planning", "Trip planning"], ["contact", "Contact Moshe"], ["sources", "Sources"]] as const;
@@ -47,7 +51,7 @@ export function CityStayHub({ g, areas }: { g: CityStayGuide; areas: Neighborhoo
           <p>{g.areaIntro || g.overview.join(" ")}</p>
           {g.areaIntro && g.overview.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
         </Section>
-        <ul className="mt-6 grid gap-4 sm:grid-cols-3">
+        <ul className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {quickPicks.map(({ area, label, description }) => area && (
             <li key={label} className="min-w-0">
               <Link to={area.path as LinkProps["to"]} className="group flex h-full flex-col overflow-hidden rounded-2xl border bg-card transition-colors hover:border-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
