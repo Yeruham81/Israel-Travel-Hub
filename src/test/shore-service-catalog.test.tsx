@@ -236,9 +236,11 @@ describe("port service catalog", () => {
     expect(haifa[0]?.listedPrice?.amount).toBe(1175);
     await pageAt("/shore-excursions/haifa/?destination=akko");
     const tourGrid = screen.getByRole("list", { name: "Other operators' tours from Haifa Port" });
+    const privateGrid = screen.getByRole("list", { name: "My private day trips from Haifa Port" });
     expect(tourGrid.children.length % 2).toBe(0);
-    expect(within(tourGrid).getByTestId("shore-companion-card")).toBeInTheDocument();
-    expect(within(tourGrid).getByRole("link", { name: "Explore all destinations" })).toHaveAttribute("href", "/shore-excursions/haifa/");
+    expect(privateGrid.children.length % 2).toBe(0);
+    expect(within(privateGrid).getByTestId("shore-companion-card")).toBeInTheDocument();
+    expect(within(privateGrid).getByRole("link", { name: "Request a custom route" })).toHaveAttribute("href", "#request-quote");
     expect(within(tourGrid).queryByLabelText("Rating 4.9 out of 5 from 29 reviews")).toBeNull();
   });
 
