@@ -21,7 +21,7 @@ async function renderPage(path: string, Page: ComponentType) {
 describe("airport transfers and private driver separation", () => {
   it("consolidates every airport destination and the inquiry form on one private-pickup-only page", async () => {
     const { container } = await renderPage("/airport-transfers/", TransfersRoute.options.component!);
-    expect(screen.getByRole("heading", { level: 1 })).toHaveTextContent(/^Airport transfers$/);
+    expect(screen.getByRole("heading", { level: 1 })).toHaveTextContent(/^Private airport transfers from Ben Gurion Airport$/);
     expect(container.querySelector("main")!.textContent).not.toMatch(/intercity|day hire|private driver|\btrain\b|metered|taxi rank/i);
     expect(screen.queryByTestId("provider-card")).not.toBeInTheDocument();
     expect(screen.getAllByTestId("airport-destination-card")).toHaveLength(12);
