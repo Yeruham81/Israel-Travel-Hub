@@ -102,7 +102,7 @@ export function ShoreServiceCatalog({ portId, filters, onFilterChange, itinerary
             </li>;
           })}
         </ul>
-        <p className="mt-4 text-xs leading-relaxed text-muted-foreground" data-testid="owner-price-terms">Published weekday private transport rates are per vehicle for up to four passengers.</p>
+        <p className="mt-4 text-xs leading-relaxed text-muted-foreground" data-testid="owner-price-terms">Published weekday private transport rates are per vehicle for up to four passengers. Larger vehicles for families and groups can be arranged in advance.</p>
       </section>}
     </>}
   </div>;
