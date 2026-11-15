@@ -48,7 +48,7 @@ describe("four dedicated airport transfer routes", () => {
     expect(platformLinks.map((platform) => platform.providerName)).toEqual(["Kiwitaxi", "Welcome Pickups", "Intui.travel", "GetTransfer.com"]);
     expect(banners).toHaveLength(4);
     expect(platformSection).toHaveTextContent(`airport pickup to ${guide.city}`);
-    expect(platformSection).toHaveTextContent("The starting prices above belong to Moshe's service");
+    expect(platformSection).toHaveTextContent("The starting prices on this site are for my private transfer service");
     expect(container.querySelector("#faq")!.compareDocumentPosition(platformSection)).toBe(Node.DOCUMENT_POSITION_FOLLOWING);
     for (const [index, platform] of platformLinks.entries()) {
       expect(within(banners[index]!).getByRole("img", { name: `${platform.providerName} logo` })).toHaveAttribute("src");
