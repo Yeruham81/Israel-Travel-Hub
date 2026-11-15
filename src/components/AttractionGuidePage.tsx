@@ -3,7 +3,7 @@ import { AuthorCard } from "@/components/AuthorCard";
 import { GuideHeroLayout, GuideHeroMedia } from "@/components/GuideHeroMedia";
 import { Breadcrumbs, FaqList, OnThisPage, RelatedLinks, Section } from "@/components/Guide";
 import { attractionGuides } from "@/data/attractionGuides";
-import { attractionPath, type AttractionId } from "@/data/attractionGuideTypes";
+import { attractionPath, isRegionalOverview, type AttractionId } from "@/data/attractionGuideTypes";
 import { CANONICAL_ORIGIN, SITE_NAME, jsonLd, pageMeta } from "@/lib/site";
 import { authorLd } from "@/lib/author";
 import { JerusalemClusterLinks, type JerusalemClusterKey } from "@/components/JerusalemClusterLinks";
@@ -17,10 +17,11 @@ import heroJerusalemLarge from "@/assets/home/hero-jerusalem-large.webp";
 export function attractionMeta(id: AttractionId) {
   const a = attractionGuides[id];
   const path = attractionPath(id);
+  const parent = isRegionalOverview(id) ? { name: "Travel guides", path: "/travel-blog/" } : { name: "Attractions", path: "/attractions/" };
   const base = pageMeta({
     title: a.title, description: a.description, path, type: "article",
     crumbs: [
-      { name: "Home", path: "/" }, { name: "Attractions", path: "/attractions/" },
+      { name: "Home", path: "/" }, parent,
       { name: a.title, path },
     ],
     ...(a.image ? { image: a.image.src, imageAlt: a.image.alt } : {}),
@@ -51,7 +52,7 @@ export function AttractionGuidePage({ id }: {id:AttractionId}) {
   const sections=[["highlights","What to see"],["getting-there","Getting there"],["tips","Practical tips"],["official","Official visitor information"],["faq","Questions"],["contact","Contact Moshe"]] as const;
   return <main className="mx-auto max-w-5xl px-4 pb-16">
     <header className="pt-6">
-      <Breadcrumbs items={[{name:"Home",to:"/"},{name:"Attractions",to:"/attractions/"},{name:a.title,to:attractionPath(id)}]}/>
+      <Breadcrumbs items={[{name:"Home",to:"/"},{name:isRegionalOverview(id) ? "Travel guides" : "Attractions",to:isRegionalOverview(id) ? "/travel-blog/" : "/attractions/"},{name:a.title,to:attractionPath(id)}]}/>
       <GuideHeroLayout image={a.image && <GuideHeroMedia
         src={a.image.src}
         alt={a.image.alt}

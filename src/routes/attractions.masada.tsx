@@ -4,17 +4,17 @@ import { Checklist, EndCta, FaqList, GuideHeader, OnThisPage, ProviderSection, R
 import { getSource, linksForPage } from "@/data/registry";
 import { pageMeta } from "@/lib/site";
 
-const PATH = "/travel-blog/masada/";
+const PATH = "/attractions/masada/";
 const TITLE = "Masada: tickets, cable car and planning your visit";
 
-export const Route = createFileRoute("/travel-blog/masada")({
+export const Route = createFileRoute("/attractions/masada")({
   head: () =>
     pageMeta({
       title: TITLE,
       description: "Plan a visit to Masada National Park: cable car or hiking, museum and night-show options, heat and timing, and where to reserve on the official site.",
       path: PATH,
       type: "article",
-      crumbs: [{ name: "Home", path: "/" }, { name: "Tickets & admission", path: "/tickets/" }, { name: "Masada", path: PATH }],
+      crumbs: [{ name: "Home", path: "/" }, { name: "Attractions", path: "/attractions/" }, { name: "Masada", path: PATH }],
     }),
   component: Masada,
 });

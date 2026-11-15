@@ -71,7 +71,8 @@ export function travelGuideMeta(id: TravelGuideId) {
   const guide = travelGuides[id];
   const updatedAt = guide.updatedAt || TRAVEL_GUIDE_CHECK_DATE;
   const path = travelGuidePaths[id];
-  const meta = pageMeta({ title: id === "shabbat" ? "Ben Gurion Airport on Shabbat: Bus 711, Taxis & Trains" : guide.title, description: guide.description, path, type: "article", crumbs: [{ name: "Home", path: "/" }, { name: "Travel guides", path: "/travel-blog/" }, { name: guide.title, path }], image: guide.photo.src, imageAlt: guide.photo.alt });
+  const parent = path.startsWith("/attractions/") ? { name: "Attractions", path: "/attractions/" } : { name: "Travel guides", path: "/travel-blog/" };
+  const meta = pageMeta({ title: id === "shabbat" ? "Ben Gurion Airport on Shabbat: Bus 711, Taxis & Trains" : guide.title, description: guide.description, path, type: "article", crumbs: [{ name: "Home", path: "/" }, parent, { name: guide.title, path }], image: guide.photo.src, imageAlt: guide.photo.alt });
   const imageUrl = new URL(guide.photo.src, CANONICAL_ORIGIN).href;
   return { ...meta, scripts: [...meta.scripts, jsonLd(
     { "@context": "https://schema.org", "@type": "Article", "@id": `${CANONICAL_ORIGIN}${path}#article`, headline: guide.title, description: guide.description, mainEntityOfPage: `${CANONICAL_ORIGIN}${path}`, inLanguage: "en", dateModified: updatedAt,
@@ -259,8 +260,8 @@ export function TravelGuidePage({ id }: { id: TravelGuideId }) {
   return <main className="mx-auto max-w-5xl px-4 pb-8">
     <article>
       <header className="pt-6">
-        <Breadcrumbs items={[{ name: "Home", to: "/" }, { name: "Travel guides", to: "/travel-blog/" }, { name: guide.title, to: travelGuidePaths[id] }]} />
-        <div className="mt-6"><GuideTags topics={guide.topics} /></div>
+        <Breadcrumbs items={[{ name: "Home", to: "/" }, { name: travelGuidePaths[id].startsWith("/attractions/") ? "Attractions" : "Travel guides", to: travelGuidePaths[id].startsWith("/attractions/") ? "/attractions/" : "/travel-blog/" }, { name: guide.title, to: travelGuidePaths[id] }]} />
+        {!travelGuidePaths[id].startsWith("/attractions/") && <div className="mt-6"><GuideTags topics={guide.topics} /></div>}
         <GuideHeroLayout image={
           <GuideHeroMedia src={guide.photo.src} alt={guide.photo.alt}>
             <GuidePhotoCredit photo={guide.photo} />
