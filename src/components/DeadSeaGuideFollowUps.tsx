@@ -27,14 +27,14 @@ const related: {
   {
     title: "Visiting Masada",
     description: "Plan the park entrance, opening hours and cable car.",
-    to: "/travel-blog/masada/",
+    to: "/attractions/masada/",
     photo: masada,
     alt: "Masada plateau above the Dead Sea",
   },
   {
     title: "Ein Gedi Nature Reserve",
     description: "Discover the reserve's waterfalls, green trails and desert wildlife.",
-    to: "/travel-blog/ein-gedi/",
+    to: "/attractions/ein-gedi/",
     photo: einGediIbex,
     alt: "Nubian ibex near a stream in Ein Gedi Nature Reserve",
   },

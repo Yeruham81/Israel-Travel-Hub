@@ -6,7 +6,7 @@ const related: { title: string; summary: string; to: LinkProps["to"]; photo: str
   {
     title: "Walking through Jerusalem's Old City",
     summary: "Choose your gate, explore the quarters and plan a route from Lion's Gate.",
-    to: "/travel-blog/old-city-jerusalem/",
+    to: "/attractions/old-city-jerusalem/",
     photo: "/images/attractions/jerusalem.webp",
     alt: "View across Jerusalem Old City",
   },
@@ -20,7 +20,7 @@ const related: { title: string; summary: string; to: LinkProps["to"]; photo: str
   {
     title: "Mount Zion",
     summary: "See the traditional Last Supper Room, Dormition Abbey and St Peter in Gallicantu.",
-    to: "/travel-blog/mount-zion/",
+    to: "/attractions/mount-zion/",
     photo: mountZion,
     alt: "Dormition Abbey on Mount Zion",
   },

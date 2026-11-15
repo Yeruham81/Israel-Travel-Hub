@@ -6,7 +6,7 @@ const related: Related[] = [
   {
     title: "Jerusalem's Old City",
     summary: "Walk through the gates and quarters, and connect Mount Zion with the Jewish and Armenian Quarters.",
-    to: "/travel-blog/old-city-jerusalem/",
+    to: "/attractions/old-city-jerusalem/",
     photo: "/images/attractions/jerusalem.webp",
     alt: "Jerusalem Old City walls and skyline",
   },
@@ -20,7 +20,7 @@ const related: Related[] = [
   {
     title: "Mount of Olives",
     summary: "The famous lookout, Palm Sunday road, Dominus Flevit and the Garden of Gethsemane.",
-    to: "/travel-blog/mount-of-olives/",
+    to: "/attractions/mount-of-olives/",
     photo: "/images/attractions/mount-of-olives.webp",
     alt: "Mount of Olives hillside with Church of All Nations",
   },

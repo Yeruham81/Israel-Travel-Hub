@@ -147,7 +147,7 @@ function TelAvivRailDetails({ guide }: { guide: AirportJourneyGuide }) {
         <img src={guide.photos.onward.src} alt={guide.photos.onward.alt} width={755} height={503} loading="lazy" decoding="async" className="aspect-[3/2] max-h-96 w-full rounded-xl object-cover" />
       </figure>}
       <ul className="mt-4 list-disc space-y-2 pl-5 leading-relaxed">{guide.connections.map(connection => <li key={connection}>{connection}</li>)}</ul>
-      <p className="mt-4 text-sm leading-relaxed">Staying in the historic port area? My <Link to="/travel-blog/jaffa/" className="font-semibold text-primary underline underline-offset-4">Old Jaffa guide</Link> explains the lanes, attractions and local access before you decide where a driver can leave you.</p>
+      <p className="mt-4 text-sm leading-relaxed">Staying in the historic port area? My <Link to="/attractions/jaffa/" className="font-semibold text-primary underline underline-offset-4">Old Jaffa guide</Link> explains the lanes, attractions and local access before you decide where a driver can leave you.</p>
       <aside className="mt-7 rounded-2xl border bg-secondary/40 p-5 sm:p-6" aria-label={guide.exampleJourney.title}>
         <h4 className="text-xl font-semibold">{guide.exampleJourney.title}</h4>
         <ol className="mt-4 space-y-3">{guide.exampleJourney.steps.map((step, index) => <li key={step.label} className="flex gap-3">

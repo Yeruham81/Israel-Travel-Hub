@@ -63,7 +63,7 @@ export const stayGuideGroups: Record<Region, GuideGroups> = {
     local: [
       card("Museums in Jerusalem", "/travel-blog/museums-in-jerusalem/", "Choose cultural highlights from the city’s museums.", museumJerusalem, "Jerusalem museum interior"),
       card("Shopping in Jerusalem", "/travel-blog/shopping-in-jerusalem/", "Explore markets, craft stalls and local shopping streets.", "/images/jerusalem/hutzot-hayotzer.webp", "Artisan shops in Jerusalem"),
-      card("Jerusalem Old City", "/travel-blog/old-city-jerusalem/", "Understand the quarters, historic gates and walking routes.", oldCity, "Historic church and stone architecture inside the Old City"),
+      card("Jerusalem Old City", "/attractions/old-city-jerusalem/", "Understand the quarters, historic gates and walking routes.", oldCity, "Historic church and stone architecture inside the Old City"),
       card("Jerusalem travel guide", "/travel-blog/jerusalem-travel-guide/", "Discover the city’s principal sights and plan your days.", jerusalemOverview, "Jerusalem skyline and old city"),
     ],
     onward: [
@@ -72,7 +72,7 @@ export const stayGuideGroups: Record<Region, GuideGroups> = {
       card("Jerusalem to the Dead Sea", "/travel-blog/jerusalem-to-the-dead-sea/", "Compare routes for a desert and Dead Sea excursion.", deadSeaTravel, "Road through the Judean Desert"),
       card("Day trips from Jerusalem", "/travel-blog/day-trips-from-jerusalem/", "Compare destinations you can visit without changing hotels.", roadTrip, "Scenic road trip in Israel"),
       card("Airport travel on Shabbat", "/travel-blog/from-ben-gurion-airport-on-shabbat/", "Understand arrivals when regular public transport is limited.", airportTransfers, "Ben Gurion Airport terminal and aircraft"),
-      card("Visiting Masada", "/travel-blog/masada/", "Plan the fortress and cable car for an early desert visit.", masadaCable, "Cable car travelling toward Masada"),
+      card("Visiting Masada", "/attractions/masada/", "Plan the fortress and cable car for an early desert visit.", masadaCable, "Cable car travelling toward Masada"),
     ],
   },
   telaviv: {
@@ -81,7 +81,7 @@ export const stayGuideGroups: Record<Region, GuideGroups> = {
       card("Attractions in Tel Aviv", "/travel-blog/attractions-in-tel-aviv/", "Find city sights beyond the hotel neighbourhood.", telAvivOverview, "Tel Aviv skyline and Mediterranean seafront"),
       card("Museums in Tel Aviv", "/travel-blog/museums-in-tel-aviv/", "Explore art, heritage and the city’s museums.", museumTelAviv, "Museum architecture in Tel Aviv"),
       card("Beaches in Tel Aviv", "/travel-blog/beaches-in-tel-aviv/", "Choose the right part of the waterfront for your visit.", beachesTelAviv, "Tel Aviv Mediterranean beach"),
-      card("Exploring Jaffa", "/travel-blog/jaffa/", "Explore Old Jaffa’s harbour, lanes and local character.", "/images/city-stays/tel-aviv-jaffa.webp", "Old Jaffa market and streets"),
+      card("Exploring Jaffa", "/attractions/jaffa/", "Explore Old Jaffa’s harbour, lanes and local character.", "/images/city-stays/tel-aviv-jaffa.webp", "Old Jaffa market and streets"),
     ],
     onward: [
       card("Ben Gurion Airport to Tel Aviv", "/travel-blog/how-to-get-from-ben-gurion-airport-to-tel-aviv/", "Select the right arrival connection for your hotel.", airportTransfers, "Airport arrival and transfer facilities"),
@@ -97,12 +97,12 @@ export const stayGuideGroups: Record<Region, GuideGroups> = {
     local: [
       card("Haifa travel guide", "/travel-blog/haifa/", "Explore the city's landmarks and neighbourhoods.", haifaOverview, "Haifa city and hillside"),
       card("Museums in Haifa", "/travel-blog/museums-in-haifa/", "Find museums and cultural stops on Mount Carmel.", haifaMuseums, "Haifa museum and exhibits"),
-      card("Acre (Akko)", "/travel-blog/akko-acre/", "Discover the historic walled port city close to Haifa.", akkoPort, "Historic coastal stone buildings in Acre"),
+      card("Acre (Akko)", "/attractions/akko-acre/", "Discover the historic walled port city close to Haifa.", akkoPort, "Historic coastal stone buildings in Acre"),
       card("Haifa shore excursions", "/shore-excursions/haifa/", "Explore the port region and excursions from Haifa.", haifaPort, "Port and coastline at Haifa"),
     ],
     onward: [
       card("Ben Gurion Airport to Haifa", "/travel-blog/how-to-get-from-ben-gurion-airport-to-haifa/", "Compare the train, taxi and transfer options.", airportHall, "Ben Gurion Airport arrivals hall"),
-      card("Visiting Tel Megiddo", "/travel-blog/tel-megiddo/", "Plan an archaeological stop in northern Israel.", megiddoPhoto, "Ancient ruins at Tel Megiddo"),
+      card("Visiting Tel Megiddo", "/attractions/tel-megiddo/", "Plan an archaeological stop in northern Israel.", megiddoPhoto, "Ancient ruins at Tel Megiddo"),
       card("Caesarea", "/attractions/caesarea/", "Visit the Roman harbour on the coast south of Haifa.", caesareaPhoto, "Ancient Caesarea amphitheatre and coast"),
       card("Getting around Israel", "/travel-blog/getting-around-israel/", "Connect Haifa with other cities and regional destinations.", roadTrip, "A road through Israeli countryside"),
       card("Israel itinerary: seven days", "/travel-blog/israel-itinerary-7-days/", "Fit the coast and north into a one-week trip.", sevenDayPhoto, "Landscape of the Galilee"),
@@ -113,14 +113,14 @@ export const stayGuideGroups: Record<Region, GuideGroups> = {
     name: "Tiberias",
     local: [
       card("Sea of Galilee guide", "/travel-blog/sea-of-galilee/", "Explore the lake and surrounding attractions.", tiberiasLake, "Sea of Galilee near Tiberias"),
-      card("Magdala", "/travel-blog/magdala/", "Discover an archaeological site on the lakeshore.", magdalaPhoto, "Historic archaeological site at Magdala"),
-      card("Capernaum", "/travel-blog/capernaum/", "Plan a visit to the northern lakeside heritage site.", capernaumPhoto, "Ruins and stonework at Capernaum"),
-      card("Tabgha", "/travel-blog/tabgha/", "Explore churches and historic sites beside the lake.", tabghaPhoto, "Historic church setting at Tabgha"),
+      card("Magdala", "/attractions/magdala/", "Discover an archaeological site on the lakeshore.", magdalaPhoto, "Historic archaeological site at Magdala"),
+      card("Capernaum", "/attractions/capernaum/", "Plan a visit to the northern lakeside heritage site.", capernaumPhoto, "Ruins and stonework at Capernaum"),
+      card("Tabgha", "/attractions/tabgha/", "Explore churches and historic sites beside the lake.", tabghaPhoto, "Historic church setting at Tabgha"),
     ],
     onward: [
-      card("Yardenit", "/travel-blog/yardenit/", "Plan a visit to the Jordan River baptism site.", yardenitPhoto, "Yardenit and the Jordan River"),
-      card("Mount of Beatitudes", "/travel-blog/mount-of-beatitudes/", "Visit the hillside overlooking the Sea of Galilee.", beatitudesPhoto, "Mount of Beatitudes landscape"),
-      card("Nazareth", "/travel-blog/basilica-of-the-annunciation/", "Add a trip to Nazareth and its major historic church.", nazarethPhoto, "Basilica of the Annunciation in Nazareth"),
+      card("Yardenit", "/attractions/yardenit/", "Plan a visit to the Jordan River baptism site.", yardenitPhoto, "Yardenit and the Jordan River"),
+      card("Mount of Beatitudes", "/attractions/mount-of-beatitudes/", "Visit the hillside overlooking the Sea of Galilee.", beatitudesPhoto, "Mount of Beatitudes landscape"),
+      card("Nazareth", "/attractions/basilica-of-the-annunciation/", "Add a trip to Nazareth and its major historic church.", nazarethPhoto, "Basilica of the Annunciation in Nazareth"),
       card("Getting around Israel", "/travel-blog/getting-around-israel/", "See how the north fits with the rest of your journey.", roadTrip, "Road travel through the countryside"),
       card("Israel itinerary: seven days", "/travel-blog/israel-itinerary-7-days/", "Build a northern stop into a week-long itinerary.", sevenDayPhoto, "Galilee hills and countryside"),
       card("Israel itinerary: ten days", "/travel-blog/israel-itinerary-10-days/", "Allow more time around the lake and further afield.", caesareaPhoto, "Coastal sights and wider itinerary across Israel"),
@@ -131,15 +131,15 @@ export const stayGuideGroups: Record<Region, GuideGroups> = {
     local: [
       card("The Dead Sea visitor guide", "/travel-blog/the-dead-sea/", "Learn about swimming, salt and practical conditions.", deadSeaPhoto, "Dead Sea beachfront and salt water"),
       card("Dead Sea attractions", "/travel-blog/dead-sea-attractions/", "Compare natural sites and stops around the region.", deadSeaAerial, "Judean Desert around the Dead Sea"),
-      card("Ein Gedi", "/travel-blog/ein-gedi/", "Plan a visit to the springs and nature reserve.", einGediPhoto, "Vegetation and landscape near Ein Gedi"),
-      card("Masada", "/travel-blog/masada/", "Visit the historic desert fortress near the shore.", masadaPhoto, "Masada and Dead Sea landscape"),
+      card("Ein Gedi", "/attractions/ein-gedi/", "Plan a visit to the springs and nature reserve.", einGediPhoto, "Vegetation and landscape near Ein Gedi"),
+      card("Masada", "/attractions/masada/", "Visit the historic desert fortress near the shore.", masadaPhoto, "Masada and Dead Sea landscape"),
     ],
     onward: [
       card("Ben Gurion Airport to Ein Bokek", "/travel-blog/how-to-get-from-ben-gurion-airport-to-ein-bokek/", "Compare routes to the Dead Sea hotel strip.", airportHall, "Ben Gurion Airport arrival terminal"),
       card("Jerusalem to the Dead Sea", "/travel-blog/jerusalem-to-the-dead-sea/", "Plan a day trip or transfer from Jerusalem.", deadSeaTravel, "Road from Jerusalem to the Dead Sea"),
       card("Israel itinerary: three days", "/travel-blog/israel-itinerary-3-days/", "Consider the Dead Sea on a short holiday.", roadTrip, "Scenic road in Israel"),
       card("Israel itinerary: five days", "/travel-blog/israel-itinerary-5-days/", "Combine a Dead Sea stay with other regions.", seasonPhoto, "Israeli desert and seasonal landscape"),
-      card("Qasr el Yahud", "/travel-blog/qasr-el-yahud/", "Explore another Jordan River site when planning a longer route.", qasrPhoto, "Jordan River baptism site at Qasr el Yahud"),
+      card("Qasr el Yahud", "/attractions/qasr-el-yahud/", "Explore another Jordan River site when planning a longer route.", qasrPhoto, "Jordan River baptism site at Qasr el Yahud"),
       card("Baptism in the Jordan River", "/travel-blog/baptism-in-the-jordan-river/", "Compare the main baptism locations and access.", "/images/attractions/jordan-river-baptism.webp", "Jordan River waterside"),
     ],
   },

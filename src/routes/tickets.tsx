@@ -35,7 +35,7 @@ function Tickets() {
       <section aria-labelledby="sites-h" className="mt-14">
         <h2 id="sites-h" className="text-3xl">Choose a site</h2>
         <div className="mt-5 grid gap-4 md:grid-cols-2">
-          <HubCard to="/travel-blog/masada/" eyebrow="Official reservations" title="Masada" text="Site entry, cable car, museum and night-show options — each checked separately on the official site." cta="Masada tickets & planning" />
+          <HubCard to="/attractions/masada/" eyebrow="Official reservations" title="Masada" text="Site entry, cable car, museum and night-show options — each checked separately on the official site." cta="Masada tickets & planning" />
           <HubCard to="/attractions/caesarea/" eyebrow="Official reservations" title="Caesarea" text="Coastal national park; check current hours and admission options for your date." cta="Caesarea visit planning" />
         </div>
       </section>

@@ -82,9 +82,9 @@ export function SacredHillGuideContent({ id }: { id: SacredHillId }) {
       </div>
       <p className="mt-5 max-w-3xl text-sm leading-relaxed text-muted-foreground">
         {id === "mount-zion" ? <>
-          <strong>Combining it with the Old City:</strong> you can finish an Old City walk through Zion Gate or arrive at Mount Zion first and continue through the Armenian and Jewish Quarters. See my <Link to="/travel-blog/old-city-jerusalem/" className="text-primary underline underline-offset-4">Old City walking guide</Link> for the next part of your day.
+          <strong>Combining it with the Old City:</strong> you can finish an Old City walk through Zion Gate or arrive at Mount Zion first and continue through the Armenian and Jewish Quarters. See my <Link to="/attractions/old-city-jerusalem/" className="text-primary underline underline-offset-4">Old City walking guide</Link> for the next part of your day.
         </> : <>
-          <strong>Combining it with the Old City:</strong> start at the lookout and finish near Lion's Gate, or see the Old City first and visit the viewpoint by vehicle as your final stop. My <Link to="/travel-blog/old-city-jerusalem/" className="text-primary underline underline-offset-4">Old City guide</Link> helps connect the routes.
+          <strong>Combining it with the Old City:</strong> start at the lookout and finish near Lion's Gate, or see the Old City first and visit the viewpoint by vehicle as your final stop. My <Link to="/attractions/old-city-jerusalem/" className="text-primary underline underline-offset-4">Old City guide</Link> helps connect the routes.
         </>}
       </p>
     </Section>
