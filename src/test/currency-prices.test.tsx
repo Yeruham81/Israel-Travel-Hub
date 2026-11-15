@@ -37,7 +37,7 @@ describe("international price estimates", () => {
 
   it.each([
     { label: "airport hub", path: "/airport-transfers/", route: TransfersRoute, count: 0 },
-    { label: "dedicated airport route", path: "/airport-transfers/ben-gurion-airport-to-jerusalem/", route: JerusalemRoute, count: 1 },
+    { label: "dedicated airport route", path: "/airport-transfers/ben-gurion-airport-to-jerusalem/", route: JerusalemRoute, count: 0 },
     { label: "shore-excursion cards", path: "/haifa-shore-excursions/", route: HaifaShoreRoute, count: 4 },
   ])("retains appropriate ILS fares and optional estimates on $label", async ({ path, route, count }) => {
     const router = createRouter({ routeTree, context: { queryClient: new QueryClient() }, history: createMemoryHistory({ initialEntries: [path] }), trailingSlash: "always" });
@@ -58,6 +58,13 @@ describe("international price estimates", () => {
       expect(other).toHaveTextContent("Another destination?");
       expect(container.querySelectorAll('[data-testid="airport-destination-card"]')).toHaveLength(12);
       expect(other.querySelector('[data-testid="currency-price"]')).toBeNull();
+    } else if (path === "/airport-transfers/ben-gurion-airport-to-jerusalem/") {
+      const ratePanel = screen.getByTestId("route-starting-rate");
+      expect(ratePanel).toHaveTextContent("From ₪550");
+      const estimate = within(ratePanel).getByTestId("compact-currency-estimate");
+      expect(estimate.querySelector('[data-currency="USD"]')).toHaveTextContent("≈ $138");
+      expect(estimate.querySelector('[data-currency="EUR"]')).toHaveTextContent("€110");
+      expect(screen.getByTestId("airport-route-fx-note")).toHaveTextContent("All fares are quoted in ILS.");
     }
   });
 
@@ -72,7 +79,7 @@ describe("international price estimates", () => {
       const card = container.querySelector(`[data-destination="${rate.id}"]`)!;
       const estimate = within(card as HTMLElement).getByTestId("compact-currency-estimate");
       expect(estimate).toHaveAttribute("data-ils", String(rate.price.amount));
-      expect(estimate.querySelector('[data-currency="USD"]')).toHaveTextContent(`≈ ${Math.round(rate.price.amount / 4).toLocaleString("en-US")}`);
+      expect(estimate.querySelector('[data-currency="USD"]')).toHaveTextContent("≈ $" + Math.round(rate.price.amount / 4).toLocaleString("en-US"));
       expect(estimate.querySelector('[data-currency="EUR"]')).toHaveTextContent(`€${Math.round(rate.price.amount / 5).toLocaleString("en-US")}`);
       expect(card).toHaveTextContent(`From ₪${rate.price.amount.toLocaleString("en-US")}`);
       expect(estimate.querySelectorAll('[aria-hidden="true"]')).toHaveLength(1);
