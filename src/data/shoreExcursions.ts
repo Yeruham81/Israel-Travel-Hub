@@ -58,7 +58,7 @@ const itineraryDetails: Record<string, ItineraryDetails> = {
     highlights: ["Old Jaffa", "Tel Aviv seafront", "Flexible city stops"],
   },
   "ashdod-jerusalem": {
-    photo: airportTransferPhotos["jerusalem"]!,
+    photo: { src: "/images/attractions/jerusalem.webp", alt: "Jerusalem Old City walls and historic skyline across the valley", sourceUrl: "" },
     description: "Plan a Jerusalem day around Old City lanes, major religious sites and a viewpoint. Tell me which places matter most so the driving, walking and return can be planned together.",
     bestFor: "A first visit to Jerusalem's historic and religious heart",
     planningNote: "The Old City involves walking, steps and modest dress at holy sites. A licensed guide is a separate arrangement.",
@@ -100,7 +100,7 @@ const itineraryDetails: Record<string, ItineraryDetails> = {
     highlights: ["Nazareth", "Sea of Galilee", "Selected heritage sites"],
   },
   "haifa-jerusalem": {
-    photo: migrationPhotos["EXISTING:jerusalem"],
+    photo: { src: "/images/hotels/jerusalem-night.webp", alt: "Illuminated walls and historic skyline of Jerusalem Old City after dusk", sourceUrl: "" },
     description: "A long day south to Jerusalem, focused on your essential Old City sites and viewpoints. Keep the plan selective and make the ship's return deadline the first planning constraint.",
     bestFor: "A Jerusalem priority on a sufficiently long port call",
     planningNote: "Confirm the full return plan before choosing this route. Bethlehem and licensed guiding are not included in this car-and-driver starting price.",
@@ -205,7 +205,7 @@ export function getShoreCatalog(portId: ShorePortId, filters: ShoreServiceSearch
     return {
       ...service, itinerary,
       listedPrice: shoreListedPrice(service.product),
-      duration: service.product?.durationLabel || "Full day · by agreement",
+      duration: service.product?.durationLabel || "Full day",
       groupLabel: service.kind === "private-driver" ? "Private vehicle" : service.product?.groupFormat === "private" ? "Private tour" : service.product?.groupFormat === "shared" ? "Shared tour" : "Confirm group size",
       includesLabel: service.product?.includesLabel || "Driver & vehicle",
       title: itinerary?.destination || service.provider.title,

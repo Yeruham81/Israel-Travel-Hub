@@ -167,6 +167,8 @@ describe("port service catalog", () => {
   it("uses a distinct credited destination photograph for every excursion across both ports", () => {
     const catalog = [...getShoreCatalog("haifa"), ...getShoreCatalog("ashdod")];
     expect(catalog).toHaveLength(17);
+    expect(catalog.filter(service => service.itinerary && service.title === "Classical Jerusalem").every(service => service.photo.alt.includes("Jerusalem"))).toBe(true);
+    expect(catalog.every(service => !service.duration.toLowerCase().includes("by agreement"))).toBe(true);
     expect(new Set(catalog.map((service) => service.photo.src)).size).toBe(catalog.length);
     const externalPhotoSources = catalog.map((service) => service.photo.sourceUrl).filter((url): url is string => Boolean(url));
     expect(new Set(externalPhotoSources).size).toBe(externalPhotoSources.length);

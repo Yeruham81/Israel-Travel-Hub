@@ -77,7 +77,7 @@ export function ShoreServiceCatalog({ portId, filters, onFilterChange, itinerary
             </li>;
           })}
         </ul>
-        <p className="mt-5 text-xs leading-relaxed text-muted-foreground" data-testid="partner-price-terms">Tour details, availability, prices and booking conditions are set by the tour operators and may change. External starting prices are dated published reference prices, not live quotes. Check the current itinerary, port pickup, return and cancellation terms with the booking provider.</p>
+        <p className="mt-5 text-xs leading-relaxed text-muted-foreground" data-testid="partner-price-terms">Tour details, availability, prices and booking conditions are set by the tour operators and may change. Check the current itinerary, port pickup, return and cancellation terms with the booking provider.</p>
       </section>}
       {privateTours.length > 0 && <section id="my-private-days" aria-labelledby="owner-tours-h" data-section="moshe-private-tours" className="mt-10 scroll-mt-24">
         <p className="text-xs font-bold uppercase tracking-widest text-primary">Personally arranged with Moshe Barak</p>

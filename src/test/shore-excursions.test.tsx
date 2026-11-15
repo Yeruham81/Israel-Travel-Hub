@@ -72,6 +72,10 @@ describe("shore excursions", () => {
     const services = screen.getAllByTestId("shore-service-card");
     expect(services).toHaveLength(servicesForPort(id).length);
     const cards = services.filter((card) => card.dataset["serviceKind"] === "private-driver");
+    const jerusalemCard = cards.find(card => card.dataset["productId"] === `${id}-jerusalem`)!;
+    expect(jerusalemCard.querySelector("img")).toHaveAttribute("src", id === "ashdod" ? "/images/attractions/jerusalem.webp" : "/images/hotels/jerusalem-night.webp");
+    expect(jerusalemCard.querySelector("img")?.getAttribute("alt")).toMatch(/Jerusalem/);
+    expect(cards.every(card => !card.textContent?.toLowerCase().includes("by agreement"))).toBe(true);
     expect(cards).toHaveLength(4);
     const ownerSection = container.querySelector('[data-section="moshe-private-tours"]');
     const externalSection = container.querySelector('#partner-tours-h')?.closest('section');
@@ -91,7 +95,8 @@ describe("shore excursions", () => {
 
     const externalCards = services.filter((card) => card.dataset["serviceKind"] === "guided-tour");
     expect(externalSection?.querySelectorAll('[data-testid="shore-service-card"]')).toHaveLength(externalCards.length);
-    expect(externalSection?.querySelector('[data-testid="partner-price-terms"]')).toHaveTextContent("External starting prices are dated published reference prices");
+    expect(externalSection?.querySelector('[data-testid="partner-price-terms"]')).not.toHaveTextContent("External starting prices are dated published reference prices, not live quotes.");
+    expect(externalSection?.querySelector('[data-testid="partner-price-terms"]')).toHaveTextContent("booking conditions");
     expect(externalSection?.querySelector('[data-testid="partner-price-terms"]')).toHaveTextContent("cancellation terms");
     expect(externalSection).not.toHaveTextContent("My published starting rates");
     expect(externalSection?.querySelector("#partner-tours-h")).toHaveTextContent(`Explore ${port.name} shore excursions`);
