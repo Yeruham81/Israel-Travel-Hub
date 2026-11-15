@@ -28,11 +28,11 @@ describe("travel guide topic filters and prerender safety", () => {
     expect(new Set(photos.map((photo) => photo.src)).size).toBe(3);
     expect(byId("3").alt).toMatch(/Jerusalem/);
     expect(byId("5").alt).toMatch(/Caesarea/);
-    expect(byId("10").alt).toMatch(/Akko/);
-    expect(itineraries["3"].hero).toBe("itinerary-3day-holy-sepulchre");
-    expect(itineraries["5"].hero).toBe("itinerary-5day-caesarea");
+    expect(byId("10").alt).toMatch(/Haifa/);
+    expect(itineraries["3"].hero).toBe("itinerary-3day-jerusalem-cover");
+    expect(itineraries["5"].hero).toBe("itinerary-5day-caesarea-cover");
     expect(itineraries["7"].hero).toBe("EXISTING:galilee");
-    expect(itineraries["10"].hero).toBe("itinerary-10day-akko-aerial");
+    expect(itineraries["10"].hero).toBe("itinerary-10day-haifa-port-cover");
 
     for (const id of itineraryIds) {
       expect(byId(id).src).toBe(migrationPhotos[itineraries[id].hero].src);
