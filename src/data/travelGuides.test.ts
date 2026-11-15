@@ -32,6 +32,11 @@ describe("travel guide topic filters and prerender safety", () => {
     expect(deepLink.searchParams.get("campaign_id")).toBe("541");
     expect(deepLink.searchParams.get("u")).toBe("https://www.airalo.com/how-airalo-works/device-compatibility");
     expect(guide.sections.find((section) => section.id === "unlimited")?.paragraphs.join(" ")).toContain("$56.24");
+    expect(guide.sections.find((section) => section.id === "unlimited")?.paragraphs.join(" ")).toContain("50GB");
+    expect(guide.sections.find((section) => section.id === "unlimited")?.paragraphs.join(" ")).toContain("$39");
+    expect(guide.sections.find((section) => section.id === "long-trip")?.paragraphs.join(" ")).toContain("one-cent difference");
+    expect(guide.sections.find((section) => section.id === "setup")?.paragraphs.join(" ")).toContain("data roaming on your home SIM");
+    expect(guide.checklist.some((item) => item.includes("travel eSIM for mobile data"))).toBe(true);
     expect(guide.sections.find((section) => section.id === "regional")?.externalLinks?.[0]?.href).toBe(AIRALO_MENA_AFFILIATE_URL);
     const regionalLink = new URL(AIRALO_MENA_AFFILIATE_URL);
     expect(regionalLink.searchParams.get("marker")).toBe("622032");
