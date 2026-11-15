@@ -210,13 +210,13 @@
   }
 }
 
-/* Restore the original deep-navy sidebar accents without changing other
-   primary-blue controls or the shared mobile navigation drawer. */
+/* Restore original deep navy to the shared sidebar navigation on desktop and
+   mobile, without changing header navigation or other primary-blue controls. */
 @layer utilities {
-  .site-sidebar nav[aria-label="Explore Israel"] > section > h2 {
+  nav[aria-label="Explore Israel"] > section > h2 {
     color: var(--color-navy);
   }
-  .site-sidebar nav[aria-label="Explore Israel"] a[aria-current="page"] {
+  nav[aria-label="Explore Israel"] a[aria-current="page"] {
     background-color: var(--color-navy);
     color: var(--color-navy-foreground);
   }
