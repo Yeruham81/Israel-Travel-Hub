@@ -43,21 +43,21 @@ export type ItineraryGuide = {
 };
 
 const L = (label: string, to: InternalPath): ItineraryLink => ({ label, to });
-const jerusalem = L("Jerusalem Old City guide", "/travel-blog/old-city-jerusalem/");
+const jerusalem = L("Jerusalem Old City guide", "/attractions/old-city-jerusalem/");
 const jerusalemHotels = L("Where to stay in Jerusalem", "/travel-blog/where-to-stay-in-jerusalem/");
-const masada = L("Planning a visit to Masada", "/travel-blog/masada/");
+const masada = L("Planning a visit to Masada", "/attractions/masada/");
 const deadSea = L("Dead Sea attractions and practical stops", "/travel-blog/dead-sea-attractions/");
 const deadSeaHotels = L("Dead Sea hotel areas", "/travel-blog/best-dead-sea-hotels/");
-const telaviv = L("Explore Old Jaffa", "/travel-blog/jaffa/");
+const telaviv = L("Explore Old Jaffa", "/attractions/jaffa/");
 const telavivHotels = L("Where to stay in Tel Aviv", "/travel-blog/where-to-stay-in-tel-aviv/");
 const caesarea = L("Caesarea, Haifa and Akko tour options", "/tours/caesarea-haifa-acre/");
 const haifa = L("Haifa city guide", "/travel-blog/haifa/");
 const haifaHotels = L("Where to stay in Haifa", "/travel-blog/best-hotels-in-haifa/");
-const nazareth = L("Basilica of the Annunciation", "/travel-blog/basilica-of-the-annunciation/");
+const nazareth = L("Basilica of the Annunciation", "/attractions/basilica-of-the-annunciation/");
 const lake = L("Sea of Galilee guide", "/travel-blog/sea-of-galilee/");
 const tiberiasHotels = L("Hotels in Tiberias", "/travel-blog/best-hotels-in-tiberias/");
-const akko = L("Akko Old City", "/travel-blog/akko-acre/");
-const baptism = L("Qasr el-Yahud visit guide", "/travel-blog/qasr-el-yahud/");
+const akko = L("Akko Old City", "/attractions/akko-acre/");
+const baptism = L("Qasr el-Yahud visit guide", "/attractions/qasr-el-yahud/");
 
 const days3: ItineraryDay[] = [
   {
@@ -97,7 +97,7 @@ const fiveExtra: ItineraryDay[] = [
     evening: "Return to Jerusalem for a second relaxed evening around your hotel district.",
     practical: "A Bethlehem or Jericho excursion should be checked for crossing arrangements, the actual operator, applicable travel advice and the return schedule. Do not assume the same driver can accompany visitors everywhere.",
     overnight: "Jerusalem, keeping the same room if possible.",
-    links: [L("Museums in Jerusalem", "/travel-blog/museums-in-jerusalem/"), L("Jerusalem to Bethlehem travel choices", "/travel-blog/jerusalem-to-bethlehem/"), L("Mount of Olives", "/travel-blog/mount-of-olives/")],
+    links: [L("Museums in Jerusalem", "/travel-blog/museums-in-jerusalem/"), L("Jerusalem to Bethlehem travel choices", "/travel-blog/jerusalem-to-bethlehem/"), L("Mount of Olives", "/attractions/mount-of-olives/")],
   },
   {
     name: "Caesarea and Haifa: northbound coastal day", region: "Coast and Haifa", image: "EXISTING:haifa",
@@ -137,7 +137,7 @@ const days5: ItineraryDay[] = [
     evening: "Enjoy your final Jerusalem evening around the centre or hotel district, ready for the move to Tel Aviv the following morning.",
     practical: "A Bethlehem visit or an outing to Jericho requires arrangements separate from city sightseeing. Check current travel advice, eligibility to enter the planned areas, the operator’s itinerary and the return journey.",
     overnight: "Jerusalem after Day 3 — the last planned night in the city.",
-    links: [L("Museums in Jerusalem", "/travel-blog/museums-in-jerusalem/"), L("Mount of Olives", "/travel-blog/mount-of-olives/"), L("Jerusalem to Bethlehem", "/travel-blog/jerusalem-to-bethlehem/")],
+    links: [L("Museums in Jerusalem", "/travel-blog/museums-in-jerusalem/"), L("Mount of Olives", "/attractions/mount-of-olives/"), L("Jerusalem to Bethlehem", "/travel-blog/jerusalem-to-bethlehem/")],
   },
   { ...days3[2]!,
     name: "Tel Aviv–Jaffa: old port, neighbourhoods and sea",
@@ -175,7 +175,7 @@ const days7: ItineraryDay[] = [
     evening: "Enjoy another evening in Jerusalem without packing for a hotel change; the desert outing starts early tomorrow.",
     practical: "A Bethlehem or Jericho day trip needs separate route and crossing arrangements. Check current travel advice, entry eligibility, the tour operator's actual itinerary and return travel.",
     overnight: "Jerusalem after Day 2 — same hotel.",
-    links: [L("Museums in Jerusalem", "/travel-blog/museums-in-jerusalem/"), L("Mount of Olives", "/travel-blog/mount-of-olives/"), L("Jerusalem to Bethlehem travel options", "/travel-blog/jerusalem-to-bethlehem/")],
+    links: [L("Museums in Jerusalem", "/travel-blog/museums-in-jerusalem/"), L("Mount of Olives", "/attractions/mount-of-olives/"), L("Jerusalem to Bethlehem travel options", "/travel-blog/jerusalem-to-bethlehem/")],
   },
   { ...days5[1]!,
     name: "Masada and the Dead Sea: a full desert day",
@@ -193,7 +193,7 @@ const days7: ItineraryDay[] = [
     evening: "Check into your hotel in Tiberias or elsewhere in the Galilee and enjoy a relaxed evening after the journey north.",
     practical: "This is a hotel-transfer day as well as a sightseeing day. A self-drive route or private driver can connect Nazareth and a lakeside stop directly; public transport may mean changing services and arranging a separate local transfer, especially with luggage.",
     overnight: "Tiberias or the Galilee after Day 4 — the first of two nights in the north.",
-    links: [nazareth, L("Magdala travel guide", "/travel-blog/magdala/"), tiberiasHotels],
+    links: [nazareth, L("Magdala travel guide", "/attractions/magdala/"), tiberiasHotels],
   },
   {
     name: "Sea of Galilee: heritage sites or a nature-focused day", region: "Sea of Galilee", image: "itinerary-7day-capernaum",
@@ -202,7 +202,7 @@ const days7: ItineraryDay[] = [
     evening: "Return to the same Galilee accommodation and enjoy the lakeside atmosphere or dinner in Tiberias.",
     practical: "A car, prearranged driver or suitable guided tour simplifies the separate lakeside stops. For a nature-focused alternative, replace the heritage route with a specific, currently accessible trail; do not assume sites near border areas are suitable without checking official advice.",
     overnight: "Tiberias or the Galilee after Day 5 — second night at the same base.",
-    links: [L("Capernaum", "/travel-blog/capernaum/"), L("Tabgha", "/travel-blog/tabgha/"), lake],
+    links: [L("Capernaum", "/attractions/capernaum/"), L("Tabgha", "/attractions/tabgha/"), lake],
   },
   {
     name: "Haifa and Caesarea: coastal stops on the way south", region: "Haifa and coast", image: "EXISTING:haifa",
@@ -241,7 +241,7 @@ const days10: ItineraryDay[] = [
     evening: "Explore Mahane Yehuda or enjoy a quieter evening near your hotel before the early desert outing.",
     practical: "If choosing Bethlehem or Jericho, check current travel advice, entry eligibility, crossing arrangements and the tour operator's actual route. Do not assume a Jerusalem taxi or driver can enter every area.",
     overnight: "Jerusalem after Day 2 — second night at the same hotel.",
-    links: [L("Museums in Jerusalem", "/travel-blog/museums-in-jerusalem/"), L("Mount of Olives", "/travel-blog/mount-of-olives/"), L("Jerusalem to Bethlehem", "/travel-blog/jerusalem-to-bethlehem/")],
+    links: [L("Museums in Jerusalem", "/travel-blog/museums-in-jerusalem/"), L("Mount of Olives", "/attractions/mount-of-olives/"), L("Jerusalem to Bethlehem", "/travel-blog/jerusalem-to-bethlehem/")],
   },
   {
     name: "Masada and the Dead Sea: a full desert excursion", region: "Judean Desert", image: "EXISTING:masada",
@@ -259,7 +259,7 @@ const days10: ItineraryDay[] = [
     evening: "Check into accommodation in Tiberias or another convenient Galilee base and enjoy a relaxed dinner after the intercity journey.",
     practical: "This is a hotel-transfer day with luggage, not a full day at the attractions. A car or private driver can connect the stops; buses may require changes and additional local rides, particularly between Nazareth and the lake.",
     overnight: "Tiberias or the Galilee after Day 4 — first of three nights in the north.",
-    links: [nazareth, L("Magdala guide", "/travel-blog/magdala/"), tiberiasHotels],
+    links: [nazareth, L("Magdala guide", "/attractions/magdala/"), tiberiasHotels],
   },
   {
     name: "Sea of Galilee: Capernaum and lakeside heritage", region: "Sea of Galilee", image: "itinerary-7day-capernaum",
@@ -268,7 +268,7 @@ const days10: ItineraryDay[] = [
     evening: "Return to your Galilee hotel for a relaxed evening without moving luggage or changing accommodation.",
     practical: "A car, prearranged driver or suitable guided tour is useful for dispersed lakeside sites. Check worship schedules, access and official travel advice before visiting, and use designated swimming areas if entering the water.",
     overnight: "Tiberias or the Galilee after Day 5 — second night at the same base.",
-    links: [L("Capernaum", "/travel-blog/capernaum/"), L("Tabgha", "/travel-blog/tabgha/"), lake],
+    links: [L("Capernaum", "/attractions/capernaum/"), L("Tabgha", "/attractions/tabgha/"), lake],
   },
   {
     name: "A flexible Galilee day: nature or more heritage", region: "Galilee", image: "EXISTING:galilee",
@@ -277,7 +277,7 @@ const days10: ItineraryDay[] = [
     evening: "Enjoy a third evening at the same Galilee hotel, with time for dinner and an easy start tomorrow.",
     practical: "Nature sites can have seasonal restrictions and different entrances. Choose a currently accessible destination in the same region if your first choice is closed; border-area routes require particular care and up-to-date official advice.",
     overnight: "Tiberias or the Galilee after Day 6 — third night at the same base.",
-    links: [lake, L("Mount Tabor guide", "/travel-blog/mount-tabor/"), L("Israel travel advice", "/travel-blog/israel-travel-tips/")],
+    links: [lake, L("Mount Tabor guide", "/attractions/mount-tabor/"), L("Israel travel advice", "/travel-blog/israel-travel-tips/")],
   },
   {
     name: "Old Akko and the northern coast: southbound transfer", region: "Akko and Haifa", image: "itinerary-10day-akko-port",
@@ -286,7 +286,7 @@ const days10: ItineraryDay[] = [
     evening: "For the full Haifa and Caesarea route tomorrow, stay in Haifa tonight. To avoid another hotel change, continue to Tel Aviv instead and choose a shorter Day 8 without returning north to Haifa.",
     practical: "This is a hotel-transfer day with luggage. From Tiberias, travel to Akko by road or bus; there is no railway station in Tiberias. Trains can be useful from Akko to Haifa, but Akko station is outside the old town. Plan luggage storage and local connections before setting off.",
     overnight: "Haifa after Day 7 for the full coastal route; alternatively Tel Aviv if shortening Day 8.",
-    links: [akko, L("Rosh Hanikra visitor guide", "/travel-blog/rosh-hanikra/"), haifaHotels],
+    links: [akko, L("Rosh Hanikra visitor guide", "/attractions/rosh-hanikra/"), haifaHotels],
   },
   {
     name: "Haifa and Caesarea: follow the Mediterranean coast", region: "Haifa and Caesarea", image: "itinerary-5day-caesarea",
@@ -341,17 +341,17 @@ export const itineraries: Record<ItineraryId, ItineraryGuide> = {
     ],
     jerusalemTourOptionsDay: 2,
     dayInlineLinks: [
-      { day: 1, field: "morning", phrase: "Old City", to: "/travel-blog/old-city-jerusalem/" },
+      { day: 1, field: "morning", phrase: "Old City", to: "/attractions/old-city-jerusalem/" },
       { day: 1, field: "afternoon", phrase: "Jerusalem museums", to: "/travel-blog/museums-in-jerusalem/" },
       { day: 1, field: "evening", phrase: "shopping in Jerusalem", to: "/travel-blog/shopping-in-jerusalem/" },
       { day: 1, field: "overnight", phrase: "where to stay in Jerusalem", to: "/travel-blog/where-to-stay-in-jerusalem/" },
-      { day: 2, field: "morning", phrase: "Masada National Park", to: "/travel-blog/masada/" },
+      { day: 2, field: "morning", phrase: "Masada National Park", to: "/attractions/masada/" },
       { day: 2, field: "morning", phrase: "how to get from Jerusalem to the Dead Sea", to: "/travel-blog/jerusalem-to-the-dead-sea/" },
       { day: 2, field: "afternoon", phrase: "Dead Sea visitor guide", to: "/travel-blog/the-dead-sea/" },
       { day: 2, field: "afternoon", phrase: "Dead Sea attractions", to: "/travel-blog/dead-sea-attractions/" },
       { day: 2, field: "practical", phrase: "Masada and Dead Sea day tours", to: "/tours/masada-dead-sea/" },
-      { day: 2, field: "practical", phrase: "Ein Gedi", to: "/travel-blog/ein-gedi/" },
-      { day: 3, field: "morning", phrase: "Old Jaffa", to: "/travel-blog/jaffa/" },
+      { day: 2, field: "practical", phrase: "Ein Gedi", to: "/attractions/ein-gedi/" },
+      { day: 3, field: "morning", phrase: "Old Jaffa", to: "/attractions/jaffa/" },
       { day: 3, field: "afternoon", phrase: "beaches in Tel Aviv", to: "/travel-blog/beaches-in-tel-aviv/" },
       { day: 3, field: "afternoon", phrase: "Tel Aviv museums", to: "/travel-blog/museums-in-tel-aviv/" },
       { day: 3, field: "practical", phrase: "Ben Gurion Airport connections", to: "/airport-transfers/" },
@@ -400,13 +400,13 @@ export const itineraries: Record<ItineraryId, ItineraryGuide> = {
     beforeYouGo: [
       { heading: "Check entry requirements", text: "Check visa or ETA-IL requirements for your passport on the official Israel entry portal, and review current travel advice before non-refundable bookings. See my Israel travel essentials guide for other preparations.", to: "/travel-blog/israel-travel-tips/", label: "Israel travel essentials guide" },
       { heading: "Plan around Shabbat and holidays", text: "Trains and many buses stop for much of Shabbat, with dates and service times varying by route. Consult the Transport guide and check the actual timetable.", to: "/travel-blog/getting-around-israel/", label: "Transport guide" },
-      { heading: "Confirm your desert stops", text: "Check Masada opening hours, any trail heat restrictions and the availability of a designated Dead Sea bathing beach. Bring water and sun protection, and consult my Masada planning guide.", to: "/travel-blog/masada/", label: "Masada planning guide" },
+      { heading: "Confirm your desert stops", text: "Check Masada opening hours, any trail heat restrictions and the availability of a designated Dead Sea bathing beach. Bring water and sun protection, and consult my Masada planning guide.", to: "/attractions/masada/", label: "Masada planning guide" },
     ],
     relatedGuides: [
-      { title: "Jerusalem Old City", description: "Choose a practical walking route through the historic quarters.", to: "/travel-blog/old-city-jerusalem/", image: "itinerary-jerusalem-old-city" },
-      { title: "Visiting Masada", description: "Entrances, cable car, hiking and visiting conditions.", to: "/travel-blog/masada/", image: "itinerary-masada-car" },
+      { title: "Jerusalem Old City", description: "Choose a practical walking route through the historic quarters.", to: "/attractions/old-city-jerusalem/", image: "itinerary-jerusalem-old-city" },
+      { title: "Visiting Masada", description: "Entrances, cable car, hiking and visiting conditions.", to: "/attractions/masada/", image: "itinerary-masada-car" },
       { title: "Dead Sea attractions", description: "Where to stop, float and plan a desert outing.", to: "/travel-blog/dead-sea-attractions/", image: "itinerary-dead-sea-shore" },
-      { title: "Old Jaffa", description: "Historic lanes, port views and neighborhood walks.", to: "/travel-blog/jaffa/", image: "itinerary-jaffa-streets" },
+      { title: "Old Jaffa", description: "Historic lanes, port views and neighborhood walks.", to: "/attractions/jaffa/", image: "itinerary-jaffa-streets" },
       { title: "Getting around Israel", description: "Compare rail, buses, taxis and longer day trips.", to: "/travel-blog/getting-around-israel/", image: "itinerary-train" },
       { title: "Ben Gurion Airport tips", description: "Arrival, luggage and planning a departure connection.", to: "/travel-blog/ben-gurion-airport-arrival-tips/", image: "itinerary-airport" },
     ],
@@ -492,19 +492,19 @@ export const itineraries: Record<ItineraryId, ItineraryGuide> = {
       ] },
     ],
     dayInlineLinks: [
-      { day: 1, field: "morning", phrase: "Old City guide", to: "/travel-blog/old-city-jerusalem/" },
+      { day: 1, field: "morning", phrase: "Old City guide", to: "/attractions/old-city-jerusalem/" },
       { day: 1, field: "evening", phrase: "shopping in Jerusalem", to: "/travel-blog/shopping-in-jerusalem/" },
       { day: 1, field: "overnight", phrase: "where to stay in Jerusalem", to: "/travel-blog/where-to-stay-in-jerusalem/" },
-      { day: 2, field: "morning", phrase: "Masada National Park", to: "/travel-blog/masada/" },
+      { day: 2, field: "morning", phrase: "Masada National Park", to: "/attractions/masada/" },
       { day: 2, field: "afternoon", phrase: "Dead Sea visitor guide", to: "/travel-blog/the-dead-sea/" },
       { day: 2, field: "afternoon", phrase: "Dead Sea attractions guide", to: "/travel-blog/dead-sea-attractions/" },
-      { day: 2, field: "afternoon", phrase: "Ein Gedi Nature Reserve", to: "/travel-blog/ein-gedi/" },
+      { day: 2, field: "afternoon", phrase: "Ein Gedi Nature Reserve", to: "/attractions/ein-gedi/" },
       { day: 2, field: "practical", phrase: "Masada and Dead Sea day tours", to: "/tours/masada-dead-sea/" },
       { day: 2, field: "practical", phrase: "how to get from Jerusalem to the Dead Sea", to: "/travel-blog/jerusalem-to-the-dead-sea/" },
       { day: 3, field: "morning", phrase: "Israel Museum", to: "/travel-blog/museums-in-jerusalem/" },
-      { day: 3, field: "morning", phrase: "Mount of Olives", to: "/travel-blog/mount-of-olives/" },
+      { day: 3, field: "morning", phrase: "Mount of Olives", to: "/attractions/mount-of-olives/" },
       { day: 3, field: "practical", phrase: "Bethlehem visit", to: "/travel-blog/jerusalem-to-bethlehem/" },
-      { day: 4, field: "morning", phrase: "Old Jaffa", to: "/travel-blog/jaffa/" },
+      { day: 4, field: "morning", phrase: "Old Jaffa", to: "/attractions/jaffa/" },
       { day: 4, field: "afternoon", phrase: "beaches in Tel Aviv", to: "/travel-blog/beaches-in-tel-aviv/" },
       { day: 4, field: "afternoon", phrase: "Tel Aviv museums", to: "/travel-blog/museums-in-tel-aviv/" },
       { day: 4, field: "practical", phrase: "how to get around Tel Aviv", to: "/travel-blog/getting-around-tel-aviv/" },
@@ -537,7 +537,7 @@ export const itineraries: Record<ItineraryId, ItineraryGuide> = {
     beforeYouGo: [
       { heading: "Check entry requirements", text: "Visa or ETA-IL arrangements depend on your passport. Check the official Israel entry portal and the latest travel advice before non-refundable bookings; the Israel travel essentials guide covers other preparations.", to: "/travel-blog/israel-travel-tips/", label: "Israel travel essentials guide" },
       { heading: "Consider Shabbat and holidays", text: "Train and bus timetables can change substantially on Friday, Saturday and public holidays. Confirm operating hours for markets, religious sites and tours on your actual dates.", to: "/travel-blog/getting-around-israel/", label: "Compare Israel transport" },
-      { heading: "Check park and garden visiting arrangements", text: "Masada, Caesarea and the Bahá’í Gardens have their own opening times, admission rules and potential closures. Plan around the official visitor information linked in the daily route.", to: "/travel-blog/masada/", label: "Masada visiting guide" },
+      { heading: "Check park and garden visiting arrangements", text: "Masada, Caesarea and the Bahá’í Gardens have their own opening times, admission rules and potential closures. Plan around the official visitor information linked in the daily route.", to: "/attractions/masada/", label: "Masada visiting guide" },
     ],
     beforeYouGoOfficialLinks: [
       { index: 0, phrase: "official Israel entry portal", href: "https://israel-entry.piba.gov.il/" },
@@ -553,11 +553,11 @@ export const itineraries: Record<ItineraryId, ItineraryGuide> = {
       { q: "How do Friday, Saturday and holidays affect the itinerary?", a: "Regular train and many bus services do not run for much of Shabbat. Opening hours for markets, parks, religious sites and gardens also vary. Check each day's availability and adjust the sightseeing order or transport." },
     ],
     relatedGuides: [
-      { title: "Jerusalem Old City", description: "Historic quarters, gates and practical walking routes.", to: "/travel-blog/old-city-jerusalem/", image: "itinerary-jerusalem-old-city" },
-      { title: "Masada National Park", description: "Entrances, cable car, trails and visitor conditions.", to: "/travel-blog/masada/", image: "itinerary-masada-car" },
+      { title: "Jerusalem Old City", description: "Historic quarters, gates and practical walking routes.", to: "/attractions/old-city-jerusalem/", image: "itinerary-jerusalem-old-city" },
+      { title: "Masada National Park", description: "Entrances, cable car, trails and visitor conditions.", to: "/attractions/masada/", image: "itinerary-masada-car" },
       { title: "Dead Sea attractions", description: "Where to float and how to plan desert stops.", to: "/travel-blog/dead-sea-attractions/", image: "itinerary-dead-sea-shore" },
       { title: "Jerusalem to Bethlehem", description: "Crossing arrangements and travel options explained.", to: "/travel-blog/jerusalem-to-bethlehem/", image: "jerusalem-to-bethlehem" },
-      { title: "Old Jaffa", description: "Port views, historic lanes and neighbourhood walks.", to: "/travel-blog/jaffa/", image: "itinerary-jaffa-streets" },
+      { title: "Old Jaffa", description: "Port views, historic lanes and neighbourhood walks.", to: "/attractions/jaffa/", image: "itinerary-jaffa-streets" },
       { title: "Getting around Israel", description: "Rail, buses, taxis and longer day-trip connections.", to: "/travel-blog/getting-around-israel/", image: "itinerary-train" },
     ],
     hero: "itinerary-5day-caesarea-cover",
@@ -649,28 +649,28 @@ export const itineraries: Record<ItineraryId, ItineraryGuide> = {
       ] },
     ],
     dayInlineLinks: [
-      { day: 1, field: "morning", phrase: "Old City guide", to: "/travel-blog/old-city-jerusalem/" },
+      { day: 1, field: "morning", phrase: "Old City guide", to: "/attractions/old-city-jerusalem/" },
       { day: 1, field: "evening", phrase: "shopping in Jerusalem", to: "/travel-blog/shopping-in-jerusalem/" },
       { day: 2, field: "morning", phrase: "Israel Museum", to: "/travel-blog/museums-in-jerusalem/" },
-      { day: 2, field: "morning", phrase: "Mount of Olives", to: "/travel-blog/mount-of-olives/" },
+      { day: 2, field: "morning", phrase: "Mount of Olives", to: "/attractions/mount-of-olives/" },
       { day: 2, field: "practical", phrase: "Bethlehem", to: "/travel-blog/jerusalem-to-bethlehem/" },
-      { day: 3, field: "morning", phrase: "Masada National Park", to: "/travel-blog/masada/" },
+      { day: 3, field: "morning", phrase: "Masada National Park", to: "/attractions/masada/" },
       { day: 3, field: "afternoon", phrase: "Dead Sea visitor guide", to: "/travel-blog/the-dead-sea/" },
-      { day: 3, field: "afternoon", phrase: "Ein Gedi", to: "/travel-blog/ein-gedi/" },
+      { day: 3, field: "afternoon", phrase: "Ein Gedi", to: "/attractions/ein-gedi/" },
       { day: 3, field: "practical", phrase: "Masada and Dead Sea tours", to: "/tours/masada-dead-sea/" },
       { day: 3, field: "practical", phrase: "Jerusalem to Dead Sea guide", to: "/travel-blog/jerusalem-to-the-dead-sea/" },
-      { day: 4, field: "morning", phrase: "Basilica of the Annunciation", to: "/travel-blog/basilica-of-the-annunciation/" },
-      { day: 4, field: "afternoon", phrase: "Magdala", to: "/travel-blog/magdala/" },
+      { day: 4, field: "morning", phrase: "Basilica of the Annunciation", to: "/attractions/basilica-of-the-annunciation/" },
+      { day: 4, field: "afternoon", phrase: "Magdala", to: "/attractions/magdala/" },
       { day: 4, field: "overnight", phrase: "Tiberias", to: "/travel-blog/best-hotels-in-tiberias/" },
-      { day: 5, field: "morning", phrase: "Capernaum", to: "/travel-blog/capernaum/" },
-      { day: 5, field: "morning", phrase: "Mount of Beatitudes", to: "/travel-blog/mount-of-beatitudes/" },
-      { day: 5, field: "afternoon", phrase: "Tabgha", to: "/travel-blog/tabgha/" },
-      { day: 5, field: "afternoon", phrase: "Magdala", to: "/travel-blog/magdala/" },
+      { day: 5, field: "morning", phrase: "Capernaum", to: "/attractions/capernaum/" },
+      { day: 5, field: "morning", phrase: "Mount of Beatitudes", to: "/attractions/mount-of-beatitudes/" },
+      { day: 5, field: "afternoon", phrase: "Tabgha", to: "/attractions/tabgha/" },
+      { day: 5, field: "afternoon", phrase: "Magdala", to: "/attractions/magdala/" },
       { day: 5, field: "afternoon", phrase: "Sea of Galilee", to: "/travel-blog/sea-of-galilee/" },
       { day: 6, field: "morning", phrase: "Haifa", to: "/travel-blog/haifa/" },
       { day: 6, field: "practical", phrase: "guided coastal excursion", to: "/tours/caesarea-haifa-acre/" },
       { day: 6, field: "overnight", phrase: "Tel Aviv", to: "/travel-blog/where-to-stay-in-tel-aviv/" },
-      { day: 7, field: "morning", phrase: "Old Jaffa guide", to: "/travel-blog/jaffa/" },
+      { day: 7, field: "morning", phrase: "Old Jaffa guide", to: "/attractions/jaffa/" },
       { day: 7, field: "afternoon", phrase: "Tel Aviv beach", to: "/travel-blog/beaches-in-tel-aviv/" },
       { day: 7, field: "practical", phrase: "Ben Gurion Airport", to: "/airport-transfers/" },
     ],
@@ -703,7 +703,7 @@ export const itineraries: Record<ItineraryId, ItineraryGuide> = {
     beforeYouGo: [
       { heading: "Check entry requirements and travel advice", text: "Visa or ETA-IL eligibility depends on your passport. Review the official Israel entry information and current travel advisories before non-refundable bookings, especially for any optional border-area excursion.", to: "/travel-blog/israel-travel-tips/", label: "Israel travel essentials" },
       { heading: "Plan around Shabbat and holidays", text: "Train and many bus services can be unavailable for much of Shabbat, and religious sites, museums and markets follow their own calendars. Check Israel Railways and local operating hours for your dates.", to: "/travel-blog/getting-around-israel/", label: "Israel transport" },
-      { heading: "Confirm individual attraction access", text: "Opening times, last entry, trail closures and guided-tour arrangements vary at Masada, the Galilee sites, Caesarea and the Bahá’í Gardens. The official visitor links in the daily itinerary are the best starting point.", to: "/travel-blog/masada/", label: "Masada visitor guide" },
+      { heading: "Confirm individual attraction access", text: "Opening times, last entry, trail closures and guided-tour arrangements vary at Masada, the Galilee sites, Caesarea and the Bahá’í Gardens. The official visitor links in the daily itinerary are the best starting point.", to: "/attractions/masada/", label: "Masada visitor guide" },
     ],
     beforeYouGoOfficialLinks: [
       { index: 0, phrase: "official Israel entry information", href: "https://www.gov.il/en/departments/topics/eta-il/govil-landing-page" },
@@ -720,9 +720,9 @@ export const itineraries: Record<ItineraryId, ItineraryGuide> = {
       { q: "What should I change if my flight leaves on Day 7 or during Shabbat?", a: "Morning or midday flights may leave no usable sightseeing time; treat Day 7 as a departure day. For later flights, choose at most a short stop and leave generous time to reach Ben Gurion Airport for security and check-in. Rail and bus services can be limited during Shabbat, so verify transport for your specific departure date." },
     ],
     relatedGuides: [
-      { title: "Jerusalem Old City", description: "Historic quarters, gates and practical walking routes.", to: "/travel-blog/old-city-jerusalem/", image: "itinerary-jerusalem-old-city" },
-      { title: "Masada and the Dead Sea", description: "Desert sites, bathing advice and travel choices.", to: "/travel-blog/masada/", image: "itinerary-dead-sea-shore" },
-      { title: "Magdala and its archaeological remains", description: "A rewarding historical stop on the Galilee shore.", to: "/travel-blog/magdala/", image: "magdala-archaeology" },
+      { title: "Jerusalem Old City", description: "Historic quarters, gates and practical walking routes.", to: "/attractions/old-city-jerusalem/", image: "itinerary-jerusalem-old-city" },
+      { title: "Masada and the Dead Sea", description: "Desert sites, bathing advice and travel choices.", to: "/attractions/masada/", image: "itinerary-dead-sea-shore" },
+      { title: "Magdala and its archaeological remains", description: "A rewarding historical stop on the Galilee shore.", to: "/attractions/magdala/", image: "magdala-archaeology" },
       { title: "Haifa city highlights", description: "Viewpoints, the Bahá’í Gardens and museums.", to: "/travel-blog/haifa/", image: "museums-in-haifa" },
       { title: "Getting around Israel", description: "Rail, buses and connections between major regions.", to: "/travel-blog/getting-around-israel/", image: "itinerary-train" },
       { title: "Ben Gurion Airport connections", description: "Plan the final journey to your flight.", to: "/airport-transfers/", image: "itinerary-airport" },
@@ -841,30 +841,30 @@ export const itineraries: Record<ItineraryId, ItineraryGuide> = {
       ] },
     ],
     dayInlineLinks: [
-      { day: 1, field: "morning", phrase: "Old City guide", to: "/travel-blog/old-city-jerusalem/" },
+      { day: 1, field: "morning", phrase: "Old City guide", to: "/attractions/old-city-jerusalem/" },
       { day: 1, field: "evening", phrase: "Mahane Yehuda", to: "/travel-blog/shopping-in-jerusalem/" },
       { day: 2, field: "morning", phrase: "Israel Museum", to: "/travel-blog/museums-in-jerusalem/" },
-      { day: 2, field: "morning", phrase: "Mount of Olives", to: "/travel-blog/mount-of-olives/" },
+      { day: 2, field: "morning", phrase: "Mount of Olives", to: "/attractions/mount-of-olives/" },
       { day: 2, field: "practical", phrase: "Bethlehem", to: "/travel-blog/jerusalem-to-bethlehem/" },
-      { day: 3, field: "morning", phrase: "Masada National Park", to: "/travel-blog/masada/" },
+      { day: 3, field: "morning", phrase: "Masada National Park", to: "/attractions/masada/" },
       { day: 3, field: "afternoon", phrase: "Dead Sea visitor guide", to: "/travel-blog/the-dead-sea/" },
-      { day: 3, field: "afternoon", phrase: "Ein Gedi Nature Reserve", to: "/travel-blog/ein-gedi/" },
+      { day: 3, field: "afternoon", phrase: "Ein Gedi Nature Reserve", to: "/attractions/ein-gedi/" },
       { day: 3, field: "practical", phrase: "Masada and Dead Sea day tours", to: "/tours/masada-dead-sea/" },
       { day: 3, field: "practical", phrase: "Jerusalem to Dead Sea guide", to: "/travel-blog/jerusalem-to-the-dead-sea/" },
-      { day: 4, field: "morning", phrase: "Basilica of the Annunciation", to: "/travel-blog/basilica-of-the-annunciation/" },
-      { day: 4, field: "afternoon", phrase: "Magdala", to: "/travel-blog/magdala/" },
+      { day: 4, field: "morning", phrase: "Basilica of the Annunciation", to: "/attractions/basilica-of-the-annunciation/" },
+      { day: 4, field: "afternoon", phrase: "Magdala", to: "/attractions/magdala/" },
       { day: 4, field: "overnight", phrase: "Tiberias", to: "/travel-blog/best-hotels-in-tiberias/" },
-      { day: 5, field: "morning", phrase: "Capernaum", to: "/travel-blog/capernaum/" },
-      { day: 5, field: "afternoon", phrase: "Tabgha", to: "/travel-blog/tabgha/" },
-      { day: 6, field: "morning", phrase: "Mount Tabor", to: "/travel-blog/mount-tabor/" },
+      { day: 5, field: "morning", phrase: "Capernaum", to: "/attractions/capernaum/" },
+      { day: 5, field: "afternoon", phrase: "Tabgha", to: "/attractions/tabgha/" },
+      { day: 6, field: "morning", phrase: "Mount Tabor", to: "/attractions/mount-tabor/" },
       { day: 6, field: "afternoon", phrase: "travel advice", to: "/travel-blog/israel-travel-tips/" },
-      { day: 7, field: "morning", phrase: "Old Akko", to: "/travel-blog/akko-acre/" },
-      { day: 7, field: "afternoon", phrase: "Rosh Hanikra", to: "/travel-blog/rosh-hanikra/" },
+      { day: 7, field: "morning", phrase: "Old Akko", to: "/attractions/akko-acre/" },
+      { day: 7, field: "afternoon", phrase: "Rosh Hanikra", to: "/attractions/rosh-hanikra/" },
       { day: 7, field: "overnight", phrase: "Haifa", to: "/travel-blog/best-hotels-in-haifa/" },
       { day: 8, field: "morning", phrase: "Bahá’í Gardens", to: "/travel-blog/haifa/" },
       { day: 8, field: "afternoon", phrase: "Caesarea National Park", to: "/attractions/caesarea/" },
       { day: 8, field: "overnight", phrase: "Tel Aviv", to: "/travel-blog/where-to-stay-in-tel-aviv/" },
-      { day: 9, field: "morning", phrase: "Old Jaffa", to: "/travel-blog/jaffa/" },
+      { day: 9, field: "morning", phrase: "Old Jaffa", to: "/attractions/jaffa/" },
       { day: 9, field: "afternoon", phrase: "Carmel Market", to: "/travel-blog/attractions-in-tel-aviv/" },
       { day: 10, field: "morning", phrase: "Tel Aviv museum", to: "/travel-blog/museums-in-tel-aviv/" },
       { day: 10, field: "practical", phrase: "airport transfer options", to: "/airport-transfers/" },
@@ -887,7 +887,7 @@ export const itineraries: Record<ItineraryId, ItineraryGuide> = {
     jerusalemTourOptionsDay: 3,
     alternatives: [
       { title: "Prefer Eilat and Timna? Choose a southern 10-day route", text: "Do not add Eilat onto this Galilee itinerary. Instead spend Days 1–3 in Jerusalem and at the Dead Sea, Days 4–5 in Tel Aviv or on a short coastal trip, Days 6–8 based in Eilat (including a dedicated Timna Park day), and Day 9 returning to central Israel ahead of your Day 10 departure. Allow a full travel day for each long transfer and verify operating routes and hotel nights.", to: "/travel-blog/eilat/", label: "Eilat travel guide" },
-      { title: "Prefer the Negev and Ramon Crater?", text: "Replace several Galilee and coastal days with a planned overnight in Mitzpe Ramon and a separate desert sightseeing day. This is a different route with different transport and hotel needs, not a quick detour between Jerusalem and Tel Aviv.", to: "/travel-blog/mitzpe-ramon-crater/", label: "Ramon Crater guide" },
+      { title: "Prefer the Negev and Ramon Crater?", text: "Replace several Galilee and coastal days with a planned overnight in Mitzpe Ramon and a separate desert sightseeing day. This is a different route with different transport and hotel needs, not a quick detour between Jerusalem and Tel Aviv.", to: "/attractions/mitzpe-ramon-crater/", label: "Ramon Crater guide" },
     ],
     logistics: [
       { heading: "Keep hotel changes purposeful", text: "Use Jerusalem accommodation for three nights and Tiberias hotel options for the next three. A Haifa night supports a full Haifa–Caesarea transfer, while Tel Aviv hotel areas suit the coastal finish. If you skip Haifa as a base, adjust Day 8 rather than returning north.", to: "/travel-blog/where-to-stay-in-jerusalem/", label: "Jerusalem accommodation" },
@@ -908,7 +908,7 @@ export const itineraries: Record<ItineraryId, ItineraryGuide> = {
     beforeYouGo: [
       { heading: "Check entry requirements and travel advice", text: "Visa or ETA-IL eligibility depends on your passport. Review the official Israel entry information and current travel advice before making non-refundable bookings, especially for optional excursions near restricted areas.", to: "/travel-blog/israel-travel-tips/", label: "Israel travel essentials" },
       { heading: "Plan around Shabbat and holidays", text: "Trains and many bus services do not operate for much of Shabbat. Check Israel Railways and local opening calendars for your actual dates, including gardens, museums and markets.", to: "/travel-blog/getting-around-israel/", label: "Israel transport guide" },
-      { heading: "Confirm national parks and heritage access", text: "Masada, Capernaum, Caesarea, Akko and the Bahá’í Gardens have different opening hours, access arrangements and potential closures. Use the official links within the daily itinerary rather than assuming availability.", to: "/travel-blog/masada/", label: "Masada guide" },
+      { heading: "Confirm national parks and heritage access", text: "Masada, Capernaum, Caesarea, Akko and the Bahá’í Gardens have different opening hours, access arrangements and potential closures. Use the official links within the daily itinerary rather than assuming availability.", to: "/attractions/masada/", label: "Masada guide" },
       { heading: "Allow for hotel transfers and luggage", text: "Check bags, accommodation check-in and onward station connections on Days 4, 7 and 8. Avoid booking activities too close to a hotel change or a flight.", to: "/travel-blog/getting-around-israel/", label: "Getting around Israel" },
     ],
     beforeYouGoOfficialLinks: [
@@ -926,10 +926,10 @@ export const itineraries: Record<ItineraryId, ItineraryGuide> = {
       { q: "What if my flight leaves on Day 10?", a: "Morning or midday flights can eliminate Day 10 sightseeing. For an evening departure, plan at most a short nearby activity and allow ample time for the journey to Ben Gurion Airport, security and airline check-in." },
     ],
     relatedGuides: [
-      { title: "Jerusalem Old City", description: "Gates, historic quarters and walking routes.", to: "/travel-blog/old-city-jerusalem/", image: "itinerary-jerusalem-old-city" },
-      { title: "Masada and the Dead Sea", description: "Desert sites, bathing precautions and access.", to: "/travel-blog/masada/", image: "itinerary-dead-sea-shore" },
+      { title: "Jerusalem Old City", description: "Gates, historic quarters and walking routes.", to: "/attractions/old-city-jerusalem/", image: "itinerary-jerusalem-old-city" },
+      { title: "Masada and the Dead Sea", description: "Desert sites, bathing precautions and access.", to: "/attractions/masada/", image: "itinerary-dead-sea-shore" },
       { title: "Sea of Galilee", description: "Lakeside stops and heritage-site connections.", to: "/travel-blog/sea-of-galilee/", image: "magdala-archaeology" },
-      { title: "Akko Old City", description: "Crusader halls, markets and harbour heritage.", to: "/travel-blog/akko-acre/", image: "itinerary-10day-akko-aerial" },
+      { title: "Akko Old City", description: "Crusader halls, markets and harbour heritage.", to: "/attractions/akko-acre/", image: "itinerary-10day-akko-aerial" },
       { title: "Haifa", description: "Bahá’í Gardens viewpoints and coastal sights.", to: "/travel-blog/haifa/", image: "EXISTING:haifa" },
       { title: "Getting around Israel", description: "Trains, buses and practical regional transport.", to: "/travel-blog/getting-around-israel/", image: "itinerary-train" },
     ],

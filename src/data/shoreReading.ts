@@ -18,7 +18,7 @@ const guides = {
   jerusalem: {
     title: "Jerusalem's Old City",
     description: "Discover the holy sites, historic quarters and viewpoints. Plan a rewarding visit around the walking, steps and time available ashore.",
-    to: "/travel-blog/old-city-jerusalem/",
+    to: "/attractions/old-city-jerusalem/",
     photo: migrationPhotos["EXISTING:jerusalem"],
   },
   telAviv: {
@@ -30,13 +30,13 @@ const guides = {
   jaffa: {
     title: "Old Jaffa & its harbour",
     description: "Explore stone lanes, sea views and the flea-market area. Choose a few memorable stops and leave time to enjoy the atmosphere.",
-    to: "/travel-blog/jaffa/",
+    to: "/attractions/jaffa/",
     photo: { src: jaffa, alt: "Old Jaffa's historic buildings and harbour beside the Mediterranean", sourceUrl: "" },
   },
   masada: {
     title: "Masada: fortress & desert views",
     description: "Discover the ancient plateau above the Dead Sea. Understand the cable-car options, admission and practical planning for a desert excursion.",
-    to: "/travel-blog/masada/",
+    to: "/attractions/masada/",
     photo: migrationPhotos["EXISTING:masada"],
   },
   deadSea: {
@@ -60,7 +60,7 @@ const guides = {
   akko: {
     title: "Akko's Old City & harbour",
     description: "Discover Crusader heritage, market lanes and the fishing harbour. Plan the walking route and admission choices for a day along the northern coast.",
-    to: "/travel-blog/akko-acre/",
+    to: "/attractions/akko-acre/",
     photo: { src: akko, alt: "Fishing boats and historic buildings around Akko's harbour", sourceUrl: "", credit: "Akko harbour · publisher's original excursion photograph; retained unchanged" },
   },
   nazareth: {
@@ -78,7 +78,7 @@ const guides = {
   roshHanikra: {
     title: "Rosh Hanikra & the grottoes",
     description: "Discover the white cliffs and sea caves of the northern coast. Check operating conditions before including the grottoes in your day ashore.",
-    to: "/travel-blog/rosh-hanikra/",
+    to: "/attractions/rosh-hanikra/",
     photo: { src: roshHanikra, alt: "Turquoise Mediterranean water inside the Rosh Hanikra grottoes", sourceUrl: "", credit: "Photograph from the publisher's Rosh Hanikra guide; retained unchanged" },
   },
 } satisfies Record<string, ShoreReadingGuide>;

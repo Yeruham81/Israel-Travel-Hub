@@ -148,7 +148,7 @@ const byId: Record<AirportJourneyId, AirportJourneyGuide> = {
     ],
     planNext: [
       { label: "Choose where to stay in Jerusalem", to: "/travel-blog/where-to-stay-in-jerusalem/", note: "Find a hotel area that fits your arrival and sightseeing plans." },
-      { label: "Explore Jerusalem's Old City", to: "/travel-blog/old-city-jerusalem/", note: "Check the gates, walking routes and practical access." },
+      { label: "Explore Jerusalem's Old City", to: "/attractions/old-city-jerusalem/", note: "Check the gates, walking routes and practical access." },
       { label: "Discover day trips from Jerusalem", to: "/travel-blog/day-trips-from-jerusalem/", note: "See options beyond the city once you have settled in." },
       { label: "Choose an Israel eSIM", to: "/travel-blog/best-esim-for-israel/", note: "Keep maps, rail timetables and arrival messages at hand." },
     ],
@@ -321,7 +321,7 @@ const byId: Record<AirportJourneyId, AirportJourneyGuide> = {
       ], inlineLinks: [{ text: "getting around Israel guide", to: "/travel-blog/getting-around-israel/" } ], checklist: ["Confirm a real departure for your landing date.", "Check the exact Terminal 3 boarding stop and city destination.", "Plan a second option if the timing does not work."] },
       { id: "rental", name: "Rental car", time: "About 75–110+ min driving plus collection", cost: "Rental + insurance, tolls, fuel and parking", bestFor: "A northern Israel road trip", doorToDoor: "Yes, where permitted", availability: "Collection hours vary", comparison: { cost: "Rental + extras", advantages: "Flexible for further northern Israel travel", drawbacks: "Collection hours, hills, tolls and parking" }, heading: "Should you rent a car at the airport?", paragraphs: [
         ...commonRental, "A rental can be useful if Haifa is a base for Akko (Acre), Nazareth, the Sea of Galilee or other northern road trips. For a short city-only stay, steep streets and limited parking may make it less useful. If you're planning to explore northern Israel, compare rental-car options on DiscoverCars. You can also plan a separate visit to Akko using the Akko travel guide."
-      ], inlineLinks: [{ text: "Akko travel guide", to: "/travel-blog/akko-acre/" }, { text: "DiscoverCars", to: "/car-rental/" } ], checklist: ["Ask about parking at your Haifa hotel.", "Compare Highway 6 toll handling.", "Check desk hours if arriving on Shabbat."] },
+      ], inlineLinks: [{ text: "Akko travel guide", to: "/attractions/akko-acre/" }, { text: "DiscoverCars", to: "/car-rental/" } ], checklist: ["Ask about parking at your Haifa hotel.", "Compare Highway 6 toll handling.", "Check desk hours if arriving on Shabbat."] },
     ],
     stations: [
       { name: "Haifa Hof HaCarmel", time: "About 80–85 min", usefulFor: "Southern Haifa, Carmel Beach, MATAM and bus connections." },
@@ -370,8 +370,8 @@ const byId: Record<AirportJourneyId, AirportJourneyGuide> = {
     planNext: [
       { label: "Haifa travel guide", to: "/travel-blog/haifa/", note: "Plan the German Colony, Mount Carmel and the waterfront." },
       { label: "Museums in Haifa", to: "/travel-blog/museums-in-haifa/", note: "Discover museums and cultural sights on Mount Carmel and downtown." },
-      { label: "Akko (Acre) travel guide", to: "/travel-blog/akko-acre/", note: "Explore the historic walled coastal city near Haifa." },
-      { label: "Nazareth and the Basilica of the Annunciation", to: "/travel-blog/basilica-of-the-annunciation/", note: "Plan an excursion into the Galilee." },
+      { label: "Akko (Acre) travel guide", to: "/attractions/akko-acre/", note: "Explore the historic walled coastal city near Haifa." },
+      { label: "Nazareth and the Basilica of the Annunciation", to: "/attractions/basilica-of-the-annunciation/", note: "Plan an excursion into the Galilee." },
     ]
   },
   "ein-bokek": {
@@ -445,7 +445,7 @@ const byId: Record<AirportJourneyId, AirportJourneyGuide> = {
         "If you'd like to visit Masada or Ein Gedi on the way, ask for a separate quote that includes the extra stop and waiting time. The Masada visitor guide can help you plan how long to spend there."
       ], inlineLinks: [
         { text: "private transfer to Ein Bokek page", to: "/airport-transfers/ein-bokek/" },
-        { text: "Masada visitor guide", to: "/travel-blog/masada/" },
+        { text: "Masada visitor guide", to: "/attractions/masada/" },
       ], checklist: ["Share the exact Dead Sea hotel, landing time, passenger count and luggage.", "Ask about child seats, waiting, flight delays, night/weekend charges and cancellation.", "Confirm any sightseeing stop or return transfer separately in writing."] },
       { id: "rental", name: "Rental car", time: "About 1h 45m–2h 30m+ driving plus collection", cost: "Rental, insurance, fuel and parking", bestFor: "Independent Masada/Dead Sea touring", doorToDoor: "To accessible parking area", availability: "Check desk hours and road access", comparison: { cost: "Rental + extras", advantages: "Freedom for Masada and other Dead Sea stops", drawbacks: "Collection time, parking and flood-related road closures" }, heading: "Should you rent a car at the airport?", paragraphs: [
         ...commonRental,
@@ -498,7 +498,7 @@ const byId: Record<AirportJourneyId, AirportJourneyGuide> = {
     related: [
       { label: "Jerusalem to the Dead Sea by bus, taxi or car", to: "/travel-blog/jerusalem-to-the-dead-sea/" },
       { label: "Where to stay at the Dead Sea", to: "/travel-blog/best-dead-sea-hotels/" },
-      { label: "Masada visitor information", to: "/travel-blog/masada/" },
+      { label: "Masada visitor information", to: "/attractions/masada/" },
       { label: "Official airport taxis and pickup instructions", to: "/travel-blog/ben-gurion-airport-taxis/" },
       { label: "Ben Gurion Airport on Shabbat", to: "/travel-blog/from-ben-gurion-airport-on-shabbat/" },
       { label: "Getting around Israel: tickets and buses", to: "/travel-blog/getting-around-israel/" },
@@ -506,7 +506,7 @@ const byId: Record<AirportJourneyId, AirportJourneyGuide> = {
     planNext: [
       { label: "The Dead Sea visitor guide", to: "/travel-blog/the-dead-sea/", note: "Learn about swimming, the resort areas and practical conditions." },
       { label: "Dead Sea attractions", to: "/travel-blog/dead-sea-attractions/", note: "Choose viewpoints, reserves and scenic stops near the shore." },
-      { label: "Ein Gedi visitor guide", to: "/travel-blog/ein-gedi/", note: "Plan the nature reserve and its separate location from Ein Bokek." },
+      { label: "Ein Gedi visitor guide", to: "/attractions/ein-gedi/", note: "Plan the nature reserve and its separate location from Ein Bokek." },
       { label: "Israel itinerary: five days", to: "/travel-blog/israel-itinerary-5-days/", note: "Combine a Dead Sea stay with nearby destinations." },
     ]
   }

@@ -94,15 +94,15 @@ export const heritageGuides = {
         "links": [
           {
             "label": "Consider a Nazareth-area viewpoint",
-            "to": "/travel-blog/mount-precipice/"
+            "to": "/attractions/mount-precipice/"
           },
           {
             "label": "Plan the Annunciation basilica",
-            "to": "/travel-blog/basilica-of-the-annunciation/"
+            "to": "/attractions/basilica-of-the-annunciation/"
           },
           {
             "label": "Compare a Mount Tabor visit",
-            "to": "/travel-blog/mount-tabor/"
+            "to": "/attractions/mount-tabor/"
           }
         ]
       },
@@ -255,15 +255,15 @@ export const heritageGuides = {
         "links": [
           {
             "label": "Plan the basilica visit",
-            "to": "/travel-blog/basilica-of-the-annunciation/"
+            "to": "/attractions/basilica-of-the-annunciation/"
           },
           {
             "label": "Explore Tel Megiddo",
-            "to": "/travel-blog/tel-megiddo/"
+            "to": "/attractions/tel-megiddo/"
           },
           {
             "label": "Read the Mount Tabor guide",
-            "to": "/travel-blog/mount-tabor/"
+            "to": "/attractions/mount-tabor/"
           }
         ]
       }
@@ -421,7 +421,7 @@ export const heritageGuides = {
         "links": [
           {
             "label": "Add a Mount Precipice viewpoint",
-            "to": "/travel-blog/mount-precipice/"
+            "to": "/attractions/mount-precipice/"
           },
           {
             "label": "Explore the Sea of Galilee",
@@ -578,15 +578,15 @@ export const heritageGuides = {
         "links": [
           {
             "label": "Explore Capernaum",
-            "to": "/travel-blog/capernaum/"
+            "to": "/attractions/capernaum/"
           },
           {
             "label": "Plan Tabgha",
-            "to": "/travel-blog/tabgha/"
+            "to": "/attractions/tabgha/"
           },
           {
             "label": "Plan a separate Yardenit visit",
-            "to": "/travel-blog/yardenit/"
+            "to": "/attractions/yardenit/"
           }
         ]
       }
@@ -734,7 +734,7 @@ export const heritageGuides = {
         "links": [
           {
             "label": "Explore Qasr el-Yahud",
-            "to": "/travel-blog/qasr-el-yahud/"
+            "to": "/attractions/qasr-el-yahud/"
           },
           {
             "label": "Compare the two Jordan baptism sites",
@@ -742,7 +742,7 @@ export const heritageGuides = {
           },
           {
             "label": "Add an archaeological visit at Magdala",
-            "to": "/travel-blog/magdala/"
+            "to": "/attractions/magdala/"
           }
         ]
       }
@@ -886,7 +886,7 @@ export const heritageGuides = {
         "links": [
           {
             "label": "Compare a visit to Yardenit",
-            "to": "/travel-blog/yardenit/"
+            "to": "/attractions/yardenit/"
           },
           {
             "label": "Plan a Dead Sea visit",

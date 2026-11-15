@@ -110,15 +110,15 @@ export const journeyDestinationGuides = {
         "links": [
           {
             "label": "Plan Masada",
-            "to": "/travel-blog/masada/"
+            "to": "/attractions/masada/"
           },
           {
             "label": "Check the Ein Gedi visit",
-            "to": "/travel-blog/ein-gedi/"
+            "to": "/attractions/ein-gedi/"
           },
           {
             "label": "Explore Qasr el-Yahud",
-            "to": "/travel-blog/qasr-el-yahud/"
+            "to": "/attractions/qasr-el-yahud/"
           },
           {
             "label": "Compare regional attractions",
@@ -651,7 +651,7 @@ export const journeyDestinationGuides = {
           },
           {
             "label": "Explore Jaffa",
-            "to": "/travel-blog/jaffa/"
+            "to": "/attractions/jaffa/"
           }
         ]
       },
@@ -669,7 +669,7 @@ export const journeyDestinationGuides = {
           },
           {
             "label": "Choose an Old City route",
-            "to": "/travel-blog/old-city-jerusalem/"
+            "to": "/attractions/old-city-jerusalem/"
           }
         ]
       },
@@ -718,7 +718,7 @@ export const journeyDestinationGuides = {
         "links": [
           {
             "label": "Plan Masada",
-            "to": "/travel-blog/masada/"
+            "to": "/attractions/masada/"
           }
         ]
       },
@@ -772,11 +772,11 @@ export const journeyDestinationGuides = {
           },
           {
             "label": "Explore Magdala",
-            "to": "/travel-blog/magdala/"
+            "to": "/attractions/magdala/"
           },
           {
             "label": "Plan Yardenit",
-            "to": "/travel-blog/yardenit/"
+            "to": "/attractions/yardenit/"
           }
         ]
       },
@@ -804,7 +804,7 @@ export const journeyDestinationGuides = {
         "links": [
           {
             "label": "Plan Mitzpe Ramon",
-            "to": "/travel-blog/mitzpe-ramon-crater/"
+            "to": "/attractions/mitzpe-ramon-crater/"
           }
         ]
       }

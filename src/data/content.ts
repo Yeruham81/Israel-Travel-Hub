@@ -595,7 +595,7 @@ export const cityStayGuides: Record<CityStayGuide["id"], CityStayGuide> = {
     related: [
       { label: "Ben Gurion Airport to Jerusalem", to: "/airport-transfers/jerusalem/", note: "Private pickup and Old City hotel access" },
       { label: "Airport arrivals on Shabbat", to: "/travel-blog/from-ben-gurion-airport-on-shabbat/" },
-      { label: "Masada visit & tickets", to: "/travel-blog/masada/" },
+      { label: "Masada visit & tickets", to: "/attractions/masada/" },
       { label: "All accommodation", to: "/accommodation/" },
     ],
   },
@@ -805,7 +805,7 @@ export const deadSeaStayGuide: HotelStayDestination = {
   ],
   sourceIds: ["owner-hotels-deadsea", "ds-nevo-spa", "ds-noga-spa", "ds-herods-spa", "ds-ein-gedi-spa"],
   related: [
-    { label: "Masada: plan your visit", to: "/travel-blog/masada/", note: "Tickets, cable car and practical visit information" },
+    { label: "Masada: plan your visit", to: "/attractions/masada/", note: "Tickets, cable car and practical visit information" },
     { label: "Airport transfer to Ein Bokek", to: "/airport-transfers/ein-bokek/", note: "Arrange your arrival from Ben Gurion Airport" },
     { label: "Private driver", to: "/private-driver/", note: "Plan hotel transfers and multi-stop days" },
     { label: "Car rental in Israel", to: "/car-rental/" },
