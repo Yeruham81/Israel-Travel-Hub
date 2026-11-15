@@ -160,7 +160,7 @@ describe("migrated practical guides", () => {
     expect(travelGuides.uber.answer).toMatch(/Uber and Lyft do not currently offer passenger rides in Israel/);
     expect(travelGuides.sherut.answer).toMatch(/former Nesher route to Jerusalem or Amal route to Haifa/);
     expect(travelGuides.esim.sections.find((section) => section.id === "calling")!.paragraphs.join(" ")).toMatch(/an Israeli phone number usually aren\x27t included/s);
-    expect(travelGuides.esim.answer).toMatch(/Saily and Airalo.*5GB.*30 days.*\$8/s);
+    expect(travelGuides.esim.answer).toMatch(/Saily and Airalo.*5GB.*\$8.*30 days/s);
   });
 
   it("covers the complete airport arrival sequence without duplicating specialty transport guides", () => {
