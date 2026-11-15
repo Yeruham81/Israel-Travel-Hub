@@ -1,5 +1,5 @@
 import type { MouseEvent } from "react";
-import { Clock3, MapPin, Users } from "lucide-react";
+import { Clock3 } from "lucide-react";
 import { PriceDisplay } from "@/components/CurrencyRates";
 import { getShoreCatalog } from "@/data/shoreExcursions";
 import { shoreDestinations, shorePorts, type ShorePortId } from "@/data/registry";
@@ -28,13 +28,13 @@ export function ShoreServiceCatalog({ portId, filters, onFilterChange, itinerary
     onFilterChange(next);
   }
 
-  return <section id="itineraries" aria-labelledby="itineraries-h" className="mt-8 scroll-mt-24">
-    <h2 id="itineraries-h" className="text-2xl font-semibold">Shore excursions & day trips from {port.name} Port</h2>
-    <div className="mt-4 rounded-xl border bg-secondary/30 p-3 sm:p-4">
+  return <section id="itineraries" aria-labelledby="itineraries-h" className="mt-7 scroll-mt-24">
+    <h2 id="itineraries-h" className="sr-only">Shore excursions & day trips from {port.name} Port</h2>
+    <div className="rounded-xl border bg-secondary/25 px-3 py-3 sm:px-4">
       <nav aria-label="Filter port services by destination">
-        <p className="mb-2 text-sm font-semibold">Destination</p>
-        <ul className="flex flex-wrap gap-2">
-          <li><a className="chip inline-block" href={shoreServiceHref(portId, withoutDestination)} onClick={(event) => filter(event, withoutDestination)} aria-current={!filters.destination ? "true" : undefined}>All destinations</a></li>
+        <p className="mb-2 text-xs font-semibold text-muted-foreground">Show:</p>
+        <ul className="flex items-center gap-2 overflow-x-auto pb-1 sm:flex-wrap sm:overflow-visible">
+          <li><a className="chip shrink-0 text-xs" href={shoreServiceHref(portId, withoutDestination)} onClick={(event) => filter(event, withoutDestination)} aria-current={!filters.destination ? "true" : undefined}>All destinations</a></li>
           {destinations.map((destination) => <li key={destination.id}><a className="chip inline-block" href={shoreServiceHref(portId, { ...filters, destination: destination.id })} onClick={(event) => filter(event, { ...filters, destination: destination.id })} aria-current={filters.destination === destination.id ? "true" : undefined}>{destination.label}</a></li>)}
         </ul>
       </nav>
@@ -48,67 +48,56 @@ export function ShoreServiceCatalog({ portId, filters, onFilterChange, itinerary
         <p className="text-xs font-bold uppercase tracking-widest text-primary">Personally arranged with Moshe Barak</p>
         <h3 id="owner-tours-h" className="mt-2 text-2xl font-semibold">My private day trips from {port.name} Port</h3>
         <p className="mt-3 max-w-3xl text-sm leading-relaxed text-muted-foreground">Choose a private car-and-driver itinerary, then send me your ship's schedule and party details for a tailored quote.</p>
-        <ul aria-label={`My private day trips from ${port.name} Port`} className="mt-4 grid gap-3 sm:grid-cols-2">
+        <ul aria-label={`My private day trips from ${port.name} Port`} className="mt-4 grid gap-3">
       {privateTours.map((service) => {
         const itinerary = service.itinerary;
-        const provider = service.provider;
-        const external = !provider.url.startsWith("/");
-        return <li key={service.id} data-testid="shore-service-card" data-service-id={service.id} data-product-id={service.productId} data-operator-id={service.operator?.id} data-booking-platform={service.partner?.id || "direct"} data-service-kind={service.kind} className={`flex min-w-0 flex-col overflow-hidden rounded-xl border bg-card ${itinerary && itineraryId === itinerary.id ? "border-primary ring-1 ring-primary" : ""}`}>
-          <img src={service.photo.src} alt={service.photo.alt} width={720} height={480} loading="lazy" decoding="async" className="aspect-[16/9] max-h-44 w-full object-cover" />
-          <div className="flex flex-1 flex-col p-3.5">
-            <h3 className="text-lg font-semibold leading-snug text-foreground">{service.title}</h3>
-            <p className="mt-1.5 line-clamp-2 text-sm leading-relaxed text-muted-foreground">{service.description}</p>
-            <dl className="mt-3 grid grid-cols-2 gap-x-3 gap-y-2 text-xs sm:text-sm">
-              <div><dt className="sr-only">Duration</dt><dd className="flex items-start gap-2"><Clock3 className="mt-0.5 h-4 w-4 shrink-0 text-primary" aria-hidden />{service.duration}</dd></div>
-              <div><dt className="sr-only">Tour format</dt><dd className="flex items-start gap-2"><Users className="mt-0.5 h-4 w-4 shrink-0 text-primary" aria-hidden />{service.groupLabel}</dd></div>
-              <div className="col-span-2"><dt className="sr-only">Pickup and return</dt><dd className="flex items-start gap-2"><MapPin className="mt-0.5 h-4 w-4 shrink-0 text-primary" aria-hidden />{port.name} Port · pickup & return</dd></div>
-              <div className="col-span-2"><dt className="inline font-medium">Includes: </dt><dd className="inline text-muted-foreground">{service.includesLabel}</dd></div>
-            </dl>
-            <ul aria-label="Destinations" className="mt-3 flex flex-wrap gap-x-3 gap-y-1">{service.destinationIds.map((id) => <li key={id}><a href={shoreServiceHref(portId, { ...filters, destination: id })} onClick={(event) => filter(event, { ...filters, destination: id })} className="text-xs text-primary underline underline-offset-2">{shoreDestinations.find((destination) => destination.id === id)!.label}</a></li>)}</ul>
-            <p className="mt-2 text-xs text-muted-foreground">Operated by {service.operator?.name || provider.providerName}{service.partner && ` · Book on ${service.partner.name}`}</p>
-            <div className="mt-auto pt-4">
-              <div className="border-t pt-4">
-                {itinerary ? <><PriceDisplay amount={itinerary.price.amount} /><p className="mt-2 text-xs text-muted-foreground">Per vehicle · up to 4 · transport only</p></>
-                  : service.listedPrice ? <><p className="text-xs text-muted-foreground">Listed from</p><p className="mt-1 text-2xl font-bold text-primary">US${service.listedPrice.amount.toLocaleString("en-US")}</p><p className="mt-1 text-xs">{service.listedPrice.basis === "per_group" ? `Per group · up to ${service.listedPrice.maxPartySize}` : "Per person"}</p></>
-                  : <><p className="text-lg font-semibold">See current price</p><p className="mt-1 text-xs text-muted-foreground">Choose date & travelers on {service.partner?.name || provider.providerName}</p></>}
+                return <li key={service.id} data-testid="shore-service-card" data-service-id={service.id} data-product-id={service.productId} data-operator-id={service.operator?.id} data-booking-platform="direct" data-service-kind={service.kind} className={"min-w-0 scroll-mt-24 overflow-hidden rounded-xl border bg-card " + (itineraryId === itinerary!.id ? "border-primary ring-1 ring-primary" : "")}>
+          <article className="flex min-w-0 flex-col sm:flex-row sm:items-stretch">
+            <img src={service.photo.src} alt={service.photo.alt} width={320} height={180} loading="lazy" decoding="async" className="h-36 w-full object-cover sm:h-auto sm:w-48 sm:shrink-0 lg:w-56" />
+            <div className="flex min-w-0 flex-1 flex-col gap-3 p-3.5 lg:flex-row lg:items-center lg:gap-5 lg:px-5">
+              <div className="min-w-0 flex-1">
+                <h3 className="text-base font-semibold leading-snug">{service.title}</h3>
+                <p className="mt-1 text-sm leading-relaxed text-muted-foreground">{service.description}</p>
+                <p className="mt-2 text-xs text-muted-foreground">{service.duration} · Private car &amp; driver · {port.name} Port · pickup &amp; return</p>
               </div>
-              {itinerary ? <a href="#request-quote" onClick={() => onSelectItinerary(itinerary.id)} className="mt-3 inline-flex min-h-11 w-full items-center justify-center rounded-lg bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground hover:bg-primary/90 focus-visible:outline-2 focus-visible:outline-primary" aria-label={`Request ${itinerary.destination} from ${port.name}`}>{itineraryId === itinerary.id ? "Selected — request this day trip" : "Request this day trip"}</a>
-                : <a href={provider.url} target={external ? "_blank" : undefined} rel={external ? relFor(provider.isAffiliate) : undefined} onClick={external ? () => recordOutboundClick({ pageId: port.pageId, productId: service.productId, offerId: provider.id }) : undefined} className="btn btn-primary mt-4 w-full">{provider.ctaLabel}{external && <><span aria-hidden> ↗</span><span className="sr-only"> (opens in a new tab)</span></>}</a>}
+              <div className="flex flex-wrap items-center gap-3 lg:w-44 lg:shrink-0 lg:flex-col lg:items-stretch">
+                <div><PriceDisplay amount={itinerary!.price.amount} /><p className="mt-1 text-xs text-muted-foreground">Per vehicle · up to 4 · transport only</p></div>
+                <a href="#request-quote" onClick={() => onSelectItinerary(itinerary!.id)} className="inline-flex min-h-10 shrink-0 items-center justify-center rounded-lg bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground hover:bg-primary/90" aria-label={"Request " + itinerary!.destination + " from " + port.name}>{itineraryId === itinerary!.id ? "Selected — request this day trip" : "Request a quote"}</a>
+              </div>
             </div>
-          </div>
+          </article>
         </li>;
       })}
     </ul>
         <p className="mt-5 text-xs leading-relaxed text-muted-foreground" data-testid="owner-price-terms">My published starting rates are in ILS per vehicle for up to four passengers on weekdays, covering transportation only. Licensed guiding, admission fees, meals and tips are extra. Extra charges may apply for night, weekend or holiday trips. I'll confirm the itinerary, availability and full price before booking.</p>
       </section>}
-      {partnerTours.length > 0 && <section aria-labelledby="partner-tours-h" className={privateTours.length ? "mt-9 border-t pt-7" : "mt-7"}>
+      {partnerTours.length > 0 && <section aria-labelledby="partner-tours-h" className="mt-8 scroll-mt-24">
             <p className="text-xs font-bold uppercase tracking-widest text-primary">Independent excursion providers</p>
-            <h3 id="partner-tours-h" className="mt-1 text-2xl font-semibold">More shore excursions from {port.name}</h3>
-            <p className="mt-3 max-w-3xl text-sm leading-relaxed text-muted-foreground">Looking for a guided experience, the company of a group or a different route? Explore these additional shore excursions for memorable places, expert insights and a day that matches your interests and time ashore.</p>
+            <h3 id="partner-tours-h" className="text-2xl font-semibold">Explore {port.name} shore excursions</h3>
+            <p className="mt-3 max-w-3xl text-sm leading-relaxed text-muted-foreground">Compare independently operated guided and shared excursions, with pickup and return from the named cruise port. Confirm the meeting point and return to your ship.</p>
             <ul aria-label={`Other operators' tours from ${port.name} Port`} className="mt-4 grid gap-3 md:grid-cols-2">
               {partnerTours.map((service) => {
                 const provider = service.provider;
-                const external = !provider.url.startsWith("/");
-                return <li key={service.id} data-testid="shore-service-card" data-service-id={service.id} data-product-id={service.productId} data-operator-id={service.operator?.id} data-booking-platform={service.partner?.id || "direct"} data-service-kind={service.kind} className="flex h-full min-w-0 gap-3 rounded-xl border bg-card p-3 transition-colors hover:border-primary/40">
-                  <img src={service.photo.src} alt={service.photo.alt} width={144} height={168} loading="lazy" decoding="async" className="h-36 w-28 shrink-0 rounded-lg object-cover sm:h-40 sm:w-32" />
-                  <div className="flex min-w-0 flex-1 flex-col">
-                    <p className="text-xs font-semibold text-primary"><span className="sr-only">Booking platform: </span>{service.partner?.name || provider.providerName}</p>
-                    <h3 className="mt-1 text-base font-semibold leading-snug text-foreground">{service.title}</h3>
-                    <p className="mt-1 line-clamp-2 text-xs leading-relaxed text-muted-foreground">{service.description}</p>
-                    <p className="mt-2 flex items-center gap-1.5 text-xs text-foreground"><Clock3 className="size-3.5 shrink-0 text-primary" aria-hidden />{service.duration} · {service.groupLabel}</p>
-                    <p className="mt-1 text-xs text-muted-foreground">{port.name} Port · pickup &amp; return</p>
-                    <p className="mt-1 text-xs text-muted-foreground">Operated by {service.operator?.name || provider.providerName}</p>
-                    <div className="mt-auto flex flex-wrap items-end justify-between gap-2 pt-2.5">
-                      <div className="min-w-0">
-                        {service.listedPrice ? <>
-                          <p className="text-[0.7rem] text-muted-foreground">Published starting price · checked {service.listedPrice.checkedAt}</p>
-                          <p className="text-base font-bold text-foreground">US${service.listedPrice.amount.toLocaleString("en-US")}</p>
-                          <p className="text-[0.7rem] text-muted-foreground">{service.listedPrice.basis === "per_group" ? `Per group · up to ${service.listedPrice.maxPartySize}` : "Per person"}</p>
-                        </> : <p className="text-xs font-semibold text-muted-foreground">See current price</p>}
+                                return <li key={service.id} data-testid="shore-service-card" data-service-id={service.id} data-product-id={service.productId} data-operator-id={service.operator?.id} data-booking-platform={service.partner?.id || "direct"} data-service-kind={service.kind} className="min-w-0 scroll-mt-24">
+                  <article className="flex h-full min-w-0 gap-3 rounded-xl border bg-card p-3 shadow-sm sm:gap-4">
+                    <img src={service.photo.src} alt={service.photo.alt} width={140} height={180} loading="lazy" decoding="async" className="h-40 w-[96px] shrink-0 rounded-lg object-cover sm:h-44 sm:w-[124px]" />
+                    <div className="flex min-w-0 flex-1 flex-col">
+                      <p className="text-xs font-semibold text-muted-foreground"><span className="sr-only">Booking platform: </span>{service.partner?.name || provider.providerName}</p>
+                      <h3 className="mt-1.5 line-clamp-2 text-base font-semibold leading-snug">{service.title}</h3>
+                      <p className="mt-1 line-clamp-2 text-xs leading-relaxed text-muted-foreground sm:text-sm">{service.description}</p>
+                      <p className="mt-2 text-xs text-muted-foreground"><Clock3 className="mr-1 inline size-3.5 text-primary" aria-hidden />{service.duration} · {service.groupLabel}</p>
+                      <p className="mt-1 text-xs text-muted-foreground">{port.name} Port · pickup &amp; return</p>
+                      <p className="mt-1 text-xs text-muted-foreground">Operated by {service.operator?.name || provider.providerName}</p>
+                      <div className="mt-auto flex flex-wrap items-end justify-between gap-2 pt-3">
+                        <div>{service.listedPrice ? <>
+                          <span className="block text-[11px] text-muted-foreground">Published starting price · checked {service.listedPrice.checkedAt}</span>
+                          <span className="font-bold text-primary">{"US$" + service.listedPrice.amount.toLocaleString("en-US")}</span>
+                          <span className="block text-[11px] text-muted-foreground">{service.listedPrice.basis === "per_group" ? "Per group · up to " + service.listedPrice.maxPartySize : "Per person"}</span>
+                        </> : <span className="text-xs font-medium text-muted-foreground">See current price</span>}</div>
+                        <a href={provider.url} target="_blank" rel={relFor(provider.isAffiliate)} onClick={() => recordOutboundClick({ pageId: port.pageId, productId: service.productId, offerId: provider.id })} className="inline-flex min-h-9 shrink-0 items-center justify-center rounded-lg bg-primary px-3 py-2 text-xs font-semibold text-primary-foreground hover:bg-primary/90" aria-label={provider.ctaLabel + ": " + service.title + " (opens in a new tab)"}>View tour <span aria-hidden>↗</span></a>
                       </div>
-                      <a href={provider.url} target={external ? "_blank" : undefined} rel={external ? relFor(provider.isAffiliate) : undefined} onClick={external ? () => recordOutboundClick({ pageId: port.pageId, productId: service.productId, offerId: provider.id }) : undefined} className="inline-flex min-h-9 shrink-0 items-center justify-center rounded-lg bg-primary px-3 py-2 text-xs font-semibold text-primary-foreground transition-colors hover:bg-primary/90" aria-label={`${provider.ctaLabel}: ${service.title} (opens in a new tab)`}>View tour<span aria-hidden> ↗</span></a>
                     </div>
-                  </div>
+                  </article>
                 </li>;
               })}
             </ul>
