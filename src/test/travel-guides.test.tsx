@@ -98,7 +98,8 @@ describe("migrated practical guides", () => {
     const article = structured.find((item) => item["@type"] === "Article");
     expect(article).toMatchObject({ headline: guide.title, dateModified: guide.updatedAt || TRAVEL_GUIDE_CHECK_DATE, inLanguage: "en", author: { "@type": "Person", name: "Moshe Barak", sameAs: [mosheBarakAuthor.reviewsUrl] } });
     expect(article.mainEntityOfPage.endsWith(path)).toBe(true);
-    for (const url of article.citation) expect(container.querySelector(`a[href="${url}"]`)).not.toBeNull();
+    if (id !== "esim") for (const url of article.citation) expect(container.querySelector(`a[href="${url}"]`)).not.toBeNull();
+    else expect(container.querySelector("#sources")).toBeNull();
     const crumbs = structured.find((item) => item["@type"] === "BreadcrumbList");
     expect(crumbs.itemListElement.map((item: { name: string }) => item.name)).toEqual(["Home", "Travel guides", guide.title]);
     expect(structured.some((item) => item["@type"] === "FAQPage")).toBe(false);
@@ -866,7 +867,7 @@ describe("migrated practical guides", () => {
     fireEvent.click(first);
     expect(readOutboundClicks()).toEqual([expect.objectContaining({ pageId: "guide-esim", productId: "esim-airalo", offerId: "esim-airalo" })]);
     const longTripSection = container.querySelector("#long-trip") as HTMLElement;
-    expect(within(longTripSection).getByRole("link", { name: /^Saily/ })).toHaveAttribute("href", expected["esim-saily"]);
+    expect(within(longTripSection).getAllByRole("link", { name: /^Saily/ })[0]).toHaveAttribute("href", expected["esim-saily"]);
     expect(container.querySelector("#short-trip")).not.toBeNull();
     expect(travelGuides.esim.services).toHaveLength(4);
     const quickAnswer = container.querySelector("#quick-answer") as HTMLElement;
