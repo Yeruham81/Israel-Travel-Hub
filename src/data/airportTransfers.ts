@@ -37,27 +37,21 @@ export const airportTransferPhotos: Record<string, StayGuidePhoto> = {
 export const airportDestinationCards = airportTransferRates.map((rate) => ({ ...rate, photo: airportTransferPhotos[rate.id]! }));
 
 export const airportTransferBenefits = [
-  { title: "A personal welcome", text: "Agree where to meet at the airport before departure, so you know where to go after collecting your bags." },
-  { title: "Flight coordination", text: "Provide the flight number and landing date so we can agree how arrival delays will be handled." },
-  { title: "Your own vehicle", text: "Your party travels in the vehicle arranged for the confirmed drop-off address." },
-  { title: "Room for your group", text: "A four-passenger car does not necessarily fit four large suitcases; describe all bags before selecting a vehicle." },
-  { title: "Family arrangements", text: "Request child seats in advance, with children's ages and any special needs." },
-  { title: "A price agreed ahead", text: "Confirm your full quote and booking conditions before committing to the ride." },
+  { title: "Agreed price, no extra charges", text: "I confirm the full fare before you book. No unexpected extras are added to the agreed price." },
+  { title: "Flight tracking", text: "I track your flight status to coordinate pickup with your actual landing time." },
+  { title: "Free cancellation up to 24 hours", text: "Cancel a transfer booked directly with me at no charge up to 24 hours before the scheduled pickup." },
 ];
 
 export const airportTransferTips = [
-  { title: "Use your landing time", text: "Give the flight's arrival date and time in Israel local time, especially if it lands after midnight. Include the flight number and clarify any connection or separate arrival." },
-  { title: "Count people and bags", text: "Include children in the passenger count. List suitcases, carry-ons, strollers and bulky items so a vehicle can be matched to the whole party." },
-  { title: "Share the exact address", text: "A city name is the starting point. Add the hotel name or full address, and ask about vehicle access if your accommodation is on a pedestrian street or inside an old town." },
-  { title: "Keep pickup details handy", text: "Save the agreed meeting point and contact number offline. Keep your phone charged and notify the operator if immigration or baggage collection takes longer than expected." },
+  { title: "Before you travel", text: "Send the flight number and arrival time in Israel local time, your exact destination, and the number of people, suitcases and carry-ons. Save your confirmed meeting point and contact details offline." },
 ];
 
 export const airportTransferFaqs = [
-  { q: "Is this a private transfer for my party?", a: "This page is for airport transfers arranged in advance for your party. Ask me to confirm the vehicle, pickup and drop-off details in your quote." },
-  { q: "Are the displayed prices per person?", a: "No. They are my published starting prices per vehicle for up to four passengers on weekdays. Extra charges may apply for night, weekend or holiday trips. Your final price and availability are confirmed with the operator." },
-  { q: "Can I request a larger vehicle or child seats?", a: "Yes. Include all passengers, luggage and children's ages in the request. The operator will confirm the suitable vehicle and any requested seats before booking." },
-  { q: "How far ahead should I arrange the ride?", a: "Please contact me in advance, preferably as early as possible for busy dates, larger groups or special vehicle requests. An inquiry does not confirm availability." },
-  { q: "What should I confirm about delays or cancellation?", a: "Ask for the meeting point, included waiting time, delay arrangements, cancellation deadline and payment terms in writing with your final quote. Platform bookings follow the terms of the offer you choose there." },
+  { q: "Are the displayed prices per person?", a: "No. They are my starting weekday fares per vehicle for up to four passengers. Night, weekend and holiday surcharges, when applicable, are included in the final price I confirm before booking; no extra charges are added to that agreed fare." },
+  { q: "Can I request a larger vehicle or child seats?", a: "Yes. Tell me about all passengers, luggage and children's ages. I'll confirm the vehicle and any requested seats before the booking is finalized." },
+  { q: "Will you track my flight if it is delayed?", a: "I track the flight details you provide and coordinate the pickup around the actual landing time. Please follow the agreed meeting instructions and contact me if your arrival or baggage collection changes unexpectedly." },
+  { q: "When can I cancel for free?", a: "For transfers booked directly with me, cancellation is free until 24 hours before the scheduled pickup. Ask about the terms of later cancellations when confirming the booking. Independent booking platforms have their own cancellation policies." },
+  { q: "When is my transfer booking confirmed?", a: "An inquiry does not reserve a vehicle. I'll confirm the full price, availability, pickup location and payment arrangements in writing before your booking is finalized." },
 ];
 
 export const airportRelatedLinks = [
