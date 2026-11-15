@@ -171,7 +171,7 @@ export function SiteHeader() {
 
 export function SiteSidebar() {
   return (
-    <aside className="hidden w-60 shrink-0 border-r lg:block">
+    <aside className="site-sidebar hidden w-60 shrink-0 border-r lg:block">
       <div className="sticky top-[57px] max-h-[calc(100vh-57px)] overflow-y-auto px-4 py-6">
         <GlobalNav />
       </div>
