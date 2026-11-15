@@ -858,7 +858,7 @@ describe("migrated practical guides", () => {
     cards.forEach((card, i) => {
       expect(card).toHaveTextContent("My choice:");
       const link = within(card as HTMLElement).getByRole("link");
-      expect(link).toHaveAttribute("href", expected[pickIds[i]]);
+      expect(link).toHaveAttribute("href", expected[pickIds[i]!]);
       expect(link).toHaveAttribute("rel", "sponsored noopener noreferrer");
     });
 
