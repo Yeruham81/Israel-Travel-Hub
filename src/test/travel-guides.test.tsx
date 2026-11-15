@@ -160,7 +160,7 @@ describe("migrated practical guides", () => {
     expect(travelGuides.uber.answer).toMatch(/Uber and Lyft do not currently offer passenger rides in Israel/);
     expect(travelGuides.sherut.answer).toMatch(/former Nesher route to Jerusalem or Amal route to Haifa/);
     expect(travelGuides.esim.sections.find((section) => section.id === "calling")!.paragraphs.join(" ")).toMatch(/US number is not an Israeli number/s);
-    expect(travelGuides.esim.answer).toMatch(/Unlimited does not necessarily mean unlimited full-speed data/i);
+    expect(travelGuides.esim.answer).toMatch(/Saily.*\$7\.99.*Airalo.*\$8\.00/s);
   });
 
   it("covers the complete airport arrival sequence without duplicating specialty transport guides", () => {
@@ -838,26 +838,32 @@ describe("migrated practical guides", () => {
     expect(travelGuides.israel.related).toEqual(["telAviv", "taxis", "sherut", "shabbat", "airportTaxis", "arrival"]);
   });
 
-  it("preserves exactly the publisher's five eSIM links with sponsored attributes and anonymous click attribution", async () => {
+  it("links five eSIM providers in the price comparison and preserves sponsored click tracking", async () => {
     const expected = { "esim-airalo": "https://airalo.tpm.li/JmHFDV3v", "esim-saily": "https://saily.tpm.li/nM5mNYzP", "esim-yesim": "https://yesim.tpm.li/6WmqBIJV", "esim-gigsky": "https://gigsky.tpm.li/NxqtNVtH", "esim-drimsim": "https://drimsim.tpm.li/khIJTNaX" };
     const router = await routerAt(travelGuidePaths.esim);
     const Page = EsimRoute.options.component!;
     const { container } = render(<RouterContextProvider router={router}><Page /></RouterContextProvider>);
-    const providerSection = container.querySelector("#provider-options")!;
-    expect(container.querySelector("#checklist")!.compareDocumentPosition(providerSection)).toBe(Node.DOCUMENT_POSITION_PRECEDING);
-    const cards = screen.getAllByTestId("provider-card");
-    expect(cards).toHaveLength(5);
-    for (const [index, link] of linksForPage("guide-esim").entries()) {
+    expect(container.querySelector("#provider-options")).toBeNull();
+    expect(screen.queryAllByTestId("provider-card")).toHaveLength(0);
+    const comparison = container.querySelector("#at-a-glance table") as HTMLElement;
+    expect(within(comparison).getByRole("columnheader", { name: "5GB / 30 days" })).toBeInTheDocument();
+    expect(comparison.textContent).toContain("$7.99");
+    expect(comparison.textContent).toContain("$8.00");
+    expect(comparison.textContent).toContain("$9.90");
+    for (const link of linksForPage("guide-esim")) {
+      const nameLink = within(comparison).getByRole("link", { name: new RegExp("^" + link.providerName) });
       expect(affiliateConfig[link.id]!.trackingUrl).toBe(expected[link.id as keyof typeof expected]);
-      expect(within(cards[index]!).getByRole("link")).toHaveAttribute("href", expected[link.id as keyof typeof expected]);
-      expect(within(cards[index]!).getByRole("link")).toHaveAttribute("rel", "sponsored noopener noreferrer");
-      expect(cards[index]).not.toHaveTextContent("Sponsored link");
+      expect(nameLink).toHaveAttribute("href", expected[link.id as keyof typeof expected]);
+      expect(nameLink).toHaveAttribute("rel", "sponsored noopener noreferrer");
       expect(link.mode).toBe("provider_redirect");
     }
-    const first = within(cards[0]!).getByRole("link");
+    const first = within(comparison).getByRole("link", { name: /^Airalo/ });
     first.addEventListener("click", (event) => event.preventDefault());
     fireEvent.click(first);
     expect(readOutboundClicks()).toEqual([expect.objectContaining({ pageId: "guide-esim", productId: "esim-airalo", offerId: "esim-airalo" })]);
+    const priceSection = container.querySelector("#price") as HTMLElement;
+    expect(within(priceSection).getByRole("link", { name: /^Saily/ })).toHaveAttribute("href", expected["esim-saily"]);
+    expect(travelGuides.esim.services).toHaveLength(4);
   });
   it.each([
     { id: "taxis", route: TaxiRoute, count: 3 },
