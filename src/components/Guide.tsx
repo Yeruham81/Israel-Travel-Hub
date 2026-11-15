@@ -266,7 +266,7 @@ export function SourceList({ ids, intro = "“Checked” dates refer to the fact
   );
 }
 
-function ProviderAction({ link: l, pageId, className, children }: { link: ProviderLink; pageId: string; className: string; children: ReactNode }) {
+function ProviderAction({ link: l, pageId, className, children, showArrow = true }: { link: ProviderLink; pageId: string; className: string; children: ReactNode; showArrow?: boolean }) {
   const internal = l.url.startsWith("/");
   return <a
     href={l.id === "cars-discovercars" ? carRentalAffiliateUrl(`/${pageId}/`) : hotelBrowseAffiliateUrl(l, pageId)}
@@ -275,22 +275,17 @@ function ProviderAction({ link: l, pageId, className, children }: { link: Provid
     onClick={internal ? undefined : () => recordOutboundClick({ pageId, productId: l.id, offerId: l.id })}
     className={className}
   >
-    {children} <span aria-hidden>{internal ? "→" : "↗"}</span>
+    {children} {showArrow && <span aria-hidden>{internal ? "→" : "↗"}</span>}
     {!internal && <span className="sr-only"> (opens in a new tab)</span>}
   </a>;
 }
 
+/** Text links in editorial eSIM comparisons use the same affiliate URL and click attribution as provider buttons. */
+export function ProviderNameLink({ link, pageId, children }: { link: ProviderLink; pageId: string; children?: ReactNode }) {
+  return <ProviderAction link={link} pageId={pageId} showArrow={false} className="font-semibold text-primary underline underline-offset-4 hover:text-primary/80 focus-visible:outline-2 focus-visible:outline-primary">{children ?? link.providerName}</ProviderAction>;
+}
+
 export function ProviderCard({ link: l, pageId }: { link: ProviderLink; pageId: string }) {
-  if (pageId === "guide-esim") return (
-    <li className="flex min-w-0 flex-col rounded-xl border bg-card p-4 sm:p-5" data-testid="provider-card">
-      <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">{l.providerName} · Travel eSIM</p>
-      <h3 className="mt-1 text-lg font-semibold">{l.title}</h3>
-      <p className="mt-2 flex-1 text-sm leading-relaxed text-muted-foreground">{l.summary}</p>
-      <div className="mt-3">
-        <ProviderAction link={l} pageId={pageId} className="btn btn-primary inline-flex text-sm">{l.ctaLabel}</ProviderAction>
-      </div>
-    </li>
-  );
   return (
     <li className="rounded-2xl border bg-card p-5 md:p-6" data-testid="provider-card">
       <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">{relationshipLabel[l.relationship]} · {l.providerName}</p>
