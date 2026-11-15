@@ -100,13 +100,13 @@ export const attractionHubRegions: AttractionHubRegion[] = [
       attraction("akko-acre", "Akko (Acre)", "Crusader halls, Ottoman streets, markets and a working harbour.", attractionHubPhotos.haifa.src),
       { id: "caesarea", title: "Caesarea National Park", description: "Roman ruins, an ancient harbour and archaeology beside the sea.", to: "/attractions/caesarea/", photo: { src: caesareaPhoto, alt: "Ruins and Mediterranean coast at Caesarea" } },
       attraction("rosh-hanikra", "Rosh Hanikra", "Sea grottoes, coastal cliffs and views near the Lebanese border.", attractionHubPhotos.haifa.src),
+      guide("haifaMuseums", "Museums in Haifa", "Find art, science, maritime history and other collections."),
     ],
     planning: [
       { label: "Caesarea, Haifa & Acre tours", to: "/tours/caesarea-haifa-acre/" },
       { label: "Shore excursions from Haifa", to: "/shore-excursions/haifa/" },
       { label: "Hotels in Haifa", to: "/travel-blog/best-hotels-in-haifa/" },
       { label: "Airport to Haifa", to: "/travel-blog/how-to-get-from-ben-gurion-airport-to-haifa/" },
-      { label: "Museums in Haifa", to: travelGuidePaths.haifaMuseums },
     ],
   },
   {
@@ -140,12 +140,12 @@ export const attractionHubRegions: AttractionHubRegion[] = [
       attraction("mount-of-beatitudes", "Mount of Beatitudes", "A peaceful hilltop church and lake panorama.", attractionHubPhotos.galilee.src),
       guide("magdala", "Magdala", "Archaeology and pilgrimage on the western shore."),
       guide("yardenit", "Yardenit", "Plan a visit to this Jordan River baptism site."),
+      guide("baptism", "Jordan River baptism sites", "Compare Yardenit and Qasr el-Yahud before choosing a pilgrimage stop.", attractionHubPhotos.baptism),
     ],
     planning: [
       { label: "Nazareth & Sea of Galilee tours", to: "/tours/nazareth-sea-of-galilee/" },
       { label: "Getting around Israel", to: travelGuidePaths.israel },
       { label: "Hotels in Tiberias", to: "/travel-blog/best-hotels-in-tiberias/" },
-      { label: "Jordan River baptism sites", to: travelGuidePaths.baptism },
     ],
   },
   {

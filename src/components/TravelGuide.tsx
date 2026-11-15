@@ -4,7 +4,7 @@ import { Fragment, type ReactNode } from "react";
 import { BookOpen, Lightbulb } from "lucide-react";
 import { Breadcrumbs, Checklist, FaqList, OnThisPage, ProviderNameLink, RelatedLinks, SourceList } from "@/components/Guide";
 import { guideTopics, travelGuides, type GuideDirectoryEntry, type GuidePhoto, type GuideTopicId, type GuideSection, type GuideInlineSpan, type GuideTable, type TravelGuide } from "@/data/travelGuides";
-import { publicSources, isPublisherUrl, linksForPage, travelGuidePaths, AIRALO_COMPATIBILITY_AFFILIATE_URL, TRAVEL_GUIDE_CHECK_DATE, type TravelGuideId } from "@/data/registry";
+import { publicSources, isPublisherUrl, linksForPage, travelGuidePaths, TRAVEL_GUIDE_CHECK_DATE, type TravelGuideId } from "@/data/registry";
 import { CANONICAL_ORIGIN, SITE_NAME, jsonLd, pageMeta } from "@/lib/site";
 import { authorLd } from "@/lib/author";
 import { hasPublicPhotoCredit } from "@/lib/photo-credits";
@@ -209,7 +209,7 @@ function esimRecommendation(paragraph: string, providers: ReturnType<typeof link
 
 function EsimPickCards({ facts, providers }: { facts: TravelGuide["facts"]; providers: ReturnType<typeof linksForPage> }) {
   const recommendedNames = ["Saily", "Saily", "GigSky"];
-  return <section aria-label="Choose your eSIM by trip type" className="mt-5 grid gap-3 sm:grid-cols-2">
+  return <section aria-label="Choose your eSIM by trip type" className="mt-5 grid gap-3 sm:grid-cols-3">
     {facts.map((fact, index) => {
       const provider = providers.find((item) => item.providerName === recommendedNames[index]);
       return <article key={fact.label} className="flex h-full flex-col rounded-xl border bg-card px-4 py-4 sm:px-5 sm:py-5">
@@ -220,12 +220,6 @@ function EsimPickCards({ facts, providers }: { facts: TravelGuide["facts"]; prov
         </p>}
       </article>;
     })}
-    <article className="flex h-full flex-col rounded-xl border bg-card px-4 py-4 sm:px-5 sm:py-5">
-      <h3 className="text-sm font-semibold text-foreground">Before you buy</h3>
-      <p className="mt-2 text-base font-semibold leading-snug">Check that your phone supports eSIM</p>
-      <p className="mt-2 text-xs leading-relaxed text-muted-foreground">Check device compatibility, carrier lock status and installation instructions before choosing a data package.</p>
-      <p className="mt-auto pt-4 text-sm"><a href={AIRALO_COMPATIBILITY_AFFILIATE_URL} target="_blank" rel="sponsored noopener noreferrer" className="font-semibold text-primary underline underline-offset-2">Check eSIM compatibility</a></p>
-    </article>
   </section>;
 }
 
@@ -283,7 +277,7 @@ export function TravelGuidePage({ id }: { id: TravelGuideId }) {
         {guide.reviewNote && <p className="mt-4 border-t border-primary/20 pt-3 text-sm leading-relaxed text-muted-foreground">{guide.reviewNote}</p>}
       </section>
       {id === "esim" && <><EsimPickCards facts={guide.facts} providers={providers} /><p className="mt-3 text-xs leading-relaxed text-muted-foreground">Plan prices checked 15 November 2026 (USD unless otherwise stated). Prices, discounts, taxes and package terms can change; confirm the final amount and allowance with the provider before buying. Providers may display prices in your local currency.</p></>}
-      {isTransportOverview && <section aria-label="Transport planning essentials" className="mt-5 grid gap-3 sm:grid-cols-2">
+      {isTransportOverview && <section aria-label="Transport planning essentials" className="mt-5 grid gap-3 sm:grid-cols-3">
         {guide.facts.map(fact => <div key={fact.label} className="rounded-xl border bg-card p-4">
           <p className="text-xs font-semibold uppercase tracking-wide text-primary">{fact.label}</p>
           <p className="mt-2 text-sm leading-relaxed">
@@ -296,11 +290,6 @@ export function TravelGuidePage({ id }: { id: TravelGuideId }) {
             </> : fact.text}
           </p>
         </div>)}
-        <div className="rounded-xl border bg-card p-4">
-          <p className="text-xs font-semibold uppercase tracking-wide text-primary">Plan your route</p>
-          <p className="mt-2 text-sm leading-relaxed text-muted-foreground">Check official departure times, connections and service changes for your date before traveling.</p>
-          <a href="https://bus.gov.il/" target="_blank" rel="noopener noreferrer" className="mt-2 inline-block text-sm font-semibold text-primary underline underline-offset-2">Official journey planner</a>
-        </div>
       </section>}
       {isJerusalemDayJourney && id !== "jerusalemDeadSea" && id !== "bethlehem" && <JerusalemJourneyOptions id={id} />}
       <OnThisPage sections={id === "jerusalemDeadSea"

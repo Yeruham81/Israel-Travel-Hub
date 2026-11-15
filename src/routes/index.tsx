@@ -15,7 +15,6 @@ import guidedTour from "@/assets/home/guided-tour-feature.webp";
 import cruisePort from "@/assets/home/cruise-port-feature.webp";
 import ashdodPort from "@/assets/home/ashdod-port.webp";
 import haifaPort from "@/assets/home/haifa-port.webp";
-import eilatWaterfront from "@/assets/eilat/waterfront.webp";
 import haifaHotels from "@/assets/haifa/panorama.webp";
 import deadSeaBeach from "@/assets/dead-sea/beach.webp";
 import jerusalemCard from "@/assets/home/jerusalem-old-city-card.webp";
@@ -96,7 +95,6 @@ export const accommodationDestinationCards: Card[] = [
   { label: "Tiberias & Galilee", text: "Lakeside, luxury & family hotels", to: "/travel-blog/best-hotels-in-tiberias/", img: { src: "/images/home/accommodation-tiberias-galilee-ai.webp", thumb: "/images/home/accommodation-tiberias-galilee-ai-tile.webp", alt: "AI-generated illustration of the Tiberias waterfront beside the Sea of Galilee" } },
   { label: "Dead Sea", text: "Spa retreats & beachfront resorts", to: "/travel-blog/best-dead-sea-hotels/", img: { src: "/images/home/accommodation-dead-sea-ai.webp", thumb: "/images/home/accommodation-dead-sea-ai-tile.webp", alt: "AI-generated illustration of Dead Sea resort hotels, salt shore and desert mountains" } },
   { label: "Haifa", text: "Carmel views, boutique & family hotels", to: "/travel-blog/best-hotels-in-haifa/", img: { src: "/images/home/accommodation-haifa-ai.webp", thumb: "/images/home/accommodation-haifa-ai-tile.webp", alt: "AI-generated illustration of Haifa's Bahá'í Gardens and Mediterranean bay" } },
-  { label: "Eilat", text: "Red Sea hotels, beachfront and visitor areas", to: "/travel-blog/eilat/", img: { src: eilatWaterfront, alt: "Waterfront resort buildings and Red Sea beach in Eilat" } },
 ];
 
 export const services: Service[] = [
@@ -288,7 +286,7 @@ function Home() {
             ) : s.id === "accommodation" ? (
               <div>
                 <ul
-                className="mt-6 grid min-w-0 grid-cols-1 gap-4 min-[480px]:grid-cols-2 lg:grid-cols-3"
+                className="mt-6 grid min-w-0 grid-cols-1 gap-4 min-[480px]:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5"
                 data-testid={`service-layout-${s.id}`}
                 aria-label="Where to stay in Israel"
               >
