@@ -1006,7 +1006,7 @@ export const haifaStayGuide: HotelStayDestination = {
   ],
   sourceIds: ["owner-hotels-haifa", "haifa-botanica-facilities", "haifa-dan-carmel-rooms"],
   related: [
-    { label: "Shore excursions from Haifa Port", to: "/haifa-shore-excursions/", note: "Plan the day around your ship's schedule" },
+    { label: "Shore excursions from Haifa Port", to: "/shore-excursions/haifa/", note: "Plan the day around your ship's schedule" },
     { label: "Airport transfer to Haifa", to: "/airport-transfers/haifa/", note: "Arrange your arrival from Ben Gurion Airport" },
     { label: "Private driver", to: "/private-driver/", note: "Plan hotel transfers and intercity journeys" },
     { label: "Tours & day trips", to: "/tours/" },

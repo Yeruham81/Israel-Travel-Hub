@@ -68,7 +68,7 @@ describe("Attractions hub redesign", () => {
     const galilee = attractionHubRegions.find(region => region.id === "sea-of-galilee")!;
     expect(galilee.cards.some(card => card.to === travelGuidePaths.baptism)).toBe(true);
     expect(galilee.cards.find(card => card.to === travelGuidePaths.baptism)?.photo.src).toBe(attractionHubPhotos.baptism.src);
-    expect(attractionHubRegions.find((region) => region.id === "haifa-coast")?.planning.some((link) => link.to === "/haifa-shore-excursions/")).toBe(true);
+    expect(attractionHubRegions.find((region) => region.id === "haifa-coast")?.planning.some((link) => link.to === "/shore-excursions/haifa/")).toBe(true);
   });
 
   it("uses locally hosted selected WordPress photographs rather than live legacy image URLs", () => {

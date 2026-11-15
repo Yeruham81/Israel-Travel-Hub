@@ -362,7 +362,7 @@ const byId: Record<AirportJourneyId, AirportJourneyGuide> = {
     related: [
       { label: "Official airport taxi booking and pickup", to: "/travel-blog/ben-gurion-airport-taxis/" },
       { label: "Where to stay in Haifa", to: "/travel-blog/best-hotels-in-haifa/" },
-      { label: "Haifa shore excursions and port planning", to: "/haifa-shore-excursions/" },
+      { label: "Haifa shore excursions and port planning", to: "/shore-excursions/haifa/" },
       { label: "Getting around Israel", to: "/travel-blog/getting-around-israel/" },
       { label: "Ben Gurion Airport on Shabbat", to: "/travel-blog/from-ben-gurion-airport-on-shabbat/" },
       { label: "Sherut in Israel: current shared-taxi options", to: "/travel-blog/sherut-in-israel/" },

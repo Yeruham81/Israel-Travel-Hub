@@ -104,7 +104,7 @@ export const attractionHubRegions: AttractionHubRegion[] = [
     ],
     planning: [
       { label: "Caesarea, Haifa & Acre tours", to: "/tours/caesarea-haifa-acre/" },
-      { label: "Shore excursions from Haifa", to: "/haifa-shore-excursions/" },
+      { label: "Shore excursions from Haifa", to: "/shore-excursions/haifa/" },
       { label: "Hotels in Haifa", to: "/travel-blog/best-hotels-in-haifa/" },
       { label: "Airport to Haifa", to: "/travel-blog/how-to-get-from-ben-gurion-airport-to-haifa/" },
     ],
@@ -122,7 +122,7 @@ export const attractionHubRegions: AttractionHubRegion[] = [
     ],
     planning: [
       { label: "Nazareth & Galilee tours", to: "/tours/nazareth-sea-of-galilee/" },
-      { label: "Shore excursions from Haifa", to: "/haifa-shore-excursions/" },
+      { label: "Shore excursions from Haifa", to: "/shore-excursions/haifa/" },
       { label: "Explore the Sea of Galilee", to: "/travel-blog/sea-of-galilee/" },
       { label: "Private driver service", to: "/private-driver/" },
     ],
@@ -207,8 +207,8 @@ export const attractionPlanningPaths: {
     description: "Arriving by cruise ship? Find day-trip ideas from Haifa or Ashdod that fit your port call, with enough time for your return to the ship.",
     to: "/shore-excursions/",
     links: [
-      { label: "From Haifa Port", to: "/haifa-shore-excursions/" },
-      { label: "From Ashdod Port", to: "/ashdod-shore-excursions/" },
+      { label: "From Haifa Port", to: "/shore-excursions/haifa/" },
+      { label: "From Ashdod Port", to: "/shore-excursions/ashdod/" },
     ],
   },
   {

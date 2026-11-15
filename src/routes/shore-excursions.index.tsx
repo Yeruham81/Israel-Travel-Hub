@@ -16,7 +16,7 @@ import { hasPublicPhotoCredit } from "@/lib/photo-credits";
 import { CANONICAL_ORIGIN, jsonLd, pageMeta, SITE_NAME } from "@/lib/site";
 
 const portIds = ["ashdod", "haifa"] as const;
-const heroPhoto = { src: cruiseShipHaifa, alt: "Cruise ship beside Haifa Port and the Mediterranean coast" };
+const heroPhoto = { src: cruiseShipHaifa, alt: "Cruise ship beside Haifa Port and the Mediterranean coast", sourceUrl: "" };
 const crumbs = [{ name: "Home", path: "/" }, { name: "Shore excursions", path: "/shore-excursions/" }] as const;
 const sections = [["ports", "Compare the ports"], ["destinations", "Destinations"], ["tour-formats", "Private or guided"], ["planning", "Plan your day"], ["faq", "FAQ"]] as const;
 const experienceIcons = { history: Landmark, galilee: Church, coast: Waves, desert: Sun };

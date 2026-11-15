@@ -731,7 +731,7 @@ export const cityCultureGuides = {
           },
           {
             "label": "Plan a day from Haifa Port",
-            "to": "/haifa-shore-excursions/"
+            "to": "/shore-excursions/haifa/"
           },
           {
             "label": "Check holiday and event planning",

@@ -111,7 +111,7 @@ const articles: Partial<Record<TravelGuideId, Upgrade>> = {
         inlineLinks: [
           { text: "Jerusalem tours", to: "/tours/jerusalem/" },
           { text: "private-driver service", to: "/private-driver/" },
-          { text: "Jerusalem outing from Ashdod", to: "/ashdod-shore-excursions/" },
+          { text: "Jerusalem outing from Ashdod", to: "/shore-excursions/ashdod/" },
         ],
       },
     ],
@@ -203,7 +203,7 @@ const articles: Partial<Record<TravelGuideId, Upgrade>> = {
         ],
         inlineLinks: [
           { text: "private-driver service", to: "/private-driver/" },
-          { text: "shore-excursion page", to: "/ashdod-shore-excursions/" },
+          { text: "shore-excursion page", to: "/shore-excursions/ashdod/" },
         ],
       },
     ],

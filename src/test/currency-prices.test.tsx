@@ -8,7 +8,7 @@ import { airportTransferRates, initialReferenceFx, referenceFxConfig, type Excha
 import { routeTree } from "@/routeTree.gen";
 import { Route as TransfersRoute } from "@/routes/airport-transfers.index";
 import { Route as JerusalemRoute } from "@/routes/airport-transfers.jerusalem";
-import { Route as HaifaShoreRoute } from "@/routes/haifa-shore-excursions";
+import { Route as HaifaShoreRoute } from "@/routes/shore-excursions.haifa";
 
 const checkTime = Date.parse("2026-10-17T20:00:00Z");
 const rates = (): ExchangeRateSnapshot => ({ ...initialReferenceFx, checkedAt: new Date().toISOString(), ilsPerUnit: { USD: 4, EUR: 5 } });
@@ -38,7 +38,7 @@ describe("international price estimates", () => {
   it.each([
     { label: "airport hub", path: "/airport-transfers/", route: TransfersRoute, count: 0 },
     { label: "dedicated airport route", path: "/airport-transfers/jerusalem/", route: JerusalemRoute, count: 0 },
-    { label: "shore-excursion cards", path: "/haifa-shore-excursions/", route: HaifaShoreRoute, count: 4 },
+    { label: "shore-excursion cards", path: "/shore-excursions/haifa/", route: HaifaShoreRoute, count: 4 },
   ])("retains appropriate ILS fares and optional estimates on $label", async ({ path, route, count }) => {
     const router = createRouter({ routeTree, context: { queryClient: new QueryClient() }, history: createMemoryHistory({ initialEntries: [path] }), trailingSlash: "always" });
     await router.load();

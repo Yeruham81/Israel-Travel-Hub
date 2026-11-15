@@ -101,7 +101,7 @@ const guides: Record<AirportTransferRouteId, RouteGuide> = {
     ],
     related: [
       { label: "Choose where to stay in Haifa", to: "/travel-blog/best-hotels-in-haifa/" },
-      { label: "Shore excursions from Haifa", to: "/haifa-shore-excursions/" },
+      { label: "Shore excursions from Haifa", to: "/shore-excursions/haifa/" },
     ],
   },
   "dead-sea": {

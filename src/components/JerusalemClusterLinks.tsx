@@ -53,7 +53,7 @@ export const jerusalemConnections: Record<JerusalemClusterKey, Destination[]> = 
     L("Mount Zion", "/travel-blog/mount-zion/", "Cenacle, Dormition and Gallicantu"),
     L("Jerusalem tours", "/tours/jerusalem/", "Choose a guided pilgrimage visit"),
     L("Bethlehem travel options", "/travel-blog/jerusalem-to-bethlehem/", "For an additional Nativity visit"),
-    L("Cruise tours from Ashdod", "/ashdod-shore-excursions/", "Plan around all-aboard time"),
+    L("Cruise tours from Ashdod", "/shore-excursions/ashdod/", "Plan around all-aboard time"),
   ],
   jerusalemShopping: [
     L("Old City walking guide", "/travel-blog/old-city-jerusalem/", "Markets and the Cardo alongside historic sites"),
