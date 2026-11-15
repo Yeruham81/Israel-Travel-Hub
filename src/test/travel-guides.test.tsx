@@ -902,7 +902,13 @@ describe("migrated practical guides", () => {
     expect(container.querySelector('nav a[href="#contact"]')).toHaveTextContent("Contact Me");
     expect(travelGuides.esim.services).toHaveLength(4);
     expect(travelGuides.esim.faqs).toHaveLength(6);
-    expect(container.querySelector("#sources")).not.toBeNull();
+    const sourceSection = container.querySelector("#sources") as HTMLElement;
+    expect(sourceSection).not.toBeNull();
+    expect(container.querySelector("article")?.lastElementChild).toBe(sourceSection);
+    const contactForm = container.querySelector('form[aria-label="Guide contact message"]');
+    expect(contactForm).not.toBeNull();
+    expect(contactForm!.compareDocumentPosition(sourceSection) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
+    expect(container).toHaveTextContent("Providers may display prices in your local currency.");
     expect(container.querySelector('#sources a[href="https://www.gigsky.com/country/esim-in-israel"]')).not.toBeNull();
     expect(container.textContent).not.toContain("References:");
   });
