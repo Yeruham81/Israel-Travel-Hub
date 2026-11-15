@@ -2356,4 +2356,10 @@ export const providerLinks: ProviderLink[] = [
   },
 ];
 
-export const linksForPage = (pageId: string) => providerLinks.filter((l) => l.pageIds.includes(pageId));
+/** Apply a destination-specific tracking link only when the approved API generated it.
+ * Otherwise retain the hub affiliate link or the provider's original public URL.
+ */
+export const linksForPage = (pageId: string) => providerLinks.filter((l) => l.pageIds.includes(pageId)).map((link) => {
+  const pageTrackingUrl = link.id.startsWith("airport-") ? affiliateConfig[`${link.id}@${pageId}`]?.trackingUrl : undefined;
+  return pageTrackingUrl ? { ...link, url: pageTrackingUrl, isAffiliate: true } : link;
+});
