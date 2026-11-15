@@ -8,7 +8,7 @@ import { Route as HubRoute } from "@/routes/tours.index";
 import { Route as LegacyBethlehemRoute } from "@/routes/tours.bethlehem-from-jerusalem";
 import { tourCategoryMeta } from "@/components/TourCategoryPage";
 import { CurrencyRatesContext } from "@/components/CurrencyRates";
-import { affiliateConfig, initialReferenceFx, operators, sources, tourBookingOffers, tourProducts, travelGuidePaths } from "@/data/registry";
+import { affiliateConfig, getSource, initialReferenceFx, operators, sources, tourBookingOffers, tourProducts, travelGuidePaths } from "@/data/registry";
 import { guideDirectory } from "@/data/travelGuides";
 import { tourCategories, tourCategoryPaths, tourPhotos } from "@/data/tours";
 import { repeatedPhotos } from "@/lib/photo-uniqueness";
@@ -136,8 +136,9 @@ describe("tours hub and SEO category pages", () => {
       expect(tour.originIds).toEqual([origin]);
       expect(tour.durationMinutes).toBe(duration);
       expect(tour.price).toMatchObject({ kind: "published_starting_rate", amount, currency: "ILS", basis: "per_vehicle", maxPartySize: 4 });
-      const source = sources.find(source => source.id === tour.price!.sourceId)!;
-      expect(source).toMatchObject({ publisher: "Israel-Taxi.com (Moshe Barak)", checkedAt: "2026-10-22" });
+      const source = getSource(tour.price!.sourceId);
+      expect(source).toMatchObject({ publisher: "Moshe Barak", url: "", checkedAt: "2026-10-22" });
+      expect(sources.some((record) => record.id === tour.price!.sourceId)).toBe(false);
       expect(privateTourPrefill(parsePrivateDriverSearch({ tour: id }))?.itinerary).toContain(origin === "tel-aviv" ? "Tel Aviv" : "Jerusalem");
     }
   });

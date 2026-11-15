@@ -85,10 +85,10 @@ describe("homepage marketing copy and service sections", () => {
       "To Jerusalem", "To Tel Aviv", "To Haifa", "To Ein Bokek",
     ]);
     expect(transferCards.map(card => card.getAttribute("href"))).toEqual([
-      "/airport-transfers/ben-gurion-airport-to-jerusalem/",
-      "/airport-transfers/ben-gurion-airport-to-tel-aviv/",
-      "/airport-transfers/ben-gurion-airport-to-haifa/",
-      "/airport-transfers/ben-gurion-airport-to-ein-bokek/",
+      "/airport-transfers/jerusalem/",
+      "/airport-transfers/tel-aviv/",
+      "/airport-transfers/haifa/",
+      "/airport-transfers/ein-bokek/",
     ]);
     for (const card of transferCards) {
       expect(card).toHaveClass("relative", "group");

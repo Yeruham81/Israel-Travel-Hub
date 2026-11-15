@@ -723,7 +723,8 @@ describe("migrated Israel itineraries", () => {
       guide.relatedGuides!.find(item => item.to === "/travel-blog/old-city-jerusalem/")!.image,
     ];
     expect(new Set(cityImageKeys).size).toBe(3);
-    expect(file("src/data/guideMigrationPhotos.ts")).toContain("Church_of_the_Holy_Sepulchre_Jerusalem_israel.jpg");
+    expect(migrationPhotos["itinerary-3day-holy-sepulchre"].src).toBeTruthy();
+    expect(migrationPhotos["itinerary-3day-holy-sepulchre"].sourceUrl).toBe("");
 
     const view = file("src/components/IsraelItineraryPage.tsx");
     expect(view).not.toContain('id="before-you-go"');
