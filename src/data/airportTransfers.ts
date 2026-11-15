@@ -35,7 +35,7 @@ export const airportTransferPhotos: Record<string, StayGuidePhoto> = {
 };
 
 /** Use the same four destination images already displayed under Airport Transfers on the homepage. */
-export const airportHomepageRoutePhotos: Record<string, StayGuidePhoto> = {
+export const airportHomepageRoutePhotos: Record<string, Pick<StayGuidePhoto, "src" | "alt">> = {
   jerusalem: { src: "/images/home/transfer-jerusalem-tower-of-david.webp", alt: "Tower of David citadel beside Jerusalem’s Old City" },
   "tel-aviv": { src: "/images/home/transfer-tel-aviv-beach-skyline.webp", alt: "Tel Aviv Mediterranean beach and modern skyline" },
   haifa: { src: "/images/home/transfer-haifa-bahai-gardens.webp", alt: "Bahá’í Gardens staircase and Shrine in Haifa" },
