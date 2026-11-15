@@ -131,7 +131,7 @@ const guides: Record<AirportTransferRouteId, RouteGuide> = {
     ],
     related: [
       { label: "Compare Dead Sea hotels", to: "/travel-blog/best-dead-sea-hotels/" },
-      { label: "Plan a visit to Masada", to: "/travel-blog/masada/" },
+      { label: "Plan a visit to Masada", to: "/attractions/masada/" },
     ],
   },
 };

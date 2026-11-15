@@ -662,15 +662,15 @@ describe("migrated Israel itineraries", () => {
     expect(itineraries["10"].dayOfficialLinks).toHaveLength(8);
     expect(itineraries["10"].beforeYouGoOfficialLinks).toHaveLength(2);
     const expectedLinks = [
-      "/travel-blog/old-city-jerusalem/",
+      "/attractions/old-city-jerusalem/",
       "/travel-blog/shopping-in-jerusalem/",
-      "/travel-blog/masada/",
+      "/attractions/masada/",
       "/travel-blog/jerusalem-to-the-dead-sea/",
       "/airport-transfers/",
       "/travel-blog/the-dead-sea/",
       "/travel-blog/dead-sea-attractions/",
-      "/travel-blog/ein-gedi/",
-      "/travel-blog/jaffa/",
+      "/attractions/ein-gedi/",
+      "/attractions/jaffa/",
       "/travel-blog/beaches-in-tel-aviv/",
       "/travel-blog/museums-in-tel-aviv/",
     ];
@@ -715,12 +715,12 @@ describe("migrated Israel itineraries", () => {
     const guide = itineraries["3"];
     expect(guide.hero).toBe("itinerary-3day-jerusalem-cover");
     expect(guide.daysPlan[0]?.image).toBe("itinerary-3day-holy-sepulchre");
-    expect(guide.relatedGuides?.find(item => item.to === "/travel-blog/old-city-jerusalem/")?.image)
+    expect(guide.relatedGuides?.find(item => item.to === "/attractions/old-city-jerusalem/")?.image)
       .toBe("itinerary-jerusalem-old-city");
     const cityImageKeys = [
       guide.hero,
       guide.daysPlan[0]!.image,
-      guide.relatedGuides!.find(item => item.to === "/travel-blog/old-city-jerusalem/")!.image,
+      guide.relatedGuides!.find(item => item.to === "/attractions/old-city-jerusalem/")!.image,
     ];
     expect(new Set(cityImageKeys).size).toBe(3);
     expect(migrationPhotos["itinerary-3day-holy-sepulchre"].src).toBeTruthy();

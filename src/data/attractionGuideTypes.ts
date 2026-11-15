@@ -15,6 +15,8 @@ export interface Attraction {
 }
 /** Regional overviews compare several destinations and stay in Travel Guides. */
 export const regionalOverviewIds = ["attractions-in-tel-aviv","dead-sea-attractions","museums-in-jerusalem","sea-of-galilee","haifa"] as const satisfies readonly AttractionId[];
-export const isRegionalOverview = (id: AttractionId): boolean => (regionalOverviewIds as readonly string[]).includes(id);
-export const attractionPath = (id: AttractionId): `/travel-blog/${AttractionId}/` | `/attractions/${AttractionId}/` =>
+export type RegionalOverviewId = typeof regionalOverviewIds[number];
+export type IndividualAttractionId = Exclude<AttractionId, RegionalOverviewId>;
+export const isRegionalOverview = (id: AttractionId): id is RegionalOverviewId => (regionalOverviewIds as readonly string[]).includes(id);
+export const attractionPath = (id: AttractionId): `/travel-blog/${RegionalOverviewId}/` | `/attractions/${IndividualAttractionId}/` =>
   isRegionalOverview(id) ? `/travel-blog/${id}/` : `/attractions/${id}/`;

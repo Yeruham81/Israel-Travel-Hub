@@ -64,7 +64,7 @@ function CarRental() {
         { label: "Private driver instead", to: "/private-driver/" },
         { label: "Hotels in Tiberias", to: "/travel-blog/best-hotels-in-tiberias/" },
         { label: "Caesarea", to: "/attractions/caesarea/" },
-        { label: "Masada", to: "/travel-blog/masada/" },
+        { label: "Masada", to: "/attractions/masada/" },
       ]} />
     </main>
   );

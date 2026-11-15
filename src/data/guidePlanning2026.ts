@@ -339,7 +339,7 @@ export const planningGuides = {
           },
           {
             "label": "Explore Jaffa",
-            "to": "/travel-blog/jaffa/"
+            "to": "/attractions/jaffa/"
           }
         ]
       },

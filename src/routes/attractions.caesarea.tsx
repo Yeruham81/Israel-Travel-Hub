@@ -71,7 +71,7 @@ function Caesarea() {
         <RelatedLinks items={[
           { label: "Hotels in Tel Aviv", to: "/travel-blog/where-to-stay-in-tel-aviv/" },
           { label: "Car rental", to: "/car-rental/" },
-          { label: "Masada visit & tickets", to: "/travel-blog/masada/" },
+          { label: "Masada visit & tickets", to: "/attractions/masada/" },
           { label: "All attractions", to: "/attractions/" },
         ]} />
         <EndCta title="Ready to visit Caesarea?" links={links} pageId="caesarea" />

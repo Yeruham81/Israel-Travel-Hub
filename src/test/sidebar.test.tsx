@@ -56,7 +56,7 @@ describe("shared sidebar navigation", () => {
   });
 
   it("automatically opens an area's guide list on a matching article", async () => {
-    const router = await navigationRouter("/travel-blog/mount-zion/");
+    const router = await navigationRouter("/attractions/mount-zion/");
     render(<RouterContextProvider router={router}><GlobalNav /></RouterContextProvider>);
     const section = screen.getByRole("region", { name: "Attractions" });
     const jerusalem = within(section).getByRole("button", { name: "Toggle Jerusalem guides" });

@@ -99,7 +99,7 @@ export const cityCultureGuides = {
         "links": [
           {
             "label": "Consider a Ramon Crater stop on a longer route",
-            "to": "/travel-blog/mitzpe-ramon-crater/"
+            "to": "/attractions/mitzpe-ramon-crater/"
           }
         ]
       },
@@ -291,7 +291,7 @@ export const cityCultureGuides = {
         "links": [
           {
             "label": "Explore Old Jaffa",
-            "to": "/travel-blog/jaffa/"
+            "to": "/attractions/jaffa/"
           },
           {
             "label": "Choose a Jaffa hotel area",
@@ -585,7 +585,7 @@ export const cityCultureGuides = {
       },
       {
         "label": "Plan time in Jaffa",
-        "to": "/travel-blog/jaffa/"
+        "to": "/attractions/jaffa/"
       }
     ],
     "sourceIds": [
