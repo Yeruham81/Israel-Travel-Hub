@@ -34,16 +34,28 @@ export const airportTransferPhotos: Record<string, StayGuidePhoto> = {
   moshe: { src: moshe, alt: "Moshe Barak seated in his vehicle", sourceUrl: `${upload}/2025/08/moshe_barak_4.webp`, label: "Moshe Barak — operator portrait" },
 };
 
-export const airportDestinationCards = airportTransferRates.map((rate) => ({ ...rate, photo: airportTransferPhotos[rate.id]! }));
+/** Use the same four destination images already displayed under Airport Transfers on the homepage. */
+export const airportHomepageRoutePhotos: Record<string, StayGuidePhoto> = {
+  jerusalem: { src: "/images/home/transfer-jerusalem-tower-of-david.webp", alt: "Tower of David citadel beside Jerusalem’s Old City" },
+  "tel-aviv": { src: "/images/home/transfer-tel-aviv-beach-skyline.webp", alt: "Tel Aviv Mediterranean beach and modern skyline" },
+  haifa: { src: "/images/home/transfer-haifa-bahai-gardens.webp", alt: "Bahá’í Gardens staircase and Shrine in Haifa" },
+  "dead-sea": { src: "/images/home/transfer-ein-bokek-aerial.webp", alt: "Aerial view of Ein Bokek Dead Sea resort area and turquoise water" },
+};
+
+export const airportDestinationCards = airportTransferRates.map((rate) => ({ ...rate, photo: airportHomepageRoutePhotos[rate.id] ?? airportTransferPhotos[rate.id]! }));
 
 export const airportTransferBenefits = [
-  { title: "Agreed price, no extra charges", text: "I confirm the full fare before you book. No unexpected extras are added to the agreed price." },
-  { title: "Flight tracking", text: "I track your flight status to coordinate pickup with your actual landing time." },
-  { title: "Free cancellation up to 24 hours", text: "Cancel a transfer booked directly with me at no charge up to 24 hours before the scheduled pickup." },
+  { title: "Agreed price, no extra charges", text: "The full fare is confirmed in advance, with no unexpected charges added later." },
+  { title: "Flight tracking", text: "Flight status is monitored so pickup can be coordinated with the actual landing time." },
+  { title: "Free cancellation up to 24 hours", text: "Direct bookings can be cancelled free of charge up to 24 hours before the scheduled pickup." },
 ];
 
-export const airportTransferTips = [
-  { title: "Before you travel", text: "Send the flight number and arrival time in Israel local time, your exact destination, and the number of people, suitcases and carry-ons. Save your confirmed meeting point and contact details offline." },
+export const airportTransferChecklist = [
+  "Use your flight's landing date and time in Israel local time, including arrivals after midnight.",
+  "Provide the full drop-off address and the number of passengers, suitcases and carry-ons.",
+  "Request child seats or a larger vehicle in advance if your party needs them.",
+  "Check the full price, waiting arrangements and cancellation terms before confirming.",
+  "Save your driver's contact details and the agreed airport meeting point for arrival.",
 ];
 
 export const airportTransferFaqs = [
