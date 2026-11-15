@@ -25,7 +25,7 @@ import { Route as ChurchesRoute } from "@/routes/travel-blog.churches-in-jerusal
 import { Route as ShoppingRoute } from "@/routes/travel-blog.shopping-in-jerusalem";
 import { Route as TelAvivDayTripsRoute } from "@/routes/travel-blog.day-trips-from-tel-aviv";
 import { filterGuides, guideDirectory, guideTopics, travelGuides } from "@/data/travelGuides";
-import { AIRALO_COMPATIBILITY_AFFILIATE_URL, affiliateConfig, getSource, isPublisherUrl, linksForPage, mosheBarakAuthor, travelGuidePaths, TRAVEL_GUIDE_CHECK_DATE } from "@/data/registry";
+import { AIRALO_COMPATIBILITY_AFFILIATE_URL, AIRALO_MENA_AFFILIATE_URL, affiliateConfig, getSource, isPublisherUrl, linksForPage, mosheBarakAuthor, travelGuidePaths, TRAVEL_GUIDE_CHECK_DATE } from "@/data/registry";
 import { readOutboundClicks } from "@/lib/outbound";
 import { repeatedPhotos } from "@/lib/photo-uniqueness";
 
@@ -839,7 +839,7 @@ describe("migrated practical guides", () => {
     expect(travelGuides.israel.related).toEqual(["telAviv", "taxis", "sherut", "shabbat", "airportTaxis", "arrival"]);
   });
 
-  it("recommends three eSIM trip types with tracked provider actions and practical links", async () => {
+  it("recommends distinct Israel eSIM plans and compares all five unlimited providers with tracked links", async () => {
     const expected = { "esim-airalo": "https://airalo.tpm.li/JmHFDV3v", "esim-saily": "https://saily.tpm.li/nM5mNYzP", "esim-yesim": "https://yesim.tpm.li/6WmqBIJV", "esim-gigsky": "https://gigsky.tpm.li/NxqtNVtH" };
     const router = await routerAt(travelGuidePaths.esim);
     const Page = EsimRoute.options.component!;
@@ -861,20 +861,25 @@ describe("migrated practical guides", () => {
       expect(link).toHaveAttribute("href", expected[pickIds[i]!]);
       expect(link).toHaveAttribute("rel", "sponsored noopener noreferrer");
     });
+    expect(container.querySelector("#at-a-glance")).toBeNull();
+    expect(container.querySelector('#price')).toBeNull();
 
-    const comparison = container.querySelector("#at-a-glance table") as HTMLElement;
-    expect(within(comparison).getAllByRole("row")).toHaveLength(4);
-    expect(within(comparison).getByRole("columnheader", { name: "My choice" })).toBeInTheDocument();
-    expect(comparison.textContent).toContain("$5.99");
-    expect(comparison.textContent).toContain("$7.99");
-    expect(comparison.textContent).toContain("$56.24");
+    const unlimited = within(container.querySelector("#unlimited") as HTMLElement).getByRole("region", { name: "Compare 30-day unlimited eSIM plans" });
+    const offers = [...unlimited.querySelectorAll("article")];
+    expect(offers).toHaveLength(4);
+    expect(unlimited).toHaveTextContent("Drimsim:");
+    expect(unlimited).toHaveTextContent("$56.24");
+    expect(unlimited).toHaveTextContent("$66.00");
+    expect(unlimited).toHaveTextContent("$69.00");
+    expect(unlimited).toHaveTextContent("$71.99");
     for (const id of Object.keys(expected) as Array<keyof typeof expected>) {
       const provider = linksForPage("guide-esim").find(link => link.id === id)!;
-      const nameLink = within(comparison).getAllByRole("link", { name: provider.providerName })[0];
+      const link = within(unlimited).getByRole("link", { name: provider.providerName });
       expect(affiliateConfig[id]!.trackingUrl).toBe(expected[id]);
-      expect(nameLink).toHaveAttribute("href", expected[id]);
-      expect(nameLink).toHaveAttribute("rel", "sponsored noopener noreferrer");
+      expect(link).toHaveAttribute("href", expected[id]);
+      expect(link).toHaveAttribute("rel", "sponsored noopener noreferrer");
     }
+
     const first = within(cards[0] as HTMLElement).getByRole("link");
     first.addEventListener("click", (event) => event.preventDefault());
     fireEvent.click(first);
@@ -888,10 +893,13 @@ describe("migrated practical guides", () => {
     const deviceLink = within(container.querySelector("#compatibility") as HTMLElement).getByRole("link", { name: /Check whether your phone supports eSIM/ });
     expect(deviceLink).toHaveAttribute("href", AIRALO_COMPATIBILITY_AFFILIATE_URL);
     expect(deviceLink).toHaveAttribute("rel", "sponsored noopener noreferrer");
-    expect(deviceLink).toHaveAttribute("target", "_blank");
-    expect(container.querySelector('#regional a[href="https://www.airalo.com/middle-east-and-north-africa-esim"]')).not.toBeNull();
+    const regional = within(container.querySelector("#regional") as HTMLElement).getByRole("link", { name: /View Airalo's Middle East/ });
+    expect(regional).toHaveAttribute("href", AIRALO_MENA_AFFILIATE_URL);
+    expect(regional).toHaveAttribute("rel", "sponsored noopener noreferrer");
+    expect(within(container.querySelector("#coverage") as HTMLElement).getByRole("link", { name: /Jerusalem to Bethlehem/ })).toBeInTheDocument();
     expect(container.querySelector('nav a[href="#contact"]')).toHaveTextContent("Contact Me");
     expect(travelGuides.esim.services).toHaveLength(4);
+    expect(travelGuides.esim.faqs).toHaveLength(6);
     expect(container.querySelector("#sources")).toBeNull();
     expect(container.textContent).not.toContain("References:");
   });
