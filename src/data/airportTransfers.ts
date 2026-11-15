@@ -17,6 +17,9 @@ import roadTrip from "@/assets/home/road-trip.webp";
 import { airportTransferRates, travelGuidePaths } from "@/data/registry";
 import type { StayGuidePhoto } from "@/data/content";
 
+/** Last editorial update; separate from provider-rate/source verification dates. */
+export const AIRPORT_TRANSFER_UPDATED_DATE = "2026-11-15";
+
 export const airportTransferPhotos: Record<string, StayGuidePhoto> = {
   "tel-aviv": { src: telAviv, alt: "Tel Aviv's beachfront hotels and promenade", sourceUrl: "", label: "Tel Aviv beachfront" },
   jerusalem: { src: jerusalem, alt: "Stone buildings and lanes in Jerusalem's Old City", sourceUrl: "", label: "Jerusalem Old City" },
