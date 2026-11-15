@@ -170,7 +170,7 @@ const photoTitleShadow = "0 1px 3px rgba(0, 0, 0, 0.95), 0 2px 8px rgba(0, 0, 0,
 
 function PhotoCard({ c }: { c: Card }) {
   return (
-    <Link to={c.to} className="photo-card group relative block overflow-hidden rounded-xl bg-navy shadow-md focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-ring">
+    <Link to={c.to} className="photo-card group relative block overflow-hidden rounded-xl bg-primary shadow-md focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-ring">
       {/* Use the original 3:2 landscape artwork instead of portrait-cropped desktop tiles. */}
       <img src={c.img.src} alt={c.img.alt} loading="lazy" decoding="async" width={720} height={480} className="aspect-[3/2] w-full object-cover transition-transform duration-500 group-hover:scale-105 xl:aspect-[6/5]" />
       <span className="absolute bottom-2 left-2 max-w-[calc(100%-1rem)] font-serif text-base font-semibold leading-tight text-white sm:bottom-3 sm:left-3 sm:text-lg" style={{ textShadow: photoTitleShadow }}>{c.label}</span>
@@ -198,7 +198,7 @@ function CompactCard({ c }: { c: Card }) {
 function AirportTransferCard({ c }: { c: Card }) {
   return (
     <li className="min-h-0">
-      <Link to={c.to} aria-label={c.label} className="group relative block aspect-[16/9] min-w-0 overflow-hidden rounded-lg bg-navy shadow-sm focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-ring lg:aspect-auto lg:h-full">
+      <Link to={c.to} aria-label={c.label} className="group relative block aspect-[16/9] min-w-0 overflow-hidden rounded-lg bg-primary shadow-sm focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-ring lg:aspect-auto lg:h-full">
         <img src={c.img.src} alt={c.img.alt} loading="lazy" decoding="async" width={720} height={480} className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" />
         <span className="absolute bottom-2 left-2 max-w-[calc(100%-1rem)] font-serif text-sm font-semibold leading-tight text-white sm:bottom-3 sm:left-3 sm:text-base" style={{ textShadow: photoTitleShadow }}>{c.label}</span>
       </Link>
@@ -209,7 +209,7 @@ function AirportTransferCard({ c }: { c: Card }) {
 /** Compact destination tile shared by the homepage tours and attractions sections. */
 function DestinationImageCard({ c }: { c: Card }) {
   return (
-    <Link to={c.to} aria-label={c.label} className="group relative block min-w-0 overflow-hidden rounded-lg bg-navy shadow-sm focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-ring">
+    <Link to={c.to} aria-label={c.label} className="group relative block min-w-0 overflow-hidden rounded-lg bg-primary shadow-sm focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-ring">
       <img src={c.img.thumb ?? c.img.src} alt={c.img.alt} loading="lazy" decoding="async" width={400} height={300} className="aspect-[4/3] w-full object-cover transition-transform duration-500 group-hover:scale-105" />
       <span className="absolute bottom-2 left-2 max-w-[calc(100%-1rem)] font-serif text-sm font-semibold leading-tight text-white sm:bottom-3 sm:left-3 sm:text-base" style={{ textShadow: photoTitleShadow }}>{c.label}</span>
     </Link>

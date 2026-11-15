@@ -19,7 +19,7 @@ export function ExtLink({ href, children, className }: { href: string; children:
 export function Wordmark() {
   return (
     <Link to="/" className="flex shrink-0 items-center gap-1.5 sm:gap-2" aria-label="Israel Taxi & Travel home">
-      <span aria-hidden className="grid h-7 w-7 shrink-0 place-items-center rounded-full bg-navy font-serif text-sm italic text-navy-foreground sm:h-8 sm:w-8 sm:text-base">i</span>
+      <span aria-hidden className="grid h-7 w-7 shrink-0 place-items-center rounded-full bg-primary font-serif text-sm italic text-primary-foreground sm:h-8 sm:w-8 sm:text-base">i</span>
       <span className="flex flex-col gap-1">
         <span className="whitespace-nowrap font-serif font-semibold text-[0.9rem] leading-none min-[375px]:text-base sm:text-xl">
           Israel Taxi <span className="italic text-primary">&amp;</span> Travel
@@ -48,7 +48,7 @@ function SidebarLink({ item, onNavigate, emphasized = false }: { item: NavItem |
       to={item.to}
       onClick={onNavigate}
       activeOptions={{ exact: true }}
-      activeProps={{ className: "bg-navy text-navy-foreground", "aria-current": "page" }}
+      activeProps={{ className: "bg-primary text-primary-foreground", "aria-current": "page" }}
       inactiveProps={{ className: "hover:bg-muted" }}
       className={className}
     >
@@ -116,7 +116,7 @@ export function GlobalNav({ onNavigate }: { onNavigate?: () => void }) {
       </ul>
       {allNavGroups.map((g) => (
         <section key={g.title} aria-label={g.title} className="mb-6 border-b pb-5">
-          <h2 className="mb-3 border-l-2 border-primary/50 pl-3 font-sans text-base font-bold uppercase leading-5 tracking-wide text-navy">{g.title}</h2>
+          <h2 className="mb-3 border-l-2 border-primary/50 pl-3 font-sans text-base font-bold uppercase leading-5 tracking-wide text-primary">{g.title}</h2>
           <ul className="space-y-0.5">
             {g.items.map((i) => (
               <li key={i.label}>

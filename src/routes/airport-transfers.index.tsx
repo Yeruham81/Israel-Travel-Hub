@@ -59,7 +59,7 @@ function Airport() {
       title="Private airport transfers from Ben Gurion Airport"
       intro="Arrange a private pickup from Ben Gurion Airport (TLV) to Jerusalem, Tel Aviv, Haifa, the Dead Sea or elsewhere in Israel. See my starting fares, request a quote or explore other booking platforms."
       image={<GuideHeroMedia src={airportTransferPhotos["other"]!.src} alt={airportTransferPhotos["other"]!.alt} compact />}
-      actions={<a href="#request-quote" className="inline-flex min-h-11 items-center justify-center rounded-lg bg-navy px-5 py-2.5 text-sm font-semibold text-navy-foreground transition-colors hover:bg-navy/90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">Request a personal quote</a>}
+      actions={<a href="#request-quote" className="inline-flex min-h-11 items-center justify-center rounded-lg bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary/90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">Request a personal quote</a>}
     />
     <div className="mx-auto max-w-5xl px-4">
       <section id="popular-destinations" aria-labelledby="popular-h" className="mt-8 scroll-mt-24">

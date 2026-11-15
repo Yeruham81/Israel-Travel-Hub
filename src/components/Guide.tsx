@@ -471,7 +471,7 @@ export function RelatedLinks({ title = "Plan the rest of your trip", items, curr
 
 export function EndCta({ title, links, pageId }: { title: string; links: ProviderLink[]; pageId: string }) {
   return (
-    <section className="mt-14 rounded-2xl bg-navy p-8 text-navy-foreground">
+    <section className="mt-14 rounded-2xl bg-primary p-8 text-primary-foreground">
       <h2 className="text-3xl">{title}</h2>
       <p className="mt-2 opacity-85">Confirm the final price and arrangements with the provider before paying.</p>
       <div className="mt-6 flex flex-wrap gap-3">

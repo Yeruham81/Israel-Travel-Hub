@@ -120,7 +120,7 @@ function Shore() {
       <p className="eyebrow">Make every hour count</p>
       <h2 id="planning-h" className="mt-2 text-3xl">Plan a day that works with your cruise</h2>
       <ol className="mt-6 grid gap-5 sm:grid-cols-2">{shorePlanningSteps.map((step, index) => <li key={step.title} className="flex gap-4 rounded-2xl border p-5">
-        <span aria-hidden className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-navy text-sm font-semibold text-navy-foreground">{index + 1}</span>
+        <span aria-hidden className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-primary text-sm font-semibold text-primary-foreground">{index + 1}</span>
         <div><h3 className="text-xl font-semibold">{step.title}</h3><p className="mt-2 text-sm leading-relaxed text-muted-foreground">{step.description}</p></div>
       </li>)}</ol>
     </section>
@@ -133,7 +133,7 @@ function Shore() {
 
     <ShoreReadingGuides guides={shoreHubGuides} title="Get to know the places on your route" />
     <FaqList faqs={shoreHubFaqs} />
-    <section aria-labelledby="shore-ready-h" className="mt-14 rounded-3xl bg-navy p-6 text-navy-foreground sm:p-8">
+    <section aria-labelledby="shore-ready-h" className="mt-14 rounded-3xl bg-primary p-6 text-primary-foreground sm:p-8">
       <h2 id="shore-ready-h" className="text-3xl">Make your day in Israel your own</h2>
       <p className="mt-3 max-w-3xl leading-relaxed opacity-90">Choose your port to discover the day trips and guided excursions, or share your ship's schedule and favorite places for a personal car-and-driver plan. A memorable day starts with the right route for you.</p>
       <div className="mt-5 flex flex-wrap gap-3"><Link to={shorePorts.ashdod.path} hash="request-quote" className="btn btn-light">Plan my day from Ashdod</Link><Link to={shorePorts.haifa.path} hash="request-quote" className="btn btn-light">Plan my day from Haifa</Link></div>

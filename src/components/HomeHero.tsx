@@ -32,7 +32,7 @@ export function HomeHero() {
   return (
     <section aria-labelledby="home-title">
       <HeroCarousel slides={heroSlides}>
-        <div className="max-w-5xl px-6 pb-8 pt-16 text-navy-foreground md:px-12 md:pb-8 md:pt-16">
+        <div className="max-w-5xl px-6 pb-8 pt-16 text-primary-foreground md:px-12 md:pb-8 md:pt-16">
           <p className="text-xs font-semibold uppercase tracking-[0.17em] opacity-90">Your journey starts here</p>
           <h1 id="home-title" className="mt-4 max-w-2xl text-4xl leading-[1.08] md:text-5xl lg:max-w-none lg:whitespace-nowrap lg:text-[clamp(3rem,3.65vw,3.25rem)]">Discover Israel, Travel Smarter</h1>
           <p className="mt-3 max-w-2xl text-lg leading-relaxed opacity-95 md:text-xl">

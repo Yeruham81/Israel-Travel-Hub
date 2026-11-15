@@ -94,7 +94,7 @@ export function AirportRoutePage({ id }: { id: AirportTransferRouteId }) {
           <p className="mt-2 text-xs leading-relaxed text-muted-foreground">Night, weekend and holiday surcharges may apply.</p>
           <p className="mt-2 text-xs leading-relaxed text-muted-foreground">Larger vehicles for groups and families can be provided, requiring a separate quote.</p>
           <p className="mt-2 text-xs leading-relaxed text-muted-foreground" data-testid="airport-route-fx-note">Full price is confirmed in advance. All fares are quoted and charged in ILS. USD and EUR amounts are approximate, based on current exchange rates.</p>
-          <a href="#request-quote" onClick={focusQuote} className="mt-4 inline-flex min-h-11 items-center justify-center rounded-lg bg-navy px-5 py-2.5 text-sm font-semibold text-navy-foreground transition-colors hover:bg-navy/90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">Request a personal quote</a>
+          <a href="#request-quote" onClick={focusQuote} className="mt-4 inline-flex min-h-11 items-center justify-center rounded-lg bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary/90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">Request a personal quote</a>
         </GuideHeroLayout>
       </header>
       <AuthorCard />

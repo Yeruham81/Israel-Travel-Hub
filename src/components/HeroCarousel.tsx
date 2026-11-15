@@ -97,7 +97,7 @@ export function HeroCarousel({ slides, children }: { slides: HeroSlide[]; childr
   };
 
   const fade = reduced && !userChosePlay ? "" : "transition-opacity duration-1000 ease-in-out";
-  const btn = "grid h-9 w-9 place-items-center rounded-full bg-navy/70 text-navy-foreground hover:bg-navy focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-navy-foreground";
+  const btn = "grid h-9 w-9 place-items-center rounded-full bg-primary/70 text-primary-foreground hover:bg-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-foreground";
 
   return (
     <div
@@ -105,7 +105,7 @@ export function HeroCarousel({ slides, children }: { slides: HeroSlide[]; childr
       role="region"
       aria-roledescription="carousel"
       aria-label="Places in Israel"
-      className="relative overflow-hidden bg-navy"
+      className="relative overflow-hidden bg-primary"
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
       onFocus={() => setFocused(true)}
@@ -124,18 +124,18 @@ export function HeroCarousel({ slides, children }: { slides: HeroSlide[]; childr
           </div>
         ))}
       </div>
-      <div className="absolute inset-0 bg-gradient-to-r from-navy/90 via-navy/60 to-navy/10 max-md:bg-gradient-to-t max-md:from-navy/95 max-md:via-navy/65 max-md:to-navy/25" aria-hidden />
+      <div className="absolute inset-0 bg-gradient-to-r from-primary/90 via-primary/60 to-primary/10 max-md:bg-gradient-to-t max-md:from-primary/95 max-md:via-primary/65 max-md:to-primary/25" aria-hidden />
       <div className="relative mx-auto max-w-[90rem]">{children}</div>
       <div className="relative mx-auto mt-16 flex max-w-[90rem] flex-wrap items-end justify-between gap-3 px-6 pb-8 md:mt-24 md:px-12 md:pb-10">
-        <p className="min-w-0 max-w-xs text-[10px] font-normal leading-snug text-navy-foreground/60 md:text-xs" aria-live={autoplayOn ? "off" : "polite"}>
+        <p className="min-w-0 max-w-xs text-[10px] font-normal leading-snug text-primary-foreground/60 md:text-xs" aria-live={autoplayOn ? "off" : "polite"}>
           {slides[index]?.caption}
         </p>
         <div className="flex shrink-0 items-center gap-2">
           <button type="button" className={btn} onClick={() => go(index - 1)} aria-label="Previous place">‹</button>
           <div className="flex items-center gap-1" role="group" aria-label="Choose a place">
             {slides.map((s, i) => (
-              <button key={s.caption} type="button" onClick={() => go(i)} aria-label={`Show ${s.caption}`} aria-current={i === index} className="grid h-7 w-5 place-items-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-navy-foreground rounded">
-                <span className={`block h-2 rounded-full bg-navy-foreground transition-all ${i === index ? "w-5" : "w-2 opacity-50"}`} />
+              <button key={s.caption} type="button" onClick={() => go(i)} aria-label={`Show ${s.caption}`} aria-current={i === index} className="grid h-7 w-5 place-items-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-foreground rounded">
+                <span className={`block h-2 rounded-full bg-primary-foreground transition-all ${i === index ? "w-5" : "w-2 opacity-50"}`} />
               </button>
             ))}
           </div>
