@@ -55,11 +55,11 @@ describe("private Ben Gurion transfers", () => {
     expect(within(more).getAllByTestId("airport-destination-card").map((card) => card.dataset["destination"])).toEqual(["raanana", "herzliya", "netanya", "ashdod", "caesarea", "nazareth", "eilat", "other"]);
     expect(within(more).getAllByRole("img")).toHaveLength(8);
     expect(new Set(within(more).getAllByRole("img").map(image => image.getAttribute("src"))).size).toBe(8);
-    expect(within(more).getByRole("img", { name: airportTransferPhotos.other!.alt })).toHaveAttribute("src", airportTransferPhotos.other!.src);
+    expect(within(more).getByRole("img", { name: airportTransferPhotos["other"]!.alt })).toHaveAttribute("src", airportTransferPhotos["other"]!.src);
     expect(screen.getByTestId("airport-rate-terms")).toHaveTextContent(/weekday.*up to four passengers.*Night, weekend and holiday/i);
     expect(screen.getByRole("heading", { name: "Private airport transfers from Ben Gurion Airport" })).toBeInTheDocument();
     expect(screen.getByTestId("hub-header").parentElement?.tagName).toBe("MAIN");
-    expect(within(screen.getByTestId("hub-header")).getByTestId("guide-hero-media").querySelector("img")).toHaveAttribute("src", airportTransferPhotos.other!.src);
+    expect(within(screen.getByTestId("hub-header")).getByTestId("guide-hero-media").querySelector("img")).toHaveAttribute("src", airportTransferPhotos["other"]!.src);
     expect(screen.getByRole("link", { name: "Request a personal quote" })).toHaveClass("bg-navy");
   });
 
