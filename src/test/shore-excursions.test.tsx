@@ -128,7 +128,7 @@ describe("shore excursions", () => {
     const alternative = services.find((card) => card.dataset["productId"] === `shore-viator-${id}-jerusalem-bethlehem`)!;
     expect(alternative).toHaveTextContent("Bein Harim Tours");
     expect(alternative).not.toHaveTextContent(/From ILS/);
-    expect(within(alternative).getByRole("link", { name: /View on Viator/ })).toHaveAttribute("rel", "noopener noreferrer");
+    expect(within(alternative).getByRole("link", { name: /View on Viator/ })).toHaveAttribute("rel", "sponsored noopener noreferrer");
     const related = screen.getByRole("region", { name: "Useful guides for your day ashore" });
     expect(within(related).getAllByRole("article")).toHaveLength(6);
     expect(within(related).getAllByRole("img")).toHaveLength(6);

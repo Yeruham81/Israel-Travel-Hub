@@ -63,7 +63,7 @@ describe("Jerusalem content and reciprocal guide cluster", () => {
     expect(has("airport-jerusalem", travelGuidePaths.jerusalem)).toBe(true);
     expect(has("jerusalem", "/travel-blog/where-to-stay-in-jerusalem/")).toBe(true);
     expect(has("stay-jerusalem", travelGuidePaths.jerusalem)).toBe(true);
-    expect(has("jerusalemChurches", "/ashdod-shore-excursions/")).toBe(true);
+    expect(has("jerusalemChurches", "/shore-excursions/ashdod/")).toBe(true);
     expect(has("shore-ashdod", travelGuidePaths.jerusalemChurches)).toBe(true);
     expect(has("bethlehem", "/tours/bethlehem-jericho-jordan-river/")).toBe(true);
     expect(has("tour-bethlehem-jericho", travelGuidePaths.bethlehem)).toBe(true);

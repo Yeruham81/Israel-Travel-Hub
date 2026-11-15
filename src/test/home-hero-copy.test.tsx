@@ -195,7 +195,7 @@ describe("homepage marketing copy and service sections", () => {
     const portLinks = within(portList).getAllByRole("link");
     expect(portLinks).toHaveLength(2);
     expect(portLinks.map(link => link.getAttribute("href"))).toEqual([
-      "/ashdod-shore-excursions/", "/haifa-shore-excursions/",
+      "/shore-excursions/ashdod/", "/shore-excursions/haifa/",
     ]);
     expect(portLinks.map(link => link.textContent)).toEqual([
       expect.stringContaining("Explore Ashdod excursions"),

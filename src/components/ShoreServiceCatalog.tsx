@@ -102,7 +102,7 @@ export function ShoreServiceCatalog({ portId, filters, onFilterChange, itinerary
                       <div className="min-w-0">
                         {service.listedPrice ? <>
                           <p className="text-[0.7rem] text-muted-foreground">Published starting price · checked {service.listedPrice.checkedAt}</p>
-                          <p className="text-base font-bold text-foreground">US$${service.listedPrice.amount.toLocaleString("en-US")}</p>
+                          <p className="text-base font-bold text-foreground">US${service.listedPrice.amount.toLocaleString("en-US")}</p>
                           <p className="text-[0.7rem] text-muted-foreground">{service.listedPrice.basis === "per_group" ? `Per group · up to ${service.listedPrice.maxPartySize}` : "Per person"}</p>
                         </> : <p className="text-xs font-semibold text-muted-foreground">See current price</p>}
                       </div>

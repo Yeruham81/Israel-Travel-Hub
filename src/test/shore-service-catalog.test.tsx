@@ -119,7 +119,7 @@ describe("port service catalog", () => {
     expect(guided).not.toHaveTextContent("Sponsored link");
     const link = within(guided).getByRole("link", { name: /View on Viator/ });
     expect(link).toHaveAttribute("target", "_blank");
-    expect(link).toHaveAttribute("rel", "noopener noreferrer");
+    expect(link).toHaveAttribute("rel", "sponsored noopener noreferrer");
     fireEvent.click(link);
     expect(JSON.parse(localStorage.getItem("itt_outbound_clicks_v1")!)[0]).toMatchObject({ event: "outbound_click", pageId: "shore-haifa", productId: "shore-viator-haifa-jerusalem-bethlehem", offerId: "shore-viator-haifa-jerusalem-bethlehem" });
     for (const port of ["haifa", "ashdod"]) {
@@ -181,8 +181,8 @@ describe("port service catalog", () => {
     expect(card).toHaveTextContent("GetYourGuide");
     expect(card).not.toHaveTextContent(/From ILS|Sponsored link/);
     const link = within(card).getByRole("link", { name: /View on GetYourGuide/ });
-    expect(link).toHaveAttribute("href", "https://www.getyourguide.com/haifa-l2051/haifa-acre-and-rosh-anikra-for-cruises-with-licensed-guide-t482201/");
-    expect(link).toHaveAttribute("rel", "noopener noreferrer");
+    expect(link).toHaveAttribute("href", affiliateConfig["shore-gyg-haifa-akko"]?.trackingUrl);
+    expect(link).toHaveAttribute("rel", "sponsored noopener noreferrer");
     fireEvent.click(link);
     expect(JSON.parse(localStorage.getItem("itt_outbound_clicks_v1")!)[0]).toMatchObject({ pageId: "shore-haifa", productId: "shore-gyg-haifa-akko", offerId: "shore-gyg-haifa-akko" });
   });

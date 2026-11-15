@@ -182,7 +182,7 @@ describe("tours hub and SEO category pages", () => {
     }
     const cruise = screen.getByRole("region", { name: "Arriving in Israel by cruise ship?" });
     expect(within(cruise).queryAllByRole("img")).toHaveLength(0);
-    expect(within(cruise).getAllByRole("link").map(link => link.getAttribute("href"))).toEqual(["/haifa-shore-excursions/", "/ashdod-shore-excursions/"]);
+    expect(within(cruise).getAllByRole("link").map(link => link.getAttribute("href"))).toEqual(["/shore-excursions/haifa/", "/shore-excursions/ashdod/"]);
     expect(within(cruise).getByRole("navigation", { name: "Shore excursions by port" })).toBeInTheDocument();
     const faq = screen.getByRole("region", { name: "Frequently asked questions" });
     expect(within(faq).getAllByText("What's the difference between a guided tour and a private driver?")).toHaveLength(1);
