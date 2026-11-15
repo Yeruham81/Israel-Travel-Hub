@@ -162,11 +162,11 @@ describe("homepage marketing copy and service sections", () => {
     const attractionTiles = within(attractionsList).getAllByRole("link");
     expect(attractionTiles).toHaveLength(6);
     expect(attractionTiles.map(tile => tile.getAttribute("href"))).toEqual([
-      "/travel-blog/rosh-hanikra/",
-      "/travel-blog/mitzpe-ramon-crater/",
-      "/travel-blog/capernaum/",
-      "/travel-blog/mount-tabor/",
-      "/travel-blog/mount-of-olives/",
+      "/attractions/rosh-hanikra/",
+      "/attractions/mitzpe-ramon-crater/",
+      "/attractions/capernaum/",
+      "/attractions/mount-tabor/",
+      "/attractions/mount-of-olives/",
       "/travel-blog/eilat/",
     ]);
     expect(attractionTiles.map(tile => tile.textContent?.trim())).toEqual([

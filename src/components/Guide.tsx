@@ -1,6 +1,7 @@
 import { type LinkProps } from "@tanstack/react-router";
 import { SiteLink as Link } from "@/components/SiteLink";
-import { guideDirectory } from "@/data/travelGuides";
+import { guideDirectory, type GuideDirectoryEntry, type GuideTopicId } from "@/data/travelGuides";
+import { attractionHubCards } from "@/data/attractionsHub";
 import { uniqueGuideCardPhotos } from "@/lib/guide-card-photos";
 import { BookOpen } from "lucide-react";
 import type { ReactNode } from "react";
@@ -322,6 +323,19 @@ function GuideCardPhoto({ photo }: { photo?: { src: string; alt: string } | null
  * Six guide cards use two desktop rows of three; smaller groups use pairs.
  * Service/action links keep their own compact link-card presentation.
  */
+/** Related recommendations may lead to a practical guide or an individual attraction. */
+const relatedDirectory: GuideDirectoryEntry[] = [
+  ...guideDirectory,
+  ...attractionHubCards.map((card) => ({
+    id: `site-${card.id}`,
+    title: card.title,
+    description: card.description,
+    to: card.to,
+    topics: ["attractions", "destinations"] as GuideTopicId[],
+    photo: card.photo,
+  })),
+];
+
 export function RelatedLinks({ title = "Plan the rest of your trip", items, currentPath, illustrated = false, maxPhotoCards = 4 }: { title?: string; items: { label: string; to: LinkProps["to"]; note?: string }[]; currentPath?: string; illustrated?: boolean; maxPhotoCards?: number }) {
   // Use the same licensed, locally stored guide photographs as the taxi and Shabbat
   // recommendation cards. Only explicitly selected related links are illustrated.
@@ -336,10 +350,10 @@ export function RelatedLinks({ title = "Plan the rest of your trip", items, curr
       return true;
     });
     const withPhoto = unique.flatMap((item) => {
-      const guide = guideDirectory.find((entry) => normalized(String(entry.to)) === normalized(String(item.to)) && entry.photo);
+      const guide = relatedDirectory.find((entry) => normalized(String(entry.to)) === normalized(String(item.to)) && entry.photo);
       return guide ? [{ item, guide }] : [];
     });
-    const pictured = uniqueGuideCardPhotos(withPhoto.slice(0, maxPhotoCards), [guideDirectory.find(guide => normalized(String(guide.to)) === normalized(currentPath || ""))?.photo?.src || ""]);
+    const pictured = uniqueGuideCardPhotos(withPhoto.slice(0, maxPhotoCards), [relatedDirectory.find(guide => normalized(String(guide.to)) === normalized(currentPath || ""))?.photo?.src || ""]);
     const picturedPaths = new Set(pictured.map(({ item }) => normalized(String(item.to))));
     const remaining = unique.filter((item) => !picturedPaths.has(normalized(String(item.to))));
     if (!pictured.length && !remaining.length) return null;
@@ -372,11 +386,11 @@ export function RelatedLinks({ title = "Plan the rest of your trip", items, curr
   }
   const guideSection = /\bguides?\b/i.test(title);
   const normalized = (path: string) => path.replace(/\/+$/, "");
-  const current = currentPath ? guideDirectory.find((guide) => normalized(String(guide.to)) === normalized(currentPath)) : undefined;
+  const current = currentPath ? relatedDirectory.find((guide) => normalized(String(guide.to)) === normalized(currentPath)) : undefined;
   const titleWords = new Set((current?.title.toLowerCase().match(/[a-z]{4,}/g) || []).map((w) => w.replace(/s$/, "")).filter((w) => !["israel", "travel", "guide", "with", "from", "your", "what", "about", "best"].includes(w)));
   const guideItems = guideSection
     ? items.flatMap((item, order) => {
-        const guide = guideDirectory.find((candidate) => candidate.to === item.to && Boolean(candidate.photo));
+        const guide = relatedDirectory.find((candidate) => candidate.to === item.to && Boolean(candidate.photo));
         if (!guide || (current && guide.to === current.to)) return [];
         const strongTopics = guide.topics.filter((topic) => topic !== "tips" && current?.topics.includes(topic)).length;
         const words = new Set((guide.title.toLowerCase().match(/[a-z]{4,}/g) || []).map((w) => w.replace(/s$/, "")));
@@ -394,18 +408,18 @@ export function RelatedLinks({ title = "Plan the rest of your trip", items, curr
   // Only use this override when all six distinct guide routes are valid.
   const curatedSix = guideSection && items.length === 6
     ? items.flatMap((item, order) => {
-        const guide = guideDirectory.find((candidate) => candidate.to === item.to && Boolean(candidate.photo));
+        const guide = relatedDirectory.find((candidate) => candidate.to === item.to && Boolean(candidate.photo));
         return guide && (!current || guide.to !== current.to) ? [{ item, guide, order, score: 0 }] : [];
       }).filter(({ guide }, index, all) => all.findIndex((entry) => entry.guide.to === guide.to) === index)
     : [];
   const selectedGuides = curatedSix.length === 6 ? curatedSix : guideItems.length >= 2 ? guideItems : items.flatMap((item, order) => {
-    const guide = guideDirectory.find((candidate) => candidate.to === item.to && Boolean(candidate.photo));
+    const guide = relatedDirectory.find((candidate) => candidate.to === item.to && Boolean(candidate.photo));
     return guide && (!current || guide.to !== current.to) ? [{ item, guide, order, score: 0 }] : [];
   }).filter(({ guide }, index, all) => all.findIndex((entry) => entry.guide.to === guide.to) === index).slice(0, 6);
   // When an editorial list is odd, prefer a genuinely related additional guide.
   // If none qualifies, show the strongest complete pairs rather than inventing relevance.
   const supplemental = current && selectedGuides.length > 0 && selectedGuides.length % 2 === 1 && selectedGuides.length < 6
-    ? guideDirectory
+    ? relatedDirectory
         .filter((candidate) => String(candidate.to).startsWith("/travel-blog/") && candidate.photo && candidate.to !== current.to && !selectedGuides.some((entry) => entry.guide.to === candidate.to))
         .map((candidate) => {
           const shared = candidate.topics.filter((topic) => topic !== "tips" && current.topics.includes(topic));

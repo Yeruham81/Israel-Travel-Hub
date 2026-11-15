@@ -24,7 +24,7 @@ describe("Mount Zion and Mount of Olives route-first visitor pages", () => {
     expect(a.official.every(source => source.url.startsWith("https://"))).toBe(true);
     expect(JSON.stringify({a, e})).not.toMatch(oldDomain);
     const json=attractionMeta(id);
-    expect(json.links[0]?.href).toContain("/travel-blog/" + id + "/");
+    expect(json.links[0]?.href).toContain("/attractions/" + id + "/");
   });
 
   it("distinguishes the hills and their different access needs", () => {

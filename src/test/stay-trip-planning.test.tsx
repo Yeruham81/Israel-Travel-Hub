@@ -55,7 +55,7 @@ describe("hotel and neighborhood guide navigation", () => {
     expect(localLinks.map((item) => item.getAttribute("href"))).toEqual([
       "/travel-blog/museums-in-jerusalem/",
       "/travel-blog/shopping-in-jerusalem/",
-      "/travel-blog/old-city-jerusalem/",
+      "/attractions/old-city-jerusalem/",
       "/travel-blog/jerusalem-travel-guide/",
     ]);
     const travelLinks = within(screen.getByTestId("stay-trip-photo-grid")).getAllByRole("link");
