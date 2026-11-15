@@ -106,10 +106,10 @@ export function HeroCarousel({ slides, children }: { slides: HeroSlide[]; childr
         {slides.map((s, i) => (
           <div key={s.caption} role="group" aria-roledescription="slide" aria-label={`${i + 1} of ${n}: ${s.caption}`} aria-hidden={i !== index} className={`absolute inset-0 ${fade} ${i === index ? "opacity-100" : "opacity-0"}`}>
             {(mounted.has(i) || i === index) && (
-              <picture>
+              <picture className="absolute inset-0 block h-full w-full">
                 <source media="(max-width: 767px)" srcSet={s.srcSm} />
                 <source media="(max-width: 1800px)" srcSet={s.srcMedium} />
-                <img src={s.src} alt={s.alt} width={s.width ?? 1920} height={s.height ?? 872} fetchPriority={i === 0 ? "high" : "auto"} decoding="async" onLoad={(e) => onImgLoad(i, e.currentTarget)} onError={() => onImgError(i)} className="h-full w-full object-cover" style={{ objectPosition: s.pos ?? "center" }} />
+                <img src={s.src} alt={s.alt} width={s.width ?? 1920} height={s.height ?? 872} fetchPriority={i === 0 ? "high" : "auto"} decoding="async" onLoad={(e) => onImgLoad(i, e.currentTarget)} onError={() => onImgError(i)} className="absolute inset-0 h-full w-full object-cover" style={{ objectPosition: s.pos ?? "center" }} />
               </picture>
             )}
           </div>
