@@ -77,7 +77,7 @@ describe("owner voice throughout the public site", () => {
     expect(source("src/routes/airport-transfers.index.tsx")).toContain("Request a personal quote");
     expect(source("src/routes/terms-of-use.tsx")).toContain("contact me at {email}");
     expect(source("src/components/AirportRoutePage.tsx")).toContain("I confirm the full price before booking.");
-    expect(source("src/components/PortPage.tsx")).toContain("Request an itinerary from {port.name}");
-    expect(source("src/components/PortPage.tsx")).toContain("I will reply with an itinerary and quote for your review.");
+    expect(source("src/components/PortPage.tsx")).toContain("<ShoreQuoteForm");
+    expect(source("src/components/PortPage.tsx")).not.toContain("Request an itinerary from {port.name}");
   });
 });
