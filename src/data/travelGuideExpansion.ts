@@ -12,11 +12,11 @@ import sepulchre from "@/assets/guides/holy-sepulchre.jpg";
 const photos = {
   hall: { src: hall, alt: "Ben Gurion Airport Terminal 3 arrivals hall", credit: "GeorgeDement · CC BY-SA 2.0 · resized WebP", sourceUrl: "https://commons.wikimedia.org/wiki/File:Ben_Gurion_Airport_terminal_3_reception_hall.jpg", licenseUrl: "https://creativecommons.org/licenses/by-sa/2.0/" },
   jerusalem: { src: panorama, alt: "Jerusalem Old City skyline with the Dome of the Rock", credit: "Berthold Werner · public domain · resized WebP", sourceUrl: "https://commons.wikimedia.org/wiki/File:Jerusalem_Dome_of_the_rock_BW_14.JPG" },
-  market: { src: market, alt: "Agripas Street beside Mahane Yehuda Market in Jerusalem", sourceUrl: "https://www.israel-taxi.com/wp-content/uploads/2026/07/mahane_yehuda_jerusalem.webp", credit: "Photo from the publisher's travel image archive." },
+  market: { src: market, alt: "Agripas Street beside Mahane Yehuda Market in Jerusalem", sourceUrl: "", credit: "Photo from the publisher's travel image archive." },
   masada: { src: masada, alt: "Masada plateau and the surrounding Dead Sea desert", credit: "Godot13 · CC BY-SA 4.0 · resized WebP", sourceUrl: "https://commons.wikimedia.org/wiki/File:Israel-2013-Aerial_13-Masada.jpg", licenseUrl: "https://creativecommons.org/licenses/by-sa/4.0/" },
-  yardenit: { src: yardenit, alt: "Visitors at the designated baptism areas at Yardenit, south of the Sea of Galilee", sourceUrl: "https://www.israel-taxi.com/wp-content/uploads/2025/08/yardenit_baptismal_site_.jpg", credit: "Photo from the publisher's travel image archive." },
-  qasr: { src: qasr, alt: "A baptism gathering at Qasr el-Yahud on the lower Jordan near Jericho", sourceUrl: "https://www.israel-taxi.com/wp-content/uploads/2025/08/Baptism_at_Kaser_el_yahud_1.jpg", credit: "Photo from the publisher's travel image archive." },
-  sepulchre: { src: sepulchre, alt: "Courtyard and facade of the Church of the Holy Sepulchre in Jerusalem", sourceUrl: "https://www.israel-taxi.com/wp-content/uploads/2025/08/Church_of_the_Holy_Sepulchre_Jerusalem_israel.jpg", credit: "Photo from the publisher's travel image archive." },
+  yardenit: { src: yardenit, alt: "Visitors at the designated baptism areas at Yardenit, south of the Sea of Galilee", sourceUrl: "", credit: "Photo from the publisher's travel image archive." },
+  qasr: { src: qasr, alt: "A baptism gathering at Qasr el-Yahud on the lower Jordan near Jericho", sourceUrl: "", credit: "Photo from the publisher's travel image archive." },
+  sepulchre: { src: sepulchre, alt: "Courtyard and facade of the Church of the Holy Sepulchre in Jerusalem", sourceUrl: "", credit: "Photo from the publisher's travel image archive." },
 } satisfies Record<string, GuidePhoto>;
 
 export const expandedTravelGuides = {

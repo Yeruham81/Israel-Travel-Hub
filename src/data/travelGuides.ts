@@ -406,7 +406,7 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
     answer: "For a week in Israel, I like Saily\'s 3GB plan for $5.99 (valid 30 days) or Airalo\'s 3GB plan for $6 (valid 7 days). For a longer stay, 5GB starts at about $8 or 10GB at $11.50, both valid for 30 days. For heavy use, GigSky\'s 30-day unlimited plan is $56.24.",
     updatedAt: "2026-11-15",
     topics: ["connectivity", "tips"],
-    photo: { src: esimPhoto, alt: "A phone displaying an eSIM graphic in front of a blurred city background", sourceUrl: "https://www.israel-taxi.com/wp-content/uploads/2025/08/best_esim_for_israel.jpeg", credit: "Illustrative eSIM screen." },
+    photo: { src: esimPhoto, alt: "A phone displaying an eSIM graphic in front of a blurred city background", sourceUrl: "", credit: "Illustrative eSIM screen." },
     facts: [
       { label: "Short trip", text: "3GB · 30 days · $5.99" },
       { label: "Longer trip", text: "5GB · 30 days · $7.99" },

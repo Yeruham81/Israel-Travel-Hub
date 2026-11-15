@@ -109,7 +109,7 @@ export const jerusalemAreaGuides: NeighborhoodStayGuide[] = [
     summary: "Downtown puts Jaffa Road, the light rail and evening cafés between the Old City and Mahane Yehuda. Some pedestrian streets require a short walk from your taxi drop-off.",
     bestFor: "First visits & exploring without a car", suits: ["first-visit", "car-free", "nightlife"], priceLevel: "Budget to upscale",
     watch: "Busy pedestrian streets can mean evening noise and a walk from the taxi drop-off.",
-    photo: { src: downtownPhoto, alt: "Pedestrians and light-rail tracks on Jaffa Road in central Jerusalem", sourceUrl: "https://www.israel-taxi.com/wp-content/uploads/2026/07/Jerusalem_city_center_pedestrian_mall.webp" },
+    photo: { src: downtownPhoto, alt: "Pedestrians and light-rail tracks on Jaffa Road in central Jerusalem", sourceUrl: "" },
     map: { lat: 31.7816, lon: 35.2199, bounds: [35.2105, 31.7765, 35.2295, 31.7875], reference: "Zion Square / Jaffa Road" },
     overview: [
       "Downtown is the modern center west of the Old City, around Jaffa Road, Zion Square, Ben Yehuda Street and the lanes of Nahalat Shiva. It is a separate area from the Old City: you stay outside the walls, with the historic sights reachable on foot rather than on your doorstep.",
@@ -141,7 +141,7 @@ export const jerusalemAreaGuides: NeighborhoodStayGuide[] = [
     summary: "Mamilla is close to Jaffa Gate and major luxury hotels; King David Street extends farther south, so the exact property changes the walk to the Old City.",
     bestFor: "Luxury stays & easy Old City access", suits: ["first-visit", "luxury", "family"], priceLevel: "Upscale to luxury",
     watch: "Hotel and restaurant costs are generally higher; Old City views depend on the room category.",
-    photo: { src: mamillaPhoto, alt: "Mamilla avenue and the surrounding hotel district seen from Jerusalem's Old City", sourceUrl: "https://www.israel-taxi.com/wp-content/uploads/2026/07/mamilla_jerusalem_view_from_old_city.webp" },
+    photo: { src: mamillaPhoto, alt: "Mamilla avenue and the surrounding hotel district seen from Jerusalem's Old City", sourceUrl: "" },
     map: { lat: 31.7765, lon: 35.2254, bounds: [35.217, 31.7700, 35.233, 31.7810], reference: "Mamilla Avenue / King David Street" },
     overview: [
       "Mamilla and the northern part of King David Street form a hotel district immediately west of the Old City. Mamilla's pedestrian avenue leads toward Jaffa Gate, while King Solomon Street and King David Street connect some of Jerusalem's best-known luxury properties.",
@@ -173,7 +173,7 @@ export const jerusalemAreaGuides: NeighborhoodStayGuide[] = [
     summary: "Old City guesthouses put historic sites close by, but stairs, uneven lanes and restrictions on vehicle access make your nearest gate and luggage route essential.",
     bestFor: "Pilgrimage, history & atmosphere", suits: ["heritage", "first-visit", "views"], priceLevel: "Simple guesthouses to heritage hotels",
     watch: "Steps, uneven paving and restricted vehicle access can make even short arrivals demanding.",
-    photo: { src: oldCityPhoto, alt: "Stone buildings and a cobbled street inside Jerusalem's Old City", sourceUrl: "https://www.israel-taxi.com/wp-content/uploads/2026/07/Jerusalem_Old_City_street.webp" },
+    photo: { src: oldCityPhoto, alt: "Stone buildings and a cobbled street inside Jerusalem's Old City", sourceUrl: "" },
     map: { lat: 31.7767, lon: 35.2332, bounds: [35.2259, 31.7709, 35.2413, 31.7833], reference: "Old City, inside the walls" },
     overview: [
       "The Old City is the most immersive option if Jerusalem's history and religious sites are the focus of your visit. Its Christian, Armenian, Jewish and Muslim quarters contain sacred places, market lanes and residential streets within the same walls. Staying here lets you experience the lanes before and after the busiest sightseeing hours.",
@@ -205,7 +205,7 @@ export const jerusalemAreaGuides: NeighborhoodStayGuide[] = [
     summary: "Rooms beside Mahane Yehuda Market can be affected by morning deliveries and late bars; residential lanes inside Nachlaot provide a different setting.",
     bestFor: "Food lovers, nightlife & local character", suits: ["food", "nightlife", "car-free", "long-stay"], priceLevel: "Budget to upscale",
     watch: "Market deliveries and bars can be noisy; the atmosphere changes substantially on Shabbat.",
-    photo: { src: marketPhoto, alt: "Agripas Street beside Mahane Yehuda Market in Jerusalem", sourceUrl: "https://www.israel-taxi.com/wp-content/uploads/2026/07/mahane_yehuda_jerusalem.webp" },
+    photo: { src: marketPhoto, alt: "Agripas Street beside Mahane Yehuda Market in Jerusalem", sourceUrl: "" },
     map: { lat: 31.7845, lon: 35.211, bounds: [35.201, 31.7777, 35.2198, 31.7905], reference: "Mahane Yehuda Market / Nachlaot" },
     overview: [
       "Mahane Yehuda Market sits around Jaffa Road and Agripas Street, immediately west of Downtown. Nachlaot extends into the historic lanes alongside it, with stone houses, small courtyards and synagogues. The two names often appear together in hotel descriptions, but the exact street makes a considerable difference.",
@@ -269,7 +269,7 @@ export const jerusalemAreaGuides: NeighborhoodStayGuide[] = [
     summary: "The German Colony's Emek Refaim cafés and Baka's residential streets suit longer stays, but southern Baka adds more travel to Old City sights.",
     bestFor: "Families, quieter evenings & longer stays", suits: ["quiet", "family", "long-stay", "luxury"], priceLevel: "Midrange to luxury",
     watch: "You are farther from the Old City; check current street works and the hotel's recommended arrival route.",
-    photo: { src: germanColonyPhoto, alt: "A pavement café and historic stone buildings on Emek Refaim in the German Colony", sourceUrl: "https://www.israel-taxi.com/wp-content/uploads/2026/07/emek_refaim_street_jerusalem.webp" },
+    photo: { src: germanColonyPhoto, alt: "A pavement café and historic stone buildings on Emek Refaim in the German Colony", sourceUrl: "" },
     map: { lat: 31.7655, lon: 35.219, bounds: [35.208, 31.7515, 35.230, 31.777], reference: "Emek Refaim / German Colony and Baka" },
     overview: [
       "The German Colony and Baka are neighboring residential areas south of central Jerusalem. Emek Refaim is the German Colony's main café and shopping street, while Baka extends farther south and east around Bethlehem Road. A hotel at the northern end of the German Colony has a different relationship to the Old City from a suite deep inside Baka.",
@@ -304,7 +304,7 @@ export const telAvivAreaGuides: NeighborhoodStayGuide[] = [
     summary: "Gordon and Frishman beaches are near large HaYarkon Street hotels and smaller inland properties. A seaside address does not guarantee a sea-view room.",
     bestFor: "Beach days & a first Tel Aviv visit", suits: ["beach", "first-visit", "views", "luxury"], priceLevel: "Mid-range to luxury",
     watch: "A beachfront address does not guarantee a sea-facing room or a private beach.",
-    photo: { src: telAvivBeachfrontPhoto, alt: "Tel Aviv's beachfront hotels and Mediterranean promenade", sourceUrl: "https://www.israel-taxi.com/wp-content/uploads/2025/08/Tel_Aviv_Promenade1.jpg" },
+    photo: { src: telAvivBeachfrontPhoto, alt: "Tel Aviv's beachfront hotels and Mediterranean promenade", sourceUrl: "" },
     map: { lat: 32.0821, lon: 34.7674, bounds: [34.759, 32.069, 34.775, 32.0915], reference: "Gordon / Frishman beach district" },
     overview: [
       "Tel Aviv's central beachfront follows the promenade beside HaYarkon Street, with Gordon, Frishman and Bograshov beaches providing useful landmarks. This guide focuses on that central strip: the port to the north and Jaffa to the south offer different bases and have their own guides.",
@@ -336,7 +336,7 @@ export const telAvivAreaGuides: NeighborhoodStayGuide[] = [
     summary: "Dizengoff Square has central cafés, boutiques and city walks; the sea is farther west. A hotel farther along Dizengoff Street may be well away from the square.",
     bestFor: "First visits, cafés & exploring on foot", suits: ["first-visit", "car-free", "nightlife", "history"], priceLevel: "Mid-range to upscale",
     watch: "Dizengoff Street is long. Check the address rather than assuming every hotel is beside the square.",
-    photo: { src: dizengoffPhoto, alt: "The fountain and pedestrian plaza at Dizengoff Square in Tel Aviv", sourceUrl: "https://www.israel-taxi.com/wp-content/uploads/2026/07/dizengoff_square_tel_aviv.webp" },
+    photo: { src: dizengoffPhoto, alt: "The fountain and pedestrian plaza at Dizengoff Square in Tel Aviv", sourceUrl: "" },
     map: { lat: 32.0773, lon: 34.7737, bounds: [34.7664, 32.0705, 34.783, 32.0858], reference: "Dizengoff Square" },
     overview: [
       "This area centers on Dizengoff Square and the surrounding streets, including the nearby stretch of Dizengoff Street, Frishman and Bograshov. It is a useful introduction to central Tel Aviv, with neighborhood cafés, restaurants and architecture woven into everyday city life.",
@@ -368,7 +368,7 @@ export const telAvivAreaGuides: NeighborhoodStayGuide[] = [
     summary: "The Old North combines residential streets, northern beaches and the port, but hotels near the busy waterfront feel different from quiet side streets.",
     bestFor: "Northern beaches, parks & a slower pace", suits: ["beach", "family", "quiet", "long-stay"], priceLevel: "Mid-range to upscale",
     watch: "The port can be lively; a quiet residential side street and a waterfront hotel offer different evenings.",
-    photo: { src: oldNorthPhoto, alt: "Aerial view of Tel Aviv Port and the Yarkon River meeting the Mediterranean", sourceUrl: "https://www.israel-taxi.com/wp-content/uploads/2025/08/tel-aviv_port_aerial.jpg" },
+    photo: { src: oldNorthPhoto, alt: "Aerial view of Tel Aviv Port and the Yarkon River meeting the Mediterranean", sourceUrl: "" },
     map: { lat: 32.0936, lon: 34.7777, bounds: [34.768, 32.083, 34.793, 32.1045], reference: "Old North / Tel Aviv Port district" },
     overview: [
       "The Old North stretches through residential streets north of the central city toward the Yarkon River. Tel Aviv Port, known locally as the Namal, sits on its coastal edge. These are adjoining places rather than one compact hotel block, so the street you choose affects both the atmosphere and your daily walks.",
@@ -400,7 +400,7 @@ export const telAvivAreaGuides: NeighborhoodStayGuide[] = [
     summary: "Neve Tzedek's historic core is low-rise and walkable; properties listed on Lilienblum or Herzl can be on its busier edges rather than within the lanes.",
     bestFor: "Couples, historic streets & boutique stays", suits: ["history", "quiet", "food", "luxury"], priceLevel: "Mid-range to luxury",
     watch: "Properties on Lilienblum or Herzl may be on the edge of Neve Tzedek rather than in its historic lanes.",
-    photo: { src: neveTzedekPhoto, alt: "Historic buildings and gardens in Neve Tzedek", sourceUrl: "https://www.israel-taxi.com/wp-content/uploads/2025/08/Neve_Tzedek_Tel_Aviv_1.jpg" },
+    photo: { src: neveTzedekPhoto, alt: "Historic buildings and gardens in Neve Tzedek", sourceUrl: "" },
     map: { lat: 32.061, lon: 34.7659, bounds: [34.756, 32.053, 34.775, 32.069], reference: "Shabazi / Suzanne Dellal district" },
     overview: [
       "Neve Tzedek is one of the city's earliest neighborhoods, with small historic houses, narrow lanes and Shabazi Street at its heart. Its scale feels different from the hotel towers on the beachfront and the busier commercial streets of central Tel Aviv.",
@@ -432,7 +432,7 @@ export const telAvivAreaGuides: NeighborhoodStayGuide[] = [
     summary: "Old Jaffa's historic hill brings slopes and stone lanes; the flea-market area puts evening cafés closer but may be noisier. The two are distinct hotel bases.",
     bestFor: "Historic atmosphere, galleries & market evenings", suits: ["history", "food", "views", "luxury"], priceLevel: "Mid-range to luxury",
     watch: "Old Jaffa has slopes and steps; the flea-market streets can be lively at night.",
-    photo: { src: jaffaPhoto, alt: "Aerial view of Old Jaffa, its port and the Mediterranean coast", sourceUrl: "https://www.israel-taxi.com/wp-content/uploads/2025/08/jaffa_panorama2.jpg" },
+    photo: { src: jaffaPhoto, alt: "Aerial view of Old Jaffa, its port and the Mediterranean coast", sourceUrl: "" },
     map: { lat: 32.0538, lon: 34.7523, bounds: [34.743, 32.0445, 34.766, 32.064], reference: "Old Jaffa / flea-market district" },
     overview: [
       "Jaffa sits at the southern end of the Tel Aviv coastline, with an old port, stone lanes and a historic hill above the sea. The adjoining flea-market district adds shops, cafés and evening restaurants around the streets inland from the Clock Tower.",
@@ -464,7 +464,7 @@ export const telAvivAreaGuides: NeighborhoodStayGuide[] = [
     summary: "Street art, neighborhood bars and Levinsky Market suit visitors who enjoy an active, less polished city base. Small hotels and independent stays are the main accommodation style.",
     bestFor: "Nightlife, food & an independent city stay", suits: ["nightlife", "food", "long-stay"], priceLevel: "Budget to mid-range; dates vary",
     watch: "Bars, workshops and building activity make the exact block and room orientation important.",
-    photo: { src: florentinPhoto, alt: "Street cafés and apartment buildings in Florentin, Tel Aviv", sourceUrl: "https://www.israel-taxi.com/wp-content/uploads/2025/08/florentin_tel_aviv1.jpg" },
+    photo: { src: florentinPhoto, alt: "Street cafés and apartment buildings in Florentin, Tel Aviv", sourceUrl: "" },
     map: { lat: 32.0557, lon: 34.7695, bounds: [34.76, 32.0485, 34.781, 32.063], reference: "Florentin / Levinsky Market district" },
     overview: [
       "Florentin is a southern Tel Aviv neighborhood of apartment buildings, workshops, cafés, bars and changing street art. The Levinsky Market streets add food shops and places to eat along its northern side. The appeal is everyday city life rather than a polished hotel district.",
@@ -496,7 +496,7 @@ export const telAvivAreaGuides: NeighborhoodStayGuide[] = [
     summary: "Kerem HaTeimanim's residential lanes sit beside Carmel Market. Market-edge and Allenby listings can mean busier mornings and nights than the quarter's interior.",
     bestFor: "Food, market mornings & beach access", suits: ["food", "beach", "car-free", "history"], priceLevel: "Mid-range to upscale",
     watch: "Market-edge and Allenby addresses can be busy; nearby listings are not always inside the residential quarter.",
-    photo: { src: keremPhoto, alt: "A narrow residential street in Kerem HaTeimanim, Tel Aviv", sourceUrl: "https://www.israel-taxi.com/wp-content/uploads/2025/08/Kerem_Hateimanim_tel_aviv1.jpg" },
+    photo: { src: keremPhoto, alt: "A narrow residential street in Kerem HaTeimanim, Tel Aviv", sourceUrl: "" },
     map: { lat: 32.069, lon: 34.7672, bounds: [34.759, 32.0635, 34.777, 32.0765], reference: "Kerem HaTeimanim / Carmel Market" },
     overview: [
       "Kerem HaTeimanim, the Yemenite Quarter, occupies small streets between the Carmel Market area and the coast. Its low-rise buildings, residential lanes and places serving Yemenite food create a distinct setting close to several of Tel Aviv's busiest visitor routes.",
@@ -528,7 +528,7 @@ export const telAvivAreaGuides: NeighborhoodStayGuide[] = [
     summary: "Rothschild's southern end connects toward Neve Tzedek and Florentin; its northern end is nearer Habima. Both are inland, with different walks to the coast.",
     bestFor: "Architecture, restaurants & a stylish city stay", suits: ["history", "food", "nightlife", "luxury", "car-free"], priceLevel: "Mid-range to luxury",
     watch: "Rothschild is a long inland boulevard; check which end you are booking and the walk to the beach.",
-    photo: { src: rothschildPhoto, alt: "The shaded central promenade and trees of Rothschild Boulevard in Tel Aviv", sourceUrl: "https://www.israel-taxi.com/wp-content/uploads/2025/08/Rothschild_Boulevard_Tel_Aviv1.jpg" },
+    photo: { src: rothschildPhoto, alt: "The shaded central promenade and trees of Rothschild Boulevard in Tel Aviv", sourceUrl: "" },
     map: { lat: 32.0643, lon: 34.7754, bounds: [34.767, 32.0555, 34.7855, 32.0755], reference: "Rothschild Boulevard / White City district" },
     overview: [
       "Rothschild Boulevard is a long, tree-lined route through the central and southern city, with a central walking strip and buildings from different periods of Tel Aviv's development. The surrounding White City streets mix historic architecture, offices, restaurants and residential life.",
@@ -748,11 +748,11 @@ export interface HotelCategoryGuide {
 }
 
 export const deadSeaPhotos = {
-  beach: { src: deadSeaBeachPhoto, alt: "Palm-lined Ein Bokek promenade, maintained beach and turquoise Dead Sea", sourceUrl: "https://www.israel-taxi.com/wp-content/uploads/2025/08/dead_sea_beach_1.jpg", label: "Ein Bokek beach and promenade" },
-  pool: { src: deadSeaPoolPhoto, alt: "Outdoor hotel swimming pools and sun loungers with the Dead Sea beyond", sourceUrl: "https://www.israel-taxi.com/wp-content/uploads/2026/01/Dead_Sea_61.jpg", label: "Dead Sea resort pool scene" },
-  landscape: { src: deadSeaLandscapePhoto, alt: "Aerial view of the southern Dead Sea hotel district and turquoise water", sourceUrl: "https://www.israel-taxi.com/wp-content/uploads/2026/02/jerusalem_to_the_dead_sea.jpg", label: "Southern Dead Sea hotel district" },
-  sunbeds: { src: deadSeaSunbedsPhoto, alt: "Shaded sun loungers beside a maintained Dead Sea beach and desert cliffs", sourceUrl: "https://www.israel-taxi.com/wp-content/uploads/2025/08/dead_sea_beach_sunbeds_.jpg", label: "Dead Sea beach and shaded loungers" },
-  einGedi: { src: einGediStayPhoto, alt: "A courtyard and low-rise hostel buildings beneath the desert cliffs at Ein Gedi", sourceUrl: "https://www.israel-taxi.com/wp-content/uploads/2026/01/dead_sea_hostel.jpg", label: "Ein Gedi hostel setting" },
+  beach: { src: deadSeaBeachPhoto, alt: "Palm-lined Ein Bokek promenade, maintained beach and turquoise Dead Sea", sourceUrl: "", label: "Ein Bokek beach and promenade" },
+  pool: { src: deadSeaPoolPhoto, alt: "Outdoor hotel swimming pools and sun loungers with the Dead Sea beyond", sourceUrl: "", label: "Dead Sea resort pool scene" },
+  landscape: { src: deadSeaLandscapePhoto, alt: "Aerial view of the southern Dead Sea hotel district and turquoise water", sourceUrl: "", label: "Southern Dead Sea hotel district" },
+  sunbeds: { src: deadSeaSunbedsPhoto, alt: "Shaded sun loungers beside a maintained Dead Sea beach and desert cliffs", sourceUrl: "", label: "Dead Sea beach and shaded loungers" },
+  einGedi: { src: einGediStayPhoto, alt: "A courtyard and low-rise hostel buildings beneath the desert cliffs at Ein Gedi", sourceUrl: "", label: "Ein Gedi hostel setting" },
 } satisfies Record<string, StayGuidePhoto>;
 
 export const deadSeaStayGuide: HotelStayDestination = {
@@ -814,10 +814,10 @@ export const deadSeaStayGuide: HotelStayDestination = {
 };
 
 export const tiberiasPhotos = {
-  waterfront: { src: tiberiasWaterfrontPhoto, alt: "Tiberias waterfront, marina and hotels beside the Sea of Galilee", sourceUrl: "https://www.israel-taxi.com/wp-content/uploads/2026/01/best_hotels_in_tiberias-1.webp", label: "Tiberias waterfront and marina" },
-  heritage: { src: tiberiasHeritagePhoto, alt: "Historic basalt-stone buildings and palm trees at The Scots Hotel in Tiberias", sourceUrl: "https://www.israel-taxi.com/wp-content/uploads/2026/01/The_Scots_Hotel_Tiberias.webp", label: "The Scots Hotel — historic buildings" },
-  central: { src: tiberiasCentralPhoto, alt: "Caesar Premier Tiberias and the central promenade seen from the lake", sourceUrl: "https://www.israel-taxi.com/wp-content/uploads/2026/01/caesar_premier_hotel_tiberias.jpg", label: "Caesar Premier and the Tiberias promenade" },
-  sunrise: { src: galileeSunrisePhoto, alt: "Sunrise over the Sea of Galilee with a boat on the water", sourceUrl: "https://www.israel-taxi.com/wp-content/uploads/2026/01/Israel_Sunrise_over_Sea_of_Galilee.jpg", label: "Sea of Galilee sunrise — destination scene" },
+  waterfront: { src: tiberiasWaterfrontPhoto, alt: "Tiberias waterfront, marina and hotels beside the Sea of Galilee", sourceUrl: "", label: "Tiberias waterfront and marina" },
+  heritage: { src: tiberiasHeritagePhoto, alt: "Historic basalt-stone buildings and palm trees at The Scots Hotel in Tiberias", sourceUrl: "", label: "The Scots Hotel — historic buildings" },
+  central: { src: tiberiasCentralPhoto, alt: "Caesar Premier Tiberias and the central promenade seen from the lake", sourceUrl: "", label: "Caesar Premier and the Tiberias promenade" },
+  sunrise: { src: galileeSunrisePhoto, alt: "Sunrise over the Sea of Galilee with a boat on the water", sourceUrl: "", label: "Sea of Galilee sunrise — destination scene" },
 } satisfies Record<string, StayGuidePhoto>;
 
 export const tiberiasStayGuide: HotelStayDestination = {
@@ -956,11 +956,11 @@ const tiberiasCategoryGuides: HotelCategoryGuide[] = [
 ];
 
 export const haifaPhotos = {
-  panorama: { src: haifaPanoramaPhoto, alt: "Haifa Bay, the Bahá'í Gardens and the lower city seen from Mount Carmel", sourceUrl: "https://www.israel-taxi.com/wp-content/uploads/2026/01/best_hotels_in_haifa_.webp", label: "Haifa Bay and the Bahá'í Gardens — city panorama" },
-  botanica: { src: haifaBotanicaPhoto, alt: "Botanica Hotel's rooftop plunge pool overlooking the Bahá'í Gardens at dusk", sourceUrl: "https://www.israel-taxi.com/wp-content/uploads/2026/01/hotel_botanica_haifa.webp", label: "Hotel Botanica — rooftop plunge pool" },
-  colony: { src: haifaColonyPhoto, alt: "Preserved stone facade and balconies of The Colony Hotel in Haifa", sourceUrl: "https://www.israel-taxi.com/wp-content/uploads/2026/01/colony_hotel_haifa.webp", label: "The Colony Hotel — German Colony exterior" },
-  leonardo: { src: haifaLeonardoPhoto, alt: "Entrance of Leonardo Plaza Haifa beside the beachfront", sourceUrl: "https://www.israel-taxi.com/wp-content/uploads/2026/01/leonardo_plaza_haifa.jpg", label: "Leonardo Plaza Haifa — entrance" },
-  danCarmel: { src: haifaDanCarmelPhoto, alt: "Dan Carmel Haifa hotel building and balconies on Mount Carmel", sourceUrl: "https://www.israel-taxi.com/wp-content/uploads/2026/01/Dan_Carmel_hotel_haifa.jpg", label: "Dan Carmel Haifa — hotel exterior" },
+  panorama: { src: haifaPanoramaPhoto, alt: "Haifa Bay, the Bahá'í Gardens and the lower city seen from Mount Carmel", sourceUrl: "", label: "Haifa Bay and the Bahá'í Gardens — city panorama" },
+  botanica: { src: haifaBotanicaPhoto, alt: "Botanica Hotel's rooftop plunge pool overlooking the Bahá'í Gardens at dusk", sourceUrl: "", label: "Hotel Botanica — rooftop plunge pool" },
+  colony: { src: haifaColonyPhoto, alt: "Preserved stone facade and balconies of The Colony Hotel in Haifa", sourceUrl: "", label: "The Colony Hotel — German Colony exterior" },
+  leonardo: { src: haifaLeonardoPhoto, alt: "Entrance of Leonardo Plaza Haifa beside the beachfront", sourceUrl: "", label: "Leonardo Plaza Haifa — entrance" },
+  danCarmel: { src: haifaDanCarmelPhoto, alt: "Dan Carmel Haifa hotel building and balconies on Mount Carmel", sourceUrl: "", label: "Dan Carmel Haifa — hotel exterior" },
 } satisfies Record<string, StayGuidePhoto>;
 
 export const haifaStayGuide: HotelStayDestination = {
@@ -1114,13 +1114,13 @@ export const accommodationDestinations: AccommodationDestinationCard[] = [
     id: "jerusalem", title: "Hotels in Jerusalem",
     text: "Ancient lanes, lively markets or leafy streets? Discover the neighborhoods and hotels that bring your Jerusalem trip to life.",
     cta: "Explore Jerusalem hotels", to: cityStayGuides.jerusalem.path as NonNullable<LinkProps["to"]>,
-    photo: { src: oldCityPhoto, alt: "Stone buildings and a cobbled street inside Jerusalem's Old City", sourceUrl: "https://www.israel-taxi.com/wp-content/uploads/2026/07/Jerusalem_Old_City_street.webp", label: "Jerusalem — Old City streets" },
+    photo: { src: oldCityPhoto, alt: "Stone buildings and a cobbled street inside Jerusalem's Old City", sourceUrl: "", label: "Jerusalem — Old City streets" },
   },
   {
     id: "telaviv", title: "Hotels in Tel Aviv",
     text: "Beachfront mornings, Jaffa charm or a stylish city hideaway? Find the neighborhood and hotel for the Tel Aviv you want to experience.",
     cta: "Explore Tel Aviv hotels", to: cityStayGuides.telaviv.path as NonNullable<LinkProps["to"]>,
-    photo: { src: telAvivBeachfrontPhoto, alt: "Tel Aviv's beachfront hotels and Mediterranean promenade", sourceUrl: "https://www.israel-taxi.com/wp-content/uploads/2025/08/Tel_Aviv_Promenade1.jpg", label: "Tel Aviv — beachfront hotels and promenade" },
+    photo: { src: telAvivBeachfrontPhoto, alt: "Tel Aviv's beachfront hotels and Mediterranean promenade", sourceUrl: "", label: "Tel Aviv — beachfront hotels and promenade" },
   },
   {
     id: "haifa", title: "Hotels in Haifa",
@@ -1141,7 +1141,7 @@ export const accommodationDestinations: AccommodationDestinationCard[] = [
     id: "eilat", title: "Hotels in Eilat",
     text: "Red Sea beaches, resort escapes and desert scenery. My Eilat guide's arrival and stay section explains the main hotel areas — it is area guidance, not an Eilat hotel comparison.",
     cta: "Explore Eilat Hotels", to: "/travel-blog/eilat/", hash: "arrival-stay",
-    photo: { src: eilatWaterfrontPhoto, alt: "Hotels, palm trees and the waterfront beside the Red Sea in Eilat", sourceUrl: "https://www.israel-taxi.com/wp-content/uploads/2025/08/eilat_.jpg", label: "Eilat — Red Sea waterfront" },
+    photo: { src: eilatWaterfrontPhoto, alt: "Hotels, palm trees and the waterfront beside the Red Sea in Eilat", sourceUrl: "", label: "Eilat — Red Sea waterfront" },
   },
 ];
 

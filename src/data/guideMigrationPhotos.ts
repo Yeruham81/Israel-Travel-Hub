@@ -54,130 +54,130 @@ export const migrationPhotos = {
   "best-time-to-visit-israel": {
     "src": image0,
     "alt": "A busy Mediterranean beach and promenade in Israel",
-    "sourceUrl": "https://www.israel-taxi.com/wp-content/uploads/2025/08/best_time_to_visit_israel.jpg"
+    "sourceUrl": ""
   },
   "what-to-eat-in-israel": {
     "src": image1,
     "alt": "Flatbread, salads and savoury dishes served at a shared meal",
-    "sourceUrl": "https://www.israel-taxi.com/wp-content/uploads/2025/08/what_to_eat_in_israel_.jpg"
+    "sourceUrl": ""
   },
   "calendar-of-events": {
     "src": image2,
     "alt": "A paper calendar with highlighted dates",
-    "sourceUrl": "https://www.israel-taxi.com/wp-content/uploads/2025/08/Israel_calendar.jpg"
+    "sourceUrl": ""
   },
   "beaches-in-tel-aviv": {
     "src": image3,
     "alt": "Tel Aviv beachfront and Mediterranean shoreline",
-    "sourceUrl": "https://www.israel-taxi.com/wp-content/uploads/2025/08/The_best_beaches_in_tel_aviv_1.jpg"
+    "sourceUrl": ""
   },
   "museums-in-tel-aviv": {
     "src": image4,
     "alt": "The geometric exterior of the Tel Aviv Museum of Art",
-    "sourceUrl": "https://www.israel-taxi.com/wp-content/uploads/2025/08/Tel_Aviv_Museum1.jpg",
+    "sourceUrl": "",
     "credit": "© www.artursalisz.com"
   },
   "museums-in-haifa": {
     "src": image5,
     "alt": "The Haifa Museum of Art building",
-    "sourceUrl": "https://www.israel-taxi.com/wp-content/uploads/2025/08/Haifa_Museum_of_Art.jpg"
+    "sourceUrl": ""
   },
   "tel-megiddo": {
     "src": image6,
     "alt": "Ancient stone remains and palm trees at Tel Megiddo",
-    "sourceUrl": "https://www.israel-taxi.com/wp-content/uploads/2025/08/Tel-megiddo-ruins_.jpg"
+    "sourceUrl": ""
   },
   "mount-precipice": {
     "src": image7,
     "alt": "A viewpoint above the Jezreel Valley at Mount Precipice",
-    "sourceUrl": "https://www.israel-taxi.com/wp-content/uploads/2025/08/mount_precipice_.jpg"
+    "sourceUrl": ""
   },
   "basilica-of-the-annunciation": {
     "src": image8,
     "alt": "Basilica of the Annunciation above the buildings of Nazareth",
-    "sourceUrl": "https://www.israel-taxi.com/wp-content/uploads/2025/08/Basilica-of-Annunciation-nazareth_.jpg"
+    "sourceUrl": ""
   },
   "magdala": {
     "src": image9,
     "alt": "The modern Duc In Altum prayer center at Magdala",
-    "sourceUrl": "https://www.israel-taxi.com/wp-content/uploads/2025/08/magdala_in_israel.jpg"
+    "sourceUrl": ""
   },
   "jerusalem-to-bethlehem": {
     "src": image10,
     "alt": "The Church of the Nativity and Manger Square in Bethlehem",
-    "sourceUrl": "https://www.israel-taxi.com/wp-content/uploads/2025/08/Church_of_the_Nativity_Bethlehem.jpg"
+    "sourceUrl": ""
   },
   "jerusalem-to-the-dead-sea": {
     "src": image11,
     "alt": "A road curving through the desert beside the Dead Sea",
-    "sourceUrl": "https://www.israel-taxi.com/wp-content/uploads/2025/08/road-to-the-dead-sea.jpg"
+    "sourceUrl": ""
   },
   "food-1": {
     "src": image12,
     "alt": "A shawarma spit beside a cooking surface",
-    "sourceUrl": "https://www.israel-taxi.com/wp-content/uploads/2025/08/Shawarma_Israel_1.jpg",
+    "sourceUrl": "",
     "credit": "© Vyacheslav Argenberg"
   },
   "food-2": {
     "src": image13,
     "alt": "Falafel balls with herbs",
-    "sourceUrl": "https://www.israel-taxi.com/wp-content/uploads/2025/08/falafel.jpeg"
+    "sourceUrl": ""
   },
   "food-3": {
     "src": image14,
     "alt": "Jerusalem mixed grill served on a plate",
-    "sourceUrl": "https://www.israel-taxi.com/wp-content/uploads/2025/08/Meorav_yerushalmi_1.jpeg"
+    "sourceUrl": ""
   },
   "food-4": {
     "src": image15,
     "alt": "Hummus with chickpeas, herbs and olive oil",
-    "sourceUrl": "https://www.israel-taxi.com/wp-content/uploads/2025/08/hummus.jpg",
+    "sourceUrl": "",
     "credit": "Photo: Daniel Zelazo"
   },
   "food-5": {
     "src": image16,
     "alt": "Shakshuka with eggs in a tomato sauce",
-    "sourceUrl": "https://www.israel-taxi.com/wp-content/uploads/2025/08/shakshuka_1.jpg"
+    "sourceUrl": ""
   },
   "food-6": {
     "src": image17,
     "alt": "A sabich pita filled with aubergine, egg and salad",
-    "sourceUrl": "https://www.israel-taxi.com/wp-content/uploads/2025/08/Sabich.jpg"
+    "sourceUrl": ""
   },
   "food-7": {
     "src": image18,
     "alt": "A tray of sesame-topped bourekas pastries",
-    "sourceUrl": "https://www.israel-taxi.com/wp-content/uploads/2025/08/Potato_bourekas_1.jpg"
+    "sourceUrl": ""
   },
   "food-8": {
     "src": image19,
     "alt": "Jachnun with tomato, egg and spicy sauce",
-    "sourceUrl": "https://www.israel-taxi.com/wp-content/uploads/2025/08/Jachnun_1.jpg"
+    "sourceUrl": ""
   },
   "food-9": {
     "src": image20,
     "alt": "Malabi puddings topped with nuts and rose petals",
-    "sourceUrl": "https://www.israel-taxi.com/wp-content/uploads/2025/08/Malabi.jpg"
+    "sourceUrl": ""
   },
   "food-10": {
     "src": image21,
     "alt": "Kanafeh topped with pistachios",
-    "sourceUrl": "https://www.israel-taxi.com/wp-content/uploads/2025/08/Kanafeh.jpg"
+    "sourceUrl": ""
   },
   "annunciation-interior": {
     "src": image22,
     "alt": "Interior of the Basilica of the Annunciation in Nazareth",
-    "sourceUrl": "https://www.israel-taxi.com/wp-content/uploads/2025/08/inside_Basilica_of_Annunciation_nazareth_.jpg"
+    "sourceUrl": ""
   },
   "magdala-archaeology": {
     "src": image23,
     "alt": "Archaeological remains beneath a protective canopy at Magdala",
-    "sourceUrl": "https://www.israel-taxi.com/wp-content/uploads/2025/08/Magdala.jpg"
+    "sourceUrl": ""
   },
   "eretz-israel-museum": {
     "src": image24,
     "alt": "Entrance to MUZA, the Eretz Israel Museum in Tel Aviv",
-    "sourceUrl": "https://www.israel-taxi.com/wp-content/uploads/2025/08/Eretz_Israel_Museum_Tel_Aviv.jpg"
+    "sourceUrl": ""
   },
   "EXISTING:eilat": {
     "src": image25,
@@ -275,7 +275,7 @@ export const migrationPhotos = {
   "itinerary-3day-holy-sepulchre": {
     "src": itineraryChurchHolySepulchre,
     "alt": "Entrance courtyard of the Church of the Holy Sepulchre in Jerusalem’s Old City",
-    "sourceUrl": "https://www.israel-taxi.com/wp-content/uploads/2025/08/Church_of_the_Holy_Sepulchre_Jerusalem_israel.jpg"
+    "sourceUrl": ""
   },
   "itinerary-jerusalem-old-city": {
     "src": itineraryOldCity,
