@@ -46,6 +46,8 @@ import itineraryCaesareaAqueduct from "@/assets/home/caesarea-aqueduct.webp";
 import itineraryAkkoPort from "@/assets/shore-excursions/akko-port.jpg";
 import itineraryAkkoAerial from "@/assets/guides/old-city-acre-aerial.webp";
 import itineraryTenDayCover from "@/assets/home/hero-jerusalem-large.webp";
+import itineraryFiveDayCaesareaCover from "@/assets/home/caesarea-dusk.webp";
+import itineraryTenDayHaifaCover from "@/assets/home/haifa-port.webp";
 
 
 export const migrationPhotos = {
@@ -234,6 +236,14 @@ export const migrationPhotos = {
   "itinerary-7day-capernaum": {
     "src": itineraryCapernaumSynagogue,
     "alt": "Archaeological remains at Capernaum on the northern Sea of Galilee shore"
+  },
+  "itinerary-5day-caesarea-cover": {
+    "src": itineraryFiveDayCaesareaCover,
+    "alt": "Caesarea's ancient Mediterranean coast at dusk, a coastal highlight of the five-day Israel route"
+  },
+  "itinerary-10day-haifa-port-cover": {
+    "src": itineraryTenDayHaifaCover,
+    "alt": "Haifa's working port and Mediterranean waterfront, a northern stop on the ten-day Israel route"
   },
   "itinerary-10day-cover": {
     "src": itineraryTenDayCover,
