@@ -7,7 +7,7 @@ import { getShorePort } from "@/data/shoreExcursions";
 import { shoreHubGuides } from "@/data/shoreReading";
 import { migrationPhotos } from "@/data/guideMigrationPhotos";
 import akkoHarbour from "@/assets/shore-excursions/akko-port.jpg";
-import cruiseShipHaifa from "@/assets/shore-excursions/cruise-ship-haifa.webp";
+import cruisePortFeature from "@/assets/home/cruise-port-feature.webp";
 import { GuideHeroMedia } from "@/components/GuideHeroMedia";
 import { shoreHubDescription, shoreHubExperiences, shoreHubFaqs, shoreHubPorts, shoreHubSourceIds, shoreHubTitle, SHORE_EXCURSION_UPDATED_DATE, shorePlanningSteps, shoreTourFormats } from "@/data/shoreHub";
 import { publicSources, shorePorts, travelGuidePaths } from "@/data/registry";
@@ -16,7 +16,7 @@ import { hasPublicPhotoCredit } from "@/lib/photo-credits";
 import { CANONICAL_ORIGIN, jsonLd, pageMeta, SITE_NAME } from "@/lib/site";
 
 const portIds = ["ashdod", "haifa"] as const;
-const heroPhoto = { src: cruiseShipHaifa, alt: "Cruise ship beside Haifa Port and the Mediterranean coast", sourceUrl: "" };
+const heroPhoto = { src: cruisePortFeature, alt: "Cruise passengers walking along a harbour quay toward a waiting vehicle", sourceUrl: "" };
 const crumbs = [{ name: "Home", path: "/" }, { name: "Shore excursions", path: "/shore-excursions/" }] as const;
 const sections = [["ports", "Compare the ports"], ["destinations", "Destinations"], ["tour-formats", "Private or guided"], ["planning", "Plan your day"], ["faq", "FAQ"]] as const;
 const experienceIcons = { history: Landmark, galilee: Church, coast: Waves, desert: Sun };
