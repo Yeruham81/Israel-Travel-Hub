@@ -1,4 +1,6 @@
 import { describe, expect, it } from "vitest";
+import { readdirSync, readFileSync } from "node:fs";
+import { join } from "node:path";
 import { airportTransferPhotos } from "@/data/airportTransfers";
 import { photoCredits } from "@/data/photoCredits";
 import {
@@ -51,4 +53,19 @@ describe("external references and private transfer route migration", () => {
     expect(urls).toHaveLength(20);
     expect(new Set(urls).size).toBe(20);
   });
+  it("has no stale private-transfer path literals in app code or old-domain photo source links", () => {
+    const scan = (directory: string): string[] => readdirSync(directory, { withFileTypes: true }).flatMap((entry) => {
+      const path = join(directory, entry.name);
+      if (entry.isDirectory()) return entry.name === "test" || entry.name === "generated" ? [] : scan(path);
+      return /\\.tsx?$/.test(entry.name) && entry.name !== "routeTree.gen.ts" ? [path] : [];
+    });
+    for (const path of scan("src")) {
+      const content = readFileSync(path, "utf8");
+      expect(content.includes("/airport-transfers/ben-gurion-airport-to-"), path).toBe(false);
+      if (path.startsWith(join("src", "data"))) {
+        expect(content, path).not.toMatch(/(?:sourceUrl|url)["']?\\s*:\\s*["']https:\\/\\/(?:www\\.)?israel-taxi\\.com\\//);
+      }
+    }
+  });
+
 });
