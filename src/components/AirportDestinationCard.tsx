@@ -3,6 +3,9 @@ import { airportTransferRoutes, type AirportTransferRate } from "@/data/registry
 import type { StayGuidePhoto } from "@/data/content";
 import { CompactCurrencyEquivalents, PriceDisplay } from "@/components/CurrencyRates";
 
+/** Consistent, slightly emphasized quote action across all transfer destination cards. */
+const quoteButtonClass = "inline-flex min-h-11 items-center justify-center rounded-lg border border-primary/50 bg-primary/10 px-3 py-2 text-center text-sm font-semibold leading-snug text-primary shadow-sm transition-[background-color,border-color,box-shadow] hover:border-primary/70 hover:bg-primary/15 hover:shadow-md focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary";
+
 export function AirportDestinationCard({ id, destination, price, photo, onChoose, layout = "featured", testId = "airport-destination-card" }: {
   id: string; destination: string; price?: AirportTransferRate["price"]; photo: Pick<StayGuidePhoto, "src" | "alt">;
   onChoose?: (id: string) => void; layout?: "featured" | "compact" | "hub-featured" | "hub-row"; testId?: string;
@@ -21,7 +24,7 @@ export function AirportDestinationCard({ id, destination, price, photo, onChoose
         <span className="mt-2 inline-block text-sm font-semibold text-primary group-hover:underline">View transfer details</span>
       </div>
     </Link>}
-    <a href="#request-quote" onClick={() => onChoose?.(id)} className="mt-1.5 self-end rounded-lg px-3 py-2 text-sm font-semibold text-primary underline-offset-4 hover:bg-secondary hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">Request a quote</a>
+    <a href="#request-quote" onClick={() => onChoose?.(id)} className={`${quoteButtonClass} mt-2 self-end`}>Request a quote</a>
   </article>;
   if (layout === "hub-row") return <article
     className="grid h-full min-h-[7rem] min-w-0 grid-cols-[4.5rem_minmax(0,1fr)_5.75rem] items-center gap-2 rounded-xl border bg-card p-2.5 transition-colors hover:border-primary/40 sm:grid-cols-[5.75rem_minmax(0,1fr)_6.5rem] sm:gap-3 sm:p-3"
@@ -33,7 +36,7 @@ export function AirportDestinationCard({ id, destination, price, photo, onChoose
       {price && <p className="mt-1 text-sm font-semibold tabular-nums text-foreground sm:text-base">From ₪{price.amount.toLocaleString("en-US")}</p>}
       {price && <CompactCurrencyEquivalents amount={price.amount} />}
     </div>
-    <a href="#request-quote" onClick={() => onChoose?.(id)} className="inline-flex min-h-11 w-full items-center justify-center rounded-lg border border-primary/20 bg-secondary/60 px-1.5 py-2 text-center text-xs font-semibold leading-snug text-primary transition-colors hover:border-primary/40 hover:bg-secondary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary sm:px-2 sm:text-sm">Request a quote</a>
+    <a href="#request-quote" onClick={() => onChoose?.(id)} className={`${quoteButtonClass} w-full px-1.5 text-xs sm:px-2 sm:text-sm`}>Request a quote</a>
   </article>;
   const compact = layout === "compact";
   const image = <img src={photo.src} alt={photo.alt} width={compact ? 80 : 360} height={compact ? 80 : 240} loading="lazy" decoding="async" className={compact ? "h-20 w-20 shrink-0 rounded-lg object-cover" : "aspect-[3/2] w-full object-cover"} />;
@@ -51,7 +54,7 @@ export function AirportDestinationCard({ id, destination, price, photo, onChoose
   </> : <>
     {image}<div className="flex flex-1 flex-col p-3 sm:p-5">{heading}{priceDetails}</div>
   </>;
-  const quoteClass = `block rounded-lg bg-secondary px-2 py-2 text-center text-sm font-semibold text-primary hover:bg-primary hover:text-primary-foreground focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary ${compact ? "mx-4 mb-4" : "mx-3 mb-3 sm:mx-5 sm:mb-5"}`;
+  const quoteClass = `${quoteButtonClass} self-stretch ${compact ? "mx-4 mb-4" : "mx-3 mb-3 sm:mx-5 sm:mb-5"}`;
   return <article className="flex h-full flex-col overflow-hidden rounded-2xl border bg-card" data-testid={testId} data-destination={id}>
     {route ? <Link to={route.path} className="flex flex-1 flex-col hover:bg-secondary/20 focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-primary">{details}</Link> : <div className="flex flex-1 flex-col">{details}</div>}
     {onChoose ? <a href="#request-quote" onClick={() => onChoose(id)} className={quoteClass}>Request a quote</a> : route ? <Link to={route.path} hash="request-quote" className={quoteClass}>Request a quote</Link> : <Link to="/airport-transfers/" search={{ destination: id }} hash="request-quote" className={quoteClass}>Request a quote</Link>}
