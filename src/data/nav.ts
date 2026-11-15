@@ -128,8 +128,8 @@ export const allNavGroups: NavGroup[] = [
     items: [
       { label: "Tours & day trips", to: "/tours/", childrenLabel: "Tour categories", alwaysExpanded: true, children: tourCategories.map(category => ({ label: category.shortTitle, to: tourCategoryPaths[category.id] })) },
       { label: "Shore excursions", to: "/shore-excursions/", childrenLabel: "Shore excursion ports", alwaysExpanded: true, children: [
-        { label: "From Haifa Port", to: "/haifa-shore-excursions/" },
-        { label: "From Ashdod Port", to: "/ashdod-shore-excursions/" },
+        { label: "From Haifa Port", to: "/shore-excursions/haifa/" },
+        { label: "From Ashdod Port", to: "/shore-excursions/ashdod/" },
       ] },
     ],
   },

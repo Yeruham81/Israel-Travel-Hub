@@ -4,12 +4,13 @@ import { cleanup, fireEvent, render, screen, waitFor, within } from "@testing-li
 import { afterEach, describe, expect, it, vi } from "vitest";
 import { GlobalNav, SiteHeader } from "@/components/Layout";
 import { getShorePort } from "@/data/shoreExcursions";
+import { SHORE_EXCURSION_UPDATED_DATE } from "@/data/shoreHub";
 import { getSource, publicSources, SHORE_EXCURSION_CHECK_DATE, shoreExcursionRates, shorePorts } from "@/data/registry";
 import { servicesForPort, shoreSourceIds } from "@/lib/shore-services";
 import { buildShoreQuoteDraft, emptyShoreQuote, validateShoreQuote } from "@/lib/shore-quote";
 import { routeTree } from "@/routeTree.gen";
-import { Route as AshdodRoute } from "@/routes/ashdod-shore-excursions";
-import { Route as HaifaRoute } from "@/routes/haifa-shore-excursions";
+import { Route as AshdodRoute } from "@/routes/shore-excursions.ashdod";
+import { Route as HaifaRoute } from "@/routes/shore-excursions.haifa";
 
 afterEach(() => { cleanup(); localStorage.clear(); vi.restoreAllMocks(); });
 const cases = [{ id: "ashdod", route: AshdodRoute }, { id: "haifa", route: HaifaRoute }] as const;
@@ -140,11 +141,11 @@ describe("shore excursions", () => {
       expect(router.matchRoutes(href).at(-1)?.routeId).toBe(href.replace(/\/$/, ""));
     }
     expect(container.querySelector("a a")).toBeNull();
-    expect(container.querySelector(`header time[datetime="${SHORE_EXCURSION_CHECK_DATE}"]`)).toBeInTheDocument();
+    expect(container.querySelector(`header time[datetime="${SHORE_EXCURSION_UPDATED_DATE}"]`)).toBeInTheDocument();
     const head = await route.options.head?.({} as never);
     expect(head).toMatchObject({ meta: expect.arrayContaining([{ title: expect.stringContaining(`${port.name} shore excursions`) }, { name: "robots", content: "noindex,nofollow" }]), links: [{ rel: "canonical", href: expect.stringContaining(port.path) }] });
     const schemas = (head?.scripts || []).map((script) => typeof script?.children === "string" ? JSON.parse(script.children) : null);
-    expect(schemas.find((schema) => schema?.["@type"] === "Article")).toMatchObject({ headline: port.title, dateModified: SHORE_EXCURSION_CHECK_DATE, author: { "@type": "Person", name: "Moshe Barak" }, citation: publicSources(shoreSourceIds(id)).map((source) => source.url) });
+    expect(schemas.find((schema) => schema?.["@type"] === "Article")).toMatchObject({ headline: port.title, dateModified: SHORE_EXCURSION_UPDATED_DATE, author: { "@type": "Person", name: "Moshe Barak" }, citation: publicSources(shoreSourceIds(id)).map((source) => source.url) });
     expect(schemas.some((schema) => schema?.["@type"] === "FAQPage")).toBe(false);
   });
 

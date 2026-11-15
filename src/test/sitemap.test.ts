@@ -29,6 +29,11 @@ describe("generated XML sitemap and robots.txt", () => {
     expect(paths).not.toContain("/guides/");
     expect(paths).not.toContain("/travel-blog/ben-gurion-airport-to-jerusalem/");
     expect(paths).toContain("/tours/");
+    expect(paths).toContain("/shore-excursions/");
+    expect(paths).toContain("/shore-excursions/ashdod/");
+    expect(paths).toContain("/shore-excursions/haifa/");
+    expect(paths).not.toContain("/ashdod-shore-excursions/");
+    expect(paths).not.toContain("/haifa-shore-excursions/");
     expect(paths).not.toContain("/tours/bethlehem-from-jerusalem/");
     expect(paths).not.toContain("/destinations/");
     expect(paths).not.toContain("/hotels/");

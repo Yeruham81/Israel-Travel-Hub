@@ -2,7 +2,7 @@ import { QueryClient } from "@tanstack/react-query";
 import { createMemoryHistory, createRouter, RouterContextProvider } from "@tanstack/react-router";
 import { cleanup, fireEvent, render, screen, waitFor, within } from "@testing-library/react";
 import { afterEach, describe, expect, it } from "vitest";
-import { Route } from "@/routes/shore-excursions";
+import { Route } from "@/routes/shore-excursions.index";
 import { routeTree } from "@/routeTree.gen";
 import { shoreHubExperiences } from "@/data/shoreHub";
 import { servicesForPort, filterShoreServices } from "@/lib/shore-services";
@@ -34,7 +34,7 @@ describe("Israel shore excursion hub", () => {
       expect(matches.every((tour) => servicesForPort(choice.portId).some((item) => item.id === tour.id))).toBe(true);
     }
     fireEvent.click(within(destinations).getByRole("link", { name: "Masada from Ashdod" }));
-    await waitFor(() => expect(router.state.location.pathname).toBe("/ashdod-shore-excursions/"));
+    await waitFor(() => expect(router.state.location.pathname).toBe("/shore-excursions/ashdod/"));
     expect(router.state.location.search).toEqual({ destination: "masada" });
   });
 
@@ -74,8 +74,8 @@ describe("Israel shore excursion hub", () => {
     expect(within(guides).getAllByRole("img")).toHaveLength(6);
     expect(within(guides).getAllByRole("link").every((link) => link.textContent === "Read More")).toBe(true);
     expect(guides).not.toHaveTextContent("→");
-    expect(screen.getByRole("link", { name: "Plan my day from Ashdod" })).toHaveAttribute("href", "/ashdod-shore-excursions/#request-quote");
-    expect(screen.getByRole("link", { name: "Plan my day from Haifa" })).toHaveAttribute("href", "/haifa-shore-excursions/#request-quote");
+    expect(screen.getByRole("link", { name: "Plan my day from Ashdod" })).toHaveAttribute("href", "/shore-excursions/ashdod/#request-quote");
+    expect(screen.getByRole("link", { name: "Plan my day from Haifa" })).toHaveAttribute("href", "/shore-excursions/haifa/#request-quote");
     for (const link of document.querySelectorAll('main a[href^="/"]')) {
       const url = new URL(link.getAttribute("href")!, CANONICAL_ORIGIN);
       expect(router.matchRoutes(url.pathname).at(-1)?.routeId.replace(/\/$/, "")).toBe(url.pathname.replace(/\/$/, ""));
@@ -89,7 +89,7 @@ describe("Israel shore excursion hub", () => {
     expect(head?.links).toContainEqual({ rel: "canonical", href: `${CANONICAL_ORIGIN}/shore-excursions/` });
     const schemas = (head?.scripts || []).map((script) => JSON.parse(String(script?.children)));
     const collection = schemas.find((schema) => schema["@type"] === "CollectionPage");
-    expect(collection.mainEntity.itemListElement.map((item: { item: { url: string } }) => item.item.url)).toEqual([`${CANONICAL_ORIGIN}/ashdod-shore-excursions/`, `${CANONICAL_ORIGIN}/haifa-shore-excursions/`]);
+    expect(collection.mainEntity.itemListElement.map((item: { item: { url: string } }) => item.item.url)).toEqual([`${CANONICAL_ORIGIN}/shore-excursions/ashdod/`, `${CANONICAL_ORIGIN}/shore-excursions/haifa/`]);
     expect(collection.author).toMatchObject({ "@type": "Person", name: "Moshe Barak" });
     expect(JSON.stringify(schemas)).not.toMatch(/"(?:offers|aggregateRating|review)"|"@type":"(?:Product|FAQPage)"/);
   });

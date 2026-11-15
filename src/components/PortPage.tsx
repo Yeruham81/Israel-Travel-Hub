@@ -1,12 +1,12 @@
 import { Link } from "@tanstack/react-router";
 import { useState } from "react";
-import { Breadcrumbs, Checklist, FaqList, OnThisPage, Section, SourceList } from "@/components/Guide";
+import { Breadcrumbs, Checklist, FaqList, Section, SourceList } from "@/components/Guide";
 import { GuidePhotoCredit } from "@/components/TravelGuide";
 import { GuideHeroLayout, GuideHeroMedia } from "@/components/GuideHeroMedia";
 import { ShoreQuoteForm } from "@/components/ShoreQuoteForm";
 import { airportTransferPhotos } from "@/data/airportTransfers";
 import { getShoreCatalog, getShorePort, shoreExcursionBenefits } from "@/data/shoreExcursions";
-import { publicSources, SHORE_EXCURSION_CHECK_DATE, shorePorts, type ShorePortId } from "@/data/registry";
+import { publicSources, shorePorts, type ShorePortId } from "@/data/registry";
 import { CANONICAL_ORIGIN, SITE_NAME, pageMeta } from "@/lib/site";
 import { AuthorCard } from "@/components/AuthorCard";
 import { PageUpdated } from "@/components/PageUpdated";
@@ -16,6 +16,7 @@ import { ShoreServiceCatalog } from "@/components/ShoreServiceCatalog";
 import { ShoreReadingGuides } from "@/components/ShoreReadingGuides";
 import { parseShoreServiceSearch, shoreSourceIds, type ShoreServiceSearch } from "@/lib/shore-services";
 import { JerusalemClusterLinks } from "@/components/JerusalemClusterLinks";
+import { SHORE_EXCURSION_UPDATED_DATE } from "@/data/shoreHub";
 
 function crumbsFor(id: ShorePortId) {
   return [{ name: "Home", path: "/" as const }, { name: "Shore excursions", path: "/shore-excursions/" as const }, { name: `From ${shorePorts[id].name} Port`, path: shorePorts[id].path }];
@@ -26,14 +27,13 @@ export function shorePortMeta(id: ShorePortId) {
   const meta = pageMeta({ title: port.title, description: port.description, path: port.path, type: "article", crumbs: crumbsFor(id), image: port.photo.src, imageAlt: port.photo.alt });
   const imageUrl = new URL(port.photo.src, CANONICAL_ORIGIN).href;
   return { ...meta, scripts: [...meta.scripts, {
-    type: "application/ld+json", children: JSON.stringify({ "@context": "https://schema.org", "@type": "Article", headline: port.title, description: port.description, mainEntityOfPage: `${CANONICAL_ORIGIN}${port.path}`, inLanguage: "en", dateModified: SHORE_EXCURSION_CHECK_DATE,
+    type: "application/ld+json", children: JSON.stringify({ "@context": "https://schema.org", "@type": "Article", headline: port.title, description: port.description, mainEntityOfPage: `${CANONICAL_ORIGIN}${port.path}`, inLanguage: "en", dateModified: SHORE_EXCURSION_UPDATED_DATE,
       author: authorLd(), publisher: { "@type": "Organization", name: SITE_NAME }, image: imageUrl,
       citation: publicSources(shoreSourceIds(id)).map((source) => source.url),
     }).replaceAll("<", "\\u003c"),
   }] };
 }
 
-const sections = [["itineraries", "Tours & day trips"], ["request-quote", "Request a quote"], ["route-fit", "Which route fits?"], ["port-access", "Port access"], ["timing", "Ship timing"], ["format", "Driver or guide"], ["check", "Before booking"], ["faq", "FAQ"], ["sources", "Sources"]] as const;
 const focusQuote = () => requestAnimationFrame(() => document.getElementById("request-quote")?.focus({ preventScroll: true }));
 
 export function PortPage({ id, filters: routeSearch, onFilterChange }: { id: ShorePortId; filters: ShoreServiceSearch; onFilterChange: (filters: ShoreServiceSearch) => void }) {
@@ -42,28 +42,25 @@ export function PortPage({ id, filters: routeSearch, onFilterChange }: { id: Sho
   const port = getShorePort(id);
   const [itineraryId, setItineraryId] = useState("");
   const photos = [port.photo, ...getShoreCatalog(id).map((service) => service.photo), ...port.related.map((guide) => guide.photo), airportTransferPhotos["moshe"]!].filter(hasPublicPhotoCredit);
-  return <main className="mx-auto max-w-5xl px-4 pb-24 lg:pb-8">
+  return <main className="mx-auto max-w-5xl px-4 pb-12">
     <header className="pt-6">
       <Breadcrumbs items={crumbsFor(id).map((crumb) => ({ name: crumb.name, to: crumb.path }))} />
       <nav aria-label="Choose your cruise port" className="mt-5 flex flex-wrap gap-2">{(Object.keys(shorePorts) as ShorePortId[]).map((portId) => <Link key={portId} to={shorePorts[portId].path} className="chip inline-block" activeProps={{ "aria-current": "page", className: "bg-navy text-navy-foreground" }}>{shorePorts[portId].name} Port</Link>)}</nav>
-      <GuideHeroLayout image={<GuideHeroMedia src={port.photo.src} alt={port.photo.alt} />}>
+      <GuideHeroLayout image={<GuideHeroMedia src={port.photo.src} alt={port.photo.alt} compact />}>
         <p className="eyebrow">Your ship. Your day ashore.</p>
         <h1 className="guide-page-title mt-3">{port.title}</h1>
         <p data-guide-intro className="mt-4 max-w-3xl text-lg leading-relaxed text-muted-foreground">{port.intro}</p>
+        <PageUpdated date={SHORE_EXCURSION_UPDATED_DATE} />
         <div className="mt-5"><a href="#request-quote" onClick={focusQuote} className="btn btn-primary">Request a private day trip</a></div>
-        <PageUpdated date={SHORE_EXCURSION_CHECK_DATE} />
       </GuideHeroLayout>
-      <AuthorCard />
+      <AuthorCard introduction />
     </header>
 
-    <section aria-labelledby="answer-h" className="mt-7 rounded-2xl border border-primary/20 bg-secondary/60 p-5 sm:p-6"><h2 id="answer-h" className="text-2xl">Find your ideal day ashore</h2><p className="mt-3 leading-relaxed">{port.answer}</p></section>
-    <OnThisPage sections={sections} />
 
     <ShoreServiceCatalog portId={id} filters={filters} onFilterChange={onFilterChange} itineraryId={itineraryId} onSelectItinerary={(next) => { setItineraryId(next); focusQuote(); }} />
 
-    <ShoreQuoteForm key={id} portId={id} itineraryId={itineraryId} onItineraryChange={setItineraryId} />
-
-    <Section id="overview" title={`Make the most of your day from ${port.name}`}>
+    <Section id="overview" title={`Choosing the right shore excursion from ${port.name}`}>
+      <p>{port.answer}</p>
       {port.overview.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
     </Section>
     <Section id="route-fit" title={`Which excursion fits your ${port.name} port call?`}>
@@ -102,8 +99,8 @@ export function PortPage({ id, filters: routeSearch, onFilterChange }: { id: Sho
     <section aria-labelledby="ready-h" className="mt-14 rounded-2xl bg-navy p-6 text-navy-foreground sm:p-8"><h2 id="ready-h" className="text-3xl">Request an itinerary from {port.name}</h2><p className="mt-3 opacity-90">Send your ship's arrival and all-aboard times, party size and preferred route. I will reply with an itinerary and quote for your review.</p><a href="#request-quote" onClick={focusQuote} className="btn btn-light mt-5">Request a personal quote</a></section>
     {id === "ashdod" && <JerusalemClusterLinks pageKey="shore-ashdod" />}
     <ShoreReadingGuides guides={port.related} />
+    <ShoreQuoteForm key={id} portId={id} itineraryId={itineraryId} onItineraryChange={setItineraryId} />
     <SourceList ids={shoreSourceIds(id)} intro="Product pages were checked for itinerary, duration and port pickup/return. External starting prices are dated reference snapshots, not live prices or confirmed availability. Published ILS rates apply only to my named day trips; external tours are booked on GetYourGuide or Viator under their own terms." />
     <details className="mt-10 rounded-xl border p-5"><summary className="cursor-pointer text-sm font-medium">Excursion image credits</summary><ul className="mt-3 space-y-3">{[...new Map(photos.map((photo) => [photo.src, photo])).values()].map((photo) => <li key={photo.src}><p className="text-sm">{photo.alt}</p><GuidePhotoCredit photo={photo} insideDisclosure /></li>)}</ul></details>
-    <div className="fixed inset-x-0 bottom-0 z-30 border-t bg-background/95 px-4 py-3 backdrop-blur lg:hidden"><div className="mx-auto flex max-w-5xl items-center justify-between gap-3"><p className="text-sm font-medium">Private day ashore<br /><span className="text-xs text-muted-foreground">From {port.name} Port</span></p><a href="#request-quote" onClick={focusQuote} className="btn btn-primary shrink-0 text-sm">Request a quote</a></div></div>
   </main>;
 }

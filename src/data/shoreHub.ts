@@ -1,5 +1,8 @@
 import { type ShoreDestinationId, type ShorePortId } from "@/data/registry";
 
+/** Editorial update date, separate from the last check of product prices and sources. */
+export const SHORE_EXCURSION_UPDATED_DATE = "2026-11-15";
+
 export const shoreHubTitle = "Shore excursions from Israel's cruise ports";
 export const shoreHubDescription = "Explore Israel shore excursions from Ashdod and Haifa. Compare Jerusalem, Galilee, Masada and coastal day trips, private drivers and guided tours with port pickup and return.";
 

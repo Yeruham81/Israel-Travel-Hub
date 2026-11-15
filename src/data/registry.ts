@@ -323,8 +323,8 @@ export const privateDriverContact = {
 };
 
 export const shorePorts = {
-  haifa: { name: "Haifa", path: "/haifa-shore-excursions/", sourceId: "owner-haifa-shore", pageId: "shore-haifa" },
-  ashdod: { name: "Ashdod", path: "/ashdod-shore-excursions/", sourceId: "owner-ashdod-shore", pageId: "shore-ashdod" },
+  haifa: { name: "Haifa", path: "/shore-excursions/haifa/", sourceId: "owner-haifa-shore", pageId: "shore-haifa" },
+  ashdod: { name: "Ashdod", path: "/shore-excursions/ashdod/", sourceId: "owner-ashdod-shore", pageId: "shore-ashdod" },
 } as const;
 export type ShorePortId = keyof typeof shorePorts;
 
@@ -2322,7 +2322,7 @@ export const providerLinks: ProviderLink[] = [
   {
     id: "ashdod-shore-moshe", pageIds: ["shore-ashdod", "shore-hub"], ...moshe, mode: "provider_inquiry",
     title: "Private car-and-driver shore excursion from Ashdod", summary: "Local driver business with suggested Tel Aviv/Jaffa, Jerusalem and Masada/Dead Sea days from Ashdod Port. Itinerary, price and timing agreed by inquiry.",
-    ctaLabel: "Request a quote", url: "/ashdod-shore-excursions/#request-quote", isAffiliate: false,
+    ctaLabel: "Request a quote", url: "/shore-excursions/ashdod/#request-quote", isAffiliate: false,
     reentryNote: "Nothing is sent from this page. Include ship name, date, disembarkation and all-aboard times and party size in your request.",
     confirm: ["Price and what it covers", "Pickup point at the port", "Driver only or licensed guide", "Return timing for your all-aboard time", "Cancellation terms"], sourceId: "owner-ashdod-shore",
   },
@@ -2335,7 +2335,7 @@ export const providerLinks: ProviderLink[] = [
   {
     id: "haifa-shore-moshe", pageIds: ["shore-haifa", "shore-hub"], ...moshe, mode: "provider_inquiry",
     title: "Private car-and-driver shore excursion from Haifa", summary: "Local driver business with suggested Akko/Rosh Hanikra, Tel Aviv/Jaffa, Nazareth/Sea of Galilee and Jerusalem days from Haifa Port. Itinerary and price by inquiry.",
-    ctaLabel: "Request a quote", url: "/haifa-shore-excursions/#request-quote", isAffiliate: false,
+    ctaLabel: "Request a quote", url: "/shore-excursions/haifa/#request-quote", isAffiliate: false,
     reentryNote: "Nothing is sent from this page. Include ship name, date, disembarkation and all-aboard times and party size in your request.",
     confirm: ["Whether the itinerary fits your port-call time", "Pickup point at the port", "Driver only or licensed guide", "Entrance fees", "Cancellation terms"], sourceId: "owner-haifa-shore",
   },

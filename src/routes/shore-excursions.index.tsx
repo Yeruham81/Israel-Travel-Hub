@@ -7,14 +7,16 @@ import { getShorePort } from "@/data/shoreExcursions";
 import { shoreHubGuides } from "@/data/shoreReading";
 import { migrationPhotos } from "@/data/guideMigrationPhotos";
 import akkoHarbour from "@/assets/shore-excursions/akko-port.jpg";
-import { shoreHubDescription, shoreHubExperiences, shoreHubFaqs, shoreHubPorts, shoreHubSourceIds, shoreHubTitle, shorePlanningSteps, shoreTourFormats } from "@/data/shoreHub";
-import { publicSources, SHORE_EXCURSION_CHECK_DATE, shorePorts, travelGuidePaths } from "@/data/registry";
+import cruiseShipHaifa from "@/assets/shore-excursions/cruise-ship-haifa.webp";
+import { GuideHeroMedia } from "@/components/GuideHeroMedia";
+import { shoreHubDescription, shoreHubExperiences, shoreHubFaqs, shoreHubPorts, shoreHubSourceIds, shoreHubTitle, SHORE_EXCURSION_UPDATED_DATE, shorePlanningSteps, shoreTourFormats } from "@/data/shoreHub";
+import { publicSources, shorePorts, travelGuidePaths } from "@/data/registry";
 import { authorLd } from "@/lib/author";
 import { hasPublicPhotoCredit } from "@/lib/photo-credits";
 import { CANONICAL_ORIGIN, jsonLd, pageMeta, SITE_NAME } from "@/lib/site";
 
 const portIds = ["ashdod", "haifa"] as const;
-const heroPhoto = migrationPhotos["EXISTING:jerusalem"];
+const heroPhoto = { src: cruiseShipHaifa, alt: "Cruise ship beside Haifa Port and the Mediterranean coast" };
 const crumbs = [{ name: "Home", path: "/" }, { name: "Shore excursions", path: "/shore-excursions/" }] as const;
 const sections = [["ports", "Compare the ports"], ["destinations", "Destinations"], ["tour-formats", "Private or guided"], ["planning", "Plan your day"], ["faq", "FAQ"]] as const;
 const experienceIcons = { history: Landmark, galilee: Church, coast: Waves, desert: Sun };
@@ -25,13 +27,13 @@ const experiencePhotos = {
   desert: migrationPhotos["EXISTING:masada"],
 };
 
-export const Route = createFileRoute("/shore-excursions")({
+export const Route = createFileRoute("/shore-excursions/")({
   head: () => {
     const meta = pageMeta({ title: "Israel shore excursions from Ashdod & Haifa cruise ports", description: shoreHubDescription, path: "/shore-excursions/", crumbs: [...crumbs], image: heroPhoto.src, imageAlt: heroPhoto.alt });
     return { ...meta, scripts: [...meta.scripts, jsonLd({
       "@context": "https://schema.org", "@type": "CollectionPage", name: shoreHubTitle,
       description: shoreHubDescription, url: `${CANONICAL_ORIGIN}/shore-excursions/`, inLanguage: "en",
-      dateModified: SHORE_EXCURSION_CHECK_DATE, author: authorLd(), publisher: { "@type": "Organization", name: SITE_NAME },
+      dateModified: SHORE_EXCURSION_UPDATED_DATE, author: authorLd(), publisher: { "@type": "Organization", name: SITE_NAME },
       image: new URL(heroPhoto.src, CANONICAL_ORIGIN).href,
       mainEntity: { "@type": "ItemList", name: "Israel cruise-port excursion guides", itemListElement: portIds.map((id, index) => ({ "@type": "ListItem", position: index + 1, item: { "@type": "WebPage", name: getShorePort(id).title, url: `${CANONICAL_ORIGIN}${shorePorts[id].path}` } })) },
       citation: publicSources(shoreHubSourceIds).map((source) => source.url),
@@ -47,8 +49,9 @@ function Shore() {
       crumbs={crumbs.map((crumb) => ({ name: crumb.name, to: crumb.path }))}
       eyebrow="Shore excursions · Ashdod & Haifa"
       title={shoreHubTitle}
-      intro="Plan a day ashore from Ashdod or Haifa, with practical guidance on destinations, transport, guided tours and returning to your ship on time."
-      checkedAt={SHORE_EXCURSION_CHECK_DATE}
+      intro="Explore shore excursions from Ashdod and Haifa cruise ports. Choose your port, compare private car-and-driver days with independently operated guided tours, and plan a realistic return to your ship."
+      checkedAt={SHORE_EXCURSION_UPDATED_DATE}
+      image={<GuideHeroMedia src={heroPhoto.src} alt={heroPhoto.alt} compact />}
       actions={<>
         <Link to={shorePorts.ashdod.path} className="btn btn-primary">Excursions from Ashdod</Link>
         <Link to={shorePorts.haifa.path} className="btn btn-primary">Excursions from Haifa</Link>
