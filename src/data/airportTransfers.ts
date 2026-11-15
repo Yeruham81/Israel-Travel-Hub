@@ -53,7 +53,7 @@ export const airportTransferBenefits = [
 export const airportTransferChecklist = [
   "Use your flight's landing date and time in Israel local time, including arrivals after midnight.",
   "Provide the full drop-off address and the number of passengers, suitcases and carry-ons.",
-  "Request child seats or a larger vehicle in advance if your party needs them.",
+  "Request child seats or a larger vehicle in advance if you need them.",
   "Check the full price, waiting arrangements and cancellation terms before confirming.",
   "Save your driver's contact details and the agreed airport meeting point for arrival.",
 ];
