@@ -32,9 +32,8 @@ jobs:
     env:
       CI: "true"
       HOSTINGER_STATIC_BUILD: "true"
-      # Always use editorially published Sanity content for routine site releases.
-      # If Uber has no published document, fail before touching Hostinger.
-      SANITY_UBER_SOURCE: published
+      # Use the same reviewed, source-controlled guides as ordinary Lovable/CI builds.
+      # Sanity draft content is intentionally not published to Hostinger automatically.
       VITE_CANONICAL_ORIGIN: ${{ vars.HOSTINGER_CANONICAL_ORIGIN || 'https://saddlebrown-guanaco-454061.hostingersite.com' }}
       VITE_INDEXABLE: ${{ vars.HOSTINGER_INDEXABLE || 'false' }}
       TARGET_SHA: ${{ github.event_name == 'workflow_run' && github.event.workflow_run.head_sha || github.sha }}
@@ -81,15 +80,15 @@ jobs:
         if: steps.freshness.outputs.current == 'true'
         run: bash scripts/build-validated-static.sh
 
-      - name: Assert the release contains the published Sanity Uber guide
+      - name: Assert the release includes the source-controlled Uber guide
         if: steps.freshness.outputs.current == 'true'
         shell: bash
         run: |
           set -euo pipefail
-          grep -Fq 'Perspective at build: published.' src/data/generated/sanityUberSnapshot.ts
-          grep -Fq 'export const sanityUberGuide: TravelGuide | null = {' src/data/generated/sanityUberSnapshot.ts
+          # Only explicitly approved Sanity publishing should replace the GitHub guide.
+          grep -Fq 'export const sanityUberGuide: TravelGuide | null = null;' src/data/generated/sanityUberSnapshot.ts
           test -s .output/public/travel-blog/uber-in-israel/index.html
-          grep -Fq 'cdn.sanity.io/images/ekfs0mfw/production/' .output/public/travel-blog/uber-in-israel/index.html
+          grep -Fq 'Is Uber Available in Israel?' .output/public/travel-blog/uber-in-israel/index.html
 
       - name: Reject missing pages, wrong canonical, or indexable trial
         if: steps.freshness.outputs.current == 'true'
@@ -189,8 +188,8 @@ jobs:
             [[ "$status" == "200" ]] || { echo "::error::Website smoke test failed for $path"; exit 1; }
           done
           uber_html="$(curl --retry 2 --max-time 20 -fsSL "$VITE_CANONICAL_ORIGIN/travel-blog/uber-in-israel/")"
-          if ! grep -Fq 'cdn.sanity.io/images/ekfs0mfw/production/' <<< "$uber_html"; then
-            echo "::error::The published Uber HTML does not contain its Sanity image"
+          if ! grep -Fq 'Is Uber Available in Israel?' <<< "$uber_html"; then
+            echo "::error::The published Uber guide does not contain its expected title"
             exit 1
           fi
-          echo "Static files published from Sanity; existing PHP APIs still respond to GET."
+          echo "Source-controlled static guides published; existing PHP APIs still respond to GET."
