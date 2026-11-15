@@ -214,7 +214,7 @@ function esimRecommendation(paragraph: string, providers: ReturnType<typeof link
   if (!match) return emphasizeEsimNames(paragraph);
   const provider = providers.find((item) => item.providerName === match[3]);
   if (!provider) return emphasizeEsimNames(paragraph);
-  return <>{emphasizeEsimNames(match[1])}<strong>My choice:</strong>{" "}
+  return <>{emphasizeEsimNames(match[1] ?? "")}<strong>My choice:</strong>{" "}
     <ProviderNameLink link={provider} pageId="guide-esim">{match[3]}</ProviderNameLink>{match[4]}</>;
 }
 
