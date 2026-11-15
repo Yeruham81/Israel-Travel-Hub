@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { filterGuides, getGuideTopicLabel, guideDirectory, guideTopics, isGuideTopic, travelGuides } from "@/data/travelGuides";
-import { formatCheckDate } from "@/data/registry";
+import { AIRALO_COMPATIBILITY_AFFILIATE_URL, formatCheckDate } from "@/data/registry";
 import { itineraryIds, itineraries } from "@/data/israelItineraries";
 import { migrationPhotos } from "@/data/guideMigrationPhotos";
 import { uniqueGuideCardPhotos } from "@/lib/guide-card-photos";
@@ -22,7 +22,14 @@ describe("travel guide topic filters and prerender safety", () => {
     for (const section of guide.sections.filter(section => ["short-trip", "long-trip", "unlimited", "regional"].includes(section.id))) {
       expect(section.paragraphs.some(paragraph => /My choice: (Saily|Airalo|GigSky)\./.test(paragraph))).toBe(true);
     }
-    expect(guide.sections.find(section => section.id === "compatibility")?.externalLinks?.[0]?.href).toBe("https://www.airalo.com/how-airalo-works/device-compatibility");
+    expect(guide.sections.find(section => section.id === "compatibility")?.externalLinks?.[0]?.href).toBe(AIRALO_COMPATIBILITY_AFFILIATE_URL);
+    const deepLink = new URL(AIRALO_COMPATIBILITY_AFFILIATE_URL);
+    expect(deepLink.origin).toBe("https://tp.media");
+    expect(deepLink.searchParams.get("marker")).toBe("622032");
+    expect(deepLink.searchParams.get("trs")).toBe("406243");
+    expect(deepLink.searchParams.get("p")).toBe("8310");
+    expect(deepLink.searchParams.get("campaign_id")).toBe("541");
+    expect(deepLink.searchParams.get("u")).toBe("https://www.airalo.com/how-airalo-works/device-compatibility");
     expect(guide.sections.find((section) => section.id === "unlimited")?.paragraphs.join(" ")).toContain("$56.24");
     expect(guide.faqs.length).toBeGreaterThanOrEqual(8);
     expect(guide.related).toHaveLength(6);
