@@ -6,10 +6,12 @@ on:
     paths:
       - 'src/routes/airport-transfers.index.tsx'
       - 'src/components/AirportDestinationCard.tsx'
+      - 'src/components/AirportRoutePage.tsx'
       - 'src/components/AirportBookingPlatforms.tsx'
       - 'src/components/TransferQuoteForm.tsx'
       - 'src/components/TravelGuide.tsx'
       - 'src/data/airportTransfers.ts'
+      - 'src/data/airportRoutes.ts'
       - 'src/data/registry.ts'
       - 'src/test/airport-transfers.test.tsx'
       - 'src/test/airport-routes.test.tsx'
