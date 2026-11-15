@@ -1,19 +1,25 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
-import { Baby, CarFront, Clock3, Handshake, Luggage, PlaneLanding } from "lucide-react";
+import { BadgeCheck, CalendarCheck, CarFront, Compass, PlaneLanding, TrainFront } from "lucide-react";
 import { FaqList, HubHeader } from "@/components/Guide";
 import { TransferQuoteForm } from "@/components/TransferQuoteForm";
 import { AirportDestinationCard as DestinationCard } from "@/components/AirportDestinationCard";
 import { AirportBookingPlatforms } from "@/components/AirportBookingPlatforms";
 import { GuidePhotoCredit } from "@/components/TravelGuide";
-import { RelatedGuideCards } from "@/components/ShoreReadingGuides";
-import { airportDestinationCards, airportTransferPhotos, airportTransferBenefits, airportTransferTips, airportTransferFaqs, airportRelatedLinks } from "@/data/airportTransfers";
-import { AIRPORT_TRANSFER_CHECK_DATE } from "@/data/registry";
+import { airportDestinationCards, airportTransferPhotos, airportTransferBenefits, airportTransferTips, airportTransferFaqs } from "@/data/airportTransfers";
+import { AIRPORT_TRANSFER_CHECK_DATE, travelGuidePaths } from "@/data/registry";
 import { PageUpdated } from "@/components/PageUpdated";
 import { pageMeta } from "@/lib/site";
 import { parseAirportTransferSearch } from "@/lib/transfer-quote";
-import { ExchangeRateNote } from "@/components/CurrencyRates";
 import { hasPublicPhotoCredit } from "@/lib/photo-credits";
+
+const benefitIcons = [BadgeCheck, PlaneLanding, CalendarCheck] as const;
+const planningLinks = [
+  { title: "Ben Gurion arrival tips", description: "What to expect after landing.", to: travelGuidePaths.arrival, icon: PlaneLanding },
+  { title: "Taxis in Israel", description: "Everyday taxis, fares and apps.", to: travelGuidePaths.taxis, icon: CarFront },
+  { title: "Getting around Israel", description: "Plan your onward connections.", to: travelGuidePaths.israel, icon: TrainFront },
+  { title: "Tours & day trips", description: "Explore more of Israel.", to: "/tours/" as const, icon: Compass },
+] as const;
 
 export const Route = createFileRoute("/airport-transfers/")({
   validateSearch: parseAirportTransferSearch,
@@ -26,63 +32,75 @@ export const Route = createFileRoute("/airport-transfers/")({
   component: Airport,
 });
 
-const benefitIcons = [Handshake, PlaneLanding, CarFront, Luggage, Baby, Clock3];
 function Airport() {
   const { destination } = Route.useSearch();
   const [destinationId, setDestinationId] = useState(destination ?? "");
-  const guideCards = airportRelatedLinks.map((link) => ({ ...link, title: link.label }));
-  const creditedPhotos = [...Object.values(airportTransferPhotos), ...guideCards.map((guide) => guide.photo)].filter(hasPublicPhotoCredit);
   useEffect(() => setDestinationId(destination ?? ""), [destination]);
   const choose = (id: string) => {
     setDestinationId(id);
     requestAnimationFrame(() => document.getElementById("request-quote")?.focus({ preventScroll: true }));
   };
-  return <main className="mx-auto max-w-5xl px-4 pb-8">
-    <HubHeader crumbs={[{ name: "Home", to: "/" }, { name: "Airport transfers", to: "/airport-transfers/" }]}
-      eyebrow="Private airport transfers · TLV" title="Airport transfers"
-      intro="Arrange a private pickup from Ben Gurion Airport (TLV) to your hotel or another destination in Israel. Explore starting prices and request a personal quote from me." />
-    <div className="mt-6 flex flex-wrap items-center gap-3 rounded-xl bg-secondary/60 px-4 py-3 text-sm"><span className="font-medium">Pre-booked pickup</span><span aria-hidden>·</span><span>Your own vehicle</span><span aria-hidden>·</span><span>Your agreed destination</span><a href="#request-quote" className="ml-auto font-semibold text-primary underline underline-offset-4">Request your quote</a></div>
-
-    <section id="popular-destinations" aria-labelledby="popular-h" className="mt-10">
-      <p className="eyebrow">Your first stop in Israel</p><h2 id="popular-h" className="mt-2 text-3xl">Popular private transfers</h2>
-      <p className="mt-3 text-muted-foreground">Explore the route details or request a personal quote for your destination.</p>
-      <div className="mt-6 grid grid-cols-2 gap-3 sm:gap-5 xl:grid-cols-4">{airportDestinationCards.filter((card) => card.popular).map((card) => <DestinationCard key={card.id} id={card.id} destination={card.destination} price={card.price} photo={card.photo} onChoose={choose} />)}</div>
-    </section>
-    <section id="more-destinations" aria-labelledby="more-h" className="mt-10">
-      <h2 id="more-h" className="text-3xl">More destinations from Ben Gurion Airport</h2>
-      <div className="mt-6 grid gap-3 sm:grid-cols-2 sm:gap-5">{airportDestinationCards.filter((card) => !card.popular).map((card) => <DestinationCard key={card.id} id={card.id} destination={card.destination} price={card.price} photo={card.photo} onChoose={choose} layout="compact" />)}<DestinationCard id="other" destination="Your destination" photo={airportTransferPhotos["other"]!} onChoose={choose} layout="compact" /></div>
-    </section>
-    <div className="mt-5 rounded-xl border bg-secondary/40 p-4 text-sm leading-relaxed" data-testid="airport-rate-terms">
-      <p><strong>About these starting prices:</strong> one-way weekday rates for my private-transfer service, per vehicle for up to four passengers. Night, weekend and holiday supplements may apply. Larger groups need a separate quote.</p>
-      <p className="mt-2 text-muted-foreground">Final price and availability are confirmed before booking.</p>
-      <PageUpdated date={AIRPORT_TRANSFER_CHECK_DATE} />
-      <ExchangeRateNote className="mt-3" />
+  const creditedPhotos = [
+    ...airportDestinationCards.filter((card) => card.popular).map((card) => card.photo),
+    airportTransferPhotos["moshe"]!,
+  ].filter(hasPublicPhotoCredit);
+  return <main className="pb-12">
+    <HubHeader
+      crumbs={[{ name: "Home", to: "/" }, { name: "Airport transfers", to: "/airport-transfers/" }]}
+      title="Private airport transfers from Ben Gurion Airport"
+      intro="Arrange a private pickup from Ben Gurion Airport (TLV) to Jerusalem, Tel Aviv, Haifa, the Dead Sea or elsewhere in Israel. See my starting fares, request a quote or explore other booking platforms."
+      actions={<a href="#request-quote" className="inline-flex min-h-10 items-center rounded-lg border border-primary/30 px-4 py-2 text-sm font-semibold text-primary underline-offset-4 hover:bg-secondary hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">Request a personal quote</a>}
+    />
+    <div className="mx-auto max-w-5xl px-4">
+      <section id="popular-destinations" aria-labelledby="popular-h" className="mt-8 scroll-mt-24">
+        <h2 id="popular-h" className="text-2xl font-semibold">Popular private transfers</h2>
+        <p className="mt-2 text-sm leading-relaxed text-muted-foreground">Browse route details or request a quote for your airport pickup.</p>
+        <div className="mt-4 grid gap-3 md:grid-cols-2">
+          {airportDestinationCards.filter((card) => card.popular).map((card) => <DestinationCard key={card.id} id={card.id} destination={card.destination} price={card.price} photo={card.photo} onChoose={choose} layout="hub-featured" />)}
+        </div>
+      </section>
+      <section id="more-destinations" aria-labelledby="more-h" className="mt-9 scroll-mt-24">
+        <h2 id="more-h" className="text-2xl font-semibold">More destinations from Ben Gurion Airport</h2>
+        <div className="mt-4 grid gap-2 sm:grid-cols-2">
+          {airportDestinationCards.filter((card) => !card.popular).map((card) => <DestinationCard key={card.id} id={card.id} destination={card.destination} price={card.price} photo={card.photo} onChoose={choose} layout="hub-row" />)}
+          <DestinationCard id="other" destination="Another destination?" photo={airportTransferPhotos["other"]!} onChoose={choose} layout="hub-row" />
+        </div>
+      </section>
+      <div className="mt-4 text-xs leading-relaxed text-muted-foreground" data-testid="airport-rate-terms">
+        <p><strong>About starting prices:</strong> One-way weekday fares for my private-transfer service, per vehicle for up to four passengers. Night, weekend and holiday supplements may apply and will be included in your final quote. Larger groups need a separate quote. No extra charges are added after the full price is confirmed.</p>
+        <PageUpdated date={AIRPORT_TRANSFER_CHECK_DATE} />
+      </div>
+      <section id="benefits" aria-labelledby="benefits-h" className="mt-7 scroll-mt-24">
+        <h2 id="benefits-h" className="sr-only">Private transfer benefits</h2>
+        <div className="grid grid-cols-3 gap-2 rounded-2xl border bg-secondary/25 p-3 sm:gap-4 sm:p-4">
+          {airportTransferBenefits.map((benefit, index) => { const Icon = benefitIcons[index]!; return <div key={benefit.title} className="min-w-0 text-center">
+            <Icon className="mx-auto size-5 text-primary sm:size-6" aria-hidden />
+            <h3 className="mt-2 text-xs font-semibold leading-snug sm:text-sm">{benefit.title}</h3>
+            <p className="mt-1 hidden text-xs leading-relaxed text-muted-foreground sm:block">{benefit.text}</p>
+          </div>; })}
+        </div>
+      </section>
+      <TransferQuoteForm destinationId={destinationId} onDestinationChange={setDestinationId} compactHeader />
+      <section id="useful-information" aria-labelledby="tips-h" className="mt-4 rounded-xl border bg-secondary/20 px-4 py-3">
+        <h2 id="tips-h" className="text-sm font-semibold">{airportTransferTips[0]!.title}</h2>
+        <p className="mt-1 text-xs leading-relaxed text-muted-foreground">{airportTransferTips[0]!.text}</p>
+      </section>
+      <AirportBookingPlatforms compact />
+      <FaqList faqs={airportTransferFaqs} compact />
+      <section id="keep-planning" aria-labelledby="keep-planning-h" className="mt-9">
+        <h2 id="keep-planning-h" className="text-2xl font-semibold">Practical travel guides</h2>
+        <ul className="mt-4 grid gap-3 sm:grid-cols-2">
+          {planningLinks.map((item) => { const Icon = item.icon; return <li key={item.title}>
+            <Link to={item.to} className="group flex h-full items-start gap-3 rounded-xl border bg-card p-3 transition-colors hover:border-primary/50 hover:bg-secondary/20 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
+              <Icon aria-hidden className="mt-0.5 size-5 shrink-0 text-primary" />
+              <span className="min-w-0"><span className="block text-sm font-semibold group-hover:text-primary">{item.title}</span><span className="mt-1 block text-xs leading-relaxed text-muted-foreground">{item.description}</span></span>
+            </Link>
+          </li>; })}
+        </ul>
+      </section>
+      {creditedPhotos.length > 0 && <details className="mt-9 rounded-xl border p-4 text-xs text-muted-foreground"><summary className="cursor-pointer font-semibold">Photo credits</summary>
+        <ul className="mt-3 space-y-3">{[...new Map(creditedPhotos.map((photo) => [photo.src, photo])).values()].map((photo) => <li key={photo.src}><GuidePhotoCredit photo={photo} /></li>)}</ul>
+      </details>}
     </div>
-
-    <TransferQuoteForm destinationId={destinationId} onDestinationChange={setDestinationId} />
-
-    <aside className="mt-7 rounded-2xl border bg-secondary/40 p-5 sm:p-6" aria-labelledby="after-request-h">
-      <h2 id="after-request-h" className="text-xl font-semibold">What happens after you send a request?</h2>
-      <ol className="mt-4 grid gap-4 sm:grid-cols-3">
-        <li><strong>1. Route and party details</strong><p className="mt-1 text-sm leading-relaxed text-muted-foreground">I review your flight, hotel address, passenger count and luggage needs.</p></li>
-        <li><strong>2. Written offer</strong><p className="mt-1 text-sm leading-relaxed text-muted-foreground">Vehicle availability, the full quoted price and pickup terms need to be agreed.</p></li>
-        <li><strong>3. Booking confirmation</strong><p className="mt-1 text-sm leading-relaxed text-muted-foreground">Your ride is reserved only after confirmation; save the agreed meeting instructions for your arrival.</p></li>
-      </ol>
-    </aside>
-
-    <section id="benefits" aria-labelledby="benefits-h" className="mt-16">
-      <p className="eyebrow">Travel with a plan</p><h2 id="benefits-h" className="mt-2 text-3xl">Why arrange your airport pickup with me?</h2>
-      <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">{airportTransferBenefits.map((benefit, index) => { const Icon = benefitIcons[index]!; return <div key={benefit.title} className="rounded-xl border bg-card p-5"><Icon className="h-6 w-6 text-primary" aria-hidden /><h3 className="mt-4 text-xl">{benefit.title}</h3><p className="mt-2 text-sm leading-relaxed text-muted-foreground">{benefit.text}</p></div>; })}</div>
-    </section>
-    <section id="useful-information" aria-labelledby="tips-h" className="mt-14">
-      <h2 id="tips-h" className="text-3xl">A smoother arrival starts before you fly</h2>
-      <div className="mt-6 grid gap-5 md:grid-cols-2">{airportTransferTips.map((tip, index) => <article key={tip.title} className="rounded-xl bg-secondary/60 p-6"><p className="text-xs font-semibold text-primary">0{index + 1}</p><h3 className="mt-2 text-2xl">{tip.title}</h3><p className="mt-3 text-sm leading-relaxed text-muted-foreground">{tip.text}</p></article>)}</div>
-    </section>
-    <FaqList faqs={airportTransferFaqs} />
-
-    <AirportBookingPlatforms />
-
-    <RelatedGuideCards id="keep-planning" title="Your ride is only the start" eyebrow="Make more of your visit" intro="Find the right place to stay and discover what to do when you arrive." guides={guideCards} />
-    {creditedPhotos.length > 0 && <details className="mt-10 rounded-xl border bg-card p-4 text-xs text-muted-foreground"><summary className="cursor-pointer font-semibold">Photo credits</summary><ul className="mt-3 space-y-3">{[...new Map(creditedPhotos.map((photo) => [photo.src, photo])).values()].map((photo) => <li key={photo.src}><p>{photo.alt}</p><GuidePhotoCredit photo={photo} /></li>)}</ul></details>}
   </main>;
 }
