@@ -54,9 +54,22 @@ describe("private Ben Gurion transfers", () => {
     const more = screen.getByRole("region", { name: "More destinations from Ben Gurion Airport" });
     expect(within(more).getAllByTestId("airport-destination-card").map((card) => card.dataset["destination"])).toEqual(["raanana", "herzliya", "netanya", "ashdod", "caesarea", "nazareth", "eilat", "other"]);
     expect(within(more).getAllByRole("img")).toHaveLength(8);
+    expect(more.querySelector(".auto-rows-fr")).not.toBeNull();
+    for (const card of within(more).getAllByTestId("airport-destination-card")) {
+      expect(card).toHaveClass("grid", "h-full");
+      expect(card.children[0]?.tagName).toBe("IMG");
+      expect(card.children[1]?.querySelector("h3")).not.toBeNull();
+      expect(card.children[2]).toHaveTextContent("Request a quote");
+      expect(card.children[2]).toHaveAttribute("href", "#request-quote");
+    }
     expect(new Set(within(more).getAllByRole("img").map(image => image.getAttribute("src"))).size).toBe(8);
     expect(within(more).getByRole("img", { name: airportTransferPhotos["other"]!.alt })).toHaveAttribute("src", airportTransferPhotos["other"]!.src);
-    expect(screen.getByTestId("airport-rate-terms")).toHaveTextContent(/weekday.*up to four passengers.*Night, weekend and holiday/i);
+    const rateTerms = screen.getByTestId("airport-rate-terms");
+    expect(rateTerms).toHaveTextContent(/weekday.*up to four passengers.*Night, weekend and holiday/i);
+    expect(rateTerms).not.toHaveTextContent("About starting prices:");
+    expect(rateTerms.querySelectorAll(":scope > p")).toHaveLength(3);
+    expect(rateTerms).toHaveTextContent("Larger vehicles for groups and families can be provided, requiring a separate quote.");
+    expect(screen.getByTestId("airport-fx-note")).toHaveTextContent("Full price is confirmed in advance. All fares are quoted and charged in ILS.");
     expect(screen.getByRole("heading", { name: "Private airport transfers from Ben Gurion Airport" })).toBeInTheDocument();
     expect(screen.getByTestId("hub-header").parentElement?.tagName).toBe("MAIN");
     expect(within(screen.getByTestId("hub-header")).getByTestId("guide-hero-media").querySelector("img")).toHaveAttribute("src", airportTransferPhotos["other"]!.src);
@@ -84,6 +97,8 @@ describe("private Ben Gurion transfers", () => {
     expect(new Set(within(related).getAllByRole("img").map(image => image.getAttribute("src"))).size).toBe(6);
     const checklist = screen.getByRole("list", { name: "Airport transfer checklist" });
     expect(within(checklist).getAllByRole("listitem")).toHaveLength(5);
+    expect(checklist).toHaveTextContent("if you need them.");
+    expect(checklist).not.toHaveTextContent("if your party needs them.");
     expect(within(benefits).getByText(/Flight status is monitored/)).toBeInTheDocument();
     expect(within(benefits).getByText(/Direct bookings can be cancelled free/)).toBeInTheDocument();
     for (const link of within(related).getAllByRole("link")) {
@@ -183,7 +198,11 @@ describe("private Ben Gurion transfers", () => {
       expect.stringContaining("Compare offers"),
     ]);
     expect(banners.every(banner => Boolean(banner.querySelector(".bg-navy")))).toBe(true);
-    expect(screen.getByRole("region", { name: "Prefer to book online?" })).toHaveTextContent("Compare options");
+    const providerSection = screen.getByRole("region", { name: "Prefer to book online?" });
+    expect(providerSection).toHaveTextContent("You can also search for an airport transfer on one of the booking websites below.");
+    expect(providerSection).toHaveTextContent("Each provider sets its own prices and terms.");
+    expect(screen.getByTestId("airport-external-providers-note")).toHaveTextContent("Please review all details carefully before booking.");
+    expect(banners.every(banner => Boolean(banner.querySelector(".self-center")))).toBe(true);
     fireEvent.click(banners[0]!);
     expect(readOutboundClicks()).toEqual([expect.objectContaining({ pageId: "airport-private-transfers", productId: "airport-kiwitaxi", offerId: "airport-kiwitaxi" })]);
     expect(JSON.stringify(readOutboundClicks())).not.toContain("email");
