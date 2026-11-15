@@ -12,22 +12,23 @@ export function AirportDestinationCard({ id, destination, price, photo, onChoose
   // changing the established layout of the four dedicated route pages.
   if (layout === "hub-featured") return <article className="flex h-full min-w-0 flex-col rounded-2xl border bg-card p-3 transition-colors hover:border-primary/40" data-testid={testId} data-destination={id}>
     {route && <Link to={route.path} className="group flex min-w-0 flex-1 items-center gap-3 rounded-xl focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary sm:gap-4">
-      <img src={photo.src} alt={photo.alt} width={112} height={128} loading="lazy" decoding="async" className="h-28 w-24 shrink-0 rounded-xl object-cover sm:h-32 sm:w-28" />
+      <img src={photo.src} alt={photo.alt} width={160} height={106} loading="lazy" decoding="async" className="aspect-[3/2] w-28 shrink-0 rounded-xl object-cover sm:w-36" />
       <div className="min-w-0 flex-1">
-        <h3 className="text-lg font-semibold leading-snug">{destination}</h3>
-        <p className="mt-1 text-lg font-semibold tabular-nums text-foreground">From ₪{price?.amount.toLocaleString("en-US")}</p>
+        <h3 className="text-base font-semibold leading-snug sm:text-lg">{destination}</h3>
+        <p className="mt-1 text-base font-semibold tabular-nums text-foreground sm:text-lg">From ₪{price?.amount.toLocaleString("en-US")}</p>
         <p className="mt-0.5 text-xs leading-snug text-muted-foreground">Weekday · One way · Up to 4 passengers</p>
         <span className="mt-2 inline-block text-sm font-semibold text-primary group-hover:underline">View transfer details</span>
       </div>
     </Link>}
-    <a href="#request-quote" onClick={() => onChoose?.(id)} className="mt-2 self-end rounded-lg px-3 py-2 text-sm font-semibold text-primary underline-offset-4 hover:bg-secondary hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">Request a quote</a>
+    <a href="#request-quote" onClick={() => onChoose?.(id)} className="mt-1.5 self-end rounded-lg px-3 py-2 text-sm font-semibold text-primary underline-offset-4 hover:bg-secondary hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">Request a quote</a>
   </article>;
-  if (layout === "hub-row") return <article className="flex min-w-0 items-center justify-between gap-3 rounded-xl border bg-card p-3 transition-colors hover:border-primary/40" data-testid={testId} data-destination={id}>
+  if (layout === "hub-row") return <article className="flex h-full min-w-0 items-center gap-3 rounded-xl border bg-card p-2.5 transition-colors hover:border-primary/40 sm:p-3" data-testid={testId} data-destination={id}>
+    <img src={photo.src} alt={photo.alt} width={112} height={72} loading="lazy" decoding="async" className="aspect-[3/2] w-20 shrink-0 rounded-lg object-cover sm:w-24" />
     <div className="min-w-0 flex-1">
       <h3 className="text-sm font-semibold leading-snug">{id === "other" ? "Another destination?" : destination}</h3>
       {price && <p className="mt-0.5 text-sm font-medium tabular-nums text-muted-foreground">From ₪{price.amount.toLocaleString("en-US")}</p>}
+      <a href="#request-quote" onClick={() => onChoose?.(id)} className="mt-1 inline-flex min-h-9 items-center rounded-md py-1 text-xs font-semibold text-primary underline-offset-4 hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary sm:text-sm">Request a quote</a>
     </div>
-    <a href="#request-quote" onClick={() => onChoose?.(id)} className="shrink-0 rounded-lg px-2 py-2 text-sm font-semibold text-primary underline-offset-4 hover:bg-secondary hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">Request a quote</a>
   </article>;
   const compact = layout === "compact";
   const image = <img src={photo.src} alt={photo.alt} width={compact ? 80 : 360} height={compact ? 80 : 240} loading="lazy" decoding="async" className={compact ? "h-20 w-20 shrink-0 rounded-lg object-cover" : "aspect-[3/2] w-full object-cover"} />;
