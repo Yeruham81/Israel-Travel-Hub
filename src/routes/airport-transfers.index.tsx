@@ -7,10 +7,9 @@ import { TransferQuoteForm } from "@/components/TransferQuoteForm";
 import { AirportDestinationCard as DestinationCard } from "@/components/AirportDestinationCard";
 import { AirportBookingPlatforms } from "@/components/AirportBookingPlatforms";
 import { GuidePhotoCredit } from "@/components/TravelGuide";
-import { airportDestinationCards, airportTransferPhotos, airportTransferBenefits, airportTransferChecklist, airportTransferFaqs } from "@/data/airportTransfers";
+import { AIRPORT_TRANSFER_UPDATED_DATE, airportDestinationCards, airportTransferPhotos, airportTransferBenefits, airportTransferChecklist, airportTransferFaqs } from "@/data/airportTransfers";
 import { travelGuides } from "@/data/travelGuides";
-import { AIRPORT_TRANSFER_CHECK_DATE, travelGuidePaths } from "@/data/registry";
-import { PageUpdated } from "@/components/PageUpdated";
+import { travelGuidePaths } from "@/data/registry";
 import { pageMeta } from "@/lib/site";
 import { parseAirportTransferSearch } from "@/lib/transfer-quote";
 import { hasPublicPhotoCredit } from "@/lib/photo-credits";
@@ -55,6 +54,7 @@ function Airport() {
   ].filter(hasPublicPhotoCredit);
   return <main className="pb-12">
     <HubHeader
+      checkedAt={AIRPORT_TRANSFER_UPDATED_DATE}
       crumbs={[{ name: "Home", to: "/" }, { name: "Airport transfers", to: "/airport-transfers/" }]}
       title="Private airport transfers from Ben Gurion Airport"
       intro="Arrange a private pickup from Ben Gurion Airport (TLV) to Jerusalem, Tel Aviv, Haifa, the Dead Sea or elsewhere in Israel. See my starting fares, request a quote or explore other booking platforms."
@@ -80,7 +80,6 @@ function Airport() {
         <p>All prices are one-way weekday fares, per vehicle for up to four passengers. Night, weekend and holiday surcharges may apply.</p>
         <p className="mt-2">Larger vehicles for groups and families can be provided, requiring a separate quote.</p>
         <p className="mt-2" data-testid="airport-fx-note">Full price is confirmed in advance. All fares are quoted and charged in ILS. USD and EUR amounts are approximate, based on current exchange rates.</p>
-        <PageUpdated date={AIRPORT_TRANSFER_CHECK_DATE} />
       </div>
       <section id="benefits" aria-labelledby="benefits-h" className="mt-7 scroll-mt-24">
         <h2 id="benefits-h" className="sr-only">Private transfer benefits</h2>
