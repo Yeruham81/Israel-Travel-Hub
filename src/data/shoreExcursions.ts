@@ -56,6 +56,8 @@ const guidedTourPhotos: Record<string, GuidePhoto> = {
   "shore-viator-haifa-caesarea-private": { src: caesareaTheatre, alt: "Roman theatre and ancient ruins at Caesarea on the Mediterranean coast", sourceUrl: "" },
   "shore-viator-haifa-galilee-private": { src: "/images/attractions/sea-of-galilee.webp", alt: "Sea of Galilee lake and hills of northern Israel", sourceUrl: "" },
   "shore-viator-haifa-akko-private": { src: roshHanikraGrottoes, alt: "White limestone cliffs and coastal grottoes at Rosh Hanikra", sourceUrl: "" },
+  "shore-viator-ashdod-masada-dead-sea": { src: "/images/tours/masada-ruins.webp", alt: "Ancient fortress ruins atop Masada above the Judean Desert", sourceUrl: "" },
+  "shore-viator-haifa-jerusalem-holy-city": { src: "/images/jerusalem/mount-zion/st-peter-in-gallicantu.webp", alt: "St Peter in Gallicantu church on Mount Zion in Jerusalem", sourceUrl: "" },
 };
 
 const itineraryDetails: Record<string, ItineraryDetails> = {

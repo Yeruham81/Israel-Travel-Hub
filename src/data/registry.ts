@@ -395,6 +395,8 @@ export interface ShoreTourProduct {
   durationLabel?: string;
   includesLabel?: string;
   checkedAt?: ISODate;
+  /** Verified product-specific booking-platform rating, not a platform or operator score. */
+  rating?: { value: number; count: number; checkedAt: ISODate };
   listedPrice?: {
     kind: "published_snapshot";
     amount: number;
@@ -546,6 +548,9 @@ export const shoreTourProducts: ShoreTourProduct[] = [
     summary: "A shared guided excursion to Nazareth and Galilee's Christian sites, with pickup and drop-off at Haifa Port. This product is for arriving cruise passengers.",
     publicUrl: "https://www.viator.com/tours/Tiberias/Haifa-Shore-Excursion-Nazareth-and-Galilee-Day-Trip/d24329-7414HBG", groupFormat: "shared",
     durationLabel: "9 hours", includesLabel: "Guide & return transport",
+    checkedAt: "2026-11-15",
+    rating: { value: 4.6, count: 109, checkedAt: "2026-11-15" },
+    listedPrice: { kind: "published_snapshot", amount: 115, currency: "USD", basis: "per_person", checkedAt: "2026-11-15", sourceId: "shore-viator-haifa-galilee" },
   },
   {
     id: "shore-viator-ashdod-jerusalem-dead-sea", portIds: ["ashdod"], operatorId: "guided-tours-israel", partnerId: "viator",
@@ -553,6 +558,9 @@ export const shoreTourProducts: ShoreTourProduct[] = [
     summary: "A shared guided day combining Jerusalem's Old City with a Dead Sea visit, with pickup and return at Ashdod Port for cruise passengers.",
     publicUrl: "https://www.viator.com/tours/Ashdod/Ashdod-Shore-Excursion-Jerusalem-and-Dead-Sea-Day-Trip/d4470-7414AJD", groupFormat: "shared",
     durationLabel: "8–10 hours", includesLabel: "Guide & return transport",
+    checkedAt: "2026-11-15",
+    rating: { value: 4.3, count: 104, checkedAt: "2026-11-15" },
+    listedPrice: { kind: "published_snapshot", amount: 125, currency: "USD", basis: "per_person", checkedAt: "2026-11-15", sourceId: "shore-viator-ashdod-jerusalem-dead-sea" },
   },
   {
     id: "shore-viator-haifa-jerusalem-bethlehem", portIds: ["haifa"], operatorId: "bein-harim", partnerId: "viator",
@@ -567,28 +575,39 @@ export const shoreTourProducts: ShoreTourProduct[] = [
     summary: "Walk Jerusalem's Old City and visit Bethlehem's Church of the Nativity on a guided day with pickup and return at Ashdod Port.",
     publicUrl: "https://www.viator.com/tours/Ashdod/Ashdod-Port-Shore-Excursion-Jerusalem-and-Bethlehem-Day-Tour-from-Ashdod-Port/d4470-5209P131", groupFormat: "shared",
     durationLabel: "9 hours", includesLabel: "Guide & return transport",
-    listedPrice: { kind: "published_snapshot", amount: 120, currency: "USD", basis: "per_person", checkedAt: "2026-10-21", sourceId: "shore-viator-ashdod-jerusalem-bethlehem-usd" },
+    checkedAt: "2026-11-15",
+    rating: { value: 3.6, count: 31, checkedAt: "2026-11-15" },
+    listedPrice: { kind: "published_snapshot", amount: 120, currency: "USD", basis: "per_person", checkedAt: "2026-11-15", sourceId: "shore-viator-ashdod-jerusalem-bethlehem" },
   },
   {
     id: "shore-viator-ashdod-jerusalem-bethlehem-smallgroup", portIds: ["ashdod"], operatorId: "compass-travel", partnerId: "viator",
     destinationIds: ["jerusalem", "bethlehem"], title: "Jerusalem & Bethlehem from Ashdod — small group",
     summary: "Join a guided small-group day from Ashdod Port to Jerusalem's Old City and Bethlehem, with pickup and return planned around your ship. Check which holy sites can be visited.",
     publicUrl: "https://www.viator.com/tours/Ashdod/Jerusalem-and-Bethlehem-from-Ashdod-Port/d4470-7367P45", groupFormat: "shared",
-    durationLabel: "8–10 hours", includesLabel: "Guided tour & return transport", checkedAt: "2026-11-15",
+    durationLabel: "8–10 hours", includesLabel: "Guided tour & return transport",
+    checkedAt: "2026-11-15",
+    rating: { value: 4.9, count: 29, checkedAt: "2026-11-15" },
+    listedPrice: { kind: "published_snapshot", amount: 225, currency: "USD", basis: "per_person", checkedAt: "2026-11-15", sourceId: "shore-viator-ashdod-jerusalem-bethlehem-smallgroup" },
   },
   {
     id: "shore-viator-ashdod-jerusalem-private", portIds: ["ashdod"], operatorId: "bein-harim", partnerId: "viator",
     destinationIds: ["jerusalem"], title: "Private Jerusalem & Western Wall from Ashdod",
     summary: "Explore Jerusalem's Old City with a private guide after pickup at Ashdod Port. A focused option for the Western Wall, historic quarters and major Christian sites.",
     publicUrl: "https://www.viator.com/tours/Ashdod/Ashdod-Shore-Excursion-Private-Jerusalem-Tour-Including-Western-Wall/d4470-5209PRTJRSJERUA", groupFormat: "private",
-    durationLabel: "10 hours", includesLabel: "Guided tour & return transport", checkedAt: "2026-11-15",
+    durationLabel: "10 hours", includesLabel: "Guided tour & return transport",
+    checkedAt: "2026-11-15",
+    rating: { value: 4.3, count: 7, checkedAt: "2026-11-15" },
+    listedPrice: { kind: "published_snapshot", amount: 480, currency: "USD", basis: "per_person", checkedAt: "2026-11-15", sourceId: "shore-viator-ashdod-jerusalem-private" },
   },
   {
     id: "shore-viator-haifa-jerusalem-bethlehem-smallgroup", portIds: ["haifa"], operatorId: "compass-travel", partnerId: "viator",
     destinationIds: ["jerusalem", "bethlehem"], title: "Jerusalem & Bethlehem from Haifa — small group",
     summary: "An extended guided excursion from Haifa Port to Jerusalem and Bethlehem with port pickup and return aligned to your ship's visit; plan for a long road journey.",
     publicUrl: "https://www.viator.com/tours/Haifa/Jerusalem-and-Bethlehem-Tour-from-Haifa-Port/d4472-7367P43", groupFormat: "shared",
-    durationLabel: "8–10 hours", includesLabel: "Guided tour & return transport", checkedAt: "2026-11-15",
+    durationLabel: "8–10 hours", includesLabel: "Guided tour & return transport",
+    checkedAt: "2026-11-15",
+    rating: { value: 4.5, count: 31, checkedAt: "2026-11-15" },
+    listedPrice: { kind: "published_snapshot", amount: 255, currency: "USD", basis: "per_person", checkedAt: "2026-11-15", sourceId: "shore-viator-haifa-jerusalem-bethlehem-smallgroup" },
   },
   {
     id: "shore-viator-haifa-jerusalem-private", portIds: ["haifa"], operatorId: "bein-harim", partnerId: "viator",
@@ -617,6 +636,26 @@ export const shoreTourProducts: ShoreTourProduct[] = [
     summary: "A private northern-coast excursion from Haifa Cruise Port, combining Akko's Crusader heritage with the Rosh Hanikra grottoes where accessible. This listing has non-refundable conditions.",
     publicUrl: "https://www.viator.com/tours/Haifa/Private-Shore-Tour-Acre-Crusader-and-Rosh-Hanikrah-from-Haifa-Port/d4472-320728P2898", groupFormat: "private",
     durationLabel: "7 hours", includesLabel: "Guided tour & return transport", checkedAt: "2026-11-15",
+  },
+  {
+    id: "shore-viator-ashdod-masada-dead-sea", portIds: ["ashdod"], operatorId: "bein-harim", partnerId: "viator",
+    destinationIds: ["masada", "dead-sea"], title: "Masada & the Dead Sea from Ashdod Port",
+    summary: "A guided group excursion with pickup at Ashdod Port, a cable-car visit to Masada and a Dead Sea stop at Ein Bokek, returning to the cruise port.",
+    publicUrl: "https://www.viator.com/tours/Ashdod/Ashdod-Port-Shore-Excursion-Masada-and-the-Dead-Sea-Day-Tour-from-Ashdod-Port/d4470-5209P132", groupFormat: "shared",
+    durationLabel: "8–9 hours", includesLabel: "Guided day trip & return transport",
+    checkedAt: "2026-11-15",
+    rating: { value: 4.2, count: 29, checkedAt: "2026-11-15" },
+    listedPrice: { kind: "published_snapshot", amount: 130, currency: "USD", basis: "per_person", checkedAt: "2026-11-15", sourceId: "shore-viator-ashdod-masada-dead-sea" },
+  },
+  {
+    id: "shore-viator-haifa-jerusalem-holy-city", portIds: ["haifa"], operatorId: "israel-with-fun", partnerId: "viator",
+    destinationIds: ["jerusalem", "bethlehem"], title: "Jerusalem & Bethlehem — private guided day from Haifa",
+    summary: "A private guided visit to Jerusalem's Old City and Bethlehem, with pickup at Haifa Port on request. Confirm your ship's docking times and return location before booking.",
+    publicUrl: "https://www.viator.com/tours/Haifa/Holy-Jerusalem-and-Bethlehem-Private-Tour/d4472-136477P11", groupFormat: "private",
+    durationLabel: "9–11 hours", includesLabel: "Guided day trip & return transport",
+    checkedAt: "2026-11-15",
+    rating: { value: 5, count: 9, checkedAt: "2026-11-15" },
+    listedPrice: { kind: "published_snapshot", amount: 1175, currency: "USD", basis: "per_group", maxPartySize: 2, checkedAt: "2026-11-15", sourceId: "shore-viator-haifa-jerusalem-holy-city" },
   },
 ];
 
@@ -1279,6 +1318,7 @@ export const operators: Operator[] = [
   { id: "taxigo-online", name: "taxiGo.online", kind: "tour_operator" },
   { id: "abano-terme-online", name: "Abano Terme Online", kind: "tour_operator" },
   { id: "taxigo-dmc", name: "taxiGo DMC", kind: "tour_operator" },
+  { id: "israel-with-fun", name: "Israel With Fun — Daniel Sigalov", kind: "tour_operator" },
   { id: "inpa", name: "Israel Nature and Parks Authority", kind: "official_site" },
   { id: "eyal-korin", name: "Eyal Korin – Ramon Crater Tours", kind: "tour_operator" },
   { id: "desert-prime", name: "Desert-Prime", kind: "tour_operator" },
@@ -1448,6 +1488,8 @@ export const affiliateConfig: Record<string, { trackingUrl: string } | undefined
   "shore-viator-haifa-caesarea-private": { trackingUrl: "https://viator.tpm.li/gQj7uWQF" },
   "shore-viator-haifa-galilee-private": { trackingUrl: "https://viator.tpm.li/1WwXrhOW" },
   "shore-viator-haifa-akko-private": { trackingUrl: "https://viator.tpm.li/vgvVO4ap" },
+  "shore-viator-ashdod-masada-dead-sea": undefined,
+  "shore-viator-haifa-jerusalem-holy-city": undefined,
 
   "esim-airalo": { trackingUrl: "https://airalo.tpm.li/JmHFDV3v" },
   "esim-airalo-compatibility": { trackingUrl: AIRALO_COMPATIBILITY_AFFILIATE_URL },

@@ -41,6 +41,17 @@ export function shoreListedPrice(product: ShoreTourProduct | undefined, now = ne
   return price;
 }
 
+/** Verified product ratings remain visible only while their source check is sufficiently recent. */
+export function shoreListedRating(product: ShoreTourProduct | undefined, now = new Date()) {
+  const rating = product?.rating;
+  if (!rating || !Number.isFinite(rating.value) || rating.value < 1 || rating.value > 5 || !Number.isInteger(rating.count) || rating.count < 1) return undefined;
+  const source = sources.find(source => source.id === product.id);
+  const checked = Date.parse(rating.checkedAt + "T00:00:00Z");
+  const age = now.getTime() - checked;
+  if (!source || source.checkedAt !== rating.checkedAt || !Number.isFinite(age) || age < 0 || age > 90 * 86_400_000) return undefined;
+  return rating;
+}
+
 export function shoreServiceHref(portId: ShorePortId, search: ShoreServiceSearch) {
   const params = new URLSearchParams(parseShoreServiceSearch(search));
   return `${shorePorts[portId].path}${params.size ? `?${params}` : ""}`;
