@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useRef, useState, type ReactNode } from "react";
 
-export type HeroSlide = { src: string; srcSm: string; srcMedium: string; alt: string; caption: string; pos?: string };
+export type HeroSlide = { src: string; srcSm: string; srcMedium: string; alt: string; caption: string; pos?: string; width?: number; height?: number };
 
 const INTERVAL = 6000;
 
@@ -8,9 +8,7 @@ type Waiter = { resolve: () => void; reject: () => void };
 
 export function HeroCarousel({ slides, children }: { slides: HeroSlide[]; children: ReactNode }) {
   const [index, setIndex] = useState(0);
-  const [playing, setPlaying] = useState(true); // user intent
   const [reduced, setReduced] = useState(false);
-  const [userChosePlay, setUserChosePlay] = useState(false);
   const [hovered, setHovered] = useState(false);
   const [focused, setFocused] = useState(false);
   const [hidden, setHidden] = useState(false);
@@ -59,8 +57,7 @@ export function HeroCarousel({ slides, children }: { slides: HeroSlide[]; childr
     if (i !== index) setMounted((prev) => { const s = new Set(prev); s.delete(i); return s; }); // allow a later retry
   };
 
-  const autoplayOn = playing && (!reduced || userChosePlay);
-  const running = autoplayOn && !hovered && !focused && !hidden;
+  const running = !reduced && !hovered && !focused && !hidden;
 
   // Defer speculative loading of slide two until after the initial mobile
   // load window. Autoplay remains at six seconds and manual navigation can
@@ -91,13 +88,7 @@ export function HeroCarousel({ slides, children }: { slides: HeroSlide[]; childr
     return () => window.clearTimeout(t);
   }, [running, index, tick, n, go]);
 
-  const togglePlay = () => {
-    if (autoplayOn) setPlaying(false);
-    else { setPlaying(true); if (reduced) setUserChosePlay(true); setTick((t) => t + 1); }
-  };
-
-  const fade = reduced && !userChosePlay ? "" : "transition-opacity duration-1000 ease-in-out";
-  const btn = "grid h-9 w-9 place-items-center rounded-full bg-primary/70 text-primary-foreground hover:bg-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-foreground";
+  const fade = reduced ? "" : "transition-opacity duration-1000 ease-in-out";
 
   return (
     <div
@@ -118,31 +109,29 @@ export function HeroCarousel({ slides, children }: { slides: HeroSlide[]; childr
               <picture>
                 <source media="(max-width: 767px)" srcSet={s.srcSm} />
                 <source media="(max-width: 1800px)" srcSet={s.srcMedium} />
-                <img src={s.src} alt={s.alt} width={1920} height={872} fetchPriority={i === 0 ? "high" : "auto"} decoding="async" onLoad={(e) => onImgLoad(i, e.currentTarget)} onError={() => onImgError(i)} className="h-full w-full object-cover" style={{ objectPosition: s.pos ?? "center" }} />
+                <img src={s.src} alt={s.alt} width={s.width ?? 1920} height={s.height ?? 872} fetchPriority={i === 0 ? "high" : "auto"} decoding="async" onLoad={(e) => onImgLoad(i, e.currentTarget)} onError={() => onImgError(i)} className="h-full w-full object-cover" style={{ objectPosition: s.pos ?? "center" }} />
               </picture>
             )}
           </div>
         ))}
       </div>
-      <div className="absolute inset-0 bg-gradient-to-r from-primary/90 via-primary/60 to-primary/10 max-md:bg-gradient-to-t max-md:from-primary/95 max-md:via-primary/65 max-md:to-primary/25" aria-hidden />
+      <div className="absolute inset-0 bg-gradient-to-r from-black/50 via-black/20 to-black/5 max-md:bg-gradient-to-t max-md:from-black/60 max-md:via-black/30 max-md:to-black/10" aria-hidden />
       <div className="relative mx-auto max-w-[90rem]">{children}</div>
-      <div className="relative mx-auto mt-16 flex max-w-[90rem] flex-wrap items-end justify-between gap-3 px-6 pb-8 md:mt-24 md:px-12 md:pb-10">
-        <p className="min-w-0 max-w-xs text-[10px] font-normal leading-snug text-primary-foreground/60 md:text-xs" aria-live={autoplayOn ? "off" : "polite"}>
-          {slides[index]?.caption}
-        </p>
-        <div className="flex shrink-0 items-center gap-2">
-          <button type="button" className={btn} onClick={() => go(index - 1)} aria-label="Previous place">‹</button>
-          <div className="flex items-center gap-1" role="group" aria-label="Choose a place">
-            {slides.map((s, i) => (
-              <button key={s.caption} type="button" onClick={() => go(i)} aria-label={`Show ${s.caption}`} aria-current={i === index} className="grid h-7 w-5 place-items-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-foreground rounded">
-                <span className={`block h-2 rounded-full bg-primary-foreground transition-all ${i === index ? "w-5" : "w-2 opacity-50"}`} />
-              </button>
-            ))}
-          </div>
-          <button type="button" className={btn} onClick={() => go(index + 1)} aria-label="Next place">›</button>
-          <button type="button" className={btn} onClick={togglePlay} aria-label={autoplayOn ? "Pause slideshow" : "Play slideshow"} aria-pressed={!autoplayOn}>
-            {autoplayOn ? "❚❚" : "▶"}
-          </button>
+      <div className="relative mx-auto mt-14 flex max-w-[90rem] justify-center pb-3 md:mt-20 md:pb-4">
+        <p className="sr-only" aria-live={running ? "off" : "polite"}>{slides[index]?.caption}</p>
+        <div className="flex items-center justify-center gap-0.5" role="group" aria-label="Choose a place">
+          {slides.map((s, i) => (
+            <button
+              key={s.caption}
+              type="button"
+              onClick={() => go(i)}
+              aria-label={`Show ${s.caption}`}
+              aria-current={i === index}
+              className="grid h-7 w-5 place-items-center rounded-full focus-visible:outline-2 focus-visible:outline-white"
+            >
+              <span aria-hidden className={`block h-1.5 rounded-full bg-white/80 transition-all duration-200 md:h-2 ${i === index ? "w-3 opacity-90" : "w-1.5 opacity-45 md:w-2"}`} />
+            </button>
+          ))}
         </div>
       </div>
     </div>

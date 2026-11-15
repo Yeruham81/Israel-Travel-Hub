@@ -19,13 +19,18 @@ describe("homepage marketing copy and service sections", () => {
     expect(headline).toHaveClass("md:text-5xl", "lg:max-w-none", "lg:whitespace-nowrap");
     expect(headline.nextElementSibling).toHaveClass("mt-3");
     const caption = screen.getByText("Jerusalem Old City from the Mount of Olives");
-    expect(caption).toHaveClass("text-[10px]", "text-primary-foreground/60");
-    expect(caption.parentElement).toHaveClass("mt-16", "md:mt-24");
+    expect(caption).toHaveClass("sr-only");
+    expect(caption.parentElement).toHaveClass("mt-14", "md:mt-20");
+    expect(screen.getAllByRole("button", { name: /^Show / })).toHaveLength(9);
+    expect(screen.queryByRole("button", { name: "Pause slideshow" })).not.toBeInTheDocument();
+    expect(screen.queryByRole("button", { name: "Play slideshow" })).not.toBeInTheDocument();
+    expect(screen.queryByRole("button", { name: "Previous place" })).not.toBeInTheDocument();
+    expect(screen.queryByRole("button", { name: "Next place" })).not.toBeInTheDocument();
     expect(screen.queryByRole("link", { name: "Find where to stay" })).not.toBeInTheDocument();
     expect(screen.queryByRole("link", { name: "Browse destinations" })).not.toBeInTheDocument();
     expect(container.querySelectorAll("a")).toHaveLength(0);
     expect(screen.getByRole("region", { name: "Places in Israel" })).toBeInTheDocument();
-    expect(screen.getByRole("button", { name: "Next place" })).toBeInTheDocument();
+    expect(screen.getByRole("group", { name: "Choose a place" })).toBeInTheDocument();
   });
   it("shows service sections without the redundant shortcut navigation under the hero", async () => {
     const router = createRouter({
