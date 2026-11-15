@@ -31,7 +31,7 @@ const guides = {
     title: "Old Jaffa & its harbour",
     description: "Explore stone lanes, sea views and the flea-market area. Choose a few memorable stops and leave time to enjoy the atmosphere.",
     to: "/travel-blog/jaffa/",
-    photo: { src: jaffa, alt: "Old Jaffa's historic buildings and harbour beside the Mediterranean", sourceUrl: "https://www.israel-taxi.com/wp-content/uploads/2025/08/jaffa_panorama2.jpg" },
+    photo: { src: jaffa, alt: "Old Jaffa's historic buildings and harbour beside the Mediterranean", sourceUrl: "" },
   },
   masada: {
     title: "Masada: fortress & desert views",
@@ -61,7 +61,7 @@ const guides = {
     title: "Akko's Old City & harbour",
     description: "Discover Crusader heritage, market lanes and the fishing harbour. Plan the walking route and admission choices for a day along the northern coast.",
     to: "/travel-blog/akko-acre/",
-    photo: { src: akko, alt: "Fishing boats and historic buildings around Akko's harbour", sourceUrl: "https://www.israel-taxi.com/wp-content/uploads/2025/08/akko_port_2.jpg", credit: "Akko harbour · publisher's original excursion photograph; retained unchanged" },
+    photo: { src: akko, alt: "Fishing boats and historic buildings around Akko's harbour", sourceUrl: "", credit: "Akko harbour · publisher's original excursion photograph; retained unchanged" },
   },
   nazareth: {
     title: "Nazareth & the Annunciation",
@@ -79,7 +79,7 @@ const guides = {
     title: "Rosh Hanikra & the grottoes",
     description: "Discover the white cliffs and sea caves of the northern coast. Check operating conditions before including the grottoes in your day ashore.",
     to: "/travel-blog/rosh-hanikra/",
-    photo: { src: roshHanikra, alt: "Turquoise Mediterranean water inside the Rosh Hanikra grottoes", sourceUrl: "https://www.israel-taxi.com/wp-content/uploads/2025/08/rosh_hanikra.jpg", credit: "Photograph from the publisher's Rosh Hanikra guide; retained unchanged" },
+    photo: { src: roshHanikra, alt: "Turquoise Mediterranean water inside the Rosh Hanikra grottoes", sourceUrl: "", credit: "Photograph from the publisher's Rosh Hanikra guide; retained unchanged" },
   },
 } satisfies Record<string, ShoreReadingGuide>;
 
