@@ -1,5 +1,5 @@
 import { Link, type LinkProps } from "@tanstack/react-router";
-import { BadgeCheck, CalendarCheck, CheckCircle2, PlaneLanding } from "lucide-react";
+import { ArrowRight, BadgeCheck, CalendarCheck, CheckCircle2, LayoutGrid, MapPin, PlaneLanding } from "lucide-react";
 import { Breadcrumbs, FaqList } from "@/components/Guide";
 import { TransferQuoteForm } from "@/components/TransferQuoteForm";
 import { GuidePhotoCredit } from "@/components/TravelGuide";
@@ -164,9 +164,29 @@ export function AirportRoutePage({ id }: { id: AirportTransferRouteId }) {
       </section>
       <section id="other-routes" aria-labelledby="other-routes-h" className="mt-9">
         <h2 id="other-routes-h" className="text-xl font-semibold">Other airport transfer destinations</h2>
-        <ul className="mt-3 flex flex-wrap gap-2">
-          {airportTransferRoutes.filter((route) => route.id !== id).map((route) => <li key={route.id}><Link to={route.path} className="chip inline-block">Ben Gurion to {getAirportRouteGuide(route.id).city}</Link></li>)}
-          <li><Link to="/airport-transfers/" className="chip inline-block">All destinations</Link></li>
+        <ul className="mt-4 grid gap-3 sm:grid-cols-2">
+          {airportTransferRoutes.filter((route) => route.id !== id).map((route) => <li key={route.id} className="min-w-0">
+            <Link to={route.path} className="group flex h-full min-h-24 min-w-0 items-center gap-3 rounded-xl border bg-card p-3 shadow-sm transition-[border-color,background-color,box-shadow] hover:border-primary/55 hover:bg-secondary/25 hover:shadow-md focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
+              <span className="flex size-11 shrink-0 items-center justify-center rounded-lg border border-primary/20 bg-primary/10 text-primary"><MapPin className="size-5" aria-hidden /></span>
+              <span className="min-w-0 flex-1">
+                <span className="block text-xs text-muted-foreground">From Ben Gurion Airport</span>
+                <span className="mt-0.5 block font-semibold leading-snug text-foreground group-hover:text-primary">{getAirportRouteGuide(route.id).city}</span>
+                <span className="mt-1 block text-xs text-muted-foreground">Starting fare &amp; route details</span>
+              </span>
+              <ArrowRight className="size-4 shrink-0 text-primary" aria-hidden />
+            </Link>
+          </li>)}
+          <li className="min-w-0">
+            <Link to="/airport-transfers/" className="group flex h-full min-h-24 min-w-0 items-center gap-3 rounded-xl border bg-secondary/30 p-3 shadow-sm transition-[border-color,background-color,box-shadow] hover:border-primary/55 hover:bg-secondary/55 hover:shadow-md focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
+              <span className="flex size-11 shrink-0 items-center justify-center rounded-lg border border-primary/20 bg-primary/10 text-primary"><LayoutGrid className="size-5" aria-hidden /></span>
+              <span className="min-w-0 flex-1">
+                <span className="block text-xs text-muted-foreground">Explore more routes</span>
+                <span className="mt-0.5 block font-semibold leading-snug text-foreground group-hover:text-primary">All destinations</span>
+                <span className="mt-1 block text-xs text-muted-foreground">Browse transfers and request a quote</span>
+              </span>
+              <ArrowRight className="size-4 shrink-0 text-primary" aria-hidden />
+            </Link>
+          </li>
         </ul>
       </section>
       {creditedPhotos.length > 0 && <details className="mt-9 rounded-xl border p-4 text-xs text-muted-foreground">
