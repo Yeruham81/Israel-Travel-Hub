@@ -4,7 +4,7 @@ import { cleanup, fireEvent, render, screen, within } from "@testing-library/rea
 import { afterEach, describe, expect, it, vi } from "vitest";
 import { Route as AirportRoute } from "@/routes/airport-transfers.index";
 import { routeTree } from "@/routeTree.gen";
-import { airportTransferRates, affiliateConfig, linksForPage, partners } from "@/data/registry";
+import { airportTransferRates, airportTransferRoutes, affiliateConfig, linksForPage, partners } from "@/data/registry";
 import { airportDestinationCards, airportHomepageRoutePhotos, airportTransferPhotos } from "@/data/airportTransfers";
 import { emptyTransferQuote, buildTransferQuoteDraft, validateTransferQuote } from "@/lib/transfer-quote";
 import { readOutboundClicks } from "@/lib/outbound";

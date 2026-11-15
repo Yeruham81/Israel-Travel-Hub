@@ -184,7 +184,7 @@ export const journeyDestinationGuides = {
       },
       {
         "label": "Plan airport transport to Ein Bokek",
-        "to": "/airport-transfers/ben-gurion-airport-to-ein-bokek/"
+        "to": "/airport-transfers/ein-bokek/"
       }
     ],
     "sourceIds": [
