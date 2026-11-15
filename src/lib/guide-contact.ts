@@ -38,9 +38,9 @@ export function guideContactCopy(_title: string, kind: GuideContactKind, place?:
         introduction: `Wondering which area of ${destination} makes sense for your visit? Tell me your dates, priorities and how you plan to arrive. I'll reply personally with relevant planning guidance; hotel availability and booking conditions must be checked with the provider.`,
         placeholder: "Travel dates, preferred area, arrival plans or your question…" };
     case "connectivity":
-      return { ...base, heading: "Questions about staying connected in Israel?",
-        introduction: "Have a question about the mobile-data and eSIM options explained here? Tell me what device you use and what you need during your trip. I'll reply personally; plan compatibility and availability should be confirmed with the provider.",
-        placeholder: "Device model, trip length, data needs or your question…" };
+      return { ...base, heading: "Planning a trip to Israel?",
+        introduction: "Have a question about planning your visit, getting from the airport or arranging a private journey? Send me your travel dates, destinations and what you would like help with. I'll reply personally.",
+        placeholder: "Travel dates, destinations, number of travellers or your question…" };
     default:
       return { ...base, heading: "Ask me about your visit to Israel",
         introduction: "Have a question about the practical advice in this guide? Tell me where and when you plan to visit and what you'd like to clarify. I'll reply personally and can help with transport planning where relevant.",
