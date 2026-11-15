@@ -103,10 +103,10 @@ describe("shared sidebar navigation", () => {
     const transportation = within(nav).getByRole("region", { name: "Transportation" });
     expect(within(transportation).getAllByRole("link").map((link) => [link.textContent, link.getAttribute("href")])).toEqual([
       ["Airport transfers", "/airport-transfers/"],
-      ["To Jerusalem", "/airport-transfers/ben-gurion-airport-to-jerusalem/"],
-      ["To Tel Aviv & Jaffa", "/airport-transfers/ben-gurion-airport-to-tel-aviv/"],
-      ["To Haifa", "/airport-transfers/ben-gurion-airport-to-haifa/"],
-      ["To Ein Bokek at the Dead Sea", "/airport-transfers/ben-gurion-airport-to-ein-bokek/"],
+      ["To Jerusalem", "/airport-transfers/jerusalem/"],
+      ["To Tel Aviv & Jaffa", "/airport-transfers/tel-aviv/"],
+      ["To Haifa", "/airport-transfers/haifa/"],
+      ["To Ein Bokek at the Dead Sea", "/airport-transfers/ein-bokek/"],
       ["To other destinations", "/airport-transfers/"],
       ["Private driver service", "/private-driver/"],
       ["Rent a car in Israel", "https://discovercars.tpm.li/w2RwEsmb?sub_id=itt_car_where_to_stay_in_jerusalem"],
@@ -196,7 +196,7 @@ describe("shared sidebar navigation", () => {
     expect(within(destinations).getAllByRole("link")).toHaveLength(5);
     expect(within(destinations).getAllByRole("link").at(-1)).toHaveTextContent("To other destinations");
     fireEvent.click(within(destinations).getByRole("link", { name: "To Haifa" }));
-    await waitFor(() => expect(router.state.location.pathname).toBe("/airport-transfers/ben-gurion-airport-to-haifa/"));
+    await waitFor(() => expect(router.state.location.pathname).toBe("/airport-transfers/haifa/"));
     result.unmount();
     render(<RouterContextProvider router={router}><GlobalNav /></RouterContextProvider>);
     expect(screen.getByRole("list", { name: "Airport transfer destinations" })).toBeVisible();
@@ -263,7 +263,7 @@ describe("shared sidebar navigation", () => {
     dialog = await screen.findByRole("dialog");
     fireEvent.click(within(dialog).getByRole("link", { name: "To Jerusalem" }));
     await waitFor(() => expect(screen.queryByRole("dialog")).not.toBeInTheDocument());
-    await waitFor(() => expect(router.state.location.pathname).toBe("/airport-transfers/ben-gurion-airport-to-jerusalem/"));
+    await waitFor(() => expect(router.state.location.pathname).toBe("/airport-transfers/jerusalem/"));
 
     fireEvent.click(trigger);
     dialog = await screen.findByRole("dialog");

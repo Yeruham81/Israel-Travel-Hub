@@ -20,7 +20,8 @@ describe("generated XML sitemap and robots.txt", () => {
     expect(paths).toContain("/terms-of-use/");
     for (const city of ["jerusalem", "tel-aviv", "haifa", "ein-bokek"]) {
       expect(paths).toContain("/travel-blog/how-to-get-from-ben-gurion-airport-to-" + city + "/");
-      expect(paths).toContain("/airport-transfers/ben-gurion-airport-to-" + city + "/");
+      expect(paths).toContain("/airport-transfers/" + city + "/");
+      expect(paths).not.toContain("/airport-transfers/ben-gurion-airport-to-" + city + "/");
     }
     expect(paths).toContain("/travel-blog/");
     expect(paths).toContain("/airport-transfers/");

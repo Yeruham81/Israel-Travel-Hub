@@ -5,8 +5,8 @@ import { afterEach, describe, expect, it } from "vitest";
 import type { ComponentType } from "react";
 import { Route as TransfersRoute } from "@/routes/airport-transfers.index";
 import { Route as DriverRoute } from "@/routes/private-driver";
-import { Route as JerusalemRoute } from "@/routes/airport-transfers.ben-gurion-airport-to-jerusalem";
-import { Route as TelAvivRoute } from "@/routes/airport-transfers.ben-gurion-airport-to-tel-aviv";
+import { Route as JerusalemRoute } from "@/routes/airport-transfers.jerusalem";
+import { Route as TelAvivRoute } from "@/routes/airport-transfers.tel-aviv";
 import { airportTransferRates, airportTransferRoutes, linksForPage } from "@/data/registry";
 import { routeTree } from "@/routeTree.gen";
 

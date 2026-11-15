@@ -17,6 +17,7 @@ describe("four dedicated airport transfer routes", () => {
     await router.load();
     const { container } = render(<RouterContextProvider router={router}><AirportRoutePage id={route.id} /></RouterContextProvider>);
     expect(router.matchRoutes(route.path).at(-1)?.routeId).toBe(route.path.replace(/\/$/, ""));
+    expect(route.path).toMatch(/^\/airport-transfers\/(?:jerusalem|tel-aviv|haifa|ein-bokek)\/$/);
     expect(screen.getAllByRole("heading", { level: 1 })).toHaveLength(1);
     expect(screen.getByRole("heading", { level: 1 })).toHaveTextContent(guide.title);
     const visibleBreadcrumbs = screen.getByRole("navigation", { name: "Breadcrumb" });
@@ -70,7 +71,7 @@ describe("four dedicated airport transfer routes", () => {
     for (const area of guide.areas) expect(screen.getByRole("heading", { name: area.title })).toBeInTheDocument();
     const otherRoutes = screen.getByRole("region", { name: "Other airport transfer destinations" });
     for (const other of airportTransferRoutes.filter((item) => item.id !== route.id)) expect(within(otherRoutes).getByRole("link", { name: `Ben Gurion to ${getAirportRouteGuide(other.id).city}` })).toHaveAttribute("href", other.path);
-    expect(getSource(route.sourceId).url).toBe(`https://www.israel-taxi.com${route.path}`);
+    expect(getSource(route.sourceId).url).toBe(""); // First-party source notes are retained internally, not linked as external references.
     expect(guide.rate).toBe(airportTransferRates.find((rate) => rate.id === route.id));
     const platformSection = screen.getByRole("region", { name: "Prefer to book online?" });
     const platformLinks = linksForPage(`airport-route-${route.id}`);

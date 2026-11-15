@@ -7,7 +7,7 @@ import { CompactCurrencyEquivalents, CurrencyRatesContext, CurrencyRatesProvider
 import { airportTransferRates, initialReferenceFx, referenceFxConfig, type ExchangeRateSnapshot } from "@/data/registry";
 import { routeTree } from "@/routeTree.gen";
 import { Route as TransfersRoute } from "@/routes/airport-transfers.index";
-import { Route as JerusalemRoute } from "@/routes/airport-transfers.ben-gurion-airport-to-jerusalem";
+import { Route as JerusalemRoute } from "@/routes/airport-transfers.jerusalem";
 import { Route as HaifaShoreRoute } from "@/routes/haifa-shore-excursions";
 
 const checkTime = Date.parse("2026-10-17T20:00:00Z");
@@ -37,7 +37,7 @@ describe("international price estimates", () => {
 
   it.each([
     { label: "airport hub", path: "/airport-transfers/", route: TransfersRoute, count: 0 },
-    { label: "dedicated airport route", path: "/airport-transfers/ben-gurion-airport-to-jerusalem/", route: JerusalemRoute, count: 0 },
+    { label: "dedicated airport route", path: "/airport-transfers/jerusalem/", route: JerusalemRoute, count: 0 },
     { label: "shore-excursion cards", path: "/haifa-shore-excursions/", route: HaifaShoreRoute, count: 4 },
   ])("retains appropriate ILS fares and optional estimates on $label", async ({ path, route, count }) => {
     const router = createRouter({ routeTree, context: { queryClient: new QueryClient() }, history: createMemoryHistory({ initialEntries: [path] }), trailingSlash: "always" });
@@ -58,7 +58,7 @@ describe("international price estimates", () => {
       expect(other).toHaveTextContent("Another destination?");
       expect(container.querySelectorAll('[data-testid="airport-destination-card"]')).toHaveLength(12);
       expect(other.querySelector('[data-testid="currency-price"]')).toBeNull();
-    } else if (path === "/airport-transfers/ben-gurion-airport-to-jerusalem/") {
+    } else if (path === "/airport-transfers/jerusalem/") {
       const ratePanel = screen.getByTestId("route-starting-rate");
       expect(ratePanel).toHaveTextContent("From ₪550");
       const estimate = within(ratePanel).getByTestId("compact-currency-estimate");

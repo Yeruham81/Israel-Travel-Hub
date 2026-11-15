@@ -112,7 +112,6 @@ export const TELAVIV_STAY_REVIEW_DATE: ISODate = "2026-10-17";
 export const DEAD_SEA_STAY_REVIEW_DATE: ISODate = "2026-10-17";
 export const TIBERIAS_STAY_REVIEW_DATE: ISODate = "2026-10-17";
 export const HAIFA_STAY_REVIEW_DATE: ISODate = "2026-10-17";
-export const OWNER_BASE = "https://www.israel-taxi.com";
 export interface AuthorProfile {
   name: string;
   role: string;
@@ -608,15 +607,6 @@ export const airportTransferRoutes = [
 ] as const;
 export type AirportTransferRouteId = typeof airportTransferRoutes[number]["id"];
 
-/** Historical links to the owner's ORIGINAL published articles, not routes on the new site.
- * Keep these URLs separate from airportTransferRoutes so source credits stay on live legacy URLs.
- */
-export const originalAirportTransferSourcePaths: Record<AirportTransferRouteId, string> = {
-  jerusalem: "/airport-transfers/ben-gurion-airport-to-jerusalem/",
-  "tel-aviv": "/airport-transfers/ben-gurion-airport-to-tel-aviv/",
-  haifa: "/airport-transfers/ben-gurion-airport-to-haifa/",
-  "dead-sea": "/airport-transfers/ben-gurion-airport-to-ein-bokek/",
-};
 
 const jerusalemHotelSources: SourceReference[] = [
   ["herbert-samuel", "Herbert Samuel Jerusalem", "https://herbertsamuel.com/en/herbert-samuel-jerusalem-hotel/"],
@@ -733,7 +723,7 @@ const ownerDayTripSources: SourceReference[] = [
   { id: "owner-north-coast-jerusalem", title: "Caesarea, Haifa & Acre private day from Jerusalem", path: "caesarea-haifa-akko-day-trip-from-jerusalem" },
   { id: "owner-galilee-tel-aviv", title: "Nazareth & Sea of Galilee private day from Tel Aviv", path: "nazareth-sea-of-galilee-day-trip-from-tel-aviv" },
   { id: "owner-galilee-jerusalem", title: "Nazareth & Sea of Galilee private day from Jerusalem", path: "nazareth-sea-of-galilee-day-trip-from-jerusalem" },
-].map(({ id, title, path }) => ({ id, title, publisher: "Israel-Taxi.com (Moshe Barak)", url: `${OWNER_BASE}/private-day-trips/${path}/`, checkedAt: TOUR_CATALOG_CHECK_DATE,
+].map(({ id, title }) => ({ id, title, publisher: "Moshe Barak", url: "", checkedAt: TOUR_CATALOG_CHECK_DATE,
   note: "Owner's original itinerary page checked for the explicit ILS price block, duration, pickup and return city, weekday basis and up-to-four-passenger limit. The legacy notes still contain an outdated USD sentence; the explicit ILS price block is used. Transportation only; guiding, admissions, parking, tolls, meals and tips excluded. Availability and the full price require confirmation." }));
 export const tourProducts: TourProduct[] = [
   { id: "my-jerusalem-day", status: "published", operatorId: "moshe-barak", originIds: ["tel-aviv", "jerusalem"], destinationIds: ["jerusalem"], tagIds: ["heritage", "christian"], title: "Jerusalem at your own pace", summary: "Enjoy a flexible private drive through Jerusalem, with a customized route built around your interests, preferred stops and schedule.", duration: "Full day · Customized itinerary", length: "full-day", format: "private", formatLabel: "Private car & driver", pickup: "Hotel pickup and final drop-off agreed in advance", inclusions: "Private vehicle and driver for your customized route" },
@@ -957,7 +947,8 @@ export const tourBookingOffers: TourBookingOffer[] = ([
     ...(amount ? { listedPrice: { kind: "published_snapshot", amount, currency: "USD", basis: "per_person", checkedAt: TOUR_CATALOG_CHECK_DATE, sourceId: id } } : {}) };
 });
 
-export const sources: SourceReference[] = [
+/** External source records and internal first-party research, stored without legacy URLs. */
+const sourceCatalog: SourceReference[] = [
   ...neighborhoodHotelSources,
   ...ownerDayTripSources,
   ...tourBookingOffers.map((offer): SourceReference => ({ id: offer.id, title: tourProducts.find((tour) => tour.id === offer.productId)!.title, publisher: offer.partnerId === "viator" ? "Viator" : "GetYourGuide", url: offer.publicUrl, checkedAt: offer.checkedAt, note: "Product identity, operator, advertised itinerary and duration reviewed. No date-specific availability is confirmed. Starting prices, when present, are short-lived editorial snapshots, not live quotes. Confirm pickup, inclusions, access and cancellation with the booking provider." })),
@@ -969,13 +960,13 @@ export const sources: SourceReference[] = [
     url: product.publicUrl, checkedAt: SHORE_EXCURSION_CHECK_DATE,
     note: `Product identity, named operator, itinerary and pickup/return at ${product.portIds.map((id) => shorePorts[id].name).join(" / ")} Port checked. ${product.seasonNote ? "The operator currently advertises a 2027 cruise program. " : ""}${product.operatorId === "rent-a-guide" ? "The title mentions both ports, but the detailed return/inclusions specify Ashdod; listed here only for Ashdod. " : ""}${product.listedPrice ? "The displayed USD starting price and per-person/per-group basis were checked as an indicative snapshot, not a quote for selected dates. " : ""}No sailing-date availability, live price, port-access permission or return guarantee is verified by this portal. Confirm all arrangements before booking.`,
   })),
-  { id: "moshe-author-profile", title: "Moshe Barak biography", publisher: "Moshe Barak", url: `${OWNER_BASE}/about-me/`, checkedAt: "2026-10-18", note: "Publisher biography supports over 20 years in private transport, local route knowledge and tailored journeys for international visitors. Tripadvisor is linked to the owner-supplied profile only; no live score, count or review text is reproduced." },
+  { id: "moshe-author-profile", title: "Moshe Barak biography", publisher: "Moshe Barak", url: "", checkedAt: "2026-10-18", note: "Publisher biography supports over 20 years in private transport, local route knowledge and tailored journeys for international visitors. Tripadvisor is linked to the owner-supplied profile only; no live score, count or review text is reproduced." },
   referenceFxSource,
   ...travelGuideSources,
   ...migrationSources,
   ...airportTransferRoutes.filter((route) => route.id !== "jerusalem").map((route): SourceReference => ({
     id: route.sourceId, title: `Ben Gurion Airport to ${route.id === "dead-sea" ? "Ein Bokek" : route.id === "tel-aviv" ? "Tel Aviv" : "Haifa"} — original guide`,
-    publisher: "Israel-Taxi.com (Moshe Barak)", url: `${OWNER_BASE}${originalAirportTransferSourcePaths[route.id]}`, checkedAt: AIRPORT_TRANSFER_CHECK_DATE,
+    publisher: "Moshe Barak", url: "", checkedAt: AIRPORT_TRANSFER_CHECK_DATE,
     note: "Moshe Barak's original route guide provides local planning context and approximate driving time. Road time starts after pickup and excludes airport formalities. It is a planning estimate; current traffic, the exact address and road conditions can change the journey.",
   })),
   ...jerusalemHotelSources,
@@ -984,8 +975,8 @@ export const sources: SourceReference[] = [
   ...tiberiasHotelSources,
   ...haifaHotelSources,
   {
-    id: "owner-hotels-haifa", title: "Best hotels in Haifa (original guide)", publisher: "Israel-Taxi.com",
-    url: `${OWNER_BASE}/travel-blog/best-hotels-in-haifa/`, checkedAt: HAIFA_STAY_REVIEW_DATE,
+    id: "owner-hotels-haifa", title: "Best hotels in Haifa (original guide)", publisher: "Moshe Barak",
+    url: "", checkedAt: HAIFA_STAY_REVIEW_DATE,
     note: "Editorial basis for the ten-property hub, boutique and family guides. Existing publisher-owned Expedia links and selected photographs are reused. Primary operator sources supplement the original guide; old ratings, fixed price ranges and unconfirmed amenities are not repeated.",
   },
   {
@@ -999,8 +990,8 @@ export const sources: SourceReference[] = [
     note: "Room occupancy varies by category; some rooms accept two adults and two children, while certain executive rooms and lounge access have different restrictions. Confirm the exact room, beds and ages in your offer.",
   },
   {
-    id: "owner-hotels-deadsea", title: "Best Dead Sea Hotels (original guide)", publisher: "Israel-Taxi.com",
-    url: `${OWNER_BASE}/travel-blog/best-dead-sea-hotels/`, checkedAt: DEAD_SEA_STAY_REVIEW_DATE,
+    id: "owner-hotels-deadsea", title: "Best Dead Sea Hotels (original guide)", publisher: "Moshe Barak",
+    url: "", checkedAt: DEAD_SEA_STAY_REVIEW_DATE,
     note: "Editorial basis for the destination guide, spa and family comparisons. Existing publisher-owned Expedia links and photographs are reused. Hotel policies were checked against primary operator sources; no firsthand stays at every property or live prices are claimed.",
   },
   {
@@ -1042,8 +1033,8 @@ export const sources: SourceReference[] = [
   {
     id: "moshe-airport-transfers",
     title: "Airport transfers – published rates",
-    publisher: "Israel-Taxi.com (Moshe Barak)",
-    url: `${OWNER_BASE}/airport-transfers/`,
+    publisher: "Moshe Barak",
+    url: "",
     checkedAt: AIRPORT_TRANSFER_CHECK_DATE,
     note: "Publisher's starting fares for eleven Ben Gurion airport destinations, for up to 4 passengers on weekdays. Extra charges may apply for night, weekend or holiday trips; advance contact recommended; final price and availability by quote. Not live inventory.",
   },
@@ -1089,40 +1080,40 @@ export const sources: SourceReference[] = [
   {
     id: "owner-route-guide",
     title: "Ben Gurion Airport to Jerusalem (existing guide)",
-    publisher: "Israel-Taxi.com",
-    url: `${OWNER_BASE}/airport-transfers/ben-gurion-airport-to-jerusalem/`,
+    publisher: "Moshe Barak",
+    url: "",
     checkedAt: AIRPORT_TRANSFER_CHECK_DATE,
     note: "Moshe Barak's original Jerusalem guide gives local planning context and an approximate 45–60+ minute drive after pickup. Airport formalities are additional; the final Jerusalem address and road traffic can extend the journey. The estimate is not a live traffic forecast.",
   },
   {
     id: "owner-stay-jerusalem",
     title: "Where to stay in Jerusalem (existing guide)",
-    publisher: "Israel-Taxi.com",
-    url: `${OWNER_BASE}/travel-blog/where-to-stay-in-jerusalem/`,
+    publisher: "Moshe Barak",
+    url: "",
     checkedAt: JERUSALEM_STAY_REVIEW_DATE,
     note: "Publisher's original six-area Jerusalem guide, used for neighborhood descriptions, practical advice, selected accommodation and existing Expedia booking links. Property identity and style also checked against hotel sources; live rates and availability are not displayed.",
   },
   {
     id: "owner-stay-telaviv",
     title: "Where to stay in Tel Aviv (existing guide)",
-    publisher: "Israel-Taxi.com",
-    url: `${OWNER_BASE}/travel-blog/where-to-stay-in-tel-aviv/`,
+    publisher: "Moshe Barak",
+    url: "",
     checkedAt: TELAVIV_STAY_REVIEW_DATE,
     note: "Editorial basis for the eight neighborhood guides and selected stays. Existing Expedia booking links and neighborhood photographs are reused from this guide; hotel identity and accommodation style were cross-checked with primary property sources. No live prices or availability are supplied.",
   },
   {
     id: "owner-hotels-tiberias",
     title: "Best hotels in Tiberias (existing guide)",
-    publisher: "Israel-Taxi.com",
-    url: `${OWNER_BASE}/travel-blog/best-hotels-in-tiberias/`,
+    publisher: "Moshe Barak",
+    url: "",
     checkedAt: TIBERIAS_STAY_REVIEW_DATE,
     note: "Editorial basis for the ten-property destination guide and focused family and luxury comparisons. Publisher-owned Expedia links and selected photographs are reused. Primary hotel sources supplement the guide, including current meal-plan notices and guest ages; no firsthand stays at every hotel or live room offers are claimed.",
   },
   {
     id: "owner-bethlehem-guide",
     title: "Jerusalem to Bethlehem (existing guide)",
-    publisher: "Israel-Taxi.com",
-    url: `${OWNER_BASE}/travel-blog/jerusalem-to-bethlehem/`,
+    publisher: "Moshe Barak",
+    url: "",
     checkedAt: null,
     note: "Supporting background guide on the existing site.",
   },
@@ -1137,16 +1128,16 @@ export const sources: SourceReference[] = [
   {
     id: "owner-ashdod-shore",
     title: "Ashdod shore excursions",
-    publisher: "Israel-Taxi.com (Moshe Barak)",
-    url: `${OWNER_BASE}/ashdod-shore-excursions/`,
+    publisher: "Moshe Barak",
+    url: "",
     checkedAt: SHORE_EXCURSION_CHECK_DATE,
     note: "Publisher's four Ashdod return car-and-driver itineraries and ILS starting rates checked: Tel Aviv/Jaffa 1,200; Jerusalem 1,700; Masada/Dead Sea 2,200; Masada/Dead Sea/Jerusalem 2,400. Up to four passengers. The fare cards and payment note specify ILS; a conflicting USD FAQ and approximate conversions are not used. These are published starting figures, not live quotes. Guiding and admissions are excluded; final terms require confirmation.",
   },
   {
     id: "owner-haifa-shore",
     title: "Haifa shore excursions",
-    publisher: "Israel-Taxi.com (Moshe Barak)",
-    url: `${OWNER_BASE}/haifa-shore-excursions/`,
+    publisher: "Moshe Barak",
+    url: "",
     checkedAt: SHORE_EXCURSION_CHECK_DATE,
     note: "Publisher's four Haifa return car-and-driver itineraries and ILS starting rates checked: Akko/Rosh Hanikra 1,900; Tel Aviv/Jaffa 2,100; Nazareth/Galilee 2,300; Jerusalem 2,700. Up to four passengers. The fare cards and payment note specify ILS; a conflicting USD FAQ and approximate conversions are not used. These are published starting figures, not live quotes. Site operation, guiding, admissions and final terms must be confirmed.",
   },
@@ -1169,16 +1160,16 @@ export const sources: SourceReference[] = [
   {
     id: "owner-private-day-trips",
     title: "Private day trips",
-    publisher: "Israel-Taxi.com (Moshe Barak)",
-    url: `${OWNER_BASE}/private-day-trips/`,
+    publisher: "Moshe Barak",
+    url: "",
     checkedAt: INFO_CHECK_DATE,
     note: "Publisher's local operator page for private day trips. Itinerary and price by inquiry.",
   },
   {
     id: "owner-private-driver",
     title: "Private driver in Israel",
-    publisher: "Israel-Taxi.com (Moshe Barak)",
-    url: `${OWNER_BASE}/private-driver-in-israel/`,
+    publisher: "Moshe Barak",
+    url: "",
     checkedAt: PRIVATE_DRIVER_CHECK_DATE,
     note: "Publisher's private-driver service and contact form checked on 17 October 2026. The original page prices each itinerary by vehicle, distance, travel date/time and special requests. No fixed fare, vehicle inventory or availability has been independently confirmed.",
   },
@@ -2092,10 +2083,15 @@ export const offers: Offer[] = [
   },
 ];
 
-// The selected Sanity snapshot supplies refreshed sources, otherwise use the existing registry.
-export const getSource = (id: string) => sanityUberSources.find((s) => s.id === id) || sources.find((s) => s.id === id)!;
+/** Public source links must lead to independent external websites.
+ * The owner's own fare and editorial observations have no outbound source URL.
+ */
+export const sources: SourceReference[] = sourceCatalog.filter((source) => Boolean(source.url) && !isPublisherUrl(source.url));
 
-export const publicSources = (ids: string[]) => [...new Set(ids)].map(getSource).filter((source): source is SourceReference => Boolean(source) && !isPublisherUrl(source.url));
+// Sanity sources are preferred; internal first-party notes remain available for
+// verification of dated fares, but never become public citations.
+export const getSource = (id: string) => sanityUberSources.find((s) => s.id === id) || sourceCatalog.find((s) => s.id === id)!;
+export const publicSources = (ids: string[]) => [...new Set(ids)].map(getSource).filter((source): source is SourceReference => Boolean(source?.url) && !isPublisherUrl(source.url));
 
 export function formatCheckDate(d: ISODate) {
   return new Date(d + "T12:00:00Z").toLocaleDateString("en-GB", {

@@ -11,10 +11,10 @@ import { travelGuides } from "@/data/travelGuides";
 import { cityStayGuides, deadSeaStayGuide } from "@/data/content";
 
 export const landingPaths = [
-  "/airport-transfers/ben-gurion-airport-to-jerusalem/",
-  "/airport-transfers/ben-gurion-airport-to-tel-aviv/",
-  "/airport-transfers/ben-gurion-airport-to-haifa/",
-  "/airport-transfers/ben-gurion-airport-to-ein-bokek/",
+  "/airport-transfers/jerusalem/",
+  "/airport-transfers/tel-aviv/",
+  "/airport-transfers/haifa/",
+  "/airport-transfers/ein-bokek/",
   "/travel-blog/from-ben-gurion-airport-on-shabbat/",
   "/travel-blog/getting-around-israel/",
   "/travel-blog/taxis-in-israel/",
@@ -144,7 +144,7 @@ describe("ten search-intent landing pages", () => {
       const hash = link.getAttribute("href") || "";
       expect(document.getElementById(hash.slice(1)), hash).not.toBeNull();
     }
-    const info = main.querySelector(path.includes("ben-gurion-airport-to-") ? "#journey-details" : path.includes("where-to-stay") || path.includes("best-dead-sea") ? "#overview" : "#quick-answer");
+    const info = main.querySelector(path.startsWith("/airport-transfers/") ? "#journey-details" : path.includes("where-to-stay") || path.includes("best-dead-sea") ? "#overview" : "#quick-answer");
     expect(info?.textContent?.length).toBeGreaterThan(100);
     const form = main.querySelector("form");
     if (form && info) expect(info.compareDocumentPosition(form) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();

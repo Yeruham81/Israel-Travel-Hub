@@ -174,6 +174,8 @@ describe("private Ben Gurion transfers", () => {
       }
     }
     expect(new Set(urls).size).toBe(20);
+    expect(airportTransferRoutes.map((route) => route.path)).toEqual(["/airport-transfers/jerusalem/", "/airport-transfers/tel-aviv/", "/airport-transfers/haifa/", "/airport-transfers/ein-bokek/"]);
+    expect(pageIds).toEqual(["airport-private-transfers", ...airportTransferRoutes.map((route) => `airport-route-${route.id}`)]);
   });
 
   it("shows four branded platform banners without invented affiliate attribution or transferring personal details", async () => {
