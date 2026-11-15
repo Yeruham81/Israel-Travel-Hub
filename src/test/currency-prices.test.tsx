@@ -36,15 +36,15 @@ describe("international price estimates", () => {
   });
 
   it.each([
-    { label: "airport hub", path: "/airport-transfers/", route: TransfersRoute, count: 11 },
+    { label: "airport hub", path: "/airport-transfers/", route: TransfersRoute, count: 0 },
     { label: "dedicated airport route", path: "/airport-transfers/ben-gurion-airport-to-jerusalem/", route: JerusalemRoute, count: 1 },
     { label: "shore-excursion cards", path: "/haifa-shore-excursions/", route: HaifaShoreRoute, count: 4 },
-  ])("shows consistent estimates on $label while retaining ILS fares and unpriced inquiries", async ({ path, route, count }) => {
+  ])("retains appropriate ILS fares and optional estimates on $label", async ({ path, route, count }) => {
     const router = createRouter({ routeTree, context: { queryClient: new QueryClient() }, history: createMemoryHistory({ initialEntries: [path] }), trailingSlash: "always" });
     await router.load();
     const Page = route.options.component!;
     const { container } = render(<RouterContextProvider router={router}><CurrencyRatesContext.Provider value={{ rates: rates(), status: "fresh", loading: false }}><Page /></CurrencyRatesContext.Provider></RouterContextProvider>);
-    const prices = screen.getAllByTestId("currency-price");
+    const prices = screen.queryAllByTestId("currency-price");
     expect(prices).toHaveLength(count);
     for (const price of prices) {
       const amount = Number(price.dataset["ils"]);
@@ -55,7 +55,8 @@ describe("international price estimates", () => {
     }
     if (path === "/airport-transfers/") {
       const other = container.querySelector('[data-destination="other"]')!;
-      expect(other).toHaveTextContent("Ask for a quote");
+      expect(other).toHaveTextContent("Another destination?");
+      expect(container.querySelectorAll('[data-testid="airport-destination-card"]')).toHaveLength(12);
       expect(other.querySelector('[data-testid="currency-price"]')).toBeNull();
     }
   });
