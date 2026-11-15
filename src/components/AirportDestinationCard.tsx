@@ -4,7 +4,7 @@ import type { StayGuidePhoto } from "@/data/content";
 import { PriceDisplay } from "@/components/CurrencyRates";
 
 export function AirportDestinationCard({ id, destination, price, photo, onChoose, layout = "featured", testId = "airport-destination-card" }: {
-  id: string; destination: string; price?: AirportTransferRate["price"]; photo: StayGuidePhoto;
+  id: string; destination: string; price?: AirportTransferRate["price"]; photo: Pick<StayGuidePhoto, "src" | "alt">;
   onChoose?: (id: string) => void; layout?: "featured" | "compact" | "hub-featured" | "hub-row"; testId?: string;
 }) {
   const route = airportTransferRoutes.find((item) => item.id === id);
