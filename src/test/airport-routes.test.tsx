@@ -25,9 +25,10 @@ describe("four dedicated airport transfer routes", () => {
     expect(visibleBreadcrumbs).not.toHaveTextContent("Ben Gurion Airport");
     expect(container.querySelector("main")!.textContent).not.toMatch(/taxi rank|\btrain\b|\bbuses\b|live availability|guaranteed pickup/i);
     expect(screen.getByTestId("route-starting-rate")).toHaveTextContent(`From ₪${guide.rate.price.amount.toLocaleString("en-US")}`);
-    expect(screen.getByTestId("airport-route-fx-note")).toHaveTextContent("All fares are quoted in ILS.");
+    expect(screen.getByTestId("airport-route-fx-note")).toHaveTextContent("Full price is confirmed in advance. All fares are quoted and charged in ILS. USD and EUR amounts are approximate, based on current exchange rates.");
     expect(screen.getByTestId("route-starting-rate")).toHaveTextContent("Per vehicle · up to 4 passengers");
     expect(screen.getByTestId("route-starting-rate")).toHaveTextContent("One-way weekday fare");
+    expect(screen.getByTestId("airport-route-fx-note").previousElementSibling).toHaveTextContent("Larger vehicles for groups and families can be provided, requiring a separate quote.");
     expect(screen.getByTestId("route-starting-rate")).toHaveTextContent(route.driveTime);
     expect(screen.getByRole("link", { name: "Request a personal quote" })).toHaveAttribute("href", "#request-quote");
     expect(screen.getByRole("link", { name: "Request a personal quote" })).toHaveClass("bg-navy");
@@ -37,6 +38,9 @@ describe("four dedicated airport transfer routes", () => {
     expect(pickup).toHaveTextContent("Agreed price, no extra charges");
     expect(pickup).toHaveTextContent("Flight tracking");
     expect(pickup).toHaveTextContent("Free cancellation up to 24 hours");
+    expect(pickup.querySelector(".lg\\:gap-8")).not.toBeNull();
+    expect(pickup.querySelectorAll(".sm\\:px-2")).toHaveLength(3);
+    expect(screen.getByRole("list", { name: "Airport transfer checklist" })).toHaveTextContent("if you need them.");
     expect(pickup).toHaveTextContent(guide.journeyText);
     const dropOff = screen.getByRole("region", { name: guide.areasTitle });
     expect(within(dropOff).getAllByRole("heading", { level: 3 })).toHaveLength(4);
