@@ -1,7 +1,7 @@
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 // Protected Travelpayouts API is the sole source of affiliate short URLs.
 const projectId = 406243, publisherId = 622032;
-const ids = ["shore-gyg-haifa-akko","shore-gyg-haifa-galilee","shore-gyg-ashdod-jerusalem-bethlehem","shore-gyg-ashdod-galilee","shore-gyg-ashdod-masada","shore-viator-haifa-galilee","shore-viator-ashdod-jerusalem-dead-sea","shore-viator-haifa-jerusalem-bethlehem","shore-viator-ashdod-jerusalem-bethlehem"];
+const ids = ["shore-gyg-haifa-akko","shore-gyg-haifa-galilee","shore-gyg-ashdod-jerusalem-bethlehem","shore-gyg-ashdod-galilee","shore-gyg-ashdod-masada","shore-viator-haifa-galilee","shore-viator-ashdod-jerusalem-dead-sea","shore-viator-haifa-jerusalem-bethlehem","shore-viator-ashdod-jerusalem-bethlehem","shore-viator-ashdod-jerusalem-bethlehem-smallgroup","shore-viator-ashdod-jerusalem-private","shore-viator-haifa-jerusalem-bethlehem-smallgroup","shore-viator-haifa-jerusalem-private","shore-viator-haifa-caesarea-private","shore-viator-haifa-galilee-private","shore-viator-haifa-akko-private"];
 const registry = await readFile("src/data/registry.ts", "utf8");
 const records = ids.map(id => {
   const start = registry.indexOf('id: "' + id + '"');
@@ -13,15 +13,18 @@ const records = ids.map(id => {
   if (!found || !block.includes('partnerId: "' + platform + '"')) throw Error("Product/platform mismatch " + id);
   const url = new URL(found[1]);
   if (url.protocol !== "https:" || url.username || url.password || url.search || url.hash || url.hostname !== "www." + (platform === "viator" ? "viator.com" : "getyourguide.com")) throw Error("Invalid source URL " + id);
-  if (!registry.includes('"' + id + '": undefined,')) throw Error("Placeholder missing " + id);
-  return { id, url: url.href, platform, subId: "shore_" + id.replace(/^shore-/, "").replaceAll("-", "_") };
+  const pending = registry.includes('"' + id + '": undefined,');
+  const configured = registry.includes('"' + id + '": { trackingUrl: "https://');
+  if (!pending && !configured) throw Error("Tracking configuration missing " + id);
+  return { id, url: url.href, platform, subId: "shore_" + id.replace(/^shore-/, "").replaceAll("-", "_"), pending };
 });
-if (records.length !== 9 || new Set(records.map(x => x.subId)).size !== 9) throw Error("Duplicate tracking IDs");
+if (records.length !== 16 || new Set(records.map(x => x.subId)).size !== 16) throw Error("Duplicate tracking IDs");
 if (process.argv.includes("--validate")) { console.log("Validated " + records.length + " shore product targets"); process.exit(0); }
 const token = process.env.TRAVELPAYOUTS_API_TOKEN;
-if (!token) throw Error("Missing protected TRAVELPAYOUTS_API_TOKEN");
+if (!token && records.some(item => item.pending)) throw Error("Missing protected TRAVELPAYOUTS_API_TOKEN");
 const results = [];
 for (const item of records) {
+  if (!item.pending) { results.push({ ...item, trackingUrl: null, status: "already_configured" }); continue; }
   let trackingUrl = null, status = "failed";
   try {
     const response = await fetch("https://api.travelpayouts.com/links/v1/create", {
@@ -48,4 +51,4 @@ for (const item of records) {
 await mkdir("artifacts", { recursive: true });
 await writeFile("artifacts/travelpayouts-shore-excursions.json", JSON.stringify({ projectId, publisherId, results }, null, 2) + "\n");
 console.log("Approved " + results.filter(item => item.trackingUrl).length + "/" + records.length);
-if (!results.some(item => item.trackingUrl)) process.exitCode = 1;
+if (results.some(item => item.pending && !item.trackingUrl)) process.exitCode = 1;

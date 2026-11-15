@@ -9,6 +9,8 @@ import jaffa from "@/assets/tel-aviv/jaffa.webp";
 import bethlehem from "@/assets/home/bethlehem-nativity.webp";
 import cableCar from "@/assets/home/masada-cable-car.webp";
 import sepulchre from "@/assets/guides/holy-sepulchre.jpg";
+import caesareaTheatre from "@/assets/home/caesarea-theatre.webp";
+import roshHanikraGrottoes from "@/assets/home/rosh-hanikra-grottos.jpg";
 import { migrationPhotos } from "@/data/guideMigrationPhotos";
 import { portShoreGuides, type ShoreReadingGuide } from "@/data/shoreReading";
 import { filterShoreServices, shoreListedPrice, type ShoreServiceSearch } from "@/lib/shore-services";
@@ -47,6 +49,13 @@ const guidedTourPhotos: Record<string, GuidePhoto> = {
   "shore-gyg-ashdod-masada": { src: cableCar, alt: "A cable car ascending toward the desert fortress of Masada", credit: "James Emery · CC BY 2.0 · resized WebP", sourceUrl: "https://commons.wikimedia.org/wiki/File:Masada_Cable_Car_1438_(511094328).jpg", licenseUrl: "https://creativecommons.org/licenses/by/2.0/" },
   "shore-viator-ashdod-jerusalem-dead-sea": migrationPhotos["jerusalem-to-the-dead-sea"],
   "shore-viator-ashdod-jerusalem-bethlehem": { src: sepulchre, alt: "Courtyard and facade of the Church of the Holy Sepulchre in Jerusalem", sourceUrl: "", credit: "Photograph from the publisher's churches guide; retained unchanged." },
+  "shore-viator-ashdod-jerusalem-bethlehem-smallgroup": { src: "/images/jerusalem/mount-zion/dormition-abbey-and-bell-tower.webp", alt: "Dormition Abbey and bell tower on Jerusalem's Mount Zion", sourceUrl: "" },
+  "shore-viator-ashdod-jerusalem-private": { src: "/images/attractions/hero-jerusalem.webp", alt: "Historic Old City of Jerusalem seen from an elevated viewpoint", sourceUrl: "" },
+  "shore-viator-haifa-jerusalem-bethlehem-smallgroup": { src: "/images/jerusalem/church-of-all-nations.webp", alt: "Church of All Nations on Jerusalem's Mount of Olives", sourceUrl: "" },
+  "shore-viator-haifa-jerusalem-private": { src: "/images/jerusalem/mount-of-olives/mary-magdalene-church.webp", alt: "Russian Orthodox Church of Mary Magdalene on Jerusalem's Mount of Olives", sourceUrl: "" },
+  "shore-viator-haifa-caesarea-private": { src: caesareaTheatre, alt: "Roman theatre and ancient ruins at Caesarea on the Mediterranean coast", sourceUrl: "" },
+  "shore-viator-haifa-galilee-private": { src: "/images/attractions/sea-of-galilee.webp", alt: "Sea of Galilee lake and hills of northern Israel", sourceUrl: "" },
+  "shore-viator-haifa-akko-private": { src: roshHanikraGrottoes, alt: "White limestone cliffs and coastal grottoes at Rosh Hanikra", sourceUrl: "" },
 };
 
 const itineraryDetails: Record<string, ItineraryDetails> = {

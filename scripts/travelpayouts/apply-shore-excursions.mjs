@@ -1,7 +1,7 @@
 import { readFile, writeFile } from "node:fs/promises";
 // Only apply exact generated links for known products. Preserve direct links on API failure.
 const data = JSON.parse(await readFile("artifacts/travelpayouts-shore-excursions.json", "utf8"));
-if (data.projectId !== 406243 || data.publisherId !== 622032 || !Array.isArray(data.results) || data.results.length !== 9) throw Error("Invalid result set");
+if (data.projectId !== 406243 || data.publisherId !== 622032 || !Array.isArray(data.results) || data.results.length !== 16) throw Error("Invalid result set");
 const path = "src/data/registry.ts";
 let source = await readFile(path, "utf8");
 const seen = new Set();
@@ -19,6 +19,6 @@ for (const item of data.results) {
   if (!source.includes(before)) throw Error("Refusing to overwrite existing tracking entry " + item.id);
   source = source.replace(before, after); applied++;
 }
-if (seen.size !== 9) throw Error("Missing result items");
+if (seen.size !== 16) throw Error("Missing result items");
 await writeFile(path, source, "utf8");
 console.log("Applied " + applied + " verified shore links; unapproved links remain public URLs");

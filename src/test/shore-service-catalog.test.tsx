@@ -17,7 +17,7 @@ async function pageAt(path: string) {
   return { ...result, router, history };
 }
 const cards = () => screen.queryAllByTestId("shore-service-card");
-const catalogSizes = { haifa: 8, ashdod: 9 };
+const catalogSizes = { haifa: 13, ashdod: 11 };
 
 describe("port service catalog", () => {
   it("keeps the actual port context, service identity and multi-stop destinations separate", () => {
@@ -140,7 +140,7 @@ describe("port service catalog", () => {
         expect(link.url).toBe(affiliateConfig[product.id]?.trackingUrl || product.publicUrl);
         expect(link.isAffiliate).toBe(Boolean(affiliateConfig[product.id]?.trackingUrl));
         expect(Object.hasOwn(affiliateConfig, product.id)).toBe(true);
-        expect(getSource(product.id).checkedAt).toBe("2026-10-21");
+        expect(getSource(product.id).checkedAt).toBe(product.checkedAt || "2026-10-21");
         expect(shoreSourceIds(port)).toContain(product.id);
         for (const destination of service.destinationIds) expect(filterShoreServices(port, { destination }).find((item) => item.productId === product.id)?.provider.id).toBe(link.id);
       }
@@ -152,6 +152,16 @@ describe("port service catalog", () => {
     try { expect(servicesForPort("haifa").some((item) => item.id === direct.id)).toBe(false); }
     finally { shoreServices.pop(); }
     expect(servicesForPort("haifa").some((item) => item.operator?.id === "rent-a-guide")).toBe(false);
+    const newProducts = shoreTourProducts.filter(p => p.checkedAt === "2026-11-15");
+    expect(newProducts).toHaveLength(7);
+    expect(newProducts.filter(p => p.portIds.includes("ashdod"))).toHaveLength(2);
+    expect(newProducts.filter(p => p.portIds.includes("haifa"))).toHaveLength(5);
+    expect(new Set(newProducts.map(p => p.publicUrl)).size).toBe(7);
+    for (const product of newProducts) {
+      expect(product.publicUrl).toMatch(/^https:\/\/www\.viator\.com\/tours\//);
+      expect(affiliateConfig).toHaveProperty(product.id);
+      expect(servicesForPort(product.portIds[0]!).some(service => service.productId === product.id)).toBe(true);
+    }
   });
 
   it("discards retired service and supplier filters so legacy links cannot hide tours", async () => {
@@ -166,7 +176,7 @@ describe("port service catalog", () => {
 
   it("uses a distinct credited destination photograph for every excursion across both ports", () => {
     const catalog = [...getShoreCatalog("haifa"), ...getShoreCatalog("ashdod")];
-    expect(catalog).toHaveLength(17);
+    expect(catalog).toHaveLength(24);
     expect(catalog.filter(service => service.itinerary && service.title === "Classical Jerusalem").every(service => service.photo.alt.includes("Jerusalem"))).toBe(true);
     expect(catalog.every(service => !service.duration.toLowerCase().includes("by agreement"))).toBe(true);
     expect(new Set(catalog.map((service) => service.photo.src)).size).toBe(catalog.length);

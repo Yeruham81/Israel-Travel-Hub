@@ -394,6 +394,7 @@ export interface ShoreTourProduct {
   seasonNote?: string;
   durationLabel?: string;
   includesLabel?: string;
+  checkedAt?: ISODate;
   listedPrice?: {
     kind: "published_snapshot";
     amount: number;
@@ -567,6 +568,55 @@ export const shoreTourProducts: ShoreTourProduct[] = [
     publicUrl: "https://www.viator.com/tours/Ashdod/Ashdod-Port-Shore-Excursion-Jerusalem-and-Bethlehem-Day-Tour-from-Ashdod-Port/d4470-5209P131", groupFormat: "shared",
     durationLabel: "9 hours", includesLabel: "Guide & return transport",
     listedPrice: { kind: "published_snapshot", amount: 120, currency: "USD", basis: "per_person", checkedAt: "2026-10-21", sourceId: "shore-viator-ashdod-jerusalem-bethlehem-usd" },
+  },
+  {
+    id: "shore-viator-ashdod-jerusalem-bethlehem-smallgroup", portIds: ["ashdod"], operatorId: "compass-travel", partnerId: "viator",
+    destinationIds: ["jerusalem", "bethlehem"], title: "Jerusalem & Bethlehem from Ashdod — small group",
+    summary: "Join a guided small-group day from Ashdod Port to Jerusalem's Old City and Bethlehem, with pickup and return planned around your ship. Check which holy sites can be visited.",
+    publicUrl: "https://www.viator.com/tours/Ashdod/Jerusalem-and-Bethlehem-from-Ashdod-Port/d4470-7367P45", groupFormat: "shared",
+    durationLabel: "8–10 hours", includesLabel: "Guided tour & return transport", checkedAt: "2026-11-15",
+  },
+  {
+    id: "shore-viator-ashdod-jerusalem-private", portIds: ["ashdod"], operatorId: "bein-harim", partnerId: "viator",
+    destinationIds: ["jerusalem"], title: "Private Jerusalem & Western Wall from Ashdod",
+    summary: "Explore Jerusalem's Old City with a private guide after pickup at Ashdod Port. A focused option for the Western Wall, historic quarters and major Christian sites.",
+    publicUrl: "https://www.viator.com/tours/Ashdod/Ashdod-Shore-Excursion-Private-Jerusalem-Tour-Including-Western-Wall/d4470-5209PRTJRSJERUA", groupFormat: "private",
+    durationLabel: "10 hours", includesLabel: "Guided tour & return transport", checkedAt: "2026-11-15",
+  },
+  {
+    id: "shore-viator-haifa-jerusalem-bethlehem-smallgroup", portIds: ["haifa"], operatorId: "compass-travel", partnerId: "viator",
+    destinationIds: ["jerusalem", "bethlehem"], title: "Jerusalem & Bethlehem from Haifa — small group",
+    summary: "An extended guided excursion from Haifa Port to Jerusalem and Bethlehem with port pickup and return aligned to your ship's visit; plan for a long road journey.",
+    publicUrl: "https://www.viator.com/tours/Haifa/Jerusalem-and-Bethlehem-Tour-from-Haifa-Port/d4472-7367P43", groupFormat: "shared",
+    durationLabel: "8–10 hours", includesLabel: "Guided tour & return transport", checkedAt: "2026-11-15",
+  },
+  {
+    id: "shore-viator-haifa-jerusalem-private", portIds: ["haifa"], operatorId: "bein-harim", partnerId: "viator",
+    destinationIds: ["jerusalem"], title: "Private Jerusalem & Western Wall from Haifa",
+    summary: "A privately guided Jerusalem excursion from Haifa Port, focusing on Old City quarters, the Western Wall and historic landmarks. Allow ample time for the return drive.",
+    publicUrl: "https://www.viator.com/tours/Haifa/Haifa-Shore-Excursion-Private-Jerusalem-Tour-Including-Western-Wall/d4472-5209PRTJRSJERUH", groupFormat: "private",
+    durationLabel: "10 hours", includesLabel: "Guided tour & return transport", checkedAt: "2026-11-15",
+  },
+  {
+    id: "shore-viator-haifa-caesarea-private", portIds: ["haifa"], operatorId: "taxigo-online", partnerId: "viator",
+    destinationIds: ["haifa", "caesarea"], title: "Haifa & Caesarea — private shore excursion",
+    summary: "Explore Haifa viewpoints and Caesarea's Roman-era remains on a private day from Haifa Cruise Port. This particular operator's listing has non-refundable conditions.",
+    publicUrl: "https://www.viator.com/tours/Haifa/Private-Shore-Tour-Haifa-and-Caesarea-Ancient-to-Modern-Israel/d4472-128285P3962", groupFormat: "private",
+    durationLabel: "6 hours", includesLabel: "Guided tour & return transport", checkedAt: "2026-11-15",
+  },
+  {
+    id: "shore-viator-haifa-galilee-private", portIds: ["haifa"], operatorId: "abano-terme-online", partnerId: "viator",
+    destinationIds: ["nazareth", "galilee"], title: "Private Nazareth & Sea of Galilee from Haifa",
+    summary: "Visit Nazareth, Capernaum and the Sea of Galilee with a private guide, returning to Haifa Cruise Port. This particular operator's listing has non-refundable conditions.",
+    publicUrl: "https://www.viator.com/tours/Haifa/Private-Shore-Tour-Nazareth-and-Sea-of-Galilee-from-Haifa-Port/d4472-417844P124", groupFormat: "private",
+    durationLabel: "8 hours", includesLabel: "Guided tour & return transport", checkedAt: "2026-11-15",
+  },
+  {
+    id: "shore-viator-haifa-akko-private", portIds: ["haifa"], operatorId: "taxigo-dmc", partnerId: "viator",
+    destinationIds: ["akko", "rosh-hanikra"], title: "Private Akko & Rosh Hanikra from Haifa",
+    summary: "A private northern-coast excursion from Haifa Cruise Port, combining Akko's Crusader heritage with the Rosh Hanikra grottoes where accessible. This listing has non-refundable conditions.",
+    publicUrl: "https://www.viator.com/tours/Haifa/Private-Shore-Tour-Acre-Crusader-and-Rosh-Hanikrah-from-Haifa-Port/d4472-320728P2898", groupFormat: "private",
+    durationLabel: "7 hours", includesLabel: "Guided tour & return transport", checkedAt: "2026-11-15",
   },
 ];
 
@@ -957,7 +1007,7 @@ const sourceCatalog: SourceReference[] = [
   { id: "shore-viator-ashdod-jerusalem-bethlehem-usd", title: "Ashdod Jerusalem & Bethlehem — USD starting-price option", publisher: "Viator", url: "https://www.viator.com/es-CL/tours/Ashdod/Ashdod-Port-Shore-Excursion-Jerusalem-and-Bethlehem-Day-Tour-from-Ashdod-Port/d4470-5209P131", checkedAt: SHORE_EXCURSION_CHECK_DATE, note: "The official Spanish-language listing for the same 5209P131 product shows an English-tour option from US$120 per person. An indicative checked starting price only; dates, travelers, options and final checkout currency change the total." },
   ...shoreTourProducts.map((product): SourceReference => ({
     id: product.id, title: product.title, publisher: product.partnerId === "getyourguide" ? "GetYourGuide product listing" : product.partnerId === "viator" ? "Viator product listing" : product.operatorId === "tourist-israel" ? "Tourist Israel" : "Compass Travel Israel",
-    url: product.publicUrl, checkedAt: SHORE_EXCURSION_CHECK_DATE,
+    url: product.publicUrl, checkedAt: product.checkedAt || SHORE_EXCURSION_CHECK_DATE,
     note: `Product identity, named operator, itinerary and pickup/return at ${product.portIds.map((id) => shorePorts[id].name).join(" / ")} Port checked. ${product.seasonNote ? "The operator currently advertises a 2027 cruise program. " : ""}${product.operatorId === "rent-a-guide" ? "The title mentions both ports, but the detailed return/inclusions specify Ashdod; listed here only for Ashdod. " : ""}${product.listedPrice ? "The displayed USD starting price and per-person/per-group basis were checked as an indicative snapshot, not a quote for selected dates. " : ""}No sailing-date availability, live price, port-access permission or return guarantee is verified by this portal. Confirm all arrangements before booking.`,
   })),
   { id: "moshe-author-profile", title: "Moshe Barak biography", publisher: "Moshe Barak", url: "", checkedAt: "2026-10-18", note: "Publisher biography supports over 20 years in private transport, local route knowledge and tailored journeys for international visitors. Tripadvisor is linked to the owner-supplied profile only; no live score, count or review text is reproduced." },
@@ -1226,6 +1276,9 @@ export const operators: Operator[] = [
   { id: "ilya-pevzner", name: "Ilya Pevzner Guide Israel", kind: "tour_operator" },
   { id: "rent-a-guide", name: "Rent-a-Guide", kind: "tour_operator" },
   { id: "guided-tours-israel", name: "Guided Tours Israel", kind: "tour_operator" },
+  { id: "taxigo-online", name: "taxiGo.online", kind: "tour_operator" },
+  { id: "abano-terme-online", name: "Abano Terme Online", kind: "tour_operator" },
+  { id: "taxigo-dmc", name: "taxiGo DMC", kind: "tour_operator" },
   { id: "inpa", name: "Israel Nature and Parks Authority", kind: "official_site" },
   { id: "eyal-korin", name: "Eyal Korin – Ramon Crater Tours", kind: "tour_operator" },
   { id: "desert-prime", name: "Desert-Prime", kind: "tour_operator" },
@@ -1387,6 +1440,14 @@ export const affiliateConfig: Record<string, { trackingUrl: string } | undefined
   "shore-gyg-ashdod-masada": { trackingUrl: "https://getyourguide.tpm.li/dqU4jiqp" },
   "shore-viator-haifa-galilee": { trackingUrl: "https://viator.tpm.li/qXL1yc0E" },
   "shore-viator-ashdod-jerusalem-dead-sea": { trackingUrl: "https://viator.tpm.li/ikBox9CI" },
+  // New exact Viator product targets: populated only by approved Travelpayouts API short links.
+  "shore-viator-ashdod-jerusalem-bethlehem-smallgroup": undefined,
+  "shore-viator-ashdod-jerusalem-private": undefined,
+  "shore-viator-haifa-jerusalem-bethlehem-smallgroup": undefined,
+  "shore-viator-haifa-jerusalem-private": undefined,
+  "shore-viator-haifa-caesarea-private": undefined,
+  "shore-viator-haifa-galilee-private": undefined,
+  "shore-viator-haifa-akko-private": undefined,
 
   "esim-airalo": { trackingUrl: "https://airalo.tpm.li/JmHFDV3v" },
   "esim-airalo-compatibility": { trackingUrl: AIRALO_COMPATIBILITY_AFFILIATE_URL },
