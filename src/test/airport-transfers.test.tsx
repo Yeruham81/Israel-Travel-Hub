@@ -110,7 +110,7 @@ describe("private Ben Gurion transfers", () => {
     expect(await screen.findByText("Thank you for contacting me")).toBeInTheDocument();
     expect(fetchSpy).toHaveBeenCalledOnce();
     expect(fetchSpy).toHaveBeenCalledWith("/api/quote-request/", expect.objectContaining({ method: "POST" }));
-    expect(JSON.parse(String(fetchSpy.mock.calls[0]![1]?.body))).toMatchObject({ sourceTitle: "Airport transfers", request: { kind: "transfer", fields: { destinationId: "jerusalem", email: "jamie+trip@example.com", date: "2099-11-01", time: "23:45", flight: "LY123", address: "Example Hotel, Jerusalem", consent: true } } });
+    expect(JSON.parse(String(fetchSpy.mock.calls[0]![1]?.body))).toMatchObject({ sourceTitle: "Private airport transfers from Ben Gurion Airport", request: { kind: "transfer", fields: { destinationId: "jerusalem", email: "jamie+trip@example.com", date: "2099-11-01", time: "23:45", flight: "LY123", address: "Example Hotel, Jerusalem", consent: true } } });
     expect(localStorage.length).toBe(0);
     fireEvent.change(screen.getByLabelText("Full name *"), { target: { value: "Another name" } });
     expect(screen.queryByRole("link", { name: "Open email to Moshe" })).not.toBeInTheDocument();
