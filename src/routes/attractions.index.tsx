@@ -7,7 +7,7 @@ import { CANONICAL_ORIGIN, jsonLd, pageMeta } from "@/lib/site";
 
 const PATH = "/attractions/";
 const TITLE = "Best attractions in Israel: places to visit & things to see";
-const DESCRIPTION = "From Jerusalem's Old City and Tel Aviv's beaches to Masada, the Galilee and Eilat, discover memorable attractions and places to visit across Israel.";
+const DESCRIPTION = "Explore Israel's individual attractions by region, including Jerusalem's Old City, Old Jaffa, Caesarea, Masada and sites across the Galilee and Negev.";
 
 export const Route = createFileRoute("/attractions/")({
   head: () => {
@@ -56,7 +56,7 @@ const planningIcons: Record<string, LucideIcon> = {
 
 function AttractionCard({ card }: { card: AttractionHubCard }) {
   return (
-    <article className="min-w-0 overflow-hidden rounded-2xl border bg-card shadow-sm transition-colors hover:border-primary/60" data-testid="attraction-card">
+    <article className="min-w-0 overflow-hidden rounded-2xl border bg-card shadow-sm transition-all hover:border-primary/60 hover:shadow-md motion-safe:hover:-translate-y-0.5" data-testid="attraction-card">
       <Link
         to={card.to}
         className="group flex h-full flex-col focus-visible:outline-2 focus-visible:outline-offset-[-3px] focus-visible:outline-primary"
@@ -65,7 +65,10 @@ function AttractionCard({ card }: { card: AttractionHubCard }) {
           <img src={card.photo.src} alt={card.photo.alt} width={755} height={503} loading="lazy" decoding="async" className="h-full w-full object-cover transition-transform duration-300 motion-safe:group-hover:scale-[1.03]" />
         </div>
         <div className="flex flex-1 flex-col p-4 sm:p-5">
-          <h3 className="font-serif text-xl font-semibold leading-snug group-hover:text-primary group-hover:underline group-hover:underline-offset-4 sm:text-2xl">{card.title}</h3>
+          <div className="flex items-start justify-between gap-2">
+            <h3 className="font-serif text-lg font-semibold leading-snug group-hover:text-primary group-hover:underline group-hover:underline-offset-4 sm:text-xl">{card.title}</h3>
+            <ArrowUpRight className="mt-1 size-4 shrink-0 text-primary/65 transition-transform motion-safe:group-hover:-translate-y-0.5 motion-safe:group-hover:translate-x-0.5" aria-hidden="true" />
+          </div>
           <p className="mt-2 flex-1 text-sm leading-relaxed text-muted-foreground">{card.description}</p>
         </div>
       </Link>
@@ -80,7 +83,7 @@ function Attractions() {
         crumbs={[{ name: "Home", to: "/" }, { name: "Attractions", to: PATH }]}
         eyebrow="Discover the places that make Israel memorable"
         title="Attractions & places to visit in Israel"
-        intro="Explore Israel's historic cities, beaches and ancient sites, from Jerusalem and Tel Aviv to Masada, the Dead Sea and the Galilee. Find places worth visiting and tips for planning your route."
+        intro="Discover individual places worth visiting across Israel, from ancient cities and archaeological sites to churches, nature reserves and desert viewpoints. Browse the attractions by region below."
       />
 
       <section id="browse-regions" aria-labelledby="browse-regions-heading" className="mt-8 scroll-mt-24 border-y py-4 sm:mt-10 sm:py-5">
@@ -110,21 +113,21 @@ function Attractions() {
           <div className="mt-3 grid gap-3 sm:mt-4 sm:grid-cols-2 sm:gap-4 xl:grid-cols-3">
             {region.cards.map((card) => <AttractionCard key={card.id} card={card} />)}
           </div>
-          <nav aria-label={"More ways to explore " + region.title} className="mt-4 border-t border-border/70 pt-3">
-            <ul className="flex flex-wrap gap-2">
-              {region.planning.map((link) => (
-                <li key={link.label}>
-                  <Link
-                    to={link.to}
-                    className="group inline-flex min-h-9 items-center gap-1.5 rounded-lg border border-border/75 bg-secondary/30 px-3 py-1.5 text-xs font-semibold leading-snug text-foreground/85 transition-colors hover:border-primary/40 hover:bg-secondary/65 hover:text-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary sm:text-sm"
-                  >
-                    {link.label}
-                    <ArrowUpRight className="size-3.5 shrink-0 text-muted-foreground/75 transition-colors group-hover:text-primary" aria-hidden="true" />
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </nav>
+          {region.relatedGuides.length > 0 && (
+            <nav aria-label={"More " + (region.navLabel ?? region.title) + " travel guides"} className="mt-5 border-t border-border/70 pt-3" data-testid="attraction-region-guides">
+              <h3 className="text-sm font-semibold text-muted-foreground">More {region.navLabel ?? region.title} travel guides</h3>
+              <ul className="mt-2 flex flex-wrap gap-x-5 gap-y-2">
+                {region.relatedGuides.map((guide) => (
+                  <li key={String(guide.to)}>
+                    <Link to={guide.to} className="inline-flex items-center gap-1 text-sm font-medium text-primary underline-offset-4 hover:underline focus-visible:rounded-sm focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
+                      {guide.label}
+                      <ArrowUpRight className="size-3.5 shrink-0" aria-hidden="true" />
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </nav>
+          )}
           <div className="mt-3 text-right">
             <a href="#browse-regions" className="text-xs font-semibold text-primary underline-offset-4 hover:underline">Back to regions ↑</a>
           </div>

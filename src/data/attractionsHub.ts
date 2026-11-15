@@ -20,7 +20,8 @@ export type AttractionHubRegion = {
   navLabel?: string;
   image: { src: string; alt: string; sourceFilename: string };
   cards: AttractionHubCard[];
-  planning: { label: string; to: LinkProps["to"] }[];
+  /** Quiet, editorially related reading below the attraction cards; never transport, hotels or tours. */
+  relatedGuides: { label: string; to: LinkProps["to"] }[];
 };
 
 export const attractionHubPhotos = {
@@ -45,7 +46,7 @@ const attraction = (id: AttractionId, title: string, description: string, fallba
     photo: photoOverride ?? item.image ?? { src: fallback, alt: title },
   };
 };
-const guide = (id: TravelGuideId, title: string, description: string, photoOverride?: { src: string; alt: string }): AttractionHubCard => ({
+const editorialAttraction = (id: TravelGuideId, title: string, description: string, photoOverride?: { src: string; alt: string }): AttractionHubCard => ({
   id, title, description, to: travelGuidePaths[id],
   photo: photoOverride ?? travelGuides[id].photo,
 });
@@ -54,45 +55,37 @@ export const attractionHubRegions: AttractionHubRegion[] = [
   {
     id: "jerusalem",
     title: "Jerusalem",
-    summary: "Wander Jerusalem’s ancient quarters, explore remarkable museums and sacred places, and discover atmospheric markets and local shopping streets.",
+    summary: "Wander Jerusalem’s Old City, take in the views from the Mount of Olives, and discover the historic landmarks of Mount Zion.",
     image: attractionHubPhotos.jerusalem,
     cards: [
       attraction("old-city-jerusalem", "Jerusalem's Old City", "Quarters, historic gates, holy sites and practical walking advice.", attractionHubPhotos.jerusalem.src),
       attraction("mount-of-olives", "Mount of Olives", "Panoramic views, churches and historic pilgrimage sites.", attractionHubPhotos.jerusalem.src, attractionHubPhotos.olives),
       attraction("mount-zion", "Mount Zion", "Churches, the Last Supper tradition and places just outside the walls.", attractionHubPhotos.jerusalem.src),
     ],
-    planning: [
-      { label: "Jerusalem museums guide", to: "/travel-blog/museums-in-jerusalem/" },
+    relatedGuides: [
       { label: "Churches in Jerusalem", to: travelGuidePaths.jerusalemChurches },
+      { label: "Museums in Jerusalem", to: "/travel-blog/museums-in-jerusalem/" },
       { label: "Shopping in Jerusalem", to: travelGuidePaths.jerusalemShopping },
-      { label: "Jerusalem city guide", to: travelGuidePaths.jerusalem },
-      { label: "Jerusalem tours", to: "/tours/jerusalem/" },
-      { label: "Day trips from Jerusalem", to: travelGuidePaths.jerusalemDayTrips },
-      { label: "Hotels in Jerusalem", to: "/travel-blog/where-to-stay-in-jerusalem/" },
     ],
   },
   {
     id: "tel-aviv-jaffa",
     title: "Tel Aviv & Jaffa",
-    summary: "Find your favourite beach for a day in the sun, explore Tel Aviv’s museums and neighbourhoods, and wander through Old Jaffa’s lively market lanes.",
+    summary: "Wander Old Jaffa’s stone lanes, explore its historic harbour, and browse the colourful flea market beside the Mediterranean.",
     image: attractionHubPhotos.telAviv,
     cards: [
       attraction("jaffa", "Old Jaffa", "Stone lanes, the harbour, flea market and historic landmarks.", attractionHubPhotos.telAviv.src),
     ],
-    planning: [
+    relatedGuides: [
       { label: "Things to see in Tel Aviv", to: "/travel-blog/attractions-in-tel-aviv/" },
       { label: "Beaches in Tel Aviv", to: travelGuidePaths.telAvivBeaches },
-      { label: "Tel Aviv museums", to: travelGuidePaths.telAvivMuseums },
-      { label: "Tel Aviv & Jaffa tours", to: "/tours/tel-aviv-jaffa/" },
-      { label: "Day trips from Tel Aviv", to: travelGuidePaths.telAvivDayTrips },
-      { label: "Hotels in Tel Aviv", to: "/travel-blog/where-to-stay-in-tel-aviv/" },
-      { label: "Airport to Tel Aviv", to: "/travel-blog/how-to-get-from-ben-gurion-airport-to-tel-aviv/" },
+      { label: "Museums in Tel Aviv", to: travelGuidePaths.telAvivMuseums },
     ],
   },
   {
     id: "haifa-coast",
     title: "Haifa & the Mediterranean coast",
-    summary: "Take in Haifa’s sweeping views, roam Acre’s old alleys, and discover Roman Caesarea and the sea grottoes at Rosh Hanikra.",
+    summary: "Discover the ancient streets of Akko, the Roman ruins of Caesarea and the dramatic sea grottoes of Rosh Hanikra.",
     navLabel: "Haifa & Coast",
     image: attractionHubPhotos.haifa,
     cards: [
@@ -100,86 +93,68 @@ export const attractionHubRegions: AttractionHubRegion[] = [
       { id: "caesarea", title: "Caesarea National Park", description: "Roman ruins, an ancient harbour and archaeology beside the sea.", to: "/attractions/caesarea/", photo: { src: caesareaPhoto, alt: "Ruins and Mediterranean coast at Caesarea" } },
       attraction("rosh-hanikra", "Rosh Hanikra", "Sea grottoes, coastal cliffs and views near the Lebanese border.", attractionHubPhotos.haifa.src),
     ],
-    planning: [
-      { label: "Haifa city guide", to: "/travel-blog/haifa/" },
-      { label: "Haifa museums", to: travelGuidePaths.haifaMuseums },
-      { label: "Caesarea, Haifa & Acre tours", to: "/tours/caesarea-haifa-acre/" },
-      { label: "Shore excursions from Haifa", to: "/shore-excursions/haifa/" },
-      { label: "Hotels in Haifa", to: "/travel-blog/best-hotels-in-haifa/" },
-      { label: "Airport to Haifa", to: "/travel-blog/how-to-get-from-ben-gurion-airport-to-haifa/" },
+    relatedGuides: [
+      { label: "Haifa visitor guide", to: "/travel-blog/haifa/" },
+      { label: "Museums in Haifa", to: travelGuidePaths.haifaMuseums },
     ],
   },
   {
     id: "nazareth-lower-galilee",
     title: "Nazareth & Galilee",
-    summary: "Discover Nazareth’s historic churches, take in the views from Mount Tabor, and explore ancient Megiddo in the heart of Galilee.",
+    summary: "Discover Nazareth’s Basilica of the Annunciation, take in views from Mount Tabor and Mount Precipice, and explore ancient Tel Megiddo.",
     image: attractionHubPhotos.nazareth,
     cards: [
-      guide("annunciation", "Basilica of the Annunciation", "Explore Nazareth's major Christian landmark and its history."),
+      editorialAttraction("annunciation", "Basilica of the Annunciation", "Explore Nazareth's major Christian landmark and its history."),
       attraction("mount-tabor", "Mount Tabor", "Church of the Transfiguration and views over the valley.", attractionHubPhotos.nazareth.src),
-      guide("precipice", "Mount Precipice", "A lookout linked to Christian tradition just outside Nazareth."),
-      guide("megiddo", "Tel Megiddo", "A major archaeological mound overlooking the Jezreel Valley."),
+      editorialAttraction("precipice", "Mount Precipice", "A lookout linked to Christian tradition just outside Nazareth."),
+      editorialAttraction("megiddo", "Tel Megiddo", "A major archaeological mound overlooking the Jezreel Valley."),
     ],
-    planning: [
-      { label: "Nazareth & Galilee tours", to: "/tours/nazareth-sea-of-galilee/" },
-      { label: "Shore excursions from Haifa", to: "/shore-excursions/haifa/" },
-      { label: "Explore the Sea of Galilee", to: "/travel-blog/sea-of-galilee/" },
-      { label: "Private driver service", to: "/private-driver/" },
-    ],
+    relatedGuides: [],
   },
   {
     id: "sea-of-galilee",
     title: "Sea of Galilee & the Jordan River",
-    summary: "Follow the Sea of Galilee’s shore to ancient sites, lakeside churches and meaningful pilgrimage stops along the Jordan River.",
+    summary: "Follow the lakeshore to Capernaum, Tabgha and Magdala, then visit the Mount of Beatitudes and Yardenit by the Jordan River.",
     navLabel: "Sea of Galilee & Jordan",
     image: attractionHubPhotos.galilee,
     cards: [
       attraction("capernaum", "Capernaum", "Ancient synagogue remains and churches near the lake.", attractionHubPhotos.galilee.src),
       attraction("tabgha", "Tabgha", "Lakeside churches, mosaics and biblical traditions.", attractionHubPhotos.galilee.src),
       attraction("mount-of-beatitudes", "Mount of Beatitudes", "A peaceful hilltop church and lake panorama.", attractionHubPhotos.galilee.src),
-      guide("magdala", "Magdala", "Archaeology and pilgrimage on the western shore."),
-      guide("yardenit", "Yardenit", "Plan a visit to this Jordan River baptism site."),
+      editorialAttraction("magdala", "Magdala", "Archaeology and pilgrimage on the western shore."),
+      editorialAttraction("yardenit", "Yardenit", "Plan a visit to this Jordan River baptism site."),
     ],
-    planning: [
-      { label: "Sea of Galilee regional guide", to: "/travel-blog/sea-of-galilee/" },
-      { label: "Jordan River baptism comparison", to: travelGuidePaths.baptism },
-      { label: "Nazareth & Sea of Galilee tours", to: "/tours/nazareth-sea-of-galilee/" },
-      { label: "Getting around Israel", to: travelGuidePaths.israel },
-      { label: "Hotels in Tiberias", to: "/travel-blog/best-hotels-in-tiberias/" },
+    relatedGuides: [
+      { label: "Sea of Galilee visitor guide", to: "/travel-blog/sea-of-galilee/" },
+      { label: "Jordan River baptism sites", to: travelGuidePaths.baptism },
     ],
   },
   {
     id: "dead-sea-masada",
     title: "Dead Sea & Masada",
-    summary: "Float in the Dead Sea, explore Masada’s desert fortress, and find the springs, nature reserves and landscapes that make this region so distinctive.",
+    summary: "Discover Masada’s desert fortress, the springs and trails of Ein Gedi, and the Jordan River pilgrimage site of Qasr el-Yahud.",
     image: attractionHubPhotos.deadSea,
     cards: [
       { id: "masada", title: "Masada National Park", description: "The mountain fortress, cable car, desert trails and visit planning.", to: "/attractions/masada/", photo: migrationPhotos["EXISTING:masada"] },
       attraction("ein-gedi", "Ein Gedi Nature Reserve", "Desert springs, wildlife and trail-access considerations.", attractionHubPhotos.deadSea.src),
-      guide("qasr", "Qasr el-Yahud", "The Jordan River pilgrimage site near Jericho."),
+      editorialAttraction("qasr", "Qasr el-Yahud", "The Jordan River pilgrimage site near Jericho."),
     ],
-    planning: [
-      { label: "Dead Sea attractions guide", to: "/travel-blog/dead-sea-attractions/" },
-      { label: "Masada & Dead Sea tours", to: "/tours/masada-dead-sea/" },
+    relatedGuides: [
+      { label: "Things to see around the Dead Sea", to: "/travel-blog/dead-sea-attractions/" },
       { label: "Dead Sea visitor guide", to: travelGuidePaths.deadSea },
-      { label: "Jerusalem to the Dead Sea", to: travelGuidePaths.jerusalemDeadSea },
-      { label: "Dead Sea hotels", to: "/travel-blog/best-dead-sea-hotels/" },
     ],
   },
   {
     id: "negev-eilat",
     title: "Negev Desert & Eilat",
-    summary: "Take in the dramatic scenery of Ramon Crater, plan a stargazing escape, and enjoy Eilat’s Red Sea beaches and marine life.",
+    summary: "Take in the vast landscapes and viewpoints of Ramon Crater, with desert trails and stargazing opportunities near Mitzpe Ramon.",
     navLabel: "Negev & Eilat",
     image: attractionHubPhotos.negev,
     cards: [
       attraction("mitzpe-ramon-crater", "Mitzpe Ramon & Ramon Crater", "Desert lookouts, geology, trails and stargazing.", attractionHubPhotos.negev.src),
     ],
-    planning: [
-      { label: "Eilat city guide", to: travelGuidePaths.eilat },
-      { label: "Eilat & Red Sea tours", to: "/tours/eilat-red-sea/" },
-      { label: "Travel around Israel", to: travelGuidePaths.israel },
-      { label: "Rent a car", to: "/car-rental/" },
+    relatedGuides: [
+      { label: "Eilat & the Red Sea guide", to: travelGuidePaths.eilat },
     ],
   },
 ];
