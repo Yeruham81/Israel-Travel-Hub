@@ -8,6 +8,7 @@ on:
       - 'src/components/AirportDestinationCard.tsx'
       - 'src/components/AirportBookingPlatforms.tsx'
       - 'src/components/TransferQuoteForm.tsx'
+      - 'src/components/TravelGuide.tsx'
       - 'src/data/airportTransfers.ts'
       - 'src/data/registry.ts'
       - 'src/test/airport-transfers.test.tsx'
