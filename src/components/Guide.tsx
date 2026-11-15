@@ -275,8 +275,8 @@ function ProviderAction({ link: l, pageId, className, children, showArrow = true
     onClick={internal ? undefined : () => recordOutboundClick({ pageId, productId: l.id, offerId: l.id })}
     className={className}
   >
-    {children} {showArrow && <span aria-hidden>{internal ? "→" : "↗"}</span>}
-    {!internal && <span className="sr-only"> (opens in a new tab)</span>}
+    {children}{showArrow && <> <span aria-hidden>{internal ? "→" : "↗"}</span></>}
+    {!internal && showArrow && <span className="sr-only"> (opens in a new tab)</span>}
   </a>;
 }
 
