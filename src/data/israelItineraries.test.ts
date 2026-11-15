@@ -530,7 +530,7 @@ describe("migrated Israel itineraries", () => {
     const tours = file("src/components/JerusalemItineraryTourOptions.tsx");
     expect(g.daysPlan).toHaveLength(10);
     expect(g.reviewedAt).toBe("2026-11-14");
-    expect(g.hero).toBe("itinerary-10day-cover");
+    expect(g.hero).toBe("itinerary-10day-haifa-port-cover");
     expect(g.daysPlan[6]?.image).toBe("itinerary-10day-akko-port");
     expect(new Set([g.hero, ...g.daysPlan.map(day => day.image)]).size).toBe(11);
     expect(g.overviewRows).toHaveLength(10);
