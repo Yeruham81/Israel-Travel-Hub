@@ -192,7 +192,7 @@ function GuideRichParagraph({ spans }: { spans: GuideInlineSpan[] }) {
 
 /** Link provider names in eSIM buying advice using existing tracked affiliate URLs. */
 function linkedEsimNames(paragraph: string, providers: ReturnType<typeof linksForPage>): ReactNode {
-  return paragraph.split(/\\b(Airalo|Saily|Yesim|GigSky|Drimsim)\\b/g).map((part, i) => {
+  return paragraph.split(/\b(Airalo|Saily|Yesim|GigSky|Drimsim)\b/g).map((part, i) => {
     const provider = providers.find((candidate) => candidate.providerName === part);
     return provider ? <ProviderNameLink key={i} link={provider} pageId="guide-esim">{part}</ProviderNameLink> : part;
   });
