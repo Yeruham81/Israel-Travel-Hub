@@ -161,7 +161,7 @@ describe("migrated practical guides", () => {
     expect(travelGuides.uber.answer).toMatch(/Uber and Lyft do not currently offer passenger rides in Israel/);
     expect(travelGuides.sherut.answer).toMatch(/former Nesher route to Jerusalem or Amal route to Haifa/);
     expect(travelGuides.esim.sections.find((section) => section.id === "calling")!.paragraphs.join(" ")).toMatch(/an Israeli phone number usually aren\x27t included/s);
-    expect(travelGuides.esim.answer).toMatch(/Saily or Airalo: 5GB costs about \$8 for 30 days/s);
+    expect(travelGuides.esim.answer).toMatch(/Saily.*3GB.*\$5\.99.*Airalo.*3GB.*\$6/s);
   });
 
   it("covers the complete airport arrival sequence without duplicating specialty transport guides", () => {
@@ -872,7 +872,7 @@ describe("migrated practical guides", () => {
     expect(travelGuides.esim.services).toHaveLength(4);
     const quickAnswer = container.querySelector("#quick-answer") as HTMLElement;
     expect(quickAnswer.querySelectorAll("a")).toHaveLength(0);
-    expect(within(quickAnswer).getByText("Saily", { selector: "strong" })).toBeInTheDocument();
+    expect(within(quickAnswer).getAllByText("Saily", { selector: "strong" })).toHaveLength(1);
     expect(within(quickAnswer).getByText("GigSky", { selector: "strong" })).toBeInTheDocument();
     expect(container.querySelector("#sources")).toBeNull();
     expect(container.textContent).not.toContain("References:");
