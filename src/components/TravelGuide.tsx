@@ -208,7 +208,7 @@ function linkedEsimNames(paragraph: string, providers: ReturnType<typeof linksFo
   });
 }
 
-/** The recommendations use one attributed affiliate link at the end, not a link on each brand mention. */
+/** Recommendations show one tracked provider action at the end, without repeated brand links. */
 function esimRecommendation(paragraph: string, providers: ReturnType<typeof linksForPage>): ReactNode {
   const match = paragraph.match(/^(.*?)(My choice:\s*)(Airalo|Saily|Yesim|GigSky|Drimsim)(\.)$/s);
   if (!match) return emphasizeEsimNames(paragraph);
