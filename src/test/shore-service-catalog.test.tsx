@@ -167,7 +167,7 @@ describe("port service catalog", () => {
     const catalog = [...getShoreCatalog("haifa"), ...getShoreCatalog("ashdod")];
     expect(catalog).toHaveLength(17);
     expect(new Set(catalog.map((service) => service.photo.src)).size).toBe(catalog.length);
-    const externalPhotoSources = catalog.map((service) => service.photo.sourceUrl).filter(Boolean);
+    const externalPhotoSources = catalog.map((service) => service.photo.sourceUrl).filter((url): url is string => Boolean(url));
     expect(new Set(externalPhotoSources).size).toBe(externalPhotoSources.length);
     expect(externalPhotoSources.every((url) => /^https:\/\//.test(url))).toBe(true);
     expect(catalog.every((service) => Boolean(service.photo.alt && service.photo.src))).toBe(true);
