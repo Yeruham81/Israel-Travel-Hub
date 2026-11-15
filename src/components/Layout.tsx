@@ -19,7 +19,7 @@ export function ExtLink({ href, children, className }: { href: string; children:
 export function Wordmark() {
   return (
     <Link to="/" className="flex shrink-0 items-center gap-1.5 sm:gap-2" aria-label="Israel Taxi & Travel home">
-      <span aria-hidden className="grid h-7 w-7 shrink-0 place-items-center rounded-full bg-primary font-serif text-sm italic text-primary-foreground sm:h-8 sm:w-8 sm:text-base">i</span>
+      <span aria-hidden className="grid h-7 w-7 shrink-0 place-items-center rounded-full bg-navy font-serif text-sm italic text-navy-foreground sm:h-8 sm:w-8 sm:text-base">i</span>
       <span className="flex flex-col gap-1">
         <span className="whitespace-nowrap font-serif font-semibold text-[0.9rem] leading-none min-[375px]:text-base sm:text-xl">
           Israel Taxi <span className="italic text-primary">&amp;</span> Travel
@@ -154,7 +154,7 @@ export function SiteHeader() {
             ))}
           </ul>
         </nav>
-        <button type="button" onClick={() => { setHasOpened(true); setOpen(true); }} className="btn btn-primary shrink-0 whitespace-nowrap gap-1 px-3 py-2 text-sm lg:hidden" aria-haspopup="dialog" aria-expanded={open}>
+        <button type="button" onClick={() => { setHasOpened(true); setOpen(true); }} className="btn shrink-0 whitespace-nowrap gap-1 bg-navy px-3 py-2 text-sm text-navy-foreground hover:bg-navy/85 lg:hidden" aria-haspopup="dialog" aria-expanded={open}>
           <Compass className="h-4 w-4" aria-hidden /> Menu
         </button>
         <Suspense fallback={null}>
