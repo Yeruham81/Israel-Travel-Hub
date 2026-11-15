@@ -92,7 +92,7 @@ export function ShoreServiceCatalog({ portId, filters, onFilterChange, itinerary
                 return <li key={service.id} data-testid="shore-service-card" data-service-id={service.id} data-product-id={service.productId} data-operator-id={service.operator?.id} data-booking-platform={service.partner?.id || "direct"} data-service-kind={service.kind} className="flex h-full min-w-0 gap-3 rounded-xl border bg-card p-3 transition-colors hover:border-primary/40">
                   <img src={service.photo.src} alt={service.photo.alt} width={144} height={168} loading="lazy" decoding="async" className="h-36 w-28 shrink-0 rounded-lg object-cover sm:h-40 sm:w-32" />
                   <div className="flex min-w-0 flex-1 flex-col">
-                    <p className="text-xs font-semibold text-primary">{service.partner?.name || provider.providerName}</p>
+                    <p className="text-xs font-semibold text-primary"><span className="sr-only">Booking platform: </span>{service.partner?.name || provider.providerName}</p>
                     <h3 className="mt-1 text-base font-semibold leading-snug text-foreground">{service.title}</h3>
                     <p className="mt-1 line-clamp-2 text-xs leading-relaxed text-muted-foreground">{service.description}</p>
                     <p className="mt-2 flex items-center gap-1.5 text-xs text-foreground"><Clock3 className="size-3.5 shrink-0 text-primary" aria-hidden />{service.duration} · {service.groupLabel}</p>
