@@ -50,7 +50,10 @@ describe("migrated practical guides", () => {
     expect(screen.getAllByRole("heading", { level: 1 })).toHaveLength(1);
     expect(screen.getByRole("heading", { level: 1 })).toHaveTextContent(guide.title);
     expect(screen.getByRole("region", { name: "Quick answer" })).toHaveTextContent(guide.answer);
-    if (id === "jerusalemDeadSea") {
+    if (id === "esim") {
+      expect(screen.getByRole("region", { name: "Compare 30-day unlimited eSIM plans" })).toBeInTheDocument();
+      expect(container.querySelector("#at-a-glance")).toBeNull();
+    } else if (id === "jerusalemDeadSea") {
       expect(screen.queryByTestId("journey-option-cards")).not.toBeInTheDocument();
       expect(screen.getByTestId("journey-stop-cards").children).toHaveLength(4);
       expect(screen.getByRole("table", { name: guide.comparison.caption })).toBeInTheDocument();
@@ -160,8 +163,8 @@ describe("migrated practical guides", () => {
     expect(travelGuides.airportTaxis.comparison.rows.join(" ")).toMatch(/Exit 03.*Exit 23/);
     expect(travelGuides.uber.answer).toMatch(/Uber and Lyft do not currently offer passenger rides in Israel/);
     expect(travelGuides.sherut.answer).toMatch(/former Nesher route to Jerusalem or Amal route to Haifa/);
-    expect(travelGuides.esim.sections.find((section) => section.id === "calling")!.paragraphs.join(" ")).toMatch(/Most travel eSIM plans include mobile data, not a phone number/s);
-    expect(travelGuides.esim.answer).toMatch(/Saily.*3GB.*\$5\.99.*Airalo.*3GB.*\$6/s);
+    expect(travelGuides.esim.sections.find((section) => section.id === "calling")!.paragraphs.join(" ")).toMatch(/A data-only eSIM lets you browse, navigate and use WhatsApp/s);
+    expect(travelGuides.esim.answer).toMatch(/Saily.*Airalo.*GigSky/s);
   });
 
   it("covers the complete airport arrival sequence without duplicating specialty transport guides", () => {
