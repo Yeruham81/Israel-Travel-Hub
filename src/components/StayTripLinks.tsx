@@ -98,7 +98,7 @@ export const stayGuideGroups: Record<Region, GuideGroups> = {
       card("Haifa travel guide", "/travel-blog/haifa/", "Explore the city's landmarks and neighbourhoods.", haifaOverview, "Haifa city and hillside"),
       card("Museums in Haifa", "/travel-blog/museums-in-haifa/", "Find museums and cultural stops on Mount Carmel.", haifaMuseums, "Haifa museum and exhibits"),
       card("Acre (Akko)", "/travel-blog/akko-acre/", "Discover the historic walled port city close to Haifa.", akkoPort, "Historic coastal stone buildings in Acre"),
-      card("Haifa shore excursions", "/haifa-shore-excursions/", "Explore the port region and excursions from Haifa.", haifaPort, "Port and coastline at Haifa"),
+      card("Haifa shore excursions", "/shore-excursions/haifa/", "Explore the port region and excursions from Haifa.", haifaPort, "Port and coastline at Haifa"),
     ],
     onward: [
       card("Ben Gurion Airport to Haifa", "/travel-blog/how-to-get-from-ben-gurion-airport-to-haifa/", "Compare the train, taxi and transfer options.", airportHall, "Ben Gurion Airport arrivals hall"),
