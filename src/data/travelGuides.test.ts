@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { filterGuides, getGuideTopicLabel, guideDirectory, guideTopics, isGuideTopic, travelGuides } from "@/data/travelGuides";
-import { AIRALO_COMPATIBILITY_AFFILIATE_URL, formatCheckDate } from "@/data/registry";
+import { AIRALO_COMPATIBILITY_AFFILIATE_URL, AIRALO_MENA_AFFILIATE_URL, formatCheckDate } from "@/data/registry";
 import { itineraryIds, itineraries } from "@/data/israelItineraries";
 import { migrationPhotos } from "@/data/guideMigrationPhotos";
 import { uniqueGuideCardPhotos } from "@/lib/guide-card-photos";
@@ -9,13 +9,14 @@ describe("travel guide topic filters and prerender safety", () => {
   it("keeps eSIM buying guidance prominent without a troubleshooting manual", () => {
     const guide = travelGuides.esim;
     expect(guide.title).toContain("Prices, Providers & My Picks");
-    expect(guide.sections.map((section) => section.id)).toEqual(["price", "short-trip", "long-trip", "unlimited", "regional", "compatibility", "calling", "coverage", "setup"]);
-    expect(guide.comparison.rows).toHaveLength(3);
-    expect(guide.comparison.rows.map(row => row[1])).toEqual(["Saily", "Saily", "GigSky"]);
-    expect(guide.comparison.rows[0]?.[2]).toContain("$5.99");
-    expect(guide.comparison.rows[1]?.[2]).toContain("$7.99");
-    expect(guide.comparison.rows[2]?.[2]).toContain("$56.24");
-    expect(guide.comparison.rows[2]?.[3]).toContain("Yesim");
+    expect(guide.sections.map((section) => section.id)).toEqual(["short-trip", "long-trip", "unlimited", "regional", "compatibility", "calling", "coverage", "setup"]);
+    expect(guide.comparison.rows).toHaveLength(5);
+    expect(guide.comparison.rows.map(row => row[0])).toEqual(["GigSky", "Yesim", "Airalo", "Saily", "Drimsim"]);
+    expect(guide.comparison.rows[0]?.[1]).toBe("$56.24");
+    expect(guide.comparison.rows[1]?.[1]).toBe("$66.00");
+    expect(guide.comparison.rows[2]?.[1]).toBe("$69.00");
+    expect(guide.comparison.rows[3]?.[1]).toBe("$71.99");
+    expect(guide.comparison.rows[4]?.[1]).toBe("Not offered");
     expect(guide.facts.map(fact => fact.label)).toEqual(["Short trip", "Longer trip", "Heavy data use"]);
     expect(guide.sections.find((section) => section.id === "short-trip")?.paragraphs.join(" ")).toContain("$5.99");
     expect(guide.sections.find((section) => section.id === "long-trip")?.paragraphs.join(" ")).toContain("$11.50");
@@ -31,7 +32,14 @@ describe("travel guide topic filters and prerender safety", () => {
     expect(deepLink.searchParams.get("campaign_id")).toBe("541");
     expect(deepLink.searchParams.get("u")).toBe("https://www.airalo.com/how-airalo-works/device-compatibility");
     expect(guide.sections.find((section) => section.id === "unlimited")?.paragraphs.join(" ")).toContain("$56.24");
-    expect(guide.faqs.length).toBeGreaterThanOrEqual(8);
+    expect(guide.sections.find((section) => section.id === "regional")?.externalLinks?.[0]?.href).toBe(AIRALO_MENA_AFFILIATE_URL);
+    const regionalLink = new URL(AIRALO_MENA_AFFILIATE_URL);
+    expect(regionalLink.searchParams.get("marker")).toBe("622032");
+    expect(regionalLink.searchParams.get("trs")).toBe("406243");
+    expect(regionalLink.searchParams.get("u")).toBe("https://www.airalo.com/middle-east-and-north-africa-esim");
+    expect(guide.faqs).toHaveLength(6);
+    expect(guide.faqs.some(faq => /WhatsApp number/.test(faq.q))).toBe(true);
+    expect(guide.faqs.some(faq => /Bethlehem or Jericho/.test(faq.q))).toBe(true);
     expect(guide.related).toHaveLength(6);
     expect(guide.sections.find((section) => section.id === "setup")?.paragraphs.length).toBeLessThanOrEqual(2);
     expect(guide.sections.some((section) => /troubleshoot|technical support/i.test(section.title))).toBe(false);
