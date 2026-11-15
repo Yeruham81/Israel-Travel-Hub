@@ -1241,6 +1241,8 @@ export const operators: Operator[] = [
 /** Existing publisher-owned tracking links copied exactly from the supplied destination guides. */
 /** Official Travelpayouts Airalo deep-link template (marker 622032, project 406243). */
 export const AIRALO_COMPATIBILITY_AFFILIATE_URL = "https://tp.media/r?marker=622032&trs=406243&p=8310&u=https%3A%2F%2Fwww.airalo.com%2Fhow-airalo-works%2Fdevice-compatibility&campaign_id=541";
+/** Airalo Middle East & North Africa destination, retaining the same Travelpayouts publisher attribution. */
+export const AIRALO_MENA_AFFILIATE_URL = "https://tp.media/r?marker=622032&trs=406243&p=8310&u=https%3A%2F%2Fwww.airalo.com%2Fmiddle-east-and-north-africa-esim&campaign_id=541";
 
 export const affiliateConfig: Record<string, { trackingUrl: string } | undefined> = {
   "cars-discovercars": { trackingUrl: DISCOVERCARS_ISRAEL_AFFILIATE_URL },
@@ -1388,6 +1390,7 @@ export const affiliateConfig: Record<string, { trackingUrl: string } | undefined
 
   "esim-airalo": { trackingUrl: "https://airalo.tpm.li/JmHFDV3v" },
   "esim-airalo-compatibility": { trackingUrl: AIRALO_COMPATIBILITY_AFFILIATE_URL },
+  "esim-airalo-mena": { trackingUrl: AIRALO_MENA_AFFILIATE_URL },
   "esim-saily": { trackingUrl: "https://saily.tpm.li/nM5mNYzP" },
   "esim-yesim": { trackingUrl: "https://yesim.tpm.li/6WmqBIJV" },
   "esim-gigsky": { trackingUrl: "https://gigsky.tpm.li/NxqtNVtH" },
