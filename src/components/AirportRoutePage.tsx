@@ -1,10 +1,11 @@
-import { Link } from "@tanstack/react-router";
-import { Breadcrumbs, FaqList, RelatedLinks } from "@/components/Guide";
+import { Link, type LinkProps } from "@tanstack/react-router";
+import { BadgeCheck, CalendarCheck, CheckCircle2, PlaneLanding } from "lucide-react";
+import { Breadcrumbs, FaqList } from "@/components/Guide";
 import { TransferQuoteForm } from "@/components/TransferQuoteForm";
-import { StayPhotoCredits } from "@/components/StayGuideParts";
+import { GuidePhotoCredit } from "@/components/TravelGuide";
 import { getAirportRouteGuide } from "@/data/airportRoutes";
-import { airportJourneyGuides } from "@/data/airportJourneyGuides";
-import { airportTransferPhotos } from "@/data/airportTransfers";
+import { airportHomepageRoutePhotos, airportTransferBenefits, airportTransferChecklist, airportTransferPhotos } from "@/data/airportTransfers";
+import { travelGuides } from "@/data/travelGuides";
 import { airportTransferNav } from "@/data/nav";
 import { AirportBookingPlatforms } from "@/components/AirportBookingPlatforms";
 import { AIRPORT_TRANSFER_CHECK_DATE, airportTransferRoutes, travelGuidePaths, type AirportTransferRouteId } from "@/data/registry";
@@ -14,6 +15,7 @@ import { CompactCurrencyEquivalents } from "@/components/CurrencyRates";
 import { AuthorCard } from "@/components/AuthorCard";
 import { PageUpdated } from "@/components/PageUpdated";
 import { GuideHeroLayout, GuideHeroMedia } from "@/components/GuideHeroMedia";
+import { hasPublicPhotoCredit } from "@/lib/photo-credits";
 
 function crumbsFor(id: AirportTransferRouteId) {
   const guide = getAirportRouteGuide(id);
@@ -26,12 +28,12 @@ function crumbsFor(id: AirportTransferRouteId) {
 
 export function airportRouteMeta(id: AirportTransferRouteId) {
   const guide = getAirportRouteGuide(id);
-  const head = pageMeta({ title: guide.title, description: guide.description, path: guide.path, crumbs: crumbsFor(id), image: guide.photo.src, imageAlt: guide.photo.alt });
+  const head = pageMeta({ title: guide.title, description: guide.description, path: guide.path, crumbs: crumbsFor(id), image: (airportHomepageRoutePhotos[id] ?? guide.photo).src, imageAlt: (airportHomepageRoutePhotos[id] ?? guide.photo).alt });
   const url = CANONICAL_ORIGIN + guide.path;
   return { ...head, scripts: [...head.scripts, jsonLd({
     "@context": "https://schema.org", "@type": "WebPage", "@id": `${url}#webpage`, url,
     name: guide.title, description: guide.description, inLanguage: "en", author: authorLd(),
-    primaryImageOfPage: { "@type": "ImageObject", url: new URL(guide.photo.src, CANONICAL_ORIGIN).href },
+    primaryImageOfPage: { "@type": "ImageObject", url: new URL((airportHomepageRoutePhotos[id] ?? guide.photo).src, CANONICAL_ORIGIN).href },
     mainEntity: { "@type": "Service", name: guide.title, serviceType: "Private airport transfer",
       provider: { "@type": "Person", name: "Moshe Barak", url: `${CANONICAL_ORIGIN}/about-moshe-barak/#moshe-barak` },
       areaServed: [{ "@type": "Place", name: "Ben Gurion Airport" }, { "@type": "Place", name: guide.city }],
@@ -39,100 +41,137 @@ export function airportRouteMeta(id: AirportTransferRouteId) {
   })] };
 }
 
-const pickupSteps = [
-  { title: "Send your arrival details", text: "Use the flight's arrival date and time in Israel local time. Add the flight number, exact hotel or address, all passengers, luggage and children's ages. Contact me in advance, preferably early for special vehicle needs." },
-  { title: "Agree the full quote", text: "Confirm vehicle and luggage capacity, requested child seats, any extra charges for night, weekend or holiday trips, included waiting, flight-delay arrangements, payment and cancellation terms. Your ride is booked only after confirmation." },
-  { title: "Save the meeting instructions", text: "Use the meeting point and contact number in your booking confirmation for the terminal where you actually arrive. Keep them available offline and contact the operator if airport formalities take longer than expected." },
-];
-
+const benefitIcons = [BadgeCheck, PlaneLanding, CalendarCheck] as const;
 const focusQuote = () => requestAnimationFrame(() => document.getElementById("request-quote")?.focus({ preventScroll: true }));
+
+type RelatedCard = { title: string; description: string; to: LinkProps["to"]; photo: { src: string; alt: string; sourceUrl?: string; licenseUrl?: string; credit?: string } };
 
 export function AirportRoutePage({ id }: { id: AirportTransferRouteId }) {
   const guide = getAirportRouteGuide(id);
-  const journeyGuide = airportJourneyGuides[id === "dead-sea" ? "ein-bokek" : id];
   const { price } = guide.rate;
+  const heroPhoto = airportHomepageRoutePhotos[id] ?? guide.photo;
+  const localGuide = id === "tel-aviv"
+    ? { title: "Getting around Tel Aviv", description: "Plan transport once you reach the city.", to: travelGuidePaths.telAviv, photo: travelGuides.telAviv.cardPhoto ?? travelGuides.telAviv.photo }
+    : { title: "Getting around Israel", description: "Plan your onward journeys.", to: travelGuidePaths.israel, photo: travelGuides.israel.cardPhoto ?? travelGuides.israel.photo };
+  const relatedCards: RelatedCard[] = [
+    { title: "Ben Gurion Airport arrival tips", description: "What to expect after landing.", to: travelGuidePaths.arrival, photo: travelGuides.arrival.cardPhoto ?? travelGuides.arrival.photo },
+    { title: "Official airport taxis", description: "Taxi pickup points and metered fares.", to: travelGuidePaths.airportTaxis, photo: { src: "/images/travel-blog/airport-taxi-sign.webp", alt: "Ben Gurion Airport taxi service sign" } },
+    localGuide,
+    { title: guide.related[0]?.label ?? "Explore hotels", description: "Choose the right area for your stay.", to: guide.related[0]?.to ?? "/accommodation/", photo: guide.photo },
+  ];
   const faqs = [
     ...guide.faqs,
-    { q: "Is the starting price for the whole vehicle?", a: `The published starting rate of ILS ${price.amount.toLocaleString("en-US")} is a one-way weekday price per vehicle for up to four passengers. Extra charges may apply for night, weekend or holiday trips. The vehicle must fit your luggage; larger groups and special requirements need a separate quote. I confirm the final total and availability.` },
-    { q: "How do I send the request and confirm the booking?", a: "Complete the form and press Send quote request to email your details directly to me. Wait for the on-page confirmation. Ask me to confirm your quote and booking in writing before relying on the pickup." },
+    { q: "Is the starting fare per vehicle or per passenger?", a: "The displayed weekday fare is per vehicle for up to four passengers, not per person. Night, weekend and holiday surcharges may apply, and luggage or a larger vehicle can affect the quote. I confirm the full price before booking." },
+    { q: "What happens if my flight is delayed?", a: "I can monitor the flight details you provide and coordinate the agreed pickup around the actual landing time. Confirm the meeting point and any waiting arrangements with me before booking, and message me if your plans change." },
+    { q: "Can I cancel my airport transfer free of charge?", a: "For a transfer booked directly with me, cancellation is free up to 24 hours before the scheduled pickup. Please check the terms for later cancellations in your booking confirmation. External booking platforms set their own policies." },
   ];
+  const checklist = [...airportTransferChecklist.slice(0, 4), guide.checklistTip];
+  const creditedPhotos = [guide.photo, airportTransferPhotos["moshe"]!, ...relatedCards.map((card) => card.photo)]
+    .filter(hasPublicPhotoCredit);
   return (
-    <main className="mx-auto max-w-5xl px-4 pb-24 lg:pb-8">
-      <div className="pt-6"><Breadcrumbs items={crumbsFor(id).map((crumb) => ({ name: crumb.name, to: crumb.path }))} /></div>
-      <header className="mt-3">
-        <GuideHeroLayout image={<GuideHeroMedia src={guide.photo.src} alt={guide.photo.alt} />}>
-          <p className="eyebrow">Your private airport pickup · TLV</p>
+    <main className="mx-auto max-w-5xl px-4 pb-12">
+      <div className="pt-6">
+        <Breadcrumbs items={crumbsFor(id).map((crumb) => ({ name: crumb.name, to: crumb.path }))} />
+      </div>
+      <header>
+        <GuideHeroLayout image={<GuideHeroMedia src={heroPhoto.src} alt={heroPhoto.alt} compact />}>
+          <p className="eyebrow">Private airport transfer · TLV</p>
           <h1 className="guide-page-title mt-3">{guide.title}</h1>
           <p data-guide-intro className="mt-4 text-lg leading-relaxed text-muted-foreground">{guide.intro}</p>
-          <div className="mt-5 flex flex-wrap items-end gap-x-6 gap-y-3 rounded-xl border bg-secondary/50 p-4" data-testid="route-starting-rate">
-            <div><p className="text-xs font-medium text-muted-foreground">Published starting rate</p><p className="mt-1 text-3xl font-semibold tabular-nums text-foreground">From ₪{price.amount.toLocaleString("en-US")}</p><CompactCurrencyEquivalents amount={price.amount} /><p className="mt-2 text-xs text-muted-foreground">One way · per vehicle · up to 4</p></div>
-            <div><p className="text-xs font-medium text-muted-foreground">Drive after pickup</p><p className="mt-1 font-semibold">{guide.driveTime}</p><p className="mt-1 text-xs text-muted-foreground">Guide estimate · traffic can add time</p></div>
+          <div className="mt-4 flex flex-wrap items-center gap-x-6 gap-y-3 rounded-xl border bg-secondary/35 p-3 sm:p-4" data-testid="route-starting-rate">
+            <div className="min-w-0">
+              <p className="text-xs font-medium text-muted-foreground">One-way weekday fare</p>
+              <p className="mt-1 text-3xl font-semibold tabular-nums text-foreground">From ₪{price.amount.toLocaleString("en-US")}</p>
+              <CompactCurrencyEquivalents amount={price.amount} />
+            </div>
+            <div className="border-l-0 text-sm sm:border-l sm:pl-5">
+              <p className="text-xs text-muted-foreground">Drive after pickup</p>
+              <p className="mt-0.5 font-semibold">{guide.driveTime}</p>
+              <p className="mt-1 text-xs text-muted-foreground">Per vehicle · up to 4 passengers</p>
+            </div>
           </div>
-          <p className="mt-2 text-xs leading-relaxed text-muted-foreground">Weekday starting rate. Extra charges may apply for night, weekend or holiday trips. Final price and availability by confirmation; larger groups need a quote.</p>
-          <p className="mt-2 text-xs leading-relaxed text-muted-foreground" data-testid="airport-route-fx-note">USD and EUR amounts are approximate, based on reference exchange rates. All fares are quoted in ILS.</p>
-          <a href="#request-quote" onClick={focusQuote} className="btn btn-primary mt-5">Request your airport transfer</a>
-          <p className="mt-3 text-sm text-muted-foreground">Private vehicle for your party · Exact hotel or address · Contact me in advance</p>
+          <p className="mt-2 text-xs leading-relaxed text-muted-foreground">Night, weekend and holiday surcharges may apply. Larger vehicles need a separate quote. The full fare is confirmed in advance.</p>
+          <p className="mt-1 text-xs leading-relaxed text-muted-foreground" data-testid="airport-route-fx-note">USD and EUR amounts are approximate, based on reference exchange rates. All fares are quoted in ILS.</p>
+          <a href="#request-quote" onClick={focusQuote} className="mt-4 inline-flex min-h-11 items-center justify-center rounded-lg bg-navy px-5 py-2.5 text-sm font-semibold text-navy-foreground transition-colors hover:bg-navy/90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">Request a personal quote</a>
           <PageUpdated date={AIRPORT_TRANSFER_CHECK_DATE} />
         </GuideHeroLayout>
       </header>
-
       <AuthorCard />
-      <nav aria-label="Transfer planning next steps" className="mt-5 flex flex-wrap gap-4 text-sm">
-        <a href="#journey-details" className="font-semibold text-primary underline">Drive time & destination</a>
-        <Link to={travelGuidePaths.shabbat} className="text-primary underline">Friday-night or Saturday arrival?</Link>
-        <Link to={guide.related[0]?.to || "/accommodation/"} className="text-primary underline">Choose your hotel area</Link>
-      </nav>
 
-      <section id="journey-details" aria-labelledby="journey-h" className="mt-14 scroll-mt-24">
-        <p className="eyebrow">Your route, planned properly</p>
-        <h2 id="journey-h" className="mt-2 text-3xl">{guide.journeyTitle}</h2>
-        <p className="mt-4 max-w-4xl leading-relaxed text-muted-foreground">{guide.journeyText}</p>
+      <section id="journey-details" aria-labelledby="journey-h" className="mt-9 scroll-mt-24">
+        <h2 id="journey-h" className="text-2xl font-semibold">Your private airport pickup</h2>
+        <p className="mt-2 max-w-4xl text-sm leading-relaxed text-muted-foreground">I can arrange a vehicle matched to your party and luggage, with an agreed meeting point and hotel or address drop-off. Send your flight details so pickup can be coordinated with your landing time.</p>
+        <div className="mt-4 grid grid-cols-3 gap-2 rounded-2xl border bg-secondary/25 p-3 sm:gap-4 sm:p-4">
+          {airportTransferBenefits.map((benefit, index) => {
+            const Icon = benefitIcons[index]!;
+            return <div key={benefit.title} className="min-w-0 text-center">
+              <Icon className="mx-auto size-5 text-primary sm:size-6" aria-hidden />
+              <h3 className="mt-2 text-xs font-semibold leading-snug sm:text-sm">{benefit.title}</h3>
+              <p className="mt-1 hidden text-xs leading-relaxed text-muted-foreground sm:block">{benefit.text}</p>
+            </div>;
+          })}
+        </div>
+        <div className="mt-5 max-w-4xl">
+          <h3 className="text-lg font-semibold">{guide.journeyTitle}</h3>
+          <p className="mt-1 text-sm leading-relaxed text-muted-foreground">{guide.journeyText}</p>
+        </div>
       </section>
-      <section id="taxi-or-transfer" aria-labelledby="taxi-or-transfer-h" className="mt-10 rounded-2xl border bg-card p-5 sm:p-7">
-        <h2 id="taxi-or-transfer-h" className="text-2xl">Private transfer or airport taxi to {guide.city}?</h2>
-        <p className="mt-3 leading-relaxed text-muted-foreground">This page is for a private vehicle arranged in advance for your party, with pickup instructions and a quoted total to confirm with me. An on-arrival licensed airport taxi instead uses the authorized taxi queue and a regulated meter. These are different booking arrangements.</p>
-        <p className="mt-3 text-sm leading-relaxed">For an on-arrival metered ride, read my <Link to={travelGuidePaths.airportTaxis} className="font-semibold text-primary underline">official airport taxi pickup guide</Link> and <Link to={travelGuidePaths.taxiFares} className="font-semibold text-primary underline">regulated taxi fares guide</Link>, or consult the <a href="https://www.iaa.gov.il/en/airports/ben-gurion/directions/directions-list/?categoryId=10450" target="_blank" rel="noopener noreferrer" className="font-semibold text-primary underline">Israel Airports Authority instructions<span className="sr-only"> (opens in a new tab)</span></a>.</p>
-        <p className="mt-3 text-sm leading-relaxed">For an independent overview of other ways to reach your destination, read my <Link to={journeyGuide.path} className="font-semibold text-primary underline">airport-to-{guide.city} travel comparison</Link>. This page is exclusively about a separately arranged private vehicle, its agreed pickup and a written quote from me.</p>
-      </section>
-      <section id="drop-off" aria-labelledby="dropoff-h" className="mt-12">
-        <h2 id="dropoff-h" className="text-3xl">{guide.areasTitle}</h2>
-        <div className="mt-5 grid gap-4 md:grid-cols-3">{guide.areas.map((area) => <article key={area.title} className="rounded-xl border bg-card p-5"><h3 className="text-xl">{area.title}</h3><p className="mt-3 text-sm leading-relaxed text-muted-foreground">{area.text}</p></article>)}</div>
-        <aside className="mt-6 rounded-xl border-l-4 border-primary bg-secondary/40 px-5 py-4">
-          <h3 className="text-lg font-semibold">{guide.example.title}</h3>
-          <p className="mt-2 text-sm leading-relaxed">{guide.example.situation}</p>
-          <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{guide.example.response}</p>
+
+      <section id="drop-off" aria-labelledby="dropoff-h" className="mt-9 scroll-mt-24">
+        <h2 id="dropoff-h" className="text-2xl font-semibold">{guide.areasTitle}</h2>
+        <div className="mt-4 grid gap-3 md:grid-cols-3">
+          {guide.areas.map((area) => <article key={area.title} className="rounded-xl border bg-card p-4">
+            <h3 className="text-base font-semibold leading-snug">{area.title}</h3>
+            <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{area.text}</p>
+          </article>)}
+        </div>
+        <aside className="mt-3 rounded-xl border-l-4 border-primary bg-secondary/30 px-4 py-3">
+          <h3 className="text-sm font-semibold">{guide.planningTitle}</h3>
+          <p className="mt-1 text-sm leading-relaxed text-muted-foreground">{guide.planningText}</p>
         </aside>
       </section>
-      <section aria-labelledby="planning-h" className="mt-10 rounded-2xl bg-secondary/60 p-6 sm:p-8">
-        <h2 id="planning-h" className="text-3xl">{guide.planningTitle}</h2>
-        <p className="mt-3 leading-relaxed text-muted-foreground">{guide.planningText}</p>
-        <a href="#request-quote" onClick={focusQuote} className="mt-4 inline-block font-semibold text-primary underline underline-offset-4">Add your details to the quote request</a>
+
+      <TransferQuoteForm destinationId={id} fixedDestination compactHeader />
+
+      <section id="before-booking" aria-labelledby="checklist-h" className="mx-auto mt-7 max-w-4xl">
+        <h2 id="checklist-h" className="text-xl font-semibold">Before booking your transfer</h2>
+        <ul className="mt-3 grid gap-x-5 gap-y-2 rounded-xl border bg-card p-4 text-sm sm:grid-cols-2" aria-label="Airport transfer checklist">
+          {checklist.map((item) => <li key={item} className="flex items-start gap-2 leading-relaxed">
+            <CheckCircle2 aria-hidden className="mt-0.5 size-4 shrink-0 text-primary" />
+            <span>{item}</span>
+          </li>)}
+        </ul>
       </section>
-      <section id="pickup" aria-labelledby="pickup-h" className="mt-14">
-        <h2 id="pickup-h" className="text-3xl">Arrange the pickup before you fly</h2>
-        <ol className="mt-5 grid gap-4 md:grid-cols-3">{pickupSteps.map((step, index) => <li key={step.title} className="rounded-xl border bg-card p-5"><p className="text-xs font-semibold text-primary">0{index + 1}</p><h3 className="mt-2 text-xl">{step.title}</h3><p className="mt-3 text-sm leading-relaxed text-muted-foreground">{step.text}</p></li>)}</ol>
+
+      <AirportBookingPlatforms pageId={"airport-route-" + id} destination={guide.city} compact />
+      <FaqList faqs={faqs} compact />
+
+      <section id="related-travel-guides" aria-labelledby="related-guides-h" className="mt-9">
+        <h2 id="related-guides-h" className="text-2xl font-semibold">Related travel guides</h2>
+        <ul className="mt-4 grid gap-3 sm:grid-cols-2">
+          {relatedCards.map((card) => <li key={card.title}>
+            <Link to={card.to} className="group flex h-full min-w-0 items-center gap-3 rounded-xl border bg-card p-3 transition-colors hover:border-primary/50 hover:bg-secondary/20 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
+              <img src={card.photo.src} alt={card.photo.alt} width={112} height={75} loading="lazy" decoding="async" className="aspect-[3/2] w-24 shrink-0 rounded-lg object-cover sm:w-28" />
+              <span className="min-w-0 flex-1">
+                <span className="block text-sm font-semibold leading-snug group-hover:text-primary">{card.title}</span>
+                <span className="mt-1 block text-xs leading-relaxed text-muted-foreground">{card.description}</span>
+                <span className="mt-1.5 inline-block text-xs font-semibold text-primary group-hover:underline">Read guide</span>
+              </span>
+            </Link>
+          </li>)}
+        </ul>
       </section>
-      <TransferQuoteForm destinationId={id} fixedDestination />
-      <FaqList faqs={faqs} />
-      <section className="mt-14 rounded-2xl bg-navy p-6 text-navy-foreground sm:p-8" aria-labelledby="ready-h">
-        <h2 id="ready-h" className="text-3xl">Your flight. Your destination. Your private ride.</h2>
-        <p className="mt-3 opacity-90">Tell me when you arrive and where you're staying in {guide.city}. Ask for the full price and pickup details before confirming your booking.</p>
-        <a href="#request-quote" onClick={focusQuote} className="btn btn-light mt-5">Request a personal quote</a>
+      <section id="other-routes" aria-labelledby="other-routes-h" className="mt-9">
+        <h2 id="other-routes-h" className="text-xl font-semibold">Other airport transfer destinations</h2>
+        <ul className="mt-3 flex flex-wrap gap-2">
+          {airportTransferRoutes.filter((route) => route.id !== id).map((route) => <li key={route.id}><Link to={route.path} className="chip inline-block">Ben Gurion to {getAirportRouteGuide(route.id).city}</Link></li>)}
+          <li><Link to="/airport-transfers/" className="chip inline-block">All destinations</Link></li>
+        </ul>
       </section>
-      <RelatedLinks title="Plan your stay" items={[{ label: "Compare other ways to reach your destination", to: journeyGuide.path }, ...guide.related, { label: "Ben Gurion arrival tips", to: travelGuidePaths.arrival }, { label: "Choosing an eSIM for Israel", to: travelGuidePaths.esim }]} />
-      <section aria-labelledby="other-routes-h" className="mt-12">
-        <h2 id="other-routes-h" className="text-2xl">Other airport transfer routes</h2>
-        <ul className="mt-4 flex flex-wrap gap-3">{airportTransferRoutes.filter((route) => route.id !== id).map((route) => <li key={route.id}><Link to={route.path} className="chip inline-block">Ben Gurion to {getAirportRouteGuide(route.id).city}</Link></li>)}<li><Link to="/airport-transfers/" className="chip inline-block">All destinations</Link></li></ul>
-      </section>
-      <details className="mt-10 rounded-xl border p-5 text-sm text-muted-foreground">
-        <summary className="cursor-pointer font-medium text-foreground">Route planning notes</summary>
-        <p className="mt-3">Driving times begin after pickup and are planning estimates, not live traffic predictions. Starting rates are for the conditions stated above. Your final quote and booking require confirmation.</p>
-      </details>
-      <AirportBookingPlatforms pageId={`airport-route-${id}`} destination={guide.city} />
-      <StayPhotoCredits photos={airportTransferPhotos["moshe"] ? [guide.photo, airportTransferPhotos["moshe"]] : [guide.photo]} />
-      <div className="fixed inset-x-0 bottom-0 z-30 border-t bg-background/95 px-4 py-3 backdrop-blur lg:hidden">
-        <div className="mx-auto flex max-w-5xl items-center justify-between gap-3"><p className="min-w-0 text-sm font-medium">Private transfer<br /><span className="text-xs text-muted-foreground">Ben Gurion to {guide.city}</span></p><a href="#request-quote" onClick={focusQuote} className="btn btn-primary shrink-0 text-sm">Request a quote</a></div>
-      </div>
+      {creditedPhotos.length > 0 && <details className="mt-9 rounded-xl border p-4 text-xs text-muted-foreground">
+        <summary className="cursor-pointer font-semibold">Photo credits</summary>
+        <ul className="mt-3 space-y-3">{[...new Map(creditedPhotos.map((photo) => [photo.src, photo])).values()].map((photo) => <li key={photo.src}><GuidePhotoCredit photo={photo} /></li>)}</ul>
+      </details>}
     </main>
   );
 }
