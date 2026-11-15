@@ -1387,7 +1387,7 @@ export const affiliateConfig: Record<string, { trackingUrl: string } | undefined
   "esim-drimsim": { trackingUrl: "https://drimsim.tpm.li/khIJTNaX" },
   // Replace only with the publisher's actual approved tracking links, including destination parameters.
   "airport-kiwitaxi": { trackingUrl: "https://kiwitaxi.tpm.li/KYAqijbk" },
-  "airport-welcome": undefined,
+  "airport-welcome": { trackingUrl: "https://tpm.li/pi1jh34Z" },
   "airport-intui": { trackingUrl: "https://intui.tpm.li/jHYMT0Ec" },
   "airport-gettransfer": { trackingUrl: "https://gettransfer.tpm.li/N5tSvz8e" },
   // BEGIN Travelpayouts airport route-specific links
@@ -1403,6 +1403,10 @@ export const affiliateConfig: Record<string, { trackingUrl: string } | undefined
   "airport-kiwitaxi@airport-route-dead-sea": { trackingUrl: "https://kiwitaxi.tpm.li/a6yHk62B" },
   "airport-intui@airport-route-dead-sea": { trackingUrl: "https://intui.tpm.li/pXHXtxvs" },
   "airport-gettransfer@airport-route-dead-sea": { trackingUrl: "https://gettransfer.tpm.li/exSGVCcq" },
+  "airport-welcome@airport-route-jerusalem": { trackingUrl: "https://tpm.li/yZQLECwh" },
+  "airport-welcome@airport-route-tel-aviv": { trackingUrl: "https://tpm.li/D86I1fyd" },
+  "airport-welcome@airport-route-haifa": { trackingUrl: "https://tpm.li/3wokS13C" },
+  "airport-welcome@airport-route-dead-sea": { trackingUrl: "https://tpm.li/sos7XtcW" },
   // END Travelpayouts airport route-specific links
   "ashdod-shore-beinharim": undefined,
   "haifa-shore-beinharim": undefined,
