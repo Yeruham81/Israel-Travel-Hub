@@ -31,44 +31,53 @@ function fillRequest() {
 }
 
 describe("private Ben Gurion transfers", () => {
-  it("uses all eleven published ILS starting fares, with four popular destinations and image cards", async () => {
+  it("shows four compact illustrated routes, seven text-only fares and one other-destination option", async () => {
     expect(Object.fromEntries(airportTransferRates.map((r) => [r.id, r.price.amount]))).toEqual({
       "tel-aviv": 330, jerusalem: 550, haifa: 930, "dead-sea": 1300, raanana: 340, herzliya: 340, netanya: 450, ashdod: 480, caesarea: 630, nazareth: 950, eilat: 2700,
     });
-    const { container } = await renderAirport();
+    const { container, router } = await renderAirport();
     const popular = screen.getByRole("region", { name: "Popular private transfers" });
     expect(within(popular).getAllByTestId("airport-destination-card").map((card) => card.dataset["destination"])).toEqual(["tel-aviv", "jerusalem", "haifa", "dead-sea"]);
     expect(screen.getAllByTestId("airport-destination-card")).toHaveLength(12);
     for (const rate of airportTransferRates) {
       expect(rate.price).toMatchObject({ kind: "published_starting_rate", currency: "ILS", basis: "per_vehicle", maxPartySize: 4, sourceId: "moshe-airport-transfers" });
-      const card = container.querySelector(`[data-destination="${rate.id}"]`)!;
-      const image = within(card as HTMLElement).getByRole("img");
-      expect(image).toHaveAttribute("src", airportTransferPhotos[rate.id]!.src);
-      expect(image).toHaveAttribute("alt", airportTransferPhotos[rate.id]!.alt);
-      expect(image).toHaveAttribute("width", rate.popular ? "360" : "80");
-      expect(image).toHaveAttribute("height", rate.popular ? "240" : "80");
-      expect(within(card as HTMLElement).getByRole("link", { name: "Request a quote" })).toHaveAttribute("href", "#request-quote");
+      const card = container.querySelector(`[data-destination="${rate.id}"]`)! as HTMLElement;
+      if (rate.popular) {
+        expect(within(card).getByRole("img")).toHaveAttribute("src", airportTransferPhotos[rate.id]!.src);
+        const routeLink = within(card).getByRole("link", { name: /View transfer details/ });
+        expect(router.matchRoutes(new URL(routeLink.getAttribute("href")!, "https://example.test").pathname).at(-1)?.routeId).toContain("airport-transfers");
+      } else expect(within(card).queryByRole("img")).not.toBeInTheDocument();
+      expect(within(card).getByRole("link", { name: "Request a quote" })).toHaveAttribute("href", "#request-quote");
       expect(card).toHaveTextContent(rate.price.amount.toLocaleString("en-US"));
+      expect(card.querySelector('[data-testid="currency-price"]')).toBeNull();
     }
     const more = screen.getByRole("region", { name: "More destinations from Ben Gurion Airport" });
     expect(within(more).getAllByTestId("airport-destination-card").map((card) => card.dataset["destination"])).toEqual(["raanana", "herzliya", "netanya", "ashdod", "caesarea", "nazareth", "eilat", "other"]);
-    expect(new Set(within(more).getAllByRole("img").map((image) => image.getAttribute("src"))).size).toBe(8);
-    expect(screen.getByTestId("airport-rate-terms")).toHaveTextContent(/weekday.*up to four.*Night, weekend and holiday/s);
+    expect(within(more).queryAllByRole("img")).toHaveLength(0);
+    expect(screen.getByTestId("airport-rate-terms")).toHaveTextContent(/weekday.*up to four passengers.*Night, weekend and holiday/i);
+    expect(screen.getByRole("heading", { name: "Private airport transfers from Ben Gurion Airport" })).toBeInTheDocument();
+    expect(screen.getByTestId("hub-header").parentElement?.tagName).toBe("MAIN");
   });
 
-  it("keeps the requested content order and removes public-transport comparisons", async () => {
+  it("uses the lean content order and preserves booking links, benefits, FAQ and guide navigation", async () => {
     const { container, router } = await renderAirport();
-    const sections = ["popular-destinations", "more-destinations", "request-quote", "benefits", "useful-information", "faq", "booking-platforms", "keep-planning"];
+    const sections = ["popular-destinations", "more-destinations", "benefits", "request-quote", "useful-information", "booking-platforms", "faq", "keep-planning"];
     for (let i = 1; i < sections.length; i++) expect(container.querySelector(`#${sections[i - 1]}`)!.compareDocumentPosition(container.querySelector(`#${sections[i]}`)!)).toBe(Node.DOCUMENT_POSITION_FOLLOWING);
-    expect(container.querySelector("main")!.textContent).not.toMatch(/\b(metered|taxi rank|train|buses)\b/i);
-    const related = screen.getByRole("region", { name: "Your ride is only the start" });
-    expect(within(related).getAllByRole("article")).toHaveLength(10);
-    expect(within(related).getAllByRole("img")).toHaveLength(10);
-    expect(within(related).getAllByRole("heading", { level: 3 })).toHaveLength(10);
-    expect(related).not.toHaveTextContent("→");
-    expect(within(related).getAllByRole("link")).toHaveLength(10);
+    expect(container.querySelector("main")!.textContent).not.toMatch(/\b(metered|taxi rank|buses)\b/i);
+    expect(container.querySelector("#after-request-h")).toBeNull();
+    expect(screen.queryByText("Why arrange your airport pickup with me?")).not.toBeInTheDocument();
+    const benefits = screen.getByRole("region", { name: "Private transfer benefits" });
+    expect(within(benefits).getAllByRole("heading", { level: 3 })).toHaveLength(3);
+    expect(benefits).toHaveTextContent("no extra charges");
+    expect(benefits).toHaveTextContent("Flight tracking");
+    expect(benefits).toHaveTextContent("Free cancellation up to 24 hours");
+    const faq = screen.getByRole("region", { name: "Frequently asked questions" });
+    expect(faq.querySelectorAll("details")).toHaveLength(5);
+    expect(faq).toHaveTextContent("When can I cancel for free?");
+    const related = screen.getByRole("region", { name: "Practical travel guides" });
+    expect(within(related).getAllByRole("link")).toHaveLength(4);
+    expect(within(related).queryAllByRole("img")).toHaveLength(0);
     for (const link of within(related).getAllByRole("link")) {
-      expect(link).toHaveTextContent("Read More");
       const path = link.getAttribute("href")!;
       expect(router.matchRoutes(path).at(-1)?.routeId.replace(/\/$/, "")).toBe(path.replace(/\/$/, ""));
     }
