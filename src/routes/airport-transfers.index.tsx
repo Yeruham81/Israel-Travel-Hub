@@ -47,10 +47,11 @@ function Airport() {
     requestAnimationFrame(() => document.getElementById("request-quote")?.focus({ preventScroll: true }));
   };
   const creditedPhotos = [
-    ...airportDestinationCards.map((card) => card.photo),
-    ...planningLinks.map((guide) => guide.photo),
-    airportTransferPhotos["other"]!,
-    airportTransferPhotos["moshe"]!,
+    ...Object.values(airportTransferPhotos),
+    travelGuides.arrival.photo,
+    travelGuides.israel.photo,
+    travelGuides.telAviv.photo,
+    travelGuides.sherut.cardPhoto ?? travelGuides.sherut.photo,
   ].filter(hasPublicPhotoCredit);
   return <main className="pb-12">
     <HubHeader
