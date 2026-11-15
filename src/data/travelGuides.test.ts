@@ -8,14 +8,17 @@ import { uniqueGuideCardPhotos } from "@/lib/guide-card-photos";
 describe("travel guide topic filters and prerender safety", () => {
   it("keeps eSIM buying guidance prominent without a troubleshooting manual", () => {
     const guide = travelGuides.esim;
-    expect(guide.title).toContain("Compare Plans, Prices & Providers");
-    expect(guide.sections.map((section) => section.id)).toEqual(["plan", "price", "compatibility", "calling", "coverage", "setup"]);
+    expect(guide.title).toContain("Prices, Providers & My Picks");
+    expect(guide.sections.map((section) => section.id)).toEqual(["price", "plan", "compatibility", "calling", "coverage", "setup"]);
     expect(guide.comparison.rows).toHaveLength(5);
+    expect(guide.comparison.rows.map(row => row[1])).toEqual(["$7.99", "$8.00", "$9.90", "$20.99*", "About €50†"]);
+    expect(guide.sections.find((section) => section.id === "price")?.paragraphs.join(" ")).toContain("$7.99");
     expect(guide.faqs.length).toBeGreaterThanOrEqual(8);
     expect(guide.related).toHaveLength(6);
     expect(guide.sections.find((section) => section.id === "setup")?.paragraphs.length).toBeLessThanOrEqual(2);
     expect(guide.sections.some((section) => /troubleshoot|technical support/i.test(section.title))).toBe(false);
     expect(guide.providerPageId).toBe("guide-esim");
+    expect(guide.services).toHaveLength(4);
     expect(guide.services.every((service) => Boolean(service.note))).toBe(true);
   });
 
