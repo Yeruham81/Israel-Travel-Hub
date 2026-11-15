@@ -56,7 +56,7 @@ export function ShoreServiceCatalog({ portId, filters, onFilterChange, itinerary
                 <img src={service.photo.src} alt={service.photo.alt} width={140} height={180} loading="lazy" decoding="async" className="h-40 w-[96px] shrink-0 rounded-lg object-cover sm:h-44 sm:w-[124px]" />
                 <div className="flex min-w-0 flex-1 flex-col">
                   <div className="flex flex-wrap items-center justify-between gap-x-2 gap-y-1 text-xs text-muted-foreground">
-                    <span className="font-semibold"><span className="sr-only">Booking platform: </span>{service.partner?.name || provider.providerName}</span>
+                    <span className="font-semibold"><span className="sr-only">Booking platform: </span>{service.partner?.name || provider.providerName}</span>{service.rating && <span aria-label={`Rating ${service.rating.value.toFixed(1)} out of 5 from ${service.rating.count} reviews`} title={`Booking-platform reviews checked ${service.rating.checkedAt}; ratings may change`} className="font-semibold text-foreground">★ {service.rating.value.toFixed(1)} <span className="font-normal text-muted-foreground">({service.rating.count})</span></span>}
                   </div>
                   <h3 className="mt-1.5 line-clamp-2 text-base font-semibold leading-snug">{service.title}</h3>
                   <p className="mt-1 line-clamp-2 text-xs leading-relaxed text-muted-foreground sm:text-sm">{service.description}</p>
@@ -76,6 +76,12 @@ export function ShoreServiceCatalog({ portId, filters, onFilterChange, itinerary
               </article>
             </li>;
           })}
+          {partnerTours.length % 2 === 1 && <li data-testid="shore-companion-card" className="min-w-0 rounded-xl border bg-secondary/30 p-5">
+            <div className="flex h-full flex-col justify-between gap-4">
+              <div><p className="text-xs font-semibold uppercase tracking-wide text-primary">Plan your day ashore</p><h3 className="mt-2 text-lg font-semibold">Explore another destination</h3><p className="mt-2 text-sm text-muted-foreground">See every available excursion from {port.name} Port, or ask for a private route that fits your ship's schedule.</p></div>
+              <a href={shoreServiceHref(portId, {})} onClick={event => filter(event, {})} className="inline-flex min-h-10 items-center justify-center rounded-lg border border-primary px-4 py-2 text-sm font-semibold text-primary hover:bg-secondary">Explore all destinations</a>
+            </div>
+          </li>}
         </ul>
         <p className="mt-5 text-xs leading-relaxed text-muted-foreground" data-testid="partner-price-terms">Tour details, availability, prices and booking conditions are set by the tour operators and may change. Check the current itinerary, port pickup, return and cancellation terms with the booking provider.</p>
       </section>}
@@ -101,6 +107,12 @@ export function ShoreServiceCatalog({ portId, filters, onFilterChange, itinerary
               </article>
             </li>;
           })}
+          {privateTours.length % 2 === 1 && <li data-testid="shore-companion-card" className="min-w-0 rounded-xl border bg-secondary/25 p-4">
+            <div className="flex h-full flex-wrap items-center justify-between gap-4">
+              <div><h3 className="text-base font-semibold">Looking for a different private itinerary?</h3><p className="mt-1 max-w-xl text-sm text-muted-foreground">Tell me your preferred stops, group size and all-aboard deadline.</p></div>
+              <a href="#request-quote" onClick={() => onSelectItinerary("other")} className="inline-flex min-h-10 items-center justify-center rounded-lg bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground">Request a custom route</a>
+            </div>
+          </li>}
         </ul>
         <p className="mt-4 text-xs leading-relaxed text-muted-foreground" data-testid="owner-price-terms">Published weekday private transport rates are per vehicle for up to four passengers. Larger vehicles for families and groups can be arranged in advance.</p>
       </section>}
