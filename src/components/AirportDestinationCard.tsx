@@ -1,7 +1,7 @@
 import { Link } from "@tanstack/react-router";
 import { airportTransferRoutes, type AirportTransferRate } from "@/data/registry";
 import type { StayGuidePhoto } from "@/data/content";
-import { PriceDisplay } from "@/components/CurrencyRates";
+import { CompactCurrencyEquivalents, PriceDisplay } from "@/components/CurrencyRates";
 
 export function AirportDestinationCard({ id, destination, price, photo, onChoose, layout = "featured", testId = "airport-destination-card" }: {
   id: string; destination: string; price?: AirportTransferRate["price"]; photo: Pick<StayGuidePhoto, "src" | "alt">;
@@ -16,6 +16,7 @@ export function AirportDestinationCard({ id, destination, price, photo, onChoose
       <div className="min-w-0 flex-1">
         <h3 className="text-base font-semibold leading-snug sm:text-lg">{destination}</h3>
         <p className="mt-1 text-base font-semibold tabular-nums text-foreground sm:text-lg">From ₪{price?.amount.toLocaleString("en-US")}</p>
+        {price && <CompactCurrencyEquivalents amount={price.amount} />}
         <p className="mt-0.5 text-xs leading-snug text-muted-foreground">Weekday · One way · Up to 4 passengers</p>
         <span className="mt-2 inline-block text-sm font-semibold text-primary group-hover:underline">View transfer details</span>
       </div>
@@ -27,6 +28,7 @@ export function AirportDestinationCard({ id, destination, price, photo, onChoose
     <div className="min-w-0 flex-1">
       <h3 className="text-sm font-semibold leading-snug">{id === "other" ? "Another destination?" : destination}</h3>
       {price && <p className="mt-0.5 text-sm font-medium tabular-nums text-muted-foreground">From ₪{price.amount.toLocaleString("en-US")}</p>}
+      {price && <CompactCurrencyEquivalents amount={price.amount} />}
       <a href="#request-quote" onClick={() => onChoose?.(id)} className="mt-1 inline-flex min-h-9 items-center rounded-md py-1 text-xs font-semibold text-primary underline-offset-4 hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary sm:text-sm">Request a quote</a>
     </div>
   </article>;
