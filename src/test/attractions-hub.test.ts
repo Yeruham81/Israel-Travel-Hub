@@ -30,7 +30,9 @@ describe("Attractions hub redesign", () => {
     expect(page).not.toContain("WordPress");
     expect(page).not.toContain("original WordPress media library");
     expect(page).not.toContain("<details");
-    expect(page).toContain("border border-border/75 bg-secondary/30");
+    expect(page).toContain('data-testid="attraction-region-guides"');
+    expect(page).toContain("region.relatedGuides.length > 0");
+    expect(page).toContain("More {region.navLabel ?? region.title} travel guides");
   });
 
   it("offers six distinct planning pathways with relevant, real internal next steps", () => {
