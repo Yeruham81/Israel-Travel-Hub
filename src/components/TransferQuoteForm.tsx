@@ -8,7 +8,7 @@ import { airportTransferRates } from "@/data/registry";
 import { airportTransferPhotos } from "@/data/airportTransfers";
 import { emptyTransferQuote, validateTransferQuote, type TransferQuoteFields } from "@/lib/transfer-quote";
 
-export function TransferQuoteForm({ destinationId, onDestinationChange, fixedDestination = false, fixedDestinationLabel }: { destinationId: string; onDestinationChange?: (id: string) => void; fixedDestination?: boolean; fixedDestinationLabel?: string }) {
+export function TransferQuoteForm({ destinationId, onDestinationChange, fixedDestination = false, fixedDestinationLabel, compactHeader = false }: { destinationId: string; onDestinationChange?: (id: string) => void; fixedDestination?: boolean; fixedDestinationLabel?: string; compactHeader?: boolean }) {
   const selectedDestination = airportTransferRates.find((rate) => rate.id === destinationId);
   const destinationLabel = fixedDestinationLabel || selectedDestination?.destination;
   const [fields, setFields] = useState(emptyTransferQuote);
@@ -31,16 +31,21 @@ export function TransferQuoteForm({ destinationId, onDestinationChange, fixedDes
   const photo = airportTransferPhotos["moshe"]!;
   const fieldClass = "mt-2 h-11 bg-background text-base";
   return (
-    <section id="request-quote" tabIndex={-1} aria-labelledby="quote-h" className="mt-14 scroll-mt-24 overflow-hidden rounded-2xl border bg-card shadow-sm focus-visible:outline-2 focus-visible:outline-primary">
-      <div className="grid md:grid-cols-[0.8fr_1.6fr]">
-        <div className="bg-navy p-6 text-navy-foreground sm:p-8">
-          <img src={photo.src} alt={photo.alt} width={150} height={200} loading="lazy" className="h-24 w-20 rounded-xl object-cover" />
-          <p className="mt-5 text-xs font-semibold uppercase tracking-widest opacity-75">A local, personal service</p>
-          <h2 id="quote-h" className="mt-3 text-3xl">{fixedDestination && selectedDestination ? `Request your transfer to ${destinationLabel}` : "Ask me for a personal quote"}</h2>
-          <p className="mt-4 leading-relaxed opacity-90">Tell me about your arrival and destination. I'll help arrange a suitable private vehicle for your party and confirm the full price before you book.</p>
-          <ul className="mt-6 list-disc space-y-3 pl-5 text-sm text-navy-foreground marker:text-white"><li>One-way pickup from Ben Gurion Airport</li><li>Minivans and minibuses are available for families, groups, and travelers with extra luggage</li><li>Please contact me in advance so I can help arrange the most suitable vehicle for your needs and provide a personal quote</li></ul>
+    <section id="request-quote" tabIndex={-1} aria-labelledby="quote-h" className={`${compactHeader ? "mt-9" : "mt-14"} scroll-mt-24 overflow-hidden rounded-2xl border bg-card shadow-sm focus-visible:outline-2 focus-visible:outline-primary`}>
+      <div className={compactHeader ? "block" : "grid md:grid-cols-[0.8fr_1.6fr]"}>
+        <div className={compactHeader ? "flex items-center gap-3 border-b bg-secondary/30 px-4 py-4 sm:gap-4 sm:px-6" : "bg-navy p-6 text-navy-foreground sm:p-8"}>
+          <img src={photo.src} alt={photo.alt} width={150} height={200} loading="lazy" decoding="async" className={compactHeader ? "h-16 w-14 shrink-0 rounded-lg object-cover object-top" : "h-24 w-20 rounded-xl object-cover"} />
+          {compactHeader ? <div className="min-w-0">
+            <h2 id="quote-h" className="text-xl font-semibold">Request a private transfer quote</h2>
+            <p className="mt-1 text-sm leading-relaxed text-muted-foreground">Share your flight and journey details. I'll confirm your vehicle and full price before booking.</p>
+          </div> : <div>
+            <p className="mt-5 text-xs font-semibold uppercase tracking-widest opacity-75">A local, personal service</p>
+            <h2 id="quote-h" className="mt-3 text-3xl">{fixedDestination && selectedDestination ? `Request your transfer to ${destinationLabel}` : "Ask me for a personal quote"}</h2>
+            <p className="mt-4 leading-relaxed opacity-90">Tell me about your arrival and destination. I'll help arrange a suitable private vehicle for your party and confirm the full price before you book.</p>
+            <ul className="mt-6 list-disc space-y-3 pl-5 text-sm text-navy-foreground marker:text-white"><li>One-way pickup from Ben Gurion Airport</li><li>Minivans and minibuses are available for families, groups, and travelers with extra luggage</li><li>Please contact me in advance so I can help arrange the most suitable vehicle for your needs and provide a personal quote</li></ul>
+          </div>}
         </div>
-        <div className="p-5 sm:p-8">
+        <div className={compactHeader ? "p-4 sm:p-6" : "p-5 sm:p-8"}>
           <form onSubmit={send} noValidate aria-label="Private airport transfer quote request" aria-busy={submission.isSending}>
             <fieldset disabled={submission.isSending} className="min-w-0">
               {errors.length > 0 && <div ref={errorRef} tabIndex={-1} role="alert" className="mb-5 rounded-xl border border-destructive p-4 text-sm text-destructive"><p className="font-semibold">Please check these details:</p><ul className="mt-2 list-disc pl-5">{errors.map((error) => <li key={error}>{error}</li>)}</ul></div>}
@@ -63,6 +68,7 @@ export function TransferQuoteForm({ destinationId, onDestinationChange, fixedDes
               </div>
               <label className="mt-5 flex items-start gap-3 text-sm leading-relaxed"><input name="consent" type="checkbox" required checked={fields.consent} onChange={(e) => update("consent", e.target.checked)} className="mt-1 h-4 w-4 shrink-0 accent-primary" /><span>I agree to share these details with Moshe Barak for this quote request. <PrivacyInformationLink /></span></label>
               <QuoteSubmissionControls submission={submission} label="Send quote request" />
+              {compactHeader && <p className="mt-3 text-xs leading-relaxed text-muted-foreground">I'll review your request and confirm the vehicle, final price and pickup arrangements before any booking is finalized.</p>}
               <p className="mt-3 text-xs text-muted-foreground">All bookings require confirmation.</p>
             </fieldset>
           </form>
