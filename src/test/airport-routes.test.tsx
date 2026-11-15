@@ -24,7 +24,8 @@ describe("four dedicated airport transfer routes", () => {
     expect(within(visibleBreadcrumbs).getByText(guide.city)).toHaveAttribute("aria-current", "page");
     expect(visibleBreadcrumbs).not.toHaveTextContent("Ben Gurion Airport");
     expect(container.querySelector("main")!.textContent).not.toMatch(/taxi rank|\btrain\b|\bbuses\b|live availability|guaranteed pickup/i);
-    expect(screen.getByTestId("route-starting-rate")).toHaveTextContent(`From ILS ${guide.rate.price.amount.toLocaleString("en-US")}`);
+    expect(screen.getByTestId("route-starting-rate")).toHaveTextContent(`From ₪${guide.rate.price.amount.toLocaleString("en-US")}`);
+    expect(screen.getByTestId("airport-route-fx-note")).toHaveTextContent("All fares are quoted in ILS.");
     expect(screen.getByTestId("route-starting-rate")).toHaveTextContent("One way · per vehicle · up to 4");
     expect(screen.getByTestId("route-starting-rate")).toHaveTextContent(route.driveTime);
     expect(screen.getByRole("link", { name: "Request your airport transfer" })).toHaveAttribute("href", "#request-quote");
