@@ -76,7 +76,7 @@ describe("shore excursions", () => {
     const ownerSection = container.querySelector('[data-section="moshe-private-tours"]');
     const externalSection = container.querySelector('#partner-tours-h')?.closest('section');
     expect(ownerSection).not.toBeNull();
-    expect(ownerSection?.querySelector('ul[aria-label^="My private day trips"]')).toHaveClass("sm:grid-cols-2");
+    expect(ownerSection?.querySelector('ul[aria-label^="My private day trips"]')).toHaveClass("grid", "gap-3");
     expect(ownerSection?.querySelectorAll('[data-testid="shore-service-card"]')).toHaveLength(4);
     expect(externalSection).not.toBeNull();
     expect(ownerSection!.compareDocumentPosition(externalSection!)).toBe(Node.DOCUMENT_POSITION_FOLLOWING);
@@ -92,8 +92,8 @@ describe("shore excursions", () => {
     expect(externalSection?.querySelector('[data-testid="partner-price-terms"]')).toHaveTextContent("External starting prices are dated published reference prices");
     expect(externalSection?.querySelector('[data-testid="partner-price-terms"]')).toHaveTextContent("cancellation terms");
     expect(externalSection).not.toHaveTextContent("My published starting rates");
-    expect(externalSection?.querySelector("#partner-tours-h")).toHaveTextContent(`More shore excursions from ${port.name}`);
-    expect(externalSection).toHaveTextContent("Looking for a guided experience, the company of a group or a different route?");
+    expect(externalSection?.querySelector("#partner-tours-h")).toHaveTextContent(`Explore ${port.name} shore excursions`);
+    expect(externalSection).toHaveTextContent("Compare independently operated guided and shared excursions");
     expect(externalSection).not.toHaveTextContent("These tours are offered by independent operators and booked on their own booking platforms.");
     expect(container.querySelector("#itineraries")?.textContent).not.toContain("Compare the route, duration, tour format and starting price.");
     for (const externalCard of externalCards) {
@@ -109,7 +109,7 @@ describe("shore excursions", () => {
     }
     // Photo credits stay available in one footer disclosure, not repeated below the hero photo.
     expect(container.querySelector('header figure details')).toBeNull();
-    const credits = screen.getByText("Excursion image credits").closest("details");
+    const credits = screen.getByText("Image credits").closest("details");
     expect(credits).not.toBeNull();
     expect(credits).not.toHaveAttribute("open");
     expect(credits?.querySelectorAll('a[href*="creativecommons.org"]').length).toBeGreaterThan(0);
@@ -129,10 +129,10 @@ describe("shore excursions", () => {
     expect(alternative).toHaveTextContent("Bein Harim Tours");
     expect(alternative).not.toHaveTextContent(/From ILS/);
     expect(within(alternative).getByRole("link", { name: /View on Viator/ })).toHaveAttribute("rel", "sponsored noopener noreferrer");
-    const related = screen.getByRole("region", { name: "Useful guides for your day ashore" });
-    expect(within(related).getAllByRole("article")).toHaveLength(6);
+    const related = screen.getByRole("list", { name: "Useful guides for your day ashore" });
+    expect(within(related).getAllByRole("listitem")).toHaveLength(6);
     expect(within(related).getAllByRole("img")).toHaveLength(6);
-    expect(within(related).getAllByRole("heading", { level: 3 })).toHaveLength(6);
+    expect(related).toHaveClass("lg:grid-cols-3");
     expect(within(related).getAllByRole("link")).toHaveLength(6);
     expect(related).not.toHaveTextContent("→");
     for (const link of within(related).getAllByRole("link")) {
@@ -140,7 +140,12 @@ describe("shore excursions", () => {
       const href = link.getAttribute("href")!;
       expect(router.matchRoutes(href).at(-1)?.routeId).toBe(href.replace(/\/$/, ""));
     }
-    expect(container.querySelector("a a")).toBeNull();
+    expect(container.querySelector("#route-fit, #benefits-h, #timing, #format, #check, #ready-h")).toBeNull();
+    expect(screen.getByRole("heading", { name: "Practical guides for your trip to Israel" })).toBeInTheDocument();
+    const practical = container.querySelector('section[aria-labelledby="shore-practical-h"]');
+    expect(practical?.querySelectorAll("a")).toHaveLength(6);
+    expect(practical?.querySelector("div.lg\\:grid-cols-3")).not.toBeNull();
+        expect(container.querySelector("a a")).toBeNull();
     expect(container.querySelector(`header time[datetime="${SHORE_EXCURSION_UPDATED_DATE}"]`)).toBeInTheDocument();
     const head = await route.options.head?.({} as never);
     expect(head).toMatchObject({ meta: expect.arrayContaining([{ title: expect.stringContaining(`${port.name} shore excursions`) }, { name: "robots", content: "noindex,nofollow" }]), links: [{ rel: "canonical", href: expect.stringContaining(port.path) }] });

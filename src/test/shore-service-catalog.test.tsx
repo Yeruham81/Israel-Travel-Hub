@@ -56,8 +56,8 @@ describe("port service catalog", () => {
     expect(screen.queryByRole("navigation", { name: "Filter port services by booking site" })).not.toBeInTheDocument();
     expect(container.querySelector("a a")).toBeNull();
     const header = screen.getByRole("heading", { level: 1 }).closest("header")!;
-    expect(header.querySelectorAll("a.btn")).toHaveLength(1);
-    expect(within(header).getByRole("link", { name: "Request a private day trip" })).toHaveAttribute("href", "#request-quote");
+    expect(header.querySelectorAll("a.btn")).toHaveLength(0);
+    expect(container.querySelector("#request-quote")).toBeInTheDocument();
     expect(header).not.toHaveTextContent(/From ILS|Weekday starting rate|Full-day return transport|Exchange rate|Browse tours|narrow.*tag/i);
     expect(cards().every((card) => card.textContent?.includes(`${shorePorts[port].name} Port · pickup & return`))).toBe(true);
     expect(cards().every((card) => !/Price checked|one.way|direct quote/.test(card.textContent || ""))).toBe(true);

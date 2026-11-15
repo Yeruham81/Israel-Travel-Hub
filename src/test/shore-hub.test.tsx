@@ -3,6 +3,7 @@ import { createMemoryHistory, createRouter, RouterContextProvider } from "@tanst
 import { cleanup, fireEvent, render, screen, waitFor, within } from "@testing-library/react";
 import { afterEach, describe, expect, it } from "vitest";
 import { Route } from "@/routes/shore-excursions.index";
+import { services } from "@/routes/index";
 import { routeTree } from "@/routeTree.gen";
 import { shoreHubExperiences } from "@/data/shoreHub";
 import { servicesForPort, filterShoreServices } from "@/lib/shore-services";
@@ -41,6 +42,9 @@ describe("Israel shore excursion hub", () => {
   it("shows matching destination photos, equal light callout buttons and on-demand photo attribution", async () => {
     await renderHub();
     const destinations = screen.getByRole("region", { name: "Where can you go on an Israel shore excursion?" });
+    const homepageShorePhoto = services.find(service => service.id === "shore-excursions")?.feature?.src;
+    expect(homepageShorePhoto).toBeTruthy();
+    expect(within(screen.getByTestId("hub-header")).getByRole("img", { name: /Cruise passengers walking/ })).toHaveAttribute("src", homepageShorePhoto);
     expect(within(destinations).getAllByRole("img")).toHaveLength(4);
     for (const experience of shoreHubExperiences) {
       const card = destinations.querySelector(`[data-experience="${experience.id}"]`);
