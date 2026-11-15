@@ -102,7 +102,7 @@ describe("shore excursions", () => {
     expect(externalSection?.querySelectorAll('[data-testid="shore-service-card"]')).toHaveLength(externalCards.length);
     expect(externalSection?.querySelector('[data-testid="partner-price-terms"]')).not.toHaveTextContent("External starting prices are dated published reference prices, not live quotes.");
     expect(externalSection?.querySelector('[data-testid="partner-price-terms"]')).toHaveTextContent("booking conditions");
-    expect(externalSection?.querySelector('[data-testid="partner-price-terms"]')).toHaveTextContent("cancellation terms");
+    expect(externalSection?.querySelector('[data-testid="partner-price-terms"]')).toHaveTextContent("cancellation policy");
     expect(externalSection).not.toHaveTextContent("My published starting rates");
     expect(externalSection?.querySelector("#partner-tours-h")).toHaveTextContent(`Explore ${port.name} shore excursions`);
     expect(externalSection).toHaveTextContent("Compare guided day trips and small-group experiences");
