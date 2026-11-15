@@ -57,13 +57,13 @@ describe("external references and private transfer route migration", () => {
     const scan = (directory: string): string[] => readdirSync(directory, { withFileTypes: true }).flatMap((entry) => {
       const path = join(directory, entry.name);
       if (entry.isDirectory()) return entry.name === "test" || entry.name === "generated" ? [] : scan(path);
-      return /\\.tsx?$/.test(entry.name) && entry.name !== "routeTree.gen.ts" ? [path] : [];
+      return /\.tsx?$/.test(entry.name) && entry.name !== "routeTree.gen.ts" ? [path] : [];
     });
     for (const path of scan("src")) {
       const content = readFileSync(path, "utf8");
       expect(content.includes("/airport-transfers/ben-gurion-airport-to-"), path).toBe(false);
       if (path.startsWith(join("src", "data"))) {
-        expect(content, path).not.toMatch(/(?:sourceUrl|url)["']?\\s*:\\s*["']https:\\/\\/(?:www\\.)?israel-taxi\\.com\\//);
+        expect(content, path).not.toMatch(/(?:sourceUrl|url)["']?\s*:\s*["']https:\/\/(?:www\.)?israel-taxi\.com\//);
       }
     }
   });
