@@ -9,7 +9,7 @@ import { accommodationDestinations } from "@/data/content";
 import { tourCategories, tourCategoryPaths } from "@/data/tours";
 import { travelGuidePaths } from "@/data/registry";
 import { attractionHubRegions } from "@/data/attractionsHub";
-import { attractionSidebarGuideLabels } from "@/data/nav";
+import { allNavGroups, attractionSidebarGuideLabels, attractionSidebarRegions } from "@/data/nav";
 
 afterEach(cleanup);
 
@@ -38,11 +38,11 @@ describe("shared sidebar navigation", () => {
     );
     expect(within(section).getAllByRole("link")).toHaveLength(1);
     for (const region of attractionHubRegions) {
-      const button = within(section).getByRole("button", { name: `Toggle ${region.title} guides` });
+      const button = within(section).getByRole("button", { name: `Toggle ${region.title} attractions` });
       expect(button).toHaveAttribute("aria-expanded", "false");
       fireEvent.click(button);
       expect(button).toHaveAttribute("aria-expanded", "true");
-      const list = within(section).getByRole("list", { name: `${region.title} guides` });
+      const list = within(section).getByRole("list", { name: `${region.title} attractions` });
       expect(list).toBeVisible();
       expect(within(list).getAllByRole("link")).toHaveLength(region.cards.length);
       region.cards.forEach(card => {
@@ -55,15 +55,50 @@ describe("shared sidebar navigation", () => {
     }
   });
 
-  it("automatically opens an area's guide list on a matching article", async () => {
+  it("lists all 20 approved individual attractions in the right region, never overview guides", () => {
+    const expected = [
+      { id: "jerusalem", slugs: ["old-city-jerusalem", "mount-of-olives", "mount-zion"] },
+      { id: "tel-aviv-jaffa", slugs: ["jaffa"] },
+      { id: "haifa-coast", slugs: ["akko-acre", "caesarea", "rosh-hanikra"] },
+      { id: "nazareth-lower-galilee", slugs: ["basilica-of-the-annunciation", "mount-tabor", "mount-precipice", "tel-megiddo"] },
+      { id: "sea-of-galilee", slugs: ["capernaum", "tabgha", "mount-of-beatitudes", "magdala", "yardenit"] },
+      { id: "dead-sea-masada", slugs: ["masada", "ein-gedi", "qasr-el-yahud"] },
+      { id: "negev-eilat", slugs: ["mitzpe-ramon-crater"] },
+    ];
+    expect(attractionHubRegions.map(region => region.id)).toEqual(expected.map(region => region.id));
+    expect(attractionSidebarRegions).toHaveLength(expected.length);
+    const group = allNavGroups.find(group => group.title === "Attractions");
+    expect(group?.items[0]).toEqual({ label: "All attractions", to: "/attractions/" });
+    expect(group?.items.slice(1)).toEqual(attractionSidebarRegions);
+    const allPaths: string[] = [];
+    for (const [index, entry] of expected.entries()) {
+      const sidebar = attractionSidebarRegions[index]!;
+      const region = attractionHubRegions[index]!;
+      expect(region.id).toBe(entry.id);
+      expect("children" in sidebar).toBe(true);
+      const paths = "children" in sidebar ? (sidebar.children ?? []).map(child => String(child.to)) : [];
+      const expectedPaths = entry.slugs.map(slug => `/attractions/${slug}/`);
+      expect(paths).toEqual(expectedPaths);
+      expect(region.cards.map(card => String(card.to))).toEqual(expectedPaths);
+      expect(paths.every(path => path.startsWith("/attractions/"))).toBe(true);
+      allPaths.push(...paths);
+    }
+    expect(allPaths).toHaveLength(20);
+    expect(new Set(allPaths).size).toBe(20);
+    expect(Object.keys(attractionSidebarGuideLabels).sort()).toEqual(
+      attractionHubRegions.flatMap(region => region.cards.map(card => card.id)).sort(),
+    );
+  });
+
+  it("automatically opens an area's attraction list on a matching page", async () => {
     const router = await navigationRouter("/attractions/mount-zion/");
     render(<RouterContextProvider router={router}><GlobalNav /></RouterContextProvider>);
     const section = screen.getByRole("region", { name: "Attractions" });
-    const jerusalem = within(section).getByRole("button", { name: "Toggle Jerusalem guides" });
+    const jerusalem = within(section).getByRole("button", { name: "Toggle Jerusalem attractions" });
     expect(jerusalem).toHaveAttribute("aria-expanded", "true");
-    const links = within(section).getByRole("list", { name: "Jerusalem guides" });
+    const links = within(section).getByRole("list", { name: "Jerusalem attractions" });
     expect(within(links).getByRole("link", { name: "Mount Zion" })).toHaveAttribute("aria-current", "page");
-    expect(within(section).getByRole("button", { name: "Toggle Tel Aviv & Jaffa guides" })).toHaveAttribute("aria-expanded", "false");
+    expect(within(section).getByRole("button", { name: "Toggle Tel Aviv & Jaffa attractions" })).toHaveAttribute("aria-expanded", "false");
   });
   it("always shows all tour categories without a toggle and places the Bethlehem journey under guides", async () => {
     const router = await navigationRouter();

@@ -65,48 +65,36 @@ export const legalNav: NavItem[] = [
   { label: "Terms of Use", to: "/terms-of-use/" },
 ];
 
-/** Short, readable guide names in the area accordion; URLs come from the Attractions hub. */
+/** Compact labels for individual attractions only. General guides do not belong in this sidebar. */
 export const attractionSidebarGuideLabels: Record<string, string> = {
   "old-city-jerusalem": "Old City",
   "mount-of-olives": "Mount of Olives",
   "mount-zion": "Mount Zion",
-  "museums-in-jerusalem": "Museums",
-  jerusalemChurches: "Churches",
-  jerusalemShopping: "Shopping",
-  "attractions-in-tel-aviv": "Tel Aviv sights",
   jaffa: "Old Jaffa",
-  telAvivBeaches: "Beaches",
-  telAvivMuseums: "Museums",
-  haifa: "Haifa",
   "akko-acre": "Akko (Acre)",
   caesarea: "Caesarea",
   "rosh-hanikra": "Rosh Hanikra",
-  haifaMuseums: "Museums",
   annunciation: "Annunciation",
   "mount-tabor": "Mount Tabor",
   precipice: "Mount Precipice",
   megiddo: "Tel Megiddo",
-  "sea-of-galilee": "Sea of Galilee",
   capernaum: "Capernaum",
   tabgha: "Tabgha",
   "mount-of-beatitudes": "Mount of Beatitudes",
   magdala: "Magdala",
   yardenit: "Yardenit",
-  baptism: "Baptism sites",
-  "dead-sea-attractions": "Dead Sea sights",
   masada: "Masada",
   "ein-gedi": "Ein Gedi",
   qasr: "Qasr el-Yahud",
   "mitzpe-ramon-crater": "Ramon Crater",
-  eilat: "Eilat & Red Sea",
 };
 
 export const attractionSidebarRegions: SidebarNavItem[] = attractionHubRegions.map((region) => ({
   label: region.navLabel ?? region.title,
   to: "/attractions/" as const, // The heading toggles; only "All attractions" navigates to this URL.
   toggleOnly: true,
-  childrenLabel: `${region.title} guides`,
-  toggleLabel: `Toggle ${region.title} guides`,
+  childrenLabel: `${region.title} attractions`,
+  toggleLabel: `Toggle ${region.title} attractions`,
   children: region.cards.map((card) => ({
     label: attractionSidebarGuideLabels[card.id] ?? card.title,
     to: card.to,
