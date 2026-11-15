@@ -8,6 +8,14 @@ const bannerStyles: Record<string, string> = {
   gettransfer: "border-indigo-200 bg-indigo-50 text-indigo-950",
 };
 
+/** CTAs pick up a stronger tone from their surrounding provider card, not a black fill. */
+const platformButtonStyles: Record<string, string> = {
+  kiwitaxi: "border-emerald-500/70 bg-emerald-200 text-emerald-950 group-hover:border-emerald-600 group-hover:bg-emerald-300",
+  welcome: "border-amber-500/70 bg-amber-200 text-amber-950 group-hover:border-amber-600 group-hover:bg-amber-300",
+  intui: "border-sky-500/70 bg-sky-200 text-sky-950 group-hover:border-sky-600 group-hover:bg-sky-300",
+  gettransfer: "border-indigo-500/70 bg-indigo-200 text-indigo-950 group-hover:border-indigo-600 group-hover:bg-indigo-300",
+};
+
 /** Short marketing copy for the hub; route pages retain their existing descriptions. */
 const hubOffers: Record<string, { description: string; action: string }> = {
   kiwitaxi: { description: "Start your trip with a pre-booked pickup and a vehicle that suits your group.", action: "Check prices" },
@@ -33,7 +41,7 @@ export function AirportBookingPlatforms({ pageId = "airport-private-transfers", 
         {!compact && <p className="text-xs font-semibold uppercase tracking-widest opacity-70">Private transfer booking</p>}
         <h3 className={compact ? "mt-1 font-sans text-lg font-bold tracking-tight" : "mt-2 font-sans text-2xl font-bold tracking-tight"}>{platform.providerName}</h3>
         <p className={compact ? "mt-1 line-clamp-2 flex-1 text-sm leading-relaxed" : "mt-3 flex-1 text-sm leading-relaxed"}>{compact ? (hubOffer?.description ?? platform.summary) : platform.summary}</p>
-        <span className={compact ? "mt-3 inline-flex min-h-10 w-fit self-center items-center justify-center rounded-lg bg-navy px-4 py-2 text-center text-sm font-semibold text-navy-foreground transition-colors group-hover:bg-navy/85" : "mt-5 text-sm font-semibold underline underline-offset-4"}>{compact ? (hubOffer?.action ?? "View options") : platform.ctaLabel}</span><span className="sr-only"> (opens in a new tab)</span>
+        <span className={`${compact ? "mt-3" : "mt-5"} inline-flex min-h-11 w-fit self-center items-center justify-center rounded-lg border px-5 py-2.5 text-center text-sm font-semibold shadow-sm transition-[background-color,border-color,box-shadow] group-hover:shadow-md ${platformButtonStyles[platform.partnerId || ""] ?? "border-primary/40 bg-secondary text-foreground group-hover:bg-secondary/80"}`}>{compact ? (hubOffer?.action ?? "View options") : platform.ctaLabel}</span><span className="sr-only"> (opens in a new tab)</span>
       </a>;
     })}</div>
     {compact && <p className="mt-3 text-xs leading-relaxed text-muted-foreground" data-testid="airport-external-providers-note">These are external, independently operated booking websites. Each provider sets its own prices and terms. Please review all details carefully before booking.</p>}
