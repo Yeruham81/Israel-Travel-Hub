@@ -64,7 +64,7 @@ describe("international price estimates", () => {
       const estimate = within(ratePanel).getByTestId("compact-currency-estimate");
       expect(estimate.querySelector('[data-currency="USD"]')).toHaveTextContent("≈ $138");
       expect(estimate.querySelector('[data-currency="EUR"]')).toHaveTextContent("€110");
-      expect(screen.getByTestId("airport-route-fx-note")).toHaveTextContent("All fares are quoted in ILS.");
+      expect(screen.getByTestId("airport-route-fx-note")).toHaveTextContent("Full price is confirmed in advance. All fares are quoted and charged in ILS. USD and EUR amounts are approximate, based on current exchange rates.");
     }
   });
 
