@@ -1488,8 +1488,8 @@ export const affiliateConfig: Record<string, { trackingUrl: string } | undefined
   "shore-viator-haifa-caesarea-private": { trackingUrl: "https://viator.tpm.li/gQj7uWQF" },
   "shore-viator-haifa-galilee-private": { trackingUrl: "https://viator.tpm.li/1WwXrhOW" },
   "shore-viator-haifa-akko-private": { trackingUrl: "https://viator.tpm.li/vgvVO4ap" },
-  "shore-viator-ashdod-masada-dead-sea": undefined,
-  "shore-viator-haifa-jerusalem-holy-city": undefined,
+  "shore-viator-ashdod-masada-dead-sea": { trackingUrl: "https://viator.tpm.li/qizXTydO" },
+  "shore-viator-haifa-jerusalem-holy-city": { trackingUrl: "https://viator.tpm.li/DdqH0xr7" },
 
   "esim-airalo": { trackingUrl: "https://airalo.tpm.li/JmHFDV3v" },
   "esim-airalo-compatibility": { trackingUrl: AIRALO_COMPATIBILITY_AFFILIATE_URL },
