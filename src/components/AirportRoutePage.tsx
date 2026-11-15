@@ -10,7 +10,7 @@ import { AirportBookingPlatforms } from "@/components/AirportBookingPlatforms";
 import { AIRPORT_TRANSFER_CHECK_DATE, airportTransferRoutes, travelGuidePaths, type AirportTransferRouteId } from "@/data/registry";
 import { CANONICAL_ORIGIN, jsonLd, pageMeta } from "@/lib/site";
 import { authorLd } from "@/lib/author";
-import { ExchangeRateNote, PriceDisplay } from "@/components/CurrencyRates";
+import { CompactCurrencyEquivalents } from "@/components/CurrencyRates";
 import { AuthorCard } from "@/components/AuthorCard";
 import { PageUpdated } from "@/components/PageUpdated";
 import { GuideHeroLayout, GuideHeroMedia } from "@/components/GuideHeroMedia";
@@ -65,11 +65,11 @@ export function AirportRoutePage({ id }: { id: AirportTransferRouteId }) {
           <h1 className="guide-page-title mt-3">{guide.title}</h1>
           <p data-guide-intro className="mt-4 text-lg leading-relaxed text-muted-foreground">{guide.intro}</p>
           <div className="mt-5 flex flex-wrap items-end gap-x-6 gap-y-3 rounded-xl border bg-secondary/50 p-4" data-testid="route-starting-rate">
-            <div><p className="text-xs font-medium text-muted-foreground">Published starting rate</p><PriceDisplay amount={price.amount} size="hero" className="mt-1" /><p className="mt-2 text-xs text-muted-foreground">One way · per vehicle · up to 4</p></div>
+            <div><p className="text-xs font-medium text-muted-foreground">Published starting rate</p><p className="mt-1 text-3xl font-semibold tabular-nums text-foreground">From ₪{price.amount.toLocaleString("en-US")}</p><CompactCurrencyEquivalents amount={price.amount} /><p className="mt-2 text-xs text-muted-foreground">One way · per vehicle · up to 4</p></div>
             <div><p className="text-xs font-medium text-muted-foreground">Drive after pickup</p><p className="mt-1 font-semibold">{guide.driveTime}</p><p className="mt-1 text-xs text-muted-foreground">Guide estimate · traffic can add time</p></div>
           </div>
           <p className="mt-2 text-xs leading-relaxed text-muted-foreground">Weekday starting rate. Extra charges may apply for night, weekend or holiday trips. Final price and availability by confirmation; larger groups need a quote.</p>
-          <ExchangeRateNote className="mt-3" />
+          <p className="mt-2 text-xs leading-relaxed text-muted-foreground" data-testid="airport-route-fx-note">USD and EUR amounts are approximate, based on reference exchange rates. All fares are quoted in ILS.</p>
           <a href="#request-quote" onClick={focusQuote} className="btn btn-primary mt-5">Request your airport transfer</a>
           <p className="mt-3 text-sm text-muted-foreground">Private vehicle for your party · Exact hotel or address · Contact me in advance</p>
           <PageUpdated date={AIRPORT_TRANSFER_CHECK_DATE} />
