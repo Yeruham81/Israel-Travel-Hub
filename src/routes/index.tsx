@@ -247,9 +247,9 @@ function Home() {
                 <p className="mt-2 max-w-2xl text-muted-foreground">{s.text}</p>
               </div>
             </header>
-            <div className="mt-6 grid min-w-0 grid-cols-1 gap-4 lg:h-[280px] lg:grid-cols-2 lg:items-stretch" data-testid={`service-layout-${s.id}`}>
+            <div className="mt-6 grid min-w-0 grid-cols-1 gap-4 lg:min-h-[280px] lg:grid-cols-2 lg:items-stretch" data-testid={`service-layout-${s.id}`}>
               {s.feature && <img src={s.feature.src} alt={s.feature.alt} loading="lazy" decoding="async" width={1400} height={880} className="aspect-[16/9] max-h-[260px] w-full min-w-0 rounded-xl object-cover lg:aspect-auto lg:h-full lg:max-h-none" />}
-              <ul className="grid min-w-0 grid-cols-2 gap-3 lg:h-full lg:grid-rows-2" aria-label="Airport transfer destinations">
+              <ul className="grid min-w-0 grid-cols-2 auto-rows-fr gap-3" aria-label="Airport transfer destinations">
                 {s.cards.map((c) => <AirportTransferCard key={c.label} c={c} />)}
               </ul>
             </div>

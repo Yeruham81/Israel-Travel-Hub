@@ -8,17 +8,15 @@ import hTaLarge from "@/assets/home/hero-tel-aviv-large.webp";
 import hHfSm from "@/assets/home/hero-haifa-sm-optimized.webp";
 import hHfMedium from "@/assets/home/hero-haifa-medium.webp";
 import hHfLarge from "@/assets/home/hero-haifa-large.webp";
-import hMsSm from "@/assets/home/hero-masada-sm-optimized.webp";
-import hMsMedium from "@/assets/home/hero-masada-medium.webp";
-import hMsLarge from "@/assets/home/hero-masada-large.webp";
-import hCsSm from "@/assets/home/hero-caesarea-sm-optimized.webp";
-import hCsMedium from "@/assets/home/hero-caesarea-medium.webp";
-import hCsLarge from "@/assets/home/hero-caesarea-large.webp";
+import hMsSm from "@/assets/home/hero-masada-plateau-mobile.webp";
+import hMsLarge from "@/assets/home/hero-masada-plateau-desktop.jpg";
+import hCsSm from "@/assets/home/hero-caesarea-coast-mobile.webp";
+import hCsLarge from "@/assets/home/hero-caesarea-coast-desktop.jpg";
 import hGlSm from "@/assets/home/hero-galilee-sm-optimized.webp";
 import hGlMedium from "@/assets/home/hero-galilee-medium.webp";
 import hGlLarge from "@/assets/home/hero-galilee-large.webp";
-import pJaffaDesktop from "@/assets/home/hero-jaffa-sunset-large.webp";
-import pJaffaMobile from "@/assets/home/hero-jaffa-sunset-sm.webp";
+import pJaffaDesktop from "@/assets/home/hero-jaffa-harbor-desktop.jpg";
+import pJaffaMobile from "@/assets/home/hero-jaffa-harbor-mobile.webp";
 import pAkkoDesktop from "@/assets/home/hero-akko-aerial-large.webp";
 import pAkkoMobile from "@/assets/home/hero-akko-aerial-sm.webp";
 import pEilatDesktop from "@/assets/home/hero-eilat-mountains-large.webp";
@@ -28,12 +26,12 @@ const heroSlides: HeroSlide[] = [
   { src: hJerLarge, srcSm: hJerSm, srcMedium: hJerMedium, caption: "Jerusalem Old City from the Mount of Olives", alt: "Jerusalem's Old City and the Dome of the Rock seen from the Mount of Olives", pos: "55% center" },
   { src: hTaLarge, srcSm: hTaSm, srcMedium: hTaMedium, caption: "Tel Aviv beach promenade", alt: "The seafront promenade beside the beach in Tel Aviv", pos: "40% center" },
   { src: hHfLarge, srcSm: hHfSm, srcMedium: hHfMedium, caption: "Haifa Bay from the Carmel, Bahá'í Gardens below", alt: "Haifa and Haifa Bay seen from Mount Carmel above the Bahá'í Gardens", pos: "center" },
-  { src: hMsLarge, srcSm: hMsSm, srcMedium: hMsMedium, caption: "Masada above the Dead Sea", alt: "The Masada plateau from the air with the Dead Sea behind", pos: "center" },
-  { src: hCsLarge, srcSm: hCsSm, srcMedium: hCsMedium, caption: "Caesarea National Park on the coast", alt: "Ancient ruins on the shore at Caesarea at dusk", pos: "65% center" },
+  { src: hMsLarge, srcSm: hMsSm, srcMedium: hMsLarge, caption: "Masada above the Dead Sea", alt: "Masada’s sunlit desert plateau and ancient fortress high above the Dead Sea", pos: "center", width: 1200, height: 675 },
+  { src: hCsLarge, srcSm: hCsSm, srcMedium: hCsLarge, caption: "Caesarea’s Mediterranean coast", alt: "Aerial view of Caesarea’s turquoise Mediterranean coastline and historic coastal landscape", pos: "center", width: 1200, height: 675 },
   { src: hGlLarge, srcSm: hGlSm, srcMedium: hGlMedium, caption: "Tiberias and the Sea of Galilee", alt: "Tiberias on the hillside above the Sea of Galilee, seen from the water", pos: "center" },
   // High-resolution Google Drive sources, recompressed as distinct desktop/mobile WebP variants.
-  { src: pJaffaDesktop, srcSm: pJaffaMobile, srcMedium: pJaffaDesktop, caption: "Old Jaffa at sunset", alt: "Jaffa’s old waterfront church tower, harbour and Mediterranean Sea at sunset", pos: "40% center", width: 1536, height: 864 },
-  { src: pAkkoDesktop, srcSm: pAkkoMobile, srcMedium: pAkkoDesktop, caption: "Akko Old City and harbour", alt: "Aerial view of Akko’s historic walled city and marina along the Mediterranean coast", pos: "center", width: 2048, height: 848 },
+  { src: pJaffaDesktop, srcSm: pJaffaMobile, srcMedium: pJaffaDesktop, caption: "Old Jaffa harbour", alt: "Fishing boats in the historic harbour below Old Jaffa’s stone waterfront and skyline", pos: "center", width: 1200, height: 675 },
+  { src: pAkkoDesktop, srcSm: pAkkoMobile, srcMedium: pAkkoDesktop, caption: "Akko Old City and harbour", alt: "Aerial view of Akko’s historic walled city, sea wall and marina along the Mediterranean coast", pos: "center 68%", width: 2048, height: 848 },
   { src: pEilatDesktop, srcSm: pEilatMobile, srcMedium: pEilatDesktop, caption: "Eilat Mountains and the gulf", alt: "Rocky mountains around Eilat overlooking the Gulf of Aqaba", pos: "center", width: 1536, height: 432 },
 ];
 

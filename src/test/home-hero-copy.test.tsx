@@ -87,8 +87,9 @@ describe("homepage marketing copy and service sections", () => {
     // Four airport routes use bold, full-photo destination tiles rather than compact text rows.
     const transferSection = document.getElementById("transfers")!;
     const transferDestinations = within(transferSection).getByRole("list", { name: "Airport transfer destinations" });
-    expect(transferDestinations).toHaveClass("grid-cols-2", "lg:grid-rows-2", "lg:h-full");
-    expect(transferSection.querySelector('[data-testid="service-layout-transfers"]')).toHaveClass("lg:h-[280px]", "lg:items-stretch");
+    expect(transferDestinations).toHaveClass("grid-cols-2", "auto-rows-fr");
+    expect(transferSection.querySelector('[data-testid="service-layout-transfers"]')).toHaveClass("lg:min-h-[280px]", "lg:items-stretch");
+    expect(transferSection.querySelector('[data-testid="service-layout-transfers"]')).not.toHaveClass("lg:h-[280px]");
     const transferCards = within(transferDestinations).getAllByRole("link");
     expect(transferCards).toHaveLength(4);
     expect(transferCards.map(card => card.textContent?.trim())).toEqual([

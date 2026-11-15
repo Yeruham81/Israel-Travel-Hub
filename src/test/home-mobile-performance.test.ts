@@ -106,6 +106,13 @@ describe("home mobile performance optimizations", () => {
     expect(slides).toContain("hero-jerusalem-medium.webp");
     expect(slides).toContain("hero-jerusalem-sm-optimized.webp");
     expect(slides).toContain("hero-jerusalem-large.webp");
+    for (const name of ["jaffa-harbor", "masada-plateau", "caesarea-coast"]) {
+      expect(slides).toContain(`hero-${name}-desktop.jpg`);
+      expect(slides).toContain(`hero-${name}-mobile.webp`);
+      expect(bytes(`src/assets/home/hero-${name}-desktop.jpg`)).toBeLessThan(230000);
+      expect(bytes(`src/assets/home/hero-${name}-mobile.webp`)).toBeLessThan(110000);
+    }
+    expect(slides).toContain('pos: "center 68%"');
     expect(carousel).toContain('media="(max-width: 767px)"');
     for (const place of ["jerusalem", "haifa", "tel-aviv", "masada", "caesarea", "galilee"]) {
       const full = bytes(`src/assets/home/hero-${place}-sm.webp`);
@@ -159,7 +166,7 @@ describe("home mobile performance optimizations", () => {
     expect(home).toContain('grid w-full min-w-0 grid-cols-[96px_minmax(0,1fr)]');
     expect(home).toContain('aria-label={s.id === "tours" ? "Tour destinations" : "Featured attractions"}');
     expect(home).toContain('aria-label="Airport transfer destinations"');
-    expect(home).toContain('lg:h-[280px] lg:grid-cols-2 lg:items-stretch');
+    expect(home).toContain('lg:min-h-[280px] lg:grid-cols-2 lg:items-stretch');
     for (const name of ["jerusalem-tower-of-david", "tel-aviv-beach-skyline", "haifa-bahai-gardens", "ein-bokek-aerial"]) {
       const path = `public/images/home/transfer-${name}.webp`;
       expect(bytes(path), path).toBeGreaterThan(10000);
