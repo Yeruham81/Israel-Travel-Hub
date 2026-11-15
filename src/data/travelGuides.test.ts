@@ -9,15 +9,20 @@ describe("travel guide topic filters and prerender safety", () => {
   it("keeps eSIM buying guidance prominent without a troubleshooting manual", () => {
     const guide = travelGuides.esim;
     expect(guide.title).toContain("Prices, Providers & My Picks");
-    expect(guide.sections.map((section) => section.id)).toEqual(["price", "short-trip", "long-trip", "unlimited", "compatibility", "calling", "coverage", "setup"]);
-    expect(guide.comparison.rows).toHaveLength(5);
-    expect(guide.comparison.rows.map(row => row[1])).toEqual(["$5.99 · 3GB / 30 days", "$6.00 · 3GB / 7 days", "$9.90 · 5GB / 30 days", "$12.99 · 3GB / 15 days", "About €30 for 3GB used"]);
-    expect(guide.comparison.rows[0]?.[2]).toContain("$7.99 / $11.99");
-    expect(guide.comparison.rows[1]?.[2]).toContain("$8.00 / $11.50");
-    expect(guide.comparison.rows[3]?.[3]).toContain("$56.24");
-    expect(guide.comparison.rows[4]?.[3]).toBe("Not offered");
+    expect(guide.sections.map((section) => section.id)).toEqual(["price", "short-trip", "long-trip", "unlimited", "regional", "compatibility", "calling", "coverage", "setup"]);
+    expect(guide.comparison.rows).toHaveLength(3);
+    expect(guide.comparison.rows.map(row => row[1])).toEqual(["Saily", "Saily", "GigSky"]);
+    expect(guide.comparison.rows[0]?.[2]).toContain("$5.99");
+    expect(guide.comparison.rows[1]?.[2]).toContain("$7.99");
+    expect(guide.comparison.rows[2]?.[2]).toContain("$56.24");
+    expect(guide.comparison.rows[2]?.[3]).toContain("Yesim");
+    expect(guide.facts.map(fact => fact.label)).toEqual(["Short trip", "Longer trip", "Heavy data use"]);
     expect(guide.sections.find((section) => section.id === "short-trip")?.paragraphs.join(" ")).toContain("$5.99");
     expect(guide.sections.find((section) => section.id === "long-trip")?.paragraphs.join(" ")).toContain("$11.50");
+    for (const section of guide.sections.filter(section => ["short-trip", "long-trip", "unlimited", "regional"].includes(section.id))) {
+      expect(section.paragraphs.some(paragraph => /My choice: (Saily|Airalo|GigSky)\./.test(paragraph))).toBe(true);
+    }
+    expect(guide.sections.find(section => section.id === "compatibility")?.externalLinks?.[0]?.href).toBe("https://www.airalo.com/how-airalo-works/device-compatibility");
     expect(guide.sections.find((section) => section.id === "unlimited")?.paragraphs.join(" ")).toContain("$56.24");
     expect(guide.faqs.length).toBeGreaterThanOrEqual(8);
     expect(guide.related).toHaveLength(6);
