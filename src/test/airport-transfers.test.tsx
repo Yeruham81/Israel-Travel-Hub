@@ -131,6 +131,23 @@ describe("private Ben Gurion transfers", () => {
     expect(fetchSpy).toHaveBeenCalledOnce();
   });
 
+  it("tracks all four booking brands independently across hub and four route pages", () => {
+    const pageIds = ["airport-private-transfers", "airport-route-jerusalem", "airport-route-tel-aviv", "airport-route-haifa", "airport-route-dead-sea"];
+    const expectedIds = ["airport-kiwitaxi", "airport-welcome", "airport-intui", "airport-gettransfer"];
+    const urls: string[] = [];
+    for (const pageId of pageIds) {
+      const links = linksForPage(pageId).filter(link => expectedIds.includes(link.id));
+      expect(links.map(link => link.id)).toEqual(expectedIds);
+      for (const link of links) {
+        expect(link.isAffiliate).toBe(true);
+        expect(link.url).toMatch(/^https:\/\/(?:[a-z0-9-]+\.)?(?:tpm\.li|tp\.st)\/[A-Za-z0-9]+/);
+        if (pageId !== "airport-private-transfers") expect(affiliateConfig[`${link.id}@${pageId}`]?.trackingUrl).toBe(link.url);
+        urls.push(link.url);
+      }
+    }
+    expect(new Set(urls).size).toBe(20);
+  });
+
   it("shows four branded platform banners without invented affiliate attribution or transferring personal details", async () => {
     await renderAirport();
     const platforms = linksForPage("airport-private-transfers");
