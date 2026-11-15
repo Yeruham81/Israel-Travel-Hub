@@ -4,11 +4,11 @@ import { Breadcrumbs, FaqList } from "@/components/Guide";
 import { TransferQuoteForm } from "@/components/TransferQuoteForm";
 import { GuidePhotoCredit } from "@/components/TravelGuide";
 import { getAirportRouteGuide } from "@/data/airportRoutes";
-import { airportHomepageRoutePhotos, airportTransferBenefits, airportTransferChecklist, airportTransferPhotos } from "@/data/airportTransfers";
+import { AIRPORT_TRANSFER_UPDATED_DATE, airportHomepageRoutePhotos, airportTransferBenefits, airportTransferChecklist, airportTransferPhotos } from "@/data/airportTransfers";
 import { travelGuides } from "@/data/travelGuides";
 import { airportTransferNav } from "@/data/nav";
 import { AirportBookingPlatforms } from "@/components/AirportBookingPlatforms";
-import { AIRPORT_TRANSFER_CHECK_DATE, airportTransferRoutes, travelGuidePaths, type AirportTransferRouteId } from "@/data/registry";
+import { airportTransferRoutes, travelGuidePaths, type AirportTransferRouteId } from "@/data/registry";
 import { CANONICAL_ORIGIN, jsonLd, pageMeta } from "@/lib/site";
 import { authorLd } from "@/lib/author";
 import { CompactCurrencyEquivalents } from "@/components/CurrencyRates";
@@ -78,6 +78,7 @@ export function AirportRoutePage({ id }: { id: AirportTransferRouteId }) {
           <p className="eyebrow">Private airport transfer · TLV</p>
           <h1 className="guide-page-title mt-3">{guide.title}</h1>
           <p data-guide-intro className="mt-4 text-lg leading-relaxed text-muted-foreground">{guide.intro}</p>
+          <PageUpdated date={AIRPORT_TRANSFER_UPDATED_DATE} />
           <div className="mt-4 flex flex-wrap items-center gap-x-6 gap-y-3 rounded-xl border bg-secondary/35 p-3 sm:p-4" data-testid="route-starting-rate">
             <div className="min-w-0">
               <p className="text-xs font-medium text-muted-foreground">One-way weekday fare</p>
@@ -94,7 +95,6 @@ export function AirportRoutePage({ id }: { id: AirportTransferRouteId }) {
           <p className="mt-2 text-xs leading-relaxed text-muted-foreground">Larger vehicles for groups and families can be provided, requiring a separate quote.</p>
           <p className="mt-2 text-xs leading-relaxed text-muted-foreground" data-testid="airport-route-fx-note">Full price is confirmed in advance. All fares are quoted and charged in ILS. USD and EUR amounts are approximate, based on current exchange rates.</p>
           <a href="#request-quote" onClick={focusQuote} className="mt-4 inline-flex min-h-11 items-center justify-center rounded-lg bg-navy px-5 py-2.5 text-sm font-semibold text-navy-foreground transition-colors hover:bg-navy/90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">Request a personal quote</a>
-          <PageUpdated date={AIRPORT_TRANSFER_CHECK_DATE} />
         </GuideHeroLayout>
       </header>
       <AuthorCard />
