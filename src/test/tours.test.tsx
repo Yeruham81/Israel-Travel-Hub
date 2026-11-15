@@ -38,6 +38,27 @@ async function renderPage(path: string) {
 }
 
 describe("shared ordinary tour catalog", () => {
+  it("keeps filtered tour category cards in pairs without hiding matching products", async () => {
+    const candidate = tourCategories.flatMap(category =>
+      toursForCategory(category.id).filter(tour => !isOwnerTour(tour)).map(tour => {
+        const query = tour.title.slice(0, 60);
+        const visible = filterTours(category.id, { q: query }).filter(item => !isOwnerTour(item));
+        return { categoryId: category.id, query, visible };
+      })
+    ).find(item => item.visible.length > 0 && item.visible.length % 2 === 1);
+    expect(candidate, "At least one tour category should have a filter with an odd tour count").toBeDefined();
+    const router = await renderPage(`${tourCategoryPaths[candidate!.categoryId]}?q=${encodeURIComponent(candidate!.query)}`);
+    const grid = screen.getByRole("list", { name: "External tours" });
+    expect(within(grid).getAllByTestId("tour-card")).toHaveLength(candidate!.visible.length);
+    expect(grid.children.length % 2).toBe(0);
+    expect(within(grid).getByTestId("tour-companion-card")).toBeInTheDocument();
+    fireEvent.click(within(grid).getByRole("button", { name: "Show all tours" }));
+    await waitFor(() => expect(router.state.location.search).toEqual({}));
+    const fullCount = toursForCategory(candidate!.categoryId).filter(tour => !isOwnerTour(tour)).length;
+    expect(screen.getAllByTestId("tour-card")).toHaveLength(fullCount);
+    expect(screen.queryByTestId("tour-companion-card")).toBeNull();
+  });
+
   it("avoids repeated editorial photos but retains Moshe portraits at separated top and bottom sections", async () => {
     const router = routerAt(tourCategoryPaths.jerusalem);
     await router.load();
