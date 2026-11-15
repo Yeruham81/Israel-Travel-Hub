@@ -90,8 +90,9 @@ export function AirportRoutePage({ id }: { id: AirportTransferRouteId }) {
               <p className="mt-1 text-xs text-muted-foreground">Per vehicle · up to 4 passengers</p>
             </div>
           </div>
-          <p className="mt-2 text-xs leading-relaxed text-muted-foreground">Night, weekend and holiday surcharges may apply. Larger vehicles need a separate quote. The full fare is confirmed in advance.</p>
-          <p className="mt-1 text-xs leading-relaxed text-muted-foreground" data-testid="airport-route-fx-note">USD and EUR amounts are approximate, based on reference exchange rates. All fares are quoted in ILS.</p>
+          <p className="mt-2 text-xs leading-relaxed text-muted-foreground">Night, weekend and holiday surcharges may apply.</p>
+          <p className="mt-2 text-xs leading-relaxed text-muted-foreground">Larger vehicles for groups and families can be provided, requiring a separate quote.</p>
+          <p className="mt-2 text-xs leading-relaxed text-muted-foreground" data-testid="airport-route-fx-note">Full price is confirmed in advance. All fares are quoted and charged in ILS. USD and EUR amounts are approximate, based on current exchange rates.</p>
           <a href="#request-quote" onClick={focusQuote} className="mt-4 inline-flex min-h-11 items-center justify-center rounded-lg bg-navy px-5 py-2.5 text-sm font-semibold text-navy-foreground transition-colors hover:bg-navy/90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">Request a personal quote</a>
           <PageUpdated date={AIRPORT_TRANSFER_CHECK_DATE} />
         </GuideHeroLayout>
@@ -101,10 +102,10 @@ export function AirportRoutePage({ id }: { id: AirportTransferRouteId }) {
       <section id="journey-details" aria-labelledby="journey-h" className="mt-9 scroll-mt-24">
         <h2 id="journey-h" className="text-2xl font-semibold">Your private airport pickup</h2>
         <p className="mt-2 max-w-4xl text-sm leading-relaxed text-muted-foreground">I can arrange a vehicle matched to your party and luggage, with an agreed meeting point and hotel or address drop-off. Send your flight details so pickup can be coordinated with your landing time.</p>
-        <div className="mt-4 grid grid-cols-3 gap-2 rounded-2xl border bg-secondary/25 p-3 sm:gap-4 sm:p-4">
+        <div className="mt-4 grid grid-cols-3 gap-4 rounded-2xl border bg-secondary/25 p-3 sm:gap-6 sm:p-4 lg:gap-8">
           {airportTransferBenefits.map((benefit, index) => {
             const Icon = benefitIcons[index]!;
-            return <div key={benefit.title} className="min-w-0 text-center">
+            return <div key={benefit.title} className="min-w-0 px-0.5 text-center sm:px-2 lg:px-3">
               <Icon className="mx-auto size-5 text-primary sm:size-6" aria-hidden />
               <h3 className="mt-2 text-xs font-semibold leading-snug sm:text-sm">{benefit.title}</h3>
               <p className="mt-1 hidden text-xs leading-relaxed text-muted-foreground sm:block">{benefit.text}</p>
