@@ -13,7 +13,7 @@ import caesareaTheatre from "@/assets/home/caesarea-theatre.webp";
 import roshHanikraGrottoes from "@/assets/home/rosh-hanikra-grottos.jpg";
 import { migrationPhotos } from "@/data/guideMigrationPhotos";
 import { portShoreGuides, type ShoreReadingGuide } from "@/data/shoreReading";
-import { filterShoreServices, shoreListedPrice, type ShoreServiceSearch } from "@/lib/shore-services";
+import { filterShoreServices, shoreListedPrice, shoreListedRating, type ShoreServiceSearch } from "@/lib/shore-services";
 
 type ItineraryDetails = {
   photo: GuidePhoto;
@@ -210,12 +210,27 @@ export function getShorePort(id: ShorePortId) {
 /** Editorial display details are separate from registry products and booking links. */
 export function getShoreCatalog(portId: ShorePortId, filters: ShoreServiceSearch = {}) {
   const port = getShorePort(portId);
-  return filterShoreServices(portId, filters).sort((a, b) => Number(Boolean(b.partner)) - Number(Boolean(a.partner))).map((service) => {
+  return filterShoreServices(portId, filters).sort((a, b) => {
+    // Reviewed + priced listings first, then reviewed-only, priced-only and finally unverified listings.
+    if (Boolean(a.partner) !== Boolean(b.partner)) return Number(Boolean(b.partner)) - Number(Boolean(a.partner));
+    if (!a.partner || !b.partner) return 0;
+    const aRating = shoreListedRating(a.product);
+    const bRating = shoreListedRating(b.product);
+    const aPrice = shoreListedPrice(a.product);
+    const bPrice = shoreListedPrice(b.product);
+    const aScore = Number(Boolean(aRating)) * 2 + Number(Boolean(aPrice));
+    const bScore = Number(Boolean(bRating)) * 2 + Number(Boolean(bPrice));
+    if (aScore !== bScore) return bScore - aScore;
+    if (aRating?.value !== bRating?.value) return (bRating?.value || 0) - (aRating?.value || 0);
+    if (aRating?.count !== bRating?.count) return (bRating?.count || 0) - (aRating?.count || 0);
+    return a.id.localeCompare(b.id);
+  }).map((service) => {
     const itinerary = port.itineraries.find((item) => item.id === service.itineraryId);
     const guidedFormat = service.product?.groupFormat === "private" ? "Private guided excursion" : service.product?.groupFormat === "shared" ? "Shared guided excursion" : "Guided excursion";
     return {
       ...service, itinerary,
       listedPrice: shoreListedPrice(service.product),
+      rating: shoreListedRating(service.product),
       duration: service.product?.durationLabel || "Full day",
       groupLabel: service.kind === "private-driver" ? "Private vehicle" : service.product?.groupFormat === "private" ? "Private tour" : service.product?.groupFormat === "shared" ? "Shared tour" : "Confirm group size",
       includesLabel: service.product?.includesLabel || "Driver & vehicle",
