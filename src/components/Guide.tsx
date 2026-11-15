@@ -327,7 +327,7 @@ function GuideCardPhoto({ photo }: { photo?: { src: string; alt: string } | null
  * Six guide cards use two desktop rows of three; smaller groups use pairs.
  * Service/action links keep their own compact link-card presentation.
  */
-export function RelatedLinks({ title = "Plan the rest of your trip", items, currentPath, illustrated = false }: { title?: string; items: { label: string; to: LinkProps["to"]; note?: string }[]; currentPath?: string; illustrated?: boolean }) {
+export function RelatedLinks({ title = "Plan the rest of your trip", items, currentPath, illustrated = false, maxPhotoCards = 4 }: { title?: string; items: { label: string; to: LinkProps["to"]; note?: string }[]; currentPath?: string; illustrated?: boolean; maxPhotoCards?: number }) {
   // Use the same licensed, locally stored guide photographs as the taxi and Shabbat
   // recommendation cards. Only explicitly selected related links are illustrated.
   // Keep service/directory links as compact secondary navigation rather than dropping them.
@@ -344,7 +344,7 @@ export function RelatedLinks({ title = "Plan the rest of your trip", items, curr
       const guide = guideDirectory.find((entry) => normalized(String(entry.to)) === normalized(String(item.to)) && entry.photo);
       return guide ? [{ item, guide }] : [];
     });
-    const pictured = uniqueGuideCardPhotos(withPhoto.slice(0, 4), [guideDirectory.find(guide => normalized(String(guide.to)) === normalized(currentPath || ""))?.photo?.src || ""]);
+    const pictured = uniqueGuideCardPhotos(withPhoto.slice(0, maxPhotoCards), [guideDirectory.find(guide => normalized(String(guide.to)) === normalized(currentPath || ""))?.photo?.src || ""]);
     const picturedPaths = new Set(pictured.map(({ item }) => normalized(String(item.to))));
     const remaining = unique.filter((item) => !picturedPaths.has(normalized(String(item.to))));
     if (!pictured.length && !remaining.length) return null;
