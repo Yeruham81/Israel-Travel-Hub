@@ -35,6 +35,10 @@ describe("four dedicated airport transfer routes", () => {
     expect(screen.getByRole("link", { name: "Request a personal quote" })).toHaveClass("bg-navy");
     const hero = screen.getByTestId("guide-hero-layout");
     expect(within(hero).getByTestId("guide-hero-media").querySelector("img")).toHaveAttribute("src", expect.stringMatching(/transfer-/));
+    const updateLine = within(hero).getByText(/^Updated/);
+    expect(updateLine).toHaveTextContent("Updated November 2026");
+    expect(updateLine.querySelector("time")).toHaveAttribute("datetime", "2026-11-15");
+    expect(updateLine.compareDocumentPosition(screen.getByTestId("route-starting-rate"))).toBe(Node.DOCUMENT_POSITION_FOLLOWING);
     const pickup = screen.getByRole("region", { name: "Your private airport pickup" });
     expect(pickup).toHaveTextContent("Agreed price, no extra charges");
     expect(pickup).toHaveTextContent("Flight tracking");
@@ -70,7 +74,14 @@ describe("four dedicated airport transfer routes", () => {
     expect(screen.getByRole("heading", { name: guide.planningTitle })).toBeInTheDocument();
     for (const area of guide.areas) expect(screen.getByRole("heading", { name: area.title })).toBeInTheDocument();
     const otherRoutes = screen.getByRole("region", { name: "Other airport transfer destinations" });
-    for (const other of airportTransferRoutes.filter((item) => item.id !== route.id)) expect(within(otherRoutes).getByRole("link", { name: `Ben Gurion to ${getAirportRouteGuide(other.id).city}` })).toHaveAttribute("href", other.path);
+    const destinationLinks = within(otherRoutes).getAllByRole("link");
+    expect(destinationLinks).toHaveLength(4);
+    for (const other of airportTransferRoutes.filter((item) => item.id !== route.id)) {
+      const link = destinationLinks.find((item) => item.getAttribute("href") === other.path);
+      expect(link).toHaveTextContent(getAirportRouteGuide(other.id).city);
+      expect(link).toHaveClass("rounded-xl", "shadow-sm");
+    }
+    expect(within(otherRoutes).getByRole("link", { name: /All destinations/ })).toHaveAttribute("href", "/airport-transfers/");
     expect(getSource(route.sourceId).url).toBe(""); // First-party source notes are retained internally, not linked as external references.
     expect(guide.rate).toBe(airportTransferRates.find((rate) => rate.id === route.id));
     const platformSection = screen.getByRole("region", { name: "Prefer to book online?" });
