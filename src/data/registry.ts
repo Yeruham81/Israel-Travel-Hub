@@ -1363,8 +1363,8 @@ export const affiliateConfig: Record<string, { trackingUrl: string } | undefined
   // END verified Travelpayouts Food & Eilat page-specific deeplinks
   // Configure an approved product-specific affiliate URL once; all category appearances use it.
   ...Object.fromEntries(tourBookingOffers.map((offer) => [offer.id, undefined])),
-  "shore-viator-haifa-jerusalem-bethlehem": undefined,
-  "shore-viator-ashdod-jerusalem-bethlehem": undefined,
+  "shore-viator-haifa-jerusalem-bethlehem": { trackingUrl: "https://viator.tpm.li/iJZFKx2w" },
+  "shore-viator-ashdod-jerusalem-bethlehem": { trackingUrl: "https://viator.tpm.li/uNQSJIOz" },
   // Shore products: replace each undefined value with { trackingUrl: "your approved product link" }.
   "shore-tourist-haifa-jerusalem": undefined,
   "shore-tourist-haifa-tel-aviv": undefined,
@@ -1380,13 +1380,13 @@ export const affiliateConfig: Record<string, { trackingUrl: string } | undefined
   "shore-compass-ashdod-masada": undefined,
   "shore-compass-haifa-galilee": undefined,
   "shore-compass-haifa-akko": undefined,
-  "shore-gyg-haifa-akko": undefined,
-  "shore-gyg-haifa-galilee": undefined,
-  "shore-gyg-ashdod-jerusalem-bethlehem": undefined,
-  "shore-gyg-ashdod-galilee": undefined,
-  "shore-gyg-ashdod-masada": undefined,
-  "shore-viator-haifa-galilee": undefined,
-  "shore-viator-ashdod-jerusalem-dead-sea": undefined,
+  "shore-gyg-haifa-akko": { trackingUrl: "https://getyourguide.tpm.li/qGy1COJF" },
+  "shore-gyg-haifa-galilee": { trackingUrl: "https://getyourguide.tpm.li/NL32F22L" },
+  "shore-gyg-ashdod-jerusalem-bethlehem": { trackingUrl: "https://getyourguide.tpm.li/CLMuT8Ml" },
+  "shore-gyg-ashdod-galilee": { trackingUrl: "https://getyourguide.tpm.li/fUbMjGbM" },
+  "shore-gyg-ashdod-masada": { trackingUrl: "https://getyourguide.tpm.li/dqU4jiqp" },
+  "shore-viator-haifa-galilee": { trackingUrl: "https://viator.tpm.li/qXL1yc0E" },
+  "shore-viator-ashdod-jerusalem-dead-sea": { trackingUrl: "https://viator.tpm.li/ikBox9CI" },
 
   "esim-airalo": { trackingUrl: "https://airalo.tpm.li/JmHFDV3v" },
   "esim-airalo-compatibility": { trackingUrl: AIRALO_COMPATIBILITY_AFFILIATE_URL },
