@@ -30,7 +30,7 @@ async function create(target, subId) {
     return { error: String(row?.message || row?.code || data.code || "unsupported").slice(0, 160) };
   }
   const url = new URL(row.partner_url);
-  if (url.protocol !== "https:" || url.username || url.password || !["welcome.tpm.li", "welcomepickups.tpm.li", "welcome.tp.st", "welcomepickups.tp.st"].includes(url.hostname)) {
+  if (url.protocol !== "https:" || url.username || url.password || !["tpm.li", "tp.st", "welcome.tpm.li", "welcomepickups.tpm.li", "welcome.tp.st", "welcomepickups.tp.st"].includes(url.hostname)) {
     return { error: "Unexpected approved-link domain " + url.hostname };
   }
   return { trackingUrl: url.toString() };
