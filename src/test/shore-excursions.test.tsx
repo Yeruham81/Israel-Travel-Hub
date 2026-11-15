@@ -86,10 +86,15 @@ describe("shore excursions", () => {
     expect(externalSection!.compareDocumentPosition(ownerSection!)).toBe(Node.DOCUMENT_POSITION_FOLLOWING);
     expect(externalSection?.querySelector("ul")).toHaveClass("md:grid-cols-2");
     expect(ownerSection?.querySelector("ul")).not.toHaveClass("md:grid-cols-2");
-    const privateTerms = ownerSection?.querySelector('[data-testid="owner-price-terms"]');
-    expect(privateTerms).toHaveTextContent("Published weekday private transport rates are per vehicle for up to four passengers.");
-    expect(privateTerms).not.toHaveTextContent(/guiding|admission|meals|tips|confirm the full price/i);
-    expect(privateTerms).not.toHaveTextContent("External starting prices");
+    expect(ownerSection?.querySelector('[data-testid="owner-price-terms"]')).toBeNull();
+    expect(ownerSection).not.toHaveTextContent("Published weekday private transport rates");
+    expect(ownerSection?.querySelector("ul")).toHaveClass("auto-rows-fr");
+    for (const card of cards) {
+      expect(card).toHaveClass("h-full");
+      expect(card.querySelector("article")).toHaveClass("h-full");
+      expect(card.querySelector("img")?.parentElement).toHaveClass("relative", "overflow-hidden");
+      expect(card.querySelector("img")).toHaveClass("absolute", "object-cover");
+    }
     expect(ownerSection).not.toHaveTextContent("not live quotes");
     expect(container.querySelector("#itineraries > p[data-testid]")).toBeNull();
 
@@ -101,7 +106,7 @@ describe("shore excursions", () => {
     expect(externalSection).not.toHaveTextContent("My published starting rates");
     expect(externalSection?.querySelector("#partner-tours-h")).toHaveTextContent(`Explore ${port.name} shore excursions`);
     expect(externalSection).toHaveTextContent("Compare guided day trips and small-group experiences");
-    expect(externalSection).not.toHaveTextContent("These tours are offered by independent operators and booked on their own booking platforms.");
+    expect(externalSection?.querySelector('[data-testid="partner-price-terms"]')?.textContent).toMatch(/^These shore excursions are provided by independent tour operators and booked through external booking websites\./);
     expect(container.querySelector("#itineraries")?.textContent).not.toContain("Compare the route, duration, tour format and starting price.");
     for (const externalCard of externalCards) {
       expect(within(externalCard).getByRole("img")).toHaveAttribute("alt", expect.any(String));
@@ -136,6 +141,11 @@ describe("shore excursions", () => {
     expect(nodes.every(Boolean)).toBe(true);
     for (let i = 1; i < nodes.length; i++) expect(nodes[i - 1]!.compareDocumentPosition(nodes[i]!)).toBe(Node.DOCUMENT_POSITION_FOLLOWING);
     expect(screen.getByLabelText("Departure & return port")).toHaveValue(`${port.name} Port`);
+    const itineraryField = screen.getByLabelText("Requested itinerary *").closest("label");
+    const passengersField = screen.getByLabelText("Passengers *").closest("label");
+    expect(itineraryField).not.toHaveClass("sm:col-span-2");
+    expect(passengersField).not.toHaveClass("sm:col-span-2");
+    expect(itineraryField?.nextElementSibling).toBe(passengersField);
     expect(screen.getByRole("link", { name: "Privacy Policy" })).toHaveAttribute("href", "/privacy-policy/");
     expect(screen.queryByText(/Prefer an online form|existing .*contact form/)).not.toBeInTheDocument();
     const alternative = services.find((card) => card.dataset["productId"] === `shore-viator-${id}-jerusalem-bethlehem`)!;
