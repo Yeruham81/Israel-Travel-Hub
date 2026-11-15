@@ -22,7 +22,7 @@ export function AirportBookingPlatforms({ pageId = "airport-private-transfers", 
   return <section id="booking-platforms" aria-labelledby="platforms-h" className={compact ? "mt-9" : "mt-16 rounded-2xl border p-5 sm:p-8"}>
     {!compact && <p className="eyebrow">More ways to arrange your ride</p>}
     <h2 id="platforms-h" className={compact ? "text-2xl font-semibold" : "mt-2 text-3xl"}>{compact ? "Prefer to book online?" : "Prefer to book through a platform?"}</h2>
-    <p className={compact ? "mt-2 max-w-3xl text-sm leading-relaxed text-muted-foreground" : "mt-3 leading-relaxed text-muted-foreground"}>{compact ? (destination ? "Compare independent booking options for your transfer to " + destination + ". Check the final price and terms on the provider’s website." : "Find and book an airport transfer with an independent provider. Compare options, then confirm the price and booking terms on its website.") : `Explore independent booking platforms for your airport pickup${destination ? ` to ${destination}` : ""}. The starting prices on this site are for my private transfer service; each platform sets its own prices, availability and terms. Enter your exact route and trip details there.`}</p>
+    <p className={compact ? "mt-2 max-w-3xl text-sm leading-relaxed text-muted-foreground" : "mt-3 leading-relaxed text-muted-foreground"}>{compact ? (destination ? "You can also search for a private transfer to " + destination + " on one of the booking websites below." : "You can also search for an airport transfer on one of the booking websites below.") : `Explore independent booking platforms for your airport pickup${destination ? ` to ${destination}` : ""}. The starting prices on this site are for my private transfer service; each platform sets its own prices, availability and terms. Enter your exact route and trip details there.`}</p>
     <div className={compact ? "mt-4 grid gap-3 sm:grid-cols-2" : "mt-6 grid gap-4 sm:grid-cols-2"}>{platforms.map((platform) => {
       const logo = partners.find((partner) => partner.id === platform.partnerId)?.logo;
       const hubOffer = hubOffers[platform.partnerId || ""];
@@ -33,8 +33,9 @@ export function AirportBookingPlatforms({ pageId = "airport-private-transfers", 
         {!compact && <p className="text-xs font-semibold uppercase tracking-widest opacity-70">Private transfer booking</p>}
         <h3 className={compact ? "mt-1 font-sans text-lg font-bold tracking-tight" : "mt-2 font-sans text-2xl font-bold tracking-tight"}>{platform.providerName}</h3>
         <p className={compact ? "mt-1 line-clamp-2 flex-1 text-sm leading-relaxed" : "mt-3 flex-1 text-sm leading-relaxed"}>{compact ? (hubOffer?.description ?? platform.summary) : platform.summary}</p>
-        <span className={compact ? "mt-3 inline-flex w-fit min-h-10 items-center rounded-lg bg-navy px-4 py-2 text-sm font-semibold text-navy-foreground transition-colors group-hover:bg-navy/85" : "mt-5 text-sm font-semibold underline underline-offset-4"}>{compact ? (hubOffer?.action ?? "View options") : platform.ctaLabel}</span><span className="sr-only"> (opens in a new tab)</span>
+        <span className={compact ? "mt-3 inline-flex min-h-10 w-fit self-center items-center justify-center rounded-lg bg-navy px-4 py-2 text-center text-sm font-semibold text-navy-foreground transition-colors group-hover:bg-navy/85" : "mt-5 text-sm font-semibold underline underline-offset-4"}>{compact ? (hubOffer?.action ?? "View options") : platform.ctaLabel}</span><span className="sr-only"> (opens in a new tab)</span>
       </a>;
     })}</div>
+    {compact && <p className="mt-3 text-xs leading-relaxed text-muted-foreground" data-testid="airport-external-providers-note">These are external, independently operated booking websites. Each provider sets its own prices and terms. Please review all details carefully before booking.</p>}
   </section>;
 }
