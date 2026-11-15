@@ -8,6 +8,8 @@ import jerusalemMamilla from "@/assets/jerusalem/mamilla.webp";
 import telAvivRothschild from "@/assets/tel-aviv/rothschild.webp";
 import tiberiasWaterfront from "@/assets/tiberias/waterfront.webp";
 import haifaPort from "@/assets/home/haifa-port.webp";
+import haifaPanorama from "@/assets/haifa/panorama.webp";
+import caesareaTheatre from "@/assets/home/caesarea-theatre.webp";
 import roadTrip from "@/assets/home/road-trip.webp";
 import jerusalemDowntown from "@/assets/jerusalem/downtown.webp";
 import tiberiasSunrise from "@/assets/tiberias/sunrise.webp";
@@ -46,6 +48,8 @@ const guideCardAlternatives: Record<string, { src: string; alt: string }[]> = {
   "attraction-attractions-in-tel-aviv": [{ src: telAvivRothschild, alt: "Rothschild Boulevard, an area for exploring Tel Aviv's city attractions" }],
   "attraction-sea-of-galilee": [{ src: tiberiasWaterfront, alt: "Tiberias waterfront on the Sea of Galilee" }],
   "attraction-haifa": [{ src: haifaPort, alt: "Haifa port and waterfront district" }],
+  "shore-haifa": [{ src: haifaPanorama, alt: "Panoramic Haifa Bay and Mount Carmel, near the Haifa cruise port" }],
+  caesarea: [{ src: caesareaTheatre, alt: "Ancient Roman theatre at Caesarea National Park on the Mediterranean coast" }],
   travelTips: [{ src: roadTrip, alt: "Road trip through Israel, illustrating practical trip planning" }],
   calendar: [{ src: jerusalemDowntown, alt: "Downtown Jerusalem, a setting for local events and city activities" }],
   yardenit: [{ src: tiberiasSunrise, alt: "Sunrise over the Sea of Galilee near the southern Jordan River region" }],
