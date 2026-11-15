@@ -83,19 +83,19 @@ export function ShoreServiceCatalog({ portId, filters, onFilterChange, itinerary
             </div>
           </li>}
         </ul>
-        <p className="mt-5 text-xs leading-relaxed text-muted-foreground" data-testid="partner-price-terms">Tour details, availability, prices and booking conditions are set by the tour operators and may change. Check the current itinerary, port pickup, return and cancellation terms with the booking provider.</p>
+        <p className="mt-5 text-xs leading-relaxed text-muted-foreground" data-testid="partner-price-terms">These shore excursions are provided by independent tour operators and booked through external booking websites. Tour itineraries, availability, prices and booking conditions may change. Before booking, check the current itinerary, port pickup, return-to-ship arrangements and cancellation policy directly with the booking provider.</p>
       </section>}
       {privateTours.length > 0 && <section id="my-private-days" aria-labelledby="owner-tours-h" data-section="moshe-private-tours" className="mt-10 scroll-mt-24">
         <p className="text-xs font-bold uppercase tracking-widest text-primary">Personally arranged with Moshe Barak</p>
         <h2 id="owner-tours-h" className="mt-2 text-3xl font-semibold">My private day trips from {port.name} Port</h2>
         <p className="mt-3 max-w-3xl text-sm leading-relaxed text-muted-foreground">Enjoy a flexible private car-and-driver day, with pickup and return arranged around your ship's schedule and your preferred stops.</p>
-        <ul aria-label={"My private day trips from " + port.name + " Port"} className="mt-4 grid gap-3">
+        <ul aria-label={"My private day trips from " + port.name + " Port"} className="mt-4 grid auto-rows-fr gap-3">
           {privateTours.map(service => {
             const itinerary = service.itinerary;
             if (!itinerary) return null;
-            return <li key={service.id} data-testid="shore-service-card" data-service-id={service.id} data-product-id={service.productId} data-operator-id={service.operator?.id} data-booking-platform="direct" data-service-kind={service.kind} className={"min-w-0 scroll-mt-24 overflow-hidden rounded-xl border bg-card " + (itineraryId === itinerary.id ? "border-primary ring-1 ring-primary" : "")}>
-              <article className="flex min-w-0 flex-col sm:flex-row sm:items-stretch">
-                <img src={service.photo.src} alt={service.photo.alt} width={320} height={180} loading="lazy" decoding="async" className="h-36 w-full object-cover sm:h-auto sm:w-48 sm:shrink-0 lg:w-56" />
+            return <li key={service.id} data-testid="shore-service-card" data-service-id={service.id} data-product-id={service.productId} data-operator-id={service.operator?.id} data-booking-platform="direct" data-service-kind={service.kind} className={"h-full min-w-0 scroll-mt-24 overflow-hidden rounded-xl border bg-card " + (itineraryId === itinerary.id ? "border-primary ring-1 ring-primary" : "")}>
+              <article className="flex h-full min-w-0 flex-col sm:flex-row sm:items-stretch">
+                <div className="relative h-36 w-full shrink-0 overflow-hidden bg-secondary/20 sm:h-auto sm:w-48 lg:w-56"><img src={service.photo.src} alt={service.photo.alt} width={320} height={180} loading="lazy" decoding="async" className="absolute inset-0 h-full w-full object-cover" /></div>
                 <div className="flex min-w-0 flex-1 flex-col gap-3 p-3.5 lg:flex-row lg:items-center lg:gap-5 lg:px-5">
                   <div className="min-w-0 flex-1">
                     <h3 className="text-base font-semibold leading-snug">{service.title}</h3>
@@ -114,7 +114,6 @@ export function ShoreServiceCatalog({ portId, filters, onFilterChange, itinerary
             </div>
           </li>}
         </ul>
-        <p className="mt-4 text-xs leading-relaxed text-muted-foreground" data-testid="owner-price-terms">Published weekday private transport rates are per vehicle for up to four passengers. Larger vehicles for families and groups can be arranged in advance.</p>
       </section>}
     </>}
   </div>;
