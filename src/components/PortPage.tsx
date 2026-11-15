@@ -1,4 +1,5 @@
 import { Link } from "@tanstack/react-router";
+import { CalendarDays, Compass, Smartphone, TrainFront } from "lucide-react";
 import { useState } from "react";
 import { Breadcrumbs, Checklist, FaqList, Section, SourceList } from "@/components/Guide";
 import { GuidePhotoCredit } from "@/components/TravelGuide";
@@ -6,7 +7,7 @@ import { GuideHeroLayout, GuideHeroMedia } from "@/components/GuideHeroMedia";
 import { ShoreQuoteForm } from "@/components/ShoreQuoteForm";
 import { airportTransferPhotos } from "@/data/airportTransfers";
 import { getShoreCatalog, getShorePort, shoreExcursionBenefits } from "@/data/shoreExcursions";
-import { publicSources, shorePorts, type ShorePortId } from "@/data/registry";
+import { publicSources, shorePorts, travelGuidePaths, type ShorePortId } from "@/data/registry";
 import { CANONICAL_ORIGIN, SITE_NAME, pageMeta } from "@/lib/site";
 import { AuthorCard } from "@/components/AuthorCard";
 import { PageUpdated } from "@/components/PageUpdated";
@@ -35,6 +36,14 @@ export function shorePortMeta(id: ShorePortId) {
 }
 
 const focusQuote = () => requestAnimationFrame(() => document.getElementById("request-quote")?.focus({ preventScroll: true }));
+
+const practicalGuides = [
+  { title: "Israel holidays & special dates", description: "Check closures and holiday schedules on your port-call date.", to: travelGuidePaths.calendar, icon: CalendarDays },
+  { title: "Travel eSIM for Israel", description: "Stay in contact with your driver or tour operator while ashore.", to: travelGuidePaths.esim, icon: Smartphone },
+  { title: "Getting around Israel", description: "Understand intercity journeys and practical onward transport.", to: travelGuidePaths.israel, icon: TrainFront },
+  { title: "Israel travel tips", description: "Plan what to bring, local essentials and a smoother sightseeing day.", to: travelGuidePaths.travelTips, icon: Compass },
+] as const;
+
 
 export function PortPage({ id, filters: routeSearch, onFilterChange }: { id: ShorePortId; filters: ShoreServiceSearch; onFilterChange: (filters: ShoreServiceSearch) => void }) {
   // The router also retains raw query keys; discard retired and invalid filters at the page boundary.
@@ -99,6 +108,21 @@ export function PortPage({ id, filters: routeSearch, onFilterChange }: { id: Sho
     <section aria-labelledby="ready-h" className="mt-14 rounded-2xl bg-navy p-6 text-navy-foreground sm:p-8"><h2 id="ready-h" className="text-3xl">Request an itinerary from {port.name}</h2><p className="mt-3 opacity-90">Send your ship's arrival and all-aboard times, party size and preferred route. I will reply with an itinerary and quote for your review.</p><a href="#request-quote" onClick={focusQuote} className="btn btn-light mt-5">Request a personal quote</a></section>
     {id === "ashdod" && <JerusalemClusterLinks pageKey="shore-ashdod" />}
     <ShoreReadingGuides guides={port.related} />
+    <section id="practical-cruise-guides" aria-labelledby="practical-cruise-guides-h" className="mt-10">
+      <h2 id="practical-cruise-guides-h" className="text-2xl font-semibold">Practical guides for your day ashore</h2>
+      <p className="mt-2 text-sm text-muted-foreground">Useful reading for planning your visit beyond the excursion itself.</p>
+      <ul className="mt-4 grid gap-3 sm:grid-cols-2">
+        {practicalGuides.map((guide) => { const Icon = guide.icon; return <li key={guide.to}>
+          <Link to={guide.to} className="group flex h-full min-w-0 items-start gap-3 rounded-xl border bg-secondary/25 p-3.5 transition-colors hover:border-primary/50 hover:bg-secondary/50 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
+            <span className="grid size-10 shrink-0 place-items-center rounded-lg bg-background text-primary"><Icon size={20} aria-hidden /></span>
+            <span className="min-w-0">
+              <span className="block text-sm font-semibold text-foreground group-hover:text-primary">{guide.title}</span>
+              <span className="mt-1 block text-xs leading-relaxed text-muted-foreground">{guide.description}</span>
+            </span>
+          </Link>
+        </li>; })}
+      </ul>
+    </section>
     <ShoreQuoteForm key={id} portId={id} itineraryId={itineraryId} onItineraryChange={setItineraryId} />
     <SourceList ids={shoreSourceIds(id)} intro="Product pages were checked for itinerary, duration and port pickup/return. External starting prices are dated reference snapshots, not live prices or confirmed availability. Published ILS rates apply only to my named day trips; external tours are booked on GetYourGuide or Viator under their own terms." />
     <details className="mt-10 rounded-xl border p-5"><summary className="cursor-pointer text-sm font-medium">Excursion image credits</summary><ul className="mt-3 space-y-3">{[...new Map(photos.map((photo) => [photo.src, photo])).values()].map((photo) => <li key={photo.src}><p className="text-sm">{photo.alt}</p><GuidePhotoCredit photo={photo} insideDisclosure /></li>)}</ul></details>
