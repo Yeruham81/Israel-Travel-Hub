@@ -16,6 +16,7 @@ import { heritageGuides } from "@/data/guideHeritage2026";
 import { journeyDestinationGuides } from "@/data/guideJourneys2026";
 import { migrationPhotos } from "@/data/guideMigrationPhotos";
 import { filterGuides, guideDirectory, travelGuides } from "@/data/travelGuides";
+import { attractionHubCards } from "@/data/attractionsHub";
 import { uniqueGuideCardPhotos } from "@/lib/guide-card-photos";
 import { repeatedPhotos } from "@/lib/photo-uniqueness";
 import { airportJourneyGuides } from "@/data/airportJourneyGuides";
@@ -63,19 +64,22 @@ describe("October planning, city and heritage guide migration", () => {
 
   it("makes every guide discoverable in the directory, with real local photographs", async () => {
     expect(ids).toHaveLength(16);
-    expect(guideDirectory).toHaveLength(69);
+    expect(guideDirectory).toHaveLength(49);
     expect(guideDirectory.some(guide => guide.id === "israel-holidays" && guide.to === "/travel-blog/israel-holidays/")).toBe(true);
     expect(new Set(guideDirectory.map(guide => guide.id)).size).toBe(guideDirectory.length);
     const router = await routerAt("/travel-blog/");
     const Hub = HubRoute.options.component!;
     const { container } = render(<RouterContextProvider router={router}><Hub /></RouterContextProvider>);
     const cards = container.querySelectorAll('[data-testid="guide-directory-card"]');
-    expect(cards).toHaveLength(69);
+    expect(cards).toHaveLength(49);
     const missing = uniqueGuideCardPhotos(guideDirectory.map(guide => ({ guide }))).filter(entry => !entry.cardPhoto).map(entry => entry.guide.id);
     expect(missing, "Every directory card must display a suitable actual image").toEqual([]);
     for (const card of cards) expect(card.querySelector('img[alt]')).not.toBeNull();
-    for (const id of ids) expect(container.querySelector(`a[href="${travelGuidePaths[id]}"]`)).not.toBeNull();
-    expect(filterGuides("Yardenit").some(guide => guide.to === travelGuidePaths.yardenit)).toBe(true);
+    for (const id of ids) {
+      if (travelGuidePaths[id].startsWith("/travel-blog/")) expect(container.querySelector(`a[href="${travelGuidePaths[id]}"]`)).not.toBeNull();
+    }
+    expect(filterGuides("Yardenit").some(guide => guide.to === travelGuidePaths.yardenit)).toBe(false);
+    expect(attractionHubCards.some(card => card.to === travelGuidePaths.yardenit)).toBe(true);
     expect(filterGuides("museum", "attractions").some(guide => guide.id === "haifaMuseums")).toBe(true);
     for (const photo of Object.values(migrationPhotos)) {
       const relative = photo.src.replace(/^\//, "").split("?")[0]!;

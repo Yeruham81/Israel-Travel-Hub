@@ -40,6 +40,13 @@ describe("generated XML sitemap and robots.txt", () => {
     expect(paths).toContain("/accommodation/");
     expect(paths).toContain("/travel-blog/jerusalem-to-bethlehem/");
     expect(paths).toContain("/attractions/");
+    for (const slug of ["old-city-jerusalem", "mount-of-olives", "mount-zion", "jaffa", "akko-acre", "rosh-hanikra", "mount-tabor", "capernaum", "tabgha", "mount-of-beatitudes", "magdala", "yardenit", "basilica-of-the-annunciation", "mount-precipice", "tel-megiddo", "masada", "ein-gedi", "qasr-el-yahud", "mitzpe-ramon-crater"]) {
+      expect(paths).toContain(`/attractions/${slug}/`);
+      expect(paths).not.toContain(`/travel-blog/${slug}/`);
+    }
+    for (const slug of ["attractions-in-tel-aviv", "dead-sea-attractions", "museums-in-jerusalem", "sea-of-galilee", "haifa"]) {
+      expect(paths).toContain(`/travel-blog/${slug}/`);
+    }
     const router = createRouter({ routeTree, context: { queryClient: new QueryClient() }, trailingSlash: "always" });
     for (const p of paths) {
       const matched = router.matchRoutes(p);

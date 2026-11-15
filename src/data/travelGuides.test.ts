@@ -78,7 +78,7 @@ describe("travel guide topic filters and prerender safety", () => {
   });
 
   it("defines a label for every directory topic and accepts every valid topic", () => {
-    expect(guideDirectory.length).toBeGreaterThan(50);
+    expect(guideDirectory.length).toBeGreaterThan(40);
     for (const topic of guideTopics) {
       expect(isGuideTopic(topic.id)).toBe(true);
       expect(getGuideTopicLabel(topic.id)).toBe(topic.label);

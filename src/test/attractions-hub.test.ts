@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
 import { attractionHubCards, attractionHubPhotos, attractionHubRegions, attractionPlanningPaths } from "@/data/attractionsHub";
 import { readFileSync } from "node:fs";
-import { attractionIds, attractionPath } from "@/data/attractionGuideTypes";
+import { attractionIds, attractionPath, isRegionalOverview } from "@/data/attractionGuideTypes";
 import { travelGuidePaths } from "@/data/registry";
 
 describe("Attractions hub redesign", () => {
@@ -16,7 +16,7 @@ describe("Attractions hub redesign", () => {
       expect(region.summary).toMatch(/^(Wander|Find|Take|Discover|Follow|Float)\b/);
       expect((region.navLabel ?? region.title).length).toBeLessThan(27);
       expect(region.image.src).toMatch(/^\/images\/attractions\/.*\.webp$/);
-      expect(region.cards.length).toBeGreaterThanOrEqual(2);
+      expect(region.cards.length).toBeGreaterThanOrEqual(1);
       expect(region.planning.length).toBeGreaterThanOrEqual(3);
       expect(region.planning.every((link) => String(link.to).startsWith("/"))).toBe(true);
     }
@@ -47,27 +47,31 @@ describe("Attractions hub redesign", () => {
     expect(attractionPlanningPaths.find(item => item.id === "transport")?.links.some(link => link.to === "/travel-blog/getting-around-israel/")).toBe(true);
   });
 
-  it("keeps all original attraction guides without duplicated cards or changed routes", () => {
+  it("keeps all individual attractions on the hub without listing regional overview guides as site cards", () => {
     const paths = attractionHubCards.map((card) => String(card.to));
-    expect(attractionHubCards).toHaveLength(32);
+    expect(attractionHubCards).toHaveLength(20);
     expect(new Set(paths).size).toBe(paths.length);
     expect(paths.every((path) => path.startsWith("/"))).toBe(true);
     for (const id of attractionIds) {
-      expect(paths).toContain(attractionPath(id));
+      if (isRegionalOverview(id)) expect(paths).not.toContain(attractionPath(id));
+      else expect(paths).toContain(attractionPath(id));
+    }
+    for (const id of ["megiddo", "precipice", "annunciation", "magdala", "yardenit", "qasr"] as const) {
+      expect(paths).toContain(travelGuidePaths[id]);
     }
     expect(paths).toContain("/attractions/caesarea/");
-    expect(paths).toContain("/travel-blog/masada/");
+    expect(paths).toContain("/attractions/masada/");
+    expect(paths.every(path => path.startsWith("/attractions/"))).toBe(true);
   });
 
-  it("includes Jerusalem shopping and relevant area-specific tour connections", () => {
+  it("keeps overview guides in planning links and individual sites in attraction cards", () => {
     const jerusalem = attractionHubRegions.find((region) => region.id === "jerusalem")!;
-    expect(jerusalem.cards.some((card) => card.to === travelGuidePaths.jerusalemShopping)).toBe(true);
-    expect(jerusalem.cards.find((card) => card.to === travelGuidePaths.jerusalemShopping)?.photo.src)
-      .toBe(attractionHubPhotos.shopping.src);
+    expect(jerusalem.cards.some((card) => card.to === travelGuidePaths.jerusalemShopping)).toBe(false);
+    expect(jerusalem.planning.some((item) => item.to === travelGuidePaths.jerusalemShopping)).toBe(true);
     expect(jerusalem.planning.some((item) => item.to === "/tours/jerusalem/")).toBe(true);
     const galilee = attractionHubRegions.find(region => region.id === "sea-of-galilee")!;
-    expect(galilee.cards.some(card => card.to === travelGuidePaths.baptism)).toBe(true);
-    expect(galilee.cards.find(card => card.to === travelGuidePaths.baptism)?.photo.src).toBe(attractionHubPhotos.baptism.src);
+    expect(galilee.cards.some(card => card.to === travelGuidePaths.baptism)).toBe(false);
+    expect(galilee.planning.some(link => link.to === travelGuidePaths.baptism)).toBe(true);
     expect(attractionHubRegions.find((region) => region.id === "haifa-coast")?.planning.some((link) => link.to === "/shore-excursions/haifa/")).toBe(true);
   });
 

@@ -2,7 +2,8 @@ import { describe, expect, it } from "vitest";
 import { QueryClient } from "@tanstack/react-query";
 import { createRouter, rootRouteId } from "@tanstack/react-router";
 import { attractionGuides } from "@/data/attractionGuides";
-import { attractionIds, attractionPath } from "@/data/attractionGuideTypes";
+import { attractionIds, attractionPath, isRegionalOverview } from "@/data/attractionGuideTypes";
+import { attractionHubCards } from "@/data/attractionsHub";
 import { attractionMeta } from "@/components/AttractionGuidePage";
 import { filterGuides, guideDirectory } from "@/data/travelGuides";
 import { routeTree } from "@/routeTree.gen";
@@ -27,12 +28,18 @@ describe("17 original attraction destination guides", () => {
       expect(guide.highlights.every(item => item.name && item.description && item.tip)).toBe(true);
     }
   });
-  it("includes the new guides in the directory and its attraction search filter", () => {
-    expect(guideDirectory).toHaveLength(69);
+  it("keeps regional overviews in Travel Guides and individual sites in Attractions", () => {
+    expect(guideDirectory).toHaveLength(49);
     const attractionItems = filterGuides("", "attractions");
     for (const id of attractionIds) {
-      expect(attractionItems.some(guide => guide.to === attractionPath(id))).toBe(true);
-      expect(guideDirectory.filter(guide => guide.to === attractionPath(id))).toHaveLength(1);
+      const url = attractionPath(id);
+      if (isRegionalOverview(id)) {
+        expect(attractionItems.some(guide => guide.to === url)).toBe(true);
+        expect(attractionHubCards.some(card => card.to === url)).toBe(false);
+      } else {
+        expect(attractionItems.some(guide => guide.to === url)).toBe(false);
+        expect(attractionHubCards.filter(card => card.to === url)).toHaveLength(1);
+      }
     }
   });
 });
