@@ -209,3 +209,15 @@
     contain-intrinsic-size: auto 650px;
   }
 }
+
+/* Restore the original deep-navy sidebar accents without changing other
+   primary-blue controls or the shared mobile navigation drawer. */
+@layer utilities {
+  .site-sidebar nav[aria-label="Explore Israel"] > section > h2 {
+    color: var(--color-navy);
+  }
+  .site-sidebar nav[aria-label="Explore Israel"] a[aria-current="page"] {
+    background-color: var(--color-navy);
+    color: var(--color-navy-foreground);
+  }
+}
