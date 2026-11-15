@@ -350,7 +350,7 @@ export function RelatedLinks({ title = "Plan the rest of your trip", items, curr
     if (!pictured.length && !remaining.length) return null;
     return <section aria-label={title} className="mt-12" data-testid="stay-trip-planning">
       <h2 className="text-2xl font-bold leading-tight sm:text-3xl">{title}</h2>
-      {pictured.length > 0 && <ul className="mt-4 grid gap-4 sm:grid-cols-2" data-testid="stay-trip-photo-grid">
+      {pictured.length > 0 && <ul className={maxPhotoCards >= 6 ? "mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-3" : "mt-4 grid gap-4 sm:grid-cols-2"} data-testid="stay-trip-photo-grid">
         {pictured.map(({ item, guide, cardPhoto }) => <li key={String(item.to)} className="min-w-0">
           <Link to={item.to} className="group flex h-full min-w-0 flex-col overflow-hidden rounded-xl border bg-card transition-colors hover:border-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
             <GuideCardPhoto photo={cardPhoto ?? null} />
