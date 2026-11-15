@@ -31,9 +31,9 @@ describe("portal navigation", () => {
       expect(group).toMatchObject({
         label: region.navLabel ?? region.title,
         toggleOnly: true,
-        childrenLabel: `${region.title} guides`,
+        childrenLabel: `${region.title} attractions`,
       });
-      if (!("children" in group!) || !group.children) throw new Error("Attraction region has no guide links");
+      if (!("children" in group!) || !group.children) throw new Error("Attraction region has no attraction links");
       expect(group.children.map((child) => child.to)).toEqual(region.cards.map((card) => card.to));
     }
     expect(allNavGroups.some((group) => group.title === "Religious sites")).toBe(false);
