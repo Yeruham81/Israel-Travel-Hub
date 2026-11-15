@@ -46,7 +46,7 @@ const guidedTourPhotos: Record<string, GuidePhoto> = {
   "shore-gyg-ashdod-galilee": migrationPhotos["annunciation-interior"],
   "shore-gyg-ashdod-masada": { src: cableCar, alt: "A cable car ascending toward the desert fortress of Masada", credit: "James Emery · CC BY 2.0 · resized WebP", sourceUrl: "https://commons.wikimedia.org/wiki/File:Masada_Cable_Car_1438_(511094328).jpg", licenseUrl: "https://creativecommons.org/licenses/by/2.0/" },
   "shore-viator-ashdod-jerusalem-dead-sea": migrationPhotos["jerusalem-to-the-dead-sea"],
-  "shore-viator-ashdod-jerusalem-bethlehem": { src: sepulchre, alt: "Courtyard and facade of the Church of the Holy Sepulchre in Jerusalem", sourceUrl: "https://www.israel-taxi.com/wp-content/uploads/2025/08/Church_of_the_Holy_Sepulchre_Jerusalem_israel.jpg", credit: "Photograph from the publisher's churches guide; retained unchanged." },
+  "shore-viator-ashdod-jerusalem-bethlehem": { src: sepulchre, alt: "Courtyard and facade of the Church of the Holy Sepulchre in Jerusalem", sourceUrl: "", credit: "Photograph from the publisher's churches guide; retained unchanged." },
 };
 
 const itineraryDetails: Record<string, ItineraryDetails> = {
@@ -79,14 +79,14 @@ const itineraryDetails: Record<string, ItineraryDetails> = {
     highlights: ["Masada", "Dead Sea", "Selected Jerusalem stops"],
   },
   "haifa-akko": {
-    photo: { src: akko, alt: "Fishing boats and stone buildings around Akko's old harbour", sourceUrl: "https://www.israel-taxi.com/wp-content/uploads/2025/08/akko_port_2.jpg", credit: "Akko harbour · image reused from the publisher's original Haifa excursion page; original JPEG retained" },
+    photo: { src: akko, alt: "Fishing boats and stone buildings around Akko's old harbour", sourceUrl: "", credit: "Akko harbour · image reused from the publisher's original Haifa excursion page; original JPEG retained" },
     description: "Explore Akko's old harbour and historic lanes, with a proposed coastal extension to Rosh Hanikra. Agree the actual stops and walking pace with your driver.",
     bestFor: "Old-town atmosphere and northern coastal scenery",
     planningNote: "Ask whether Rosh Hanikra is operating and accessible on your date before relying on it. Discuss an alternative northern stop if needed.",
     highlights: ["Akko Old City", "Historic harbour", "Rosh Hanikra if accessible"],
   },
   "haifa-tel-aviv": {
-    photo: { src: jaffa, alt: "Old Jaffa and its harbour beside the Mediterranean coast", sourceUrl: "https://www.israel-taxi.com/wp-content/uploads/2025/08/jaffa_panorama2.jpg" },
+    photo: { src: jaffa, alt: "Old Jaffa and its harbour beside the Mediterranean coast", sourceUrl: "" },
     description: "Travel south for Old Jaffa and Tel Aviv's seafront, architecture or city neighborhoods. Pick a few priorities and leave room for traffic on the return to Haifa.",
     bestFor: "Urban culture, Jaffa and Mediterranean promenades",
     planningNote: "This involves more road time than a nearby northern outing. Confirm the time left for walking, food and any extra stops.",
