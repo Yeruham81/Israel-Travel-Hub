@@ -488,7 +488,7 @@ export function HubCard({ to, eyebrow, title, text, cta }: { to: LinkProps["to"]
   );
 }
 
-export function HubHeader({ crumbs, eyebrow, title, intro, actions, checkedAt, showAuthor = true }: {
+export function HubHeader({ crumbs, eyebrow, title, intro, actions, checkedAt, showAuthor = true, image }: {
   crumbs: UiCrumb[];
   eyebrow?: string;
   title: string;
@@ -496,14 +496,22 @@ export function HubHeader({ crumbs, eyebrow, title, intro, actions, checkedAt, s
   actions?: ReactNode;
   checkedAt?: string;
   showAuthor?: boolean;
+  /** Optional right-hand photograph on a single hub; other hub headers remain unchanged. */
+  image?: ReactNode;
 }) {
+  const content = <>
+    {eyebrow && <p className="eyebrow mt-6">{eyebrow}</p>}
+    <h1 className="guide-page-title mt-3 max-w-4xl">{title}</h1>
+    <div data-guide-intro className="mt-4 max-w-3xl text-lg leading-relaxed text-muted-foreground">{intro}</div>
+    {actions && <div className="mt-5 flex flex-wrap gap-3">{actions}</div>}
+  </>;
   return (
     <header className="hub-header mx-auto max-w-5xl px-4 pt-6" data-testid="hub-header">
       <Breadcrumbs items={crumbs} />
-      {eyebrow && <p className="eyebrow mt-6">{eyebrow}</p>}
-      <h1 className="guide-page-title mt-3 max-w-4xl">{title}</h1>
-      <div data-guide-intro className="mt-4 max-w-3xl text-lg leading-relaxed text-muted-foreground">{intro}</div>
-      {actions && <div className="mt-5 flex flex-wrap gap-3">{actions}</div>}
+      {image ? <div className="mt-4 grid min-w-0 items-start gap-4 lg:grid-cols-[minmax(0,1.9fr)_minmax(0,0.95fr)] lg:gap-6">
+        <div className="min-w-0">{content}</div>
+        <div className="min-w-0">{image}</div>
+      </div> : content}
       {checkedAt && <PageUpdated date={checkedAt} />}
       {showAuthor && <AuthorCard />}
     </header>
