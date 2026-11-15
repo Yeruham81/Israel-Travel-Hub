@@ -239,8 +239,7 @@ function EsimUnlimitedComparison({ guide, providers }: { guide: TravelGuide; pro
         </article>;
       })}
     </div>
-    {drimsim && <p className="mt-3 text-sm text-muted-foreground"><strong>{drimsim[0]}:</strong> no unlimited plan; its data is charged by usage.</p>}
-    <p className="mt-2 text-xs text-muted-foreground">Prices checked November 2026.</p>
+    {drimsim && <p className="mt-3 text-sm text-muted-foreground"><strong>{drimsim[0]}:</strong> no unlimited plan. Its published Israel pay-as-you-go rate is €0.01 per MB; review activation fees and total usage costs before choosing it.</p>}
   </section>;
 }
 
@@ -277,7 +276,7 @@ export function TravelGuidePage({ id }: { id: TravelGuideId }) {
         <h2 id="answer-h" className="text-2xl">Quick answer</h2><p className="mt-3 text-lg leading-relaxed">{id === "esim" ? emphasizeEsimNames(guide.answer) : guide.answer}</p>
         {guide.reviewNote && <p className="mt-4 border-t border-primary/20 pt-3 text-sm leading-relaxed text-muted-foreground">{guide.reviewNote}</p>}
       </section>
-      {id === "esim" && <EsimPickCards facts={guide.facts} providers={providers} />}
+      {id === "esim" && <><EsimPickCards facts={guide.facts} providers={providers} /><p className="mt-3 text-xs leading-relaxed text-muted-foreground">Plan prices checked 15 November 2026 (USD unless otherwise stated). Prices, discounts, taxes and package terms can change; confirm the final amount and allowance with the provider before buying.</p></>}
       {isTransportOverview && <section aria-label="Transport planning essentials" className="mt-5 grid gap-3 sm:grid-cols-3">
         {guide.facts.map(fact => <div key={fact.label} className="rounded-xl border bg-card p-4">
           <p className="text-xs font-semibold uppercase tracking-wide text-primary">{fact.label}</p>
@@ -376,6 +375,7 @@ export function TravelGuidePage({ id }: { id: TravelGuideId }) {
       <FaqList faqs={guide.faqs} {...(isTransportOverview && guide.faqGroups ? { groups: guide.faqGroups } : {})} />
       {id === "jerusalemDeadSea" && <DeadSeaGuideFollowUps />}
       {id === "bethlehem" && <BethlehemGuideFollowUps />}
+      {id === "esim" && <SourceList ids={sourcesFor(guide)} intro="Official provider plan pages used for these comparisons. Prices, coverage and fair-use limits can change; confirm the details for the exact package before purchase." />}
       {!isTransportOverview && !isTaxiFareGuide && id !== "esim" && id !== "jerusalemDeadSea" && id !== "bethlehem" && (id === "shabbat" ? <SourceList ids={sourcesFor(guide)} intro="Official airport, public-transport and taxi-tariff references. Confirm timetables, charges and pickup instructions for your date." /> : <SourceList ids={sourcesFor(guide)} />)}
       {!isJerusalemCluster && id !== "shabbat" && <RelatedLinks title="Related practical guides" currentPath={travelGuidePaths[id]} illustrated={id === "esim"} maxPhotoCards={id === "esim" ? 6 : 4} items={guide.related.map((guideId) => ({ label: travelGuides[guideId].title, to: travelGuidePaths[guideId] }))} />}
       {!isJerusalemCluster && id !== "shabbat" && id !== "jerusalemDeadSea" && <RelatedLinks title="Plan the next part of your trip" items={guide.services} />}
