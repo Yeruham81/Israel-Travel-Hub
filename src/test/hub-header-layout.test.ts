@@ -8,7 +8,7 @@ const broadHubs = [
   "src/routes/airport-transfers.index.tsx",
   "src/routes/tours.index.tsx",
   "src/routes/attractions.index.tsx",
-  "src/routes/shore-excursions.tsx",
+  "src/routes/shore-excursions.index.tsx",
   "src/routes/accommodation.tsx",
 ] as const;
 
@@ -21,7 +21,7 @@ const focusedPages = [
 ] as const;
 
 describe("consistent top-of-page layout for service and discovery hubs", () => {
-  it("gives all five broad overviews the same image-free heading component", () => {
+  it("gives all five broad overviews the same shared heading component", () => {
     for (const file of broadHubs) {
       const src = read(file);
       expect(src, file).toContain("<HubHeader");
