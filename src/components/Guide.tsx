@@ -281,6 +281,16 @@ function ProviderAction({ link: l, pageId, className, children }: { link: Provid
 }
 
 export function ProviderCard({ link: l, pageId }: { link: ProviderLink; pageId: string }) {
+  if (pageId === "guide-esim") return (
+    <li className="flex min-w-0 flex-col rounded-xl border bg-card p-4 sm:p-5" data-testid="provider-card">
+      <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">{l.providerName} · Travel eSIM</p>
+      <h3 className="mt-1 text-lg font-semibold">{l.title}</h3>
+      <p className="mt-2 flex-1 text-sm leading-relaxed text-muted-foreground">{l.summary}</p>
+      <div className="mt-3">
+        <ProviderAction link={l} pageId={pageId} className="btn btn-primary inline-flex text-sm">{l.ctaLabel}</ProviderAction>
+      </div>
+    </li>
+  );
   return (
     <li className="rounded-2xl border bg-card p-5 md:p-6" data-testid="provider-card">
       <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">{relationshipLabel[l.relationship]} · {l.providerName}</p>
