@@ -30,6 +30,11 @@ describe("homepage marketing copy and service sections", () => {
     expect(screen.queryByRole("link", { name: "Browse destinations" })).not.toBeInTheDocument();
     expect(container.querySelectorAll("a")).toHaveLength(0);
     expect(screen.getByRole("region", { name: "Places in Israel" })).toBeInTheDocument();
+    // On ultrawide monitors, the picture and image fill the slide frame
+    // instead of depending on intrinsic image dimensions.
+    const picture = container.querySelector("picture");
+    expect(picture).toHaveClass("absolute", "inset-0", "h-full", "w-full");
+    expect(picture?.querySelector("img")).toHaveClass("absolute", "inset-0", "h-full", "w-full", "object-cover");
     expect(screen.getByRole("group", { name: "Choose a place" })).toBeInTheDocument();
   });
   it("shows service sections without the redundant shortcut navigation under the hero", async () => {
