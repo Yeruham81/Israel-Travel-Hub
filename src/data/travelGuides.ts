@@ -2,7 +2,7 @@ import { itineraries, itineraryIds } from "@/data/israelItineraries";
 import { migrationPhotos } from "@/data/guideMigrationPhotos";
 import type { LinkProps } from "@tanstack/react-router";
 import { getShorePort } from "@/data/shoreExcursions";
-import { travelGuidePaths, type TravelGuideId } from "@/data/registry";
+import { travelGuidePaths, AIRALO_COMPATIBILITY_AFFILIATE_URL, type TravelGuideId } from "@/data/registry";
 import { airportTransferPhotos } from "@/data/airportTransfers";
 import airportHall from "@/assets/home/ben-gurion-t3.webp";
 import railPlatform from "@/assets/airport-journeys/ben-gurion-rail-platform.webp";
@@ -476,7 +476,7 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
           "Your phone also needs to be unlocked. Many phones can keep a home SIM active for calls and messages while using a travel eSIM for data.",
         ],
         externalLinks: [
-          { label: "Check whether your phone supports eSIM", href: "https://www.airalo.com/how-airalo-works/device-compatibility" },
+          { label: "Check whether your phone supports eSIM", href: AIRALO_COMPATIBILITY_AFFILIATE_URL },
         ],
         sourceIds: ["guide-esim-airalo", "guide-esim-saily"],
       },
