@@ -5,7 +5,7 @@ import { afterEach, describe, expect, it, vi } from "vitest";
 import { Route as AirportRoute } from "@/routes/airport-transfers.index";
 import { routeTree } from "@/routeTree.gen";
 import { airportTransferRates, affiliateConfig, linksForPage, partners } from "@/data/registry";
-import { airportTransferPhotos } from "@/data/airportTransfers";
+import { airportDestinationCards, airportHomepageRoutePhotos, airportTransferPhotos } from "@/data/airportTransfers";
 import { emptyTransferQuote, buildTransferQuoteDraft, validateTransferQuote } from "@/lib/transfer-quote";
 import { readOutboundClicks } from "@/lib/outbound";
 
@@ -31,7 +31,7 @@ function fillRequest() {
 }
 
 describe("private Ben Gurion transfers", () => {
-  it("shows four compact illustrated routes, seven text-only fares and one other-destination option", async () => {
+  it("shows four homepage-matched landscape route images and eight smaller illustrated destinations", async () => {
     expect(Object.fromEntries(airportTransferRates.map((r) => [r.id, r.price.amount]))).toEqual({
       "tel-aviv": 330, jerusalem: 550, haifa: 930, "dead-sea": 1300, raanana: 340, herzliya: 340, netanya: 450, ashdod: 480, caesarea: 630, nazareth: 950, eilat: 2700,
     });
@@ -43,27 +43,31 @@ describe("private Ben Gurion transfers", () => {
       expect(rate.price).toMatchObject({ kind: "published_starting_rate", currency: "ILS", basis: "per_vehicle", maxPartySize: 4, sourceId: "moshe-airport-transfers" });
       const card = container.querySelector(`[data-destination="${rate.id}"]`)! as HTMLElement;
       if (rate.popular) {
-        expect(within(card).getByRole("img")).toHaveAttribute("src", airportTransferPhotos[rate.id]!.src);
+        expect(within(card).getByRole("img")).toHaveAttribute("src", airportHomepageRoutePhotos[rate.id]!.src);
         const routeLink = within(card).getByRole("link", { name: /View transfer details/ });
         expect(router.matchRoutes(new URL(routeLink.getAttribute("href")!, "https://example.test").pathname).at(-1)?.routeId).toContain("airport-transfers");
-      } else expect(within(card).queryByRole("img")).not.toBeInTheDocument();
+      } else expect(within(card).getByRole("img")).toHaveAttribute("src", airportDestinationCards.find(item => item.id === rate.id)!.photo.src);
       expect(within(card).getByRole("link", { name: "Request a quote" })).toHaveAttribute("href", "#request-quote");
       expect(card).toHaveTextContent(rate.price.amount.toLocaleString("en-US"));
       expect(card.querySelector('[data-testid="currency-price"]')).toBeNull();
     }
     const more = screen.getByRole("region", { name: "More destinations from Ben Gurion Airport" });
     expect(within(more).getAllByTestId("airport-destination-card").map((card) => card.dataset["destination"])).toEqual(["raanana", "herzliya", "netanya", "ashdod", "caesarea", "nazareth", "eilat", "other"]);
-    expect(within(more).queryAllByRole("img")).toHaveLength(0);
+    expect(within(more).getAllByRole("img")).toHaveLength(8);
+    expect(new Set(within(more).getAllByRole("img").map(image => image.getAttribute("src"))).size).toBe(8);
+    expect(within(more).getByRole("img", { name: airportTransferPhotos.other!.alt })).toHaveAttribute("src", airportTransferPhotos.other!.src);
     expect(screen.getByTestId("airport-rate-terms")).toHaveTextContent(/weekday.*up to four passengers.*Night, weekend and holiday/i);
     expect(screen.getByRole("heading", { name: "Private airport transfers from Ben Gurion Airport" })).toBeInTheDocument();
     expect(screen.getByTestId("hub-header").parentElement?.tagName).toBe("MAIN");
+    expect(within(screen.getByTestId("hub-header")).getByTestId("guide-hero-media").querySelector("img")).toHaveAttribute("src", airportTransferPhotos.other!.src);
+    expect(screen.getByRole("link", { name: "Request a personal quote" })).toHaveClass("bg-navy");
   });
 
   it("uses the lean content order and preserves booking links, benefits, FAQ and guide navigation", async () => {
     const { container, router } = await renderAirport();
     const sections = ["popular-destinations", "more-destinations", "benefits", "request-quote", "useful-information", "booking-platforms", "faq", "keep-planning"];
     for (let i = 1; i < sections.length; i++) expect(container.querySelector(`#${sections[i - 1]}`)!.compareDocumentPosition(container.querySelector(`#${sections[i]}`)!)).toBe(Node.DOCUMENT_POSITION_FOLLOWING);
-    expect(container.querySelector("main")!.textContent).not.toMatch(/\b(metered|taxi rank|buses)\b/i);
+    expect((container.querySelector("#popular-destinations")!.textContent || "") + (container.querySelector("#more-destinations")!.textContent || "")).not.toMatch(/\b(metered|taxi rank|buses)\b/i);
     expect(container.querySelector("#after-request-h")).toBeNull();
     expect(screen.queryByText("Why arrange your airport pickup with me?")).not.toBeInTheDocument();
     const benefits = screen.getByRole("region", { name: "Private transfer benefits" });
@@ -75,8 +79,13 @@ describe("private Ben Gurion transfers", () => {
     expect(faq.querySelectorAll("details")).toHaveLength(5);
     expect(faq).toHaveTextContent("When can I cancel for free?");
     const related = screen.getByRole("region", { name: "Practical travel guides" });
-    expect(within(related).getAllByRole("link")).toHaveLength(4);
-    expect(within(related).queryAllByRole("img")).toHaveLength(0);
+    expect(within(related).getAllByRole("link")).toHaveLength(6);
+    expect(within(related).getAllByRole("img")).toHaveLength(6);
+    expect(new Set(within(related).getAllByRole("img").map(image => image.getAttribute("src"))).size).toBe(6);
+    const checklist = screen.getByRole("list", { name: "Airport transfer checklist" });
+    expect(within(checklist).getAllByRole("listitem")).toHaveLength(5);
+    expect(within(benefits).getByText(/Flight status is monitored/)).toBeInTheDocument();
+    expect(within(benefits).getByText(/Direct bookings can be cancelled free/)).toBeInTheDocument();
     for (const link of within(related).getAllByRole("link")) {
       const path = link.getAttribute("href")!;
       expect(router.matchRoutes(path).at(-1)?.routeId.replace(/\/$/, "")).toBe(path.replace(/\/$/, ""));
@@ -167,6 +176,14 @@ describe("private Ben Gurion transfers", () => {
       expect(platform.isAffiliate).toBe(Boolean(affiliateConfig[platform.id]?.trackingUrl));
     }
     expect(new Set(banners.map((banner) => within(banner).getByRole("img").getAttribute("src"))).size).toBe(4);
+    expect(banners.map(banner => banner.textContent)).toEqual([
+      expect.stringContaining("Check prices"),
+      expect.stringContaining("Book your pickup"),
+      expect.stringContaining("Explore transfers"),
+      expect.stringContaining("Compare offers"),
+    ]);
+    expect(banners.every(banner => Boolean(banner.querySelector(".bg-navy")))).toBe(true);
+    expect(screen.getByRole("region", { name: "Prefer to book online?" })).toHaveTextContent("Compare options");
     fireEvent.click(banners[0]!);
     expect(readOutboundClicks()).toEqual([expect.objectContaining({ pageId: "airport-private-transfers", productId: "airport-kiwitaxi", offerId: "airport-kiwitaxi" })]);
     expect(JSON.stringify(readOutboundClicks())).not.toContain("email");
