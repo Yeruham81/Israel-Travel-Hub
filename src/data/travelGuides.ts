@@ -737,9 +737,9 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
     related: ["airportTaxis", "shabbat", "sherut", "taxiFares", "esim", "taxis", "israel", "uber"],
     services: [
       { label: "Airport transfer destinations and personal quote", to: "/airport-transfers/" },
-      { label: "Private airport transfer to Tel Aviv", to: "/airport-transfers/ben-gurion-airport-to-tel-aviv/" },
-      { label: "Private airport transfer to Jerusalem", to: "/airport-transfers/ben-gurion-airport-to-jerusalem/" },
-      { label: "Private airport transfer to Haifa", to: "/airport-transfers/ben-gurion-airport-to-haifa/" },
+      { label: "Private airport transfer to Tel Aviv", to: "/airport-transfers/tel-aviv/" },
+      { label: "Private airport transfer to Jerusalem", to: "/airport-transfers/jerusalem/" },
+      { label: "Private airport transfer to Haifa", to: "/airport-transfers/haifa/" },
     ],
   },
   israel: {

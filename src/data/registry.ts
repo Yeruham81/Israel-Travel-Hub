@@ -601,12 +601,22 @@ export const shoreServices: ShoreServiceRecord[] = [
 
 /** Only these four airport destinations have individual transfer guides. */
 export const airportTransferRoutes = [
-  { id: "jerusalem", path: "/airport-transfers/ben-gurion-airport-to-jerusalem/", sourceId: "owner-route-guide", driveTime: "45–60+ minutes" },
-  { id: "tel-aviv", path: "/airport-transfers/ben-gurion-airport-to-tel-aviv/", sourceId: "owner-airport-tel-aviv", driveTime: "20–40+ minutes" },
-  { id: "haifa", path: "/airport-transfers/ben-gurion-airport-to-haifa/", sourceId: "owner-airport-haifa", driveTime: "75–110+ minutes" },
-  { id: "dead-sea", path: "/airport-transfers/ben-gurion-airport-to-ein-bokek/", sourceId: "owner-airport-ein-bokek", driveTime: "1 hr 45 min–2 hr 30 min+" },
+  { id: "jerusalem", path: "/airport-transfers/jerusalem/", sourceId: "owner-route-guide", driveTime: "45–60+ minutes" },
+  { id: "tel-aviv", path: "/airport-transfers/tel-aviv/", sourceId: "owner-airport-tel-aviv", driveTime: "20–40+ minutes" },
+  { id: "haifa", path: "/airport-transfers/haifa/", sourceId: "owner-airport-haifa", driveTime: "75–110+ minutes" },
+  { id: "dead-sea", path: "/airport-transfers/ein-bokek/", sourceId: "owner-airport-ein-bokek", driveTime: "1 hr 45 min–2 hr 30 min+" },
 ] as const;
 export type AirportTransferRouteId = typeof airportTransferRoutes[number]["id"];
+
+/** Historical links to the owner's ORIGINAL published articles, not routes on the new site.
+ * Keep these URLs separate from airportTransferRoutes so source credits stay on live legacy URLs.
+ */
+export const originalAirportTransferSourcePaths: Record<AirportTransferRouteId, string> = {
+  jerusalem: "/airport-transfers/ben-gurion-airport-to-jerusalem/",
+  "tel-aviv": "/airport-transfers/ben-gurion-airport-to-tel-aviv/",
+  haifa: "/airport-transfers/ben-gurion-airport-to-haifa/",
+  "dead-sea": "/airport-transfers/ben-gurion-airport-to-ein-bokek/",
+};
 
 const jerusalemHotelSources: SourceReference[] = [
   ["herbert-samuel", "Herbert Samuel Jerusalem", "https://herbertsamuel.com/en/herbert-samuel-jerusalem-hotel/"],
@@ -965,7 +975,7 @@ export const sources: SourceReference[] = [
   ...migrationSources,
   ...airportTransferRoutes.filter((route) => route.id !== "jerusalem").map((route): SourceReference => ({
     id: route.sourceId, title: `Ben Gurion Airport to ${route.id === "dead-sea" ? "Ein Bokek" : route.id === "tel-aviv" ? "Tel Aviv" : "Haifa"} — original guide`,
-    publisher: "Israel-Taxi.com (Moshe Barak)", url: `${OWNER_BASE}${route.path}`, checkedAt: AIRPORT_TRANSFER_CHECK_DATE,
+    publisher: "Israel-Taxi.com (Moshe Barak)", url: `${OWNER_BASE}${originalAirportTransferSourcePaths[route.id]}`, checkedAt: AIRPORT_TRANSFER_CHECK_DATE,
     note: "Moshe Barak's original route guide provides local planning context and approximate driving time. Road time starts after pickup and excludes airport formalities. It is a planning estimate; current traffic, the exact address and road conditions can change the journey.",
   })),
   ...jerusalemHotelSources,
@@ -1980,7 +1990,7 @@ export const hotelsForArea = (areaId: string, cityId?: HotelRecommendation["city
 
 export const tlvToJerusalem: RouteRecord = {
   id: "tlv-jerusalem",
-  path: "/airport-transfers/ben-gurion-airport-to-jerusalem/",
+  path: "/airport-transfers/jerusalem/",
   origin: { code: "TLV", name: "Ben Gurion Airport" },
   destination: { name: "Jerusalem" },
   status: "published",
@@ -2017,7 +2027,7 @@ export const offers: Offer[] = [
     },
     maxPassengersKnown: 4,
     ctaLabel: "Request a quote",
-    url: "/airport-transfers/ben-gurion-airport-to-jerusalem/#request-quote",
+    url: "/airport-transfers/jerusalem/#request-quote",
     isAffiliate: false,
     isInformational: false,
     confirmOnOffer: commonConfirm,
@@ -2267,7 +2277,7 @@ export const providerLinks: ProviderLink[] = [
   {
     id: "tlv-ta-moshe", pageIds: ["tlv-telaviv"], ...moshe, mode: "provider_inquiry",
     title: "Private pre-booked transfer", summary: "Local driver business. Ask for a quote for your Tel Aviv or Jaffa address, party size and arrival time.",
-    ctaLabel: "Request a quote", url: "/airport-transfers/ben-gurion-airport-to-tel-aviv/#request-quote", isAffiliate: false,
+    ctaLabel: "Request a quote", url: "/airport-transfers/tel-aviv/#request-quote", isAffiliate: false,
     reentryNote: "Your details are not passed on. Include flight time, passengers, luggage and address in your request.",
     confirm: ["Final price and any extra charges", "Vehicle size", "Meeting point and waiting time", "Child seats"], sourceId: "moshe-airport-transfers",
   },
