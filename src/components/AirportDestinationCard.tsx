@@ -27,16 +27,16 @@ export function AirportDestinationCard({ id, destination, price, photo, onChoose
     <a href="#request-quote" onClick={() => onChoose?.(id)} className={`${quoteButtonClass} mt-2 self-end`}>Request a quote</a>
   </article>;
   if (layout === "hub-row") return <article
-    className="grid h-full min-h-[7rem] min-w-0 grid-cols-[4.5rem_minmax(0,1fr)_5.75rem] items-center gap-2 rounded-xl border bg-card p-2.5 transition-colors hover:border-primary/40 sm:grid-cols-[5.75rem_minmax(0,1fr)_6.5rem] sm:gap-3 sm:p-3"
+    className="grid h-full min-h-[7rem] min-w-0 grid-cols-[5.25rem_minmax(0,1fr)] items-center gap-2 rounded-xl border bg-card p-2.5 transition-colors hover:border-primary/40 sm:grid-cols-[6.5rem_minmax(0,1fr)] sm:gap-3 sm:p-3 lg:grid-cols-[6.5rem_minmax(0,1fr)_8.75rem]"
     data-testid={testId} data-destination={id}
   >
-    <img src={photo.src} alt={photo.alt} width={112} height={75} loading="lazy" decoding="async" className="aspect-[3/2] w-full rounded-lg object-cover" />
+    <img src={photo.src} alt={photo.alt} width={128} height={85} loading="lazy" decoding="async" className="aspect-[3/2] w-full rounded-lg object-cover" />
     <div className="min-w-0">
       <h3 className="text-base font-semibold leading-snug sm:text-lg">{id === "other" ? "Another destination?" : destination}</h3>
       {price && <p className="mt-1 text-sm font-semibold tabular-nums text-foreground sm:text-base">From ₪{price.amount.toLocaleString("en-US")}</p>}
       {price && <CompactCurrencyEquivalents amount={price.amount} />}
     </div>
-    <a href="#request-quote" onClick={() => onChoose?.(id)} className={`${quoteButtonClass} w-full px-1.5 text-xs sm:px-2 sm:text-sm`}>Request a quote</a>
+    <a href="#request-quote" onClick={() => onChoose?.(id)} className={`${quoteButtonClass} col-span-2 w-full whitespace-nowrap px-3 text-xs sm:text-sm lg:col-span-1`}>Request a quote</a>
   </article>;
   const compact = layout === "compact";
   const image = <img src={photo.src} alt={photo.alt} width={compact ? 80 : 360} height={compact ? 80 : 240} loading="lazy" decoding="async" className={compact ? "h-20 w-20 shrink-0 rounded-lg object-cover" : "aspect-[3/2] w-full object-cover"} />;
