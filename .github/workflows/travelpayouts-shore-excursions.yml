@@ -1,0 +1,47 @@
+name: Generate Travelpayouts shore excursion product links
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'scripts/travelpayouts/generate-shore-excursions.mjs'
+      - 'scripts/travelpayouts/apply-shore-excursions.mjs'
+      - '.github/workflows/travelpayouts-shore-excursions.yml'
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  generate:
+    if: github.event_name == 'workflow_dispatch' || contains(github.event.head_commit.message, '[generate-shore-affiliates]')
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - name: Validate shore source URLs
+        run: node scripts/travelpayouts/generate-shore-excursions.mjs --validate
+      - name: Generate authentic product links
+        env:
+          TRAVELPAYOUTS_API_TOKEN: ${{ secrets.TRAVELPAYOUTS_API_TOKEN }}
+        run: node scripts/travelpayouts/generate-shore-excursions.mjs
+      - name: Apply approved product links
+        run: node scripts/travelpayouts/apply-shore-excursions.mjs
+      - name: Commit verified links
+        run: |
+          if git diff --quiet -- src/data/registry.ts; then
+            echo "No new approved partner links"
+          else
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git add src/data/registry.ts
+            git commit -m "Configure verified Travelpayouts shore excursion product links"
+            git push origin HEAD:main
+          fi
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: shore-excursion-link-validation
+          path: artifacts/travelpayouts-shore-excursions.json
+          if-no-files-found: warn
+          retention-days: 14
