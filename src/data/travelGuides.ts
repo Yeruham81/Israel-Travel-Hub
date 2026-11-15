@@ -403,7 +403,7 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
     title: "Best eSIM for Israel: Prices, Providers & My Picks",
     description: "Compare Israel eSIM prices for short trips, longer stays and heavy data use. My picks for 3GB, 5GB, 10GB and unlimited travel plans.",
     intro: "Choosing an eSIM for Israel? Here are my picks for a short break, a longer holiday and travellers who need unlimited data.",
-    answer: "For a short visit, I would choose Saily. For a longer holiday, I would start with Saily for 5GB or Airalo for 10GB. For unlimited data, GigSky had the lowest 30-day price in my comparison. The cards below show the plans and prices.",
+    answer: "For a short visit or a longer trip with moderate data use, I would start with Saily. For 10GB, consider Airalo; for unlimited data, GigSky offered the lowest 30-day price in my comparison. The plans and prices are below.",
     updatedAt: "2026-11-15",
     topics: ["connectivity", "tips"],
     photo: { src: esimPhoto, alt: "A phone displaying an eSIM graphic in front of a blurred city background", sourceUrl: "", credit: "Illustrative eSIM screen." },
