@@ -432,7 +432,7 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
           "GigSky's Israel 5GB/30-day package was listed at $20.99 in a November 2026 independent comparison; the GigSky website did not expose a verifiable checkout price when checked. Drimsim is different: at its published €0.01 per MB, using around 5,000MB would cost roughly €50 in data charges. That is a usage illustration, not a 5GB bundle or a fixed 30-day plan.",
           "Need more data? Airalo listed 10GB/30 days at $11.50 and 20GB/30 days at $16.50; Saily listed 10GB/30 days at $11.99; Yesim listed 10GB/30 days at $16.50. Compare the final checkout price and unlimited-plan speed limits before choosing.",
         ],
-        sourceIds: ["guide-esim-airalo", "guide-esim-saily", "guide-esim-yesim", "guide-esim-gigsky", "guide-esim-gigsky-price-nov26", "guide-esim-drimsim"],
+        sourceIds: ["guide-esim-airalo", "guide-esim-saily", "guide-esim-saily-usd-price-nov26", "guide-esim-yesim", "guide-esim-gigsky", "guide-esim-gigsky-price-nov26", "guide-esim-drimsim"],
       },
       {
         id: "plan",
@@ -500,7 +500,7 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
       { q: "Does unlimited eSIM mean unlimited full-speed data?", a: "No. Some offers reduce speed after a fair-use allowance and can restrict hotspot usage. Read the specific plan conditions." },
       { q: "When should I buy the eSIM?", a: "Before your trip is convenient, but check when the paid validity begins and whether you can wait until arrival to activate it." },
     ],
-    sourceIds: ["guide-esim-airalo", "guide-esim-saily", "guide-esim-yesim", "guide-esim-gigsky", "guide-esim-gigsky-price-nov26", "guide-esim-drimsim"],
+    sourceIds: ["guide-esim-airalo", "guide-esim-saily", "guide-esim-saily-usd-price-nov26", "guide-esim-yesim", "guide-esim-gigsky", "guide-esim-gigsky-price-nov26", "guide-esim-drimsim"],
     related: ["arrival", "airportTaxis", "uber", "taxis", "israel", "shabbat"],
     services: [
       { label: "Airport transfers", to: "/airport-transfers/", note: "Choose a confirmed pickup or compare ways to leave Ben Gurion Airport." },
