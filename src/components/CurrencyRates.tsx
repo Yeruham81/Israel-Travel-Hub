@@ -138,6 +138,22 @@ export function PriceDisplay({ amount, size = "card", from = true, className = "
   </div>;
 }
 
+/** Compact, unobtrusive equivalents for the airport hub's landscape destination cards.
+ * The ILS fare remains the primary price. No stale or unavailable exchange rates
+ * are displayed; the existing provider supplies one shared refresh for the page.
+ */
+export function CompactCurrencyEquivalents({ amount }: { amount: number }) {
+  const { rates } = useContext(CurrencyRatesContext);
+  if (!isUsableExchangeRates(rates)) return null;
+  const usd = convertedAmount(amount, "USD", rates).toLocaleString("en-US");
+  const eur = convertedAmount(amount, "EUR", rates).toLocaleString("en-US");
+  return <p className="mt-0.5 flex flex-wrap items-center gap-x-1 text-xs leading-snug tabular-nums text-muted-foreground" data-testid="compact-currency-estimate" data-ils={amount} aria-label={`Approximately ${usd} US dollars or ${eur} euros`}>
+    <span className="whitespace-nowrap" data-currency="USD">≈ ${usd}</span>
+    <span aria-hidden="true">·</span>
+    <span className="whitespace-nowrap" data-currency="EUR">€{eur}</span>
+  </p>;
+}
+
 /** Shared concise pricing disclaimer; FX publication and cache status are kept in data, not displayed. */
 export function ExchangeRateNote({ className = "" }: { className?: string }) {
   return <p className={`text-xs leading-relaxed text-muted-foreground ${className}`} data-testid="exchange-rate-note">
