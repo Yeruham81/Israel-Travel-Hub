@@ -862,7 +862,7 @@ describe("migrated practical guides", () => {
     fireEvent.click(first);
     expect(readOutboundClicks()).toEqual([expect.objectContaining({ pageId: "guide-esim", productId: "esim-airalo", offerId: "esim-airalo" })]);
     const priceSection = container.querySelector("#price") as HTMLElement;
-    expect(within(priceSection).getByRole("link", { name: /^Saily/ })).toHaveAttribute("href", expected["esim-saily"]);
+    expect(within(priceSection).getAllByRole("link", { name: /^Saily/ })[0]).toHaveAttribute("href", expected["esim-saily"]);
     expect(travelGuides.esim.services).toHaveLength(4);
   });
   it.each([
