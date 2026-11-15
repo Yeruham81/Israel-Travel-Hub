@@ -159,8 +159,8 @@ describe("migrated practical guides", () => {
     expect(travelGuides.airportTaxis.comparison.rows.join(" ")).toMatch(/Exit 03.*Exit 23/);
     expect(travelGuides.uber.answer).toMatch(/Uber and Lyft do not currently offer passenger rides in Israel/);
     expect(travelGuides.sherut.answer).toMatch(/former Nesher route to Jerusalem or Amal route to Haifa/);
-    expect(travelGuides.esim.sections.find((section) => section.id === "calling")!.paragraphs.join(" ")).toMatch(/US phone number.*different from an Israeli/s);
-    expect(travelGuides.esim.answer).toMatch(/unlimited.*does not promise unlimited full-speed/i);
+    expect(travelGuides.esim.sections.find((section) => section.id === "calling")!.paragraphs.join(" ")).toMatch(/US number is not an Israeli number/s);
+    expect(travelGuides.esim.answer).toMatch(/Unlimited does not necessarily mean unlimited full-speed data/i);
   });
 
   it("covers the complete airport arrival sequence without duplicating specialty transport guides", () => {
@@ -844,7 +844,7 @@ describe("migrated practical guides", () => {
     const Page = EsimRoute.options.component!;
     const { container } = render(<RouterContextProvider router={router}><Page /></RouterContextProvider>);
     const providerSection = container.querySelector("#provider-options")!;
-    expect(container.querySelector("#checklist")!.compareDocumentPosition(providerSection)).toBe(Node.DOCUMENT_POSITION_FOLLOWING);
+    expect(container.querySelector("#checklist")!.compareDocumentPosition(providerSection)).toBe(Node.DOCUMENT_POSITION_PRECEDING);
     const cards = screen.getAllByTestId("provider-card");
     expect(cards).toHaveLength(5);
     for (const [index, link] of linksForPage("guide-esim").entries()) {
