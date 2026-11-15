@@ -302,11 +302,13 @@ describe("tours hub and SEO category pages", () => {
         const ownerGrid = owner.querySelector('ul[aria-label="My private day trips"]');
         expect(ownerGrid?.className).toMatch(/auto-rows-fr/);
         for (const card of owner.querySelectorAll('[data-testid="owner-tour-card"]')) {
-          expect(card).toHaveClass("h-full");
+          expect(card.getAttribute("class")).toContain("h-full");
           if (ownerGrid?.classList.contains("auto-rows-fr")) {
-            expect(card.querySelector("article")).toHaveClass("h-full");
-            expect(card.querySelector("img")?.parentElement).toHaveClass("relative", "overflow-hidden");
-            expect(card.querySelector("img")).toHaveClass("absolute", "object-cover");
+            expect(card.querySelector("article")?.getAttribute("class")).toContain("h-full");
+            expect(card.querySelector("img")?.parentElement?.getAttribute("class")).toContain("relative");
+            expect(card.querySelector("img")?.parentElement?.getAttribute("class")).toContain("overflow-hidden");
+            expect(card.querySelector("img")?.getAttribute("class")).toContain("absolute");
+            expect(card.querySelector("img")?.getAttribute("class")).toContain("object-cover");
           }
         }
         expect(owner.className).not.toContain("bg-navy");
