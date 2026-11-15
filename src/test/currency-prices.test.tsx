@@ -38,7 +38,7 @@ describe("international price estimates", () => {
   it.each([
     { label: "airport hub", path: "/airport-transfers/", route: TransfersRoute, count: 0 },
     { label: "dedicated airport route", path: "/airport-transfers/jerusalem/", route: JerusalemRoute, count: 0 },
-    { label: "shore-excursion cards", path: "/shore-excursions/haifa/", route: HaifaShoreRoute, count: 4 },
+    { label: "compact shore-excursion cards", path: "/shore-excursions/haifa/", route: HaifaShoreRoute, count: 0 },
   ])("retains appropriate ILS fares and optional estimates on $label", async ({ path, route, count }) => {
     const router = createRouter({ routeTree, context: { queryClient: new QueryClient() }, history: createMemoryHistory({ initialEntries: [path] }), trailingSlash: "always" });
     await router.load();

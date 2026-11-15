@@ -215,7 +215,7 @@ describe("port service catalog", () => {
     expect(shoreListedPrice({ ...product, listedPrice: { ...product.listedPrice!, basis: "per_group" } }, now)).toBeUndefined();
     await pageAt("/shore-excursions/haifa/?platform=viator");
     const privateTour = cards().find((card) => card.dataset["productId"] === "shore-viator-haifa-jerusalem-bethlehem")!;
-    expect(privateTour).toHaveTextContent("See current price");
+    expect(privateTour).toHaveTextContent("Check current price");
     expect(privateTour).not.toHaveTextContent(/US\$|From ILS/);
   });
 

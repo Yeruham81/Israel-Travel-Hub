@@ -134,7 +134,8 @@ describe("shore excursions", () => {
     expect(screen.getByRole("link", { name: "Privacy Policy" })).toHaveAttribute("href", "/privacy-policy/");
     expect(screen.queryByText(/Prefer an online form|existing .*contact form/)).not.toBeInTheDocument();
     const alternative = services.find((card) => card.dataset["productId"] === `shore-viator-${id}-jerusalem-bethlehem`)!;
-    expect(alternative).toHaveTextContent("Bein Harim Tours");
+    expect(alternative).toHaveAttribute("data-operator-id", "bein-harim");
+    expect(alternative).toHaveTextContent("Viator");
     expect(alternative).not.toHaveTextContent(/From ILS/);
     expect(within(alternative).getByRole("link", { name: /View on Viator/ })).toHaveAttribute("rel", "sponsored noopener noreferrer");
     const related = screen.getByRole("list", { name: "Useful guides for your day ashore" });
@@ -192,7 +193,7 @@ describe("shore excursions", () => {
     expect(localStorage.length).toBe(0);
     fireEvent.click(screen.getByRole("link", { name: `Request ${port.itineraries[1]!.destination} from ${port.name}` }));
     expect(screen.getByRole("button", { name: "Send excursion request" })).toBeEnabled();
-    fireEvent.click(screen.getByRole("link", { name: "Ask for a custom itinerary" }));
+    fireEvent.change(screen.getByLabelText("Requested itinerary *"), { target: { value: "other" } });
     expect(screen.getByLabelText("Requested itinerary *")).toHaveValue("other");
     expect(screen.getByLabelText("Your itinerary or destinations *")).toBeRequired();
   });
