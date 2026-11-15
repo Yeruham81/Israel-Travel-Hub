@@ -401,7 +401,7 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
   esim: {
     id: "esim",
     title: "Best eSIM for Israel: Prices, Providers & My Picks",
-    description: "Find the best Israel travel eSIM for a short visit, a two-week trip or heavy data use. Compare November 2026 prices for 5GB/30-day plans, then choose the right provider.",
+    description: "Find the best Israel travel eSIM for a short visit, a two-week trip or heavy data use. Compare 5GB/30-day prices, recommended providers and what each plan includes.",
     intro: "Which eSIM should you buy before travelling to Israel? Compare actual plan prices, see my picks for different trip lengths and data needs, and follow the provider links to choose your package.",
     answer: "For a typical Israel holiday, I would compare Saily ($7.99 for 5GB/30 days) and Airalo ($8.00 for 5GB/30 days) first. Airalo is also worth checking for heavier fixed-data use (20GB/30 days at $16.50). Yesim offers fixed-data and unlimited alternatives, GigSky is worth comparing for multi-country trips, and Drimsim suits very occasional use rather than a normal data-heavy holiday. These are published November 2026 prices, not guarantees of network speed or checkout price.",
     updatedAt: "2026-11-15",
