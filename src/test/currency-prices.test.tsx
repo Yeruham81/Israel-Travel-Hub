@@ -89,10 +89,11 @@ describe("international price estimates", () => {
     const outdated = { ...rates(), publishedAt: "2026-09-01" };
     const expired = renderToString(<CurrencyRatesContext.Provider value={{ rates: outdated, status: "cached", loading: false }}><CompactCurrencyEquivalents amount={550} /></CurrencyRatesContext.Provider>);
     expect(expired).not.toContain("compact-currency-estimate");
-    const fresh = renderToString(<CurrencyRatesContext.Provider value={{ rates: rates(), status: "fresh", loading: false }}><CompactCurrencyEquivalents amount={550} /></CurrencyRatesContext.Provider>);
-    expect(fresh).toContain("≈ $138");
-    expect(fresh).toContain("€110");
-    expect(fresh).not.toContain("USD/EUR estimates unavailable");
+    render(<CurrencyRatesContext.Provider value={{ rates: rates(), status: "fresh", loading: false }}><CompactCurrencyEquivalents amount={550} /></CurrencyRatesContext.Provider>);
+    const fresh = screen.getByTestId("compact-currency-estimate");
+    expect(fresh.querySelector('[data-currency="USD"]')).toHaveTextContent("≈ $138");
+    expect(fresh.querySelector('[data-currency="EUR"]')).toHaveTextContent("€110");
+    expect(fresh).not.toHaveTextContent("USD/EUR estimates unavailable");
   });
 
   it("does not fetch on the price-free homepage and activates after navigation to priced routes", async () => {
