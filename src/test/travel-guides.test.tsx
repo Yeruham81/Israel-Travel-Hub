@@ -839,45 +839,58 @@ describe("migrated practical guides", () => {
     expect(travelGuides.israel.related).toEqual(["telAviv", "taxis", "sherut", "shabbat", "airportTaxis", "arrival"]);
   });
 
-  it("links five eSIM providers in the price comparison and preserves sponsored click tracking", async () => {
-    const expected = { "esim-airalo": "https://airalo.tpm.li/JmHFDV3v", "esim-saily": "https://saily.tpm.li/nM5mNYzP", "esim-yesim": "https://yesim.tpm.li/6WmqBIJV", "esim-gigsky": "https://gigsky.tpm.li/NxqtNVtH", "esim-drimsim": "https://drimsim.tpm.li/khIJTNaX" };
+  it("recommends three eSIM trip types with tracked provider actions and practical links", async () => {
+    const expected = { "esim-airalo": "https://airalo.tpm.li/JmHFDV3v", "esim-saily": "https://saily.tpm.li/nM5mNYzP", "esim-yesim": "https://yesim.tpm.li/6WmqBIJV", "esim-gigsky": "https://gigsky.tpm.li/NxqtNVtH" };
     const router = await routerAt(travelGuidePaths.esim);
     const Page = EsimRoute.options.component!;
     const { container } = render(<RouterContextProvider router={router}><Page /></RouterContextProvider>);
     expect(container.querySelector("#provider-options")).toBeNull();
     expect(screen.queryAllByTestId("provider-card")).toHaveLength(0);
-    const comparison = container.querySelector("#at-a-glance table") as HTMLElement;
-    expect(within(comparison).getByRole("columnheader", { name: "Longer trip · 5GB / 10GB" })).toBeInTheDocument();
-    expect(comparison.textContent).toContain("$7.99");
-    expect(comparison.textContent).toContain("$8.00");
-    expect(comparison.textContent).toContain("$9.90");
-    expect(comparison.textContent).toContain("$56.24");
-    expect(comparison.textContent).toContain("$69.00");
-    expect(comparison.textContent).toContain("$71.99");
-    expect(within(comparison).getByRole("columnheader", { name: "Heavy use · Unlimited" })).toBeInTheDocument();
-    for (const link of linksForPage("guide-esim")) {
-      const nameLink = within(comparison).getByRole("link", { name: new RegExp("^" + link.providerName) });
-      expect(affiliateConfig[link.id]!.trackingUrl).toBe(expected[link.id as keyof typeof expected]);
-      expect(nameLink).toHaveAttribute("href", expected[link.id as keyof typeof expected]);
-      expect(nameLink).toHaveAttribute("rel", "sponsored noopener noreferrer");
-      expect(link.mode).toBe("provider_redirect");
-    }
-    const first = within(comparison).getByRole("link", { name: /^Airalo/ });
-    first.addEventListener("click", (event) => event.preventDefault());
-    fireEvent.click(first);
-    expect(readOutboundClicks()).toEqual([expect.objectContaining({ pageId: "guide-esim", productId: "esim-airalo", offerId: "esim-airalo" })]);
-    const longTripSection = container.querySelector("#long-trip") as HTMLElement;
-    expect(within(longTripSection).getAllByRole("link", { name: /^Saily/ })[0]).toHaveAttribute("href", expected["esim-saily"]);
-    expect(container.querySelector("#short-trip")).not.toBeNull();
-    expect(travelGuides.esim.services).toHaveLength(4);
+
     const quickAnswer = container.querySelector("#quick-answer") as HTMLElement;
     expect(quickAnswer.querySelectorAll("a")).toHaveLength(0);
     expect(within(quickAnswer).getAllByText("Saily", { selector: "strong" })).toHaveLength(1);
-    expect(within(quickAnswer).getByText("GigSky", { selector: "strong" })).toBeInTheDocument();
+
+    const pickCards = screen.getByRole("region", { name: "Choose your eSIM by trip type" });
+    const cards = [...pickCards.querySelectorAll("article")];
+    expect(cards).toHaveLength(3);
+    const pickIds = ["esim-saily", "esim-saily", "esim-gigsky"] as const;
+    cards.forEach((card, i) => {
+      expect(card).toHaveTextContent("My choice:");
+      const link = within(card as HTMLElement).getByRole("link");
+      expect(link).toHaveAttribute("href", expected[pickIds[i]]);
+      expect(link).toHaveAttribute("rel", "sponsored noopener noreferrer");
+    });
+
+    const comparison = container.querySelector("#at-a-glance table") as HTMLElement;
+    expect(within(comparison).getAllByRole("row")).toHaveLength(4);
+    expect(within(comparison).getByRole("columnheader", { name: "My choice" })).toBeInTheDocument();
+    expect(comparison.textContent).toContain("$5.99");
+    expect(comparison.textContent).toContain("$7.99");
+    expect(comparison.textContent).toContain("$56.24");
+    for (const id of Object.keys(expected) as Array<keyof typeof expected>) {
+      const provider = linksForPage("guide-esim").find(link => link.id === id)!;
+      const nameLink = within(comparison).getAllByRole("link", { name: provider.providerName })[0];
+      expect(affiliateConfig[id]!.trackingUrl).toBe(expected[id]);
+      expect(nameLink).toHaveAttribute("href", expected[id]);
+      expect(nameLink).toHaveAttribute("rel", "sponsored noopener noreferrer");
+    }
+    const first = within(cards[0] as HTMLElement).getByRole("link");
+    first.addEventListener("click", (event) => event.preventDefault());
+    fireEvent.click(first);
+    expect(readOutboundClicks()).toEqual([expect.objectContaining({ pageId: "guide-esim", productId: "esim-saily", offerId: "esim-saily" })]);
+
+    for (const sectionId of ["short-trip", "long-trip", "unlimited", "regional"]) {
+      const section = container.querySelector("#" + sectionId) as HTMLElement;
+      expect(section).toHaveTextContent("My choice:");
+      expect(within(section).getAllByRole("link", { name: /^(Saily|Airalo|GigSky)$/ }).length).toBeGreaterThan(0);
+    }
+    expect(container.querySelector('#compatibility a[href="https://www.airalo.com/how-airalo-works/device-compatibility"]')).not.toBeNull();
+    expect(container.querySelector('#regional a[href="https://www.airalo.com/middle-east-and-north-africa-esim"]')).not.toBeNull();
+    expect(container.querySelector('nav a[href="#contact"]')).toHaveTextContent("Contact Me");
+    expect(travelGuides.esim.services).toHaveLength(4);
     expect(container.querySelector("#sources")).toBeNull();
     expect(container.textContent).not.toContain("References:");
-    const unlimited = container.querySelector("#unlimited") as HTMLElement;
-    expect(unlimited).toHaveTextContent("$56.24");
   });
   it.each([
     { id: "taxis", route: TaxiRoute, count: 3 },
