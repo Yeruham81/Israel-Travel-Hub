@@ -49,8 +49,9 @@ describe("port service catalog", () => {
   it.each([{ port: "haifa" }, { port: "ashdod" }] as const)("shows all $port return tours with destination tags and preserves the inquiry while filtering", async ({ port }) => {
     const { router, history, container } = await pageAt(shorePorts[port].path);
     expect(cards()).toHaveLength(catalogSizes[port]);
-    expect(cards().slice(0, 4).every((card) => card.dataset["serviceKind"] === "private-driver" && card.dataset["bookingPlatform"] === "direct")).toBe(true);
-    expect(cards().slice(4).every((card) => ["getyourguide", "viator"].includes(card.dataset["bookingPlatform"]!))).toBe(true);
+    const externalCount = catalogSizes[port] - 4;
+    expect(cards().slice(0, externalCount).every(card => card.dataset["serviceKind"] === "guided-tour" && ["getyourguide", "viator"].includes(card.dataset["bookingPlatform"]!))).toBe(true);
+    expect(cards().slice(externalCount).every(card => card.dataset["serviceKind"] === "private-driver" && card.dataset["bookingPlatform"] === "direct")).toBe(true);
     expect(screen.queryByRole("search")).not.toBeInTheDocument();
     expect(screen.queryByRole("navigation", { name: "Filter port services by type" })).not.toBeInTheDocument();
     expect(screen.queryByRole("navigation", { name: "Filter port services by booking site" })).not.toBeInTheDocument();
@@ -59,7 +60,7 @@ describe("port service catalog", () => {
     expect(header.querySelectorAll("a.btn")).toHaveLength(0);
     expect(container.querySelector("#request-quote")).toBeInTheDocument();
     expect(header).not.toHaveTextContent(/From ILS|Weekday starting rate|Full-day return transport|Exchange rate|Browse tours|narrow.*tag/i);
-    expect(cards().every((card) => card.textContent?.includes(`${shorePorts[port].name} Port · pickup & return`))).toBe(true);
+    expect(cards().every((card) => card.textContent?.includes(`From ${shorePorts[port].name} Port`))).toBe(true);
     expect(cards().every((card) => !/Price checked|one.way|direct quote/.test(card.textContent || ""))).toBe(true);
     expect(cards().some((card) => card.dataset["serviceKind"] === "transfer")).toBe(false);
     fireEvent.change(screen.getByLabelText("Full name *"), { target: { value: "Jamie Cruise" } });
@@ -177,7 +178,8 @@ describe("port service catalog", () => {
     await pageAt("/shore-excursions/haifa/?operator=ilya-pevzner&destination=akko");
     expect(cards()).toHaveLength(2);
     const card = cards().find((card) => card.dataset["productId"] === "shore-gyg-haifa-akko")!;
-    expect(card).toHaveTextContent("Operated by Ilya Pevzner Guide Israel");
+    expect(card).toHaveAttribute("data-operator-id", "ilya-pevzner");
+    expect(card).not.toHaveTextContent("Operated by");
     expect(card).toHaveTextContent("GetYourGuide");
     expect(card).not.toHaveTextContent(/From ILS|Sponsored link/);
     const link = within(card).getByRole("link", { name: /View on GetYourGuide/ });
@@ -192,16 +194,15 @@ describe("port service catalog", () => {
     const card = cards().find((card) => card.dataset["productId"] === "shore-gyg-ashdod-jerusalem-bethlehem")!;
     expect(card).toHaveTextContent("9–11 hours");
     expect(card).toHaveTextContent("Private tour");
-    expect(card).toHaveTextContent("Ashdod Port · pickup & return");
+    expect(card).toHaveTextContent("From Ashdod Port");
     expect(card).toHaveTextContent("US$1,009");
-    expect(card).toHaveTextContent("Per group · up to 3");
-    expect(card).toHaveTextContent("Published starting price");
-    expect(card).toHaveTextContent("2026-10-21");
+    expect(card).toHaveTextContent("Reference price · per group");
+    expect(card).not.toHaveTextContent("2026-10-21");
     expect(card).not.toHaveTextContent(/Per person|Best for:|Published car-and-driver starting rate|Check the actual ship date/);
     const masada = cards().find((card) => card.dataset["productId"] === "shore-gyg-ashdod-masada")!;
     expect(masada).toHaveTextContent("US$130");
-    expect(masada).toHaveTextContent("Per person");
-    expect(masada).not.toHaveTextContent("Per group");
+    expect(masada).toHaveTextContent("Reference price · per person");
+    expect(masada).not.toHaveTextContent("per group");
   });
 
   it("suppresses old, future, unsupported or invalid price snapshots and preserves an honest price fallback", async () => {
