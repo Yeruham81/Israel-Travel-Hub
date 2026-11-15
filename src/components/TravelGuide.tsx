@@ -208,6 +208,32 @@ function linkedEsimNames(paragraph: string, providers: ReturnType<typeof linksFo
   });
 }
 
+/** The recommendations use one attributed affiliate link at the end, not a link on each brand mention. */
+function esimRecommendation(paragraph: string, providers: ReturnType<typeof linksForPage>): ReactNode {
+  const match = paragraph.match(/^(.*?)(My choice:\s*)(Airalo|Saily|Yesim|GigSky|Drimsim)(\.)$/s);
+  if (!match) return emphasizeEsimNames(paragraph);
+  const provider = providers.find((item) => item.providerName === match[3]);
+  if (!provider) return emphasizeEsimNames(paragraph);
+  return <>{emphasizeEsimNames(match[1])}<strong>My choice:</strong>{" "}
+    <ProviderNameLink link={provider} pageId="guide-esim">{match[3]}</ProviderNameLink>{match[4]}</>;
+}
+
+function EsimPickCards({ facts, providers }: { facts: TravelGuide["facts"]; providers: ReturnType<typeof linksForPage> }) {
+  const recommendedNames = ["Saily", "Saily", "GigSky"];
+  return <section aria-label="Choose your eSIM by trip type" className="mt-5 grid gap-3 sm:grid-cols-3">
+    {facts.map((fact, index) => {
+      const provider = providers.find((item) => item.providerName === recommendedNames[index]);
+      return <article key={fact.label} className="flex h-full flex-col rounded-xl border bg-card px-4 py-4 sm:px-5 sm:py-5">
+        <h3 className="text-sm font-semibold text-foreground">{fact.label}</h3>
+        <p className="mt-2 text-base font-semibold leading-snug">{fact.text}</p>
+        {provider && <p className="mt-auto pt-4 text-sm"><strong>My choice:</strong>{" "}
+          <ProviderNameLink link={provider} pageId="guide-esim">{provider.providerName} · See plans</ProviderNameLink>
+        </p>}
+      </article>;
+    })}
+  </section>;
+}
+
 export function TravelGuidePage({ id }: { id: TravelGuideId }) {
   const guide = travelGuides[id];
   // Area A entry rules introduce the Bethlehem route choices before the comparison.
@@ -241,7 +267,8 @@ export function TravelGuidePage({ id }: { id: TravelGuideId }) {
         <h2 id="answer-h" className="text-2xl">Quick answer</h2><p className="mt-3 text-lg leading-relaxed">{id === "esim" ? emphasizeEsimNames(guide.answer) : guide.answer}</p>
         {guide.reviewNote && <p className="mt-4 border-t border-primary/20 pt-3 text-sm leading-relaxed text-muted-foreground">{guide.reviewNote}</p>}
       </section>
-      {(isTransportOverview || id === "esim") && <section aria-label={id === "esim" ? "Choose your eSIM by trip type" : "Transport planning essentials"} className="mt-5 grid gap-3 sm:grid-cols-3">
+      {id === "esim" && <EsimPickCards facts={guide.facts} providers={providers} />}
+      {isTransportOverview && <section aria-label="Transport planning essentials" className="mt-5 grid gap-3 sm:grid-cols-3">
         {guide.facts.map(fact => <div key={fact.label} className="rounded-xl border bg-card p-4">
           <p className="text-xs font-semibold uppercase tracking-wide text-primary">{fact.label}</p>
           <p className="mt-2 text-sm leading-relaxed">
@@ -265,7 +292,7 @@ export function TravelGuidePage({ id }: { id: TravelGuideId }) {
         : isTaxiFareGuide
           ? [["at-a-glance", "Meter rates"], ...guide.sections.map((section) => [section.id, section.title] as const), ["faq", "FAQ"], ["contact", "Contact"], ["sources", "Sources"]]
           : id === "esim"
-          ? [["at-a-glance", "Compare prices"], ...guide.sections.map((section) => [section.id, section.title] as const), ["checklist", "Checklist"], ["faq", "FAQ"], ["contact", "Contact Moshe"]]
+          ? [["at-a-glance", "My eSIM picks"], ...guide.sections.map((section) => [section.id, section.title] as const), ["checklist", "Checklist"], ["faq", "FAQ"], ["contact", "Contact Me"]]
           : [["at-a-glance", "At a glance"], ...guide.sections.map((section) => [section.id, section.title] as const), ["checklist", "Checklist"], ["faq", "FAQ"], ...(isTransportOverview ? [["contact", "Contact Moshe"], ["sources", "Sources"]] as const : [["sources", "Sources"], ["contact", "Contact Moshe"]] as const)]} compactLabels={id === "taxis" ? taxiNavCompactLabels : isTaxiFareGuide ? fareNavCompactLabels : undefined} />
       {bethlehemEntryRules && <section id={bethlehemEntryRules.id} aria-labelledby="entry-rules-h" className="mt-10 scroll-mt-24">
         <h2 id="entry-rules-h" className="text-3xl">{bethlehemEntryRules.title}</h2>
@@ -281,7 +308,7 @@ export function TravelGuidePage({ id }: { id: TravelGuideId }) {
         <h2 id="comparison-h" className="text-3xl">{guide.comparison.caption}</h2>
         {isTransportOverview && <p className="mt-3 max-w-3xl leading-relaxed">Compare the entire trip to your final address. Cost labels are relative, not live fares; operating hours depend on your date and route.</p>}
         {isTransportOverview && <p className="mt-3 text-xs text-muted-foreground sm:hidden">Swipe horizontally to view all five columns.</p>}{id === "esim" && <p className="mt-3 text-xs text-muted-foreground sm:hidden">Swipe to see prices for all three trip types.</p>}
-        <div role="region" aria-label={id === "esim" ? "eSIM plan prices comparison" : "Transport comparison table"} tabIndex={0} className="mt-5 max-w-full overflow-x-auto rounded-xl border focus-visible:outline-2 focus-visible:outline-primary"><table className={isTransportOverview ? "w-full min-w-[860px] text-left text-sm" : id === "jerusalemDeadSea" ? "w-full min-w-[780px] text-left text-sm" : isTaxiFareGuide ? "w-full min-w-[640px] text-left text-sm" : id === "esim" ? "w-full min-w-[1000px] text-left text-sm" : "w-full min-w-[560px] text-left text-sm"}><caption className="sr-only">{guide.comparison.caption}</caption><thead className="bg-secondary"><tr>{guide.comparison.headers.map((heading) => <th key={heading} scope="col" className={"p-4 font-semibold " + ((isTransportOverview || isTaxiFareGuide || id === "esim") && heading === guide.comparison.headers[0] ? "sticky left-0 z-10 bg-secondary" : "")}>{heading}</th>)}</tr></thead><tbody className="divide-y">{guide.comparison.rows.map((row, index) => <tr key={index} className="bg-card">{row.map((cell, cellIndex) => cellIndex === 0 ? <th key={cellIndex} scope="row" className={"p-4 font-medium " + ((isTransportOverview || isTaxiFareGuide || id === "esim") ? "sticky left-0 z-10 bg-card" : "")}>{isTransportOverview ? <a href={"#" + (overviewRowAnchors[index] || "choose")} className="text-primary underline underline-offset-4">{cell}</a> : id === "esim" ? (providers.find((link) => link.providerName === cell) ? <ProviderNameLink link={providers.find((link) => link.providerName === cell)!} pageId="guide-esim">{cell}</ProviderNameLink> : cell) : cell}</th> : <td key={cellIndex} className="p-4 leading-relaxed text-muted-foreground">{cell}</td>)}</tr>)}</tbody></table></div>
+        <div role="region" aria-label={id === "esim" ? "eSIM plan prices comparison" : "Transport comparison table"} tabIndex={0} className="mt-5 max-w-full overflow-x-auto rounded-xl border focus-visible:outline-2 focus-visible:outline-primary"><table className={isTransportOverview ? "w-full min-w-[860px] text-left text-sm" : id === "jerusalemDeadSea" ? "w-full min-w-[780px] text-left text-sm" : isTaxiFareGuide ? "w-full min-w-[640px] text-left text-sm" : id === "esim" ? "w-full min-w-[1000px] text-left text-sm" : "w-full min-w-[560px] text-left text-sm"}><caption className="sr-only">{guide.comparison.caption}</caption><thead className="bg-secondary"><tr>{guide.comparison.headers.map((heading) => <th key={heading} scope="col" className={"p-4 font-semibold " + ((isTransportOverview || isTaxiFareGuide || id === "esim") && heading === guide.comparison.headers[0] ? "sticky left-0 z-10 bg-secondary" : "")}>{heading}</th>)}</tr></thead><tbody className="divide-y">{guide.comparison.rows.map((row, index) => <tr key={index} className="bg-card">{row.map((cell, cellIndex) => cellIndex === 0 ? <th key={cellIndex} scope="row" className={"p-4 font-medium " + ((isTransportOverview || isTaxiFareGuide || id === "esim") ? "sticky left-0 z-10 bg-card" : "")}>{isTransportOverview ? <a href={"#" + (overviewRowAnchors[index] || "choose")} className="text-primary underline underline-offset-4">{cell}</a> : id === "esim" ? (providers.find((link) => link.providerName === cell) ? <ProviderNameLink link={providers.find((link) => link.providerName === cell)!} pageId="guide-esim">{cell}</ProviderNameLink> : cell) : cell}</th> : <td key={cellIndex} className="p-4 leading-relaxed text-muted-foreground">{id === "esim" ? linkedEsimNames(cell, providers) : cell}</td>)}</tr>)}</tbody></table></div>
         {id === "esim" && <p className="mt-3 max-w-4xl text-xs leading-relaxed text-muted-foreground">Prices checked November 2026. Short-trip packages have different validity periods. Drimsim charges by MB, not by bundle.</p>}{isTaxiFareGuide && <p className="mt-3 max-w-4xl text-sm leading-relaxed text-muted-foreground">Rates effective April 2026, specified through March 2027 unless amended. All amounts above include 18% VAT outside Eilat; the official regulation lists amounts before VAT.</p>}
       </section>}
       {isTransportOverview && <nav aria-label="Quick transport topics" className="mt-4 rounded-xl border bg-secondary/30 p-3">
@@ -302,7 +329,7 @@ export function TravelGuidePage({ id }: { id: TravelGuideId }) {
         <div className="mt-4 max-w-4xl space-y-4 leading-relaxed text-foreground">
           {section.paragraphs.map((paragraph, paragraphIndex) => (
             <Fragment key={paragraphIndex}>
-              <p>{section.richParagraphs?.[paragraphIndex] ? <GuideRichParagraph spans={section.richParagraphs[paragraphIndex]} /> : id === "esim" ? linkedEsimNames(paragraph, providers) : <GuideParagraph paragraph={paragraph} inlineLinks={section.inlineLinks} />}</p>
+              <p>{section.richParagraphs?.[paragraphIndex] ? <GuideRichParagraph spans={section.richParagraphs[paragraphIndex]} /> : id === "esim" ? esimRecommendation(paragraph, providers) : <GuideParagraph paragraph={paragraph} inlineLinks={section.inlineLinks} />}</p>
               {paragraphIndex === 0 && section.photo && <GuideSectionPhoto photo={section.photo} />}
             </Fragment>
           ))}
