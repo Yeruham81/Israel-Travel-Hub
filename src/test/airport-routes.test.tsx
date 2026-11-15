@@ -73,8 +73,11 @@ describe("four dedicated airport transfer routes", () => {
     const banners = within(platformSection).getAllByTestId("airport-platform-banner");
     expect(platformLinks.map((platform) => platform.providerName)).toEqual(["Kiwitaxi", "Welcome Pickups", "Intui.travel", "GetTransfer.com"]);
     expect(banners).toHaveLength(4);
-    expect(platformSection).toHaveTextContent("Compare independent booking options for your transfer to " + guide.city);
-    expect(platformSection).toHaveTextContent("Check the final price and terms");
+    expect(banners.every(banner => Boolean(banner.querySelector(".self-center")))).toBe(true);
+    expect(platformSection).toHaveTextContent("You can also search for a private transfer to " + guide.city + " on one of the booking websites below.");
+    expect(platformSection).toHaveTextContent("Each provider sets its own prices and terms.");
+    expect(platformSection).toHaveTextContent("Please review all details carefully before booking.");
+    expect(within(platformSection).getByTestId("airport-external-providers-note")).toBeInTheDocument();
     expect(platformSection.compareDocumentPosition(container.querySelector("#faq")!)).toBe(Node.DOCUMENT_POSITION_FOLLOWING);
     for (const [index, platform] of platformLinks.entries()) {
       expect(within(banners[index]!).getByRole("img", { name: `${platform.providerName} logo` })).toHaveAttribute("src");
