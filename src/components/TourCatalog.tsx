@@ -14,7 +14,7 @@ export function OwnerTourSection({ tours, compact = false }: { tours: TourProduc
     <p className="text-xs font-bold uppercase tracking-widest text-primary">Personally arranged with Moshe Barak</p>
     <h2 id="my-private-days-h" className="mt-2 text-3xl font-semibold">My private day trips</h2>
     <p className="mt-3 max-w-3xl text-sm leading-relaxed text-muted-foreground">Enjoy the flexibility of a private driver, with a customized route, convenient pickup and stops of your choice.</p>
-    <ul className={compact ? "mt-4 grid auto-rows-fr gap-3" : "mt-5 grid gap-5 sm:auto-rows-fr sm:grid-cols-2"} aria-label="My private day trips">
+    <ul className={compact ? "mt-4 grid auto-rows-fr gap-3" : "mt-5 grid auto-rows-fr gap-5 sm:grid-cols-2"} aria-label="My private day trips">
       {tours.map(tour => compact ? <li key={tour.id} id={tour.id} data-product-id={tour.id} data-operator-id="moshe-barak" data-testid="owner-tour-card" className="h-full min-w-0 scroll-mt-24 overflow-hidden rounded-xl border bg-card">
         <article className="flex h-full min-w-0 flex-col sm:flex-row sm:items-stretch">
           <div className="relative h-36 w-full shrink-0 overflow-hidden bg-secondary/20 sm:h-auto sm:w-48 lg:w-56"><img src={tourPhotos[tour.id]!.src} alt={tourPhotos[tour.id]!.alt} width={320} height={180} loading="lazy" decoding="async" className="absolute inset-0 h-full w-full object-cover" /></div>
