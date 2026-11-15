@@ -32,16 +32,15 @@ export function ShoreQuoteForm({ portId, itineraryId, onItineraryChange }: { por
   const photo = airportTransferPhotos["moshe"]!;
   const fieldClass = "mt-2 h-11 bg-background text-base";
   return <section id="request-quote" tabIndex={-1} aria-labelledby="quote-h" className="mt-12 scroll-mt-24 overflow-hidden rounded-2xl border bg-card shadow-sm focus-visible:outline-2 focus-visible:outline-primary">
-    <div className="grid md:grid-cols-[0.8fr_1.6fr]">
+    <div className="grid md:grid-cols-[0.85fr_1.5fr]">
       <div className="bg-navy p-6 text-navy-foreground sm:p-8">
         <img src={photo.src} alt={photo.alt} width={150} height={200} loading="lazy" className="h-24 w-20 rounded-xl object-cover" />
-        <p className="mt-5 text-xs font-semibold uppercase tracking-widest opacity-75">A personal plan for your day ashore</p>
+        <p className="mt-5 text-xs font-semibold uppercase tracking-widest opacity-80">A personal plan for your day ashore</p>
         <h2 id="quote-h" className="mt-3 text-3xl">Request your {port.name} shore excursion</h2>
-        <p className="mt-4 leading-relaxed opacity-90">Tell me about your ship and the places you'd like to visit. I'll help plan a realistic route, arrange a suitable vehicle and confirm the full price before you book.</p>
-        <ul className="mt-6 list-disc space-y-3 pl-5 text-sm text-navy-foreground marker:text-white"><li>Private return trip from {port.name} Port</li><li>Custom itineraries and larger-group requests</li><li>Pickup and return planned around your ship</li><li>I'll prepare a personal quote for your day ashore</li></ul>
+        <p className="mt-4 leading-relaxed opacity-90">Tell me your ship, shore time, group size and preferred stops. I can arrange a private car and driver from {port.name} Port, with a realistic return plan and a confirmed quote before booking.</p>
       </div>
       <div className="p-5 sm:p-8">
-        <form onSubmit={send} noValidate aria-label={`${port.name} shore excursion quote request`} aria-busy={submission.isSending}>
+        <form onSubmit={send} noValidate className="mt-6" aria-label={`${port.name} shore excursion quote request`} aria-busy={submission.isSending}>
           <fieldset disabled={submission.isSending} className="min-w-0">
             {errors.length > 0 && <div ref={errorRef} tabIndex={-1} role="alert" className="mb-5 rounded-xl border border-destructive p-4 text-sm text-destructive"><p className="font-semibold">Please check these details:</p><ul className="mt-2 list-disc pl-5">{errors.map((error) => <li key={error}>{error}</li>)}</ul></div>}
             <div className="grid gap-5 sm:grid-cols-2">
