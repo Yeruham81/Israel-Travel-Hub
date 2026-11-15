@@ -276,7 +276,7 @@ export function TravelGuidePage({ id }: { id: TravelGuideId }) {
         <h2 id="answer-h" className="text-2xl">Quick answer</h2><p className="mt-3 text-lg leading-relaxed">{id === "esim" ? emphasizeEsimNames(guide.answer) : guide.answer}</p>
         {guide.reviewNote && <p className="mt-4 border-t border-primary/20 pt-3 text-sm leading-relaxed text-muted-foreground">{guide.reviewNote}</p>}
       </section>
-      {id === "esim" && <><EsimPickCards facts={guide.facts} providers={providers} /><p className="mt-3 text-xs leading-relaxed text-muted-foreground">Plan prices checked 15 November 2026 (USD unless otherwise stated). Prices, discounts, taxes and package terms can change; confirm the final amount and allowance with the provider before buying.</p></>}
+      {id === "esim" && <><EsimPickCards facts={guide.facts} providers={providers} /><p className="mt-3 text-xs leading-relaxed text-muted-foreground">Plan prices checked 15 November 2026 (USD unless otherwise stated). Prices, discounts, taxes and package terms can change; confirm the final amount and allowance with the provider before buying. Providers may display prices in your local currency.</p></>}
       {isTransportOverview && <section aria-label="Transport planning essentials" className="mt-5 grid gap-3 sm:grid-cols-3">
         {guide.facts.map(fact => <div key={fact.label} className="rounded-xl border bg-card p-4">
           <p className="text-xs font-semibold uppercase tracking-wide text-primary">{fact.label}</p>
@@ -375,7 +375,6 @@ export function TravelGuidePage({ id }: { id: TravelGuideId }) {
       <FaqList faqs={guide.faqs} {...(isTransportOverview && guide.faqGroups ? { groups: guide.faqGroups } : {})} />
       {id === "jerusalemDeadSea" && <DeadSeaGuideFollowUps />}
       {id === "bethlehem" && <BethlehemGuideFollowUps />}
-      {id === "esim" && <SourceList ids={sourcesFor(guide)} intro="Official provider plan pages used for these comparisons. Prices, coverage and fair-use limits can change; confirm the details for the exact package before purchase." />}
       {!isTransportOverview && !isTaxiFareGuide && id !== "esim" && id !== "jerusalemDeadSea" && id !== "bethlehem" && (id === "shabbat" ? <SourceList ids={sourcesFor(guide)} intro="Official airport, public-transport and taxi-tariff references. Confirm timetables, charges and pickup instructions for your date." /> : <SourceList ids={sourcesFor(guide)} />)}
       {!isJerusalemCluster && id !== "shabbat" && <RelatedLinks title="Related practical guides" currentPath={travelGuidePaths[id]} illustrated={id === "esim"} maxPhotoCards={id === "esim" ? 6 : 4} items={guide.related.map((guideId) => ({ label: travelGuides[guideId].title, to: travelGuidePaths[guideId] }))} />}
       {!isJerusalemCluster && id !== "shabbat" && id !== "jerusalemDeadSea" && <RelatedLinks title="Plan the next part of your trip" items={guide.services} />}
@@ -395,6 +394,7 @@ export function TravelGuidePage({ id }: { id: TravelGuideId }) {
       {isTaxiFareGuide && <SourceList ids={sourcesFor(guide)} intro="Official taxi tariffs, applicable times and passenger-rights references." />}
       {id === "jerusalemDeadSea" && <SourceList ids={sourcesFor(guide)} intro="Official transport, beach and national-park information. Confirm schedules and conditions for your travel date." />}
       {id === "bethlehem" && <SourceList ids={sourcesFor(guide)} intro="Official bus, church and entry references." />}
+      {id === "esim" && <SourceList ids={sourcesFor(guide)} intro="Official provider plan pages used for these comparisons. Prices, coverage and fair-use limits can change; confirm the details for the exact package before purchase." />}
     </article>
   </main>;
 }
