@@ -461,8 +461,7 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
         id: "regional",
         title: "Best eSIM for a Middle East trip",
         paragraphs: [
-          "Visiting Israel along with Jordan, Egypt or other nearby countries? Airalo offers a Middle East & North Africa regional eSIM designed for travel across several destinations, so you may not need a separate plan in each country. My choice: Airalo.",
-          "The countries included depend on the regional package. Airalo's published coverage information includes Israel, Jordan and Egypt; you can view the current list of countries on the regional plan page.",
+          "Visiting Israel along with Jordan, Egypt or other nearby countries? Airalo offers a Middle East & North Africa regional eSIM covering several destinations with one plan. Its published country list includes Israel, Jordan and Egypt, making it a useful alternative to buying separate eSIMs for each country. My choice: Airalo.",
         ],
         externalLinks: [
           { label: "View Airalo's Middle East & North Africa coverage", href: "https://www.airalo.com/middle-east-and-north-africa-esim" },
