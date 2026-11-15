@@ -64,27 +64,28 @@ function Airport() {
     <div className="mx-auto max-w-5xl px-4">
       <section id="popular-destinations" aria-labelledby="popular-h" className="mt-8 scroll-mt-24">
         <h2 id="popular-h" className="text-2xl font-semibold">Popular private transfers</h2>
-        <p className="mt-2 text-sm leading-relaxed text-muted-foreground">Browse route details or request a quote for your airport pickup.</p>
+        <p className="mt-2 text-sm leading-relaxed text-muted-foreground">Choose where you’re heading for a direct, pre-arranged ride to your hotel or address.</p>
         <div className="mt-4 grid gap-3 md:grid-cols-2">
           {airportDestinationCards.filter((card) => card.popular).map((card) => <DestinationCard key={card.id} id={card.id} destination={card.destination} price={card.price} photo={card.photo} onChoose={choose} layout="hub-featured" />)}
         </div>
       </section>
       <section id="more-destinations" aria-labelledby="more-h" className="mt-9 scroll-mt-24">
         <h2 id="more-h" className="text-2xl font-semibold">More destinations from Ben Gurion Airport</h2>
-        <div className="mt-4 grid gap-2 sm:grid-cols-2">
+        <div className="mt-4 grid auto-rows-fr gap-2 sm:grid-cols-2">
           {airportDestinationCards.filter((card) => !card.popular).map((card) => <DestinationCard key={card.id} id={card.id} destination={card.destination} price={card.price} photo={card.photo} onChoose={choose} layout="hub-row" />)}
           <DestinationCard id="other" destination="Another destination?" photo={airportTransferPhotos["other"]!} onChoose={choose} layout="hub-row" />
         </div>
       </section>
       <div className="mt-4 text-xs leading-relaxed text-muted-foreground" data-testid="airport-rate-terms">
-        <p><strong>About starting prices:</strong> All prices are one-way weekday fares, per vehicle for up to four passengers. Night, weekend and holiday surcharges may apply. Larger vehicles for groups and families can be provided, requiring a separate quote. Full price is confirmed in advance.</p>
-        <p className="mt-1" data-testid="airport-fx-note">USD and EUR amounts are approximate, based on reference exchange rates. All fares are quoted in ILS.</p>
+        <p>All prices are one-way weekday fares, per vehicle for up to four passengers. Night, weekend and holiday surcharges may apply.</p>
+        <p className="mt-2">Larger vehicles for groups and families can be provided, requiring a separate quote.</p>
+        <p className="mt-2" data-testid="airport-fx-note">Full price is confirmed in advance. All fares are quoted and charged in ILS. USD and EUR amounts are approximate, based on current exchange rates.</p>
         <PageUpdated date={AIRPORT_TRANSFER_CHECK_DATE} />
       </div>
       <section id="benefits" aria-labelledby="benefits-h" className="mt-7 scroll-mt-24">
         <h2 id="benefits-h" className="sr-only">Private transfer benefits</h2>
-        <div className="grid grid-cols-3 gap-2 rounded-2xl border bg-secondary/25 p-3 sm:gap-4 sm:p-4">
-          {airportTransferBenefits.map((benefit, index) => { const Icon = benefitIcons[index]!; return <div key={benefit.title} className="min-w-0 text-center">
+        <div className="grid grid-cols-3 gap-4 rounded-2xl border bg-secondary/25 p-3 sm:gap-6 sm:p-4 lg:gap-8">
+          {airportTransferBenefits.map((benefit, index) => { const Icon = benefitIcons[index]!; return <div key={benefit.title} className="min-w-0 px-0.5 text-center sm:px-2 lg:px-3">
             <Icon className="mx-auto size-5 text-primary sm:size-6" aria-hidden />
             <h3 className="mt-2 text-xs font-semibold leading-snug sm:text-sm">{benefit.title}</h3>
             <p className="mt-1 hidden text-xs leading-relaxed text-muted-foreground sm:block">{benefit.text}</p>
