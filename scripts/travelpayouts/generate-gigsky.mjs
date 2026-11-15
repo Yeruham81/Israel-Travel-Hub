@@ -10,6 +10,7 @@ if (!token) throw new Error("Missing TRAVELPAYOUTS_API_TOKEN GitHub Actions secr
 
 const target = "https://www.gigsky.com/country/esim-in-israel";
 const subId = "itt_best_esim_israel_gigsky";
+const candidates = [target, "https://gigsky.com/country/esim-in-israel", "https://app.gigsky.com/", "https://www.gigsky.com/"];
 const response = await fetch("https://api.travelpayouts.com/links/v1/create", {
   method: "POST",
   headers: {
@@ -21,14 +22,18 @@ const response = await fetch("https://api.travelpayouts.com/links/v1/create", {
     trs: 406243,
     marker: 622032,
     shorten: true,
-    links: [{ url: target, sub_id: subId }],
+    links: candidates.map((url, index) => ({ url, sub_id: subId + "_" + index })),
   }),
   signal: AbortSignal.timeout(20000),
   redirect: "error",
 });
 if (!response.ok) throw new Error("Travelpayouts API HTTP " + response.status);
 const payload = await response.json();
-const result = payload?.result?.links?.[0];
+const results = payload?.result?.links ?? [];
+for (const item of results) {
+  console.log("GigSky candidate", item.url, item.code, String(item.message ?? "").slice(0, 100));
+}
+const result = results.find((item) => item.url === target);
 if (payload?.code !== "success" || result?.code !== "success" ||
     result?.url !== target || typeof result.partner_url !== "string") {
   throw new Error("GigSky destination link was not generated: " +
