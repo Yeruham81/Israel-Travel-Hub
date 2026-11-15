@@ -3,8 +3,8 @@ import { createMemoryHistory, createRouter, RouterContextProvider } from "@tanst
 import { act, cleanup, fireEvent, render, screen, within } from "@testing-library/react";
 import { renderToString } from "react-dom/server";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
-import { CurrencyRatesContext, CurrencyRatesProvider, ExchangeRateNote, PriceDisplay } from "@/components/CurrencyRates";
-import { initialReferenceFx, referenceFxConfig, type ExchangeRateSnapshot } from "@/data/registry";
+import { CompactCurrencyEquivalents, CurrencyRatesContext, CurrencyRatesProvider, ExchangeRateNote, PriceDisplay } from "@/components/CurrencyRates";
+import { airportTransferRates, initialReferenceFx, referenceFxConfig, type ExchangeRateSnapshot } from "@/data/registry";
 import { routeTree } from "@/routeTree.gen";
 import { Route as TransfersRoute } from "@/routes/airport-transfers.index";
 import { Route as JerusalemRoute } from "@/routes/airport-transfers.ben-gurion-airport-to-jerusalem";
@@ -59,6 +59,40 @@ describe("international price estimates", () => {
       expect(container.querySelectorAll('[data-testid="airport-destination-card"]')).toHaveLength(12);
       expect(other.querySelector('[data-testid="currency-price"]')).toBeNull();
     }
+  });
+
+  it("adds a single discreet USD/EUR line below each of the eleven ILS airport hub fares", async () => {
+    const router = createRouter({ routeTree, context: { queryClient: new QueryClient() }, history: createMemoryHistory({ initialEntries: ["/airport-transfers/"] }), trailingSlash: "always" });
+    await router.load();
+    const Page = TransfersRoute.options.component!;
+    const { container } = render(<RouterContextProvider router={router}><CurrencyRatesContext.Provider value={{ rates: rates(), status: "fresh", loading: false }}><Page /></CurrencyRatesContext.Provider></RouterContextProvider>);
+    const estimates = screen.getAllByTestId("compact-currency-estimate");
+    expect(estimates).toHaveLength(11);
+    for (const rate of airportTransferRates) {
+      const card = container.querySelector(`[data-destination="${rate.id}"]`)!;
+      const estimate = within(card as HTMLElement).getByTestId("compact-currency-estimate");
+      expect(estimate).toHaveAttribute("data-ils", String(rate.price.amount));
+      expect(estimate.querySelector('[data-currency="USD"]')).toHaveTextContent(`≈ ${Math.round(rate.price.amount / 4).toLocaleString("en-US")}`);
+      expect(estimate.querySelector('[data-currency="EUR"]')).toHaveTextContent(`€${Math.round(rate.price.amount / 5).toLocaleString("en-US")}`);
+      expect(card).toHaveTextContent(`From ₪${rate.price.amount.toLocaleString("en-US")}`);
+      expect(estimate.querySelectorAll('[aria-hidden="true"]')).toHaveLength(1);
+    }
+    const other = container.querySelector('[data-destination="other"]')!;
+    expect(other.querySelector('[data-testid="compact-currency-estimate"]')).toBeNull();
+    expect(screen.getByTestId("airport-fx-note")).toHaveTextContent("USD and EUR amounts are approximate, based on reference exchange rates. All fares are quoted in ILS.");
+    expect(screen.getAllByTestId("airport-fx-note")).toHaveLength(1);
+  });
+
+  it("omits compact USD/EUR estimates when exchange rates are missing or expired", () => {
+    const unavailable = renderToString(<CurrencyRatesContext.Provider value={{ rates: null, status: "unavailable", loading: false }}><CompactCurrencyEquivalents amount={550} /></CurrencyRatesContext.Provider>);
+    expect(unavailable).not.toContain("compact-currency-estimate");
+    const outdated = { ...rates(), publishedAt: "2026-09-01" };
+    const expired = renderToString(<CurrencyRatesContext.Provider value={{ rates: outdated, status: "cached", loading: false }}><CompactCurrencyEquivalents amount={550} /></CurrencyRatesContext.Provider>);
+    expect(expired).not.toContain("compact-currency-estimate");
+    const fresh = renderToString(<CurrencyRatesContext.Provider value={{ rates: rates(), status: "fresh", loading: false }}><CompactCurrencyEquivalents amount={550} /></CurrencyRatesContext.Provider>);
+    expect(fresh).toContain("≈ $138");
+    expect(fresh).toContain("€110");
+    expect(fresh).not.toContain("USD/EUR estimates unavailable");
   });
 
   it("does not fetch on the price-free homepage and activates after navigation to priced routes", async () => {
