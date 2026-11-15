@@ -603,6 +603,6 @@ export const tourCruisePhoto: GuidePhoto = {
 };
 
 export const tourCruisePorts = [
-  { id: "haifa", title: "From Haifa Port", to: "/haifa-shore-excursions/", description: "Discover Galilee's sacred sites, Akko's old harbour and the northern coast.", photo: airport["haifa"]! },
-  { id: "ashdod", title: "From Ashdod Port", to: "/ashdod-shore-excursions/", description: "Explore Jerusalem, the lively coast of Tel Aviv and Jaffa, or Masada and the Dead Sea.", photo: airport["ashdod"]! },
+  { id: "haifa", title: "From Haifa Port", to: "/shore-excursions/haifa/", description: "Discover Galilee's sacred sites, Akko's old harbour and the northern coast.", photo: airport["haifa"]! },
+  { id: "ashdod", title: "From Ashdod Port", to: "/shore-excursions/ashdod/", description: "Explore Jerusalem, the lively coast of Tel Aviv and Jaffa, or Masada and the Dead Sea.", photo: airport["ashdod"]! },
 ] as const;
