@@ -78,6 +78,7 @@ function Airport() {
       </section>
       <div className="mt-4 text-xs leading-relaxed text-muted-foreground" data-testid="airport-rate-terms">
         <p><strong>About starting prices:</strong> All prices are one-way weekday fares, per vehicle for up to four passengers. Night, weekend and holiday surcharges may apply. Larger vehicles for groups and families can be provided, requiring a separate quote. Full price is confirmed in advance.</p>
+        <p className="mt-1" data-testid="airport-fx-note">USD and EUR amounts are approximate, based on reference exchange rates. All fares are quoted in ILS.</p>
         <PageUpdated date={AIRPORT_TRANSFER_CHECK_DATE} />
       </div>
       <section id="benefits" aria-labelledby="benefits-h" className="mt-7 scroll-mt-24">
