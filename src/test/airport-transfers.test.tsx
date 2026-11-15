@@ -67,7 +67,11 @@ describe("private Ben Gurion transfers", () => {
     const rateTerms = screen.getByTestId("airport-rate-terms");
     expect(rateTerms).toHaveTextContent(/weekday.*up to four passengers.*Night, weekend and holiday/i);
     expect(rateTerms).not.toHaveTextContent("About starting prices:");
-    expect(rateTerms.querySelectorAll(":scope > p")).toHaveLength(3);
+    const priceParagraphs = Array.from(rateTerms.querySelectorAll(":scope > p"));
+    expect(priceParagraphs).toHaveLength(4); // Three fare lines plus the page update.
+    expect(priceParagraphs[0]).toHaveTextContent("All prices are one-way weekday fares");
+    expect(priceParagraphs[1]).toHaveTextContent("Larger vehicles for groups and families");
+    expect(priceParagraphs[2]).toHaveTextContent("Full price is confirmed in advance.");
     expect(rateTerms).toHaveTextContent("Larger vehicles for groups and families can be provided, requiring a separate quote.");
     expect(screen.getByTestId("airport-fx-note")).toHaveTextContent("Full price is confirmed in advance. All fares are quoted and charged in ILS.");
     expect(screen.getByRole("heading", { name: "Private airport transfers from Ben Gurion Airport" })).toBeInTheDocument();
