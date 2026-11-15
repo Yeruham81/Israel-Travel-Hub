@@ -299,6 +299,16 @@ describe("tours hub and SEO category pages", () => {
       expect(doc.querySelector("#external-tours-h")?.textContent).toBe(category.id === "jerusalem" || category.id === "tel-aviv-jaffa" || category.id === "masada-dead-sea" || category.id === "bethlehem-jericho" || category.id === "nazareth-galilee" || category.id === "northern-coast" || category.id === "negev-ramon" || category.id === "golan-heights" || category.id === "food-markets" || category.id === "eilat-red-sea" ? `Explore ${category.shortTitle} tours` : `${owner ? "More " : ""}${category.title}`);
       expect(doc.body.textContent).not.toMatch(/Other operators' tours & experiences|Independent tour providers/);
       if (owner) {
+        const ownerGrid = owner.querySelector('ul[aria-label="My private day trips"]');
+        expect(ownerGrid?.className).toMatch(/auto-rows-fr/);
+        for (const card of owner.querySelectorAll('[data-testid="owner-tour-card"]')) {
+          expect(card).toHaveClass("h-full");
+          if (ownerGrid?.classList.contains("auto-rows-fr")) {
+            expect(card.querySelector("article")).toHaveClass("h-full");
+            expect(card.querySelector("img")?.parentElement).toHaveClass("relative", "overflow-hidden");
+            expect(card.querySelector("img")).toHaveClass("absolute", "object-cover");
+          }
+        }
         expect(owner.className).not.toContain("bg-navy");
         expect(owner.textContent).not.toContain("Arrange directly with me");
         for (const card of owner.querySelectorAll('[data-testid="owner-tour-card"]')) {
