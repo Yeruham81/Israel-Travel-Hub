@@ -87,8 +87,8 @@ describe("shore excursions", () => {
     expect(externalSection?.querySelector("ul")).toHaveClass("md:grid-cols-2");
     expect(ownerSection?.querySelector("ul")).not.toHaveClass("md:grid-cols-2");
     const privateTerms = ownerSection?.querySelector('[data-testid="owner-price-terms"]');
-    expect(privateTerms).toHaveTextContent("Published weekday rates for private transport are per vehicle");
-    expect(privateTerms).toHaveTextContent("guiding, admission, meals and tips are excluded");
+    expect(privateTerms).toHaveTextContent("Published weekday private transport rates are per vehicle for up to four passengers.");
+    expect(privateTerms).not.toHaveTextContent(/guiding|admission|meals|tips|confirm the full price/i);
     expect(privateTerms).not.toHaveTextContent("External starting prices");
     expect(ownerSection).not.toHaveTextContent("not live quotes");
     expect(container.querySelector("#itineraries > p[data-testid]")).toBeNull();
