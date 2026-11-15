@@ -25,7 +25,7 @@ import { Route as ChurchesRoute } from "@/routes/travel-blog.churches-in-jerusal
 import { Route as ShoppingRoute } from "@/routes/travel-blog.shopping-in-jerusalem";
 import { Route as TelAvivDayTripsRoute } from "@/routes/travel-blog.day-trips-from-tel-aviv";
 import { filterGuides, guideDirectory, guideTopics, travelGuides } from "@/data/travelGuides";
-import { affiliateConfig, getSource, isPublisherUrl, linksForPage, mosheBarakAuthor, travelGuidePaths, TRAVEL_GUIDE_CHECK_DATE } from "@/data/registry";
+import { AIRALO_COMPATIBILITY_AFFILIATE_URL, affiliateConfig, getSource, isPublisherUrl, linksForPage, mosheBarakAuthor, travelGuidePaths, TRAVEL_GUIDE_CHECK_DATE } from "@/data/registry";
 import { readOutboundClicks } from "@/lib/outbound";
 import { repeatedPhotos } from "@/lib/photo-uniqueness";
 
@@ -885,7 +885,10 @@ describe("migrated practical guides", () => {
       expect(section).toHaveTextContent("My choice:");
       expect(within(section).getAllByRole("link", { name: /^(Saily|Airalo|GigSky)$/ }).length).toBeGreaterThan(0);
     }
-    expect(container.querySelector('#compatibility a[href="https://www.airalo.com/how-airalo-works/device-compatibility"]')).not.toBeNull();
+    const deviceLink = within(container.querySelector("#compatibility") as HTMLElement).getByRole("link", { name: /Check whether your phone supports eSIM/ });
+    expect(deviceLink).toHaveAttribute("href", AIRALO_COMPATIBILITY_AFFILIATE_URL);
+    expect(deviceLink).toHaveAttribute("rel", "sponsored noopener noreferrer");
+    expect(deviceLink).toHaveAttribute("target", "_blank");
     expect(container.querySelector('#regional a[href="https://www.airalo.com/middle-east-and-north-africa-esim"]')).not.toBeNull();
     expect(container.querySelector('nav a[href="#contact"]')).toHaveTextContent("Contact Me");
     expect(travelGuides.esim.services).toHaveLength(4);
