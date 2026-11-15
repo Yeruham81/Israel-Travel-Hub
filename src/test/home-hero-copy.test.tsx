@@ -197,11 +197,15 @@ describe("homepage marketing copy and service sections", () => {
     // Shore-port images keep a landscape ratio, and both cards align with the shorter ship photo on desktop.
     const shoreSection = document.getElementById("shore-excursions")!;
     const shoreLayout = shoreSection.querySelector('[data-testid="service-layout-shore-excursions"]')!;
-    expect(shoreLayout).toHaveClass("lg:h-[280px]", "lg:grid-cols-2", "lg:items-stretch");
+    // A fixed 280px height lets two text-heavy port cards overflow onto the CTA
+    // on wide monitors. Keep 280px as a minimum so the layout grows with its content.
+    expect(shoreLayout).toHaveClass("lg:min-h-[280px]", "lg:grid-cols-2", "lg:items-stretch");
+    expect(shoreLayout).not.toHaveClass("lg:h-[280px]");
     const shorePhoto = shoreLayout.querySelector(":scope > img")!;
     expect(shorePhoto).toHaveClass("aspect-[16/9]", "lg:h-full", "object-cover");
     const portList = within(shoreSection).getByRole("list", { name: "Shore excursions by port" });
-    expect(portList).toHaveClass("gap-3", "lg:h-full", "lg:grid-rows-2");
+    expect(portList).toHaveClass("gap-3", "auto-rows-fr");
+    expect(portList).not.toHaveClass("lg:h-full", "lg:grid-rows-2");
     const portLinks = within(portList).getAllByRole("link");
     expect(portLinks).toHaveLength(2);
     expect(portLinks.map(link => link.getAttribute("href"))).toEqual([

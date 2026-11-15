@@ -166,6 +166,8 @@ describe("home mobile performance optimizations", () => {
       expect(bytes(path), path).toBeLessThan(100000);
     }
     expect(home).toContain('aspect-[16/9] overflow-hidden min-[480px]:aspect-auto');
+    expect(home).toContain('lg:min-h-[280px] lg:grid-cols-2 lg:items-stretch');
+    expect(home).toContain('auto-rows-fr gap-3" aria-label="Shore excursions by port"');
     expect(home).toContain('line-clamp-2 text-sm leading-snug text-muted-foreground');
   });
 
