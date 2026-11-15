@@ -14,7 +14,7 @@ export function AirportDestinationCard({ id, destination, price, photo, onChoose
     {route && <Link to={route.path} className="group flex min-w-0 flex-1 items-center gap-3 rounded-xl focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary sm:gap-4">
       <img src={photo.src} alt={photo.alt} width={160} height={106} loading="lazy" decoding="async" className="aspect-[3/2] w-28 shrink-0 rounded-xl object-cover sm:w-36" />
       <div className="min-w-0 flex-1">
-        <h3 className="text-base font-semibold leading-snug sm:text-lg">{destination}</h3>
+        <h3 className="text-lg font-semibold leading-snug sm:text-xl">{destination}</h3>
         <p className="mt-1 text-base font-semibold tabular-nums text-foreground sm:text-lg">From ₪{price?.amount.toLocaleString("en-US")}</p>
         {price && <CompactCurrencyEquivalents amount={price.amount} />}
         <p className="mt-0.5 text-xs leading-snug text-muted-foreground">Weekday · One way · Up to 4 passengers</p>
@@ -23,14 +23,17 @@ export function AirportDestinationCard({ id, destination, price, photo, onChoose
     </Link>}
     <a href="#request-quote" onClick={() => onChoose?.(id)} className="mt-1.5 self-end rounded-lg px-3 py-2 text-sm font-semibold text-primary underline-offset-4 hover:bg-secondary hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">Request a quote</a>
   </article>;
-  if (layout === "hub-row") return <article className="flex h-full min-w-0 items-center gap-3 rounded-xl border bg-card p-2.5 transition-colors hover:border-primary/40 sm:p-3" data-testid={testId} data-destination={id}>
-    <img src={photo.src} alt={photo.alt} width={112} height={72} loading="lazy" decoding="async" className="aspect-[3/2] w-20 shrink-0 rounded-lg object-cover sm:w-24" />
-    <div className="min-w-0 flex-1">
-      <h3 className="text-sm font-semibold leading-snug">{id === "other" ? "Another destination?" : destination}</h3>
-      {price && <p className="mt-0.5 text-sm font-medium tabular-nums text-muted-foreground">From ₪{price.amount.toLocaleString("en-US")}</p>}
+  if (layout === "hub-row") return <article
+    className="grid h-full min-h-[7rem] min-w-0 grid-cols-[4.5rem_minmax(0,1fr)_5.75rem] items-center gap-2 rounded-xl border bg-card p-2.5 transition-colors hover:border-primary/40 sm:grid-cols-[5.75rem_minmax(0,1fr)_6.5rem] sm:gap-3 sm:p-3"
+    data-testid={testId} data-destination={id}
+  >
+    <img src={photo.src} alt={photo.alt} width={112} height={75} loading="lazy" decoding="async" className="aspect-[3/2] w-full rounded-lg object-cover" />
+    <div className="min-w-0">
+      <h3 className="text-base font-semibold leading-snug sm:text-lg">{id === "other" ? "Another destination?" : destination}</h3>
+      {price && <p className="mt-1 text-sm font-semibold tabular-nums text-foreground sm:text-base">From ₪{price.amount.toLocaleString("en-US")}</p>}
       {price && <CompactCurrencyEquivalents amount={price.amount} />}
-      <a href="#request-quote" onClick={() => onChoose?.(id)} className="mt-1 inline-flex min-h-9 items-center rounded-md py-1 text-xs font-semibold text-primary underline-offset-4 hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary sm:text-sm">Request a quote</a>
     </div>
+    <a href="#request-quote" onClick={() => onChoose?.(id)} className="inline-flex min-h-11 w-full items-center justify-center rounded-lg border border-primary/20 bg-secondary/60 px-1.5 py-2 text-center text-xs font-semibold leading-snug text-primary transition-colors hover:border-primary/40 hover:bg-secondary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary sm:px-2 sm:text-sm">Request a quote</a>
   </article>;
   const compact = layout === "compact";
   const image = <img src={photo.src} alt={photo.alt} width={compact ? 80 : 360} height={compact ? 80 : 240} loading="lazy" decoding="async" className={compact ? "h-20 w-20 shrink-0 rounded-lg object-cover" : "aspect-[3/2] w-full object-cover"} />;
