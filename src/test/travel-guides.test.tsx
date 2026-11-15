@@ -842,7 +842,7 @@ describe("migrated practical guides", () => {
   });
 
   it("recommends distinct Israel eSIM plans and compares all five unlimited providers with tracked links", async () => {
-    const expected = { "esim-airalo": "https://airalo.tpm.li/JmHFDV3v", "esim-saily": "https://saily.tpm.li/nM5mNYzP", "esim-yesim": "https://yesim.tpm.li/6WmqBIJV", "esim-gigsky": "https://gigsky.tpm.li/NxqtNVtH" };
+    const expected = { "esim-airalo": "https://airalo.tpm.li/JmHFDV3v", "esim-saily": "https://saily.tpm.li/nM5mNYzP", "esim-yesim": "https://yesim.tpm.li/6WmqBIJV", "esim-gigsky": "https://gigsky.tpm.li/1lvxdeMq" };
     const router = await routerAt(travelGuidePaths.esim);
     const Page = EsimRoute.options.component!;
     const { container } = render(<RouterContextProvider router={router}><Page /></RouterContextProvider>);
