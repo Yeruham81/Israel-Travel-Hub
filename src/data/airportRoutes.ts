@@ -17,7 +17,7 @@ const guides: Record<AirportTransferRouteId, RouteGuide> = {
   jerusalem: {
     city: "Jerusalem", title: "Private transfer from Ben Gurion Airport to Jerusalem",
     description: "Private Ben Gurion Airport to Jerusalem transfer: travel time, Old City hotel drop-off, luggage and weekday starting rate. Send a quote request.",
-    intro: "Book a private pickup to your Jerusalem hotel or address, including Mamilla and the Old City area. Share your flight, luggage and exact drop-off point for a confirmed quote.",
+    intro: "Book a private pickup to your Jerusalem hotel or address, including Mamilla and the Old City area. Send me your flight, luggage and exact drop-off point for a confirmed quote.",
     checklistTip: "For Old City accommodation, confirm a vehicle-accessible drop-off and any remaining walk or steps.",
     journeyTitle: "Driving to your Jerusalem hotel",
     journeyText: "Allow around 45–60 minutes or more after pickup, depending on traffic and your hotel's location. Airport formalities come before the drive, and Old City accommodation may require a nearby permitted vehicle drop-off.",
