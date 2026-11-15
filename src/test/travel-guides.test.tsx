@@ -101,8 +101,7 @@ describe("migrated practical guides", () => {
     const article = structured.find((item) => item["@type"] === "Article");
     expect(article).toMatchObject({ headline: guide.title, dateModified: guide.updatedAt || TRAVEL_GUIDE_CHECK_DATE, inLanguage: "en", author: { "@type": "Person", name: "Moshe Barak", sameAs: [mosheBarakAuthor.reviewsUrl] } });
     expect(article.mainEntityOfPage.endsWith(path)).toBe(true);
-    if (id !== "esim") for (const url of article.citation) expect(container.querySelector(`a[href="${url}"]`)).not.toBeNull();
-    else expect(container.querySelector("#sources")).toBeNull();
+    for (const url of article.citation) expect(container.querySelector(`a[href="${url}"]`)).not.toBeNull();
     const crumbs = structured.find((item) => item["@type"] === "BreadcrumbList");
     expect(crumbs.itemListElement.map((item: { name: string }) => item.name)).toEqual(["Home", "Travel guides", guide.title]);
     expect(structured.some((item) => item["@type"] === "FAQPage")).toBe(false);
@@ -903,7 +902,8 @@ describe("migrated practical guides", () => {
     expect(container.querySelector('nav a[href="#contact"]')).toHaveTextContent("Contact Me");
     expect(travelGuides.esim.services).toHaveLength(4);
     expect(travelGuides.esim.faqs).toHaveLength(6);
-    expect(container.querySelector("#sources")).toBeNull();
+    expect(container.querySelector("#sources")).not.toBeNull();
+    expect(container.querySelector('#sources a[href="https://www.gigsky.com/country/esim-in-israel"]')).not.toBeNull();
     expect(container.textContent).not.toContain("References:");
   });
   it.each([
