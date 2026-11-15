@@ -1393,7 +1393,7 @@ export const affiliateConfig: Record<string, { trackingUrl: string } | undefined
   "esim-airalo-mena": { trackingUrl: AIRALO_MENA_AFFILIATE_URL },
   "esim-saily": { trackingUrl: "https://saily.tpm.li/nM5mNYzP" },
   "esim-yesim": { trackingUrl: "https://yesim.tpm.li/6WmqBIJV" },
-  "esim-gigsky": { trackingUrl: "https://gigsky.tpm.li/NxqtNVtH" },
+  "esim-gigsky": { trackingUrl: "https://gigsky.tpm.li/1lvxdeMq" },
   "esim-drimsim": { trackingUrl: "https://drimsim.tpm.li/khIJTNaX" },
   // Replace only with the publisher's actual approved tracking links, including destination parameters.
   "airport-kiwitaxi": { trackingUrl: "https://kiwitaxi.tpm.li/KYAqijbk" },
