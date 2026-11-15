@@ -160,7 +160,7 @@ describe("migrated practical guides", () => {
     expect(travelGuides.uber.answer).toMatch(/Uber and Lyft do not currently offer passenger rides in Israel/);
     expect(travelGuides.sherut.answer).toMatch(/former Nesher route to Jerusalem or Amal route to Haifa/);
     expect(travelGuides.esim.sections.find((section) => section.id === "calling")!.paragraphs.join(" ")).toMatch(/an Israeli phone number usually aren\x27t included/s);
-    expect(travelGuides.esim.answer).toMatch(/Saily and Airalo.*5GB.*\$8.*30 days/s);
+    expect(travelGuides.esim.answer).toMatch(/Saily or Airalo: 5GB costs about \$8 for 30 days/s);
   });
 
   it("covers the complete airport arrival sequence without duplicating specialty transport guides", () => {
@@ -846,14 +846,14 @@ describe("migrated practical guides", () => {
     expect(container.querySelector("#provider-options")).toBeNull();
     expect(screen.queryAllByTestId("provider-card")).toHaveLength(0);
     const comparison = container.querySelector("#at-a-glance table") as HTMLElement;
-    expect(within(comparison).getByRole("columnheader", { name: "5GB / 30 days" })).toBeInTheDocument();
+    expect(within(comparison).getByRole("columnheader", { name: "Longer trip · 5GB / 10GB" })).toBeInTheDocument();
     expect(comparison.textContent).toContain("$7.99");
     expect(comparison.textContent).toContain("$8.00");
     expect(comparison.textContent).toContain("$9.90");
     expect(comparison.textContent).toContain("$56.24");
     expect(comparison.textContent).toContain("$69.00");
     expect(comparison.textContent).toContain("$71.99");
-    expect(within(comparison).getByRole("columnheader", { name: "Unlimited / 30 days" })).toBeInTheDocument();
+    expect(within(comparison).getByRole("columnheader", { name: "Heavy use · Unlimited" })).toBeInTheDocument();
     for (const link of linksForPage("guide-esim")) {
       const nameLink = within(comparison).getByRole("link", { name: new RegExp("^" + link.providerName) });
       expect(affiliateConfig[link.id]!.trackingUrl).toBe(expected[link.id as keyof typeof expected]);
@@ -865,8 +865,9 @@ describe("migrated practical guides", () => {
     first.addEventListener("click", (event) => event.preventDefault());
     fireEvent.click(first);
     expect(readOutboundClicks()).toEqual([expect.objectContaining({ pageId: "guide-esim", productId: "esim-airalo", offerId: "esim-airalo" })]);
-    const priceSection = container.querySelector("#price") as HTMLElement;
-    expect(within(priceSection).getAllByRole("link", { name: /^Saily/ })[0]).toHaveAttribute("href", expected["esim-saily"]);
+    const longTripSection = container.querySelector("#long-trip") as HTMLElement;
+    expect(within(longTripSection).getByRole("link", { name: /^Saily/ })).toHaveAttribute("href", expected["esim-saily"]);
+    expect(container.querySelector("#short-trip")).not.toBeNull();
     expect(travelGuides.esim.services).toHaveLength(4);
     const quickAnswer = container.querySelector("#quick-answer") as HTMLElement;
     expect(quickAnswer.querySelectorAll("a")).toHaveLength(0);
