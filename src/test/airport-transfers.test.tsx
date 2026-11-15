@@ -47,7 +47,9 @@ describe("private Ben Gurion transfers", () => {
         const routeLink = within(card).getByRole("link", { name: /View transfer details/ });
         expect(router.matchRoutes(new URL(routeLink.getAttribute("href")!, "https://example.test").pathname).at(-1)?.routeId).toContain("airport-transfers");
       } else expect(within(card).getByRole("img")).toHaveAttribute("src", airportDestinationCards.find(item => item.id === rate.id)!.photo.src);
-      expect(within(card).getByRole("link", { name: "Request a quote" })).toHaveAttribute("href", "#request-quote");
+      const quoteButton = within(card).getByRole("link", { name: "Request a quote" });
+      expect(quoteButton).toHaveAttribute("href", "#request-quote");
+      expect(quoteButton).toHaveClass("border-primary/50", "bg-primary/10", "shadow-sm");
       expect(card).toHaveTextContent(rate.price.amount.toLocaleString("en-US"));
       expect(card.querySelector('[data-testid="currency-price"]')).toBeNull();
     }
@@ -68,7 +70,7 @@ describe("private Ben Gurion transfers", () => {
     expect(rateTerms).toHaveTextContent(/weekday.*up to four passengers.*Night, weekend and holiday/i);
     expect(rateTerms).not.toHaveTextContent("About starting prices:");
     const priceParagraphs = Array.from(rateTerms.querySelectorAll(":scope > p"));
-    expect(priceParagraphs).toHaveLength(4); // Three fare lines plus the page update.
+    expect(priceParagraphs).toHaveLength(3); // Fare terms only; the page update now belongs in the opening header.
     expect(priceParagraphs[0]).toHaveTextContent("All prices are one-way weekday fares");
     expect(priceParagraphs[1]).toHaveTextContent("Larger vehicles for groups and families");
     expect(priceParagraphs[2]).toHaveTextContent("Full price is confirmed in advance.");
@@ -76,7 +78,13 @@ describe("private Ben Gurion transfers", () => {
     expect(screen.getByTestId("airport-fx-note")).toHaveTextContent("Full price is confirmed in advance. All fares are quoted and charged in ILS.");
     expect(screen.getByRole("heading", { name: "Private airport transfers from Ben Gurion Airport" })).toBeInTheDocument();
     expect(screen.getByTestId("hub-header").parentElement?.tagName).toBe("MAIN");
-    expect(within(screen.getByTestId("hub-header")).getByTestId("guide-hero-media").querySelector("img")).toHaveAttribute("src", airportTransferPhotos["other"]!.src);
+    const hubHeader = screen.getByTestId("hub-header");
+    expect(within(hubHeader).getByTestId("guide-hero-media").querySelector("img")).toHaveAttribute("src", airportTransferPhotos["other"]!.src);
+    const updateLine = within(hubHeader).getByText(/^Updated/);
+    expect(updateLine).toHaveTextContent("Updated November 2026");
+    expect(updateLine.querySelector("time")).toHaveAttribute("datetime", "2026-11-15");
+    expect(rateTerms.querySelector("time")).toBeNull();
+    expect(updateLine.compareDocumentPosition(popular)).toBe(Node.DOCUMENT_POSITION_FOLLOWING);
     expect(screen.getByRole("link", { name: "Request a personal quote" })).toHaveClass("bg-navy");
   });
 
@@ -203,7 +211,13 @@ describe("private Ben Gurion transfers", () => {
       expect.stringContaining("Explore transfers"),
       expect.stringContaining("Compare offers"),
     ]);
-    expect(banners.every(banner => Boolean(banner.querySelector(".bg-navy")))).toBe(true);
+    const buttonColors = ["bg-emerald-200", "bg-amber-200", "bg-sky-200", "bg-indigo-200"];
+    for (const [index, banner] of banners.entries()) {
+      const button = banner.querySelector(`.${buttonColors[index]}`);
+      expect(button).not.toBeNull();
+      expect(button).toHaveClass("border", "shadow-sm");
+      expect(banner.querySelector(".bg-navy")).toBeNull();
+    }
     const providerSection = screen.getByRole("region", { name: "Prefer to book online?" });
     expect(providerSection).toHaveTextContent("You can also search for an airport transfer on one of the booking websites below.");
     expect(providerSection).toHaveTextContent("Each provider sets its own prices and terms.");
