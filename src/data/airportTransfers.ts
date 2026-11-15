@@ -14,24 +14,23 @@ import moshe from "@/assets/airport-transfers/moshe.webp";
 import airportHall from "@/assets/home/ben-gurion-t3.webp";
 import esim from "@/assets/guides/esim-israel.jpeg";
 import roadTrip from "@/assets/home/road-trip.webp";
-import { airportTransferRates, OWNER_BASE, travelGuidePaths } from "@/data/registry";
+import { airportTransferRates, travelGuidePaths } from "@/data/registry";
 import type { StayGuidePhoto } from "@/data/content";
 
-const upload = `${OWNER_BASE}/wp-content/uploads`;
 export const airportTransferPhotos: Record<string, StayGuidePhoto> = {
-  "tel-aviv": { src: telAviv, alt: "Tel Aviv's beachfront hotels and promenade", sourceUrl: `${upload}/2025/08/Tel_Aviv_Promenade1.jpg`, label: "Tel Aviv beachfront" },
-  jerusalem: { src: jerusalem, alt: "Stone buildings and lanes in Jerusalem's Old City", sourceUrl: `${upload}/2026/07/Jerusalem_Old_City_street.webp`, label: "Jerusalem Old City" },
-  haifa: { src: haifa, alt: "Haifa Bay and the Bahá'í Gardens from Mount Carmel", sourceUrl: `${upload}/2026/01/best_hotels_in_haifa_.webp`, label: "Haifa Bay" },
-  "dead-sea": { src: deadSea, alt: "Ein Bokek beach beside the Dead Sea", sourceUrl: `${upload}/2025/08/dead_sea_beach_1.jpg`, label: "Ein Bokek, Dead Sea" },
-  raanana: { src: raanana, alt: "Orange Tree public artwork in Ra’anana", sourceUrl: `${upload}/2025/08/orange_tree_in_raanana_1.jpg`, label: "Ra’anana" },
-  herzliya: { src: herzliya, alt: "Herzliya beach and the Mediterranean coastline", sourceUrl: `${upload}/2025/08/beach_in_Herzliya_1.jpg`, label: "Herzliya beach" },
-  netanya: { src: netanya, alt: "Netanya's coastal skyline and beaches", sourceUrl: `${upload}/2025/08/Netanya_Beach_Promende_1.jpg`, label: "Netanya coastline" },
-  ashdod: { src: ashdod, alt: "Boats in Ashdod Marina seen from the air", sourceUrl: `${upload}/2025/08/Ashdod_1.jpg`, label: "Ashdod Marina" },
-  caesarea: { src: caesarea, alt: "Aerial view of Caesarea's ancient coastal harbour", sourceUrl: `${upload}/2025/08/caesarea_1.jpg`, label: "Caesarea coastline" },
-  nazareth: { src: nazareth, alt: "Courtyard and dome of the Basilica of the Annunciation in Nazareth", sourceUrl: `${upload}/2025/08/Basilica_of_Annunciation_1.jpg`, label: "Nazareth" },
-  eilat: { src: eilat, alt: "Palm-lined waterfront and hotels in Eilat on the Red Sea", sourceUrl: `${upload}/2025/08/eilat_.jpg`, label: "Eilat waterfront" },
-  other: { src: airport, alt: "Aircraft beside the terminal at Ben Gurion Airport", sourceUrl: `${upload}/2026/08/planes_at_ben_gurion_airport_.webp`, label: "Ben Gurion Airport" },
-  moshe: { src: moshe, alt: "Moshe Barak seated in his vehicle", sourceUrl: `${upload}/2025/08/moshe_barak_4.webp`, label: "Moshe Barak — operator portrait" },
+  "tel-aviv": { src: telAviv, alt: "Tel Aviv's beachfront hotels and promenade", sourceUrl: "", label: "Tel Aviv beachfront" },
+  jerusalem: { src: jerusalem, alt: "Stone buildings and lanes in Jerusalem's Old City", sourceUrl: "", label: "Jerusalem Old City" },
+  haifa: { src: haifa, alt: "Haifa Bay and the Bahá'í Gardens from Mount Carmel", sourceUrl: "", label: "Haifa Bay" },
+  "dead-sea": { src: deadSea, alt: "Ein Bokek beach beside the Dead Sea", sourceUrl: "", label: "Ein Bokek, Dead Sea" },
+  raanana: { src: raanana, alt: "Orange Tree public artwork in Ra’anana", sourceUrl: "", label: "Ra’anana" },
+  herzliya: { src: herzliya, alt: "Herzliya beach and the Mediterranean coastline", sourceUrl: "", label: "Herzliya beach" },
+  netanya: { src: netanya, alt: "Netanya's coastal skyline and beaches", sourceUrl: "", label: "Netanya coastline" },
+  ashdod: { src: ashdod, alt: "Boats in Ashdod Marina seen from the air", sourceUrl: "", label: "Ashdod Marina" },
+  caesarea: { src: caesarea, alt: "Aerial view of Caesarea's ancient coastal harbour", sourceUrl: "", label: "Caesarea coastline" },
+  nazareth: { src: nazareth, alt: "Courtyard and dome of the Basilica of the Annunciation in Nazareth", sourceUrl: "", label: "Nazareth" },
+  eilat: { src: eilat, alt: "Palm-lined waterfront and hotels in Eilat on the Red Sea", sourceUrl: "", label: "Eilat waterfront" },
+  other: { src: airport, alt: "Aircraft beside the terminal at Ben Gurion Airport", sourceUrl: "", label: "Ben Gurion Airport" },
+  moshe: { src: moshe, alt: "Moshe Barak seated in his vehicle", sourceUrl: "", label: "Moshe Barak — operator portrait" },
 };
 
 /** Use the same four destination images already displayed under Airport Transfers on the homepage. */
@@ -75,7 +74,7 @@ export const airportRelatedLinks = [
   {
     label: "Choosing an eSIM for Israel", to: travelGuidePaths.esim,
     description: "Stay connected for maps, messages and travel plans. Understand phone compatibility, data allowances and activation before choosing an eSIM for your visit.",
-    photo: { src: esim, alt: "A phone displaying an illustrative eSIM screen against a city background", sourceUrl: `${upload}/2025/08/best_esim_for_israel.jpeg`, credit: "Illustrative eSIM screen, not a provider speed test." },
+    photo: { src: esim, alt: "A phone displaying an illustrative eSIM screen against a city background", sourceUrl: "", credit: "Illustrative eSIM screen, not a provider speed test." },
   },
   {
     label: "Taxis in Israel", to: travelGuidePaths.taxis,
