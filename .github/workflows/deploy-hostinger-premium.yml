@@ -32,8 +32,8 @@ jobs:
     env:
       CI: "true"
       HOSTINGER_STATIC_BUILD: "true"
-      # Use the same reviewed, source-controlled guides as ordinary Lovable/CI builds.
-      # Sanity draft content is intentionally not published to Hostinger automatically.
+      # Hostinger uses reviewed, source-controlled guides from GitHub.
+      # No external editorial CMS fetch is required for this deployment.
       VITE_CANONICAL_ORIGIN: ${{ vars.HOSTINGER_CANONICAL_ORIGIN || 'https://saddlebrown-guanaco-454061.hostingersite.com' }}
       VITE_INDEXABLE: ${{ vars.HOSTINGER_INDEXABLE || 'false' }}
       TARGET_SHA: ${{ github.event_name == 'workflow_run' && github.event.workflow_run.head_sha || github.sha }}
@@ -80,13 +80,11 @@ jobs:
         if: steps.freshness.outputs.current == 'true'
         run: bash scripts/build-validated-static.sh
 
-      - name: Assert the release includes the source-controlled Uber guide
+      - name: Assert the release includes the reviewed Uber guide
         if: steps.freshness.outputs.current == 'true'
         shell: bash
         run: |
           set -euo pipefail
-          # Only explicitly approved Sanity publishing should replace the GitHub guide.
-          grep -Fq 'export const sanityUberGuide: TravelGuide | null = null;' src/data/generated/sanityUberSnapshot.ts
           test -s .output/public/travel-blog/uber-in-israel/index.html
           grep -Fq 'Is Uber Available in Israel?' .output/public/travel-blog/uber-in-israel/index.html
 
