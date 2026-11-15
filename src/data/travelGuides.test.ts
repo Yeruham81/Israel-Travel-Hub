@@ -41,7 +41,7 @@ describe("travel guide topic filters and prerender safety", () => {
     const regionalLink = new URL(AIRALO_MENA_AFFILIATE_URL);
     expect(regionalLink.searchParams.get("marker")).toBe("622032");
     expect(regionalLink.searchParams.get("trs")).toBe("406243");
-    expect(regionalLink.searchParams.get("u")).toBe("https://www.airalo.com/middle-east-and-north-africa-esim");
+    expect(regionalLink.searchParams.get("u")).toBe("https://www.airalo.com/middle-east-and-north-africa-esim/mena-30days-5gb");
     expect(guide.faqs).toHaveLength(6);
     expect(guide.faqs.some(faq => /WhatsApp number/.test(faq.q))).toBe(true);
     expect(guide.faqs.some(faq => /Bethlehem or Jericho/.test(faq.q))).toBe(true);
