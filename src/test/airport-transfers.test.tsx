@@ -63,6 +63,10 @@ describe("private Ben Gurion transfers", () => {
       expect(card.children[1]?.querySelector("h3")).not.toBeNull();
       expect(card.children[2]).toHaveTextContent("Request a quote");
       expect(card.children[2]).toHaveAttribute("href", "#request-quote");
+      expect(card.children[2]).toHaveClass("whitespace-nowrap", "col-span-2", "lg:col-span-1");
+      expect(card).toHaveClass("grid-cols-[5.25rem_minmax(0,1fr)]", "sm:grid-cols-[6.5rem_minmax(0,1fr)]", "lg:grid-cols-[6.5rem_minmax(0,1fr)_8.75rem]");
+      expect(card.children[0]).toHaveAttribute("width", "128");
+      expect(card.children[0]).toHaveAttribute("height", "85");
     }
     expect(new Set(within(more).getAllByRole("img").map(image => image.getAttribute("src"))).size).toBe(8);
     expect(within(more).getByRole("img", { name: airportTransferPhotos["other"]!.alt })).toHaveAttribute("src", airportTransferPhotos["other"]!.src);
