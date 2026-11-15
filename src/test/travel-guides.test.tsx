@@ -160,7 +160,7 @@ describe("migrated practical guides", () => {
     expect(travelGuides.airportTaxis.comparison.rows.join(" ")).toMatch(/Exit 03.*Exit 23/);
     expect(travelGuides.uber.answer).toMatch(/Uber and Lyft do not currently offer passenger rides in Israel/);
     expect(travelGuides.sherut.answer).toMatch(/former Nesher route to Jerusalem or Amal route to Haifa/);
-    expect(travelGuides.esim.sections.find((section) => section.id === "calling")!.paragraphs.join(" ")).toMatch(/an Israeli phone number usually aren\x27t included/s);
+    expect(travelGuides.esim.sections.find((section) => section.id === "calling")!.paragraphs.join(" ")).toMatch(/Most travel eSIM plans include mobile data, not a phone number/s);
     expect(travelGuides.esim.answer).toMatch(/Saily.*3GB.*\$5\.99.*Airalo.*3GB.*\$6/s);
   });
 
