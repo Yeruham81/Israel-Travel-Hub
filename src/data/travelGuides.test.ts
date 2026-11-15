@@ -9,10 +9,12 @@ describe("travel guide topic filters and prerender safety", () => {
   it("keeps eSIM buying guidance prominent without a troubleshooting manual", () => {
     const guide = travelGuides.esim;
     expect(guide.title).toContain("Prices, Providers & My Picks");
-    expect(guide.sections.map((section) => section.id)).toEqual(["price", "plan", "compatibility", "calling", "coverage", "setup"]);
+    expect(guide.sections.map((section) => section.id)).toEqual(["price", "unlimited", "plan", "compatibility", "calling", "coverage", "setup"]);
     expect(guide.comparison.rows).toHaveLength(5);
-    expect(guide.comparison.rows.map(row => row[1])).toEqual(["$7.99", "$8.00", "$9.90", "$20.99*", "About €50†"]);
+    expect(guide.comparison.rows.map(row => row[1])).toEqual(["$7.99", "$8.00", "$9.90", "$18.89", "About €50*"]);
+    expect(guide.comparison.rows.map(row => row[2])).toEqual(["$71.99", "$69.00", "About $61", "$56.24", "Not available"]);
     expect(guide.sections.find((section) => section.id === "price")?.paragraphs.join(" ")).toContain("$7.99");
+    expect(guide.sections.find((section) => section.id === "unlimited")?.paragraphs.join(" ")).toContain("$56.24");
     expect(guide.faqs.length).toBeGreaterThanOrEqual(8);
     expect(guide.related).toHaveLength(6);
     expect(guide.sections.find((section) => section.id === "setup")?.paragraphs.length).toBeLessThanOrEqual(2);
