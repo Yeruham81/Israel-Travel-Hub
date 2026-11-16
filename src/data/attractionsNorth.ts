@@ -1,11 +1,11 @@
 import type { Attraction } from "@/data/attractionGuideTypes";
 import { capernaumSite } from "@/data/capernaumSite";
+import { tabghaSite } from "@/data/tabghaSite";
 import haifaImg from "@/assets/haifa/panorama.webp";
 import akkoImg from "@/assets/shore-excursions/akko-port.jpg";
 import lake from "@/assets/home/tiberias-lake.webp";
 import roshHanikra from "@/assets/guides/rosh-hanikra.jpg";
 import mountTabor from "@/assets/guides/mount-tabor.jpg";
-import tabgha from "@/assets/guides/tabgha.jpg";
 import mountOfBeatitudes from "@/assets/guides/mount-of-beatitudes.jpg";
 export const northernAttractions: Record<string, Attraction> = {
 "sea-of-galilee":{
@@ -105,18 +105,20 @@ export const northernAttractions: Record<string, Attraction> = {
  ],
 },
 "tabgha":{
- title:"Tabgha: Church of the Multiplication and Primacy of Peter",description:"Discover Tabgha's two major pilgrimage churches on the Sea of Galilee, their historic mosaics and lakeside setting.",
- region:"Sea of Galilee",image:{src:tabgha,alt:"Courtyard and olive tree at the Church of the Multiplication in Tabgha"},duration:"1–2 hours",
- intro:"Tabgha is a quiet lakeside area west of Capernaum, traditionally linked with two New Testament events: the feeding of the multitude and Jesus' post-resurrection appearance to his disciples.",
- takeaway:"Visit the Church of the Multiplication and the Church of the Primacy of Peter as two separate sanctuaries. Walking distances are manageable for some visitors, but vehicle access and services differ.",
- highlights:[
- {name:"Church of the Multiplication",description:"An important modern church preserves early Christian mosaic heritage, including the traditional loaves-and-fishes design.",tip:"Look for worship and preservation notices before approaching the sanctuary."},
- {name:"Church of the Primacy of Peter",description:"The Franciscan church marks a tradition associated with Jesus, Peter and the lakeside meal.",tip:"Keep the shore and prayer spaces quiet; follow access signs."},
- {name:"Landscape and shoreline",description:"The area offers intimate views of the Sea of Galilee and a different atmosphere from urban Tiberias.",tip:"Do not assume the shore is an unrestricted public bathing area."}],
- arrival:["Tabgha sits on the northwest shore between Magdala and Capernaum.","Intercity transport does not necessarily stop directly at each church; plan the last leg.","Combine with Capernaum or Mount of Beatitudes when transport and visit schedules allow."],
- planning:["Check the two churches' separate opening and service arrangements.","Modest dress is appropriate.","Carry water for outdoor paths, particularly in summer.","Group access may need arrangement during pilgrimage seasons."],
- faqs:[{q:"What is Tabgha famous for?",a:"The churches commemorating the feeding of the multitude and the primacy of Peter."},{q:"Are the churches at one entrance?",a:"No. They are nearby but separately operated sanctuaries."},{q:"Is Tabgha a town?",a:"The name identifies a historical and religious lakeside area, not a large modern city."}],
- official:[{label:"Christian Information Center",url:"https://www.cicts.org/"}],
+ title:tabghaSite.title,
+ description:tabghaSite.description,
+ region:tabghaSite.region,
+ image:tabghaSite.hero,
+ duration:tabghaSite.duration,
+ intro:tabghaSite.intro,
+ takeaway:"Start at the Church of the Multiplication, then visit the Primacy chapel beside the lake.",
+ highlights:[], arrival:[], planning:[], faqs:[],
+ official:[
+  {label:"Christian Information Center — Tabgha opening hours and contacts",url:tabghaSite.sources.visitorHours},
+  {label:"Benedictine Tabgha Priory — Church of the Multiplication",url:tabghaSite.sources.benedictineHistory},
+  {label:"Benedictine Tabgha Priory — visitor information",url:tabghaSite.sources.benedictineVisitors},
+  {label:"Custody of the Holy Land — Primacy of Peter and Tabgha history",url:tabghaSite.sources.franciscan},
+ ],
 },
 "mount-of-beatitudes":{
  title:"Mount of Beatitudes: church and panorama over Galilee",description:"Visit the Mount of Beatitudes above the Sea of Galilee: hilltop church, garden paths, viewpoints and practical travel advice.",

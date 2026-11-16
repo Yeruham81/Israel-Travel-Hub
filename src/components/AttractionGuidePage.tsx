@@ -1,5 +1,6 @@
 import { Link } from "@tanstack/react-router";
 import { capernaumSite } from "@/data/capernaumSite";
+import { tabghaSite } from "@/data/tabghaSite";
 import { AuthorCard } from "@/components/AuthorCard";
 import { GuideHeroLayout, GuideHeroMedia } from "@/components/GuideHeroMedia";
 import { Breadcrumbs, FaqList, OnThisPage, RelatedLinks, Section } from "@/components/Guide";
@@ -31,7 +32,7 @@ export function attractionMeta(id: AttractionId) {
   return { ...base, scripts: [...base.scripts, jsonLd({
     "@context":"https://schema.org", "@type":"Article",
     "@id": url + "#article", mainEntityOfPage: url, headline:a.title,
-    description:a.description, inLanguage:"en", dateModified: id === "capernaum" ? capernaumSite.updatedAt : a.region === "Jerusalem" ? "2026-10-24" : "2026-10-18",
+    description:a.description, inLanguage:"en", dateModified: id === "capernaum" ? capernaumSite.updatedAt : id === "tabgha" ? tabghaSite.updatedAt : a.region === "Jerusalem" ? "2026-10-24" : "2026-10-18",
     author:authorLd(), publisher:{"@type":"Organization",name:SITE_NAME,url:CANONICAL_ORIGIN},
     ...(a.image ? {image:new URL(a.image.src,CANONICAL_ORIGIN).href}:{}),
     citation:a.official.map(o=>o.url),

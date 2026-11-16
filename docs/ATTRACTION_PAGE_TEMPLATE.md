@@ -1,7 +1,8 @@
 # Reusable individual attraction page - editorial and visual standard
 
 The fully researched Capernaum article at /attractions/capernaum/ is the first
-reference implementation. Reuse the structural component
+reference implementation. The Tabgha article at /attractions/tabgha/ is the
+second example, covering two neighbouring churches with different hours. Reuse the structural component
 src/components/AttractionDestinationPage.tsx with attraction-specific content
 instead of cloning the entire Capernaum page.
 
@@ -123,3 +124,24 @@ local WebP assets: the Orthodox church, an aerial overview of the shore and
 ruins, and an aerial photograph of the synagogue. Avoid duplicate uses within
 the same page. Keep the Galilee tour-category referral generic rather than
 adding individual tours to each attraction page.
+
+## Second example: Tabgha
+
+The Tabgha guide uses the same compact hero, 4:3 editorial photos, factual
+summary, illustrated nearby cards, planning links, one contact form, and
+final source disclosure. It adapts the visiting-hours comparison to two
+independent churches and concentrates on the mosaics, the Primacy chapel,
+and practical route planning. No dedicated tour product is required:
+link to the regional Galilee tour catalogue and keep private-trip enquiries
+linked to the form below.
+
+High-value site facts and the verified November 2026 visitor-hours snapshot
+live in `src/data/tabghaSite.ts`; its editorial body lives in
+`src/components/TabghaAttractionPage.tsx`. Its older registry entry is
+metadata-only, and SEO's `dateModified` matches the canonical update date.
+
+The Multiplication church is currently listed as open Monday-Saturday
+09:00-15:00 and closed Sunday. The Primacy of Peter is listed 08:00-17:00,
+with last entry at 16:30 and some holiday exceptions. Keep these separate
+and refresh them from the operators when they change. Do not reuse the
+opening hours of another church or state an admission price unless verified.
