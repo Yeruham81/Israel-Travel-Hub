@@ -2,7 +2,7 @@ import { HeroCarousel, type HeroSlide } from "@/components/HeroCarousel";
 import hJerSm from "@/assets/home/hero-jerusalem-sm-optimized.webp";
 import hJerMedium from "@/assets/home/hero-jerusalem-medium.webp";
 import hJerLarge from "@/assets/home/hero-jerusalem-large.webp";
-import hTaSm from "@/assets/home/hero-refresh-tel-aviv-coastline-v2-mobile.webp";
+import hTaSm from "@/assets/home/hero-refresh-tel-aviv-coastline-v3-mobile.webp";
 import hTaMedium from "@/assets/home/hero-refresh-tel-aviv-coastline-v2-medium.webp";
 import hTaLarge from "@/assets/home/hero-refresh-tel-aviv-coastline-v2-large.webp";
 import pAkkoDesktop from "@/assets/home/hero-akko-aerial-large.webp";
@@ -21,7 +21,7 @@ import pDeadSeaSaltMedium from "@/assets/home/hero-refresh-dead-sea-salt-v4-medi
 import pDeadSeaSaltMobile from "@/assets/home/hero-refresh-dead-sea-salt-v4-mobile.webp";
 import pJaffaPortLarge from "@/assets/home/hero-refresh-jaffa-port-v4-large.webp";
 import pJaffaPortMedium from "@/assets/home/hero-refresh-jaffa-port-v4-medium.webp";
-import pJaffaPortMobile from "@/assets/home/hero-refresh-jaffa-port-v4-mobile.webp";
+import pJaffaPortMobile from "@/assets/home/hero-refresh-jaffa-port-v5-mobile.webp";
 import pEilatMountainsLarge from "@/assets/home/hero-refresh-eilat-mountains-v4-large.webp";
 import pEilatMountainsMedium from "@/assets/home/hero-refresh-eilat-mountains-v4-medium.webp";
 import pEilatMountainsMobile from "@/assets/home/hero-refresh-eilat-mountains-v4-mobile.webp";
@@ -30,10 +30,10 @@ import pRamonCraterMedium from "@/assets/home/hero-refresh-ramon-crater-v4-mediu
 import pRamonCraterMobile from "@/assets/home/hero-refresh-ramon-crater-v4-mobile.webp";
 import pTelAvivSaronaLarge from "@/assets/home/hero-refresh-tel-aviv-sarona-v4-large.webp";
 import pTelAvivSaronaMedium from "@/assets/home/hero-refresh-tel-aviv-sarona-v4-medium.webp";
-import pTelAvivSaronaMobile from "@/assets/home/hero-refresh-tel-aviv-sarona-v4-mobile.webp";
+import pTelAvivSaronaMobile from "@/assets/home/hero-refresh-tel-aviv-sarona-v5-mobile.webp";
 import pJerusalemJaffaGateLarge from "@/assets/home/hero-refresh-jerusalem-jaffa-gate-v4-large.webp";
 import pJerusalemJaffaGateMedium from "@/assets/home/hero-refresh-jerusalem-jaffa-gate-v4-medium.webp";
-import pJerusalemJaffaGateMobile from "@/assets/home/hero-refresh-jerusalem-jaffa-gate-v4-mobile.webp";
+import pJerusalemJaffaGateMobile from "@/assets/home/hero-refresh-jerusalem-jaffa-gate-v5-mobile.webp";
 
 export const heroSlides: HeroSlide[] = [
   { src: hJerLarge, srcSm: hJerSm, srcMedium: hJerMedium, caption: "Jerusalem Old City from the Mount of Olives", alt: "Jerusalem's Old City and the Dome of the Rock seen from the Mount of Olives", pos: "55% 60%" },

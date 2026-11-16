@@ -55,3 +55,11 @@ Each processed landscape photo was cropped from its actual original Commons imag
 - tel-aviv-sarona: unchanged because conversion could not be safely completed (Download failed: HTTP Error 429: Too many requests - please contact noc@wikimedia.org to discuss a less disruptive approach or instead use thumbnail images in sizes listed on https://w.wiki/GHai. (0c640b1)).
 
 - tel-aviv-sarona: 2048px original photo crop, 1600px medium and compact 720px mobile. Generated from the verified 5472px Wikimedia Commons photograph.
+
+## Mobile-only carousel crop update (slides 2, 6, 10 and 12)
+
+Only the four mobile WebP files were reframed. Desktop images, desktop object positioning, the other eight slides, and slide order are unchanged. Three mobile images were cropped from the original Commons photographs. Tel Aviv beach was cropped from the available 1800x600 owner-supplied panorama at native size (780x600); the missing original taller source was not fabricated or upscaled. All four new mobile image files are under 145 KB and use new cache-safe names.
+- Slide 2: hero-refresh-tel-aviv-coastline-v3-mobile.webp, horizontal centering 0.03
+- Slide 6: hero-refresh-jerusalem-jaffa-gate-v5-mobile.webp, horizontal centering 0.16
+- Slide 10: hero-refresh-jaffa-port-v5-mobile.webp, horizontal centering 0.62
+- Slide 12: hero-refresh-tel-aviv-sarona-v5-mobile.webp, horizontal centering 0.65

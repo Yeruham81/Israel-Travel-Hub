@@ -110,11 +110,15 @@ describe("home mobile performance optimizations", () => {
     const optimizedSlugs = ["haifa-gardens", "masada-dead-sea", "caesarea-coast", "jerusalem-jaffa-gate", "dead-sea-salt", "eilat-mountains", "jaffa-port", "ramon-crater", "tel-aviv-sarona"];
     for (const slug of optimizedSlugs) {
       for (const [variant, budget] of [["large", 480000], ["medium", 300000], ["mobile", 150000]] as const) {
-        const file = `hero-refresh-${slug}-v4-${variant}.webp`;
+        const file = variant === "mobile" && ["jaffa-port", "tel-aviv-sarona", "jerusalem-jaffa-gate"].includes(slug)
+          ? `hero-refresh-${slug}-v5-mobile.webp`
+          : `hero-refresh-${slug}-v4-${variant}.webp`;
         expect(slides).toContain(file);
         expect(bytes(`src/assets/home/${file}`)).toBeLessThanOrEqual(budget);
       }
     }
+    expect(slides).toContain("hero-refresh-tel-aviv-coastline-v3-mobile.webp");
+    expect(bytes("src/assets/home/hero-refresh-tel-aviv-coastline-v3-mobile.webp")).toBeLessThan(145000);
     expect(slides).toContain("highDensity: true");
     expect(carousel).toContain('s.highDensity ? s.srcMedium + " 1x, " + s.src + " 2x" : s.srcMedium');
     expect(slides).toContain('pos: "center 68%"');

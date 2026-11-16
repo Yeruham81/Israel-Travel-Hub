@@ -19,7 +19,7 @@ describe("homepage hero photo carousel", () => {
     expect(heroSlides[1]?.caption).toBe("Tel Aviv beachfront skyline");
     expect(heroSlides[1]?.src).toContain("hero-refresh-tel-aviv-coastline-v2-large.webp");
     expect(heroSlides[1]?.srcMedium).toContain("hero-refresh-tel-aviv-coastline-v2-medium.webp");
-    expect(heroSlides[1]?.srcSm).toContain("hero-refresh-tel-aviv-coastline-v2-mobile.webp");
+    expect(heroSlides[1]?.srcSm).toContain("hero-refresh-tel-aviv-coastline-v3-mobile.webp");
     expect(heroSlides[2]?.caption).toBe("Haifa and the Bahá’í Gardens");
     expect(heroSlides[2]?.src).toContain("hero-refresh-haifa-gardens-v4-large.webp");
     expect(heroSlides[2]?.srcMedium).toContain("hero-refresh-haifa-gardens-v4-medium.webp");
@@ -46,7 +46,7 @@ describe("homepage hero photo carousel", () => {
     expect(heroSlides[9]?.caption).toBe("Old Jaffa and its harbour");
     expect(heroSlides[9]?.src).toContain("hero-refresh-jaffa-port-v4-large.webp");
     expect(heroSlides[9]?.srcMedium).toContain("hero-refresh-jaffa-port-v4-medium.webp");
-    expect(heroSlides[9]?.srcSm).toContain("hero-refresh-jaffa-port-v4-mobile.webp");
+    expect(heroSlides[9]?.srcSm).toContain("hero-refresh-jaffa-port-v5-mobile.webp");
     expect(heroSlides[9]?.highDensity).toBe(true);
   });
 
