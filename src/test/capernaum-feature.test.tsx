@@ -98,8 +98,12 @@ describe("Capernaum as the first reusable individual-attraction guide", () => {
     expect(article).toContain('to="/travel-blog/sea-of-galilee/"');
     expect(article).not.toContain("The Franciscan ruins, Orthodox monastery and national park are close");
     expect(article).not.toContain("There are three different places to enter");
-    expect(content.contactIntroduction).toMatch(/^Send me your travel date/);
+    expect(content.contactIntroduction).toMatch(/^Tell me when you’re planning to visit/);
     expect(content.contactIntroduction).not.toContain("?");
+    expect(content.contactIntroduction).toContain("I’ll be happy to help arrange a private day trip"); 
+    expect(article).toContain('className="aspect-[4/3] max-h-72 w-full rounded-lg object-cover object-center sm:max-h-64 lg:max-h-72"');
+    const pageLayout = readFileSync("src/components/AttractionDestinationPage.tsx", "utf8");
+    expect(pageLayout).toContain("Practical guides to help you plan the rest of your journey.");
     expect(shell).toContain("contactIntroduction ? { introduction: content.contactIntroduction }");
     const park = readFileSync("src/data/capernaumSite.ts", "utf8");
     expect(park).toContain('fridays: "08:00–15:00"');

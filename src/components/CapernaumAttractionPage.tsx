@@ -48,7 +48,7 @@ const page: AttractionDestinationContent = {
   historyTitle: "History and biblical significance",
   relatedTitle: "Explore related sites",
   updatedAt: capernaumSite.updatedAt,
-  contactIntroduction: "Send me your travel date, starting point and planned stops. I’ll reply personally and can help arrange a private journey.",
+  contactIntroduction: "Tell me when you’re planning to visit, where you’d like to start and which places interest you most. I’ll be happy to help arrange a private day trip around your plans.",
   hero: capernaumSite.hero,
   intro: capernaumSite.intro,
   facts: [
@@ -105,7 +105,7 @@ const page: AttractionDestinationContent = {
             <li><strong>Today:</strong> Visitors can compare the excavated layers with the modern memorial built over the traditional House of Peter.</li>
           </ul>
         </div>
-        <img src="/images/attractions/capernaum-peter-memorial-interior.webp" alt="Archaeological rooms visible through the floor of the modern memorial above Peter's traditional house" width={640} height={480} loading="lazy" decoding="async" className="aspect-[16/10] max-h-44 w-full rounded-lg object-cover sm:max-h-40" />
+        <img src="/images/attractions/capernaum-peter-memorial-interior.webp" alt="Archaeological rooms visible through the floor of the modern memorial above Peter's traditional house" width={640} height={480} loading="lazy" decoding="async" className="aspect-[4/3] max-h-72 w-full rounded-lg object-cover object-center sm:max-h-64 lg:max-h-72" />
       </div>
     </div>
   ),
