@@ -39,3 +39,17 @@ Four user-supplied photographs were verified against their original files using 
 - **Slide 4 — Masada:** [Andrew Shiva, aerial Masada](https://commons.wikimedia.org/wiki/File:Israel-2013-Aerial_18-Masada.jpg), [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/).
 - **Slide 5 — Caesarea coast:** [Idomeir, קיסריה העתיקה](https://commons.wikimedia.org/wiki/File:%D7%A7%D7%99%D7%A1%D7%A8%D7%99%D7%94_%D7%94%D7%A2%D7%AA%D7%99%D7%A7%D7%94.jpg), [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/).
 - **Slide 11 — Mitzpe Ramon:** [Hagai Agmon-Snir, Camel Hill](https://commons.wikimedia.org/wiki/File:CamelHillMitzpeRamonMar262022_03.jpg), [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/).
+
+## 2048px responsive carousel update
+
+Each processed landscape photo was cropped from its actual original Commons image; not enlarged from a smaller derivative. Normal WebP variants are 2048×1024 desktop, 1600×800 medium and 720×900 mobile. The Dead Sea sunrise original is only 1600px, so its derivatives are 1600×800, 1280×640 and 720×900, without upscaling. Jerusalem slide 1 remains completely unchanged; Tel Aviv slide 2 retains its existing 1800×600px asset pending a usable 1920px source file; Akko already has a 2048px desktop file and a compact mobile variant.
+
+- haifa-gardens: 2048px crop generated from full-resolution original.
+- masada-dead-sea: 2048px crop generated from full-resolution original.
+- caesarea-coast: 2048px crop generated from full-resolution original.
+- jerusalem-jaffa-gate: 2048px crop generated from full-resolution original.
+- dead-sea-salt: 1600px crop generated from full-resolution original.
+- eilat-mountains: 2048px crop generated from full-resolution original.
+- jaffa-port: 2048px crop generated from full-resolution original.
+- ramon-crater: 2048px crop generated from full-resolution original.
+- tel-aviv-sarona: unchanged because conversion could not be safely completed (Download failed: HTTP Error 429: Too many requests - please contact noc@wikimedia.org to discuss a less disruptive approach or instead use thumbnail images in sizes listed on https://w.wiki/GHai. (0c640b1)).

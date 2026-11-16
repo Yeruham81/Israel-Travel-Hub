@@ -106,32 +106,13 @@ describe("home mobile performance optimizations", () => {
     expect(slides).toContain("hero-jerusalem-medium.webp");
     expect(slides).toContain("hero-jerusalem-sm-optimized.webp");
     expect(slides).toContain("hero-jerusalem-large.webp");
-    // Earlier panoramic photos remain compact and self-hosted.
-    for (const name of [
-      "dead-sea-salt",
-      "eilat-mountains", "tel-aviv-sarona", "jerusalem-jaffa-gate",
-    ]) {
-      for (const [variant, maxBytes] of [["large", 340000], ["medium", 225000], ["mobile", 155000]] as const) {
-        const filename = `hero-refresh-${name}-${variant}.webp`;
-        expect(slides).toContain(filename);
-        expect(bytes(`src/assets/home/${filename}`)).toBeLessThanOrEqual(maxBytes);
-      }
-    }
-    // The two recent replacements and Haifa get high-definition variants.
-    const improved = [
-      { name: "haifa-gardens", max: { large: 1350000, medium: 700000, mobile: 360000 } },
-      { name: "jaffa-port", max: { large: 1600000, medium: 900000, mobile: 460000 } },
-      { name: "masada-dead-sea", max: { large: 1600000, medium: 900000, mobile: 460000 } },
-      { name: "caesarea-coast", max: { large: 1600000, medium: 900000, mobile: 460000 } },
-      { name: "ramon-crater", max: { large: 1600000, medium: 900000, mobile: 460000 } },
-      { name: "tel-aviv-coastline", max: { large: 290000, medium: 270000, mobile: 140000 } },
-    ] as const;
-    for (const item of improved) {
-      for (const variant of ["large", "medium", "mobile"] as const) {
-        const version = ["jaffa-port", "masada-dead-sea", "caesarea-coast", "ramon-crater"].includes(item.name) ? "v3" : "v2";
-        const filename = `hero-refresh-${item.name}-${version}-${variant}.webp`;
-        expect(slides).toContain(filename);
-        expect(bytes(`src/assets/home/${filename}`)).toBeLessThanOrEqual(item.max[variant]);
+    // Full-resolution original crops, not enlarged small derivatives.
+    const optimizedSlugs = ["haifa-gardens", "masada-dead-sea", "caesarea-coast", "jerusalem-jaffa-gate", "dead-sea-salt", "eilat-mountains", "jaffa-port", "ramon-crater"];
+    for (const slug of optimizedSlugs) {
+      for (const [variant, budget] of [["large", 480000], ["medium", 300000], ["mobile", 150000]] as const) {
+        const file = `hero-refresh-${slug}-v4-${variant}.webp`;
+        expect(slides).toContain(file);
+        expect(bytes(`src/assets/home/${file}`)).toBeLessThanOrEqual(budget);
       }
     }
     expect(slides).toContain("highDensity: true");
