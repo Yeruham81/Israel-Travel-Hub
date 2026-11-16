@@ -90,13 +90,13 @@ export function AttractionHighlight({
 }) {
   return (
     <article className="rounded-xl border border-border/80 bg-card p-4 sm:p-5" data-testid="attraction-highlight">
-      <div className={image ? "grid gap-4 sm:grid-cols-[minmax(0,1.4fr)_minmax(0,1fr)] sm:items-start" : ""}>
+      <div className={image ? "grid gap-3 sm:grid-cols-[minmax(0,1fr)_minmax(180px,220px)] sm:items-start lg:grid-cols-[minmax(0,1fr)_240px]" : ""}>
         <div className="min-w-0">
           <h3 className="font-serif text-xl font-semibold leading-snug">{title}</h3>
           <div className="mt-2 space-y-3 text-sm leading-relaxed sm:text-base">{children}</div>
           {note && <p className="mt-3 border-l-2 border-primary/40 pl-3 text-sm leading-relaxed text-muted-foreground">{note}</p>}
         </div>
-        {image && <img src={image.src} alt={image.alt} width={640} height={480} loading="lazy" decoding="async" className="aspect-[4/3] w-full rounded-lg object-cover" />}
+        {image && <img src={image.src} alt={image.alt} width={640} height={480} loading="lazy" decoding="async" className="aspect-[16/10] max-h-44 w-full rounded-lg object-cover sm:max-h-40 lg:max-h-44" />}
       </div>
     </article>
   );
@@ -147,7 +147,7 @@ export function AttractionDestinationPage({ content }: { content: AttractionDest
       </section>
       {!!content.planningLinks?.length && <nav id="trip-planning" aria-label="Plan your trip to Israel" className="mt-10 scroll-mt-24 rounded-xl border border-border/70 bg-secondary/15 p-4 sm:p-5" data-testid="attraction-trip-planning">
         <h2 className="text-lg font-semibold sm:text-xl">Plan your trip to Israel</h2>
-        <p className="mt-1 text-sm text-muted-foreground">A few practical guides to help you organise the rest of your journey.</p>
+        <p className="mt-1 text-sm text-muted-foreground">Practical guides to help you plan the rest of your journey.</p>
         <ul className="mt-4 grid gap-2 sm:grid-cols-2 lg:grid-cols-3">
           {content.planningLinks.map(item => {
             const Icon = planningIcons[item.icon ?? "region"];

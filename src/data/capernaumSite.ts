@@ -19,8 +19,7 @@ export const capernaumSite = {
   },
   park: {
     regular: "08:00–16:00",
-    winterFridays: "08:00–15:00",
-    publishedSummerFridays: "13:00–15:00",
+    fridays: "08:00–15:00",
     specialHolidayEves: "08:00–13:00",
     phone: "04 679 3865",
     phoneHref: "+97246793865",

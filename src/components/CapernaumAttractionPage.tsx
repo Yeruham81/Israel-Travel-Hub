@@ -8,7 +8,7 @@ const visitSources = capernaumSite.sources;
 
 const visitorAreas = [
   {
-    name: "Franciscan archaeological site",
+    name: "Archaeological site",
     details: <><strong>{capernaumSite.franciscan.fee}</strong> admission. <strong>{capernaumSite.franciscan.morning}</strong> (last entry {capernaumSite.franciscan.lastMorningEntry}) and <strong>{capernaumSite.franciscan.afternoon}</strong> (last entry {capernaumSite.franciscan.lastAfternoonEntry}). Holiday closures and shortened hours apply.</>,
     source: "Christian Information Center",
     url: visitSources.franciscan,
@@ -20,13 +20,12 @@ const visitorAreas = [
     url: visitSources.orthodox,
   },
   {
-    name: "National park / marine terminal",
+    name: "National park & marine terminal",
     details: <div className="space-y-2">
-      <p>Marine-terminal access is <strong>free and does not require advance booking</strong>.</p>
+      <p>Access is <strong>free and does not require advance booking</strong>.</p>
       <ul className="list-disc space-y-1 pl-4">
-        <li><strong>Sun–Thu & Saturday:</strong> {capernaumSite.park.regular}, in both seasons.</li>
-        <li><strong>Winter Fridays and holiday eves:</strong> {capernaumSite.park.winterFridays}.</li>
-        <li><strong>Summer Fridays and holiday eves:</strong> {capernaumSite.park.publishedSummerFridays}, as currently published by the park authority. This unusual short window should be reconfirmed before travelling.</li>
+        <li><strong>Sun–Thu & Saturday:</strong> {capernaumSite.park.regular}, year-round.</li>
+        <li><strong>Fridays and holiday eves:</strong> {capernaumSite.park.fridays}, year-round.</li>
         <li><strong>Rosh Hashanah, Passover and Yom Kippur eves:</strong> {capernaumSite.park.specialHolidayEves}.</li>
       </ul>
       <p className="text-xs text-muted-foreground">The park closes admission one hour before its posted closing time.</p>
@@ -53,13 +52,13 @@ const page: AttractionDestinationContent = {
   intro: capernaumSite.intro,
   facts: [
     { icon: "location", label: "Location", value: "Northern Sea of Galilee", note: "Near Route 87, east of Route 90" },
-    { icon: "duration", label: "Time needed", value: "60–90 minutes", note: "At the main archaeological site" },
-    { icon: "admission", label: "Entry fee", value: capernaumSite.franciscan.fee, note: "Franciscan archaeological site" },
+    { icon: "duration", label: "Time needed", value: "60–90 minutes", note: "At the archaeological site" },
+    { icon: "admission", label: "Entry fee", value: capernaumSite.franciscan.fee, note: "Archaeological site" },
     { icon: "hours", label: "Opening hours", value: `${capernaumSite.franciscan.morning} / ${capernaumSite.franciscan.afternoon}`, note: "Last entry 11:40 / 16:30" },
-    { icon: "highlights", label: "Highlights", value: "Synagogue & Peter's house", note: "Inside the Franciscan site" },
+    { icon: "highlights", label: "Highlights", value: "Synagogue & Peter's house", note: "Inside the archaeological site" },
     { icon: "access", label: "Getting there", value: "Car or organised tour", note: "Public transport is less convenient" },
   ],
-  glanceNote: <>The hours and ₪10 fee above apply <strong>only to the Franciscan archaeological site</strong>. The Orthodox monastery and national park have their own visiting arrangements.</>,
+  glanceNote: <>The opening hours and entry fee above apply to the <strong>archaeological site</strong>. For the Orthodox monastery and national park, see the <a href="#visitor-info" className="font-semibold text-primary underline underline-offset-4">visitor information below</a>.</>,
   highlightContent: (
     <div className="mt-4 space-y-3">
       <AttractionHighlight
@@ -87,7 +86,7 @@ const page: AttractionDestinationContent = {
         <p><strong>Visits must be arranged in advance</strong> with the monastery. Do not assume that a ticket for the ruins also provides admission here.</p>
       </AttractionHighlight>
       <AttractionHighlight title="The national park and the lakeshore">
-        <p>Kfar Nahum National Park is a separately managed visitor area near the excavations. It includes lakeside space and a marine terminal, with its own hours and entry rules. The park authority lists free access to the terminal area without advance booking.</p>
+        <p>Kfar Nahum National Park is a separately managed visitor area near the excavations. It includes lakeside space and a marine terminal, with its own hours and entry rules. Access to the terminal area is free without advance booking.</p>
         <p>Swimming is not permitted within the national park. Check signs on site and enjoy the views from the shore instead.</p>
       </AttractionHighlight>
     </div>
@@ -105,7 +104,7 @@ const page: AttractionDestinationContent = {
             <li><strong>Today:</strong> Visitors can compare the excavated layers with the modern memorial built over the traditional House of Peter.</li>
           </ul>
         </div>
-        <img src="/images/attractions/capernaum-peter-memorial-interior.webp" alt="Archaeological rooms visible through the floor of the modern memorial above Peter's traditional house" width={640} height={480} loading="lazy" decoding="async" className="aspect-[4/3] w-full rounded-lg object-cover" />
+        <img src="/images/attractions/capernaum-peter-memorial-interior.webp" alt="Archaeological rooms visible through the floor of the modern memorial above Peter's traditional house" width={640} height={480} loading="lazy" decoding="async" className="aspect-[16/10] max-h-44 w-full rounded-lg object-cover sm:max-h-40" />
       </div>
     </div>
   ),
@@ -134,22 +133,26 @@ const page: AttractionDestinationContent = {
         </table>
       </div>
       <AttractionPracticalTip>
-        <strong>Plan around the midday break.</strong> I recommend visiting the Franciscan site in the morning or after 14:00. Its gates close from 12:00 to 14:00, so arriving at lunchtime can disrupt the rest of your Galilee itinerary.
+        <strong>Plan around the midday break.</strong> I recommend visiting the archaeological site in the morning or after 14:00. Its gates close from 12:00 to 14:00, so arriving at lunchtime can disrupt the rest of your Galilee itinerary.
       </AttractionPracticalTip>
       <AttractionPracticalTip>
-        <strong>Check Christian and Jewish holiday dates.</strong> The Franciscan compound is closed on Christmas Day, New Year's Day, Easter Sunday and Yom Kippur, with reduced hours on certain other religious dates. Verify the official schedule shortly before travelling.
+        <strong>Check Christian and Jewish holiday dates.</strong> The archaeological site is closed on Christmas Day, New Year's Day, Easter Sunday and Yom Kippur, with reduced hours on certain other religious dates. Verify the official schedule shortly before travelling.
       </AttractionPracticalTip>
       <div className="rounded-xl border border-border/80 bg-secondary/20 p-4 sm:p-5" data-testid="capernaum-visitor-facilities">
         <h3 className="font-serif text-xl font-semibold">Facilities and visitor essentials</h3>
         <p className="mt-2 text-sm leading-relaxed">The following facilities are described by the <strong>national park authority for its own visitor area</strong>, not for the separately managed churches.</p>
-        <ul className="mt-3 grid list-disc gap-x-5 gap-y-2 pl-5 text-sm leading-relaxed sm:grid-cols-2 sm:text-base">
-          <li><strong>Parking:</strong> Parking near the park entrance, with a paved accessible approach.</li>
-          <li><strong>Restrooms and drinking water:</strong> Toilets and water fountains, including accessible facilities.</li>
-          <li><strong>Shade and seating:</strong> Shaded seating overlooking the lake.</li>
-          <li><strong>Refreshments:</strong> The park authority lists accessible café and restaurant facilities; check what is operating on your visit date.</li>
-          <li><strong>Accessibility:</strong> Accessible entrance areas and surfaced paths within the national park. Access to archaeological surfaces and church compounds must be checked separately.</li>
-          <li><strong>Useful contacts:</strong> Franciscan site <a href={`tel:${capernaumSite.franciscan.phoneHref}`} className="font-semibold text-primary underline underline-offset-4">{capernaumSite.franciscan.phone}</a>; national park <a href={`tel:${capernaumSite.park.phoneHref}`} className="font-semibold text-primary underline underline-offset-4">{capernaumSite.park.phone}</a>.</li>
-        </ul>
+        <div className="mt-3 grid gap-x-5 gap-y-1 sm:grid-cols-2" data-testid="capernaum-facilities-columns">
+          <ul className="list-disc space-y-1 pl-5 text-sm leading-relaxed sm:text-base">
+            <li><strong>Parking:</strong> Parking near the park entrance, with a paved accessible approach.</li>
+            <li><strong>Restrooms and drinking water:</strong> Toilets and water fountains, including accessible facilities.</li>
+            <li><strong>Shade and seating:</strong> Shaded seating overlooking the lake.</li>
+          </ul>
+          <ul className="list-disc space-y-1 pl-5 text-sm leading-relaxed sm:text-base">
+            <li><strong>Accessibility:</strong> Accessible entrances and surfaced paths within the park. Check access to the separate archaeological and church grounds directly.</li>
+            <li><strong>Refreshments:</strong> Accessible café and restaurant facilities with variable opening hours.</li>
+            <li><strong>Useful contacts:</strong> Archaeological site <a href={`tel:${capernaumSite.franciscan.phoneHref}`} className="font-semibold text-primary underline underline-offset-4">{capernaumSite.franciscan.phone}</a>; national park <a href={`tel:${capernaumSite.park.phoneHref}`} className="font-semibold text-primary underline underline-offset-4">{capernaumSite.park.phone}</a>.</li>
+          </ul>
+        </div>
       </div>
       <ul className="list-disc space-y-2 pl-5 text-sm leading-relaxed sm:text-base">
         <li><strong>Clothing:</strong> Choose respectful dress for churches and sacred spaces.</li>
@@ -200,8 +203,7 @@ const page: AttractionDestinationContent = {
         <p className="mt-3 text-sm text-muted-foreground">Add the Greek Orthodox monastery only if you have arranged a visit. Allow time for opening hours and short drives between the sites.</p>
       </div>
       <figure className="overflow-hidden rounded-xl border bg-card">
-        <img src="/images/attractions/capernaum-aerial-overview.webp" alt="Aerial view of the archaeological compound, shoreline and Sea of Galilee at Capernaum" loading="lazy" decoding="async" width={1100} height={714} className="aspect-[16/7] w-full object-cover" />
-        <figcaption className="px-4 py-2 text-sm text-muted-foreground">An aerial view helps put the archaeological site, lakeshore and surrounding approach in context.</figcaption>
+        <img src="/images/attractions/capernaum-aerial-overview.webp" alt="Aerial view of the archaeological compound, shoreline and Sea of Galilee at Capernaum" loading="lazy" decoding="async" width={1100} height={714} className="h-44 w-full object-cover object-center sm:h-52" />
       </figure>
       <AttractionPracticalTip>
         <strong>A relaxing break by the lake.</strong> The national park's shaded seating areas offer a pleasant spot for a short break overlooking the Sea of Galilee. Bring a light snack before continuing to Tabgha or the Mount of Beatitudes. Swimming and lighting fires are prohibited in the national park; please take your litter with you.
@@ -224,7 +226,7 @@ const page: AttractionDestinationContent = {
           <img src={galileePhoto} alt="Green hills above the Sea of Galilee on a northern Israel day-trip route" width={128} height={100} loading="lazy" decoding="async" className="h-24 w-24 shrink-0 rounded-lg object-cover sm:w-28" />
           <div className="flex min-w-0 flex-1 flex-col">
             <h3 className="font-serif text-lg font-semibold leading-snug group-hover:text-primary">Explore with a private driver</h3>
-            <p className="mt-1 text-sm leading-relaxed text-muted-foreground">I can arrange this private day trip from Jerusalem or Tel Aviv, or as a shore excursion from Haifa Port, with stops tailored to your group.</p>
+            <p className="mt-1 text-sm leading-relaxed text-muted-foreground">Message me to arrange a private day trip from Jerusalem or Tel Aviv, or a shore excursion from Haifa Port, with stops tailored to your group.</p>
             <span className="mt-2 inline-flex items-center gap-1 text-sm font-semibold text-primary">Request a quote <ArrowUpRight className="h-4 w-4" aria-hidden="true" /></span>
           </div>
         </a>
