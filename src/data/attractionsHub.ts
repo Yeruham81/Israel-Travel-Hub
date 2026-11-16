@@ -118,7 +118,7 @@ export const attractionHubRegions: AttractionHubRegion[] = [
     navLabel: "Sea of Galilee & Jordan",
     image: attractionHubPhotos.galilee,
     cards: [
-      attraction("capernaum", "Capernaum", "Ancient synagogue remains and churches near the lake.", attractionHubPhotos.galilee.src),
+      attraction("capernaum", "Capernaum", "Explore the ancient synagogue, Peter’s house and lakeside ruins.", attractionHubPhotos.galilee.src),
       attraction("tabgha", "Tabgha", "Lakeside churches, mosaics and biblical traditions.", attractionHubPhotos.galilee.src),
       attraction("mount-of-beatitudes", "Mount of Beatitudes", "A peaceful hilltop church and lake panorama.", attractionHubPhotos.galilee.src),
       editorialAttraction("magdala", "Magdala", "Archaeology and pilgrimage on the western shore."),

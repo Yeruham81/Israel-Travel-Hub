@@ -1,6 +1,7 @@
 import type { LinkProps } from "@tanstack/react-router";
 import type { ReactNode } from "react";
-import { ArrowUpRight, Clock3, MapPin, Ticket, CalendarClock, Info } from "lucide-react";
+import { Link } from "@/components/SiteLink";
+import { ArrowUpRight, Clock3, MapPin, Ticket, CalendarClock, Landmark, Route, Lightbulb } from "lucide-react";
 import { AuthorCard } from "@/components/AuthorCard";
 import { GuideHeroLayout, GuideHeroMedia } from "@/components/GuideHeroMedia";
 import { Breadcrumbs, FaqList, OnThisPage, RelatedLinks, Section } from "@/components/Guide";
@@ -9,9 +10,19 @@ import { PageUpdated } from "@/components/PageUpdated";
 import { SourcesDisclosure } from "@/components/SourcesDisclosure";
 import { guideContactCopy } from "@/lib/guide-contact";
 
-export type AttractionFact = { label: string; value: string; note?: string };
+const factIcons = { location: MapPin, duration: Clock3, admission: Ticket, hours: CalendarClock, highlights: Landmark, access: Route } as const;
+export type AttractionFact = { icon: keyof typeof factIcons; label: string; value: string; note?: string };
 export type AttractionSource = { label: string; url: string; note?: string };
 export type AttractionNearbyLink = { label: string; to: LinkProps["to"]; note?: string };
+export type AttractionPlanningLink = { label: string; to: LinkProps["to"] };
+/** Yellow-bulb editorial guidance. Advice may be first-person, but must not
+ * invent a visit or personal observation the author has not reported. */
+export function AttractionPracticalTip({ children }: { children: ReactNode }) {
+  return <aside className="mt-4 flex items-start gap-3 rounded-xl border border-amber-200/90 bg-amber-50/80 px-4 py-3 text-sm leading-relaxed text-foreground dark:border-amber-800/55 dark:bg-amber-950/20" data-testid="attraction-practical-tip">
+    <Lightbulb className="mt-0.5 h-5 w-5 shrink-0 fill-amber-300/80 text-amber-600 dark:text-amber-400" aria-hidden="true" />
+    <div className="min-w-0">{children}</div>
+  </aside>;
+}
 
 /** Reusable page framework for individual /attractions/ sites.
  * Slots let an archaeological site, church, city or nature reserve have distinct
@@ -29,26 +40,28 @@ export type AttractionDestinationContent = {
   glanceNote?: ReactNode;
   highlightContent: ReactNode;
   historyContent?: ReactNode;
+  historyTitle?: string;
   visitorContent: ReactNode;
   transportContent: ReactNode;
   itineraryContent: ReactNode;
   tourContent?: ReactNode;
   faqs: { q: string; a: string }[];
   nearby: AttractionNearbyLink[];
+  relatedTitle?: string;
+  planningLinks?: AttractionPlanningLink[];
   sources: AttractionSource[];
 };
 
 function AtAGlance({ placeName, facts, note }: { placeName: string; facts: AttractionFact[]; note?: ReactNode }) {
-  const icons = [MapPin, Clock3, Ticket, CalendarClock, Info, Info];
   return (
     <section id="at-a-glance" aria-labelledby="at-a-glance-h" className="mt-7 scroll-mt-24">
       <h2 id="at-a-glance-h" className="text-xl font-bold sm:text-2xl">{placeName} at a glance</h2>
       <div className="mt-3 grid grid-cols-2 gap-2 sm:grid-cols-3 sm:gap-3" data-testid="attraction-at-a-glance">
-        {facts.map((fact, index) => {
-          const Icon = icons[index % icons.length]!;
-          return <div key={fact.label} className="min-w-0 rounded-xl border border-border/80 bg-secondary/25 px-3 py-3 sm:px-4">
+        {facts.map((fact) => {
+          const Icon = factIcons[fact.icon];
+          return <div key={fact.label} className="min-w-0 rounded-xl border border-amber-200/80 bg-amber-50/90 px-3 py-3 shadow-sm dark:border-amber-800/50 dark:bg-amber-950/20 sm:px-4">
             <div className="flex items-center gap-1.5">
-              <Icon className="h-4 w-4 shrink-0 text-primary" aria-hidden="true" />
+              <Icon className="h-4 w-4 shrink-0 text-amber-700 dark:text-amber-400" aria-hidden="true" />
               <p className="text-[11px] font-bold uppercase leading-snug tracking-wide text-muted-foreground">{fact.label}</p>
             </div>
             <p className="mt-2 text-sm font-bold leading-snug text-foreground sm:text-base">{fact.value}</p>
@@ -75,7 +88,7 @@ export function AttractionHighlight({
         <div className="min-w-0">
           <h3 className="font-serif text-xl font-semibold leading-snug">{title}</h3>
           <div className="mt-2 space-y-3 text-sm leading-relaxed sm:text-base">{children}</div>
-          {note && <p className="mt-3 border-l-2 border-primary/40 pl-3 text-sm leading-relaxed text-muted-foreground"><strong>Worth knowing:</strong> {note}</p>}
+          {note && <p className="mt-3 border-l-2 border-primary/40 pl-3 text-sm leading-relaxed text-muted-foreground">{note}</p>}
         </div>
         {image && <img src={image.src} alt={image.alt} width={640} height={480} loading="lazy" decoding="async" className="aspect-[4/3] w-full rounded-lg object-cover" />}
       </div>
@@ -92,7 +105,8 @@ export function AttractionDestinationPage({ content }: { content: AttractionDest
     ["visit-plan", "Plan your visit"],
     ...(content.tourContent ? [["tours", "Tours and private visits"] as [string, string]] : []),
     ["faq", "Questions"],
-    ["nearby", "Nearby attractions"],
+    ["nearby", "Related sites"],
+    ...(content.planningLinks?.length ? [["trip-planning", "Plan your trip"] as [string, string]] : []),
     ["contact", "Contact"],
   ];
   return (
@@ -116,15 +130,26 @@ export function AttractionDestinationPage({ content }: { content: AttractionDest
       <Section id="highlights" title={"What to see at " + content.placeName} className="mt-9">
         {content.highlightContent}
       </Section>
-      {content.historyContent && <Section id="history" title="History and biblical significance">{content.historyContent}</Section>}
+      {content.historyContent && <Section id="history" title={content.historyTitle ?? "History and significance"}>{content.historyContent}</Section>}
       <Section id="visitor-info" title="Opening hours, tickets and practical information">{content.visitorContent}</Section>
       <Section id="getting-there" title={"How to get to " + content.placeName}>{content.transportContent}</Section>
       <Section id="visit-plan" title="How to plan your visit">{content.itineraryContent}</Section>
       {content.tourContent && <Section id="tours" title="Guided tours and private visits">{content.tourContent}</Section>}
       <FaqList faqs={content.faqs} />
-      <section id="nearby" aria-label="Nearby attractions" className="scroll-mt-24">
-        <RelatedLinks title="Explore nearby attractions" currentPath={String(content.path)} items={content.nearby} illustrated maxPhotoCards={4} />
+      <section id="nearby" aria-label="Related sites" className="scroll-mt-24">
+        <RelatedLinks title={content.relatedTitle ?? "Explore related sites"} currentPath={String(content.path)} items={content.nearby} illustrated maxPhotoCards={content.nearby.length >= 6 ? 6 : 4} />
       </section>
+      {!!content.planningLinks?.length && <nav id="trip-planning" aria-label="Plan your trip to Israel" className="mt-9 scroll-mt-24 rounded-xl border border-border/75 bg-secondary/20 p-4 sm:p-5" data-testid="attraction-trip-planning">
+        <h2 className="text-lg font-semibold sm:text-xl">Plan your trip to Israel</h2>
+        <p className="mt-1 text-sm text-muted-foreground">Useful reading for organising your visit beyond this attraction.</p>
+        <ul className="mt-3 grid gap-x-5 gap-y-2 sm:grid-cols-2 lg:grid-cols-3">
+          {content.planningLinks.map(item => <li key={String(item.to)}>
+            <Link to={item.to} className="inline-flex items-start gap-1 text-sm font-medium text-primary underline-offset-4 hover:underline focus-visible:rounded-sm focus-visible:outline-2 focus-visible:outline-primary">
+              {item.label}<ArrowUpRight className="mt-0.5 size-3.5 shrink-0" aria-hidden="true" />
+            </Link>
+          </li>)}
+        </ul>
+      </nav>}
       <HomeContactForm key={String(content.path)} guide={guideContactCopy(content.title, "attraction", content.placeName)} />
       <SourcesDisclosure>
         <p className="mb-3 leading-relaxed">Official information checked {new Date(content.updatedAt + "T00:00:00Z").toLocaleDateString("en-US", { month: "long", year: "numeric", timeZone: "UTC" })}. Visiting rules and access can change; check the relevant operator's latest notices for your date.</p>

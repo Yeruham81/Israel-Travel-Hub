@@ -1,211 +1,247 @@
 import { Link } from "@tanstack/react-router";
-import { ArrowUpRight, CarFront, MapPinned, Ticket, TrainFront } from "lucide-react";
-import { AttractionDestinationPage, AttractionHighlight, type AttractionDestinationContent } from "@/components/AttractionDestinationPage";
+import { ArrowUpRight, BusFront, CarFront } from "lucide-react";
+import { AttractionDestinationPage, AttractionHighlight, AttractionPracticalTip, type AttractionDestinationContent } from "@/components/AttractionDestinationPage";
 import capernaumPhoto from "@/assets/guides/capernaum.jpg";
+import galileePhoto from "@/assets/home/hero-galilee-sm.webp";
 
 const visitSources = {
   franciscan: "https://www.cicts.org/our-services/",
   archaeology: "https://www.custodia.org/en/sanctuaries/capernaum/",
   orthodox: "https://capernaum.info/opening-hours-and-contacts/",
   park: "https://en.parks.org.il/reserve-park/kfar-nahum-capernaum-national-park/",
+  parkHebrew: "https://www.parks.org.il/reserve-park/%D7%92%D7%9F-%D7%9C%D7%90%D7%95%D7%9E%D7%99-%D7%9B%D7%A4%D7%A8-%D7%A0%D7%97%D7%95%D7%9D/",
 };
+
+const visitorAreas = [
+  {
+    name: "Franciscan archaeological site",
+    details: <><strong>₪10</strong> admission. <strong>08:00–12:00</strong> (last entry 11:40) and <strong>14:00–17:00</strong> (last entry 16:30). Holiday closures and shortened hours apply.</>,
+    source: "Christian Information Center",
+    url: visitSources.franciscan,
+  },
+  {
+    name: "Greek Orthodox monastery",
+    details: <>Visits <strong>by prior phone arrangement</strong> with the monastery's superior. Separate access and religious-service schedules.</>,
+    source: "Monastery visitor information",
+    url: visitSources.orthodox,
+  },
+  {
+    name: "National park / marine terminal",
+    details: <>Free access to the <strong>marine-terminal visitor area</strong> without prior booking, according to the park authority. Separate park hours and rules.</>,
+    source: "Israel Nature and Parks Authority",
+    url: visitSources.park,
+  },
+] as const;
+
+/** Approximate ancient-site marker from OpenStreetMap (way 551062314). */
+const openStreetMapEmbed = "https://www.openstreetmap.org/export/embed.html?bbox=35.549%2C32.861%2C35.603%2C32.898&layer=mapnik&marker=32.88069%2C35.57552";
+const openStreetMapLarger = "https://www.openstreetmap.org/?mlat=32.88069&mlon=35.57552#map=14/32.88069/35.57552";
 
 const page: AttractionDestinationContent = {
   path: "/attractions/capernaum/",
   placeName: "Capernaum",
   title: "Capernaum (Kfar Nahum): Visitor Guide",
   region: "Sea of Galilee",
-  updatedAt: "2026-11-15",
+  historyTitle: "History and biblical significance",
+  relatedTitle: "Explore related sites",
+  updatedAt: "2026-11-16",
   hero: {
     src: capernaumPhoto,
     alt: "Basalt village remains and part of the ancient limestone synagogue at Capernaum, beside the Sea of Galilee",
   },
-  intro: "On the northwestern shore of the Sea of Galilee, Capernaum preserves the remains of a Jewish village closely associated with Jesus' ministry. Explore its monumental synagogue, the site traditionally identified as Peter's house, and the lakeside setting—while planning around several separately managed visitor areas.",
+  intro: "On the northwestern shore of the Sea of Galilee, Capernaum preserves the remains of a Jewish village closely associated with Jesus' ministry. Visit the ancient synagogue and the traditional site of Peter's house, then discover the nearby Greek Orthodox monastery and Kfar Nahum National Park along the lakeshore.",
   facts: [
-    { label: "Location", value: "Northwestern Sea of Galilee", note: "Near Route 87, east of Route 90" },
-    { label: "Suggested visit", value: "60–90 minutes", note: "For the Franciscan archaeological site" },
-    { label: "Admission", value: "₪10", note: "Published fee at the Franciscan site" },
-    { label: "Published hours", value: "08:00–12:00 / 14:00–17:00", note: "Last entry 11:40 / 16:30" },
-    { label: "Main sights", value: "Synagogue & Peter's house", note: "Within the Franciscan site" },
-    { label: "Other areas", value: "Separate access", note: "Orthodox monastery and national park" },
+    { icon: "location", label: "Location", value: "Northern Sea of Galilee", note: "Near Route 87, east of Route 90" },
+    { icon: "duration", label: "Time needed", value: "60–90 minutes", note: "At the main archaeological site" },
+    { icon: "admission", label: "Entry fee", value: "₪10", note: "Franciscan archaeological site" },
+    { icon: "hours", label: "Opening hours", value: "08:00–12:00 / 14:00–17:00", note: "Last entry 11:40 / 16:30" },
+    { icon: "highlights", label: "Highlights", value: "Synagogue & Peter's house", note: "Inside the Franciscan site" },
+    { icon: "access", label: "Other places", value: "Separate entrances", note: "Orthodox monastery and park" },
   ],
-  glanceNote: <>The archaeological site, Greek Orthodox monastery and national park visitor area have <strong>different operators, entrances and visiting rules</strong>. Hours and the ₪10 fee above apply to the Franciscan site only. Check holiday exceptions before travelling.</>,
+  glanceNote: <>The hours and ₪10 fee above apply <strong>only to the Franciscan archaeological site</strong>. The Orthodox monastery and national park have their own visiting arrangements.</>,
   highlightContent: (
-    <div className="mt-5 space-y-4">
+    <div className="mt-4 space-y-3">
       <AttractionHighlight
         title="The ancient synagogue"
-        image={{
-          src: "/images/attractions/capernaum-synagogue.webp",
-          alt: "Visitors beside the white limestone walls and columns of Capernaum's ancient synagogue",
-        }}
-        note="The imposing limestone synagogue visible today is generally dated to the fifth century, not the time of Jesus."
+        image={{ src: "/images/attractions/capernaum-synagogue.webp", alt: "Visitors beside the white limestone synagogue walls and columns at Capernaum" }}
       >
-        <p>The white limestone façade, columns and carved stonework contrast with the darker basalt used in the surrounding village. This is the best-known archaeological landmark at Capernaum, and the surviving architecture gives a vivid impression of a substantial late-antique synagogue.</p>
-        <p>Excavations revealed earlier structures beneath it. Those remains are important when considering the New Testament references to teaching in a synagogue at Capernaum, but the building standing above ground should not be described as the actual first-century structure.</p>
+        <p>White limestone columns and carved details stand out against the darker basalt of the village. This is the best-known archaeological landmark at Capernaum.</p>
+        <p>The synagogue visible today is generally dated to the fifth century, much later than the time of Jesus. Earlier archaeological levels lie beneath it.</p>
       </AttractionHighlight>
       <AttractionHighlight
-        title="The site traditionally identified as Peter's house"
-        image={{
-          src: "/images/attractions/capernaum-peters-house.webp",
-          alt: "Excavated basalt rooms below the elevated modern church marking the traditional site of Peter's house",
-        }}
-        note="The identification with Peter's home comes from Christian tradition and archaeological interpretation; it cannot be established as a personal address with certainty."
+        title="The traditional House of Peter"
+        image={{ src: "/images/attractions/capernaum-peters-house.webp", alt: "Basalt dwelling remains and the elevated modern memorial above the traditional House of Peter at Capernaum" }}
       >
-        <p>Close to the synagogue, excavated domestic rooms are associated by Christian tradition with the house of the apostle Peter. Archaeologists identified changes in the use of the complex over time, including phases of Christian veneration and a later Byzantine octagonal church.</p>
-        <p>A striking modern memorial church, inaugurated in 1990, stands above the excavated area. The architecture allows visitors to look towards the earlier remains without walking on the most sensitive archaeological layers.</p>
+        <p>Excavated rooms near the synagogue are traditionally associated with the apostle Peter. Christian worship developed here over centuries, and a Byzantine octagonal church later enclosed part of the earlier site.</p>
+        <p>The modern memorial church rises above the excavations, allowing visitors to see the remains below. The identification as Peter's personal home is a matter of tradition, not proven archaeological certainty.</p>
       </AttractionHighlight>
-      <AttractionHighlight title="The basalt houses of the ancient village">
-        <p>The low stone foundations between the main monuments are easy to overlook. They reveal a residential settlement of rooms and courtyards built with local basalt, a useful contrast with the more elaborate limestone synagogue.</p>
-        <p>Give these remains a few minutes rather than rushing between the religious landmarks. They help explain the everyday setting of the village and the people who lived beside the lake.</p>
+      <AttractionHighlight title="The basalt houses of the old village">
+        <p>Take a few minutes to explore the low stone walls and courtyards between the main monuments. These domestic remains show the scale and layout of the settlement that stood beside the lake.</p>
       </AttractionHighlight>
-      <AttractionHighlight title="The Greek Orthodox Monastery of the Twelve Apostles" note="This is a separate religious compound. Its official website asks visitors to arrange entry by phone in advance.">
-        <p>Nearby, the Greek Orthodox monastery is known for its distinctive red-domed church, dedicated to the Holy Apostles Peter and Paul. It offers a different architectural and devotional experience from the Franciscan archaeological compound.</p>
-        <p>Do not assume that admission to the archaeological site gives access to the monastery, or that the monastery is open whenever the ruins are open. Arrange your visit directly with the monastery if this stop matters to your itinerary.</p>
+      <AttractionHighlight title="The Greek Orthodox Church of the Twelve Apostles">
+        <p>The neighbouring Greek Orthodox monastery is recognisable by its red-domed church and peaceful grounds. It is separate from the Franciscan archaeological site and offers a different religious and architectural experience.</p>
+        <p><strong>Visits must be arranged in advance</strong> with the monastery. Do not assume that a ticket for the ruins also provides admission here.</p>
       </AttractionHighlight>
-      <AttractionHighlight title="The national park visitor area and lakeshore">
-        <p>The Israel Nature and Parks Authority manages a separate national park area and lakeside visitor terminal. It includes a waterfront setting and information about Capernaum, but it is <strong>not</strong> the same entrance as the Franciscan ruins.</p>
-        <p>The park authority says the marine-terminal entrance is free of charge without advance booking. The park's own opening times and rules apply there, and entering the lake is prohibited in the national park.</p>
+      <AttractionHighlight title="The national park and the lakeshore">
+        <p>Kfar Nahum National Park is a separately managed visitor area near the excavations. It includes lakeside space and a marine terminal, with its own hours and entry rules. The park authority lists free access to the terminal area without advance booking.</p>
+        <p>Swimming is not permitted within the national park. Check signs on site and enjoy the views from the shore instead.</p>
       </AttractionHighlight>
     </div>
   ),
   historyContent: (
-    <div className="mt-4 space-y-5">
-      <div>
-        <h3 className="font-serif text-xl font-semibold">From a lakeside village to a pilgrimage site</h3>
-        <p className="mt-2 leading-relaxed">Kfar Nahum means “village of Nahum” in Hebrew. The settlement developed on the northern shore of the Sea of Galilee and is remembered as a Jewish community during the Roman period. Its surviving walls and courtyards speak to ordinary village life, while the synagogue demonstrates the area's later religious and architectural development.</p>
-        <p className="mt-3 leading-relaxed">The New Testament repeatedly places Jesus in Capernaum. The town is associated with his teaching and healing ministry, including accounts of activity in a synagogue and at Peter's home (for example, Mark 1:21–31). These texts explain the site's importance to Christian pilgrims; archaeology and religious tradition should nevertheless be distinguished when identifying particular buildings.</p>
-      </div>
+    <div className="mt-4 space-y-4">
+      <p>Known in Hebrew as Kfar Nahum (“village of Nahum”), Capernaum was a lakeside Jewish settlement during the Roman period. The New Testament describes Jesus teaching and healing here, including events associated with the synagogue and Peter's house (Mark 1:21–31).</p>
       <div className="grid gap-4 rounded-xl border bg-secondary/20 p-4 sm:grid-cols-[minmax(0,1.3fr)_minmax(0,1fr)] sm:items-start sm:p-5">
-        <div>
-          <h3 className="font-serif text-xl font-semibold">What the excavations tell us</h3>
-          <p className="mt-2 leading-relaxed">The monumental white synagogue is generally assigned to the fifth century, with evidence of earlier buildings beneath it. Excavation around the traditional House of Peter revealed successive phases of adaptation and worship, including a Byzantine church built over the earlier room.</p>
-          <p className="mt-3 leading-relaxed">The photograph alongside this section shows visitors looking down into the preserved remains from inside the modern memorial—one way the site communicates those layers of history.</p>
+        <div className="min-w-0">
+          <h3 className="font-serif text-xl font-semibold">How the site changed over time</h3>
+          <ul className="mt-3 list-disc space-y-2 pl-5 text-sm leading-relaxed sm:text-base">
+            <li><strong>Roman period:</strong> A village of basalt houses stood beside the lake.</li>
+            <li><strong>Early Christian period:</strong> One domestic complex became a place of veneration according to the archaeological interpretation.</li>
+            <li><strong>Byzantine period:</strong> The monumental limestone synagogue and an octagonal church reflect later religious life.</li>
+            <li><strong>Today:</strong> Visitors can compare the excavated layers with the modern memorial built over the traditional House of Peter.</li>
+          </ul>
         </div>
-        <img src="/images/attractions/capernaum-peter-memorial-interior.webp" alt="Visitors viewing the preserved archaeological remains through the floor of the modern Peter memorial church in Capernaum" width={640} height={480} loading="lazy" decoding="async" className="aspect-[4/3] w-full rounded-lg object-cover" />
+        <img src="/images/attractions/capernaum-peter-memorial-interior.webp" alt="Archaeological rooms visible through the floor of the modern memorial above Peter's traditional house" width={640} height={480} loading="lazy" decoding="async" className="aspect-[4/3] w-full rounded-lg object-cover" />
       </div>
+      <p className="text-sm text-muted-foreground">Biblical tradition explains why Capernaum became a pilgrimage destination; the visible ruins and their dates must be interpreted separately from those traditions.</p>
     </div>
   ),
   visitorContent: (
-    <div className="mt-4 space-y-5">
-      <p>The main reason to check details carefully is that <strong>“Capernaum” refers to more than one visitor entrance</strong>. Use the operator of the exact site you plan to enter—not a generic opening-hours listing for the whole area.</p>
-      <div className="overflow-x-auto rounded-xl border">
-        <table className="w-full min-w-[560px] border-collapse text-left text-sm" data-testid="capernaum-visitor-table">
-          <thead className="bg-secondary/70">
-            <tr>
-              <th scope="col" className="px-4 py-3 font-bold">Site</th>
-              <th scope="col" className="px-4 py-3 font-bold">Admission and visiting rules</th>
-              <th scope="col" className="px-4 py-3 font-bold">Official information</th>
-            </tr>
-          </thead>
-          <tbody className="divide-y">
-            <tr>
-              <th scope="row" className="px-4 py-3 align-top font-semibold">Franciscan archaeological compound</th>
-              <td className="px-4 py-3 align-top">Published entrance fee: <strong>₪10</strong>. Hours: <strong>08:00–12:00</strong> (last entry 11:40) and <strong>14:00–17:00</strong> (last entry 16:30). Holiday exceptions and closures apply.</td>
-              <td className="px-4 py-3 align-top"><a href={visitSources.franciscan} target="_blank" rel="noopener noreferrer" className="font-semibold text-primary underline underline-offset-4">Christian Information Center</a></td>
-            </tr>
-            <tr>
-              <th scope="row" className="px-4 py-3 align-top font-semibold">Greek Orthodox monastery</th>
-              <td className="px-4 py-3 align-top">Visit <strong>by prior phone arrangement</strong> with the superior. Confirm timing and any other conditions directly.</td>
-              <td className="px-4 py-3 align-top"><a href={visitSources.orthodox} target="_blank" rel="noopener noreferrer" className="font-semibold text-primary underline underline-offset-4">Monastery visitor information</a></td>
-            </tr>
-            <tr>
-              <th scope="row" className="px-4 py-3 align-top font-semibold">National park / marine terminal</th>
-              <td className="px-4 py-3 align-top">The <strong>marine-terminal entrance</strong> is listed as free without prior booking. The national park has separate, seasonally variable opening hours.</td>
-              <td className="px-4 py-3 align-top"><a href={visitSources.park} target="_blank" rel="noopener noreferrer" className="font-semibold text-primary underline underline-offset-4">Israel Nature and Parks Authority</a></td>
-            </tr>
-          </tbody>
+    <div className="mt-4 space-y-4">
+      <p>There are three different places to enter in the Capernaum area. The table below compares their published visiting arrangements.</p>
+      <div className="grid gap-3 md:hidden" data-testid="capernaum-mobile-visitor-cards">
+        {visitorAreas.map(site => <article key={site.name} className="rounded-xl border bg-card p-4">
+          <h3 className="text-base font-semibold">{site.name}</h3>
+          <p className="mt-2 text-sm leading-relaxed">{site.details}</p>
+          <a href={site.url} target="_blank" rel="noopener noreferrer" className="mt-3 inline-flex items-center gap-1 text-sm font-semibold text-primary underline-offset-4 hover:underline">{site.source}<ArrowUpRight className="h-3.5 w-3.5" aria-hidden="true" /></a>
+        </article>)}
+      </div>
+      <div className="hidden overflow-x-auto rounded-xl border md:block">
+        <table className="w-full border-collapse text-left text-sm" data-testid="capernaum-visitor-table">
+          <thead className="bg-secondary/70"><tr>
+            <th scope="col" className="w-[26%] px-4 py-3 font-bold">Visitor area</th>
+            <th scope="col" className="px-4 py-3 font-bold">Admission and visiting rules</th>
+            <th scope="col" className="w-[26%] px-4 py-3 font-bold">Official information</th>
+          </tr></thead>
+          <tbody className="divide-y">{visitorAreas.map(site => <tr key={site.name}>
+            <th scope="row" className="px-4 py-3 align-top font-semibold">{site.name}</th>
+            <td className="px-4 py-3 align-top leading-relaxed">{site.details}</td>
+            <td className="px-4 py-3 align-top"><a href={site.url} target="_blank" rel="noopener noreferrer" className="font-semibold text-primary underline underline-offset-4">{site.source}</a></td>
+          </tr>)}</tbody>
         </table>
       </div>
-      <p className="text-sm leading-relaxed text-muted-foreground"><strong>Holiday exception:</strong> The Christian Information Center lists closures of the Franciscan site on Christmas Day, New Year's Day, Easter Sunday and Yom Kippur, as well as shorter hours on some other Christian holiday dates. Always recheck its current listing.</p>
-      <div className="grid gap-3 sm:grid-cols-2">
-        <div className="rounded-xl border bg-card p-4">
-          <h3 className="font-semibold">Clothing, weather and walking</h3>
-          <p className="mt-2 text-sm leading-relaxed">Dress respectfully near churches and sacred spaces. Wear comfortable shoes for uneven stone surfaces and take drinking water, a hat and sun protection. Exposed ruins can be hot in summer.</p>
-        </div>
-        <div className="rounded-xl border bg-card p-4">
-          <h3 className="font-semibold">Parking and accessibility</h3>
-          <p className="mt-2 text-sm leading-relaxed">Choose the correct entrance before setting out. The park authority describes accessible paths and facilities at its own visitor area, but this does not guarantee the same accessibility inside either church-managed compound. Contact the relevant operator for specific mobility needs.</p>
-        </div>
-      </div>
-      <p className="text-sm leading-relaxed"><strong>For the Greek Orthodox monastery:</strong> Its official page gives <a href="tel:+972532840991" className="font-semibold text-primary underline underline-offset-4">+972 53 284 0991</a> for arranging a visit. The listed contact is for the monastery, not for the Franciscan site.</p>
+      <AttractionPracticalTip>
+        <strong>Plan around the midday break.</strong> I recommend visiting the Franciscan site in the morning or after 14:00. Its gates close from 12:00 to 14:00, so arriving at lunchtime can disrupt the rest of your Galilee itinerary.
+      </AttractionPracticalTip>
+      <AttractionPracticalTip>
+        <strong>Check Christian and Jewish holiday dates.</strong> The Franciscan compound is closed on Christmas Day, New Year's Day, Easter Sunday and Yom Kippur, with reduced hours on certain other religious dates. Verify the official schedule shortly before travelling.
+      </AttractionPracticalTip>
+      <ul className="list-disc space-y-2 pl-5 text-sm leading-relaxed sm:text-base">
+        <li><strong>Clothing:</strong> Choose respectful dress for churches and sacred spaces.</li>
+        <li><strong>Comfort:</strong> Wear shoes suitable for uneven stones; bring drinking water and sun protection.</li>
+        <li><strong>Accessibility:</strong> The national park publishes information for its own facilities, but this does not establish step-free access throughout the archaeological and monastery grounds. Ask the relevant operator.</li>
+        <li><strong>Orthodox monastery:</strong> Arrange a visit with the superior by phone at <a href="tel:+972532840991" className="font-semibold text-primary underline underline-offset-4">+972 53 284 0991</a>.</li>
+      </ul>
     </div>
   ),
   transportContent: (
     <div className="mt-4 space-y-4">
-      <p>Capernaum lies on the northern shore of the Sea of Galilee, east of the Capernaum (Kfar Nahum) junction on Route 90. The park authority directs drivers east along <strong>Route 87 for about 4 km</strong> from the junction. There are several nearby compounds, so navigate to the exact entrance you intend to visit.</p>
-      <div className="grid gap-3 sm:grid-cols-2">
-        <article className="rounded-xl border bg-card p-4">
-          <div className="flex items-center gap-2"><CarFront className="h-5 w-5 text-primary" aria-hidden="true" /><h3 className="font-semibold">By car or private driver</h3></div>
-          <p className="mt-2 text-sm leading-relaxed">Approach via Route 90 and turn onto Route 87, or use the eastern approach via Route 92 where appropriate. A vehicle is convenient if you want to include Tabgha and the Mount of Beatitudes on the same outing. Set your destination to the Franciscan archaeological site, monastery or national park entrance—not simply “Kfar Nahum.”</p>
-        </article>
-        <article className="rounded-xl border bg-card p-4">
-          <div className="flex items-center gap-2"><TrainFront className="h-5 w-5 text-primary" aria-hidden="true" /><h3 className="font-semibold">By public transport</h3></div>
-          <p className="mt-2 text-sm leading-relaxed">Bus options around the northern lake can be limited and may involve a long walk. <strong>Kfar Nahum Junction is not beside the archaeological entrance:</strong> the road distance east to the Capernaum site is about 4 km. Check the actual stop, pedestrian route and return service before relying on a bus; do not assume a short walk from the junction.</p>
-        </article>
+      <p>Capernaum is on the <strong>northwestern shore of the Sea of Galilee</strong>, northeast of Tiberias. The Franciscan ruins, Orthodox monastery and national park are close to one another, but have <strong>different entrances</strong>.</p>
+      <div className="grid gap-4 lg:grid-cols-[minmax(0,1.4fr)_minmax(0,1fr)]">
+        <div className="space-y-3">
+          <article className="rounded-xl border bg-card p-4">
+            <div className="flex items-center gap-2"><CarFront className="h-5 w-5 text-primary" aria-hidden="true" /><h3 className="font-semibold">By car or with a driver</h3></div>
+            <p className="mt-2 text-sm leading-relaxed">From Route 90, turn east onto <strong>Route 87</strong> and follow signs to Capernaum (about 4 km from the junction). The site can also be approached from Route 92 along the eastern side of the lake. Choose the <strong>exact site entrance</strong> in your navigation app.</p>
+          </article>
+          <article className="rounded-xl border bg-card p-4">
+            <div className="flex items-center gap-2"><BusFront className="h-5 w-5 text-primary" aria-hidden="true" /><h3 className="font-semibold">By public transport</h3></div>
+            <p className="mt-2 text-sm leading-relaxed">Getting here by bus may be possible, but infrequent services and the walk to the entrance make it inconvenient. <strong>I recommend a car, taxi, or prearranged group or private tour</strong> for an easier visit, especially when combining several lakeside sites.</p>
+          </article>
+        </div>
+        <div className="rounded-xl border bg-card p-3" data-testid="capernaum-location-map">
+          <h3 className="text-sm font-semibold">Where is Capernaum?</h3>
+          <iframe title="OpenStreetMap showing the archaeological site of Capernaum by the Sea of Galilee" src={openStreetMapEmbed} loading="lazy" referrerPolicy="strict-origin-when-cross-origin" className="mt-2 h-52 w-full rounded-lg border-0 sm:h-60 lg:h-56" />
+          <a href={openStreetMapLarger} target="_blank" rel="noopener noreferrer" className="mt-2 inline-flex items-center gap-1 text-xs font-semibold text-primary underline-offset-4 hover:underline">View larger map <ArrowUpRight className="h-3.5 w-3.5" aria-hidden="true" /></a>
+          <p className="mt-1 text-xs text-muted-foreground">Map: OpenStreetMap contributors · The pin marks the archaeological site, not every nearby entrance.</p>
+        </div>
       </div>
-      <p className="text-sm leading-relaxed">Tiberias is a practical starting point for exploring the northwestern shore. Longer journeys from Tel Aviv or Jerusalem usually require setting aside a substantial part of the day for driving as well as sightseeing. For other transport options, read my <Link to="/travel-blog/sea-of-galilee/" className="font-semibold text-primary underline underline-offset-4">Sea of Galilee visitor guide</Link>.</p>
+      <p className="text-sm leading-relaxed">If you are staying in Tiberias, this is a convenient stop on a northern-lake itinerary. For a wider look at the region, see my <Link to="/travel-blog/sea-of-galilee/" className="font-semibold text-primary underline underline-offset-4">Sea of Galilee visitor guide</Link>.</p>
     </div>
   ),
   itineraryContent: (
     <div className="mt-4 space-y-4">
       <div className="rounded-xl border bg-card p-4 sm:p-5">
-        <h3 className="font-serif text-xl font-semibold">Option 1: Capernaum only · 60–90 minutes</h3>
-        <ol className="mt-3 list-decimal space-y-2 pl-5 text-sm leading-relaxed sm:text-base">
-          <li>Begin at the white limestone synagogue and take time to examine its columns and carved details.</li>
-          <li>Continue to the traditional House of Peter and look towards the excavated rooms beneath the modern memorial.</li>
-          <li>Walk among the remaining basalt village foundations, then allow a few minutes to enjoy the lakeside setting.</li>
-        </ol>
+        <h3 className="font-serif text-xl font-semibold">A short visit: 60–90 minutes</h3>
+        <ul className="mt-3 list-disc space-y-2 pl-5 text-sm leading-relaxed sm:text-base">
+          <li>Start with the <strong>white limestone synagogue</strong> and its carved details.</li>
+          <li>Continue to the <strong>traditional House of Peter</strong> and look towards the remains beneath the modern memorial.</li>
+          <li>Walk past the <strong>basalt village foundations</strong> and enjoy the lakeside setting.</li>
+        </ul>
       </div>
       <div className="rounded-xl border bg-card p-4 sm:p-5">
-        <h3 className="font-serif text-xl font-semibold">Option 2: A half-day around the northern lake</h3>
-        <ol className="mt-3 list-decimal space-y-2 pl-5 text-sm leading-relaxed sm:text-base">
-          <li>Visit the Franciscan archaeological compound at Capernaum.</li>
-          <li>Continue to <Link to="/attractions/tabgha/" className="font-semibold text-primary underline underline-offset-4">Tabgha</Link> for its lakeside churches and mosaics.</li>
-          <li>Include the <Link to="/attractions/mount-of-beatitudes/" className="font-semibold text-primary underline underline-offset-4">Mount of Beatitudes</Link> for its church and views across the Sea of Galilee.</li>
-        </ol>
-        <p className="mt-3 text-sm leading-relaxed text-muted-foreground">An Orthodox monastery visit can be added only if arranged in advance. Allow time for the drives between entrances, opening hours and any services taking place; this is a suggested sequence, not a fixed timetable.</p>
+        <h3 className="font-serif text-xl font-semibold">A half-day on the northern Sea of Galilee</h3>
+        <ul className="mt-3 list-disc space-y-2 pl-5 text-sm leading-relaxed sm:text-base">
+          <li>Begin with the archaeological site at <strong>Capernaum</strong>.</li>
+          <li>Drive to <Link to="/attractions/tabgha/" className="font-semibold text-primary underline underline-offset-4">Tabgha</Link> for its mosaic and lakeside churches.</li>
+          <li>Continue to the <Link to="/attractions/mount-of-beatitudes/" className="font-semibold text-primary underline underline-offset-4">Mount of Beatitudes</Link> for a peaceful hilltop church and lake views.</li>
+        </ul>
+        <p className="mt-3 text-sm text-muted-foreground">Add the Greek Orthodox monastery only if you have arranged a visit. Allow time for opening hours and short drives between the sites.</p>
       </div>
-      <p><strong>Prefer to walk?</strong> The park authority describes a roughly 3.5 km lakeside promenade connecting the Capernaum visitor area with Tabgha. Check the condition of the path, heat and access before choosing it over transport; walking between all religious sites is not necessarily the simplest option.</p>
+      <AttractionPracticalTip>
+        <strong>My lakeside-break suggestion:</strong> If you find a public bench or permitted seating area overlooking the lake, a light picnic or snack can be a pleasant pause between visits. Respect the rules of the religious compounds and national park, and take all litter with you.
+      </AttractionPracticalTip>
     </div>
   ),
   tourContent: (
     <div className="mt-4 space-y-4">
-      <p>Many Nazareth and Sea of Galilee day tours advertise a stop in Capernaum, sometimes paired with Tabgha, the Mount of Beatitudes or Yardenit. Stops, guided time, departure cities and entrance fees vary: <strong>do not assume every Galilee tour includes Capernaum</strong> just because it visits the lake.</p>
+      <p>Galilee day tours may include Capernaum alongside Nazareth, Tabgha or the Mount of Beatitudes. Choose a trip that <strong>explicitly lists Capernaum as a stop</strong> and check its departure city, time on site, guiding language and admission arrangements.</p>
       <div className="grid gap-3 sm:grid-cols-2">
-        <Link to="/tours/nazareth-sea-of-galilee/" className="group flex flex-col justify-between rounded-xl border bg-card p-5 transition-colors hover:border-primary/60 focus-visible:outline-2 focus-visible:outline-primary">
-          <div>
-            <div className="flex items-center gap-2"><MapPinned className="h-5 w-5 text-primary" aria-hidden="true" /><h3 className="font-serif text-lg font-semibold">Compare guided Galilee tours</h3></div>
-            <p className="mt-2 text-sm leading-relaxed text-muted-foreground">Browse tour options and check the actual stop list, departure point, duration, admission and current booking price with each provider.</p>
+        <Link to="/tours/nazareth-sea-of-galilee/" className="group flex h-full min-w-0 items-start gap-3 rounded-xl border bg-card p-3 transition-all hover:border-primary/60 hover:shadow-sm focus-visible:outline-2 focus-visible:outline-primary sm:p-4" data-testid="capernaum-galilee-tours-card">
+          <img src="/images/attractions/sea-of-galilee.webp" alt="Sea of Galilee landscape representing guided visits around its northern shore" width={128} height={100} loading="lazy" decoding="async" className="h-24 w-24 shrink-0 rounded-lg object-cover sm:w-28" />
+          <div className="flex min-w-0 flex-1 flex-col">
+            <h3 className="font-serif text-lg font-semibold leading-snug group-hover:text-primary">Compare guided Galilee tours</h3>
+            <p className="mt-1 text-sm leading-relaxed text-muted-foreground">Browse local and full-day options. Check which stops are included and compare prices on the tour pages.</p>
+            <span className="mt-2 inline-flex items-center gap-1 text-sm font-semibold text-primary">Explore tours <ArrowUpRight className="h-4 w-4" aria-hidden="true" /></span>
           </div>
-          <span className="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-primary">Explore tours <ArrowUpRight className="h-4 w-4" aria-hidden="true" /></span>
         </Link>
-        <Link to="/private-driver/" className="group flex flex-col justify-between rounded-xl border bg-card p-5 transition-colors hover:border-primary/60 focus-visible:outline-2 focus-visible:outline-primary">
-          <div>
-            <div className="flex items-center gap-2"><Ticket className="h-5 w-5 text-primary" aria-hidden="true" /><h3 className="font-serif text-lg font-semibold">Arrange a private driver</h3></div>
-            <p className="mt-2 text-sm leading-relaxed text-muted-foreground">I can arrange a vehicle and agree the pickup, stops and return plan with you. Licensed guiding and site admission are separate from a driver-only transport quote.</p>
+        <Link to="/private-driver/" className="group flex h-full min-w-0 items-start gap-3 rounded-xl border bg-card p-3 transition-all hover:border-primary/60 hover:shadow-sm focus-visible:outline-2 focus-visible:outline-primary sm:p-4" data-testid="capernaum-private-driver-card">
+          <img src={galileePhoto} alt="Green hills above the Sea of Galilee on a northern Israel day-trip route" width={128} height={100} loading="lazy" decoding="async" className="h-24 w-24 shrink-0 rounded-lg object-cover sm:w-28" />
+          <div className="flex min-w-0 flex-1 flex-col">
+            <h3 className="font-serif text-lg font-semibold leading-snug group-hover:text-primary">Explore with a private driver</h3>
+            <p className="mt-1 text-sm leading-relaxed text-muted-foreground">I can help arrange a car and flexible stops that fit your day. Professional guiding can be arranged separately.</p>
+            <span className="mt-2 inline-flex items-center gap-1 text-sm font-semibold text-primary">Private journeys <ArrowUpRight className="h-4 w-4" aria-hidden="true" /></span>
           </div>
-          <span className="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-primary">Private driver options <ArrowUpRight className="h-4 w-4" aria-hidden="true" /></span>
         </Link>
       </div>
     </div>
   ),
   faqs: [
-    { q: "Are Capernaum and Kfar Nahum the same place?", a: "Yes. Kfar Nahum is the Hebrew name of Capernaum, the ancient lakeside settlement on the Sea of Galilee. Different nearby visitor areas still have separate entrances." },
-    { q: "Is Capernaum free to visit?", a: "Not all of it. The Franciscan archaeological compound publishes a ₪10 entrance fee. The Israel Nature and Parks Authority says entrance to its marine-terminal visitor area is free without prior booking. The Greek Orthodox monastery has separate visiting arrangements." },
-    { q: "Is the ancient synagogue from Jesus' lifetime?", a: "The imposing white limestone synagogue standing today is generally dated to the fifth century. Excavations revealed earlier remains beneath it, but visitors should not confuse the visible building with the synagogue described in first-century Gospel accounts." },
-    { q: "Can I visit the Greek Orthodox monastery without arranging it?", a: "The monastery's official information asks visitors to arrange a visit by phone with the superior. It is not covered by the Franciscan archaeological entrance." },
-    { q: "How much time should I allow?", a: "About 60–90 minutes is a sensible starting point for the main Franciscan archaeological site. Allow additional time if you also want the separate Orthodox monastery, national park area or nearby churches." },
-    { q: "Can I walk to Capernaum from the Kfar Nahum Junction bus stop?", a: "Do not assume it is a short walk. The park authority places Capernaum about 4 km along Route 87 from the junction. Check the exact bus stop, footpath and return departure before deciding to rely on public transport." },
-    { q: "Is Capernaum open on religious holidays?", a: "Not necessarily. The Christian Information Center publishes specific closures and shortened hours for the Franciscan site on certain Christian and Jewish dates. The Orthodox monastery and national park have their own arrangements, so verify each entrance separately." },
-    { q: "Is the visit accessible for someone with limited mobility?", a: "Conditions differ among the ruins, religious compounds and national park facilities. The park authority describes accessible paths at its visitor area, but that does not establish accessibility throughout the archaeological ruins. Contact the operator of the specific entrance about step-free access and surfaces." },
+    { q: "Are Capernaum and Kfar Nahum the same place?", a: "Yes. Kfar Nahum is the Hebrew name of Capernaum, on the northwestern shore of the Sea of Galilee." },
+    { q: "Do I need to book admission to the archaeological site?", a: "The Franciscan compound publishes an entrance fee, opening hours and last-entry times; individual visits are generally arranged at the entrance. Check current holiday and group rules with the Christian Information Center before arriving." },
+    { q: "Is one ticket valid for all parts of Capernaum?", a: "No. The Franciscan ruins, Orthodox monastery and national park visitor area are separately managed. The monastery asks for advance phone arrangements." },
+    { q: "Is the synagogue standing today from the time of Jesus?", a: "No. The monumental white limestone building is generally dated to the fifth century, with older archaeological layers below it." },
+    { q: "Can I combine Capernaum with Nazareth in one day?", a: "Yes, if you have a vehicle or suitable prearranged tour. Capernaum combines naturally with Tabgha and the Mount of Beatitudes; Nazareth adds travel and sightseeing time, so plan a realistic route." },
+    { q: "Is a public bus a convenient way to visit?", a: "Usually not. Some connections are possible, but stops can be far from the entrance and buses are not frequent. A car, taxi or organised day trip is generally simpler." },
+    { q: "Is the visit suitable for people with limited mobility?", a: "The visitor areas have different surfaces and accessibility arrangements. Excavated basalt areas can be uneven. Check step-free access with the exact site operator before travelling." },
   ],
   nearby: [
-    { label: "Tabgha", to: "/attractions/tabgha/", note: "Lakeside churches, the multiplication mosaic and the Primacy of Peter tradition." },
-    { label: "Mount of Beatitudes", to: "/attractions/mount-of-beatitudes/", note: "A hilltop sanctuary and views across the northern Sea of Galilee." },
-    { label: "Magdala", to: "/attractions/magdala/", note: "Archaeology and pilgrimage on the western shore of the lake." },
-    { label: "Yardenit", to: "/attractions/yardenit/", note: "A separate Jordan River baptism site farther south, near the lake's outlet." },
+    { label: "Tabgha", to: "/attractions/tabgha/", note: "Lakeside churches, mosaics and early Christian traditions." },
+    { label: "Mount of Beatitudes", to: "/attractions/mount-of-beatitudes/", note: "Hilltop church and broad views over the Sea of Galilee." },
+    { label: "Magdala", to: "/attractions/magdala/", note: "A first-century synagogue and archaeological heritage on the western shore." },
+    { label: "Yardenit", to: "/attractions/yardenit/", note: "Jordan River baptism site often included on longer Galilee days." },
+    { label: "Basilica of the Annunciation", to: "/attractions/basilica-of-the-annunciation/", note: "An important Christian pilgrimage landmark in Nazareth." },
+    { label: "Mount Tabor", to: "/attractions/mount-tabor/", note: "The Transfiguration church and scenic Lower Galilee viewpoints." },
+  ],
+  planningLinks: [
+    { label: "Sea of Galilee travel guide", to: "/travel-blog/sea-of-galilee/" },
+    { label: "7-day Israel itinerary", to: "/travel-blog/israel-itinerary-7-days/" },
+    { label: "10-day Israel itinerary", to: "/travel-blog/israel-itinerary-10-days/" },
+    { label: "Best time to visit Israel", to: "/travel-blog/best-time-to-visit-israel/" },
+    { label: "Getting around Israel", to: "/travel-blog/getting-around-israel/" },
+    { label: "Arrival tips at Ben Gurion Airport", to: "/travel-blog/ben-gurion-airport-arrival-tips/" },
   ],
   sources: [
+    { label: "Israel Nature and Parks Authority — Hebrew visitor information", url: visitSources.parkHebrew, note: "Official notice about free marine-terminal access and national-park visitor rules." },
     { label: "Christian Information Center — Capernaum entrance and opening hours", url: visitSources.franciscan, note: "Franciscan compound: published entrance fee, last-admission times and holiday exceptions." },
     { label: "Custody of the Holy Land — Capernaum archaeology and history", url: visitSources.archaeology, note: "Historical background, excavation history, synagogue dating and traditional Peter's house." },
     { label: "Greek Orthodox Monastery of the Twelve Apostles — visitor arrangements", url: visitSources.orthodox, note: "Official advance-contact requirement and monastery details." },

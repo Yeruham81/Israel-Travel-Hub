@@ -9,19 +9,19 @@ describe("Capernaum as the first reusable individual-attraction guide", () => {
   it("keeps the approved URL, title, update date and documented visitor facts coherent", () => {
     expect(content.path).toBe("/attractions/capernaum/");
     expect(content.title).toBe("Capernaum (Kfar Nahum): Visitor Guide");
-    expect(content.updatedAt).toBe("2026-11-15");
+    expect(content.updatedAt).toBe("2026-11-16");
     expect(content.facts).toHaveLength(6);
     expect(content.facts.map(fact => fact.label)).toEqual([
-      "Location", "Suggested visit", "Admission", "Published hours", "Main sights", "Other areas",
+      "Location", "Time needed", "Entry fee", "Opening hours", "Highlights", "Other places",
     ]);
-    expect(content.facts.find(fact => fact.label === "Admission")?.value).toBe("₪10");
-    expect(content.facts.find(fact => fact.label === "Published hours")?.value).toContain("14:00–17:00");
-    expect(content.sources).toHaveLength(4);
+    expect(content.facts.find(fact => fact.label === "Entry fee")?.value).toBe("₪10");
+    expect(content.facts.find(fact => fact.label === "Opening hours")?.value).toContain("14:00–17:00");
+    expect(content.sources).toHaveLength(5);
     expect(content.sources.every(source => source.url.startsWith("https://"))).toBe(true);
     expect(content.sources.some(source => source.url.includes("capernaum.info"))).toBe(true);
     expect(content.sources.some(source => source.url.includes("parks.org.il"))).toBe(true);
     expect(attractionGuides.capernaum.title).toBe(content.title);
-    expect(JSON.stringify(attractionMeta("capernaum").scripts)).toContain("2026-11-15");
+    expect(JSON.stringify(attractionMeta("capernaum").scripts)).toContain("2026-11-16");
     expect(attractionHubCards.filter(card => card.to === content.path)).toHaveLength(1);
   });
 
@@ -39,7 +39,12 @@ describe("Capernaum as the first reusable individual-attraction guide", () => {
       "/attractions/mount-of-beatitudes/",
       "/attractions/magdala/",
       "/attractions/yardenit/",
+      "/attractions/basilica-of-the-annunciation/",
+      "/attractions/mount-tabor/",
     ]);
+    expect(content.nearby).toHaveLength(6);
+    expect(content.planningLinks).toHaveLength(6);
+    expect(new Set(content.planningLinks?.map(link => String(link.to))).size).toBe(6);
     expect(content.faqs.length).toBeGreaterThanOrEqual(6);
     expect(new Set(content.faqs.map(faq => faq.q)).size).toBe(content.faqs.length);
   });
@@ -54,7 +59,18 @@ describe("Capernaum as the first reusable individual-attraction guide", () => {
     expect(shell).toContain('data-testid="attraction-at-a-glance"');
     expect(shell).toContain("<OnThisPage");
     expect(shell).toContain("<FaqList");
-    expect(shell).toContain("illustrated maxPhotoCards={4}");
+    expect(shell).toContain("illustrated maxPhotoCards={content.nearby.length >= 6 ? 6 : 4}");
+    expect(shell).toContain('data-testid="attraction-trip-planning"');
+    expect(shell).toContain('bg-amber-50/90');
+    expect(shell).toContain('data-testid="attraction-practical-tip"');
+    expect(shell).not.toContain("Worth knowing:");
+    const article = readFileSync("src/components/CapernaumAttractionPage.tsx", "utf8");
+    expect(article).toContain('data-testid="capernaum-location-map"');
+    expect(article).toContain('data-testid="capernaum-mobile-visitor-cards"');
+    expect(article).toContain("BusFront");
+    expect(article.split("<AttractionPracticalTip>").length - 1).toBe(3);
+    expect(article).not.toContain("Worth knowing:");
+    expect(article).not.toContain("3.5 km lakeside promenade");
     expect(shell.split("<HomeContactForm").length - 1).toBe(1);
     expect(shell.indexOf("<SourcesDisclosure>")).toBeGreaterThan(shell.indexOf("<HomeContactForm"));
   });
