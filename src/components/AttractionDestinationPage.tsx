@@ -48,12 +48,12 @@ export type AttractionDestinationContent = {
   historyContent?: ReactNode;
   contactIntroduction?: string;
   historyTitle?: string;
-  visitorContent: ReactNode;
-  transportContent: ReactNode;
-  itineraryContent: ReactNode;
+  visitorContent?: ReactNode;
+  transportContent?: ReactNode;
+  itineraryContent?: ReactNode;
   tourContent?: ReactNode;
-  faqs: { q: string; a: string }[];
-  nearby: AttractionNearbyLink[];
+  faqs?: { q: string; a: string }[];
+  nearby?: AttractionNearbyLink[];
   relatedTitle?: string;
   planningLinks?: AttractionPlanningLink[];
   sources: AttractionSource[];
@@ -113,13 +113,13 @@ export function AttractionHighlight({
 export function AttractionDestinationPage({ content }: { content: AttractionDestinationContent }) {
   const sections: [string, string][] = [
     ["highlights", "What to see"],
-    ["visitor-info", "Opening hours & tickets"],
-    ["getting-there", "How to get there"],
-    ["visit-plan", "Plan your visit"],
+    ...(content.visitorContent ? [["visitor-info", "Opening hours & tickets"] as [string, string]] : []),
+    ...(content.transportContent ? [["getting-there", "How to get there"] as [string, string]] : []),
+    ...(content.itineraryContent ? [["visit-plan", "Plan your visit"] as [string, string]] : []),
     ...(content.historyContent ? [["history", "History and significance"] as [string, string]] : []),
     ...(content.tourContent ? [["tours", "Tours and private visits"] as [string, string]] : []),
-    ["faq", "Questions"],
-    ["nearby", "Related sites"],
+    ...(content.faqs?.length ? [["faq", "Questions"] as [string, string]] : []),
+    ...(content.nearby?.length ? [["nearby", "Related sites"] as [string, string]] : []),
     ...(content.planningLinks?.length ? [["trip-planning", "Plan your trip"] as [string, string]] : []),
     ["contact", "Contact"],
   ];
@@ -144,15 +144,15 @@ export function AttractionDestinationPage({ content }: { content: AttractionDest
       <Section id="highlights" title={"What to see at " + content.placeName} className="mt-9">
         {content.highlightContent}
       </Section>
-      <Section id="visitor-info" title="Opening hours, tickets and practical information">{content.visitorContent}</Section>
-      <Section id="getting-there" title={"How to get to " + content.placeName}>{content.transportContent}</Section>
-      <Section id="visit-plan" title="How to plan your visit">{content.itineraryContent}</Section>
+      {content.visitorContent && <Section id="visitor-info" title="Opening hours, tickets and practical information">{content.visitorContent}</Section>}
+      {content.transportContent && <Section id="getting-there" title={"How to get to " + content.placeName}>{content.transportContent}</Section>}
+      {content.itineraryContent && <Section id="visit-plan" title="How to plan your visit">{content.itineraryContent}</Section>}
       {content.historyContent && <Section id="history" title={content.historyTitle ?? "History and significance"}>{content.historyContent}</Section>}
       {content.tourContent && <Section id="tours" title="Guided tours and private visits">{content.tourContent}</Section>}
-      <FaqList faqs={content.faqs} />
-      <section id="nearby" aria-label="Related sites" className="scroll-mt-24">
+      {!!content.faqs?.length && <FaqList faqs={content.faqs} />}
+      {!!content.nearby?.length && <section id="nearby" aria-label="Related sites" className="scroll-mt-24">
         <RelatedLinks title={content.relatedTitle ?? "Explore related sites"} currentPath={String(content.path)} items={content.nearby} illustrated maxPhotoCards={content.nearby.length >= 6 ? 6 : 4} />
-      </section>
+      </section>}
       {!!content.planningLinks?.length && <nav id="trip-planning" aria-label="Plan your trip to Israel" className="mt-10 scroll-mt-24 rounded-xl border border-border/70 bg-secondary/15 p-4 sm:p-5" data-testid="attraction-trip-planning">
         <h2 className="text-lg font-semibold sm:text-xl">Plan your trip to Israel</h2>
         <p className="mt-1 text-sm text-muted-foreground">Practical guides to help you plan the rest of your journey.</p>

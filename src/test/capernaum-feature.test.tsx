@@ -67,6 +67,14 @@ describe("Capernaum as the first reusable individual-attraction guide", () => {
     expect(shell).toContain("<OnThisPage");
     expect(shell).toContain("<FaqList");
     expect(shell).toContain("illustrated maxPhotoCards={content.nearby.length >= 6 ? 6 : 4}");
+    expect(shell).toContain("visitorContent?: ReactNode");
+    expect(shell).toContain("transportContent?: ReactNode");
+    expect(shell).toContain("itineraryContent?: ReactNode");
+    expect(shell).toContain("faqs?:");
+    expect(shell).toContain("nearby?:");
+    expect(shell).toContain("content.visitorContent && <Section");
+    expect(shell).toContain("content.itineraryContent && <Section");
+    expect(shell).toContain("!!content.nearby?.length && <section");
     expect(shell).toContain('data-testid="attraction-trip-planning"');
     expect(shell).toContain('bg-amber-50/90');
     expect(shell).toContain('data-testid="attraction-practical-tip"');
@@ -89,6 +97,9 @@ describe("Capernaum as the first reusable individual-attraction guide", () => {
     expect(article).toContain("053-2840991");
     expect(article.match(/whitespace-nowrap/g)).toHaveLength(3);
     expect(article).toContain("A full-day Galilee and Sea of Galilee trip");
+    expect(article).toContain("I recommend choosing three to five sites, including Capernaum");
+    expect(article).not.toContain("These are options, not a checklist for a single day");
+    expect(article).not.toContain("Add the Greek Orthodox monastery only if");
     expect(article).not.toContain("A half-day on the northern Sea of Galilee");
     expect(article).toContain("shore excursion from Haifa Port");
     expect(article).toContain('to="/attractions/magdala/"');
@@ -135,6 +146,12 @@ describe("Capernaum as the first reusable individual-attraction guide", () => {
     expect(article).toContain("BusFront");
     expect(article.split("<AttractionPracticalTip>").length - 1).toBe(3);
     expect(article).not.toContain("Worth knowing:");
+    const templateDoc = readFileSync("docs/ATTRACTION_PAGE_TEMPLATE.md", "utf8");
+    expect(templateDoc).toContain("08:00–15:00 year-round");
+    expect(templateDoc).toContain("optional sections");
+    expect(templateDoc).toContain("six genuinely relevant");
+    const guideComponent = readFileSync("src/components/Guide.tsx", "utf8");
+    expect(guideComponent).toContain('pictured.length === 6 ? "mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-3"');
     expect(article).not.toContain("3.5 km lakeside promenade");
     expect(article).not.toContain("Biblical tradition explains why Capernaum became a pilgrimage destination");
     expect(article).not.toContain("Map: OpenStreetMap contributors");
