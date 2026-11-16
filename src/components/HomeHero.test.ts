@@ -25,11 +25,24 @@ describe("homepage hero photo carousel", () => {
     expect(heroSlides[2]?.srcMedium).toContain("hero-refresh-haifa-gardens-v2-medium.webp");
     expect(heroSlides[2]?.srcSm).toContain("hero-refresh-haifa-gardens-v2-mobile.webp");
     expect(heroSlides[2]?.highDensity).toBe(true);
+    expect(heroSlides[3]?.src).toContain("hero-refresh-masada-dead-sea-v3-large.webp");
+    expect(heroSlides[3]?.srcMedium).toContain("hero-refresh-masada-dead-sea-v3-medium.webp");
+    expect(heroSlides[3]?.srcSm).toContain("hero-refresh-masada-dead-sea-v3-mobile.webp");
+    expect(heroSlides[3]?.highDensity).toBe(true);
+    expect(heroSlides[4]?.src).toContain("hero-refresh-caesarea-coast-v3-large.webp");
+    expect(heroSlides[4]?.srcMedium).toContain("hero-refresh-caesarea-coast-v3-medium.webp");
+    expect(heroSlides[4]?.srcSm).toContain("hero-refresh-caesarea-coast-v3-mobile.webp");
+    expect(heroSlides[4]?.highDensity).toBe(true);
+    expect(heroSlides[10]?.src).toContain("hero-refresh-ramon-crater-v3-large.webp");
+    expect(heroSlides[10]?.srcMedium).toContain("hero-refresh-ramon-crater-v3-medium.webp");
+    expect(heroSlides[10]?.srcSm).toContain("hero-refresh-ramon-crater-v3-mobile.webp");
+    expect(heroSlides[10]?.highDensity).toBe(true);
     expect(heroSlides[7]?.caption).toBe("Akko Old City and harbour");
     expect(heroSlides[9]?.caption).toBe("Old Jaffa and its harbour");
-    expect(heroSlides[9]?.src).toContain("hero-refresh-jaffa-port-v2-large.webp");
-    expect(heroSlides[9]?.srcMedium).toContain("hero-refresh-jaffa-port-v2-medium.webp");
-    expect(heroSlides[9]?.srcSm).toContain("hero-refresh-jaffa-port-v2-mobile.webp");
+    expect(heroSlides[9]?.src).toContain("hero-refresh-jaffa-port-v3-large.webp");
+    expect(heroSlides[9]?.srcMedium).toContain("hero-refresh-jaffa-port-v3-medium.webp");
+    expect(heroSlides[9]?.srcSm).toContain("hero-refresh-jaffa-port-v3-mobile.webp");
+    expect(heroSlides[9]?.highDensity).toBe(true);
   });
 
   it("uses 10 new compressed responsive images, without altering the other nine refreshed slides", () => {

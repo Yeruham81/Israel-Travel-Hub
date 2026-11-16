@@ -108,8 +108,8 @@ describe("home mobile performance optimizations", () => {
     expect(slides).toContain("hero-jerusalem-large.webp");
     // Earlier panoramic photos remain compact and self-hosted.
     for (const name of [
-      "masada-dead-sea", "caesarea-coast", "dead-sea-salt",
-      "eilat-mountains", "ramon-crater", "tel-aviv-sarona", "jerusalem-jaffa-gate",
+      "dead-sea-salt",
+      "eilat-mountains", "tel-aviv-sarona", "jerusalem-jaffa-gate",
     ]) {
       for (const [variant, maxBytes] of [["large", 340000], ["medium", 225000], ["mobile", 155000]] as const) {
         const filename = `hero-refresh-${name}-${variant}.webp`;
@@ -120,12 +120,16 @@ describe("home mobile performance optimizations", () => {
     // The two recent replacements and Haifa get high-definition variants.
     const improved = [
       { name: "haifa-gardens", max: { large: 1350000, medium: 700000, mobile: 360000 } },
-      { name: "jaffa-port", max: { large: 530000, medium: 350000, mobile: 250000 } },
+      { name: "jaffa-port", max: { large: 1600000, medium: 900000, mobile: 460000 } },
+      { name: "masada-dead-sea", max: { large: 1600000, medium: 900000, mobile: 460000 } },
+      { name: "caesarea-coast", max: { large: 1600000, medium: 900000, mobile: 460000 } },
+      { name: "ramon-crater", max: { large: 1600000, medium: 900000, mobile: 460000 } },
       { name: "tel-aviv-coastline", max: { large: 290000, medium: 270000, mobile: 140000 } },
     ] as const;
     for (const item of improved) {
       for (const variant of ["large", "medium", "mobile"] as const) {
-        const filename = `hero-refresh-${item.name}-v2-${variant}.webp`;
+        const version = ["jaffa-port", "masada-dead-sea", "caesarea-coast", "ramon-crater"].includes(item.name) ? "v3" : "v2";
+        const filename = `hero-refresh-${item.name}-${version}-${variant}.webp`;
         expect(slides).toContain(filename);
         expect(bytes(`src/assets/home/${filename}`)).toBeLessThanOrEqual(item.max[variant]);
       }
