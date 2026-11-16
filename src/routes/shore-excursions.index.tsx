@@ -77,6 +77,10 @@ function Shore() {
       intro="Arriving in Israel by cruise ship? Find private car-and-driver days and guided shore excursions from Ashdod or Haifa. Start with your port, then choose a route that fits your hours ashore."
       checkedAt={SHORE_EXCURSION_UPDATED_DATE}
       image={<GuideHeroMedia src={heroPhoto.src} alt={heroPhoto.alt} compact />}
+      actions={<>
+        <Link to={shorePorts.ashdod.path} className="btn btn-primary w-full justify-center sm:w-auto sm:min-w-48">Excursions from Ashdod</Link>
+        <Link to={shorePorts.haifa.path} className="btn btn-primary w-full justify-center sm:w-auto sm:min-w-48">Excursions from Haifa</Link>
+      </>}
     />
 
     <div className="mx-auto max-w-5xl px-4">
