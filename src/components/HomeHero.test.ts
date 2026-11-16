@@ -15,9 +15,9 @@ describe("homepage hero photo carousel", () => {
   });
 
   it("preserves the original Jerusalem, Tel Aviv and Akko slides in slots 1, 2 and 8", () => {
-    expect(heroSlides[0].caption).toBe("Jerusalem Old City from the Mount of Olives");
-    expect(heroSlides[1].caption).toBe("Tel Aviv beach promenade");
-    expect(heroSlides[7].caption).toBe("Akko Old City and harbour");
+    expect(heroSlides[0]?.caption).toBe("Jerusalem Old City from the Mount of Olives");
+    expect(heroSlides[1]?.caption).toBe("Tel Aviv beach promenade");
+    expect(heroSlides[7]?.caption).toBe("Akko Old City and harbour");
   });
 
   it("uses 9 new responsive images for the other slides", () => {
