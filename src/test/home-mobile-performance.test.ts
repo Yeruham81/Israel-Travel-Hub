@@ -106,10 +106,10 @@ describe("home mobile performance optimizations", () => {
     expect(slides).toContain("hero-jerusalem-medium.webp");
     expect(slides).toContain("hero-jerusalem-sm-optimized.webp");
     expect(slides).toContain("hero-jerusalem-large.webp");
-    // All nine updated hero photographs have three local, compressed WebP variants.
+    // Earlier panoramic photos remain compact and self-hosted.
     for (const name of [
-      "haifa-gardens", "masada-dead-sea", "caesarea-coast", "dead-sea-salt",
-      "jaffa-port", "eilat-mountains", "ramon-crater", "tel-aviv-sarona", "jerusalem-jaffa-gate",
+      "masada-dead-sea", "caesarea-coast", "dead-sea-salt",
+      "eilat-mountains", "ramon-crater", "tel-aviv-sarona", "jerusalem-jaffa-gate",
     ]) {
       for (const [variant, maxBytes] of [["large", 340000], ["medium", 225000], ["mobile", 155000]] as const) {
         const filename = `hero-refresh-${name}-${variant}.webp`;
@@ -117,6 +117,21 @@ describe("home mobile performance optimizations", () => {
         expect(bytes(`src/assets/home/${filename}`)).toBeLessThanOrEqual(maxBytes);
       }
     }
+    // The two recent replacements and Haifa get high-definition variants.
+    const improved = [
+      { name: "haifa-gardens", max: { large: 1350000, medium: 700000, mobile: 360000 } },
+      { name: "jaffa-port", max: { large: 530000, medium: 350000, mobile: 250000 } },
+      { name: "tel-aviv-coastline", max: { large: 290000, medium: 270000, mobile: 140000 } },
+    ] as const;
+    for (const item of improved) {
+      for (const variant of ["large", "medium", "mobile"] as const) {
+        const filename = `hero-refresh-${item.name}-v2-${variant}.webp`;
+        expect(slides).toContain(filename);
+        expect(bytes(`src/assets/home/${filename}`)).toBeLessThanOrEqual(item.max[variant]);
+      }
+    }
+    expect(slides).toContain("highDensity: true");
+    expect(carousel).toContain('s.highDensity ? s.srcMedium + " 1x, " + s.src + " 2x" : s.srcMedium');
     expect(slides).toContain('pos: "center 68%"');
     expect(carousel).toContain('media="(max-width: 767px)"');
     for (const place of ["jerusalem", "haifa", "tel-aviv", "masada", "caesarea", "galilee"]) {
