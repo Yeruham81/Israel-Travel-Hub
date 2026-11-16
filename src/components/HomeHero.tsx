@@ -35,7 +35,7 @@ import pJerusalemJaffaGateLarge from "@/assets/home/hero-refresh-jerusalem-jaffa
 import pJerusalemJaffaGateMedium from "@/assets/home/hero-refresh-jerusalem-jaffa-gate-medium.webp";
 import pJerusalemJaffaGateMobile from "@/assets/home/hero-refresh-jerusalem-jaffa-gate-mobile.webp";
 
-const heroSlides: HeroSlide[] = [
+export const heroSlides: HeroSlide[] = [
   { src: hJerLarge, srcSm: hJerSm, srcMedium: hJerMedium, caption: "Jerusalem Old City from the Mount of Olives", alt: "Jerusalem's Old City and the Dome of the Rock seen from the Mount of Olives", pos: "55% center" },
   { src: hTaLarge, srcSm: hTaSm, srcMedium: hTaMedium, caption: "Tel Aviv beach promenade", alt: "The seafront promenade beside the beach in Tel Aviv", pos: "40% center" },
   { src: pHaifaGardensLarge, srcSm: pHaifaGardensMobile, srcMedium: pHaifaGardensMedium, caption: "Haifa and the Bahá’í Gardens", alt: "The Bahá’í Gardens, Haifa city and the Mediterranean port seen from Mount Carmel", pos: "center", width: 1680, height: 840 },
