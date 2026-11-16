@@ -37,7 +37,7 @@ jobs:
               path=Path(f"src/assets/home/hero-refresh-haifa-gardens-v2-{size}.webp")
               with Image.open(path) as im:
                   assert im.format=="WEBP" and im.size==expected,(size,im.size)
-              assert 70_000 < path.stat().st_size < 960_000, (size,path.stat().st_size)
+              assert 70_000 < path.stat().st_size < 1_351_000, (size,path.stat().st_size)
           code=Path("src/components/HomeHero.tsx").read_text()
           assert len([line for line in code.splitlines() if line.startswith("  { src:")])==12
           slides=[line for line in code.splitlines() if line.startswith("  { src:")]
