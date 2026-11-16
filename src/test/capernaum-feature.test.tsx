@@ -41,7 +41,7 @@ describe("Capernaum as the first reusable individual-attraction guide", () => {
     expect(photos.every(path => existsSync("public" + path))).toBe(true);
     const article = readFileSync("src/components/CapernaumAttractionPage.tsx", "utf8");
     for (const photo of photos) expect(article.split(photo).length - 1).toBe(1);
-    expect(content.nearby.map(item => item.to)).toEqual([
+    expect(content.nearby?.map(item => item.to)).toEqual([
       "/attractions/tabgha/",
       "/attractions/mount-of-beatitudes/",
       "/attractions/magdala/",
@@ -52,8 +52,8 @@ describe("Capernaum as the first reusable individual-attraction guide", () => {
     expect(content.nearby).toHaveLength(6);
     expect(content.planningLinks).toHaveLength(6);
     expect(new Set(content.planningLinks?.map(link => String(link.to))).size).toBe(6);
-    expect(content.faqs.length).toBeGreaterThanOrEqual(6);
-    expect(new Set(content.faqs.map(faq => faq.q)).size).toBe(content.faqs.length);
+    expect(content.faqs?.length).toBeGreaterThanOrEqual(6);
+    expect(new Set(content.faqs?.map(faq => faq.q) ?? []).size).toBe(content.faqs?.length);
   });
 
   it("uses the shared responsive shell, one form and a final collapsed source disclosure", () => {
