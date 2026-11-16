@@ -1,7 +1,7 @@
 import { type ShoreDestinationId, type ShorePortId } from "@/data/registry";
 
 /** Editorial update date, separate from the last check of product prices and sources. */
-export const SHORE_EXCURSION_UPDATED_DATE = "2026-11-15";
+export const SHORE_EXCURSION_UPDATED_DATE = "2026-11-16";
 
 export const shoreHubTitle = "Shore excursions from Israel's cruise ports";
 export const shoreHubDescription = "Explore Israel shore excursions from Ashdod and Haifa. Compare Jerusalem, Galilee, Masada and coastal day trips, private drivers and guided tours with port pickup and return.";
@@ -15,14 +15,14 @@ export const shoreHubPorts: Record<ShorePortId, {
 }> = {
   ashdod: {
     location: "Southern Mediterranean coast",
-    description: "From Ashdod, compare a relatively close Tel Aviv–Jaffa outing, a Jerusalem visit with substantial walking, or a longer desert day to Masada and the Dead Sea.",
+    description: "Choose Jerusalem, Tel Aviv and Old Jaffa, or a longer day at Masada and the Dead Sea.",
     highlights: ["Jerusalem & Bethlehem", "Tel Aviv & Old Jaffa", "Masada & the Dead Sea"],
     planning: "A coastal outing can offer a gentler day. Jerusalem involves walking and steps; desert routes need a longer port call and time on the road.",
     pickup: "This secure port is not a pedestrian city-center terminal. The ship's shuttle and authorized pickup point must be confirmed for the actual call.",
   },
   haifa: {
     location: "Northern Mediterranean coast",
-    description: "From Haifa, nearby Akko and northern Galilee routes preserve more sightseeing time than the longer journeys south to Tel Aviv or Jerusalem.",
+    description: "Explore nearby Haifa and Akko, or visit Nazareth and the Sea of Galilee.",
     highlights: ["Haifa & Akko", "Nazareth & Sea of Galilee", "Jerusalem on a longer call"],
     planning: "Northern routes keep more of the day in the region. Jerusalem and Tel Aviv mean longer drives south, so plan a selective itinerary.",
     pickup: "The passenger-terminal public access is via a pedestrian bridge near 65 HaAtsmaut Street; confirm any ship-specific meeting instructions.",
@@ -38,42 +38,42 @@ export const shoreHubExperiences: {
 }[] = [
   {
     id: "history", title: "Jerusalem & Bethlehem",
-    description: "Jerusalem's Old City involves walking and site-specific access. A combined Bethlehem itinerary also requires its own operator arrangements; compare the remaining time at each stop after the return drive.",
+    description: "Explore the Old City's historic quarters and sacred sites. A Bethlehem visit needs suitable arrangements and enough time for the return to port.",
     bestFor: "First-time visitors, history lovers and pilgrims",
     links: [{ portId: "ashdod", destination: "jerusalem", label: "Jerusalem from Ashdod" }, { portId: "haifa", destination: "jerusalem", label: "Jerusalem from Haifa" }],
   },
   {
     id: "galilee", title: "Nazareth & the Sea of Galilee",
-    description: "Connect Nazareth's Christian heritage with the landscapes around the lake. A focused route might include selected churches and lakeside sites, with time to appreciate their setting. Haifa is the natural northern starting point; the Ashdod option involves a longer journey.",
+    description: "Visit Nazareth and selected lakeside sites from Haifa. An Ashdod departure means significantly more driving.",
     bestFor: "Christian heritage and scenic countryside",
     links: [{ portId: "haifa", destination: "galilee", label: "Galilee from Haifa" }, { portId: "ashdod", destination: "galilee", label: "Galilee from Ashdod" }],
   },
   {
     id: "coast", title: "Coastal cities & old harbours",
-    description: "Enjoy Akko's harbour and historic lanes from Haifa, or Old Jaffa and Tel Aviv's seafront from Ashdod. Markets, architecture and a relaxed lunch make appealing alternatives to an intensive religious itinerary. A private day lets you agree how much walking to include.",
+    description: "Explore Akko's historic harbour from Haifa, or Tel Aviv and Old Jaffa from Ashdod, at a more relaxed pace.",
     bestFor: "Couples, families and a less hurried city experience",
     links: [{ portId: "haifa", destination: "akko", label: "Akko from Haifa" }, { portId: "ashdod", destination: "tel-aviv", label: "Tel Aviv & Jaffa from Ashdod" }],
   },
   {
     id: "desert", title: "Masada & the Dead Sea",
-    description: "From Ashdod, Masada and a designated Dead Sea beach make a longer day. Confirm Masada admission and cable-car operating times, then decide how much time is left for the beach and port return.",
+    description: "Combine Masada with a designated Dead Sea beach from Ashdod when your port call allows a full day.",
     bestFor: "Dramatic landscapes and a full day of discovery",
     links: [{ portId: "ashdod", destination: "masada", label: "Masada from Ashdod" }, { portId: "ashdod", destination: "dead-sea", label: "Dead Sea from Ashdod" }],
   },
 ];
 
 export const shoreTourFormats = [
-  { title: "Private car & driver", bestFor: "Families and small groups who value their own pace", includes: "Your party's vehicle and driver; guiding and admissions arranged separately", tradeoff: "Flexible stops and breaks, with the route agreed in advance. Request a licensed guide if you want guided visits inside sites." },
-  { title: "Private guided excursion", bestFor: "Travelers who want personal attention and historical context", includes: "A private guided itinerary with the inclusions stated on its booking page", tradeoff: "More personal attention, usually at a higher total cost. Confirm the guide's language, admissions and vehicle capacity." },
-  { title: "Shared guided excursion", bestFor: "Solo travelers and couples who prefer a planned group day", includes: "A set route and group format, with transport and guiding as listed", tradeoff: "A potentially lower per-person cost, with less freedom over the pace and stops. Check the departure time and group size." },
-  { title: "Small-group guided excursion", bestFor: "Visitors who prefer a smaller group without booking a private guide", includes: "A guided itinerary with a stated maximum group size, where the operator offers one", tradeoff: "Availability and actual group size vary by departure. Confirm the maximum number of travelers before booking." },
+  { title: "Private car & driver", bestFor: "Families and small groups who value their own pace", includes: "Your party's vehicle and driver; guiding and admissions arranged separately", tradeoff: "Flexible stops and breaks. Guiding is separate unless specifically arranged." },
+  { title: "Private guided excursion", bestFor: "Travelers who want personal attention and historical context", includes: "A private guided itinerary with the inclusions stated on its booking page", tradeoff: "Personal guiding for your party, usually at a higher total cost." },
+  { title: "Shared guided excursion", bestFor: "Solo travelers and couples who prefer a planned group day", includes: "A set route and group format, with transport and guiding as listed", tradeoff: "A fixed schedule and less flexibility. Check pickup, departure and group size." },
+  { title: "Small-group guided excursion", bestFor: "Visitors who prefer a smaller group without booking a private guide", includes: "A guided itinerary with a stated maximum group size, where the operator offers one", tradeoff: "A smaller group on a set itinerary; confirm its maximum size and pickup." },
 ];
 
 export const shorePlanningSteps = [
-  { title: "Start with the real hours ashore", description: "Use the expected time you can leave the ship and its all-aboard deadline, rather than counting every hour between docking and sailing. Share both dates for an overnight call." },
-  { title: "Choose one main experience", description: "Leave room for the drive, walking, lunch and queues. A shorter route with time to enjoy a place can be more rewarding than combining Jerusalem, Masada and the Dead Sea in a single rushed day." },
-  { title: "Agree pickup and the return plan", description: "Confirm the meeting point for your ship, any terminal shuttle, the planned return time and what changes if disembarkation is delayed. Keep the operator's contact details available offline." },
-  { title: "Match the day to your party", description: "Mention children's ages, mobility needs, steps, walking tolerance and any equipment. Confirm vehicle capacity, child seats, guiding, admission and cancellation terms in the full quote or booking page." },
+  { title: "Start with the real hours ashore", description: "Use the expected disembarkation time and all-aboard deadline, not only your docking and sailing times." },
+  { title: "Choose one main experience", description: "Allow time for driving, walking and queues; keep your route manageable." },
+  { title: "Agree pickup and the return plan", description: "Confirm the port meeting point, any shuttle, the return buffer and your operator's contact details." },
+  { title: "Match the day to your party", description: "Share your group size and accessibility needs; check vehicle capacity and cancellation terms." },
 ];
 
 export const shoreHubFaqs = [
