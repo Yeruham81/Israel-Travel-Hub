@@ -38,25 +38,25 @@ export const shoreHubExperiences: {
 }[] = [
   {
     id: "history", title: "Jerusalem & Bethlehem",
-    description: "Explore the Old City's historic quarters and sacred sites. A Bethlehem visit needs suitable arrangements and enough time for the return to port.",
+    description: "See Jerusalem's historic and sacred sites. Add Bethlehem only when timing and arrangements allow.",
     bestFor: "First-time visitors, history lovers and pilgrims",
     links: [{ portId: "ashdod", destination: "jerusalem", label: "Jerusalem from Ashdod" }, { portId: "haifa", destination: "jerusalem", label: "Jerusalem from Haifa" }],
   },
   {
     id: "galilee", title: "Nazareth & the Sea of Galilee",
-    description: "Visit Nazareth and selected lakeside sites from Haifa. An Ashdod departure means significantly more driving.",
+    description: "Discover Nazareth and selected lakeside sites, best suited to a Haifa port call.",
     bestFor: "Christian heritage and scenic countryside",
     links: [{ portId: "haifa", destination: "galilee", label: "Galilee from Haifa" }, { portId: "ashdod", destination: "galilee", label: "Galilee from Ashdod" }],
   },
   {
     id: "coast", title: "Coastal cities & old harbours",
-    description: "Explore Akko's historic harbour from Haifa, or Tel Aviv and Old Jaffa from Ashdod, at a more relaxed pace.",
+    description: "Explore Akko from Haifa, or Tel Aviv and Old Jaffa from Ashdod.",
     bestFor: "Couples, families and a less hurried city experience",
     links: [{ portId: "haifa", destination: "akko", label: "Akko from Haifa" }, { portId: "ashdod", destination: "tel-aviv", label: "Tel Aviv & Jaffa from Ashdod" }],
   },
   {
     id: "desert", title: "Masada & the Dead Sea",
-    description: "Combine Masada with a designated Dead Sea beach from Ashdod when your port call allows a full day.",
+    description: "See Masada and a designated Dead Sea beach from Ashdod on a longer port call.",
     bestFor: "Dramatic landscapes and a full day of discovery",
     links: [{ portId: "ashdod", destination: "masada", label: "Masada from Ashdod" }, { portId: "ashdod", destination: "dead-sea", label: "Dead Sea from Ashdod" }],
   },
