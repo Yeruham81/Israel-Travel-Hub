@@ -33,9 +33,10 @@ const visitorAreas = [
   },
 ] as const;
 
-/** Approximate ancient-site marker from OpenStreetMap (way 551062314). */
-const openStreetMapEmbed = "https://www.openstreetmap.org/export/embed.html?bbox=35.549%2C32.861%2C35.603%2C32.898&layer=mapnik&marker=32.88069%2C35.57552";
-const openStreetMapLarger = "https://www.openstreetmap.org/?mlat=32.88069&mlon=35.57552#map=14/32.88069/35.57552";
+/** Map shown in English, zoomed out enough to show Capernaum's place beside the Sea of Galilee.
+ * The classic Google Maps iframe supports language selection without a project API key. */
+const locationMapEmbed = "https://maps.google.com/maps?q=Capernaum%2C%20Sea%20of%20Galilee%2C%20Israel&hl=en&z=11&t=m&output=embed";
+const locationMapLarger = "https://www.google.com/maps/search/?api=1&query=Capernaum%2C%20Israel&hl=en";
 
 const page: AttractionDestinationContent = {
   path: "/attractions/capernaum/",
@@ -103,7 +104,6 @@ const page: AttractionDestinationContent = {
         </div>
         <img src="/images/attractions/capernaum-peter-memorial-interior.webp" alt="Archaeological rooms visible through the floor of the modern memorial above Peter's traditional house" width={640} height={480} loading="lazy" decoding="async" className="aspect-[4/3] w-full rounded-lg object-cover" />
       </div>
-      <p className="text-sm text-muted-foreground">Biblical tradition explains why Capernaum became a pilgrimage destination; the visible ruins and their dates must be interpreted separately from those traditions.</p>
     </div>
   ),
   visitorContent: (
@@ -160,12 +160,10 @@ const page: AttractionDestinationContent = {
         </div>
         <div className="rounded-xl border bg-card p-3" data-testid="capernaum-location-map">
           <h3 className="text-sm font-semibold">Where is Capernaum?</h3>
-          <iframe title="OpenStreetMap showing the archaeological site of Capernaum by the Sea of Galilee" src={openStreetMapEmbed} loading="lazy" referrerPolicy="strict-origin-when-cross-origin" className="mt-2 h-52 w-full rounded-lg border-0 sm:h-60 lg:h-56" />
-          <a href={openStreetMapLarger} target="_blank" rel="noopener noreferrer" className="mt-2 inline-flex items-center gap-1 text-xs font-semibold text-primary underline-offset-4 hover:underline">View larger map <ArrowUpRight className="h-3.5 w-3.5" aria-hidden="true" /></a>
-          <p className="mt-1 text-xs text-muted-foreground">Map: OpenStreetMap contributors · The pin marks the archaeological site, not every nearby entrance.</p>
+          <iframe title="Map of Capernaum on the northern shore of the Sea of Galilee" src={locationMapEmbed} loading="lazy" referrerPolicy="strict-origin-when-cross-origin" className="mt-2 h-52 w-full rounded-lg border-0 sm:h-60 lg:h-56" />
+          <a href={locationMapLarger} target="_blank" rel="noopener noreferrer" className="mt-2 inline-flex items-center gap-1 text-xs font-semibold text-primary underline-offset-4 hover:underline">View larger map <ArrowUpRight className="h-3.5 w-3.5" aria-hidden="true" /></a>
         </div>
       </div>
-      <p className="text-sm leading-relaxed">If you are staying in Tiberias, this is a convenient stop on a northern-lake itinerary. For a wider look at the region, see my <Link to="/travel-blog/sea-of-galilee/" className="font-semibold text-primary underline underline-offset-4">Sea of Galilee visitor guide</Link>.</p>
     </div>
   ),
   itineraryContent: (
@@ -196,7 +194,7 @@ const page: AttractionDestinationContent = {
     <div className="mt-4 space-y-4">
       <p>Galilee day tours may include Capernaum alongside Nazareth, Tabgha or the Mount of Beatitudes. Choose a trip that <strong>explicitly lists Capernaum as a stop</strong> and check its departure city, time on site, guiding language and admission arrangements.</p>
       <div className="grid gap-3 sm:grid-cols-2">
-        <Link to="/tours/nazareth-sea-of-galilee/" className="group flex h-full min-w-0 items-start gap-3 rounded-xl border bg-card p-3 transition-all hover:border-primary/60 hover:shadow-sm focus-visible:outline-2 focus-visible:outline-primary sm:p-4" data-testid="capernaum-galilee-tours-card">
+        <Link to="/tours/nazareth-sea-of-galilee/" className="attraction-tour-card group flex h-full min-w-0 items-start gap-3 rounded-xl border bg-card p-3 transition-all hover:border-primary/60 hover:shadow-sm focus-visible:outline-2 focus-visible:outline-primary sm:p-4" data-testid="capernaum-galilee-tours-card">
           <img src="/images/attractions/sea-of-galilee.webp" alt="Sea of Galilee landscape representing guided visits around its northern shore" width={128} height={100} loading="lazy" decoding="async" className="h-24 w-24 shrink-0 rounded-lg object-cover sm:w-28" />
           <div className="flex min-w-0 flex-1 flex-col">
             <h3 className="font-serif text-lg font-semibold leading-snug group-hover:text-primary">Compare guided Galilee tours</h3>
@@ -204,14 +202,14 @@ const page: AttractionDestinationContent = {
             <span className="mt-2 inline-flex items-center gap-1 text-sm font-semibold text-primary">Explore tours <ArrowUpRight className="h-4 w-4" aria-hidden="true" /></span>
           </div>
         </Link>
-        <Link to="/private-driver/" className="group flex h-full min-w-0 items-start gap-3 rounded-xl border bg-card p-3 transition-all hover:border-primary/60 hover:shadow-sm focus-visible:outline-2 focus-visible:outline-primary sm:p-4" data-testid="capernaum-private-driver-card">
+        <a href="#contact" className="attraction-tour-card group flex h-full min-w-0 items-start gap-3 rounded-xl border bg-card p-3 transition-all hover:border-primary/60 hover:shadow-sm focus-visible:outline-2 focus-visible:outline-primary sm:p-4" data-testid="capernaum-private-driver-card">
           <img src={galileePhoto} alt="Green hills above the Sea of Galilee on a northern Israel day-trip route" width={128} height={100} loading="lazy" decoding="async" className="h-24 w-24 shrink-0 rounded-lg object-cover sm:w-28" />
           <div className="flex min-w-0 flex-1 flex-col">
             <h3 className="font-serif text-lg font-semibold leading-snug group-hover:text-primary">Explore with a private driver</h3>
-            <p className="mt-1 text-sm leading-relaxed text-muted-foreground">I can help arrange a car and flexible stops that fit your day. Professional guiding can be arranged separately.</p>
-            <span className="mt-2 inline-flex items-center gap-1 text-sm font-semibold text-primary">Private journeys <ArrowUpRight className="h-4 w-4" aria-hidden="true" /></span>
+            <p className="mt-1 text-sm leading-relaxed text-muted-foreground">I can arrange this private day trip from Jerusalem or Tel Aviv, or as a shore excursion from Haifa Port, with stops tailored to your group.</p>
+            <span className="mt-2 inline-flex items-center gap-1 text-sm font-semibold text-primary">Request a quote <ArrowUpRight className="h-4 w-4" aria-hidden="true" /></span>
           </div>
-        </Link>
+        </a>
       </div>
     </div>
   ),
