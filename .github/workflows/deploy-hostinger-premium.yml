@@ -180,7 +180,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          for path in / /travel-blog/ /travel-blog/uber-in-israel/ /api/quote-request/ /api/exchange-rates/; do
+          for path in / /travel-blog/ /travel-blog/uber-in-israel/ /attractions/capernaum/ /api/quote-request/ /api/exchange-rates/; do
             status="$(curl --retry 2 --retry-delay 2 --max-time 20 -L -sS -o /dev/null -w '%{http_code}' "$VITE_CANONICAL_ORIGIN$path")"
             echo "$path -> HTTP $status"
             [[ "$status" == "200" ]] || { echo "::error::Website smoke test failed for $path"; exit 1; }
@@ -188,6 +188,15 @@ jobs:
           uber_html="$(curl --retry 2 --max-time 20 -fsSL "$VITE_CANONICAL_ORIGIN/travel-blog/uber-in-israel/")"
           if ! grep -Fq 'Is Uber Available in Israel?' <<< "$uber_html"; then
             echo "::error::The published Uber guide does not contain its expected title"
+            exit 1
+          fi
+          capernaum_html="$(curl --retry 2 --max-time 20 -fsSL "$VITE_CANONICAL_ORIGIN/attractions/capernaum/")"
+          if ! grep -Fq 'Capernaum (Kfar Nahum): Visitor Guide' <<< "$capernaum_html"; then
+            echo "::error::The published Capernaum attraction guide is missing its title"
+            exit 1
+          fi
+          if ! grep -Fq 'Capernaum at a glance' <<< "$capernaum_html"; then
+            echo "::error::The published Capernaum guide is missing its at-a-glance panel"
             exit 1
           fi
           echo "Source-controlled static guides published; existing PHP APIs still respond to GET."
