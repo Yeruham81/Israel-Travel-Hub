@@ -61,4 +61,18 @@ describe("homepage hero photo carousel", () => {
       expect(slide.height).toBeGreaterThanOrEqual(600);
     }
   });
+  it("uses the four new mobile-specific crops without changing desktop image sources", () => {
+    const expected = [
+      [1, "hero-refresh-tel-aviv-coastline-v3-mobile.webp", "hero-refresh-tel-aviv-coastline-v2-large.webp"],
+      [5, "hero-refresh-jerusalem-jaffa-gate-v5-mobile.webp", "hero-refresh-jerusalem-jaffa-gate-v4-large.webp"],
+      [9, "hero-refresh-jaffa-port-v5-mobile.webp", "hero-refresh-jaffa-port-v4-large.webp"],
+      [11, "hero-refresh-tel-aviv-sarona-v5-mobile.webp", "hero-refresh-tel-aviv-sarona-v4-large.webp"],
+    ] as const;
+    for (const [index, mobile, desktop] of expected) {
+      expect(heroSlides[index]?.srcSm).toContain(mobile);
+      expect(heroSlides[index]?.src).toContain(desktop);
+    }
+    expect(heroSlides[0]?.srcSm).toContain("hero-jerusalem-sm-optimized.webp");
+  });
+
 });
