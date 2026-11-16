@@ -190,13 +190,17 @@ jobs:
             echo "::error::The published Uber guide does not contain its expected title"
             exit 1
           fi
-          capernaum_html="$(curl --retry 2 --max-time 20 -fsSL "$VITE_CANONICAL_ORIGIN/attractions/capernaum/")"
-          if ! grep -Fq 'Capernaum (Kfar Nahum): Visitor Guide' <<< "$capernaum_html"; then
+          capernaum_html="$(mktemp)"
+          curl --retry 2 --max-time 20 -fsSL -o "$capernaum_html" "$VITE_CANONICAL_ORIGIN/attractions/capernaum/"
+          if ! grep -Fq 'Capernaum (Kfar Nahum): Visitor Guide' "$capernaum_html"; then
             echo "::error::The published Capernaum attraction guide is missing its title"
             exit 1
           fi
-          if ! grep -Fq 'Capernaum at a glance' <<< "$capernaum_html"; then
+          # SSR may insert HTML comment boundaries between dynamic place name and heading text.
+          # Assert the actual fact-card panel instead of a fragile concatenated text string.
+          if ! grep -Fq 'data-testid="attraction-at-a-glance"' "$capernaum_html"; then
             echo "::error::The published Capernaum guide is missing its at-a-glance panel"
             exit 1
           fi
+          rm -f "$capernaum_html"
           echo "Source-controlled static guides published; existing PHP APIs still respond to GET."
