@@ -106,11 +106,16 @@ describe("home mobile performance optimizations", () => {
     expect(slides).toContain("hero-jerusalem-medium.webp");
     expect(slides).toContain("hero-jerusalem-sm-optimized.webp");
     expect(slides).toContain("hero-jerusalem-large.webp");
-    for (const name of ["jaffa-harbor", "masada-plateau", "caesarea-coast"]) {
-      expect(slides).toContain(`hero-${name}-desktop.jpg`);
-      expect(slides).toContain(`hero-${name}-mobile.webp`);
-      expect(bytes(`src/assets/home/hero-${name}-desktop.jpg`)).toBeLessThan(230000);
-      expect(bytes(`src/assets/home/hero-${name}-mobile.webp`)).toBeLessThan(110000);
+    // All nine updated hero photographs have three local, compressed WebP variants.
+    for (const name of [
+      "haifa-gardens", "masada-dead-sea", "caesarea-coast", "dead-sea-salt",
+      "jaffa-port", "eilat-mountains", "ramon-crater", "tel-aviv-sarona", "jerusalem-jaffa-gate",
+    ]) {
+      for (const [variant, maxBytes] of [["large", 340000], ["medium", 225000], ["mobile", 155000]] as const) {
+        const filename = `hero-refresh-${name}-${variant}.webp`;
+        expect(slides).toContain(filename);
+        expect(bytes(`src/assets/home/${filename}`)).toBeLessThanOrEqual(maxBytes);
+      }
     }
     expect(slides).toContain('pos: "center 68%"');
     expect(carousel).toContain('media="(max-width: 767px)"');
