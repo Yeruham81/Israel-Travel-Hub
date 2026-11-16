@@ -57,9 +57,9 @@ PHOTOS = [
 ]
 
 SIZES = [
-    ("large", (1920, 960), 245_000),
-    ("medium", (1280, 720), 145_000),
-    ("mobile", (768, 900), 105_000),
+    ("large", (1680, 840), 340_000),
+    ("medium", (1280, 720), 225_000),
+    ("mobile", (720, 840), 155_000),
 ]
 
 
@@ -115,7 +115,7 @@ def export_variants(photo: Image.Image, slug: str, center: tuple[float, float]) 
     for label, dims, max_bytes in SIZES:
         cropped = ImageOps.fit(photo, dims, method=Image.Resampling.LANCZOS, centering=center)
         result = None
-        for quality in (83, 80, 77, 74, 71, 68, 65, 62, 59):
+        for quality in (83, 80, 77, 74, 71, 68, 65, 62, 59, 56, 53):
             buffer = io.BytesIO()
             cropped.save(buffer, format="WEBP", quality=quality, method=6)
             result = buffer.getvalue()
@@ -157,7 +157,7 @@ def update_carousel() -> None:
         return (
             f'  {{ src: {ident}Large, srcSm: {ident}Mobile, '
             f'srcMedium: {ident}Medium, caption: "{caption}", '
-            f'alt: "{alt}", pos: "center", width: 1920, height: 960 }},'
+            f'alt: "{alt}", pos: "center", width: 1680, height: 840 }},'
         )
 
     slides = [
