@@ -72,7 +72,7 @@ def get(url: str, limit: int = 7_000_000) -> bytes:
                 if response.status != 200:
                     raise RuntimeError(f"HTTP {response.status} from {url}")
                 data = response.read(limit + 1)
-            if not 10_000 < len(data) < limit:
+            if not 100 < len(data) < limit:
                 raise RuntimeError(f"Bad response length {len(data)} from {url}")
             return data
         except (urllib.error.URLError, OSError, RuntimeError) as error:
