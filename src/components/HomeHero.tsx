@@ -28,9 +28,9 @@ import pEilatMountainsMobile from "@/assets/home/hero-refresh-eilat-mountains-v4
 import pRamonCraterLarge from "@/assets/home/hero-refresh-ramon-crater-v4-large.webp";
 import pRamonCraterMedium from "@/assets/home/hero-refresh-ramon-crater-v4-medium.webp";
 import pRamonCraterMobile from "@/assets/home/hero-refresh-ramon-crater-v4-mobile.webp";
-import pTelAvivSaronaLarge from "@/assets/home/hero-refresh-tel-aviv-sarona-large.webp";
-import pTelAvivSaronaMedium from "@/assets/home/hero-refresh-tel-aviv-sarona-medium.webp";
-import pTelAvivSaronaMobile from "@/assets/home/hero-refresh-tel-aviv-sarona-mobile.webp";
+import pTelAvivSaronaLarge from "@/assets/home/hero-refresh-tel-aviv-sarona-v4-large.webp";
+import pTelAvivSaronaMedium from "@/assets/home/hero-refresh-tel-aviv-sarona-v4-medium.webp";
+import pTelAvivSaronaMobile from "@/assets/home/hero-refresh-tel-aviv-sarona-v4-mobile.webp";
 import pJerusalemJaffaGateLarge from "@/assets/home/hero-refresh-jerusalem-jaffa-gate-v4-large.webp";
 import pJerusalemJaffaGateMedium from "@/assets/home/hero-refresh-jerusalem-jaffa-gate-v4-medium.webp";
 import pJerusalemJaffaGateMobile from "@/assets/home/hero-refresh-jerusalem-jaffa-gate-v4-mobile.webp";
@@ -47,7 +47,7 @@ export const heroSlides: HeroSlide[] = [
   { src: pEilatMountainsLarge, srcSm: pEilatMountainsMobile, srcMedium: pEilatMountainsMedium, caption: "Eilat Mountains and the Gulf of Aqaba", alt: "Rocky Eilat Mountains overlooking the city of Eilat and the blue Gulf of Aqaba", pos: "center", width: 2048, height: 1024, highDensity: true },
   { src: pJaffaPortLarge, srcSm: pJaffaPortMobile, srcMedium: pJaffaPortMedium, caption: "Old Jaffa and its harbour", alt: "Aerial view of Old Jaffa stone buildings, waterfront, marina and the stone breakwater", pos: "center 60%", width: 2048, height: 1024, highDensity: true },
   { src: pRamonCraterLarge, srcSm: pRamonCraterMobile, srcMedium: pRamonCraterMedium, caption: "Sunrise over Makhtesh Ramon", alt: "Sun rising over the edge of Makhtesh Ramon beside Camel Hill near Mitzpe Ramon", pos: "center", width: 2048, height: 1024, highDensity: true },
-  { src: pTelAvivSaronaLarge, srcSm: pTelAvivSaronaMobile, srcMedium: pTelAvivSaronaMedium, caption: "Tel Aviv’s modern skyline", alt: "High-rise towers in Tel Aviv's Sarona business district with the Mediterranean Sea in the distance", pos: "center", width: 1680, height: 840 },
+  { src: pTelAvivSaronaLarge, srcSm: pTelAvivSaronaMobile, srcMedium: pTelAvivSaronaMedium, caption: "Tel Aviv’s modern skyline", alt: "High-rise towers in Tel Aviv's Sarona business district with the Mediterranean Sea in the distance", pos: "center", width: 2048, height: 1024, highDensity: true },
 ];
 
 /** Rendered by the root layout above the shared sidebar/content columns. */

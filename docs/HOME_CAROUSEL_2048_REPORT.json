@@ -7,17 +7,13 @@
     "dead-sea-salt",
     "eilat-mountains",
     "jaffa-port",
-    "ramon-crater"
+    "ramon-crater",
+    "tel-aviv-sarona"
   ],
   "unchanged": {
     "0": "Jerusalem intentionally preserved",
     "1": "Tel Aviv current 1800px kept (new 1920px image not accessible as a file)",
     "7": "Akko already 2048px"
   },
-  "skipped": [
-    [
-      "tel-aviv-sarona",
-      "Download failed: HTTP Error 429: Too many requests - please contact noc@wikimedia.org to discuss a less disruptive approach or instead use thumbnail images in sizes listed on https://w.wiki/GHai. (0c640b1)"
-    ]
-  ]
+  "skipped": []
 }

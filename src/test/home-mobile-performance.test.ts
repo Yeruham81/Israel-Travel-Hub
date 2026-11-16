@@ -107,7 +107,7 @@ describe("home mobile performance optimizations", () => {
     expect(slides).toContain("hero-jerusalem-sm-optimized.webp");
     expect(slides).toContain("hero-jerusalem-large.webp");
     // Full-resolution original crops, not enlarged small derivatives.
-    const optimizedSlugs = ["haifa-gardens", "masada-dead-sea", "caesarea-coast", "jerusalem-jaffa-gate", "dead-sea-salt", "eilat-mountains", "jaffa-port", "ramon-crater"];
+    const optimizedSlugs = ["haifa-gardens", "masada-dead-sea", "caesarea-coast", "jerusalem-jaffa-gate", "dead-sea-salt", "eilat-mountains", "jaffa-port", "ramon-crater", "tel-aviv-sarona"];
     for (const slug of optimizedSlugs) {
       for (const [variant, budget] of [["large", 480000], ["medium", 300000], ["mobile", 150000]] as const) {
         const file = `hero-refresh-${slug}-v4-${variant}.webp`;

@@ -53,3 +53,5 @@ Each processed landscape photo was cropped from its actual original Commons imag
 - jaffa-port: 2048px crop generated from full-resolution original.
 - ramon-crater: 2048px crop generated from full-resolution original.
 - tel-aviv-sarona: unchanged because conversion could not be safely completed (Download failed: HTTP Error 429: Too many requests - please contact noc@wikimedia.org to discuss a less disruptive approach or instead use thumbnail images in sizes listed on https://w.wiki/GHai. (0c640b1)).
+
+- tel-aviv-sarona: 2048px original photo crop, 1600px medium and compact 720px mobile. Generated from the verified 5472px Wikimedia Commons photograph.
