@@ -19,7 +19,9 @@ describe("homepage marketing copy and service sections", () => {
     expect(headline).toHaveClass("md:text-5xl", "lg:max-w-none", "lg:whitespace-nowrap");
     expect(headline.nextElementSibling).toHaveClass("mt-3");
     const caption = screen.getByText("Jerusalem Old City from the Mount of Olives");
-    expect(caption).toHaveClass("sr-only");
+    expect(caption).not.toHaveClass("sr-only");
+    expect(caption).toHaveClass("text-left", "text-white/90", "lg:absolute", "lg:bottom-4", "lg:left-8");
+    expect(caption).toHaveStyle({ textShadow: "0 1px 3px rgba(0,0,0,0.95), 0 2px 8px rgba(0,0,0,0.75)" });
     expect(caption.parentElement).toHaveClass("mt-14", "md:mt-20");
     expect(screen.getAllByRole("button", { name: /^Show / })).toHaveLength(12);
     expect(screen.queryByRole("button", { name: "Pause slideshow" })).not.toBeInTheDocument();
