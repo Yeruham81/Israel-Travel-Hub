@@ -22,6 +22,16 @@ function fill() {
 describe("private driver page and inquiry", () => {
   it("shows illustrated journeys, an early inquiry, practical planning and six working guide cards", async () => {
     const { container, router } = await renderDriver();
+    const quote = container.querySelector("#request-quote")!;
+    const intro = within(quote as HTMLElement).getByTestId("quote-form-intro");
+    expect(quote.firstElementChild?.firstElementChild).toBe(intro);
+    expect(intro).toHaveClass("bg-navy", "border-b");
+    for (const name of ["contact", "journey"]) {
+      expect(within(quote as HTMLElement).getByTestId(`quote-fields-${name}`)).toHaveClass("sm:grid-cols-2", "xl:grid-cols-3");
+    }
+    for (const name of ["route", "party"]) {
+      expect(within(quote as HTMLElement).getByTestId(`quote-fields-${name}`)).toHaveClass("sm:grid-cols-2");
+    }
     expect(screen.getAllByRole("heading", { level: 1 })).toHaveLength(1);
     expect(screen.getByRole("heading", { level: 1 })).toHaveTextContent("Private driver in Israel");
     expect(screen.getByRole("navigation", { name: "Breadcrumb" })).toHaveTextContent("Home /Private driver");

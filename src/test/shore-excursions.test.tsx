@@ -66,6 +66,14 @@ describe("shore excursions", () => {
     const router = await routerAt(port.path);
     const Page = route.options.component!;
     const { container } = render(<RouterContextProvider router={router}><Page /></RouterContextProvider>);
+    const quote = container.querySelector("#request-quote")!;
+    const intro = within(quote as HTMLElement).getByTestId("quote-form-intro");
+    expect(quote.firstElementChild?.firstElementChild).toBe(intro);
+    expect(intro).toHaveClass("bg-navy", "border-b");
+    expect(within(quote as HTMLElement).getByTestId("quote-fields-contact")).toHaveClass("sm:grid-cols-2", "xl:grid-cols-4");
+    expect(within(quote as HTMLElement).getByTestId("quote-fields-cruise")).toHaveClass("sm:grid-cols-2");
+    expect(within(quote as HTMLElement).getByTestId("quote-fields-schedule")).toHaveClass("sm:grid-cols-2", "2xl:grid-cols-4");
+    expect(within(quote as HTMLElement).getByTestId("quote-fields-party")).toHaveClass("sm:grid-cols-2");
     expect(screen.getAllByRole("heading", { level: 1 })).toHaveLength(1);
     expect(screen.getByRole("heading", { level: 1 })).toHaveTextContent(port.title);
     expect(router.matchRoutes(port.path).at(-1)?.routeId).toBe(port.path.replace(/\/$/, ""));

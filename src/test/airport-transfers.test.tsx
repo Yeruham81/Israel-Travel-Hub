@@ -36,6 +36,14 @@ describe("private Ben Gurion transfers", () => {
       "tel-aviv": 330, jerusalem: 550, haifa: 930, "dead-sea": 1300, raanana: 340, herzliya: 340, netanya: 450, ashdod: 480, caesarea: 630, nazareth: 950, eilat: 2700,
     });
     const { container, router } = await renderAirport();
+    const quote = container.querySelector("#request-quote")!;
+    const intro = within(quote as HTMLElement).getByTestId("quote-form-intro");
+    expect(quote.firstElementChild?.firstElementChild).toBe(intro);
+    expect(intro).toHaveClass("bg-navy", "border-b");
+    expect(within(quote as HTMLElement).getByTestId("quote-fields-contact")).toHaveClass("sm:grid-cols-2", "xl:grid-cols-3");
+    expect(within(quote as HTMLElement).getByTestId("quote-fields-arrival")).toHaveClass("sm:grid-cols-2", "xl:grid-cols-3");
+    expect(within(quote as HTMLElement).getByTestId("quote-fields-destination")).toHaveClass("sm:grid-cols-2");
+    expect(within(quote as HTMLElement).getByTestId("quote-fields-party")).toHaveClass("xl:grid-cols-3");
     const popular = screen.getByRole("region", { name: "Popular private transfers" });
     expect(within(popular).getAllByTestId("airport-destination-card").map((card) => card.dataset["destination"])).toEqual(["tel-aviv", "jerusalem", "haifa", "dead-sea"]);
     expect(screen.getAllByTestId("airport-destination-card")).toHaveLength(12);

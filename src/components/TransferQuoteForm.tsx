@@ -5,7 +5,7 @@ import { useEffect, useRef, useState, type FormEvent } from "react";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { airportTransferRates } from "@/data/registry";
-import { airportTransferPhotos } from "@/data/airportTransfers";
+import { QuoteFormIntro } from "@/components/QuoteFormIntro";
 import { emptyTransferQuote, validateTransferQuote, type TransferQuoteFields } from "@/lib/transfer-quote";
 
 export function TransferQuoteForm({ destinationId, onDestinationChange, fixedDestination = false, fixedDestinationLabel, compactHeader = false }: { destinationId: string; onDestinationChange?: (id: string) => void; fixedDestination?: boolean; fixedDestinationLabel?: string; compactHeader?: boolean }) {
@@ -28,47 +28,50 @@ export function TransferQuoteForm({ destinationId, onDestinationChange, fixedDes
     if (nextErrors.length) { submission.reset(); requestAnimationFrame(() => errorRef.current?.focus()); return; }
     await submission.submit({ kind: "transfer", fields: values });
   }
-  const photo = airportTransferPhotos["moshe"]!;
-  const fieldClass = "mt-2 h-11 bg-background text-base";
-  const halfFieldClass = compactHeader ? "min-w-0 text-sm font-medium lg:col-span-3" : "text-sm font-medium";
-  const fullFieldClass = compactHeader ? "min-w-0 text-sm font-medium sm:col-span-2 lg:col-span-6" : "text-sm font-medium sm:col-span-2";
-  const thirdFieldClass = compactHeader ? "min-w-0 text-sm font-medium lg:col-span-2" : "text-sm font-medium";
-  const fullRowClass = compactHeader ? "sm:col-span-2 lg:col-span-6" : "sm:col-span-2";
+  const fieldClass = "mt-2 h-11 w-full min-w-0 bg-background text-base";
   return (
-    <section id="request-quote" tabIndex={-1} aria-labelledby="quote-h" className={`${compactHeader ? "mx-auto mt-9 w-full max-w-4xl" : "mt-14"} scroll-mt-24 overflow-hidden rounded-2xl border bg-card shadow-sm focus-visible:outline-2 focus-visible:outline-primary`}>
-      <div className={compactHeader ? "block" : "grid md:grid-cols-[0.8fr_1.6fr]"}>
-        <div className={compactHeader ? "flex items-center gap-3 border-b bg-navy px-4 py-4 text-navy-foreground sm:gap-4 sm:px-6" : "bg-navy p-6 text-navy-foreground sm:p-8"}>
-          <img src={photo.src} alt={photo.alt} width={150} height={200} loading="lazy" decoding="async" className={compactHeader ? "h-16 w-14 shrink-0 rounded-lg object-cover object-top" : "h-24 w-20 rounded-xl object-cover"} />
-          {compactHeader ? <div className="min-w-0">
-            <h2 id="quote-h" className="text-xl font-semibold">Request a private transfer quote</h2>
-            <p className="mt-1 text-sm leading-relaxed text-navy-foreground/90">Message me with your details to get a personal quote and book your private transfer.</p>
-          </div> : <div>
-            <p className="mt-5 text-xs font-semibold uppercase tracking-widest opacity-75">A local, personal service</p>
-            <h2 id="quote-h" className="mt-3 text-3xl">{fixedDestination && selectedDestination ? `Request your transfer to ${destinationLabel}` : "Ask me for a personal quote"}</h2>
-            <p className="mt-4 leading-relaxed opacity-90">Tell me about your arrival and destination. I'll help arrange a suitable private vehicle for your party and confirm the full price before you book.</p>
-            <ul className="mt-6 list-disc space-y-3 pl-5 text-sm text-navy-foreground marker:text-white"><li>One-way pickup from Ben Gurion Airport</li><li>Minivans and minibuses are available for families, groups, and travelers with extra luggage</li><li>Please contact me in advance so I can help arrange the most suitable vehicle for your needs and provide a personal quote</li></ul>
-          </div>}
-        </div>
-        <div className={compactHeader ? "p-4 sm:p-6" : "p-5 sm:p-8"}>
+    <section id="request-quote" tabIndex={-1} aria-labelledby="quote-h" className={`${compactHeader ? "mx-auto mt-9 w-full" : "mt-14"} scroll-mt-24 overflow-hidden rounded-2xl border bg-card shadow-sm focus-visible:outline-2 focus-visible:outline-primary`}>
+      <div>
+        <QuoteFormIntro
+          headingId="quote-h"
+          eyebrow="A local, personal service"
+          title={compactHeader ? "Request a private transfer quote" : fixedDestination && selectedDestination ? `Request your transfer to ${destinationLabel}` : "Ask me for a personal quote"}
+          description={compactHeader
+            ? "Message me with your flight, destination and group details to receive a personal quote for your private transfer."
+            : "Tell me about your arrival and destination. I'll help arrange a suitable private vehicle and confirm the full price before you book."}
+        />
+        <div className="p-5 sm:p-7">
           <form onSubmit={send} noValidate aria-label="Private airport transfer quote request" aria-busy={submission.isSending}>
             <fieldset disabled={submission.isSending} className="min-w-0">
               {errors.length > 0 && <div ref={errorRef} tabIndex={-1} role="alert" className="mb-5 rounded-xl border border-destructive p-4 text-sm text-destructive"><p className="font-semibold">Please check these details:</p><ul className="mt-2 list-disc pl-5">{errors.map((error) => <li key={error}>{error}</li>)}</ul></div>}
-              <div className={compactHeader ? "grid gap-4 sm:grid-cols-2 lg:grid-cols-6" : "grid gap-5 sm:grid-cols-2"}>
-                <label className={halfFieldClass}>Full name *<Input name="name" autoComplete="name" required maxLength={120} value={fields.name} onChange={(e) => update("name", e.target.value)} className={fieldClass} /></label>
-                <label className={halfFieldClass}>Email address *<Input name="email" type="email" autoComplete="email" required maxLength={254} value={fields.email} onChange={(e) => update("email", e.target.value)} className={fieldClass} /></label>
-                <label className={halfFieldClass}>Phone / WhatsApp<Input name="phone" type="tel" autoComplete="tel" maxLength={50} placeholder="Include country code" value={fields.phone} onChange={(e) => update("phone", e.target.value)} className={fieldClass} /></label>
-                <label className={halfFieldClass}>Flight number<Input name="flight" maxLength={30} placeholder="For example, LY123" value={fields.flight} onChange={(e) => update("flight", e.target.value)} className={fieldClass} /></label>
-                <label className={halfFieldClass}>Flight arrival date *<Input name="date" type="date" required value={fields.date} onChange={(e) => update("date", e.target.value)} className={fieldClass} /></label>
-                <label className={halfFieldClass}>Flight arrival time *<Input name="time" type="time" required value={fields.time} onChange={(e) => update("time", e.target.value)} className={fieldClass} /></label>
-                <p className={`${compactHeader ? "" : "-mt-3"} text-xs text-muted-foreground ${fullRowClass}`}>Use the arrival date and time in Israel local time, including the correct date after midnight.</p>
-                <label className={halfFieldClass}>Destination *{fixedDestination && selectedDestination ? <Input name="destination" readOnly value={destinationLabel} className={`${fieldClass} bg-secondary/40`} /> : <select name="destination" required value={destinationId} onChange={(e) => { onDestinationChange?.(e.target.value); submission.reset(); }} className="mt-2 h-11 w-full rounded-md border border-input bg-background px-3 text-base"><option value="">Choose your destination</option>{airportTransferRates.map((rate) => <option key={rate.id} value={rate.id}>{rate.destination}</option>)}<option value="other">Another destination</option></select>}</label>
-                {destinationId === "other" && <label className={fullFieldClass}>City or destination *<Input name="otherDestination" required maxLength={120} value={fields.otherDestination} onChange={(e) => update("otherDestination", e.target.value)} className={fieldClass} /></label>}
-                <label className={halfFieldClass}>Drop-off hotel or address<Input name="address" maxLength={250} placeholder="Hotel name or full address, if known" value={fields.address} onChange={(e) => update("address", e.target.value)} className={fieldClass} /></label>
-                <label className={thirdFieldClass}>Passengers *<Input name="passengers" type="number" min={1} max={99} step={1} required value={fields.passengers} onChange={(e) => update("passengers", e.target.value)} className={fieldClass} /></label>
-                <label className={thirdFieldClass}>Suitcases *<Input name="suitcases" type="number" min={0} max={40} step={1} required value={fields.suitcases} onChange={(e) => update("suitcases", e.target.value)} className={fieldClass} /></label>
-                <label className={thirdFieldClass}>Carry-ons *<Input name="carryOns" type="number" min={0} max={40} step={1} required value={fields.carryOns} onChange={(e) => update("carryOns", e.target.value)} className={fieldClass} /></label>
-                {Number(fields.passengers) > 4 && <p className={`self-center rounded-lg bg-secondary p-3 text-sm ${fullRowClass}`}>For more than four passengers, ask for a group quote. The published car starting prices do not apply to your whole group.</p>}
-                <label className={fullFieldClass}>Additional requests<Textarea name="notes" maxLength={1500} rows={compactHeader ? 3 : 4} placeholder="Children's ages, strollers, extra luggage, accessibility needs or a return-trip request" value={fields.notes} onChange={(e) => update("notes", e.target.value)} className="mt-2 bg-background text-base" /></label>
+              <div className="space-y-5">
+                <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3" data-testid="quote-fields-contact">
+                  <label className="min-w-0 text-sm font-medium">Full name *<Input name="name" autoComplete="name" required maxLength={120} value={fields.name} onChange={(e) => update("name", e.target.value)} className={fieldClass} /></label>
+                  <label className="min-w-0 text-sm font-medium">Email address *<Input name="email" type="email" autoComplete="email" required maxLength={254} value={fields.email} onChange={(e) => update("email", e.target.value)} className={fieldClass} /></label>
+                  <label className="min-w-0 text-sm font-medium">Phone / WhatsApp<Input name="phone" type="tel" autoComplete="tel" maxLength={50} placeholder="Include country code" value={fields.phone} onChange={(e) => update("phone", e.target.value)} className={fieldClass} /></label>
+                </div>
+                <div>
+                  <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3" data-testid="quote-fields-arrival">
+                    <label className="min-w-0 text-sm font-medium">Flight number<Input name="flight" maxLength={30} placeholder="For example, LY123" value={fields.flight} onChange={(e) => update("flight", e.target.value)} className={fieldClass} /></label>
+                    <label className="min-w-0 text-sm font-medium">Flight arrival date *<Input name="date" type="date" required value={fields.date} onChange={(e) => update("date", e.target.value)} className={fieldClass} /></label>
+                    <label className="min-w-0 text-sm font-medium">Flight arrival time *<Input name="time" type="time" required value={fields.time} onChange={(e) => update("time", e.target.value)} className={fieldClass} /></label>
+                  </div>
+                  <p className="mt-2 text-xs text-muted-foreground">Use the arrival date and time in Israel local time, including the correct date after midnight.</p>
+                </div>
+                <div>
+                  <div className="grid gap-4 sm:grid-cols-2" data-testid="quote-fields-destination">
+                    <label className="min-w-0 text-sm font-medium">Destination *{fixedDestination && selectedDestination ? <Input name="destination" readOnly value={destinationLabel} className={`${fieldClass} bg-secondary/40`} /> : <select name="destination" required value={destinationId} onChange={(e) => { onDestinationChange?.(e.target.value); submission.reset(); }} className="mt-2 h-11 w-full min-w-0 rounded-md border border-input bg-background px-3 text-base"><option value="">Choose your destination</option>{airportTransferRates.map((rate) => <option key={rate.id} value={rate.id}>{rate.destination}</option>)}<option value="other">Another destination</option></select>}</label>
+                    <label className="min-w-0 text-sm font-medium">Drop-off hotel or address<Input name="address" maxLength={250} placeholder="Hotel name or full address, if known" value={fields.address} onChange={(e) => update("address", e.target.value)} className={fieldClass} /></label>
+                  </div>
+                  {destinationId === "other" && <label className="mt-4 block min-w-0 text-sm font-medium">City or destination *<Input name="otherDestination" required maxLength={120} value={fields.otherDestination} onChange={(e) => update("otherDestination", e.target.value)} className={fieldClass} /></label>}
+                </div>
+                <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3" data-testid="quote-fields-party">
+                  <label className="min-w-0 text-sm font-medium">Passengers *<Input name="passengers" type="number" min={1} max={99} step={1} required value={fields.passengers} onChange={(e) => update("passengers", e.target.value)} className={fieldClass} /></label>
+                  <label className="min-w-0 text-sm font-medium">Suitcases *<Input name="suitcases" type="number" min={0} max={40} step={1} required value={fields.suitcases} onChange={(e) => update("suitcases", e.target.value)} className={fieldClass} /></label>
+                  <label className="min-w-0 text-sm font-medium">Carry-ons *<Input name="carryOns" type="number" min={0} max={40} step={1} required value={fields.carryOns} onChange={(e) => update("carryOns", e.target.value)} className={fieldClass} /></label>
+                </div>
+                {Number(fields.passengers) > 4 && <p className="rounded-lg bg-secondary p-3 text-sm">For more than four passengers, ask for a group quote. The published car starting prices do not apply to your whole group.</p>}
+                <label className="block min-w-0 text-sm font-medium">Additional requests<Textarea name="notes" maxLength={1500} rows={3} placeholder="Children's ages, strollers, extra luggage, accessibility needs or a return-trip request" value={fields.notes} onChange={(e) => update("notes", e.target.value)} className="mt-2 w-full bg-background text-base" /></label>
               </div>
               <label className="mt-5 flex items-start gap-3 text-sm leading-relaxed"><input name="consent" type="checkbox" required checked={fields.consent} onChange={(e) => update("consent", e.target.checked)} className="mt-1 h-4 w-4 shrink-0 accent-primary" /><span>I agree to share these details with Moshe Barak for this quote request. <PrivacyInformationLink /></span></label>
               <QuoteSubmissionControls submission={submission} label="Send quote request" />
