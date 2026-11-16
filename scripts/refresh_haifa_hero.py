@@ -19,9 +19,9 @@ CREDITS=ROOT / "docs/HOME_CAROUSEL_PHOTO_CREDITS.md"
 FILENAME="The Hanging Gardens of Haifa, Israel (50099173503) (cropped).jpg"
 USER_AGENT="IsraelTravelHubImageOptimization/1.0 (Wikimedia Commons credit)"
 SIZES=(
-  ("large",(2880,1440),950_000),
-  ("medium",(1920,960),530_000),
-  ("mobile",(900,1125),290_000),
+  ("large",(2880,1440),1_350_000),
+  ("medium",(1920,960),700_000),
+  ("mobile",(900,1125),360_000),
 )
 
 def download(url,max_length):
