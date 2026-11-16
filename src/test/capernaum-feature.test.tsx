@@ -119,6 +119,7 @@ describe("Capernaum as the first reusable individual-attraction guide", () => {
     expect(content.glanceNote).toBeDefined();
     expect(article).toContain("capernaum-orthodox-church.webp");
     expect(article).toContain("capernaum-aerial-overview.webp");
+    expect(article).toContain('className="h-52 w-full object-cover object-center sm:h-64"');
     expect(article).toContain("capernaum-synagogue-aerial.webp");
     expect(article).toContain("Facilities and visitor essentials");
     expect(article).not.toContain("If you find a public bench");

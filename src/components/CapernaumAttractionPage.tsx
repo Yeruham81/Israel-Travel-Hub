@@ -205,7 +205,7 @@ const page: AttractionDestinationContent = {
         <p className="mt-3 text-sm text-muted-foreground">These are options, not a checklist for a single day. Choose a realistic combination, especially when returning to a cruise ship. Add the Greek Orthodox monastery only if you have arranged a visit, and plan around opening hours.</p>
       </div>
       <figure className="overflow-hidden rounded-xl border bg-card">
-        <img src="/images/attractions/capernaum-aerial-overview.webp" alt="Aerial view of the archaeological compound, shoreline and Sea of Galilee at Capernaum" loading="lazy" decoding="async" width={1100} height={714} className="h-44 w-full object-cover object-center sm:h-52" />
+        <img src="/images/attractions/capernaum-aerial-overview.webp" alt="Aerial view of the archaeological compound, shoreline and Sea of Galilee at Capernaum" loading="lazy" decoding="async" width={1100} height={714} className="h-52 w-full object-cover object-center sm:h-64" />
       </figure>
       <AttractionPracticalTip>
         <strong>A relaxing break by the lake.</strong> The national park's shaded seating areas offer a pleasant spot for a short break overlooking the Sea of Galilee. Bring a light snack before continuing to Tabgha or the Mount of Beatitudes. Swimming and lighting fires are prohibited in the national park; please take your litter with you.
