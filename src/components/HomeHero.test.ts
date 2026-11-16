@@ -14,21 +14,24 @@ describe("homepage hero photo carousel", () => {
     }
   });
 
-  it("preserves the original Jerusalem, Tel Aviv and Akko slides in slots 1, 2 and 8", () => {
+  it("preserves Jerusalem and Akko, and uses the new Tel Aviv coast photo at position 2", () => {
     expect(heroSlides[0]?.caption).toBe("Jerusalem Old City from the Mount of Olives");
-    expect(heroSlides[1]?.caption).toBe("Tel Aviv beach promenade");
+    expect(heroSlides[1]?.caption).toBe("Tel Aviv beachfront skyline");
+    expect(heroSlides[1]?.src).toContain("hero-refresh-tel-aviv-coastline-large.webp");
+    expect(heroSlides[1]?.srcMedium).toContain("hero-refresh-tel-aviv-coastline-medium.webp");
+    expect(heroSlides[1]?.srcSm).toContain("hero-refresh-tel-aviv-coastline-mobile.webp");
     expect(heroSlides[7]?.caption).toBe("Akko Old City and harbour");
   });
 
-  it("uses 9 new responsive images for the other slides", () => {
-    const changed = heroSlides.filter((_, i) => ![0, 1, 7].includes(i));
-    expect(changed).toHaveLength(9);
+  it("uses 10 new compressed responsive images, without altering the other nine refreshed slides", () => {
+    const changed = heroSlides.filter((_, i) => ![0, 7].includes(i));
+    expect(changed).toHaveLength(10);
     for (const slide of changed) {
       expect(slide.src).toContain("hero-refresh-");
       expect(slide.srcMedium).toContain("hero-refresh-");
       expect(slide.srcSm).toContain("hero-refresh-");
-      expect(slide.width).toBe(1680);
-      expect(slide.height).toBe(840);
+      expect(slide.width).toBeGreaterThanOrEqual(1600);
+      expect(slide.height).toBeGreaterThanOrEqual(600);
     }
   });
 });

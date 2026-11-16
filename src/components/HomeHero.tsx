@@ -2,9 +2,9 @@ import { HeroCarousel, type HeroSlide } from "@/components/HeroCarousel";
 import hJerSm from "@/assets/home/hero-jerusalem-sm-optimized.webp";
 import hJerMedium from "@/assets/home/hero-jerusalem-medium.webp";
 import hJerLarge from "@/assets/home/hero-jerusalem-large.webp";
-import hTaSm from "@/assets/home/hero-tel-aviv-sm-optimized.webp";
-import hTaMedium from "@/assets/home/hero-tel-aviv-medium.webp";
-import hTaLarge from "@/assets/home/hero-tel-aviv-large.webp";
+import hTaSm from "@/assets/home/hero-refresh-tel-aviv-coastline-mobile.webp";
+import hTaMedium from "@/assets/home/hero-refresh-tel-aviv-coastline-medium.webp";
+import hTaLarge from "@/assets/home/hero-refresh-tel-aviv-coastline-large.webp";
 import pAkkoDesktop from "@/assets/home/hero-akko-aerial-large.webp";
 import pAkkoMobile from "@/assets/home/hero-akko-aerial-sm.webp";
 import pHaifaGardensLarge from "@/assets/home/hero-refresh-haifa-gardens-large.webp";
@@ -37,7 +37,7 @@ import pJerusalemJaffaGateMobile from "@/assets/home/hero-refresh-jerusalem-jaff
 
 export const heroSlides: HeroSlide[] = [
   { src: hJerLarge, srcSm: hJerSm, srcMedium: hJerMedium, caption: "Jerusalem Old City from the Mount of Olives", alt: "Jerusalem's Old City and the Dome of the Rock seen from the Mount of Olives", pos: "55% center" },
-  { src: hTaLarge, srcSm: hTaSm, srcMedium: hTaMedium, caption: "Tel Aviv beach promenade", alt: "The seafront promenade beside the beach in Tel Aviv", pos: "40% center" },
+  { src: hTaLarge, srcSm: hTaSm, srcMedium: hTaMedium, caption: "Tel Aviv beachfront skyline", alt: "Tel Aviv beaches, Mediterranean coastline and high-rise skyline along the seafront promenade", pos: "center 52%", width: 1800, height: 600 },
   { src: pHaifaGardensLarge, srcSm: pHaifaGardensMobile, srcMedium: pHaifaGardensMedium, caption: "Haifa and the Bahá’í Gardens", alt: "The Bahá’í Gardens, Haifa city and the Mediterranean port seen from Mount Carmel", pos: "center", width: 1680, height: 840 },
   { src: pMasadaDeadSeaLarge, srcSm: pMasadaDeadSeaMobile, srcMedium: pMasadaDeadSeaMedium, caption: "Masada above the Dead Sea", alt: "Aerial view of Masada's ancient fortress on a sunlit cliff overlooking the Dead Sea", pos: "center", width: 1680, height: 840 },
   { src: pCaesareaCoastLarge, srcSm: pCaesareaCoastMobile, srcMedium: pCaesareaCoastMedium, caption: "Caesarea’s ancient harbour", alt: "Aerial view of the ancient harbour, turquoise Mediterranean water and shoreline near Caesarea", pos: "center", width: 1680, height: 840 },
