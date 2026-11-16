@@ -5,6 +5,7 @@ on:
     branches: [main]
     paths:
       - ".github/workflows/optimize-home-hero-2048.yml"
+      - "scripts/optimize_home_carousel_2048.py"
   workflow_dispatch:
 
 permissions:
@@ -40,13 +41,14 @@ jobs:
           import json
           report = json.loads(Path('docs/HOME_CAROUSEL_2048_REPORT.json').read_text())
           dims = {'large':(2048,1024), 'medium':(1600,800), 'mobile':(720,900)}
+          salt_dims = {'large':(1600,800), 'medium':(1280,640), 'mobile':(720,900)}
           ceilings = {'large':480000, 'medium':300000, 'mobile':150000}
           for slug in report['processed']:
               for kind in dims:
                   f = Path(f'src/assets/home/hero-refresh-{slug}-v4-{kind}.webp')
                   assert f.is_file() and f.stat().st_size <= ceilings[kind], f
                   with Image.open(f) as im:
-                      assert im.format == 'WEBP' and im.size == dims[kind], f
+                      assert im.format == 'WEBP' and im.size == (salt_dims if slug == 'dead-sea-salt' else dims)[kind], f
           code = Path('src/components/HomeHero.tsx').read_text()
           slides = [line for line in code.splitlines() if line.startswith('  { src:')]
           assert len(slides) == 12
