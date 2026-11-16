@@ -48,6 +48,7 @@ const page: AttractionDestinationContent = {
   historyTitle: "History and biblical significance",
   relatedTitle: "Explore related sites",
   updatedAt: capernaumSite.updatedAt,
+  contactIntroduction: "Send me your travel date, starting point and planned stops. I’ll reply personally and can help arrange a private journey.",
   hero: capernaumSite.hero,
   intro: capernaumSite.intro,
   facts: [
@@ -82,11 +83,11 @@ const page: AttractionDestinationContent = {
         title="The Greek Orthodox Church of the Twelve Apostles"
         image={{ src: "/images/attractions/capernaum-orthodox-church.webp", alt: "Greek Orthodox Church of the Twelve Apostles in Capernaum with bright red domes and crosses" }}
       >
-        <p>The neighbouring Greek Orthodox monastery is recognisable by its red-domed church and peaceful grounds. It is separate from the Franciscan archaeological site and offers a different religious and architectural experience.</p>
-        <p><strong>Visits must be arranged in advance</strong> with the monastery. Do not assume that a ticket for the ruins also provides admission here.</p>
+        <p>The neighbouring Greek Orthodox monastery is recognisable by its red-domed church and peaceful grounds. It offers a different religious and architectural experience from the ruins.</p>
+        <p><strong>Visits must be arranged in advance</strong> with the monastery.</p>
       </AttractionHighlight>
       <AttractionHighlight title="The national park and the lakeshore">
-        <p>Kfar Nahum National Park is a separately managed visitor area near the excavations. It includes lakeside space and a marine terminal, with its own hours and entry rules. Access to the terminal area is free without advance booking.</p>
+        <p>Kfar Nahum National Park offers a lakeside visitor area and marine terminal. Access to the terminal area is free without advance booking.</p>
         <p>Swimming is not permitted within the national park. Check signs on site and enjoy the views from the shore instead.</p>
       </AttractionHighlight>
     </div>
@@ -110,7 +111,7 @@ const page: AttractionDestinationContent = {
   ),
   visitorContent: (
     <div className="mt-4 space-y-4">
-      <p>There are three different places to enter in the Capernaum area. The table below compares their published visiting arrangements.</p>
+      <p>Compare opening hours, admission and booking requirements for the three visitor areas below.</p>
       <div className="grid gap-3 md:hidden" data-testid="capernaum-mobile-visitor-cards">
         {visitorAreas.map(site => <article key={site.name} className="rounded-xl border bg-card p-4">
           <h3 className="text-base font-semibold">{site.name}</h3>
@@ -150,20 +151,20 @@ const page: AttractionDestinationContent = {
           <ul className="list-disc space-y-1 pl-5 text-sm leading-relaxed sm:text-base">
             <li><strong>Accessibility:</strong> Accessible entrances and surfaced paths within the park. Check access to the separate archaeological and church grounds directly.</li>
             <li><strong>Refreshments:</strong> Accessible café and restaurant facilities with variable opening hours.</li>
-            <li><strong>Useful contacts:</strong> Archaeological site <a href={`tel:${capernaumSite.franciscan.phoneHref}`} className="font-semibold text-primary underline underline-offset-4">{capernaumSite.franciscan.phone}</a>; national park <a href={`tel:${capernaumSite.park.phoneHref}`} className="font-semibold text-primary underline underline-offset-4">{capernaumSite.park.phone}</a>.</li>
+            <li><strong>Useful contacts:</strong> Archaeological site <a href={`tel:${capernaumSite.franciscan.phoneHref}`} className="inline-block whitespace-nowrap font-semibold text-primary underline underline-offset-4" dir="ltr">{capernaumSite.franciscan.phone}</a>; national park <a href={`tel:${capernaumSite.park.phoneHref}`} className="inline-block whitespace-nowrap font-semibold text-primary underline underline-offset-4" dir="ltr">{capernaumSite.park.phone}</a>.</li>
           </ul>
         </div>
       </div>
       <ul className="list-disc space-y-2 pl-5 text-sm leading-relaxed sm:text-base">
         <li><strong>Clothing:</strong> Choose respectful dress for churches and sacred spaces.</li>
         <li><strong>Comfort:</strong> Wear shoes suitable for uneven stones; bring drinking water and sun protection.</li>
-        <li><strong>Orthodox monastery:</strong> Arrange a visit with the superior by phone at <a href="tel:+972532840991" className="font-semibold text-primary underline underline-offset-4">+972 53 284 0991</a>.</li>
+        <li><strong>Orthodox monastery:</strong> Arrange a visit with the superior by phone at <a href="tel:+972532840991" className="inline-block whitespace-nowrap font-semibold text-primary underline underline-offset-4" dir="ltr">053-2840991</a>.</li>
       </ul>
     </div>
   ),
   transportContent: (
     <div className="mt-4 space-y-4">
-      <p>Capernaum is on the <strong>northwestern shore of the Sea of Galilee</strong>, northeast of Tiberias. The Franciscan ruins, Orthodox monastery and national park are close to one another, but have <strong>different entrances</strong>.</p>
+      <p>Capernaum is on the <strong>northwestern shore of the Sea of Galilee</strong>, northeast of Tiberias.</p>
       <div className="grid gap-4 lg:grid-cols-[minmax(0,1.4fr)_minmax(0,1fr)]">
         <div className="space-y-3">
           <article className="rounded-xl border bg-card p-4">
@@ -194,13 +195,14 @@ const page: AttractionDestinationContent = {
         </ul>
       </div>
       <div className="rounded-xl border bg-card p-4 sm:p-5">
-        <h3 className="font-serif text-xl font-semibold">A half-day on the northern Sea of Galilee</h3>
+        <h3 className="font-serif text-xl font-semibold">A full-day Galilee and Sea of Galilee trip</h3>
+        <p className="mt-3 text-sm leading-relaxed sm:text-base">A day trip can start in <strong>Tel Aviv</strong> or <strong>Jerusalem</strong>, or be arranged as a <strong>shore excursion from Haifa Port</strong>. Include Capernaum and choose other stops to suit your interests, available time and departure point:</p>
         <ul className="mt-3 list-disc space-y-2 pl-5 text-sm leading-relaxed sm:text-base">
-          <li>Begin with the archaeological site at <strong>Capernaum</strong>.</li>
-          <li>Drive to <Link to="/attractions/tabgha/" className="font-semibold text-primary underline underline-offset-4">Tabgha</Link> for its mosaic and lakeside churches.</li>
-          <li>Continue to the <Link to="/attractions/mount-of-beatitudes/" className="font-semibold text-primary underline underline-offset-4">Mount of Beatitudes</Link> for a peaceful hilltop church and lake views.</li>
+          <li><strong>Northern lakeshore:</strong> <Link to="/attractions/tabgha/" className="font-semibold text-primary underline underline-offset-4">Tabgha</Link>, the <Link to="/attractions/mount-of-beatitudes/" className="font-semibold text-primary underline underline-offset-4">Mount of Beatitudes</Link> and <Link to="/attractions/magdala/" className="font-semibold text-primary underline underline-offset-4">Magdala</Link>.</li>
+          <li><strong>Galilee towns and the Jordan River:</strong> <Link to="/attractions/basilica-of-the-annunciation/" className="font-semibold text-primary underline underline-offset-4">Nazareth’s Basilica of the Annunciation</Link>, <Link to="/travel-blog/sea-of-galilee/" className="font-semibold text-primary underline underline-offset-4">Tiberias and the Sea of Galilee</Link>, and <Link to="/attractions/yardenit/" className="font-semibold text-primary underline underline-offset-4">Yardenit</Link>.</li>
+          <li><strong>Lower Galilee:</strong> <Link to="/attractions/mount-tabor/" className="font-semibold text-primary underline underline-offset-4">Mount Tabor</Link>.</li>
         </ul>
-        <p className="mt-3 text-sm text-muted-foreground">Add the Greek Orthodox monastery only if you have arranged a visit. Allow time for opening hours and short drives between the sites.</p>
+        <p className="mt-3 text-sm text-muted-foreground">These are options, not a checklist for a single day. Choose a realistic combination, especially when returning to a cruise ship. Add the Greek Orthodox monastery only if you have arranged a visit, and plan around opening hours.</p>
       </div>
       <figure className="overflow-hidden rounded-xl border bg-card">
         <img src="/images/attractions/capernaum-aerial-overview.webp" alt="Aerial view of the archaeological compound, shoreline and Sea of Galilee at Capernaum" loading="lazy" decoding="async" width={1100} height={714} className="h-44 w-full object-cover object-center sm:h-52" />

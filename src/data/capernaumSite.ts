@@ -14,14 +14,14 @@ export const capernaumSite = {
     afternoon: "14:00–17:00",
     lastMorningEntry: "11:40",
     lastAfternoonEntry: "16:30",
-    phone: "04 672 1059",
+    phone: "04-6721059",
     phoneHref: "+97246721059",
   },
   park: {
     regular: "08:00–16:00",
     fridays: "08:00–15:00",
     specialHolidayEves: "08:00–13:00",
-    phone: "04 679 3865",
+    phone: "04-6793865",
     phoneHref: "+97246793865",
   },
   sources: {
