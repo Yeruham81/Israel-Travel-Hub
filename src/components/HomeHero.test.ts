@@ -41,7 +41,7 @@ describe("homepage hero photo carousel", () => {
     // without changing or resizing the original Jerusalem image.
     expect(heroSlides[0]?.pos).toBe("55% 60%");
     expect(heroSlides[1]?.pos).toBe("center 60%");
-    expect(heroSlides[9]?.pos).toBe("center 54%");
+    expect(heroSlides[9]?.pos).toBe("center 18%");
     expect(heroSlides[7]?.caption).toBe("Akko Old City and harbour");
     expect(heroSlides[9]?.caption).toBe("Old Jaffa and its harbour");
     expect(heroSlides[9]?.src).toContain("hero-refresh-jaffa-port-v4-large.webp");
