@@ -1,0 +1,78 @@
+name: Diagnose Hostinger homepage cache (read only)
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/diagnose-hostinger-homepage-cache.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  inspect:
+    if: contains(github.event.head_commit.message, '[diagnose-hostinger-homepage]')
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      ORIGIN: ${{ vars.HOSTINGER_CANONICAL_ORIGIN || 'https://saddlebrown-guanaco-454061.hostingersite.com' }}
+      HOSTINGER_SSH_HOST: ${{ secrets.HOSTINGER_SSH_HOST }}
+      HOSTINGER_SSH_USER: ${{ secrets.HOSTINGER_SSH_USER }}
+      HOSTINGER_SSH_PRIVATE_KEY: ${{ secrets.HOSTINGER_SSH_PRIVATE_KEY }}
+      HOSTINGER_SSH_KNOWN_HOSTS: ${{ secrets.HOSTINGER_SSH_KNOWN_HOSTS }}
+      HOSTINGER_REMOTE_PATH: ${{ secrets.HOSTINGER_REMOTE_PATH }}
+      HOSTINGER_SSH_PORT: ${{ vars.HOSTINGER_SSH_PORT || '65002' }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Compare live homepage with exact HTML on Hostinger (read only)
+        shell: bash
+        run: |
+          set -euo pipefail
+          install -d -m 700 "$HOME/.ssh"
+          printf '%s\n' "$HOSTINGER_SSH_PRIVATE_KEY" > "$HOME/.ssh/hostinger_key"
+          printf '%s\n' "$HOSTINGER_SSH_KNOWN_HOSTS" > "$HOME/.ssh/known_hosts"
+          chmod 600 "$HOME/.ssh/hostinger_key" "$HOME/.ssh/known_hosts"
+          SSHOPTS="-p $HOSTINGER_SSH_PORT -i $HOME/.ssh/hostinger_key -o BatchMode=yes -o StrictHostKeyChecking=yes -o UserKnownHostsFile=$HOME/.ssh/known_hosts"
+          ssh $SSHOPTS "$HOSTINGER_SSH_USER@$HOSTINGER_SSH_HOST" "cat '$HOSTINGER_REMOTE_PATH/index.html'" > remote-index.html
+          curl -fsSL --retry 2 --max-time 30 -D normal-headers.txt "$ORIGIN/" -o public-index.html
+          curl -fsSL --retry 2 --max-time 30 -H "Cache-Control: no-cache" -D fresh-headers.txt "$ORIGIN/?ith-cache-check=0350ac8b" -o public-no-cache.html
+          printf 'REMOTE_HTML_SHA256='; sha256sum remote-index.html | cut -d' ' -f1
+          printf 'PUBLIC_HTML_SHA256='; sha256sum public-index.html | cut -d' ' -f1
+          printf 'NO_CACHE_HTML_SHA256='; sha256sum public-no-cache.html | cut -d' ' -f1
+          cmp -s remote-index.html public-index.html && echo 'NORMAL_PUBLIC_MATCHES_REMOTE=YES' || echo 'NORMAL_PUBLIC_MATCHES_REMOTE=NO'
+          cmp -s remote-index.html public-no-cache.html && echo 'CACHE_BUST_PUBLIC_MATCHES_REMOTE=YES' || echo 'CACHE_BUST_PUBLIC_MATCHES_REMOTE=NO'
+          echo 'PUBLIC_CACHE_HEADERS:'
+          grep -iE '^(HTTP/|cache-control:|age:|etag:|last-modified:|x-litespeed-cache:|x-hostinger|cf-cache-status:|vary:|server:|date:)' normal-headers.txt || true
+          echo 'CACHE_BUST_HEADERS:'
+          grep -iE '^(HTTP/|cache-control:|age:|etag:|last-modified:|x-litespeed-cache:|x-hostinger|cf-cache-status:|vary:|server:|date:)' fresh-headers.txt || true
+          python - <<'PY'
+          from html.parser import HTMLParser
+          import urllib.request, hashlib, pathlib, os
+          class Assets(HTMLParser):
+              def __init__(self): super().__init__(); self.urls=[]
+              def handle_starttag(self,tag,attrs):
+                  d=dict(attrs)
+                  for k in ('src','href'):
+                      v=d.get(k,'')
+                      if v and '.js' in v and v.startswith('/'):
+                          self.urls.append(v.split('?')[0])
+          for file in ('remote-index.html','public-index.html','public-no-cache.html'):
+              p=Assets(); p.feed(pathlib.Path(file).read_text(errors='replace'))
+              print(file+'_ASSETS',len(p.urls),'first',p.urls[:8])
+          parsed=Assets(); parsed.feed(pathlib.Path('public-index.html').read_text(errors='replace'))
+          checked=0
+          for asset in list(dict.fromkeys(parsed.urls))[:12]:
+              req=urllib.request.Request(os.environ['ORIGIN'].rstrip('/')+asset,headers={'Cache-Control':'no-cache'})
+              try:
+                  with urllib.request.urlopen(req,timeout=20) as r:
+                      data=r.read()
+                  print('PUBLIC_JS',asset,'sha256',hashlib.sha256(data).hexdigest(),'Jaffa54',b'center 54%' in data,'Jaffa60',b'center 60%' in data)
+                  checked+=1
+              except Exception as e:
+                  print('PUBLIC_JS_ERROR',asset,type(e).__name__,str(e)[:120])
+          print('PUBLIC_ASSETS_CHECKED',checked)
+          PY
+          echo 'SERVER_BUNDLE_COUNTS (historic hashed JS may remain; not proof of active use):'
+          ssh $SSHOPTS "$HOSTINGER_SSH_USER@$HOSTINGER_SSH_HOST" \
+            "find '$HOSTINGER_REMOTE_PATH/assets' -maxdepth 1 -name '*.js' -type f -exec grep -l -F 'Old Jaffa and its harbour' {} \; 2>/dev/null | wc -l" \
+            | awk '{print "SERVER_JAFFA_BUNDLE_COUNT="$1}'
