@@ -233,12 +233,12 @@ const page: AttractionDestinationContent = {
     { label: "Mount Tabor", to: "/attractions/mount-tabor/", note: "The Transfiguration church and scenic Lower Galilee viewpoints." },
   ],
   planningLinks: [
-    { label: "Sea of Galilee travel guide", to: "/travel-blog/sea-of-galilee/" },
-    { label: "7-day Israel itinerary", to: "/travel-blog/israel-itinerary-7-days/" },
-    { label: "10-day Israel itinerary", to: "/travel-blog/israel-itinerary-10-days/" },
-    { label: "Best time to visit Israel", to: "/travel-blog/best-time-to-visit-israel/" },
-    { label: "Getting around Israel", to: "/travel-blog/getting-around-israel/" },
-    { label: "Arrival tips at Ben Gurion Airport", to: "/travel-blog/ben-gurion-airport-arrival-tips/" },
+    { label: "Sea of Galilee travel guide", to: "/travel-blog/sea-of-galilee/", description: "Places to see around the lake.", icon: "region" },
+    { label: "7-day Israel itinerary", to: "/travel-blog/israel-itinerary-7-days/", description: "Plan a balanced week.", icon: "itinerary" },
+    { label: "10-day Israel itinerary", to: "/travel-blog/israel-itinerary-10-days/", description: "Explore more without rushing.", icon: "itinerary" },
+    { label: "Best time to visit Israel", to: "/travel-blog/best-time-to-visit-israel/", description: "Weather, seasons and holidays.", icon: "seasons" },
+    { label: "Getting around Israel", to: "/travel-blog/getting-around-israel/", description: "Trains, buses, taxis and driving.", icon: "transport" },
+    { label: "Arrival tips at Ben Gurion Airport", to: "/travel-blog/ben-gurion-airport-arrival-tips/", description: "Practical first steps on arrival.", icon: "arrival" },
   ],
   sources: [
     { label: "Israel Nature and Parks Authority — Hebrew visitor information", url: visitSources.parkHebrew, note: "Official notice about free marine-terminal access and national-park visitor rules." },

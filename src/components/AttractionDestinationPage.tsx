@@ -1,7 +1,7 @@
 import type { LinkProps } from "@tanstack/react-router";
 import type { ReactNode } from "react";
 import { SiteLink as Link } from "@/components/SiteLink";
-import { ArrowUpRight, Clock3, MapPin, Ticket, CalendarClock, Landmark, Route, Lightbulb } from "lucide-react";
+import { ArrowUpRight, BookOpen, CalendarDays, Clock3, MapPin, Ticket, CalendarClock, Landmark, Route, Lightbulb, Plane, Sun } from "lucide-react";
 import { AuthorCard } from "@/components/AuthorCard";
 import { GuideHeroLayout, GuideHeroMedia } from "@/components/GuideHeroMedia";
 import { Breadcrumbs, FaqList, OnThisPage, RelatedLinks, Section } from "@/components/Guide";
@@ -14,7 +14,13 @@ const factIcons = { location: MapPin, duration: Clock3, admission: Ticket, hours
 export type AttractionFact = { icon: keyof typeof factIcons; label: string; value: string; note?: string };
 export type AttractionSource = { label: string; url: string; note?: string };
 export type AttractionNearbyLink = { label: string; to: LinkProps["to"]; note?: string };
-export type AttractionPlanningLink = { label: string; to: LinkProps["to"] };
+const planningIcons = { region: BookOpen, itinerary: CalendarDays, seasons: Sun, transport: Route, arrival: Plane } as const;
+export type AttractionPlanningLink = {
+  label: string;
+  to: LinkProps["to"];
+  description?: string;
+  icon?: keyof typeof planningIcons;
+};
 /** Yellow-bulb editorial guidance. Advice may be first-person, but must not
  * invent a visit or personal observation the author has not reported. */
 export function AttractionPracticalTip({ children }: { children: ReactNode }) {
@@ -139,15 +145,23 @@ export function AttractionDestinationPage({ content }: { content: AttractionDest
       <section id="nearby" aria-label="Related sites" className="scroll-mt-24">
         <RelatedLinks title={content.relatedTitle ?? "Explore related sites"} currentPath={String(content.path)} items={content.nearby} illustrated maxPhotoCards={content.nearby.length >= 6 ? 6 : 4} />
       </section>
-      {!!content.planningLinks?.length && <nav id="trip-planning" aria-label="Plan your trip to Israel" className="mt-9 scroll-mt-24 rounded-xl border border-border/75 bg-secondary/20 p-4 sm:p-5" data-testid="attraction-trip-planning">
+      {!!content.planningLinks?.length && <nav id="trip-planning" aria-label="Plan your trip to Israel" className="mt-10 scroll-mt-24 rounded-xl border border-border/70 bg-secondary/15 p-4 sm:p-5" data-testid="attraction-trip-planning">
         <h2 className="text-lg font-semibold sm:text-xl">Plan your trip to Israel</h2>
-        <p className="mt-1 text-sm text-muted-foreground">Useful reading for organising your visit beyond this attraction.</p>
-        <ul className="mt-3 grid gap-x-5 gap-y-2 sm:grid-cols-2 lg:grid-cols-3">
-          {content.planningLinks.map(item => <li key={String(item.to)}>
-            <Link to={item.to} className="inline-flex items-start gap-1 text-sm font-medium text-primary underline-offset-4 hover:underline focus-visible:rounded-sm focus-visible:outline-2 focus-visible:outline-primary">
-              {item.label}<ArrowUpRight className="mt-0.5 size-3.5 shrink-0" aria-hidden="true" />
-            </Link>
-          </li>)}
+        <p className="mt-1 text-sm text-muted-foreground">A few practical guides to help you organise the rest of your journey.</p>
+        <ul className="mt-4 grid gap-2 sm:grid-cols-2 lg:grid-cols-3">
+          {content.planningLinks.map(item => {
+            const Icon = planningIcons[item.icon ?? "region"];
+            return <li key={String(item.to)} className="min-w-0">
+              <Link to={item.to} className="group flex h-full min-w-0 items-start gap-2.5 rounded-lg border border-border/75 bg-card px-3 py-3 text-foreground no-underline shadow-sm transition-all hover:border-primary/50 hover:shadow-md focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
+                <span className="flex size-8 shrink-0 items-center justify-center rounded-lg bg-primary/10 text-primary"><Icon className="size-4" aria-hidden="true" /></span>
+                <span className="min-w-0 flex-1">
+                  <span className="block text-sm font-semibold leading-snug group-hover:text-primary">{item.label}</span>
+                  {item.description && <span className="mt-1 block text-xs leading-relaxed text-muted-foreground">{item.description}</span>}
+                </span>
+                <ArrowUpRight className="mt-1 size-3.5 shrink-0 text-primary/75" aria-hidden="true" />
+              </Link>
+            </li>;
+          })}
         </ul>
       </nav>}
       <HomeContactForm key={String(content.path)} guide={guideContactCopy(content.title, "attraction", content.placeName)} />
