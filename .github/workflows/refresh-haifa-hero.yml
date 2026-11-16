@@ -1,0 +1,62 @@
+name: Refresh Haifa carousel photo from 5K original
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/refresh-haifa-hero.yml"
+
+permissions:
+  contents: write
+
+jobs:
+  refresh-haifa-image:
+    if: contains(github.event.head_commit.message, '[refresh-haifa-hero]')
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Checkout latest main
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          persist-credentials: true
+
+      - name: Install Pillow
+        run: python -m pip install --disable-pip-version-check "Pillow>=11,<13"
+
+      - name: Restore full-quality Haifa hero from Wikimedia original
+        run: python scripts/refresh_haifa_hero.py
+
+      - name: Verify responsive output and slide count before committing
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          from PIL import Image
+          sizes={"large":(2880,1440),"medium":(1920,960),"mobile":(900,1125)}
+          for size,expected in sizes.items():
+              path=Path(f"src/assets/home/hero-refresh-haifa-gardens-v2-{size}.webp")
+              with Image.open(path) as im:
+                  assert im.format=="WEBP" and im.size==expected,(size,im.size)
+              assert 70_000 < path.stat().st_size < 960_000, (size,path.stat().st_size)
+          code=Path("src/components/HomeHero.tsx").read_text()
+          assert len([line for line in code.splitlines() if line.startswith("  { src:")])==12
+          slides=[line for line in code.splitlines() if line.startswith("  { src:")]
+          assert "Jerusalem Old City from the Mount of Olives" in slides[0]
+          assert "Tel Aviv beachfront skyline" in slides[1]
+          assert "Haifa and the Bahá’í Gardens" in slides[2]
+          assert "Akko Old City and harbour" in slides[7]
+          assert "Old Jaffa and its harbour" in slides[9]
+          print("Three verified HiRes WebP outputs; 12 slides preserved")
+          PY
+
+      - name: Commit optimized images and code atomically
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add src/assets/home/hero-refresh-haifa-gardens-v2-*.webp src/components/HomeHero.tsx src/components/HeroCarousel.tsx src/components/HomeHero.test.ts docs/HOME_CAROUSEL_PHOTO_CREDITS.md
+          if git diff --cached --quiet; then
+            echo "No changes to commit"
+            exit 0
+          fi
+          git commit -m "Restore full-resolution Haifa carousel image and retina support"
+          git push origin HEAD:main
