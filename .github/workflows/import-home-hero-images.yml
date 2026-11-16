@@ -1,0 +1,58 @@
+name: Import 9 optimized homepage carousel photographs
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/import-home-hero-images.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  optimize-and-commit:
+    if: contains(github.event.head_commit.message, '[import-home-hero]')
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Check out the connected main branch
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+          ref: main
+
+      - name: Install image tools
+        run: python -m pip install --disable-pip-version-check 'Pillow>=11.0,<13'
+
+      - name: Fetch exact original photos, create responsive WebP variants and update carousel
+        run: python scripts/import_home_hero.py
+
+      - name: Check all nine images and protected slide positions
+        run: |
+          python - <<'PY'
+          import re
+          from pathlib import Path
+          text = Path('src/components/HomeHero.tsx').read_text()
+          slides = re.findall(r'^  \{ src: .*\},$', text, re.M)
+          assert len(slides) == 12, len(slides)
+          assert 'hJerLarge' in slides[0], slides[0]
+          assert 'hTaLarge' in slides[1], slides[1]
+          assert 'pAkkoDesktop' in slides[7], slides[7]
+          files = list(Path('src/assets/home').glob('hero-refresh-*.webp'))
+          assert len(files) == 27, len(files)
+          for path in files:
+              assert path.stat().st_size < 246000, path
+          print('Verified 12 slides, 3 unchanged positions, 27 optimized WebP variants')
+          PY
+
+      - name: Commit new image files and carousel in one atomic revision
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add src/assets/home/hero-refresh-*.webp src/components/HomeHero.tsx docs/HOME_CAROUSEL_PHOTO_CREDITS.md
+          if git diff --cached --quiet; then
+            echo "No image or carousel changes to commit"
+            exit 0
+          fi
+          git commit -m "Replace homepage carousel photos with 9 optimized panoramas (12 slides)"
+          git push origin HEAD:main
