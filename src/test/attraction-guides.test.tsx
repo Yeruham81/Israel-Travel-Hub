@@ -16,10 +16,9 @@ describe("17 original attraction destination guides", () => {
     for (const id of attractionIds) {
       const guide = attractionGuides[id];
       expect(guide.title.length).toBeGreaterThan(22);
-      // Capernaum uses a dedicated, fully researched content component.
-      // Only its metadata lives in the legacy registry; do not duplicate its
-      // highlights or visiting instructions in two independently edited copies.
-      if (id !== "capernaum") {
+      // Upgraded individual-attraction guides use dedicated, researched components.
+      // Their legacy registry entries hold metadata rather than duplicate body content.
+      if (id !== "capernaum" && id !== "tabgha") {
         expect(guide.highlights.length).toBeGreaterThanOrEqual(3);
         expect(guide.arrival.length).toBeGreaterThanOrEqual(3);
         expect(guide.faqs.length).toBeGreaterThanOrEqual(3);
