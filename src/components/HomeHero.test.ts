@@ -20,6 +20,11 @@ describe("homepage hero photo carousel", () => {
     expect(heroSlides[1]?.src).toContain("hero-refresh-tel-aviv-coastline-v2-large.webp");
     expect(heroSlides[1]?.srcMedium).toContain("hero-refresh-tel-aviv-coastline-v2-medium.webp");
     expect(heroSlides[1]?.srcSm).toContain("hero-refresh-tel-aviv-coastline-v2-mobile.webp");
+    expect(heroSlides[2]?.caption).toBe("Haifa and the Bahá’í Gardens");
+    expect(heroSlides[2]?.src).toContain("hero-refresh-haifa-gardens-v2-large.webp");
+    expect(heroSlides[2]?.srcMedium).toContain("hero-refresh-haifa-gardens-v2-medium.webp");
+    expect(heroSlides[2]?.srcSm).toContain("hero-refresh-haifa-gardens-v2-mobile.webp");
+    expect(heroSlides[2]?.highDensity).toBe(true);
     expect(heroSlides[7]?.caption).toBe("Akko Old City and harbour");
     expect(heroSlides[9]?.caption).toBe("Old Jaffa and its harbour");
     expect(heroSlides[9]?.src).toContain("hero-refresh-jaffa-port-v2-large.webp");

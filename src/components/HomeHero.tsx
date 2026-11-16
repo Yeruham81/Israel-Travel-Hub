@@ -7,9 +7,9 @@ import hTaMedium from "@/assets/home/hero-refresh-tel-aviv-coastline-v2-medium.w
 import hTaLarge from "@/assets/home/hero-refresh-tel-aviv-coastline-v2-large.webp";
 import pAkkoDesktop from "@/assets/home/hero-akko-aerial-large.webp";
 import pAkkoMobile from "@/assets/home/hero-akko-aerial-sm.webp";
-import pHaifaGardensLarge from "@/assets/home/hero-refresh-haifa-gardens-large.webp";
-import pHaifaGardensMedium from "@/assets/home/hero-refresh-haifa-gardens-medium.webp";
-import pHaifaGardensMobile from "@/assets/home/hero-refresh-haifa-gardens-mobile.webp";
+import pHaifaGardensLarge from "@/assets/home/hero-refresh-haifa-gardens-v2-large.webp";
+import pHaifaGardensMedium from "@/assets/home/hero-refresh-haifa-gardens-v2-medium.webp";
+import pHaifaGardensMobile from "@/assets/home/hero-refresh-haifa-gardens-v2-mobile.webp";
 import pMasadaDeadSeaLarge from "@/assets/home/hero-refresh-masada-dead-sea-large.webp";
 import pMasadaDeadSeaMedium from "@/assets/home/hero-refresh-masada-dead-sea-medium.webp";
 import pMasadaDeadSeaMobile from "@/assets/home/hero-refresh-masada-dead-sea-mobile.webp";
@@ -38,7 +38,7 @@ import pJerusalemJaffaGateMobile from "@/assets/home/hero-refresh-jerusalem-jaff
 export const heroSlides: HeroSlide[] = [
   { src: hJerLarge, srcSm: hJerSm, srcMedium: hJerMedium, caption: "Jerusalem Old City from the Mount of Olives", alt: "Jerusalem's Old City and the Dome of the Rock seen from the Mount of Olives", pos: "55% center" },
   { src: hTaLarge, srcSm: hTaSm, srcMedium: hTaMedium, caption: "Tel Aviv beachfront skyline", alt: "Tel Aviv beaches, Mediterranean coastline and high-rise skyline along the seafront promenade", pos: "center 52%", width: 1800, height: 600 },
-  { src: pHaifaGardensLarge, srcSm: pHaifaGardensMobile, srcMedium: pHaifaGardensMedium, caption: "Haifa and the Bahá’í Gardens", alt: "The Bahá’í Gardens, Haifa city and the Mediterranean port seen from Mount Carmel", pos: "center", width: 1680, height: 840 },
+  { src: pHaifaGardensLarge, srcSm: pHaifaGardensMobile, srcMedium: pHaifaGardensMedium, caption: "Haifa and the Bahá’í Gardens", alt: "The Bahá’í Gardens, Haifa city and the Mediterranean port seen from Mount Carmel", pos: "center 60%", width: 2880, height: 1440, highDensity: true },
   { src: pMasadaDeadSeaLarge, srcSm: pMasadaDeadSeaMobile, srcMedium: pMasadaDeadSeaMedium, caption: "Masada above the Dead Sea", alt: "Aerial view of Masada's ancient fortress on a sunlit cliff overlooking the Dead Sea", pos: "center", width: 1680, height: 840 },
   { src: pCaesareaCoastLarge, srcSm: pCaesareaCoastMobile, srcMedium: pCaesareaCoastMedium, caption: "Caesarea’s ancient harbour", alt: "Aerial view of the ancient harbour, turquoise Mediterranean water and shoreline near Caesarea", pos: "center", width: 1680, height: 840 },
   { src: pJerusalemJaffaGateLarge, srcSm: pJerusalemJaffaGateMobile, srcMedium: pJerusalemJaffaGateMedium, caption: "Jerusalem Old City walls at Jaffa Gate", alt: "Visitors walking beside Jerusalem's old city walls near Jaffa Gate and the Tower of David", pos: "center", width: 1680, height: 840 },

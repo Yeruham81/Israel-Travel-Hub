@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useRef, useState, type ReactNode } from "react";
 
-export type HeroSlide = { src: string; srcSm: string; srcMedium: string; alt: string; caption: string; pos?: string; width?: number; height?: number };
+export type HeroSlide = { src: string; srcSm: string; srcMedium: string; alt: string; caption: string; pos?: string; width?: number; height?: number; highDensity?: boolean };
 
 const INTERVAL = 6000;
 
@@ -108,7 +108,7 @@ export function HeroCarousel({ slides, children }: { slides: HeroSlide[]; childr
             {(mounted.has(i) || i === index) && (
               <picture className="absolute inset-0 block h-full w-full">
                 <source media="(max-width: 767px)" srcSet={s.srcSm} />
-                <source media="(max-width: 1800px)" srcSet={s.srcMedium} />
+                <source media="(max-width: 1800px)" srcSet={s.highDensity ? s.srcMedium + " 1x, " + s.src + " 2x" : s.srcMedium} />
                 <img src={s.src} alt={s.alt} width={s.width ?? 1920} height={s.height ?? 872} fetchPriority={i === 0 ? "high" : "auto"} decoding="async" onLoad={(e) => onImgLoad(i, e.currentTarget)} onError={() => onImgError(i)} className="absolute inset-0 h-full w-full object-cover" style={{ objectPosition: s.pos ?? "center" }} />
               </picture>
             )}

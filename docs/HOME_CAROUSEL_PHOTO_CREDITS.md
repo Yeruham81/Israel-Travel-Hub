@@ -23,3 +23,10 @@ All nine photos are modified versions (crop, resize, color-mode conversion, WebP
 - **Slide 2 — Tel Aviv beachfront skyline:** updated from the site owner's original photograph `tel-aviv-coastline_3.jpg` (1800 × 600). Previous 111 KB and 101 KB WebP variants showed softness; the new `hero-refresh-tel-aviv-coastline-v2-*.webp` derivatives use higher-quality encoding. Desktop and medium versions both retain the full 1800 × 600 source dimensions, avoiding unnecessary 1536 px scaling. A specially cropped portrait mobile version replaces the heavily downsized 768 × 256 file.
 - **Slide 10 — Old Jaffa harbour:** updated from the site-owner-supplied file `old_jaffa_harbor_at_golden_hour.png`, an AI-assisted image. The `hero-refresh-jaffa-port-v2-*.webp` variants use optimized local WebP, with distinct desktop, medium, and mobile crops. The original historic Wikimedia photo's attribution above is retained solely for its superseded version, not this current slide.
 - All other ten slide positions and their respective imagery remain unchanged. The carousel continues to have exactly twelve slides.
+
+- Slide 3 — Haifa and the Bahá’í Gardens: regenerated from the verified
+  Wikimedia Commons original 5,268 x 3,136 photograph, rather than a reduced thumbnail.
+  Responsive, locally hosted WebP outputs use 2,880 x 1,440, 1,920 x 960,
+  and 900 x 1,125 pixels. The slide can request its larger file on
+  high-pixel-density desktop screens instead of upscaling the medium image.
+  Original photographer and licence are listed in the provenance table above.
