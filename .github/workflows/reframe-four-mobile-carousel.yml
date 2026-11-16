@@ -1,0 +1,82 @@
+name: Reframe four mobile carousel photos (source crops)
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/reframe-four-mobile-carousel.yml"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: mobile-hero-cropping
+  cancel-in-progress: false
+
+jobs:
+  reframe:
+    if: contains(github.event.head_commit.message, '[reframe-four-mobile]')
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - name: Check out latest main
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          persist-credentials: true
+      - name: Install Pillow
+        run: python -m pip install --disable-pip-version-check 'Pillow>=11,<13'
+      - name: Crop exactly four source images; preserve all desktop images and captions
+        run: python scripts/reframe_four_mobile_hero.py
+      - name: Validate WebP, size budgets and protected slides
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          from PIL import Image
+          root=Path('src/assets/home')
+          expected={
+              'hero-refresh-tel-aviv-coastline-v3-mobile.webp': (780,600),
+              'hero-refresh-jerusalem-jaffa-gate-v5-mobile.webp': (720,900),
+              'hero-refresh-jaffa-port-v5-mobile.webp': (720,900),
+              'hero-refresh-tel-aviv-sarona-v5-mobile.webp': (720,900),
+          }
+          for name, dimensions in expected.items():
+              path=root/name
+              assert path.is_file(), name
+              assert 10000 < path.stat().st_size <= 145000, (name, path.stat().st_size)
+              with Image.open(path) as image:
+                  assert image.format=='WEBP' and image.size==dimensions, (name, image.size)
+              print(name, dimensions, path.stat().st_size)
+          src=Path('src/components/HomeHero.tsx').read_text()
+          slides=[line for line in src.splitlines() if line.startswith('  { src:')]
+          assert len(slides)==12
+          for i,name in [(1,'Tel Aviv beachfront skyline'),(5,'Jerusalem Old City walls at Jaffa Gate'),
+                         (9,'Old Jaffa and its harbour'),(11,'Tel Aviv’s modern skyline')]:
+              assert name in slides[i], (i,slides[i])
+          assert 'pos: "center 18%"' in slides[9]
+          assert 'hero-jerusalem-sm-optimized.webp' in src
+          print('Desktop positions and protected Jerusalem first slide remain unchanged.')
+          PY
+      - name: Set up Bun
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: "1.4.4"
+      - name: Install locked app dependencies
+        run: bash scripts/install-ci-dependencies.sh
+      - name: Run carousel and mobile performance regression tests
+        run: bun x vitest run src/components/HomeHero.test.ts src/test/home-mobile-performance.test.ts
+      - name: Commit only mobile assets and their references
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add \
+            src/assets/home/hero-refresh-tel-aviv-coastline-v3-mobile.webp \
+            src/assets/home/hero-refresh-jerusalem-jaffa-gate-v5-mobile.webp \
+            src/assets/home/hero-refresh-jaffa-port-v5-mobile.webp \
+            src/assets/home/hero-refresh-tel-aviv-sarona-v5-mobile.webp \
+            src/components/HomeHero.tsx src/components/HomeHero.test.ts \
+            src/test/home-mobile-performance.test.ts \
+            docs/HOME_CAROUSEL_PHOTO_CREDITS.md
+          git diff --cached --exit-code && { echo 'No changes to commit'; exit 0; } || true
+          git commit -m "Refine 4 mobile-only hero image crops from available original photos"
+          git push origin HEAD:main
