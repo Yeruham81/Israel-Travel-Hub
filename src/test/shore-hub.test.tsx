@@ -23,9 +23,9 @@ describe("Israel shore excursion hub", () => {
   it("connects useful destination choices to the matching return-tour catalog", async () => {
     const router = await renderHub();
     expect(screen.getAllByRole("heading", { level: 1 })).toHaveLength(1);
-    expect(screen.getByRole("heading", { name: "Your cruise port makes the difference" })).toBeInTheDocument();
-    expect(screen.getByRole("heading", { name: "Private driver or guided shore excursion?" })).toBeInTheDocument();
-    const destinations = screen.getByRole("region", { name: "Where can you go on an Israel shore excursion?" });
+    expect(screen.getByRole("heading", { name: "Choose your cruise port" })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "Private driver or guided excursion?" })).toBeInTheDocument();
+    const destinations = screen.getByRole("region", { name: "Explore popular shore excursion destinations" });
     for (const choice of shoreHubExperiences.flatMap((experience) => experience.links)) {
       const link = within(destinations).getByRole("link", { name: choice.label });
       const url = new URL(link.getAttribute("href")!, CANONICAL_ORIGIN);
@@ -39,32 +39,38 @@ describe("Israel shore excursion hub", () => {
     expect(router.state.location.search).toEqual({ destination: "masada" });
   });
 
-  it("shows matching destination photos, equal light callout buttons and on-demand photo attribution", async () => {
+  it("uses compact illustrated port choices, matching primary CTAs and on-demand credits", async () => {
     await renderHub();
-    const destinations = screen.getByRole("region", { name: "Where can you go on an Israel shore excursion?" });
+    const destinations = screen.getByRole("region", { name: "Explore popular shore excursion destinations" });
     const homepageShorePhoto = services.find(service => service.id === "shore-excursions")?.feature?.src;
     expect(homepageShorePhoto).toBeTruthy();
     expect(within(screen.getByTestId("hub-header")).getByRole("img", { name: /Cruise passengers walking/ })).toHaveAttribute("src", homepageShorePhoto);
-    expect(within(destinations).getAllByRole("img")).toHaveLength(4);
+    // Destination summaries now use compact illustrated icons, rather than
+    // repeating the six destination-guide photos further down the same page.
+    expect(within(destinations).queryAllByRole("img")).toHaveLength(0);
     for (const experience of shoreHubExperiences) {
       const card = destinations.querySelector(`[data-experience="${experience.id}"]`);
       expect(card).not.toBeNull();
-      expect(card?.querySelector("img")?.getAttribute("alt")?.length).toBeGreaterThan(12);
+      expect(card?.querySelector("svg")).not.toBeNull();
+      expect(card).toHaveTextContent(experience.title);
     }
     const topChoices = [
       screen.getByRole("link", { name: "Excursions from Ashdod" }),
       screen.getByRole("link", { name: "Excursions from Haifa" }),
     ];
+    const quoteNav = screen.getByRole("navigation", { name: "Private cruise-port quote requests" });
     const bottomChoices = [
-      screen.getByRole("link", { name: "Plan my day from Ashdod" }),
-      screen.getByRole("link", { name: "Plan my day from Haifa" }),
+      within(quoteNav).getByRole("link", { name: "From Ashdod" }),
+      within(quoteNav).getByRole("link", { name: "From Haifa" }),
     ];
     expect(topChoices[0]).toHaveClass("btn-primary");
     expect(topChoices[1]).toHaveClass("btn-primary");
-    expect(bottomChoices[0]).toHaveClass("btn-light");
-    expect(bottomChoices[1]).toHaveClass("btn-light");
+    expect(bottomChoices[0]).toHaveClass("btn-primary");
+    expect(bottomChoices[1]).toHaveClass("btn-primary");
+    expect(bottomChoices[0]).toHaveAttribute("href", "/shore-excursions/ashdod/#request-quote");
+    expect(bottomChoices[1]).toHaveAttribute("href", "/shore-excursions/haifa/#request-quote");
     expect(within(screen.getByTestId("hub-header")).getByRole("img", { name: "Moshe Barak" })).toBeInTheDocument();
-    const credits = screen.getByText("Image credits").closest("details");
+    const credits = screen.getByText("Photo credits").closest("details");
     expect(credits).not.toBeNull();
     expect(credits?.hasAttribute("open")).toBe(false);
     expect(credits?.querySelectorAll('a[href*="creativecommons.org"]').length).toBeGreaterThan(0);
@@ -73,13 +79,15 @@ describe("Israel shore excursion hub", () => {
 
   it("provides six illustrated destination guides, working internal links and port-specific inquiry anchors", async () => {
     const router = await renderHub();
-    const guides = screen.getByRole("region", { name: "Get to know the places on your route" });
-    expect(within(guides).getAllByRole("article")).toHaveLength(6);
+    const guides = screen.getByRole("region", { name: "Discover the places along your route" });
+    const related = within(guides).getAllByRole("link");
+    expect(related).toHaveLength(6);
     expect(within(guides).getAllByRole("img")).toHaveLength(6);
-    expect(within(guides).getAllByRole("link").every((link) => link.textContent === "Read More")).toBe(true);
+    expect(related.every(link => link.textContent?.includes("Read guide"))).toBe(true);
     expect(guides).not.toHaveTextContent("→");
-    expect(screen.getByRole("link", { name: "Plan my day from Ashdod" })).toHaveAttribute("href", "/shore-excursions/ashdod/#request-quote");
-    expect(screen.getByRole("link", { name: "Plan my day from Haifa" })).toHaveAttribute("href", "/shore-excursions/haifa/#request-quote");
+    const quoteNav = screen.getByRole("navigation", { name: "Private cruise-port quote requests" });
+    expect(within(quoteNav).getByRole("link", { name: "From Ashdod" })).toHaveAttribute("href", "/shore-excursions/ashdod/#request-quote");
+    expect(within(quoteNav).getByRole("link", { name: "From Haifa" })).toHaveAttribute("href", "/shore-excursions/haifa/#request-quote");
     for (const link of document.querySelectorAll('main a[href^="/"]')) {
       const url = new URL(link.getAttribute("href")!, CANONICAL_ORIGIN);
       expect(router.matchRoutes(url.pathname).at(-1)?.routeId.replace(/\/$/, "")).toBe(url.pathname.replace(/\/$/, ""));
