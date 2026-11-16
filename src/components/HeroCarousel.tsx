@@ -117,8 +117,15 @@ export function HeroCarousel({ slides, children }: { slides: HeroSlide[]; childr
       </div>
       <div className="absolute inset-0 bg-gradient-to-r from-black/50 via-black/20 to-black/5 max-md:bg-gradient-to-t max-md:from-black/60 max-md:via-black/30 max-md:to-black/10" aria-hidden />
       <div className="relative mx-auto max-w-[90rem]">{children}</div>
-      <div className="relative mx-auto mt-14 flex max-w-[90rem] justify-center pb-3 md:mt-20 md:pb-4">
-        <p className="sr-only" aria-live={running ? "off" : "polite"}>{slides[index]?.caption}</p>
+      <div className="relative mx-auto mt-14 flex max-w-[90rem] flex-col items-center gap-1.5 px-4 pb-3 md:mt-20 md:px-8 md:pb-4">
+        <p
+          className="pointer-events-none w-full text-left text-xs font-medium leading-4 text-white/90 lg:absolute lg:bottom-4 lg:left-8 lg:w-auto lg:max-w-[calc(50%-150px)]"
+          style={{ textShadow: "0 1px 3px rgba(0,0,0,0.95), 0 2px 8px rgba(0,0,0,0.75)" }}
+          aria-live={running ? "off" : "polite"}
+          aria-atomic="true"
+        >
+          {slides[index]?.caption}
+        </p>
         <div className="flex items-center justify-center gap-0.5" role="group" aria-label="Choose a place">
           {slides.map((s, i) => (
             <button
