@@ -39,6 +39,7 @@ ORIGINALS = [
 ]
 
 SIZES = {"large": (2048, 1024), "medium": (1600, 800), "mobile": (720, 900)}
+FALLBACK_SIZES = {"dead-sea-salt": {"large": (1600, 800), "medium": (1280, 640), "mobile": (720, 900)}}
 TARGETS = {"large": 360_000, "medium": 240_000, "mobile": 95_000}
 CEILINGS = {"large": 480_000, "medium": 300_000, "mobile": 150_000}
 UA = {"User-Agent": "IsraelTravelHubImages/1.0 (original photo credit and optimization)"}
@@ -60,7 +61,7 @@ def fetch_bytes(url, limit):
     raise RuntimeError("Download failed: " + str(last))
 
 
-def full_resolution(name, expected_license):
+def full_resolution(name, expected_license, slug):
     args = urllib.parse.urlencode({
         "action": "query", "format": "json", "formatversion": "2",
         "titles": "File:" + name, "prop": "imageinfo", "iiprop": "url|size|extmetadata",
@@ -73,20 +74,21 @@ def full_resolution(name, expected_license):
         raise ValueError(f"License mismatch: {name} {license_name} vs {expected_license}")
     if not info["url"].startswith("https://upload.wikimedia.org/"):
         raise ValueError("Unexpected full-resolution source host")
-    if info["width"] < 2048 or info["height"] < 1024:
-        raise ValueError(f"Cannot crop 2048 without enlargement: {name} {info['width']}x{info['height']}")
+    required = FALLBACK_SIZES.get(slug, SIZES)["large"]
+    if info["width"] < required[0] or info["height"] < required[1]:
+        raise ValueError(f"Cannot crop {required} without enlargement: {name} {info['width']}x{info['height']}")
     raw = fetch_bytes(info["url"], 40_000_000)
     with Image.open(io.BytesIO(raw)) as image:
         im = ImageOps.exif_transpose(image).convert("RGB")
         im.load()
-    if im.width < 2048 or im.height < 1024:
+    if im.width < required[0] or im.height < required[1]:
         raise ValueError(f"Source too small after EXIF transpose: {name} {im.size}")
     print(f"ORIGINAL {name}: {im.width}x{im.height}, {len(raw)} bytes", flush=True)
     return im
 
 
 def save_webp(photo, slug, variant, center):
-    dims = SIZES[variant]
+    dims = FALLBACK_SIZES.get(slug, SIZES)[variant]
     # Fit is always a *crop + downsample*, never a scale-up.
     if photo.width < dims[0] or photo.height < dims[1]:
         raise ValueError(f"Refusing enlargement: {slug}, {photo.size} -> {dims}")
@@ -127,11 +129,12 @@ def replace_slide_paths(code, index, slug):
         import_lines.append((matches[0], variable, "mobile" if marker == "srcSm:" else "medium" if marker == "srcMedium:" else "large"))
     for j, variable, variant in import_lines:
         lines[j] = f'import {variable} from "@/assets/home/hero-refresh-{slug}-v4-{variant}.webp";\n'
-    updated = re.sub(r"width:\s*\d+,\s*height:\s*\d+", "width: 2048, height: 1024", current)
+    wide, tall = FALLBACK_SIZES.get(slug, SIZES)["large"]
+    updated = re.sub(r"width:\s*\d+,\s*height:\s*\d+", f"width: {wide}, height: {tall}", current)
     if updated == current:
         raise ValueError("Cannot find dimension metadata for " + slug)
     if "highDensity: true" not in updated:
-        updated = updated.replace("height: 1024", "height: 1024, highDensity: true")
+        updated = updated.replace(f"height: {tall}", f"height: {tall}, highDensity: true")
     lines[slides[index]] = updated
     return "".join(lines)
 
@@ -148,7 +151,8 @@ def update_code(processed):
     assert len(after_slides) == 12
     assert all(after_slides[i] == old for i, old in protected.items())
     for index, slug in processed:
-        assert f"width: 2048, height: 1024" in after_slides[index], slug
+        width, height = FALLBACK_SIZES.get(slug, SIZES)["large"]
+        assert f"width: {width}, height: {height}" in after_slides[index], slug
     HERO.write_text(code)
 
     # Preserve all the pre-existing behavioral checks, updating only changed path assertions.
@@ -169,9 +173,9 @@ def update_code(processed):
     const optimizedSlugs = {items};
     for (const slug of optimizedSlugs) {{
       for (const [variant, budget] of [["large", 480000], ["medium", 300000], ["mobile", 150000]] as const) {{
-        const file = \`hero-refresh-\${{slug}}-v4-\${{variant}}.webp\`;
+        const file = `hero-refresh-${{slug}}-v4-${{variant}}.webp`;
         expect(slides).toContain(file);
-        expect(bytes(\`src/assets/home/\${{file}}\`)).toBeLessThanOrEqual(budget);
+        expect(bytes(`src/assets/home/${{file}}`)).toBeLessThanOrEqual(budget);
       }}
     }}
 ''' + perf[end:]
@@ -184,7 +188,7 @@ def main():
     failures = []
     for index, slug, name, lic, desktop_center, mobile_center in ORIGINALS:
         try:
-            source = full_resolution(name, lic)
+            source = full_resolution(name, lic, slug)
             for label in SIZES:
                 save_webp(source, slug, label, mobile_center if label == "mobile" else desktop_center)
             successes.append((index, slug))
@@ -200,18 +204,21 @@ def main():
     text = CREDITS.read_text()
     text += "\n## 2048px responsive carousel update\n\n"
     text += ("Each processed landscape photo was cropped from its actual original Commons image; "
-             "not enlarged from a smaller derivative. New WebP variants: 2048×1024 desktop, "
-             "1600×800 medium and 720×900 portrait mobile. Jerusalem slide 1 remains completely "
-             "unchanged. Tel Aviv slide 2 retains its maximum original 1800×600 pixels; Akko "
+             "not enlarged from a smaller derivative. Normal WebP variants are 2048×1024 desktop, "
+             "1600×800 medium and 720×900 mobile. The Dead Sea sunrise original is only "
+             "1600px, so its derivatives are 1600×800, 1280×640 and 720×900, without upscaling. "
+             "Jerusalem slide 1 remains completely unchanged; Tel Aviv slide 2 retains its "
+             "existing 1800×600px asset pending a usable 1920px source file; Akko "
              "already has a 2048px desktop file and a compact mobile variant.\n\n")
     for _, slug in successes:
-        text += f"- {slug}: 2048px crop generated from full-resolution original.\n"
+        original_width = FALLBACK_SIZES.get(slug, SIZES)["large"][0]
+        text += f"- {slug}: {original_width}px crop generated from full-resolution original.\n"
     for slug, reason in failures:
         text += f"- {slug}: unchanged because conversion could not be safely completed ({reason}).\n"
     CREDITS.write_text(text)
     (ROOT / "docs/HOME_CAROUSEL_2048_REPORT.json").write_text(json.dumps({
         "processed": [slug for _, slug in successes],
-        "unchanged": {"0": "Jerusalem intentionally preserved", "1": "Tel Aviv original only 1800px",
+        "unchanged": {"0": "Jerusalem intentionally preserved", "1": "Tel Aviv current 1800px kept (new 1920px image not accessible as a file)",
                       "7": "Akko already 2048px"},
         "skipped": failures
     }, ensure_ascii=False, indent=2) + "\n")
