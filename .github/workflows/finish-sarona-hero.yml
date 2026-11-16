@@ -1,0 +1,51 @@
+name: Finish Sarona skyline hero conversion from full-resolution original
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/finish-sarona-hero.yml"
+
+permissions:
+  contents: write
+
+jobs:
+  finish:
+    if: contains(github.event.head_commit.message, '[finish-sarona-hero]')
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          persist-credentials: true
+      - run: python -m pip install --disable-pip-version-check 'Pillow>=11,<13'
+      - name: Download original, crop & compress without upscaling
+        run: python scripts/finish_home_carousel_sarona.py
+      - name: Verify actual 2048px/WebP dimensions and file sizes
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          from PIL import Image
+          for kind, dims, limit in [('large',(2048,1024),480000),('medium',(1600,800),300000),('mobile',(720,900),150000)]:
+              p = Path(f'src/assets/home/hero-refresh-tel-aviv-sarona-v4-{kind}.webp')
+              assert p.stat().st_size <= limit, p
+              with Image.open(p) as image:
+                  assert image.size == dims and image.format == 'WEBP', p
+          print('Verified original-resolution derivatives')
+          PY
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: "1.4.4"
+      - run: bash scripts/install-ci-dependencies.sh
+      - name: Test carousel and mobile performance
+        run: bun x vitest run src/components/HomeHero.test.ts src/test/home-mobile-performance.test.ts
+      - name: Save source-derived assets and references
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add src/assets/home/hero-refresh-tel-aviv-sarona-v4-*.webp \
+            src/components/HomeHero.tsx src/test/home-mobile-performance.test.ts \
+            docs/HOME_CAROUSEL_PHOTO_CREDITS.md docs/HOME_CAROUSEL_2048_REPORT.json
+          git commit -m "Finish 2048px original crop for Tel Aviv Sarona hero"
+          git push origin HEAD:main
