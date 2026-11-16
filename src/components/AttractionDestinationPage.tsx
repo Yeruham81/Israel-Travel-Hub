@@ -105,10 +105,10 @@ export function AttractionHighlight({
 export function AttractionDestinationPage({ content }: { content: AttractionDestinationContent }) {
   const sections: [string, string][] = [
     ["highlights", "What to see"],
-    ...(content.historyContent ? [["history", "History and significance"] as [string, string]] : []),
     ["visitor-info", "Opening hours & tickets"],
     ["getting-there", "How to get there"],
     ["visit-plan", "Plan your visit"],
+    ...(content.historyContent ? [["history", "History and significance"] as [string, string]] : []),
     ...(content.tourContent ? [["tours", "Tours and private visits"] as [string, string]] : []),
     ["faq", "Questions"],
     ["nearby", "Related sites"],
@@ -136,10 +136,10 @@ export function AttractionDestinationPage({ content }: { content: AttractionDest
       <Section id="highlights" title={"What to see at " + content.placeName} className="mt-9">
         {content.highlightContent}
       </Section>
-      {content.historyContent && <Section id="history" title={content.historyTitle ?? "History and significance"}>{content.historyContent}</Section>}
       <Section id="visitor-info" title="Opening hours, tickets and practical information">{content.visitorContent}</Section>
       <Section id="getting-there" title={"How to get to " + content.placeName}>{content.transportContent}</Section>
       <Section id="visit-plan" title="How to plan your visit">{content.itineraryContent}</Section>
+      {content.historyContent && <Section id="history" title={content.historyTitle ?? "History and significance"}>{content.historyContent}</Section>}
       {content.tourContent && <Section id="tours" title="Guided tours and private visits">{content.tourContent}</Section>}
       <FaqList faqs={content.faqs} />
       <section id="nearby" aria-label="Related sites" className="scroll-mt-24">

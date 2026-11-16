@@ -16,9 +16,16 @@ describe("17 original attraction destination guides", () => {
     for (const id of attractionIds) {
       const guide = attractionGuides[id];
       expect(guide.title.length).toBeGreaterThan(22);
-      expect(guide.highlights.length).toBeGreaterThanOrEqual(3);
-      expect(guide.arrival.length).toBeGreaterThanOrEqual(3);
-      expect(guide.faqs.length).toBeGreaterThanOrEqual(3);
+      // Capernaum uses a dedicated, fully researched content component.
+      // Only its metadata lives in the legacy registry; do not duplicate its
+      // highlights or visiting instructions in two independently edited copies.
+      if (id !== "capernaum") {
+        expect(guide.highlights.length).toBeGreaterThanOrEqual(3);
+        expect(guide.arrival.length).toBeGreaterThanOrEqual(3);
+        expect(guide.faqs.length).toBeGreaterThanOrEqual(3);
+      } else {
+        expect(guide.highlights).toHaveLength(0);
+      }
       const p = attractionPath(id);
       expect(router.matchRoutes(p).at(-1)?.routeId).not.toBe(rootRouteId);
       expect(attractionMeta(id).links[0]?.href).toContain(p);

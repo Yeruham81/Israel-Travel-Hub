@@ -64,3 +64,23 @@ the corresponding structured-data dateModified. Keep the site owner's voice
 in first-person singular when describing his services, and preserve
 affiliate tracking on linked external tour catalogues. Booking inquiries
 require confirmation.
+
+## Reference implementation and data ownership
+
+Capernaum's high-value facts, contacts, title, URL metadata, operator hours,
+sources, and update date are centralised in `src/data/capernaumSite.ts`.
+Its full editorial body is in `src/components/CapernaumAttractionPage.tsx`.
+The older `attractionsNorth.ts` registry deliberately contains metadata only
+for Capernaum; never recreate a second independently maintained guide there.
+The shared page template displays the history section **after** practical
+visiting hours, navigation, and suggested itineraries for visitor intent.
+
+The park's official published summer Friday window is exceptionally short.
+Do not rewrite or guess a more convenient schedule; label it as published and
+direct travellers to check the park authority before visiting.
+
+Photographs contributed for Capernaum were resized and converted into distinct
+local WebP assets: the Orthodox church, an aerial overview of the shore and
+ruins, and an aerial photograph of the synagogue. Avoid duplicate uses within
+the same page. Keep the Galilee tour-category referral generic rather than
+adding individual tours to each attraction page.

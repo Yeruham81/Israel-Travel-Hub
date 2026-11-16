@@ -1,10 +1,10 @@
 import type { Attraction } from "@/data/attractionGuideTypes";
+import { capernaumSite } from "@/data/capernaumSite";
 import haifaImg from "@/assets/haifa/panorama.webp";
 import akkoImg from "@/assets/shore-excursions/akko-port.jpg";
 import lake from "@/assets/home/tiberias-lake.webp";
 import roshHanikra from "@/assets/guides/rosh-hanikra.jpg";
 import mountTabor from "@/assets/guides/mount-tabor.jpg";
-import capernaum from "@/assets/guides/capernaum.jpg";
 import tabgha from "@/assets/guides/tabgha.jpg";
 import mountOfBeatitudes from "@/assets/guides/mount-of-beatitudes.jpg";
 export const northernAttractions: Record<string, Attraction> = {
@@ -84,26 +84,24 @@ export const northernAttractions: Record<string, Attraction> = {
  faqs:[{q:"Can a large tour bus drive to the church?",a:"Hilltop vehicle restrictions can apply; check the current local shuttle or taxi arrangement."},{q:"Is Mount Tabor the same as Mount of Beatitudes?",a:"No. Mount Tabor is in Lower Galilee; Mount of Beatitudes overlooks the Sea of Galilee."},{q:"Is the summit open all day?",a:"No. Church and site access depend on current visiting hours and services."}],
  official:[{label:"Christian Information Center",url:"https://www.cicts.org/"}],
 },
+// The complete Capernaum article has its own destination-page component.
+// This registry entry supplies SEO/directory metadata only; do not maintain a
+// second, obsolete version of its visitor instructions, highlights and FAQs.
 "capernaum":{
- title:"Capernaum (Kfar Nahum): Visitor Guide",
- description:"Plan a visit to Capernaum: ancient synagogue, traditional Peter's house, Franciscan opening hours and admission, Orthodox monastery and access near the Sea of Galilee.",
- region:"Sea of Galilee",image:{src:capernaum,alt:"Excavated stone village and limestone synagogue ruins at Capernaum by the Sea of Galilee"},duration:"60–90 minutes at the Franciscan archaeological site",
- intro:"On the northwestern shore of the Sea of Galilee, Capernaum preserves an ancient Jewish village associated with Jesus' ministry. Its synagogue, traditional House of Peter and neighbouring Christian sites have different visiting arrangements.",
- takeaway:"The Franciscan archaeological compound, Greek Orthodox monastery and Israel Nature and Parks Authority visitor area are separate sites. Confirm the correct entrance and operator before your visit.",
- highlights:[
- {name:"Ancient synagogue",description:"The visible white limestone synagogue is generally dated to the fifth century; earlier structures were found beneath it.",tip:"Do not confuse the standing late-antique building with the earlier synagogue of Gospel tradition."},
- {name:"Traditional House of Peter",description:"Excavated basalt rooms are traditionally associated with Peter, with an elevated modern memorial above the archaeological remains.",tip:"The identification is traditional rather than a proven personal address."},
- {name:"Basalt village houses",description:"Foundations of dwellings reveal the pattern of the ancient settlement beside the lake.",tip:"Allow time to explore the residential remains between the main landmarks."},
- {name:"Greek Orthodox monastery",description:"The neighbouring red-domed monastery has its own religious and architectural character.",tip:"The monastery's official website asks visitors to arrange entry by phone in advance."},
- {name:"National park shoreline",description:"A separately managed visitor area includes a marine terminal and lakeside paths.",tip:"The park authority lists free entrance to the marine terminal, not to the Franciscan ruins."}],
- arrival:["From the Route 90 Capernaum junction, follow Route 87 east for approximately 4 km to the Capernaum site, according to the parks authority.","Set your navigation to the exact Franciscan, Orthodox or national park entrance; they are different places.","Public transport may require a long walk; the junction is not beside the archaeological site. Check the stop and return timetable.","Tabgha and Mount of Beatitudes can be combined on a wider northwestern Sea of Galilee outing."],
- planning:["The Christian Information Center publishes a ₪10 Franciscan entrance fee and two daily visiting periods: 08:00–12:00 and 14:00–17:00, subject to holiday exceptions.","The Greek Orthodox monastery requests advance telephone arrangements.","Wear respectful clothing for churches, comfortable walking shoes and sun protection in exposed ruins.","The national park publishes separate hours and accessibility details for its own facilities; do not assume they apply to the Franciscan compound."],
- faqs:[{q:"Are Kfar Nahum and Capernaum the same place?",a:"Yes. Kfar Nahum is the Hebrew name, but distinct nearby visitor areas have separate entrances."},{q:"Is admission free?",a:"The published Franciscan fee is ₪10; the marine terminal at the separately managed national park is listed as free."},{q:"Is the visible synagogue from Jesus' lifetime?",a:"No. The monumental limestone remains are generally fifth-century; older structures lie beneath."},{q:"Can I visit the Orthodox monastery without arranging it?",a:"Its official website says visits are by prior phone arrangement."},{q:"Can I walk from the bus junction?",a:"The junction is approximately 4 km from the Capernaum site by road, so do not assume a short walk."}],
+ title:capernaumSite.title,
+ description:capernaumSite.description,
+ region:capernaumSite.region,
+ image:capernaumSite.hero,
+ duration:capernaumSite.duration,
+ intro:capernaumSite.intro,
+ takeaway:"Plan around the Franciscan site's midday closure and check the national park or monastery independently.",
+ highlights:[], arrival:[], planning:[], faqs:[],
  official:[
- {label:"Christian Information Center — Franciscan entry and opening hours",url:"https://www.cicts.org/our-services/"},
- {label:"Custody of the Holy Land — Capernaum history",url:"https://www.custodia.org/en/sanctuaries/capernaum/"},
- {label:"Greek Orthodox monastery — official visitor contact",url:"https://capernaum.info/opening-hours-and-contacts/"},
- {label:"Israel Nature and Parks Authority — Kfar Nahum National Park",url:"https://en.parks.org.il/reserve-park/kfar-nahum-capernaum-national-park/"}
+  {label:"Christian Information Center — Franciscan entry and opening hours",url:capernaumSite.sources.franciscan},
+  {label:"Custody of the Holy Land — Capernaum history",url:capernaumSite.sources.archaeology},
+  {label:"Greek Orthodox monastery — official visiting arrangements",url:capernaumSite.sources.orthodox},
+  {label:"Israel Nature and Parks Authority — official park details",url:capernaumSite.sources.park},
+  {label:"Israel Nature and Parks Authority — published park hours",url:capernaumSite.sources.parkHebrew},
  ],
 },
 "tabgha":{
