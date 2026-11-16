@@ -13,7 +13,7 @@ describe("compact shore excursions hub", () => {
     expect(page).toContain("checkedAt={SHORE_EXCURSION_UPDATED_DATE}");
     expect(page).toContain('className="mt-8 scroll-mt-24"');
     expect(page).toContain("Choose your cruise port");
-    expect(page).toContain("Explore popular shore excursion destinations");
+    expect(page).toContain("Popular shore excursion routes");
     expect(page).toContain("Private driver or guided excursion?");
     expect(page).toContain("Before booking your shore excursion");
     expect(page).toContain("<FaqList faqs={shoreHubFaqs} compact />");
@@ -34,7 +34,7 @@ describe("compact shore excursions hub", () => {
 
   it("retains even card grids, related guides, factual FAQs and source citations", () => {
     expect(shoreHubExperiences).toHaveLength(4);
-    expect(shoreTourFormats).toHaveLength(4);
+    expect(shoreTourFormats).toHaveLength(2);
     expect(shorePlanningSteps).toHaveLength(4);
     expect(shoreHubGuides).toHaveLength(6);
     expect(shoreHubFaqs.length).toBeGreaterThanOrEqual(6);
@@ -43,6 +43,7 @@ describe("compact shore excursions hub", () => {
     expect(page).toContain("shorePlanningSteps.map");
     expect(page).toContain("shoreHubGuides.map");
     expect(page).toContain("SourceList");
+    expect(page.indexOf("<SourceList")).toBeGreaterThan(page.indexOf("Photo credits"));
     expect(page).toContain("GuidePhotoCredit");
     expect(page).toContain("jsonLd({");
     expect(page).toContain('path: "/shore-excursions/"');

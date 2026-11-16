@@ -25,7 +25,7 @@ describe("Israel shore excursion hub", () => {
     expect(screen.getAllByRole("heading", { level: 1 })).toHaveLength(1);
     expect(screen.getByRole("heading", { name: "Choose your cruise port" })).toBeInTheDocument();
     expect(screen.getByRole("heading", { name: "Private driver or guided excursion?" })).toBeInTheDocument();
-    const destinations = screen.getByRole("region", { name: "Explore popular shore excursion destinations" });
+    const destinations = screen.getByRole("region", { name: "Popular shore excursion routes" });
     for (const choice of shoreHubExperiences.flatMap((experience) => experience.links)) {
       const link = within(destinations).getByRole("link", { name: choice.label });
       const url = new URL(link.getAttribute("href")!, CANONICAL_ORIGIN);
@@ -41,17 +41,16 @@ describe("Israel shore excursion hub", () => {
 
   it("uses compact illustrated port choices, matching primary CTAs and on-demand credits", async () => {
     await renderHub();
-    const destinations = screen.getByRole("region", { name: "Explore popular shore excursion destinations" });
+    const destinations = screen.getByRole("region", { name: "Popular shore excursion routes" });
     const homepageShorePhoto = services.find(service => service.id === "shore-excursions")?.feature?.src;
     expect(homepageShorePhoto).toBeTruthy();
     expect(within(screen.getByTestId("hub-header")).getByRole("img", { name: /Cruise passengers walking/ })).toHaveAttribute("src", homepageShorePhoto);
-    // Destination summaries now use compact illustrated icons, rather than
-    // repeating the six destination-guide photos further down the same page.
-    expect(within(destinations).queryAllByRole("img")).toHaveLength(0);
+    // The four route cards have distinct illustrations, separate from related-guide images.
+    expect(within(destinations).getAllByRole("img")).toHaveLength(4);
     for (const experience of shoreHubExperiences) {
       const card = destinations.querySelector(`[data-experience="${experience.id}"]`);
       expect(card).not.toBeNull();
-      expect(card?.querySelector("svg")).not.toBeNull();
+      expect(card?.querySelector("img")).not.toBeNull();
       expect(card).toHaveTextContent(experience.title);
     }
     const topChoices = [
@@ -60,13 +59,13 @@ describe("Israel shore excursion hub", () => {
     ];
     const quoteNav = screen.getByRole("navigation", { name: "Private cruise-port quote requests" });
     const bottomChoices = [
-      within(quoteNav).getByRole("link", { name: "From Ashdod" }),
-      within(quoteNav).getByRole("link", { name: "From Haifa" }),
+      within(quoteNav).getByRole("link", { name: "Request a quote from Ashdod" }),
+      within(quoteNav).getByRole("link", { name: "Request a quote from Haifa" }),
     ];
     expect(topChoices[0]).toHaveClass("btn-primary");
     expect(topChoices[1]).toHaveClass("btn-primary");
-    expect(bottomChoices[0]).toHaveClass("btn-primary");
-    expect(bottomChoices[1]).toHaveClass("btn-primary");
+    expect(bottomChoices[0]).toHaveClass("text-primary");
+    expect(bottomChoices[1]).toHaveClass("text-primary");
     expect(bottomChoices[0]).toHaveAttribute("href", "/shore-excursions/ashdod/#request-quote");
     expect(bottomChoices[1]).toHaveAttribute("href", "/shore-excursions/haifa/#request-quote");
     expect(within(screen.getByTestId("hub-header")).getByRole("img", { name: "Moshe Barak" })).toBeInTheDocument();
@@ -84,10 +83,12 @@ describe("Israel shore excursion hub", () => {
     expect(related).toHaveLength(6);
     expect(within(guides).getAllByRole("img")).toHaveLength(6);
     expect(related.every(link => link.textContent?.includes("Read guide"))).toBe(true);
+    const photos = Array.from(document.querySelectorAll("main img")).map(image => image.getAttribute("src"));
+    expect(new Set(photos).size).toBe(photos.length);
     expect(guides).not.toHaveTextContent("→");
     const quoteNav = screen.getByRole("navigation", { name: "Private cruise-port quote requests" });
-    expect(within(quoteNav).getByRole("link", { name: "From Ashdod" })).toHaveAttribute("href", "/shore-excursions/ashdod/#request-quote");
-    expect(within(quoteNav).getByRole("link", { name: "From Haifa" })).toHaveAttribute("href", "/shore-excursions/haifa/#request-quote");
+    expect(within(quoteNav).getByRole("link", { name: "Request a quote from Ashdod" })).toHaveAttribute("href", "/shore-excursions/ashdod/#request-quote");
+    expect(within(quoteNav).getByRole("link", { name: "Request a quote from Haifa" })).toHaveAttribute("href", "/shore-excursions/haifa/#request-quote");
     for (const link of document.querySelectorAll('main a[href^="/"]')) {
       const url = new URL(link.getAttribute("href")!, CANONICAL_ORIGIN);
       expect(router.matchRoutes(url.pathname).at(-1)?.routeId.replace(/\/$/, "")).toBe(url.pathname.replace(/\/$/, ""));

@@ -1,11 +1,15 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { CalendarDays, CheckCircle2, Church, Compass, Landmark, Smartphone, Sun, TrainFront, Waves } from "lucide-react";
+import { Anchor, CalendarDays, CheckCircle2, Compass, Smartphone, TrainFront } from "lucide-react";
 import { FaqList, HubHeader, SourceList } from "@/components/Guide";
 import { GuidePhotoCredit } from "@/components/TravelGuide";
 import { GuideHeroMedia } from "@/components/GuideHeroMedia";
 import { getShorePort } from "@/data/shoreExcursions";
 import { shoreHubGuides } from "@/data/shoreReading";
 import cruisePortFeature from "@/assets/home/cruise-port-feature.webp";
+import jerusalemFeature from "@/assets/home/jerusalem-old-city-card.webp";
+import galileeFeature from "@/assets/home/tiberias-lake-card.webp";
+import coastFeature from "@/assets/home/hero-jaffa-harbor-desktop.jpg";
+import masadaFeature from "@/assets/home/masada-cable-car-card.webp";
 import {
   shoreHubDescription, shoreHubExperiences, shoreHubFaqs, shoreHubPorts,
   shoreHubSourceIds, shoreHubTitle, SHORE_EXCURSION_UPDATED_DATE,
@@ -19,7 +23,12 @@ import { CANONICAL_ORIGIN, jsonLd, pageMeta, SITE_NAME } from "@/lib/site";
 const portIds = ["ashdod", "haifa"] as const;
 const heroPhoto = { src: cruisePortFeature, alt: "Cruise passengers walking along a harbour quay toward a waiting vehicle", sourceUrl: "" };
 const crumbs = [{ name: "Home", path: "/" }, { name: "Shore excursions", path: "/shore-excursions/" }] as const;
-const experienceIcons = { history: Landmark, galilee: Church, coast: Waves, desert: Sun };
+const experiencePhotos = {
+  history: { src: jerusalemFeature, alt: "Historic buildings in Jerusalem's Old City" },
+  galilee: { src: galileeFeature, alt: "Sea of Galilee and its surrounding hills" },
+  coast: { src: coastFeature, alt: "Old Jaffa harbour and its Mediterranean waterfront" },
+  desert: { src: masadaFeature, alt: "Masada and the surrounding Judean Desert landscape" },
+} as const;
 
 const practicalGuides = [
   { title: "Israel travel tips", description: "What to know before your day ashore.", to: travelGuidePaths.travelTips, icon: Compass },
@@ -74,7 +83,7 @@ function Shore() {
     <HubHeader
       crumbs={crumbs.map(crumb => ({ name: crumb.name, to: crumb.path }))}
       title={shoreHubTitle}
-      intro="Arriving in Israel by cruise ship? Find private car-and-driver days and guided shore excursions from Ashdod or Haifa. Start with your port, then choose a route that fits your hours ashore."
+      intro="Arriving by cruise ship? Explore guided excursions and private car-and-driver days from Ashdod and Haifa. Start with your port, then choose a route that fits your time ashore."
       checkedAt={SHORE_EXCURSION_UPDATED_DATE}
       image={<GuideHeroMedia src={heroPhoto.src} alt={heroPhoto.alt} compact />}
       actions={<>
@@ -95,13 +104,13 @@ function Shore() {
             const details = shoreHubPorts[id];
             return <li key={id} className="min-w-0">
               <Link to={port.path} className="group flex h-full min-w-0 items-center gap-3 rounded-2xl border bg-card p-3 transition-colors hover:border-primary/50 hover:bg-secondary/20 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary sm:gap-4">
-                <img src={port.photo.src} alt={port.photo.alt} width={160} height={192} loading="lazy" decoding="async" className="h-32 w-24 shrink-0 rounded-xl object-cover sm:h-36 sm:w-28" />
+                <img src={port.photo.src} alt={port.photo.alt} width={160} height={192} loading="lazy" decoding="async" className="h-28 w-24 shrink-0 rounded-xl object-cover sm:h-32 sm:w-28" />
                 <span className="flex min-w-0 flex-1 flex-col items-start">
                   <span className="block text-xs font-medium text-muted-foreground">{details.location}</span>
                   <span className="mt-1 block text-lg font-semibold leading-snug">From {port.name} Port</span>
                   <span className="mt-1 line-clamp-2 text-sm leading-relaxed text-muted-foreground">{details.description}</span>
                   <span className="mt-2 block text-xs leading-relaxed text-muted-foreground"><strong className="text-foreground">Popular:</strong> {details.highlights.join(" · ")}</span>
-                  <span className="mt-2 text-sm font-semibold text-primary group-hover:underline">Explore {port.name} excursions</span>
+                  <span className="mt-2 text-sm font-semibold text-primary group-hover:underline">View {port.name} excursions</span>
                 </span>
               </Link>
             </li>;
@@ -113,24 +122,26 @@ function Shore() {
       </section>
 
       <section id="destinations" aria-labelledby="shore-destinations-h" className="mt-9 scroll-mt-24">
-        <h2 id="shore-destinations-h" className="text-2xl font-semibold">Explore popular shore excursion destinations</h2>
-        <p className="mt-2 max-w-3xl text-sm leading-relaxed text-muted-foreground">Browse a destination, then see guided tours and private-day options from the right port.</p>
-        <ul className="mt-4 grid gap-3 sm:grid-cols-2">
+        <h2 id="shore-destinations-h" className="text-2xl font-semibold">Popular shore excursion routes</h2>
+        <p className="mt-2 max-w-3xl text-sm leading-relaxed text-muted-foreground">
+          Choose a destination to explore excursions from the matching cruise port.
+        </p>
+        <ul className="mt-4 grid gap-3 md:grid-cols-2">
           {shoreHubExperiences.map(experience => {
-            const Icon = experienceIcons[experience.id];
-            return <li key={experience.id} className="flex min-w-0 flex-col rounded-xl border bg-card p-4" data-experience={experience.id}>
-              <div className="flex items-start gap-3">
-                <span className="grid size-9 shrink-0 place-items-center rounded-lg bg-secondary/60 text-primary"><Icon className="size-5" aria-hidden /></span>
-                <div className="min-w-0">
+            const photo = experiencePhotos[experience.id];
+            return <li key={experience.id} data-experience={experience.id} className="min-w-0">
+              <article className="flex h-full min-w-0 items-center gap-3 rounded-2xl border bg-card p-3 sm:gap-4">
+                <img src={photo.src} alt={photo.alt} width={160} height={192} loading="lazy" decoding="async" className="h-28 w-24 shrink-0 rounded-xl object-cover sm:h-32 sm:w-28" />
+                <div className="flex min-w-0 flex-1 flex-col items-start">
                   <h3 className="text-base font-semibold leading-snug sm:text-lg">{experience.title}</h3>
-                  <p className="mt-1 text-sm leading-relaxed text-muted-foreground">{experience.description}</p>
+                  <p className="mt-1 line-clamp-2 text-sm leading-relaxed text-muted-foreground">{experience.description}</p>
+                  <nav aria-label={`Port options for ${experience.title}`} className="mt-2 flex flex-wrap gap-x-4 gap-y-2">
+                    {experience.links.map(link => <Link key={link.portId + "-" + link.destination} to={shorePorts[link.portId].path} search={{ destination: link.destination }} className="text-xs font-semibold text-primary underline-offset-4 hover:underline focus-visible:rounded focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
+                      {link.label}
+                    </Link>)}
+                  </nav>
                 </div>
-              </div>
-              <ul className="mt-auto flex flex-wrap gap-x-4 gap-y-2 pt-3 pl-12">
-                {experience.links.map(link => <li key={link.portId + "-" + link.destination}>
-                  <Link to={shorePorts[link.portId].path} search={{ destination: link.destination }} className="text-xs font-semibold text-primary underline-offset-4 hover:underline focus-visible:rounded focus-visible:outline-2 focus-visible:outline-primary">{link.label}</Link>
-                </li>)}
-              </ul>
+              </article>
             </li>;
           })}
         </ul>
@@ -139,12 +150,12 @@ function Shore() {
       <section id="tour-formats" aria-labelledby="shore-formats-h" className="mt-9 scroll-mt-24">
         <h2 id="shore-formats-h" className="text-2xl font-semibold">Private driver or guided excursion?</h2>
         <p className="mt-2 max-w-3xl text-sm leading-relaxed text-muted-foreground">
-          Choose the right pace and level of guiding. Individual listings explain whether the price is per person or per vehicle and what is included.
+          Choose a flexible private drive or a guided excursion. Individual listings explain what is included.
         </p>
         <ul className="mt-4 grid gap-3 sm:grid-cols-2">
-          {shoreTourFormats.map(format => <li key={format.title} className="rounded-xl border bg-secondary/20 p-4">
+          {shoreTourFormats.map(format => <li key={format.title} className="rounded-xl border bg-card p-4">
             <h3 className="text-base font-semibold">{format.title}</h3>
-            <p className="mt-1 text-sm text-muted-foreground">{format.bestFor}</p>
+            <p className="mt-1 text-sm leading-relaxed text-muted-foreground">{format.bestFor}</p>
             <p className="mt-2 text-xs leading-relaxed text-muted-foreground">{format.tradeoff}</p>
           </li>)}
         </ul>
@@ -161,15 +172,18 @@ function Shore() {
             </div>
           </li>)}
         </ul>
-        <div className="mt-4 flex flex-wrap items-center justify-between gap-3 rounded-xl border bg-secondary/25 p-4">
+        <div className="mt-4 flex items-start gap-3 rounded-2xl border bg-card p-4 sm:p-5">
+          <Anchor aria-hidden className="mt-0.5 size-5 shrink-0 text-primary" />
           <div className="min-w-0">
-            <h3 className="text-base font-semibold">Looking for a private driver?</h3>
-            <p className="mt-1 text-sm leading-relaxed text-muted-foreground">Share your ship's date, port and preferred stops on the relevant port page for a tailored car-and-driver quote.</p>
+            <h3 className="text-lg font-semibold">Looking for a private driver?</h3>
+            <p className="mt-1 text-sm leading-relaxed text-muted-foreground">
+              Share your ship, date, group size and preferred stops. I'll check a suitable route and vehicle for your cruise call.
+            </p>
+            <nav aria-label="Private cruise-port quote requests" className="mt-3 flex flex-wrap gap-x-5 gap-y-2">
+              <Link to={shorePorts.ashdod.path} hash="request-quote" className="text-sm font-semibold text-primary underline-offset-4 hover:underline">Request a quote from Ashdod</Link>
+              <Link to={shorePorts.haifa.path} hash="request-quote" className="text-sm font-semibold text-primary underline-offset-4 hover:underline">Request a quote from Haifa</Link>
+            </nav>
           </div>
-          <nav aria-label="Private cruise-port quote requests" className="flex flex-wrap gap-2">
-            <Link to={shorePorts.ashdod.path} hash="request-quote" className="btn btn-primary">From Ashdod</Link>
-            <Link to={shorePorts.haifa.path} hash="request-quote" className="btn btn-primary">From Haifa</Link>
-          </nav>
         </div>
       </section>
 
@@ -180,7 +194,7 @@ function Shore() {
         <ul className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
           {shoreHubGuides.map(guide => <li key={String(guide.to)} className="min-w-0">
             <Link to={guide.to} className="group flex h-full min-w-0 items-center gap-3 rounded-xl border bg-card p-3 transition-colors hover:border-primary/50 hover:bg-secondary/20 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
-              <img src={guide.photo.src} alt={guide.photo.alt} width={112} height={90} loading="lazy" decoding="async" className="h-24 w-20 shrink-0 rounded-lg object-cover" />
+              <img src={guide.photo.src} alt={guide.photo.alt} width={112} height={90} loading="lazy" decoding="async" className="aspect-[3/2] w-24 shrink-0 rounded-lg object-cover sm:w-28" />
               <span className="min-w-0 flex-1">
                 <span className="block text-sm font-semibold leading-snug text-foreground group-hover:text-primary">{guide.title}</span>
                 <span className="mt-1 line-clamp-2 block text-xs leading-relaxed text-muted-foreground">{guide.description}</span>
@@ -209,16 +223,16 @@ function Shore() {
         </ul>
       </section>
 
-      <SourceList
-        ids={shoreHubSourceIds}
-        intro="Official port and national-park information for planning. Your cruise line and tour operator confirm the arrangements for your ship and date."
-      />
       {photos.length > 0 && <details className="mt-9 rounded-xl border p-4 text-xs text-muted-foreground">
         <summary className="cursor-pointer font-semibold">Photo credits</summary>
         <ul className="mt-3 space-y-3">
           {[...new Map(photos.map(photo => [photo.src, photo])).values()].map(photo => <li key={photo.src}><GuidePhotoCredit photo={photo} /></li>)}
         </ul>
       </details>}
+      <SourceList
+        ids={shoreHubSourceIds}
+        intro="Official port and national-park information for planning. Your cruise line and tour operator confirm the arrangements for your ship and date."
+      />
     </div>
   </main>;
 }
