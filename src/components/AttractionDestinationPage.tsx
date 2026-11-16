@@ -1,6 +1,6 @@
 import type { LinkProps } from "@tanstack/react-router";
 import type { ReactNode } from "react";
-import { Link } from "@/components/SiteLink";
+import { SiteLink as Link } from "@/components/SiteLink";
 import { ArrowUpRight, Clock3, MapPin, Ticket, CalendarClock, Landmark, Route, Lightbulb } from "lucide-react";
 import { AuthorCard } from "@/components/AuthorCard";
 import { GuideHeroLayout, GuideHeroMedia } from "@/components/GuideHeroMedia";
