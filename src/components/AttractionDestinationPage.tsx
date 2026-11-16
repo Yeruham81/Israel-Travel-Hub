@@ -81,6 +81,13 @@ function AtAGlance({ placeName, facts, note }: { placeName: string; facts: Attra
   );
 }
 
+/** Standard article photo: 4:3 at every breakpoint, up to 260 × 195 px on desktop.
+ * Full mobile width; independent of the compact hero, panoramas and link thumbnails.
+ */
+export function AttractionContentImage({ src, alt }: { src: string; alt: string }) {
+  return <img src={src} alt={alt} width={520} height={390} loading="lazy" decoding="async" className="aspect-[4/3] h-auto w-full rounded-lg object-cover" />;
+}
+
 export function AttractionHighlight({
   title, image, children, note,
 }: {
@@ -91,13 +98,13 @@ export function AttractionHighlight({
 }) {
   return (
     <article className="rounded-xl border border-border/80 bg-card p-4 sm:p-5" data-testid="attraction-highlight">
-      <div className={image ? "grid gap-3 sm:grid-cols-[minmax(0,1fr)_minmax(180px,220px)] sm:items-start lg:grid-cols-[minmax(0,1fr)_240px]" : ""}>
+      <div className={image ? "grid gap-3 sm:grid-cols-[minmax(0,1fr)_minmax(0,220px)] sm:items-start lg:grid-cols-[minmax(0,1fr)_260px]" : ""}>
         <div className="min-w-0">
           <h3 className="font-serif text-xl font-semibold leading-snug">{title}</h3>
           <div className="mt-2 space-y-3 text-sm leading-relaxed sm:text-base">{children}</div>
           {note && <p className="mt-3 border-l-2 border-primary/40 pl-3 text-sm leading-relaxed text-muted-foreground">{note}</p>}
         </div>
-        {image && <img src={image.src} alt={image.alt} width={640} height={480} loading="lazy" decoding="async" className="aspect-[16/10] max-h-44 w-full rounded-lg object-cover sm:max-h-40 lg:max-h-44" />}
+        {image && <AttractionContentImage src={image.src} alt={image.alt} />}
       </div>
     </article>
   );

@@ -52,6 +52,13 @@ All images must be local project assets. Prefer licensed/owned photos from the
 owner's archived site and truthful alt descriptions. Never insert an image
 between a heading and its introductory paragraph. No duplicate images within
 an article, except the author portrait near the top and the contact form.
+For standard editorial photos within guide sections, reuse `AttractionContentImage`:
+4:3 at all breakpoints, 260×195 CSS pixels at desktop (up to 220px wide
+at intermediate widths), and responsive full width on mobile. The history photo
+and highlight cards use the same component. Do not impose conflicting max-height
+constraints: preserve the ratio and let the source crop with `object-cover`.
+Compact hero, panoramic images and link/tour thumbnails keep independent
+aspect ratios and sizes.
 Do not publish source filenames, invented visitor prices, ratings or tickets.
 
 Do not add a repeating "Worth knowing:" label to every highlight. Remove

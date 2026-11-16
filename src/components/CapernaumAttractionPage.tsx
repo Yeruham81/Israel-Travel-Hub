@@ -1,6 +1,6 @@
 import { Link } from "@tanstack/react-router";
 import { ArrowUpRight, BusFront, CarFront } from "lucide-react";
-import { AttractionDestinationPage, AttractionHighlight, AttractionPracticalTip, type AttractionDestinationContent } from "@/components/AttractionDestinationPage";
+import { AttractionContentImage, AttractionDestinationPage, AttractionHighlight, AttractionPracticalTip, type AttractionDestinationContent } from "@/components/AttractionDestinationPage";
 import { capernaumSite } from "@/data/capernaumSite";
 import galileePhoto from "@/assets/home/hero-galilee-sm.webp";
 
@@ -95,7 +95,7 @@ const page: AttractionDestinationContent = {
   historyContent: (
     <div className="mt-4 space-y-4">
       <p>Known in Hebrew as Kfar Nahum (“village of Nahum”), Capernaum was a lakeside Jewish settlement during the Roman period. The New Testament describes Jesus teaching and healing here, including events associated with the synagogue and Peter's house (Mark 1:21–31).</p>
-      <div className="grid gap-4 rounded-xl border bg-secondary/20 p-4 sm:grid-cols-[minmax(0,1.3fr)_minmax(0,1fr)] sm:items-start sm:p-5">
+      <div className="grid gap-4 rounded-xl border bg-secondary/20 p-4 sm:grid-cols-[minmax(0,1fr)_minmax(0,220px)] sm:items-start sm:p-5 lg:grid-cols-[minmax(0,1fr)_260px]">
         <div className="min-w-0">
           <h3 className="font-serif text-xl font-semibold">How the site changed over time</h3>
           <ul className="mt-3 list-disc space-y-2 pl-5 text-sm leading-relaxed sm:text-base">
@@ -105,7 +105,7 @@ const page: AttractionDestinationContent = {
             <li><strong>Today:</strong> Visitors can compare the excavated layers with the modern memorial built over the traditional House of Peter.</li>
           </ul>
         </div>
-        <img src="/images/attractions/capernaum-peter-memorial-interior.webp" alt="Archaeological rooms visible through the floor of the modern memorial above Peter's traditional house" width={640} height={480} loading="lazy" decoding="async" className="aspect-[4/3] max-h-72 w-full rounded-lg object-cover object-center sm:max-h-64 lg:max-h-72" />
+        <AttractionContentImage src="/images/attractions/capernaum-peter-memorial-interior.webp" alt="Archaeological rooms visible through the floor of the modern memorial above Peter's traditional house" />
       </div>
     </div>
   ),
