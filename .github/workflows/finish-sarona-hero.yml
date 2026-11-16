@@ -5,6 +5,7 @@ on:
     branches: [main]
     paths:
       - ".github/workflows/finish-sarona-hero.yml"
+      - "scripts/finish_home_carousel_sarona.py"
 
 permissions:
   contents: write
