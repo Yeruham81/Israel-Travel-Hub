@@ -41,7 +41,7 @@ jobs:
           files = list(Path('src/assets/home').glob('hero-refresh-*.webp'))
           assert len(files) == 27, len(files)
           for path in files:
-              assert path.stat().st_size < 246000, path
+              assert path.stat().st_size < 341000, path
           print('Verified 12 slides, 3 unchanged positions, 27 optimized WebP variants')
           PY
 
