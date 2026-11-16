@@ -14,13 +14,17 @@ describe("homepage hero photo carousel", () => {
     }
   });
 
-  it("preserves Jerusalem and Akko, and uses the new Tel Aviv coast photo at position 2", () => {
+  it("preserves Jerusalem and Akko, with sharper Tel Aviv at 2 and updated Jaffa at 10", () => {
     expect(heroSlides[0]?.caption).toBe("Jerusalem Old City from the Mount of Olives");
     expect(heroSlides[1]?.caption).toBe("Tel Aviv beachfront skyline");
-    expect(heroSlides[1]?.src).toContain("hero-refresh-tel-aviv-coastline-large.webp");
-    expect(heroSlides[1]?.srcMedium).toContain("hero-refresh-tel-aviv-coastline-medium.webp");
-    expect(heroSlides[1]?.srcSm).toContain("hero-refresh-tel-aviv-coastline-mobile.webp");
+    expect(heroSlides[1]?.src).toContain("hero-refresh-tel-aviv-coastline-v2-large.webp");
+    expect(heroSlides[1]?.srcMedium).toContain("hero-refresh-tel-aviv-coastline-v2-medium.webp");
+    expect(heroSlides[1]?.srcSm).toContain("hero-refresh-tel-aviv-coastline-v2-mobile.webp");
     expect(heroSlides[7]?.caption).toBe("Akko Old City and harbour");
+    expect(heroSlides[9]?.caption).toBe("Old Jaffa and its harbour");
+    expect(heroSlides[9]?.src).toContain("hero-refresh-jaffa-port-v2-large.webp");
+    expect(heroSlides[9]?.srcMedium).toContain("hero-refresh-jaffa-port-v2-medium.webp");
+    expect(heroSlides[9]?.srcSm).toContain("hero-refresh-jaffa-port-v2-mobile.webp");
   });
 
   it("uses 10 new compressed responsive images, without altering the other nine refreshed slides", () => {

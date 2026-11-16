@@ -2,9 +2,9 @@ import { HeroCarousel, type HeroSlide } from "@/components/HeroCarousel";
 import hJerSm from "@/assets/home/hero-jerusalem-sm-optimized.webp";
 import hJerMedium from "@/assets/home/hero-jerusalem-medium.webp";
 import hJerLarge from "@/assets/home/hero-jerusalem-large.webp";
-import hTaSm from "@/assets/home/hero-refresh-tel-aviv-coastline-mobile.webp";
-import hTaMedium from "@/assets/home/hero-refresh-tel-aviv-coastline-medium.webp";
-import hTaLarge from "@/assets/home/hero-refresh-tel-aviv-coastline-large.webp";
+import hTaSm from "@/assets/home/hero-refresh-tel-aviv-coastline-v2-mobile.webp";
+import hTaMedium from "@/assets/home/hero-refresh-tel-aviv-coastline-v2-medium.webp";
+import hTaLarge from "@/assets/home/hero-refresh-tel-aviv-coastline-v2-large.webp";
 import pAkkoDesktop from "@/assets/home/hero-akko-aerial-large.webp";
 import pAkkoMobile from "@/assets/home/hero-akko-aerial-sm.webp";
 import pHaifaGardensLarge from "@/assets/home/hero-refresh-haifa-gardens-large.webp";
@@ -19,9 +19,9 @@ import pCaesareaCoastMobile from "@/assets/home/hero-refresh-caesarea-coast-mobi
 import pDeadSeaSaltLarge from "@/assets/home/hero-refresh-dead-sea-salt-large.webp";
 import pDeadSeaSaltMedium from "@/assets/home/hero-refresh-dead-sea-salt-medium.webp";
 import pDeadSeaSaltMobile from "@/assets/home/hero-refresh-dead-sea-salt-mobile.webp";
-import pJaffaPortLarge from "@/assets/home/hero-refresh-jaffa-port-large.webp";
-import pJaffaPortMedium from "@/assets/home/hero-refresh-jaffa-port-medium.webp";
-import pJaffaPortMobile from "@/assets/home/hero-refresh-jaffa-port-mobile.webp";
+import pJaffaPortLarge from "@/assets/home/hero-refresh-jaffa-port-v2-large.webp";
+import pJaffaPortMedium from "@/assets/home/hero-refresh-jaffa-port-v2-medium.webp";
+import pJaffaPortMobile from "@/assets/home/hero-refresh-jaffa-port-v2-mobile.webp";
 import pEilatMountainsLarge from "@/assets/home/hero-refresh-eilat-mountains-large.webp";
 import pEilatMountainsMedium from "@/assets/home/hero-refresh-eilat-mountains-medium.webp";
 import pEilatMountainsMobile from "@/assets/home/hero-refresh-eilat-mountains-mobile.webp";
@@ -45,7 +45,7 @@ export const heroSlides: HeroSlide[] = [
   { src: pDeadSeaSaltLarge, srcSm: pDeadSeaSaltMobile, srcMedium: pDeadSeaSaltMedium, caption: "Dead Sea salt formations at sunrise", alt: "White salt formations in shallow turquoise Dead Sea water under an orange sunrise sky", pos: "center 25%", width: 1680, height: 840 },
   { src: pAkkoDesktop, srcSm: pAkkoMobile, srcMedium: pAkkoDesktop, caption: "Akko Old City and harbour", alt: "Aerial view of Akko’s historic walled city, sea wall and marina along the Mediterranean coast", pos: "center 68%", width: 2048, height: 848 },
   { src: pEilatMountainsLarge, srcSm: pEilatMountainsMobile, srcMedium: pEilatMountainsMedium, caption: "Eilat Mountains and the Gulf of Aqaba", alt: "Rocky Eilat Mountains overlooking the city of Eilat and the blue Gulf of Aqaba", pos: "center", width: 1680, height: 840 },
-  { src: pJaffaPortLarge, srcSm: pJaffaPortMobile, srcMedium: pJaffaPortMedium, caption: "Old Jaffa and its harbour", alt: "Aerial view of historic Old Jaffa stone buildings, the harbour and the Mediterranean shoreline", pos: "center", width: 1680, height: 840 },
+  { src: pJaffaPortLarge, srcSm: pJaffaPortMobile, srcMedium: pJaffaPortMedium, caption: "Old Jaffa and its harbour", alt: "Aerial view of Old Jaffa stone buildings, waterfront, marina and the stone breakwater", pos: "center", width: 1680, height: 840 },
   { src: pRamonCraterLarge, srcSm: pRamonCraterMobile, srcMedium: pRamonCraterMedium, caption: "Sunrise over Makhtesh Ramon", alt: "Sun rising over the edge of Makhtesh Ramon beside Camel Hill near Mitzpe Ramon", pos: "center", width: 1680, height: 840 },
   { src: pTelAvivSaronaLarge, srcSm: pTelAvivSaronaMobile, srcMedium: pTelAvivSaronaMedium, caption: "Tel Aviv’s modern skyline", alt: "High-rise towers in Tel Aviv's Sarona business district with the Mediterranean Sea in the distance", pos: "center", width: 1680, height: 840 },
 ];
