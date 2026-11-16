@@ -1,0 +1,81 @@
+name: Optimize home carousel from full-resolution originals (2048px)
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/optimize-home-hero-2048.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: home-hero-originals-2048
+  cancel-in-progress: false
+
+jobs:
+  optimize:
+    if: github.event_name == 'workflow_dispatch' || contains(github.event.head_commit.message, '[optimize-home-hero-2048]')
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - name: Checkout main without history rewrites
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          persist-credentials: true
+
+      - name: Install Python image processing
+        run: python -m pip install --disable-pip-version-check 'Pillow>=11,<13'
+
+      - name: Process only original images and rewrite used responsive sources
+        run: python scripts/optimize_home_carousel_2048.py
+
+      - name: Check every generated WebP and protect original Jerusalem slide
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          from PIL import Image
+          import json
+          report = json.loads(Path('docs/HOME_CAROUSEL_2048_REPORT.json').read_text())
+          dims = {'large':(2048,1024), 'medium':(1600,800), 'mobile':(720,900)}
+          ceilings = {'large':480000, 'medium':300000, 'mobile':150000}
+          for slug in report['processed']:
+              for kind in dims:
+                  f = Path(f'src/assets/home/hero-refresh-{slug}-v4-{kind}.webp')
+                  assert f.is_file() and f.stat().st_size <= ceilings[kind], f
+                  with Image.open(f) as im:
+                      assert im.format == 'WEBP' and im.size == dims[kind], f
+          code = Path('src/components/HomeHero.tsx').read_text()
+          slides = [line for line in code.splitlines() if line.startswith('  { src:')]
+          assert len(slides) == 12
+          assert 'hJerLarge' in slides[0] and 'hJerSm' in slides[0]
+          assert 'hTaLarge' in slides[1] and 'hTaSm' in slides[1]
+          assert 'pAkkoDesktop' in slides[7] and 'pAkkoMobile' in slides[7]
+          print('Validated', len(report['processed']), 'fully optimized slides')
+          print('Skipped source images:', report['skipped'])
+          PY
+
+      - name: Install app dependencies for focused regression tests
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: "1.4.4"
+      - run: bash scripts/install-ci-dependencies.sh
+      - name: Test hero slides and mobile optimization
+        run: bun x vitest run src/components/HomeHero.test.ts src/test/home-mobile-performance.test.ts
+
+      - name: Commit only successfully validated new image assets and references
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add src/assets/home/hero-refresh-*-v4-*.webp \
+            src/components/HomeHero.tsx src/components/HomeHero.test.ts \
+            src/test/home-mobile-performance.test.ts \
+            docs/HOME_CAROUSEL_PHOTO_CREDITS.md docs/HOME_CAROUSEL_2048_REPORT.json
+          if git diff --cached --quiet; then
+            echo "No changes to commit"
+            exit 0
+          fi
+          git commit -m "Optimize homepage carousel to 2048px from full photo originals"
+          git push origin HEAD:main
