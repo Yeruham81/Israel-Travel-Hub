@@ -1,15 +1,16 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { Church, Landmark, MapPin, Sun, Waves } from "lucide-react";
-import { FaqList, HubHeader, OnThisPage, Section, SourceList } from "@/components/Guide";
+import { CalendarDays, CheckCircle2, Church, Compass, Landmark, Smartphone, Sun, TrainFront, Waves } from "lucide-react";
+import { FaqList, HubHeader, SourceList } from "@/components/Guide";
 import { GuidePhotoCredit } from "@/components/TravelGuide";
-import { ShoreReadingGuides } from "@/components/ShoreReadingGuides";
+import { GuideHeroMedia } from "@/components/GuideHeroMedia";
 import { getShorePort } from "@/data/shoreExcursions";
 import { shoreHubGuides } from "@/data/shoreReading";
-import { migrationPhotos } from "@/data/guideMigrationPhotos";
-import akkoHarbour from "@/assets/shore-excursions/akko-port.jpg";
 import cruisePortFeature from "@/assets/home/cruise-port-feature.webp";
-import { GuideHeroMedia } from "@/components/GuideHeroMedia";
-import { shoreHubDescription, shoreHubExperiences, shoreHubFaqs, shoreHubPorts, shoreHubSourceIds, shoreHubTitle, SHORE_EXCURSION_UPDATED_DATE, shorePlanningSteps, shoreTourFormats } from "@/data/shoreHub";
+import {
+  shoreHubDescription, shoreHubExperiences, shoreHubFaqs, shoreHubPorts,
+  shoreHubSourceIds, shoreHubTitle, SHORE_EXCURSION_UPDATED_DATE,
+  shorePlanningSteps, shoreTourFormats,
+} from "@/data/shoreHub";
 import { publicSources, shorePorts, travelGuidePaths } from "@/data/registry";
 import { authorLd } from "@/lib/author";
 import { hasPublicPhotoCredit } from "@/lib/photo-credits";
@@ -18,127 +19,202 @@ import { CANONICAL_ORIGIN, jsonLd, pageMeta, SITE_NAME } from "@/lib/site";
 const portIds = ["ashdod", "haifa"] as const;
 const heroPhoto = { src: cruisePortFeature, alt: "Cruise passengers walking along a harbour quay toward a waiting vehicle", sourceUrl: "" };
 const crumbs = [{ name: "Home", path: "/" }, { name: "Shore excursions", path: "/shore-excursions/" }] as const;
-const sections = [["ports", "Compare the ports"], ["destinations", "Destinations"], ["tour-formats", "Private or guided"], ["planning", "Plan your day"], ["faq", "FAQ"]] as const;
 const experienceIcons = { history: Landmark, galilee: Church, coast: Waves, desert: Sun };
-const experiencePhotos = {
-  history: migrationPhotos["EXISTING:jerusalem"],
-  galilee: migrationPhotos["EXISTING:galilee"],
-  coast: { src: akkoHarbour, alt: "Fishing boats and historic stone buildings beside Akko's old harbour", sourceUrl: "https://www.israel-taxi.com/wp-content/uploads/2025/08/akko_port_2.jpg", credit: "Akko harbour · photograph from the original Haifa shore-excursion guide" },
-  desert: migrationPhotos["EXISTING:masada"],
-};
+
+const practicalGuides = [
+  { title: "Israel travel tips", description: "What to know before your day ashore.", to: travelGuidePaths.travelTips, icon: Compass },
+  { title: "Travel eSIM for Israel", description: "Keep in touch with your driver or guide.", to: travelGuidePaths.esim, icon: Smartphone },
+  { title: "Getting around Israel", description: "Transport options beyond the port.", to: travelGuidePaths.israel, icon: TrainFront },
+  { title: "Israel holidays & events", description: "Check dates that may affect your visit.", to: travelGuidePaths.calendar, icon: CalendarDays },
+] as const;
 
 export const Route = createFileRoute("/shore-excursions/")({
   head: () => {
-    const meta = pageMeta({ title: "Israel shore excursions from Ashdod & Haifa cruise ports", description: shoreHubDescription, path: "/shore-excursions/", crumbs: [...crumbs], image: heroPhoto.src, imageAlt: heroPhoto.alt });
-    return { ...meta, scripts: [...meta.scripts, jsonLd({
-      "@context": "https://schema.org", "@type": "CollectionPage", name: shoreHubTitle,
-      description: shoreHubDescription, url: `${CANONICAL_ORIGIN}/shore-excursions/`, inLanguage: "en",
-      dateModified: SHORE_EXCURSION_UPDATED_DATE, author: authorLd(), publisher: { "@type": "Organization", name: SITE_NAME },
-      image: new URL(heroPhoto.src, CANONICAL_ORIGIN).href,
-      mainEntity: { "@type": "ItemList", name: "Israel cruise-port excursion guides", itemListElement: portIds.map((id, index) => ({ "@type": "ListItem", position: index + 1, item: { "@type": "WebPage", name: getShorePort(id).title, url: `${CANONICAL_ORIGIN}${shorePorts[id].path}` } })) },
-      citation: publicSources(shoreHubSourceIds).map((source) => source.url),
-    })] };
+    const meta = pageMeta({
+      title: "Israel shore excursions from Ashdod & Haifa cruise ports",
+      description: shoreHubDescription,
+      path: "/shore-excursions/",
+      crumbs: [...crumbs],
+      image: heroPhoto.src,
+      imageAlt: heroPhoto.alt,
+    });
+    return {
+      ...meta,
+      scripts: [...meta.scripts, jsonLd({
+        "@context": "https://schema.org",
+        "@type": "CollectionPage",
+        name: shoreHubTitle,
+        description: shoreHubDescription,
+        url: CANONICAL_ORIGIN + "/shore-excursions/",
+        inLanguage: "en",
+        dateModified: SHORE_EXCURSION_UPDATED_DATE,
+        author: authorLd(),
+        publisher: { "@type": "Organization", name: SITE_NAME },
+        image: new URL(heroPhoto.src, CANONICAL_ORIGIN).href,
+        mainEntity: {
+          "@type": "ItemList",
+          name: "Israel cruise-port excursion guides",
+          itemListElement: portIds.map((id, index) => ({
+            "@type": "ListItem",
+            position: index + 1,
+            item: { "@type": "WebPage", name: getShorePort(id).title, url: CANONICAL_ORIGIN + shorePorts[id].path },
+          })),
+        },
+        citation: publicSources(shoreHubSourceIds).map(source => source.url),
+      })],
+    };
   },
   component: Shore,
 });
 
 function Shore() {
-  const photos = [heroPhoto, ...portIds.map((id) => getShorePort(id).photo), ...Object.values(experiencePhotos), ...shoreHubGuides.map((guide) => guide.photo)].filter(hasPublicPhotoCredit);
-  return <main className="mx-auto max-w-5xl px-4 pb-10">
+  const photos = [heroPhoto, ...portIds.map(id => getShorePort(id).photo), ...shoreHubGuides.map(guide => guide.photo)].filter(hasPublicPhotoCredit);
+
+  return <main className="pb-12" data-testid="shore-hub">
     <HubHeader
-      crumbs={crumbs.map((crumb) => ({ name: crumb.name, to: crumb.path }))}
-      eyebrow="Shore excursions · Ashdod & Haifa"
+      crumbs={crumbs.map(crumb => ({ name: crumb.name, to: crumb.path }))}
       title={shoreHubTitle}
-      intro="Explore shore excursions from Ashdod and Haifa cruise ports. Choose your port, compare private car-and-driver days with independently operated guided tours, and plan a realistic return to your ship."
+      intro="Arriving in Israel by cruise ship? Find private car-and-driver days and guided shore excursions from Ashdod or Haifa. Start with your port, then choose a route that fits your hours ashore."
       checkedAt={SHORE_EXCURSION_UPDATED_DATE}
       image={<GuideHeroMedia src={heroPhoto.src} alt={heroPhoto.alt} compact />}
-      actions={<>
-        <Link to={shorePorts.ashdod.path} className="btn btn-primary">Excursions from Ashdod</Link>
-        <Link to={shorePorts.haifa.path} className="btn btn-primary">Excursions from Haifa</Link>
-      </>}
     />
-    <OnThisPage sections={sections} />
 
-    <section id="ports" aria-labelledby="ports-h" className="mt-10 scroll-mt-24">
-      <p className="eyebrow">Two gateways to Israel</p>
-      <h2 id="ports-h" className="mt-2 text-3xl">Your cruise port makes the difference</h2>
-      <p className="mt-3 max-w-3xl leading-relaxed text-muted-foreground">The most rewarding Israel shore excursion starts with the right route for your port. Ashdod opens up Jerusalem, the southern coast and the Dead Sea region; Haifa puts northern coastal towns and the Galilee within a more natural day's reach. Your ship's actual schedule determines what fits.</p>
-      <ul className="mt-6 grid gap-6 sm:grid-cols-2">
-        {portIds.map((id) => {
-          const port = getShorePort(id);
-          const details = shoreHubPorts[id];
-          return <li key={id} className="flex min-w-0 flex-col overflow-hidden rounded-2xl border bg-card">
-            <img src={port.photo.src} alt={port.photo.alt} width={900} height={600} loading="lazy" decoding="async" className="aspect-[16/9] w-full object-cover" />
-            <div className="flex flex-1 flex-col p-5 sm:p-6">
-              <p className="eyebrow">{details.location}</p>
-              <h3 className="mt-2 text-3xl font-semibold">Shore excursions from {port.name}</h3>
-              <p className="mt-3 leading-relaxed text-muted-foreground">{details.description}</p>
-              <ul className="mt-4 space-y-2 text-sm">{details.highlights.map((highlight) => <li key={highlight} className="flex items-start gap-2"><MapPin className="mt-0.5 h-4 w-4 shrink-0 text-primary" aria-hidden />{highlight}</li>)}</ul>
-              <p className="mt-4 border-t pt-4 text-sm leading-relaxed text-muted-foreground">{details.planning}</p>
-              <p className="mt-3 text-sm leading-relaxed"><strong>Meeting point:</strong> {details.pickup}</p>
-              <div className="mt-auto pt-5"><Link to={port.path} className="btn btn-primary w-full">Explore {port.name} excursions</Link></div>
+    <div className="mx-auto max-w-5xl px-4">
+      <section id="ports" aria-labelledby="shore-ports-h" className="mt-8 scroll-mt-24">
+        <h2 id="shore-ports-h" className="text-2xl font-semibold">Choose your cruise port</h2>
+        <p className="mt-2 max-w-3xl text-sm leading-relaxed text-muted-foreground">
+          Ashdod is a useful starting point for Jerusalem and the southern coast. Haifa is closer to Akko, Nazareth and the Sea of Galilee.
+        </p>
+        <ul className="mt-4 grid gap-3 md:grid-cols-2" aria-label="Cruise port excursion guides">
+          {portIds.map(id => {
+            const port = getShorePort(id);
+            const details = shoreHubPorts[id];
+            return <li key={id} className="min-w-0">
+              <Link to={port.path} className="group flex h-full min-w-0 items-center gap-3 rounded-2xl border bg-card p-3 transition-colors hover:border-primary/50 hover:bg-secondary/20 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary sm:gap-4">
+                <img src={port.photo.src} alt={port.photo.alt} width={160} height={192} loading="lazy" decoding="async" className="h-32 w-24 shrink-0 rounded-xl object-cover sm:h-36 sm:w-28" />
+                <span className="flex min-w-0 flex-1 flex-col items-start">
+                  <span className="block text-xs font-medium text-muted-foreground">{details.location}</span>
+                  <span className="mt-1 block text-lg font-semibold leading-snug">From {port.name} Port</span>
+                  <span className="mt-1 line-clamp-2 text-sm leading-relaxed text-muted-foreground">{details.description}</span>
+                  <span className="mt-2 block text-xs leading-relaxed text-muted-foreground"><strong className="text-foreground">Popular:</strong> {details.highlights.join(" · ")}</span>
+                  <span className="mt-2 text-sm font-semibold text-primary group-hover:underline">Explore {port.name} excursions</span>
+                </span>
+              </Link>
+            </li>;
+          })}
+        </ul>
+        <p className="mt-3 text-xs leading-relaxed text-muted-foreground">
+          Pickup arrangements differ: Ashdod may involve a port shuttle or authorized pickup point, while Haifa has a downtown passenger terminal. Confirm your ship's meeting instructions before booking.
+        </p>
+      </section>
+
+      <section id="destinations" aria-labelledby="shore-destinations-h" className="mt-9 scroll-mt-24">
+        <h2 id="shore-destinations-h" className="text-2xl font-semibold">Explore popular shore excursion destinations</h2>
+        <p className="mt-2 max-w-3xl text-sm leading-relaxed text-muted-foreground">Browse a destination, then see guided tours and private-day options from the right port.</p>
+        <ul className="mt-4 grid gap-3 sm:grid-cols-2">
+          {shoreHubExperiences.map(experience => {
+            const Icon = experienceIcons[experience.id];
+            return <li key={experience.id} className="flex min-w-0 flex-col rounded-xl border bg-card p-4" data-experience={experience.id}>
+              <div className="flex items-start gap-3">
+                <span className="grid size-9 shrink-0 place-items-center rounded-lg bg-secondary/60 text-primary"><Icon className="size-5" aria-hidden /></span>
+                <div className="min-w-0">
+                  <h3 className="text-base font-semibold leading-snug sm:text-lg">{experience.title}</h3>
+                  <p className="mt-1 text-sm leading-relaxed text-muted-foreground">{experience.description}</p>
+                </div>
+              </div>
+              <ul className="mt-auto flex flex-wrap gap-x-4 gap-y-2 pt-3 pl-12">
+                {experience.links.map(link => <li key={link.portId + "-" + link.destination}>
+                  <Link to={shorePorts[link.portId].path} search={{ destination: link.destination }} className="text-xs font-semibold text-primary underline-offset-4 hover:underline focus-visible:rounded focus-visible:outline-2 focus-visible:outline-primary">{link.label}</Link>
+                </li>)}
+              </ul>
+            </li>;
+          })}
+        </ul>
+      </section>
+
+      <section id="tour-formats" aria-labelledby="shore-formats-h" className="mt-9 scroll-mt-24">
+        <h2 id="shore-formats-h" className="text-2xl font-semibold">Private driver or guided excursion?</h2>
+        <p className="mt-2 max-w-3xl text-sm leading-relaxed text-muted-foreground">
+          Choose the right pace and level of guiding. Individual listings explain whether the price is per person or per vehicle and what is included.
+        </p>
+        <ul className="mt-4 grid gap-3 sm:grid-cols-2">
+          {shoreTourFormats.map(format => <li key={format.title} className="rounded-xl border bg-secondary/20 p-4">
+            <h3 className="text-base font-semibold">{format.title}</h3>
+            <p className="mt-1 text-sm text-muted-foreground">{format.bestFor}</p>
+            <p className="mt-2 text-xs leading-relaxed text-muted-foreground">{format.tradeoff}</p>
+          </li>)}
+        </ul>
+      </section>
+
+      <section id="planning" aria-labelledby="shore-planning-h" className="mt-9 scroll-mt-24">
+        <h2 id="shore-planning-h" className="text-2xl font-semibold">Before booking your shore excursion</h2>
+        <ul className="mt-4 grid gap-x-5 gap-y-3 rounded-xl border bg-card p-4 sm:grid-cols-2">
+          {shorePlanningSteps.map(step => <li key={step.title} className="flex items-start gap-2.5">
+            <CheckCircle2 className="mt-0.5 size-4 shrink-0 text-primary" aria-hidden />
+            <div>
+              <h3 className="text-sm font-semibold">{step.title}</h3>
+              <p className="mt-1 text-xs leading-relaxed text-muted-foreground">{step.description}</p>
             </div>
-          </li>;
-        })}
-      </ul>
-      <p className="mt-4 text-sm leading-relaxed text-muted-foreground">Haifa's passenger terminal connects with the downtown area; Ashdod has its own terminal and port-access arrangements. Confirm the meeting point for your ship with the operator rather than assuming every pickup is beside the gangway.</p>
-    </section>
+          </li>)}
+        </ul>
+        <div className="mt-4 flex flex-wrap items-center justify-between gap-3 rounded-xl border bg-secondary/25 p-4">
+          <div className="min-w-0">
+            <h3 className="text-base font-semibold">Looking for a private driver?</h3>
+            <p className="mt-1 text-sm leading-relaxed text-muted-foreground">Share your ship's date, port and preferred stops on the relevant port page for a tailored car-and-driver quote.</p>
+          </div>
+          <nav aria-label="Private cruise-port quote requests" className="flex flex-wrap gap-2">
+            <Link to={shorePorts.ashdod.path} hash="request-quote" className="btn btn-primary">From Ashdod</Link>
+            <Link to={shorePorts.haifa.path} hash="request-quote" className="btn btn-primary">From Haifa</Link>
+          </nav>
+        </div>
+      </section>
 
-    <section id="destinations" aria-labelledby="destinations-h" className="mt-14 scroll-mt-24">
-      <p className="eyebrow">Find your kind of day</p>
-      <h2 id="destinations-h" className="mt-2 text-3xl">Where can you go on an Israel shore excursion?</h2>
-      <div className="mt-6 grid gap-5 sm:grid-cols-2">
-        {shoreHubExperiences.map((experience) => {
-          const Icon = experienceIcons[experience.id];
-          const image = experiencePhotos[experience.id];
-          return <article key={experience.id} data-experience={experience.id} className="flex min-w-0 flex-col overflow-hidden rounded-2xl border bg-card">
-            <img src={image.src} alt={image.alt} width={800} height={450} loading="lazy" decoding="async" className="aspect-[16/9] w-full object-cover" />
-            <div className="flex flex-1 flex-col p-5 sm:p-6">
-              <div className="flex items-center gap-3"><span className="shrink-0 rounded-xl bg-secondary p-2.5 text-primary"><Icon className="h-5 w-5" aria-hidden /></span><h3 className="text-2xl font-semibold">{experience.title}</h3></div>
-              <p className="mt-4 text-sm leading-relaxed text-muted-foreground">{experience.description}</p>
-              <p className="mt-3 text-sm"><span className="font-semibold">A great fit for: </span>{experience.bestFor}</p>
-              <ul className="mt-auto flex flex-wrap gap-x-4 gap-y-2 pt-5">{experience.links.map((link) => <li key={`${link.portId}-${link.destination}`}><Link to={shorePorts[link.portId].path} search={{ destination: link.destination }} className="text-sm font-semibold text-primary underline underline-offset-4">{link.label}</Link></li>)}</ul>
-            </div>
-          </article>;
-        })}
-      </div>
-    </section>
+      <FaqList faqs={shoreHubFaqs} compact />
 
-    <section id="tour-formats" aria-labelledby="tour-formats-h" className="mt-14 scroll-mt-24 rounded-3xl bg-secondary/70 p-5 sm:p-7">
-      <p className="eyebrow">Choose how you explore</p>
-      <h2 id="tour-formats-h" className="mt-2 text-3xl">Private driver or guided shore excursion?</h2>
-      <p className="mt-3 max-w-3xl leading-relaxed text-muted-foreground">Travel at your family's pace, spend the day with a dedicated guide, or join a shared itinerary. Compare the experience and the full cost for your party, as well as the headline price.</p>
-      <div className="mt-6 grid gap-4 sm:grid-cols-2">{shoreTourFormats.map((format) => <article key={format.title} className="rounded-2xl border bg-card p-5">
-        <h3 className="text-2xl font-semibold">{format.title}</h3>
-        <p className="mt-3 text-sm font-medium text-primary">{format.bestFor}</p>
-        <p className="mt-3 text-sm leading-relaxed"><span className="font-semibold">What to expect: </span>{format.includes}.</p>
-        <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{format.tradeoff}</p>
-      </article>)}</div>
-    </section>
+      <section id="shore-related-guides" aria-labelledby="shore-related-h" className="mt-9">
+        <h2 id="shore-related-h" className="text-2xl font-semibold">Discover the places along your route</h2>
+        <ul className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+          {shoreHubGuides.map(guide => <li key={String(guide.to)} className="min-w-0">
+            <Link to={guide.to} className="group flex h-full min-w-0 items-center gap-3 rounded-xl border bg-card p-3 transition-colors hover:border-primary/50 hover:bg-secondary/20 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
+              <img src={guide.photo.src} alt={guide.photo.alt} width={112} height={90} loading="lazy" decoding="async" className="h-24 w-20 shrink-0 rounded-lg object-cover" />
+              <span className="min-w-0 flex-1">
+                <span className="block text-sm font-semibold leading-snug text-foreground group-hover:text-primary">{guide.title}</span>
+                <span className="mt-1 line-clamp-2 block text-xs leading-relaxed text-muted-foreground">{guide.description}</span>
+                <span className="mt-1.5 inline-block text-xs font-semibold text-primary group-hover:underline">Read guide</span>
+              </span>
+            </Link>
+          </li>)}
+        </ul>
+      </section>
 
-    <section id="planning" aria-labelledby="planning-h" className="mt-14 scroll-mt-24">
-      <p className="eyebrow">Make every hour count</p>
-      <h2 id="planning-h" className="mt-2 text-3xl">Plan a day that works with your cruise</h2>
-      <ol className="mt-6 grid gap-5 sm:grid-cols-2">{shorePlanningSteps.map((step, index) => <li key={step.title} className="flex gap-4 rounded-2xl border p-5">
-        <span aria-hidden className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-primary text-sm font-semibold text-primary-foreground">{index + 1}</span>
-        <div><h3 className="text-xl font-semibold">{step.title}</h3><p className="mt-2 text-sm leading-relaxed text-muted-foreground">{step.description}</p></div>
-      </li>)}</ol>
-    </section>
+      <section id="shore-practical" aria-labelledby="shore-practical-h" className="mt-9">
+        <h2 id="shore-practical-h" className="text-2xl font-semibold">Practical travel guides</h2>
+        <ul className="mt-4 grid gap-3 sm:grid-cols-2">
+          {practicalGuides.map(guide => {
+            const Icon = guide.icon;
+            return <li key={guide.to}>
+              <Link to={guide.to} className="group flex h-full items-start gap-3 rounded-xl border bg-card p-3 transition-colors hover:border-primary/50 hover:bg-secondary/20 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
+                <Icon aria-hidden className="mt-0.5 size-5 shrink-0 text-primary" />
+                <span className="min-w-0">
+                  <span className="block text-sm font-semibold text-foreground group-hover:text-primary">{guide.title}</span>
+                  <span className="mt-1 block text-xs leading-relaxed text-muted-foreground">{guide.description}</span>
+                </span>
+              </Link>
+            </li>;
+          })}
+        </ul>
+      </section>
 
-    <Section id="visit-tips" title="Small details that make a better day ashore">
-      <p>Wear comfortable shoes for the stone lanes of Jerusalem, Jaffa and Akko. Discuss steps and walking distances before choosing a route, and check dress expectations at religious sites. A private vehicle helps connect stops, but it does not remove the walking inside historic quarters.</p>
-      <p>For Masada and the Dead Sea, plan for sun, water and a realistic balance between the fortress and any beach stop. Cable-car operation, admission and weather conditions can affect the visit. A designated beach with the facilities you need is a separate choice from simply reaching a Dead Sea viewpoint.</p>
-      <p>Save your pickup details and operator's number, and keep enough phone battery for the return. My <Link to={travelGuidePaths.travelTips} className="text-primary underline">Israel travel tips</Link> and <Link to={travelGuidePaths.esim} className="text-primary underline">Israel eSIM guide</Link> help with practical preparations. For travel beyond your port call, explore <Link to="/tours/" className="text-primary underline">Israel tours and day trips</Link> or <Link to="/private-driver/" className="text-primary underline">a private driver for a custom itinerary</Link>.</p>
-    </Section>
-
-    <ShoreReadingGuides guides={shoreHubGuides} title="Get to know the places on your route" />
-    <FaqList faqs={shoreHubFaqs} />
-    <section aria-labelledby="shore-ready-h" className="mt-14 rounded-3xl bg-primary p-6 text-primary-foreground sm:p-8">
-      <h2 id="shore-ready-h" className="text-3xl">Make your day in Israel your own</h2>
-      <p className="mt-3 max-w-3xl leading-relaxed opacity-90">Choose your port to discover the day trips and guided excursions, or share your ship's schedule and favorite places for a personal car-and-driver plan. A memorable day starts with the right route for you.</p>
-      <div className="mt-5 flex flex-wrap gap-3"><Link to={shorePorts.ashdod.path} hash="request-quote" className="btn btn-light">Plan my day from Ashdod</Link><Link to={shorePorts.haifa.path} hash="request-quote" className="btn btn-light">Plan my day from Haifa</Link></div>
-    </section>
-    <SourceList ids={shoreHubSourceIds} intro="Official terminal and national-park information for planning your visit. Your cruise line and the individual operator confirm the arrangements for your actual ship and date." />
-    <details className="mt-8 rounded-xl border p-5"><summary className="cursor-pointer text-sm font-medium">Image credits</summary><ul className="mt-3 space-y-3">{[...new Map(photos.map((photo) => [photo.src, photo])).values()].map((photo) => <li key={photo.src}><p className="text-sm">{photo.alt}</p><GuidePhotoCredit photo={photo} insideDisclosure /></li>)}</ul></details>
+      <SourceList
+        ids={shoreHubSourceIds}
+        intro="Official port and national-park information for planning. Your cruise line and tour operator confirm the arrangements for your ship and date."
+      />
+      {photos.length > 0 && <details className="mt-9 rounded-xl border p-4 text-xs text-muted-foreground">
+        <summary className="cursor-pointer font-semibold">Photo credits</summary>
+        <ul className="mt-3 space-y-3">
+          {[...new Map(photos.map(photo => [photo.src, photo])).values()].map(photo => <li key={photo.src}><GuidePhotoCredit photo={photo} /></li>)}
+        </ul>
+      </details>}
+    </div>
   </main>;
 }
