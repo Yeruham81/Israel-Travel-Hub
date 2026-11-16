@@ -88,4 +88,12 @@ export const portShoreGuides: Record<ShorePortId, ShoreReadingGuide[]> = {
   haifa: [guides.haifa, guides.akko, guides.nazareth, guides.galilee, guides.roshHanikra, guides.jerusalem],
 };
 
-export const shoreHubGuides: ShoreReadingGuide[] = [guides.jerusalem, guides.galilee, guides.masada, guides.akko, guides.jaffa, guides.deadSea];
+/** Short hub-only previews; retain detailed descriptions on individual port pages. */
+export const shoreHubGuides: ShoreReadingGuide[] = [
+  { ...guides.jerusalem, description: "Historic quarters, sacred sites and classic viewpoints." },
+  { ...guides.galilee, description: "Lakeside heritage around Tiberias and Capernaum." },
+  { ...guides.masada, description: "Ancient fortress, desert views and cable-car planning." },
+  { ...guides.akko, description: "Historic harbour, market lanes and Crusader heritage." },
+  { ...guides.jaffa, description: "Stone lanes, sea views and the old harbour." },
+  { ...guides.deadSea, description: "Designated beaches, access and bathing tips." },
+];

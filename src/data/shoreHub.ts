@@ -15,14 +15,14 @@ export const shoreHubPorts: Record<ShorePortId, {
 }> = {
   ashdod: {
     location: "Southern Mediterranean coast",
-    description: "Choose Jerusalem, Tel Aviv and Old Jaffa, or a longer day at Masada and the Dead Sea.",
+    description: "A great starting point for visiting some of Israel's major attractions.",
     highlights: ["Jerusalem & Bethlehem", "Tel Aviv & Old Jaffa", "Masada & the Dead Sea"],
     planning: "A coastal outing can offer a gentler day. Jerusalem involves walking and steps; desert routes need a longer port call and time on the road.",
     pickup: "This secure port is not a pedestrian city-center terminal. The ship's shuttle and authorized pickup point must be confirmed for the actual call.",
   },
   haifa: {
     location: "Northern Mediterranean coast",
-    description: "Explore nearby Haifa and Akko, or visit Nazareth and the Sea of Galilee.",
+    description: "The ideal location for touring the northern coast and Galilee region.",
     highlights: ["Haifa & Akko", "Nazareth & Sea of Galilee", "Jerusalem on a longer call"],
     planning: "Northern routes keep more of the day in the region. Jerusalem and Tel Aviv mean longer drives south, so plan a selective itinerary.",
     pickup: "The passenger-terminal public access is via a pedestrian bridge near 65 HaAtsmaut Street; confirm any ship-specific meeting instructions.",
@@ -40,25 +40,25 @@ export const shoreHubExperiences: {
     id: "history", title: "Jerusalem & Bethlehem",
     description: "See Jerusalem's historic and sacred sites. Add Bethlehem only when timing and arrangements allow.",
     bestFor: "First-time visitors, history lovers and pilgrims",
-    links: [{ portId: "ashdod", destination: "jerusalem", label: "Jerusalem from Ashdod" }, { portId: "haifa", destination: "jerusalem", label: "Jerusalem from Haifa" }],
+    links: [{ portId: "ashdod", destination: "jerusalem", label: "From Ashdod" }, { portId: "haifa", destination: "jerusalem", label: "From Haifa" }],
   },
   {
     id: "galilee", title: "Nazareth & the Sea of Galilee",
     description: "Discover Nazareth and selected lakeside sites, best suited to a Haifa port call.",
     bestFor: "Christian heritage and scenic countryside",
-    links: [{ portId: "haifa", destination: "galilee", label: "Galilee from Haifa" }, { portId: "ashdod", destination: "galilee", label: "Galilee from Ashdod" }],
+    links: [{ portId: "haifa", destination: "galilee", label: "From Haifa" }, { portId: "ashdod", destination: "galilee", label: "From Ashdod" }],
   },
   {
     id: "coast", title: "Coastal cities & old harbours",
     description: "Explore Akko from Haifa, or Tel Aviv and Old Jaffa from Ashdod.",
     bestFor: "Couples, families and a less hurried city experience",
-    links: [{ portId: "haifa", destination: "akko", label: "Akko from Haifa" }, { portId: "ashdod", destination: "tel-aviv", label: "Tel Aviv & Jaffa from Ashdod" }],
+    links: [{ portId: "haifa", destination: "akko", label: "From Haifa" }, { portId: "ashdod", destination: "tel-aviv", label: "From Ashdod" }],
   },
   {
     id: "desert", title: "Masada & the Dead Sea",
     description: "See Masada and a designated Dead Sea beach from Ashdod on a longer port call.",
     bestFor: "Dramatic landscapes and a full day of discovery",
-    links: [{ portId: "ashdod", destination: "masada", label: "Masada from Ashdod" }, { portId: "ashdod", destination: "dead-sea", label: "Dead Sea from Ashdod" }],
+    links: [{ portId: "ashdod", destination: "masada", label: "From Ashdod" }],
   },
 ];
 

@@ -1,10 +1,11 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { Anchor, CalendarDays, CheckCircle2, Compass, Smartphone, TrainFront } from "lucide-react";
+import { Anchor, CheckCircle2 } from "lucide-react";
 import { FaqList, HubHeader, SourceList } from "@/components/Guide";
 import { GuidePhotoCredit } from "@/components/TravelGuide";
 import { GuideHeroMedia } from "@/components/GuideHeroMedia";
 import { getShorePort } from "@/data/shoreExcursions";
 import { shoreHubGuides } from "@/data/shoreReading";
+import { travelGuides } from "@/data/travelGuides";
 import cruisePortFeature from "@/assets/home/cruise-port-feature.webp";
 import jerusalemFeature from "@/assets/home/jerusalem-old-city-card.webp";
 import galileeFeature from "@/assets/home/tiberias-lake-card.webp";
@@ -31,10 +32,12 @@ const experiencePhotos = {
 } as const;
 
 const practicalGuides = [
-  { title: "Israel travel tips", description: "What to know before your day ashore.", to: travelGuidePaths.travelTips, icon: Compass },
-  { title: "Travel eSIM for Israel", description: "Keep in touch with your driver or guide.", to: travelGuidePaths.esim, icon: Smartphone },
-  { title: "Getting around Israel", description: "Transport options beyond the port.", to: travelGuidePaths.israel, icon: TrainFront },
-  { title: "Israel holidays & events", description: "Check dates that may affect your visit.", to: travelGuidePaths.calendar, icon: CalendarDays },
+  { title: "Israel travel tips", description: "Essential advice for your visit.", to: travelGuidePaths.travelTips, photo: travelGuides.travelTips.cardPhoto ?? travelGuides.travelTips.photo },
+  { title: "Travel eSIM for Israel", description: "Stay connected during your day ashore.", to: travelGuidePaths.esim, photo: travelGuides.esim.cardPhoto ?? travelGuides.esim.photo },
+  { title: "Getting around Israel", description: "Trains, buses, taxis and local travel.", to: travelGuidePaths.israel, photo: travelGuides.israel.cardPhoto ?? travelGuides.israel.photo },
+  { title: "Israel holidays & events", description: "Check events that may affect your visit.", to: travelGuidePaths.calendar, photo: travelGuides.calendar.cardPhoto ?? travelGuides.calendar.photo },
+  { title: "Best time to visit Israel", description: "Seasons, weather and regional conditions.", to: travelGuidePaths.bestTime, photo: travelGuides.bestTime.cardPhoto ?? travelGuides.bestTime.photo },
+  { title: "Taxis in Israel", description: "Licensed taxis, fares and booking apps.", to: travelGuidePaths.taxis, photo: travelGuides.taxis.cardPhoto ?? travelGuides.taxis.photo },
 ] as const;
 
 export const Route = createFileRoute("/shore-excursions/")({
@@ -77,7 +80,7 @@ export const Route = createFileRoute("/shore-excursions/")({
 });
 
 function Shore() {
-  const photos = [heroPhoto, ...portIds.map(id => getShorePort(id).photo), ...shoreHubGuides.map(guide => guide.photo)].filter(hasPublicPhotoCredit);
+  const photos = [heroPhoto, ...portIds.map(id => getShorePort(id).photo), ...shoreHubGuides.map(guide => guide.photo), ...practicalGuides.map(guide => guide.photo)].filter(hasPublicPhotoCredit);
 
   return <main className="pb-12" data-testid="shore-hub">
     <HubHeader
@@ -95,9 +98,6 @@ function Shore() {
     <div className="mx-auto max-w-5xl px-4">
       <section id="ports" aria-labelledby="shore-ports-h" className="mt-8 scroll-mt-24">
         <h2 id="shore-ports-h" className="text-2xl font-semibold">Choose your cruise port</h2>
-        <p className="mt-2 max-w-3xl text-sm leading-relaxed text-muted-foreground">
-          Ashdod is a useful starting point for Jerusalem and the southern coast. Haifa is closer to Akko, Nazareth and the Sea of Galilee.
-        </p>
         <ul className="mt-4 grid gap-3 md:grid-cols-2" aria-label="Cruise port excursion guides">
           {portIds.map(id => {
             const port = getShorePort(id);
@@ -106,7 +106,6 @@ function Shore() {
               <Link to={port.path} className="group flex h-full min-w-0 items-center gap-3 rounded-2xl border bg-card p-3 transition-colors hover:border-primary/50 hover:bg-secondary/20 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary sm:gap-4">
                 <img src={port.photo.src} alt={port.photo.alt} width={160} height={192} loading="lazy" decoding="async" className="h-28 w-24 shrink-0 rounded-xl object-cover sm:h-32 sm:w-28" />
                 <span className="flex min-w-0 flex-1 flex-col items-start">
-                  <span className="block text-xs font-medium text-muted-foreground">{details.location}</span>
                   <span className="mt-1 block text-lg font-semibold leading-snug">From {port.name} Port</span>
                   <span className="mt-1 line-clamp-2 text-sm leading-relaxed text-muted-foreground">{details.description}</span>
                   <span className="mt-2 block text-xs leading-relaxed text-muted-foreground"><strong className="text-foreground">Popular:</strong> {details.highlights.join(" · ")}</span>
@@ -116,9 +115,6 @@ function Shore() {
             </li>;
           })}
         </ul>
-        <p className="mt-3 text-xs leading-relaxed text-muted-foreground">
-          Pickup arrangements differ: Ashdod may involve a port shuttle or authorized pickup point, while Haifa has a downtown passenger terminal. Confirm your ship's meeting instructions before booking.
-        </p>
       </section>
 
       <section id="destinations" aria-labelledby="shore-destinations-h" className="mt-9 scroll-mt-24">
@@ -190,7 +186,7 @@ function Shore() {
       <FaqList faqs={shoreHubFaqs} compact />
 
       <section id="shore-related-guides" aria-labelledby="shore-related-h" className="mt-9">
-        <h2 id="shore-related-h" className="text-2xl font-semibold">Discover the places along your route</h2>
+        <h2 id="shore-related-h" className="text-2xl font-semibold">Discover Israel's main attractions</h2>
         <ul className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
           {shoreHubGuides.map(guide => <li key={String(guide.to)} className="min-w-0">
             <Link to={guide.to} className="group flex h-full min-w-0 items-center gap-3 rounded-xl border bg-card p-3 transition-colors hover:border-primary/50 hover:bg-secondary/20 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
@@ -208,18 +204,16 @@ function Shore() {
       <section id="shore-practical" aria-labelledby="shore-practical-h" className="mt-9">
         <h2 id="shore-practical-h" className="text-2xl font-semibold">Practical travel guides</h2>
         <ul className="mt-4 grid gap-3 sm:grid-cols-2">
-          {practicalGuides.map(guide => {
-            const Icon = guide.icon;
-            return <li key={guide.to}>
-              <Link to={guide.to} className="group flex h-full items-start gap-3 rounded-xl border bg-card p-3 transition-colors hover:border-primary/50 hover:bg-secondary/20 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
-                <Icon aria-hidden className="mt-0.5 size-5 shrink-0 text-primary" />
-                <span className="min-w-0">
-                  <span className="block text-sm font-semibold text-foreground group-hover:text-primary">{guide.title}</span>
-                  <span className="mt-1 block text-xs leading-relaxed text-muted-foreground">{guide.description}</span>
-                </span>
-              </Link>
-            </li>;
-          })}
+          {practicalGuides.map(guide => <li key={guide.to} className="min-w-0">
+            <Link to={guide.to} className="group flex h-full min-w-0 items-center gap-3 rounded-xl border bg-card p-3 transition-colors hover:border-primary/50 hover:bg-secondary/20 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
+              <img src={guide.photo.src} alt={guide.photo.alt} width={112} height={75} loading="lazy" decoding="async" className="aspect-[3/2] w-24 shrink-0 rounded-lg object-cover sm:w-28" />
+              <span className="min-w-0 flex-1">
+                <span className="block text-sm font-semibold leading-snug text-foreground group-hover:text-primary">{guide.title}</span>
+                <span className="mt-1 block text-xs leading-relaxed text-muted-foreground">{guide.description}</span>
+                <span className="mt-1.5 inline-block text-xs font-semibold text-primary group-hover:underline">Read guide</span>
+              </span>
+            </Link>
+          </li>)}
         </ul>
       </section>
 

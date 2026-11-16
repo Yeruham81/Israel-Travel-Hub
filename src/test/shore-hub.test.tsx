@@ -26,15 +26,22 @@ describe("Israel shore excursion hub", () => {
     expect(screen.getByRole("heading", { name: "Choose your cruise port" })).toBeInTheDocument();
     expect(screen.getByRole("heading", { name: "Private driver or guided excursion?" })).toBeInTheDocument();
     const destinations = screen.getByRole("region", { name: "Popular shore excursion routes" });
-    for (const choice of shoreHubExperiences.flatMap((experience) => experience.links)) {
-      const link = within(destinations).getByRole("link", { name: choice.label });
-      const url = new URL(link.getAttribute("href")!, CANONICAL_ORIGIN);
-      expect(url.searchParams.get("destination")).toBe(choice.destination);
-      const matches = filterShoreServices(choice.portId, { destination: choice.destination });
-      expect(matches.length).toBeGreaterThan(0);
-      expect(matches.every((tour) => servicesForPort(choice.portId).some((item) => item.id === tour.id))).toBe(true);
+    for (const experience of shoreHubExperiences) {
+      const card = destinations.querySelector(`[data-experience="${experience.id}"]`)! as HTMLElement;
+      expect(new Set(experience.links.map(link => link.label)).size).toBe(experience.links.length);
+      for (const choice of experience.links) {
+        const link = within(card).getByRole("link", { name: choice.label });
+        const url = new URL(link.getAttribute("href")!, CANONICAL_ORIGIN);
+        expect(url.searchParams.get("destination")).toBe(choice.destination);
+        const matches = filterShoreServices(choice.portId, { destination: choice.destination });
+        expect(matches.length).toBeGreaterThan(0);
+        expect(matches.every(tour => servicesForPort(choice.portId).some(item => item.id === tour.id))).toBe(true);
+      }
     }
-    fireEvent.click(within(destinations).getByRole("link", { name: "Masada from Ashdod" }));
+    const desert = destinations.querySelector('[data-experience="desert"]')! as HTMLElement;
+    expect(within(desert).getAllByRole("link", { name: "From Ashdod" })).toHaveLength(1);
+    expect(filterShoreServices("ashdod", { destination: "masada" }).some(item => item.destinationIds.includes("dead-sea"))).toBe(true);
+    fireEvent.click(within(desert).getByRole("link", { name: "From Ashdod" }));
     await waitFor(() => expect(router.state.location.pathname).toBe("/shore-excursions/ashdod/"));
     expect(router.state.location.search).toEqual({ destination: "masada" });
   });
@@ -69,6 +76,10 @@ describe("Israel shore excursion hub", () => {
     expect(bottomChoices[0]).toHaveAttribute("href", "/shore-excursions/ashdod/#request-quote");
     expect(bottomChoices[1]).toHaveAttribute("href", "/shore-excursions/haifa/#request-quote");
     expect(within(screen.getByTestId("hub-header")).getByRole("img", { name: "Moshe Barak" })).toBeInTheDocument();
+    const ports = screen.getByRole("list", { name: "Cruise port excursion guides" });
+    expect(ports).toHaveTextContent("A great starting point for visiting some of Israel's major attractions.");
+    expect(ports).toHaveTextContent("The ideal location for touring the northern coast and Galilee region.");
+    expect(screen.queryByText(/Pickup arrangements differ:/)).not.toBeInTheDocument();
     const credits = screen.getByText("Photo credits").closest("details");
     expect(credits).not.toBeNull();
     expect(credits?.hasAttribute("open")).toBe(false);
@@ -78,10 +89,17 @@ describe("Israel shore excursion hub", () => {
 
   it("provides six illustrated destination guides, working internal links and port-specific inquiry anchors", async () => {
     const router = await renderHub();
-    const guides = screen.getByRole("region", { name: "Discover the places along your route" });
+    const guides = screen.getByRole("region", { name: "Discover Israel's main attractions" });
     const related = within(guides).getAllByRole("link");
     expect(related).toHaveLength(6);
     expect(within(guides).getAllByRole("img")).toHaveLength(6);
+    expect(within(guides).getAllByRole("link").every(link => {
+      const preview = link.querySelector("span.text-muted-foreground");
+      return Boolean(preview && preview.textContent && preview.textContent.length < 80);
+    })).toBe(true);
+    const practical = screen.getByRole("region", { name: "Practical travel guides" });
+    expect(within(practical).getAllByRole("link")).toHaveLength(6);
+    expect(within(practical).getAllByRole("img")).toHaveLength(6);
     expect(related.every(link => link.textContent?.includes("Read guide"))).toBe(true);
     const photos = Array.from(document.querySelectorAll("main img")).map(image => image.getAttribute("src"));
     expect(new Set(photos).size).toBe(photos.length);
