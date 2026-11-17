@@ -83,7 +83,7 @@ describe("Mount of Beatitudes individual attraction upgrade", () => {
     expect(article).not.toContain("₪100");
     expect(article).not.toContain("source.hoursAndParking");
     expect(site.sources.hours).toContain("cicts.org");
-    expect(content.sources[0].label).toContain("visiting hours");
+    expect(content.sources[0]?.label).toContain("visiting hours");
     expect(article).toContain("tel:");
     expect(shell.split("<HomeContactForm").length - 1).toBe(1);
     expect(shell.indexOf("<SourcesDisclosure>")).toBeGreaterThan(shell.indexOf("<HomeContactForm"));
