@@ -208,6 +208,7 @@ export const magdalaDestinationContent: AttractionDestinationContent = {
   sources: [
     { label: "Magdala — official plan your visit", url: sources.plan, note: "Daily opening hours for the archaeological park and Duc In Altum, directions and site facilities." },
     { label: "Magdala — archaeological park", url: sources.archaeology, note: "Background on the first-century synagogue, Magdala Stone and excavated town." },
+    { label: "The Metropolitan Museum of Art — Magdala Stone catalogue entry", url: sources.stoneCatalogue, note: "The original first-century carved stone in the Israel Antiquities Authority collection." },
     { label: "Magdala — Duc In Altum", url: sources.ducInAltum, note: "Boat Chapel, Women's Atrium, prayer spaces and religious services." },
     { label: "Magdala — official contact and visitor centre", url: sources.contact, note: "Current ticket and tour enquiries, visitor contacts and religious service arrangements." },
     { label: "Christian Information Center — Magdala holiday hours", url: sources.cicHours, note: "24 December morning hours and closures on Christmas Day and Yom Kippur." },
