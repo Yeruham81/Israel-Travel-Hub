@@ -49,6 +49,8 @@ export type AttractionDestinationContent = {
   contactIntroduction?: string;
   historyTitle?: string;
   visitorContent?: ReactNode;
+  visitorTitle?: string;
+  visitorNavLabel?: string;
   transportContent?: ReactNode;
   itineraryContent?: ReactNode;
   tourContent?: ReactNode;
@@ -113,7 +115,7 @@ export function AttractionHighlight({
 export function AttractionDestinationPage({ content }: { content: AttractionDestinationContent }) {
   const sections: [string, string][] = [
     ["highlights", "What to see"],
-    ...(content.visitorContent ? [["visitor-info", "Opening hours & tickets"] as [string, string]] : []),
+    ...(content.visitorContent ? [["visitor-info", content.visitorNavLabel ?? "Opening hours & tickets"] as [string, string]] : []),
     ...(content.transportContent ? [["getting-there", "How to get there"] as [string, string]] : []),
     ...(content.itineraryContent ? [["visit-plan", "Plan your visit"] as [string, string]] : []),
     ...(content.historyContent ? [["history", "History and significance"] as [string, string]] : []),
@@ -144,7 +146,7 @@ export function AttractionDestinationPage({ content }: { content: AttractionDest
       <Section id="highlights" title={"What to see at " + content.placeName} className="mt-9">
         {content.highlightContent}
       </Section>
-      {content.visitorContent && <Section id="visitor-info" title="Opening hours, tickets and practical information">{content.visitorContent}</Section>}
+      {content.visitorContent && <Section id="visitor-info" title={content.visitorTitle ?? "Opening hours, tickets and practical information"}>{content.visitorContent}</Section>}
       {content.transportContent && <Section id="getting-there" title={"How to get to " + content.placeName}>{content.transportContent}</Section>}
       {content.itineraryContent && <Section id="visit-plan" title="How to plan your visit">{content.itineraryContent}</Section>}
       {content.historyContent && <Section id="history" title={content.historyTitle ?? "History and significance"}>{content.historyContent}</Section>}
