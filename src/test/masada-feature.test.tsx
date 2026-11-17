@@ -4,6 +4,8 @@ import { masadaDestinationContent as content } from "@/components/MasadaAttracti
 import { masadaSite as site } from "@/data/masadaSite";
 import { masadaMeta } from "@/routes/attractions.masada";
 import { attractionHubCards } from "@/data/attractionsHub";
+import { einGediCardPhoto } from "@/data/einGediCardPhoto";
+import { attractionGuides } from "@/data/attractionGuides";
 
 describe("Masada upgraded attraction guide", () => {
   it("uses the shared attraction layout, author, sources, metadata and related guides", () => {
@@ -16,12 +18,20 @@ describe("Masada upgraded attraction guide", () => {
     expect(content.facts).toHaveLength(6);
     expect(content.facts.find(f => f.label === "Entry")?.value).toBe("₪37 adult");
     expect(content.visitorNavLabel).toBe("Tickets & hours");
-    expect(content.nearby).toHaveLength(4);
+    expect(content.nearby).toHaveLength(6);
+    expect(content.nearby?.map(x => x.to)).toContain("/attractions/mount-of-olives/");
+    expect(content.nearby?.map(x => x.to)).toContain("/attractions/mount-zion/");
+    expect(content.nearby?.map(x => x.to)).toContain("/attractions/ein-gedi/");
     expect(new Set(content.nearby!.map(x => x.to)).size).toBe(content.nearby!.length);
     expect(content.planningLinks).toHaveLength(6);
     expect(content.faqs).toHaveLength(8);
     expect(content.sources).toHaveLength(8);
     expect(attractionHubCards.filter(card => card.to === content.path)).toHaveLength(1);
+    const einGediCard = attractionHubCards.find(card => card.to === "/attractions/ein-gedi/");
+    expect(einGediCard?.photo).toEqual(einGediCardPhoto);
+    expect(attractionGuides["ein-gedi"].image).toEqual(einGediCardPhoto);
+    expect(einGediCardPhoto.src).toContain("ein-gedi-waterfall.webp");
+    expect(einGediCardPhoto.alt).toContain("Ein Gedi Nature Reserve");
     expect(shell).toContain('["contact", "Contact me"]');
     expect(shell).toContain("<AuthorCard />");
     expect(shell.indexOf("<SourcesDisclosure>")).toBeGreaterThan(shell.indexOf("<HomeContactForm"));
@@ -71,6 +81,8 @@ describe("Masada upgraded attraction guide", () => {
       "src/assets/dead-sea/landscape.webp",
     ]) expect(existsSync(path), path).toBe(true);
     expect(page).toContain('data-testid="masada-wide-panorama"');
+    expect(page).toContain("desertShorePhoto");
+    expect(page).not.toContain("einGediPhoto");
     expect(page).toContain("Herod's Northern Palace");
     expect(page).toContain("The Roman siege camps and ramp");
     expect(page).toContain("Yigael Yadin Masada Museum");
