@@ -2,6 +2,7 @@ import type { TravelGuide } from "@/data/travelGuides";
 import { migrationPhotos as P } from "@/data/guideMigrationPhotos";
 import { magdalaSite } from "@/data/magdalaSite";
 import { yardenitSite } from "@/data/yardenitSite";
+import { mountPrecipiceSite } from "@/data/mountPrecipiceSite";
 
 export const heritageGuides = {
   "megiddo": {
@@ -167,17 +168,17 @@ export const heritageGuides = {
   },
   "precipice": {
     "id": "precipice",
-    "updatedAt": "2026-10-20",
-    "title": "Mount Precipice, Nazareth: viewpoints and practical advice",
-    "description": "Plan Mount Precipice near Nazareth: the Jezreel Valley panorama, Christian tradition, paths and transport, with links to nearby heritage visits.",
-    "intro": "Mount Precipice is a landscape stop on the southern side of Nazareth, with views over the Jezreel Valley. Its religious associations and open setting make it a different visit from a church interior. Give it room in a Nazareth outing without expecting the viewpoint to replace time in the old city.",
+    "updatedAt": mountPrecipiceSite.updatedAt,
+    "title": mountPrecipiceSite.title,
+    "description": mountPrecipiceSite.description,
+    "intro": mountPrecipiceSite.intro,
     "answer": "Visit for the panorama and the place’s association in Christian tradition with Luke’s account of Jesus at Nazareth. The Custodia describes that identification as a medieval tradition. Check local access and weather, stay on designated paths and arrange the return before going up to the viewpoint.",
     "topics": [
       "attractions",
       "destinations",
       "religion"
     ],
-    "photo": P["mount-precipice"],
+    "photo": mountPrecipiceSite.hero,
     "facts": [
       {
         "label": "Main reason to visit",
