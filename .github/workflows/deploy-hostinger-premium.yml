@@ -443,7 +443,19 @@ jobs:
             console.error("::error::Masada canonical URL incorrect");
             process.exit(1);
           }
-          console.log("Masada title, visitor prices, two entrances, panorama and canonical verified.");
+          const relatedGrid = html.match(/<ul[^>]*data-testid=["']stay-trip-photo-grid["'][^>]*>([\s\S]*?)<\/ul>/i);
+          const relatedCards = (relatedGrid?.[1].match(/<li\b/g) || []).length;
+          if (relatedCards !== 6) {
+            console.error("::error::Masada related attraction grid requires exactly six photo cards; found " + relatedCards);
+            process.exit(1);
+          }
+          for (const required of ["Mount of Olives", "Mount Zion", "Ein Gedi", "ein-gedi-waterfall"]) {
+            if (!html.includes(required)) {
+              console.error("::error::Masada related attractions missing " + required);
+              process.exit(1);
+            }
+          }
+          console.log("Masada title, prices, six attraction photo cards, Ein Gedi waterfall and canonical verified.");
           NODE
           rm -f "$masada_html"
           echo "Source-controlled static guides published; existing PHP APIs still respond to GET."
