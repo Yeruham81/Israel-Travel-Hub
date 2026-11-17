@@ -1,6 +1,7 @@
 import type { TravelGuide } from "@/data/travelGuides";
 import { migrationPhotos as P } from "@/data/guideMigrationPhotos";
 import { magdalaSite } from "@/data/magdalaSite";
+import { yardenitSite } from "@/data/yardenitSite";
 
 export const heritageGuides = {
   "megiddo": {
@@ -637,17 +638,17 @@ export const heritageGuides = {
   },
   "yardenit": {
     "id": "yardenit",
-    "updatedAt": "2026-10-20",
-    "title": "Yardenit baptismal site: visiting and ceremony planning",
-    "description": "Plan Yardenit at the southern Sea of Galilee: baptism arrangements, robes, facilities, clergy and a realistic Galilee itinerary. Distinguish it from Qasr el-Yahud.",
-    "intro": "Yardenit is a modern, purpose-built baptismal site where the Jordan flows out of the Sea of Galilee, near Kibbutz Kinneret. It offers an organised setting for pilgrims, groups and visitors who want to see a baptism or spend time by the river. It is distinct from the traditional southern baptism location at Qasr el-Yahud.",
+    "updatedAt": yardenitSite.updatedAt,
+    "title": yardenitSite.title,
+    "description": yardenitSite.description,
+    "intro": yardenitSite.intro,
     "answer": "Choose Yardenit for its Galilee location and designated baptism facilities. The operator currently describes entry and conducting a baptism as free, with required white robes rented or purchased and some facilities charged separately. There is no resident priest: organise clergy or a ceremony in advance and confirm the actual visit and last-baptism times directly.",
     "topics": [
       "attractions",
       "destinations",
       "religion"
     ],
-    "photo": P["EXISTING:yardenit"],
+    "photo": yardenitSite.hero,
     "facts": [
       {
         "label": "Location",

@@ -1,7 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { TravelGuidePage, travelGuideMeta } from "@/components/TravelGuide";
+import { travelGuideMeta } from "@/components/TravelGuide";
+import { YardenitAttractionPage } from "@/components/YardenitAttractionPage";
 
 export const Route = createFileRoute("/attractions/yardenit")({
   head: () => travelGuideMeta("yardenit"),
-  component: () => <TravelGuidePage id="yardenit" />,
+  component: YardenitAttractionPage,
 });
