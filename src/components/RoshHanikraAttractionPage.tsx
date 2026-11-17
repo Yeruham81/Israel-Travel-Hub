@@ -1,7 +1,7 @@
 import { Link } from "@tanstack/react-router";
 import { ArrowUpRight, BusFront, CarFront, Footprints } from "lucide-react";
 import {
-  AttractionDestinationPage, AttractionHighlight, AttractionPracticalTip,
+  AttractionDestinationPage, AttractionHighlight,
   type AttractionDestinationContent,
 } from "@/components/AttractionDestinationPage";
 import { roshHanikraSite } from "@/data/roshHanikraSite";
@@ -30,8 +30,8 @@ export const roshHanikraDestinationContent: AttractionDestinationContent = {
   facts: [
     { icon: "location", label: "Location", value: "Northern Mediterranean coast", note: "End of Route 4, near the Lebanese border" },
     { icon: "duration", label: "Time needed", value: "60–90 minutes", note: "Cable car, grottoes and viewpoint; excluding travel" },
-    { icon: "admission", label: "Entry", value: "Paid ticket", note: "Cable car, grotto walk and film; see official prices" },
-    { icon: "hours", label: "Last cable-car entry", value: "16:00 / 18:00", note: "Autumn–winter / summer; check your date" },
+    { icon: "admission", label: "Entry", value: "₪47 adult", note: "Reduced admission ₪39; child with disability ₪29" },
+    { icon: "hours", label: "Open daily", value: "Last entry 16:00 / 18:00", note: "Autumn–winter / summer; closes one hour later" },
     { icon: "highlights", label: "Main experience", value: "Cable car & grottoes", note: "Sea caves, historic tunnel and coastal views" },
     { icon: "access", label: "Accessibility", value: "Partly accessible", note: "The full grotto route has narrow passages and steps" },
   ],
@@ -56,45 +56,35 @@ export const roshHanikraDestinationContent: AttractionDestinationContent = {
         image={{ src: "/images/attractions/rosh-hanikra-railway-tunnel.webp", alt: "Illuminated rock-cut tunnel at the Rosh Hanikra visitor site" }}
       >
         <p>Near the grottoes, the old railway tunnel recalls the line built through the headland during the Second World War to link Haifa with Beirut and Tripoli. Today the visitor experience includes an audiovisual presentation telling the story of the cliffs, caves and railway.</p>
-        <p>I recommend watching the film if it is running during your visit; it provides useful context before or after seeing the natural passages.</p>
+        <p>The film provides useful context before or after seeing the natural passages. Screenings are subject to the site's daily operations.</p>
       </AttractionHighlight>
       <AttractionHighlight
         title="The chalk headland above the Mediterranean"
         image={{ src: "/images/attractions/rosh-hanikra-cliffs.webp", alt: "White limestone and chalk cliffs at Rosh Hanikra rising directly from the Mediterranean Sea" }}
       >
-        <p>The pale headland is a landmark of the northern coast. From designated viewpoints you can appreciate the layers of rock, the deep-blue water and the remarkable way the sea has shaped the cliff.</p>
+        <p>The pale headland is a landmark of the northern coast. From the designated viewpoints, take in the layers of rock and deep-blue water, then look south along the Western Galilee coastline towards Achziv and Nahariya.</p>
         <p>Stay within the visitor areas and observe any posted border or security instructions; the location is immediately beside Israel's northern frontier.</p>
-      </AttractionHighlight>
-      <AttractionHighlight
-        title="Views along the Western Galilee coastline"
-        image={{ src: "/images/attractions/rosh-hanikra-coast.webp", alt: "View south along the Western Galilee's rocky Mediterranean coastline from Rosh Hanikra" }}
-      >
-        <p>Before leaving the upper visitor area, look south along the coast towards Achziv and Nahariya. On clear days the shoreline stretches far into the distance, making this a natural scenic stop on a Western Galilee journey.</p>
-        <p>For a longer day, combine the grottoes with <Link to="/attractions/akko-acre/" className={inlineLink}>Old Akko</Link> or another stop farther along the coast.</p>
       </AttractionHighlight>
     </div>
   ),
   visitorContent: (
     <div className="mt-4 space-y-4">
-      <p>Rosh Hanikra's regular visitor ticket covers the cable car, the self-guided grotto walk and the audiovisual presentation. The site resumed welcoming visitors in October 2026 after restoration work. Check the official operator's visitor information for the arrangements on your particular day, especially in rough weather.</p>
+      <p>Rosh Hanikra's regular visitor ticket covers the cable car, the self-guided grotto walk and the audiovisual presentation. The site resumed welcoming visitors in October 2026 after restoration work.</p>
       <div className="grid gap-3 sm:grid-cols-2" data-testid="rosh-hanikra-visitor-hours">
         <article className="rounded-xl border bg-card p-4">
           <h3 className="font-serif text-xl font-semibold">Seasonal visiting hours</h3>
-          <p className="mt-3 text-sm leading-relaxed sm:text-base">The operator currently lists <strong>last cable-car entry at {roshHanikraSite.visit.lastCableAutumnWinter} in autumn and winter</strong>, and <strong>{roshHanikraSite.visit.lastCableSummer} in summer</strong>. The site closes about <strong>{roshHanikraSite.visit.closesAfterLastEntry}</strong> after the last entry.</p>
-          <p className="mt-2 text-sm leading-relaxed sm:text-base">The timetable may change for holidays, sea conditions or other operational reasons. Check the day's hours before driving north, especially if arriving in the afternoon.</p>
-          <a href={roshHanikraSite.sources.info} target="_blank" rel="noopener noreferrer" className="mt-3 inline-flex items-center gap-1 text-sm font-semibold text-primary hover:underline">Official hours and visitor information <ArrowUpRight className="h-3.5 w-3.5" aria-hidden="true" /></a>
+          <p className="mt-3 text-sm leading-relaxed sm:text-base">The site is open <strong>every day of the week</strong>. Last cable-car entry is at <strong>{roshHanikraSite.visit.lastCableAutumnWinter} in autumn and winter</strong> and <strong>{roshHanikraSite.visit.lastCableSummer} in summer</strong>. The site closes <strong>{roshHanikraSite.visit.closesAfterLastEntry}</strong> after the last entry.</p>
+          <p className="mt-2 text-sm leading-relaxed sm:text-base">Daily hours are published on the <a href="https://www.rosh-hanikra.com/" target="_blank" rel="noopener noreferrer" className={inlineLink}>official homepage</a> and may change on holidays or because of weather. Check them before your visit.</p>
+          <a href={roshHanikraSite.sources.info} target="_blank" rel="noopener noreferrer" className="mt-3 inline-flex items-center gap-1 text-sm font-semibold text-primary hover:underline">Additional visitor information <ArrowUpRight className="h-3.5 w-3.5" aria-hidden="true" /></a>
         </article>
         <article className="rounded-xl border bg-card p-4">
           <h3 className="font-serif text-xl font-semibold">Tickets and contact</h3>
-          <p className="mt-3 text-sm leading-relaxed sm:text-base">Purchase a <a href={roshHanikraSite.sources.tickets} target="_blank" rel="noopener noreferrer" className={inlineLink}>regular entry ticket on the official site</a>, where you can choose the visitor category and see the price before payment. Your ticket covers the cable car, grottoes and film.</p>
-          <p className="mt-2 text-sm leading-relaxed sm:text-base">The operator also lists <a href={roshHanikraSite.sources.comboAkko} target="_blank" rel="noopener noreferrer" className={inlineLink}>combined entry with Old Akko</a>, useful if you plan to visit both.</p>
+          <p className="mt-3 text-sm leading-relaxed sm:text-base"><strong>Admission:</strong> ₪47 per adult; ₪39 for children under 18, soldiers, senior citizens and visitors with disabilities; ₪29 for children with disabilities. Tickets include the cable car, grotto walk and film. <a href={roshHanikraSite.sources.tickets} target="_blank" rel="noopener noreferrer" className={inlineLink}>Buy tickets on the official site</a>.</p>
+          <p className="mt-2 text-sm leading-relaxed sm:text-base">The operator also offers a <a href={roshHanikraSite.sources.comboAkko} target="_blank" rel="noopener noreferrer" className={inlineLink}>combined ticket with Old Akko</a>. Akko entry can be used separately within seven days of purchase; Rosh Hanikra admission is for the selected visit day.</p>
           <p className="mt-3 text-sm"><strong>Visitor service: </strong><a href={"tel:" + roshHanikraSite.visit.customerServiceHref} dir="ltr" className={inlineLink}>{roshHanikraSite.visit.customerService}</a></p>
           <p className="mt-1 text-sm text-muted-foreground">Sunday–Thursday, 09:00–16:00</p>
         </article>
       </div>
-      <AttractionPracticalTip>
-        <strong>My planning tip:</strong> The grottoes are at their most dramatic when the waves are active, but rough sea and wind can also affect access. Keep the stop flexible and check the operator's latest update on the day of your visit.
-      </AttractionPracticalTip>
       <div className="rounded-xl border border-border/80 bg-secondary/20 p-4 sm:p-5" data-testid="rosh-hanikra-visitor-essentials">
         <h3 className="font-serif text-xl font-semibold">Useful things to know before visiting</h3>
         <ul className="mt-3 grid list-disc gap-x-6 gap-y-2 pl-5 text-sm leading-relaxed sm:grid-cols-2 sm:text-base">
@@ -119,7 +109,7 @@ export const roshHanikraDestinationContent: AttractionDestinationContent = {
           </article>
           <article className="rounded-xl border bg-card p-4">
             <div className="flex items-center gap-2"><BusFront className="h-5 w-5 text-primary" aria-hidden="true" /><h3 className="font-semibold">By public transport</h3></div>
-            <p className="mt-2 text-sm leading-relaxed">Take a train to <strong>Nahariya</strong> and check the onward bus connection. The operator's older directions mention <strong>Nativ Express line 31</strong> from Nahariya Central Station, but confirm its current route and the last walk to the upper station in the <a href="https://bus.gov.il/en/home" target="_blank" rel="noopener noreferrer" className={inlineLink}>official public transport planner</a>. Check return services before starting the journey.</p>
+            <p className="mt-2 text-sm leading-relaxed">Take a train to <strong>Nahariya</strong> and check the onward bus connection. Use the <a href="https://bus.gov.il/en/home" target="_blank" rel="noopener noreferrer" className={inlineLink}>official public transport planner</a> to check the current bus connection, walking distance to the upper station and return services.</p>
           </article>
           <article className="rounded-xl border bg-card p-4">
             <div className="flex items-center gap-2"><Footprints className="h-5 w-5 text-primary" aria-hidden="true" /><h3 className="font-semibold">Walking through the site</h3></div>
@@ -149,9 +139,8 @@ export const roshHanikraDestinationContent: AttractionDestinationContent = {
         <h3 className="font-serif text-xl font-semibold">Combine Rosh Hanikra with the Western Galilee</h3>
         <p className="mt-3 text-sm leading-relaxed sm:text-base">For a full day, I recommend choosing a manageable two or three stops along the coast rather than spending most of your time in transit.</p>
         <ul className="mt-3 list-disc space-y-2 pl-5 text-sm leading-relaxed sm:text-base">
-          <li><strong>Classic coastal day:</strong> Combine Rosh Hanikra with <Link to="/attractions/akko-acre/" className={inlineLink}>Old Akko</Link>, its markets, harbour and Crusader history.</li>
-          <li><strong>Continue towards Haifa:</strong> Explore the <Link to="/travel-blog/haifa/" className={inlineLink}>Bahá'í Gardens viewpoints and German Colony</Link> if you are travelling south.</li>
-          <li><strong>A longer coastal journey:</strong> <Link to="/attractions/caesarea/" className={inlineLink}>Caesarea National Park</Link> can be another stop on a day with a suitable start and enough driving time.</li>
+          <li><strong>Classic Western Galilee day:</strong> Combine Rosh Hanikra and Achziv Beach with <Link to="/attractions/akko-acre/" className={inlineLink}>Old Akko</Link>, its markets, harbour and Crusader history.</li>
+          <li><strong>Nearby coastal stop:</strong> Enjoy Nahariya and its seafront for a shorter, relaxed route.</li><li><strong>Continue towards Haifa:</strong> Explore the <Link to="/travel-blog/haifa/" className={inlineLink}>Bahá’í Gardens viewpoints and German Colony</Link> if you are heading south.</li>
         </ul>
       </div>
     </div>
@@ -188,13 +177,13 @@ export const roshHanikraDestinationContent: AttractionDestinationContent = {
   ),
   faqs: [
     { q: "Is Rosh Hanikra open for visits?", a: "The site reopened in October 2026, and the official operator is currently selling entry to the cable car and grottoes. Check the site's current operating notice before travelling, because weather or local restrictions can change access." },
-    { q: "What does the Rosh Hanikra ticket include?", a: "The standard entry experience includes the cable car, the self-guided grotto walk and an audiovisual presentation. Current prices and visitor categories are available through the official booking page." },
-    { q: "What are the opening hours?", a: "The official information centre lists last cable-car entry at 16:00 in autumn and winter and 18:00 in summer. The site usually closes an hour later; check the day's schedule for holidays or weather changes." },
+    { q: "What does the Rosh Hanikra ticket include?", a: "The standard entry experience includes the cable car, the self-guided grotto walk and an audiovisual presentation. Admission is ₪47 for adults, ₪39 for children under 18, soldiers, senior citizens and visitors with disabilities, and ₪29 for children with disabilities." },
+    { q: "What are the opening hours?", a: "The site is open daily. Last cable-car entry is at 16:00 in autumn and winter and 18:00 in summer; the site closes one hour later. Check the official homepage for daily hours and changes due to holidays or weather." },
     { q: "How much time do I need?", a: "Allow about 60–90 minutes for the viewpoints, cable car, grotto walk and film, plus any queueing time." },
     { q: "Is Rosh Hanikra wheelchair accessible?", a: "Partly. There is an accessible bridge and cable-car access, and visitors using wheelchairs can reach the first grotto and part of the second. The remaining cave path has narrow passages and steps." },
     { q: "Can I visit the caves without taking the cable car?", a: "The regular ticket includes the cable car to the lower visitor area. Contact the site directly to discuss any alternative access arrangements required for your visit." },
     { q: "Is swimming permitted inside the grottoes?", a: "No. This is a visitor walking route through sea caves, not a designated bathing beach." },
-    { q: "What else can I visit nearby?", a: "Old Akko and the Western Galilee coast are natural companions. You can extend the day towards Haifa if your starting point and timetable allow." },
+    { q: "What else can I visit nearby?", a: "Achziv Beach, Nahariya and Old Akko make good nearby stops. Haifa is an option if you are travelling farther south." },
   ],
   nearby: [
     { label: "Old Akko", to: "/attractions/akko-acre/", note: "Harbour, markets and Crusader-era heritage south along the coast." },
