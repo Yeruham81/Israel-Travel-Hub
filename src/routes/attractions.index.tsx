@@ -45,7 +45,7 @@ export const Route = createFileRoute("/attractions/")({
   component: Attractions,
 });
 
-const planningIcons: Record<string, LucideIcon> = {
+const planningIcons: Record<(typeof attractionPlanningPaths)[number]["id"], LucideIcon> = {
   transport: TrainFront,
   seasons: Sun,
   hotels: BedDouble,
