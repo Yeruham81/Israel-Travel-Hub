@@ -24,11 +24,18 @@ describe("Yardenit individual attraction upgrade", () => {
     expect(JSON.stringify(travelGuideMeta("yardenit").scripts)).toContain("2026-11-17");
     expect(attractionHubCards.filter(item => String(item.to) === String(content.path))).toHaveLength(1);
     expect(article).toContain("Baptism ends before site closing");
-    expect(article).toContain("Yardenit does not have a resident priest");
+    expect(content.glanceNote).toBeUndefined();
+    expect(article).toContain("There is no resident priest");
     expect(article).toContain('data-testid="yardenit-location-map"');
     expect(article).toContain('data-testid="yardenit-hours-baptism"');
     expect(article).toContain('data-testid="yardenit-visitor-essentials"');
     expect(article).toContain("https://bus.gov.il/en/home");
+    expect(article).toContain("Beit Yerach Regional School");
+    expect(article).toContain("stop 57066");
+    expect(article).toContain("Bring a towel, dry clothes");
+    expect(article).toContain("established in <strong>1981 by Kibbutz Kinneret");
+    expect(article).toContain("more than 80 languages and dialects");
+    expect(article).toContain("Pilgrims in white robes taking part in a group baptism");
     expect(article).toContain('carRentalAffiliateUrl("/attractions/yardenit/")');
     expect(article).toContain('rel="sponsored noopener noreferrer"');
     expect(article).toContain('href="#contact"');
@@ -47,7 +54,17 @@ describe("Yardenit individual attraction upgrade", () => {
     expect(content.planningLinks).toHaveLength(6);
     expect(new Set(content.nearby?.map(item => String(item.to))).size).toBe(6);
     expect(content.faqs?.length).toBeGreaterThanOrEqual(6);
+    expect(content.sources).toHaveLength(5);
     expect(content.sources.every(item => item.url.startsWith("https://"))).toBe(true);
+    expect(site.sources.wall).toBe("https://www.yardenit.com/wall-of-new-life/");
+    expect(content.nearby?.map(item => item.to)).toEqual([
+      "/attractions/magdala/",
+      "/attractions/tabgha/",
+      "/attractions/capernaum/",
+      "/attractions/mount-of-beatitudes/",
+      "/attractions/basilica-of-the-annunciation/",
+      "/attractions/mount-tabor/",
+    ]);
     expect(article).not.toContain("These are options, not a checklist");
     expect(article).not.toContain("Worth knowing:");
   });

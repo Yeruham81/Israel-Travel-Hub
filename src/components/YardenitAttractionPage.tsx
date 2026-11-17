@@ -34,18 +34,17 @@ export const yardenitDestinationContent: AttractionDestinationContent = {
     { icon: "highlights", label: "Baptism clothing", value: "White robe required", note: "Rent or buy one at the site" },
     { icon: "access", label: "Getting there", value: "Car, bus or tour", note: "Check the final connection" },
   ],
-  glanceNote: <>For a baptism, arrange your minister and ceremony time before booking your journey. Yardenit does not have a resident priest.</>,
   highlightContent: (
     <div className="mt-4 space-y-3">
       <AttractionHighlight
         title="The baptism pools and Jordan River"
-        image={{ src: "/images/attractions/jordan-river-baptism.webp", alt: "Riverbank and designated baptism steps beside the Jordan River" }}
+        image={{ src: "/images/attractions/jordan-river-baptism.webp", alt: "Pilgrims in white robes taking part in a group baptism at the Jordan River in Yardenit" }}
       >
         <p>Paths and terraces lead to designated places where visitors enter the Jordan River for baptism. Even if you are not taking part in a ceremony, the greenery and water make this a pleasant place to pause.</p>
         <p>The pools have handrails, and the site provides facilities for groups arriving to worship together.</p>
       </AttractionHighlight>
       <AttractionHighlight title="The Wall of New Life">
-        <p>Look for the ceramic panels displaying the Gospel account of Jesus' baptism from Mark 1 in many languages. This is one of the site's most distinctive details and a meaningful stop for visitors from around the world.</p>
+        <p>Look for the Wall of New Life, a collection of hand-painted ceramic panels displaying the Gospel account of Jesus’ baptism (Mark 1:9–11) in more than 80 languages and dialects. Created by Armenian artist Hagop Anteassian, the panels celebrate the many communities that come to Yardenit.</p>
       </AttractionHighlight>
       <AttractionHighlight title="Gardens and quiet places for prayer">
         <p>The landscaped riverbank has places to gather, reflect and enjoy the natural setting. I recommend leaving a little unhurried time here, especially if your group is combining Yardenit with several other Galilee stops.</p>
@@ -76,8 +75,9 @@ export const yardenitDestinationContent: AttractionDestinationContent = {
       </AttractionPracticalTip>
       <div className="rounded-xl border border-border/80 bg-secondary/20 p-4 sm:p-5" data-testid="yardenit-visitor-essentials">
         <h3 className="font-serif text-xl font-semibold">Useful things to know before visiting</h3>
+        <p className="mt-3 text-sm leading-relaxed sm:text-base"><strong>If you’re being baptized:</strong> Bring a towel, dry clothes for afterwards, a bag for wet items and drinking water. Changing rooms and showers are available at the site.</p>
         <ul className="mt-3 grid list-disc gap-x-6 gap-y-2 pl-5 text-sm leading-relaxed sm:grid-cols-2 sm:text-base">
-          <li><strong>Facilities:</strong> Changing rooms, showers, toilets, a gift shop and food and drink options are available.</li>
+          <li><strong>Facilities:</strong> Toilets, a gift shop and food and drink options are available.</li>
           <li><strong>Accessibility:</strong> The operator describes ramps and handrails for accessing the baptism areas. Ask about the best route for your particular needs.</li>
           <li><strong>Groups:</strong> The official FAQ says groups of up to 40 can visit without advance coordination. A planned ceremony still needs its own arrangements.</li>
           <li><strong>Respectful visits:</strong> Keep the baptism area peaceful, respect worshippers and use only designated water-entry areas.</li>
@@ -97,7 +97,7 @@ export const yardenitDestinationContent: AttractionDestinationContent = {
           </article>
           <article className="rounded-xl border bg-card p-4">
             <div className="flex items-center gap-2"><BusFront className="h-5 w-5 text-primary" aria-hidden="true" /><h3 className="font-semibold">By public transport</h3></div>
-            <p className="mt-2 text-sm leading-relaxed">Bus routes in the Kinneret area can bring you close to the site, but check the correct stop, walking approach and return service using the <a href="https://bus.gov.il/en/home" target="_blank" rel="noopener noreferrer" className={inlineLink}>official public transport planner</a>. For several Galilee stops in one day, consider <a href={carRentalAffiliateUrl("/attractions/yardenit/")} target="_blank" rel="sponsored noopener noreferrer" className={inlineLink}>renting a car</a>, comparing <Link to="/tours/nazareth-sea-of-galilee/" className={inlineLink}>Galilee tours</Link>, or <a href="#contact" className={inlineLink}>arranging a private driver</a>.</p>
+            <p className="mt-2 text-sm leading-relaxed">From Tiberias, look for buses serving <strong>Beit Yerach Regional School (בית ספר אזורי בית ירח, stop 57066)</strong>, a short walk from Yardenit. Check your route, the walk from the stop and the return departure using the <a href="https://bus.gov.il/en/home" target="_blank" rel="noopener noreferrer" className={inlineLink}>official public transport planner</a>. For several Galilee stops in one day, consider <a href={carRentalAffiliateUrl("/attractions/yardenit/")} target="_blank" rel="sponsored noopener noreferrer" className={inlineLink}>renting a car</a>, comparing <Link to="/tours/nazareth-sea-of-galilee/" className={inlineLink}>Galilee tours</Link>, or <a href="#contact" className={inlineLink}>arranging a private driver</a>.</p>
           </article>
         </div>
         <div className="rounded-xl border bg-card p-3" data-testid="yardenit-location-map">
@@ -127,7 +127,7 @@ export const yardenitDestinationContent: AttractionDestinationContent = {
   ),
   historyContent: (
     <div className="mt-4 space-y-3">
-      <p>Christian pilgrims visit the Jordan River because the Gospels describe Jesus being baptized by John the Baptist. Yardenit was developed in modern times as a place where visitors can take part in baptism ceremonies in the river near the Sea of Galilee.</p>
+      <p>Christian pilgrims visit the Jordan River because the Gospels describe Jesus being baptized by John the Baptist. Yardenit was established in <strong>1981 by Kibbutz Kinneret, with support from Israel’s Ministry of Tourism</strong>, to provide a designated place for baptism in the river near the Sea of Galilee.</p>
       <p>The traditional location associated with Jesus' baptism is much farther south, near Jericho. That site is known as <Link to="/attractions/qasr-el-yahud/" className={inlineLink}>Qasr el-Yahud</Link>. Yardenit offers a different setting and visitor experience, so the choice depends on your journey and the ceremony you hope to arrange.</p>
       <p>For a fuller explanation of both sites, read my <Link to="/travel-blog/baptism-in-the-jordan-river/" className={inlineLink}>guide to baptism in the Jordan River</Link>.</p>
     </div>
@@ -156,10 +156,10 @@ export const yardenitDestinationContent: AttractionDestinationContent = {
     </div>
   ),
   faqs: [
-    { q: "Is entry to Yardenit free?", a: "Yes. Yardenit says there is no charge for visiting or for the baptism ceremony itself. The required white robe and certain facilities have separate charges." },
-    { q: "Do I need to book a baptism in advance?", a: "Arrange your own minister and ceremony details ahead of time. Yardenit says visiting groups of up to 40 do not generally need advance coordination, while larger groups should contact the site." },
-    { q: "Is there a priest at Yardenit?", a: "No. Yardenit does not have a resident priest, but can provide contacts for local clergy on request." },
-    { q: "What should I wear for a baptism?", a: "A special white baptism robe is required. You can wear other clothing underneath it, but not enter the water wearing only swimwear." },
+    { q: "Is entry to Yardenit free?", a: "Yes. Entry and the baptism ceremony itself are free; white robes and some facilities cost extra." },
+    { q: "Do I need to book a baptism in advance?", a: "Arrange your minister and ceremony details ahead of time. Groups of up to 40 may visit without general coordination; larger groups should contact Yardenit." },
+    { q: "Is there a priest at Yardenit?", a: "There is no resident priest; Yardenit can provide local clergy contacts on request." },
+    { q: "What should I wear for a baptism?", a: "Wear the required white baptism robe over suitable clothing. Entering the water in swimwear alone is not permitted." },
     { q: "What are Yardenit's opening hours?", a: "Hours listed on the operator's pages differ. Contact Yardenit to confirm access and the last baptism time for your chosen date." },
     { q: "Is Yardenit where Jesus was baptized?", a: "Yardenit is a modern baptism site near the Sea of Galilee. The traditional location associated with Jesus' baptism is Qasr el-Yahud on the lower Jordan, near Jericho." },
     { q: "Can I get to Yardenit from Tiberias?", a: "Yes. Yardenit is south of Tiberias near Kibbutz Kinneret. Travel by car, arranged driver or suitable local bus, checking the final walking approach." },
@@ -182,7 +182,8 @@ export const yardenitDestinationContent: AttractionDestinationContent = {
   ],
   sources: [
     { label: "Yardenit — baptism and visitor facilities", url: yardenitSite.sources.baptism, note: "Free entry, white robes, designated pools, accessibility features and facilities." },
-    { label: "Yardenit — official questions and answers", url: yardenitSite.sources.faq, note: "Clergy, groups, baptism clothing and fees." },
+    { label: "Yardenit — official questions and answers", url: yardenitSite.sources.faq, note: "Clergy, groups, baptism clothing, fees and the site’s 1981 founding." },
+    { label: "Yardenit — Wall of New Life", url: yardenitSite.sources.wall, note: "Hand-painted panels displaying Mark’s account of the baptism in many languages." },
     { label: "Yardenit — about the site", url: yardenitSite.sources.about, note: "Jordan River setting and site background." },
     { label: "Yardenit — contact and visiting arrangements", url: yardenitSite.sources.contact, note: "Phone, email and visitor information; confirm hours directly." },
   ],

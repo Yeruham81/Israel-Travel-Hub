@@ -14,6 +14,7 @@ export const yardenitSite = {
   sources: {
     baptism: "https://www.yardenit.com/baptism/",
     faq: "https://www.yardenit.com/qa/",
+    wall: "https://www.yardenit.com/wall-of-new-life/",
     about: "https://www.yardenit.com/about/",
     contact: "https://www.yardenit.com/contact/",
   },
