@@ -16,24 +16,24 @@ const visitorAreas = [
   {
     name: "Church of the Multiplication",
     details: <>
-      <p><strong>Monday–Saturday:</strong> {tabghaSite.multiplication.hours}. <strong>Closed Sunday.</strong></p>
+      <p><strong>Monday–Saturday:</strong> {tabghaSite.multiplication.hours} (last entry {tabghaSite.multiplication.lastEntry}). <strong>Sunday:</strong> no regular sightseeing visits; the church is accessible to Mass participants only.</p>
       <p className="mt-1">The Benedictine church with the loaves-and-fishes mosaic. Individual visits are generally possible during visitor hours.</p>
     </>,
     phone: tabghaSite.multiplication.phone,
     phoneHref: tabghaSite.multiplication.phoneHref,
-    source: "Official visitor hours",
-    sourceUrl: tabghaSite.sources.visitorHours,
+    source: "Official Benedictine hours",
+    sourceUrl: tabghaSite.sources.multiplicationHours,
   },
   {
     name: "Church of the Primacy of Peter",
     details: <>
       <p><strong>Daily:</strong> {tabghaSite.primacy.hours}; last entry {tabghaSite.primacy.lastEntry}.</p>
-      <p className="mt-1">Closed on Christmas Day, New Year's Day and Yom Kippur. Shorter hours apply on 24 and 31 December and during the Holy Week Triduum.</p>
+      <p className="mt-1">Closed on Christmas Day, New Year's Day and Yom Kippur. On 24 and 31 December and Holy Week Thursday–Saturday, visits are 08:00–12:00 (last entry 11:40).</p>
     </>,
     phone: tabghaSite.primacy.phone,
     phoneHref: tabghaSite.primacy.phoneHref,
-    source: "Official visitor hours",
-    sourceUrl: tabghaSite.sources.visitorHours,
+    source: "Primacy visitor hours (CIC)",
+    sourceUrl: tabghaSite.sources.primacyHours,
   },
 ] as const;
 
@@ -54,8 +54,8 @@ export const tabghaDestinationContent: AttractionDestinationContent = {
     { icon: "location", label: "Location", value: "Northwest Sea of Galilee", note: "Along Route 87, near Capernaum" },
     { icon: "duration", label: "Time needed", value: "About 1 hour", note: "For both churches at a relaxed pace" },
     { icon: "admission", label: "Admission", value: "No published fee", note: "For either church" },
-    { icon: "hours", label: "Multiplication church", value: tabghaSite.multiplication.hours, note: "Monday–Saturday; closed Sunday" },
-    { icon: "highlights", label: "Highlights", value: "Mosaics & lakeside chapel", note: "Two nearby churches" },
+    { icon: "hours", label: "Multiplication church", value: tabghaSite.multiplication.hours, note: "Monday–Saturday; Sunday worship only" },
+    { icon: "hours", label: "Primacy church", value: tabghaSite.primacy.hours, note: "Daily; last entry " + tabghaSite.primacy.lastEntry },
     { icon: "access", label: "Getting there", value: "Car or organised tour", note: "Plan each church entrance" },
   ],
   highlightContent: (
@@ -120,7 +120,7 @@ export const tabghaDestinationContent: AttractionDestinationContent = {
         </table>
       </div>
       <AttractionPracticalTip>
-        <strong>Visit the Multiplication church first.</strong> It currently closes at 15:00 and is closed on Sundays, whereas the Primacy chapel usually remains open until 17:00. On a Sunday, plan your visit around the Primacy chapel instead.
+        <strong>Start with the Church of the Multiplication.</strong> Its last visitor admission is at 14:45; afterwards, continue to the Primacy chapel beside the lake. On Sundays, the Primacy chapel is the better choice for a sightseeing visit.
       </AttractionPracticalTip>
       <div className="rounded-xl border border-border/80 bg-secondary/20 p-4 sm:p-5" data-testid="tabgha-visitor-essentials">
         <h3 className="font-serif text-xl font-semibold">Useful things to know before visiting</h3>
@@ -226,7 +226,7 @@ export const tabghaDestinationContent: AttractionDestinationContent = {
   faqs: [
     { q: "What is Tabgha best known for?", a: "Its Church of the Multiplication, with the ancient loaves-and-fishes mosaic, and the nearby Church of the Primacy of Peter at the lakeshore." },
     { q: "Can I visit both churches in one trip?", a: "Yes. They are close to one another. Allow about an hour for the two churches and their surroundings, more if you plan to pray or travel with a group." },
-    { q: "Is the Church of the Multiplication open on Sundays?", a: "No. The current published visitor hours are Monday to Saturday, 09:00–15:00. The Church of the Primacy of Peter normally opens on Sundays." },
+    { q: "Is the Church of the Multiplication open on Sundays?", a: "There are no regular sightseeing visits on Sundays; access is reserved for Mass participants. Monday–Saturday visitor hours are 09:00–15:00 (last entry 14:45). The Church of the Primacy of Peter normally welcomes visitors on Sundays." },
     { q: "Is there an entry fee?", a: "Neither church currently lists a visitor admission fee. For group services or special arrangements, contact the responsible church." },
     { q: "Can I visit Tabgha without a car?", a: "It may be possible by bus, but services and the walk to the churches can make planning awkward. A car or organised Galilee tour is usually easier." },
     { q: "Is Tabgha the same as Capernaum?", a: "No. They are nearby places with different sights. Tabgha is known for two churches; Capernaum is known for its ancient synagogue and traditional House of Peter." },
@@ -249,8 +249,8 @@ export const tabghaDestinationContent: AttractionDestinationContent = {
     { label: "Ben Gurion Airport arrival tips", to: "/travel-blog/ben-gurion-airport-arrival-tips/", description: "Practical advice for your arrival.", icon: "arrival" },
   ],
   sources: [
-    { label: "Christian Information Center — current Tabgha opening hours", url: tabghaSite.sources.visitorHours, note: "Opening hours, Sunday closures, holiday exceptions and contact numbers for both churches." },
-    { label: "Benedictine Tabgha Priory — official information", url: tabghaSite.sources.benedictine, note: "Local monastic community, worship, facilities and church background." },
+    { label: "Benedictine Tabgha Priory — Church of the Multiplication opening hours", url: tabghaSite.sources.multiplicationHours, note: "Direct official visitor timetable, last entry and Sunday worship arrangements." },
+    { label: "Christian Information Center — Primacy of Peter opening hours", url: tabghaSite.sources.primacyHours, note: "Franciscan shrine's published hours, holiday exceptions and phone number; linked to its entry in the official timetable." },
     { label: "Benedictine Tabgha Priory — Church of the Multiplication", url: tabghaSite.sources.benedictineHistory, note: "Fifth-century mosaics and construction history of the present church." },
     { label: "Benedictine Tabgha Priory — pilgrims and visitors", url: tabghaSite.sources.benedictineVisitors, note: "Visitor facilities, pilgrim arrangements and monastery shop." },
     { label: "Custody of the Holy Land — Tabgha", url: tabghaSite.sources.franciscan, note: "History and Gospel traditions of the Multiplication and Primacy shrines." },
