@@ -114,7 +114,8 @@ export const northernAttractions: Record<string, Attraction> = {
  takeaway:"Start at the Church of the Multiplication, then visit the Primacy chapel beside the lake.",
  highlights:[], arrival:[], planning:[], faqs:[],
  official:[
-  {label:"Christian Information Center — Tabgha opening hours and contacts",url:tabghaSite.sources.visitorHours},
+  {label:"Benedictine Tabgha Priory — Multiplication church opening hours",url:tabghaSite.sources.multiplicationHours},
+   {label:"Christian Information Center — Primacy of Peter visitor hours",url:tabghaSite.sources.primacyHours},
   {label:"Benedictine Tabgha Priory — Church of the Multiplication",url:tabghaSite.sources.benedictineHistory},
   {label:"Benedictine Tabgha Priory — visitor information",url:tabghaSite.sources.benedictineVisitors},
   {label:"Custody of the Holy Land — Primacy of Peter and Tabgha history",url:tabghaSite.sources.franciscan},
