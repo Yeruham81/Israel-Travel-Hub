@@ -131,7 +131,7 @@ export const northernAttractions: Record<string, Attraction> = {
   takeaway: "Allow time for the octagonal church, gardens and views, and plan around the midday closure.",
   highlights: [], arrival: [], planning: [], faqs: [],
   official: [
-    {label: "Christian Information Center — Mount of Beatitudes hours and parking", url: mountBeatitudesSite.sources.hoursAndParking},
+    {label: "Christian Information Center — Mount of Beatitudes visiting hours", url: mountBeatitudesSite.sources.hours},
     {label: "Church of the Beatitudes — official history and contact", url: mountBeatitudesSite.sources.churchAbout},
     {label: "Church of the Beatitudes — pilgrim and group arrangements", url: mountBeatitudesSite.sources.visitAndGroups},
     {label: "Jesus Trail — route through the Mount of Beatitudes", url: mountBeatitudesSite.sources.jesusTrail},
