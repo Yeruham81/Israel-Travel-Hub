@@ -123,7 +123,7 @@ export function AttractionDestinationPage({ content }: { content: AttractionDest
     ...(content.faqs?.length ? [["faq", "Questions"] as [string, string]] : []),
     ...(content.nearby?.length ? [["nearby", "Related sites"] as [string, string]] : []),
     ...(content.planningLinks?.length ? [["trip-planning", "Plan your trip"] as [string, string]] : []),
-    ["contact", "Contact"],
+    ["contact", "Contact me"],
   ];
   return (
     <main className="mx-auto max-w-5xl px-4 pb-16">
