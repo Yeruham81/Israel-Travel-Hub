@@ -45,6 +45,18 @@ describe("Mount Tabor individual attraction guide", () => {
     expect(article).toContain("Private cars can use the narrow summit road");
     expect(article).toContain("large coaches cannot");
     expect(article).toContain("black-marked summit circuit");
+    expect(article).toContain("Bus routes <strong>350 and 352</strong>");
+    expect(article).toContain("Har Tabor Terminal");
+    expect(article).toContain("Gate of the Wind");
+    expect(article).toContain("medieval Benedictine monastery");
+    expect(article).toContain("The hilltop basilica and its terraces");
+    expect(article).toContain("Aerial view of the Basilica of the Transfiguration");
+    expect(article).not.toContain('title="Views from the basilica terraces"');
+    expect(article).not.toContain("Plan the return journey.");
+    expect(site.visit.weekdayHours).toBe("08:00–17:00");
+    expect(site.visit.weekendHours).toBe("08:00–12:00 / 14:00–16:30");
+    expect(article).toContain("<strong>Monday–Friday:</strong>");
+    expect(article).toContain("<strong>Saturday–Sunday:</strong>");
     expect(article).toContain("not normally open for casual sightseeing");
     expect(article).toContain("Antonio Barluzzi");
     expect(article).toContain("1924");

@@ -10,8 +10,9 @@ export const mountTaborSite = {
   hero: { src: mountTaborHero, alt: "Twin stone towers of the Church of the Transfiguration on Mount Tabor" },
   duration: "60–90 minutes at the summit, excluding travel",
   visit: {
-    cicHours: "08:00–17:00", lastEntry: "16:30",
-    franciscanWeekendHours: "08:00–12:00 / 14:00–16:30",
+    weekdayHours: "08:00–17:00",
+    weekendHours: "08:00–12:00 / 14:00–16:30",
+    cicLastEntry: "16:30",
     visitorPhone: "04-662-0720", visitorPhoneHref: "+97246620720",
     friarsPhone: "04-667-6300", friarsPhoneHref: "+97246676300",
   },
