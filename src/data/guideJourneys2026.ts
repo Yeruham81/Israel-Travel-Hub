@@ -937,7 +937,7 @@ export const journeyDestinationGuides = {
             },
             {
               "label": "National public transport planner",
-              "href": "https://bus.gov.il/"
+              "href": "https://bus.gov.il/en/home"
             }
           ],
           "tip": "Check the last bus back to Jerusalem from your chosen stop before planning the day's activities."
