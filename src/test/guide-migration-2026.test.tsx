@@ -23,7 +23,7 @@ import { airportJourneyGuides } from "@/data/airportJourneyGuides";
 import { getSource, isPublisherUrl, publicSources, travelGuidePaths, type TravelGuideId } from "@/data/registry";
 
 afterEach(cleanup);
-const ids = Object.keys({ ...planningGuides, ...cityCultureGuides, ...heritageGuides, ...journeyDestinationGuides }).filter(id => id !== "calendar" && id !== "precipice") as TravelGuideId[];
+const ids = Object.keys({ ...planningGuides, ...cityCultureGuides, ...heritageGuides, ...journeyDestinationGuides }).filter(id => id !== "calendar" && id !== "precipice" && id !== "megiddo") as TravelGuideId[];
 async function routerAt(url: string) {
   const router = createRouter({ routeTree, context: { queryClient: new QueryClient() }, history: createMemoryHistory({ initialEntries: [url] }), trailingSlash: "always" });
   await router.load();
@@ -63,8 +63,8 @@ describe("October planning, city and heritage guide migration", () => {
   });
 
   it("makes every guide discoverable in the directory, with real local photographs", async () => {
-    // Mount Precipice is now tested as a dedicated attraction, not a legacy TravelGuidePage.
-    expect(ids).toHaveLength(15);
+    // Mount Precipice and Tel Megiddo have dedicated attraction pages and tests.
+    expect(ids).toHaveLength(14);
     expect(guideDirectory).toHaveLength(49);
     expect(guideDirectory.some(guide => guide.id === "israel-holidays" && guide.to === "/travel-blog/israel-holidays/")).toBe(true);
     expect(new Set(guideDirectory.map(guide => guide.id)).size).toBe(guideDirectory.length);

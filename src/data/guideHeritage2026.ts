@@ -3,168 +3,28 @@ import { migrationPhotos as P } from "@/data/guideMigrationPhotos";
 import { magdalaSite } from "@/data/magdalaSite";
 import { yardenitSite } from "@/data/yardenitSite";
 import { mountPrecipiceSite } from "@/data/mountPrecipiceSite";
+import { telMegiddoSite } from "@/data/telMegiddoSite";
 
 export const heritageGuides = {
   "megiddo": {
     "id": "megiddo",
-    "updatedAt": "2026-10-20",
-    "title": "Tel Megiddo: archaeology, Armageddon and visitor planning",
-    "description": "Explore Tel Megiddo’s ancient city layers, gates and water system. Understand the Armageddon connection and plan admission, walking and a coherent northern day.",
-    "intro": "Tel Megiddo is a settlement mound above the Jezreel Valley, built from successive ancient cities rather than one monument from a single period. It rewards a visit that connects the ruins with trade routes, urban life and water engineering. The name Armageddon adds a later religious association, but archaeology and scriptural interpretation need to be kept distinct.",
-    "answer": "Allow time for the signed archaeological route and ask which parts of the water-system visit are open. Tel Megiddo is part of UNESCO’s Biblical Tels World Heritage property, together with Hazor and Beer Sheba. Choose a manageable combination with Nazareth or another valley destination, rather than adding every Galilee sight to the same day.",
-    "topics": [
-      "attractions",
-      "destinations",
-      "religion"
-    ],
-    "photo": P["tel-megiddo"],
-    "facts": [
-      {
-        "label": "What it is",
-        "text": "A mound containing successive ancient cities"
-      },
-      {
-        "label": "Main interest",
-        "text": "Archaeology, water engineering and valley setting"
-      },
-      {
-        "label": "Before arrival",
-        "text": "Check park reservations and open routes"
-      }
-    ],
-    "comparison": {
-      "caption": "Plan your Megiddo visit",
-      "headers": [
-        "Focus",
-        "What to look for",
-        "Practical point"
-      ],
-      "rows": [
-        [
-          "Ancient city",
-          "Layers of settlement, gates and public buildings",
-          "Use the park interpretation to distinguish periods"
-        ],
-        [
-          "Water system",
-          "Underground engineering associated with the ancient city",
-          "Confirm current route access and steps"
-        ],
-        [
-          "Valley landscape",
-          "The strategic setting above regional routes",
-          "Bring shade protection for exposed areas"
-        ],
-        [
-          "Religious context",
-          "The association with Armageddon",
-          "Separate tradition and interpretation from excavated evidence"
-        ]
-      ]
-    },
-    "sections": [
-      {
-        "id": "history",
-        "title": "Read Megiddo as a city with many layers",
-        "paragraphs": [
-          "The surviving remains belong to different phases of settlement. Gates, walls, cult buildings and other structures help explain a city that was rebuilt repeatedly. A good introduction or guided explanation can make these relationships clearer than a quick walk between isolated stones.",
-          "UNESCO lists Megiddo with Hazor and Beer Sheba for their evidence of ancient urban development and engineering. The listing does not mean all three sites are nearby or belong in one excursion. Take time to understand Megiddo itself before comparing it with another archaeological park."
-        ]
-      },
-      {
-        "id": "water-system",
-        "title": "The water system and the visitor route",
-        "paragraphs": [
-          "Megiddo’s underground water infrastructure is one of the important features to understand. Before descending, ask the park about the currently open route, the stairs, exit point and any restrictions. A route that is technically open can still be unsuitable for a visitor who cannot manage enclosed spaces or repeated steps.",
-          "Use the visitor information and signed paths, and avoid assuming that every photographed area remains accessible. The surface ruins also deserve time; you do not need to rush them simply to complete a feature list."
-        ]
-      },
-      {
-        "id": "armageddon",
-        "title": "The Armageddon association",
-        "paragraphs": [
-          "The name is associated with the biblical idea of Armageddon and the landscape of Megiddo. For a faith-based visit, a guide can explain the relevant texts and interpretations alongside the archaeological setting. Avoid treating later religious symbolism as proof of a particular future event.",
-          "Some traditional names used for structures have been debated by archaeologists. Follow the interpretation on site and distinguish an excavated building’s physical remains from a confident attribution to one named biblical ruler."
-        ]
-      },
-      {
-        "id": "getting-there",
-        "title": "Getting there and choosing an excursion",
-        "paragraphs": [
-          "The park is reached from the Road 66 area near Megiddo junction. A car, arranged driver or suitable tour can make the last leg easier. If using public transport, check the current operator, stop and final walking route rather than copying an old bus number.",
-          "Nazareth, Mount Precipice and Mount Tabor can be considered when building a northern route, but they are separate visits. Decide whether your priority is archaeology or pilgrimage, and ask for a timed proposal before combining several major stops."
-        ],
-        "links": [
-          {
-            "label": "Consider a Nazareth-area viewpoint",
-            "to": "/attractions/mount-precipice/"
-          },
-          {
-            "label": "Plan the Annunciation basilica",
-            "to": "/attractions/basilica-of-the-annunciation/"
-          },
-          {
-            "label": "Compare a Mount Tabor visit",
-            "to": "/attractions/mount-tabor/"
-          }
-        ]
-      },
-      {
-        "id": "practical",
-        "title": "Heat, admission and comfortable walking",
-        "paragraphs": [
-          "Check the parks authority’s current reservation, entry and last-admission information for your date. The last entry can be earlier than the stated closing time. Wear shoes for uneven surfaces and carry water and sun protection; much of the experience is outdoors.",
-          "For mobility needs, ask about the specific route you want, not simply whether the park is described as accessible. Agree the pickup point and leave time for a rest before the next destination."
-        ],
-        "links": [
-          {
-            "label": "Arrange a driver for a northern itinerary",
-            "to": "/private-driver/"
-          }
-        ]
-      }
-    ],
-    "checklist": [
-      "Reserve and check the current last-entry rules",
-      "Confirm the water-system route and stairs",
-      "Use the signed interpretation for different periods",
-      "Bring water and suitable footwear",
-      "Choose a realistic northern combination"
-    ],
-    "faqs": [
-      {
-        "q": "Is Megiddo one building?",
-        "a": "No. It is a settlement mound with remains from successive ancient cities."
-      },
-      {
-        "q": "Can every visitor enter the underground water system?",
-        "a": "Check the open route and its physical demands directly. Steps and enclosed sections may not suit everyone."
-      },
-      {
-        "q": "Is Tel Megiddo the same place as the modern Megiddo area?",
-        "a": "Use the national park’s exact entrance and map pin. A general settlement or junction name is not a museum or park entrance."
-      }
-    ],
-    "related": [
-      "precipice",
-      "annunciation",
-      "magdala",
-      "bestTime"
-    ],
-    "services": [
-      {
-        "label": "Explore other attractions",
-        "to": "/attractions/"
-      },
-      {
-        "label": "Compare northern day trips",
-        "to": "/travel-blog/day-trips-from-tel-aviv/"
-      }
-    ],
-    "sourceIds": [
-      "m26-megiddo",
-      "m26-unesco-tels"
-    ]
+    "updatedAt": telMegiddoSite.updatedAt,
+    "title": telMegiddoSite.title,
+    "description": telMegiddoSite.description,
+    "intro": telMegiddoSite.intro,
+    "answer": "Explore the ancient city gates, excavation layers, viewpoints and water system, with an easy-to-follow visitor route.",
+    "topics": ["attractions", "destinations", "religion"],
+    "photo": telMegiddoSite.hero,
+    // The published page is maintained in TelMegiddoAttractionPage.
+    // Keep only SEO, directory and shared metadata here to avoid duplicate editorial content.
+    "facts": [],
+    "comparison": { "caption": "", "headers": [], "rows": [] },
+    "sections": [],
+    "checklist": [],
+    "faqs": [],
+    "related": [],
+    "services": [],
+    "sourceIds": ["m26-megiddo", "m26-megiddo-reservation", "m26-unesco-tels", "m26-megiddo-water-system"]
   },
   "precipice": {
     "id": "precipice",

@@ -227,12 +227,28 @@ export const migrationSources: SourceReference[] = [
     "note": "Park identity, road approach, booking and last-entry information. Current water-system access should be confirmed."
   },
   {
+    "id": "m26-megiddo-reservation",
+    "title": "Visit coordination for national parks",
+    "publisher": "Israel Nature and Parks Authority",
+    "url": "https://en.parks.org.il/%D7%94%D7%96%D7%9E%D7%A0%D7%95%D7%AA-%D7%9C%D7%90%D7%AA%D7%A8%D7%99%D7%9D/",
+    "checkedAt": "2026-11-17",
+    "note": "Official advance visit coordination and notifications about closures and changes."
+  },
+  {
     "id": "m26-unesco-tels",
     "title": "Biblical Tels – Megiddo, Hazor, Beer Sheba",
     "publisher": "UNESCO World Heritage Centre",
     "url": "https://whc.unesco.org/en/list/1108/",
     "checkedAt": "2026-10-20",
     "note": "Serial World Heritage property and the archaeological significance of successive city layers and water engineering."
+  },
+  {
+    "id": "m26-megiddo-water-system",
+    "title": "Tel Megiddo: The ancient water system",
+    "publisher": "Israel Nature and Parks Authority",
+    "url": "https://www.parks.org.il/article/megiddo-trip-talk-8/",
+    "checkedAt": "2026-11-17",
+    "note": "Official interpretation of the rock-cut shaft, tunnel and the water system's visitor route."
   },
   {
     "id": "m26-precipice-kkl",
