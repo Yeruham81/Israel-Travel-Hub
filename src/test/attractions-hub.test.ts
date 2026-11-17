@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { attractionHubCards, attractionHubPhotos, attractionHubRegions, attractionPlanningPaths } from "@/data/attractionsHub";
+import { attractionHubCards, attractionHubPhotos, attractionHubRegions, attractionPlanningPaths, attractionRelatedGuides } from "@/data/attractionsHub";
 import { readFileSync } from "node:fs";
 import { attractionIds, attractionPath, isRegionalOverview } from "@/data/attractionGuideTypes";
 import { travelGuidePaths } from "@/data/registry";
@@ -35,21 +35,42 @@ describe("Attractions hub redesign", () => {
     expect(page).toContain("More {region.navLabel ?? region.title} travel guides");
   });
 
-  it("offers six distinct planning pathways with relevant, real internal next steps", () => {
+  it("uses six photo-based related guides and six compact icon-based planning links", () => {
+    expect(attractionRelatedGuides).toHaveLength(6);
     expect(attractionPlanningPaths).toHaveLength(6);
-    expect(new Set(attractionPlanningPaths.map(item => item.id)).size).toBe(6);
-    expect(new Set(attractionPlanningPaths.map(item => item.to)).size).toBe(6);
-    for (const item of attractionPlanningPaths) {
-      expect(item.title.length).toBeGreaterThan(12);
-      expect(item.description.length).toBeGreaterThan(75);
-      expect(String(item.to).startsWith("/") && String(item.to).endsWith("/")).toBe(true);
-      expect(item.links).toHaveLength(2);
-      expect(new Set(item.links.map(link => link.to)).size).toBe(2);
-      expect(item.links.every(link => String(link.to).startsWith("/"))).toBe(true);
-      expect(item.links.every(link => link.to !== item.to)).toBe(true);
+    expect(new Set(attractionRelatedGuides.map(item => String(item.to))).size).toBe(6);
+    expect(new Set(attractionRelatedGuides.map(item => item.photo.src)).size).toBe(6);
+    expect(new Set(attractionPlanningPaths.map(item => String(item.to))).size).toBe(6);
+    for (const guide of attractionRelatedGuides) {
+      expect(guide.title.length).toBeGreaterThan(6);
+      expect(guide.description.length).toBeGreaterThan(25);
+      expect(guide.photo.src).toBeTruthy();
+      expect(guide.photo.alt).toBeTruthy();
+      expect(String(guide.to).startsWith("/travel-blog/")).toBe(true);
     }
+    expect(attractionPlanningPaths.map(item => item.id)).toEqual(["transport", "seasons", "hotels", "tips", "calendar", "esim"]);
     expect(attractionPlanningPaths.find(item => item.id === "hotels")?.to).toBe("/accommodation/");
-    expect(attractionPlanningPaths.find(item => item.id === "transport")?.links.some(link => link.to === "/travel-blog/getting-around-israel/")).toBe(true);
+    expect(attractionPlanningPaths.find(item => item.id === "transport")?.to).toBe(travelGuidePaths.israel);
+    for (const item of attractionPlanningPaths) {
+      expect(item.title).toBeTruthy();
+      expect(item.description.length).toBeGreaterThan(20);
+      expect(String(item.to).startsWith("/")).toBe(true);
+      expect(String(item.to).endsWith("/")).toBe(true);
+    }
+    const page = readFileSync("src/routes/attractions.index.tsx", "utf8");
+    expect(page).toContain('id="attractions-related"');
+    expect(page).toContain('id="attractions-trip-planning"');
+    expect(page).toContain("Related travel guides");
+    expect(page).toContain("Plan your trip to Israel");
+    expect(page).toContain("attractionRelatedGuides.map");
+    expect(page).toContain("attractionPlanningPaths.map");
+    expect(page).toContain("<img src={guide.photo.src}");
+    expect(page).toContain("<Icon aria-hidden");
+    expect(page).not.toContain("More ways to plan your trip");
+    expect(page).not.toContain('data-testid="attractions-planning-card"');
+    expect(page).toContain('to="/tours/"');
+    expect(page).toContain('to="/shore-excursions/"');
+    expect(page).toContain('to="/private-driver/"');
   });
 
   it("keeps all individual attractions on the hub without listing regional overview guides as site cards", () => {

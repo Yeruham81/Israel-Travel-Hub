@@ -159,73 +159,62 @@ export const attractionHubRegions: AttractionHubRegion[] = [
   },
 ];
 
-export const attractionPlanningPaths: {
-  id: string;
+export const attractionRelatedGuides: {
   title: string;
   description: string;
   to: LinkProps["to"];
-  links: { label: string; to: LinkProps["to"] }[];
+  photo: { src: string; alt: string };
 }[] = [
   {
-    id: "tours",
-    title: "Tours & day trips",
-    description: "Discover guided city walks, archaeological sites and full-day excursions, with options for different interests and starting points.",
-    to: "/tours/",
-    links: [
-      { label: "Jerusalem tours", to: "/tours/jerusalem/" },
-      { label: "Masada & Dead Sea tours", to: "/tours/masada-dead-sea/" },
-    ],
+    title: "Jerusalem travel guide",
+    description: "Old City highlights, neighbourhoods and memorable viewpoints.",
+    to: travelGuidePaths.jerusalem,
+    photo: travelGuides.jerusalem.cardPhoto ?? travelGuides.jerusalem.photo,
   },
   {
-    id: "shore-excursions",
-    title: "Shore excursions",
-    description: "Arriving by cruise ship? Find day-trip ideas from Haifa or Ashdod that fit your port call, with enough time for your return to the ship.",
-    to: "/shore-excursions/",
-    links: [
-      { label: "From Haifa Port", to: "/shore-excursions/haifa/" },
-      { label: "From Ashdod Port", to: "/shore-excursions/ashdod/" },
-    ],
+    title: "Discover Tel Aviv & Jaffa",
+    description: "A lively coast, historic lanes, markets and city culture.",
+    to: "/travel-blog/attractions-in-tel-aviv/",
+    photo: migrationPhotos["EXISTING:coast"],
   },
   {
-    id: "hotels",
-    title: "Find the right place to stay",
-    description: "Compare neighbourhoods, coastal resorts and hotel areas to find a practical base for sightseeing and day trips.",
-    to: "/accommodation/",
-    links: [
-      { label: "Where to stay in Jerusalem", to: "/travel-blog/where-to-stay-in-jerusalem/" },
-      { label: "Where to stay in Tel Aviv", to: "/travel-blog/where-to-stay-in-tel-aviv/" },
-    ],
+    title: "Haifa visitor guide",
+    description: "Gardens, hilltop views and northern coastal experiences.",
+    to: "/travel-blog/haifa/",
+    photo: migrationPhotos["EXISTING:haifa"],
   },
   {
-    id: "transport",
-    title: "Arrive and get around",
-    description: "Make sense of airport journeys, trains, buses and taxis, including that last leg from the station to your hotel.",
-    to: "/airport-transfers/",
-    links: [
-      { label: "Airport to Jerusalem", to: "/travel-blog/how-to-get-from-ben-gurion-airport-to-jerusalem/" },
-      { label: "Getting around Israel", to: travelGuidePaths.israel },
-    ],
+    title: "Sea of Galilee travel guide",
+    description: "Lakeside towns, heritage sites and beautiful scenery.",
+    to: "/travel-blog/sea-of-galilee/",
+    photo: migrationPhotos["EXISTING:galilee"],
   },
   {
-    id: "private-days",
-    title: "Explore with a private driver",
-    description: "Build a flexible sightseeing day around your priorities and ask for a personal transport quote, with guiding arranged separately.",
-    to: "/private-driver/",
-    links: [
-      { label: "Caesarea, Haifa & Acre", to: "/tours/caesarea-haifa-acre/" },
-      { label: "Nazareth & Galilee tours", to: "/tours/nazareth-sea-of-galilee/" },
-    ],
+    title: "Explore the Dead Sea",
+    description: "Saltwater beaches, desert landscapes and nearby sights.",
+    to: travelGuidePaths.deadSea,
+    photo: travelGuides.deadSea.cardPhoto ?? travelGuides.deadSea.photo,
   },
   {
-    id: "practical-guides",
-    title: "Plan around dates and local customs",
-    description: "Check seasonal conditions, religious holidays and public-transport patterns before setting your itinerary.",
-    to: "/travel-blog/",
-    links: [
-      { label: "Best time to visit", to: travelGuidePaths.bestTime },
-      { label: "Airport travel on Shabbat", to: travelGuidePaths.shabbat },
-    ],
+    title: "Eilat & the Red Sea",
+    description: "Beaches, coral reefs and adventures in the desert.",
+    to: travelGuidePaths.eilat,
+    photo: travelGuides.eilat.cardPhoto ?? travelGuides.eilat.photo,
   },
+];
+
+export const attractionPlanningPaths: {
+  id: "transport" | "seasons" | "hotels" | "tips" | "calendar" | "esim";
+  title: string;
+  description: string;
+  to: LinkProps["to"];
+}[] = [
+  { id: "transport", title: "Getting around Israel", description: "Trains, buses, taxis and travel between cities.", to: travelGuidePaths.israel },
+  { id: "seasons", title: "Best time to visit", description: "Weather, seasons and planning your sightseeing.", to: travelGuidePaths.bestTime },
+  { id: "hotels", title: "Where to stay", description: "Find a convenient base for exploring Israel.", to: "/accommodation/" },
+  { id: "tips", title: "Israel travel tips", description: "Helpful advice before and during your visit.", to: travelGuidePaths.travelTips },
+  { id: "calendar", title: "Israel holidays & events", description: "Check local festivals and special dates.", to: travelGuidePaths.calendar },
+  { id: "esim", title: "Travel eSIM for Israel", description: "Stay connected during your trip.", to: travelGuidePaths.esim },
 ];
 
 export const attractionHubCards = attractionHubRegions.flatMap((region) => region.cards);

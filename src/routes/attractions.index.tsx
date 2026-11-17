@@ -1,8 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { SiteLink as Link } from "@/components/SiteLink";
-import { ArrowUpRight, BedDouble, CalendarDays, CarFront, Compass, Ship, TrainFront, type LucideIcon } from "lucide-react";
+import { ArrowUpRight, BedDouble, BookOpen, CalendarDays, Smartphone, Sun, TrainFront, type LucideIcon } from "lucide-react";
 import { HubHeader } from "@/components/Guide";
-import { attractionHubCards, attractionHubPhotos, attractionHubRegions, attractionPlanningPaths, type AttractionHubCard } from "@/data/attractionsHub";
+import { attractionHubCards, attractionHubPhotos, attractionHubRegions, attractionPlanningPaths, attractionRelatedGuides, type AttractionHubCard } from "@/data/attractionsHub";
 import { CANONICAL_ORIGIN, jsonLd, pageMeta } from "@/lib/site";
 
 const PATH = "/attractions/";
@@ -46,12 +46,12 @@ export const Route = createFileRoute("/attractions/")({
 });
 
 const planningIcons: Record<string, LucideIcon> = {
-  tours: Compass,
-  "shore-excursions": Ship,
-  hotels: BedDouble,
   transport: TrainFront,
-  "private-days": CarFront,
-  "practical-guides": CalendarDays,
+  seasons: Sun,
+  hotels: BedDouble,
+  tips: BookOpen,
+  calendar: CalendarDays,
+  esim: Smartphone,
 };
 
 function AttractionCard({ card }: { card: AttractionHubCard }) {
@@ -134,41 +134,44 @@ function Attractions() {
         </section>
       ))}
 
-      <section aria-labelledby="more-ideas-heading" className="mt-14 border-t pt-9">
-        <h2 id="more-ideas-heading" className="text-2xl font-semibold sm:text-3xl">More ways to plan your trip</h2>
-        <p className="mt-3 max-w-3xl leading-relaxed text-muted-foreground">
-          Finding the places you want to visit is only part of a great trip. Choose an interesting day out,
-          decide where to stay and plan the journeys in between — with practical guidance for each step.
-        </p>
-        <div className="mt-6 grid gap-4 md:grid-cols-2 xl:grid-cols-3">
-          {attractionPlanningPaths.map((item) => {
-            const Icon = planningIcons[item.id] ?? Compass;
-            return (
-              <article key={item.id} className="flex min-w-0 flex-col rounded-2xl border bg-card p-5 transition-colors hover:border-primary/50" data-testid="attractions-planning-card">
-                <div className="flex items-start gap-3">
-                  <span className="flex size-10 shrink-0 items-center justify-center rounded-lg bg-secondary text-primary">
-                    <Icon className="size-5" aria-hidden="true" />
-                  </span>
-                  <h3 className="pt-1 text-xl font-semibold leading-snug">
-                    <Link to={item.to} className="text-foreground underline-offset-4 hover:text-primary hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">{item.title}</Link>
-                  </h3>
-                </div>
-                <p className="mt-3 flex-1 text-sm leading-relaxed text-muted-foreground">{item.description}</p>
-                <ul className="mt-4 space-y-2 border-t pt-3" aria-label={"Related reading for " + item.title}>
-                  {item.links.map((link) => (
-                    <li key={String(link.to)}>
-                      <Link to={link.to} className="inline-flex items-start gap-1 text-sm font-semibold leading-snug text-primary underline-offset-4 hover:underline">
-                        {link.label} <ArrowUpRight aria-hidden="true" className="mt-0.5 size-3.5 shrink-0" />
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-              </article>
-            );
-          })}
-        </div>
-      </section>
+      <div className="mx-auto max-w-5xl">
+        <section id="attractions-related" aria-labelledby="attractions-related-h" className="mt-12 border-t pt-9">
+          <h2 id="attractions-related-h" className="text-2xl font-semibold">Related travel guides</h2>
+          <ul className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+            {attractionRelatedGuides.map(guide => <li key={String(guide.to)} className="min-w-0">
+              <Link to={guide.to} className="group flex h-full min-w-0 items-center gap-3 rounded-xl border bg-card p-3 transition-colors hover:border-primary/50 hover:bg-secondary/20 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
+                <img src={guide.photo.src} alt={guide.photo.alt} width={112} height={75} loading="lazy" decoding="async" className="aspect-[3/2] w-24 shrink-0 rounded-lg object-cover sm:w-28" />
+                <span className="min-w-0 flex-1">
+                  <span className="block text-sm font-semibold leading-snug text-foreground group-hover:text-primary">{guide.title}</span>
+                  <span className="mt-1 line-clamp-2 block text-xs leading-relaxed text-muted-foreground">{guide.description}</span>
+                  <span className="mt-1.5 inline-block text-xs font-semibold text-primary group-hover:underline">Read guide</span>
+                </span>
+              </Link>
+            </li>)}
+          </ul>
+          <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
+            Want to explore these places in person? Browse <Link to="/tours/" className="font-medium text-primary underline-offset-4 hover:underline">tours &amp; day trips</Link>, <Link to="/shore-excursions/" className="font-medium text-primary underline-offset-4 hover:underline">shore excursions</Link> or <Link to="/private-driver/" className="font-medium text-primary underline-offset-4 hover:underline">a private driver</Link>.
+          </p>
+        </section>
 
+        <section id="attractions-trip-planning" aria-labelledby="attractions-trip-planning-h" className="mt-9">
+          <h2 id="attractions-trip-planning-h" className="text-2xl font-semibold">Plan your trip to Israel</h2>
+          <ul className="mt-4 grid gap-3 sm:grid-cols-2">
+            {attractionPlanningPaths.map(item => {
+              const Icon = planningIcons[item.id];
+              return <li key={item.id} className="min-w-0">
+                <Link to={item.to} className="group flex h-full items-start gap-3 rounded-xl border bg-card p-3 transition-colors hover:border-primary/50 hover:bg-secondary/20 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
+                  <Icon aria-hidden className="mt-0.5 size-5 shrink-0 text-primary" />
+                  <span className="min-w-0">
+                    <span className="block text-sm font-semibold leading-snug text-foreground group-hover:text-primary">{item.title}</span>
+                    <span className="mt-1 block text-xs leading-relaxed text-muted-foreground">{item.description}</span>
+                  </span>
+                </Link>
+              </li>;
+            })}
+          </ul>
+        </section>
+      </div>
     </main>
   );
 }
