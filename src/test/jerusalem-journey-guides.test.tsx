@@ -205,7 +205,7 @@ describe("Jerusalem independent day-trip planning guides", () => {
     const relatedGuides = screen.getByTestId("deadsea-related-guides");
     expect(relatedGuides.children).toHaveLength(6);
     expect(within(relatedGuides).getAllByRole("img")).toHaveLength(6);
-    expect(within(relatedGuides).getByRole("img", { name: /Nubian ibex near a stream in Ein Gedi/ })).toBeInTheDocument();
+    expect(within(relatedGuides).getByRole("img", { name: /Waterfall tumbling through green vegetation and rocky cliffs in Ein Gedi Nature Reserve/ })).toBeInTheDocument();
     expect(new Set(within(relatedGuides).getAllByRole("link").map(link => link.getAttribute("href"))).size).toBe(6);
     const nextSteps = screen.getByTestId("deadsea-next-steps");
     expect(within(nextSteps).getAllByRole("link")).toHaveLength(4);
