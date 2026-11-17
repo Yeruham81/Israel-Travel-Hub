@@ -53,15 +53,19 @@ export const mountBeatitudesDestinationContent: AttractionDestinationContent = {
         <p>Walk around the arches encircling the church. They frame lovely views towards the lake and offer shade while you take in the hillside setting.</p>
         <p>I recommend allowing a few extra minutes here rather than rushing straight back to the car.</p>
       </AttractionHighlight>
-      <AttractionHighlight title="Gardens and outdoor prayer spaces">
-        <p>Landscaped paths, lawns and quiet places for reflection surround the church. Some outdoor areas are used for organised prayer and services, so give groups their space.</p>
-        <p>The garden paths follow the slope, with changes in level as you move away from the main church.</p>
+      <AttractionHighlight title="Gardens and views over the Sea of Galilee">
+        <p>Walk through the landscaped gardens to enjoy the quiet setting and views over the lake. Some outdoor areas are reserved for organised prayer and services, so give groups their space.</p>
+        <p>Garden paths follow the slope, with changes in level as you move away from the main church.</p>
+        <figure className="mt-3 overflow-hidden rounded-lg border border-border/70">
+          <img src="/images/attractions/beatitudes-sea-view.webp" alt="Panoramic view of the Sea of Galilee and green hills from the Mount of Beatitudes gardens" loading="lazy" decoding="async" width={768} height={249} className="block h-auto w-full object-cover" />
+          <figcaption className="px-3 py-2 text-xs text-muted-foreground">The Sea of Galilee as seen from the Mount of Beatitudes.</figcaption>
+        </figure>
       </AttractionHighlight>
     </div>
   ),
   visitorContent: (
     <div className="mt-4 space-y-4">
-      <p>The church and gardens are one visitor site managed by the Franciscan Missionary Sisters. Plan around the midday closure when choosing your visiting time.</p>
+      <p>The church and gardens are visited as one site, with the lake viewpoints close to the sanctuary.</p>
       <div className="grid gap-3 sm:grid-cols-2" data-testid="beatitudes-hours-admission">
         <article className="rounded-xl border bg-card p-4">
           <h3 className="font-serif text-xl font-semibold">Opening hours</h3>
@@ -79,7 +83,7 @@ export const mountBeatitudesDestinationContent: AttractionDestinationContent = {
         </article>
       </div>
       <AttractionPracticalTip>
-        <strong>Avoid the midday closure.</strong> Plan your visit before 11:30 or after 14:00. If you're also visiting Tabgha and Capernaum, arrange your stops around the different church opening hours.
+        <strong>Plan around the opening hours.</strong> Visit in the morning or after 14:00. If you're also visiting Tabgha and Capernaum, check each site's opening hours before setting out.
       </AttractionPracticalTip>
       <div className="rounded-xl border border-border/80 bg-secondary/20 p-4 sm:p-5" data-testid="beatitudes-visitor-essentials">
         <h3 className="font-serif text-xl font-semibold">Useful things to know before visiting</h3>
@@ -87,10 +91,11 @@ export const mountBeatitudesDestinationContent: AttractionDestinationContent = {
           <li><strong>Dress:</strong> Cover shoulders and knees and keep voices low inside the church and gardens.</li>
           <li><strong>Accessibility:</strong> Cars can reach the hilltop entrance, but some garden paths slope or have steps. Contact the sisters about step-free access if needed.</li>
           <li><strong>Facilities:</strong> Parking and restrooms are available within the grounds. The site also has guesthouses for pilgrims.</li>
-          <li><strong>Site contact:</strong> Call <a href={"tel:" + visit.phoneHref} dir="ltr" className="inline-block whitespace-nowrap font-semibold text-primary underline underline-offset-4">{visit.phone}</a> for visitor arrangements.</li>
+          <li><strong>Guesthouse and general enquiries:</strong> <a href={"tel:" + visit.phoneHref} dir="ltr" className="inline-block whitespace-nowrap font-semibold text-primary underline underline-offset-4">{visit.phone}</a>.</li>
+          <li><strong>Prayer and Mass arrangements:</strong> <a href={"tel:" + visit.prayerPhoneHref} dir="ltr" className="inline-block whitespace-nowrap font-semibold text-primary underline underline-offset-4">{visit.prayerPhone}</a>.</li>
         </ul>
       </div>
-      <p className="text-sm leading-relaxed">Groups arranging a prayer service or Mass should contact the sisters in advance at <a href={"tel:" + visit.prayerPhoneHref} dir="ltr" className={inlineLink}>{visit.prayerPhone}</a>. <a href={source.visitAndGroups} target="_blank" rel="noopener noreferrer" className={inlineLink}>See the church's group-visit information.</a></p>
+      <p className="text-sm leading-relaxed">If you're planning a group service, <a href={source.visitAndGroups} target="_blank" rel="noopener noreferrer" className={inlineLink}>see prayer and Mass arrangements</a> on the church's website before your visit.</p>
     </div>
   ),
   transportContent: (
@@ -136,10 +141,7 @@ export const mountBeatitudesDestinationContent: AttractionDestinationContent = {
         </ul>
         <p className="mt-3 text-sm text-muted-foreground">If you're visiting on a shore excursion from Haifa Port, allow enough time for the return journey.</p>
       </div>
-      <figure className="overflow-hidden rounded-xl border bg-card">
-        <img src="/images/attractions/beatitudes-sea-view.webp" alt="Panoramic view of the Sea of Galilee and green hills from the Mount of Beatitudes gardens" loading="lazy" decoding="async" width={768} height={249} className="h-auto w-full object-cover" />
-        <figcaption className="px-3 py-2 text-xs text-muted-foreground">The Sea of Galilee as seen from the Mount of Beatitudes.</figcaption>
-      </figure>
+
     </div>
   ),
   historyContent: (
@@ -173,7 +175,7 @@ export const mountBeatitudesDestinationContent: AttractionDestinationContent = {
   ),
   faqs: [
     { q: "How much time do I need at the Mount of Beatitudes?", a: "Around 45–60 minutes is comfortable for the church, colonnade, gardens and lake views. Allow longer if you are attending a booked service." },
-    { q: "What are the visiting hours?", a: "The published schedule is 08:00–11:30 and 14:00–16:30. The site closes between these sessions and on Easter, Christmas and the Feast of the Beatitudes." },
+    { q: "What are the visiting hours?", a: "The published visiting hours are 08:00–11:30 and 14:00–16:30, with a midday closure in between. Check holiday closures before travelling." },
     { q: "Is there an entrance fee?", a: "Yes. The entrance fee is ₪10 per person." },
     { q: "Can I visit without a car?", a: "You may be able to reach the Tabgha area by bus from Tiberias, but the uphill approach to the church makes this less convenient. A rental car, organised tour or private driver is easier when combining sites." },
     { q: "Is the Mount of Beatitudes wheelchair accessible?", a: "Vehicles can reach the hilltop grounds, while some garden paths slope or have steps. Contact the sisters before travelling to check the accessible entrance and route for your needs." },
@@ -198,8 +200,8 @@ export const mountBeatitudesDestinationContent: AttractionDestinationContent = {
   ],
   sources: [
     { label: "Christian Information Center — Mount of Beatitudes visiting hours", url: source.hours, note: "Published visiting hours, holiday closures and visitor contact details." },
-    { label: "Church of the Beatitudes — official history and contact", url: source.churchAbout, note: "Antonio Barluzzi, octagonal design, construction dates and managing organisation." },
-    { label: "Church of the Beatitudes — official visit and group arrangements", url: source.visitAndGroups, note: "Prayer and Mass arrangements, guesthouse information and contact numbers." },
+    { label: "Church of the Beatitudes — official history and contact", url: source.churchAbout, note: "Antonio Barluzzi, octagonal design, construction dates and site contact details." },
+    { label: "Church of the Beatitudes — prayer, Mass and guesthouse arrangements", url: source.visitAndGroups, note: "Church contact details for services and group accommodation." },
     { label: "Jesus Trail — walking route through the Mount of Beatitudes", url: source.jesusTrail, note: "Background on the marked long-distance route linking Tabgha, the Mount of Beatitudes and Capernaum." },
   ],
 };
