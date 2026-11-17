@@ -47,7 +47,7 @@ describe("private driver page and inquiry", () => {
     expect(screen.getAllByTestId("driver-journey-card")).toHaveLength(3);
     const dayHire = privateDriverJourneys.find(journey => journey.id === "day-hire");
     expect(dayHire?.photo.src).toBe(scenicDrivePhoto);
-    expect(dayHire?.photo.src).not.toBe(airportTransferPhotos.jerusalem?.src);
+    expect(dayHire?.photo.src).not.toBe(airportTransferPhotos["jerusalem"]?.src);
     expect(within(screen.getAllByTestId("driver-journey-card")[1]!).getByRole("img")).toHaveAttribute("src", scenicDrivePhoto);
     const header = screen.getByTestId("hub-header");
     expect(header).toContainElement(screen.getByRole("heading", { level: 1 }));
