@@ -1,5 +1,5 @@
 import { Link } from "@tanstack/react-router";
-import { ArrowUpRight, BusFront, CarFront, Footprints, CableCar, Sun, Clock3 } from "lucide-react";
+import { ArrowUpRight, BusFront, CarFront, Footprints, CableCar, Sun } from "lucide-react";
 import {
   AttractionDestinationPage, AttractionHighlight, AttractionPracticalTip,
   type AttractionDestinationContent,
