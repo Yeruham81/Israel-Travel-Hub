@@ -310,7 +310,7 @@ export const airportTransferContact = {
   deliveryMode: "server_email" as const,
 };
 
-export const PRIVATE_DRIVER_CHECK_DATE: ISODate = "2026-10-17";
+export const PRIVATE_DRIVER_CHECK_DATE: ISODate = "2026-11-17";
 export const privateDriverServices = [
   { id: "intercity", label: "Intercity transfer" },
   { id: "day-hire", label: "Private driver by the day" },
