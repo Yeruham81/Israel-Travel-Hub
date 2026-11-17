@@ -169,7 +169,12 @@
     transition: background-color .15s ease, color .15s ease;
   }
   .chip:hover { background: var(--color-secondary); color: var(--color-primary); }
+  /* The blue background of a selected filter is deliberately tighter than the
+     regular navigation chip. Keep the same readable label and active colour. */
   .chip[aria-pressed="true"], .chip[aria-current="true"], .chip[aria-current="page"] {
+    min-height: 2.125rem;
+    align-self: center;
+    padding: .3rem .625rem;
     background: var(--color-primary);
     color: var(--color-primary-foreground);
   }
