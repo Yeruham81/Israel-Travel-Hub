@@ -33,7 +33,7 @@ export const magdalaDestinationContent: AttractionDestinationContent = {
     { icon: "duration", label: "Time needed", value: "60–90 minutes", note: "Archaeology and Duc In Altum" },
     { icon: "hours", label: "Archaeological park", value: visit.archaeologyHours, note: "Daily · visitor centre too" },
     { icon: "hours", label: "Duc In Altum", value: visit.prayerCentreHours, note: "Daily · prayer centre" },
-    { icon: "admission", label: "Admission", value: "Ask visitor centre", note: "No current official price list online" },
+    { icon: "admission", label: "Admission", value: "Contact visitor centre", note: "Tickets and group visits" },
     { icon: "access", label: "Getting there", value: "Route 90", note: "Car, taxi, local bus or tour" },
   ],
   highlightContent: (
@@ -47,7 +47,7 @@ export const magdalaDestinationContent: AttractionDestinationContent = {
       </AttractionHighlight>
       <AttractionHighlight title="The Magdala Stone">
         <p>The carved stone discovered in the synagogue is one of the site's most important finds. Its reliefs include a depiction of the menorah, connecting the town's Jewish life to the Temple in Jerusalem.</p>
-        <p>Read the interpretation at the synagogue and ask the visitor centre about the stone or replica on display during your visit.</p>
+        <p>The stone displayed in the synagogue is a replica. The original is part of the Israel Antiquities Authority’s collection and has been exhibited elsewhere.</p>
       </AttractionHighlight>
       <AttractionHighlight title="Streets, marketplace and ritual baths">
         <p>Beyond the synagogue, the excavated town reveals shops, domestic buildings and ancient <em>mikvaot</em> (ritual baths). Together, these remains help explain how people lived and worked beside the lake.</p>
@@ -64,8 +64,8 @@ export const magdalaDestinationContent: AttractionDestinationContent = {
         title="The Women's Atrium and other chapels"
         image={{ src: "/images/attractions/magdala-womens-atrium.webp", alt: "Columned Women's Atrium inside Magdala's Duc In Altum prayer centre" }}
       >
-        <p>The Women's Atrium honours women in the Gospel tradition, including Mary Magdalene. From here, explore the chapels with their mosaics and the lower Encounter Chapel if it is open during your visit.</p>
-        <p>The artworks and modern architecture add a thoughtful final stop after the ancient town.</p>
+        <p>The Women's Atrium honours women in the Gospel tradition, including Mary Magdalene. From here, explore the mosaic chapels and the lower Encounter Chapel.</p>
+        <p>In the Encounter Chapel, the floor incorporates first-century paving stones from Magdala’s ancient marketplace near the harbour, carefully returned to their approximate original positions when the chapel was built.</p>
       </AttractionHighlight>
     </div>
   ),
@@ -79,12 +79,12 @@ export const magdalaDestinationContent: AttractionDestinationContent = {
             <div><dt className="inline font-semibold">Archaeological park & visitor centre: </dt><dd className="inline">{visit.archaeologyHours}</dd></div>
             <div><dt className="inline font-semibold">Duc In Altum: </dt><dd className="inline">{visit.prayerCentreHours}</dd></div>
           </dl>
-          <p className="mt-2 text-sm">Both are normally open daily. Holiday schedules and access during religious services may vary.</p>
+          <p className="mt-2 text-sm">Both are normally open daily. On 24 December, visiting hours are 08:00–12:00; the site is closed on Christmas Day (25 December) and Yom Kippur. Access during religious services may vary.</p>
           <a href={sources.plan} target="_blank" rel="noopener noreferrer" className="mt-3 inline-flex items-center gap-1 text-sm font-semibold text-primary hover:underline">Official visiting hours <ArrowUpRight className="h-3.5 w-3.5" aria-hidden="true" /></a>
         </article>
         <article className="rounded-xl border bg-card p-4">
           <h3 className="font-serif text-xl font-semibold">Tickets and guided visits</h3>
-          <p className="mt-3 text-sm leading-relaxed sm:text-base">The site does not publish a current admission price list on its official visit page. For ticket prices, group rates and guided tours, contact the visitor centre.</p>
+          <p className="mt-3 text-sm leading-relaxed sm:text-base">For admission details, group rates and guided tours, contact the visitor centre directly.</p>
           <a href={"mailto:" + visit.visitorEmail} className={"mt-2 inline-block text-sm " + inlineLink}>{visit.visitorEmail}</a>
           <p className="mt-1 text-sm"><a href={"tel:" + visit.visitorPhoneHref} className={inlineLink} dir="ltr">{visit.visitorPhone}</a></p>
           <a href={sources.contact} target="_blank" rel="noopener noreferrer" className="mt-3 inline-flex items-center gap-1 text-sm font-semibold text-primary hover:underline">Official visitor centre contacts <ArrowUpRight className="h-3.5 w-3.5" aria-hidden="true" /></a>
@@ -181,9 +181,8 @@ export const magdalaDestinationContent: AttractionDestinationContent = {
   ),
   faqs: [
     { q: "How long should I spend at Magdala?", a: "Allow around 60–90 minutes to see the first-century synagogue, some of the excavated town and Duc In Altum. A guided visit or religious service can take longer." },
-    { q: "What are Magdala's opening hours?", a: "According to the official visit page, the visitor centre and archaeological park are open daily 08:00–17:30, while Duc In Altum is open daily 08:00–18:00. Check holiday notices before visiting." },
-    { q: "How much does it cost to enter Magdala?", a: "The operator does not publish a current ticket price list on its official visit page. Contact the Magdala visitor centre for admission prices and group rates." },
-    { q: "Can I see the original Magdala Stone?", a: "The stone was discovered in the synagogue and has been displayed internationally. Ask the site what original objects and reproductions are currently available to view." },
+    { q: "What are Magdala's opening hours?", a: "The archaeological park and visitor centre are open 08:00–17:30, and Duc In Altum 08:00–18:00. Special hours and holiday closures are listed in the visitor information above." },
+    { q: "Can I see the original Magdala Stone?", a: "The stone on display in the ancient synagogue is a replica. The original belongs to the Israel Antiquities Authority’s collection and has been displayed in exhibitions." },
     { q: "Is Duc In Altum the ancient synagogue?", a: "No. The synagogue is a first-century archaeological discovery. Duc In Altum is the modern prayer centre beside the excavations." },
     { q: "Is Magdala the hometown of Mary Magdalene?", a: "Magdala is traditionally associated with Mary Magdalene. The ancient town has been excavated, but archaeology does not prove her exact birthplace or home." },
     { q: "Can I visit Magdala by bus?", a: "Local buses serve the Migdal area from Tiberias. Check the right stop, walking route and return departure in Israel's official public transport planner before travelling." },
@@ -211,7 +210,7 @@ export const magdalaDestinationContent: AttractionDestinationContent = {
     { label: "Magdala — archaeological park", url: sources.archaeology, note: "Background on the first-century synagogue, Magdala Stone and excavated town." },
     { label: "Magdala — Duc In Altum", url: sources.ducInAltum, note: "Boat Chapel, Women's Atrium, prayer spaces and religious services." },
     { label: "Magdala — official contact and visitor centre", url: sources.contact, note: "Current ticket and tour enquiries, visitor contacts and religious service arrangements." },
-    { label: "Christian Information Center — published shrine hours", url: sources.cicHours, note: "Additional holiday closure information and religious-site listing." },
+    { label: "Christian Information Center — Magdala holiday hours", url: sources.cicHours, note: "24 December morning hours and closures on Christmas Day and Yom Kippur." },
   ],
 };
 
