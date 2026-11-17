@@ -28,7 +28,7 @@ describe("Caesarea upgraded attraction guide", () => {
     expect(new Set(content.nearby!.map(item => item.to)).size).toBe(6);
     expect(content.planningLinks).toHaveLength(6);
     expect(content.faqs).toHaveLength(8);
-    expect(content.sources).toHaveLength(6);
+    expect(content.sources).toHaveLength(7);
     const meta = caesareaMeta();
     expect(meta.links.find(link => link.rel === "canonical")?.href).toContain("/attractions/caesarea/");
     const article = meta.scripts.map(script => JSON.parse(script.children as string)).find(script => script["@type"] === "Article");
@@ -46,7 +46,18 @@ describe("Caesarea upgraded attraction guide", () => {
     expect(site.visit.summerRegular).toBe("08:00–17:00");
     expect(site.visit.winterRegular).toBe("08:00–16:00");
     expect(article).toContain("Last park entry is one hour before closing");
-    expect(article).toContain("Children under 5 generally enter free");
+    expect(article).toContain("Children under 5 enter free");
+    expect(site.visit.specialHolidayEves).toBe("08:00–13:00");
+    expect(site.visit.harborOnly).toBe("₪18");
+    expect(site.visit.soldier).toBe("₪27");
+    expect(site.visit.groupThreshold).toBe("over 30");
+    expect(article).toContain("Rosh Hashanah, Passover and Yom Kippur eves");
+    expect(article).toContain("Harbor only");
+    expect(article).toContain("more than 30 people");
+    expect(article).toContain("Active-duty soldier");
+    expect(article).toContain("groups of more than 10");
+    expect(article).toContain("Harbor parking may become chargeable");
+    expect(article).toContain("aqueductDirections");
     expect(article).toContain("harbor visitors' center");
     expect(article).toContain("Caesarea Experience");
     expect(article).toContain('data-testid="caesarea-hours-tickets"');
@@ -65,15 +76,30 @@ describe("Caesarea upgraded attraction guide", () => {
   it("reuses distinct existing local photos and contains a feasible coastal itinerary", () => {
     const article = readFileSync("src/components/CaesareaAttractionPage.tsx", "utf8");
     for (const path of [
-      "src/assets/home/caesarea-dusk-feature.webp",
+      "public/images/attractions/caesarea-ruins-hero.svg",
       "src/assets/home/caesarea-theatre.webp",
-      "src/assets/home/hero-caesarea-sm.webp",
-      "src/assets/home/caesarea-aqueduct.webp",
+      "public/images/attractions/caesarea-crusader-arches.svg",
+      "public/images/attractions/caesarea-aqueduct-arches.svg",
+      "src/assets/home/hero-caesarea-coast-desktop.jpg",
       "src/assets/shore-excursions/akko-port.jpg",
       "src/assets/haifa/panorama.webp",
     ]) {
       expect(existsSync(path), path).toBe(true);
     }
+    expect(site.hero.src).toBe("/images/attractions/caesarea-ruins-hero.svg");
+    for (const path of [
+      "public/images/attractions/caesarea-ruins-hero.svg",
+      "public/images/attractions/caesarea-crusader-arches.svg",
+      "public/images/attractions/caesarea-aqueduct-arches.svg",
+    ]) {
+      const imageMarkup = readFileSync(path, "utf8");
+      expect(imageMarkup).toContain('<image ');
+      expect(imageMarkup).toContain('data:image/webp;base64,');
+    }
+    expect(article).toContain('data-testid="caesarea-coastal-panorama"');
+    expect(article).toContain("coastPanorama");
+    expect(article).not.toContain("harborPhoto");
+    expect(article).not.toContain("aqueductPhoto");
     expect(article).toContain("The Roman theater overlooking the sea");
     expect(article).toContain("The hippodrome and promontory palace");
     expect(article).toContain("The ancient harbor and Crusader walls");
