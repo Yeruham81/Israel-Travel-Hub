@@ -65,6 +65,9 @@ describe("Tabgha visitor guide follows the individual-attraction template", () =
     expect(article).toContain('data-testid="tabgha-visitor-table"');
     expect(article).toContain('data-testid="tabgha-location-map"');
     expect(article).toContain("hl=en&z=12");
+    expect(article).toContain("maps/dir/?api=1&destination=Church%20of%20the%20Multiplication");
+    expect(article).toContain("maps/dir/?api=1&destination=Church%20of%20the%20Primacy");
+    expect(article).toContain("https://bus.gov.il/en/Geographic-Area");
     expect(article).toContain("tabghaSite.multiplication.hours");
     expect(article).toContain("tabghaSite.primacy.hours");
     expect(article).toContain("tabghaSite.sources.multiplicationHours");
