@@ -303,7 +303,7 @@ export function TravelGuidePage({ id }: { id: TravelGuideId }) {
           ? [["at-a-glance", "Meter rates"], ...guide.sections.map((section) => [section.id, section.title] as const), ["faq", "FAQ"], ["contact", "Contact"], ["sources", "Sources"]]
           : id === "esim"
           ? [...guide.sections.map((section) => [section.id, section.title] as const), ["checklist", "Checklist"], ["faq", "FAQ"], ["contact", "Contact Me"]]
-          : [["at-a-glance", "At a glance"], ...guide.sections.map((section) => [section.id, section.title] as const), ["checklist", "Checklist"], ["faq", "FAQ"], ...(isTransportOverview ? [["contact", "Contact Moshe"], ["sources", "Sources"]] as const : [["sources", "Sources"], ["contact", "Contact Moshe"]] as const)]} compactLabels={id === "taxis" ? taxiNavCompactLabels : isTaxiFareGuide ? fareNavCompactLabels : undefined} />
+          : [["at-a-glance", "At a glance"], ...guide.sections.map((section) => [section.id, section.title] as const), ["checklist", "Checklist"], ["faq", "FAQ"], ...(isTransportOverview ? [["contact", "Contact Moshe"], ["sources", "Sources"]] as const : [["sources", "Sources"], ["contact", travelGuidePaths[id].startsWith("/attractions/") ? "Contact me" : "Contact Moshe"]] as const)]} compactLabels={id === "taxis" ? taxiNavCompactLabels : isTaxiFareGuide ? fareNavCompactLabels : undefined} />
       {bethlehemEntryRules && <section id={bethlehemEntryRules.id} aria-labelledby="entry-rules-h" className="mt-10 scroll-mt-24">
         <h2 id="entry-rules-h" className="text-3xl">{bethlehemEntryRules.title}</h2>
         <div className="mt-4 max-w-4xl space-y-4 leading-relaxed text-foreground">
