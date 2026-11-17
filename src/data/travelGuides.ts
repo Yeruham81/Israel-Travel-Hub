@@ -285,7 +285,7 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
         ],
         highlightedLinks: [
           { label: "Israel Railways — check train times", href: "https://www.rail.co.il/", context: "Enter your travel date and destination, and check the final leg from the station." },
-          { label: "National public transport journey planner", href: "https://bus.gov.il/", context: "Check available bus routes and connections for the day you arrive." },
+          { label: "National public transport journey planner", href: "https://bus.gov.il/en/home", context: "Check available bus routes and connections for the day you arrive." },
         ],
         sourceIds: ["guide-iaa", "israel-rail", "guide-gett"],
       },
@@ -814,7 +814,7 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
               "Enter your departure point and destination in the national journey planner. Check the bus stop, connections, payment options and last return service. Schedules can change during holidays, road closures or security-related disruptions.",
             ],
             highlightedLinks: [
-              { label: "National public transport route planner", href: "https://route.bus.gov.il/", context: "Search buses and light rail by the exact travel date, stop and direction. Verify important departures with the operator." },
+              { label: "National public transport route planner", href: "https://bus.gov.il/en/home", context: "Search buses and light rail by the exact travel date, stop and direction. Verify important departures with the operator." },
               { label: "Egged — seat reservations for selected routes", href: "https://www.egged.co.il/en/information-for-passengers/tickets-information", context: "Some intercity services such as selected Eilat routes use seat reservations; check before travelling." },
             ],
             sourceIds: ["guide-bus-planner", "guide-egged-seat-reservations"],
@@ -1047,10 +1047,10 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
                 ["Tel Aviv → Tiberias", "Intercity bus or planned regional trip", "Arrival terminal, total time and final return bus"],
               ],
               rowLinks: [
-                { href: "https://route.bus.gov.il/", label: "Plan Tel Aviv–Jerusalem on the national public transport planner" },
+                { href: "https://bus.gov.il/en/home", label: "Plan Tel Aviv–Jerusalem on the national public transport planner" },
                 { to: "/travel-blog/how-to-get-from-ben-gurion-airport-to-haifa/", label: "Ben Gurion Airport to Haifa" },
                 { to: "/travel-blog/jerusalem-to-the-dead-sea/", label: "Jerusalem to the Dead Sea" },
-                { href: "https://route.bus.gov.il/", label: "Plan Tel Aviv–Tiberias on the national public transport planner" },
+                { href: "https://bus.gov.il/en/home", label: "Plan Tel Aviv–Tiberias on the national public transport planner" },
               ],
             }],
           },
@@ -1256,7 +1256,7 @@ telAviv: {
           "Some night buses operate only on selected nights. Don't assume your regular route runs around the clock.",
           "Use official operator or route-planner notices to confirm disruptions and the last return.",
         ],
-        externalLinks: [{ label: "National public-transport route planner", href: "https://route.bus.gov.il/" }],
+        externalLinks: [{ label: "National public-transport route planner", href: "https://bus.gov.il/en/home" }],
         sourceIds: ["guide-telaviv-transit", "guide-bus-planner", "guide-public-transport-payments"],
       },
       {
