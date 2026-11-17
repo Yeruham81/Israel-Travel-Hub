@@ -52,7 +52,7 @@ export function ShabbatPublicTransportLinks() {
       context="Enter your actual date, departure station and destination to check the first train after Shabbat and your onward connection."
     />
     <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-      For bus journeys, check the <a href="https://route.bus.gov.il/?saveParams=true&tab=source-destination" target="_blank" rel="noopener noreferrer" className="font-medium text-primary underline underline-offset-4">National Public Transport Authority — route planner<span className="sr-only"> (opens in a new tab)</span></a> for the date and exact route.
+      For bus journeys, check the <a href="https://bus.gov.il/en/homeen/home" target="_blank" rel="noopener noreferrer" className="font-medium text-primary underline underline-offset-4">National Public Transport Authority — route planner<span className="sr-only"> (opens in a new tab)</span></a> for the date and exact route.
     </p>
   </div>;
 }
