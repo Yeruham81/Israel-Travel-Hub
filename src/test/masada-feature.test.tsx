@@ -69,7 +69,7 @@ describe("Masada upgraded attraction guide", () => {
     expect(page).toContain("Active reservist");
     expect(page).toContain("Student</dt>");
     expect(page).toContain('aria-label="Masada night show seasonal starting times"');
-    expect(page).toContain("closed January–April");
+    expect(page).toContain("Closed January–April");
     expect(page).toContain("Egged line 486");
     expect(page).toContain("Line 444");
     expect(page).toContain("requires advance seat reservation");
