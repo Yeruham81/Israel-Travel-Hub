@@ -373,9 +373,9 @@ jobs:
           const fs = require("node:fs");
           const html = fs.readFileSync(process.argv[2], "utf8");
           const expectedUrl = process.argv[3];
-          const canonicalLinks = [...html.matchAll(/<link\\b[^>]*>/gi)]
-            .map(match => match[0]).filter(tag => /\\brel=["']canonical["']/i.test(tag));
-          if (!/<title[^>]*>[^<]*Caesarea National Park[^<]*<\\/title>/i.test(html)) {
+          const canonicalLinks = [...html.matchAll(/<link\b[^>]*>/gi)]
+            .map(match => match[0]).filter(tag => /\brel=["']canonical["']/i.test(tag));
+          if (!(html.match(/<title[^>]*>([^<]*)/i)?.[1] ?? "").includes("Caesarea National Park")) {
             console.error("::error::Caesarea page title is missing");
             process.exit(1);
           }
