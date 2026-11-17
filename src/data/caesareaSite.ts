@@ -28,10 +28,10 @@ export const caesareaSite = {
   sources: {
     park: "https://en.parks.org.il/reserve-park/caesarea-national-park/",
     prices: "https://www.parks.org.il/article/price/",
+    harborPrices: "https://caesarea.com/en/rec-leisure/%D7%9E%D7%97%D7%99%D7%A8%D7%95%D7%9F/",
     harborHours: "https://caesarea.com/en/rec-leisure/%D7%A9%D7%A2%D7%95%D7%AA-%D7%A4%D7%A2%D7%99%D7%9C%D7%95%D7%AA/",
     visitorCenter: "https://caesarea.com/en/rec-leisure/%D7%9E%D7%A8%D7%9B%D7%96-%D7%94%D7%9E%D7%91%D7%A7%D7%A8%D7%99%D7%9D/",
     visitorFaq: "https://caesarea.com/en/rec-leisure/%D7%A9%D7%90%D7%9C%D7%95%D7%AA-%D7%95%D7%AA%D7%A9%D7%95%D7%91%D7%95%D7%AA/",
     harborSites: "https://caesarea.com/en/rec-leisure/the-caesarea-port-and-the-old-city/",
-    harborPrices: "https://caesarea.com/en/rec-leisure/%D7%9E%D7%97%D7%99%D7%A8%D7%95%D7%9F/",
   },
 };
