@@ -133,7 +133,7 @@ describe("four independent airport transportation comparisons", () => {
     expect(doc.querySelectorAll('#options aside[data-testid="useful-journey-link"]')).toHaveLength(5);
     expect(doc.querySelector("#options")?.textContent).not.toContain("Before choosing this option");
     expect(doc.querySelector('#option-rail a[href="https://www.rail.co.il/"]')).not.toBeNull();
-    expect(doc.querySelector('#option-bus a[href="https://bus.gov.il/"]')).not.toBeNull();
+    expect(doc.querySelector('#option-bus a[href="https://bus.gov.il/en/home"]')).not.toBeNull();
     expect(doc.querySelector('#option-taxi a[href="https://www.gett.com/il/airport-en/"]')).not.toBeNull();
     expect(doc.querySelector('#option-weekend a[href="https://busofash.co.il/?lines=711"]')).not.toBeNull();
     expect(doc.querySelector('#option-rail a[href="/travel-blog/where-to-stay-in-tel-aviv/"]')).not.toBeNull();
@@ -222,7 +222,7 @@ describe("four independent airport transportation comparisons", () => {
     expect(usefulLinks.every(box => box.querySelector('svg[aria-hidden="true"]') && box.querySelector("a[href]"))).toBe(true);
     expect(doc.querySelector('#option-rail aside[aria-label="Important Jerusalem train ticket information"] svg[aria-hidden="true"]')).not.toBeNull();
     expect(doc.querySelector('#option-taxi aside[data-testid="useful-journey-link"] a[href="https://www.gett.com/il/airport-en/"]')).not.toBeNull();
-    expect(doc.querySelector('#option-bus aside[data-testid="useful-journey-link"] a[href="https://bus.gov.il/"]')).not.toBeNull();
+    expect(doc.querySelector('#option-bus aside[data-testid="useful-journey-link"] a[href="https://bus.gov.il/en/home"]')).not.toBeNull();
     expect(doc.querySelector('#option-private aside[data-testid="useful-journey-link"] a[href="#request-quote"]')).not.toBeNull();
     expect(doc.querySelector('#option-rental aside[data-testid="useful-journey-link"]')).toBeNull();
     for (const o of g.options) for (const l of o.inlineLinks || []) {
