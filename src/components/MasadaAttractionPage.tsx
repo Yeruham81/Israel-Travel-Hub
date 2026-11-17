@@ -109,7 +109,7 @@ export const masadaDestinationContent: AttractionDestinationContent = {
             <div className="flex items-start justify-between gap-3"><dt>Active reservist</dt><dd className="shrink-0 font-semibold" dir="ltr">{fees.activeReservist}</dd></div>
             <div className="flex items-start justify-between gap-3"><dt>Israeli senior citizen</dt><dd className="shrink-0 font-semibold" dir="ltr">{fees.israeliSenior}</dd></div>
           </dl>
-          <p className="mt-3 text-xs text-muted-foreground">Children under 5 enter free. Reduced fares require the relevant eligibility, and group prices apply to more than 30 people. Matmon membership covers regular admission under the program's terms.</p>
+          <p className="mt-3 text-xs text-muted-foreground">Children under 5 enter free. Reduced fares require eligibility, and group rates apply to groups of more than 30 people. Matmon membership covers regular park admission under the program's terms.</p>
           <a href={official.fees} target="_blank" rel="noopener noreferrer" className="mt-3 inline-flex items-center gap-1 text-sm font-semibold text-primary hover:underline">Official admission prices <ArrowUpRight className="h-3.5 w-3.5" aria-hidden="true" /></a>
         </article>
       </div>
