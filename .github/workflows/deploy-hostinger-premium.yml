@@ -202,7 +202,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          for path in / /travel-blog/ /travel-blog/uber-in-israel/ /attractions/capernaum/ /attractions/mount-precipice/ /attractions/tel-megiddo/ /attractions/basilica-of-the-annunciation/ /attractions/rosh-hanikra/ /api/quote-request/ /api/exchange-rates/; do
+          for path in / /travel-blog/ /travel-blog/uber-in-israel/ /attractions/capernaum/ /attractions/mount-precipice/ /attractions/tel-megiddo/ /attractions/basilica-of-the-annunciation/ /attractions/rosh-hanikra/ /attractions/caesarea/ /api/quote-request/ /api/exchange-rates/; do
             status="$(curl --retry 2 --retry-delay 2 --max-time 20 -L -sS -o /dev/null -w '%{http_code}' "$VITE_CANONICAL_ORIGIN$path")"
             echo "$path -> HTTP $status"
             [[ "$status" == "200" ]] || { echo "::error::Website smoke test failed for $path"; exit 1; }
@@ -365,5 +365,52 @@ jobs:
             fi
             rm -f "$image_file"
             echo "Rosh Hanikra image $image_name -> valid WebP"
+          done
+          # Confirm the upgraded Caesarea route, prices, canonical and Drive-backed images.
+          caesarea_html="$(mktemp)"
+          curl --retry 2 --max-time 20 -fsSL -o "$caesarea_html" "$VITE_CANONICAL_ORIGIN/attractions/caesarea/"
+          node - "$caesarea_html" "$VITE_CANONICAL_ORIGIN/attractions/caesarea/" <<'NODE'
+          const fs = require("node:fs");
+          const html = fs.readFileSync(process.argv[2], "utf8");
+          const expectedUrl = process.argv[3];
+          const canonicalLinks = [...html.matchAll(/<link\\b[^>]*>/gi)]
+            .map(match => match[0]).filter(tag => /\\brel=["']canonical["']/i.test(tag));
+          if (!/<title[^>]*>[^<]*Caesarea National Park[^<]*<\\/title>/i.test(html)) {
+            console.error("::error::Caesarea page title is missing");
+            process.exit(1);
+          }
+          for (const required of [
+            'data-testid="caesarea-hours-tickets"',
+            'data-testid="attraction-at-a-glance"',
+            'data-testid="caesarea-coastal-panorama"',
+            "Harbor only",
+            "₪46",
+            "₪18",
+            "caesarea-ruins-hero.svg",
+            "caesarea-crusader-arches.svg",
+            "caesarea-aqueduct-arches.svg",
+          ]) {
+            if (!html.includes(required)) {
+              console.error("::error::Caesarea published page is missing " + required);
+              process.exit(1);
+            }
+          }
+          if (!canonicalLinks.some(tag => tag.includes('href="' + expectedUrl + '"'))) {
+            console.error("::error::Caesarea published canonical URL is incorrect");
+            process.exit(1);
+          }
+          console.log("Caesarea title, content, pricing, images and canonical verified.");
+          NODE
+          rm -f "$caesarea_html"
+          for image_name in caesarea-ruins-hero.svg caesarea-crusader-arches.svg caesarea-aqueduct-arches.svg; do
+            image_file="$(mktemp)"
+            curl --retry 2 --max-time 20 -fsSL -o "$image_file" "$VITE_CANONICAL_ORIGIN/images/attractions/$image_name"
+            if [[ "$(file --mime-type -b "$image_file")" != "image/svg+xml" ]] || ! grep -Fq '<image ' "$image_file"; then
+              rm -f "$image_file"
+              echo "::error::Caesarea image $image_name is missing or invalid"
+              exit 1
+            fi
+            rm -f "$image_file"
+            echo "Caesarea photo asset $image_name -> valid SVG with embedded image"
           done
           echo "Source-controlled static guides published; existing PHP APIs still respond to GET."
