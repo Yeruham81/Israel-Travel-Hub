@@ -65,8 +65,10 @@ describe("Magdala individual attraction guide upgrade", () => {
     expect(article).toContain("No current official price list online");
     expect(article).not.toContain("₪17");
     expect(article).not.toContain("₪12");
-    expect(article).toContain("visit@magdala.org");
-    expect(article).toContain("ducinaltum@magdala.org");
+    expect(site.visit.visitorEmail).toBe("visit@magdala.org");
+    expect(article).toContain("visit.visitorEmail");
+    expect(site.visit.prayerEmail).toBe("ducinaltum@magdala.org");
+    expect(article).toContain("visit.prayerEmail");
     expect(site.visit.visitorPhoneHref).toBe("+97246209900");
     expect(site.visit.prayerPhoneHref).toBe("+972533261622");
     expect(shell).toContain('["contact", "Contact me"]');
