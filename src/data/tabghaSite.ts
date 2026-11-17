@@ -11,6 +11,7 @@ export const tabghaSite = {
   updatedAt: "2026-11-17",
   multiplication: {
     hours: "09:00–15:00",
+    lastEntry: "14:45",
     days: "Monday–Saturday",
     closed: "Sunday",
     phone: "04-6678100",
@@ -23,7 +24,8 @@ export const tabghaSite = {
     phoneHref: "+97246724767",
   },
   sources: {
-    visitorHours: "https://www.cicts.org/our-services/",
+    multiplicationHours: "https://dormitio.net/tabgha/gottesdienst-und-oeffnungszeiten/",
+    primacyHours: "https://www.cicts.org/our-services/#:~:text=Tabgha%20%E2%80%93%20Primacy%20of%20St.%20Peter",
     benedictine: "https://dormitio.net/tabgha/",
     benedictineHistory: "https://dormitio.net/tabgha/brotvermehrungskirche/",
     benedictineVisitors: "https://dormitio.net/tabgha/pilger-und-gaeste/",
