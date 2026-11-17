@@ -28,7 +28,7 @@ export function SacredHillGuideContent({ id }: { id: SacredHillId }) {
     ["getting-there", "Getting there"],
     ["visitor-advice", "Visitor tips"],
     ["faq", "Questions"],
-    ["visit-options", "Contact Moshe"],
+    ["visit-options", "Contact me"],
   ] as const;
 
   return <>
