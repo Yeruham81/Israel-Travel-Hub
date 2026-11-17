@@ -73,7 +73,7 @@ describe("owner voice throughout the public site", () => {
       expect(source(file), file).not.toMatch(/Sponsored link|Affiliate link|earn me a commission|sponsored booking link/i);
     }
     expect(source("src/components/HomeContactForm.tsx")).toContain("Tell me how I can help");
-    expect(source("src/routes/private-driver.tsx")).toContain("Tell me where you want to go");
+    expect(source("src/routes/private-driver.tsx")).toContain("Tell me what you have in mind");
     expect(source("src/routes/airport-transfers.index.tsx")).toContain("Request a personal quote");
     expect(source("src/routes/terms-of-use.tsx")).toContain("contact me at {email}");
     expect(source("src/components/AirportRoutePage.tsx")).toContain("I confirm the full price before booking.");

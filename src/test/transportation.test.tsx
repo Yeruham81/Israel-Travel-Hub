@@ -64,13 +64,14 @@ describe("airport transfers and private driver separation", () => {
     const { container, router } = await renderPage("/private-driver/", DriverRoute.options.component!);
     expect(router.matchRoutes("/private-driver/").at(-1)?.routeId).toBe("/private-driver");
     expect(screen.getByRole("heading", { level: 1 })).toHaveTextContent("Private driver in Israel");
-    expect(screen.getByRole("heading", { name: "Intercity transfers & day hire" })).toBeInTheDocument();
-    const planning = screen.getByRole("region", { name: "Plan the day before requesting a quote" });
+    expect(screen.getByRole("heading", { name: "Choose the journey that suits you" })).toBeInTheDocument();
+    const benefits = screen.getByRole("region", { name: "A journey planned around you" });
     const form = screen.getByRole("form", { name: "Private driver quote request" });
-    expect(form.compareDocumentPosition(planning)).toBe(Node.DOCUMENT_POSITION_FOLLOWING);
+    expect(benefits.compareDocumentPosition(form)).toBe(Node.DOCUMENT_POSITION_FOLLOWING);
+    expect(screen.queryByRole("heading", { name: "Plan the day before requesting a quote" })).not.toBeInTheDocument();
     expect(screen.getByRole("link", { name: "Privacy Policy" })).toHaveAttribute("href", "/privacy-policy/");
     expect(screen.queryByText(/Prefer an online form|existing .*contact form/)).not.toBeInTheDocument();
-    expect(screen.getByText(/Share your route with me so I can agree the vehicle, itinerary and full price/)).toBeInTheDocument();
+    expect(screen.getByText(/Tell me what you have in mind, and I.ll prepare a personal quote/)).toBeInTheDocument();
     expect(container.textContent).not.toMatch(/ILS\s*\d/);
     expect(linksForPage("private-driver").map((link) => link.id)).toEqual(["private-driver-moshe"]);
     expect(linksForPage("transfers-hub")).toEqual([]);

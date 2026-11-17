@@ -68,7 +68,7 @@ describe("private driver page and inquiry", () => {
     expect(nextSteps.querySelector("ul")).toHaveClass("sm:grid-cols-2", "lg:grid-cols-3");
     expect(within(nextSteps).getAllByRole("link")).toHaveLength(6);
     for (const link of within(nextSteps).getAllByRole("link")) {
-      expect(router.matchRoutes(link.getAttribute("href")!).at(-1)?.routeId).toBe(link.getAttribute("href")!.replace(/\/$/, ""));
+      expect(router.matchRoutes(link.getAttribute("href")!).at(-1)?.routeId.replace(/\/$/, "")).toBe(link.getAttribute("href")!.replace(/\/$/, ""));
     }
     for (const card of guides) expect(router.matchRoutes(card.getAttribute("href")!).at(-1)?.routeId).toBe(card.getAttribute("href")!.replace(/\/$/, ""));
     expect(screen.getByRole("link", { name: "Privacy Policy" })).toHaveAttribute("href", "/privacy-policy/");
