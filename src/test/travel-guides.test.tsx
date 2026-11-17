@@ -159,26 +159,40 @@ describe("migrated practical guides", () => {
     expect(planning.compareDocumentPosition(credits)).toBe(Node.DOCUMENT_POSITION_FOLLOWING);
   });
 
-  it("combines search with topic filters, shares the URL and recovers from an empty result", async () => {
+  it("uses compact topic chips, shareable URL filters, and no free-text search", async () => {
     const router = await routerAt("/travel-blog/");
     const Hub = HubRoute.options.component!;
     render(<RouterContextProvider router={router}><Hub /></RouterContextProvider>);
     expect(screen.getAllByTestId("guide-directory-card")).toHaveLength(49);
-    fireEvent.change(screen.getByRole("searchbox"), { target: { value: "eSIM" } });
-    expect(screen.getAllByTestId("guide-directory-card")).toHaveLength(1);
-    fireEvent.submit(screen.getByRole("search"));
-    await waitFor(() => expect(router.state.location.search).toMatchObject({ q: "eSIM" }));
+    expect(screen.queryByRole("searchbox")).not.toBeInTheDocument();
+    expect(screen.queryByRole("search")).not.toBeInTheDocument();
     const topics = screen.getByRole("navigation", { name: "Filter guides by topic" });
-    fireEvent.click(within(topics).getByRole("link", { name: "Attractions" }));
-    await screen.findByRole("heading", { name: "No guides match this search" });
-    fireEvent.click(screen.getByRole("button", { name: "Clear filters" }));
-    await waitFor(() => expect(screen.getAllByTestId("guide-directory-card")).toHaveLength(49));
-    expect(screen.getByRole("searchbox")).toHaveValue("");
+    expect(topics).toHaveClass("rounded-xl", "bg-secondary/25");
+    expect(within(topics).getAllByRole("link")).toHaveLength(guideTopics.length + 1);
+    expect(within(topics).getByRole("link", { name: "All guides" })).toHaveAttribute("aria-current", "true");
+    expect(within(topics).getByRole("link", { name: "eSIM & mobile" })).toHaveAttribute("href", "/travel-blog/?topic=connectivity");
+    fireEvent.click(within(topics).getByRole("link", { name: "eSIM & mobile" }));
+    await waitFor(() => expect(router.state.location.search).toEqual({ topic: "connectivity" }));
+    expect(screen.getAllByTestId("guide-directory-card")).toHaveLength(filterGuides("", "connectivity").length);
+    expect(within(topics).getByRole("link", { name: "eSIM & mobile" })).toHaveAttribute("aria-current", "true");
+    expect(topics.querySelectorAll('[aria-current="true"]')).toHaveLength(1);
+    fireEvent.click(within(topics).getByRole("link", { name: "All guides" }));
+    await waitFor(() => expect(router.state.location.search).toEqual({}));
+    expect(screen.getAllByTestId("guide-directory-card")).toHaveLength(49);
     await act(async () => { await router.navigate({ to: "/travel-blog/", search: { topic: "attractions" } }); });
     expect(screen.getAllByTestId("guide-directory-card")).toHaveLength(filterGuides("", "attractions").length);
     expect(within(topics).getByRole("link", { name: "Attractions" })).toHaveAttribute("aria-current", "true");
-    expect(within(topics).getByRole("link", { name: "All topics" })).not.toHaveAttribute("aria-current");
-    expect(topics.querySelectorAll('[aria-current="true"]')).toHaveLength(1);
+    fireEvent.click(screen.getByRole("link", { name: "Clear filter" }));
+    await waitFor(() => expect(router.state.location.search).toEqual({}));
+    expect(screen.getAllByTestId("guide-directory-card")).toHaveLength(49);
+  });
+
+  it("ignores deprecated text-search parameters instead of invisibly filtering the directory", async () => {
+    const router = await routerAt("/travel-blog/?q=eSIM");
+    const Hub = HubRoute.options.component!;
+    render(<RouterContextProvider router={router}><Hub /></RouterContextProvider>);
+    expect(screen.getAllByTestId("guide-directory-card")).toHaveLength(guideDirectory.length);
+    expect(screen.queryByRole("searchbox")).not.toBeInTheDocument();
   });
 
   it("opens article topic tags as valid filtered directory links", async () => {

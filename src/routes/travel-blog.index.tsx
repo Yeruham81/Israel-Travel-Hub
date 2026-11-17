@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useEffect, useState, type MouseEvent } from "react";
+import type { MouseEvent } from "react";
 import { BookOpen, CalendarDays, MapPinned, Smartphone, Sun, TrainFront } from "lucide-react";
 import { GuideCard, GuidePhotoCredit } from "@/components/TravelGuide";
 import { hasPublicPhotoCredit } from "@/lib/photo-credits";
@@ -33,47 +33,54 @@ const tripPlanningLinks = [
   { title: "7-day Israel itinerary", description: "Ideas for a week of memorable highlights.", to: "/travel-blog/israel-itinerary-7-days/", icon: MapPinned },
 ] as const;
 
+/** Short labels for topic chips; the shared topic names used by articles stay unchanged. */
+const guideFilterLabels: Record<GuideTopicId, string> = {
+  transportation: "Getting around",
+  destinations: "Destinations",
+  attractions: "Attractions",
+  itineraries: "Itineraries & day trips",
+  tips: "Travel tips",
+  accommodation: "Where to stay",
+  connectivity: "eSIM & mobile",
+  religion: "Heritage & religion",
+  shopping: "Markets & shopping",
+};
+
 export const Route = createFileRoute("/travel-blog/")({
-  validateSearch: (search: Record<string, unknown>): { q?: string; topic?: GuideTopicId } => ({ ...(typeof search["q"] === "string" && search["q"].trim() ? { q: search["q"].trim().slice(0, 120) } : {}), ...(isGuideTopic(search["topic"]) ? { topic: search["topic"] } : {}) }),
+  validateSearch: (search: Record<string, unknown>): { topic?: GuideTopicId } => isGuideTopic(search["topic"]) ? { topic: search["topic"] } : {},
   head: () => pageMeta({ title: "Israel travel guides: transport, destinations and trip planning", description: "Browse guides to Israel's airport arrivals, taxis, public transport, hotel areas, Jerusalem, the Dead Sea, attractions and day trips.", path: "/travel-blog/", crumbs: [{ name: "Home", path: "/" }, { name: "Travel guides", path: "/travel-blog/" }] }),
   component: Guides,
 });
 
 function Guides() {
-  const { q = "", topic } = Route.useSearch();
+  const { topic } = Route.useSearch();
   const navigate = Route.useNavigate();
-  const [query, setQuery] = useState(q);
-  useEffect(() => setQuery(q), [q]);
-  // The prerenderer can reach a query string before router validation completes.
-  // Always validate it at the rendering boundary too.
+  // Validate topic again while prerendering, before router search validation settles.
   const activeTopic = isGuideTopic(topic) ? topic : undefined;
   const activeTopicLabel = getGuideTopicLabel(activeTopic);
-  const guides = filterGuides(query, activeTopic);
+  const guides = filterGuides("", activeTopic);
   const picturedGuides = uniqueGuideCardPhotos(guides.map(guide => ({ guide })));
-  const searchFor = (nextTopic?: GuideTopicId) => ({ ...(query.trim() ? { q: query.trim().slice(0, 120) } : {}), ...(nextTopic ? { topic: nextTopic } : {}) });
-  const topicHref = (nextTopic?: GuideTopicId) => {
-    const params = new URLSearchParams(searchFor(nextTopic));
-    return `/travel-blog/${params.size ? `?${params}` : ""}`;
-  };
+  const topicHref = (nextTopic?: GuideTopicId) => nextTopic ? `/travel-blog/?topic=${nextTopic}` : "/travel-blog/";
   function selectTopic(event: MouseEvent<HTMLAnchorElement>, nextTopic?: GuideTopicId) {
     if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
     event.preventDefault();
-    void navigate({ search: searchFor(nextTopic) });
+    void navigate({ search: nextTopic ? { topic: nextTopic } : {}, resetScroll: false });
   }
   const photos = [...new Map(guideDirectory.flatMap(guide => guide.photo ? [[guide.photo.src, guide.photo] as const] : [])).values()].filter(hasPublicPhotoCredit);
   return <main className="mx-auto max-w-6xl px-4 pb-8">
-    <HubHeader crumbs={[{ name: "Home", to: "/" }, { name: "Travel guides", to: "/travel-blog/" }]} eyebrow="Useful answers for your Israel trip" title="Travel guides & practical tips" intro="Prepare for arrival, choose how to get around and explore destinations, day trips, religious heritage and local markets. Browse by topic or search for the question you need answered." />
-    <div className="mt-6 rounded-2xl border bg-secondary/50 p-3.5 sm:mt-8 sm:p-7">
-      <form onSubmit={(event) => { event.preventDefault(); void navigate({ search: searchFor(activeTopic), replace: true }); }} role="search" className="flex flex-wrap items-end gap-2 sm:gap-3"><label className="min-w-0 flex-1 text-xs font-medium sm:text-sm">Search travel guides<input value={query} maxLength={120} onChange={(event) => setQuery(event.target.value)} type="search" placeholder="City, airport or eSIM" className="mt-1.5 h-10 w-full rounded-lg border bg-background px-3 text-base sm:mt-2 sm:h-12 sm:px-4" /></label><button type="submit" className="btn btn-primary h-10 shrink-0 px-3 py-2 text-sm sm:h-auto sm:px-5 sm:py-3">Search</button></form>
-      <nav aria-label="Filter guides by topic" className="mt-3 sm:mt-5">
-        <ul className="flex flex-wrap gap-1.5 sm:gap-2">
-          <li><a href={topicHref()} onClick={(event) => selectTopic(event)} className="chip inline-block" aria-current={!activeTopic ? "true" : undefined}>All topics</a></li>
-          {guideTopics.map((item) => <li key={item.id}><a href={topicHref(item.id)} onClick={(event) => selectTopic(event, item.id)} className="chip inline-block" aria-current={activeTopic === item.id ? "true" : undefined}>{item.label}</a></li>)}
-        </ul>
-      </nav>
+    <HubHeader crumbs={[{ name: "Home", to: "/" }, { name: "Travel guides", to: "/travel-blog/" }]} eyebrow="Useful answers for your Israel trip" title="Travel guides & practical tips" intro="Prepare for arrival, choose how to get around and explore destinations, day trips, religious heritage and local markets. Choose a topic below to find useful guides for your trip." />
+    <nav aria-label="Filter guides by topic" className="mt-6 rounded-xl border bg-secondary/25 px-3 py-3 sm:mt-8 sm:px-4">
+      <div className="flex items-center gap-2 overflow-x-auto pb-1 sm:flex-wrap sm:overflow-visible">
+        <span className="mr-1 shrink-0 text-xs font-semibold text-muted-foreground">Show:</span>
+        <a href={topicHref()} onClick={event => selectTopic(event)} aria-current={!activeTopic ? "true" : undefined} className="chip shrink-0 text-xs">All guides</a>
+        {guideTopics.map(item => <a key={item.id} href={topicHref(item.id)} onClick={event => selectTopic(event, item.id)} aria-current={activeTopic === item.id ? "true" : undefined} className="chip shrink-0 text-xs">{guideFilterLabels[item.id]}</a>)}
+      </div>
+    </nav>
+    <div className="mt-4 flex flex-wrap items-center justify-between gap-3">
+      <p role="status" aria-live="polite" className="text-sm text-muted-foreground">{guides.length} {guides.length === 1 ? "guide" : "guides"}{activeTopicLabel ? ` · ${activeTopicLabel}` : ""}</p>
+      {activeTopic && <a href={topicHref()} onClick={event => selectTopic(event)} className="text-sm font-semibold text-primary underline-offset-4 hover:underline">Clear filter</a>}
     </div>
-    <div className="mt-7 flex flex-wrap items-center justify-between gap-3"><p role="status" aria-live="polite" className="text-sm text-muted-foreground">{guides.length} {guides.length === 1 ? "guide" : "guides"}{activeTopicLabel ? ` · ${activeTopicLabel}` : ""}</p>{(query || activeTopic) && <button type="button" onClick={() => { setQuery(""); void navigate({ search: {}, replace: true }); }} className="text-sm font-medium text-primary underline">Clear filters</button>}</div>
-    {guides.length > 0 ? <div className="mt-5 grid gap-5 sm:grid-cols-2 xl:grid-cols-3">{picturedGuides.map(({ guide, cardPhoto }) => <GuideCard key={guide.id} guide={guide} cardPhoto={cardPhoto || null} />)}</div> : <div className="mt-5 rounded-xl border p-8"><h2 className="text-2xl">No guides match this search</h2><p className="mt-2 text-muted-foreground">Try fewer words or choose another topic. Clear the filters to browse every guide.</p></div>}
+    {guides.length > 0 ? <div className="mt-5 grid gap-5 sm:grid-cols-2 xl:grid-cols-3">{picturedGuides.map(({ guide, cardPhoto }) => <GuideCard key={guide.id} guide={guide} cardPhoto={cardPhoto || null} />)}</div> : <div className="mt-5 rounded-xl border p-8"><h2 className="text-2xl">No guides match this topic</h2><p className="mt-2 text-muted-foreground">Choose another topic or select All guides to see the full collection.</p></div>}
     <div className="mx-auto max-w-5xl">
       <section id="explore-israel" aria-labelledby="explore-israel-h" className="mt-12 border-t pt-9">
         <h2 id="explore-israel-h" className="text-2xl font-semibold">Explore Israel further</h2>
