@@ -202,7 +202,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          for path in / /travel-blog/ /travel-blog/uber-in-israel/ /attractions/capernaum/ /attractions/mount-precipice/ /attractions/tel-megiddo/ /attractions/basilica-of-the-annunciation/ /attractions/rosh-hanikra/ /attractions/caesarea/ /api/quote-request/ /api/exchange-rates/; do
+          for path in / /travel-blog/ /travel-blog/uber-in-israel/ /attractions/capernaum/ /attractions/mount-precipice/ /attractions/tel-megiddo/ /attractions/basilica-of-the-annunciation/ /attractions/rosh-hanikra/ /attractions/caesarea/ /attractions/masada/ /api/quote-request/ /api/exchange-rates/; do
             status="$(curl --retry 2 --retry-delay 2 --max-time 20 -L -sS -o /dev/null -w '%{http_code}' "$VITE_CANONICAL_ORIGIN$path")"
             echo "$path -> HTTP $status"
             [[ "$status" == "200" ]] || { echo "::error::Website smoke test failed for $path"; exit 1; }
@@ -413,4 +413,37 @@ jobs:
             rm -f "$image_file"
             echo "Caesarea photo asset $image_name -> valid SVG with embedded image"
           done
+          # Check published Masada guide, pricing, map, panorama and canonical.
+          masada_html="$(mktemp)"
+          curl --retry 2 --max-time 20 -fsSL -o "$masada_html" "$VITE_CANONICAL_ORIGIN/attractions/masada/"
+          node - "$masada_html" "$VITE_CANONICAL_ORIGIN/attractions/masada/" <<'NODE'
+          const fs = require("node:fs");
+          const html = fs.readFileSync(process.argv[2], "utf8");
+          const expected = process.argv[3];
+          const canonicalLinks = [...html.matchAll(/<link\b[^>]*>/gi)]
+            .map(m => m[0]).filter(tag => /\brel=["']canonical["']/i.test(tag));
+          if (!(html.match(/<title[^>]*>([^<]*)/i)?.[1] ?? "").includes("Masada National Park")) {
+            console.error("::error::Masada published title missing");
+            process.exit(1);
+          }
+          for (const required of [
+            'data-testid="attraction-at-a-glance"',
+            'data-testid="masada-hours-tickets"',
+            'data-testid="masada-cable-prices"',
+            'data-testid="masada-two-entrances"',
+            'data-testid="masada-wide-panorama"',
+            "₪37", "₪21", "₪54", "Masada East", "Masada West",
+          ]) {
+            if (!html.includes(required)) {
+              console.error("::error::Masada published page missing " + required);
+              process.exit(1);
+            }
+          }
+          if (!canonicalLinks.some(tag => tag.includes('href="' + expected + '"'))) {
+            console.error("::error::Masada canonical URL incorrect");
+            process.exit(1);
+          }
+          console.log("Masada title, visitor prices, two entrances, panorama and canonical verified.");
+          NODE
+          rm -f "$masada_html"
           echo "Source-controlled static guides published; existing PHP APIs still respond to GET."
