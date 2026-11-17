@@ -124,6 +124,41 @@ describe("migrated practical guides", () => {
     for (const topic of guideTopics) expect(guideDirectory.some((guide) => guide.topics.includes(topic.id))).toBe(true);
   });
 
+  it("adds six destination/service links and six compact planning guides without changing the directory cards", async () => {
+    const router = await routerAt("/travel-blog/");
+    const Hub = HubRoute.options.component!;
+    const html = renderToString(<RouterContextProvider router={router}><Hub /></RouterContextProvider>);
+    const doc = new DOMParser().parseFromString(html, "text/html");
+    const cards = doc.querySelectorAll('[data-testid="guide-directory-card"]');
+    expect(cards).toHaveLength(guideDirectory.length);
+    const explore = doc.querySelector('section#explore-israel')!;
+    const planning = doc.querySelector('section#plan-israel-trip')!;
+    expect(explore.querySelector("h2")?.textContent).toBe("Explore Israel further");
+    expect(planning.querySelector("h2")?.textContent).toBe("Plan your trip to Israel");
+    const exploreLinks = [...explore.querySelectorAll("li > a")];
+    const planningLinks = [...planning.querySelectorAll("li > a")];
+    expect(exploreLinks).toHaveLength(6);
+    expect(planningLinks).toHaveLength(6);
+    expect(explore.querySelectorAll("li img")).toHaveLength(6);
+    expect(new Set([...explore.querySelectorAll("li img")].map(image => image.getAttribute("src"))).size).toBe(6);
+    expect(planning.querySelectorAll("img")).toHaveLength(0);
+    expect(planning.querySelectorAll("svg")).toHaveLength(6);
+    expect(exploreLinks.map(link => link.getAttribute("href"))).toEqual([
+      "/attractions/", "/tours/", "/shore-excursions/", "/airport-transfers/", "/accommodation/", "/private-driver/",
+    ]);
+    expect(planningLinks.map(link => link.getAttribute("href"))).toEqual([
+      travelGuidePaths.travelTips, travelGuidePaths.bestTime, travelGuidePaths.israel,
+      travelGuidePaths.calendar, travelGuidePaths.esim, "/travel-blog/israel-itinerary-7-days/",
+    ]);
+    for (const link of [...exploreLinks, ...planningLinks]) {
+      const to = link.getAttribute("href")!;
+      expect(router.matchRoutes(to).at(-1)?.routeId.replace(/\\/$/, "")).toBe(to.replace(/\\/$/, ""));
+    }
+    expect(explore.compareDocumentPosition(planning)).toBe(Node.DOCUMENT_POSITION_FOLLOWING);
+    const credits = doc.querySelector("details");
+    expect(planning.compareDocumentPosition(credits)).toBe(Node.DOCUMENT_POSITION_FOLLOWING);
+  });
+
   it("combines search with topic filters, shares the URL and recovers from an empty result", async () => {
     const router = await routerAt("/travel-blog/");
     const Hub = HubRoute.options.component!;
