@@ -155,7 +155,7 @@ describe("migrated practical guides", () => {
       expect(router.matchRoutes(to).at(-1)?.routeId.replace(/\/$/, "")).toBe(to.replace(/\/$/, ""));
     }
     expect(explore.compareDocumentPosition(planning)).toBe(Node.DOCUMENT_POSITION_FOLLOWING);
-    const credits = doc.querySelector("details");
+    const credits = doc.querySelector("details")!;
     expect(planning.compareDocumentPosition(credits)).toBe(Node.DOCUMENT_POSITION_FOLLOWING);
   });
 
