@@ -6,7 +6,7 @@ import { mountTaborSite } from "@/data/mountTaborSite";
 import haifaImg from "@/assets/haifa/panorama.webp";
 import akkoImg from "@/assets/shore-excursions/akko-port.jpg";
 import lake from "@/assets/home/tiberias-lake.webp";
-import roshHanikra from "@/assets/guides/rosh-hanikra.jpg";
+import { roshHanikraSite } from "@/data/roshHanikraSite";
 export const northernAttractions: Record<string, Attraction> = {
 "sea-of-galilee":{
  title:"Sea of Galilee: shores, historic sites and visitor guide",description:"Discover the Sea of Galilee, Tiberias, Capernaum, Tabgha, Mount of Beatitudes and scenic lakeside sites, with access and planning tips.",
@@ -40,19 +40,22 @@ export const northernAttractions: Record<string, Attraction> = {
  official:[{label:"Old Akko official heritage site",url:"https://www.akko.org.il/en/"}],
 },
 "rosh-hanikra":{
- title:"Rosh Hanikra: sea grottoes and the northern coast",description:"Plan Rosh Hanikra's coastal grottoes, scenic viewpoints, cable-car access when operating and nearby north-coast stops.",
- region:"Haifa & northern coast",image:{src:roshHanikra,alt:"Turquoise seawater inside the grottoes at Rosh Hanikra"},duration:"1–2 hours, excluding travel",
- intro:"At Israel's far northern Mediterranean coastline, Rosh Hanikra is known for pale limestone cliffs and sea-carved grottoes. Access to the tourist facilities can be disrupted by regional security and operational restrictions.",
- takeaway:"Confirm the visitor site's current operating status directly before travelling north. A dramatic viewpoint does not guarantee that the grotto tunnels or cable car are accessible on your date.",
- highlights:[
- {name:"Sea caves and grottoes",description:"Waves have carved passages and chambers into the chalky rock at the coast.",tip:"Access depends on the visitor site's operation and sea conditions."},
- {name:"Cliffside cable car",description:"A steep cable-car descent has historically connected the upper tourist site to the grotto walk.",tip:"Treat operation and ticket inclusion as date-specific, not guaranteed."},
- {name:"Northern Mediterranean views",description:"The white cliffs provide distinctive coastal scenery near the border area.",tip:"Obey security restrictions, barriers and official instructions."},
- {name:"Nearby beaches and towns",description:"The wider western Galilee coast includes Akko, Nahariya and designated beaches.",tip:"Do not assume restrictions or access are the same at every point."}],
- arrival:["Rosh Hanikra is north of Nahariya near the Lebanese border.","Public transport can take you toward Nahariya, but the final connection needs confirming.","Check security and road conditions before scheduling a driver, car rental or group trip."],
- planning:["Verify whether the site and cable car operate on your date.","Do not approach border fencing or prohibited areas.","Closed-toe shoes help on damp cave paths where access is permitted.","Choose a flexible backup attraction in the Western Galilee."],
- faqs:[{q:"Is Rosh Hanikra always open?",a:"No. Regional security and operating conditions can close the tourist site; seek a dated operator update."},{q:"Do I need the cable car?",a:"The historic tourist experience has used the cable car for cave access, but confirm current operation and alternatives."},{q:"Is this a swimming beach?",a:"No. The grotto area is not a designated bathing beach."}],
- official:[{label:"Rosh Hanikra visitor information",url:"https://www.rosh-hanikra.com/"}],
+ title:roshHanikraSite.title,
+ description:roshHanikraSite.description,
+ region:roshHanikraSite.region,
+ image:roshHanikraSite.hero,
+ duration:"60–90 minutes, excluding travel",
+ intro:roshHanikraSite.intro,
+ takeaway:"Visit the sea grottoes by cable car and enjoy the coastal views. Check the operator's daily hours and weather conditions before going.",
+ // The visitor article lives in RoshHanikraAttractionPage.
+ highlights:[],arrival:[],planning:[],faqs:[],
+ official:[
+  {label:"Rosh Hanikra — official visitor information",url:roshHanikraSite.sources.info},
+  {label:"Rosh Hanikra — official tickets",url:roshHanikraSite.sources.tickets},
+  {label:"Rosh Hanikra — accessibility information",url:roshHanikraSite.sources.accessibility},
+  {label:"Rosh Hanikra and Old Akko — combined ticket",url:roshHanikraSite.sources.comboAkko},
+  {label:"Haifa–Beirut railway history",url:roshHanikraSite.sources.railway}
+ ],
 },
 "haifa":{
  title:"Haifa visitor guide: Bahá’í Gardens, German Colony and coast",description:"Explore Haifa's Bahá’í Gardens, German Colony, Carmel views, museums, Bat Galim and the beach, with transport and visiting tips.",

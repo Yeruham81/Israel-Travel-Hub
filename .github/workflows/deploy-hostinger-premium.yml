@@ -202,7 +202,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          for path in / /travel-blog/ /travel-blog/uber-in-israel/ /attractions/capernaum/ /attractions/mount-precipice/ /attractions/tel-megiddo/ /attractions/basilica-of-the-annunciation/ /api/quote-request/ /api/exchange-rates/; do
+          for path in / /travel-blog/ /travel-blog/uber-in-israel/ /attractions/capernaum/ /attractions/mount-precipice/ /attractions/tel-megiddo/ /attractions/basilica-of-the-annunciation/ /attractions/rosh-hanikra/ /api/quote-request/ /api/exchange-rates/; do
             status="$(curl --retry 2 --retry-delay 2 --max-time 20 -L -sS -o /dev/null -w '%{http_code}' "$VITE_CANONICAL_ORIGIN$path")"
             echo "$path -> HTTP $status"
             [[ "$status" == "200" ]] || { echo "::error::Website smoke test failed for $path"; exit 1; }
@@ -330,5 +330,40 @@ jobs:
             fi
             rm -f "$image_file"
             echo "Annunciation image $image_name -> valid WebP"
+          done
+          # Verify Rosh Hanikra's published page and all five unique grotto/coast images.
+          rosh_hanikra_html="$(mktemp)"
+          curl --retry 2 --max-time 20 -fsSL -o "$rosh_hanikra_html" "$VITE_CANONICAL_ORIGIN/attractions/rosh-hanikra/"
+          node - "$rosh_hanikra_html" "$VITE_CANONICAL_ORIGIN/attractions/rosh-hanikra/" <<'NODE'
+          const fs = require("node:fs");
+          const html = fs.readFileSync(process.argv[2], "utf8");
+          const expectedUrl = process.argv[3];
+          const canonicalLinks = [...html.matchAll(/<link\b[^>]*>/gi)]
+            .map(match => match[0]).filter(tag => /\brel=["']canonical["']/i.test(tag));
+          if (!/<title[^>]*>[^<]*Rosh Hanikra[^<]*<\/title>/i.test(html)) {
+            console.error("::error::Rosh Hanikra published title is missing");
+            process.exit(1);
+          }
+          if (!html.includes('data-testid="rosh-hanikra-visitor-hours"') || !html.includes('data-testid="attraction-at-a-glance"')) {
+            console.error("::error::Rosh Hanikra published visitor sections are missing");
+            process.exit(1);
+          }
+          if (!canonicalLinks.some(tag => tag.includes('href="' + expectedUrl + '"'))) {
+            console.error("::error::Rosh Hanikra published canonical URL is missing or incorrect");
+            process.exit(1);
+          }
+          console.log("Rosh Hanikra published title, visitor information and canonical verified.");
+          NODE
+          rm -f "$rosh_hanikra_html"
+          for image_name in rosh-hanikra-cable-car.webp rosh-hanikra-blue-grotto.webp rosh-hanikra-railway-tunnel.webp rosh-hanikra-cliffs.webp rosh-hanikra-coast.webp; do
+            image_file="$(mktemp)"
+            curl --retry 2 --max-time 20 -fsSL -o "$image_file" "$VITE_CANONICAL_ORIGIN/images/attractions/$image_name"
+            if [[ "$(file --mime-type -b "$image_file")" != "image/webp" ]]; then
+              rm -f "$image_file"
+              echo "::error::Rosh Hanikra image $image_name did not return a valid WebP"
+              exit 1
+            fi
+            rm -f "$image_file"
+            echo "Rosh Hanikra image $image_name -> valid WebP"
           done
           echo "Source-controlled static guides published; existing PHP APIs still respond to GET."
