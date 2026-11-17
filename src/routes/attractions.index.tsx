@@ -2,6 +2,8 @@ import { createFileRoute } from "@tanstack/react-router";
 import { SiteLink as Link } from "@/components/SiteLink";
 import { ArrowUpRight, BedDouble, BookOpen, CalendarDays, Smartphone, Sun, TrainFront, type LucideIcon } from "lucide-react";
 import { HubHeader } from "@/components/Guide";
+import { GuidePhotoCredit } from "@/components/TravelGuide";
+import { hasPublicPhotoCredit } from "@/lib/photo-credits";
 import { attractionHubCards, attractionHubPhotos, attractionHubRegions, attractionPlanningPaths, attractionRelatedGuides, type AttractionHubCard } from "@/data/attractionsHub";
 import { CANONICAL_ORIGIN, jsonLd, pageMeta } from "@/lib/site";
 
@@ -77,6 +79,8 @@ function AttractionCard({ card }: { card: AttractionHubCard }) {
 }
 
 function Attractions() {
+  const creditedRelatedPhotos = attractionRelatedGuides.map(guide => guide.photo).filter(hasPublicPhotoCredit);
+
   return (
     <main className="mx-auto max-w-6xl px-4 pb-16">
       <HubHeader
@@ -171,6 +175,12 @@ function Attractions() {
             })}
           </ul>
         </section>
+        {creditedRelatedPhotos.length > 0 && <details className="mt-9 rounded-xl border p-4 text-xs text-muted-foreground">
+          <summary className="cursor-pointer font-semibold">Photo credits</summary>
+          <ul className="mt-3 space-y-3">
+            {creditedRelatedPhotos.map(photo => <li key={photo.src}><GuidePhotoCredit photo={photo} insideDisclosure /></li>)}
+          </ul>
+        </details>}
       </div>
     </main>
   );

@@ -1,7 +1,7 @@
 import type { LinkProps } from "@tanstack/react-router";
 import { attractionGuides } from "@/data/attractionGuides";
 import { attractionPath, type AttractionId } from "@/data/attractionGuideTypes";
-import { travelGuides } from "@/data/travelGuides";
+import { travelGuides, type GuidePhoto } from "@/data/travelGuides";
 import { travelGuidePaths, type TravelGuideId } from "@/data/registry";
 import { migrationPhotos } from "@/data/guideMigrationPhotos";
 import caesareaPhoto from "@/assets/home/caesarea-dusk.webp";
@@ -163,7 +163,7 @@ export const attractionRelatedGuides: {
   title: string;
   description: string;
   to: LinkProps["to"];
-  photo: { src: string; alt: string };
+  photo: GuidePhoto;
 }[] = [
   {
     title: "Jerusalem travel guide",

@@ -29,7 +29,9 @@ describe("Attractions hub redesign", () => {
     const page = readFileSync("src/routes/attractions.index.tsx", "utf8");
     expect(page).not.toContain("WordPress");
     expect(page).not.toContain("original WordPress media library");
-    expect(page).not.toContain("<details");
+    expect(page).toContain("Photo credits");
+    expect(page).toContain("GuidePhotoCredit");
+    expect(page).toContain("hasPublicPhotoCredit");
     expect(page).toContain('data-testid="attraction-region-guides"');
     expect(page).toContain("region.relatedGuides.length > 0");
     expect(page).toContain("More {region.navLabel ?? region.title} travel guides");
