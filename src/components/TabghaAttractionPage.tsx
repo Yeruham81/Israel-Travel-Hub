@@ -8,9 +8,8 @@ import { tabghaSite } from "@/data/tabghaSite";
 import galileePhoto from "@/assets/home/hero-galilee-sm.webp";
 import { carRentalAffiliateUrl } from "@/lib/car-rental-affiliate";
 
-// Display both nearby churches as the two map endpoints; separate entrance links remain below.
-const tabghaMapEmbed = "https://maps.google.com/maps?saddr=32.87326%2C35.54955&daddr=32.871858%2C35.5503&hl=en&z=16&t=m&output=embed";
-const tabghaMapLarger = "https://www.google.com/maps/dir/?api=1&origin=32.87326%2C35.54955&destination=32.871858%2C35.5503";
+// A dedicated local map shows both churches as independent pins, without a route.
+const tabghaMapEmbed = "/maps/tabgha-churches.html";
 const multiplicationDirections = "https://www.google.com/maps/dir/?api=1&destination=Church%20of%20the%20Multiplication%2C%20Tabgha%2C%20Israel&travelmode=driving";
 const primacyDirections = "https://www.google.com/maps/dir/?api=1&destination=Church%20of%20the%20Primacy%20of%20Peter%2C%20Tabgha%2C%20Israel&travelmode=driving";
 
@@ -165,7 +164,7 @@ export const tabghaDestinationContent: AttractionDestinationContent = {
             <a href={multiplicationDirections} target="_blank" rel="noopener noreferrer" className="font-semibold text-primary hover:underline">1. Church of the Multiplication (inland)</a>
             <a href={primacyDirections} target="_blank" rel="noopener noreferrer" className="font-semibold text-primary hover:underline">2. Church of the Primacy of Peter (lakeside)</a>
           </div>
-          <a href={tabghaMapLarger} target="_blank" rel="noopener noreferrer" className="mt-2 inline-flex items-center gap-1 text-xs font-semibold text-primary hover:underline">View both on Google Maps <ArrowUpRight className="h-3.5 w-3.5" aria-hidden="true" /></a>
+          <a href={tabghaMapEmbed} target="_blank" rel="noopener noreferrer" className="mt-2 inline-flex items-center gap-1 text-xs font-semibold text-primary hover:underline">Open larger map <ArrowUpRight className="h-3.5 w-3.5" aria-hidden="true" /></a>
         </div>
       </div>
     </div>
