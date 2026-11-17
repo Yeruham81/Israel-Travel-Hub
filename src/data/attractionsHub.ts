@@ -5,6 +5,7 @@ import { travelGuides, type GuidePhoto } from "@/data/travelGuides";
 import { travelGuidePaths, type TravelGuideId } from "@/data/registry";
 import { migrationPhotos } from "@/data/guideMigrationPhotos";
 import caesareaPhoto from "@/assets/home/caesarea-dusk.webp";
+import { einGediCardPhoto } from "@/data/einGediCardPhoto";
 
 export type AttractionHubCard = {
   id: string;
@@ -136,7 +137,7 @@ export const attractionHubRegions: AttractionHubRegion[] = [
     image: attractionHubPhotos.deadSea,
     cards: [
       { id: "masada", title: "Masada National Park", description: "The mountain fortress, cable car, desert trails and visit planning.", to: "/attractions/masada/", photo: migrationPhotos["EXISTING:masada"] },
-      attraction("ein-gedi", "Ein Gedi Nature Reserve", "Desert springs, wildlife and trail-access considerations.", attractionHubPhotos.deadSea.src),
+      attraction("ein-gedi", "Ein Gedi Nature Reserve", "Desert springs, wildlife and trail-access considerations.", einGediCardPhoto.src, einGediCardPhoto),
       editorialAttraction("qasr", "Qasr el-Yahud", "The Jordan River pilgrimage site near Jericho."),
     ],
     relatedGuides: [
