@@ -208,7 +208,7 @@ export function IsraelHolidaysPage() {
           <li><a className="text-primary underline" href={"https://www.timeanddate.com/holidays/israel/"+(Number(today.slice(0,4))+1)} target="_blank" rel="noopener noreferrer">Time and Date — next year ({Number(today.slice(0,4))+1})</a></li>
           <li><a className="text-primary underline" href="https://aladhan.com/islamic-calendar-api" target="_blank" rel="noopener noreferrer">AlAdhan — calculated Islamic dates (tentative until locally confirmed)</a></li>
           <li><a className="text-primary underline" href="https://parents.education.gov.il/gov-education/vacations-camps-leisure/schedule/" target="_blank" rel="noopener noreferrer">Israel Ministry of Education — school vacation calendar</a></li>
-          <li><a className="text-primary underline" href="https://bus.gov.il/" target="_blank" rel="noopener noreferrer">Israel Ministry of Transport — check current bus services</a></li>
+          <li><a className="text-primary underline" href="https://bus.gov.il/en/home" target="_blank" rel="noopener noreferrer">Israel Ministry of Transport — check current bus services</a></li>
           <li><a className="text-primary underline" href="https://www.rail.co.il/" target="_blank" rel="noopener noreferrer">Israel Railways — train schedules</a></li>
           <li><a className="text-primary underline" href="https://www.iaa.gov.il/en/airports/ben-gurion/" target="_blank" rel="noopener noreferrer">Israel Airports Authority — airport information</a></li>
         </ul>
