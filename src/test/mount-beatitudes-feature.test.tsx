@@ -88,4 +88,29 @@ describe("Mount of Beatitudes individual attraction upgrade", () => {
     expect(shell.split("<HomeContactForm").length - 1).toBe(1);
     expect(shell.indexOf("<SourcesDisclosure>")).toBeGreaterThan(shell.indexOf("<HomeContactForm"));
   });
+
+  it("places the lake panorama with the gardens, clarifies contacts and avoids visitor-copy repetition", () => {
+    const article = readFileSync("src/components/MountBeatitudesAttractionPage.tsx", "utf8");
+    const highlights = article.slice(article.indexOf("highlightContent: ("), article.indexOf("visitorContent: ("));
+    const visitPlan = article.slice(article.indexOf("itineraryContent: ("), article.indexOf("historyContent: ("));
+    expect(highlights).toContain('title="Gardens and views over the Sea of Galilee"');
+    expect(highlights).toContain("/images/attractions/beatitudes-sea-view.webp");
+    expect(highlights).toContain("The Sea of Galilee as seen from the Mount of Beatitudes.");
+    expect(visitPlan).not.toContain("beatitudes-sea-view.webp");
+    expect(article.split("beatitudes-sea-view.webp")).toHaveLength(2);
+    expect(article).toContain("Guesthouse and general enquiries:");
+    expect(article).toContain("Prayer and Mass arrangements:");
+    expect(article).toContain('href={"tel:" + visit.phoneHref}');
+    expect(article).toContain('href={"tel:" + visit.prayerPhoneHref}');
+    expect(article.split('href={"tel:" + visit.prayerPhoneHref}')).toHaveLength(2);
+    expect(article).toContain("see prayer and Mass arrangements");
+    expect(article).not.toContain("See the church's group-visit information.");
+    expect(article).not.toContain("managed by the Franciscan Missionary Sisters");
+    expect(article).not.toContain("for visitor arrangements.");
+    expect(article).toContain("The site is closed between 11:30 and 14:00");
+    expect(article).not.toContain("Avoid the midday closure.");
+    expect(content.faqs?.find(item => item.q === "What are the visiting hours?")?.a).toContain("with a midday closure in between");
+    expect(content.sources.some(item => item.label.includes("prayer, Mass and guesthouse arrangements"))).toBe(true);
+  });
+
 });
