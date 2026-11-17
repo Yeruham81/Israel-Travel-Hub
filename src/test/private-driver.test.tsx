@@ -5,6 +5,8 @@ import { afterEach, describe, expect, it, vi } from "vitest";
 import { Route as DriverRoute } from "@/routes/private-driver";
 import { routeTree } from "@/routeTree.gen";
 import { buildDriverQuoteDraft, emptyDriverQuote, validateDriverQuote } from "@/lib/private-driver-quote";
+import { StayPhotoCredits } from "@/components/StayGuideParts";
+import { privateDriverFaqs, privateDriverHero } from "@/data/privateDriver";
 
 afterEach(() => { cleanup(); localStorage.clear(); vi.restoreAllMocks(); });
 async function renderDriver() {
@@ -26,12 +28,17 @@ describe("private driver page and inquiry", () => {
     const intro = within(quote as HTMLElement).getByTestId("quote-form-intro");
     expect(quote.firstElementChild?.firstElementChild).toBe(intro);
     expect(intro).toHaveClass("bg-navy", "border-b");
-    for (const name of ["contact", "journey"]) {
-      expect(within(quote as HTMLElement).getByTestId(`quote-fields-${name}`)).toHaveClass("sm:grid-cols-2", "xl:grid-cols-3");
-    }
-    for (const name of ["route", "party"]) {
-      expect(within(quote as HTMLElement).getByTestId(`quote-fields-${name}`)).toHaveClass("sm:grid-cols-2");
-    }
+    expect(within(quote as HTMLElement).getByTestId("quote-fields-contact")).toHaveClass("sm:grid-cols-2", "xl:grid-cols-3");
+    const dateTime = within(quote as HTMLElement).getByTestId("quote-fields-journey");
+    expect(dateTime).toHaveClass("grid-cols-2", "sm:grid-cols-3");
+    expect(dateTime.firstElementChild).toHaveClass("col-span-2", "sm:col-span-1");
+    expect(within(dateTime).getByLabelText("Pickup date *")).toHaveAttribute("type", "date");
+    expect(within(dateTime).getByLabelText("Pickup time")).toHaveAttribute("type", "time");
+    expect(within(quote as HTMLElement).getByTestId("quote-fields-route")).toHaveClass("sm:grid-cols-2");
+    const partyFields = within(quote as HTMLElement).getByTestId("quote-fields-party");
+    expect(partyFields).toHaveClass("grid-cols-2");
+    expect(within(partyFields).getByLabelText("Passengers *")).toHaveAttribute("type", "number");
+    expect(within(partyFields).getByLabelText("Luggage")).toHaveAttribute("name", "luggage");
     expect(screen.getAllByRole("heading", { level: 1 })).toHaveLength(1);
     expect(screen.getByRole("heading", { level: 1 })).toHaveTextContent("Private driver in Israel");
     expect(screen.getByRole("navigation", { name: "Breadcrumb" })).toHaveTextContent("Home /Private driver");
@@ -49,13 +56,20 @@ describe("private driver page and inquiry", () => {
     expect(screen.getByRole("region", { name: "A journey planned around you" }).querySelectorAll("h3")).toHaveLength(3);
     for (const card of screen.getAllByTestId("driver-journey-card")) {
       expect(within(card).getByRole("link", { name: "Request this journey" })).toHaveAttribute("href", "#request-quote");
-      expect(within(card).getByRole("img")).toHaveClass("aspect-[3/2]");
+      expect(card).toHaveClass("grid-cols-[5.75rem_minmax(0,1fr)]", "sm:grid-cols-[7.5rem_minmax(0,1fr)]", "md:flex", "md:flex-col");
+      expect(within(card).getByRole("img")).toHaveClass("md:aspect-[16/9]", "md:h-auto");
     }
     const sections = ["journeys", "benefits", "request-quote", "faq", "travel-guides", "next-steps"];
     for (let i = 1; i < sections.length; i++) expect(container.querySelector(`#${sections[i - 1]}`)!.compareDocumentPosition(container.querySelector(`#${sections[i]}`)!)).toBe(Node.DOCUMENT_POSITION_FOLLOWING);
     for (const image of screen.getAllByRole("img")) { expect(image).toHaveAttribute("src"); expect(image.getAttribute("alt")).toBeTruthy(); }
     const guideSection = screen.getByRole("region", { name: "Related travel guides" });
     expect(guideSection.querySelector("ul")).toHaveClass("sm:grid-cols-2", "lg:grid-cols-3");
+    expect(privateDriverFaqs).toHaveLength(6);
+    expect(screen.getByRole("region", { name: "Frequently asked questions" })).toHaveTextContent("How do payment, cancellation and extra hours work?");
+    const afterFaq = screen.getByTestId("driver-after-faq-cta");
+    expect(within(afterFaq).getByRole("link", { name: "Request a quote" })).toHaveAttribute("href", "#request-quote");
+    expect(screen.queryByText("Photo credits")).not.toBeInTheDocument();
+    expect(privateDriverHero.alt).toMatch(/Car travelling on a winding road/);
     const guides = screen.getAllByTestId("driver-guide-card");
     expect(guides).toHaveLength(6);
     const relevantPhotos = [
@@ -65,7 +79,8 @@ describe("private driver page and inquiry", () => {
     ];
     expect(new Set(relevantPhotos).size).toBe(10);
     const nextSteps = screen.getByRole("region", { name: "Plan the next part of your trip" });
-    expect(nextSteps.querySelector("ul")).toHaveClass("sm:grid-cols-2", "lg:grid-cols-3");
+    expect(nextSteps.querySelector("ul")).toHaveClass("sm:grid-cols-2");
+    expect(nextSteps.querySelector("ul")).not.toHaveClass("lg:grid-cols-3");
     expect(within(nextSteps).getAllByRole("link")).toHaveLength(6);
     for (const link of within(nextSteps).getAllByRole("link")) {
       expect(router.matchRoutes(link.getAttribute("href")!).at(-1)?.routeId.replace(/\/$/, "")).toBe(link.getAttribute("href")!.replace(/\/$/, ""));
@@ -112,6 +127,21 @@ describe("private driver page and inquiry", () => {
     expect(fetchSpy).toHaveBeenCalledTimes(2);
     fireEvent.change(screen.getByLabelText("Final drop-off *"), { target: { value: "A different hotel" } });
     expect(screen.getByRole("button", { name: "Send quote request" })).toBeEnabled();
+  });
+});
+
+describe("shared photo-credit links", () => {
+  it("omits empty photo credits while keeping genuine source links", () => {
+    const absent = render(<StayPhotoCredits photos={[{ src: "/photo.webp", alt: "Test photograph", label: "Test photo", sourceUrl: "" }]} />);
+    expect(absent.queryByText("Photo credits")).not.toBeInTheDocument();
+    absent.unmount();
+    const credited = render(<StayPhotoCredits photos={[
+      { src: "/photo.webp", alt: "Local photo", label: "No external credit", sourceUrl: "" },
+      { src: "/external.webp", alt: "External photo", label: "Photographer credit", sourceUrl: "https://commons.wikimedia.org/wiki/File:Example.jpg" },
+    ]} />);
+    expect(credited.getByText("Photo credits")).toBeInTheDocument();
+    expect(credited.getByRole("link", { name: /Photographer credit/ })).toHaveAttribute("href", "https://commons.wikimedia.org/wiki/File:Example.jpg");
+    expect(credited.queryByRole("link", { name: /No external credit/ })).not.toBeInTheDocument();
   });
 });
 
