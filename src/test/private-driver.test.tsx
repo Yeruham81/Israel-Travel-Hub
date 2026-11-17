@@ -6,7 +6,9 @@ import { Route as DriverRoute } from "@/routes/private-driver";
 import { routeTree } from "@/routeTree.gen";
 import { buildDriverQuoteDraft, emptyDriverQuote, validateDriverQuote } from "@/lib/private-driver-quote";
 import { StayPhotoCredits } from "@/components/StayGuideParts";
-import { privateDriverFaqs, privateDriverHero } from "@/data/privateDriver";
+import { privateDriverFaqs, privateDriverHero, privateDriverJourneys } from "@/data/privateDriver";
+import scenicDrivePhoto from "@/assets/home/road-trip.webp";
+import { airportTransferPhotos } from "@/data/airportTransfers";
 
 afterEach(() => { cleanup(); localStorage.clear(); vi.restoreAllMocks(); });
 async function renderDriver() {
@@ -43,6 +45,10 @@ describe("private driver page and inquiry", () => {
     expect(screen.getByRole("heading", { level: 1 })).toHaveTextContent("Private driver in Israel");
     expect(screen.getByRole("navigation", { name: "Breadcrumb" })).toHaveTextContent("Home /Private driver");
     expect(screen.getAllByTestId("driver-journey-card")).toHaveLength(3);
+    const dayHire = privateDriverJourneys.find(journey => journey.id === "day-hire");
+    expect(dayHire?.photo.src).toBe(scenicDrivePhoto);
+    expect(dayHire?.photo.src).not.toBe(airportTransferPhotos.jerusalem?.src);
+    expect(within(screen.getAllByTestId("driver-journey-card")[1]!).getByRole("img")).toHaveAttribute("src", scenicDrivePhoto);
     const header = screen.getByTestId("hub-header");
     expect(header).toContainElement(screen.getByRole("heading", { level: 1 }));
     expect(within(header).getByTestId("guide-hero-media")).toBeInTheDocument();

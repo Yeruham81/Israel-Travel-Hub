@@ -1,6 +1,7 @@
 import { airportTransferPhotos as photos } from "@/data/airportTransfers";
 import { privateDriverServices, travelGuidePaths } from "@/data/registry";
 import jerusalemRoadPhoto from "@/assets/road-to-jerusalem.jpg";
+import scenicDrivePhoto from "@/assets/home/road-trip.webp";
 import localBusesPhoto from "@/assets/guides/2026-11/buses-in-tel-aviv.webp";
 import itineraryPhoto from "@/assets/home/masada-dead-sea-card.webp";
 import deadSeaRoadPhoto from "@/assets/guides/dead-sea-route-road.webp";
@@ -17,7 +18,12 @@ const descriptions = {
   "day-hire": {
     title: "Private driver for the day",
     text: "Set aside a day for sightseeing on a route of your choice. Tell me where you'd like to go, how long to spend at each stop and where to finish.",
-    photo: photos["jerusalem"]!,
+    photo: {
+      src: scenicDrivePhoto,
+      alt: "Private car travelling on a scenic desert road during a day trip in Israel",
+      sourceUrl: "",
+      label: "Scenic private day trip",
+    },
   },
   "multi-stop": {
     title: "Multi-stop journeys",
