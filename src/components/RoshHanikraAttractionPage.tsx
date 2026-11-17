@@ -180,7 +180,7 @@ export const roshHanikraDestinationContent: AttractionDestinationContent = {
     </div>
   ),
   faqs: [
-    { q: "Is Rosh Hanikra open for visits?", a: "The site reopened in October 2026, and the official operator is currently selling entry to the cable car and grottoes. Check the site's current operating notice before travelling, because weather or local restrictions can change access." },
+    { q: "Is Rosh Hanikra open for visits?", a: "Yes. The site is open daily, subject to changes for holidays, weather or temporary restrictions. Check the operator's latest opening hours before travelling." },
     { q: "What does the Rosh Hanikra ticket include?", a: "The standard entry experience includes the cable car, the self-guided grotto walk and an audiovisual presentation. Admission is ₪47 for adults, ₪39 for children under 18, soldiers, senior citizens and visitors with disabilities, and ₪29 for children with disabilities." },
     { q: "What are the opening hours?", a: "The site is open daily. Last cable-car entry is at 16:00 in autumn and winter and 18:00 in summer; the site closes one hour later. Check the official homepage for daily hours and changes due to holidays or weather." },
     { q: "How much time do I need?", a: "Allow about 60–90 minutes for the viewpoints, cable car, grotto walk and film, plus any queueing time." },
