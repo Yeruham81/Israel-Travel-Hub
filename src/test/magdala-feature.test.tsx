@@ -15,7 +15,8 @@ describe("Magdala individual attraction guide upgrade", () => {
     expect(content.facts).toHaveLength(6);
     expect(content.facts.find(f => f.label === "Archaeological park")?.value).toBe("08:00–17:30");
     expect(content.facts.find(f => f.label === "Duc In Altum")?.value).toBe("08:00–18:00");
-    expect(content.facts.find(f => f.label === "Admission")?.value).toBe("Contact visitor centre");
+    expect(content.facts.find(f => f.label === "Admission")?.value).toBe("₪20 (ages 13+)");
+    expect(content.facts.find(f => f.label === "Admission")?.note).toBe("₪17 per visitor in groups of 10+");
     expect(content.visitorTitle).toBe("Opening hours, tickets and visitor information");
     expect(content.visitorNavLabel).toBe("Hours & tickets");
     expect(travelGuides.magdala.updatedAt).toBe(site.updatedAt);
@@ -44,7 +45,7 @@ describe("Magdala individual attraction guide upgrade", () => {
     expect(content.sources.every(s => s.url.startsWith("https://"))).toBe(true);
   });
 
-  it("provides a Google Maps pin, current official contacts and no unsupported ticket price", () => {
+  it("provides confirmed admission prices, a Google Maps pin and current official contacts", () => {
     const article = readFileSync("src/components/MagdalaAttractionPage.tsx", "utf8");
     const route = readFileSync("src/routes/attractions.magdala.tsx", "utf8");
     const shell = readFileSync("src/components/AttractionDestinationPage.tsx", "utf8");
@@ -65,9 +66,13 @@ describe("Magdala individual attraction guide upgrade", () => {
     expect(article).not.toContain("No current official price list online");
     expect(article).not.toContain("does not publish a current admission price list");
     expect(article).not.toContain("How much does it cost to enter Magdala?");
-    expect(article).toContain("For admission details, group rates and guided tours");
-    expect(article).not.toContain("₪17");
-    expect(article).not.toContain("₪12");
+    expect(site.visit.regularAdmissionPrice).toBe("₪20");
+    expect(site.visit.regularAdmissionAge).toBe("Over 12");
+    expect(site.visit.groupAdmissionPrice).toBe("₪17");
+    expect(site.visit.groupMinimumSize).toBe(10);
+    expect(article).toContain("Visitors over age 12");
+    expect(article).toContain("Rates confirmed directly with the visitor centre.");
+    expect(article).toContain("other admission categories and guided visits");
     expect(site.visit.visitorEmail).toBe("visit@magdala.org");
     expect(article).toContain("visit.visitorEmail");
     expect(site.visit.prayerEmail).toBe("ducinaltum@magdala.org");
