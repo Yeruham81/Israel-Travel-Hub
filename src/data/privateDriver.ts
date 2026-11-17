@@ -1,9 +1,9 @@
 import { airportTransferPhotos as photos } from "@/data/airportTransfers";
 import { privateDriverServices, travelGuidePaths } from "@/data/registry";
-import roadTripPhoto from "@/assets/home/road-trip.webp";
+import jerusalemRoadPhoto from "@/assets/road-to-jerusalem.jpg";
 import localBusesPhoto from "@/assets/guides/2026-11/buses-in-tel-aviv.webp";
-import telAvivStreetPhoto from "@/assets/tel-aviv/dizengoff.webp";
-import taxiPhoto from "@/assets/guides/taxi-cabs-israel.webp";
+import itineraryPhoto from "@/assets/home/masada-dead-sea-card.webp";
+import deadSeaRoadPhoto from "@/assets/guides/dead-sea-route-road.webp";
 import jerusalemPhoto from "@/assets/home/jerusalem-old-city-card.webp";
 import caesareaPhoto from "@/assets/home/caesarea-dusk-card.webp";
 import deadSeaPhoto from "@/assets/dead-sea/beach-card.webp";
@@ -16,21 +16,21 @@ const descriptions = {
   },
   "day-hire": {
     title: "Private driver for the day",
-    text: "Explore Jerusalem, the Galilee, the Dead Sea or places on your own wish list. Choose the stops and pace that work for your day.",
+    text: "Set aside a day for sightseeing on a route of your choice. Tell me where you'd like to go, how long to spend at each stop and where to finish.",
     photo: photos["jerusalem"]!,
   },
   "multi-stop": {
     title: "Multi-stop journeys",
-    text: "Make the journey part of the experience with sightseeing or a relaxed break between destinations. I'll help you plan a sensible route.",
+    text: "Travelling between cities? Add a visit to Caesarea or another stop along the way. I'll help plan your pickup, stops and final drop-off.",
     photo: photos["caesarea"]!,
   },
 };
 export const privateDriverJourneys = privateDriverServices.map(service => ({ ...service, ...descriptions[service.id] }));
 export const privateDriverHero = {
-  src: roadTripPhoto,
-  alt: "Illustration of a vehicle travelling along a desert road in Israel",
+  src: jerusalemRoadPhoto,
+  alt: "Car travelling on a winding road towards Jerusalem at sunset",
   sourceUrl: "",
-  label: "Travel through Israel",
+  label: "Scenic road to Jerusalem",
 };
 export const privateDriverBenefits = [
   { title: "A route that fits your plans", text: "Choose your pickup, drop-off and favourite stops rather than following a fixed itinerary." },
@@ -38,20 +38,18 @@ export const privateDriverBenefits = [
   { title: "A clear quote before booking", text: "I'll confirm the itinerary, vehicle, total price and arrangements before you decide." },
 ];
 export const privateDriverFaqs = [
-  { q: "Can I book a transfer between two hotels?", a: "Yes. Send me both addresses, your date and preferred pickup time, plus the number of passengers and bags. I'll check the journey and send you a quote." },
-  { q: "Can I hire a private driver for a whole day?", a: "You can request a full-day driver for sightseeing or appointments. Tell me which places interest you, where you want to start and finish, and any times that are important to you. I'll help put together a practical route." },
-  { q: "Can I stop at attractions along the way?", a: "Of course — a few well-chosen stops can make an intercity journey more enjoyable. Include the places you want to visit and roughly how long you'd like at each, so the route and waiting time can be included in your quote." },
-  { q: "How much does a private driver in Israel cost?", a: "Prices depend on your route, hours, date, vehicle size and any special requirements. There isn't a single fixed fare for every trip. I'll provide a personal quote with the agreed details before booking." },
-  { q: "Does a private driver also provide guided tours?", a: "Private driving and licensed tour guiding are different services. If you'd like a guide as well as transport, mention it in your request and I'll check what can be arranged." },
-  { q: "Can I request a larger vehicle or child seats?", a: "Yes, please mention the number of passengers, children's ages, luggage and any mobility or accessibility needs. I can then check which vehicle and equipment are available for your date." },
-  { q: "Can I request a Ben Gurion Airport pickup?", a: "Yes. For airport pickups and published starting fares to popular destinations, the separate Airport Transfers page is the best place to begin." },
-  { q: "When is my booking confirmed?", a: "After we agree on the route, vehicle, price and relevant terms, I'll confirm the arrangements with you. Sending the inquiry form alone does not create a booking." },
+  { q: "How is my private driver quote calculated?", a: "The price depends on your route, the hours needed, date, vehicle size and any special requests. I'll confirm the total and what it covers, including the agreed stops, waiting time, parking or tolls where relevant, before you book." },
+  { q: "Can I add stops or change the route during the journey?", a: "Yes, let's plan your preferred stops in advance so there is enough time to enjoy them. Changes on the day depend on the driver's availability and may affect the price, so please discuss them with me first." },
+  { q: "Is a licensed tour guide included?", a: "A private driver provides transport for your agreed route. Guided visits are a separate service. If you'd like a licensed guide, tell me the language and places you're interested in so I can check the options." },
+  { q: "Can I request a larger vehicle, child seats or accessibility support?", a: "Please include your group size, children's ages, luggage and any accessibility needs. I'll check the suitable vehicle and equipment for your date and confirm what can be arranged." },
+  { q: "How do payment, cancellation and extra hours work?", a: "I'll explain the payment and cancellation terms with your quote, along with any limits on hours or mileage and charges for extra time or stops. Your booking is confirmed only after we agree on the itinerary, vehicle, price and relevant terms." },
+  { q: "Can I book a pickup from Ben Gurion Airport?", a: "Yes. For airport pickups, use my Airport Transfers page to see starting prices to popular destinations and request a quote for your arrival." },
 ];
 export const privateDriverGuides = [
-  { title: "Getting around Israel", to: travelGuidePaths.israel, text: "Plan journeys between cities and regions.", photo: { src: localBusesPhoto, alt: "Buses at an Israeli transport terminal", sourceUrl: "", label: "Getting around Israel" } },
-  { title: "Getting around Tel Aviv", to: travelGuidePaths.telAviv, text: "Explore local transport and travel options.", photo: { src: telAvivStreetPhoto, alt: "Pedestrian-friendly streets in central Tel Aviv", sourceUrl: "", label: "Getting around Tel Aviv" } },
-  { title: "Taxis in Israel", to: travelGuidePaths.taxis, text: "Understand taxi options and fares.", photo: { src: taxiPhoto, alt: "Taxis travelling on a road in Israel", sourceUrl: "", label: "Taxis in Israel" } },
-  { title: "Where to stay in Jerusalem", to: "/travel-blog/where-to-stay-in-jerusalem/" as const, text: "Choose an area for your hotel stay.", photo: { src: jerusalemPhoto, alt: "Stone buildings in Jerusalem's Old City", sourceUrl: "", label: "Jerusalem Old City" } },
-  { title: "Caesarea visitor guide", to: "/attractions/caesarea/" as const, text: "Add ancient Caesarea to a coastal route.", photo: { src: caesareaPhoto, alt: "Ancient Caesarea beside the Mediterranean Sea", sourceUrl: "", label: "Caesarea" } },
+  { title: "Getting around Israel", to: travelGuidePaths.israel, text: "Plan your travel between cities and regions.", photo: { src: localBusesPhoto, alt: "Buses at an Israeli transport terminal", sourceUrl: "", label: "Getting around Israel" } },
+  { title: "Israel itinerary: 7 days", to: "/travel-blog/israel-itinerary-7-days/" as const, text: "Ideas for a week of sightseeing around Israel.", photo: { src: itineraryPhoto, alt: "Masada and the Dead Sea landscape", sourceUrl: "", label: "Seven-day Israel itinerary" } },
+  { title: "Jerusalem to the Dead Sea", to: "/travel-blog/jerusalem-to-the-dead-sea/" as const, text: "Choose stops and plan the journey to the Dead Sea.", photo: { src: deadSeaRoadPhoto, alt: "Winding road beside the Dead Sea", sourceUrl: "", label: "Dead Sea scenic route" } },
+  { title: "Where to stay in Jerusalem", to: "/travel-blog/where-to-stay-in-jerusalem/" as const, text: "Choose a convenient area for your hotel stay.", photo: { src: jerusalemPhoto, alt: "Stone buildings in Jerusalem's Old City", sourceUrl: "", label: "Jerusalem Old City" } },
+  { title: "Caesarea visitor guide", to: "/attractions/caesarea/" as const, text: "Add ancient Caesarea to a coastal journey.", photo: { src: caesareaPhoto, alt: "Ancient Caesarea beside the Mediterranean Sea", sourceUrl: "", label: "Caesarea" } },
   { title: "Dead Sea hotels", to: "/travel-blog/best-dead-sea-hotels/" as const, text: "Find your base on the Dead Sea coast.", photo: { src: deadSeaPhoto, alt: "Beach and hotels near the Dead Sea", sourceUrl: "", label: "Dead Sea beach" } },
 ];

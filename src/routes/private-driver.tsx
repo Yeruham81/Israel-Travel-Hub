@@ -62,12 +62,12 @@ function PrivateDriverContent({ transfer }: { transfer: ReturnType<typeof parseP
         <h2 id="journeys-h" className="text-2xl font-semibold">Choose the journey that suits you</h2>
         <p className="mt-2 max-w-3xl text-sm leading-relaxed text-muted-foreground">A direct transfer, a day out or several stops along the way — choose a starting point and I'll help with the details.</p>
         <div className="mt-4 grid gap-3 md:grid-cols-3">
-          {privateDriverJourneys.map(journey => <article key={journey.id} className="flex h-full min-w-0 flex-col overflow-hidden rounded-2xl border bg-card transition-colors hover:border-primary/40" data-testid="driver-journey-card">
-            <img src={journey.photo.src} alt={journey.photo.alt} width={360} height={240} loading="lazy" decoding="async" className="aspect-[3/2] w-full object-cover" />
-            <div className="flex flex-1 flex-col p-4">
-              <h3 className="text-lg font-semibold leading-snug">{journey.title}</h3>
-              <p className="mt-2 flex-1 text-sm leading-relaxed text-muted-foreground">{journey.text}</p>
-              <a href="#request-quote" onClick={() => { setServiceId(journey.id); focusQuote(); }} className="mt-3 inline-flex min-h-9 items-center self-start text-sm font-semibold text-primary underline-offset-4 hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">Request this journey</a>
+          {privateDriverJourneys.map(journey => <article key={journey.id} className="grid h-full min-w-0 grid-cols-[5.75rem_minmax(0,1fr)] overflow-hidden rounded-2xl border bg-card transition-colors hover:border-primary/40 sm:grid-cols-[7.5rem_minmax(0,1fr)] md:flex md:flex-col" data-testid="driver-journey-card">
+            <img src={journey.photo.src} alt={journey.photo.alt} width={360} height={240} loading="lazy" decoding="async" className="h-full min-h-0 w-full object-cover md:aspect-[16/9] md:h-auto" />
+            <div className="flex min-w-0 flex-1 flex-col p-3 sm:p-4">
+              <h3 className="text-base font-semibold leading-snug sm:text-lg">{journey.title}</h3>
+              <p className="mt-1.5 flex-1 text-[13px] leading-relaxed text-muted-foreground sm:mt-2 sm:text-sm">{journey.text}</p>
+              <a href="#request-quote" onClick={() => { setServiceId(journey.id); focusQuote(); }} className="mt-2 inline-flex min-h-8 items-center self-start text-sm font-semibold text-primary underline-offset-4 hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">Request this journey</a>
             </div>
           </article>)}
         </div>
@@ -92,6 +92,13 @@ function PrivateDriverContent({ transfer }: { transfer: ReturnType<typeof parseP
       <PrivateDriverQuoteForm serviceId={serviceId} onServiceChange={setServiceId} />
 
       <FaqList faqs={privateDriverFaqs} compact />
+      <div className="mt-5 flex flex-col gap-3 rounded-xl border border-primary/15 bg-secondary/25 px-4 py-4 sm:flex-row sm:items-center sm:justify-between" data-testid="driver-after-faq-cta">
+        <div className="min-w-0">
+          <p className="text-sm font-semibold">Have a route in mind?</p>
+          <p className="mt-1 text-sm leading-relaxed text-muted-foreground">Share your date, stops and group size, and I'll help you plan a private journey.</p>
+        </div>
+        <a href="#request-quote" onClick={focusQuote} className="inline-flex min-h-9 shrink-0 items-center justify-center self-start rounded-lg bg-primary px-3 py-1.5 text-sm font-semibold text-primary-foreground hover:bg-primary/90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary sm:self-center">Request a quote</a>
+      </div>
 
       <section id="travel-guides" aria-labelledby="guides-h" className="mt-9 scroll-mt-24">
         <h2 id="guides-h" className="text-2xl font-semibold">Related travel guides</h2>
@@ -111,7 +118,7 @@ function PrivateDriverContent({ transfer }: { transfer: ReturnType<typeof parseP
 
       <section id="next-steps" aria-labelledby="next-steps-h" className="mt-9 scroll-mt-24">
         <h2 id="next-steps-h" className="text-2xl font-semibold">Plan the next part of your trip</h2>
-        <ul className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+        <ul className="mt-4 grid gap-3 sm:grid-cols-2">
           {planningLinks.map(item => {
             const Icon = item.icon;
             return <li key={item.to} className="min-w-0">
