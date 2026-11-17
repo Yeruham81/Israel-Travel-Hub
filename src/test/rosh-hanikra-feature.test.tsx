@@ -18,7 +18,7 @@ describe("Rosh Hanikra attraction guide", () => {
     expect(content.intro).toBe(site.intro);
     expect(content.updatedAt).toBe("2026-11-17");
     expect(content.facts).toHaveLength(6);
-    expect(content.facts.find(f => f.label === "Entry")?.value).toBe("Paid ticket");
+    expect(content.facts.find(f => f.label === "Admission")?.value).toBe("₪47 adult");
     expect(content.facts.find(f => f.label === "Accessibility")?.value).toBe("Partly accessible");
     expect(attractionGuides["rosh-hanikra"].title).toBe(content.title);
     expect(attractionGuides["rosh-hanikra"].description).toBe(site.description);
@@ -49,7 +49,6 @@ describe("Rosh Hanikra attraction guide", () => {
       "public/images/attractions/rosh-hanikra-cable-car.webp",
       "public/images/attractions/rosh-hanikra-blue-grotto.webp",
       "public/images/attractions/rosh-hanikra-railway-tunnel.webp",
-      "public/images/attractions/rosh-hanikra-coast.webp",
       "public/images/attractions/rosh-hanikra-cliffs.webp",
     ];
     const hashes = imageFiles.map(path => {
@@ -66,7 +65,12 @@ describe("Rosh Hanikra attraction guide", () => {
     expect(site.visit.customerServiceHref).toBe("+972732710100");
     expect(article).toContain("100-metre accessible bridge");
     expect(article).toContain("first grotto and part of the second");
-    expect(article).toContain("Nativ Express line 31");
+    expect(article).not.toContain("Nativ Express line 31");
+    expect(article).toContain("₪47");
+    expect(article).toContain("₪39");
+    expect(article).toContain("₪29");
+    expect(article).toContain("every day of the week");
+    expect(article).toContain("official homepage");
     expect(article).toContain("Nahariya");
     expect(article).toContain("Haifa–Beirut–Tripoli railway");
     expect(article).toContain("Elephant's Foot");
