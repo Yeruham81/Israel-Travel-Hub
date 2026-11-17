@@ -11,8 +11,8 @@ describe("instant navigation scrolling", () => {
 
   it("keeps only the selected blue filter chip compact across shared filter panels", () => {
     const css = readFileSync(resolve(process.cwd(), "src/styles.css"), "utf8");
-    const baseChip = css.match(/  \.chip \\{([\\s\\S]*?)\\n  \\}/)?.[1];
-    const selectedChip = css.match(/  \.chip\\[aria-pressed="true"\\], \.chip\\[aria-current="true"\\], \.chip\\[aria-current="page"\\] \\{([\\s\\S]*?)\\n  \\}/)?.[1];
+    const baseChip = css.match(/  \.chip \{([\s\S]*?)\n  \}/)?.[1];
+    const selectedChip = css.match(/  \.chip\[aria-pressed="true"\], \.chip\[aria-current="true"\], \.chip\[aria-current="page"\] \{([\s\S]*?)\n  \}/)?.[1];
     expect(baseChip).toContain("min-height: 2.5rem");
     expect(baseChip).toContain("padding: .5rem .75rem");
     expect(selectedChip).toContain("min-height: 2.125rem");
