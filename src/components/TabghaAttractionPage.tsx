@@ -9,8 +9,8 @@ import galileePhoto from "@/assets/home/hero-galilee-sm.webp";
 
 const tabghaMapEmbed = "https://maps.google.com/maps?q=Tabgha%2C%20Sea%20of%20Galilee%2C%20Israel&hl=en&z=12&t=m&output=embed";
 const tabghaMapLarger = "https://www.google.com/maps/search/?api=1&query=Tabgha%2C%20Israel&hl=en";
-const multiplicationDirections = "https://www.google.com/maps/search/?api=1&query=Church%20of%20the%20Multiplication%20Tabgha%20Israel&hl=en";
-const primacyDirections = "https://www.google.com/maps/search/?api=1&query=Church%20of%20the%20Primacy%20of%20Peter%20Tabgha%20Israel&hl=en";
+const multiplicationDirections = "https://www.google.com/maps/dir/?api=1&destination=Church%20of%20the%20Multiplication%2C%20Tabgha%2C%20Israel&travelmode=driving";
+const primacyDirections = "https://www.google.com/maps/dir/?api=1&destination=Church%20of%20the%20Primacy%20of%20Peter%2C%20Tabgha%2C%20Israel&travelmode=driving";
 
 const visitorAreas = [
   {
@@ -151,7 +151,7 @@ export const tabghaDestinationContent: AttractionDestinationContent = {
           </article>
           <article className="rounded-xl border bg-card p-4">
             <div className="flex items-center gap-2"><BusFront className="h-5 w-5 text-primary" aria-hidden="true" /><h3 className="font-semibold">By public transport</h3></div>
-            <p className="mt-2 text-sm leading-relaxed">Bus connections along this part of the lake can be limited, and the final walk depends on your stop. I recommend a car or organised tour if you want to combine Tabgha with several nearby attractions in one day.</p>
+            <p className="mt-2 text-sm leading-relaxed">Buses travel along Route 90 near Tabgha, but you will need to check the walking route from your stop to each church. Use the <a href="https://bus.gov.il/en/Geographic-Area" target="_blank" rel="noopener noreferrer" className="font-semibold text-primary underline underline-offset-4">official public transport planner</a> for connections from Tiberias or elsewhere. A car or organised tour makes it easier to visit several Galilee sites in one day.</p>
           </article>
         </div>
         <div className="rounded-xl border bg-card p-3" data-testid="tabgha-location-map">
