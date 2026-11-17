@@ -1,0 +1,34 @@
+import caesareaHero from "@/assets/home/caesarea-dusk-feature.webp";
+
+/** Shared visitor information for the upgraded Caesarea National Park attraction guide. */
+export const caesareaSite = {
+  title: "Caesarea National Park: Roman Ruins, Harbor & Visitor Guide",
+  description: "Explore Caesarea National Park's Roman theater, hippodrome, ancient harbor, Crusader walls and nearby aqueduct, with updated ticket prices, hours, accessibility and practical visit tips.",
+  region: "Haifa & northern coast" as const,
+  updatedAt: "2026-11-17",
+  intro: "At Caesarea, Roman ruins stretch along the Mediterranean shore, from an ancient theater and chariot-racing arena to the harbor built by King Herod. I recommend allowing a few hours to explore the archaeological park on foot, with extra time for the harbor and its visitors' center.",
+  hero: { src: caesareaHero, alt: "Ancient stone ruins beside the Mediterranean at Caesarea in the evening light" },
+  visit: {
+    summerRegular: "08:00–17:00",
+    summerFriday: "08:00–16:00",
+    winterRegular: "08:00–16:00",
+    winterFriday: "08:00–15:00",
+    finalEntryBeforeClosing: "1 hour",
+    adult: "₪46",
+    child: "₪27",
+    groupAdult: "₪39",
+    groupChild: "₪23",
+    student: "₪39",
+    israeliSenior: "₪23",
+    parkPhone: "04-6267080",
+    parkPhoneHref: "+97246267080",
+  },
+  sources: {
+    park: "https://en.parks.org.il/reserve-park/caesarea-national-park/",
+    prices: "https://www.parks.org.il/article/price/",
+    harborHours: "https://caesarea.com/en/rec-leisure/%D7%A9%D7%A2%D7%95%D7%AA-%D7%A4%D7%A2%D7%99%D7%9C%D7%95%D7%AA/",
+    visitorCenter: "https://caesarea.com/en/rec-leisure/%D7%9E%D7%A8%D7%9B%D7%96-%D7%94%D7%9E%D7%91%D7%A7%D7%A8%D7%99%D7%9D/",
+    visitorFaq: "https://caesarea.com/en/rec-leisure/%D7%A9%D7%90%D7%9C%D7%95%D7%AA-%D7%95%D7%AA%D7%A9%D7%95%D7%91%D7%95%D7%AA/",
+    harborSites: "https://caesarea.com/en/rec-leisure/the-caesarea-port-and-the-old-city/",
+  },
+};
