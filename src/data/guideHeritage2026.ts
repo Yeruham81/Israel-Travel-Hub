@@ -1,5 +1,6 @@
 import type { TravelGuide } from "@/data/travelGuides";
 import { migrationPhotos as P } from "@/data/guideMigrationPhotos";
+import { magdalaSite } from "@/data/magdalaSite";
 
 export const heritageGuides = {
   "megiddo": {
@@ -479,17 +480,17 @@ export const heritageGuides = {
   },
   "magdala": {
     "id": "magdala",
-    "updatedAt": "2026-10-20",
-    "title": "Magdala: ancient synagogue, archaeology and Duc In Altum",
-    "description": "Visit Magdala on the Sea of Galilee: first-century synagogue remains, the Magdala Stone story and Duc In Altum, with practical admission and itinerary advice.",
-    "intro": "Magdala combines an archaeological park with a modern Christian prayer center beside the Sea of Galilee. Its ancient Jewish setting and later religious associations offer different ways to understand the site. Leave time for both archaeology and the visitor route through Duc In Altum if they are part of your visit.",
+    "updatedAt": magdalaSite.updatedAt,
+    "title": magdalaSite.title,
+    "description": magdalaSite.description,
+    "intro": magdalaSite.intro,
     "answer": "Choose Magdala for first-century archaeology and the modern Duc In Altum setting, then confirm what your admission and visit include. The ancient settlement is associated with Mary Magdalene’s traditional home region; that association is not archaeological proof of a particular house or a documented birthplace.",
     "topics": [
       "attractions",
       "destinations",
       "religion"
     ],
-    "photo": P["magdala"],
+    "photo": magdalaSite.hero,
     "facts": [
       {
         "label": "Ancient setting",
