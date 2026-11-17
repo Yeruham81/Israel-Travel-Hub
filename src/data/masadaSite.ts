@@ -29,6 +29,10 @@ export const masadaSite = {
     cableReturnChild: "₪32",
     museumOnly: "₪20",
     nightShow: "₪45",
+    nightShowMayJune: "20:30",
+    nightShowJulyAugust: "21:00",
+    nightShowSeptemberOctober: "20:30",
+    nightShowNovemberDecember: "19:30",
     sitePhone: "*3639",
   },
   sources: {
@@ -39,6 +43,6 @@ export const masadaSite = {
     romanRamp: "https://en.parks.org.il/article/the-roman-ramp-trail-at-masada-national-park/",
     museum: "https://en.parks.org.il/article/masada-museum/",
     nightShow: "https://en.parks.org.il/reserve-park/masada-orkol",
-    complexAccess: "https://www.parks.org.il/masada-3/",
+    complexAccess: "https://en.parks.org.il/national-parks-and-nature-reserves-location/",
   },
 };
