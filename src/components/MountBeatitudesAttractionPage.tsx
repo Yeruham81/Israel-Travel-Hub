@@ -25,8 +25,8 @@ export const mountBeatitudesDestinationContent: AttractionDestinationContent = {
   hero: mountBeatitudesSite.hero,
   intro: mountBeatitudesSite.intro,
   historyTitle: "The Sermon on the Mount and the church's history",
-  visitorTitle: "Opening hours, parking and visitor information",
-  visitorNavLabel: "Hours & parking",
+  visitorTitle: "Opening hours, admission and visitor information",
+  visitorNavLabel: "Hours & admission",
   relatedTitle: "Explore more around the Sea of Galilee",
   contactIntroduction: "Tell me when you're visiting, where you'll be starting from and which Galilee sites you'd like to include. I'll be happy to help arrange a private day trip around your plans.",
   facts: [
@@ -34,10 +34,9 @@ export const mountBeatitudesDestinationContent: AttractionDestinationContent = {
     { icon: "duration", label: "Time needed", value: "45–60 minutes", note: "Church, gardens and viewpoint" },
     { icon: "hours", label: "Morning hours", value: visit.morning, note: "Midday closure follows" },
     { icon: "hours", label: "Afternoon hours", value: visit.afternoon, note: "Check holiday closures" },
-    { icon: "admission", label: "Car parking", value: visit.parkingCar, note: "Van ₪60 · bus ₪100" },
+    { icon: "admission", label: "Entrance fee", value: visit.entryPerPerson, note: "Per person" },
     { icon: "access", label: "Getting there", value: "Car or organised tour", note: "Uphill access road" },
   ],
-  glanceNote: <>The published charges are for <strong>vehicle parking</strong>. The official timetable does not list a separate admission fee for the church or gardens.</>,
   highlightContent: (
     <div className="mt-4 space-y-3">
       <AttractionHighlight
@@ -62,8 +61,8 @@ export const mountBeatitudesDestinationContent: AttractionDestinationContent = {
   ),
   visitorContent: (
     <div className="mt-4 space-y-4">
-      <p>The church and gardens are one visitor site managed by the Franciscan Missionary Sisters. The midday closure and vehicle parking charge are worth planning around.</p>
-      <div className="grid gap-3 sm:grid-cols-2" data-testid="beatitudes-hours-parking">
+      <p>The church and gardens are one visitor site managed by the Franciscan Missionary Sisters. Plan around the midday closure when choosing your visiting time.</p>
+      <div className="grid gap-3 sm:grid-cols-2" data-testid="beatitudes-hours-admission">
         <article className="rounded-xl border bg-card p-4">
           <h3 className="font-serif text-xl font-semibold">Opening hours</h3>
           <dl className="mt-3 space-y-2 text-sm leading-relaxed sm:text-base">
@@ -71,17 +70,12 @@ export const mountBeatitudesDestinationContent: AttractionDestinationContent = {
             <div><dt className="inline font-semibold">Afternoon: </dt><dd className="inline">{visit.afternoon}</dd></div>
           </dl>
           <p className="mt-2 text-sm">The site is closed between 11:30 and 14:00, and also at Easter, Christmas and the Feast of the Beatitudes.</p>
-          <a href={source.hoursAndParking} target="_blank" rel="noopener noreferrer" className="mt-3 inline-flex items-center gap-1 text-sm font-semibold text-primary hover:underline">Official shrine hours <ArrowUpRight className="h-3.5 w-3.5" aria-hidden="true" /></a>
+          <a href={source.hours} target="_blank" rel="noopener noreferrer" className="mt-3 inline-flex items-center gap-1 text-sm font-semibold text-primary hover:underline">Official shrine hours <ArrowUpRight className="h-3.5 w-3.5" aria-hidden="true" /></a>
         </article>
         <article className="rounded-xl border bg-card p-4">
-          <h3 className="font-serif text-xl font-semibold">Parking and admission</h3>
-          <dl className="mt-3 grid grid-cols-[minmax(0,1fr)_auto] gap-x-4 gap-y-2 text-sm leading-relaxed sm:text-base">
-            <dt>Car</dt><dd className="font-semibold">{visit.parkingCar}</dd>
-            <dt>Van</dt><dd className="font-semibold">{visit.parkingVan}</dd>
-            <dt>Tour bus</dt><dd className="font-semibold">{visit.parkingBus}</dd>
-          </dl>
-          <p className="mt-2 text-sm">The published prices are per vehicle. No separate church admission fee is listed on the official schedule.</p>
-          <a href={source.hoursAndParking} target="_blank" rel="noopener noreferrer" className="mt-3 inline-flex items-center gap-1 text-sm font-semibold text-primary hover:underline">Official parking charges <ArrowUpRight className="h-3.5 w-3.5" aria-hidden="true" /></a>
+          <h3 className="font-serif text-xl font-semibold">Entrance fee</h3>
+          <p className="mt-3 text-lg font-semibold">{visit.entryPerPerson} per person</p>
+          <p className="mt-2 text-sm leading-relaxed">Allow time to explore the church, colonnade and gardens during the visiting hours.</p>
         </article>
       </div>
       <AttractionPracticalTip>
@@ -180,7 +174,7 @@ export const mountBeatitudesDestinationContent: AttractionDestinationContent = {
   faqs: [
     { q: "How much time do I need at the Mount of Beatitudes?", a: "Around 45–60 minutes is comfortable for the church, colonnade, gardens and lake views. Allow longer if you are attending a booked service." },
     { q: "What are the visiting hours?", a: "The published schedule is 08:00–11:30 and 14:00–16:30. The site closes between these sessions and on Easter, Christmas and the Feast of the Beatitudes." },
-    { q: "Is there an entrance fee?", a: "The Christian Information Center lists vehicle parking charges rather than a separate admission fee: ₪30 for a car, ₪60 for a van and ₪100 for a bus. It does not publish a separate church entry charge." },
+    { q: "Is there an entrance fee?", a: "Yes. The entrance fee is ₪10 per person." },
     { q: "Can I visit without a car?", a: "You may be able to reach the Tabgha area by bus from Tiberias, but the uphill approach to the church makes this less convenient. A rental car, organised tour or private driver is easier when combining sites." },
     { q: "Is the Mount of Beatitudes wheelchair accessible?", a: "Vehicles can reach the hilltop grounds, while some garden paths slope or have steps. Contact the sisters before travelling to check the accessible entrance and route for your needs." },
     { q: "Can our group arrange Mass or a prayer service?", a: "Yes. Arrange services ahead of time with the Franciscan Missionary Sisters at 04-6711223." },
@@ -203,7 +197,7 @@ export const mountBeatitudesDestinationContent: AttractionDestinationContent = {
     { label: "Ben Gurion Airport arrival tips", to: "/travel-blog/ben-gurion-airport-arrival-tips/", description: "Practical advice for your arrival.", icon: "arrival" },
   ],
   sources: [
-    { label: "Christian Information Center — Mount of Beatitudes visiting hours and parking", url: source.hoursAndParking, note: "Published opening sessions, holiday closures, car/van/bus parking charges and visitor phone number." },
+    { label: "Christian Information Center — Mount of Beatitudes visiting hours", url: source.hours, note: "Published visiting hours, holiday closures and visitor contact details." },
     { label: "Church of the Beatitudes — official history and contact", url: source.churchAbout, note: "Antonio Barluzzi, octagonal design, construction dates and managing organisation." },
     { label: "Church of the Beatitudes — official visit and group arrangements", url: source.visitAndGroups, note: "Prayer and Mass arrangements, guesthouse information and contact numbers." },
     { label: "Jesus Trail — walking route through the Mount of Beatitudes", url: source.jesusTrail, note: "Background on the marked long-distance route linking Tabgha, the Mount of Beatitudes and Capernaum." },
