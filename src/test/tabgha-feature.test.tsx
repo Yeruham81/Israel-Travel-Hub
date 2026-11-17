@@ -14,9 +14,13 @@ describe("Tabgha visitor guide follows the individual-attraction template", () =
     expect(content.updatedAt).toBe("2026-11-17");
     expect(content.facts).toHaveLength(6);
     expect(content.facts.find(f => f.label === "Multiplication church")?.value).toBe("09:00–15:00");
+    expect(content.facts.find(f => f.label === "Primacy church")?.value).toBe("08:00–17:00");
     expect(content.facts.find(f => f.label === "Admission")?.value).toBe("No published fee");
     expect(tabghaSite.multiplication.closed).toBe("Sunday");
+    expect(tabghaSite.multiplication.lastEntry).toBe("14:45");
     expect(tabghaSite.primacy.lastEntry).toBe("16:30");
+    expect(tabghaSite.sources.multiplicationHours).toBe("https://dormitio.net/tabgha/gottesdienst-und-oeffnungszeiten/");
+    expect(tabghaSite.sources.primacyHours).toContain("www.cicts.org/our-services/#:~:text=Tabgha");
     expect(attractionGuides.tabgha.title).toBe(content.title);
     expect(attractionGuides.tabgha.intro).toBe(content.intro);
     expect(attractionGuides.tabgha.highlights).toHaveLength(0);
@@ -63,6 +67,10 @@ describe("Tabgha visitor guide follows the individual-attraction template", () =
     expect(article).toContain("hl=en&z=12");
     expect(article).toContain("tabghaSite.multiplication.hours");
     expect(article).toContain("tabghaSite.primacy.hours");
+    expect(article).toContain("tabghaSite.sources.multiplicationHours");
+    expect(article).toContain("tabghaSite.sources.primacyHours");
+    expect(article).toContain("site.source}</a>");
+    expect(article).not.toContain(">Official hours</a>");
     expect(article).toContain('href={"tel:" + site.phoneHref}');
     expect(article).toContain("whitespace-nowrap");
     expect(article).toContain("A short visit: about one hour");
