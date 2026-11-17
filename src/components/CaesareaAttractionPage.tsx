@@ -7,8 +7,7 @@ import {
 import { caesareaSite } from "@/data/caesareaSite";
 import { carRentalAffiliateUrl } from "@/lib/car-rental-affiliate";
 import theaterPhoto from "@/assets/home/caesarea-theatre.webp";
-import harborPhoto from "@/assets/home/hero-caesarea-sm.webp";
-import aqueductPhoto from "@/assets/home/caesarea-aqueduct.webp";
+import coastPanorama from "@/assets/home/hero-caesarea-coast-desktop.jpg";
 import akkoPhoto from "@/assets/shore-excursions/akko-port.jpg";
 import haifaPhoto from "@/assets/haifa/panorama.webp";
 
@@ -18,6 +17,7 @@ const inlineLink = "font-semibold text-primary underline underline-offset-4";
 const mapEmbed = "https://maps.google.com/maps?q=Caesarea%20National%20Park%2C%20Israel&hl=en&z=14&t=m&output=embed";
 const mapLarger = "https://www.google.com/maps/search/?api=1&query=Caesarea%20National%20Park%2C%20Israel&hl=en";
 const drivingDirections = "https://www.google.com/maps/dir/?api=1&destination=Caesarea%20National%20Park%2C%20Israel&travelmode=driving";
+const aqueductDirections = "https://www.google.com/maps/dir/?api=1&destination=Caesarea%20Aqueduct%20Beach%2C%20Israel&travelmode=driving";
 
 export const caesareaDestinationContent: AttractionDestinationContent = {
   path: "/attractions/caesarea/",
@@ -56,7 +56,7 @@ export const caesareaDestinationContent: AttractionDestinationContent = {
       </AttractionHighlight>
       <AttractionHighlight
         title="The ancient harbor and Crusader walls"
-        image={{ src: harborPhoto, alt: "Caesarea's archaeological coastline and the stone remains of its ancient Mediterranean harbor" }}
+        image={{ src: "/images/attractions/caesarea-crusader-arches.svg", alt: "Historic stone arches within the Crusader quarter at Caesarea" }}
       >
         <p>Herod built one of the ancient Mediterranean's ambitious artificial harbors here. Later rulers reshaped the city, leaving Crusader walls, gates and stone-lined streets around today's harbor area.</p>
         <p>I recommend walking through the northern harbor quarter and taking time to see both the sea and the fortifications. Cafés and restaurants make this a pleasant place for a break.</p>
@@ -67,10 +67,10 @@ export const caesareaDestinationContent: AttractionDestinationContent = {
       </AttractionHighlight>
       <AttractionHighlight
         title="The aqueduct on the beach"
-        image={{ src: aqueductPhoto, alt: "Ancient stone aqueduct arches beside the Mediterranean at Caesarea" }}
+        image={{ src: "/images/attractions/caesarea-aqueduct-arches.svg", alt: "Roman aqueduct arches beside the sandy beach at Caesarea" }}
       >
         <p>North of the main archaeological circuit, the aqueduct's long row of stone arches once carried fresh water into Roman Caesarea. Today it stands beside the beach and is especially striking against the sea.</p>
-        <p>Visit the aqueduct as a separate nearby stop, preferably by car or with a driver. It is not the same entrance as the theater or harbor, and beach access and swimming conditions should be checked separately.</p>
+        <p>Visit the aqueduct as a separate nearby stop, preferably by car or with a driver. It is not the same entrance as the theater or harbor, and beach access and swimming conditions should be checked separately. <a href={aqueductDirections} target="_blank" rel="noopener noreferrer" className={inlineLink}>Directions to the aqueduct</a>.</p>
       </AttractionHighlight>
     </div>
   ),
@@ -156,7 +156,7 @@ export const caesareaDestinationContent: AttractionDestinationContent = {
           <li>Continue along the <strong>hippodrome and promontory palace</strong> towards the harbor.</li>
           <li>Explore the <strong>Crusader quarter and harbor visitors' center</strong>, then take a break by the water.</li>
         </ol>
-        <p className="mt-3 text-sm leading-relaxed sm:text-base">Allow another 20–30 minutes for the aqueduct, excluding travel between the two locations. You can also reverse the route if you start at the northern gate.</p>
+        <p className="mt-3 text-sm leading-relaxed sm:text-base">Allow another 20–30 minutes for the aqueduct, excluding travel between the two locations. You can also reverse the route if you start at the northern gate. <a href={aqueductDirections} target="_blank" rel="noopener noreferrer" className={inlineLink}>Navigate to the aqueduct separately</a>.</p>
       </div>
       <div className="rounded-xl border bg-card p-4 sm:p-5">
         <h3 className="font-serif text-xl font-semibold">Combine Caesarea with a coastal day trip</h3>
@@ -167,6 +167,10 @@ export const caesareaDestinationContent: AttractionDestinationContent = {
           <li><strong>Heading south:</strong> Combine the ruins with <Link to="/attractions/jaffa/" className={inlineLink}>Old Jaffa</Link> for another historic harbor setting.</li>
         </ul>
       </div>
+      <figure className="overflow-hidden rounded-xl border bg-card" data-testid="caesarea-coastal-panorama">
+        <img src={coastPanorama} alt="Wide aerial panorama of Caesarea's ancient harbor, archaeological park and Mediterranean shoreline" width={1200} height={675} loading="lazy" decoding="async" className="h-52 w-full object-cover object-center sm:h-64 lg:h-72" />
+        <figcaption className="px-3 py-2 text-xs text-muted-foreground">Caesarea's ancient harbor and coastline, seen from above.</figcaption>
+      </figure>
     </div>
   ),
   historyContent: (
