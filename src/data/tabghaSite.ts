@@ -30,5 +30,6 @@ export const tabghaSite = {
     benedictineHistory: "https://dormitio.net/tabgha/brotvermehrungskirche/",
     benedictineVisitors: "https://dormitio.net/tabgha/pilger-und-gaeste/",
     franciscan: "https://www.custodia.org/en/sanctuaries/tabgha/",
+    primacyAccessibility: "https://www.orientchurch.va/images/colletta2020/allegati/Allegato_Custodia_Inglese.pdf",
   },
 };
