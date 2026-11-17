@@ -23,6 +23,7 @@ export const magdalaSite = {
   sources: {
     plan: "https://www.magdala.org/plan-your-visit",
     archaeology: "https://www.magdala.org/archaeology",
+    stoneCatalogue: "https://resources.metmuseum.org/resources/metpublications/pdf/The_World_between_Empires_Art_and_Identity_in_the_Ancient_Middle_East.pdf",
     ducInAltum: "https://www.magdala.org/duc-in-altum",
     contact: "https://www.magdala.org/contact",
     cicHours: "https://www.cicts.org/our-services/",
