@@ -6,6 +6,7 @@ import {
 } from "@/components/AttractionDestinationPage";
 import { tabghaSite } from "@/data/tabghaSite";
 import galileePhoto from "@/assets/home/hero-galilee-sm.webp";
+import { carRentalAffiliateUrl } from "@/lib/car-rental-affiliate";
 
 const tabghaMapEmbed = "https://maps.google.com/maps?q=Tabgha%2C%20Sea%20of%20Galilee%2C%20Israel&hl=en&z=12&t=m&output=embed";
 const tabghaMapLarger = "https://www.google.com/maps/search/?api=1&query=Tabgha%2C%20Israel&hl=en";
@@ -143,7 +144,7 @@ export const tabghaDestinationContent: AttractionDestinationContent = {
         <div className="space-y-3">
           <article className="rounded-xl border bg-card p-4">
             <div className="flex items-center gap-2"><CarFront className="h-5 w-5 text-primary" aria-hidden="true" /><h3 className="font-semibold">By car or with a driver</h3></div>
-            <p className="mt-2 text-sm leading-relaxed">From Tiberias, follow the lake's western side towards Route 87 and Tabgha. The two churches are close together but have separate entrances. Check the correct destination before driving.</p>
+            <p className="mt-2 text-sm leading-relaxed">From Tiberias, follow the lake's western side towards Route 87 and Tabgha. The two churches are close together but have separate entrances. Follow the signs to each Tabgha site.</p>
             <div className="mt-3 flex flex-wrap gap-x-4 gap-y-2 text-sm">
               <a href={multiplicationDirections} target="_blank" rel="noopener noreferrer" className="font-semibold text-primary hover:underline">Multiplication church directions</a>
               <a href={primacyDirections} target="_blank" rel="noopener noreferrer" className="font-semibold text-primary hover:underline">Primacy chapel directions</a>
@@ -151,7 +152,7 @@ export const tabghaDestinationContent: AttractionDestinationContent = {
           </article>
           <article className="rounded-xl border bg-card p-4">
             <div className="flex items-center gap-2"><BusFront className="h-5 w-5 text-primary" aria-hidden="true" /><h3 className="font-semibold">By public transport</h3></div>
-            <p className="mt-2 text-sm leading-relaxed">Buses travel along Route 90 near Tabgha, but you will need to check the walking route from your stop to each church. Use the <a href="https://bus.gov.il/en/Geographic-Area" target="_blank" rel="noopener noreferrer" className="font-semibold text-primary underline underline-offset-4">official public transport planner</a> for connections from Tiberias or elsewhere. A car or organised tour makes it easier to visit several Galilee sites in one day.</p>
+            <p className="mt-2 text-sm leading-relaxed">You can reach Tabgha by bus from Tiberias, but it is not the most convenient option for visitors, especially if you want to explore several sites around the Sea of Galilee in one day. Check bus times and the walk from your stop with the <a href="https://bus.gov.il/en/Geographic-Area" target="_blank" rel="noopener noreferrer" className="font-semibold text-primary underline underline-offset-4">official public transport planner</a>. For a more flexible day, I recommend <a href={carRentalAffiliateUrl("/attractions/tabgha/")} target="_blank" rel="sponsored noopener noreferrer" className="font-semibold text-primary underline underline-offset-4">renting a car</a>, joining an <Link to="/tours/nazareth-sea-of-galilee/" className="font-semibold text-primary underline underline-offset-4">organised Galilee tour</Link>, or <a href="#contact" className="font-semibold text-primary underline underline-offset-4">arranging a private day trip with a driver</a>.</p>
           </article>
         </div>
         <div className="rounded-xl border bg-card p-3" data-testid="tabgha-location-map">
