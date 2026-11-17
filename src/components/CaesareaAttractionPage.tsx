@@ -83,37 +83,45 @@ export const caesareaDestinationContent: AttractionDestinationContent = {
           <p className="mt-3 text-sm font-semibold">April–October</p>
           <dl className="mt-1 space-y-1 text-sm leading-relaxed sm:text-base">
             <div><dt className="inline">Sunday–Thursday & Saturday: </dt><dd className="inline font-semibold">{visit.summerRegular}</dd></div>
-            <div><dt className="inline">Friday & holiday eves: </dt><dd className="inline font-semibold">{visit.summerFriday}</dd></div>
+            <div><dt className="inline">Fridays and ordinary holiday eves: </dt><dd className="inline font-semibold">{visit.summerFriday}</dd></div>
           </dl>
           <p className="mt-3 text-sm font-semibold">November–March</p>
           <dl className="mt-1 space-y-1 text-sm leading-relaxed sm:text-base">
             <div><dt className="inline">Sunday–Thursday & Saturday: </dt><dd className="inline font-semibold">{visit.winterRegular}</dd></div>
-            <div><dt className="inline">Friday & holiday eves: </dt><dd className="inline font-semibold">{visit.winterFriday}</dd></div>
+            <div><dt className="inline">Fridays and ordinary holiday eves: </dt><dd className="inline font-semibold">{visit.winterFriday}</dd></div>
           </dl>
-          <p className="mt-3 text-sm leading-relaxed sm:text-base"><strong>Last park entry is one hour before closing.</strong> Certain holiday eves have earlier hours. Check the <a href={sources.park} target="_blank" rel="noopener noreferrer" className={inlineLink}>official daily information</a> for your date.</p>
+          <p className="mt-3 text-sm leading-relaxed sm:text-base"><strong>Rosh Hashanah, Passover and Yom Kippur eves:</strong> {visit.specialHolidayEves}. <strong>Last park entry is one hour before closing.</strong> Check the <a href={sources.park} target="_blank" rel="noopener noreferrer" className={inlineLink}>official daily information</a> for changes on your visit date.</p>
         </article>
         <article className="rounded-xl border bg-card p-4">
           <h3 className="font-serif text-xl font-semibold">Admission prices</h3>
           <dl className="mt-3 space-y-2 text-sm leading-relaxed sm:text-base">
             <div className="flex items-start justify-between gap-3"><dt>Adult</dt><dd className="shrink-0 font-semibold" dir="ltr">{visit.adult}</dd></div>
             <div className="flex items-start justify-between gap-3"><dt>Child, ages 5–18</dt><dd className="shrink-0 font-semibold" dir="ltr">{visit.child}</dd></div>
-            <div className="flex items-start justify-between gap-3"><dt>Student / adult group</dt><dd className="shrink-0 font-semibold" dir="ltr">{visit.student}</dd></div>
-            <div className="flex items-start justify-between gap-3"><dt>Child in a group</dt><dd className="shrink-0 font-semibold" dir="ltr">{visit.groupChild}</dd></div>
+            <div className="flex items-start justify-between gap-3"><dt>Student</dt><dd className="shrink-0 font-semibold" dir="ltr">{visit.student}</dd></div>
+            <div className="flex items-start justify-between gap-3"><dt>Adult in a group ({visit.groupThreshold} people)</dt><dd className="shrink-0 font-semibold" dir="ltr">{visit.groupAdult}</dd></div>
+            <div className="flex items-start justify-between gap-3"><dt>Child in a group ({visit.groupThreshold} people)</dt><dd className="shrink-0 font-semibold" dir="ltr">{visit.groupChild}</dd></div>
             <div className="flex items-start justify-between gap-3"><dt>Israeli senior citizen</dt><dd className="shrink-0 font-semibold" dir="ltr">{visit.israeliSenior}</dd></div>
           </dl>
-          <p className="mt-3 text-sm leading-relaxed sm:text-base">Children under 5 generally enter free. Group rates follow the park authority's group eligibility rules; Matmon members receive admission under their membership terms.</p>
+          <p className="mt-3 text-sm leading-relaxed sm:text-base">Children under 5 enter free; group rates apply to groups of more than 30 people. Matmon members receive admission under their membership terms.</p>
+          <div className="mt-3 border-t pt-3">
+            <div className="flex items-start justify-between gap-3 text-sm leading-relaxed sm:text-base">
+              <span><strong>Harbor only</strong> (without the theater, hippodrome or visitors' center)</span>
+              <strong className="shrink-0" dir="ltr">{visit.harborOnly}</strong>
+            </div>
+            <p className="mt-1 text-xs text-muted-foreground">Choose the full national park ticket to explore the entire archaeological route. <a href={sources.harborPrices} target="_blank" rel="noopener noreferrer" className={inlineLink}>Harbor-only ticket details</a>.</p>
+          </div>
           <a href={sources.park} target="_blank" rel="noopener noreferrer" className="mt-3 inline-flex items-center gap-1 text-sm font-semibold text-primary hover:underline">Official tickets and visit reservation <ArrowUpRight className="h-3.5 w-3.5" aria-hidden="true" /></a>
         </article>
       </div>
       <AttractionPracticalTip>
-        <strong>Plan the hours for the park, not just the harbor.</strong> The harbor area remains lively after the archaeological park closes, but that does not extend the last entry time for the paid ruins. The visitors' center normally opens at 08:30 and stops entry 30 minutes before its closing time. <a href={sources.harborHours} target="_blank" rel="noopener noreferrer" className={inlineLink}>See harbor and visitor-center hours</a>.
+        <strong>Plan the hours for the park, not just the harbor.</strong> The harbor area remains lively after the archaeological park closes, but that does not extend the last entry time for the paid ruins. The visitors' center normally opens at 08:30 and stops entry 30 minutes before its published closing time. <a href={sources.harborHours} target="_blank" rel="noopener noreferrer" className={inlineLink}>See harbor and visitor-center hours</a>.
       </AttractionPracticalTip>
       <div className="rounded-xl border border-border/80 bg-secondary/20 p-4 sm:p-5" data-testid="caesarea-visitor-essentials">
         <h3 className="font-serif text-xl font-semibold">Useful things to know before visiting</h3>
         <ul className="mt-3 grid list-disc gap-x-6 gap-y-2 pl-5 text-sm leading-relaxed sm:grid-cols-2 sm:text-base">
           <li><strong>Sun and walking:</strong> The ruins are exposed. Bring water, a hat and comfortable shoes for ancient stone paths.</li>
           <li><strong>Accessibility:</strong> Accessible routes cover sections including the theater, hippodrome, promenade, ancient city and visitors' center; some archaeological ground is uneven.</li>
-          <li><strong>Facilities:</strong> Parking, restrooms and restaurants are available in the visitor complex. The harbor has places to eat and browse.</li>
+          <li><strong>Facilities and parking:</strong> Parking, restrooms and restaurants are available. Harbor parking may become chargeable after the national park closes; check the signs if you are staying for dinner.</li>
           <li><strong>Displays:</strong> The “Caesarea Experience” near the theater is currently listed as not open; the harbor visitors' center is a different exhibition.</li>
         </ul>
         <p className="mt-3 text-sm leading-relaxed">For accessibility arrangements or temporary closures, consult the <a href={sources.park} target="_blank" rel="noopener noreferrer" className={inlineLink}>official park page</a> or call <a href={"tel:" + visit.parkPhoneHref} className={inlineLink} dir="ltr">{visit.parkPhone}</a>.</p>
@@ -204,9 +212,9 @@ export const caesareaDestinationContent: AttractionDestinationContent = {
     </div>
   ),
   faqs: [
-    { q: "How much does Caesarea National Park cost?", a: "Published entrance fees are ₪46 for an adult and ₪27 for a child aged 5–18. Student and adult-group tickets are ₪39, child-group tickets ₪23, and Israeli senior tickets ₪23. Check the official page for eligibility and changes." },
-    { q: "What are the opening hours?", a: "The park opens at 08:00. April–October it closes at 17:00 (16:00 on Fridays and holiday eves); November–March at 16:00 (15:00 on Fridays and holiday eves). Last park entry is one hour before closing, and certain holiday eves have reduced hours." },
-    { q: "Do I need to reserve a visit?", a: "The park authority provides a visit reservation option. Checking and reserving ahead is advisable on busy weekends and holidays; harbor visitor-center groups should also check their separate reservation arrangements." },
+    { q: "How much does Caesarea National Park cost?", a: "Full park admission costs ₪46 for an adult and ₪27 for a child aged 5–18. Students and adults in groups of more than 30 pay ₪39; children in qualifying groups and Israeli senior citizens pay ₪23. Harbor-only admission costs ₪18 and excludes the theater, hippodrome and visitors' center." },
+    { q: "What are the opening hours?", a: "The park opens at 08:00. April–October it closes at 17:00 (16:00 on Fridays and ordinary holiday eves); November–March at 16:00 (15:00 on Fridays and ordinary holiday eves). On Rosh Hashanah, Passover and Yom Kippur eves, it closes at 13:00. Last park entry is one hour before closing." },
+    { q: "Do I need to reserve a visit?", a: "Regular independent visits to the national park generally do not require advance reservation, although entry may depend on capacity. For the harbor visitors' center, groups of more than 10 should reserve a time; without reservations, entry is first-come, first-served and subject to available space." },
     { q: "How long should I spend at Caesarea?", a: "Allow 2–3 hours for the theater, hippodrome, ancient harbor and visitors' center. Add more time for a meal or the separate aqueduct stop." },
     { q: "Is the aqueduct part of the park walk?", a: "The aqueduct beside the beach is a separate nearby stop, away from the main theater-to-harbor archaeological route." },
     { q: "Is the harbor open after the national park closes?", a: "The harbor precinct may remain open into the evening, but entry to the archaeological park follows its own earlier opening and closing times." },
@@ -232,6 +240,7 @@ export const caesareaDestinationContent: AttractionDestinationContent = {
   sources: [
     { label: "Israel Nature and Parks Authority — Caesarea National Park", url: sources.park, note: "Current park hours, ticket prices, accessibility and reservation information." },
     { label: "Israel Nature and Parks Authority — admission price list", url: sources.prices, note: "General entry categories, child age rules and group admission conditions." },
+    { label: "Caesarea Harbor — admission prices", url: sources.harborPrices, note: "Reduced-price harbor-only ticket and other admission arrangements." },
     { label: "Caesarea Harbor — opening hours", url: sources.harborHours, note: "Differences between national park, harbor and visitors' center schedules." },
     { label: "Caesarea Harbor — visitors' center", url: sources.visitorCenter, note: "Exhibition inside Herod's vaults and visitor-center arrangements." },
     { label: "Caesarea Harbor — visitors' center FAQ", url: sources.visitorFaq, note: "Visitor-center access, visit duration and practical information." },
