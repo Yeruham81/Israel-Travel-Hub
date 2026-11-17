@@ -942,7 +942,7 @@ export const itinerarySources = [
   { label: "Masada National Park — access and visiting rules", url: "https://en.parks.org.il/reserve-park/masada-national-park/" },
   { label: "Bahá’í Gardens Haifa — visiting arrangements", url: "https://ganbahai.org.il/visit-us-haifa/" },
   { label: "Israel Railways — services and schedules", url: "https://www.rail.co.il/" },
-  { label: "Israel public transport trip planner", url: "https://bus.gov.il/" },
+  { label: "Israel public transport trip planner", url: "https://bus.gov.il/en/home" },
   { label: "Israel Nature and Parks Authority — nature reserve conditions", url: "https://en.parks.org.il/" },
 ];
 
