@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { BedDouble, BookOpen, Sun, TrainFront } from "lucide-react";
+import { BedDouble, BookOpen, CalendarDays, Smartphone, Sun, TrainFront } from "lucide-react";
 import { FaqList, HubHeader } from "@/components/Guide";
 import { TourCategoryExplorer, TourCruiseCallout } from "@/components/TourDiscovery";
 import { TourPhotoCredits } from "@/components/TourCategoryPage";
@@ -13,6 +13,8 @@ const planningLinks = [
   { title: "Best time to visit", description: "Weather, seasons and trip planning.", to: travelGuidePaths.bestTime, icon: Sun },
   { title: "Where to stay", description: "Accommodation and convenient bases.", to: "/accommodation/" as const, icon: BedDouble },
   { title: "Israel travel tips", description: "Practical advice before your visit.", to: travelGuidePaths.travelTips, icon: BookOpen },
+  { title: "Israel holidays & events", description: "Plan around festivals and special dates.", to: travelGuidePaths.calendar, icon: CalendarDays },
+  { title: "Travel eSIM for Israel", description: "Stay connected during your trip.", to: travelGuidePaths.esim, icon: Smartphone },
 ] as const;
 
 export const Route = createFileRoute("/tours/")({

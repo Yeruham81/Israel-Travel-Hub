@@ -102,7 +102,7 @@ describe("private Ben Gurion transfers", () => {
 
   it("uses the lean content order and preserves booking links, benefits, FAQ and guide navigation", async () => {
     const { container, router } = await renderAirport();
-    const sections = ["popular-destinations", "more-destinations", "benefits", "request-quote", "useful-information", "booking-platforms", "faq", "keep-planning"];
+    const sections = ["popular-destinations", "more-destinations", "benefits", "request-quote", "useful-information", "booking-platforms", "faq", "keep-planning", "trip-planning"];
     for (let i = 1; i < sections.length; i++) expect(container.querySelector(`#${sections[i - 1]}`)!.compareDocumentPosition(container.querySelector(`#${sections[i]}`)!)).toBe(Node.DOCUMENT_POSITION_FOLLOWING);
     expect((container.querySelector("#popular-destinations")!.textContent || "") + (container.querySelector("#more-destinations")!.textContent || "")).not.toMatch(/\b(metered|taxi rank|buses)\b/i);
     expect(container.querySelector("#after-request-h")).toBeNull();
@@ -115,17 +115,23 @@ describe("private Ben Gurion transfers", () => {
     const faq = screen.getByRole("region", { name: "Frequently asked questions" });
     expect(faq.querySelectorAll("details")).toHaveLength(5);
     expect(faq).toHaveTextContent("When can I cancel for free?");
-    const related = screen.getByRole("region", { name: "Practical travel guides" });
+    const related = screen.getByRole("region", { name: "Related travel guides" });
     expect(within(related).getAllByRole("link")).toHaveLength(6);
     expect(within(related).getAllByRole("img")).toHaveLength(6);
     expect(new Set(within(related).getAllByRole("img").map(image => image.getAttribute("src"))).size).toBe(6);
+    const planning = screen.getByRole("region", { name: "Plan your trip to Israel" });
+    expect(within(planning).getAllByRole("link")).toHaveLength(6);
+    expect(within(planning).queryAllByRole("img")).toHaveLength(0);
+    expect(within(planning).getAllByRole("link").every(link => link.querySelector("svg") !== null)).toBe(true);
+    expect(new Set(within(planning).getAllByRole("link").map(link => link.getAttribute("href"))).size).toBe(6);
+    expect(within(planning).getByRole("link", { name: /Israel itinerary: 7 days/ })).toHaveAttribute("href", "/travel-blog/israel-itinerary-7-days/");
     const checklist = screen.getByRole("list", { name: "Airport transfer checklist" });
     expect(within(checklist).getAllByRole("listitem")).toHaveLength(5);
     expect(checklist).toHaveTextContent("if you need them.");
     expect(checklist).not.toHaveTextContent("if your party needs them.");
     expect(within(benefits).getByText(/Flight status is monitored/)).toBeInTheDocument();
     expect(within(benefits).getByText(/Direct bookings can be cancelled free/)).toBeInTheDocument();
-    for (const link of within(related).getAllByRole("link")) {
+    for (const link of [...within(related).getAllByRole("link"), ...within(planning).getAllByRole("link")]) {
       const path = link.getAttribute("href")!;
       expect(router.matchRoutes(path).at(-1)?.routeId.replace(/\/$/, "")).toBe(path.replace(/\/$/, ""));
     }

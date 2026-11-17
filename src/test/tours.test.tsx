@@ -164,7 +164,7 @@ describe("tours hub and SEO category pages", () => {
     }
   });
 
-  it("renders ten compact, fully clickable category cards and only four practical guide links", async () => {
+  it("renders ten compact, fully clickable category cards and six planning links", async () => {
     const router = await renderPage("/tours/");
     expect(screen.getAllByRole("heading", { level: 1 })).toHaveLength(1);
     expect(screen.getByRole("heading", { name: "Tours & day trips in Israel" })).toBeInTheDocument();
@@ -194,7 +194,9 @@ describe("tours hub and SEO category pages", () => {
     expect(document.querySelector("a a")).toBeNull();
 
     const planning = screen.getByRole("region", { name: "Plan your trip to Israel" });
-    expect(within(planning).getAllByRole("link")).toHaveLength(4);
+    expect(within(planning).getAllByRole("link")).toHaveLength(6);
+    expect(within(planning).getByRole("link", { name: /Israel holidays & events/ })).toHaveAttribute("href", travelGuidePaths.calendar);
+    expect(within(planning).getByRole("link", { name: /Travel eSIM for Israel/ })).toHaveAttribute("href", travelGuidePaths.esim);
     expect(within(planning).queryAllByRole("img")).toHaveLength(0);
     expect(planning.querySelector('a[href*="shore-excursions"]')).toBeNull();
     for (const link of planning.querySelectorAll("a")) {

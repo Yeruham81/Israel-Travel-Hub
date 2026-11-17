@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
-import { BadgeCheck, CalendarCheck, CheckCircle2, PlaneLanding } from "lucide-react";
+import { BadgeCheck, BedDouble, BookOpen, CalendarCheck, CalendarDays, CheckCircle2, Map, PlaneLanding, Smartphone, Sun } from "lucide-react";
 import { FaqList, HubHeader } from "@/components/Guide";
 import { GuideHeroMedia } from "@/components/GuideHeroMedia";
 import { TransferQuoteForm } from "@/components/TransferQuoteForm";
@@ -22,6 +22,16 @@ const planningLinks = [
   { title: "Getting around Israel", description: "Trains, buses and longer journeys.", to: travelGuidePaths.israel, photo: travelGuides.israel.cardPhoto ?? travelGuides.israel.photo },
   { title: "Getting around Tel Aviv", description: "City transport, light rail and Shabbat.", to: travelGuidePaths.telAviv, photo: travelGuides.telAviv.cardPhoto ?? travelGuides.telAviv.photo },
   { title: "Sherut in Israel", description: "Shared taxis and current airport alternatives.", to: travelGuidePaths.sherut, photo: travelGuides.sherut.cardPhoto ?? travelGuides.sherut.photo },
+] as const;
+
+// General trip-planning ideas complement the airport-specific guides above.
+const tripPlanningLinks = [
+  { title: "Israel travel tips", description: "Practical advice before your visit.", to: travelGuidePaths.travelTips, icon: BookOpen },
+  { title: "Best time to visit", description: "Weather, seasons and trip planning.", to: travelGuidePaths.bestTime, icon: Sun },
+  { title: "Where to stay", description: "Accommodation and convenient bases.", to: "/accommodation/" as const, icon: BedDouble },
+  { title: "Travel eSIM for Israel", description: "Stay connected during your trip.", to: travelGuidePaths.esim, icon: Smartphone },
+  { title: "Israel holidays & events", description: "Plan around festivals and special dates.", to: travelGuidePaths.calendar, icon: CalendarDays },
+  { title: "Israel itinerary: 7 days", description: "A week of highlights and travel ideas.", to: "/travel-blog/israel-itinerary-7-days/" as const, icon: Map },
 ] as const;
 
 export const Route = createFileRoute("/airport-transfers/")({
@@ -104,7 +114,7 @@ function Airport() {
       <AirportBookingPlatforms compact />
       <FaqList faqs={airportTransferFaqs} compact />
       <section id="keep-planning" aria-labelledby="keep-planning-h" className="mt-9">
-        <h2 id="keep-planning-h" className="text-2xl font-semibold">Practical travel guides</h2>
+        <h2 id="keep-planning-h" className="text-2xl font-semibold">Related travel guides</h2>
         <ul className="mt-4 grid gap-3 sm:grid-cols-2">
           {planningLinks.map((guide) => <li key={guide.to} className="min-w-0">
             <Link to={guide.to} className="group flex h-full min-w-0 items-center gap-3 rounded-xl border bg-card p-3 transition-colors hover:border-primary/50 hover:bg-secondary/20 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
@@ -116,6 +126,23 @@ function Airport() {
               </span>
             </Link>
           </li>)}
+        </ul>
+      </section>
+      <section id="trip-planning" aria-labelledby="trip-planning-h" className="mt-9">
+        <h2 id="trip-planning-h" className="text-2xl font-semibold">Plan your trip to Israel</h2>
+        <ul className="mt-4 grid gap-3 sm:grid-cols-2">
+          {tripPlanningLinks.map(item => {
+            const Icon = item.icon;
+            return <li key={item.to}>
+              <Link to={item.to} className="group flex h-full items-start gap-3 rounded-xl border bg-card p-3 transition-colors hover:border-primary/50 hover:bg-secondary/20 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
+                <Icon aria-hidden className="mt-0.5 size-5 shrink-0 text-primary" />
+                <span className="min-w-0">
+                  <span className="block text-sm font-semibold text-foreground group-hover:text-primary">{item.title}</span>
+                  <span className="mt-1 block text-xs leading-relaxed text-muted-foreground">{item.description}</span>
+                </span>
+              </Link>
+            </li>;
+          })}
         </ul>
       </section>
       {creditedPhotos.length > 0 && <details className="mt-9 rounded-xl border p-4 text-xs text-muted-foreground"><summary className="cursor-pointer font-semibold">Photo credits</summary>
