@@ -43,7 +43,7 @@ export const masadaDestinationContent: AttractionDestinationContent = {
     { icon: "highlights", label: "Don't miss", value: "Northern Palace", note: "Roman siege works, storerooms and Dead Sea views" },
     { icon: "access", label: "Getting up", value: "Cable car or hike", note: "Eastern and western entrances are separate" },
   ],
-  glanceNote: <><strong>Choose your entrance before setting out:</strong> Masada East (Route 90) has the cable car and Snake Path. Masada West (via Arad, Road 3199) has the shorter Roman Ramp and evening show. There is no direct road between them.</>,
+  glanceNote: <><strong>Choose your entrance before setting out:</strong> The cable car and Snake Path are on the eastern side, while the Roman Ramp and evening show are accessed from the west. The roads do not connect directly.</>,
   highlightContent: (
     <div className="mt-4 space-y-3">
       <AttractionHighlight
@@ -84,7 +84,7 @@ export const masadaDestinationContent: AttractionDestinationContent = {
   ),
   visitorContent: (
     <div className="mt-4 space-y-4">
-      <p>Masada's park admission and cable-car fare are separate. Choose the eastern or western side before booking transport, and check your entrance and return journey carefully.</p>
+      <p>Park admission and cable-car travel are priced separately. The visitor rates and operating hours below apply to your chosen date and admission category.</p>
       <div className="grid gap-3 sm:grid-cols-2" data-testid="masada-hours-tickets">
         <article className="rounded-xl border bg-card p-4">
           <h3 className="font-serif text-xl font-semibold">National park hours</h3>
@@ -102,11 +102,14 @@ export const masadaDestinationContent: AttractionDestinationContent = {
           <dl className="mt-3 space-y-2 text-sm leading-relaxed sm:text-base">
             <div className="flex items-start justify-between gap-3"><dt>Adult</dt><dd className="shrink-0 font-semibold" dir="ltr">{fees.adult}</dd></div>
             <div className="flex items-start justify-between gap-3"><dt>Child, ages 5–18</dt><dd className="shrink-0 font-semibold" dir="ltr">{fees.child}</dd></div>
-            <div className="flex items-start justify-between gap-3"><dt>Adult in group / student</dt><dd className="shrink-0 font-semibold" dir="ltr">{fees.adultGroup}</dd></div>
-            <div className="flex items-start justify-between gap-3"><dt>Child in group</dt><dd className="shrink-0 font-semibold" dir="ltr">{fees.childGroup}</dd></div>
+            <div className="flex items-start justify-between gap-3"><dt>Student</dt><dd className="shrink-0 font-semibold" dir="ltr">{fees.student}</dd></div>
+            <div className="flex items-start justify-between gap-3"><dt>Adult in group (more than 30)</dt><dd className="shrink-0 font-semibold" dir="ltr">{fees.adultGroup}</dd></div>
+            <div className="flex items-start justify-between gap-3"><dt>Child in group (more than 30)</dt><dd className="shrink-0 font-semibold" dir="ltr">{fees.childGroup}</dd></div>
+            <div className="flex items-start justify-between gap-3"><dt>Active-duty soldier</dt><dd className="shrink-0 font-semibold" dir="ltr">{fees.soldier}</dd></div>
+            <div className="flex items-start justify-between gap-3"><dt>Active reservist</dt><dd className="shrink-0 font-semibold" dir="ltr">{fees.activeReservist}</dd></div>
             <div className="flex items-start justify-between gap-3"><dt>Israeli senior citizen</dt><dd className="shrink-0 font-semibold" dir="ltr">{fees.israeliSenior}</dd></div>
           </dl>
-          <p className="mt-3 text-xs text-muted-foreground">Group rates apply to groups of more than 30 people. Other official concession categories apply. Matmon membership covers regular park admission under the program's terms.</p>
+          <p className="mt-3 text-xs text-muted-foreground">Children under 5 enter free. Reduced fares require the relevant eligibility, and group prices apply to more than 30 people. Matmon membership covers regular admission under the program's terms.</p>
           <a href={official.fees} target="_blank" rel="noopener noreferrer" className="mt-3 inline-flex items-center gap-1 text-sm font-semibold text-primary hover:underline">Official admission prices <ArrowUpRight className="h-3.5 w-3.5" aria-hidden="true" /></a>
         </article>
       </div>
@@ -144,18 +147,25 @@ export const masadaDestinationContent: AttractionDestinationContent = {
           <li><strong>What to bring:</strong> Water, hat, sun protection and sturdy shoes. Shade is limited on the plateau; sudden desert flooding can also affect roads and trails.</li>
           <li><strong>Facilities:</strong> The eastern visitor complex has parking, restrooms, food and shops. The western entrance has more limited services.</li>
         </ul>
-        <p className="mt-3 text-sm leading-relaxed">For access arrangements or temporary closures, check <a href={official.park} target="_blank" rel="noopener noreferrer" className={inlineLink}>Masada's official visitor page</a> or call the parks authority at {fees.sitePhone}.</p>
+        <p className="mt-3 text-sm leading-relaxed">For access arrangements or temporary closures, check <a href={official.park} target="_blank" rel="noopener noreferrer" className={inlineLink}>Masada's official visitor page</a> or call the parks authority at <a href="tel:*3639" dir="ltr" className={inlineLink}>{fees.sitePhone}</a>.</p>
       </div>
       <div className="rounded-xl border bg-card p-4 sm:p-5">
         <h3 className="font-serif text-xl font-semibold">The Masada night show</h3>
-        <p className="mt-2 text-sm leading-relaxed sm:text-base">The approximately 45-minute sound-and-light show takes place on the <strong>western side</strong>, reached via Arad and Road 3199. The published schedule is Tuesday and Thursday evenings after sunset from May through December (weather permitting); the show is closed January–April. Standard tickets cost {fees.nightShow} per person. Confirm the evening and starting time before travelling.</p>
-        <p className="mt-2 text-sm leading-relaxed sm:text-base">Do not navigate to the eastern cable-car entrance for the evening show. <a href={official.nightShow} target="_blank" rel="noopener noreferrer" className={inlineLink}>Show times and booking</a>.</p>
+        <p className="mt-2 text-sm leading-relaxed sm:text-base">The approximately 45-minute sound-and-light show takes place at <strong>Masada West</strong>, on Tuesdays and Thursdays. Standard tickets cost {fees.nightShow} per person.</p>
+        <dl className="mt-3 grid grid-cols-1 gap-x-6 gap-y-2 text-sm leading-relaxed sm:grid-cols-2 sm:text-base" aria-label="Masada night show seasonal starting times">
+          <div className="flex justify-between gap-3"><dt>May–June</dt><dd className="font-semibold" dir="ltr">{fees.nightShowMayJune}</dd></div>
+          <div className="flex justify-between gap-3"><dt>July–August</dt><dd className="font-semibold" dir="ltr">{fees.nightShowJulyAugust}</dd></div>
+          <div className="flex justify-between gap-3"><dt>September–October</dt><dd className="font-semibold" dir="ltr">{fees.nightShowSeptemberOctober}</dd></div>
+          <div className="flex justify-between gap-3"><dt>November–December</dt><dd className="font-semibold" dir="ltr">{fees.nightShowNovemberDecember}</dd></div>
+        </dl>
+        <p className="mt-2 text-sm leading-relaxed text-muted-foreground">Closed January–April according to the operator's English timetable. November–December shows are weather-dependent; confirm availability and the starting time for your date.</p>
+        <p className="mt-2 text-sm leading-relaxed sm:text-base">The show is reached from Arad via Road 3199. <a href={official.nightShow} target="_blank" rel="noopener noreferrer" className={inlineLink}>Show times and booking</a>.</p>
       </div>
     </div>
   ),
   transportContent: (
     <div className="mt-4 space-y-4">
-      <p>Masada has <strong>two separate access roads</strong>. Most Dead Sea day-trip visitors use Masada East for the cable car. The Roman Ramp and night show are approached from the west via Arad.</p>
+      <p>Most visitors arriving from the Dead Sea use <strong>Masada East</strong>. Choose <strong>Masada West</strong> if you plan to climb the Roman Ramp or attend the evening show. The approaches and facilities differ.</p>
       <div className="grid gap-3 sm:grid-cols-2" data-testid="masada-two-entrances">
         <article className="rounded-xl border bg-card p-4">
           <h3 className="font-serif text-xl font-semibold">Masada East — Route 90</h3>
@@ -168,6 +178,7 @@ export const masadaDestinationContent: AttractionDestinationContent = {
           <a href={westDirections} target="_blank" rel="noopener noreferrer" className="mt-3 inline-flex items-center gap-1 text-sm font-semibold text-primary hover:underline">Directions to Masada West <ArrowUpRight className="h-3.5 w-3.5" aria-hidden="true"/></a>
         </article>
       </div>
+      <p className="text-sm leading-relaxed">See the <a href={official.complexAccess} target="_blank" rel="noopener noreferrer" className={inlineLink}>official English guide to Masada's visitor areas</a> for both entrances.</p>
       <div className="grid gap-4 lg:grid-cols-[minmax(0,1.4fr)_minmax(0,1fr)]">
         <div className="space-y-3">
           <article className="rounded-xl border bg-card p-4">
@@ -176,7 +187,7 @@ export const masadaDestinationContent: AttractionDestinationContent = {
           </article>
           <article className="rounded-xl border bg-card p-4">
             <div className="flex items-center gap-2"><BusFront className="h-5 w-5 text-primary"/><h3 className="font-semibold">By public transport</h3></div>
-            <p className="mt-2 text-sm leading-relaxed">Check buses to the <strong>Masada East</strong> stop from Jerusalem or Dead Sea towns. Verify both the outward and return journey in the <a href="https://bus.gov.il/en/home" target="_blank" rel="noopener noreferrer" className={inlineLink}>official route planner</a>. Public transport is not a convenient way to reach the western entrance.</p>
+            <p className="mt-2 text-sm leading-relaxed">From Jerusalem Central Bus Station, <strong>Egged line 486</strong> serves the Masada East stop. <strong>Line 444</strong> toward Eilat can also stop at Masada, but requires advance seat reservation. Check both your outbound and return departures, especially the last bus, in the <a href="https://bus.gov.il/en/home" target="_blank" rel="noopener noreferrer" className={inlineLink}>official transport planner</a>, and consult <a href="https://www.egged.co.il/en/information-for-passengers/tickets-information" target="_blank" rel="noopener noreferrer" className={inlineLink}>Egged's reserved-seat information</a>. Neither bus takes you to Masada West.</p>
           </article>
           <article className="rounded-xl border bg-card p-4">
             <div className="flex items-center gap-2"><Footprints className="h-5 w-5 text-primary"/><h3 className="font-semibold">By hiking</h3></div>
@@ -249,20 +260,20 @@ export const masadaDestinationContent: AttractionDestinationContent = {
   faqs: [
     { q: "How much does Masada National Park cost?", a: "Admission excluding the cable car is ₪37 per adult and ₪21 per child aged 5–18. The cable car is a separate purchase: a return fare is ₪54 for adults and ₪32 for children, making regular entry plus return cable car ₪91 per adult or ₪53 per child." },
     { q: "Is the cable car included in the admission ticket?", a: "No. Park entrance and cable-car tickets are priced separately; make sure your reservation or tour package specifies both." },
-    { q: "Which Masada entrance should I use?", a: "Use Masada East from Route 90 for the cable car, Snake Path and museum. Use Masada West via Arad and Road 3199 for the Roman Ramp and night show. The entrances are not connected by a direct road." },
+    { q: "Which Masada entrance should I use?", a: "Masada East serves the cable car, Snake Path and museum; Masada West serves the Roman Ramp and night show. Check the directions for your chosen entrance in the How to get there section." },
     { q: "Can I see sunrise at Masada using the cable car?", a: "The Snake Path can open before dawn, subject to weather restrictions. Regular cable-car hours start later; special sunrise cable-car departures run only on selected dates and require booking." },
     { q: "How difficult is the Snake Path?", a: "It is a steep ascent of around 2 km with roughly 900 steps, taking about an hour for fit hikers. Summer heat may close ascent as early as 07:00. Check the park's current instructions." },
     { q: "Do I need to reserve entry or the museum?", a: "Advance park timeslot coordination is recommended because it guarantees entry when there is capacity pressure. For the Yigael Yadin Museum, a separate timed reservation is required even if the museum is included with paid park entry." },
     { q: "How long does a visit to Masada take?", a: "Allow 2–3 hours on site for the main ruins and viewpoints, plus extra time for hiking, the museum, or a separate Dead Sea stop." },
-    { q: "Where does the Masada night show take place?", a: "At Masada West via Arad, not at the eastern cable-car station. It runs on published evenings after sunset with its own tickets and reservation." },
+    { q: "Where does the Masada night show take place?", a: "At Masada West, with separate admission and advance booking. Its seasonal starting times are listed in the visitor information section." },
   ],
   nearby: [
     { label: "Ein Gedi", to: "/attractions/ein-gedi/", note: "A desert oasis with waterfalls and wildlife. Check the currently open trails before visiting." },
     { label: "Qasr el-Yahud", to: "/attractions/qasr-el-yahud/", note: "Historic Jordan River baptism site on the way from Jerusalem." },
-    { label: "Old City of Jerusalem", to: "/attractions/old-city-jerusalem/", note: "Historic religious and cultural landmarks for an overnight or longer trip." },
-    { label: "Mitzpe Ramon", to: "/attractions/mitzpe-ramon-crater/", note: "A longer desert-road journey to the dramatic Makhtesh Ramon landscape." },
-    { label: "Mount of Olives", to: "/attractions/mount-of-olives/", note: "Jerusalem viewpoints, churches and historic sites across from the Old City." },
-    { label: "Mount Zion", to: "/attractions/mount-zion/", note: "Historic churches and landmarks just outside Jerusalem's Old City walls." },
+    { label: "Old City of Jerusalem", to: "/attractions/old-city-jerusalem/", note: "Jerusalem's historic quarters and landmarks, ideal for a separate sightseeing day." },
+    { label: "Mitzpe Ramon", to: "/attractions/mitzpe-ramon-crater/", note: "Ramon Crater's dramatic desert views, best planned as a separate day trip." },
+    { label: "Mount of Olives", to: "/attractions/mount-of-olives/", note: "Panoramic Jerusalem viewpoints and churches to explore on a city sightseeing day." },
+    { label: "Mount Zion", to: "/attractions/mount-zion/", note: "Churches and landmarks just beyond Jerusalem's walls, suitable for a Jerusalem day." },
   ],
   planningLinks: [
     { label: "Jerusalem to the Dead Sea", to: "/travel-blog/jerusalem-to-the-dead-sea/", description: "Build a realistic route from Jerusalem.", icon: "itinerary" },
