@@ -2,11 +2,11 @@ import type { Attraction } from "@/data/attractionGuideTypes";
 import { capernaumSite } from "@/data/capernaumSite";
 import { tabghaSite } from "@/data/tabghaSite";
 import { mountBeatitudesSite } from "@/data/mountBeatitudesSite";
+import { mountTaborSite } from "@/data/mountTaborSite";
 import haifaImg from "@/assets/haifa/panorama.webp";
 import akkoImg from "@/assets/shore-excursions/akko-port.jpg";
 import lake from "@/assets/home/tiberias-lake.webp";
 import roshHanikra from "@/assets/guides/rosh-hanikra.jpg";
-import mountTabor from "@/assets/guides/mount-tabor.jpg";
 export const northernAttractions: Record<string, Attraction> = {
 "sea-of-galilee":{
  title:"Sea of Galilee: shores, historic sites and visitor guide",description:"Discover the Sea of Galilee, Tiberias, Capernaum, Tabgha, Mount of Beatitudes and scenic lakeside sites, with access and planning tips.",
@@ -71,18 +71,16 @@ export const northernAttractions: Record<string, Attraction> = {
  official:[{label:"Bahá’í Gardens official visits",url:"https://ganbahai.org.il/"}],
 },
 "mount-tabor":{
- title:"Mount Tabor: Church of the Transfiguration and Galilee views",description:"Visit Mount Tabor's Church of the Transfiguration, hilltop viewpoints and pilgrimage setting, with advice on shuttle access and opening hours.",
- region:"Sea of Galilee",image:{src:mountTabor,alt:"Church of the Transfiguration on Mount Tabor"},duration:"1–2 hours plus access time",
- intro:"Mount Tabor rises prominently above the Jezreel Valley and is traditionally associated with the Transfiguration of Jesus. The Franciscan sanctuary, views and wooded slopes form the focus of most visits.",
- takeaway:"Reach the base area first and confirm how visitors are currently admitted to the hilltop. Access for large coaches and private vehicles can be restricted, making a local shuttle or taxi necessary.",
- highlights:[
- {name:"Church of the Transfiguration",description:"A Franciscan church marks the Christian tradition of Jesus' transfiguration and is known for its distinctive architecture.",tip:"Dress modestly; services and visitor opening times take precedence."},
- {name:"Hilltop panorama",description:"The summit has viewpoints across the Jezreel Valley and towards Lower Galilee.",tip:"Haze and weather strongly affect the views."},
- {name:"Historic sanctuaries",description:"Remains and neighbouring churches reflect the mountain's long religious significance.",tip:"Confirm which areas are accessible rather than assuming every compound is open."}],
- arrival:["Mount Tabor lies near Daburiyya and Kfar Tavor in Lower Galilee.","Access up the steep road can be restricted; verify local transport at the base.","Public transport to nearby communities is not the same as transport to the summit."],
- planning:["Check religious services, opening times and the current ascent arrangement.","Wear footwear suitable for steps and uneven surfaces.","Allow extra time if a shuttle operates by demand.","Combine with nearby Galilee stops only if time and site access allow."],
- faqs:[{q:"Can a large tour bus drive to the church?",a:"Hilltop vehicle restrictions can apply; check the current local shuttle or taxi arrangement."},{q:"Is Mount Tabor the same as Mount of Beatitudes?",a:"No. Mount Tabor is in Lower Galilee; Mount of Beatitudes overlooks the Sea of Galilee."},{q:"Is the summit open all day?",a:"No. Church and site access depend on current visiting hours and services."}],
- official:[{label:"Christian Information Center",url:"https://www.cicts.org/"}],
+ title:mountTaborSite.title,description:mountTaborSite.description,region:mountTaborSite.region,
+ image:mountTaborSite.hero,duration:mountTaborSite.duration,intro:mountTaborSite.intro,
+ takeaway:"Visit the basilica and enjoy the summit views, allowing time for the winding road.",
+ highlights:[],arrival:[],planning:[],faqs:[],
+ official:[
+  {label:"Christian Information Center — visitor hours",url:mountTaborSite.sources.cic},
+  {label:"Custody of the Holy Land — sanctuary",url:mountTaborSite.sources.franciscan},
+  {label:"Israel Nature and Parks Authority — access",url:mountTaborSite.sources.parks},
+  {label:"KKL-JNF — summit trail",url:mountTaborSite.sources.trail},
+ ],
 },
 // The complete Capernaum article has its own destination-page component.
 // This registry entry supplies SEO/directory metadata only; do not maintain a

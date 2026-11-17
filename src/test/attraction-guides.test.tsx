@@ -18,7 +18,7 @@ describe("17 original attraction destination guides", () => {
       expect(guide.title.length).toBeGreaterThan(22);
       // Upgraded individual-attraction guides use dedicated, researched components.
       // Their legacy registry entries hold metadata rather than duplicate body content.
-      if (id !== "capernaum" && id !== "tabgha" && id !== "mount-of-beatitudes") {
+      if (id !== "capernaum" && id !== "tabgha" && id !== "mount-of-beatitudes" && id !== "mount-tabor") {
         expect(guide.highlights.length).toBeGreaterThanOrEqual(3);
         expect(guide.arrival.length).toBeGreaterThanOrEqual(3);
         expect(guide.faqs.length).toBeGreaterThanOrEqual(3);
