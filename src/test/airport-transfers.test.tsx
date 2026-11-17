@@ -53,7 +53,7 @@ describe("private Ben Gurion transfers", () => {
       if (rate.popular) {
         expect(within(card).getByRole("img")).toHaveAttribute("src", airportHomepageRoutePhotos[rate.id]!.src);
         expect(card).toHaveClass("flex-row", "sm:flex-col");
-        expect(within(card).getByRole("img")).toHaveClass("w-14", "sm:w-36");
+        expect(within(card).getByRole("img")).toHaveClass("w-16", "sm:w-40", "md:w-36", "lg:w-40");
         expect(within(card).getByRole("link", { name: "Request a quote" })).toHaveClass("sm:self-end");
         expect(within(card).getByRole("heading", { level: 3 })).toHaveClass("text-base", "sm:text-xl");
         expect(within(card).getByText(`From ₪${rate.price.amount.toLocaleString("en-US")}`)).toHaveClass("text-[13px]", "font-bold");
@@ -82,12 +82,13 @@ describe("private Ben Gurion transfers", () => {
       expect(card.children[2]).toHaveAttribute("href", "#request-quote");
       expect(card.children[2]).toHaveClass("whitespace-nowrap", "bg-primary", "text-primary-foreground", "justify-self-end");
       expect(card.children[2]).not.toHaveClass("col-span-2");
-      expect(card).toHaveClass("grid-cols-[3.5rem_minmax(0,1fr)_6.5rem]", "sm:grid-cols-[6.5rem_minmax(0,1fr)_8.75rem]");
+      expect(card).toHaveClass("grid-cols-[4rem_minmax(0,1fr)_6.5rem]", "sm:grid-cols-[7rem_minmax(0,1fr)_8.75rem]");
       if (card.dataset["destination"] !== "other") {
         expect(card.children[1]?.querySelector("p")).toHaveClass("text-[13px]", "font-bold");
       }
       expect(card.children[0]).toHaveAttribute("width", "128");
       expect(card.children[0]).toHaveAttribute("height", "85");
+      expect(card.children[0]).toHaveClass("aspect-[3/2]", "w-full", "object-cover");
     }
     expect(new Set(within(more).getAllByRole("img").map(image => image.getAttribute("src"))).size).toBe(8);
     expect(within(more).getByRole("img", { name: airportTransferPhotos["other"]!.alt })).toHaveAttribute("src", airportTransferPhotos["other"]!.src);

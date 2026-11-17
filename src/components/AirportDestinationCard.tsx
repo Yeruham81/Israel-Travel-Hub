@@ -18,7 +18,7 @@ export function AirportDestinationCard({ id, destination, price, photo, onChoose
   // changing the established layout of the four dedicated route pages.
   if (layout === "hub-featured") return <article className="flex h-full min-w-0 flex-row items-center gap-2 rounded-2xl border bg-card p-2.5 transition-colors hover:border-primary/40 sm:flex-col sm:items-stretch sm:gap-0 sm:p-3" data-testid={testId} data-destination={id}>
     {route && <Link to={route.path} className="group flex min-w-0 flex-1 items-center gap-2 rounded-xl focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary sm:gap-4">
-      <img src={photo.src} alt={photo.alt} width={160} height={106} loading="lazy" decoding="async" className="aspect-[3/2] w-14 shrink-0 rounded-lg object-cover sm:w-36 sm:rounded-xl" />
+      <img src={photo.src} alt={photo.alt} width={160} height={106} loading="lazy" decoding="async" className="aspect-[3/2] w-16 shrink-0 rounded-lg object-cover sm:w-40 sm:rounded-xl md:w-36 lg:w-40" />
       <div className="min-w-0 flex-1">
         <h3 className="text-base font-semibold leading-tight sm:text-xl sm:leading-snug">{destination}</h3>
         <p className="mt-0.5 text-[13px] font-bold tabular-nums text-foreground sm:mt-1 sm:text-lg">From ₪{price?.amount.toLocaleString("en-US")}</p>
@@ -30,7 +30,7 @@ export function AirportDestinationCard({ id, destination, price, photo, onChoose
     <a href="#request-quote" onClick={() => onChoose?.(id)} className={`${hubQuoteButtonClass} sm:mt-2 sm:self-end`}>Request a quote</a>
   </article>;
   if (layout === "hub-row") return <article
-    className="grid h-full min-h-[5.5rem] min-w-0 grid-cols-[3.5rem_minmax(0,1fr)_6.5rem] items-center gap-2 rounded-xl border bg-card p-2.5 transition-colors hover:border-primary/40 sm:min-h-[7rem] sm:grid-cols-[6.5rem_minmax(0,1fr)_8.75rem] sm:gap-3 sm:p-3"
+    className="grid h-full min-h-[5.5rem] min-w-0 grid-cols-[4rem_minmax(0,1fr)_6.5rem] items-center gap-2 rounded-xl border bg-card p-2.5 transition-colors hover:border-primary/40 sm:min-h-[7rem] sm:grid-cols-[7rem_minmax(0,1fr)_8.75rem] sm:gap-3 sm:p-3"
     data-testid={testId} data-destination={id}
   >
     <img src={photo.src} alt={photo.alt} width={128} height={85} loading="lazy" decoding="async" className="aspect-[3/2] w-full rounded-lg object-cover" />
