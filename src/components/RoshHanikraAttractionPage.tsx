@@ -56,8 +56,7 @@ export const roshHanikraDestinationContent: AttractionDestinationContent = {
         image={{ src: "/images/attractions/rosh-hanikra-railway-tunnel.webp", alt: "Illuminated rock-cut tunnel at the Rosh Hanikra visitor site" }}
       >
         <p>Near the grottoes, the old railway tunnel recalls the line built through the headland during the Second World War to link Haifa with Beirut and Tripoli. Today the visitor experience includes an audiovisual presentation telling the story of the cliffs, caves and railway.</p>
-        <p>The film provides useful context before or after seeing the natural passages. Screenings are subject to the site's daily operations.</p>
-      </AttractionHighlight>
+              </AttractionHighlight>
       <AttractionHighlight
         title="The chalk headland above the Mediterranean"
         image={{ src: "/images/attractions/rosh-hanikra-cliffs.webp", alt: "White limestone and chalk cliffs at Rosh Hanikra rising directly from the Mediterranean Sea" }}
@@ -69,17 +68,22 @@ export const roshHanikraDestinationContent: AttractionDestinationContent = {
   ),
   visitorContent: (
     <div className="mt-4 space-y-4">
-      <p>Rosh Hanikra's regular visitor ticket covers the cable car, the self-guided grotto walk and the audiovisual presentation. The site resumed welcoming visitors in October 2026 after restoration work.</p>
+      <p>A regular ticket includes the cable car, the self-guided grotto walk and the audiovisual presentation.</p>
       <div className="grid gap-3 sm:grid-cols-2" data-testid="rosh-hanikra-visitor-hours">
         <article className="rounded-xl border bg-card p-4">
           <h3 className="font-serif text-xl font-semibold">Seasonal visiting hours</h3>
           <p className="mt-3 text-sm leading-relaxed sm:text-base">The site is open <strong>every day of the week</strong>. Last cable-car entry is at <strong>{roshHanikraSite.visit.lastCableAutumnWinter} in autumn and winter</strong> and <strong>{roshHanikraSite.visit.lastCableSummer} in summer</strong>. The site closes <strong>{roshHanikraSite.visit.closesAfterLastEntry}</strong> after the last entry.</p>
-          <p className="mt-2 text-sm leading-relaxed sm:text-base">Daily hours are published on the <a href="https://www.rosh-hanikra.com/" target="_blank" rel="noopener noreferrer" className={inlineLink}>official homepage</a> and may change on holidays or because of weather. Check them before your visit.</p>
+          <p className="mt-2 text-sm leading-relaxed sm:text-base">Daily hours are published on the <a href="https://www.rosh-hanikra.com/tq/en/" target="_blank" rel="noopener noreferrer" className={inlineLink}>official homepage</a> and may change on holidays or because of weather. Check them before your visit.</p>
           <a href={roshHanikraSite.sources.info} target="_blank" rel="noopener noreferrer" className="mt-3 inline-flex items-center gap-1 text-sm font-semibold text-primary hover:underline">Additional visitor information <ArrowUpRight className="h-3.5 w-3.5" aria-hidden="true" /></a>
         </article>
         <article className="rounded-xl border bg-card p-4">
           <h3 className="font-serif text-xl font-semibold">Tickets and contact</h3>
-          <p className="mt-3 text-sm leading-relaxed sm:text-base"><strong>Admission:</strong> ₪47 per adult; ₪39 for children under 18, soldiers, senior citizens and visitors with disabilities; ₪29 for children with disabilities. Tickets include the cable car, grotto walk and film. <a href={roshHanikraSite.sources.tickets} target="_blank" rel="noopener noreferrer" className={inlineLink}>Buy tickets on the official site</a>.</p>
+          <ul className="mt-3 space-y-2 text-sm leading-relaxed sm:text-base" aria-label="Admission prices">
+            <li className="flex items-start justify-between gap-3"><span>Adult</span><strong className="shrink-0" dir="ltr">₪47</strong></li>
+            <li className="flex items-start justify-between gap-3"><span>Child aged 3–17, soldier, senior citizen or visitor with a disability</span><strong className="shrink-0" dir="ltr">₪39</strong></li>
+            <li className="flex items-start justify-between gap-3"><span>Child with a disability</span><strong className="shrink-0" dir="ltr">₪29</strong></li>
+          </ul>
+          <p className="mt-3 text-sm leading-relaxed sm:text-base">Child tickets are required from age 3. Admission includes the cable car, grotto walk and film. <a href={roshHanikraSite.sources.tickets} target="_blank" rel="noopener noreferrer" className={inlineLink}>Buy tickets on the official site</a>.</p>
           <p className="mt-2 text-sm leading-relaxed sm:text-base">The operator also offers a <a href={roshHanikraSite.sources.comboAkko} target="_blank" rel="noopener noreferrer" className={inlineLink}>combined ticket with Old Akko</a>. Akko entry can be used separately within seven days of purchase; Rosh Hanikra admission is for the selected visit day.</p>
           <p className="mt-3 text-sm"><strong>Visitor service: </strong><a href={"tel:" + roshHanikraSite.visit.customerServiceHref} dir="ltr" className={inlineLink}>{roshHanikraSite.visit.customerService}</a></p>
           <p className="mt-1 text-sm text-muted-foreground">Sunday–Thursday, 09:00–16:00</p>
