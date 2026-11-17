@@ -138,7 +138,7 @@ export const mountBeatitudesDestinationContent: AttractionDestinationContent = {
       </div>
       <figure className="overflow-hidden rounded-xl border bg-card">
         <img src="/images/attractions/beatitudes-sea-view.webp" alt="Panoramic view of the Sea of Galilee and green hills from the Mount of Beatitudes gardens" loading="lazy" decoding="async" width={768} height={249} className="h-auto w-full object-cover" />
-        <figcaption className="px-3 py-2 text-xs text-muted-foreground">The northern Sea of Galilee seen from the gardens.</figcaption>
+        <figcaption className="px-3 py-2 text-xs text-muted-foreground">The Sea of Galilee as seen from the Mount of Beatitudes.</figcaption>
       </figure>
     </div>
   ),
