@@ -7,7 +7,7 @@ import { CompactCurrencyEquivalents, PriceDisplay } from "@/components/CurrencyR
 const quoteButtonClass = "inline-flex min-h-11 items-center justify-center rounded-lg border border-primary/50 bg-primary/10 px-3 py-2 text-center text-sm font-semibold leading-snug text-primary shadow-sm transition-[background-color,border-color,box-shadow] hover:border-primary/70 hover:bg-primary/15 hover:shadow-md focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary";
 
 // On the airport-transfers hub, match the solid medium-blue CTA used throughout the site.
-const hubQuoteButtonClass = "inline-flex min-h-11 shrink-0 items-center justify-center whitespace-nowrap rounded-lg bg-primary px-2 py-2 text-center text-[11px] font-semibold leading-none text-primary-foreground shadow-sm transition-colors hover:bg-primary/90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary sm:px-3 sm:text-sm";
+const hubQuoteButtonClass = "inline-flex min-h-9 shrink-0 items-center justify-center whitespace-nowrap rounded-lg bg-primary px-1.5 py-1.5 text-center text-[11px] font-semibold leading-none text-primary-foreground shadow-sm transition-colors hover:bg-primary/90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary sm:min-h-10 sm:px-2 sm:text-sm";
 
 export function AirportDestinationCard({ id, destination, price, photo, onChoose, layout = "featured", testId = "airport-destination-card" }: {
   id: string; destination: string; price?: AirportTransferRate["price"]; photo: Pick<StayGuidePhoto, "src" | "alt">;
@@ -20,8 +20,8 @@ export function AirportDestinationCard({ id, destination, price, photo, onChoose
     {route && <Link to={route.path} className="group flex min-w-0 flex-1 items-center gap-2 rounded-xl focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary sm:gap-4">
       <img src={photo.src} alt={photo.alt} width={160} height={106} loading="lazy" decoding="async" className="aspect-[3/2] w-14 shrink-0 rounded-lg object-cover sm:w-36 sm:rounded-xl" />
       <div className="min-w-0 flex-1">
-        <h3 className="text-sm font-semibold leading-tight sm:text-xl sm:leading-snug">{destination}</h3>
-        <p className="mt-1 text-[11px] font-semibold tabular-nums text-foreground sm:text-lg">From ₪{price?.amount.toLocaleString("en-US")}</p>
+        <h3 className="text-base font-semibold leading-tight sm:text-xl sm:leading-snug">{destination}</h3>
+        <p className="mt-0.5 text-[13px] font-bold tabular-nums text-foreground sm:mt-1 sm:text-lg">From ₪{price?.amount.toLocaleString("en-US")}</p>
         {price && <div className="hidden sm:block"><CompactCurrencyEquivalents amount={price.amount} /></div>}
         <p className="mt-0.5 hidden text-xs leading-snug text-muted-foreground sm:block">Weekday · One way · Up to 4 passengers</p>
         <span className="mt-2 hidden text-sm font-semibold text-primary group-hover:underline sm:inline-block">View transfer details</span>
@@ -30,16 +30,16 @@ export function AirportDestinationCard({ id, destination, price, photo, onChoose
     <a href="#request-quote" onClick={() => onChoose?.(id)} className={`${hubQuoteButtonClass} sm:mt-2 sm:self-end`}>Request a quote</a>
   </article>;
   if (layout === "hub-row") return <article
-    className="grid h-full min-h-[5.5rem] min-w-0 grid-cols-[3.5rem_minmax(0,1fr)_7rem] items-center gap-2 rounded-xl border bg-card p-2.5 transition-colors hover:border-primary/40 sm:min-h-[7rem] sm:grid-cols-[6.5rem_minmax(0,1fr)_8.75rem] sm:gap-3 sm:p-3"
+    className="grid h-full min-h-[5.5rem] min-w-0 grid-cols-[3.5rem_minmax(0,1fr)_6.5rem] items-center gap-2 rounded-xl border bg-card p-2.5 transition-colors hover:border-primary/40 sm:min-h-[7rem] sm:grid-cols-[6.5rem_minmax(0,1fr)_8.75rem] sm:gap-3 sm:p-3"
     data-testid={testId} data-destination={id}
   >
     <img src={photo.src} alt={photo.alt} width={128} height={85} loading="lazy" decoding="async" className="aspect-[3/2] w-full rounded-lg object-cover" />
     <div className="min-w-0">
-      <h3 className="text-sm font-semibold leading-tight sm:text-lg sm:leading-snug">{id === "other" ? "Another destination?" : destination}</h3>
-      {price && <p className="mt-1 text-[11px] font-semibold tabular-nums text-foreground sm:text-base">From ₪{price.amount.toLocaleString("en-US")}</p>}
+      <h3 className="text-base font-semibold leading-tight sm:text-lg sm:leading-snug">{id === "other" ? "Another destination?" : destination}</h3>
+      {price && <p className="mt-0.5 text-[13px] font-bold tabular-nums text-foreground sm:mt-1 sm:text-base">From ₪{price.amount.toLocaleString("en-US")}</p>}
       {price && <div className="hidden sm:block"><CompactCurrencyEquivalents amount={price.amount} /></div>}
     </div>
-    <a href="#request-quote" onClick={() => onChoose?.(id)} className={hubQuoteButtonClass}>Request a quote</a>
+    <a href="#request-quote" onClick={() => onChoose?.(id)} className={`${hubQuoteButtonClass} justify-self-end`}>Request a quote</a>
   </article>;
   const compact = layout === "compact";
   const image = <img src={photo.src} alt={photo.alt} width={compact ? 80 : 360} height={compact ? 80 : 240} loading="lazy" decoding="async" className={compact ? "h-20 w-20 shrink-0 rounded-lg object-cover" : "aspect-[3/2] w-full object-cover"} />;

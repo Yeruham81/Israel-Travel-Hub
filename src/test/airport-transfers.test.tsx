@@ -55,12 +55,15 @@ describe("private Ben Gurion transfers", () => {
         expect(card).toHaveClass("flex-row", "sm:flex-col");
         expect(within(card).getByRole("img")).toHaveClass("w-14", "sm:w-36");
         expect(within(card).getByRole("link", { name: "Request a quote" })).toHaveClass("sm:self-end");
+        expect(within(card).getByRole("heading", { level: 3 })).toHaveClass("text-base", "sm:text-xl");
+        expect(within(card).getByText(`From ₪${rate.price.amount.toLocaleString("en-US")}`)).toHaveClass("text-[13px]", "font-bold");
         const routeLink = within(card).getByRole("link", { name: /View transfer details/ });
         expect(router.matchRoutes(new URL(routeLink.getAttribute("href")!, "https://example.test").pathname).at(-1)?.routeId).toContain("airport-transfers");
       } else expect(within(card).getByRole("img")).toHaveAttribute("src", airportDestinationCards.find(item => item.id === rate.id)!.photo.src);
       const quoteButton = within(card).getByRole("link", { name: "Request a quote" });
       expect(quoteButton).toHaveAttribute("href", "#request-quote");
-      expect(quoteButton).toHaveClass("bg-primary", "text-primary-foreground", "whitespace-nowrap", "shadow-sm");
+      expect(quoteButton).toHaveClass("bg-primary", "text-primary-foreground", "whitespace-nowrap", "shadow-sm", "min-h-9", "px-1.5", "sm:min-h-10", "sm:px-2");
+      expect(quoteButton).not.toHaveClass("min-h-11", "px-3");
       expect(quoteButton).not.toHaveClass("bg-primary/10");
       expect(card).toHaveTextContent(rate.price.amount.toLocaleString("en-US"));
       expect(card.querySelector('[data-testid="currency-price"]')).toBeNull();
@@ -74,12 +77,15 @@ describe("private Ben Gurion transfers", () => {
       expect(card).toHaveClass("grid", "h-full");
       expect(card.children[0]?.tagName).toBe("IMG");
       expect(card.children[1]?.querySelector("h3")).not.toBeNull();
-      expect(card.children[1]?.querySelector("h3")).toHaveClass("text-sm");
+      expect(card.children[1]?.querySelector("h3")).toHaveClass("text-base");
       expect(card.children[2]).toHaveTextContent("Request a quote");
       expect(card.children[2]).toHaveAttribute("href", "#request-quote");
-      expect(card.children[2]).toHaveClass("whitespace-nowrap", "bg-primary", "text-primary-foreground");
+      expect(card.children[2]).toHaveClass("whitespace-nowrap", "bg-primary", "text-primary-foreground", "justify-self-end");
       expect(card.children[2]).not.toHaveClass("col-span-2");
-      expect(card).toHaveClass("grid-cols-[3.5rem_minmax(0,1fr)_7rem]", "sm:grid-cols-[6.5rem_minmax(0,1fr)_8.75rem]");
+      expect(card).toHaveClass("grid-cols-[3.5rem_minmax(0,1fr)_6.5rem]", "sm:grid-cols-[6.5rem_minmax(0,1fr)_8.75rem]");
+      if (card.dataset["destination"] !== "other") {
+        expect(card.children[1]?.querySelector("p")).toHaveClass("text-[13px]", "font-bold");
+      }
       expect(card.children[0]).toHaveAttribute("width", "128");
       expect(card.children[0]).toHaveAttribute("height", "85");
     }
