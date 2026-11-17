@@ -63,7 +63,8 @@ describe("October planning, city and heritage guide migration", () => {
   });
 
   it("makes every guide discoverable in the directory, with real local photographs", async () => {
-    expect(ids).toHaveLength(16);
+    // Mount Precipice is now tested as a dedicated attraction, not a legacy TravelGuidePage.
+    expect(ids).toHaveLength(15);
     expect(guideDirectory).toHaveLength(49);
     expect(guideDirectory.some(guide => guide.id === "israel-holidays" && guide.to === "/travel-blog/israel-holidays/")).toBe(true);
     expect(new Set(guideDirectory.map(guide => guide.id)).size).toBe(guideDirectory.length);
