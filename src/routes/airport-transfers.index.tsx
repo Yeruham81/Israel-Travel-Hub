@@ -115,7 +115,7 @@ function Airport() {
       <FaqList faqs={airportTransferFaqs} compact />
       <section id="keep-planning" aria-labelledby="keep-planning-h" className="mt-9">
         <h2 id="keep-planning-h" className="text-2xl font-semibold">Related travel guides</h2>
-        <ul className="mt-4 grid gap-3 sm:grid-cols-2">
+        <ul className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
           {planningLinks.map((guide) => <li key={guide.to} className="min-w-0">
             <Link to={guide.to} className="group flex h-full min-w-0 items-center gap-3 rounded-xl border bg-card p-3 transition-colors hover:border-primary/50 hover:bg-secondary/20 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
               <img src={guide.photo.src} alt={guide.photo.alt} width={112} height={75} loading="lazy" decoding="async" className="aspect-[3/2] w-24 shrink-0 rounded-lg object-cover sm:w-28" />
