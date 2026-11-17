@@ -15,7 +15,7 @@ describe("Magdala individual attraction guide upgrade", () => {
     expect(content.facts).toHaveLength(6);
     expect(content.facts.find(f => f.label === "Archaeological park")?.value).toBe("08:00–17:30");
     expect(content.facts.find(f => f.label === "Duc In Altum")?.value).toBe("08:00–18:00");
-    expect(content.facts.find(f => f.label === "Admission")?.value).toBe("Ask visitor centre");
+    expect(content.facts.find(f => f.label === "Admission")?.value).toBe("Contact visitor centre");
     expect(content.visitorTitle).toBe("Opening hours, tickets and visitor information");
     expect(content.visitorNavLabel).toBe("Hours & tickets");
     expect(travelGuides.magdala.updatedAt).toBe(site.updatedAt);
@@ -40,7 +40,7 @@ describe("Magdala individual attraction guide upgrade", () => {
     for (const src of paths.slice(1)) {
       expect(article.split(src).length - 1, src).toBe(1);
     }
-    expect(content.sources).toHaveLength(5);
+    expect(content.sources).toHaveLength(6);
     expect(content.sources.every(s => s.url.startsWith("https://"))).toBe(true);
   });
 
@@ -62,7 +62,10 @@ describe("Magdala individual attraction guide upgrade", () => {
     expect(article).toContain('rel="sponsored noopener noreferrer"');
     expect(article).toContain('href="#contact"');
     expect(article).toContain('to="/tours/nazareth-sea-of-galilee/"');
-    expect(article).toContain("No current official price list online");
+    expect(article).not.toContain("No current official price list online");
+    expect(article).not.toContain("does not publish a current admission price list");
+    expect(article).not.toContain("How much does it cost to enter Magdala?");
+    expect(article).toContain("For admission details, group rates and guided tours");
     expect(article).not.toContain("₪17");
     expect(article).not.toContain("₪12");
     expect(site.visit.visitorEmail).toBe("visit@magdala.org");
@@ -83,7 +86,14 @@ describe("Magdala individual attraction guide upgrade", () => {
     expect(article).toContain("Streets, marketplace and ritual baths");
     expect(article).toContain("Duc In Altum and the Boat Chapel");
     expect(article).toContain("The Women's Atrium and other chapels");
-    expect(article).toContain("does not publish a current admission price list");
+    expect(article).toContain("The stone displayed in the synagogue is a replica");
+    expect(article).toContain("Israel Antiquities Authority’s collection");
+    expect(article).toContain("24 December, visiting hours are 08:00–12:00");
+    expect(article).toContain("Christmas Day (25 December) and Yom Kippur");
+    expect(article).toContain("floor incorporates first-century paving stones");
+    expect(article).toContain("ancient marketplace near the harbour");
+    expect(site.sources.stoneCatalogue).toContain("metmuseum.org");
+    expect(content.sources.some(source => source.label.includes("Magdala Stone catalogue"))).toBe(true);
     expect(content.nearby?.map(item => item.to)).toEqual([
       "/attractions/tabgha/",
       "/attractions/capernaum/",
