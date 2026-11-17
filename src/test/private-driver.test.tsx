@@ -13,7 +13,7 @@ async function renderDriver() {
   const Page = DriverRoute.options.component!;
   return { ...render(<RouterContextProvider router={router}><Page /></RouterContextProvider>), router };
 }
-function choose(index: number) { fireEvent.click(within(screen.getAllByTestId("driver-journey-card")[index]!).getByRole("link", { name: "Plan this journey" })); }
+function choose(index: number) { fireEvent.click(within(screen.getAllByTestId("driver-journey-card")[index]!).getByRole("link", { name: "Request this journey" })); }
 function fill() {
   for (const [label, value] of [["Full name *", "Jamie Smith"], ["Email address *", "jamie+trip@example.com"], ["Pickup date *", "2099-11-01"], ["Pickup city, hotel or address *", "Hotel A, Tel Aviv"], ["Final drop-off *", "Hotel B, Jerusalem"]]) fireEvent.change(screen.getByLabelText(label!), { target: { value } });
   fireEvent.click(screen.getByRole("checkbox"));
@@ -36,11 +36,40 @@ describe("private driver page and inquiry", () => {
     expect(screen.getByRole("heading", { level: 1 })).toHaveTextContent("Private driver in Israel");
     expect(screen.getByRole("navigation", { name: "Breadcrumb" })).toHaveTextContent("Home /Private driver");
     expect(screen.getAllByTestId("driver-journey-card")).toHaveLength(3);
-    const sections = ["journeys", "request-quote", "benefits", "planning", "how-it-works", "faq", "travel-guides"];
+    const header = screen.getByTestId("hub-header");
+    expect(header).toContainElement(screen.getByRole("heading", { level: 1 }));
+    expect(within(header).getByTestId("guide-hero-media")).toBeInTheDocument();
+    expect(within(header).getByRole("link", { name: "Request a personal quote" })).toHaveAttribute("href", "#request-quote");
+    expect(within(header).getByTestId("author-card")).toBeInTheDocument();
+    expect(screen.getAllByTestId("author-card")).toHaveLength(1);
+    expect(screen.queryByText("Plan the day before requesting a quote")).not.toBeInTheDocument();
+    expect(screen.queryByText("From an idea to an agreed itinerary")).not.toBeInTheDocument();
+    expect(screen.queryByRole("heading", { name: "Tell me where you want to go" })).not.toBeInTheDocument();
+    expect(container.querySelector(".fixed.inset-x-0.bottom-0")).toBeNull();
+    expect(screen.getByRole("region", { name: "A journey planned around you" }).querySelectorAll("h3")).toHaveLength(3);
+    for (const card of screen.getAllByTestId("driver-journey-card")) {
+      expect(within(card).getByRole("link", { name: "Request this journey" })).toHaveAttribute("href", "#request-quote");
+      expect(within(card).getByRole("img")).toHaveClass("aspect-[3/2]");
+    }
+    const sections = ["journeys", "benefits", "request-quote", "faq", "travel-guides", "next-steps"];
     for (let i = 1; i < sections.length; i++) expect(container.querySelector(`#${sections[i - 1]}`)!.compareDocumentPosition(container.querySelector(`#${sections[i]}`)!)).toBe(Node.DOCUMENT_POSITION_FOLLOWING);
     for (const image of screen.getAllByRole("img")) { expect(image).toHaveAttribute("src"); expect(image.getAttribute("alt")).toBeTruthy(); }
+    const guideSection = screen.getByRole("region", { name: "Related travel guides" });
+    expect(guideSection.querySelector("ul")).toHaveClass("sm:grid-cols-2", "lg:grid-cols-3");
     const guides = screen.getAllByTestId("driver-guide-card");
     expect(guides).toHaveLength(6);
+    const relevantPhotos = [
+      ...screen.getAllByTestId("driver-journey-card").map(card => within(card).getByRole("img").getAttribute("src")),
+      ...guides.map(card => within(card).getByRole("img").getAttribute("src")),
+      within(header).getByTestId("guide-hero-media").querySelector("img")?.getAttribute("src"),
+    ];
+    expect(new Set(relevantPhotos).size).toBe(10);
+    const nextSteps = screen.getByRole("region", { name: "Plan the next part of your trip" });
+    expect(nextSteps.querySelector("ul")).toHaveClass("sm:grid-cols-2", "lg:grid-cols-3");
+    expect(within(nextSteps).getAllByRole("link")).toHaveLength(6);
+    for (const link of within(nextSteps).getAllByRole("link")) {
+      expect(router.matchRoutes(link.getAttribute("href")!).at(-1)?.routeId).toBe(link.getAttribute("href")!.replace(/\/$/, ""));
+    }
     for (const card of guides) expect(router.matchRoutes(card.getAttribute("href")!).at(-1)?.routeId).toBe(card.getAttribute("href")!.replace(/\/$/, ""));
     expect(screen.getByRole("link", { name: "Privacy Policy" })).toHaveAttribute("href", "/privacy-policy/");
     expect(screen.queryByText(/Prefer an online form|existing .*contact form/)).not.toBeInTheDocument();
