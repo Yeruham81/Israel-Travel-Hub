@@ -52,12 +52,16 @@ describe("private Ben Gurion transfers", () => {
       const card = container.querySelector(`[data-destination="${rate.id}"]`)! as HTMLElement;
       if (rate.popular) {
         expect(within(card).getByRole("img")).toHaveAttribute("src", airportHomepageRoutePhotos[rate.id]!.src);
+        expect(card).toHaveClass("flex-row", "sm:flex-col");
+        expect(within(card).getByRole("img")).toHaveClass("w-14", "sm:w-36");
+        expect(within(card).getByRole("link", { name: "Request a quote" })).toHaveClass("sm:self-end");
         const routeLink = within(card).getByRole("link", { name: /View transfer details/ });
         expect(router.matchRoutes(new URL(routeLink.getAttribute("href")!, "https://example.test").pathname).at(-1)?.routeId).toContain("airport-transfers");
       } else expect(within(card).getByRole("img")).toHaveAttribute("src", airportDestinationCards.find(item => item.id === rate.id)!.photo.src);
       const quoteButton = within(card).getByRole("link", { name: "Request a quote" });
       expect(quoteButton).toHaveAttribute("href", "#request-quote");
-      expect(quoteButton).toHaveClass("border-primary/50", "bg-primary/10", "shadow-sm");
+      expect(quoteButton).toHaveClass("bg-primary", "text-primary-foreground", "whitespace-nowrap", "shadow-sm");
+      expect(quoteButton).not.toHaveClass("bg-primary/10");
       expect(card).toHaveTextContent(rate.price.amount.toLocaleString("en-US"));
       expect(card.querySelector('[data-testid="currency-price"]')).toBeNull();
     }
@@ -65,14 +69,17 @@ describe("private Ben Gurion transfers", () => {
     expect(within(more).getAllByTestId("airport-destination-card").map((card) => card.dataset["destination"])).toEqual(["raanana", "herzliya", "netanya", "ashdod", "caesarea", "nazareth", "eilat", "other"]);
     expect(within(more).getAllByRole("img")).toHaveLength(8);
     expect(more.querySelector(".auto-rows-fr")).not.toBeNull();
+    expect(more.querySelector(".lg\\:grid-cols-2")).not.toBeNull();
     for (const card of within(more).getAllByTestId("airport-destination-card")) {
       expect(card).toHaveClass("grid", "h-full");
       expect(card.children[0]?.tagName).toBe("IMG");
       expect(card.children[1]?.querySelector("h3")).not.toBeNull();
+      expect(card.children[1]?.querySelector("h3")).toHaveClass("text-sm");
       expect(card.children[2]).toHaveTextContent("Request a quote");
       expect(card.children[2]).toHaveAttribute("href", "#request-quote");
-      expect(card.children[2]).toHaveClass("whitespace-nowrap", "col-span-2", "lg:col-span-1");
-      expect(card).toHaveClass("grid-cols-[5.25rem_minmax(0,1fr)]", "sm:grid-cols-[6.5rem_minmax(0,1fr)]", "lg:grid-cols-[6.5rem_minmax(0,1fr)_8.75rem]");
+      expect(card.children[2]).toHaveClass("whitespace-nowrap", "bg-primary", "text-primary-foreground");
+      expect(card.children[2]).not.toHaveClass("col-span-2");
+      expect(card).toHaveClass("grid-cols-[3.5rem_minmax(0,1fr)_7rem]", "sm:grid-cols-[6.5rem_minmax(0,1fr)_8.75rem]");
       expect(card.children[0]).toHaveAttribute("width", "128");
       expect(card.children[0]).toHaveAttribute("height", "85");
     }

@@ -81,7 +81,7 @@ function Airport() {
       </section>
       <section id="more-destinations" aria-labelledby="more-h" className="mt-9 scroll-mt-24">
         <h2 id="more-h" className="text-2xl font-semibold">More destinations from Ben Gurion Airport</h2>
-        <div className="mt-4 grid auto-rows-fr gap-2 sm:grid-cols-2">
+        <div className="mt-4 grid auto-rows-fr gap-2 lg:grid-cols-2">
           {airportDestinationCards.filter((card) => !card.popular).map((card) => <DestinationCard key={card.id} id={card.id} destination={card.destination} price={card.price} photo={card.photo} onChoose={choose} layout="hub-row" />)}
           <DestinationCard id="other" destination="Another destination?" photo={airportTransferPhotos["other"]!} onChoose={choose} layout="hub-row" />
         </div>
