@@ -74,7 +74,11 @@ describe("Rosh Hanikra attraction guide", () => {
     expect(article).toContain("Nahariya");
     expect(article).toContain("Haifa–Beirut–Tripoli railway");
     expect(article).toContain("Elephant's Foot");
-    expect(article).toContain("October 2026");
+    expect(article).not.toContain("October 2026");
+    expect(article).toContain("https://www.rosh-hanikra.com/tq/en/");
+    expect(article).toContain("Child tickets are required from age 3.");
+    expect(article).toContain('aria-label="Admission prices"');
+    expect(article).not.toContain("Screenings are subject to");
     expect(article).toContain("not a swimming beach");
     expect(article).toContain("https://bus.gov.il/en/home");
     expect(article).toContain('carRentalAffiliateUrl("/attractions/rosh-hanikra/")');
