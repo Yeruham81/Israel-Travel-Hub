@@ -1,6 +1,6 @@
 import type { Attraction } from "@/data/attractionGuideTypes";
 import deadSea from "@/assets/dead-sea/landscape.webp";
-import einGedi from "@/assets/dead-sea/ein-gedi.webp";
+import { einGediCardPhoto } from "@/data/einGediCardPhoto";
 import ramonCrater from "@/assets/guides/mitzpe-ramon-crater.jpg";
 export const desertAttractions: Record<string, Attraction> = {
 "dead-sea-attractions": {
@@ -33,7 +33,7 @@ export const desertAttractions: Record<string, Attraction> = {
  official:[{label:"Israel Nature and Parks Authority",url:"https://en.parks.org.il/"}],
 },
 "ein-gedi":{
- title:"Ein Gedi Nature Reserve: waterfalls, trails and visitor advice",description:"Plan Ein Gedi Nature Reserve near the Dead Sea, including Nahal David, Nahal Arugot, springs, wildlife and current trail restrictions.",region:"Dead Sea & Negev",image:{src:einGedi,alt:"Desert oasis vegetation near Ein Gedi"},duration:"2–4 hours for an accessible open route",
+ title:"Ein Gedi Nature Reserve: waterfalls, trails and visitor advice",description:"Plan Ein Gedi Nature Reserve near the Dead Sea, including Nahal David, Nahal Arugot, springs, wildlife and current trail restrictions.",region:"Dead Sea & Negev",image:einGediCardPhoto,duration:"2–4 hours for an accessible open route",
  intro:"Ein Gedi is a desert oasis beside the Dead Sea, known for springs, ravines and ibex. Its streams and canyon paths are weather-sensitive, and damage from rockfalls and flash floods means the open trail network can change.",
  takeaway:"Check the reserve's official, date-specific opening announcement before setting out. Choose only an open trail appropriate to the group's ability and allow for significant heat even when water is present.",
  highlights:[
