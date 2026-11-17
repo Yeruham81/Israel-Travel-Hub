@@ -52,7 +52,7 @@ describe("Tabgha visitor guide follows the individual-attraction template", () =
     ]);
     expect(content.planningLinks).toHaveLength(6);
     expect(new Set(content.nearby?.map(item => String(item.to))).size).toBe(6);
-    expect(content.sources).toHaveLength(5);
+    expect(content.sources).toHaveLength(6);
     expect(content.sources.every(s => s.url.startsWith("https://"))).toBe(true);
   });
 
@@ -64,7 +64,12 @@ describe("Tabgha visitor guide follows the individual-attraction template", () =
     expect(article).toContain('data-testid="tabgha-mobile-hours"');
     expect(article).toContain('data-testid="tabgha-visitor-table"');
     expect(article).toContain('data-testid="tabgha-location-map"');
-    expect(article).toContain("hl=en&z=12");
+    expect(article).toContain("saddr=32.87326%2C35.54955");
+    expect(article).toContain("daddr=32.871858%2C35.5503");
+    expect(article).toContain("The two Tabgha churches");
+    expect(article).toContain("1. Church of the Multiplication (inland)");
+    expect(article).toContain("2. Church of the Primacy of Peter (lakeside)");
+    expect(article).toContain("View both on Google Maps");
     expect(article).toContain("maps/dir/?api=1&destination=Church%20of%20the%20Multiplication");
     expect(article).toContain("maps/dir/?api=1&destination=Church%20of%20the%20Primacy");
     expect(article).toContain("https://bus.gov.il/en/Geographic-Area");
@@ -78,6 +83,13 @@ describe("Tabgha visitor guide follows the individual-attraction template", () =
     expect(article).toContain("tabghaSite.primacy.hours");
     expect(article).toContain("tabghaSite.sources.multiplicationHours");
     expect(article).toContain("tabghaSite.sources.primacyHours");
+    expect(article).toContain("tabghaSite.sources.primacyAccessibility");
+    expect(article).toContain("An access ramp was installed at the Primacy chapel");
+    expect(article).toContain("Car and coach parking is available around Tabgha");
+    expect(content.visitorTitle).toBe("Opening hours and visitor information");
+    expect(content.visitorNavLabel).toBe("Opening hours & visits");
+    expect(shell).toContain('content.visitorTitle ?? "Opening hours, tickets and practical information"');
+    expect(shell).toContain('content.visitorNavLabel ?? "Opening hours & tickets"');
     expect(article).toContain("site.source}</a>");
     expect(article).not.toContain(">Official hours</a>");
     expect(article).toContain('href={"tel:" + site.phoneHref}');
