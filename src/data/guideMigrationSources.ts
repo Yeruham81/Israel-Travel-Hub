@@ -277,10 +277,34 @@ export const migrationSources: SourceReference[] = [
   {
     "id": "m26-annunciation",
     "title": "Nazareth – Basilica of the Annunciation",
-    "publisher": "Custodia di Terra Santa",
+    "publisher": "Custody of the Holy Land",
     "url": "https://www.custodia.org/en/sanctuaries/nazareth-basilica-of-the-annunciation/",
-    "checkedAt": "2026-10-20",
-    "note": "Sanctuary identity and history; the Mount Precipice identification is described as medieval tradition rather than archaeological proof."
+    "checkedAt": "2026-11-17",
+    "note": "Franciscan sanctuary, lower grotto, upper basilica, architecture and visitor information."
+  },
+  {
+    "id": "m26-annunciation-hours",
+    "title": "Shrine opening hours – Nazareth Basilica and St. Joseph",
+    "publisher": "Christian Information Center",
+    "url": "https://www.cicts.org/our-services/",
+    "checkedAt": "2026-11-17",
+    "note": "Regular visitor hours, last entry, quiet prayer time and Holy Week changes."
+  },
+  {
+    "id": "m26-annunciation-brochure",
+    "title": "Nazareth: Basilica of the Annunciation – visitor brochure",
+    "publisher": "Custody of the Holy Land",
+    "url": "https://www.custodia.org/wp-content/uploads/2024/12/ENG-nazaret-bis.pdf",
+    "checkedAt": "2026-11-17",
+    "note": "History of earlier churches, archaeological remains and sanctuary information."
+  },
+  {
+    "id": "m26-annunciation-parish",
+    "title": "Nazareth Parish – Church of the Annunciation",
+    "publisher": "Latin Patriarchate of Jerusalem",
+    "url": "https://www.lpj.org/en/the-patriarchate/diocese/parishes/israel-1/nazareth-parish-church-of-the-annunciation",
+    "checkedAt": "2026-11-17",
+    "note": "Parish contact and Mass schedule."
   },
   {
     "id": "m26-cicts",

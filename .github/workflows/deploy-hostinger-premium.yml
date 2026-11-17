@@ -202,7 +202,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          for path in / /travel-blog/ /travel-blog/uber-in-israel/ /attractions/capernaum/ /attractions/mount-precipice/ /attractions/tel-megiddo/ /api/quote-request/ /api/exchange-rates/; do
+          for path in / /travel-blog/ /travel-blog/uber-in-israel/ /attractions/capernaum/ /attractions/mount-precipice/ /attractions/tel-megiddo/ /attractions/basilica-of-the-annunciation/ /api/quote-request/ /api/exchange-rates/; do
             status="$(curl --retry 2 --retry-delay 2 --max-time 20 -L -sS -o /dev/null -w '%{http_code}' "$VITE_CANONICAL_ORIGIN$path")"
             echo "$path -> HTTP $status"
             [[ "$status" == "200" ]] || { echo "::error::Website smoke test failed for $path"; exit 1; }
@@ -295,5 +295,40 @@ jobs:
             fi
             rm -f "$image_file"
             echo "Tel Megiddo image $image_name -> valid WebP"
+          done
+          # Check the published Nazareth Basilica of the Annunciation and its four photographs.
+          annunciation_html="$(mktemp)"
+          curl --retry 2 --max-time 20 -fsSL -o "$annunciation_html" "$VITE_CANONICAL_ORIGIN/attractions/basilica-of-the-annunciation/"
+          node - "$annunciation_html" "$VITE_CANONICAL_ORIGIN/attractions/basilica-of-the-annunciation/" <<'NODE'
+          const fs = require("node:fs");
+          const html = fs.readFileSync(process.argv[2], "utf8");
+          const expectedUrl = process.argv[3];
+          const canonicalLinks = [...html.matchAll(/<link\b[^>]*>/gi)]
+            .map(match => match[0]).filter(tag => /\brel=["']canonical["']/i.test(tag));
+          if (!/<title[^>]*>[^<]*Basilica of the Annunciation[^<]*<\/title>/i.test(html)) {
+            console.error("::error::Published Annunciation basilica title is missing");
+            process.exit(1);
+          }
+          if (!html.includes('data-testid="annunciation-visitor-hours"') || !html.includes('data-testid="attraction-at-a-glance"')) {
+            console.error("::error::Published Annunciation basilica visitor sections are missing");
+            process.exit(1);
+          }
+          if (!canonicalLinks.some(tag => tag.includes('href="' + expectedUrl + '"'))) {
+            console.error("::error::Published Annunciation basilica canonical URL is wrong");
+            process.exit(1);
+          }
+          console.log("Annunciation basilica published title, visiting information and canonical verified.");
+          NODE
+          rm -f "$annunciation_html"
+          for image_name in annunciation-grotto.webp annunciation-upper-basilica.webp annunciation-marian-mosaics.webp annunciation-dome.webp; do
+            image_file="$(mktemp)"
+            curl --retry 2 --max-time 20 -fsSL -o "$image_file" "$VITE_CANONICAL_ORIGIN/images/attractions/$image_name"
+            if [[ "$(file --mime-type -b "$image_file")" != "image/webp" ]]; then
+              rm -f "$image_file"
+              echo "::error::Annunciation image $image_name did not return a valid WebP"
+              exit 1
+            fi
+            rm -f "$image_file"
+            echo "Annunciation image $image_name -> valid WebP"
           done
           echo "Source-controlled static guides published; existing PHP APIs still respond to GET."

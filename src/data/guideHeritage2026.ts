@@ -4,6 +4,7 @@ import { magdalaSite } from "@/data/magdalaSite";
 import { yardenitSite } from "@/data/yardenitSite";
 import { mountPrecipiceSite } from "@/data/mountPrecipiceSite";
 import { telMegiddoSite } from "@/data/telMegiddoSite";
+import { annunciationSite } from "@/data/annunciationSite";
 
 export const heritageGuides = {
   "megiddo": {
@@ -48,169 +49,27 @@ export const heritageGuides = {
   },
   "annunciation": {
     "id": "annunciation",
-    "updatedAt": "2026-10-20",
-    "title": "Basilica of the Annunciation, Nazareth: a visitor guide",
-    "description": "Explore Nazareth’s Basilica of the Annunciation, the grotto, upper church and Marian artworks, with worship, dress, accessibility and transport advice.",
-    "intro": "The Basilica of the Annunciation is a central landmark of Nazareth and a major Catholic pilgrimage sanctuary. Its modern church shelters layers of earlier worship and the grotto associated in Catholic tradition with the Annunciation. Plan time to experience the spaces quietly, rather than treating the basilica as a brief exterior photograph.",
-    "answer": "Visit the lower sanctuary and the upper church when access permits, and look at the international Marian artworks around the complex. Worship, ceremonies and individual visitor arrangements shape what you can enter. This Catholic basilica is distinct from the Greek Orthodox Annunciation church associated with Mary’s Well.",
-    "topics": [
-      "attractions",
-      "destinations",
-      "religion"
-    ],
-    "photo": P["basilica-of-the-annunciation"],
-    "facts": [
-      {
-        "label": "Setting",
-        "text": "Central Nazareth, with separate lower and upper spaces"
-      },
-      {
-        "label": "Tradition",
-        "text": "Catholic association with the Annunciation"
-      },
-      {
-        "label": "Visit respectfully",
-        "text": "Services and posted instructions take priority"
-      }
-    ],
-    "comparison": {
-      "caption": "What to see in the sanctuary",
-      "headers": [
-        "Area",
-        "Why it matters",
-        "How to approach it"
-      ],
-      "rows": [
-        [
-          "Lower sanctuary and grotto",
-          "The focus of the Catholic tradition",
-          "Respect prayer space and any restricted access"
-        ],
-        [
-          "Upper church",
-          "A large worship setting and religious art",
-          "Check whether a service is taking place"
-        ],
-        [
-          "Marian artworks",
-          "Depictions from different communities and countries",
-          "Leave time to look beyond the main grotto"
-        ],
-        [
-          "Nearby Nazareth sites",
-          "Additional churches and old-city streets",
-          "Separate opening and walking arrangements"
-        ]
-      ]
-    },
-    "sections": [
-      {
-        "id": "tradition",
-        "title": "A living sanctuary with a layered history",
-        "paragraphs": [
-          "The modern basilica stands at a site associated with earlier Christian churches and the Catholic tradition of Mary’s home. Its significance combines religious memory, architecture and continuing worship. Historical building phases and the faith tradition are related subjects, but they should not be described as identical kinds of evidence.",
-          "Nazareth contains other Annunciation-related places, including the Greek Orthodox church near Mary’s Well. Confirm which sanctuary you mean when arranging a meeting point or a guide; similar English names do not identify the same entrance."
-        ]
-      },
-      {
-        "id": "grotto-upper-church",
-        "title": "The grotto and the upper church",
-        "paragraphs": [
-          "The lower sanctuary focuses attention on the grotto, while the upper church offers a larger worship space. Allow a visit to unfold around services and the permitted visitor route. Not every altar, chapel or ceremonial area is open for casual entry at all times.",
-          "The Marian images and mosaics contributed by different countries give the visit an international dimension. Look at them at a respectful pace, follow photography instructions and avoid blocking those coming to pray."
-        ],
-        "photo": P["annunciation-interior"]
-      },
-      {
-        "id": "worship",
-        "title": "Dress, services and organised prayer",
-        "paragraphs": [
-          "Wear clothing appropriate for a religious site and follow the posted dress instructions. Keep voices low and ask before photographing worshippers. A sightseeing visit is not permission to conduct a private ceremony, use a reserved space or enter during every service.",
-          "If your group needs Mass, a particular language or organised prayer, coordinate with the sanctuary before fixing the rest of the day. Religious calendars can affect Nazareth visits differently from a regular weekday timetable."
-        ],
-        "links": [
-          {
-            "label": "Check religious calendars",
-            "to": "/travel-blog/calendar-of-events/"
-          },
-          {
-            "label": "Compare Jerusalem church visits",
-            "to": "/travel-blog/churches-in-jerusalem/"
-          }
-        ]
-      },
-      {
-        "id": "arrival",
-        "title": "Getting to central Nazareth",
-        "paragraphs": [
-          "Give a driver the exact basilica entrance or a confirmed nearby drop-off rather than only the city name. Parking and old-city walking can take extra time. If arriving by intercity bus, check the remaining local journey and the return service before setting off.",
-          "For mobility needs, ask about the actual entrances, levels and assistance needed for your chosen route. A modern building does not guarantee that every adjoining historic area can be reached without steps."
-        ]
-      },
-      {
-        "id": "day-plan",
-        "title": "Build a focused Nazareth and Galilee day",
-        "paragraphs": [
-          "A basilica visit and a meal or old-city walk can form the centre of the day. Mount Precipice is a separate viewpoint outing; Mount Tabor and the Sea of Galilee require distinct road journeys. Choose the sites most important to your visit rather than rushing a long list of churches.",
-          "For a private journey, agree whether the booking includes a licensed guide, transport only, waiting and admissions. Keep any worship appointment as a fixed time allowance in the itinerary."
-        ],
-        "links": [
-          {
-            "label": "Add a Mount Precipice viewpoint",
-            "to": "/attractions/mount-precipice/"
-          },
-          {
-            "label": "Explore the Sea of Galilee",
-            "to": "/travel-blog/sea-of-galilee/"
-          },
-          {
-            "label": "Discuss a custom journey",
-            "to": "/private-driver/"
-          }
-        ]
-      }
-    ],
-    "checklist": [
-      "Confirm the sanctuary and exact entrance",
-      "Check visitor access around services",
-      "Arrange any ceremony or group prayer separately",
-      "Dress respectfully and follow photography rules",
-      "Ask about the route between levels if needed",
-      "Leave enough time for Nazareth itself"
-    ],
-    "faqs": [
-      {
-        "q": "Is this the same church as the one near Mary’s Well?",
-        "a": "No. The Catholic basilica and the Greek Orthodox Annunciation church are distinct sanctuaries with different entrances and arrangements."
-      },
-      {
-        "q": "Can I visit during every service?",
-        "a": "Worship takes priority. Follow the sanctuary’s current visitor instructions and coordinate organised religious activities in advance."
-      },
-      {
-        "q": "Does a private driver automatically provide guiding inside?",
-        "a": "No. Agree whether licensed guiding, admissions and any sanctuary arrangements are included separately from transport."
-      }
-    ],
-    "related": [
-      "precipice",
-      "magdala",
-      "yardenit",
-      "calendar"
-    ],
-    "services": [
-      {
-        "label": "Plan a northern day from Jerusalem",
-        "to": "/travel-blog/day-trips-from-jerusalem/"
-      },
-      {
-        "label": "Plan a northern day from Tel Aviv",
-        "to": "/travel-blog/day-trips-from-tel-aviv/"
-      }
-    ],
+    "updatedAt": annunciationSite.updatedAt,
+    "title": annunciationSite.title,
+    "description": annunciationSite.description,
+    "intro": annunciationSite.intro,
+    "answer": "Visit the Grotto of the Annunciation and the upper church, then enjoy the international Marian artwork and nearby Nazareth sites.",
+    "topics": ["attractions", "destinations", "religion"],
+    "photo": annunciationSite.hero,
+    // The complete visitor article is maintained in AnnunciationAttractionPage.
+    // Retain the registry entry only for SEO metadata and attraction directory links.
+    "facts": [],
+    "comparison": { "caption": "", "headers": [], "rows": [] },
+    "sections": [],
+    "checklist": [],
+    "faqs": [],
+    "related": [],
+    "services": [],
     "sourceIds": [
       "m26-annunciation",
-      "m26-cicts"
+      "m26-annunciation-hours",
+      "m26-annunciation-brochure",
+      "m26-annunciation-parish"
     ]
   },
   "magdala": {
