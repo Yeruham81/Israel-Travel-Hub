@@ -33,7 +33,7 @@ export const magdalaDestinationContent: AttractionDestinationContent = {
     { icon: "duration", label: "Time needed", value: "60–90 minutes", note: "Archaeology and Duc In Altum" },
     { icon: "hours", label: "Archaeological park", value: visit.archaeologyHours, note: "Daily · visitor centre too" },
     { icon: "hours", label: "Duc In Altum", value: visit.prayerCentreHours, note: "Daily · prayer centre" },
-    { icon: "admission", label: "Admission", value: "Contact visitor centre", note: "Tickets and group visits" },
+    { icon: "admission", label: "Admission", value: `${visit.regularAdmissionPrice} (ages 13+)`, note: `${visit.groupAdmissionPrice} per visitor in groups of ${visit.groupMinimumSize}+` },
     { icon: "access", label: "Getting there", value: "Route 90", note: "Car, taxi, local bus or tour" },
   ],
   highlightContent: (
@@ -84,7 +84,11 @@ export const magdalaDestinationContent: AttractionDestinationContent = {
         </article>
         <article className="rounded-xl border bg-card p-4">
           <h3 className="font-serif text-xl font-semibold">Tickets and guided visits</h3>
-          <p className="mt-3 text-sm leading-relaxed sm:text-base">For admission details, group rates and guided tours, contact the visitor centre directly.</p>
+          <dl className="mt-3 space-y-2 text-sm leading-relaxed sm:text-base">
+            <div className="flex items-start justify-between gap-3"><dt>Visitors over age 12</dt><dd className="shrink-0 font-semibold" dir="ltr">{visit.regularAdmissionPrice}</dd></div>
+            <div className="flex items-start justify-between gap-3"><dt>Group of {visit.groupMinimumSize} or more (per person)</dt><dd className="shrink-0 font-semibold" dir="ltr">{visit.groupAdmissionPrice}</dd></div>
+          </dl>
+          <p className="mt-3 text-sm leading-relaxed sm:text-base">Rates confirmed directly with the visitor centre. For other admission categories and guided visits, contact the visitor centre.</p>
           <a href={"mailto:" + visit.visitorEmail} className={"mt-2 inline-block text-sm " + inlineLink}>{visit.visitorEmail}</a>
           <p className="mt-1 text-sm"><a href={"tel:" + visit.visitorPhoneHref} className={inlineLink} dir="ltr">{visit.visitorPhone}</a></p>
           <a href={sources.contact} target="_blank" rel="noopener noreferrer" className="mt-3 inline-flex items-center gap-1 text-sm font-semibold text-primary hover:underline">Official visitor centre contacts <ArrowUpRight className="h-3.5 w-3.5" aria-hidden="true" /></a>
