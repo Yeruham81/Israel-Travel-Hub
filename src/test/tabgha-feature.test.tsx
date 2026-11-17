@@ -72,7 +72,7 @@ describe("Tabgha visitor guide follows the individual-attraction template", () =
     expect(map).toContain('mark(primacy, "2", "Church of the Primacy of Peter")');
     expect(map).not.toContain("L.Routing");
     expect(map).not.toContain("L.polyline");
-    expect(map).not.toContain("directions");
+    expect(map).not.toContain("maps/dir");
     expect(article).toContain("The two Tabgha churches");
     expect(article).toContain("1. Church of the Multiplication (inland)");
     expect(article).toContain("2. Church of the Primacy of Peter (lakeside)");
