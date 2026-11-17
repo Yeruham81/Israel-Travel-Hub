@@ -8,8 +8,9 @@ import { tabghaSite } from "@/data/tabghaSite";
 import galileePhoto from "@/assets/home/hero-galilee-sm.webp";
 import { carRentalAffiliateUrl } from "@/lib/car-rental-affiliate";
 
-// A dedicated local map shows both churches as independent pins, without a route.
-const tabghaMapEmbed = "/maps/tabgha-churches.html";
+// One location pin gives visitors the general position of Tabgha without displaying a route.
+const tabghaMapEmbed = "https://maps.google.com/maps?q=Tabgha%2C%20Israel&hl=en&z=15&t=m&output=embed";
+const tabghaMapLarger = "https://www.google.com/maps/search/?api=1&query=Tabgha%2C%20Israel&hl=en";
 const multiplicationDirections = "https://www.google.com/maps/dir/?api=1&destination=Church%20of%20the%20Multiplication%2C%20Tabgha%2C%20Israel&travelmode=driving";
 const primacyDirections = "https://www.google.com/maps/dir/?api=1&destination=Church%20of%20the%20Primacy%20of%20Peter%2C%20Tabgha%2C%20Israel&travelmode=driving";
 
@@ -154,17 +155,13 @@ export const tabghaDestinationContent: AttractionDestinationContent = {
           </article>
           <article className="rounded-xl border bg-card p-4">
             <div className="flex items-center gap-2"><BusFront className="h-5 w-5 text-primary" aria-hidden="true" /><h3 className="font-semibold">By public transport</h3></div>
-            <p className="mt-2 text-sm leading-relaxed">You can reach Tabgha by bus from Tiberias, but it is not the most convenient option for visitors, especially if you want to explore several sites around the Sea of Galilee in one day. Check bus times and the walk from your stop with the <a href="https://bus.gov.il/en/homeen/home" target="_blank" rel="noopener noreferrer" className="font-semibold text-primary underline underline-offset-4">official public transport planner</a>. For a more flexible day, I recommend <a href={carRentalAffiliateUrl("/attractions/tabgha/")} target="_blank" rel="sponsored noopener noreferrer" className="font-semibold text-primary underline underline-offset-4">renting a car</a>, joining an <Link to="/tours/nazareth-sea-of-galilee/" className="font-semibold text-primary underline underline-offset-4">organised Galilee tour</Link>, or <a href="#contact" className="font-semibold text-primary underline underline-offset-4">arranging a private day trip with a driver</a>.</p>
+            <p className="mt-2 text-sm leading-relaxed">You can reach Tabgha by bus from Tiberias, but it is not the most convenient option for visitors, especially if you want to explore several sites around the Sea of Galilee in one day. Check bus times and the walk from your stop with the <a href="https://bus.gov.il/en/home" target="_blank" rel="noopener noreferrer" className="font-semibold text-primary underline underline-offset-4">official public transport planner</a>. For a more flexible day, I recommend <a href={carRentalAffiliateUrl("/attractions/tabgha/")} target="_blank" rel="sponsored noopener noreferrer" className="font-semibold text-primary underline underline-offset-4">renting a car</a>, joining an <Link to="/tours/nazareth-sea-of-galilee/" className="font-semibold text-primary underline underline-offset-4">organised Galilee tour</Link>, or <a href="#contact" className="font-semibold text-primary underline underline-offset-4">arranging a private day trip with a driver</a>.</p>
           </article>
         </div>
         <div className="rounded-xl border bg-card p-3" data-testid="tabgha-location-map">
-          <h3 className="text-sm font-semibold">The two Tabgha churches</h3>
-          <iframe title="Map showing the Church of the Multiplication and the Church of the Primacy of Peter at Tabgha" src={tabghaMapEmbed} loading="lazy" referrerPolicy="strict-origin-when-cross-origin" className="mt-2 h-52 w-full rounded-lg border-0 sm:h-60 lg:h-56" />
-          <div className="mt-2 grid gap-1 text-xs leading-relaxed">
-            <a href={multiplicationDirections} target="_blank" rel="noopener noreferrer" className="font-semibold text-primary hover:underline">1. Church of the Multiplication (inland)</a>
-            <a href={primacyDirections} target="_blank" rel="noopener noreferrer" className="font-semibold text-primary hover:underline">2. Church of the Primacy of Peter (lakeside)</a>
-          </div>
-          <a href={tabghaMapEmbed} target="_blank" rel="noopener noreferrer" className="mt-2 inline-flex items-center gap-1 text-xs font-semibold text-primary hover:underline">Open larger map <ArrowUpRight className="h-3.5 w-3.5" aria-hidden="true" /></a>
+          <h3 className="text-sm font-semibold">Where is Tabgha?</h3>
+          <iframe title="Google Maps location of Tabgha on the Sea of Galilee" src={tabghaMapEmbed} loading="lazy" referrerPolicy="strict-origin-when-cross-origin" className="mt-2 h-52 w-full rounded-lg border-0 sm:h-60 lg:h-56" />
+          <a href={tabghaMapLarger} target="_blank" rel="noopener noreferrer" className="mt-2 inline-flex items-center gap-1 text-xs font-semibold text-primary hover:underline">View larger map <ArrowUpRight className="h-3.5 w-3.5" aria-hidden="true" /></a>
         </div>
       </div>
     </div>
