@@ -844,7 +844,7 @@ describe("migrated practical guides", () => {
     for (const [label, url] of ([
       ["Look up Shabbat times on MyZmanim", "https://www.myzmanim.com/"],
       ["Israel Railways — official timetable", "https://rail.co.il/?lan=en"],
-      ["National Public Transport Authority — route planner", "https://route.bus.gov.il/?saveParams=true&tab=source-destination"],
+      ["National Public Transport Authority — route planner", "https://bus.gov.il/en/home"],
     ] as const)) {
       const link = within(container).getByRole("link", { name: new RegExp(label) });
       expect(link).toHaveAttribute("href", url);
