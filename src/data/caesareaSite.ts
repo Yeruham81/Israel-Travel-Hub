@@ -20,6 +20,7 @@ export const caesareaSite = {
     groupThreshold: "over 30",
     harborOnly: "₪18",
     student: "₪39",
+    soldier: "₪27",
     israeliSenior: "₪23",
     parkPhone: "04-6267080",
     parkPhoneHref: "+97246267080",
