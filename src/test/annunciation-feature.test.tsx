@@ -1,5 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { existsSync, readFileSync } from "node:fs";
+import { createHash } from "node:crypto";
 import { annunciationDestinationContent as content } from "@/components/AnnunciationAttractionPage";
 import { annunciationSite as site } from "@/data/annunciationSite";
 import { travelGuides } from "@/data/travelGuides";
@@ -59,6 +60,15 @@ describe("Basilica of the Annunciation attraction guide", () => {
     expect(site.hours.lastEntry).toBe("17:45");
     expect(site.hours.eveningPrayer).toBe("18:00–21:00");
     expect(article).toContain("St. Joseph's Church");
+    expect(article).toContain("visited on request");
+    expect(article).toContain("sanctuary's visitor information");
+    expect(article).toContain("Casa Nova Street");
+    expect(article).toContain("Franciscan Casa Nova guesthouse");
+    expect(article).toContain("Nazareth parish's published Mass schedule");
+    expect(article).toContain("Sightseeing ends at 18:00.");
+    expect(article).toContain("silent prayer only");
+    expect(article).toContain("mount-precipice-jezreel-view.webp");
+    expect(article).not.toContain('src="/images/attractions/nazareth-galilee.webp"');
     expect(article).toContain("Giovanni Muzio");
     expect(article).toContain("1969");
     expect(article).toContain("Nazareth Central Station / Paul VI Street");
@@ -77,5 +87,22 @@ describe("Basilica of the Annunciation attraction guide", () => {
     expect(content.faqs).toHaveLength(8);
     expect(content.sources).toHaveLength(4);
     expect(article).not.toContain("These are options, not a checklist");
+  });
+
+  it("never reuses identical images in the hero, highlights or tour cards", () => {
+    const imageFiles = [
+      "src/assets/guides/2026-11/basilica-annunciation-courtyard.webp",
+      "public/images/attractions/annunciation-grotto.webp",
+      "public/images/attractions/annunciation-upper-basilica.webp",
+      "public/images/attractions/annunciation-marian-mosaics.webp",
+      "public/images/attractions/annunciation-dome.webp",
+      "public/images/attractions/mount-precipice-jezreel-view.webp",
+      "src/assets/guides/2026-10/basilica-of-the-annunciation.webp",
+    ];
+    const uniqueHashes = new Set(imageFiles.map(path => {
+      expect(existsSync(path), path).toBe(true);
+      return createHash("sha256").update(readFileSync(path)).digest("hex");
+    }));
+    expect(uniqueHashes.size).toBe(imageFiles.length);
   });
 });
