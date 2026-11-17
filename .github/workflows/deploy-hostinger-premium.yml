@@ -175,6 +175,28 @@ jobs:
             -e "ssh -p $HOSTINGER_SSH_PORT -i $HOME/.ssh/hostinger_deploy -o BatchMode=yes -o StrictHostKeyChecking=yes -o UserKnownHostsFile=$HOME/.ssh/known_hosts" \
             .output/public/ "$HOSTINGER_SSH_USER@$HOSTINGER_SSH_HOST:$HOSTINGER_REMOTE_PATH/"
 
+      # This one retired map was published before switching Tabgha back to Google Maps.
+      # General rsync intentionally has no --delete; remove only this verified file.
+      - name: Retire obsolete OpenStreetMap Tabgha file
+        if: steps.freshness.outputs.current == 'true' && env.DRY_RUN != 'true'
+        shell: bash
+        run: |
+          set -euo pipefail
+          BACKUP_DIR="$(dirname "$HOSTINGER_REMOTE_PATH")/cms-static-backups/$GITHUB_RUN_ID"
+          ssh -p "$HOSTINGER_SSH_PORT" -i "$HOME/.ssh/hostinger_deploy" -o BatchMode=yes -o StrictHostKeyChecking=yes -o UserKnownHostsFile="$HOME/.ssh/known_hosts" \
+            "$HOSTINGER_SSH_USER@$HOSTINGER_SSH_HOST" \
+            "set -eu
+             old='$HOSTINGER_REMOTE_PATH/maps/tabgha-churches.html'
+             if [ -L \"\$old\" ]; then echo 'Refusing to remove unexpected symlink' >&2; exit 1; fi
+             if [ -f \"\$old\" ]; then
+               grep -Fq 'tile.openstreetmap.org' \"\$old\" || { echo 'Obsolete file contents are unexpected' >&2; exit 1; }
+               umask 077
+               mkdir -p '$BACKUP_DIR'
+               mv -- \"\$old\" '$BACKUP_DIR/retired-tabgha-churches.html'
+             fi
+             test ! -e \"\$old\""
+          echo "Retired the exact obsolete Tabgha map only (or it was already absent)."
+
       - name: Read-only public smoke test
         if: steps.freshness.outputs.current == 'true' && env.DRY_RUN != 'true'
         shell: bash
