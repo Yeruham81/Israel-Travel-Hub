@@ -235,6 +235,30 @@ export const migrationSources: SourceReference[] = [
     "note": "Serial World Heritage property and the archaeological significance of successive city layers and water engineering."
   },
   {
+    "id": "m26-precipice-kkl",
+    "title": "Mount of Precipice: Lookout and walking trails",
+    "publisher": "KKL-JNF",
+    "url": "https://kkl-jnf.org/hiking_and_walking_tracks/mount-of-precipice/",
+    "checkedAt": "2026-11-17",
+    "note": "Main viewpoint, access from parking, Forester's House, Gospel Trail descent and walking conditions."
+  },
+  {
+    "id": "m26-precipice-jesus-trail",
+    "title": "Mount Precipice",
+    "publisher": "Jesus Trail",
+    "url": "https://jesustrail.com/sites/mount-precipice/",
+    "checkedAt": "2026-11-17",
+    "note": "Christian tradition, valley views and the modern papal pilgrimage gathering."
+  },
+  {
+    "id": "m26-precipice-nazareth-tourism",
+    "title": "Nazareth travel information",
+    "publisher": "Israel Ministry of Tourism",
+    "url": "https://holyland.israel.travel/Posts/galilee/Nazareth",
+    "checkedAt": null,
+    "note": "Official tourism entry point for regional visitor context; content requires JavaScript."
+  },
+  {
     "id": "m26-annunciation",
     "title": "Nazareth – Basilica of the Annunciation",
     "publisher": "Custodia di Terra Santa",

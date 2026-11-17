@@ -28,7 +28,7 @@ export const mountPrecipiceDestinationContent: AttractionDestinationContent = {
   contactIntroduction: "Tell me when you're visiting, where you'd like to start and which Nazareth or Galilee places interest you. I'll be happy to help plan a private day trip.",
   facts: [
     { icon: "location", label: "Location", value: "South of Nazareth", note: "Above the Jezreel Valley" },
-    { icon: "duration", label: "Time needed", value: "30–45 minutes", note: "For the lookout; allow longer for walking" },
+    { icon: "duration", label: "Time needed", value: "30–45 minutes", note: "For the lookout; 1–2 hours with a longer ridge walk" },
     { icon: "admission", label: "Admission", value: "Free", note: "Public open-air viewpoint" },
     { icon: "hours", label: "When to visit", value: "During daylight", note: "The exposed viewpoint is best enjoyed in good visibility" },
     { icon: "access", label: "Getting there", value: "Car or taxi", note: "Parking near the summit" },
@@ -71,7 +71,7 @@ export const mountPrecipiceDestinationContent: AttractionDestinationContent = {
         <article className="rounded-xl border bg-card p-4">
           <h3 className="font-serif text-xl font-semibold">Entry, parking and a short visit</h3>
           <p className="mt-3 text-sm leading-relaxed sm:text-base">There is no entry charge for the public lookout. Follow the brown road signs for Mount Precipice and park near the hilltop trailhead. The paved path leads to the Three Faiths Lookout.</p>
-          <p className="mt-2 text-sm leading-relaxed sm:text-base">Allow about <strong>30–45 minutes</strong> for the viewpoint and photographs, or longer if you plan to walk along the ridge. A daylight visit is the most practical choice.</p>
+          <p className="mt-2 text-sm leading-relaxed sm:text-base">Allow about <strong>30–45 minutes</strong> for the main viewpoint and photographs. If you would like a longer walk along the hilltop, allow <strong>about 1–2 hours</strong> in total. A daylight visit is the most practical choice.</p>
           <a href={mountPrecipiceSite.sources.kkl} target="_blank" rel="noopener noreferrer" className="mt-3 inline-flex items-center gap-1 text-sm font-semibold text-primary hover:underline">KKL-JNF's official walking guide <ArrowUpRight className="h-3.5 w-3.5" aria-hidden="true" /></a>
         </article>
         <article className="rounded-xl border bg-card p-4">
@@ -107,7 +107,7 @@ export const mountPrecipiceDestinationContent: AttractionDestinationContent = {
           </article>
           <article className="rounded-xl border bg-card p-4">
             <div className="flex items-center gap-2"><BusFront className="h-5 w-5 text-primary" aria-hidden="true" /><h3 className="font-semibold">By public transport</h3></div>
-            <p className="mt-2 text-sm leading-relaxed">Buses serve Nazareth and nearby roads, but a city-centre stop does not necessarily leave you near the summit parking area. Check the final walking route and hills before relying on a bus; the <a href="https://bus.gov.il/en/home" target="_blank" rel="noopener noreferrer" className={inlineLink}>official public transport planner</a> can help. For several regional stops, consider <a href={carRentalAffiliateUrl("/attractions/mount-precipice/")} target="_blank" rel="sponsored noopener noreferrer" className={inlineLink}>renting a car</a>, <Link to="/tours/nazareth-sea-of-galilee/" className={inlineLink}>comparing guided tours</Link> or <a href="#contact" className={inlineLink}>arranging a private driver</a>.</p>
+            <p className="mt-2 text-sm leading-relaxed">A useful nearby bus stop to look up is <strong>Beit Al-Hikma School / Al-Qafza (בי״ס בית אל-חכמה/אל-קפזה)</strong>, on the southern side of Nazareth. The walk from this stop to Mount Precipice is not the same as the short paved path from the hilltop car park: check the uphill route, pavements and return journey before setting out. Use the <a href="https://bus.gov.il/en/home" target="_blank" rel="noopener noreferrer" className={inlineLink}>official public transport planner</a> to confirm a suitable service for your date. For several regional stops, consider <a href={carRentalAffiliateUrl("/attractions/mount-precipice/")} target="_blank" rel="sponsored noopener noreferrer" className={inlineLink}>renting a car</a>, <Link to="/tours/nazareth-sea-of-galilee/" className={inlineLink}>comparing guided tours</Link> or <a href="#contact" className={inlineLink}>arranging a private driver</a>.</p>
           </article>
           <article className="rounded-xl border bg-card p-4">
             <div className="flex items-center gap-2"><Footprints className="h-5 w-5 text-primary" aria-hidden="true" /><h3 className="font-semibold">On foot</h3></div>
@@ -125,8 +125,12 @@ export const mountPrecipiceDestinationContent: AttractionDestinationContent = {
   itineraryContent: (
     <div className="mt-4 space-y-4">
       <div className="rounded-xl border bg-card p-4 sm:p-5">
-        <h3 className="font-serif text-xl font-semibold">A short visit to the lookout</h3>
-        <p className="mt-3 text-sm leading-relaxed sm:text-base">Park near the summit, walk up to the Three Faiths Lookout and enjoy the Jezreel Valley panorama. If you have a little extra time, continue east to the Forester's House viewpoint before returning to the parking area.</p>
+        <h3 className="font-serif text-xl font-semibold">Choose the visit that suits your day</h3>
+        <ul className="mt-3 list-disc space-y-2 pl-5 text-sm leading-relaxed sm:text-base">
+          <li><strong>30–45 minutes — main lookout:</strong> Park near the summit, follow the paved path to the Three Faiths Lookout and enjoy the Jezreel Valley panorama.</li>
+          <li><strong>About 1–2 hours — extended hilltop walk:</strong> Continue towards the Forester's House viewpoint, take time for the ridge views and return to the parking area.</li>
+          <li><strong>Longer one-way hike towards Iksal:</strong> The Gospel Trail leaves the hilltop and descends towards Iksal. This is a separate hike, so plan the route, walking conditions and return transport in advance.</li>
+        </ul>
       </div>
       <div className="rounded-xl border bg-card p-4 sm:p-5">
         <h3 className="font-serif text-xl font-semibold">Combine Mount Precipice with Nazareth or Lower Galilee</h3>
@@ -171,7 +175,7 @@ export const mountPrecipiceDestinationContent: AttractionDestinationContent = {
   ),
   faqs: [
     { q: "Is Mount Precipice free to visit?", a: "Yes. The hilltop lookout is a public open-air site with no entrance ticket." },
-    { q: "How long does a Mount Precipice visit take?", a: "Allow 30–45 minutes for the main lookout and photographs, or longer if you continue to the Forester's House or take a walk along the ridge." },
+    { q: "How long does a Mount Precipice visit take?", a: "Allow 30–45 minutes for the main viewpoint or around 1–2 hours for an extended ridge walk. The descent towards Iksal is a separate, longer hike." },
     { q: "Can I drive to Mount Precipice?", a: "Yes. Follow the signs from Route 75 to the hilltop car park, then continue on foot along the paved path." },
     { q: "Can wheelchair users reach the lookout?", a: "KKL-JNF describes a wheelchair-accessible paved path to the Three Faiths Lookout. Conditions on the longer trails are different, so check your particular route." },
     { q: "Is this the exact cliff mentioned in the Gospel?", a: "Mount Precipice is traditionally associated with Luke 4:29–30, but the text does not identify the cliff precisely." },

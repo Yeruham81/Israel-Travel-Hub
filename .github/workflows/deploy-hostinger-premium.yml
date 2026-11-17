@@ -202,7 +202,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          for path in / /travel-blog/ /travel-blog/uber-in-israel/ /attractions/capernaum/ /api/quote-request/ /api/exchange-rates/; do
+          for path in / /travel-blog/ /travel-blog/uber-in-israel/ /attractions/capernaum/ /attractions/mount-precipice/ /api/quote-request/ /api/exchange-rates/; do
             status="$(curl --retry 2 --retry-delay 2 --max-time 20 -L -sS -o /dev/null -w '%{http_code}' "$VITE_CANONICAL_ORIGIN$path")"
             echo "$path -> HTTP $status"
             [[ "$status" == "200" ]] || { echo "::error::Website smoke test failed for $path"; exit 1; }
@@ -225,4 +225,40 @@ jobs:
             exit 1
           fi
           rm -f "$capernaum_html"
+          # Check the published Mount Precipice page itself, including SEO and images.
+          precipice_html="$(mktemp)"
+          curl --retry 2 --max-time 20 -fsSL -o "$precipice_html" "$VITE_CANONICAL_ORIGIN/attractions/mount-precipice/"
+          node - "$precipice_html" "$VITE_CANONICAL_ORIGIN/attractions/mount-precipice/" <<'NODE'
+          const fs = require("node:fs");
+          const html = fs.readFileSync(process.argv[2], "utf8");
+          const expectedUrl = process.argv[3];
+          const canonicalLinks = [...html.matchAll(/<link\b[^>]*>/gi)]
+            .map(match => match[0])
+            .filter(tag => /\brel=["']canonical["']/i.test(tag));
+          if (!/<title[^>]*>[^<]*Mount Precipice[^<]*<\/title>/i.test(html)) {
+            console.error("::error::Mount Precipice published page is missing its title");
+            process.exit(1);
+          }
+          if (!html.includes('data-testid="mount-precipice-visitor-cards"')) {
+            console.error("::error::Mount Precipice published page is missing its visitor information");
+            process.exit(1);
+          }
+          if (!canonicalLinks.some(tag => tag.includes('href="' + expectedUrl + '"'))) {
+            console.error("::error::Mount Precipice published page has a missing or incorrect canonical link");
+            process.exit(1);
+          }
+          console.log("Mount Precipice published title, visitor content and canonical verified.");
+          NODE
+          rm -f "$precipice_html"
+          for image_name in mount-precipice-jezreel-view.webp mount-precipice-mount-tabor-view.webp; do
+            image_file="$(mktemp)"
+            curl --retry 2 --max-time 20 -fsSL -o "$image_file" "$VITE_CANONICAL_ORIGIN/images/attractions/$image_name"
+            if [[ "$(file --mime-type -b "$image_file")" != "image/webp" ]]; then
+              rm -f "$image_file"
+              echo "::error::Mount Precipice image $image_name did not return a valid WebP file"
+              exit 1
+            fi
+            rm -f "$image_file"
+            echo "Mount Precipice image $image_name -> valid WebP"
+          done
           echo "Source-controlled static guides published; existing PHP APIs still respond to GET."

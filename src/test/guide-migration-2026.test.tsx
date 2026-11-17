@@ -23,7 +23,7 @@ import { airportJourneyGuides } from "@/data/airportJourneyGuides";
 import { getSource, isPublisherUrl, publicSources, travelGuidePaths, type TravelGuideId } from "@/data/registry";
 
 afterEach(cleanup);
-const ids = Object.keys({ ...planningGuides, ...cityCultureGuides, ...heritageGuides, ...journeyDestinationGuides }).filter(id => id !== "calendar") as TravelGuideId[];
+const ids = Object.keys({ ...planningGuides, ...cityCultureGuides, ...heritageGuides, ...journeyDestinationGuides }).filter(id => id !== "calendar" && id !== "precipice") as TravelGuideId[];
 async function routerAt(url: string) {
   const router = createRouter({ routeTree, context: { queryClient: new QueryClient() }, history: createMemoryHistory({ initialEntries: [url] }), trailingSlash: "always" });
   await router.load();

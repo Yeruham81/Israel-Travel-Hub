@@ -172,146 +172,19 @@ export const heritageGuides = {
     "title": mountPrecipiceSite.title,
     "description": mountPrecipiceSite.description,
     "intro": mountPrecipiceSite.intro,
-    "answer": "Visit for the panorama and the place’s association in Christian tradition with Luke’s account of Jesus at Nazareth. The Custodia describes that identification as a medieval tradition. Check local access and weather, stay on designated paths and arrange the return before going up to the viewpoint.",
-    "topics": [
-      "attractions",
-      "destinations",
-      "religion"
-    ],
+    "answer": "Visit the Three Faiths Lookout for the Jezreel Valley panorama, with longer hilltop walks if you have time.",
+    "topics": ["attractions", "destinations", "religion"],
     "photo": mountPrecipiceSite.hero,
-    "facts": [
-      {
-        "label": "Main reason to visit",
-        "text": "A Jezreel Valley panorama near Nazareth"
-      },
-      {
-        "label": "Religious context",
-        "text": "A traditional association with Luke’s account"
-      },
-      {
-        "label": "Plan separately",
-        "text": "The viewpoint is outside the old-city church area"
-      }
-    ],
-    "comparison": {
-      "caption": "Build a Nazareth-area visit",
-      "headers": [
-        "Stop",
-        "Main purpose",
-        "Planning detail"
-      ],
-      "rows": [
-        [
-          "Mount Precipice",
-          "Landscape and religious context",
-          "Outdoor paths, exposed edges and weather"
-        ],
-        [
-          "Basilica of the Annunciation",
-          "A major Catholic sanctuary",
-          "Separate visitor and worship arrangements"
-        ],
-        [
-          "Nazareth old-city streets",
-          "Neighbourhood atmosphere and a meal",
-          "Walking gradients, parking and opening patterns"
-        ],
-        [
-          "Mount Tabor or Megiddo",
-          "A separate heritage excursion",
-          "Include the drive and an actual visit window"
-        ]
-      ]
-    },
-    "sections": [
-      {
-        "id": "tradition",
-        "title": "What the traditional name means",
-        "paragraphs": [
-          "Luke’s Gospel recounts a hostile response to Jesus after his teaching at Nazareth. The traditional identification of the precipice with this hill developed later; it should not be presented as archaeological proof of the precise location of the event. The Custodia’s account provides useful context for a pilgrimage visit.",
-          "You can enjoy the landscape without sharing a particular religious interpretation. A guide can connect the viewpoint, the modern city and the historic setting, while leaving the distinction between text, tradition and physical evidence clear."
-        ]
-      },
-      {
-        "id": "panorama",
-        "title": "Enjoy the viewpoint at a comfortable pace",
-        "paragraphs": [
-          "The broad valley view is the main attraction. Visibility changes with weather and haze, so leave flexibility rather than promising a particular photograph. Look for a designated viewing area and use only the paths that are open and appropriate for your group.",
-          "Wind, sun and uneven ground can make a short stop more demanding than it looks in a photograph. Keep away from exposed cliff edges and do not follow an informal trail simply because it appears on a phone map."
-        ]
-      },
-      {
-        "id": "access",
-        "title": "Getting to the hill and back",
-        "paragraphs": [
-          "An arranged vehicle can make it easier to combine the viewpoint with Nazareth’s central sights. Confirm the current vehicle approach, exact drop-off and where the driver will wait. Do not assume a public bus that reaches Nazareth also stops at the viewpoint.",
-          "If walking, check the actual route, gradient and distance from your starting point. A route across a busy road or a steep approach is different from a short stroll within the old city. Ask locally about current access before committing to the walk."
-        ]
-      },
-      {
-        "id": "combine",
-        "title": "Choose one main Nazareth visit",
-        "paragraphs": [
-          "Pair the viewpoint with enough time for the Basilica of the Annunciation or a focused old-city visit. Do not turn every nearby church and archaeological park into a compulsory stop. A northern itinerary needs time for meals, parking and the journey between the valley and lake.",
-          "Mount Tabor is a distinct hilltop pilgrimage site; Tel Megiddo is an archaeological park. Choose the addition that matches your interests rather than assuming the three places offer the same experience."
-        ],
-        "links": [
-          {
-            "label": "Plan the basilica visit",
-            "to": "/attractions/basilica-of-the-annunciation/"
-          },
-          {
-            "label": "Explore Tel Megiddo",
-            "to": "/attractions/tel-megiddo/"
-          },
-          {
-            "label": "Read the Mount Tabor guide",
-            "to": "/attractions/mount-tabor/"
-          }
-        ]
-      }
-    ],
-    "checklist": [
-      "Check current viewpoint access and the local forecast",
-      "Choose a designated route and avoid cliff edges",
-      "Arrange the pickup or return before arrival",
-      "Allow real time for a separate Nazareth visit",
-      "Keep religious tradition distinct from archaeological certainty"
-    ],
-    "faqs": [
-      {
-        "q": "Is Mount Precipice in Nazareth’s old city?",
-        "a": "No. Treat the hilltop viewpoint and the central church-and-market area as separate stops."
-      },
-      {
-        "q": "Is the exact biblical location proven?",
-        "a": "The identification is a religious tradition, described by the Custodia as medieval. It is not proof of the precise location of the Gospel event."
-      },
-      {
-        "q": "Can I rely on a bus to take me directly to the viewpoint?",
-        "a": "Check a current route and stop. Reaching Nazareth by public transport does not establish a convenient final leg to the hill."
-      }
-    ],
-    "related": [
-      "annunciation",
-      "megiddo",
-      "magdala",
-      "bestTime"
-    ],
-    "services": [
-      {
-        "label": "Plan a custom northern journey",
-        "to": "/private-driver/"
-      },
-      {
-        "label": "Browse attractions by area",
-        "to": "/attractions/"
-      }
-    ],
-    "sourceIds": [
-      "m26-annunciation",
-      "m26-ims"
-    ]
+    // The published visitor article is maintained only in MountPrecipiceAttractionPage.
+    // Retain the TravelGuide shape here solely for SEO, link discovery and shared metadata.
+    "facts": [],
+    "comparison": { "caption": "", "headers": [], "rows": [] },
+    "sections": [],
+    "checklist": [],
+    "faqs": [],
+    "related": [],
+    "services": [],
+    "sourceIds": ["m26-precipice-kkl", "m26-precipice-jesus-trail", "m26-precipice-nazareth-tourism"]
   },
   "annunciation": {
     "id": "annunciation",

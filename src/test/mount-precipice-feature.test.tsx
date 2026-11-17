@@ -5,6 +5,7 @@ import { mountPrecipiceSite as site } from "@/data/mountPrecipiceSite";
 import { travelGuides } from "@/data/travelGuides";
 import { travelGuideMeta } from "@/components/TravelGuide";
 import { attractionHubCards } from "@/data/attractionsHub";
+import { publicSources } from "@/data/registry";
 
 describe("Mount Precipice attraction guide", () => {
   it("uses the shared destination page with synchronized metadata and a single hub card", () => {
@@ -23,6 +24,20 @@ describe("Mount Precipice attraction guide", () => {
     expect(travelGuides.precipice.description).toBe(site.description);
     expect(travelGuides.precipice.photo).toEqual(site.hero);
     expect(travelGuides.precipice.updatedAt).toBe(site.updatedAt);
+    expect(travelGuides.precipice.sections).toHaveLength(0);
+    expect(travelGuides.precipice.faqs).toHaveLength(0);
+    expect(travelGuides.precipice.comparison.rows).toHaveLength(0);
+    expect(travelGuides.precipice.sourceIds).toEqual([
+      "m26-precipice-kkl",
+      "m26-precipice-jesus-trail",
+      "m26-precipice-nazareth-tourism",
+    ]);
+    const citations = publicSources(travelGuides.precipice.sourceIds).map(source => source.url);
+    expect(citations).toEqual(content.sources.map(source => source.url));
+    const articleMetadata = travelGuideMeta("precipice").scripts
+      .map(script => JSON.parse(script.children as string))
+      .find(script => script["@type"] === "Article");
+    expect(articleMetadata.citation).toEqual(citations);
     expect(JSON.stringify(travelGuideMeta("precipice").scripts)).toContain("2026-11-17");
     expect(attractionHubCards.filter(card => String(card.to) === String(content.path))).toHaveLength(1);
     expect(shell).toContain('["contact", "Contact me"]');
@@ -43,6 +58,12 @@ describe("Mount Precipice attraction guide", () => {
     expect(article).toContain("Three Faiths Lookout");
     expect(article).toContain("Forester's House");
     expect(article).toContain("300 metres");
+    expect(article).toContain("Beit Al-Hikma School / Al-Qafza");
+    expect(article).toContain("בי״ס בית אל-חכמה/אל-קפזה");
+    expect(article).toContain("30–45 minutes — main lookout");
+    expect(article).toContain("About 1–2 hours — extended hilltop walk");
+    expect(article).toContain("Longer one-way hike towards Iksal");
+    expect(site.hero.alt).toContain("small central building");
     expect(article).toContain("Gospel Trail");
     expect(article).toContain("Qafzeh Cave");
     expect(article).toContain("Pope Benedict XVI");
