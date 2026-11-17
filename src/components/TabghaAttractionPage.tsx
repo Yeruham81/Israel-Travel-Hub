@@ -8,8 +8,9 @@ import { tabghaSite } from "@/data/tabghaSite";
 import galileePhoto from "@/assets/home/hero-galilee-sm.webp";
 import { carRentalAffiliateUrl } from "@/lib/car-rental-affiliate";
 
-const tabghaMapEmbed = "https://maps.google.com/maps?q=Tabgha%2C%20Sea%20of%20Galilee%2C%20Israel&hl=en&z=12&t=m&output=embed";
-const tabghaMapLarger = "https://www.google.com/maps/search/?api=1&query=Tabgha%2C%20Israel&hl=en";
+// Display both nearby churches as the two map endpoints; separate entrance links remain below.
+const tabghaMapEmbed = "https://maps.google.com/maps?saddr=32.87326%2C35.54955&daddr=32.871858%2C35.5503&hl=en&z=16&t=m&output=embed";
+const tabghaMapLarger = "https://www.google.com/maps/dir/?api=1&origin=32.87326%2C35.54955&destination=32.871858%2C35.5503";
 const multiplicationDirections = "https://www.google.com/maps/dir/?api=1&destination=Church%20of%20the%20Multiplication%2C%20Tabgha%2C%20Israel&travelmode=driving";
 const primacyDirections = "https://www.google.com/maps/dir/?api=1&destination=Church%20of%20the%20Primacy%20of%20Peter%2C%20Tabgha%2C%20Israel&travelmode=driving";
 
@@ -49,6 +50,8 @@ export const tabghaDestinationContent: AttractionDestinationContent = {
   hero: tabghaSite.hero,
   intro: tabghaSite.intro,
   historyTitle: "Tabgha's history and Gospel traditions",
+  visitorTitle: "Opening hours and visitor information",
+  visitorNavLabel: "Opening hours & visits",
   relatedTitle: "Explore more around the Sea of Galilee",
   contactIntroduction: "Tell me when you’re visiting, where you’ll be starting from and which Galilee sites you’d love to see. I’ll be happy to help put together a private day trip for you.",
   facts: [
@@ -128,8 +131,8 @@ export const tabghaDestinationContent: AttractionDestinationContent = {
         <ul className="mt-3 grid gap-x-6 gap-y-2 pl-5 text-sm leading-relaxed sm:grid-cols-2 sm:text-base list-disc">
           <li><strong>Entry:</strong> Neither church currently publishes an admission fee. Check with the church if you are arranging a special group visit.</li>
           <li><strong>Dress:</strong> Both are working places of worship. Cover shoulders and knees and be considerate during services.</li>
-          <li><strong>Walking:</strong> The Primacy chapel leads towards uneven lakeshore rocks. Wear comfortable shoes and check accessibility needs with the church.</li>
-          <li><strong>Facilities:</strong> Parking is available in the area. The Benedictine community also has a small monastery shop, normally open Monday–Saturday.</li>
+          <li><strong>Accessibility:</strong> The Multiplication church has a relatively level approach. An access ramp was installed at the Primacy chapel, but the rocky lakeshore and steps are difficult for wheelchair users. Contact each church to check the current step-free route.</li>
+          <li><strong>Parking and facilities:</strong> Car and coach parking is available around Tabgha, with separate entrances to the churches. The Benedictine monastery shop is normally open Monday–Saturday, 09:00–15:00.</li>
         </ul>
       </div>
       <AttractionPracticalTip>
@@ -156,9 +159,13 @@ export const tabghaDestinationContent: AttractionDestinationContent = {
           </article>
         </div>
         <div className="rounded-xl border bg-card p-3" data-testid="tabgha-location-map">
-          <h3 className="text-sm font-semibold">Where is Tabgha?</h3>
-          <iframe title="Map of Tabgha on the northwestern shore of the Sea of Galilee" src={tabghaMapEmbed} loading="lazy" referrerPolicy="strict-origin-when-cross-origin" className="mt-2 h-52 w-full rounded-lg border-0 sm:h-60 lg:h-56" />
-          <a href={tabghaMapLarger} target="_blank" rel="noopener noreferrer" className="mt-2 inline-flex items-center gap-1 text-xs font-semibold text-primary hover:underline">View larger map <ArrowUpRight className="h-3.5 w-3.5" aria-hidden="true" /></a>
+          <h3 className="text-sm font-semibold">The two Tabgha churches</h3>
+          <iframe title="Map showing the Church of the Multiplication and the Church of the Primacy of Peter at Tabgha" src={tabghaMapEmbed} loading="lazy" referrerPolicy="strict-origin-when-cross-origin" className="mt-2 h-52 w-full rounded-lg border-0 sm:h-60 lg:h-56" />
+          <div className="mt-2 grid gap-1 text-xs leading-relaxed">
+            <a href={multiplicationDirections} target="_blank" rel="noopener noreferrer" className="font-semibold text-primary hover:underline">1. Church of the Multiplication (inland)</a>
+            <a href={primacyDirections} target="_blank" rel="noopener noreferrer" className="font-semibold text-primary hover:underline">2. Church of the Primacy of Peter (lakeside)</a>
+          </div>
+          <a href={tabghaMapLarger} target="_blank" rel="noopener noreferrer" className="mt-2 inline-flex items-center gap-1 text-xs font-semibold text-primary hover:underline">View both on Google Maps <ArrowUpRight className="h-3.5 w-3.5" aria-hidden="true" /></a>
         </div>
       </div>
     </div>
@@ -231,7 +238,7 @@ export const tabghaDestinationContent: AttractionDestinationContent = {
     { q: "Is there an entry fee?", a: "Neither church currently lists a visitor admission fee. For group services or special arrangements, contact the responsible church." },
     { q: "Can I visit Tabgha without a car?", a: "It may be possible by bus, but services and the walk to the churches can make planning awkward. A car or organised Galilee tour is usually easier." },
     { q: "Is Tabgha the same as Capernaum?", a: "No. They are nearby places with different sights. Tabgha is known for two churches; Capernaum is known for its ancient synagogue and traditional House of Peter." },
-    { q: "Can I visit with limited mobility?", a: "The churches have different entrances and surfaces, and parts of the shore are rocky. Ask the church about step-free access before travelling." },
+    { q: "Can I visit with limited mobility?", a: "The Church of the Multiplication has a relatively level approach, and the Primacy chapel has an access ramp. The rocky lakeshore and steps may still be difficult to reach. Contact both churches to confirm a step-free route for your visit." },
   ],
   nearby: [
     { label: "Capernaum", to: "/attractions/capernaum/", note: "The ancient synagogue, basalt village and traditional House of Peter." },
@@ -255,6 +262,7 @@ export const tabghaDestinationContent: AttractionDestinationContent = {
     { label: "Benedictine Tabgha Priory — Church of the Multiplication", url: tabghaSite.sources.benedictineHistory, note: "Fifth-century mosaics and construction history of the present church." },
     { label: "Benedictine Tabgha Priory — pilgrims and visitors", url: tabghaSite.sources.benedictineVisitors, note: "Visitor facilities, pilgrim arrangements and monastery shop." },
     { label: "Custody of the Holy Land — Tabgha", url: tabghaSite.sources.franciscan, note: "History and Gospel traditions of the Multiplication and Primacy shrines." },
+    { label: "Custody of the Holy Land — Primacy chapel accessibility ramp", url: tabghaSite.sources.primacyAccessibility, note: "Custody report confirming the ramp was built; current access arrangements should be checked with the chapel." },
   ],
 };
 
