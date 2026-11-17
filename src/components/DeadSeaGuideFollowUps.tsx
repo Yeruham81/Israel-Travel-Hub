@@ -1,7 +1,7 @@
 import { Link, type LinkProps } from "@tanstack/react-router";
 import deadSeaBeach from "@/assets/dead-sea/beach.webp";
 import masada from "@/assets/home/masada-dead-sea.webp";
-import einGediIbex from "@/assets/guides/ein-gedi-ibex.webp";
+import { einGediCardPhoto } from "@/data/einGediCardPhoto";
 import deadSeaLandscape from "@/assets/dead-sea/landscape.webp";
 import deadSeaHotelPool from "@/assets/dead-sea/pool.webp";
 import jerusalemOldCity from "@/assets/jerusalem/old-city.webp";
@@ -35,8 +35,8 @@ const related: {
     title: "Ein Gedi Nature Reserve",
     description: "Discover the reserve's waterfalls, green trails and desert wildlife.",
     to: "/attractions/ein-gedi/",
-    photo: einGediIbex,
-    alt: "Nubian ibex near a stream in Ein Gedi Nature Reserve",
+    photo: einGediCardPhoto.src,
+    alt: einGediCardPhoto.alt,
   },
   {
     title: "Dead Sea attractions",
