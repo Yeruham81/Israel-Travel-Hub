@@ -93,14 +93,16 @@ describe("Israel shore excursion hub", () => {
     const related = within(guides).getAllByRole("link");
     expect(related).toHaveLength(6);
     expect(within(guides).getAllByRole("img")).toHaveLength(6);
+    expect(screen.getByText("Choose a destination to explore shore excursions from Ashdod or Haifa.")).toBeInTheDocument();
     expect(within(guides).getAllByRole("link").every(link => {
       const preview = link.querySelector("span.text-muted-foreground");
       return Boolean(preview && preview.textContent && preview.textContent.length < 80);
     })).toBe(true);
-    const practical = screen.getByRole("region", { name: "Practical travel guides" });
+    const practical = screen.getByRole("region", { name: "Plan your trip to Israel" });
     expect(within(practical).getAllByRole("link")).toHaveLength(6);
-    expect(within(practical).getAllByRole("img")).toHaveLength(6);
-    expect(related.every(link => link.textContent?.includes("Read guide"))).toBe(true);
+    expect(within(practical).queryAllByRole("img")).toHaveLength(0);
+    expect(within(practical).getAllByRole("link").every(link => link.querySelector("svg") !== null)).toBe(true);
+    expect(related.every(link => link.textContent?.includes("Read more"))).toBe(true);
     const photos = Array.from(document.querySelectorAll("main img")).map(image => image.getAttribute("src"));
     expect(new Set(photos).size).toBe(photos.length);
     expect(guides).not.toHaveTextContent("→");

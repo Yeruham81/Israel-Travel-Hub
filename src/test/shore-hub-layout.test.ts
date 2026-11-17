@@ -37,8 +37,12 @@ describe("compact shore excursions hub", () => {
     expect(shoreTourFormats).toHaveLength(2);
     expect(shorePlanningSteps).toHaveLength(4);
     expect(shoreHubGuides).toHaveLength(6);
-    expect(page).toContain("travelGuides.bestTime");
-    expect(page).toContain("travelGuides.taxis");
+    expect(page).toContain("icon: Sun");
+    expect(page).toContain("icon: CarFront");
+    expect(page).toContain("Plan your trip to Israel");
+    expect(page).toContain("Read more");
+    expect(page).toContain("Read guide");
+    expect(page).not.toContain("travelGuides.bestTime");
     expect(page).toContain("Discover Israel's main attractions");
     expect(page).not.toContain("Pickup arrangements differ:");
     expect(page).not.toContain("Ashdod is a useful starting point");

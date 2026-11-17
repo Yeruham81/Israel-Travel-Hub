@@ -1,11 +1,10 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { Anchor, CheckCircle2 } from "lucide-react";
+import { Anchor, CalendarDays, CarFront, CheckCircle2, Compass, Smartphone, Sun, TrainFront } from "lucide-react";
 import { FaqList, HubHeader, SourceList } from "@/components/Guide";
 import { GuidePhotoCredit } from "@/components/TravelGuide";
 import { GuideHeroMedia } from "@/components/GuideHeroMedia";
 import { getShorePort } from "@/data/shoreExcursions";
 import { shoreHubGuides } from "@/data/shoreReading";
-import { travelGuides } from "@/data/travelGuides";
 import cruisePortFeature from "@/assets/home/cruise-port-feature.webp";
 import jerusalemFeature from "@/assets/home/jerusalem-old-city-card.webp";
 import galileeFeature from "@/assets/home/tiberias-lake-card.webp";
@@ -32,12 +31,12 @@ const experiencePhotos = {
 } as const;
 
 const practicalGuides = [
-  { title: "Israel travel tips", description: "Essential advice for your visit.", to: travelGuidePaths.travelTips, photo: travelGuides.travelTips.cardPhoto ?? travelGuides.travelTips.photo },
-  { title: "Travel eSIM for Israel", description: "Stay connected during your day ashore.", to: travelGuidePaths.esim, photo: travelGuides.esim.cardPhoto ?? travelGuides.esim.photo },
-  { title: "Getting around Israel", description: "Trains, buses, taxis and local travel.", to: travelGuidePaths.israel, photo: travelGuides.israel.cardPhoto ?? travelGuides.israel.photo },
-  { title: "Israel holidays & events", description: "Check events that may affect your visit.", to: travelGuidePaths.calendar, photo: travelGuides.calendar.cardPhoto ?? travelGuides.calendar.photo },
-  { title: "Best time to visit Israel", description: "Seasons, weather and regional conditions.", to: travelGuidePaths.bestTime, photo: travelGuides.bestTime.cardPhoto ?? travelGuides.bestTime.photo },
-  { title: "Taxis in Israel", description: "Licensed taxis, fares and booking apps.", to: travelGuidePaths.taxis, photo: travelGuides.taxis.cardPhoto ?? travelGuides.taxis.photo },
+  { title: "Israel travel tips", description: "Essential advice for your visit.", to: travelGuidePaths.travelTips, icon: Compass },
+  { title: "Travel eSIM for Israel", description: "Stay connected during your day ashore.", to: travelGuidePaths.esim, icon: Smartphone },
+  { title: "Getting around Israel", description: "Trains, buses, taxis and local travel.", to: travelGuidePaths.israel, icon: TrainFront },
+  { title: "Israel holidays & events", description: "Check events that may affect your visit.", to: travelGuidePaths.calendar, icon: CalendarDays },
+  { title: "Best time to visit Israel", description: "Seasons, weather and regional conditions.", to: travelGuidePaths.bestTime, icon: Sun },
+  { title: "Taxis in Israel", description: "Licensed taxis, fares and booking apps.", to: travelGuidePaths.taxis, icon: CarFront },
 ] as const;
 
 export const Route = createFileRoute("/shore-excursions/")({
@@ -80,7 +79,7 @@ export const Route = createFileRoute("/shore-excursions/")({
 });
 
 function Shore() {
-  const photos = [heroPhoto, ...portIds.map(id => getShorePort(id).photo), ...shoreHubGuides.map(guide => guide.photo), ...practicalGuides.map(guide => guide.photo)].filter(hasPublicPhotoCredit);
+  const photos = [heroPhoto, ...portIds.map(id => getShorePort(id).photo), ...shoreHubGuides.map(guide => guide.photo)].filter(hasPublicPhotoCredit);
 
   return <main className="pb-12" data-testid="shore-hub">
     <HubHeader
@@ -120,7 +119,7 @@ function Shore() {
       <section id="destinations" aria-labelledby="shore-destinations-h" className="mt-9 scroll-mt-24">
         <h2 id="shore-destinations-h" className="text-2xl font-semibold">Popular shore excursion routes</h2>
         <p className="mt-2 max-w-3xl text-sm leading-relaxed text-muted-foreground">
-          Choose a destination to explore excursions from the matching cruise port.
+          Choose a destination to explore shore excursions from Ashdod or Haifa.
         </p>
         <ul className="mt-4 grid gap-3 md:grid-cols-2">
           {shoreHubExperiences.map(experience => {
@@ -194,7 +193,7 @@ function Shore() {
               <span className="min-w-0 flex-1">
                 <span className="block text-sm font-semibold leading-snug text-foreground group-hover:text-primary">{guide.title}</span>
                 <span className="mt-1 line-clamp-2 block text-xs leading-relaxed text-muted-foreground">{guide.description}</span>
-                <span className="mt-1.5 inline-block text-xs font-semibold text-primary group-hover:underline">Read guide</span>
+                <span className="mt-1.5 inline-block text-xs font-semibold text-primary group-hover:underline">Read more</span>
               </span>
             </Link>
           </li>)}
@@ -202,18 +201,21 @@ function Shore() {
       </section>
 
       <section id="shore-practical" aria-labelledby="shore-practical-h" className="mt-9">
-        <h2 id="shore-practical-h" className="text-2xl font-semibold">Practical travel guides</h2>
+        <h2 id="shore-practical-h" className="text-2xl font-semibold">Plan your trip to Israel</h2>
         <ul className="mt-4 grid gap-3 sm:grid-cols-2">
-          {practicalGuides.map(guide => <li key={guide.to} className="min-w-0">
-            <Link to={guide.to} className="group flex h-full min-w-0 items-center gap-3 rounded-xl border bg-card p-3 transition-colors hover:border-primary/50 hover:bg-secondary/20 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
-              <img src={guide.photo.src} alt={guide.photo.alt} width={112} height={75} loading="lazy" decoding="async" className="aspect-[3/2] w-24 shrink-0 rounded-lg object-cover sm:w-28" />
-              <span className="min-w-0 flex-1">
-                <span className="block text-sm font-semibold leading-snug text-foreground group-hover:text-primary">{guide.title}</span>
-                <span className="mt-1 block text-xs leading-relaxed text-muted-foreground">{guide.description}</span>
-                <span className="mt-1.5 inline-block text-xs font-semibold text-primary group-hover:underline">Read guide</span>
-              </span>
-            </Link>
-          </li>)}
+          {practicalGuides.map(guide => {
+            const Icon = guide.icon;
+            return <li key={guide.to} className="min-w-0">
+              <Link to={guide.to} className="group flex h-full items-start gap-3 rounded-xl border bg-card p-3 transition-colors hover:border-primary/50 hover:bg-secondary/20 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
+                <Icon aria-hidden className="mt-0.5 size-5 shrink-0 text-primary" />
+                <span className="min-w-0">
+                  <span className="block text-sm font-semibold leading-snug text-foreground group-hover:text-primary">{guide.title}</span>
+                  <span className="mt-1 block text-xs leading-relaxed text-muted-foreground">{guide.description}</span>
+                  <span className="mt-1.5 inline-block text-xs font-semibold text-primary group-hover:underline">Read guide</span>
+                </span>
+              </Link>
+            </li>;
+          })}
         </ul>
       </section>
 

@@ -1,7 +1,7 @@
 import { type ShoreDestinationId, type ShorePortId } from "@/data/registry";
 
 /** Editorial update date, separate from the last check of product prices and sources. */
-export const SHORE_EXCURSION_UPDATED_DATE = "2026-11-16";
+export const SHORE_EXCURSION_UPDATED_DATE = "2026-11-17";
 
 export const shoreHubTitle = "Shore excursions from Israel's cruise ports";
 export const shoreHubDescription = "Explore Israel shore excursions from Ashdod and Haifa. Compare Jerusalem, Galilee, Masada and coastal day trips, private drivers and guided tours with port pickup and return.";
@@ -38,25 +38,25 @@ export const shoreHubExperiences: {
 }[] = [
   {
     id: "history", title: "Jerusalem & Bethlehem",
-    description: "See Jerusalem's historic and sacred sites. Add Bethlehem only when timing and arrangements allow.",
+    description: "Wander Jerusalem's ancient lanes and discover its sacred landmarks, alongside Bethlehem's rich heritage.",
     bestFor: "First-time visitors, history lovers and pilgrims",
     links: [{ portId: "ashdod", destination: "jerusalem", label: "From Ashdod" }, { portId: "haifa", destination: "jerusalem", label: "From Haifa" }],
   },
   {
     id: "galilee", title: "Nazareth & the Sea of Galilee",
-    description: "Discover Nazareth and selected lakeside sites, best suited to a Haifa port call.",
+    description: "Explore Nazareth's landmark churches, charming Galilee villages and the peaceful shores of the Sea of Galilee.",
     bestFor: "Christian heritage and scenic countryside",
     links: [{ portId: "haifa", destination: "galilee", label: "From Haifa" }, { portId: "ashdod", destination: "galilee", label: "From Ashdod" }],
   },
   {
     id: "coast", title: "Coastal cities & old harbours",
-    description: "Explore Akko from Haifa, or Tel Aviv and Old Jaffa from Ashdod.",
+    description: "Enjoy colourful old harbours, winding stone lanes, lively markets and beautiful Mediterranean views.",
     bestFor: "Couples, families and a less hurried city experience",
     links: [{ portId: "haifa", destination: "akko", label: "From Haifa" }, { portId: "ashdod", destination: "tel-aviv", label: "From Ashdod" }],
   },
   {
     id: "desert", title: "Masada & the Dead Sea",
-    description: "See Masada and a designated Dead Sea beach from Ashdod on a longer port call.",
+    description: "Admire breathtaking desert panoramas from Masada and unwind beside the shimmering waters of the Dead Sea.",
     bestFor: "Dramatic landscapes and a full day of discovery",
     links: [{ portId: "ashdod", destination: "masada", label: "From Ashdod" }],
   },
