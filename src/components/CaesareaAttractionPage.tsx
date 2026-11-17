@@ -83,12 +83,12 @@ export const caesareaDestinationContent: AttractionDestinationContent = {
           <p className="mt-3 text-sm font-semibold">April–October</p>
           <dl className="mt-1 space-y-1 text-sm leading-relaxed sm:text-base">
             <div><dt className="inline">Sunday–Thursday & Saturday: </dt><dd className="inline font-semibold">{visit.summerRegular}</dd></div>
-            <div><dt className="inline">Fridays and ordinary holiday eves: </dt><dd className="inline font-semibold">{visit.summerFriday}</dd></div>
+            <div><dt className="inline">Fridays and other holiday eves: </dt><dd className="inline font-semibold">{visit.summerFriday}</dd></div>
           </dl>
           <p className="mt-3 text-sm font-semibold">November–March</p>
           <dl className="mt-1 space-y-1 text-sm leading-relaxed sm:text-base">
             <div><dt className="inline">Sunday–Thursday & Saturday: </dt><dd className="inline font-semibold">{visit.winterRegular}</dd></div>
-            <div><dt className="inline">Fridays and ordinary holiday eves: </dt><dd className="inline font-semibold">{visit.winterFriday}</dd></div>
+            <div><dt className="inline">Fridays and other holiday eves: </dt><dd className="inline font-semibold">{visit.winterFriday}</dd></div>
           </dl>
           <p className="mt-3 text-sm leading-relaxed sm:text-base"><strong>Rosh Hashanah, Passover and Yom Kippur eves:</strong> {visit.specialHolidayEves}. <strong>Last park entry is one hour before closing.</strong> Check the <a href={sources.park} target="_blank" rel="noopener noreferrer" className={inlineLink}>official daily information</a> for changes on your visit date.</p>
         </article>
@@ -98,6 +98,7 @@ export const caesareaDestinationContent: AttractionDestinationContent = {
             <div className="flex items-start justify-between gap-3"><dt>Adult</dt><dd className="shrink-0 font-semibold" dir="ltr">{visit.adult}</dd></div>
             <div className="flex items-start justify-between gap-3"><dt>Child, ages 5–18</dt><dd className="shrink-0 font-semibold" dir="ltr">{visit.child}</dd></div>
             <div className="flex items-start justify-between gap-3"><dt>Student</dt><dd className="shrink-0 font-semibold" dir="ltr">{visit.student}</dd></div>
+            <div className="flex items-start justify-between gap-3"><dt>Active-duty soldier</dt><dd className="shrink-0 font-semibold" dir="ltr">{visit.soldier}</dd></div>
             <div className="flex items-start justify-between gap-3"><dt>Adult in a group ({visit.groupThreshold} people)</dt><dd className="shrink-0 font-semibold" dir="ltr">{visit.groupAdult}</dd></div>
             <div className="flex items-start justify-between gap-3"><dt>Child in a group ({visit.groupThreshold} people)</dt><dd className="shrink-0 font-semibold" dir="ltr">{visit.groupChild}</dd></div>
             <div className="flex items-start justify-between gap-3"><dt>Israeli senior citizen</dt><dd className="shrink-0 font-semibold" dir="ltr">{visit.israeliSenior}</dd></div>
@@ -213,7 +214,7 @@ export const caesareaDestinationContent: AttractionDestinationContent = {
   ),
   faqs: [
     { q: "How much does Caesarea National Park cost?", a: "Full park admission costs ₪46 for an adult and ₪27 for a child aged 5–18. Students and adults in groups of more than 30 pay ₪39; children in qualifying groups and Israeli senior citizens pay ₪23. Harbor-only admission costs ₪18 and excludes the theater, hippodrome and visitors' center." },
-    { q: "What are the opening hours?", a: "The park opens at 08:00. April–October it closes at 17:00 (16:00 on Fridays and ordinary holiday eves); November–March at 16:00 (15:00 on Fridays and ordinary holiday eves). On Rosh Hashanah, Passover and Yom Kippur eves, it closes at 13:00. Last park entry is one hour before closing." },
+    { q: "What are the opening hours?", a: "The park opens at 08:00. April–October it closes at 17:00 (16:00 on Fridays and other holiday eves); November–March at 16:00 (15:00 on Fridays and other holiday eves). On Rosh Hashanah, Passover and Yom Kippur eves, it closes at 13:00. Last park entry is one hour before closing." },
     { q: "Do I need to reserve a visit?", a: "Regular independent visits to the national park generally do not require advance reservation, although entry may depend on capacity. For the harbor visitors' center, groups of more than 10 should reserve a time; without reservations, entry is first-come, first-served and subject to available space." },
     { q: "How long should I spend at Caesarea?", a: "Allow 2–3 hours for the theater, hippodrome, ancient harbor and visitors' center. Add more time for a meal or the separate aqueduct stop." },
     { q: "Is the aqueduct part of the park walk?", a: "The aqueduct beside the beach is a separate nearby stop, away from the main theater-to-harbor archaeological route." },
