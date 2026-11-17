@@ -148,7 +148,7 @@ export const masadaDestinationContent: AttractionDestinationContent = {
       </div>
       <div className="rounded-xl border bg-card p-4 sm:p-5">
         <h3 className="font-serif text-xl font-semibold">The Masada night show</h3>
-        <p className="mt-2 text-sm leading-relaxed sm:text-base">The approximately 45-minute sound-and-light show takes place on the <strong>western side</strong>, reached via Arad and Road 3199. The published schedule is normally Tuesday and Thursday evenings after sunset, with seasonal closures and possible changes. Standard tickets cost {fees.nightShow} per person.</p>
+        <p className="mt-2 text-sm leading-relaxed sm:text-base">The approximately 45-minute sound-and-light show takes place on the <strong>western side</strong>, reached via Arad and Road 3199. The published schedule is Tuesday and Thursday evenings after sunset from May through December (weather permitting); the show is closed January–April. Standard tickets cost {fees.nightShow} per person. Confirm the evening and starting time before travelling.</p>
         <p className="mt-2 text-sm leading-relaxed sm:text-base">Do not navigate to the eastern cable-car entrance for the evening show. <a href={official.nightShow} target="_blank" rel="noopener noreferrer" className={inlineLink}>Show times and booking</a>.</p>
       </div>
     </div>
@@ -225,7 +225,7 @@ export const masadaDestinationContent: AttractionDestinationContent = {
   ),
   tourContent: (
     <div className="mt-4 space-y-4">
-      <p>Day tours often pair Masada with the Dead Sea, sometimes adding Ein Gedi. Before booking, check whether national-park entry, the cable car and hotel pickup are included, and whether the tour uses the eastern entrance.</p>
+      <p>Day tours often pair Masada with the Dead Sea, sometimes adding Ein Gedi when its trails are open. Before booking, check whether national-park entry, the cable car and hotel pickup are included, and whether the tour uses the eastern entrance.</p>
       <div className="grid gap-3 sm:grid-cols-2">
         <Link to="/tours/masada-dead-sea/" className="attraction-tour-card group flex h-full min-w-0 items-start gap-3 rounded-xl border bg-card p-3 transition-all hover:border-primary/60 hover:shadow-sm focus-visible:outline-2 focus-visible:outline-primary sm:p-4">
           <img src={deadSeaPhoto} alt="Wide Dead Sea landscape near Masada" width={128} height={100} loading="lazy" decoding="async" className="h-24 w-24 shrink-0 rounded-lg object-cover sm:w-28"/>
@@ -257,7 +257,7 @@ export const masadaDestinationContent: AttractionDestinationContent = {
     { q: "Where does the Masada night show take place?", a: "At Masada West via Arad, not at the eastern cable-car station. It runs on published evenings after sunset with its own tickets and reservation." },
   ],
   nearby: [
-    { label: "Ein Gedi", to: "/attractions/ein-gedi/", note: "Oasis reserve with desert springs and walking trails beside the Dead Sea." },
+    { label: "Ein Gedi", to: "/attractions/ein-gedi/", note: "A desert oasis with waterfalls and wildlife. Check the currently open trails before visiting." },
     { label: "Qasr el-Yahud", to: "/attractions/qasr-el-yahud/", note: "Historic Jordan River baptism site on the way from Jerusalem." },
     { label: "Old City of Jerusalem", to: "/attractions/old-city-jerusalem/", note: "Historic religious and cultural landmarks for an overnight or longer trip." },
     { label: "Mitzpe Ramon", to: "/attractions/mitzpe-ramon-crater/", note: "A longer desert-road journey to the dramatic Makhtesh Ramon landscape." },
