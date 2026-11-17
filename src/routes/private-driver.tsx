@@ -1,15 +1,13 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState } from "react";
-import { ArrowRight, Clock3, Luggage, MapPinned, MessageSquareText } from "lucide-react";
-import { Breadcrumbs, Checklist, FaqList, RelatedLinks } from "@/components/Guide";
+import { BedDouble, BookOpen, CarFront, Compass, Luggage, MapPinned, MessageSquareText, PlaneLanding, Ship } from "lucide-react";
+import { FaqList, HubHeader } from "@/components/Guide";
 import { PrivateDriverQuoteForm } from "@/components/PrivateDriverQuoteForm";
 import { StayPhotoCredits } from "@/components/StayGuideParts";
-import { privateDriverBenefits, privateDriverFaqs, privateDriverGuides, privateDriverHero, privateDriverJourneys, privateDriverSteps } from "@/data/privateDriver";
-import { airportTransferPhotos } from "@/data/airportTransfers";
+import { GuideHeroMedia } from "@/components/GuideHeroMedia";
+import { privateDriverBenefits, privateDriverFaqs, privateDriverGuides, privateDriverHero, privateDriverJourneys } from "@/data/privateDriver";
 import { PRIVATE_DRIVER_CHECK_DATE } from "@/data/registry";
 import { pageMeta } from "@/lib/site";
-import { AuthorCard } from "@/components/AuthorCard";
-import { PageUpdated } from "@/components/PageUpdated";
 import { portTransferPrefill } from "@/lib/shore-services";
 import { parsePrivateDriverSearch, privateTourPrefill } from "@/lib/private-driver-search";
 
@@ -19,70 +17,117 @@ export const Route = createFileRoute("/private-driver")({
     title: "Private driver in Israel: intercity transfers and day hire",
     description: "Hire a private driver in Israel for hotel-to-hotel journeys, full-day itineraries and multiple stops. Share your route and request a written quote.",
     path: "/private-driver/",
+    image: privateDriverHero.src,
+    imageAlt: privateDriverHero.alt,
     crumbs: [{ name: "Home", path: "/" }, { name: "Private driver", path: "/private-driver/" }],
   }),
   component: PrivateDriver,
 });
 
-const benefitIcons = [MapPinned, Luggage, Clock3, MessageSquareText];
+const benefitIcons = [MapPinned, Luggage, MessageSquareText] as const;
+const planningLinks = [
+  { title: "Airport transfers", description: "Private pickups from Ben Gurion Airport.", to: "/airport-transfers/" as const, icon: PlaneLanding },
+  { title: "Tours & day trips", description: "Explore more experiences around Israel.", to: "/tours/" as const, icon: Compass },
+  { title: "Shore excursions", description: "Plan a day ashore from Haifa or Ashdod.", to: "/shore-excursions/" as const, icon: Ship },
+  { title: "Where to stay", description: "Find a convenient base for your journey.", to: "/accommodation/" as const, icon: BedDouble },
+  { title: "Car rental", description: "Compare options for driving independently.", to: "/car-rental/" as const, icon: CarFront },
+  { title: "All travel guides", description: "Discover more practical tips for Israel.", to: "/travel-blog/" as const, icon: BookOpen },
+] as const;
 const focusQuote = () => requestAnimationFrame(() => document.getElementById("request-quote")?.focus({ preventScroll: true }));
 
 function PrivateDriver() {
   const transfer = Route.useSearch();
-  return <PrivateDriverContent key={`${transfer.port || ""}-${transfer.transfer || ""}-${transfer.tour || ""}`} transfer={transfer} />;
+  return <PrivateDriverContent key={String(transfer.port || "") + "-" + String(transfer.transfer || "") + "-" + String(transfer.tour || "")} transfer={transfer} />;
 }
 
 function PrivateDriverContent({ transfer }: { transfer: ReturnType<typeof parsePrivateDriverSearch> }) {
   const portFields = portTransferPrefill(transfer);
   const tourFields = privateTourPrefill(transfer);
   const [serviceId, setServiceId] = useState(portFields ? "intercity" : tourFields ? "day-hire" : "");
-  return <main className="mx-auto max-w-5xl px-4 pb-24 lg:pb-8">
-    <div className="pt-6"><Breadcrumbs items={[{ name: "Home", to: "/" }, { name: "Private driver", to: "/private-driver/" }]} /></div>
-    <header className="mt-7 grid items-center gap-7 lg:grid-cols-[1.2fr_1fr]">
-      <div className="min-w-0"><p className="eyebrow">Your journey, your pace</p><h1 className="mt-3 text-4xl leading-[1.1] md:text-5xl">Private driver in Israel</h1>
-        <p className="mt-4 text-lg leading-relaxed text-muted-foreground">Travel between hotels, plan a day out or connect several stops with a private driver. Share your route with me so I can agree the vehicle, itinerary and full price with you before booking.</p>
-        <a href="#request-quote" onClick={focusQuote} className="btn btn-primary mt-6">Request your private driver</a><p className="mt-3 text-sm text-muted-foreground">A personal quote · Your agreed itinerary · No booking until confirmation</p>
-        <PageUpdated date={PRIVATE_DRIVER_CHECK_DATE} />
-      </div>
-      <img src={privateDriverHero.src} alt={privateDriverHero.alt} width={755} height={503} fetchPriority="high" decoding="async" className="aspect-[4/3] w-full rounded-2xl object-cover" />
-    </header>
-    <AuthorCard />
-    <section id="journeys" aria-labelledby="journeys-h" className="mt-12">
-      <p className="eyebrow">Choose the journey you need</p><h2 id="journeys-h" className="mt-2 text-3xl">Intercity transfers & day hire</h2><p className="mt-3 leading-relaxed text-muted-foreground">Start with the type of trip, then tell me the details. Every route is quoted individually.</p>
-      <div className="mt-6 grid gap-5 md:grid-cols-3">{privateDriverJourneys.map((journey) => <article key={journey.id} className="flex h-full flex-col overflow-hidden rounded-2xl border bg-card" data-testid="driver-journey-card">
-        <img src={journey.photo.src} alt={journey.photo.alt} width={360} height={240} loading="lazy" decoding="async" className="aspect-[16/9] w-full object-cover" />
-        <div className="flex flex-1 flex-col p-5"><h3 className="text-2xl">{journey.title}</h3><p className="mt-3 flex-1 text-sm leading-relaxed text-muted-foreground">{journey.text}</p><a href="#request-quote" onClick={() => { setServiceId(journey.id); focusQuote(); }} className="mt-5 inline-flex items-center gap-2 font-semibold text-primary underline underline-offset-4">Plan this journey<ArrowRight className="h-4 w-4" aria-hidden /></a></div>
-      </article>)}</div>
-    </section>
-    {portFields && <p className="mt-8 rounded-xl border bg-secondary/50 p-5 text-sm">Your one-way transfer request starts at {portFields.pickup}{portFields.dropoff ? ` and goes to ${portFields.dropoff}` : "; add your hotel or final address below"}. Please include the cruise ship and disembarkation details, and any flight details for an airport transfer. I must confirm the meeting point, timing, vehicle and price before booking.</p>}
-    {tourFields && <p className="mt-8 rounded-xl border bg-secondary/50 p-5 text-sm">Your preferred day trip is included in the request below. Add your date, exact pickup and final drop-off, and any changes you would like. I will confirm the route, availability and full price with you.</p>}
-    <PrivateDriverQuoteForm serviceId={serviceId} onServiceChange={setServiceId} />
-    <section id="benefits" aria-labelledby="benefits-h" className="mt-14">
-      <p className="eyebrow">Make the day work for you</p><h2 id="benefits-h" className="mt-2 text-3xl">What to arrange with your private driver</h2>
-      <div className="mt-6 grid gap-4 sm:grid-cols-2">{privateDriverBenefits.map((benefit, index) => { const Icon = benefitIcons[index]!; return <article key={benefit.title} className="rounded-xl border bg-card p-6"><Icon className="h-6 w-6 text-primary" aria-hidden /><h3 className="mt-4 text-2xl">{benefit.title}</h3><p className="mt-3 text-sm leading-relaxed text-muted-foreground">{benefit.text}</p></article>; })}</div>
-    </section>
-    <section id="planning" aria-labelledby="planning-h" className="mt-14">
-      <h2 id="planning-h" className="text-3xl">Plan the day before requesting a quote</h2>
-      <div className="mt-5 grid gap-4 sm:grid-cols-2">
-        <Checklist title="Share the details" items={["Pickup and final drop-off addresses", "Date, preferred time and any fixed appointments", "Every stop and the time you would like there", "All passengers, bags and children's ages", "Guide language, mobility or access needs"]} />
-        <Checklist title="Confirm in writing" items={["Vehicle size, luggage capacity and total price", "Included hours, distance and waiting time", "Parking, tolls, extra stops and overtime", "Guiding, entrance tickets and meals", "Payment, cancellation and itinerary changes"]} />
-      </div>
-      <div className="mt-5 rounded-2xl bg-secondary/60 p-6"><h3 className="text-2xl">A driver and a tour guide are different services</h3><p className="mt-3 leading-relaxed text-muted-foreground">Use a driver for transportation and an agreed route. If you want guided visits, request a licensed guide and the language you need; ask what is included and what costs extra. Do not assume admission, meals or guiding are part of a transport quote.</p><p className="mt-3 text-sm text-muted-foreground">Prefer to drive yourself? Explore <Link to="/car-rental/" className="font-semibold text-primary underline">car rental in Israel</Link> and compare the full cost for your plans.</p></div>
-    </section>
-    <section id="how-it-works" aria-labelledby="steps-h" className="mt-14"><h2 id="steps-h" className="text-3xl">From an idea to an agreed itinerary</h2><ol className="mt-5 grid gap-4 md:grid-cols-3">{privateDriverSteps.map((step, index) => <li key={step.title} className="rounded-xl border p-5"><p className="text-xs font-semibold text-primary">0{index + 1}</p><h3 className="mt-3 text-2xl">{step.title}</h3><p className="mt-3 text-sm leading-relaxed text-muted-foreground">{step.text}</p></li>)}</ol></section>
-    <FaqList faqs={privateDriverFaqs} />
-    <section aria-labelledby="ready-h" className="mt-14 rounded-2xl bg-primary p-6 text-primary-foreground sm:p-8"><h2 id="ready-h" className="text-3xl">Tell me where you want to go</h2><p className="mt-3 max-w-2xl leading-relaxed opacity-90">A simple hotel transfer or a day with several stops: share what matters to your party and ask for a personal proposal.</p><a href="#request-quote" onClick={focusQuote} className="btn btn-light mt-5">Request a personal quote</a></section>
-    <section id="travel-guides" aria-labelledby="guides-h" className="mt-14">
-      <p className="eyebrow">Keep planning your visit</p><h2 id="guides-h" className="mt-2 text-3xl">Guides for your route and your stay</h2>
-      <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">{privateDriverGuides.map((guide) => <Link key={guide.to} to={guide.to} className="flex h-full flex-col overflow-hidden rounded-xl border bg-card hover:border-primary focus-visible:outline-2 focus-visible:outline-primary" data-testid="driver-guide-card"><img src={guide.photo.src} alt={guide.photo.alt} width={360} height={240} loading="lazy" decoding="async" className="aspect-[16/9] w-full object-cover" /><div className="flex flex-1 flex-col p-5"><h3 className="text-2xl">{guide.title}</h3><p className="mt-2 flex-1 text-sm leading-relaxed text-muted-foreground">{guide.text}</p><span className="mt-4 text-sm font-semibold text-primary">Read the guide <span aria-hidden>→</span></span></div></Link>)}</div>
-    </section>
-    <RelatedLinks title="More ways to travel in Israel" items={[
-      { label: "Airport transfers", to: "/airport-transfers/", note: "Private Ben Gurion pickups and destination starting rates" },
-      { label: "Car rental", to: "/car-rental/", note: "For an independent driving itinerary" },
-      { label: "Tours & day trips", to: "/tours/", note: "Explore organised visits and day-trip options" },
-      { label: "Shore excursions", to: "/shore-excursions/", note: "Plan around a Haifa or Ashdod port call" },
-    ]} />
-    <StayPhotoCredits photos={[privateDriverHero, ...privateDriverJourneys.map((journey) => journey.photo), ...privateDriverGuides.map((guide) => guide.photo), airportTransferPhotos["moshe"]!]} />
-    <div className="fixed inset-x-0 bottom-0 z-30 border-t bg-background/95 px-4 py-3 backdrop-blur lg:hidden"><div className="mx-auto flex max-w-5xl items-center justify-between gap-3"><p className="text-sm font-medium">Your private driver<br /><span className="text-xs text-muted-foreground">A quote for your itinerary</span></p><a href="#request-quote" onClick={focusQuote} className="btn btn-primary shrink-0 text-sm">Request a quote</a></div></div>
+  const creditedPhotos = [privateDriverHero, ...privateDriverJourneys.map(journey => journey.photo), ...privateDriverGuides.map(guide => guide.photo)];
+
+  return <main className="pb-12" data-testid="private-driver-page">
+    <HubHeader
+      crumbs={[{ name: "Home", to: "/" }, { name: "Private driver", to: "/private-driver/" }]}
+      eyebrow="Travel at your own pace"
+      title="Private driver in Israel"
+      intro="From hotel-to-hotel transfers to a full day exploring Israel, I'll help arrange a private driver around your route and group. Tell me what you have in mind, and I'll prepare a personal quote."
+      checkedAt={PRIVATE_DRIVER_CHECK_DATE}
+      image={<GuideHeroMedia src={privateDriverHero.src} alt={privateDriverHero.alt} compact />}
+      actions={<a href="#request-quote" onClick={focusQuote} className="inline-flex min-h-11 items-center justify-center rounded-lg bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary/90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">Request a personal quote</a>}
+    />
+
+    <div className="mx-auto max-w-5xl px-4">
+      <section id="journeys" aria-labelledby="journeys-h" className="mt-8 scroll-mt-24">
+        <h2 id="journeys-h" className="text-2xl font-semibold">Choose the journey that suits you</h2>
+        <p className="mt-2 max-w-3xl text-sm leading-relaxed text-muted-foreground">A direct transfer, a day out or several stops along the way — choose a starting point and I'll help with the details.</p>
+        <div className="mt-4 grid gap-3 md:grid-cols-3">
+          {privateDriverJourneys.map(journey => <article key={journey.id} className="flex h-full min-w-0 flex-col overflow-hidden rounded-2xl border bg-card transition-colors hover:border-primary/40" data-testid="driver-journey-card">
+            <img src={journey.photo.src} alt={journey.photo.alt} width={360} height={240} loading="lazy" decoding="async" className="aspect-[3/2] w-full object-cover" />
+            <div className="flex flex-1 flex-col p-4">
+              <h3 className="text-lg font-semibold leading-snug">{journey.title}</h3>
+              <p className="mt-2 flex-1 text-sm leading-relaxed text-muted-foreground">{journey.text}</p>
+              <a href="#request-quote" onClick={() => { setServiceId(journey.id); focusQuote(); }} className="mt-3 inline-flex min-h-9 items-center self-start text-sm font-semibold text-primary underline-offset-4 hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">Request this journey</a>
+            </div>
+          </article>)}
+        </div>
+      </section>
+
+      <section id="benefits" aria-labelledby="benefits-h" className="mt-8 scroll-mt-24">
+        <h2 id="benefits-h" className="text-2xl font-semibold">A journey planned around you</h2>
+        <div className="mt-4 grid gap-3 rounded-2xl border bg-secondary/25 p-3 sm:grid-cols-3 sm:p-4">
+          {privateDriverBenefits.map((benefit, index) => {
+            const Icon = benefitIcons[index]!;
+            return <div key={benefit.title} className="min-w-0 rounded-xl bg-card/70 p-3 sm:bg-transparent sm:p-2">
+              <Icon className="size-5 text-primary" aria-hidden />
+              <h3 className="mt-2 text-base font-semibold leading-snug">{benefit.title}</h3>
+              <p className="mt-1 text-sm leading-relaxed text-muted-foreground">{benefit.text}</p>
+            </div>;
+          })}
+        </div>
+      </section>
+
+      {portFields && <p className="mt-6 rounded-xl border bg-secondary/40 px-4 py-3 text-sm leading-relaxed">Travelling from {portFields.pickup}? Please add your exact pickup point, destination and any ship or flight details in the form so I can check the arrangements for your journey.</p>}
+      {tourFields && <p className="mt-6 rounded-xl border bg-secondary/40 px-4 py-3 text-sm leading-relaxed">Planning a private day out? Please include the itinerary you'd like, your pickup point and any changes you have in mind in the form below.</p>}
+      <PrivateDriverQuoteForm serviceId={serviceId} onServiceChange={setServiceId} />
+
+      <FaqList faqs={privateDriverFaqs} compact />
+
+      <section id="travel-guides" aria-labelledby="guides-h" className="mt-9 scroll-mt-24">
+        <h2 id="guides-h" className="text-2xl font-semibold">Related travel guides</h2>
+        <ul className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+          {privateDriverGuides.map(guide => <li key={guide.to} className="min-w-0">
+            <Link to={guide.to} className="group flex h-full min-w-0 items-center gap-3 rounded-xl border bg-card p-3 transition-colors hover:border-primary/50 hover:bg-secondary/20 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary" data-testid="driver-guide-card">
+              <img src={guide.photo.src} alt={guide.photo.alt} width={112} height={75} loading="lazy" decoding="async" className="aspect-[3/2] w-20 shrink-0 rounded-lg object-cover sm:w-24 lg:w-20 xl:w-24" />
+              <span className="min-w-0 flex-1">
+                <span className="block text-sm font-semibold leading-snug text-foreground group-hover:text-primary">{guide.title}</span>
+                <span className="mt-1 line-clamp-2 block text-xs leading-relaxed text-muted-foreground">{guide.text}</span>
+                <span className="mt-1.5 inline-block text-xs font-semibold text-primary group-hover:underline">Read guide</span>
+              </span>
+            </Link>
+          </li>)}
+        </ul>
+      </section>
+
+      <section id="next-steps" aria-labelledby="next-steps-h" className="mt-9 scroll-mt-24">
+        <h2 id="next-steps-h" className="text-2xl font-semibold">Plan the next part of your trip</h2>
+        <ul className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+          {planningLinks.map(item => {
+            const Icon = item.icon;
+            return <li key={item.to} className="min-w-0">
+              <Link to={item.to} className="group flex h-full min-w-0 items-start gap-3 rounded-xl border bg-card p-3 transition-colors hover:border-primary/50 hover:bg-secondary/20 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
+                <Icon aria-hidden className="mt-0.5 size-5 shrink-0 text-primary" />
+                <span className="min-w-0">
+                  <span className="block text-sm font-semibold leading-snug text-foreground group-hover:text-primary">{item.title}</span>
+                  <span className="mt-1 block text-xs leading-relaxed text-muted-foreground">{item.description}</span>
+                </span>
+              </Link>
+            </li>;
+          })}
+        </ul>
+      </section>
+
+      <StayPhotoCredits photos={creditedPhotos} />
+    </div>
   </main>;
 }
