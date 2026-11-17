@@ -30,6 +30,7 @@ export const privateDriverHero = {
   src: roadTripPhoto,
   alt: "Illustration of a vehicle travelling along a desert road in Israel",
   sourceUrl: "",
+  label: "Travel through Israel",
 };
 export const privateDriverBenefits = [
   { title: "A route that fits your plans", text: "Choose your pickup, drop-off and favourite stops rather than following a fixed itinerary." },
@@ -47,10 +48,10 @@ export const privateDriverFaqs = [
   { q: "When is my booking confirmed?", a: "After we agree on the route, vehicle, price and relevant terms, I'll confirm the arrangements with you. Sending the inquiry form alone does not create a booking." },
 ];
 export const privateDriverGuides = [
-  { title: "Getting around Israel", to: travelGuidePaths.israel, text: "Plan journeys between cities and regions.", photo: { src: localBusesPhoto, alt: "Buses at an Israeli transport terminal" } },
-  { title: "Getting around Tel Aviv", to: travelGuidePaths.telAviv, text: "Explore local transport and travel options.", photo: { src: telAvivStreetPhoto, alt: "Pedestrian-friendly streets in central Tel Aviv" } },
-  { title: "Taxis in Israel", to: travelGuidePaths.taxis, text: "Understand taxi options and fares.", photo: { src: taxiPhoto, alt: "Taxis travelling on a road in Israel" } },
-  { title: "Where to stay in Jerusalem", to: "/travel-blog/where-to-stay-in-jerusalem/" as const, text: "Choose an area for your hotel stay.", photo: { src: jerusalemPhoto, alt: "Stone buildings in Jerusalem's Old City" } },
-  { title: "Caesarea visitor guide", to: "/attractions/caesarea/" as const, text: "Add ancient Caesarea to a coastal route.", photo: { src: caesareaPhoto, alt: "Ancient Caesarea beside the Mediterranean Sea" } },
-  { title: "Dead Sea hotels", to: "/travel-blog/best-dead-sea-hotels/" as const, text: "Find your base on the Dead Sea coast.", photo: { src: deadSeaPhoto, alt: "Beach and hotels near the Dead Sea" } },
+  { title: "Getting around Israel", to: travelGuidePaths.israel, text: "Plan journeys between cities and regions.", photo: { src: localBusesPhoto, alt: "Buses at an Israeli transport terminal", sourceUrl: "", label: "Getting around Israel" } },
+  { title: "Getting around Tel Aviv", to: travelGuidePaths.telAviv, text: "Explore local transport and travel options.", photo: { src: telAvivStreetPhoto, alt: "Pedestrian-friendly streets in central Tel Aviv", sourceUrl: "", label: "Getting around Tel Aviv" } },
+  { title: "Taxis in Israel", to: travelGuidePaths.taxis, text: "Understand taxi options and fares.", photo: { src: taxiPhoto, alt: "Taxis travelling on a road in Israel", sourceUrl: "", label: "Taxis in Israel" } },
+  { title: "Where to stay in Jerusalem", to: "/travel-blog/where-to-stay-in-jerusalem/" as const, text: "Choose an area for your hotel stay.", photo: { src: jerusalemPhoto, alt: "Stone buildings in Jerusalem's Old City", sourceUrl: "", label: "Jerusalem Old City" } },
+  { title: "Caesarea visitor guide", to: "/attractions/caesarea/" as const, text: "Add ancient Caesarea to a coastal route.", photo: { src: caesareaPhoto, alt: "Ancient Caesarea beside the Mediterranean Sea", sourceUrl: "", label: "Caesarea" } },
+  { title: "Dead Sea hotels", to: "/travel-blog/best-dead-sea-hotels/" as const, text: "Find your base on the Dead Sea coast.", photo: { src: deadSeaPhoto, alt: "Beach and hotels near the Dead Sea", sourceUrl: "", label: "Dead Sea beach" } },
 ];
