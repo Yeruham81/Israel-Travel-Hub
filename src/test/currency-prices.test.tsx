@@ -78,6 +78,9 @@ describe("international price estimates", () => {
     for (const rate of airportTransferRates) {
       const card = container.querySelector(`[data-destination="${rate.id}"]`)!;
       const estimate = within(card as HTMLElement).getByTestId("compact-currency-estimate");
+      // Both equivalents must remain visible at mobile sizes, not hidden until sm.
+      expect(estimate.parentElement).toHaveClass("min-w-0");
+      expect(estimate.parentElement).not.toHaveClass("hidden", "sm:block");
       expect(estimate).toHaveAttribute("data-ils", String(rate.price.amount));
       expect(estimate.querySelector('[data-currency="USD"]')).toHaveTextContent("≈ $" + Math.round(rate.price.amount / 4).toLocaleString("en-US"));
       expect(estimate.querySelector('[data-currency="EUR"]')).toHaveTextContent(`€${Math.round(rate.price.amount / 5).toLocaleString("en-US")}`);

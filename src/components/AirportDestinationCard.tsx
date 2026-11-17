@@ -22,7 +22,7 @@ export function AirportDestinationCard({ id, destination, price, photo, onChoose
       <div className="min-w-0 flex-1">
         <h3 className="text-base font-semibold leading-tight sm:text-xl sm:leading-snug">{destination}</h3>
         <p className="mt-0.5 text-[13px] font-bold tabular-nums text-foreground sm:mt-1 sm:text-lg">From ₪{price?.amount.toLocaleString("en-US")}</p>
-        {price && <div className="hidden sm:block"><CompactCurrencyEquivalents amount={price.amount} /></div>}
+        {price && <div className="min-w-0"><CompactCurrencyEquivalents amount={price.amount} /></div>}
         <p className="mt-0.5 hidden text-xs leading-snug text-muted-foreground sm:block">Weekday · One way · Up to 4 passengers</p>
         <span className="mt-2 hidden text-sm font-semibold text-primary group-hover:underline sm:inline-block">View transfer details</span>
       </div>
@@ -37,7 +37,7 @@ export function AirportDestinationCard({ id, destination, price, photo, onChoose
     <div className="min-w-0">
       <h3 className="text-base font-semibold leading-tight sm:text-lg sm:leading-snug">{id === "other" ? "Another destination?" : destination}</h3>
       {price && <p className="mt-0.5 text-[13px] font-bold tabular-nums text-foreground sm:mt-1 sm:text-base">From ₪{price.amount.toLocaleString("en-US")}</p>}
-      {price && <div className="hidden sm:block"><CompactCurrencyEquivalents amount={price.amount} /></div>}
+      {price && <div className="min-w-0"><CompactCurrencyEquivalents amount={price.amount} /></div>}
     </div>
     <a href="#request-quote" onClick={() => onChoose?.(id)} className={`${hubQuoteButtonClass} justify-self-end`}>Request a quote</a>
   </article>;
