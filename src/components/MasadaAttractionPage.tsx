@@ -65,11 +65,16 @@ export const masadaDestinationContent: AttractionDestinationContent = {
         <p>The shorter <a href={official.romanRamp} target="_blank" rel="noopener noreferrer" className={inlineLink}>Roman Ramp Trail</a> approaches the plateau from the western entrance, not from the cable-car station.</p>
       </AttractionHighlight>
       <AttractionHighlight
-        title="The Snake Path and cable car"
+        title="The steep Snake Path"
         image={{ src: snakePathPhoto, alt: "Steep winding Snake Path climbing the eastern side of Masada" }}
       >
-        <p>The Snake Path zigzags steeply up the eastern cliff. Its approximately 2 km ascent climbs around 350 m and takes about an hour for fit hikers. Heat restrictions can close it to ascent or descent well before the park closes.</p>
-        <p>For an easier ascent, the cable car leaves from Masada East and takes around three minutes to reach the summit. It is paid separately from park admission.</p>
+        <p>The Snake Path zigzags up the eastern cliff. Its approximately 2 km ascent climbs around 350 m and takes about an hour for fit hikers. Heat restrictions can close it to ascent or descent well before the park closes.</p>
+      </AttractionHighlight>
+      <AttractionHighlight
+        title="The cable car to the summit"
+        image={{ src: cableCarPhoto, alt: "Masada's cable car climbing the desert mountain towards the fortress summit" }}
+      >
+        <p>For an easier ascent, the cable car leaves from Masada East and takes around three minutes to reach the summit. It is paid separately from park admission, and the last ascent normally leaves one hour before the park closes.</p>
       </AttractionHighlight>
       <AttractionHighlight title="The Yigael Yadin Masada Museum">
         <p>Located at the eastern visitor complex, the museum displays archaeological finds from the excavations, including objects linked to Herod, the rebels and the Roman army.</p>
@@ -101,7 +106,7 @@ export const masadaDestinationContent: AttractionDestinationContent = {
             <div className="flex items-start justify-between gap-3"><dt>Child in group</dt><dd className="shrink-0 font-semibold" dir="ltr">{fees.childGroup}</dd></div>
             <div className="flex items-start justify-between gap-3"><dt>Israeli senior citizen</dt><dd className="shrink-0 font-semibold" dir="ltr">{fees.israeliSenior}</dd></div>
           </dl>
-          <p className="mt-3 text-xs text-muted-foreground">Groups are more than 30 people. Other official concession categories apply. Matmon membership covers regular park admission under the program's terms.</p>
+          <p className="mt-3 text-xs text-muted-foreground">Group rates apply to groups of more than 30 people. Other official concession categories apply. Matmon membership covers regular park admission under the program's terms.</p>
           <a href={official.fees} target="_blank" rel="noopener noreferrer" className="mt-3 inline-flex items-center gap-1 text-sm font-semibold text-primary hover:underline">Official admission prices <ArrowUpRight className="h-3.5 w-3.5" aria-hidden="true" /></a>
         </article>
       </div>
