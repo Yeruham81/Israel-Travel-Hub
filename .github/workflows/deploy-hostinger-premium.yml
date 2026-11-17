@@ -176,7 +176,7 @@ jobs:
             .output/public/ "$HOSTINGER_SSH_USER@$HOSTINGER_SSH_HOST:$HOSTINGER_REMOTE_PATH/"
 
       # This one retired map was published before switching Tabgha back to Google Maps.
-      # General rsync intentionally has no --delete; remove only this verified file.
+      # Preserve normal upload behavior; relocate only this verified obsolete file.
       - name: Retire obsolete OpenStreetMap Tabgha file
         if: steps.freshness.outputs.current == 'true' && env.DRY_RUN != 'true'
         shell: bash
