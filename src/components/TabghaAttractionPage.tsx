@@ -113,7 +113,7 @@ export const tabghaDestinationContent: AttractionDestinationContent = {
               <td className="px-4 py-3 align-top leading-relaxed">{site.details}</td>
               <td className="px-4 py-3 align-top">
                 <a href={"tel:" + site.phoneHref} dir="ltr" className={phoneLinkClass}>{site.phone}</a>
-                <a href={site.sourceUrl} target="_blank" rel="noopener noreferrer" className="mt-2 block text-xs font-semibold text-primary hover:underline">Official hours</a>
+                <a href={site.sourceUrl} target="_blank" rel="noopener noreferrer" className="mt-2 block text-xs font-semibold text-primary hover:underline">{site.source}</a>
               </td>
             </tr>)}
           </tbody>
