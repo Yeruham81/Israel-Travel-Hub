@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
-import { BadgeCheck, BedDouble, BookOpen, CalendarCheck, CalendarDays, CheckCircle2, Map, PlaneLanding, Smartphone, Sun } from "lucide-react";
+import { BadgeCheck, BedDouble, BookOpen, CalendarCheck, CalendarDays, CheckCircle2, Map as MapIcon, PlaneLanding, Smartphone, Sun } from "lucide-react";
 import { FaqList, HubHeader } from "@/components/Guide";
 import { GuideHeroMedia } from "@/components/GuideHeroMedia";
 import { TransferQuoteForm } from "@/components/TransferQuoteForm";
@@ -31,7 +31,7 @@ const tripPlanningLinks = [
   { title: "Where to stay", description: "Accommodation and convenient bases.", to: "/accommodation/" as const, icon: BedDouble },
   { title: "Travel eSIM for Israel", description: "Stay connected during your trip.", to: travelGuidePaths.esim, icon: Smartphone },
   { title: "Israel holidays & events", description: "Plan around festivals and special dates.", to: travelGuidePaths.calendar, icon: CalendarDays },
-  { title: "Israel itinerary: 7 days", description: "A week of highlights and travel ideas.", to: "/travel-blog/israel-itinerary-7-days/" as const, icon: Map },
+  { title: "Israel itinerary: 7 days", description: "A week of highlights and travel ideas.", to: "/travel-blog/israel-itinerary-7-days/" as const, icon: MapIcon },
 ] as const;
 
 export const Route = createFileRoute("/airport-transfers/")({
