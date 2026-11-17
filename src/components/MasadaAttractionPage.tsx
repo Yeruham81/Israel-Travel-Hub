@@ -12,7 +12,7 @@ import snakePathPhoto from "@/assets/guides/dead-sea-excursions/masada-snake-pat
 import cableCarPhoto from "@/assets/home/masada-cable-car-wide.webp";
 import panoramaPhoto from "@/assets/home/hero-refresh-masada-dead-sea-v4-large.webp";
 import deadSeaPhoto from "@/assets/dead-sea/landscape.webp";
-import einGediPhoto from "@/assets/guides/dead-sea-excursions/ein-gedi-waterfall.webp";
+import desertShorePhoto from "@/assets/guides/dead-sea-excursions/dead-sea-salt-shore.webp";
 
 const fees = masadaSite.visit;
 const official = masadaSite.sources;
@@ -236,7 +236,7 @@ export const masadaDestinationContent: AttractionDestinationContent = {
           </div>
         </Link>
         <a href="#contact" className="attraction-tour-card group flex h-full min-w-0 items-start gap-3 rounded-xl border bg-card p-3 transition-all hover:border-primary/60 hover:shadow-sm focus-visible:outline-2 focus-visible:outline-primary sm:p-4">
-          <img src={einGediPhoto} alt="Green desert oasis and waterfall near Ein Gedi on a Dead Sea day trip" width={128} height={100} loading="lazy" decoding="async" className="h-24 w-24 shrink-0 rounded-lg object-cover sm:w-28"/>
+          <img src={desertShorePhoto} alt="Salt formations and the dramatic desert shoreline of the Dead Sea" width={128} height={100} loading="lazy" decoding="async" className="h-24 w-24 shrink-0 rounded-lg object-cover sm:w-28"/>
           <div className="flex min-w-0 flex-1 flex-col">
             <h3 className="font-serif text-lg font-semibold leading-snug group-hover:text-primary">Plan a private desert day</h3>
             <p className="mt-1 text-sm leading-relaxed text-muted-foreground">Choose stops around Masada and the Dead Sea.</p>
@@ -261,6 +261,8 @@ export const masadaDestinationContent: AttractionDestinationContent = {
     { label: "Qasr el-Yahud", to: "/attractions/qasr-el-yahud/", note: "Historic Jordan River baptism site on the way from Jerusalem." },
     { label: "Old City of Jerusalem", to: "/attractions/old-city-jerusalem/", note: "Historic religious and cultural landmarks for an overnight or longer trip." },
     { label: "Mitzpe Ramon", to: "/attractions/mitzpe-ramon-crater/", note: "A longer desert-road journey to the dramatic Makhtesh Ramon landscape." },
+    { label: "Mount of Olives", to: "/attractions/mount-of-olives/", note: "Jerusalem viewpoints, churches and historic sites across from the Old City." },
+    { label: "Mount Zion", to: "/attractions/mount-zion/", note: "Historic churches and landmarks just outside Jerusalem's Old City walls." },
   ],
   planningLinks: [
     { label: "Jerusalem to the Dead Sea", to: "/travel-blog/jerusalem-to-the-dead-sea/", description: "Build a realistic route from Jerusalem.", icon: "itinerary" },
