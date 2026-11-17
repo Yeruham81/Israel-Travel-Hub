@@ -52,7 +52,7 @@ export function AttractionGuidePage({ id }: {id:AttractionId}) {
   const sacred = id === "mount-zion" || id === "mount-of-olives";
   const ids=Object.keys(attractionGuides) as AttractionId[];
   const nearby=ids.filter(other=>other!==id && attractionGuides[other].region===a.region).slice(0,4);
-  const sections=[["highlights","What to see"],["getting-there","Getting there"],["tips","Practical tips"],["official","Official visitor information"],["faq","Questions"],["contact","Contact Moshe"]] as const;
+  const sections=[["highlights","What to see"],["getting-there","Getting there"],["tips","Practical tips"],["official","Official visitor information"],["faq","Questions"],["contact","Contact me"]] as const;
   return <main className="mx-auto max-w-5xl px-4 pb-16">
     <header className="pt-6">
       <Breadcrumbs items={[{name:"Home",to:"/"},{name:isRegionalOverview(id) ? "Travel guides" : "Attractions",to:isRegionalOverview(id) ? "/travel-blog/" : "/attractions/"},{name:a.title,to:attractionPath(id)}]}/>
