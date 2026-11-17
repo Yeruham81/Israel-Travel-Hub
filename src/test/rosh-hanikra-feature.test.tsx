@@ -18,7 +18,7 @@ describe("Rosh Hanikra attraction guide", () => {
     expect(content.intro).toBe(site.intro);
     expect(content.updatedAt).toBe("2026-11-17");
     expect(content.facts).toHaveLength(6);
-    expect(content.facts.find(f => f.label === "Admission")?.value).toBe("₪47 adult");
+    expect(content.facts.find(f => f.label === "Entry")?.value).toBe("₪47 adult");
     expect(content.facts.find(f => f.label === "Accessibility")?.value).toBe("Partly accessible");
     expect(attractionGuides["rosh-hanikra"].title).toBe(content.title);
     expect(attractionGuides["rosh-hanikra"].description).toBe(site.description);
