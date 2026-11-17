@@ -1,7 +1,7 @@
 import { Link } from "@tanstack/react-router";
 import { ArrowUpRight, BusFront, CarFront, Footprints } from "lucide-react";
 import {
-  AttractionDestinationPage, AttractionHighlight, AttractionPracticalTip,
+  AttractionDestinationPage, AttractionHighlight,
   type AttractionDestinationContent,
 } from "@/components/AttractionDestinationPage";
 import { telMegiddoSite } from "@/data/telMegiddoSite";
@@ -56,7 +56,8 @@ export const telMegiddoDestinationContent: AttractionDestinationContent = {
       </AttractionHighlight>
       <AttractionHighlight title="The underground water system">
         <p>One of Tel Megiddo's most memorable sights is the water system: a deep rock-cut shaft and a tunnel leading towards a spring outside the ancient city walls. It allowed residents to collect water while remaining protected during a siege.</p>
-        <p>The visitor route involves many stairs and an enclosed underground passage. Ask at the entrance whether the system is open on your date, where the route exits and whether it is suitable for everyone in your group. You can enjoy the surface archaeology even if you skip the descent.</p>
+        <p>The marked underground route has <strong>183 steps down</strong> to the shaft and <strong>80 steps up</strong> at the other end of the tunnel, according to the park's official audio guide. You emerge at a different point from where you entered; follow the signed path back towards the Canaanite gate and the start of the visit.</p>
+        <p>The descent is optional. If stairs or enclosed spaces are difficult for your group, follow the above-ground trail instead. Check with park staff that the underground section is open and where to rejoin your group.</p>
       </AttractionHighlight>
       <AttractionHighlight
         title="The tell and its Jezreel Valley setting"
@@ -77,7 +78,7 @@ export const telMegiddoDestinationContent: AttractionDestinationContent = {
           <p className="mt-2 text-sm leading-relaxed sm:text-base"><strong>Summer, Friday:</strong> {telMegiddoSite.hours.summerFriday}.</p>
           <p className="mt-2 text-sm leading-relaxed sm:text-base"><strong>Winter, Sunday–Thursday and Saturday:</strong> {telMegiddoSite.hours.winterRegular}.</p>
           <p className="mt-2 text-sm leading-relaxed sm:text-base"><strong>Winter, Friday:</strong> {telMegiddoSite.hours.winterFriday}.</p>
-          <p className="mt-3 text-sm leading-relaxed sm:text-base"><strong>Last admission is one hour before closing.</strong> Holiday eves and special dates may have shorter hours; check before visiting.</p>
+          <p className="mt-3 text-sm leading-relaxed sm:text-base"><strong>Last admission is one hour before closing.</strong> On some holiday eves, including Yom Kippur eve, the park lists an earlier <strong>13:00 closing time</strong>. Holiday-eve hours are not necessarily the same as Friday hours; confirm the schedule for your date on the official park page.</p>
         </article>
         <article className="rounded-xl border bg-card p-4">
           <h3 className="font-serif text-xl font-semibold">Admission and contact</h3>
@@ -88,9 +89,6 @@ export const telMegiddoDestinationContent: AttractionDestinationContent = {
           <a href={telMegiddoSite.sources.park} target="_blank" rel="noopener noreferrer" className="mt-3 inline-flex items-center gap-1 text-sm font-semibold text-primary hover:underline">Official prices and hours <ArrowUpRight className="h-3.5 w-3.5" aria-hidden="true" /></a>
         </article>
       </div>
-      <AttractionPracticalTip>
-        <strong>Before going into the water system:</strong> Check the open route and its exit with park staff. The descent and tunnel involve steep steps and enclosed spaces, and there are alternative sights above ground.
-      </AttractionPracticalTip>
       <div className="rounded-xl border border-border/80 bg-secondary/20 p-4 sm:p-5" data-testid="tel-megiddo-visitor-essentials">
         <h3 className="font-serif text-xl font-semibold">Useful things to know before visiting</h3>
         <ul className="mt-3 grid list-disc gap-x-6 gap-y-2 pl-5 text-sm leading-relaxed sm:grid-cols-2 sm:text-base">
@@ -114,11 +112,11 @@ export const telMegiddoDestinationContent: AttractionDestinationContent = {
           </article>
           <article className="rounded-xl border bg-card p-4">
             <div className="flex items-center gap-2"><BusFront className="h-5 w-5 text-primary" aria-hidden="true" /><h3 className="font-semibold">By public transport</h3></div>
-            <p className="mt-2 text-sm leading-relaxed">Look for services to <strong>Megiddo Antiquities Junction (מסעף מגידו עתיקות)</strong> on Route 66. Route 56 is among the services listed for the area, but check the correct direction, times and walk to the park entrance using the <a href="https://bus.gov.il/en/home" target="_blank" rel="noopener noreferrer" className={inlineLink}>official public transport planner</a>. For several sites in one day, consider <a href={carRentalAffiliateUrl("/attractions/tel-megiddo/")} target="_blank" rel="sponsored noopener noreferrer" className={inlineLink}>renting a car</a>, <Link to="/tours/nazareth-sea-of-galilee/" className={inlineLink}>comparing northern Israel tours</Link> or <a href="#contact" className={inlineLink}>arranging a private driver</a>.</p>
+            <p className="mt-2 text-sm leading-relaxed">Look for services to <strong>Megiddo Antiquities Junction (מסעף מגידו עתיקות, stop 55407)</strong> on Route 66. Route 56 is among the services listed for the area. Check which stop serves your direction, the safe walk to the entrance and the return timetable using the <a href="https://bus.gov.il/en/home" target="_blank" rel="noopener noreferrer" className={inlineLink}>official public transport planner</a>. For several sites in one day, consider <a href={carRentalAffiliateUrl("/attractions/tel-megiddo/")} target="_blank" rel="sponsored noopener noreferrer" className={inlineLink}>renting a car</a>, <Link to="/tours/nazareth-sea-of-galilee/" className={inlineLink}>comparing northern Israel tours</Link> or <a href="#contact" className={inlineLink}>arranging a private driver</a>.</p>
           </article>
           <article className="rounded-xl border bg-card p-4">
             <div className="flex items-center gap-2"><Footprints className="h-5 w-5 text-primary" aria-hidden="true" /><h3 className="font-semibold">Walking inside the park</h3></div>
-            <p className="mt-2 text-sm leading-relaxed">Follow the numbered, signposted visitor route around the mound. Ask at the entrance about an accessible route or avoiding the steep water-system descent; the underground walk is a separate commitment from the surface trail.</p>
+            <p className="mt-2 text-sm leading-relaxed">Follow the numbered, signposted visitor route around the mound. If you would prefer to remain above ground, staff can point out the surface route and accessible sections.</p>
           </article>
         </div>
         <div className="rounded-xl border bg-card p-3" data-testid="tel-megiddo-location-map">
@@ -137,8 +135,9 @@ export const telMegiddoDestinationContent: AttractionDestinationContent = {
         <ol className="mt-3 list-decimal space-y-2 pl-5 text-sm leading-relaxed sm:text-base">
           <li>Begin at the visitor centre and museum to understand the sequence of cities.</li>
           <li>Follow the marked trail through the city gates, temples, granary and stables.</li>
-          <li>Enjoy the valley viewpoints, then decide whether the water-system stairs suit your group.</li>
+          <li>Enjoy the valley viewpoints and choose whether to take the optional water-system route.</li>
         </ol>
+        <p className="mt-3 text-sm leading-relaxed sm:text-base">For a self-guided visit, try the <a href="https://www.parks.org.il/category/megiddo-trip-talk/" target="_blank" rel="noopener noreferrer" className={inlineLink}>official Trip Talk audio guide</a>, with English explanations for stops including the gates, temples, granary and water system.</p>
       </div>
       <div className="rounded-xl border bg-card p-4 sm:p-5">
         <h3 className="font-serif text-xl font-semibold">Combine Tel Megiddo with a northern Israel day trip</h3>
@@ -187,7 +186,7 @@ export const telMegiddoDestinationContent: AttractionDestinationContent = {
     { q: "What are the opening hours?", a: "The park generally opens at 08:00. Summer closing is 17:00 (16:00 Fridays), while winter closing is 16:00 (15:00 Fridays). Last admission is one hour before closing, and holiday schedules can be shorter." },
     { q: "Should I reserve my visit?", a: "Using the parks authority's official coordination system is recommended to secure a time and receive updates about your visit." },
     { q: "How long should I spend at Tel Megiddo?", a: "Allow roughly 1.5–2 hours for the main archaeological site, with extra time if you take the underground water-system route and watch the introductory film." },
-    { q: "Can everyone visit the underground water system?", a: "The route includes many steep steps and enclosed sections. Check that it is open and suitable for your group before descending." },
+    { q: "Can everyone visit the underground water system?", a: "No. The underground route has a steep descent and ascent. A surface route is available for visitors who prefer to skip it." },
     { q: "Can visitors who cannot use stairs still enjoy Tel Megiddo?", a: "Yes, there are adapted areas above ground. Ask the park which route is currently accessible and skip the underground steps if they are unsuitable." },
     { q: "Is Tel Megiddo the biblical Armageddon?", a: "The name Armageddon is widely associated with Megiddo in the Book of Revelation. The archaeological remains tell the documented history of ancient settlement and warfare; religious interpretations are a separate subject." },
     { q: "Can I get there by public transport?", a: "Bus services travel along Road 66 near Megiddo Antiquities Junction. Confirm the nearest stop, the safe final walk to the entrance and your return connection before travelling." },
