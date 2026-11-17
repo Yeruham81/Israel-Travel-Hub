@@ -1,12 +1,12 @@
 import type { Attraction } from "@/data/attractionGuideTypes";
 import { capernaumSite } from "@/data/capernaumSite";
 import { tabghaSite } from "@/data/tabghaSite";
+import { mountBeatitudesSite } from "@/data/mountBeatitudesSite";
 import haifaImg from "@/assets/haifa/panorama.webp";
 import akkoImg from "@/assets/shore-excursions/akko-port.jpg";
 import lake from "@/assets/home/tiberias-lake.webp";
 import roshHanikra from "@/assets/guides/rosh-hanikra.jpg";
 import mountTabor from "@/assets/guides/mount-tabor.jpg";
-import mountOfBeatitudes from "@/assets/guides/mount-of-beatitudes.jpg";
 export const northernAttractions: Record<string, Attraction> = {
 "sea-of-galilee":{
  title:"Sea of Galilee: shores, historic sites and visitor guide",description:"Discover the Sea of Galilee, Tiberias, Capernaum, Tabgha, Mount of Beatitudes and scenic lakeside sites, with access and planning tips.",
@@ -122,17 +122,19 @@ export const northernAttractions: Record<string, Attraction> = {
  ],
 },
 "mount-of-beatitudes":{
- title:"Mount of Beatitudes: church and panorama over Galilee",description:"Visit the Mount of Beatitudes above the Sea of Galilee: hilltop church, garden paths, viewpoints and practical travel advice.",
- region:"Sea of Galilee",image:{src:mountOfBeatitudes,alt:"Church of the Beatitudes and its gardens above the Sea of Galilee"},duration:"1–2 hours",
- intro:"The Mount of Beatitudes is traditionally associated with Jesus' Sermon on the Mount. Its peaceful sanctuary, gardens and views across the Sea of Galilee give the site a contemplative character.",
- takeaway:"Visit the church and its grounds with time for quiet reflection. This is a separate hilltop site from Mount Tabor, and access requires a distinct road journey.",
- highlights:[
- {name:"Church of the Beatitudes",description:"A distinctive octagonal Catholic church marks the setting of the Sermon on the Mount in Christian tradition.",tip:"Dress respectfully and check visiting hours and services."},
- {name:"Garden paths and quiet spaces",description:"The landscaped grounds encourage slow walking and contemplation.",tip:"Keep group noise low and respect reserved prayer areas."},
- {name:"Sea of Galilee viewpoint",description:"The hillside provides memorable views of the lake and surrounding Lower Galilee.",tip:"Views change with haze and weather; mornings are often more comfortable in warm seasons."}],
- arrival:["The Mount of Beatitudes is on a hillside north of the lake, not in Tiberias itself.","A road transfer is generally needed from Capernaum or other lakeside sites.","Check whether coaches have a specified parking and drop-off area."],
- planning:["Check current admission arrangements and worship schedules.","Bring sun protection for outdoor areas.","Choose a manageable route if anyone has mobility limitations.","A quieter visit works better than fitting it into an overloaded day."],
- faqs:[{q:"Is Mount of Beatitudes the same as Mount Tabor?",a:"No. These are two distinct Christian pilgrimage sites in different parts of Galilee."},{q:"Can visitors enter the church?",a:"Visitor access is generally possible when open, but services and private events take priority."},{q:"Is there a panoramic view?",a:"Yes. The grounds overlook the northern Sea of Galilee."}],
- official:[{label:"Christian Information Center",url:"https://www.cicts.org/"}],
+  title: mountBeatitudesSite.title,
+  description: mountBeatitudesSite.description,
+  region: mountBeatitudesSite.region,
+  image: mountBeatitudesSite.hero,
+  duration: "45–60 minutes",
+  intro: mountBeatitudesSite.intro,
+  takeaway: "Allow time for the octagonal church, gardens and views, and plan around the midday closure.",
+  highlights: [], arrival: [], planning: [], faqs: [],
+  official: [
+    {label: "Christian Information Center — Mount of Beatitudes hours and parking", url: mountBeatitudesSite.sources.hoursAndParking},
+    {label: "Church of the Beatitudes — official history and contact", url: mountBeatitudesSite.sources.churchAbout},
+    {label: "Church of the Beatitudes — pilgrim and group arrangements", url: mountBeatitudesSite.sources.visitAndGroups},
+    {label: "Jesus Trail — route through the Mount of Beatitudes", url: mountBeatitudesSite.sources.jesusTrail},
+  ],
 }
 };
