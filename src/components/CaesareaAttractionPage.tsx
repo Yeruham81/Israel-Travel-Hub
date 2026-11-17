@@ -7,7 +7,7 @@ import {
 import { caesareaSite } from "@/data/caesareaSite";
 import { carRentalAffiliateUrl } from "@/lib/car-rental-affiliate";
 import theaterPhoto from "@/assets/home/caesarea-theatre.webp";
-import coastPanorama from "@/assets/home/hero-caesarea-coast-desktop.jpg";
+import coastPanorama from "@/assets/home/hero-refresh-caesarea-coast-v4-large.webp";
 import akkoPhoto from "@/assets/shore-excursions/akko-port.jpg";
 import haifaPhoto from "@/assets/haifa/panorama.webp";
 
