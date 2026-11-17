@@ -71,7 +71,8 @@ describe("Tel Megiddo attraction guide", () => {
     expect(article).toContain("Holiday-eve hours are not necessarily the same as Friday hours");
     expect(article).not.toContain("<AttractionPracticalTip>");
     expect(article.split("183 steps down").length - 1).toBe(1);
-    expect(article).toContain("many stairs");
+    expect(article).toContain("183 steps down");
+    expect(article).toContain("80 steps up");
     expect(article).toContain("Megiddo Antiquities Junction");
     expect(article).toContain("מסעף מגידו עתיקות");
     expect(article).toContain("Road 66");
