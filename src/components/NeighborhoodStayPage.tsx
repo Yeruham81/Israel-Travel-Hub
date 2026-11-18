@@ -155,6 +155,9 @@ export function NeighborhoodStayPage({ area }: { area: NeighborhoodStayGuide }) 
         </Section>
         <Section id="location" title="Map, getting around & arriving with luggage" className="scroll-mt-32">
           <div className="mt-5"><AreaMap area={area} /></div>
+          {isJerusalem && <p className="mt-2 text-xs leading-relaxed text-muted-foreground">
+            This map marks the neighborhood, not individual hotel entrances. Check the exact address and walking route on the booking site.
+          </p>}
           {area.gettingAround.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
           {isJerusalem && localInsight && <aside className="mt-5 flex items-start gap-3 rounded-xl border border-amber-300/60 bg-amber-50/70 p-4 text-sm text-foreground dark:border-amber-600/40 dark:bg-amber-950/20">
             <Lightbulb className="mt-0.5 h-5 w-5 shrink-0 text-amber-600 dark:text-amber-400" aria-hidden />
