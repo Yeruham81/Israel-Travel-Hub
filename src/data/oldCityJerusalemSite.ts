@@ -34,6 +34,7 @@ export const oldCityJerusalemSite = {
     tunnelsBooking: "https://thekotel.org/en/book-a-tour/",
     tower: "https://www.tod.org.il/en/event/entrance-to-the-tower-of-david/",
     towerFaq: "https://www.tod.org.il/en/faqs/",
+    towerEntrance: "https://www.tod.org.il/en/qa/where-is-the-entrance-to-the-museum/",
     ramparts: "https://www.pami.co.il/en/attractions/ramparts-walk/",
     rampartsTickets: "https://www.pami.co.il/en/ramparts-tickets/",
     jerusalemTransit: "https://bus.gov.il/en/home",
