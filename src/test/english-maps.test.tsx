@@ -34,6 +34,27 @@ function label(expression: unknown, properties: Record<string, string>): unknown
 
 afterEach(() => { cleanup(); vi.useRealTimers(); });
 
+describe("Google Maps for the Jerusalem and Tel Aviv neighborhood pages", () => {
+  it("embeds Google Maps around the neighborhood reference, with an external Google Maps link", () => {
+    for (const area of [...jerusalemAreaGuides, ...telAvivAreaGuides]) {
+      const { container, unmount } = render(<AreaMap area={area} provider="google" />);
+      const iframe = container.querySelector("iframe")!;
+      const map = new URL(iframe.getAttribute("src")!);
+      expect(map.hostname).toBe("maps.google.com");
+      expect(map.searchParams.get("output")).toBe("embed");
+      expect(map.searchParams.get("q")).toBe(`${area.map.lat},${area.map.lon}`);
+      expect(iframe.title).toContain("Google Maps");
+      const link = container.querySelector("figcaption a")!;
+      const external = new URL(link.getAttribute("href")!);
+      expect(external.hostname).toBe("www.google.com");
+      expect(external.searchParams.get("query")).toBe(`${area.map.lat},${area.map.lon}`);
+      expect(link).toHaveTextContent("Open in Google Maps");
+      expect(container.querySelector("figcaption")).toHaveTextContent(area.map.reference);
+      unmount();
+    }
+  });
+});
+
 describe("free English maps throughout the accommodation guides", () => {
   it("all 17 area/destination locations keep their bounds and marker in both the lazy embed and larger English map", () => {
     vi.useFakeTimers();
