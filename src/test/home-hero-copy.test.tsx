@@ -115,7 +115,7 @@ describe("homepage marketing copy and service sections", () => {
       "/images/home/transfer-haifa-bahai-gardens.webp",
       "/images/home/transfer-ein-bokek-aerial.webp",
     ]);
-    const transferHeroPhoto = transferSection.querySelector('[data-testid="service-layout-transfers"] > img');
+    const transferHeroPhoto = transferSection.querySelector('[data-testid="service-layout-transfers"] > picture > img');
     expect(transferHeroPhoto).toHaveClass("aspect-[16/9]", "lg:h-full");
     expect(transferHeroPhoto).toHaveAttribute("src", services.find(s => s.id === "transfers")?.feature?.src);
     expect(transferHeroPhoto).toHaveAttribute("alt", expect.stringContaining("BEN GURION AIRPORT"));
