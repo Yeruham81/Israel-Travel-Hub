@@ -5,12 +5,7 @@
  */
 import type { HotelIllustration } from "@/data/telAvivHotelPhotos";
 import jerusalemOldCity from "@/assets/home/jerusalem-old-city.webp";
-import jerusalemLightRail from "@/assets/guides/2026-11/jerusalem-light-rail.webp";
 import jaffaGate from "@/assets/home/hero-refresh-jerusalem-jaffa-gate-v4-medium.webp";
-
-import foodMarket from "@/assets/tours-hub/food-markets.webp";
-
-
 
 const neighbourhood = (src: string, alt: string): HotelIllustration => ({
   src,
@@ -20,7 +15,7 @@ const neighbourhood = (src: string, alt: string): HotelIllustration => ({
 });
 
 export const jerusalemHotelPhotos: Record<string, HotelIllustration> = {
-  "herbert-samuel": neighbourhood(jerusalemLightRail, "Light rail and street scene in central Jerusalem"),
+  "herbert-samuel": neighbourhood("/images/attractions/jerusalem.webp", "Jerusalem stone buildings and urban scenery"),
   "arthur": neighbourhood("/images/city-stays/jerusalem-downtown.webp", "Downtown Jerusalem neighbourhood"),
   "mamilla": neighbourhood(jaffaGate, "Jaffa Gate and the historic walls near Mamilla"),
   "king-david": neighbourhood("/images/city-stays/jerusalem-mamilla.webp", "Mamilla and King David Street area of Jerusalem"),
@@ -33,7 +28,7 @@ export const jerusalemHotelPhotos: Record<string, HotelIllustration> = {
   },
   "sephardic-house": neighbourhood("/images/attractions/old-jerusalem-cardo.webp", "Ancient Cardo stonework in Jerusalem’s Jewish Quarter"),
   "bezalel": neighbourhood("/images/hotel-cards/bezalel.webp", "Nachlaot neighborhood streets in central Jerusalem"),
-  "market-courtyard": neighbourhood(foodMarket, "Food-market stalls illustrating the market atmosphere"),
+  "market-courtyard": neighbourhood("/images/attractions/jerusalem-shopping.webp", "Jerusalem market streets and shops"),
   "american-colony": neighbourhood("/images/attractions/old-jerusalem-damascus-gate.webp", "Damascus Gate and northern Old City surroundings"),
   "jerusalem-hotel": neighbourhood("/images/hotels/jerusalem-night.webp", "Jerusalem skyline at night"),
   "orient": neighbourhood("/images/city-stays/jerusalem-german-colony.webp", "Street scene in Jerusalem’s German Colony"),
