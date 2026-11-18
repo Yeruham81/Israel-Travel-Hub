@@ -1,7 +1,7 @@
 import { Link } from "@tanstack/react-router";
 import { ArrowUpRight, BusFront, CarFront, Clock3, Footprints, Ticket } from "lucide-react";
 import {
-  AttractionDestinationPage, AttractionHighlight, AttractionPracticalTip,
+  AttractionDestinationPage, AttractionHighlight,
   type AttractionDestinationContent,
 } from "@/components/AttractionDestinationPage";
 import { ramonCraterSite } from "@/data/ramonCraterSite";
