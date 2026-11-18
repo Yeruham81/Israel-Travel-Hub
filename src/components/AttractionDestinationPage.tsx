@@ -63,6 +63,8 @@ export type AttractionDestinationContent = {
   relatedTitle?: string;
   planningLinks?: AttractionPlanningLink[];
   sources: AttractionSource[];
+  /** Optional compact attributions for third-party images below the source list. */
+  photoCredits?: ReactNode;
 };
 
 function AtAGlance({ placeName, facts, note }: { placeName: string; facts: AttractionFact[]; note?: ReactNode }) {
@@ -190,6 +192,7 @@ export function AttractionDestinationPage({ content }: { content: AttractionDest
             {source.note && <p className="mt-0.5 text-xs">{source.note}</p>}
           </li>)}
         </ul>
+        {content.photoCredits && <div className="mt-4 border-t border-border/70 pt-3 text-xs leading-relaxed text-muted-foreground" data-testid="attraction-photo-credits">{content.photoCredits}</div>}
       </SourcesDisclosure>
     </main>
   );
