@@ -36,7 +36,7 @@ describe("Ramon Crater upgraded attraction guide", () => {
     expect(site.visit.child).toBe("₪16");
     expect(site.visit.student).toBe("₪26");
     expect(article).toContain("Closed as of November 2026.");
-    expect(article).toContain("check the official site for reopening information");
+    expect(article).toContain("Check the official Hai Ramon page before visiting");
     expect(article).toContain("The rim viewpoints are free");
     expect(article).toContain("Advance reservations are required");
     expect(article).toContain("Nahal Ardon");
