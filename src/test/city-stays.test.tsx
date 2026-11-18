@@ -72,21 +72,21 @@ describe.each([
     expect(screen.getAllByTestId("neighborhood-card")).toHaveLength(areas.length);
   });
 
-  it("each area explains location before hotel recommendations and preserves sponsored booking links", () => {
+  it("each area presents hotels prominently with working booking links and useful location guidance", () => {
     for (const area of areas) {
       const { container, unmount } = render(<NeighborhoodStayPage area={area} />);
       expect(screen.getByRole("heading", { level: 1 })).toHaveTextContent(area.title);
       expect(container.querySelectorAll("main")).toHaveLength(1);
       expect(container.querySelector("main main")).toBeNull();
-      expect(container.querySelector("#location")!.compareDocumentPosition(container.querySelector("#book")!)).toBe(Node.DOCUMENT_POSITION_FOLLOWING);
+      expect(container.querySelector(g.id === "jerusalem" ? "#book" : "#location")!.compareDocumentPosition(container.querySelector(g.id === "jerusalem" ? "#location" : "#book")!)).toBe(Node.DOCUMENT_POSITION_FOLLOWING);
       const cards = screen.getAllByTestId("hotel-recommendation");
       expect(cards).toHaveLength(4);
-      expect(container.querySelector("#book [data-testid='neighborhood-hotel-grid']")).toHaveClass("sm:grid-cols-2");
+      expect(container.querySelector("#book [data-testid='neighborhood-hotel-grid']")).toHaveClass(g.id === "jerusalem" ? "lg:grid-cols-2" : "sm:grid-cols-2");
       const imageUrls = cards.map((card) => within(card).getByTestId("hotel-illustration").getAttribute("src"));
       expect(new Set(imageUrls).size).toBe(4);
       expect(screen.getByTestId("neighborhood-hotel-photo-credits")).toBeInTheDocument();
       expect(within(container.querySelector("#book") as HTMLElement).getByRole("heading", {
-        name: g.id === "jerusalem" ? `Hotels I recommend in ${area.shortName}` : `My top picks in ${area.name}`,
+        name: g.id === "jerusalem" ? `Hotels in ${area.shortName}` : `My top picks in ${area.name}`,
       })).toBeInTheDocument();
       if (g.id === "jerusalem") {
         const hotelSection = container.querySelector("#book") as HTMLElement;
@@ -96,7 +96,13 @@ describe.each([
         expect(within(container.querySelector("#other-areas") as HTMLElement).getAllByRole("link")).toHaveLength(6);
         expect(within(container.querySelector("#other-areas") as HTMLElement).getByRole("link", { name: /All Jerusalem neighborhoods/ })).toHaveAttribute("href", g.path);
         expect(screen.getByRole("link", { name: /Read my guide to where to stay in Jerusalem/ })).toHaveAttribute("href", "/travel-blog/where-to-stay-in-jerusalem/");
-        expect(container.querySelector("#book + #checklist")).toBeInTheDocument();
+        expect(container.querySelector("#book")!.compareDocumentPosition(container.querySelector("#overview")!) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
+        expect(container.querySelector("#overview")!.compareDocumentPosition(container.querySelector("#location")!) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
+        expect(container.querySelector("#location")!.compareDocumentPosition(container.querySelector("#checklist")!) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
+        expect(container.querySelector("#more-hotels")!.compareDocumentPosition(container.querySelector("#overview")!) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
+        expect(within(container.querySelector("#location") as HTMLElement).getByText(/Arriving with luggage:/)).toBeInTheDocument();
+        expect(within(hotelSection).getByText(/Photos illustrate the neighborhoods/)).toBeInTheDocument();
+        for (const src of imageUrls) expect(src).not.toBe(area.photo.src);
         expect(container.querySelector("#sources")).not.toBeNull();
         expect(container.querySelector("#sources")!.compareDocumentPosition(screen.getByTestId("neighborhood-hotel-photo-credits")) & Node.DOCUMENT_POSITION_PRECEDING).toBeTruthy();
       }
