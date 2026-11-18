@@ -1,15 +1,16 @@
 import { Link, type LinkProps } from "@tanstack/react-router";
-import { ArrowRight, ExternalLink, Lightbulb, MapPin } from "lucide-react";
+import { ArrowRight, Lightbulb } from "lucide-react";
 import { GuideHeader, OnThisPage, FaqList, SourceList } from "@/components/Guide";
 import { StayTripLinks } from "@/components/StayTripLinks";
+import { AreaMap } from "@/components/AreaMap";
 import { HomeContactForm } from "@/components/HomeContactForm";
 import { accommodationEditorial } from "@/data/accommodationEditorial";
 import { neighborhoodGuidesForCity, type CityStayGuide } from "@/data/content";
 import { areaDecisionNotes } from "@/data/localEditorialInsights";
 import { INFO_CHECK_DATE } from "@/data/registry";
 import { guideContactCopy } from "@/lib/guide-contact";
-import jerusalemHero from "@/assets/home/hero-refresh-jerusalem-jaffa-gate-v4-medium.webp";
-import telAvivHero from "@/assets/home/hero-refresh-tel-aviv-coastline-v2-medium.webp";
+import jerusalemHero from "@/assets/guides/2026-11/where-to-stay-jerusalem-drive.webp";
+import telAvivHero from "@/assets/guides/2026-11/where-to-stay-tel-aviv-drive.webp";
 
 /**
  * A travel-blog neighbourhood-choice article, deliberately separate from the
@@ -71,8 +72,8 @@ export function CityNeighborhoodEditorial({ guide }: { guide: CityStayGuide }) {
   const choices = decisionNotes[cityId];
   const areas = neighborhoodGuidesForCity(cityId);
   const hero = cityId === "jerusalem"
-    ? { src: jerusalemHero, alt: "Jerusalem's Jaffa Gate and the Old City walls" }
-    : { src: telAvivHero, alt: "Central Tel Aviv beachfront and the Mediterranean coast" };
+    ? { src: jerusalemHero, alt: "Aerial view of Jaffa Road and the buildings of central Jerusalem" }
+    : { src: telAvivHero, alt: "Beachfront hotels, promenade and Mediterranean shoreline in Tel Aviv" };
 
   return <main className="pb-10" data-testid="city-neighborhood-editorial">
     <GuideHeader
@@ -110,8 +111,7 @@ export function CityNeighborhoodEditorial({ guide }: { guide: CityStayGuide }) {
       </section>
 
       <section id="compare" aria-labelledby="compare-h" className="mt-14 scroll-mt-32">
-        <h2 id="compare-h" className="text-3xl">Compare the main areas at a glance</h2>
-        <p className="mt-3 max-w-3xl leading-relaxed text-muted-foreground">Use these short summaries to narrow your options. Each links to a fuller neighbourhood explanation below, followed by a separate page for hotel choices.</p>
+        <h2 id="compare-h" className="text-3xl">Areas at a glance</h2>
         <ul className="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
           {areas.map((area) => <li key={area.id}>
             <a href={`#area-${area.id}`} className="group flex h-full flex-col rounded-xl border bg-card p-4 transition-colors hover:border-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
@@ -124,10 +124,7 @@ export function CityNeighborhoodEditorial({ guide }: { guide: CityStayGuide }) {
       </section>
 
       <section id="neighborhoods" aria-labelledby="neighborhoods-h" className="mt-14 scroll-mt-32">
-        <h2 id="neighborhoods-h" className="text-3xl">The neighbourhoods, area by area</h2>
-        <p className="mt-3 max-w-3xl leading-relaxed text-muted-foreground">
-          These are my practical notes about the atmosphere, sightseeing access and trade-offs in each part of the city. Hotel selections are kept separately under Accommodation.
-        </p>
+        <h2 id="neighborhoods-h" className="text-3xl">Neighbourhoods in {cityName}</h2>
         <div className="mt-5 divide-y border-t">
           {areas.map((area) => <section key={area.id} id={`area-${area.id}`} aria-labelledby={`area-${area.id}-h`} className="scroll-mt-32 py-9 sm:py-11" data-testid="editorial-neighborhood">
             <div className="grid items-start gap-5 md:grid-cols-[minmax(0,1.5fr)_minmax(230px,1fr)] md:gap-7">
@@ -137,20 +134,19 @@ export function CityNeighborhoodEditorial({ guide }: { guide: CityStayGuide }) {
                 <p className="mt-4 text-sm leading-relaxed"><strong>Best for:</strong> {area.bestFor}</p>
                 <p className="mt-2 text-sm leading-relaxed"><strong>Nearby highlights:</strong> {area.highlights.slice(0, 3).map((place) => place.name).join(" · ")}</p>
               </div>
-              <figure className="min-w-0 overflow-hidden rounded-xl border bg-secondary/20">
-                <img src={area.photo.src} alt={area.photo.alt} width={755} height={503} loading="lazy" decoding="async" className="aspect-[16/10] w-full object-cover" />
-                <figcaption className="px-3 py-2 text-xs text-muted-foreground">{area.shortName} · neighbourhood view</figcaption>
-              </figure>
+              <div className="min-w-0">
+                <figure className="overflow-hidden rounded-xl border bg-secondary/20">
+                  <img src={area.photo.src} alt={area.photo.alt} width={755} height={503} loading="lazy" decoding="async" className="aspect-[16/10] w-full object-cover" />
+                  <figcaption className="px-3 py-2 text-xs leading-relaxed text-muted-foreground">{area.photo.alt}</figcaption>
+                </figure>
+                <div className="mt-3"><AreaMap area={area} compact provider="google" showExternalLink={false} /></div>
+              </div>
             </div>
             <AreaComparison areaId={area.id} />
-            <div className="mt-5 flex flex-wrap items-center gap-x-6 gap-y-3">
-              <Link to={area.path as LinkProps["to"]} className="inline-flex min-h-11 items-center gap-2 rounded-lg border border-primary/25 bg-secondary/40 px-4 py-2.5 text-sm font-semibold text-primary transition-colors hover:border-primary hover:bg-secondary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
-                Browse hotels in {area.shortName} <ArrowRight className="h-4 w-4" aria-hidden />
+            <div className="mt-6 flex justify-center">
+              <Link to={area.path as LinkProps["to"]} className="btn btn-primary inline-flex min-h-11 items-center justify-center gap-2 rounded-lg px-5 py-3 text-center text-sm font-semibold">
+                Browse hotels in {area.shortName} <ArrowRight className="h-4 w-4 shrink-0" aria-hidden />
               </Link>
-              <a href={`https://www.google.com/maps/search/?api=1&query=${area.map.lat}%2C${area.map.lon}`} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-11 items-center gap-1.5 text-sm font-medium text-primary underline underline-offset-2">
-                <MapPin className="h-4 w-4" aria-hidden /> Find the area on Google Maps <ExternalLink className="h-3.5 w-3.5" aria-hidden />
-                <span className="sr-only"> (opens in a new tab)</span>
-              </a>
             </div>
           </section>)}
         </div>
@@ -158,7 +154,7 @@ export function CityNeighborhoodEditorial({ guide }: { guide: CityStayGuide }) {
 
       <section id="tips" aria-labelledby="tips-h" className="mt-12 scroll-mt-32">
         <h2 id="tips-h" className="text-3xl">What to check before booking</h2>
-        <p className="mt-3 max-w-3xl leading-relaxed">Choosing the right neighbourhood is only half of the decision. Here are the details I recommend checking before paying for a room.</p>
+        <p className="mt-3 max-w-3xl leading-relaxed">The exact street, hotel entrance and room category can matter as much as the neighbourhood itself.</p>
         <ul className="mt-5 grid gap-3 sm:grid-cols-2">
           {guide.checklist.map((tip) => <li key={tip} className="flex gap-3 rounded-xl border bg-secondary/25 p-4 text-sm leading-relaxed"><span aria-hidden className="font-bold text-primary">✓</span>{tip}</li>)}
         </ul>
@@ -172,7 +168,7 @@ export function CityNeighborhoodEditorial({ guide }: { guide: CityStayGuide }) {
       </section>
 
       <FaqList faqs={[...decisionNotes[cityId].faqs]} />
-      <StayTripLinks region={cityId} currentPath={info.path} />
+      <StayTripLinks region={cityId} currentPath={info.path} presentation="guide" />
       <HomeContactForm guide={guideContactCopy(info.title, "accommodation", cityName)} />
       <SourceList ids={guide.sourceIds} />
     </article>

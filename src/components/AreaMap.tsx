@@ -3,7 +3,7 @@ import type { NeighborhoodStayGuide } from "@/data/content";
 import { isPublisherUrl } from "@/data/registry";
 
 /** Google Maps for the Jerusalem/Tel Aviv neighborhoods, legacy local map for other destination guides. */
-export function AreaMap({ area, compact = false, provider = "local" }: { area: Pick<NeighborhoodStayGuide, "name" | "map">; compact?: boolean; provider?: "local" | "google" }) {
+export function AreaMap({ area, compact = false, provider = "local", showExternalLink = true }: { area: Pick<NeighborhoodStayGuide, "name" | "map">; compact?: boolean; provider?: "local" | "google"; showExternalLink?: boolean }) {
   const { lat, lon, bounds, reference } = area.map;
   const query = encodeURIComponent(`${lat},${lon}`);
   const params = new URLSearchParams({ bbox: bounds.join(","), marker: `${lat},${lon}`, name: area.name, lang: "en" });
@@ -23,9 +23,9 @@ export function AreaMap({ area, compact = false, provider = "local" }: { area: P
       />
       <figcaption className="flex flex-wrap items-center justify-between gap-x-4 gap-y-1 bg-card px-3 py-2 text-xs text-muted-foreground">
         <span className="flex items-center gap-1.5"><MapPin className="h-3.5 w-3.5 shrink-0" aria-hidden /> {reference}</span>
-        <a href={externalUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 font-semibold text-primary underline underline-offset-2">
+        {showExternalLink && <a href={externalUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 font-semibold text-primary underline underline-offset-2">
           {provider === "google" ? "Open in Google Maps" : "Open a larger map"} <ExternalLink className="h-3 w-3" aria-hidden /><span className="sr-only"> (opens in a new tab)</span>
-        </a>
+        </a>}
       </figcaption>
     </figure>
   );
