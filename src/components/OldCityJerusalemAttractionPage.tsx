@@ -69,8 +69,8 @@ export const oldCityJerusalemDestinationContent: AttractionDestinationContent = 
         <p>Walking along the public streets is free. You can follow the marked stations independently or join a pilgrimage-focused guided walk; individual chapels may have restricted hours. <Link to="/travel-blog/churches-in-jerusalem/" className={inlineLink}>Explore more Jerusalem churches</Link>.</p>
         <p className="text-xs font-semibold text-muted-foreground">Free public walking route</p>
       </AttractionHighlight>
-      <AttractionHighlight title="Temple Mount / Haram al-Sharif" image={{ src: photos.temple, alt: "Golden Dome of the Rock on the Temple Mount or Haram al-Sharif esplanade in Jerusalem" }}>
-        <p>Known as the Temple Mount in Judaism and Haram al-Sharif or the Noble Sanctuary in Islam, this sacred compound includes the Dome of the Rock and Al-Aqsa Mosque. It is one of Jerusalem's most significant places for both religious traditions.</p>
+      <AttractionHighlight title="Temple Mount" image={{ src: photos.temple, alt: "Golden Dome of the Rock on the Temple Mount in Jerusalem" }}>
+        <p>The Temple Mount is sacred to Judaism and Islam. The compound includes the Dome of the Rock and Al-Aqsa Mosque and is one of the most significant religious sites in Jerusalem.</p>
         <p><strong>Visitor access is tightly controlled.</strong> Non-Muslim visits, when permitted, normally use the Mughrabi Gate approach beside the Western Wall, during limited weekday windows. The interiors of Al-Aqsa Mosque and the Dome of the Rock are generally not open to non-Muslim visitors. Check current access conditions before making this a fixed part of your itinerary.</p>
         <p className="text-xs font-semibold text-muted-foreground">Limited visiting windows; no general admission to the shrine interiors</p>
       </AttractionHighlight>
@@ -225,7 +225,7 @@ export const oldCityJerusalemDestinationContent: AttractionDestinationContent = 
     { q: "How long should I spend in Jerusalem's Old City?", a: "Allow at least three or four hours for two major sights and a little wandering. A full day is better if you want a museum, the Western Wall Tunnels or a more detailed pilgrimage route." },
     { q: "Which gate is closest to the Western Wall?", a: "Dung Gate is often the simplest approach. Jaffa Gate suits visits beginning near the Tower of David and Christian Quarter, while Damascus Gate is useful for the northern markets and Via Dolorosa." },
     { q: "Can I visit the Old City on Saturday?", a: "Yes. Public streets and the Western Wall plaza remain accessible, and the Church of the Holy Sepulchre usually opens daily. Shops, museums, transport and religious sites have different schedules, so plan around your particular stops." },
-    { q: "Can non-Muslims visit the Dome of the Rock or Al-Aqsa Mosque?", a: "The interiors are generally not open to non-Muslim visitors. Access to the Temple Mount/Haram al-Sharif esplanade itself is limited to designated visiting periods when permitted, subject to security and religious events." },
+    { q: "Can non-Muslims visit the Dome of the Rock or Al-Aqsa Mosque?", a: "The interiors are generally not open to non-Muslim visitors. Access to the Temple Mount esplanade itself is limited to designated visiting periods when permitted, subject to security and religious events." },
     { q: "Is Jerusalem's Old City wheelchair accessible?", a: "Some adapted routes and places are accessible, but many alleys and old buildings have slopes or stairs. Contact the specific attraction and plan a suitable entry gate before travelling." },
   ],
   nearby: [
