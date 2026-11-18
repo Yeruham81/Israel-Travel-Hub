@@ -232,7 +232,8 @@ describe("homepage marketing copy and service sections", () => {
 
     // The former bottom destination strip is consolidated into the accommodation section.
     const accommodationSection = document.getElementById("accommodation")!;
-    const destinationLinks = within(accommodationSection).getAllByRole("link").filter(link => link.getAttribute("href")?.startsWith("/accommodation/"));
+    const destinationGrid = accommodationSection.querySelector('[data-testid="service-layout-accommodation"]')!;
+    const destinationLinks = within(destinationGrid).getAllByRole("link");
     expect(destinationLinks).toHaveLength(5);
     // Only the destination name appears over each accommodation image.
     for (const [link, destination] of destinationLinks.map((link, i) => [link, ["Jerusalem", "Tel Aviv & Jaffa", "Tiberias & Galilee", "Dead Sea", "Haifa"][i]!] as const)) {
