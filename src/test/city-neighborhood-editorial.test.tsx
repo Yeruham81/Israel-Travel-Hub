@@ -66,7 +66,24 @@ describe("Jerusalem and Tel Aviv neighbourhood editorial guides", () => {
         expect(within(section).getAllByTestId("jerusalem-editorial-hotel-card")).toHaveLength(2);
         expect(within(section).getByRole("heading", { name: /^Popular hotels in / })).toBeInTheDocument();
       }
-      expect(container).toHaveTextContent("The maps show the general location of each area");
+      expect(container).not.toHaveTextContent("The maps show the general location of each area");
+      expect(container).not.toHaveTextContent("Photos illustrate the surrounding neighbourhoods, not the hotels themselves");
+      const layouts = container.querySelectorAll('[data-testid="jerusalem-area-layout"]');
+      expect(layouts).toHaveLength(6);
+      for (const layout of layouts) {
+        expect(layout).toHaveClass("items-stretch");
+        const textColumn = layout.children[0]!;
+        const mediaColumn = layout.children[1]!;
+        const hotelSection = textColumn.querySelector('[data-testid="jerusalem-editorial-hotel-picks"]');
+        const mapHolder = mediaColumn.querySelector('[data-testid="jerusalem-area-map"]');
+        const mapFrame = mapHolder?.querySelector("iframe");
+        expect(hotelSection).toBeTruthy();
+        expect(textColumn.lastElementChild).toBe(hotelSection);
+        expect(hotelSection?.querySelectorAll('[data-testid="jerusalem-editorial-hotel-card"]')).toHaveLength(2);
+        expect(mapHolder).toHaveClass("mt-6", "flex-1");
+        expect(mapFrame).toHaveClass("min-h-44", "flex-1");
+        expect(mediaColumn.querySelector("figure")).toBeTruthy();
+      }
       expect(container).toHaveTextContent("Blue Line light-rail construction");
       expect(screen.getByTestId("sources")).toHaveAttribute("data-ids", expect.stringContaining("jerusalem-emek-refaim-works"));
       expect(container.querySelector("#faq")).toHaveAttribute("data-faq-count", "5");
@@ -74,6 +91,7 @@ describe("Jerusalem and Tel Aviv neighbourhood editorial guides", () => {
       expect(container.querySelector("#compare")).toBeInTheDocument();
       expect(container.querySelector('[data-testid="jerusalem-area-image-grid"]')).toBeNull();
       expect(container.querySelectorAll('[data-testid="jerusalem-editorial-hotel-card"]')).toHaveLength(0);
+      expect(container.querySelector('[data-testid="jerusalem-area-layout"]')).toBeNull();
       expect(container.querySelectorAll('[data-testid="jerusalem-practical-notes"]')).toHaveLength(0);
       expect(container.querySelector("#faq")).toHaveAttribute("data-faq-count", "4");
     }

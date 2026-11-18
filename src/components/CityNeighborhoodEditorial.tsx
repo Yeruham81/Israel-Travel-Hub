@@ -227,14 +227,13 @@ export function CityNeighborhoodEditorial({ guide }: { guide: CityStayGuide }) {
 
       <section id="neighborhoods" aria-labelledby="neighborhoods-h" className="mt-14 scroll-mt-32">
         <h2 id="neighborhoods-h" className="text-3xl">Neighbourhoods in {cityName}</h2>
-        {cityId === "jerusalem" && <p className="mt-3 max-w-3xl text-sm leading-relaxed text-muted-foreground">The maps show the general location of each area. Check your hotel's exact address before booking.</p>}
         <div className="mt-5 divide-y border-t">
           {areas.map((area) => {
             const photo = cityId === "jerusalem" && area.id === "old-city"
               ? { src: oldCityStoneLane, alt: "Narrow sandstone lane in Jerusalem's Jewish Quarter" }
               : area.photo;
             return <section key={area.id} id={`area-${area.id}`} aria-labelledby={`area-${area.id}-h`} className="scroll-mt-32 py-9 sm:py-11" data-testid="editorial-neighborhood">
-            <div className="grid items-start gap-5 md:grid-cols-[minmax(0,1.5fr)_minmax(230px,1fr)] md:gap-7">
+            <div className={`grid gap-5 md:grid-cols-[minmax(0,1.5fr)_minmax(230px,1fr)] md:gap-7 ${cityId === "jerusalem" ? "items-stretch" : "items-start"}`} data-testid={cityId === "jerusalem" ? "jerusalem-area-layout" : undefined}>
               <div className="min-w-0">
                 <h3 id={`area-${area.id}-h`} className="text-2xl font-semibold sm:text-3xl">{area.name}</h3>
                 {cityId === "jerusalem" && <div className="mt-3 space-y-1.5 text-sm leading-relaxed" data-testid="jerusalem-area-highlights">
@@ -246,13 +245,16 @@ export function CityNeighborhoodEditorial({ guide }: { guide: CityStayGuide }) {
                   <p className="mt-4 text-sm leading-relaxed"><strong>Best for:</strong> {area.bestFor}</p>
                   <p className="mt-2 text-sm leading-relaxed"><strong>Nearby highlights:</strong> {area.highlights.slice(0, 3).map((place) => place.name).join(" · ")}</p>
                 </>}
+                {cityId === "jerusalem" && <JerusalemEditorialHotels area={area} />}
               </div>
-              <div className="min-w-0">
+              <div className={cityId === "jerusalem" ? "flex min-w-0 flex-col" : "min-w-0"} data-testid={cityId === "jerusalem" ? "jerusalem-area-media" : undefined}>
                 <figure className="overflow-hidden rounded-xl border bg-secondary/20">
                   <img src={photo.src} alt={photo.alt} width={755} height={503} loading="lazy" decoding="async" className="aspect-[16/10] w-full object-cover" />
                   <figcaption className="px-3 py-2 text-xs leading-relaxed text-muted-foreground">{photo.alt}</figcaption>
                 </figure>
-                <div className="mt-3"><AreaMap area={area} compact provider="google" showExternalLink={false} /></div>
+                <div className={cityId === "jerusalem" ? "mt-6 min-h-0 flex-1" : "mt-3"} data-testid={cityId === "jerusalem" ? "jerusalem-area-map" : undefined}>
+                  <AreaMap area={area} compact provider="google" showExternalLink={false} stretch={cityId === "jerusalem"} />
+                </div>
               </div>
             </div>
             {cityId === "jerusalem" ? <JerusalemPracticalNotes areaId={area.id} /> : <AreaComparison areaId={area.id} />}
@@ -260,7 +262,6 @@ export function CityNeighborhoodEditorial({ guide }: { guide: CityStayGuide }) {
               <Lightbulb className="mt-0.5 h-5 w-5 shrink-0 text-amber-600" aria-hidden />
               <p>Blue Line light-rail construction on Emek Refaim has changed some road and bus arrangements. Ask your accommodation about its current entrance and drop-off; consult the <a href="https://baka.org.il/he/120/" target="_blank" rel="noopener noreferrer" className="font-semibold text-primary underline underline-offset-2">local construction updates</a> before travelling.</p>
             </aside>}
-            {cityId === "jerusalem" && <JerusalemEditorialHotels area={area} />}
             <div className="mt-6 flex justify-center">
               <Link to={area.path as LinkProps["to"]} className="btn btn-primary inline-flex min-h-11 items-center justify-center gap-2 rounded-lg px-5 py-3 text-center text-sm font-semibold">
                 {cityId === "jerusalem" ? "Browse more hotels in " : "Browse hotels in "}{area.shortName} <ArrowRight className="h-4 w-4 shrink-0" aria-hidden />

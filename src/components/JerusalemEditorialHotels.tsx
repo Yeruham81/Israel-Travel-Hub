@@ -19,14 +19,14 @@ export function JerusalemEditorialHotels({ area }: { area: NeighborhoodStayGuide
 
   if (!hotels.length) return null;
 
-  return <section className="mt-7" aria-label={`Popular hotels in ${area.shortName}`} data-testid="jerusalem-editorial-hotel-picks">
+  return <section className="mt-5" aria-label={`Popular hotels in ${area.shortName}`} data-testid="jerusalem-editorial-hotel-picks">
     <div className="flex items-center gap-2.5">
       <span className="grid h-9 w-9 shrink-0 place-items-center rounded-xl bg-primary/10 text-primary">
         <Hotel className="h-5 w-5" aria-hidden />
       </span>
       <h4 className="text-lg font-semibold sm:text-xl">Popular hotels in {area.shortName}</h4>
     </div>
-    <ul className="mt-3 grid gap-3 sm:grid-cols-2">
+    <ul className="mt-3 grid gap-3">
       {hotels.map((hotel) => {
         const photo = cityHotelPhoto(hotel);
         const booking = bookings.find((offer) => offer.id === `hotel-${hotel.id}-expedia`);
@@ -62,6 +62,5 @@ export function JerusalemEditorialHotels({ area }: { area: NeighborhoodStayGuide
         </li>;
       })}
     </ul>
-    <p className="mt-2 text-xs leading-relaxed text-muted-foreground">Photos illustrate the surrounding neighbourhoods, not the hotels themselves.</p>
   </section>;
 }
