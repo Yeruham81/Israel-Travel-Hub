@@ -24,6 +24,33 @@ const walkingLinks = [
   { title: "Gethsemane to Lion’s Gate", url: lionGateWalk, description: "Continue into the Old City on foot" },
 ];
 
+const mountOlivesTours = [
+  {
+    id: "6540P87",
+    platform: "Viator",
+    title: "Jerusalem Mount of Olives Tour",
+    summary: "Small-group guided visit focused on the Ascension chapel, Gethsemane, Tomb of Mary and the historic Jewish cemetery.",
+    duration: "3 hr 30 min",
+    rating: "5.0 · 1 review",
+    price: "From approx. US$60 / person",
+    photo: guidedTourPhoto,
+    alt: "Jerusalem guided sightseeing scene",
+    href: "https://www.viator.com/en-GB/tours/Jerusalem/Jerusalem-Mount-of-Olives-Tour/d921-6540P87",
+  },
+  {
+    id: "117240P3",
+    platform: "Viator",
+    title: "From the Ascension Chapel to Gethsemane",
+    summary: "Guided walk on the hill’s Christian pilgrimage route, beginning with a local bus transfer from Damascus Gate.",
+    duration: "3–4 hours",
+    rating: "5.0 · 1 review",
+    price: "From approx. US$225 / group",
+    photo: oldCityTourPhoto,
+    alt: "Old City of Jerusalem near the walking-tour departure point",
+    href: "https://www.viator.com/en-GB/tours/Jerusalem/Mt-of-Olives-from-the-Church-of-the-Ascension-to-Gethsemane/d921-117240P3",
+  },
+] as const;
+
 export const mountOlivesDestinationContent: AttractionDestinationContent = {
   path: "/attractions/mount-of-olives/",
   placeName: "Mount of Olives",
@@ -154,17 +181,24 @@ export const mountOlivesDestinationContent: AttractionDestinationContent = {
   ),
   tourContent: (
     <div className="mt-4 space-y-4">
-      <p>Guided Jerusalem visits can offer more context about the churches and the Old City. Before booking, confirm that your chosen tour actually includes the Mount of Olives viewpoint and the stops you want; not every Jerusalem tour goes up the hill.</p>
+      <p>These two guided experiences specifically cover the Mount of Olives, rather than only Jerusalem's Old City. Check the actual stops, meeting point, accessibility and church admission for your date before booking.</p>
       <div className="grid gap-3 sm:grid-cols-2" data-testid="mount-olives-tour-cards">
-        <Link to="/tours/jerusalem/" className="attraction-tour-card group flex h-full min-w-0 items-start gap-3 rounded-xl border bg-card p-3 transition-all hover:border-primary/60 hover:shadow-sm sm:p-4">
-          <img src={guidedTourPhoto} alt="Guided sightseeing in Jerusalem" width={128} height={100} loading="lazy" decoding="async" className="h-24 w-24 shrink-0 rounded-lg object-cover sm:w-28"/>
-          <div className="min-w-0 flex-1"><h3 className="font-serif text-lg font-semibold leading-snug group-hover:text-primary">Jerusalem guided tours</h3><p className="mt-1 text-sm text-muted-foreground">Compare independently operated walks and sightseeing days.</p><span className="mt-2 inline-flex items-center gap-1 text-sm font-semibold text-primary">Explore tours <ArrowUpRight className="h-4 w-4"/></span></div>
-        </Link>
-        <a href="#contact" className="attraction-tour-card group flex h-full min-w-0 items-start gap-3 rounded-xl border bg-card p-3 transition-all hover:border-primary/60 hover:shadow-sm sm:p-4">
-          <img src={oldCityTourPhoto} alt="Jerusalem Old City skyline and historic walls" width={128} height={100} loading="lazy" decoding="async" className="h-24 w-24 shrink-0 rounded-lg object-cover sm:w-28"/>
-          <div className="min-w-0 flex-1"><h3 className="font-serif text-lg font-semibold leading-snug group-hover:text-primary">Private driver for the day</h3><p className="mt-1 text-sm text-muted-foreground">Arrange drop-off at the viewpoint and pickup near Gethsemane.</p><span className="mt-2 inline-flex items-center gap-1 text-sm font-semibold text-primary">Send an inquiry <ArrowUpRight className="h-4 w-4"/></span></div>
-        </a>
+        {mountOlivesTours.map(tour => <article key={tour.id} className="flex min-w-0 flex-col overflow-hidden rounded-xl border bg-card" data-tour-id={tour.id}>
+          <img src={tour.photo} alt={tour.alt} loading="lazy" decoding="async" width={480} height={260} className="aspect-[16/9] w-full object-cover"/>
+          <div className="flex flex-1 flex-col p-4">
+            <p className="text-xs font-semibold text-muted-foreground">{tour.platform}</p>
+            <h3 className="mt-1 font-serif text-lg font-semibold leading-snug">{tour.title}</h3>
+            <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{tour.summary}</p>
+            <p className="mt-3 text-sm">{tour.duration} · ★ {tour.rating}</p>
+            <div className="mt-auto flex flex-wrap items-end justify-between gap-3 pt-4">
+              <div><p className="text-xs text-muted-foreground">Listed starting price, Nov 2026</p><p className="text-sm font-semibold">{tour.price}</p></div>
+              <a href={tour.href} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 rounded-lg bg-primary px-3 py-2 text-sm font-semibold text-primary-foreground">View tour <ArrowUpRight className="h-4 w-4" aria-hidden="true"/></a>
+            </div>
+          </div>
+        </article>)}
       </div>
+      <p className="text-xs text-muted-foreground">Prices and ratings are dated booking-platform snapshots, not live quotes; totals, availability and currency may differ for your date. These are direct provider links, without affiliate attribution.</p>
+      <p className="text-sm leading-relaxed">For more options, <Link to="/tours/jerusalem/" className={inlineLink}>browse Jerusalem guided tours</Link>. If you only need transport between the upper viewpoint and Gethsemane, <a href="#contact" className={inlineLink}>contact me about a private driver</a>.</p>
     </div>
   ),
   faqs: [
@@ -200,6 +234,8 @@ export const mountOlivesDestinationContent: AttractionDestinationContent = {
     { label: "Israel public transportation planner", url: official.transit },
     { label: "City of David — Jerusalem Trail route", url: official.jerusalemWalk },
     { label: "Enjoy Jerusalem — Mount of Olives walking route", url: official.trailGuide },
+    { label: "Viator — Jerusalem Mount of Olives Tour", url: mountOlivesTours[0].href },
+    { label: "Viator — Ascension Chapel to Gethsemane guided walk", url: mountOlivesTours[1].href },
   ],
 };
 
