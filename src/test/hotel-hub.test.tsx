@@ -65,15 +65,26 @@ describe("Accommodation booking hub",()=>{
   expect(neighborhoodGuidesForCity("telaviv")).toHaveLength(8);
   expect(hotelCategoryGuides).toHaveLength(6);
  });
- it("places two mobile-friendly, commission-tagged search widgets below the FAQ", () => {
+ it("separates Booking above booking tips and Agoda below the FAQ without changing commission tracking", () => {
   const { container } = page();
-  const section = screen.getByTestId("hotel-search-widgets");
-  expect(section).toHaveTextContent("Search hotels in Israel");
-  expect(hotelSearchWidgets.map((widget) => widget.id)).toEqual(["agoda", "booking"]);
-  expect(hotelSearchWidgets).toHaveLength(2);
+  const bookingSection = screen.getByTestId("hotel-search-booking");
+  const agodaSection = screen.getByTestId("hotel-search-widgets");
+  const stylesSection = container.querySelector("#styles")!;
+  const bookingTipsSection = container.querySelector("#booking-tips")!;
   const faqs = screen.getByRole("heading", { name: "Frequently asked questions" });
-  expect(faqs.compareDocumentPosition(section) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
 
+  expect(bookingSection).toHaveTextContent("Search hotels in Israel");
+  expect(agodaSection).toHaveTextContent("More hotel search options");
+  expect(stylesSection.compareDocumentPosition(bookingSection) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
+  expect(bookingSection.compareDocumentPosition(bookingTipsSection) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
+  expect(faqs.compareDocumentPosition(agodaSection) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
+  expect(bookingSection).toContainElement(screen.getByTestId("booking-hotel-search-widget"));
+  expect(agodaSection).toContainElement(screen.getByTestId("agoda-hotel-search-widget"));
+  expect(bookingSection).not.toContainElement(screen.getByTestId("agoda-hotel-search-widget"));
+  expect(agodaSection).not.toContainElement(screen.getByTestId("booking-hotel-search-widget"));
+
+  expect(hotelSearchWidgets.map((widget) => widget.id).sort()).toEqual(["agoda", "booking"]);
+  expect(hotelSearchWidgets).toHaveLength(2);
   for (const widget of hotelSearchWidgets) {
     const card = screen.getByTestId(`${widget.id}-hotel-search-widget`);
     const mount = screen.getByTestId(`${widget.id}-hotel-widget-mount`);
@@ -85,7 +96,7 @@ describe("Accommodation booking hub",()=>{
     expect(url.searchParams.get("trs")).toBe("406243");
     expect(url.searchParams.get("shmarker")).toBe("622032.accommodation_hub_widget");
     expect(url.searchParams.get("powered_by")).toBe("false");
-    // jsdom has no IntersectionObserver: it falls back to loading immediately.
+    // jsdom has no IntersectionObserver: each widget loads immediately.
     const script = mount.querySelector("script");
     expect(script).not.toBeNull();
     expect(script?.src).toBe(widget.scriptUrl);
@@ -93,9 +104,10 @@ describe("Accommodation booking hub",()=>{
     expect(script?.charset).toBe("utf-8");
   }
 
-  expect(new URL(hotelSearchWidgets[1].scriptUrl).searchParams.get("campaign_id")).toBe("84");
-  expect(new URL(hotelSearchWidgets[1].scriptUrl).searchParams.get("promo_id")).toBe("9240");
-  const agoda = new URL(hotelSearchWidgets[0].scriptUrl);
+  const booking = new URL(hotelSearchWidgets.find((widget) => widget.id === "booking")!.scriptUrl);
+  expect(booking.searchParams.get("campaign_id")).toBe("84");
+  expect(booking.searchParams.get("promo_id")).toBe("9240");
+  const agoda = new URL(hotelSearchWidgets.find((widget) => widget.id === "agoda")!.scriptUrl);
   expect(agoda.searchParams.get("campaign_id")).toBe("104");
   expect(agoda.searchParams.get("promo_id")).toBe("8303");
   expect(agoda.searchParams.get("default_destination")).toBe("Jerusalem, Israel");
