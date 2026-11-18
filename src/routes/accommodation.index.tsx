@@ -1,7 +1,7 @@
 import { createFileRoute, Link, type LinkProps } from "@tanstack/react-router";
 import { ArrowRight, BookOpen, CalendarDays, CarFront, Check, MapPin, PlaneLanding, TrainFront } from "lucide-react";
 import { AccommodationCard } from "@/components/AccommodationCard";
-import { TravelpayoutsHotelWidgets } from "@/components/TravelpayoutsHotelWidgets";
+import { TravelpayoutsHotelWidget } from "@/components/TravelpayoutsHotelWidgets";
 import { FaqList, HubHeader } from "@/components/Guide";
 import { GuideHeroMedia } from "@/components/GuideHeroMedia";
 import { accommodationDestinations } from "@/data/content";
@@ -118,6 +118,8 @@ function AccommodationHub() {
         </ul>
       </section>
 
+      <TravelpayoutsHotelWidget provider="booking" />
+
       <section id="booking-tips" aria-labelledby="booking-tips-h" className="mt-10 scroll-mt-24">
         <h2 id="booking-tips-h" className="text-2xl font-semibold">Before you book</h2>
         <ul className="mt-4 grid gap-x-6 rounded-2xl border bg-secondary/20 px-4 sm:grid-cols-2 sm:px-6" aria-label="Hotel booking checklist">
@@ -153,7 +155,7 @@ function AccommodationHub() {
       </section>
 
       <FaqList compact faqs={hotelHubFaqs} />
-      <TravelpayoutsHotelWidgets />
+      <TravelpayoutsHotelWidget provider="agoda" />
     </div>
   </main>;
 }
