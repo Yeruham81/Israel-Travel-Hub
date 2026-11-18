@@ -1,5 +1,5 @@
 import { createFileRoute, Link, type LinkProps } from "@tanstack/react-router";
-import { ArrowRight, BookOpen, CalendarDays, CarFront, MapPin, PlaneLanding, ReceiptText, TrainFront, Users } from "lucide-react";
+import { ArrowRight, BookOpen, CalendarDays, CarFront, Check, MapPin, PlaneLanding, TrainFront } from "lucide-react";
 import { AccommodationCard } from "@/components/AccommodationCard";
 import { FaqList, HubHeader } from "@/components/Guide";
 import { GuideHeroMedia } from "@/components/GuideHeroMedia";
@@ -12,18 +12,18 @@ import hotelRoomPhoto from "@/assets/home/hotel-room-feature.webp";
 const destinations = accommodationDestinations;
 
 const guideLabels: Record<keyof typeof accommodationEditorial, string> = {
-  jerusalem: "Read the Jerusalem area guide",
-  telaviv: "Read the Tel Aviv area guide",
+  jerusalem: "Read my guide to choosing where to stay in Jerusalem",
+  telaviv: "Read my guide to choosing where to stay in Tel Aviv",
   haifa: "Read the Haifa area guide",
   tiberias: "Read the Tiberias area guide",
   deadsea: "Read the Dead Sea area guide",
 };
 
 const bookingTips = [
-  { title: "Choose a practical location", icon: MapPin, text: "Check the walk to sights, restaurants and transport. Hills and steps matter in Jerusalem and Haifa." },
-  { title: "Check the room details", icon: Users, text: "Enter all guests and children's ages, then confirm the beds, room size and lift access." },
-  { title: "Compare the full price", icon: ReceiptText, text: "Check taxes, breakfast, parking, deposits and cancellation terms alongside the room rate." },
-  { title: "Plan your arrival", icon: CalendarDays, text: "For Friday, Saturday or holiday arrivals, confirm check-in, meals and a way to reach the hotel." },
+  { title: "Choose a practical location", text: "Check the walk to sights, restaurants and transport. Hills and steps matter in Jerusalem and Haifa." },
+  { title: "Check the room details", text: "Enter all guests and children's ages, then confirm the beds, room size and lift access." },
+  { title: "Compare the full price", text: "Check taxes, breakfast, parking, deposits and cancellation terms alongside the room rate." },
+  { title: "Plan your arrival", text: "For Friday, Saturday or holiday arrivals, confirm check-in, meals and a way to reach the hotel." },
 ] as const;
 
 const planningGuides = [
@@ -84,9 +84,6 @@ function AccommodationHub() {
     <div className="mx-auto max-w-5xl px-4">
       <section id="destinations" aria-labelledby="destinations-h" className="mt-9 scroll-mt-24">
         <h2 id="destinations-h" className="text-2xl font-semibold">Choose where to stay</h2>
-        <p className="mt-2 max-w-3xl text-sm leading-relaxed text-muted-foreground">
-          Jerusalem and Tel Aviv have neighborhood-by-neighborhood hotel guides. For Haifa, Tiberias and the Dead Sea, start with the local area overview and explore hotels by style.
-        </p>
         <ul className="mt-4 grid grid-cols-2 auto-rows-fr gap-2.5 sm:gap-4" aria-label="Hotel destinations in Israel">
           {destinations.map(destination => {
             const comingSoon = destination.id === "eilat";
@@ -104,9 +101,6 @@ function AccommodationHub() {
 
       <section id="styles" aria-labelledby="hotel-styles-h" className="mt-10 scroll-mt-24">
         <h2 id="hotel-styles-h" className="text-2xl font-semibold">Explore by hotel style</h2>
-        <p className="mt-2 max-w-3xl text-sm leading-relaxed text-muted-foreground">
-          Have a particular kind of stay in mind? Open a focused guide, from city hotels and boutique properties to beachfront and spa resorts.
-        </p>
         <ul className="mt-4 grid gap-3 md:grid-cols-2" aria-label="Hotel styles">
           {hotelStyles.filter(style => style.link).map(style => <li key={style.id} className="min-w-0">
             <Link to={style.link!.to} className="group flex h-full min-w-0 items-start gap-3 rounded-2xl border bg-card p-3 transition-colors hover:border-primary/50 hover:bg-secondary/20 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary" data-testid="hotel-style-card">
@@ -125,27 +119,23 @@ function AccommodationHub() {
 
       <section id="booking-tips" aria-labelledby="booking-tips-h" className="mt-10 scroll-mt-24">
         <h2 id="booking-tips-h" className="text-2xl font-semibold">Before you book</h2>
-        <p className="mt-2 max-w-3xl text-sm leading-relaxed text-muted-foreground">
-          A well-located room with the right facilities can make a real difference to your trip. These are the checks I recommend before comparing offers.
-        </p>
-        <div className="mt-4 grid gap-3 sm:grid-cols-2">
-          {bookingTips.map(tip => <div key={tip.title} className="rounded-2xl border bg-card p-4">
-            <div className="flex items-center gap-2.5">
-              <tip.icon className="h-5 w-5 shrink-0 text-primary" aria-hidden />
+        <ul className="mt-4 grid gap-x-6 rounded-2xl border bg-secondary/20 px-4 sm:grid-cols-2 sm:px-6" aria-label="Hotel booking checklist">
+          {bookingTips.map(tip => <li key={tip.title} className="flex items-start gap-3 border-b py-4 last:border-b-0 sm:[&:nth-last-child(-n+2)]:border-b-0">
+            <span className="mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-full border border-primary/20 bg-primary/10 text-primary">
+              <Check className="h-4 w-4" aria-hidden />
+            </span>
+            <div className="min-w-0">
               <h3 className="text-base font-semibold">{tip.title}</h3>
+              <p className="mt-1 text-sm leading-relaxed text-muted-foreground">{tip.text}</p>
             </div>
-            <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{tip.text}</p>
-          </div>)}
-        </div>
-        <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-          When you follow a hotel link to Expedia, enter your dates and guests to check current room prices, availability and booking conditions.
-        </p>
+          </li>)}
+        </ul>
       </section>
 
       <section id="planning" aria-labelledby="planning-h" className="mt-10 scroll-mt-24">
         <h2 id="planning-h" className="text-2xl font-semibold">Plan the rest of your trip</h2>
         <p className="mt-2 max-w-3xl text-sm leading-relaxed text-muted-foreground">
-          Your hotel is one part of the plan. These guides will help you choose how to arrive, get around and fit your overnight stays into a realistic itinerary.
+          Find helpful guides to arriving, getting around and planning overnight stops across Israel.
         </p>
         <ul className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
           {planningGuides.map(guide => <li key={guide.title}>
