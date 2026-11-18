@@ -10,6 +10,7 @@ import camelHillPhoto from "@/assets/negev/ramon-camel-hill.webp";
 import widePhoto from "@/assets/negev/ramon-wide.webp";
 import ibexPhoto from "@/assets/negev/ramon-ibexes.webp";
 import jeepPhoto from "@/assets/negev/ramon-jeep.webp";
+import cloudsPhoto from "@/assets/negev/ramon-clouds.webp";
 import panoramaPhoto from "@/assets/home/hero-refresh-ramon-crater-v4-large.webp";
 
 const info = ramonCraterSite.visit;
@@ -205,7 +206,7 @@ export const ramonCraterDestinationContent: AttractionDestinationContent = {
           <div className="min-w-0 flex-1"><h3 className="font-serif text-lg font-semibold leading-snug group-hover:text-primary">Negev desert & Ramon Crater tours</h3><p className="mt-1 text-sm text-muted-foreground">Explore guided trips, desert experiences and available excursions.</p><span className="mt-2 inline-flex items-center gap-1 text-sm font-semibold text-primary">Explore tours <ArrowUpRight className="h-4 w-4"/></span></div>
         </Link>
         <a href="#contact" className="attraction-tour-card group flex h-full min-w-0 items-start gap-3 rounded-xl border bg-card p-3 transition-all hover:border-primary/60 hover:shadow-sm focus-visible:outline-2 focus-visible:outline-primary sm:p-4">
-          <img src={starsPhoto} alt="The Milky Way above the Negev at night" width={128} height={100} loading="lazy" decoding="async" className="h-24 w-24 shrink-0 rounded-lg object-cover sm:w-28"/>
+          <img src={cloudsPhoto} alt="Clouds and open desert slopes at Makhtesh Ramon" width={128} height={100} loading="lazy" decoding="async" className="h-24 w-24 shrink-0 rounded-lg object-cover sm:w-28"/>
           <div className="min-w-0 flex-1"><h3 className="font-serif text-lg font-semibold leading-snug group-hover:text-primary">Plan a private desert day</h3><p className="mt-1 text-sm text-muted-foreground">Choose your viewpoints, time on the trails and departure location.</p><span className="mt-2 inline-flex items-center gap-1 text-sm font-semibold text-primary">Request a quote <ArrowUpRight className="h-4 w-4"/></span></div>
         </a>
       </div>
