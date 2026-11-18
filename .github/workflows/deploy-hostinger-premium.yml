@@ -202,7 +202,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          for path in / /travel-blog/ /travel-blog/uber-in-israel/ /attractions/capernaum/ /attractions/mount-precipice/ /attractions/tel-megiddo/ /attractions/basilica-of-the-annunciation/ /attractions/rosh-hanikra/ /attractions/caesarea/ /attractions/masada/ /attractions/qasr-el-yahud/ /api/quote-request/ /api/exchange-rates/; do
+          for path in / /travel-blog/ /travel-blog/uber-in-israel/ /attractions/capernaum/ /attractions/mount-precipice/ /attractions/tel-megiddo/ /attractions/basilica-of-the-annunciation/ /attractions/rosh-hanikra/ /attractions/caesarea/ /attractions/masada/ /attractions/qasr-el-yahud/ /attractions/ein-gedi/ /api/quote-request/ /api/exchange-rates/; do
             status="$(curl --retry 2 --retry-delay 2 --max-time 20 -L -sS -o /dev/null -w '%{http_code}' "$VITE_CANONICAL_ORIGIN$path")"
             echo "$path -> HTTP $status"
             [[ "$status" == "200" ]] || { echo "::error::Website smoke test failed for $path"; exit 1; }
@@ -504,4 +504,46 @@ jobs:
           console.log("Qasr el-Yahud published visitor rules, booking, six related cards and canonical verified.");
           NODE
           rm -f "$qasr_html"
+          # Confirm the upgraded Ein Gedi guide, trail-specific reservations, rates and panorama.
+          ein_gedi_html="$(mktemp)"
+          curl --retry 2 --max-time 20 -fsSL -o "$ein_gedi_html" "$VITE_CANONICAL_ORIGIN/attractions/ein-gedi/"
+          node - "$ein_gedi_html" "$VITE_CANONICAL_ORIGIN/attractions/ein-gedi/" <<'NODE'
+          const fs = require("node:fs");
+          const html = fs.readFileSync(process.argv[2], "utf8");
+          const expected = process.argv[3];
+          const canonicalLinks = [...html.matchAll(/<link\b[^>]*>/gi)]
+            .map(m => m[0]).filter(tag => /\brel=["']canonical["']/i.test(tag));
+          if (!(html.match(/<title[^>]*>([^<]*)/i)?.[1] ?? "").includes("Ein Gedi Nature Reserve")) {
+            console.error("::error::Ein Gedi title missing from published page");
+            process.exit(1);
+          }
+          for (const required of [
+            'data-testid="attraction-at-a-glance"',
+            'data-testid="ein-gedi-hours-tickets"',
+            'data-testid="ein-gedi-trail-booking"',
+            'data-testid="ein-gedi-three-entrances"',
+            'data-testid="ein-gedi-wide-panorama"',
+            'data-testid="ein-gedi-map"',
+            "₪31", "₪16", "Nahal David", "Nahal Arugot",
+            "October 2026", "Book Nahal David", "Book Nahal Arugot",
+            "ein-gedi-canyon-panorama",
+            "ein-gedi-rock-gorge",
+          ]) {
+            if (!html.includes(required)) {
+              console.error("::error::Ein Gedi public page missing " + required);
+              process.exit(1);
+            }
+          }
+          if (!canonicalLinks.some(tag => tag.includes('href="' + expected + '"'))) {
+            console.error("::error::Ein Gedi published canonical is wrong");
+            process.exit(1);
+          }
+          const relatedGrid = html.match(/<ul[^>]*data-testid=["']stay-trip-photo-grid["'][^>]*>([\s\S]*?)<\/ul>/i);
+          if ((relatedGrid?.[1].match(/<li\b/g) || []).length !== 6) {
+            console.error("::error::Ein Gedi page must show six nearby attraction cards");
+            process.exit(1);
+          }
+          console.log("Ein Gedi title, current trail guidance, rates, panorama, six related cards and canonical verified.");
+          NODE
+          rm -f "$ein_gedi_html"
           echo "Source-controlled static guides published; existing PHP APIs still respond to GET."
