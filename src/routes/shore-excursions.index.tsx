@@ -8,8 +8,17 @@ import { shoreHubGuides } from "@/data/shoreReading";
 import cruisePortFeature from "@/assets/home/cruise-port-feature.webp";
 import jerusalemFeature from "@/assets/home/jerusalem-old-city-card.webp";
 import galileeFeature from "@/assets/home/tiberias-lake-card.webp";
-import coastFeature from "@/assets/home/hero-jaffa-harbor-desktop.jpg";
 import masadaFeature from "@/assets/home/masada-cable-car-card.webp";
+import ashdodHubThumb from "@/assets/home/ashdod-port-card.webp";
+import haifaHubThumb from "@/assets/home/haifa-port-card.webp";
+import cruisePortPhone from "@/assets/shore-hub/cruise-port-phone.webp";
+import coastHubThumb from "@/assets/shore-hub/jaffa-route.webp";
+import guideJerusalemThumb from "@/assets/shore-hub/guide-jerusalem.webp";
+import guideGalileeThumb from "@/assets/shore-hub/guide-galilee.webp";
+import guideMasadaThumb from "@/assets/shore-hub/guide-masada.webp";
+import guideAkkoThumb from "@/assets/shore-hub/guide-akko.webp";
+import guideJaffaThumb from "@/assets/shore-hub/guide-jaffa.webp";
+import guideDeadSeaThumb from "@/assets/shore-hub/guide-dead-sea.webp";
 import {
   shoreHubDescription, shoreHubExperiences, shoreHubFaqs, shoreHubPorts,
   shoreHubSourceIds, shoreHubTitle, SHORE_EXCURSION_UPDATED_DATE,
@@ -23,10 +32,23 @@ import { CANONICAL_ORIGIN, jsonLd, pageMeta, SITE_NAME } from "@/lib/site";
 const portIds = ["ashdod", "haifa"] as const;
 const heroPhoto = { src: cruisePortFeature, alt: "Cruise passengers walking along a harbour quay toward a waiting vehicle", sourceUrl: "" };
 const crumbs = [{ name: "Home", path: "/" }, { name: "Shore excursions", path: "/shore-excursions/" }] as const;
+
+/** Thumbnail selection is local to the shore hub: destination-page source
+ * photos and credits are never overwritten by small card variants.
+ */
+const shoreHubPortThumbnailSources = { ashdod: ashdodHubThumb, haifa: haifaHubThumb } as const;
+const shoreHubGuideThumbnailSources: Record<string, string> = {
+  "/attractions/old-city-jerusalem/": guideJerusalemThumb,
+  "/travel-blog/sea-of-galilee/": guideGalileeThumb,
+  "/attractions/masada/": guideMasadaThumb,
+  "/attractions/akko-acre/": guideAkkoThumb,
+  "/attractions/jaffa/": guideJaffaThumb,
+  [travelGuidePaths.deadSea]: guideDeadSeaThumb,
+};
 const experiencePhotos = {
   history: { src: jerusalemFeature, alt: "Historic buildings in Jerusalem's Old City" },
   galilee: { src: galileeFeature, alt: "Sea of Galilee and its surrounding hills" },
-  coast: { src: coastFeature, alt: "Old Jaffa harbour and its Mediterranean waterfront" },
+  coast: { src: coastHubThumb, alt: "Old Jaffa harbour and its Mediterranean waterfront" },
   desert: { src: masadaFeature, alt: "Masada and the surrounding Judean Desert landscape" },
 } as const;
 
@@ -87,7 +109,7 @@ function Shore() {
       title={shoreHubTitle}
       intro="Arriving by cruise ship? Explore guided excursions and private car-and-driver days from Ashdod and Haifa. Start with your port, then choose a route that fits your time ashore."
       checkedAt={SHORE_EXCURSION_UPDATED_DATE}
-      image={<GuideHeroMedia src={heroPhoto.src} alt={heroPhoto.alt} compact />}
+      image={<GuideHeroMedia src={heroPhoto.src} mobileSrc={cruisePortPhone} alt={heroPhoto.alt} compact />}
       actions={<>
         <Link to={shorePorts.ashdod.path} className="btn btn-primary w-full justify-center sm:w-auto sm:min-w-48">Excursions from Ashdod</Link>
         <Link to={shorePorts.haifa.path} className="btn btn-primary w-full justify-center sm:w-auto sm:min-w-48">Excursions from Haifa</Link>
@@ -103,7 +125,7 @@ function Shore() {
             const details = shoreHubPorts[id];
             return <li key={id} className="min-w-0">
               <Link to={port.path} className="group flex h-full min-w-0 items-center gap-3 rounded-2xl border bg-card p-3 transition-colors hover:border-primary/50 hover:bg-secondary/20 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary sm:gap-4">
-                <img src={port.photo.src} alt={port.photo.alt} width={160} height={192} loading="lazy" decoding="async" className="h-28 w-24 shrink-0 rounded-xl object-cover sm:h-32 sm:w-28" />
+                <img src={shoreHubPortThumbnailSources[id]} alt={port.photo.alt} width={160} height={192} loading="lazy" decoding="async" className="h-28 w-24 shrink-0 rounded-xl object-cover sm:h-32 sm:w-28" />
                 <span className="flex min-w-0 flex-1 flex-col items-start">
                   <span className="mt-1 block text-lg font-semibold leading-snug">From {port.name} Port</span>
                   <span className="mt-1 line-clamp-2 text-sm leading-relaxed text-muted-foreground">{details.description}</span>
@@ -189,7 +211,7 @@ function Shore() {
         <ul className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
           {shoreHubGuides.map(guide => <li key={String(guide.to)} className="min-w-0">
             <Link to={guide.to} className="group flex h-full min-w-0 items-center gap-3 rounded-xl border bg-card p-3 transition-colors hover:border-primary/50 hover:bg-secondary/20 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
-              <img src={guide.photo.src} alt={guide.photo.alt} width={112} height={90} loading="lazy" decoding="async" className="aspect-[3/2] w-24 shrink-0 rounded-lg object-cover sm:w-28" />
+              <img src={shoreHubGuideThumbnailSources[String(guide.to)] ?? guide.photo.src} alt={guide.photo.alt} width={112} height={90} loading="lazy" decoding="async" className="aspect-[3/2] w-24 shrink-0 rounded-lg object-cover sm:w-28" />
               <span className="min-w-0 flex-1">
                 <span className="block text-sm font-semibold leading-snug text-foreground group-hover:text-primary">{guide.title}</span>
                 <span className="mt-1 line-clamp-2 block text-xs leading-relaxed text-muted-foreground">{guide.description}</span>

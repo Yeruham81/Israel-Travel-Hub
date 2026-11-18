@@ -1,0 +1,233 @@
+{
+  "scope": "Shore excursions hub only: 1 compact mobile intro, 2 port cards, 4 experience cards, 6 related-guide cards",
+  "originalsPreserved": true,
+  "createdVariants": 8,
+  "reusedVariants": 5,
+  "sourceBytes": 1062097,
+  "optimizedBytes": 314300,
+  "savedBytes": 747797,
+  "notes": "Hero savings apply only on phones up to 480px. Three already-small experience cards are unchanged. Estimates compare file sizes, not Lighthouse actual network bytes or LCP.",
+  "files": [
+    {
+      "label": "hero-phone",
+      "source": "src/assets/home/cruise-port-feature.webp",
+      "served": "src/assets/shore-hub/cruise-port-phone.webp",
+      "sourceBytes": 71270,
+      "servedBytes": 71270,
+      "savedBytes": 0,
+      "reusedExistingAsset": false,
+      "sourceDimensions": [
+        1080,
+        699
+      ],
+      "servedDimensions": [
+        1080,
+        699
+      ]
+    },
+    {
+      "label": "coast",
+      "source": "src/assets/home/hero-jaffa-harbor-desktop.jpg",
+      "served": "src/assets/shore-hub/jaffa-route.webp",
+      "sourceBytes": 160689,
+      "servedBytes": 27770,
+      "savedBytes": 132919,
+      "reusedExistingAsset": false,
+      "sourceDimensions": [
+        1200,
+        675
+      ],
+      "servedDimensions": [
+        400,
+        225
+      ]
+    },
+    {
+      "label": "guide-jerusalem",
+      "source": "src/assets/home/jerusalem-old-city.webp",
+      "served": "src/assets/shore-hub/guide-jerusalem.webp",
+      "sourceBytes": 142198,
+      "servedBytes": 32356,
+      "savedBytes": 109842,
+      "reusedExistingAsset": false,
+      "sourceDimensions": [
+        900,
+        600
+      ],
+      "servedDimensions": [
+        360,
+        240
+      ]
+    },
+    {
+      "label": "guide-galilee",
+      "source": "src/assets/home/tiberias-lake.webp",
+      "served": "src/assets/shore-hub/guide-galilee.webp",
+      "sourceBytes": 141838,
+      "servedBytes": 22582,
+      "savedBytes": 119256,
+      "reusedExistingAsset": false,
+      "sourceDimensions": [
+        1200,
+        900
+      ],
+      "servedDimensions": [
+        360,
+        270
+      ]
+    },
+    {
+      "label": "guide-masada",
+      "source": "src/assets/home/masada-dead-sea.webp",
+      "served": "src/assets/shore-hub/guide-masada.webp",
+      "sourceBytes": 122226,
+      "servedBytes": 15728,
+      "savedBytes": 106498,
+      "reusedExistingAsset": false,
+      "sourceDimensions": [
+        1200,
+        879
+      ],
+      "servedDimensions": [
+        360,
+        264
+      ]
+    },
+    {
+      "label": "guide-akko",
+      "source": "src/assets/shore-excursions/akko-port.jpg",
+      "served": "src/assets/shore-hub/guide-akko.webp",
+      "sourceBytes": 60256,
+      "servedBytes": 28106,
+      "savedBytes": 32150,
+      "reusedExistingAsset": false,
+      "sourceDimensions": [
+        360,
+        240
+      ],
+      "servedDimensions": [
+        360,
+        240
+      ]
+    },
+    {
+      "label": "guide-jaffa",
+      "source": "src/assets/tel-aviv/jaffa.webp",
+      "served": "src/assets/shore-hub/guide-jaffa.webp",
+      "sourceBytes": 68256,
+      "servedBytes": 20182,
+      "savedBytes": 48074,
+      "reusedExistingAsset": false,
+      "sourceDimensions": [
+        755,
+        385
+      ],
+      "servedDimensions": [
+        360,
+        184
+      ]
+    },
+    {
+      "label": "guide-dead-sea",
+      "source": "src/assets/dead-sea/beach.webp",
+      "served": "src/assets/shore-hub/guide-dead-sea.webp",
+      "sourceBytes": 80718,
+      "servedBytes": 25308,
+      "savedBytes": 55410,
+      "reusedExistingAsset": false,
+      "sourceDimensions": [
+        755,
+        504
+      ],
+      "servedDimensions": [
+        360,
+        240
+      ]
+    },
+    {
+      "label": "port-ashdod",
+      "source": "src/assets/home/ashdod-port.webp",
+      "served": "src/assets/home/ashdod-port-card.webp",
+      "sourceBytes": 55034,
+      "servedBytes": 9424,
+      "savedBytes": 45610,
+      "reusedExistingAsset": true,
+      "sourceDimensions": [
+        900,
+        600
+      ],
+      "servedDimensions": [
+        360,
+        240
+      ]
+    },
+    {
+      "label": "port-haifa",
+      "source": "src/assets/home/haifa-port.webp",
+      "served": "src/assets/home/haifa-port-card.webp",
+      "sourceBytes": 116518,
+      "servedBytes": 18480,
+      "savedBytes": 98038,
+      "reusedExistingAsset": true,
+      "sourceDimensions": [
+        900,
+        600
+      ],
+      "servedDimensions": [
+        360,
+        240
+      ]
+    },
+    {
+      "label": "experience-history",
+      "source": "src/assets/home/jerusalem-old-city-card.webp",
+      "served": "src/assets/home/jerusalem-old-city-card.webp",
+      "sourceBytes": 19002,
+      "servedBytes": 19002,
+      "savedBytes": 0,
+      "reusedExistingAsset": true,
+      "sourceDimensions": [
+        360,
+        240
+      ],
+      "servedDimensions": [
+        360,
+        240
+      ]
+    },
+    {
+      "label": "experience-galilee",
+      "source": "src/assets/home/tiberias-lake-card.webp",
+      "served": "src/assets/home/tiberias-lake-card.webp",
+      "sourceBytes": 11074,
+      "servedBytes": 11074,
+      "savedBytes": 0,
+      "reusedExistingAsset": true,
+      "sourceDimensions": [
+        360,
+        270
+      ],
+      "servedDimensions": [
+        360,
+        270
+      ]
+    },
+    {
+      "label": "experience-desert",
+      "source": "src/assets/home/masada-cable-car-card.webp",
+      "served": "src/assets/home/masada-cable-car-card.webp",
+      "sourceBytes": 13018,
+      "servedBytes": 13018,
+      "savedBytes": 0,
+      "reusedExistingAsset": true,
+      "sourceDimensions": [
+        360,
+        270
+      ],
+      "servedDimensions": [
+        360,
+        270
+      ]
+    }
+  ]
+}

@@ -6,6 +6,7 @@ import { Route } from "@/routes/shore-excursions.index";
 import { services } from "@/routes/index";
 import { routeTree } from "@/routeTree.gen";
 import { shoreHubExperiences } from "@/data/shoreHub";
+import { shoreHubGuides } from "@/data/shoreReading";
 import { servicesForPort, filterShoreServices } from "@/lib/shore-services";
 import { CANONICAL_ORIGIN } from "@/lib/site";
 
@@ -52,8 +53,11 @@ describe("Israel shore excursion hub", () => {
     const homepageShorePhoto = services.find(service => service.id === "shore-excursions")?.feature?.src;
     expect(homepageShorePhoto).toBeTruthy();
     expect(within(screen.getByTestId("hub-header")).getByRole("img", { name: /Cruise passengers walking/ })).toHaveAttribute("src", homepageShorePhoto);
+    const mobileHero = screen.getByTestId("hub-header").querySelector('picture source[media="(max-width: 480px)"]');
+    expect(mobileHero?.getAttribute("srcset")).toMatch(/cruise-port-phone/);
     // The four route cards have distinct illustrations, separate from related-guide images.
     expect(within(destinations).getAllByRole("img")).toHaveLength(4);
+    expect(destinations.querySelector('[data-experience="coast"] img')?.getAttribute("src")).toMatch(/jaffa-route/);
     for (const experience of shoreHubExperiences) {
       const card = destinations.querySelector(`[data-experience="${experience.id}"]`);
       expect(card).not.toBeNull();
@@ -79,6 +83,8 @@ describe("Israel shore excursion hub", () => {
     const ports = screen.getByRole("list", { name: "Cruise port excursion guides" });
     expect(ports).toHaveTextContent("A great starting point for visiting some of Israel's major attractions.");
     expect(ports).toHaveTextContent("The ideal location for touring the northern coast and Galilee region.");
+    expect([...ports.querySelectorAll("img")].map(image => image.getAttribute("src")))
+      .toEqual(expect.arrayContaining([expect.stringMatching(/ashdod-port-card/), expect.stringMatching(/haifa-port-card/)]));
     expect(screen.queryByText(/Pickup arrangements differ:/)).not.toBeInTheDocument();
     const credits = screen.getByText("Photo credits").closest("details");
     expect(credits).not.toBeNull();
@@ -93,6 +99,8 @@ describe("Israel shore excursion hub", () => {
     const related = within(guides).getAllByRole("link");
     expect(related).toHaveLength(6);
     expect(within(guides).getAllByRole("img")).toHaveLength(6);
+    expect([...guides.querySelectorAll("img")].map(image => image.getAttribute("src")))
+      .toEqual(shoreHubGuides.map(() => expect.stringMatching(/guide-(jerusalem|galilee|masada|akko|jaffa|dead-sea)/)));
     expect(screen.getByText("Choose a destination to explore shore excursions from Ashdod or Haifa.")).toBeInTheDocument();
     expect(within(guides).getAllByRole("link").every(link => {
       const preview = link.querySelector("span.text-muted-foreground");
