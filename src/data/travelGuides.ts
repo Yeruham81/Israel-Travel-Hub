@@ -195,7 +195,7 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
           "Taxis may be available during Shabbat and Jewish holidays, even when most public transport stops. Check Gett or Yango for your location, but arrange important airport or long-distance rides in advance.",
           "Night, weekend and holiday taxi fares may be higher. For airport transport during Shabbat, see my airport Shabbat travel guide.",
         ],
-        inlineLinks: [{ text: "airport Shabbat travel guide", to: travelGuidePaths.shabbat }],
+        inlineLinks: [{ text: "Jewish holidays", to: travelGuidePaths.calendar }, { text: "airport Shabbat travel guide", to: travelGuidePaths.shabbat }],
         sourceIds: ["guide-iaa", "taxi-fares-2026", "guide-weekend-711"],
       },
     ],
