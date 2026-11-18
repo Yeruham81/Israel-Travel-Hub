@@ -76,6 +76,13 @@ describe("Jerusalem Old City upgraded attractions guide", () => {
     expect(site.official.tunnels).toBe("https://thekotel.org/en/book-a-tour/");
     expect(content.relatedTitle).toBe("Explore Jerusalem and day trips across Israel");
     expect(page).toContain('data-testid="jerusalem-old-city-featured-tours"');
+    expect((page.match(/<AttractionPracticalTip>/g) || [])).toHaveLength(4);
+    expect(page).toContain("Following the Via Dolorosa?");
+    expect(page).toContain("If you book a Western Wall Tunnels tour");
+    expect(page).toContain("Meeting a driver after your walk?");
+    expect(page).toContain("Tour details, availability, prices and booking conditions are set by the tour operators");
+    expect(page).toContain("cancellation policy directly with the booking provider");
+    expect(page).not.toContain("Ratings are previously checked booking-platform snapshots.");
     expect(page).toContain("ExternalTourCard");
     expect(page).not.toContain('JerusalemPartnerOffers id="old-city-jerusalem"');
     expect(affiliateConfig["tour-jerusalem-old-city-walk-viator@attractions-old-city-jerusalem"]?.trackingUrl).toBe("https://viator.tpm.li/NfTH03Dg");
