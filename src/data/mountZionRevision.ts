@@ -65,7 +65,7 @@ export const mountZionEditorialUpdate: SacredHillEditorial = {
       note: "The church and cemetery are separate additions in different parts of the slope. Treat them as optional branches, not as one continuous shortcut.",
     },
   ],
-  stopIntro: "Each stop has its own entrance and visiting arrangements. Choose the places that interest you and allow time to enjoy them without rushing.",
+  stopIntro: "When planning a visit, remember that each site has its own entrance and visiting arrangements. Choose the stops that interest you and leave time to enjoy them.",
   stops: [
     {
       name: "Room of the Last Supper (Cenacle)",
