@@ -714,4 +714,56 @@ jobs:
           NODE
             rm -f "$data"
           done
+          # Verify the revised Jerusalem Old City guide and all landmark photos on the public site.
+          jerusalem_html="$(mktemp)"
+          curl --retry 2 --max-time 20 -fsSL -o "$jerusalem_html" "$VITE_CANONICAL_ORIGIN/attractions/old-city-jerusalem/"
+          node - "$jerusalem_html" "$VITE_CANONICAL_ORIGIN/attractions/old-city-jerusalem/" <<'NODE'
+          const fs = require("node:fs");
+          const html = fs.readFileSync(process.argv[2], "utf8");
+          const expected = process.argv[3];
+          for (const snippet of [
+            "Jerusalem&#x27;s Old City", "What to see in Jerusalem", "Western Wall Tunnels",
+            "Temple Mount", "Haram al-Sharif", "Church of the Holy Sepulchre",
+            "Via Dolorosa", "Damascus Gate", "Tower of David",
+            'data-testid="jerusalem-old-city-hours-fees"',
+            'data-testid="jerusalem-old-city-access"',
+            'data-testid="jerusalem-old-city-walking-plans"',
+            'data-testid="jerusalem-old-city-map"',
+            'data-testid="jerusalem-old-city-tour-cards"',
+          ]) {
+            if (!html.includes(snippet.replace("&#x27;", "'")) && !html.includes(snippet)) {
+              console.error("::error::Jerusalem Old City public page missing " + snippet);
+              process.exit(1);
+            }
+          }
+          const canonical = [...html.matchAll(/<link\b[^>]*>/gi)].map(x=>x[0]).filter(tag=>/\brel=["']canonical["']/i.test(tag));
+          if(!canonical.some(tag=>tag.includes('href="' + expected + '"'))) {
+            console.error("::error::Old City Jerusalem canonical does not match the published URL");
+            process.exit(1);
+          }
+          if((html.match(/data-testid="attraction-highlight"/g)||[]).length !== 8) {
+            console.error("::error::Old City Jerusalem expected eight main landmark cards");
+            process.exit(1);
+          }
+          const related = html.match(/<ul[^>]*data-testid=["']stay-trip-photo-grid["'][^>]*>([\s\S]*?)<\/ul>/i);
+          if((related?.[1].match(/<li\b/g)||[]).length !== 6) {
+            console.error("::error::Old City Jerusalem expected six related attraction cards");
+            process.exit(1);
+          }
+          console.log("Old City Jerusalem published content, eight highlights, six related cards, and canonical checked.");
+          NODE
+          rm -f "$jerusalem_html"
+          for picture in old-jerusalem-western-wall.webp old-jerusalem-holy-sepulchre.webp old-jerusalem-via-dolorosa.webp old-jerusalem-temple-mount.webp old-jerusalem-cardo.webp old-jerusalem-tower-of-david.webp old-jerusalem-western-wall-tunnels.webp old-jerusalem-damascus-gate.webp; do
+            data="$(mktemp)"
+            curl --retry 2 --max-time 20 -fsSL -o "$data" "$VITE_CANONICAL_ORIGIN/images/attractions/$picture"
+            node - "$data" "$picture" <<'NODE'
+          const fs = require("node:fs");
+          const bytes = fs.readFileSync(process.argv[2]);
+          if (bytes.subarray(0,4).toString() !== "RIFF" || bytes.subarray(8,12).toString() !== "WEBP") {
+            console.error("::error::Jerusalem landmark photo is not valid WebP: " + process.argv[3]);
+            process.exit(1);
+          }
+          NODE
+            rm -f "$data"
+          done
           echo "Source-controlled static guides published; existing PHP APIs still respond to GET."
