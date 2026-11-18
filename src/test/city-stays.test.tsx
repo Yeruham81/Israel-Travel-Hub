@@ -116,7 +116,7 @@ describe.each([
         expect(card).toBeDefined();
         expect(within(card).getByTestId("hotel-short-description").textContent!.split(" ").length).toBeLessThanOrEqual(25);
         expect(within(card).getByTestId("hotel-best-for").textContent).toMatch(/^Best for:/);
-        expect(within(card).getAllByRole("link")).toHaveLength(1);
+        expect(within(card).getAllByRole("link")).toHaveLength(2);
       }
       unmount();
     }
