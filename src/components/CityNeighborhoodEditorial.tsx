@@ -1,8 +1,10 @@
 import { Link, type LinkProps } from "@tanstack/react-router";
-import { ArrowRight, Lightbulb } from "lucide-react";
+import { Accessibility, ArrowRight, Eye, Footprints, House, Lightbulb, MapPin, Route, TrainFront, Volume2, type LucideIcon } from "lucide-react";
 import { GuideHeader, OnThisPage, FaqList, SourceList } from "@/components/Guide";
 import { StayTripLinks } from "@/components/StayTripLinks";
 import { AreaMap } from "@/components/AreaMap";
+import { JerusalemEditorialHotels } from "@/components/JerusalemEditorialHotels";
+import { CityHotelPhotoCredits } from "@/components/CityHotelPhotoCredits";
 import { HomeContactForm } from "@/components/HomeContactForm";
 import { accommodationEditorial } from "@/data/accommodationEditorial";
 import { neighborhoodGuidesForCity, type CityStayGuide } from "@/data/content";
@@ -24,6 +26,8 @@ const sections = [
   ["faq", "FAQ"], ["explore", "Related guides"],
   ["trip-planning", "Trip planning"], ["contact", "Contact me"],
 ] as const;
+
+const jerusalemSections = sections.filter(([id]) => id !== "compare");
 
 const decisionNotes = {
   jerusalem: {
@@ -78,17 +82,42 @@ const jerusalemPractical: Record<string, { consider: string; gettingAround: stri
   },
 };
 
+const jerusalemNoteDesign: Record<string, { insightTitle: string; arrivalTitle: string; InsightIcon: LucideIcon; ArrivalIcon: LucideIcon }> = {
+  downtown: { insightTitle: "City energy & quiet rooms", arrivalTitle: "Walking to Jaffa Gate", InsightIcon: Volume2, ArrivalIcon: Footprints },
+  mamilla: { insightTitle: "Booking a room with a view", arrivalTitle: "Reaching Jaffa Gate", InsightIcon: Eye, ArrivalIcon: Footprints },
+  "old-city": { insightTitle: "Historic buildings & accessibility", arrivalTitle: "Choose the right gate", InsightIcon: Accessibility, ArrivalIcon: MapPin },
+  "mahane-yehuda": { insightTitle: "Market streets after dark", arrivalTitle: "Getting to the Old City", InsightIcon: Volume2, ArrivalIcon: TrainFront },
+  "east-jerusalem": { insightTitle: "Choose the exact location", arrivalTitle: "Damascus Gate on foot", InsightIcon: MapPin, ArrivalIcon: Footprints },
+  "german-colony": { insightTitle: "A residential base", arrivalTitle: "Routes from Baka & the German Colony", InsightIcon: House, ArrivalIcon: Route },
+};
+
 function JerusalemPracticalNotes({ areaId }: { areaId: string }) {
   const notes = jerusalemPractical[areaId];
-  if (!notes) return null;
-  return <div className="mt-5 grid gap-4 sm:grid-cols-2" data-testid="jerusalem-practical-notes">
-    <aside className="rounded-xl border bg-secondary/25 p-4 text-sm leading-relaxed">
-      <h4 className="font-semibold">Worth considering</h4>
-      <p className="mt-2 text-muted-foreground">{notes.consider}</p>
+  const presentation = jerusalemNoteDesign[areaId];
+  if (!notes || !presentation) return null;
+  const { InsightIcon, ArrivalIcon } = presentation;
+  return <div className="mt-6 grid gap-4 sm:grid-cols-2" data-testid="jerusalem-practical-notes">
+    <aside className="rounded-2xl border border-primary/20 border-l-4 border-l-primary bg-secondary/40 p-4 shadow-sm sm:p-5">
+      <div className="flex items-start gap-3">
+        <span className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-primary/10 text-primary">
+          <InsightIcon className="h-5 w-5" aria-hidden />
+        </span>
+        <div className="min-w-0">
+          <h4 className="font-semibold leading-snug">{presentation.insightTitle}</h4>
+          <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{notes.consider}</p>
+        </div>
+      </div>
     </aside>
-    <div className="rounded-xl border bg-secondary/25 p-4 text-sm leading-relaxed">
-      <h4 className="font-semibold">Getting around from here</h4>
-      <p className="mt-2 text-muted-foreground">{notes.gettingAround}</p>
+    <div className="rounded-2xl border border-sky-200/80 bg-sky-50/70 p-4 shadow-sm dark:border-sky-700/35 dark:bg-sky-950/25 sm:p-5">
+      <div className="flex items-start gap-3">
+        <span className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-sky-100 text-sky-800 dark:bg-sky-900/45 dark:text-sky-300">
+          <ArrivalIcon className="h-5 w-5" aria-hidden />
+        </span>
+        <div className="min-w-0">
+          <h4 className="font-semibold leading-snug">{presentation.arrivalTitle}</h4>
+          <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{notes.gettingAround}</p>
+        </div>
+      </div>
     </div>
   </div>;
 }
@@ -128,7 +157,7 @@ export function CityNeighborhoodEditorial({ guide }: { guide: CityStayGuide }) {
       checkedAt={guide.reviewedAt || INFO_CHECK_DATE}
       image={hero}
     />
-    <OnThisPage sections={sections} />
+    <OnThisPage sections={cityId === "jerusalem" ? jerusalemSections : sections} />
     <article className="mx-auto max-w-5xl px-4">
       <section id="choose" aria-labelledby="choose-h" className="mt-10 scroll-mt-32">
         <p className="eyebrow">Choose your base</p>
@@ -137,24 +166,39 @@ export function CityNeighborhoodEditorial({ guide }: { guide: CityStayGuide }) {
         {cityId !== "jerusalem" && <p className="mt-3 max-w-4xl leading-relaxed text-muted-foreground">
           I suggest choosing the area before you start comparing individual hotels. Think about the places you want to visit on foot, where you would like to spend your evenings and how easily you can reach the accommodation with luggage.
         </p>}
-        <ul className="mt-6 grid gap-4 sm:grid-cols-3">
-          {(guide.quickPicks || []).map((pick) => {
-            const area = areas.find((candidate) => candidate.id === pick.areaId);
-            return <li key={pick.areaId} className="rounded-xl border bg-secondary/30 p-4">
-              <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">{pick.label}</p>
-              <h3 className="mt-2 text-lg font-semibold">{area?.shortName || pick.areaId}</h3>
-              <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{pick.description}</p>
-              <a href={`#area-${pick.areaId}`} className="mt-3 inline-flex min-h-10 items-center gap-1 text-sm font-semibold text-primary hover:underline">Read about this area <ArrowRight className="h-4 w-4" aria-hidden /></a>
-            </li>;
-          })}
-        </ul>
+        {cityId === "jerusalem"
+          ? <ul className="mt-7 grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-3" data-testid="jerusalem-area-image-grid">
+            {areas.map((area) => <li key={area.id} className="min-w-0">
+              <a href={`#area-${area.id}`} className="group flex h-full flex-col overflow-hidden rounded-2xl border bg-card shadow-sm transition-all hover:-translate-y-0.5 hover:border-primary/60 hover:shadow-md focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
+                <div className="overflow-hidden bg-muted">
+                  <img src={area.photo.src} alt={area.photo.alt} width={600} height={375} loading="lazy" decoding="async" className="aspect-[16/10] w-full object-cover transition-transform duration-300 group-hover:scale-[1.035]" />
+                </div>
+                <span className="flex flex-1 flex-col p-3 sm:p-4">
+                  <span className="text-sm font-bold leading-snug text-foreground group-hover:text-primary sm:text-lg">{area.shortName}</span>
+                  <span className="mt-1.5 line-clamp-2 flex-1 text-xs leading-relaxed text-muted-foreground sm:text-sm">{area.bestFor}</span>
+                  <span className="mt-3 inline-flex items-center gap-1.5 text-xs font-semibold text-primary sm:text-sm">Explore this area <ArrowRight className="h-3.5 w-3.5 shrink-0" aria-hidden /></span>
+                </span>
+              </a>
+            </li>)}
+          </ul>
+          : <ul className="mt-6 grid gap-4 sm:grid-cols-3">
+            {(guide.quickPicks || []).map((pick) => {
+              const area = areas.find((candidate) => candidate.id === pick.areaId);
+              return <li key={pick.areaId} className="rounded-xl border bg-secondary/30 p-4">
+                <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">{pick.label}</p>
+                <h3 className="mt-2 text-lg font-semibold">{area?.shortName || pick.areaId}</h3>
+                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{pick.description}</p>
+                <a href={`#area-${pick.areaId}`} className="mt-3 inline-flex min-h-10 items-center gap-1 text-sm font-semibold text-primary hover:underline">Read about this area <ArrowRight className="h-4 w-4" aria-hidden /></a>
+              </li>;
+            })}
+          </ul>
         <aside className="mt-6 flex gap-3 rounded-xl border border-amber-200 bg-amber-50/80 p-4 text-sm leading-relaxed dark:border-amber-900/50 dark:bg-amber-950/20">
           <Lightbulb className="mt-0.5 h-5 w-5 shrink-0 text-amber-600" aria-hidden />
           <p>{choices.callout}</p>
         </aside>
       </section>
 
-      <section id="compare" aria-labelledby="compare-h" className="mt-14 scroll-mt-32">
+      {cityId !== "jerusalem" && <section id="compare" aria-labelledby="compare-h" className="mt-14 scroll-mt-32">
         <h2 id="compare-h" className="text-3xl">Areas at a glance</h2>
         <ul className="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
           {areas.map((area) => <li key={area.id}>
@@ -166,7 +210,7 @@ export function CityNeighborhoodEditorial({ guide }: { guide: CityStayGuide }) {
             </a>
           </li>)}
         </ul>
-      </section>
+      </section>}
 
       <section id="neighborhoods" aria-labelledby="neighborhoods-h" className="mt-14 scroll-mt-32">
         <h2 id="neighborhoods-h" className="text-3xl">Neighbourhoods in {cityName}</h2>
@@ -180,9 +224,15 @@ export function CityNeighborhoodEditorial({ guide }: { guide: CityStayGuide }) {
             <div className="grid items-start gap-5 md:grid-cols-[minmax(0,1.5fr)_minmax(230px,1fr)] md:gap-7">
               <div className="min-w-0">
                 <h3 id={`area-${area.id}-h`} className="text-2xl font-semibold sm:text-3xl">{area.name}</h3>
+                {cityId === "jerusalem" && <div className="mt-3 space-y-1.5 text-sm leading-relaxed" data-testid="jerusalem-area-highlights">
+                  <p><strong>Best for:</strong> {area.bestFor}</p>
+                  <p><strong>Nearby highlights:</strong> {area.highlights.slice(0, 3).map((place) => place.name).join(" · ")}</p>
+                </div>}
                 {(cityId === "jerusalem" ? area.overview.slice(0, 2) : area.overview).map((paragraph, index) => <p key={index} className="mt-3 leading-relaxed">{paragraph}</p>)}
-                <p className="mt-4 text-sm leading-relaxed"><strong>Best for:</strong> {area.bestFor}</p>
-                <p className="mt-2 text-sm leading-relaxed"><strong>Nearby highlights:</strong> {area.highlights.slice(0, 3).map((place) => place.name).join(" · ")}</p>
+                {cityId !== "jerusalem" && <>
+                  <p className="mt-4 text-sm leading-relaxed"><strong>Best for:</strong> {area.bestFor}</p>
+                  <p className="mt-2 text-sm leading-relaxed"><strong>Nearby highlights:</strong> {area.highlights.slice(0, 3).map((place) => place.name).join(" · ")}</p>
+                </>}
               </div>
               <div className="min-w-0">
                 <figure className="overflow-hidden rounded-xl border bg-secondary/20">
@@ -197,9 +247,10 @@ export function CityNeighborhoodEditorial({ guide }: { guide: CityStayGuide }) {
               <Lightbulb className="mt-0.5 h-5 w-5 shrink-0 text-amber-600" aria-hidden />
               <p>Blue Line light-rail construction on Emek Refaim has changed some road and bus arrangements. Ask your accommodation about its current entrance and drop-off; consult the <a href="https://baka.org.il/he/120/" target="_blank" rel="noopener noreferrer" className="font-semibold text-primary underline underline-offset-2">local construction updates</a> before travelling.</p>
             </aside>}
+            {cityId === "jerusalem" && <JerusalemEditorialHotels area={area} />}
             <div className="mt-6 flex justify-center">
               <Link to={area.path as LinkProps["to"]} className="btn btn-primary inline-flex min-h-11 items-center justify-center gap-2 rounded-lg px-5 py-3 text-center text-sm font-semibold">
-                Browse hotels in {area.shortName} <ArrowRight className="h-4 w-4 shrink-0" aria-hidden />
+                {cityId === "jerusalem" ? "Browse more hotels in " : "Browse hotels in "}{area.shortName} <ArrowRight className="h-4 w-4 shrink-0" aria-hidden />
               </Link>
             </div>
           </section>;
@@ -242,6 +293,7 @@ export function CityNeighborhoodEditorial({ guide }: { guide: CityStayGuide }) {
         ? { ...guideContactCopy(info.title, "accommodation", cityName),
             introduction: "Not sure which part of Jerusalem would suit your plans? Tell me your travel dates, main interests and how you expect to arrive. I'll be happy to share practical advice." }
         : guideContactCopy(info.title, "accommodation", cityName)} />
+      {cityId === "jerusalem" && <CityHotelPhotoCredits city="jerusalem" />}
       <SourceList
         ids={cityId === "jerusalem" ? [...guide.sourceIds, "israel-rail", "jerusalem-light-rail-updates", "jerusalem-emek-refaim-works"] : guide.sourceIds}
         {...(cityId === "jerusalem" ? { intro: "Transport and access information for planning your stay." } : {})}

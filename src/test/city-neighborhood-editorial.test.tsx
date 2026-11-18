@@ -35,19 +35,45 @@ describe("Jerusalem and Tel Aviv neighbourhood editorial guides", () => {
       expect(section.querySelector("figcaption")?.textContent).toBe(region === "jerusalem" && area.id === "old-city"
         ? "Narrow sandstone lane in Jerusalem's Jewish Quarter" : area.photo.alt);
       expect(section).not.toHaveTextContent("neighbourhood view");
-      const button = within(section).getByRole("link", { name: new RegExp(`Browse hotels in ${area.shortName}`) });
+      const button = within(section).getByRole("link", { name: new RegExp(`${region === "jerusalem" ? "Browse more hotels in " : "Browse hotels in "}${area.shortName}`) });
       expect(button).toHaveAttribute("href", area.path);
       expect(button).toHaveClass("btn", "btn-primary");
       expect(button.parentElement).toHaveClass("justify-center");
     }
     if (region === "jerusalem") {
       expect(container.querySelectorAll('[data-testid="jerusalem-practical-notes"]')).toHaveLength(6);
-      expect(container).toHaveTextContent("Getting around from here");
+      expect(container).toHaveTextContent("Walking to Jaffa Gate");
+      expect(container).toHaveTextContent("Choose the right gate");
+      expect(container).toHaveTextContent("Market streets after dark");
+      expect(container).not.toHaveTextContent("Worth considering");
+      const navigation = screen.getByTestId("jerusalem-area-image-grid");
+      expect(within(navigation).getAllByRole("link")).toHaveLength(6);
+      expect(within(navigation).getAllByRole("img")).toHaveLength(6);
+      expect(container.querySelector("#compare")).toBeNull();
+      expect(within(container.querySelector("#choose")!).getByText(/Jerusalem is hilly/)).toBeInTheDocument();
+      expect(container.querySelectorAll('[data-testid="jerusalem-area-highlights"]')).toHaveLength(6);
+      expect(container.querySelectorAll('[data-testid="jerusalem-editorial-hotel-picks"]')).toHaveLength(6);
+      expect(container.querySelectorAll('[data-testid="jerusalem-editorial-hotel-card"]')).toHaveLength(12);
+      expect(container.querySelectorAll('[data-testid="jerusalem-editorial-hotel-link"]')).toHaveLength(12);
+      for (const section of sections) {
+        const heading = section.querySelector("h3[id$='-h']");
+        const facts = section.querySelector('[data-testid="jerusalem-area-highlights"]');
+        const paragraphs = section.querySelectorAll("p");
+        expect(heading).toBeTruthy();
+        expect(facts).toBeTruthy();
+        expect(heading?.compareDocumentPosition(facts!) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
+        expect(Array.from(paragraphs).some((paragraph) => paragraph.textContent?.startsWith("Best for:"))).toBe(true);
+        expect(within(section).getAllByTestId("jerusalem-editorial-hotel-card")).toHaveLength(2);
+        expect(within(section).getByRole("heading", { name: /^Popular hotels in / })).toBeInTheDocument();
+      }
       expect(container).toHaveTextContent("The maps show the general location of each area");
       expect(container).toHaveTextContent("Blue Line light-rail construction");
       expect(screen.getByTestId("sources")).toHaveAttribute("data-ids", expect.stringContaining("jerusalem-emek-refaim-works"));
       expect(container.querySelector("#faq")).toHaveAttribute("data-faq-count", "5");
     } else {
+      expect(container.querySelector("#compare")).toBeInTheDocument();
+      expect(container.querySelector('[data-testid="jerusalem-area-image-grid"]')).toBeNull();
+      expect(container.querySelectorAll('[data-testid="jerusalem-editorial-hotel-card"]')).toHaveLength(0);
       expect(container.querySelectorAll('[data-testid="jerusalem-practical-notes"]')).toHaveLength(0);
       expect(container.querySelector("#faq")).toHaveAttribute("data-faq-count", "4");
     }
