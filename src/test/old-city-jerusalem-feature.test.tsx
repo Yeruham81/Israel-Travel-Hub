@@ -4,6 +4,8 @@ import { oldCityJerusalemDestinationContent as content } from "@/components/OldC
 import { oldCityJerusalemSite as site } from "@/data/oldCityJerusalemSite";
 import { oldCityJerusalemMeta } from "@/routes/attractions.old-city-jerusalem";
 import { attractionHubCards } from "@/data/attractionsHub";
+import { affiliateConfig } from "@/data/registry";
+import { offersForTour } from "@/lib/tours";
 
 describe("Jerusalem Old City upgraded attractions guide", () => {
   it("uses the shared destination design, current meta and all eight illustrated landmarks", () => {
@@ -19,7 +21,7 @@ describe("Jerusalem Old City upgraded attractions guide", () => {
     expect(content.nearby).toHaveLength(6);
     expect(content.planningLinks).toHaveLength(6);
     expect(content.faqs).toHaveLength(5);
-    expect(content.sources).toHaveLength(6);
+    expect(content.sources).toHaveLength(7);
     expect(new Set(content.nearby?.map(x => x.to)).size).toBe(6);
     expect(attractionHubCards.filter(card => card.to === content.path)).toHaveLength(1);
     expect((page.match(/<AttractionHighlight\s+title=/g) || [])).toHaveLength(8);
@@ -27,7 +29,9 @@ describe("Jerusalem Old City upgraded attractions guide", () => {
     expect(meta.links.find(x => x.rel === "canonical")?.href).toContain(content.path);
     const schema = meta.scripts.map(x => JSON.parse(x.children as string)).find(x => x["@type"] === "Article");
     expect(schema.dateModified).toBe("2026-11-18");
-    expect(schema.citation).toContain(site.official.unesco);
+    expect(schema.citation).toEqual(content.sources.map(source => source.url));
+    expect(schema.citation).not.toContain(site.official.accessibleJlmIos);
+    expect(schema.citation).not.toContain(site.official.jerusalemTransit);
   });
 
   it("correctly distinguishes free sacred places, paid tours and limited worship-site access", () => {
@@ -52,6 +56,13 @@ describe("Jerusalem Old City upgraded attractions guide", () => {
     expect(page).toContain('data-testid="jerusalem-old-city-tour-cards"');
     expect(page).toContain('data-testid="jerusalem-old-city-published-hours"');
     expect(page).toContain("Sunday 12:00–17:00");
+    expect(page).toContain("opposite Jaffa Gate Plaza");
+    expect(page).toContain("Friday and Shabbat:");
+    expect(page).toContain("most city buses stop operating");
+    expect(page).toContain('title="Damascus Gate and the Muslim Quarter Markets"');
+    expect(page).toContain("Ramparts Walk</a> starts at Jaffa Gate");
+    expect(page).toContain("<strong>Armenian Quarter:</strong>");
+    expect(page).toContain("plan your morning around that limited visiting window");
     expect(page).toContain("Saturday–Thursday 09:00–16:00 in winter");
     expect(page).toContain("Jaffa Gate–New Gate section of the northern route");
     expect(page).toContain("follows sections of the walls open to visitors");
@@ -64,7 +75,11 @@ describe("Jerusalem Old City upgraded attractions guide", () => {
     expect(page).not.toContain("follows accessible sections of the city walls");
     expect(site.official.tunnels).toBe("https://thekotel.org/en/book-a-tour/");
     expect(content.relatedTitle).toBe("Explore Jerusalem and day trips across Israel");
-    expect(page).toContain('JerusalemPartnerOffers id="old-city-jerusalem"');
+    expect(page).toContain('data-testid="jerusalem-old-city-featured-tours"');
+    expect(page).toContain("ExternalTourCard");
+    expect(page).not.toContain('JerusalemPartnerOffers id="old-city-jerusalem"');
+    expect(affiliateConfig["tour-jerusalem-old-city-walk-viator@attractions-old-city-jerusalem"]?.trackingUrl).toBe("https://viator.tpm.li/NfTH03Dg");
+    expect(offersForTour("jerusalem-private-oldcity-walk", "attractions-old-city-jerusalem")[0]?.provider.isAffiliate).toBe(true);
     expect(page).toContain("contactIntroduction:");
     expect(page).not.toContain("Planning a visit to Jerusalem's Old City? Tell me");
     expect(site.visitor.towerAdult).toBe("₪55");
