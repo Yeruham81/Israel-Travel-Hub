@@ -4,7 +4,7 @@ on:
   push:
     branches: [main]
     paths:
-      - "scripts/travel-blog-image-manifest.test.ts"
+      - "src/test/travel-blog-photo-manifest.test.ts"
       - "scripts/optimize_travel_blog_hub_images.py"
       - ".github/workflows/optimize-travel-blog-hub-images.yml"
   workflow_dispatch:
@@ -39,7 +39,7 @@ jobs:
       - name: Inspect actual default and topic-filtered guide image assignments
         env:
           WRITE_TRAVEL_BLOG_MANIFEST: "1"
-        run: bun x vitest run scripts/travel-blog-image-manifest.test.ts
+        run: bun x vitest run src/test/travel-blog-photo-manifest.test.ts
 
       - name: Configure Python
         uses: actions/setup-python@v5
