@@ -1,6 +1,7 @@
 import { describe, expect, it } from "vitest";
 import { attractionHubCards, attractionHubPhotos, attractionHubRegions, attractionPlanningPaths, attractionRelatedGuides } from "@/data/attractionsHub";
 import { readFileSync } from "node:fs";
+import { attractionHubCardImageSets, attractionHubRegionImageSets, attractionHubRelatedImageSets } from "@/data/attractionHubResponsivePhotos";
 import { attractionIds, attractionPath, isRegionalOverview } from "@/data/attractionGuideTypes";
 import { travelGuidePaths } from "@/data/registry";
 
@@ -117,5 +118,46 @@ describe("Attractions hub redesign", () => {
       expect(card.photo.src).toBeTruthy();
       expect(card.photo.src).not.toContain("israel-taxi.com");
     }
+  });
+});
+
+describe("attractions landing responsive image delivery", () => {
+  const parseWidths = (srcset: string) => srcset.split(", ").map(value => Number(value.match(/ (\d+)w$/)?.[1]));
+
+  it("retains every original source and gives all 20 large cards native-resolution fallback", () => {
+    expect(attractionHubCards).toHaveLength(20);
+    for (const card of attractionHubCards) {
+      const srcset = attractionHubCardImageSets[card.photo.src] ?? "";
+      expect(srcset, card.id).toBeTruthy();
+      const widths = parseWidths(srcset);
+      expect(widths.every(width => Number.isInteger(width) && width > 0), card.id).toBe(true);
+      expect(new Set(widths).size, card.id).toBe(widths.length);
+      expect(widths, card.id).toEqual([...widths].sort((a, b) => a - b));
+      expect(srcset.includes(card.photo.src) || card.id === "akko-acre", card.id).toBe(true);
+    }
+  });
+
+  it("preserves region and guide sources and responsive breakpoints", () => {
+    for (const region of attractionHubRegions) {
+      expect(attractionHubRegionImageSets[region.image.src], region.id).toBeTruthy();
+      expect(parseWidths(attractionHubRegionImageSets[region.image.src]!).length).toBeGreaterThan(0);
+    }
+    for (const guide of attractionRelatedGuides) {
+      const srcset = attractionHubRelatedImageSets[guide.photo.src] ?? "";
+      expect(srcset, guide.title).toBeTruthy();
+      const widths = parseWidths(srcset);
+      expect(widths.every(width => Number.isInteger(width) && width > 0), guide.title).toBe(true);
+      expect(new Set(widths).size, guide.title).toBe(widths.length);
+    }
+    const page = readFileSync("src/routes/attractions.index.tsx", "utf8");
+    expect(page).toContain("srcSet={attractionHubCardImageSets[card.photo.src]}");
+    expect(page).toContain('sizes="(min-width: 1280px) 365px');
+    expect(page).toContain("srcSet={attractionHubRegionImageSets[region.image.src]}");
+    expect(page).toContain('sizes="(min-width: 640px) 144px, 80px"');
+    expect(page).toContain("srcSet={attractionHubRelatedImageSets[guide.photo.src]}");
+    expect(page).toContain('sizes="(min-width: 640px) 112px, 96px"');
+    expect(page).toContain('<img src={card.photo.src}');
+    expect(page).toContain('<img src={region.image.src}');
+    expect(page).toContain('<img src={guide.photo.src}');
   });
 });

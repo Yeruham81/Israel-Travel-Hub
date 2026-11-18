@@ -1,0 +1,872 @@
+{
+  "scope": "Only /attractions/ region labels, 20 attraction cards and 6 guide previews; originals and individual attractions unchanged",
+  "qualityThresholdPSNRdB": 36.0,
+  "originalSourceFilesPreserved": true,
+  "originalImageCount": 32,
+  "imageSlots": 33,
+  "generatedVariants": 34,
+  "reusedVariants": 2,
+  "oneXPotentialSavingsBytes": 1589266,
+  "sourceFileBytesAcrossSlots": 2950440,
+  "notes": "Per-slot source-to-smallest-image comparison, not PageSpeed Insights network savings. On high-DPR and wider screens the browser may load larger or original files. Each WebP derivative preserves original crop/aspect ratio and passed a >=36dB PSNR check.",
+  "rows": [
+    {
+      "group": "cards",
+      "id": "old-city-jerusalem",
+      "source": "src/assets/home/jerusalem-old-city.webp",
+      "nativeDimensions": [
+        900,
+        600
+      ],
+      "nativeBytes": 142198,
+      "variants": [
+        {
+          "path": "src/assets/attractions-hub/card-old-city-jerusalem-420.webp",
+          "width": 420,
+          "height": 280,
+          "bytes": 51960,
+          "psnrDb": 38.59,
+          "sourceWidth": 900,
+          "sourceHeight": 600,
+          "quality": 92,
+          "reused": false
+        }
+      ],
+      "oneXCandidateBytes": 51960,
+      "oneXPotentialSavingsBytes": 90238
+    },
+    {
+      "group": "cards",
+      "id": "mount-of-olives",
+      "source": "public/images/attractions/mount-of-olives.webp",
+      "nativeDimensions": [
+        755,
+        503
+      ],
+      "nativeBytes": 126000,
+      "variants": [
+        {
+          "path": "src/assets/attractions-hub/card-mount-of-olives-420.webp",
+          "width": 420,
+          "height": 280,
+          "bytes": 60790,
+          "psnrDb": 37.43,
+          "sourceWidth": 755,
+          "sourceHeight": 503,
+          "quality": 92,
+          "reused": false
+        }
+      ],
+      "oneXCandidateBytes": 60790,
+      "oneXPotentialSavingsBytes": 65210
+    },
+    {
+      "group": "cards",
+      "id": "mount-zion",
+      "source": "src/assets/guides/mount-zion.jpg",
+      "nativeDimensions": [
+        755,
+        503
+      ],
+      "nativeBytes": 74362,
+      "variants": [
+        {
+          "path": "src/assets/attractions-hub/card-mount-zion-420.webp",
+          "width": 420,
+          "height": 280,
+          "bytes": 35188,
+          "psnrDb": 40.03,
+          "sourceWidth": 755,
+          "sourceHeight": 503,
+          "quality": 92,
+          "reused": false
+        }
+      ],
+      "oneXCandidateBytes": 35188,
+      "oneXPotentialSavingsBytes": 39174
+    },
+    {
+      "group": "cards",
+      "id": "jaffa",
+      "source": "src/assets/tel-aviv/jaffa.webp",
+      "nativeDimensions": [
+        755,
+        385
+      ],
+      "nativeBytes": 68256,
+      "variants": [
+        {
+          "path": "src/assets/attractions-hub/card-jaffa-420.webp",
+          "width": 420,
+          "height": 214,
+          "bytes": 33730,
+          "psnrDb": 38.32,
+          "sourceWidth": 755,
+          "sourceHeight": 385,
+          "quality": 92,
+          "reused": false
+        }
+      ],
+      "oneXCandidateBytes": 33730,
+      "oneXPotentialSavingsBytes": 34526
+    },
+    {
+      "group": "cards",
+      "id": "akko-acre",
+      "source": "src/assets/shore-excursions/akko-port.jpg",
+      "nativeDimensions": [
+        360,
+        240
+      ],
+      "nativeBytes": 60256,
+      "variants": [
+        {
+          "path": "src/assets/attractions-hub/card-akko-acre-360.webp",
+          "width": 360,
+          "height": 240,
+          "bytes": 31694,
+          "psnrDb": 39.85,
+          "sourceWidth": 360,
+          "sourceHeight": 240,
+          "quality": 92,
+          "reused": false
+        }
+      ],
+      "oneXCandidateBytes": 31694,
+      "oneXPotentialSavingsBytes": 28562
+    },
+    {
+      "group": "cards",
+      "id": "caesarea",
+      "source": "src/assets/home/caesarea-dusk.webp",
+      "nativeDimensions": [
+        1200,
+        715
+      ],
+      "nativeBytes": 107542,
+      "variants": [
+        {
+          "path": "src/assets/attractions-hub/card-caesarea-420.webp",
+          "width": 420,
+          "height": 250,
+          "bytes": 28670,
+          "psnrDb": 40.12,
+          "sourceWidth": 1200,
+          "sourceHeight": 715,
+          "quality": 92,
+          "reused": false
+        },
+        {
+          "path": "src/assets/attractions-hub/card-caesarea-720.webp",
+          "width": 720,
+          "height": 429,
+          "bytes": 77030,
+          "psnrDb": 41.66,
+          "sourceWidth": 1200,
+          "sourceHeight": 715,
+          "quality": 92,
+          "reused": false
+        }
+      ],
+      "oneXCandidateBytes": 28670,
+      "oneXPotentialSavingsBytes": 78872
+    },
+    {
+      "group": "cards",
+      "id": "rosh-hanikra",
+      "source": "src/assets/guides/rosh-hanikra.jpg",
+      "nativeDimensions": [
+        738,
+        493
+      ],
+      "nativeBytes": 58909,
+      "variants": [
+        {
+          "path": "src/assets/attractions-hub/card-rosh-hanikra-420.webp",
+          "width": 420,
+          "height": 281,
+          "bytes": 34598,
+          "psnrDb": 39.18,
+          "sourceWidth": 738,
+          "sourceHeight": 493,
+          "quality": 92,
+          "reused": false
+        }
+      ],
+      "oneXCandidateBytes": 34598,
+      "oneXPotentialSavingsBytes": 24311
+    },
+    {
+      "group": "cards",
+      "id": "annunciation",
+      "source": "src/assets/guides/2026-11/basilica-annunciation-courtyard.webp",
+      "nativeDimensions": [
+        738,
+        493
+      ],
+      "nativeBytes": 56320,
+      "variants": [
+        {
+          "path": "src/assets/attractions-hub/card-annunciation-420.webp",
+          "width": 420,
+          "height": 281,
+          "bytes": 36558,
+          "psnrDb": 41.14,
+          "sourceWidth": 738,
+          "sourceHeight": 493,
+          "quality": 92,
+          "reused": false
+        }
+      ],
+      "oneXCandidateBytes": 36558,
+      "oneXPotentialSavingsBytes": 19762
+    },
+    {
+      "group": "cards",
+      "id": "mount-tabor",
+      "source": "src/assets/guides/mount-tabor.jpg",
+      "nativeDimensions": [
+        738,
+        493
+      ],
+      "nativeBytes": 59395,
+      "variants": [
+        {
+          "path": "src/assets/attractions-hub/card-mount-tabor-420.webp",
+          "width": 420,
+          "height": 281,
+          "bytes": 39844,
+          "psnrDb": 39.86,
+          "sourceWidth": 738,
+          "sourceHeight": 493,
+          "quality": 92,
+          "reused": false
+        }
+      ],
+      "oneXCandidateBytes": 39844,
+      "oneXPotentialSavingsBytes": 19551
+    },
+    {
+      "group": "cards",
+      "id": "precipice",
+      "source": "src/assets/guides/2026-10/mount-precipice.webp",
+      "nativeDimensions": [
+        755,
+        503
+      ],
+      "nativeBytes": 102696,
+      "variants": [
+        {
+          "path": "src/assets/attractions-hub/card-precipice-420.webp",
+          "width": 420,
+          "height": 280,
+          "bytes": 42488,
+          "psnrDb": 40.6,
+          "sourceWidth": 755,
+          "sourceHeight": 503,
+          "quality": 92,
+          "reused": false
+        }
+      ],
+      "oneXCandidateBytes": 42488,
+      "oneXPotentialSavingsBytes": 60208
+    },
+    {
+      "group": "cards",
+      "id": "megiddo",
+      "source": "src/assets/guides/2026-10/tel-megiddo.webp",
+      "nativeDimensions": [
+        760,
+        508
+      ],
+      "nativeBytes": 112658,
+      "variants": [
+        {
+          "path": "src/assets/attractions-hub/card-megiddo-420.webp",
+          "width": 420,
+          "height": 281,
+          "bytes": 45640,
+          "psnrDb": 36.99,
+          "sourceWidth": 760,
+          "sourceHeight": 508,
+          "quality": 92,
+          "reused": false
+        },
+        {
+          "path": "src/assets/attractions-hub/card-megiddo-640.webp",
+          "width": 640,
+          "height": 428,
+          "bytes": 100714,
+          "psnrDb": 38.79,
+          "sourceWidth": 760,
+          "sourceHeight": 508,
+          "quality": 92,
+          "reused": false
+        }
+      ],
+      "oneXCandidateBytes": 45640,
+      "oneXPotentialSavingsBytes": 67018
+    },
+    {
+      "group": "cards",
+      "id": "capernaum",
+      "source": "src/assets/guides/capernaum.jpg",
+      "nativeDimensions": [
+        738,
+        493
+      ],
+      "nativeBytes": 98997,
+      "variants": [
+        {
+          "path": "src/assets/attractions-hub/card-capernaum-420.webp",
+          "width": 420,
+          "height": 281,
+          "bytes": 58298,
+          "psnrDb": 36.27,
+          "sourceWidth": 738,
+          "sourceHeight": 493,
+          "quality": 92,
+          "reused": false
+        }
+      ],
+      "oneXCandidateBytes": 58298,
+      "oneXPotentialSavingsBytes": 40699
+    },
+    {
+      "group": "cards",
+      "id": "tabgha",
+      "source": "src/assets/guides/tabgha.jpg",
+      "nativeDimensions": [
+        755,
+        503
+      ],
+      "nativeBytes": 85704,
+      "variants": [
+        {
+          "path": "src/assets/attractions-hub/card-tabgha-420.webp",
+          "width": 420,
+          "height": 280,
+          "bytes": 49072,
+          "psnrDb": 38.65,
+          "sourceWidth": 755,
+          "sourceHeight": 503,
+          "quality": 92,
+          "reused": false
+        }
+      ],
+      "oneXCandidateBytes": 49072,
+      "oneXPotentialSavingsBytes": 36632
+    },
+    {
+      "group": "cards",
+      "id": "mount-of-beatitudes",
+      "source": "src/assets/guides/mount-of-beatitudes.jpg",
+      "nativeDimensions": [
+        730,
+        488
+      ],
+      "nativeBytes": 75322,
+      "variants": [
+        {
+          "path": "src/assets/attractions-hub/card-mount-of-beatitudes-420.webp",
+          "width": 420,
+          "height": 281,
+          "bytes": 50114,
+          "psnrDb": 37.38,
+          "sourceWidth": 730,
+          "sourceHeight": 488,
+          "quality": 92,
+          "reused": false
+        }
+      ],
+      "oneXCandidateBytes": 50114,
+      "oneXPotentialSavingsBytes": 25208
+    },
+    {
+      "group": "cards",
+      "id": "magdala",
+      "source": "public/images/attractions/magdala-duc-in-altum-exterior.webp",
+      "nativeDimensions": [
+        738,
+        493
+      ],
+      "nativeBytes": 76674,
+      "variants": [
+        {
+          "path": "src/assets/attractions-hub/card-magdala-420.webp",
+          "width": 420,
+          "height": 281,
+          "bytes": 42138,
+          "psnrDb": 41.13,
+          "sourceWidth": 738,
+          "sourceHeight": 493,
+          "quality": 92,
+          "reused": false
+        }
+      ],
+      "oneXCandidateBytes": 42138,
+      "oneXPotentialSavingsBytes": 34536
+    },
+    {
+      "group": "cards",
+      "id": "yardenit",
+      "source": "src/assets/guides/yardenit.jpg",
+      "nativeDimensions": [
+        730,
+        488
+      ],
+      "nativeBytes": 85992,
+      "variants": [
+        {
+          "path": "src/assets/attractions-hub/card-yardenit-420.webp",
+          "width": 420,
+          "height": 281,
+          "bytes": 56172,
+          "psnrDb": 37.54,
+          "sourceWidth": 730,
+          "sourceHeight": 488,
+          "quality": 92,
+          "reused": false
+        }
+      ],
+      "oneXCandidateBytes": 56172,
+      "oneXPotentialSavingsBytes": 29820
+    },
+    {
+      "group": "cards",
+      "id": "masada",
+      "source": "src/assets/home/masada-dead-sea.webp",
+      "nativeDimensions": [
+        1200,
+        879
+      ],
+      "nativeBytes": 122226,
+      "variants": [
+        {
+          "path": "src/assets/attractions-hub/card-masada-420.webp",
+          "width": 420,
+          "height": 308,
+          "bytes": 29070,
+          "psnrDb": 40.69,
+          "sourceWidth": 1200,
+          "sourceHeight": 879,
+          "quality": 92,
+          "reused": false
+        },
+        {
+          "path": "src/assets/attractions-hub/card-masada-720.webp",
+          "width": 720,
+          "height": 527,
+          "bytes": 80790,
+          "psnrDb": 42.13,
+          "sourceWidth": 1200,
+          "sourceHeight": 879,
+          "quality": 92,
+          "reused": false
+        }
+      ],
+      "oneXCandidateBytes": 29070,
+      "oneXPotentialSavingsBytes": 93156
+    },
+    {
+      "group": "cards",
+      "id": "ein-gedi",
+      "source": "src/assets/guides/dead-sea-excursions/ein-gedi-waterfall.webp",
+      "nativeDimensions": [
+        755,
+        503
+      ],
+      "nativeBytes": 125264,
+      "variants": [
+        {
+          "path": "src/assets/attractions-hub/card-ein-gedi-420.webp",
+          "width": 420,
+          "height": 280,
+          "bytes": 61512,
+          "psnrDb": 38.87,
+          "sourceWidth": 755,
+          "sourceHeight": 503,
+          "quality": 92,
+          "reused": false
+        }
+      ],
+      "oneXCandidateBytes": 61512,
+      "oneXPotentialSavingsBytes": 63752
+    },
+    {
+      "group": "cards",
+      "id": "qasr",
+      "source": "src/assets/guides/qasr-el-yahud.jpg",
+      "nativeDimensions": [
+        755,
+        503
+      ],
+      "nativeBytes": 90804,
+      "variants": [
+        {
+          "path": "src/assets/attractions-hub/card-qasr-420.webp",
+          "width": 420,
+          "height": 280,
+          "bytes": 46672,
+          "psnrDb": 38.71,
+          "sourceWidth": 755,
+          "sourceHeight": 503,
+          "quality": 92,
+          "reused": false
+        }
+      ],
+      "oneXCandidateBytes": 46672,
+      "oneXPotentialSavingsBytes": 44132
+    },
+    {
+      "group": "cards",
+      "id": "mitzpe-ramon-crater",
+      "source": "src/assets/guides/mitzpe-ramon-crater.jpg",
+      "nativeDimensions": [
+        738,
+        493
+      ],
+      "nativeBytes": 55161,
+      "variants": [
+        {
+          "path": "src/assets/attractions-hub/card-mitzpe-ramon-crater-420.webp",
+          "width": 420,
+          "height": 281,
+          "bytes": 37308,
+          "psnrDb": 40.36,
+          "sourceWidth": 738,
+          "sourceHeight": 493,
+          "quality": 92,
+          "reused": false
+        }
+      ],
+      "oneXCandidateBytes": 37308,
+      "oneXPotentialSavingsBytes": 17853
+    },
+    {
+      "group": "regions",
+      "id": "jerusalem",
+      "source": "public/images/attractions/jerusalem.webp",
+      "nativeDimensions": [
+        755,
+        405
+      ],
+      "nativeBytes": 55190,
+      "variants": [
+        {
+          "path": "public/images/attractions/jerusalem-mobile.webp",
+          "width": 480,
+          "height": 257,
+          "bytes": 24182,
+          "psnrDb": 36.08,
+          "sourceWidth": 755,
+          "sourceHeight": 405,
+          "quality": "existing",
+          "reused": true
+        }
+      ],
+      "oneXCandidateBytes": 24182,
+      "oneXPotentialSavingsBytes": 31008
+    },
+    {
+      "group": "regions",
+      "id": "tel-aviv-jaffa",
+      "source": "public/images/attractions/tel-aviv-jaffa.webp",
+      "nativeDimensions": [
+        738,
+        493
+      ],
+      "nativeBytes": 69484,
+      "variants": [
+        {
+          "path": "public/images/attractions/tel-aviv-jaffa-mobile.webp",
+          "width": 480,
+          "height": 321,
+          "bytes": 32332,
+          "psnrDb": 36.13,
+          "sourceWidth": 738,
+          "sourceHeight": 493,
+          "quality": "existing",
+          "reused": true
+        }
+      ],
+      "oneXCandidateBytes": 32332,
+      "oneXPotentialSavingsBytes": 37152
+    },
+    {
+      "group": "regions",
+      "id": "haifa-coast",
+      "source": "public/images/attractions/haifa-coast.webp",
+      "nativeDimensions": [
+        755,
+        503
+      ],
+      "nativeBytes": 105726,
+      "variants": [
+        {
+          "path": "src/assets/attractions-hub/region-haifa-coast-480.webp",
+          "width": 480,
+          "height": 320,
+          "bytes": 70266,
+          "psnrDb": 38.38,
+          "sourceWidth": 755,
+          "sourceHeight": 503,
+          "quality": 93,
+          "reused": false
+        }
+      ],
+      "oneXCandidateBytes": 70266,
+      "oneXPotentialSavingsBytes": 35460
+    },
+    {
+      "group": "regions",
+      "id": "nazareth-lower-galilee",
+      "source": "public/images/attractions/nazareth-galilee.webp",
+      "nativeDimensions": [
+        738,
+        553
+      ],
+      "nativeBytes": 117698,
+      "variants": [
+        {
+          "path": "src/assets/attractions-hub/region-nazareth-lower-galilee-480.webp",
+          "width": 480,
+          "height": 360,
+          "bytes": 79210,
+          "psnrDb": 39.86,
+          "sourceWidth": 738,
+          "sourceHeight": 553,
+          "quality": 93,
+          "reused": false
+        }
+      ],
+      "oneXCandidateBytes": 79210,
+      "oneXPotentialSavingsBytes": 38488
+    },
+    {
+      "group": "regions",
+      "id": "sea-of-galilee",
+      "source": "public/images/attractions/sea-of-galilee.webp",
+      "nativeDimensions": [
+        755,
+        483
+      ],
+      "nativeBytes": 77652,
+      "variants": [
+        {
+          "path": "src/assets/attractions-hub/region-sea-of-galilee-480.webp",
+          "width": 480,
+          "height": 307,
+          "bytes": 54126,
+          "psnrDb": 38.67,
+          "sourceWidth": 755,
+          "sourceHeight": 483,
+          "quality": 93,
+          "reused": false
+        }
+      ],
+      "oneXCandidateBytes": 54126,
+      "oneXPotentialSavingsBytes": 23526
+    },
+    {
+      "group": "regions",
+      "id": "dead-sea-masada",
+      "source": "public/images/attractions/dead-sea.webp",
+      "nativeDimensions": [
+        755,
+        503
+      ],
+      "nativeBytes": 19330,
+      "variants": [
+        {
+          "path": "src/assets/attractions-hub/region-dead-sea-masada-480.webp",
+          "width": 480,
+          "height": 320,
+          "bytes": 15592,
+          "psnrDb": 44.03,
+          "sourceWidth": 755,
+          "sourceHeight": 503,
+          "quality": 93,
+          "reused": false
+        }
+      ],
+      "oneXCandidateBytes": 15592,
+      "oneXPotentialSavingsBytes": 3738
+    },
+    {
+      "group": "regions",
+      "id": "negev-eilat",
+      "source": "public/images/attractions/ramon-crater.webp",
+      "nativeDimensions": [
+        755,
+        427
+      ],
+      "nativeBytes": 42086,
+      "variants": [
+        {
+          "path": "src/assets/attractions-hub/region-negev-eilat-480.webp",
+          "width": 480,
+          "height": 271,
+          "bytes": 35168,
+          "psnrDb": 41.48,
+          "sourceWidth": 755,
+          "sourceHeight": 427,
+          "quality": 93,
+          "reused": false
+        }
+      ],
+      "oneXCandidateBytes": 35168,
+      "oneXPotentialSavingsBytes": 6918
+    },
+    {
+      "group": "related",
+      "id": "jerusalem",
+      "source": "src/assets/home/jerusalem-old-city.webp",
+      "nativeDimensions": [
+        900,
+        600
+      ],
+      "nativeBytes": 142198,
+      "variants": [
+        {
+          "path": "src/assets/attractions-hub/related-jerusalem-360.webp",
+          "width": 360,
+          "height": 240,
+          "bytes": 43496,
+          "psnrDb": 39.07,
+          "sourceWidth": 900,
+          "sourceHeight": 600,
+          "quality": 94,
+          "reused": false
+        }
+      ],
+      "oneXCandidateBytes": 43496,
+      "oneXPotentialSavingsBytes": 98702
+    },
+    {
+      "group": "related",
+      "id": "tel-aviv",
+      "source": "src/assets/home/tel-aviv-coast.webp",
+      "nativeDimensions": [
+        1200,
+        675
+      ],
+      "nativeBytes": 133428,
+      "variants": [
+        {
+          "path": "src/assets/attractions-hub/related-tel-aviv-360.webp",
+          "width": 360,
+          "height": 202,
+          "bytes": 23842,
+          "psnrDb": 42.26,
+          "sourceWidth": 1200,
+          "sourceHeight": 675,
+          "quality": 94,
+          "reused": false
+        }
+      ],
+      "oneXCandidateBytes": 23842,
+      "oneXPotentialSavingsBytes": 109586
+    },
+    {
+      "group": "related",
+      "id": "haifa",
+      "source": "src/assets/haifa/panorama.webp",
+      "nativeDimensions": [
+        1200,
+        414
+      ],
+      "nativeBytes": 105990,
+      "variants": [
+        {
+          "path": "src/assets/attractions-hub/related-haifa-360.webp",
+          "width": 360,
+          "height": 124,
+          "bytes": 17450,
+          "psnrDb": 38.72,
+          "sourceWidth": 1200,
+          "sourceHeight": 414,
+          "quality": 94,
+          "reused": false
+        }
+      ],
+      "oneXCandidateBytes": 17450,
+      "oneXPotentialSavingsBytes": 88540
+    },
+    {
+      "group": "related",
+      "id": "galilee",
+      "source": "src/assets/home/tiberias-lake.webp",
+      "nativeDimensions": [
+        1200,
+        900
+      ],
+      "nativeBytes": 141838,
+      "variants": [
+        {
+          "path": "src/assets/attractions-hub/related-galilee-360.webp",
+          "width": 360,
+          "height": 270,
+          "bytes": 33312,
+          "psnrDb": 40.15,
+          "sourceWidth": 1200,
+          "sourceHeight": 900,
+          "quality": 94,
+          "reused": false
+        }
+      ],
+      "oneXCandidateBytes": 33312,
+      "oneXPotentialSavingsBytes": 108526
+    },
+    {
+      "group": "related",
+      "id": "dead-sea",
+      "source": "src/assets/dead-sea/landscape.webp",
+      "nativeDimensions": [
+        755,
+        424
+      ],
+      "nativeBytes": 55366,
+      "variants": [
+        {
+          "path": "src/assets/attractions-hub/related-dead-sea-360.webp",
+          "width": 360,
+          "height": 202,
+          "bytes": 27342,
+          "psnrDb": 39.37,
+          "sourceWidth": 755,
+          "sourceHeight": 424,
+          "quality": 94,
+          "reused": false
+        }
+      ],
+      "oneXCandidateBytes": 27342,
+      "oneXPotentialSavingsBytes": 28024
+    },
+    {
+      "group": "related",
+      "id": "eilat",
+      "source": "src/assets/eilat/waterfront.webp",
+      "nativeDimensions": [
+        755,
+        503
+      ],
+      "nativeBytes": 99718,
+      "variants": [
+        {
+          "path": "src/assets/attractions-hub/related-eilat-360.webp",
+          "width": 360,
+          "height": 240,
+          "bytes": 33340,
+          "psnrDb": 39.0,
+          "sourceWidth": 755,
+          "sourceHeight": 503,
+          "quality": 94,
+          "reused": false
+        }
+      ],
+      "oneXCandidateBytes": 33340,
+      "oneXPotentialSavingsBytes": 66378
+    }
+  ]
+}

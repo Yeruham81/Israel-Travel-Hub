@@ -6,6 +6,7 @@ import { GuidePhotoCredit } from "@/components/TravelGuide";
 import { hasPublicPhotoCredit } from "@/lib/photo-credits";
 import { attractionHubCards, attractionHubPhotos, attractionHubRegions, attractionPlanningPaths, attractionRelatedGuides, type AttractionHubCard } from "@/data/attractionsHub";
 import { CANONICAL_ORIGIN, jsonLd, pageMeta } from "@/lib/site";
+import { attractionHubCardImageSets, attractionHubRegionImageSets, attractionHubRelatedImageSets } from "@/data/attractionHubResponsivePhotos";
 
 const PATH = "/attractions/";
 const TITLE = "Best attractions in Israel: places to visit & things to see";
@@ -64,7 +65,7 @@ function AttractionCard({ card }: { card: AttractionHubCard }) {
         className="group flex h-full flex-col focus-visible:outline-2 focus-visible:outline-offset-[-3px] focus-visible:outline-primary"
       >
         <div className="aspect-[3/2] overflow-hidden bg-secondary">
-          <img src={card.photo.src} alt={card.photo.alt} width={755} height={503} loading="lazy" decoding="async" className="h-full w-full object-cover transition-transform duration-300 motion-safe:group-hover:scale-[1.03]" />
+          <img src={card.photo.src} srcSet={attractionHubCardImageSets[card.photo.src]} sizes="(min-width: 1280px) 365px, (min-width: 640px) calc(50vw - 24px), calc(100vw - 32px)" alt={card.photo.alt} width={755} height={503} loading="lazy" decoding="async" className="h-full w-full object-cover transition-transform duration-300 motion-safe:group-hover:scale-[1.03]" />
         </div>
         <div className="flex flex-1 flex-col p-4 sm:p-5">
           <div className="flex items-start justify-between gap-2">
@@ -108,7 +109,7 @@ function Attractions() {
       {attractionHubRegions.map((region) => (
         <section key={region.id} id={region.id} aria-labelledby={region.id + "-heading"} className="mt-10 scroll-mt-24 sm:mt-12">
           <div className="flex items-start gap-3 border-b border-l-4 border-l-primary bg-secondary/20 py-3 pl-3 pr-2 sm:items-center sm:gap-5 sm:py-4 sm:pl-5 sm:pr-4">
-            <img src={region.image.src} alt="" width={240} height={160} loading="lazy" decoding="async" className="h-20 w-20 shrink-0 rounded-md object-cover sm:h-24 sm:w-36" />
+            <img src={region.image.src} srcSet={attractionHubRegionImageSets[region.image.src]} sizes="(min-width: 640px) 144px, 80px" alt="" width={240} height={160} loading="lazy" decoding="async" className="h-20 w-20 shrink-0 rounded-md object-cover sm:h-24 sm:w-36" />
             <div className="min-w-0 flex-1">
               <h2 id={region.id + "-heading"} className="text-2xl font-bold leading-tight tracking-tight sm:text-3xl">{region.title}</h2>
               <p className="mt-1.5 max-w-3xl text-sm leading-relaxed text-muted-foreground sm:text-base">{region.summary}</p>
@@ -144,7 +145,7 @@ function Attractions() {
           <ul className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
             {attractionRelatedGuides.map(guide => <li key={String(guide.to)} className="min-w-0">
               <Link to={guide.to} className="group flex h-full min-w-0 items-center gap-3 rounded-xl border bg-card p-3 transition-colors hover:border-primary/50 hover:bg-secondary/20 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
-                <img src={guide.photo.src} alt={guide.photo.alt} width={112} height={75} loading="lazy" decoding="async" className="aspect-[3/2] w-24 shrink-0 rounded-lg object-cover sm:w-28" />
+                <img src={guide.photo.src} srcSet={attractionHubRelatedImageSets[guide.photo.src]} sizes="(min-width: 640px) 112px, 96px" alt={guide.photo.alt} width={112} height={75} loading="lazy" decoding="async" className="aspect-[3/2] w-24 shrink-0 rounded-lg object-cover sm:w-28" />
                 <span className="min-w-0 flex-1">
                   <span className="block text-sm font-semibold leading-snug text-foreground group-hover:text-primary">{guide.title}</span>
                   <span className="mt-1 line-clamp-2 block text-xs leading-relaxed text-muted-foreground">{guide.description}</span>
