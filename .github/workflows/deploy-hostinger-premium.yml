@@ -252,7 +252,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          for path in /accommodation/ /accommodation/jerusalem/ /accommodation/tel-aviv/ /accommodation/haifa/ /accommodation/tiberias/ /accommodation/dead-sea/ /accommodation/jerusalem/downtown/ /accommodation/jerusalem/mamilla-king-david/ /accommodation/jerusalem/old-city/ /accommodation/jerusalem/mahane-yehuda-nachlaot/ /accommodation/jerusalem/east-jerusalem/ /accommodation/jerusalem/german-colony-baka/ /accommodation/tel-aviv/beachfront/ /accommodation/tel-aviv/dizengoff-city-center/ /accommodation/tel-aviv/old-north-port/ /accommodation/tel-aviv/neve-tzedek/ /accommodation/tel-aviv/jaffa/ /accommodation/tel-aviv/florentin/ /accommodation/tel-aviv/kerem-hateimanim/ /accommodation/tel-aviv/rothschild-boulevard/ /accommodation/haifa/boutique/ /accommodation/haifa/family/ /accommodation/tiberias/luxury/ /accommodation/tiberias/family/ /accommodation/dead-sea/spa/ /accommodation/dead-sea/family/ / /travel-blog/ /travel-blog/uber-in-israel/ /attractions/capernaum/ /attractions/mount-precipice/ /attractions/tel-megiddo/ /attractions/basilica-of-the-annunciation/ /attractions/rosh-hanikra/ /attractions/caesarea/ /attractions/masada/ /attractions/qasr-el-yahud/ /attractions/ein-gedi/ /attractions/mitzpe-ramon-crater/ /api/quote-request/ /api/exchange-rates/; do
+          for path in /accommodation/ /accommodation/jerusalem/ /accommodation/tel-aviv/ /accommodation/haifa/ /accommodation/tiberias/ /accommodation/dead-sea/ /accommodation/jerusalem/downtown/ /accommodation/jerusalem/mamilla-king-david/ /accommodation/jerusalem/old-city/ /accommodation/jerusalem/mahane-yehuda-nachlaot/ /accommodation/jerusalem/east-jerusalem/ /accommodation/jerusalem/german-colony-baka/ /accommodation/tel-aviv/beachfront/ /accommodation/tel-aviv/dizengoff-city-center/ /accommodation/tel-aviv/old-north-port/ /accommodation/tel-aviv/neve-tzedek/ /accommodation/tel-aviv/jaffa/ /accommodation/tel-aviv/florentin/ /accommodation/tel-aviv/kerem-hateimanim/ /accommodation/tel-aviv/rothschild-boulevard/ /accommodation/haifa/boutique/ /accommodation/haifa/family/ /accommodation/tiberias/luxury/ /accommodation/tiberias/family/ /accommodation/dead-sea/spa/ /accommodation/dead-sea/family/ / /travel-blog/ /travel-blog/uber-in-israel/ /attractions/capernaum/ /attractions/mount-precipice/ /attractions/tel-megiddo/ /attractions/basilica-of-the-annunciation/ /attractions/rosh-hanikra/ /attractions/caesarea/ /attractions/masada/ /attractions/qasr-el-yahud/ /attractions/ein-gedi/ /attractions/mitzpe-ramon-crater/ /attractions/akko-acre/ /api/quote-request/ /api/exchange-rates/; do
             status="$(curl --retry 2 --retry-delay 2 --max-time 20 -L -sS -o /dev/null -w '%{http_code}' "$VITE_CANONICAL_ORIGIN$path")"
             echo "$path -> HTTP $status"
             [[ "$status" == "200" ]] || { echo "::error::Website smoke test failed for $path"; exit 1; }
@@ -651,5 +651,60 @@ jobs:
           console.log("Ramon image loaded: " + process.argv[3] + ", bytes=" + data.length);
           NODE
             rm -f "$image_file"
+          done
+          # Check Old Akko's visitor guide, paid/unpaid tickets, and eight illustrated sites.
+          akko_html="$(mktemp)"
+          curl --retry 2 --max-time 20 -fsSL -o "$akko_html" "$VITE_CANONICAL_ORIGIN/attractions/akko-acre/"
+          node - "$akko_html" "$VITE_CANONICAL_ORIGIN/attractions/akko-acre/" <<'NODE'
+          const fs = require("node:fs");
+          const html = fs.readFileSync(process.argv[2], "utf8");
+          const expected = process.argv[3];
+          const canonicalLinks = [...html.matchAll(/<link\b[^>]*>/gi)]
+            .map(m => m[0]).filter(tag => /\brel=["']canonical["']/i.test(tag));
+          for (const snippet of [
+            "Old Akko (Acre): Historic Attractions",
+            'data-testid="akko-ticket-hours"',
+            'data-testid="akko-booking"',
+            'data-testid="akko-accessibility"',
+            'data-testid="akko-walking-routes"',
+            'data-testid="akko-map"',
+            "Templars",
+            "Ramchal Synagogue",
+            "Treasures in the Wall",
+            "₪55",
+          ]) {
+            if (!html.includes(snippet)) {
+              console.error("::error::Old Akko live guide missing " + snippet);
+              process.exit(1);
+            }
+          }
+          if (!canonicalLinks.some(tag => tag.includes('href="' + expected + '"'))) {
+            console.error("::error::Old Akko published canonical is wrong");
+            process.exit(1);
+          }
+          if ((html.match(/data-testid="attraction-highlight"/g) || []).length !== 8) {
+            console.error("::error::Old Akko must show exactly eight attractions");
+            process.exit(1);
+          }
+          const related = html.match(/<ul[^>]*data-testid=["']stay-trip-photo-grid["'][^>]*>([\s\S]*?)<\/ul>/i);
+          if ((related?.[1].match(/<li\b/g) || []).length !== 6) {
+            console.error("::error::Old Akko must show six related attraction cards");
+            process.exit(1);
+          }
+          console.log("Old Akko published content, eight highlights, related grid and canonical confirmed.");
+          NODE
+          rm -f "$akko_html"
+          for picture in akko-knights-halls.webp akko-templar-tunnel.webp akko-turkish-bath.webp akko-al-jazzar-mosque.webp akko-market.webp akko-fishing-harbour.webp akko-treasures-museum.webp akko-ramchal-synagogue.webp; do
+            data="$(mktemp)"
+            curl --retry 2 --max-time 20 -fsSL -o "$data" "$VITE_CANONICAL_ORIGIN/images/attractions/$picture"
+            node - "$data" "$picture" <<'NODE'
+          const fs = require("node:fs");
+          const bytes = fs.readFileSync(process.argv[2]);
+          if (bytes.subarray(0,4).toString() !== "RIFF" || bytes.subarray(8,12).toString() !== "WEBP") {
+            console.error("::error::Old Akko photo is not valid WebP: " + process.argv[3]);
+            process.exit(1);
+          }
+          NODE
+            rm -f "$data"
           done
           echo "Source-controlled static guides published; existing PHP APIs still respond to GET."
