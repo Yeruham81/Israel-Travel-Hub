@@ -22,14 +22,14 @@ export function AccommodationCard({
         className={"w-full object-cover motion-safe:transition-transform motion-safe:duration-300 motion-safe:group-hover:scale-[1.03] " + (featured ? "h-44 min-[480px]:h-full min-[480px]:min-h-44" : "h-40 min-[480px]:h-full min-[480px]:min-h-40")}
       />
     </span>
-    <span className={"flex min-w-0 flex-1 flex-col p-4 " + (featured ? "sm:p-5" : "")}>
+    <div className={"flex min-w-0 flex-1 flex-col p-4 " + (featured ? "sm:p-5" : "")}>
       <h3 className="text-lg font-semibold leading-snug sm:text-xl">{d.title}</h3>
       <span className="mt-2 flex-1 text-sm leading-relaxed text-muted-foreground">{d.text}</span>
       <span className="mt-3 inline-flex items-center gap-1.5 text-sm font-semibold text-primary group-hover:underline">
         {d.cta}<ArrowRight className="h-4 w-4 shrink-0" aria-hidden />
       </span>
       {isExternal && <span className="sr-only"> (opens in a new tab)</span>}
-    </span>
+    </div>
   </>;
 
   return <article className="flex h-full min-w-0 flex-col overflow-hidden rounded-2xl border bg-card transition-colors hover:border-primary/50" data-testid="hotel-destination-card">
