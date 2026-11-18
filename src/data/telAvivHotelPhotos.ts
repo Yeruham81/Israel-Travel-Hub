@@ -4,6 +4,12 @@
  * Source and licence links remain outbound information, never image hotlinks.
  */
 import heroTelAviv from "@/assets/home/hero-tel-aviv.webp";
+import gordonBeach from "@/assets/home/tel-aviv-coast-card.webp";
+import jaffaHarbor from "@/assets/home/hero-refresh-jaffa-port-v4-medium.webp";
+import jaffaCard from "@/assets/attractions-hub/card-jaffa-420.webp";
+import cityTaxi from "@/assets/travel-blog-hub/taxi-in-tel-aviv-44a5c4426c-420.webp";
+import saronaStreet from "@/assets/home/hero-refresh-tel-aviv-sarona-medium.webp";
+
 
 import telAvivCoast from "@/assets/home/tel-aviv-coast.webp";
 import beachesTelAviv from "@/assets/guides/2026-10/beaches-in-tel-aviv.webp";
@@ -12,8 +18,6 @@ import dizengoff from "@/assets/tel-aviv/dizengoff.webp";
 import florentin from "@/assets/tel-aviv/florentin.webp";
 import jaffa from "@/assets/tel-aviv/jaffa.webp";
 import kerem from "@/assets/tel-aviv/kerem-hateimanim.webp";
-import neveTzedek from "@/assets/tel-aviv/neve-tzedek.webp";
-import oldNorth from "@/assets/tel-aviv/old-north.webp";
 import rothschild from "@/assets/tel-aviv/rothschild.webp";
 
 export type HotelIllustration = {
@@ -41,8 +45,8 @@ export const telAvivHotelPhotos: Record<string, HotelIllustration> = {
     sourceUrl: "https://commons.wikimedia.org/wiki/File:Tel_Aviv_Tayelet-Strand-Promenade_Beach_(34257299744).jpg",
     licenseUrl: "https://creativecommons.org/licenses/by-sa/2.0/",
   },
-  "tlv-embassy": district(beachfront, "Tel Aviv's beachfront and Mediterranean promenade"),
-  "tlv-backstage": district(dizengoff, "Dizengoff district streets in Tel Aviv"),
+  "tlv-embassy": district("/images/city-stays/tel-aviv-beachfront.webp", "Gordon Beach and central Tel Aviv seafront"),
+  "tlv-backstage": district("/images/city-stays/tel-aviv-dizengoff.webp", "Dizengoff Square in central Tel Aviv"),
   "tlv-cinema": district("/images/hotel-cards/tlv-cinema.webp", "Illustrative urban architecture and culture in central Tel Aviv"),
   "tlv-port-tower": {
     src: telAvivCoast,
@@ -52,20 +56,20 @@ export const telAvivHotelPhotos: Record<string, HotelIllustration> = {
     sourceUrl: "https://commons.wikimedia.org/wiki/File:PikiWiki_Israel_58105_jaffa_-_old_city.jpg",
     licenseUrl: "https://creativecommons.org/licenses/by/2.5/",
   },
-  "tlv-melody": district(oldNorth, "Streets and buildings of Tel Aviv's Old North"),
-  "tlv-elkonin": district(neveTzedek, "Historic streets around Neve Tzedek, Tel Aviv"),
+  "tlv-melody": district(gordonBeach, "Mediterranean coastline and northern Tel Aviv beaches"),
+  "tlv-elkonin": district(jaffaHarbor, "Historic Jaffa waterfront south of Neve Tzedek"),
   "tlv-ruby": district(kerem, "Kerem HaTeimanim streets in Tel Aviv"),
-  "tlv-the-jaffa": district(jaffa, "Historic Jaffa neighbourhood"),
+  "tlv-the-jaffa": district(jaffaCard, "Historic Old Jaffa buildings and streets"),
   "tlv-market-house": {
     src: beachesTelAviv,
     alt: "Tel Aviv beach and seafront along the Mediterranean",
     label: "Tel Aviv city photograph",
     credit: "Photograph reused from the publisher's Tel Aviv beach guide",
   },
-  "tlv-albi-florentin": district(florentin, "Florentin street scene in south Tel Aviv"),
+  "tlv-albi-florentin": district(cityTaxi, "Tel Aviv city streets and urban transport"),
   "tlv-florentin-house": district("/images/city-stays/tel-aviv-jaffa.webp", "South Tel Aviv and Jaffa urban surroundings"),
   "tlv-poli-house": district("/images/attractions/tel-aviv-jaffa.webp", "Historic Jaffa waterfront and city"),
   "tlv-assemblage": district("/images/city-stays/tel-aviv-beachfront.webp", "Tel Aviv's Mediterranean beachfront district"),
-  "tlv-the-norman": district(rothschild, "Rothschild Boulevard and the surrounding Tel Aviv streets"),
+  "tlv-the-norman": district(saronaStreet, "Central Tel Aviv urban architecture and street scenery"),
   "tlv-65-rothschild": district("/images/hotel-cards/tlv-65-rothschild.webp", "Illustrative historical city architecture of Tel Aviv-Yafo"),
 };
