@@ -1,30 +1,13 @@
 {
-  "scope": "Shore excursions hub only: 1 compact mobile intro, 2 port cards, 4 experience cards, 6 related-guide cards",
+  "scope": "Shore excursions hub only: 2 port cards, 4 experience cards, 6 related-guide cards; well-optimized original cover is retained",
   "originalsPreserved": true,
-  "createdVariants": 8,
+  "createdVariants": 7,
   "reusedVariants": 5,
-  "sourceBytes": 1062097,
-  "optimizedBytes": 314300,
+  "sourceBytes": 990827,
+  "optimizedBytes": 243030,
   "savedBytes": 747797,
-  "notes": "Hero savings apply only on phones up to 480px. Three already-small experience cards are unchanged. Estimates compare file sizes, not Lighthouse actual network bytes or LCP.",
+  "notes": "The existing 69.6 KiB introduction image was already efficient; its redundant phone derivative was removed. Three already-small experience cards are unchanged. Estimates compare file sizes, not Lighthouse actual network bytes or LCP.",
   "files": [
-    {
-      "label": "hero-phone",
-      "source": "src/assets/home/cruise-port-feature.webp",
-      "served": "src/assets/shore-hub/cruise-port-phone.webp",
-      "sourceBytes": 71270,
-      "servedBytes": 71270,
-      "savedBytes": 0,
-      "reusedExistingAsset": false,
-      "sourceDimensions": [
-        1080,
-        699
-      ],
-      "servedDimensions": [
-        1080,
-        699
-      ]
-    },
     {
       "label": "coast",
       "source": "src/assets/home/hero-jaffa-harbor-desktop.jpg",

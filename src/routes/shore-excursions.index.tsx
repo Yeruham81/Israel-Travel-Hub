@@ -11,7 +11,6 @@ import galileeFeature from "@/assets/home/tiberias-lake-card.webp";
 import masadaFeature from "@/assets/home/masada-cable-car-card.webp";
 import ashdodHubThumb from "@/assets/home/ashdod-port-card.webp";
 import haifaHubThumb from "@/assets/home/haifa-port-card.webp";
-import cruisePortPhone from "@/assets/shore-hub/cruise-port-phone.webp";
 import coastHubThumb from "@/assets/shore-hub/jaffa-route.webp";
 import guideJerusalemThumb from "@/assets/shore-hub/guide-jerusalem.webp";
 import guideGalileeThumb from "@/assets/shore-hub/guide-galilee.webp";
@@ -109,7 +108,7 @@ function Shore() {
       title={shoreHubTitle}
       intro="Arriving by cruise ship? Explore guided excursions and private car-and-driver days from Ashdod and Haifa. Start with your port, then choose a route that fits your time ashore."
       checkedAt={SHORE_EXCURSION_UPDATED_DATE}
-      image={<GuideHeroMedia src={heroPhoto.src} mobileSrc={cruisePortPhone} alt={heroPhoto.alt} compact />}
+      image={<GuideHeroMedia src={heroPhoto.src} alt={heroPhoto.alt} compact />}
       actions={<>
         <Link to={shorePorts.ashdod.path} className="btn btn-primary w-full justify-center sm:w-auto sm:min-w-48">Excursions from Ashdod</Link>
         <Link to={shorePorts.haifa.path} className="btn btn-primary w-full justify-center sm:w-auto sm:min-w-48">Excursions from Haifa</Link>
