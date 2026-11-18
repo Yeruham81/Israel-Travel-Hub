@@ -98,18 +98,11 @@ export function NeighborhoodStayPage({ area }: { area: NeighborhoodStayGuide }) 
   const overviewSection = (
         <Section id="overview" title={`What is it like to stay in ${area.name}?`} className="scroll-mt-32">
           {area.overview.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
-          {localInsight && (isJerusalem ? (
-            <aside className="mt-6 rounded-2xl border bg-secondary/30 p-4 sm:p-5">
-              <h3 className="text-lg font-semibold">{localInsight.heading}</h3>
-              <p className="mt-2 text-sm leading-relaxed">{localInsight.choose}</p>
-              <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{localInsight.compare}</p>
-            </aside>
-          ) : <aside className="mt-6 rounded-2xl border bg-secondary/40 p-5 sm:p-6">
-            <h3 className="text-xl font-semibold">{localInsight.heading}</h3>
-            <p className="mt-3 text-sm leading-relaxed"><strong>Why stay here:</strong> {localInsight.choose}</p>
-            <p className="mt-2 text-sm leading-relaxed"><strong>Worth comparing:</strong> {localInsight.compare}</p>
-            <p className="mt-2 text-sm leading-relaxed"><strong>Arriving with luggage:</strong> {localInsight.arrival}</p>
-          </aside>)}
+          {localInsight && <aside className="mt-6 rounded-2xl border bg-secondary/30 p-4 sm:p-5">
+            <h3 className="text-lg font-semibold">{localInsight.heading}</h3>
+            <p className="mt-2 text-sm leading-relaxed">{localInsight.choose}</p>
+            <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{localInsight.compare}</p>
+          </aside>}
           {<p className="mt-5 text-sm leading-relaxed text-muted-foreground">
             Still comparing locations? <Link to={(isJerusalem ? "/travel-blog/where-to-stay-in-jerusalem/" : "/travel-blog/where-to-stay-in-tel-aviv/") as LinkProps["to"]} className="font-semibold text-primary underline underline-offset-4">Read my guide to where to stay in {city.city}</Link> for a broader look at the city’s neighborhoods.
           </p>}
