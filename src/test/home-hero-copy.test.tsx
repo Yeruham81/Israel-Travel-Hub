@@ -232,7 +232,7 @@ describe("homepage marketing copy and service sections", () => {
 
     // The former bottom destination strip is consolidated into the accommodation section.
     const accommodationSection = document.getElementById("accommodation")!;
-    const destinationLinks = within(accommodationSection).getAllByRole("link").filter(link => link.getAttribute("href")?.startsWith("/travel-blog/"));
+    const destinationLinks = within(accommodationSection).getAllByRole("link").filter(link => link.getAttribute("href")?.startsWith("/accommodation/"));
     expect(destinationLinks).toHaveLength(5);
     // Only the destination name appears over each accommodation image.
     for (const [link, destination] of destinationLinks.map((link, i) => [link, ["Jerusalem", "Tel Aviv & Jaffa", "Tiberias & Galilee", "Dead Sea", "Haifa"][i]!] as const)) {
@@ -248,11 +248,11 @@ describe("homepage marketing copy and service sections", () => {
       expect(accommodationSection).not.toHaveTextContent(removedDescription);
     }
     expect(destinationLinks.map(link => link.getAttribute("href"))).toEqual([
-      "/travel-blog/where-to-stay-in-jerusalem/",
-      "/travel-blog/where-to-stay-in-tel-aviv/",
-      "/travel-blog/best-hotels-in-tiberias/",
-      "/travel-blog/best-dead-sea-hotels/",
-      "/travel-blog/best-hotels-in-haifa/",
+      "/accommodation/jerusalem/",
+      "/accommodation/tel-aviv/",
+      "/accommodation/tiberias/",
+      "/accommodation/dead-sea/",
+      "/accommodation/haifa/",
     ]);
     expect(within(accommodationSection).getAllByRole("img")).toHaveLength(5);
     // The five landscape source images keep more of each destination view than the old portrait crops.
