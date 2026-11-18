@@ -22,6 +22,14 @@ describe("Accommodation booking hub",()=>{
   const cards=container.querySelectorAll('[data-testid="accommodation-destination-card"]');
   expect(cards).toHaveLength(5);
   expect(accommodationDestinations).toHaveLength(6);
+  expect(container.querySelectorAll('[data-testid="hotel-destination-card"]')).toHaveLength(5);
+  const jerusalem = container.querySelector('[data-testid="hotel-destination-card"]')!;
+  expect(jerusalem.closest("li")).toHaveClass("md:col-span-2");
+  expect(jerusalem.querySelector('a[href="/travel-blog/where-to-stay-in-jerusalem/"]')).toBeInTheDocument();
+  expect(jerusalem.querySelectorAll("a")).toHaveLength(2);
+  expect(jerusalem.querySelector("img")).toHaveAttribute("src", accommodationDestinations[0]!.photo.src);
+  expect(jerusalem.querySelector("img")?.getAttribute("alt")).toMatch(/panoramic view of Jerusalem/i);
+  expect(screen.getByTestId("guide-hero-media")).toBeInTheDocument();
   const urls=[...cards].map(card=>card.getAttribute("href"));
   expect(urls).toEqual(["/accommodation/jerusalem/","/accommodation/tel-aviv/","/accommodation/haifa/","/accommodation/tiberias/","/accommodation/dead-sea/"]);
   expect(container.querySelectorAll('a[href^="/travel-blog/where-to-stay"], a[href^="/travel-blog/best-hotels"], a[href^="/travel-blog/best-dead-sea"]')).toHaveLength(5);
@@ -33,13 +41,18 @@ describe("Accommodation booking hub",()=>{
    expect(screen.getByRole("heading",{name:style.title})).toBeInTheDocument();
    expect(style.link?.to).toMatch(/^\/accommodation\//);
   }
+  expect(screen.getAllByTestId("hotel-style-card")).toHaveLength(6);
+  expect(screen.getAllByTestId("hotel-style-card").every(card => card.querySelector("img"))).toBe(true);
+  expect(screen.getByRole("heading", { name: "Plan the rest of your trip" })).toBeInTheDocument();
+  expect(screen.getByRole("heading", { name: "Frequently asked questions" })).toBeInTheDocument();
   expect(neighborhoodGuidesForCity("jerusalem")).toHaveLength(6);
   expect(neighborhoodGuidesForCity("telaviv")).toHaveLength(8);
   expect(hotelCategoryGuides).toHaveLength(6);
  });
  it("keeps a canonical Accommodation hub and no live room price claims", async()=>{
   page();
-  expect(screen.getByText(/I do not display unverified live room rates/i)).toBeInTheDocument();
+  expect(screen.getByText(/enter your dates and guests to check current room prices/i)).toBeInTheDocument();
+  expect(screen.queryByText(/unverified live room rates/i)).toBeNull();
   const meta=await HubRoute.options.head?.({} as never);
   expect(meta).toMatchObject({links:[{rel:"canonical",href:CANONICAL_ORIGIN+"/accommodation/"}]});
  });
