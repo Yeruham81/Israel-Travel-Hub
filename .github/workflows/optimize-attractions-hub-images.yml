@@ -1,0 +1,114 @@
+name: Optimize attractions hub responsive images
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "scripts/optimize_attractions_hub_images.py"
+      - ".github/workflows/optimize-attractions-hub-images.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  actions: write
+
+concurrency:
+  group: optimize-attractions-hub-images
+  cancel-in-progress: false
+
+jobs:
+  optimize:
+    runs-on: ubuntu-latest
+    timeout-minutes: 24
+    steps:
+      - name: Checkout current main
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+          persist-credentials: true
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install Pillow for high-quality WebP downsampling and fidelity checks
+        run: python -m pip install --disable-pip-version-check 'Pillow>=11,<13'
+      - name: Generate resolution-aware images without changing full-size sources
+        run: python scripts/optimize_attractions_hub_images.py
+      - name: Verify images, aspect ratios and measured PSNR visual fidelity
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          from PIL import Image,ImageChops,ImageOps,ImageStat
+          from math import log10,sqrt
+          report=json.loads(Path('docs/ATTRACTIONS_HUB_IMAGE_DELIVERY_REPORT.json').read_text())
+          assert report['originalSourceFilesPreserved']
+          assert report['imageSlots'] == 33
+          assert report['qualityThresholdPSNRdB'] >= 36
+          assert report['oneXPotentialSavingsBytes'] > 650000
+          assert report['generatedVariants'] >= 12
+          for item in report['rows']:
+              with Image.open(item['source']) as source_image:
+                  source=ImageOps.exif_transpose(source_image).convert('RGB')
+              assert list(source.size) == item['nativeDimensions']
+              for variant in item['variants']:
+                  with Image.open(variant['path']) as f:
+                      assert f.format == 'WEBP'
+                      displayed=f.convert('RGB')
+                  assert displayed.width <= source.width, item
+                  assert displayed.height <= source.height, item
+                  assert abs(displayed.width/displayed.height-source.width/source.height) < 0.01, item
+                  ref=source.resize(displayed.size,Image.Resampling.LANCZOS)
+                  channels=ImageStat.Stat(ImageChops.difference(ref,displayed)).rms
+                  mse=sum(c*c for c in channels)/3
+                  score=99.0 if mse==0 else 20*log10(255/sqrt(mse))
+                  assert score>=36.0, (item['id'],variant['path'],score)
+          print('Verified every derivative: all aspect ratios unchanged, all PSNR >= 36 dB')
+          print('Potential 1x savings (not Lighthouse traffic):',report['oneXPotentialSavingsBytes'])
+          PY
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: "1.4.4"
+      - name: Install application dependencies
+        run: bash scripts/install-ci-dependencies.sh
+      - name: Build project and regenerate typed routes
+        run: bun run build
+      - name: Run attractions landing, regional, and destination regression tests
+        run: bun x vitest run src/test/attractions-hub.test.ts src/test/attraction-guides.test.tsx src/test/attractions-region-scaffold.test.ts src/test/attraction-on-this-page.test.tsx
+      - name: Verify TypeScript
+        run: bun x tsc --noEmit
+      - name: Commit optimized hub images only after all quality checks pass
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A src/assets/attractions-hub/ \
+            src/data/attractionHubResponsivePhotos.ts \
+            src/routes/attractions.index.tsx \
+            src/test/attractions-hub.test.ts \
+            docs/ATTRACTIONS_HUB_IMAGE_DELIVERY_REPORT.json
+          if git diff --cached --quiet; then
+            echo "Attractions landing thumbnails are already optimized"
+          else
+            git commit -m "Serve native-fidelity responsive photography in attractions hub"
+            # Vite may change tracked generated route files; exclude all those
+            # changes from the controlled image-only commit before rebasing.
+            git reset --hard HEAD
+            for attempt in 1 2 3 4 5; do
+              git fetch origin main
+              git rebase origin/main
+              if git push origin HEAD:main; then
+                echo "All quality-tested responsive imagery safely pushed"
+                break
+              fi
+              if [[ "$attempt" == "5" ]]; then
+                echo "::error::Could not push quality-tested images"
+                exit 1
+              fi
+              sleep 2
+            done
+          fi
+      - name: Run complete project verification before Hostinger deployment
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh workflow run full-project-validation.yml --ref main
