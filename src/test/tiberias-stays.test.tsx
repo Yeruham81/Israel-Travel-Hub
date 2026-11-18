@@ -14,8 +14,8 @@ import { readOutboundClicks } from "@/lib/outbound";
 import { hotelAffiliateUrl } from "@/lib/hotel-affiliate";
 import { routeTree } from "@/routeTree.gen";
 import { Route as DestinationRoute } from "@/routes/accommodation.tiberias.index";
-import { Route as FamilyRoute } from "@/routes/accommodation.tiberias.family-hotels";
-import { Route as LuxuryRoute } from "@/routes/accommodation.tiberias.luxury-hotels";
+import { Route as FamilyRoute } from "@/routes/accommodation.tiberias.family";
+import { Route as LuxuryRoute } from "@/routes/accommodation.tiberias.luxury";
 
 vi.mock("@tanstack/react-router", async () => {
   const actual = await vi.importActual<typeof import("@tanstack/react-router")>("@tanstack/react-router");

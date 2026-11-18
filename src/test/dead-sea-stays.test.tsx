@@ -12,8 +12,8 @@ import { readOutboundClicks } from "@/lib/outbound";
 import { hotelAffiliateUrl } from "@/lib/hotel-affiliate";
 import { routeTree } from "@/routeTree.gen";
 import { Route as DestinationRoute } from "@/routes/accommodation.dead-sea.index";
-import { Route as SpaRoute } from "@/routes/accommodation.dead-sea.spa-hotels";
-import { Route as FamilyRoute } from "@/routes/accommodation.dead-sea.family-hotels";
+import { Route as SpaRoute } from "@/routes/accommodation.dead-sea.spa";
+import { Route as FamilyRoute } from "@/routes/accommodation.dead-sea.family";
 
 vi.mock("@tanstack/react-router", async () => {
   const actual = await vi.importActual<typeof import("@tanstack/react-router")>("@tanstack/react-router");

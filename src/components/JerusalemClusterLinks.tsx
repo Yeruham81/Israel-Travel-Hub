@@ -26,7 +26,7 @@ export const jerusalemConnections: Record<JerusalemClusterKey, Destination[]> = 
     L("Shopping in Jerusalem", "/travel-blog/shopping-in-jerusalem/", "The Cardo and Old City markets"),
     L("Jerusalem guided tours", "/tours/jerusalem/", "Check walking length, start city and language"),
     L("Jerusalem city guide", "/travel-blog/jerusalem-travel-guide/", "Build a wider city itinerary"),
-    L("Old City hotel areas", "/accommodation/jerusalem/old-city-hotels/", "Check luggage and pedestrian access"),
+    L("Old City hotel areas", "/accommodation/jerusalem/old-city/", "Check luggage and pedestrian access"),
   ],
   "mount-of-olives": [
     L("Churches of Jerusalem", "/travel-blog/churches-in-jerusalem/", "Connect the viewpoint to Gethsemane and sacred sites"),
@@ -57,7 +57,7 @@ export const jerusalemConnections: Record<JerusalemClusterKey, Destination[]> = 
   ],
   jerusalemShopping: [
     L("Old City walking guide", "/attractions/old-city-jerusalem/", "Markets and the Cardo alongside historic sites"),
-    L("Mahane Yehuda / Nachlaot hotels", "/accommodation/jerusalem/mahane-yehuda-nachlaot-hotels/", "Stay close to the market"),
+    L("Mahane Yehuda / Nachlaot hotels", "/accommodation/jerusalem/mahane-yehuda-nachlaot/", "Stay close to the market"),
     L("Food and market tours", "/tours/food-market-tours/", "Experiences with optional tastings"),
     L("Jerusalem city guide", "/travel-blog/jerusalem-travel-guide/", "Place shopping within a wider visit"),
     L("Jerusalem events calendar", "/travel-blog/calendar-of-events/", "Check fairs and event dates"),
