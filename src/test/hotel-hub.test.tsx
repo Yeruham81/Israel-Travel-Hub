@@ -70,7 +70,10 @@ describe("Accommodation booking hub",()=>{
   expect(screen.queryByText(/unverified live room rates/i)).toBeNull();
   const meta=await HubRoute.options.head?.({} as never);
   expect(meta).toMatchObject({links:[{rel:"canonical",href:CANONICAL_ORIGIN+"/accommodation/"}]});
-  const jsonLd = meta?.scripts?.flatMap(script => typeof script.children === "string" ? [JSON.parse(script.children)] : []) ?? [];
+  const jsonLd = meta?.scripts?.flatMap(script => {
+    const children = script?.children;
+    return typeof children === "string" ? [JSON.parse(children)] : [];
+  }) ?? [];
   const collection = jsonLd.find(entry => entry["@type"] === "CollectionPage");
   expect(collection?.mainEntity?.itemListElement).toHaveLength(6);
   expect(collection.mainEntity.itemListElement[5]).not.toHaveProperty("item.url");
