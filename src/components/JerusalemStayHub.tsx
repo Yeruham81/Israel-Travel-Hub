@@ -72,7 +72,7 @@ export function JerusalemStayHub({ g, areas }: { g: CityStayGuide; areas: Neighb
                 onClick={() => recordOutboundClick({ pageId: "stay-jerusalem", productId: booking.id, offerId: booking.id })}
                 className="btn btn-primary inline-flex min-h-11 items-center justify-center gap-2"
               >
-                Browse more on {booking.providerName} <ArrowRight className="h-4 w-4" aria-hidden />
+                Browse more Jerusalem hotels <ArrowRight className="h-4 w-4" aria-hidden />
                 <span className="sr-only"> (opens in a new tab)</span>
               </a>
             ))}
