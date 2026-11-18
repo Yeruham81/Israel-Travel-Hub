@@ -212,5 +212,15 @@
         270
       ]
     }
-  ]
+  ],
+  "verification": {
+    "hubOnly": true,
+    "originalCoverUntouched": true,
+    "noRedundantCoverDerivative": true,
+    "originalSourceFilesUntouched": true,
+    "sourceUniquenessTests": "Passed: 13 image instances remain unique in the hub",
+    "automatedChecks": "Shore hub regressions, shore-excursions tests, production build and TypeScript passed",
+    "deploymentVerification": "The regular push-triggered full CI and Hostinger deploy workflow will verify the final published revision",
+    "psiNote": "Compare a fresh mobile PSI result after publication; file size differences are not identical to Lighthouse estimated network savings"
+  }
 }
