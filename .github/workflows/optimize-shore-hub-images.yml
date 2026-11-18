@@ -43,8 +43,8 @@ jobs:
           p=Path('docs/SHORE_HUB_IMAGE_DELIVERY_REPORT.json')
           report=json.loads(p.read_text())
           assert report['originalsPreserved']
-          assert len(report['files']) == 13
-          assert report['createdVariants'] == 8
+          assert len(report['files']) == 12
+          assert report['createdVariants'] == 7
           assert report['savedBytes'] > 450000
           for f in report['files']:
               with Image.open(f['source']) as orig, Image.open(f['served']) as served:
@@ -70,7 +70,7 @@ jobs:
           set -euo pipefail
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add src/assets/shore-hub/*.webp \
+          git add -A src/assets/shore-hub/ \
             src/routes/shore-excursions.index.tsx \
             src/test/shore-hub.test.tsx \
             docs/SHORE_HUB_IMAGE_DELIVERY_REPORT.json

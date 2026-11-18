@@ -17,8 +17,6 @@ REPORT = ROOT / "docs/SHORE_HUB_IMAGE_DELIVERY_REPORT.json"
 
 # (original, destination, target width, WebP quality)
 GENERATE = {
-    "hero-phone": ("src/assets/home/cruise-port-feature.webp",
-                   str(DIRECTORY/"cruise-port-phone.webp"), 768, 89),
     "coast": ("src/assets/home/hero-jaffa-harbor-desktop.jpg",
               str(DIRECTORY/"jaffa-route.webp"), 400, 89),
     "guide-jerusalem": ("src/assets/home/jerusalem-old-city.webp",
@@ -75,8 +73,7 @@ def create_webp(source_path: str, output_path: str, width: int, quality: int) ->
     with Image.open(output) as verified:
         assert verified.format == "WEBP", output
         assert verified.width <= original.width, output
-        if output_path != GENERATE["hero-phone"][1]:
-            assert verified.width >= 224, output
+        assert verified.width >= 224, output
 
 def measure(label: str, source_name: str, target_name: str, reused: bool) -> dict:
     source, target = ROOT/source_name, ROOT/target_name
@@ -98,7 +95,6 @@ def measure(label: str, source_name: str, target_name: str, reused: bool) -> dic
 def wire_page() -> None:
     imports = '''import ashdodHubThumb from "@/assets/home/ashdod-port-card.webp";
 import haifaHubThumb from "@/assets/home/haifa-port-card.webp";
-import cruisePortPhone from "@/assets/shore-hub/cruise-port-phone.webp";
 import coastHubThumb from "@/assets/shore-hub/jaffa-route.webp";
 import guideJerusalemThumb from "@/assets/shore-hub/guide-jerusalem.webp";
 import guideGalileeThumb from "@/assets/shore-hub/guide-galilee.webp";
@@ -109,6 +105,7 @@ import guideDeadSeaThumb from "@/assets/shore-hub/guide-dead-sea.webp";
 '''
     route_file = ROOT / "src/routes/shore-excursions.index.tsx"
     text = route_file.read_text()
+    text = text.replace('import cruisePortPhone from "@/assets/shore-hub/cruise-port-phone.webp";\n', '', 1)
     text = replace_once(text,
         'import masadaFeature from "@/assets/home/masada-cable-car-card.webp";',
         'import masadaFeature from "@/assets/home/masada-cable-car-card.webp";\n'+imports.rstrip())
@@ -133,12 +130,11 @@ const shoreHubGuideThumbnailSources: Record<string, string> = {
         '  coast: { src: coastHubThumb, alt: "Old Jaffa harbour and its Mediterranean waterfront" },')
     # The original JPEG is not used by the hub after the swap.
     coast_import = 'import coastFeature from "@/assets/home/hero-jaffa-harbor-desktop.jpg";\n'
-    if text.count(coast_import) != 1:
-        raise ValueError("Could not remove the unused desktop coast import")
-    text = text.replace(coast_import, "", 1)
-    text = replace_once(text,
-        'image={<GuideHeroMedia src={heroPhoto.src} alt={heroPhoto.alt} compact />}',
-        'image={<GuideHeroMedia src={heroPhoto.src} mobileSrc={cruisePortPhone} alt={heroPhoto.alt} compact />}')
+    if coast_import in text:
+        text = text.replace(coast_import, "", 1)
+    text = text.replace(
+        'image={<GuideHeroMedia src={heroPhoto.src} mobileSrc={cruisePortPhone} alt={heroPhoto.alt} compact />}',
+        'image={<GuideHeroMedia src={heroPhoto.src} alt={heroPhoto.alt} compact />}', 1)
     text = replace_once(text,
         '<img src={port.photo.src} alt={port.photo.alt} width={160} height={192}',
         '<img src={shoreHubPortThumbnailSources[id]} alt={port.photo.alt} width={160} height={192}')
@@ -152,11 +148,10 @@ const shoreHubGuideThumbnailSources: Record<string, string> = {
     tests=replace_once(tests,
         'import { shoreHubExperiences } from "@/data/shoreHub";',
         'import { shoreHubExperiences } from "@/data/shoreHub";\nimport { shoreHubGuides } from "@/data/shoreReading";')
-    tests=replace_once(tests,
-        '    expect(within(screen.getByTestId("hub-header")).getByRole("img", { name: /Cruise passengers walking/ })).toHaveAttribute("src", homepageShorePhoto);',
-        '''    expect(within(screen.getByTestId("hub-header")).getByRole("img", { name: /Cruise passengers walking/ })).toHaveAttribute("src", homepageShorePhoto);
-    const mobileHero = screen.getByTestId("hub-header").querySelector('picture source[media="(max-width: 480px)"]');
-    expect(mobileHero?.getAttribute("srcset")).toMatch(/cruise-port-phone/);''')
+    tests=tests.replace(
+        '''    const mobileHero = screen.getByTestId("hub-header").querySelector('picture source[media="(max-width: 480px)"]');
+    expect(mobileHero?.getAttribute("srcset")).toMatch(/cruise-port-phone/);
+''', '', 1)
     tests=replace_once(tests,
         '    expect(within(destinations).getAllByRole("img")).toHaveLength(4);',
         '''    expect(within(destinations).getAllByRole("img")).toHaveLength(4);
@@ -174,22 +169,25 @@ const shoreHubGuideThumbnailSources: Record<string, string> = {
     test_file.write_text(tests)
 
 def main() -> None:
+    obsolete = ROOT / DIRECTORY / "cruise-port-phone.webp"
+    if obsolete.exists():
+        obsolete.unlink()
     for original,target,width,q in GENERATE.values():
         create_webp(original,target,width,q)
     items=[measure(k,source,target,False) for k,(source,target,*_) in GENERATE.items()]
     items += [measure(k,source,target,True) for k,(source,target) in REUSE.items()]
-    assert len(items)==13
+    assert len(items)==12
     assert sum(item["savedBytes"] for item in items)>450_000, "Insufficient image-size improvement"
     wire_page()
     report={
-        "scope":"Shore excursions hub only: 1 compact mobile intro, 2 port cards, 4 experience cards, 6 related-guide cards",
+        "scope":"Shore excursions hub only: 2 port cards, 4 experience cards, 6 related-guide cards; well-optimized original cover is retained",
         "originalsPreserved":True,
         "createdVariants":len(GENERATE),
         "reusedVariants":len(REUSE),
         "sourceBytes":sum(x["sourceBytes"] for x in items),
         "optimizedBytes":sum(x["servedBytes"] for x in items),
         "savedBytes":sum(x["savedBytes"] for x in items),
-        "notes":"Hero savings apply only on phones up to 480px. Three already-small experience cards are unchanged. Estimates compare file sizes, not Lighthouse actual network bytes or LCP.",
+        "notes":"The existing 69.6 KiB introduction image was already efficient; its redundant phone derivative was removed. Three already-small experience cards are unchanged. Estimates compare file sizes, not Lighthouse actual network bytes or LCP.",
         "files":items,
     }
     REPORT.parent.mkdir(exist_ok=True)
