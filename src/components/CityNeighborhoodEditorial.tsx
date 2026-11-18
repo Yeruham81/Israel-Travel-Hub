@@ -205,7 +205,6 @@ export function CityNeighborhoodEditorial({ guide }: { guide: CityStayGuide }) {
             <a href={`#area-${area.id}`} className="group flex h-full flex-col rounded-xl border bg-card p-4 transition-colors hover:border-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
               <span className="font-semibold group-hover:text-primary">{area.shortName}</span>
               <span className="mt-2 flex-1 text-sm leading-relaxed text-muted-foreground">{area.bestFor}</span>
-              {cityId === "jerusalem" && <span className="mt-2 text-xs leading-relaxed text-muted-foreground"><strong>Worth knowing:</strong> {area.watch}</span>}
               <span className="mt-3 text-xs font-semibold text-primary">Explore this neighbourhood →</span>
             </a>
           </li>)}
