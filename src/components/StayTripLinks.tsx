@@ -1,6 +1,8 @@
 import { Link, type LinkProps } from "@tanstack/react-router";
 import type { ReactNode } from "react";
 import museumJerusalem from "@/assets/guides/museums-in-jerusalem.jpg";
+import telAvivAttractions from "@/assets/attractions-hub/related-tel-aviv-360.webp";
+import telAvivFoodMarketTours from "@/assets/tours-hub/food-markets.webp";
 import oldCityLanes from "@/assets/jerusalem/old-city.webp";
 import jerusalemOverview from "@/assets/home/hero-jerusalem.webp";
 import mountOfOlivesCard from "@/assets/attractions-hub/card-mount-of-olives-420.webp";
@@ -11,7 +13,6 @@ import roadTrip from "@/assets/home/road-trip.webp";
 import masadaCable from "@/assets/home/masada-cable-car.webp";
 import museumTelAviv from "@/assets/guides/2026-10/museums-in-tel-aviv.webp";
 import beachesTelAviv from "@/assets/guides/2026-10/beaches-in-tel-aviv.webp";
-import telAvivOverview from "@/assets/home/hero-tel-aviv.webp";
 import telAvivCoast from "@/assets/home/tel-aviv-coast.webp";
 import telAvivMuseum from "@/assets/guides/2026-10/eretz-israel-museum.webp";
 import telAvivPromenade from "@/assets/tel-aviv/beachfront.webp";
@@ -81,12 +82,12 @@ export const stayGuideGroups: Record<Region, GuideGroups> = {
   telaviv: {
     name: "Tel Aviv",
     local: [
-      card("Attractions in Tel Aviv", "/travel-blog/attractions-in-tel-aviv/", "Find city sights beyond the hotel neighbourhood.", telAvivOverview, "Tel Aviv skyline and Mediterranean seafront"),
+      card("Attractions in Tel Aviv", "/travel-blog/attractions-in-tel-aviv/", "Find city sights beyond the hotel neighbourhood.", telAvivAttractions, "Central Tel Aviv city and neighborhood views"),
       card("Museums in Tel Aviv", "/travel-blog/museums-in-tel-aviv/", "Explore art, heritage and the city’s museums.", museumTelAviv, "Museum architecture in Tel Aviv"),
       card("Beaches in Tel Aviv", "/travel-blog/beaches-in-tel-aviv/", "Choose the right part of the waterfront for your visit.", beachesTelAviv, "Tel Aviv Mediterranean beach"),
       card("Exploring Jaffa", "/attractions/jaffa/", "Explore Old Jaffa’s harbour, lanes and local character.", "/images/city-stays/tel-aviv-jaffa.webp", "Old Jaffa market and streets"),
       card("Tel Aviv & Jaffa tours", "/tours/tel-aviv-jaffa/", "Find walking tours, neighborhood routes and historic Jaffa experiences.", telAvivCoast, "Coastal Tel Aviv seen from the waterfront"),
-      card("Food & market tours", "/tours/food-market-tours/", "Discover tasting routes and market walks in Tel Aviv.", foodPhoto, "Local food and market dishes in Israel"),
+      card("Food & market tours", "/tours/food-market-tours/", "Discover tasting routes and market walks in Tel Aviv.", telAvivFoodMarketTours, "Market food stalls and tasting experiences"),
     ],
     onward: [
       card("Ben Gurion Airport to Tel Aviv", "/travel-blog/how-to-get-from-ben-gurion-airport-to-tel-aviv/", "Select the right arrival connection for your hotel.", airportTransfers, "Airport arrival and transfer facilities"),
