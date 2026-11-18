@@ -29,7 +29,7 @@ CARD_SOURCES: dict[str, str] = {
     "mount-of-olives": "public/images/attractions/mount-of-olives.webp",
     "mount-zion": "src/assets/guides/mount-zion.jpg",
     "jaffa": "src/assets/tel-aviv/jaffa.webp",
-    "akko-acre": "src/assets/shore-excursions/akko-port.jpg",
+    "akko-acre": "src/assets/guides/old-city-acre-aerial.webp",
     "caesarea": "src/assets/home/caesarea-dusk.webp",
     "rosh-hanikra": "src/assets/guides/rosh-hanikra.jpg",
     "annunciation": "src/assets/guides/2026-11/basilica-annunciation-courtyard.webp",
