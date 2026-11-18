@@ -553,8 +553,8 @@ jobs:
           const fs = require("node:fs");
           const html = fs.readFileSync(process.argv[2], "utf8");
           const expected = process.argv[3];
-          const canonicalLinks = [...html.matchAll(/<link\\b[^>]*>/gi)]
-            .map(m => m[0]).filter(tag => /\\brel=["']canonical["']/i.test(tag));
+          const canonicalLinks = [...html.matchAll(/<link\b[^>]*>/gi)]
+            .map(m => m[0]).filter(tag => /\brel=["']canonical["']/i.test(tag));
           for (const text of [
             "Ramon Crater (Makhtesh Ramon)",
             'data-testid="ramon-hours-prices"',
@@ -575,8 +575,8 @@ jobs:
             console.error("::error::Ramon Crater published canonical URL incorrect");
             process.exit(1);
           }
-          const relatedGrid = html.match(/<ul[^>]*data-testid=["']stay-trip-photo-grid["'][^>]*>([\\s\\S]*?)<\\/ul>/i);
-          if ((relatedGrid?.[1].match(/<li\\b/g) || []).length !== 6) {
+          const relatedGrid = html.match(/<ul[^>]*data-testid=["']stay-trip-photo-grid["'][^>]*>([\s\S]*?)<\/ul>/i);
+          if ((relatedGrid?.[1].match(/<li\b/g) || []).length !== 6) {
             console.error("::error::Ramon Crater related attraction cards must total six");
             process.exit(1);
           }
