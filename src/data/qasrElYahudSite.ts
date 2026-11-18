@@ -1,4 +1,4 @@
-import qasrHero from "@/assets/guides/dead-sea-excursions/jordan-river-qasr-al-yahud.webp";
+import qasrHero from "@/assets/guides/dead-sea-excursions/qasr-el-yahud-river-deck.jpg";
 
 /** Direct operator information and visitor references for the Qasr el-Yahud guide. */
 export const qasrElYahudSite = {
@@ -7,7 +7,7 @@ export const qasrElYahudSite = {
   region: "Jordan Valley & Dead Sea" as const,
   updatedAt: "2026-11-17",
   intro: "On the lower Jordan River near Jericho, Qasr el-Yahud brings visitors to a place closely associated with the baptism of Jesus. You can visit the riverbank, watch ceremonies and spend a quiet moment by the water. I recommend checking the site's reservation and access arrangements before setting out, even for a short stop.",
-  hero: { src: qasrHero, alt: "Riverbank, wooden walkways and trees at the Qasr el-Yahud baptism site on the Jordan River" },
+  hero: { src: qasrHero, alt: "Wide view of the Jordan River and the wooden baptismal walkways at Qasr el-Yahud" },
   visit: {
     admission: "Free",
     reservation: "Required in advance",
@@ -24,8 +24,9 @@ export const qasrElYahudSite = {
   sources: {
     operatorEnglish: "https://en.parks.org.il/reserve-park/baptismal-site-on-the-jordan-river-qasr-al-yahud/",
     operatorHebrew: "https://www.parks.org.il/reserve-park/%D7%90%D7%AA%D7%A8-%D7%94%D7%98%D7%91%D7%99%D7%9C%D7%94-%D7%A7%D7%90%D7%A1%D7%A8-%D7%90%D7%9C-%D7%99%D7%94%D7%95%D7%93/",
-    reservations: "https://en.parks.org.il/%D7%94%D7%96%D7%9E%D7%A0%D7%95%D7%AA-%D7%9C%D7%90%D7%AA%D7%A8%D7%99%D7%9D/",
+    reservations: "https://www.parks.org.il/%D7%94%D7%96%D7%9E%D7%A0%D7%95%D7%AA%20%D7%9C%D7%90%D7%AA%D7%A8%D7%99%D7%9D/",
+    ceremonies: "https://www.parks.org.il/ceremony/%D7%A4%D7%A2%D7%99%D7%9C%D7%95%D7%99%D7%95%D7%AA-%D7%A9%D7%A0%D7%99%D7%AA%D7%9F-%D7%9C%D7%A7%D7%99%D7%99%D7%9D-%D7%91%D7%90%D7%AA%D7%A8-%D7%94%D7%98%D7%91%D7%99%D7%9C%D7%94-%D7%A7%D7%90%D7%A1%D7%A8/",
+    accessibility: "https://www.parks.org.il/new/accessibility/",
     baptismJordan: "https://whc.unesco.org/en/list/1446/",
-    govReserve: "https://www.gov.il/en/departments/Units/nature_reserves_and_parks_unit",
   },
 };
