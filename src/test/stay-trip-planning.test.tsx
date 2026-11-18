@@ -18,22 +18,24 @@ afterEach(cleanup);
 describe("hotel and neighborhood guide navigation", () => {
   const regions = ["jerusalem", "telaviv", "haifa", "tiberias", "deadsea"] as const;
 
-  it.each(regions)("shows four local guides followed by six unique onward guides for %s", (region) => {
+  it.each(regions)("shows local guides followed by six unique onward guides for %s", (region) => {
     const { container } = render(<StayTripLinks region={region} currentPath="/accommodation/" />);
     const wrapper = screen.getByTestId("stay-trip-planning");
     const local = within(wrapper).getByTestId("stay-local-photo-grid");
     const onward = within(wrapper).getByTestId("stay-trip-photo-grid");
-    expect(within(local).getAllByRole("link")).toHaveLength(4);
+    const localCount = region === "jerusalem" ? 6 : 4;
+    expect(within(local).getAllByRole("link")).toHaveLength(localCount);
     expect(within(onward).getAllByRole("link")).toHaveLength(6);
-    expect(within(local).getAllByRole("img")).toHaveLength(4);
+    expect(within(local).getAllByRole("img")).toHaveLength(localCount);
+    if (region === "jerusalem") expect(local).toHaveClass("grid-cols-2", "lg:grid-cols-3");
     expect(within(onward).getAllByRole("img")).toHaveLength(6);
 
     const links = within(wrapper).getAllByRole("link");
     expect(links.every((item) => item.getAttribute("href")?.startsWith("/"))).toBe(true);
-    expect(new Set(links.map((item) => item.getAttribute("href"))).size).toBe(10);
+    expect(new Set(links.map((item) => item.getAttribute("href"))).size).toBe(localCount + 6);
 
     const photos = within(wrapper).getAllByRole("img");
-    expect(new Set(photos.map((item) => item.getAttribute("src"))).size).toBe(10);
+    expect(new Set(photos.map((item) => item.getAttribute("src"))).size).toBe(localCount + 6);
     for (const image of photos) {
       expect(image.getAttribute("src")).toBeTruthy();
       expect(image.getAttribute("alt")?.length).toBeGreaterThan(10);
@@ -49,7 +51,7 @@ describe("hotel and neighborhood guide navigation", () => {
     expect(container.textContent).not.toContain("More ways to plan your stay");
   });
 
-  it("uses the requested four exact Jerusalem local subjects and separates the travel logistics", () => {
+  it("keeps four original Jerusalem local subjects, adds Mount of Olives and churches, and separates travel logistics", () => {
     render(<StayTripLinks region="jerusalem" />);
     const localLinks = within(screen.getByTestId("stay-local-photo-grid")).getAllByRole("link");
     expect(localLinks.map((item) => item.getAttribute("href"))).toEqual([
@@ -57,6 +59,8 @@ describe("hotel and neighborhood guide navigation", () => {
       "/travel-blog/shopping-in-jerusalem/",
       "/attractions/old-city-jerusalem/",
       "/travel-blog/jerusalem-travel-guide/",
+      "/attractions/mount-of-olives/",
+      "/travel-blog/churches-in-jerusalem/",
     ]);
     const travelLinks = within(screen.getByTestId("stay-trip-photo-grid")).getAllByRole("link");
     expect(travelLinks[0]).toHaveAttribute("href", "/travel-blog/how-to-get-from-ben-gurion-airport-to-jerusalem/");
