@@ -66,7 +66,17 @@ describe("Accommodation booking hub",()=>{
  });
  it("keeps a canonical Accommodation hub and no live room price claims", async()=>{
   page();
-  expect(screen.getByText(/enter your dates and guests to check current room prices/i)).toBeInTheDocument();
+  expect(screen.queryByText(/enter your dates and guests to check current room prices/i)).toBeNull();
+  expect(screen.queryByText(/Jerusalem and Tel Aviv have neighborhood-by-neighborhood hotel guides/i)).toBeNull();
+  expect(screen.queryByText(/Have a particular kind of stay in mind/i)).toBeNull();
+  expect(screen.queryByText(/A well-located room with the right facilities/i)).toBeNull();
+  expect(screen.getByRole("link", { name: /Read my guide to choosing where to stay in Jerusalem/i })).toHaveAttribute("href", "/travel-blog/where-to-stay-in-jerusalem/");
+  expect(screen.getByRole("link", { name: /Read my guide to choosing where to stay in Tel Aviv/i })).toHaveAttribute("href", "/travel-blog/where-to-stay-in-tel-aviv/");
+  const checklist = screen.getByRole("list", { name: "Hotel booking checklist" });
+  expect(checklist.querySelectorAll("li")).toHaveLength(4);
+  expect(checklist.querySelectorAll("svg")).toHaveLength(4);
+  expect(checklist).toHaveTextContent("Compare the full price");
+  expect(checklist).toHaveTextContent("Plan your arrival");
   expect(screen.queryByText(/unverified live room rates/i)).toBeNull();
   const meta=await HubRoute.options.head?.({} as never);
   expect(meta).toMatchObject({links:[{rel:"canonical",href:CANONICAL_ORIGIN+"/accommodation/"}]});
