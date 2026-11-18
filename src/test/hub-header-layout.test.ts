@@ -9,7 +9,7 @@ const broadHubs = [
   "src/routes/tours.index.tsx",
   "src/routes/attractions.index.tsx",
   "src/routes/shore-excursions.index.tsx",
-  "src/routes/accommodation.tsx",
+  "src/routes/accommodation.index.tsx",
 ] as const;
 
 const focusedPages = [
