@@ -85,7 +85,21 @@ describe.each([
       const imageUrls = cards.map((card) => within(card).getByTestId("hotel-illustration").getAttribute("src"));
       expect(new Set(imageUrls).size).toBe(4);
       expect(screen.getByTestId("neighborhood-hotel-photo-credits")).toBeInTheDocument();
-      expect(within(container.querySelector("#book") as HTMLElement).getByRole("heading", { name: `My top picks in ${area.name}` })).toBeInTheDocument();
+      expect(within(container.querySelector("#book") as HTMLElement).getByRole("heading", {
+        name: g.id === "jerusalem" ? `Hotels I recommend in ${area.shortName}` : `My top picks in ${area.name}`,
+      })).toBeInTheDocument();
+      if (g.id === "jerusalem") {
+        const hotelSection = container.querySelector("#book") as HTMLElement;
+        expect(within(hotelSection).getAllByTestId("jerusalem-hotel-booking-cta")).toHaveLength(4);
+        expect(within(hotelSection).getAllByRole("link", { name: /^(Check rooms|View hotel)/ })).toHaveLength(4);
+        expect(within(hotelSection).queryByText(/Check rooms on Expedia|View hotel on Expedia/)).not.toBeInTheDocument();
+        expect(within(container.querySelector("#other-areas") as HTMLElement).getAllByRole("link")).toHaveLength(6);
+        expect(within(container.querySelector("#other-areas") as HTMLElement).getByRole("link", { name: /All Jerusalem neighborhoods/ })).toHaveAttribute("href", g.path);
+        expect(screen.getByRole("link", { name: /Read my guide to where to stay in Jerusalem/ })).toHaveAttribute("href", "/travel-blog/where-to-stay-in-jerusalem/");
+        expect(container.querySelector("#book + #checklist")).toBeInTheDocument();
+        expect(container.querySelector("#sources")).not.toBeNull();
+        expect(container.querySelector("#sources")!.compareDocumentPosition(screen.getByTestId("neighborhood-hotel-photo-credits")) & Node.DOCUMENT_POSITION_PRECEDING).toBeTruthy();
+      }
       expect(within(container.querySelector("#book") as HTMLElement).queryByText(/Images are illustrative, not photographs of these hotels/i)).not.toBeInTheDocument();
       expect(screen.queryByText("Who it suits")).not.toBeInTheDocument();
       expect(screen.queryByText("Check before booking")).not.toBeInTheDocument();
