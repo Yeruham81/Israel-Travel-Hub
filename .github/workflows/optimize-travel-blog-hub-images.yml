@@ -1,0 +1,134 @@
+name: Optimize travel blog guide directory images
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "scripts/travel-blog-image-manifest.test.ts"
+      - "scripts/optimize_travel_blog_hub_images.py"
+      - ".github/workflows/optimize-travel-blog-hub-images.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: optimize-travel-blog-hub-images
+  cancel-in-progress: false
+
+jobs:
+  optimize:
+    runs-on: ubuntu-latest
+    timeout-minutes: 28
+    steps:
+      - name: Checkout latest main
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+          persist-credentials: true
+
+      - name: Set up Bun
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: "1.4.4"
+
+      - name: Install dependencies
+        run: bash scripts/install-ci-dependencies.sh
+
+      - name: Inspect actual default and topic-filtered guide image assignments
+        env:
+          WRITE_TRAVEL_BLOG_MANIFEST: "1"
+        run: bun x vitest run scripts/travel-blog-image-manifest.test.ts
+
+      - name: Configure Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install Pillow
+        run: python -m pip install --disable-pip-version-check "Pillow>=11,<13"
+
+      - name: Generate visually verified responsive cover variants and JSX
+        run: python scripts/optimize_travel_blog_hub_images.py
+
+      - name: Independently verify original photos, crop and PSNR quality
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          from PIL import Image, ImageOps, ImageChops, ImageStat
+          from math import log10, sqrt
+          import json
+          r=json.loads(Path('docs/TRAVEL_BLOG_HUB_IMAGE_DELIVERY_REPORT.json').read_text())
+          assert r['nativeSourceFilesPreserved']
+          assert r['numberOfGuides']==49
+          assert r['uniqueCoverSources']>=42
+          assert r['qualityThresholdPSNRdB']>=36
+          assert r['oneXPotentialSavingsBytes']>400000
+          count=0
+          for src,details in r['photos'].items():
+              original=Path('public'+src) if src.startswith('/images/') else Path(src.lstrip('/'))
+              with Image.open(original) as f:
+                  raw=ImageOps.exif_transpose(f).convert('RGB')
+              assert list(raw.size)==details['originalDimensions']
+              assert original.stat().st_size==details['originalBytes']
+              for variant in details['candidates']:
+                  with Image.open(variant['path']) as opened:
+                      assert opened.format=='WEBP'
+                      small=opened.convert('RGB')
+                  assert small.width<raw.width and small.height<=raw.height
+                  assert abs(small.width/small.height-raw.width/raw.height)<0.012
+                  expected=raw.resize(small.size,Image.Resampling.LANCZOS)
+                  channel=ImageStat.Stat(ImageChops.difference(expected,small)).rms
+                  mse=sum(ch*ch for ch in channel)/3
+                  score=99 if mse==0 else 20*log10(255/sqrt(mse))
+                  assert score>=36, (src,variant['path'],score)
+                  count+=1
+          assert count==r['variantsCreated']
+          assert all(s['resolutionRegressions']==0 for s in r['viewportMatrix'])
+          print('Verified',count,'responsive WebP variants, original aspect ratio and visual quality >=36dB')
+          print('Potential default-density guide-cover saving:',r['oneXPotentialSavingsBytes'],'bytes')
+          PY
+
+      - name: Build and regenerate typed routes
+        run: bun run build
+
+      - name: Test guide cards, topic filters and source uniqueness
+        run: bun x vitest run src/test/travel-blog-hub-images.test.ts src/test/travel-guides.test.tsx src/data/travelGuides.test.ts src/test/photo-uniqueness.test.ts
+
+      - name: Verify TypeScript
+        run: bun x tsc --noEmit
+
+      - name: Commit optimized files only after all tests and quality checks pass
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A \
+            src/assets/travel-blog-hub/ \
+            src/data/travelBlogHubResponsivePhotos.ts \
+            src/components/TravelGuide.tsx \
+            src/routes/travel-blog.index.tsx \
+            src/test/travel-blog-hub-images.test.ts \
+            docs/TRAVEL_BLOG_HUB_PHOTO_MANIFEST.json \
+            docs/TRAVEL_BLOG_HUB_IMAGE_DELIVERY_REPORT.json
+          if git diff --cached --quiet; then
+            echo "Travel blog images already optimized"
+          else
+            git commit -m "Serve high-fidelity responsive photos on travel guides index"
+            # Keep regenerated files unrelated to this page out of the image commit.
+            git reset --hard HEAD
+            for attempt in 1 2 3 4 5; do
+              git fetch origin main
+              git rebase origin/main
+              if git push origin HEAD:main; then
+                echo "Verified travel-guide images safely pushed to main"
+                break
+              fi
+              if [[ "$attempt" == "5" ]]; then
+                echo "::error::Unable to safely update main"
+                exit 1
+              fi
+              sleep 2
+            done
+          fi
