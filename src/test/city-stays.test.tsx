@@ -50,7 +50,12 @@ describe.each([
       expect(card.querySelector("img")).toHaveClass("aspect-[16/10]", "object-cover");
       expect(card.querySelector("img")).toHaveAttribute("width", "755");
       expect(within(card).getByRole("link", { name: `Explore ${area.name}: area guide and hotel recommendations` })).toHaveAttribute("href", area.path);
-      expect(within(card).getByText("Explore Area & Hotels")).toBeInTheDocument();
+      if (g.id === "jerusalem") {
+        expect(within(card).getByRole("link", { name: `Explore ${area.name}: area guide and hotel recommendations` })).toHaveTextContent(/(?:Discover|Browse|Explore|Find)/);
+        expect(within(card).queryByText("Explore Area & Hotels")).toBeNull();
+      } else {
+        expect(within(card).getByText("Explore Area & Hotels")).toBeInTheDocument();
+      }
       expect(card.textContent).not.toMatch(/Area guide & [0-9]+ hotel picks/);
     }
     expect(screen.getByRole("heading", { name: `Compare areas in ${g.city}` })).toBeInTheDocument();
@@ -203,8 +208,7 @@ describe("Tel Aviv direct hotel catalog", () => {
       expect(card).toBeDefined();
       expect(within(card).getByRole("heading", { name: hotel.name, level: 3 })).toBeInTheDocument();
       const area = telAvivAreaGuides.find((item) => item.id === hotel.areaId)!;
-      expect(within(card).queryByRole("link", { name: `Explore ${area.shortName} area guide` })).toBeNull();
-      expect(within(card).getByText(area.shortName)).toBeInTheDocument();
+      expect(within(card).getByRole("link", { name: `Explore ${area.shortName} area guide` })).toHaveAttribute("href", area.path);
       expect(within(card).getByTestId("hotel-short-description")).toHaveTextContent((hotelTileCopy[hotel.id] || { description: hotel.summary }).description);
       expect(within(card).getByTestId("hotel-best-for")).toHaveTextContent(`Best for: ${(hotelTileCopy[hotel.id] || { bestFor: hotel.bestFor }).bestFor}`);
       expect((hotelTileCopy[hotel.id]?.bestFor || hotel.bestFor).split(" ").length).toBeLessThanOrEqual(6);
@@ -308,12 +312,13 @@ describe("Jerusalem direct hotel catalog", () => {
       expect(booking, hotel.name).toBeDefined();
       expect(booking.url).toBe(affiliateConfig[booking.id]?.trackingUrl || getSource(hotel.sourceId).url);
       expect(within(card).getByRole("heading", { name: hotel.name, level: 3 })).toBeInTheDocument();
-      expect(within(card).getByRole("link", { name: `Explore ${area.shortName} area guide` })).toHaveAttribute("href", area.path);
+      expect(within(card).queryByRole("link", { name: `Explore ${area.shortName} area guide` })).toBeNull();
+      expect(within(card).getByText(area.shortName)).toBeInTheDocument();
       expect(within(card).getByTestId("hotel-short-description")).toHaveTextContent(copy.description);
       expect(within(card).getByTestId("hotel-best-for")).toHaveTextContent(`Best for: ${copy.bestFor}`);
       expect(copy.bestFor.split(" ").length).toBeLessThanOrEqual(6);
       expect(copy.description.split(" ").length).toBeLessThanOrEqual(25);
-      expect(within(card).getAllByRole("link")).toHaveLength(2);
+      expect(within(card).getAllByRole("link")).toHaveLength(1);
       const book = within(card).getByRole("link", { name: `Check rooms & rates for ${hotel.name} on Expedia` });
       expect(book).toHaveTextContent("Check rooms & rates");
       expect(book).not.toHaveClass("btn-primary");
