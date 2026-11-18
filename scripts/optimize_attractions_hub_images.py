@@ -305,7 +305,7 @@ describe("attractions landing responsive image delivery", () => {
   it("retains every original source and gives all 20 large cards native-resolution fallback", () => {
     expect(attractionHubCards).toHaveLength(20);
     for (const card of attractionHubCards) {
-      const srcset = attractionHubCardImageSets[card.photo.src];
+      const srcset = attractionHubCardImageSets[card.photo.src] ?? "";
       expect(srcset, card.id).toBeTruthy();
       const widths = parseWidths(srcset);
       expect(widths.every(width => Number.isInteger(width) && width > 0), card.id).toBe(true);
@@ -321,7 +321,7 @@ describe("attractions landing responsive image delivery", () => {
       expect(parseWidths(attractionHubRegionImageSets[region.image.src]!).length).toBeGreaterThan(0);
     }
     for (const guide of attractionRelatedGuides) {
-      const srcset = attractionHubRelatedImageSets[guide.photo.src];
+      const srcset = attractionHubRelatedImageSets[guide.photo.src] ?? "";
       expect(srcset, guide.title).toBeTruthy();
       const widths = parseWidths(srcset);
       expect(widths.every(width => Number.isInteger(width) && width > 0), guide.title).toBe(true);
