@@ -202,7 +202,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          for path in / /travel-blog/ /travel-blog/uber-in-israel/ /attractions/capernaum/ /attractions/mount-precipice/ /attractions/tel-megiddo/ /attractions/basilica-of-the-annunciation/ /attractions/rosh-hanikra/ /attractions/caesarea/ /attractions/masada/ /attractions/qasr-el-yahud/ /attractions/ein-gedi/ /api/quote-request/ /api/exchange-rates/; do
+          for path in / /travel-blog/ /travel-blog/uber-in-israel/ /attractions/capernaum/ /attractions/mount-precipice/ /attractions/tel-megiddo/ /attractions/basilica-of-the-annunciation/ /attractions/rosh-hanikra/ /attractions/caesarea/ /attractions/masada/ /attractions/qasr-el-yahud/ /attractions/ein-gedi/ /attractions/mitzpe-ramon-crater/ /api/quote-request/ /api/exchange-rates/; do
             status="$(curl --retry 2 --retry-delay 2 --max-time 20 -L -sS -o /dev/null -w '%{http_code}' "$VITE_CANONICAL_ORIGIN$path")"
             echo "$path -> HTTP $status"
             [[ "$status" == "200" ]] || { echo "::error::Website smoke test failed for $path"; exit 1; }
@@ -546,4 +546,41 @@ jobs:
           console.log("Ein Gedi title, current trail guidance, rates, panorama, six related cards and canonical verified.");
           NODE
           rm -f "$ein_gedi_html"
+          # Validate the updated Ramon Crater visitor guide and its dated closure note.
+          ramon_html="$(mktemp)"
+          curl --retry 2 --max-time 20 -fsSL -o "$ramon_html" "$VITE_CANONICAL_ORIGIN/attractions/mitzpe-ramon-crater/"
+          node - "$ramon_html" "$VITE_CANONICAL_ORIGIN/attractions/mitzpe-ramon-crater/" <<'NODE'
+          const fs = require("node:fs");
+          const html = fs.readFileSync(process.argv[2], "utf8");
+          const expected = process.argv[3];
+          const canonicalLinks = [...html.matchAll(/<link\\b[^>]*>/gi)]
+            .map(m => m[0]).filter(tag => /\\brel=["']canonical["']/i.test(tag));
+          for (const text of [
+            "Ramon Crater (Makhtesh Ramon)",
+            'data-testid="ramon-hours-prices"',
+            'data-testid="ramon-booking"',
+            'data-testid="ramon-visit-options"',
+            'data-testid="ramon-three-stops"',
+            'data-testid="ramon-panorama"',
+            "Hai Ramon",
+            "Closed as of November 2026",
+            "Ramon Colors",
+          ]) {
+            if (!html.includes(text)) {
+              console.error("::error::Ramon Crater public page missing " + text);
+              process.exit(1);
+            }
+          }
+          if (!canonicalLinks.some(tag => tag.includes('href="' + expected + '"'))) {
+            console.error("::error::Ramon Crater published canonical URL incorrect");
+            process.exit(1);
+          }
+          const relatedGrid = html.match(/<ul[^>]*data-testid=["']stay-trip-photo-grid["'][^>]*>([\\s\\S]*?)<\\/ul>/i);
+          if ((relatedGrid?.[1].match(/<li\\b/g) || []).length !== 6) {
+            console.error("::error::Ramon Crater related attraction cards must total six");
+            process.exit(1);
+          }
+          console.log("Ramon Crater visitor information, closure note, photo cards and canonical verified.");
+          NODE
+          rm -f "$ramon_html"
           echo "Source-controlled static guides published; existing PHP APIs still respond to GET."
