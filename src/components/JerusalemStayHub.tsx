@@ -5,7 +5,7 @@ import {
   type CityStayGuide, type NeighborhoodStayGuide, type StayPreference, preferenceLabels,
 } from "@/data/content";
 import { areaArrivalSignals } from "@/data/localEditorialInsights";
-import { linksForPage } from "@/data/registry";
+import { INFO_CHECK_DATE, linksForPage } from "@/data/registry";
 import { GuideHeader, OnThisPage, Checklist, FaqList, SourceList } from "@/components/Guide";
 import { JerusalemHotelBrowser } from "@/components/JerusalemHotelBrowser";
 import { StayTripLinks } from "@/components/StayTripLinks";
@@ -39,7 +39,7 @@ export function JerusalemStayHub({ g, areas }: { g: CityStayGuide; areas: Neighb
         eyebrow="Accommodation · Jerusalem"
         title={g.title}
         intro={g.intro}
-        checkedAt={g.reviewedAt}
+        checkedAt={g.reviewedAt || INFO_CHECK_DATE}
         image={{ src: jerusalemHeroPhoto, alt: "Jaffa Gate and Jerusalem Old City walls" }}
       />
       <OnThisPage sections={pageSections} />
