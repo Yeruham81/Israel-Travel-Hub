@@ -1,5 +1,5 @@
 import { createFileRoute, Link, type LinkProps } from "@tanstack/react-router";
-import { ArrowRight, BookOpen, CalendarDays, CarFront, CheckCircle2, MapPin, PlaneLanding, ReceiptText, TrainFront, Users } from "lucide-react";
+import { ArrowRight, BookOpen, CalendarDays, CarFront, MapPin, PlaneLanding, ReceiptText, TrainFront, Users } from "lucide-react";
 import { AccommodationCard } from "@/components/AccommodationCard";
 import { FaqList, HubHeader } from "@/components/Guide";
 import { GuideHeroMedia } from "@/components/GuideHeroMedia";
@@ -110,7 +110,7 @@ function AccommodationHub() {
             <Link to={style.link!.to} className="group flex h-full min-w-0 items-start gap-3 rounded-2xl border bg-card p-3 transition-colors hover:border-primary/50 hover:bg-secondary/20 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary" data-testid="hotel-style-card">
               <img src={style.photo.src} alt={style.photo.alt} width={144} height={144} loading="lazy" decoding="async" className="h-24 w-24 shrink-0 rounded-xl object-cover sm:h-28 sm:w-28" />
               <span className="flex min-w-0 flex-1 flex-col">
-                <span className="text-base font-semibold leading-snug sm:text-lg">{style.title}</span>
+                <h3 className="text-base font-semibold leading-snug sm:text-lg">{style.title}</h3>
                 <span className="mt-1.5 text-sm leading-relaxed text-muted-foreground">{style.advantage}</span>
                 <span className="mt-2 inline-flex items-center gap-1 text-sm font-semibold text-primary group-hover:underline">
                   {style.link!.label}<ArrowRight className="h-4 w-4 shrink-0" aria-hidden />
