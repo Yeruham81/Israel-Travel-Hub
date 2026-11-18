@@ -100,6 +100,107 @@ def main() -> None:
         </picture>'''
     if "srcSet={c.img.mobile}" not in text:
         text = replace_once(text, old, new)
+
+    # PSI mobile audit: the six tours use full desktop photographs, while the
+    # airport transfer tiles already have mobile variants. Create derivatives
+    # without modifying the source/crop, including the bundled Bethlehem image.
+    tour_sources = (
+        "public/images/attractions/jerusalem.webp",
+        "public/images/attractions/tel-aviv-jaffa.webp",
+        "public/images/tours/masada-ruins.webp",
+        "src/assets/guides/2026-10/jerusalem-to-bethlehem.webp",
+        "public/images/attractions/sea-of-galilee.webp",
+        "public/images/attractions/haifa-coast.webp",
+    )
+    for relative in tour_sources:
+        photo = ROOT / relative
+        optimized = photo.with_name(photo.stem + "-mobile.webp")
+        records.append(convert(photo, optimized, 480, .88, 44000))
+        if relative.startswith("public/"):
+            src = "/" + relative.removeprefix("public/")
+            mobile = "/" + str(optimized.relative_to(ROOT)).removeprefix("public/")
+            old = f'img: {{ src: "{src}", alt:'
+            new = f'img: {{ src: "{src}", mobile: "{mobile}", alt:'
+            if new not in text:
+                text = replace_once(text, old, new)
+
+    # Existing desktop assets remain intact. For smaller-screen editorial
+    # feature photos, choose an explicitly sized image using <picture>.
+    feature_specs = (
+        (
+            "src/assets/home/guided-tour-feature.webp",
+            "src/assets/home/guided-tour-feature-mobile.webp",
+            640, 47000,
+        ),
+        (
+            "src/assets/airport-transfers/airport.webp",
+            "src/assets/airport-transfers/airport-mobile.webp",
+            640, 31000,
+        ),
+        (
+            "src/assets/home/hero-jerusalem-sm-optimized.webp",
+            "src/assets/home/hero-jerusalem-psi-mobile.webp",
+            840, 89000,
+        ),
+    )
+    for original_name, optimized_name, width, limit in feature_specs:
+        records.append(convert(ROOT / original_name, ROOT / optimized_name, width, .94, limit))
+
+    tour_import = 'import bethlehemTourPhoto from "@/assets/guides/2026-10/jerusalem-to-bethlehem.webp";'
+    mobile_tour_import = 'import bethlehemTourPhotoMobile from "@/assets/guides/2026-10/jerusalem-to-bethlehem-mobile.webp";'
+    if mobile_tour_import not in text:
+        text = replace_once(text, tour_import, tour_import + "\n" + mobile_tour_import)
+    if 'img: { src: bethlehemTourPhoto, mobile: bethlehemTourPhotoMobile, alt:' not in text:
+        text = replace_once(text,
+            'img: { src: bethlehemTourPhoto, alt:',
+            'img: { src: bethlehemTourPhoto, mobile: bethlehemTourPhotoMobile, alt:')
+
+    for original_import, mobile_import in (
+        ('import guidedTour from "@/assets/home/guided-tour-feature.webp";',
+         'import guidedTourMobile from "@/assets/home/guided-tour-feature-mobile.webp";'),
+        ('import benGurionApronPhoto from "@/assets/airport-transfers/airport.webp";',
+         'import benGurionApronPhotoMobile from "@/assets/airport-transfers/airport-mobile.webp";'),
+    ):
+        if mobile_import not in text:
+            text = replace_once(text, original_import, original_import + "\n" + mobile_import)
+    if 'feature: { src: guidedTour, mobile: guidedTourMobile, alt:' not in text:
+        text = replace_once(text, 'feature: { src: guidedTour, alt:',
+                                 'feature: { src: guidedTour, mobile: guidedTourMobile, alt:')
+    if 'feature: { src: benGurionApronPhoto, mobile: benGurionApronPhotoMobile, alt:' not in text:
+        text = replace_once(text, 'feature: { src: benGurionApronPhoto, alt:',
+                                 'feature: { src: benGurionApronPhoto, mobile: benGurionApronPhotoMobile, alt:')
+
+    # Same image elements and object-cover positioning; only the source
+    # selection changes on phones. This preserves the approved card crops.
+    tour_img = '<img src={c.img.thumb ?? c.img.src} alt={c.img.alt} loading="lazy" decoding="async" width={400} height={300} className="aspect-[4/3] w-full object-cover transition-transform duration-500 group-hover:scale-105" />'
+    tour_picture = """<picture className="block">
+        {c.img.mobile && <source media="(max-width: 767px)" srcSet={c.img.mobile} type="image/webp" />}
+        <img src={c.img.thumb ?? c.img.src} alt={c.img.alt} loading="lazy" decoding="async" width={400} height={300} className="aspect-[4/3] w-full object-cover transition-transform duration-500 group-hover:scale-105" />
+      </picture>"""
+    if tour_picture not in text:
+        text = replace_once(text, tour_img, tour_picture)
+
+    for original_tag in (
+        '<img src={s.feature.src} alt={s.feature.alt} loading="lazy" decoding="async" width={1400} height={880} className="aspect-[16/9] max-h-[260px] w-full min-w-0 rounded-xl object-cover lg:aspect-auto lg:h-full lg:max-h-none" />',
+        '<img src={s.feature.src} alt={s.feature.alt} loading="lazy" decoding="async" width={900} height={560} className="aspect-[16/9] max-h-[320px] w-full min-w-0 rounded-xl object-cover lg:aspect-auto lg:h-full lg:max-h-none" />',
+    ):
+        new_tag = ('<picture className="block h-full min-w-0">'
+                   '{s.feature.mobile && <source media="(max-width: 767px)" srcSet={s.feature.mobile} type="image/webp" />}'
+                   + original_tag + '</picture>')
+        if new_tag not in text:
+            text = replace_once(text, original_tag, new_tag)
+
+    # Update both the LCP preload and carousel to the SAME mobile asset.
+    old_hero = 'hero-jerusalem-sm-optimized.webp'
+    new_hero = 'hero-jerusalem-psi-mobile.webp'
+    if new_hero not in text:
+        text = replace_once(text, old_hero, new_hero)
+    hero_component = ROOT / "src/components/HomeHero.tsx"
+    hero_source = hero_component.read_text()
+    if new_hero not in hero_source:
+        hero_source = replace_once(hero_source, old_hero, new_hero)
+        hero_component.write_text(hero_source)
+
     HOME.write_text(text)
 
     test = TEST.read_text()
@@ -128,12 +229,60 @@ def main() -> None:
         test = replace_once(test, marker, addition + marker)
         TEST.write_text(test)
 
+
+    # Preserve static assertions that the preloaded first slide matches the
+    # rendered carousel asset, and cover new PSI-specific mobile files.
+    marker_psi = '  it("sets cache rules for static resources without caching HTML or API responses", () => {'
+    if 'it("uses right-sized mobile tour, feature and LCP images"' not in test:
+        snippet = '''  it("uses right-sized mobile tour, feature and LCP images", () => {
+    const homepage = read("src/routes/index.tsx");
+    const hero = read("src/components/HomeHero.tsx");
+    expect(homepage).toContain('<picture className="block">');
+    expect(homepage).toContain('width={400} height={300}');
+    expect(homepage).toContain('media="(max-width: 767px)" srcSet={c.img.mobile}');
+    expect(homepage).toContain('s.feature.mobile && <source');
+    for (const path of [
+      "public/images/attractions/jerusalem",
+      "public/images/attractions/tel-aviv-jaffa",
+      "public/images/tours/masada-ruins",
+      "public/images/attractions/sea-of-galilee",
+      "public/images/attractions/haifa-coast",
+      "src/assets/guides/2026-10/jerusalem-to-bethlehem",
+    ]) {
+      const source = path + ".webp";
+      const mobile = path + "-mobile.webp";
+      expect(bytes(mobile), mobile).toBeLessThan(bytes(source));
+      expect(bytes(mobile), mobile).toBeLessThan(44001);
+    }
+    for (const name of [
+      "src/assets/home/guided-tour-feature-mobile.webp",
+      "src/assets/airport-transfers/airport-mobile.webp",
+      "src/assets/home/hero-jerusalem-psi-mobile.webp",
+    ]) {
+      expect(bytes(name), name).toBeGreaterThan(5000);
+    }
+    expect(bytes("src/assets/home/guided-tour-feature-mobile.webp")).toBeLessThan(bytes("src/assets/home/guided-tour-feature.webp"));
+    expect(bytes("src/assets/airport-transfers/airport-mobile.webp")).toBeLessThan(bytes("src/assets/airport-transfers/airport.webp"));
+    expect(bytes("src/assets/home/hero-jerusalem-psi-mobile.webp")).toBeLessThan(bytes("src/assets/home/hero-jerusalem-sm-optimized.webp"));
+    expect(hero).toContain("hero-jerusalem-psi-mobile.webp");
+    expect(homepage).toContain("hero-jerusalem-psi-mobile.webp");
+    expect(homepage).toContain("bethlehemTourPhotoMobile");
+    expect(homepage).toContain("guidedTourMobile");
+    expect(homepage).toContain("benGurionApronPhotoMobile");
+  });
+
+'''
+        test = replace_once(test, marker_psi, snippet + marker_psi)
+    test = test.replace('expect(slides).toContain("hero-jerusalem-sm-optimized.webp");',
+                        'expect(slides).toContain("hero-jerusalem-psi-mobile.webp");')
+    TEST.write_text(test)
+
     total_original = sum(row["originalBytes"] for row in records)
     total_optimized = sum(row["optimizedBytes"] for row in records)
     REPORT.parent.mkdir(exist_ok=True)
     REPORT.write_text(json.dumps({
-        "scope": "Four near-top airport transfer cards (mobile only) and Timna feature photo (all viewports)",
-        "note": "Independent source-file audit; Google PageSpeed result could not be opened by the assistant. Image variants are cropped identically to the originals (no crop changes).",
+        "scope": "PSI mobile follow-up: six tour tiles, two editorial features and LCP mobile hero; includes existing transfer cards and Timna optimization",
+        "note": "Based on supplied PSI screenshots; full desktop photos remain untouched. WebP mobile variants retain the original aspect ratio, content and crop.",
         "files": records,
         "originalBytesTotal": total_original,
         "optimizedBytesTotal": total_optimized,

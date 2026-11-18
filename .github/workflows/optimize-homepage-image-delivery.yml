@@ -39,8 +39,8 @@ jobs:
           from pathlib import Path
           from PIL import Image
           d = json.loads(Path('docs/HOMEPAGE_IMAGE_DELIVERY_REPORT.json').read_text())
-          assert len(d['files']) == 5
-          assert d['savedBytesTotal'] > 100000, d
+          assert len(d['files']) == 14
+          assert d['savedBytesTotal'] > 250000, d
           for f in d['files']:
               with Image.open(f['optimized']) as photo:
                   assert photo.format == 'WEBP'
@@ -60,12 +60,18 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add public/images/home/transfer-*-mobile.webp \
+            public/images/attractions/*-mobile.webp public/images/tours/*-mobile.webp \
+            src/assets/guides/2026-10/jerusalem-to-bethlehem-mobile.webp \
+            src/assets/airport-transfers/airport-mobile.webp \
+            src/assets/home/guided-tour-feature-mobile.webp \
+            src/assets/home/hero-jerusalem-psi-mobile.webp \
             src/assets/home/timna-park-feature-optimized.webp \
-            src/routes/index.tsx src/test/home-mobile-performance.test.ts \
+            src/routes/index.tsx src/components/HomeHero.tsx \
+            src/test/home-mobile-performance.test.ts \
             docs/HOMEPAGE_IMAGE_DELIVERY_REPORT.json
           if git diff --cached --quiet; then
             echo "No image changes to commit"
             exit 0
           fi
-          git commit -m "Serve compact mobile transfer cards and compressed Timna homepage photo"
+          git commit -m "Optimize PSI homepage tour cards, feature photos and LCP hero for mobile"
           git push origin HEAD:main
