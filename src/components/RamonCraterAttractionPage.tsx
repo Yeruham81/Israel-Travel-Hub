@@ -153,7 +153,7 @@ export const ramonCraterDestinationContent: AttractionDestinationContent = {
         <div className="space-y-3">
           <article className="rounded-xl border bg-card p-4">
             <div className="flex items-center gap-2"><CarFront className="h-5 w-5 text-primary"/><h3 className="font-semibold">By car or private driver</h3></div>
-            <p className="mt-2 text-sm leading-relaxed">Route 40 connects Be'er Sheva, Mitzpe Ramon and the desert farther south. A <a href={carRentalAffiliateUrl("/attractions/mitzpe-ramon-crater/")} target="_blank" rel="sponsored noopener noreferrer" className={inlineLink}>rental car</a> or <a href="#contact" className={inlineLink}>private driver</a> is the easiest way to link different crater stops. Check road conditions before taking a dirt track.</p>
+            <p className="mt-2 text-sm leading-relaxed">Route 40 connects Be'er Sheva, Mitzpe Ramon and the desert farther south. A <a href={carRentalAffiliateUrl("/attractions/mitzpe-ramon-crater/")} target="_blank" rel="sponsored noopener noreferrer" className={inlineLink}>rental car</a> or <a href="#contact" className={inlineLink}>private driver</a> is the easiest way to link different crater stops. Check road conditions before taking a dirt track. Parking beside the visitor center is paid; the park authority lists free parking at the Hai Ramon lot.</p>
           </article>
           <article className="rounded-xl border bg-card p-4">
             <div className="flex items-center gap-2"><BusFront className="h-5 w-5 text-primary"/><h3 className="font-semibold">By bus</h3></div>
