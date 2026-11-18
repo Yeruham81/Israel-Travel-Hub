@@ -99,6 +99,7 @@ export const oldCityJerusalemDestinationContent: AttractionDestinationContent = 
         <p>For panoramic views, the separate <a href={official.ramparts} target="_blank" rel="noopener noreferrer" className={inlineLink}>Ramparts Walk</a> starts at Jaffa Gate, not Damascus Gate. Its visitor routes have stairs, uneven paving and narrow elevated paths; they are not wheelchair accessible or suitable for baby strollers.</p>
         <p className="text-xs font-semibold text-muted-foreground">Markets and gate free; separate Ramparts Walk: {info.rampartsAdult} per adult</p>
       </AttractionHighlight>
+      <AttractionPracticalTip>Following the Via Dolorosa? Save a station-by-station route before setting out. The numbered stops can be easy to miss among busy market lanes, and the final stations are inside the Church of the Holy Sepulchre.</AttractionPracticalTip>
     </div>
   ),
   visitorContent: (
@@ -142,6 +143,7 @@ export const oldCityJerusalemDestinationContent: AttractionDestinationContent = 
         </div>
         <p className="mt-3 text-sm leading-relaxed text-muted-foreground">Special dates and holidays may change these hours. Western Wall Tunnels visits run by reservation; check your chosen tour time.</p>
       </section>
+      <AttractionPracticalTip>If you book a Western Wall Tunnels tour, save the confirmation and follow its exact meeting-point and arrival instructions. Navigating to the Western Wall plaza alone may not take you to your tour’s meeting place.</AttractionPracticalTip>
       <div className="rounded-xl border bg-card p-4 sm:p-5" data-testid="jerusalem-old-city-entry">
         <h3 className="font-serif text-xl font-semibold">Which entry gate should you use?</h3>
         <p className="mt-2 text-sm leading-relaxed sm:text-base"><strong>Jaffa Gate</strong> works well for the Tower of David, the Christian Quarter and the Armenian Quarter. <strong>Dung Gate</strong> is convenient for the Western Wall and the Jewish Quarter. <strong>Damascus Gate</strong> leads to the Muslim Quarter's markets and the Via Dolorosa.</p>
@@ -204,6 +206,7 @@ export const oldCityJerusalemDestinationContent: AttractionDestinationContent = 
           <a href={mapLarger} target="_blank" rel="noopener noreferrer" className="mt-2 inline-flex items-center gap-1 text-xs font-semibold text-primary">View larger map <ArrowUpRight className="h-3.5 w-3.5"/></a>
         </div>
       </div>
+      <AttractionPracticalTip>Meeting a driver after your walk? Agree on a named gate and a precise road-accessible pickup spot before entering the Old City. A pin inside the walls may lead to a pedestrian-only lane.</AttractionPracticalTip>
     </div>
   ),
   itineraryContent: (
@@ -238,7 +241,7 @@ export const oldCityJerusalemDestinationContent: AttractionDestinationContent = 
       <ul className="grid gap-3 sm:grid-cols-2" data-testid="jerusalem-old-city-featured-tours">
         {featuredOldCityTours.map(tour => <ExternalTourCard key={tour.id} tour={tour} pageId="attractions-old-city-jerusalem" compact />)}
       </ul>
-      <p className="text-xs text-muted-foreground">Ratings are previously checked booking-platform snapshots. No live price or availability is shown here; confirm the total before paying.</p>
+      <p className="mt-4 text-xs leading-relaxed text-muted-foreground">Tour details, availability, prices and booking conditions are set by the tour operators and may change. Before booking, check the current departure date and location, itinerary, guiding, admissions, meeting and return arrangements, and cancellation policy directly with the booking provider. Each tour is subject to the operator's own terms and conditions.</p>
       <div className="grid gap-3 sm:grid-cols-2" data-testid="jerusalem-old-city-tour-cards">
         <Link to="/tours/jerusalem/" className="attraction-tour-card group flex h-full min-w-0 items-start gap-3 rounded-xl border bg-card p-3 transition-all hover:border-primary/60 hover:shadow-sm focus-visible:outline-2 focus-visible:outline-primary sm:p-4">
           <img src={oldCityTourPhoto} alt="Jerusalem Old City roofs and historic landmarks" width={128} height={100} loading="lazy" decoding="async" className="h-24 w-24 shrink-0 rounded-lg object-cover sm:w-28"/>
