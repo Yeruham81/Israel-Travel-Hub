@@ -6,6 +6,16 @@
  * Source photos come from the publisher's connected photo library.
  */
 import type { HotelIllustration } from "@/data/telAvivHotelPhotos";
+import jerusalemLightRail from "@/assets/guides/2026-11/jerusalem-light-rail.webp";
+import mahaneMarket from "@/assets/travel-blog-hub/mahane-yehuda-c53a05ac52-420.webp";
+import foodMarkets from "@/assets/tours-hub/food-markets.webp";
+import germanColonyStreet from "@/assets/travel-blog-hub/colony-35429f7d31-420.webp";
+
+const jerusalemScene = (src: string, alt: string): HotelIllustration => ({
+  src, alt, label: "Illustrative Jerusalem neighborhood photograph",
+  credit: "Photograph from the local Jerusalem image library",
+});
+
 
 const scene = (id: string, ext: "webp" | "jpg", alt: string): HotelIllustration => ({
   src: `/images/hotel-cards/${id}.${ext}`,
@@ -15,17 +25,17 @@ const scene = (id: string, ext: "webp" | "jpg", alt: string): HotelIllustration 
 });
 
 export const supplementalHotelPhotos: Record<string, HotelIllustration> = {
-  "jlm-ibis": scene("jlm-ibis", "webp", "Illustrative cityscape of Jerusalem"),
-  "jlm-ibis-styles": scene("jlm-ibis-styles", "webp", "Illustrative Jerusalem downtown shops and street scene"),
+  "jlm-ibis": jerusalemScene(jerusalemLightRail, "Light rail and city streets in central Jerusalem"),
+  "jlm-ibis-styles": jerusalemScene("/images/attractions/jerusalem-mobile.webp", "Jerusalem streets and historic stone architecture"),
   "jlm-david-citadel": scene("jlm-david-citadel", "webp", "Mamilla and Old City surroundings in Jerusalem"),
   "jlm-waldorf": scene("jlm-waldorf", "webp", "Mamilla pedestrian area in central Jerusalem"),
   "jlm-hashimi": scene("jlm-hashimi", "webp", "Old City market lanes in Jerusalem"),
   "jlm-saladin": scene("jlm-saladin", "webp", "Via Dolorosa and its historic Old City surroundings"),
-  "jlm-agripas": scene("jlm-agripas", "webp", "Mahane Yehuda market produce and stalls in Jerusalem"),
-  "jlm-villa-albi": scene("jlm-villa-albi", "webp", "Illustrative Jerusalem market and arts scene"),
+  "jlm-agripas": jerusalemScene(mahaneMarket, "Mahane Yehuda Market in central Jerusalem"),
+  "jlm-villa-albi": jerusalemScene(foodMarkets, "Colorful market stalls and food in Jerusalem"),
   "jlm-holy-land": scene("jlm-holy-land", "webp", "Jerusalem Old City illuminated after dark"),
   "jlm-st-george": scene("jlm-st-george", "webp", "East Jerusalem residential streets"),
-  "jlm-templer-inn": scene("jlm-templer-inn", "webp", "Panoramic view of Jerusalem"),
+  "jlm-templer-inn": jerusalemScene(germanColonyStreet, "Street scene in Jerusalem's German Colony"),
   "jlm-little-house-baka": scene("jlm-little-house-baka", "webp", "Illustrative Jerusalem city view near southern neighborhoods"),
 
   "tlv-dan": scene("tlv-dan", "webp", "Tel Aviv Mediterranean promenade and beachfront"),
