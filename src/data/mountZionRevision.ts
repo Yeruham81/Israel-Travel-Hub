@@ -65,7 +65,7 @@ export const mountZionEditorialUpdate: SacredHillEditorial = {
       note: "The church and cemetery are separate additions in different parts of the slope. Treat them as optional branches, not as one continuous shortcut.",
     },
   ],
-  stopIntro: "The places below are close on a map but feel quite different in person: a room associated with the Last Supper, an active Jewish prayer site, a Benedictine abbey and smaller memorial places. These are the details I would check while planning a visit.",
+  stopIntro: "Each stop has its own entrance and visiting arrangements. Choose the places that interest you and allow time to enjoy them without rushing.",
   stops: [
     {
       name: "Room of the Last Supper (Cenacle)",
@@ -79,6 +79,7 @@ export const mountZionEditorialUpdate: SacredHillEditorial = {
       description: "Directly below the Upper Room is the traditional Tomb of King David. The site is a place of Jewish prayer and a meaningful stop for visitors interested in the many traditions that meet on Mount Zion.",
       visit: "There are separate Jewish prayer sections here, and men should bring a head covering. Allow a quiet few minutes, particularly when people are praying, before moving back towards Dormition Abbey.",
       tipLabel: "A respectful visit",
+      image: { src: "/images/jerusalem/mount-zion/davids-tomb.webp", alt: "The traditional cenotaph of King David inside the Mount Zion prayer chamber" },
     },
     {
       name: "Dormition Abbey",
@@ -101,18 +102,21 @@ export const mountZionEditorialUpdate: SacredHillEditorial = {
       description: "Zion Gate connects Mount Zion with the Armenian and Jewish Quarters of the Old City. Its stone entrance is one of Jerusalem's most memorable gates; marks left by the battles of 1948 can still be seen in the masonry.",
       visit: "It is the natural link between the hill and an Old City walk. If you want to visit the Western Wall afterwards, continue through the Jewish Quarter.",
       tipLabel: "Continue your walk",
+      image: { src: "/images/jerusalem/mount-zion/zion-gate.webp", alt: "The arched entrance to Zion Gate through Jerusalem’s Old City walls" },
     },
     {
       name: "Oskar Schindler's grave",
       description: "Oskar Schindler, honoured as Righteous Among the Nations for rescuing Jews during the Holocaust, is buried in Mount Zion's Catholic cemetery. Visitors often leave a small stone on his grave as a sign of remembrance.",
       visit: "The grave is in the lower Catholic cemetery, not beside the three main Mount Zion churches. Find the cemetery entrance first and treat this as a quiet memorial visit, allowing extra time to return.",
       tipLabel: "Before going down",
+      image: { src: "/images/jerusalem/mount-zion/oskar-schindler-grave.webp", alt: "Oskar Schindler’s grave in the Mount Zion Catholic cemetery, with small memorial stones" },
     },
     {
       name: "The Chamber of the Holocaust",
       description: "This small memorial museum on Mount Zion remembers Jewish communities destroyed during the Holocaust. Its collection and atmosphere offer a different kind of visit from the religious landmarks nearby.",
       visit: "Its historical memorials offer a meaningful contrast to the older religious places on the hill. Allow a separate visit rather than adding it as a hurried final stop.",
       tipLabel: "An additional stop",
+      image: { src: "/images/jerusalem/mount-zion/chamber-of-the-holocaust.webp", alt: "Entrance sign for the Chamber of the Holocaust memorial on Mount Zion" },
       link: { label: "Chamber of the Holocaust visiting information", url: "https://martefhashoa.org/" },
     },
   ],
