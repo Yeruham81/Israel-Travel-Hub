@@ -137,7 +137,7 @@ const page: AttractionDestinationContent = {
         <strong>Plan around the midday break.</strong> I recommend visiting the archaeological site in the morning or after 14:00. Its gates close from 12:00 to 14:00, so arriving at lunchtime can disrupt the rest of your Galilee itinerary.
       </AttractionPracticalTip>
       <AttractionPracticalTip>
-        <strong>Check Christian and Jewish holiday dates.</strong> The archaeological site is closed on Christmas Day, New Year's Day, Easter Sunday and Yom Kippur, with reduced hours on certain other religious dates. Verify the official schedule shortly before travelling.
+        <strong>Check Christian and <Link to="/travel-blog/israel-holidays/" className={inlineLink}>Jewish holiday dates</Link>.</strong> The archaeological site is closed on Christmas Day, New Year's Day, Easter Sunday and Yom Kippur, with reduced hours on certain other religious dates. Verify the official schedule shortly before travelling.
       </AttractionPracticalTip>
       <div className="rounded-xl border border-border/80 bg-secondary/20 p-4 sm:p-5" data-testid="capernaum-visitor-facilities">
         <h3 className="font-serif text-xl font-semibold">Facilities and visitor essentials</h3>
