@@ -196,7 +196,7 @@ def wire() -> None:
     s=unique_replace(
         s,
         'compactHomeLayout?: boolean }) {',
-        'compactHomeLayout?: boolean; responsiveSrcSet?: string }) {')
+        'compactHomeLayout?: boolean; responsiveSrcSet?: string | undefined }) {')
     s=unique_replace(
         s,
         '<img src={displayedPhoto.src} alt={displayedPhoto.alt} width={600} height={400}',

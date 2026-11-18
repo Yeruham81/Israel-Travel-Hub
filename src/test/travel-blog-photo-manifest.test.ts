@@ -10,7 +10,7 @@ import { uniqueGuideCardPhotos } from "@/lib/guide-card-photos";
  * bundled image imports, rather than guessing filenames from its TS source.
  */
 describe("capture travel blog hub image sources", () => {
-  it.skipIf(process.env.WRITE_TRAVEL_BLOG_MANIFEST !== "1")("collects default and filtered guide card photos", () => {
+  it.skipIf(process.env["WRITE_TRAVEL_BLOG_MANIFEST"] !== "1")("collects default and filtered guide card photos", () => {
     const selected = new Map<string, { src: string; guideIds: Set<string>; views: Set<string> }>();
     const sizes: Record<string, number> = {};
     const topics = [{ id: "all" }, ...guideTopics];
