@@ -32,7 +32,8 @@ describe("Jerusalem Old City upgraded attractions guide", () => {
 
   it("correctly distinguishes free sacred places, paid tours and limited worship-site access", () => {
     const page = readFileSync("src/components/OldCityJerusalemAttractionPage.tsx", "utf8");
-    expect(page).toContain("Temple Mount / Haram al-Sharif");
+    expect(page).toContain('title="Temple Mount"');
+    expect(page).not.toMatch(/Haram al-Sharif|Noble Sanctuary/i);
     expect(page).toContain("Non-Muslim visits");
     expect(page).toContain("interiors of Al-Aqsa Mosque and the Dome of the Rock");
     expect(page).toContain("Entry is free");
