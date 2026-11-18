@@ -663,6 +663,13 @@ jobs:
             .map(m => m[0]).filter(tag => /\brel=["']canonical["']/i.test(tag));
           for (const snippet of [
             "Old Akko (Acre): Historic Attractions",
+            "Old Akko (Acre): Attractions &amp; Tickets",
+            "What to see in Old Akko",
+            "Moat Parking (free)",
+            "View official tickets and visitor information",
+            'data-testid="akko-tour-cards"',
+            'data-testid="attraction-photo-credits"',
+            "Adam Jones (museum collection)",
             'data-testid="akko-ticket-hours"',
             'data-testid="akko-booking"',
             'data-testid="akko-accessibility"',
