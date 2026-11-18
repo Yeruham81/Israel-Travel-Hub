@@ -7,16 +7,17 @@ import {
 import { ramonCraterSite } from "@/data/ramonCraterSite";
 import { carRentalAffiliateUrl } from "@/lib/car-rental-affiliate";
 import camelHillPhoto from "@/assets/negev/ramon-camel-hill.webp";
-import rockPhoto from "@/assets/negev/ramon-rocks.webp";
 import widePhoto from "@/assets/negev/ramon-wide.webp";
 import ibexPhoto from "@/assets/negev/ramon-ibexes.webp";
 import jeepPhoto from "@/assets/negev/ramon-jeep.webp";
-import darkSkyPhoto from "@/assets/negev/ramon-clouds.webp";
 import panoramaPhoto from "@/assets/home/hero-refresh-ramon-crater-v4-large.webp";
 
 const info = ramonCraterSite.visit;
 const official = ramonCraterSite.sources;
 const inlineLink = "font-semibold text-primary underline underline-offset-4";
+const minsaraPhoto = "/images/attractions/ramon-haminsara-columns.webp";
+const sandRatPhoto = "/images/attractions/hai-ramon-fat-sand-rat.webp";
+const starsPhoto = "/images/attractions/ramon-stargazing.webp";
 const centerDirections = "https://www.google.com/maps/dir/?api=1&destination=Makhtesh%20Ramon%20Visitors%20Center%2C%20Mitzpe%20Ramon%2C%20Israel&travelmode=driving";
 const minsaraDirections = "https://www.google.com/maps/dir/?api=1&destination=HaMinsara%2C%20Makhtesh%20Ramon%2C%20Israel&travelmode=driving";
 const colorsDirections = "https://www.google.com/maps/dir/?api=1&destination=Ramon%20Colors%20National%20Park%2C%20Israel&travelmode=driving";
@@ -35,7 +36,7 @@ export const ramonCraterDestinationContent: AttractionDestinationContent = {
   visitorNavLabel: "Tickets & hours",
   historyTitle: "How Makhtesh Ramon was formed",
   relatedTitle: "Explore the desert and beyond",
-  contactIntroduction: "Planning a visit to Mitzpe Ramon and the Negev? Tell me your travel date, where you're staying and whether you prefer viewpoints, easy walks or a longer desert outing. I'll be happy to help plan a private trip.",
+  contactIntroduction: "Tell me your travel date, where you're staying and whether you prefer viewpoints, easy walks or a longer desert outing. I'll be happy to help plan a private trip.",
   facts: [
     { icon: "location", label: "Location", value: "Negev Highlands", note: "Mitzpe Ramon, on Route 40" },
     { icon: "duration", label: "Time needed", value: "1 hour–full day", note: "Longer for a serious hike or overnight stay" },
@@ -55,7 +56,7 @@ export const ramonCraterDestinationContent: AttractionDestinationContent = {
         <p>The town-side promenade and Camel Hill (Har Gamal) give you sweeping views of the vast crater basin and its ridges. I would visit in the early morning or late afternoon, when softer light brings out the colours of the rocks.</p>
         <p>These are good options when you have limited time or prefer to enjoy the desert without a strenuous hike. Keep to the marked approaches and stay clear of exposed cliff edges.</p>
       </AttractionHighlight>
-      <AttractionHighlight title="HaMinsara — the Carpentry Shop" image={{ src: rockPhoto, alt: "Distinctive rocky geology in the Ramon Crater area" }}>
+      <AttractionHighlight title="HaMinsara — the Carpentry Shop" image={{ src: minsaraPhoto, alt: "Rectangular and hexagonal sandstone prisms at HaMinsara in Ramon Crater" }}>
         <p>HaMinsara is a short geological walk famous for polygonal stone columns that resemble pieces of timber. Their unusual shape makes this a rewarding stop even for visitors who are not planning a long trail.</p>
         <p>Access is via a short track from Route 40, south of Mitzpe Ramon. <a href={official.minsara} target="_blank" rel="noopener noreferrer" className={inlineLink}>See the official approach and walking information</a>.</p>
       </AttractionHighlight>
@@ -70,11 +71,11 @@ export const ramonCraterDestinationContent: AttractionDestinationContent = {
       <AttractionHighlight title="Desert ibex and local wildlife" image={{ src: ibexPhoto, alt: "Ibexes standing on the rocky terrain near Mitzpe Ramon" }}>
         <p>Ibex often appear near the town's cliffs and paths, and their sure-footed movement among the rocks is a highlight for many visitors. Keep your distance, store food securely and do not feed the animals.</p>
       </AttractionHighlight>
-      <AttractionHighlight title="Hai Ramon — desert wildlife park">
-        <p>Hai Ramon was developed to introduce visitors to desert animals and the plants of the Negev Highlands. It includes information about small desert species and a botanical garden illustrating local habitats.</p>
-        <p><strong>Closed as of November 2026.</strong> I am keeping this site in the guide for future trip planning, but it should not be included as an open stop until its status changes. <a href={official.haiRamon} target="_blank" rel="noopener noreferrer" className={inlineLink}>Check the official Hai Ramon page before visiting</a>.</p>
+      <AttractionHighlight title="Hai Ramon — desert wildlife park" image={{ src: sandRatPhoto, alt: "A fat sand rat, one of the desert animals featured at Hai Ramon; representative photograph taken at another wildlife facility" }}>
+        <p>Hai Ramon introduces visitors to desert animals that are rarely seen during a walk, including lizards, tortoises, hedgehogs, sand rats and other small creatures. The adjacent botanical garden illustrates the Negev's varied habitats.</p>
+        <p><strong>Closed as of November 2026.</strong> <a href={official.haiRamon} target="_blank" rel="noopener noreferrer" className={inlineLink}>Check the current visiting status on the official website</a> when planning your trip.</p>
       </AttractionHighlight>
-      <AttractionHighlight title="Stargazing in the desert">
+      <AttractionHighlight title="Stargazing in the desert" image={{ src: starsPhoto, alt: "The Milky Way and a star-filled night sky above a desert tree near Ramon Crater" }}>
         <p>Ramon Crater was designated an International Dark Sky Park in 2017. An overnight stay provides a different experience from a daytime visit, with a chance to see remarkably dark skies.</p>
         <p>Look for a cloud-free night with little moonlight and use an authorised overnight site or guided activity. Avoid entering closed trails or driving off-road after dark. <a href={official.darkSky} target="_blank" rel="noopener noreferrer" className={inlineLink}>Dark-sky park information</a>.</p>
       </AttractionHighlight>
@@ -204,7 +205,7 @@ export const ramonCraterDestinationContent: AttractionDestinationContent = {
           <div className="min-w-0 flex-1"><h3 className="font-serif text-lg font-semibold leading-snug group-hover:text-primary">Negev desert & Ramon Crater tours</h3><p className="mt-1 text-sm text-muted-foreground">Explore guided trips, desert experiences and available excursions.</p><span className="mt-2 inline-flex items-center gap-1 text-sm font-semibold text-primary">Explore tours <ArrowUpRight className="h-4 w-4"/></span></div>
         </Link>
         <a href="#contact" className="attraction-tour-card group flex h-full min-w-0 items-start gap-3 rounded-xl border bg-card p-3 transition-all hover:border-primary/60 hover:shadow-sm focus-visible:outline-2 focus-visible:outline-primary sm:p-4">
-          <img src={darkSkyPhoto} alt="Dramatic Negev desert landscape beneath clouds" width={128} height={100} loading="lazy" decoding="async" className="h-24 w-24 shrink-0 rounded-lg object-cover sm:w-28"/>
+          <img src={starsPhoto} alt="The Milky Way above the Negev at night" width={128} height={100} loading="lazy" decoding="async" className="h-24 w-24 shrink-0 rounded-lg object-cover sm:w-28"/>
           <div className="min-w-0 flex-1"><h3 className="font-serif text-lg font-semibold leading-snug group-hover:text-primary">Plan a private desert day</h3><p className="mt-1 text-sm text-muted-foreground">Choose your viewpoints, time on the trails and departure location.</p><span className="mt-2 inline-flex items-center gap-1 text-sm font-semibold text-primary">Request a quote <ArrowUpRight className="h-4 w-4"/></span></div>
         </a>
       </div>
@@ -214,7 +215,7 @@ export const ramonCraterDestinationContent: AttractionDestinationContent = {
     { q: "Is Ramon Crater a meteorite crater?", a: "No. Makhtesh Ramon is an erosion landform created as rock layers wore away over millions of years, not an impact crater or volcano." },
     { q: "Do I have to pay to see Ramon Crater?", a: "No. Outdoor rim viewpoints are free. The indoor Ramon Visitor Center charges admission and requires an advance booking." },
     { q: "Can I enjoy Ramon Crater without hiking?", a: "Yes. The rim promenade, Camel Hill and scenic drives provide memorable views. Parts of Ramon Colors also have accessible facilities." },
-    { q: "Is Hai Ramon open?", a: "As of November 2026, Hai Ramon wildlife park is closed to visitors. It is still included here for future trips; check the official park page before planning a visit." },
+    { q: "Is Hai Ramon open?", a: "Hai Ramon is closed as of November 2026. Check the official Israel Nature and Parks Authority website for its current status before travelling." },
     { q: "Can I see the stars from Ramon Crater?", a: "The dark-sky park offers excellent potential for stargazing, but actual visibility depends on moonlight, clouds and local conditions. Use authorised viewing areas." },
   ],
   nearby: [
@@ -240,6 +241,8 @@ export const ramonCraterDestinationContent: AttractionDestinationContent = {
     { label: "Israel Nature and Parks Authority — Nahal Ardon trail", url: official.ardon },
     { label: "Israel Nature and Parks Authority — Hai Ramon status", url: official.haiRamon },
     { label: "DarkSky International — Ramon Crater Dark Sky Park", url: official.darkSky },
+    { label: "Photo credit — HaMinsara columns (Yuvalr, CC BY-SA 3.0; resized)", url: "https://commons.wikimedia.org/wiki/File:Sandy_rectangular_and_hexagonal_prisms_at_the_centre_of_Makhtesh_Ramon_-_Ha-Minsara_(The_Carpentry_Shop),_Israel.jpg" },
+    { label: "Photo credit — fat sand rat (SuperJew, CC BY-SA 3.0; resized)", url: "https://commons.wikimedia.org/wiki/File:Fat_Sand_Rat.jpg" },
   ],
 };
 
