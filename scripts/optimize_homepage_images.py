@@ -275,7 +275,7 @@ def main() -> None:
         test = replace_once(test, marker_psi, snippet + marker_psi)
     test = test.replace('expect(slides).toContain("hero-jerusalem-sm-optimized.webp");',
                         'expect(slides).toContain("hero-jerusalem-psi-mobile.webp");')
-    TEST.write_text(test)
+    # Update the legacy baseline assertion to include the new mobile variant.\n    test = test.replace(\n        "expect(home).toContain('feature: { src: benGurionApronPhoto, alt:');",\n        "expect(home).toContain('feature: { src: benGurionApronPhoto, mobile: benGurionApronPhotoMobile, alt:');"\n    )\n    TEST.write_text(test)
 
     total_original = sum(row["originalBytes"] for row in records)
     total_optimized = sum(row["optimizedBytes"] for row in records)
