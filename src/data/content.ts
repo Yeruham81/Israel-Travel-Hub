@@ -561,7 +561,7 @@ export const cityStayGuides: Record<CityStayGuide["id"], CityStayGuide> = {
   jerusalem: {
     id: "jerusalem",
     city: "Jerusalem",
-    reviewedAt: "2026-10-17",
+    reviewedAt: "2026-11-18",
     areaIntro: "For a first visit, Downtown is a practical starting point. Mamilla puts luxury hotels close to Jaffa Gate; the Old City offers the most immersive historic stay. Choose the market for food and nightlife, the northern East Jerusalem hotel district for Damascus Gate, or the German Colony and Baka for a more residential base.",
     quickPicks: [
       { areaId: "downtown", label: "Your first visit", description: "A convenient base for the main sights" },
