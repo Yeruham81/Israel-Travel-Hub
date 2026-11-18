@@ -61,7 +61,7 @@ describe("Jerusalem and Tel Aviv neighbourhood editorial guides", () => {
         const paragraphs = section.querySelectorAll("p");
         expect(heading).toBeTruthy();
         expect(facts).toBeTruthy();
-        expect(heading?.compareDocumentPosition(facts!) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
+        expect(heading!.compareDocumentPosition(facts!) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
         expect(Array.from(paragraphs).some((paragraph) => paragraph.textContent?.startsWith("Best for:"))).toBe(true);
         expect(within(section).getAllByTestId("jerusalem-editorial-hotel-card")).toHaveLength(2);
         expect(within(section).getByRole("heading", { name: /^Popular hotels in / })).toBeInTheDocument();
