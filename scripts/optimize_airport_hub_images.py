@@ -92,7 +92,7 @@ def update_files():
     component = component_file.read_text()
     component = change_once(component,
       'photo: Pick<StayGuidePhoto, "src" | "alt">;',
-      'photo: Pick<StayGuidePhoto, "src" | "alt"> & { hubSrc?: string };')
+      'photo: Pick<StayGuidePhoto, "src" | "alt"> & { hubSrc?: string | undefined };')
     old = '<img src={photo.src}'
     new = '<img src={photo.hubSrc ?? photo.src}'
     if component.count(new) != 2:
@@ -135,7 +135,7 @@ def update_files():
       'image={<GuideHeroMedia src={airportTransferPhotos["other"]!.src} mobileSrc={airportHeroMobile} alt={airportTransferPhotos["other"]!.alt} compact />}')
     route = change_once(route,
       'photo={airportTransferPhotos["other"]!} onChoose={choose} layout="hub-row"',
-      'photo={{ ...airportTransferPhotos["other"]!, hubSrc: airportHubPhotoSrc.other }} onChoose={choose} layout="hub-row"')
+      'photo={{ ...airportTransferPhotos["other"]!, hubSrc: airportHubPhotoSrc["other"] }} onChoose={choose} layout="hub-row"')
     route = change_once(route,
       '<img src={guide.photo.src} alt={guide.photo.alt} width={112} height={75}',
       '<img src={guide.thumb} alt={guide.photo.alt} width={112} height={75}')
@@ -173,7 +173,7 @@ def update_files():
       'toHaveAttribute("src", airportDestinationCards.find(item => item.id === rate.id)!.photo.hubSrc);')
     test=change_once(test,
       'toHaveAttribute("src", airportTransferPhotos["other"]!.src);\n    const rateTerms',
-      'toHaveAttribute("src", airportHubPhotoSrc.other);\n    const rateTerms')
+      'toHaveAttribute("src", airportHubPhotoSrc["other"]);\n    const rateTerms')
     test_file.write_text(test)
 
 def main():
