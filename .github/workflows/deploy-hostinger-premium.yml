@@ -565,6 +565,10 @@ jobs:
             "Hai Ramon",
             "Closed as of November 2026",
             "Ramon Colors",
+            "ramon-haminsara-columns.webp",
+            "hai-ramon-fat-sand-rat.webp",
+            "ramon-stargazing.webp",
+            "Check the current visiting status on the official website",
           ]) {
             if (!html.includes(text)) {
               console.error("::error::Ramon Crater public page missing " + text);
@@ -583,4 +587,19 @@ jobs:
           console.log("Ramon Crater visitor information, closure note, photo cards and canonical verified.");
           NODE
           rm -f "$ramon_html"
+          # All three editorial images must be published as real local WebP files.
+          for image in ramon-haminsara-columns.webp hai-ramon-fat-sand-rat.webp ramon-stargazing.webp; do
+            image_file="$(mktemp)"
+            curl --retry 2 --max-time 20 -fsSL -o "$image_file" "$VITE_CANONICAL_ORIGIN/images/attractions/$image"
+            node - "$image_file" "$image" <<'NODE'
+          const fs = require("node:fs");
+          const data = fs.readFileSync(process.argv[2]);
+          if (data.subarray(0, 4).toString() !== "RIFF" || data.subarray(8, 12).toString() !== "WEBP") {
+            console.error("::error::Ramon image is not valid WebP: " + process.argv[3]);
+            process.exit(1);
+          }
+          console.log("Ramon image loaded: " + process.argv[3] + ", bytes=" + data.length);
+          NODE
+            rm -f "$image_file"
+          done
           echo "Source-controlled static guides published; existing PHP APIs still respond to GET."
