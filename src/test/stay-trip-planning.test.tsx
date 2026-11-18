@@ -23,11 +23,14 @@ describe("hotel and neighborhood guide navigation", () => {
     const wrapper = screen.getByTestId("stay-trip-planning");
     const local = within(wrapper).getByTestId("stay-local-photo-grid");
     const onward = within(wrapper).getByTestId("stay-trip-photo-grid");
-    const localCount = region === "jerusalem" ? 6 : 4;
+    const localCount = region === "jerusalem" || region === "telaviv" ? 6 : 4;
     expect(within(local).getAllByRole("link")).toHaveLength(localCount);
     expect(within(onward).getAllByRole("link")).toHaveLength(6);
     expect(within(local).getAllByRole("img")).toHaveLength(localCount);
-    if (region === "jerusalem") expect(local).toHaveClass("grid-cols-2", "lg:grid-cols-3");
+    if (region === "jerusalem" || region === "telaviv") {
+      expect(local).toHaveClass("grid-cols-2", "lg:grid-cols-3");
+      expect(onward).toHaveClass("grid-cols-2", "lg:grid-cols-3");
+    }
     expect(within(onward).getAllByRole("img")).toHaveLength(6);
 
     const links = within(wrapper).getAllByRole("link");
