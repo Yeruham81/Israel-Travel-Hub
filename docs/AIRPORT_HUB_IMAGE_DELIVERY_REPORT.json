@@ -159,5 +159,11 @@
   ],
   "sourceBytes": 827924,
   "optimizedBytes": 231198,
-  "savedBytes": 596726
+  "savedBytes": 596726,
+  "psiBaseline": {
+    "source": "User-reported pre-optimization PageSpeed Insights mobile audit",
+    "estimatedSavingsKiB": 494,
+    "measuredAfterOptimization": false
+  },
+  "note": "Source-to-thumbnail byte savings are not interchangeable with PageSpeed Insights savings. The originals remain unchanged; 4 existing mobile transfer images and the mobile hero are reused in addition to the 14 new thumbnails."
 }
