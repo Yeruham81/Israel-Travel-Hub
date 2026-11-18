@@ -5,7 +5,7 @@
  */
 import type { HotelIllustration } from "@/data/telAvivHotelPhotos";
 import jerusalemOldCity from "@/assets/home/jerusalem-old-city.webp";
-import downtown from "@/assets/jerusalem/downtown.webp";
+import jerusalemLightRail from "@/assets/guides/2026-11/jerusalem-light-rail.webp";
 import eastJerusalem from "@/assets/jerusalem/east-jerusalem.webp";
 import germanColony from "@/assets/jerusalem/german-colony.webp";
 import mamilla from "@/assets/jerusalem/mamilla.webp";
@@ -20,7 +20,7 @@ const neighbourhood = (src: string, alt: string): HotelIllustration => ({
 });
 
 export const jerusalemHotelPhotos: Record<string, HotelIllustration> = {
-  "herbert-samuel": neighbourhood(downtown, "View of central Jerusalem streets and buildings"),
+  "herbert-samuel": neighbourhood(jerusalemLightRail, "Light rail and street scene in central Jerusalem"),
   "arthur": neighbourhood("/images/city-stays/jerusalem-downtown.webp", "Downtown Jerusalem neighbourhood"),
   "mamilla": neighbourhood(mamilla, "Mamilla and the historic city surroundings"),
   "king-david": neighbourhood("/images/city-stays/jerusalem-mamilla.webp", "Mamilla and King David Street area of Jerusalem"),
