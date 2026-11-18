@@ -90,7 +90,7 @@ export function NeighborhoodStayPage({ area }: { area: NeighborhoodStayGuide }) 
           </ul>
           <p className="mt-4 text-xs leading-relaxed text-muted-foreground">
             {isJerusalem
-              ? "Hotel links open a third-party booking platform. Check the full details before booking; some links may earn me a commission at no extra cost to you."
+              ? "Hotel links open a third-party booking platform. Check the room details, total price and booking conditions before confirming your reservation."
               : "Check hotel prices, availability and booking conditions for your dates directly on Expedia."}
           </p>
         </section>
