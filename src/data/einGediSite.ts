@@ -35,6 +35,5 @@ export const einGediSite = {
     arugot: "https://www.parks.org.il/reserve-park/arugot/",
     trails: "https://www.parks.org.il/reserve-park/%D7%A9%D7%9E%D7%95%D7%A8%D7%AA-%D7%98%D7%91%D7%A2-%D7%A2%D7%99%D7%9F-%D7%92%D7%93%D7%99/",
     antiquities: "https://en.parks.org.il/reserve-park/engedi/",
-    safety: "https://en.parks.org.il/article/important-rules-for-hiking-in-israel/",
   },
 };
