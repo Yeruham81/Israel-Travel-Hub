@@ -288,7 +288,7 @@ describe("Jerusalem direct hotel catalog", () => {
     const { container } = render(<CityStayPage g={cityStayGuides.jerusalem} />);
     const catalog = container.querySelector("#book") as HTMLElement;
     expect(within(catalog).getByRole("heading", { name: "Choose a Jerusalem hotel" })).toBeInTheDocument();
-    expect(catalog.compareDocumentPosition(container.querySelector("#areas")) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
+    expect(catalog.compareDocumentPosition(container.querySelector("#areas")!) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
     expect(within(catalog).getAllByTestId("jerusalem-hotel-card")).toHaveLength(12);
     expect(within(catalog).getByTestId("jerusalem-hotel-count")).toHaveTextContent("Showing 12 of 24 hotels");
     expect(within(catalog).getByTestId("jerusalem-hotels")).toHaveClass("lg:grid-cols-2");
