@@ -4,7 +4,7 @@ import { tabghaSite } from "@/data/tabghaSite";
 import { mountBeatitudesSite } from "@/data/mountBeatitudesSite";
 import { mountTaborSite } from "@/data/mountTaborSite";
 import haifaImg from "@/assets/haifa/panorama.webp";
-import akkoImg from "@/assets/shore-excursions/akko-port.jpg";
+import { akkoSite } from "@/data/akkoSite";
 import lake from "@/assets/home/tiberias-lake.webp";
 import { roshHanikraSite } from "@/data/roshHanikraSite";
 export const northernAttractions: Record<string, Attraction> = {
@@ -25,9 +25,9 @@ export const northernAttractions: Record<string, Attraction> = {
  official:[{label:"Israel Nature and Parks Authority",url:"https://en.parks.org.il/"}],
 },
 "akko-acre":{
- title:"Akko (Acre): Crusader halls, tunnels, market and harbour",description:"Plan a visit to Old Akko, including the Hospitaller Halls, Templar Tunnel, citadel, bazaar, Ottoman heritage and harbour.",
- region:"Haifa & northern coast",image:{src:akkoImg,alt:"Historic port of Akko on Israel's Mediterranean coast"},duration:"3–6 hours",
- intro:"Old Akko sits behind stone walls on the Mediterranean, preserving layers of Crusader, Ottoman and modern history. Its subterranean monuments are as compelling as the alleys, market and harbour above them.",
+ title:akkoSite.title,description:akkoSite.description,
+ region:"Haifa & northern coast",image:akkoSite.hero,duration:"3–6 hours",
+ intro:akkoSite.intro,
  takeaway:"Prioritise the Hospitaller Halls and one or two neighbouring paid heritage sites, then wander the market and harbour. Check combined admission arrangements rather than assuming every site shares a ticket.",
  highlights:[
  {name:"Hospitaller Halls and citadel",description:"Underground Crusader-era ceremonial and service halls reveal the scale of Akko's medieval history.",tip:"Check touring routes and opening times; ticket bundles can change."},
