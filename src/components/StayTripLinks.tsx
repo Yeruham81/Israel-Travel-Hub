@@ -1,6 +1,7 @@
 import { Link, type LinkProps } from "@tanstack/react-router";
 import type { ReactNode } from "react";
 import museumJerusalem from "@/assets/guides/museums-in-jerusalem.jpg";
+import oldCityLanes from "@/assets/jerusalem/old-city.webp";
 import jerusalemOverview from "@/assets/home/hero-jerusalem.webp";
 import mountOfOlivesCard from "@/assets/attractions-hub/card-mount-of-olives-420.webp";
 import airportHall from "@/assets/home/ben-gurion-t3.webp";
@@ -63,7 +64,7 @@ export const stayGuideGroups: Record<Region, GuideGroups> = {
     local: [
       card("Museums in Jerusalem", "/travel-blog/museums-in-jerusalem/", "Choose cultural highlights from the city’s museums.", museumJerusalem, "Jerusalem museum interior"),
       card("Shopping in Jerusalem", "/travel-blog/shopping-in-jerusalem/", "Explore markets, craft stalls and local shopping streets.", "/images/attractions/old-jerusalem-via-dolorosa.webp", "Souk stalls along a stone-paved lane in Jerusalem's Old City"),
-      card("Jerusalem Old City", "/attractions/old-city-jerusalem/", "Understand the quarters, historic gates and walking routes.", "/images/attractions/old-jerusalem-cardo.webp", "Stone-paved Cardo passage in Jerusalem's Old City"),
+      card("Jerusalem Old City", "/attractions/old-city-jerusalem/", "Understand the quarters, historic gates and walking routes.", oldCityLanes, "Narrow stone streets and historic architecture in Jerusalem's Old City"),
       card("Jerusalem travel guide", "/travel-blog/jerusalem-travel-guide/", "Discover the city’s principal sights and plan your days.", jerusalemOverview, "Jerusalem skyline and old city"),
       card("Mount of Olives", "/attractions/mount-of-olives/", "Explore the historic hillside, viewpoints and religious landmarks.", mountOfOlivesCard, "Mount of Olives churches and Jerusalem panorama"),
       card("Churches in Jerusalem", "/travel-blog/churches-in-jerusalem/", "Plan visits to important churches across Jerusalem.", "/images/jerusalem/church-of-all-nations.webp", "Church of All Nations near the Mount of Olives"),
