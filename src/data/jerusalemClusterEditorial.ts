@@ -63,7 +63,7 @@ const articles: Partial<Record<TravelGuideId, Upgrade>> = {
         inlineLinks: [
           { text: "Ben Gurion Airport to Jerusalem guide", to: "/travel-blog/how-to-get-from-ben-gurion-airport-to-jerusalem/" },
           { text: "airport transfer service", to: "/airport-transfers/jerusalem/" },
-          { text: "Jewish holidays", to: travelGuidePaths.calendar },
+          { text: "Jewish holidays", to: "/travel-blog/israel-holidays/" },
         ],
       },
     ],
