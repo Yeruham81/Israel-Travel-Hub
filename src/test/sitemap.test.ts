@@ -38,6 +38,22 @@ describe("generated XML sitemap and robots.txt", () => {
     expect(paths).not.toContain("/destinations/");
     expect(paths).not.toContain("/hotels/");
     expect(paths).toContain("/accommodation/");
+
+    const hotelSubpages = [
+      ["jerusalem", ["downtown", "mamilla-king-david", "old-city", "mahane-yehuda-nachlaot", "east-jerusalem", "german-colony-baka"]],
+      ["tel-aviv", ["beachfront", "dizengoff-city-center", "old-north-port", "neve-tzedek", "jaffa", "florentin", "kerem-hateimanim", "rothschild-boulevard"]],
+      ["haifa", ["boutique", "family"]],
+      ["tiberias", ["luxury", "family"]],
+      ["dead-sea", ["spa", "family"]],
+    ] as const;
+    for (const [city, slugs] of hotelSubpages) {
+      expect(paths).toContain(`/accommodation/${city}/`);
+      for (const slug of slugs) {
+        expect(paths).toContain(`/accommodation/${city}/${slug}/`);
+        expect(paths).not.toContain(`/accommodation/${city}/${slug}-hotels/`);
+      }
+    }
+
     expect(paths).toContain("/travel-blog/jerusalem-to-bethlehem/");
     expect(paths).toContain("/attractions/");
     for (const slug of ["old-city-jerusalem", "mount-of-olives", "mount-zion", "jaffa", "akko-acre", "rosh-hanikra", "mount-tabor", "capernaum", "tabgha", "mount-of-beatitudes", "magdala", "yardenit", "basilica-of-the-annunciation", "mount-precipice", "tel-megiddo", "masada", "ein-gedi", "qasr-el-yahud", "mitzpe-ramon-crater"]) {

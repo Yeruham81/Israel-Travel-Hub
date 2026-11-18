@@ -30,7 +30,7 @@ describe("Tiberias destination and distinct hotel intents", () => {
   it("resolves the new Tiberias hotel destination and both style routes", () => {
     const router = createRouter({ routeTree, context: { queryClient: new QueryClient() }, trailingSlash: "always" });
     expect(destination.path).toBe("/accommodation/tiberias/");
-    for (const path of [destination.path, "/accommodation/tiberias/family-hotels/", "/accommodation/tiberias/luxury-hotels/"]) {
+    for (const path of [destination.path, "/accommodation/tiberias/family/", "/accommodation/tiberias/luxury/"]) {
       expect(router.matchRoutes(path).at(-1)?.routeId).toBe(path === destination.path ? path : path.replace(/\/$/, ""));
     }
   });
