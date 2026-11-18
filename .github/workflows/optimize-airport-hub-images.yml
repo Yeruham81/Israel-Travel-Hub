@@ -55,6 +55,8 @@ jobs:
           bun-version: "1.4.4"
       - name: Install locked application dependencies
         run: bash scripts/install-ci-dependencies.sh
+      - name: Build project and generate the typed route tree
+        run: bun run build
       - name: Run hub visual/functionality regressions
         run: bun x vitest run src/test/airport-transfers.test.tsx
       - name: Verify TypeScript
