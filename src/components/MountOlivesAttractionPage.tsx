@@ -100,7 +100,7 @@ export const mountOlivesDestinationContent: AttractionDestinationContent = {
         <div className="space-y-3">
           <article className="rounded-xl border bg-card p-4">
             <div className="flex items-center gap-2"><BusFront className="h-5 w-5 text-primary" aria-hidden="true"/><h3 className="font-semibold">By public bus</h3></div>
-            <p className="mt-2 text-sm leading-relaxed">City of David lists bus 84 from Ammunition Hill near the light rail toward Ma'ale HaZeitim and Seven Arches. Routes 83, 83A and 51 serve Derech Yericho near the lower cemetery approach. Verify the exact stop and day with the <a href={official.transit} target="_blank" rel="noopener noreferrer" className={inlineLink}>public transport planner</a>; routes may change.</p>
+            <p className="mt-2 text-sm leading-relaxed">For the <strong>Seven Arches viewpoint</strong>, City of David lists bus 84 from Ammunition Hill near the light rail. For <strong>Pater Noster and the Chapel of the Ascension</strong>, buses 255 and 275 serve the Church of the Ascension/Rabia Al-Adawiya area. Routes 83, 83A and 51 serve Derech Yericho near the lower cemetery approach. Check the exact stop, direction and service day with the <a href={official.transit} target="_blank" rel="noopener noreferrer" className={inlineLink}>public transport planner</a>; routes may change.</p>
             <p className="mt-2 text-sm leading-relaxed">The light rail and most Israeli city buses do not operate during Shabbat, from Friday afternoon until Saturday evening. Other local services can follow different schedules.</p>
           </article>
           <article className="rounded-xl border bg-card p-4">
@@ -132,13 +132,24 @@ export const mountOlivesDestinationContent: AttractionDestinationContent = {
           <p className="mt-3 border-t pt-3 text-sm text-muted-foreground">{route.note}</p>
         </article>)}
       </div>
-      <AttractionPracticalTip>For the fuller pilgrimage route, Tuesday or Thursday is often the most useful day because St Mary Magdalene has a short morning window and Pater Noster has temporarily reduced visiting hours. Confirm both before you set out. For an independent Old City walk afterwards, see my <Link to="/attractions/old-city-jerusalem/" className={inlineLink}>Jerusalem Old City guide</Link>.</AttractionPracticalTip>
+      <div className="rounded-xl border bg-card p-4 sm:p-5" data-testid="mount-olives-walking-connections">
+        <h3 className="font-serif text-xl font-semibold">Walking connections</h3>
+        <p className="mt-2 text-sm leading-relaxed text-muted-foreground">Choose the leg that suits your route. These are navigation links, not estimates of walking time.</p>
+        <ul className="mt-3 grid gap-3 sm:grid-cols-3">
+          {walkingLinks.map(leg => <li key={leg.url} className="rounded-lg border bg-secondary/20 p-3">
+            <a href={leg.url} target="_blank" rel="noopener noreferrer" className={inlineLink}>{leg.title} <ArrowUpRight className="inline h-4 w-4" aria-hidden="true"/></a>
+            <p className="mt-1 text-xs leading-relaxed text-muted-foreground">{leg.description}</p>
+          </li>)}
+        </ul>
+        <p className="mt-3 text-sm leading-relaxed">Google Maps may suggest a different path from the traditional <strong>Palm Sunday Road</strong>. Check pedestrian signs and each church's actual entrance, or see the <a href={official.trailGuide} target="_blank" rel="noopener noreferrer" className={inlineLink}>Mount of Olives walking route from Enjoy Jerusalem</a>.</p>
+      </div>
+      <AttractionPracticalTip>For a fuller church visit, Tuesday or Thursday currently offers the best chance of combining Pater Noster with St Mary Magdalene's short morning hours. Confirm both. My <Link to="/attractions/old-city-jerusalem/" className={inlineLink}>Jerusalem Old City guide</Link> covers the next part of your walk.</AttractionPracticalTip>
     </div>
   ),
   historyContent: (
     <div className="mt-4 space-y-3">
       {mountOlivesEditorialUpdate.history.map(paragraph => <p key={paragraph}>{paragraph}</p>)}
-      <p>The Mount of Olives Jewish cemetery is still used today. You can learn about the graves and their history from <a href={official.cemeteryGraves} target="_blank" rel="noopener noreferrer" className={inlineLink}>the dedicated cemetery information project</a>. For nearby Christian heritage, see my <Link to="/travel-blog/churches-in-jerusalem/" className={inlineLink}>Jerusalem churches guide</Link>.</p>
+      <p>For a deeper look at the hill’s history, see the <a href={official.cemeteryGraves} target="_blank" rel="noopener noreferrer" className={inlineLink}>Mount of Olives cemetery heritage project</a> and my <Link to="/travel-blog/churches-in-jerusalem/" className={inlineLink}>Jerusalem churches guide</Link>.</p>
     </div>
   ),
   tourContent: (
@@ -184,9 +195,11 @@ export const mountOlivesDestinationContent: AttractionDestinationContent = {
   sources: [
     { label: "Christian Information Center — Holy Land church hours and fees", url: official.churchHours },
     { label: "City of David — Mount of Olives visitor access and buses", url: official.cemetery },
+    { label: "City of David — cemetery mapping and grave locator", url: official.graveLocator },
     { label: "Mount of Olives cemetery information", url: official.cemeteryGraves },
     { label: "Israel public transportation planner", url: official.transit },
     { label: "City of David — Jerusalem Trail route", url: official.jerusalemWalk },
+    { label: "Enjoy Jerusalem — Mount of Olives walking route", url: official.trailGuide },
   ],
 };
 
