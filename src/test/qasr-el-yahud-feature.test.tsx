@@ -46,7 +46,7 @@ describe("Qasr el-Yahud upgraded attraction guide", () => {
     expect(site.visit.winterFriday).toBe("08:00–15:00");
     expect(site.visit.holidayEves).toBe("08:00–13:00");
     expect(site.visit.sitePhone).toBe("02-6504844");
-    expect(page).toContain("Reserve a free visit");
+    expect(page).toContain("Free entry — reserve first");
     expect(page).toContain("Book a free Qasr el-Yahud visit");
     expect(page).toContain("up to two weeks in advance");
     expect(page).toContain("href={official.operatorEnglish}");
