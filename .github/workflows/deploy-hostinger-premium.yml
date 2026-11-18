@@ -525,7 +525,7 @@ jobs:
             'data-testid="ein-gedi-wide-panorama"',
             'data-testid="ein-gedi-map"',
             "₪31", "₪16", "Nahal David", "Nahal Arugot",
-            "October 2026", "Book Nahal David", "Book Nahal Arugot",
+            "October 2026", "Nahal David", "Nahal Arugot", "information &amp; reservations",
             "ein-gedi-canyon-panorama",
             "ein-gedi-rock-gorge",
           ]) {
