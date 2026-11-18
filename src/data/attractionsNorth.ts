@@ -5,6 +5,7 @@ import { mountBeatitudesSite } from "@/data/mountBeatitudesSite";
 import { mountTaborSite } from "@/data/mountTaborSite";
 import haifaImg from "@/assets/haifa/panorama.webp";
 import { akkoSite } from "@/data/akkoSite";
+import akkoImg from "@/assets/shore-excursions/akko-port.jpg";
 import lake from "@/assets/home/tiberias-lake.webp";
 import { roshHanikraSite } from "@/data/roshHanikraSite";
 export const northernAttractions: Record<string, Attraction> = {
@@ -26,7 +27,7 @@ export const northernAttractions: Record<string, Attraction> = {
 },
 "akko-acre":{
  title:akkoSite.title,description:akkoSite.description,
- region:"Haifa & northern coast",image:akkoSite.hero,duration:"3–6 hours",
+ region:"Haifa & northern coast",image:{src:akkoImg,alt:"Historic port of Akko on Israel’s Mediterranean coast"},duration:"3–6 hours",
  intro:akkoSite.intro,
  takeaway:"Prioritise the Hospitaller Halls and one or two neighbouring paid heritage sites, then wander the market and harbour. Check combined admission arrangements rather than assuming every site shares a ticket.",
  highlights:[
