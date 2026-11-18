@@ -7,6 +7,7 @@ import type { ResortHotelFacts } from "@/data/registry";
 import downtownPhoto from "@/assets/jerusalem/downtown.webp";
 import mamillaPhoto from "@/assets/jerusalem/mamilla.webp";
 import oldCityPhoto from "@/assets/jerusalem/old-city.webp";
+import jerusalemSkylinePhoto from "@/assets/home/jerusalem-old-city.webp";
 import marketPhoto from "@/assets/jerusalem/mahane-yehuda.webp";
 import eastJerusalemPhoto from "@/assets/jerusalem/east-jerusalem.webp";
 import germanColonyPhoto from "@/assets/jerusalem/german-colony.webp";
@@ -1112,30 +1113,30 @@ export type AccommodationDestinationCard = {
 export const accommodationDestinations: AccommodationDestinationCard[] = [
   {
     id: "jerusalem", title: "Hotels in Jerusalem",
-    text: "Ancient lanes, lively markets or leafy streets? Discover the neighborhoods and hotels that bring your Jerusalem trip to life.",
-    cta: "Explore Jerusalem hotels", to: cityStayGuides.jerusalem.path as NonNullable<LinkProps["to"]>,
-    photo: { src: oldCityPhoto, alt: "Stone buildings and a cobbled street inside Jerusalem's Old City", sourceUrl: "", label: "Jerusalem — Old City streets" },
+    text: "Compare Downtown, Mamilla, the Old City and quieter neighborhoods, with practical advice on walking routes, steps and getting around.",
+    cta: "Compare Jerusalem hotels", to: cityStayGuides.jerusalem.path as NonNullable<LinkProps["to"]>,
+    photo: { src: jerusalemSkylinePhoto, alt: "Panoramic view of Jerusalem’s Old City skyline from the Mount of Olives", sourceUrl: "", label: "Jerusalem — Old City panorama" },
   },
   {
     id: "telaviv", title: "Hotels in Tel Aviv",
-    text: "Beachfront mornings, Jaffa charm or a stylish city hideaway? Find the neighborhood and hotel for the Tel Aviv you want to experience.",
-    cta: "Explore Tel Aviv hotels", to: cityStayGuides.telaviv.path as NonNullable<LinkProps["to"]>,
+    text: "Explore the beachfront, Jaffa, Rothschild Boulevard and city-center stays, and choose the location that suits your days and evenings.",
+    cta: "Compare Tel Aviv hotels", to: cityStayGuides.telaviv.path as NonNullable<LinkProps["to"]>,
     photo: { src: telAvivBeachfrontPhoto, alt: "Tel Aviv's beachfront hotels and Mediterranean promenade", sourceUrl: "", label: "Tel Aviv — beachfront hotels and promenade" },
   },
   {
     id: "haifa", title: "Hotels in Haifa",
-    text: "Garden views, characterful boutique hotels and Mediterranean beach days. Find your place between Mount Carmel and the coast.",
-    cta: "Explore Haifa hotels", to: haifaStayGuide.path as NonNullable<LinkProps["to"]>, photo: haifaPhotos.panorama,
+    text: "Compare the German Colony, Mount Carmel and beachfront stays, with tips on Haifa’s hills, transport and hotel styles.",
+    cta: "Compare Haifa hotels", to: haifaStayGuide.path as NonNullable<LinkProps["to"]>, photo: haifaPhotos.panorama,
   },
   {
     id: "tiberias", title: "Hotels in Tiberias",
-    text: "Slow mornings by the Sea of Galilee, family pool days and a base for exploring the north. Discover a stay that suits your pace.",
-    cta: "Explore Tiberias hotels", to: tiberiasStayGuide.path as NonNullable<LinkProps["to"]>, photo: tiberiasPhotos.waterfront,
+    text: "Choose a central waterfront base or a quieter hotel above the lake, and compare family facilities, lake access and nearby attractions.",
+    cta: "Compare Tiberias hotels", to: tiberiasStayGuide.path as NonNullable<LinkProps["to"]>, photo: tiberiasPhotos.waterfront,
   },
   {
     id: "deadsea", title: "Dead Sea hotels",
-    text: "Unwind with a spa escape, a relaxing resort break or time together by the water. Explore where to stay for your Dead Sea getaway.",
-    cta: "Explore Dead Sea hotels", to: deadSeaStayGuide.path as NonNullable<LinkProps["to"]>, photo: deadSeaPhotos.beach,
+    text: "Compare spa hotels and family resorts around Ein Bokek and the southern hotel district, with advice on beach access and meals.",
+    cta: "Compare Dead Sea hotels", to: deadSeaStayGuide.path as NonNullable<LinkProps["to"]>, photo: deadSeaPhotos.beach,
   },
   {
     id: "eilat", title: "Hotels in Eilat",
