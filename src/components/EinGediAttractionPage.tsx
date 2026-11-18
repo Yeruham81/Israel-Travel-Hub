@@ -6,7 +6,7 @@ import {
 } from "@/components/AttractionDestinationPage";
 import { einGediSite } from "@/data/einGediSite";
 import { carRentalAffiliateUrl } from "@/lib/car-rental-affiliate";
-import oasisPhoto from "@/assets/guides/dead-sea-excursions/ein-gedi-oasis.webp";
+import rockGorgePhoto from "@/assets/guides/dead-sea-excursions/ein-gedi-rock-gorge.jpg";
 import ibexPhoto from "@/assets/guides/ein-gedi-ibex.webp";
 import cliffsPhoto from "@/assets/guides/dead-sea-excursions/ein-gedi-reserve-cliffs.jpg";
 import canyonPanorama from "@/assets/guides/dead-sea-excursions/ein-gedi-canyon-panorama.jpg";
@@ -54,7 +54,7 @@ export const einGediDestinationContent: AttractionDestinationContent = {
       </AttractionHighlight>
       <AttractionHighlight
         title="Nahal Arugot — the wilder canyon"
-        image={{ src: oasisPhoto, alt: "Desert cliffs and patches of green oasis vegetation around Ein Gedi" }}
+        image={{ src: rockGorgePhoto, alt: "Rocky water-carved gorge within Ein Gedi Nature Reserve" }}
       >
         <p>Nahal Arugot has a separate entrance south of Nahal David. When available, the lower pools are roughly a twenty-minute walk each way; the Hidden Waterfall route is a longer, more demanding hike of about three to four hours, with dry and partly wet trail options.</p>
         <p>The official trail pages have published differing temporary closure statuses after flood damage. <strong>Check Nahal Arugot's current notice and book that entrance separately before planning the longer hike.</strong> The upper pools may be dry following earlier flooding.</p>
@@ -265,7 +265,6 @@ export const einGediDestinationContent: AttractionDestinationContent = {
     { label: "Israel Nature and Parks Authority — Nahal Arugot", url: official.arugot, note: "Trail choices, opening restrictions and entry cutoffs." },
     { label: "Israel Nature and Parks Authority — detailed trails and prices", url: official.trails, note: "General access, concession categories and safety information." },
     { label: "Israel Nature and Parks Authority — Ein Gedi Antiquities", url: official.antiquities, note: "Ancient synagogue, separate fees and accessibility." },
-    { label: "Israel Nature and Parks Authority — hiking safety", url: official.safety, note: "General safety principles for protected hiking routes." },
   ],
 };
 
