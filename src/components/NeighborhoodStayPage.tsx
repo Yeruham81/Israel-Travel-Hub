@@ -1,5 +1,5 @@
 import { Link, type LinkProps } from "@tanstack/react-router";
-import { ArrowLeft, ArrowRight, MapPin } from "lucide-react";
+import { ArrowLeft, ArrowRight, Lightbulb, MapPin } from "lucide-react";
 import { cityStayGuides, neighborhoodGuidesForCity, type NeighborhoodStayGuide } from "@/data/content";
 import { areaDecisionNotes } from "@/data/localEditorialInsights";
 import { hotelsForArea, INFO_CHECK_DATE, linksForPage } from "@/data/registry";
@@ -16,7 +16,37 @@ import { hotelBrowseAffiliateUrl } from "@/lib/hotel-affiliate";
 import { recordOutboundClick, relFor } from "@/lib/outbound";
 import jerusalemAreaGuidePhoto from "@/assets/home/jerusalem-old-city-tile.webp";
 
-const sections = [["overview", "The area"], ["highlights", "Nearby sights"], ["location", "Map & arrival"], ["book", "Hotel picks"], ["checklist", "Booking tips"], ["other-areas", "More areas"], ["faq", "FAQ"], ["explore", "Local guides"], ["trip-planning", "Trip planning"], ["contact", "Contact me"], ["sources", "Sources"]] as const;
+const sections = [
+  ["book", "Hotels"], ["overview", "The area"], ["highlights", "Nearby sights"],
+  ["location", "Map & arrival"], ["checklist", "Booking tips"], ["other-areas", "More areas"],
+  ["faq", "FAQ"], ["explore", "Local guides"], ["trip-planning", "Trip planning"],
+  ["contact", "Contact me"],
+] as const;
+
+const highlightGuides: Record<string, Record<string, { to: string; label: string }>> = {
+  downtown: {
+    "Ben Yehuda & Nahalat Shiva": { to: "/travel-blog/shopping-in-jerusalem/", label: "Shopping in Jerusalem" },
+    "Jaffa Gate & the Old City": { to: "/attractions/old-city-jerusalem/", label: "Explore the Old City" },
+  },
+  mamilla: {
+    "Mamilla Avenue": { to: "/travel-blog/shopping-in-jerusalem/", label: "Shopping in Jerusalem" },
+    "Jaffa Gate & Tower of David": { to: "/attractions/old-city-jerusalem/", label: "Explore the Old City" },
+  },
+  "old-city": {
+    "Christian & Armenian quarters": { to: "/travel-blog/churches-in-jerusalem/", label: "Churches in Jerusalem" },
+    "Jewish Quarter": { to: "/attractions/old-city-jerusalem/", label: "Explore the Old City" },
+  },
+  "mahane-yehuda": {
+    "Mahane Yehuda Market": { to: "/travel-blog/shopping-in-jerusalem/", label: "Market & shopping guide" },
+  },
+  "east-jerusalem": {
+    "Damascus Gate": { to: "/attractions/old-city-jerusalem/", label: "Explore the Old City" },
+    "Garden Tomb & Nablus Road": { to: "/travel-blog/churches-in-jerusalem/", label: "Churches in Jerusalem" },
+  },
+  "german-colony": {
+    "First Station area & Train Track Park": { to: "/travel-blog/jerusalem-travel-guide/", label: "Jerusalem travel guide" },
+  },
+};
 
 export function NeighborhoodStayPage({ area }: { area: NeighborhoodStayGuide }) {
   const city = cityStayGuides[area.cityId];
@@ -42,41 +72,19 @@ export function NeighborhoodStayPage({ area }: { area: NeighborhoodStayGuide }) 
       <OnThisPage sections={sections} />
       <article className="mx-auto max-w-5xl px-4">
         <Link to={city.path as LinkProps["to"]} className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-primary"><ArrowLeft className="h-4 w-4" aria-hidden /> Compare all {city.city} areas</Link>
-        <dl className="mt-6 grid gap-4 rounded-2xl border bg-card p-5 sm:grid-cols-3 sm:p-6">
+        <dl className="mt-5 grid gap-3 rounded-2xl border bg-card p-4 sm:grid-cols-3 sm:gap-4 sm:p-5">
           <div><dt className="eyebrow">Best for</dt><dd className="mt-2 text-sm font-medium">{area.bestFor}</dd></div>
-          <div><dt className="eyebrow">Stay style</dt><dd className="mt-2 text-sm font-medium">{area.priceLevel}</dd></div>
-          <div><dt className="eyebrow">The tradeoff</dt><dd className="mt-2 text-sm leading-relaxed text-muted-foreground">{area.watch}</dd></div>
+          <div><dt className="eyebrow">Hotel styles</dt><dd className="mt-2 text-sm font-medium">{area.priceLevel}</dd></div>
+          <div><dt className="eyebrow">Keep in mind</dt><dd className="mt-2 text-sm leading-relaxed text-muted-foreground">{area.watch}</dd></div>
         </dl>
-        <Section id="overview" title={`What is it like to stay in ${area.name}?`} className="scroll-mt-32">
-          {area.overview.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
-          {localInsight && <aside className="mt-6 rounded-2xl border bg-secondary/40 p-5 sm:p-6">
-            <h3 className="text-xl font-semibold">{localInsight.heading}</h3>
-            <p className="mt-3 text-sm leading-relaxed"><strong>Why stay here:</strong> {localInsight.choose}</p>
-            <p className="mt-2 text-sm leading-relaxed"><strong>Worth comparing:</strong> {localInsight.compare}</p>
-            <p className="mt-2 text-sm leading-relaxed"><strong>Arriving with luggage:</strong> {localInsight.arrival}</p>
-          </aside>}
-          {isJerusalem && <p className="mt-5 text-sm leading-relaxed text-muted-foreground">
-            Still comparing locations? <Link to={"/travel-blog/where-to-stay-in-jerusalem/" as LinkProps["to"]} className="font-semibold text-primary underline underline-offset-4">Read my guide to where to stay in Jerusalem</Link> for a broader look at the city’s neighborhoods.
-          </p>}
-        </Section>
-        <Section id="highlights" title="Nearby sights & local character" className="scroll-mt-32">
-          <div className="mt-5 grid gap-4 sm:grid-cols-3">{area.highlights.map((highlight) => <div key={highlight.name} className="rounded-2xl border bg-card p-5"><MapPin className="h-5 w-5 text-primary" aria-hidden /><h3 className="mt-3 text-xl">{highlight.name}</h3><p className="mt-2 text-sm! text-muted-foreground">{highlight.text}</p></div>)}</div>
-        </Section>
-        <Section id="location" title="Map, getting around & arriving with luggage" className="scroll-mt-32">
-          <div className="mt-5"><AreaMap area={area} /></div>
-          {area.gettingAround.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
-          <div className="mt-5"><Checklist title="Make your arrival easier" items={area.arrivalTips} /></div>
-          {airportGuide && <p><Link to={airportGuide.to}>Planning an airport arrival? Compare the options from Ben Gurion Airport to {city.city}.</Link></p>}
-        </Section>
-
-        <section id="book" aria-labelledby="book-h" className="mt-12 scroll-mt-32">
-          <h2 id="book-h" className="text-2xl font-semibold sm:text-3xl">{isJerusalem ? `Hotels I recommend in ${area.shortName}` : `My top picks in ${area.name}`}</h2>
+        <section id="book" aria-labelledby="book-h" className="mt-8 scroll-mt-32">
+          <h2 id="book-h" className="text-2xl font-semibold sm:text-3xl">{isJerusalem ? `Hotels in ${area.shortName}` : `My top picks in ${area.name}`}</h2>
           <p className="mt-2 max-w-3xl text-sm leading-relaxed text-muted-foreground">
             {isJerusalem
-              ? "Compare four selected places to stay, then check room choices, total prices and booking terms for your dates on the booking platform."
+              ? "Compare these hotels, then check rooms, total prices and booking conditions for your travel dates."
               : "Compare four different places to stay in this area. Use Expedia to check rooms, total prices and availability for your dates."}
           </p>
-          <ul className="mt-5 grid gap-4 sm:grid-cols-2" data-testid="neighborhood-hotel-grid">
+          <ul className={`mt-5 grid gap-4 ${isJerusalem ? "lg:grid-cols-2" : "sm:grid-cols-2"}`} data-testid="neighborhood-hotel-grid">
             {isJerusalem
               ? hotels.map((hotel) => <JerusalemHotelTile key={hotel.id} hotel={hotel} pageId={pageId} showArea={false} />)
               : hotels.map((hotel) => (
@@ -90,18 +98,12 @@ export function NeighborhoodStayPage({ area }: { area: NeighborhoodStayGuide }) 
           </ul>
           <p className="mt-4 text-xs leading-relaxed text-muted-foreground">
             {isJerusalem
-              ? "Hotel links open a third-party booking platform. Check the room details, total price and booking conditions before confirming your reservation."
+              ? "Photos illustrate the neighborhoods, not the hotels themselves. Booking links lead to third-party platforms; review room details, total prices and conditions before booking."
               : "Check hotel prices, availability and booking conditions for your dates directly on Expedia."}
           </p>
         </section>
-        <Section id="checklist" title="Before you book" className="scroll-mt-32">
-          <div className="mt-5 grid gap-4 sm:grid-cols-2">
-            <Checklist title="For this area" items={area.bookingTips} />
-            <Checklist title={`For any ${city.city} stay`} items={["Confirm the final total including taxes, fees and extras", "Read cancellation and payment conditions for your exact room offer", "Ask about Shabbat check-in, meals and transport if relevant", "Check recent room-specific feedback and accessibility requirements"]} />
-          </div>
-        </Section>
         {isJerusalem ? (
-          <section id="more-hotels" aria-label={`More hotels in ${area.shortName}`} className="mt-8 scroll-mt-32 rounded-2xl border bg-secondary/35 p-4 sm:p-6">
+          <section id="more-hotels" aria-label={`More hotels in ${area.shortName}`} className="mt-5 scroll-mt-32 rounded-2xl border bg-secondary/25 p-4 sm:p-5">
             <div className="flex flex-wrap items-center justify-between gap-4">
               <div className="max-w-xl">
                 <h3 className="text-lg font-semibold">Looking for another hotel in {area.shortName}?</h3>
@@ -118,6 +120,56 @@ export function NeighborhoodStayPage({ area }: { area: NeighborhoodStayGuide }) 
             </div>
           </section>
         ) : <ProviderSection id="more-hotels" title={`See more options in ${area.shortName}`} intro="Want a different room style or budget? Browse other properties, and check each one's exact map location before booking." links={linksForPage(`stay-area-${area.id}-browse`)} pageId={pageId} />}
+        <Section id="overview" title={`What is it like to stay in ${area.name}?`} className="scroll-mt-32">
+          {area.overview.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
+          {localInsight && (isJerusalem ? (
+            <aside className="mt-6 rounded-2xl border bg-secondary/30 p-4 sm:p-5">
+              <h3 className="text-lg font-semibold">{localInsight.heading}</h3>
+              <p className="mt-2 text-sm leading-relaxed">{localInsight.choose}</p>
+              <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{localInsight.compare}</p>
+            </aside>
+          ) : <aside className="mt-6 rounded-2xl border bg-secondary/40 p-5 sm:p-6">
+            <h3 className="text-xl font-semibold">{localInsight.heading}</h3>
+            <p className="mt-3 text-sm leading-relaxed"><strong>Why stay here:</strong> {localInsight.choose}</p>
+            <p className="mt-2 text-sm leading-relaxed"><strong>Worth comparing:</strong> {localInsight.compare}</p>
+            <p className="mt-2 text-sm leading-relaxed"><strong>Arriving with luggage:</strong> {localInsight.arrival}</p>
+          </aside>)}
+          {isJerusalem && <p className="mt-5 text-sm leading-relaxed text-muted-foreground">
+            Still comparing locations? <Link to={"/travel-blog/where-to-stay-in-jerusalem/" as LinkProps["to"]} className="font-semibold text-primary underline underline-offset-4">Read my guide to where to stay in Jerusalem</Link> for a broader look at the city’s neighborhoods.
+          </p>}
+        </Section>
+        <Section id="highlights" title="Nearby sights & local character" className="scroll-mt-32">
+          <div className="mt-5 grid gap-4 sm:grid-cols-3">
+            {area.highlights.map((highlight) => {
+              const relatedGuide = isJerusalem ? highlightGuides[area.id]?.[highlight.name] : undefined;
+              return <div key={highlight.name} className="flex h-full flex-col rounded-2xl border bg-card p-4 sm:p-5">
+                <MapPin className="h-5 w-5 text-primary" aria-hidden />
+                <h3 className="mt-3 text-lg font-semibold">{highlight.name}</h3>
+                <p className="mt-2 flex-1 text-sm! leading-relaxed text-muted-foreground">{highlight.text}</p>
+                {relatedGuide && <Link to={relatedGuide.to as LinkProps["to"]} className="mt-3 inline-flex items-center gap-1 text-sm font-semibold text-primary underline underline-offset-4">
+                  {relatedGuide.label} <ArrowRight className="h-4 w-4" aria-hidden />
+                </Link>}
+              </div>;
+            })}
+          </div>
+        </Section>
+        <Section id="location" title="Map, getting around & arriving with luggage" className="scroll-mt-32">
+          <div className="mt-5"><AreaMap area={area} /></div>
+          {area.gettingAround.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
+          {isJerusalem && localInsight && <aside className="mt-5 flex items-start gap-3 rounded-xl border border-amber-300/60 bg-amber-50/70 p-4 text-sm text-foreground dark:border-amber-600/40 dark:bg-amber-950/20">
+            <Lightbulb className="mt-0.5 h-5 w-5 shrink-0 text-amber-600 dark:text-amber-400" aria-hidden />
+            <p className="leading-relaxed"><strong>Arriving with luggage:</strong> {localInsight.arrival}</p>
+          </aside>}
+          <div className="mt-5"><Checklist title="Make your arrival easier" items={area.arrivalTips} /></div>
+          {airportGuide && <p><Link to={airportGuide.to}>Planning an airport arrival? Compare the options from Ben Gurion Airport to {city.city}.</Link></p>}
+        </Section>
+
+        <Section id="checklist" title="Before you book" className="scroll-mt-32">
+          <div className="mt-5 grid gap-4 sm:grid-cols-2">
+            <Checklist title="For this area" items={area.bookingTips} />
+            <Checklist title={`For any ${city.city} stay`} items={["Confirm the final total including taxes, fees and extras", "Read cancellation and payment conditions for your exact room offer", "Ask about Shabbat check-in, meals and transport if relevant", "Check recent room-specific feedback and accessibility requirements"]} />
+          </div>
+        </Section>
         <section id="other-areas" aria-labelledby="other-areas-h" className="mt-14 scroll-mt-32">
           <h2 id="other-areas-h" className="text-3xl">Explore Other Areas to Stay</h2>
           <p className="mt-2 text-muted-foreground">Compare a different side of {city.city} before you decide.</p>
