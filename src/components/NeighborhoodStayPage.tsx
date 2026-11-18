@@ -2,28 +2,32 @@ import { Link, type LinkProps } from "@tanstack/react-router";
 import { ArrowLeft, ArrowRight, MapPin } from "lucide-react";
 import { cityStayGuides, neighborhoodGuidesForCity, type NeighborhoodStayGuide } from "@/data/content";
 import { areaDecisionNotes } from "@/data/localEditorialInsights";
-import { getSource, hotelsForArea, INFO_CHECK_DATE, linksForPage } from "@/data/registry";
+import { hotelsForArea, INFO_CHECK_DATE, linksForPage } from "@/data/registry";
 import { StayHotelCard } from "@/components/StayHotelCard";
 import { cityHotelPhoto } from "@/data/cityHotelCatalog";
 import { hotelTileCopy } from "@/components/TelAvivHotelBrowser";
-import { jerusalemHotelTileCopy } from "@/components/JerusalemHotelBrowser";
+import { JerusalemHotelTile, jerusalemHotelTileCopy } from "@/components/JerusalemHotelBrowser";
 import { AreaMap, AreaPhotoCredit } from "@/components/AreaMap";
 import { GuideHeader, OnThisPage, Section, Checklist, FaqList, ProviderSection, SourceList } from "@/components/Guide";
 import { StayTripLinks } from "@/components/StayTripLinks";
 import { HomeContactForm } from "@/components/HomeContactForm";
 import { guideContactCopy } from "@/lib/guide-contact";
+import { hotelBrowseAffiliateUrl } from "@/lib/hotel-affiliate";
+import { recordOutboundClick, relFor } from "@/lib/outbound";
+import jerusalemAreaGuidePhoto from "@/assets/home/jerusalem-old-city-tile.webp";
 
-const sections = [["overview", "The area"], ["highlights", "Nearby sights"], ["location", "Map & arrival"], ["book", "Hotel picks"], ["checklist", "Booking tips"], ["other-areas", "More areas"], ["faq", "FAQ"], ["explore", "Local guides"], ["trip-planning", "Trip planning"], ["contact", "Contact Moshe"], ["sources", "Sources"]] as const;
+const sections = [["overview", "The area"], ["highlights", "Nearby sights"], ["location", "Map & arrival"], ["book", "Hotel picks"], ["checklist", "Booking tips"], ["other-areas", "More areas"], ["faq", "FAQ"], ["explore", "Local guides"], ["trip-planning", "Trip planning"], ["contact", "Contact me"], ["sources", "Sources"]] as const;
 
 export function NeighborhoodStayPage({ area }: { area: NeighborhoodStayGuide }) {
   const city = cityStayGuides[area.cityId];
+  const isJerusalem = area.cityId === "jerusalem";
   const localInsight = areaDecisionNotes[area.id];
   const hotels = hotelsForArea(area.id, area.cityId);
   const bookings = linksForPage(`stay-area-${area.id}`);
   const otherAreas = neighborhoodGuidesForCity(area.cityId).filter((other) => other.id !== area.id);
   const pageId = `stay-area-${area.id}`;
   const airportGuide = city.related.find((item) => item.label.startsWith("Ben Gurion Airport"));
-   const shortCopy = area.cityId === "jerusalem" ? jerusalemHotelTileCopy : hotelTileCopy;
+  const shortCopy = isJerusalem ? jerusalemHotelTileCopy : hotelTileCopy;
 
   return (
     <main className="pb-8">
@@ -51,6 +55,9 @@ export function NeighborhoodStayPage({ area }: { area: NeighborhoodStayGuide }) 
             <p className="mt-2 text-sm leading-relaxed"><strong>Worth comparing:</strong> {localInsight.compare}</p>
             <p className="mt-2 text-sm leading-relaxed"><strong>Arriving with luggage:</strong> {localInsight.arrival}</p>
           </aside>}
+          {isJerusalem && <p className="mt-5 text-sm leading-relaxed text-muted-foreground">
+            Still comparing locations? <Link to={"/travel-blog/where-to-stay-in-jerusalem/" as LinkProps["to"]} className="font-semibold text-primary underline underline-offset-4">Read my guide to where to stay in Jerusalem</Link> for a broader look at the city’s neighborhoods.
+          </p>}
         </Section>
         <Section id="highlights" title="Nearby sights & local character" className="scroll-mt-32">
           <div className="mt-5 grid gap-4 sm:grid-cols-3">{area.highlights.map((highlight) => <div key={highlight.name} className="rounded-2xl border bg-card p-5"><MapPin className="h-5 w-5 text-primary" aria-hidden /><h3 className="mt-3 text-xl">{highlight.name}</h3><p className="mt-2 text-sm! text-muted-foreground">{highlight.text}</p></div>)}</div>
@@ -62,23 +69,29 @@ export function NeighborhoodStayPage({ area }: { area: NeighborhoodStayGuide }) 
           {airportGuide && <p><Link to={airportGuide.to}>Planning an airport arrival? Compare the options from Ben Gurion Airport to {city.city}.</Link></p>}
         </Section>
 
-        <section id="book" aria-labelledby="book-h" className="mt-14 scroll-mt-32">
-          <h2 id="book-h" className="text-3xl">My top picks in {area.name}</h2>
+        <section id="book" aria-labelledby="book-h" className="mt-12 scroll-mt-32">
+          <h2 id="book-h" className="text-2xl font-semibold sm:text-3xl">{isJerusalem ? `Hotels I recommend in ${area.shortName}` : `My top picks in ${area.name}`}</h2>
           <p className="mt-2 max-w-3xl text-sm leading-relaxed text-muted-foreground">
-            Compare four different places to stay in this area. Use Expedia to check rooms, total prices and availability for your dates.
+            {isJerusalem
+              ? "Compare four selected places to stay, then check room choices, total prices and booking terms for your dates on the booking platform."
+              : "Compare four different places to stay in this area. Use Expedia to check rooms, total prices and availability for your dates."}
           </p>
           <ul className="mt-5 grid gap-4 sm:grid-cols-2" data-testid="neighborhood-hotel-grid">
-            {hotels.map((hotel) => (
-              <StayHotelCard key={hotel.id} tile hotel={hotel}
-                booking={bookings.find((booking) => booking.id === `hotel-${hotel.id}-expedia`)}
-                editorial={shortCopy[hotel.id] ? { summary: shortCopy[hotel.id]!.description, bestFor: shortCopy[hotel.id]!.bestFor, watch: hotel.watch } : undefined}
-                photo={cityHotelPhoto(hotel)}
-                fallbackPhoto={area.photo}
-                pageId={pageId} />
-            ))}
+            {isJerusalem
+              ? hotels.map((hotel) => <JerusalemHotelTile key={hotel.id} hotel={hotel} pageId={pageId} showArea={false} />)
+              : hotels.map((hotel) => (
+                <StayHotelCard key={hotel.id} tile hotel={hotel}
+                  booking={bookings.find((booking) => booking.id === `hotel-${hotel.id}-expedia`)}
+                  editorial={shortCopy[hotel.id] ? { summary: shortCopy[hotel.id]!.description, bestFor: shortCopy[hotel.id]!.bestFor, watch: hotel.watch } : undefined}
+                  photo={cityHotelPhoto(hotel)}
+                  fallbackPhoto={area.photo}
+                  pageId={pageId} />
+              ))}
           </ul>
           <p className="mt-4 text-xs leading-relaxed text-muted-foreground">
-            Check hotel prices, availability and booking conditions for your dates directly on Expedia.
+            {isJerusalem
+              ? "Hotel links open a third-party booking platform. Check the full details before booking; some links may earn me a commission at no extra cost to you."
+              : "Check hotel prices, availability and booking conditions for your dates directly on Expedia."}
           </p>
         </section>
         <Section id="checklist" title="Before you book" className="scroll-mt-32">
@@ -87,11 +100,28 @@ export function NeighborhoodStayPage({ area }: { area: NeighborhoodStayGuide }) 
             <Checklist title={`For any ${city.city} stay`} items={["Confirm the final total including taxes, fees and extras", "Read cancellation and payment conditions for your exact room offer", "Ask about Shabbat check-in, meals and transport if relevant", "Check recent room-specific feedback and accessibility requirements"]} />
           </div>
         </Section>
-        <ProviderSection id="more-hotels" title={`See more options in ${area.shortName}`} intro="Want a different room style or budget? Browse other properties, and check each one's exact map location before booking." links={linksForPage(`stay-area-${area.id}-browse`)} pageId={pageId} />
+        {isJerusalem ? (
+          <section id="more-hotels" aria-label={`More hotels in ${area.shortName}`} className="mt-8 scroll-mt-32 rounded-2xl border bg-secondary/35 p-4 sm:p-6">
+            <div className="flex flex-wrap items-center justify-between gap-4">
+              <div className="max-w-xl">
+                <h3 className="text-lg font-semibold">Looking for another hotel in {area.shortName}?</h3>
+                <p className="mt-1.5 text-sm leading-relaxed text-muted-foreground">Explore more options and check the exact location, room details and cancellation conditions for your dates.</p>
+              </div>
+              {linksForPage(`stay-area-${area.id}-browse`).map((booking) => (
+                <a key={booking.id} href={hotelBrowseAffiliateUrl(booking, pageId)} target="_blank" rel={relFor(booking.isAffiliate)}
+                  onClick={() => recordOutboundClick({ pageId, productId: booking.id, offerId: booking.id })}
+                  className="inline-flex min-h-11 items-center justify-center gap-2 rounded-lg border border-primary/30 bg-card px-4 py-2.5 text-sm font-semibold text-primary transition-colors hover:border-primary/60 hover:bg-secondary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
+                  Browse more {area.shortName} hotels <ArrowRight className="h-4 w-4" aria-hidden />
+                  <span className="sr-only"> (opens in a new tab)</span>
+                </a>
+              ))}
+            </div>
+          </section>
+        ) : <ProviderSection id="more-hotels" title={`See more options in ${area.shortName}`} intro="Want a different room style or budget? Browse other properties, and check each one's exact map location before booking." links={linksForPage(`stay-area-${area.id}-browse`)} pageId={pageId} />}
         <section id="other-areas" aria-labelledby="other-areas-h" className="mt-14 scroll-mt-32">
           <h2 id="other-areas-h" className="text-3xl">Explore Other Areas to Stay</h2>
           <p className="mt-2 text-muted-foreground">Compare a different side of {city.city} before you decide.</p>
-          <ul className="mt-5 grid gap-4 sm:grid-cols-2">{otherAreas.map((other) => <li key={other.id} className="min-w-0">
+          <ul className={`mt-5 grid gap-4 sm:grid-cols-2 ${isJerusalem ? "lg:grid-cols-3" : ""}`}>{otherAreas.map((other) => <li key={other.id} className="min-w-0">
             <Link to={other.path as LinkProps["to"]} className="group flex h-full flex-col overflow-hidden rounded-xl border bg-card hover:border-primary">
               <img src={other.photo.src} alt={other.photo.alt} width={600} height={375} loading="lazy" decoding="async" className="aspect-[16/10] w-full object-cover" />
               <span className="flex flex-1 items-center justify-between gap-3 p-4">
@@ -99,12 +129,20 @@ export function NeighborhoodStayPage({ area }: { area: NeighborhoodStayGuide }) 
                 <ArrowRight className="h-4 w-4 shrink-0 text-primary" aria-hidden />
               </span>
             </Link>
-          </li>)}</ul>
+          </li>)}
+            {isJerusalem && <li className="min-w-0">
+              <Link to={city.path as LinkProps["to"]} className="group flex h-full flex-col overflow-hidden rounded-xl border bg-card hover:border-primary">
+                <img src={jerusalemAreaGuidePhoto} alt="Jerusalem Old City skyline and surrounding neighborhoods" width={600} height={375} loading="lazy" decoding="async" className="aspect-[16/10] w-full object-cover" />
+                <span className="flex flex-1 items-center justify-between gap-3 p-4">
+                  <span><span className="block text-xl font-semibold">All Jerusalem neighborhoods</span><span className="mt-1 block text-xs text-muted-foreground">Compare areas and hotel choices across the city</span></span>
+                  <ArrowRight className="h-4 w-4 shrink-0 text-primary" aria-hidden />
+                </span>
+              </Link>
+            </li>}</ul>
         </section>
         <FaqList faqs={area.faqs} />
         <StayTripLinks region={area.cityId} currentPath={area.path} />
         <HomeContactForm key={area.id} guide={guideContactCopy(area.title, "accommodation", `${area.shortName}, ${city.city}`)} />
-        <SourceList ids={[...city.sourceIds, ...hotels.map((hotel) => hotel.sourceId)]} />
         <AreaPhotoCredit areas={[area]} />
         <div className="mt-5"><details className="mt-3 rounded-xl border bg-card p-3 text-xs text-muted-foreground" data-testid="neighborhood-hotel-photo-credits">
             <summary className="cursor-pointer font-semibold text-foreground">Illustrative photo credits & licenses</summary>
@@ -118,6 +156,7 @@ export function NeighborhoodStayPage({ area }: { area: NeighborhoodStayGuide }) 
               })}
             </ul>
           </details></div>
+        <SourceList ids={[...city.sourceIds, ...hotels.map((hotel) => hotel.sourceId)]} />
       </article>
     </main>
   );
