@@ -15,16 +15,31 @@ afterEach(cleanup);
 const page=() => render((() => { const Page=HubRoute.options.component!; return <Page/>; })());
 
 describe("Accommodation booking hub",()=>{
- it("has one H1, five city hotel cards and independent area-guide links",()=>{
+ it("has one H1, six paired city cards and five independent area-guide links",()=>{
   const {container}=page();
   expect(screen.getAllByRole("heading",{level:1})).toHaveLength(1);
   expect(screen.getByRole("heading",{name:"Hotels in Israel"})).toBeInTheDocument();
   const cards=container.querySelectorAll('[data-testid="accommodation-destination-card"]');
   expect(cards).toHaveLength(5);
   expect(accommodationDestinations).toHaveLength(6);
-  expect(container.querySelectorAll('[data-testid="hotel-destination-card"]')).toHaveLength(5);
+  const destinationsGrid = container.querySelector('[aria-label="Hotel destinations in Israel"]')!;
+  expect(destinationsGrid).toHaveClass("grid-cols-2");
+  expect(destinationsGrid).not.toHaveClass("md:grid-cols-3");
+  const allCards = [...container.querySelectorAll('[data-testid="hotel-destination-card"]')];
+  expect(allCards).toHaveLength(6);
+  expect(allCards.map(card => card.querySelector("h3")?.textContent)).toEqual([
+    "Hotels in Jerusalem", "Hotels in Tel Aviv", "Hotels in Haifa",
+    "Hotels in Tiberias", "Dead Sea hotels", "Hotels in Eilat",
+  ]);
+  expect(allCards.every(card => !card.closest("li")?.classList.contains("md:col-span-2"))).toBe(true);
+  const eilat = allCards[5]!;
+  expect(eilat).toHaveTextContent("Coming soon");
+  expect(eilat.querySelectorAll("a")).toHaveLength(0);
+  expect(screen.getByTestId("accommodation-coming-soon-card")).toBeInTheDocument();
+  expect(container.querySelector('a[href="/travel-blog/eilat/"]')).toBeNull();
+  expect(screen.queryByRole("link", { name: /Explore hotel destinations/i })).toBeNull();
   const jerusalem = container.querySelector('[data-testid="hotel-destination-card"]')!;
-  expect(jerusalem.closest("li")).toHaveClass("md:col-span-2");
+  expect(jerusalem.closest("li")).toHaveClass("min-w-0");
   expect(jerusalem.querySelector('a[href="/travel-blog/where-to-stay-in-jerusalem/"]')).toBeInTheDocument();
   expect(jerusalem.querySelectorAll("a")).toHaveLength(2);
   expect(jerusalem.querySelector("img")).toHaveAttribute("src", accommodationDestinations[0]!.photo.src);
@@ -55,5 +70,13 @@ describe("Accommodation booking hub",()=>{
   expect(screen.queryByText(/unverified live room rates/i)).toBeNull();
   const meta=await HubRoute.options.head?.({} as never);
   expect(meta).toMatchObject({links:[{rel:"canonical",href:CANONICAL_ORIGIN+"/accommodation/"}]});
+  const jsonLd = meta?.scripts?.flatMap(script => {
+    const children = script?.children;
+    return typeof children === "string" ? [JSON.parse(children)] : [];
+  }) ?? [];
+  const collection = jsonLd.find(entry => entry["@type"] === "CollectionPage");
+  expect(collection?.mainEntity?.itemListElement).toHaveLength(6);
+  expect(collection.mainEntity.itemListElement[5]).not.toHaveProperty("item.url");
+  expect(collection.mainEntity.itemListElement[5].name).toMatch(/Eilat/);
  });
 });

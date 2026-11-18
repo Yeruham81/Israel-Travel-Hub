@@ -3,11 +3,22 @@ import { act, cleanup, fireEvent, render, screen, within } from "@testing-librar
 import { afterEach, vi } from "vitest";
 import { HomeTestimonials } from "@/components/HomeTestimonials";
 import { serviceDomains, allNavGroups } from "@/data/nav";
+import { accommodationDestinationCards } from "@/routes/index";
 import { customerTestimonials, tripadvisorReviews, tripadvisorProfileUrl, tripadvisorSnapshot } from "@/data/homeReviews";
 
 afterEach(() => { cleanup(); vi.useRealTimers(); });
 
 describe("homepage navigation and review sources", () => {
+  it("sends all five homepage accommodation cards to their accommodation city pages", () => {
+    expect(accommodationDestinationCards.map(card => card.to)).toEqual([
+      "/accommodation/jerusalem/",
+      "/accommodation/tel-aviv/",
+      "/accommodation/tiberias/",
+      "/accommodation/dead-sea/",
+      "/accommodation/haifa/",
+    ]);
+    expect(accommodationDestinationCards.every(card => !String(card.to).startsWith("/travel-blog/"))).toBe(true);
+  });
   it("keeps six ordered primary entries and rental only in the sidebar", () => {
     expect(serviceDomains.map(x => x.label)).toEqual(["Airport transfers", "Tours & Day Trips", "Shore excursions", "Accommodation", "Attractions", "Travel guides"]);
     expect(serviceDomains.some(x => x.to === "/car-rental/" || x.to === "/tickets/")).toBe(false);

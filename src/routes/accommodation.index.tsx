@@ -9,7 +9,7 @@ import { hotelHubFaqs, hotelStyles } from "@/data/hotelHub";
 import { CANONICAL_ORIGIN, jsonLd, pageMeta } from "@/lib/site";
 import hotelRoomPhoto from "@/assets/home/hotel-room-feature.webp";
 
-const destinations = accommodationDestinations.filter(d => d.id !== "eilat");
+const destinations = accommodationDestinations;
 
 const guideLabels: Record<keyof typeof accommodationEditorial, string> = {
   jerusalem: "Read the Jerusalem area guide",
@@ -57,11 +57,13 @@ export const Route = createFileRoute("/accommodation/")({
           "@type": "ItemList",
           itemListElement: destinations.map((destination, i) => ({
             "@type": "ListItem", position: i + 1,
-            item: {
-              "@type": "WebPage",
-              name: destination.title,
-              url: CANONICAL_ORIGIN + ("to" in destination ? destination.to : "/accommodation/"),
-            },
+            ...(destination.id === "eilat"
+              ? { name: "Hotels in Eilat — coming soon" }
+              : { item: {
+                  "@type": "WebPage",
+                  name: destination.title,
+                  url: CANONICAL_ORIGIN + ("to" in destination ? destination.to : "/accommodation/"),
+                } }),
           })),
         },
       })],
@@ -78,7 +80,6 @@ function AccommodationHub() {
       title="Hotels in Israel"
       intro="Looking for the right place to stay? Start with a destination, then compare the neighborhoods, hotel styles and practical details that suit your trip."
       image={<GuideHeroMedia src={hotelRoomPhoto} alt="A welcoming hotel guest room" compact />}
-      actions={<a href="#destinations" className="btn btn-primary">Explore hotel destinations <ArrowRight className="h-4 w-4" aria-hidden /></a>}
     />
     <div className="mx-auto max-w-5xl px-4">
       <section id="destinations" aria-labelledby="destinations-h" className="mt-9 scroll-mt-24">
@@ -86,14 +87,15 @@ function AccommodationHub() {
         <p className="mt-2 max-w-3xl text-sm leading-relaxed text-muted-foreground">
           Jerusalem and Tel Aviv have neighborhood-by-neighborhood hotel guides. For Haifa, Tiberias and the Dead Sea, start with the local area overview and explore hotels by style.
         </p>
-        <ul className="mt-4 grid gap-3 md:grid-cols-2" aria-label="Hotel destinations in Israel">
-          {destinations.map((destination, index) => {
+        <ul className="mt-4 grid grid-cols-2 auto-rows-fr gap-2.5 sm:gap-4" aria-label="Hotel destinations in Israel">
+          {destinations.map(destination => {
+            const comingSoon = destination.id === "eilat";
             const id = destination.id as keyof typeof accommodationEditorial;
-            return <li key={destination.id} className={index === 0 ? "min-w-0 md:col-span-2" : "min-w-0"}>
+            return <li key={destination.id} className="min-w-0">
               <AccommodationCard
                 destination={destination}
-                featured={index === 0}
-                guideLink={{ to: accommodationEditorial[id].path as LinkProps["to"], label: guideLabels[id] }}
+                comingSoon={comingSoon}
+                {...(!comingSoon ? { guideLink: { to: accommodationEditorial[id].path as LinkProps["to"], label: guideLabels[id] } } : {})}
               />
             </li>;
           })}
