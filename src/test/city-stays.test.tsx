@@ -50,12 +50,8 @@ describe.each([
       expect(card.querySelector("img")).toHaveClass("aspect-[16/10]", "object-cover");
       expect(card.querySelector("img")).toHaveAttribute("width", "755");
       expect(within(card).getByRole("link", { name: `Explore ${area.name}: area guide and hotel recommendations` })).toHaveAttribute("href", area.path);
-      if (g.id === "jerusalem") {
-        expect(within(card).getByRole("link", { name: `Explore ${area.name}: area guide and hotel recommendations` })).toHaveTextContent(/(?:Discover|Browse|Explore|Find)/);
-        expect(within(card).queryByText("Explore Area & Hotels")).toBeNull();
-      } else {
-        expect(within(card).getByText("Explore Area & Hotels")).toBeInTheDocument();
-      }
+      expect(within(card).getByRole("link", { name: `Explore ${area.name}: area guide and hotel recommendations` })).toHaveTextContent(/(?:Discover|Browse|Explore|Find)/);
+      expect(within(card).queryByText("Explore Area & Hotels")).toBeNull();
       expect(card.textContent).not.toMatch(/Area guide & [0-9]+ hotel picks/);
     }
     expect(screen.getByRole("heading", { name: `Compare areas in ${g.city}` })).toBeInTheDocument();
@@ -78,24 +74,24 @@ describe.each([
       expect(screen.getByRole("heading", { level: 1 })).toHaveTextContent(area.title);
       expect(container.querySelectorAll("main")).toHaveLength(1);
       expect(container.querySelector("main main")).toBeNull();
-      expect(container.querySelector(g.id === "jerusalem" ? "#book" : "#location")!.compareDocumentPosition(container.querySelector(g.id === "jerusalem" ? "#location" : "#book")!)).toBe(Node.DOCUMENT_POSITION_FOLLOWING);
+      expect(container.querySelector("#book")!.compareDocumentPosition(container.querySelector("#location")!)).toBe(Node.DOCUMENT_POSITION_FOLLOWING);
       const cards = screen.getAllByTestId("hotel-recommendation");
       expect(cards).toHaveLength(4);
-      expect(container.querySelector("#book [data-testid='neighborhood-hotel-grid']")).toHaveClass(g.id === "jerusalem" ? "lg:grid-cols-2" : "sm:grid-cols-2");
+      expect(container.querySelector("#book [data-testid='neighborhood-hotel-grid']")).toHaveClass("lg:grid-cols-2");
       const imageUrls = cards.map((card) => within(card).getByTestId("hotel-illustration").getAttribute("src"));
       expect(new Set(imageUrls).size).toBe(4);
       expect(screen.getByTestId("neighborhood-hotel-photo-credits")).toBeInTheDocument();
       expect(within(container.querySelector("#book") as HTMLElement).getByRole("heading", {
-        name: g.id === "jerusalem" ? `Hotels in ${area.shortName}` : `My top picks in ${area.name}`,
+        name: `Hotels in ${area.shortName}`,
       })).toBeInTheDocument();
-      if (g.id === "jerusalem") {
+      {
         const hotelSection = container.querySelector("#book") as HTMLElement;
-        expect(within(hotelSection).getAllByTestId("jerusalem-hotel-booking-cta")).toHaveLength(4);
+        if (g.id === "jerusalem") expect(within(hotelSection).getAllByTestId("jerusalem-hotel-booking-cta")).toHaveLength(4);
         expect(within(hotelSection).getAllByRole("link", { name: /^(Check rooms|View hotel)/ })).toHaveLength(4);
         expect(within(hotelSection).queryByText(/Check rooms on Expedia|View hotel on Expedia/)).not.toBeInTheDocument();
-        expect(within(container.querySelector("#other-areas") as HTMLElement).getAllByRole("link")).toHaveLength(6);
-        expect(within(container.querySelector("#other-areas") as HTMLElement).getByRole("link", { name: /All Jerusalem neighborhoods/ })).toHaveAttribute("href", g.path);
-        expect(screen.getByRole("link", { name: /Read my guide to where to stay in Jerusalem/ })).toHaveAttribute("href", "/travel-blog/where-to-stay-in-jerusalem/");
+        expect(within(container.querySelector("#other-areas") as HTMLElement).getAllByRole("link")).toHaveLength(areas.length);
+        expect(within(container.querySelector("#other-areas") as HTMLElement).getByRole("link", { name: /All .* neighborhoods/ })).toHaveAttribute("href", g.path);
+        expect(screen.getByRole("link", { name: /Read my guide to where to stay in/ })).toHaveAttribute("href", g.id === "jerusalem" ? "/travel-blog/where-to-stay-in-jerusalem/" : "/travel-blog/where-to-stay-in-tel-aviv/");
         expect(container.querySelector("#book")!.compareDocumentPosition(container.querySelector("#overview")!) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
         expect(container.querySelector("#overview")!.compareDocumentPosition(container.querySelector("#location")!) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
         expect(container.querySelector("#location")!.compareDocumentPosition(container.querySelector("#checklist")!) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
