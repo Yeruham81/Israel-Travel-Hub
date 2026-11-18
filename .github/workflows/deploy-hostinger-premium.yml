@@ -729,6 +729,7 @@ jobs:
           for (const required of [
             "Mount Zion: What to See", "Dormition Abbey", "David", "Gallicantu",
             "Cenacle", "Zion Gate", "Oskar Schindler", "Chamber of the Holocaust",
+            "detailed illustrated Mount Zion map", "Monday and Thursday departures generally substitute Yad Vashem",
             'data-testid="mount-zion-hours-fees"',
             'data-testid="mount-zion-accessibility"',
             'data-testid="mount-zion-access-points"',
@@ -759,7 +760,7 @@ jobs:
           console.log("Mount Zion public page, seven highlights, six related cards and canonical verified.");
           NODE
           rm -f "$zion_html"
-          for picture in cenacle-upper-room.webp dormition-abbey-and-bell-tower.webp st-peter-in-gallicantu.webp; do
+          for picture in cenacle-upper-room.webp davids-tomb.webp dormition-abbey-and-bell-tower.webp st-peter-in-gallicantu.webp zion-gate.webp oskar-schindler-grave.webp chamber-of-the-holocaust.webp; do
             data="$(mktemp)"
             curl --http1.1 --retry 2 --retry-all-errors --max-time 30 -fsSL -o "$data" "$VITE_CANONICAL_ORIGIN/images/jerusalem/mount-zion/$picture"
             node - "$data" "$picture" <<'NODE'
