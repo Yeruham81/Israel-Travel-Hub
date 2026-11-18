@@ -14,6 +14,11 @@ import { guideContactCopy } from "@/lib/guide-contact";
 import jerusalemHero from "@/assets/guides/2026-11/where-to-stay-jerusalem-drive.webp";
 import telAvivHero from "@/assets/guides/2026-11/where-to-stay-tel-aviv-drive.webp";
 import oldCityStoneLane from "@/assets/guides/2026-11/jerusalem-jewish-quarter-stone-lane.webp";
+import downtownCard from "@/assets/travel-blog-hub/downtown-944eb9d46b-420.webp";
+import oldCityCard from "@/assets/attractions-hub/card-old-city-jerusalem-420.webp";
+import marketCard from "@/assets/travel-blog-hub/mahane-yehuda-c53a05ac52-420.webp";
+import eastJerusalemCard from "@/assets/jerusalem/old-city.webp";
+import colonyCard from "@/assets/travel-blog-hub/colony-35429f7d31-420.webp";
 
 /**
  * A travel-blog neighbourhood-choice article, deliberately separate from the
@@ -28,6 +33,15 @@ const sections = [
 ] as const;
 
 const jerusalemSections = sections.filter(([id]) => id !== "compare");
+
+const jerusalemAreaCardPhotos: Record<string, { src: string; alt: string }> = {
+  downtown: { src: downtownCard, alt: "Streets and historic buildings in Downtown Jerusalem" },
+  mamilla: { src: "/images/attractions/old-jerusalem-tower-of-david.webp", alt: "Tower of David beside Jerusalem's Jaffa Gate" },
+  "old-city": { src: oldCityCard, alt: "Jerusalem's Old City and historic stone architecture" },
+  "mahane-yehuda": { src: marketCard, alt: "Mahane Yehuda Market in Jerusalem" },
+  "east-jerusalem": { src: eastJerusalemCard, alt: "Historic Jerusalem buildings close to the Old City" },
+  "german-colony": { src: colonyCard, alt: "Streets and stone buildings of Jerusalem's German Colony" },
+};
 
 const decisionNotes = {
   jerusalem: {
@@ -171,7 +185,7 @@ export function CityNeighborhoodEditorial({ guide }: { guide: CityStayGuide }) {
             {areas.map((area) => <li key={area.id} className="min-w-0">
               <a href={`#area-${area.id}`} className="group flex h-full flex-col overflow-hidden rounded-2xl border bg-card shadow-sm transition-all hover:-translate-y-0.5 hover:border-primary/60 hover:shadow-md focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
                 <div className="overflow-hidden bg-muted">
-                  <img src={area.photo.src} alt={area.photo.alt} width={600} height={375} loading="lazy" decoding="async" className="aspect-[16/10] w-full object-cover transition-transform duration-300 group-hover:scale-[1.035]" />
+                  <img src={(jerusalemAreaCardPhotos[area.id] ?? area.photo).src} alt={(jerusalemAreaCardPhotos[area.id] ?? area.photo).alt} width={600} height={375} loading="lazy" decoding="async" className="aspect-[16/10] w-full object-cover transition-transform duration-300 group-hover:scale-[1.035]" />
                 </div>
                 <span className="flex flex-1 flex-col p-3 sm:p-4">
                   <span className="text-sm font-bold leading-snug text-foreground group-hover:text-primary sm:text-lg">{area.shortName}</span>
