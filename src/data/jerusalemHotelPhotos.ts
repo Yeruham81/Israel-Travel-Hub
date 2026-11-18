@@ -6,11 +6,11 @@
 import type { HotelIllustration } from "@/data/telAvivHotelPhotos";
 import jerusalemOldCity from "@/assets/home/jerusalem-old-city.webp";
 import jerusalemLightRail from "@/assets/guides/2026-11/jerusalem-light-rail.webp";
-import eastJerusalem from "@/assets/jerusalem/east-jerusalem.webp";
-import germanColony from "@/assets/jerusalem/german-colony.webp";
-import mamilla from "@/assets/jerusalem/mamilla.webp";
-import mahaneYehuda from "@/assets/jerusalem/mahane-yehuda.webp";
-import oldCity from "@/assets/jerusalem/old-city.webp";
+import jaffaGate from "@/assets/home/hero-refresh-jerusalem-jaffa-gate-v4-medium.webp";
+import germanColonyStreets from "@/assets/travel-blog-hub/colony-35429f7d31-420.webp";
+import foodMarket from "@/assets/tours-hub/food-markets.webp";
+
+
 
 const neighbourhood = (src: string, alt: string): HotelIllustration => ({
   src,
@@ -22,7 +22,7 @@ const neighbourhood = (src: string, alt: string): HotelIllustration => ({
 export const jerusalemHotelPhotos: Record<string, HotelIllustration> = {
   "herbert-samuel": neighbourhood(jerusalemLightRail, "Light rail and street scene in central Jerusalem"),
   "arthur": neighbourhood("/images/city-stays/jerusalem-downtown.webp", "Downtown Jerusalem neighbourhood"),
-  "mamilla": neighbourhood(mamilla, "Mamilla and the historic city surroundings"),
+  "mamilla": neighbourhood(jaffaGate, "Jaffa Gate and the historic walls near Mamilla"),
   "king-david": neighbourhood("/images/city-stays/jerusalem-mamilla.webp", "Mamilla and King David Street area of Jerusalem"),
   "new-imperial": {
     src: jerusalemOldCity,
@@ -31,11 +31,11 @@ export const jerusalemHotelPhotos: Record<string, HotelIllustration> = {
     credit: "Berthold Werner · Public domain",
     sourceUrl: "https://commons.wikimedia.org/wiki/File:Jerusalem_Dome_of_the_rock_BW_14.JPG",
   },
-  "sephardic-house": neighbourhood(oldCity, "Stone buildings and narrow streets of Jerusalem Old City"),
+  "sephardic-house": neighbourhood("/images/attractions/old-jerusalem-cardo.webp", "Ancient Cardo stonework in Jerusalem’s Jewish Quarter"),
   "bezalel": neighbourhood("/images/hotel-cards/bezalel.webp", "Nachlaot neighborhood streets in central Jerusalem"),
-  "market-courtyard": neighbourhood(mahaneYehuda, "Market surroundings in Jerusalem"),
-  "american-colony": neighbourhood(eastJerusalem, "Jerusalem's eastern districts"),
+  "market-courtyard": neighbourhood(foodMarket, "Food stalls and market atmosphere in Jerusalem"),
+  "american-colony": neighbourhood("/images/attractions/old-jerusalem-damascus-gate.webp", "Damascus Gate and northern Old City surroundings"),
   "jerusalem-hotel": neighbourhood("/images/hotels/jerusalem-night.webp", "Jerusalem skyline at night"),
-  "orient": neighbourhood(germanColony, "Jerusalem's German Colony neighbourhood"),
+  "orient": neighbourhood(germanColonyStreets, "Street scene in Jerusalem’s German Colony"),
   "rafael-residence": neighbourhood("/images/jerusalem/first-station.webp", "Historic First Station area of Jerusalem near Baka"),
 };
