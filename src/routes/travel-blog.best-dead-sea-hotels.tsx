@@ -1,9 +1,10 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { HotelDestinationPage } from "@/components/HotelDestinationPage";
-import { deadSeaStayGuide as guide } from "@/data/content";
-import { hotelGuideMeta } from "@/lib/landing-schema";
+import { StayEditorialGuidePage } from "@/components/StayEditorialGuidePage";
+import { deadSeaStayGuide } from "@/data/content";
+import { hotelEditorialMeta } from "@/lib/hotel-editorial-meta";
 
+const g = deadSeaStayGuide;
 export const Route = createFileRoute("/travel-blog/best-dead-sea-hotels")({
-  head: () => hotelGuideMeta(guide, guide.name, guide.photo.src),
-  component: () => <HotelDestinationPage guide={guide} />,
+ head: () => hotelEditorialMeta(g, "deadsea", g.photo.src),
+ component: () => <StayEditorialGuidePage guide={g} id="deadsea" />,
 });

@@ -103,7 +103,7 @@ export interface NeighborhoodStayGuide {
 export const jerusalemAreaGuides: NeighborhoodStayGuide[] = [
   {
     id: "downtown", cityId: "jerusalem", name: "Downtown Jerusalem", shortName: "Downtown",
-    path: "/jerusalem/downtown-hotels/",
+    path: "/accommodation/jerusalem/downtown-hotels/",
     title: "Downtown Jerusalem hotels: best area for first-time visitors",
     metaDescription: "Stay near Jaffa Road, Zion Square and Jerusalem's light rail. Compare Downtown hotels, Old City walking routes and street-noise tradeoffs.",
     summary: "Downtown puts Jaffa Road, the light rail and evening cafés between the Old City and Mahane Yehuda. Some pedestrian streets require a short walk from your taxi drop-off.",
@@ -135,7 +135,7 @@ export const jerusalemAreaGuides: NeighborhoodStayGuide[] = [
   },
   {
     id: "mamilla", cityId: "jerusalem", name: "Mamilla & King David Street", shortName: "Mamilla & King David",
-    path: "/jerusalem/mamilla-king-david-hotels/",
+    path: "/accommodation/jerusalem/mamilla-king-david-hotels/",
     title: "Mamilla & King David Street hotels near Jerusalem Old City",
     metaDescription: "Compare luxury hotels near Jerusalem's Jaffa Gate. Discover Mamilla and King David Street views, Old City access and luggage-arrival tips.",
     summary: "Mamilla is close to Jaffa Gate and major luxury hotels; King David Street extends farther south, so the exact property changes the walk to the Old City.",
@@ -167,7 +167,7 @@ export const jerusalemAreaGuides: NeighborhoodStayGuide[] = [
   },
   {
     id: "old-city", cityId: "jerusalem", name: "Jerusalem's Old City", shortName: "Old City",
-    path: "/jerusalem/old-city-hotels/",
+    path: "/accommodation/jerusalem/old-city-hotels/",
     title: "Hotels in Jerusalem's Old City: inside the walls or outside?",
     metaDescription: "Choose an Old City stay: compare historic quarters, hotel locations, gate access, steps and luggage routes inside Jerusalem's walls.",
     summary: "Old City guesthouses put historic sites close by, but stairs, uneven lanes and restrictions on vehicle access make your nearest gate and luggage route essential.",
@@ -199,7 +199,7 @@ export const jerusalemAreaGuides: NeighborhoodStayGuide[] = [
   },
   {
     id: "mahane-yehuda", cityId: "jerusalem", name: "Mahane Yehuda & Nachlaot", shortName: "Mahane Yehuda & Nachlaot",
-    path: "/jerusalem/mahane-yehuda-nachlaot-hotels/",
+    path: "/accommodation/jerusalem/mahane-yehuda-nachlaot-hotels/",
     title: "Mahane Yehuda & Nachlaot hotels near Jerusalem Market",
     metaDescription: "Stay by Mahane Yehuda Market or in Nachlaot. Compare food and nightlife, quiet lanes, hotel locations and Friday-evening arrangements.",
     summary: "Rooms beside Mahane Yehuda Market can be affected by morning deliveries and late bars; residential lanes inside Nachlaot provide a different setting.",
@@ -231,7 +231,7 @@ export const jerusalemAreaGuides: NeighborhoodStayGuide[] = [
   },
   {
     id: "east-jerusalem", cityId: "jerusalem", name: "East Jerusalem", shortName: "East Jerusalem",
-    path: "/jerusalem/east-jerusalem-hotels/",
+    path: "/accommodation/jerusalem/east-jerusalem-hotels/",
     title: "East Jerusalem hotels: Damascus Gate & Nablus Road stays",
     metaDescription: "Compare hotels near Damascus Gate and Nablus Road, including heritage stays, Old City entrances and practical airport drop-offs.",
     summary: "This guide covers the Nablus Road and Damascus Gate hotel district, not all of East Jerusalem. Check the exact address when choosing access to the northern Old City gates.",
@@ -263,7 +263,7 @@ export const jerusalemAreaGuides: NeighborhoodStayGuide[] = [
   },
   {
     id: "german-colony", cityId: "jerusalem", name: "German Colony & Baka", shortName: "German Colony & Baka",
-    path: "/jerusalem/german-colony-baka-hotels/",
+    path: "/accommodation/jerusalem/german-colony-baka-hotels/",
     title: "German Colony & Baka hotels: quieter Jerusalem stays",
     metaDescription: "Explore Emek Refaim cafés and Baka's residential streets. Compare a quieter Jerusalem hotel base, accommodation styles and Old City connections.",
     summary: "The German Colony's Emek Refaim cafés and Baka's residential streets suit longer stays, but southern Baka adds more travel to Old City sights.",
@@ -298,7 +298,7 @@ export const jerusalemAreaGuides: NeighborhoodStayGuide[] = [
 export const telAvivAreaGuides: NeighborhoodStayGuide[] = [
   {
     id: "telaviv-beachfront", cityId: "telaviv", name: "Tel Aviv Beachfront", shortName: "Beachfront",
-    path: "/tel-aviv/beachfront-hotels/",
+    path: "/accommodation/tel-aviv/beachfront-hotels/",
     title: "Tel Aviv beachfront hotels: Gordon & Frishman Beach area",
     metaDescription: "Compare beachfront stays near Gordon and Frishman beaches, the promenade and cafés. Check sea-view room types, street noise and access.",
     summary: "Gordon and Frishman beaches are near large HaYarkon Street hotels and smaller inland properties. A seaside address does not guarantee a sea-view room.",
@@ -330,7 +330,7 @@ export const telAvivAreaGuides: NeighborhoodStayGuide[] = [
   },
   {
     id: "telaviv-dizengoff", cityId: "telaviv", name: "Dizengoff Square & City Center", shortName: "Dizengoff & City Center",
-    path: "/tel-aviv/dizengoff-city-center-hotels/",
+    path: "/accommodation/tel-aviv/dizengoff-city-center-hotels/",
     title: "Dizengoff & Tel Aviv city center hotels: car-free stays",
     metaDescription: "Stay by Dizengoff Square, the White City and central cafés. Compare boutique hotel options, beach walks and transport without a car.",
     summary: "Dizengoff Square has central cafés, boutiques and city walks; the sea is farther west. A hotel farther along Dizengoff Street may be well away from the square.",
@@ -362,7 +362,7 @@ export const telAvivAreaGuides: NeighborhoodStayGuide[] = [
   },
   {
     id: "telaviv-old-north", cityId: "telaviv", name: "Old North & Tel Aviv Port", shortName: "Old North & Port",
-    path: "/tel-aviv/old-north-port-hotels/",
+    path: "/accommodation/tel-aviv/old-north-port-hotels/",
     title: "Old North & Tel Aviv Port hotels: family and beach stays",
     metaDescription: "Compare hotels near Tel Aviv Port, northern beaches and Yarkon Park. Check family priorities, quieter streets and distance to the center.",
     summary: "The Old North combines residential streets, northern beaches and the port, but hotels near the busy waterfront feel different from quiet side streets.",
@@ -394,7 +394,7 @@ export const telAvivAreaGuides: NeighborhoodStayGuide[] = [
   },
   {
     id: "telaviv-neve-tzedek", cityId: "telaviv", name: "Neve Tzedek & Surroundings", shortName: "Neve Tzedek",
-    path: "/tel-aviv/neve-tzedek-hotels/",
+    path: "/accommodation/tel-aviv/neve-tzedek-hotels/",
     title: "Neve Tzedek hotels: boutique stays in historic Tel Aviv",
     metaDescription: "Explore boutique hotels and apartments around Shabazi Street. Compare quiet Neve Tzedek lanes, beach walks and access in heritage buildings.",
     summary: "Neve Tzedek's historic core is low-rise and walkable; properties listed on Lilienblum or Herzl can be on its busier edges rather than within the lanes.",
@@ -426,7 +426,7 @@ export const telAvivAreaGuides: NeighborhoodStayGuide[] = [
   },
   {
     id: "telaviv-jaffa", cityId: "telaviv", name: "Jaffa: Old City & Flea Market", shortName: "Jaffa",
-    path: "/tel-aviv/jaffa-hotels/",
+    path: "/accommodation/tel-aviv/jaffa-hotels/",
     title: "Jaffa hotels: Old Jaffa or the flea market area?",
     metaDescription: "Where to stay in Jaffa: compare Old Jaffa's historic lanes with the flea-market district, beach access and luggage drop-off points.",
     summary: "Old Jaffa's historic hill brings slopes and stone lanes; the flea-market area puts evening cafés closer but may be noisier. The two are distinct hotel bases.",
@@ -458,7 +458,7 @@ export const telAvivAreaGuides: NeighborhoodStayGuide[] = [
   },
   {
     id: "telaviv-florentin", cityId: "telaviv", name: "Florentin & Levinsky Market", shortName: "Florentin",
-    path: "/tel-aviv/florentin-hotels/",
+    path: "/accommodation/tel-aviv/florentin-hotels/",
     title: "Florentin hotels: nightlife, street art & Levinsky Market",
     metaDescription: "Stay near Florentin's street art, cafés and Levinsky Market. Compare small hotels and the tradeoffs of lively streets and late check-in.",
     summary: "Street art, neighborhood bars and Levinsky Market suit visitors who enjoy an active, less polished city base. Small hotels and independent stays are the main accommodation style.",
@@ -490,7 +490,7 @@ export const telAvivAreaGuides: NeighborhoodStayGuide[] = [
   },
   {
     id: "telaviv-kerem", cityId: "telaviv", name: "Kerem HaTeimanim & Carmel Market", shortName: "Kerem HaTeimanim",
-    path: "/tel-aviv/kerem-hateimanim-hotels/",
+    path: "/accommodation/tel-aviv/kerem-hateimanim-hotels/",
     title: "Kerem HaTeimanim hotels: Carmel Market and the beach",
     metaDescription: "Explore Tel Aviv's Yemenite Quarter near Carmel Market and the beach. Compare hotel location, market noise and luggage access.",
     summary: "Kerem HaTeimanim's residential lanes sit beside Carmel Market. Market-edge and Allenby listings can mean busier mornings and nights than the quarter's interior.",
@@ -522,7 +522,7 @@ export const telAvivAreaGuides: NeighborhoodStayGuide[] = [
   },
   {
     id: "telaviv-rothschild", cityId: "telaviv", name: "Rothschild Boulevard & White City", shortName: "Rothschild Boulevard",
-    path: "/tel-aviv/rothschild-boulevard-hotels/",
+    path: "/accommodation/tel-aviv/rothschild-boulevard-hotels/",
     title: "Rothschild Boulevard hotels: Tel Aviv White City stays",
     metaDescription: "Compare hotels by Rothschild Boulevard for Bauhaus streets, cafés, nightlife and a central city base. Check room noise and booking terms.",
     summary: "Rothschild's southern end connects toward Neve Tzedek and Florentin; its northern end is nearer Habima. Both are inland, with different walks to the coast.",
@@ -567,8 +567,8 @@ export const cityStayGuides: Record<CityStayGuide["id"], CityStayGuide> = {
       { areaId: "mamilla", label: "A little more luxury", description: "Landmark hotels near the Old City" },
       { areaId: "german-colony", label: "A slower stay", description: "Neighborhood cafés and residential streets" },
     ],
-    path: "/travel-blog/where-to-stay-in-jerusalem/",
-    title: "Where to stay in Jerusalem: areas and hotel booking tips",
+    path: "/accommodation/jerusalem/",
+    title: "Jerusalem hotels: browse by neighborhood",
     metaDescription: "Where to stay in Jerusalem: compare Downtown, Mamilla, the Old City and quieter areas for sightseeing, hotel choice and luggage access.",
     intro: "Compare six Jerusalem hotel areas by their actual access to Old City gates, transport, restaurants and taxi drop-offs—from central Jaffa Road to residential Baka.",
     overview: [
@@ -609,8 +609,8 @@ export const cityStayGuides: Record<CityStayGuide["id"], CityStayGuide> = {
       { areaId: "telaviv-dizengoff", label: "Cafés & city life", description: "Boutique hotels around Dizengoff Square" },
       { areaId: "telaviv-jaffa", label: "A historic stay", description: "Old Jaffa, the port and flea-market evenings" },
     ],
-    path: "/travel-blog/where-to-stay-in-tel-aviv/",
-    title: "Where to stay in Tel Aviv: beachfront, Jaffa and city areas",
+    path: "/accommodation/tel-aviv/",
+    title: "Tel Aviv hotels: browse by neighborhood",
     metaDescription: "Where to stay in Tel Aviv: compare beachfront hotels, Dizengoff, Jaffa and quieter areas for beach access, nightlife and arrival.",
     intro: "Eight Tel Aviv hotel districts offer different tradeoffs: beachfront access, central walking routes, southern markets, Jaffa's historic streets and nightlife.",
     overview: [
@@ -644,7 +644,7 @@ export const cityStayGuides: Record<CityStayGuide["id"], CityStayGuide> = {
   tiberias: {
     id: "tiberias",
     city: "Tiberias",
-    path: "/travel-blog/best-hotels-in-tiberias/",
+    path: "/accommodation/tiberias/",
     title: "Hotels in Tiberias & the Sea of Galilee: where to stay",
     metaDescription: "Where to stay in Tiberias and around the Sea of Galilee: lakefront, hillside and countryside options, with a practical booking checklist.",
     intro: "Tiberias is the main town on the Sea of Galilee and a base for Christian sites, the Golan and northern Israel. Choose between the walkable lakefront, quieter hillside views or countryside stays around the lake.",
@@ -756,8 +756,8 @@ export const deadSeaPhotos = {
 } satisfies Record<string, StayGuidePhoto>;
 
 export const deadSeaStayGuide: HotelStayDestination = {
-  id: "deadsea", name: "Dead Sea", path: "/travel-blog/best-dead-sea-hotels/",
-  title: "Best Dead Sea hotels in Israel: spa, family & luxury stays",
+  id: "deadsea", name: "Dead Sea", path: "/accommodation/dead-sea/",
+  title: "Dead Sea hotels: spa, family & resort stays",
   metaDescription: "Compare Dead Sea hotels in Ein Bokek, Neve Zohar and Ein Gedi: spa or family resorts, beach access, age policies and room inclusions.",
   intro: "Ein Bokek resort hotels, the southern district and inland Ein Gedi stays are distinct choices. Beach access, mineral pools, children's facilities and spa rules differ by property.",
   reviewedAt: "2026-10-17", photo: deadSeaPhotos.beach,
@@ -783,8 +783,8 @@ export const deadSeaStayGuide: HotelStayDestination = {
   ],
   groups: [
     { id: "luxury", title: "Luxury & quieter resort stays", intro: "Choose between a smaller luxury format, a substantial beachfront spa resort and a low-rise design hotel. Check minimum guest ages and the exact room category before choosing a special stay.", hotelIds: ["ds-kayma", "ds-herods", "ds-milos"], photo: deadSeaPhotos.landscape, browsePageId: "stay-deadsea-luxury-browse" },
-    { id: "spa", title: "Spa-focused hotels", intro: "Nevo and Oasis offer different wellness breaks: a broad full-service resort versus an age-restricted spa setting. The detailed guide also compares Herods, Milos and Noga by facilities, access and booking conditions.", hotelIds: ["ds-nevo", "ds-oasis"], photo: deadSeaPhotos.sunbeds, guidePath: "/dead-sea/spa-hotels/", guideLabel: "Compare Dead Sea spa hotels" },
-    { id: "family", title: "Hotels for families with children", intro: "Compare an all-inclusive resort with a water park against a central beachfront hotel with a choice of meal plans. For more options, the family guide also covers Noga and Leonardo Plaza and the questions to ask for your children's ages.", hotelIds: ["ds-leonardo-club", "ds-vert"], photo: deadSeaPhotos.pool, guidePath: "/dead-sea/family-hotels/", guideLabel: "Compare Dead Sea family hotels" },
+    { id: "spa", title: "Spa-focused hotels", intro: "Nevo and Oasis offer different wellness breaks: a broad full-service resort versus an age-restricted spa setting. The detailed guide also compares Herods, Milos and Noga by facilities, access and booking conditions.", hotelIds: ["ds-nevo", "ds-oasis"], photo: deadSeaPhotos.sunbeds, guidePath: "/accommodation/dead-sea/spa-hotels/", guideLabel: "Compare Dead Sea spa hotels" },
+    { id: "family", title: "Hotels for families with children", intro: "Compare an all-inclusive resort with a water park against a central beachfront hotel with a choice of meal plans. For more options, the family guide also covers Noga and Leonardo Plaza and the questions to ask for your children's ages.", hotelIds: ["ds-leonardo-club", "ds-vert"], photo: deadSeaPhotos.pool, guidePath: "/accommodation/dead-sea/family-hotels/", guideLabel: "Compare Dead Sea family hotels" },
     { id: "value", title: "Value & practical resort alternatives", intro: "Value depends on the total offer, not a permanent 'cheap' label. Compare Noga's Ein Bokek setting with Leonardo Plaza's southern location, room options and separate route to the beach.", hotelIds: ["ds-noga", "ds-leonardo-plaza"], photo: deadSeaPhotos.beach, browsePageId: "stay-deadsea-value-browse" },
     { id: "ein-gedi", title: "Nature-focused stays near Ein Gedi", intro: "These two alternatives suit a different trip from a beachfront resort holiday. Ein Gedi Hotel adds gardens and a spa; the HI hostel offers a simpler base near the nature-reserve area. Check current access to the places you plan to visit.", hotelIds: ["ds-ein-gedi", "ds-hi-ein-gedi"], photo: deadSeaPhotos.einGedi, browsePageId: "stay-deadsea-ein-gedi-browse" },
   ],
@@ -846,8 +846,8 @@ export const tiberiasStayGuide: HotelStayDestination = {
     "If you will drive around the Galilee, compare parking availability, charges and access at the hotel. Without a car, plan your northern sightseeing through the tours or transport pages and check date-specific services, especially around Shabbat and holidays. Book suitable child seats when arranging family transport.",
   ],
   groups: [
-    { id: "luxury", title: "Luxury & couples' stays", intro: "Compare a contemporary boutique hotel, a luxury beach hotel and a heritage property. Their guest ages and relationship to the lake differ, so choose the setting before paying for a particular room category.", hotelIds: ["tib-u-boutique", "tib-galei-kinneret", "tib-scots"], photo: tiberiasPhotos.heritage, guidePath: "/tiberias/luxury-hotels/", guideLabel: "Compare Tiberias luxury & couples' hotels" },
-    { id: "family", title: "Family hotels & water activities", intro: "Gai Beach suits a holiday built around the beach and water park. Leonardo Club is a central activity hotel with a meal-plan notice to check. The full family guide also includes Caesar Premier for a promenade-based stay.", hotelIds: ["tib-gai-beach", "tib-leonardo-club"], photo: tiberiasPhotos.sunrise, guidePath: "/tiberias/family-hotels/", guideLabel: "Compare Tiberias family hotels" },
+    { id: "luxury", title: "Luxury & couples' stays", intro: "Compare a contemporary boutique hotel, a luxury beach hotel and a heritage property. Their guest ages and relationship to the lake differ, so choose the setting before paying for a particular room category.", hotelIds: ["tib-u-boutique", "tib-galei-kinneret", "tib-scots"], photo: tiberiasPhotos.heritage, guidePath: "/accommodation/tiberias/luxury-hotels/", guideLabel: "Compare Tiberias luxury & couples' hotels" },
+    { id: "family", title: "Family hotels & water activities", intro: "Gai Beach suits a holiday built around the beach and water park. Leonardo Club is a central activity hotel with a meal-plan notice to check. The full family guide also includes Caesar Premier for a promenade-based stay.", hotelIds: ["tib-gai-beach", "tib-leonardo-club"], photo: tiberiasPhotos.sunrise, guidePath: "/accommodation/tiberias/family-hotels/", guideLabel: "Compare Tiberias family hotels" },
     { id: "central", title: "Central hotels & a base for exploring", intro: "Compare a full-service promenade hotel, a hotel above the waterfront and a smaller property near downtown. Choose for the daily walking route and the facilities you will actually use between Galilee outings.", hotelIds: ["tib-caesar", "tib-sofia", "tib-emily"], photo: tiberiasPhotos.central, browsePageId: "stay-tiberias-central-browse" },
     { id: "budget", title: "Budget-minded & independent stays", intro: "Compare a smaller hotel with hostel-style accommodation, including private and shared rooms. Check the final price for the same dates and party, plus bathrooms, meals and arrival arrangements; neither format guarantees the lowest total.", hotelIds: ["tib-tiberia", "tib-hostel"], photo: tiberiasPhotos.waterfront, browsePageId: "stay-tiberias-budget-browse" },
   ],
@@ -872,7 +872,7 @@ export const tiberiasStayGuide: HotelStayDestination = {
 
 const tiberiasCategoryGuides: HotelCategoryGuide[] = [
   {
-    id: "family", destinationId: "tiberias", path: "/tiberias/family-hotels/", shortTitle: "Family hotels",
+    id: "family", destinationId: "tiberias", path: "/accommodation/tiberias/family-hotels/", shortTitle: "Family hotels",
     title: "Tiberias family hotels: pools, water parks and meal plans",
     metaDescription: "Compare family hotels in Tiberias with Sea of Galilee access, pools, water attractions and meal plans. Verify seasonal facilities and child ages.",
     summary: "Choose between a beach-and-water-park holiday, a central activity hotel and a promenade base. Compare three Tiberias family hotels by children's facilities, meal plans and the practical details that change the whole family total.",
@@ -913,7 +913,7 @@ const tiberiasCategoryGuides: HotelCategoryGuide[] = [
     sourceIds: [],
   },
   {
-    id: "luxury", destinationId: "tiberias", path: "/tiberias/luxury-hotels/", shortTitle: "Luxury & couples' hotels",
+    id: "luxury", destinationId: "tiberias", path: "/accommodation/tiberias/luxury-hotels/", shortTitle: "Luxury & couples' hotels",
     title: "Luxury hotels in Tiberias: Sea of Galilee spa and lake stays",
     metaDescription: "Compare luxury Tiberias hotels by lakeside access, spa facilities, heritage atmosphere and minimum guest ages. Confirm the room offer.",
     summary: "Compare three different luxury stays on the Sea of Galilee: contemporary boutique comfort, a beach-and-spa hotel and a historic waterfront setting. Choose the atmosphere, lake access and guest policy that fit your trip.",
@@ -964,7 +964,7 @@ export const haifaPhotos = {
 } satisfies Record<string, StayGuidePhoto>;
 
 export const haifaStayGuide: HotelStayDestination = {
-  id: "haifa", name: "Haifa", path: "/travel-blog/best-hotels-in-haifa/",
+  id: "haifa", name: "Haifa", path: "/accommodation/haifa/",
   title: "Best hotels in Haifa: where to stay from Carmel to the coast",
     metaDescription: "Where to stay in Haifa: compare German Colony boutique hotels, Mount Carmel views, beachside family stays and the transport tradeoffs.",
   intro: "Haifa's steep geography makes hotel location decisive: the German Colony, Mount Carmel and the southern beachfront require different daily transport and offer different experiences.",
@@ -990,8 +990,8 @@ export const haifaStayGuide: HotelStayDestination = {
   ],
   groups: [
     { id: "luxury", title: "Luxury hotels: German Colony or Carmel", intro: "Compare Botanica's contemporary design and age-restricted setting with Dan Carmel's larger hilltop hotel and family facilities. Choose between the neighborhood, the room's outlook and the leisure experience you want.", hotelIds: ["haifa-botanica", "haifa-dan-carmel"], photo: haifaPhotos.botanica },
-    { id: "boutique", title: "Boutique hotels & historic character", intro: "The Schumacher combines a preserved building and newer wing with an adults-only policy; The Colony Hotel offers a heritage address on Ben Gurion Boulevard. The detailed boutique guide also includes Botanica as a larger design-led alternative.", hotelIds: ["haifa-schumacher", "haifa-colony"], photo: haifaPhotos.colony, guidePath: "/haifa/boutique-hotels/", guideLabel: "Compare Haifa boutique hotels" },
-    { id: "family", title: "Hotels for families with children", intro: "Compare a heated indoor pool on the Carmel with a beachfront hotel and children's facilities. The dedicated family guide also covers Dan Carmel, room occupancy and the activities that are actually available on your travel dates.", hotelIds: ["haifa-crowne-plaza", "haifa-leonardo-plaza"], photo: haifaPhotos.leonardo, guidePath: "/haifa/family-hotels/", guideLabel: "Compare Haifa family hotels" },
+    { id: "boutique", title: "Boutique hotels & historic character", intro: "The Schumacher combines a preserved building and newer wing with an adults-only policy; The Colony Hotel offers a heritage address on Ben Gurion Boulevard. The detailed boutique guide also includes Botanica as a larger design-led alternative.", hotelIds: ["haifa-schumacher", "haifa-colony"], photo: haifaPhotos.colony, guidePath: "/accommodation/haifa/boutique-hotels/", guideLabel: "Compare Haifa boutique hotels" },
+    { id: "family", title: "Hotels for families with children", intro: "Compare a heated indoor pool on the Carmel with a beachfront hotel and children's facilities. The dedicated family guide also covers Dan Carmel, room occupancy and the activities that are actually available on your travel dates.", hotelIds: ["haifa-crowne-plaza", "haifa-leonardo-plaza"], photo: haifaPhotos.leonardo, guidePath: "/accommodation/haifa/family-hotels/", guideLabel: "Compare Haifa family hotels" },
     { id: "mid-range", title: "Practical city hotels & mid-range comparisons", intro: "Golden Crown is a lower-city base near the German Colony; Nof is a Carmel address with bay views. Compare the final room offer and your daily transport rather than expecting the same experience from hotels in a similar price bracket.", hotelIds: ["haifa-golden-crown", "haifa-nof"], photo: haifaPhotos.panorama },
     { id: "budget", title: "Budget-minded & independent stays", intro: "Port Inn is a downtown guesthouse comparison; Loui Talpiot adds a market-neighborhood location and room kitchenettes. Check the exact room and included services, with meals, bathrooms and arrival arrangements part of the decision.", hotelIds: ["haifa-port-inn", "haifa-loui-talpiot"], photo: haifaPhotos.panorama },
   ],
@@ -1017,7 +1017,7 @@ export const haifaStayGuide: HotelStayDestination = {
 
 const haifaCategoryGuides: HotelCategoryGuide[] = [
   {
-    id: "boutique", destinationId: "haifa", path: "/haifa/boutique-hotels/", shortTitle: "Boutique hotels",
+    id: "boutique", destinationId: "haifa", path: "/accommodation/haifa/boutique-hotels/", shortTitle: "Boutique hotels",
     title: "Haifa boutique hotels: German Colony and heritage stays",
     metaDescription: "Compare heritage and design hotels in Haifa's German Colony. Check adults-only policies, room views, building access and nearby restaurants.",
     summary: "Choose between restored historic buildings and a contemporary design-led hotel below the Bahá'í Gardens. Compare three German Colony stays by character, guest policy and the facilities that matter to your city break.",
@@ -1058,7 +1058,7 @@ const haifaCategoryGuides: HotelCategoryGuide[] = [
     sourceIds: ["haifa-botanica-facilities"],
   },
   {
-    id: "family", destinationId: "haifa", path: "/haifa/family-hotels/", shortTitle: "Family hotels",
+    id: "family", destinationId: "haifa", path: "/accommodation/haifa/family-hotels/", shortTitle: "Family hotels",
     title: "Haifa family hotels: Carmel pools or beachfront stays?",
     metaDescription: "Compare Haifa family hotels for beach access, Carmel Center pools, room capacity and children's activities. Check the location before booking.",
     summary: "Choose a beachfront family stay or a Carmel base with hotel pools and city outings. Compare three Haifa hotels by swimming arrangements, room layouts and the daily journeys you will make with children.",
@@ -1149,7 +1149,7 @@ export const hotelCategoryGuides: HotelCategoryGuide[] = [
   ...haifaCategoryGuides,
   ...tiberiasCategoryGuides,
   {
-    id: "spa", destinationId: "deadsea", path: "/dead-sea/spa-hotels/", shortTitle: "Spa hotels",
+    id: "spa", destinationId: "deadsea", path: "/accommodation/dead-sea/spa-hotels/", shortTitle: "Spa hotels",
     overviewTitle: "Choose the spa experience you want", detailNavLabel: "Spa access", checklistTitle: "Spa entry & guest ages",
     title: "Dead Sea spa hotels: pools, guest ages and inclusions",
     metaDescription: "Compare Israeli Dead Sea spa hotels by mineral pools, wellness facilities and beach access. Check guest-age limits and treatment extras.",
@@ -1191,7 +1191,7 @@ export const hotelCategoryGuides: HotelCategoryGuide[] = [
     sourceIds: ["ds-nevo-spa", "ds-noga-spa", "ds-herods-spa"],
   },
   {
-    id: "family", destinationId: "deadsea", path: "/dead-sea/family-hotels/", shortTitle: "Family hotels",
+    id: "family", destinationId: "deadsea", path: "/accommodation/dead-sea/family-hotels/", shortTitle: "Family hotels",
     overviewTitle: "Choose for your children's ages and your travel plans", detailNavLabel: "Meals & rooms", checklistTitle: "The room & children's facilities",
     title: "Dead Sea family hotels: pools, all-inclusive and beaches",
     metaDescription: "Compare family hotels at the Dead Sea for pools, slides, kids' clubs and meal plans. Check children’s ages, all-inclusive terms and beach routes.",

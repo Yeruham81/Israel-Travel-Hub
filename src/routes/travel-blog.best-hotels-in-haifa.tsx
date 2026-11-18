@@ -1,9 +1,10 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { HotelDestinationPage } from "@/components/HotelDestinationPage";
-import { haifaStayGuide as guide } from "@/data/content";
-import { hotelGuideMeta } from "@/lib/landing-schema";
+import { StayEditorialGuidePage } from "@/components/StayEditorialGuidePage";
+import { haifaStayGuide } from "@/data/content";
+import { hotelEditorialMeta } from "@/lib/hotel-editorial-meta";
 
+const g = haifaStayGuide;
 export const Route = createFileRoute("/travel-blog/best-hotels-in-haifa")({
-  head: () => hotelGuideMeta(guide, guide.name, guide.photo.src),
-  component: () => <HotelDestinationPage guide={guide} />,
+ head: () => hotelEditorialMeta(g, "haifa", g.photo.src),
+ component: () => <StayEditorialGuidePage guide={g} id="haifa" />,
 });

@@ -1,13 +1,10 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { HotelDestinationPage } from "@/components/HotelDestinationPage";
-import { tiberiasStayGuide as g } from "@/data/content";
-import { hotelGuideMeta } from "@/lib/landing-schema";
+import { StayEditorialGuidePage } from "@/components/StayEditorialGuidePage";
+import { tiberiasStayGuide } from "@/data/content";
+import { hotelEditorialMeta } from "@/lib/hotel-editorial-meta";
 
+const g = tiberiasStayGuide;
 export const Route = createFileRoute("/travel-blog/best-hotels-in-tiberias")({
-  head: () => hotelGuideMeta(g, g.name, g.photo.src),
-  component: StayTiberias,
+ head: () => hotelEditorialMeta(g, "tiberias", g.photo.src),
+ component: () => <StayEditorialGuidePage guide={g} id="tiberias" />,
 });
-
-function StayTiberias() {
-  return <HotelDestinationPage guide={g} />;
-}

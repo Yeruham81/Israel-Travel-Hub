@@ -37,11 +37,11 @@ export const serviceNav: NavItem[] = [
 export const serviceDomains: NavItem[] = serviceNav.filter((n) => n.to !== "/");
 
 export const hotelNav: NavItem[] = [
-  { label: "Hotels in Jerusalem", to: "/travel-blog/where-to-stay-in-jerusalem/" },
-  { label: "Hotels in Tel Aviv", to: "/travel-blog/where-to-stay-in-tel-aviv/" },
-  { label: "Hotels in Tiberias", to: "/travel-blog/best-hotels-in-tiberias/" },
-  { label: "Hotels in Haifa", to: "/travel-blog/best-hotels-in-haifa/" },
-  { label: "Dead Sea hotels", to: "/travel-blog/best-dead-sea-hotels/" },
+  { label: "Hotels in Jerusalem", to: "/accommodation/jerusalem/" },
+  { label: "Hotels in Tel Aviv", to: "/accommodation/tel-aviv/" },
+  { label: "Hotels in Tiberias", to: "/accommodation/tiberias/" },
+  { label: "Hotels in Haifa", to: "/accommodation/haifa/" },
+  { label: "Dead Sea hotels", to: "/accommodation/dead-sea/" },
 ];
 
 /** Migrated practical guides resolve inside this portal. */
@@ -149,6 +149,13 @@ export const allNavGroups: NavGroup[] = [
         { label: "How to get to Ein Bokek", to: "/travel-blog/how-to-get-from-ben-gurion-airport-to-ein-bokek/" },
       ] },
 
+      { label: "Where to stay guides", headingOnly: true, childrenLabel: "Accommodation planning guides", children: [
+        { label: "Where to stay in Jerusalem", to: "/travel-blog/where-to-stay-in-jerusalem/" },
+        { label: "Where to stay in Tel Aviv", to: "/travel-blog/where-to-stay-in-tel-aviv/" },
+        { label: "Best hotels in Haifa", to: "/travel-blog/best-hotels-in-haifa/" },
+        { label: "Best hotels in Tiberias", to: "/travel-blog/best-hotels-in-tiberias/" },
+        { label: "Dead Sea best hotels", to: "/travel-blog/best-dead-sea-hotels/" },
+      ] },
       { label: "Israel travel tips", to: travelGuidePaths.travelTips },
       { label: "Best time to visit Israel", to: travelGuidePaths.bestTime },
       { label: "Holidays & events", to: travelGuidePaths.calendar },

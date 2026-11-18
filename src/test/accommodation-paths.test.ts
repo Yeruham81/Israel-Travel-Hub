@@ -25,11 +25,11 @@ describe("Accommodation URL and deleted Destinations directory", () => {
 
   it("has one live Accommodation hub in the route tree", () => {
     const routeTree = readFileSync("src/routeTree.gen.ts", "utf8");
-    const source = readFileSync("src/routes/accommodation.tsx", "utf8");
-    expect(routeTree).toContain("AccommodationRoute");
+    const source = readFileSync("src/routes/accommodation.index.tsx", "utf8");
+    expect(routeTree).toMatch(/Accommodation(?:Index)?Route/);
     expect(routeTree).not.toMatch(/\bHotelsRoute\b/);
     expect(routeTree).not.toContain("DestinationsRoute");
-    expect(source).toContain('createFileRoute("/accommodation")');
+    expect(source).toContain('createFileRoute("/accommodation/")');
     expect(source).toContain('path: "/accommodation/"');
   });
 });
