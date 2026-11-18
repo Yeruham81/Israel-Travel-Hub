@@ -9,17 +9,17 @@ export const hotelSearchWidgets = [
   {
     id: "booking",
     title: "Search hotels with Booking.com",
-    src: "https://tpwgt.com/content?trs=406243&shmarker=622032.accommodation_hub_widget&locale=en-us&powered_by=false&campaign_id=84&promo_id=9240",
+    scriptUrl: "https://tpwgt.com/content?trs=406243&shmarker=622032.accommodation_hub_widget&locale=en-us&powered_by=false&campaign_id=84&promo_id=9240",
   },
   {
     id: "trip",
     title: "Search hotels with Trip.com",
-    src: "https://tpwgt.com/content?trs=406243&shmarker=622032.accommodation_hub_widget&lang=www&layout=S10391&powered_by=false&campaign_id=121&promo_id=4038",
+    scriptUrl: "https://tpwgt.com/content?trs=406243&shmarker=622032.accommodation_hub_widget&lang=www&layout=S10391&powered_by=false&campaign_id=121&promo_id=4038",
   },
   {
     id: "agoda",
     title: "Search hotels with Agoda",
-    src: "https://tpwgt.com/content?trs=406243&shmarker=622032.accommodation_hub_widget&locale=en&default_destination=Jerusalem%2C%20Israel&powered_by=false&primary_override=%235392F9&color_button=%235392F9&color_icons=%235392F9&dark=%23262626&color_border=%235392F9&color_focused=%2332a8dd&border_radius=5&no_labels=&plain=false&promo_id=8303&campaign_id=104",
+    scriptUrl: "https://tpwgt.com/content?trs=406243&shmarker=622032.accommodation_hub_widget&locale=en&default_destination=Jerusalem%2C%20Israel&powered_by=false&primary_override=%235392F9&color_button=%235392F9&color_icons=%235392F9&dark=%23262626&color_border=%235392F9&color_focused=%2332a8dd&border_radius=5&no_labels=&plain=false&promo_id=8303&campaign_id=104",
   },
 ] as const;
 
@@ -35,7 +35,7 @@ function HotelSearchWidget({ widget, visible }: {
     if (!visible || !mount) return;
 
     const script = document.createElement("script");
-    script.src = widget.src;
+    script.src = widget.scriptUrl;
     script.async = true;
     script.charset = "utf-8";
     script.onerror = () => setFailed(true);
@@ -46,7 +46,7 @@ function HotelSearchWidget({ widget, visible }: {
       script.onerror = null;
       mount.replaceChildren();
     };
-  }, [visible, widget.src]);
+  }, [visible, widget.scriptUrl]);
 
   return (
     <div className="min-w-0 rounded-2xl border bg-card p-4 sm:p-6" data-testid={`${widget.id}-hotel-search-widget`}>
