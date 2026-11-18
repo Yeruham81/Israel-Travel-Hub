@@ -65,12 +65,12 @@ describe("Accommodation booking hub",()=>{
   expect(neighborhoodGuidesForCity("telaviv")).toHaveLength(8);
   expect(hotelCategoryGuides).toHaveLength(6);
  });
- it("places three independent, commission-tagged search widgets below the FAQ", () => {
+ it("places two mobile-friendly, commission-tagged search widgets below the FAQ", () => {
   const { container } = page();
   const section = screen.getByTestId("hotel-search-widgets");
   expect(section).toHaveTextContent("Search hotels in Israel");
-  expect(hotelSearchWidgets.map((widget) => widget.id)).toEqual(["booking", "trip", "agoda"]);
-  expect(hotelSearchWidgets).toHaveLength(3);
+  expect(hotelSearchWidgets.map((widget) => widget.id)).toEqual(["agoda", "booking"]);
+  expect(hotelSearchWidgets).toHaveLength(2);
   const faqs = screen.getByRole("heading", { name: "Frequently asked questions" });
   expect(faqs.compareDocumentPosition(section) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
 
@@ -93,16 +93,15 @@ describe("Accommodation booking hub",()=>{
     expect(script?.charset).toBe("utf-8");
   }
 
-  expect(new URL(hotelSearchWidgets[0].scriptUrl).searchParams.get("campaign_id")).toBe("84");
-  expect(new URL(hotelSearchWidgets[0].scriptUrl).searchParams.get("promo_id")).toBe("9240");
-  expect(new URL(hotelSearchWidgets[1].scriptUrl).searchParams.get("campaign_id")).toBe("121");
-  expect(new URL(hotelSearchWidgets[1].scriptUrl).searchParams.get("promo_id")).toBe("4038");
-  const agoda = new URL(hotelSearchWidgets[2].scriptUrl);
+  expect(new URL(hotelSearchWidgets[1].scriptUrl).searchParams.get("campaign_id")).toBe("84");
+  expect(new URL(hotelSearchWidgets[1].scriptUrl).searchParams.get("promo_id")).toBe("9240");
+  const agoda = new URL(hotelSearchWidgets[0].scriptUrl);
   expect(agoda.searchParams.get("campaign_id")).toBe("104");
   expect(agoda.searchParams.get("promo_id")).toBe("8303");
   expect(agoda.searchParams.get("default_destination")).toBe("Jerusalem, Israel");
   expect(agoda.searchParams.get("primary_override")).toBe("#5392F9");
-  expect(container.querySelectorAll('[data-testid$="-hotel-search-widget"]')).toHaveLength(3);
+  expect(container.querySelectorAll('[data-testid$="-hotel-search-widget"]')).toHaveLength(2);
+  expect(screen.queryByTestId("trip-hotel-search-widget")).toBeNull();
  });
  it("keeps a canonical Accommodation hub and no live room price claims", async()=>{
   page();
