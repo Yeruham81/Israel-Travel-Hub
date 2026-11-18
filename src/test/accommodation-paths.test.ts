@@ -26,14 +26,14 @@ describe("Accommodation URL and deleted Destinations directory", () => {
   it("has no obsolete -hotels accommodation URLs in published application sources", () => {
     const stale: string[] = [];
     for (const file of sources("src")) {
-      if (file.includes("src/test/") || /\\.test\\.[jt]sx?$/.test(file) || file.endsWith("routeTree.gen.ts")) continue;
+      if (file.includes("src/test/") || /\.test\.[jt]sx?$/.test(file) || file.endsWith("routeTree.gen.ts")) continue;
       const content = readFileSync(file, "utf8");
-      if (/\\/accommodation\\/(?:jerusalem|tel-aviv|haifa|tiberias|dead-sea)\\/[a-z0-9-]+-hotels\\//.test(content)) {
+      if (/\/accommodation\/(?:jerusalem|tel-aviv|haifa|tiberias|dead-sea)\/[a-z0-9-]+-hotels\//.test(content)) {
         stale.push(file);
       }
     }
     expect(stale).toEqual([]);
-    expect(readdirSync("src/routes").filter(name => /^accommodation\\..+-hotels\\.tsx$/.test(name))).toEqual([]);
+    expect(readdirSync("src/routes").filter(name => /^accommodation\..+-hotels\.tsx$/.test(name))).toEqual([]);
   });
 
   it("has one live Accommodation hub in the route tree", () => {
