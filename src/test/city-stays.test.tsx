@@ -193,7 +193,7 @@ describe.each([
     const sources = container.querySelector("#sources");
     expect(within(local as HTMLElement).getByRole("heading", { name: `Explore more around ${g.city}` })).toBeInTheDocument();
     expect(within(planning as HTMLElement).getByRole("heading", { name: "Plan the rest of your trip" })).toBeInTheDocument();
-    expect(local.querySelectorAll("a img")).toHaveLength(g.id === "jerusalem" ? 6 : 4);
+    expect(local.querySelectorAll("a img")).toHaveLength(6);
     expect(planning.querySelectorAll("a img")).toHaveLength(6);
     expect(faq.compareDocumentPosition(local) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
     expect(local.compareDocumentPosition(planning) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
