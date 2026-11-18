@@ -65,7 +65,7 @@ describe("Jerusalem Old City upgraded attractions guide", () => {
     expect(page).toContain("plan your morning around that limited visiting window");
     expect(page).toContain("Saturday–Thursday 09:00–16:00 in winter");
     expect(page).toContain("Jaffa Gate–New Gate section of the northern route");
-    expect(page).toContain("follows sections of the walls open to visitors");
+    expect(page).toContain("starts at Jaffa Gate, not Damascus Gate");
     expect(page).toContain("not wheelchair accessible or suitable for baby strollers");
     expect(page).toContain("official tour-by-tour accessibility guidance");
     expect(page).toContain("Accessible JLM for iPhone");
