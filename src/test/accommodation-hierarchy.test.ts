@@ -21,6 +21,19 @@ describe("planning guides and accommodation hierarchy", () => {
    expect(existsSync("src/routes/accommodation."+slug+".index.tsx")).toBe(true);
   }
  });
+ it("uses concise area and category slugs without a repeated hotels suffix", () => {
+  const nested = [
+   ...neighborhoodGuidesForCity("jerusalem"),
+   ...neighborhoodGuidesForCity("telaviv"),
+   ...hotelCategoryGuides,
+  ];
+  expect(nested).toHaveLength(20);
+  for (const guide of nested) {
+   expect(guide.path).toMatch(/^\/accommodation\/(jerusalem|tel-aviv|haifa|tiberias|dead-sea)\/[a-z0-9-]+\/$/);
+   expect(guide.path).not.toMatch(/-hotels\/$/);
+   expect(existsSync("src/routes/accommodation." + guide.path.slice("/accommodation/".length, -1).replaceAll("/", ".") + ".tsx")).toBe(true);
+  }
+ });
  it("nests all neighborhoods and hotel categories under their destination", () => {
   for(const city of ["jerusalem","telaviv"] as const)for(const area of neighborhoodGuidesForCity(city)){
    expect(area.path).toMatch(/^\/accommodation\//);

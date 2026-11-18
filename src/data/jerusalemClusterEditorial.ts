@@ -165,7 +165,7 @@ const articles: Partial<Record<TravelGuideId, Upgrade>> = {
         ],
         inlineLinks: [
           { text: "food-and-market tours", to: "/tours/food-market-tours/" },
-          { text: "Mahane Yehuda and Nachlaot hotels", to: "/accommodation/jerusalem/mahane-yehuda-nachlaot-hotels/" },
+          { text: "Mahane Yehuda and Nachlaot hotels", to: "/accommodation/jerusalem/mahane-yehuda-nachlaot/" },
         ],
       },
     ],
@@ -174,7 +174,7 @@ const articles: Partial<Record<TravelGuideId, Upgrade>> = {
       { label: "Food and market tours", to: "/tours/food-market-tours/" },
       { label: "Explore the Old City", to: "/attractions/old-city-jerusalem/" },
       { label: "Where to stay in Jerusalem", to: "/travel-blog/where-to-stay-in-jerusalem/" },
-      { label: "German Colony and Baka hotels", to: "/accommodation/jerusalem/german-colony-baka-hotels/" },
+      { label: "German Colony and Baka hotels", to: "/accommodation/jerusalem/german-colony-baka/" },
     ],
   },
   jerusalemDayTrips: {

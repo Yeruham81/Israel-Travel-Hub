@@ -175,6 +175,56 @@ jobs:
             -e "ssh -p $HOSTINGER_SSH_PORT -i $HOME/.ssh/hostinger_deploy -o BatchMode=yes -o StrictHostKeyChecking=yes -o UserKnownHostsFile=$HOME/.ssh/known_hosts" \
             .output/public/ "$HOSTINGER_SSH_USER@$HOSTINGER_SSH_HOST:$HOSTINGER_REMOTE_PATH/"
 
+      - name: Retire exact old accommodation HTML pages without redirects
+        if: steps.freshness.outputs.current == 'true' && env.DRY_RUN != 'true'
+        shell: bash
+        run: |
+          set -euo pipefail
+          BACKUP_DIR="$(dirname "$HOSTINGER_REMOTE_PATH")/cms-static-backups/$GITHUB_RUN_ID/retired-accommodation"
+          ssh -p "$HOSTINGER_SSH_PORT" -i "$HOME/.ssh/hostinger_deploy" -o BatchMode=yes -o StrictHostKeyChecking=yes -o UserKnownHostsFile="$HOME/.ssh/known_hosts" \
+            "$HOSTINGER_SSH_USER@$HOSTINGER_SSH_HOST" \
+            "HOSTINGER_REMOTE_PATH='$HOSTINGER_REMOTE_PATH' BACKUP_DIR='$BACKUP_DIR' sh -s" <<'REMOTE'
+          set -eu
+          cd "$HOSTINGER_REMOTE_PATH"
+          test -f .ith-static-deploy-ok
+          test ! -L accommodation
+          umask 077
+          for relative in \
+            accommodation/jerusalem/downtown-hotels/index.html \
+            accommodation/jerusalem/mamilla-king-david-hotels/index.html \
+            accommodation/jerusalem/old-city-hotels/index.html \
+            accommodation/jerusalem/mahane-yehuda-nachlaot-hotels/index.html \
+            accommodation/jerusalem/east-jerusalem-hotels/index.html \
+            accommodation/jerusalem/german-colony-baka-hotels/index.html \
+            accommodation/tel-aviv/beachfront-hotels/index.html \
+            accommodation/tel-aviv/dizengoff-city-center-hotels/index.html \
+            accommodation/tel-aviv/old-north-port-hotels/index.html \
+            accommodation/tel-aviv/neve-tzedek-hotels/index.html \
+            accommodation/tel-aviv/jaffa-hotels/index.html \
+            accommodation/tel-aviv/florentin-hotels/index.html \
+            accommodation/tel-aviv/kerem-hateimanim-hotels/index.html \
+            accommodation/tel-aviv/rothschild-boulevard-hotels/index.html \
+            accommodation/haifa/boutique-hotels/index.html \
+            accommodation/haifa/family-hotels/index.html \
+            accommodation/tiberias/luxury-hotels/index.html \
+            accommodation/tiberias/family-hotels/index.html \
+            accommodation/dead-sea/spa-hotels/index.html \
+            accommodation/dead-sea/family-hotels/index.html; do
+            parent=${relative%/index.html}
+            citydir=${parent%/*}
+            if [ -L "$citydir" ] || [ -L "$parent" ] || [ -L "$relative" ]; then
+              echo "Refusing symlink at $relative" >&2
+              exit 1
+            fi
+            if [ -f "$relative" ]; then
+              target="$BACKUP_DIR/$relative"
+              mkdir -p "$(dirname "$target")"
+              mv -- "$relative" "$target"
+            fi
+          done
+          REMOTE
+          echo "Retired old accommodation HTML pages into a private backup, when present."
+
       # This one retired map was published before switching Tabgha back to Google Maps.
       # Preserve normal upload behavior; relocate only this verified obsolete file.
       - name: Retire obsolete OpenStreetMap Tabgha file
@@ -202,7 +252,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          for path in / /travel-blog/ /travel-blog/uber-in-israel/ /attractions/capernaum/ /attractions/mount-precipice/ /attractions/tel-megiddo/ /attractions/basilica-of-the-annunciation/ /attractions/rosh-hanikra/ /attractions/caesarea/ /attractions/masada/ /attractions/qasr-el-yahud/ /attractions/ein-gedi/ /attractions/mitzpe-ramon-crater/ /api/quote-request/ /api/exchange-rates/; do
+          for path in /accommodation/ /accommodation/jerusalem/ /accommodation/tel-aviv/ /accommodation/haifa/ /accommodation/tiberias/ /accommodation/dead-sea/ /accommodation/jerusalem/downtown/ /accommodation/jerusalem/mamilla-king-david/ /accommodation/jerusalem/old-city/ /accommodation/jerusalem/mahane-yehuda-nachlaot/ /accommodation/jerusalem/east-jerusalem/ /accommodation/jerusalem/german-colony-baka/ /accommodation/tel-aviv/beachfront/ /accommodation/tel-aviv/dizengoff-city-center/ /accommodation/tel-aviv/old-north-port/ /accommodation/tel-aviv/neve-tzedek/ /accommodation/tel-aviv/jaffa/ /accommodation/tel-aviv/florentin/ /accommodation/tel-aviv/kerem-hateimanim/ /accommodation/tel-aviv/rothschild-boulevard/ /accommodation/haifa/boutique/ /accommodation/haifa/family/ /accommodation/tiberias/luxury/ /accommodation/tiberias/family/ /accommodation/dead-sea/spa/ /accommodation/dead-sea/family/ / /travel-blog/ /travel-blog/uber-in-israel/ /attractions/capernaum/ /attractions/mount-precipice/ /attractions/tel-megiddo/ /attractions/basilica-of-the-annunciation/ /attractions/rosh-hanikra/ /attractions/caesarea/ /attractions/masada/ /attractions/qasr-el-yahud/ /attractions/ein-gedi/ /attractions/mitzpe-ramon-crater/ /api/quote-request/ /api/exchange-rates/; do
             status="$(curl --retry 2 --retry-delay 2 --max-time 20 -L -sS -o /dev/null -w '%{http_code}' "$VITE_CANONICAL_ORIGIN$path")"
             echo "$path -> HTTP $status"
             [[ "$status" == "200" ]] || { echo "::error::Website smoke test failed for $path"; exit 1; }
