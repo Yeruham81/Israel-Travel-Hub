@@ -104,7 +104,7 @@ describe("home mobile performance optimizations", () => {
     const slides = read("src/components/HomeHero.tsx");
     const carousel = read("src/components/HeroCarousel.tsx");
     expect(slides).toContain("hero-jerusalem-medium.webp");
-    expect(slides).toContain("hero-jerusalem-sm-optimized.webp");
+    expect(slides).toContain("hero-jerusalem-psi-mobile.webp");
     expect(slides).toContain("hero-jerusalem-large.webp");
     // Full-resolution original crops, not enlarged small derivatives.
     const optimizedSlugs = ["haifa-gardens", "masada-dead-sea", "caesarea-coast", "jerusalem-jaffa-gate", "dead-sea-salt", "eilat-mountains", "jaffa-port", "ramon-crater", "tel-aviv-sarona"];
@@ -146,7 +146,7 @@ describe("home mobile performance optimizations", () => {
       expect(home).toContain(`${name}-feature.webp`);
     }
     expect(home).toContain('import benGurionApronPhoto from "@/assets/airport-transfers/airport.webp"');
-    expect(home).toContain('feature: { src: benGurionApronPhoto, alt:');
+    expect(home).toContain('feature: { src: benGurionApronPhoto, mobile: benGurionApronPhotoMobile, alt:');
     expect(home).not.toContain('feature: { src: "/images/travel-blog/taxi-in-tel-aviv.webp"');
     expect(bytes("src/assets/airport-transfers/airport.webp")).toBeGreaterThan(10000);
     expect(bytes("public/images/home/uber-in-israel-phone-question.webp")).toBeGreaterThan(10000);
@@ -206,6 +206,43 @@ describe("home mobile performance optimizations", () => {
     const timnaOptimized = bytes("src/assets/home/timna-park-feature-optimized.webp");
     expect(timnaOptimized).toBeLessThan(timnaOriginal * .75);
     expect(home).toContain('timna-park-feature-optimized.webp');
+  });
+
+  it("uses right-sized mobile tour, feature and LCP images", () => {
+    const homepage = read("src/routes/index.tsx");
+    const hero = read("src/components/HomeHero.tsx");
+    expect(homepage).toContain('<picture className="block">');
+    expect(homepage).toContain('width={400} height={300}');
+    expect(homepage).toContain('media="(max-width: 767px)" srcSet={c.img.mobile}');
+    expect(homepage).toContain('s.feature.mobile && <source');
+    for (const path of [
+      "public/images/attractions/jerusalem",
+      "public/images/attractions/tel-aviv-jaffa",
+      "public/images/tours/masada-ruins",
+      "public/images/attractions/sea-of-galilee",
+      "public/images/attractions/haifa-coast",
+      "src/assets/guides/2026-10/jerusalem-to-bethlehem",
+    ]) {
+      const source = path + ".webp";
+      const mobile = path + "-mobile.webp";
+      expect(bytes(mobile), mobile).toBeLessThan(bytes(source));
+      expect(bytes(mobile), mobile).toBeLessThan(44001);
+    }
+    for (const name of [
+      "src/assets/home/guided-tour-feature-mobile.webp",
+      "src/assets/airport-transfers/airport-mobile.webp",
+      "src/assets/home/hero-jerusalem-psi-mobile.webp",
+    ]) {
+      expect(bytes(name), name).toBeGreaterThan(5000);
+    }
+    expect(bytes("src/assets/home/guided-tour-feature-mobile.webp")).toBeLessThan(bytes("src/assets/home/guided-tour-feature.webp"));
+    expect(bytes("src/assets/airport-transfers/airport-mobile.webp")).toBeLessThan(bytes("src/assets/airport-transfers/airport.webp"));
+    expect(bytes("src/assets/home/hero-jerusalem-psi-mobile.webp")).toBeLessThan(bytes("src/assets/home/hero-jerusalem-sm-optimized.webp"));
+    expect(hero).toContain("hero-jerusalem-psi-mobile.webp");
+    expect(homepage).toContain("hero-jerusalem-psi-mobile.webp");
+    expect(homepage).toContain("bethlehemTourPhotoMobile");
+    expect(homepage).toContain("guidedTourMobile");
+    expect(homepage).toContain("benGurionApronPhotoMobile");
   });
 
   it("sets cache rules for static resources without caching HTML or API responses", () => {

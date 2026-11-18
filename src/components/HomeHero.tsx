@@ -1,5 +1,5 @@
 import { HeroCarousel, type HeroSlide } from "@/components/HeroCarousel";
-import hJerSm from "@/assets/home/hero-jerusalem-sm-optimized.webp";
+import hJerSm from "@/assets/home/hero-jerusalem-psi-mobile.webp";
 import hJerMedium from "@/assets/home/hero-jerusalem-medium.webp";
 import hJerLarge from "@/assets/home/hero-jerusalem-large.webp";
 import hTaSm from "@/assets/home/hero-refresh-tel-aviv-coastline-v3-mobile.webp";

@@ -1,6 +1,6 @@
 {
-  "scope": "Four near-top airport transfer cards (mobile only) and Timna feature photo (all viewports)",
-  "note": "Independent source-file audit; Google PageSpeed result could not be opened by the assistant. Image variants are cropped identically to the originals (no crop changes).",
+  "scope": "PSI mobile follow-up: six tour tiles, two editorial features and LCP mobile hero; includes existing transfer cards and Timna optimization",
+  "note": "Based on supplied PSI screenshots; full desktop photos remain untouched. WebP mobile variants retain the original aspect ratio, content and crop.",
   "files": [
     {
       "source": "public/images/home/transfer-jerusalem-tower-of-david.webp",
@@ -51,9 +51,99 @@
       "sourceWidth": 755,
       "optimizedWidth": 755,
       "quality": 82
+    },
+    {
+      "source": "public/images/attractions/jerusalem.webp",
+      "optimized": "public/images/attractions/jerusalem-mobile.webp",
+      "originalBytes": 55190,
+      "optimizedBytes": 24182,
+      "savedBytes": 31008,
+      "sourceWidth": 755,
+      "optimizedWidth": 480,
+      "quality": 82
+    },
+    {
+      "source": "public/images/attractions/tel-aviv-jaffa.webp",
+      "optimized": "public/images/attractions/tel-aviv-jaffa-mobile.webp",
+      "originalBytes": 69484,
+      "optimizedBytes": 32332,
+      "savedBytes": 37152,
+      "sourceWidth": 738,
+      "optimizedWidth": 480,
+      "quality": 82
+    },
+    {
+      "source": "public/images/tours/masada-ruins.webp",
+      "optimized": "public/images/tours/masada-ruins-mobile.webp",
+      "originalBytes": 96124,
+      "optimizedBytes": 34156,
+      "savedBytes": 61968,
+      "sourceWidth": 755,
+      "optimizedWidth": 480,
+      "quality": 82
+    },
+    {
+      "source": "src/assets/guides/2026-10/jerusalem-to-bethlehem.webp",
+      "optimized": "src/assets/guides/2026-10/jerusalem-to-bethlehem-mobile.webp",
+      "originalBytes": 69946,
+      "optimizedBytes": 23444,
+      "savedBytes": 46502,
+      "sourceWidth": 755,
+      "optimizedWidth": 480,
+      "quality": 82
+    },
+    {
+      "source": "public/images/attractions/sea-of-galilee.webp",
+      "optimized": "public/images/attractions/sea-of-galilee-mobile.webp",
+      "originalBytes": 77652,
+      "optimizedBytes": 31474,
+      "savedBytes": 46178,
+      "sourceWidth": 755,
+      "optimizedWidth": 480,
+      "quality": 82
+    },
+    {
+      "source": "public/images/attractions/haifa-coast.webp",
+      "optimized": "public/images/attractions/haifa-coast-mobile.webp",
+      "originalBytes": 105726,
+      "optimizedBytes": 40652,
+      "savedBytes": 65074,
+      "sourceWidth": 755,
+      "optimizedWidth": 480,
+      "quality": 79
+    },
+    {
+      "source": "src/assets/home/guided-tour-feature.webp",
+      "optimized": "src/assets/home/guided-tour-feature-mobile.webp",
+      "originalBytes": 55860,
+      "optimizedBytes": 38570,
+      "savedBytes": 17290,
+      "sourceWidth": 1080,
+      "optimizedWidth": 640,
+      "quality": 82
+    },
+    {
+      "source": "src/assets/airport-transfers/airport.webp",
+      "optimized": "src/assets/airport-transfers/airport-mobile.webp",
+      "originalBytes": 32608,
+      "optimizedBytes": 18886,
+      "savedBytes": 13722,
+      "sourceWidth": 900,
+      "optimizedWidth": 640,
+      "quality": 82
+    },
+    {
+      "source": "src/assets/home/hero-jerusalem-sm-optimized.webp",
+      "optimized": "src/assets/home/hero-jerusalem-psi-mobile.webp",
+      "originalBytes": 110944,
+      "optimizedBytes": 89606,
+      "savedBytes": 21338,
+      "sourceWidth": 900,
+      "optimizedWidth": 720,
+      "quality": 79
     }
   ],
-  "originalBytesTotal": 495173,
-  "optimizedBytesTotal": 228484,
-  "savedBytesTotal": 266689
+  "originalBytesTotal": 1168707,
+  "optimizedBytesTotal": 561786,
+  "savedBytesTotal": 606921
 }

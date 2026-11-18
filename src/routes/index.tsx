@@ -1,9 +1,10 @@
 import { createFileRoute, Link, type LinkProps } from "@tanstack/react-router";
-import lcpHeroMobile from "@/assets/home/hero-jerusalem-sm-optimized.webp";
+import lcpHeroMobile from "@/assets/home/hero-jerusalem-psi-mobile.webp";
 import lcpHeroMedium from "@/assets/home/hero-jerusalem-medium.webp";
 import lcpHeroLarge from "@/assets/home/hero-jerusalem-large.webp";
 import jerusalem from "@/assets/home/jerusalem-old-city.webp";
 import benGurionApronPhoto from "@/assets/airport-transfers/airport.webp";
+import benGurionApronPhotoMobile from "@/assets/airport-transfers/airport-mobile.webp";
 import telAviv from "@/assets/home/tel-aviv-coast.webp";
 import tiberias from "@/assets/home/tiberias-lake.webp";
 import t3 from "@/assets/home/ben-gurion-t3.webp";
@@ -12,6 +13,7 @@ import masada from "@/assets/home/masada-dead-sea.webp";
 import timnaParkFeature from "@/assets/home/timna-park-feature-optimized.webp";
 import caesareaAqueduct from "@/assets/home/caesarea-aqueduct.webp";
 import guidedTour from "@/assets/home/guided-tour-feature.webp";
+import guidedTourMobile from "@/assets/home/guided-tour-feature-mobile.webp";
 import cruisePort from "@/assets/home/cruise-port-feature.webp";
 import ashdodPort from "@/assets/home/ashdod-port.webp";
 import haifaPort from "@/assets/home/haifa-port.webp";
@@ -39,6 +41,7 @@ import deadSeaTile from "@/assets/dead-sea/beach-tile.webp";
 import { pageMeta } from "@/lib/site";
 import { tourCategoryPaths } from "@/data/tours";
 import bethlehemTourPhoto from "@/assets/guides/2026-10/jerusalem-to-bethlehem.webp";
+import bethlehemTourPhotoMobile from "@/assets/guides/2026-10/jerusalem-to-bethlehem-mobile.webp";
 import roshHanikraPhoto from "@/assets/guides/rosh-hanikra.jpg";
 import ramonCraterPhoto from "@/assets/guides/mitzpe-ramon-crater.jpg";
 import capernaumPhoto from "@/assets/guides/capernaum.jpg";
@@ -101,7 +104,7 @@ export const services: Service[] = [
   {
     id: "transfers", eyebrow: "Airport Transfers", tagline: "Plan a Smooth Arrival in Israel", title: "Airport Transfers",
     text: "Start your visit to Israel with a smooth, comfortable arrival. Arrange a private transfer from Ben Gurion Airport to Jerusalem, Tel Aviv, Haifa, or any other destination across the country.",
-    feature: { src: benGurionApronPhoto, alt: "Parked aircraft at Ben Gurion Airport with the terminal sign reading BEN GURION AIRPORT" },
+    feature: { src: benGurionApronPhoto, mobile: benGurionApronPhotoMobile, alt: "Parked aircraft at Ben Gurion Airport with the terminal sign reading BEN GURION AIRPORT" },
     cards: [
       { label: "To Jerusalem", to: "/airport-transfers/jerusalem/", img: { src: "/images/home/transfer-jerusalem-tower-of-david.webp", mobile: "/images/home/transfer-jerusalem-tower-of-david-mobile.webp", alt: "Tower of David citadel beside Jerusalem’s Old City" } },
       { label: "To Tel Aviv", to: "/airport-transfers/tel-aviv/", img: { src: "/images/home/transfer-tel-aviv-beach-skyline.webp", mobile: "/images/home/transfer-tel-aviv-beach-skyline-mobile.webp", alt: "Tel Aviv Mediterranean beach and modern skyline" } },
@@ -113,14 +116,14 @@ export const services: Service[] = [
   {
     id: "tours", eyebrow: "Tours & Day Trips", tagline: "See the Best of Israel in a Day", title: "Tours & Day Trips",
     text: "Explore Israel’s top destinations with guided tours and day trips, and find the experiences that best match your interests and travel style.",
-    feature: { src: guidedTour, alt: "Illustrative small group on a guided walk through old stone streets" },
+    feature: { src: guidedTour, mobile: guidedTourMobile, alt: "Illustrative small group on a guided walk through old stone streets" },
     cards: [
-      { label: "Jerusalem", to: tourCategoryPaths.jerusalem, img: { src: "/images/attractions/jerusalem.webp", alt: "Jerusalem’s Old City and the Dome of the Rock" } },
-      { label: "Tel Aviv & Jaffa", to: tourCategoryPaths["tel-aviv-jaffa"], img: { src: "/images/attractions/tel-aviv-jaffa.webp", alt: "Fishing boats and old stone buildings around Jaffa harbour" } },
-      { label: "Masada & Dead Sea", to: tourCategoryPaths["masada-dead-sea"], img: { src: "/images/tours/masada-ruins.webp", alt: "Ancient stone ruins on the Masada plateau" } },
-      { label: "Bethlehem & Jericho", to: tourCategoryPaths["bethlehem-jericho"], img: { src: bethlehemTourPhoto, alt: "Church of the Nativity and Manger Square in Bethlehem" } },
-      { label: "Nazareth & Galilee", to: tourCategoryPaths["nazareth-galilee"], img: { src: "/images/attractions/sea-of-galilee.webp", alt: "The Sea of Galilee and green hills overlooking the lake" } },
-      { label: "Caesarea, Haifa & Acre", to: tourCategoryPaths["northern-coast"], img: { src: "/images/attractions/haifa-coast.webp", alt: "Haifa’s cityscape and Mediterranean coastline" } },
+      { label: "Jerusalem", to: tourCategoryPaths.jerusalem, img: { src: "/images/attractions/jerusalem.webp", mobile: "/images/attractions/jerusalem-mobile.webp", alt: "Jerusalem’s Old City and the Dome of the Rock" } },
+      { label: "Tel Aviv & Jaffa", to: tourCategoryPaths["tel-aviv-jaffa"], img: { src: "/images/attractions/tel-aviv-jaffa.webp", mobile: "/images/attractions/tel-aviv-jaffa-mobile.webp", alt: "Fishing boats and old stone buildings around Jaffa harbour" } },
+      { label: "Masada & Dead Sea", to: tourCategoryPaths["masada-dead-sea"], img: { src: "/images/tours/masada-ruins.webp", mobile: "/images/tours/masada-ruins-mobile.webp", alt: "Ancient stone ruins on the Masada plateau" } },
+      { label: "Bethlehem & Jericho", to: tourCategoryPaths["bethlehem-jericho"], img: { src: bethlehemTourPhoto, mobile: bethlehemTourPhotoMobile, alt: "Church of the Nativity and Manger Square in Bethlehem" } },
+      { label: "Nazareth & Galilee", to: tourCategoryPaths["nazareth-galilee"], img: { src: "/images/attractions/sea-of-galilee.webp", mobile: "/images/attractions/sea-of-galilee-mobile.webp", alt: "The Sea of Galilee and green hills overlooking the lake" } },
+      { label: "Caesarea, Haifa & Acre", to: tourCategoryPaths["northern-coast"], img: { src: "/images/attractions/haifa-coast.webp", mobile: "/images/attractions/haifa-coast-mobile.webp", alt: "Haifa’s cityscape and Mediterranean coastline" } },
     ],
     hub: { label: "Explore all tours & day trips", to: "/tours/" },
   },
@@ -213,7 +216,10 @@ function AirportTransferCard({ c }: { c: Card }) {
 function DestinationImageCard({ c }: { c: Card }) {
   return (
     <Link to={c.to} aria-label={c.label} className="group relative block min-w-0 overflow-hidden rounded-lg bg-primary shadow-sm focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-ring">
-      <img src={c.img.thumb ?? c.img.src} alt={c.img.alt} loading="lazy" decoding="async" width={400} height={300} className="aspect-[4/3] w-full object-cover transition-transform duration-500 group-hover:scale-105" />
+      <picture className="block">
+        {c.img.mobile && <source media="(max-width: 767px)" srcSet={c.img.mobile} type="image/webp" />}
+        <img src={c.img.thumb ?? c.img.src} alt={c.img.alt} loading="lazy" decoding="async" width={400} height={300} className="aspect-[4/3] w-full object-cover transition-transform duration-500 group-hover:scale-105" />
+      </picture>
       <span className="absolute bottom-2 left-2 max-w-[calc(100%-1rem)] font-serif text-sm font-semibold leading-tight text-white sm:bottom-3 sm:left-3 sm:text-base" style={{ textShadow: photoTitleShadow }}>{c.label}</span>
     </Link>
   );
@@ -251,7 +257,7 @@ function Home() {
               </div>
             </header>
             <div className="mt-6 grid min-w-0 grid-cols-1 gap-4 lg:min-h-[280px] lg:grid-cols-2 lg:items-stretch" data-testid={`service-layout-${s.id}`}>
-              {s.feature && <img src={s.feature.src} alt={s.feature.alt} loading="lazy" decoding="async" width={1400} height={880} className="aspect-[16/9] max-h-[260px] w-full min-w-0 rounded-xl object-cover lg:aspect-auto lg:h-full lg:max-h-none" />}
+              {s.feature && <picture className="block h-full min-w-0">{s.feature.mobile && <source media="(max-width: 767px)" srcSet={s.feature.mobile} type="image/webp" />}<img src={s.feature.src} alt={s.feature.alt} loading="lazy" decoding="async" width={1400} height={880} className="aspect-[16/9] max-h-[260px] w-full min-w-0 rounded-xl object-cover lg:aspect-auto lg:h-full lg:max-h-none" /></picture>}
               <ul className="grid min-w-0 grid-cols-2 auto-rows-fr gap-3" aria-label="Airport transfer destinations">
                 {s.cards.map((c) => <AirportTransferCard key={c.label} c={c} />)}
               </ul>
@@ -274,7 +280,7 @@ function Home() {
             </header>
             {s.id === "tours" || s.id === "attractions" ? (
               <div className="mt-6 grid min-w-0 gap-4 lg:grid-cols-[minmax(0,2fr)_minmax(0,3fr)] lg:items-stretch" data-testid={`service-layout-${s.id}`}>
-                {s.feature && <img src={s.feature.src} alt={s.feature.alt} loading="lazy" decoding="async" width={900} height={560} className="aspect-[16/9] max-h-[320px] w-full min-w-0 rounded-xl object-cover lg:aspect-auto lg:h-full lg:max-h-none" />}
+                {s.feature && <picture className="block h-full min-w-0">{s.feature.mobile && <source media="(max-width: 767px)" srcSet={s.feature.mobile} type="image/webp" />}<img src={s.feature.src} alt={s.feature.alt} loading="lazy" decoding="async" width={900} height={560} className="aspect-[16/9] max-h-[320px] w-full min-w-0 rounded-xl object-cover lg:aspect-auto lg:h-full lg:max-h-none" /></picture>}
                 <ul className="grid min-w-0 grid-cols-2 gap-3 sm:grid-cols-3" aria-label={s.id === "tours" ? "Tour destinations" : "Featured attractions"}>
                   {s.cards.map((card) => <li key={card.label} className="min-w-0"><DestinationImageCard c={card} /></li>)}
                 </ul>
