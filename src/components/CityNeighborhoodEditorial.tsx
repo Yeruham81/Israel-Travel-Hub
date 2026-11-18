@@ -244,7 +244,7 @@ export function CityNeighborhoodEditorial({ guide }: { guide: CityStayGuide }) {
         : guideContactCopy(info.title, "accommodation", cityName)} />
       <SourceList
         ids={cityId === "jerusalem" ? [...guide.sourceIds, "israel-rail", "jerusalem-light-rail-updates", "jerusalem-emek-refaim-works"] : guide.sourceIds}
-        intro={cityId === "jerusalem" ? "Transport and access information for planning your stay." : undefined}
+        {...(cityId === "jerusalem" ? { intro: "Transport and access information for planning your stay." } : {})}
       />
     </article>
   </main>;
