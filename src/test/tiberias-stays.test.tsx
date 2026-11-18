@@ -27,9 +27,9 @@ const categories = hotelCategoryGuides.filter((guide) => guide.destinationId ===
 const hotel = (id: string) => hotels.find((hotel) => hotel.id === id)!;
 
 describe("Tiberias destination and distinct hotel intents", () => {
-  it("keeps the original destination URL and resolves both new intent routes", () => {
+  it("resolves the new Tiberias hotel destination and both style routes", () => {
     const router = createRouter({ routeTree, context: { queryClient: new QueryClient() }, trailingSlash: "always" });
-    expect(destination.path).toBe("/travel-blog/best-hotels-in-tiberias/");
+    expect(destination.path).toBe("/accommodation/tiberias/");
     for (const path of [destination.path, "/accommodation/tiberias/family-hotels/", "/accommodation/tiberias/luxury-hotels/"]) {
       expect(router.matchRoutes(path).at(-1)?.routeId).toBe(path === destination.path ? path : path.replace(/\/$/, ""));
     }
