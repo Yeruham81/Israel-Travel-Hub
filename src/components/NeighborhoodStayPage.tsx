@@ -114,7 +114,8 @@ export function NeighborhoodStayPage({ area }: { area: NeighborhoodStayGuide }) 
             </div>
           </section>
         ) : <ProviderSection id="more-hotels" title={`See more options in ${area.shortName}`} intro="Want a different room style or budget? Browse other properties, and check each one's exact map location before booking." links={linksForPage(`stay-area-${area.id}-browse`)} pageId={pageId} />}
-    </>  );
+    </>
+  );
 
   const overviewSection = (
         <Section id="overview" title={`What is it like to stay in ${area.name}?`} className="scroll-mt-32">
@@ -196,7 +197,7 @@ export function NeighborhoodStayPage({ area }: { area: NeighborhoodStayGuide }) 
         <Link to={city.path as LinkProps["to"]} className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-primary"><ArrowLeft className="h-4 w-4" aria-hidden /> Compare all {city.city} areas</Link>
         <dl className={isJerusalem ? "mt-5 grid gap-3 rounded-2xl border bg-card p-4 sm:grid-cols-3 sm:gap-4 sm:p-5" : "mt-6 grid gap-4 rounded-2xl border bg-card p-5 sm:grid-cols-3 sm:p-6"}>
           <div><dt className="eyebrow">Best for</dt><dd className="mt-2 text-sm font-medium">{area.bestFor}</dd></div>
-          <div><dt className="eyebrow">{isJerusalem ? "Hotel styles" : "Stay style"}</dt><dd className="mt-2 text-sm font-medium">{area.priceLevel}</dd></div>
+          <div><dt className="eyebrow">{isJerusalem ? "Stay options" : "Stay style"}</dt><dd className="mt-2 text-sm font-medium">{area.priceLevel}</dd></div>
           <div><dt className="eyebrow">{isJerusalem ? "Keep in mind" : "The tradeoff"}</dt><dd className="mt-2 text-sm leading-relaxed text-muted-foreground">{area.watch}</dd></div>
         </dl>
         {isJerusalem ? (
