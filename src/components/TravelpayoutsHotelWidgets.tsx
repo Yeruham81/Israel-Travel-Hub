@@ -45,10 +45,9 @@ function HotelSearchWidget({ widget, visible }: {
 
   return (
     <div className="min-w-0 rounded-2xl border bg-card p-4 sm:p-6" data-testid={`${widget.id}-hotel-search-widget`}>
-      <h3 className="text-lg font-semibold sm:text-xl">{widget.title}</h3>
       <div
         ref={mountRef}
-        className="mt-4 min-h-52 min-w-0 max-w-full overflow-x-auto [&_iframe]:max-w-full"
+        className="min-h-52 min-w-0 max-w-full overflow-x-auto [&_iframe]:max-w-full"
         aria-label={widget.title}
         data-testid={`${widget.id}-hotel-widget-mount`}
       />
@@ -95,20 +94,16 @@ export function TravelpayoutsHotelWidget({ provider }: {
 
   const isBooking = provider === "booking";
   const sectionId = isBooking ? "hotel-search-booking" : "hotel-search-widgets";
-  const headingId = isBooking ? "hotel-search-booking-h" : "hotel-search-widgets-h";
 
   return (
     <section
       ref={sectionRef}
       id={sectionId}
-      aria-labelledby={headingId}
+      aria-label={widget.title}
       className="mt-10 scroll-mt-24"
       data-testid={sectionId}
     >
-      <h2 id={headingId} className="text-2xl font-semibold">
-        {isBooking ? "Search hotels in Israel" : "More hotel search options"}
-      </h2>
-      <div className="mt-4 min-w-0">
+      <div className="min-w-0">
         <HotelSearchWidget widget={widget} visible={visible} />
       </div>
     </section>
