@@ -55,6 +55,19 @@ describe("Jerusalem and Tel Aviv neighbourhood editorial guides", () => {
       expect(container.querySelectorAll('[data-testid="jerusalem-editorial-hotel-picks"]')).toHaveLength(6);
       expect(container.querySelectorAll('[data-testid="jerusalem-editorial-hotel-card"]')).toHaveLength(12);
       expect(container.querySelectorAll('[data-testid="jerusalem-editorial-hotel-link"]')).toHaveLength(12);
+      const hotelGrids = container.querySelectorAll('[data-testid="jerusalem-editorial-hotel-grid"]');
+      expect(hotelGrids).toHaveLength(6);
+      for (const grid of hotelGrids) {
+        expect(grid).toHaveClass("grid-cols-2");
+        expect(grid.querySelectorAll("li")).toHaveLength(2);
+        expect(grid.querySelectorAll("img")).toHaveLength(0);
+        expect(grid.querySelectorAll("svg")).toHaveLength(4);
+      }
+      const bookingChecklist = screen.getByTestId("jerusalem-booking-checklist");
+      expect(bookingChecklist).toHaveClass("rounded-2xl", "border", "bg-secondary/20", "sm:grid-cols-2");
+      expect(bookingChecklist.querySelectorAll("li")).toHaveLength(8);
+      expect(within(bookingChecklist).getByRole("heading", { name: "Check accessibility" })).toBeInTheDocument();
+      expect(within(bookingChecklist).getByRole("heading", { name: "Read the full booking terms" })).toBeInTheDocument();
       for (const section of sections) {
         const heading = section.querySelector("h3[id$='-h']");
         const facts = section.querySelector('[data-testid="jerusalem-area-highlights"]');
@@ -92,6 +105,7 @@ describe("Jerusalem and Tel Aviv neighbourhood editorial guides", () => {
       expect(container.querySelector('[data-testid="jerusalem-area-image-grid"]')).toBeNull();
       expect(container.querySelectorAll('[data-testid="jerusalem-editorial-hotel-card"]')).toHaveLength(0);
       expect(container.querySelector('[data-testid="jerusalem-area-layout"]')).toBeNull();
+      expect(container.querySelector('[data-testid="jerusalem-booking-checklist"]')).toBeNull();
       expect(container.querySelectorAll('[data-testid="jerusalem-practical-notes"]')).toHaveLength(0);
       expect(container.querySelector("#faq")).toHaveAttribute("data-faq-count", "4");
     }

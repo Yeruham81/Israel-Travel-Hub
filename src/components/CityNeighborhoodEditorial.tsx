@@ -1,10 +1,9 @@
 import { Link, type LinkProps } from "@tanstack/react-router";
-import { Accessibility, ArrowRight, Eye, Footprints, House, Lightbulb, MapPin, Route, TrainFront, Volume2, type LucideIcon } from "lucide-react";
+import { Accessibility, ArrowRight, Check, Eye, Footprints, House, Lightbulb, MapPin, Route, TrainFront, Volume2, type LucideIcon } from "lucide-react";
 import { GuideHeader, OnThisPage, FaqList, SourceList } from "@/components/Guide";
 import { StayTripLinks } from "@/components/StayTripLinks";
 import { AreaMap } from "@/components/AreaMap";
 import { JerusalemEditorialHotels } from "@/components/JerusalemEditorialHotels";
-import { CityHotelPhotoCredits } from "@/components/CityHotelPhotoCredits";
 import { HomeContactForm } from "@/components/HomeContactForm";
 import { accommodationEditorial } from "@/data/accommodationEditorial";
 import { neighborhoodGuidesForCity, type CityStayGuide } from "@/data/content";
@@ -95,6 +94,18 @@ const jerusalemPractical: Record<string, { consider: string; gettingAround: stri
     gettingAround: "From the northern German Colony, Jaffa Gate is roughly a 15–25-minute walk, depending on the starting point. Properties farther into Baka usually make more sense as a bus-or-taxi base.",
   },
 };
+
+/** Use the Accommodation page's titled, two-column booking checklist treatment. */
+const jerusalemBookingTips = [
+  { title: "Check the walking route", text: "Plan the walk to your preferred Old City gate, including hills and steps." },
+  { title: "Confirm taxi access", text: "Confirm where your taxi can stop and how far you will carry luggage." },
+  { title: "Consider street noise", text: "Ask about noise from pedestrian streets, market deliveries and nearby bars." },
+  { title: "Check accessibility", text: "Check lift access and the full step-free route to your room if needed." },
+  { title: "Plan a weekend arrival", text: "For a Friday-evening or Saturday arrival, confirm check-in, meals and transport." },
+  { title: "Ask about a Shabbat elevator", text: "If you need a Shabbat elevator, check whether the hotel has one." },
+  { title: "Confirm parking", text: "Driving? Ask for the exact parking location and daily charge." },
+  { title: "Read the full booking terms", text: "Check the full price, included taxes and cancellation deadline before paying." },
+] as const;
 
 const jerusalemNoteDesign: Record<string, { insightTitle: string; arrivalTitle: string; InsightIcon: LucideIcon; ArrivalIcon: LucideIcon }> = {
   downtown: { insightTitle: "City energy & quiet rooms", arrivalTitle: "Walking to Jaffa Gate", InsightIcon: Volume2, ArrivalIcon: Footprints },
@@ -275,19 +286,21 @@ export function CityNeighborhoodEditorial({ guide }: { guide: CityStayGuide }) {
       <section id="tips" aria-labelledby="tips-h" className="mt-12 scroll-mt-32">
         <h2 id="tips-h" className="text-3xl">What to check before booking</h2>
         {cityId !== "jerusalem" && <p className="mt-3 max-w-3xl leading-relaxed">The exact street, hotel entrance and room category can matter as much as the neighbourhood itself.</p>}
-        <ul className="mt-5 grid gap-3 sm:grid-cols-2">
-          {(cityId === "jerusalem" ? [
-            "Plan the walk to your preferred Old City gate, including hills and steps.",
-            "Confirm where your taxi can stop and how far you will carry luggage.",
-            "Ask about noise from pedestrian streets, market deliveries and nearby bars.",
-            "Check lift access and the full step-free route to your room if needed.",
-            "For a Friday-evening or Saturday arrival, confirm check-in, meals and transport.",
-            "If you need a Shabbat elevator, check whether the hotel has one.",
-            "Driving? Ask for the exact parking location and daily charge.",
-            "Check the full price, included taxes and cancellation deadline before paying.",
-          ] : guide.checklist).map((tip) => <li key={tip} className="flex gap-3 rounded-xl border bg-secondary/25 p-4 text-sm leading-relaxed"><span aria-hidden className="font-bold text-primary">✓</span>{tip}</li>)}
-        </ul>
-        <aside className="mt-6 flex gap-3 rounded-xl border border-amber-200 bg-amber-50/80 p-4 text-sm leading-relaxed dark:border-amber-900/50 dark:bg-amber-950/20">
+        {cityId === "jerusalem"
+          ? <ul className="mt-4 grid gap-x-6 rounded-2xl border bg-secondary/20 px-4 sm:grid-cols-2 sm:px-6" aria-label="Jerusalem hotel booking checklist" data-testid="jerusalem-booking-checklist">
+              {jerusalemBookingTips.map((tip) => <li key={tip.title} className="flex items-start gap-3 border-b py-4 last:border-b-0 sm:[&:nth-last-child(-n+2)]:border-b-0">
+                <span className="mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-full border border-primary/20 bg-primary/10 text-primary">
+                  <Check className="h-4 w-4" aria-hidden />
+                </span>
+                <div className="min-w-0">
+                  <h3 className="text-base font-semibold">{tip.title}</h3>
+                  <p className="mt-1 text-sm leading-relaxed text-muted-foreground">{tip.text}</p>
+                </div>
+              </li>)}
+            </ul>
+          : <ul className="mt-5 grid gap-3 sm:grid-cols-2">
+              {guide.checklist.map((tip) => <li key={tip} className="flex gap-3 rounded-xl border bg-secondary/25 p-4 text-sm leading-relaxed"><span aria-hidden className="font-bold text-primary">✓</span>{tip}</li>)}
+            </ul>}        <aside className="mt-6 flex gap-3 rounded-xl border border-amber-200 bg-amber-50/80 p-4 text-sm leading-relaxed dark:border-amber-900/50 dark:bg-amber-950/20">
           <Lightbulb className="mt-0.5 h-5 w-5 shrink-0 text-amber-600" aria-hidden />
           <p>{choices.check} See my <Link to="/travel-blog/calendar-of-events/" className="font-semibold text-primary underline underline-offset-2">Israel calendar of events</Link> for public holidays and special dates that can affect your plans.</p>
         </aside>
@@ -307,7 +320,6 @@ export function CityNeighborhoodEditorial({ guide }: { guide: CityStayGuide }) {
         ? { ...guideContactCopy(info.title, "accommodation", cityName),
             introduction: "Not sure which part of Jerusalem would suit your plans? Tell me your travel dates, main interests and how you expect to arrive. I'll be happy to share practical advice." }
         : guideContactCopy(info.title, "accommodation", cityName)} />
-      {cityId === "jerusalem" && <CityHotelPhotoCredits city="jerusalem" />}
       <SourceList
         ids={cityId === "jerusalem" ? [...guide.sourceIds, "israel-rail", "jerusalem-light-rail-updates", "jerusalem-emek-refaim-works"] : guide.sourceIds}
         {...(cityId === "jerusalem" ? { intro: "Transport and access information for planning your stay." } : {})}
