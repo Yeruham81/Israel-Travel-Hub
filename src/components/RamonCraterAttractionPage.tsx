@@ -44,7 +44,7 @@ export const ramonCraterDestinationContent: AttractionDestinationContent = {
     { icon: "highlights", label: "Don't miss", value: "Rim & geology", note: "Camel Hill, Colors Road and HaMinsara" },
     { icon: "access", label: "Accessibility", value: "Selected areas", note: "Visitor center and marked viewing points" },
   ],
-  glanceNote: <><strong>Choose your experience:</strong> The rim viewpoints are free to explore; the indoor <a href={official.center} target="_blank" rel="noopener noreferrer" className={inlineLink}>Ramon Visitor Center</a> charges admission and requires an advance reservation. The <a href={official.haiRamon} target="_blank" rel="noopener noreferrer" className={inlineLink}>Hai Ramon wildlife park</a> is closed as of November 2026; check its official page before future visits.</>,
+  glanceNote: <><strong>Choose your experience:</strong> The rim viewpoints are free to explore; the indoor <a href={official.center} target="_blank" rel="noopener noreferrer" className={inlineLink}>Ramon Visitor Center</a> charges admission and requires an advance reservation.</>,
   highlightContent: (
     <div className="mt-4 space-y-3">
       <AttractionHighlight title="Ramon Crater Visitor Center">
@@ -187,7 +187,6 @@ export const ramonCraterDestinationContent: AttractionDestinationContent = {
         <img src={panoramaPhoto} alt="Wide panoramic view over the rocky terrain and coloured layers of Ramon Crater" width={1200} height={675} loading="lazy" decoding="async" className="h-auto max-h-[420px] w-full object-cover object-center"/>
         <figcaption className="px-3 py-2 text-xs text-muted-foreground">Ramon Crater's wide desert landscape. Plan walks according to the weather and available daylight.</figcaption>
       </figure>
-      <AttractionPracticalTip><strong>About Hai Ramon:</strong> This wildlife park is closed as of November 2026, so leave it out of your immediate itinerary. It remains in the guide for future visits; <a href={official.haiRamon} target="_blank" rel="noopener noreferrer" className={inlineLink}>check the official site for reopening information</a>.</AttractionPracticalTip>
     </div>
   ),
   historyContent: (
@@ -228,7 +227,7 @@ export const ramonCraterDestinationContent: AttractionDestinationContent = {
   ],
   planningLinks: [
     { label: "Eilat & the Red Sea", to: "/travel-blog/eilat/", description: "Plan the next part of a southern Israel trip.", icon: "region" },
-    { label: "Negev & Ramon Crater tours", to: "/tours/negev-desert-ramon-crater/", description: "Browse guided desert experiences.", icon: "itinerary" },
+    { label: "10-day Israel itinerary", to: "/travel-blog/israel-itinerary-10-days/", description: "Build a longer journey with time for the desert.", icon: "itinerary" },
     { label: "Getting around Israel", to: "/travel-blog/getting-around-israel/", description: "Compare buses, drivers and car rentals.", icon: "transport" },
     { label: "Best time to visit Israel", to: "/travel-blog/best-time-to-visit-israel/", description: "Weather and season-by-season planning.", icon: "seasons" },
     { label: "7-day Israel itinerary", to: "/travel-blog/israel-itinerary-7-days/", description: "See how the desert can fit a longer visit.", icon: "itinerary" },
