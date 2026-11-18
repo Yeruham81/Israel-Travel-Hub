@@ -10,6 +10,7 @@ on:
 
 permissions:
   contents: write
+  actions: write
 
 concurrency:
   group: optimize-homepage-image-delivery
@@ -89,3 +90,10 @@ jobs:
           done
           echo "::error::Could not push optimized images safely after retries"
           exit 1
+
+      # Pushes made with GITHUB_TOKEN do not trigger on: push workflows.
+      - name: Dispatch validation for latest main image changes
+        if: success()
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh workflow run full-project-validation.yml --ref main
