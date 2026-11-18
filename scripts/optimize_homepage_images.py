@@ -140,7 +140,7 @@ def main() -> None:
         (
             "src/assets/home/hero-jerusalem-sm-optimized.webp",
             "src/assets/home/hero-jerusalem-psi-mobile.webp",
-            840, 89000,
+            720, 96000,
         ),
     )
     for original_name, optimized_name, width, limit in feature_specs:
