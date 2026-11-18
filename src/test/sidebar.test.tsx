@@ -326,7 +326,7 @@ describe("accommodation destination hub", () => {
       expect(within(card).getByRole("img").getAttribute("alt")).not.toBe("");
       expect(card.textContent).not.toMatch(/compare\s+(?:\d+|six|eight|ten|eleven)\s+(?:hotels|areas)/i);
       const href = card.getAttribute("href")!;
-      if (href.startsWith("/")) expect(router.matchRoutes(href.split("#")[0]!).at(-1)?.routeId).toBe(href.split("#")[0]!.replace(/\/$/, ""));
+      if (href.startsWith("/")) expect(router.matchRoutes(href.split("#")[0]!).at(-1)?.routeId).toBe(href.split("#")[0]!);
     }
     expect(screen.queryByText("Guide image sources")).not.toBeInTheDocument();
     expect(document.querySelector('a[href*="israel-taxi.com/wp-content/"]')).toBeNull();

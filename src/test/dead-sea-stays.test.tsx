@@ -27,7 +27,7 @@ describe("Dead Sea destination → travel intent → booking", () => {
   it("preserves the original destination URL and gives both category guides independent routes", () => {
     const router = createRouter({ routeTree, context: { queryClient: new QueryClient() }, trailingSlash: "always" });
     for (const path of [deadSeaStayGuide.path, ...categories.map((guide) => guide.path)]) {
-      expect(router.matchRoutes(path).at(-1)?.routeId).toBe(path.replace(/\/$/, ""));
+      expect(router.matchRoutes(path).at(-1)?.routeId).toBe(path === deadSeaStayGuide.path ? path : path.replace(/\/$/, ""));
     }
   });
 

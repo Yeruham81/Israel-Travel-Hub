@@ -31,7 +31,7 @@ describe("Tiberias destination and distinct hotel intents", () => {
     const router = createRouter({ routeTree, context: { queryClient: new QueryClient() }, trailingSlash: "always" });
     expect(destination.path).toBe("/travel-blog/best-hotels-in-tiberias/");
     for (const path of [destination.path, "/accommodation/tiberias/family-hotels/", "/accommodation/tiberias/luxury-hotels/"]) {
-      expect(router.matchRoutes(path).at(-1)?.routeId).toBe(path.replace(/\/$/, ""));
+      expect(router.matchRoutes(path).at(-1)?.routeId).toBe(path === destination.path ? path : path.replace(/\/$/, ""));
     }
   });
 

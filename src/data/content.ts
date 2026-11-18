@@ -821,7 +821,7 @@ export const tiberiasPhotos = {
 } satisfies Record<string, StayGuidePhoto>;
 
 export const tiberiasStayGuide: HotelStayDestination = {
-  id: "tiberias", name: "Tiberias", path: "/travel-blog/best-hotels-in-tiberias/",
+  id: "tiberias", name: "Tiberias", path: "/accommodation/tiberias/",
   title: "Best hotels in Tiberias: lakefront, family and luxury stays",
     metaDescription: "Compare hotels in Tiberias by Sea of Galilee location, lake access, family activities and luxury options. Plan your Galilee travel base.",
   intro: "Tiberias hotels range from promenade bases to hillside and lakeside properties. A lake-view room, a swimming beach and an on-site water park are different features.",

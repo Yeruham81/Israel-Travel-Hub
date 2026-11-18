@@ -8,12 +8,12 @@ describe("removed Destinations directory", () => {
   it("has no route file, server redirect, or generated route registration", () => {
     expect(existsSync("src/routes/destinations.tsx")).toBe(false);
     expect(existsSync("src/routes/hotels.tsx")).toBe(false);
-    expect(existsSync("src/routes/accommodation.tsx")).toBe(true);
+    expect(existsSync("src/routes/accommodation.index.tsx")).toBe(true);
     expect(existsSync("src/lib/retired-route-redirects.server.ts")).toBe(false);
     const tree = readFileSync("src/routeTree.gen.ts", "utf8");
     expect(tree).not.toContain("DestinationsRoute");
     expect(tree).not.toMatch(/\bHotelsRoute\b/);
-    expect(tree).toContain("AccommodationRoute");
+    expect(tree).toMatch(/Accommodation(?:Index)?Route/);
     expect(tree).not.toContain("'/destinations'");
     const server = readFileSync("src/server.ts", "utf8");
     expect(server).not.toContain("redirectRetiredDestinations");

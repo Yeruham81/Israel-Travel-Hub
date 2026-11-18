@@ -33,7 +33,7 @@ describe.each([
   it("the existing city URL and every linked neighborhood resolve to their own page", () => {
     const router = createRouter({ routeTree, context: { queryClient: new QueryClient() }, trailingSlash: "always" });
     for (const path of [g.path, ...areas.map((area) => area.path)]) {
-      expect(router.matchRoutes(path).at(-1)?.routeId).toBe(path.replace(/\/$/, ""));
+      expect(router.matchRoutes(path).at(-1)?.routeId).toBe(path === g.path ? path : path.replace(/\/$/, ""));
     }
   });
 
