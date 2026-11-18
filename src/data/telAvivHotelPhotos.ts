@@ -5,6 +5,7 @@
  */
 import heroTelAviv from "@/assets/home/hero-tel-aviv.webp";
 import gordonBeach from "@/assets/home/tel-aviv-coast-card.webp";
+import alternateBeachView from "@/assets/home/hero-refresh-tel-aviv-coastline-medium.webp";
 import jaffaHarbor from "@/assets/home/hero-refresh-jaffa-port-v4-medium.webp";
 import jaffaCard from "@/assets/attractions-hub/card-jaffa-420.webp";
 import cityTaxi from "@/assets/travel-blog-hub/taxi-in-tel-aviv-44a5c4426c-420.webp";
@@ -45,7 +46,7 @@ export const telAvivHotelPhotos: Record<string, HotelIllustration> = {
     sourceUrl: "https://commons.wikimedia.org/wiki/File:Tel_Aviv_Tayelet-Strand-Promenade_Beach_(34257299744).jpg",
     licenseUrl: "https://creativecommons.org/licenses/by-sa/2.0/",
   },
-  "tlv-embassy": district("/images/city-stays/tel-aviv-beachfront.webp", "Gordon Beach and central Tel Aviv seafront"),
+  "tlv-embassy": district(alternateBeachView, "Central Tel Aviv beachfront and Mediterranean coastal views"),
   "tlv-backstage": district("/images/city-stays/tel-aviv-dizengoff.webp", "Dizengoff Square in central Tel Aviv"),
   "tlv-cinema": district("/images/hotel-cards/tlv-cinema.webp", "Illustrative urban architecture and culture in central Tel Aviv"),
   "tlv-port-tower": {
