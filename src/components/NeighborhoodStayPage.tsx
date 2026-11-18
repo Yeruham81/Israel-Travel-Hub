@@ -88,8 +88,8 @@ export function NeighborhoodStayPage({ area }: { area: NeighborhoodStayGuide }) 
           </ul>
           <p className="mt-4 text-xs leading-relaxed text-muted-foreground">
             {isJerusalem
-              ? "Photos illustrate the neighborhoods, not the hotels themselves. Booking links lead to third-party platforms; review room details, total prices and conditions before booking."
-              : "Check hotel prices, availability and booking conditions for your dates directly on Expedia."}
+              ? "Photos illustrate the neighborhoods, not the hotels themselves. Hotel stays are provided by independent properties and booked through external booking websites. Prices, room availability and booking terms can change. Before booking, check the exact room, hotel address, total price and cancellation policy directly with the booking provider."
+              : "Photos illustrate the neighborhoods, not the hotels themselves. Hotels are independently operated and bookings take place on external booking websites. Before booking, confirm the exact room, hotel address, full price, availability and cancellation terms with the booking provider."}
           </p>
         </section>
   );
@@ -160,7 +160,7 @@ export function NeighborhoodStayPage({ area }: { area: NeighborhoodStayGuide }) 
         <Section id="location" title="Map, getting around & arriving with luggage" className="scroll-mt-32">
           <div className="mt-5"><AreaMap area={area} /></div>
           {isJerusalem && <p className="mt-2 text-xs leading-relaxed text-muted-foreground">
-            This map marks the neighborhood, not individual hotel entrances. Check the exact address and walking route on the booking site.
+            The map shows the neighborhood's location. Check your hotel's exact address before booking.
           </p>}
           {area.gettingAround.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
           {isJerusalem && localInsight && <aside className="mt-5 flex items-start gap-3 rounded-xl border border-amber-300/60 bg-amber-50/70 p-4 text-sm text-foreground dark:border-amber-600/40 dark:bg-amber-950/20">
