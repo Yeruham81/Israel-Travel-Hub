@@ -73,8 +73,10 @@ describe("Accommodation booking hub",()=>{
   const bookingTipsSection = container.querySelector("#booking-tips")!;
   const faqs = screen.getByRole("heading", { name: "Frequently asked questions" });
 
-  expect(bookingSection).toHaveTextContent("Search hotels in Israel");
-  expect(agodaSection).toHaveTextContent("More hotel search options");
+  expect(bookingSection).toHaveAttribute("aria-label", "Search hotels with Booking.com");
+  expect(agodaSection).toHaveAttribute("aria-label", "Search hotels with Agoda");
+  expect(bookingSection.querySelector("h2, h3")).toBeNull();
+  expect(agodaSection.querySelector("h2, h3")).toBeNull();
   expect(stylesSection.compareDocumentPosition(bookingSection) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
   expect(bookingSection.compareDocumentPosition(bookingTipsSection) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
   expect(faqs.compareDocumentPosition(agodaSection) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
@@ -89,7 +91,7 @@ describe("Accommodation booking hub",()=>{
     const card = screen.getByTestId(`${widget.id}-hotel-search-widget`);
     const mount = screen.getByTestId(`${widget.id}-hotel-widget-mount`);
     expect(card).toContainElement(mount);
-    expect(card).toHaveTextContent(widget.title);
+    expect(mount).toHaveAttribute("aria-label", widget.title);
     const url = new URL(widget.scriptUrl);
     expect(url.origin).toBe("https://tpwgt.com");
     expect(url.pathname).toBe("/content");
