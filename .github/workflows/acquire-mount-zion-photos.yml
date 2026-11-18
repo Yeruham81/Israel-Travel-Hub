@@ -1,0 +1,80 @@
+name: Acquire licensed Mount Zion landmark photos
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - ".github/workflows/acquire-mount-zion-photos.yml"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: mount-zion-photo-import
+  cancel-in-progress: false
+
+jobs:
+  import-photographs:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+      - name: Download exact credited Wikimedia Commons photographs
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p "$RUNNER_TEMP/mount-zion" public/images/jerusalem/mount-zion
+          prefix="https://upload.wikimedia.org/wikipedia/commons/thumb"
+          curl -A "Israel-Travel-Hub editor (licensed Wikimedia content)" --retry 4 --retry-all-errors --retry-delay 3 --connect-timeout 20 --max-time 100 -fsSL "$prefix/6/67/The_cenotaph_of_David%27s_Tomb.jpg/960px-The_cenotaph_of_David%27s_Tomb.jpg" -o "$RUNNER_TEMP/mount-zion/david.jpg"
+          curl -A "Israel-Travel-Hub editor (licensed Wikimedia content)" --retry 4 --retry-all-errors --retry-delay 3 --connect-timeout 20 --max-time 100 -fsSL "$prefix/1/16/Jerusalem_-_Zion_gate.jpg/960px-Jerusalem_-_Zion_gate.jpg" -o "$RUNNER_TEMP/mount-zion/zion-gate.jpg"
+          curl -A "Israel-Travel-Hub editor (licensed Wikimedia content)" --retry 4 --retry-all-errors --retry-delay 3 --connect-timeout 20 --max-time 100 -fsSL "$prefix/1/1b/Jerusalem_-_Oskar_Schindler%27s_Grave.jpg/960px-Jerusalem_-_Oskar_Schindler%27s_Grave.jpg" -o "$RUNNER_TEMP/mount-zion/schindler.jpg"
+          curl -A "Israel-Travel-Hub editor (licensed Wikimedia content)" --retry 4 --retry-all-errors --retry-delay 3 --connect-timeout 20 --max-time 100 -fsSL "$prefix/1/1c/Chamber_of_the_Holocaust_-_Outside_King_David%27s_Tomb_-_Jerusalem_-_Israel_-_02_%285676110809%29.jpg/960px-Chamber_of_the_Holocaust_-_Outside_King_David%27s_Tomb_-_Jerusalem_-_Israel_-_02_%285676110809%29.jpg" -o "$RUNNER_TEMP/mount-zion/chamber.jpg"
+      - name: Convert to web-optimized 4-to-3 WebP
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -m pip install --disable-pip-version-check --quiet Pillow
+          python - <<'PY'
+          from PIL import Image, ImageOps
+          from pathlib import Path
+          import os
+          originals = Path(os.environ["RUNNER_TEMP"]) / "mount-zion"
+          output = Path("public/images/jerusalem/mount-zion")
+          names = {
+            "david.jpg": "davids-tomb.webp",
+            "zion-gate.jpg": "zion-gate.webp",
+            "schindler.jpg": "oskar-schindler-grave.webp",
+            "chamber.jpg": "chamber-of-the-holocaust.webp",
+          }
+          for source, target in names.items():
+              with Image.open(originals / source) as img:
+                  img = ImageOps.exif_transpose(img).convert("RGB")
+                  if img.width < 500 or img.height < 380:
+                      raise ValueError(f"Image too small: {source} {img.size}")
+                  # Preserve the actual landmark; no invented details or upscaling.
+                  img = ImageOps.fit(img, (800, 600), method=Image.Resampling.LANCZOS, centering=(0.5, 0.5))
+                  img.save(output / target, format="WEBP", quality=82, method=6)
+              data = (output / target).read_bytes()
+              if data[:4] != b"RIFF" or data[8:12] != b"WEBP":
+                  raise ValueError(f"Invalid WebP: {target}")
+              if len(data) > 180_000:
+                  raise ValueError(f"Photo too large: {target} {len(data)}")
+              print(f"{target}: {len(data)} bytes")
+          PY
+      - name: Commit local images to repository
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add public/images/jerusalem/mount-zion/davids-tomb.webp public/images/jerusalem/mount-zion/zion-gate.webp public/images/jerusalem/mount-zion/oskar-schindler-grave.webp public/images/jerusalem/mount-zion/chamber-of-the-holocaust.webp
+          if git diff --cached --quiet; then
+            echo "Photos already up to date."
+            exit 0
+          fi
+          git commit -m "Add four licensed Mount Zion landmark photographs"
+          git pull --rebase origin main
+          git push origin HEAD:main
