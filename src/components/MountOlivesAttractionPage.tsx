@@ -44,14 +44,13 @@ export const mountOlivesDestinationContent: AttractionDestinationContent = {
   highlightContent: (
     <div className="mt-4 space-y-3">
       <p className="text-sm leading-relaxed sm:text-base">{mountOlivesEditorialUpdate.stopIntro}</p>
-      {mountOlivesEditorialUpdate.stops.map((stop, index) => <AttractionHighlight
+      {mountOlivesEditorialUpdate.stops.map(stop => <AttractionHighlight
         key={stop.name}
         title={stop.name}
         image={stop.image ? { src: stop.image.src, alt: stop.image.alt } : undefined}
       >
         <p>{stop.description}</p>
         <p>{stop.visit}</p>
-        <p className="text-xs font-semibold text-muted-foreground">{mountOlivesSite.hours[index]?.name === stop.name || index === 0 ? mountOlivesSite.hours[index]?.time : ""}</p>
       </AttractionHighlight>)}
       <AttractionPracticalTip>The hillside is steep and some entrances are on different paths. For a comfortable first visit, I would begin at the Seven Arches lookout, choose one or two church interiors and finish at Gethsemane rather than returning uphill on foot.</AttractionPracticalTip>
     </div>
