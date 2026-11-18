@@ -320,7 +320,11 @@ export const expandedTravelGuides = {
     description: "Where to shop in Jerusalem: compare Mahane Yehuda food stalls, Old City crafts, Mamilla shops, Ben Yehuda Street and Malha mall.",
     intro: "Choose the shopping experience you want, then combine nearby places. Jerusalem's food markets, pedestrian streets and enclosed malls serve different purposes.",
     answer: "Start with the Old City for souvenir browsing, Mahane Yehuda for food and market atmosphere, Mamilla/Ben Yehuda for central shopping, or Malha for an enclosed mall. Add neighbourhood boutiques or crafts around a current programme. Check the actual shop and date, especially on Friday and Saturday; a lively restaurant area does not mean all retail is trading.",
-    topics: ["shopping", "destinations", "tips"], photo: photos.market,
+    topics: ["shopping", "destinations", "tips"], photo: {
+      src: "/images/attractions/old-jerusalem-via-dolorosa.webp",
+      alt: "Old City Jerusalem market passage and stone-paved souk",
+      credit: "Photo from the publisher's Jerusalem image library.",
+    },
     facts: [{ label: "Food market", text: "Mahane Yehuda: stalls and evening venues differ" }, { label: "Old City edge", text: "Mamilla connects naturally with a Jaffa Gate visit" }, { label: "Weekend", text: "Check individual businesses and event dates" }],
     comparison: { caption: "Which Jerusalem shopping area fits your plans?", headers: ["Area", "Consider it for", "Keep in mind"], rows: [["Old City / Cardo", "Souvenirs, Judaica, galleries and traditional goods", "Lanes, steps, product origin and individual opening"], ["Mahane Yehuda", "Food, ingredients and market atmosphere", "Stall trading differs from restaurant/nightlife hours"], ["Mamilla / Ben Yehuda", "Central shops, cafés and browsing", "Different retail mix and individual prices"], ["Malha", "An enclosed shopping-centre visit", "A separate journey beyond the central walking area"], ["Neighbourhoods / craft venues", "Independent shops, studios and dated markets", "Verify the current business or event programme"]] },
     sections: [
