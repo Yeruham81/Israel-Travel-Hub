@@ -1,0 +1,99 @@
+name: Optimize Tours Hub image delivery
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "scripts/optimize_tours_hub_images.py"
+      - ".github/workflows/optimize-tours-hub-images.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  actions: write
+
+concurrency:
+  group: optimize-tours-hub-images
+  cancel-in-progress: false
+
+jobs:
+  optimize:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Checkout current main
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+          persist-credentials: true
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install Pillow
+        run: python -m pip install --disable-pip-version-check 'Pillow>=11,<13'
+      - name: Generate and wire the compact tours hub photos
+        run: python scripts/optimize_tours_hub_images.py
+      - name: Verify output sizes, decodability and preservation of originals
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          from PIL import Image
+          r = json.loads(Path('docs/TOURS_HUB_IMAGE_DELIVERY_REPORT.json').read_text())
+          assert len(r['files']) == 10
+          assert r['reusedFiles'] == 7 and r['generatedFiles'] == 3
+          assert r['savedBytes'] > 700_000
+          for file in r['files']:
+              with Image.open(file['served']) as photo:
+                  assert photo.format == 'WEBP', file
+                  assert photo.width >= 224
+              assert file['servedBytes'] < file['originalBytes']
+          assert r['sourceFilesUnmodified']
+          print(f"Source-to-served reduction: {r['savedBytes']} bytes")
+          PY
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: "1.4.4"
+      - name: Install dependencies
+        run: bash scripts/install-ci-dependencies.sh
+      - name: Build project and regenerate typed routes
+        run: bun run build
+      - name: Run full tours hub and category regression tests
+        run: bun x vitest run src/test/tours.test.tsx
+      - name: TypeScript check
+        run: bun x tsc --noEmit
+      - name: Commit verified hub-only assets and references
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add src/assets/tours-hub/*.webp \
+            src/data/tourHubThumbnails.ts \
+            src/components/TourDiscovery.tsx \
+            src/test/tours.test.tsx \
+            docs/TOURS_HUB_IMAGE_DELIVERY_REPORT.json
+          if git diff --cached --quiet; then
+            echo "Tours hub images already optimized"
+          else
+            git commit -m "Serve compact WebP category photos on tours hub only"
+            # Discard only local generated outputs not staged in this image commit.
+            git reset --hard HEAD
+            for attempt in 1 2 3 4 5; do
+              git fetch origin main
+              git rebase origin/main
+              if git push origin HEAD:main; then
+                echo "Verified tour hub changes safely pushed"
+                break
+              fi
+              if [[ "$attempt" == "5" ]]; then
+                echo "::error::Could not safely update main"
+                exit 1
+              fi
+              sleep 2
+            done
+          fi
+      - name: Validate the optimized main for deployment
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh workflow run full-project-validation.yml --ref main
