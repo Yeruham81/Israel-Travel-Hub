@@ -1365,6 +1365,10 @@ export const affiliateConfig: Record<string, { trackingUrl: string } | undefined
   "tour-jerusalem-street-art-walk-viator@tours-jerusalem": { trackingUrl: "https://viator.tpm.li/y3qMoNFK" },
   "tour-jerusalem-old-city-walk-viator@tours-jerusalem": { trackingUrl: "https://viator.tpm.li/NfTH03Dg" },
   "tour-jerusalem-private-oldcity-walk-viator@tours-jerusalem": { trackingUrl: "https://viator.tpm.li/WFfLsF8z" },
+  // The Old City guide uses the same already-approved affiliate destinations,
+  // with a distinct pageId for outbound click attribution.
+  "tour-jerusalem-old-city-walk-viator@attractions-old-city-jerusalem": { trackingUrl: "https://viator.tpm.li/NfTH03Dg" },
+  "tour-jerusalem-private-oldcity-walk-viator@attractions-old-city-jerusalem": { trackingUrl: "https://viator.tpm.li/WFfLsF8z" },
   "tour-jerusalem-beyond-walls-viator@tours-jerusalem": { trackingUrl: "https://viator.tpm.li/UWEBkSk3" },
   "tour-jerusalem-day-tel-aviv-viator@tours-jerusalem": { trackingUrl: "https://viator.tpm.li/qw5niivo" },
   "tour-jerusalem-bethlehem-private-getyourguide@tours-jerusalem": { trackingUrl: "https://getyourguide.tpm.li/uIfr7roD" },
