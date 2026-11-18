@@ -17,7 +17,7 @@ export function StayEditorialGuidePage({ guide, id }: { guide: CityStayGuide | H
  const photo = isCity ? neighborhoodGuidesForCity(guide.id)[0]?.photo : guide.photo;
  return <main className="pb-10">
   <GuideHeader crumbs={[{ name: "Home", to: "/" }, { name: "Travel guides", to: "/travel-blog/" }, { name: info.title, to: info.path as LinkProps["to"] }]}
-    eyebrow={"Travel guide · " + name} title={info.title} intro={info.intro} image={photo} checkedAt={guide.reviewedAt} />
+    eyebrow={"Travel guide · " + name} title={info.title} intro={info.intro} {...(photo ? { image: photo } : {})} {...(guide.reviewedAt ? { checkedAt: guide.reviewedAt } : {})} />
   <OnThisPage sections={sections}/>
   <article className="mx-auto max-w-5xl px-4">
    <Section id="overview" title={"Choosing where to stay in " + name} className="scroll-mt-32">

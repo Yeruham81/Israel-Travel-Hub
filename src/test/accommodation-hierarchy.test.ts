@@ -14,7 +14,7 @@ describe("planning guides and accommodation hierarchy", () => {
   ["deadsea", "dead-sea", deadSeaStayGuide],
  ] as const;
  it("keeps the five information guides separate from five booking destinations", () => {
-  expect(accommodationDestinations.filter(d=>d.id!=="eilat").map(d=>d.to)).toEqual(pages.map(p=>"/accommodation/"+p[1]+"/"));
+  expect(accommodationDestinations.filter(d=>d.id!=="eilat").map(d=>"to" in d ? d.to : null)).toEqual(pages.map(p=>"/accommodation/"+p[1]+"/"));
   for(const [id,slug,g] of pages) {
    expect(g.path).toBe("/accommodation/"+slug+"/");
    expect(accommodationEditorial[id].path).toMatch(/^\/travel-blog\//);

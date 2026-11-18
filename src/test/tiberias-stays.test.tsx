@@ -13,9 +13,9 @@ import { CANONICAL_ORIGIN } from "@/lib/site";
 import { readOutboundClicks } from "@/lib/outbound";
 import { hotelAffiliateUrl } from "@/lib/hotel-affiliate";
 import { routeTree } from "@/routeTree.gen";
-import { Route as DestinationRoute } from "@/routes/travel-blog.best-hotels-in-tiberias";
-import { Route as FamilyRoute } from "@/routes/tiberias.family-hotels";
-import { Route as LuxuryRoute } from "@/routes/tiberias.luxury-hotels";
+import { Route as DestinationRoute } from "@/routes/accommodation.tiberias.index";
+import { Route as FamilyRoute } from "@/routes/accommodation.tiberias.family-hotels";
+import { Route as LuxuryRoute } from "@/routes/accommodation.tiberias.luxury-hotels";
 
 vi.mock("@tanstack/react-router", async () => {
   const actual = await vi.importActual<typeof import("@tanstack/react-router")>("@tanstack/react-router");
@@ -30,7 +30,7 @@ describe("Tiberias destination and distinct hotel intents", () => {
   it("keeps the original destination URL and resolves both new intent routes", () => {
     const router = createRouter({ routeTree, context: { queryClient: new QueryClient() }, trailingSlash: "always" });
     expect(destination.path).toBe("/travel-blog/best-hotels-in-tiberias/");
-    for (const path of [destination.path, "/tiberias/family-hotels/", "/tiberias/luxury-hotels/"]) {
+    for (const path of [destination.path, "/accommodation/tiberias/family-hotels/", "/accommodation/tiberias/luxury-hotels/"]) {
       expect(router.matchRoutes(path).at(-1)?.routeId).toBe(path.replace(/\/$/, ""));
     }
   });

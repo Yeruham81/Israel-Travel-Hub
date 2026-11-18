@@ -4,7 +4,7 @@ import { cleanup, fireEvent, render, screen, waitFor, within } from "@testing-li
 import { afterEach, describe, expect, it, vi } from "vitest";
 import { GlobalNav, SiteHeader } from "@/components/Layout";
 import { routeTree } from "@/routeTree.gen";
-import { Route as HotelsRoute } from "@/routes/accommodation";
+import { Route as HotelsRoute } from "@/routes/accommodation.index";
 import { accommodationDestinations } from "@/data/content";
 import { tourCategories, tourCategoryPaths } from "@/data/tours";
 import { travelGuidePaths } from "@/data/registry";
@@ -121,7 +121,7 @@ describe("shared sidebar navigation", () => {
   });
 
   it("renders the five topic groups and marks the exact current page", async () => {
-    const router = await navigationRouter("/travel-blog/where-to-stay-in-jerusalem/");
+    const router = await navigationRouter("/accommodation/jerusalem/");
     render(<RouterContextProvider router={router}><GlobalNav /></RouterContextProvider>);
     const nav = screen.getByRole("navigation", { name: "Explore Israel" });
     expect(within(nav).getAllByRole("heading").map((heading) => heading.textContent)).toEqual([
@@ -144,7 +144,7 @@ describe("shared sidebar navigation", () => {
       ["To Ein Bokek at the Dead Sea", "/airport-transfers/ein-bokek/"],
       ["To other destinations", "/airport-transfers/"],
       ["Private driver service", "/private-driver/"],
-      ["Rent a car in Israel", "https://discovercars.tpm.li/w2RwEsmb?sub_id=itt_car_where_to_stay_in_jerusalem"],
+      ["Rent a car in Israel", "https://discovercars.tpm.li/w2RwEsmb?sub_id=itt_car_accommodation_jerusalem"],
     ]);
   });
 
@@ -312,14 +312,14 @@ describe("shared sidebar navigation", () => {
 });
 
 describe("accommodation destination hub", () => {
-  it("presents six illustrated destinations with real guide links and inviting copy", async () => {
+  it("presents five hotel destinations and separate guide links", async () => {
     const router = await navigationRouter("/accommodation/");
     const Hotels = HotelsRoute.options.component!;
     render(<RouterContextProvider router={router}><Hotels /></RouterContextProvider>);
     const cards = screen.getAllByTestId("accommodation-destination-card");
-    expect(cards).toHaveLength(6);
+    expect(cards).toHaveLength(5);
     expect(cards.map((card) => within(card).getByRole("heading").textContent)).toEqual([
-      "Hotels in Jerusalem", "Hotels in Tel Aviv", "Hotels in Haifa", "Hotels in Tiberias", "Dead Sea hotels", "Hotels in Eilat",
+      "Hotels in Jerusalem", "Hotels in Tel Aviv", "Hotels in Haifa", "Hotels in Tiberias", "Dead Sea hotels",
     ]);
     for (const card of cards) {
       expect(within(card).getByRole("img")).toHaveAttribute("src");
@@ -328,19 +328,14 @@ describe("accommodation destination hub", () => {
       const href = card.getAttribute("href")!;
       if (href.startsWith("/")) expect(router.matchRoutes(href.split("#")[0]!).at(-1)?.routeId).toBe(href.split("#")[0]!.replace(/\/$/, ""));
     }
-    const eilat = cards.at(-1)!;
-    expect(eilat).toHaveAttribute("href", "/travel-blog/eilat/#arrival-stay");
-    expect(eilat).toHaveTextContent("Explore Eilat Hotels");
-    expect(eilat).not.toHaveAttribute("target");
-    expect(eilat).not.toHaveTextContent("israel-taxi.com");
     expect(screen.queryByText("Guide image sources")).not.toBeInTheDocument();
     expect(document.querySelector('a[href*="israel-taxi.com/wp-content/"]')).toBeNull();
   });
 
-  it("retains the accommodation URL and includes Eilat in page discovery", async () => {
+  it("retains the accommodation URL and a concise city-hotel description", async () => {
     const head = await HotelsRoute.options.head?.({} as never);
     expect(head).toMatchObject({
-      meta: expect.arrayContaining([expect.objectContaining({ name: "description", content: expect.stringContaining("Eilat") })]),
+      meta: expect.arrayContaining([expect.objectContaining({ name: "description", content: expect.stringContaining("Jerusalem") })]),
       links: expect.arrayContaining([expect.objectContaining({ rel: "canonical", href: expect.stringMatching(/\/accommodation\/$/) })]),
     });
     expect(new Set(accommodationDestinations.map((destination) => destination.photo.src)).size).toBe(6);

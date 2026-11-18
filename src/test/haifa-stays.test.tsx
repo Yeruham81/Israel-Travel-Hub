@@ -12,9 +12,9 @@ import { CANONICAL_ORIGIN } from "@/lib/site";
 import { readOutboundClicks } from "@/lib/outbound";
 import { hotelAffiliateUrl } from "@/lib/hotel-affiliate";
 import { routeTree } from "@/routeTree.gen";
-import { Route as DestinationRoute } from "@/routes/travel-blog.best-hotels-in-haifa";
-import { Route as FamilyRoute } from "@/routes/haifa.family-hotels";
-import { Route as BoutiqueRoute } from "@/routes/haifa.boutique-hotels";
+import { Route as DestinationRoute } from "@/routes/accommodation.haifa.index";
+import { Route as FamilyRoute } from "@/routes/accommodation.haifa.family-hotels";
+import { Route as BoutiqueRoute } from "@/routes/accommodation.haifa.boutique-hotels";
 
 vi.mock("@tanstack/react-router", async () => {
   const actual = await vi.importActual<typeof import("@tanstack/react-router")>("@tanstack/react-router");
@@ -28,7 +28,7 @@ describe("Haifa accommodation: location and travel intent before booking", () =>
   it("uses the original destination path with two independent category routes and a global hotel shortcut", () => {
     const router = createRouter({ routeTree, context: { queryClient: new QueryClient() }, trailingSlash: "always" });
     expect(destination.path).toBe("/travel-blog/best-hotels-in-haifa/");
-    for (const path of [destination.path, "/haifa/boutique-hotels/", "/haifa/family-hotels/"]) {
+    for (const path of [destination.path, "/accommodation/haifa/boutique-hotels/", "/accommodation/haifa/family-hotels/"]) {
       expect(router.matchRoutes(path).at(-1)?.routeId).toBe(path.replace(/\/$/, ""));
     }
     expect(hotelNav.find((item) => item.label === "Hotels in Haifa")?.to).toBe(destination.path);

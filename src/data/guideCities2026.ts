@@ -269,7 +269,7 @@ export const cityCultureGuides = {
         "links": [
           {
             "label": "Compare beachfront hotel areas",
-            "to": "/tel-aviv/beachfront-hotels/"
+            "to": "/accommodation/tel-aviv/beachfront-hotels/"
           }
         ]
       },
@@ -295,7 +295,7 @@ export const cityCultureGuides = {
           },
           {
             "label": "Choose a Jaffa hotel area",
-            "to": "/tel-aviv/jaffa-hotels/"
+            "to": "/accommodation/tel-aviv/jaffa-hotels/"
           }
         ]
       },

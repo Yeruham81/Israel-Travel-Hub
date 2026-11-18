@@ -11,9 +11,9 @@ import { CANONICAL_ORIGIN } from "@/lib/site";
 import { readOutboundClicks } from "@/lib/outbound";
 import { hotelAffiliateUrl } from "@/lib/hotel-affiliate";
 import { routeTree } from "@/routeTree.gen";
-import { Route as DestinationRoute } from "@/routes/travel-blog.best-dead-sea-hotels";
-import { Route as SpaRoute } from "@/routes/dead-sea.spa-hotels";
-import { Route as FamilyRoute } from "@/routes/dead-sea.family-hotels";
+import { Route as DestinationRoute } from "@/routes/accommodation.dead-sea.index";
+import { Route as SpaRoute } from "@/routes/accommodation.dead-sea.spa-hotels";
+import { Route as FamilyRoute } from "@/routes/accommodation.dead-sea.family-hotels";
 
 vi.mock("@tanstack/react-router", async () => {
   const actual = await vi.importActual<typeof import("@tanstack/react-router")>("@tanstack/react-router");

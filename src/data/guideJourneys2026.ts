@@ -88,7 +88,7 @@ export const journeyDestinationGuides = {
           },
           {
             "label": "Compare spa stays",
-            "to": "/dead-sea/spa-hotels/"
+            "to": "/accommodation/dead-sea/spa-hotels/"
           }
         ]
       },
@@ -180,7 +180,7 @@ export const journeyDestinationGuides = {
     "services": [
       {
         "label": "Compare Dead Sea family stays",
-        "to": "/dead-sea/family-hotels/"
+        "to": "/accommodation/dead-sea/family-hotels/"
       },
       {
         "label": "Plan airport transport to Ein Bokek",
