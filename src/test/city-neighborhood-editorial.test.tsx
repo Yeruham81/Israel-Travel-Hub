@@ -30,8 +30,8 @@ describe("Jerusalem and Tel Aviv neighbourhood editorial guides", () => {
     expect(container.querySelectorAll('iframe[src^="https://maps.google.com/maps?"]')).toHaveLength(areas.length);
     expect(container.querySelectorAll('a[href*="google.com/maps"]')).toHaveLength(0);
     for (let i = 0; i < areas.length; i++) {
-      const area = areas[i];
-      const section = sections[i];
+      const area = areas[i]!;
+      const section = sections[i]!;
       expect(section.querySelector("figcaption")?.textContent).toBe(area.photo.alt);
       expect(section).not.toHaveTextContent("neighbourhood view");
       const button = within(section).getByRole("link", { name: new RegExp(`Browse hotels in ${area.shortName}`) });
