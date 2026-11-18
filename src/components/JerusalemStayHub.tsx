@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link, type LinkProps } from "@tanstack/react-router";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, BookOpen } from "lucide-react";
 import {
   type CityStayGuide, type NeighborhoodStayGuide, type StayPreference, preferenceLabels,
 } from "@/data/content";
@@ -16,12 +16,22 @@ import { AreaPhotoCredit } from "@/components/AreaMap";
 import { hotelBrowseAffiliateUrl } from "@/lib/hotel-affiliate";
 import { recordOutboundClick, relFor } from "@/lib/outbound";
 import jerusalemHeroPhoto from "@/assets/home/hero-refresh-jerusalem-jaffa-gate-v4-medium.webp";
+import jerusalemAreaGuidePhoto from "@/assets/home/jerusalem-old-city-tile.webp";
 
 const pageSections = [
-  ["book", "Hotels"], ["areas", "Neighborhoods"], ["compare", "Compare areas"],
+  ["book", "Hotels"], ["area-guide", "Where to stay"], ["areas", "Neighborhoods"], ["compare", "Compare areas"],
   ["checklist", "Booking tips"], ["faq", "FAQ"], ["explore", "Local guides"],
   ["trip-planning", "Trip planning"], ["contact", "Contact me"],
 ] as const;
+
+const neighborhoodCta: Record<string, string> = {
+  downtown: "Discover Downtown hotels",
+  mamilla: "Browse Mamilla hotels",
+  "old-city": "Find an Old City stay",
+  "mahane-yehuda": "Explore market-area hotels",
+  "east-jerusalem": "Discover East Jerusalem stays",
+  "german-colony": "Browse German Colony & Baka hotels",
+};
 
 export function JerusalemStayHub({ g, areas }: { g: CityStayGuide; areas: NeighborhoodStayGuide[] }) {
   const [preference, setPreference] = useState<StayPreference | null>(null);
@@ -62,12 +72,33 @@ export function JerusalemStayHub({ g, areas }: { g: CityStayGuide; areas: Neighb
                 onClick={() => recordOutboundClick({ pageId: "stay-jerusalem", productId: booking.id, offerId: booking.id })}
                 className="btn btn-primary inline-flex min-h-11 items-center justify-center gap-2"
               >
-                Browse more on {booking.providerName} <ArrowRight className="h-4 w-4" aria-hidden />
+                Browse more Jerusalem hotels <ArrowRight className="h-4 w-4" aria-hidden />
                 <span className="sr-only"> (opens in a new tab)</span>
               </a>
             ))}
           </div>
         </div>
+
+        <section id="area-guide" aria-labelledby="area-guide-h" className="mt-8 scroll-mt-28">
+          <div className="grid overflow-hidden rounded-2xl border bg-secondary/30 sm:grid-cols-[minmax(0,1fr)_230px]">
+            <div className="min-w-0 p-5 sm:p-6">
+              <p className="eyebrow inline-flex items-center gap-2"><BookOpen className="h-4 w-4" aria-hidden /> Jerusalem hotel neighborhoods</p>
+              <h2 id="area-guide-h" className="mt-2 text-xl font-semibold sm:text-2xl">
+                Not sure where to stay in Jerusalem?
+              </h2>
+              <p className="mt-2 max-w-xl text-sm leading-relaxed text-muted-foreground">
+                My guide compares the city's main areas, from lively Downtown and Mamilla to the Old City and quieter residential neighborhoods. Find the best base for your plans before choosing a room.
+              </p>
+              <Link
+                to={"/travel-blog/where-to-stay-in-jerusalem/" as LinkProps["to"]}
+                className="mt-4 inline-flex min-h-11 items-center gap-2 rounded-lg border border-primary/30 bg-card px-4 py-2.5 text-sm font-semibold text-primary transition-colors hover:border-primary/60 hover:bg-secondary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+              >
+                Explore my guide to Jerusalem neighborhoods <ArrowRight className="h-4 w-4" aria-hidden />
+              </Link>
+            </div>
+            <img src={jerusalemAreaGuidePhoto} alt="Jerusalem Old City skyline and surrounding neighborhoods" width={460} height={300} loading="lazy" decoding="async" className="hidden h-full w-full object-cover sm:block" />
+          </div>
+        </section>
 
         <section id="areas" aria-labelledby="areas-h" className="mt-12 scroll-mt-28">
           <h2 id="areas-h" className="text-2xl font-semibold sm:text-3xl">Choose your Jerusalem neighborhood</h2>
@@ -111,7 +142,7 @@ export function JerusalemStayHub({ g, areas }: { g: CityStayGuide; areas: Neighb
                   className="mt-3 inline-flex w-fit min-h-8 items-center gap-1 text-xs font-semibold text-primary underline underline-offset-4 sm:text-sm"
                   aria-label={"Explore " + area.name + ": area guide and hotel recommendations"}
                 >
-                  Explore Area & Hotels <ArrowRight className="h-4 w-4" aria-hidden />
+                  {neighborhoodCta[area.id] || "Explore hotels in this area"} <ArrowRight className="h-4 w-4" aria-hidden />
                 </Link>
               </div>
             </li>)}

@@ -3,6 +3,7 @@ import type { ReactNode } from "react";
 import museumJerusalem from "@/assets/guides/museums-in-jerusalem.jpg";
 import jerusalemOverview from "@/assets/home/hero-jerusalem.webp";
 import oldCity from "@/assets/guides/holy-sepulchre.jpg";
+import mountOfOlivesCard from "@/assets/attractions-hub/card-mount-of-olives-420.webp";
 import airportHall from "@/assets/home/ben-gurion-t3.webp";
 import bethlehemTravel from "@/assets/guides/2026-10/jerusalem-to-bethlehem.webp";
 import deadSeaTravel from "@/assets/guides/2026-10/jerusalem-to-the-dead-sea.webp";
@@ -51,7 +52,7 @@ const card = (title: string, to: string, note: string, photo: string, alt: strin
 /**
  * A fixed editorial sequence, not an auto-sorted link cloud.
  *
- * Local: exactly four guides directly about the destination and its immediate region.
+ * Local: six Jerusalem guides or four for other destinations, directly relevant to the city or region.
  * Onward: exactly six transport, excursions and wider-trip planning guides.
  * Both sections use genuine article routes and distinct local photographs.
  * A single property card can appear across pages; these guide cards must never
@@ -65,6 +66,8 @@ export const stayGuideGroups: Record<Region, GuideGroups> = {
       card("Shopping in Jerusalem", "/travel-blog/shopping-in-jerusalem/", "Explore markets, craft stalls and local shopping streets.", "/images/jerusalem/hutzot-hayotzer.webp", "Artisan shops in Jerusalem"),
       card("Jerusalem Old City", "/attractions/old-city-jerusalem/", "Understand the quarters, historic gates and walking routes.", oldCity, "Historic church and stone architecture inside the Old City"),
       card("Jerusalem travel guide", "/travel-blog/jerusalem-travel-guide/", "Discover the city’s principal sights and plan your days.", jerusalemOverview, "Jerusalem skyline and old city"),
+      card("Mount of Olives", "/attractions/mount-of-olives/", "Explore the historic hillside, viewpoints and religious landmarks.", mountOfOlivesCard, "Mount of Olives churches and Jerusalem panorama"),
+      card("Churches in Jerusalem", "/travel-blog/churches-in-jerusalem/", "Plan visits to important churches across Jerusalem.", "/images/jerusalem/church-of-all-nations.webp", "Church of All Nations near the Mount of Olives"),
     ],
     onward: [
       card("Ben Gurion Airport to Jerusalem", "/travel-blog/how-to-get-from-ben-gurion-airport-to-jerusalem/", "Compare train, bus, taxi and transfer arrangements.", airportHall, "Ben Gurion Airport terminal"),
@@ -182,7 +185,7 @@ export function StayTripLinks({
     {local.length > 0 && <section id="explore" aria-labelledby="stay-explore-h" className="mt-14 scroll-mt-32">
       <h2 id="stay-explore-h" className="text-2xl font-bold sm:text-3xl">Explore more around {set.name}</h2>
       <p className="mt-2 text-muted-foreground">Explore places and practical guides directly related to {set.name}.</p>
-      {renderCards(local, "sm:grid-cols-2", "stay-local-photo-grid")}
+      {renderCards(local, region === "jerusalem" ? "grid-cols-2 lg:grid-cols-3" : "sm:grid-cols-2", "stay-local-photo-grid")}
     </section>}
     {onward.length > 0 && <section id="trip-planning" aria-labelledby="stay-planning-h" className="scroll-mt-32">
       <h2 id="stay-planning-h" className="text-2xl font-bold sm:text-3xl">Plan the rest of your trip</h2>
