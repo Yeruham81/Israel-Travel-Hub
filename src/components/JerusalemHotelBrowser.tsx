@@ -117,7 +117,7 @@ export function JerusalemHotelBrowser() {
   );
 }
 
-function JerusalemHotelTile({ hotel }: { hotel: HotelRecommendation }) {
+export function JerusalemHotelTile({ hotel, pageId = "stay-jerusalem", showArea = true }: { hotel: HotelRecommendation; pageId?: string; showArea?: boolean }) {
   const [photoFailed, setPhotoFailed] = useState(false);
   const area = jerusalemAreaGuides.find((item) => item.id === hotel.areaId);
   if (!area) return null;
@@ -128,7 +128,7 @@ function JerusalemHotelTile({ hotel }: { hotel: HotelRecommendation }) {
   const copy = jerusalemHotelTileCopy[hotel.id] || { description: hotel.summary, bestFor: hotel.bestFor };
 
   return (
-    <li className="group flex min-w-0 flex-col overflow-hidden rounded-2xl border bg-card shadow-sm transition-all hover:border-primary/50 hover:shadow-md sm:grid sm:grid-cols-[160px_minmax(0,1fr)] sm:grid-rows-[1fr_auto]" data-testid="jerusalem-hotel-card">
+    <li className="group flex min-w-0 flex-col overflow-hidden rounded-2xl border bg-card shadow-sm transition-all hover:border-primary/50 hover:shadow-md sm:grid sm:grid-cols-[160px_minmax(0,1fr)] sm:grid-rows-[1fr_auto]" data-testid={showArea ? "jerusalem-hotel-card" : "hotel-recommendation"}>
       <div className="relative overflow-hidden bg-muted sm:row-span-2">
         <img
           src={image.src} alt={image.alt}
@@ -137,9 +137,9 @@ function JerusalemHotelTile({ hotel }: { hotel: HotelRecommendation }) {
           data-testid="hotel-illustration"
           className="aspect-[16/9] w-full object-cover sm:aspect-auto sm:h-full sm:min-h-[215px]"
         />
-        <span className="absolute bottom-2 left-2 max-w-[calc(100%-1rem)] rounded-md bg-background/95 px-2 py-1 text-[11px] font-medium leading-tight text-foreground shadow-sm">
+        {showArea && <span className="absolute bottom-2 left-2 max-w-[calc(100%-1rem)] rounded-md bg-background/95 px-2 py-1 text-[11px] font-medium leading-tight text-foreground shadow-sm">
           {area.shortName}
-        </span>
+        </span>}
       </div>
       <div className="flex min-w-0 flex-col px-4 pb-3 pt-4">
         <h3 className="text-lg font-semibold leading-snug">{hotel.name}</h3>
@@ -150,11 +150,11 @@ function JerusalemHotelTile({ hotel }: { hotel: HotelRecommendation }) {
       {booking && (
         <div className="border-t bg-secondary/20 px-3 py-3 sm:col-start-2 sm:px-4">
           <a
-            href={hotelAffiliateUrl(booking, "stay-jerusalem", hotel.id)}
+            href={hotelAffiliateUrl(booking, pageId, hotel.id)}
             target="_blank" rel={relFor(booking.isAffiliate)}
-            onClick={() => recordOutboundClick({ pageId: "stay-jerusalem", productId: hotel.id, offerId: booking.id })}
+            onClick={() => recordOutboundClick({ pageId, productId: hotel.id, offerId: booking.id })}
             className="inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-lg border border-primary/30 bg-primary/5 px-4 py-2.5 text-center text-sm font-semibold text-primary transition-colors hover:border-primary/60 hover:bg-primary/10 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary" data-testid="jerusalem-hotel-booking-cta"
-            aria-label={"Check rooms & rates for " + hotel.name + " on Expedia"}
+            aria-label={showArea ? "Check rooms & rates for " + hotel.name + " on Expedia" : `${booking.ctaLabel} for ${hotel.name}`}
           >
             Check rooms & rates <ExternalLink className="h-4 w-4 shrink-0" aria-hidden />
             <span className="sr-only"> (opens in a new tab)</span>
