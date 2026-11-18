@@ -719,6 +719,59 @@ jobs:
           NODE
             rm -f "$data"
           done
+          # Verify the upgraded Mount Zion guide before marking the publication successful.
+          zion_html="$(mktemp)"
+          curl --http1.1 --retry 2 --retry-all-errors --max-time 30 -fsSL -o "$zion_html" "$VITE_CANONICAL_ORIGIN/attractions/mount-zion/"
+          node - "$zion_html" "$VITE_CANONICAL_ORIGIN/attractions/mount-zion/" <<'NODE'
+          const fs = require("node:fs");
+          const html = fs.readFileSync(process.argv[2], "utf8");
+          const url = process.argv[3];
+          for (const required of [
+            "Mount Zion: What to See", "Dormition Abbey", "David", "Gallicantu",
+            "Cenacle", "Zion Gate", "Oskar Schindler", "Chamber of the Holocaust",
+            'data-testid="mount-zion-hours-fees"',
+            'data-testid="mount-zion-accessibility"',
+            'data-testid="mount-zion-access-points"',
+            'data-testid="mount-zion-map"',
+            'data-testid="mount-zion-walking-routes"',
+            'data-testid="mount-zion-walking-connections"',
+            'data-testid="mount-zion-tour-cards"',
+          ]) {
+            if (!html.includes(required)) {
+              console.error("::error::Mount Zion public page missing " + required);
+              process.exit(1);
+            }
+          }
+          const canonical = [...html.matchAll(/<link\b[^>]*>/gi)].map(x=>x[0]).filter(tag=>/\brel=["']canonical["']/i.test(tag));
+          if (!canonical.some(tag=>tag.includes('href="' + url + '"'))) {
+            console.error("::error::Mount Zion published canonical differs from expected URL");
+            process.exit(1);
+          }
+          if ((html.match(/data-testid="attraction-highlight"/g)||[]).length !== 7) {
+            console.error("::error::Mount Zion requires seven main landmark cards");
+            process.exit(1);
+          }
+          const related = html.match(/<ul[^>]*data-testid=["']stay-trip-photo-grid["'][^>]*>([\s\S]*?)<\/ul>/i);
+          if ((related?.[1].match(/<li\b/g)||[]).length !== 6) {
+            console.error("::error::Mount Zion requires six illustrated related attraction cards");
+            process.exit(1);
+          }
+          console.log("Mount Zion public page, seven highlights, six related cards and canonical verified.");
+          NODE
+          rm -f "$zion_html"
+          for picture in cenacle-upper-room.webp dormition-abbey-and-bell-tower.webp st-peter-in-gallicantu.webp; do
+            data="$(mktemp)"
+            curl --http1.1 --retry 2 --retry-all-errors --max-time 30 -fsSL -o "$data" "$VITE_CANONICAL_ORIGIN/images/jerusalem/mount-zion/$picture"
+            node - "$data" "$picture" <<'NODE'
+          const fs = require("node:fs");
+          const bytes = fs.readFileSync(process.argv[2]);
+          if (bytes.subarray(0,4).toString() !== "RIFF" || bytes.subarray(8,12).toString() !== "WEBP") {
+            console.error("::error::Mount Zion image missing or invalid: " + process.argv[3]);
+            process.exit(1);
+          }
+          NODE
+            rm -f "$data"
+          done
           # Verify the upgraded Mount of Olives guide and locally hosted landmark photographs.
           olives_html="$(mktemp)"
           curl --retry 2 --max-time 20 -fsSL -o "$olives_html" "$VITE_CANONICAL_ORIGIN/attractions/mount-of-olives/"
