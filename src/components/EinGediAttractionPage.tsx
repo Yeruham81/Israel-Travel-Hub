@@ -14,8 +14,8 @@ import desertOverlook from "@/assets/guides/dead-sea-excursions/ein-gedi-dead-se
 import deadSeaPhoto from "@/assets/guides/dead-sea-excursions/dead-sea-salt-shore.webp";
 import masadaPhoto from "@/assets/home/masada-dead-sea-card.webp";
 
-// Attributed photograph of the actual Ein Gedi synagogue mosaic; small Wikimedia thumbnail.
-const synagogueMosaicPhoto = "https://upload.wikimedia.org/wikipedia/commons/thumb/4/44/Ein_Gedi_synagogue058.JPG/520px-Ein_Gedi_synagogue058.JPG";
+// Optimized local WebP of the Ein Gedi synagogue mosaic (Stéphanie Gromann / Wikimedia Commons).
+const synagogueMosaicPhoto = "/images/attractions/ein-gedi-synagogue-mosaic.webp";
 
 const info = einGediSite.visit;
 const official = einGediSite.sources;
