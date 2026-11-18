@@ -1,0 +1,182 @@
+{
+  "scope": "Ten /tours/ hub category thumbnails only; no changes to full-size sources or destination pages",
+  "sourceTotalBytes": 1255978,
+  "servedTotalBytes": 229102,
+  "savedBytes": 1026876,
+  "reusedFiles": 7,
+  "generatedFiles": 3,
+  "sourceFilesUnmodified": true,
+  "measurementNote": "Comparison of complete source-file bytes, not the PageSpeed Insights estimate. Lazy loading may defer lower cards, so this does not directly measure LCP.",
+  "files": [
+    {
+      "categoryId": "jerusalem",
+      "original": "src/assets/home/jerusalem-old-city.webp",
+      "served": "src/assets/home/jerusalem-old-city-card.webp",
+      "originalBytes": 142198,
+      "servedBytes": 19002,
+      "savedBytes": 123196,
+      "reused": true,
+      "sourceDimensions": [
+        900,
+        600
+      ],
+      "optimizedDimensions": [
+        360,
+        240
+      ]
+    },
+    {
+      "categoryId": "tel-aviv-jaffa",
+      "original": "src/assets/home/tel-aviv-coast.webp",
+      "served": "src/assets/home/tel-aviv-coast-card.webp",
+      "originalBytes": 133428,
+      "servedBytes": 7460,
+      "savedBytes": 125968,
+      "reused": true,
+      "sourceDimensions": [
+        1200,
+        675
+      ],
+      "optimizedDimensions": [
+        360,
+        203
+      ]
+    },
+    {
+      "categoryId": "masada-dead-sea",
+      "original": "src/assets/home/masada-dead-sea.webp",
+      "served": "src/assets/home/masada-dead-sea-card.webp",
+      "originalBytes": 122226,
+      "servedBytes": 7238,
+      "savedBytes": 114988,
+      "reused": true,
+      "sourceDimensions": [
+        1200,
+        879
+      ],
+      "optimizedDimensions": [
+        360,
+        264
+      ]
+    },
+    {
+      "categoryId": "bethlehem-jericho",
+      "original": "src/assets/guides/2026-10/jerusalem-to-bethlehem.webp",
+      "served": "src/assets/guides/2026-10/jerusalem-to-bethlehem-mobile.webp",
+      "originalBytes": 69946,
+      "servedBytes": 23444,
+      "savedBytes": 46502,
+      "reused": true,
+      "sourceDimensions": [
+        755,
+        503
+      ],
+      "optimizedDimensions": [
+        480,
+        320
+      ]
+    },
+    {
+      "categoryId": "nazareth-galilee",
+      "original": "src/assets/home/tiberias-lake.webp",
+      "served": "src/assets/home/tiberias-lake-card.webp",
+      "originalBytes": 141838,
+      "servedBytes": 11074,
+      "savedBytes": 130764,
+      "reused": true,
+      "sourceDimensions": [
+        1200,
+        900
+      ],
+      "optimizedDimensions": [
+        360,
+        270
+      ]
+    },
+    {
+      "categoryId": "northern-coast",
+      "original": "src/assets/airport-transfers/caesarea.webp",
+      "served": "src/assets/airport-transfers/caesarea-hub.webp",
+      "originalBytes": 23218,
+      "servedBytes": 18648,
+      "savedBytes": 4570,
+      "reused": true,
+      "sourceDimensions": [
+        360,
+        240
+      ],
+      "optimizedDimensions": [
+        320,
+        213
+      ]
+    },
+    {
+      "categoryId": "negev-ramon",
+      "original": "src/assets/negev/ramon-clouds.webp",
+      "served": "src/assets/tours-hub/ramon-crater.webp",
+      "originalBytes": 42086,
+      "servedBytes": 24486,
+      "savedBytes": 17600,
+      "reused": false,
+      "sourceDimensions": [
+        755,
+        427
+      ],
+      "optimizedDimensions": [
+        480,
+        271
+      ]
+    },
+    {
+      "categoryId": "golan-heights",
+      "original": "src/assets/golan/bental-view.jpg",
+      "served": "src/assets/tours-hub/golan-heights.webp",
+      "originalBytes": 388352,
+      "servedBytes": 50184,
+      "savedBytes": 338168,
+      "reused": false,
+      "sourceDimensions": [
+        1280,
+        960
+      ],
+      "optimizedDimensions": [
+        480,
+        360
+      ]
+    },
+    {
+      "categoryId": "food-markets",
+      "original": "src/assets/guides/2026-10/what-to-eat-in-israel.webp",
+      "served": "src/assets/tours-hub/food-markets.webp",
+      "originalBytes": 92968,
+      "servedBytes": 49130,
+      "savedBytes": 43838,
+      "reused": false,
+      "sourceDimensions": [
+        755,
+        503
+      ],
+      "optimizedDimensions": [
+        480,
+        320
+      ]
+    },
+    {
+      "categoryId": "eilat-red-sea",
+      "original": "src/assets/eilat/waterfront.webp",
+      "served": "src/assets/airport-transfers/eilat-hub.webp",
+      "originalBytes": 99718,
+      "servedBytes": 18436,
+      "savedBytes": 81282,
+      "reused": true,
+      "sourceDimensions": [
+        755,
+        503
+      ],
+      "optimizedDimensions": [
+        320,
+        213
+      ]
+    }
+  ]
+}

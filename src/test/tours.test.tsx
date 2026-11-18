@@ -11,6 +11,7 @@ import { CurrencyRatesContext } from "@/components/CurrencyRates";
 import { affiliateConfig, getSource, initialReferenceFx, operators, sources, tourBookingOffers, tourProducts, travelGuidePaths } from "@/data/registry";
 import { guideDirectory } from "@/data/travelGuides";
 import { tourCategories, tourCategoryPaths, tourPhotos } from "@/data/tours";
+import { tourHubThumbnailSources } from "@/data/tourHubThumbnails";
 import { repeatedPhotos } from "@/lib/photo-uniqueness";
 import { parseTourHubSearch, filterTours, isOwnerTour, offersForTour, parseTourSearch, tourSnapshotPrice, toursForCategory } from "@/lib/tours";
 import { CANONICAL_ORIGIN } from "@/lib/site";
@@ -185,6 +186,10 @@ describe("tours hub and SEO category pages", () => {
     for (const category of categories) {
       expect(category.querySelectorAll("[data-product-id]")).toHaveLength(0);
       expect(category.querySelectorAll("img")).toHaveLength(1);
+      const originalCategory = tourCategories.find(item => item.id === category.getAttribute("data-category-id"))!;
+      expect(category.querySelector("img")).toHaveAttribute("src", tourHubThumbnailSources[originalCategory.id]);
+      expect(category.querySelector("img")).toHaveAttribute("loading", "lazy");
+      expect(tourHubThumbnailSources[originalCategory.id]).not.toBe(originalCategory.photo.src);
       expect(category.querySelectorAll("a")).toHaveLength(1);
       const link = category.querySelector("a")!;
       const route = tourCategories.find(item => item.id === category.getAttribute("data-category-id"))!;

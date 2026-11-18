@@ -1,6 +1,7 @@
 import { Link } from "@tanstack/react-router";
 import { Anchor, ArrowRight } from "lucide-react";
 import { tourCategories, tourCategoryPaths, tourCruisePorts, type TourCategoryId } from "@/data/tours";
+import { tourHubThumbnailSources } from "@/data/tourHubThumbnails";
 
 /** The hub is a visual gateway; detailed filters and individual products belong on category pages. */
 const hubCategoryCopy: Record<TourCategoryId, { title: string; description: string; action: string }> = {
@@ -24,7 +25,7 @@ export function TourCategoryExplorer() {
         const copy = hubCategoryCopy[category.id];
         return <li key={category.id} id={`category-${category.id}`} data-category-id={category.id} className="min-w-0 scroll-mt-24">
           <Link to={tourCategoryPaths[category.id]} className="group flex h-full min-w-0 items-center gap-3 rounded-2xl border bg-card p-3 transition-colors hover:border-primary/50 hover:bg-secondary/20 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary sm:gap-4">
-            <img src={category.photo.src} alt="" width={160} height={192} loading="lazy" decoding="async" className="h-28 w-24 shrink-0 rounded-xl object-cover sm:h-32 sm:w-28" />
+            <img src={tourHubThumbnailSources[category.id]} alt="" width={160} height={192} loading="lazy" decoding="async" className="h-28 w-24 shrink-0 rounded-xl object-cover sm:h-32 sm:w-28" />
             <div className="flex min-w-0 flex-1 flex-col items-start">
               <h3 className="text-base font-semibold leading-snug text-foreground sm:text-lg">{copy.title}</h3>
               <p className="mt-1 line-clamp-2 text-sm leading-relaxed text-muted-foreground">{copy.description}</p>
