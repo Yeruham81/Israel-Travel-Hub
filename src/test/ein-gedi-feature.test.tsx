@@ -53,8 +53,8 @@ describe("Ein Gedi upgraded attraction guide", () => {
     expect(article).toContain("separate visit reservations");
     expect(article).toContain("antiquities-only");
     expect(article).toContain("accessible");
-    expect(article).toContain("flash");
-    expect(article).toContain("dead Sea".toLowerCase().replace("dead", "Dead"));
+    expect(article.toLowerCase()).toContain("flash floods");
+    expect(article).toContain("Dead Sea");
     expect(article).toContain('data-testid="ein-gedi-hours-tickets"');
     expect(article).toContain('data-testid="ein-gedi-trail-booking"');
     expect(article).toContain('data-testid="ein-gedi-three-entrances"');
