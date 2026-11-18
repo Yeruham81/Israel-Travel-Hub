@@ -191,7 +191,7 @@ export function CityNeighborhoodEditorial({ guide }: { guide: CityStayGuide }) {
                 <a href={`#area-${pick.areaId}`} className="mt-3 inline-flex min-h-10 items-center gap-1 text-sm font-semibold text-primary hover:underline">Read about this area <ArrowRight className="h-4 w-4" aria-hidden /></a>
               </li>;
             })}
-          </ul>
+          </ul>}
         <aside className="mt-6 flex gap-3 rounded-xl border border-amber-200 bg-amber-50/80 p-4 text-sm leading-relaxed dark:border-amber-900/50 dark:bg-amber-950/20">
           <Lightbulb className="mt-0.5 h-5 w-5 shrink-0 text-amber-600" aria-hidden />
           <p>{choices.callout}</p>
