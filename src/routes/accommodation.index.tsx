@@ -1,6 +1,7 @@
 import { createFileRoute, Link, type LinkProps } from "@tanstack/react-router";
 import { ArrowRight, BookOpen, CalendarDays, CarFront, Check, MapPin, PlaneLanding, TrainFront } from "lucide-react";
 import { AccommodationCard } from "@/components/AccommodationCard";
+import { TravelpayoutsHotelWidgets } from "@/components/TravelpayoutsHotelWidgets";
 import { FaqList, HubHeader } from "@/components/Guide";
 import { GuideHeroMedia } from "@/components/GuideHeroMedia";
 import { accommodationDestinations } from "@/data/content";
@@ -152,6 +153,7 @@ function AccommodationHub() {
       </section>
 
       <FaqList compact faqs={hotelHubFaqs} />
+      <TravelpayoutsHotelWidgets />
     </div>
   </main>;
 }
