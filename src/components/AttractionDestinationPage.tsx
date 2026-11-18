@@ -38,6 +38,10 @@ export type AttractionDestinationContent = {
   path: LinkProps["to"];
   placeName: string;
   title: string;
+  /** Shorter visual headline for narrow screens without changing SEO title. */
+  heroTitle?: string;
+  /** Optional idiomatic section heading for cities and historic districts. */
+  highlightsTitle?: string;
   region: string;
   intro: string;
   hero: { src: string; alt: string };
@@ -131,11 +135,11 @@ export function AttractionDestinationPage({ content }: { content: AttractionDest
         <Breadcrumbs items={[
           { name: "Home", to: "/" },
           { name: "Attractions", to: "/attractions/" },
-          { name: content.title, to: content.path },
+          { name: content.heroTitle ?? content.title, to: content.path },
         ]} />
         <GuideHeroLayout image={<GuideHeroMedia src={content.hero.src} alt={content.hero.alt} />}>
           <p className="eyebrow">{content.region} · Attractions</p>
-          <h1 className="guide-page-title mt-3">{content.title}</h1>
+          <h1 className="guide-page-title mt-3">{content.heroTitle ?? content.title}</h1>
           <p data-guide-intro className="mt-4 max-w-3xl text-lg leading-relaxed text-foreground">{content.intro}</p>
           <PageUpdated date={content.updatedAt} />
         </GuideHeroLayout>
@@ -143,7 +147,7 @@ export function AttractionDestinationPage({ content }: { content: AttractionDest
       </header>
       <AtAGlance placeName={content.placeName} facts={content.facts} note={content.glanceNote} />
       <OnThisPage sections={sections} />
-      <Section id="highlights" title={"What to see at " + content.placeName} className="mt-9">
+      <Section id="highlights" title={content.highlightsTitle ?? "What to see at " + content.placeName} className="mt-9">
         {content.highlightContent}
       </Section>
       {content.visitorContent && <Section id="visitor-info" title={content.visitorTitle ?? "Opening hours, tickets and practical information"}>{content.visitorContent}</Section>}
