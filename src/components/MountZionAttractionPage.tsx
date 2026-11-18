@@ -7,7 +7,7 @@ import {
 import { mountZionEditorialUpdate } from "@/data/mountZionRevision";
 import { mountZionSite } from "@/data/mountZionSite";
 import guidedTourPhoto from "@/assets/home/guided-tour-card.webp";
-import oldCityTourPhoto from "@/assets/home/jerusalem-old-city-card.webp";
+const mountZionHillsidePhoto = "/images/jerusalem/mount-zion/mount-zion-hillside.webp";
 
 const official = mountZionSite.official;
 const inlineLink = "font-semibold text-primary underline underline-offset-4";
@@ -32,6 +32,7 @@ const mountZionTours = [
     summary: "A guided Jerusalem day including the Cenacle on Mount Zion, Old City landmarks and selected hotel pickup points.",
     duration: "About 7 hours",
     rating: "4.5 · 43 reviews",
+    notice: "",
     photo: guidedTourPhoto,
     alt: "Guided sightseeing in Jerusalem",
     href: "https://www.viator.com/tours/Jerusalem/Jerusalem-Old-City/d921-5209P123",
@@ -40,11 +41,12 @@ const mountZionTours = [
     id: "5209TEL210",
     platform: "Viator",
     title: "Jerusalem Highlights from Tel Aviv",
-    summary: "Full-day tour visiting the Upper Room and David's Tomb on applicable dates. Some operating days substitute other sites.",
+    summary: "A full-day Jerusalem visit with Old City highlights and, on the standard itinerary, the Upper Room and David’s Tomb.",
     duration: "Full day",
     rating: "4.5 · 87 reviews",
-    photo: oldCityTourPhoto,
-    alt: "Jerusalem Old City landmarks on a guided tour",
+    notice: "Monday and Thursday departures generally substitute Yad Vashem for the Cenacle and David’s Tomb. If seeing Mount Zion is your priority, check the dated itinerary before booking.",
+    photo: mountZionHillsidePhoto,
+    alt: "Mount Zion hillside and Jerusalem stone buildings near the Old City",
     href: "https://www.viator.com/tours/Tel-Aviv/Old-Jerusalem-Day-Trip-from-Tel-Aviv/d920-5209TEL210",
   },
 ] as const;
@@ -72,7 +74,7 @@ export const mountZionDestinationContent: AttractionDestinationContent = {
     { icon: "highlights", label: "Main landmarks", value: "Upper Room & Dormition", note: "David's Tomb in the same historic complex" },
     { icon: "access", label: "Walking", value: "Compact central circuit", note: "Lower sites need additional steps or a vehicle" },
   ],
-  glanceNote: <>The easiest short visit starts just outside <a href={zionGateDirections} target="_blank" rel="noopener noreferrer" className={inlineLink}>Zion Gate</a>. The <strong>Upper Room is upstairs</strong> and David's Tomb is on the lower level; allow for separate prayer and access arrangements. <a href={official.dormition} target="_blank" rel="noopener noreferrer" className={inlineLink}>Dormition Abbey</a> has different Sunday visiting hours.</>,
+  glanceNote: <>Start on foot near <a href={zionGateDirections} target="_blank" rel="noopener noreferrer" className={inlineLink}>Zion Gate</a>. The Upper Room is upstairs from David’s Tomb; both have their own visitor and worship arrangements. See <a href={official.dormition} target="_blank" rel="noopener noreferrer" className={inlineLink}>Dormition Abbey’s hours</a> before a Sunday visit.</>,
   highlightContent: (
     <div className="mt-4 space-y-3">
       <p className="text-sm leading-relaxed sm:text-base">{mountZionEditorialUpdate.stopIntro}</p>
@@ -103,16 +105,16 @@ export const mountZionDestinationContent: AttractionDestinationContent = {
           <li><strong>St Peter in Gallicantu:</strong> The <a href={official.gallicantu} target="_blank" rel="noopener noreferrer" className={inlineLink}>sanctuary reports accessibility for visitors with reduced mobility</a>, but the walk down from Zion Gate is on a slope. A vehicle can approach from Hebron Road; do not assume every nearby road turn is permitted.</li>
           <li><strong>David's Tomb:</strong> Respect the separate prayer areas, modest dress and photography rules; men should carry a head covering.</li>
           <li><strong>Schindler's grave:</strong> The Catholic cemetery has a <a href={official.catholicCemetery} target="_blank" rel="noopener noreferrer" className={inlineLink}>separate entrance on the southern hillside</a> and stair-linked terraces. It is not beside the Upper Room.</li>
-          <li><strong>Chamber of the Holocaust:</strong> The <a href={official.holocaustChamber} target="_blank" rel="noopener noreferrer" className={inlineLink}>museum</a> opens Sunday–Thursday 09:00–14:00, with group visits arranged ahead.</li>
+          <li><strong>Chamber of the Holocaust:</strong> <a href={official.holocaustChamber} target="_blank" rel="noopener noreferrer" className={inlineLink}>Arrange group visits</a> in advance, especially when adding the memorial to a busy itinerary.</li>
         </ul>
       </div>
     </div>
   ),
   transportContent: (
     <div className="mt-4 space-y-4">
-      <p>Zion Gate is a helpful point of reference, whether you are walking from the Old City or arranging road transport. The central sites are close together; the lower cemetery and Gallicantu are separate extensions.</p>
+      <p>Use Zion Gate as your pedestrian starting point. Vehicles can approach the surrounding roads but cannot drive through the historic gate. For Gallicantu and the Catholic cemetery, choose a separate approach or allow for an additional hillside walk.</p>
       <div className="grid gap-3 sm:grid-cols-3" data-testid="mount-zion-access-points">
-        <article className="rounded-xl border bg-card p-3"><h3 className="font-serif text-lg font-semibold">Zion Gate</h3><p className="mt-2 text-sm">Start for Dormition Abbey, the Cenacle and David's Tomb.</p><a href={zionGateDirections} target="_blank" rel="noopener noreferrer" className={inlineLink}>Map directions <ArrowUpRight className="inline h-4 w-4" aria-hidden="true"/></a></article>
+        <article className="rounded-xl border bg-card p-3"><h3 className="font-serif text-lg font-semibold">Zion Gate</h3><p className="mt-2 text-sm">Start for Dormition Abbey, the Cenacle and David's Tomb.</p><a href={zionGateDirections} target="_blank" rel="noopener noreferrer" className={inlineLink}>Driving to Zion Gate area <ArrowUpRight className="inline h-4 w-4" aria-hidden="true"/></a></article>
         <article className="rounded-xl border bg-card p-3"><h3 className="font-serif text-lg font-semibold">St Peter in Gallicantu</h3><p className="mt-2 text-sm">A lower hillside stop with its own road access from Hebron Road.</p><a href={gallicantuDirections} target="_blank" rel="noopener noreferrer" className={inlineLink}>Driving directions <ArrowUpRight className="inline h-4 w-4" aria-hidden="true"/></a></article>
         <article className="rounded-xl border bg-card p-3"><h3 className="font-serif text-lg font-semibold">Old City connection</h3><p className="mt-2 text-sm">Return through Zion Gate to the Armenian and Jewish Quarters.</p><a href={oldCityWalk} target="_blank" rel="noopener noreferrer" className={inlineLink}>Walking map <ArrowUpRight className="inline h-4 w-4" aria-hidden="true"/></a></article>
       </div>
@@ -128,7 +130,7 @@ export const mountZionDestinationContent: AttractionDestinationContent = {
           </article>
           <article className="rounded-xl border bg-card p-4">
             <div className="flex items-center gap-2"><CarFront className="h-5 w-5 text-primary" aria-hidden="true"/><h3 className="font-semibold">Taxi and private transport</h3></div>
-            <p className="mt-2 text-sm leading-relaxed">Arrange a drop-off at a road-accessible point near Zion Gate rather than at a church door within a pedestrian courtyard. For Gallicantu, follow the site's <a href={official.gallicantu} target="_blank" rel="noopener noreferrer" className={inlineLink}>specific driving approach</a> via Hebron Road. Agree on pickup details before going downhill.</p>
+            <p className="mt-2 text-sm leading-relaxed">Arrange a drop-off on a vehicle-accessible road <strong>near</strong> Zion Gate, then continue on foot; the gate itself is not a drive-through entrance. Gallicantu has <a href={official.gallicantu} target="_blank" rel="noopener noreferrer" className={inlineLink}>its own approach</a> via Hebron Road. Confirm the pickup point if you descend the hillside.</p>
           </article>
         </div>
         <div className="rounded-xl border bg-card p-3" data-testid="mount-zion-map">
@@ -153,7 +155,7 @@ export const mountZionDestinationContent: AttractionDestinationContent = {
       </div>
       <div className="rounded-xl border bg-card p-4 sm:p-5" data-testid="mount-zion-walking-connections">
         <h3 className="font-serif text-xl font-semibold">Walking connections</h3>
-        <p className="mt-2 text-sm leading-relaxed text-muted-foreground">Open the leg you need for directions; local gates, steps and road crossings may affect the exact route.</p>
+        <p className="mt-2 text-sm leading-relaxed text-muted-foreground">Choose the walking link that fits your day. For the location of all seven stops, use the <a href={official.mountZionMap} target="_blank" rel="noopener noreferrer" className={inlineLink}>detailed illustrated Mount Zion map (PDF)</a>, which marks individual sites and paths.</p>
         <ul className="mt-3 grid gap-3 sm:grid-cols-3">
           {walkingLegs.map(leg => <li key={leg.href} className="rounded-lg border bg-secondary/20 p-3">
             <a href={leg.href} target="_blank" rel="noopener noreferrer" className={inlineLink}>{leg.title} <ArrowUpRight className="inline h-4 w-4" aria-hidden="true"/></a>
@@ -181,11 +183,12 @@ export const mountZionDestinationContent: AttractionDestinationContent = {
             <h3 className="mt-1 font-serif text-lg font-semibold leading-snug">{tour.title}</h3>
             <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{tour.summary}</p>
             <p className="mt-3 text-sm">{tour.duration} · ★ {tour.rating}</p>
-            <div className="mt-auto pt-4"><a href={tour.href} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 rounded-lg bg-primary px-3 py-2 text-sm font-semibold text-primary-foreground">View tour <ArrowUpRight className="h-4 w-4" aria-hidden="true"/></a></div>
+            {tour.notice && <p className="mt-3 rounded-lg border border-amber-200 bg-amber-50 px-3 py-2 text-sm leading-relaxed text-foreground dark:border-amber-800 dark:bg-amber-950/20">{tour.notice}</p>}
+            <div className="mt-auto flex flex-wrap items-center justify-between gap-3 pt-4"><span className="text-sm font-semibold text-primary">Check current price</span><a href={tour.href} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 rounded-lg bg-primary px-3 py-2 text-sm font-semibold text-primary-foreground">View tour <ArrowUpRight className="h-4 w-4" aria-hidden="true"/></a></div>
           </div>
         </article>)}
       </div>
-      <p className="text-xs text-muted-foreground">Ratings are dated Viator listing snapshots, not live availability. The Tel Aviv departure may substitute other sites for Mount Zion on Mondays and Thursdays. These are direct provider links, without affiliate attribution.</p>
+      <p className="text-xs text-muted-foreground">Ratings were checked in November 2026. Prices and availability depend on the selected date, currency and party size; check the operator’s booking page. These are direct Viator links, not tracked affiliate links.</p>
       <p className="text-sm leading-relaxed">You can <Link to="/tours/jerusalem/" className={inlineLink}>explore other Jerusalem tours</Link>, or <a href="#contact" className={inlineLink}>contact me about private transport</a> if you mainly need help with drop-off and pickup.</p>
     </div>
   ),
@@ -214,11 +217,19 @@ export const mountZionDestinationContent: AttractionDestinationContent = {
     { label: "Ben Gurion Airport to Jerusalem", to: "/travel-blog/how-to-get-from-ben-gurion-airport-to-jerusalem/", description: "Compare train, taxi and transfer options.", icon: "arrival" },
     { label: "3-day Israel itinerary", to: "/travel-blog/israel-itinerary-3-days/", description: "See how Jerusalem fits into a shorter trip.", icon: "itinerary" },
   ],
+  photoCredits: <p>
+    Photographs (resized and cropped to WebP):{" "}
+    <a href="https://commons.wikimedia.org/wiki/File:The_cenotaph_of_David%27s_Tomb.jpg" target="_blank" rel="noopener noreferrer" className={inlineLink}>David’s Tomb</a> — Jacek555, <a href="https://creativecommons.org/licenses/by-sa/3.0/" target="_blank" rel="noopener noreferrer" className={inlineLink}>CC BY-SA 3.0</a>;{" "}
+    <a href="https://commons.wikimedia.org/wiki/File:Jerusalem_-_Zion_gate.jpg" target="_blank" rel="noopener noreferrer" className={inlineLink}>Zion Gate</a> and{" "}
+    <a href="https://commons.wikimedia.org/wiki/File:Jerusalem_-_Oskar_Schindler%27s_Grave.jpg" target="_blank" rel="noopener noreferrer" className={inlineLink}>Oskar Schindler’s grave</a> — Marco Plassio, <a href="https://creativecommons.org/licenses/by-sa/3.0/" target="_blank" rel="noopener noreferrer" className={inlineLink}>CC BY-SA 3.0</a>;{" "}
+    <a href="https://commons.wikimedia.org/wiki/File:Chamber_of_the_Holocaust_-_Outside_King_David%27s_Tomb_-_Jerusalem_-_Israel_-_02_(5676110809).jpg" target="_blank" rel="noopener noreferrer" className={inlineLink}>Chamber of the Holocaust</a> — Adam Jones, <a href="https://creativecommons.org/licenses/by-sa/2.0/" target="_blank" rel="noopener noreferrer" className={inlineLink}>CC BY-SA 2.0</a>. Source: Wikimedia Commons.
+  </p>,
   sources: [
     { label: "Christian Information Center — holy site visiting hours", url: official.cicHours },
     { label: "Dormition Abbey — official opening hours", url: official.dormition },
     { label: "St Peter in Gallicantu — visiting hours and accessibility", url: official.gallicantu },
     { label: "Window to Mount Zion — local heritage and walking context", url: official.mountZionHeritage },
+    { label: "Window to Mount Zion — detailed site map (PDF)", url: official.mountZionMap },
     { label: "Mount Zion Catholic Cemetery — Oskar Schindler's grave", url: official.catholicCemetery },
     { label: "Chamber of the Holocaust — hours and group visits", url: official.holocaustChamber },
     { label: "Israel public transport planner", url: official.busPlanner },
