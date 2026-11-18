@@ -3,6 +3,7 @@ import type { CityStayGuide, StayPreference } from "@/data/content";
 import { preferenceLabels, neighborhoodGuidesForCity } from "@/data/content";
 import { StayTripLinks } from "@/components/StayTripLinks";
 import { CityStayHub } from "@/components/CityStayHub";
+import { JerusalemStayHub } from "@/components/JerusalemStayHub";
 import { linksForPage } from "@/data/registry";
 import { type UiCrumb, Checklist, FaqList, GuideHeader, OnThisPage, ProviderSection, Section, SourceList } from "@/components/Guide";
 import { HomeContactForm } from "@/components/HomeContactForm";
@@ -22,7 +23,7 @@ const sections = [
 
 export function CityStayPage({ g }: { g: CityStayGuide }) {
   const areas = neighborhoodGuidesForCity(g.id);
-  return areas.length ? <CityStayHub g={g} areas={areas} /> : <SimpleCityStayPage g={g} />;
+  return g.id === "jerusalem" ? <JerusalemStayHub g={g} areas={areas} /> : areas.length ? <CityStayHub g={g} areas={areas} /> : <SimpleCityStayPage g={g} />;
 }
 
 function SimpleCityStayPage({ g }: { g: CityStayGuide }) {
