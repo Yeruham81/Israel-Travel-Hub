@@ -18,7 +18,7 @@ describe("Mount Zion full attraction guide", () => {
     expect(content.nearby).toHaveLength(6);
     expect(content.planningLinks).toHaveLength(6);
     expect(content.faqs).toHaveLength(7);
-    expect(content.sources).toHaveLength(9);
+    expect(content.sources).toHaveLength(10);
     expect(attractionHubCards.filter(card => card.to === content.path)).toHaveLength(1);
     const meta = mountZionMeta();
     expect(meta.links.some(link => link.rel === "canonical" && link.href?.includes(content.path))).toBe(true);
@@ -31,8 +31,8 @@ describe("Mount Zion full attraction guide", () => {
     const page = readFileSync("src/components/MountZionAttractionPage.tsx", "utf8");
     expect(mountZionEditorialUpdate.stops).toHaveLength(7);
     const photos = mountZionEditorialUpdate.stops.flatMap(stop => stop.image ? [stop.image] : []);
-    expect(photos).toHaveLength(3);
-    expect(new Set(photos.map(photo => photo.src)).size).toBe(3);
+    expect(photos).toHaveLength(7);
+    expect(new Set(photos.map(photo => photo.src)).size).toBe(7);
     for (const photo of photos) {
       if (photo.src.startsWith("/images/")) expect(existsSync("public" + photo.src), photo.src).toBe(true);
     }
@@ -48,11 +48,23 @@ describe("Mount Zion full attraction guide", () => {
     expect(page).toContain("Jaffa Gate to Zion Gate");
     expect(page).toContain("Zion Gate to Gallicantu");
     expect(page).toContain("Zion Gate to Western Wall");
+    expect(page).toContain("detailed illustrated Mount Zion map");
+    expect(page).toContain("Driving to Zion Gate area");
+    expect(page).toContain("Monday and Thursday departures generally substitute Yad Vashem");
+    expect(page).toContain("Check current price");
+    expect(page).toContain("mount-zion-hillside.webp");
+    expect(page).toContain("CC BY-SA 3.0");
+    expect(page).toContain("CC BY-SA 2.0");
     expect(page).not.toMatch(/Haram al-Sharif|not physically proven/i);
   });
 
   it("provides current, operator-specific Sunday and museum visiting information", () => {
     expect(mountZionSite.hours).toHaveLength(7);
+    expect(mountZionSite.official.mountZionMap).toContain("Mount-Zion-map-english.pdf");
+    const tomb = mountZionSite.hours.find(site => site.name === "David’s Tomb");
+    const grave = mountZionSite.hours.find(site => site.name === "Oskar Schindler’s grave");
+    expect(tomb?.time).toContain("09:00–sunset");
+    expect(grave?.time).toContain("09:00–16:00");
     const abbey = mountZionSite.hours.find(site => site.name === "Dormition Abbey");
     const gallicantu = mountZionSite.hours.find(site => site.name === "St Peter in Gallicantu");
     const museum = mountZionSite.hours.find(site => site.name.includes("Chamber of the Holocaust"));
@@ -60,6 +72,7 @@ describe("Mount Zion full attraction guide", () => {
     expect(gallicantu?.time).toContain("closed Sunday");
     expect(museum?.time).toContain("Sun–Thu 09:00–14:00");
     expect(content.sources.some(x => x.url === mountZionSite.official.dormition)).toBe(true);
+    expect(content.sources.some(x => x.url === mountZionSite.official.mountZionMap)).toBe(true);
     expect(content.sources.some(x => x.url === mountZionSite.official.gallicantu)).toBe(true);
     expect(content.sources.some(x => x.url === mountZionSite.official.holocaustChamber)).toBe(true);
     expect(new Set(content.sources.map(source => source.url)).size).toBe(content.sources.length);
