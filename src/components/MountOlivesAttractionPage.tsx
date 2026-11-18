@@ -16,6 +16,13 @@ const mapLarger = "https://www.google.com/maps/search/?api=1&query=Seven%20Arche
 const viewpointDirections = "https://www.google.com/maps/dir/?api=1&destination=Seven%20Arches%20Hotel%20Mount%20of%20Olives%20Jerusalem&travelmode=driving";
 const gethsemaneDirections = "https://www.google.com/maps/dir/?api=1&destination=Church%20of%20All%20Nations%20Gethsemane%20Jerusalem&travelmode=driving";
 const lionGateWalk = "https://www.google.com/maps/dir/?api=1&origin=Church%20of%20All%20Nations%20Gethsemane%20Jerusalem&destination=Lions%20Gate%20Jerusalem&travelmode=walking";
+const upperRidgeWalk = "https://www.google.com/maps/dir/?api=1&origin=Pater%20Noster%20Church%20Jerusalem&destination=Seven%20Arches%20Hotel%20Mount%20of%20Olives%20Jerusalem&travelmode=walking";
+const downhillWalk = "https://www.google.com/maps/dir/?api=1&origin=Seven%20Arches%20Hotel%20Mount%20of%20Olives%20Jerusalem&destination=Church%20of%20All%20Nations%20Gethsemane%20Jerusalem&travelmode=walking";
+const walkingLinks = [
+  { title: "Pater Noster to Seven Arches", url: upperRidgeWalk, description: "Upper ridge, before the main descent" },
+  { title: "Seven Arches to Gethsemane", url: downhillWalk, description: "Check the traditional Palm Sunday Road and church entrances" },
+  { title: "Gethsemane to Lion’s Gate", url: lionGateWalk, description: "Continue into the Old City on foot" },
+];
 
 export const mountOlivesDestinationContent: AttractionDestinationContent = {
   path: "/attractions/mount-of-olives/",
@@ -52,7 +59,6 @@ export const mountOlivesDestinationContent: AttractionDestinationContent = {
         <p>{stop.description}</p>
         <p>{stop.visit}</p>
       </AttractionHighlight>)}
-      <AttractionPracticalTip>The hillside is steep and some entrances are on different paths. For a comfortable first visit, I would begin at the Seven Arches lookout, choose one or two church interiors and finish at Gethsemane rather than returning uphill on foot.</AttractionPracticalTip>
     </div>
   ),
   visitorContent: (
@@ -68,7 +74,8 @@ export const mountOlivesDestinationContent: AttractionDestinationContent = {
           </div>
         </article>)}
       </div>
-      <p className="text-sm leading-relaxed">The published Pater Noster timetable and its temporary shorter schedule differ; check the current <a href={official.churchHours} target="_blank" rel="noopener noreferrer" className={inlineLink}>Christian Information Center hours</a> before planning a visit around it. The Church of All Nations and the nearby Grotto of the Apostles do not share the same continuous opening hours: the grotto closes around midday.</p>
+      <p className="text-sm leading-relaxed"><strong>Pater Noster:</strong> The temporary visiting hours are Tuesday and Thursday 09:00–12:00. Although the standard timetable also lists Saturday, confirm Saturday access before travelling. Check the <a href={official.churchHours} target="_blank" rel="noopener noreferrer" className={inlineLink}>Christian Information Center</a> for changes.</p>
+      <p className="text-sm leading-relaxed"><strong>Grotto of the Apostles:</strong> Unlike the adjoining Church of All Nations, the grotto has a midday break. It generally opens 07:30–12:00 and 14:30–18:00 (until 17:00 October–March), with last entry ten minutes before the scheduled closure.</p>
       <div className="rounded-xl border bg-secondary/20 p-4 sm:p-5" data-testid="mount-olives-access">
         <h3 className="font-serif text-xl font-semibold">Accessibility, visiting etiquette and practical details</h3>
         <ul className="mt-3 list-disc space-y-2 pl-5 text-sm leading-relaxed sm:text-base">
@@ -76,7 +83,7 @@ export const mountOlivesDestinationContent: AttractionDestinationContent = {
           <li><strong>Alternative:</strong> For limited mobility, visit the lookout by vehicle and arrange a separate drop-off near Gethsemane. Check step-free access to each church directly.</li>
           <li><strong>Tomb of Mary:</strong> Reaching the underground sanctuary involves a long stairway.</li>
           <li><strong>Respectful visits:</strong> Wear modest clothing inside churches, observe service times and follow photography instructions.</li>
-          <li><strong>Jewish cemetery:</strong> This is an active burial place; please respect graves, funerals and mourners. The <a href={official.cemetery} target="_blank" rel="noopener noreferrer" className={inlineLink}>Mount of Olives Information Center</a> currently reports that it is temporarily closed to visitors.</li>
+          <li><strong>Jewish cemetery:</strong> This is an active burial ground, not a walking shortcut. Use the <a href={official.graveLocator} target="_blank" rel="noopener noreferrer" className={inlineLink}>City of David cemetery mapping system</a> to locate particular graves and approaches. Guided cemetery tours for organised groups require booking at least eight working days ahead; the <a href={official.cemetery} target="_blank" rel="noopener noreferrer" className={inlineLink}>information centre</a> is temporarily closed. Respect funerals and mourners.</li>
         </ul>
       </div>
     </div>
@@ -87,7 +94,7 @@ export const mountOlivesDestinationContent: AttractionDestinationContent = {
       <div className="grid gap-3 sm:grid-cols-3" data-testid="mount-olives-access-points">
         <article className="rounded-xl border bg-card p-3"><h3 className="font-serif text-lg font-semibold">Seven Arches viewpoint</h3><p className="mt-2 text-sm">Best starting point for the panorama and a downhill walk.</p><a href={viewpointDirections} target="_blank" rel="noopener noreferrer" className={inlineLink}>Driving directions <ArrowUpRight className="inline h-4 w-4"/></a></article>
         <article className="rounded-xl border bg-card p-3"><h3 className="font-serif text-lg font-semibold">Gethsemane</h3><p className="mt-2 text-sm">Lower pickup point near the Church of All Nations and Tomb of Mary.</p><a href={gethsemaneDirections} target="_blank" rel="noopener noreferrer" className={inlineLink}>Driving directions <ArrowUpRight className="inline h-4 w-4"/></a></article>
-        <article className="rounded-xl border bg-card p-3"><h3 className="font-serif text-lg font-semibold">Lion's Gate</h3><p className="mt-2 text-sm">Continue into Jerusalem's Old City from the foot of the hill.</p><a href={lionGateWalk} target="_blank" rel="noopener noreferrer" className={inlineLink}>Walking directions <ArrowUpRight className="inline h-4 w-4"/></a></article>
+        <article className="rounded-xl border bg-card p-3"><h3 className="font-serif text-lg font-semibold">Lion's Gate</h3><p className="mt-2 text-sm">Continue into Jerusalem's Old City from the foot of the hill.</p><a href="#visit-plan" className={inlineLink}>See walking connections <ArrowUpRight className="inline h-4 w-4"/></a></article>
       </div>
       <div className="grid gap-4 lg:grid-cols-[minmax(0,1.4fr)_minmax(0,1fr)]">
         <div className="space-y-3">
