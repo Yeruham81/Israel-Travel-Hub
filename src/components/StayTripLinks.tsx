@@ -2,7 +2,6 @@ import { Link, type LinkProps } from "@tanstack/react-router";
 import type { ReactNode } from "react";
 import museumJerusalem from "@/assets/guides/museums-in-jerusalem.jpg";
 import jerusalemOverview from "@/assets/home/hero-jerusalem.webp";
-import oldCity from "@/assets/guides/holy-sepulchre.jpg";
 import mountOfOlivesCard from "@/assets/attractions-hub/card-mount-of-olives-420.webp";
 import airportHall from "@/assets/home/ben-gurion-t3.webp";
 import bethlehemTravel from "@/assets/guides/2026-10/jerusalem-to-bethlehem.webp";
@@ -63,8 +62,8 @@ export const stayGuideGroups: Record<Region, GuideGroups> = {
     name: "Jerusalem",
     local: [
       card("Museums in Jerusalem", "/travel-blog/museums-in-jerusalem/", "Choose cultural highlights from the city’s museums.", museumJerusalem, "Jerusalem museum interior"),
-      card("Shopping in Jerusalem", "/travel-blog/shopping-in-jerusalem/", "Explore markets, craft stalls and local shopping streets.", "/images/jerusalem/hutzot-hayotzer.webp", "Artisan shops in Jerusalem"),
-      card("Jerusalem Old City", "/attractions/old-city-jerusalem/", "Understand the quarters, historic gates and walking routes.", oldCity, "Historic church and stone architecture inside the Old City"),
+      card("Shopping in Jerusalem", "/travel-blog/shopping-in-jerusalem/", "Explore markets, craft stalls and local shopping streets.", "/images/attractions/old-jerusalem-via-dolorosa.webp", "Souk stalls along a stone-paved lane in Jerusalem's Old City"),
+      card("Jerusalem Old City", "/attractions/old-city-jerusalem/", "Understand the quarters, historic gates and walking routes.", "/images/attractions/old-jerusalem-cardo.webp", "Stone-paved Cardo passage in Jerusalem's Old City"),
       card("Jerusalem travel guide", "/travel-blog/jerusalem-travel-guide/", "Discover the city’s principal sights and plan your days.", jerusalemOverview, "Jerusalem skyline and old city"),
       card("Mount of Olives", "/attractions/mount-of-olives/", "Explore the historic hillside, viewpoints and religious landmarks.", mountOfOlivesCard, "Mount of Olives churches and Jerusalem panorama"),
       card("Churches in Jerusalem", "/travel-blog/churches-in-jerusalem/", "Plan visits to important churches across Jerusalem.", "/images/jerusalem/church-of-all-nations.webp", "Church of All Nations near the Mount of Olives"),
@@ -85,6 +84,8 @@ export const stayGuideGroups: Record<Region, GuideGroups> = {
       card("Museums in Tel Aviv", "/travel-blog/museums-in-tel-aviv/", "Explore art, heritage and the city’s museums.", museumTelAviv, "Museum architecture in Tel Aviv"),
       card("Beaches in Tel Aviv", "/travel-blog/beaches-in-tel-aviv/", "Choose the right part of the waterfront for your visit.", beachesTelAviv, "Tel Aviv Mediterranean beach"),
       card("Exploring Jaffa", "/attractions/jaffa/", "Explore Old Jaffa’s harbour, lanes and local character.", "/images/city-stays/tel-aviv-jaffa.webp", "Old Jaffa market and streets"),
+      card("Tel Aviv & Jaffa tours", "/tours/tel-aviv-jaffa/", "Find walking tours, neighborhood routes and historic Jaffa experiences.", telAvivCoast, "Coastal Tel Aviv seen from the waterfront"),
+      card("Food & market tours", "/tours/food-market-tours/", "Discover tasting routes and market walks in Tel Aviv.", foodPhoto, "Local food and market dishes in Israel"),
     ],
     onward: [
       card("Ben Gurion Airport to Tel Aviv", "/travel-blog/how-to-get-from-ben-gurion-airport-to-tel-aviv/", "Select the right arrival connection for your hotel.", airportTransfers, "Airport arrival and transfer facilities"),
@@ -172,10 +173,10 @@ export function StayTripLinks({
       {items.map((item) => <li key={item.to} className="min-w-0">
         <Link to={item.to as LinkProps["to"]} className="group flex h-full min-w-0 flex-col overflow-hidden rounded-2xl border bg-card transition-colors hover:border-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
           <img src={item.photo} alt={item.alt} loading="lazy" decoding="async" width={600} height={375} className="aspect-[16/10] w-full object-cover" />
-          <span className="flex flex-1 flex-col p-4">
-            <span className="text-lg font-semibold leading-snug text-foreground group-hover:text-primary">{item.title}</span>
-            <span className="mt-2 flex-1 text-sm leading-relaxed text-muted-foreground">{item.note}</span>
-            <span className="mt-4 text-sm font-semibold text-primary">Read the guide →</span>
+          <span className="flex flex-1 flex-col p-3 sm:p-4">
+            <span className="text-sm font-semibold leading-snug text-foreground group-hover:text-primary sm:text-lg">{item.title}</span>
+            <span className="mt-2 flex-1 text-xs leading-relaxed text-muted-foreground sm:text-sm">{item.note}</span>
+            <span className="mt-3 text-xs font-semibold text-primary sm:mt-4 sm:text-sm">Read the guide →</span>
           </span>
         </Link>
       </li>)}
@@ -185,12 +186,12 @@ export function StayTripLinks({
     {local.length > 0 && <section id="explore" aria-labelledby="stay-explore-h" className="mt-14 scroll-mt-32">
       <h2 id="stay-explore-h" className="text-2xl font-bold sm:text-3xl">Explore more around {set.name}</h2>
       <p className="mt-2 text-muted-foreground">Explore places and practical guides directly related to {set.name}.</p>
-      {renderCards(local, region === "jerusalem" ? "grid-cols-2 lg:grid-cols-3" : "sm:grid-cols-2", "stay-local-photo-grid")}
+      {renderCards(local, region === "jerusalem" || region === "telaviv" ? "grid-cols-2 lg:grid-cols-3" : "sm:grid-cols-2", "stay-local-photo-grid")}
     </section>}
     {onward.length > 0 && <section id="trip-planning" aria-labelledby="stay-planning-h" className="scroll-mt-32">
       <h2 id="stay-planning-h" className="text-2xl font-bold sm:text-3xl">Plan the rest of your trip</h2>
       <p className="mt-2 text-muted-foreground">Plan your arrivals, excursions and onward travel after choosing your hotel.</p>
-      {renderCards(onward, "sm:grid-cols-2 lg:grid-cols-3", "stay-trip-photo-grid")}
+      {renderCards(onward, region === "jerusalem" || region === "telaviv" ? "grid-cols-2 lg:grid-cols-3" : "sm:grid-cols-2 lg:grid-cols-3", "stay-trip-photo-grid")}
     </section>}
   </div>;
 }
