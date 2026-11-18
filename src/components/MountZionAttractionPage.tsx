@@ -201,7 +201,7 @@ export const mountZionDestinationContent: AttractionDestinationContent = {
   nearby: [
     { label: "Jerusalem's Old City", to: "/attractions/old-city-jerusalem/", note: "Continue through Zion Gate to the Armenian and Jewish Quarters." },
     { label: "Mount of Olives", to: "/attractions/mount-of-olives/", note: "Panorama, Gethsemane and hillside pilgrimage sites." },
-    { label: "Museums in Jerusalem", to: "/attractions/museums-in-jerusalem/", note: "Explore museums and heritage collections across the city." },
+    { label: "Caesarea National Park", to: "/attractions/caesarea/", note: "Mediterranean Roman ruins on a separate day trip." },
     { label: "Qasr el-Yahud", to: "/attractions/qasr-el-yahud/", note: "Jordan River pilgrimage site on a separate day." },
     { label: "Masada National Park", to: "/attractions/masada/", note: "Ancient desert fortress for a longer excursion." },
     { label: "Ein Gedi Nature Reserve", to: "/attractions/ein-gedi/", note: "Oasis walks and natural scenery by the Dead Sea." },
