@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { OldCityJerusalemAttractionPage } from "@/components/OldCityJerusalemAttractionPage";
+import { OldCityJerusalemAttractionPage, oldCityJerusalemDestinationContent } from "@/components/OldCityJerusalemAttractionPage";
 import { oldCityJerusalemSite } from "@/data/oldCityJerusalemSite";
 import { CANONICAL_ORIGIN, SITE_NAME, jsonLd, pageMeta } from "@/lib/site";
 import { authorLd } from "@/lib/author";
@@ -35,7 +35,7 @@ export function oldCityJerusalemMeta() {
       author: authorLd(),
       publisher: { "@type": "Organization", name: SITE_NAME, url: CANONICAL_ORIGIN },
       image: new URL(oldCityJerusalemSite.hero.src, CANONICAL_ORIGIN).href,
-      citation: Object.values(oldCityJerusalemSite.official),
+      citation: [...new Set(oldCityJerusalemDestinationContent.sources.map(source => source.url))],
     })],
   };
 }
