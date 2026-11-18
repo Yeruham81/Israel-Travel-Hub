@@ -191,6 +191,8 @@ describe("home mobile performance optimizations", () => {
     const home = read("src/routes/index.tsx");
     expect(home).toContain('mobile?: string');
     expect(home).toContain('media="(max-width: 767px)" srcSet={c.img.mobile}');
+    expect(home).toContain('<picture className="absolute inset-0 block">');
+    expect(home).toContain('type="image/webp"');
     expect(home).toContain('loading="lazy" decoding="async"');
     for (const slug of ["jerusalem-tower-of-david", "tel-aviv-beach-skyline", "haifa-bahai-gardens", "ein-bokek-aerial"]) {
       const original = `public/images/home/transfer-${slug}.webp`;
