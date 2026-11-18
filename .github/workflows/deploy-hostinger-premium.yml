@@ -477,9 +477,13 @@ jobs:
             'data-testid="qasr-free-reservation"',
             'data-testid="qasr-baptism-guidance"',
             'data-testid="qasr-location-map"',
-            "advance registration is mandatory",
+            "Book a free Qasr el-Yahud visit",
+            "up to two weeks in advance",
             "free for visitors of all ages",
             "cover shoulders and knees",
+            "official ceremony guidelines",
+            "qasr-el-yahud-river-deck",
+            "jordan-river-baptism.webp",
             "Yardenit",
           ]) {
             if (!html.includes(required)) {
