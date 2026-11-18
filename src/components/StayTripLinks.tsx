@@ -4,6 +4,7 @@ import museumJerusalem from "@/assets/guides/museums-in-jerusalem.jpg";
 import telAvivAttractions from "@/assets/attractions-hub/related-tel-aviv-360.webp";
 import telAvivFoodMarketTours from "@/assets/tours-hub/food-markets.webp";
 import oldCityLanes from "@/assets/guides/2026-11/jerusalem-old-city-market-lanes.webp";
+import jerusalemLightRail from "@/assets/guides/2026-11/jerusalem-light-rail.webp";
 import jerusalemOverview from "@/assets/home/hero-jerusalem.webp";
 import mountOfOlivesCard from "@/assets/attractions-hub/card-mount-of-olives-420.webp";
 import airportHall from "@/assets/home/ben-gurion-t3.webp";
@@ -171,7 +172,11 @@ export function StayTripLinks({
     return true;
   };
   const local = set.local.filter(keep);
-  const onward = set.onward.filter(keep);
+  const onwardCandidates = isEditorial && region === "jerusalem"
+    ? [...set.onward.slice(0, -1), card("Getting around Israel", "/travel-blog/getting-around-israel/",
+        "Compare trains, buses, light rail and taxis from your Jerusalem base.", jerusalemLightRail, "Jerusalem light-rail train")]
+    : set.onward;
+  const onward = onwardCandidates.filter(keep);
   const renderCards = (items: GuideCard[], grid: string, testId: string): ReactNode => (
     <ul className={`mt-5 grid gap-4 ${grid}`} data-testid={testId}>
       {items.map((item) => <li key={item.to} className="min-w-0">
@@ -194,7 +199,7 @@ export function StayTripLinks({
     </section>}
     {onward.length > 0 && <section id="trip-planning" aria-labelledby="stay-planning-h" className="scroll-mt-32">
       <h2 id="stay-planning-h" className="text-2xl font-bold sm:text-3xl">Plan the rest of your trip</h2>
-      <p className="mt-2 text-muted-foreground">{isEditorial ? "Explore transport options, day trips and practical travel advice." : "Plan your arrivals, excursions and onward travel after choosing your hotel."}</p>
+      {!(isEditorial && region === "jerusalem") && <p className="mt-2 text-muted-foreground">{isEditorial ? "Explore transport options, day trips and practical travel advice." : "Plan your arrivals, excursions and onward travel after choosing your hotel."}</p>}
       {renderCards(onward, region === "jerusalem" || region === "telaviv" ? "grid-cols-2 lg:grid-cols-3" : "sm:grid-cols-2 lg:grid-cols-3", "stay-trip-photo-grid")}
     </section>}
   </div>;

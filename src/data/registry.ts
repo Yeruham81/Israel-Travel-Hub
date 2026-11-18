@@ -1175,6 +1175,22 @@ const sourceCatalog: SourceReference[] = [
     note: "Moshe Barak's original Jerusalem guide gives local planning context and an approximate 45–60+ minute drive after pickup. Airport formalities are additional; the final Jerusalem address and road traffic can extend the journey. The estimate is not a live traffic forecast.",
   },
   {
+    id: "jerusalem-light-rail-updates",
+    title: "Service and construction updates for the Jerusalem light rail",
+    publisher: "Jerusalem Light Rail Network",
+    url: "https://j-lrt.co.il/updates/",
+    checkedAt: "2026-11-18",
+    note: "Official announcements about rail services and construction. Check the latest status for your travel date.",
+  },
+  {
+    id: "jerusalem-emek-refaim-works",
+    title: "Blue Line construction and access updates in Emek Refaim",
+    publisher: "Baka Community Administration",
+    url: "https://baka.org.il/he/120/",
+    checkedAt: "2026-11-18",
+    note: "Local project and access updates, including June 2026 information on traffic and public transport changes around Emek Refaim.",
+  },
+  {
     id: "owner-stay-jerusalem",
     title: "Where to stay in Jerusalem (existing guide)",
     publisher: "Moshe Barak",

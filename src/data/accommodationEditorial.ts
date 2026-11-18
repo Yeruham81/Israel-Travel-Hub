@@ -1,7 +1,7 @@
 export const accommodationEditorial = {
   jerusalem: { path: "/travel-blog/where-to-stay-in-jerusalem/", title: "Where to stay in Jerusalem",
-    description: "Compare Jerusalem neighborhoods for Old City access, transport, food and local atmosphere before choosing hotels.",
-    intro: "Jerusalem's hills, Old City gates and different neighborhood rhythms make the location of your hotel especially important. I compare the main areas, from Jaffa Road to the Old City and quieter residential streets, so you can choose a base that suits your trip.",
+    description: "Compare Jerusalem neighbourhoods for Old City access, transport, food and local atmosphere before choosing hotels.",
+    intro: "Jerusalem's hills, Old City gates and different neighbourhood rhythms make the location of your hotel especially important. I compare the main areas, from Jaffa Road to the Old City and quieter residential streets, so you can choose a base that suits your trip.",
     tip: "For a first visit, consider the walk to the Old City gates, the light rail, evening dining and where a taxi can stop with your luggage." },
   telaviv: { path: "/travel-blog/where-to-stay-in-tel-aviv/", title: "Where to stay in Tel Aviv",
     description: "Compare Tel Aviv and Jaffa neighborhoods for beaches, food markets, nightlife and transport before booking.",
