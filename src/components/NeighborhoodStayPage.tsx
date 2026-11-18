@@ -142,10 +142,10 @@ export function NeighborhoodStayPage({ area }: { area: NeighborhoodStayGuide }) 
           <div className="mt-5 grid gap-4 sm:grid-cols-3">
             {area.highlights.map((highlight) => {
               const relatedGuide = isJerusalem ? highlightGuides[area.id]?.[highlight.name] : undefined;
-              return <div key={highlight.name} className="flex h-full flex-col rounded-2xl border bg-card p-4 sm:p-5">
+              return <div key={highlight.name} className={isJerusalem ? "flex h-full flex-col rounded-2xl border bg-card p-4 sm:p-5" : "rounded-2xl border bg-card p-5"}>
                 <MapPin className="h-5 w-5 text-primary" aria-hidden />
-                <h3 className="mt-3 text-lg font-semibold">{highlight.name}</h3>
-                <p className="mt-2 flex-1 text-sm! leading-relaxed text-muted-foreground">{highlight.text}</p>
+                <h3 className={isJerusalem ? "mt-3 text-lg font-semibold" : "mt-3 text-xl"}>{highlight.name}</h3>
+                <p className={isJerusalem ? "mt-2 flex-1 text-sm! leading-relaxed text-muted-foreground" : "mt-2 text-sm! text-muted-foreground"}>{highlight.text}</p>
                 {relatedGuide && <Link to={relatedGuide.to as LinkProps["to"]} className="mt-3 inline-flex items-center gap-1 text-sm font-semibold text-primary underline underline-offset-4">
                   {relatedGuide.label} <ArrowRight className="h-4 w-4" aria-hidden />
                 </Link>}
