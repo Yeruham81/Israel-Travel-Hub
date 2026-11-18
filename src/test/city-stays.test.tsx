@@ -116,7 +116,7 @@ describe.each([
         expect(card).toBeDefined();
         expect(within(card).getByTestId("hotel-short-description").textContent!.split(" ").length).toBeLessThanOrEqual(25);
         expect(within(card).getByTestId("hotel-best-for").textContent).toMatch(/^Best for:/);
-        expect(within(card).getAllByRole("link")).toHaveLength(2);
+        expect(within(card).getAllByRole("link")).toHaveLength(1);
       }
       unmount();
     }
@@ -213,7 +213,7 @@ describe("Tel Aviv direct hotel catalog", () => {
       expect(within(card).getByTestId("hotel-best-for")).toHaveTextContent(`Best for: ${(hotelTileCopy[hotel.id] || { bestFor: hotel.bestFor }).bestFor}`);
       expect((hotelTileCopy[hotel.id]?.bestFor || hotel.bestFor).split(" ").length).toBeLessThanOrEqual(6);
       expect((hotelTileCopy[hotel.id]?.description || hotel.summary).split(" ").length).toBeLessThanOrEqual(25);
-      expect(within(card).getAllByRole("link")).toHaveLength(1);
+      expect(within(card).getAllByRole("link")).toHaveLength(2);
       expect(within(card).queryByText("Explore the area")).not.toBeInTheDocument();
     }
     const displayedImages = within(catalog).getAllByTestId("hotel-illustration") as HTMLImageElement[];
