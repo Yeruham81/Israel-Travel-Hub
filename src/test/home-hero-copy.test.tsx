@@ -232,7 +232,7 @@ describe("homepage marketing copy and service sections", () => {
 
     // The former bottom destination strip is consolidated into the accommodation section.
     const accommodationSection = document.getElementById("accommodation")!;
-    const destinationGrid = accommodationSection.querySelector('[data-testid="service-layout-accommodation"]')!;
+    const destinationGrid = accommodationSection.querySelector<HTMLElement>('[data-testid="service-layout-accommodation"]')!;
     const destinationLinks = within(destinationGrid).getAllByRole("link");
     expect(destinationLinks).toHaveLength(5);
     // Only the destination name appears over each accommodation image.
