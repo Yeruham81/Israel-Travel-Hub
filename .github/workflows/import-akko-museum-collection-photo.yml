@@ -1,0 +1,44 @@
+name: Import Old Akko museum collection photograph once
+on:
+  push:
+    branches: [main]
+    paths: [.github/workflows/import-akko-museum-collection-photo.yml]
+permissions:
+  contents: write
+jobs:
+  optimize:
+    runs-on: ubuntu-latest
+    timeout-minutes: 9
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+      - name: Fetch and optimize real museum exhibit
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p public/images/attractions
+          curl -fL --retry 4 --retry-delay 2 --max-time 75 -A 'IsraelTravelHub-Guide/1.0 (attributed Wikimedia photo import)' \
+            'https://commons.wikimedia.org/wiki/Special:Redirect/file/Antique%20Padlocks%20-%20Treasures%20in%20the%20Wall%20Museum%20-%20Akko%20(Acre)%20-%20Israel.jpg?width=800' -o /tmp/akko-museum-exhibit.jpg
+          python3 -m pip install --quiet Pillow
+          python3 - <<'PY'
+          from PIL import Image
+          with Image.open('/tmp/akko-museum-exhibit.jpg') as im:
+              im = im.convert('RGB')
+              im.thumbnail((800,600))
+              im.save('public/images/attractions/akko-treasures-museum.webp', 'WEBP', quality=79, method=6)
+              print("Saved photo of antique padlocks in the museum:", im.size)
+          PY
+          test -s public/images/attractions/akko-treasures-museum.webp
+      - name: Commit local image update
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add public/images/attractions/akko-treasures-museum.webp
+          if ! git diff --cached --quiet; then
+            git commit -m 'Replace Akko museum sign photo with licensed collection exhibit'
+            git pull --rebase origin main
+            git push origin HEAD:main
+          fi
