@@ -18,10 +18,11 @@ describe("Ein Gedi upgraded attraction guide", () => {
     expect(content.facts.find(x => x.label === "Admission")?.value).toBe("₪31 adult");
     expect(content.visitorNavLabel).toBe("Trails & tickets");
     expect(content.nearby).toHaveLength(6);
+    expect(content.nearby?.some(x => x.to === "/attractions/old-city-jerusalem/")).toBe(true);
     expect(new Set(content.nearby!.map(x => x.to)).size).toBe(6);
     expect(content.planningLinks).toHaveLength(6);
-    expect(content.faqs).toHaveLength(8);
-    expect(content.sources).toHaveLength(6);
+    expect(content.faqs).toHaveLength(5);
+    expect(content.sources).toHaveLength(5);
     expect(shell).toContain('["contact", "Contact me"]');
     expect(shell).toContain("<AuthorCard />");
     expect(shell.indexOf("<SourcesDisclosure>")).toBeGreaterThan(shell.indexOf("<HomeContactForm"));
@@ -47,10 +48,13 @@ describe("Ein Gedi upgraded attraction guide", () => {
     expect(site.visit.winterRegular).toBe("08:00–16:00");
     expect(article).toContain("October 2026");
     expect(article).toContain("ten minutes to the first waterfall");
-    expect(article).toContain("differing temporary closure statuses");
+    expect(article).toContain("experienced hikers");
     expect(article).toContain("Nahal Arugot");
     expect(article).toContain("three hours before closing");
     expect(article).toContain("separate visit reservations");
+    expect(article).toContain("Nahal David — information & reservations");
+    expect(article).toContain("Nahal Arugot — information & reservations");
+    expect(article).not.toContain("Book Nahal David");
     expect(article).toContain("antiquities-only");
     expect(article).toContain("accessible");
     expect(article.toLowerCase()).toContain("flash floods");
@@ -71,7 +75,7 @@ describe("Ein Gedi upgraded attraction guide", () => {
       "src/assets/guides/dead-sea-excursions/ein-gedi-waterfall.webp",
       "src/assets/guides/dead-sea-excursions/ein-gedi-rock-gorge.jpg",
       "src/assets/guides/ein-gedi-ibex.webp",
-      "src/assets/guides/dead-sea-excursions/ein-gedi-reserve-cliffs.jpg",
+      "src/assets/guides/dead-sea-excursions/ein-gedi-oasis.webp",
       "src/assets/guides/dead-sea-excursions/ein-gedi-dead-sea-overlook.jpg",
       "src/assets/guides/dead-sea-excursions/ein-gedi-canyon-panorama.jpg",
       "src/assets/guides/dead-sea-excursions/dead-sea-salt-shore.webp",
@@ -82,7 +86,9 @@ describe("Ein Gedi upgraded attraction guide", () => {
     expect(article).toContain('data-testid="ein-gedi-wide-panorama"');
     expect(article).toContain("h-auto max-h-[420px] w-full");
     expect(article).toContain("rockGorgePhoto");
-    expect(article).not.toContain("oasisPhoto");
+    expect(article).toContain("oasisPhoto");
+    expect(article).toContain("synagogueMosaicPhoto");
+    expect(article).toContain("Stéphanie Gromann / Wikimedia Commons");
     expect(article).toContain("The ancient synagogue and its mosaics");
   });
 });
