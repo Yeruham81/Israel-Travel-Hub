@@ -127,7 +127,7 @@ export const einGediDestinationContent: AttractionDestinationContent = {
       </div>
       <div className="rounded-xl border border-border/80 bg-secondary/20 p-4 sm:p-5" data-testid="ein-gedi-safety">
         <h3 className="font-serif text-xl font-semibold">Safety, accessibility and facilities</h3>
-        <ul className="mt-3 grid list-disc gap-x-6 gap-y-2 pl-5 text-sm leading-relaxed sm:grid-cols-2 sm:text-base">
+        <ul className="mt-3 list-disc pl-5 text-sm leading-relaxed sm:columns-2 sm:gap-x-6 sm:text-base [&>li]:mb-2 [&>li]:break-inside-avoid">
           <li><strong>Flash floods:</strong> Never enter a canyon when storms or flood warnings affect its drainage area, even if the sky above you is clear.</li>
           <li><strong>Heat and water:</strong> Carry drinking water, a hat and closed hiking shoes. Plan longer hikes for cooler hours and do not drink stream water.</li>
           <li><strong>Accessible areas:</strong> A roughly 500-metre paved Nahal David approach, resting points and the synagogue have accessibility features; natural canyon routes are often unsuitable for wheelchairs.</li>
