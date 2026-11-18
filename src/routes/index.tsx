@@ -9,7 +9,7 @@ import tiberias from "@/assets/home/tiberias-lake.webp";
 import t3 from "@/assets/home/ben-gurion-t3.webp";
 import bethlehem from "@/assets/home/bethlehem-nativity.webp";
 import masada from "@/assets/home/masada-dead-sea.webp";
-import timnaParkFeature from "@/assets/home/timna-park-feature.jpg";
+import timnaParkFeature from "@/assets/home/timna-park-feature-optimized.webp";
 import caesareaAqueduct from "@/assets/home/caesarea-aqueduct.webp";
 import guidedTour from "@/assets/home/guided-tour-feature.webp";
 import cruisePort from "@/assets/home/cruise-port-feature.webp";
@@ -74,7 +74,7 @@ export const Route = createFileRoute("/")({
   component: Home,
 });
 
-type Img = { src: string; alt: string; thumb?: string; tile?: string; pos?: string };
+type Img = { src: string; alt: string; thumb?: string; tile?: string; mobile?: string; pos?: string };
 type Card = { label: string; text?: string; cta?: string; to: LinkProps["to"]; img: Img };
 type Service = { id: string; eyebrow: string; tagline: string; title: string; text: string; feature?: Img; cards: Card[]; hub: { label: string; to: LinkProps["to"] } };
 
@@ -103,10 +103,10 @@ export const services: Service[] = [
     text: "Start your visit to Israel with a smooth, comfortable arrival. Arrange a private transfer from Ben Gurion Airport to Jerusalem, Tel Aviv, Haifa, or any other destination across the country.",
     feature: { src: benGurionApronPhoto, alt: "Parked aircraft at Ben Gurion Airport with the terminal sign reading BEN GURION AIRPORT" },
     cards: [
-      { label: "To Jerusalem", to: "/airport-transfers/jerusalem/", img: { src: "/images/home/transfer-jerusalem-tower-of-david.webp", alt: "Tower of David citadel beside Jerusalem’s Old City" } },
-      { label: "To Tel Aviv", to: "/airport-transfers/tel-aviv/", img: { src: "/images/home/transfer-tel-aviv-beach-skyline.webp", alt: "Tel Aviv Mediterranean beach and modern skyline" } },
-      { label: "To Haifa", to: "/airport-transfers/haifa/", img: { src: "/images/home/transfer-haifa-bahai-gardens.webp", alt: "Bahá’í Gardens staircase and Shrine in Haifa" } },
-      { label: "To Ein Bokek", to: "/airport-transfers/ein-bokek/", img: { src: "/images/home/transfer-ein-bokek-aerial.webp", alt: "Aerial view of Ein Bokek Dead Sea resort area and turquoise water" } },
+      { label: "To Jerusalem", to: "/airport-transfers/jerusalem/", img: { src: "/images/home/transfer-jerusalem-tower-of-david.webp", mobile: "/images/home/transfer-jerusalem-tower-of-david-mobile.webp", alt: "Tower of David citadel beside Jerusalem’s Old City" } },
+      { label: "To Tel Aviv", to: "/airport-transfers/tel-aviv/", img: { src: "/images/home/transfer-tel-aviv-beach-skyline.webp", mobile: "/images/home/transfer-tel-aviv-beach-skyline-mobile.webp", alt: "Tel Aviv Mediterranean beach and modern skyline" } },
+      { label: "To Haifa", to: "/airport-transfers/haifa/", img: { src: "/images/home/transfer-haifa-bahai-gardens.webp", mobile: "/images/home/transfer-haifa-bahai-gardens-mobile.webp", alt: "Bahá’í Gardens staircase and Shrine in Haifa" } },
+      { label: "To Ein Bokek", to: "/airport-transfers/ein-bokek/", img: { src: "/images/home/transfer-ein-bokek-aerial.webp", mobile: "/images/home/transfer-ein-bokek-aerial-mobile.webp", alt: "Aerial view of Ein Bokek Dead Sea resort area and turquoise water" } },
     ],
     hub: { label: "Explore all airport transfers", to: "/airport-transfers/" },
   },
@@ -199,7 +199,10 @@ function AirportTransferCard({ c }: { c: Card }) {
   return (
     <li className="min-h-0">
       <Link to={c.to} aria-label={c.label} className="group relative block aspect-[16/9] min-w-0 overflow-hidden rounded-lg bg-primary shadow-sm focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-ring lg:aspect-auto lg:h-full">
-        <img src={c.img.src} alt={c.img.alt} loading="lazy" decoding="async" width={720} height={480} className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" />
+        <picture className="absolute inset-0 block">
+          {c.img.mobile && <source media="(max-width: 767px)" srcSet={c.img.mobile} type="image/webp" />}
+          <img src={c.img.src} alt={c.img.alt} loading="lazy" decoding="async" width={720} height={480} className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" />
+        </picture>
         <span className="absolute bottom-2 left-2 max-w-[calc(100%-1rem)] font-serif text-sm font-semibold leading-tight text-white sm:bottom-3 sm:left-3 sm:text-base" style={{ textShadow: photoTitleShadow }}>{c.label}</span>
       </Link>
     </li>

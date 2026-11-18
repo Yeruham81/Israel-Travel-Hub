@@ -1,0 +1,59 @@
+{
+  "scope": "Four near-top airport transfer cards (mobile only) and Timna feature photo (all viewports)",
+  "note": "Independent source-file audit; Google PageSpeed result could not be opened by the assistant. Image variants are cropped identically to the originals (no crop changes).",
+  "files": [
+    {
+      "source": "public/images/home/transfer-jerusalem-tower-of-david.webp",
+      "optimized": "public/images/home/transfer-jerusalem-tower-of-david-mobile.webp",
+      "originalBytes": 68076,
+      "optimizedBytes": 36428,
+      "savedBytes": 31648,
+      "sourceWidth": 691,
+      "optimizedWidth": 520,
+      "quality": 82
+    },
+    {
+      "source": "public/images/home/transfer-tel-aviv-beach-skyline.webp",
+      "optimized": "public/images/home/transfer-tel-aviv-beach-skyline-mobile.webp",
+      "originalBytes": 43538,
+      "optimizedBytes": 17392,
+      "savedBytes": 26146,
+      "sourceWidth": 755,
+      "optimizedWidth": 520,
+      "quality": 82
+    },
+    {
+      "source": "public/images/home/transfer-haifa-bahai-gardens.webp",
+      "optimized": "public/images/home/transfer-haifa-bahai-gardens-mobile.webp",
+      "originalBytes": 85594,
+      "optimizedBytes": 42798,
+      "savedBytes": 42796,
+      "sourceWidth": 755,
+      "optimizedWidth": 520,
+      "quality": 82
+    },
+    {
+      "source": "public/images/home/transfer-ein-bokek-aerial.webp",
+      "optimized": "public/images/home/transfer-ein-bokek-aerial-mobile.webp",
+      "originalBytes": 59028,
+      "optimizedBytes": 28260,
+      "savedBytes": 30768,
+      "sourceWidth": 755,
+      "optimizedWidth": 520,
+      "quality": 82
+    },
+    {
+      "source": "src/assets/home/timna-park-feature.jpg",
+      "optimized": "src/assets/home/timna-park-feature-optimized.webp",
+      "originalBytes": 238937,
+      "optimizedBytes": 103606,
+      "savedBytes": 135331,
+      "sourceWidth": 755,
+      "optimizedWidth": 755,
+      "quality": 82
+    }
+  ],
+  "originalBytesTotal": 495173,
+  "optimizedBytesTotal": 228484,
+  "savedBytesTotal": 266689
+}

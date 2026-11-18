@@ -187,6 +187,25 @@ describe("home mobile performance optimizations", () => {
     expect(home).toContain('line-clamp-2 text-sm leading-snug text-muted-foreground');
   });
 
+  it("serves smaller transfer pictures on phones without changing desktop photos", () => {
+    const home = read("src/routes/index.tsx");
+    expect(home).toContain('mobile?: string');
+    expect(home).toContain('media="(max-width: 767px)" srcSet={c.img.mobile}');
+    expect(home).toContain('loading="lazy" decoding="async"');
+    for (const slug of ["jerusalem-tower-of-david", "tel-aviv-beach-skyline", "haifa-bahai-gardens", "ein-bokek-aerial"]) {
+      const original = `public/images/home/transfer-${slug}.webp`;
+      const mobile = `public/images/home/transfer-${slug}-mobile.webp`;
+      expect(bytes(mobile), slug).toBeLessThan(bytes(original));
+      expect(bytes(mobile), slug).toBeLessThan(46001);
+      expect(home).toContain(`/images/home/transfer-${slug}-mobile.webp`);
+      expect(home).toContain(`/images/home/transfer-${slug}.webp`);
+    }
+    const timnaOriginal = bytes("src/assets/home/timna-park-feature.jpg");
+    const timnaOptimized = bytes("src/assets/home/timna-park-feature-optimized.webp");
+    expect(timnaOptimized).toBeLessThan(timnaOriginal * .75);
+    expect(home).toContain('timna-park-feature-optimized.webp');
+  });
+
   it("sets cache rules for static resources without caching HTML or API responses", () => {
     const rules = read("public/_headers");
     expect(rules).toContain("/fonts/*");
