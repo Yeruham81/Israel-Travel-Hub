@@ -1,0 +1,30 @@
+name: Temporary audit of Jewish holiday references
+on:
+  push:
+    paths:
+      - ".github/workflows/temporary-jewish-holiday-link-audit.yml"
+permissions:
+  contents: read
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: List holiday mentions for editorial linking
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import re
+          exp = re.compile(r"Jewish holiday(?:s| eves)?", re.I)
+          for p in sorted(Path("src").rglob("*")):
+              if p.suffix not in {".ts", ".tsx", ".mjs"} or ".test." in p.name or "/ui/" in str(p):
+                  continue
+              try: s = p.read_text()
+              except Exception: continue
+              for m in exp.finditer(s):
+                  line=s.count("\n",0,m.start())+1
+                  beg=max(0,m.start()-150); end=min(len(s),m.end()+210)
+                  snippet=s[beg:end].replace("\n"," ")
+                  print(f"MATCH | {p}:{line} | {m.group(0)} | {snippet}")
+          PY
