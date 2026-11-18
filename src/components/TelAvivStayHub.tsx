@@ -15,8 +15,8 @@ import { CityHotelPhotoCredits } from "@/components/CityHotelPhotoCredits";
 import { AreaPhotoCredit } from "@/components/AreaMap";
 import { hotelBrowseAffiliateUrl } from "@/lib/hotel-affiliate";
 import { recordOutboundClick, relFor } from "@/lib/outbound";
-import telavivHeroPhoto from "@/assets/home/hero-tel-aviv.webp";
-import telavivAreaGuidePhoto from "@/assets/home/tel-aviv-coast.webp";
+import telavivHeroPhoto from "@/assets/home/hero-refresh-tel-aviv-coastline-v2-medium.webp";
+import telavivAreaGuidePhoto from "@/assets/home/hero-refresh-tel-aviv-sarona-v4-medium.webp";
 
 const pageSections = [
   ["book", "Hotels"], ["area-guide", "Where to stay"], ["areas", "Neighborhoods"], ["compare", "Compare areas"],
