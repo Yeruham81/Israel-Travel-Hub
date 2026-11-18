@@ -714,6 +714,58 @@ jobs:
           NODE
             rm -f "$data"
           done
+          # Verify the upgraded Mount of Olives guide and locally hosted landmark photographs.
+          olives_html="$(mktemp)"
+          curl --retry 2 --max-time 20 -fsSL -o "$olives_html" "$VITE_CANONICAL_ORIGIN/attractions/mount-of-olives/"
+          node - "$olives_html" "$VITE_CANONICAL_ORIGIN/attractions/mount-of-olives/" <<'NODE'
+          const fs = require("node:fs");
+          const html = fs.readFileSync(process.argv[2], "utf8");
+          const expectedUrl = process.argv[3];
+          for (const required of [
+            "Mount of Olives: Viewpoint", "Seven Arches", "Pater Noster",
+            "Chapel of the Ascension", "Dominus Flevit", "St Mary Magdalene",
+            "Gethsemane", "Tomb of the Virgin Mary", "Jewish cemetery",
+            'data-testid="mount-olives-hours-fees"',
+            'data-testid="mount-olives-access"',
+            'data-testid="mount-olives-walking-routes"',
+            'data-testid="mount-olives-access-points"',
+            'data-testid="mount-olives-map"',
+          ]) {
+            if (!html.includes(required)) {
+              console.error("::error::Mount of Olives public page missing " + required);
+              process.exit(1);
+            }
+          }
+          const canonical = [...html.matchAll(/<link\b[^>]*>/gi)].map(x=>x[0]).filter(x=>/\brel=["']canonical["']/i.test(x));
+          if (!canonical.some(tag=>tag.includes('href="' + expectedUrl + '"'))) {
+            console.error("::error::Mount of Olives canonical does not match the public URL");
+            process.exit(1);
+          }
+          if ((html.match(/data-testid="attraction-highlight"/g)||[]).length !== 8) {
+            console.error("::error::Mount of Olives requires eight illustrated main stops");
+            process.exit(1);
+          }
+          const related = html.match(/<ul[^>]*data-testid=["']stay-trip-photo-grid["'][^>]*>([\s\S]*?)<\/ul>/i);
+          if ((related?.[1].match(/<li\b/g)||[]).length !== 6) {
+            console.error("::error::Mount of Olives requires six related attraction cards");
+            process.exit(1);
+          }
+          console.log("Mount of Olives public guide, eight highlights, six related cards and canonical verified.");
+          NODE
+          rm -f "$olives_html"
+          for picture in pater-noster.webp chapel-of-ascension.webp dominus-flevit.webp mary-magdalene-church.webp tomb-of-virgin-mary.webp; do
+            data="$(mktemp)"
+            curl --retry 2 --max-time 20 -fsSL -o "$data" "$VITE_CANONICAL_ORIGIN/images/jerusalem/mount-of-olives/$picture"
+            node - "$data" "$picture" <<'NODE'
+          const fs = require("node:fs");
+          const bytes = fs.readFileSync(process.argv[2]);
+          if (bytes.subarray(0,4).toString() !== "RIFF" || bytes.subarray(8,12).toString() !== "WEBP") {
+            console.error("::error::Mount of Olives image is missing or invalid: " + process.argv[3]);
+            process.exit(1);
+          }
+          NODE
+            rm -f "$data"
+          done
           # Verify the revised Jerusalem Old City guide and all landmark photos on the public site.
           jerusalem_html="$(mktemp)"
           curl --retry 2 --max-time 20 -fsSL -o "$jerusalem_html" "$VITE_CANONICAL_ORIGIN/attractions/old-city-jerusalem/"
