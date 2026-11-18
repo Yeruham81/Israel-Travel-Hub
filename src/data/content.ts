@@ -6,7 +6,6 @@ import type { LinkProps } from "@tanstack/react-router";
 import type { ResortHotelFacts } from "@/data/registry";
 import downtownPhoto from "@/assets/jerusalem/downtown.webp";
 import mamillaPhoto from "@/assets/jerusalem/mamilla.webp";
-import oldCityPhoto from "@/assets/jerusalem/old-city.webp";
 import jerusalemSkylinePhoto from "@/assets/home/jerusalem-old-city.webp";
 import marketPhoto from "@/assets/jerusalem/mahane-yehuda.webp";
 import eastJerusalemPhoto from "@/assets/jerusalem/east-jerusalem.webp";
@@ -174,7 +173,7 @@ export const jerusalemAreaGuides: NeighborhoodStayGuide[] = [
     summary: "Old City guesthouses put historic sites close by, but stairs, uneven lanes and restrictions on vehicle access make your nearest gate and luggage route essential.",
     bestFor: "Pilgrimage, history & atmosphere", suits: ["heritage", "first-visit", "views"], priceLevel: "Simple guesthouses to heritage hotels",
     watch: "Steps, uneven paving and restricted vehicle access can make even short arrivals demanding.",
-    photo: { src: oldCityPhoto, alt: "Stone buildings and a cobbled street inside Jerusalem's Old City", sourceUrl: "" },
+    photo: { src: "/images/attractions/old-jerusalem-cardo.webp", alt: "Narrow stone-paved shopping passage in Jerusalem's Old City", sourceUrl: "" },
     map: { lat: 31.7767, lon: 35.2332, bounds: [35.2259, 31.7709, 35.2413, 31.7833], reference: "Old City, inside the walls" },
     overview: [
       "The Old City is the most immersive option if Jerusalem's history and religious sites are the focus of your visit. Its Christian, Armenian, Jewish and Muslim quarters contain sacred places, market lanes and residential streets within the same walls. Staying here lets you experience the lanes before and after the busiest sightseeing hours.",
@@ -603,7 +602,7 @@ export const cityStayGuides: Record<CityStayGuide["id"], CityStayGuide> = {
   telaviv: {
     id: "telaviv",
     city: "Tel Aviv",
-    reviewedAt: "2026-10-17",
+    reviewedAt: "2026-11-18",
     areaIntro: "Start with the beachfront for sea and promenade time, or Dizengoff for a central café base. Choose the Old North for parks and northern beaches, Neve Tzedek or Jaffa for historic character, Florentin for nightlife, Kerem HaTeimanim for food and the coast, or Rothschild for architecture and restaurants.",
     quickPicks: [
       { areaId: "telaviv-beachfront", label: "Sea & a first visit", description: "Central beaches and the Mediterranean promenade" },
