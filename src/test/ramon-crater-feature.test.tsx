@@ -18,7 +18,7 @@ describe("Ramon Crater upgraded attraction guide", () => {
     expect(new Set(content.nearby!.map(x => x.to)).size).toBe(6);
     expect(content.planningLinks).toHaveLength(6);
     expect(content.faqs).toHaveLength(5);
-    expect(content.sources).toHaveLength(6);
+    expect(content.sources).toHaveLength(8);
     expect(shell).toContain('["contact", "Contact me"]');
     expect(shell).toContain("<AuthorCard />");
     expect(attractionHubCards.some(card => card.to === content.path)).toBe(true);
@@ -36,7 +36,9 @@ describe("Ramon Crater upgraded attraction guide", () => {
     expect(site.visit.child).toBe("₪16");
     expect(site.visit.student).toBe("₪26");
     expect(article).toContain("Closed as of November 2026.");
-    expect(article).toContain("Check the official Hai Ramon page before visiting");
+    expect(article).toContain("Check the current visiting status on the official website");
+    expect(article).not.toContain("I am keeping this site in the guide");
+    expect(article).not.toContain("Planning a visit to Mitzpe Ramon and the Negev?");
     expect(article).toContain("The rim viewpoints are free");
     expect(article).toContain("Advance reservations are required");
     expect(article).toContain("Nahal Ardon");
@@ -57,16 +59,20 @@ describe("Ramon Crater upgraded attraction guide", () => {
     const paths = [
       "src/assets/negev/ramon-panorama.webp",
       "src/assets/negev/ramon-camel-hill.webp",
-      "src/assets/negev/ramon-rocks.webp",
+      "public/images/attractions/ramon-haminsara-columns.webp",
       "src/assets/negev/ramon-wide.webp",
       "src/assets/negev/ramon-ibexes.webp",
       "src/assets/negev/ramon-jeep.webp",
-      "src/assets/negev/ramon-clouds.webp",
+      "public/images/attractions/hai-ramon-fat-sand-rat.webp",
+      "public/images/attractions/ramon-stargazing.webp",
       "src/assets/home/hero-refresh-ramon-crater-v4-large.webp",
     ];
     for (const path of paths) expect(existsSync(path), path).toBe(true);
     expect(new Set(paths).size).toBe(paths.length);
     const article = readFileSync("src/components/RamonCraterAttractionPage.tsx", "utf8");
     expect(article).not.toContain("upload.wikimedia.org");
+    expect(article).toContain("src: minsaraPhoto");
+    expect(article).toContain("src: sandRatPhoto");
+    expect(article).toContain("src: starsPhoto");
   });
 });
