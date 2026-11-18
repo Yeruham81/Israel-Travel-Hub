@@ -24,6 +24,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           ref: main
+          fetch-depth: 0
           persist-credentials: true
       - uses: actions/setup-python@v5
         with:
@@ -74,4 +75,17 @@ jobs:
             exit 0
           fi
           git commit -m "Optimize PSI homepage tour cards, feature photos and LCP hero for mobile"
-          git push origin HEAD:main
+          # Other page edits may reach main while compression/tests run.
+          # Rebase this isolated asset commit onto the latest main; never force.
+          for attempt in 1 2 3 4 5; do
+            git fetch origin main
+            git rebase origin/main
+            if git push origin HEAD:main; then
+              echo "Optimized images merged safely onto current main"
+              exit 0
+            fi
+            echo "Main advanced during push (attempt $attempt); retrying"
+            sleep 2
+          done
+          echo "::error::Could not push optimized images safely after retries"
+          exit 1
