@@ -1,13 +1,20 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
+import guideSherutThumb from "@/assets/airport-transfers/guide-sherut-hub.webp";
+import guideTelAvivThumb from "@/assets/airport-transfers/guide-tel-aviv-hub.webp";
+import guideIsraelThumb from "@/assets/airport-transfers/guide-israel-hub.webp";
+import guideTaxisThumb from "@/assets/airport-transfers/guide-taxis-hub.webp";
+import guideAirportTaxisThumb from "@/assets/airport-transfers/guide-airport-taxis-hub.webp";
+import guideArrivalThumb from "@/assets/airport-transfers/guide-arrival-hub.webp";
 import { useEffect, useState } from "react";
 import { BadgeCheck, BedDouble, BookOpen, CalendarCheck, CalendarDays, CheckCircle2, Map as MapIcon, PlaneLanding, Smartphone, Sun } from "lucide-react";
 import { FaqList, HubHeader } from "@/components/Guide";
 import { GuideHeroMedia } from "@/components/GuideHeroMedia";
+import airportHeroMobile from "@/assets/airport-transfers/airport-mobile.webp";
 import { TransferQuoteForm } from "@/components/TransferQuoteForm";
 import { AirportDestinationCard as DestinationCard } from "@/components/AirportDestinationCard";
 import { AirportBookingPlatforms } from "@/components/AirportBookingPlatforms";
 import { GuidePhotoCredit } from "@/components/TravelGuide";
-import { AIRPORT_TRANSFER_UPDATED_DATE, airportDestinationCards, airportTransferPhotos, airportTransferBenefits, airportTransferChecklist, airportTransferFaqs } from "@/data/airportTransfers";
+import { AIRPORT_TRANSFER_UPDATED_DATE, airportDestinationCards, airportHubPhotoSrc, airportTransferPhotos, airportTransferBenefits, airportTransferChecklist, airportTransferFaqs } from "@/data/airportTransfers";
 import { travelGuides } from "@/data/travelGuides";
 import { travelGuidePaths } from "@/data/registry";
 import { pageMeta } from "@/lib/site";
@@ -16,12 +23,12 @@ import { hasPublicPhotoCredit } from "@/lib/photo-credits";
 
 const benefitIcons = [BadgeCheck, PlaneLanding, CalendarCheck] as const;
 const planningLinks = [
-  { title: "Ben Gurion arrival tips", description: "From landing to the arrivals hall.", to: travelGuidePaths.arrival, photo: travelGuides.arrival.cardPhoto ?? travelGuides.arrival.photo },
-  { title: "Official airport taxis", description: "Pickup points, booking and taxi fares.", to: travelGuidePaths.airportTaxis, photo: { src: "/images/travel-blog/airport-taxi-sign.webp", alt: "Airport taxi service sign at Ben Gurion Airport" } },
-  { title: "Taxis in Israel", description: "Licensed taxis, apps and payments.", to: travelGuidePaths.taxis, photo: travelGuides.taxis.cardPhoto ?? travelGuides.taxis.photo },
-  { title: "Getting around Israel", description: "Trains, buses and longer journeys.", to: travelGuidePaths.israel, photo: travelGuides.israel.cardPhoto ?? travelGuides.israel.photo },
-  { title: "Getting around Tel Aviv", description: "City transport, light rail and Shabbat.", to: travelGuidePaths.telAviv, photo: travelGuides.telAviv.cardPhoto ?? travelGuides.telAviv.photo },
-  { title: "Sherut in Israel", description: "Shared taxis and current airport alternatives.", to: travelGuidePaths.sherut, photo: travelGuides.sherut.cardPhoto ?? travelGuides.sherut.photo },
+  { title: "Ben Gurion arrival tips", description: "From landing to the arrivals hall.", to: travelGuidePaths.arrival, photo: travelGuides.arrival.cardPhoto ?? travelGuides.arrival.photo, thumb: guideArrivalThumb },
+  { title: "Official airport taxis", description: "Pickup points, booking and taxi fares.", to: travelGuidePaths.airportTaxis, photo: { src: "/images/travel-blog/airport-taxi-sign.webp", alt: "Airport taxi service sign at Ben Gurion Airport" }, thumb: guideAirportTaxisThumb },
+  { title: "Taxis in Israel", description: "Licensed taxis, apps and payments.", to: travelGuidePaths.taxis, photo: travelGuides.taxis.cardPhoto ?? travelGuides.taxis.photo, thumb: guideTaxisThumb },
+  { title: "Getting around Israel", description: "Trains, buses and longer journeys.", to: travelGuidePaths.israel, photo: travelGuides.israel.cardPhoto ?? travelGuides.israel.photo, thumb: guideIsraelThumb },
+  { title: "Getting around Tel Aviv", description: "City transport, light rail and Shabbat.", to: travelGuidePaths.telAviv, photo: travelGuides.telAviv.cardPhoto ?? travelGuides.telAviv.photo, thumb: guideTelAvivThumb },
+  { title: "Sherut in Israel", description: "Shared taxis and current airport alternatives.", to: travelGuidePaths.sherut, photo: travelGuides.sherut.cardPhoto ?? travelGuides.sherut.photo, thumb: guideSherutThumb },
 ] as const;
 
 // General trip-planning ideas complement the airport-specific guides above.
@@ -68,7 +75,7 @@ function Airport() {
       crumbs={[{ name: "Home", to: "/" }, { name: "Airport transfers", to: "/airport-transfers/" }]}
       title="Private airport transfers from Ben Gurion Airport"
       intro="Arrange a private pickup from Ben Gurion Airport (TLV) to Jerusalem, Tel Aviv, Haifa, the Dead Sea or elsewhere in Israel. See my starting fares, request a quote or explore other booking platforms."
-      image={<GuideHeroMedia src={airportTransferPhotos["other"]!.src} alt={airportTransferPhotos["other"]!.alt} compact />}
+      image={<GuideHeroMedia src={airportTransferPhotos["other"]!.src} mobileSrc={airportHeroMobile} alt={airportTransferPhotos["other"]!.alt} compact />}
       actions={<a href="#request-quote" className="inline-flex min-h-11 items-center justify-center rounded-lg bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary/90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">Request a personal quote</a>}
     />
     <div className="mx-auto max-w-5xl px-4">
@@ -83,7 +90,7 @@ function Airport() {
         <h2 id="more-h" className="text-2xl font-semibold">More destinations from Ben Gurion Airport</h2>
         <div className="mt-4 grid auto-rows-fr gap-2 lg:grid-cols-2">
           {airportDestinationCards.filter((card) => !card.popular).map((card) => <DestinationCard key={card.id} id={card.id} destination={card.destination} price={card.price} photo={card.photo} onChoose={choose} layout="hub-row" />)}
-          <DestinationCard id="other" destination="Another destination?" photo={airportTransferPhotos["other"]!} onChoose={choose} layout="hub-row" />
+          <DestinationCard id="other" destination="Another destination?" photo={{ ...airportTransferPhotos["other"]!, hubSrc: airportHubPhotoSrc["other"] }} onChoose={choose} layout="hub-row" />
         </div>
       </section>
       <div className="mt-4 text-xs leading-relaxed text-muted-foreground" data-testid="airport-rate-terms">
@@ -118,7 +125,7 @@ function Airport() {
         <ul className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
           {planningLinks.map((guide) => <li key={guide.to} className="min-w-0">
             <Link to={guide.to} className="group flex h-full min-w-0 items-center gap-3 rounded-xl border bg-card p-3 transition-colors hover:border-primary/50 hover:bg-secondary/20 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
-              <img src={guide.photo.src} alt={guide.photo.alt} width={112} height={75} loading="lazy" decoding="async" className="aspect-[3/2] w-24 shrink-0 rounded-lg object-cover sm:w-28" />
+              <img src={guide.thumb} alt={guide.photo.alt} width={112} height={75} loading="lazy" decoding="async" className="aspect-[3/2] w-24 shrink-0 rounded-lg object-cover sm:w-28" />
               <span className="min-w-0 flex-1">
                 <span className="block text-sm font-semibold leading-snug group-hover:text-primary">{guide.title}</span>
                 <span className="mt-1 block text-xs leading-relaxed text-muted-foreground">{guide.description}</span>

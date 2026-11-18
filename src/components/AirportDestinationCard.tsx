@@ -10,7 +10,7 @@ const quoteButtonClass = "inline-flex min-h-11 items-center justify-center round
 const hubQuoteButtonClass = "inline-flex min-h-9 shrink-0 items-center justify-center whitespace-nowrap rounded-lg bg-primary px-1.5 py-1.5 text-center text-[11px] font-semibold leading-none text-primary-foreground shadow-sm transition-colors hover:bg-primary/90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary sm:min-h-10 sm:px-2 sm:text-sm";
 
 export function AirportDestinationCard({ id, destination, price, photo, onChoose, layout = "featured", testId = "airport-destination-card" }: {
-  id: string; destination: string; price?: AirportTransferRate["price"]; photo: Pick<StayGuidePhoto, "src" | "alt">;
+  id: string; destination: string; price?: AirportTransferRate["price"]; photo: Pick<StayGuidePhoto, "src" | "alt"> & { hubSrc?: string | undefined };
   onChoose?: (id: string) => void; layout?: "featured" | "compact" | "hub-featured" | "hub-row"; testId?: string;
 }) {
   const route = airportTransferRoutes.find((item) => item.id === id);
@@ -18,7 +18,7 @@ export function AirportDestinationCard({ id, destination, price, photo, onChoose
   // changing the established layout of the four dedicated route pages.
   if (layout === "hub-featured") return <article className="flex h-full min-w-0 flex-row items-center gap-2 rounded-2xl border bg-card p-2.5 transition-colors hover:border-primary/40 sm:flex-col sm:items-stretch sm:gap-0 sm:p-3" data-testid={testId} data-destination={id}>
     {route && <Link to={route.path} className="group flex min-w-0 flex-1 items-center gap-2 rounded-xl focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary sm:gap-4">
-      <img src={photo.src} alt={photo.alt} width={160} height={106} loading="lazy" decoding="async" className="aspect-[3/2] w-16 shrink-0 rounded-lg object-cover sm:w-40 sm:rounded-xl md:w-36 lg:w-40" />
+      <img src={photo.hubSrc ?? photo.src} alt={photo.alt} width={160} height={106} loading="lazy" decoding="async" className="aspect-[3/2] w-16 shrink-0 rounded-lg object-cover sm:w-40 sm:rounded-xl md:w-36 lg:w-40" />
       <div className="min-w-0 flex-1">
         <h3 className="text-base font-semibold leading-tight sm:text-xl sm:leading-snug">{destination}</h3>
         <p className="mt-0.5 text-[13px] font-bold tabular-nums text-foreground sm:mt-1 sm:text-lg">From ₪{price?.amount.toLocaleString("en-US")}</p>
@@ -33,7 +33,7 @@ export function AirportDestinationCard({ id, destination, price, photo, onChoose
     className="grid h-full min-h-[5.5rem] min-w-0 grid-cols-[4rem_minmax(0,1fr)_6.5rem] items-center gap-2 rounded-xl border bg-card p-2.5 transition-colors hover:border-primary/40 sm:min-h-[7rem] sm:grid-cols-[7rem_minmax(0,1fr)_8.75rem] sm:gap-3 sm:p-3"
     data-testid={testId} data-destination={id}
   >
-    <img src={photo.src} alt={photo.alt} width={128} height={85} loading="lazy" decoding="async" className="aspect-[3/2] w-full rounded-lg object-cover" />
+    <img src={photo.hubSrc ?? photo.src} alt={photo.alt} width={128} height={85} loading="lazy" decoding="async" className="aspect-[3/2] w-full rounded-lg object-cover" />
     <div className="min-w-0">
       <h3 className="text-base font-semibold leading-tight sm:text-lg sm:leading-snug">{id === "other" ? "Another destination?" : destination}</h3>
       {price && <p className="mt-0.5 text-[13px] font-bold tabular-nums text-foreground sm:mt-1 sm:text-base">From ₪{price.amount.toLocaleString("en-US")}</p>}

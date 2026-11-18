@@ -1,4 +1,12 @@
 import telAviv from "@/assets/tel-aviv/beachfront.webp";
+import hubOther from "@/assets/airport-transfers/other-hub.webp";
+import hubEilat from "@/assets/airport-transfers/eilat-hub.webp";
+import hubNazareth from "@/assets/airport-transfers/nazareth-hub.webp";
+import hubCaesarea from "@/assets/airport-transfers/caesarea-hub.webp";
+import hubAshdod from "@/assets/airport-transfers/ashdod-hub.webp";
+import hubNetanya from "@/assets/airport-transfers/netanya-hub.webp";
+import hubHerzliya from "@/assets/airport-transfers/herzliya-hub.webp";
+import hubRaanana from "@/assets/airport-transfers/raanana-hub.webp";
 import jerusalem from "@/assets/jerusalem/old-city.webp";
 import haifa from "@/assets/haifa/panorama.webp";
 import deadSea from "@/assets/dead-sea/beach.webp";
@@ -44,7 +52,22 @@ export const airportHomepageRoutePhotos: Record<string, Pick<StayGuidePhoto, "sr
   "dead-sea": { src: "/images/home/transfer-ein-bokek-aerial.webp", alt: "Aerial view of Ein Bokek Dead Sea resort area and turquoise water" },
 };
 
-export const airportDestinationCards = airportTransferRates.map((rate) => ({ ...rate, photo: airportHomepageRoutePhotos[rate.id] ?? airportTransferPhotos[rate.id]! }));
+export const airportHubPhotoSrc: Record<string, string> = {
+  "jerusalem": "/images/home/transfer-jerusalem-tower-of-david-mobile.webp",
+  "tel-aviv": "/images/home/transfer-tel-aviv-beach-skyline-mobile.webp",
+  "haifa": "/images/home/transfer-haifa-bahai-gardens-mobile.webp",
+  "dead-sea": "/images/home/transfer-ein-bokek-aerial-mobile.webp",
+  "raanana": hubRaanana,
+  "herzliya": hubHerzliya,
+  "netanya": hubNetanya,
+  "ashdod": hubAshdod,
+  "caesarea": hubCaesarea,
+  "nazareth": hubNazareth,
+  "eilat": hubEilat,
+  "other": hubOther,
+};
+
+export const airportDestinationCards = airportTransferRates.map((rate) => ({ ...rate, photo: { ...(airportHomepageRoutePhotos[rate.id] ?? airportTransferPhotos[rate.id]!), hubSrc: airportHubPhotoSrc[rate.id] } }));
 
 export const airportTransferBenefits = [
   { title: "Agreed price, no extra charges", text: "The full fare is confirmed in advance, with no unexpected charges added later." },

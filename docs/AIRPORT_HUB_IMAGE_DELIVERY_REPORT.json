@@ -1,0 +1,163 @@
+{
+  "scope": "Airport-transfers hub: eight small route thumbnails, six guide thumbnails, plus four existing mobile destination images and one existing mobile hero",
+  "originalsPreserved": true,
+  "files": [
+    {
+      "name": "raanana",
+      "source": "src/assets/airport-transfers/raanana.webp",
+      "optimized": "src/assets/airport-transfers/raanana-hub.webp",
+      "sourceBytes": 23450,
+      "optimizedBytes": 19022,
+      "savedBytes": 4428,
+      "sourceWidth": 360,
+      "optimizedWidth": 320,
+      "quality": 84
+    },
+    {
+      "name": "herzliya",
+      "source": "src/assets/airport-transfers/herzliya.webp",
+      "optimized": "src/assets/airport-transfers/herzliya-hub.webp",
+      "sourceBytes": 12136,
+      "optimizedBytes": 9154,
+      "savedBytes": 2982,
+      "sourceWidth": 360,
+      "optimizedWidth": 320,
+      "quality": 82
+    },
+    {
+      "name": "netanya",
+      "source": "src/assets/airport-transfers/netanya.webp",
+      "optimized": "src/assets/airport-transfers/netanya-hub.webp",
+      "sourceBytes": 15036,
+      "optimizedBytes": 11204,
+      "savedBytes": 3832,
+      "sourceWidth": 360,
+      "optimizedWidth": 320,
+      "quality": 84
+    },
+    {
+      "name": "ashdod",
+      "source": "src/assets/airport-transfers/ashdod.webp",
+      "optimized": "src/assets/airport-transfers/ashdod-hub.webp",
+      "sourceBytes": 29706,
+      "optimizedBytes": 23570,
+      "savedBytes": 6136,
+      "sourceWidth": 360,
+      "optimizedWidth": 320,
+      "quality": 84
+    },
+    {
+      "name": "caesarea",
+      "source": "src/assets/airport-transfers/caesarea.webp",
+      "optimized": "src/assets/airport-transfers/caesarea-hub.webp",
+      "sourceBytes": 23218,
+      "optimizedBytes": 18648,
+      "savedBytes": 4570,
+      "sourceWidth": 360,
+      "optimizedWidth": 320,
+      "quality": 84
+    },
+    {
+      "name": "nazareth",
+      "source": "src/assets/airport-transfers/nazareth.webp",
+      "optimized": "src/assets/airport-transfers/nazareth-hub.webp",
+      "sourceBytes": 17628,
+      "optimizedBytes": 14414,
+      "savedBytes": 3214,
+      "sourceWidth": 360,
+      "optimizedWidth": 320,
+      "quality": 84
+    },
+    {
+      "name": "eilat",
+      "source": "src/assets/eilat/waterfront.webp",
+      "optimized": "src/assets/airport-transfers/eilat-hub.webp",
+      "sourceBytes": 99718,
+      "optimizedBytes": 18436,
+      "savedBytes": 81282,
+      "sourceWidth": 755,
+      "optimizedWidth": 320,
+      "quality": 86
+    },
+    {
+      "name": "other",
+      "source": "src/assets/airport-transfers/airport.webp",
+      "optimized": "src/assets/airport-transfers/other-hub.webp",
+      "sourceBytes": 32608,
+      "optimizedBytes": 8648,
+      "savedBytes": 23960,
+      "sourceWidth": 900,
+      "optimizedWidth": 320,
+      "quality": 86
+    },
+    {
+      "name": "guide-arrival",
+      "source": "src/assets/home/ben-gurion-t3.webp",
+      "optimized": "src/assets/airport-transfers/guide-arrival-hub.webp",
+      "sourceBytes": 233340,
+      "optimizedBytes": 24188,
+      "savedBytes": 209152,
+      "sourceWidth": 1200,
+      "optimizedWidth": 336,
+      "quality": 86
+    },
+    {
+      "name": "guide-airport-taxis",
+      "source": "public/images/travel-blog/airport-taxi-sign.webp",
+      "optimized": "src/assets/airport-transfers/guide-airport-taxis-hub.webp",
+      "sourceBytes": 28984,
+      "optimizedBytes": 14526,
+      "savedBytes": 14458,
+      "sourceWidth": 656,
+      "optimizedWidth": 336,
+      "quality": 86
+    },
+    {
+      "name": "guide-taxis",
+      "source": "public/images/travel-blog/taxi-in-tel-aviv.webp",
+      "optimized": "src/assets/airport-transfers/guide-taxis-hub.webp",
+      "sourceBytes": 73556,
+      "optimizedBytes": 23052,
+      "savedBytes": 50504,
+      "sourceWidth": 755,
+      "optimizedWidth": 336,
+      "quality": 86
+    },
+    {
+      "name": "guide-israel",
+      "source": "src/assets/guides/2026-11/buses-in-tel-aviv.webp",
+      "optimized": "src/assets/airport-transfers/guide-israel-hub.webp",
+      "sourceBytes": 57872,
+      "optimizedBytes": 18404,
+      "savedBytes": 39468,
+      "sourceWidth": 755,
+      "optimizedWidth": 336,
+      "quality": 86
+    },
+    {
+      "name": "guide-tel-aviv",
+      "source": "src/assets/home/tel-aviv-coast.webp",
+      "optimized": "src/assets/airport-transfers/guide-tel-aviv-hub.webp",
+      "sourceBytes": 133428,
+      "optimizedBytes": 12326,
+      "savedBytes": 121102,
+      "sourceWidth": 1200,
+      "optimizedWidth": 336,
+      "quality": 86
+    },
+    {
+      "name": "guide-sherut",
+      "source": "src/assets/guides/sherut-nesher-airport.webp",
+      "optimized": "src/assets/airport-transfers/guide-sherut-hub.webp",
+      "sourceBytes": 47244,
+      "optimizedBytes": 15606,
+      "savedBytes": 31638,
+      "sourceWidth": 755,
+      "optimizedWidth": 336,
+      "quality": 86
+    }
+  ],
+  "sourceBytes": 827924,
+  "optimizedBytes": 231198,
+  "savedBytes": 596726
+}

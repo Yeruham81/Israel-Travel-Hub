@@ -5,7 +5,7 @@ import { afterEach, describe, expect, it, vi } from "vitest";
 import { Route as AirportRoute } from "@/routes/airport-transfers.index";
 import { routeTree } from "@/routeTree.gen";
 import { airportTransferRates, airportTransferRoutes, affiliateConfig, linksForPage, partners } from "@/data/registry";
-import { airportDestinationCards, airportHomepageRoutePhotos, airportTransferPhotos } from "@/data/airportTransfers";
+import { airportDestinationCards, airportHubPhotoSrc, airportTransferPhotos } from "@/data/airportTransfers";
 import { emptyTransferQuote, buildTransferQuoteDraft, validateTransferQuote } from "@/lib/transfer-quote";
 import { readOutboundClicks } from "@/lib/outbound";
 
@@ -51,7 +51,7 @@ describe("private Ben Gurion transfers", () => {
       expect(rate.price).toMatchObject({ kind: "published_starting_rate", currency: "ILS", basis: "per_vehicle", maxPartySize: 4, sourceId: "moshe-airport-transfers" });
       const card = container.querySelector(`[data-destination="${rate.id}"]`)! as HTMLElement;
       if (rate.popular) {
-        expect(within(card).getByRole("img")).toHaveAttribute("src", airportHomepageRoutePhotos[rate.id]!.src);
+        expect(within(card).getByRole("img")).toHaveAttribute("src", airportHubPhotoSrc[rate.id]);
         expect(card).toHaveClass("flex-row", "sm:flex-col");
         expect(within(card).getByRole("img")).toHaveClass("w-16", "sm:w-40", "md:w-36", "lg:w-40");
         expect(within(card).getByRole("link", { name: "Request a quote" })).toHaveClass("sm:self-end");
@@ -59,7 +59,7 @@ describe("private Ben Gurion transfers", () => {
         expect(within(card).getByText(`From ₪${rate.price.amount.toLocaleString("en-US")}`)).toHaveClass("text-[13px]", "font-bold");
         const routeLink = within(card).getByRole("link", { name: /View transfer details/ });
         expect(router.matchRoutes(new URL(routeLink.getAttribute("href")!, "https://example.test").pathname).at(-1)?.routeId).toContain("airport-transfers");
-      } else expect(within(card).getByRole("img")).toHaveAttribute("src", airportDestinationCards.find(item => item.id === rate.id)!.photo.src);
+      } else expect(within(card).getByRole("img")).toHaveAttribute("src", airportDestinationCards.find(item => item.id === rate.id)!.photo.hubSrc);
       const quoteButton = within(card).getByRole("link", { name: "Request a quote" });
       expect(quoteButton).toHaveAttribute("href", "#request-quote");
       expect(quoteButton).toHaveClass("bg-primary", "text-primary-foreground", "whitespace-nowrap", "shadow-sm", "min-h-9", "px-1.5", "sm:min-h-10", "sm:px-2");
@@ -91,7 +91,7 @@ describe("private Ben Gurion transfers", () => {
       expect(card.children[0]).toHaveClass("aspect-[3/2]", "w-full", "object-cover");
     }
     expect(new Set(within(more).getAllByRole("img").map(image => image.getAttribute("src"))).size).toBe(8);
-    expect(within(more).getByRole("img", { name: airportTransferPhotos["other"]!.alt })).toHaveAttribute("src", airportTransferPhotos["other"]!.src);
+    expect(within(more).getByRole("img", { name: airportTransferPhotos["other"]!.alt })).toHaveAttribute("src", airportHubPhotoSrc["other"]);
     const rateTerms = screen.getByTestId("airport-rate-terms");
     expect(rateTerms).toHaveTextContent(/weekday.*up to four passengers.*Night, weekend and holiday/i);
     expect(rateTerms).not.toHaveTextContent("About starting prices:");

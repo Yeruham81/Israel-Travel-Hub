@@ -81,6 +81,7 @@ export function GuideHeroMedia({
   fit = "cover",
   compact = false,
   srcSet,
+  mobileSrc,
   sizes,
   width = 1200,
   height = 675,
@@ -93,12 +94,15 @@ export function GuideHeroMedia({
   /** Smaller cover reserved for compact editorial landing-page intros. */
   compact?: boolean;
   srcSet?: string | undefined;
+  mobileSrc?: string | undefined;
   sizes?: string | undefined;
   width?: number;
   height?: number;
 }) {
   return (
     <figure className="w-full max-w-2xl lg:max-w-none" data-testid="guide-hero-media">
+      {mobileSrc ? <picture className="block">
+        <source media="(max-width: 767px)" srcSet={mobileSrc} type="image/webp" />
       <img
         src={src}
         srcSet={srcSet}
@@ -110,6 +114,19 @@ export function GuideHeroMedia({
         decoding="async"
         className={`block aspect-[16/9] w-full rounded-2xl ${compact ? "max-h-[185px] lg:max-h-[175px]" : "max-h-[300px] lg:aspect-[4/3] lg:max-h-[260px]"} ${fit === "contain" ? "bg-secondary/30 object-contain" : "object-cover"}`}
       />
+      </picture> : (
+      <img
+        src={src}
+        srcSet={srcSet}
+        sizes={sizes}
+        alt={alt}
+        width={width}
+        height={height}
+        fetchPriority="high"
+        decoding="async"
+        className={`block aspect-[16/9] w-full rounded-2xl ${compact ? "max-h-[185px] lg:max-h-[175px]" : "max-h-[300px] lg:aspect-[4/3] lg:max-h-[260px]"} ${fit === "contain" ? "bg-secondary/30 object-contain" : "object-cover"}`}
+      />
+      )}
       {caption && <figcaption className="mt-2 text-xs leading-relaxed text-muted-foreground">{caption}</figcaption>}
       {children}
     </figure>
