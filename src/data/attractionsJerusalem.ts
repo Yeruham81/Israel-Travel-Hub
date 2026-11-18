@@ -1,12 +1,13 @@
 import type { Attraction } from "@/data/attractionGuideTypes";
+import { oldCityJerusalemSite } from "@/data/oldCityJerusalemSite";
 import panorama from "@/assets/home/jerusalem-old-city.webp";
 import museums from "@/assets/guides/museums-in-jerusalem.jpg";
 import mountZion from "@/assets/guides/mount-zion.jpg";
 export const jerusalemAttractions: Record<string, Attraction> = {
 "old-city-jerusalem": {
-  title:"Jerusalem Old City: quarters, gates and sights",description:"A practical guide to Jerusalem's Old City, four quarters, Western Wall, Holy Sepulchre, key gates, walking routes, accessibility and visiting etiquette.",
+  title:oldCityJerusalemSite.title,description:oldCityJerusalemSite.description,
   region:"Jerusalem",image:{src:panorama,alt:"Jerusalem Old City skyline and historic walls"},
-  intro:"Inside Jerusalem's walls, centuries of Jewish, Christian, Muslim and Armenian heritage unfold through crowded markets, quiet courtyards and sacred places. It's compact on a map but not always easy to navigate on foot: steps, security controls and religious observances shape the day.",
+  intro:oldCityJerusalemSite.intro,
   takeaway:"Choose your gate by the sites you want to visit. Jaffa Gate works well for the Christian and Armenian quarters; Dung Gate is convenient for the Western Wall and Jewish Quarter. A half-day is enough for one or two areas, not every landmark.",duration:"Half day to full day",
   highlights:[
     {name:"Jewish Quarter and Western Wall",description:"The Western Wall plaza, Jewish Quarter lanes, Cardo remains and Hurva Synagogue lie relatively close together. The plaza is a living prayer site with its own access rules.",tip:"Approach through Dung Gate for a focused Wall visit; check religious holidays and security arrangements."},
