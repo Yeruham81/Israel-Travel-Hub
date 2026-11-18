@@ -77,6 +77,11 @@ jobs:
             echo "Nothing to optimize"
           else
             git commit -m "Serve compact high-quality airport hub images"
+            # The Vite build regenerates a tracked route tree. It is not part
+            # of this image-only change; reset sandbox-only unstaged outputs
+            # after committing the approved assets, before rebasing.
+            git status --short
+            git reset --hard HEAD
             for i in 1 2 3 4 5; do
               git fetch origin main
               git rebase origin/main
