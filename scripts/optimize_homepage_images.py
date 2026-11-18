@@ -72,7 +72,7 @@ def main() -> None:
     for slug in TRANSFER_SLUGS:
         original = ROOT / f"public/images/home/transfer-{slug}.webp"
         optimized = ROOT / f"public/images/home/transfer-{slug}-mobile.webp"
-        records.append(convert(original, optimized, 520, .78, 46000))
+        records.append(convert(original, optimized, 420, .70, 32000))
 
     original = ROOT / "src/assets/home/timna-park-feature.jpg"
     optimized = ROOT / "src/assets/home/timna-park-feature-optimized.webp"
