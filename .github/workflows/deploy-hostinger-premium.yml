@@ -723,7 +723,7 @@ jobs:
           const expected = process.argv[3];
           for (const snippet of [
             "Jerusalem&#x27;s Old City", "What to see in Jerusalem", "Western Wall Tunnels",
-            "Temple Mount", "Haram al-Sharif", "Church of the Holy Sepulchre",
+            "Temple Mount", "Church of the Holy Sepulchre", "Cathedral of St. James",
             "Via Dolorosa", "Damascus Gate", "Tower of David",
             'data-testid="jerusalem-old-city-hours-fees"',
             'data-testid="jerusalem-old-city-access"',
