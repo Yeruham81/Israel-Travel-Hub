@@ -136,7 +136,7 @@ export function NeighborhoodStayPage({ area }: { area: NeighborhoodStayGuide }) 
 
   const locationSection = (
         <Section id="location" title="Map, getting around & arriving with luggage" className="scroll-mt-32">
-          <div className="mt-5"><AreaMap area={area} /></div>
+          <div className="mt-5"><AreaMap area={area} provider="google" /></div>
           {<p className="mt-2 text-xs leading-relaxed text-muted-foreground">
             The map shows the neighborhood's location. Check your hotel's exact address before booking.
           </p>}
