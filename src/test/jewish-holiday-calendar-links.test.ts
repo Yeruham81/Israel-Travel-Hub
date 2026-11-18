@@ -5,8 +5,9 @@ import { travelGuidePaths } from "@/data/registry";
 const source = (path: string) => readFileSync(path, "utf8");
 
 describe("Jewish holiday cross-links", () => {
-  it("uses the existing calendar guide rather than a second holiday page", () => {
-    expect(travelGuidePaths.calendar).toBe("/travel-blog/israel-holidays/");
+  it("distinguishes the events calendar from the dedicated holiday-planning guide", () => {
+    expect(travelGuidePaths.calendar).toBe("/travel-blog/calendar-of-events/");
+    expect(source("src/routes/travel-blog.israel-holidays.tsx")).toContain('const PATH = "/travel-blog/israel-holidays/";');
   });
 
   it.each([
@@ -27,9 +28,15 @@ describe("Jewish holiday cross-links", () => {
     ];
     for (const path of docs) {
       const text = source(path);
-      expect(text).toContain('{ text: "Jewish holidays", to: travelGuidePaths.calendar }');
-      expect(text.match(/\{ text: "Jewish holidays", to: travelGuidePaths.calendar \}/g)).toHaveLength(1);
+      expect(text).toContain('{ text: "Jewish holidays", to: "/travel-blog/israel-holidays/" }');
+      expect(text.match(/\{ text: "Jewish holidays", to: "\/travel-blog\/israel-holidays\/" \}/g)).toHaveLength(1);
     }
+  });
+
+  it("keeps one holiday link in each taxi guide while preserving the distinct events calendar", () => {
+    const text = source("src/data/taxiGuideCluster.ts");
+    expect(text.split('{ text: "Jewish holidays", to: "/travel-blog/israel-holidays/" }').length - 1).toBe(2);
+    expect(text).not.toContain('text: "Israel\'s Calendar of Events", to: travelGuidePaths.calendar');
   });
 
   it("does not duplicate the calendar link already placed in the Old City guide", () => {
