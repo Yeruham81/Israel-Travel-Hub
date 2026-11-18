@@ -140,9 +140,9 @@ export const taxiGuideCluster: Record<"taxis" | "taxiFares" | "airportTaxis", Tr
         paragraphs: [
           "Licensed taxis can operate on Shabbat and on many Jewish holidays, even when trains and most ordinary buses stop. However, fewer drivers may be working and a taxi may be harder to find outside busy areas. Arrange time-sensitive or long-distance pickups in advance.",
           "Taxi tariffs change according to set hours, not the exact time of sunset. On Fridays and holiday eves, Tariff A runs until 16:00, Tariff B from 16:01 to 21:00 and Tariff C from 21:01 overnight. On Shabbat and recognized holidays, Tariff B applies from 06:00 to 19:00 and Tariff C from 19:01 overnight. See the fares guide for the remaining weekdays, full hours and rates.",
-          "Travel during Yom Kippur is very different from an ordinary Shabbat. Roads are largely empty, and you should not expect normal taxi availability. For airport transport on a regular Shabbat, consult the airport weekend transport guide, and check Israel's Calendar of Events when planning your trip.",
+          "Travel during Yom Kippur is very different from an ordinary Shabbat. Roads are largely empty, and you should not expect normal taxi availability. For airport transport on a regular Shabbat, consult the airport weekend transport guide, and check the dates of upcoming Jewish observances before your trip.",
         ],
-        inlineLinks: [{ text: "fares guide", to: travelGuidePaths.taxiFares }, { text: "airport weekend transport guide", to: travelGuidePaths.shabbat }, { text: "Israel's Calendar of Events", to: travelGuidePaths.calendar }],
+        inlineLinks: [{ text: "fares guide", to: travelGuidePaths.taxiFares }, { text: "airport weekend transport guide", to: travelGuidePaths.shabbat }, { text: "Jewish holidays", to: "/travel-blog/israel-holidays/" }],
         sourceIds: ["taxi-tariff-hours"],
       },
       {
@@ -479,9 +479,9 @@ export const taxiGuideCluster: Record<"taxis" | "taxiFares" | "airportTaxis", Tr
         paragraphs: [
           "The airport authority publishes the authorized taxi service as available around the clock, but a 24-hour operation is not a promise of no waiting. Vehicle availability can fluctuate at busy times and on holidays.",
           "For arriving passengers during Shabbat, taxis are one option when much scheduled public transport is suspended. The dedicated Shabbat guide compares other possible transport arrangements and advises checking the exact travel date.",
-          "Jewish holidays, national observances and special dates can affect schedules and travel planning. My Israel's Calendar of Events helps you identify those dates; Yom Kippur deserves special advance caution.",
+          "Jewish holidays, national observances and special dates can affect schedules and travel planning. Check your dates before travelling; Yom Kippur deserves special advance caution.",
         ],
-        inlineLinks: [{ text: "dedicated Shabbat guide", to: travelGuidePaths.shabbat }, { text: "Israel's Calendar of Events", to: travelGuidePaths.calendar }],
+        inlineLinks: [{ text: "dedicated Shabbat guide", to: travelGuidePaths.shabbat }, { text: "Jewish holidays", to: "/travel-blog/israel-holidays/" }],
         sourceIds: ["guide-iaa"],
       },
       {
