@@ -27,7 +27,7 @@
   },
   "uniqueCoverSources": 49,
   "nativeSourceFilesPreserved": true,
-  "qualityThresholdPSNRdB": 36.0,
+  "qualityThresholdPSNRdB": 36,
   "variantsCreated": 55,
   "originalBytesAcrossUniqueDirectoryCovers": 4102986,
   "oneXBytesAcrossUniqueDirectoryCovers": 1762590,
@@ -190,7 +190,7 @@
           "width": 420,
           "height": 280,
           "bytes": 25922,
-          "psnrDb": 40.0,
+          "psnrDb": 40,
           "quality": 91
         }
       ],
@@ -1155,5 +1155,27 @@
       "oneXCandidateBytes": 47404,
       "oneXPotentialSavingsBytes": 113528
     }
+  },
+  "verification": {
+    "nativeImagesAndAltTextPreserved": true,
+    "allTopicSelectionsCovered": true,
+    "filtersVerified": [
+      "all",
+      "transportation",
+      "destinations",
+      "attractions",
+      "itineraries",
+      "tips",
+      "accommodation",
+      "connectivity",
+      "religion",
+      "shopping"
+    ],
+    "preservesLegacyGuideCardUsageOutsideTravelBlog": true,
+    "optimizedImagesPassMinPSNR": 36.27,
+    "minimumRequiredPSNR": 36,
+    "allTenViewportScenariosHaveNoResolutionRegressions": true,
+    "guideAndFilterRegressionTests": "69 focused tests passed before image commit; full project CI is the final publishing gate",
+    "caveat": "File-size comparison only; no live PageSpeed Insights estimate or screenshot-by-screenshot visual inspection is claimed."
   }
 }
