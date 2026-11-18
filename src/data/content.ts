@@ -569,9 +569,9 @@ export const cityStayGuides: Record<CityStayGuide["id"], CityStayGuide> = {
       { areaId: "german-colony", label: "A slower stay", description: "Neighborhood cafés and residential streets" },
     ],
     path: "/accommodation/jerusalem/",
-    title: "Jerusalem hotels: browse by neighborhood",
+    title: "Hotels in Jerusalem: compare my picks by neighborhood",
     metaDescription: "Where to stay in Jerusalem: compare Downtown, Mamilla, the Old City and quieter areas for sightseeing, hotel choice and luggage access.",
-    intro: "Compare six Jerusalem hotel areas by their actual access to Old City gates, transport, restaurants and taxi drop-offs—from central Jaffa Road to residential Baka.",
+    intro: "Explore my Jerusalem hotel picks, filter by neighborhood and follow the Expedia links to check rooms for your dates. Find practical advice for each area below.",
     overview: [
       "Most first-time visitors want to be within walking distance of the Old City gates. The western city centre gives that plus restaurants and the light rail; staying inside the walls is atmospheric but involves stairs, cobbles and limited vehicle access.",
       "From Friday afternoon to Saturday evening much of West Jerusalem slows down for Shabbat: many restaurants and public transport pause. East Jerusalem and the Old City's Christian and Muslim quarters keep a different rhythm. Plan meals and arrivals with that in mind.",
