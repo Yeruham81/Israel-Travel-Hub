@@ -1,6 +1,6 @@
 {
   "scope": "Only /attractions/ region labels, 20 attraction cards and 6 guide previews; originals and individual attractions unchanged",
-  "qualityThresholdPSNRdB": 36,
+  "qualityThresholdPSNRdB": 36.0,
   "originalSourceFilesPreserved": true,
   "originalImageCount": 32,
   "imageSlots": 33,
@@ -858,7 +858,7 @@
           "width": 360,
           "height": 240,
           "bytes": 33340,
-          "psnrDb": 39,
+          "psnrDb": 39.0,
           "sourceWidth": 755,
           "sourceHeight": 503,
           "quality": 94,
@@ -868,104 +868,5 @@
       "oneXCandidateBytes": 33340,
       "oneXPotentialSavingsBytes": 66378
     }
-  ],
-  "verification": {
-    "nativeSourceFilesPreserved": true,
-    "originalImageUsedWhenMoreDetailNeeded": true,
-    "visualFidelityCheck": "All 36 selected derivative/reuse instances passed PSNR >=36 dB relative to the original photograph reduced to the same dimensions, with unchanged crop.",
-    "layoutCheck": "Original CSS classes, object-cover, card aspect-ratios, alt text, photo credits, image src and SEO photo sources remain intact.",
-    "simulatedViewportMatrix": [
-      {
-        "device": "phone",
-        "viewportCssPx": 390,
-        "devicePixelRatio": 1,
-        "optimizedSelections": 33,
-        "originalSelections": 0,
-        "resolutionRegressions": 0,
-        "qualityFailures": 0
-      },
-      {
-        "device": "phone-retina",
-        "viewportCssPx": 390,
-        "devicePixelRatio": 2,
-        "optimizedSelections": 15,
-        "originalSelections": 18,
-        "resolutionRegressions": 0,
-        "qualityFailures": 0
-      },
-      {
-        "device": "phone-high-dpr",
-        "viewportCssPx": 390,
-        "devicePixelRatio": 3,
-        "optimizedSelections": 13,
-        "originalSelections": 20,
-        "resolutionRegressions": 0,
-        "qualityFailures": 0
-      },
-      {
-        "device": "tablet",
-        "viewportCssPx": 768,
-        "devicePixelRatio": 1,
-        "optimizedSelections": 33,
-        "originalSelections": 0,
-        "resolutionRegressions": 0,
-        "qualityFailures": 0
-      },
-      {
-        "device": "tablet-retina",
-        "viewportCssPx": 768,
-        "devicePixelRatio": 2,
-        "optimizedSelections": 15,
-        "originalSelections": 18,
-        "resolutionRegressions": 0,
-        "qualityFailures": 0
-      },
-      {
-        "device": "wide-tablet",
-        "viewportCssPx": 1180,
-        "devicePixelRatio": 1,
-        "optimizedSelections": 16,
-        "originalSelections": 17,
-        "resolutionRegressions": 0,
-        "qualityFailures": 0
-      },
-      {
-        "device": "wide-tablet-retina",
-        "viewportCssPx": 1180,
-        "devicePixelRatio": 2,
-        "optimizedSelections": 13,
-        "originalSelections": 20,
-        "resolutionRegressions": 0,
-        "qualityFailures": 0
-      },
-      {
-        "device": "desktop",
-        "viewportCssPx": 1440,
-        "devicePixelRatio": 1,
-        "optimizedSelections": 32,
-        "originalSelections": 1,
-        "resolutionRegressions": 0,
-        "qualityFailures": 0
-      },
-      {
-        "device": "desktop-retina",
-        "viewportCssPx": 1440,
-        "devicePixelRatio": 2,
-        "optimizedSelections": 13,
-        "originalSelections": 20,
-        "resolutionRegressions": 0,
-        "qualityFailures": 0
-      },
-      {
-        "device": "desktop-high-dpr",
-        "viewportCssPx": 1440,
-        "devicePixelRatio": 3,
-        "optimizedSelections": 13,
-        "originalSelections": 20,
-        "resolutionRegressions": 0,
-        "qualityFailures": 0
-      }
-    ],
-    "caution": "Viewport matrix verifies responsive image candidate resolution for several phone/tablet/desktop DPRs. It is not a screenshot-based visual audit or a PageSpeed Insights measurement."
-  }
+  ]
 }
