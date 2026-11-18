@@ -26,7 +26,7 @@ export const jerusalemHotelPhotos: Record<string, HotelIllustration> = {
     credit: "Berthold Werner · Public domain",
     sourceUrl: "https://commons.wikimedia.org/wiki/File:Jerusalem_Dome_of_the_rock_BW_14.JPG",
   },
-  "sephardic-house": neighbourhood("/images/attractions/old-jerusalem-cardo.webp", "Ancient Cardo stonework in Jerusalem’s Jewish Quarter"),
+  "sephardic-house": neighbourhood("/images/attractions/old-jerusalem-western-wall.webp", "Western Wall and historic Jewish Quarter surroundings in Jerusalem"),
   "bezalel": neighbourhood("/images/hotel-cards/bezalel.webp", "Nachlaot neighborhood streets in central Jerusalem"),
   "market-courtyard": neighbourhood("/images/attractions/jerusalem-shopping.webp", "Jerusalem market streets and shops"),
   "american-colony": neighbourhood("/images/attractions/old-jerusalem-damascus-gate.webp", "Damascus Gate and northern Old City surroundings"),
