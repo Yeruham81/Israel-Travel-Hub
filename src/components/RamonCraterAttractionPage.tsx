@@ -117,7 +117,7 @@ export const ramonCraterDestinationContent: AttractionDestinationContent = {
         <h3 className="font-serif text-xl font-semibold">Safety, accessibility and facilities</h3>
         <ul className="mt-3 list-disc pl-5 text-sm leading-relaxed sm:columns-2 sm:gap-x-6 sm:text-base [&>li]:mb-2 [&>li]:break-inside-avoid">
           <li><strong>Heat and water:</strong> Pack water, sun protection and suitable walking shoes. Most crater-floor routes have little shade.</li>
-          <li><strong>Floods:</strong> Do not enter wadis when storms are forecast anywhere upstream. Follow official trail and road closure notices.</li>
+          <li><strong>Floods:</strong> Do not enter wadis when storms are forecast anywhere upstream. Check flash-flood forecasts and follow official trail and road closure notices.</li>
           <li><strong>Driving:</strong> Route 40 is paved, but desert side tracks vary. Use a suitable vehicle and stay on designated roads.</li>
           <li><strong>Cliffs:</strong> Keep behind barriers and away from unstable edges; supervise children near viewpoints.</li>
           <li><strong>Accessibility:</strong> The visitor center and some park viewing areas have accessible facilities. Natural hiking trails and dirt roads may not be suitable for wheelchairs.</li>
