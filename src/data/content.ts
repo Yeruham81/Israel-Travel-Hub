@@ -105,7 +105,7 @@ export const jerusalemAreaGuides: NeighborhoodStayGuide[] = [
   {
     id: "downtown", cityId: "jerusalem", name: "Downtown Jerusalem", shortName: "Downtown",
     path: "/accommodation/jerusalem/downtown/",
-    title: "Downtown Jerusalem hotels: best area for first-time visitors",
+    title: "Hotels in Downtown Jerusalem",
     metaDescription: "Stay near Jaffa Road, Zion Square and Jerusalem's light rail. Compare Downtown hotels, Old City walking routes and street-noise tradeoffs.",
     summary: "Downtown puts Jaffa Road, the light rail and evening cafés between the Old City and Mahane Yehuda. Some pedestrian streets require a short walk from your taxi drop-off.",
     bestFor: "First visits & exploring without a car", suits: ["first-visit", "car-free", "nightlife"], priceLevel: "Budget to upscale",
@@ -137,7 +137,7 @@ export const jerusalemAreaGuides: NeighborhoodStayGuide[] = [
   {
     id: "mamilla", cityId: "jerusalem", name: "Mamilla & King David Street", shortName: "Mamilla & King David",
     path: "/accommodation/jerusalem/mamilla-king-david/",
-    title: "Mamilla & King David Street hotels near Jerusalem Old City",
+    title: "Hotels in Mamilla & King David Street",
     metaDescription: "Compare luxury hotels near Jerusalem's Jaffa Gate. Discover Mamilla and King David Street views, Old City access and luggage-arrival tips.",
     summary: "Mamilla is close to Jaffa Gate and major luxury hotels; King David Street extends farther south, so the exact property changes the walk to the Old City.",
     bestFor: "Luxury stays & easy Old City access", suits: ["first-visit", "luxury", "family"], priceLevel: "Upscale to luxury",
@@ -169,7 +169,7 @@ export const jerusalemAreaGuides: NeighborhoodStayGuide[] = [
   {
     id: "old-city", cityId: "jerusalem", name: "Jerusalem's Old City", shortName: "Old City",
     path: "/accommodation/jerusalem/old-city/",
-    title: "Hotels in Jerusalem's Old City: inside the walls or outside?",
+    title: "Hotels in Jerusalem's Old City",
     metaDescription: "Choose an Old City stay: compare historic quarters, hotel locations, gate access, steps and luggage routes inside Jerusalem's walls.",
     summary: "Old City guesthouses put historic sites close by, but stairs, uneven lanes and restrictions on vehicle access make your nearest gate and luggage route essential.",
     bestFor: "Pilgrimage, history & atmosphere", suits: ["heritage", "first-visit", "views"], priceLevel: "Simple guesthouses to heritage hotels",
@@ -201,7 +201,7 @@ export const jerusalemAreaGuides: NeighborhoodStayGuide[] = [
   {
     id: "mahane-yehuda", cityId: "jerusalem", name: "Mahane Yehuda & Nachlaot", shortName: "Mahane Yehuda & Nachlaot",
     path: "/accommodation/jerusalem/mahane-yehuda-nachlaot/",
-    title: "Mahane Yehuda & Nachlaot hotels near Jerusalem Market",
+    title: "Hotels near Mahane Yehuda & Nachlaot",
     metaDescription: "Stay by Mahane Yehuda Market or in Nachlaot. Compare food and nightlife, quiet lanes, hotel locations and Friday-evening arrangements.",
     summary: "Rooms beside Mahane Yehuda Market can be affected by morning deliveries and late bars; residential lanes inside Nachlaot provide a different setting.",
     bestFor: "Food lovers, nightlife & local character", suits: ["food", "nightlife", "car-free", "long-stay"], priceLevel: "Budget to upscale",
@@ -233,7 +233,7 @@ export const jerusalemAreaGuides: NeighborhoodStayGuide[] = [
   {
     id: "east-jerusalem", cityId: "jerusalem", name: "East Jerusalem", shortName: "East Jerusalem",
     path: "/accommodation/jerusalem/east-jerusalem/",
-    title: "East Jerusalem hotels: Damascus Gate & Nablus Road stays",
+    title: "Hotels in East Jerusalem",
     metaDescription: "Compare hotels near Damascus Gate and Nablus Road, including heritage stays, Old City entrances and practical airport drop-offs.",
     summary: "This guide covers the Nablus Road and Damascus Gate hotel district, not all of East Jerusalem. Check the exact address when choosing access to the northern Old City gates.",
     bestFor: "Christian sites & Palestinian heritage", suits: ["heritage", "first-visit", "car-free"], priceLevel: "Guesthouses to landmark luxury",
@@ -265,7 +265,7 @@ export const jerusalemAreaGuides: NeighborhoodStayGuide[] = [
   {
     id: "german-colony", cityId: "jerusalem", name: "German Colony & Baka", shortName: "German Colony & Baka",
     path: "/accommodation/jerusalem/german-colony-baka/",
-    title: "German Colony & Baka hotels: quieter Jerusalem stays",
+    title: "Hotels in German Colony & Baka",
     metaDescription: "Explore Emek Refaim cafés and Baka's residential streets. Compare a quieter Jerusalem hotel base, accommodation styles and Old City connections.",
     summary: "The German Colony's Emek Refaim cafés and Baka's residential streets suit longer stays, but southern Baka adds more travel to Old City sights.",
     bestFor: "Families, quieter evenings & longer stays", suits: ["quiet", "family", "long-stay", "luxury"], priceLevel: "Midrange to luxury",
