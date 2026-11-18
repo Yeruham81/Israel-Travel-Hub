@@ -4,10 +4,13 @@ import {
   AttractionDestinationPage, AttractionHighlight, AttractionPracticalTip,
   type AttractionDestinationContent,
 } from "@/components/AttractionDestinationPage";
-import { JerusalemPartnerOffers } from "@/components/JerusalemPartnerOffers";
+import { ExternalTourCard } from "@/components/TourCatalog";
+import { tourProducts } from "@/data/registry";
 import { oldCityJerusalemSite } from "@/data/oldCityJerusalemSite";
 import oldCityTourPhoto from "@/assets/home/jerusalem-old-city-card.webp";
 import gateTourPhoto from "@/assets/home/hero-refresh-jerusalem-jaffa-gate-v4-medium.webp";
+
+const featuredOldCityTours = tourProducts.filter(tour => tour.status === "published" && (tour.id === "jerusalem-old-city-walk" || tour.id === "jerusalem-private-oldcity-walk"));
 
 const official = oldCityJerusalemSite.official;
 const info = oldCityJerusalemSite.visitor;
@@ -45,7 +48,7 @@ export const oldCityJerusalemDestinationContent: AttractionDestinationContent = 
   contactIntroduction: "Tell me when you're visiting, where you're staying and which landmarks matter most to you. I'll be happy to help plan a private Jerusalem visit or a longer day in the area.",
   facts: [
     { icon: "location", label: "Location", value: "Inside the city walls", note: "Jaffa, Damascus, Dung and Zion Gates" },
-    { icon: "duration", label: "Time needed", value: "3 hours–full day", note: "Allow longer for museums or guided tours" },
+    { icon: "duration", label: "Time needed", value: "2–3 hours to a full day", note: "Allow 4–5 hours for the main sights and a relaxed walk" },
     { icon: "admission", label: "Old City streets", value: "Free entry", note: "Museums, tours and the ramparts charge separately" },
     { icon: "hours", label: "Opening hours", value: "Vary by site", note: "Religious services and security affect access" },
     { icon: "highlights", label: "Don't miss", value: "Sacred landmarks", note: "Western Wall, Holy Sepulchre and historic lanes" },
@@ -81,7 +84,7 @@ export const oldCityJerusalemDestinationContent: AttractionDestinationContent = 
       </AttractionHighlight>
       <AttractionHighlight title="Tower of David Jerusalem Museum and Jaffa Gate" image={{ src: photos.tower, alt: "Ancient stone fortress, towers and courtyards at the Tower of David near Jaffa Gate" }}>
         <p>Just inside Jaffa Gate, the Tower of David's citadel offers an excellent introduction to the city's long history through archaeology, exhibitions and views from the fortress. The nearby gate is also a practical starting point for exploring the Christian and Armenian Quarters.</p>
-        <p>Allow around 60–90 minutes for the museum if you wish to enter. Museum tickets are separate from other Old City attractions. <a href={official.tower} target="_blank" rel="noopener noreferrer" className={inlineLink}>Tower of David tickets and visitor information</a>.</p>
+        <p>Allow around 60–90 minutes for the museum. The main visitor entrance is opposite Jaffa Gate Plaza, near the exit from Mamilla Avenue, rather than through the historic Jaffa Gate passage. Museum tickets are separate from other Old City attractions. <a href={official.towerEntrance} target="_blank" rel="noopener noreferrer" className={inlineLink}>Find the museum entrance</a> and <a href={official.tower} target="_blank" rel="noopener noreferrer" className={inlineLink}>check tickets and hours</a>.</p>
         <p>From Jaffa Gate, you can also explore the quieter Armenian Quarter and the Cathedral of St. James. The cathedral normally admits visitors only during short prayer-service periods, and the surrounding monastery is not open for casual visits. <a href={official.stJames} target="_blank" rel="noopener noreferrer" className={inlineLink}>Check the visitor arrangements</a> before going.</p>
         <p className="text-xs font-semibold text-muted-foreground">Museum admission: {info.towerAdult} adult; Jaffa Gate itself is free</p>
       </AttractionHighlight>
@@ -91,12 +94,11 @@ export const oldCityJerusalemDestinationContent: AttractionDestinationContent = 
         <p>Accessibility varies considerably by route: the Great Stone Tour is partly accessible with advance arrangements for wheelchair users, while the Great Bridge route is not wheelchair accessible. Check the <a href={official.tunnelsAccessibility} target="_blank" rel="noopener noreferrer" className={inlineLink}>official tour-by-tour accessibility guidance</a> before booking.</p>
         <p className="text-xs font-semibold text-muted-foreground">Ticketed guided tour; advance booking recommended</p>
       </AttractionHighlight>
-      <AttractionHighlight title="Damascus Gate, markets and the Ramparts Walk" image={{ src: photos.damascus, alt: "Historic stone Damascus Gate at the entrance to Jerusalem's Old City" }}>
+      <AttractionHighlight title="Damascus Gate and the Muslim Quarter Markets" image={{ src: photos.damascus, alt: "Historic stone Damascus Gate at the entrance to Jerusalem's Old City" }}>
         <p>Damascus Gate leads into the lively markets of the Muslim Quarter, where you can browse traditional food shops, souks and narrow streets. The gate is also a useful approach to the early stations of the Via Dolorosa.</p>
-        <p>For panoramic views, the separate <a href={official.ramparts} target="_blank" rel="noopener noreferrer" className={inlineLink}>Ramparts Walk</a> follows sections of the walls open to visitors from Jaffa Gate. It is a paid walk with stairs, uneven paving and narrow elevated paths; it is not wheelchair accessible or suitable for baby strollers.</p>
-        <p className="text-xs font-semibold text-muted-foreground">Markets and gates free; Ramparts Walk ticket: {info.rampartsAdult} adult</p>
+        <p>For panoramic views, the separate <a href={official.ramparts} target="_blank" rel="noopener noreferrer" className={inlineLink}>Ramparts Walk</a> starts at Jaffa Gate, not Damascus Gate. Its visitor routes have stairs, uneven paving and narrow elevated paths; they are not wheelchair accessible or suitable for baby strollers.</p>
+        <p className="text-xs font-semibold text-muted-foreground">Markets and gate free; separate Ramparts Walk: {info.rampartsAdult} per adult</p>
       </AttractionHighlight>
-      <AttractionPracticalTip>For a first visit, I would choose two or three major landmarks and allow time to enjoy the streets between them. The Old City is small on a map, but queues, steps and security checks can add considerably to your day.</AttractionPracticalTip>
     </div>
   ),
   visitorContent: (
@@ -121,20 +123,25 @@ export const oldCityJerusalemDestinationContent: AttractionDestinationContent = 
             <div className="flex justify-between gap-3"><dt>Ramparts Walk</dt><dd className="shrink-0 font-semibold">{info.rampartsAdult} adult</dd></div>
             <div className="flex justify-between gap-3"><dt>Western Wall Tunnels</dt><dd className="shrink-0 font-semibold">By tour</dd></div>
           </dl>
-          <div className="mt-4 space-y-3 border-t pt-3 text-sm leading-relaxed sm:text-base" data-testid="jerusalem-old-city-published-hours">
-            <div>
-              <h4 className="font-semibold">Tower of David Museum — regular hours</h4>
-              <p className="mt-1">Sunday 12:00–17:00; Monday, Wednesday and Thursday 09:00–17:00; Tuesday 09:00–20:00; Friday and Saturday 09:00–15:00. Last entry is one hour before closing.</p>
-            </div>
-            <div>
-              <h4 className="font-semibold">Ramparts Walk — regular hours</h4>
-              <p className="mt-1">Saturday–Thursday 09:00–16:00 in winter and 09:00–17:00 in summer. Fridays and Jewish holiday eves: 09:00–14:00. On Fridays, the southern route and only the Jaffa Gate–New Gate section of the northern route are open.</p>
-            </div>
-          </div>
-          <p className="mt-3 text-sm leading-relaxed">Special dates, holidays and seasonal events may change these hours. Tunnel tours run by reservation; check the official pages for your visit date.</p>
           <p className="mt-3 text-sm leading-relaxed"><a href={official.tower} target="_blank" rel="noopener noreferrer" className={inlineLink}>Tower of David</a> · <a href={official.rampartsTickets} target="_blank" rel="noopener noreferrer" className={inlineLink}>Ramparts tickets</a> · <a href={official.tunnelsBooking} target="_blank" rel="noopener noreferrer" className={inlineLink}>Tunnel reservations</a></p>
         </article>
       </div>
+      <section className="rounded-xl border bg-card p-4 sm:p-5" aria-labelledby="old-city-hours-heading" data-testid="jerusalem-old-city-published-hours">
+        <div className="flex items-center gap-2"><Clock3 className="h-5 w-5 text-primary" aria-hidden="true"/><h3 id="old-city-hours-heading" className="font-serif text-xl font-semibold">Regular opening hours at ticketed sites</h3></div>
+        <div className="mt-3 grid gap-4 text-sm leading-relaxed sm:grid-cols-2 sm:text-base">
+          <div className="rounded-lg border border-border/70 p-3">
+            <h4 className="font-semibold">Tower of David Museum</h4>
+            <p className="mt-1">Sunday 12:00–17:00; Monday, Wednesday and Thursday 09:00–17:00; Tuesday 09:00–20:00; Friday and Saturday 09:00–15:00. Last entry is one hour before closing.</p>
+            <a href={official.tower} target="_blank" rel="noopener noreferrer" className={inlineLink}>Confirm museum hours</a>
+          </div>
+          <div className="rounded-lg border border-border/70 p-3">
+            <h4 className="font-semibold">Ramparts Walk</h4>
+            <p className="mt-1">Saturday–Thursday 09:00–16:00 in winter and 09:00–17:00 in summer. Fridays and Jewish holiday eves: 09:00–14:00. On Fridays, the southern route and only the Jaffa Gate–New Gate section of the northern route are open.</p>
+            <a href={official.ramparts} target="_blank" rel="noopener noreferrer" className={inlineLink}>Confirm Ramparts hours</a>
+          </div>
+        </div>
+        <p className="mt-3 text-sm leading-relaxed text-muted-foreground">Special dates and holidays may change these hours. Western Wall Tunnels visits run by reservation; check your chosen tour time.</p>
+      </section>
       <div className="rounded-xl border bg-card p-4 sm:p-5" data-testid="jerusalem-old-city-entry">
         <h3 className="font-serif text-xl font-semibold">Which entry gate should you use?</h3>
         <p className="mt-2 text-sm leading-relaxed sm:text-base"><strong>Jaffa Gate</strong> works well for the Tower of David, the Christian Quarter and the Armenian Quarter. <strong>Dung Gate</strong> is convenient for the Western Wall and the Jewish Quarter. <strong>Damascus Gate</strong> leads to the Muslim Quarter's markets and the Via Dolorosa.</p>
@@ -179,7 +186,8 @@ export const oldCityJerusalemDestinationContent: AttractionDestinationContent = 
         <div className="space-y-3">
           <article className="rounded-xl border bg-card p-4">
             <div className="flex items-center gap-2"><BusFront className="h-5 w-5 text-primary"/><h3 className="font-semibold">By train, light rail or bus</h3></div>
-            <p className="mt-2 text-sm leading-relaxed">The intercity train terminates at Jerusalem–Yitzhak Navon, near the central bus station. Continue by light rail, bus or taxi toward the gate you need. The light rail can be convenient for the Damascus Gate area and central Jerusalem, but confirm the route and operating hours for your date using the <a href={official.jerusalemTransit} target="_blank" rel="noopener noreferrer" className={inlineLink}>public transport planner</a>.</p>
+            <p className="mt-2 text-sm leading-relaxed">The intercity train terminates at Jerusalem–Yitzhak Navon, near the central bus station. Continue by light rail, bus or taxi toward the gate you need. The light rail can be convenient for the Damascus Gate area and central Jerusalem; confirm the route and operating hours using the <a href={official.jerusalemTransit} target="_blank" rel="noopener noreferrer" className={inlineLink}>public transport planner</a>.</p>
+            <p className="mt-2 text-sm leading-relaxed"><strong>Friday and Shabbat:</strong> Trains, Jerusalem’s light rail and most city buses stop operating from Friday afternoon until Saturday evening. Some local services have different schedules, so check the route you need.</p>
           </article>
           <article className="rounded-xl border bg-card p-4">
             <div className="flex items-center gap-2"><CarFront className="h-5 w-5 text-primary"/><h3 className="font-semibold">By car or private driver</h3></div>
@@ -205,22 +213,32 @@ export const oldCityJerusalemDestinationContent: AttractionDestinationContent = 
         <div className="mt-3 space-y-3 text-sm leading-relaxed sm:text-base">
           <p><strong>A shorter visit (2–3 hours):</strong> Enter at Jaffa Gate, visit the Church of the Holy Sepulchre and enjoy the nearby Christian Quarter lanes and market streets. Add the Tower of David only if you have enough time.</p>
           <p><strong>A half day (4–5 hours):</strong> Start at Jaffa Gate, visit the Holy Sepulchre, cross the Cardo in the Jewish Quarter and continue to the Western Wall. Leave time for lunch and pauses along the way.</p>
-          <p><strong>A full day:</strong> Choose one additional timed or ticketed experience — the Western Wall Tunnels, Tower of David or Ramparts Walk — rather than expecting all three to fit easily. A Temple Mount visit may require reorganising your morning around its permitted visiting window.</p>
+          <p><strong>A full day:</strong> Choose one additional timed or ticketed experience — the Western Wall Tunnels, Tower of David or Ramparts Walk — rather than expecting all three to fit easily. If a Temple Mount visit matters most to you, first confirm whether non-Muslim access is permitted on your date and plan your morning around that limited visiting window. Choose one other timed experience later in the day if there is time.</p>
         </div>
-        <p className="mt-3 text-sm leading-relaxed sm:text-base">For a family visit, I recommend choosing three or four main stops and allowing time for breaks. If religious pilgrimage is your priority, follow the <Link to="/travel-blog/churches-in-jerusalem/" className={inlineLink}>Jerusalem churches guide</Link> to plan a route through the relevant stations and chapels.</p>
+        <p className="mt-3 text-sm leading-relaxed sm:text-base">With children, allow extra time for steps and breaks. If Christian pilgrimage is your priority, follow the <Link to="/travel-blog/churches-in-jerusalem/" className={inlineLink}>Jerusalem churches guide</Link> to plan a route through the relevant stations and chapels.</p>
       </div>
       <AttractionPracticalTip>A guided walk is particularly useful if you want to understand the relationship between the four quarters. For a more flexible day, choose your first and last gate before arranging transport.</AttractionPracticalTip>
     </div>
   ),
   historyContent: (
     <div className="mt-4 space-y-3">
-      <p>Jerusalem's walled Old City is divided into the Jewish, Christian, Muslim and Armenian Quarters. These neighbourhoods contain places that are deeply significant to different communities, alongside homes, shops, schools and markets.</p>
-      <p>The city's present walls largely date to the Ottoman period, while many monuments and archaeological remains reach back much further. The Old City of Jerusalem and its Walls is recognised as a <a href={official.unesco} target="_blank" rel="noopener noreferrer" className={inlineLink}>UNESCO World Heritage Site</a>.</p>
+      <p>The four historic quarters are living neighbourhoods as well as places of worship. Each has its own atmosphere and street pattern:</p>
+      <ul className="grid gap-2 text-sm leading-relaxed sm:grid-cols-2 sm:text-base">
+        <li className="rounded-lg border bg-card p-3"><strong>Christian Quarter:</strong> Pilgrim routes, churches and guesthouses converge near the Holy Sepulchre.</li>
+        <li className="rounded-lg border bg-card p-3"><strong>Muslim Quarter:</strong> The northern lanes connect everyday shops, markets and religious institutions.</li>
+        <li className="rounded-lg border bg-card p-3"><strong>Jewish Quarter:</strong> Restored streets, archaeological remains and synagogues reflect successive periods.</li>
+        <li className="rounded-lg border bg-card p-3"><strong>Armenian Quarter:</strong> Churches, community buildings and quieter streets reflect a longstanding Armenian presence.</li>
+      </ul>
+      <p>The present city walls largely date to the Ottoman period, though the city's history reaches much further back. The Old City of Jerusalem and its Walls is a <a href={official.unesco} target="_blank" rel="noopener noreferrer" className={inlineLink}>UNESCO World Heritage Site</a>.</p>
     </div>
   ),
   tourContent: (
     <div className="mt-4 space-y-4">
-      <p>Guided walks can help you understand the major religious traditions and complicated layers of history. Before choosing a tour, check its walking demands, meeting gate, language and the actual sites included.</p>
+      <p>Guided walks connect the Old City’s major sites and religious traditions. These two existing, reviewed Jerusalem departures offer a shared walk or private guide; check the meeting point, sites included, accessibility and language before booking.</p>
+      <ul className="grid gap-3 sm:grid-cols-2" data-testid="jerusalem-old-city-featured-tours">
+        {featuredOldCityTours.map(tour => <ExternalTourCard key={tour.id} tour={tour} pageId="attractions-old-city-jerusalem" compact />)}
+      </ul>
+      <p className="text-xs text-muted-foreground">Ratings are previously checked booking-platform snapshots. No live price or availability is shown here; confirm the total before paying.</p>
       <div className="grid gap-3 sm:grid-cols-2" data-testid="jerusalem-old-city-tour-cards">
         <Link to="/tours/jerusalem/" className="attraction-tour-card group flex h-full min-w-0 items-start gap-3 rounded-xl border bg-card p-3 transition-all hover:border-primary/60 hover:shadow-sm focus-visible:outline-2 focus-visible:outline-primary sm:p-4">
           <img src={oldCityTourPhoto} alt="Jerusalem Old City roofs and historic landmarks" width={128} height={100} loading="lazy" decoding="async" className="h-24 w-24 shrink-0 rounded-lg object-cover sm:w-28"/>
@@ -231,13 +249,12 @@ export const oldCityJerusalemDestinationContent: AttractionDestinationContent = 
           <div className="min-w-0 flex-1"><h3 className="font-serif text-lg font-semibold leading-snug group-hover:text-primary">Plan a private Jerusalem visit</h3><p className="mt-1 text-sm text-muted-foreground">Choose the sites that matter to you and plan your pickup.</p><span className="mt-2 inline-flex items-center gap-1 text-sm font-semibold text-primary">Send an inquiry <ArrowUpRight className="h-4 w-4"/></span></div>
         </a>
       </div>
-      <JerusalemPartnerOffers id="old-city-jerusalem" />
     </div>
   ),
   faqs: [
-    { q: "How long should I spend in Jerusalem's Old City?", a: "Allow at least three or four hours for two major sights and a little wandering. A full day is better if you want a museum, the Western Wall Tunnels or a more detailed pilgrimage route." },
+    { q: "How long should I spend in Jerusalem's Old City?", a: "Allow 2–3 hours for a short walk with one or two major landmarks, or 4–5 hours for the Holy Sepulchre, Jewish Quarter and Western Wall at a relaxed pace. A full day is better for a museum, a booked tunnel tour or a detailed pilgrimage route." },
     { q: "Which gate is closest to the Western Wall?", a: "Dung Gate is often the simplest approach. Jaffa Gate suits visits beginning near the Tower of David and Christian Quarter, while Damascus Gate is useful for the northern markets and Via Dolorosa." },
-    { q: "Can I visit the Old City on Saturday?", a: "Yes. Public streets and the Western Wall plaza remain accessible, and the Church of the Holy Sepulchre usually opens daily. Shops, museums, transport and religious sites have different schedules, so plan around your particular stops." },
+    { q: "Can I visit the Old City on Saturday?", a: "Yes. Public streets and the Western Wall plaza remain accessible, and the Church of the Holy Sepulchre usually opens daily. Shops and museums follow different hours. Trains, Jerusalem’s light rail and most city buses generally stop from Friday afternoon until Saturday evening, so check opening times and your transport options in advance." },
     { q: "Can non-Muslims visit the Dome of the Rock or Al-Aqsa Mosque?", a: "The interiors are generally not open to non-Muslim visitors. For non-Muslim visitors, Temple Mount access is normally limited to Sunday–Thursday visiting windows and is generally unavailable on Friday and Saturday. Check the current arrangements shortly before your visit." },
     { q: "Is Jerusalem's Old City wheelchair accessible?", a: "Some adapted routes and places are accessible, but many alleys and old buildings have slopes or stairs. Contact the specific attraction and plan a suitable entry gate before travelling." },
   ],
@@ -263,6 +280,7 @@ export const oldCityJerusalemDestinationContent: AttractionDestinationContent = 
     { label: "Western Wall Heritage Foundation — visitor information", url: official.westernWall },
     { label: "Western Wall Heritage Foundation — tunnel tours and booking", url: official.tunnels },
     { label: "Tower of David Jerusalem Museum — tickets and visiting", url: official.tower },
+    { label: "Tower of David Jerusalem Museum — entrance and directions", url: official.towerEntrance },
     { label: "East Jerusalem Development — Ramparts Walk", url: official.ramparts },
   ],
 };
