@@ -60,12 +60,16 @@ function HotelSearchWidget({ widget, visible }: {
 }
 
 /**
- * Widgets are below the editorial content. Load them only as the visitor
- * approaches the section, keeping third-party JS out of the initial render.
+ * Keep a separate viewport observer for each placement. Booking appears after
+ * the hotel-style cards; Agoda remains after the FAQ. The external scripts are
+ * still inserted only when their respective section approaches the viewport.
  */
-export function TravelpayoutsHotelWidgets() {
+export function TravelpayoutsHotelWidget({ provider }: {
+  provider: (typeof hotelSearchWidgets)[number]["id"];
+}) {
   const sectionRef = useRef<HTMLElement>(null);
   const [visible, setVisible] = useState(false);
+  const widget = hotelSearchWidgets.find((item) => item.id === provider)!;
 
   useEffect(() => {
     const section = sectionRef.current;
@@ -89,17 +93,23 @@ export function TravelpayoutsHotelWidgets() {
     return () => observer.disconnect();
   }, [visible]);
 
+  const isBooking = provider === "booking";
+  const sectionId = isBooking ? "hotel-search-booking" : "hotel-search-widgets";
+  const headingId = isBooking ? "hotel-search-booking-h" : "hotel-search-widgets-h";
+
   return (
     <section
       ref={sectionRef}
-      id="hotel-search-widgets"
-      aria-labelledby="hotel-search-widgets-h"
-      className="mt-12 scroll-mt-24"
-      data-testid="hotel-search-widgets"
+      id={sectionId}
+      aria-labelledby={headingId}
+      className="mt-10 scroll-mt-24"
+      data-testid={sectionId}
     >
-      <h2 id="hotel-search-widgets-h" className="text-2xl font-semibold">Search hotels in Israel</h2>
-      <div className="mt-5 grid min-w-0 gap-5">
-        {hotelSearchWidgets.map((widget) => <HotelSearchWidget key={widget.id} widget={widget} visible={visible} />)}
+      <h2 id={headingId} className="text-2xl font-semibold">
+        {isBooking ? "Search hotels in Israel" : "More hotel search options"}
+      </h2>
+      <div className="mt-4 min-w-0">
+        <HotelSearchWidget widget={widget} visible={visible} />
       </div>
     </section>
   );
