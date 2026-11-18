@@ -178,5 +178,11 @@
         213
       ]
     }
-  ]
+  ],
+  "verification": {
+    "assetCheck": "All 10 optimized WebP assets decoded successfully; no source files were overwritten.",
+    "componentCheck": "TourCategoryExplorer uses only the mapped hub thumbnails while MoreTourCategories and full tour pages retain original sources.",
+    "testSuite": "src/test/tours.test.tsx and TypeScript both passed before committing the assets.",
+    "pageSpeedStatus": "New PSI measurement recommended after Hostinger deploy; source-to-served savings are not an LCP prediction."
+  }
 }
