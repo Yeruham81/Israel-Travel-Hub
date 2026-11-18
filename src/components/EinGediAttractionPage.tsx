@@ -9,12 +9,13 @@ import { carRentalAffiliateUrl } from "@/lib/car-rental-affiliate";
 import rockGorgePhoto from "@/assets/guides/dead-sea-excursions/ein-gedi-rock-gorge.jpg";
 import ibexPhoto from "@/assets/guides/ein-gedi-ibex.webp";
 import oasisPhoto from "@/assets/guides/dead-sea-excursions/ein-gedi-oasis.webp";
-// Attributed photograph of the actual Ein Gedi synagogue mosaic; small Wikimedia thumbnail.
-const synagogueMosaicPhoto = "https://upload.wikimedia.org/wikipedia/commons/thumb/4/44/Ein_Gedi_synagogue058.JPG/520px-Ein_Gedi_synagogue058.JPG";
 import canyonPanorama from "@/assets/guides/dead-sea-excursions/ein-gedi-canyon-panorama.jpg";
 import desertOverlook from "@/assets/guides/dead-sea-excursions/ein-gedi-dead-sea-overlook.jpg";
 import deadSeaPhoto from "@/assets/guides/dead-sea-excursions/dead-sea-salt-shore.webp";
 import masadaPhoto from "@/assets/home/masada-dead-sea-card.webp";
+
+// Attributed photograph of the actual Ein Gedi synagogue mosaic; small Wikimedia thumbnail.
+const synagogueMosaicPhoto = "https://upload.wikimedia.org/wikipedia/commons/thumb/4/44/Ein_Gedi_synagogue058.JPG/520px-Ein_Gedi_synagogue058.JPG";
 
 const info = einGediSite.visit;
 const official = einGediSite.sources;
