@@ -102,7 +102,7 @@ export function GuideHeroMedia({
   return (
     <figure className="w-full max-w-2xl lg:max-w-none" data-testid="guide-hero-media">
       {mobileSrc ? <picture className="block">
-        <source media="(max-width: 767px)" srcSet={mobileSrc} type="image/webp" />
+        <source media="(max-width: 480px)" srcSet={mobileSrc} type="image/webp" />
       <img
         src={src}
         srcSet={srcSet}
