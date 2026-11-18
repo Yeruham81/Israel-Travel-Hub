@@ -1,0 +1,1159 @@
+{
+  "scope": "Only /travel-blog/ guide-directory and two oversized Explore Israel further thumbnails",
+  "numberOfGuides": 49,
+  "topicsChecked": [
+    "all",
+    "transportation",
+    "destinations",
+    "attractions",
+    "itineraries",
+    "tips",
+    "accommodation",
+    "connectivity",
+    "religion",
+    "shopping"
+  ],
+  "topicCounts": {
+    "all": 49,
+    "transportation": 18,
+    "destinations": 33,
+    "attractions": 17,
+    "itineraries": 15,
+    "tips": 32,
+    "accommodation": 5,
+    "connectivity": 1,
+    "religion": 5,
+    "shopping": 1
+  },
+  "uniqueCoverSources": 49,
+  "nativeSourceFilesPreserved": true,
+  "qualityThresholdPSNRdB": 36.0,
+  "variantsCreated": 55,
+  "originalBytesAcrossUniqueDirectoryCovers": 4102986,
+  "oneXBytesAcrossUniqueDirectoryCovers": 1762590,
+  "oneXPotentialSavingsBytes": 2340396,
+  "extraExplorePotentialSavingsBytes": 154816,
+  "viewportMatrix": [
+    {
+      "scenario": "mobile",
+      "viewportCssPx": 390,
+      "dpr": 1,
+      "optimized": 47,
+      "native": 2,
+      "resolutionRegressions": 0
+    },
+    {
+      "scenario": "mobile-2x",
+      "viewportCssPx": 390,
+      "dpr": 2,
+      "optimized": 7,
+      "native": 42,
+      "resolutionRegressions": 0
+    },
+    {
+      "scenario": "mobile-3x",
+      "viewportCssPx": 390,
+      "dpr": 3,
+      "optimized": 0,
+      "native": 49,
+      "resolutionRegressions": 0
+    },
+    {
+      "scenario": "tablet",
+      "viewportCssPx": 768,
+      "dpr": 1,
+      "optimized": 47,
+      "native": 2,
+      "resolutionRegressions": 0
+    },
+    {
+      "scenario": "tablet-2x",
+      "viewportCssPx": 768,
+      "dpr": 2,
+      "optimized": 7,
+      "native": 42,
+      "resolutionRegressions": 0
+    },
+    {
+      "scenario": "wide-tablet",
+      "viewportCssPx": 1180,
+      "dpr": 1,
+      "optimized": 7,
+      "native": 42,
+      "resolutionRegressions": 0
+    },
+    {
+      "scenario": "wide-tablet-2x",
+      "viewportCssPx": 1180,
+      "dpr": 2,
+      "optimized": 0,
+      "native": 49,
+      "resolutionRegressions": 0
+    },
+    {
+      "scenario": "desktop",
+      "viewportCssPx": 1440,
+      "dpr": 1,
+      "optimized": 47,
+      "native": 2,
+      "resolutionRegressions": 0
+    },
+    {
+      "scenario": "desktop-2x",
+      "viewportCssPx": 1440,
+      "dpr": 2,
+      "optimized": 7,
+      "native": 42,
+      "resolutionRegressions": 0
+    },
+    {
+      "scenario": "desktop-3x",
+      "viewportCssPx": 1440,
+      "dpr": 3,
+      "optimized": 0,
+      "native": 49,
+      "resolutionRegressions": 0
+    }
+  ],
+  "notes": "File-size comparison for default and filtered guide cover source union, not actual PageSpeed network transfer. Native image is preserved as full-resolution srcSet fallback, so savings vary by screen and DPR. PSNR measures derivatives against original resized with Lanczos; it does not replace human screenshots.",
+  "photos": {
+    "/images/attractions/hero-jerusalem.webp": {
+      "group": "directory",
+      "originalDimensions": [
+        755,
+        290
+      ],
+      "originalBytes": 78850,
+      "candidates": [
+        {
+          "path": "src/assets/travel-blog-hub/hero-jerusalem-7402d48781-420.webp",
+          "width": 420,
+          "height": 161,
+          "bytes": 36742,
+          "psnrDb": 36.58,
+          "quality": 91
+        }
+      ],
+      "oneXCandidateBytes": 36742,
+      "oneXPotentialSavingsBytes": 42108
+    },
+    "/images/hotels/jerusalem-night.webp": {
+      "group": "directory",
+      "originalDimensions": [
+        755,
+        424
+      ],
+      "originalBytes": 46246,
+      "candidates": [
+        {
+          "path": "src/assets/travel-blog-hub/jerusalem-night-443d64981d-420.webp",
+          "width": 420,
+          "height": 236,
+          "bytes": 22184,
+          "psnrDb": 38.21,
+          "quality": 91
+        }
+      ],
+      "oneXCandidateBytes": 22184,
+      "oneXPotentialSavingsBytes": 24062
+    },
+    "/images/jerusalem/hutzot-hayotzer.webp": {
+      "group": "directory",
+      "originalDimensions": [
+        717,
+        479
+      ],
+      "originalBytes": 104696,
+      "candidates": [
+        {
+          "path": "src/assets/travel-blog-hub/hutzot-hayotzer-68fdc7ec32-420.webp",
+          "width": 420,
+          "height": 281,
+          "bytes": 67622,
+          "psnrDb": 36.39,
+          "quality": 95
+        }
+      ],
+      "oneXCandidateBytes": 67622,
+      "oneXPotentialSavingsBytes": 37074
+    },
+    "/images/travel-blog/airport-taxi-sign.webp": {
+      "group": "directory",
+      "originalDimensions": [
+        656,
+        438
+      ],
+      "originalBytes": 28984,
+      "candidates": [
+        {
+          "path": "src/assets/travel-blog-hub/airport-taxi-sign-5068c09ab5-420.webp",
+          "width": 420,
+          "height": 280,
+          "bytes": 25922,
+          "psnrDb": 40.0,
+          "quality": 91
+        }
+      ],
+      "oneXCandidateBytes": 25922,
+      "oneXPotentialSavingsBytes": 3062
+    },
+    "/images/travel-blog/taxi-in-tel-aviv.webp": {
+      "group": "directory",
+      "originalDimensions": [
+        755,
+        485
+      ],
+      "originalBytes": 73556,
+      "candidates": [
+        {
+          "path": "src/assets/travel-blog-hub/taxi-in-tel-aviv-44a5c4426c-420.webp",
+          "width": 420,
+          "height": 270,
+          "bytes": 41580,
+          "psnrDb": 37.36,
+          "quality": 91
+        }
+      ],
+      "oneXCandidateBytes": 41580,
+      "oneXPotentialSavingsBytes": 31976
+    },
+    "/src/assets/airport-journeys/ben-gurion-rail-platform.webp": {
+      "group": "directory",
+      "originalDimensions": [
+        755,
+        503
+      ],
+      "originalBytes": 65532,
+      "candidates": [
+        {
+          "path": "src/assets/travel-blog-hub/ben-gurion-rail-platform-173032e97b-420.webp",
+          "width": 420,
+          "height": 280,
+          "bytes": 35154,
+          "psnrDb": 40.23,
+          "quality": 91
+        }
+      ],
+      "oneXCandidateBytes": 35154,
+      "oneXPotentialSavingsBytes": 30378
+    },
+    "/src/assets/airport-journeys/jerusalem-navon-platform.webp": {
+      "group": "directory",
+      "originalDimensions": [
+        755,
+        352
+      ],
+      "originalBytes": 46550,
+      "candidates": [
+        {
+          "path": "src/assets/travel-blog-hub/jerusalem-navon-platform-a9c1fd2bc7-420.webp",
+          "width": 420,
+          "height": 196,
+          "bytes": 26070,
+          "psnrDb": 37.68,
+          "quality": 91
+        }
+      ],
+      "oneXCandidateBytes": 26070,
+      "oneXPotentialSavingsBytes": 20480
+    },
+    "/src/assets/airport-transfers/airport.webp": {
+      "group": "directory",
+      "originalDimensions": [
+        900,
+        476
+      ],
+      "originalBytes": 32608,
+      "candidates": [
+        {
+          "path": "src/assets/travel-blog-hub/airport-5a53716b88-420.webp",
+          "width": 420,
+          "height": 222,
+          "bytes": 17130,
+          "psnrDb": 40.72,
+          "quality": 91
+        }
+      ],
+      "oneXCandidateBytes": 17130,
+      "oneXPotentialSavingsBytes": 15478
+    },
+    "/src/assets/airport-transfers/caesarea.webp": {
+      "group": "directory",
+      "originalDimensions": [
+        360,
+        240
+      ],
+      "originalBytes": 23218,
+      "candidates": [],
+      "oneXCandidateBytes": 23218,
+      "oneXPotentialSavingsBytes": 0
+    },
+    "/src/assets/dead-sea/beach.webp": {
+      "group": "directory",
+      "originalDimensions": [
+        755,
+        504
+      ],
+      "originalBytes": 80718,
+      "candidates": [
+        {
+          "path": "src/assets/travel-blog-hub/beach-ac50b0575b-420.webp",
+          "width": 420,
+          "height": 280,
+          "bytes": 39366,
+          "psnrDb": 37.44,
+          "quality": 91
+        }
+      ],
+      "oneXCandidateBytes": 39366,
+      "oneXPotentialSavingsBytes": 41352
+    },
+    "/src/assets/dead-sea/landscape.webp": {
+      "group": "directory",
+      "originalDimensions": [
+        755,
+        424
+      ],
+      "originalBytes": 55366,
+      "candidates": [
+        {
+          "path": "src/assets/travel-blog-hub/landscape-5100261ec8-420.webp",
+          "width": 420,
+          "height": 236,
+          "bytes": 29526,
+          "psnrDb": 38.93,
+          "quality": 91
+        }
+      ],
+      "oneXCandidateBytes": 29526,
+      "oneXPotentialSavingsBytes": 25840
+    },
+    "/src/assets/dead-sea/sunbeds.webp": {
+      "group": "directory",
+      "originalDimensions": [
+        755,
+        503
+      ],
+      "originalBytes": 58850,
+      "candidates": [
+        {
+          "path": "src/assets/travel-blog-hub/sunbeds-9b0a2cbe55-420.webp",
+          "width": 420,
+          "height": 280,
+          "bytes": 30478,
+          "psnrDb": 38.06,
+          "quality": 91
+        }
+      ],
+      "oneXCandidateBytes": 30478,
+      "oneXPotentialSavingsBytes": 28372
+    },
+    "/src/assets/eilat/waterfront.webp": {
+      "group": "directory",
+      "originalDimensions": [
+        755,
+        503
+      ],
+      "originalBytes": 99718,
+      "candidates": [
+        {
+          "path": "src/assets/travel-blog-hub/waterfront-441b1003dd-420.webp",
+          "width": 420,
+          "height": 280,
+          "bytes": 39162,
+          "psnrDb": 38.62,
+          "quality": 91
+        }
+      ],
+      "oneXCandidateBytes": 39162,
+      "oneXPotentialSavingsBytes": 60556
+    },
+    "/src/assets/guides/2026-10/beaches-in-tel-aviv.webp": {
+      "group": "directory",
+      "originalDimensions": [
+        738,
+        493
+      ],
+      "originalBytes": 66906,
+      "candidates": [
+        {
+          "path": "src/assets/travel-blog-hub/beaches-in-tel-aviv-ee15d5ba18-420.webp",
+          "width": 420,
+          "height": 281,
+          "bytes": 33266,
+          "psnrDb": 40.76,
+          "quality": 91
+        }
+      ],
+      "oneXCandidateBytes": 33266,
+      "oneXPotentialSavingsBytes": 33640
+    },
+    "/src/assets/guides/2026-10/best-time-to-visit-israel.webp": {
+      "group": "directory",
+      "originalDimensions": [
+        738,
+        493
+      ],
+      "originalBytes": 88598,
+      "candidates": [
+        {
+          "path": "src/assets/travel-blog-hub/best-time-to-visit-israel-fbc581864b-420.webp",
+          "width": 420,
+          "height": 281,
+          "bytes": 43658,
+          "psnrDb": 36.8,
+          "quality": 91
+        }
+      ],
+      "oneXCandidateBytes": 43658,
+      "oneXPotentialSavingsBytes": 44940
+    },
+    "/src/assets/guides/2026-10/calendar-of-events.webp": {
+      "group": "directory",
+      "originalDimensions": [
+        720,
+        480
+      ],
+      "originalBytes": 18044,
+      "candidates": [
+        {
+          "path": "src/assets/travel-blog-hub/calendar-of-events-daeef06b0d-420.webp",
+          "width": 420,
+          "height": 280,
+          "bytes": 12588,
+          "psnrDb": 42.94,
+          "quality": 91
+        }
+      ],
+      "oneXCandidateBytes": 12588,
+      "oneXPotentialSavingsBytes": 5456
+    },
+    "/src/assets/guides/2026-10/jerusalem-to-bethlehem.webp": {
+      "group": "directory",
+      "originalDimensions": [
+        755,
+        503
+      ],
+      "originalBytes": 69946,
+      "candidates": [
+        {
+          "path": "src/assets/travel-blog-hub/jerusalem-to-bethlehem-60e3b9e031-420.webp",
+          "width": 420,
+          "height": 280,
+          "bytes": 30000,
+          "psnrDb": 40.91,
+          "quality": 91
+        }
+      ],
+      "oneXCandidateBytes": 30000,
+      "oneXPotentialSavingsBytes": 39946
+    },
+    "/src/assets/guides/2026-10/jerusalem-to-the-dead-sea.webp": {
+      "group": "directory",
+      "originalDimensions": [
+        755,
+        503
+      ],
+      "originalBytes": 78310,
+      "candidates": [
+        {
+          "path": "src/assets/travel-blog-hub/jerusalem-to-the-dead-sea-9fd5887f5e-420.webp",
+          "width": 420,
+          "height": 280,
+          "bytes": 27816,
+          "psnrDb": 40.9,
+          "quality": 91
+        }
+      ],
+      "oneXCandidateBytes": 27816,
+      "oneXPotentialSavingsBytes": 50494
+    },
+    "/src/assets/guides/2026-10/museums-in-haifa.webp": {
+      "group": "directory",
+      "originalDimensions": [
+        700,
+        522
+      ],
+      "originalBytes": 118446,
+      "candidates": [
+        {
+          "path": "src/assets/travel-blog-hub/museums-in-haifa-e9ec6dfaa7-420.webp",
+          "width": 420,
+          "height": 313,
+          "bytes": 50518,
+          "psnrDb": 38.46,
+          "quality": 91
+        }
+      ],
+      "oneXCandidateBytes": 50518,
+      "oneXPotentialSavingsBytes": 67928
+    },
+    "/src/assets/guides/2026-10/museums-in-tel-aviv.webp": {
+      "group": "directory",
+      "originalDimensions": [
+        738,
+        493
+      ],
+      "originalBytes": 54648,
+      "candidates": [
+        {
+          "path": "src/assets/travel-blog-hub/museums-in-tel-aviv-14696c5521-420.webp",
+          "width": 420,
+          "height": 281,
+          "bytes": 26044,
+          "psnrDb": 40.9,
+          "quality": 91
+        }
+      ],
+      "oneXCandidateBytes": 26044,
+      "oneXPotentialSavingsBytes": 28604
+    },
+    "/src/assets/guides/2026-10/what-to-eat-in-israel.webp": {
+      "group": "directory",
+      "originalDimensions": [
+        755,
+        503
+      ],
+      "originalBytes": 92968,
+      "candidates": [
+        {
+          "path": "src/assets/travel-blog-hub/what-to-eat-in-israel-6f156c7497-420.webp",
+          "width": 420,
+          "height": 280,
+          "bytes": 46490,
+          "psnrDb": 37.82,
+          "quality": 91
+        }
+      ],
+      "oneXCandidateBytes": 46490,
+      "oneXPotentialSavingsBytes": 46478
+    },
+    "/src/assets/guides/2026-11/buses-in-tel-aviv.webp": {
+      "group": "directory",
+      "originalDimensions": [
+        755,
+        434
+      ],
+      "originalBytes": 57872,
+      "candidates": [
+        {
+          "path": "src/assets/travel-blog-hub/buses-in-tel-aviv-10d90ec83c-420.webp",
+          "width": 420,
+          "height": 241,
+          "bytes": 33820,
+          "psnrDb": 39.17,
+          "quality": 91
+        }
+      ],
+      "oneXCandidateBytes": 33820,
+      "oneXPotentialSavingsBytes": 24052
+    },
+    "/src/assets/guides/esim-israel.jpeg": {
+      "group": "directory",
+      "originalDimensions": [
+        755,
+        503
+      ],
+      "originalBytes": 52231,
+      "candidates": [
+        {
+          "path": "src/assets/travel-blog-hub/esim-israel-8eea27914b-420.webp",
+          "width": 420,
+          "height": 280,
+          "bytes": 17094,
+          "psnrDb": 39.72,
+          "quality": 91
+        }
+      ],
+      "oneXCandidateBytes": 17094,
+      "oneXPotentialSavingsBytes": 35137
+    },
+    "/src/assets/guides/holy-sepulchre.jpg": {
+      "group": "directory",
+      "originalDimensions": [
+        755,
+        503
+      ],
+      "originalBytes": 98537,
+      "candidates": [
+        {
+          "path": "src/assets/travel-blog-hub/holy-sepulchre-68d89e1789-420.webp",
+          "width": 420,
+          "height": 280,
+          "bytes": 47750,
+          "psnrDb": 38.69,
+          "quality": 91
+        }
+      ],
+      "oneXCandidateBytes": 47750,
+      "oneXPotentialSavingsBytes": 50787
+    },
+    "/src/assets/guides/museums-in-jerusalem.jpg": {
+      "group": "directory",
+      "originalDimensions": [
+        717,
+        477
+      ],
+      "originalBytes": 131642,
+      "candidates": [
+        {
+          "path": "src/assets/travel-blog-hub/museums-in-jerusalem-75b490f7ad-420.webp",
+          "width": 420,
+          "height": 279,
+          "bytes": 32440,
+          "psnrDb": 39.69,
+          "quality": 91
+        }
+      ],
+      "oneXCandidateBytes": 32440,
+      "oneXPotentialSavingsBytes": 99202
+    },
+    "/src/assets/guides/sherut-nesher-airport.webp": {
+      "group": "directory",
+      "originalDimensions": [
+        755,
+        503
+      ],
+      "originalBytes": 47244,
+      "candidates": [
+        {
+          "path": "src/assets/travel-blog-hub/sherut-nesher-airport-d075770da7-420.webp",
+          "width": 420,
+          "height": 280,
+          "bytes": 28944,
+          "psnrDb": 39.69,
+          "quality": 91
+        }
+      ],
+      "oneXCandidateBytes": 28944,
+      "oneXPotentialSavingsBytes": 18300
+    },
+    "/src/assets/guides/taxi-cabs-israel.webp": {
+      "group": "directory",
+      "originalDimensions": [
+        755,
+        503
+      ],
+      "originalBytes": 55696,
+      "candidates": [
+        {
+          "path": "src/assets/travel-blog-hub/taxi-cabs-israel-e79a676d99-420.webp",
+          "width": 420,
+          "height": 280,
+          "bytes": 35634,
+          "psnrDb": 40.46,
+          "quality": 91
+        }
+      ],
+      "oneXCandidateBytes": 35634,
+      "oneXPotentialSavingsBytes": 20062
+    },
+    "/src/assets/guides/yardenit.jpg": {
+      "group": "directory",
+      "originalDimensions": [
+        730,
+        488
+      ],
+      "originalBytes": 85992,
+      "candidates": [
+        {
+          "path": "src/assets/travel-blog-hub/yardenit-4a1a990925-420.webp",
+          "width": 420,
+          "height": 281,
+          "bytes": 53954,
+          "psnrDb": 37.13,
+          "quality": 91
+        }
+      ],
+      "oneXCandidateBytes": 53954,
+      "oneXPotentialSavingsBytes": 32038
+    },
+    "/src/assets/haifa/botanica.webp": {
+      "group": "directory",
+      "originalDimensions": [
+        753,
+        501
+      ],
+      "originalBytes": 51122,
+      "candidates": [
+        {
+          "path": "src/assets/travel-blog-hub/botanica-b73aea27c8-420.webp",
+          "width": 420,
+          "height": 279,
+          "bytes": 25822,
+          "psnrDb": 40.69,
+          "quality": 91
+        }
+      ],
+      "oneXCandidateBytes": 25822,
+      "oneXPotentialSavingsBytes": 25300
+    },
+    "/src/assets/haifa/colony.webp": {
+      "group": "directory",
+      "originalDimensions": [
+        640,
+        480
+      ],
+      "originalBytes": 74654,
+      "candidates": [
+        {
+          "path": "src/assets/travel-blog-hub/colony-35429f7d31-420.webp",
+          "width": 420,
+          "height": 315,
+          "bytes": 45390,
+          "psnrDb": 39.85,
+          "quality": 91
+        }
+      ],
+      "oneXCandidateBytes": 45390,
+      "oneXPotentialSavingsBytes": 29264
+    },
+    "/src/assets/haifa/panorama.webp": {
+      "group": "directory",
+      "originalDimensions": [
+        1200,
+        414
+      ],
+      "originalBytes": 105990,
+      "candidates": [
+        {
+          "path": "src/assets/travel-blog-hub/panorama-3336830cb5-420.webp",
+          "width": 420,
+          "height": 145,
+          "bytes": 20570,
+          "psnrDb": 38.35,
+          "quality": 91
+        },
+        {
+          "path": "src/assets/travel-blog-hub/panorama-3336830cb5-800.webp",
+          "width": 800,
+          "height": 276,
+          "bytes": 67064,
+          "psnrDb": 40.6,
+          "quality": 91
+        }
+      ],
+      "oneXCandidateBytes": 20570,
+      "oneXPotentialSavingsBytes": 85420
+    },
+    "/src/assets/home/ashdod-port.webp": {
+      "group": "directory",
+      "originalDimensions": [
+        900,
+        600
+      ],
+      "originalBytes": 55034,
+      "candidates": [
+        {
+          "path": "src/assets/travel-blog-hub/ashdod-port-40621ec89f-420.webp",
+          "width": 420,
+          "height": 280,
+          "bytes": 27698,
+          "psnrDb": 37.66,
+          "quality": 91
+        }
+      ],
+      "oneXCandidateBytes": 27698,
+      "oneXPotentialSavingsBytes": 27336
+    },
+    "/src/assets/home/ben-gurion-t3.webp": {
+      "group": "directory",
+      "originalDimensions": [
+        1200,
+        900
+      ],
+      "originalBytes": 233340,
+      "candidates": [
+        {
+          "path": "src/assets/travel-blog-hub/ben-gurion-t3-9fdedbc133-420.webp",
+          "width": 420,
+          "height": 315,
+          "bytes": 49142,
+          "psnrDb": 37.63,
+          "quality": 91
+        },
+        {
+          "path": "src/assets/travel-blog-hub/ben-gurion-t3-9fdedbc133-800.webp",
+          "width": 800,
+          "height": 600,
+          "bytes": 174376,
+          "psnrDb": 39.84,
+          "quality": 91
+        }
+      ],
+      "oneXCandidateBytes": 49142,
+      "oneXPotentialSavingsBytes": 184198
+    },
+    "/src/assets/home/caesarea-dusk.webp": {
+      "group": "directory",
+      "originalDimensions": [
+        1200,
+        715
+      ],
+      "originalBytes": 107542,
+      "candidates": [
+        {
+          "path": "src/assets/travel-blog-hub/caesarea-dusk-39f7dcee13-420.webp",
+          "width": 420,
+          "height": 250,
+          "bytes": 27546,
+          "psnrDb": 39.73,
+          "quality": 91
+        },
+        {
+          "path": "src/assets/travel-blog-hub/caesarea-dusk-39f7dcee13-800.webp",
+          "width": 800,
+          "height": 477,
+          "bytes": 87396,
+          "psnrDb": 41.5,
+          "quality": 91
+        }
+      ],
+      "oneXCandidateBytes": 27546,
+      "oneXPotentialSavingsBytes": 79996
+    },
+    "/src/assets/home/haifa-port.webp": {
+      "group": "directory",
+      "originalDimensions": [
+        900,
+        600
+      ],
+      "originalBytes": 116518,
+      "candidates": [
+        {
+          "path": "src/assets/travel-blog-hub/haifa-port-4f95fa071b-420.webp",
+          "width": 420,
+          "height": 280,
+          "bytes": 46850,
+          "psnrDb": 38.25,
+          "quality": 91
+        }
+      ],
+      "oneXCandidateBytes": 46850,
+      "oneXPotentialSavingsBytes": 69668
+    },
+    "/src/assets/home/hotel-room.webp": {
+      "group": "explore",
+      "originalDimensions": [
+        1400,
+        882
+      ],
+      "originalBytes": 108792,
+      "candidates": [
+        {
+          "path": "src/assets/travel-blog-hub/hotel-room-54b1cef076-360.webp",
+          "width": 360,
+          "height": 227,
+          "bytes": 21596,
+          "psnrDb": 39.11,
+          "quality": 91
+        }
+      ],
+      "oneXCandidateBytes": 21596,
+      "oneXPotentialSavingsBytes": 87196
+    },
+    "/src/assets/home/jerusalem-old-city.webp": {
+      "group": "directory",
+      "originalDimensions": [
+        900,
+        600
+      ],
+      "originalBytes": 142198,
+      "candidates": [
+        {
+          "path": "src/assets/travel-blog-hub/jerusalem-old-city-d76e2ab50c-420.webp",
+          "width": 420,
+          "height": 280,
+          "bytes": 49530,
+          "psnrDb": 38.26,
+          "quality": 91
+        }
+      ],
+      "oneXCandidateBytes": 49530,
+      "oneXPotentialSavingsBytes": 92668
+    },
+    "/src/assets/home/masada-dead-sea.webp": {
+      "group": "directory",
+      "originalDimensions": [
+        1200,
+        879
+      ],
+      "originalBytes": 122226,
+      "candidates": [
+        {
+          "path": "src/assets/travel-blog-hub/masada-dead-sea-c98d78dbb2-420.webp",
+          "width": 420,
+          "height": 308,
+          "bytes": 26000,
+          "psnrDb": 40.08,
+          "quality": 91
+        },
+        {
+          "path": "src/assets/travel-blog-hub/masada-dead-sea-c98d78dbb2-800.webp",
+          "width": 800,
+          "height": 586,
+          "bytes": 92654,
+          "psnrDb": 41.96,
+          "quality": 91
+        }
+      ],
+      "oneXCandidateBytes": 26000,
+      "oneXPotentialSavingsBytes": 96226
+    },
+    "/src/assets/home/road-trip.webp": {
+      "group": "directory",
+      "originalDimensions": [
+        1400,
+        882
+      ],
+      "originalBytes": 106618,
+      "candidates": [
+        {
+          "path": "src/assets/travel-blog-hub/road-trip-3f7779bd66-420.webp",
+          "width": 420,
+          "height": 265,
+          "bytes": 38998,
+          "psnrDb": 36.27,
+          "quality": 95
+        },
+        {
+          "path": "src/assets/travel-blog-hub/road-trip-3f7779bd66-800.webp",
+          "width": 800,
+          "height": 504,
+          "bytes": 81552,
+          "psnrDb": 39.11,
+          "quality": 91
+        }
+      ],
+      "oneXCandidateBytes": 38998,
+      "oneXPotentialSavingsBytes": 67620
+    },
+    "/src/assets/home/tel-aviv-coast.webp": {
+      "group": "directory",
+      "originalDimensions": [
+        1200,
+        675
+      ],
+      "originalBytes": 133428,
+      "candidates": [
+        {
+          "path": "src/assets/travel-blog-hub/tel-aviv-coast-a93d569ded-420.webp",
+          "width": 420,
+          "height": 236,
+          "bytes": 25494,
+          "psnrDb": 40.65,
+          "quality": 91
+        },
+        {
+          "path": "src/assets/travel-blog-hub/tel-aviv-coast-a93d569ded-800.webp",
+          "width": 800,
+          "height": 450,
+          "bytes": 98880,
+          "psnrDb": 41.98,
+          "quality": 91
+        }
+      ],
+      "oneXCandidateBytes": 25494,
+      "oneXPotentialSavingsBytes": 107934
+    },
+    "/src/assets/home/tiberias-lake.webp": {
+      "group": "directory",
+      "originalDimensions": [
+        1200,
+        900
+      ],
+      "originalBytes": 141838,
+      "candidates": [
+        {
+          "path": "src/assets/travel-blog-hub/tiberias-lake-23ac6ce1ea-420.webp",
+          "width": 420,
+          "height": 315,
+          "bytes": 35324,
+          "psnrDb": 39.03,
+          "quality": 91
+        },
+        {
+          "path": "src/assets/travel-blog-hub/tiberias-lake-23ac6ce1ea-800.webp",
+          "width": 800,
+          "height": 600,
+          "bytes": 118072,
+          "psnrDb": 41.15,
+          "quality": 91
+        }
+      ],
+      "oneXCandidateBytes": 35324,
+      "oneXPotentialSavingsBytes": 106514
+    },
+    "/src/assets/jerusalem/downtown.webp": {
+      "group": "directory",
+      "originalDimensions": [
+        755,
+        503
+      ],
+      "originalBytes": 85080,
+      "candidates": [
+        {
+          "path": "src/assets/travel-blog-hub/downtown-944eb9d46b-420.webp",
+          "width": 420,
+          "height": 280,
+          "bytes": 40742,
+          "psnrDb": 39.78,
+          "quality": 91
+        }
+      ],
+      "oneXCandidateBytes": 40742,
+      "oneXPotentialSavingsBytes": 44338
+    },
+    "/src/assets/jerusalem/mahane-yehuda.webp": {
+      "group": "directory",
+      "originalDimensions": [
+        755,
+        503
+      ],
+      "originalBytes": 60340,
+      "candidates": [
+        {
+          "path": "src/assets/travel-blog-hub/mahane-yehuda-c53a05ac52-420.webp",
+          "width": 420,
+          "height": 280,
+          "bytes": 34326,
+          "psnrDb": 40.71,
+          "quality": 91
+        }
+      ],
+      "oneXCandidateBytes": 34326,
+      "oneXPotentialSavingsBytes": 26014
+    },
+    "/src/assets/jerusalem/old-city.webp": {
+      "group": "directory",
+      "originalDimensions": [
+        755,
+        503
+      ],
+      "originalBytes": 94680,
+      "candidates": [
+        {
+          "path": "src/assets/travel-blog-hub/old-city-1038598496-420.webp",
+          "width": 420,
+          "height": 280,
+          "bytes": 43426,
+          "psnrDb": 40.25,
+          "quality": 91
+        }
+      ],
+      "oneXCandidateBytes": 43426,
+      "oneXPotentialSavingsBytes": 51254
+    },
+    "/src/assets/shore-excursions/akko-port.jpg": {
+      "group": "directory",
+      "originalDimensions": [
+        360,
+        240
+      ],
+      "originalBytes": 60256,
+      "candidates": [],
+      "oneXCandidateBytes": 60256,
+      "oneXPotentialSavingsBytes": 0
+    },
+    "/src/assets/tel-aviv/beachfront.webp": {
+      "group": "directory",
+      "originalDimensions": [
+        755,
+        439
+      ],
+      "originalBytes": 65468,
+      "candidates": [
+        {
+          "path": "src/assets/travel-blog-hub/beachfront-a30e02947f-420.webp",
+          "width": 420,
+          "height": 244,
+          "bytes": 32722,
+          "psnrDb": 36.33,
+          "quality": 91
+        }
+      ],
+      "oneXCandidateBytes": 32722,
+      "oneXPotentialSavingsBytes": 32746
+    },
+    "/src/assets/tel-aviv/old-north.webp": {
+      "group": "directory",
+      "originalDimensions": [
+        755,
+        424
+      ],
+      "originalBytes": 87424,
+      "candidates": [
+        {
+          "path": "src/assets/travel-blog-hub/old-north-14ec3bcb89-420.webp",
+          "width": 420,
+          "height": 236,
+          "bytes": 43298,
+          "psnrDb": 36.93,
+          "quality": 91
+        }
+      ],
+      "oneXCandidateBytes": 43298,
+      "oneXPotentialSavingsBytes": 44126
+    },
+    "/src/assets/tel-aviv/rothschild.webp": {
+      "group": "directory",
+      "originalDimensions": [
+        755,
+        424
+      ],
+      "originalBytes": 92402,
+      "candidates": [
+        {
+          "path": "src/assets/travel-blog-hub/rothschild-ecff6bfaaf-420.webp",
+          "width": 420,
+          "height": 236,
+          "bytes": 44056,
+          "psnrDb": 39.11,
+          "quality": 91
+        }
+      ],
+      "oneXCandidateBytes": 44056,
+      "oneXPotentialSavingsBytes": 48346
+    },
+    "/src/assets/tiberias/heritage.webp": {
+      "group": "directory",
+      "originalDimensions": [
+        755,
+        503
+      ],
+      "originalBytes": 93924,
+      "candidates": [
+        {
+          "path": "src/assets/travel-blog-hub/heritage-9a01de85e7-420.webp",
+          "width": 420,
+          "height": 280,
+          "bytes": 43826,
+          "psnrDb": 38.85,
+          "quality": 91
+        }
+      ],
+      "oneXCandidateBytes": 43826,
+      "oneXPotentialSavingsBytes": 50098
+    },
+    "/src/assets/tiberias/waterfront.webp": {
+      "group": "directory",
+      "originalDimensions": [
+        1022,
+        674
+      ],
+      "originalBytes": 160932,
+      "candidates": [
+        {
+          "path": "src/assets/travel-blog-hub/waterfront-d8fad80589-420.webp",
+          "width": 420,
+          "height": 277,
+          "bytes": 47404,
+          "psnrDb": 38.72,
+          "quality": 91
+        }
+      ],
+      "oneXCandidateBytes": 47404,
+      "oneXPotentialSavingsBytes": 113528
+    }
+  }
+}

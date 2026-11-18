@@ -1,0 +1,604 @@
+{
+  "directorySize": 49,
+  "topicCounts": {
+    "all": 49,
+    "transportation": 18,
+    "destinations": 33,
+    "attractions": 17,
+    "itineraries": 15,
+    "tips": 32,
+    "accommodation": 5,
+    "connectivity": 1,
+    "religion": 5,
+    "shopping": 1
+  },
+  "sources": [
+    {
+      "src": "/images/attractions/hero-jerusalem.webp",
+      "guideIds": [
+        "israel-itinerary-3"
+      ],
+      "views": [
+        "all",
+        "destinations",
+        "itineraries",
+        "tips"
+      ]
+    },
+    {
+      "src": "/images/hotels/jerusalem-night.webp",
+      "guideIds": [
+        "shabbat"
+      ],
+      "views": [
+        "all",
+        "tips",
+        "transportation"
+      ]
+    },
+    {
+      "src": "/images/jerusalem/hutzot-hayotzer.webp",
+      "guideIds": [
+        "jerusalemShopping"
+      ],
+      "views": [
+        "all",
+        "destinations",
+        "tips"
+      ]
+    },
+    {
+      "src": "/images/travel-blog/airport-taxi-sign.webp",
+      "guideIds": [
+        "airportTaxis"
+      ],
+      "views": [
+        "all"
+      ]
+    },
+    {
+      "src": "/images/travel-blog/taxi-in-tel-aviv.webp",
+      "guideIds": [
+        "taxis",
+        "uber"
+      ],
+      "views": [
+        "all",
+        "tips",
+        "transportation"
+      ]
+    },
+    {
+      "src": "/src/assets/airport-journeys/ben-gurion-rail-platform.webp",
+      "guideIds": [
+        "airport-journey-ein-bokek",
+        "airport-journey-tel-aviv"
+      ],
+      "views": [
+        "all",
+        "tips",
+        "transportation"
+      ]
+    },
+    {
+      "src": "/src/assets/airport-journeys/jerusalem-navon-platform.webp",
+      "guideIds": [
+        "airport-journey-jerusalem"
+      ],
+      "views": [
+        "all"
+      ]
+    },
+    {
+      "src": "/src/assets/airport-transfers/airport.webp",
+      "guideIds": [
+        "airportTaxis",
+        "arrival"
+      ],
+      "views": [
+        "all",
+        "tips",
+        "transportation"
+      ]
+    },
+    {
+      "src": "/src/assets/airport-transfers/caesarea.webp",
+      "guideIds": [
+        "telAvivDayTrips"
+      ],
+      "views": [
+        "all",
+        "attractions",
+        "destinations",
+        "itineraries"
+      ]
+    },
+    {
+      "src": "/src/assets/dead-sea/beach.webp",
+      "guideIds": [
+        "airport-journey-ein-bokek",
+        "stay-deadsea"
+      ],
+      "views": [
+        "accommodation",
+        "all",
+        "destinations",
+        "tips",
+        "transportation"
+      ]
+    },
+    {
+      "src": "/src/assets/dead-sea/landscape.webp",
+      "guideIds": [
+        "attraction-dead-sea-attractions",
+        "deadSea"
+      ],
+      "views": [
+        "all",
+        "attractions",
+        "destinations",
+        "tips"
+      ]
+    },
+    {
+      "src": "/src/assets/dead-sea/sunbeds.webp",
+      "guideIds": [
+        "deadSea"
+      ],
+      "views": [
+        "all",
+        "attractions",
+        "destinations"
+      ]
+    },
+    {
+      "src": "/src/assets/eilat/waterfront.webp",
+      "guideIds": [
+        "eilat"
+      ],
+      "views": [
+        "all",
+        "attractions",
+        "destinations",
+        "tips"
+      ]
+    },
+    {
+      "src": "/src/assets/guides/2026-10/beaches-in-tel-aviv.webp",
+      "guideIds": [
+        "telAvivBeaches"
+      ],
+      "views": [
+        "all",
+        "attractions",
+        "destinations",
+        "tips"
+      ]
+    },
+    {
+      "src": "/src/assets/guides/2026-10/best-time-to-visit-israel.webp",
+      "guideIds": [
+        "bestTime"
+      ],
+      "views": [
+        "all",
+        "itineraries",
+        "tips"
+      ]
+    },
+    {
+      "src": "/src/assets/guides/2026-10/calendar-of-events.webp",
+      "guideIds": [
+        "calendar",
+        "israel-holidays"
+      ],
+      "views": [
+        "all",
+        "attractions",
+        "itineraries",
+        "religion",
+        "tips"
+      ]
+    },
+    {
+      "src": "/src/assets/guides/2026-10/jerusalem-to-bethlehem.webp",
+      "guideIds": [
+        "bethlehem"
+      ],
+      "views": [
+        "all",
+        "destinations",
+        "religion",
+        "tips",
+        "transportation"
+      ]
+    },
+    {
+      "src": "/src/assets/guides/2026-10/jerusalem-to-the-dead-sea.webp",
+      "guideIds": [
+        "jerusalemDeadSea"
+      ],
+      "views": [
+        "all",
+        "destinations",
+        "itineraries",
+        "transportation"
+      ]
+    },
+    {
+      "src": "/src/assets/guides/2026-10/museums-in-haifa.webp",
+      "guideIds": [
+        "haifaMuseums"
+      ],
+      "views": [
+        "all",
+        "attractions",
+        "destinations",
+        "tips"
+      ]
+    },
+    {
+      "src": "/src/assets/guides/2026-10/museums-in-tel-aviv.webp",
+      "guideIds": [
+        "telAvivMuseums"
+      ],
+      "views": [
+        "all",
+        "attractions",
+        "destinations",
+        "tips"
+      ]
+    },
+    {
+      "src": "/src/assets/guides/2026-10/what-to-eat-in-israel.webp",
+      "guideIds": [
+        "food"
+      ],
+      "views": [
+        "all",
+        "destinations",
+        "tips"
+      ]
+    },
+    {
+      "src": "/src/assets/guides/2026-11/buses-in-tel-aviv.webp",
+      "guideIds": [
+        "israel"
+      ],
+      "views": [
+        "all",
+        "destinations",
+        "itineraries",
+        "tips",
+        "transportation"
+      ]
+    },
+    {
+      "src": "/src/assets/guides/esim-israel.jpeg",
+      "guideIds": [
+        "esim"
+      ],
+      "views": [
+        "all",
+        "connectivity",
+        "tips"
+      ]
+    },
+    {
+      "src": "/src/assets/guides/holy-sepulchre.jpg",
+      "guideIds": [
+        "jerusalemChurches"
+      ],
+      "views": [
+        "all",
+        "attractions",
+        "destinations",
+        "religion"
+      ]
+    },
+    {
+      "src": "/src/assets/guides/museums-in-jerusalem.jpg",
+      "guideIds": [
+        "attraction-museums-in-jerusalem"
+      ],
+      "views": [
+        "all",
+        "attractions",
+        "destinations"
+      ]
+    },
+    {
+      "src": "/src/assets/guides/sherut-nesher-airport.webp",
+      "guideIds": [
+        "sherut"
+      ],
+      "views": [
+        "all",
+        "tips",
+        "transportation"
+      ]
+    },
+    {
+      "src": "/src/assets/guides/taxi-cabs-israel.webp",
+      "guideIds": [
+        "taxiFares"
+      ],
+      "views": [
+        "all",
+        "tips",
+        "transportation"
+      ]
+    },
+    {
+      "src": "/src/assets/guides/yardenit.jpg",
+      "guideIds": [
+        "baptism"
+      ],
+      "views": [
+        "all",
+        "attractions",
+        "itineraries",
+        "religion"
+      ]
+    },
+    {
+      "src": "/src/assets/haifa/botanica.webp",
+      "guideIds": [
+        "stay-haifa"
+      ],
+      "views": [
+        "all",
+        "destinations"
+      ]
+    },
+    {
+      "src": "/src/assets/haifa/colony.webp",
+      "guideIds": [
+        "airport-journey-haifa",
+        "shore-haifa"
+      ],
+      "views": [
+        "all",
+        "destinations",
+        "itineraries"
+      ]
+    },
+    {
+      "src": "/src/assets/haifa/panorama.webp",
+      "guideIds": [
+        "airport-journey-haifa",
+        "attraction-haifa",
+        "stay-haifa"
+      ],
+      "views": [
+        "accommodation",
+        "all",
+        "attractions",
+        "destinations",
+        "tips",
+        "transportation"
+      ]
+    },
+    {
+      "src": "/src/assets/home/ashdod-port.webp",
+      "guideIds": [
+        "shore-ashdod"
+      ],
+      "views": [
+        "all",
+        "destinations",
+        "itineraries",
+        "transportation"
+      ]
+    },
+    {
+      "src": "/src/assets/home/ben-gurion-t3.webp",
+      "guideIds": [
+        "arrival",
+        "uber"
+      ],
+      "views": [
+        "all",
+        "tips",
+        "transportation"
+      ]
+    },
+    {
+      "src": "/src/assets/home/caesarea-dusk.webp",
+      "guideIds": [
+        "israel-itinerary-5"
+      ],
+      "views": [
+        "all",
+        "destinations",
+        "itineraries",
+        "tips"
+      ]
+    },
+    {
+      "src": "/src/assets/home/haifa-port.webp",
+      "guideIds": [
+        "israel-itinerary-10",
+        "shore-haifa"
+      ],
+      "views": [
+        "all",
+        "destinations",
+        "itineraries",
+        "tips",
+        "transportation"
+      ]
+    },
+    {
+      "src": "/src/assets/home/jerusalem-old-city.webp",
+      "guideIds": [
+        "jerusalem",
+        "topTen"
+      ],
+      "views": [
+        "all",
+        "attractions",
+        "destinations",
+        "itineraries",
+        "religion",
+        "tips"
+      ]
+    },
+    {
+      "src": "/src/assets/home/masada-dead-sea.webp",
+      "guideIds": [
+        "jerusalemDayTrips"
+      ],
+      "views": [
+        "all",
+        "attractions",
+        "destinations",
+        "itineraries"
+      ]
+    },
+    {
+      "src": "/src/assets/home/road-trip.webp",
+      "guideIds": [
+        "travelTips"
+      ],
+      "views": [
+        "all",
+        "destinations",
+        "tips",
+        "transportation"
+      ]
+    },
+    {
+      "src": "/src/assets/home/tel-aviv-coast.webp",
+      "guideIds": [
+        "attraction-attractions-in-tel-aviv",
+        "telAviv"
+      ],
+      "views": [
+        "all",
+        "attractions",
+        "destinations",
+        "tips",
+        "transportation"
+      ]
+    },
+    {
+      "src": "/src/assets/home/tiberias-lake.webp",
+      "guideIds": [
+        "attraction-sea-of-galilee",
+        "israel-itinerary-7",
+        "stay-tiberias"
+      ],
+      "views": [
+        "accommodation",
+        "all",
+        "attractions",
+        "destinations",
+        "itineraries",
+        "tips"
+      ]
+    },
+    {
+      "src": "/src/assets/jerusalem/downtown.webp",
+      "guideIds": [
+        "calendar"
+      ],
+      "views": [
+        "all",
+        "itineraries",
+        "tips"
+      ]
+    },
+    {
+      "src": "/src/assets/jerusalem/mahane-yehuda.webp",
+      "guideIds": [
+        "jerusalem",
+        "jerusalemShopping"
+      ],
+      "views": [
+        "all",
+        "attractions",
+        "destinations",
+        "shopping",
+        "tips"
+      ]
+    },
+    {
+      "src": "/src/assets/jerusalem/old-city.webp",
+      "guideIds": [
+        "airport-journey-jerusalem",
+        "stay-jerusalem"
+      ],
+      "views": [
+        "accommodation",
+        "all",
+        "destinations",
+        "tips",
+        "transportation"
+      ]
+    },
+    {
+      "src": "/src/assets/shore-excursions/akko-port.jpg",
+      "guideIds": [
+        "shore-haifa"
+      ],
+      "views": [
+        "all"
+      ]
+    },
+    {
+      "src": "/src/assets/tel-aviv/beachfront.webp",
+      "guideIds": [
+        "airport-journey-tel-aviv",
+        "stay-telaviv",
+        "taxis"
+      ],
+      "views": [
+        "accommodation",
+        "all",
+        "destinations",
+        "tips",
+        "transportation"
+      ]
+    },
+    {
+      "src": "/src/assets/tel-aviv/old-north.webp",
+      "guideIds": [
+        "stay-telaviv"
+      ],
+      "views": [
+        "all"
+      ]
+    },
+    {
+      "src": "/src/assets/tel-aviv/rothschild.webp",
+      "guideIds": [
+        "attraction-attractions-in-tel-aviv"
+      ],
+      "views": [
+        "all",
+        "destinations"
+      ]
+    },
+    {
+      "src": "/src/assets/tiberias/heritage.webp",
+      "guideIds": [
+        "stay-tiberias"
+      ],
+      "views": [
+        "all",
+        "destinations"
+      ]
+    },
+    {
+      "src": "/src/assets/tiberias/waterfront.webp",
+      "guideIds": [
+        "attraction-sea-of-galilee"
+      ],
+      "views": [
+        "all",
+        "destinations"
+      ]
+    }
+  ]
+}
