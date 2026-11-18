@@ -79,7 +79,7 @@ describe("Accommodation booking hub",()=>{
     const mount = screen.getByTestId(`${widget.id}-hotel-widget-mount`);
     expect(card).toContainElement(mount);
     expect(card).toHaveTextContent(widget.title);
-    const url = new URL(widget.src);
+    const url = new URL(widget.scriptUrl);
     expect(url.origin).toBe("https://tpwgt.com");
     expect(url.pathname).toBe("/content");
     expect(url.searchParams.get("trs")).toBe("406243");
@@ -88,16 +88,16 @@ describe("Accommodation booking hub",()=>{
     // jsdom has no IntersectionObserver: it falls back to loading immediately.
     const script = mount.querySelector("script");
     expect(script).not.toBeNull();
-    expect(script?.src).toBe(widget.src);
+    expect(script?.src).toBe(widget.scriptUrl);
     expect(script?.async).toBe(true);
     expect(script?.charset).toBe("utf-8");
   }
 
-  expect(new URL(hotelSearchWidgets[0].src).searchParams.get("campaign_id")).toBe("84");
-  expect(new URL(hotelSearchWidgets[0].src).searchParams.get("promo_id")).toBe("9240");
-  expect(new URL(hotelSearchWidgets[1].src).searchParams.get("campaign_id")).toBe("121");
-  expect(new URL(hotelSearchWidgets[1].src).searchParams.get("promo_id")).toBe("4038");
-  const agoda = new URL(hotelSearchWidgets[2].src);
+  expect(new URL(hotelSearchWidgets[0].scriptUrl).searchParams.get("campaign_id")).toBe("84");
+  expect(new URL(hotelSearchWidgets[0].scriptUrl).searchParams.get("promo_id")).toBe("9240");
+  expect(new URL(hotelSearchWidgets[1].scriptUrl).searchParams.get("campaign_id")).toBe("121");
+  expect(new URL(hotelSearchWidgets[1].scriptUrl).searchParams.get("promo_id")).toBe("4038");
+  const agoda = new URL(hotelSearchWidgets[2].scriptUrl);
   expect(agoda.searchParams.get("campaign_id")).toBe("104");
   expect(agoda.searchParams.get("promo_id")).toBe("8303");
   expect(agoda.searchParams.get("default_destination")).toBe("Jerusalem, Israel");
