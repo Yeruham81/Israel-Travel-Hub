@@ -71,7 +71,7 @@ const guides: Record<AirportTransferRouteId, RouteGuide> = {
     ],
     related: [
       { label: "Find your Tel Aviv hotel area", to: "/travel-blog/where-to-stay-in-tel-aviv/" },
-      { label: "Hotels around Jaffa", to: "/accommodation/tel-aviv/jaffa-hotels/" },
+      { label: "Hotels around Jaffa", to: "/accommodation/tel-aviv/jaffa/" },
     ],
   },
   haifa: {
