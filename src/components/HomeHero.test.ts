@@ -72,7 +72,7 @@ describe("homepage hero photo carousel", () => {
       expect(heroSlides[index]?.srcSm).toContain(mobile);
       expect(heroSlides[index]?.src).toContain(desktop);
     }
-    expect(heroSlides[0]?.srcSm).toContain("hero-jerusalem-sm-optimized.webp");
+    expect(heroSlides[0]?.srcSm).toContain("hero-jerusalem-psi-mobile.webp");
   });
 
 });
