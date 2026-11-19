@@ -51,7 +51,7 @@ const related = [
 const faqs = [
   { q: "Where is the best place to shop for souvenirs in Jerusalem?", a: "I suggest starting with the Old City souks for traditional gifts, the Cardo for Judaica and art, or Hutzot Hayotzer for original craft. Ask about where more expensive pieces were made and the materials used." },
   { q: "Where should I go shopping on a rainy day?", a: "Malha Mall is a practical indoor choice. You can also visit enclosed shops in central Jerusalem, but a day at Malha is a separate journey from the Old City." },
-  { q: "Can I shop in Jerusalem on Shabbat?", a: "Most Jewish-owned shops close for Shabbat, particularly in the city centre and Mahane Yehuda. The First Station complex has Saturday activity, but each shop, restaurant and event has its own hours. Check individual venues before setting out." },
+  { q: "Can I shop in Jerusalem on Shabbat?", a: "Many city-centre shops and Mahane Yehuda market stalls close for Shabbat. The First Station hosts food and cultural activities on Saturdays, but its published shopping hours are 18:00–22:00. Check the business or event you want before setting out." },
   { q: "Can tourists get a VAT refund on purchases in Israel?", a: "Eligible tourists can apply for a VAT refund on qualifying goods bought at participating businesses, subject to the Israel Tax Authority's rules and documentation. Ask the retailer for the required paperwork and check the official procedure before departure." },
   { q: "Should I bargain in Jerusalem's markets?", a: "In some traditional market stalls polite bargaining is welcome; fixed-price shops, galleries and chain stores work differently. Confirm the total price before paying rather than assuming there is a standard discount." },
   { q: "When does the Bezalel Arts Fair take place?", a: "The arts fair is associated with Friday mornings in the Bezalel and Shatz pedestrian-street area. Dates, hours and the programme may change with weather or special events, so I recommend checking the current organiser listing before going." },
@@ -243,7 +243,7 @@ export function JerusalemShoppingGuide() {
         {shoppingDistricts.map((district, index) => <section key={district.id} className="mt-9" aria-label={district.title}>
           <h3 className="text-xl font-bold sm:text-2xl">{district.title}</h3>
           <p className="mt-2 max-w-3xl leading-relaxed text-muted-foreground">{district.intro}</p>
-          <div className="mt-5 grid items-stretch gap-5 md:grid-cols-2">
+          <div className={"mt-5 grid items-stretch gap-5 md:grid-cols-2 " + (places.filter(place => place.district === district.title).length === 3 ? "lg:grid-cols-3" : "")}>
             {places.filter(place => place.district === district.title).map(place =>
               <PlaceCard key={place.id} place={place} index={places.indexOf(place)} />)}
           </div>
@@ -280,7 +280,7 @@ export function JerusalemShoppingGuide() {
           intro="A little planning makes market visits and larger purchases much easier, especially around Shabbat and holidays." />
         <div className="grid gap-4 md:grid-cols-2">
           <div className="rounded-xl border bg-card p-5"><CalendarDays aria-hidden="true" className="h-5 w-5 text-primary" /><h3 className="mt-2 font-bold">Fridays, Shabbat & holidays</h3>
-            <p className="mt-2 text-sm leading-relaxed">Many shops and market stalls close early on Friday and remain closed on Saturday. Some venues, including the First Station, operate on Saturday, but the individual businesses vary. See my <Link to="/travel-blog/calendar-of-events/" className="font-semibold text-primary hover:underline">Israel calendar of events</Link> for holidays that may affect shopping.</p>
+            <p className="mt-2 text-sm leading-relaxed">Many shops and market stalls close early on Friday and remain closed on Saturday. The First Station runs some food and cultural activities on Saturday, but its shopping page lists Saturday shopping hours of 18:00–22:00. Check the specific venue. See my <Link to="/travel-blog/calendar-of-events/" className="font-semibold text-primary hover:underline">Israel calendar of events</Link> for holidays that may affect shopping.</p>
           </div>
           <div className="rounded-xl border bg-card p-5"><CreditCard aria-hidden="true" className="h-5 w-5 text-primary" /><h3 className="mt-2 font-bold">Payment & bargaining</h3>
             <p className="mt-2 text-sm leading-relaxed">Cards are widely accepted in established shops, while some small market stalls may prefer cash. Confirm the total price in shekels before paying. Negotiate politely only where it is welcomed; there is no universal market discount.</p>
@@ -323,11 +323,13 @@ export function JerusalemShoppingGuide() {
       <SourcesDisclosure>
         <p className="mb-3 text-sm leading-relaxed">I use destination and venue information for the markets, shopping venues and tax guidance. Check current event dates and individual shop opening times before visiting.</p>
         <ul className="grid gap-x-5 gap-y-3 text-sm sm:grid-cols-2">
-          <li><OfficialLink href="https://en.machne.co.il/">Mahane Yehuda Market — official website</OfficialLink></li>
-          <li><OfficialLink href="https://www.itraveljerusalem.com/he/event/betzalel-arts-fair">Bezalel Arts Fair — event information</OfficialLink></li>
-          <li><OfficialLink href="https://edisonhafakot.co.il/he/fairline/3">Bezalel Arts Fair — organiser information</OfficialLink></li>
-          <li><OfficialLink href="https://www.firststation.co.il/en/">The First Station — official website</OfficialLink></li>
-          <li><OfficialLink href="https://www.firststation.co.il/en/shopping-at-the-first-station/">The First Station — shops and opening guidance</OfficialLink></li>
+          <li><OfficialLink href="https://en.machne.co.il/">Mahane Yehuda — independent market visitor guide</OfficialLink></li>
+          <li><OfficialLink href="https://edisonhafakot.co.il/he/fairline/3">Bezalel Arts Fair — organiser and Friday schedule (Hebrew)</OfficialLink></li>
+          <li><OfficialLink href="https://alrovmamilla.com/en/">Alrov Mamilla Avenue — official shops and hours</OfficialLink></li>
+          <li><OfficialLink href="https://azrieligroup.com/properties/azrieli-mall-jerusalem/">Azrieli Jerusalem Mall — official mall information</OfficialLink></li>
+          <li><OfficialLink href="https://artistscolony.co.il/">Hutzot Hayotzer — artists' colony website</OfficialLink></li>
+          <li><OfficialLink href="https://www.firststation.co.il/en/shopping-at-the-first-station/">The First Station — shopping hours</OfficialLink></li>
+          <li><OfficialLink href="https://www.firststation.co.il/en/saturdays-at-the-first-station/">The First Station — Saturday dining and activities</OfficialLink></li>
           <li><OfficialLink href="https://www.gov.il/en/pages/vat-refund-guide-for-tourists?chapterIndex=1">Israel Tax Authority — tourist VAT refund rules</OfficialLink></li>
         </ul>
       </SourcesDisclosure>

@@ -16,11 +16,11 @@ describe("Jerusalem shopping guide editorial regression", () => {
     expect(places.every(place => shoppingDistricts.some(group => group.title === place.district))).toBe(true);
   });
 
-  it("uses locally hosted, unique photographs and reserves only the missing fair image", () => {
+  it("uses ten unique locally hosted destination photos including the Bezalel arts fair", () => {
     const photos = places.filter(place => place.photo);
-    expect(photos).toHaveLength(9);
-    expect(new Set(photos.map(place => place.photo!.src)).size).toBe(9);
-    expect(places.find(place => place.id === "bezalel")?.photo).toBeUndefined();
+    expect(photos).toHaveLength(10);
+    expect(new Set(photos.map(place => place.photo!.src)).size).toBe(10);
+    expect(places.find(place => place.id === "bezalel")?.photo?.src).toBe("/images/jerusalem-shopping/bezalel-arts-fair.webp");
     expect(existsSync(resolve(process.cwd(), "public/images/jerusalem-shopping/hero.webp"))).toBe(true);
     for (const place of photos) {
       const file = resolve(process.cwd(), "public" + place.photo!.src);
@@ -50,6 +50,15 @@ describe("Jerusalem shopping guide editorial regression", () => {
     expect(page).toContain("The First Station");
     expect(page).toContain("Contact me");
     expect(data).toContain("Bezalel and Shatz");
+    expect(data).toContain("https://edisonhafakot.co.il/he/fairline/3");
+    expect(data).not.toContain("itraveljerusalem.com/he/event/betzalel-arts-fair");
+    expect(data).toContain("https://alrovmamilla.com/en/");
+    expect(data).toContain("https://azrieligroup.com/properties/azrieli-mall-jerusalem/");
+    expect(data).toContain("https://artistscolony.co.il/");
+    expect(data).toContain("Saturday are 18:00–22:00");
+    expect(page).toContain("lg:grid-cols-3");
+    expect(page).toContain("independent market visitor guide");
+    expect(page).toContain("shopping hours of 18:00–22:00");
     expect(data).not.toContain("offer half");
     expect(page).not.toContain("50% of");
     expect(page).not.toContain("60%-70%");

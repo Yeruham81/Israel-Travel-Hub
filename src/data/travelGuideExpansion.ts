@@ -354,7 +354,7 @@ export const expandedTravelGuides = {
     faqs: [
       { q: "Where is the best place to buy souvenirs in Jerusalem?", a: "I would start in the Old City for traditional souvenirs, the Cardo for Judaica and art, or Hutzot Hayotzer for original work." },
       { q: "Where is best for indoor shopping?", a: "Malha Mall is an enclosed shopping centre with multiple retailers, outside the historic centre." },
-      { q: "Is shopping open on Shabbat?", a: "Many city-centre shops close. The First Station complex operates on Saturday, but individual businesses and pop-ups have different hours." },
+      { q: "Is shopping open on Shabbat?", a: "Many city-centre shops close. The First Station has Saturday dining and cultural activities, while its shopping page lists Saturday shopping hours of 18:00–22:00." },
       { q: "Can I claim VAT back?", a: "Eligible visitors can claim qualifying purchases from participating retailers under the Israel Tax Authority's rules." },
       { q: "Can I bargain in Jerusalem?", a: "Some market sellers welcome polite bargaining, while fixed-price stores and galleries work differently." },
       { q: "When is the Bezalel Arts Fair?", a: "It is associated with Fridays on Bezalel and Shatz pedestrian streets. Verify this week's schedule." },

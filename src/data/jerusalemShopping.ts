@@ -48,6 +48,7 @@ export const jerusalemShoppingPlaces: ShoppingPlace[] = [
     gettingThere: "Walk west from Jaffa Gate or approach from the central city streets and nearby tram/bus connections.",
     lat: 31.7777, lon: 35.2234,
     photo: { src: images + "mamilla.webp", alt: "Mamilla open-air pedestrian shopping avenue in Jerusalem" },
+    official: { label: "Mamilla shops & opening hours", href: "https://alrovmamilla.com/en/" },
   },
   {
     id: "hutzot", name: "Hutzot Hayotzer", district: "Old City & Mamilla",
@@ -58,6 +59,7 @@ export const jerusalemShoppingPlaces: ShoppingPlace[] = [
     gettingThere: "Near Sultan's Pool, a downhill walk from the Mamilla/Jaffa Gate area; allow for the return climb.",
     lat: 31.7729, lon: 35.2246,
     photo: { src: images + "hutzot-hayotzer.webp", alt: "Handcrafted artwork displayed at Hutzot Hayotzer artists' colony" },
+    official: { label: "Artists' Colony website", href: "https://artistscolony.co.il/" },
   },
   {
     id: "mahane", name: "Mahane Yehuda Market", district: "City centre & markets",
@@ -85,11 +87,11 @@ export const jerusalemShoppingPlaces: ShoppingPlace[] = [
     bestFor: "Handmade designs & Friday art stalls", area: "Bezalel and Shatz pedestrian streets",
     when: "Usually Friday; check this week's notice", highlights: "Jewellery · Prints · Ceramics",
     description: "The Friday arts fair brings makers and small stalls to the Bezalel and Shatz pedestrian-street area. Look for jewellery, ceramics, photography, woodwork, prints and independent design. It is especially appealing when you want a local piece rather than a mass-produced souvenir.",
-    practical: "It is associated with Friday trading, but the programme and weather can affect the event. Confirm the current week's location and hours with the organiser before making a dedicated trip.",
+    practical: "The organiser lists the fair on Fridays on Bezalel pedestrian street. I recommend checking the organiser's latest announcement for the hours and any schedule changes before making a dedicated trip.",
     gettingThere: "The Bezalel/Shatz pedestrian streets in the city centre, near the Nahalat Shiva and central-city walking areas.",
     lat: 31.7797, lon: 35.2149,
-    // No confidently matching Drive photograph found: keep the layout-ready image slot.
-    official: { label: "Arts fair information", href: "https://www.itraveljerusalem.com/he/event/betzalel-arts-fair" },
+    photo: { src: images + "bezalel-arts-fair.webp", alt: "Jerusalem arts fair stall with original paintings and handmade artwork" },
+    official: { label: "Arts fair organiser & dates", href: "https://edisonhafakot.co.il/he/fairline/3" },
   },
   {
     id: "emek-refaim", name: "Emek Refaim Street", district: "South Jerusalem",
@@ -106,7 +108,7 @@ export const jerusalemShoppingPlaces: ShoppingPlace[] = [
     bestFor: "Food, events & occasional markets", area: "David Remez Street",
     when: "Check the programme, including Shabbat", highlights: "Restaurants · Events · Pop-up stalls",
     description: "The restored railway station combines restaurants, cultural events, some shops and occasional markets. It is a lively outing with a shopping element, particularly suitable if you also want a meal or family activity.",
-    practical: "The complex operates on Saturdays, but this does not mean every individual shop or pop-up stall is open. Use the venue's events and shopping pages for your date.",
+    practical: "The venue's published shopping hours for Saturday are 18:00–22:00. Saturday food and cultural activities can begin earlier, so check the hours of the business or event you want.",
     gettingThere: "On David Remez Street, south of central Jerusalem and close to the German Colony.",
     lat: 31.7685, lon: 35.2216,
     photo: { src: images + "first-station.webp", alt: "The First Station Jerusalem with shops and restaurants" },
@@ -121,6 +123,7 @@ export const jerusalemShoppingPlaces: ShoppingPlace[] = [
     gettingThere: "In southwest Jerusalem on Agudat Sport Beitar Street; use bus, taxi or a planned car journey.",
     lat: 31.7507, lon: 35.1910,
     photo: { src: images + "malha.webp", alt: "Interior shopping galleries at Malha Mall in Jerusalem" },
+    official: { label: "Azrieli Jerusalem Mall", href: "https://azrieligroup.com/properties/azrieli-mall-jerusalem/" },
   },
 ];
 
