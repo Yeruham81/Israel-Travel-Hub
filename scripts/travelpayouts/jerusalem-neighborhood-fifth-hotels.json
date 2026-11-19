@@ -1,0 +1,31 @@
+{
+  "project_id": 406243,
+  "partner_id": 622032,
+  "links": [
+    {
+      "id": "jlm-eldan",
+      "name": "The Eldan Hotel",
+      "url": "https://www.expedia.com/Jerusalem-Hotels-The-Eldan-Hotel.h4846905.Hotel-Information"
+    },
+    {
+      "id": "jlm-christ-church",
+      "name": "Christ Church Guest House",
+      "url": "https://www.expedia.com/Jerusalem-Hotels-Christ-Church-Guest-House.h127406078.Hotel-Information"
+    },
+    {
+      "id": "jlm-brown-machne",
+      "name": "Brown Machne Yehuda",
+      "url": "https://www.expedia.com/Jerusalem-Hotels-Machne-Yehuda-A-Member-Of-Brown-Hotels.h66336653.Hotel-Information"
+    },
+    {
+      "id": "jlm-national-hotel",
+      "name": "National Hotel Jerusalem",
+      "url": "https://www.expedia.com/Jerusalem-Hotels-National-Hotel-Jerusalem.h4473287.Hotel-Information"
+    },
+    {
+      "id": "jlm-dan-boutique",
+      "name": "Dan Boutique Jerusalem",
+      "url": "https://www.expedia.com/Jerusalem-Hotels-Dan-Boutique-Jerusalem.h19654.Hotel-Information"
+    }
+  ]
+}
