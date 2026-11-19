@@ -6,6 +6,7 @@ import { linksForPage } from "@/data/registry";
 import { hotelBooking, resortHotel } from "@/components/StayGuideParts";
 import { resortHotelPhoto } from "@/data/resortHotelPhotos";
 import { hotelAffiliateUrl, hotelBrowseAffiliateUrl } from "@/lib/hotel-affiliate";
+import { hotelGoogleMapsUrl } from "@/lib/hotel-google-maps";
 
 vi.mock("@tanstack/react-router", () => ({
   Link: ({ to, children, ...props }: { to: string; children: React.ReactNode; [key: string]: unknown }) => <a href={to} {...props}>{children}</a>,
@@ -55,6 +56,11 @@ describe("Tiberias hotel editorial", () => {
     expect(container.querySelector("#location iframe")).toHaveAttribute("src", expect.stringMatching(/^https:\/\/maps\.google\.com\/maps\?.*z=13/));
     expect(container).toHaveTextContent("full board or all-inclusive");
     expect(container).toHaveTextContent("Guests must be aged 12 or older");
+    expect(screen.getAllByTestId("tiberias-hotel-facility-notice")).toHaveLength(3);
+    expect(container).toHaveTextContent("The private beach closed on October 4, 2026");
+    expect(container).toHaveTextContent("The seasonal outdoor pool is closed from November 1, 2026");
+    expect(container).toHaveTextContent("currently advertises full board instead of all-inclusive");
+    expect(container).not.toHaveTextContent("Select a hotel name to jump");
   });
 
   it("keeps direct Expedia Travelpayouts links and category-level attribution", () => {
@@ -67,6 +73,11 @@ describe("Tiberias hotel editorial", () => {
       expect(link).toHaveAttribute("href", hotelAffiliateUrl(hotelBooking(id)!, pageId, id));
       expect(link).toHaveAttribute("rel", expect.stringContaining("sponsored"));
       expect(link).toHaveTextContent("Check rooms & rates");
+      const map = within(card).getByTestId("tiberias-hotel-map-link");
+      expect(map).toHaveAttribute("href", hotelGoogleMapsUrl(resortHotel(id)));
+      expect(map).toHaveAttribute("target", "_blank");
+      expect(map).toHaveAttribute("rel", expect.stringContaining("noopener"));
+      expect(map).toHaveTextContent("View location on Google Maps");
     });
     for (const group of tiberiasStayGuide.groups) {
       const booking = linksForPage(group.browsePageId ?? ("stay-tiberias-" + group.id + "-browse"))[0]!;
