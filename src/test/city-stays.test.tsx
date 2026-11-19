@@ -543,12 +543,12 @@ describe("Jerusalem direct hotel catalog", () => {
     const mamilla = within(filters).getByRole("button", { name: "Mamilla & King David" });
     fireEvent.click(mamilla);
     expect(mamilla).toHaveAttribute("aria-pressed", "true");
-    expect(within(catalog).getAllByTestId("jerusalem-hotel-card")).toHaveLength(4);
+    expect(within(catalog).getAllByTestId("jerusalem-hotel-card")).toHaveLength(5);
     expect(within(catalog).queryByRole("status")).not.toBeInTheDocument();
     fireEvent.click(within(filters).getByRole("button", { name: "All areas" }));
     expect(within(catalog).getAllByTestId("jerusalem-hotel-card")).toHaveLength(12);
     fireEvent.click(within(catalog).getByRole("button", { name: "Show more hotels" }));
-    expect(within(catalog).getAllByTestId("jerusalem-hotel-card")).toHaveLength(25);
+    expect(within(catalog).getAllByTestId("jerusalem-hotel-card")).toHaveLength(30);
     fireEvent.change(within(catalog).getByLabelText("Sort"), { target: { value: "name" } });
     const names = within(catalog).getAllByTestId("jerusalem-hotel-card").map((card) => card.querySelector("h3")!.textContent!);
     expect(names).toEqual([...names].sort((a, b) => a.localeCompare(b)));
@@ -560,7 +560,7 @@ describe("Jerusalem direct hotel catalog", () => {
     const select = within(catalog).getByLabelText("Choose hotel area") as HTMLSelectElement;
     fireEvent.change(select, { target: { value: "old-city" } });
     expect(select.value).toBe("old-city");
-    expect(within(catalog).getAllByTestId("jerusalem-hotel-card")).toHaveLength(4);
+    expect(within(catalog).getAllByTestId("jerusalem-hotel-card")).toHaveLength(5);
     fireEvent.click(within(catalog).getByRole("button", { name: "View all Jerusalem hotels" }));
     expect(select.value).toBe("all");
     expect(within(catalog).getAllByTestId("jerusalem-hotel-card")).toHaveLength(12);
