@@ -12,7 +12,7 @@ import { AreaMap, AreaPhotoCredit } from "@/components/AreaMap";
 import { GuideHeader, OnThisPage, Section, Checklist, FaqList, SourceList } from "@/components/Guide";
 import { StayTripLinks } from "@/components/StayTripLinks";
 import { HomeContactForm } from "@/components/HomeContactForm";
-import { guideContactCopy } from "@/lib/guide-contact";
+import { neighborhoodTripContactCopy } from "@/lib/guide-contact";
 import { hotelBrowseAffiliateUrl } from "@/lib/hotel-affiliate";
 import { recordOutboundClick, relFor } from "@/lib/outbound";
 import jerusalemAreaGuidePhoto from "@/assets/home/jerusalem-old-city-tile.webp";
@@ -259,7 +259,7 @@ export function NeighborhoodStayPage({ area }: { area: NeighborhoodStayGuide }) 
         </section>
         <FaqList faqs={area.faqs} />
         <StayTripLinks region={area.cityId} currentPath={area.path} />
-        <HomeContactForm key={area.id} guide={guideContactCopy(area.title, "accommodation", `${area.shortName}, ${city.city}`)} />
+        <HomeContactForm key={area.id} guide={neighborhoodTripContactCopy(isJerusalem ? "Jerusalem" : "Tel Aviv")} />
         <AreaPhotoCredit areas={[area]} />
         <div className="mt-5"><details className="mt-3 rounded-xl border bg-card p-3 text-xs text-muted-foreground" data-testid="neighborhood-hotel-photo-credits">
             <summary className="cursor-pointer font-semibold text-foreground">Illustrative photo credits & licenses</summary>
