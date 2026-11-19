@@ -37,7 +37,7 @@ function OfficialLink({ href, children }: { href: string; children: ReactNode })
 }
 
 function MapLink({ museum }: { museum: MuseumEntry }) {
-  const url = "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(museum.name + ", " + museum.address + ", Israel");
+  const url = "https://www.google.com/maps/dir/?api=1&destination=" + encodeURIComponent(museum.name + ", " + museum.address + ", Israel");
   return <a href={url} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 font-medium text-primary hover:underline">
     <MapPin aria-hidden="true" className="h-3.5 w-3.5" /> Directions <ArrowUpRight aria-hidden="true" className="h-3.5 w-3.5" />
     <span className="sr-only"> (opens in a new tab)</span>
@@ -63,7 +63,7 @@ function MuseumCard({ museum }: { museum: MuseumEntry }) {
     family ? "Family-friendly" : null,
     advanceBooking ? "Book ahead" : null,
   ].filter((item): item is string => Boolean(item)).slice(0, 3);
-  const ticketLabel = museum.id === "bauhaus" ? "Self-guided audio tour" : museum.id === "liebling" ? "Tours & events" : "Check tickets & rates";
+  const ticketLabel = museum.id === "bauhaus" ? "Tours & audio guide" : museum.id === "liebling" ? "Tours & events" : "Check tickets & rates";
   return <article id={"museum-" + museum.id} className="flex scroll-mt-28 flex-col overflow-hidden rounded-2xl border bg-card shadow-sm">
     {museumImage ? <img src={museumImage.src} alt={museumImage.alt} width={840} height={473} loading="lazy" decoding="async" className="aspect-[16/9] w-full object-cover" />
     : <div className="flex items-center justify-between gap-3 border-b bg-secondary/35 px-4 py-3">
@@ -88,7 +88,6 @@ function MuseumCard({ museum }: { museum: MuseumEntry }) {
         <ul className="mt-1 list-disc space-y-0.5 pl-5 text-sm leading-relaxed text-muted-foreground">{museum.highlights.slice(0, 2).map(highlight => <li key={highlight}>{highlight}</li>)}</ul>
       </div>
       <p className="mt-3 text-sm leading-relaxed"><strong className="text-primary">My tip:</strong> {museum.tip}</p>
-      {museum.id === "palmach" && <p className="mt-3 text-sm">Reserve by phone or WhatsApp: <a href="tel:+97235459800" className="font-semibold text-primary underline-offset-2 hover:underline">03-5459800</a></p>}
       <div className="mt-3 flex flex-wrap items-baseline gap-x-3 gap-y-1 text-xs text-muted-foreground"><span>{museum.address}</span><MapLink museum={museum} /></div>
       <div className="mt-auto grid gap-2 border-t pt-4 text-sm sm:grid-cols-2">
         {(museum.ticketUrl && museum.id !== "independence" || museum.id === "palmach") && <a href={museum.id === "palmach" ? "tel:+97235459800" : museum.ticketUrl} target={museum.id === "palmach" ? undefined : "_blank"} rel={museum.id === "palmach" ? undefined : "noopener noreferrer"} className="inline-flex min-h-11 items-center justify-center gap-1.5 rounded-lg bg-primary px-3 py-2.5 text-center font-semibold text-primary-foreground transition-opacity hover:opacity-90">{museum.id === "palmach" ? "Reserve by phone" : ticketLabel}{museum.id !== "palmach" && <ExternalLink className="h-3.5 w-3.5" aria-hidden="true" />}</a>}
@@ -126,7 +125,6 @@ function MuseumMap() {
   return <section aria-label="Museum locations in Tel Aviv and Jaffa" className="mt-7 overflow-hidden rounded-xl border bg-card">
     <div className="p-4">
       <h3 className="text-lg font-semibold">Museums on the map</h3>
-      <p className="mt-1 text-sm text-muted-foreground">All 15 museums on one map. Select a venue to zoom in.</p>
       <div className="mt-3 flex flex-wrap items-end gap-3">
         <label htmlFor="museum-map-select" className="min-w-0 flex-1 text-sm font-semibold">Focus on a museum
           <select id="museum-map-select" value={selectedId} onChange={e => focus(e.target.value)} className="mt-2 min-h-11 w-full rounded-lg border bg-background px-3 py-2 text-sm font-normal focus-visible:outline-2 focus-visible:outline-primary">
