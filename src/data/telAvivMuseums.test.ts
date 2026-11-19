@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { additionalMuseums, museumAreas, museums } from "@/data/telAvivMuseums";
+import { additionalMuseums, museumAreas, museumMapPoints, museums } from "@/data/telAvivMuseums";
 
 describe("Tel Aviv museums editorial guide", () => {
   it("keeps each museum unique, locally positioned and linked to a museum operator", () => {
@@ -17,14 +17,27 @@ describe("Tel Aviv museums editorial guide", () => {
     }
   });
 
-  it("keeps temporarily closed places in the main editorial list with dated closure notes", () => {
+  it("keeps temporarily closed places in the main editorial list with accurate closure notices", () => {
     const independence = museums.find(museum => museum.id === "independence");
     const muza = museums.find(museum => museum.id === "muza");
-    expect(independence?.closureNote).toBe("Closed as of November 2026.");
+    expect(independence?.closureNote).toBe("Closed until further notice for restoration.");
     expect(muza?.closureNote).toBe("Planetarium closed as of November 2026.");
     expect(independence?.intro).toContain("14 May 1948");
     expect(muza?.intro).toContain("museum");
     expect(additionalMuseums.some(museum => museum.name === "Independence Hall")).toBe(false);
+  });
+
+  it("grounds exactly fifteen museums on the shared city map and makes closed venues recognizable", () => {
+    expect(museumMapPoints).toHaveLength(15);
+    expect(new Set(museumMapPoints.map(point => point.id)).size).toBe(15);
+    expect(museumMapPoints.map(point => point.id)).toEqual(museums.map(point => point.id));
+    for (const point of museumMapPoints) {
+      expect(point.lat).toBeGreaterThan(32);
+      expect(point.lat).toBeLessThan(32.2);
+      expect(point.lon).toBeGreaterThan(34.6);
+      expect(point.lon).toBeLessThan(34.95);
+    }
+    expect(museumMapPoints.filter(point => point.closed).map(point => point.id)).toEqual(["independence"]);
   });
 
   it("publishes verified adult admission and regular opening-day guidance, without inventing unknown fees", () => {
@@ -45,9 +58,12 @@ describe("Tel Aviv museums editorial guide", () => {
     expect(museums.find(museum => museum.id === "palmach")?.booking).toContain("03-5459800");
     expect(museums.find(museum => museum.id === "bauhaus")?.closureNote).toBe("Guided tours suspended as of November 2026.");
     expect(museums.find(museum => museum.id === "bialik")?.admission).toContain("₪75");
+    expect(museums.find(museum => museum.id === "art")?.ticketUrl).toContain("tickets.tamuseum.org.il");
+    expect(museums.find(museum => museum.id === "palmach")?.openingDays).toContain("Fri 09:00–11:00");
+    expect(museums.find(museum => museum.id === "bauhaus")?.admission).toContain("₪90");
   });
 
-    it("differentiates the two Etzel sites and retains essential new venues", () => {
+  it("differentiates the two Etzel sites and retains essential new venues", () => {
     expect(museums.find(museum => museum.id === "etzel-1948")?.address).toContain("Charles Clore");
     expect(additionalMuseums.find(museum => museum.name.includes("Jabotinsky"))?.place).toContain("King George");
     for (const id of ["rubin", "liebling", "bauhaus", "bialik", "city"]) {
