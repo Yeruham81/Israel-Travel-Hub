@@ -1,0 +1,241 @@
+import { Link } from "@tanstack/react-router";
+import { ArrowUpRight, ExternalLink, Lightbulb, MapPin, Waves, Users, Heart, Compass, TreePalm, Sun, ShieldCheck, Bus, Accessibility, Dog, Umbrella, CalendarDays } from "lucide-react";
+import { Breadcrumbs, FaqList, OnThisPage } from "@/components/Guide";
+import { AuthorCard } from "@/components/AuthorCard";
+import { GuideHeroLayout, GuideHeroMedia } from "@/components/GuideHeroMedia";
+import { PageUpdated } from "@/components/PageUpdated";
+import { SourcesDisclosure } from "@/components/SourcesDisclosure";
+import { HomeContactForm } from "@/components/HomeContactForm";
+import { neighborhoodTripContactCopy } from "@/lib/guide-contact";
+import { beachMapPoints, beachTopPicks, officialTelAvivBeaches, officialBeachFacilities, officialBeachPrices, telAvivBeaches, type TelAvivBeach } from "@/data/telAvivBeaches";
+
+import heroPhoto from "@/assets/guides/2026-10/beaches-in-tel-aviv.webp";
+import jaffaPhoto from "@/assets/tel-aviv/jaffa.webp";
+import rothschildPhoto from "@/assets/tel-aviv/rothschild.webp";
+import dizengoffPhoto from "@/assets/tel-aviv/dizengoff.webp";
+import museumPhoto from "@/assets/guides/2026-10/museums-in-tel-aviv.webp";
+import beachfrontPhoto from "@/assets/tel-aviv/beachfront.webp";
+import roadPhoto from "@/assets/home/road-trip-card.webp";
+
+const updatedAt = "2026-11-19";
+const headings = [
+  ["choose", "Choose a beach"],
+  ["compare", "Compare beaches"],
+  ["beach-map", "Beach map"],
+  ["beaches", "Explore beaches"],
+  ["season", "When to visit"],
+  ["practical", "Practical tips"],
+  ["transport", "Getting there"],
+  ["beyond", "Beyond Tel Aviv"],
+  ["faq", "FAQ"],
+  ["explore-more", "Explore more"],
+  ["contact", "Contact me"],
+] as const;
+
+const pickIcons = [Waves, Users, Heart, Compass, TreePalm, Sun];
+const areas = [
+  { name: "Northern coast" as const, intro: "From the northernmost Tzuk beaches to Hilton, these stretches are more spread out. Some work best as a dedicated beach trip, while those closer to the port are easier to combine with a walk." },
+  { name: "Central seafront" as const, intro: "If you're staying in the centre, these neighbouring beaches are usually the simplest options. I suggest picking the access point closest to your hotel instead of spending time moving between nearly identical stretches." },
+  { name: "Southern coast and Jaffa" as const, intro: "South of the central hotel strip, the beaches and parks lead towards Jaffa. Choose a supervised beach for swimming, then make time for the waterfront and neighbourhoods nearby." },
+];
+const related = [
+  { title: "Attractions in Tel Aviv", to: "/travel-blog/attractions-in-tel-aviv/" as const, note: "Ideas for sightseeing beyond the sand", image: rothschildPhoto, alt: "Rothschild Boulevard in Tel Aviv" },
+  { title: "Explore Old Jaffa", to: "/attractions/jaffa/" as const, note: "Old streets, the port and coastal views", image: jaffaPhoto, alt: "Historic streets in Old Jaffa" },
+  { title: "Getting around Tel Aviv", to: "/travel-blog/getting-around-tel-aviv/" as const, note: "Buses, the light rail, taxis and walking", image: dizengoffPhoto, alt: "A street in central Tel Aviv" },
+  { title: "Museums in Tel Aviv", to: "/travel-blog/museums-in-tel-aviv/" as const, note: "Art, history and a good rainy-day alternative", image: museumPhoto, alt: "Tel Aviv museum architecture" },
+  { title: "Where to stay in Tel Aviv", to: "/travel-blog/where-to-stay-in-tel-aviv/" as const, note: "Compare areas near the coast and city centre", image: beachfrontPhoto, alt: "Hotels along Tel Aviv's waterfront" },
+  { title: "Day trips from Tel Aviv", to: "/travel-blog/day-trips-from-tel-aviv/" as const, note: "Take a different outing beyond the city", image: roadPhoto, alt: "A road trip in Israel" },
+];
+
+const faqs = [
+  { q: "Which Tel Aviv beach is best for a first visit?", a: "I would start with Gordon or Frishman if you are staying centrally. Both are easy to fit around a promenade walk, a meal or a short city outing. Bograshov and Jerusalem Beach can be just as convenient depending on your hotel." },
+  { q: "Which beach is most practical for families with children?", a: "Metzitzim is a good starting point because of its nearby facilities and the port area. No beach is automatically safe for children: choose a supervised swimming zone, follow the flags and keep children within reach." },
+  { q: "Can I swim at Tel Aviv's beaches all year?", a: "You can visit the waterfront throughout the year, but swimming depends on an operating lifeguard station, the permitted bathing zone and daily sea conditions. Some stations may operate beyond the main bathing season. Check municipal updates and the signs before entering the sea." },
+  { q: "Are Tel Aviv beaches free?", a: "Access to the municipal public beaches is free. Sunbeds, chairs, umbrellas, parking or nearby businesses may charge separately. Check the official municipal hire-price information before renting equipment." },
+  { q: "Where are dogs allowed off the leash?", a: "The municipality lists signed off-leash stretches at Hilton (north of the declared beach), Tel Baruch (south of the kite-surfing area), Charles Clore (south of the declared beach) and Givat Aliya (south of the declared beach). Follow local signs; these are not general permissions to bring dogs into supervised bathing zones." },
+  { q: "Are the beaches accessible for wheelchair users?", a: "Several beaches have accessible paths, shade, toilets and assisted water-access chairs, but access varies by specific route and conditions. North Tzuk has a documented slope limitation. Check municipal accessibility details and request current assistance information before travelling." },
+];
+
+const detailLink = "inline-flex items-center gap-1.5 font-semibold text-primary underline-offset-4 hover:underline focus-visible:outline-2 focus-visible:outline-primary";
+function OfficialLink({ href, children }: { href: string; children: React.ReactNode }) {
+  return <a href={href} target="_blank" rel="noopener noreferrer" className={detailLink}>{children}<ExternalLink aria-hidden="true" className="h-3.5 w-3.5" /><span className="sr-only"> (opens in a new tab)</span></a>;
+}
+function BeachMapLink({ beach }: { beach: TelAvivBeach }) {
+  const url = "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(beach.name + ", Tel Aviv-Yafo, Israel");
+  return <a href={url} target="_blank" rel="noopener noreferrer" className={detailLink}>
+    <MapPin aria-hidden="true" className="h-4 w-4" />View location on Google Maps<ArrowUpRight aria-hidden="true" className="h-3.5 w-3.5" />
+    <span className="sr-only"> (opens in a new tab)</span>
+  </a>;
+}
+function Heading({ id, title, intro }: { id: string; title: string; intro?: string }) {
+  return <div className="mb-5">
+    <h2 id={id + "-h"} className="text-2xl font-bold tracking-tight sm:text-3xl">{title}</h2>
+    {intro && <p className="mt-2 max-w-3xl leading-relaxed text-muted-foreground">{intro}</p>}
+  </div>;
+}
+function Tip({ children }: { children: React.ReactNode }) {
+  return <aside className="flex gap-3 rounded-xl border border-amber-300/50 bg-amber-50/80 p-4 text-sm leading-relaxed text-slate-800">
+    <Lightbulb aria-hidden="true" className="mt-0.5 h-5 w-5 shrink-0 text-amber-600" />
+    <div>{children}</div>
+  </aside>;
+}
+function BeachCard({ beach }: { beach: TelAvivBeach }) {
+  return <article id={"beach-" + beach.id} className="flex scroll-mt-28 flex-col rounded-2xl border bg-card p-4 shadow-sm sm:p-5">
+    <div className="flex items-start justify-between gap-3">
+      <div>
+        <p className="text-xs font-semibold uppercase tracking-wide text-primary">{beach.bestFor}</p>
+        <h4 className="mt-1 text-xl font-bold">{beach.name}</h4>
+      </div>
+      <Waves aria-hidden="true" className="h-5 w-5 shrink-0 text-primary/50" />
+    </div>
+    <p className="mt-3 text-sm leading-relaxed">{beach.summary}</p>
+    <p className="mt-3 text-sm leading-relaxed text-muted-foreground"><strong className="text-foreground">Getting there:</strong> {beach.access}</p>
+    <p className="mt-3 text-sm leading-relaxed"><strong className="text-primary">My tip:</strong> {beach.tip}</p>
+    <div className="mt-auto flex flex-wrap items-center gap-x-5 gap-y-2 border-t pt-4 text-xs">
+      <BeachMapLink beach={beach} />
+      {beach.official && <OfficialLink href={beach.official}>Official beach information</OfficialLink>}
+    </div>
+  </article>;
+}
+
+const beachMapUrl = "/maps/tel-aviv-beaches.html?marker=32.085,34.766&bbox=34.732,32.027,34.805,32.155&name=Tel%20Aviv%20beaches&waypoints=" + encodeURIComponent(JSON.stringify(beachMapPoints));
+
+export function TelAvivBeachesGuide() {
+  return <main className="mx-auto max-w-5xl px-4 pb-10">
+    <article>
+      <header className="pt-6">
+        <Breadcrumbs items={[{ name: "Home", to: "/" }, { name: "Travel guides", to: "/travel-blog/" }, { name: "Beaches in Tel Aviv", to: "/travel-blog/beaches-in-tel-aviv/" }]} />
+        <GuideHeroLayout image={<GuideHeroMedia src={heroPhoto} alt="The Mediterranean shoreline and beachfront in Tel Aviv" />}>
+          <p className="text-xs font-semibold uppercase tracking-[0.16em] text-primary">Tel Aviv & Jaffa · Beaches and seaside</p>
+          <h1 className="guide-page-title mt-2">The Best Beaches in Tel Aviv</h1>
+          <p data-guide-intro className="mt-4 max-w-3xl text-lg leading-relaxed">From the lively city-centre beaches to the quieter northern shoreline and the coast around Jaffa, my guide will help you choose where to swim, relax and explore the waterfront.</p>
+          <PageUpdated date={updatedAt} />
+        </GuideHeroLayout>
+        <AuthorCard />
+      </header>
+
+      <section aria-label="My quick beach recommendation" className="mt-8 rounded-xl border border-primary/20 bg-secondary/40 p-5 sm:p-6">
+        <h2 className="text-xl font-bold">Where I'd start</h2>
+        <p className="mt-2 leading-relaxed">For a first visit, I'd choose <a className={detailLink} href="#beach-gordon">Gordon</a> or <a className={detailLink} href="#beach-frishman">Frishman</a> for their central location, <a className={detailLink} href="#beach-metzitzim">Metzitzim</a> for a family day near the port, or <a className={detailLink} href="#beach-charles-clore">Charles Clore</a> if you're combining the seaside with Jaffa. Tel Aviv–Yafo has 13 municipally listed bathing beaches, but the best choice depends on where you're staying and what you want to do.</p>
+      </section>
+
+      <OnThisPage sections={headings} />
+
+      <section id="choose" aria-labelledby="choose-h" className="mt-10 scroll-mt-24">
+        <Heading id="choose" title="Which Tel Aviv beach should you choose?" intro="Start with the experience you want. These six picks link to fuller descriptions and practical information below." />
+        <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+          {beachTopPicks.map((pick, index) => {
+            const Icon = pickIcons[index]!;
+            const beach = telAvivBeaches.find(item => item.id === pick.id)!;
+            return <a key={pick.id} href={"#beach-" + pick.id} className="group flex min-h-[144px] flex-col rounded-xl border bg-card p-4 transition-colors hover:border-primary/50 hover:bg-secondary/25 focus-visible:outline-2 focus-visible:outline-primary">
+              <div className="flex items-center gap-2"><Icon aria-hidden="true" className="h-5 w-5 text-primary" /><strong className="text-sm">{pick.label}</strong></div>
+              <p className="mt-1 font-semibold text-primary">{beach.name}</p>
+              <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{pick.note}</p>
+              <span className="mt-auto inline-flex items-center gap-1 pt-3 text-xs font-semibold text-primary">Explore this beach <ArrowUpRight aria-hidden="true" className="h-3.5 w-3.5" /></span>
+            </a>;
+          })}
+        </div>
+      </section>
+
+      <section id="compare" aria-labelledby="compare-h" className="mt-12 scroll-mt-24">
+        <Heading id="compare" title="Tel Aviv beaches at a glance" intro="Compare the municipality's 13 listed beaches from north to south. The table describes their general appeal, not live bathing status." />
+        <div role="region" tabIndex={0} aria-label="Thirteen Tel Aviv beaches compared" className="overflow-x-auto rounded-xl border bg-card focus-visible:outline-2 focus-visible:outline-primary">
+          <table className="w-full min-w-[680px] border-collapse text-left text-sm">
+            <caption className="sr-only">Thirteen municipal Tel Aviv beaches by area, main appeal and access</caption>
+            <thead className="bg-secondary/60"><tr><th scope="col" className="sticky left-0 z-10 border-b bg-secondary px-3 py-3 font-semibold">Beach</th><th scope="col" className="border-b px-3 py-3 font-semibold">Area</th><th scope="col" className="border-b px-3 py-3 font-semibold">Best for</th><th scope="col" className="border-b px-3 py-3 font-semibold">Getting there</th></tr></thead>
+            <tbody>{telAvivBeaches.map(beach => <tr key={beach.id} className="border-b last:border-0">
+              <th scope="row" className="sticky left-0 z-10 w-[170px] min-w-[155px] bg-card px-3 py-3 font-semibold"><a href={"#beach-" + beach.id} className="text-primary hover:underline">{beach.name}</a></th>
+              <td className="px-3 py-3">{beach.area}</td><td className="px-3 py-3">{beach.bestFor}</td><td className="px-3 py-3">{beach.access}</td>
+            </tr>)}</tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="beach-map" aria-labelledby="beach-map-h" className="mt-12 scroll-mt-24">
+        <Heading id="beach-map" title="Map of Tel Aviv's beaches" intro="The map follows the coastline from North Tzuk to Givat Aliya. Use the individual Google Maps links below for directions to your chosen entrance." />
+        <div className="overflow-hidden rounded-xl border bg-card">
+          <iframe title="Interactive map of Tel Aviv's thirteen listed beaches" loading="lazy" referrerPolicy="strict-origin-when-cross-origin" src={beachMapUrl} width={900} height={440} className="h-[330px] w-full border-0 sm:h-[440px]" />
+          <div className="flex flex-wrap items-center justify-between gap-3 p-3 text-xs text-muted-foreground">
+            <span>Map pins indicate approximate beach locations, not lifeguard towers or swimming boundaries. Map data © OpenStreetMap contributors.</span>
+            <OfficialLink href="https://www.google.com/maps/search/?api=1&query=Tel+Aviv+beaches">Open in Google Maps</OfficialLink>
+          </div>
+        </div>
+      </section>
+
+      <section id="beaches" aria-labelledby="beaches-h" className="mt-12 scroll-mt-24">
+        <Heading id="beaches" title="My guide to Tel Aviv's beaches" intro="Here is what distinguishes each beach, with a practical note to help you make the most of your visit." />
+        {areas.map((area, index) => <section key={area.name} aria-label={area.name} className="mt-9">
+          <h3 className="text-xl font-bold sm:text-2xl">{area.name}</h3>
+          <p className="mt-2 max-w-3xl leading-relaxed text-muted-foreground">{area.intro}</p>
+          <div className="mt-5 grid items-stretch gap-4 md:grid-cols-2">{telAvivBeaches.filter(beach => beach.area === area.name).map(beach => <BeachCard key={beach.id} beach={beach} />)}</div>
+          {index === 0 && <div className="mt-5"><Tip>The northern beaches are not equally convenient from a central hotel. I recommend checking the exact entrance and how you'll get back, especially when visiting North or South Tzuk.</Tip></div>}
+          {index === 1 && <div className="mt-5"><Tip>For central Tel Aviv, a short walk along the promenade is often the best way to choose a spot. There's little reason to cross town if a comparable beach is already near your accommodation.</Tip></div>}
+        </section>)}
+      </section>
+
+      <section id="season" aria-labelledby="season-h" className="mt-12 scroll-mt-24">
+        <Heading id="season" title="When is the best time to visit?" />
+        <p className="leading-relaxed">I like the coast in spring and autumn for comfortable walks and less intense midday heat. Summer is the busiest season for sunbathing and beach life; arrive earlier, bring water and protect yourself from the sun. In winter, the promenade can still be lovely, but rain, wind and rough seas can change your plans.</p>
+        <p className="mt-3 leading-relaxed">The city's official bathing season does not tell the whole story: some lifeguard stations can operate beyond it. Check <OfficialLink href={officialTelAvivBeaches}>current municipal beach and lifeguard information</OfficialLink> on the day you plan to swim, rather than relying on a fixed annual closing date.</p>
+      </section>
+
+      <section id="practical" aria-labelledby="practical-h" className="mt-12 scroll-mt-24">
+        <Heading id="practical" title="My practical beach tips" intro="These are the details I'd check before choosing a beach, particularly when travelling with children or anyone who needs accessible facilities." />
+        <div className="grid gap-4 md:grid-cols-2">
+          <div className="rounded-xl border bg-card p-5"><ShieldCheck aria-hidden="true" className="mb-2 h-5 w-5 text-primary" /><h3 className="font-bold">Swimming and lifeguards</h3><p className="mt-2 text-sm leading-relaxed">Swim only in a declared, marked zone with an active lifeguard on duty. Follow the flags and local instructions; breakwaters, calm-looking water or other swimmers are not proof that conditions are safe.</p></div>
+          <div className="rounded-xl border bg-card p-5"><Umbrella aria-hidden="true" className="mb-2 h-5 w-5 text-primary" /><h3 className="font-bold">Facilities and costs</h3><p className="mt-2 text-sm leading-relaxed">Public beach entry is free. Facilities vary and paid services can include sunbeds, chairs, umbrellas and nearby parking. See the <OfficialLink href={officialBeachPrices}>municipal price and beach rules</OfficialLink> before renting.</p></div>
+          <div className="rounded-xl border bg-card p-5"><Accessibility aria-hidden="true" className="mb-2 h-5 w-5 text-primary" /><h3 className="font-bold">Accessible visits</h3><p className="mt-2 text-sm leading-relaxed">The city lists accessible pathways, shade, toilets and chairs for water access at many bathing beaches. Check the <OfficialLink href={officialBeachFacilities}>facilities and accessibility guide</OfficialLink> for the exact location; the North Tzuk approach has a documented slope limitation.</p></div>
+          <div className="rounded-xl border bg-card p-5"><Dog aria-hidden="true" className="mb-2 h-5 w-5 text-primary" /><h3 className="font-bold">Bringing a dog</h3><p className="mt-2 text-sm leading-relaxed">Off-leash sections are signed at Hilton, Tel Baruch, Charles Clore and Givat Aliya, separate from the supervised bathing areas. Follow signs and keep dogs out of restricted stretches.</p></div>
+          <div className="rounded-xl border bg-card p-5"><Waves aria-hidden="true" className="mb-2 h-5 w-5 text-primary" /><h3 className="font-bold">Surfing and other water sports</h3><p className="mt-2 text-sm leading-relaxed">Hilton, Charles Clore and some northern areas have water-sport zones. Use the designated area for the activity you choose and do not assume surfing is permitted within a bathing zone. The nearby Aviv shoreline is often described as a sport area, not a separate declared swimming beach.</p></div>
+          <div className="rounded-xl border bg-card p-5"><CalendarDays aria-hidden="true" className="mb-2 h-5 w-5 text-primary" /><h3 className="font-bold">Religious beach and special dates</h3><p className="mt-2 text-sm leading-relaxed">Nordau has separate men's and women's bathing days during the season. <Link to="/travel-blog/calendar-of-events/" className="font-semibold text-primary hover:underline">Jewish holidays and holiday eves</Link> can change services and transit; check current official notices.</p></div>
+        </div>
+        <div className="mt-5"><Tip>If you need step-free access, a water-access chair or family facilities, choose your beach by its specific services rather than a broad “accessible” or “family-friendly” label. Call ahead where necessary.</Tip></div>
+      </section>
+
+      <section id="transport" aria-labelledby="transport-h" className="mt-12 scroll-mt-24">
+        <Heading id="transport" title="How to get to Tel Aviv's beaches" />
+        <div className="grid gap-4 md:grid-cols-3">
+          <div className="rounded-xl border bg-card p-5"><Compass aria-hidden="true" className="mb-2 h-5 w-5 text-primary" /><h3 className="font-semibold">Walk from central hotels</h3><p className="mt-2 text-sm leading-relaxed">Gordon, Frishman, Bograshov and Jerusalem beaches are convenient from much of central Tel Aviv. Check the street leading to the correct beach entrance.</p></div>
+          <div className="rounded-xl border bg-card p-5"><Bus aria-hidden="true" className="mb-2 h-5 w-5 text-primary" /><h3 className="font-semibold">Bus, light rail or taxi</h3><p className="mt-2 text-sm leading-relaxed">Buses and taxis can reach more of the beachfront; the Red Line light rail does not run directly along the beach. Compare the last walk and current schedules.</p></div>
+          <div className="rounded-xl border bg-card p-5"><MapPin aria-hidden="true" className="mb-2 h-5 w-5 text-primary" /><h3 className="font-semibold">North and Jaffa</h3><p className="mt-2 text-sm leading-relaxed">Tel Baruch and the Tzuk beaches are farther north, while Givat Aliya is south of Old Jaffa. Plan your return transport as well as the outward journey.</p></div>
+        </div>
+        <p className="mt-4 leading-relaxed">For routes, tickets and Shabbat travel, see my <Link to="/travel-blog/getting-around-tel-aviv/" className="font-semibold text-primary hover:underline">getting around Tel Aviv guide</Link>. Arriving from the airport? Compare options in <Link to="/travel-blog/how-to-get-from-ben-gurion-airport-to-tel-aviv/" className="font-semibold text-primary hover:underline">my Ben Gurion Airport to Tel Aviv guide</Link>.</p>
+      </section>
+
+      <section id="beyond" aria-labelledby="beyond-h" className="mt-12 scroll-mt-24">
+        <Heading id="beyond" title="Beaches beyond Tel Aviv" intro="If you have more time, these are different coastal outings rather than extra stops on the central Tel Aviv promenade." />
+        <div className="grid gap-4 md:grid-cols-3">
+          <div className="rounded-xl border bg-card p-5"><h3 className="text-lg font-semibold">Sidna Ali, Herzliya</h3><p className="mt-2 text-sm leading-relaxed">A northern shore with cliffs and a different landscape from Tel Aviv. Check the specific access route, safe bathing zone and any local restrictions.</p><p className="mt-4 text-xs"><OfficialLink href="https://www.google.com/maps/search/?api=1&query=Sidna+Ali+Beach+Herzliya">View location</OfficialLink></p></div>
+          <div className="rounded-xl border bg-card p-5"><h3 className="text-lg font-semibold">Ga'ash Beach</h3><p className="mt-2 text-sm leading-relaxed">A more natural coastal setting, where cliff edges and access conditions deserve extra care. Never treat an unguarded stretch as a swimming beach.</p><p className="mt-4 text-xs"><OfficialLink href="https://www.google.com/maps/search/?api=1&query=Gaash+Beach+Israel">View location</OfficialLink></p></div>
+          <div className="rounded-xl border bg-card p-5"><h3 className="text-lg font-semibold">Palmahim Beach</h3><p className="mt-2 text-sm leading-relaxed">A protected natural shoreline south of the city. Pedestrian access is free; vehicles may incur entry or parking charges, and swimming arrangements follow park notices.</p><p className="mt-4 text-xs"><OfficialLink href="https://en.parks.org.il/reserve-park/palmahim-beach-national-park/">Official park information</OfficialLink></p></div>
+        </div>
+        <p className="mt-3 text-sm text-muted-foreground">For a longer coastal sightseeing day, I would plan separately around <Link to="/attractions/caesarea/" className="font-semibold text-primary hover:underline">Caesarea</Link> rather than treat its beaches as a nearby Tel Aviv stop.</p>
+      </section>
+
+      <FaqList faqs={faqs} />
+
+      <section id="explore-more" aria-labelledby="explore-more-h" className="mt-12 scroll-mt-24">
+        <Heading id="explore-more" title="Explore more of Tel Aviv" intro="Continue planning with my city, transport and sightseeing guides." />
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {related.map(item => <Link key={item.to} to={item.to} className="group flex h-full flex-col overflow-hidden rounded-xl border bg-card transition-colors hover:border-primary/40 hover:bg-secondary/20">
+            <img src={item.image} alt={item.alt} width={640} height={360} loading="lazy" decoding="async" className="aspect-[16/9] w-full object-cover" />
+            <span className="flex flex-1 flex-col p-4"><strong>{item.title}</strong><span className="mt-2 text-sm leading-relaxed text-muted-foreground">{item.note}</span><span className="mt-auto inline-flex items-center gap-1 pt-4 text-sm font-semibold text-primary">Explore my guide <ArrowUpRight aria-hidden="true" className="h-4 w-4" /></span></span>
+          </Link>)}
+        </div>
+      </section>
+      <HomeContactForm guide={neighborhoodTripContactCopy("Tel Aviv")} />
+      <SourcesDisclosure>
+        <p className="mb-3 text-sm leading-relaxed">I use the city's official beach descriptions for the municipal beach list, safety, accessibility and separate-bathing rules, and the Israel Nature and Parks Authority for Palmahim. Lifeguard operation, flags, sea conditions, facilities and park fees can change; confirm the details for your visit.</p>
+        <ul className="grid gap-x-5 gap-y-2 text-sm sm:grid-cols-2">
+          <li><OfficialLink href={officialTelAvivBeaches}>Tel Aviv–Yafo Municipality — beaches and lifeguards</OfficialLink></li>
+          <li><OfficialLink href={officialBeachFacilities}>Municipality — facilities, accessibility and dog areas</OfficialLink></li>
+          <li><OfficialLink href={officialBeachPrices}>Municipality — beach rules and hire prices</OfficialLink></li>
+          <li><OfficialLink href="https://www.tel-aviv.gov.il/Visitors/Beaches/Pages/Nordau.aspx">Nordau separate beach — official schedule</OfficialLink></li>
+          <li><OfficialLink href="https://www.tel-aviv.gov.il/Visitors/Beaches/Pages/Charles.aspx">Charles Clore — beach facilities</OfficialLink></li>
+          <li><OfficialLink href="https://www.tel-aviv.gov.il/Visitors/Beaches/Pages/Hatzuk.aspx">North Tzuk — accessibility and facilities</OfficialLink></li>
+          <li><OfficialLink href="https://en.parks.org.il/reserve-park/palmahim-beach-national-park/">Palmahim Beach National Park</OfficialLink></li>
+        </ul>
+      </SourcesDisclosure>
+    </article>
+  </main>;
+}
