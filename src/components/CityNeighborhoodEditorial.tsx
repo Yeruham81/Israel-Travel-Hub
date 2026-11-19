@@ -294,7 +294,7 @@ export function CityNeighborhoodEditorial({ guide }: { guide: CityStayGuide }) {
             </aside>}
             <div className="mt-6 flex justify-center">
               <Link to={area.path as LinkProps["to"]} className="btn btn-primary inline-flex min-h-11 items-center justify-center gap-2 rounded-lg px-5 py-3 text-center text-sm font-semibold">
-                {cityId === "jerusalem" ? "Browse more hotels in " : "Explore more hotels in "}{area.shortName} <ArrowRight className="h-4 w-4 shrink-0" aria-hidden />
+                Browse more hotels in {area.shortName} <ArrowRight className="h-4 w-4 shrink-0" aria-hidden />
               </Link>
             </div>
           </section>;
@@ -341,7 +341,7 @@ export function CityNeighborhoodEditorial({ guide }: { guide: CityStayGuide }) {
             introduction: "Not sure which part of Tel Aviv would suit your plans? Tell me your dates, interests and whether the beach or city neighbourhoods matter most to you. I'll be happy to offer practical advice." }} />
       <SourceList
         ids={cityId === "jerusalem" ? [...guide.sourceIds, ...jerusalemStaySourceIds] : guide.sourceIds}
-        {...(cityId === "jerusalem" ? { intro: "Transport and access information for planning your stay." } : {})}
+        intro={cityId === "jerusalem" ? "Transport and access information for planning your stay." : "Neighbourhood and accommodation information for planning your stay."}
       />
     </article>
   </main>;
