@@ -433,7 +433,7 @@ export const cityCultureGuides = {
     faqs: [
       { q: "What are the best museums for a first visit?", a: "Tel Aviv Museum of Art for art, ANU for Jewish culture and Steinhardt for natural history are good starting points. Around Bialik Square, several smaller museums are within walking distance." },
       { q: "Can I visit multiple museums in one day?", a: "Yes, particularly around Bialik Square. In Ramat Aviv choose one major museum first and check timings before adding a second." },
-      { q: "Are some museums temporarily closed?", a: "Independence Hall is closed until further notice for restoration, MUZA's planetarium is temporarily closed and guided walks at Bauhaus Center are suspended. Their museum entries stay in the guide for future visits." },
+      { q: "Are some museums temporarily closed?", a: "Independence Hall is closed until further notice for restoration, and MUZA's planetarium is closed as of November 2026. Check the Bauhaus Center's programme directly to confirm guided or self-guided tours are running before your visit." },
     ],
     related: ["telAvivBeaches", "food", "calendar", "haifaMuseums"],
     services: [
