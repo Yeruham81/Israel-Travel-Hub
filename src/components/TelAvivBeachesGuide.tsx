@@ -1,4 +1,5 @@
 import { Link } from "@tanstack/react-router";
+import { useEffect, useRef, useState } from "react";
 import { ArrowUpRight, ExternalLink, Lightbulb, MapPin, Waves, Users, Heart, Compass, TreePalm, Sun, ShieldCheck, Bus, Accessibility, Dog, Umbrella, CalendarDays } from "lucide-react";
 import { Breadcrumbs, FaqList, OnThisPage } from "@/components/Guide";
 import { AuthorCard } from "@/components/AuthorCard";
@@ -7,7 +8,7 @@ import { PageUpdated } from "@/components/PageUpdated";
 import { SourcesDisclosure } from "@/components/SourcesDisclosure";
 import { HomeContactForm } from "@/components/HomeContactForm";
 import { neighborhoodTripContactCopy } from "@/lib/guide-contact";
-import { beachMapPoints, beachTopPicks, officialTelAvivBeaches, officialBeachFacilities, officialBeachPrices, telAvivBeaches, type TelAvivBeach } from "@/data/telAvivBeaches";
+import { beachMapPoints, beachTopPicks, officialTelAvivBeaches, officialTelAvivBeachesEnglish, officialBeachFacilities, officialBeachPrices, telAvivBeaches, type TelAvivBeach } from "@/data/telAvivBeaches";
 
 import heroPhoto from "@/assets/guides/2026-10/beaches-in-tel-aviv.webp";
 import jaffaPhoto from "@/assets/tel-aviv/jaffa.webp";
@@ -79,21 +80,52 @@ function Tip({ children }: { children: React.ReactNode }) {
     <div>{children}</div>
   </aside>;
 }
-function BeachCard({ beach }: { beach: TelAvivBeach }) {
-  return <article id={"beach-" + beach.id} className="flex scroll-mt-28 flex-col rounded-2xl border bg-card p-4 shadow-sm sm:p-5">
-    <div className="flex items-start justify-between gap-3">
-      <div>
-        <p className="text-xs font-semibold uppercase tracking-wide text-primary">{beach.bestFor}</p>
-        <h4 className="mt-1 text-xl font-bold">{beach.name}</h4>
-      </div>
-      <Waves aria-hidden="true" className="h-5 w-5 shrink-0 text-primary/50" />
+/** Photograph positions are part of the layout now; exact local assets can be attached later. */
+function BeachPhotoSlot({ beach, kind = "detail", compact = false }: {
+  beach: TelAvivBeach; kind?: "pick" | "detail"; compact?: boolean;
+}) {
+  const photo = kind === "pick" ? beach.pickPhoto : beach.detailPhoto;
+  const shape = compact ? "aspect-[4/3] w-24 shrink-0 rounded-lg sm:w-28" : "aspect-[16/9] w-full";
+  return photo ? (
+    <img src={photo.src} alt={photo.alt} loading="lazy" decoding="async"
+      width={compact ? 280 : 880} height={compact ? 210 : 495}
+      className={shape + " object-cover"} />
+  ) : (
+    <div aria-hidden="true" data-beach-photo-slot={kind + ":" + beach.id}
+      className={shape + " flex items-center justify-center bg-secondary/50 text-primary/30"}>
+      <Waves className={compact ? "h-7 w-7" : "h-12 w-12"} strokeWidth={1.25} />
     </div>
-    <p className="mt-3 text-sm leading-relaxed">{beach.summary}</p>
-    <p className="mt-3 text-sm leading-relaxed text-muted-foreground"><strong className="text-foreground">Getting there:</strong> {beach.access}</p>
-    <p className="mt-3 text-sm leading-relaxed"><strong className="text-primary">My tip:</strong> {beach.tip}</p>
-    <div className="mt-auto flex flex-wrap items-center gap-x-5 gap-y-2 border-t pt-4 text-xs">
+  );
+}
+
+function BeachCard({ beach, compact = false }: { beach: TelAvivBeach; compact?: boolean }) {
+  return <article id={"beach-" + beach.id} className="flex scroll-mt-28 flex-col overflow-hidden rounded-2xl border bg-card shadow-sm">
+    {compact ? (
+      <div className="flex gap-3 p-4">
+        <BeachPhotoSlot beach={beach} compact />
+        <div className="min-w-0 flex-1">
+          <h4 className="text-lg font-bold leading-tight">{beach.name}</h4>
+          <p className="mt-1 text-xs font-medium text-primary">{beach.bestFor}</p>
+          <p className="mt-2 text-sm leading-relaxed">{beach.summary}</p>
+          <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{beach.tip}</p>
+          <p className="mt-2 text-xs text-muted-foreground">{beach.highlights} · {beach.accessShort}</p>
+        </div>
+      </div>
+    ) : (
+      <>
+        <BeachPhotoSlot beach={beach} />
+        <div className="flex flex-1 flex-col p-4 sm:p-5">
+          <p className="text-xs font-semibold uppercase tracking-wide text-primary">{beach.bestFor}</p>
+          <h4 className="mt-1 text-xl font-bold">{beach.name}</h4>
+          <p className="mt-3 leading-relaxed">{beach.summary}</p>
+          <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{beach.tip}</p>
+          <p className="mt-3 rounded-lg bg-secondary/40 px-3 py-2 text-xs font-medium">{beach.highlights} · {beach.accessShort}</p>
+        </div>
+      </>
+    )}
+    <div className="mt-auto flex flex-wrap items-center gap-x-4 gap-y-2 border-t px-4 py-3 text-xs sm:px-5">
       <BeachMapLink beach={beach} />
-      {beach.official && <OfficialLink href={beach.official}>Official beach information</OfficialLink>}
+      {beach.official && <OfficialLink href={beach.official}>City beach details</OfficialLink>}
     </div>
   </article>;
 }
@@ -123,15 +155,19 @@ export function TelAvivBeachesGuide() {
 
       <section id="choose" aria-labelledby="choose-h" className="mt-10 scroll-mt-24">
         <Heading id="choose" title="Which Tel Aviv beach should you choose?" intro="Start with the experience you want. These six picks link to fuller descriptions and practical information below." />
-        <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="grid gap-4 grid-cols-2 lg:grid-cols-3">
           {beachTopPicks.map((pick, index) => {
             const Icon = pickIcons[index]!;
             const beach = telAvivBeaches.find(item => item.id === pick.id)!;
-            return <a key={pick.id} href={"#beach-" + pick.id} className="group flex min-h-[144px] flex-col rounded-xl border bg-card p-4 transition-colors hover:border-primary/50 hover:bg-secondary/25 focus-visible:outline-2 focus-visible:outline-primary">
-              <div className="flex items-center gap-2"><Icon aria-hidden="true" className="h-5 w-5 text-primary" /><strong className="text-sm">{pick.label}</strong></div>
-              <p className="mt-1 font-semibold text-primary">{beach.name}</p>
-              <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{pick.note}</p>
-              <span className="mt-auto inline-flex items-center gap-1 pt-3 text-xs font-semibold text-primary">Explore this beach <ArrowUpRight aria-hidden="true" className="h-3.5 w-3.5" /></span>
+            return <a key={pick.id} href={"#beach-" + pick.id}
+              className="group flex min-w-0 flex-col overflow-hidden rounded-xl border bg-card transition-colors hover:border-primary/40 hover:bg-secondary/20 focus-visible:outline-2 focus-visible:outline-primary">
+              <BeachPhotoSlot beach={beach} kind="pick" />
+              <span className="flex flex-1 flex-col p-3 sm:p-4">
+                <span className="flex items-center gap-2 text-xs font-semibold text-primary"><Icon aria-hidden="true" className="h-4 w-4 shrink-0" />{pick.label}</span>
+                <strong className="mt-2 text-base leading-snug">{beach.name}</strong>
+                <span className="mt-1 text-sm leading-relaxed text-muted-foreground">{pick.note}</span>
+                <span className="mt-auto inline-flex items-center gap-1 pt-3 text-xs font-semibold text-primary">Read about this beach <ArrowUpRight aria-hidden="true" className="h-3.5 w-3.5" /></span>
+              </span>
             </a>;
           })}
         </div>
@@ -139,15 +175,29 @@ export function TelAvivBeachesGuide() {
 
       <section id="compare" aria-labelledby="compare-h" className="mt-12 scroll-mt-24">
         <Heading id="compare" title="Tel Aviv beaches at a glance" intro="Compare the municipality's 13 listed beaches from north to south. The table describes their general appeal, not live bathing status." />
-        <div role="region" tabIndex={0} aria-label="Thirteen Tel Aviv beaches compared" className="overflow-x-auto rounded-xl border bg-card focus-visible:outline-2 focus-visible:outline-primary">
-          <table className="w-full min-w-[680px] border-collapse text-left text-sm">
-            <caption className="sr-only">Thirteen municipal Tel Aviv beaches by area, main appeal and access</caption>
-            <thead className="bg-secondary/60"><tr><th scope="col" className="sticky left-0 z-10 border-b bg-secondary px-3 py-3 font-semibold">Beach</th><th scope="col" className="border-b px-3 py-3 font-semibold">Area</th><th scope="col" className="border-b px-3 py-3 font-semibold">Best for</th><th scope="col" className="border-b px-3 py-3 font-semibold">Getting there</th></tr></thead>
+        <div role="region" tabIndex={0} aria-label="Thirteen Tel Aviv beaches compared" className="overflow-hidden rounded-xl border bg-card focus-visible:outline-2 focus-visible:outline-primary">
+          <table className="hidden w-full table-fixed border-collapse text-left text-sm md:table">
+            <caption className="sr-only">Tel Aviv municipal beaches: location, reason to visit and facilities</caption>
+            <thead className="bg-secondary/60"><tr>
+              <th scope="col" className="w-[24%] border-b px-3 py-3 font-semibold">Beach</th>
+              <th scope="col" className="w-[21%] border-b px-3 py-3 font-semibold">Area</th>
+              <th scope="col" className="w-[24%] border-b px-3 py-3 font-semibold">Best for</th>
+              <th scope="col" className="w-[31%] border-b px-3 py-3 font-semibold">Facilities & access</th>
+            </tr></thead>
             <tbody>{telAvivBeaches.map(beach => <tr key={beach.id} className="border-b last:border-0">
-              <th scope="row" className="sticky left-0 z-10 w-[170px] min-w-[155px] bg-card px-3 py-3 font-semibold"><a href={"#beach-" + beach.id} className="text-primary hover:underline">{beach.name}</a></th>
-              <td className="px-3 py-3">{beach.area}</td><td className="px-3 py-3">{beach.bestFor}</td><td className="px-3 py-3">{beach.access}</td>
+              <th scope="row" className="px-3 py-3 font-semibold"><a href={"#beach-" + beach.id} className="text-primary hover:underline">{beach.name}</a></th>
+              <td className="px-3 py-3">{beach.area}</td>
+              <td className="px-3 py-3">{beach.bestFor}</td>
+              <td className="px-3 py-3">{beach.highlights}<span className="mt-1 block text-xs text-muted-foreground">{beach.accessShort}</span></td>
             </tr>)}</tbody>
           </table>
+          <ul className="divide-y md:hidden">
+            {telAvivBeaches.map(beach => <li key={beach.id} className="px-4 py-3">
+              <a href={"#beach-" + beach.id} className="font-semibold text-primary hover:underline">{beach.name}</a>
+              <p className="mt-1 text-sm">{beach.bestFor}</p>
+              <p className="mt-1 text-xs leading-relaxed text-muted-foreground">{beach.highlights} · {beach.accessShort}</p>
+            </li>)}
+          </ul>
         </div>
       </section>
 
