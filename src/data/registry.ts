@@ -1554,6 +1554,8 @@ export const affiliateConfig: Record<string, { trackingUrl: string } | undefined
   // The page+hotel SubID is added by hotelAffiliateUrl() at render time.
   "hotel-jlm-ibis-expedia": { trackingUrl: "https://expedia.tpm.li/nKcakttc" },
   "hotel-jlm-ibis-styles-expedia": { trackingUrl: "https://expedia.tpm.li/cfGgqry4" },
+  // Generated for the exact Paamonim Expedia property by the Travelpayouts links API (19 Nov 2026).
+  "hotel-jlm-paamonim-expedia": { trackingUrl: "https://expedia.tpk.lv/wdsf1D6t" },
   "hotel-jlm-david-citadel-expedia": { trackingUrl: "https://expedia.tpm.li/BvIrC40X" },
   "hotel-jlm-waldorf-expedia": { trackingUrl: "https://expedia.tpm.li/sYbVC6QM" },
   "hotel-jlm-hashimi-expedia": { trackingUrl: "https://expedia.tpm.li/WU93VyPL" },
