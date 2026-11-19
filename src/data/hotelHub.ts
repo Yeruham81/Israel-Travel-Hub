@@ -86,5 +86,5 @@ export const itineraryCards: ItineraryCard[] = [
 export const hotelHubFaqs = [
   { q: "Should I change hotels every night?", a: "Not usually. Choose a few well-positioned hotel bases and make day trips where practical; longer drives to northern or southern destinations may justify another overnight stay." },
   { q: "Which city is best for a first trip?", a: "Most first trips combine Jerusalem for history and Tel Aviv for the beach and city life. Open each city guide to compare neighborhoods before choosing a hotel." },
-  { q: "What should I check if I arrive on a Friday evening?", a: "Confirm late check-in, ask what meals are served that evening and plan a taxi or private transfer, because most public transport stops for Shabbat." },
+  { q: "Which hotel areas are best if I travel without a car?", a: "In Jerusalem, Downtown and locations close to the Jaffa Road light rail are convenient starting points. In Tel Aviv, look for central areas with good bus or light-rail connections. Haifa is hilly, so check the Carmelit and bus links as well as the walk back to your hotel. Choose the exact location around your sightseeing plans." },
 ];
