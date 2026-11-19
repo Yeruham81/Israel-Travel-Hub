@@ -320,7 +320,7 @@ export function HotelStyleEditorialGuide({ guide }: { guide: HotelStayDestinatio
       <section id="hotels" className="mt-14 scroll-mt-32" aria-labelledby="hotels-h">
         <p className="eyebrow">My selected places to stay</p>
         <h2 id="hotels-h" className="mt-2 text-3xl">Recommended hotels by travel style</h2>
-        <p className="mt-3 max-w-4xl leading-relaxed">I have selected 11 stays across five travel styles, from luxury resorts to simple accommodation near Ein Gedi. Hotel-card photographs are illustrative; the booking links show the rooms available for your dates.</p>
+        <p className="mt-3 max-w-4xl leading-relaxed">I have selected 11 stays across five travel styles, from luxury resorts to simple accommodation near Ein Gedi.</p>
         <div className="mt-6 divide-y border-t">
           {guide.groups.map(group => {
             const copy = groupCaptions[group.id];
