@@ -21,10 +21,11 @@ export function AccommodationCard({
     </span>
     <div className="flex min-w-0 flex-1 flex-col p-2.5 sm:p-4">
       <h3 className="text-sm font-semibold leading-snug sm:text-lg">{d.title}</h3>
-      <p className="mt-1.5 flex-1 text-xs leading-relaxed text-muted-foreground line-clamp-3 sm:line-clamp-none sm:text-sm">
-        {comingSoon
+      <p className="mt-1.5 flex-1 text-xs leading-relaxed text-muted-foreground sm:text-sm">
+        <span className="sm:hidden">{d.mobileText ?? d.text}</span>
+        <span className="hidden sm:inline">{comingSoon
           ? "Red Sea resorts, beach hotels and desert getaways. A dedicated Eilat hotel guide is coming soon."
-          : d.text}
+          : d.text}</span>
       </p>
       {comingSoon
         ? <span className="mt-3 text-xs font-semibold text-muted-foreground sm:text-sm">Coming soon</span>
