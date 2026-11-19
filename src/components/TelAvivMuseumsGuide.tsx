@@ -131,7 +131,7 @@ function MuseumMap() {
         <label htmlFor="museum-map-select" className="min-w-0 flex-1 text-sm font-semibold">Focus on a museum
           <select id="museum-map-select" value={selectedId} onChange={e => focus(e.target.value)} className="mt-2 min-h-11 w-full rounded-lg border bg-background px-3 py-2 text-sm font-normal focus-visible:outline-2 focus-visible:outline-primary">
             <option value="all">All museums — city overview</option>
-            {museumAreas.map(area => <optgroup key={area.id} label={area.name}>{museums.filter(museum => museum.area === area.id).map(museum => <option key={museum.id} value={museum.id}>{museum.name}{museum.id === "independence" ? " (closed)" : ""}</option>)}</optgroup>)}
+            {museumAreas.map(area => <optgroup key={area.id} label={area.name}>{museums.filter(museum => museum.area === area.id).map(museum => <option key={museum.id} value={museum.id}>{museums.findIndex(item => item.id === museum.id) + 1}. {museum.name}{museum.id === "independence" ? " (closed)" : ""}</option>)}</optgroup>)}
           </select>
         </label>
         <button type="button" disabled={selectedId === "all"} onClick={() => focus("all")} className="min-h-11 rounded-lg border border-primary/30 px-4 py-2 text-sm font-semibold text-primary hover:bg-secondary disabled:cursor-default disabled:opacity-50">Show all museums</button>
