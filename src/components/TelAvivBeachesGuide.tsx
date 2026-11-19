@@ -133,6 +133,22 @@ function BeachCard({ beach, compact = false }: { beach: TelAvivBeach; compact?: 
 const beachMapUrl = "/maps/tel-aviv-beaches.html?marker=32.085,34.766&bbox=34.732,32.027,34.805,32.155&name=Tel%20Aviv%20beaches&waypoints=" + encodeURIComponent(JSON.stringify(beachMapPoints));
 
 export function TelAvivBeachesGuide() {
+  const [mapBeach, setMapBeach] = useState("all");
+  const beachMapRef = useRef<HTMLIFrameElement>(null);
+  const focusMap = (id: string) => {
+    setMapBeach(id);
+    beachMapRef.current?.contentWindow?.postMessage({ type: "tel-aviv-beach-map-focus", id }, window.location.origin);
+  };
+  useEffect(() => {
+    const listener = (event: MessageEvent) => {
+      if (event.origin !== window.location.origin || event.source !== beachMapRef.current?.contentWindow) return;
+      if (event.data?.type !== "tel-aviv-beach-map-selected") return;
+      const id = event.data.id;
+      if (typeof id === "string" && beachMapPoints.some(beach => beach.id === id)) setMapBeach(id);
+    };
+    window.addEventListener("message", listener);
+    return () => window.removeEventListener("message", listener);
+  }, []);
   return <main className="mx-auto max-w-5xl px-4 pb-10">
     <article>
       <header className="pt-6">
@@ -204,23 +220,53 @@ export function TelAvivBeachesGuide() {
       <section id="beach-map" aria-labelledby="beach-map-h" className="mt-12 scroll-mt-24">
         <Heading id="beach-map" title="Map of Tel Aviv's beaches" intro="The map follows the coastline from North Tzuk to Givat Aliya. Use the individual Google Maps links below for directions to your chosen entrance." />
         <div className="overflow-hidden rounded-xl border bg-card">
-          <iframe title="Interactive map of Tel Aviv's thirteen listed beaches" loading="lazy" referrerPolicy="strict-origin-when-cross-origin" src={beachMapUrl} width={900} height={440} className="h-[330px] w-full border-0 sm:h-[440px]" />
+          <div className="flex flex-wrap items-end gap-3 border-b p-4">
+            <label htmlFor="tel-aviv-beach-map-select" className="min-w-0 flex-1 text-sm font-semibold">
+              Focus on a beach
+              <select id="tel-aviv-beach-map-select" value={mapBeach} onChange={event => focusMap(event.target.value)}
+                className="mt-2 min-h-11 w-full rounded-lg border bg-background px-3 py-2 text-sm font-normal focus-visible:outline-2 focus-visible:outline-primary">
+                <option value="all">All 13 beaches</option>
+                {areas.map(area => <optgroup key={area.name} label={area.name}>
+                  {telAvivBeaches.filter(beach => beach.area === area.name).map((beach, i) => <option key={beach.id} value={beach.id}>
+                    {telAvivBeaches.indexOf(beach) + 1}. {beach.name}
+                  </option>)}
+                </optgroup>)}
+              </select>
+            </label>
+            <button type="button" onClick={() => focusMap("all")} disabled={mapBeach === "all"}
+              className="min-h-11 rounded-lg border border-primary/30 px-4 py-2 text-sm font-semibold text-primary hover:bg-secondary disabled:cursor-default disabled:opacity-40">Show all beaches</button>
+          </div>
+          <iframe ref={beachMapRef} title="Interactive map of Tel Aviv's thirteen listed beaches"
+            loading="lazy" referrerPolicy="strict-origin-when-cross-origin" src={beachMapUrl} width={900} height={440}
+            onLoad={() => { if (mapBeach !== "all") beachMapRef.current?.contentWindow?.postMessage({ type: "tel-aviv-beach-map-focus", id: mapBeach }, window.location.origin); }}
+            className="h-[340px] w-full border-0 sm:h-[440px]" />
           <div className="flex flex-wrap items-center justify-between gap-3 p-3 text-xs text-muted-foreground">
-            <span>Map pins indicate approximate beach locations, not lifeguard towers or swimming boundaries. Map data © OpenStreetMap contributors.</span>
-            <OfficialLink href="https://www.google.com/maps/search/?api=1&query=Tel+Aviv+beaches">Open in Google Maps</OfficialLink>
+            <span>Map pins mark approximate beach locations. Map data © OpenStreetMap contributors.</span>
+            {mapBeach !== "all" ? <BeachMapLink beach={telAvivBeaches.find(beach => beach.id === mapBeach)!} /> :
+              <OfficialLink href="https://www.google.com/maps/search/?api=1&query=Tel+Aviv+beaches">Open in Google Maps</OfficialLink>}
           </div>
         </div>
       </section>
 
       <section id="beaches" aria-labelledby="beaches-h" className="mt-12 scroll-mt-24">
-        <Heading id="beaches" title="My guide to Tel Aviv's beaches" intro="Here is what distinguishes each beach, with a practical note to help you make the most of your visit." />
-        {areas.map((area, index) => <section key={area.name} aria-label={area.name} className="mt-9">
-          <h3 className="text-xl font-bold sm:text-2xl">{area.name}</h3>
-          <p className="mt-2 max-w-3xl leading-relaxed text-muted-foreground">{area.intro}</p>
-          <div className="mt-5 grid items-stretch gap-4 md:grid-cols-2">{telAvivBeaches.filter(beach => beach.area === area.name).map(beach => <BeachCard key={beach.id} beach={beach} />)}</div>
-          {index === 0 && <div className="mt-5"><Tip>The northern beaches are not equally convenient from a central hotel. I recommend checking the exact entrance and how you'll get back, especially when visiting North or South Tzuk.</Tip></div>}
-          {index === 1 && <div className="mt-5"><Tip>For central Tel Aviv, a short walk along the promenade is often the best way to choose a spot. There's little reason to cross town if a comparable beach is already near your accommodation.</Tip></div>}
-        </section>)}
+        <Heading id="beaches" title="My guide to Tel Aviv's beaches" intro="Start with my main picks in each area, then browse other municipal beaches nearby." />
+        {areas.map((area, index) => {
+          const beaches = telAvivBeaches.filter(beach => beach.area === area.name);
+          const mainPicks = beaches.filter(beach => beach.featured);
+          const additional = beaches.filter(beach => !beach.featured);
+          return <section key={area.name} aria-label={area.name} className="mt-9">
+            <h3 className="text-xl font-bold sm:text-2xl">{area.name}</h3>
+            <p className="mt-2 max-w-3xl leading-relaxed text-muted-foreground">{area.intro}</p>
+            <div className="mt-5 grid items-stretch gap-5 md:grid-cols-2">
+              {mainPicks.map(beach => <BeachCard key={beach.id} beach={beach} />)}
+            </div>
+            {additional.length > 0 && <div className="mt-5 grid items-stretch gap-4 md:grid-cols-2">
+              {additional.map(beach => <BeachCard key={beach.id} beach={beach} compact />)}
+            </div>}
+            {index === 0 && <div className="mt-5"><Tip>Tel Baruch and the Tzuk beaches are much farther from central hotels than Hilton or Metzitzim. For a northern beach day, I recommend choosing the entrance and checking your return journey.</Tip></div>}
+            {index === 1 && <div className="mt-5"><Tip>Gordon, Frishman, Bograshov and Jerusalem Beach are close together along the promenade. Choose one near your accommodation and spend more time enjoying the sea than changing locations.</Tip></div>}
+          </section>;
+        })}
       </section>
 
       <section id="season" aria-labelledby="season-h" className="mt-12 scroll-mt-24">
