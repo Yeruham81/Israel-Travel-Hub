@@ -1,5 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { readFileSync } from "node:fs";
+import { resolve } from "node:path";
 import { beachMapPoints, beachTopPicks, telAvivBeaches } from "@/data/telAvivBeaches";
 
 describe("Tel Aviv beach guide editorial regression", () => {
@@ -32,8 +33,8 @@ describe("Tel Aviv beach guide editorial regression", () => {
   });
 
   it("keeps the selectable clustered map and the direct Aviv Beach lifeguard statement", () => {
-    const page = readFileSync(new URL("../components/TelAvivBeachesGuide.tsx", import.meta.url), "utf8");
-    const map = readFileSync(new URL("../../public/maps/tel-aviv-beaches.html", import.meta.url), "utf8");
+    const page = readFileSync(resolve(process.cwd(), "src/components/TelAvivBeachesGuide.tsx"), "utf8");
+    const map = readFileSync(resolve(process.cwd(), "public/maps/tel-aviv-beaches.html"), "utf8");
     expect(page).toContain("data-beach-photo-slot");
     expect(page).toContain('kind="pick"');
     expect(page).toContain("Focus on a beach");
