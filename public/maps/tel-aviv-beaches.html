@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex,nofollow" />
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
+    <title>Tel Aviv bathing beaches map</title>
+    <link rel="stylesheet" href="https://unpkg.com/maplibre-gl@5.12.0/dist/maplibre-gl.css" integrity="sha384-mnM9NG1099tBMNxdDQNDKIxYcn/fmqQXFJvbT5l1MsrWvzfxBEffceBsw75/cW2R" crossorigin="anonymous" />
+    <style>
+      html, body, #map { width: 100%; height: 100%; margin: 0; }
+      body { font: 14px/1.5 system-ui, sans-serif; background: #edf2ee; color: #173648; }
+      #map { position: absolute; inset: 0; }
+      #status { position: absolute; z-index: 2; inset: 0; display: grid; place-content: center; padding: 20px; text-align: center; background: #edf2eeed; }
+      #status[hidden] { display: none; }
+      #status p { margin: 0 0 8px; }
+      a { color: #155e75; }
+      .maplibregl-ctrl-attrib { font: 10px/1.5 system-ui, sans-serif; }
+      .route-pin { display: grid; place-content: center; width: 27px; height: 27px; border: 2px solid white; border-radius: 50%; background: #155e75; color: white; box-shadow: 0 1px 5px #17364866; font: bold 12px system-ui,sans-serif; cursor: help; }
+      .maplibregl-ctrl-attrib a { color: #173648; }
+    </style>
+  </head>
+  <body>
+    <div id="map" role="region" aria-label="Interactive map of Tel Aviv beaches"></div>
+    <div id="status" role="status" aria-live="polite">
+      <p id="message">Loading Tel Aviv beaches map…</p>
+      <a id="fallback" href="https://www.google.com/maps/search/?api=1&amp;query=Tel%20Aviv%20beaches" target="_blank" rel="noopener noreferrer">Find Tel Aviv beaches on Google Maps</a>
+      <noscript><p>Enable JavaScript to use this interactive map.</p></noscript>
+    </div>
+    <script src="https://unpkg.com/maplibre-gl@5.12.0/dist/maplibre-gl.js" integrity="sha384-7+0QVD3+GoeOjaW35yTmpj0FR1K45ugw4ZUY0qEFomHSmAude6e9nB6/Xy5aPnzQ" crossorigin="anonymous"></script>
+    <script id="map-viewer">
+      (() => {
+        const status = document.getElementById("status");
+        const message = document.getElementById("message");
+        const fallback = document.getElementById("fallback");
+        const unavailable = () => {
+          message.textContent = "The interactive map is temporarily unavailable.";
+          status.hidden = false;
+        };
+        const numbers = (value, length) => {
+          if (!value) return null;
+          const parts = value.split(",");
+          if (parts.length !== length || parts.some((part) => !part.trim())) return null;
+          const result = parts.map(Number);
+          return result.every(Number.isFinite) ? result : null;
+        };
+        const params = new URLSearchParams(window.location.search);
+        // These numbered markers show approximate beach locations, not swimming boundaries.
+        let waypoints = [];
+        try {
+          const raw = params.get("waypoints");
+          if (raw && raw.length < 2500) {
+            const parsed = JSON.parse(raw);
+            if (Array.isArray(parsed) && parsed.length <= 13 &&
+                parsed.every((p) => typeof p.name === "string" && p.name.length <= 80 &&
+                  Number.isFinite(p.lat) && Number.isFinite(p.lon) &&
+                  Math.abs(p.lat) <= 85 && Math.abs(p.lon) <= 180)) waypoints = parsed;
+          }
+        } catch { /* Ignore an invalid optional list; keep the reference map. */ }
+        const point = numbers(params.get("marker"), 2);
+        const box = numbers(params.get("bbox"), 4);
+        if (!point || !box || Math.abs(point[0]) > 85 || Math.abs(point[1]) > 180 ||
+            Math.abs(box[0]) > 180 || Math.abs(box[2]) > 180 || Math.abs(box[1]) > 85 || Math.abs(box[3]) > 85 ||
+            box[0] >= box[2] || box[1] >= box[3] || point[1] < box[0] || point[1] > box[2] || point[0] < box[1] || point[0] > box[3]) {
+          message.textContent = "This map location is unavailable. Please return to the guide.";
+          fallback.hidden = true;
+          return;
+        }
+        const name = (params.get("name") || "Tel Aviv beaches").slice(0, 160);
+        document.title = `English map of ${name}`;
+        document.getElementById("map").setAttribute("aria-label", `Interactive English map of ${name}`);
+        fallback.href = "https://www.google.com/maps/search/?api=1&query=Tel%20Aviv%20beaches";
+        if (typeof maplibregl === "undefined") {
+          unavailable();
+          return;
+        }
+        let map;
+        let ready = false;
+        const timer = window.setTimeout(unavailable, 20000);
+        try {
+          maplibregl.setWorkerCount(1);
+          map = new maplibregl.Map({
+            container: "map",
+            style: new URL("./english-style.json", window.location.href).href,
+            center: [point[1], point[0]],
+            bounds: [[box[0], box[1]], [box[2], box[3]]],
+            fitBoundsOptions: { padding: 24, maxZoom: 16 },
+            attributionControl: false,
+            cooperativeGestures: true,
+            dragRotate: false,
+            touchPitch: false,
+            pitchWithRotate: false,
+            renderWorldCopies: false,
+            maxPitch: 0,
+            locale: {
+              "NavigationControl.ZoomIn": "Zoom in",
+              "NavigationControl.ZoomOut": "Zoom out",
+              "AttributionControl.ToggleAttribution": "Toggle map credits"
+            }
+          });
+          map.touchZoomRotate.disableRotation();
+          map.addControl(new maplibregl.NavigationControl({ showCompass: false }), "top-right");
+          map.addControl(new maplibregl.AttributionControl({ compact: true, customAttribution: '<a href="https://maputnik.github.io/osm-liberty/" target="_blank" rel="noopener noreferrer">OSM Liberty</a> (English labels)' }));
+          if (waypoints.length) {
+            waypoints.forEach((place, index) => {
+              // textContent (rather than HTML) prevents data in the URL from
+              // becoming executable markup. Labels are offered as tooltips.
+              const el = document.createElement("span");
+              el.className = "route-pin";
+              el.textContent = String(index + 1);
+              el.title = place.name;
+              el.setAttribute("aria-label", `Beach ${index + 1}: ${place.name}`);
+              el.setAttribute("role", "img");
+              const popupContent = document.createElement("div");
+              const title = document.createElement("strong");
+              title.textContent = place.name;
+              popupContent.appendChild(title);
+              const link = document.createElement("a");
+              link.href = "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(place.name + ", Tel Aviv-Yafo, Israel");
+              link.target = "_blank";
+              link.rel = "noopener noreferrer";
+              link.textContent = "Open directions on Google Maps ↗";
+              link.style.display = "block";
+              link.style.marginTop = "6px";
+              popupContent.appendChild(link);
+              const popup = new maplibregl.Popup({ offset: 20 }).setDOMContent(popupContent);
+              new maplibregl.Marker({ element: el, anchor: "bottom" })
+                .setLngLat([place.lon, place.lat]).setPopup(popup).addTo(map);
+            });
+          } else {
+            const marker = new maplibregl.Marker({ color: "#155e75" }).setLngLat([point[1], point[0]]).addTo(map);
+            marker.getElement().setAttribute("aria-label", `${name}: area reference point`);
+            marker.getElement().setAttribute("role", "img");
+          }
+          map.once("load", () => {
+            ready = true;
+            window.clearTimeout(timer);
+            status.hidden = true;
+          });
+          map.on("error", () => { if (!ready) unavailable(); });
+          window.addEventListener("pagehide", (event) => {
+            if (!event.persisted) { window.clearTimeout(timer); map.remove(); }
+          });
+        } catch {
+          window.clearTimeout(timer);
+          if (map) map.remove();
+          unavailable();
+        }
+      })();
+    </script>
+  </body>
+</html>
