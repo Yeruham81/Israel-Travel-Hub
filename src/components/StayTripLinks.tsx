@@ -35,10 +35,10 @@ import yardenitPhoto from "@/assets/guides/yardenit.jpg";
 import beatitudesPhoto from "@/assets/guides/mount-of-beatitudes.jpg";
 import nazarethPhoto from "@/assets/guides/2026-10/basilica-of-the-annunciation.webp";
 import deadSeaPhoto from "@/assets/dead-sea/beach.webp";
-import einGediPhoto from "@/assets/dead-sea/ein-gedi.webp";
+import einGediPhoto from "@/assets/guides/dead-sea-excursions/ein-gedi-waterfall.webp";
 import masadaPhoto from "@/assets/home/masada-dead-sea.webp";
 import masadaTourPhoto from "@/assets/guides/dead-sea-excursions/private-masada-dead-sea.webp";
-import deadSeaAerial from "@/assets/home/hero-masada.webp";
+import deadSeaMudBathing from "@/assets/guides/dead-sea-excursions/dead-sea-mud-bathing.webp";
 import qasrPhoto from "@/assets/guides/qasr-el-yahud.jpg";
 import seasonPhoto from "@/assets/guides/2026-10/best-time-to-visit-israel.webp";
 import israelCalendar from "@/assets/guides/2026-10/calendar-of-events.webp";
@@ -138,8 +138,8 @@ export const stayGuideGroups: Record<Region, GuideGroups> = {
     name: "the Dead Sea",
     local: [
       card("The Dead Sea visitor guide", "/travel-blog/the-dead-sea/", "Learn about swimming, salt and practical conditions.", deadSeaPhoto, "Dead Sea beachfront and salt water"),
-      card("Dead Sea attractions", "/travel-blog/dead-sea-attractions/", "Compare natural sites and stops around the region.", deadSeaAerial, "Judean Desert around the Dead Sea"),
-      card("Ein Gedi", "/attractions/ein-gedi/", "Plan a visit to the springs and nature reserve.", einGediPhoto, "Vegetation and landscape near Ein Gedi"),
+      card("Dead Sea attractions", "/travel-blog/dead-sea-attractions/", "Compare natural sites and stops around the region.", deadSeaMudBathing, "Visitor enjoying a Dead Sea mineral mud treatment by the shoreline"),
+      card("Ein Gedi", "/attractions/ein-gedi/", "Plan a visit to the springs and nature reserve.", einGediPhoto, "Waterfall and green cliffs in Ein Gedi Nature Reserve"),
       card("Masada", "/attractions/masada/", "Visit the historic desert fortress near the shore.", masadaPhoto, "Masada and Dead Sea landscape"),
       card("Qasr el Yahud", "/attractions/qasr-el-yahud/", "Visit the historic baptism site beside the Jordan River.", qasrPhoto, "Jordan River baptism site at Qasr el Yahud"),
       card("Masada & Dead Sea tours", "/tours/masada-dead-sea/", "Explore tour options combining the fortress and the shore.", masadaTourPhoto, "Desert excursion to Masada and the Dead Sea"),
