@@ -26,6 +26,7 @@ import akkoPort from "@/assets/shore-excursions/akko-port.jpg";
 import haifaArrival from "@/assets/airport-transfers/ashdod.webp";
 import megiddoPhoto from "@/assets/guides/2026-10/tel-megiddo.webp";
 import caesareaPhoto from "@/assets/home/caesarea-dusk.webp";
+import caesareaAqueductPhoto from "@/assets/home/caesarea-aqueduct.webp";
 import sevenDayPhoto from "@/assets/home/hero-galilee.webp";
 import tiberiasLake from "@/assets/home/tiberias-lake.webp";
 import magdalaPhoto from "@/assets/guides/2026-10/magdala.webp";
@@ -109,6 +110,8 @@ export const stayGuideGroups: Record<Region, GuideGroups> = {
       card("Museums in Haifa", "/travel-blog/museums-in-haifa/", "Find museums and cultural stops on Mount Carmel.", haifaMuseums, "Haifa museum and exhibits"),
       card("Acre (Akko)", "/attractions/akko-acre/", "Discover the historic walled port city close to Haifa.", akkoPort, "Historic coastal stone buildings in Acre"),
       card("Haifa shore excursions", "/shore-excursions/haifa/", "Explore the port region and excursions from Haifa.", haifaPort, "Port and coastline at Haifa"),
+      card("Rosh Hanikra", "/attractions/rosh-hanikra/", "Discover the dramatic grottoes and cliffs on the northern coast.", "/images/attractions/rosh-hanikra-cliffs.webp", "White cliffs and Mediterranean water at Rosh Hanikra"),
+      card("Caesarea, Haifa & Acre tours", "/tours/caesarea-haifa-acre/", "Explore guided tours of the northern Mediterranean coast.", caesareaAqueductPhoto, "Ancient Roman aqueduct by the beach at Caesarea"),
     ],
     onward: [
       card("Ben Gurion Airport to Haifa", "/travel-blog/how-to-get-from-ben-gurion-airport-to-haifa/", "Compare the train, taxi and transfer options.", airportHall, "Ben Gurion Airport arrivals hall"),
@@ -198,12 +201,12 @@ export function StayTripLinks({
     {local.length > 0 && <section id="explore" aria-labelledby="stay-explore-h" className="mt-14 scroll-mt-32">
       <h2 id="stay-explore-h" className="text-2xl font-bold sm:text-3xl">Explore more around {set.name}</h2>
       {!isEditorial && <p className="mt-2 text-muted-foreground">Explore places and practical guides directly related to {set.name}.</p>}
-      {renderCards(local, region === "jerusalem" || region === "telaviv" || region === "deadsea" || region === "tiberias" ? "grid-cols-2 lg:grid-cols-3" : "sm:grid-cols-2", "stay-local-photo-grid")}
+      {renderCards(local, region === "jerusalem" || region === "telaviv" || region === "deadsea" || region === "tiberias" || region === "haifa" ? "grid-cols-2 lg:grid-cols-3" : "sm:grid-cols-2", "stay-local-photo-grid")}
     </section>}
     {onward.length > 0 && <section id="trip-planning" aria-labelledby="stay-planning-h" className="scroll-mt-32">
       <h2 id="stay-planning-h" className="text-2xl font-bold sm:text-3xl">Plan the rest of your trip</h2>
       {!(isEditorial && region === "jerusalem") && <p className="mt-2 text-muted-foreground">{isEditorial ? "Explore transport options, day trips and practical travel advice." : "Plan your arrivals, excursions and onward travel after choosing your hotel."}</p>}
-      {renderCards(onward, region === "jerusalem" || region === "telaviv" || region === "deadsea" || region === "tiberias" ? "grid-cols-2 lg:grid-cols-3" : "sm:grid-cols-2 lg:grid-cols-3", "stay-trip-photo-grid")}
+      {renderCards(onward, region === "jerusalem" || region === "telaviv" || region === "deadsea" || region === "tiberias" || region === "haifa" ? "grid-cols-2 lg:grid-cols-3" : "sm:grid-cols-2 lg:grid-cols-3", "stay-trip-photo-grid")}
     </section>}
   </div>;
 }
