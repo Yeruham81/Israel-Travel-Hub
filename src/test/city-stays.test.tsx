@@ -316,7 +316,8 @@ describe("Jerusalem direct hotel catalog", () => {
     const initialCards = within(catalog).getAllByTestId("jerusalem-hotel-card");
     const initialAreaCounts = new Map<string, number>();
     for (const card of initialCards) {
-      const areaName = jerusalemAreaGuides.find((area) => card.textContent?.includes(area.shortName))?.id;
+      const label = within(card).getByTestId("hotel-area-label").textContent;
+      const areaName = jerusalemAreaGuides.find((area) => area.shortName === label)?.id;
       expect(areaName).toBeDefined();
       initialAreaCounts.set(areaName!, (initialAreaCounts.get(areaName!) ?? 0) + 1);
     }
