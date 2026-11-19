@@ -71,19 +71,38 @@ const hotelCardDetails: Record<string, { type: string; location: string; highlig
     location: "Bethlehem Road, Baka",
     highlight: "Residential suites with living space and kitchen facilities.",
   },
+  // Tel Aviv: one concise distinction per locally sourced hotel choice.
+  "tlv-dan": { type: "Classic beachfront luxury", location: "HaYarkon Street", highlight: "Established seafront hotel near Gordon and Frishman beaches." },
+  "tlv-royal-beach": { type: "Luxury beach hotel", location: "Central promenade", highlight: "Large Isrotel hotel near the southern central-beach stretch." },
+  "tlv-center-chic": { type: "Design boutique", location: "Dizengoff Square", highlight: "An Atlas hotel directly beside the square and its cafés." },
+  "tlv-dizengoff-garden": { type: "Small boutique hotel", location: "Dizengoff Street", highlight: "A compact city stay close to shops and evening restaurants." },
+  "tlv-shalom": { type: "Boutique hotel", location: "Independence Park", highlight: "Sea-adjacent Atlas hotel near northern beaches." },
+  "tlv-tal": { type: "Contemporary hotel", location: "Near Tel Aviv Port", highlight: "A convenient base for the port and Metzitzim Beach." },
+  "tlv-trieste": { type: "Heritage suites", location: "Near Neve Tzedek", highlight: "Independent suites in a restored low-rise building." },
+  "tlv-vera": { type: "Boutique hotel", location: "Lilienblum Street", highlight: "Stylish city base between Neve Tzedek and Rothschild." },
+  "tlv-setai": { type: "Luxury heritage hotel", location: "Jaffa's Clock Tower", highlight: "Restored landmark setting close to Old Jaffa and the port." },
+  "tlv-margosa": { type: "Boutique hotel", location: "Near the flea market", highlight: "Small Jaffa hotel with cafés and historic streets nearby." },
+  "tlv-levinski-market": { type: "Urban hotel", location: "Levinsky Market", highlight: "A practical base for local food stalls and Florentin streets." },
+  "tlv-mulan": { type: "Small urban hotel", location: "Florentin area", highlight: "An independent stay in the lively south-city district." },
+  "tlv-carmel-beach-house": { type: "Guesthouse-style stay", location: "Carmel Market area", highlight: "Compact accommodation between the market and central beaches." },
+  "tlv-fabric": { type: "Design boutique", location: "Nahalat Binyamin", highlight: "Atlas boutique hotel on a lively pedestrian-shopping street." },
+  "tlv-rothschild22": { type: "Business boutique", location: "Rothschild Boulevard", highlight: "Urban hotel on the boulevard near restaurants and offices." },
+  "tlv-rothschild71": { type: "Historic boutique", location: "Rothschild Boulevard", highlight: "Restored city-centre building with a residential feel." },
 };
 
 /** Two compact, entirely clickable cards with approved property-specific links. */
-export function JerusalemEditorialHotels({ area }: { area: NeighborhoodStayGuide }) {
-  const hotels = hotelsForArea(area.id, "jerusalem").slice(0, 2);
+export function CityEditorialHotels({ area }: { area: NeighborhoodStayGuide }) {
+  const cityId = area.cityId;
+  const hotels = hotelsForArea(area.id, cityId).slice(0, 2);
   const bookings = linksForPage(`stay-area-${area.id}`);
-  const pageId = "guide-where-to-stay-jerusalem";
+  const pageId = cityId === "jerusalem" ? "guide-where-to-stay-jerusalem" : "guide-where-to-stay-tel-aviv";
+  const prefix = cityId === "jerusalem" ? "jerusalem" : "telaviv";
 
   if (!hotels.length) return null;
 
-  return <section className="mt-5" aria-label={`Popular hotels in ${area.shortName}`} data-testid="jerusalem-editorial-hotel-picks">
+  return <section className="mt-5" aria-label={`Popular hotels in ${area.shortName}`} data-testid={`${prefix}-editorial-hotel-picks`}>
     <h4 className="text-lg font-semibold sm:text-xl">Popular hotels in {area.shortName}</h4>
-    <ul className="mt-3 grid grid-cols-2 gap-3" data-testid="jerusalem-editorial-hotel-grid">
+    <ul className="mt-3 grid grid-cols-2 gap-3" data-testid={`${prefix}-editorial-hotel-grid`}>
       {hotels.map((hotel) => {
         const booking = bookings.find((offer) => offer.id === `hotel-${hotel.id}-expedia`);
         const details = hotelCardDetails[hotel.id] ?? {
@@ -114,7 +133,7 @@ export function JerusalemEditorialHotels({ area }: { area: NeighborhoodStayGuide
             {booking && <span className="sr-only"> (opens in a new tab)</span>}
           </span>
         </>;
-        return <li key={hotel.id} className="min-w-0" data-testid="jerusalem-editorial-hotel-card">
+        return <li key={hotel.id} className="min-w-0" data-testid={`${prefix}-editorial-hotel-card`}>
           {booking ? <a
             href={hotelAffiliateUrl(booking, pageId, hotel.id)}
             aria-label={`Check rooms and rates for ${hotel.name} on Expedia (opens in a new tab)`}
@@ -122,15 +141,18 @@ export function JerusalemEditorialHotels({ area }: { area: NeighborhoodStayGuide
             rel={relFor(booking.isAffiliate)}
             onClick={() => recordOutboundClick({ pageId, productId: hotel.id, offerId: booking.id })}
             className="group flex h-full min-w-0 flex-col rounded-xl border bg-card p-3 shadow-sm transition-all hover:border-primary/60 hover:shadow-md focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary sm:p-4"
-            data-testid="jerusalem-editorial-hotel-link"
+            data-testid={`${prefix}-editorial-hotel-link`}
           >{cardContent}</a> : <Link
             to={area.path as LinkProps["to"]}
             aria-label={`Explore hotels in ${area.shortName}, including ${hotel.name}`}
             className="group flex h-full min-w-0 flex-col rounded-xl border bg-card p-3 shadow-sm transition-all hover:border-primary/60 hover:shadow-md focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary sm:p-4"
-            data-testid="jerusalem-editorial-hotel-link"
+            data-testid={`${prefix}-editorial-hotel-link`}
           >{cardContent}</Link>}
         </li>;
       })}
     </ul>
   </section>;
 }
+
+/** Backwards-compatible export for existing Jerusalem consumers. */
+export const JerusalemEditorialHotels = CityEditorialHotels;
