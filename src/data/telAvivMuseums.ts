@@ -118,7 +118,7 @@ export const museums: MuseumEntry[] = [
     intro: "A modern natural-history museum exploring biodiversity, evolution and the living world through specimens and interpretive displays, especially appealing to curious children and adults.",
     highlights: ["Animals and biodiversity", "Regional habitats and ecology", "Family-friendly exhibition spaces"],
     tip: "Reserve a museum time online and check the day-specific timetable. ANU is a separate institution with separate admission.",
-    url: "https://smnh.tau.ac.il/en/buy-tickets/",
+    url: "https://smnh.tau.ac.il/en/",
     ticketUrl: "https://smnh.tau.ac.il/en/buy-tickets/",
   },
   {
@@ -133,7 +133,7 @@ export const museums: MuseumEntry[] = [
     tip: "The Lasky Planetarium is a separate attraction within MUZA and may require a separate ticket. Check the museum for reopening news.",
     closureNote: "Planetarium closed as of November 2026.",
     url: "https://www.eretzmuseum.org.il/en/visit/",
-    ticketUrl: "https://www.eretzmuseum.org.il/en/visit/",
+    ticketUrl: "https://www.eretzmuseum.org.il/tickets/",
 
   },
   {
