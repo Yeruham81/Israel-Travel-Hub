@@ -144,7 +144,7 @@ describe("ten search-intent landing pages", () => {
       const hash = link.getAttribute("href") || "";
       expect(document.getElementById(hash.slice(1)), hash).not.toBeNull();
     }
-    const info = main.querySelector(path.startsWith("/airport-transfers/") ? "#journey-details" : path.includes("where-to-stay") ? "#choose" : path.includes("best-dead-sea") ? "#overview" : "#quick-answer");
+    const info = main.querySelector(path.startsWith("/airport-transfers/") ? "#journey-details" : path.includes("where-to-stay") ? "#choose" : path.includes("best-dead-sea") ? "#choose" : "#quick-answer");
     expect(info?.textContent?.length).toBeGreaterThan(100);
     const form = main.querySelector("form");
     if (form && info) expect(info.compareDocumentPosition(form) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
