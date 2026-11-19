@@ -1104,6 +1104,7 @@ export type AccommodationDestinationCard = {
   id: string;
   title: string;
   text: string;
+  mobileText?: string;
   cta: string;
   photo: StayGuidePhoto;
 } & ({ to: NonNullable<LinkProps["to"]>; hash?: string } | { href: string });
@@ -1113,33 +1114,39 @@ export const accommodationDestinations: AccommodationDestinationCard[] = [
   {
     id: "jerusalem", title: "Hotels in Jerusalem",
     text: "Compare Downtown, Mamilla, the Old City and quieter neighborhoods, with practical advice on walking routes, steps and getting around.",
+    mobileText: "Compare Downtown, Mamilla and Old City hotels.",
     cta: "Compare Jerusalem hotels", to: cityStayGuides.jerusalem.path as NonNullable<LinkProps["to"]>,
     photo: { src: jerusalemSkylinePhoto, alt: "Panoramic view of Jerusalem’s Old City skyline from the Mount of Olives", sourceUrl: "", label: "Jerusalem — Old City panorama" },
   },
   {
     id: "telaviv", title: "Hotels in Tel Aviv",
     text: "Explore the beachfront, Jaffa, Rothschild Boulevard and city-center stays, and choose the location that suits your days and evenings.",
+    mobileText: "Beachfront, Jaffa and city-center hotel options.",
     cta: "Compare Tel Aviv hotels", to: cityStayGuides.telaviv.path as NonNullable<LinkProps["to"]>,
     photo: { src: telAvivBeachfrontPhoto, alt: "Tel Aviv's beachfront hotels and Mediterranean promenade", sourceUrl: "", label: "Tel Aviv — beachfront hotels and promenade" },
   },
   {
     id: "haifa", title: "Hotels in Haifa",
     text: "Compare the German Colony, Mount Carmel and beachfront stays, with tips on Haifa’s hills, transport and hotel styles.",
+    mobileText: "German Colony, Carmel and beachfront stays.",
     cta: "Compare Haifa hotels", to: haifaStayGuide.path as NonNullable<LinkProps["to"]>, photo: haifaPhotos.panorama,
   },
   {
     id: "tiberias", title: "Hotels in Tiberias",
     text: "Choose a central waterfront base or a quieter hotel above the lake, and compare family facilities, lake access and nearby attractions.",
+    mobileText: "Lakefront and hillside hotels for Galilee trips.",
     cta: "Compare Tiberias hotels", to: tiberiasStayGuide.path as NonNullable<LinkProps["to"]>, photo: tiberiasPhotos.waterfront,
   },
   {
     id: "deadsea", title: "Dead Sea hotels",
     text: "Compare spa hotels and family resorts around Ein Bokek and the southern hotel district, with advice on beach access and meals.",
+    mobileText: "Spa and family resorts near Ein Bokek.",
     cta: "Compare Dead Sea hotels", to: deadSeaStayGuide.path as NonNullable<LinkProps["to"]>, photo: deadSeaPhotos.beach,
   },
   {
     id: "eilat", title: "Hotels in Eilat",
     text: "Red Sea beaches, resort escapes and desert scenery. My Eilat guide's arrival and stay section explains the main hotel areas — it is area guidance, not an Eilat hotel comparison.",
+    mobileText: "Red Sea resorts and beachfront stays.",
     cta: "Explore Eilat Hotels", to: "/travel-blog/eilat/", hash: "arrival-stay",
     photo: { src: eilatWaterfrontPhoto, alt: "Hotels, palm trees and the waterfront beside the Red Sea in Eilat", sourceUrl: "", label: "Eilat — Red Sea waterfront" },
   },
