@@ -2,7 +2,7 @@ import { Link, type LinkProps } from "@tanstack/react-router";
 import { ArrowRight, ArrowUpRight, Check, Hotel, Lightbulb, MapPin } from "lucide-react";
 import { accommodationEditorial } from "@/data/accommodationEditorial";
 import type { HotelStayDestination } from "@/data/content";
-import { INFO_CHECK_DATE, linksForPage } from "@/data/registry";
+import { linksForPage } from "@/data/registry";
 import { AreaMap } from "@/components/AreaMap";
 import { GuideHeader, OnThisPage, FaqList, SourceList } from "@/components/Guide";
 import { HomeContactForm } from "@/components/HomeContactForm";
@@ -214,7 +214,7 @@ export function HotelStyleEditorialGuide({ guide }: { guide: HotelStayDestinatio
       title={info.title}
       intro={info.intro}
       image={guide.photo}
-      checkedAt={INFO_CHECK_DATE}
+      checkedAt={guide.reviewedAt}
     />
     <OnThisPage sections={sections} />
     <article className="mx-auto max-w-5xl px-4">
