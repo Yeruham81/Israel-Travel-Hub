@@ -1,6 +1,6 @@
 import { Link, type LinkProps } from "@tanstack/react-router";
 import jerusalemCity from "@/assets/home/jerusalem-old-city.webp";
-import oldCity from "@/assets/jerusalem/old-city.webp";
+import oldCity from "@/assets/guides/2026-11/jerusalem-old-city-market-lanes.webp";
 import churches from "@/assets/guides/holy-sepulchre.jpg";
 import deadSeaRoute from "@/assets/guides/2026-10/jerusalem-to-the-dead-sea.webp";
 import masada from "@/assets/home/masada-dead-sea.webp";
@@ -8,7 +8,7 @@ import masada from "@/assets/home/masada-dead-sea.webp";
 /** Six illustrated, contextually relevant links, followed by secondary planning. */
 const related: { title: string; description: string; to: LinkProps["to"]; image: string; alt: string }[] = [
   { title: "Jerusalem Travel Guide", description: "Plan the city sites and neighbourhoods around a Bethlehem visit.", to: "/travel-blog/jerusalem-travel-guide/", image: jerusalemCity, alt: "Jerusalem Old City skyline" },
-  { title: "Jerusalem's Old City", description: "Find Damascus Gate, the historic quarters and walking routes.", to: "/attractions/old-city-jerusalem/", image: oldCity, alt: "Jerusalem Old City stone streets and walls" },
+  { title: "Jerusalem's Old City", description: "Find Damascus Gate, the historic quarters and walking routes.", to: "/attractions/old-city-jerusalem/", image: oldCity, alt: "Historic market lanes in Jerusalem’s Old City" },
   { title: "Churches in Jerusalem", description: "Explore Christian heritage sites before or after Bethlehem.", to: "/travel-blog/churches-in-jerusalem/", image: churches, alt: "Church of the Holy Sepulchre in Jerusalem" },
   { title: "Jerusalem to the Dead Sea", description: "Compare another popular road excursion, buses and tours.", to: "/travel-blog/jerusalem-to-the-dead-sea/", image: deadSeaRoute, alt: "Road through the desert toward the Dead Sea" },
   { title: "Day Trips from Jerusalem", description: "Compare Bethlehem with Masada, the Dead Sea and other day visits.", to: "/travel-blog/day-trips-from-jerusalem/", image: masada, alt: "Masada overlooking the Dead Sea" },

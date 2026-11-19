@@ -106,6 +106,9 @@ describe("Jerusalem independent day-trip planning guides", () => {
     expect(screen.queryByTestId("journey-tour-card")).not.toBeInTheDocument();
     const related = screen.getByTestId("bethlehem-related-guides");
     expect(within(related).getAllByRole("img")).toHaveLength(6);
+    const oldCityGuideCard = within(related).getByRole("link", { name: /Jerusalem's Old City/i });
+    expect(within(oldCityGuideCard).getByRole("img").getAttribute("src")).toContain("jerusalem-old-city-market-lanes");
+    expect(within(related).getAllByRole("img").map(img => img.getAttribute("src")).join(" ")).not.toContain("old-city-BJwjTGND");
     expect(new Set(within(related).getAllByRole("link").map(link => link.getAttribute("href"))).size).toBe(6);
     expect(within(screen.getByTestId("bethlehem-next-steps")).getAllByRole("link")).toHaveLength(4);
     const faq = container.querySelector("#faq")!;
