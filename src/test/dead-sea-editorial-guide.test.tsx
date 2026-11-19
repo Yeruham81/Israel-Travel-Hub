@@ -33,7 +33,7 @@ describe("Dead Sea category-first travel-blog hotel guide", () => {
     expect(screen.getByRole("heading", { level: 1, name: "Best Dead Sea hotels: where to stay" })).toBeInTheDocument();
     const categories = screen.getAllByTestId("deadsea-category-card");
     expect(categories).toHaveLength(4);
-    expect(screen.getByTestId("deadsea-category-grid")).toHaveClass("grid-cols-2", "lg:grid-cols-4");
+    expect(screen.getByTestId("deadsea-category-grid")).toHaveClass("min-[360px]:grid-cols-2", "lg:grid-cols-4");
     expect(categories.map(a => a.getAttribute("href"))).toEqual(["#group-luxury", "#group-spa", "#group-family", "#group-value"]);
     expect(categories.every(a => a.querySelector("img")?.getAttribute("src"))).toBe(true);
     const categoryImages = categories.map(card => card.querySelector("img")!.getAttribute("src"));
@@ -156,6 +156,6 @@ describe("Dead Sea category-first travel-blog hotel guide", () => {
     const hotels = deadSeaStayGuide.groups.flatMap(group => group.hotelIds);
     hotels.forEach(id => expect(sources).toContain(resortHotel(id).sourceId));
     expect(sources.length).toBeGreaterThanOrEqual(11);
-    expect(sourceList).toHaveAttribute("data-intro", expect.stringContaining("Hotel websites and practical travel resources"));
+    expect(sourceList).toHaveAttribute("data-intro", expect.stringContaining("Official hotel websites and practical travel resources"));
   });
 });
