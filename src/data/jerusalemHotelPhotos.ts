@@ -5,7 +5,7 @@
  */
 import type { HotelIllustration } from "@/data/telAvivHotelPhotos";
 import jerusalemOldCity from "@/assets/home/jerusalem-old-city.webp";
-import jaffaGate from "@/assets/home/hero-refresh-jerusalem-jaffa-gate-v4-medium.webp";
+import mamillaOverview from "@/assets/home/hero-jerusalem-sm-optimized.webp";
 
 const neighbourhood = (src: string, alt: string): HotelIllustration => ({
   src,
@@ -17,7 +17,7 @@ const neighbourhood = (src: string, alt: string): HotelIllustration => ({
 export const jerusalemHotelPhotos: Record<string, HotelIllustration> = {
   "herbert-samuel": neighbourhood("/images/attractions/jerusalem.webp", "Jerusalem stone buildings and urban scenery"),
   "arthur": neighbourhood("/images/city-stays/jerusalem-downtown.webp", "Downtown Jerusalem neighbourhood"),
-  "mamilla": neighbourhood(jaffaGate, "Jaffa Gate and the historic walls near Mamilla"),
+  "mamilla": neighbourhood(mamillaOverview, "Jerusalem stone skyline near the historic city center"),
   "king-david": neighbourhood("/images/city-stays/jerusalem-mamilla.webp", "Mamilla and King David Street area of Jerusalem"),
   "new-imperial": {
     src: jerusalemOldCity,
