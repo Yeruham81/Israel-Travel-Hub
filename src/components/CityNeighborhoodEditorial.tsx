@@ -192,21 +192,18 @@ export function CityNeighborhoodEditorial({ guide }: { guide: CityStayGuide }) {
       checkedAt={guide.reviewedAt || INFO_CHECK_DATE}
       image={hero}
     />
-    <OnThisPage sections={cityId === "jerusalem" ? jerusalemSections : sections} />
+    <OnThisPage sections={neighborhoodSections} />
     <article className="mx-auto max-w-5xl px-4">
       <section id="choose" aria-labelledby="choose-h" className="mt-10 scroll-mt-32">
         <p className="eyebrow">Choose your base</p>
         <h2 id="choose-h" className="mt-2 text-3xl">Where should you stay in {cityName}?</h2>
         <p className="mt-4 max-w-4xl leading-relaxed">{choices.introduction}</p>
-        {cityId !== "jerusalem" && <p className="mt-3 max-w-4xl leading-relaxed text-muted-foreground">
-          I suggest choosing the area before you start comparing individual hotels. Think about the places you want to visit on foot, where you would like to spend your evenings and how easily you can reach the accommodation with luggage.
-        </p>}
-        {cityId === "jerusalem"
-          ? <ul className="mt-7 grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-3" data-testid="jerusalem-area-image-grid">
+
+        {<ul className={`mt-7 grid grid-cols-2 gap-3 sm:gap-4 ${cityId === "jerusalem" ? "lg:grid-cols-3" : "lg:grid-cols-4"}`} data-testid={`${cityId === "jerusalem" ? "jerusalem" : "telaviv"}-area-image-grid`}>
             {areas.map((area) => <li key={area.id} className="min-w-0">
               <a href={`#area-${area.id}`} className="group flex h-full flex-col overflow-hidden rounded-2xl border bg-card shadow-sm transition-all hover:-translate-y-0.5 hover:border-primary/60 hover:shadow-md focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
                 <div className="overflow-hidden bg-muted">
-                  <img src={(jerusalemAreaCardPhotos[area.id] ?? area.photo).src} alt={(jerusalemAreaCardPhotos[area.id] ?? area.photo).alt} width={600} height={375} loading="lazy" decoding="async" className="aspect-[16/10] w-full object-cover transition-transform duration-300 group-hover:scale-[1.035]" />
+                  <img src={((cityId === "jerusalem" ? jerusalemAreaCardPhotos : telAvivAreaCardPhotos)[area.id] ?? area.photo).src} alt={((cityId === "jerusalem" ? jerusalemAreaCardPhotos : telAvivAreaCardPhotos)[area.id] ?? area.photo).alt} width={600} height={375} loading="lazy" decoding="async" className="aspect-[16/10] w-full object-cover transition-transform duration-300 group-hover:scale-[1.035]" />
                 </div>
                 <span className="flex flex-1 flex-col p-3 sm:p-4">
                   <span className="text-sm font-bold leading-snug text-foreground group-hover:text-primary sm:text-lg">{area.shortName}</span>
@@ -215,36 +212,13 @@ export function CityNeighborhoodEditorial({ guide }: { guide: CityStayGuide }) {
                 </span>
               </a>
             </li>)}
-          </ul>
-          : <ul className="mt-6 grid gap-4 sm:grid-cols-3">
-            {(guide.quickPicks || []).map((pick) => {
-              const area = areas.find((candidate) => candidate.id === pick.areaId);
-              return <li key={pick.areaId} className="rounded-xl border bg-secondary/30 p-4">
-                <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">{pick.label}</p>
-                <h3 className="mt-2 text-lg font-semibold">{area?.shortName || pick.areaId}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{pick.description}</p>
-                <a href={`#area-${pick.areaId}`} className="mt-3 inline-flex min-h-10 items-center gap-1 text-sm font-semibold text-primary hover:underline">Read about this area <ArrowRight className="h-4 w-4" aria-hidden /></a>
-              </li>;
-            })}
           </ul>}
+
         <aside className="mt-6 flex gap-3 rounded-xl border border-amber-200 bg-amber-50/80 p-4 text-sm leading-relaxed dark:border-amber-900/50 dark:bg-amber-950/20">
           <Lightbulb className="mt-0.5 h-5 w-5 shrink-0 text-amber-600" aria-hidden />
           <p>{choices.callout}</p>
         </aside>
       </section>
-
-      {cityId !== "jerusalem" && <section id="compare" aria-labelledby="compare-h" className="mt-14 scroll-mt-32">
-        <h2 id="compare-h" className="text-3xl">Areas at a glance</h2>
-        <ul className="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-          {areas.map((area) => <li key={area.id}>
-            <a href={`#area-${area.id}`} className="group flex h-full flex-col rounded-xl border bg-card p-4 transition-colors hover:border-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
-              <span className="font-semibold group-hover:text-primary">{area.shortName}</span>
-              <span className="mt-2 flex-1 text-sm leading-relaxed text-muted-foreground">{area.bestFor}</span>
-              <span className="mt-3 text-xs font-semibold text-primary">Explore this neighbourhood →</span>
-            </a>
-          </li>)}
-        </ul>
-      </section>}
 
       <section id="neighborhoods" aria-labelledby="neighborhoods-h" className="mt-14 scroll-mt-32">
         <h2 id="neighborhoods-h" className="text-3xl">Neighbourhoods in {cityName}</h2>
@@ -266,7 +240,7 @@ export function CityNeighborhoodEditorial({ guide }: { guide: CityStayGuide }) {
                   <p className="mt-4 text-sm leading-relaxed"><strong>Best for:</strong> {area.bestFor}</p>
                   <p className="mt-2 text-sm leading-relaxed"><strong>Nearby highlights:</strong> {area.highlights.slice(0, 3).map((place) => place.name).join(" · ")}</p>
                 </>}
-                {cityId === "jerusalem" && <JerusalemEditorialHotels area={area} />}
+                <CityEditorialHotels area={area} />
               </div>
               <div className={cityId === "jerusalem" ? "flex min-w-0 flex-col" : "min-w-0"} data-testid={cityId === "jerusalem" ? "jerusalem-area-media" : undefined}>
                 <figure className="overflow-hidden rounded-xl border bg-secondary/20">
