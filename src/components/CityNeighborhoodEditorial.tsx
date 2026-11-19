@@ -17,8 +17,6 @@ import downtownCard from "@/assets/travel-blog-hub/downtown-944eb9d46b-420.webp"
 import mamillaStreet from "@/assets/jerusalem/mamilla.webp";
 import marketCard from "@/assets/travel-blog-hub/mahane-yehuda-c53a05ac52-420.webp";
 import eastJerusalemCard from "@/assets/jerusalem/east-jerusalem-house.webp";
-import oldNorthCard from "@/assets/travel-blog-hub/old-north-14ec3bcb89-420.webp";
-import rothschildCard from "@/assets/travel-blog-hub/rothschild-ecff6bfaaf-420.webp";
 
 /**
  * A travel-blog neighbourhood-choice article, deliberately separate from the
@@ -43,13 +41,11 @@ const jerusalemAreaCardPhotos: Record<string, { src: string; alt: string }> = {
   "german-colony": { src: "/images/city-stays/jerusalem-german-colony.webp", alt: "Emek Refaim Street in Jerusalem's German Colony" },
 };
 
-/** Tel Aviv thumbnail variants: use independent, location-specific assets where available. */
+/** Tel Aviv neighbourhood photos: use full-size area images where possible, with selected location-specific alternatives. */
 const telAvivAreaCardPhotos: Record<string, { src: string; alt: string }> = {
   "telaviv-beachfront": { src: "/images/city-stays/tel-aviv-beachfront.webp", alt: "Gordon Beach on Tel Aviv's Mediterranean waterfront" },
   "telaviv-dizengoff": { src: "/images/city-stays/tel-aviv-dizengoff.webp", alt: "Dizengoff Square in central Tel Aviv" },
-  "telaviv-old-north": { src: oldNorthCard, alt: "Streets and green spaces of Tel Aviv's Old North" },
   "telaviv-jaffa": { src: "/images/city-stays/tel-aviv-jaffa.webp", alt: "Market streets in Jaffa" },
-  "telaviv-rothschild": { src: rothschildCard, alt: "Rothschild Boulevard in Tel Aviv" },
 };
 
 const decisionNotes = {
@@ -218,6 +214,8 @@ export function CityNeighborhoodEditorial({ guide }: { guide: CityStayGuide }) {
   const info = accommodationEditorial[cityId];
   const choices = decisionNotes[cityId];
   const areas = neighborhoodGuidesForCity(cityId);
+  // One source of truth for both the navigation cards and the full area sections.
+  const areaPhotos = cityId === "jerusalem" ? jerusalemAreaCardPhotos : telAvivAreaCardPhotos;
   const hero = cityId === "jerusalem"
     ? { src: jerusalemHero, alt: "Aerial view of Jaffa Road and the buildings of central Jerusalem" }
     : { src: telAvivHero, alt: "Beachfront hotels, promenade and Mediterranean shoreline in Tel Aviv" };
@@ -239,10 +237,12 @@ export function CityNeighborhoodEditorial({ guide }: { guide: CityStayGuide }) {
         <p className="mt-4 max-w-4xl leading-relaxed">{choices.introduction}</p>
 
         {<ul className={`mt-7 grid grid-cols-2 gap-3 sm:gap-4 ${cityId === "jerusalem" ? "lg:grid-cols-3" : "lg:grid-cols-4"}`} data-testid={`${cityId === "jerusalem" ? "jerusalem" : "telaviv"}-area-image-grid`}>
-            {areas.map((area) => <li key={area.id} className="min-w-0">
+            {areas.map((area) => {
+              const photo = areaPhotos[area.id] ?? area.photo;
+              return <li key={area.id} className="min-w-0">
               <a href={`#area-${area.id}`} className="group flex h-full flex-col overflow-hidden rounded-2xl border bg-card shadow-sm transition-all hover:-translate-y-0.5 hover:border-primary/60 hover:shadow-md focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
                 <div className="overflow-hidden bg-muted">
-                  <img src={((cityId === "jerusalem" ? jerusalemAreaCardPhotos : telAvivAreaCardPhotos)[area.id] ?? area.photo).src} alt={((cityId === "jerusalem" ? jerusalemAreaCardPhotos : telAvivAreaCardPhotos)[area.id] ?? area.photo).alt} width={600} height={375} loading="lazy" decoding="async" className="aspect-[16/10] w-full object-cover transition-transform duration-300 group-hover:scale-[1.035]" />
+                  <img src={photo.src} alt={photo.alt} width={600} height={375} loading="lazy" decoding="async" className="aspect-[16/10] w-full object-cover transition-transform duration-300 group-hover:scale-[1.035]" />
                 </div>
                 <span className="flex flex-1 flex-col p-3 sm:p-4">
                   <span className="text-sm font-bold leading-snug text-foreground group-hover:text-primary sm:text-lg">{area.shortName}</span>
@@ -250,7 +250,8 @@ export function CityNeighborhoodEditorial({ guide }: { guide: CityStayGuide }) {
                   <span className="mt-3 inline-flex items-center gap-1.5 text-xs font-semibold text-primary sm:text-sm">Explore this area <ArrowRight className="h-3.5 w-3.5 shrink-0" aria-hidden /></span>
                 </span>
               </a>
-            </li>)}
+            </li>;
+            })}
           </ul>}
 
         <aside className="mt-6 flex gap-3 rounded-xl border border-amber-200 bg-amber-50/80 p-4 text-sm leading-relaxed dark:border-amber-900/50 dark:bg-amber-950/20">
@@ -263,7 +264,7 @@ export function CityNeighborhoodEditorial({ guide }: { guide: CityStayGuide }) {
         <h2 id="neighborhoods-h" className="text-3xl">Neighbourhoods in {cityName}</h2>
         <div className="mt-5 divide-y border-t">
           {areas.map((area) => {
-            const photo = cityId === "jerusalem" ? (jerusalemAreaCardPhotos[area.id] ?? area.photo) : area.photo;
+            const photo = areaPhotos[area.id] ?? area.photo;
             return <section key={area.id} id={`area-${area.id}`} aria-labelledby={`area-${area.id}-h`} className="scroll-mt-32 py-9 sm:py-11" data-testid="editorial-neighborhood">
             <div className="grid items-stretch gap-5 md:grid-cols-[minmax(0,1.5fr)_minmax(230px,1fr)] md:gap-7" data-testid={`${cityId === "jerusalem" ? "jerusalem" : "telaviv"}-area-layout`}>
               <div className="min-w-0">
