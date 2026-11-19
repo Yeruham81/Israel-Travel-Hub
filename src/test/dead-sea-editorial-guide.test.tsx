@@ -35,6 +35,11 @@ describe("Dead Sea category-first travel-blog hotel guide", () => {
     expect(screen.getByTestId("deadsea-category-grid")).toHaveClass("grid-cols-2", "lg:grid-cols-4");
     expect(categories.map(a => a.getAttribute("href"))).toEqual(["#group-luxury", "#group-spa", "#group-family", "#group-value"]);
     expect(categories.every(a => a.querySelector("img")?.getAttribute("src"))).toBe(true);
+    const categoryImages = categories.map(card => card.querySelector("img")!.getAttribute("src"));
+    expect(new Set(categoryImages).size).toBe(4);
+    expect(categoryImages).not.toContain(deadSeaStayGuide.photo.src);
+    expect(categoryImages).not.toContain(resortHotelPhoto("ds-leonardo-club").src);
+    expect(resortHotelPhoto("ds-leonardo-club").src).not.toBe(deadSeaStayGuide.photo.src);
     expect(screen.getByTestId("deadsea-ein-gedi-spotlight")).toHaveAttribute("href", "#group-ein-gedi");
     expect(screen.getAllByTestId("deadsea-hotel-group")).toHaveLength(5);
     for (const group of screen.getAllByTestId("deadsea-hotel-group")) {
@@ -71,9 +76,22 @@ describe("Dead Sea category-first travel-blog hotel guide", () => {
     const oasisPhoto = container.querySelector<HTMLImageElement>("#hotel-ds-oasis img");
     expect(oasisPhoto).toHaveAttribute("src", resortHotelPhoto("ds-oasis").src);
     expect(oasisPhoto).not.toHaveAttribute("src", "/images/hotel-cards/ds-oasis.jpg");
+    expect(resortHotelPhoto("ds-oasis").src).not.toBe(resortHotelPhoto("ds-nevo").src);
+    expect(resortHotelPhoto("ds-oasis").src).not.toBe(resortHotelPhoto("ds-noga").src);
+    expect(container).not.toHaveTextContent("Compare other properties on the booking provider");
     expect(new Set(cards.map(card => card.querySelector("img")?.getAttribute("src"))).size).toBe(11);
     expect(screen.getAllByRole("listitem").filter(node => node.closest('#tips') !== null)).toHaveLength(8);
     expect(container).toHaveTextContent("Separate hotel and spa age rules");
+    const arrival = within(container.querySelector("#location") as HTMLElement);
+    expect(arrival.getByText(/sites along Route 90, such as/)).toBeInTheDocument();
+    for (const [name, href] of [
+      ["Masada", "/attractions/masada/"],
+      ["Ein Gedi Nature Reserve", "/attractions/ein-gedi/"],
+      ["Qasr el Yahud", "/attractions/qasr-el-yahud/"],
+      ["Dead Sea attractions guide", "/travel-blog/dead-sea-attractions/"],
+    ]) {
+      expect(arrival.getByRole("link", { name })).toHaveAttribute("href", href);
+    }
     expect(container).toHaveTextContent("entry from 16");
     expect(container).toHaveTextContent("operating bathing beach");
     expect(container).not.toHaveTextContent("Oasis is strictly adults-only");
