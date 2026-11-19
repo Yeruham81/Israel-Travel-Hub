@@ -7,7 +7,7 @@ import { cityHotelPhoto, hotelsInCityCatalog } from "@/data/cityHotelCatalog";
 import { activeHotelNotice } from "@/lib/hotel-notices";
 import type { HotelIllustration } from "@/data/telAvivHotelPhotos";
 import { recordOutboundClick, relFor } from "@/lib/outbound";
-import { hotelAffiliateUrl } from "@/lib/hotel-affiliate";
+import { hotelAffiliateUrl, hotelBrowseAffiliateUrl } from "@/lib/hotel-affiliate";
 
 /**
  * Editorial catalogue, not a live hotel search. Reuses the checked property
@@ -36,6 +36,7 @@ export const jerusalemHotelTileCopy: Record<string, { description: string; bestF
 
 
 export function JerusalemHotelBrowser() {
+  const cityBrowseOffer = linksForPage("stay-jerusalem").find((offer) => offer.id === "hotels-jerusalem-expedia");
   const [areaId, setAreaId] = useState<string>("all");
   const [expanded, setExpanded] = useState(false);
   const [sort, setSort] = useState<"area" | "name">("area");
@@ -129,7 +130,7 @@ export function JerusalemHotelBrowser() {
             data-testid="jerusalem-hotel-expand"
             className="inline-flex min-h-11 items-center justify-center gap-2 rounded-lg border border-primary/40 bg-card px-5 py-2.5 text-sm font-semibold text-primary transition-colors hover:border-primary hover:bg-secondary/20 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
           >
-            {expanded ? "Show fewer hotels" : `View all ${jerusalemHotelCatalog.length} hotels`}
+            {expanded ? "Show fewer hotels" : "View more hotels"}
             <ArrowRight className={`h-4 w-4 transition-transform ${expanded ? "rotate-180" : ""}`} aria-hidden />
           </button>
         </div>
@@ -145,6 +146,21 @@ export function JerusalemHotelBrowser() {
         <button type="button" onClick={resetArea} className="mt-4 inline-flex min-h-11 items-center gap-2 font-semibold text-primary underline underline-offset-4">
           <RotateCcw className="h-4 w-4" aria-hidden /> View all Jerusalem hotels
         </button>
+      )}
+      {cityBrowseOffer && (
+        <div className="mt-6 flex justify-center">
+          <a
+            href={hotelBrowseAffiliateUrl(cityBrowseOffer, "stay-jerusalem")}
+            target="_blank"
+            rel={relFor(cityBrowseOffer.isAffiliate)}
+            onClick={() => recordOutboundClick({ pageId: "stay-jerusalem", productId: cityBrowseOffer.id, offerId: cityBrowseOffer.id })}
+            data-testid="jerusalem-all-hotels-expedia"
+            className="btn btn-primary inline-flex min-h-11 items-center justify-center gap-2 px-6 py-2.5 text-center"
+          >
+            Browse all Jerusalem hotels <ArrowRight className="h-4 w-4" aria-hidden />
+            <span className="sr-only"> (opens in a new tab)</span>
+          </a>
+        </div>
       )}
     </section>
   );
