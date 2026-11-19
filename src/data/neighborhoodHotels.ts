@@ -1,4 +1,4 @@
-/** 28 supplemental neighborhood hotel records with direct Expedia property SOURCE URLs.
+/** 29 supplemental neighborhood hotel records with direct Expedia property SOURCE URLs.
  * Editorial citations remain non-affiliate, while the separate booking offers in
  * registry.ts carry approved property-specific Travelpayouts affiliate links.
  * These records feed both neighborhood pages and the complete city galleries.
@@ -29,6 +29,18 @@ const supplemental: (HotelRecommendation & { expediaUrl: string })[] = [
     "watch": "Check the pedestrian-only access and nearest vehicle drop-off.",
     "sourceId": "hotel-jlm-ibis-styles-expedia-listing",
     "expediaUrl": "https://www.expedia.com/Jerusalem-Hotels-Ibis-Styles-Jerusalem-City-Center-An-AccorHotels-Brand.h27464110.Hotel-Information"
+  },
+  {
+    "id": "jlm-paamonim",
+    "cityId": "jerusalem",
+    "areaId": "downtown",
+    "name": "Paamonim Jerusalem Hotel",
+    "style": "Central boutique hotel",
+    "summary": "Boutique rooms at 4 King George Street, near Jaffa Road, the light rail and downtown cafés.",
+    "bestFor": "Walkable central city stays",
+    "watch": "Check the room layout, nearby street noise and the most convenient luggage drop-off.",
+    "sourceId": "hotel-jlm-paamonim-expedia-listing",
+    "expediaUrl": "https://www.expedia.com/Jerusalem-Hotels-Paamonim-Jerusalem-Hotel.h14708123.Hotel-Information"
   },
   {
     "id": "jlm-david-citadel",
@@ -351,6 +363,6 @@ export const neighborhoodHotelSources: SourceReference[] = supplemental.map((hot
   title: `${hotel.name} — Expedia property page`,
   publisher: "Expedia",
   url: hotel.expediaUrl,
-  checkedAt: "2026-10-22",
+  checkedAt: hotel.id === "jlm-paamonim" ? "2026-11-19" : "2026-10-22",
   note: "Expedia property information used to check accommodation details. Confirm room availability, final prices and cancellation terms on Expedia before booking.",
 }));
