@@ -286,7 +286,7 @@ export function HotelStyleEditorialGuide({ guide }: { guide: HotelStayDestinatio
         <div className="mt-6 divide-y border-t">
           {guide.groups.map(group => {
             const copy = groupCaptions[group.id];
-            const categoryBrowse = group.browsePageId ? linksForPage(group.browsePageId)[0] : undefined;
+            const categoryBrowse = linksForPage(group.browsePageId ?? ("stay-deadsea-" + group.id + "-browse"))[0];
             return <section key={group.id} id={"group-" + group.id} className="scroll-mt-32 py-9 sm:py-11" aria-labelledby={"group-" + group.id + "-h"} data-testid="deadsea-hotel-group">
               <p className="eyebrow">{copy?.eyebrow}</p>
               <h3 id={"group-" + group.id + "-h"} className="mt-2 text-2xl font-semibold sm:text-3xl">{copy?.title ?? group.title}</h3>
