@@ -92,7 +92,7 @@ describe.each([
       expect(container.querySelector("#book")!.compareDocumentPosition(container.querySelector("#location")!)).toBe(Node.DOCUMENT_POSITION_FOLLOWING);
       const cards = screen.getAllByTestId("hotel-recommendation");
       expect(cards).toHaveLength(4);
-      expect(container.querySelector("#book [data-testid='neighborhood-hotel-grid']")).toHaveClass("lg:grid-cols-2");
+      expect(container.querySelector("#book [data-testid='neighborhood-hotel-grid']")).toHaveClass(g.id === "jerusalem" && area.id === "downtown" ? "sm:grid-cols-2" : "lg:grid-cols-2");
       const imageUrls = cards.map((card) => within(card).getByTestId("hotel-illustration").getAttribute("src"));
       expect(new Set(imageUrls).size).toBe(4);
       expect(screen.getByTestId("neighborhood-hotel-photo-credits")).toBeInTheDocument();
@@ -106,14 +106,36 @@ describe.each([
         expect(within(hotelSection).queryByText(/Check rooms on Expedia|View hotel on Expedia/)).not.toBeInTheDocument();
         expect(within(container.querySelector("#other-areas") as HTMLElement).getAllByRole("link")).toHaveLength(areas.length);
         expect(within(container.querySelector("#other-areas") as HTMLElement).getByRole("link", { name: /All .* neighborhoods/ })).toHaveAttribute("href", g.path);
-        expect(screen.getByRole("link", { name: /Read my guide to where to stay in/ })).toHaveAttribute("href", g.id === "jerusalem" ? "/travel-blog/where-to-stay-in-jerusalem/" : "/travel-blog/where-to-stay-in-tel-aviv/");
+        if (area.id === "downtown") {
+          expect(screen.getByRole("link", { name: /Explore the neighborhood guide/ })).toHaveAttribute("href", "/travel-blog/where-to-stay-in-jerusalem/");
+        } else {
+          expect(screen.getByRole("link", { name: /Read my guide to where to stay in/ })).toHaveAttribute("href", g.id === "jerusalem" ? "/travel-blog/where-to-stay-in-jerusalem/" : "/travel-blog/where-to-stay-in-tel-aviv/");
+        }
         expect(container.querySelector("#book")!.compareDocumentPosition(container.querySelector("#overview")!) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
         expect(container.querySelector("#overview")!.compareDocumentPosition(container.querySelector("#location")!) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
         expect(container.querySelector("#location")!.compareDocumentPosition(container.querySelector("#checklist")!) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
-        expect(container.querySelector("#more-hotels")!.compareDocumentPosition(container.querySelector("#overview")!) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
+        if (area.id === "downtown") {
+          expect(container.querySelector("#more-hotels")).toBeNull();
+          expect(container.querySelector("#area-guide")).toBeInTheDocument();
+          expect(container.querySelector("#overview")!.compareDocumentPosition(container.querySelector("#area-guide")!) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
+          expect(container.querySelector("#book iframe")).toHaveLength(1);
+          expect(container.querySelector("#location iframe")).toBeNull();
+          expect(container.querySelector("#book [data-testid='downtown-hotel-map']")).toHaveClass("xl:h-full");
+        } else {
+          expect(container.querySelector("#more-hotels")!.compareDocumentPosition(container.querySelector("#overview")!) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
+        }
         expect(within(container.querySelector("#location") as HTMLElement).getByText(/Arriving with luggage:/)).toBeInTheDocument();
-        expect(within(hotelSection).getByText(/Photos illustrate the neighborhoods/)).toBeInTheDocument();
+        expect(within(hotelSection).getByText(/Hotel stays are provided by independent properties/)).toBeInTheDocument();
         for (const src of imageUrls) expect(src).not.toBe(area.photo.src);
+        if (area.id === "downtown") {
+          for (const card of cards) {
+            expect(card).toHaveClass("flex", "flex-col");
+            expect(within(card).getByTestId("hotel-illustration")).toHaveClass("aspect-[16/9]", "w-full", "object-cover");
+            expect(card.lastElementChild).toContainElement(within(card).getByRole("link", { name: /^(Check rooms|View hotel)/ }));
+          }
+          expect(within(container.querySelector("#location") as HTMLElement).queryByText("Make your arrival easier")).toBeNull();
+          expect(within(container.querySelector("#checklist") as HTMLElement).getByText("Location & arrival")).toBeInTheDocument();
+        }
         expect(container.querySelector("#sources")).not.toBeNull();
         expect(container.querySelector("#sources")!.compareDocumentPosition(screen.getByTestId("neighborhood-hotel-photo-credits")) & Node.DOCUMENT_POSITION_PRECEDING).toBeTruthy();
       }
@@ -152,6 +174,32 @@ describe.each([
       unmount();
     }
   }, 20000);
+
+  it("places Downtown's four vertical cards beside one map, with a correctly tracked neighborhood Expedia link", () => {
+    const { container } = render(<NeighborhoodStayPage area={jerusalemAreaGuides.find((area) => area.id === "downtown")!} />);
+    const section = container.querySelector("#book") as HTMLElement;
+    const grid = within(section).getByTestId("downtown-hotels-with-map");
+    expect(grid).toHaveClass("xl:grid-cols-[minmax(0,1fr)_minmax(250px,0.4fr)]", "items-stretch");
+    expect(within(grid).getAllByTestId("hotel-recommendation")).toHaveLength(4);
+    const map = within(section).getByTestId("downtown-hotel-map");
+    expect(map.querySelector("iframe")).toHaveAttribute("src", expect.stringContaining("maps.google.com"));
+    expect(map.querySelector("figure")).toHaveClass("h-full", "flex", "flex-col");
+    const browse = within(section).getByTestId("downtown-area-browse-expedia");
+    const offer = linksForPage("stay-area-downtown-browse")[0]!;
+    expect(offer.id).toBe("area-downtown-expedia");
+    expect(browse).toHaveTextContent("Browse more Downtown hotels");
+    expect(browse).toHaveClass("btn-primary");
+    expect(browse).toHaveAttribute("href", hotelBrowseAffiliateUrl(offer, "stay-area-downtown"));
+    expect(browse.getAttribute("href")).toContain("sub_id=itt_stay_area_downtown_area_downtown_expedia");
+    expect(browse.getAttribute("rel")).toContain("sponsored");
+    fireEvent.click(browse);
+    expect(readOutboundClicks()).toContainEqual(expect.objectContaining({
+      pageId: "stay-area-downtown", productId: offer.id, offerId: offer.id,
+    }));
+    expect(screen.getByRole("heading", { name: "Getting around Downtown Jerusalem" })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "Not sure where to base yourself in Jerusalem?" })).toBeInTheDocument();
+    expect(screen.queryByText(/Planning an airport arrival\?/)).not.toBeInTheDocument();
+  });
 
   it("city gallery matches the complete four-per-area inventory with no missing or duplicate hotel IDs", () => {
     const expected = areas.flatMap((area) => hotelsForArea(area.id, g.id));
