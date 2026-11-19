@@ -89,7 +89,7 @@ describe("Dead Sea category-first travel-blog hotel guide", () => {
       ["Ein Gedi Nature Reserve", "/attractions/ein-gedi/"],
       ["Qasr el Yahud", "/attractions/qasr-el-yahud/"],
       ["Dead Sea attractions guide", "/travel-blog/dead-sea-attractions/"],
-    ]) {
+    ] as const) {
       expect(arrival.getByRole("link", { name })).toHaveAttribute("href", href);
     }
     expect(container).toHaveTextContent("entry from 16");
