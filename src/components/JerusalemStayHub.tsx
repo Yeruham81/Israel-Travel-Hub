@@ -15,6 +15,8 @@ import { CityHotelPhotoCredits } from "@/components/CityHotelPhotoCredits";
 import { AreaPhotoCredit } from "@/components/AreaMap";
 import jerusalemHeroPhoto from "@/assets/home/hero-refresh-jerusalem-jaffa-gate-v4-medium.webp";
 import jerusalemAreaGuidePhoto from "@/assets/guides/2026-11/where-to-stay-jerusalem-drive.webp";
+import jewishQuarterLanePhoto from "@/assets/guides/2026-11/jerusalem-jewish-quarter-stone-lane.webp";
+import eastJerusalemHousePhoto from "@/assets/jerusalem/east-jerusalem-house.webp";
 
 const pageSections = [
   ["book", "Hotels"], ["areas", "Neighborhoods"], ["compare", "Compare areas"],
@@ -29,6 +31,11 @@ const neighborhoodCta: Record<string, string> = {
   "mahane-yehuda": "Explore market-area hotels",
   "east-jerusalem": "Discover East Jerusalem stays",
   "german-colony": "Browse German Colony & Baka hotels",
+};
+
+const neighborhoodCardPhotos: Record<string, { src: string; alt: string }> = {
+  "old-city": { src: jewishQuarterLanePhoto, alt: "Stone lane in Jerusalem's Jewish Quarter within the Old City" },
+  "east-jerusalem": { src: eastJerusalemHousePhoto, alt: "Traditional stone house in East Jerusalem" },
 };
 
 export function JerusalemStayHub({ g, areas }: { g: CityStayGuide; areas: NeighborhoodStayGuide[] }) {
@@ -82,7 +89,8 @@ export function JerusalemStayHub({ g, areas }: { g: CityStayGuide; areas: Neighb
               >
                 <span className="block min-w-0 overflow-hidden bg-muted">
                   <img
-                    src={area.photo.src} alt={area.photo.alt}
+                    src={neighborhoodCardPhotos[area.id]?.src ?? area.photo.src}
+                    alt={neighborhoodCardPhotos[area.id]?.alt ?? area.photo.alt}
                     width={755} height={503} loading="lazy" decoding="async"
                     className="aspect-[16/10] h-full w-full object-cover transition-transform duration-300 motion-safe:group-hover:scale-[1.03]"
                   />
