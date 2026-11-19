@@ -54,7 +54,8 @@ describe("migrated practical guides", () => {
       // recommendation, ten place cards, a map, photos and a six-card follow-up grid.
       expect(container.querySelectorAll('article[id^="shop-"]')).toHaveLength(10);
       expect(container.querySelector('iframe[src^="/maps/jerusalem-shopping.html"]')).not.toBeNull();
-      expect(container.querySelector('[data-shopping-photo-slot="bezalel"]')).not.toBeNull();
+      expect(container.querySelector('#shop-bezalel img[src="/images/jerusalem-shopping/bezalel-arts-fair.webp"]')).not.toBeNull();
+      expect(container.querySelector('[data-shopping-photo-slot="bezalel"]')).toBeNull();
       expect(container.querySelectorAll("#explore-more a")).toHaveLength(6);
       expect(screen.getByRole("heading", { name: "Where I'd start" })).toBeInTheDocument();
       expect(screen.getByRole("complementary", { name: "About the author" })).toHaveTextContent("Written by Moshe Barak");
