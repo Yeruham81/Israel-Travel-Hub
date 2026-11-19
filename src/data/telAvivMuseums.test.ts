@@ -1,3 +1,4 @@
+import { readFileSync } from "node:fs";
 import { describe, expect, it } from "vitest";
 import { additionalMuseums, museumAreas, museumMapPoints, museums } from "@/data/telAvivMuseums";
 
@@ -56,11 +57,28 @@ describe("Tel Aviv museums editorial guide", () => {
     expect(museums.find(museum => museum.id === "city")?.ticketUrl).toContain("smarticket");
     expect(museums.find(museum => museum.id === "steinhardt")?.ticketUrl).toContain("smnh.tau.ac.il");
     expect(museums.find(museum => museum.id === "palmach")?.booking).toContain("03-5459800");
-    expect(museums.find(museum => museum.id === "bauhaus")?.closureNote).toBe("Guided tours suspended as of November 2026.");
+    const bauhaus = museums.find(museum => museum.id === "bauhaus");
+    expect(bauhaus?.closureNote).toBeUndefined();
+    expect(bauhaus?.booking).toContain("Check dates for guided White City tours");
+    expect(bauhaus?.tip).toContain("Check with the centre in advance");
+    expect(bauhaus?.booking.toLowerCase()).not.toContain("suspended");
     expect(museums.find(museum => museum.id === "bialik")?.admission).toContain("₪75");
     expect(museums.find(museum => museum.id === "art")?.ticketUrl).toContain("tickets.tamuseum.org.il");
     expect(museums.find(museum => museum.id === "palmach")?.openingDays).toContain("Fri 09:00–11:00");
     expect(museums.find(museum => museum.id === "bauhaus")?.admission).toContain("₪90");
+  });
+
+  it("uses built-in map clustering and keeps direct directions separate from venue searches", () => {
+    const mapHtml = readFileSync(new URL("../../public/maps/tel-aviv-museums.html", import.meta.url), "utf8");
+    const guideCode = readFileSync(new URL("../components/TelAvivMuseumsGuide.tsx", import.meta.url), "utf8");
+    expect(mapHtml).toContain("cluster:true");
+    expect(mapHtml).toContain("getClusterExpansionZoom");
+    expect(mapHtml).toContain("museum-cluster-count");
+    expect(mapHtml).toContain("museum-points");
+    expect(mapHtml).toContain("tel-aviv-museum-map-selected");
+    expect(guideCode).toContain("https://www.google.com/maps/dir/?api=1&destination=");
+    expect(guideCode).not.toContain("All 15 museums on one map. Select a venue to zoom in.");
+    expect(guideCode).not.toContain("Reserve by phone or WhatsApp: <a");
   });
 
   it("differentiates the two Etzel sites and retains essential new venues", () => {
