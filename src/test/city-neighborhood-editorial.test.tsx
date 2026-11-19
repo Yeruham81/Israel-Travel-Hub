@@ -40,7 +40,13 @@ describe("Jerusalem and Tel Aviv neighbourhood editorial guides", () => {
     for (let i = 0; i < areas.length; i++) {
       const area = areas[i]!;
       const section = sections[i]!;
-      if (region === "telaviv") expect(section.querySelector("figcaption")?.textContent).toBe(area.photo.alt);
+      const gridId = region === "jerusalem" ? "jerusalem-area-image-grid" : "telaviv-area-image-grid";
+      const cardImage = screen.getByTestId(gridId).querySelector(`a[href="#area-${area.id}"] img`);
+      expect(cardImage).toBeTruthy();
+      expect(cardImage).toHaveAttribute("alt", expect.any(String));
+      expect(cardImage?.getAttribute("alt")).toBeTruthy();
+      expect(section.querySelector("figure img")).toHaveAttribute("src", cardImage?.getAttribute("src"));
+      expect(section.querySelector("figcaption")).toHaveTextContent(cardImage?.getAttribute("alt") || "");
       expect(section).not.toHaveTextContent("neighbourhood view");
       const button = within(section).getByRole("link", { name: new RegExp(`${region === "jerusalem" ? "Browse more hotels in " : "Explore more hotels in "}${area.shortName}`) });
       expect(button).toHaveAttribute("href", area.path);
@@ -59,13 +65,6 @@ describe("Jerusalem and Tel Aviv neighbourhood editorial guides", () => {
       const eastJerusalemCard = navigation.querySelector('a[href="#area-east-jerusalem"] img');
       expect(eastJerusalemCard).toHaveAttribute("src", eastJerusalemHouse);
       expect(navigation.querySelector('a[href="#area-old-city"] img')).toHaveAttribute("src", oldCityStoneLane);
-      for (const area of areas) {
-        const cardImage = navigation.querySelector(`a[href="#area-${area.id}"] img`);
-        const section = container.querySelector(`#area-${area.id}`);
-        expect(cardImage).toBeTruthy();
-        expect(section?.querySelector("figure img")).toHaveAttribute("src", cardImage?.getAttribute("src"));
-        expect(section?.querySelector("figcaption")).toHaveTextContent(cardImage?.getAttribute("alt") || "");
-      }
       expect(container.querySelector('img[src*="old-city-BJwjTGND"]')).toBeNull();
       expect(container.querySelector("#compare")).toBeNull();
       expect(navigation.querySelector('a[href="#area-mamilla"] img')).toHaveAttribute("src", mamillaStreet);
@@ -164,6 +163,13 @@ describe("Jerusalem and Tel Aviv neighbourhood editorial guides", () => {
       expect(within(navigation).getAllByRole("link")).toHaveLength(8);
       expect(within(navigation).getAllByRole("img")).toHaveLength(8);
       expect(navigation).toHaveClass("lg:grid-cols-4");
+      expect(navigation.querySelector('a[href="#area-telaviv-beachfront"] img')).toHaveAttribute("src", "/images/city-stays/tel-aviv-beachfront.webp");
+      expect(navigation.querySelector('a[href="#area-telaviv-dizengoff"] img')).toHaveAttribute("src", "/images/city-stays/tel-aviv-dizengoff.webp");
+      expect(navigation.querySelector('a[href="#area-telaviv-jaffa"] img')).toHaveAttribute("src", "/images/city-stays/tel-aviv-jaffa.webp");
+      expect(navigation.querySelector('a[href="#area-telaviv-old-north"] img')).toHaveAttribute("src", areas.find((area) => area.id === "telaviv-old-north")?.photo.src);
+      expect(navigation.querySelector('a[href="#area-telaviv-rothschild"] img')).toHaveAttribute("src", areas.find((area) => area.id === "telaviv-rothschild")?.photo.src);
+      const photoSources = within(navigation).getAllByRole("img").map((img) => img.getAttribute("src"));
+      expect(new Set(photoSources).size).toBe(8);
       expect(container.querySelectorAll('[data-testid="telaviv-practical-notes"]')).toHaveLength(8);
       expect(container.querySelectorAll('[data-testid="telaviv-area-highlights"]')).toHaveLength(8);
       expect(container.querySelectorAll('[data-testid="telaviv-area-layout"]')).toHaveLength(8);
