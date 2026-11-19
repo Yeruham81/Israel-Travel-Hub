@@ -12,8 +12,8 @@ import { hotelBooking, resortHotel } from "@/components/StayGuideParts";
 import { resortHotelPhoto } from "@/data/resortHotelPhotos";
 import { hotelAffiliateUrl, hotelBrowseAffiliateUrl } from "@/lib/hotel-affiliate";
 import { recordOutboundClick, relFor } from "@/lib/outbound";
-import deadSeaValueImage from "@/assets/dead-sea/beach-card.webp";
-import deadSeaFamilyImage from "@/assets/dead-sea/beach-tile.webp";
+import deadSeaValueImage from "@/assets/home/hotel-room.webp";
+import deadSeaSpaImage from "@/assets/home/hero-refresh-dead-sea-salt-v4-medium.webp";
 
 /**
  * Category-first accommodation editorial, sharing the structure and UI patterns
@@ -258,7 +258,13 @@ export function HotelStyleEditorialGuide({ guide }: { guide: HotelStayDestinatio
         <div className="mt-6 grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-4" data-testid="deadsea-category-grid">
           {primaryGroups.map(group => {
             const content = groupCaptions[group.id];
-            const photo = group.id === "value" ? { src: deadSeaValueImage, alt: "Dead Sea beachfront and resort area" } : group.id === "family" ? { src: deadSeaFamilyImage, alt: "Dead Sea swimming beach near the family resort hotels" } : group.photo;
+            const photo = group.id === "value"
+              ? { src: deadSeaValueImage, alt: "Comfortable illustrative hotel bedroom with a bright sitting area" }
+              : group.id === "family"
+                ? { src: "/images/home/accommodation-dead-sea-ai.webp", alt: "Illustrative Dead Sea hotels along the shore below the desert cliffs" }
+                : group.id === "spa"
+                  ? { src: deadSeaSpaImage, alt: "Sunset over the mineral-rich Dead Sea shoreline" }
+                  : group.photo;
             return <a key={group.id} href={"#group-" + group.id} className="group flex min-w-0 flex-col overflow-hidden rounded-2xl border bg-card shadow-sm transition-all hover:-translate-y-0.5 hover:border-primary/60 hover:shadow-md" data-testid="deadsea-category-card">
               <img src={photo.src} alt={photo.alt} width={755} height={503} loading="lazy" decoding="async" className="aspect-[16/10] w-full object-cover" />
               <span className="flex flex-1 flex-col p-3 sm:p-4">
@@ -353,7 +359,7 @@ export function HotelStyleEditorialGuide({ guide }: { guide: HotelStayDestinatio
           })}
         </div>
         {browseLink && <div className="mt-3 flex flex-col items-start gap-3 rounded-2xl border bg-secondary/30 p-5 sm:flex-row sm:items-center sm:justify-between sm:p-6">
-          <div><h3 className="text-lg font-semibold">Looking for more Dead Sea hotels?</h3><p className="mt-1 text-sm leading-relaxed text-muted-foreground">Compare other properties on the booking provider and confirm that your selected hotel is in Israel.</p></div>
+          <div><h3 className="text-lg font-semibold">Looking for more Dead Sea hotels?</h3></div>
           <a href={hotelBrowseAffiliateUrl(browseLink, pageId)} target="_blank" rel={relFor(browseLink.isAffiliate)}
             onClick={() => recordOutboundClick({ pageId, productId: browseLink.id, offerId: browseLink.id })}
             className="inline-flex min-h-11 shrink-0 items-center justify-center gap-2 rounded-lg border border-primary/40 bg-card px-4 py-2 text-sm font-semibold text-primary">
@@ -373,7 +379,10 @@ export function HotelStyleEditorialGuide({ guide }: { guide: HotelStayDestinatio
             <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{location.text}</p>
           </article>)}
         </div>
-        <div className="mt-5 space-y-3">{guide.arrival.map(paragraph => <p key={paragraph} className="leading-relaxed">{paragraph}</p>)}</div>
+        <div className="mt-5 space-y-3">
+          <p className="leading-relaxed">{guide.arrival[0]}</p>
+          <p className="leading-relaxed">A car or a booked driver is useful for combining your stay with sites along Route 90, such as <Link to="/attractions/masada/" className="font-semibold text-primary underline underline-offset-2">Masada</Link>, <Link to="/attractions/ein-gedi/" className="font-semibold text-primary underline underline-offset-2">Ein Gedi Nature Reserve</Link> and <Link to="/attractions/qasr-el-yahud/" className="font-semibold text-primary underline underline-offset-2">Qasr el Yahud</Link>. My <Link to="/travel-blog/dead-sea-attractions/" className="font-semibold text-primary underline underline-offset-2">Dead Sea attractions guide</Link> covers more stops in the region. Check current transport services, attraction access and hotel check-in for your travel date, especially Friday evening, Saturday and holidays. Reserve child seats or accessible transport where needed.</p>
+        </div>
       </section>
 
       <section id="tips" className="mt-14 scroll-mt-32" aria-labelledby="tips-h">
