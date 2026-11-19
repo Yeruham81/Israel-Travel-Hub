@@ -45,6 +45,14 @@ describe("hotel-level and page-level Travelpayouts attribution", () => {
     expect(allHotelOffers).toHaveLength(88);
     expect(allHotelOffers.every((link) => link.isAffiliate)).toBe(true);
     expect(new Set(allHotelOffers.map((link) => link.url)).size).toBe(allHotelOffers.length);
+    for (const offer of allHotelOffers) {
+      const hotelId = offer.id.slice("hotel-".length, -"-expedia".length);
+      const sourcePage = offer.pageIds[0]!;
+      const destination = new URL(hotelAffiliateUrl(offer, sourcePage, hotelId));
+      expect(["expedia.tpm.li", "expedia.tpk.lv"]).toContain(destination.hostname);
+      expect(destination.searchParams.getAll("sub_id")).toEqual([hotelClickSubId(sourcePage, hotelId)]);
+      expect(destination.origin + destination.pathname).toBe(offer.url);
+    }
   });
 
   it("tracks Paamonim separately in Downtown and in the Jerusalem city hotel catalog", () => {
