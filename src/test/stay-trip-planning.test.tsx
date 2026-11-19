@@ -29,7 +29,7 @@ describe("hotel and neighborhood guide navigation", () => {
     expect(within(local).getAllByRole("img")).toHaveLength(localCount);
     if (region === "jerusalem" || region === "telaviv" || region === "deadsea") {
       expect(local).toHaveClass("grid-cols-2", "lg:grid-cols-3");
-      expect(onward).toHaveClass("grid-cols-2", "lg:grid-cols-3");
+      expect(onward).toHaveClass(region === "deadsea" ? "sm:grid-cols-2" : "grid-cols-2", "lg:grid-cols-3");
     }
     expect(within(onward).getAllByRole("img")).toHaveLength(6);
 
