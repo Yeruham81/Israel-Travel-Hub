@@ -5,6 +5,7 @@ import { deadSeaStayGuide } from "@/data/content";
 import { linksForPage } from "@/data/registry";
 import { hotelBooking, resortHotel } from "@/components/StayGuideParts";
 import { hotelAffiliateUrl, hotelBrowseAffiliateUrl } from "@/lib/hotel-affiliate";
+import { hotelGoogleMapsUrl } from "@/lib/hotel-google-maps";
 import { resortHotelPhoto } from "@/data/resortHotelPhotos";
 
 vi.mock("@tanstack/react-router", () => ({
@@ -79,6 +80,11 @@ describe("Dead Sea category-first travel-blog hotel guide", () => {
     expect(resortHotelPhoto("ds-oasis").src).not.toBe(resortHotelPhoto("ds-nevo").src);
     expect(resortHotelPhoto("ds-oasis").src).not.toBe(resortHotelPhoto("ds-noga").src);
     expect(container).not.toHaveTextContent("Compare other properties on the booking provider");
+    expect(screen.getAllByTestId("deadsea-hotel-facility-notice")).toHaveLength(2);
+    expect(container).toHaveTextContent("As of November 2026, the water park is temporarily closed");
+    expect(container).toHaveTextContent("As of November 2026, the spa Jacuzzi is temporarily out of service.");
+    expect(container).not.toHaveTextContent("Select a hotel name to jump");
+    expect(container).not.toHaveTextContent("Current room prices and availability are checked on the booking provider");
     expect(new Set(cards.map(card => card.querySelector("img")?.getAttribute("src"))).size).toBe(11);
     expect(screen.getAllByRole("listitem").filter(node => node.closest('#tips') !== null)).toHaveLength(8);
     expect(container).toHaveTextContent("Separate hotel and spa age rules");
@@ -110,6 +116,11 @@ describe("Dead Sea category-first travel-blog hotel guide", () => {
       expect(link).toHaveAttribute("target", "_blank");
       expect(link).toHaveAttribute("rel", expect.stringContaining("sponsored"));
       expect(link).toHaveTextContent("Check rooms & rates");
+      const map = within(card).getByTestId("deadsea-hotel-map-link");
+      expect(map).toHaveAttribute("href", hotelGoogleMapsUrl(resortHotel(id)));
+      expect(map).toHaveAttribute("target", "_blank");
+      expect(map).toHaveAttribute("rel", expect.stringContaining("noopener"));
+      expect(map).toHaveTextContent("View location on Google Maps");
       expect(link.getAttribute("aria-label")).toContain(resortHotel(id).name);
       expect(card.querySelector("img")).toBeInTheDocument();
     });
@@ -145,6 +156,6 @@ describe("Dead Sea category-first travel-blog hotel guide", () => {
     const hotels = deadSeaStayGuide.groups.flatMap(group => group.hotelIds);
     hotels.forEach(id => expect(sources).toContain(resortHotel(id).sourceId));
     expect(sources.length).toBeGreaterThanOrEqual(11);
-    expect(sourceList).toHaveAttribute("data-intro", expect.stringContaining("Hotel facilities, access and age policies"));
+    expect(sourceList).toHaveAttribute("data-intro", expect.stringContaining("Hotel websites and practical travel resources"));
   });
 });
