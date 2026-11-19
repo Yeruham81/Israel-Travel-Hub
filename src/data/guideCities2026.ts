@@ -1,5 +1,6 @@
 import type { TravelGuide } from "@/data/travelGuides";
 import { migrationPhotos as P } from "@/data/guideMigrationPhotos";
+import { museums as telAvivMuseumEntries, museumAreas as telAvivMuseumAreas } from "@/data/telAvivMuseums";
 
 export const cityCultureGuides = {
   "eilat": {
@@ -379,233 +380,73 @@ export const cityCultureGuides = {
       "m26-tlv-city"
     ]
   },
+  // This registry entry supplies cards, search metadata and legacy guide readers.
+  // Its museum sections and comparison are derived from the same curated data
+  // used by the dedicated public Tel Aviv museums article.
   "telAvivMuseums": {
-    "id": "telAvivMuseums",
-    "updatedAt": "2026-11-19",
-    "title": "Best Museums in Tel Aviv & Jaffa",
-    "description": "Explore the best museums in Tel Aviv and Jaffa, from art and history to natural history and architecture. Compare venues, booking needs and neighbourhood museum routes.",
-    "intro": "Discover Tel Aviv and Jaffa museums with my practical advice on what to see, how to choose, and which cultural attractions to combine in a visit.",
-    "answer": "Choose Tel Aviv Museum of Art for a large art visit, MUZA for material culture and archaeology, ANU for Jewish cultural history, or Steinhardt for natural history. Add a smaller museum only if the location and visit windows fit. Check advance reservations, the language of timed experiences and current renovation or access notices.",
-    "topics": [
-      "attractions",
-      "destinations",
-      "tips"
+    id: "telAvivMuseums",
+    updatedAt: "2026-11-19",
+    title: "Best Museums in Tel Aviv & Jaffa",
+    description: "Explore museums in Tel Aviv and Jaffa, from art and natural history to architecture and historic houses, with visitor prices, booking advice and practical neighbourhood routes.",
+    intro: "Discover Tel Aviv and Jaffa's museums through my guide to choosing the right collection, planning a manageable itinerary and checking tickets and opening days.",
+    answer: "My first choices are Tel Aviv Museum of Art for exhibitions, ANU for Jewish culture and the Steinhardt Museum for natural history. Bialik Square is ideal for a walk between smaller venues. Check admission, current exhibitions and temporary closure notices before visiting.",
+    topics: ["attractions", "destinations", "tips"],
+    photo: P["museums-in-tel-aviv"],
+    facts: [
+      { label: "15 venues", text: "Art, history, architecture and family collections" },
+      { label: "Plan by area", text: "Central Tel Aviv, Ramat Aviv, Neve Tzedek or Jaffa" },
+      { label: "Rates and hours", text: "Official adult prices and usual opening days, checked November 2026" },
     ],
-    "photo": P["museums-in-tel-aviv"],
-    "facts": [
-      {
-        "label": "Choose by theme",
-        "text": "Art, natural history, city stories or heritage"
-      },
-      {
-        "label": "Group by location",
-        "text": "Central city, Ramat Aviv or Jaffa"
-      },
-      {
-        "label": "Reserve first",
-        "text": "Timed visits and language need separate checks"
-      }
-    ],
-    "comparison": {
-      "caption": "Choose a museum area",
-      "headers": [
-        "Area",
-        "Museums to compare",
-        "Planning approach"
-      ],
-      "rows": [
-        [
-          "Central cultural district",
-          "Tel Aviv Museum of Art",
-          "Leave time for a substantial main visit"
-        ],
-        [
-          "Bialik / Rothschild / Neve Tzedek",
-          "City Museum, Independence Hall, Gutman",
-          "Check access separately for each institution"
-        ],
-        [
-          "University / Ramat Aviv",
-          "ANU, Steinhardt, MUZA, Palmach",
-          "Choose one main visit and confirm the last leg"
-        ],
-        [
-          "Northern city",
-          "Yitzhak Rabin Center",
-          "Plan the actual address and museum duration"
-        ],
-        [
-          "Jaffa and the southern waterfront",
-          "Ilana Goor, Etzel, Uri Geller",
-          "Different operators, routes and booking terms"
-        ]
-      ]
+    comparison: {
+      caption: "Tel Aviv and Jaffa museums — regular admission and visiting times",
+      headers: ["Museum", "Area", "Adult admission", "Usual opening days"],
+      rows: telAvivMuseumEntries.map(museum => [
+        museum.name, museum.neighbourhood,
+        museum.id === "independence" ? "Closed for restoration" : museum.priceNis === 0 ? "Free general entry" : typeof museum.priceNis === "number" ? "NIS " + museum.priceNis : "Confirm with operator",
+        museum.openingDays || "Check with operator",
+      ]),
     },
-    "sections": [
-      {
-        "id": "art",
-        "title": "Tel Aviv Museum of Art",
-        "paragraphs": [
-          "Choose this for Israeli and international art, architecture and changing exhibitions. The museum’s current notice directs visitors through the Herta and Paul Amir Building during renovation work. Check the exhibition and entrance information when booking rather than expecting every gallery or installation to be open."
-        ]
-      },
-      {
-        "id": "muza",
-        "title": "MUZA · Eretz Israel Museum",
-        "paragraphs": [
-          "This Ramat Aviv museum campus combines archaeology, material culture, craft and changing exhibitions. It is a substantial visit rather than one small gallery. Planetarium sessions and special programmes can require separate reservations or tickets; check the precise combination you want."
+    sections: telAvivMuseumAreas.map(area => ({
+      id: "area-" + area.id,
+      title: area.name,
+      paragraphs: [area.intro],
+      subsections: telAvivMuseumEntries.filter(museum => museum.area === area.id).map(museum => ({
+        id: "museum-" + museum.id,
+        title: museum.name,
+        paragraphs: [
+          museum.intro,
+          "Admission: " + museum.admission + ". Usual opening: " + (museum.openingDays || "check with the museum") + ". " + museum.booking + ".",
+          "My tip: " + museum.tip,
+          ...(museum.closureNote ? [museum.closureNote] : []),
         ],
-        "photo": P["eretz-israel-museum"]
-      },
-      {
-        "id": "anu",
-        "title": "ANU · Museum of the Jewish People",
-        "paragraphs": [
-          "On the Tel Aviv University campus, ANU explores Jewish life and culture across communities and periods. Choose it for a broad cultural story, and check the language and suitability of any guided or family programme separately from ordinary admission."
-        ]
-      },
-      {
-        "id": "independence",
-        "title": "Independence Hall",
-        "paragraphs": [
-          "The historic declaration-of-independence setting on Rothschild Boulevard has had extended restoration-related access changes. Do not rely on an old reopening year or assume an interior visit is available. Confirm current arrangements with the heritage operator before building a morning around it."
-        ]
-      },
-      {
-        "id": "city",
-        "title": "Tel Aviv–Yafo City Museum",
-        "paragraphs": [
-          "At 27 Bialik Street, the city museum focuses on local people, urban stories and contemporary interpretations of Tel Aviv–Yafo. It fits a central neighbourhood outing; compare its current exhibition with the larger art and university museums rather than treating them as interchangeable."
-        ]
-      },
-      {
-        "id": "natural-history",
-        "title": "Steinhardt Museum of Natural History",
-        "paragraphs": [
-          "This Tel Aviv University museum introduces biodiversity and the natural world. Its official visitor information currently says tickets are purchased online only. Check timed-entry, family activities and accessibility information before travelling; do not assume a ticket for neighbouring ANU covers it."
-        ]
-      },
-      {
-        "id": "palmach",
-        "title": "Palmach Museum",
-        "paragraphs": [
-          "An experiential historical visit in the Ramat Aviv area follows the story of the Palmach. Confirm advance booking, session language, age guidance and group arrangements directly. A structured museum experience needs a place in the day’s timetable, not just a spare half-hour."
-        ]
-      },
-      {
-        "id": "etzel",
-        "title": "Etzel Museum · 1948",
-        "paragraphs": [
-          "This separate museum near the Jaffa seafront covers a specific organisation and period in the history of 1948. Check the Ministry of Defense museum listing for public visits, language and admission. It is different from both Independence Hall and the Palmach Museum."
-        ]
-      },
-      {
-        "id": "rabin",
-        "title": "Yitzhak Rabin Center",
-        "paragraphs": [
-          "The center’s museum places Rabin’s life within modern Israeli history. Use its own visitor information for the entrance, languages, accessibility and admission. Plan it as a distinct northern-city stop rather than assuming it is in the central Rothschild museum cluster."
-        ]
-      },
-      {
-        "id": "ilana-goor",
-        "title": "Ilana Goor Museum",
-        "paragraphs": [
-          "In Old Jaffa, this artist’s collection and historic building offer a different scale of art visit from the main city museum. Consider stairs, the actual visitor route and opening arrangements when pairing it with the port or old hill."
-        ]
-      },
-      {
-        "id": "gutman",
-        "title": "Nahum Gutman Museum of Art",
-        "paragraphs": [
-          "This Neve Tzedek museum is a useful name to compare for an artist-focused visit and a neighbourhood walk. Confirm its current exhibition and opening directly. Nearby cafés, shops and other attractions have their own timetables."
-        ]
-      },
-      {
-        "id": "geller",
-        "title": "Uri Geller Museum",
-        "paragraphs": [
-          "This specialist Jaffa collection offers an advance-booked tour rather than an ordinary walk-in museum visit. The operator currently states that no walk-ins are allowed. Check the group or private format, language, age guidance and current booking terms before travelling specifically for it."
-        ]
-      },
-      {
-        "id": "museum-day",
-        "title": "Build a museum day that leaves room to enjoy it",
-        "paragraphs": [
-          "Compare the current exhibition, the amount of reading or audio and any age guidance before choosing a museum for children. A hands-on or natural-history programme is not the same experience as a long historical presentation. Ask about English content if that matters to your group.",
-          "Use the museum’s current ticket page for prices, last entry and special-event terms. Do not carry forward old guidebook prices or assume all museums open on the same weekday. Pair one main visit with a meal or nearby walk, and leave time for transport, a cloakroom and a break."
-        ],
-        "links": [
-          {
-            "label": "Plan a food stop",
-            "to": "/travel-blog/what-to-eat-in-israel/"
-          },
-          {
-            "label": "Add a beach or promenade walk",
-            "to": "/travel-blog/beaches-in-tel-aviv/"
-          },
-          {
-            "label": "Plan transport between neighbourhoods",
-            "to": "/travel-blog/getting-around-tel-aviv/"
-          }
-        ]
-      }
+        bullets: museum.highlights,
+        highlightedLinks: [{ label: "Official museum information", href: museum.url, context: "Current visitor details and operating notices" }],
+      })),
+    })),
+    checklist: [
+      "Choose an area and one main museum for the day",
+      "Check official admission rates, concessions and opening times",
+      "Reserve any timed presentation or family gallery",
+      "Check separate historic venues and temporary closure notices",
+      "Plan transport, accessibility and a meal or walking break",
     ],
-    "checklist": [
-      "Pick a subject and a coherent neighbourhood",
-      "Check the exhibition, booking and entry point",
-      "Confirm English content and age suitability",
-      "Check stairs, accessible routes and any assistance",
-      "Use current tickets rather than old prices",
-      "Leave time for one main visit and a break"
+    faqs: [
+      { q: "What are the best museums for a first visit?", a: "Tel Aviv Museum of Art for art, ANU for Jewish culture and Steinhardt for natural history are good starting points. Around Bialik Square, several smaller museums are within walking distance." },
+      { q: "Can I visit multiple museums in one day?", a: "Yes, particularly around Bialik Square. In Ramat Aviv choose one major museum first and check timings before adding a second." },
+      { q: "Are some museums temporarily closed?", a: "Independence Hall is closed for restoration as of November 2026, MUZA's planetarium is temporarily closed and guided walks at Bauhaus Center are suspended. Their museum entries stay in the guide for future visits." },
     ],
-    "faqs": [
-      {
-        "q": "Can I visit all the major museums in one day?",
-        "a": "Choose one main institution and perhaps a nearby smaller visit. Distances, timed sessions and the amount of content make an all-museums day unrealistic for most visitors."
-      },
-      {
-        "q": "Is Independence Hall automatically open to visitors?",
-        "a": "Do not assume so. Restoration-related access has changed, and old reopening dates are not a current confirmation."
-      },
-      {
-        "q": "Are ANU and Steinhardt one museum?",
-        "a": "No. They are separate institutions on the university campus, with separate admission and programmes."
-      }
+    related: ["telAvivBeaches", "food", "calendar", "haifaMuseums"],
+    services: [
+      { label: "Explore Tel Aviv attractions", to: "/travel-blog/attractions-in-tel-aviv/" },
+      { label: "Plan getting around Tel Aviv", to: "/travel-blog/getting-around-tel-aviv/" },
+      { label: "Discover Jaffa", to: "/attractions/jaffa/" },
     ],
-    "related": [
-      "telAvivBeaches",
-      "food",
-      "calendar",
-      "haifaMuseums"
+    sourceIds: [
+      "m26-tamuseum", "m26-muza", "m26-anu", "m26-steinhardt",
+      "m26-tlv-museum", "m26-palmach", "m26-rabin", "m26-ilana",
+      "m26-independence", "m26-defense-museums", "m26-gutman",
+      "m26-geller", "m26-rubin", "m26-liebling", "m26-bialik", "m26-bauhaus",
     ],
-    "services": [
-      {
-        "label": "Compare Tel Aviv hotel neighbourhoods",
-        "to": "/travel-blog/where-to-stay-in-tel-aviv/"
-      },
-      {
-        "label": "Plan time in Jaffa",
-        "to": "/attractions/jaffa/"
-      }
-    ],
-    "sourceIds": [
-      "m26-tamuseum",
-      "m26-muza",
-      "m26-anu",
-      "m26-steinhardt",
-      "m26-tlv-museum",
-      "m26-palmach",
-      "m26-rabin",
-      "m26-ilana",
-      "m26-independence",
-      "m26-defense-museums",
-      "m26-gutman",
-      "m26-geller",
-      "m26-rubin",
-      "m26-liebling",
-      "m26-bialik",
-      "m26-bauhaus"
-    ]
   },
   "haifaMuseums": {
     "id": "haifaMuseums",
