@@ -15,6 +15,7 @@ import { hotelTileCopy } from "@/components/TelAvivHotelBrowser";
 import { cityHotelPhoto, hotelsInCityCatalog } from "@/data/cityHotelCatalog";
 import { jerusalemHotelCatalog, jerusalemHotelTileCopy } from "@/components/JerusalemHotelBrowser";
 import { jerusalemHotelPhotos } from "@/data/jerusalemHotelPhotos";
+import jerusalemEditorialHero from "@/assets/guides/2026-11/where-to-stay-jerusalem-drive.webp";
 import { routeTree } from "@/routeTree.gen";
 
 // Keep router matching real, while making isolated page renders independent of
@@ -323,6 +324,7 @@ describe("Jerusalem direct hotel catalog", () => {
     }
     expect([...initialAreaCounts.values()]).toEqual([2, 2, 2, 2, 2, 2]);
     const expand = within(catalog).getByRole("button", { name: "View more hotels" });
+    expect(expand.querySelector("svg")).toBeNull();
     expect(expand).toHaveAttribute("aria-expanded", "false");
     fireEvent.click(expand);
     expect(expand).toHaveAttribute("aria-expanded", "true");
@@ -398,10 +400,20 @@ describe("Jerusalem direct hotel catalog", () => {
     expect(within(neighborhoodSection).getAllByRole("button")).toHaveLength(7);
     expect(neighborhoodSection.querySelectorAll("[data-testid='neighborhood-card']")).toHaveLength(6);
     expect(within(catalog).getByRole("button", { name: "View more hotels" })).toBeInTheDocument();
-    const areaGuide = container.querySelector("#area-guide")!;
-    expect(areaGuide.compareDocumentPosition(catalog) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
-    expect(areaGuide).toBeInTheDocument();
-    expect(within(areaGuide as HTMLElement).getByRole("link", { name: /Explore the neighborhood guide/i })).toHaveAttribute("href", "/travel-blog/where-to-stay-in-jerusalem/");
+    const areaGuide = container.querySelector("#area-guide")! as HTMLElement;
+    const comparison = container.querySelector("#compare")!;
+    const checklist = container.querySelector("#checklist")!;
+    expect(comparison.compareDocumentPosition(areaGuide) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
+    expect(areaGuide.compareDocumentPosition(checklist) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
+    expect(within(areaGuide).getByRole("heading", { name: "Not sure where to base yourself in Jerusalem?" })).toBeInTheDocument();
+    expect(areaGuide.querySelector("img")).toHaveAttribute("src", jerusalemEditorialHero);
+    expect(within(areaGuide).getByRole("link", { name: /Explore the neighborhood guide/i })).toHaveAttribute("href", "/travel-blog/where-to-stay-in-jerusalem/");
+    const neighborhoodCards = neighborhoodSection.querySelector("ul")!;
+    const firstTip = within(neighborhoodSection).getByText("Think about the last walk.").closest("div")!;
+    const secondTip = within(neighborhoodSection).getByText("Check your dates.").closest("div")!;
+    expect(neighborhoodCards.compareDocumentPosition(firstTip) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
+    expect(firstTip.compareDocumentPosition(secondTip) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
+    expect(within(comparison as HTMLElement).getByText(/Compare each neighborhood’s advantages/)).toBeInTheDocument();
     expect(screen.getByTestId("stay-local-photo-grid").querySelectorAll("a")).toHaveLength(6);
     expect(screen.getByRole("img", { name: "Jaffa Gate and Jerusalem Old City walls" })).toBeInTheDocument();
     const firstCard = within(catalog).getAllByTestId("jerusalem-hotel-card")[0]!;
