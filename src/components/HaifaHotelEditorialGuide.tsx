@@ -290,7 +290,8 @@ export function HaifaHotelEditorialGuide({ guide }: { guide: HotelStayDestinatio
             </a>;
           })}
         </div>
-        {budgetGroup && <a href="#group-budget" className="group mt-4 flex min-w-0 flex-col overflow-hidden rounded-2xl border bg-card shadow-sm transition-all hover:-translate-y-0.5 hover:border-primary/60 hover:shadow-md sm:flex-row sm:items-center" data-testid="haifa-budget-spotlight">
+        {budgetGroup && (
+        <a href="#group-budget" className="group mt-4 flex min-w-0 flex-col overflow-hidden rounded-2xl border bg-card shadow-sm transition-all hover:-translate-y-0.5 hover:border-primary/60 hover:shadow-md sm:flex-row sm:items-center" data-testid="haifa-budget-spotlight">
           <span className="flex min-w-0 flex-1 flex-col p-4 sm:p-5">
             <span className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">Another way to stay in Haifa</span>
             <strong className="mt-1 break-words text-base leading-snug sm:text-lg">Independent & budget-minded stays</strong>
@@ -299,7 +300,8 @@ export function HaifaHotelEditorialGuide({ guide }: { guide: HotelStayDestinatio
           <span className="flex min-h-11 shrink-0 items-center gap-2 border-t px-4 py-3 text-sm font-semibold text-primary sm:border-l sm:border-t-0 sm:px-5">
             See hotels <ArrowRight className="h-4 w-4 shrink-0" aria-hidden />
           </span>
-        </a>}
+        </a>
+        )}
         <aside className="mt-6 flex gap-3 rounded-xl border border-amber-200 bg-amber-50/80 p-4 text-sm leading-relaxed dark:border-amber-900/50 dark:bg-amber-950/20">
           <Lightbulb className="mt-0.5 h-5 w-5 shrink-0 text-amber-600" aria-hidden />
           <p>A room with a beautiful bay view can be high above the shore. Check the actual journey to the beach, the Bahá'í Gardens and your planned daily stops before deciding.</p>
