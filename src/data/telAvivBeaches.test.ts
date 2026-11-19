@@ -47,6 +47,21 @@ describe("Tel Aviv beach guide editorial regression", () => {
     expect(map).toContain("tel-aviv-beach-map-selected");
   });
 
+  it("keeps mobile map controls full width and prevents isolated regional cards", () => {
+    const page = readFileSync(resolve(process.cwd(), "src/components/TelAvivBeachesGuide.tsx"), "utf8");
+    const data = readFileSync(resolve(process.cwd(), "src/data/telAvivBeaches.ts"), "utf8");
+    expect(page).toContain("flex flex-col gap-3 border-b p-4 sm:flex-row sm:items-end");
+    expect(page).toContain("w-full min-w-0 text-sm font-semibold sm:w-auto sm:flex-1");
+    expect(page).toContain("disabled:opacity-40 sm:w-auto");
+    expect(page).toContain('area.name === "Southern coast and Jaffa"');
+    expect(page).toContain('group.beaches.length === 3 ? "md:grid-cols-3" : "md:grid-cols-2"');
+    expect(page).toContain("md:aspect-[16/9] md:w-full");
+    expect(page).not.toContain("officialTelAvivBeachesEnglish");
+    expect(data).not.toContain("officialTelAvivBeachesEnglish");
+    expect(page).toContain("There are no lifeguard services at Aviv Beach.");
+    expect(page).toContain("data-beach-photo-slot");
+  });
+
   it("retains thirteen map markers in north-to-south order", () => {
     expect(beachMapPoints).toHaveLength(13);
     expect(beachMapPoints.map(point => point.id)).toEqual(telAvivBeaches.map(beach => beach.id));
