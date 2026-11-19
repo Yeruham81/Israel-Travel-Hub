@@ -15,9 +15,9 @@ export const accommodationEditorial = {
     description: "Find a Tiberias or Sea of Galilee base with practical advice on lakefront, hillside and family stays.",
     intro: "Tiberias works both as a lakeside break and as a base for exploring the Sea of Galilee. Compare the central promenade, hillside views and quieter places around the lake before choosing a hotel.",
     tip: "Plan how you will reach sites around the Sea of Galilee; a hillside view may mean a steep journey back from the waterfront." },
-  deadsea: { path: "/travel-blog/best-dead-sea-hotels/", title: "Dead Sea best hotels: where to stay",
-    description: "Understand Ein Bokek, the southern Dead Sea resort area and Ein Gedi before choosing a spa or family hotel.",
-    intro: "At the Dead Sea, location and facilities can shape your whole stay. I explain the differences between Ein Bokek, the southern hotel district and Ein Gedi before you compare spa resorts, family hotels and quieter options.",
+  deadsea: { path: "/travel-blog/best-dead-sea-hotels/", title: "Best Dead Sea hotels: where to stay",
+    description: "Compare 11 Dead Sea hotels for luxury, spa, family holidays and value. Find practical beach access advice, Ein Gedi alternatives and booking links.",
+    intro: "At the Dead Sea, the hotel can shape your whole holiday. I compare luxury escapes, spa breaks, family resorts and practical stays around Ein Bokek and Neve Zohar, plus quieter options near Ein Gedi, to help you choose what really suits your trip.",
     tip: "Check the exact beach route, meals and transport; a resort in Ein Bokek and a stay in Ein Gedi are very different bases." },
 } as const;
 export type AccommodationEditorialId = keyof typeof accommodationEditorial;
