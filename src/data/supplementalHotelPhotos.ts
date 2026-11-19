@@ -7,7 +7,7 @@
  */
 import type { HotelIllustration } from "@/data/telAvivHotelPhotos";
 import jerusalemNight from "@/assets/travel-blog-hub/jerusalem-night-443d64981d-420.webp";
-import downtownStreet from "@/assets/jerusalem/downtown.webp";
+import downtownStreet from "@/assets/travel-blog-hub/downtown-944eb9d46b-420.webp";
 import mahaneMarket from "@/assets/travel-blog-hub/mahane-yehuda-c53a05ac52-420.webp";
 import foodMarkets from "@/assets/tours-hub/food-markets.webp";
 import germanColonyStreet from "@/assets/travel-blog-hub/colony-35429f7d31-420.webp";
