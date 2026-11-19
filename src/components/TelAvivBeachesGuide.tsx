@@ -8,7 +8,7 @@ import { PageUpdated } from "@/components/PageUpdated";
 import { SourcesDisclosure } from "@/components/SourcesDisclosure";
 import { HomeContactForm } from "@/components/HomeContactForm";
 import { neighborhoodTripContactCopy } from "@/lib/guide-contact";
-import { beachMapPoints, beachTopPicks, officialTelAvivBeaches, officialTelAvivBeachesEnglish, officialBeachFacilities, officialBeachPrices, telAvivBeaches, type TelAvivBeach } from "@/data/telAvivBeaches";
+import { beachMapPoints, beachTopPicks, officialTelAvivBeaches, officialBeachFacilities, officialBeachPrices, telAvivBeaches, type TelAvivBeach } from "@/data/telAvivBeaches";
 
 import heroPhoto from "@/assets/guides/2026-10/beaches-in-tel-aviv.webp";
 import jaffaPhoto from "@/assets/tel-aviv/jaffa.webp";
@@ -85,7 +85,7 @@ function BeachPhotoSlot({ beach, kind = "detail", compact = false }: {
   beach: TelAvivBeach; kind?: "pick" | "detail"; compact?: boolean;
 }) {
   const photo = kind === "pick" ? beach.pickPhoto : beach.detailPhoto;
-  const shape = compact ? "aspect-[4/3] w-24 shrink-0 rounded-lg sm:w-28" : "aspect-[16/9] w-full";
+  const shape = compact ? "aspect-[4/3] w-24 shrink-0 rounded-lg sm:w-28 md:aspect-[16/9] md:w-full lg:aspect-[4/3] lg:w-24 xl:w-28" : "aspect-[16/9] w-full";
   return photo ? (
     <img src={photo.src} alt={photo.alt} loading="lazy" decoding="async"
       width={compact ? 280 : 880} height={compact ? 210 : 495}
@@ -101,7 +101,7 @@ function BeachPhotoSlot({ beach, kind = "detail", compact = false }: {
 function BeachCard({ beach, compact = false }: { beach: TelAvivBeach; compact?: boolean }) {
   return <article id={"beach-" + beach.id} className="flex scroll-mt-28 flex-col overflow-hidden rounded-2xl border bg-card shadow-sm">
     {compact ? (
-      <div className="flex gap-3 p-4">
+      <div className="flex flex-col gap-3 p-4 sm:flex-row md:flex-col lg:flex-row">
         <BeachPhotoSlot beach={beach} compact />
         <div className="min-w-0 flex-1">
           <h4 className="text-lg font-bold leading-tight">{beach.name}</h4>
@@ -220,8 +220,8 @@ export function TelAvivBeachesGuide() {
       <section id="beach-map" aria-labelledby="beach-map-h" className="mt-12 scroll-mt-24">
         <Heading id="beach-map" title="Map of Tel Aviv's beaches" intro="The map follows the coastline from North Tzuk to Givat Aliya. Use the individual Google Maps links below for directions to your chosen entrance." />
         <div className="overflow-hidden rounded-xl border bg-card">
-          <div className="flex flex-wrap items-end gap-3 border-b p-4">
-            <label htmlFor="tel-aviv-beach-map-select" className="min-w-0 flex-1 text-sm font-semibold">
+          <div className="flex flex-col gap-3 border-b p-4 sm:flex-row sm:items-end">
+            <label htmlFor="tel-aviv-beach-map-select" className="w-full min-w-0 text-sm font-semibold sm:w-auto sm:flex-1">
               Focus on a beach
               <select id="tel-aviv-beach-map-select" value={mapBeach} onChange={event => focusMap(event.target.value)}
                 className="mt-2 min-h-11 w-full rounded-lg border bg-background px-3 py-2 text-sm font-normal focus-visible:outline-2 focus-visible:outline-primary">
@@ -234,7 +234,7 @@ export function TelAvivBeachesGuide() {
               </select>
             </label>
             <button type="button" onClick={() => focusMap("all")} disabled={mapBeach === "all"}
-              className="min-h-11 rounded-lg border border-primary/30 px-4 py-2 text-sm font-semibold text-primary hover:bg-secondary disabled:cursor-default disabled:opacity-40">Show all beaches</button>
+              className="min-h-11 w-full rounded-lg border border-primary/30 px-4 py-2 text-sm font-semibold text-primary hover:bg-secondary disabled:cursor-default disabled:opacity-40 sm:w-auto">Show all beaches</button>
           </div>
           <iframe ref={beachMapRef} title="Interactive map of Tel Aviv's thirteen listed beaches"
             loading="lazy" referrerPolicy="strict-origin-when-cross-origin" src={beachMapUrl} width={900} height={440}
@@ -254,15 +254,23 @@ export function TelAvivBeachesGuide() {
           const beaches = telAvivBeaches.filter(beach => beach.area === area.name);
           const mainPicks = beaches.filter(beach => beach.featured);
           const additional = beaches.filter(beach => !beach.featured);
+          // Keep both southern beaches on the same row. Groups of three elsewhere
+          // use three desktop columns rather than leaving a single orphan card.
+          const groups = area.name === "Southern coast and Jaffa"
+            ? [{ beaches, compact: false }]
+            : [
+              { beaches: mainPicks, compact: false },
+              { beaches: additional, compact: true },
+            ];
           return <section key={area.name} aria-label={area.name} className="mt-9">
             <h3 className="text-xl font-bold sm:text-2xl">{area.name}</h3>
             <p className="mt-2 max-w-3xl leading-relaxed text-muted-foreground">{area.intro}</p>
-            <div className="mt-5 grid items-stretch gap-5 md:grid-cols-2">
-              {mainPicks.map(beach => <BeachCard key={beach.id} beach={beach} />)}
-            </div>
-            {additional.length > 0 && <div className="mt-5 grid items-stretch gap-4 md:grid-cols-2">
-              {additional.map(beach => <BeachCard key={beach.id} beach={beach} compact />)}
-            </div>}
+            {groups.filter(group => group.beaches.length > 0).map(group => (
+              <div key={group.compact ? "secondary" : "featured"}
+                className={"mt-5 grid items-stretch gap-4 " + (group.beaches.length === 3 ? "md:grid-cols-3" : "md:grid-cols-2")}>
+                {group.beaches.map(beach => <BeachCard key={beach.id} beach={beach} compact={group.compact} />)}
+              </div>
+            ))}
             {index === 0 && <div className="mt-5"><Tip>Tel Baruch and the Tzuk beaches are much farther from central hotels than Hilton or Metzitzim. For a northern beach day, I recommend choosing the entrance and checking your return journey.</Tip></div>}
             {index === 1 && <div className="mt-5"><Tip>Gordon, Frishman, Bograshov and Jerusalem Beach are close together along the promenade. Choose one near your accommodation and spend more time enjoying the sea than changing locations.</Tip></div>}
           </section>;
@@ -332,7 +340,6 @@ export function TelAvivBeachesGuide() {
       <SourcesDisclosure>
         <p className="mb-3 text-sm leading-relaxed">I use the city's official beach descriptions for the municipal beach list, safety, accessibility and separate-bathing rules, and the Israel Nature and Parks Authority for Palmahim. Lifeguard operation, flags, sea conditions, facilities and park fees can change; confirm the details for your visit.</p>
         <ul className="grid gap-x-5 gap-y-2 text-sm sm:grid-cols-2">
-          <li><OfficialLink href={officialTelAvivBeachesEnglish}>Tel Aviv–Yafo beaches — official English guide</OfficialLink></li>
           <li><OfficialLink href={officialTelAvivBeaches}>Municipality — current lifeguards and sea conditions (Hebrew)</OfficialLink></li>
           <li><OfficialLink href={officialBeachFacilities}>Municipality — facilities, accessibility and dog areas (Hebrew)</OfficialLink></li>
           <li><OfficialLink href={officialBeachPrices}>Municipality — beach rental prices (Hebrew)</OfficialLink></li>
