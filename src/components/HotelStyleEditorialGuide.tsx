@@ -1,5 +1,5 @@
 import { Link, type LinkProps } from "@tanstack/react-router";
-import { ArrowRight, ArrowUpRight, Check, Hotel, Lightbulb, MapPin, Waves } from "lucide-react";
+import { ArrowRight, ArrowUpRight, Check, Hotel, Lightbulb, MapPin } from "lucide-react";
 import { accommodationEditorial } from "@/data/accommodationEditorial";
 import type { HotelStayDestination } from "@/data/content";
 import { INFO_CHECK_DATE, linksForPage } from "@/data/registry";
