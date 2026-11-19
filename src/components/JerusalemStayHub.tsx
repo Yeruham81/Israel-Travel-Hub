@@ -14,11 +14,11 @@ import { guideContactCopy } from "@/lib/guide-contact";
 import { CityHotelPhotoCredits } from "@/components/CityHotelPhotoCredits";
 import { AreaPhotoCredit } from "@/components/AreaMap";
 import jerusalemHeroPhoto from "@/assets/home/hero-refresh-jerusalem-jaffa-gate-v4-medium.webp";
-import jerusalemAreaGuidePhoto from "@/assets/home/jerusalem-old-city-tile.webp";
+import jerusalemAreaGuidePhoto from "@/assets/guides/2026-11/where-to-stay-jerusalem-drive.webp";
 
 const pageSections = [
-  ["area-guide", "Where to stay"], ["book", "Hotels"], ["areas", "Neighborhoods"], ["compare", "Compare areas"],
-  ["checklist", "Booking tips"], ["faq", "FAQ"], ["explore", "Local guides"],
+  ["book", "Hotels"], ["areas", "Neighborhoods"], ["compare", "Compare areas"],
+  ["area-guide", "Where to stay"], ["checklist", "Booking tips"], ["faq", "FAQ"], ["explore", "Local guides"],
   ["trip-planning", "Trip planning"], ["contact", "Contact me"],
 ] as const;
 
@@ -52,27 +52,6 @@ export function JerusalemStayHub({ g, areas }: { g: CityStayGuide; areas: Neighb
       />
       <OnThisPage sections={pageSections} />
       <article className="mx-auto max-w-5xl px-4">
-        <section id="area-guide" aria-labelledby="area-guide-h" className="mt-8 scroll-mt-28">
-          <div className="grid overflow-hidden rounded-2xl border bg-secondary/30 sm:grid-cols-[minmax(0,1fr)_230px]">
-            <div className="min-w-0 p-5 sm:p-6">
-              <p className="eyebrow inline-flex items-center gap-2"><BookOpen className="h-4 w-4" aria-hidden /> Find your ideal base</p>
-              <h2 id="area-guide-h" className="mt-2 text-xl font-semibold sm:text-2xl">
-                Choosing your Jerusalem neighborhood?
-              </h2>
-              <p className="mt-2 max-w-xl text-sm leading-relaxed text-muted-foreground">
-                Compare the atmosphere, walking distances and transport connections of six popular areas before deciding where to stay.
-              </p>
-              <Link
-                to={"/travel-blog/where-to-stay-in-jerusalem/" as LinkProps["to"]}
-                className="mt-4 inline-flex min-h-11 items-center gap-2 rounded-lg border border-primary/30 bg-card px-4 py-2.5 text-sm font-semibold text-primary transition-colors hover:border-primary/60 hover:bg-secondary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
-              >
-                Explore the neighborhood guide <ArrowRight className="h-4 w-4" aria-hidden />
-              </Link>
-            </div>
-            <img src={jerusalemAreaGuidePhoto} alt="Jerusalem Old City skyline and surrounding neighborhoods" width={460} height={300} loading="lazy" decoding="async" className="hidden h-full w-full object-cover sm:block" />
-          </div>
-        </section>
-
         <JerusalemHotelBrowser />
 
         <section id="areas" aria-labelledby="areas-h" className="mt-12 scroll-mt-28">
@@ -80,16 +59,6 @@ export function JerusalemStayHub({ g, areas }: { g: CityStayGuide; areas: Neighb
           <p className="mt-3 w-full text-pretty leading-relaxed text-muted-foreground">
             {g.areaIntro}
           </p>
-          <div className="mt-4 grid gap-3 sm:grid-cols-2">
-            <div className="flex gap-3 rounded-xl border border-amber-200/60 bg-amber-50/60 p-4 dark:border-amber-400/20 dark:bg-amber-500/5">
-              <Lightbulb className="mt-0.5 h-5 w-5 shrink-0 text-amber-600 dark:text-amber-400" aria-hidden />
-              <p className="text-sm leading-relaxed"><strong>Think about the last walk.</strong> Jerusalem is hilly, and the nearest taxi stop or light-rail station may still be uphill from your hotel.</p>
-            </div>
-            <div className="flex gap-3 rounded-xl border border-amber-200/60 bg-amber-50/60 p-4 dark:border-amber-400/20 dark:bg-amber-500/5">
-              <Lightbulb className="mt-0.5 h-5 w-5 shrink-0 text-amber-600 dark:text-amber-400" aria-hidden />
-              <p className="text-sm leading-relaxed"><strong>Check your dates.</strong> Shabbat and <Link to="/travel-blog/israel-holidays/" className="font-semibold text-primary underline underline-offset-2">Jewish holidays</Link> can affect transport and dining in West Jerusalem; other neighborhoods may follow different schedules.</p>
-            </div>
-          </div>
           <div className="mt-5 flex flex-wrap gap-2" role="group" aria-label="Choose areas by travel style">
             <button
               type="button" className="chip" aria-pressed={preference === null}
@@ -129,11 +98,21 @@ export function JerusalemStayHub({ g, areas }: { g: CityStayGuide; areas: Neighb
               </Link>
             </li>)}
           </ul>
+          <div className="mt-6 grid gap-3 sm:grid-cols-2">
+            <div className="flex gap-3 rounded-xl border border-amber-200/60 bg-amber-50/60 p-4 dark:border-amber-400/20 dark:bg-amber-500/5">
+              <Lightbulb className="mt-0.5 h-5 w-5 shrink-0 text-amber-600 dark:text-amber-400" aria-hidden />
+              <p className="text-sm leading-relaxed"><strong>Think about the last walk.</strong> Jerusalem is hilly, and the nearest taxi stop or light-rail station may still be uphill from your hotel.</p>
+            </div>
+            <div className="flex gap-3 rounded-xl border border-amber-200/60 bg-amber-50/60 p-4 dark:border-amber-400/20 dark:bg-amber-500/5">
+              <Lightbulb className="mt-0.5 h-5 w-5 shrink-0 text-amber-600 dark:text-amber-400" aria-hidden />
+              <p className="text-sm leading-relaxed"><strong>Check your dates.</strong> Shabbat and <Link to="/travel-blog/israel-holidays/" className="font-semibold text-primary underline underline-offset-2">Jewish holidays</Link> can affect transport and dining in West Jerusalem; other neighborhoods may follow different schedules.</p>
+            </div>
+          </div>
         </section>
 
         <section id="compare" aria-labelledby="compare-h" className="mt-12 scroll-mt-28">
           <h2 id="compare-h" className="text-2xl font-semibold sm:text-3xl">Compare areas in Jerusalem</h2>
-          <p className="mt-2 text-sm text-muted-foreground">A quick guide to location and access before choosing a room.</p>
+          <p className="mt-2 text-sm text-muted-foreground">Compare each neighborhood’s advantages, arrival options and practical considerations to find the right base for your stay.</p>
           <div className="mt-4 overflow-hidden rounded-2xl border bg-card">
             <div className="overflow-x-auto" role="region" aria-label="Jerusalem neighborhood comparison" tabIndex={0}>
               <table className="w-full min-w-[680px] text-left text-sm">
@@ -155,6 +134,27 @@ export function JerusalemStayHub({ g, areas }: { g: CityStayGuide; areas: Neighb
                 </tbody>
               </table>
             </div>
+          </div>
+        </section>
+
+        <section id="area-guide" aria-labelledby="area-guide-h" className="mt-8 scroll-mt-28">
+          <div className="grid overflow-hidden rounded-2xl border bg-secondary/30 sm:grid-cols-[minmax(0,1fr)_230px]">
+            <div className="min-w-0 p-5 sm:p-6">
+              <p className="eyebrow inline-flex items-center gap-2"><BookOpen className="h-4 w-4" aria-hidden /> Neighborhood guide</p>
+              <h2 id="area-guide-h" className="mt-2 text-xl font-semibold sm:text-2xl">
+                Not sure where to base yourself in Jerusalem?
+              </h2>
+              <p className="mt-2 max-w-xl text-sm leading-relaxed text-muted-foreground">
+                Explore my guide to six Jerusalem neighborhoods, with practical advice on atmosphere, sightseeing access and getting around.
+              </p>
+              <Link
+                to={"/travel-blog/where-to-stay-in-jerusalem/" as LinkProps["to"]}
+                className="mt-4 inline-flex min-h-11 items-center gap-2 rounded-lg border border-primary/30 bg-card px-4 py-2.5 text-sm font-semibold text-primary transition-colors hover:border-primary/60 hover:bg-secondary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+              >
+                Explore the neighborhood guide <ArrowRight className="h-4 w-4" aria-hidden />
+              </Link>
+            </div>
+            <img src={jerusalemAreaGuidePhoto} alt="Jerusalem neighborhood and cityscape view from the Where to Stay in Jerusalem guide" width={460} height={300} loading="lazy" decoding="async" className="aspect-[16/10] h-full w-full object-cover sm:aspect-auto" />
           </div>
         </section>
 
