@@ -120,17 +120,17 @@ export function JerusalemHotelBrowser() {
         {visible.map((hotel) => <JerusalemHotelTile key={hotel.id} hotel={hotel} />)}
       </ul>
 
-      {areaId === "all" && (
+      {areaId === "all" && visible.length < hotelList.length && (
         <div className="mt-5 flex justify-center">
           <button
             type="button"
-            onClick={() => setExpanded((current) => !current)}
-            aria-expanded={expanded}
+            onClick={() => setExpanded(true)}
+            aria-expanded={false}
             aria-controls="jerusalem-hotels"
             data-testid="jerusalem-hotel-expand"
             className="inline-flex min-h-11 items-center justify-center gap-2 rounded-lg border border-primary/40 bg-card px-5 py-2.5 text-sm font-semibold text-primary transition-colors hover:border-primary hover:bg-secondary/20 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
           >
-            {expanded ? "Show fewer hotels" : "View more hotels"}
+            Show more hotels
           </button>
         </div>
       )}
