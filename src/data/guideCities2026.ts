@@ -189,8 +189,8 @@ export const cityCultureGuides = {
     ],
     comparison: {
       caption: "Compare Tel Aviv's thirteen municipally listed bathing beaches",
-      headers: ["Beach", "Area", "Best for", "Getting there"],
-      rows: listedTelAvivBeaches.map(beach => [beach.name, beach.area, beach.bestFor, beach.access]),
+      headers: ["Beach", "Area", "Best for", "Facilities & access"],
+      rows: listedTelAvivBeaches.map(beach => [beach.name, beach.area, beach.bestFor, beach.highlights + " · " + beach.accessShort]),
     },
     sections: [
       {
@@ -212,6 +212,7 @@ export const cityCultureGuides = {
         paragraphs: [
           "Visit the municipality's current beach and lifeguard page for seasonal operation and daily conditions. Swim only inside a declared bathing zone with lifeguards on duty.",
           "Accessible routes and bathing assistance vary. North Tzuk has a documented slope limitation, while the city lists water-access chairs and other facilities at several beaches.",
+          "There are no lifeguard services at Aviv Beach. This is a water-sports stretch rather than one of the 13 declared bathing beaches.",
         ],
       },
       {
