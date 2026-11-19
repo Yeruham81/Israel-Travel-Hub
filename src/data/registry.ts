@@ -1556,6 +1556,12 @@ export const affiliateConfig: Record<string, { trackingUrl: string } | undefined
   "hotel-jlm-ibis-styles-expedia": { trackingUrl: "https://expedia.tpm.li/cfGgqry4" },
   // Generated for the exact Paamonim Expedia property by the Travelpayouts links API (19 Nov 2026).
   "hotel-jlm-paamonim-expedia": { trackingUrl: "https://expedia.tpk.lv/wdsf1D6t" },
+  // Direct links generated for five Jerusalem neighborhood hotels by Travelpayouts (19 Nov 2026).
+  "hotel-jlm-eldan-expedia": { trackingUrl: "https://expedia.tpk.lv/yOVUvTzX" },
+  "hotel-jlm-christ-church-expedia": { trackingUrl: "https://expedia.tpk.lv/Bg2hIg69" },
+  "hotel-jlm-brown-machne-expedia": { trackingUrl: "https://expedia.tpk.lv/5LY5y9KA" },
+  "hotel-jlm-national-hotel-expedia": { trackingUrl: "https://expedia.tpk.lv/QbywqunZ" },
+  "hotel-jlm-dan-boutique-expedia": { trackingUrl: "https://expedia.tpk.lv/43hfwKBG" },
   "hotel-jlm-david-citadel-expedia": { trackingUrl: "https://expedia.tpm.li/BvIrC40X" },
   "hotel-jlm-waldorf-expedia": { trackingUrl: "https://expedia.tpm.li/sYbVC6QM" },
   "hotel-jlm-hashimi-expedia": { trackingUrl: "https://expedia.tpm.li/WU93VyPL" },
