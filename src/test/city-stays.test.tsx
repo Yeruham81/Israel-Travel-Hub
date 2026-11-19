@@ -93,18 +93,23 @@ describe.each([
       expect(container.querySelector("main main")).toBeNull();
       expect(container.querySelector("#book")!.compareDocumentPosition(container.querySelector("#location")!)).toBe(Node.DOCUMENT_POSITION_FOLLOWING);
       const cards = screen.getAllByTestId("hotel-recommendation");
-      const expectedHotels = g.id === "jerusalem" && area.id === "downtown" ? 5 : 4;
+      const expectedHotels = g.id === "jerusalem" ? 5 : 4;
       expect(cards).toHaveLength(expectedHotels);
-      expect(container.querySelector("#book [data-testid='neighborhood-hotel-grid']")).toHaveClass(g.id === "jerusalem" && area.id === "downtown" ? "sm:grid-cols-2" : "lg:grid-cols-2");
+      expect(container.querySelector("#book [data-testid='neighborhood-hotel-grid']")).toHaveClass(g.id === "jerusalem" ? "sm:grid-cols-2" : "lg:grid-cols-2");
       const imageUrls = cards.map((card) => within(card).getByTestId("hotel-illustration").getAttribute("src"));
       expect(new Set(imageUrls).size).toBe(expectedHotels);
       expect(screen.getByTestId("neighborhood-hotel-photo-credits")).toBeInTheDocument();
       expect(within(container.querySelector("#book") as HTMLElement).getByRole("heading", {
-        name: g.id === "jerusalem" && area.id === "downtown"
-          ? "Popular hotels in Jerusalem's Downtown"
-          : `Hotels in ${area.shortName}`,
+        name: g.id === "jerusalem" ? ({
+          downtown: "Popular hotels in Jerusalem's Downtown",
+          mamilla: "Popular hotels in Mamilla & King David Street",
+          "old-city": "Popular hotels in Jerusalem's Old City",
+          "mahane-yehuda": "Popular hotels near Mahane Yehuda & Nachlaot",
+          "east-jerusalem": "Popular hotels in East Jerusalem",
+          "german-colony": "Popular hotels in German Colony & Baka",
+        } as Record<string, string>)[area.id] : `Hotels in ${area.shortName}`,
       })).toBeInTheDocument();
-      if (g.id === "jerusalem" && area.id === "downtown") {
+      if (g.id === "jerusalem") {
         expect(within(container.querySelector("#book") as HTMLElement).queryByText(/Explore my selected hotels/)).toBeNull();
       }
       {
@@ -114,7 +119,7 @@ describe.each([
         expect(within(hotelSection).queryByText(/Check rooms on Expedia|View hotel on Expedia/)).not.toBeInTheDocument();
         expect(within(container.querySelector("#other-areas") as HTMLElement).getAllByRole("link")).toHaveLength(areas.length);
         expect(within(container.querySelector("#other-areas") as HTMLElement).getByRole("link", { name: /All .* neighborhoods/ })).toHaveAttribute("href", g.path);
-        if (area.id === "downtown") {
+        if (g.id === "jerusalem") {
           expect(screen.getByRole("link", { name: /Compare neighborhoods/ })).toHaveAttribute("href", "/travel-blog/where-to-stay-in-jerusalem/");
         } else {
           expect(screen.getByRole("link", { name: /Read my guide to where to stay in/ })).toHaveAttribute("href", g.id === "jerusalem" ? "/travel-blog/where-to-stay-in-jerusalem/" : "/travel-blog/where-to-stay-in-tel-aviv/");
@@ -122,7 +127,7 @@ describe.each([
         expect(container.querySelector("#book")!.compareDocumentPosition(container.querySelector("#overview")!) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
         expect(container.querySelector("#overview")!.compareDocumentPosition(container.querySelector("#location")!) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
         expect(container.querySelector("#location")!.compareDocumentPosition(container.querySelector("#checklist")!) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
-        if (area.id === "downtown") {
+        if (g.id === "jerusalem") {
           expect(container.querySelector("#more-hotels")).toBeNull();
           expect(container.querySelector("#area-guide")).toBeInTheDocument();
           expect(container.querySelector("#overview")!.compareDocumentPosition(container.querySelector("#area-guide")!) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
@@ -131,14 +136,14 @@ describe.each([
           const grid = container.querySelector("#book [data-testid='neighborhood-hotel-grid']")!;
           expect(grid).toHaveClass("xl:grid-cols-3", "auto-rows-fr");
           expect(grid.children).toHaveLength(6);
-          expect(grid.lastElementChild).toHaveAttribute("data-testid", "downtown-hotel-map");
+          expect(grid.lastElementChild).toHaveAttribute("data-testid", "jerusalem-hotel-map");
         } else {
           expect(container.querySelector("#more-hotels")!.compareDocumentPosition(container.querySelector("#overview")!) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
         }
         expect(within(container.querySelector("#location") as HTMLElement).getByText(/Arriving with luggage:/)).toBeInTheDocument();
         expect(within(hotelSection).getByText(/Hotel stays are provided by independent properties/)).toBeInTheDocument();
         for (const src of imageUrls) expect(src).not.toBe(area.photo.src);
-        if (area.id === "downtown") {
+        if (g.id === "jerusalem") {
           for (const card of cards) {
             expect(card).toHaveClass("flex", "flex-col");
             expect(within(card).getByTestId("hotel-illustration")).toHaveClass("aspect-[16/9]", "w-full", "object-cover");
@@ -154,7 +159,7 @@ describe.each([
       expect(screen.queryByText("Who it suits")).not.toBeInTheDocument();
       expect(screen.queryByText("Check before booking")).not.toBeInTheDocument();
       expect(within(screen.getByRole("navigation", { name: "Breadcrumb" })).getByRole("link", { name: g.city })).toHaveAttribute("href", g.path);
-      if (area.id === "downtown") {
+      if (g.id === "jerusalem") {
         expect(container.querySelector(`a[href="${g.related[0]!.to}"]`)).toBeNull();
       } else {
         expect(container.querySelector(`a[href="${g.related[0]!.to}"]`)).toBeInTheDocument();
@@ -190,15 +195,15 @@ describe.each([
     }
   }, 20000);
 
-  it("places five Downtown hotel cards and a compact sixth-cell map with a tracked Expedia link", () => {
+  it("places five hotel cards and one compact map consistently across every Jerusalem neighborhood", () => {
     const { container } = render(<NeighborhoodStayPage area={jerusalemAreaGuides.find((area) => area.id === "downtown")!} />);
     const section = container.querySelector("#book") as HTMLElement;
-    const grid = within(section).getByTestId("downtown-hotels-with-map");
+    const grid = within(section).getByTestId("jerusalem-hotels-with-map");
     const list = within(grid).getByTestId("neighborhood-hotel-grid");
     expect(list).toHaveClass("sm:grid-cols-2", "xl:grid-cols-3", "auto-rows-fr", "items-stretch");
     expect(within(grid).getAllByTestId("hotel-recommendation")).toHaveLength(5);
     expect(list.children).toHaveLength(6);
-    const map = within(section).getByTestId("downtown-hotel-map");
+    const map = within(section).getByTestId("jerusalem-hotel-map");
     expect(map.querySelector("iframe")).toHaveAttribute("src", expect.stringContaining("maps.google.com"));
     expect(map.querySelector("figure")).toHaveClass("h-full", "flex", "flex-col");
     const areaLinks = container.querySelector("#other-areas") as HTMLElement;
@@ -219,7 +224,7 @@ describe.each([
     const paamonim = jerusalemHotelCatalog.find((hotel) => hotel.id === "jlm-paamonim")!;
     expect(paamonim.name).toBe("Paamonim Jerusalem Hotel");
     expect(getSource(paamonim.sourceId).url).toContain("h14708123.Hotel-Information");
-    const browse = within(section).getByTestId("downtown-area-browse-expedia");
+    const browse = within(section).getByTestId("jerusalem-area-browse-expedia");
     const offer = linksForPage("stay-area-downtown-browse")[0]!;
     expect(offer.id).toBe("area-downtown-expedia");
     expect(browse).toHaveTextContent("Browse more Downtown hotels");
@@ -240,7 +245,7 @@ describe.each([
   it("city gallery matches every area inventory with no missing or duplicate hotel IDs", () => {
     const expected = areas.flatMap((area) => hotelsForArea(area.id, g.id));
     const inCity = hotelsInCityCatalog(g.id as "jerusalem" | "telaviv");
-    expect(inCity).toHaveLength(areas.length * 4 + (g.id === "jerusalem" ? 1 : 0));
+    expect(inCity).toHaveLength(areas.length * (g.id === "jerusalem" ? 5 : 4));
     expect(new Set(inCity.map((hotel) => hotel.id)).size).toBe(inCity.length);
     expect(inCity.map((hotel) => hotel.id)).toEqual(expected.map((hotel) => hotel.id));
     for (const hotel of inCity) {
@@ -256,7 +261,7 @@ describe.each([
   it("keeps distinct hotels in each neighborhood with verified Expedia sources", () => {
     for (const area of areas) {
       const hotels = hotelsForArea(area.id, g.id);
-      const expectedCount = g.id === "jerusalem" && area.id === "downtown" ? 5 : 4;
+      const expectedCount = g.id === "jerusalem" ? 5 : 4;
       expect(hotels).toHaveLength(expectedCount);
       const bookings = linksForPage(`stay-area-${area.id}`).filter((link) => link.id.startsWith("hotel-"));
       expect(bookings).toHaveLength(expectedCount);
@@ -404,14 +409,14 @@ describe("Tel Aviv direct hotel catalog", () => {
 });
 
 describe("Jerusalem direct hotel catalog", () => {
-  it("shows all 25 Jerusalem neighborhood hotels with correctly attributed photos and links", () => {
-    expect(jerusalemHotelCatalog).toHaveLength(25);
+  it("shows all 30 Jerusalem neighborhood hotels with correctly attributed photos and links", () => {
+    expect(jerusalemHotelCatalog).toHaveLength(30);
     const { container } = render(<CityStayPage g={cityStayGuides.jerusalem} />);
     const catalog = container.querySelector("#book") as HTMLElement;
     expect(within(catalog).getByRole("heading", { name: "Choose a Jerusalem hotel" })).toBeInTheDocument();
     expect(catalog.compareDocumentPosition(container.querySelector("#areas")!) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
     expect(within(catalog).getAllByTestId("jerusalem-hotel-card")).toHaveLength(12);
-    expect(within(catalog).getByTestId("jerusalem-hotel-count")).toHaveTextContent("Showing 12 of 25 hotels across 6 neighborhoods");
+    expect(within(catalog).getByTestId("jerusalem-hotel-count")).toHaveTextContent("Showing 12 of 30 hotels across 6 neighborhoods");
     expect(within(catalog).getByTestId("jerusalem-hotels")).toHaveClass("sm:grid-cols-2", "lg:grid-cols-3");
     const initialCards = within(catalog).getAllByTestId("jerusalem-hotel-card");
     const initialAreaCounts = new Map<string, number>();
@@ -428,11 +433,11 @@ describe("Jerusalem direct hotel catalog", () => {
     fireEvent.click(expand);
     expect(within(catalog).queryByTestId("jerusalem-hotel-expand")).toBeNull();
     expect(within(catalog).queryByRole("button", { name: "Show fewer hotels" })).toBeNull();
-    expect(within(catalog).getByTestId("jerusalem-hotel-count")).toHaveTextContent("25 hotels across 6 neighborhoods");
+    expect(within(catalog).getByTestId("jerusalem-hotel-count")).toHaveTextContent("30 hotels across 6 neighborhoods");
     const cards = within(catalog).getAllByTestId("jerusalem-hotel-card");
-    expect(cards).toHaveLength(25);
-    expect(catalog).toHaveTextContent("25 hotels across 6 neighborhoods");
-    expect(within(catalog).getAllByTestId("hotel-illustration")).toHaveLength(25);
+    expect(cards).toHaveLength(30);
+    expect(catalog).toHaveTextContent("30 hotels across 6 neighborhoods");
+    expect(within(catalog).getAllByTestId("hotel-illustration")).toHaveLength(30);
 
     for (const hotel of jerusalemHotelCatalog) {
       const card = cards.find((candidate) => candidate.querySelector("h3")?.textContent === hotel.name)!;
