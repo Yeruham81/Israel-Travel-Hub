@@ -11,6 +11,7 @@ import { guideContactCopy } from "@/lib/guide-contact";
 import { hotelBooking, resortHotel } from "@/components/StayGuideParts";
 import { resortHotelPhoto } from "@/data/resortHotelPhotos";
 import { hotelAffiliateUrl, hotelBrowseAffiliateUrl } from "@/lib/hotel-affiliate";
+import { hotelGoogleMapsUrl } from "@/lib/hotel-google-maps";
 import { recordOutboundClick, relFor } from "@/lib/outbound";
 import deadSeaValueImage from "@/assets/home/hotel-room.webp";
 import deadSeaSpaImage from "@/assets/home/hero-refresh-dead-sea-salt-v4-medium.webp";
@@ -191,7 +192,20 @@ const groupPlanningTips: Record<string, { title: string; points: readonly [strin
   },
 };
 
-const sourceIntro = "Hotel facilities, access and age policies are based on operator information. Confirm the exact room offer and current conditions before booking.";
+const hotelFacilityNotices: Record<string, string> = {
+  "ds-herods": "As of November 2026, the spa Jacuzzi is temporarily out of service.",
+  "ds-leonardo-club": "As of November 2026, the water park is temporarily closed. Ask the hotel about reopening before planning your stay.",
+};
+
+const browseLabels: Record<string, string> = {
+  luxury: "Browse more luxury hotels",
+  spa: "Browse more spa hotels",
+  family: "Browse more family hotels",
+  value: "Browse more affordable Dead Sea stays",
+  "ein-gedi": "Browse more places to stay near Ein Gedi",
+};
+
+const sourceIntro = "Hotel websites and practical travel resources.";
 
 function HotelCard({ id, pageId }: { id: string; pageId: string }) {
   const hotel = resortHotel(id);
@@ -212,10 +226,24 @@ function HotelCard({ id, pageId }: { id: string; pageId: string }) {
       <p className="mt-2 flex items-start gap-1.5 text-xs text-muted-foreground">
         <MapPin className="mt-0.5 h-3.5 w-3.5 shrink-0 text-primary" aria-hidden /> {hotel.resortFacts.location}
       </p>
+      <a
+        href={hotelGoogleMapsUrl(hotel)}
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label={"View location of " + hotel.name + " on Google Maps (opens in a new tab)"}
+        className="mt-1.5 inline-flex w-fit items-center gap-1.5 text-xs font-medium text-primary underline underline-offset-2 hover:text-primary/80"
+        data-testid="deadsea-hotel-map-link"
+      >
+        View location on Google Maps <ArrowUpRight className="h-3.5 w-3.5" aria-hidden />
+      </a>
       <p className="mt-3 text-sm leading-relaxed">{info.summary}</p>
       <p className="mt-3 text-sm leading-relaxed"><strong>Best for:</strong> {info.bestFor}</p>
       <p className="mt-2 text-sm leading-relaxed text-muted-foreground"><strong className="text-foreground">Beach:</strong> {info.beach}</p>
       <p className="mt-2 text-sm leading-relaxed text-muted-foreground"><strong className="text-foreground">Keep in mind:</strong> {info.consider}</p>
+      {hotelFacilityNotices[id] && <p className="mt-3 flex items-start gap-2 rounded-lg border border-amber-200 bg-amber-50/80 p-3 text-xs leading-relaxed text-foreground dark:border-amber-900/60 dark:bg-amber-950/20" data-testid="deadsea-hotel-facility-notice">
+        <Lightbulb className="mt-0.5 h-4 w-4 shrink-0 text-amber-700 dark:text-amber-300" aria-hidden />
+        <span>{hotelFacilityNotices[id]}</span>
+      </p>}
       {booking ? <a
         href={hotelAffiliateUrl(booking, pageId, hotel.id)}
         target="_blank"
@@ -291,7 +319,7 @@ export function HotelStyleEditorialGuide({ guide }: { guide: HotelStayDestinatio
 
       <section id="compare" className="mt-14 scroll-mt-32" aria-labelledby="compare-h">
         <h2 id="compare-h" className="text-3xl">Dead Sea hotels at a glance</h2>
-        <p className="mt-3 leading-relaxed text-muted-foreground">The 11 options below cover the Israeli shore. Select a hotel name to jump to its description and booking link. Current room prices and availability are checked on the booking provider's website.</p>
+        <p className="mt-3 leading-relaxed text-muted-foreground">Compare the location, beach access and best features of 11 places to stay along the Israeli Dead Sea.</p>
         <div className="mt-5 overflow-x-auto rounded-2xl border bg-card" role="region" tabIndex={0} aria-label="Compare 11 Dead Sea hotel recommendations">
           <table className="w-full min-w-[700px] text-left text-sm" data-testid="deadsea-hotel-comparison">
             <caption className="sr-only">Recommended Dead Sea stays, main appeal, location and beach arrangement</caption>
@@ -351,7 +379,7 @@ export function HotelStyleEditorialGuide({ guide }: { guide: HotelStayDestinatio
                   onClick={() => recordOutboundClick({ pageId, productId: categoryBrowse.id, offerId: categoryBrowse.id })}
                   className="inline-flex min-h-11 items-center justify-center gap-2 rounded-lg bg-primary px-5 py-2.5 text-center text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary/90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
                   data-testid="deadsea-category-browse-link">
-                  Browse more {group.id === "ein-gedi" ? "Ein Gedi stays" : group.id + " hotels"} <ArrowUpRight className="h-4 w-4" aria-hidden />
+                  {browseLabels[group.id] ?? `Browse more ${group.id} hotels`} <ArrowUpRight className="h-4 w-4" aria-hidden />
                   <span className="sr-only"> (opens in a new tab)</span>
                 </a>
               </div>}
