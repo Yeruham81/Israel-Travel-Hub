@@ -196,10 +196,12 @@ describe.each([
     expect(map.querySelector("iframe")).toHaveAttribute("src", expect.stringContaining("maps.google.com"));
     expect(map.querySelector("figure")).toHaveClass("h-full", "flex", "flex-col");
     const areaLinks = container.querySelector("#other-areas") as HTMLElement;
-    for (const [id, name] of [["old-city", /Old City/], ["east-jerusalem", /East Jerusalem/]] as const) {
-      const link = within(areaLinks).getByRole("link", { name });
-      expect(link.querySelector("img")).toHaveAttribute("src", jerusalemStayCardPhotos[id].src);
-      expect(link.querySelector("img")).toHaveAttribute("alt", jerusalemStayCardPhotos[id].alt);
+    for (const id of ["old-city", "east-jerusalem"] as const) {
+      const area = jerusalemAreaGuides.find((item) => item.id === id)!;
+      const link = areaLinks.querySelector(`a[href="${area.path}"]`);
+      expect(link).toBeInTheDocument();
+      expect(link?.querySelector("img")).toHaveAttribute("src", jerusalemStayCardPhotos[id].src);
+      expect(link?.querySelector("img")).toHaveAttribute("alt", jerusalemStayCardPhotos[id].alt);
     }
     const ibis = cityHotelPhoto(jerusalemHotelCatalog.find((hotel) => hotel.id === "jlm-ibis")!);
     const styles = cityHotelPhoto(jerusalemHotelCatalog.find((hotel) => hotel.id === "jlm-ibis-styles")!);
