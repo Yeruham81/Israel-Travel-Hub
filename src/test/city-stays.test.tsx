@@ -107,7 +107,7 @@ describe.each([
           "mahane-yehuda": "Popular hotels near Mahane Yehuda & Nachlaot",
           "east-jerusalem": "Popular hotels in East Jerusalem",
           "german-colony": "Popular hotels in German Colony & Baka",
-        } as Record<string, string>)[area.id] : `Hotels in ${area.shortName}`,
+        } as Record<string, string>)[area.id]! : `Hotels in ${area.shortName}`,
       })).toBeInTheDocument();
       if (g.id === "jerusalem") {
         expect(within(container.querySelector("#book") as HTMLElement).queryByText(/Explore my selected hotels/)).toBeNull();
@@ -122,7 +122,7 @@ describe.each([
         if (g.id === "jerusalem") {
           expect(screen.getByRole("link", { name: /Compare neighborhoods/ })).toHaveAttribute("href", "/travel-blog/where-to-stay-in-jerusalem/");
         } else {
-          expect(screen.getByRole("link", { name: /Read my guide to where to stay in/ })).toHaveAttribute("href", g.id === "jerusalem" ? "/travel-blog/where-to-stay-in-jerusalem/" : "/travel-blog/where-to-stay-in-tel-aviv/");
+          expect(screen.getByRole("link", { name: /Read my guide to where to stay in/ })).toHaveAttribute("href", "/travel-blog/where-to-stay-in-tel-aviv/");
         }
         expect(container.querySelector("#book")!.compareDocumentPosition(container.querySelector("#overview")!) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
         expect(container.querySelector("#overview")!.compareDocumentPosition(container.querySelector("#location")!) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
