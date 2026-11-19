@@ -24,6 +24,20 @@ const remoteImagePatterns = [
 ];
 
 describe("local-only image asset policy", () => {
+  it("never reintroduces the retired Old City photo in cards or responsive assets", () => {
+    const retiredImports = [
+      "assets/jerusalem/old-city.webp",
+      "assets/travel-blog-hub/old-city-1038598496-420.webp",
+    ];
+    const offenders: string[] = [];
+    for (const file of sourceFiles(srcRoot)) {
+      const source = readFileSync(file, "utf8");
+      if (retiredImports.some((asset) => source.includes(asset))) {
+        offenders.push(relative(process.cwd(), file));
+      }
+    }
+    expect(offenders).toEqual([]);
+  });
   it("never hotlinks images in authored source", () => {
     const violations: string[] = [];
     for (const file of sourceFiles(srcRoot)) {

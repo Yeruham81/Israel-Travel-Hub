@@ -22,7 +22,7 @@ import caesareaAqueductTile from "@/assets/home/caesarea-aqueduct-tile.webp";
 import haifaPortImage from "@/assets/home/haifa-port.webp";
 import roshHanikraPhoto from "@/assets/home/rosh-hanikra-grottos.jpg";
 import holySepulchre from "@/assets/guides/holy-sepulchre.jpg";
-import jerusalemOldCityStreet from "@/assets/jerusalem/old-city.webp";
+import jerusalemOldCityStreet from "@/assets/guides/2026-11/jerusalem-old-city-market-lanes.webp";
 import jerusalemDowntown from "@/assets/jerusalem/downtown.webp";
 import jerusalemMamilla from "@/assets/jerusalem/mamilla.webp";
 import museumsJerusalem from "@/assets/guides/museums-in-jerusalem.jpg";
@@ -108,7 +108,7 @@ export const tourPhotos: Record<string, GuidePhoto> = {
   "my-north-coast-jerusalem": { src: caesareaAqueduct, alt: "The ancient aqueduct beside the Mediterranean beach at Caesarea", sourceUrl: "https://commons.wikimedia.org/wiki/File:125359_caesarea_national_park_PikiWiki_Israel.jpg", credit: "זאב שטיין (Zeev Stein) · CC BY 2.5 · resized and converted to WebP", licenseUrl: "https://creativecommons.org/licenses/by/2.5/" },
   "my-galilee-day": airport["nazareth"]!,
   "my-galilee-jerusalem": { src: capernaum, alt: "Archaeological remains and the ancient synagogue at Capernaum beside the Sea of Galilee", sourceUrl: "" },
-  "jerusalem-old-city-walk": { src: jerusalemOldCityStreet, alt: "Stone street in Jerusalem's Old City", sourceUrl: "" },
+  "jerusalem-old-city-walk": { src: jerusalemOldCityStreet, alt: "Market lane in Jerusalem’s Old City", sourceUrl: "" },
   "jerusalem-private-oldcity-walk": { src: holySepulchre, alt: "Church of the Holy Sepulchre in the Old City of Jerusalem" },
   "jerusalem-beyond-walls": { src: jerusalemDowntown, alt: "Pedestrian street in central Jerusalem beyond the Old City walls" },
   "jerusalem-street-art-walk": { src: "/images/jerusalem/hutzot-hayotzer.webp", alt: "Jerusalem artists' quarter, illustrating the city's creative side" },

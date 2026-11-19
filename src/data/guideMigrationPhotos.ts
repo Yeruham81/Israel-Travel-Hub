@@ -34,7 +34,7 @@ import image31 from "@/assets/home/masada-dead-sea.webp";
 import image32 from "@/assets/haifa/panorama.webp";
 import image33 from "@/assets/home/tiberias-lake.webp";
 import image34 from "@/assets/guides/mitzpe-ramon-crater.jpg";
-import itineraryOldCity from "@/assets/jerusalem/old-city.webp";
+import itineraryOldCity from "@/assets/guides/2026-11/jerusalem-jewish-quarter-stone-lane.webp";
 import itineraryTrain from "@/assets/airport-journeys/jerusalem-navon-platform.webp";
 import itineraryAirport from "@/assets/home/ben-gurion-t3.webp";
 import itineraryMasadaCar from "@/assets/home/masada-cable-car.webp";
@@ -279,7 +279,7 @@ export const migrationPhotos = {
   },
   "itinerary-jerusalem-old-city": {
     "src": itineraryOldCity,
-    "alt": "Jerusalem Old City architecture and historic streets"
+    "alt": "Narrow stone lane in Jerusalem’s Jewish Quarter"
   },
   "itinerary-train": {
     "src": itineraryTrain,

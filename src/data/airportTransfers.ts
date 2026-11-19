@@ -7,7 +7,7 @@ import hubAshdod from "@/assets/airport-transfers/ashdod-hub.webp";
 import hubNetanya from "@/assets/airport-transfers/netanya-hub.webp";
 import hubHerzliya from "@/assets/airport-transfers/herzliya-hub.webp";
 import hubRaanana from "@/assets/airport-transfers/raanana-hub.webp";
-import jerusalem from "@/assets/jerusalem/old-city.webp";
+import jerusalem from "@/assets/attractions-hub/card-old-city-jerusalem-420.webp";
 import haifa from "@/assets/haifa/panorama.webp";
 import deadSea from "@/assets/dead-sea/beach.webp";
 import eilat from "@/assets/eilat/waterfront.webp";
@@ -30,7 +30,7 @@ export const AIRPORT_TRANSFER_UPDATED_DATE = "2026-11-15";
 
 export const airportTransferPhotos: Record<string, StayGuidePhoto> = {
   "tel-aviv": { src: telAviv, alt: "Tel Aviv's beachfront hotels and promenade", sourceUrl: "", label: "Tel Aviv beachfront" },
-  jerusalem: { src: jerusalem, alt: "Stone buildings and lanes in Jerusalem's Old City", sourceUrl: "", label: "Jerusalem Old City" },
+  jerusalem: { src: jerusalem, alt: "Jerusalem’s Old City and historic stone architecture", sourceUrl: "", label: "Jerusalem Old City" },
   haifa: { src: haifa, alt: "Haifa Bay and the Bahá'í Gardens from Mount Carmel", sourceUrl: "", label: "Haifa Bay" },
   "dead-sea": { src: deadSea, alt: "Ein Bokek beach beside the Dead Sea", sourceUrl: "", label: "Ein Bokek, Dead Sea" },
   raanana: { src: raanana, alt: "Orange Tree public artwork in Ra’anana", sourceUrl: "", label: "Ra’anana" },

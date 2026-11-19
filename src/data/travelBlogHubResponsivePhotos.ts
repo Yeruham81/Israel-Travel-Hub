@@ -86,8 +86,6 @@ import photo81 from "@/assets/jerusalem/downtown.webp";
 import photo82 from "@/assets/travel-blog-hub/downtown-944eb9d46b-420.webp";
 import photo83 from "@/assets/jerusalem/mahane-yehuda.webp";
 import photo84 from "@/assets/travel-blog-hub/mahane-yehuda-c53a05ac52-420.webp";
-import photo85 from "@/assets/jerusalem/old-city.webp";
-import photo86 from "@/assets/travel-blog-hub/old-city-1038598496-420.webp";
 import photo87 from "@/assets/shore-excursions/akko-port.jpg";
 import photo88 from "@/assets/tel-aviv/beachfront.webp";
 import photo89 from "@/assets/travel-blog-hub/beachfront-a30e02947f-420.webp";
@@ -145,7 +143,6 @@ export const travelBlogHubImageSets: Record<string, string> = {
   [photo78]: [photo79 + " 420w", photo80 + " 800w", photo78 + " 1200w"].join(", "),
   [photo81]: [photo82 + " 420w", photo81 + " 755w"].join(", "),
   [photo83]: [photo84 + " 420w", photo83 + " 755w"].join(", "),
-  [photo85]: [photo86 + " 420w", photo85 + " 755w"].join(", "),
   [photo87]: [photo87 + " 360w"].join(", "),
   [photo88]: [photo89 + " 420w", photo88 + " 755w"].join(", "),
   [photo90]: [photo91 + " 420w", photo90 + " 755w"].join(", "),

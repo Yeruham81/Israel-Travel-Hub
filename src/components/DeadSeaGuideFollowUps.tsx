@@ -4,7 +4,7 @@ import masada from "@/assets/home/masada-dead-sea.webp";
 import { einGediCardPhoto } from "@/data/einGediCardPhoto";
 import deadSeaLandscape from "@/assets/dead-sea/landscape.webp";
 import deadSeaHotelPool from "@/assets/dead-sea/pool.webp";
-import jerusalemOldCity from "@/assets/jerusalem/old-city.webp";
+import jerusalemOldCity from "@/assets/home/hero-refresh-jerusalem-jaffa-gate-v4-medium.webp";
 
 /** Six focused guide cards with local, relevant photographs, followed by
  * genuinely useful onward planning links. Specific to the Jerusalem–Dead Sea
@@ -57,7 +57,7 @@ const related: {
     description: "Compare the Dead Sea with other realistic day trips.",
     to: "/travel-blog/day-trips-from-jerusalem/",
     photo: jerusalemOldCity,
-    alt: "Jerusalem Old City skyline",
+    alt: "Jaffa Gate and the walls of Jerusalem’s Old City",
   },
 ];
 
