@@ -16,7 +16,7 @@ afterEach(cleanup);
 const page=() => render((() => { const Page=HubRoute.options.component!; return <Page/>; })());
 
 describe("Accommodation booking hub",()=>{
- it("has one H1, six paired city cards and five independent area-guide links",()=>{
+ it("has one H1, six destination cards and five separate area guides",()=>{
   const {container}=page();
   expect(screen.getAllByRole("heading",{level:1})).toHaveLength(1);
   expect(screen.getByRole("heading",{name:"Hotels in Israel"})).toBeInTheDocument();
@@ -41,14 +41,22 @@ describe("Accommodation booking hub",()=>{
   expect(screen.queryByRole("link", { name: /Explore hotel destinations/i })).toBeNull();
   const jerusalem = container.querySelector('[data-testid="hotel-destination-card"]')!;
   expect(jerusalem.closest("li")).toHaveClass("min-w-0");
-  expect(jerusalem.querySelector('a[href="/travel-blog/where-to-stay-in-jerusalem/"]')).toBeInTheDocument();
-  expect(jerusalem.querySelectorAll("a")).toHaveLength(2);
+  expect(jerusalem.querySelector('a[href="/travel-blog/where-to-stay-in-jerusalem/"]')).toBeNull();
+  expect(jerusalem.querySelectorAll("a")).toHaveLength(1);
+  expect(allCards.every(card => card.querySelectorAll("a").length <= 1)).toBe(true);
   expect(jerusalem.querySelector("img")).toHaveAttribute("src", accommodationDestinations[0]!.photo.src);
   expect(jerusalem.querySelector("img")?.getAttribute("alt")).toMatch(/panoramic view of Jerusalem/i);
   expect(screen.getByTestId("guide-hero-media")).toBeInTheDocument();
   const urls=[...cards].map(card=>card.getAttribute("href"));
   expect(urls).toEqual(["/accommodation/jerusalem/","/accommodation/tel-aviv/","/accommodation/haifa/","/accommodation/tiberias/","/accommodation/dead-sea/"]);
+  const areaGuides = screen.getByTestId("accommodation-area-guides");
+  expect(areaGuides.querySelectorAll('[data-testid="accommodation-area-guide-card"]')).toHaveLength(5);
   expect(container.querySelectorAll('a[href^="/travel-blog/where-to-stay"], a[href^="/travel-blog/best-hotels"], a[href^="/travel-blog/best-dead-sea"]')).toHaveLength(5);
+  expect(areaGuides).toHaveTextContent("Not sure where to base yourself?");
+  expect(areaGuides).toHaveTextContent("popular neighborhoods and hotel areas");
+  expect(areaGuides).toHaveTextContent("practical tips before booking");
+  expect(areaGuides).toHaveTextContent("recommended places to stay");
+  expect(areaGuides.querySelectorAll("img")).toHaveLength(0);
  });
  it("shows hotel styles that lead to the actual area or category catalogues",()=>{
   page();
@@ -71,6 +79,7 @@ describe("Accommodation booking hub",()=>{
   const agodaSection = screen.getByTestId("hotel-search-widgets");
   const stylesSection = container.querySelector("#styles")!;
   const bookingTipsSection = container.querySelector("#booking-tips")!;
+  const areaGuidesSection = screen.getByTestId("accommodation-area-guides");
   const faqs = screen.getByRole("heading", { name: "Frequently asked questions" });
 
   expect(bookingSection).toHaveAttribute("aria-label", "Search hotels with Booking.com");
@@ -78,7 +87,8 @@ describe("Accommodation booking hub",()=>{
   expect(bookingSection.querySelector("h2, h3")).toBeNull();
   expect(agodaSection.querySelector("h2, h3")).toBeNull();
   expect(stylesSection.compareDocumentPosition(bookingSection) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
-  expect(bookingSection.compareDocumentPosition(bookingTipsSection) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
+  expect(bookingSection.compareDocumentPosition(areaGuidesSection) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
+  expect(areaGuidesSection.compareDocumentPosition(bookingTipsSection) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
   expect(faqs.compareDocumentPosition(agodaSection) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
   expect(bookingSection).toContainElement(screen.getByTestId("booking-hotel-search-widget"));
   expect(agodaSection).toContainElement(screen.getByTestId("agoda-hotel-search-widget"));
@@ -123,8 +133,16 @@ describe("Accommodation booking hub",()=>{
   expect(screen.queryByText(/Jerusalem and Tel Aviv have neighborhood-by-neighborhood hotel guides/i)).toBeNull();
   expect(screen.queryByText(/Have a particular kind of stay in mind/i)).toBeNull();
   expect(screen.queryByText(/A well-located room with the right facilities/i)).toBeNull();
-  expect(screen.getByRole("link", { name: /Read my guide to choosing where to stay in Jerusalem/i })).toHaveAttribute("href", "/travel-blog/where-to-stay-in-jerusalem/");
-  expect(screen.getByRole("link", { name: /Read my guide to choosing where to stay in Tel Aviv/i })).toHaveAttribute("href", "/travel-blog/where-to-stay-in-tel-aviv/");
+  const guides = screen.getByTestId("accommodation-area-guides");
+  const guideLinks = [...guides.querySelectorAll('a[data-testid="accommodation-area-guide-card"]')];
+  expect(guideLinks.map(link => link.getAttribute("href"))).toEqual([
+    "/travel-blog/where-to-stay-in-jerusalem/",
+    "/travel-blog/where-to-stay-in-tel-aviv/",
+    "/travel-blog/best-hotels-in-haifa/",
+    "/travel-blog/best-hotels-in-tiberias/",
+    "/travel-blog/best-dead-sea-hotels/",
+  ]);
+  expect(guides).toHaveTextContent("The best hotels in Haifa: where to stay");
   const checklist = screen.getByRole("list", { name: "Hotel booking checklist" });
   expect(checklist.querySelectorAll("li")).toHaveLength(4);
   expect(checklist.querySelectorAll("svg")).toHaveLength(4);
