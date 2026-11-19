@@ -49,6 +49,29 @@ describe("migrated practical guides", () => {
     expect(router.matchRoutes(path).at(-1)?.routeId).toBe(path.replace(/\/$/, ""));
     expect(screen.getAllByRole("heading", { level: 1 })).toHaveLength(1);
     expect(screen.getByRole("heading", { level: 1 })).toHaveTextContent(guide.title);
+    if (id === "jerusalemShopping") {
+      // This guide now uses the shared dedicated layout, with an editorial quick
+      // recommendation, ten place cards, a map, photos and a six-card follow-up grid.
+      expect(container.querySelectorAll('article[id^="shop-"]')).toHaveLength(10);
+      expect(container.querySelector('iframe[src^="/maps/jerusalem-shopping.html"]')).not.toBeNull();
+      expect(container.querySelector('[data-shopping-photo-slot="bezalel"]')).not.toBeNull();
+      expect(container.querySelectorAll("#explore-more a")).toHaveLength(6);
+      expect(screen.getByRole("heading", { name: "Where I'd start" })).toBeInTheDocument();
+      expect(screen.getByRole("complementary", { name: "About the author" })).toHaveTextContent("Written by Moshe Barak");
+      expect(container.querySelector("time")).toHaveAttribute("datetime", guide.updatedAt);
+      expect(container.querySelectorAll("#contact")).toHaveLength(1);
+      expect(container.querySelector('a[href*="israel-taxi.com"]')).toBeNull();
+      const head = await route.options.head?.({} as never);
+      expect(head).toMatchObject({ meta: expect.arrayContaining([
+        { title: guide.title },
+        { name: "description", content: guide.description },
+        { name: "robots", content: "noindex,nofollow" },
+      ]) });
+      const structured = head!.scripts!.flatMap((script) => typeof script?.children === "string" ? [JSON.parse(script.children)] : []);
+      const article = structured.find((item) => item["@type"] === "Article");
+      expect(article).toMatchObject({ headline: guide.title, dateModified: guide.updatedAt, inLanguage: "en" });
+      return;
+    }
     expect(screen.getByRole("region", { name: "Quick answer" })).toHaveTextContent(guide.answer);
     if (id === "esim") {
       expect(screen.getByRole("region", { name: "Compare 30-day unlimited eSIM plans" })).toBeInTheDocument();
@@ -872,7 +895,7 @@ describe("migrated practical guides", () => {
     expect(travelGuides.baptism.sections.find((section) => section.id === "qasr-visit")!.photo?.alt).toContain("Qasr el-Yahud");
     expect(travelGuides.jerusalemChurches.comparison.rows.map((row) => row[0])).toEqual(["Old City", "Mount of Olives / Kidron", "Mount Zion", "Ein Karem"]);
     expect(travelGuides.jerusalemDeadSea.sections.find(section => section.id === "beach")!.paragraphs.join(" ")).toContain("free access, showers, changing rooms");
-    expect(travelGuides.jerusalemShopping.sections.find((section) => section.id === "crafts-and-practicalities")!.paragraphs.join(" ")).toContain("not independently confirmed");
+    expect(travelGuides.jerusalemShopping.sections.find((section) => section.id === "shop-bezalel")!.paragraphs.join(" ")).toContain("Friday arts fair");
     expect(JSON.stringify(travelGuides.jerusalemChurches)).not.toMatch(/10-20 ILS|50-80 ILS|open daily.*8:00/i);
     expect(travelGuides.jerusalemDayTrips.sections.find((section) => section.id === "tel-aviv-jaffa")).toBeTruthy();
     expect(travelGuides.telAvivDayTrips.sections.find((section) => section.id === "jerusalem-day")).toBeTruthy();
