@@ -20,7 +20,7 @@ export const jerusalemAttractions: Record<string, Attraction> = {
   official:[{label:"Tower of David Jerusalem Museum",url:"https://www.tod.org.il/en/"}],
 },
 "museums-in-jerusalem": {
- title:"Best museums in Jerusalem: art, history and archaeology",description:"Compare Jerusalem museums: Israel Museum, Yad Vashem, Tower of David, Bible Lands, Islamic Art and specialist collections, with practical visit planning.",
+ title:"Best Museums in Jerusalem",description:"My guide to 15 Jerusalem museums and cultural experiences, with admission, opening days, booking links, neighbourhoods, map and practical visitor tips.",
  region:"Jerusalem",image:{src:museums,alt:"Rockefeller Museum courtyard and tower in Jerusalem"},
  intro:"Jerusalem's leading museums tell very different stories. The Israel Museum is expansive and collection-led, Yad Vashem focuses on Holocaust remembrance, and Tower of David makes the city itself the central subject. Choosing by theme and neighbourhood is better than chasing a checklist.",
  takeaway:"If you have one museum afternoon, pick the Israel Museum for art and archaeology, Tower of David for Jerusalem's layers of history, or Yad Vashem for a focused and emotionally demanding memorial visit. They are not next door to one another.", duration:"2–4 hours per major museum",
