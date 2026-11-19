@@ -106,7 +106,7 @@ export function TelAvivHotelBrowser() {
   );
 }
 
-export function TelAvivHotelTile({ hotel, pageId = "stay-telaviv", showArea = true }: { hotel: HotelRecommendation; pageId?: string; showArea?: boolean }) {
+export function TelAvivHotelTile({ hotel, pageId = "stay-telaviv", showArea = true, stacked = false }: { hotel: HotelRecommendation; pageId?: string; showArea?: boolean; stacked?: boolean }) {
   const [photoFailed, setPhotoFailed] = useState(false);
   const area = telAvivAreaGuides.find((item) => item.id === hotel.areaId);
   if (!area) return null;
@@ -117,15 +117,19 @@ export function TelAvivHotelTile({ hotel, pageId = "stay-telaviv", showArea = tr
 
 
   const copy = hotelTileCopy[hotel.id] || { description: hotel.summary, bestFor: hotel.bestFor };
+  const verticalLayout = stacked;
 
   return (
-    <li className="group flex min-w-0 flex-col overflow-hidden rounded-2xl border bg-card shadow-sm transition-all hover:border-primary/50 hover:shadow-md sm:grid sm:grid-cols-[160px_minmax(0,1fr)] sm:grid-rows-[1fr_auto]" data-testid={showArea ? "tel-aviv-hotel-card" : "hotel-recommendation"}>
-      <div className="relative overflow-hidden bg-muted sm:row-span-2">
+    <li className={verticalLayout
+      ? "group flex h-full min-w-0 flex-col overflow-hidden rounded-2xl border bg-card shadow-sm transition-all hover:border-primary/50 hover:shadow-md"
+      : "group flex min-w-0 flex-col overflow-hidden rounded-2xl border bg-card shadow-sm transition-all hover:border-primary/50 hover:shadow-md sm:grid sm:grid-cols-[160px_minmax(0,1fr)] sm:grid-rows-[1fr_auto]"
+    } data-testid={showArea ? "tel-aviv-hotel-card" : "hotel-recommendation"}>
+      <div className={verticalLayout ? "relative w-full overflow-hidden bg-muted" : "relative overflow-hidden bg-muted sm:row-span-2"}>
         <img src={image.src} alt={image.alt} onError={() => { if (!photoFailed) setPhotoFailed(true); }}
              width={755} height={503} loading="lazy" decoding="async" data-testid="hotel-illustration"
-             className="aspect-[16/9] w-full object-cover sm:aspect-auto sm:h-full sm:min-h-[215px]" />
+             className={verticalLayout ? "aspect-[16/9] w-full object-cover" : "aspect-[16/9] w-full object-cover sm:aspect-auto sm:h-full sm:min-h-[215px]"} />
       </div>
-      <div className="flex min-w-0 flex-col px-4 pb-3 pt-4">
+      <div className={verticalLayout ? "flex min-w-0 flex-1 flex-col px-4 pb-3 pt-4" : "flex min-w-0 flex-col px-4 pb-3 pt-4"}>
         <h3 className="text-lg font-semibold leading-snug">{hotel.name}</h3>
         {showArea && <Link to={area.path as LinkProps["to"]}
               className="mt-1 inline-flex w-fit items-center gap-1 text-xs font-medium text-primary underline underline-offset-2 hover:text-primary/80 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
@@ -137,7 +141,7 @@ export function TelAvivHotelTile({ hotel, pageId = "stay-telaviv", showArea = tr
         {notice && <p className="mt-3 rounded-lg border border-primary/25 bg-secondary/70 p-3 text-xs leading-relaxed" data-testid="hotel-operating-notice">{notice.message}</p>}
       </div>
       {booking && (
-        <div className="border-t bg-secondary/20 px-3 py-3 sm:col-start-2 sm:px-4">
+        <div className={verticalLayout ? "mt-auto border-t bg-secondary/20 px-3 py-3 sm:px-4" : "border-t bg-secondary/20 px-3 py-3 sm:col-start-2 sm:px-4"}>
           <a href={hotelAffiliateUrl(booking, pageId, hotel.id)} target="_blank" rel={relFor(booking.isAffiliate)}
              onClick={() => recordOutboundClick({ pageId, productId: hotel.id, offerId: booking.id })}
              className="inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-lg border border-primary/30 bg-primary/5 px-4 py-2.5 text-center text-sm font-semibold text-primary transition-colors hover:border-primary/60 hover:bg-primary/10 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
