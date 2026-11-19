@@ -381,10 +381,10 @@ export const cityCultureGuides = {
   },
   "telAvivMuseums": {
     "id": "telAvivMuseums",
-    "updatedAt": "2026-10-20",
-    "title": "Best museums in Tel Aviv: art, history and family visits",
-    "description": "Compare 12 Tel Aviv and Jaffa museum options by subject and neighbourhood, with booking, language and current-access checks for a workable museum day.",
-    "intro": "Tel Aviv’s museums range from major art collections and university museums to smaller artist houses, city history and structured military-history experiences. Choose by subject and location first. A northern campus visit, a Bialik Street outing and a Jaffa afternoon are three different days to plan, not neighbouring stops on one short walk.",
+    "updatedAt": "2026-11-19",
+    "title": "Best Museums in Tel Aviv & Jaffa",
+    "description": "Explore the best museums in Tel Aviv and Jaffa, from art and history to natural history and architecture. Compare venues, booking needs and neighbourhood museum routes.",
+    "intro": "Discover Tel Aviv and Jaffa museums with my practical advice on what to see, how to choose, and which cultural attractions to combine in a visit.",
     "answer": "Choose Tel Aviv Museum of Art for a large art visit, MUZA for material culture and archaeology, ANU for Jewish cultural history, or Steinhardt for natural history. Add a smaller museum only if the location and visit windows fit. Check advance reservations, the language of timed experiences and current renovation or access notices.",
     "topics": [
       "attractions",
@@ -600,7 +600,11 @@ export const cityCultureGuides = {
       "m26-independence",
       "m26-defense-museums",
       "m26-gutman",
-      "m26-geller"
+      "m26-geller",
+      "m26-rubin",
+      "m26-liebling",
+      "m26-bialik",
+      "m26-bauhaus"
     ]
   },
   "haifaMuseums": {
