@@ -25,28 +25,41 @@ describe("hotel-level and page-level Travelpayouts attribution", () => {
     }
   });
 
-  it("keeps approved property links and explicitly distinguishes Paamonim's untracked Expedia listing", () => {
+  it("uses a unique verified Expedia Travelpayouts deep link for every hotel", () => {
     expect(neighborhoodHotelAdditions).toHaveLength(29);
     for (const hotel of neighborhoodHotelAdditions) {
       const key = `hotel-${hotel.id}-expedia`;
       const booking = providerLinks.find((link) => link.id === key);
+      const expectedShortLink = affiliateConfig[key]?.trackingUrl;
       expect(booking?.providerName, key).toBe("Expedia");
-      if (hotel.id === "jlm-paamonim") {
-        expect(affiliateConfig[key]?.trackingUrl).toBeUndefined();
-        expect(booking?.url).toBe("https://www.expedia.com/Jerusalem-Hotels-Paamonim-Jerusalem-Hotel.h14708123.Hotel-Information");
-        expect(booking?.isAffiliate).toBe(false);
-        expect(booking?.ctaLabel).toBe("View hotel on Expedia");
-      } else {
-        expect(affiliateConfig[key]?.trackingUrl, key).toMatch(/^https:\/\/expedia\.tpm\.li\/[a-zA-Z0-9]{8}$/);
-        expect(booking?.url, key).toBe(affiliateConfig[key]?.trackingUrl);
-        expect(booking?.isAffiliate, key).toBe(true);
-        expect(booking?.ctaLabel).toBe("Check rooms on Expedia");
-      }
+      expect(expectedShortLink, key).toMatch(
+        hotel.id === "jlm-paamonim"
+          ? /^https:\/\/expedia\.tpk\.lv\/[a-zA-Z0-9]{8}$/
+          : /^https:\/\/expedia\.tpm\.li\/[a-zA-Z0-9]{8}$/,
+      );
+      expect(booking?.url, key).toBe(expectedShortLink);
+      expect(booking?.isAffiliate, key).toBe(true);
+      expect(booking?.ctaLabel).toBe("Check rooms on Expedia");
     }
     const allHotelOffers = providerLinks.filter((link) => /^hotel-.*-expedia$/.test(link.id));
     expect(allHotelOffers).toHaveLength(88);
-    expect(allHotelOffers.filter((link) => link.isAffiliate)).toHaveLength(87);
+    expect(allHotelOffers.every((link) => link.isAffiliate)).toBe(true);
     expect(new Set(allHotelOffers.map((link) => link.url)).size).toBe(allHotelOffers.length);
+  });
+
+  it("tracks Paamonim separately in Downtown and in the Jerusalem city hotel catalog", () => {
+    const booking = linksForPage("stay-area-downtown").find(
+      (item) => item.id === "hotel-jlm-paamonim-expedia",
+    )!;
+    expect(booking.isAffiliate).toBe(true);
+    expect(booking.url).toBe("https://expedia.tpk.lv/wdsf1D6t");
+    const area = new URL(hotelAffiliateUrl(booking, "stay-area-downtown", "jlm-paamonim"));
+    const city = new URL(hotelAffiliateUrl(booking, "stay-jerusalem", "jlm-paamonim"));
+    expect(area.origin + area.pathname).toBe(booking.url);
+    expect(city.origin + city.pathname).toBe(booking.url);
+    expect(area.searchParams.getAll("sub_id")).toEqual(["itt_stay_area_downtown_jlm_paamonim"]);
+    expect(city.searchParams.getAll("sub_id")).toEqual(["itt_stay_jerusalem_jlm_paamonim"]);
+    expect(area.searchParams.get("sub_id")).not.toBe(city.searchParams.get("sub_id"));
   });
 
   it("tracks city/area/category searches by the source page and the search destination, not a hotel", () => {
