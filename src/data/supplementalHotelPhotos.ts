@@ -7,6 +7,7 @@
  */
 import type { HotelIllustration } from "@/data/telAvivHotelPhotos";
 import jerusalemNight from "@/assets/travel-blog-hub/jerusalem-night-443d64981d-420.webp";
+import downtownStreet from "@/assets/jerusalem/downtown.webp";
 import mahaneMarket from "@/assets/travel-blog-hub/mahane-yehuda-c53a05ac52-420.webp";
 import foodMarkets from "@/assets/tours-hub/food-markets.webp";
 import germanColonyStreet from "@/assets/travel-blog-hub/colony-35429f7d31-420.webp";
@@ -25,7 +26,7 @@ const scene = (id: string, ext: "webp" | "jpg", alt: string): HotelIllustration 
 });
 
 export const supplementalHotelPhotos: Record<string, HotelIllustration> = {
-  "jlm-ibis": jerusalemScene("/images/attractions/jerusalem-shopping.webp", "Jerusalem stone buildings along an urban shopping street"),
+  "jlm-ibis": jerusalemScene(downtownStreet, "Downtown Jerusalem streets and stone buildings near Jaffa Road"),
   "jlm-ibis-styles": jerusalemScene("/images/hotel-cards/jlm-ibis-styles.webp", "Historic stone shopping passage in Jerusalem"),
   "jlm-paamonim": jerusalemScene(jerusalemNight, "Jerusalem skyline illuminated after dark"),
   "jlm-david-citadel": scene("jlm-david-citadel", "webp", "Mamilla and Old City surroundings in Jerusalem"),
