@@ -144,9 +144,7 @@ export function NeighborhoodStayPage({ area }: { area: NeighborhoodStayGuide }) 
             <p className="mt-2 text-sm leading-relaxed">{localInsight.choose}</p>
             <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{localInsight.compare}</p>
           </aside>}
-          {!isJerusalem && <p className="mt-5 text-sm leading-relaxed text-muted-foreground">
-            Still comparing locations? <Link to={(isJerusalem ? "/travel-blog/where-to-stay-in-jerusalem/" : "/travel-blog/where-to-stay-in-tel-aviv/") as LinkProps["to"]} className="font-semibold text-primary underline underline-offset-4">Read my guide to where to stay in {city.city}</Link> for a broader look at the city’s neighborhoods.
-          </p>}
+
         </Section>
   );
 
@@ -169,65 +167,49 @@ export function NeighborhoodStayPage({ area }: { area: NeighborhoodStayGuide }) 
   );
 
   const locationSection = (
-    <Section id="location" title={isJerusalem ? (isDowntown ? "Getting around Downtown Jerusalem" : area.id === "old-city" ? "Getting around the Old City" : `Getting around ${area.shortName}`) : "Map, getting around & arriving with luggage"} className="scroll-mt-32">
-      {!isJerusalem && <>
-        <div className="mt-5"><AreaMap area={area} provider="google" /></div>
-        <p className="mt-2 text-xs leading-relaxed text-muted-foreground">
-          The map shows the neighborhood's location. Check your hotel's exact address before booking.
-        </p>
-      </>}
+    <Section id="location" title={isDowntown ? "Getting around Downtown Jerusalem" : area.id === "old-city" ? "Getting around the Old City" : `Getting around ${area.shortName}`} className="scroll-mt-32">
       {area.gettingAround.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
       {localInsight && <aside className="mt-5 flex items-start gap-3 rounded-xl border border-amber-300/60 bg-amber-50/70 p-4 text-sm text-foreground dark:border-amber-600/40 dark:bg-amber-950/20">
         <Lightbulb className="mt-0.5 h-5 w-5 shrink-0 text-amber-600 dark:text-amber-400" aria-hidden />
         <p className="leading-relaxed"><strong>Arriving with luggage:</strong> {localInsight.arrival}</p>
       </aside>}
-      {!isJerusalem && <div className="mt-5"><Checklist title="Make your arrival easier" items={area.arrivalTips} /></div>}
       {!isJerusalem && airportGuide && <p><Link to={airportGuide.to}>Planning an airport arrival? Compare the options from Ben Gurion Airport to {city.city}.</Link></p>}
     </Section>
   );
 
-    const checklistSection = (
+  const checklistSection = (
     <Section id="checklist" title="Before you book" className="scroll-mt-32">
-      {isJerusalem ? (
-        <>
-          <p className="mt-2 max-w-3xl leading-relaxed text-muted-foreground">
-            {arrivalIntroductions[area.id]}
-          </p>
-          <div className="mt-4 grid gap-4 sm:grid-cols-2">
-            {([
-              { title: "Location & arrival", items: isDowntown ? [
-                area.arrivalTips[0],
-                area.arrivalTips[1],
-                "Confirm check-in arrangements for your arrival day, especially on Shabbat",
-                "Check lift and step-free access if you need them",
-              ] : area.arrivalTips },
-              { title: "Room & booking conditions", items: isDowntown ? [
-                area.arrivalTips[2],
-                ...area.bookingTips,
-                "Review the total price, taxes and cancellation terms for your room",
-              ] : [
-                ...area.bookingTips,
-                "Review the final price, payment conditions and cancellation policy for your room",
-              ] },
-            ]).map((group) => <div key={group.title} className="rounded-2xl border bg-secondary/20 p-4 sm:p-5">
-              <h3 className="text-base font-semibold">{group.title}</h3>
-              <ul className="mt-3 space-y-3">
-                {group.items.map((tip) => <li key={tip} className="flex items-start gap-3">
-                  <span className="mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-full border border-primary/20 bg-primary/10 text-primary">
-                    <Check className="h-4 w-4" aria-hidden />
-                  </span>
-                  <span className="text-sm leading-relaxed text-muted-foreground">{tip}</span>
-                </li>)}
-              </ul>
-            </div>)}
-          </div>
-        </>
-      ) : (
-        <div className="mt-5 grid gap-4 sm:grid-cols-2">
-          <Checklist title="For this area" items={area.bookingTips} />
-          <Checklist title={`For any ${city.city} stay`} items={["Confirm the final total including taxes, fees and extras", "Read cancellation and payment conditions for your exact room offer", "Ask about Shabbat check-in, meals and transport if relevant", "Check recent room-specific feedback and accessibility requirements"]} />
-        </div>
-      )}
+      <p className="mt-2 max-w-3xl leading-relaxed text-muted-foreground">
+        {arrivalIntroductions[area.id]}
+      </p>
+      <div className="mt-4 grid gap-4 sm:grid-cols-2">
+        {([
+          { title: "Location & arrival", items: isDowntown ? [
+            area.arrivalTips[0],
+            area.arrivalTips[1],
+            "Confirm check-in arrangements for your arrival day, especially on Shabbat",
+            "Check lift and step-free access if you need them",
+          ] : area.arrivalTips },
+          { title: "Room & booking conditions", items: isDowntown ? [
+            area.arrivalTips[2],
+            ...area.bookingTips,
+            "Review the total price, taxes and cancellation terms for your room",
+          ] : [
+            ...area.bookingTips,
+            "Review the final price, payment conditions and cancellation policy for your room",
+          ] },
+        ]).map((group) => <div key={group.title} className="rounded-2xl border bg-secondary/20 p-4 sm:p-5">
+          <h3 className="text-base font-semibold">{group.title}</h3>
+          <ul className="mt-3 space-y-3">
+            {group.items.map((tip) => <li key={tip} className="flex items-start gap-3">
+              <span className="mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-full border border-primary/20 bg-primary/10 text-primary">
+                <Check className="h-4 w-4" aria-hidden />
+              </span>
+              <span className="text-sm leading-relaxed text-muted-foreground">{tip}</span>
+            </li>)}
+          </ul>
+        </div>)}
+      </div>
     </Section>
   );
 
@@ -241,7 +223,7 @@ export function NeighborhoodStayPage({ area }: { area: NeighborhoodStayGuide }) 
         image={area.photo}
         checkedAt={city.reviewedAt || INFO_CHECK_DATE}
       />
-      <OnThisPage sections={isJerusalem ? jerusalemSections : sections} />
+      <OnThisPage sections={sections} />
       <article className="mx-auto max-w-5xl px-4">
         <Link to={city.path as LinkProps["to"]} className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-primary"><ArrowLeft className="h-4 w-4" aria-hidden /> Compare all {city.city} areas</Link>
         <dl className="mt-5 grid gap-3 rounded-2xl border bg-card p-4 sm:grid-cols-3 sm:gap-4 sm:p-5">
@@ -250,9 +232,8 @@ export function NeighborhoodStayPage({ area }: { area: NeighborhoodStayGuide }) 
           <div><dt className="eyebrow">Keep in mind</dt><dd className="mt-2 text-sm leading-relaxed text-muted-foreground">{area.watch}</dd></div>
         </dl>
         {hotelSection}
-        {!isJerusalem && moreSection}
         {overviewSection}
-        {isJerusalem && <JerusalemNeighborhoodGuideCallout />}
+        {isJerusalem ? <JerusalemNeighborhoodGuideCallout /> : <TelAvivNeighborhoodGuideCallout />}
         {highlightsSection}
         {locationSection}
         {checklistSection}
