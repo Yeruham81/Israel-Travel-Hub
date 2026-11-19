@@ -1,4 +1,4 @@
-import { useState, type ReactNode } from "react";
+import { useEffect, useRef, useState, type ReactNode } from "react";
 import { Link } from "@tanstack/react-router";
 import { ArrowUpRight, CalendarCheck2, Clock3, ExternalLink, Landmark, Lightbulb, MapPin, Ticket, CalendarDays } from "lucide-react";
 import { Breadcrumbs, FaqList, OnThisPage } from "@/components/Guide";
@@ -8,7 +8,7 @@ import { PageUpdated } from "@/components/PageUpdated";
 import { SourcesDisclosure } from "@/components/SourcesDisclosure";
 import { HomeContactForm } from "@/components/HomeContactForm";
 import { neighborhoodTripContactCopy } from "@/lib/guide-contact";
-import { additionalMuseums, museumAreas, museums, type MuseumEntry } from "@/data/telAvivMuseums";
+import { additionalMuseums, museumAreas, museumMapPoints, museums, type MuseumEntry } from "@/data/telAvivMuseums";
 import museumHero from "@/assets/guides/2026-10/museums-in-tel-aviv.webp";
 import muzaPhoto from "@/assets/guides/2026-10/eretz-israel-museum.webp";
 import jaffaPhoto from "@/assets/tel-aviv/jaffa.webp";
@@ -58,7 +58,7 @@ function MuseumCard({ museum }: { museum: MuseumEntry }) {
   const family = ["anu", "steinhardt", "muza", "art", "city", "gutman"].includes(museum.id);
   const advanceBooking = ["palmach", "city", "steinhardt"].includes(museum.id);
   const tags = [
-    museum.theme,
+    museumImage ? museum.theme : null,
     museum.priceNis === 0 ? "Free entry" : null,
     family ? "Family-friendly" : null,
     advanceBooking ? "Book ahead" : null,
@@ -89,11 +89,10 @@ function MuseumCard({ museum }: { museum: MuseumEntry }) {
       </div>
       <p className="mt-3 text-sm leading-relaxed"><strong className="text-primary">My tip:</strong> {museum.tip}</p>
       {museum.id === "palmach" && <p className="mt-3 text-sm">Reserve by phone or WhatsApp: <a href="tel:+97235459800" className="font-semibold text-primary underline-offset-2 hover:underline">03-5459800</a></p>}
-      <p className="mt-3 text-xs text-muted-foreground">{museum.address}</p>
-      <div className="mt-auto flex flex-wrap items-center justify-between gap-x-3 gap-y-3 border-t pt-4 text-sm">
-        {museum.ticketUrl && museum.id !== "independence" && <OfficialLink href={museum.ticketUrl}>{ticketLabel}</OfficialLink>}
-        <OfficialLink href={museum.url}>Official visitor information</OfficialLink>
-        <MapLink museum={museum} />
+      <div className="mt-3 flex flex-wrap items-baseline gap-x-3 gap-y-1 text-xs text-muted-foreground"><span>{museum.address}</span><MapLink museum={museum} /></div>
+      <div className="mt-auto grid gap-2 border-t pt-4 text-sm sm:grid-cols-2">
+        {(museum.ticketUrl && museum.id !== "independence" || museum.id === "palmach") && <a href={museum.id === "palmach" ? "tel:+97235459800" : museum.ticketUrl} target={museum.id === "palmach" ? undefined : "_blank"} rel={museum.id === "palmach" ? undefined : "noopener noreferrer"} className="inline-flex min-h-11 items-center justify-center gap-1.5 rounded-lg bg-primary px-3 py-2.5 text-center font-semibold text-primary-foreground transition-opacity hover:opacity-90">{museum.id === "palmach" ? "Reserve by phone" : ticketLabel}{museum.id !== "palmach" && <ExternalLink className="h-3.5 w-3.5" aria-hidden="true" />}</a>}
+        <a href={museum.url} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-11 items-center justify-center gap-1.5 rounded-lg border border-sky-200 bg-sky-100 px-3 py-2.5 text-center font-semibold text-sky-950 hover:bg-sky-200">Official museum website<ExternalLink className="h-3.5 w-3.5" aria-hidden="true" /><span className="sr-only">(opens in a new tab)</span></a>
       </div>
     </div>
   </article>;
@@ -106,24 +105,46 @@ function PlanningTip({ children }: { children: ReactNode }) {
   </aside>;
 }
 
+const museumMapUrl = "/maps/tel-aviv-museums.html?points=" + encodeURIComponent(JSON.stringify(museumMapPoints));
+
 function MuseumMap() {
-  const [selectedId, setSelectedId] = useState("art");
-  const selected = museums.find(item => item.id === selectedId) ?? museums[0]!;
-  const mapQuery = selected.name + ", " + selected.address + ", Israel";
-  const mapUrl = "https://maps.google.com/maps?q=" + encodeURIComponent(mapQuery) + "&z=15&output=embed";
-  const externalUrl = "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(mapQuery);
-  return <section aria-label="Selected museum locations" className="mt-7 overflow-hidden rounded-xl border bg-card">
+  const [selectedId, setSelectedId] = useState("all");
+  const frame = useRef<HTMLIFrameElement>(null);
+  const selected = museums.find(museum => museum.id === selectedId);
+  const focus = (id: string) => {
+    setSelectedId(id);
+    frame.current?.contentWindow?.postMessage({type:"tel-aviv-museum-map-focus",id}, window.location.origin);
+  };
+  useEffect(() => {
+    const listener = (event: MessageEvent) => {
+      if (event.origin !== window.location.origin || event.source !== frame.current?.contentWindow) return;
+      if (event.data?.type === "tel-aviv-museum-map-selected" && museumMapPoints.some(museum => museum.id === event.data.id)) setSelectedId(event.data.id);
+    };
+    window.addEventListener("message", listener);
+    return () => window.removeEventListener("message", listener);
+  }, []);
+  return <section aria-label="Museum locations in Tel Aviv and Jaffa" className="mt-7 overflow-hidden rounded-xl border bg-card">
     <div className="p-4">
-      <h3 className="text-lg font-semibold">Find each museum on the map</h3>
-      <p className="mt-1 text-sm text-muted-foreground">Select any of the 15 museums to show its precise address. This curated map focuses on the chosen venue rather than unrelated nearby attractions.</p>
-      <label className="mt-3 block text-sm font-semibold" htmlFor="museum-map-select">Museum to locate</label>
-      <select id="museum-map-select" value={selectedId} onChange={event => setSelectedId(event.target.value)} className="mt-2 min-h-11 w-full rounded-lg border bg-background px-3 py-2 text-sm focus-visible:outline-2 focus-visible:outline-primary">
-        {museumAreas.map(area => <optgroup key={area.id} label={area.name}>{museums.filter(museum => museum.area === area.id).map(museum => <option key={museum.id} value={museum.id}>{museum.name}{museum.closureNote ? " — closure notice" : ""}</option>)}</optgroup>)}
-      </select>
-      <p className="mt-2 text-xs text-muted-foreground">{selected.address}, Israel{selected.closureNote ? " · " + selected.closureNote : ""}</p>
+      <h3 className="text-lg font-semibold">Museums on the map</h3>
+      <p className="mt-1 text-sm text-muted-foreground">All 15 museums on one map. Select a venue to zoom in.</p>
+      <div className="mt-3 flex flex-wrap items-end gap-3">
+        <label htmlFor="museum-map-select" className="min-w-0 flex-1 text-sm font-semibold">Focus on a museum
+          <select id="museum-map-select" value={selectedId} onChange={e => focus(e.target.value)} className="mt-2 min-h-11 w-full rounded-lg border bg-background px-3 py-2 text-sm font-normal focus-visible:outline-2 focus-visible:outline-primary">
+            <option value="all">All museums — city overview</option>
+            {museumAreas.map(area => <optgroup key={area.id} label={area.name}>{museums.filter(museum => museum.area === area.id).map(museum => <option key={museum.id} value={museum.id}>{museum.name}{museum.id === "independence" ? " (closed)" : ""}</option>)}</optgroup>)}
+          </select>
+        </label>
+        <button type="button" disabled={selectedId === "all"} onClick={() => focus("all")} className="min-h-11 rounded-lg border border-primary/30 px-4 py-2 text-sm font-semibold text-primary hover:bg-secondary disabled:cursor-default disabled:opacity-50">Show all museums</button>
+      </div>
+      {selected && <p className="mt-2 text-xs text-muted-foreground">{selected.address}, Israel{selected.closureNote ? " · " + selected.closureNote : ""}</p>}
     </div>
-    <iframe key={selected.id} title={"Map of " + selected.name + " in Tel Aviv"} loading="lazy" referrerPolicy="strict-origin-when-cross-origin" src={mapUrl} width="900" height="320" className="h-64 w-full border-0 sm:h-80" />
-    <div className="flex flex-wrap items-center justify-between gap-2 p-3 text-xs text-muted-foreground"><span>Every listing has its own Directions link for the museum entrance.</span><OfficialLink href={externalUrl}>Open selected location in Google Maps</OfficialLink></div>
+    <iframe ref={frame} title="All fifteen museums in Tel Aviv and Jaffa" loading="lazy" referrerPolicy="strict-origin-when-cross-origin" src={museumMapUrl} onLoad={() => {
+      if (selectedId !== "all") frame.current?.contentWindow?.postMessage({type:"tel-aviv-museum-map-focus",id:selectedId},window.location.origin);
+    }} width={900} height={440} className="h-[360px] w-full border-0 sm:h-[440px]" />
+    <div className="flex flex-wrap items-center justify-between gap-3 p-3 text-xs text-muted-foreground">
+      <span>Map data © OpenStreetMap contributors.</span>
+      {selected && <OfficialLink href={"https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(selected.name + ", " + selected.address + ", Israel")}>Open in Google Maps</OfficialLink>}
+    </div>
   </section>;
 }
 
@@ -134,11 +155,16 @@ const faqs = [
   { q: "Are there free museums in Tel Aviv?", a: "Liebling Haus normally offers free general entry, while exhibitions or special events elsewhere can have separate charges. MUZA's outdoor park areas have different entry arrangements from the exhibitions. Always check the specific event or museum before arrival." },
   { q: "Can I visit several museums in one day?", a: "Yes, especially around Bialik Square. In Ramat Aviv, I recommend choosing one major museum, or two only if their opening times and your transport arrangements fit. Allow time for meals and breaks." },
   { q: "Are museums open on Saturdays and Jewish holidays?", a: "Opening days differ from one museum to another; some open on Saturdays and others do not. Holiday eves and special events can change hours even at museums that normally open. Check the official timetable before making the journey." },
-  { q: "Can I visit Independence Hall right now?", a: "The historic site remains part of this guide, but its interior is closed as of November 2026 because of extensive restoration. Check the official operator for a future reopening announcement before planning entry." },
+  { q: "Can I visit Independence Hall right now?", a: "Independence Hall is closed until further notice for restoration. You can still include its exterior on a Rothschild Boulevard walk; check the operator for reopening news before planning an interior visit." },
 ];
 
 export function TelAvivMuseumsGuide() {
   const featured = museums.filter(museum => ["art", "city", "steinhardt", "anu", "muza", "liebling"].includes(museum.id));
+  const featuredCta: Record<string, string> = {
+    art: "See art highlights", city: "Explore visitor details",
+    steinhardt: "Discover natural history", anu: "Plan your museum visit",
+    muza: "Explore MUZA exhibitions", liebling: "Discover the White City",
+  };
   const jump = [
     ["top-picks", "My top picks"], ["compare", "Compare museums"], ["by-area", "Museums by area"],
     ["choose", "Which museum?"], ["museum-routes", "Suggested visits"], ["practical", "Visitor tips"],
@@ -173,20 +199,19 @@ export function TelAvivMuseumsGuide() {
             <strong className="mt-2 text-base leading-snug">{museum.name}</strong>
             <span className="mt-2 text-sm leading-relaxed text-muted-foreground">{museum.bestFor}</span>
             <span className="mt-2 text-xs text-muted-foreground">{museum.priceNis === 0 ? "Free general entry" : typeof museum.priceNis === "number" ? "Adult ₪" + museum.priceNis : "Check admission"}</span>
-            <span className="mt-auto inline-flex items-center gap-1 pt-4 text-xs font-semibold text-primary">Read my guide <ArrowUpRight aria-hidden="true" className="h-3.5 w-3.5" /></span>
+            <span className="mt-auto inline-flex items-center gap-1 pt-4 text-xs font-semibold text-primary">{featuredCta[museum.id] ?? "See museum details"} <ArrowUpRight aria-hidden="true" className="h-3.5 w-3.5" /></span>
           </a>)}
         </div>
       </section>
 
       <section id="compare" aria-labelledby="compare-heading" className="mt-11 scroll-mt-24">
         <SectionHeading id="compare" title="Compare Tel Aviv museums at a glance" intro="Regular adult admission rates checked in November 2026. Visit durations are my estimates; opening days, concessions, exhibitions and booking terms may change." />
-        <p className="mb-2 text-xs leading-relaxed text-muted-foreground lg:hidden">Swipe the table horizontally to compare admission, opening days and booking details.</p>
         <div role="region" aria-label="Museum admission and visiting comparison" tabIndex={0} className="overflow-x-auto rounded-xl border bg-card focus-visible:outline-2 focus-visible:outline-primary">
-          <table className="w-full min-w-[930px] border-collapse text-left text-sm">
+          <table className="w-full min-w-[900px] border-collapse text-left text-sm">
             <caption className="sr-only">Fifteen museums compared by area, adult admission, regular opening days and booking</caption>
             <thead className="bg-secondary/60"><tr>{["Museum", "Best for", "Area", "Adult admission", "Opening days", "Allow", "Booking"].map((h, index) => <th scope="col" key={h} className={index === 0 ? "sticky left-0 z-10 border-b bg-secondary px-3 py-3 font-semibold" : "border-b px-3 py-3 font-semibold"}>{h}</th>)}</tr></thead>
             <tbody>{museums.map(museum => <tr key={museum.id} className="border-b last:border-0">
-              <th scope="row" className="sticky left-0 z-10 min-w-40 bg-card px-3 py-3 font-semibold"><a href={"#museum-" + museum.id} className="text-primary hover:underline">{museum.name}</a>{museum.closureNote && <span className="mt-1 block text-xs font-normal text-amber-800">{museum.closureNote}</span>}</th>
+              <th scope="row" className="sticky left-0 z-10 w-[140px] min-w-[136px] bg-card px-3 py-3 font-semibold"><a href={"#museum-" + museum.id} className="text-primary hover:underline">{museum.name}</a>{museum.closureNote && <span className="mt-1 block text-xs font-normal text-amber-800">{museum.closureNote}</span>}</th>
               <td className="px-3 py-3">{museum.bestFor}</td><td className="px-3 py-3">{museum.neighbourhood}</td>
               <td className="whitespace-nowrap px-3 py-3 font-medium">{museum.id === "independence" ? "Closed" : museum.priceNis === 0 ? "Free*" : typeof museum.priceNis === "number" ? "₪" + museum.priceNis : "Confirm with operator"}</td>
               <td className="px-3 py-3">{museum.openingDays || "Check official hours"}</td><td className="whitespace-nowrap px-3 py-3">{museum.duration}</td><td className="px-3 py-3">{museum.booking}</td>
