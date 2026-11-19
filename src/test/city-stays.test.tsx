@@ -200,8 +200,8 @@ describe.each([
       const area = jerusalemAreaGuides.find((item) => item.id === id)!;
       const link = areaLinks.querySelector(`a[href="${area.path}"]`);
       expect(link).toBeInTheDocument();
-      expect(link?.querySelector("img")).toHaveAttribute("src", jerusalemStayCardPhotos[id].src);
-      expect(link?.querySelector("img")).toHaveAttribute("alt", jerusalemStayCardPhotos[id].alt);
+      expect(link?.querySelector("img")).toHaveAttribute("src", jerusalemStayCardPhotos[id]!.src);
+      expect(link?.querySelector("img")).toHaveAttribute("alt", jerusalemStayCardPhotos[id]!.alt);
     }
     const ibis = cityHotelPhoto(jerusalemHotelCatalog.find((hotel) => hotel.id === "jlm-ibis")!);
     const styles = cityHotelPhoto(jerusalemHotelCatalog.find((hotel) => hotel.id === "jlm-ibis-styles")!);
