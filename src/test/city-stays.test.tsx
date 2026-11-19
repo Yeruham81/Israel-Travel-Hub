@@ -143,7 +143,11 @@ describe.each([
       expect(screen.queryByText("Who it suits")).not.toBeInTheDocument();
       expect(screen.queryByText("Check before booking")).not.toBeInTheDocument();
       expect(within(screen.getByRole("navigation", { name: "Breadcrumb" })).getByRole("link", { name: g.city })).toHaveAttribute("href", g.path);
-      expect(container.querySelector(`a[href="${g.related[0]!.to}"]`)).toBeInTheDocument();
+      if (area.id === "downtown") {
+        expect(container.querySelector(`a[href="${g.related[0]!.to}"]`)).toBeNull();
+      } else {
+        expect(container.querySelector(`a[href="${g.related[0]!.to}"]`)).toBeInTheDocument();
+      }
       expect(container.querySelector(`a[href="${otherCity.related[0]!.to}"]`)).toBeNull();
       expect(container.querySelector(`#sources a[href="${getSource(g.sourceIds[0]!).url}"]`)).toBeNull();
       expect(container.querySelector(`#sources a[href="${getSource(otherCity.sourceIds[0]!).url}"]`)).toBeNull();
