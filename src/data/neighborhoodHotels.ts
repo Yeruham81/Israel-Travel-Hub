@@ -1,4 +1,4 @@
-/** 29 supplemental neighborhood hotel records with direct Expedia property SOURCE URLs.
+/** 34 supplemental neighborhood hotel records with direct Expedia property SOURCE URLs.
  * Editorial citations remain non-affiliate, while the separate booking offers in
  * registry.ts carry approved property-specific Travelpayouts affiliate links.
  * These records feed both neighborhood pages and the complete city galleries.
@@ -41,6 +41,66 @@ const supplemental: (HotelRecommendation & { expediaUrl: string })[] = [
     "watch": "Check the room layout, nearby street noise and the most convenient luggage drop-off.",
     "sourceId": "hotel-jlm-paamonim-expedia-listing",
     "expediaUrl": "https://www.expedia.com/Jerusalem-Hotels-Paamonim-Jerusalem-Hotel.h14708123.Hotel-Information"
+  },
+  {
+    "id": "jlm-eldan",
+    "cityId": "jerusalem",
+    "areaId": "mamilla",
+    "name": "The Eldan Hotel",
+    "style": "King David Street hotel",
+    "summary": "Central hotel at 24 King David Street, near Mamilla Avenue and a walk from Jaffa Gate.",
+    "bestFor": "Old City walks and central sightseeing",
+    "watch": "Check your room's street outlook and the most convenient luggage drop-off.",
+    "sourceId": "hotel-jlm-eldan-expedia-listing",
+    "expediaUrl": "https://www.expedia.com/Jerusalem-Hotels-The-Eldan-Hotel.h4846905.Hotel-Information"
+  },
+  {
+    "id": "jlm-christ-church",
+    "cityId": "jerusalem",
+    "areaId": "old-city",
+    "name": "Christ Church Guest House",
+    "style": "Historic guesthouse",
+    "summary": "Heritage guesthouse in Jerusalem's Old City, near Jaffa Gate and the Christian Quarter.",
+    "bestFor": "Pilgrimage visits and historic atmosphere",
+    "watch": "Confirm gate access, luggage handling and stairs before arrival.",
+    "sourceId": "hotel-jlm-christ-church-expedia-listing",
+    "expediaUrl": "https://www.expedia.com/Jerusalem-Hotels-Christ-Church-Guest-House.h127406078.Hotel-Information"
+  },
+  {
+    "id": "jlm-brown-machne",
+    "cityId": "jerusalem",
+    "areaId": "mahane-yehuda",
+    "name": "Brown Machne Yehuda",
+    "style": "Market-side boutique hotel",
+    "summary": "Boutique accommodation by Jaffa Road and Mahane Yehuda Market, close to food stalls and cafés.",
+    "bestFor": "Market visits and lively city breaks",
+    "watch": "Check the room's outlook and noise from nearby streets and nightlife.",
+    "sourceId": "hotel-jlm-brown-machne-expedia-listing",
+    "expediaUrl": "https://www.expedia.com/Jerusalem-Hotels-Machne-Yehuda-A-Member-Of-Brown-Hotels.h66336653.Hotel-Information"
+  },
+  {
+    "id": "jlm-national-hotel",
+    "cityId": "jerusalem",
+    "areaId": "east-jerusalem",
+    "name": "National Hotel Jerusalem",
+    "style": "East Jerusalem city hotel",
+    "summary": "Hotel on Al Zahra Street with local dining nearby and routes toward Damascus Gate.",
+    "bestFor": "Northern Old City access and local streets",
+    "watch": "Check your street entrance, reception arrangements and actual walking route.",
+    "sourceId": "hotel-jlm-national-hotel-expedia-listing",
+    "expediaUrl": "https://www.expedia.com/Jerusalem-Hotels-National-Hotel-Jerusalem.h4473287.Hotel-Information"
+  },
+  {
+    "id": "jlm-dan-boutique",
+    "cityId": "jerusalem",
+    "areaId": "german-colony",
+    "name": "Dan Boutique Jerusalem",
+    "style": "Boutique city hotel",
+    "summary": "Hotel on Hebron Road near the First Station, within walking distance of the northern German Colony.",
+    "bestFor": "First Station restaurants and neighborhood walks",
+    "watch": "Confirm the route to Emek Refaim and availability of parking.",
+    "sourceId": "hotel-jlm-dan-boutique-expedia-listing",
+    "expediaUrl": "https://www.expedia.com/Jerusalem-Hotels-Dan-Boutique-Jerusalem.h19654.Hotel-Information"
   },
   {
     "id": "jlm-david-citadel",
@@ -363,6 +423,6 @@ export const neighborhoodHotelSources: SourceReference[] = supplemental.map((hot
   title: `${hotel.name} — Expedia property page`,
   publisher: "Expedia",
   url: hotel.expediaUrl,
-  checkedAt: hotel.id === "jlm-paamonim" ? "2026-11-19" : "2026-10-22",
+  checkedAt: hotel.id === "jlm-paamonim" || ["jlm-eldan", "jlm-christ-church", "jlm-brown-machne", "jlm-national-hotel", "jlm-dan-boutique"].includes(hotel.id) ? "2026-11-19" : "2026-10-22",
   note: "Expedia property information used to check accommodation details. Confirm room availability, final prices and cancellation terms on Expedia before booking.",
 }));
