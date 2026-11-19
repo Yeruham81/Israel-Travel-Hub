@@ -19,7 +19,6 @@ export type TelAvivBeach = {
   featured?: boolean;
 };
 export const officialTelAvivBeaches = "https://www.tel-aviv.gov.il/Visitors/Beaches/Pages/Beaches.aspx";
-export const officialTelAvivBeachesEnglish = "https://www.tel-aviv.gov.il/en/visit/beaches/pages/default.aspx";
 export const officialBeachFacilities = "https://www.tel-aviv.gov.il/Visitors/Beaches/Pages/beachlist.aspx";
 export const officialBeachPrices = "https://www.tel-aviv.gov.il/Visitors/Beaches/Pages/Instructions.aspx";
 
