@@ -2,13 +2,13 @@ import { MapPin, ExternalLink } from "lucide-react";
 import type { NeighborhoodStayGuide } from "@/data/content";
 import { isPublisherUrl } from "@/data/registry";
 
-/** Google Maps for the Jerusalem/Tel Aviv neighborhoods, legacy local map for other destination guides. */
-export function AreaMap({ area, compact = false, provider = "local", showExternalLink = true, stretch = false }: { area: Pick<NeighborhoodStayGuide, "name" | "map">; compact?: boolean; provider?: "local" | "google"; showExternalLink?: boolean; stretch?: boolean }) {
+/** Google Maps is the default for all accommodation maps. Older local maps remain available only when explicitly requested. */
+export function AreaMap({ area, compact = false, provider = "google", googleZoom = 14, showExternalLink = true, stretch = false }: { area: Pick<NeighborhoodStayGuide, "name" | "map">; compact?: boolean; provider?: "local" | "google"; googleZoom?: number; showExternalLink?: boolean; stretch?: boolean }) {
   const { lat, lon, bounds, reference } = area.map;
   const query = encodeURIComponent(`${lat},${lon}`);
   const params = new URLSearchParams({ bbox: bounds.join(","), marker: `${lat},${lon}`, name: area.name, lang: "en" });
   const localUrl = `/maps/area.html?${params.toString()}`;
-  const mapUrl = provider === "google" ? `https://maps.google.com/maps?q=${query}&z=14&output=embed` : localUrl;
+  const mapUrl = provider === "google" ? `https://maps.google.com/maps?q=${query}&z=${googleZoom}&output=embed` : localUrl;
   const externalUrl = provider === "google" ? `https://www.google.com/maps/search/?api=1&query=${query}` : localUrl;
   return (
     <figure className={`min-w-0 overflow-hidden rounded-xl border bg-muted ${stretch ? "flex h-full flex-col" : ""}`}>
