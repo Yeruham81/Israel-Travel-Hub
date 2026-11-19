@@ -248,18 +248,18 @@ export function FaqList({
   );
 }
 
-export function SourceList({ ids, intro = "“Checked” dates refer to the facts on these pages only. Provider prices, availability and inventory were not verified." }: { ids: string[]; intro?: string }) {
+export function SourceList({ ids, intro = "“Checked” dates refer to the facts on these pages only. Provider prices, availability and inventory were not verified.", compact = false }: { ids: string[]; intro?: string; compact?: boolean }) {
   const sources = publicSources(ids);
   if (!sources.length) return null;
   return (
     <SourcesDisclosure>
       <p className="mt-2 text-sm text-muted-foreground">{intro}</p>
-      <ul className="mt-4 space-y-3">
+      <ul className={compact ? "mt-4 grid gap-2 sm:grid-cols-2" : "mt-4 space-y-3"}>
         {sources.map((s) => (
-          <li key={s.id} className="rounded-xl border bg-card p-4 text-sm">
-            <ExtLink href={s.url} className="font-semibold text-primary">{s.publisher}: {s.title}</ExtLink>
-            <p className="mt-1 text-muted-foreground">{s.note}</p>
-            <p className="mt-1 text-xs">{s.checkedAt ? `Checked ${formatCheckDate(s.checkedAt)}` : "Linked for reference"}</p>
+          <li key={s.id} className={compact ? "min-w-0 rounded-lg border bg-card p-3 text-sm" : "rounded-xl border bg-card p-4 text-sm"}>
+            <ExtLink href={s.url} className="font-semibold text-primary">{compact ? s.title : `${s.publisher}: ${s.title}`}</ExtLink>
+            {(!compact || !s.id.startsWith("hotel-")) && <p className="mt-1 text-muted-foreground">{s.note}</p>}
+            <p className="mt-1 text-xs text-muted-foreground">{s.checkedAt ? `Checked ${formatCheckDate(s.checkedAt)}` : "Linked for reference"}</p>
           </li>
         ))}
       </ul>
