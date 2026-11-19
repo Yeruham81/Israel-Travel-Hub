@@ -90,6 +90,26 @@ const hotelCardDetails: Record<string, { type: string; location: string; highlig
   "tlv-rothschild71": { type: "Historic boutique", location: "Rothschild Boulevard", highlight: "Restored city-centre building with a residential feel." },
 };
 
+/** Short, single-line category labels for the 16 hotels actually shown in the Tel Aviv guide. */
+const telAvivHotelTypeLabels: Record<string, string> = {
+  "tlv-carlton": "Beachfront luxury",
+  "tlv-embassy": "Retro boutique",
+  "tlv-backstage": "Theatre boutique",
+  "tlv-cinema": "Cinema boutique",
+  "tlv-port-tower": "Contemporary hotel",
+  "tlv-melody": "Boutique hotel",
+  "tlv-elkonin": "Heritage luxury",
+  "tlv-ruby": "Independent stay",
+  "tlv-the-jaffa": "Heritage luxury",
+  "tlv-market-house": "Boutique hotel",
+  "tlv-albi-florentin": "Urban hotel",
+  "tlv-florentin-house": "Urban boutique",
+  "tlv-poli-house": "Design hotel",
+  "tlv-assemblage": "Heritage boutique",
+  "tlv-the-norman": "Luxury boutique",
+  "tlv-65-rothschild": "Boutique hotel",
+};
+
 /** Two compact, entirely clickable cards with approved property-specific links. */
 export function CityEditorialHotels({ area }: { area: NeighborhoodStayGuide }) {
   const cityId = area.cityId;
@@ -110,13 +130,14 @@ export function CityEditorialHotels({ area }: { area: NeighborhoodStayGuide }) {
           location: area.shortName,
           highlight: hotel.summary,
         };
+        const categoryLabel = cityId === "telaviv" ? (telAvivHotelTypeLabels[hotel.id] ?? details.type) : details.type;
         const cardContent = <>
           <span className="flex min-w-0 items-center gap-2">
             <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-primary/10 text-primary" aria-hidden="true">
               <Hotel className="h-4.5 w-4.5" />
             </span>
-            <span className="min-w-0 text-[10px] font-semibold uppercase leading-tight tracking-wide text-muted-foreground sm:text-xs" data-testid="hotel-type">
-              {details.type}
+            <span className="min-w-0 truncate whitespace-nowrap text-[10px] font-semibold uppercase leading-tight tracking-wide text-muted-foreground sm:text-xs" data-testid="hotel-type">
+              {categoryLabel}
             </span>
           </span>
           <h5 className="mt-2 text-sm font-bold leading-snug text-foreground sm:text-base">{hotel.name}</h5>
