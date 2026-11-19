@@ -127,7 +127,9 @@ describe.each([
           expect(grid.children).toHaveLength(6);
           expect(grid.lastElementChild).toHaveAttribute("data-testid", "jerusalem-hotel-map");
         } else {
-          expect(container.querySelector("#more-hotels")!.compareDocumentPosition(container.querySelector("#overview")!) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
+          expect(container.querySelector("#more-hotels")).toBeNull();
+          expect(container.querySelector("#area-guide")).toBeInTheDocument();
+          expect(container.querySelector("#overview")!.compareDocumentPosition(container.querySelector("#area-guide")!) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
         }
         expect(within(container.querySelector("#location") as HTMLElement).getByText(/Arriving with luggage:/)).toBeInTheDocument();
         expect(within(hotelSection).getByText(/Hotel stays are provided by independent properties/)).toBeInTheDocument();
