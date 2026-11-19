@@ -63,9 +63,9 @@ describe("Tiberias destination and distinct hotel intents", () => {
       expect(card.querySelector("img")).toHaveAttribute("src", guide.photo.src);
     }
     const map = new URL(container.querySelector("#location iframe")!.getAttribute("src")!, "https://example.test");
-    expect(map.pathname).toBe("/maps/area.html");
-    expect(map.searchParams.get("lang")).toBe("en");
-    expect(map.searchParams.get("marker")).toBe(`${destination.map.lat},${destination.map.lon}`);
+    expect(map.hostname).toBe("maps.google.com");
+    expect(map.searchParams.get("q")).toBe(`${destination.map.lat},${destination.map.lon}`);
+    expect(map.searchParams.get("output")).toBe("embed");
     expect(container.querySelector("#location")!.compareDocumentPosition(container.querySelector("#book")!)).toBe(Node.DOCUMENT_POSITION_FOLLOWING);
     expect(within(container.querySelector("#more-stays") as HTMLElement).getByRole("link", { name: /Check prices on Booking.com/ })).toHaveAttribute("href", "https://www.booking.com/city/il/tiberias.html");
     expect(container.querySelectorAll("main")).toHaveLength(1);
