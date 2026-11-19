@@ -17,7 +17,7 @@ import {
   type ShoppingPlace,
 } from "@/data/jerusalemShopping";
 
-import oldCityPhoto from "@/assets/jerusalem/old-city.webp";
+import oldCityPhoto from "@/assets/home/jerusalem-old-city.webp";
 import mahaneHotelPhoto from "@/assets/jerusalem/mahane-yehuda.webp";
 import hotelPhoto from "@/assets/jerusalem/mamilla.webp";
 import foodPhoto from "@/assets/guides/2026-10/what-to-eat-in-israel.webp";
