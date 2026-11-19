@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link, type LinkProps } from "@tanstack/react-router";
-import { ArrowRight, BookOpen, Check, Lightbulb } from "lucide-react";
+import { ArrowRight, Check, Lightbulb } from "lucide-react";
 import {
   type CityStayGuide, type NeighborhoodStayGuide, type StayPreference, preferenceLabels,
 } from "@/data/content";
@@ -8,13 +8,13 @@ import { areaArrivalSignals } from "@/data/localEditorialInsights";
 import { INFO_CHECK_DATE } from "@/data/registry";
 import { GuideHeader, OnThisPage, FaqList, SourceList } from "@/components/Guide";
 import { JerusalemHotelBrowser } from "@/components/JerusalemHotelBrowser";
+import { JerusalemNeighborhoodGuideCallout } from "@/components/JerusalemNeighborhoodGuideCallout";
 import { StayTripLinks } from "@/components/StayTripLinks";
 import { HomeContactForm } from "@/components/HomeContactForm";
 import { guideContactCopy } from "@/lib/guide-contact";
 import { CityHotelPhotoCredits } from "@/components/CityHotelPhotoCredits";
 import { AreaPhotoCredit } from "@/components/AreaMap";
 import jerusalemHeroPhoto from "@/assets/home/hero-refresh-jerusalem-jaffa-gate-v4-medium.webp";
-import jerusalemAreaGuidePhoto from "@/assets/guides/2026-11/where-to-stay-jerusalem-drive.webp";
 import jewishQuarterLanePhoto from "@/assets/guides/2026-11/jerusalem-jewish-quarter-stone-lane.webp";
 import eastJerusalemHousePhoto from "@/assets/jerusalem/east-jerusalem-house.webp";
 
@@ -145,26 +145,7 @@ export function JerusalemStayHub({ g, areas }: { g: CityStayGuide; areas: Neighb
           </div>
         </section>
 
-        <section id="area-guide" aria-labelledby="area-guide-h" className="mt-8 scroll-mt-28">
-          <div className="grid overflow-hidden rounded-2xl border bg-secondary/30 sm:grid-cols-[minmax(0,1fr)_230px]">
-            <div className="min-w-0 p-5 sm:p-6">
-              <p className="eyebrow inline-flex items-center gap-2"><BookOpen className="h-4 w-4" aria-hidden /> Neighborhood guide</p>
-              <h2 id="area-guide-h" className="mt-2 text-xl font-semibold sm:text-2xl">
-                Not sure where to base yourself in Jerusalem?
-              </h2>
-              <p className="mt-2 max-w-xl text-sm leading-relaxed text-muted-foreground">
-                Explore my guide to six Jerusalem neighborhoods, with practical advice on atmosphere, sightseeing access and getting around.
-              </p>
-              <Link
-                to={"/travel-blog/where-to-stay-in-jerusalem/" as LinkProps["to"]}
-                className="mt-4 inline-flex min-h-11 items-center gap-2 rounded-lg border border-primary/30 bg-card px-4 py-2.5 text-sm font-semibold text-primary transition-colors hover:border-primary/60 hover:bg-secondary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
-              >
-                Explore the neighborhood guide <ArrowRight className="h-4 w-4" aria-hidden />
-              </Link>
-            </div>
-            <img src={jerusalemAreaGuidePhoto} alt="Jerusalem neighborhood and cityscape view from the Where to Stay in Jerusalem guide" width={460} height={300} loading="lazy" decoding="async" className="aspect-[16/10] h-full w-full object-cover sm:aspect-auto" />
-          </div>
-        </section>
+        <JerusalemNeighborhoodGuideCallout />
 
         <section id="checklist" aria-labelledby="checklist-h" className="mt-12 scroll-mt-28">
           <h2 id="checklist-h" className="text-2xl font-semibold sm:text-3xl">Before you book</h2>
