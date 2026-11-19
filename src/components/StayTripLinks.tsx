@@ -33,6 +33,8 @@ import capernaumPhoto from "@/assets/guides/capernaum.jpg";
 import tabghaPhoto from "@/assets/guides/tabgha.jpg";
 import yardenitPhoto from "@/assets/guides/yardenit.jpg";
 import beatitudesPhoto from "@/assets/guides/mount-of-beatitudes.jpg";
+import mountTaborPhoto from "@/assets/guides/mount-tabor.jpg";
+import galileeTourPhoto from "@/assets/attractions-hub/region-sea-of-galilee-480.webp";
 import nazarethPhoto from "@/assets/guides/2026-10/basilica-of-the-annunciation.webp";
 import deadSeaPhoto from "@/assets/dead-sea/beach.webp";
 import einGediPhoto from "@/assets/guides/dead-sea-excursions/ein-gedi-waterfall.webp";
@@ -124,10 +126,12 @@ export const stayGuideGroups: Record<Region, GuideGroups> = {
       card("Magdala", "/attractions/magdala/", "Discover an archaeological site on the lakeshore.", magdalaPhoto, "Historic archaeological site at Magdala"),
       card("Capernaum", "/attractions/capernaum/", "Plan a visit to the northern lakeside heritage site.", capernaumPhoto, "Ruins and stonework at Capernaum"),
       card("Tabgha", "/attractions/tabgha/", "Explore churches and historic sites beside the lake.", tabghaPhoto, "Historic church setting at Tabgha"),
-    ],
-    onward: [
       card("Yardenit", "/attractions/yardenit/", "Plan a visit to the Jordan River baptism site.", yardenitPhoto, "Yardenit and the Jordan River"),
       card("Mount of Beatitudes", "/attractions/mount-of-beatitudes/", "Visit the hillside overlooking the Sea of Galilee.", beatitudesPhoto, "Mount of Beatitudes landscape"),
+    ],
+    onward: [
+      card("Mount Tabor", "/attractions/mount-tabor/", "Visit the hilltop basilica and enjoy views across Lower Galilee.", mountTaborPhoto, "Basilica and landscape on Mount Tabor"),
+      card("Nazareth & Galilee tours", "/tours/nazareth-sea-of-galilee/", "Explore organized trips to the region’s key places.", galileeTourPhoto, "Sea of Galilee and surrounding green hills"),
       card("Nazareth", "/attractions/basilica-of-the-annunciation/", "Add a trip to Nazareth and its major historic church.", nazarethPhoto, "Basilica of the Annunciation in Nazareth"),
       card("Getting around Israel", "/travel-blog/getting-around-israel/", "See how the north fits with the rest of your journey.", roadTrip, "Road travel through the countryside"),
       card("Israel itinerary: seven days", "/travel-blog/israel-itinerary-7-days/", "Build a northern stop into a week-long itinerary.", sevenDayPhoto, "Galilee hills and countryside"),
@@ -194,12 +198,12 @@ export function StayTripLinks({
     {local.length > 0 && <section id="explore" aria-labelledby="stay-explore-h" className="mt-14 scroll-mt-32">
       <h2 id="stay-explore-h" className="text-2xl font-bold sm:text-3xl">Explore more around {set.name}</h2>
       {!isEditorial && <p className="mt-2 text-muted-foreground">Explore places and practical guides directly related to {set.name}.</p>}
-      {renderCards(local, region === "jerusalem" || region === "telaviv" || region === "deadsea" ? "grid-cols-2 lg:grid-cols-3" : "sm:grid-cols-2", "stay-local-photo-grid")}
+      {renderCards(local, region === "jerusalem" || region === "telaviv" || region === "deadsea" || region === "tiberias" ? "grid-cols-2 lg:grid-cols-3" : "sm:grid-cols-2", "stay-local-photo-grid")}
     </section>}
     {onward.length > 0 && <section id="trip-planning" aria-labelledby="stay-planning-h" className="scroll-mt-32">
       <h2 id="stay-planning-h" className="text-2xl font-bold sm:text-3xl">Plan the rest of your trip</h2>
       {!(isEditorial && region === "jerusalem") && <p className="mt-2 text-muted-foreground">{isEditorial ? "Explore transport options, day trips and practical travel advice." : "Plan your arrivals, excursions and onward travel after choosing your hotel."}</p>}
-      {renderCards(onward, region === "jerusalem" || region === "telaviv" || region === "deadsea" ? "grid-cols-2 lg:grid-cols-3" : "sm:grid-cols-2 lg:grid-cols-3", "stay-trip-photo-grid")}
+      {renderCards(onward, region === "jerusalem" || region === "telaviv" || region === "deadsea" || region === "tiberias" ? "grid-cols-2 lg:grid-cols-3" : "sm:grid-cols-2 lg:grid-cols-3", "stay-trip-photo-grid")}
     </section>}
   </div>;
 }
