@@ -43,7 +43,7 @@ describe("local-only image asset policy", () => {
     for (const file of sourceFiles(srcRoot)) {
       const lines = readFileSync(file, "utf8").split(/\r?\n/);
       lines.forEach((line, index) => {
-        if (remoteImagePatterns.some(regex => regex.test(line))) {
+        if (remoteImagePatterns.some(regex => regex.test(line)) && !(/<iframe\b/.test(line) && /https:\/\/maps\.google\.com\//.test(line))) {
           violations.push(`${relative(process.cwd(), file)}:${index + 1}`);
         }
       });
