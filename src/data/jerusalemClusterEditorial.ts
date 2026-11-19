@@ -231,7 +231,11 @@ export function applyJerusalemGuideEditorial(guides: Record<TravelGuideId, Trave
     if (changes.description) guide.description = changes.description;
     if (changes.intro) guide.intro = changes.intro;
     if (changes.answer) guide.answer = changes.answer;
-    guide.sections = [...guide.sections, ...changes.sections.filter(section => !guide.sections.some(existing => existing.id === section.id))];
+    // The dedicated shopping guide now has one authoritative 10-place registry.
+    // Avoid appending older generic shopping sections that duplicate its locations.
+    if (id !== "jerusalemShopping") {
+      guide.sections = [...guide.sections, ...changes.sections.filter(section => !guide.sections.some(existing => existing.id === section.id))];
+    }
     if (changes.related) guide.related = [...new Set([...guide.related, ...changes.related])].filter(other => other !== id);
     if (changes.services) guide.services = [...changes.services, ...guide.services.filter(service => !changes.services?.some(added => added.to === service.to))];
     if (changes.reading) guide.reading = [...(guide.reading || []), ...changes.reading];
@@ -239,7 +243,7 @@ export function applyJerusalemGuideEditorial(guides: Record<TravelGuideId, Trave
       const einKarem = guide.sections.find(section => section.id === "ein-karem");
       if (einKarem && !einKarem.photo) einKarem.photo = { src: "/images/jerusalem/church-of-visitation.webp", alt: "Church of the Visitation in the hillside Ein Karem neighbourhood" };
     }
-    guide.updatedAt = "2026-10-24";
+    guide.updatedAt = id === "jerusalemShopping" ? "2026-11-20" : "2026-10-24";
   }
 }
 
