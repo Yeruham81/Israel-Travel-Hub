@@ -31,6 +31,7 @@ function withTravelpayoutsSubId(
   // Keep official and unrelated affiliate URLs untouched.
   if (url.protocol !== "https:" || !(
     url.hostname === "tp.st" || url.hostname.endsWith(".tpm.li")
+    || url.hostname.endsWith(".tpk.lv")
   )) return booking.url;
   url.searchParams.set("sub_id", value);
   return url.toString();
