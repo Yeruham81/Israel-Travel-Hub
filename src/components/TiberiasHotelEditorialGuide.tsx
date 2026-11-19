@@ -179,7 +179,7 @@ const browseLabels: Record<string, string> = {
   budget: "Browse more budget-friendly stays",
 };
 
-const sourceIntro = "Hotel websites and regional travel resources.";
+const sourceIntro = "Official hotel websites and regional travel resources, with check dates below.";
 
 function HotelCard({ id, pageId }: { id: string; pageId: string }) {
   const hotel = resortHotel(id);
@@ -256,7 +256,7 @@ export function TiberiasHotelEditorialGuide({ guide }: { guide: HotelStayDestina
         <p className="eyebrow">Choose your Tiberias stay</p>
         <h2 id="choose-h" className="mt-2 text-3xl">Which Tiberias hotel suits you?</h2>
         <p className="mt-4 max-w-4xl leading-relaxed">I recommend choosing a hotel around the kind of holiday you want: a luxurious lakeside break, family activities, a convenient central base or simple accommodation for exploring the Galilee.</p>
-        <div className="mt-6 grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-4" data-testid="tiberias-category-grid">
+        <div className="mt-6 grid grid-cols-1 gap-3 min-[360px]:grid-cols-2 sm:gap-4 lg:grid-cols-4" data-testid="tiberias-category-grid">
           {primaryGroups.map(group => {
             const content = groupCaptions[group.id];
             const photo = group.id === "luxury"
@@ -268,10 +268,10 @@ export function TiberiasHotelEditorialGuide({ guide }: { guide: HotelStayDestina
                   : { src: tiberiasBudgetPhoto, alt: "Bright and comfortable hotel room" };
             return <a key={group.id} href={"#group-" + group.id} className="group flex min-w-0 flex-col overflow-hidden rounded-2xl border bg-card shadow-sm transition-all hover:-translate-y-0.5 hover:border-primary/60 hover:shadow-md" data-testid="tiberias-category-card">
               <img src={photo.src} alt={photo.alt} width={755} height={503} loading="lazy" decoding="async" className="aspect-[16/10] w-full object-cover" />
-              <span className="flex flex-1 flex-col p-3 sm:p-4">
-                <span className="text-sm font-bold leading-snug sm:text-lg">{content?.title ?? group.title}</span>
+              <span className="flex min-w-0 flex-1 flex-col p-3 sm:p-4">
+                <span className="break-words text-sm font-bold leading-snug sm:text-lg">{content?.title ?? group.title}</span>
                 <span className="mt-2 line-clamp-2 flex-1 text-xs leading-relaxed text-muted-foreground sm:text-sm">{content?.eyebrow ?? group.intro}</span>
-                <span className="mt-3 inline-flex items-center gap-1.5 text-xs font-semibold text-primary sm:text-sm">Explore this category <ArrowRight className="h-4 w-4" aria-hidden /></span>
+                <span className="mt-3 inline-flex flex-wrap items-center gap-1 text-xs font-semibold text-primary sm:text-sm">See hotels <ArrowRight className="h-4 w-4 shrink-0" aria-hidden /></span>
               </span>
             </a>;
           })}
@@ -284,7 +284,6 @@ export function TiberiasHotelEditorialGuide({ guide }: { guide: HotelStayDestina
 
       <section id="compare" className="mt-14 scroll-mt-32" aria-labelledby="compare-h">
         <h2 id="compare-h" className="text-3xl">Tiberias hotels at a glance</h2>
-        <p className="mt-3 leading-relaxed text-muted-foreground">Compare ten Tiberias hotels by lakeside setting, neighborhood, facilities and access to the Sea of Galilee.</p>
         <div className="mt-5 overflow-x-auto rounded-2xl border bg-card" role="region" tabIndex={0} aria-label="Compare 10 Tiberias hotel recommendations">
           <table className="w-full min-w-[700px] text-left text-sm" data-testid="tiberias-hotel-comparison">
             <caption className="sr-only">Recommended Tiberias hotels, main appeal, location and lake access</caption>
@@ -313,7 +312,6 @@ export function TiberiasHotelEditorialGuide({ guide }: { guide: HotelStayDestina
       <section id="hotels" className="mt-14 scroll-mt-32" aria-labelledby="hotels-h">
         <p className="eyebrow">My selected places to stay</p>
         <h2 id="hotels-h" className="mt-2 text-3xl">Recommended hotels by travel style</h2>
-        <p className="mt-3 max-w-4xl leading-relaxed">I have selected ten hotels in four groups, from lakeside luxury and family resorts to convenient central stays and independent accommodation.</p>
         <div className="mt-6 divide-y border-t">
           {guide.groups.map(group => {
             const copy = groupCaptions[group.id];
@@ -401,7 +399,7 @@ export function TiberiasHotelEditorialGuide({ guide }: { guide: HotelStayDestina
         introduction: "Need a private transfer to your Tiberias hotel or a driver for a day around the Sea of Galilee? Send me your pickup location, travel date and group details.",
         placeholder: "Pickup location, Tiberias hotel, travel date, passengers and luggage…",
       }} />
-      <SourceList ids={sourceIds} intro={sourceIntro} />
+      <SourceList ids={sourceIds} intro={sourceIntro} compact />
     </article>
   </main>;
 }
