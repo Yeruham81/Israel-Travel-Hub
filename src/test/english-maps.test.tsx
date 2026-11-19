@@ -59,7 +59,7 @@ describe("free English maps throughout the accommodation guides", () => {
   it("all 17 area/destination locations keep their bounds and marker in both the lazy embed and larger English map", () => {
     vi.useFakeTimers();
     for (const [index, area] of areas.entries()) {
-      const { container, unmount } = render(<AreaMap area={area} compact={index % 2 === 0} />);
+      const { container, unmount } = render(<AreaMap area={area} provider="local" compact={index % 2 === 0} />);
       const iframe = container.querySelector("iframe")!;
       const link = container.querySelector('a[href^="/maps/area.html"]')!;
       expect(iframe).toHaveAttribute("loading", "lazy");
