@@ -9,7 +9,7 @@ import { cityStayGuides, jerusalemAreaGuides, telAvivAreaGuides, neighborhoodGui
 import { affiliateConfig, getSource, hotelsForArea, linksForPage } from "@/data/registry";
 import { telAvivHotelCatalog } from "@/components/TelAvivHotelBrowser";
 import { readOutboundClicks } from "@/lib/outbound";
-import { hotelAffiliateUrl } from "@/lib/hotel-affiliate";
+import { hotelAffiliateUrl, hotelBrowseAffiliateUrl } from "@/lib/hotel-affiliate";
 import { telAvivHotelPhotos } from "@/data/telAvivHotelPhotos";
 import { hotelTileCopy } from "@/components/TelAvivHotelBrowser";
 import { cityHotelPhoto, hotelsInCityCatalog } from "@/data/cityHotelCatalog";
@@ -322,7 +322,7 @@ describe("Jerusalem direct hotel catalog", () => {
       initialAreaCounts.set(areaName!, (initialAreaCounts.get(areaName!) ?? 0) + 1);
     }
     expect([...initialAreaCounts.values()]).toEqual([2, 2, 2, 2, 2, 2]);
-    const expand = within(catalog).getByRole("button", { name: "View all 24 hotels" });
+    const expand = within(catalog).getByRole("button", { name: "View more hotels" });
     expect(expand).toHaveAttribute("aria-expanded", "false");
     fireEvent.click(expand);
     expect(expand).toHaveAttribute("aria-expanded", "true");
@@ -370,7 +370,21 @@ describe("Jerusalem direct hotel catalog", () => {
     expect(within(catalog).queryByText(/Neighborhood photograph|Illustrative hotel photograph/)).not.toBeInTheDocument();
     expect(within(catalog).queryByText(/Already know your dates|Confirm dates, guests and final price/)).not.toBeInTheDocument();
     expect(catalog.textContent).not.toMatch(/ILS\s*\d{2,}|rooms available now|live price/i);
-    expect(container.querySelector("#more-hotels")).toBeInTheDocument();
+    expect(container.querySelector("#more-hotels")).toBeNull();
+    expect(screen.queryByText("Looking for another Jerusalem hotel?")).not.toBeInTheDocument();
+    const cityOffer = linksForPage("stay-jerusalem").find((item) => item.id === "hotels-jerusalem-expedia")!;
+    const browseAll = within(catalog).getByTestId("jerusalem-all-hotels-expedia");
+    expect(browseAll).toHaveTextContent("Browse all Jerusalem hotels");
+    expect(browseAll).toHaveAttribute("href", hotelBrowseAffiliateUrl(cityOffer, "stay-jerusalem"));
+    expect(browseAll).toHaveClass("btn-primary");
+    expect(browseAll.getAttribute("rel")).toContain("sponsored");
+    expect(container.querySelector("#compare details")).toBeNull();
+    expect(container.querySelector("#compare table")).toBeInTheDocument();
+    expect(container.querySelector("#areas > p")).toHaveClass("w-full", "text-pretty");
+    fireEvent.click(browseAll);
+    expect(readOutboundClicks()).toContainEqual(expect.objectContaining({
+      pageId: "stay-jerusalem", productId: cityOffer.id, offerId: cityOffer.id,
+    }));
     expect(container.querySelector("#trip-planning")).toBeInTheDocument();
   }, 20000);
 
@@ -383,7 +397,7 @@ describe("Jerusalem direct hotel catalog", () => {
     expect(container.querySelector("#areas [role='group']")).toBeInTheDocument();
     expect(within(neighborhoodSection).getAllByRole("button")).toHaveLength(7);
     expect(neighborhoodSection.querySelectorAll("[data-testid='neighborhood-card']")).toHaveLength(6);
-    expect(within(catalog).getByRole("button", { name: "View all 24 hotels" })).toBeInTheDocument();
+    expect(within(catalog).getByRole("button", { name: "View more hotels" })).toBeInTheDocument();
     const areaGuide = container.querySelector("#area-guide")!;
     expect(areaGuide.compareDocumentPosition(catalog) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
     expect(areaGuide).toBeInTheDocument();
@@ -416,7 +430,7 @@ describe("Jerusalem direct hotel catalog", () => {
     expect(within(catalog).queryByRole("status")).not.toBeInTheDocument();
     fireEvent.click(within(filters).getByRole("button", { name: "All areas" }));
     expect(within(catalog).getAllByTestId("jerusalem-hotel-card")).toHaveLength(12);
-    fireEvent.click(within(catalog).getByRole("button", { name: "View all 24 hotels" }));
+    fireEvent.click(within(catalog).getByRole("button", { name: "View more hotels" }));
     expect(within(catalog).getAllByTestId("jerusalem-hotel-card")).toHaveLength(24);
     fireEvent.change(within(catalog).getByLabelText("Sort"), { target: { value: "name" } });
     const names = within(catalog).getAllByTestId("jerusalem-hotel-card").map((card) => card.querySelector("h3")!.textContent!);
