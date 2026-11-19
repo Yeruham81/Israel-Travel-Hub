@@ -40,7 +40,7 @@ describe("Jerusalem and Tel Aviv neighbourhood editorial guides", () => {
       expect(section.querySelector("figcaption")?.textContent).toBe(region === "jerusalem" && area.id === "old-city"
         ? "Narrow sandstone lane in Jerusalem's Jewish Quarter" : area.photo.alt);
       expect(section).not.toHaveTextContent("neighbourhood view");
-      const button = within(section).getByRole("link", { name: new RegExp(`${region === "jerusalem" ? "Browse more hotels in " : "Browse hotels in "}${area.shortName}`) });
+      const button = within(section).getByRole("link", { name: new RegExp(`${region === "jerusalem" ? "Browse more hotels in " : "Explore more hotels in "}${area.shortName}`) });
       expect(button).toHaveAttribute("href", area.path);
       expect(button).toHaveClass("btn", "btn-primary");
       expect(button.parentElement).toHaveClass("justify-center");
@@ -58,6 +58,8 @@ describe("Jerusalem and Tel Aviv neighbourhood editorial guides", () => {
       expect(eastJerusalemCard).toHaveAttribute("src", expect.stringContaining("east-jerusalem-house"));
       expect(container.querySelector('img[src*="old-city-BJwjTGND"]')).toBeNull();
       expect(container.querySelector("#compare")).toBeNull();
+      expect(navigation.querySelector('a[href="#area-mamilla"] img')).toHaveAttribute("src", "/images/city-stays/jerusalem-mamilla.webp");
+      expect(navigation.querySelector('a[href="#area-german-colony"] img')).toHaveAttribute("src", "/images/city-stays/jerusalem-german-colony.webp");
       expect(within(container.querySelector("#choose")!).getByText(/Jerusalem is hilly/)).toBeInTheDocument();
       expect(container.querySelectorAll('[data-testid="jerusalem-area-highlights"]')).toHaveLength(6);
       expect(container.querySelectorAll('[data-testid="jerusalem-editorial-hotel-picks"]')).toHaveLength(6);
@@ -147,12 +149,49 @@ describe("Jerusalem and Tel Aviv neighbourhood editorial guides", () => {
       expect(screen.getByTestId("sources")).toHaveAttribute("data-ids", expect.stringContaining("jerusalem-emek-refaim-works"));
       expect(container.querySelector("#faq")).toHaveAttribute("data-faq-count", "5");
     } else {
-      expect(container.querySelector("#compare")).toBeInTheDocument();
-      expect(container.querySelector('[data-testid="jerusalem-area-image-grid"]')).toBeNull();
-      expect(container.querySelectorAll('[data-testid="jerusalem-editorial-hotel-card"]')).toHaveLength(0);
-      expect(container.querySelector('[data-testid="jerusalem-area-layout"]')).toBeNull();
-      expect(container.querySelector('[data-testid="jerusalem-booking-checklist"]')).toBeNull();
-      expect(container.querySelectorAll('[data-testid="jerusalem-practical-notes"]')).toHaveLength(0);
+      expect(container.querySelector("#compare")).toBeNull();
+      const navigation = screen.getByTestId("telaviv-area-image-grid");
+      expect(within(navigation).getAllByRole("link")).toHaveLength(8);
+      expect(within(navigation).getAllByRole("img")).toHaveLength(8);
+      expect(navigation).toHaveClass("lg:grid-cols-4");
+      expect(container.querySelectorAll('[data-testid="telaviv-practical-notes"]')).toHaveLength(8);
+      expect(container.querySelectorAll('[data-testid="telaviv-area-highlights"]')).toHaveLength(8);
+      expect(container.querySelectorAll('[data-testid="telaviv-area-layout"]')).toHaveLength(8);
+      expect(container.querySelectorAll('[data-testid="telaviv-area-map"]')).toHaveLength(8);
+      expect(container.querySelectorAll('[data-testid="telaviv-editorial-hotel-picks"]')).toHaveLength(8);
+      expect(container.querySelectorAll('[data-testid="telaviv-editorial-hotel-card"]')).toHaveLength(16);
+      const cards = container.querySelectorAll('[data-testid="telaviv-editorial-hotel-link"]');
+      expect(cards).toHaveLength(16);
+      for (const card of cards) {
+        expect(card).toHaveTextContent("Check rooms & rates");
+        expect(card).toHaveAttribute("target", "_blank");
+        expect(card.querySelector('[data-testid="hotel-highlight"]')?.textContent?.trim()).toBeTruthy();
+      }
+      for (const area of areas) {
+        const section = container.querySelector('#area-' + area.id)!;
+        const hotelCards = within(section as HTMLElement).getAllByTestId("telaviv-editorial-hotel-card");
+        expect(hotelCards).toHaveLength(2);
+        expect(section.querySelector("figure img")).toHaveAttribute("alt", "");
+        expect(section.querySelector("figure figcaption")?.textContent).toBeTruthy();
+        expect(section.querySelector('[data-testid="telaviv-area-map"]')).toHaveClass("mt-6", "flex-1");
+        expect(section.querySelector('[data-testid="telaviv-area-layout"]')).toHaveClass("items-stretch");
+        const hotels = hotelsForArea(area.id, "telaviv").slice(0, 2);
+        const bookingOffers = linksForPage('stay-area-' + area.id);
+        hotelCards.forEach((card, index) => {
+          const hotel = hotels[index]!;
+          const booking = bookingOffers.find((offer) => offer.id === 'hotel-' + hotel.id + '-expedia')!;
+          const link = within(card).getByTestId("telaviv-editorial-hotel-link");
+          expect(link).toHaveAttribute("href", hotelAffiliateUrl(booking, "guide-where-to-stay-tel-aviv", hotel.id));
+          expect(link).toHaveTextContent(hotel.name);
+        });
+      }
+      const bookingChecklist = screen.getByTestId("telaviv-booking-checklist");
+      expect(bookingChecklist).toHaveClass("rounded-2xl", "border", "bg-secondary/20", "sm:grid-cols-2");
+      expect(bookingChecklist.querySelectorAll("li")).toHaveLength(8);
+      expect(within(bookingChecklist).getByRole("heading", { name: "Book the right view" })).toBeInTheDocument();
+      expect(container).toHaveTextContent("Hills, steps & luggage");
+      expect(container).toHaveTextContent("Nightlife & room noise");
+      expect(container).toHaveTextContent("Hotels and booking websites are independent providers.");
       expect(container.querySelector("#faq")).toHaveAttribute("data-faq-count", "4");
     }
     expect(container).not.toHaveTextContent("Use these short summaries to narrow your options");
