@@ -190,8 +190,8 @@ export const jerusalemMuseums: JerusalemMuseumEntry[] = [
       "Regional archaeological collections"
     ],
     "tip": "Do not plan a spontaneous interior visit. Check whether a book-ahead guided tour is running; the facade can be seen from Sultan Suleiman Street.",
-    "url": "https://www.itraveljerusalem.com/attraction/rockefeller-archaeological-museum",
-    "ticketUrl": "https://www.tod.org.il/en/",
+    "url": "https://www.tod.org.il/en/tours-around-jerusalem/",
+    "ticketUrl": "https://www.tod.org.il/en/event/treasures-of-the-rockefeller-in-en/",
     "closureNote": "Closed to regular walk-in visitors; check organised tours."
   },
   {
