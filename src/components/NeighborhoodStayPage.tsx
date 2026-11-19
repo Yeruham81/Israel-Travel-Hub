@@ -6,6 +6,7 @@ import { hotelsForArea, INFO_CHECK_DATE, linksForPage } from "@/data/registry";
 import { cityHotelPhoto } from "@/data/cityHotelCatalog";
 import { JerusalemHotelTile } from "@/components/JerusalemHotelBrowser";
 import { JerusalemNeighborhoodGuideCallout } from "@/components/JerusalemNeighborhoodGuideCallout";
+import { TelAvivNeighborhoodGuideCallout } from "@/components/TelAvivNeighborhoodGuideCallout";
 import { TelAvivHotelTile } from "@/components/TelAvivHotelBrowser";
 import { AreaMap, AreaPhotoCredit } from "@/components/AreaMap";
 import { GuideHeader, OnThisPage, Section, Checklist, FaqList, SourceList } from "@/components/Guide";
@@ -19,13 +20,6 @@ import { jerusalemStayCardPhotos } from "@/data/jerusalemStayCardPhotos";
 import telAvivAreaGuidePhoto from "@/assets/home/tel-aviv-coast.webp";
 
 const sections = [
-  ["book", "Hotels"], ["overview", "The area"], ["highlights", "Nearby sights"],
-  ["location", "Map & arrival"], ["checklist", "Booking tips"], ["other-areas", "More areas"],
-  ["faq", "FAQ"], ["explore", "Local guides"], ["trip-planning", "Trip planning"],
-  ["contact", "Contact me"],
-] as const;
-
-const jerusalemSections = [
   ["book", "Hotels"], ["overview", "The area"], ["area-guide", "Neighborhood guide"],
   ["highlights", "Nearby sights"], ["location", "Getting around"], ["checklist", "Booking tips"],
   ["other-areas", "More areas"], ["faq", "FAQ"], ["explore", "Local guides"],
@@ -69,6 +63,16 @@ export function NeighborhoodStayPage({ area }: { area: NeighborhoodStayGuide }) 
     "east-jerusalem": "Popular hotels in East Jerusalem",
     "german-colony": "Popular hotels in German Colony & Baka",
   };
+  const telAvivHotelHeadings: Record<string, string> = {
+    "telaviv-beachfront": "Popular hotels by Tel Aviv's central beaches",
+    "telaviv-dizengoff": "Popular hotels near Dizengoff Square & City Center",
+    "telaviv-old-north": "Popular hotels in the Old North & Port area",
+    "telaviv-neve-tzedek": "Popular hotels in and around Neve Tzedek",
+    "telaviv-jaffa": "Popular hotels in Jaffa",
+    "telaviv-florentin": "Popular hotels in Florentin",
+    "telaviv-kerem": "Popular hotels near Kerem HaTeimanim & Carmel Market",
+    "telaviv-rothschild": "Popular hotels along Rothschild Boulevard",
+  };
   const arrivalIntroductions: Record<string, string> = {
     downtown: "A central address is convenient, but your hotel entrance, room location and arrival time can make a real difference.",
     mamilla: "The walk to Jaffa Gate, room outlook and entrance arrangements vary along King David Street.",
@@ -77,6 +81,16 @@ export function NeighborhoodStayPage({ area }: { area: NeighborhoodStayGuide }) 
     "east-jerusalem": "Check your street address, the nearest Old City gate and arrangements for a late arrival.",
     "german-colony": "Confirm the walking distance to local sights, current road access and the room's street outlook.",
   };
+  Object.assign(arrivalIntroductions, {
+    "telaviv-beachfront": "The beach, hotel entrance and room outlook can be quite different even along the same stretch of HaYarkon Street.",
+    "telaviv-dizengoff": "Dizengoff Street extends far beyond the square, so the precise hotel address and its vehicle access matter.",
+    "telaviv-old-north": "A room by the port offers a different evening from one on a residential Old North side street.",
+    "telaviv-neve-tzedek": "Historic lanes, surrounding main streets and converted buildings call for different luggage and access arrangements.",
+    "telaviv-jaffa": "Choose between Old Jaffa's slopes and the busier flea-market streets before arranging your arrival.",
+    "telaviv-florentin": "Late-night venues and self-check-in instructions can make the exact street and room especially important.",
+    "telaviv-kerem": "A room within the Yemenite Quarter may feel different from one along the edges of Carmel Market.",
+    "telaviv-rothschild": "The boulevard is long: your nearest junction, room orientation and hotel entrance deserve a close look.",
+  });
   const localInsight = areaDecisionNotes[area.id];
   const hotels = hotelsForArea(area.id, area.cityId);
   const otherAreas = neighborhoodGuidesForCity(area.cityId).filter((other) => other.id !== area.id);
@@ -87,42 +101,31 @@ export function NeighborhoodStayPage({ area }: { area: NeighborhoodStayGuide }) 
   const hotelSection = (
     <section id="book" aria-labelledby="book-h" className="mt-8 scroll-mt-32">
       <h2 id="book-h" className="text-2xl font-semibold sm:text-3xl">
-        {isJerusalem ? jerusalemHotelHeadings[area.id] : `Hotels in ${area.shortName}`}
+        {isJerusalem ? jerusalemHotelHeadings[area.id] : telAvivHotelHeadings[area.id]}
       </h2>
-      {!isJerusalem && (
-        <p className="mt-2 max-w-3xl text-sm leading-relaxed text-muted-foreground">
-          Explore my selected hotels in {area.shortName}, then check room offers and booking terms for your dates.
-        </p>
-      )}
-      {isJerusalem ? (
-        <div className="mt-5" data-testid="jerusalem-hotels-with-map">
-          <ul className="grid min-w-0 auto-rows-fr items-stretch gap-4 sm:grid-cols-2 xl:grid-cols-3" data-testid="neighborhood-hotel-grid">
-            {hotels.map((hotel) => <JerusalemHotelTile key={hotel.id} hotel={hotel} pageId={pageId} showArea={false} stacked />)}
-            <li className="flex min-h-0 min-w-0 flex-col" data-testid="jerusalem-hotel-map">
-              <AreaMap area={area} provider="google" compact stretch />
-            </li>
-          </ul>
-        </div>
-      ) : (
-        <ul className="mt-5 grid gap-4 lg:grid-cols-2" data-testid="neighborhood-hotel-grid">
+      <div className="mt-5" data-testid={isJerusalem ? "jerusalem-hotels-with-map" : "tel-aviv-hotels-with-map"}>
+        <ul className="grid min-w-0 auto-rows-fr items-stretch gap-4 sm:grid-cols-2 xl:grid-cols-3" data-testid="neighborhood-hotel-grid">
           {hotels.map((hotel) => isJerusalem
-            ? <JerusalemHotelTile key={hotel.id} hotel={hotel} pageId={pageId} showArea={false} />
-            : <TelAvivHotelTile key={hotel.id} hotel={hotel} pageId={pageId} showArea={false} />)}
+            ? <JerusalemHotelTile key={hotel.id} hotel={hotel} pageId={pageId} showArea={false} stacked />
+            : <TelAvivHotelTile key={hotel.id} hotel={hotel} pageId={pageId} showArea={false} stacked />)}
+          <li className="flex min-h-0 min-w-0 flex-col" data-testid={isJerusalem ? "jerusalem-hotel-map" : "tel-aviv-hotel-map"}>
+            <AreaMap area={area} provider="google" compact stretch />
+          </li>
         </ul>
-      )}
+      </div>
       <p className="mt-4 text-xs leading-relaxed text-muted-foreground">
         Hotel stays are provided by independent properties and booked through external booking websites.
         Prices, availability, room details and booking conditions may change. Before booking, check the
         hotel address, exact room offer, total price and cancellation terms directly with the booking provider.
       </p>
-      {isJerusalem && browseOffers.map((booking) => (
+      {browseOffers.map((booking) => (
         <div className="mt-6 flex justify-center" key={booking.id}>
           <a
             href={hotelBrowseAffiliateUrl(booking, pageId)}
             target="_blank"
             rel={relFor(booking.isAffiliate)}
             onClick={() => recordOutboundClick({ pageId, productId: booking.id, offerId: booking.id })}
-            data-testid="jerusalem-area-browse-expedia"
+            data-testid={isJerusalem ? "jerusalem-area-browse-expedia" : "tel-aviv-area-browse-expedia"}
             className="btn btn-primary inline-flex min-h-11 items-center justify-center gap-2 px-6 py-2.5 text-center"
           >
             Browse more {area.shortName} hotels <ArrowRight className="h-4 w-4" aria-hidden />
@@ -130,25 +133,6 @@ export function NeighborhoodStayPage({ area }: { area: NeighborhoodStayGuide }) 
           </a>
         </div>
       ))}
-    </section>
-  );
-
-    const moreSection = (
-    <section id="more-hotels" aria-label={`More hotels in ${area.shortName}`} className="mt-5 scroll-mt-32 rounded-2xl border bg-secondary/25 p-4 sm:p-5">
-      <div className="flex flex-wrap items-center justify-between gap-4">
-        <div className="max-w-xl">
-          <h3 className="text-lg font-semibold">Looking for another hotel in {area.shortName}?</h3>
-          <p className="mt-1.5 text-sm leading-relaxed text-muted-foreground">Explore more options and check the exact location, room details and cancellation conditions for your dates.</p>
-        </div>
-        {browseOffers.map((booking) => (
-          <a key={booking.id} href={hotelBrowseAffiliateUrl(booking, pageId)} target="_blank" rel={relFor(booking.isAffiliate)}
-            onClick={() => recordOutboundClick({ pageId, productId: booking.id, offerId: booking.id })}
-            className="inline-flex min-h-11 items-center justify-center gap-2 rounded-lg border border-primary/30 bg-card px-4 py-2.5 text-sm font-semibold text-primary transition-colors hover:border-primary/60 hover:bg-secondary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
-            Browse more {area.shortName} hotels <ArrowRight className="h-4 w-4" aria-hidden />
-            <span className="sr-only"> (opens in a new tab)</span>
-          </a>
-        ))}
-      </div>
     </section>
   );
 
