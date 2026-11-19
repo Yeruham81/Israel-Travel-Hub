@@ -1,9 +1,9 @@
 import { Link } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
 import {
-  ArrowUpRight, ExternalLink, ShoppingBag, MapPin, Landmark, UtensilsCrossed,
-  Palette, Shirt, Store, CalendarDays, Clock3, CreditCard, Receipt,
-  Accessibility, Package, TrainFront, Lightbulb, Sun, ShieldCheck,
+  ArrowUpRight, ExternalLink, MapPin, Landmark, UtensilsCrossed,
+  Palette, Shirt, Store, CalendarDays, CreditCard, Receipt,
+  Accessibility, Package, TrainFront, Lightbulb, Sun,
 } from "lucide-react";
 import { Breadcrumbs, FaqList, OnThisPage } from "@/components/Guide";
 import { AuthorCard } from "@/components/AuthorCard";
@@ -142,7 +142,7 @@ export function JerusalemShoppingGuide() {
           { name: "Shopping in Jerusalem", to: "/travel-blog/shopping-in-jerusalem/" },
         ]} />
         <GuideHeroLayout image={<GuideHeroMedia src="/images/jerusalem-shopping/hero.webp"
-          alt="Shops and market displays in Jerusalem" />}>
+          alt="Evening shopping promenade lined with fashion boutiques in Jerusalem" />}>
           <p className="text-xs font-semibold uppercase tracking-[0.16em] text-primary">Jerusalem · Markets, shops & local design</p>
           <h1 className="guide-page-title mt-2">Shopping in Jerusalem: Markets, Crafts, Malls & Local Streets</h1>
           <p data-guide-intro className="mt-4 max-w-3xl text-lg leading-relaxed">
@@ -319,9 +319,7 @@ export function JerusalemShoppingGuide() {
         </div>
       </section>
 
-      <section id="contact" aria-label="Contact me about Jerusalem travel" className="mt-12 scroll-mt-24">
-        <HomeContactForm guide={neighborhoodTripContactCopy("Jerusalem")} />
-      </section>
+      <HomeContactForm guide={neighborhoodTripContactCopy("Jerusalem")} />
       <SourcesDisclosure>
         <p className="mb-3 text-sm leading-relaxed">I use destination and venue information for the markets, shopping venues and tax guidance. Check current event dates and individual shop opening times before visiting.</p>
         <ul className="grid gap-x-5 gap-y-3 text-sm sm:grid-cols-2">
