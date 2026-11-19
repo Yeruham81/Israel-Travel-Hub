@@ -85,7 +85,7 @@ const supplemental: (HotelRecommendation & { expediaUrl: string })[] = [
     "name": "National Hotel Jerusalem",
     "style": "East Jerusalem city hotel",
     "summary": "Hotel on Al Zahra Street with local dining nearby and routes toward Damascus Gate.",
-    "bestFor": "Northern Old City access and local streets",
+    "bestFor": "Northern Old City access",
     "watch": "Check your street entrance, reception arrangements and actual walking route.",
     "sourceId": "hotel-jlm-national-hotel-expedia-listing",
     "expediaUrl": "https://www.expedia.com/Jerusalem-Hotels-National-Hotel-Jerusalem.h4473287.Hotel-Information"
