@@ -182,7 +182,15 @@ describe("Jerusalem and Tel Aviv neighbourhood editorial guides", () => {
         expect(card).toHaveTextContent("Check rooms & rates");
         expect(card).toHaveAttribute("target", "_blank");
         expect(card.querySelector('[data-testid="hotel-highlight"]')?.textContent?.trim()).toBeTruthy();
+        const hotelType = card.querySelector<HTMLElement>('[data-testid="hotel-type"]');
+        const words = hotelType?.textContent?.trim().split(/\\s+/) ?? [];
+        expect(words.length).toBeGreaterThanOrEqual(2);
+        expect(words.length).toBeLessThanOrEqual(3);
+        expect(hotelType).toHaveClass("whitespace-nowrap", "truncate");
       }
+      expect(container).not.toHaveTextContent("Historic cinema building on Dizengoff Square");
+      expect(container).not.toHaveTextContent("Luxury heritage hotel in Old Jaffa");
+      expect(container).not.toHaveTextContent("Small hotel with digital self check-in");
       for (const area of areas) {
         const section = container.querySelector('#area-' + area.id)!;
         const hotelCards = within(section as HTMLElement).getAllByTestId("telaviv-editorial-hotel-card");
