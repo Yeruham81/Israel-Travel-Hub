@@ -13,6 +13,7 @@ import { resortHotelPhoto } from "@/data/resortHotelPhotos";
 import { hotelAffiliateUrl, hotelBrowseAffiliateUrl } from "@/lib/hotel-affiliate";
 import { recordOutboundClick, relFor } from "@/lib/outbound";
 import deadSeaValueImage from "@/assets/dead-sea/beach-card.webp";
+import deadSeaFamilyImage from "@/assets/dead-sea/beach-tile.webp";
 
 /**
  * Category-first accommodation editorial, sharing the structure and UI patterns
@@ -133,12 +134,12 @@ const bookingTips = [
 const groupCaptions: Record<string, { title: string; eyebrow: string; advice: string }> = {
   luxury: {
     title: "Luxury & romantic stays",
-    eyebrow: "Smaller escapes and full-service luxury",
+    eyebrow: "Private retreats and refined resorts",
     advice: "Kayma is the most intimate option, Herods emphasizes a full-service spa and southern beachfront setting, and Milos stands out for design in Ein Bokek.",
   },
   spa: {
     title: "Spa & wellness hotels",
-    eyebrow: "Wellness without assuming adults-only",
+    eyebrow: "Mineral pools, treatments and relaxation",
     advice: "Nevo suits a broader resort holiday; Oasis is more focused on a quieter, age-restricted spa experience. Compare entry rules and treatment charges before deciding.",
   },
   family: {
@@ -148,13 +149,13 @@ const groupCaptions: Record<string, { title: string; eyebrow: string; advice: st
   },
   value: {
     title: "Best-value stays",
-    eyebrow: "Compare the package, not a fixed price tier",
-    advice: "Noga is useful for a central Ein Bokek base with wellness facilities. Leonardo Plaza makes sense when its total offer offsets the less direct beach route.",
+    eyebrow: "Comfortable stays with practical facilities",
+    advice: "Noga combines an Ein Bokek location with mineral-water pools. Leonardo Plaza offers family rooms and resort facilities in the southern hotel district.",
   },
   "ein-gedi": {
     title: "Staying near Ein Gedi",
-    eyebrow: "Nature first, not a beachfront resort",
-    advice: "Ein Gedi Hotel and HI Ein Gedi Hostel are alternatives for nature outings and simpler stays. Both require separate planning for bathing at an operating Dead Sea beach.",
+    eyebrow: "Gardens, desert scenery and nature trails",
+    advice: "Choose Ein Gedi Hotel for landscaped gardens and a spa, or HI Ein Gedi Hostel for simple accommodation close to nature outings. Plan beach bathing as a separate excursion.",
   },
 };
 
@@ -222,10 +223,10 @@ export function HotelStyleEditorialGuide({ guide }: { guide: HotelStayDestinatio
         <p className="eyebrow">Choose the holiday, then the hotel</p>
         <h2 id="choose-h" className="mt-2 text-3xl">Which Dead Sea stay suits you?</h2>
         <p className="mt-4 max-w-4xl leading-relaxed">I usually start by asking what matters most: time on an operating beach, a spa break, activities for children or a comfortable hotel at the right total price. The main resorts are in Ein Bokek and the southern hotel district; Ein Gedi is a different, nature-focused choice.</p>
-        <div className="mt-6 grid grid-cols-2 gap-3 sm:gap-4" data-testid="deadsea-category-grid">
+        <div className="mt-6 grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-4" data-testid="deadsea-category-grid">
           {primaryGroups.map(group => {
             const content = groupCaptions[group.id];
-            const photo = group.id === "value" ? { src: deadSeaValueImage, alt: "Dead Sea beachfront and resort area" } : group.photo;
+            const photo = group.id === "value" ? { src: deadSeaValueImage, alt: "Dead Sea beachfront and resort area" } : group.id === "family" ? { src: deadSeaFamilyImage, alt: "Dead Sea swimming beach near the family resort hotels" } : group.photo;
             return <a key={group.id} href={"#group-" + group.id} className="group flex min-w-0 flex-col overflow-hidden rounded-2xl border bg-card shadow-sm transition-all hover:-translate-y-0.5 hover:border-primary/60 hover:shadow-md" data-testid="deadsea-category-card">
               <img src={photo.src} alt={photo.alt} width={755} height={503} loading="lazy" decoding="async" className="aspect-[16/10] w-full object-cover" />
               <span className="flex flex-1 flex-col p-3 sm:p-4">
@@ -240,13 +241,13 @@ export function HotelStyleEditorialGuide({ guide }: { guide: HotelStayDestinatio
           <img src={einGediGroup.photo.src} alt={einGediGroup.photo.alt} width={320} height={200} loading="lazy" decoding="async" className="aspect-[4/3] w-28 shrink-0 object-cover sm:w-44" />
           <span className="flex flex-1 flex-col justify-center p-3 sm:p-5">
             <strong className="text-base sm:text-lg">Staying near Ein Gedi?</strong>
-            <span className="mt-1 text-xs leading-relaxed text-muted-foreground sm:text-sm">A nature-focused base for the reserve and desert scenery, rather than a resort beside a bathing beach.</span>
+            <span className="mt-1 text-xs leading-relaxed text-muted-foreground sm:text-sm">A peaceful base for visiting Ein Gedi Nature Reserve and enjoying the desert scenery.</span>
             <span className="mt-2 flex items-center gap-1 text-xs font-semibold text-primary sm:text-sm">See Ein Gedi stays <ArrowRight className="h-4 w-4" aria-hidden /></span>
           </span>
         </a>}
         <aside className="mt-6 flex gap-3 rounded-xl border border-amber-200 bg-amber-50/80 p-4 text-sm leading-relaxed dark:border-amber-900/50 dark:bg-amber-950/20">
           <Lightbulb className="mt-0.5 h-5 w-5 shrink-0 text-amber-600" aria-hidden />
-          <p>For a first Dead Sea visit, I would compare beach access and the full room-and-meals package before comparing star ratings. A mineral-water pool is not the same as a walk to an operating beach.</p>
+          <p>For a first Dead Sea visit, I recommend comparing beach access, mineral-water pools and the full room-and-meals package before choosing a hotel.</p>
         </aside>
       </section>
 
@@ -276,13 +277,12 @@ export function HotelStyleEditorialGuide({ guide }: { guide: HotelStayDestinatio
             </tbody>
           </table>
         </div>
-        <p className="mt-3 text-xs leading-relaxed text-muted-foreground">Scroll the comparison sideways on a small screen. The exact room, beach services and cancellation terms can differ by property and date.</p>
       </section>
 
       <section id="hotels" className="mt-14 scroll-mt-32" aria-labelledby="hotels-h">
         <p className="eyebrow">My selected places to stay</p>
         <h2 id="hotels-h" className="mt-2 text-3xl">Recommended hotels by travel style</h2>
-        <p className="mt-3 max-w-4xl leading-relaxed">I have grouped each property once by its main appeal, although some suit several travel styles. The photographs illustrate the accommodation or area and may not show the named property. Check the hotel's own listing for room photographs, facilities and current terms.</p>
+        <p className="mt-3 max-w-4xl leading-relaxed">I have selected 11 stays across five travel styles, from luxury resorts to simple accommodation near Ein Gedi. Hotel-card photographs are illustrative; the booking links show the rooms available for your dates.</p>
         <div className="mt-6 divide-y border-t">
           {guide.groups.map(group => {
             const copy = groupCaptions[group.id];
@@ -291,20 +291,18 @@ export function HotelStyleEditorialGuide({ guide }: { guide: HotelStayDestinatio
               <p className="eyebrow">{copy?.eyebrow}</p>
               <h3 id={"group-" + group.id + "-h"} className="mt-2 text-2xl font-semibold sm:text-3xl">{copy?.title ?? group.title}</h3>
               <p className="mt-3 max-w-4xl leading-relaxed">{copy?.advice ?? group.intro}</p>
-              <ul className={"mt-6 grid gap-4 " + (group.hotelIds.length === 3 ? "sm:grid-cols-2 lg:grid-cols-3" : "sm:grid-cols-2")}>
+              <ul className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3" data-testid="deadsea-hotel-grid">
                 {group.hotelIds.map(id => <HotelCard key={id} id={id} pageId={pageId} />)}
               </ul>
-              <div className="mt-6 flex flex-wrap items-center justify-between gap-3">
-                {group.guidePath ? <Link to={group.guidePath as LinkProps["to"]} className="inline-flex items-center gap-1.5 text-sm font-semibold text-primary underline underline-offset-4">
-                  {group.guideLabel} <ArrowRight className="h-4 w-4" aria-hidden />
-                </Link> : <span />}
-                {categoryBrowse && <a href={hotelBrowseAffiliateUrl(categoryBrowse, pageId)} target="_blank" rel={relFor(categoryBrowse.isAffiliate)}
+              {categoryBrowse && <div className="mt-6 flex justify-center">
+                <a href={hotelBrowseAffiliateUrl(categoryBrowse, pageId)} target="_blank" rel={relFor(categoryBrowse.isAffiliate)}
                   onClick={() => recordOutboundClick({ pageId, productId: categoryBrowse.id, offerId: categoryBrowse.id })}
-                  className="inline-flex min-h-10 items-center gap-1.5 rounded-lg border border-primary/30 px-3 py-2 text-sm font-semibold text-primary hover:bg-primary/5">
+                  className="inline-flex min-h-11 items-center justify-center gap-2 rounded-lg bg-primary px-5 py-2.5 text-center text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary/90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+                  data-testid="deadsea-category-browse-link">
                   Browse more {group.id === "ein-gedi" ? "Ein Gedi stays" : group.id + " hotels"} <ArrowUpRight className="h-4 w-4" aria-hidden />
                   <span className="sr-only"> (opens in a new tab)</span>
-                </a>}
-              </div>
+                </a>
+              </div>}
             </section>;
           })}
         </div>
@@ -321,7 +319,7 @@ export function HotelStyleEditorialGuide({ guide }: { guide: HotelStayDestinatio
       <section id="location" className="mt-14 scroll-mt-32" aria-labelledby="location-h">
         <h2 id="location-h" className="text-3xl">Where are the hotels?</h2>
         <p className="mt-3 leading-relaxed">Most resort hotels are concentrated around Ein Bokek and the southern district near Neve Zohar. Ein Gedi is farther north and works better as a base for nature outings. Use the map for orientation, then check the precise hotel address before arranging transport.</p>
-        <div className="mt-5"><AreaMap area={{ name: "Dead Sea hotel region", map: guide.map }} /></div>
+        <div className="mt-5"><AreaMap area={{ name: "Dead Sea hotel region", map: guide.map }} provider="google" googleZoom={10} /></div>
         <div className="mt-5 grid gap-4 sm:grid-cols-3">
           {guide.locations.map(location => <article key={location.name} className="rounded-xl border bg-card p-4 sm:p-5">
             <MapPin className="h-5 w-5 text-primary" aria-hidden />
@@ -351,7 +349,9 @@ export function HotelStyleEditorialGuide({ guide }: { guide: HotelStayDestinatio
       <StayTripLinks region={guide.id} currentPath={info.path} presentation="guide" />
       <HomeContactForm guide={{
         ...guideContactCopy(info.title, "accommodation", guide.name),
-        introduction: "Not sure which Dead Sea hotel would fit your plans? Tell me your travel dates, what matters most and how you plan to arrive. I'll be happy to share practical advice.",
+        heading: "Planning a Dead Sea Vacation?",
+        introduction: "Need a private transfer to your hotel in Ein Bokek? Send me your pickup location, date, number of passengers and luggage details, and I'll help arrange the journey.",
+        placeholder: "Pickup location, Ein Bokek hotel, travel date, passengers and luggage…",
       }} />
       <SourceList ids={sourceIds} intro={sourceIntro} />
     </article>
