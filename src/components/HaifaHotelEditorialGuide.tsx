@@ -299,7 +299,7 @@ export function HaifaHotelEditorialGuide({ guide }: { guide: HotelStayDestinatio
           <span className="flex min-h-11 shrink-0 items-center gap-2 border-t px-4 py-3 text-sm font-semibold text-primary sm:border-l sm:border-t-0 sm:px-5">
             See hotels <ArrowRight className="h-4 w-4 shrink-0" aria-hidden />
           </span>
-        </a>
+        </a>}
         <aside className="mt-6 flex gap-3 rounded-xl border border-amber-200 bg-amber-50/80 p-4 text-sm leading-relaxed dark:border-amber-900/50 dark:bg-amber-950/20">
           <Lightbulb className="mt-0.5 h-5 w-5 shrink-0 text-amber-600" aria-hidden />
           <p>A room with a beautiful bay view can be high above the shore. Check the actual journey to the beach, the Bahá'í Gardens and your planned daily stops before deciding.</p>
