@@ -43,8 +43,8 @@ function MuseumCard({museum}:{museum:MuseumEntry}) {
   const family = ["science","time","music","tower"].includes(museum.id);
   const bookAhead = ["yad","science","time","friends","tolerance","begin","music"].includes(museum.id);
   const tags = [museum.priceNis === 0 ? "Free entry" : null, family ? "Family-friendly" : null, bookAhead ? "Book ahead" : null].filter((x):x is string=>Boolean(x));
-  const showTicket = Boolean(museum.ticketUrl && museum.ticketUrl !== museum.url && museum.id !== "rockefeller");
-  const ticketLabel = ["yad","begin","friends","tolerance","time"].includes(museum.id) ? "Reserve a visit" : museum.id === "israel" ? "Tickets & admission" : "Check tickets & rates";
+  const showTicket = Boolean(museum.ticketUrl && museum.ticketUrl !== museum.url);
+  const ticketLabel = museum.id === "rockefeller" ? "Check organised tours" : ["yad","begin","friends","tolerance","time"].includes(museum.id) ? "Reserve a visit" : museum.id === "israel" ? "Tickets & admission" : "Check tickets & rates";
   return <article id={"museum-"+museum.id} className="flex scroll-mt-28 flex-col overflow-hidden rounded-2xl border bg-card shadow-sm">
     <div className="flex items-center justify-between gap-3 border-b bg-secondary/35 px-4 py-3"><span className="text-xs font-semibold uppercase tracking-wide text-primary">{museum.theme}</span><Landmark className="h-5 w-5 text-primary/60" aria-hidden="true"/></div>
     <div className="flex flex-1 flex-col p-4 sm:p-5">
@@ -65,7 +65,7 @@ function MuseumCard({museum}:{museum:MuseumEntry}) {
       <div className="mt-3 flex flex-wrap items-baseline gap-x-3 gap-y-1 text-xs text-muted-foreground"><span>{museum.address}</span><MapLink museum={museum}/></div>
       <div className="mt-auto grid gap-2 border-t pt-4 text-sm sm:grid-cols-2">
         {showTicket && <a href={museum.ticketUrl} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-11 items-center justify-center gap-1.5 rounded-lg bg-primary px-3 py-2.5 text-center font-semibold text-primary-foreground transition-opacity hover:opacity-90">{ticketLabel}<ExternalLink className="h-3.5 w-3.5" aria-hidden="true"/><span className="sr-only"> (opens in a new tab)</span></a>}
-        <a href={museum.url} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-11 items-center justify-center gap-1.5 rounded-lg border border-sky-200 bg-sky-100 px-3 py-2.5 text-center font-semibold text-sky-950 hover:bg-sky-200">Official museum website<ExternalLink className="h-3.5 w-3.5" aria-hidden="true"/><span className="sr-only"> (opens in a new tab)</span></a>
+        <a href={museum.url} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-11 items-center justify-center gap-1.5 rounded-lg border border-sky-200 bg-sky-100 px-3 py-2.5 text-center font-semibold text-sky-950 hover:bg-sky-200">{museum.id === "rockefeller" ? "Official tour information" : "Official museum website"}<ExternalLink className="h-3.5 w-3.5" aria-hidden="true"/><span className="sr-only"> (opens in a new tab)</span></a>
       </div>
     </div>
   </article>;
