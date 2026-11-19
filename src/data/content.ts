@@ -568,9 +568,9 @@ export const cityStayGuides: Record<CityStayGuide["id"], CityStayGuide> = {
       { areaId: "german-colony", label: "Best for a residential stay", description: "Neighbourhood cafés and quieter streets" },
     ],
     path: "/accommodation/jerusalem/",
-    title: "Hotels in Jerusalem: compare my picks by neighborhood",
+    title: "Hotels in Jerusalem: my picks by neighborhood",
     metaDescription: "Where to stay in Jerusalem: compare Downtown, Mamilla, the Old City and quieter areas for sightseeing, hotel choice and luggage access.",
-    intro: "Explore my Jerusalem hotel picks, filter by neighborhood and follow the Expedia links to check rooms for your dates. Find practical advice for each area below.",
+    intro: "Jerusalem offers very different places to stay, from lively Downtown and Mamilla to the historic Old City and quieter residential neighborhoods. Explore my hotel picks and find the right base for your visit.",
     overview: [
       "Most first-time visitors want to be within walking distance of the Old City gates. The western city centre gives that plus restaurants and the light rail; staying inside the walls is atmospheric but involves stairs, cobbles and limited vehicle access.",
       "From Friday afternoon to Saturday evening much of West Jerusalem slows down for Shabbat: many restaurants and public transport pause. East Jerusalem and the Old City's Christian and Muslim quarters keep a different rhythm. Plan meals and arrivals with that in mind.",
@@ -588,7 +588,7 @@ export const cityStayGuides: Record<CityStayGuide["id"], CityStayGuide> = {
     faqs: [
       { q: "Is it better to stay inside or outside the Old City?", a: "Inside is atmospheric and close to the sights but has limited vehicle access, steps and fewer amenities. Outside, the city centre or East Jerusalem keeps you walkable with easier taxi access." },
       { q: "What changes on Shabbat?", a: "From Friday afternoon to Saturday evening many West Jerusalem businesses and most public transport pause. Ask your accommodation about check-in, elevators and meals, and plan transfers in advance." },
-      { q: "Where can I find hotel recommendations for each area?", a: "Compare my selected Jerusalem hotels directly on this page using the neighborhood filters, or open an individual area guide for walking routes, arrival tips and more detail. Check actual prices, room availability and terms on the booking site." },
+      { q: "Which areas suit families or travelers who need easier access?", a: "Downtown and Mamilla offer hotel choices close to transport, restaurants and popular sights, while the German Colony and Baka have a quieter residential feel. Step-free access varies by property and street, especially near the Old City. Check the actual entrance, lifts, room layout and taxi drop-off before booking." },
       { q: "How do I get from Ben Gurion Airport to my hotel?", a: "Use my private airport-to-Jerusalem transfer page for hotel drop-offs and a quote request. For neutral transport choices, read Getting around Israel; for a Friday-night or Saturday arrival, read my airport-on-Shabbat guide." },
     ],
     sourceIds: ["owner-stay-jerusalem"],
