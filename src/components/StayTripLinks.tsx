@@ -37,6 +37,7 @@ import nazarethPhoto from "@/assets/guides/2026-10/basilica-of-the-annunciation.
 import deadSeaPhoto from "@/assets/dead-sea/beach.webp";
 import einGediPhoto from "@/assets/dead-sea/ein-gedi.webp";
 import masadaPhoto from "@/assets/home/masada-dead-sea.webp";
+import masadaTourPhoto from "@/assets/guides/dead-sea-excursions/private-masada-dead-sea.webp";
 import deadSeaAerial from "@/assets/home/hero-masada.webp";
 import qasrPhoto from "@/assets/guides/qasr-el-yahud.jpg";
 import seasonPhoto from "@/assets/guides/2026-10/best-time-to-visit-israel.webp";
@@ -54,7 +55,7 @@ const card = (title: string, to: string, note: string, photo: string, alt: strin
 /**
  * A fixed editorial sequence, not an auto-sorted link cloud.
  *
- * Local: six Jerusalem guides or four for other destinations, directly relevant to the city or region.
+ * Local: six Jerusalem, Tel Aviv or Dead Sea guides; other destinations can have a shorter editorial selection.
  * Onward: exactly six transport, excursions and wider-trip planning guides.
  * Both sections use genuine article routes and distinct local photographs.
  * A single property card can appear across pages; these guide cards must never
@@ -140,13 +141,15 @@ export const stayGuideGroups: Record<Region, GuideGroups> = {
       card("Dead Sea attractions", "/travel-blog/dead-sea-attractions/", "Compare natural sites and stops around the region.", deadSeaAerial, "Judean Desert around the Dead Sea"),
       card("Ein Gedi", "/attractions/ein-gedi/", "Plan a visit to the springs and nature reserve.", einGediPhoto, "Vegetation and landscape near Ein Gedi"),
       card("Masada", "/attractions/masada/", "Visit the historic desert fortress near the shore.", masadaPhoto, "Masada and Dead Sea landscape"),
+      card("Qasr el Yahud", "/attractions/qasr-el-yahud/", "Visit the historic baptism site beside the Jordan River.", qasrPhoto, "Jordan River baptism site at Qasr el Yahud"),
+      card("Masada & Dead Sea tours", "/tours/masada-dead-sea/", "Explore tour options combining the fortress and the shore.", masadaTourPhoto, "Desert excursion to Masada and the Dead Sea"),
     ],
     onward: [
       card("Ben Gurion Airport to Ein Bokek", "/travel-blog/how-to-get-from-ben-gurion-airport-to-ein-bokek/", "Compare routes to the Dead Sea hotel strip.", airportHall, "Ben Gurion Airport arrival terminal"),
       card("Jerusalem to the Dead Sea", "/travel-blog/jerusalem-to-the-dead-sea/", "Plan a day trip or transfer from Jerusalem.", deadSeaTravel, "Road from Jerusalem to the Dead Sea"),
       card("Israel itinerary: three days", "/travel-blog/israel-itinerary-3-days/", "Consider the Dead Sea on a short holiday.", roadTrip, "Scenic road in Israel"),
       card("Israel itinerary: five days", "/travel-blog/israel-itinerary-5-days/", "Combine a Dead Sea stay with other regions.", seasonPhoto, "Israeli desert and seasonal landscape"),
-      card("Qasr el Yahud", "/attractions/qasr-el-yahud/", "Explore another Jordan River site when planning a longer route.", qasrPhoto, "Jordan River baptism site at Qasr el Yahud"),
+      card("Israel calendar of events", "/travel-blog/calendar-of-events/", "Check holiday dates when planning hotel and transport arrangements.", israelCalendar, "Israel travel calendar and special dates"),
       card("Baptism in the Jordan River", "/travel-blog/baptism-in-the-jordan-river/", "Compare the main baptism locations and access.", "/images/attractions/jordan-river-baptism.webp", "Jordan River waterside"),
     ],
   },
@@ -191,7 +194,7 @@ export function StayTripLinks({
     {local.length > 0 && <section id="explore" aria-labelledby="stay-explore-h" className="mt-14 scroll-mt-32">
       <h2 id="stay-explore-h" className="text-2xl font-bold sm:text-3xl">Explore more around {set.name}</h2>
       {!isEditorial && <p className="mt-2 text-muted-foreground">Explore places and practical guides directly related to {set.name}.</p>}
-      {renderCards(local, region === "jerusalem" || region === "telaviv" ? "grid-cols-2 lg:grid-cols-3" : "sm:grid-cols-2", "stay-local-photo-grid")}
+      {renderCards(local, region === "jerusalem" || region === "telaviv" || region === "deadsea" ? "grid-cols-2 lg:grid-cols-3" : "sm:grid-cols-2", "stay-local-photo-grid")}
     </section>}
     {onward.length > 0 && <section id="trip-planning" aria-labelledby="stay-planning-h" className="scroll-mt-32">
       <h2 id="stay-planning-h" className="text-2xl font-bold sm:text-3xl">Plan the rest of your trip</h2>
