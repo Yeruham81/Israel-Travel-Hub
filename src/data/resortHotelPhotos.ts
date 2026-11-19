@@ -7,10 +7,10 @@
  */
 import type { HotelIllustration } from "@/data/telAvivHotelPhotos";
 import haifaPanorama from "@/assets/haifa/panorama.webp";
-import deadSeaBeach from "@/assets/dead-sea/beach.webp";
 import deadSeaLandscape from "@/assets/dead-sea/landscape.webp";
-import deadSeaSunbeds from "@/assets/dead-sea/sunbeds.webp";
-import deadSeaPool from "@/assets/dead-sea/pool.webp";
+import deadSeaSunbedsPhoto from "@/assets/dead-sea/sunbeds.webp";
+import deadSeaSaltShore from "@/assets/guides/dead-sea-excursions/dead-sea-salt-shore.webp";
+import deadSeaSaltIsland from "@/assets/guides/dead-sea-salt-island.webp";
 
 const library = (filename: string, alt: string): HotelIllustration => ({
   src: `/images/hotel-cards/${filename}`,
@@ -56,10 +56,10 @@ export const resortHotelPhotos: Record<string, HotelIllustration> = {
   "ds-herods": library("ds-herods.jpg", "Illustrative resort setting on the Dead Sea"),
   "ds-milos": library("ds-milos.jpg", "Illustrative spa hotel image at the Dead Sea"),
   "ds-nevo": library("ds-nevo.jpg", "Illustrative swimming pool and resort scene at the Dead Sea"),
-  "ds-oasis": local(deadSeaPool, "Illustrative resort swimming pool in the Dead Sea hotel district"),
-  "ds-leonardo-club": local(deadSeaBeach, "Ein Bokek beach near the Dead Sea hotels"),
+  "ds-oasis": local(deadSeaSunbedsPhoto, "Sun loungers on a serviced Dead Sea beach beside the resort district"),
+  "ds-leonardo-club": local(deadSeaSaltShore, "Shallow Dead Sea shore and resort buildings beneath the desert cliffs"),
   "ds-vert": local(deadSeaLandscape, "Aerial landscape of the southern Dead Sea hotel district"),
-  "ds-noga": local(deadSeaSunbeds, "Beach loungers near the Dead Sea resort district"),
+  "ds-noga": local(deadSeaSaltIsland, "Salt formations and resort hotels in the distance on the Dead Sea shore"),
   "ds-leonardo-plaza": local("/images/attractions/dead-sea.webp", "Dead Sea landscape near the southern hotels"),
   "ds-ein-gedi": library("ds-ein-gedi.jpg", "Nature reserve scenery near Ein Gedi accommodation"),
   "ds-hi-ein-gedi": library("ds-hi-ein-gedi.jpg", "Illustrative hostel accommodation at Ein Gedi"),
