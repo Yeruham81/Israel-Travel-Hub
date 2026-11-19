@@ -37,6 +37,7 @@ export const jerusalemHotelTileCopy: Record<string, { description: string; bestF
 
 export function JerusalemHotelBrowser() {
   const [areaId, setAreaId] = useState<string>("all");
+  const [expanded, setExpanded] = useState(false);
   const [sort, setSort] = useState<"area" | "name">("area");
   const selectedArea = jerusalemAreaGuides.find((area) => area.id === areaId);
   const hotelList = jerusalemHotelCatalog
@@ -44,9 +45,15 @@ export function JerusalemHotelBrowser() {
     .sort((a, b) => sort === "name"
       ? a.name.localeCompare(b.name)
       : jerusalemAreaGuides.findIndex((area) => area.id === a.areaId) - jerusalemAreaGuides.findIndex((area) => area.id === b.areaId) || a.name.localeCompare(b.name));
-  const visible = hotelList;
-  const resetArea = () => setAreaId("all");
-  const chooseArea = (id: string) => setAreaId(id);
+  // The first two editorial picks in each neighborhood form a balanced opening selection.
+  const featuredIds = new Set(jerusalemAreaGuides.flatMap((area) =>
+    jerusalemHotelCatalog.filter((hotel) => hotel.areaId === area.id).slice(0, 2).map((hotel) => hotel.id),
+  ));
+  const visible = areaId === "all" && !expanded
+    ? hotelList.filter((hotel) => featuredIds.has(hotel.id))
+    : hotelList;
+  const resetArea = () => { setAreaId("all"); setExpanded(false); };
+  const chooseArea = (id: string) => { setAreaId(id); setExpanded(false); };
 
   return (
     <section id="book" aria-labelledby="hotel-catalog-h" className="mt-7 scroll-mt-28" data-testid="jerusalem-hotel-browser">
@@ -83,7 +90,11 @@ export function JerusalemHotelBrowser() {
         </div>
         <div className="mt-4 flex flex-wrap items-center justify-between gap-3 border-t pt-3">
           <p className="text-xs font-medium text-muted-foreground" data-testid="jerusalem-hotel-count">
-            Showing {visible.length} of {areaId === "all" ? jerusalemHotelCatalog.length : hotelList.length} hotels
+            {selectedArea
+              ? `${hotelList.length} hotels in ${selectedArea.shortName}`
+              : expanded
+                ? `${jerusalemHotelCatalog.length} hotels across ${jerusalemAreaGuides.length} neighborhoods`
+                : `Showing ${visible.length} of ${jerusalemHotelCatalog.length} hotels across ${jerusalemAreaGuides.length} neighborhoods`}
           </p>
           <label htmlFor="jerusalem-hotel-sort" className="flex items-center gap-2 text-xs font-medium">
             Sort by
@@ -104,9 +115,25 @@ export function JerusalemHotelBrowser() {
         )}
       </div>
 
-      <ul className="mt-4 grid min-w-0 gap-4 lg:grid-cols-2" data-testid="jerusalem-hotels">
+      <ul id="jerusalem-hotels" className="mt-4 grid min-w-0 gap-4 sm:grid-cols-2 lg:grid-cols-3" data-testid="jerusalem-hotels">
         {visible.map((hotel) => <JerusalemHotelTile key={hotel.id} hotel={hotel} />)}
       </ul>
+
+      {areaId === "all" && (
+        <div className="mt-5 flex justify-center">
+          <button
+            type="button"
+            onClick={() => setExpanded((current) => !current)}
+            aria-expanded={expanded}
+            aria-controls="jerusalem-hotels"
+            data-testid="jerusalem-hotel-expand"
+            className="inline-flex min-h-11 items-center justify-center gap-2 rounded-lg border border-primary/40 bg-card px-5 py-2.5 text-sm font-semibold text-primary transition-colors hover:border-primary hover:bg-secondary/20 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+          >
+            {expanded ? "Show fewer hotels" : `View all ${jerusalemHotelCatalog.length} hotels`}
+            <ArrowRight className={`h-4 w-4 transition-transform ${expanded ? "rotate-180" : ""}`} aria-hidden />
+          </button>
+        </div>
+      )}
 
       <p className="mt-4 text-xs leading-relaxed text-muted-foreground">
         Hotel stays are provided by independent properties and booked through external booking websites.
@@ -134,27 +161,33 @@ export function JerusalemHotelTile({ hotel, pageId = "stay-jerusalem", showArea 
   const copy = jerusalemHotelTileCopy[hotel.id] || { description: hotel.summary, bestFor: hotel.bestFor };
 
   return (
-    <li className="group flex min-w-0 flex-col overflow-hidden rounded-2xl border bg-card shadow-sm transition-all hover:border-primary/50 hover:shadow-md sm:grid sm:grid-cols-[160px_minmax(0,1fr)] sm:grid-rows-[1fr_auto]" data-testid={showArea ? "jerusalem-hotel-card" : "hotel-recommendation"}>
-      <div className="relative overflow-hidden bg-muted sm:row-span-2">
+    <li className={showArea
+      ? "group flex h-full min-w-0 flex-col overflow-hidden rounded-2xl border bg-card shadow-sm transition-all hover:border-primary/50 hover:shadow-md"
+      : "group flex min-w-0 flex-col overflow-hidden rounded-2xl border bg-card shadow-sm transition-all hover:border-primary/50 hover:shadow-md sm:grid sm:grid-cols-[160px_minmax(0,1fr)] sm:grid-rows-[1fr_auto]"
+    } data-testid={showArea ? "jerusalem-hotel-card" : "hotel-recommendation"}>
+      <div className={showArea ? "relative w-full overflow-hidden bg-muted" : "relative overflow-hidden bg-muted sm:row-span-2"}>
         <img
           src={image.src} alt={image.alt}
           onError={() => { if (!photoFailed) setPhotoFailed(true); }}
           width={755} height={503} loading="lazy" decoding="async"
           data-testid="hotel-illustration"
-          className="aspect-[16/9] w-full object-cover sm:aspect-auto sm:h-full sm:min-h-[215px]"
+          className={showArea
+            ? "aspect-[16/9] w-full object-cover"
+            : "aspect-[16/9] w-full object-cover sm:aspect-auto sm:h-full sm:min-h-[215px]"
+          }
         />
         {showArea && <span className="absolute bottom-2 left-2 max-w-[calc(100%-1rem)] rounded-md bg-background/95 px-2 py-1 text-[11px] font-medium leading-tight text-foreground shadow-sm">
           {area.shortName}
         </span>}
       </div>
-      <div className="flex min-w-0 flex-col px-4 pb-3 pt-4">
+      <div className={showArea ? "flex min-w-0 flex-1 flex-col px-4 pb-3 pt-4" : "flex min-w-0 flex-col px-4 pb-3 pt-4"}>
         <h3 className="text-lg font-semibold leading-snug">{hotel.name}</h3>
         <p className="mt-2 line-clamp-2 text-sm leading-relaxed text-muted-foreground" data-testid="hotel-short-description">{copy.description}</p>
         <p className="mt-2 text-sm leading-snug" data-testid="hotel-best-for"><span className="font-semibold">Best for:</span> {copy.bestFor}</p>
         {notice && <p className="mt-3 rounded-lg border border-primary/25 bg-secondary/70 p-3 text-xs leading-relaxed" data-testid="hotel-operating-notice">{notice.message}</p>}
       </div>
       {booking && (
-        <div className="border-t bg-secondary/20 px-3 py-3 sm:col-start-2 sm:px-4">
+        <div className={showArea ? "mt-auto border-t bg-secondary/20 px-3 py-3 sm:px-4" : "border-t bg-secondary/20 px-3 py-3 sm:col-start-2 sm:px-4"}>
           <a
             href={hotelAffiliateUrl(booking, pageId, hotel.id)}
             target="_blank" rel={relFor(booking.isAffiliate)}
