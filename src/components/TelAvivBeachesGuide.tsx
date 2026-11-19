@@ -227,7 +227,7 @@ export function TelAvivBeachesGuide() {
                 className="mt-2 min-h-11 w-full rounded-lg border bg-background px-3 py-2 text-sm font-normal focus-visible:outline-2 focus-visible:outline-primary">
                 <option value="all">All 13 beaches</option>
                 {areas.map(area => <optgroup key={area.name} label={area.name}>
-                  {telAvivBeaches.filter(beach => beach.area === area.name).map((beach, i) => <option key={beach.id} value={beach.id}>
+                  {telAvivBeaches.filter(beach => beach.area === area.name).map(beach => <option key={beach.id} value={beach.id}>
                     {telAvivBeaches.indexOf(beach) + 1}. {beach.name}
                   </option>)}
                 </optgroup>)}
@@ -272,20 +272,29 @@ export function TelAvivBeachesGuide() {
       <section id="season" aria-labelledby="season-h" className="mt-12 scroll-mt-24">
         <Heading id="season" title="When is the best time to visit?" />
         <p className="leading-relaxed">I like the coast in spring and autumn for comfortable walks and less intense midday heat. Summer is the busiest season for sunbathing and beach life; arrive earlier, bring water and protect yourself from the sun. In winter, the promenade can still be lovely, but rain, wind and rough seas can change your plans.</p>
-        <p className="mt-3 leading-relaxed">The city's official bathing season does not tell the whole story: some lifeguard stations can operate beyond it. Check <OfficialLink href={officialTelAvivBeaches}>current municipal beach and lifeguard information</OfficialLink> on the day you plan to swim, rather than relying on a fixed annual closing date.</p>
+        <p className="mt-3 leading-relaxed">The city operates some lifeguard stations outside the main bathing season. Check <OfficialLink href={officialTelAvivBeaches}>current municipal beach and lifeguard information</OfficialLink> on the day you plan to swim, rather than relying on a fixed annual closing date.</p>
       </section>
 
       <section id="practical" aria-labelledby="practical-h" className="mt-12 scroll-mt-24">
         <Heading id="practical" title="My practical beach tips" intro="These are the details I'd check before choosing a beach, particularly when travelling with children or anyone who needs accessible facilities." />
         <div className="grid gap-4 md:grid-cols-2">
-          <div className="rounded-xl border bg-card p-5"><ShieldCheck aria-hidden="true" className="mb-2 h-5 w-5 text-primary" /><h3 className="font-bold">Swimming and lifeguards</h3><p className="mt-2 text-sm leading-relaxed">Swim only in a declared, marked zone with an active lifeguard on duty. Follow the flags and local instructions; breakwaters, calm-looking water or other swimmers are not proof that conditions are safe.</p></div>
+          <div className="rounded-xl border bg-card p-5"><ShieldCheck aria-hidden="true" className="mb-2 h-5 w-5 text-primary" /><h3 className="font-bold">Swimming and lifeguards</h3><p className="mt-2 text-sm leading-relaxed">Swim only in a declared bathing zone when lifeguards are on duty. Follow the flags and local instructions, and check municipal sea-water quality warnings. If jellyfish are present, check current local reports and avoid contact with them.</p></div>
           <div className="rounded-xl border bg-card p-5"><Umbrella aria-hidden="true" className="mb-2 h-5 w-5 text-primary" /><h3 className="font-bold">Facilities and costs</h3><p className="mt-2 text-sm leading-relaxed">Public beach entry is free. Facilities vary and paid services can include sunbeds, chairs, umbrellas and nearby parking. See the <OfficialLink href={officialBeachPrices}>municipal price and beach rules</OfficialLink> before renting.</p></div>
           <div className="rounded-xl border bg-card p-5"><Accessibility aria-hidden="true" className="mb-2 h-5 w-5 text-primary" /><h3 className="font-bold">Accessible visits</h3><p className="mt-2 text-sm leading-relaxed">The city lists accessible pathways, shade, toilets and chairs for water access at many bathing beaches. Check the <OfficialLink href={officialBeachFacilities}>facilities and accessibility guide</OfficialLink> for the exact location; the North Tzuk approach has a documented slope limitation.</p></div>
           <div className="rounded-xl border bg-card p-5"><Dog aria-hidden="true" className="mb-2 h-5 w-5 text-primary" /><h3 className="font-bold">Bringing a dog</h3><p className="mt-2 text-sm leading-relaxed">Off-leash sections are signed at Hilton, Tel Baruch, Charles Clore and Givat Aliya, separate from the supervised bathing areas. Follow signs and keep dogs out of restricted stretches.</p></div>
-          <div className="rounded-xl border bg-card p-5"><Waves aria-hidden="true" className="mb-2 h-5 w-5 text-primary" /><h3 className="font-bold">Surfing and other water sports</h3><p className="mt-2 text-sm leading-relaxed">Hilton, Charles Clore and some northern areas have water-sport zones. Use the designated area for the activity you choose and do not assume surfing is permitted within a bathing zone. The nearby Aviv shoreline is often described as a sport area, not a separate declared swimming beach.</p></div>
+          <div className="rounded-xl border bg-card p-5"><Waves aria-hidden="true" className="mb-2 h-5 w-5 text-primary" /><h3 className="font-bold">Surfing and other water sports</h3><p className="mt-2 text-sm leading-relaxed">Hilton, Charles Clore and some northern areas have water-sport zones. Use the designated area for the activity you choose and do not assume surfing is permitted within a bathing zone. There are no lifeguard services at Aviv Beach. It is a water-sports stretch, not one of the 13 declared bathing beaches. For swimming, choose a declared beach with an operating lifeguard station, such as Geula.</p></div>
           <div className="rounded-xl border bg-card p-5"><CalendarDays aria-hidden="true" className="mb-2 h-5 w-5 text-primary" /><h3 className="font-bold">Religious beach and special dates</h3><p className="mt-2 text-sm leading-relaxed">Nordau has separate men's and women's bathing days during the season. <Link to="/travel-blog/calendar-of-events/" className="font-semibold text-primary hover:underline">Jewish holidays and holiday eves</Link> can change services and transit; check current official notices.</p></div>
         </div>
-        <div className="mt-5"><Tip>If you need step-free access, a water-access chair or family facilities, choose your beach by its specific services rather than a broad “accessible” or “family-friendly” label. Call ahead where necessary.</Tip></div>
+        <section aria-label="Nordau separate bathing days" className="mt-5 rounded-xl border bg-card p-4 sm:p-5">
+          <h3 className="font-bold">Nordau Religious Beach: separate bathing days</h3>
+          <p className="mt-1 text-sm leading-relaxed text-muted-foreground">During the official bathing season:</p>
+          <div className="mt-3 grid gap-3 sm:grid-cols-2">
+            <div className="rounded-lg bg-secondary/50 px-4 py-3"><strong className="block text-sm text-primary">Women</strong><span className="mt-1 block text-sm">Sunday · Tuesday · Thursday</span></div>
+            <div className="rounded-lg bg-secondary/50 px-4 py-3"><strong className="block text-sm text-primary">Men</strong><span className="mt-1 block text-sm">Monday · Wednesday · Friday</span></div>
+          </div>
+          <p className="mt-3 text-sm">Check <OfficialLink href="https://www.tel-aviv.gov.il/Visitors/Beaches/Pages/Nordau.aspx">Nordau's official beach information</OfficialLink> for operating hours and current arrangements.</p>
+        </section>
+        <div className="mt-5"><Tip>If you need step-free access, a water-access chair or family facilities, check the specific beach's services and assistance arrangements before travelling.</Tip></div>
       </section>
 
       <section id="transport" aria-labelledby="transport-h" className="mt-12 scroll-mt-24">
@@ -323,9 +332,10 @@ export function TelAvivBeachesGuide() {
       <SourcesDisclosure>
         <p className="mb-3 text-sm leading-relaxed">I use the city's official beach descriptions for the municipal beach list, safety, accessibility and separate-bathing rules, and the Israel Nature and Parks Authority for Palmahim. Lifeguard operation, flags, sea conditions, facilities and park fees can change; confirm the details for your visit.</p>
         <ul className="grid gap-x-5 gap-y-2 text-sm sm:grid-cols-2">
-          <li><OfficialLink href={officialTelAvivBeaches}>Tel Aviv–Yafo Municipality — beaches and lifeguards</OfficialLink></li>
-          <li><OfficialLink href={officialBeachFacilities}>Municipality — facilities, accessibility and dog areas</OfficialLink></li>
-          <li><OfficialLink href={officialBeachPrices}>Municipality — beach rules and hire prices</OfficialLink></li>
+          <li><OfficialLink href={officialTelAvivBeachesEnglish}>Tel Aviv–Yafo beaches — official English guide</OfficialLink></li>
+          <li><OfficialLink href={officialTelAvivBeaches}>Municipality — current lifeguards and sea conditions (Hebrew)</OfficialLink></li>
+          <li><OfficialLink href={officialBeachFacilities}>Municipality — facilities, accessibility and dog areas (Hebrew)</OfficialLink></li>
+          <li><OfficialLink href={officialBeachPrices}>Municipality — beach rental prices (Hebrew)</OfficialLink></li>
           <li><OfficialLink href="https://www.tel-aviv.gov.il/Visitors/Beaches/Pages/Nordau.aspx">Nordau separate beach — official schedule</OfficialLink></li>
           <li><OfficialLink href="https://www.tel-aviv.gov.il/Visitors/Beaches/Pages/Charles.aspx">Charles Clore — beach facilities</OfficialLink></li>
           <li><OfficialLink href="https://www.tel-aviv.gov.il/Visitors/Beaches/Pages/Hatzuk.aspx">North Tzuk — accessibility and facilities</OfficialLink></li>
