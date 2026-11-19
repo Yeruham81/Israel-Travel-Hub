@@ -766,13 +766,13 @@ const tiberiasHotelSources: SourceReference[] = [
   ["caesar", "Caesar Premier Tiberias", "https://www.caesarpremier.com/caesar-tiberias-hotel"],
   ["sofia", "Sofia Hotel Tiberias", "https://sofiahotel.co.il/"],
   ["emily", "Emily's Hotel", "https://english.emilys-aviv.co.il/emilys-tiberias-hotel"],
-  ["tiberia", "Tiberia Hotel — operator's public profile", "https://www.facebook.com/tiberiahotel/"],
+  ["tiberia", "Tiberia Hotel — official website", "https://www.greenbeach.co.il/en/"],
   ["hostel", "Tiberias Hostel", "https://www.hosteltiberias.com/"],
 ].map(([id, name, url]): SourceReference => ({
   id: `hotel-tib-${id}-official`, title: `${name} — property information`, publisher: name!, url: url!,
   checkedAt: TIBERIAS_STAY_REVIEW_DATE,
   note: id === "tiberia"
-    ? "The operator's public profile supports the property identity and small central-hotel format. No separate official website was established; confirm room facilities and arrival arrangements directly. Prices and inventory are not live."
+    ? "The hotel website lists 17 HaNoter Street. Confirm your room facilities and arrival arrangements directly. Rates and inventory are not live."
     : "Identity, location and relevant facilities or policies checked against primary operator information. Reconfirm operation, guest and facility age limits, seasonal pools, beach arrangements and the exact meal plan for your dates. No live rates or availability are supplied.",
 }));
 
