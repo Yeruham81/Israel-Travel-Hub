@@ -12,12 +12,38 @@ import hotelRoomPhoto from "@/assets/home/hotel-room-feature.webp";
 
 const destinations = accommodationDestinations;
 
+/** A small category cue, one destination title, and a useful one-line promise. */
 const areaGuideCards = [
-  { id: "jerusalem", place: "Jerusalem", cta: "Explore Jerusalem areas" },
-  { id: "telaviv", place: "Tel Aviv", cta: "Compare Tel Aviv neighborhoods" },
-  { id: "haifa", place: "Haifa", cta: "Discover Haifa hotel areas" },
-  { id: "tiberias", place: "Tiberias", cta: "Choose a Sea of Galilee base" },
-  { id: "deadsea", place: "Dead Sea", cta: "Explore Dead Sea stays" },
+  {
+    id: "jerusalem", eyebrow: "History & city walks", title: "Jerusalem",
+    description: "Compare Downtown, Mamilla and the Old City, with practical hotel picks for sightseeing.",
+    cta: "Compare neighborhoods", to: accommodationEditorial.jerusalem.path as LinkProps["to"],
+  },
+  {
+    id: "telaviv", eyebrow: "Beach & city life", title: "Tel Aviv",
+    description: "Choose between the beachfront, Jaffa and lively central neighborhoods, with hotel recommendations.",
+    cta: "Explore the areas", to: accommodationEditorial.telaviv.path as LinkProps["to"],
+  },
+  {
+    id: "haifa", eyebrow: "Coast & Carmel", title: "Haifa",
+    description: "Weigh German Colony charm, Carmel views and beach access before choosing a hotel.",
+    cta: "Find your ideal base", to: accommodationEditorial.haifa.path as LinkProps["to"],
+  },
+  {
+    id: "tiberias", eyebrow: "Lakeside escapes", title: "Tiberias & the Galilee",
+    description: "Compare waterfront and hillside stays, family facilities and convenient bases for exploring the lake.",
+    cta: "Explore lakeside stays", to: accommodationEditorial.tiberias.path as LinkProps["to"],
+  },
+  {
+    id: "deadsea", eyebrow: "Desert & wellness", title: "Dead Sea",
+    description: "Understand Ein Bokek, nearby resorts and Ein Gedi, from beach access to spa facilities.",
+    cta: "Compare resort areas", to: accommodationEditorial.deadsea.path as LinkProps["to"],
+  },
+  {
+    id: "eilat", eyebrow: "Red Sea getaways", title: "Eilat",
+    description: "Discover beachfront resorts, marina stays and quieter options along the Red Sea.",
+    cta: "Coming soon", to: null,
+  },
 ] as const;
 
 const bookingTips = [
@@ -79,7 +105,7 @@ function AccommodationHub() {
       crumbs={[{ name: "Home", to: "/" }, { name: "Accommodation", to: "/accommodation/" }]}
       eyebrow="Accommodation"
       title="Hotels in Israel"
-      intro="Looking for the right place to stay? Start with a destination, then compare the neighborhoods, hotel styles and practical details that suit your trip."
+      intro="Find the right place to stay in Israel, from Jerusalem's historic neighborhoods and Tel Aviv's beaches to Haifa, the Sea of Galilee and the Dead Sea."
       image={<GuideHeroMedia src={hotelRoomPhoto} alt="A welcoming hotel guest room" compact />}
     />
     <div className="mx-auto max-w-5xl px-4">
@@ -119,22 +145,33 @@ function AccommodationHub() {
         </p>
         <ul className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-3" aria-label="Where to stay guides by destination">
           {areaGuideCards.map(guide => {
-            const editorial = accommodationEditorial[guide.id];
+            const available = guide.to !== null;
+            const content = <>
+              <span className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-wide text-primary">
+                <BookOpen className="h-4 w-4 shrink-0" aria-hidden /> {guide.eyebrow}
+              </span>
+              <h3 className="mt-3 text-lg font-semibold leading-snug">{guide.title}</h3>
+              <p className="mt-2 flex-1 text-sm leading-relaxed text-muted-foreground">{guide.description}</p>
+              <span className={available
+                ? "mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-primary group-hover:underline"
+                : "mt-4 inline-flex items-center text-sm font-semibold text-muted-foreground"
+              }>
+                {guide.cta}{available && <ArrowRight className="h-4 w-4 shrink-0" aria-hidden />}
+              </span>
+            </>;
+            const baseClass = "flex h-full min-w-0 flex-col rounded-2xl border bg-card p-4";
             return <li key={guide.id} className="min-w-0">
-              <Link
-                to={editorial.path as LinkProps["to"]}
-                className="group flex h-full min-w-0 flex-col rounded-2xl border bg-card p-4 transition-colors hover:border-primary/50 hover:bg-secondary/20 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
-                data-testid="accommodation-area-guide-card"
-              >
-                <span className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-wide text-primary">
-                  <BookOpen className="h-4 w-4 shrink-0" aria-hidden /> {guide.place} stay guide
-                </span>
-                <h3 className="mt-3 text-lg font-semibold leading-snug">{editorial.title}</h3>
-                <p className="mt-2 flex-1 text-sm leading-relaxed text-muted-foreground">{editorial.description}</p>
-                <span className="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-primary group-hover:underline">
-                  {guide.cta}<ArrowRight className="h-4 w-4 shrink-0" aria-hidden />
-                </span>
-              </Link>
+              {available
+                ? <Link
+                    to={guide.to}
+                    className={`group ${baseClass} transition-colors hover:border-primary/50 hover:bg-secondary/20 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary`}
+                    data-testid="accommodation-area-guide-card"
+                  >{content}</Link>
+                : <article
+                    className={baseClass}
+                    data-testid="accommodation-area-guide-coming-soon"
+                    aria-label="Eilat hotel area guide — coming soon"
+                  >{content}</article>}
             </li>;
           })}
         </ul>
