@@ -15,10 +15,6 @@
     #status[hidden]{display:none}
     #status p{margin:0 0 12px}
     a{color:#195c9e}
-    .museum-pin{display:grid;place-items:center;width:28px;height:28px;border:2px solid #fff;border-radius:50%;background:#2779bc;color:#fff;box-shadow:0 2px 7px #12334666;cursor:pointer;font-weight:800;font-size:11px}
-    .museum-pin:hover,.museum-pin:focus-visible,.museum-pin.selected{background:#0966a6;outline:3px solid #a3d9f5;outline-offset:1px;z-index:2}
-    .museum-pin.closed{background:#866234}
-    .museum-pin.closed.selected{background:#6f451e}
     .maplibregl-popup-content{font:13px/1.5 system-ui,sans-serif;padding:10px 12px;max-width:225px}
     .maplibregl-ctrl-attrib{font:10px/1.3 system-ui,sans-serif}
     .maplibregl-ctrl-attrib a{color:#123346}
@@ -57,18 +53,30 @@
         return;
       }
 
-      let map, popup, markers = new Map(), selectedId = null, ready = false, requestedId = null;
+      let map, popup, selectedId = null, ready = false, requestedId = null;
+      const bounds = [[34.743,32.046],[34.814,32.121]];
       const unavailable = () => {
         message.textContent = "The interactive map is temporarily unavailable.";
         status.hidden = false;
       };
-      const bounds = [[34.743,32.046],[34.814,32.121]];
+      const highlightSelected = () => {
+        if (!map || !map.getLayer("museum-points")) return;
+        map.setPaintProperty("museum-points", "circle-color", [
+          "case",
+          ["==", ["get", "id"], selectedId || ""], "#075b96",
+          ["get", "closed"], "#866234",
+          "#2779bc"
+        ]);
+        map.setPaintProperty("museum-points", "circle-stroke-width", [
+          "case", ["==", ["get", "id"], selectedId || ""], 4, 2
+        ]);
+      };
       const showAll = () => {
         if (!ready) { requestedId = "all"; return; }
         selectedId = null;
-        for (const [id, el] of markers) el.classList.toggle("selected", false);
+        highlightSelected();
         if (popup) popup.remove();
-        map.fitBounds(bounds, {padding: {top:34,bottom:34,left:34,right:34}, duration:500, maxZoom:13.4});
+        map.fitBounds(bounds, {padding:{top:34,bottom:34,left:34,right:34},duration:500,maxZoom:13.4});
       };
       const focus = id => {
         if (id === "all") { showAll(); return; }
@@ -76,11 +84,13 @@
         if (!point) return;
         if (!ready) { requestedId = id; return; }
         selectedId = id;
-        for (const [markerId, el] of markers) el.classList.toggle("selected", markerId === id);
-        map.flyTo({center:[point.lon,point.lat],zoom:15.2,essential:true});
+        highlightSelected();
+        // Beyond clusterMaxZoom every museum is a separate selectable point.
+        map.flyTo({center:[point.lon,point.lat],zoom:16.7,essential:true});
         if (popup) popup.remove();
         const content = document.createElement("div");
-        const name = document.createElement("strong");name.textContent = point.name;
+        const name = document.createElement("strong");
+        name.textContent = point.name;
         content.appendChild(name);
         if (point.closed) {
           const note = document.createElement("div");
@@ -88,7 +98,8 @@
           note.style.marginTop = "4px";
           content.appendChild(note);
         }
-        popup = new maplibregl.Popup({offset:20,closeButton:true,maxWidth:"245px"}).setLngLat([point.lon,point.lat]).setDOMContent(content).addTo(map);
+        popup = new maplibregl.Popup({offset:19,closeButton:true,maxWidth:"245px"})
+          .setLngLat([point.lon,point.lat]).setDOMContent(content).addTo(map);
       };
       window.addEventListener("message", event => {
         if (event.origin !== location.origin || event.source !== window.parent) return;
@@ -97,7 +108,7 @@
         focus(command.id);
       });
       if (typeof maplibregl === "undefined") { unavailable(); return; }
-      const timeout = window.setTimeout(() => {if(!ready)unavailable()},16000);
+      const timeout = window.setTimeout(() => {if (!ready) unavailable();},16000);
       try {
         maplibregl.setWorkerCount(1);
         map = new maplibregl.Map({
@@ -106,39 +117,84 @@
           bounds,
           fitBoundsOptions:{padding:{top:34,bottom:34,left:34,right:34},maxZoom:13.4},
           attributionControl:false,
-          cooperativeGestures:true, dragRotate:false,touchPitch:false,
+          cooperativeGestures:true,dragRotate:false,touchPitch:false,
           pitchWithRotate:false,renderWorldCopies:false,maxPitch:0,
           locale:{"NavigationControl.ZoomIn":"Zoom in","NavigationControl.ZoomOut":"Zoom out","AttributionControl.ToggleAttribution":"Toggle map credits"}
         });
         map.touchZoomRotate.disableRotation();
         map.addControl(new maplibregl.NavigationControl({showCompass:false}),"top-right");
         map.addControl(new maplibregl.AttributionControl({compact:true,customAttribution:'<a href="https://maputnik.github.io/osm-liberty/" target="_blank" rel="noopener noreferrer">OSM Liberty</a> (English labels)'}));
-        museums.forEach((point,index) => {
-          const el = document.createElement("button");
-          el.type="button";
-          el.className = "museum-pin" + (point.closed ? " closed" : "");
-          el.textContent = String(index+1);
-          el.title=point.name+(point.closed?" (temporarily closed)":"");
-          el.setAttribute("aria-label","Focus on "+point.name);
-          el.addEventListener("click",()=> {
-            focus(point.id);
-            window.parent.postMessage({type:"tel-aviv-museum-map-selected",id:point.id},location.origin);
+        map.once("load", () => {
+          const features = museums.map((point,index) => ({
+            type:"Feature",
+            properties:{id:point.id,name:point.name,number:index+1,closed:point.closed},
+            geometry:{type:"Point",coordinates:[point.lon,point.lat]}
+          }));
+          map.addSource("museums",{
+            type:"geojson",data:{type:"FeatureCollection",features},
+            cluster:true,clusterRadius:52,clusterMaxZoom:15
           });
-          new maplibregl.Marker({element:el,anchor:"bottom"}).setLngLat([point.lon,point.lat]).addTo(map);
-          markers.set(point.id,el);
-        });
-        map.once("load",()=>{
-          ready=true;
+          map.addLayer({
+            id:"museum-clusters",type:"circle",source:"museums",
+            filter:["has","point_count"],
+            paint:{"circle-color":"#206b9d","circle-radius":["step",["get","point_count"],20,4,24,8,28],
+              "circle-stroke-width":2,"circle-stroke-color":"#ffffff"}
+          });
+          map.addLayer({
+            id:"museum-cluster-count",type:"symbol",source:"museums",
+            filter:["has","point_count"],
+            layout:{"text-field":["get","point_count_abbreviated"],"text-size":13,
+              "text-font":["Noto Sans Bold","Open Sans Bold","Arial Unicode MS Bold"]},
+            paint:{"text-color":"#ffffff"}
+          });
+          map.addLayer({
+            id:"museum-points",type:"circle",source:"museums",
+            filter:["!",["has","point_count"]],
+            paint:{"circle-color":["case",["get","closed"],"#866234","#2779bc"],
+              "circle-radius":15,"circle-stroke-width":2,"circle-stroke-color":"#ffffff"}
+          });
+          map.addLayer({
+            id:"museum-numbers",type:"symbol",source:"museums",
+            filter:["!",["has","point_count"]],
+            layout:{"text-field":["to-string",["get","number"]],"text-size":11,
+              "text-font":["Noto Sans Bold","Open Sans Bold","Arial Unicode MS Bold"]},
+            paint:{"text-color":"#ffffff"}
+          });
+          map.on("click","museum-clusters",async event => {
+            const feature = event.features && event.features[0];
+            if (!feature) return;
+            try {
+              const source = map.getSource("museums");
+              const zoom = await source.getClusterExpansionZoom(Number(feature.properties.cluster_id));
+              map.easeTo({center:feature.geometry.coordinates,zoom:Math.min(zoom+0.4,17.5),duration:450});
+            } catch { map.zoomIn(); }
+          });
+          const selectPoint = event => {
+            const feature = event.features && event.features[0];
+            if (!feature) return;
+            const id = feature.properties.id;
+            focus(id);
+            window.parent.postMessage({type:"tel-aviv-museum-map-selected",id},location.origin);
+          };
+          map.on("click","museum-points",selectPoint);
+          map.on("click","museum-numbers",selectPoint);
+          for (const layer of ["museum-clusters","museum-points","museum-numbers"]) {
+            map.on("mouseenter",layer,()=>{map.getCanvas().style.cursor="pointer";});
+            map.on("mouseleave",layer,()=>{map.getCanvas().style.cursor="";});
+          }
+          ready = true;
           window.clearTimeout(timeout);
-          status.hidden=true;
-          if (requestedId && requestedId!=="all") focus(requestedId);
+          status.hidden = true;
+          if (requestedId && requestedId !== "all") focus(requestedId);
           else showAll();
         });
-        map.on("error",()=>{if(!ready)unavailable()});
-        window.addEventListener("pagehide",e=>{if(!e.persisted){window.clearTimeout(timeout);map.remove()}});
-      }catch{
+        map.on("error", () => {if (!ready) unavailable();});
+        window.addEventListener("pagehide", event => {
+          if (!event.persisted) {window.clearTimeout(timeout);map.remove();}
+        });
+      } catch {
         window.clearTimeout(timeout);
-        if(map)map.remove();
+        if (map) map.remove();
         unavailable();
       }
     })();
