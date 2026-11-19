@@ -17,6 +17,7 @@ import rothschildPhoto from "@/assets/tel-aviv/rothschild.webp";
 import beachfrontPhoto from "@/assets/tel-aviv/beachfront.webp";
 
 const updatedAt = "2026-11-19";
+const museumMapEmbedUrl = "https://maps.google.com/maps?q=museums%20in%20Tel%20Aviv%20and%20Jaffa&t=&z=12&ie=UTF8&iwloc=&output=embed";
 
 const related = [
   { title: "Attractions in Tel Aviv", to: "/travel-blog/attractions-in-tel-aviv/" as const, note: "Landmarks and local experiences beyond the museums", image: rothschildPhoto, alt: "Rothschild Boulevard in Tel Aviv" },
@@ -211,7 +212,7 @@ export function TelAvivMuseumsGuide() {
         </div>
         <div className="mt-5"><PlanningTip>My preferred approach is one substantial museum, a nearby lighter visit if time permits, and a walk or meal afterwards. It is a more enjoyable day than a rushed checklist.</PlanningTip></div>
         <div className="mt-7 overflow-hidden rounded-xl border bg-card">
-          <iframe title="Overview map of museums in Tel Aviv and Jaffa" loading="lazy" referrerPolicy="strict-origin-when-cross-origin" src="https://maps.google.com/maps?q=museums%20in%20Tel%20Aviv%20and%20Jaffa&t=&z=12&ie=UTF8&iwloc=&output=embed" width="900" height="320" className="h-64 w-full border-0 sm:h-80" />
+          <iframe title="Overview map of museums in Tel Aviv and Jaffa" loading="lazy" referrerPolicy="strict-origin-when-cross-origin" src={museumMapEmbedUrl} width="900" height="320" className="h-64 w-full border-0 sm:h-80" />
           <div className="flex flex-wrap items-center justify-between gap-2 p-3 text-xs text-muted-foreground"><span>Area overview — use each museum's Directions link for its precise entrance.</span><OfficialLink href="https://www.google.com/maps/search/?api=1&query=museums%20Tel%20Aviv%20Jaffa">Open larger map</OfficialLink></div>
         </div>
       </section>
