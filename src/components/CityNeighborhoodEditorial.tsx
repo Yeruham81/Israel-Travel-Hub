@@ -267,38 +267,35 @@ export function CityNeighborhoodEditorial({ guide }: { guide: CityStayGuide }) {
               ? { src: oldCityStoneLane, alt: "Narrow sandstone lane in Jerusalem's Jewish Quarter" }
               : area.photo;
             return <section key={area.id} id={`area-${area.id}`} aria-labelledby={`area-${area.id}-h`} className="scroll-mt-32 py-9 sm:py-11" data-testid="editorial-neighborhood">
-            <div className={`grid gap-5 md:grid-cols-[minmax(0,1.5fr)_minmax(230px,1fr)] md:gap-7 ${cityId === "jerusalem" ? "items-stretch" : "items-start"}`} data-testid={cityId === "jerusalem" ? "jerusalem-area-layout" : undefined}>
+            <div className="grid items-stretch gap-5 md:grid-cols-[minmax(0,1.5fr)_minmax(230px,1fr)] md:gap-7" data-testid={`${cityId === "jerusalem" ? "jerusalem" : "telaviv"}-area-layout`}>
               <div className="min-w-0">
                 <h3 id={`area-${area.id}-h`} className="text-2xl font-semibold sm:text-3xl">{area.name}</h3>
-                {cityId === "jerusalem" && <div className="mt-3 space-y-1.5 text-sm leading-relaxed" data-testid="jerusalem-area-highlights">
+                {<div className="mt-3 space-y-1.5 text-sm leading-relaxed" data-testid={`${cityId === "jerusalem" ? "jerusalem" : "telaviv"}-area-highlights`}>
                   <p><strong>Best for:</strong> {area.bestFor}</p>
                   <p><strong>Nearby highlights:</strong> {area.highlights.slice(0, 3).map((place) => place.name).join(" · ")}</p>
                 </div>}
-                {(cityId === "jerusalem" ? area.overview.slice(0, 2) : area.overview).map((paragraph, index) => <p key={index} className="mt-3 leading-relaxed">{paragraph}</p>)}
-                {cityId !== "jerusalem" && <>
-                  <p className="mt-4 text-sm leading-relaxed"><strong>Best for:</strong> {area.bestFor}</p>
-                  <p className="mt-2 text-sm leading-relaxed"><strong>Nearby highlights:</strong> {area.highlights.slice(0, 3).map((place) => place.name).join(" · ")}</p>
-                </>}
+                {area.overview.slice(0, 2).map((paragraph, index) => <p key={index} className="mt-3 leading-relaxed">{paragraph}</p>)}
+
                 <CityEditorialHotels area={area} />
               </div>
-              <div className={cityId === "jerusalem" ? "flex min-w-0 flex-col" : "min-w-0"} data-testid={cityId === "jerusalem" ? "jerusalem-area-media" : undefined}>
+              <div className="flex min-w-0 flex-col" data-testid={`${cityId === "jerusalem" ? "jerusalem" : "telaviv"}-area-media`}>
                 <figure className="overflow-hidden rounded-xl border bg-secondary/20">
-                  <img src={photo.src} alt={cityId === "jerusalem" ? "" : photo.alt} width={755} height={503} loading="lazy" decoding="async" className="aspect-[16/10] w-full object-cover" />
+                  <img src={photo.src} alt="" width={755} height={503} loading="lazy" decoding="async" className="aspect-[16/10] w-full object-cover" />
                   <figcaption className="px-3 py-2 text-xs leading-relaxed text-muted-foreground">{photo.alt}</figcaption>
                 </figure>
-                <div className={cityId === "jerusalem" ? "mt-6 min-h-0 flex-1" : "mt-3"} data-testid={cityId === "jerusalem" ? "jerusalem-area-map" : undefined}>
-                  <AreaMap area={area} compact provider="google" showExternalLink={false} stretch={cityId === "jerusalem"} />
+                <div className="mt-6 min-h-0 flex-1" data-testid={`${cityId === "jerusalem" ? "jerusalem" : "telaviv"}-area-map`}>
+                  <AreaMap area={area} compact provider="google" showExternalLink={false} stretch />
                 </div>
               </div>
             </div>
-            {cityId === "jerusalem" ? <JerusalemPracticalNotes areaId={area.id} /> : <AreaComparison areaId={area.id} />}
+            {cityId === "jerusalem" ? <JerusalemPracticalNotes areaId={area.id} /> : <TelAvivPracticalNotes areaId={area.id} />}
             {cityId === "jerusalem" && area.id === "german-colony" && <aside className="mt-4 flex gap-3 rounded-xl border border-amber-200 bg-amber-50/80 p-4 text-sm leading-relaxed dark:border-amber-900/50 dark:bg-amber-950/20">
               <Lightbulb className="mt-0.5 h-5 w-5 shrink-0 text-amber-600" aria-hidden />
               <p>Blue Line light-rail construction on Emek Refaim has changed some road and bus arrangements. Ask your accommodation about its current entrance and drop-off; consult the <a href="https://baka.org.il/he/120/" target="_blank" rel="noopener noreferrer" className="font-semibold text-primary underline underline-offset-2">local construction updates</a> before travelling.</p>
             </aside>}
             <div className="mt-6 flex justify-center">
               <Link to={area.path as LinkProps["to"]} className="btn btn-primary inline-flex min-h-11 items-center justify-center gap-2 rounded-lg px-5 py-3 text-center text-sm font-semibold">
-                {cityId === "jerusalem" ? "Browse more hotels in " : "Browse hotels in "}{area.shortName} <ArrowRight className="h-4 w-4 shrink-0" aria-hidden />
+                {cityId === "jerusalem" ? "Browse more hotels in " : "Explore more hotels in "}{area.shortName} <ArrowRight className="h-4 w-4 shrink-0" aria-hidden />
               </Link>
             </div>
           </section>;
