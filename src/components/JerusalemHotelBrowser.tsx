@@ -131,7 +131,6 @@ export function JerusalemHotelBrowser() {
             className="inline-flex min-h-11 items-center justify-center gap-2 rounded-lg border border-primary/40 bg-card px-5 py-2.5 text-sm font-semibold text-primary transition-colors hover:border-primary hover:bg-secondary/20 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
           >
             {expanded ? "Show fewer hotels" : "View more hotels"}
-            <ArrowRight className={`h-4 w-4 transition-transform ${expanded ? "rotate-180" : ""}`} aria-hidden />
           </button>
         </div>
       )}
