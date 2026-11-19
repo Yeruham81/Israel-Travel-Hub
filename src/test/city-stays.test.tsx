@@ -118,7 +118,7 @@ describe.each([
           expect(container.querySelector("#more-hotels")).toBeNull();
           expect(container.querySelector("#area-guide")).toBeInTheDocument();
           expect(container.querySelector("#overview")!.compareDocumentPosition(container.querySelector("#area-guide")!) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
-          expect(container.querySelector("#book iframe")).toHaveLength(1);
+          expect(container.querySelectorAll("#book iframe")).toHaveLength(1);
           expect(container.querySelector("#location iframe")).toBeNull();
           expect(container.querySelector("#book [data-testid='downtown-hotel-map']")).toHaveClass("xl:h-full");
         } else {
