@@ -7,6 +7,9 @@ import { hotelEditorialMeta } from "@/lib/hotel-editorial-meta";
 import { hotelsForArea, linksForPage } from "@/data/registry";
 import { hotelAffiliateUrl } from "@/lib/hotel-affiliate";
 import { CityNeighborhoodEditorial } from "@/components/CityNeighborhoodEditorial";
+import mamillaStreet from "@/assets/jerusalem/mamilla.webp";
+import eastJerusalemHouse from "@/assets/jerusalem/east-jerusalem-house.webp";
+import oldCityStoneLane from "@/assets/guides/2026-11/jerusalem-jewish-quarter-stone-lane.webp";
 
 vi.mock("@tanstack/react-router", () => ({
   Link: ({ to, children, ...props }: { to: string; children: React.ReactNode; [key: string]: unknown }) => <a href={to} {...props}>{children}</a>,
@@ -37,8 +40,7 @@ describe("Jerusalem and Tel Aviv neighbourhood editorial guides", () => {
     for (let i = 0; i < areas.length; i++) {
       const area = areas[i]!;
       const section = sections[i]!;
-      expect(section.querySelector("figcaption")?.textContent).toBe(region === "jerusalem" && area.id === "old-city"
-        ? "Narrow sandstone lane in Jerusalem's Jewish Quarter" : area.photo.alt);
+      if (region === "telaviv") expect(section.querySelector("figcaption")?.textContent).toBe(area.photo.alt);
       expect(section).not.toHaveTextContent("neighbourhood view");
       const button = within(section).getByRole("link", { name: new RegExp(`${region === "jerusalem" ? "Browse more hotels in " : "Explore more hotels in "}${area.shortName}`) });
       expect(button).toHaveAttribute("href", area.path);
@@ -55,10 +57,18 @@ describe("Jerusalem and Tel Aviv neighbourhood editorial guides", () => {
       expect(within(navigation).getAllByRole("link")).toHaveLength(6);
       expect(within(navigation).getAllByRole("img")).toHaveLength(6);
       const eastJerusalemCard = navigation.querySelector('a[href="#area-east-jerusalem"] img');
-      expect(eastJerusalemCard).toHaveAttribute("src", expect.stringContaining("east-jerusalem-house"));
+      expect(eastJerusalemCard).toHaveAttribute("src", eastJerusalemHouse);
+      expect(navigation.querySelector('a[href="#area-old-city"] img')).toHaveAttribute("src", oldCityStoneLane);
+      for (const area of areas) {
+        const cardImage = navigation.querySelector(`a[href="#area-${area.id}"] img`);
+        const section = container.querySelector(`#area-${area.id}`);
+        expect(cardImage).toBeTruthy();
+        expect(section?.querySelector("figure img")).toHaveAttribute("src", cardImage?.getAttribute("src"));
+        expect(section?.querySelector("figcaption")).toHaveTextContent(cardImage?.getAttribute("alt") || "");
+      }
       expect(container.querySelector('img[src*="old-city-BJwjTGND"]')).toBeNull();
       expect(container.querySelector("#compare")).toBeNull();
-      expect(navigation.querySelector('a[href="#area-mamilla"] img')).toHaveAttribute("src", "/images/city-stays/jerusalem-mamilla.webp");
+      expect(navigation.querySelector('a[href="#area-mamilla"] img')).toHaveAttribute("src", mamillaStreet);
       expect(navigation.querySelector('a[href="#area-german-colony"] img')).toHaveAttribute("src", "/images/city-stays/jerusalem-german-colony.webp");
       expect(within(container.querySelector("#choose")!).getByText(/Jerusalem is hilly/)).toBeInTheDocument();
       expect(container.querySelectorAll('[data-testid="jerusalem-area-highlights"]')).toHaveLength(6);
