@@ -27,16 +27,17 @@ describe("Tel Aviv neighborhood hotel-page parity and Travelpayouts links", () =
 
       const browse = linksForPage(`${pageId}-browse`);
       expect(browse, area.id).toHaveLength(1);
-      expect(browse[0].isAffiliate).toBe(true);
-      const browseUrl = new URL(hotelBrowseAffiliateUrl(browse[0], pageId));
-      expect(browseUrl.searchParams.getAll("sub_id")).toEqual([hotelBrowseSubId(pageId, browse[0].id)]);
+      const browseBooking = browse[0]!;
+      expect(browseBooking.isAffiliate).toBe(true);
+      const browseUrl = new URL(hotelBrowseAffiliateUrl(browseBooking, pageId));
+      expect(browseUrl.searchParams.getAll("sub_id")).toEqual([hotelBrowseSubId(pageId, browseBooking.id)]);
     }
     expect(seen.size).toBe(32);
   });
 
   it("renders the stacked horizontal-photo card with the correct property-specific tracking URL", () => {
-    const area = telAvivAreaGuides[0];
-    const hotel = hotelsForArea(area.id, "telaviv")[0];
+    const area = telAvivAreaGuides[0]!;
+    const hotel = hotelsForArea(area.id, "telaviv")[0]!;
     const pageId = `stay-area-${area.id}`;
     const booking = linksForPage(pageId).find((offer) => offer.id === `hotel-${hotel.id}-expedia`)!;
     const html = renderToStaticMarkup(
