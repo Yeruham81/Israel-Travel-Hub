@@ -26,14 +26,14 @@ describe("hotel-level and page-level Travelpayouts attribution", () => {
   });
 
   it("uses a unique verified Expedia Travelpayouts deep link for every hotel", () => {
-    expect(neighborhoodHotelAdditions).toHaveLength(29);
+    expect(neighborhoodHotelAdditions).toHaveLength(34);
     for (const hotel of neighborhoodHotelAdditions) {
       const key = `hotel-${hotel.id}-expedia`;
       const booking = providerLinks.find((link) => link.id === key);
       const expectedShortLink = affiliateConfig[key]?.trackingUrl;
       expect(booking?.providerName, key).toBe("Expedia");
       expect(expectedShortLink, key).toMatch(
-        hotel.id === "jlm-paamonim"
+        ["jlm-paamonim", "jlm-eldan", "jlm-christ-church", "jlm-brown-machne", "jlm-national-hotel", "jlm-dan-boutique"].includes(hotel.id)
           ? /^https:\/\/expedia\.tpk\.lv\/[a-zA-Z0-9]{8}$/
           : /^https:\/\/expedia\.tpm\.li\/[a-zA-Z0-9]{8}$/,
       );
@@ -42,7 +42,7 @@ describe("hotel-level and page-level Travelpayouts attribution", () => {
       expect(booking?.ctaLabel).toBe("Check rooms on Expedia");
     }
     const allHotelOffers = providerLinks.filter((link) => /^hotel-.*-expedia$/.test(link.id));
-    expect(allHotelOffers).toHaveLength(88);
+    expect(allHotelOffers).toHaveLength(93);
     expect(allHotelOffers.every((link) => link.isAffiliate)).toBe(true);
     expect(new Set(allHotelOffers.map((link) => link.url)).size).toBe(allHotelOffers.length);
     for (const offer of allHotelOffers) {
