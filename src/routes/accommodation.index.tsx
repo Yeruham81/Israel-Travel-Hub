@@ -12,13 +12,13 @@ import hotelRoomPhoto from "@/assets/home/hotel-room-feature.webp";
 
 const destinations = accommodationDestinations;
 
-const guideLabels: Record<keyof typeof accommodationEditorial, string> = {
-  jerusalem: "Read my guide to choosing where to stay in Jerusalem",
-  telaviv: "Read my guide to choosing where to stay in Tel Aviv",
-  haifa: "Read the Haifa area guide",
-  tiberias: "Read the Tiberias area guide",
-  deadsea: "Read the Dead Sea area guide",
-};
+const areaGuideCards = [
+  { id: "jerusalem", place: "Jerusalem", cta: "Explore Jerusalem areas" },
+  { id: "telaviv", place: "Tel Aviv", cta: "Compare Tel Aviv neighborhoods" },
+  { id: "haifa", place: "Haifa", cta: "Discover Haifa hotel areas" },
+  { id: "tiberias", place: "Tiberias", cta: "Choose a Sea of Galilee base" },
+  { id: "deadsea", place: "Dead Sea", cta: "Explore Dead Sea stays" },
+] as const;
 
 const bookingTips = [
   { title: "Choose a practical location", text: "Check the walk to sights, restaurants and transport. Hills and steps matter in Jerusalem and Haifa." },
@@ -86,17 +86,9 @@ function AccommodationHub() {
       <section id="destinations" aria-labelledby="destinations-h" className="mt-9 scroll-mt-24">
         <h2 id="destinations-h" className="text-2xl font-semibold">Choose where to stay</h2>
         <ul className="mt-4 grid grid-cols-2 auto-rows-fr gap-2.5 sm:gap-4" aria-label="Hotel destinations in Israel">
-          {destinations.map(destination => {
-            const comingSoon = destination.id === "eilat";
-            const id = destination.id as keyof typeof accommodationEditorial;
-            return <li key={destination.id} className="min-w-0">
-              <AccommodationCard
-                destination={destination}
-                comingSoon={comingSoon}
-                {...(!comingSoon ? { guideLink: { to: accommodationEditorial[id].path as LinkProps["to"], label: guideLabels[id] } } : {})}
-              />
-            </li>;
-          })}
+          {destinations.map(destination => <li key={destination.id} className="min-w-0">
+            <AccommodationCard destination={destination} comingSoon={destination.id === "eilat"} />
+          </li>)}
         </ul>
       </section>
 
@@ -119,6 +111,34 @@ function AccommodationHub() {
       </section>
 
       <TravelpayoutsHotelWidget provider="booking" />
+
+      <section id="where-to-stay-guides" aria-labelledby="where-to-stay-guides-h" className="mt-10 scroll-mt-24" data-testid="accommodation-area-guides">
+        <h2 id="where-to-stay-guides-h" className="text-2xl font-semibold">Not sure where to base yourself?</h2>
+        <p className="mt-2 max-w-3xl text-sm leading-relaxed text-muted-foreground">
+          Explore my guides to popular neighborhoods and hotel areas, with practical tips before booking and recommended places to stay.
+        </p>
+        <ul className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-3" aria-label="Where to stay guides by destination">
+          {areaGuideCards.map(guide => {
+            const editorial = accommodationEditorial[guide.id];
+            return <li key={guide.id} className="min-w-0">
+              <Link
+                to={editorial.path as LinkProps["to"]}
+                className="group flex h-full min-w-0 flex-col rounded-2xl border bg-card p-4 transition-colors hover:border-primary/50 hover:bg-secondary/20 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+                data-testid="accommodation-area-guide-card"
+              >
+                <span className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-wide text-primary">
+                  <BookOpen className="h-4 w-4 shrink-0" aria-hidden /> {guide.place} stay guide
+                </span>
+                <h3 className="mt-3 text-lg font-semibold leading-snug">{editorial.title}</h3>
+                <p className="mt-2 flex-1 text-sm leading-relaxed text-muted-foreground">{editorial.description}</p>
+                <span className="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-primary group-hover:underline">
+                  {guide.cta}<ArrowRight className="h-4 w-4 shrink-0" aria-hidden />
+                </span>
+              </Link>
+            </li>;
+          })}
+        </ul>
+      </section>
 
       <section id="booking-tips" aria-labelledby="booking-tips-h" className="mt-10 scroll-mt-24">
         <h2 id="booking-tips-h" className="text-2xl font-semibold">Before you book</h2>
