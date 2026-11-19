@@ -39,7 +39,19 @@ describe("Dead Sea category-first travel-blog hotel guide", () => {
     expect(screen.getAllByTestId("deadsea-hotel-group")).toHaveLength(5);
     for (const group of screen.getAllByTestId("deadsea-hotel-group")) {
       expect(within(group).getByTestId("deadsea-hotel-grid")).toHaveClass("sm:grid-cols-2", "lg:grid-cols-3");
+      const groupId = group.getAttribute("id");
+      const tips = within(group).queryAllByTestId("deadsea-category-tip");
+      expect(tips).toHaveLength(groupId === "group-luxury" ? 0 : 1);
+      if (tips.length) {
+        expect(tips[0]).toHaveClass("lg:col-span-1", "sm:col-span-2");
+        expect(within(tips[0]!).getAllByRole("listitem")).toHaveLength(2);
+      }
     }
+    expect(screen.getAllByTestId("deadsea-category-tip")).toHaveLength(4);
+    expect(screen.getByText("Make the most of your spa break")).toBeInTheDocument();
+    expect(screen.getByText("Plan a family-friendly stay")).toBeInTheDocument();
+    expect(screen.getByText("Find the best overall value")).toBeInTheDocument();
+    expect(screen.getByText("Plan your Ein Gedi outings")).toBeInTheDocument();
     const expectedIds = deadSeaStayGuide.groups.flatMap(group => group.hotelIds);
     expect(expectedIds).toHaveLength(11);
     expect(new Set(expectedIds).size).toBe(11);
