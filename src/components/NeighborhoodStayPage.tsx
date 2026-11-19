@@ -70,10 +70,14 @@ export function NeighborhoodStayPage({ area }: { area: NeighborhoodStayGuide }) 
 
   const hotelSection = (
     <section id="book" aria-labelledby="book-h" className="mt-8 scroll-mt-32">
-      <h2 id="book-h" className="text-2xl font-semibold sm:text-3xl">Hotels in {area.shortName}</h2>
-      <p className="mt-2 max-w-3xl text-sm leading-relaxed text-muted-foreground">
-        Explore my selected hotels in {area.shortName}, then check room offers and booking terms for your dates.
-      </p>
+      <h2 id="book-h" className="text-2xl font-semibold sm:text-3xl">
+        {isDowntown ? "Popular hotels in Jerusalem's Downtown" : `Hotels in ${area.shortName}`}
+      </h2>
+      {!isDowntown && (
+        <p className="mt-2 max-w-3xl text-sm leading-relaxed text-muted-foreground">
+          Explore my selected hotels in {area.shortName}, then check room offers and booking terms for your dates.
+        </p>
+      )}
       {isDowntown ? (
         <div className="mt-5" data-testid="downtown-hotels-with-map">
           <ul className="grid min-w-0 auto-rows-fr items-stretch gap-4 sm:grid-cols-2 xl:grid-cols-3" data-testid="neighborhood-hotel-grid">
