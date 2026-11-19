@@ -23,11 +23,11 @@ describe("hotel and neighborhood guide navigation", () => {
     const wrapper = screen.getByTestId("stay-trip-planning");
     const local = within(wrapper).getByTestId("stay-local-photo-grid");
     const onward = within(wrapper).getByTestId("stay-trip-photo-grid");
-    const localCount = region === "jerusalem" || region === "telaviv" ? 6 : 4;
+    const localCount = region === "jerusalem" || region === "telaviv" || region === "deadsea" ? 6 : 4;
     expect(within(local).getAllByRole("link")).toHaveLength(localCount);
     expect(within(onward).getAllByRole("link")).toHaveLength(6);
     expect(within(local).getAllByRole("img")).toHaveLength(localCount);
-    if (region === "jerusalem" || region === "telaviv") {
+    if (region === "jerusalem" || region === "telaviv" || region === "deadsea") {
       expect(local).toHaveClass("grid-cols-2", "lg:grid-cols-3");
       expect(onward).toHaveClass("grid-cols-2", "lg:grid-cols-3");
     }
@@ -71,6 +71,17 @@ describe("hotel and neighborhood guide navigation", () => {
     expect(travelLinks[2]).toHaveAttribute("href", "/travel-blog/jerusalem-to-the-dead-sea/");
     expect(travelLinks[3]).toHaveAttribute("href", "/travel-blog/getting-around-israel/");
     expect(travelLinks.map((item) => item.getAttribute("href"))).not.toContain("/travel-blog/day-trips-from-jerusalem/");
+  });
+
+  it("shows six Dead Sea destination guides and six distinct onward guides", () => {
+    render(<StayTripLinks region="deadsea" currentPath="/travel-blog/best-dead-sea-hotels/" presentation="guide" />);
+    const local = within(screen.getByTestId("stay-local-photo-grid")).getAllByRole("link");
+    const onward = within(screen.getByTestId("stay-trip-photo-grid")).getAllByRole("link");
+    expect(local).toHaveLength(6);
+    expect(onward).toHaveLength(6);
+    expect(local.map(link => link.getAttribute("href"))).toContain("/tours/masada-dead-sea/");
+    expect(local.map(link => link.getAttribute("href"))).toContain("/attractions/qasr-el-yahud/");
+    expect(onward.map(link => link.getAttribute("href"))).toContain("/travel-blog/calendar-of-events/");
   });
 
   it("removes a link to the currently displayed page without repeating it elsewhere", () => {
