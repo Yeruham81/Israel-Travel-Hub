@@ -325,6 +325,7 @@ export const expandedTravelGuides = {
     answer: "I suggest Mahane Yehuda for food, the Old City for traditional souvenirs, Mamilla for brands, Malha for indoor shopping and Hutzot Hayotzer for artisan gifts. Check current dates for the Friday Bezalel Arts Fair.",
     topics: ["shopping", "destinations", "tips"],
     photo: { src: "/images/jerusalem-shopping/hero.webp", alt: "Evening shopping promenade lined with fashion boutiques in Jerusalem" },
+    cardPhoto: { src: "/images/attractions/old-jerusalem-via-dolorosa.webp", alt: "Old City Jerusalem market passage and stone-paved souk" },
     facts: [
       { label: "10 places", text: "Markets, shopping streets, workshops and a mall" },
       { label: "Central picks", text: "Mahane Yehuda, Old City, Mamilla and Ben Yehuda" },
@@ -339,6 +340,9 @@ export const expandedTravelGuides = {
       id: "shop-" + place.id,
       title: place.name,
       paragraphs: [place.description, place.practical, place.gettingThere],
+      ...(place.id === "mahane"
+        ? { inlineLinks: [{ text: "Mahane Yehuda", to: "/accommodation/jerusalem/mahane-yehuda-nachlaot/" as const }] }
+        : {}),
     })),
     checklist: [
       "Choose your shopping area and what you want to buy",
