@@ -7,8 +7,9 @@ import { HomeContactForm } from "@/components/HomeContactForm";
 import { StayTripLinks } from "@/components/StayTripLinks";
 import { guideContactCopy } from "@/lib/guide-contact";
 import { resortHotel, hotelBooking } from "@/components/StayGuideParts";
+import { linksForPage } from "@/data/registry";
 import { resortHotelPhoto } from "@/data/resortHotelPhotos";
-import { hotelAffiliateUrl } from "@/lib/hotel-affiliate";
+import { hotelAffiliateUrl, hotelBrowseAffiliateUrl } from "@/lib/hotel-affiliate";
 import { hotelGoogleMapsUrl } from "@/lib/hotel-google-maps";
 import { recordOutboundClick, relFor } from "@/lib/outbound";
 
@@ -168,6 +169,40 @@ const groupTips: Record<string, { title: string; points: readonly [string, strin
   },
 };
 
+/** Verified public Expedia destination pages. These are direct links until the
+ * Travelpayouts account supplies short links for Haifa city/category searches.
+ * Never reuse a particular hotel's tracked link for a destination search.
+ */
+const browseFallback: Record<string, { id: string; label: string; url: string }> = {
+  luxury: {
+    id: "hotels-haifa-luxury-direct",
+    label: "Browse more luxury stays",
+    url: "https://www.expedia.com/Haifa-Hotels-Luxury-Hotel.0-0-d1446-tLuxuryHotel.Travel-Guide-Filter-Hotels",
+  },
+  boutique: {
+    id: "hotels-haifa-boutique-direct",
+    label: "Browse more boutique hotels",
+    url: "https://www.expedia.com/Haifa-Hotels-Boutique-Hotel.0-0-d1446-tBoutiqueHotel.Travel-Guide-Filter-Hotels",
+  },
+  family: {
+    id: "hotels-haifa-family-direct",
+    label: "Browse more family hotels",
+    url: "https://www.expedia.com/Haifa-Hotels-Family-Hotel.0-0-d1446-tFamilyHotel.Travel-Guide-Filter-Hotels",
+  },
+  "mid-range": {
+    id: "hotels-haifa-city-direct",
+    label: "Browse more city hotels",
+    url: "https://www.expedia.com/Haifa-Hotels.d1446.Travel-Guide-Hotels",
+  },
+  budget: {
+    id: "hotels-haifa-budget-direct",
+    label: "Browse more affordable stays",
+    url: "https://www.expedia.com/Haifa-Hotels-Cheap-Hotels.0-0-d1446-tCheapHotels.Travel-Guide-Filter-Hotels",
+  },
+};
+
+const haifaAllHotelsUrl = "https://www.expedia.com/Haifa-Hotels.d1446.Travel-Guide-Hotels";
+
 const bookingTips = [
   { title: "Choose the right elevation", text: "A nearby point on the map may be up a steep slope. Check walks, steps and the Carmelit or bus connection." },
   { title: "Confirm your beach plan", text: "A view of Haifa Bay is not a beachfront location. For beach days, compare the southern seafront and its transport connections." },
@@ -224,6 +259,7 @@ export function HaifaHotelEditorialGuide({ guide }: { guide: HotelStayDestinatio
   const budgetGroup = groups.find(group => group.id === "budget");
   const allHotelIds = groups.flatMap(group => group.hotelIds);
   const sourceIds = [...new Set([...guide.sourceIds, ...allHotelIds.map(id => resortHotel(id).sourceId)])];
+  const allHotelsAffiliate = linksForPage("stay-haifa-browse").find(link => link.isAffiliate && link.partnerId === "expedia");
 
   return <main className="pb-10" data-testid="haifa-style-editorial">
     <GuideHeader
@@ -254,13 +290,16 @@ export function HaifaHotelEditorialGuide({ guide }: { guide: HotelStayDestinatio
             </a>;
           })}
         </div>
-        {budgetGroup && <a href="#group-budget" className="group mt-4 flex flex-col gap-2 rounded-2xl border bg-secondary/30 p-4 transition-colors hover:border-primary/60 sm:flex-row sm:items-center sm:justify-between sm:p-5" data-testid="haifa-budget-spotlight">
-          <span>
-            <strong className="text-base sm:text-lg">Independent & budget-minded stays</strong>
-            <span className="mt-1 block text-sm leading-relaxed text-muted-foreground">Explore options around the lower city and Talpiot Market.</span>
+        {budgetGroup && <a href="#group-budget" className="group mt-4 flex min-w-0 flex-col overflow-hidden rounded-2xl border bg-card shadow-sm transition-all hover:-translate-y-0.5 hover:border-primary/60 hover:shadow-md sm:flex-row sm:items-center" data-testid="haifa-budget-spotlight">
+          <span className="flex min-w-0 flex-1 flex-col p-4 sm:p-5">
+            <span className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">Another way to stay in Haifa</span>
+            <strong className="mt-1 break-words text-base leading-snug sm:text-lg">Independent & budget-minded stays</strong>
+            <span className="mt-2 text-sm leading-relaxed text-muted-foreground">Explore smaller places to stay in the lower city and around Talpiot Market.</span>
           </span>
-          <span className="inline-flex shrink-0 items-center gap-1 text-sm font-semibold text-primary">See hotels <ArrowRight className="h-4 w-4" aria-hidden /></span>
-        </a>}
+          <span className="flex min-h-11 shrink-0 items-center gap-2 border-t px-4 py-3 text-sm font-semibold text-primary sm:border-l sm:border-t-0 sm:px-5">
+            See hotels <ArrowRight className="h-4 w-4 shrink-0" aria-hidden />
+          </span>
+        </a>
         <aside className="mt-6 flex gap-3 rounded-xl border border-amber-200 bg-amber-50/80 p-4 text-sm leading-relaxed dark:border-amber-900/50 dark:bg-amber-950/20">
           <Lightbulb className="mt-0.5 h-5 w-5 shrink-0 text-amber-600" aria-hidden />
           <p>A room with a beautiful bay view can be high above the shore. Check the actual journey to the beach, the Bahá'í Gardens and your planned daily stops before deciding.</p>
@@ -301,6 +340,9 @@ export function HaifaHotelEditorialGuide({ guide }: { guide: HotelStayDestinatio
           {groups.map(group => {
             const copy = groupCopy[group.id];
             const tip = groupTips[group.id];
+            const browse = browseFallback[group.id];
+            const affiliate = linksForPage("stay-haifa-" + group.id + "-browse").find(link => link.isAffiliate && link.partnerId === "expedia");
+            const browseOfferId = affiliate?.id ?? browse?.id;
             return <section key={group.id} id={"group-" + group.id} className="scroll-mt-32 py-9 sm:py-11" aria-labelledby={"group-" + group.id + "-h"} data-testid="haifa-hotel-group">
               <p className="eyebrow">{copy?.eyebrow}</p>
               <h3 id={"group-" + group.id + "-h"} className="mt-2 text-2xl font-semibold sm:text-3xl">{copy?.title ?? group.title}</h3>
@@ -325,8 +367,29 @@ export function HaifaHotelEditorialGuide({ guide }: { guide: HotelStayDestinatio
                   </aside>
                 </li>}
               </ul>
+              {browse && browseOfferId && <div className="mt-6 flex justify-center">
+                <a href={affiliate ? hotelBrowseAffiliateUrl(affiliate, pageId) : browse.url}
+                  target="_blank" rel={affiliate ? relFor(affiliate.isAffiliate) : "noopener noreferrer"}
+                  onClick={() => recordOutboundClick({ pageId, productId: browseOfferId, offerId: browseOfferId })}
+                  className="inline-flex min-h-11 max-w-full items-center justify-center gap-2 rounded-lg bg-primary px-5 py-2.5 text-center text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary/90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+                  data-testid="haifa-category-browse-link">
+                  {browse.label} <ArrowUpRight className="h-4 w-4 shrink-0" aria-hidden />
+                  <span className="sr-only"> (opens in a new tab)</span>
+                </a>
+              </div>}
             </section>;
           })}
+        </div>
+        <div className="mt-3 flex flex-col items-start gap-3 rounded-2xl border bg-secondary/30 p-5 sm:flex-row sm:items-center sm:justify-between sm:p-6">
+          <h3 className="text-lg font-semibold">Looking for more hotels in Haifa?</h3>
+          <a href={allHotelsAffiliate ? hotelBrowseAffiliateUrl(allHotelsAffiliate, pageId) : haifaAllHotelsUrl}
+            target="_blank" rel={allHotelsAffiliate ? relFor(allHotelsAffiliate.isAffiliate) : "noopener noreferrer"}
+            onClick={() => recordOutboundClick({ pageId, productId: allHotelsAffiliate?.id ?? "hotels-haifa-all-direct", offerId: allHotelsAffiliate?.id ?? "hotels-haifa-all-direct" })}
+            className="inline-flex min-h-11 items-center justify-center gap-2 rounded-lg border border-primary/40 bg-card px-4 py-2 text-center text-sm font-semibold text-primary"
+            data-testid="haifa-all-hotels-browse-link">
+            Browse more Haifa hotels <ArrowUpRight className="h-4 w-4 shrink-0" aria-hidden />
+            <span className="sr-only"> (opens in a new tab)</span>
+          </a>
         </div>
       </section>
 
