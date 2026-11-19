@@ -10,7 +10,7 @@ import { HomeContactForm } from "@/components/HomeContactForm";
 import { neighborhoodTripContactCopy } from "@/lib/guide-contact";
 import { jerusalemAdditionalMuseums as additionalMuseums, jerusalemMuseumAreas as museumAreas, jerusalemMuseumMapPoints as museumMapPoints, jerusalemMuseums as museums, type JerusalemMuseumEntry as MuseumEntry } from "@/data/jerusalemMuseums";
 import museumHero from "@/assets/guides/museums-in-jerusalem.jpg";
-import oldCityPhoto from "@/assets/jerusalem/old-city.webp";
+import oldCityPhoto from "@/assets/attractions-hub/card-old-city-jerusalem-420.webp";
 import jerusalemPhoto from "@/assets/attractions-hub/related-jerusalem-360.webp";
 import mamillaPhoto from "@/assets/jerusalem/mamilla.webp";
 import downtownPhoto from "@/assets/jerusalem/downtown.webp";
