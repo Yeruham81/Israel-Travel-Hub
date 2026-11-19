@@ -64,7 +64,7 @@ jobs:
               const item = data.items?.find(x => x.id === "jlm-paamonim");
               if (!item || item.original_url !== "https://www.expedia.com/Jerusalem-Hotels-Paamonim-Jerusalem-Hotel.h14708123.Hotel-Information"
                   || item.status !== "generated_pending_review"
-                  || !/^https:\/\/expedia\.tpm\.li\/[A-Za-z0-9]+\/?$/.test(item.affiliate_url ?? "")) {
+                  || !/^https:\/\/expedia\.(?:tpm\.li|tpk\.lv)\/[A-Za-z0-9]+\/?$/.test(item.affiliate_url ?? "")) {
                 throw Error("Paamonim partner link failed source and domain validation");
               }
               console.log("Paamonim approved candidate: " + item.affiliate_url);
