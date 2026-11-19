@@ -15,7 +15,7 @@ describe("Jerusalem content and reciprocal guide cluster", () => {
       const guide = travelGuides[id];
       expect(guide.id).toBe(id);
       expect(travelGuidePaths[id]).toMatch(/^\/travel-blog\/.+\/$/);
-      expect(guide.updatedAt).toBe(id === "jerusalemDeadSea" || id === "bethlehem" ? "2026-11-13" : "2026-10-24");
+      expect(guide.updatedAt).toBe(id === "jerusalemShopping" ? "2026-11-20" : id === "jerusalemDeadSea" || id === "bethlehem" ? "2026-11-13" : "2026-10-24");
       expect(new Set(guide.sections.map(section => section.id)).size).toBe(guide.sections.length);
       expect(guide.sections.length).toBeGreaterThanOrEqual(id === "jerusalemDeadSea" ? 5 : 6);
       expect(jerusalemConnections[id].length).toBeGreaterThanOrEqual(3);
@@ -34,9 +34,11 @@ describe("Jerusalem content and reciprocal guide cluster", () => {
       expect(museums.some(museum => museum.includes(name))).toBe(true);
     }
     const shopping = travelGuides.jerusalemShopping;
-    for (const keyword of ["artists-colony", "bezalel-independent-design", "shopping-cardo-and-first-station", "shopping-market-tours"]) {
+    for (const keyword of ["shop-hutzot", "shop-bezalel", "shop-cardo", "shop-mahane"]) {
       expect(shopping.sections.some(section => section.id === keyword)).toBe(true);
     }
+    expect(shopping.sections).toHaveLength(10);
+    expect(shopping.comparison.rows).toHaveLength(10);
     expect(shopping.services.some(x => x.to === "/tours/food-market-tours/")).toBe(true);
   });
 
