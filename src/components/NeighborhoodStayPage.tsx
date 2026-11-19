@@ -15,6 +15,7 @@ import { guideContactCopy } from "@/lib/guide-contact";
 import { hotelBrowseAffiliateUrl } from "@/lib/hotel-affiliate";
 import { recordOutboundClick, relFor } from "@/lib/outbound";
 import jerusalemAreaGuidePhoto from "@/assets/home/jerusalem-old-city-tile.webp";
+import { jerusalemStayCardPhotos } from "@/data/jerusalemStayCardPhotos";
 import telAvivAreaGuidePhoto from "@/assets/home/tel-aviv-coast.webp";
 
 const sections = [
@@ -253,7 +254,7 @@ export function NeighborhoodStayPage({ area }: { area: NeighborhoodStayGuide }) 
           <p className="mt-2 text-muted-foreground">Compare a different side of {city.city} before you decide.</p>
           <ul className={`mt-5 grid gap-4 sm:grid-cols-2 ${isJerusalem ? "lg:grid-cols-3" : "lg:grid-cols-4"}`}>{otherAreas.map((other) => <li key={other.id} className="min-w-0">
             <Link to={other.path as LinkProps["to"]} className="group flex h-full flex-col overflow-hidden rounded-xl border bg-card hover:border-primary">
-              <img src={other.photo.src} alt={other.photo.alt} width={600} height={375} loading="lazy" decoding="async" className="aspect-[16/10] w-full object-cover" />
+              <img src={isJerusalem ? (jerusalemStayCardPhotos[other.id]?.src ?? other.photo.src) : other.photo.src} alt={isJerusalem ? (jerusalemStayCardPhotos[other.id]?.alt ?? other.photo.alt) : other.photo.alt} width={600} height={375} loading="lazy" decoding="async" className="aspect-[16/10] w-full object-cover" />
               <span className="flex flex-1 items-center justify-between gap-3 p-4">
                 <span><span className="block text-xl font-semibold">{other.shortName}</span><span className="mt-1 block text-xs text-muted-foreground">{other.bestFor}</span></span>
                 <ArrowRight className="h-4 w-4 shrink-0 text-primary" aria-hidden />
