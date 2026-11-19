@@ -5,7 +5,7 @@ import {
   type CityStayGuide, type NeighborhoodStayGuide, type StayPreference, preferenceLabels,
 } from "@/data/content";
 import { areaArrivalSignals } from "@/data/localEditorialInsights";
-import { INFO_CHECK_DATE, linksForPage } from "@/data/registry";
+import { INFO_CHECK_DATE } from "@/data/registry";
 import { GuideHeader, OnThisPage, FaqList, SourceList } from "@/components/Guide";
 import { JerusalemHotelBrowser } from "@/components/JerusalemHotelBrowser";
 import { StayTripLinks } from "@/components/StayTripLinks";
@@ -13,8 +13,6 @@ import { HomeContactForm } from "@/components/HomeContactForm";
 import { guideContactCopy } from "@/lib/guide-contact";
 import { CityHotelPhotoCredits } from "@/components/CityHotelPhotoCredits";
 import { AreaPhotoCredit } from "@/components/AreaMap";
-import { hotelBrowseAffiliateUrl } from "@/lib/hotel-affiliate";
-import { recordOutboundClick, relFor } from "@/lib/outbound";
 import jerusalemHeroPhoto from "@/assets/home/hero-refresh-jerusalem-jaffa-gate-v4-medium.webp";
 import jerusalemAreaGuidePhoto from "@/assets/home/jerusalem-old-city-tile.webp";
 
@@ -77,34 +75,9 @@ export function JerusalemStayHub({ g, areas }: { g: CityStayGuide; areas: Neighb
 
         <JerusalemHotelBrowser />
 
-        <div id="more-hotels" className="mt-6 flex flex-wrap items-center justify-between gap-4 rounded-2xl border bg-secondary/35 p-4 sm:p-6">
-          <div className="max-w-xl">
-            <h3 className="text-lg font-semibold">Looking for another Jerusalem hotel?</h3>
-            <p className="mt-1.5 text-sm leading-relaxed text-muted-foreground">
-              Explore more places to stay and check prices, availability and cancellation options for your dates.
-            </p>
-          </div>
-          <div className="flex flex-wrap gap-2">
-            {linksForPage("stay-jerusalem").map((booking) => (
-              <a
-                key={booking.id}
-                href={hotelBrowseAffiliateUrl(booking, "stay-jerusalem")}
-                target="_blank" rel={relFor(booking.isAffiliate)}
-                onClick={() => recordOutboundClick({ pageId: "stay-jerusalem", productId: booking.id, offerId: booking.id })}
-                className="btn btn-primary inline-flex min-h-11 items-center justify-center gap-2"
-              >
-                Browse more Jerusalem hotels <ArrowRight className="h-4 w-4" aria-hidden />
-                <span className="sr-only"> (opens in a new tab)</span>
-              </a>
-            ))}
-          </div>
-        </div>
-
-
-
         <section id="areas" aria-labelledby="areas-h" className="mt-12 scroll-mt-28">
           <h2 id="areas-h" className="text-2xl font-semibold sm:text-3xl">Choose your Jerusalem neighborhood</h2>
-          <p className="mt-3 max-w-3xl leading-relaxed text-muted-foreground">
+          <p className="mt-3 w-full text-pretty leading-relaxed text-muted-foreground">
             {g.areaIntro}
           </p>
           <div className="mt-4 grid gap-3 sm:grid-cols-2">
@@ -161,9 +134,8 @@ export function JerusalemStayHub({ g, areas }: { g: CityStayGuide; areas: Neighb
         <section id="compare" aria-labelledby="compare-h" className="mt-12 scroll-mt-28">
           <h2 id="compare-h" className="text-2xl font-semibold sm:text-3xl">Compare areas in Jerusalem</h2>
           <p className="mt-2 text-sm text-muted-foreground">A quick guide to location and access before choosing a room.</p>
-          <details className="mt-4 overflow-hidden rounded-2xl border bg-card">
-            <summary className="cursor-pointer px-5 py-4 font-semibold text-primary">View neighborhood comparison</summary>
-            <div className="overflow-x-auto border-t" role="region" aria-label="Jerusalem neighborhood comparison" tabIndex={0}>
+          <div className="mt-4 overflow-hidden rounded-2xl border bg-card">
+            <div className="overflow-x-auto" role="region" aria-label="Jerusalem neighborhood comparison" tabIndex={0}>
               <table className="w-full min-w-[680px] text-left text-sm">
                 <caption className="sr-only">Jerusalem neighborhoods, ideal guests, arrival considerations and tradeoffs</caption>
                 <thead className="bg-secondary">
@@ -183,7 +155,7 @@ export function JerusalemStayHub({ g, areas }: { g: CityStayGuide; areas: Neighb
                 </tbody>
               </table>
             </div>
-          </details>
+          </div>
         </section>
 
         <section id="checklist" aria-labelledby="checklist-h" className="mt-12 scroll-mt-28">
