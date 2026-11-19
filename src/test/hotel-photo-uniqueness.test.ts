@@ -15,7 +15,7 @@ describe("unique hotel photo mapping across all destinations", () => {
     ...haifaHotelRecommendations,
   ];
 
-  it("has one dedicated image for each of 87 hotel identities, reused only for that same hotel", () => {
+  it("has one dedicated image for each of 88 hotel identities, reused only for that same hotel", () => {
     expect(cityHotels).toHaveLength(57);
     expect(resortHotels).toHaveLength(31);
     expect(Object.keys(supplementalHotelPhotos)).toHaveLength(29);
@@ -26,10 +26,10 @@ describe("unique hotel photo mapping across all destinations", () => {
       ...resortHotels.map((hotel) => ({ hotelId: hotel.id, image: resortHotelPhoto(hotel.id) })),
     ];
     expect(entries).toHaveLength(88);
-    expect(new Set(entries.map(({ hotelId }) => hotelId)).size).toBe(87);
+    expect(new Set(entries.map(({ hotelId }) => hotelId)).size).toBe(88);
 
     const assignedPaths = entries.map(({ image }) => image.src);
-    expect(new Set(assignedPaths).size).toBe(87);
+    expect(new Set(assignedPaths).size).toBe(88);
     for (const { hotelId, image } of entries) {
       expect(image.src, hotelId).toMatch(/^(\/|https?:\/\/)/);
       expect(image.alt?.length, hotelId).toBeGreaterThan(12);
