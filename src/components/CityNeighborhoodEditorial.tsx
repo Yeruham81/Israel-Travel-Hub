@@ -14,7 +14,7 @@ import jerusalemHero from "@/assets/guides/2026-11/where-to-stay-jerusalem-drive
 import telAvivHero from "@/assets/guides/2026-11/where-to-stay-tel-aviv-drive.webp";
 import oldCityStoneLane from "@/assets/guides/2026-11/jerusalem-jewish-quarter-stone-lane.webp";
 import downtownCard from "@/assets/travel-blog-hub/downtown-944eb9d46b-420.webp";
-import oldCityCard from "@/assets/attractions-hub/card-old-city-jerusalem-420.webp";
+import mamillaStreet from "@/assets/jerusalem/mamilla.webp";
 import marketCard from "@/assets/travel-blog-hub/mahane-yehuda-c53a05ac52-420.webp";
 import eastJerusalemCard from "@/assets/jerusalem/east-jerusalem-house.webp";
 import oldNorthCard from "@/assets/travel-blog-hub/old-north-14ec3bcb89-420.webp";
@@ -36,8 +36,8 @@ const neighborhoodSections = sections.filter(([id]) => id !== "compare");
 
 const jerusalemAreaCardPhotos: Record<string, { src: string; alt: string }> = {
   downtown: { src: downtownCard, alt: "Streets and historic buildings in Downtown Jerusalem" },
-  mamilla: { src: "/images/city-stays/jerusalem-mamilla.webp", alt: "Shops and stone buildings along Jerusalem's Mamilla pedestrian avenue" },
-  "old-city": { src: oldCityCard, alt: "Jerusalem's Old City and historic stone architecture" },
+  mamilla: { src: mamillaStreet, alt: "Mamilla Avenue and the surrounding hotel district in Jerusalem" },
+  "old-city": { src: oldCityStoneLane, alt: "Narrow sandstone lane in Jerusalem's Jewish Quarter" },
   "mahane-yehuda": { src: marketCard, alt: "Mahane Yehuda Market in Jerusalem" },
   "east-jerusalem": { src: eastJerusalemCard, alt: "Traditional house in East Jerusalem" },
   "german-colony": { src: "/images/city-stays/jerusalem-german-colony.webp", alt: "Emek Refaim Street in Jerusalem's German Colony" },
@@ -263,9 +263,7 @@ export function CityNeighborhoodEditorial({ guide }: { guide: CityStayGuide }) {
         <h2 id="neighborhoods-h" className="text-3xl">Neighbourhoods in {cityName}</h2>
         <div className="mt-5 divide-y border-t">
           {areas.map((area) => {
-            const photo = cityId === "jerusalem" && area.id === "old-city"
-              ? { src: oldCityStoneLane, alt: "Narrow sandstone lane in Jerusalem's Jewish Quarter" }
-              : area.photo;
+            const photo = cityId === "jerusalem" ? (jerusalemAreaCardPhotos[area.id] ?? area.photo) : area.photo;
             return <section key={area.id} id={`area-${area.id}`} aria-labelledby={`area-${area.id}-h`} className="scroll-mt-32 py-9 sm:py-11" data-testid="editorial-neighborhood">
             <div className="grid items-stretch gap-5 md:grid-cols-[minmax(0,1.5fr)_minmax(230px,1fr)] md:gap-7" data-testid={`${cityId === "jerusalem" ? "jerusalem" : "telaviv"}-area-layout`}>
               <div className="min-w-0">
