@@ -149,7 +149,7 @@ function MuseumMap() {
 }
 
 const faqs = [
-  { q: "Is there a combined ticket for Bialik Square?", a: "Bialik House publishes a Bialik Square combined ticket for ₪75. Check the current conditions and which institutions are included directly with the operator before purchasing." },
+  { q: "Is there a combined ticket for Bialik Square?", a: "Bialik House lists a ₪75 combined ticket for Bialik Square. The square includes the City Museum, Bialik House, Liebling Haus, Rubin Museum and Felicja Blumental Centre; confirm which venues and exhibitions the pass currently covers." },
   { q: "Which museum would you choose for a first visit to Tel Aviv?", a: "I'd start with the Tel Aviv Museum of Art for art, ANU for the story of Jewish communities, or the Steinhardt Museum for natural history. If you're short on time, the museums around Bialik Square make a satisfying cultural walk." },
   { q: "Which museums are best for children?", a: "The Steinhardt Museum is particularly approachable for families. ANU's Heroes gallery is aimed at children aged 6–12 and requires an advance reservation. Check any special programme's age range and language before booking." },
   { q: "Are there free museums in Tel Aviv?", a: "Liebling Haus normally offers free general entry, while exhibitions or special events elsewhere can have separate charges. MUZA's outdoor park areas have different entry arrangements from the exhibitions. Always check the specific event or museum before arrival." },
@@ -227,7 +227,7 @@ export function TelAvivMuseumsGuide() {
           <h3 className="text-2xl font-semibold">{area.name}</h3>
           <p className="mt-2 max-w-3xl leading-relaxed text-muted-foreground">{area.intro}</p>
           <div className="mt-5 grid items-stretch gap-5 md:grid-cols-2">{museums.filter(museum => museum.area === area.id).map(museum => <MuseumCard key={museum.id} museum={museum} />)}</div>
-          {index === 0 && <div className="mt-5"><PlanningTip>For a walkable cultural afternoon, start around Bialik Square and choose two or three venues. <OfficialLink href="https://www.bialikmuseum.org.il/pages?pageid=14">Bialik House lists a Bialik Square combined ticket</OfficialLink> for ₪75. Check exactly which institutions it includes before buying separate tickets. The main Tel Aviv Museum of Art is farther away and deserves its own substantial visit.</PlanningTip></div>}
+          {index === 0 && <div className="mt-5"><PlanningTip>For a walkable cultural afternoon, choose two or three cultural venues around Bialik Square: the City Museum, Bialik House, Rubin Museum, Liebling Haus and Felicja Blumental Centre are nearby. <OfficialLink href="https://www.bialikmuseum.org.il/pages?pageid=14">Bialik House advertises a ₪75 combined ticket</OfficialLink>; confirm its participating venues before purchasing. Save the main Tel Aviv Museum of Art for a separate substantial visit.</PlanningTip></div>}
           {index === 1 && <div className="mt-5"><PlanningTip>The university-area museums are separate institutions. Check each ticket, English-language option and visiting time before travelling. The MUZA planetarium is closed as of November 2026, although the museum campus remains open.</PlanningTip></div>}
         </section>)}
         <div className="mt-8 rounded-xl border bg-card p-4">
