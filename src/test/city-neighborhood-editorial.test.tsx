@@ -183,7 +183,7 @@ describe("Jerusalem and Tel Aviv neighbourhood editorial guides", () => {
         expect(card).toHaveAttribute("target", "_blank");
         expect(card.querySelector('[data-testid="hotel-highlight"]')?.textContent?.trim()).toBeTruthy();
         const hotelType = card.querySelector<HTMLElement>('[data-testid="hotel-type"]');
-        const words = hotelType?.textContent?.trim().split(/\\s+/) ?? [];
+        const words = hotelType?.textContent?.trim().split(/\s+/) ?? [];
         expect(words.length).toBeGreaterThanOrEqual(2);
         expect(words.length).toBeLessThanOrEqual(3);
         expect(hotelType).toHaveClass("whitespace-nowrap", "truncate");
