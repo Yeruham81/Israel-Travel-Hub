@@ -1,6 +1,6 @@
 /**
  * One unique locally stored illustrative neighborhood image for each of the
- * 29 supplemental Jerusalem / Tel Aviv hotels (13 + 16).
+ * 34 supplemental Jerusalem / Tel Aviv hotels (18 + 16).
  * These are surrounding-area editorial illustrations, NOT representations
  * of the named hotel's actual rooms, building, or facilities.
  * Source photos come from the publisher's connected photo library.
@@ -11,6 +11,7 @@ import downtownStreet from "@/assets/travel-blog-hub/downtown-944eb9d46b-420.web
 import mahaneMarket from "@/assets/travel-blog-hub/mahane-yehuda-c53a05ac52-420.webp";
 import foodMarkets from "@/assets/tours-hub/food-markets.webp";
 import germanColonyStreet from "@/assets/travel-blog-hub/colony-35429f7d31-420.webp";
+import marketBakery from "@/assets/guides/2026-10/food-7.webp";
 
 const jerusalemScene = (src: string, alt: string): HotelIllustration => ({
   src, alt, label: "Illustrative Jerusalem neighborhood photograph",
@@ -29,6 +30,11 @@ export const supplementalHotelPhotos: Record<string, HotelIllustration> = {
   "jlm-ibis": jerusalemScene(downtownStreet, "Downtown Jerusalem streets and stone buildings near Jaffa Road"),
   "jlm-ibis-styles": jerusalemScene("/images/hotel-cards/jlm-ibis-styles.webp", "Historic stone shopping passage in Jerusalem"),
   "jlm-paamonim": jerusalemScene(jerusalemNight, "Jerusalem skyline illuminated after dark"),
+  "jlm-eldan": jerusalemScene("/images/attractions/old-jerusalem-tower-of-david.webp", "Tower of David by Jaffa Gate, a landmark near King David Street"),
+  "jlm-christ-church": jerusalemScene("/images/attractions/old-jerusalem-holy-sepulchre.webp", "Historic Church of the Holy Sepulchre inside Jerusalem's Old City"),
+  "jlm-brown-machne": jerusalemScene(marketBakery, "Freshly baked sesame pastries at a local market bakery"),
+  "jlm-national-hotel": jerusalemScene("/images/attractions/old-jerusalem-via-dolorosa.webp", "Historic stone market lanes in Jerusalem's northern Old City"),
+  "jlm-dan-boutique": jerusalemScene("/images/jerusalem/mount-zion/mount-zion-hillside.webp", "Mount Zion hillside near the First Station and southern Jerusalem"),
   "jlm-david-citadel": scene("jlm-david-citadel", "webp", "Mamilla and Old City surroundings in Jerusalem"),
   "jlm-waldorf": scene("jlm-waldorf", "webp", "Mamilla pedestrian area in central Jerusalem"),
   "jlm-hashimi": scene("jlm-hashimi", "webp", "Old City market lanes in Jerusalem"),
