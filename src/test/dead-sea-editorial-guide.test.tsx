@@ -47,7 +47,7 @@ describe("Dead Sea category-first travel-blog hotel guide", () => {
     }
     expect(container.querySelectorAll('#location iframe')).toHaveLength(1);
     expect(screen.getAllByRole("listitem").filter(node => node.closest('#tips') !== null)).toHaveLength(8);
-    expect(container).toHaveTextContent("Hotel and spa age");
+    expect(container).toHaveTextContent("Separate hotel and spa age rules");
     expect(container).toHaveTextContent("entry from 16");
     expect(container).toHaveTextContent("operating bathing beach");
     expect(container).not.toHaveTextContent("Oasis is strictly adults-only");
