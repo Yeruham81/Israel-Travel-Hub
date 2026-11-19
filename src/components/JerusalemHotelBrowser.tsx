@@ -176,7 +176,7 @@ export function JerusalemHotelTile({ hotel, pageId = "stay-jerusalem", showArea 
             : "aspect-[16/9] w-full object-cover sm:aspect-auto sm:h-full sm:min-h-[215px]"
           }
         />
-        {showArea && <span className="absolute bottom-2 left-2 max-w-[calc(100%-1rem)] rounded-md bg-background/95 px-2 py-1 text-[11px] font-medium leading-tight text-foreground shadow-sm">
+        {showArea && <span data-testid="hotel-area-label" className="absolute bottom-2 left-2 max-w-[calc(100%-1rem)] rounded-md bg-background/95 px-2 py-1 text-[11px] font-medium leading-tight text-foreground shadow-sm">
           {area.shortName}
         </span>}
       </div>
