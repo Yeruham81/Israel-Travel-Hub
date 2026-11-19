@@ -69,7 +69,8 @@ describe("hotel and neighborhood guide navigation", () => {
     expect(travelLinks[0]).toHaveAttribute("href", "/travel-blog/how-to-get-from-ben-gurion-airport-to-jerusalem/");
     expect(travelLinks[1]).toHaveAttribute("href", "/travel-blog/jerusalem-to-bethlehem/");
     expect(travelLinks[2]).toHaveAttribute("href", "/travel-blog/jerusalem-to-the-dead-sea/");
-    expect(travelLinks[3]).toHaveAttribute("href", "/travel-blog/day-trips-from-jerusalem/");
+    expect(travelLinks[3]).toHaveAttribute("href", "/travel-blog/getting-around-israel/");
+    expect(travelLinks.map((item) => item.getAttribute("href"))).not.toContain("/travel-blog/day-trips-from-jerusalem/");
   });
 
   it("removes a link to the currently displayed page without repeating it elsewhere", () => {
