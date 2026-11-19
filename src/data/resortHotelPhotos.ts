@@ -10,6 +10,7 @@ import haifaPanorama from "@/assets/haifa/panorama.webp";
 import deadSeaBeach from "@/assets/dead-sea/beach.webp";
 import deadSeaLandscape from "@/assets/dead-sea/landscape.webp";
 import deadSeaSunbeds from "@/assets/dead-sea/sunbeds.webp";
+import deadSeaPool from "@/assets/dead-sea/pool.webp";
 
 const library = (filename: string, alt: string): HotelIllustration => ({
   src: `/images/hotel-cards/${filename}`,
@@ -55,7 +56,7 @@ export const resortHotelPhotos: Record<string, HotelIllustration> = {
   "ds-herods": library("ds-herods.jpg", "Illustrative resort setting on the Dead Sea"),
   "ds-milos": library("ds-milos.jpg", "Illustrative spa hotel image at the Dead Sea"),
   "ds-nevo": library("ds-nevo.jpg", "Illustrative swimming pool and resort scene at the Dead Sea"),
-  "ds-oasis": library("ds-oasis.jpg", "Illustrative view of the Dead Sea area"),
+  "ds-oasis": local(deadSeaPool, "Illustrative resort swimming pool in the Dead Sea hotel district"),
   "ds-leonardo-club": local(deadSeaBeach, "Ein Bokek beach near the Dead Sea hotels"),
   "ds-vert": local(deadSeaLandscape, "Aerial landscape of the southern Dead Sea hotel district"),
   "ds-noga": local(deadSeaSunbeds, "Beach loungers near the Dead Sea resort district"),
