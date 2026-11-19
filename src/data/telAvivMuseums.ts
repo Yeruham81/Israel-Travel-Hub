@@ -129,13 +129,13 @@ export const museums: MuseumEntry[] = [
     url: "https://www.gutmanmuseum.co.il/en/useful-info/",
   },
   {
-    id: "etzel-1948", name: "Etzel Museum – 1948", area: "south", neighbourhood: "Charles Clore Park / Jaffa seafront", address: "Charles Clore Park, Tel Aviv-Yafo",
+    id: "etzel-1948", name: "Etzel Museum – 1948", area: "south", neighbourhood: "Charles Clore Park / Jaffa seafront", address: "2 Nahum Goldmann Street, Charles Clore Park, Tel Aviv-Yafo",
     theme: "Military history", bestFor: "1948 history & heritage", duration: "45–75 minutes",
     admission: "Confirm with the Ministry of Defense", booking: "Verify public visiting sessions",
     intro: "This waterfront site focuses on the Etzel underground organisation and the 1948 fighting in the Jaffa area. It is distinct from the Etzel Museum in the Jabotinsky House on King George Street.",
     highlights: ["History of the 1948 Jaffa campaign", "Seafront historic setting", "Separate Ministry of Defense museum"],
     tip: "Do not confuse this museum with the Etzel Museum at 38 King George Street. Check visitor entry and English information with the operator before setting out.",
-    url: "https://mod.gov.il/en/legacy/national-defense-museums",
+    url: "https://museums.mod.gov.il/sites/Tashach/Events/Pages/default.aspx",
   },
   {
     id: "ilana", name: "Ilana Goor Museum", area: "jaffa", neighbourhood: "Old Jaffa", address: "4 Mazal Dagim Street, Old Jaffa",
