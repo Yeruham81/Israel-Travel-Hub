@@ -77,9 +77,9 @@ describe("Accommodation booking hub",()=>{
   expect(upcomingAreaCard.querySelector("a")).toBeNull();
   expect(container.querySelectorAll('a[href^="/travel-blog/where-to-stay"], a[href^="/travel-blog/best-hotels"], a[href^="/travel-blog/best-dead-sea"]')).toHaveLength(5);
   expect(areaGuides).toHaveTextContent("Not sure where to base yourself?");
-  expect(areaGuides).toHaveTextContent("popular neighborhoods and hotel areas");
-  expect(areaGuides).toHaveTextContent("practical tips before booking");
-  expect(areaGuides).toHaveTextContent("recommended places to stay");
+  expect(areaGuides).toHaveTextContent("most popular neighborhoods and best areas to stay in Israel");
+  expect(areaGuides).toHaveTextContent("practical tips");
+  expect(areaGuides).toHaveTextContent("handpicked hotel recommendations");
   expect(areaGuides.querySelectorAll("img")).toHaveLength(0);
  });
  it("shows hotel styles that lead to the actual area or category catalogues",()=>{
