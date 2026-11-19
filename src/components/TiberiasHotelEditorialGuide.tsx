@@ -258,7 +258,7 @@ export function TiberiasHotelEditorialGuide({ guide }: { guide: HotelStayDestina
         <h2 id="compare-h" className="text-3xl">Tiberias hotels at a glance</h2>
         <p className="mt-3 leading-relaxed text-muted-foreground">These ten options cover different ways to stay in Tiberias. Select a hotel name to jump straight to its description and booking link.</p>
         <div className="mt-5 overflow-x-auto rounded-2xl border bg-card" role="region" tabIndex={0} aria-label="Compare 10 Tiberias hotel recommendations">
-          <table className="w-full min-w-[700px] text-left text-sm" data-testid="deadsea-hotel-comparison">
+          <table className="w-full min-w-[700px] text-left text-sm" data-testid="tiberias-hotel-comparison">
             <caption className="sr-only">Recommended Tiberias hotels, main appeal, location and lake access</caption>
             <thead className="bg-secondary"><tr>
               <th scope="col" className="px-4 py-3 font-semibold">Hotel</th>
@@ -270,7 +270,7 @@ export function TiberiasHotelEditorialGuide({ guide }: { guide: HotelStayDestina
               {allHotelIds.map(id => {
                 const hotel = resortHotel(id);
                 const note = tiberiasHotelNotes[id];
-                return <tr key={id} data-testid="deadsea-comparison-row">
+                return <tr key={id} data-testid="tiberias-comparison-row">
                   <th scope="row" className="min-w-44 px-4 py-4 align-top"><a href={"#hotel-" + id} className="font-semibold text-primary underline underline-offset-2">{hotel.name}</a></th>
                   <td className="px-4 py-4 align-top leading-relaxed">{note?.bestFor ?? hotel.bestFor}</td>
                   <td className="px-4 py-4 align-top leading-relaxed text-muted-foreground">{hotel.resortFacts.location}</td>
