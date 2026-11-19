@@ -75,7 +75,7 @@ export const stayGuideGroups: Record<Region, GuideGroups> = {
       card("Ben Gurion Airport to Jerusalem", "/travel-blog/how-to-get-from-ben-gurion-airport-to-jerusalem/", "Compare train, bus, taxi and transfer arrangements.", airportHall, "Ben Gurion Airport terminal"),
       card("Jerusalem to Bethlehem", "/travel-blog/jerusalem-to-bethlehem/", "Plan a practical journey to Bethlehem from the city.", bethlehemTravel, "Road and buildings on the way to Bethlehem"),
       card("Jerusalem to the Dead Sea", "/travel-blog/jerusalem-to-the-dead-sea/", "Compare routes for a desert and Dead Sea excursion.", deadSeaTravel, "Road through the Judean Desert"),
-      card("Day trips from Jerusalem", "/travel-blog/day-trips-from-jerusalem/", "Compare destinations you can visit without changing hotels.", roadTrip, "Scenic road trip in Israel"),
+      card("Getting around Israel", "/travel-blog/getting-around-israel/", "Compare trains, buses, light rail and taxis for journeys beyond Jerusalem.", jerusalemLightRail, "Jerusalem light-rail train"),
       card("Airport travel on Shabbat", "/travel-blog/from-ben-gurion-airport-on-shabbat/", "Understand arrivals when regular public transport is limited.", airportTransfers, "Ben Gurion Airport terminal and aircraft"),
       card("Visiting Masada", "/attractions/masada/", "Plan the fortress and cable car for an early desert visit.", masadaCable, "Cable car travelling toward Masada"),
     ],
@@ -172,11 +172,7 @@ export function StayTripLinks({
     return true;
   };
   const local = set.local.filter(keep);
-  const onwardCandidates = isEditorial && region === "jerusalem"
-    ? [...set.onward.slice(0, -1), card("Getting around Israel", "/travel-blog/getting-around-israel/",
-        "Compare trains, buses, light rail and taxis from your Jerusalem base.", jerusalemLightRail, "Jerusalem light-rail train")]
-    : set.onward;
-  const onward = onwardCandidates.filter(keep);
+  const onward = set.onward.filter(keep);
   const renderCards = (items: GuideCard[], grid: string, testId: string): ReactNode => (
     <ul className={`mt-5 grid gap-4 ${grid}`} data-testid={testId}>
       {items.map((item) => <li key={item.to} className="min-w-0">
