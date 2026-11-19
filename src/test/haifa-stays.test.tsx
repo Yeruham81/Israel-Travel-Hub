@@ -58,9 +58,9 @@ describe("Haifa accommodation: location and travel intent before booking", () =>
     expect(cards).toHaveLength(2);
     for (const guide of categories) expect(cards.find((card) => card.getAttribute("href") === guide.path)!.querySelector("img")).toHaveAttribute("src", guide.photo.src);
     const map = new URL(container.querySelector("#location iframe")!.getAttribute("src")!, "https://example.test");
-    expect(map.pathname).toBe("/maps/area.html");
-    expect(map.searchParams.get("lang")).toBe("en");
-    expect(map.searchParams.get("marker")).toBe(`${destination.map.lat},${destination.map.lon}`);
+    expect(map.hostname).toBe("maps.google.com");
+    expect(map.searchParams.get("q")).toBe(`${destination.map.lat},${destination.map.lon}`);
+    expect(map.searchParams.get("output")).toBe("embed");
     expect(container.querySelector("#location")!.compareDocumentPosition(container.querySelector("#book")!)).toBe(Node.DOCUMENT_POSITION_FOLLOWING);
     expect(container.querySelector('#explore a[href="/shore-excursions/haifa/"]')).toBeInTheDocument();
     expect(container.querySelectorAll("main")).toHaveLength(1);
