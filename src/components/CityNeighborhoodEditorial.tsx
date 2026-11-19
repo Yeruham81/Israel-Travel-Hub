@@ -105,6 +105,29 @@ const jerusalemPractical: Record<string, { consider: string; gettingAround: stri
   },
 };
 
+/** Tailored comparisons and arrival guidance for each of the eight Tel Aviv areas. */
+const telAvivNoteDesign: Record<string, { insightTitle: string; arrivalTitle: string; InsightIcon: LucideIcon; ArrivalIcon: LucideIcon }> = {
+  "telaviv-beachfront": { insightTitle: "Beach access & room views", arrivalTitle: "Finding the hotel entrance", InsightIcon: Eye, ArrivalIcon: MapPin },
+  "telaviv-dizengoff": { insightTitle: "Near the square or farther north?", arrivalTitle: "From the airport and stations", InsightIcon: Footprints, ArrivalIcon: Route },
+  "telaviv-old-north": { insightTitle: "Quiet streets or the port?", arrivalTitle: "A northern Tel Aviv arrival", InsightIcon: Volume2, ArrivalIcon: MapPin },
+  "telaviv-neve-tzedek": { insightTitle: "Historic lanes or main roads?", arrivalTitle: "Arriving among narrow streets", InsightIcon: House, ArrivalIcon: Footprints },
+  "telaviv-jaffa": { insightTitle: "Old Jaffa or the flea market?", arrivalTitle: "Hills, steps & luggage", InsightIcon: Footprints, ArrivalIcon: MapPin },
+  "telaviv-florentin": { insightTitle: "Nightlife & room noise", arrivalTitle: "Apartment entry arrangements", InsightIcon: Volume2, ArrivalIcon: MapPin },
+  "telaviv-kerem": { insightTitle: "Market edge or inner streets?", arrivalTitle: "Walking in with luggage", InsightIcon: Volume2, ArrivalIcon: Footprints },
+  "telaviv-rothschild": { insightTitle: "Which end of the boulevard?", arrivalTitle: "Checking your actual address", InsightIcon: Route, ArrivalIcon: MapPin },
+};
+
+const telAvivBookingTips = [
+  { title: "Measure the walk to the beach", text: "Check the hotel's street address and the route to the beach you expect to use." },
+  { title: "Book the right view", text: "A hotel near the seafront does not guarantee a sea-view room; check the exact room category." },
+  { title: "Look at street and bar noise", text: "For Florentin, Rothschild and market streets, check which way your room faces." },
+  { title: "Check steps and lifts", text: "Converted buildings in Neve Tzedek and Jaffa may have stairs or restricted vehicle access." },
+  { title: "Plan your arrival", text: "Check the last connection from the airport or station and Friday-evening or Saturday service." },
+  { title: "Confirm parking", text: "Parking is often limited and costly in central Tel Aviv; ask about the actual garage or space." },
+  { title: "Review apartment check-in", text: "For self-check-in accommodation, save the entry instructions and an emergency contact." },
+  { title: "Read the booking terms", text: "Compare the final total, occupancy, included taxes and cancellation rules before paying." },
+] as const;
+
 /** Use the Accommodation page's titled, two-column booking checklist treatment. */
 const jerusalemBookingTips = [
   { title: "Check the walking route", text: "Plan the walk to your preferred Old City gate, including hills and steps." },
@@ -157,19 +180,35 @@ function JerusalemPracticalNotes({ areaId }: { areaId: string }) {
   </div>;
 }
 
-function AreaComparison({ areaId }: { areaId: string }) {
+function TelAvivPracticalNotes({ areaId }: { areaId: string }) {
   const note = areaDecisionNotes[areaId];
-  if (!note) return null;
-  return <aside className="mt-5 grid gap-3 rounded-xl border bg-secondary/25 p-4 text-sm leading-relaxed sm:grid-cols-2 sm:p-5">
-    <div>
-      <h4 className="font-semibold">{note.heading}</h4>
-      <p className="mt-2 text-muted-foreground">{note.compare}</p>
+  const presentation = telAvivNoteDesign[areaId];
+  if (!note || !presentation) return null;
+  const { InsightIcon, ArrivalIcon } = presentation;
+  return <div className="mt-6 grid gap-4 sm:grid-cols-2" data-testid="telaviv-practical-notes">
+    <aside className="rounded-2xl border border-primary/20 border-l-4 border-l-primary bg-secondary/40 p-4 shadow-sm sm:p-5">
+      <div className="flex items-start gap-3">
+        <span className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-primary/10 text-primary">
+          <InsightIcon className="h-5 w-5" aria-hidden />
+        </span>
+        <div className="min-w-0">
+          <h4 className="font-semibold leading-snug">{presentation.insightTitle}</h4>
+          <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{note.compare}</p>
+        </div>
+      </div>
+    </aside>
+    <div className="rounded-2xl border border-sky-200/80 bg-sky-50/70 p-4 shadow-sm dark:border-sky-700/35 dark:bg-sky-950/25 sm:p-5">
+      <div className="flex items-start gap-3">
+        <span className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-sky-100 text-sky-800 dark:bg-sky-900/45 dark:text-sky-300">
+          <ArrivalIcon className="h-5 w-5" aria-hidden />
+        </span>
+        <div className="min-w-0">
+          <h4 className="font-semibold leading-snug">{presentation.arrivalTitle}</h4>
+          <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{note.arrival}</p>
+        </div>
+      </div>
     </div>
-    <div>
-      <h4 className="font-semibold">Before arriving</h4>
-      <p className="mt-2 text-muted-foreground">{note.arrival}</p>
-    </div>
-  </aside>;
+  </div>;
 }
 
 export function CityNeighborhoodEditorial({ guide }: { guide: CityStayGuide }) {
