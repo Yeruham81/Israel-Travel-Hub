@@ -11,6 +11,7 @@ import { guideContactCopy } from "@/lib/guide-contact";
 import { hotelBooking, resortHotel } from "@/components/StayGuideParts";
 import { resortHotelPhoto } from "@/data/resortHotelPhotos";
 import { hotelAffiliateUrl, hotelBrowseAffiliateUrl } from "@/lib/hotel-affiliate";
+import { hotelGoogleMapsUrl } from "@/lib/hotel-google-maps";
 import { recordOutboundClick, relFor } from "@/lib/outbound";
 import tiberiasLuxuryPhoto from "@/assets/tiberias/sunrise.webp";
 import tiberiasCentralPhoto from "@/assets/travel-blog-hub/waterfront-441b1003dd-420.webp";
@@ -165,7 +166,20 @@ const groupPlanningTips: Record<string, { title: string; points: readonly [strin
   },
 };
 
-const sourceIntro = "Official hotel information and regional travel resources for planning your Tiberias stay.";
+const hotelFacilityNotices: Record<string, string> = {
+  "tib-galei-kinneret": "The private beach closed on October 4, 2026 for the season. It is expected to reopen for the next swimming season.",
+  "tib-scots": "The seasonal outdoor pool is closed from November 1, 2026 to April 1, 2027.",
+  "tib-leonardo-club": "The water slides are closed for the winter season. The hotel currently advertises full board instead of all-inclusive.",
+};
+
+const browseLabels: Record<string, string> = {
+  luxury: "Browse more luxury hotels",
+  family: "Browse more family hotels",
+  central: "Browse more hotels in central Tiberias",
+  budget: "Browse more budget-friendly stays",
+};
+
+const sourceIntro = "Hotel websites and regional travel resources.";
 
 function HotelCard({ id, pageId }: { id: string; pageId: string }) {
   const hotel = resortHotel(id);
@@ -186,10 +200,24 @@ function HotelCard({ id, pageId }: { id: string; pageId: string }) {
       <p className="mt-2 flex items-start gap-1.5 text-xs text-muted-foreground">
         <MapPin className="mt-0.5 h-3.5 w-3.5 shrink-0 text-primary" aria-hidden /> {hotel.resortFacts.location}
       </p>
+      <a
+        href={hotelGoogleMapsUrl(hotel)}
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label={"View location of " + hotel.name + " on Google Maps (opens in a new tab)"}
+        className="mt-1.5 inline-flex w-fit items-center gap-1.5 text-xs font-medium text-primary underline underline-offset-2 hover:text-primary/80"
+        data-testid="tiberias-hotel-map-link"
+      >
+        View location on Google Maps <ArrowUpRight className="h-3.5 w-3.5" aria-hidden />
+      </a>
       <p className="mt-3 text-sm leading-relaxed">{info.summary}</p>
       <p className="mt-3 text-sm leading-relaxed"><strong>Best for:</strong> {info.bestFor}</p>
       <p className="mt-2 text-sm leading-relaxed text-muted-foreground"><strong className="text-foreground">Lake access:</strong> {info.beach}</p>
       <p className="mt-2 text-sm leading-relaxed text-muted-foreground"><strong className="text-foreground">Keep in mind:</strong> {info.consider}</p>
+      {hotelFacilityNotices[id] && <p className="mt-3 flex items-start gap-2 rounded-lg border border-amber-200 bg-amber-50/80 p-3 text-xs leading-relaxed text-foreground dark:border-amber-900/60 dark:bg-amber-950/20" data-testid="tiberias-hotel-facility-notice">
+        <Lightbulb className="mt-0.5 h-4 w-4 shrink-0 text-amber-700 dark:text-amber-300" aria-hidden />
+        <span>{hotelFacilityNotices[id]}</span>
+      </p>}
       {booking ? <a
         href={hotelAffiliateUrl(booking, pageId, hotel.id)}
         target="_blank"
@@ -256,7 +284,7 @@ export function TiberiasHotelEditorialGuide({ guide }: { guide: HotelStayDestina
 
       <section id="compare" className="mt-14 scroll-mt-32" aria-labelledby="compare-h">
         <h2 id="compare-h" className="text-3xl">Tiberias hotels at a glance</h2>
-        <p className="mt-3 leading-relaxed text-muted-foreground">These ten options cover different ways to stay in Tiberias. Select a hotel name to jump straight to its description and booking link.</p>
+        <p className="mt-3 leading-relaxed text-muted-foreground">Compare ten Tiberias hotels by lakeside setting, neighborhood, facilities and access to the Sea of Galilee.</p>
         <div className="mt-5 overflow-x-auto rounded-2xl border bg-card" role="region" tabIndex={0} aria-label="Compare 10 Tiberias hotel recommendations">
           <table className="w-full min-w-[700px] text-left text-sm" data-testid="tiberias-hotel-comparison">
             <caption className="sr-only">Recommended Tiberias hotels, main appeal, location and lake access</caption>
@@ -316,7 +344,7 @@ export function TiberiasHotelEditorialGuide({ guide }: { guide: HotelStayDestina
                   onClick={() => recordOutboundClick({ pageId, productId: categoryBrowse.id, offerId: categoryBrowse.id })}
                   className="inline-flex min-h-11 items-center justify-center gap-2 rounded-lg bg-primary px-5 py-2.5 text-center text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary/90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
                   data-testid="tiberias-category-browse-link">
-                  Browse more {group.id + " hotels"} <ArrowUpRight className="h-4 w-4" aria-hidden />
+                  {browseLabels[group.id] ?? `Browse more ${group.id} hotels`} <ArrowUpRight className="h-4 w-4" aria-hidden />
                   <span className="sr-only"> (opens in a new tab)</span>
                 </a>
               </div>}
