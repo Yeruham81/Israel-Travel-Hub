@@ -5,6 +5,7 @@ import { deadSeaStayGuide } from "@/data/content";
 import { linksForPage } from "@/data/registry";
 import { hotelBooking, resortHotel } from "@/components/StayGuideParts";
 import { hotelAffiliateUrl, hotelBrowseAffiliateUrl } from "@/lib/hotel-affiliate";
+import { resortHotelPhoto } from "@/data/resortHotelPhotos";
 
 vi.mock("@tanstack/react-router", () => ({
   Link: ({ to, children, ...props }: { to: string; children: React.ReactNode; [key: string]: unknown }) => <a href={to} {...props}>{children}</a>,
@@ -20,7 +21,7 @@ vi.mock("@/components/StayTripLinks", () => ({
     <section data-testid="related-guides" data-region={region} data-presentation={presentation} data-current={currentPath} />,
 }));
 vi.mock("@/components/HomeContactForm", () => ({
-  HomeContactForm: () => <form aria-label="Standard contact form" />,
+  HomeContactForm: ({ guide }: { guide: { heading: string; introduction: string; placeholder: string } }) => <form aria-label="Standard contact form" data-heading={guide.heading} data-intro={guide.introduction} data-placeholder={guide.placeholder} />,
 }));
 
 afterEach(cleanup);
@@ -31,10 +32,14 @@ describe("Dead Sea category-first travel-blog hotel guide", () => {
     expect(screen.getByRole("heading", { level: 1, name: "Best Dead Sea hotels: where to stay" })).toBeInTheDocument();
     const categories = screen.getAllByTestId("deadsea-category-card");
     expect(categories).toHaveLength(4);
+    expect(screen.getByTestId("deadsea-category-grid")).toHaveClass("grid-cols-2", "lg:grid-cols-4");
     expect(categories.map(a => a.getAttribute("href"))).toEqual(["#group-luxury", "#group-spa", "#group-family", "#group-value"]);
     expect(categories.every(a => a.querySelector("img")?.getAttribute("src"))).toBe(true);
     expect(screen.getByTestId("deadsea-ein-gedi-spotlight")).toHaveAttribute("href", "#group-ein-gedi");
     expect(screen.getAllByTestId("deadsea-hotel-group")).toHaveLength(5);
+    for (const group of screen.getAllByTestId("deadsea-hotel-group")) {
+      expect(within(group).getByTestId("deadsea-hotel-grid")).toHaveClass("sm:grid-cols-2", "lg:grid-cols-3");
+    }
     const expectedIds = deadSeaStayGuide.groups.flatMap(group => group.hotelIds);
     expect(expectedIds).toHaveLength(11);
     expect(new Set(expectedIds).size).toBe(11);
@@ -46,6 +51,15 @@ describe("Dead Sea category-first travel-blog hotel guide", () => {
       expect(container.querySelector('a[href="#hotel-' + id + '"]')).toHaveTextContent(resortHotel(id).name);
     }
     expect(container.querySelectorAll('#location iframe')).toHaveLength(1);
+    expect(container.querySelector("#location iframe")).toHaveAttribute("src", expect.stringMatching(/^https:\/\/maps\.google\.com\/maps\?.*z=9/));
+    expect(container).not.toHaveTextContent("Scroll the comparison sideways");
+    expect(container).not.toHaveTextContent("Wellness without assuming adults-only");
+    expect(container).not.toHaveTextContent("Compare the package, not a fixed price tier");
+    expect(container).not.toHaveTextContent("Nature first, not a beachfront resort");
+    const oasisPhoto = container.querySelector<HTMLImageElement>("#hotel-ds-oasis img");
+    expect(oasisPhoto).toHaveAttribute("src", resortHotelPhoto("ds-oasis").src);
+    expect(oasisPhoto).not.toHaveAttribute("src", "/images/hotel-cards/ds-oasis.jpg");
+    expect(new Set(cards.map(card => card.querySelector("img")?.getAttribute("src"))).size).toBe(11);
     expect(screen.getAllByRole("listitem").filter(node => node.closest('#tips') !== null)).toHaveLength(8);
     expect(container).toHaveTextContent("Separate hotel and spa age rules");
     expect(container).toHaveTextContent("entry from 16");
@@ -74,7 +88,11 @@ describe("Dead Sea category-first travel-blog hotel guide", () => {
       const key = group.browsePageId ?? ("stay-deadsea-" + group.id + "-browse");
       const booking = linksForPage(key)[0]!;
       const section = container.querySelector("#group-" + group.id)!;
-      expect(within(section as HTMLElement).getByRole("link", { name: /Browse more .* hotels|Browse more Ein Gedi stays/ })).toHaveAttribute("href", hotelBrowseAffiliateUrl(booking, pageId));
+      const browse = within(section as HTMLElement).getByTestId("deadsea-category-browse-link");
+      expect(browse).toHaveAttribute("href", hotelBrowseAffiliateUrl(booking, pageId));
+      expect(browse).toHaveClass("bg-primary", "text-primary-foreground");
+      expect(browse.parentElement).toHaveClass("justify-center");
+      expect(section.querySelector(`a[href="${group.guidePath}"]`)).toBeNull();
     }
     const overallLink = linksForPage("stay-deadsea-browse")[0]!;
     expect(screen.getByRole("link", { name: /Browse more Dead Sea hotels/ })).toHaveAttribute("href", hotelBrowseAffiliateUrl(overallLink, pageId));
@@ -88,7 +106,10 @@ describe("Dead Sea category-first travel-blog hotel guide", () => {
     expect(screen.getByTestId("related-guides")).toHaveAttribute("data-region", "deadsea");
     expect(screen.getByTestId("related-guides")).toHaveAttribute("data-presentation", "guide");
     expect(screen.getByTestId("related-guides")).toHaveAttribute("data-current", "/travel-blog/best-dead-sea-hotels/");
-    expect(screen.getByRole("form", { name: "Standard contact form" })).toBeInTheDocument();
+    const form = screen.getByRole("form", { name: "Standard contact form" });
+    expect(form).toHaveAttribute("data-heading", "Planning a Dead Sea Vacation?");
+    expect(form).toHaveAttribute("data-intro", expect.stringContaining("private transfer to your hotel in Ein Bokek"));
+    expect(form).toHaveAttribute("data-placeholder", expect.stringContaining("Pickup location, Ein Bokek hotel"));
     const sourceList = screen.getByTestId("deadsea-sources");
     const sources = sourceList.getAttribute("data-ids")!.split(",");
     const hotels = deadSeaStayGuide.groups.flatMap(group => group.hotelIds);
