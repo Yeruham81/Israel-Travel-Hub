@@ -141,7 +141,7 @@ function AccommodationHub() {
       <section id="where-to-stay-guides" aria-labelledby="where-to-stay-guides-h" className="mt-10 scroll-mt-24" data-testid="accommodation-area-guides">
         <h2 id="where-to-stay-guides-h" className="text-2xl font-semibold">Not sure where to base yourself?</h2>
         <p className="mt-2 max-w-3xl text-sm leading-relaxed text-muted-foreground">
-          Explore my guides to popular neighborhoods and hotel areas, with practical tips before booking and recommended places to stay.
+          Explore my guides to the most popular neighborhoods and best areas to stay in Israel, with practical tips and handpicked hotel recommendations.
         </p>
         <ul className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-3" aria-label="Where to stay guides by destination">
           {areaGuideCards.map(guide => {
