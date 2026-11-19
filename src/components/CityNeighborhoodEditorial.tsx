@@ -5,7 +5,7 @@ import { StayTripLinks } from "@/components/StayTripLinks";
 import { AreaMap } from "@/components/AreaMap";
 import { JerusalemEditorialHotels } from "@/components/JerusalemEditorialHotels";
 import { HomeContactForm } from "@/components/HomeContactForm";
-import { accommodationEditorial } from "@/data/accommodationEditorial";
+import { accommodationEditorial, jerusalemStaySourceIds } from "@/data/accommodationEditorial";
 import { neighborhoodGuidesForCity, type CityStayGuide } from "@/data/content";
 import { areaDecisionNotes } from "@/data/localEditorialInsights";
 import { INFO_CHECK_DATE } from "@/data/registry";
@@ -16,7 +16,7 @@ import oldCityStoneLane from "@/assets/guides/2026-11/jerusalem-jewish-quarter-s
 import downtownCard from "@/assets/travel-blog-hub/downtown-944eb9d46b-420.webp";
 import oldCityCard from "@/assets/attractions-hub/card-old-city-jerusalem-420.webp";
 import marketCard from "@/assets/travel-blog-hub/mahane-yehuda-c53a05ac52-420.webp";
-import eastJerusalemCard from "@/assets/jerusalem/old-city.webp";
+import eastJerusalemCard from "@/assets/jerusalem/east-jerusalem-house.webp";
 import colonyCard from "@/assets/travel-blog-hub/colony-35429f7d31-420.webp";
 
 /**
@@ -38,7 +38,7 @@ const jerusalemAreaCardPhotos: Record<string, { src: string; alt: string }> = {
   mamilla: { src: "/images/attractions/old-jerusalem-tower-of-david.webp", alt: "Tower of David beside Jerusalem's Jaffa Gate" },
   "old-city": { src: oldCityCard, alt: "Jerusalem's Old City and historic stone architecture" },
   "mahane-yehuda": { src: marketCard, alt: "Mahane Yehuda Market in Jerusalem" },
-  "east-jerusalem": { src: eastJerusalemCard, alt: "Historic Jerusalem buildings close to the Old City" },
+  "east-jerusalem": { src: eastJerusalemCard, alt: "Traditional house in East Jerusalem" },
   "german-colony": { src: colonyCard, alt: "Streets and stone buildings of Jerusalem's German Colony" },
 };
 
@@ -86,7 +86,7 @@ const jerusalemPractical: Record<string, { consider: string; gettingAround: stri
     gettingAround: "Jaffa Gate is roughly 20–30 minutes on foot from much of this area. Alternatively, take the light rail toward City Hall when it is operating, then walk. Parking and pickup beside the market can be awkward.",
   },
   "east-jerusalem": {
-    consider: "Hotels close to Damascus Gate and those farther north around the American Colony have different walking distances. An 'East Jerusalem' listing can refer to a much wider area.",
+    consider: "Hotels near Damascus Gate and those around the American Colony offer different settings. If western Downtown restaurants and Mahane Yehuda nightlife are your priority, choose a base farther west.",
     gettingAround: "Hotels beside the northern Old City walls may be a short walk from Damascus Gate, while properties near the American Colony are farther away. Use the precise address for arrival and check the most useful gate for your itinerary.",
   },
   "german-colony": {
@@ -260,7 +260,7 @@ export function CityNeighborhoodEditorial({ guide }: { guide: CityStayGuide }) {
               </div>
               <div className={cityId === "jerusalem" ? "flex min-w-0 flex-col" : "min-w-0"} data-testid={cityId === "jerusalem" ? "jerusalem-area-media" : undefined}>
                 <figure className="overflow-hidden rounded-xl border bg-secondary/20">
-                  <img src={photo.src} alt={photo.alt} width={755} height={503} loading="lazy" decoding="async" className="aspect-[16/10] w-full object-cover" />
+                  <img src={photo.src} alt={cityId === "jerusalem" ? "" : photo.alt} width={755} height={503} loading="lazy" decoding="async" className="aspect-[16/10] w-full object-cover" />
                   <figcaption className="px-3 py-2 text-xs leading-relaxed text-muted-foreground">{photo.alt}</figcaption>
                 </figure>
                 <div className={cityId === "jerusalem" ? "mt-6 min-h-0 flex-1" : "mt-3"} data-testid={cityId === "jerusalem" ? "jerusalem-area-map" : undefined}>
@@ -302,10 +302,14 @@ export function CityNeighborhoodEditorial({ guide }: { guide: CityStayGuide }) {
               {guide.checklist.map((tip) => <li key={tip} className="flex gap-3 rounded-xl border bg-secondary/25 p-4 text-sm leading-relaxed"><span aria-hidden className="font-bold text-primary">✓</span>{tip}</li>)}
             </ul>}        <aside className="mt-6 flex gap-3 rounded-xl border border-amber-200 bg-amber-50/80 p-4 text-sm leading-relaxed dark:border-amber-900/50 dark:bg-amber-950/20">
           <Lightbulb className="mt-0.5 h-5 w-5 shrink-0 text-amber-600" aria-hidden />
-          <p>{choices.check} See my <Link to="/travel-blog/calendar-of-events/" className="font-semibold text-primary underline underline-offset-2">Israel calendar of events</Link> for public holidays and special dates that can affect your plans.</p>
+          <p>{cityId === "jerusalem"
+            ? <>Check my <Link to="/travel-blog/calendar-of-events/" className="font-semibold text-primary underline underline-offset-2">Israel calendar of events</Link> for holiday dates that may affect local services during your stay.</>
+            : <>{choices.check} See my <Link to="/travel-blog/calendar-of-events/" className="font-semibold text-primary underline underline-offset-2">Israel calendar of events</Link> for public holidays and special dates that can affect your plans.</>}</p>
         </aside>
         <p className="mt-5 text-sm leading-relaxed text-muted-foreground">
-          Accommodation and reservations are provided by independent hotels and external booking websites. Check the exact property address, room type, total price and cancellation terms with the provider before booking.
+          {cityId === "jerusalem"
+            ? "Hotels and booking websites are independent providers. Review all booking details carefully before confirming."
+            : "Accommodation and reservations are provided by independent hotels and external booking websites. Check the exact property address, room type, total price and cancellation terms with the provider before booking."}
         </p>
       </section>
 
@@ -321,7 +325,7 @@ export function CityNeighborhoodEditorial({ guide }: { guide: CityStayGuide }) {
             introduction: "Not sure which part of Jerusalem would suit your plans? Tell me your travel dates, main interests and how you expect to arrive. I'll be happy to share practical advice." }
         : guideContactCopy(info.title, "accommodation", cityName)} />
       <SourceList
-        ids={cityId === "jerusalem" ? [...guide.sourceIds, "israel-rail", "jerusalem-light-rail-updates", "jerusalem-emek-refaim-works"] : guide.sourceIds}
+        ids={cityId === "jerusalem" ? [...guide.sourceIds, ...jerusalemStaySourceIds] : guide.sourceIds}
         {...(cityId === "jerusalem" ? { intro: "Transport and access information for planning your stay." } : {})}
       />
     </article>

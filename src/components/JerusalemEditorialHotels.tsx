@@ -117,6 +117,7 @@ export function JerusalemEditorialHotels({ area }: { area: NeighborhoodStayGuide
         return <li key={hotel.id} className="min-w-0" data-testid="jerusalem-editorial-hotel-card">
           {booking ? <a
             href={hotelAffiliateUrl(booking, pageId, hotel.id)}
+            aria-label={`Check rooms and rates for ${hotel.name} on Expedia (opens in a new tab)`}
             target="_blank"
             rel={relFor(booking.isAffiliate)}
             onClick={() => recordOutboundClick({ pageId, productId: hotel.id, offerId: booking.id })}
@@ -124,6 +125,7 @@ export function JerusalemEditorialHotels({ area }: { area: NeighborhoodStayGuide
             data-testid="jerusalem-editorial-hotel-link"
           >{cardContent}</a> : <Link
             to={area.path as LinkProps["to"]}
+            aria-label={`Explore hotels in ${area.shortName}, including ${hotel.name}`}
             className="group flex h-full min-w-0 flex-col rounded-xl border bg-card p-3 shadow-sm transition-all hover:border-primary/60 hover:shadow-md focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary sm:p-4"
             data-testid="jerusalem-editorial-hotel-link"
           >{cardContent}</Link>}

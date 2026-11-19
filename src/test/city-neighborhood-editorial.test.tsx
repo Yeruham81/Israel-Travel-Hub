@@ -1,6 +1,9 @@
 import { cleanup, render, screen, within } from "@testing-library/react";
 import { afterEach, describe, expect, it, vi } from "vitest";
 import { cityStayGuides, neighborhoodGuidesForCity } from "@/data/content";
+import { jerusalemStaySourceIds } from "@/data/accommodationEditorial";
+import { publicSources } from "@/data/registry";
+import { hotelEditorialMeta } from "@/lib/hotel-editorial-meta";
 import { hotelsForArea, linksForPage } from "@/data/registry";
 import { hotelAffiliateUrl } from "@/lib/hotel-affiliate";
 import { CityNeighborhoodEditorial } from "@/components/CityNeighborhoodEditorial";
@@ -51,12 +54,18 @@ describe("Jerusalem and Tel Aviv neighbourhood editorial guides", () => {
       const navigation = screen.getByTestId("jerusalem-area-image-grid");
       expect(within(navigation).getAllByRole("link")).toHaveLength(6);
       expect(within(navigation).getAllByRole("img")).toHaveLength(6);
+      const eastJerusalemCard = navigation.querySelector('a[href="#area-east-jerusalem"] img');
+      expect(eastJerusalemCard).toHaveAttribute("src", expect.stringContaining("east-jerusalem-house"));
+      expect(container.querySelector('img[src*="old-city-BJwjTGND"]')).toBeNull();
       expect(container.querySelector("#compare")).toBeNull();
       expect(within(container.querySelector("#choose")!).getByText(/Jerusalem is hilly/)).toBeInTheDocument();
       expect(container.querySelectorAll('[data-testid="jerusalem-area-highlights"]')).toHaveLength(6);
       expect(container.querySelectorAll('[data-testid="jerusalem-editorial-hotel-picks"]')).toHaveLength(6);
       expect(container.querySelectorAll('[data-testid="jerusalem-editorial-hotel-card"]')).toHaveLength(12);
       expect(container.querySelectorAll('[data-testid="jerusalem-editorial-hotel-link"]')).toHaveLength(12);
+      for (const link of container.querySelectorAll('[data-testid="jerusalem-editorial-hotel-link"]')) {
+        expect(link.getAttribute("aria-label")).toMatch(/^Check rooms and rates for .+ on Expedia \(opens in a new tab\)$/);
+      }
       const hotelGrids = container.querySelectorAll('[data-testid="jerusalem-editorial-hotel-grid"]');
       expect(hotelGrids).toHaveLength(6);
       for (const grid of hotelGrids) {
@@ -110,8 +119,16 @@ describe("Jerusalem and Tel Aviv neighbourhood editorial guides", () => {
       }
       expect(container).not.toHaveTextContent("The maps show the general location of each area");
       expect(container).not.toHaveTextContent("Photos illustrate the surrounding neighbourhoods, not the hotels themselves");
+      expect(container).toHaveTextContent("Hotels and booking websites are independent providers.");
+      expect(container).not.toHaveTextContent("Check the exact property address, room type, total price and cancellation terms with the provider before booking.");
+      expect(container).toHaveTextContent("If western Downtown restaurants and Mahane Yehuda nightlife are your priority");
+      expect(container).toHaveTextContent("holiday dates that may affect local services");
       const layouts = container.querySelectorAll('[data-testid="jerusalem-area-layout"]');
       expect(layouts).toHaveLength(6);
+      for (const section of sections) {
+        expect(section.querySelector("figure img")).toHaveAttribute("alt", "");
+        expect(section.querySelector("figure figcaption")?.textContent).toBeTruthy();
+      }
       for (const layout of layouts) {
         expect(layout).toHaveClass("items-stretch");
         const textColumn = layout.children[0]!;
@@ -142,5 +159,17 @@ describe("Jerusalem and Tel Aviv neighbourhood editorial guides", () => {
     expect(container).not.toHaveTextContent("Hotel selections are kept separately under Accommodation");
     expect(within(screen.getByTestId("city-neighborhood-editorial")).getByTestId("trip-links-props")).toHaveAttribute("data-presentation", "guide");
     expect(screen.getByRole("form", { name: "Standard contact form" })).toBeInTheDocument();
+  });
+});
+
+describe("Jerusalem accommodation guide structured data", () => {
+  it("uses the same public sources for visible guide citations and Article JSON-LD", () => {
+    const guide = cityStayGuides.jerusalem;
+    const meta = hotelEditorialMeta(guide, "jerusalem", "/example-hero.webp");
+    const article = JSON.parse(meta.scripts[meta.scripts.length - 1]!.children);
+    const expectedSources = publicSources([...guide.sourceIds, ...jerusalemStaySourceIds]).map((source) => source.url);
+    expect(expectedSources.length).toBeGreaterThan(0);
+    expect(article["@type"]).toBe("Article");
+    expect(article.citation).toEqual(expectedSources);
   });
 });

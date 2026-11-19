@@ -21,3 +21,10 @@ export const accommodationEditorial = {
     tip: "Check the exact beach route, meals and transport; a resort in Ein Bokek and a stay in Ein Gedi are very different bases." },
 } as const;
 export type AccommodationEditorialId = keyof typeof accommodationEditorial;
+
+/** Public transport and access sources shared by Jerusalem guide text and Article schema. */
+export const jerusalemStaySourceIds = [
+  "israel-rail",
+  "jerusalem-light-rail-updates",
+  "jerusalem-emek-refaim-works",
+] as const;
