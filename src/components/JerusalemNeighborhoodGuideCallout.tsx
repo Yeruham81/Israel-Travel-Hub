@@ -13,7 +13,7 @@ export function JerusalemNeighborhoodGuideCallout({ id = "area-guide" }: { id?: 
             Not sure where to base yourself in Jerusalem?
           </h2>
           <p className="mt-2 max-w-xl text-sm leading-relaxed text-muted-foreground">
-            A practical look at six Jerusalem neighborhoods, from their atmosphere and walking routes to public transport and sightseeing access.
+            In my guide, I compare six Jerusalem neighborhoods, including their atmosphere, walking routes, public transport and access to major sights.
           </p>
           <Link
             to="/travel-blog/where-to-stay-in-jerusalem/"
