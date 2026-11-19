@@ -18,7 +18,7 @@ vi.mock("@/components/Guide", () => ({
   GuideHeader: ({ title, image }: { title: string; image: { src: string; alt: string } }) => <header><h1>{title}</h1><img src={image.src} alt={image.alt} /></header>,
   OnThisPage: () => <nav aria-label="On this page" />,
   FaqList: ({ faqs }: { faqs: { q: string; a: string }[] }) => <section id="faq" data-faq-count={faqs.length} />,
-  SourceList: ({ ids }: { ids: string[] }) => <section aria-label="Sources" data-testid="sources" data-ids={ids.join(",")} />,
+  SourceList: ({ ids, intro }: { ids: string[]; intro?: string }) => <section aria-label="Sources" data-testid="sources" data-ids={ids.join(",")} data-intro={intro} />,
 }));
 vi.mock("@/components/StayTripLinks", () => ({
   StayTripLinks: ({ region, presentation }: { region: string; presentation: string }) => <section data-testid="trip-links-props" data-region={region} data-presentation={presentation} />,
@@ -48,7 +48,7 @@ describe("Jerusalem and Tel Aviv neighbourhood editorial guides", () => {
       expect(section.querySelector("figure img")).toHaveAttribute("src", cardImage?.getAttribute("src"));
       expect(section.querySelector("figcaption")).toHaveTextContent(cardImage?.getAttribute("alt") || "");
       expect(section).not.toHaveTextContent("neighbourhood view");
-      const button = within(section).getByRole("link", { name: new RegExp(`${region === "jerusalem" ? "Browse more hotels in " : "Explore more hotels in "}${area.shortName}`) });
+      const button = within(section).getByRole("link", { name: new RegExp(`Browse more hotels in ${area.shortName}`) });
       expect(button).toHaveAttribute("href", area.path);
       expect(button).toHaveClass("btn", "btn-primary");
       expect(button.parentElement).toHaveClass("justify-center");
@@ -218,6 +218,9 @@ describe("Jerusalem and Tel Aviv neighbourhood editorial guides", () => {
       expect(container).toHaveTextContent("Hotels and booking websites are independent providers.");
       expect(container.querySelector("#faq")).toHaveAttribute("data-faq-count", "4");
     }
+    expect(screen.getByTestId("sources")).toHaveAttribute("data-intro", region === "jerusalem"
+      ? "Transport and access information for planning your stay."
+      : "Neighbourhood and accommodation information for planning your stay.");
     expect(container).not.toHaveTextContent("Use these short summaries to narrow your options");
     expect(container).not.toHaveTextContent("Hotel selections are kept separately under Accommodation");
     expect(within(screen.getByTestId("city-neighborhood-editorial")).getByTestId("trip-links-props")).toHaveAttribute("data-presentation", "guide");
