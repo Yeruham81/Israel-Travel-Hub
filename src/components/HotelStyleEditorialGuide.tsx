@@ -319,7 +319,7 @@ export function HotelStyleEditorialGuide({ guide }: { guide: HotelStayDestinatio
       <section id="location" className="mt-14 scroll-mt-32" aria-labelledby="location-h">
         <h2 id="location-h" className="text-3xl">Where are the hotels?</h2>
         <p className="mt-3 leading-relaxed">Most resort hotels are concentrated around Ein Bokek and the southern district near Neve Zohar. Ein Gedi is farther north and works better as a base for nature outings. Use the map for orientation, then check the precise hotel address before arranging transport.</p>
-        <div className="mt-5"><AreaMap area={{ name: "Dead Sea hotel region", map: guide.map }} provider="google" googleZoom={10} /></div>
+        <div className="mt-5"><AreaMap area={{ name: "Dead Sea hotel region", map: guide.map }} provider="google" googleZoom={9} /></div>
         <div className="mt-5 grid gap-4 sm:grid-cols-3">
           {guide.locations.map(location => <article key={location.name} className="rounded-xl border bg-card p-4 sm:p-5">
             <MapPin className="h-5 w-5 text-primary" aria-hidden />
