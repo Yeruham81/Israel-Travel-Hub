@@ -1,6 +1,7 @@
 import type { TravelGuide } from "@/data/travelGuides";
 import { migrationPhotos as P } from "@/data/guideMigrationPhotos";
 import { museums as telAvivMuseumEntries, museumAreas as telAvivMuseumAreas } from "@/data/telAvivMuseums";
+import { telAvivBeaches as listedTelAvivBeaches } from "@/data/telAvivBeaches";
 
 export const cityCultureGuides = {
   "eilat": {
@@ -173,212 +174,70 @@ export const cityCultureGuides = {
     ]
   },
   "telAvivBeaches": {
-    "id": "telAvivBeaches",
-    "updatedAt": "2026-10-20",
-    "title": "Tel Aviv beaches: choose your stretch of the coast",
-    "description": "Compare Gordon, Frishman, Hilton, Jerusalem, Aviv, Metzitzim, Tel Baruch, HaTzuk, Alma and Givat Aliya beaches, with supervision and access advice.",
-    "intro": "Tel Aviv–Yafo’s waterfront changes as you walk it: central beaches beside hotels, northern stretches near parks and a southern coast around Jaffa. Most visitors will enjoy choosing one or two areas and spending time there. The right beach depends on your accommodation, swimming plans, facilities and the kind of atmosphere you prefer.",
-    "answer": "For an easy central first visit, compare Gordon, Frishman and Jerusalem beaches. Consider Hilton and Metzitzim farther north, or the Jaffa coast for a different setting. Swim only in designated areas while lifeguards are on duty and follow the current flags; a busy promenade or a familiar beach name is not evidence that swimming is permitted.",
-    "topics": [
-      "attractions",
-      "destinations",
-      "tips"
+    id: "telAvivBeaches",
+    updatedAt: "2026-11-19",
+    title: "The Best Beaches in Tel Aviv",
+    description: "My guide to Tel Aviv's 13 municipal bathing beaches, with practical picks, a map, lifeguards, safety, accessibility, dog areas and getting around.",
+    intro: "From the lively central beaches to quieter northern stretches and the coast around Jaffa, my guide helps you choose where to swim, relax and explore.",
+    answer: "For an easy first visit, choose Gordon or Frishman near the central hotel strip; Metzitzim is a good starting point for families and Charles Clore suits a day around Jaffa. Swim only in marked zones with lifeguards on duty, and check current municipal status.",
+    topics: ["attractions", "destinations", "tips"],
+    photo: P["beaches-in-tel-aviv"],
+    facts: [
+      { label: "13 listed beaches", text: "From North Tzuk to Givat Aliya" },
+      { label: "Central picks", text: "Gordon, Frishman, Bograshov and Jerusalem" },
+      { label: "Plan your swim", text: "Check current lifeguards, flags and access" },
     ],
-    "photo": P["beaches-in-tel-aviv"],
-    "facts": [
-      {
-        "label": "Central choice",
-        "text": "Gordon, Frishman and Jerusalem beaches"
-      },
-      {
-        "label": "Different setting",
-        "text": "Northern beaches or the Jaffa coast"
-      },
-      {
-        "label": "Water access",
-        "text": "Use the posted flags and lifeguard instructions"
-      }
-    ],
-    "comparison": {
-      "caption": "Compare the beach areas",
-      "headers": [
-        "Beach or stretch",
-        "Why consider it",
-        "Planning detail"
-      ],
-      "rows": [
-        [
-          "Gordon",
-          "Central seafront and an active atmosphere",
-          "Allow for a busy urban beach"
-        ],
-        [
-          "Frishman",
-          "Convenient central hotel-area beach",
-          "Check the actual bathing and sport zones"
-        ],
-        [
-          "Hilton",
-          "A well-known social and LGBTQ+ meeting area",
-          "Different stretches serve different activities"
-        ],
-        [
-          "Jerusalem / Geula area",
-          "A central beach-and-city day",
-          "Confirm the beach access point you mean"
-        ],
-        [
-          "Aviv",
-          "Southern central seafront and water-sport setting",
-          "Separate sport areas from bathing areas"
-        ],
-        [
-          "Metzitzim",
-          "Northern seafront near the port",
-          "Check family facilities for your date"
-        ],
-        [
-          "Tel Baruch",
-          "A northern alternative outside the central strip",
-          "Plan the onward and return journey"
-        ],
-        [
-          "HaTzuk",
-          "Farther-north beach setting",
-          "Confirm accessible paths and available assistance"
-        ],
-        [
-          "Alma / Charles Clore",
-          "A promenade and Jaffa-oriented outing",
-          "Use designated supervised swimming areas only"
-        ],
-        [
-          "Givat Aliya",
-          "A southern Jaffa setting",
-          "Check posted facilities, access and animal rules"
-        ]
-      ]
+    comparison: {
+      caption: "Compare Tel Aviv's thirteen municipally listed bathing beaches",
+      headers: ["Beach", "Area", "Best for", "Getting there"],
+      rows: listedTelAvivBeaches.map(beach => [beach.name, beach.area, beach.bestFor, beach.access]),
     },
-    "sections": [
+    sections: [
       {
-        "id": "central",
-        "title": "Central beaches: Gordon, Frishman and Jerusalem",
-        "paragraphs": [
-          "These are useful starting points when you stay near the central beachfront. You can combine time by the sea with a meal or a short walk inland without arranging a separate day trip. Facilities and concessions vary, so check shade, toilets, chair hire and your preferred access point on arrival.",
-          "The names of neighbouring beaches, streets and beach businesses are not always used consistently in casual directions. Save a precise meeting point, especially for a taxi or a group. A hotel described as beachfront may still involve a road crossing or a walk to the bathing area."
+        id: "choose", title: "Which Tel Aviv beach should you choose?",
+        paragraphs: [
+          "For a first visit, I usually suggest Gordon or Frishman. Metzitzim is useful for families near the port, while Hilton is known for its LGBTQ+ social scene and Charles Clore works well with a Jaffa outing.",
         ],
-        "links": [
-          {
-            "label": "Compare beachfront hotel areas",
-            "to": "/accommodation/tel-aviv/beachfront/"
-          }
-        ]
       },
+      ...(["Northern coast", "Central seafront", "Southern coast and Jaffa"] as const).map(area => ({
+        id: area === "Northern coast" ? "north" : area === "Central seafront" ? "centre" : "south",
+        title: area,
+        paragraphs: [listedTelAvivBeaches.filter(beach => beach.area === area).map(beach => beach.name).join(", ") + "."],
+        subsections: listedTelAvivBeaches.filter(beach => beach.area === area).map(beach => ({
+          id: "beach-" + beach.id, title: beach.name, paragraphs: [beach.summary, beach.tip],
+        })),
+      })),
       {
-        "id": "north",
-        "title": "Northern choices: Hilton, Metzitzim, Tel Baruch and HaTzuk",
-        "paragraphs": [
-          "Hilton is well known as an LGBTQ+ social beach area, but different nearby water zones and stretches have different uses. Metzitzim is convenient to the northern promenade and port area. Farther north, Tel Baruch and HaTzuk require more deliberate transport planning from a central hotel.",
-          "Accessibility is specific to a route, facility and service, not a permanent label for an entire beach. Ask about accessible parking, the path across the sand, toilets and any bathing assistance. Nordau, the separate religious beach, has its own gender-specific arrangements; check the municipal information rather than applying those rules to neighbouring beaches."
-        ]
-      },
-      {
-        "id": "south",
-        "title": "Southern stretches: Aviv, Alma and Givat Aliya",
-        "paragraphs": [
-          "Aviv is useful to consider alongside the southern central promenade. Alma and Charles Clore connect naturally with a Jaffa-oriented walk, while Givat Aliya lies farther south. These are different settings, not one continuous area with identical bathing facilities.",
-          "Do not retain old claims that a particular beach always allows dogs, always has a specific sports activity or is automatically suitable for children. Follow the current signs and municipal rules. For a Jaffa day, include the time and slopes between the beach, harbour, old hill and flea market."
+        id: "safety", title: "Swimming, lifeguards and accessibility",
+        paragraphs: [
+          "Visit the municipality's current beach and lifeguard page for seasonal operation and daily conditions. Swim only inside a declared bathing zone with lifeguards on duty.",
+          "Accessible routes and bathing assistance vary. North Tzuk has a documented slope limitation, while the city lists water-access chairs and other facilities at several beaches.",
         ],
-        "links": [
-          {
-            "label": "Explore Old Jaffa",
-            "to": "/attractions/jaffa/"
-          },
-          {
-            "label": "Choose a Jaffa hotel area",
-            "to": "/accommodation/tel-aviv/jaffa/"
-          }
-        ]
       },
       {
-        "id": "bathing",
-        "title": "Swimming, facilities and the time of day",
-        "paragraphs": [
-          "Check the current bathing season and the lifeguard station at the exact beach. Follow the flags and local instructions even if other people enter the water. Keep swimming separate from surfing, boats and other designated sport areas. Children need active adult supervision.",
-          "Take water and sun protection, and use an early or later visit when that better suits the weather. A promenade walk remains a different activity from swimming. If conditions do not suit a beach day, a museum or neighbourhood outing can make a useful alternative."
-        ],
-        "links": [
-          {
-            "label": "Choose an indoor alternative",
-            "to": "/travel-blog/museums-in-tel-aviv/"
-          },
-          {
-            "label": "Compare seasonal conditions",
-            "to": "/travel-blog/best-time-to-visit-israel/"
-          }
-        ]
+        id: "beyond", title: "More beaches beyond Tel Aviv",
+        paragraphs: ["For a different outing, consider Sidna Ali in Herzliya, Ga'ash or Palmahim Beach National Park. These require separate transport and bathing-condition checks."],
       },
-      {
-        "id": "beyond-city",
-        "title": "Beaches beyond Tel Aviv need their own plan",
-        "paragraphs": [
-          "Gaash, Palmachim, Dor/Tantura, Sidna Ali near Herzliya and Caesarea are separate coastal outings beyond the central Tel Aviv beachfront. They are not additional stops on the central Tel Aviv promenade. Check the particular managing authority, parking, supervised beach and return transport.",
-          "Choose one based on the experience you want, rather than a promise that leaving the city guarantees a quieter or better beach. For a sightseeing combination, the Caesarea archaeological park and nearby beach access have separate visitor arrangements."
-        ],
-        "links": [
-          {
-            "label": "Plan a Caesarea visit",
-            "to": "/attractions/caesarea/"
-          },
-          {
-            "label": "Compare day trips from Tel Aviv",
-            "to": "/travel-blog/day-trips-from-tel-aviv/"
-          }
-        ]
-      }
     ],
-    "checklist": [
-      "Choose the beach by location and facilities",
-      "Check flags and active lifeguard supervision",
-      "Confirm accessibility and sport or animal rules locally",
-      "Save a precise meeting point",
-      "Include shade, water and the return journey"
+    checklist: [
+      "Choose a beach near your hotel or planned sightseeing area",
+      "Check active lifeguard supervision and posted flags",
+      "Confirm accessibility, family facilities or dog-area signs if relevant",
+      "Take water and sun protection",
+      "Plan transport back, especially from the northern beaches",
     ],
-    "faqs": [
-      {
-        "q": "Which beach is best for a first visit?",
-        "a": "A central beach such as Gordon, Frishman or Jerusalem is convenient from many beachfront hotels. Choose around your exact address and current bathing arrangements."
-      },
-      {
-        "q": "Is every part of the waterfront a swimming beach?",
-        "a": "No. A pleasant promenade or open stretch of sand is not the same as a designated supervised bathing area."
-      },
-      {
-        "q": "Are beaches outside the city automatically quieter?",
-        "a": "No. Demand, access and facilities vary. Treat each as a separate outing and check its own visitor information."
-      }
+    faqs: [
+      { q: "Which Tel Aviv beach is best for a first visit?", a: "Gordon or Frishman are convenient choices for many visitors staying in central Tel Aviv." },
+      { q: "Are Tel Aviv's beaches free?", a: "Access is free; beach-equipment hire and parking can cost extra." },
+      { q: "Can I swim all year?", a: "Only with active lifeguard supervision in the designated swimming area. Check current municipal notices, flags and local conditions." },
     ],
-    "related": [
-      "telAvivMuseums",
-      "food",
-      "bestTime",
-      "topTen"
+    related: ["telAvivMuseums", "food", "bestTime", "topTen"],
+    services: [
+      { label: "Choose where to stay in Tel Aviv", to: "/travel-blog/where-to-stay-in-tel-aviv/" },
+      { label: "Plan getting around Tel Aviv", to: "/travel-blog/getting-around-tel-aviv/" },
+      { label: "Explore Jaffa", to: "/attractions/jaffa/" },
     ],
-    "services": [
-      {
-        "label": "Choose where to stay in Tel Aviv",
-        "to": "/travel-blog/where-to-stay-in-tel-aviv/"
-      },
-      {
-        "label": "Plan your local journey",
-        "to": "/travel-blog/getting-around-tel-aviv/"
-      }
-    ],
-    "sourceIds": [
-      "m26-tlv-beaches",
-      "m26-tlv-beach-status",
-      "m26-tlv-city"
-    ]
+    sourceIds: ["m26-tlv-beaches", "m26-tlv-beach-status", "m26-tlv-city"],
   },
   // This registry entry supplies cards, search metadata and legacy guide readers.
   // Its museum sections and comparison are derived from the same curated data
