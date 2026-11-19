@@ -205,7 +205,7 @@ const browseLabels: Record<string, string> = {
   "ein-gedi": "Browse more places to stay near Ein Gedi",
 };
 
-const sourceIntro = "Hotel websites and practical travel resources.";
+const sourceIntro = "Official hotel websites and practical travel resources, with check dates below.";
 
 function HotelCard({ id, pageId }: { id: string; pageId: string }) {
   const hotel = resortHotel(id);
@@ -283,7 +283,7 @@ export function HotelStyleEditorialGuide({ guide }: { guide: HotelStayDestinatio
         <p className="eyebrow">Choose the holiday, then the hotel</p>
         <h2 id="choose-h" className="mt-2 text-3xl">Which Dead Sea stay suits you?</h2>
         <p className="mt-4 max-w-4xl leading-relaxed">I usually start by asking what matters most: time on an operating beach, a spa break, activities for children or a comfortable hotel at the right total price. The main resorts are in Ein Bokek and the southern hotel district; Ein Gedi is a different, nature-focused choice.</p>
-        <div className="mt-6 grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-4" data-testid="deadsea-category-grid">
+        <div className="mt-6 grid grid-cols-1 gap-3 min-[360px]:grid-cols-2 sm:gap-4 lg:grid-cols-4" data-testid="deadsea-category-grid">
           {primaryGroups.map(group => {
             const content = groupCaptions[group.id];
             const photo = group.id === "value"
@@ -295,10 +295,10 @@ export function HotelStyleEditorialGuide({ guide }: { guide: HotelStayDestinatio
                   : group.photo;
             return <a key={group.id} href={"#group-" + group.id} className="group flex min-w-0 flex-col overflow-hidden rounded-2xl border bg-card shadow-sm transition-all hover:-translate-y-0.5 hover:border-primary/60 hover:shadow-md" data-testid="deadsea-category-card">
               <img src={photo.src} alt={photo.alt} width={755} height={503} loading="lazy" decoding="async" className="aspect-[16/10] w-full object-cover" />
-              <span className="flex flex-1 flex-col p-3 sm:p-4">
-                <span className="text-sm font-bold leading-snug sm:text-lg">{content?.title ?? group.title}</span>
+              <span className="flex min-w-0 flex-1 flex-col p-3 sm:p-4">
+                <span className="break-words text-sm font-bold leading-snug sm:text-lg">{content?.title ?? group.title}</span>
                 <span className="mt-2 line-clamp-2 flex-1 text-xs leading-relaxed text-muted-foreground sm:text-sm">{content?.eyebrow ?? group.intro}</span>
-                <span className="mt-3 inline-flex items-center gap-1.5 text-xs font-semibold text-primary sm:text-sm">Explore this category <ArrowRight className="h-4 w-4" aria-hidden /></span>
+                <span className="mt-3 inline-flex flex-wrap items-center gap-1 text-xs font-semibold text-primary sm:text-sm">See hotels <ArrowRight className="h-4 w-4 shrink-0" aria-hidden /></span>
               </span>
             </a>;
           })}
@@ -319,7 +319,6 @@ export function HotelStyleEditorialGuide({ guide }: { guide: HotelStayDestinatio
 
       <section id="compare" className="mt-14 scroll-mt-32" aria-labelledby="compare-h">
         <h2 id="compare-h" className="text-3xl">Dead Sea hotels at a glance</h2>
-        <p className="mt-3 leading-relaxed text-muted-foreground">Compare the location, beach access and best features of 11 places to stay along the Israeli Dead Sea.</p>
         <div className="mt-5 overflow-x-auto rounded-2xl border bg-card" role="region" tabIndex={0} aria-label="Compare 11 Dead Sea hotel recommendations">
           <table className="w-full min-w-[700px] text-left text-sm" data-testid="deadsea-hotel-comparison">
             <caption className="sr-only">Recommended Dead Sea stays, main appeal, location and beach arrangement</caption>
@@ -348,7 +347,6 @@ export function HotelStyleEditorialGuide({ guide }: { guide: HotelStayDestinatio
       <section id="hotels" className="mt-14 scroll-mt-32" aria-labelledby="hotels-h">
         <p className="eyebrow">My selected places to stay</p>
         <h2 id="hotels-h" className="mt-2 text-3xl">Recommended hotels by travel style</h2>
-        <p className="mt-3 max-w-4xl leading-relaxed">I have selected 11 stays across five travel styles, from luxury resorts to simple accommodation near Ein Gedi.</p>
         <div className="mt-6 divide-y border-t">
           {guide.groups.map(group => {
             const copy = groupCaptions[group.id];
@@ -436,7 +434,7 @@ export function HotelStyleEditorialGuide({ guide }: { guide: HotelStayDestinatio
         introduction: "Need a private transfer to your hotel in Ein Bokek? Send me your pickup location, date, number of passengers and luggage details, and I'll help arrange the journey.",
         placeholder: "Pickup location, Ein Bokek hotel, travel date, passengers and luggage…",
       }} />
-      <SourceList ids={sourceIds} intro={sourceIntro} />
+      <SourceList ids={sourceIds} intro={sourceIntro} compact />
     </article>
   </main>;
 }
