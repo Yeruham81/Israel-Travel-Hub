@@ -13,7 +13,7 @@ import { resortHotelPhoto } from "@/data/resortHotelPhotos";
 import { hotelAffiliateUrl, hotelBrowseAffiliateUrl } from "@/lib/hotel-affiliate";
 import { hotelGoogleMapsUrl } from "@/lib/hotel-google-maps";
 import { recordOutboundClick, relFor } from "@/lib/outbound";
-import deadSeaValueImage from "@/assets/home/hotel-room.webp";
+import deadSeaValueImage from "@/assets/attractions-hub/region-dead-sea-masada-480.webp";
 import deadSeaSpaImage from "@/assets/home/hero-refresh-dead-sea-salt-v4-medium.webp";
 
 /**
@@ -287,7 +287,7 @@ export function HotelStyleEditorialGuide({ guide }: { guide: HotelStayDestinatio
           {primaryGroups.map(group => {
             const content = groupCaptions[group.id];
             const photo = group.id === "value"
-              ? { src: deadSeaValueImage, alt: "Comfortable illustrative hotel bedroom with a bright sitting area" }
+              ? { src: deadSeaValueImage, alt: "Visitor relaxing in the shallow turquoise waters of the Dead Sea" }
               : group.id === "family"
                 ? { src: "/images/home/accommodation-dead-sea-ai.webp", alt: "Illustrative Dead Sea hotels along the shore below the desert cliffs" }
                 : group.id === "spa"
