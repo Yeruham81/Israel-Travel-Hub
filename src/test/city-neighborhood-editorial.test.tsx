@@ -1,6 +1,8 @@
 import { cleanup, render, screen, within } from "@testing-library/react";
 import { afterEach, describe, expect, it, vi } from "vitest";
 import { cityStayGuides, neighborhoodGuidesForCity } from "@/data/content";
+import { hotelsForArea, linksForPage } from "@/data/registry";
+import { hotelAffiliateUrl } from "@/lib/hotel-affiliate";
 import { CityNeighborhoodEditorial } from "@/components/CityNeighborhoodEditorial";
 
 vi.mock("@tanstack/react-router", () => ({
@@ -61,7 +63,19 @@ describe("Jerusalem and Tel Aviv neighbourhood editorial guides", () => {
         expect(grid).toHaveClass("grid-cols-2");
         expect(grid.querySelectorAll("li")).toHaveLength(2);
         expect(grid.querySelectorAll("img")).toHaveLength(0);
-        expect(grid.querySelectorAll("svg")).toHaveLength(4);
+        expect(grid.querySelectorAll("svg")).toHaveLength(6);
+        expect(grid.querySelectorAll('[data-testid="hotel-type"]')).toHaveLength(2);
+        expect(grid.querySelectorAll('[data-testid="hotel-location"]')).toHaveLength(2);
+        expect(grid.querySelectorAll('[data-testid="hotel-highlight"]')).toHaveLength(2);
+        const cards = grid.querySelectorAll('[data-testid="jerusalem-editorial-hotel-card"]');
+        for (const card of cards) {
+          const wholeCardLink = card.querySelector('[data-testid="jerusalem-editorial-hotel-link"]');
+          expect(wholeCardLink?.tagName).toBe("A");
+          expect(wholeCardLink).toHaveClass("flex", "h-full", "flex-col", "group");
+          expect(card.querySelectorAll("a")).toHaveLength(1);
+          expect(wholeCardLink).toHaveTextContent("Check rooms & rates");
+          expect(wholeCardLink?.querySelector('[data-testid="hotel-highlight"]')?.textContent?.trim()).toBeTruthy();
+        }
       }
       const bookingChecklist = screen.getByTestId("jerusalem-booking-checklist");
       expect(bookingChecklist).toHaveClass("rounded-2xl", "border", "bg-secondary/20", "sm:grid-cols-2");
@@ -77,7 +91,22 @@ describe("Jerusalem and Tel Aviv neighbourhood editorial guides", () => {
         expect(heading!.compareDocumentPosition(facts!) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
         expect(Array.from(paragraphs).some((paragraph) => paragraph.textContent?.startsWith("Best for:"))).toBe(true);
         expect(within(section).getAllByTestId("jerusalem-editorial-hotel-card")).toHaveLength(2);
-        expect(within(section).getByRole("heading", { name: /^Popular hotels in / })).toBeInTheDocument();
+        const popularHotelsHeading = within(section).getByRole("heading", { name: /^Popular hotels in / });
+        expect(popularHotelsHeading).toBeInTheDocument();
+        expect(popularHotelsHeading.querySelector("svg")).toBeNull();
+        const area = areas.find((candidate) => candidate.name === heading!.textContent)!;
+        const hotelCards = within(section).getAllByTestId("jerusalem-editorial-hotel-card");
+        const hotels = hotelsForArea(area.id, "jerusalem").slice(0, 2);
+        const bookingOffers = linksForPage(`stay-area-${area.id}`);
+        expect(hotels).toHaveLength(2);
+        hotelCards.forEach((card, index) => {
+          const hotel = hotels[index]!;
+          const booking = bookingOffers.find((offer) => offer.id === `hotel-${hotel.id}-expedia`)!;
+          const cardLink = within(card).getByTestId("jerusalem-editorial-hotel-link");
+          expect(cardLink).toHaveAttribute("href", hotelAffiliateUrl(booking, "guide-where-to-stay-jerusalem", hotel.id));
+          expect(cardLink).toHaveAttribute("target", "_blank");
+          expect(cardLink).toHaveTextContent(hotel.name);
+        });
       }
       expect(container).not.toHaveTextContent("The maps show the general location of each area");
       expect(container).not.toHaveTextContent("Photos illustrate the surrounding neighbourhoods, not the hotels themselves");
