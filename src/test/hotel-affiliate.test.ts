@@ -25,20 +25,27 @@ describe("hotel-level and page-level Travelpayouts attribution", () => {
     }
   });
 
-  it("has an approved Expedia deep link for every supplemental hotel in Jerusalem and Tel Aviv", () => {
-    expect(neighborhoodHotelAdditions).toHaveLength(28);
+  it("keeps approved property links and explicitly distinguishes Paamonim's untracked Expedia listing", () => {
+    expect(neighborhoodHotelAdditions).toHaveLength(29);
     for (const hotel of neighborhoodHotelAdditions) {
       const key = `hotel-${hotel.id}-expedia`;
       const booking = providerLinks.find((link) => link.id === key);
-      expect(affiliateConfig[key]?.trackingUrl, key).toMatch(/^https:\/\/expedia\.tpm\.li\/[a-zA-Z0-9]{8}$/);
-      expect(booking?.url, key).toBe(affiliateConfig[key]?.trackingUrl);
-      expect(booking?.isAffiliate, key).toBe(true);
-      expect(booking?.providerName).toBe("Expedia");
-      expect(booking?.ctaLabel).toBe("Check rooms on Expedia");
+      expect(booking?.providerName, key).toBe("Expedia");
+      if (hotel.id === "jlm-paamonim") {
+        expect(affiliateConfig[key]?.trackingUrl).toBeUndefined();
+        expect(booking?.url).toBe("https://www.expedia.com/Jerusalem-Hotels-Paamonim-Jerusalem-Hotel.h14708123.Hotel-Information");
+        expect(booking?.isAffiliate).toBe(false);
+        expect(booking?.ctaLabel).toBe("View hotel on Expedia");
+      } else {
+        expect(affiliateConfig[key]?.trackingUrl, key).toMatch(/^https:\/\/expedia\.tpm\.li\/[a-zA-Z0-9]{8}$/);
+        expect(booking?.url, key).toBe(affiliateConfig[key]?.trackingUrl);
+        expect(booking?.isAffiliate, key).toBe(true);
+        expect(booking?.ctaLabel).toBe("Check rooms on Expedia");
+      }
     }
     const allHotelOffers = providerLinks.filter((link) => /^hotel-.*-expedia$/.test(link.id));
-    expect(allHotelOffers).toHaveLength(87);
-    expect(allHotelOffers.every((link) => link.isAffiliate)).toBe(true);
+    expect(allHotelOffers).toHaveLength(88);
+    expect(allHotelOffers.filter((link) => link.isAffiliate)).toHaveLength(87);
     expect(new Set(allHotelOffers.map((link) => link.url)).size).toBe(allHotelOffers.length);
   });
 
