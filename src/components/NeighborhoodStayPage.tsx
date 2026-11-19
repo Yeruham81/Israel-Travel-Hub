@@ -80,8 +80,6 @@ export function NeighborhoodStayPage({ area }: { area: NeighborhoodStayGuide }) 
     "mahane-yehuda": "Room location and the market's evening and early-morning activity can make a real difference.",
     "east-jerusalem": "Check your street address, the nearest Old City gate and arrangements for a late arrival.",
     "german-colony": "Confirm the walking distance to local sights, current road access and the room's street outlook.",
-  };
-  Object.assign(arrivalIntroductions, {
     "telaviv-beachfront": "The beach, hotel entrance and room outlook can be quite different even along the same stretch of HaYarkon Street.",
     "telaviv-dizengoff": "Dizengoff Street extends far beyond the square, so the precise hotel address and its vehicle access matter.",
     "telaviv-old-north": "A room by the port offers a different evening from one on a residential Old North side street.",
@@ -90,7 +88,7 @@ export function NeighborhoodStayPage({ area }: { area: NeighborhoodStayGuide }) 
     "telaviv-florentin": "Late-night venues and self-check-in instructions can make the exact street and room especially important.",
     "telaviv-kerem": "A room within the Yemenite Quarter may feel different from one along the edges of Carmel Market.",
     "telaviv-rothschild": "The boulevard is long: your nearest junction, room orientation and hotel entrance deserve a close look.",
-  });
+  };
   const localInsight = areaDecisionNotes[area.id];
   const hotels = hotelsForArea(area.id, area.cityId);
   const otherAreas = neighborhoodGuidesForCity(area.cityId).filter((other) => other.id !== area.id);
@@ -108,7 +106,7 @@ export function NeighborhoodStayPage({ area }: { area: NeighborhoodStayGuide }) 
           {hotels.map((hotel) => isJerusalem
             ? <JerusalemHotelTile key={hotel.id} hotel={hotel} pageId={pageId} showArea={false} stacked />
             : <TelAvivHotelTile key={hotel.id} hotel={hotel} pageId={pageId} showArea={false} stacked />)}
-          <li className="flex min-h-0 min-w-0 flex-col" data-testid={isJerusalem ? "jerusalem-hotel-map" : "tel-aviv-hotel-map"}>
+          <li className={isJerusalem ? "flex min-h-0 min-w-0 flex-col" : "flex min-h-0 min-w-0 flex-col sm:col-span-2 xl:col-span-2"} data-testid={isJerusalem ? "jerusalem-hotel-map" : "tel-aviv-hotel-map"}>
             <AreaMap area={area} provider="google" compact stretch />
           </li>
         </ul>
