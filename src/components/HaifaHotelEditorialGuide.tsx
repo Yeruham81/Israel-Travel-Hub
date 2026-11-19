@@ -169,39 +169,21 @@ const groupTips: Record<string, { title: string; points: readonly [string, strin
   },
 };
 
-/** Verified public Expedia destination pages. These are direct links until the
- * Travelpayouts account supplies short links for Haifa city/category searches.
- * Never reuse a particular hotel's tracked link for a destination search.
- */
-const browseFallback: Record<string, { id: string; label: string; url: string }> = {
-  luxury: {
-    id: "hotels-haifa-luxury-direct",
-    label: "Browse more luxury stays",
-    url: "https://www.expedia.com/Haifa-Hotels-Luxury-Hotel.0-0-d1446-tLuxuryHotel.Travel-Guide-Filter-Hotels",
-  },
-  boutique: {
-    id: "hotels-haifa-boutique-direct",
-    label: "Browse more boutique hotels",
-    url: "https://www.expedia.com/Haifa-Hotels-Boutique-Hotel.0-0-d1446-tBoutiqueHotel.Travel-Guide-Filter-Hotels",
-  },
-  family: {
-    id: "hotels-haifa-family-direct",
-    label: "Browse more family hotels",
-    url: "https://www.expedia.com/Haifa-Hotels-Family-Hotel.0-0-d1446-tFamilyHotel.Travel-Guide-Filter-Hotels",
-  },
-  "mid-range": {
-    id: "hotels-haifa-city-direct",
-    label: "Browse more city hotels",
-    url: "https://www.expedia.com/Haifa-Hotels.d1446.Travel-Guide-Hotels",
-  },
-  budget: {
-    id: "hotels-haifa-budget-direct",
-    label: "Browse more affordable stays",
-    url: "https://www.expedia.com/Haifa-Hotels-Cheap-Hotels.0-0-d1446-tCheapHotels.Travel-Guide-Filter-Hotels",
-  },
+/** CTA labels remain editorial; booking links must be verified affiliate URLs. */
+const browseLabels: Record<string, string> = {
+  luxury: "Browse more luxury stays",
+  boutique: "Browse more boutique hotels",
+  family: "Browse more family hotels",
+  "mid-range": "Browse more city hotels",
+  budget: "Browse more affordable stays",
 };
 
-const haifaAllHotelsUrl = "https://www.expedia.com/Haifa-Hotels.d1446.Travel-Guide-Hotels";
+function trackedExpediaBrowseLink(pageKey: string) {
+  return linksForPage(pageKey).find(link =>
+    link.isAffiliate && link.partnerId === "expedia"
+    && /^https:\/\/expedia\.(?:tpm\.li|tpk\.lv)\/[A-Za-z0-9]+(?:\?[^\s]*)?$/.test(link.url)
+  );
+}
 
 const bookingTips = [
   { title: "Choose the right elevation", text: "A nearby point on the map may be up a steep slope. Check walks, steps and the Carmelit or bus connection." },
@@ -259,7 +241,7 @@ export function HaifaHotelEditorialGuide({ guide }: { guide: HotelStayDestinatio
   const budgetGroup = groups.find(group => group.id === "budget");
   const allHotelIds = groups.flatMap(group => group.hotelIds);
   const sourceIds = [...new Set([...guide.sourceIds, ...allHotelIds.map(id => resortHotel(id).sourceId)])];
-  const allHotelsAffiliate = linksForPage("stay-haifa-browse").find(link => link.isAffiliate && link.partnerId === "expedia");
+  const allHotelsAffiliate = trackedExpediaBrowseLink("stay-haifa-browse");
 
   return <main className="pb-10" data-testid="haifa-style-editorial">
     <GuideHeader
@@ -342,9 +324,8 @@ export function HaifaHotelEditorialGuide({ guide }: { guide: HotelStayDestinatio
           {groups.map(group => {
             const copy = groupCopy[group.id];
             const tip = groupTips[group.id];
-            const browse = browseFallback[group.id];
-            const affiliate = linksForPage("stay-haifa-" + group.id + "-browse").find(link => link.isAffiliate && link.partnerId === "expedia");
-            const browseOfferId = affiliate?.id ?? browse?.id;
+            const browseLabel = browseLabels[group.id];
+            const affiliate = trackedExpediaBrowseLink("stay-haifa-" + group.id + "-browse");
             return <section key={group.id} id={"group-" + group.id} className="scroll-mt-32 py-9 sm:py-11" aria-labelledby={"group-" + group.id + "-h"} data-testid="haifa-hotel-group">
               <p className="eyebrow">{copy?.eyebrow}</p>
               <h3 id={"group-" + group.id + "-h"} className="mt-2 text-2xl font-semibold sm:text-3xl">{copy?.title ?? group.title}</h3>
@@ -369,30 +350,30 @@ export function HaifaHotelEditorialGuide({ guide }: { guide: HotelStayDestinatio
                   </aside>
                 </li>}
               </ul>
-              {browse && browseOfferId && <div className="mt-6 flex justify-center">
-                <a href={affiliate ? hotelBrowseAffiliateUrl(affiliate, pageId) : browse.url}
-                  target="_blank" rel={affiliate ? relFor(affiliate.isAffiliate) : "noopener noreferrer"}
-                  onClick={() => recordOutboundClick({ pageId, productId: browseOfferId, offerId: browseOfferId })}
+              {browseLabel && affiliate && <div className="mt-6 flex justify-center">
+                <a href={hotelBrowseAffiliateUrl(affiliate, pageId)}
+                  target="_blank" rel={relFor(affiliate.isAffiliate)}
+                  onClick={() => recordOutboundClick({ pageId, productId: affiliate.id, offerId: affiliate.id })}
                   className="inline-flex min-h-11 max-w-full items-center justify-center gap-2 rounded-lg bg-primary px-5 py-2.5 text-center text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary/90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
                   data-testid="haifa-category-browse-link">
-                  {browse.label} <ArrowUpRight className="h-4 w-4 shrink-0" aria-hidden />
+                  {browseLabel} <ArrowUpRight className="h-4 w-4 shrink-0" aria-hidden />
                   <span className="sr-only"> (opens in a new tab)</span>
                 </a>
               </div>}
             </section>;
           })}
         </div>
-        <div className="mt-3 flex flex-col items-start gap-3 rounded-2xl border bg-secondary/30 p-5 sm:flex-row sm:items-center sm:justify-between sm:p-6">
+        {allHotelsAffiliate && <div className="mt-3 flex flex-col items-start gap-3 rounded-2xl border bg-secondary/30 p-5 sm:flex-row sm:items-center sm:justify-between sm:p-6">
           <h3 className="text-lg font-semibold">Looking for more hotels in Haifa?</h3>
-          <a href={allHotelsAffiliate ? hotelBrowseAffiliateUrl(allHotelsAffiliate, pageId) : haifaAllHotelsUrl}
-            target="_blank" rel={allHotelsAffiliate ? relFor(allHotelsAffiliate.isAffiliate) : "noopener noreferrer"}
-            onClick={() => recordOutboundClick({ pageId, productId: allHotelsAffiliate?.id ?? "hotels-haifa-all-direct", offerId: allHotelsAffiliate?.id ?? "hotels-haifa-all-direct" })}
+          <a href={hotelBrowseAffiliateUrl(allHotelsAffiliate, pageId)}
+            target="_blank" rel={relFor(allHotelsAffiliate.isAffiliate)}
+            onClick={() => recordOutboundClick({ pageId, productId: allHotelsAffiliate.id, offerId: allHotelsAffiliate.id })}
             className="inline-flex min-h-11 items-center justify-center gap-2 rounded-lg border border-primary/40 bg-card px-4 py-2 text-center text-sm font-semibold text-primary"
             data-testid="haifa-all-hotels-browse-link">
             Browse more Haifa hotels <ArrowUpRight className="h-4 w-4 shrink-0" aria-hidden />
             <span className="sr-only"> (opens in a new tab)</span>
           </a>
-        </div>
+        </div>}
       </section>
 
       <section id="location" className="mt-14 scroll-mt-32" aria-labelledby="location-h">
