@@ -18,6 +18,7 @@ import { jerusalemHotelPhotos } from "@/data/jerusalemHotelPhotos";
 import { jerusalemStayCardPhotos } from "@/data/jerusalemStayCardPhotos";
 import jerusalemEditorialHero from "@/assets/guides/2026-11/where-to-stay-jerusalem-drive.webp";
 import jewishQuarterLanePhoto from "@/assets/guides/2026-11/jerusalem-jewish-quarter-stone-lane.webp";
+import downtownCardPhoto from "@/assets/travel-blog-hub/downtown-944eb9d46b-420.webp";
 import eastJerusalemHousePhoto from "@/assets/jerusalem/east-jerusalem-house.webp";
 import { routeTree } from "@/routeTree.gen";
 
@@ -206,7 +207,7 @@ describe.each([
     const ibis = cityHotelPhoto(jerusalemHotelCatalog.find((hotel) => hotel.id === "jlm-ibis")!);
     const styles = cityHotelPhoto(jerusalemHotelCatalog.find((hotel) => hotel.id === "jlm-ibis-styles")!);
     const herbert = cityHotelPhoto(jerusalemHotelCatalog.find((hotel) => hotel.id === "herbert-samuel")!);
-    expect(ibis.src).toBe("/images/attractions/jerusalem-shopping.webp");
+    expect(ibis.src).toBe(downtownCardPhoto);
     expect(styles.src).toBe("/images/hotel-cards/jlm-ibis-styles.webp");
     expect(styles.src).not.toBe(herbert.src);
     expect(styles.src).not.toBe(ibis.src);
