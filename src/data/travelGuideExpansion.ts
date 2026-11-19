@@ -1,4 +1,5 @@
 import type { GuidePhoto, TravelGuide } from "@/data/travelGuides";
+import { jerusalemShoppingPlaces as shoppingPlaces } from "@/data/jerusalemShopping";
 import { airportTransferPhotos } from "@/data/airportTransfers";
 import { travelGuidePaths } from "@/data/registry";
 import hall from "@/assets/home/ben-gurion-t3.webp";
@@ -316,28 +317,54 @@ export const expandedTravelGuides = {
     services: [{ label: "Choose a Jerusalem hotel area", to: "/travel-blog/where-to-stay-in-jerusalem/" }, { label: "Plan transport with a private driver", to: "/private-driver/" }, { label: "Compare Bethlehem & Jericho tours", to: "/tours/bethlehem-jericho-jordan-river/" }, { label: "Airport transfer to Jerusalem", to: "/airport-transfers/jerusalem/" }],
   },
   jerusalemShopping: {
-    id: "jerusalemShopping", title: "Shopping in Jerusalem: Mahane Yehuda, Old City and malls",
-    description: "Where to shop in Jerusalem: compare Mahane Yehuda food stalls, Old City crafts, Mamilla shops, Ben Yehuda Street and Malha mall.",
-    intro: "Choose the shopping experience you want, then combine nearby places. Jerusalem's food markets, pedestrian streets and enclosed malls serve different purposes.",
-    answer: "Start with the Old City for souvenir browsing, Mahane Yehuda for food and market atmosphere, Mamilla/Ben Yehuda for central shopping, or Malha for an enclosed mall. Add neighbourhood boutiques or crafts around a current programme. Check the actual shop and date, especially on Friday and Saturday; a lively restaurant area does not mean all retail is trading.",
-    topics: ["shopping", "destinations", "tips"], photo: {
-      src: "/images/attractions/old-jerusalem-via-dolorosa.webp",
-      alt: "Old City Jerusalem market passage and stone-paved souk",
-      credit: "Photo from the publisher's Jerusalem image library.",
-    },
-    facts: [{ label: "Food market", text: "Mahane Yehuda: stalls and evening venues differ" }, { label: "Old City edge", text: "Mamilla connects naturally with a Jaffa Gate visit" }, { label: "Weekend", text: "Check individual businesses and event dates" }],
-    comparison: { caption: "Which Jerusalem shopping area fits your plans?", headers: ["Area", "Consider it for", "Keep in mind"], rows: [["Old City / Cardo", "Souvenirs, Judaica, galleries and traditional goods", "Lanes, steps, product origin and individual opening"], ["Mahane Yehuda", "Food, ingredients and market atmosphere", "Stall trading differs from restaurant/nightlife hours"], ["Mamilla / Ben Yehuda", "Central shops, cafés and browsing", "Different retail mix and individual prices"], ["Malha", "An enclosed shopping-centre visit", "A separate journey beyond the central walking area"], ["Neighbourhoods / craft venues", "Independent shops, studios and dated markets", "Verify the current business or event programme"]] },
-    sections: [
-      { id: "old-city-shopping", title: "Old City markets and the Cardo", paragraphs: ["Browse the market lanes for ceramics, textiles, spices, religious items and souvenirs. The Cardo and nearby Jewish Quarter galleries can suit a different kind of art or Judaica browse. Link shopping to a walking route rather than repeatedly returning through the same gates.", "Ask about maker, materials, origin and packing before buying something important. Bargain only where the seller welcomes it; there is no reliable universal rule to offer half or a fixed percentage of the first price. Posted-price shops and craft galleries are different from a negotiable market sale."], sourceIds: ["guide-jerusalem-shopping"] },
-      { id: "market-food", title: "Mahane Yehuda: food stalls and evening venues", paragraphs: ["Mahane Yehuda sits around the Jaffa Road/Agripas area and combines market shopping with places to eat. Pick a visit around your purpose: buying ingredients, tasting food or an evening out do not necessarily use the same opening hours.", "Friday can mean pre-Shabbat shopping and earlier closing for many businesses. Confirm individual restaurants or tours separately, including dietary requirements and exactly what a tasting product includes. Keep some room in your plans to browse rather than booking every minute."], sourceIds: ["guide-mahane-yehuda"] },
-      { id: "central-shopping", title: "Mamilla and the city-centre pedestrian streets", paragraphs: ["Mamilla is an open-air shopping avenue beside the Old City approach at Jaffa Gate. Ben Yehuda and the surrounding city-centre streets offer another central browsing area. Choose by shops and route, not by assuming all central retailers have identical prices or opening.", "These areas can fit before or after a nearby visit. Keep enough time to return purchases to your hotel if you will continue to religious sites or a long walk; shopping bags can change what feels like an easy route."], sourceIds: ["guide-jerusalem-shopping", ] },
-      { id: "malha-and-neighbourhoods", title: "Malha Mall, Emek Refaim and the First Station", paragraphs: ["Malha offers an enclosed mall outing away from the central walking area. Check the current stores, facilities and travel plan rather than relying on an old entertainment list. Emek Refaim in the German Colony offers a different neighbourhood setting for shops and cafés.", "The First Station's operator lists activity through the week, including Saturday. Check the exact restaurant, shop or dated event you want; this is not a promise that every business or an old advertised activity is running."], sourceIds: ["guide-jerusalem-shopping", "guide-first-station"] },
-      { id: "crafts-and-practicalities", title: "Crafts, fair dates and buying practicalities", paragraphs: ["Hutzot Hayotzer and independent studios can suit an interest in local craft. For Bezalel-area fairs or other arts markets, use a current dated listing: the old guide's fixed weekly event and address were not independently confirmed and should not anchor your day.", "Confirm total price, accepted payment, return terms and any delivery or packing arrangement. Keep receipts and avoid assuming every item is locally handmade. For food souvenirs, check your onward carrier and destination's rules before paying for something you may not be able to take home."], sourceIds: ["guide-jerusalem-shopping", ] },
+    id: "jerusalemShopping",
+    updatedAt: "2026-11-20",
+    title: "Shopping in Jerusalem: Markets, Crafts, Malls & Local Streets",
+    description: "My guide to ten Jerusalem shopping areas, including Mahane Yehuda, Old City markets, Mamilla, Malha, the Cardo and Friday's Bezalel Arts Fair, with a map and practical tips.",
+    intro: "From Mahane Yehuda and the Old City souks to modern stores and local arts fairs, my guide will help you choose where to shop and what to combine.",
+    answer: "I suggest Mahane Yehuda for food, the Old City for traditional souvenirs, Mamilla for brands, Malha for indoor shopping and Hutzot Hayotzer for artisan gifts. Check current dates for the Friday Bezalel Arts Fair.",
+    topics: ["shopping", "destinations", "tips"],
+    photo: { src: "/images/jerusalem-shopping/hero.webp", alt: "Shops and market displays in Jerusalem" },
+    facts: [
+      { label: "10 places", text: "Markets, shopping streets, workshops and a mall" },
+      { label: "Central picks", text: "Mahane Yehuda, Old City, Mamilla and Ben Yehuda" },
+      { label: "Plan your visit", text: "Check Friday, Shabbat and fair opening times" },
     ],
-    checklist: ["Choose the type of shopping and geographic area", "Check individual hours for your actual date", "Verify a craft fair's current venue and programme", "Ask about origin, materials, total and return terms", "Keep receipts and a payment backup", "Plan luggage, packing and the route back to your hotel"],
-    faqs: [{ q: "Where should I shop for souvenirs in Jerusalem?", a: "Compare the Old City market lanes, the Cardo/galleries and central shops against the items you want. Ask about origin and materials rather than assuming every souvenir is handmade locally." }, { q: "Is shopping open on Shabbat?", a: "It varies by business and area. The First Station operator lists Saturday activity, but that does not apply to every shop in Jerusalem. Verify the retailer or event you intend to visit." }, { q: "Should I always bargain?", a: "No. Ask respectfully whether a market price is negotiable; fixed-price stores and many galleries work differently. A universal discount percentage is not a useful rule." }],
-    sourceIds: ["guide-jerusalem-shopping", "guide-mahane-yehuda", "guide-first-station"], related: ["jerusalem", "jerusalemChurches", "travelTips", "israel"],
-    services: [{ label: "Where to stay in Jerusalem", to: "/travel-blog/where-to-stay-in-jerusalem/" }, { label: "Mahane Yehuda & Nachlaot stays", to: "/accommodation/jerusalem/mahane-yehuda-nachlaot/" }, { label: "German Colony & Baka stays", to: "/accommodation/jerusalem/german-colony-baka/" }, { label: "Private driver for a planned journey", to: "/private-driver/" }],
+    comparison: {
+      caption: "Ten places to shop in Jerusalem",
+      headers: ["Place", "Best for", "Area", "When to go"],
+      rows: shoppingPlaces.map(place => [place.name, place.bestFor, place.area, place.when]),
+    },
+    sections: shoppingPlaces.map(place => ({
+      id: "shop-" + place.id,
+      title: place.name,
+      paragraphs: [place.description, place.practical, place.gettingThere],
+    })),
+    checklist: [
+      "Choose your shopping area and what you want to buy",
+      "Check Friday, Shabbat and festival dates for your visit",
+      "Ask about origin, materials, final prices and return terms",
+      "Check tourist VAT eligibility and required paperwork before purchase",
+      "Plan a practical walking route and return journey with shopping bags",
+    ],
+    faqs: [
+      { q: "Where is the best place to buy souvenirs in Jerusalem?", a: "I would start in the Old City for traditional souvenirs, the Cardo for Judaica and art, or Hutzot Hayotzer for original work." },
+      { q: "Where is best for indoor shopping?", a: "Malha Mall is an enclosed shopping centre with multiple retailers, outside the historic centre." },
+      { q: "Is shopping open on Shabbat?", a: "Many city-centre shops close. The First Station complex operates on Saturday, but individual businesses and pop-ups have different hours." },
+      { q: "Can I claim VAT back?", a: "Eligible visitors can claim qualifying purchases from participating retailers under the Israel Tax Authority's rules." },
+      { q: "Can I bargain in Jerusalem?", a: "Some market sellers welcome polite bargaining, while fixed-price stores and galleries work differently." },
+      { q: "When is the Bezalel Arts Fair?", a: "It is associated with Fridays on Bezalel and Shatz pedestrian streets. Verify this week's schedule." },
+    ],
+    sourceIds: ["guide-jerusalem-shopping", "guide-mahane-yehuda", "guide-first-station"],
+    related: ["jerusalem", "food", "calendar", "israel"],
+    services: [
+      { label: "Old City walking guide", to: "/attractions/old-city-jerusalem/" },
+      { label: "Mahane Yehuda & Nachlaot hotels", to: "/accommodation/jerusalem/mahane-yehuda-nachlaot/" },
+      { label: "Where to stay in Jerusalem", to: "/travel-blog/where-to-stay-in-jerusalem/" },
+      { label: "Food and market tours", to: "/tours/food-market-tours/" },
+      { label: "Jerusalem tours", to: "/tours/jerusalem/" },
+      { label: "Israel's calendar of events", to: "/travel-blog/calendar-of-events/" },
+    ],
   },
   jerusalemDayTrips: {
     id: "jerusalemDayTrips", title: "Best day trips from Jerusalem: Dead Sea, Bethlehem and more",
