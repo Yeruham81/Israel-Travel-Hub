@@ -72,7 +72,8 @@ describe("hotel-level and page-level Travelpayouts attribution", () => {
 
   it("tracks city/area/category searches by the source page and the search destination, not a hotel", () => {
     const offers = providerLinks.filter((link) => /^(?:hotels|area|category)-[a-z0-9-]+-expedia$/.test(link.id));
-    expect(offers).toHaveLength(27);
+    // Includes six Haifa category/city partner links added to the original 27 browse offers.
+    expect(offers).toHaveLength(33);
     for (const booking of offers) {
       expect(booking.isAffiliate).toBe(true);
       const pageId = booking.pageIds[0]!;
