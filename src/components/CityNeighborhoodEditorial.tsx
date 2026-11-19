@@ -3,7 +3,7 @@ import { Accessibility, ArrowRight, Check, Eye, Footprints, House, Lightbulb, Ma
 import { GuideHeader, OnThisPage, FaqList, SourceList } from "@/components/Guide";
 import { StayTripLinks } from "@/components/StayTripLinks";
 import { AreaMap } from "@/components/AreaMap";
-import { JerusalemEditorialHotels } from "@/components/JerusalemEditorialHotels";
+import { CityEditorialHotels } from "@/components/JerusalemEditorialHotels";
 import { HomeContactForm } from "@/components/HomeContactForm";
 import { accommodationEditorial, jerusalemStaySourceIds } from "@/data/accommodationEditorial";
 import { neighborhoodGuidesForCity, type CityStayGuide } from "@/data/content";
@@ -17,7 +17,8 @@ import downtownCard from "@/assets/travel-blog-hub/downtown-944eb9d46b-420.webp"
 import oldCityCard from "@/assets/attractions-hub/card-old-city-jerusalem-420.webp";
 import marketCard from "@/assets/travel-blog-hub/mahane-yehuda-c53a05ac52-420.webp";
 import eastJerusalemCard from "@/assets/jerusalem/east-jerusalem-house.webp";
-import colonyCard from "@/assets/travel-blog-hub/colony-35429f7d31-420.webp";
+import oldNorthCard from "@/assets/travel-blog-hub/old-north-14ec3bcb89-420.webp";
+import rothschildCard from "@/assets/travel-blog-hub/rothschild-ecff6bfaaf-420.webp";
 
 /**
  * A travel-blog neighbourhood-choice article, deliberately separate from the
@@ -31,15 +32,24 @@ const sections = [
   ["trip-planning", "Trip planning"], ["contact", "Contact me"],
 ] as const;
 
-const jerusalemSections = sections.filter(([id]) => id !== "compare");
+const neighborhoodSections = sections.filter(([id]) => id !== "compare");
 
 const jerusalemAreaCardPhotos: Record<string, { src: string; alt: string }> = {
   downtown: { src: downtownCard, alt: "Streets and historic buildings in Downtown Jerusalem" },
-  mamilla: { src: "/images/attractions/old-jerusalem-tower-of-david.webp", alt: "Tower of David beside Jerusalem's Jaffa Gate" },
+  mamilla: { src: "/images/city-stays/jerusalem-mamilla.webp", alt: "Shops and stone buildings along Jerusalem's Mamilla pedestrian avenue" },
   "old-city": { src: oldCityCard, alt: "Jerusalem's Old City and historic stone architecture" },
   "mahane-yehuda": { src: marketCard, alt: "Mahane Yehuda Market in Jerusalem" },
   "east-jerusalem": { src: eastJerusalemCard, alt: "Traditional house in East Jerusalem" },
-  "german-colony": { src: colonyCard, alt: "Streets and stone buildings of Jerusalem's German Colony" },
+  "german-colony": { src: "/images/city-stays/jerusalem-german-colony.webp", alt: "Emek Refaim Street in Jerusalem's German Colony" },
+};
+
+/** Tel Aviv thumbnail variants: use independent, location-specific assets where available. */
+const telAvivAreaCardPhotos: Record<string, { src: string; alt: string }> = {
+  "telaviv-beachfront": { src: "/images/city-stays/tel-aviv-beachfront.webp", alt: "Gordon Beach on Tel Aviv's Mediterranean waterfront" },
+  "telaviv-dizengoff": { src: "/images/city-stays/tel-aviv-dizengoff.webp", alt: "Dizengoff Square in central Tel Aviv" },
+  "telaviv-old-north": { src: oldNorthCard, alt: "Streets and green spaces of Tel Aviv's Old North" },
+  "telaviv-jaffa": { src: "/images/city-stays/tel-aviv-jaffa.webp", alt: "Market streets in Jaffa" },
+  "telaviv-rothschild": { src: rothschildCard, alt: "Rothschild Boulevard in Tel Aviv" },
 };
 
 const decisionNotes = {
