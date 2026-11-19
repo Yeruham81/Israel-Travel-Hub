@@ -75,13 +75,13 @@ export function NeighborhoodStayPage({ area }: { area: NeighborhoodStayGuide }) 
         Explore my selected hotels in {area.shortName}, then check room offers and booking terms for your dates.
       </p>
       {isDowntown ? (
-        <div className="mt-5 grid items-stretch gap-4 xl:grid-cols-[minmax(0,1fr)_minmax(250px,0.4fr)]" data-testid="downtown-hotels-with-map">
-          <ul className="grid min-w-0 gap-4 sm:grid-cols-2" data-testid="neighborhood-hotel-grid">
+        <div className="mt-5" data-testid="downtown-hotels-with-map">
+          <ul className="grid min-w-0 auto-rows-fr items-stretch gap-4 sm:grid-cols-2 xl:grid-cols-3" data-testid="neighborhood-hotel-grid">
             {hotels.map((hotel) => <JerusalemHotelTile key={hotel.id} hotel={hotel} pageId={pageId} showArea={false} stacked />)}
+            <li className="flex min-h-0 min-w-0 flex-col" data-testid="downtown-hotel-map">
+              <AreaMap area={area} provider="google" compact stretch />
+            </li>
           </ul>
-          <div className="min-w-0 xl:h-full" data-testid="downtown-hotel-map">
-            <AreaMap area={area} provider="google" compact stretch />
-          </div>
         </div>
       ) : (
         <ul className="mt-5 grid gap-4 lg:grid-cols-2" data-testid="neighborhood-hotel-grid">
