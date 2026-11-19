@@ -159,6 +159,38 @@ const groupCaptions: Record<string, { title: string; eyebrow: string; advice: st
   },
 };
 
+/** Practical prompts that occupy the third column where a category has two hotels. */
+const groupPlanningTips: Record<string, { title: string; points: readonly [string, string] }> = {
+  spa: {
+    title: "Make the most of your spa break",
+    points: [
+      "Reserve treatments ahead of your visit, especially for weekends and holiday periods.",
+      "Check spa opening times and which mineral pools are included in your room rate.",
+    ],
+  },
+  family: {
+    title: "Plan a family-friendly stay",
+    points: [
+      "Check water-park opening dates, slide height limits and children's activity hours.",
+      "Compare the meal and drink inclusions for adults and children in your chosen package.",
+    ],
+  },
+  value: {
+    title: "Find the best overall value",
+    points: [
+      "Compare hotels for the same dates, room size, meal plan and cancellation terms.",
+      "Include parking, spa admission and any beach transport in the total cost.",
+    ],
+  },
+  "ein-gedi": {
+    title: "Plan your Ein Gedi outings",
+    points: [
+      "Check nature-reserve opening hours and trail conditions before your visit.",
+      "Arrange transport to a designated Dead Sea bathing beach if you want time in the water.",
+    ],
+  },
+};
+
 const sourceIntro = "Hotel facilities, access and age policies are based on operator information. Confirm the exact room offer and current conditions before booking.";
 
 function HotelCard({ id, pageId }: { id: string; pageId: string }) {
@@ -293,6 +325,20 @@ export function HotelStyleEditorialGuide({ guide }: { guide: HotelStayDestinatio
               <p className="mt-3 max-w-4xl leading-relaxed">{copy?.advice ?? group.intro}</p>
               <ul className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3" data-testid="deadsea-hotel-grid">
                 {group.hotelIds.map(id => <HotelCard key={id} id={id} pageId={pageId} />)}
+                {group.hotelIds.length === 2 && groupPlanningTips[group.id] && <li className="min-w-0 sm:col-span-2 lg:col-span-1" data-testid="deadsea-category-tip">
+                  <aside className="flex h-full flex-col rounded-xl border border-amber-200 bg-amber-50/70 p-5 dark:border-amber-900/50 dark:bg-amber-950/20" aria-label={groupPlanningTips[group.id]!.title}>
+                    <span className="flex h-10 w-10 items-center justify-center rounded-full bg-amber-100 text-amber-700 dark:bg-amber-900/40 dark:text-amber-300">
+                      <Lightbulb className="h-5 w-5" aria-hidden />
+                    </span>
+                    <h4 className="mt-4 text-lg font-semibold leading-snug">{groupPlanningTips[group.id]!.title}</h4>
+                    <ul className="mt-4 space-y-4 text-sm leading-relaxed">
+                      {groupPlanningTips[group.id]!.points.map(point => <li key={point} className="flex items-start gap-2.5">
+                        <Check className="mt-0.5 h-4 w-4 shrink-0 text-amber-700 dark:text-amber-300" aria-hidden />
+                        <span>{point}</span>
+                      </li>)}
+                    </ul>
+                  </aside>
+                </li>}
               </ul>
               {categoryBrowse && <div className="mt-6 flex justify-center">
                 <a href={hotelBrowseAffiliateUrl(categoryBrowse, pageId)} target="_blank" rel={relFor(categoryBrowse.isAffiliate)}
