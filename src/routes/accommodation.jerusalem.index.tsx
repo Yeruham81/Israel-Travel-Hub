@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { JerusalemStayHub } from "@/components/JerusalemStayHub";
-import { cityStayGuides } from "@/data/content";
+import { cityStayGuides, jerusalemAreaGuides } from "@/data/content";
 import { hotelGuideMeta } from "@/lib/landing-schema";
 import jerusalemHeroPhoto from "@/assets/home/hero-refresh-jerusalem-jaffa-gate-v4-medium.webp";
 const g = cityStayGuides.jerusalem;
