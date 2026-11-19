@@ -17,27 +17,27 @@ const areaGuideCards = [
   {
     id: "jerusalem", eyebrow: "History & city walks", title: "Jerusalem",
     description: "Compare Downtown, Mamilla and the Old City, with practical hotel picks for sightseeing.",
-    cta: "Compare neighborhoods", to: accommodationEditorial.jerusalem.path as LinkProps["to"],
+    cta: "Compare neighborhoods", to: accommodationEditorial.jerusalem.path as NonNullable<LinkProps["to"]>,
   },
   {
     id: "telaviv", eyebrow: "Beach & city life", title: "Tel Aviv",
     description: "Choose between the beachfront, Jaffa and lively central neighborhoods, with hotel recommendations.",
-    cta: "Explore the areas", to: accommodationEditorial.telaviv.path as LinkProps["to"],
+    cta: "Explore the areas", to: accommodationEditorial.telaviv.path as NonNullable<LinkProps["to"]>,
   },
   {
     id: "haifa", eyebrow: "Coast & Carmel", title: "Haifa",
     description: "Weigh German Colony charm, Carmel views and beach access before choosing a hotel.",
-    cta: "Find your ideal base", to: accommodationEditorial.haifa.path as LinkProps["to"],
+    cta: "Find your ideal base", to: accommodationEditorial.haifa.path as NonNullable<LinkProps["to"]>,
   },
   {
     id: "tiberias", eyebrow: "Lakeside escapes", title: "Tiberias & the Galilee",
     description: "Compare waterfront and hillside stays, family facilities and convenient bases for exploring the lake.",
-    cta: "Explore lakeside stays", to: accommodationEditorial.tiberias.path as LinkProps["to"],
+    cta: "Explore lakeside stays", to: accommodationEditorial.tiberias.path as NonNullable<LinkProps["to"]>,
   },
   {
     id: "deadsea", eyebrow: "Desert & wellness", title: "Dead Sea",
     description: "Understand Ein Bokek, nearby resorts and Ein Gedi, from beach access to spa facilities.",
-    cta: "Compare resort areas", to: accommodationEditorial.deadsea.path as LinkProps["to"],
+    cta: "Compare resort areas", to: accommodationEditorial.deadsea.path as NonNullable<LinkProps["to"]>,
   },
   {
     id: "eilat", eyebrow: "Red Sea getaways", title: "Eilat",
