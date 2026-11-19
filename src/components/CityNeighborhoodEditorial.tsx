@@ -305,10 +305,9 @@ export function CityNeighborhoodEditorial({ guide }: { guide: CityStayGuide }) {
 
       <section id="tips" aria-labelledby="tips-h" className="mt-12 scroll-mt-32">
         <h2 id="tips-h" className="text-3xl">What to check before booking</h2>
-        {cityId !== "jerusalem" && <p className="mt-3 max-w-3xl leading-relaxed">The exact street, hotel entrance and room category can matter as much as the neighbourhood itself.</p>}
-        {cityId === "jerusalem"
-          ? <ul className="mt-4 grid gap-x-6 rounded-2xl border bg-secondary/20 px-4 sm:grid-cols-2 sm:px-6" aria-label="Jerusalem hotel booking checklist" data-testid="jerusalem-booking-checklist">
-              {jerusalemBookingTips.map((tip) => <li key={tip.title} className="flex items-start gap-3 border-b py-4 last:border-b-0 sm:[&:nth-last-child(-n+2)]:border-b-0">
+
+        {<ul className="mt-4 grid gap-x-6 rounded-2xl border bg-secondary/20 px-4 sm:grid-cols-2 sm:px-6" aria-label={`${cityName} hotel booking checklist`} data-testid={`${cityId === "jerusalem" ? "jerusalem" : "telaviv"}-booking-checklist`}>
+              {(cityId === "jerusalem" ? jerusalemBookingTips : telAvivBookingTips).map((tip) => <li key={tip.title} className="flex items-start gap-3 border-b py-4 last:border-b-0 sm:[&:nth-last-child(-n+2)]:border-b-0">
                 <span className="mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-full border border-primary/20 bg-primary/10 text-primary">
                   <Check className="h-4 w-4" aria-hidden />
                 </span>
@@ -317,19 +316,15 @@ export function CityNeighborhoodEditorial({ guide }: { guide: CityStayGuide }) {
                   <p className="mt-1 text-sm leading-relaxed text-muted-foreground">{tip.text}</p>
                 </div>
               </li>)}
-            </ul>
-          : <ul className="mt-5 grid gap-3 sm:grid-cols-2">
-              {guide.checklist.map((tip) => <li key={tip} className="flex gap-3 rounded-xl border bg-secondary/25 p-4 text-sm leading-relaxed"><span aria-hidden className="font-bold text-primary">✓</span>{tip}</li>)}
-            </ul>}        <aside className="mt-6 flex gap-3 rounded-xl border border-amber-200 bg-amber-50/80 p-4 text-sm leading-relaxed dark:border-amber-900/50 dark:bg-amber-950/20">
+            </ul>}
+        <aside className="mt-6 flex gap-3 rounded-xl border border-amber-200 bg-amber-50/80 p-4 text-sm leading-relaxed dark:border-amber-900/50 dark:bg-amber-950/20">
           <Lightbulb className="mt-0.5 h-5 w-5 shrink-0 text-amber-600" aria-hidden />
           <p>{cityId === "jerusalem"
             ? <>Check my <Link to="/travel-blog/calendar-of-events/" className="font-semibold text-primary underline underline-offset-2">Israel calendar of events</Link> for holiday dates that may affect local services during your stay.</>
             : <>{choices.check} See my <Link to="/travel-blog/calendar-of-events/" className="font-semibold text-primary underline underline-offset-2">Israel calendar of events</Link> for public holidays and special dates that can affect your plans.</>}</p>
         </aside>
         <p className="mt-5 text-sm leading-relaxed text-muted-foreground">
-          {cityId === "jerusalem"
-            ? "Hotels and booking websites are independent providers. Review all booking details carefully before confirming."
-            : "Accommodation and reservations are provided by independent hotels and external booking websites. Check the exact property address, room type, total price and cancellation terms with the provider before booking."}
+          {"Hotels and booking websites are independent providers. Review all booking details carefully before confirming."}
         </p>
       </section>
 
@@ -343,7 +338,8 @@ export function CityNeighborhoodEditorial({ guide }: { guide: CityStayGuide }) {
       <HomeContactForm guide={cityId === "jerusalem"
         ? { ...guideContactCopy(info.title, "accommodation", cityName),
             introduction: "Not sure which part of Jerusalem would suit your plans? Tell me your travel dates, main interests and how you expect to arrive. I'll be happy to share practical advice." }
-        : guideContactCopy(info.title, "accommodation", cityName)} />
+        : { ...guideContactCopy(info.title, "accommodation", cityName),
+            introduction: "Not sure which part of Tel Aviv would suit your plans? Tell me your dates, interests and whether the beach or city neighbourhoods matter most to you. I'll be happy to offer practical advice." }} />
       <SourceList
         ids={cityId === "jerusalem" ? [...guide.sourceIds, ...jerusalemStaySourceIds] : guide.sourceIds}
         {...(cityId === "jerusalem" ? { intro: "Transport and access information for planning your stay." } : {})}
