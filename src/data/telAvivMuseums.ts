@@ -6,6 +6,7 @@ export type MuseumEntry = {
   intro: string; highlights: string[]; tip: string; url: string; ticketUrl?: string;
   image?: { src: string; alt: string; credit?: string };
   featured?: boolean;
+  closureNote?: string;
 };
 
 export const museumAreas: { id: MuseumArea; name: string; intro: string }[] = [
@@ -24,7 +25,7 @@ export const museums: MuseumEntry[] = [
     highlights: ["Israeli and international collections", "Herta and Paul Amir Building and architecture", "Changing exhibitions and sculpture"],
     tip: "Review the exhibitions before travelling. The Eyal Ofer Pavilion (formerly Helena Rubinstein Pavilion) is at 6 Tarsat Boulevard, separate from the main entrance, and renovation notices may affect access.",
     url: "https://www.tamuseum.org.il/en/visit/", featured: true,
-    image: {src: "/images/travel-blog/museums-in-tel-aviv-hero.webp", alt: "Geometric exterior of the Tel Aviv Museum of Art", credit: "© www.artursalisz.com"},
+
   },
   {
     id: "city", name: "Tel Aviv–Yafo City Museum", area: "central", neighbourhood: "Bialik Square", address: "27 Bialik Street, Tel Aviv",
@@ -95,9 +96,10 @@ export const museums: MuseumEntry[] = [
     admission: "Paid exhibitions; some outdoor areas accessible free", booking: "Check exhibitions and programme tickets",
     intro: "A leafy multi-pavilion museum campus with archaeology, historical craft, photography and changing displays. The grounds are a real part of the experience.",
     highlights: ["Archaeological and material-culture collections", "Outdoor heritage spaces", "Changing exhibitions"],
-    tip: "The Lasky Planetarium is currently marked temporarily closed on MUZA's official site; do not plan a planetarium session without a fresh reopening notice.",
+    tip: "The Lasky Planetarium is a separate attraction within MUZA and may require a separate ticket. Check the museum for reopening news.",
+    closureNote: "Planetarium closed as of November 2026.",
     url: "https://www.eretzmuseum.org.il/en/visit/",
-    image: {src:"/images/travel-blog/muza-eretz-israel.webp", alt:"View of MUZA, Eretz Israel Museum in Ramat Aviv"},
+
   },
   {
     id: "palmach", name: "Palmach Museum", area: "north", neighbourhood: "Ramat Aviv", address: "10 Haim Levanon Street, Tel Aviv",
@@ -144,10 +146,19 @@ export const museums: MuseumEntry[] = [
     tip: "Allow enough time for the staircases and streets around the building and pair it with the Jaffa lanes and port.",
     url: "https://www.ilanagoormuseum.org/en/visiting/",
   },
+  {
+    id: "independence", name: "Independence Hall", area: "central", neighbourhood: "Rothschild Boulevard", address: "16 Rothschild Boulevard, Tel Aviv",
+    theme: "Independence heritage", bestFor: "Israel's founding history", duration: "45–60 minutes once reopened",
+    admission: "Reopening and admission details to be announced", booking: "Interior visits unavailable while closed",
+    intro: "The historic residence of Meir Dizengoff is where David Ben-Gurion proclaimed the establishment of the State of Israel on 14 May 1948. Its historic significance makes it an important part of Tel Aviv's museum story, even during restoration.",
+    highlights: ["Site of Israel's 1948 declaration", "Early Tel Aviv history", "Historic Rothschild Boulevard setting"],
+    tip: "You can include the building in a Rothschild Boulevard heritage walk, but do not plan an interior tour until the official operator confirms reopening.",
+    closureNote: "Closed as of November 2026.",
+    url: "https://shimur.org/sites/independence-hall/?lang=en",
+  },
 ];
 
 export const additionalMuseums = [
   { name: "Etzel Museum – Jabotinsky House", place: "38 King George Street, central Tel Aviv", note: "A separate museum focused on the organisation's earlier history; verify visiting hours with the Ministry of Defense.", url: "https://museums.mod.gov.il/sites/Etzel/aboutus/Pages/About.aspx" },
   { name: "Uri Geller Museum", place: "Old Jaffa", note: "A specialist private or group guided visit, not a regular walk-in museum. Contact the operator before planning it.", url: "https://www.urigellermuseum.com/" },
-  { name: "Independence Hall", place: "16 Rothschild Boulevard", note: "Historic declaration site. Extended renovations have affected access; do not plan an interior visit until reopening is confirmed by the operator.", url: "https://shimur.org/sites/independence-hall/?lang=en" },
 ];
