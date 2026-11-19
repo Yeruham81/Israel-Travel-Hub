@@ -18,6 +18,7 @@ describe("Haifa Expedia browse buttons use verified Travelpayouts affiliate link
     );
     expect(links).toHaveLength(1);
     const [link] = links;
+    if (!link) throw new Error("Haifa Expedia affiliate link missing for " + expectedOffer);
     expect(link.url).toMatch(/^https:\/\/expedia\.(?:tpm\.li|tpk\.lv)\/[A-Za-z0-9]+$/);
     const target = new URL(hotelBrowseAffiliateUrl(link, "stay-haifa"));
     expect(target.hostname).toMatch(/^expedia\.(?:tpm\.li|tpk\.lv)$/);
