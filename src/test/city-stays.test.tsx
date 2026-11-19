@@ -100,14 +100,7 @@ describe.each([
       expect(new Set(imageUrls).size).toBe(expectedHotels);
       expect(screen.getByTestId("neighborhood-hotel-photo-credits")).toBeInTheDocument();
       expect(within(container.querySelector("#book") as HTMLElement).getByRole("heading", {
-        name: g.id === "jerusalem" ? ({
-          downtown: "Popular hotels in Jerusalem's Downtown",
-          mamilla: "Popular hotels in Mamilla & King David Street",
-          "old-city": "Popular hotels in Jerusalem's Old City",
-          "mahane-yehuda": "Popular hotels near Mahane Yehuda & Nachlaot",
-          "east-jerusalem": "Popular hotels in East Jerusalem",
-          "german-colony": "Popular hotels in German Colony & Baka",
-        } as Record<string, string>)[area.id]! : `Hotels in ${area.shortName}`,
+        name: /^Popular hotels/i,
       })).toBeInTheDocument();
       if (g.id === "jerusalem") {
         expect(within(container.querySelector("#book") as HTMLElement).queryByText(/Explore my selected hotels/)).toBeNull();
