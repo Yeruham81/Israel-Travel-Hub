@@ -34,7 +34,7 @@ import tabghaPhoto from "@/assets/guides/tabgha.jpg";
 import yardenitPhoto from "@/assets/guides/yardenit.jpg";
 import beatitudesPhoto from "@/assets/guides/mount-of-beatitudes.jpg";
 import mountTaborPhoto from "@/assets/guides/mount-tabor.jpg";
-import galileeTourPhoto from "@/assets/attractions-hub/region-sea-of-galilee-480.webp";
+import galileeTourPhoto from "@/assets/attractions-hub/region-nazareth-lower-galilee-480.webp";
 import nazarethPhoto from "@/assets/guides/2026-10/basilica-of-the-annunciation.webp";
 import deadSeaPhoto from "@/assets/dead-sea/beach.webp";
 import einGediPhoto from "@/assets/guides/dead-sea-excursions/ein-gedi-waterfall.webp";
@@ -131,7 +131,7 @@ export const stayGuideGroups: Record<Region, GuideGroups> = {
     ],
     onward: [
       card("Mount Tabor", "/attractions/mount-tabor/", "Visit the hilltop basilica and enjoy views across Lower Galilee.", mountTaborPhoto, "Basilica and landscape on Mount Tabor"),
-      card("Nazareth & Galilee tours", "/tours/nazareth-sea-of-galilee/", "Explore organized trips to the region’s key places.", galileeTourPhoto, "Sea of Galilee and surrounding green hills"),
+      card("Nazareth & Galilee tours", "/tours/nazareth-sea-of-galilee/", "Explore organized trips to the region’s key places.", galileeTourPhoto, "Visitors viewing mosaics inside the Basilica of the Annunciation in Nazareth"),
       card("Nazareth", "/attractions/basilica-of-the-annunciation/", "Add a trip to Nazareth and its major historic church.", nazarethPhoto, "Basilica of the Annunciation in Nazareth"),
       card("Getting around Israel", "/travel-blog/getting-around-israel/", "See how the north fits with the rest of your journey.", roadTrip, "Road travel through the countryside"),
       card("Israel itinerary: seven days", "/travel-blog/israel-itinerary-7-days/", "Build a northern stop into a week-long itinerary.", sevenDayPhoto, "Galilee hills and countryside"),
