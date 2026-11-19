@@ -1,0 +1,31 @@
+{
+  "project_id": 406243,
+  "partner_id": 622032,
+  "links": [
+    {
+      "id": "haifa-luxury-browse",
+      "name": "Luxury hotels in Haifa",
+      "url": "https://www.expedia.com/Haifa-Hotels-Luxury-Hotel.0-0-d1446-tLuxuryHotel.Travel-Guide-Filter-Hotels"
+    },
+    {
+      "id": "haifa-boutique-browse",
+      "name": "Boutique hotels in Haifa",
+      "url": "https://www.expedia.com/Haifa-Hotels-Boutique-Hotel.0-0-d1446-tBoutiqueHotel.Travel-Guide-Filter-Hotels"
+    },
+    {
+      "id": "haifa-family-browse",
+      "name": "Family hotels in Haifa",
+      "url": "https://www.expedia.com/Haifa-Hotels-Family-Hotel.0-0-d1446-tFamilyHotel.Travel-Guide-Filter-Hotels"
+    },
+    {
+      "id": "haifa-city-browse",
+      "name": "Hotels in Haifa (city and all)",
+      "url": "https://www.expedia.com/Haifa-Hotels.d1446.Travel-Guide-Hotels"
+    },
+    {
+      "id": "haifa-budget-browse",
+      "name": "Affordable hotels in Haifa",
+      "url": "https://www.expedia.com/Haifa-Hotels-Cheap-Hotels.0-0-d1446-tCheapHotels.Travel-Guide-Filter-Hotels"
+    }
+  ]
+}
