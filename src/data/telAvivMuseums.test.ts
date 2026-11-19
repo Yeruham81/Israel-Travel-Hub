@@ -69,8 +69,8 @@ describe("Tel Aviv museums editorial guide", () => {
   });
 
   it("uses built-in map clustering and keeps direct directions separate from venue searches", () => {
-    const mapHtml = readFileSync(new URL("../../public/maps/tel-aviv-museums.html", import.meta.url), "utf8");
-    const guideCode = readFileSync(new URL("../components/TelAvivMuseumsGuide.tsx", import.meta.url), "utf8");
+    const mapHtml = readFileSync("public/maps/tel-aviv-museums.html", "utf8");
+    const guideCode = readFileSync("src/components/TelAvivMuseumsGuide.tsx", "utf8");
     expect(mapHtml).toContain("cluster:true");
     expect(mapHtml).toContain("getClusterExpansionZoom");
     expect(mapHtml).toContain("museum-cluster-count");
