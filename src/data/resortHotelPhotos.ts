@@ -7,6 +7,7 @@
  */
 import type { HotelIllustration } from "@/data/telAvivHotelPhotos";
 import haifaPanorama from "@/assets/haifa/panorama.webp";
+import galileeWaterView from "@/assets/home/hero-galilee-medium.webp";
 import deadSeaLandscape from "@/assets/dead-sea/landscape.webp";
 import deadSeaSunbedsPhoto from "@/assets/dead-sea/sunbeds.webp";
 import deadSeaSaltShore from "@/assets/guides/dead-sea-excursions/dead-sea-salt-shore.webp";
@@ -49,7 +50,7 @@ export const resortHotelPhotos: Record<string, HotelIllustration> = {
   "tib-caesar": library("tib-caesar.webp", "Illustrative hotel image in central Tiberias"),
   "tib-sofia": library("tib-sofia.webp", "Illustrative Tiberias hotel image"),
   "tib-emily": library("tib-emily.webp", "Illustrative hotel room in Tiberias"),
-  "tib-tiberia": library("tib-tiberia.webp", "Illustrative Tiberias accommodation image"),
+  "tib-tiberia": local(galileeWaterView, "Sea of Galilee and Tiberias hills from across the lake, illustrating the hotel location"),
   "tib-hostel": library("tib-hostel.webp", "Illustrative hostel interior in Tiberias"),
 
   "ds-kayma": library("ds-kayma.jpg", "Illustrative hotel and resort image near the Dead Sea"),
