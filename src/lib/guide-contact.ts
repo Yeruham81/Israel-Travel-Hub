@@ -47,3 +47,17 @@ export function guideContactCopy(_title: string, kind: GuideContactKind, place?:
         placeholder: "Travel dates, places you plan to visit or your question…" };
   }
 }
+
+/** City-specific transport and sightseeing inquiry, for Jerusalem and Tel Aviv neighborhood pages.
+ * Hotel recommendations remain in the guide; the contact form is for trip planning and private travel.
+ */
+export function neighborhoodTripContactCopy(city: "Jerusalem" | "Tel Aviv"): GuideContactCopy {
+  return {
+    subject: "",
+    heading: `Planning a trip to ${city}?`,
+    introduction: city === "Jerusalem"
+      ? "Exploring Jerusalem and its surroundings? I can help arrange an airport transfer, a private driver for sightseeing or a day trip beyond the city. Tell me your travel dates, how many people are coming and what you'd like to see, and I'll reply personally."
+      : "Planning to explore Tel Aviv, Jaffa or other places nearby? I can help arrange an airport transfer, a private driver or a day trip. Tell me your travel dates, how many people are coming and what you'd like to see, and I'll reply personally.",
+    placeholder: "Travel dates, number of travelers, pickup location, destinations or your question…",
+  };
+}
