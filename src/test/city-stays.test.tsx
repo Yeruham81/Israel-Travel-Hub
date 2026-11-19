@@ -95,7 +95,7 @@ describe.each([
       const cards = screen.getAllByTestId("hotel-recommendation");
       const expectedHotels = g.id === "jerusalem" ? 5 : 4;
       expect(cards).toHaveLength(expectedHotels);
-      expect(container.querySelector("#book [data-testid='neighborhood-hotel-grid']")).toHaveClass(g.id === "jerusalem" ? "sm:grid-cols-2" : "lg:grid-cols-2");
+      expect(container.querySelector("#book [data-testid='neighborhood-hotel-grid']")).toHaveClass(g.id === "jerusalem" ? "sm:grid-cols-2" : "xl:grid-cols-3");
       const imageUrls = cards.map((card) => within(card).getByTestId("hotel-illustration").getAttribute("src"));
       expect(new Set(imageUrls).size).toBe(expectedHotels);
       expect(screen.getByTestId("neighborhood-hotel-photo-credits")).toBeInTheDocument();
