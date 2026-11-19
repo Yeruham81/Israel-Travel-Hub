@@ -165,7 +165,7 @@ export function JerusalemHotelBrowser() {
   );
 }
 
-export function JerusalemHotelTile({ hotel, pageId = "stay-jerusalem", showArea = true }: { hotel: HotelRecommendation; pageId?: string; showArea?: boolean }) {
+export function JerusalemHotelTile({ hotel, pageId = "stay-jerusalem", showArea = true, stacked = false }: { hotel: HotelRecommendation; pageId?: string; showArea?: boolean; stacked?: boolean }) {
   const [photoFailed, setPhotoFailed] = useState(false);
   const area = jerusalemAreaGuides.find((item) => item.id === hotel.areaId);
   if (!area) return null;
@@ -174,19 +174,20 @@ export function JerusalemHotelTile({ hotel, pageId = "stay-jerusalem", showArea 
   const booking = linksForPage("stay-area-" + area.id).find((item) => item.id === "hotel-" + hotel.id + "-expedia");
   const notice = activeHotelNotice(hotel);
   const copy = jerusalemHotelTileCopy[hotel.id] || { description: hotel.summary, bestFor: hotel.bestFor };
+  const verticalLayout = showArea || stacked;
 
   return (
-    <li className={showArea
+    <li className={verticalLayout
       ? "group flex h-full min-w-0 flex-col overflow-hidden rounded-2xl border bg-card shadow-sm transition-all hover:border-primary/50 hover:shadow-md"
       : "group flex min-w-0 flex-col overflow-hidden rounded-2xl border bg-card shadow-sm transition-all hover:border-primary/50 hover:shadow-md sm:grid sm:grid-cols-[160px_minmax(0,1fr)] sm:grid-rows-[1fr_auto]"
     } data-testid={showArea ? "jerusalem-hotel-card" : "hotel-recommendation"}>
-      <div className={showArea ? "relative w-full overflow-hidden bg-muted" : "relative overflow-hidden bg-muted sm:row-span-2"}>
+      <div className={verticalLayout ? "relative w-full overflow-hidden bg-muted" : "relative overflow-hidden bg-muted sm:row-span-2"}>
         <img
           src={image.src} alt={image.alt}
           onError={() => { if (!photoFailed) setPhotoFailed(true); }}
           width={755} height={503} loading="lazy" decoding="async"
           data-testid="hotel-illustration"
-          className={showArea
+          className={verticalLayout
             ? "aspect-[16/9] w-full object-cover"
             : "aspect-[16/9] w-full object-cover sm:aspect-auto sm:h-full sm:min-h-[215px]"
           }
@@ -195,14 +196,14 @@ export function JerusalemHotelTile({ hotel, pageId = "stay-jerusalem", showArea 
           {area.shortName}
         </span>}
       </div>
-      <div className={showArea ? "flex min-w-0 flex-1 flex-col px-4 pb-3 pt-4" : "flex min-w-0 flex-col px-4 pb-3 pt-4"}>
+      <div className={verticalLayout ? "flex min-w-0 flex-1 flex-col px-4 pb-3 pt-4" : "flex min-w-0 flex-col px-4 pb-3 pt-4"}>
         <h3 className="text-lg font-semibold leading-snug">{hotel.name}</h3>
         <p className="mt-2 line-clamp-2 text-sm leading-relaxed text-muted-foreground" data-testid="hotel-short-description">{copy.description}</p>
         <p className="mt-2 text-sm leading-snug" data-testid="hotel-best-for"><span className="font-semibold">Best for:</span> {copy.bestFor}</p>
         {notice && <p className="mt-3 rounded-lg border border-primary/25 bg-secondary/70 p-3 text-xs leading-relaxed" data-testid="hotel-operating-notice">{notice.message}</p>}
       </div>
       {booking && (
-        <div className={showArea ? "mt-auto border-t bg-secondary/20 px-3 py-3 sm:px-4" : "border-t bg-secondary/20 px-3 py-3 sm:col-start-2 sm:px-4"}>
+        <div className={verticalLayout ? "mt-auto border-t bg-secondary/20 px-3 py-3 sm:px-4" : "border-t bg-secondary/20 px-3 py-3 sm:col-start-2 sm:px-4"}>
           <a
             href={hotelAffiliateUrl(booking, pageId, hotel.id)}
             target="_blank" rel={relFor(booking.isAffiliate)}
