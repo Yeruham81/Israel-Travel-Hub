@@ -16,16 +16,16 @@ describe("unique hotel photo mapping across all destinations", () => {
   ];
 
   it("has one dedicated image for each of 87 hotel identities, reused only for that same hotel", () => {
-    expect(cityHotels).toHaveLength(56);
+    expect(cityHotels).toHaveLength(57);
     expect(resortHotels).toHaveLength(31);
-    expect(Object.keys(supplementalHotelPhotos)).toHaveLength(28);
+    expect(Object.keys(supplementalHotelPhotos)).toHaveLength(29);
     expect(Object.keys(resortHotelPhotos)).toHaveLength(31);
 
     const entries = [
       ...cityHotels.map((hotel) => ({ hotelId: hotel.id, image: cityHotelPhoto(hotel) })),
       ...resortHotels.map((hotel) => ({ hotelId: hotel.id, image: resortHotelPhoto(hotel.id) })),
     ];
-    expect(entries).toHaveLength(87);
+    expect(entries).toHaveLength(88);
     expect(new Set(entries.map(({ hotelId }) => hotelId)).size).toBe(87);
 
     const assignedPaths = entries.map(({ image }) => image.src);
