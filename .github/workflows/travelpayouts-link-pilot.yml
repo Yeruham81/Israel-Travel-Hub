@@ -12,6 +12,7 @@ on:
           - pilot
           - paamonim
           - jerusalem-areas
+          - haifa-browse
   push:
     branches: [main]
     paths:
@@ -38,6 +39,7 @@ jobs:
           node scripts/travelpayouts/generate-links.mjs scripts/travelpayouts/remaining-hotels.json --validate
           node scripts/travelpayouts/generate-links.mjs scripts/travelpayouts/paamonim-hotel.json --validate
           node scripts/travelpayouts/generate-links.mjs scripts/travelpayouts/jerusalem-neighborhood-fifth-hotels.json --validate
+          node scripts/travelpayouts/generate-links.mjs scripts/travelpayouts/haifa-browse.json --validate
 
   generate-links:
     name: Generate candidate links for review (never edits site)
@@ -57,8 +59,26 @@ jobs:
           REQUESTED_BATCH: ${{ inputs.batch }}
           IS_PAAMONIM_PUSH: ${{ github.event_name == 'push' && contains(github.event.head_commit.message, '[paamonim-hotel]') }}
           IS_JERUSALEM_AREAS_PUSH: ${{ github.event_name == 'push' && contains(github.event.head_commit.message, '[generate-jerusalem-areas]') }}
+          IS_HAIFA_BROWSE_PUSH: ${{ github.event_name == 'push' && contains(github.event.head_commit.message, '[generate-haifa-browse]') }}
         run: |
-          if [ "$REQUESTED_BATCH" = "jerusalem-areas" ] || [ "$IS_JERUSALEM_AREAS_PUSH" = "true" ]; then
+          if [ "$REQUESTED_BATCH" = "haifa-browse" ] || [ "$IS_HAIFA_BROWSE_PUSH" = "true" ]; then
+            node scripts/travelpayouts/generate-links.mjs scripts/travelpayouts/haifa-browse.json
+            node --input-type=module -e '
+              import { readFileSync } from "node:fs";
+              const input = JSON.parse(readFileSync("scripts/travelpayouts/haifa-browse.json", "utf8"));
+              const data = JSON.parse(readFileSync("artifacts/travelpayouts-pilot.json", "utf8"));
+              if (data.project_id !== input.project_id || data.partner_id !== input.partner_id
+                  || data.items?.length !== 5 || input.links.length !== 5) throw Error("Incomplete Haifa browse batch");
+              for (const target of input.links) {
+                const item = data.items.find(x => x.id === target.id);
+                if (!item || item.original_url !== target.url || item.status !== "generated_pending_review"
+                    || !/^https:\/\/expedia\.(?:tpm\.li|tpk\.lv)\/[A-Za-z0-9]+\/?(?:\?[^\s]*)?$/.test(item.affiliate_url ?? "")) {
+                  throw Error("Unverified Haifa Expedia affiliate link: " + target.id);
+                }
+                console.log(target.id + " verified affiliate: " + item.affiliate_url);
+              }
+            '
+          elif [ "$REQUESTED_BATCH" = "jerusalem-areas" ] || [ "$IS_JERUSALEM_AREAS_PUSH" = "true" ]; then
             node scripts/travelpayouts/generate-links.mjs scripts/travelpayouts/jerusalem-neighborhood-fifth-hotels.json
             node --input-type=module -e '
               import { readFileSync } from "node:fs";
