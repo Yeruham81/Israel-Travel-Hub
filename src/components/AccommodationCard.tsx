@@ -1,15 +1,12 @@
-import { Link, type LinkProps } from "@tanstack/react-router";
-import { ArrowRight, BookOpen } from "lucide-react";
+import { Link } from "@tanstack/react-router";
+import { ArrowRight } from "lucide-react";
 import type { AccommodationDestinationCard } from "@/data/content";
 import { relFor } from "@/lib/outbound";
 
-type GuideLink = { to: LinkProps["to"]; label: string };
-
 export function AccommodationCard({
-  destination: d, guideLink, comingSoon = false,
+  destination: d, comingSoon = false,
 }: {
   destination: AccommodationDestinationCard;
-  guideLink?: GuideLink;
   comingSoon?: boolean;
 }) {
   const isExternal = "href" in d;
@@ -44,10 +41,5 @@ export function AccommodationCard({
       : isExternal
         ? <a href={d.href} target="_blank" rel={relFor(false)} className={primaryClass} data-testid="accommodation-destination-card">{content}</a>
         : <Link to={d.to} {...(d.hash ? { hash: d.hash } : {})} className={primaryClass} data-testid="accommodation-destination-card">{content}</Link>}
-    {guideLink && !comingSoon && <div className="border-t px-2.5 py-1 sm:px-4">
-      <Link to={guideLink.to} className="inline-flex min-h-11 items-center gap-1.5 text-[11px] font-semibold leading-snug text-primary underline-offset-4 hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary sm:gap-2 sm:text-sm">
-        <BookOpen className="h-4 w-4 shrink-0" aria-hidden /> {guideLink.label}
-      </Link>
-    </div>}
   </article>;
 }
