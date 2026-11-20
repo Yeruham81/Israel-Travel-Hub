@@ -56,8 +56,8 @@ export function neighborhoodTripContactCopy(city: "Jerusalem" | "Tel Aviv"): Gui
     subject: "",
     heading: `Planning a trip to ${city}?`,
     introduction: city === "Jerusalem"
-      ? "Exploring Jerusalem and its surroundings? I can help arrange an airport transfer, a private driver for sightseeing or a day trip beyond the city. Tell me your travel dates, how many people are coming and what you'd like to see, and I'll reply personally."
-      : "Planning to explore Tel Aviv, Jaffa or other places nearby? I can help arrange an airport transfer, a private driver or a day trip. Tell me your travel dates, how many people are coming and what you'd like to see, and I'll reply personally.",
+      ? "I'm Moshe Barak. Need an airport transfer to Jerusalem, a private driver for sightseeing or a day trip beyond the city? Tell me your dates, pickup point and group size, and I'll reply personally."
+      : "I'm Moshe Barak. Need an airport transfer to Tel Aviv or Jaffa, a private ride or a day trip? Tell me your travel dates, pickup point and group size, and I'll reply personally.",
     placeholder: "Travel dates, number of travelers, pickup location, destinations or your question…",
   };
 }
