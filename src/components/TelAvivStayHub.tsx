@@ -15,7 +15,7 @@ import { guideContactCopy } from "@/lib/guide-contact";
 import { CityHotelPhotoCredits } from "@/components/CityHotelPhotoCredits";
 import { AreaPhotoCredit } from "@/components/AreaMap";
 import telavivHeroPhoto from "@/assets/home/hero-refresh-tel-aviv-coastline-v2-medium.webp";
-import telavivAreaGuidePhoto from "@/assets/home/hero-refresh-tel-aviv-sarona-v4-medium.webp";
+import telavivAreaGuidePhoto from "@/assets/guides/2026-11/where-to-stay-tel-aviv-drive.webp";
 
 const pageSections = [
   ["book", "Hotels"], ["areas", "Neighborhoods"], ["compare", "Compare areas"], ["area-guide", "Where to stay"],
