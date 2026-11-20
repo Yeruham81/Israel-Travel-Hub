@@ -299,6 +299,40 @@ describe.each([
 
 });
 
+describe("Five Tel Aviv neighborhood hotels and compact maps", () => {
+  it("shows four local hotels plus one clearly labeled nearby hotel, all with tracked Expedia links", () => {
+    for (const area of telAvivAreaGuides) {
+      const { container, unmount } = render(<NeighborhoodStayPage area={area} />);
+      const list = within(container.querySelector("#book") as HTMLElement).getByTestId("neighborhood-hotel-grid");
+      const cards = within(list).getAllByTestId("hotel-recommendation");
+      expect(cards, area.name).toHaveLength(5);
+      expect(list.children).toHaveLength(6);
+      expect(list).toHaveClass("sm:grid-cols-2", "xl:grid-cols-3");
+      const map = within(list).getByTestId("tel-aviv-hotel-map");
+      expect(map).not.toHaveClass("sm:col-span-2", "xl:col-span-2");
+      expect(map.querySelector("iframe")?.getAttribute("src")).toContain("maps.google.com");
+      const nearby = cards[4]!;
+      expect(nearby).toHaveTextContent("Nearby ·");
+      const name = nearby.querySelector("h3")!.textContent!;
+      const hotel = telAvivHotelCatalog.find((item) => item.name === name)!;
+      expect(hotel, name).toBeDefined();
+      expect(hotel.areaId).not.toBe(area.id);
+      const offer = linksForPage(`stay-area-${hotel.areaId}`).find((item) => item.id === `hotel-${hotel.id}-expedia`)!;
+      expect(offer).toBeDefined();
+      expect(offer.isAffiliate).toBe(true);
+      expect(within(nearby).getByRole("link", { name: `${offer.ctaLabel} for ${hotel.name}` }))
+        .toHaveAttribute("href", hotelAffiliateUrl(offer, `stay-area-${area.id}`, hotel.id));
+      expect(new Set(cards.map((card) => within(card).getByTestId("hotel-illustration").getAttribute("src"))).size).toBe(5);
+      unmount();
+    }
+  }, 20000);
+
+  it("never uses the retired Dizengoff Garden hotel-card image", () => {
+    const hotel = telAvivHotelCatalog.find((entry) => entry.id === "tlv-dizengoff-garden")!;
+    expect(cityHotelPhoto(hotel).src).not.toContain("tlv-dizengoff-garden.webp");
+  });
+});
+
 describe("Tel Aviv direct hotel catalog", () => {
   it("shows all 32 neighborhood hotels with booking links and area-specific copy", () => {
     expect(telAvivHotelCatalog).toHaveLength(32);
