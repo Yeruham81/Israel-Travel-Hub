@@ -176,3 +176,18 @@ export const topTenSuggestedRoutes = [
   { title: "Galilee & northern Israel", locations: ["galilee","haifa"], summary: "Choose a lake-area base for heritage and nature visits, then add a separate Haifa stop on a longer northern trip.", note: "Lake scenery · Heritage · Gardens" },
   { title: "Negev & Red Sea", locations: ["desert-night","red-sea"], summary: "Spend time at Mitzpe Ramon, ideally including a night, before continuing south to Eilat for reef and seaside experiences.", note: "Desert · Stars · Snorkelling" },
 ] as const;
+
+export const topTenFaqs = [
+  { q: "Which experiences should I choose for my first visit to Israel?",
+    a: "I would prioritise Jerusalem, time on the Mediterranean coast and one regional excursion that matches your interests. If history appeals most, consider Masada; if you prefer nature or relaxation, think about a Dead Sea beach or the Galilee." },
+  { q: "How many days do I need to experience Israel?",
+    a: "Three to five days can give you a focused city-and-day-trip introduction, while seven to ten days offers more room for regional stops. Travelling to Eilat or Mitzpe Ramon takes extra time. Use my itineraries to build a route that fits your actual dates." },
+  { q: "Can I visit these places without renting a car?",
+    a: "Yes, especially Jerusalem, Tel Aviv and Haifa, which have public transport options. Masada, the Dead Sea, lakeside Galilee stops and the southern desert are more involved; compare public transport, guided tours and an arranged driver for the specific day." },
+  { q: "Which experiences suit families with children?",
+    a: "An appropriate supervised beach, food market, accessible Old City route, selected museums or a suitable Eilat marine activity can work well. At Masada, the desert or on snorkelling outings, choose the route and conditions for your children's ages and abilities." },
+  { q: "When is the best season to visit these places?",
+    a: "Spring and autumn are good starting points for a varied trip, but each region differs. Desert hikes and open-air archaeology need heat-aware planning; beach and water activities have their own seasons. Check weather and holiday arrangements for your actual travel dates." },
+  { q: "Can I combine Eilat and the Ramon Crater with Jerusalem or Tel Aviv?",
+    a: "You can combine them on a longer trip, but I recommend treating the Negev and Eilat as a southern leg with dedicated travel time and at least one overnight stop. They are not quick additions to a central-Israel sightseeing day." },
+];
