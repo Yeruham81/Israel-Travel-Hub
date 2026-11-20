@@ -44,9 +44,9 @@ describe("visitor event card grouping",()=>{
     const cards=groupEventCards([sample,later,editorial]);
     expect(cards).toHaveLength(3);
   });
-  it("uses exactly eight illustrated, existing and distinct travel guides",()=>{
-    expect(EVENT_RELATED_GUIDES).toHaveLength(8);
-    expect(new Set(EVENT_RELATED_GUIDES.map(x=>x.to)).size).toBe(8);
+  it("uses seven illustrated, existing and distinct travel guides",()=>{
+    expect(EVENT_RELATED_GUIDES).toHaveLength(7);
+    expect(new Set(EVENT_RELATED_GUIDES.map(x=>x.to)).size).toBe(7);
     for(const guide of EVENT_RELATED_GUIDES){
       expect(String(guide.to)).toMatch(/^\/travel-blog\//);
       expect(guide.photo.src).toBeTruthy();

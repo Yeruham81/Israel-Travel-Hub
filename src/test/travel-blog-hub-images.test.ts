@@ -7,8 +7,8 @@ import { travelBlogHubImageSets, travelBlogExploreImageSets } from "@/data/trave
 const widths = (srcset: string) => srcset.split(", ").map(part => Number(part.match(/ (\d+)w$/)?.[1]));
 
 describe("travel-blog index responsive WebP delivery", () => {
-  it("maps actual unique photos for the 48-card directory and every topic view", () => {
-    expect(guideDirectory).toHaveLength(48);
+  it("maps actual unique photos for the 46-card directory and every topic view", () => {
+    expect(guideDirectory).toHaveLength(46);
     for (const topic of [undefined, ...guideTopics.map(item => item.id)]) {
       const guides = filterGuides("", topic);
       const pictured = uniqueGuideCardPhotos(guides.map(guide => ({ guide })));

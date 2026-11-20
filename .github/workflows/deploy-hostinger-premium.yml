@@ -226,7 +226,7 @@ jobs:
           echo "Retired old accommodation HTML pages into a private backup, when present."
 
       # Delete only the two explicitly withdrawn old guide HTML files.
-      # rsync intentionally does not use --delete because PHP and other site assets
+      # The upload is non-destructive because PHP and other site assets
       # must remain untouched; take a private backup before retiring these paths.
       - name: Retire removed day-trip guide HTML
         if: steps.freshness.outputs.current == 'true' && env.DRY_RUN != 'true'

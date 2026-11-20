@@ -15,7 +15,7 @@ import { israelToday, rollingMonths, type Month } from "@/data/holidayRolling";
 const PATH = "/travel-blog/israel-holidays/";
 const TITLE = "Israel Holidays Calendar: Dates & Travel Planning";
 const DESCRIPTION = "Explore Israel's holidays and their impact on travel. Select your dates on an interactive calendar to check transport changes, opening hours, crowds and local observances.";
-const photo = migrationPhotos["calendar-of-events"];
+const photo = {src:"/images/attractions/old-jerusalem-western-wall.webp",alt:"Worshippers and visitors at the Western Wall in Jerusalem"};
 const crumbs = [{name:"Home",path:"/"},{name:"Travel guides",path:"/travel-blog/"},{name:"Israel holidays",path:PATH}];
 
 export const Route = createFileRoute("/travel-blog/israel-holidays")({

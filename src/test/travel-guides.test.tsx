@@ -164,11 +164,11 @@ describe("migrated practical guides", () => {
     const router = await routerAt("/travel-blog/");
     const Hub = HubRoute.options.component!;
     const html = renderToString(<RouterContextProvider router={router}><Hub /></RouterContextProvider>);
-    expect(guideDirectory).toHaveLength(48);
+    expect(guideDirectory).toHaveLength(46);
     const doc = new DOMParser().parseFromString(html, "text/html");
     const cardPhotos = [...doc.querySelectorAll('[data-testid="guide-directory-card"] img')].map(photo => photo.getAttribute("src") || "");
     expect(repeatedPhotos(cardPhotos)).toEqual([]);
-    expect(new Set(guideDirectory.map((guide) => guide.to)).size).toBe(48);
+    expect(new Set(guideDirectory.map((guide) => guide.to)).size).toBe(46);
     expect(guideDirectory.some(guide => guide.id === "israel-holidays" && guide.to === "/travel-blog/israel-holidays/")).toBe(true);
     for (const guide of guideDirectory) {
       expect(html).toContain(`href="${guide.to}"`);
@@ -216,7 +216,7 @@ describe("migrated practical guides", () => {
     const router = await routerAt("/travel-blog/");
     const Hub = HubRoute.options.component!;
     render(<RouterContextProvider router={router}><Hub /></RouterContextProvider>);
-    expect(screen.getAllByTestId("guide-directory-card")).toHaveLength(48);
+    expect(screen.getAllByTestId("guide-directory-card")).toHaveLength(46);
     expect(screen.queryByRole("searchbox")).not.toBeInTheDocument();
     expect(screen.queryByRole("search")).not.toBeInTheDocument();
     const topics = screen.getByRole("navigation", { name: "Filter guides by topic" });
@@ -231,13 +231,13 @@ describe("migrated practical guides", () => {
     expect(topics.querySelectorAll('[aria-current="true"]')).toHaveLength(1);
     fireEvent.click(within(topics).getByRole("link", { name: "All guides" }));
     await waitFor(() => expect(router.state.location.search).toEqual({}));
-    expect(screen.getAllByTestId("guide-directory-card")).toHaveLength(48);
+    expect(screen.getAllByTestId("guide-directory-card")).toHaveLength(46);
     await act(async () => { await router.navigate({ to: "/travel-blog/", search: { topic: "attractions" } }); });
     expect(screen.getAllByTestId("guide-directory-card")).toHaveLength(filterGuides("", "attractions").length);
     expect(within(topics).getByRole("link", { name: "Attractions" })).toHaveAttribute("aria-current", "true");
     fireEvent.click(screen.getByRole("link", { name: "Clear filter" }));
     await waitFor(() => expect(router.state.location.search).toEqual({}));
-    expect(screen.getAllByTestId("guide-directory-card")).toHaveLength(48);
+    expect(screen.getAllByTestId("guide-directory-card")).toHaveLength(46);
   });
 
   it("ignores deprecated text-search parameters instead of invisibly filtering the directory", async () => {
@@ -408,7 +408,7 @@ describe("migrated practical guides", () => {
     expect(guide.sections.find(section => section.id === "shabbat")?.paragraphs.join(" ")).toMatch(/Terminal 1/);
     expect(guide.sections.find(section => section.id === "bikes")?.paragraphs.join(" ")).toMatch(/at least 16.*qualification requirements/s);
     expect(guide.photo.src).toMatch(/^\/(?:src\/)?assets\//);
-    expect(guide.photo.licenseUrl).toBe("https://creativecommons.org/licenses/by/2.5/");
+    expect(guide.photo.alt).toContain("Dizengoff");
     expect(guide.faqs).toHaveLength(15);
     expect(guide.faqGroups).toHaveLength(3);
     expect(guide.faqGroups!.flatMap(group => group.indexes).sort((a, b) => a - b)).toEqual([...Array(15).keys()]);

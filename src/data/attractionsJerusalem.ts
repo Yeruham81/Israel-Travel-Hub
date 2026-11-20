@@ -6,7 +6,7 @@ import mountZion from "@/assets/guides/mount-zion.jpg";
 export const jerusalemAttractions: Record<string, Attraction> = {
 "old-city-jerusalem": {
   title:oldCityJerusalemSite.title,description:oldCityJerusalemSite.description,
-  region:"Jerusalem",image:{src:panorama,alt:"Jerusalem Old City skyline and historic walls"},
+  region:"Jerusalem",image:oldCityJerusalemSite.hero,
   intro:oldCityJerusalemSite.intro,
   takeaway:"Choose your gate by the sites you want to visit. Jaffa Gate works well for the Christian and Armenian quarters; Dung Gate is convenient for the Western Wall and Jewish Quarter. A half-day is enough for one or two areas, not every landmark.",duration:"Half day to full day",
   highlights:[

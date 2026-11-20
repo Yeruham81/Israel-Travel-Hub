@@ -11,7 +11,7 @@ import { roshHanikraSite } from "@/data/roshHanikraSite";
 export const northernAttractions: Record<string, Attraction> = {
 "sea-of-galilee":{
  title:"Sea of Galilee: shores, historic sites and visitor guide",description:"Discover the Sea of Galilee, Tiberias, Capernaum, Tabgha, Mount of Beatitudes and scenic lakeside sites, with access and planning tips.",
- region:"Sea of Galilee",image:{src:lake,alt:"Tiberias and the shores of the Sea of Galilee"},duration:"Full day to two days",
+ region:"Sea of Galilee",image:{src:"/images/attractions/sea-of-galilee.webp",alt:"The Sea of Galilee and surrounding hills"},duration:"Full day to two days",
  intro:"Lake Kinneret, known internationally as the Sea of Galilee, combines freshwater shores with landscapes important to Jewish and Christian history. Lakeside towns, sanctuaries and trails spread around the water, so choosing a base matters.",
  takeaway:"Start with Tiberias if you need accommodation and services, or focus on the northwestern shore if your priority is the Gospel sites. A car or driver makes multiple lake stops more practical.",
  highlights:[

@@ -74,7 +74,7 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
     answer: "Uber and Lyft do not currently offer passenger rides in Israel. Instead, you can book licensed taxis through Gett or Yango, use a taxi stand, ask your hotel to arrange a taxi or book a private transfer. Check pickup details, fares and payment methods before travelling.",
     topics: ["transportation", "tips"],
     updatedAt: "2026-11-11",
-    photo: { src: "/images/travel-blog/taxi-in-tel-aviv.webp", alt: "Licensed taxis on a street in Tel Aviv" },
+    photo: { src: "/images/home/uber-in-israel-phone-question.webp", alt: "Illustration of a phone asking about Uber availability in Israel" },
     facts: [
       { label: "Uber & Lyft", text: "No passenger ride-booking service currently available" },
       { label: "Taxi-booking apps", text: "Gett and Yango; check availability for your address and time" },
@@ -1136,7 +1136,7 @@ telAviv: {
     answer: "For most visitors, walking and city buses are the easiest ways to explore Tel Aviv. The Red Line light rail is also useful when its stations are close to your destination. Use Israel Railways for airport and intercity journeys; its Tel Aviv stations are inland, away from the beach. Taxis are convenient for late arrivals, heavy luggage and trips during Shabbat. Regular buses and trains generally stop during Shabbat, but Tel Aviv has a free weekend bus network on selected routes.",
     updatedAt: "2026-11-12",
     topics: ["transportation", "destinations", "tips"],
-    photo: {src: archivedBuses, alt: "City buses at a Tel Aviv metropolitan transport terminal"},
+    photo: {src: telAvivDizengoff, alt: "Street scene in the Dizengoff area of Tel Aviv"},
     facts: [
       { label: "Best starting point", text: "Walk locally; check buses and the Red Line light rail for cross-town trips" },
       { label: "How to pay", text: "Rav-Kav card or an authorized app; card taps are not yet universal" },
@@ -1458,6 +1458,7 @@ telAviv: {
       { label: "Where to stay in Tel Aviv", to: "/travel-blog/where-to-stay-in-tel-aviv/", note: "Compare neighborhoods by the places you plan to visit and your transit options." },
       { label: "Explore Old Jaffa", to: "/attractions/jaffa/", note: "Plan the old streets, port and connections to the rest of the city." },
       { label: "Tel Aviv beaches guide", to: travelGuidePaths.telAvivBeaches, note: "Choose a stretch of shoreline and plan walking or onward transport." },
+      { label: "Attractions in Tel Aviv", to: "/travel-blog/attractions-in-tel-aviv/", note: "Explore sights, museums and neighbourhoods." },
     ],
   },
 
@@ -1486,7 +1487,7 @@ export const guideDirectory: GuideDirectoryEntry[] = [
   { id: "airport-journey-haifa", title: "How to get from Ben Gurion Airport to Haifa", description: "Compare train, bus, taxi and private-transfer options, travel times, estimated fares and weekend alternatives.", to: "/travel-blog/how-to-get-from-ben-gurion-airport-to-haifa/", topics: ["transportation", "tips"], photo: airportJourneyGuides.haifa.photo },
   { id: "airport-journey-ein-bokek", title: "How to get from Ben Gurion Airport to Ein Bokek", description: "Compare train, bus, taxi and private-transfer options, travel times, estimated fares and weekend alternatives.", to: "/travel-blog/how-to-get-from-ben-gurion-airport-to-ein-bokek/", topics: ["transportation", "tips"], photo: airportJourneyGuides["ein-bokek"].photo },
 
-  { id: "israel-holidays", title: "Israel Holidays Calendar: Dates & Travel Planning", description: "Select your trip dates on an interactive calendar to see which holidays could affect transport, opening hours, crowds and prices.", to: "/travel-blog/israel-holidays/" as LinkProps["to"], topics: ["tips","religion","itineraries"], photo: migrationPhotos["calendar-of-events"] },
+  { id: "israel-holidays", title: "Israel Holidays Calendar: Dates & Travel Planning", description: "Select your trip dates on an interactive calendar to see which holidays could affect transport, opening hours, crowds and prices.", to: "/travel-blog/israel-holidays/" as LinkProps["to"], topics: ["tips","religion","itineraries"], photo: {src:"/images/attractions/old-jerusalem-western-wall.webp",alt:"Visitors at the Western Wall in Jerusalem"} },
   ...Object.values(travelGuides).filter((guide) => !travelGuidePaths[guide.id].startsWith("/attractions/")).map((guide) => ({ id: guide.id, title: guide.title, description: guide.description, to: travelGuidePaths[guide.id], topics: guide.topics, photo: guide.photo })),
   ...(["haifa", "ashdod"] as const).map((id): GuideDirectoryEntry => { const port = getShorePort(id); return { id: `shore-${id}`, title: port.title, description: port.description, to: port.path, topics: ["destinations", "itineraries", "transportation"], photo: port.photo }; }),
   { id: "stay-jerusalem", title: "Where to stay in Jerusalem", description: "Choose the neighbourhood and hotel style that fit your visit.", to: "/travel-blog/where-to-stay-in-jerusalem/", topics: ["destinations", "accommodation"], photo: neighborhoodGuidesForCity("jerusalem")[0]!.photo },

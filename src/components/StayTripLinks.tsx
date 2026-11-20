@@ -1,3 +1,4 @@
+import { guideHeroPhotoForPath } from "@/lib/guide-hero-photos";
 import { Link, type LinkProps } from "@tanstack/react-router";
 import type { ReactNode } from "react";
 import museumJerusalem from "@/assets/guides/museums-in-jerusalem.jpg";
@@ -52,8 +53,10 @@ import inlandRoute from "@/assets/home/masada-cable-car-wide.webp";
 type Region = "jerusalem" | "telaviv" | "haifa" | "tiberias" | "deadsea";
 type GuideCard = { title: string; to: string; note: string; photo: string; alt: string };
 type GuideGroups = { name: string; local: GuideCard[]; onward: GuideCard[] };
-const card = (title: string, to: string, note: string, photo: string, alt: string): GuideCard =>
-  ({ title, to, note, photo, alt });
+const card = (title: string, to: string, note: string, photo: string, alt: string): GuideCard => {
+  const primary = guideHeroPhotoForPath(to);
+  return { title, to, note, photo: primary?.src ?? photo, alt: primary?.alt ?? alt };
+};
 
 /**
  * A fixed editorial sequence, not an auto-sorted link cloud.
@@ -97,7 +100,7 @@ export const stayGuideGroups: Record<Region, GuideGroups> = {
     onward: [
       card("Ben Gurion Airport to Tel Aviv", "/travel-blog/how-to-get-from-ben-gurion-airport-to-tel-aviv/", "Select the right arrival connection for your hotel.", airportTransfers, "Airport arrival and transfer facilities"),
       card("Getting around Tel Aviv", "/travel-blog/getting-around-tel-aviv/", "Plan walking, local trains, buses and taxis.", telAvivPromenade, "Tel Aviv promenade and city streets"),
-      card("Day trips from Tel Aviv", "/travel-blog/day-trips-from-tel-aviv/", "Explore other destinations from a city hotel base.", caesareaPhoto, "Ancient coastal ruins at Caesarea"),
+      card("Best time to visit Israel", "/travel-blog/best-time-to-visit-israel/", "Understand seasons, weather and regional travel conditions.", seasonPhoto, "Seasonal Mediterranean landscape"),
       card("Airport arrivals on Shabbat", "/travel-blog/from-ben-gurion-airport-on-shabbat/", "Check weekend arrivals and transport changes.", airportHall, "Ben Gurion Airport arrival terminal"),
       card("What to eat in Israel", "/travel-blog/what-to-eat-in-israel/", "Add markets and regional food to your itinerary.", foodPhoto, "Israeli food and local dishes"),
       card("Israel travel tips", "/travel-blog/israel-travel-tips/", "Practical preparation before you explore beyond the city.", seasonPhoto, "Seasonal landscape in Israel"),

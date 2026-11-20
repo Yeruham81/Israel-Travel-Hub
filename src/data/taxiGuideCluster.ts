@@ -10,6 +10,7 @@ import { migrationPhotos } from "@/data/guideMigrationPhotos";
 import { travelGuidePaths } from "@/data/registry";
 import { airportTransferPhotos } from "@/data/airportTransfers";
 import roadTrip from "@/assets/home/road-trip.webp";
+import taxiMeterPhoto from "@/assets/guides/israeli-taxi-roof-sign.webp";
 import airportHall from "@/assets/home/ben-gurion-t3.webp";
 
 const airport = airportTransferPhotos["other"]!;
@@ -230,7 +231,7 @@ export const taxiGuideCluster: Record<"taxis" | "taxiFares" | "airportTaxis", Tr
     answer: "Under the current published rates, a taxi meter starts at ₪12.46 outside Eilat. The fare then increases with both time and distance. Tariffs A, B and C apply at different hours, and longer trips have a higher rate per kilometre after 10 km. Permitted extra charges may also apply.",
     topics: ["transportation", "tips"],
     updatedAt: "2026-11-13",
-    photo: { src: "/images/travel-blog/taxi-in-tel-aviv.webp", alt: "Licensed white taxis with yellow roof signs on a street in Tel Aviv" },
+    photo: { src: taxiMeterPhoto, alt: "Yellow taxi roof sign on a licensed Israeli taxi" },
     facts: [
       { label: "Meter starts at", text: "₪12.46 including VAT outside Eilat" },
       { label: "Day / night", text: "Tariffs A, B and C change with the day and hour" },
