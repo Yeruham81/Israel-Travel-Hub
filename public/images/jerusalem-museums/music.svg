@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" role="img" aria-labelledby="title desc">
+<title id="title">Musical instruments in an illuminated heritage gallery</title>
+<desc id="desc">Original illustration of a stringed oud, a bowed violin and a goblet drum in illuminated display niches</desc>
+<defs>
+ <linearGradient id="wall" x2="0" y2="1"><stop stop-color="#d9bc8f"/><stop offset=".7" stop-color="#e8d2ac"/><stop offset="1" stop-color="#b99564"/></linearGradient>
+ <linearGradient id="alcove" x2="0" y2="1"><stop stop-color="#372f34"/><stop offset=".62" stop-color="#625252"/><stop offset="1" stop-color="#9a7162"/></linearGradient>
+ <linearGradient id="wood" x2=".9" y2="1"><stop stop-color="#9d492b"/><stop offset=".45" stop-color="#cc8651"/><stop offset="1" stop-color="#7e352a"/></linearGradient>
+ <linearGradient id="drum" x2="1" y2="1"><stop stop-color="#bd8951"/><stop offset=".6" stop-color="#e2bc7c"/><stop offset="1" stop-color="#97663f"/></linearGradient>
+ <linearGradient id="floor" x2="0" y2="1"><stop stop-color="#c3a279"/><stop offset="1" stop-color="#846650"/></linearGradient>
+ <radialGradient id="glow"><stop stop-color="#ffe7af" stop-opacity=".75"/><stop offset="1" stop-color="#ffe7af" stop-opacity="0"/></radialGradient>
+ <pattern id="stone" width="180" height="66" patternUnits="userSpaceOnUse"><path d="M0 0H180M0 66H180M90 0V33M0 33H180M0 33V66M180 33V66" fill="none" stroke="#ab885f" stroke-width="3" opacity=".18"/></pattern>
+ <pattern id="strings" width="6" height="8" patternUnits="userSpaceOnUse"><path d="M3 0V8" stroke="#d8be9a" stroke-width=".7" opacity=".7"/></pattern>
+ <filter id="shadow" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="10"/></filter>
+</defs>
+<rect width="1200" height="675" fill="url(#wall)"/><rect width="1200" height="675" fill="url(#stone)"/>
+<path d="M0 525H1200V675H0" fill="url(#floor)"/><path d="M0 525H1200" stroke="#7d5e43" stroke-width="12"/>
+<g opacity=".28" fill="none" stroke="#f4e1bd" stroke-width="3"><path d="M0 580H1200M0 636H1200M130 525L55 675M310 525L280 675M505 525L510 675M695 525L730 675M880 525L965 675M1060 525L1180 675"/></g>
+<g fill="#6b4f40" stroke="#a77c54" stroke-width="10">
+<path d="M120 518V239Q120 101 265 101Q410 101 410 239V518Z"/>
+<path d="M453 518V239Q453 101 600 101Q747 101 747 239V518Z"/>
+<path d="M790 518V239Q790 101 935 101Q1080 101 1080 239V518Z"/>
+</g>
+<g fill="url(#alcove)"><path d="M142 514V239Q142 125 265 125Q388 125 388 239V514Z"/><path d="M475 514V239Q475 125 600 125Q725 125 725 239V514Z"/><path d="M812 514V239Q812 125 935 125Q1058 125 1058 239V514Z"/></g>
+<g opacity=".8"><ellipse cx="265" cy="220" rx="148" ry="175" fill="url(#glow)"/><ellipse cx="600" cy="220" rx="148" ry="175" fill="url(#glow)"/><ellipse cx="935" cy="220" rx="148" ry="175" fill="url(#glow)"/></g>
+<g fill="#e7c38f" stroke="#876344" stroke-width="7"><rect x="151" y="472" width="228" height="46" rx="4"/><rect x="484" y="472" width="232" height="46" rx="4"/><rect x="821" y="472" width="228" height="46" rx="4"/></g>
+<!-- Oud -->
+<g transform="translate(265 320) rotate(-12)">
+ <ellipse cx="0" cy="75" rx="79" ry="108" fill="#5c3529" filter="url(#shadow)"/>
+ <ellipse cx="0" cy="65" rx="72" ry="102" fill="url(#wood)" stroke="#6f3427" stroke-width="7"/>
+ <path d="M-37 140Q0 153 37 140" stroke="#efb97c" fill="none" stroke-width="5"/>
+ <rect x="-13" y="-205" width="26" height="150" rx="7" fill="#6d412f" stroke="#ad7c56" stroke-width="3"/>
+ <path d="M-13-205Q-34-239-11-253L8-248L20-209" fill="#53372d" stroke="#b28662" stroke-width="4"/>
+ <g fill="#e0bd8f"><circle cx="-19" cy="-217" r="6"/><circle cx="-18" cy="-235" r="6"/><circle cx="18" cy="-225" r="6"/><circle cx="19" cy="-241" r="6"/></g>
+ <circle cy="30" r="27" fill="#2e2827" stroke="#e9c99c" stroke-width="5"/>
+ <g stroke="#e6ba78" stroke-width="2" fill="none"><circle cy="30" r="17"/><path d="M-22 14L22 46M-22 46L22 14M-25 30H25M0 3V57"/></g>
+ <rect x="-25" y="128" width="50" height="12" rx="4" fill="#372b2b"/>
+ <g stroke="#e5caa0" stroke-width="1.5"><path d="M-9-194L-9 134M-5-194L-5 134M0-194V134M5-194V134M9-194V134"/></g>
+</g>
+<!-- Violin -->
+<g transform="translate(600 312) rotate(8)">
+ <ellipse cx="0" cy="96" rx="65" ry="98" fill="#402721" filter="url(#shadow)"/>
+ <path d="M0 158C-75 156-71 100-47 64C-78 35-75-23-35-27C-17-27-17-5 0-7C17-5 17-27 35-27C75-23 78 35 47 64C71 100 75 156 0 158Z" fill="url(#wood)" stroke="#6a2f24" stroke-width="7"/>
+ <rect x="-11" y="-192" width="22" height="166" rx="6" fill="#5e352d"/>
+ <path d="M-11-192Q-25-223-2-240Q22-251 20-224Q17-210 2-216" fill="#5e352d" stroke="#b57b52" stroke-width="4"/>
+ <g fill="#e6c59a"><circle cx="-13" cy="-183" r="6"/><circle cx="13" cy="-175" r="6"/><circle cx="-13" cy="-162" r="6"/><circle cx="13" cy="-153" r="6"/></g>
+ <path d="M-30 52C-42 61-41 83-30 90M30 52C42 61 41 83 30 90" stroke="#37232a" stroke-width="8" fill="none" stroke-linecap="round"/>
+ <path d="M-32 112Q0 103 32 112M-32 119Q0 110 32 119" stroke="#38272a" stroke-width="5" fill="none"/>
+ <path d="M-7-188L-7 137M-2-188L-2 137M3-188L3 137M8-188L8 137" stroke="#e8d8b8" stroke-width="1.7"/>
+ <rect x="-25" y="136" width="50" height="14" rx="4" fill="#462a25"/>
+</g>
+<!-- Darbuka -->
+<g transform="translate(935 345)">
+ <ellipse cy="-44" rx="74" ry="26" fill="#473631" filter="url(#shadow)"/>
+ <path d="M-66-48C-63 8-27 29-28 79C-30 123-56 141-56 153Q0 182 56 153C56 141 30 123 28 79C27 29 63 8 66-48Z" fill="url(#drum)" stroke="#765239" stroke-width="8"/>
+ <ellipse cy="-48" rx="72" ry="24" fill="#e9d5b0" stroke="#8b6343" stroke-width="8"/>
+ <ellipse cy="-49" rx="56" ry="17" fill="#d8c399" stroke="#c09d70" stroke-width="2"/>
+ <g fill="none" stroke="#795b40" stroke-width="5" opacity=".8"><path d="M-46 10Q0 40 46 10M-33 57Q0 84 33 57M-38 116Q0 97 38 116"/><path d="M0-20V144M-18-15Q-4 26-18 68M18-15Q4 26 18 68"/></g>
+</g>
+<g fill="#f5daa7"><circle cx="265" cy="147" r="6"/><circle cx="600" cy="147" r="6"/><circle cx="935" cy="147" r="6"/></g>
+<path d="M0 45H1200" stroke="#ab7e50" stroke-width="10" opacity=".7"/><path d="M0 67H1200" stroke="#fff1d2" stroke-width="3" opacity=".4"/>
+</svg>

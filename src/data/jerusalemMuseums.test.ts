@@ -1,8 +1,22 @@
-import {readFileSync} from "node:fs";
+import {existsSync,readFileSync} from "node:fs";
+import {jerusalemMuseumPhotos} from "@/data/jerusalemMuseumPhotos";
 import {describe,expect,it} from "vitest";
 import {jerusalemMuseumAreas,jerusalemMuseums,jerusalemMuseumMapPoints,jerusalemAdditionalMuseums} from "@/data/jerusalemMuseums";
 
 describe("Jerusalem museums editorial guide",()=>{
+  it("provides distinct locally stored images for every museum",()=>{
+    const sources = new Set<string>();
+    for(const museum of jerusalemMuseums){
+      const photo = jerusalemMuseumPhotos[museum.id];
+      expect(photo,museum.id).toBeDefined();
+      expect(photo.alt,museum.id).toBeTruthy();
+      expect(photo.src,museum.id).toMatch(/^\/images\/jerusalem-museums\//);
+      expect(existsSync("public"+photo.src),museum.id).toBe(true);
+      expect(sources.has(photo.src),museum.id).toBe(false);
+      sources.add(photo.src);
+    }
+    expect(jerusalemMuseumPhotos.music.illustrative).toBe(true);
+  });
   it("retains all twelve original subjects and adds three central museums",()=>{
     expect(jerusalemMuseums).toHaveLength(15);
     expect(new Set(jerusalemMuseums.map(m=>m.id)).size).toBe(15);

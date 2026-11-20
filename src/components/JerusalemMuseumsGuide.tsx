@@ -9,6 +9,7 @@ import { SourcesDisclosure } from "@/components/SourcesDisclosure";
 import { HomeContactForm } from "@/components/HomeContactForm";
 import { neighborhoodTripContactCopy } from "@/lib/guide-contact";
 import { jerusalemAdditionalMuseums as additionalMuseums, jerusalemMuseumAreas as museumAreas, jerusalemMuseumMapPoints as museumMapPoints, jerusalemMuseums as museums, type JerusalemMuseumEntry as MuseumEntry } from "@/data/jerusalemMuseums";
+import {jerusalemMuseumPhotos} from "@/data/jerusalemMuseumPhotos";
 import museumHero from "@/assets/guides/museums-in-jerusalem.jpg";
 import oldCityPhoto from "@/assets/attractions-hub/card-old-city-jerusalem-420.webp";
 import jerusalemPhoto from "@/assets/attractions-hub/related-jerusalem-360.webp";
@@ -17,7 +18,7 @@ import downtownPhoto from "@/assets/jerusalem/downtown.webp";
 import bethlehemPhoto from "@/assets/guides/2026-10/jerusalem-to-bethlehem.webp";
 import mahanePhoto from "@/assets/jerusalem/mahane-yehuda.webp";
 
-const updatedAt = "2026-11-19";
+const updatedAt = "2026-11-20";
 const related = [
   {title:"Jerusalem travel guide",to:"/travel-blog/jerusalem-travel-guide/" as const,note:"My practical introduction to the city and its sights",image:jerusalemPhoto,alt:"Jerusalem city view"},
   {title:"Explore the Old City",to:"/attractions/old-city-jerusalem/" as const,note:"City gates, historic streets and places to visit",image:oldCityPhoto,alt:"Jerusalem Old City"},
@@ -40,13 +41,15 @@ function PlanningTip({children}:{children:ReactNode}) {
   return <aside className="flex items-start gap-3 rounded-xl border border-amber-200 bg-amber-50/80 p-4 text-sm leading-relaxed text-amber-950"><Lightbulb className="mt-0.5 h-5 w-5 shrink-0 text-amber-600" aria-hidden="true"/><div><strong>My tip:</strong> {children}</div></aside>;
 }
 function MuseumCard({museum}:{museum:MuseumEntry}) {
+  const museumPhoto = jerusalemMuseumPhotos[museum.id];
   const family = ["science","time","music","tower"].includes(museum.id);
   const bookAhead = ["yad","science","time","friends","tolerance","begin","music"].includes(museum.id);
-  const tags = [museum.priceNis === 0 ? "Free entry" : null, family ? "Family-friendly" : null, bookAhead ? "Book ahead" : null].filter((x):x is string=>Boolean(x));
+  const tags = [museum.theme, museum.priceNis === 0 ? "Free entry" : null, family ? "Family-friendly" : null, bookAhead ? "Book ahead" : null].filter((x):x is string=>Boolean(x));
   const showTicket = Boolean(museum.ticketUrl && museum.ticketUrl !== museum.url);
   const ticketLabel = museum.id === "rockefeller" ? "Check organised tours" : ["yad","begin","friends","tolerance","time"].includes(museum.id) ? "Reserve a visit" : museum.id === "israel" ? "Tickets & admission" : "Check tickets & rates";
   return <article id={"museum-"+museum.id} className="flex scroll-mt-28 flex-col overflow-hidden rounded-2xl border bg-card shadow-sm">
-    <div className="flex items-center justify-between gap-3 border-b bg-secondary/35 px-4 py-3"><span className="text-xs font-semibold uppercase tracking-wide text-primary">{museum.theme}</span><Landmark className="h-5 w-5 text-primary/60" aria-hidden="true"/></div>
+    <img src={museumPhoto.src} alt={museumPhoto.alt} width={1200} height={675} loading="lazy" decoding="async" className="aspect-[16/9] w-full object-cover" />
+    {museumPhoto.illustrative && <p className="px-4 pt-2 text-xs text-muted-foreground">Illustration of traditional instruments, not a photograph of the museum.</p>}
     <div className="flex flex-1 flex-col p-4 sm:p-5">
       <p className="text-xs font-semibold uppercase tracking-wide text-primary">{museum.neighbourhood}</p>
       <h3 className="mt-1 text-xl font-bold leading-snug">{museum.name}</h3>
