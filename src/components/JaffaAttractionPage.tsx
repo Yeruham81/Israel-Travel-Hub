@@ -85,7 +85,7 @@ export const jaffaDestinationContent: AttractionDestinationContent = {
       </AttractionHighlight>
       <AttractionHighlight title="Flea Market and Greek Market streets" image={{ src: photos.market, alt: "Antique shops and outdoor stalls in the Jaffa Flea Market area" }}>
         <p>Jaffa's flea-market district lies southeast of the Clock Tower. Antique stalls and vintage shops sit alongside cafés, restaurants and small design businesses; nearby Greek Market streets add another lively pocket to explore.</p>
-        <p>For actual market browsing, daytime is a better choice than late evening. Dining and nightlife follow different hours, and trading is more limited on Saturdays and <Link to="/travel-blog/calendar-of-events/" className={inlineLink}>Jewish holidays</Link>.</p>
+        <p>For actual market browsing, daytime is a better choice than late evening. Dining and nightlife follow different hours, and trading is more limited on Saturdays and <Link to="/travel-blog/israel-holidays/" className={inlineLink}>Jewish holidays</Link>.</p>
       </AttractionHighlight>
       <AttractionPracticalTip>For a first-time visit, I would prioritise the hilltop old town, Summit Garden, the port and either the flea market or a museum according to your interests. Leave time for a coffee or meal rather than rushing from sight to sight.</AttractionPracticalTip>
       <h3 className="pt-3 font-serif text-xl font-semibold">More cultural experiences in Jaffa</h3>
@@ -130,7 +130,7 @@ export const jaffaDestinationContent: AttractionDestinationContent = {
         <article className="rounded-xl border bg-card p-4">
           <div className="flex items-center gap-2"><Clock3 className="h-5 w-5 text-primary"/><h3 className="font-serif text-xl font-semibold">Opening times vary</h3></div>
           <p className="mt-3 text-sm leading-relaxed sm:text-base">The public outdoor areas are generally accessible throughout the day. Galleries, places of worship, visitor centres, shops and museums may have limited or changing hours.</p>
-          <p className="mt-2 text-sm leading-relaxed sm:text-base">Flea-market trading, restaurant service and Saturday activity are not the same. If you are travelling on <Link to="/travel-blog/calendar-of-events/" className={inlineLink}>Jewish holidays</Link> or holiday eves, confirm individual venues before setting out.</p>
+          <p className="mt-2 text-sm leading-relaxed sm:text-base">Flea-market trading, restaurant service and Saturday activity are not the same. If you are travelling on <Link to="/travel-blog/israel-holidays/" className={inlineLink}>Jewish holidays</Link> or holiday eves, confirm individual venues before setting out.</p>
         </article>
       </div>
       <article className="rounded-xl border bg-secondary/20 p-4 sm:p-5">
@@ -174,7 +174,7 @@ export const jaffaDestinationContent: AttractionDestinationContent = {
         <p>For traditional flavours, look for hummus, falafel, shakshuka, freshly baked pastries and seafood. Long-established names such as Abu Hassan, Dr. Shakshuka and Abulafia Bakery are associated with Jaffa, but check their current branches and hours before making a special journey.</p>
         <p>I would choose a lunch stop around the flea market if you are visiting during the day, or end your walk at the port for an evening meal. For more ideas, see my guide to <Link to="/travel-blog/what-to-eat-in-israel/" className={inlineLink}>what to eat in Israel</Link>.</p>
       </div>
-      <AttractionContentImage src={photos.food} alt="Local food and café dishes associated with Jaffa's culinary scene" />
+      <AttractionContentImage src={photos.food} alt="Outdoor cafés and dining streets in Jaffa" />
     </div>
   ),
   practicalContent: (
