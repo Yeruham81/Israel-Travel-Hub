@@ -394,8 +394,8 @@ export function TiberiasHotelEditorialGuide({ guide }: { guide: HotelStayDestina
       <StayTripLinks region={guide.id} currentPath={info.path} presentation="guide" />
       <HomeContactForm guide={{
         ...guideContactCopy(info.title, "accommodation", guide.name),
-        heading: "Planning a Tiberias Vacation?",
-        introduction: "Need a private transfer to your Tiberias hotel or a driver for a day around the Sea of Galilee? Send me your pickup location, travel date and group details.",
+        heading: "Need private transport to Tiberias?",
+        introduction: "I'm Moshe Barak. I arrange private transfers to Tiberias and day trips around the Sea of Galilee. Send me your pickup location, travel date, destinations and group details, and I'll reply personally.",
         placeholder: "Pickup location, Tiberias hotel, travel date, passengers and luggage…",
       }} />
       <SourceList ids={sourceIds} intro={sourceIntro} compact />
