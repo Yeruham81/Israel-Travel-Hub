@@ -43,6 +43,28 @@ assert(existsSync(join(root, "assets")), "Missing built assets");
 assert(existsSync(join(root, "sitemap.xml")), "Missing sitemap");
 assert(existsSync(join(root, "robots.txt")), "Missing robots.txt");
 
+// Prevent city-template leakage and tour-product mismatches before ANY upload.
+for (const [city, headings] of [
+  ["haifa", ["Where to eat in Haifa", "Practical tips for visiting Haifa", "Getting to and around Haifa"]],
+  ["jaffa", ["Where to eat in Jaffa", "Practical tips for visiting Jaffa"]],
+]) {
+  const file = join(root, "attractions", city, "index.html");
+  assert(existsSync(file), "Missing prerendered " + city + " guide");
+  const html = readFileSync(file, "utf8");
+  const actualHeadings = [...html.matchAll(/<h[1-6]\b[^>]*>([\s\S]*?)<\/h[1-6]>/gi)]
+    .map(match => match[1].replace(/<[^>]*>/g, "").trim());
+  for (const heading of headings) {
+    assert(actualHeadings.includes(heading), city + " guide missing heading: " + heading);
+  }
+  if (city === "haifa") {
+    assert(!actualHeadings.some(h => /jaffa/i.test(h)), "Jaffa title found in Haifa guide");
+    assert(!html.includes("Guided Haifa city walk from the port"), "Obsolete misleading Haifa walking-tour title");
+    for (const code of ["368992P3", "22120", "58143P8"]) {
+      assert(html.includes('data-provider-product-code="' + code + '"'), "Missing Haifa tour product " + code);
+    }
+  }
+}
+
 const privateApi = join(root, "api");
 // Never deploy compiled API: Hostinger's manually configured PHP endpoints
 // are excluded by rsync, and server-side Vite JS cannot run as static files.
