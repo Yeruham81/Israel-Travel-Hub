@@ -955,7 +955,7 @@ jobs:
           if (!html.includes("viator.tpm.li/") || !html.includes("getyourguide.tpm.li/")) {
             console.error("::error::Haifa Travelpayouts tour cards missing");process.exitCode=1;
           }
-          const headings = [...html.matchAll(/<h[1-6]\\b[^>]*>([\\s\\S]*?)<\\/h[1-6]>/gi)]
+          const headings = [...html.matchAll(/<h[1-6]\b[^>]*>([\s\S]*?)<\/h[1-6]>/gi)]
             .map(m => m[1].replace(/<[^>]+>/g, "").trim());
           for (const title of ["Where to eat in Haifa","Practical tips for visiting Haifa","Getting to and around Haifa"]) {
             if (!headings.includes(title)) { console.error("::error::Haifa heading missing: "+title);process.exitCode=1; }
