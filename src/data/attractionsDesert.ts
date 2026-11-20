@@ -4,7 +4,7 @@ import { einGediCardPhoto } from "@/data/einGediCardPhoto";
 import ramonCrater from "@/assets/guides/mitzpe-ramon-crater.jpg";
 export const desertAttractions: Record<string, Attraction> = {
 "dead-sea-attractions": {
- title:"Dead Sea attractions: beaches, nature and historic sites",description:"Explore the Dead Sea's top attractions, from Ein Bokek and Masada to Ein Gedi and desert viewpoints, with planning and road-trip advice.",region:"Dead Sea & Negev",image:{src:deadSea,alt:"Dead Sea mountains and shoreline"},duration:"One day to several days",
+ title:"Dead Sea Attractions: Best Things to Do",description:"Discover ten Dead Sea attractions, from Ein Bokek and Masada to Ein Gedi, Qumran, desert trails and heritage sites, with maps and practical trip tips.",region:"Dead Sea & Negev",image:{src:deadSea,alt:"Dead Sea mountains and shoreline"},duration:"One day to several days",
  intro:"The Dead Sea region is more than a place to float. Desert ruins, mineral-rich shores, reserves and wide open viewpoints reward visitors who know how far apart the stops are. The resort strip of Ein Bokek is different from the northern Dead Sea and Ein Gedi.",
  takeaway:"Choose two or three compatible activities rather than every attraction. Masada and a designated swimming beach are a popular pairing; Ein Gedi requires separate trail planning and current access checks.",
  highlights:[
