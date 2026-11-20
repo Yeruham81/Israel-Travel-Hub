@@ -528,8 +528,8 @@ export const heritageGuides = {
         "to": "/private-driver/"
       },
       {
-        "label": "Compare day trips from Jerusalem",
-        "to": "/travel-blog/day-trips-from-jerusalem/"
+        "label": "Masada and Dead Sea tours",
+        "to": "/tours/masada-dead-sea/"
       }
     ],
     "sourceIds": [

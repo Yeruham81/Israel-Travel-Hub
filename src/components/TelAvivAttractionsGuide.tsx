@@ -1,3 +1,4 @@
+import { guideHeroPhotoForPath } from "@/lib/guide-hero-photos";
 import { Link } from "@tanstack/react-router";
 import { useEffect, useRef, useState, type ReactNode } from "react";
 import {
@@ -49,8 +50,8 @@ const related=[
  {title:"Tel Aviv beaches",to:"/travel-blog/beaches-in-tel-aviv/" as const,description:"Choose a supervised beach and seaside walk",image:relatedBeach,alt:"Sandy beach and promenade on the Tel Aviv coast"},
  {title:"Museums in Tel Aviv",to:"/travel-blog/museums-in-tel-aviv/" as const,description:"Art, archaeology and indoor culture",image:relatedMuseum,alt:"Exterior of a Tel Aviv museum"},
  {title:"Getting around Tel Aviv",to:"/travel-blog/getting-around-tel-aviv/" as const,description:"Buses, the Red Line, walking and taxis",image:relatedTransport,alt:"Bus serving central Tel Aviv"},
+ {title:"Israel travel tips",to:"/travel-blog/israel-travel-tips/" as const,description:"My essential planning advice for visitors",image:relatedDayTrips,alt:"Travel planning in Israel"},
  {title:"Where to stay in Tel Aviv",to:"/travel-blog/where-to-stay-in-tel-aviv/" as const,description:"Compare neighbourhoods and hotels",image:relatedHotels,alt:"A street in a central Tel Aviv accommodation area"},
- {title:"Day trips from Tel Aviv",to:"/travel-blog/day-trips-from-tel-aviv/" as const,description:"See more of Israel from your city base",image:relatedDayTrips,alt:"Scenic road on an Israel day trip"},
 ];
 const planning=[
  {title:"3 days in Israel",to:"/travel-blog/israel-itinerary-3-days/" as const,description:"A shorter journey around the highlights",image:threeDays,alt:"Jerusalem skyline"},
@@ -92,7 +93,7 @@ function Tip({children}:{children:ReactNode}){
 }
 function GuideCard({item}:{item:typeof related[number] | typeof planning[number]}){
  return <Link to={item.to} className="group flex min-w-0 flex-col overflow-hidden rounded-xl border bg-card transition-colors hover:border-primary/50 focus-visible:outline-2 focus-visible:outline-primary">
- <img src={item.image} alt={item.alt} width={560} height={350} loading="lazy" decoding="async" className="aspect-[16/10] w-full object-cover"/>
+ <img src={guideHeroPhotoForPath(item.to)!.src} alt={guideHeroPhotoForPath(item.to)!.alt} width={560} height={350} loading="lazy" decoding="async" className="aspect-[16/10] w-full object-cover"/>
  <span className="flex flex-1 flex-col p-3 sm:p-4"><strong className="text-sm leading-snug group-hover:text-primary sm:text-base">{item.title}</strong>
  <span className="mt-2 text-xs leading-relaxed text-muted-foreground sm:text-sm">{item.description}</span>
  <span className="mt-auto inline-flex items-center gap-1 pt-3 text-xs font-semibold text-primary">Explore guide <ArrowUpRight aria-hidden className="h-3.5 w-3.5"/></span></span></Link>;

@@ -1,3 +1,4 @@
+import { guideHeroPhotoForPath } from "@/lib/guide-hero-photos";
 import { useEffect, useRef, useState, type ReactNode } from "react";
 import { Link } from "@tanstack/react-router";
 import { ArrowUpRight, CalendarCheck2, Clock3, ExternalLink, Landmark, Lightbulb, MapPin, Ticket, CalendarDays } from "lucide-react";
@@ -26,8 +27,8 @@ const related = [
   { title: "Explore Old Jaffa", to: "/attractions/jaffa/" as const, note: "Historic lanes, the port and nearby sights", image: jaffaPhoto, alt: "Old Jaffa and its historic streets" },
   { title: "Getting around Tel Aviv", to: "/travel-blog/getting-around-tel-aviv/" as const, note: "Buses, trains, the light rail and other transport", image: dizengoffPhoto, alt: "A street scene in central Tel Aviv" },
   { title: "Beaches in Tel Aviv", to: "/travel-blog/beaches-in-tel-aviv/" as const, note: "Relax with a seaside walk after visiting a museum", image: beachPhoto, alt: "Tel Aviv's Mediterranean beachfront" },
+  { title: "Israel events calendar", to: "/travel-blog/calendar-of-events/" as const, note: "Festivals, cultural events and seasonal activities", image: museumHero, alt: "Israel events" },
   { title: "Where to stay in Tel Aviv", to: "/travel-blog/where-to-stay-in-tel-aviv/" as const, note: "Compare neighbourhoods and hotels for your visit", image: beachfrontPhoto, alt: "Beachfront and hotels in Tel Aviv" },
-  { title: "Day trips from Tel Aviv", to: "/travel-blog/day-trips-from-tel-aviv/" as const, note: "Explore more of Israel on another day", image: nevePhoto, alt: "The historic Neve Tzedek neighbourhood" },
 ];
 
 function OfficialLink({ href, children }: { href: string; children: ReactNode }) {
@@ -287,7 +288,7 @@ export function TelAvivMuseumsGuide() {
         <SectionHeading id="explore-more" title="Explore more of Tel Aviv" intro="Continue planning your stay with my related city, transport and sightseeing guides." />
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {related.map(item => <Link key={item.to} to={item.to} className="group flex h-full flex-col overflow-hidden rounded-xl border bg-card transition-colors hover:border-primary/40 hover:bg-secondary/20">
-            <img src={item.image} alt={item.alt} width={640} height={360} loading="lazy" decoding="async" className="aspect-[16/9] w-full object-cover" />
+            <img src={guideHeroPhotoForPath(item.to)!.src} alt={guideHeroPhotoForPath(item.to)!.alt} width={640} height={360} loading="lazy" decoding="async" className="aspect-[16/9] w-full object-cover" />
             <span className="flex flex-1 flex-col p-4"><strong className="text-base">{item.title}</strong><span className="mt-2 text-sm leading-relaxed text-muted-foreground">{item.note}</span><span className="mt-auto inline-flex items-center gap-1 pt-4 text-sm font-semibold text-primary">Explore my guide <ArrowUpRight aria-hidden="true" className="h-4 w-4" /></span></span>
           </Link>)}
         </div>

@@ -1,4 +1,3 @@
-import oldCityPhoto from "@/assets/home/jerusalem-old-city.webp";
 
 /** Old City visitor facts checked against responsible operators, November 2026. */
 export const oldCityJerusalemSite = {
@@ -7,8 +6,8 @@ export const oldCityJerusalemSite = {
   updatedAt: "2026-11-18",
   region: "Jerusalem",
   hero: {
-    src: oldCityPhoto,
-    alt: "Jerusalem's Old City skyline, ancient stone walls and historic domes",
+    src: "/images/attractions/old-jerusalem-via-dolorosa.webp",
+    alt: "Stone-paved historic lanes of Jerusalem's Old City near the Via Dolorosa",
   },
   intro: "Jerusalem’s Old City brings Jewish, Christian, Muslim and Armenian heritage together within a remarkably small area. I suggest choosing a few meaningful stops rather than trying to see every landmark in one day: the churches, prayer sites, lively markets and historic streets each deserve time of their own.",
   visitor: {

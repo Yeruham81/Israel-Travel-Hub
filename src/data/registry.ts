@@ -203,10 +203,8 @@ export const travelGuidePaths = {
   jerusalem: "/travel-blog/jerusalem-travel-guide/",
   jerusalemDeadSea: "/travel-blog/jerusalem-to-the-dead-sea/",
   baptism: "/travel-blog/baptism-in-the-jordan-river/",
-  jerusalemDayTrips: "/travel-blog/day-trips-from-jerusalem/",
   jerusalemChurches: "/travel-blog/churches-in-jerusalem/",
   jerusalemShopping: "/travel-blog/shopping-in-jerusalem/",
-  telAvivDayTrips: "/travel-blog/day-trips-from-tel-aviv/",
 } as const;
 export type TravelGuideId = keyof typeof travelGuidePaths;
 

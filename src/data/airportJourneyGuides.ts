@@ -149,7 +149,7 @@ const byId: Record<AirportJourneyId, AirportJourneyGuide> = {
     planNext: [
       { label: "Choose where to stay in Jerusalem", to: "/travel-blog/where-to-stay-in-jerusalem/", note: "Find a hotel area that fits your arrival and sightseeing plans." },
       { label: "Explore Jerusalem's Old City", to: "/attractions/old-city-jerusalem/", note: "Check the gates, walking routes and practical access." },
-      { label: "Discover day trips from Jerusalem", to: "/travel-blog/day-trips-from-jerusalem/", note: "See options beyond the city once you have settled in." },
+      { label: "Jerusalem tours and sightseeing", to: "/tours/jerusalem/", note: "Find guided walks and experiences in the city." },
       { label: "Choose an Israel eSIM", to: "/travel-blog/best-esim-for-israel/", note: "Keep maps, rail timetables and arrival messages at hand." },
     ],
   },
@@ -261,7 +261,7 @@ const byId: Record<AirportJourneyId, AirportJourneyGuide> = {
       { label: "Choose where to stay in Tel Aviv", to: "/travel-blog/where-to-stay-in-tel-aviv/", note: "Match the hotel area to your arrival station or bus stop." },
       { label: "Beachfront hotels in Tel Aviv", to: "/accommodation/tel-aviv/beachfront/", note: "Find a hotel close to the promenade and check its access." },
       { label: "Beaches in Tel Aviv", to: "/travel-blog/beaches-in-tel-aviv/", note: "Plan your first day near the coast." },
-      { label: "Day trips from Tel Aviv", to: "/travel-blog/day-trips-from-tel-aviv/", note: "Explore destinations beyond the city once you have settled in." },
+      { label: "Tel Aviv and Jaffa tours", to: "/tours/tel-aviv-jaffa/", note: "Explore guided city walks and experiences." },
     ]
   },
   haifa: {

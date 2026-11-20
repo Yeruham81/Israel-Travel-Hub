@@ -1,3 +1,4 @@
+import { guideHeroPhotoForPath } from "@/lib/guide-hero-photos";
 import { type LinkProps } from "@tanstack/react-router";
 import { SiteLink as Link } from "@/components/SiteLink";
 import { guideDirectory, type GuideDirectoryEntry, type GuideTopicId } from "@/data/travelGuides";
@@ -332,7 +333,7 @@ const relatedDirectory: GuideDirectoryEntry[] = [
     description: card.description,
     to: card.to,
     topics: ["attractions", "destinations"] as GuideTopicId[],
-    photo: card.photo,
+    photo: guideHeroPhotoForPath(String(card.to)) ?? card.photo,
   })),
 ];
 

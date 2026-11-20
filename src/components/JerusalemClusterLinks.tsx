@@ -2,7 +2,7 @@ import { Link, type LinkProps } from "@tanstack/react-router";
 
 /** Direct, contextual, reciprocal Jerusalem links. No sponsored URLs are invented. */
 export type JerusalemClusterKey =
-  | "jerusalem" | "jerusalemChurches" | "jerusalemShopping" | "jerusalemDayTrips"
+  | "jerusalem" | "jerusalemChurches" | "jerusalemShopping"
   | "bethlehem" | "jerusalemDeadSea"
   | "old-city-jerusalem" | "mount-of-olives" | "mount-zion" | "museums-in-jerusalem"
   | "tour-jerusalem" | "tour-bethlehem-jericho" | "tour-masada-dead-sea"
@@ -62,17 +62,9 @@ export const jerusalemConnections: Record<JerusalemClusterKey, Destination[]> = 
     L("Jerusalem city guide", "/travel-blog/jerusalem-travel-guide/", "Place shopping within a wider visit"),
     L("Jerusalem events calendar", "/travel-blog/calendar-of-events/", "Check fairs and event dates"),
   ],
-  jerusalemDayTrips: [
-    L("Jerusalem to the Dead Sea", "/travel-blog/jerusalem-to-the-dead-sea/", "Plan an independent bus, car or tour journey"),
-    L("Masada and Dead Sea tours", "/tours/masada-dead-sea/", "Compare guided and transport-only options"),
-    L("Jerusalem to Bethlehem", "/travel-blog/jerusalem-to-bethlehem/", "Understand the border and local travel"),
-    L("Bethlehem and Jericho tours", "/tours/bethlehem-jericho-jordan-river/", "Compare published guided itineraries"),
-    L("Private driver", "/private-driver/", "Request a route and complete transport quote"),
-    L("Jerusalem accommodation", "/travel-blog/where-to-stay-in-jerusalem/", "Pick a starting base"),
-  ],
   bethlehem: [
     L("Compare organised Bethlehem tours", "/tours/bethlehem-jericho-jordan-river/", "Guided options are separate from an independent bus trip"),
-    L("Day trips from Jerusalem", "/travel-blog/day-trips-from-jerusalem/", "Compare the destinations and time commitments"),
+    L("Jerusalem guided tours", "/tours/jerusalem/", "See the city sights on a guided visit"),
     L("Churches in Jerusalem", "/travel-blog/churches-in-jerusalem/", "Connect a Nativity trip with city pilgrimage sites"),
     L("Old City and Damascus Gate", "/attractions/old-city-jerusalem/", "Plan the bus approach near Damascus Gate"),
     L("Jerusalem city guide", "/travel-blog/jerusalem-travel-guide/", "Fit Bethlehem around the rest of your stay"),
@@ -81,7 +73,7 @@ export const jerusalemConnections: Record<JerusalemClusterKey, Destination[]> = 
     L("Masada and Dead Sea tours", "/tours/masada-dead-sea/", "Compare complete itineraries and inclusions"),
     L("Masada visitor guide", "/attractions/masada/", "National park access and cable car planning"),
     L("Dead Sea attractions", "/travel-blog/dead-sea-attractions/", "Choose a beach, reserve or other stop"),
-    L("Day trips from Jerusalem", "/travel-blog/day-trips-from-jerusalem/", "Compare a desert trip with other routes"),
+    L("Ein Gedi visitor guide", "/attractions/ein-gedi/", "Plan a nature stop near the Dead Sea"),
     L("Dead Sea hotels", "/travel-blog/best-dead-sea-hotels/", "For overnight resort visits"),
   ],
   "tour-jerusalem": [
@@ -93,12 +85,12 @@ export const jerusalemConnections: Record<JerusalemClusterKey, Destination[]> = 
   ],
   "tour-bethlehem-jericho": [
     L("Jerusalem to Bethlehem transport", "/travel-blog/jerusalem-to-bethlehem/", "Independent bus, taxi and crossing choices"),
-    L("Jerusalem day trips", "/travel-blog/day-trips-from-jerusalem/", "Choose a workable full-day route"),
+    L("Jerusalem city guide", "/travel-blog/jerusalem-travel-guide/", "Make a realistic city visit"),
     L("Churches in Jerusalem", "/travel-blog/churches-in-jerusalem/", "Build a pilgrimage-focused stay"),
   ],
   "tour-masada-dead-sea": [
     L("Jerusalem to the Dead Sea", "/travel-blog/jerusalem-to-the-dead-sea/", "Buses, driving and local destinations"),
-    L("Day trips from Jerusalem", "/travel-blog/day-trips-from-jerusalem/", "Compare other ideas for a day out"),
+    L("Dead Sea attractions", "/travel-blog/dead-sea-attractions/", "Explore nearby reserves and beaches"),
     L("Masada National Park guide", "/attractions/masada/", "Prepare for the fortress and cable car"),
   ],
   "tour-food-markets": [
@@ -109,7 +101,7 @@ export const jerusalemConnections: Record<JerusalemClusterKey, Destination[]> = 
     L("Jerusalem city guide", "/travel-blog/jerusalem-travel-guide/", "Choose sites that fit the port day"),
     L("Old City walking guide", "/attractions/old-city-jerusalem/", "Understand the length and accessibility of the walk"),
     L("Churches in Jerusalem", "/travel-blog/churches-in-jerusalem/", "Prioritise important pilgrimage stops"),
-    L("Jerusalem day trips", "/travel-blog/day-trips-from-jerusalem/", "Plan separate excursions during a longer stay"),
+    L("Jerusalem tours", "/tours/jerusalem/", "Explore guided experiences from the port"),
   ],
   "airport-jerusalem": [
     L("Jerusalem city guide", "/travel-blog/jerusalem-travel-guide/", "Plan the visit once you reach the city"),
@@ -129,7 +121,7 @@ export const jerusalemConnections: Record<JerusalemClusterKey, Destination[]> = 
 export function JerusalemClusterLinks({ pageKey }: { pageKey: JerusalemClusterKey }) {
   const links = jerusalemConnections[pageKey];
   if (!links?.length) return null;
-  const guideKey = (["jerusalem", "jerusalemChurches", "jerusalemShopping", "jerusalemDayTrips", "bethlehem", "jerusalemDeadSea"] as string[]).includes(pageKey);
+  const guideKey = (["jerusalem", "jerusalemChurches", "jerusalemShopping", "bethlehem", "jerusalemDeadSea"] as string[]).includes(pageKey);
   const title = guideKey ? "Related practical guides" : "Explore more around Jerusalem";
   return <section aria-labelledby="jerusalem-connections-h" className="mt-12 border-t pt-8" data-testid="jerusalem-cluster-links">
     <h2 id="jerusalem-connections-h" className="text-2xl font-semibold sm:text-3xl">{title}</h2>

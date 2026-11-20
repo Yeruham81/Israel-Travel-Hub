@@ -1,3 +1,4 @@
+import { guideHeroPhotoForPath } from "@/lib/guide-hero-photos";
 import { Link } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
 import { ArrowUpRight, ExternalLink, Lightbulb, MapPin, Waves, Users, Heart, Compass, TreePalm, Sun, ShieldCheck, Bus, Accessibility, Dog, Umbrella, CalendarDays } from "lucide-react";
@@ -44,8 +45,8 @@ const related = [
   { title: "Explore Old Jaffa", to: "/attractions/jaffa/" as const, note: "Old streets, the port and coastal views", image: jaffaPhoto, alt: "Historic streets in Old Jaffa" },
   { title: "Getting around Tel Aviv", to: "/travel-blog/getting-around-tel-aviv/" as const, note: "Buses, the light rail, taxis and walking", image: dizengoffPhoto, alt: "A street in central Tel Aviv" },
   { title: "Museums in Tel Aviv", to: "/travel-blog/museums-in-tel-aviv/" as const, note: "Art, history and a good rainy-day alternative", image: museumPhoto, alt: "Tel Aviv museum architecture" },
+  { title: "Best time to visit Israel", to: "/travel-blog/best-time-to-visit-israel/" as const, note: "Seasonal planning for city and beach visits", image: heroPhoto, alt: "Seasonal view of Israel" },
   { title: "Where to stay in Tel Aviv", to: "/travel-blog/where-to-stay-in-tel-aviv/" as const, note: "Compare areas near the coast and city centre", image: beachfrontPhoto, alt: "Hotels along Tel Aviv's waterfront" },
-  { title: "Day trips from Tel Aviv", to: "/travel-blog/day-trips-from-tel-aviv/" as const, note: "Take a different outing beyond the city", image: roadPhoto, alt: "A road trip in Israel" },
 ];
 
 const faqs = [
@@ -331,7 +332,7 @@ export function TelAvivBeachesGuide() {
         <Heading id="explore-more" title="Explore more of Tel Aviv" intro="Continue planning with my city, transport and sightseeing guides." />
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {related.map(item => <Link key={item.to} to={item.to} className="group flex h-full flex-col overflow-hidden rounded-xl border bg-card transition-colors hover:border-primary/40 hover:bg-secondary/20">
-            <img src={item.image} alt={item.alt} width={640} height={360} loading="lazy" decoding="async" className="aspect-[16/9] w-full object-cover" />
+            <img src={guideHeroPhotoForPath(item.to)!.src} alt={guideHeroPhotoForPath(item.to)!.alt} width={640} height={360} loading="lazy" decoding="async" className="aspect-[16/9] w-full object-cover" />
             <span className="flex flex-1 flex-col p-4"><strong>{item.title}</strong><span className="mt-2 text-sm leading-relaxed text-muted-foreground">{item.note}</span><span className="mt-auto inline-flex items-center gap-1 pt-4 text-sm font-semibold text-primary">Explore my guide <ArrowUpRight aria-hidden="true" className="h-4 w-4" /></span></span>
           </Link>)}
         </div>

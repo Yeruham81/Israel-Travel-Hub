@@ -1,10 +1,13 @@
 import type { LinkProps } from "@tanstack/react-router";
+import { oldCityJerusalemSite } from "@/data/oldCityJerusalemSite";
+import { jaffaSite } from "@/data/jaffaSite";
 import { attractionGuides } from "@/data/attractionGuides";
 import { attractionPath, type AttractionId } from "@/data/attractionGuideTypes";
 import { travelGuides, type GuidePhoto } from "@/data/travelGuides";
 import { travelGuidePaths, type TravelGuideId } from "@/data/registry";
 import { migrationPhotos } from "@/data/guideMigrationPhotos";
 import caesareaPhoto from "@/assets/home/caesarea-dusk.webp";
+import telAvivMain from "@/assets/home/tel-aviv-coast.webp";
 import { einGediCardPhoto } from "@/data/einGediCardPhoto";
 
 export type AttractionHubCard = {
@@ -44,12 +47,12 @@ const attraction = (id: AttractionId, title: string, description: string, fallba
   const item = attractionGuides[id];
   return {
     id, title, description, to: attractionPath(id),
-    photo: photoOverride ?? item.image ?? { src: fallback, alt: title },
+    photo: id === "old-city-jerusalem" ? oldCityJerusalemSite.hero : id === "jaffa" ? jaffaSite.hero : item.image ?? photoOverride ?? { src: fallback, alt: title },
   };
 };
 const editorialAttraction = (id: TravelGuideId, title: string, description: string, photoOverride?: { src: string; alt: string }): AttractionHubCard => ({
   id, title, description, to: travelGuidePaths[id],
-  photo: photoOverride ?? travelGuides[id].photo,
+  photo: travelGuides[id].photo,
 });
 
 export const attractionHubRegions: AttractionHubRegion[] = [
@@ -170,37 +173,37 @@ export const attractionRelatedGuides: {
     title: "Jerusalem travel guide",
     description: "Old City highlights, neighbourhoods and memorable viewpoints.",
     to: travelGuidePaths.jerusalem,
-    photo: travelGuides.jerusalem.cardPhoto ?? travelGuides.jerusalem.photo,
+    photo: travelGuides.jerusalem.photo,
   },
   {
     title: "Discover Tel Aviv & Jaffa",
     description: "A lively coast, historic lanes, markets and city culture.",
     to: "/travel-blog/attractions-in-tel-aviv/",
-    photo: migrationPhotos["EXISTING:coast"],
+    photo: {src: telAvivMain, alt: "Tel Aviv skyline and Mediterranean beachfront"},
   },
   {
     title: "Haifa visitor guide",
     description: "Gardens, hilltop views and northern coastal experiences.",
     to: "/attractions/haifa/",
-    photo: migrationPhotos["EXISTING:haifa"],
+    photo: attractionGuides.haifa.image!,
   },
   {
     title: "Sea of Galilee travel guide",
     description: "Lakeside towns, heritage sites and beautiful scenery.",
     to: "/travel-blog/sea-of-galilee/",
-    photo: migrationPhotos["EXISTING:galilee"],
+    photo: attractionGuides["sea-of-galilee"].image!,
   },
   {
     title: "Explore the Dead Sea",
     description: "Saltwater beaches, desert landscapes and nearby sights.",
     to: travelGuidePaths.deadSea,
-    photo: travelGuides.deadSea.cardPhoto ?? travelGuides.deadSea.photo,
+    photo: travelGuides.deadSea.photo,
   },
   {
     title: "Eilat & the Red Sea",
     description: "Beaches, coral reefs and adventures in the desert.",
     to: travelGuidePaths.eilat,
-    photo: travelGuides.eilat.cardPhoto ?? travelGuides.eilat.photo,
+    photo: travelGuides.eilat.photo,
   },
 ];
 

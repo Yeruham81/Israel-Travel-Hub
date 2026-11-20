@@ -1,3 +1,4 @@
+import { guideHeroPhotoForPath } from "@/lib/guide-hero-photos";
 import { useEffect, useRef, useState, type ReactNode } from "react";
 import { Link } from "@tanstack/react-router";
 import { ArrowUpRight, CalendarCheck2, CalendarDays, Clock3, ExternalLink, Lightbulb, MapPin, Ticket } from "lucide-react";
@@ -24,7 +25,7 @@ const related = [
   {title:"Explore the Old City",to:"/attractions/old-city-jerusalem/" as const,note:"City gates, historic streets and places to visit",image:oldCityPhoto,alt:"Jerusalem Old City"},
   {title:"Where to stay in Jerusalem",to:"/travel-blog/where-to-stay-in-jerusalem/" as const,note:"Neighbourhoods and hotel areas for your visit",image:mamillaPhoto,alt:"Mamilla area of Jerusalem"},
   {title:"Shopping in Jerusalem",to:"/travel-blog/shopping-in-jerusalem/" as const,note:"Markets, crafts and shopping streets around the city",image:mahanePhoto,alt:"Mahane Yehuda market in Jerusalem"},
-  {title:"Day trips from Jerusalem",to:"/travel-blog/day-trips-from-jerusalem/" as const,note:"Explore more of Israel from your Jerusalem base",image:downtownPhoto,alt:"Jerusalem city centre"},
+  {title:"Churches in Jerusalem",to:"/travel-blog/churches-in-jerusalem/" as const,note:"My guide to churches, pilgrimage routes and practical visiting tips",image:museumHero,alt:"Historic Jerusalem churches"},
   {title:"How to get to Bethlehem",to:"/travel-blog/jerusalem-to-bethlehem/" as const,note:"Practical travel options and planning advice",image:bethlehemPhoto,alt:"Bethlehem pilgrimage site"},
 ];
 function OfficialLink({href,children}:{href:string;children:ReactNode}) {
@@ -238,7 +239,7 @@ export function JerusalemMuseumsGuide(){
     <FaqList faqs={faqs}/>
     <section id="explore-more" aria-labelledby="explore-more-heading" className="mt-12 scroll-mt-24">
       <SectionHeading id="explore-more" title="Explore more of Jerusalem" intro="Continue planning with my Jerusalem city guides, neighbourhoods and day trips."/>
-      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">{related.map(item=><Link key={item.to} to={item.to} className="group flex h-full flex-col overflow-hidden rounded-xl border bg-card transition-colors hover:border-primary/40 hover:bg-secondary/20"><img src={item.image} alt={item.alt} width={640} height={360} loading="lazy" decoding="async" className="aspect-[16/9] w-full object-cover"/><span className="flex flex-1 flex-col p-4"><strong className="text-base">{item.title}</strong><span className="mt-2 text-sm leading-relaxed text-muted-foreground">{item.note}</span><span className="mt-auto inline-flex items-center gap-1 pt-4 text-sm font-semibold text-primary">Explore my guide <ArrowUpRight className="h-4 w-4" aria-hidden="true"/></span></span></Link>)}</div>
+      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">{related.map(item=><Link key={item.to} to={item.to} className="group flex h-full flex-col overflow-hidden rounded-xl border bg-card transition-colors hover:border-primary/40 hover:bg-secondary/20"><img src={guideHeroPhotoForPath(item.to)!.src} alt={guideHeroPhotoForPath(item.to)!.alt} width={640} height={360} loading="lazy" decoding="async" className="aspect-[16/9] w-full object-cover"/><span className="flex flex-1 flex-col p-4"><strong className="text-base">{item.title}</strong><span className="mt-2 text-sm leading-relaxed text-muted-foreground">{item.note}</span><span className="mt-auto inline-flex items-center gap-1 pt-4 text-sm font-semibold text-primary">Explore my guide <ArrowUpRight className="h-4 w-4" aria-hidden="true"/></span></span></Link>)}</div>
     </section>
     <HomeContactForm guide={neighborhoodTripContactCopy("Jerusalem")}/>
     <SourcesDisclosure>

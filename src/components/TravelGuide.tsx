@@ -128,7 +128,8 @@ function SectionReferences({ ids }: { ids: string[] }) {
 
 export function GuideCard({ guide, headingLevel = 2, cardPhoto, showReadMoreArrow = true, compactHomeLayout = false, responsiveSrcSet }: { guide: GuideDirectoryEntry; headingLevel?: 2 | 3; cardPhoto?: { src: string; alt: string } | null; showReadMoreArrow?: boolean; compactHomeLayout?: boolean; responsiveSrcSet?: string | undefined }) {
   const Heading = headingLevel === 3 ? "h3" : "h2";
-  const displayedPhoto = cardPhoto === undefined ? guide.photo : cardPhoto;
+  // Always show the main photo of the destination page, not a caller override.
+  const displayedPhoto = guide.photo;
   return <article className="flex h-full min-w-0 flex-col overflow-hidden rounded-2xl border bg-card" data-testid="guide-directory-card">
     <Link to={guide.to} className="group flex flex-1 flex-col focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-primary">
       {displayedPhoto ? <img src={displayedPhoto.src} srcSet={responsiveSrcSet} sizes={responsiveSrcSet ? "(min-width: 1280px) 360px, (min-width: 640px) calc(50vw - 26px), calc(100vw - 32px)" : undefined} alt={displayedPhoto.alt} width={600} height={400} loading="lazy" decoding="async" className="aspect-[3/2] w-full object-cover" /> : <span aria-hidden="true" data-testid="guide-card-placeholder" className="flex aspect-[3/2] w-full items-center justify-center bg-secondary/50 text-muted-foreground"><BookOpen className="h-10 w-10 opacity-50" /></span>}
@@ -250,7 +251,7 @@ export function TravelGuidePage({ id }: { id: TravelGuideId }) {
   const bethlehemEntryRules = id === "bethlehem" ? guide.sections.find((section) => section.id === "entry-rules") : undefined;
   const providers = guide.providerPageId ? linksForPage(guide.providerPageId) : [];
   const isJerusalemDayJourney = id === "bethlehem" || id === "jerusalemDeadSea";
-  const isJerusalemCluster = (["jerusalem", "jerusalemChurches", "jerusalemShopping", "jerusalemDayTrips", "bethlehem", "jerusalemDeadSea"] as string[]).includes(id);
+  const isJerusalemCluster = (["jerusalem", "jerusalemChurches", "jerusalemShopping", "bethlehem", "jerusalemDeadSea"] as string[]).includes(id);
   const isNationalGuide = id === "israel";
   const isTransportOverview = isNationalGuide || id === "telAviv";
   const isTaxiFareGuide = id === "taxiFares";

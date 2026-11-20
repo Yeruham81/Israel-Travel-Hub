@@ -67,13 +67,12 @@ const articles: Partial<Record<TravelGuideId, Upgrade>> = {
         ],
       },
     ],
-    related: ["jerusalemChurches", "jerusalemShopping", "jerusalemDayTrips", "jerusalemDeadSea", "bethlehem"],
+    related: ["jerusalemChurches", "jerusalemShopping", "jerusalemDeadSea", "bethlehem"],
     services: [
       { label: "Jerusalem walking and guided tours", to: "/tours/jerusalem/", note: "Check the advertised starting city and guiding inclusions" },
       { label: "Where to stay in Jerusalem", to: "/travel-blog/where-to-stay-in-jerusalem/", note: "Neighbourhood and hotel advice" },
       { label: "Airport to Jerusalem: all transport options", to: "/travel-blog/how-to-get-from-ben-gurion-airport-to-jerusalem/" },
       { label: "Airport to Jerusalem: request a private transfer", to: "/airport-transfers/jerusalem/" },
-      { label: "Day trips from Jerusalem", to: travelGuidePaths.jerusalemDayTrips },
     ],
   },
   jerusalemChurches: {
@@ -116,7 +115,7 @@ const articles: Partial<Record<TravelGuideId, Upgrade>> = {
         ],
       },
     ],
-    related: ["jerusalem", "jerusalemDayTrips", "bethlehem"],
+    related: ["jerusalem", "bethlehem"],
   },
   jerusalemShopping: {
     title: "Shopping in Jerusalem: Markets, Crafts, Malls & Local Streets",
@@ -176,45 +175,6 @@ const articles: Partial<Record<TravelGuideId, Upgrade>> = {
       { label: "Explore the Old City", to: "/attractions/old-city-jerusalem/" },
       { label: "Where to stay in Jerusalem", to: "/travel-blog/where-to-stay-in-jerusalem/" },
       { label: "German Colony and Baka hotels", to: "/accommodation/jerusalem/german-colony-baka/" },
-    ],
-  },
-  jerusalemDayTrips: {
-    title: "Day Trips from Jerusalem: Compare Routes, Transport & Tours",
-    description: "Choose day trips from Jerusalem to Masada, the Dead Sea, Bethlehem, Tel Aviv, Caesarea or the Galilee with realistic travel plans and links to tours.",
-    sections: [
-      {
-        id: "departure-city-matters",
-        title: "Check where the advertised tour actually starts",
-        paragraphs: [
-          "A tour sold as a day trip to Jerusalem is not necessarily a tour departing from Jerusalem. Compare the stated pickup city and meeting point before reserving: a package travelling from Tel Aviv can include a long transfer that you do not need when already staying in Jerusalem.",
-          "The Dead Sea and Masada have dedicated tours with different access, guiding and beach inclusions. For the independent journey, check the Jerusalem to the Dead Sea guide instead. For Bethlehem, verify crossing arrangements and transport permissions before treating it as a routine local taxi ride.",
-        ],
-        inlineLinks: [
-          { text: "Dead Sea and Masada", to: "/tours/masada-dead-sea/" },
-          { text: "Jerusalem to the Dead Sea guide", to: travelGuidePaths.jerusalemDeadSea },
-          { text: "Bethlehem", to: travelGuidePaths.bethlehem },
-        ],
-      },
-      {
-        id: "day-trip-booking-checks",
-        title: "How to compare prices, tickets and guides fairly",
-        paragraphs: [
-          "Look for the same inclusions across offers: pickup and drop-off, guiding, group size, required entrance tickets, optional stops, lunch, waiting and cancellation conditions. External tour prices are the provider's responsibility and may change with date, currency, group size or options. This guide does not display a live price or promise a particular departure.",
-          "My private-driver service can handle flexible transport for sites reached by car, while licensed guiding and admissions are separate. If arriving at Ashdod Port, cruise return times and port pickup rules change the route; choose the shore-excursion page rather than an ordinary Jerusalem hotel departure.",
-        ],
-        inlineLinks: [
-          { text: "private-driver service", to: "/private-driver/" },
-          { text: "shore-excursion page", to: "/shore-excursions/ashdod/" },
-        ],
-      },
-    ],
-    related: ["jerusalem", "jerusalemDeadSea", "bethlehem", "telAvivDayTrips"],
-    services: [
-      { label: "Masada and Dead Sea tour choices", to: "/tours/masada-dead-sea/" },
-      { label: "Jerusalem walking tours", to: "/tours/jerusalem/" },
-      { label: "Bethlehem, Jericho and Jordan River tours", to: "/tours/bethlehem-jericho-jordan-river/" },
-      { label: "Tel Aviv and Jaffa tours", to: "/tours/tel-aviv-jaffa/" },
-      { label: "Caesarea, Haifa and Acre tours", to: "/tours/caesarea-haifa-acre/" },
     ],
   },
 

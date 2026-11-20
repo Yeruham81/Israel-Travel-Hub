@@ -4,6 +4,8 @@ import type { LinkProps } from "@tanstack/react-router";
 import { getShorePort } from "@/data/shoreExcursions";
 import { travelGuidePaths, AIRALO_COMPATIBILITY_AFFILIATE_URL, AIRALO_MENA_AFFILIATE_URL, type TravelGuideId } from "@/data/registry";
 import { airportTransferPhotos } from "@/data/airportTransfers";
+import { airportJourneyGuides } from "@/data/airportJourneyGuides";
+import { neighborhoodGuidesForCity, haifaStayGuide, tiberiasStayGuide, deadSeaStayGuide } from "@/data/content";
 import airportHall from "@/assets/home/ben-gurion-t3.webp";
 import railPlatform from "@/assets/airport-journeys/ben-gurion-rail-platform.webp";
 import navonPlatform from "@/assets/airport-journeys/jerusalem-navon-platform.webp";
@@ -234,8 +236,7 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
     answer: "No regular airport sherut currently operates on the former Nesher route to Jerusalem or Amal route to Haifa. Use a train, suitable bus, official airport taxi or private transfer instead. Local sherut taxis and separately booked shared shuttles are different services.",
     topics: ["transportation", "tips"],
     updatedAt: "2026-11-11",
-    photo: airportTransferPhotos["other"]!,
-    cardPhoto: { src: sherutNesherCardPhoto, alt: "Former Nesher yellow-and-white shared shuttle van at Ben Gurion Airport" },
+    photo: { src: sherutNesherCardPhoto, alt: "Former Nesher yellow-and-white shared shuttle van at Ben Gurion Airport" },
     facts: [
       { label: "Former Nesher airport sherut", text: "Former airport service to Jerusalem — discontinued" },
       { label: "Former Amal airport sherut", text: "Former airport service to Haifa — discontinued" },
@@ -1135,7 +1136,7 @@ telAviv: {
     answer: "For most visitors, walking and city buses are the easiest ways to explore Tel Aviv. The Red Line light rail is also useful when its stations are close to your destination. Use Israel Railways for airport and intercity journeys; its Tel Aviv stations are inland, away from the beach. Taxis are convenient for late arrivals, heavy luggage and trips during Shabbat. Regular buses and trains generally stop during Shabbat, but Tel Aviv has a free weekend bus network on selected routes.",
     updatedAt: "2026-11-12",
     topics: ["transportation", "destinations", "tips"],
-    photo: migrationPhotos["EXISTING:coast"],
+    photo: {src: archivedBuses, alt: "City buses at a Tel Aviv metropolitan transport terminal"},
     facts: [
       { label: "Best starting point", text: "Walk locally; check buses and the Red Line light rail for cross-town trips" },
       { label: "How to pay", text: "Rav-Kav card or an authorized app; card taps are not yet universal" },
@@ -1452,12 +1453,11 @@ telAviv: {
       "guide-sherut-regulation", "guide-telaviv-bicycle-rules", "guide-telaviv-weekend-hours",
       "guide-weekend-network", "guide-weekend-711",
     ],
-    related: ["israel", "taxis", "sherut", "shabbat", "airportTaxis", "telAvivDayTrips"],
+    related: ["israel", "taxis", "sherut", "shabbat", "airportTaxis"],
     services: [
       { label: "Where to stay in Tel Aviv", to: "/travel-blog/where-to-stay-in-tel-aviv/", note: "Compare neighborhoods by the places you plan to visit and your transit options." },
       { label: "Explore Old Jaffa", to: "/attractions/jaffa/", note: "Plan the old streets, port and connections to the rest of the city." },
       { label: "Tel Aviv beaches guide", to: travelGuidePaths.telAvivBeaches, note: "Choose a stretch of shoreline and plan walking or onward transport." },
-      { label: "Day trips from Tel Aviv", to: travelGuidePaths.telAvivDayTrips, note: "Decide when train, bus, tour or private car makes most sense beyond the city." },
     ],
   },
 
@@ -1481,19 +1481,19 @@ export const guideDirectory: GuideDirectoryEntry[] = [
       photo: migrationPhotos[g.hero] };
   }),
   ...attractionIds.filter(isRegionalOverview).map((id): GuideDirectoryEntry => { const g = attractionGuides[id]; return { id: `attraction-${id}`, title: g.title, description: g.description, to: attractionPath(id), topics: ["attractions","destinations",...(id.includes("mount-") || ["capernaum","tabgha"].includes(id) ? ["religion" as const] : [])], ...(g.image ? {photo:g.image}: {}) }; }),
-  { id: "airport-journey-jerusalem", title: "How to get from Ben Gurion Airport to Jerusalem", description: "Compare train, bus, taxi and private-transfer options, travel times, estimated fares and weekend alternatives.", to: "/travel-blog/how-to-get-from-ben-gurion-airport-to-jerusalem/", topics: ["transportation", "tips"], photo: airportTransferPhotos["jerusalem"]! },
-  { id: "airport-journey-tel-aviv", title: "How to get from Ben Gurion Airport to Tel Aviv", description: "Compare train, bus, taxi and private-transfer options, travel times, estimated fares and weekend alternatives.", to: "/travel-blog/how-to-get-from-ben-gurion-airport-to-tel-aviv/", topics: ["transportation", "tips"], photo: airportTransferPhotos["tel-aviv"]! },
-  { id: "airport-journey-haifa", title: "How to get from Ben Gurion Airport to Haifa", description: "Compare train, bus, taxi and private-transfer options, travel times, estimated fares and weekend alternatives.", to: "/travel-blog/how-to-get-from-ben-gurion-airport-to-haifa/", topics: ["transportation", "tips"], photo: airportTransferPhotos["haifa"]! },
-  { id: "airport-journey-ein-bokek", title: "How to get from Ben Gurion Airport to Ein Bokek", description: "Compare train, bus, taxi and private-transfer options, travel times, estimated fares and weekend alternatives.", to: "/travel-blog/how-to-get-from-ben-gurion-airport-to-ein-bokek/", topics: ["transportation", "tips"], photo: airportTransferPhotos["dead-sea"]! },
+  { id: "airport-journey-jerusalem", title: "How to get from Ben Gurion Airport to Jerusalem", description: "Compare train, bus, taxi and private-transfer options, travel times, estimated fares and weekend alternatives.", to: "/travel-blog/how-to-get-from-ben-gurion-airport-to-jerusalem/", topics: ["transportation", "tips"], photo: airportJourneyGuides.jerusalem.photo },
+  { id: "airport-journey-tel-aviv", title: "How to get from Ben Gurion Airport to Tel Aviv", description: "Compare train, bus, taxi and private-transfer options, travel times, estimated fares and weekend alternatives.", to: "/travel-blog/how-to-get-from-ben-gurion-airport-to-tel-aviv/", topics: ["transportation", "tips"], photo: airportJourneyGuides["tel-aviv"].photo },
+  { id: "airport-journey-haifa", title: "How to get from Ben Gurion Airport to Haifa", description: "Compare train, bus, taxi and private-transfer options, travel times, estimated fares and weekend alternatives.", to: "/travel-blog/how-to-get-from-ben-gurion-airport-to-haifa/", topics: ["transportation", "tips"], photo: airportJourneyGuides.haifa.photo },
+  { id: "airport-journey-ein-bokek", title: "How to get from Ben Gurion Airport to Ein Bokek", description: "Compare train, bus, taxi and private-transfer options, travel times, estimated fares and weekend alternatives.", to: "/travel-blog/how-to-get-from-ben-gurion-airport-to-ein-bokek/", topics: ["transportation", "tips"], photo: airportJourneyGuides["ein-bokek"].photo },
 
   { id: "israel-holidays", title: "Israel Holidays Calendar: Dates & Travel Planning", description: "Select your trip dates on an interactive calendar to see which holidays could affect transport, opening hours, crowds and prices.", to: "/travel-blog/israel-holidays/" as LinkProps["to"], topics: ["tips","religion","itineraries"], photo: migrationPhotos["calendar-of-events"] },
-  ...Object.values(travelGuides).filter((guide) => !travelGuidePaths[guide.id].startsWith("/attractions/")).map((guide) => ({ id: guide.id, title: guide.title, description: guide.description, to: travelGuidePaths[guide.id], topics: guide.topics, photo: guide.cardPhoto ?? guide.photo })),
+  ...Object.values(travelGuides).filter((guide) => !travelGuidePaths[guide.id].startsWith("/attractions/")).map((guide) => ({ id: guide.id, title: guide.title, description: guide.description, to: travelGuidePaths[guide.id], topics: guide.topics, photo: guide.photo })),
   ...(["haifa", "ashdod"] as const).map((id): GuideDirectoryEntry => { const port = getShorePort(id); return { id: `shore-${id}`, title: port.title, description: port.description, to: port.path, topics: ["destinations", "itineraries", "transportation"], photo: port.photo }; }),
-  { id: "stay-jerusalem", title: "Where to stay in Jerusalem", description: "Choose the neighbourhood and hotel style that fit your visit.", to: "/travel-blog/where-to-stay-in-jerusalem/", topics: ["destinations", "accommodation"], photo: airportTransferPhotos["jerusalem"]! },
-  { id: "stay-telaviv", title: "Where to stay in Tel Aviv", description: "Compare beachfront, Jaffa and central neighbourhoods.", to: "/travel-blog/where-to-stay-in-tel-aviv/", topics: ["destinations", "accommodation"], photo: airportTransferPhotos["tel-aviv"]! },
-  { id: "stay-haifa", title: "Where to stay in Haifa", description: "Understand coastal, German Colony and Carmel hotel locations.", to: "/travel-blog/best-hotels-in-haifa/", topics: ["destinations", "accommodation"], photo: airportTransferPhotos["haifa"]! },
-  { id: "stay-tiberias", title: "Tiberias & Sea of Galilee hotels", description: "Lakeside bases, family facilities and practical arrival checks.", to: "/travel-blog/best-hotels-in-tiberias/", topics: ["destinations", "accommodation"], photo: { src: tiberias, alt: "Tiberias on the Sea of Galilee", credit: "Ian Scott · CC BY-SA 2.0 · resized WebP", sourceUrl: "https://commons.wikimedia.org/wiki/File:Tiberias_from_the_Sea_of_Galilee_(5809646279).jpg", licenseUrl: "https://creativecommons.org/licenses/by-sa/2.0/" } },
-  { id: "stay-deadsea", title: "Dead Sea hotels", description: "Choose Ein Bokek, a spa stay or a family hotel on the Israeli shore.", to: "/travel-blog/best-dead-sea-hotels/", topics: ["destinations", "accommodation"], photo: airportTransferPhotos["dead-sea"]! },
+  { id: "stay-jerusalem", title: "Where to stay in Jerusalem", description: "Choose the neighbourhood and hotel style that fit your visit.", to: "/travel-blog/where-to-stay-in-jerusalem/", topics: ["destinations", "accommodation"], photo: neighborhoodGuidesForCity("jerusalem")[0]!.photo },
+  { id: "stay-telaviv", title: "Where to stay in Tel Aviv", description: "Compare beachfront, Jaffa and central neighbourhoods.", to: "/travel-blog/where-to-stay-in-tel-aviv/", topics: ["destinations", "accommodation"], photo: neighborhoodGuidesForCity("telaviv")[0]!.photo },
+  { id: "stay-haifa", title: "Where to stay in Haifa", description: "Understand coastal, German Colony and Carmel hotel locations.", to: "/travel-blog/best-hotels-in-haifa/", topics: ["destinations", "accommodation"], photo: haifaStayGuide.photo },
+  { id: "stay-tiberias", title: "Tiberias & Sea of Galilee hotels", description: "Lakeside bases, family facilities and practical arrival checks.", to: "/travel-blog/best-hotels-in-tiberias/", topics: ["destinations", "accommodation"], photo: tiberiasStayGuide.photo },
+  { id: "stay-deadsea", title: "Dead Sea hotels", description: "Choose Ein Bokek, a spa stay or a family hotel on the Israeli shore.", to: "/travel-blog/best-dead-sea-hotels/", topics: ["destinations", "accommodation"], photo: deadSeaStayGuide.photo },
 ];
 
 export function isGuideTopic(value: unknown): value is GuideTopicId { return typeof value === "string" && guideTopics.some((topic) => topic.id === value); }

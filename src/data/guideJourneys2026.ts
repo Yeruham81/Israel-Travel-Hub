@@ -560,7 +560,6 @@ export const journeyDestinationGuides = {
   "related": [
     "jerusalem",
     "jerusalemChurches",
-    "jerusalemDayTrips",
     "jerusalemDeadSea"
   ],
   "services": [],
@@ -823,7 +822,6 @@ export const journeyDestinationGuides = {
       ],
       "related": [
         "deadSea",
-        "jerusalemDayTrips",
         "bestTime"
       ],
       "services": [
