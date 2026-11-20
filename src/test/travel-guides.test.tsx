@@ -23,6 +23,7 @@ import { Route as BaptismRoute } from "@/routes/travel-blog.baptism-in-the-jorda
 import { Route as JerusalemDayTripsRoute } from "@/routes/travel-blog.day-trips-from-jerusalem";
 import { Route as ChurchesRoute } from "@/routes/travel-blog.churches-in-jerusalem";
 import { Route as ShoppingRoute } from "@/routes/travel-blog.shopping-in-jerusalem";
+import { Route as TopTenRoute } from "@/routes/travel-blog.top-10-things-to-do-in-israel";
 import { Route as TelAvivDayTripsRoute } from "@/routes/travel-blog.day-trips-from-tel-aviv";
 import { filterGuides, guideDirectory, guideTopics, travelGuides } from "@/data/travelGuides";
 import { AIRALO_COMPATIBILITY_AFFILIATE_URL, AIRALO_MENA_AFFILIATE_URL, affiliateConfig, getSource, isPublisherUrl, linksForPage, mosheBarakAuthor, travelGuidePaths, TRAVEL_GUIDE_CHECK_DATE } from "@/data/registry";
@@ -31,7 +32,7 @@ import { repeatedPhotos } from "@/lib/photo-uniqueness";
 
 afterEach(() => { cleanup(); localStorage.clear(); });
 const cases = [{ id: "uber", route: UberRoute }, { id: "sherut", route: SherutRoute }, { id: "esim", route: EsimRoute }, { id: "arrival", route: ArrivalRoute }, { id: "israel", route: IsraelRoute }, { id: "telAviv", route: TelAvivRoute }, { id: "taxis", route: TaxiRoute },
-  { id: "shabbat", route: ShabbatRoute }, { id: "travelTips", route: TipsRoute }, { id: "jerusalem", route: JerusalemRoute }, { id: "jerusalemDeadSea", route: DeadSeaRoute }, { id: "baptism", route: BaptismRoute }, { id: "jerusalemDayTrips", route: JerusalemDayTripsRoute }, { id: "jerusalemChurches", route: ChurchesRoute }, { id: "jerusalemShopping", route: ShoppingRoute }, { id: "telAvivDayTrips", route: TelAvivDayTripsRoute },
+  { id: "shabbat", route: ShabbatRoute }, { id: "travelTips", route: TipsRoute }, { id: "jerusalem", route: JerusalemRoute }, { id: "jerusalemDeadSea", route: DeadSeaRoute }, { id: "baptism", route: BaptismRoute }, { id: "jerusalemDayTrips", route: JerusalemDayTripsRoute }, { id: "jerusalemChurches", route: ChurchesRoute }, { id: "jerusalemShopping", route: ShoppingRoute }, { id: "topTen", route: TopTenRoute }, { id: "telAvivDayTrips", route: TelAvivDayTripsRoute },
 ] as const;
 async function routerAt(path: string) {
   const router = createRouter({ routeTree, context: { queryClient: new QueryClient() }, history: createMemoryHistory({ initialEntries: [path] }), trailingSlash: "always" });
@@ -70,6 +71,36 @@ describe("migrated practical guides", () => {
       ]) });
       const structured = head!.scripts!.flatMap((script) => typeof script?.children === "string" ? [JSON.parse(script.children)] : []);
       const article = structured.find((item) => item["@type"] === "Article");
+      expect(article).toMatchObject({ headline: guide.title, dateModified: guide.updatedAt, inLanguage: "en" });
+      return;
+    }
+    if (id === "topTen") {
+      expect(container.querySelectorAll('article[id]')).toHaveLength(10);
+      expect(container.querySelector('iframe[src^="/maps/top-ten-israel.html"]')).not.toBeNull();
+      expect(container.querySelectorAll('#choose a[href^="#"]')).toHaveLength(10);
+      expect(container.querySelectorAll("#compare tbody tr")).toHaveLength(10);
+      expect(container.querySelectorAll("#explore-more a")).toHaveLength(6);
+      expect(container.querySelectorAll("#plan-trip a")).toHaveLength(6);
+      expect(container.querySelectorAll("#faq details")).toHaveLength(6);
+      expect(container.querySelectorAll("#contact")).toHaveLength(1);
+      const photoPaths = [...container.querySelectorAll('#experiences article > img')].map(el => el.getAttribute("src"));
+      expect(photoPaths).toHaveLength(10);
+      expect(new Set(photoPaths).size).toBe(10);
+      expect(container.querySelector('img[src="/images/top-ten-israel/hero.webp"]')).not.toBeNull();
+      const contact = container.querySelector("#contact")!;
+      const sources = container.querySelector("#sources")!;
+      expect(contact.compareDocumentPosition(sources) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
+      expect(screen.getByRole("complementary", { name: "About the author" })).toHaveTextContent("Written by Moshe Barak");
+      expect(container.querySelector("time")).toHaveAttribute("datetime", guide.updatedAt);
+      expect(container.querySelector('a[href*="israel-taxi.com"]')).toBeNull();
+      const head = await route.options.head?.({} as never);
+      expect(head).toMatchObject({ meta: expect.arrayContaining([
+        { title: guide.title },
+        { name: "description", content: guide.description },
+        { name: "robots", content: "noindex,nofollow" },
+      ]) });
+      const structured = head!.scripts!.flatMap((script) => typeof script?.children === "string" ? [JSON.parse(script.children)] : []);
+      const article = structured.find(item => item["@type"] === "Article");
       expect(article).toMatchObject({ headline: guide.title, dateModified: guide.updatedAt, inLanguage: "en" });
       return;
     }
