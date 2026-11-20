@@ -12,6 +12,7 @@ import mahaneMarket from "@/assets/travel-blog-hub/mahane-yehuda-c53a05ac52-420.
 import foodMarkets from "@/assets/tours-hub/food-markets.webp";
 import germanColonyStreet from "@/assets/travel-blog-hub/colony-35429f7d31-420.webp";
 import marketBakery from "@/assets/guides/2026-10/food-7.webp";
+import telAvivSarona from "@/assets/home/hero-refresh-tel-aviv-sarona-v4-medium.webp";
 
 const jerusalemScene = (src: string, alt: string): HotelIllustration => ({
   src, alt, label: "Illustrative Jerusalem neighborhood photograph",
@@ -49,7 +50,7 @@ export const supplementalHotelPhotos: Record<string, HotelIllustration> = {
   "tlv-dan": scene("tlv-dan", "webp", "Tel Aviv Mediterranean promenade and beachfront"),
   "tlv-royal-beach": scene("tlv-royal-beach", "webp", "Tel Aviv coastline viewed from Jaffa"),
   "tlv-center-chic": scene("tlv-center-chic", "webp", "Dizengoff Street in central Tel Aviv"),
-  "tlv-dizengoff-garden": scene("tlv-dizengoff-garden", "webp", "Illustrative central Tel Aviv city view"),
+  "tlv-dizengoff-garden": { src: telAvivSarona, alt: "Urban streets and buildings in Tel Aviv", label: "Illustrative Tel Aviv city photograph", credit: "Photograph from the site\u0027s Tel Aviv image collection" },
   "tlv-shalom": scene("tlv-shalom", "webp", "Old North area of Tel Aviv"),
   "tlv-tal": scene("tlv-tal", "webp", "Tel Aviv Port waterfront surroundings"),
   "tlv-trieste": scene("tlv-trieste", "webp", "Historic Neve Tzedek neighborhood in Tel Aviv"),
