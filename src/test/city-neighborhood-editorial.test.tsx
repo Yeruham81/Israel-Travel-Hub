@@ -164,7 +164,7 @@ describe("Jerusalem and Tel Aviv neighbourhood editorial guides", () => {
       const navigation = screen.getByTestId("telaviv-area-image-grid");
       expect(within(navigation).getAllByRole("link")).toHaveLength(8);
       expect(within(navigation).getAllByRole("img")).toHaveLength(8);
-      expect(navigation).toHaveClass("lg:grid-cols-3");
+      expect(navigation).toHaveClass("lg:grid-cols-4");
       expect(navigation.querySelector('a[href="#area-telaviv-beachfront"] img')).toHaveAttribute("src", "/images/city-stays/tel-aviv-beachfront.webp");
       expect(navigation.querySelector('a[href="#area-telaviv-dizengoff"] img')).toHaveAttribute("src", "/images/city-stays/tel-aviv-dizengoff.webp");
       expect(navigation.querySelector('a[href="#area-telaviv-jaffa"] img')).toHaveAttribute("src", "/images/city-stays/tel-aviv-jaffa.webp");
