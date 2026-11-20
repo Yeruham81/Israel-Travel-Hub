@@ -58,7 +58,7 @@ function MuseumCard({museum}:{museum:MuseumEntry}) {
             height={museumPhoto.height}
             loading="lazy"
             decoding="async"
-            className={`aspect-[16/10] w-full sm:aspect-[4/3] lg:aspect-[4/3] ${museumPhoto.fit === "contain" ? "object-contain" : "object-cover"}`}
+            className={`aspect-[16/10] w-full sm:aspect-[16/9] lg:aspect-[4/3] ${museumPhoto.fit === "contain" ? "object-contain" : "object-cover"}`}
           />
         </div>
         {museumPhoto.illustrative && <figcaption className="px-4 py-2 text-xs leading-relaxed text-muted-foreground lg:px-0">Illustration of traditional instruments, not a photograph of the museum.</figcaption>}
