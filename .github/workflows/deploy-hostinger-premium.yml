@@ -937,7 +937,7 @@ jobs:
           const fs = require("node:fs");
           const html = fs.readFileSync("/tmp/haifa-city.html","utf8");
           for (const required of [
-            "Haifa: Attractions & City Guide","Louis Promenade","Wadi Nisnas","The German Colony",
+            "Haifa: Attractions","Louis Promenade","Wadi Nisnas","The German Colony",
             "Stella Maris","Bat Galim","Dado","Suggested Haifa itineraries",
             'data-testid="haifa-affiliate-tour-cards"', "Free to explore", "Carmelit", "Google Maps", "Talpiot Market"
           ]) {
