@@ -48,9 +48,9 @@ function MuseumCard({museum}:{museum:MuseumEntry}) {
   const showTicket = Boolean(museum.ticketUrl && museum.ticketUrl !== museum.url);
   const ticketLabel = museum.id === "rockefeller" ? "Check organised tours" : ["yad","begin","friends","tolerance","time"].includes(museum.id) ? "Reserve a visit" : museum.id === "israel" ? "Tickets & admission" : "Check tickets & rates";
   return <article id={"museum-"+museum.id} data-museum-card="horizontal" className="scroll-mt-28 overflow-hidden rounded-2xl border bg-card shadow-sm">
-    <div className="lg:grid lg:grid-cols-[minmax(0,34%)_minmax(0,1fr)] lg:items-stretch">
-      <figure className="min-w-0 bg-secondary/20 lg:p-5 lg:pr-0">
-        <div className="overflow-hidden bg-secondary/40 lg:rounded-xl">
+    <div className="lg:grid lg:grid-cols-[minmax(0,1fr)_270px] lg:items-start lg:gap-6 lg:p-5">
+      <figure className="min-w-0 bg-secondary/20 lg:col-start-2 lg:row-start-1 lg:overflow-hidden lg:rounded-xl">
+        <div className="overflow-hidden bg-secondary/40">
           <img
             src={museumPhoto.src}
             alt={museumPhoto.alt}
@@ -58,24 +58,26 @@ function MuseumCard({museum}:{museum:MuseumEntry}) {
             height={museumPhoto.height}
             loading="lazy"
             decoding="async"
-            className={`aspect-[16/10] w-full sm:aspect-[16/9] lg:aspect-[4/3] ${museumPhoto.fit === "contain" ? "object-contain" : "object-cover"}`}
+            className={`h-48 w-full sm:h-56 lg:aspect-[4/3] lg:h-auto ${museumPhoto.fit === "contain" ? "object-contain" : "object-cover"}`}
           />
         </div>
-        {museumPhoto.illustrative && <figcaption className="px-4 py-2 text-xs leading-relaxed text-muted-foreground lg:px-0">Illustration of traditional instruments, not a photograph of the museum.</figcaption>}
+        {museumPhoto.illustrative && <figcaption className="px-3 py-2 text-xs leading-relaxed text-muted-foreground">Illustration of traditional instruments, not a photograph of the museum.</figcaption>}
       </figure>
-      <div className="flex min-w-0 flex-col p-4 sm:p-5 lg:p-6">
+      <div className="min-w-0 p-4 sm:p-5 lg:col-start-1 lg:row-start-1 lg:p-0">
         <p className="text-xs font-semibold uppercase tracking-wide text-primary">{museum.neighbourhood}</p>
         <h3 className="mt-1 text-xl font-bold leading-snug sm:text-2xl">{museum.name}</h3>
         {tags.length>0 && <div className="mt-2 flex flex-wrap gap-1.5">{tags.map(tag=><span key={tag} className="rounded-full border border-primary/15 bg-secondary/50 px-2.5 py-1 text-[11px] font-medium">{tag}</span>)}</div>}
         {museum.closureNote && <p className="mt-3 w-fit rounded-md border border-amber-300/60 bg-amber-50 px-2 py-1 text-xs font-semibold text-amber-900">{museum.closureNote}</p>}
         <p className="mt-3 text-sm leading-relaxed">{museum.intro}</p>
-        <dl className="mt-4 grid gap-3 rounded-xl bg-secondary/40 p-3.5 text-sm sm:grid-cols-2">
+      </div>
+    </div>
+    <div className="border-t px-4 py-4 sm:px-5 lg:px-6">
+      <dl className="grid gap-3 rounded-xl bg-secondary/40 p-3.5 text-sm sm:grid-cols-2">
           <div className="flex min-w-0 items-start gap-2"><Clock3 className="mt-0.5 h-4 w-4 shrink-0 text-primary" aria-hidden="true"/><div><dt className="font-semibold">Allow</dt><dd className="mt-0.5 leading-relaxed text-muted-foreground">{museum.duration}</dd></div></div>
           <div className="flex min-w-0 items-start gap-2"><Ticket className="mt-0.5 h-4 w-4 shrink-0 text-primary" aria-hidden="true"/><div><dt className="font-semibold">Admission</dt><dd className="mt-0.5 leading-relaxed text-muted-foreground">{museum.admission}</dd></div></div>
           <div className="flex min-w-0 items-start gap-2"><CalendarDays className="mt-0.5 h-4 w-4 shrink-0 text-primary" aria-hidden="true"/><div><dt className="font-semibold">Usual opening</dt><dd className="mt-0.5 leading-relaxed text-muted-foreground">{museum.openingDays}</dd></div></div>
           <div className="flex min-w-0 items-start gap-2"><CalendarCheck2 className="mt-0.5 h-4 w-4 shrink-0 text-primary" aria-hidden="true"/><div><dt className="font-semibold">Booking</dt><dd className="mt-0.5 leading-relaxed text-muted-foreground">{museum.booking}</dd></div></div>
-        </dl>
-      </div>
+      </dl>
     </div>
     <div className="grid gap-4 border-t px-4 py-4 sm:px-5 lg:grid-cols-2 lg:gap-6 lg:px-6">
       <div>

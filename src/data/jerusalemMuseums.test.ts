@@ -26,7 +26,10 @@ describe("Jerusalem museums editorial guide",()=>{
   it("uses single-column horizontal museum cards at desktop and stacked photographs on mobile",()=>{
     const guide = readFileSync("src/components/JerusalemMuseumsGuide.tsx","utf8");
     expect(guide).toContain('data-museum-card="horizontal"');
-    expect(guide).toContain("lg:grid-cols-[minmax(0,34%)_minmax(0,1fr)]");
+    expect(guide).toContain("lg:grid-cols-[minmax(0,1fr)_270px]");
+    expect(guide).toContain("lg:col-start-2 lg:row-start-1");
+    expect(guide).toContain("lg:col-start-1 lg:row-start-1");
+    expect(guide).toContain('className="border-t px-4 py-4 sm:px-5 lg:px-6"');
     expect(guide).toContain("lg:grid-cols-2 lg:gap-6");
     expect(guide).toContain('className="mt-5 grid gap-5"');
     expect(guide).not.toContain('className="mt-5 grid items-stretch gap-5 md:grid-cols-2"');
