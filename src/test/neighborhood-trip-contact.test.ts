@@ -14,7 +14,7 @@ describe("Neighborhood contact panels focus on travel services, not hotel select
     const copy = neighborhoodTripContactCopy(city);
     expect(copy.heading).toBe(`Planning a trip to ${city}?`);
     expect(copy.introduction).toMatch(/airport transfer/i);
-    expect(copy.introduction).toMatch(/private driver/i);
+    expect(copy.introduction).toMatch(/private (driver|ride)/i);
     expect(copy.introduction).toMatch(/day trip/i);
     expect(copy.introduction).toMatch(/I'll reply personally/);
     expect(copy.introduction).not.toMatch(/hotel|room|booking provider|which area/i);
@@ -23,8 +23,8 @@ describe("Neighborhood contact panels focus on travel services, not hotel select
     expect(copy.subject).toBe("");
   });
 
-  it("preserves the accommodation-specific helper for other pages", () => {
+  it("keeps the shared accommodation contact helper focused on private transport", () => {
     const copy = guideContactCopy("Accommodation guide", "accommodation", "Haifa");
-    expect(copy.heading).toBe("Questions about staying in Haifa?");
+    expect(copy.heading).toBe("Need a private transfer to or from Haifa?");
   });
 });

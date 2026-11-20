@@ -101,7 +101,7 @@ describe("Tiberias hotel editorial", () => {
     expect(screen.getByRole("link", { name: "Israel calendar of events" })).toHaveAttribute("href", "/travel-blog/calendar-of-events/");
     expect(screen.getByTestId("related-guides")).toHaveAttribute("data-region", "tiberias");
     expect(screen.getByTestId("related-guides")).toHaveAttribute("data-current", "/travel-blog/best-hotels-in-tiberias/");
-    expect(screen.getByRole("form", { name: "Standard contact form" })).toHaveAttribute("data-heading", "Planning a Tiberias Vacation?");
+    expect(screen.getByRole("form", { name: "Standard contact form" })).toHaveAttribute("data-heading", "Need private transport to Tiberias?");
     const ids = screen.getByTestId("tiberias-sources").getAttribute("data-ids")!.split(",");
     for (const id of tiberiasStayGuide.groups.flatMap(group => group.hotelIds)) expect(ids).toContain(resortHotel(id).sourceId);
   });

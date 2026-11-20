@@ -33,7 +33,7 @@ describe("Dead Sea category-first travel-blog hotel guide", () => {
     expect(screen.getByRole("heading", { level: 1, name: "Best Dead Sea hotels: where to stay" })).toBeInTheDocument();
     const categories = screen.getAllByTestId("deadsea-category-card");
     expect(categories).toHaveLength(4);
-    expect(screen.getByTestId("deadsea-category-grid")).toHaveClass("min-[360px]:grid-cols-2", "lg:grid-cols-4");
+    expect(screen.getByTestId("deadsea-category-grid")).toHaveClass("min-[360px]:grid-cols-2", "lg:grid-cols-3");
     expect(categories.map(a => a.getAttribute("href"))).toEqual(["#group-luxury", "#group-spa", "#group-family", "#group-value"]);
     expect(categories.every(a => a.querySelector("img")?.getAttribute("src"))).toBe(true);
     const categoryImages = categories.map(card => card.querySelector("img")!.getAttribute("src"));
@@ -148,7 +148,7 @@ describe("Dead Sea category-first travel-blog hotel guide", () => {
     expect(screen.getByTestId("related-guides")).toHaveAttribute("data-presentation", "guide");
     expect(screen.getByTestId("related-guides")).toHaveAttribute("data-current", "/travel-blog/best-dead-sea-hotels/");
     const form = screen.getByRole("form", { name: "Standard contact form" });
-    expect(form).toHaveAttribute("data-heading", "Planning a Dead Sea Vacation?");
+    expect(form).toHaveAttribute("data-heading", "Need a private transfer to the Dead Sea?");
     expect(form).toHaveAttribute("data-intro", expect.stringContaining("private transfer to your hotel in Ein Bokek"));
     expect(form).toHaveAttribute("data-placeholder", expect.stringContaining("Pickup location, Ein Bokek hotel"));
     const sourceList = screen.getByTestId("deadsea-sources");

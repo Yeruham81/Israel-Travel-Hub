@@ -98,7 +98,9 @@ describe("Jerusalem and Tel Aviv neighbourhood editorial guides", () => {
         }
       }
       const bookingChecklist = screen.getByTestId("jerusalem-booking-checklist");
-      expect(bookingChecklist).toHaveClass("rounded-2xl", "border", "bg-secondary/20", "sm:grid-cols-2");
+      expect(bookingChecklist).toHaveClass("grid", "sm:grid-cols-2");
+      expect([...bookingChecklist.children]).toHaveLength(2);
+      for (const card of bookingChecklist.children) expect(card).toHaveClass("rounded-2xl", "border", "bg-secondary/35");
       expect(bookingChecklist.querySelectorAll("li")).toHaveLength(8);
       expect(within(bookingChecklist).getByRole("heading", { name: "Check accessibility" })).toBeInTheDocument();
       expect(within(bookingChecklist).getByRole("heading", { name: "Read the full booking terms" })).toBeInTheDocument();
@@ -210,7 +212,9 @@ describe("Jerusalem and Tel Aviv neighbourhood editorial guides", () => {
         });
       }
       const bookingChecklist = screen.getByTestId("telaviv-booking-checklist");
-      expect(bookingChecklist).toHaveClass("rounded-2xl", "border", "bg-secondary/20", "sm:grid-cols-2");
+      expect(bookingChecklist).toHaveClass("grid", "sm:grid-cols-2");
+      expect([...bookingChecklist.children]).toHaveLength(2);
+      for (const card of bookingChecklist.children) expect(card).toHaveClass("rounded-2xl", "border", "bg-secondary/35");
       expect(bookingChecklist.querySelectorAll("li")).toHaveLength(8);
       expect(within(bookingChecklist).getByRole("heading", { name: "Book the right view" })).toBeInTheDocument();
       expect(container).toHaveTextContent("Hills, steps & luggage");

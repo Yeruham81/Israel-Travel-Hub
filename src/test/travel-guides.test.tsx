@@ -80,7 +80,7 @@ describe("migrated practical guides", () => {
       expect(container.querySelectorAll('#choose a[href^="#"]')).toHaveLength(10);
       expect(container.querySelectorAll("#compare tbody tr")).toHaveLength(10);
       expect(container.querySelectorAll("#explore-more a")).toHaveLength(6);
-      expect(container.querySelectorAll("#plan-trip a")).toHaveLength(6);
+      expect(container.querySelectorAll("#plan-trip a")).toHaveLength(7);
       expect(container.querySelectorAll("#faq details")).toHaveLength(6);
       expect(container.querySelectorAll("#contact")).toHaveLength(1);
       const photoPaths = [...container.querySelectorAll('#experiences article > img')].map(el => el.getAttribute("src"));
