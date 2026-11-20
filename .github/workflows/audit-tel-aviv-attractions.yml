@@ -16,14 +16,28 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: "24"
+      - uses: oven-sh/setup-bun@v2
+      - name: Install current website dependencies
+        run: bun install --frozen-lockfile
       - name: Install headless Chromium
         run: |
           mkdir -p /tmp/tlv-audit
           npm install --prefix /tmp/tlv-audit --no-save playwright@1.56.1
           /tmp/tlv-audit/node_modules/.bin/playwright install --with-deps chromium
-      - name: Verify published guide at desktop and mobile viewport sizes
+      - name: Start local preview of the updated guide
+        run: |
+          node scripts/generate-sitemap.mjs --mode development
+          nohup ./node_modules/.bin/vite dev --host 127.0.0.1 --port 4173 > /tmp/tlv-vite.log 2>&1 &
+          for i in $(seq 1 80); do
+            if curl -fsS --max-time 4 http://127.0.0.1:4173/travel-blog/attractions-in-tel-aviv/ > /dev/null; then echo "Local preview ready"; exit 0; fi
+            sleep 2
+          done
+          cat /tmp/tlv-vite.log
+          exit 1
+      - name: Check responsive page and capture screenshots (local preview)
         env:
           NODE_PATH: /tmp/tlv-audit/node_modules
+          TEL_AVIV_AUDIT_URL: http://127.0.0.1:4173/travel-blog/attractions-in-tel-aviv/
         run: node scripts/audit-tel-aviv-attractions.cjs
       - name: Keep screenshots and structured audit for review
         if: always()
