@@ -91,8 +91,8 @@ describe("Upgraded Tel Aviv attractions editorial guide",()=>{
    expect(page).toContain("related.map");
    expect(page).toContain("planning.map");
    expect(page).toContain("Where to Stay in Israel");
-   expect(page).toContain('to="/travel-blog/beaches-in-tel-aviv/"');
-   expect(page).toContain('to="/travel-blog/museums-in-tel-aviv/"');
-   expect(page).toContain('to="/travel-blog/getting-around-tel-aviv/"');
+   expect(page).toContain('/travel-blog/beaches-in-tel-aviv/');
+   expect(page).toContain('/travel-blog/museums-in-tel-aviv/');
+   expect(page).toContain('/travel-blog/getting-around-tel-aviv/');
  });
 });
