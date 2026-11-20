@@ -1,4 +1,5 @@
 import type { TravelGuide } from "@/data/travelGuides";
+import { topTenExperiences, topTenFaqs } from "@/data/topTenExperiences";
 import { carRentalAffiliateUrl } from "@/lib/car-rental-affiliate";
 import { migrationPhotos as P } from "@/data/guideMigrationPhotos";
 import palestinianTaxiPhoto from "@/assets/guides/bethlehem/palestinian-taxi.jpg";
@@ -574,286 +575,55 @@ export const journeyDestinationGuides = {
   "nextSteps": []
 },
     "topTen": {
-    "id": "topTen",
-    "updatedAt": "2026-10-20",
-    "title": "Top 10 things to do in Israel: build a trip around experiences",
-    "description": "Choose ten Israel experiences: beaches, Jerusalem, food, Tel Aviv evenings, Masada, the Dead Sea, Haifa, Galilee, Eilat and the Ramon Crater night sky.",
-    "intro": "A memorable trip is more than a list of sights. These ten experiences offer a realistic mix of cities, coast, sacred places and desert. You do not need to do all ten on one trip: start with the experiences that matter most and let geography shape the route.",
-    "answer": "For a first visit, choose a manageable combination of Jerusalem, the coast and one regional excursion, then add Galilee, Eilat or the Negev if your time allows. Group nearby experiences and give each a clear purpose. Transport, admission and seasonal conditions matter more than completing a ranking.",
-    "topics": [
-      "attractions",
-      "destinations",
-      "itineraries",
-      "tips"
+    id: "topTen",
+    updatedAt: "2026-11-20",
+    title: "Top 10 Things to Do in Israel",
+    description: "Explore my ten favourite Israel experiences, from Jerusalem and Tel Aviv to Masada, the Dead Sea, the Galilee, Haifa, Eilat and stargazing at Ramon Crater. Compare, map and plan your visit.",
+    intro: "From Jerusalem's Old City to Tel Aviv's coast, the Dead Sea and desert stars, these ten experiences are a starting point for planning your own Israel trip.",
+    answer: "I recommend combining Jerusalem, time on the Mediterranean coast and one regional excursion for a first visit. With more time, add the Galilee or a southern journey to the Negev and Eilat.",
+    topics: ["attractions", "destinations", "itineraries", "tips"],
+    photo: { src: "/images/top-ten-israel/hero.webp", alt: "Old Jaffa and the Mediterranean waterfront in Tel Aviv" },
+    facts: [
+      { label: "Ten experiences", text: "Coast, heritage, food, nature and night sky" },
+      { label: "Eight regions", text: "Geographical map to choose a realistic route" },
+      { label: "Start planning", text: "Pick priorities, then fit them to your dates" },
     ],
-    "photo": P["EXISTING:jerusalem"],
-    "facts": [
-      {
-        "label": "Choose your mix",
-        "text": "City, coast, heritage and landscape"
-      },
-      {
-        "label": "Group by region",
-        "text": "Avoid repeated long return journeys"
-      },
-      {
-        "label": "Allow real time",
-        "text": "A beach, ceremony or park visit is an experience"
-      }
-    ],
-    "comparison": {
-      "caption": "Turn experiences into a workable route",
-      "headers": [
-        "Region or base",
-        "Experiences to combine",
-        "Keep separate time for"
-      ],
-      "rows": [
-        [
-          "Jerusalem",
-          "Old City, museums and markets",
-          "A Bethlehem or Dead Sea road excursion"
-        ],
-        [
-          "Tel Aviv and the coast",
-          "Beaches, food and evenings",
-          "A meaningful Haifa or Caesarea visit"
-        ],
-        [
-          "Galilee",
-          "Lake scenery, archaeology and pilgrimage",
-          "Fixed ceremonies and different site windows"
-        ],
-        [
-          "Dead Sea and Negev",
-          "Masada, a managed beach and desert viewpoints",
-          "Heat-aware walking and the longer road legs"
-        ],
-        [
-          "Eilat",
-          "Reef and Red Sea experiences",
-          "A separate southern stay and its transport"
-        ]
-      ]
+    comparison: {
+      caption: "Compare all ten experiences in Israel",
+      headers: ["Experience", "Region", "Best for", "Time to allow"],
+      rows: topTenExperiences.map(experience => [
+        experience.shortTitle, experience.region, experience.bestFor, experience.visitTime,
+      ]),
     },
-    "sections": [
-      {
-        "id": "beaches",
-        "title": "1. Spend time on the Mediterranean coast",
-        "paragraphs": [
-          "Choose a beach or promenade area that fits your base instead of racing along the whole coast. Tel Aviv offers central urban beaches, while Jaffa adds a different waterfront setting. Use designated bathing areas and current lifeguard instructions; a coastal walk and a swimming visit are different plans."
-        ],
-        "photo": P["EXISTING:coast"],
-        "links": [
-          {
-            "label": "Choose a Tel Aviv beach",
-            "to": "/travel-blog/beaches-in-tel-aviv/"
-          },
-          {
-            "label": "Explore Jaffa",
-            "to": "/attractions/jaffa/"
-          }
-        ]
-      },
-      {
-        "id": "jerusalem",
-        "title": "2. Explore Jerusalem at a human pace",
-        "paragraphs": [
-          "Give the Old City, a museum or a neighbourhood walk enough time to become the main experience of the day. Choose a few places important to your interests and respect their separate religious and visitor arrangements. A gate-to-gate route with time for a meal works better than trying every sacred site in one morning."
-        ],
-        "photo": P["EXISTING:jerusalem"],
-        "links": [
-          {
-            "label": "Plan Jerusalem",
-            "to": "/travel-blog/jerusalem-travel-guide/"
-          },
-          {
-            "label": "Choose an Old City route",
-            "to": "/attractions/old-city-jerusalem/"
-          }
-        ]
-      },
-      {
-        "id": "food",
-        "title": "3. Discover the food and markets",
-        "paragraphs": [
-          "Use a market or neighbourhood as the focus for a tasting day: a bakery stop, a savoury lunch and a shared dessert. Ask about ingredients and portions, and check each business’s hours. The food reflects many communities and a wider regional tradition; leave room to notice the differences rather than chasing a rigid ranking."
-        ],
-        "photo": P["what-to-eat-in-israel"],
-        "links": [
-          {
-            "label": "Explore ten dishes",
-            "to": "/travel-blog/what-to-eat-in-israel/"
-          },
-          {
-            "label": "Plan Jerusalem market time",
-            "to": "/travel-blog/shopping-in-jerusalem/"
-          }
-        ]
-      },
-      {
-        "id": "evening",
-        "title": "4. Enjoy a Tel Aviv evening",
-        "paragraphs": [
-          "Choose an evening around a meal, a performance, a neighbourhood bar or a promenade walk. Venues, opening patterns and the atmosphere vary, so use a current programme and arrange the return to your accommodation. A late night does not need to mean a named club or an outdated list of supposedly permanent hotspots."
-        ],
-        "links": [
-          {
-            "label": "Find current events",
-            "to": "/travel-blog/calendar-of-events/"
-          },
-          {
-            "label": "Plan the journey back",
-            "to": "/travel-blog/getting-around-tel-aviv/"
-          }
-        ]
-      },
-      {
-        "id": "masada",
-        "title": "5. Visit Masada’s archaeology and landscape",
-        "paragraphs": [
-          "Choose the appropriate entrance and compare the cable car with any trail that is currently open and suitable for the weather. The plateau deserves time for its story and views, not only the journey up. A sunrise hike is an option to assess carefully, rather than a requirement for enjoying the site."
-        ],
-        "photo": P["EXISTING:masada"],
-        "links": [
-          {
-            "label": "Plan Masada",
-            "to": "/attractions/masada/"
-          }
-        ]
-      },
-      {
-        "id": "dead-sea",
-        "title": "6. Experience a managed Dead Sea beach",
-        "paragraphs": [
-          "Choose a named beach or hotel district, use supervised access and keep the water away from your face. The southern Ein Bokek area and northern beach facilities require different journeys. Leave time to change and rinse, then decide whether a second major attraction will still fit comfortably."
-        ],
-        "photo": P["EXISTING:deadSea"],
-        "links": [
-          {
-            "label": "Choose your Dead Sea visit",
-            "to": "/travel-blog/the-dead-sea/"
-          },
-          {
-            "label": "Compare travel from Jerusalem",
-            "to": "/travel-blog/jerusalem-to-the-dead-sea/"
-          }
-        ]
-      },
-      {
-        "id": "haifa",
-        "title": "7. See Haifa’s Bahá’í Gardens setting",
-        "paragraphs": [
-          "Compare the permitted viewpoints and any currently offered guided route, then pair the visit with the German Colony, a museum or the coast. The terraces are a separately managed religious site; do not assume you can walk freely from top to bottom. Choose transport around Haifa’s elevation changes."
-        ],
-        "photo": P["EXISTING:haifa"],
-        "links": [
-          {
-            "label": "Explore Haifa",
-            "to": "/travel-blog/haifa/"
-          },
-          {
-            "label": "Choose a museum nearby",
-            "to": "/travel-blog/museums-in-haifa/"
-          }
-        ]
-      },
-      {
-        "id": "galilee",
-        "title": "8. Slow down around the Sea of Galilee",
-        "paragraphs": [
-          "Choose a lakeside base or a small group of heritage sites rather than expecting the whole lake in an afternoon. Magdala, Capernaum, Tabgha, the Mount of Beatitudes and Yardenit offer different experiences and visiting windows. A ceremony or a quiet archaeological visit needs real time in the plan."
-        ],
-        "photo": P["EXISTING:galilee"],
-        "links": [
-          {
-            "label": "Plan the Sea of Galilee",
-            "to": "/travel-blog/sea-of-galilee/"
-          },
-          {
-            "label": "Explore Magdala",
-            "to": "/attractions/magdala/"
-          },
-          {
-            "label": "Plan Yardenit",
-            "to": "/attractions/yardenit/"
-          }
-        ]
-      },
-      {
-        "id": "red-sea",
-        "title": "9. Explore the Red Sea at Eilat",
-        "paragraphs": [
-          "Compare a designated reef visit, a suitable snorkelling or diving activity and an aquarium-style experience. Read the operator’s age, ability and ticket conditions, and protect the coral by following the permitted water routes. Eilat is a separate southern stay, not a quick extra stop on a northern day trip."
-        ],
-        "photo": P["EXISTING:eilat"],
-        "links": [
-          {
-            "label": "Plan Eilat and its attractions",
-            "to": "/travel-blog/eilat/"
-          }
-        ]
-      },
-      {
-        "id": "desert-night",
-        "title": "10. Make time for the Ramon Crater landscape and night sky",
-        "paragraphs": [
-          "Use a signed daytime viewpoint around Mitzpe Ramon and consider an authorised night-sky experience when conditions suit. Cloud, the moon and local light affect what you can see; no operator can guarantee a particular sky. Arrange permitted access, warm layers and the journey back after dark."
-        ],
-        "photo": P["EXISTING:ramon"],
-        "links": [
-          {
-            "label": "Plan Mitzpe Ramon",
-            "to": "/attractions/mitzpe-ramon-crater/"
-          }
-        ]
-      }
+    sections: topTenExperiences.map(experience => ({
+      id: experience.id,
+      title: experience.title,
+      paragraphs: [experience.description, experience.practical, experience.gettingThere, experience.tip],
+      photo: experience.photo,
+      links: [experience.guide, ...(experience.extraGuide ? [experience.extraGuide] : [])],
+      ...(experience.official ? { externalLinks: [experience.official] } : {}),
+    })),
+    checklist: [
+      "Choose a few favourite experiences for the time available",
+      "Group destinations by area and decide on overnight bases",
+      "Check park access, bathing supervision and the local forecast",
+      "Confirm holiday and weekend transport or venue arrangements",
+      "Plan the return journey, especially after dark or from desert sites",
     ],
-    "checklist": [
-      "Choose priorities instead of attempting all ten",
-      "Group experiences around a few overnight bases",
-      "Check season, holiday and venue arrangements",
-      "Plan the final leg and the return from excursions",
-      "Leave time for meals and unhurried visits"
+    faqs: topTenFaqs,
+    sourceIds: [
+      "m26-tlv-beaches", "guide-jerusalem-tourism",
+      "inpa-masada", "m26-bahai", "m26-coral", "m26-ims",
     ],
-    "faqs": [
-      {
-        "q": "Do I need to include all ten experiences?",
-        "a": "No. Treat the list as choices. A focused trip with enough time at each place is usually more rewarding than attempting every region."
-      },
-      {
-        "q": "Is Eilat a simple day trip from Jerusalem or Tel Aviv?",
-        "a": "Treat it as a separate southern journey with substantial travel time. Compare an overnight stay and the actual transport options."
-      },
-      {
-        "q": "Should I book a driver for the entire trip?",
-        "a": "Choose transport around each segment. City walking and transit, a particular day tour, a rental period or a private journey solve different needs."
-      }
+    related: ["bestTime", "calendar", "food", "deadSea"],
+    services: [
+      { label: "3-day Israel itinerary", to: "/travel-blog/israel-itinerary-3-days/" },
+      { label: "5-day Israel itinerary", to: "/travel-blog/israel-itinerary-5-days/" },
+      { label: "7-day Israel itinerary", to: "/travel-blog/israel-itinerary-7-days/" },
+      { label: "10-day Israel itinerary", to: "/travel-blog/israel-itinerary-10-days/" },
+      { label: "Getting around Israel", to: "/travel-blog/getting-around-israel/" },
+      { label: "Best time to visit", to: "/travel-blog/best-time-to-visit-israel/" },
     ],
-    "related": [
-      "bestTime",
-      "calendar",
-      "food",
-      "deadSea"
-    ],
-    "services": [
-      {
-        "label": "Browse destinations and accommodation bases",
-        "to": "/accommodation/"
-      },
-      {
-        "label": "Compare tours and day trips",
-        "to": "/tours/"
-      }
-    ],
-    "sourceIds": [
-      "m26-tlv-beaches",
-      "guide-jerusalem-tourism",
-      "inpa-masada",
-      "m26-bahai",
-      "m26-coral",
-      "m26-ims"
-    ]
   },
     "jerusalemDeadSea": {
       "id": "jerusalemDeadSea",
