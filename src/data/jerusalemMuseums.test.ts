@@ -15,7 +15,7 @@ describe("Jerusalem museums editorial guide",()=>{
       expect(sources.has(photo.src),museum.id).toBe(false);
       sources.add(photo.src);
     }
-    expect(jerusalemMuseumPhotos.music.illustrative).toBe(true);
+    expect(jerusalemMuseumPhotos["music"]!.illustrative).toBe(true);
   });
   it("retains all twelve original subjects and adds three central museums",()=>{
     expect(jerusalemMuseums).toHaveLength(15);
