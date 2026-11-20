@@ -15,6 +15,8 @@ describe("Jaffa multi-stop city attractions guide", () => {
     expect(content.facts).toHaveLength(6);
     expect(content.itineraryFirst).toBe(true);
     expect(content.itineraryTitle).toMatch(/walking routes/i);
+    expect(content.navigationSections).toHaveLength(8);
+    expect(content.navigationSections?.at(-1)).toEqual(["contact", "Contact me"]);
     expect(content.foodContent).toBeTruthy();
     expect(content.practicalContent).toBeTruthy();
     expect(content.visitorContent).toBeTruthy();
@@ -23,10 +25,13 @@ describe("Jaffa multi-stop city attractions guide", () => {
     expect(new Set(content.nearby!.map(x => x.to)).size).toBe(6);
     expect(content.planningLinks).toHaveLength(6);
     expect(content.sources.length).toBeGreaterThanOrEqual(7);
-    expect(component.match(/<AttractionHighlight(?:\s|\n)/g)).toHaveLength(10);
+    expect(component.match(/<AttractionHighlight(?:\s|\n)/g)).toHaveLength(8);
     expect(component).toContain('data-testid="jaffa-walking-routes"');
     expect(component).toContain("around 2–3 hours");
     expect(component).toContain("around 4–5 hours");
+    expect(component).toContain("Open short walking route in Google Maps");
+    expect(component).toContain("Open half-day walking route in Google Maps");
+    expect(component.match(/https:\/\/www\.google\.com\/maps\/dir\/\?api=1/g)).toHaveLength(2);
     expect(component).toContain('data-testid="jaffa-transport"');
     expect(component).toContain("Shalma");
     expect(component).toContain("DAN KAL");
@@ -43,6 +48,12 @@ describe("Jaffa multi-stop city attractions guide", () => {
     expect(component).not.toMatch(/https?:\/\/(?:images\.unsplash|upload\.wikimedia)/);
     expect(component).toContain("Na Laga'at Center");
     expect(component).toContain("Ilana Goor Museum");
+    expect(component).toContain("₪45 adult admission");
+    expect(component).toContain("There is no walk-in admission");
+    expect(component).toContain("2 Marzouk and Azar Street");
+    expect(component).toContain("position: \"38% center\"");
+    expect(jaffaSite.official.touristInformation).toBe("https://visit.tel-aviv.gov.il/info/about");
+    expect(jaffaSite.official.municipalWalkingGuide).toContain("oldjaffatour.aspx");
     expect(component).toContain("Uri Geller Museum");
     expect(component).toContain("/travel-blog/israel-holidays/");
     const names = [
@@ -59,9 +70,10 @@ describe("Jaffa multi-stop city attractions guide", () => {
 
   it("does not insert invented all-city opening hours or admission fees", () => {
     const component = readFileSync("src/components/JaffaAttractionPage.tsx", "utf8");
-    expect(component).toContain("historic neighbourhood, not a single ticketed attraction");
+    expect(component).toContain("Jaffa is a historic port city and part of modern Tel Aviv–Yafo");
     expect(component).toContain("Museums, cultural performances and optional tours set their own prices");
     expect(component).not.toContain("15–30 NIS");
+    expect(component).toContain("10:00–16:00 Sunday–Thursday and Saturday");
     expect(component).not.toContain("Built in 1906");
   });
 });

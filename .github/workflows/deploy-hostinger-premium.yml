@@ -877,4 +877,52 @@ jobs:
           NODE
             rm -f "$data"
           done
+          # Verify Jaffa's published multi-stop walking guide and its corrected media.
+          jaffa_html="$(mktemp)"
+          curl --retry 2 --max-time 25 -fsSL -o "$jaffa_html" "$VITE_CANONICAL_ORIGIN/attractions/jaffa/"
+          node - "$jaffa_html" "$VITE_CANONICAL_ORIGIN/attractions/jaffa/" <<'NODE'
+          const fs = require("node:fs");
+          const html = fs.readFileSync(process.argv[2], "utf8");
+          const canonicalUrl = process.argv[3];
+          for (const required of [
+            "Old Jaffa:", "Clock Tower Square", "Mahmoudiya Mosque",
+            "Kedumim Square", "St. Peter", "Summit Garden", "Jaffa Port",
+            "Ilana Goor Museum", "Na Laga", "₪45",
+            'data-testid="jaffa-walking-routes"',
+            'data-testid="jaffa-visitor-essentials"',
+            'data-testid="jaffa-transport"',
+            "Open short walking route in Google Maps",
+            "Open half-day walking route in Google Maps",
+            "Tourist information near the Clock Tower",
+          ]) {
+            if (!html.includes(required)) {
+              console.error("::error::Jaffa public guide missing " + required);
+              process.exit(1);
+            }
+          }
+          const canonical = [...html.matchAll(/<link\b[^>]*>/gi)].map(x => x[0]).filter(x => /\brel=["']canonical["']/i.test(x));
+          if (!canonical.some(tag => tag.includes('href="' + canonicalUrl + '"'))) {
+            console.error("::error::Jaffa canonical differs from published URL");
+            process.exit(1);
+          }
+          if ((html.match(/data-testid="attraction-highlight"/g) || []).length !== 8) {
+            console.error("::error::Jaffa must display six landmark and two cultural cards");
+            process.exit(1);
+          }
+          console.log("Jaffa public guide, walks, museum details, eight highlights and canonical verified.");
+          NODE
+          rm -f "$jaffa_html"
+          for picture in jaffa-panorama.webp jaffa-clock-tower.webp jaffa-summit-garden.webp jaffa-food.webp jaffa-ilana-goor-museum.webp; do
+            data="$(mktemp)"
+            curl --retry 2 --max-time 25 -fsSL -o "$data" "$VITE_CANONICAL_ORIGIN/images/attractions/$picture"
+            node - "$data" "$picture" <<'NODE'
+          const fs = require("node:fs");
+          const bytes = fs.readFileSync(process.argv[2]);
+          if (bytes.subarray(0, 4).toString() !== "RIFF" || bytes.subarray(8, 12).toString() !== "WEBP") {
+            console.error("::error::Jaffa photograph is missing or not WebP: " + process.argv[3]);
+            process.exit(1);
+          }
+          NODE
+            rm -f "$data"
+          done
           echo "Source-controlled static guides published; existing PHP APIs still respond to GET."

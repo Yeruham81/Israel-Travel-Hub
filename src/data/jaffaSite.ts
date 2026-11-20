@@ -12,6 +12,8 @@ export const jaffaSite = {
   official: {
     oldJaffa: "https://www.oldjaffa.co.il/",
     municipality: "https://www.tel-aviv.gov.il/en/",
+    touristInformation: "https://visit.tel-aviv.gov.il/info/about",
+    municipalWalkingGuide: "https://www.tel-aviv.gov.il/Visitors/Jaffa/Pages/oldjaffatour.aspx",
     municipalWalkingMap: "https://www.tel-aviv.gov.il/Visitors/Jaffa/Documents/%D7%9E%D7%A1%D7%9C%D7%95%D7%9C%20%D7%94%D7%A2%D7%99%D7%A8%20%D7%94%D7%A2%D7%AA%D7%99%D7%A7%D7%94%20-%20%D7%94%D7%A1%D7%99%D7%95%D7%A8%20%D7%94%D7%9E%D7%9C%D7%90.pdf",
     oldJaffaArrival: "https://www.oldjaffa.co.il/%D7%99%D7%A6%D7%99%D7%A8%D7%AA-%D7%A7%D7%A9%D7%A8/",
     church: "https://www.oldjaffa.co.il/businesses/%D7%9B%D7%A0%D7%A1%D7%99%D7%99%D7%AA-%D7%A1%D7%A0%D7%98-%D7%A4%D7%99%D7%98%D7%A8/",

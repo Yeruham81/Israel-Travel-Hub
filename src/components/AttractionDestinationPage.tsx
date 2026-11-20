@@ -66,6 +66,8 @@ export type AttractionDestinationContent = {
   nearby?: AttractionNearbyLink[];
   relatedTitle?: string;
   planningLinks?: AttractionPlanningLink[];
+  /** Optional compact menu for a multi-stop city guide; does not hide page sections. */
+  navigationSections?: [string, string][];
   sources: AttractionSource[];
   /** Optional compact attributions for third-party images below the source list. */
   photoCredits?: ReactNode;
@@ -96,15 +98,15 @@ function AtAGlance({ placeName, facts, note }: { placeName: string; facts: Attra
 /** Standard article photo: 4:3 at every breakpoint, up to 260 × 195 px on desktop.
  * Full mobile width; independent of the compact hero, panoramas and link thumbnails.
  */
-export function AttractionContentImage({ src, alt }: { src: string; alt: string }) {
-  return <img src={src} alt={alt} width={520} height={390} loading="lazy" decoding="async" className="aspect-[4/3] h-auto w-full rounded-lg object-cover" />;
+export function AttractionContentImage({ src, alt, position }: { src: string; alt: string; position?: string }) {
+  return <img src={src} alt={alt} width={520} height={390} loading="lazy" decoding="async" className="aspect-[4/3] h-auto w-full rounded-lg object-cover" style={position ? { objectPosition: position } : undefined} />;
 }
 
 export function AttractionHighlight({
   title, image, children, note,
 }: {
   title: string;
-  image?: { src: string; alt: string } | undefined;
+  image?: { src: string; alt: string; position?: string } | undefined;
   children: ReactNode;
   note?: ReactNode;
 }) {
@@ -116,7 +118,7 @@ export function AttractionHighlight({
           <div className="mt-2 space-y-3 text-sm leading-relaxed sm:text-base">{children}</div>
           {note && <p className="mt-3 border-l-2 border-primary/40 pl-3 text-sm leading-relaxed text-muted-foreground">{note}</p>}
         </div>
-        {image && <AttractionContentImage src={image.src} alt={image.alt} />}
+        {image && <AttractionContentImage src={image.src} alt={image.alt} position={image.position} />}
       </div>
     </article>
   );
@@ -155,7 +157,7 @@ export function AttractionDestinationPage({ content }: { content: AttractionDest
         <AuthorCard />
       </header>
       <AtAGlance placeName={content.placeName} facts={content.facts} note={content.glanceNote} />
-      <OnThisPage sections={sections} />
+      <OnThisPage sections={content.navigationSections ?? sections} />
       <Section id="highlights" title={content.highlightsTitle ?? "What to see at " + content.placeName} className="mt-9">
         {content.highlightContent}
       </Section>
