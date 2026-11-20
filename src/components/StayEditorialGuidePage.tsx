@@ -27,7 +27,7 @@ export function StayEditorialGuidePage({ guide, id }: { guide: CityStayGuide | H
    <section id="areas" aria-labelledby="areas-h" className="mt-12 scroll-mt-32">
     <p className="eyebrow">Location first</p><h2 id="areas-h" className="mt-2 text-3xl">Compare the main areas</h2>
     <p className="mt-3 max-w-3xl leading-relaxed text-muted-foreground">Choose the setting that suits your travel plans. When you have an area in mind, compare individual properties in my accommodation pages.</p>
-    <div className="mt-6 grid gap-4 sm:grid-cols-2">{locations.map(a => <div key={a.name} className="rounded-2xl border bg-card p-5">
+    <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">{locations.map(a => <div key={a.name} className="rounded-2xl border bg-card p-5">
      <h3 className="flex items-start gap-2 text-xl font-semibold"><MapPin className="mt-1 h-4 w-4 shrink-0 text-primary" aria-hidden/>{a.name}</h3>
      <p className="mt-3 text-sm leading-relaxed">{a.text}</p>
      {a.watch && <p className="mt-3 text-sm text-muted-foreground"><strong className="text-foreground">Keep in mind:</strong> {a.watch}</p>}
