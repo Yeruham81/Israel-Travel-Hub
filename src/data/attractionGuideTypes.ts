@@ -14,7 +14,7 @@ export interface Attraction {
   image?: {src:string;alt:string};
 }
 /** Regional overviews compare several destinations and stay in Travel Guides. */
-export const regionalOverviewIds = ["attractions-in-tel-aviv","dead-sea-attractions","museums-in-jerusalem","sea-of-galilee","haifa"] as const satisfies readonly AttractionId[];
+export const regionalOverviewIds = ["attractions-in-tel-aviv","dead-sea-attractions","museums-in-jerusalem","sea-of-galilee"] as const satisfies readonly AttractionId[];
 export type RegionalOverviewId = typeof regionalOverviewIds[number];
 export type IndividualAttractionId = Exclude<AttractionId, RegionalOverviewId>;
 export const isRegionalOverview = (id: AttractionId): id is RegionalOverviewId => (regionalOverviewIds as readonly string[]).includes(id);

@@ -744,7 +744,7 @@ describe("migrated practical guides", () => {
     ]);
     expect(guide.sections.find((s) => s.id === "local-sherut")!.paragraphs.join(" ")).toMatch(/pay separately.*Shabbat/s);
     expect(guide.services.map((item) => item.to)).toEqual([
-      "/car-rental/", "/travel-blog/where-to-stay-in-jerusalem/", "/travel-blog/haifa/", travelGuidePaths.esim,
+      "/car-rental/", "/travel-blog/where-to-stay-in-jerusalem/", "/attractions/haifa/", travelGuidePaths.esim,
     ]);
     expect(guide.sourceIds).toContain("guide-sherut-regulation");
     expect(getSource("guide-sherut-regulation").url).toContain("gov.il");

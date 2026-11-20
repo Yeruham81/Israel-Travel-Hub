@@ -1,0 +1,30 @@
+/** Fact-checked civic, transit and visitor sources for the multi-neighborhood Haifa guide. */
+export const haifaSite = {
+  title: "Things to Do in Haifa | Bahá’í Gardens, Carmel & City Walks",
+  description: "My practical Haifa guide: Bahá’í Gardens viewpoints, German Colony, Wadi Nisnas, Carmel, Bat Galim, beaches, two city itineraries, transport and tours.",
+  updatedAt: "2026-11-20",
+  region: "Haifa & northern coast",
+  hero: {
+    src: "/images/attractions/haifa-coast.webp",
+    alt: "Haifa's mountain slopes, port and Mediterranean bay",
+  },
+  intro: "Haifa is a city I recommend exploring by neighbourhood rather than by one long walk. The Bahá’í Gardens rise between the German Colony and Mount Carmel, while Wadi Nisnas, the Lower City and Bat Galim give you a very different taste of local life. Below are the sights I would prioritise, how to combine them and the transport that makes Haifa's steep hills easier.",
+  official: {
+    bahai: "https://ganbahai.org.il/visit-us-haifa/",
+    bahaiBooking: "https://www.booking.ganbahai.org.il/service-page/English-tour-Yefe-Nof-St",
+    bahaiAccess: "https://ganbahai.org.il/accessibility/",
+    haifaAttractions: "https://www.haifa.muni.il/culture/top-ten/",
+    haifaPlaces: "https://www.haifa.muni.il/culture/places/",
+    haifaBeaches: "https://www.haifa.muni.il/culture/beaches-and-sea/",
+    haifaWalkingTrails: "https://www.haifa.muni.il/article/haifatrail/",
+    haifaNatureTrails: "https://www.haifa.muni.il/culture/itineraries/",
+    carmelit: "https://www.haifa.muni.il/city-and-muni/municipal-corporations/carmelit/",
+    carmelitCulture: "https://www.haifa.muni.il/article/culture-line/",
+    touristCableCar: "https://www.haifa.muni.il/place/funicular/",
+    rail: "https://www.rail.co.il/en",
+    buses: "https://bus.gov.il/en/home",
+    haifaMuseums: "https://www.hms.org.il/eng",
+    railCableCar: "https://www.cableexpress.co/",
+    stellaMaris: "https://www.haifa.muni.il/culture/places/",
+  },
+} as const;

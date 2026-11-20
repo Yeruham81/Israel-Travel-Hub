@@ -72,6 +72,7 @@ export const attractionSidebarGuideLabels: Record<string, string> = {
   "mount-zion": "Mount Zion",
   jaffa: "Old Jaffa",
   "akko-acre": "Akko (Acre)",
+  haifa: "Haifa",
   caesarea: "Caesarea",
   "rosh-hanikra": "Rosh Hanikra",
   annunciation: "Annunciation",

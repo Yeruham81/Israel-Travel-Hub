@@ -926,3 +926,43 @@ jobs:
             rm -f "$data"
           done
           echo "Source-controlled static guides published; existing PHP APIs still respond to GET."
+
+      - name: Validate published Haifa city guide, tours and image assets
+        if: steps.freshness.outputs.current == 'true' && env.DRY_RUN != 'true'
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl --http1.1 --retry-all-errors --retry 3 --max-time 40 -fsSL "$VITE_CANONICAL_ORIGIN/attractions/haifa/" -o /tmp/haifa-city.html
+          node - <<'NODE'
+          const fs = require("node:fs");
+          const html = fs.readFileSync("/tmp/haifa-city.html","utf8");
+          for (const required of [
+            "Haifa: Attractions & City Guide","Louis Promenade","Wadi Nisnas","The German Colony",
+            "Stella Maris","Bat Galim","Dado","Suggested Haifa itineraries",
+            'data-testid="haifa-affiliate-tour-cards"', "Free to explore", "Carmelit", "Google Maps", "Talpiot Market"
+          ]) {
+            if (!html.includes(required)) {
+              console.error("::error::Haifa public guide missing "+required); process.exitCode=1;
+            }
+          }
+          const canonical=process.env.VITE_CANONICAL_ORIGIN+"/attractions/haifa/";
+          if(![...html.matchAll(/<link\b[^>]*>/gi)].some(m=>m[0].includes('rel="canonical"')&&m[0].includes('href="'+canonical+'"'))) {
+            console.error("::error::Haifa canonical missing");process.exitCode=1;
+          }
+          if ((html.match(/data-testid="attraction-highlight"/g)||[]).length!==8) {
+            console.error("::error::Haifa must display eight principal city highlights");process.exitCode=1;
+          }
+          if (!html.includes("viator.tpm.li/") || !html.includes("getyourguide.tpm.li/")) {
+            console.error("::error::Haifa Travelpayouts tour cards missing");process.exitCode=1;
+          }
+          NODE
+          for photo in haifa-bahai-gardens.webp haifa-stella-maris.webp haifa-cable-car.webp haifa-beach.webp haifa-german-colony.webp haifa-wadi-nisnas.webp haifa-turkish-market.webp haifa-bat-galim.webp; do
+            curl --http1.1 --retry-all-errors --retry 2 --max-time 35 -fsSL "$VITE_CANONICAL_ORIGIN/images/attractions/$photo" -o "/tmp/$photo"
+            node - "/tmp/$photo" "$photo" <<'NODE'
+          const fs = require("node:fs"); const b=fs.readFileSync(process.argv[2]);
+          if(b.length<1000||b.toString("ascii",0,4)!=="RIFF"||b.toString("ascii",8,12)!=="WEBP") {
+            console.error("::error::Invalid Haifa photo: "+process.argv[3]);process.exit(1);
+          }
+          NODE
+          done
+          echo "Haifa guide, eight highlights, affiliate tours, canonical and eight photographs verified."

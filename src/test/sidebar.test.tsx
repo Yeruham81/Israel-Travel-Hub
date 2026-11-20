@@ -55,11 +55,11 @@ describe("shared sidebar navigation", () => {
     }
   });
 
-  it("lists all 20 approved individual attractions in the right region, never overview guides", () => {
+  it("lists all 21 approved individual attractions in the right region, never overview guides", () => {
     const expected = [
       { id: "jerusalem", slugs: ["old-city-jerusalem", "mount-of-olives", "mount-zion"] },
       { id: "tel-aviv-jaffa", slugs: ["jaffa"] },
-      { id: "haifa-coast", slugs: ["akko-acre", "caesarea", "rosh-hanikra"] },
+      { id: "haifa-coast", slugs: ["haifa", "akko-acre", "caesarea", "rosh-hanikra"] },
       { id: "nazareth-lower-galilee", slugs: ["basilica-of-the-annunciation", "mount-tabor", "mount-precipice", "tel-megiddo"] },
       { id: "sea-of-galilee", slugs: ["capernaum", "tabgha", "mount-of-beatitudes", "magdala", "yardenit"] },
       { id: "dead-sea-masada", slugs: ["masada", "ein-gedi", "qasr-el-yahud"] },
@@ -83,8 +83,8 @@ describe("shared sidebar navigation", () => {
       expect(paths.every(path => path.startsWith("/attractions/"))).toBe(true);
       allPaths.push(...paths);
     }
-    expect(allPaths).toHaveLength(20);
-    expect(new Set(allPaths).size).toBe(20);
+    expect(allPaths).toHaveLength(21);
+    expect(new Set(allPaths).size).toBe(21);
     expect(Object.keys(attractionSidebarGuideLabels).sort()).toEqual(
       attractionHubRegions.flatMap(region => region.cards.map(card => card.id)).sort(),
     );

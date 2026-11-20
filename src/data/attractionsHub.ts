@@ -86,16 +86,16 @@ export const attractionHubRegions: AttractionHubRegion[] = [
   {
     id: "haifa-coast",
     title: "Haifa & the Mediterranean coast",
-    summary: "Discover the ancient streets of Akko, the Roman ruins of Caesarea and the dramatic sea grottoes of Rosh Hanikra.",
+    summary: "Discover Haifa's hillside gardens and city neighbourhoods alongside the ancient streets of Akko, Roman Caesarea and the sea grottoes of Rosh Hanikra.",
     navLabel: "Haifa & Coast",
     image: attractionHubPhotos.haifa,
     cards: [
+      attraction("haifa", "Haifa: City Attractions", "Bahá’í Gardens, Carmel lookouts, markets, historic districts and beaches.", attractionHubPhotos.haifa.src, { src: "/images/home/transfer-haifa-bahai-gardens.webp", alt: "The terraced Bahá’í Gardens overlooking Haifa" }),
       attraction("akko-acre", "Akko (Acre)", "Crusader halls, Ottoman streets, markets and a working harbour.", attractionHubPhotos.haifa.src),
       { id: "caesarea", title: "Caesarea National Park", description: "Roman ruins, an ancient harbour and archaeology beside the sea.", to: "/attractions/caesarea/", photo: { src: caesareaPhoto, alt: "Ruins and Mediterranean coast at Caesarea" } },
       attraction("rosh-hanikra", "Rosh Hanikra", "Sea grottoes, coastal cliffs and views near the Lebanese border.", attractionHubPhotos.haifa.src),
     ],
     relatedGuides: [
-      { label: "Haifa visitor guide", to: "/travel-blog/haifa/" },
       { label: "Museums in Haifa", to: travelGuidePaths.haifaMuseums },
     ],
   },
@@ -181,7 +181,7 @@ export const attractionRelatedGuides: {
   {
     title: "Haifa visitor guide",
     description: "Gardens, hilltop views and northern coastal experiences.",
-    to: "/travel-blog/haifa/",
+    to: "/attractions/haifa/",
     photo: migrationPhotos["EXISTING:haifa"],
   },
   {
