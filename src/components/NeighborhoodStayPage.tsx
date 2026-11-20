@@ -118,11 +118,12 @@ export function NeighborhoodStayPage({ area }: { area: NeighborhoodStayGuide }) 
       <h2 id="book-h" className="text-2xl font-semibold sm:text-3xl">
         {isJerusalem ? jerusalemHotelHeadings[area.id] : telAvivHotelHeadings[area.id]}
       </h2>
+      {nearbyHotel && <p className="mt-2 text-sm leading-relaxed text-muted-foreground">My shortlist includes four stays in {area.shortName} and one nearby alternative in {neighborhoodGuidesForCity("telaviv").find((a) => a.id === nearbyHotel.areaId)?.shortName}. Check the exact address for your plans.</p>}
       <div className="mt-5" data-testid={isJerusalem ? "jerusalem-hotels-with-map" : "tel-aviv-hotels-with-map"}>
         <ul className="grid min-w-0 auto-rows-fr items-stretch gap-4 sm:grid-cols-2 xl:grid-cols-3" data-testid="neighborhood-hotel-grid">
           {hotels.map((hotel) => isJerusalem
             ? <JerusalemHotelTile key={hotel.id} hotel={hotel} pageId={pageId} showArea={false} stacked />
-            : <TelAvivHotelTile key={hotel.id} hotel={hotel} pageId={pageId} showArea={hotel.id === nearbyHotel?.id} stacked />)}
+            : <TelAvivHotelTile key={hotel.id} hotel={hotel} pageId={pageId} showArea={false} showNearbyArea={hotel.id === nearbyHotel?.id} stacked />)}
           <li className="flex min-h-0 min-w-0 flex-col" data-testid={isJerusalem ? "jerusalem-hotel-map" : "tel-aviv-hotel-map"}>
             <AreaMap area={area} provider="google" compact stretch />
           </li>
