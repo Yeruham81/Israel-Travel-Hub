@@ -16,6 +16,7 @@ export type TelAvivExperience = {
   mapLinks: {label:string;query:string}[];
   guide?: {label:string;to:LinkProps["to"]};
   official?: {label:string;url:string;note?:string};
+  additionalOfficial?: {label:string;url:string;note?:string};
 };
 
 export const telAvivAttractionsUpdatedAt="2026-11-20";
@@ -41,19 +42,21 @@ export const telAvivExperiences: TelAvivExperience[]=[
     transport:"Walk or cycle along the beachfront; buses and taxis serve parallel streets. Train stations are inland, so allow a final local connection.",
     image:{src:beaches,alt:"Sandy Mediterranean bathing beach and blue sea in Tel Aviv"},
     guide:{label:"My complete Tel Aviv beach guide",to:"/travel-blog/beaches-in-tel-aviv/"},
-    official:{label:"Tel Aviv beach information — municipality",url:"https://www.tel-aviv.gov.il/en/Visit/Beaches/Pages/Beaches.aspx"},
+    official:{label:"Tel Aviv beach information — municipality",url:"https://www.tel-aviv.gov.il/en/visit/beaches/pages/default.aspx"},
+    additionalOfficial:{label:"Live municipal beach and lifeguard information (Hebrew)",url:"https://www.tel-aviv.gov.il/Visitors/Beaches/Pages/Beaches.aspx",note:"Hebrew"},
     mapLinks:[{label:"Gordon Beach",query:"Gordon Beach Tel Aviv Israel"},{label:"Frishman Beach",query:"Frishman Beach Tel Aviv Israel"}]
   },
   {
     id:"carmel-market",title:"Taste your way through Carmel Market",shortTitle:"Carmel Market",area:"Kerem HaTeimanim",category:"Markets & local food",
     bestFor:"Street food, lively stalls and local atmosphere",time:"1–2 hours",entry:"Free to explore; food and tastings extra",
     description:"Shuk HaCarmel is a sensory introduction to Tel Aviv: produce stalls, spices, baked goods and informal food counters spill into a busy market street. The neighbouring Kerem HaTeimanim streets offer a quieter contrast with low-rise houses and small places to eat.",
-    practical:"The market is usually liveliest on weekdays and Friday mornings, and most stalls close before Shabbat. Individual businesses have independent hours. The pedestrian lanes can be busy and uneven; keep valuables secure and watch for delivery carts.",
+    practical:"The market is usually liveliest on weekdays and Friday mornings, and most stalls close before Shabbat. Individual businesses have independent hours. The nearby Nahalat Binyamin Arts & Crafts Fair generally runs on Tuesdays and Fridays; check the organisers’ current schedule. The pedestrian lanes can be busy and uneven; watch for delivery carts.",
     tip:"I'd come hungry, taste a few things that appeal to you and then walk towards the nearby Nahalat Binyamin crafts area when the fair is operating.",
     transport:"Best approached on foot from central Tel Aviv, the seafront or Allenby Street; parking nearby can be difficult.",
-    image:{src:"/images/tel-aviv-attractions/carmel-market.webp",alt:"Busy market street and food stalls at Carmel Market in Tel Aviv"},
+    image:{src:"/images/tel-aviv-attractions/carmel-market.webp",alt:"Carmel Market in central Tel Aviv"},
     mapLinks:[{label:"Carmel Market",query:"Carmel Market Tel Aviv Yafo Israel"},{label:"Nahalat Binyamin Arts Fair",query:"Nahalat Binyamin Arts and Crafts Fair Tel Aviv Israel"}],
-    official:{label:"Carmel Market — municipality overview",url:"https://www.tel-aviv.gov.il/en/Visit/Top10Places/Pages/default.aspx"}
+    official:{label:"Carmel Market — municipal page (Hebrew)",url:"https://www.tel-aviv.gov.il/Residents/Development/Pages/CarmelMarket.aspx",note:"Hebrew"},
+    additionalOfficial:{label:"Nahalat Binyamin Arts & Crafts Fair — official website",url:"https://nachalatbinyamin-tlv.com/en/"}
   },
   {
     id:"neve-tzedek",title:"Explore Neve Tzedek's historic lanes",shortTitle:"Neve Tzedek",area:"South-central Tel Aviv",category:"Architecture & neighbourhoods",
@@ -64,7 +67,7 @@ export const telAvivExperiences: TelAvivExperience[]=[
     transport:"Walk from Jaffa or the southern centre. Nearby Red Line stops and buses can shorten the approach.",
     image:{src:neve,alt:"Restored historic houses and intimate streets of Neve Tzedek"},
     mapLinks:[{label:"Suzanne Dellal Centre",query:"Suzanne Dellal Centre Neve Tzedek Tel Aviv Israel"},{label:"Neve Tzedek",query:"Neve Tzedek Tel Aviv Israel"}],
-    official:{label:"Neve Tzedek and the city's heritage — municipality",url:"https://www.tel-aviv.gov.il/en/Visit/Top10Places/Pages/default.aspx"}
+    official:{label:"Neve Tzedek heritage — Suzanne Dellal Centre",url:"https://suzannedellal.org.il/en/neve-tzedek/"}
   },
   {
     id:"white-city",title:"Follow Rothschild Boulevard through the White City",shortTitle:"Rothschild & White City",area:"Central Tel Aviv",category:"Bauhaus architecture & city life",
@@ -145,13 +148,21 @@ export const telAvivMapPoints=[
 export const telAvivRoutes=[
  {title:"First time in Tel Aviv",kind:"Old Jaffa, neighbourhoods & the sea",allow:"Full day, around 7–9 hours including breaks",ids:["old-jaffa","neve-tzedek","carmel-market","beaches"],text:"Start in Old Jaffa, wander through Neve Tzedek and Carmel Market, then finish with a central beach or sunset promenade walk. Allow extra time if exploring museums inside Jaffa.",tip:"I'd avoid adding the northern port to this walking day. The route is more enjoyable with time for food and a rest."},
  {title:"Architecture, cafés and art",kind:"A central city culture day",allow:"About 5–7 hours depending on museum time",ids:["white-city","dizengoff","tel-aviv-art-museum","sarona"],text:"Explore Rothschild's International Style buildings, have a coffee near Dizengoff, visit the museum, and consider Sarona for food afterwards.",tip:"The places are not all directly adjacent; choose the most convenient transport for the museum and Sarona section."},
- {title:"Markets and local culture",kind:"Food & street art",allow:"Half to full day, depending on tastings",ids:["carmel-market","florentin","neve-tzedek"],text:"Combine Carmel Market, a wander through Neve Tzedek and Florentin's murals or Levinsky Market. A guided food or street-art experience can replace part of the self-guided walk.",tip:"Choose a weekday when the food markets are active. On Friday plan around earlier stall closures and changes before Shabbat."}
+ {title:"Markets and local culture",kind:"Food & street art",allow:"Half to full day, depending on tastings",ids:["carmel-market","neve-tzedek","florentin"],text:"Begin at Carmel Market, head southwest to Neve Tzedek, then finish farther east in Florentin and Levinsky Market. A guided food or street-art experience can replace part of the self-guided walk.",tip:"Choose a weekday when food markets are active. On Friday, allow for earlier closures before Shabbat. The route can also be walked in reverse."}
 ] as const;
+
+/** Google Maps walking waypoints correspond to the three route cards above. */
+export const telAvivRouteNavigation = [
+ {origin:"Jaffa Clock Tower Tel Aviv Israel", waypoints:["Suzanne Dellal Centre Neve Tzedek Tel Aviv Israel","Carmel Market Tel Aviv Israel"], destination:"Gordon Beach Tel Aviv Israel"},
+ {origin:"Rothschild Boulevard 16 Tel Aviv Israel", waypoints:["Dizengoff Square Tel Aviv Israel","Tel Aviv Museum of Art Israel"], destination:"Sarona Market Tel Aviv Israel"},
+ {origin:"Carmel Market Tel Aviv Israel", waypoints:["Suzanne Dellal Centre Neve Tzedek Tel Aviv Israel"], destination:"Levinsky Market Tel Aviv Israel"},
+] as const;
+
 export const telAvivFaqs=[
  {q:"What are the must-see attractions in Tel Aviv on a first visit?",a:"I'd prioritise Old Jaffa, one central Mediterranean beach, Carmel Market and a neighbourhood walk through Neve Tzedek or Rothschild Boulevard. With another day, choose a museum, Florentin or the northern port."},
  {q:"Can I see Tel Aviv in one day?",a:"You can enjoy several central highlights in a full day, but the city stretches from Old Jaffa to the northern waterfront. Choose a route by area and leave time for food and breaks instead of attempting all ten experiences."},
  {q:"Which attractions are free?",a:"Public beaches and promenades, Old Jaffa's streets, the Rothschild architectural walk, neighbourhoods and the port waterfront are generally free to explore. Museums, performances, purchases and guided activities are separate."},
- {q:"What can I do on Shabbat (Saturday)?",a:"Seaside walks, public squares and outdoor neighbourhoods are options, while many traditional markets and public transport services have changed or limited schedules. Check beach lifeguard arrangements, operators and the city's calendar."},
+ {q:"What can I do on Shabbat (Saturday)?",a:"Seaside walks, public squares and outdoor neighbourhoods are options, while many traditional markets and normal public transport services have changed or limited schedules. The free Na’im BeSofash weekend shuttle serves parts of greater Tel Aviv on Fridays and Saturdays; check its current routes and times with the municipality. Also check beach lifeguard arrangements and the city’s event calendar."},
  {q:"How should I get around Tel Aviv?",a:"Walking is ideal within neighbourhoods, but buses, the Red Line light rail, taxis and cycling can help with longer distances. Rail stations are inland rather than beside the beach. Plan each transfer instead of assuming one transport mode reaches every sight."},
  {q:"Are the beaches and Old Jaffa accessible?",a:"Some promenade and waterfront routes are relatively accessible, but historic Jaffa has slopes, steps and cobblestones. Each beach has different accessible facilities; check the specific entrance and arrangements in advance."}
 ];
@@ -167,5 +178,5 @@ export const telAvivEditorialOverview: Attraction={
   arrival:telAvivExperiences.map(e=>e.transport),
   planning:["Use supervised bathing beaches and check lifeguard information.","Group nearby neighbourhoods to minimise transport time.","Check cultural venues, markets and public transport around Shabbat and holidays."],
   faqs:telAvivFaqs,
-  official:telAvivExperiences.flatMap(e=>e.official?[{label:e.official.label,url:e.official.url}]:[])
+  official:telAvivExperiences.flatMap(e=>[...(e.official?[{label:e.official.label,url:e.official.url}]:[]),...(e.additionalOfficial?[{label:e.additionalOfficial.label,url:e.additionalOfficial.url}]:[])])
 };

@@ -12,11 +12,12 @@ import { PageUpdated } from "@/components/PageUpdated";
 import { SourcesDisclosure } from "@/components/SourcesDisclosure";
 import { HomeContactForm } from "@/components/HomeContactForm";
 import {
- telAvivExperiences as stops, telAvivRoutes, telAvivFaqs,
+ telAvivExperiences as stops, telAvivRoutes, telAvivRouteNavigation, telAvivFaqs,
  telAvivMapPoints, telAvivAttractionsUpdatedAt, type TelAvivExperience
 } from "@/data/telAvivAttractionsGuide";
 import { affiliateConfig } from "@/data/registry";
 import { recordOutboundClick, relFor } from "@/lib/outbound";
+import florentinPhotoCredit from "@/data/telAvivGraffitiPhotoCredit.json";
 
 import hero from "@/assets/home/tel-aviv-coast.webp";
 import relatedJaffa from "@/assets/shore-hub/guide-jaffa.webp";
@@ -60,11 +61,19 @@ const planning=[
  {title:"Best time to visit Israel",to:"/travel-blog/best-time-to-visit-israel/" as const,description:"Compare seasons and weather",image:seasonPhoto,alt:"Landscape showing a season in Israel"}
 ];
 const affiliateTours=[
- {id:"tour-jaffa-carmel-walk-getyourguide@tours-tel-aviv-jaffa",provider:"GetYourGuide",title:"Tel Aviv Urban Walk: Architecture, Food & Street Art",description:"A guided city experience combining neighbourhood culture, streets and local flavours",image:tourCity,alt:"The Tel Aviv skyline and urban coastline"},
- {id:"tour-old-jaffa-walk-viator@tours-tel-aviv-jaffa",provider:"Viator",title:"Old Jaffa & Flea Market Walking Tour",description:"Explore the historic Jaffa area and its lively flea-market streets",image:tourJaffa,alt:"Historic stone buildings in Jaffa"},
- {id:"tour-carmel-market-food-tour-viator@tours-tel-aviv-jaffa",provider:"Viator",title:"Market Tour & Israeli Cooking Workshop",description:"A food-centred experience in Tel Aviv; check the provider's meeting point and menu",image:tourFood,alt:"Shops and neighbourhood streets around central Tel Aviv"},
- {id:"tour-tel-aviv-street-art-viator@tours-tel-aviv-jaffa",provider:"Viator",title:"Tel Aviv Street Art & Graffiti Tour",description:"Discover a changing urban-art scene with a local guide",image:"/images/tel-aviv-attractions/florentin-walk.webp",alt:"Distinctive buildings along the streets of Florentin"},
+ {id:"tour-jaffa-carmel-walk-getyourguide@tours-tel-aviv-jaffa",provider:"GetYourGuide",title:"Tel Aviv Urban Walk: Architecture, Food & Street Art",description:"A guided city experience combining neighbourhood culture, streets and local flavours",image:tourCity,alt:"The Tel Aviv skyline and urban coastline",duration:"Confirm with provider",meeting:"Check selected meeting point",fromUsd:null,ratingLabel:null},
+ {id:"tour-old-jaffa-walk-viator@tours-tel-aviv-jaffa",provider:"Viator",title:"Old Jaffa & Flea Market Walking Tour",description:"A compact walking tour of Jaffa's stone streets, harbour and flea market",image:tourJaffa,alt:"Historic stone buildings in Jaffa",duration:"1 hr 30 min",meeting:"Yefet St 7, Jaffa",fromUsd:59,ratingLabel:"4.5 · 13 reviews"},
+ {id:"tour-carmel-market-food-tour-viator@tours-tel-aviv-jaffa",provider:"Viator",title:"Carmel Market Food-Tasting Tour",description:"Local flavours and food tastings at Carmel Market and Kerem HaTeimanim. This is a tasting walk, not a cooking workshop.",image:"/images/tel-aviv-attractions/carmel-food-tasting.webp",alt:"A colourful stall of olives, pickles and spices at Carmel Market",duration:"3 hours",meeting:"HaCarmel St 43",fromUsd:145,ratingLabel:"5.0 · 143 reviews"},
+ {id:"tour-tel-aviv-street-art-viator@tours-tel-aviv-jaffa",provider:"Viator",title:"Tel Aviv Street Art & Graffiti Tour",description:"Discover the changing graffiti and urban-art scene with a local guide",image:"/images/tel-aviv-attractions/florentin-graffiti.webp",alt:"A real graffiti mural on Florentin Street in Tel Aviv",duration:"2 hours",meeting:"Meeting point varies",fromUsd:65,ratingLabel:"4.9 · 77 reviews"},
 ] as const;
+/** Google Maps opens an ordinary walking itinerary; visitors can adjust transit on the map. */
+function walkingDirectionsUrl(index:number){
+ const route=telAvivRouteNavigation[index];
+ if(!route)return "https://www.google.com/maps/dir/?api=1&destination=Tel+Aviv+Israel";
+ const params=new URLSearchParams({api:"1",origin:route.origin,destination:route.destination,travelmode:"walking"});
+ params.set("waypoints",route.waypoints.join("|"));
+ return "https://www.google.com/maps/dir/?"+params.toString();
+}
 
 function Heading({id,title,intro}:{id:string;title:string;intro?:ReactNode}) {
  return <div className="mb-5"><h2 id={id+"-h"} className="text-2xl font-bold tracking-tight sm:text-3xl">{title}</h2>
@@ -108,6 +117,7 @@ function ExperienceCard({stop,num}:{stop:TelAvivExperience;num:number}){
  <div className="mt-auto flex flex-wrap gap-x-5 gap-y-3 border-t px-4 py-4 sm:px-5">
   {stop.guide&&<Link to={stop.guide.to} className={linkClass}>{stop.guide.label}<ArrowUpRight aria-hidden className="h-3.5 w-3.5"/></Link>}
   {stop.official&&<External url={stop.official.url}>{stop.official.label}</External>}
+  {stop.additionalOfficial&&<External url={stop.additionalOfficial.url}>{stop.additionalOfficial.label}</External>}
   {stop.mapLinks.map(location=><MapLink key={location.query} {...location}/>)}
  </div>
  </article>;
@@ -129,6 +139,14 @@ function Tours(){
      <span className="text-xs font-semibold uppercase tracking-wide text-primary">{tour.provider}</span>
      <strong className="mt-1 text-lg leading-snug group-hover:text-primary">{tour.title}</strong>
      <span className="mt-2 text-sm leading-relaxed text-muted-foreground">{tour.description}</span>
+     <span className="mt-3 flex flex-wrap gap-x-4 gap-y-2 text-xs text-muted-foreground">
+      <span className="inline-flex items-center gap-1"><Clock3 aria-hidden className="h-3.5 w-3.5"/>{tour.duration}</span>
+      <span className="inline-flex items-center gap-1"><MapPin aria-hidden className="h-3.5 w-3.5"/>{tour.meeting}</span>
+     </span>
+     {(tour.fromUsd || tour.ratingLabel) && <span className="mt-3 flex flex-wrap justify-between gap-2 text-xs text-muted-foreground">
+       {tour.fromUsd && <span>From <strong className="text-foreground">US${tour.fromUsd}</strong> per person*</span>}
+       {tour.ratingLabel && <span>{tour.ratingLabel}*</span>}
+     </span>}
      <span className="mt-auto flex items-center justify-between gap-3 border-t pt-4 text-sm font-semibold text-primary">
        <span>Check duration, price & availability</span><span className="inline-flex items-center gap-1 whitespace-nowrap">View & book <ExternalLink aria-hidden className="h-3.5 w-3.5"/></span>
      </span>
@@ -136,7 +154,7 @@ function Tours(){
    </a>;
   })}
   </div>
-  <p className="mt-3 text-xs leading-relaxed text-muted-foreground">Tour schedules, meeting points, admission, prices and availability are provided by independent suppliers. Check the full booking conditions, especially around holidays and changing local arrangements.</p>
+  <p className="mt-3 text-xs leading-relaxed text-muted-foreground">Duration, meeting points, prices and ratings shown are indicative provider details checked in November 2026, not live offers; some listings may change or become unavailable. Confirm all arrangements, accessibility and booking conditions with the supplier.</p>
   <div className="mt-5 flex flex-wrap justify-center gap-3">
    <Link to="/tours/tel-aviv-jaffa/" className="inline-flex items-center gap-2 rounded-lg border border-primary/30 bg-secondary/35 px-4 py-2.5 text-sm font-semibold text-primary hover:bg-secondary">Explore all Tel Aviv & Jaffa tours <ChevronRight aria-hidden className="h-4 w-4"/></Link>
    <Link to="/tours/food-market-tours/" className="inline-flex items-center gap-2 rounded-lg border bg-background px-4 py-2.5 text-sm font-semibold text-primary hover:bg-secondary">Explore food & market tours <ChevronRight aria-hidden className="h-4 w-4"/></Link>
@@ -251,6 +269,11 @@ export function TelAvivAttractionsGuide(){
          return <a key={id} href={"#"+id} className="rounded-full border bg-secondary/40 px-3 py-1 text-xs font-medium text-primary hover:bg-secondary">{s.shortTitle}</a>;
        })}</div>
        <p className="mt-4 text-sm leading-relaxed text-muted-foreground"><strong className="text-foreground">My tip: </strong>{route.tip}</p>
+       <a href={walkingDirectionsUrl(i)} target="_blank" rel="noopener noreferrer" className="mt-auto inline-flex items-center gap-1.5 pt-4 text-sm font-semibold text-primary hover:underline">
+         <MapPin aria-hidden className="h-4 w-4"/>Open walking route on Google Maps
+         <ExternalLink aria-hidden className="h-3.5 w-3.5"/>
+         <span className="sr-only"> (opens in a new tab)</span>
+       </a>
       </article>)}
     </div>
   </section>
@@ -260,7 +283,7 @@ export function TelAvivAttractionsGuide(){
       <div className="rounded-xl border bg-card p-5"><Footprints aria-hidden className="h-5 w-5 text-primary"/><h3 className="mt-2 font-bold">Plan by neighbourhood</h3><p className="mt-2 text-sm leading-relaxed">Jaffa, Neve Tzedek and Carmel Market fit naturally together. The port and northern park are farther away. Choose a few clusters rather than switching repeatedly across town.</p></div>
       <div className="rounded-xl border bg-card p-5"><Waves aria-hidden className="h-5 w-5 text-primary"/><h3 className="mt-2 font-bold">Check beach safety</h3><p className="mt-2 text-sm leading-relaxed">Use designated swimming areas with active lifeguard services and follow flags and sea conditions. A public boardwalk is not automatically a swimming zone. <Link to="/travel-blog/beaches-in-tel-aviv/" className="font-semibold text-primary hover:underline">Compare beach facilities</Link>.</p></div>
       <div className="rounded-xl border bg-card p-5"><CalendarDays aria-hidden className="h-5 w-5 text-primary"/><h3 className="mt-2 font-bold">Look at the calendar</h3><p className="mt-2 text-sm leading-relaxed">Carmel Market and many shops change their hours before Shabbat; museums and performances have separate schedules. My <Link to="/travel-blog/calendar-of-events/" className="font-semibold text-primary hover:underline">Israel calendar of events</Link> explains holidays and special dates.</p></div>
-      <div className="rounded-xl border bg-card p-5"><Train aria-hidden className="h-5 w-5 text-primary"/><h3 className="mt-2 font-bold">Choose transport for the actual route</h3><p className="mt-2 text-sm leading-relaxed">Buses, the Red Line light rail, taxis and walking can work better than a car in central Tel Aviv. Rail stations are inland. See my <Link to="/travel-blog/getting-around-tel-aviv/" className="font-semibold text-primary hover:underline">transport guide</Link>.</p></div>
+      <div className="rounded-xl border bg-card p-5"><Train aria-hidden className="h-5 w-5 text-primary"/><h3 className="mt-2 font-bold">Choose transport for the actual route</h3><p className="mt-2 text-sm leading-relaxed">Buses, the Red Line light rail, taxis and walking can work better than a car in central Tel Aviv. On Fridays and Saturdays the free <External url="https://www.tel-aviv.gov.il/en/Live/Transportation/Pages/PublicTransportaiton.aspx">Na'im BeSofash weekend shuttle</External> serves parts of the metropolitan area; check current routes and schedules before relying on it. Rail stations are inland. See my <Link to="/travel-blog/getting-around-tel-aviv/" className="font-semibold text-primary hover:underline">transport guide</Link>.</p></div>
       <div className="rounded-xl border bg-card p-5"><ShieldCheck aria-hidden className="h-5 w-5 text-primary"/><h3 className="mt-2 font-bold">Plan for sun and access</h3><p className="mt-2 text-sm leading-relaxed">Carry drinking water, dress for heat and use sun protection. Old Jaffa has steep and uneven sections, while beach-access arrangements differ. Check accessibility for your chosen route.</p></div>
       <div className="rounded-xl border bg-card p-5"><BedDouble aria-hidden className="h-5 w-5 text-primary"/><h3 className="mt-2 font-bold">Stay in a convenient area</h3><p className="mt-2 text-sm leading-relaxed">A hotel near the central beach or one of the walkable districts can simplify sightseeing. Compare neighbourhoods with my <Link to="/travel-blog/where-to-stay-in-tel-aviv/" className="font-semibold text-primary hover:underline">Tel Aviv accommodation guide</Link>.</p></div>
     </div>
@@ -287,13 +310,19 @@ export function TelAvivAttractionsGuide(){
     <ul className="grid gap-x-5 gap-y-3 text-sm sm:grid-cols-2">
      <li><External url="https://www.tel-aviv.gov.il/en/Visit/Top10Places/Pages/default.aspx">Tel Aviv–Yafo Municipality — key places</External></li>
      <li><External url="https://www.tel-aviv.gov.il/Visitors/Jaffa/Pages/oldjaffatour.aspx">Old Jaffa municipal walking route (Hebrew)</External></li>
-     <li><External url="https://www.tel-aviv.gov.il/en/Visit/Beaches/Pages/Beaches.aspx">Municipal beach information</External></li>
+     <li><External url="https://www.tel-aviv.gov.il/en/visit/beaches/pages/default.aspx">Municipal beach information (English)</External></li>
+     <li><External url="https://www.tel-aviv.gov.il/Visitors/Beaches/Pages/Beaches.aspx">Beach conditions and lifeguard services (Hebrew)</External></li>
+     <li><External url="https://www.tel-aviv.gov.il/en/Live/Transportation/Pages/PublicTransportaiton.aspx">Free weekend public transport — municipality</External></li>
      <li><External url="https://whc.unesco.org/en/list/1096/">UNESCO — White City of Tel Aviv</External></li>
      <li><External url="https://www.tamuseum.org.il/en/visit/">Tel Aviv Museum of Art — visitor information</External></li>
      <li><External url="https://nachalatbinyamin-tlv.com/en/">Nahalat Binyamin Arts & Crafts Fair</External></li>
+     <li><External url="https://suzannedellal.org.il/en/neve-tzedek/">Neve Tzedek history — Suzanne Dellal Centre</External></li>
      <li><External url="https://www.tel-aviv.gov.il/en/Pages/HomePage.aspx">Tel Aviv–Yafo Municipality</External></li>
      <li><External url="https://www.rail.co.il/en">Israel Railways</External></li>
     </ul>
+    <p className="mt-5 border-t pt-4 text-xs leading-relaxed text-muted-foreground">
+      Florentin graffiti photograph: <a className="font-semibold text-primary hover:underline" href={florentinPhotoCredit.sourceUrl} target="_blank" rel="noopener noreferrer">{florentinPhotoCredit.author}</a>, licensed under <a className="font-semibold text-primary hover:underline" href={florentinPhotoCredit.licenseUrl} target="_blank" rel="noopener noreferrer">{florentinPhotoCredit.license}</a>. {florentinPhotoCredit.modification}.
+    </p>
   </SourcesDisclosure>
  </article></main>;
 }

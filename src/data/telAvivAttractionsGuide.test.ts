@@ -7,6 +7,8 @@ import {
 } from "@/data/telAvivAttractionsGuide";
 import { attractionGuides } from "@/data/attractionGuides";
 import { affiliateConfig } from "@/data/registry";
+import { telAvivRouteNavigation } from "@/data/telAvivAttractionsGuide";
+import florentinCredit from "@/data/telAvivGraffitiPhotoCredit.json";
 
 describe("Upgraded Tel Aviv attractions editorial guide",()=>{
  it("contains ten distinct city experiences with practical content and meaningful Google Maps destinations",()=>{
@@ -27,6 +29,11 @@ describe("Upgraded Tel Aviv attractions editorial guide",()=>{
    expect(telAvivExperiences.find(x=>x.id==="old-jaffa")?.practical).toContain("steps");
    expect(telAvivExperiences.find(x=>x.id==="white-city")?.practical).toContain("UNESCO");
    expect(telAvivExperiences.find(x=>x.id==="carmel-market")?.practical).toContain("Shabbat");
+   expect(telAvivExperiences.find(x=>x.id==="beaches")?.official?.url).toContain("/en/visit/beaches/pages/default.aspx");
+   expect(telAvivExperiences.find(x=>x.id==="beaches")?.additionalOfficial?.url).toContain("/Visitors/Beaches/Pages/Beaches.aspx");
+   expect(telAvivExperiences.find(x=>x.id==="carmel-market")?.additionalOfficial?.url).toContain("nachalatbinyamin-tlv.com");
+   expect(telAvivExperiences.find(x=>x.id==="neve-tzedek")?.official?.url).toContain("suzannedellal.org.il");
+   expect(telAvivFaqs.find(x=>x.q.includes("Shabbat"))?.a).toContain("Na’im BeSofash");
  });
 
  it("reuses a shared metadata source rather than a stale five-highlight overview",()=>{
@@ -52,6 +59,13 @@ describe("Upgraded Tel Aviv attractions editorial guide",()=>{
    expect(new Set(telAvivMapPoints.map(x=>x.id)).size).toBe(10);
    expect(telAvivMapPoints.every(x=>x.lat>=32.04 && x.lat<=32.12 && x.lon>=34.74 && x.lon<=34.81)).toBe(true);
    expect(telAvivRoutes).toHaveLength(3);
+   expect(telAvivRouteNavigation).toHaveLength(3);
+   expect(telAvivRoutes[2]?.ids).toEqual(["carmel-market","neve-tzedek","florentin"]);
+   for(const nav of telAvivRouteNavigation){
+     expect(nav.origin).toContain("Israel");
+     expect(nav.destination).toContain("Israel");
+     expect(nav.waypoints.length).toBeGreaterThanOrEqual(1);
+   }
    for(const x of telAvivRoutes){
      expect(x.ids.length).toBeGreaterThan(2);
      expect(x.allow.length).toBeGreaterThan(20);
@@ -75,6 +89,17 @@ describe("Upgraded Tel Aviv attractions editorial guide",()=>{
    const page=readFileSync(resolve(process.cwd(),"src/components/TelAvivAttractionsGuide.tsx"),"utf8");
    for(const id of ids)expect(page).toContain(id);
    expect(page).toContain("tel_aviv_attractions_");
+   expect(page).toContain("Carmel Market Food-Tasting Tour");
+   expect(page).not.toContain("Market Tour & Israeli Cooking Workshop");
+   expect(page).toContain("HaCarmel St 43");
+   expect(page).toContain("Yefet St 7");
+   expect(page).toContain("florentin-graffiti.webp");
+   expect(page).toContain("carmel-food-tasting.webp");
+   expect(page).toContain("fromUsd:145");
+   expect(page).toContain("walkingDirectionsUrl");
+   expect(page).toContain("travelmode:\"walking\"");
+   expect(page).toContain("Na'im BeSofash weekend shuttle");
+   expect(page).toContain("telAvivGraffitiPhotoCredit.json");
    expect(page).toContain("relFor(true)");
    expect(page).toContain('data-testid="tel-aviv-curated-tour"');
    expect(page).toContain('to="/tours/tel-aviv-jaffa/"');
@@ -91,6 +116,11 @@ describe("Upgraded Tel Aviv attractions editorial guide",()=>{
    expect(page).toContain("related.map");
    expect(page).toContain("planning.map");
    expect(page).toContain("Where to Stay in Israel");
+   expect(existsSync(resolve(process.cwd(),"public/images/tel-aviv-attractions/carmel-food-tasting.webp"))).toBe(true);
+   expect(existsSync(resolve(process.cwd(),"public/images/tel-aviv-attractions/florentin-graffiti.webp"))).toBe(true);
+   expect(florentinCredit.license).toBe("CC BY 4.0");
+   expect(florentinCredit.author).toBe("Nizzan Cohen");
+   expect(florentinCredit.sourceUrl).toContain("commons.wikimedia.org");
    expect(page).toContain('/travel-blog/beaches-in-tel-aviv/');
    expect(page).toContain('/travel-blog/museums-in-tel-aviv/');
    expect(page).toContain('/travel-blog/getting-around-tel-aviv/');
