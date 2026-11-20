@@ -9,6 +9,7 @@ import { affiliateConfig } from "@/data/registry";
 import { recordOutboundClick } from "@/lib/outbound";
 import carmelPhoto from "@/assets/haifa/panorama.webp";
 import museumsPhoto from "@/assets/guides/2026-10/museums-in-haifa.webp";
+import caesareaTourPhoto from "@/assets/home/caesarea-aqueduct.webp";
 
 const official = haifaSite.official;
 const inlineLink = "font-semibold text-primary underline underline-offset-4";
@@ -31,56 +32,60 @@ const walkingMap = (origin: string, destination: string, waypoints: string[]) =>
   "https://www.google.com/maps/dir/?api=1&origin=" + encodeURIComponent(origin)
   + "&destination=" + encodeURIComponent(destination)
   + "&travelmode=walking&waypoints=" + waypoints.map(encodeURIComponent).join("%7C");
-const downtownWalkingRoute = walkingMap(
-  "German Colony Plaza, 21 Hagefen, Haifa, Israel",
+export const downtownWalkingRoute = walkingMap(
+  "Ben Gurion Boulevard, German Colony, Haifa, Israel",
   "Turkish Market, Moshe Aharon Street, Haifa, Israel",
-  ["Ben Gurion Boulevard, Haifa, Israel", "Wadi Nisnas Market, Haifa, Israel"],
+  ["Bahai Gardens Lower Viewpoint, 21 Hagefen Street, Haifa, Israel", "Wadi Nisnas Market, Haifa, Israel"],
 );
-const carmelWalkingRoute = walkingMap(
-  "Louis Promenade, Haifa, Israel",
+export const carmelWalkingRoute = walkingMap(
+  "Carmel Center, Haifa, Israel",
   "Bahai Gardens Upper Balcony, 61 Yefe Nof, Haifa, Israel",
-  ["Carmel Center, Haifa, Israel"],
+  ["Louis Promenade, Yefe Nof Street, Haifa, Israel"],
 );
-const downtownFullRoute = walkingMap(
-  "German Colony, Haifa, Israel", "Turkish Market, Haifa, Israel",
-  ["Wadi Nisnas Market, Haifa, Israel"],
-);
+export const downtownFullRoute = downtownWalkingRoute;
 const mapEmbed = "https://maps.google.com/maps?q=Haifa%2C%20Israel&hl=en&z=12&t=m&output=embed";
 
-type TourPlacement = {
+export type TourPlacement = {
   id: string;
   platform: "GetYourGuide" | "Viator";
+  productCode: string;
   title: string;
   description: string;
+  duration: string;
+  priceFrom: string;
+  rating: string;
   image: string;
   affiliateKey: string;
   subId: string;
 };
-const tourPlacements: TourPlacement[] = [
+/** Provider listing IDs and published snapshots checked 20 November 2026.
+ * Travelpayouts redirect destinations still require separate periodic QA.
+ */
+export const haifaTourPlacements: TourPlacement[] = [
   {
-    id: "coast-private-rosh-hanikra",
-    platform: "Viator",
-    title: "Guided Haifa city walk from the port",
-    description: "A local walking experience for visitors who would rather explore the city with a licensed guide. Check the advertised meeting point and route.",
-    image: pictures.colony,
+    id: "coast-private-rosh-hanikra", platform: "Viator", productCode: "368992P3",
+    title: "Caesarea, Haifa, Akko & Rosh Hanikra private tour",
+    description: "A privately guided full-day coastal excursion starting in Tel Aviv, visiting Caesarea, a Haifa viewpoint, Akko and a planned Rosh Hanikra stop. This is not a short walk from Haifa Port.",
+    duration: "8–10 hours", priceFrom: "From $1,450 per group", rating: "5.0/5 · 9 reviews",
+    image: "/images/attractions/rosh-hanikra-cliffs.webp",
     affiliateKey: "tour-coast-private-rosh-hanikra-viator@tours-northern-coast",
-    subId: "haifa_citywalk_viator",
+    subId: "haifa_private_coast_viator",
   },
   {
-    id: "caesarea-haifa-akko",
-    platform: "GetYourGuide",
-    title: "Caesarea, Haifa & Akko day trip",
-    description: "A guided northern-coast day tour from Tel Aviv, with Haifa as one stop. Check the full itinerary and collection location.",
-    image: pictures.gardens,
+    id: "caesarea-haifa-akko", platform: "GetYourGuide", productCode: "22120",
+    title: "Caesarea, Haifa & Akko day trip from Tel Aviv",
+    description: "An 11-hour guided coast tour with a Bahá’í Gardens viewpoint, Caesarea, Rosh Hanikra and Akko. Pickup is arranged in the Tel Aviv area.",
+    duration: "11 hours", priceFrom: "From $95 per person", rating: "4.3/5 · 759 reviews",
+    image: caesareaTourPhoto,
     affiliateKey: "tour-caesarea-haifa-akko-getyourguide@tours-northern-coast",
     subId: "haifa_coast_gyg",
   },
   {
-    id: "north-coast-small-group",
-    platform: "Viator",
+    id: "north-coast-small-group", platform: "Viator", productCode: "58143P8",
     title: "Caesarea, Haifa & Acre small-group tour",
-    description: "A smaller-group day trip covering several coastal highlights from Tel Aviv. Confirm the exact stops and inclusions.",
-    image: pictures.market,
+    description: "A guided small-group coastal day trip departing from Tel Aviv, covering Caesarea, Haifa and historic Akko. Confirm pickup and minimum-group requirements.",
+    duration: "8–10 hours", priceFrom: "From $279 per person", rating: "5.0/5 · 7 reviews",
+    image: "/images/attractions/akko-fishing-harbour.webp",
     affiliateKey: "tour-north-coast-small-group-viator@tours-northern-coast",
     subId: "haifa_coast_viator",
   },
@@ -88,7 +93,7 @@ const tourPlacements: TourPlacement[] = [
 
 /** Only display product-specific, already-configured Travelpayouts links. */
 function HaifaPartnerTours() {
-  const placements = tourPlacements.flatMap((tour) => {
+  const placements = haifaTourPlacements.flatMap((tour) => {
     const base = affiliateConfig[tour.affiliateKey]?.trackingUrl;
     return base?.startsWith("https://") && base.includes(".tpm.li/")
       ? [{ ...tour, url: base + "?sub_id=" + encodeURIComponent(tour.subId) }]
@@ -98,13 +103,18 @@ function HaifaPartnerTours() {
   return (
     <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3" data-testid="haifa-affiliate-tour-cards">
       {placements.map((tour) => (
-        <article key={tour.id} className="flex min-w-0 flex-col overflow-hidden rounded-xl border bg-card">
+        <article key={tour.id} data-provider-product-code={tour.productCode} className="flex min-w-0 flex-col overflow-hidden rounded-xl border bg-card">
           <img src={tour.image} alt="" loading="lazy" width={520} height={300} decoding="async"
             className="aspect-[16/9] w-full object-cover" />
           <div className="flex flex-1 flex-col p-4">
             <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">{tour.platform}</p>
             <h3 className="mt-1 font-serif text-lg font-semibold">{tour.title}</h3>
             <p className="mt-2 flex-1 text-sm leading-relaxed text-muted-foreground">{tour.description}</p>
+            <div className="mt-3 space-y-1 text-xs text-muted-foreground">
+              <p className="font-semibold text-foreground"><Clock3 className="mr-1 inline size-3.5" aria-hidden="true" />{tour.duration}</p>
+              <p>{tour.priceFrom}</p>
+              <p aria-label={"Rating " + tour.rating}>★ {tour.rating}</p>
+            </div>
             <a href={tour.url} target="_blank" rel="sponsored noopener noreferrer"
               onClick={() => recordOutboundClick({ pageId: "attractions-haifa", productId: tour.id, offerId: tour.affiliateKey })}
               className="mt-3 inline-flex items-center gap-1 text-sm font-semibold text-primary underline underline-offset-4">
@@ -113,6 +123,7 @@ function HaifaPartnerTours() {
           </div>
         </article>
       ))}
+      <p className="col-span-full text-xs leading-relaxed text-muted-foreground">Prices and ratings are published provider snapshots checked November 2026, not live quotes. Verify availability, inclusions, reviews and final costs on the booking platform.</p>
     </div>
   );
 }
@@ -137,6 +148,7 @@ export const haifaDestinationContent: AttractionDestinationContent = {
   itineraryFirst: true,
   itineraryTitle: "Suggested Haifa itineraries",
   visitorTitle: "Visiting Haifa: gardens, tickets and accessibility",
+  transportTitle: "Getting to and around Haifa",
   visitorNavLabel: "Visitor essentials",
   historyTitle: "Haifa's history and neighbourhoods",
   relatedTitle: "Explore Haifa and the northern coast",
@@ -182,7 +194,7 @@ export const haifaDestinationContent: AttractionDestinationContent = {
         {directions("Ben Gurion Boulevard, German Colony, Haifa, Israel")}
       </AttractionHighlight>
       <AttractionHighlight title="Wadi Nisnas: market and neighbourhood art"
-        image={{ src: pictures.wadi, alt: "Stone buildings and street life in the Wadi Nisnas neighbourhood of Haifa" }}>
+        image={{ src: pictures.wadi, alt: "Stone buildings and street life in the Wadi Nisnas neighbourhood of Haifa", mobileContain: true }}>
         <p>Wadi Nisnas is a lived-in Arab neighbourhood known for its market lanes, small food businesses and outdoor art. It offers a different side of Haifa from the manicured gardens and waterfront.</p>
         <p>I would browse the market during the day, try a local pastry or hummus and look for the artwork along the streets. Respect residential entrances and ask before photographing people. Market stalls have independent hours; do not assume everything is open on Sunday.</p>
         {directions("Wadi Nisnas Market, Haifa, Israel")}
@@ -248,7 +260,7 @@ export const haifaDestinationContent: AttractionDestinationContent = {
           </div>
         </article>
       </div>
-      <AttractionPracticalTip>The <a href={official.bahaiBooking} target="_blank" rel="noopener noreferrer" className={inlineLink}>guided upper-terraces tour</a> is a separate activity with a specific meeting point and exit. If you book it, plan the rest of your day around that time rather than trying to add it to the self-guided route.</AttractionPracticalTip>
+      <AttractionPracticalTip>If you reserve a time-specific garden visit, adjust the rest of your route around its meeting and finishing points.</AttractionPracticalTip>
     </div>
   ),
   visitorContent: (
@@ -256,8 +268,8 @@ export const haifaDestinationContent: AttractionDestinationContent = {
       <p>Haifa is a city with independent attractions, not one ticketed site. Public streets, many viewpoints, beaches and promenades are free to visit. Museums, commercial cable cars and certain activities set separate prices and schedules.</p>
       <div className="grid gap-3 sm:grid-cols-2">
         <article className="rounded-xl border bg-card p-4">
-          <div className="flex items-center gap-2"><Ticket className="h-5 w-5 text-primary"/><h3 className="font-serif text-xl font-semibold">Bahá’í Gardens visits are free</h3></div>
-          <p className="mt-2 text-sm leading-relaxed">The three designated garden viewpoints do not require advance booking, while the free Upper Terraces guided visit requires a reservation. The viewpoints and Shrine may have different hours. Use the <a className={inlineLink} href={official.bahai} target="_blank" rel="noopener noreferrer">official garden access page</a> to choose the correct entrance and check any closure notice.</p>
+          <div className="flex items-center gap-2"><Ticket className="h-5 w-5 text-primary"/><h3 className="font-serif text-xl font-semibold">Bahá’í Gardens access</h3></div>
+          <p className="mt-2 text-sm leading-relaxed">See the main Bahá’í Gardens card above for entrances, admission and booking details. Access hours vary by area; use the <a className={inlineLink} href={official.bahai} target="_blank" rel="noopener noreferrer">official garden access page</a> for the latest changes.</p>
         </article>
         <article className="rounded-xl border bg-card p-4">
           <div className="flex items-center gap-2"><Clock3 className="h-5 w-5 text-primary"/><h3 className="font-serif text-xl font-semibold">Opening times vary by site</h3></div>
@@ -266,7 +278,7 @@ export const haifaDestinationContent: AttractionDestinationContent = {
       </div>
       <article className="rounded-xl border bg-secondary/20 p-4 sm:p-5">
         <h3 className="font-serif text-xl font-semibold">Accessibility and families</h3>
-        <p className="mt-2 text-sm leading-relaxed">Haifa's slopes can be challenging even between nearby-looking neighbourhoods. The Lower City and parts of the beachfront are generally easier for shorter walks; the Carmel slopes, older steps and certain viewpoints require more care. For Bahá’í visits, the 80 Hatzionut Main Entrance has the largest paved self-guided area, although it includes a moderately steep slope. The 750-step guided tour is not accessible to visitors with walking difficulties or strollers. Read the <a href={official.bahaiAccess} className={inlineLink} target="_blank" rel="noopener noreferrer">official accessibility guidance</a>.</p>
+        <p className="mt-2 text-sm leading-relaxed">Haifa's slopes can be challenging even between nearby-looking neighbourhoods. The Lower City and parts of the beachfront are generally easier for shorter walks; the Carmel slopes, older steps and certain viewpoints require more care. For Bahá’í visits, the 80 Hatzionut Main Entrance has the largest paved self-guided area, although it includes a moderately steep slope. The guided terrace descent is not accessible to visitors with walking difficulties or strollers. Read the <a href={official.bahaiAccess} className={inlineLink} target="_blank" rel="noopener noreferrer">official accessibility guidance</a>.</p>
       </article>
       <article className="rounded-xl border bg-secondary/20 p-4 sm:p-5">
         <h3 className="font-serif text-xl font-semibold">Safe beach visits</h3>
@@ -335,7 +347,7 @@ export const haifaDestinationContent: AttractionDestinationContent = {
   practicalContent: (
     <div className="mt-4 space-y-3">
       <AttractionPracticalTip><strong>Plan by elevation:</strong> use the Carmelit or a vehicle when moving between Carmel Center and the Lower City. Walking is more pleasant within a district than up the entire hill.</AttractionPracticalTip>
-      <AttractionPracticalTip><strong>Garden rules:</strong> wear clothing covering shoulders and knees, take water, follow the marked visitor areas and check the official website for holiday or weather closures.</AttractionPracticalTip>
+      <AttractionPracticalTip><strong>Before the gardens:</strong> check access restrictions or weather closures and bring water for a warm day on the Carmel.</AttractionPracticalTip>
       <AttractionPracticalTip><strong>Weekend timing:</strong> transport, shops, markets and places of worship follow different schedules on Friday and Saturday. Choose the activities you care about, then verify their operating times individually.</AttractionPracticalTip>
       <p>For a longer northern-Israel stay, consider choosing your base with my <Link to="/travel-blog/best-hotels-in-haifa/" className={inlineLink}>Haifa hotel guide</Link>. The Lower City, German Colony and Carmel Center offer very different transport and evening options.</p>
     </div>
@@ -362,16 +374,16 @@ export const haifaDestinationContent: AttractionDestinationContent = {
           <span className="mt-3 inline-flex items-center gap-1 text-sm font-semibold text-primary">Haifa shore excursions <ArrowUpRight className="h-4 w-4"/></span>
         </Link>
       </div>
-      <AttractionPracticalTip>The guided tours inside the <strong>Bahá’í Gardens are free</strong> and arranged by the Gardens themselves. Use the <a href={official.bahaiBooking} target="_blank" rel="noopener noreferrer" className={inlineLink}>official reservation system</a>, not a commercial sightseeing tour card, to book that particular experience.</AttractionPracticalTip>
+      <AttractionPracticalTip>The Gardens’ official guided visit is separate from the commercial tours above. Reserve it through the <a href={official.bahaiBooking} target="_blank" rel="noopener noreferrer" className={inlineLink}>official booking system</a>.</AttractionPracticalTip>
     </div>
   ),
   faqs: [
     { q: "How much time should I spend in Haifa?", a: "Two to three hours is enough for a Lower City and German Colony introduction. Allow about five to seven hours to combine Carmel viewpoints with the Lower City and an optional coast stop. An overnight visit gives you more flexibility for museums and beaches." },
-    { q: "Can I visit the Bahá’í Gardens without booking?", a: "Yes. Designated viewpoints have free self-guided access during published hours. The separate Upper Terraces guided tour requires advance booking and involves about 750 stairs. Check the official site for current access." },
+    { q: "Can I visit the Bahá’í Gardens without booking?", a: "Yes. The designated viewpoints are available for self-guided visits; the separate guided route requires a reservation. See the entrances and booking details in the first attraction card." },
     { q: "Can I walk from the top of the Bahá’í Gardens to the German Colony through the terraces?", a: "No. The public viewpoints are separate; the terraces are not an unrestricted top-to-bottom public walkway. A reserved guided tour follows an authorised route with its own meeting and exit points." },
     { q: "Is Haifa easy to visit without a car?", a: "Yes, especially if you choose nearby sites within each district and use rail, the Carmelit, buses or taxis between hillside and coastal locations. Do not plan a single long walking loop across the mountain and harbour." },
     { q: "What can I do in Haifa on Saturday?", a: "Public promenades, viewpoints and some food businesses can be good options, though opening hours vary. Some city buses and Metronit services operate on Saturdays, while Israel Railways and the Carmelit have different weekend schedules. Check the exact service and venue." },
-    { q: "Which Haifa activities work well for families?", a: "The Bat Galim waterfront, southern beaches in lifeguard season, Madatech and short Carmel lookouts are useful choices. Families with strollers should avoid the 750-step guided garden tour and check the accessibility notes for individual sites." },
+    { q: "Which Haifa activities work well for families?", a: "The Bat Galim waterfront, southern beaches in lifeguard season, Madatech and short Carmel lookouts are useful choices. For strollers, choose accessible garden areas instead of the guided terrace descent and check access notes for each site." },
   ],
   nearby: [
     { label: "Old Akko (Acre)", to: "/attractions/akko-acre/", note: "Crusader halls, Ottoman lanes, markets and harbour views." },

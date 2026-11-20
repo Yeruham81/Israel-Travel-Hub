@@ -955,6 +955,22 @@ jobs:
           if (!html.includes("viator.tpm.li/") || !html.includes("getyourguide.tpm.li/")) {
             console.error("::error::Haifa Travelpayouts tour cards missing");process.exitCode=1;
           }
+          const headings = [...html.matchAll(/<h[1-6]\\b[^>]*>([\\s\\S]*?)<\\/h[1-6]>/gi)]
+            .map(m => m[1].replace(/<[^>]+>/g, "").trim());
+          for (const title of ["Where to eat in Haifa","Practical tips for visiting Haifa","Getting to and around Haifa"]) {
+            if (!headings.includes(title)) { console.error("::error::Haifa heading missing: "+title);process.exitCode=1; }
+          }
+          if (headings.some(title => /jaffa/i.test(title))) {
+            console.error("::error::Jaffa heading leaked into Haifa guide");process.exitCode=1;
+          }
+          for (const code of ["368992P3","22120","58143P8"]) {
+            if (!html.includes('data-provider-product-code="'+code+'"')) {
+              console.error("::error::Haifa product ID missing: "+code);process.exitCode=1;
+            }
+          }
+          if (html.includes("Guided Haifa city walk from the port")) {
+            console.error("::error::Obsolete tour title on Haifa page");process.exitCode=1;
+          }
           NODE
           for photo in haifa-bahai-gardens.webp haifa-stella-maris.webp haifa-cable-car.webp haifa-beach.webp haifa-german-colony.webp haifa-wadi-nisnas.webp haifa-turkish-market.webp haifa-bat-galim.webp; do
             curl --http1.1 --retry-all-errors --retry 2 --max-time 35 -fsSL "$VITE_CANONICAL_ORIGIN/images/attractions/$photo" -o "/tmp/$photo"

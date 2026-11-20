@@ -995,7 +995,7 @@ export const tourBookingOffers: TourBookingOffer[] = ([
   ["coast-akko-jerusalem", "viator", "https://www.viator.com/tours/Jerusalem/Akko-Nazareth-and-Caesarea-Day-Tour/d921-26254P71"],
   ["coast-private-jerusalem-tel-aviv", "viator", "https://www.viator.com/tours/Tel-Aviv/Caesarea-Haifa-and-Acre-Private-Tour-from-Jerusalem/d920-88630P123"],
   ["coast-private-cross-israel", "viator", "https://www.viator.com/tours/Tel-Aviv/1-Day-Tel-Aviv-and-Caesarea/d920-101217P9"],
-  ["coast-private-rosh-hanikra", "viator", "https://www.viator.com/tours/Haifa/Haifa-Walking-City-Tour-from-the-Port-with-the-Licensed-Guide/d4472-368992P3"],
+  ["coast-private-rosh-hanikra", "viator", "https://www.viator.com/tours/Haifa/Caesarea-Haifa-Akko-and-Rosh-Hanikra-Private-Tour-from-Tel-Aviv/d4472-368992P3"],
   ["ramon-jeep-adventure", "viator", "https://www.viator.com/tours/Sde-Boker/Two-hour-guided-jeep-tour-in-to-and-around-the-Ramon-crater/d29363-107499P1"],
   ["ramon-guided-jeep", "viator", "https://www.viator.com/tours/Sde-Boker/Ramon-crater-jeep-tour/d29363-13060P1"],
   ["ramon-jeep-hiking", "viator", "https://www.viator.com/tours/Sde-Boker/One-day-jeep-tour-combined-with-hiking-in-Ramon-crater-in-the-Negev-desert/d29363-13060P3"],

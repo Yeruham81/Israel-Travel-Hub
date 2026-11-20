@@ -17,4 +17,6 @@ The Creative Commons photographs are reduced to a maximum width of 900 pixels an
 
 The existing hero \`/images/attractions/haifa-coast.webp\`, \`src/assets/haifa/panorama.webp\`, museums guide photo and other historical project images also need the owner's original usage-rights review.
 
+Tour-card photos now use existing, distinct assets: `rosh-hanikra-cliffs.webp`, `src/assets/home/caesarea-aqueduct.webp`, and `akko-fishing-harbour.webp`. Verify their original rights records, along with the legacy hero, before final launch.
+
 This internal checklist is not intended to be displayed as a technical notice to travellers.

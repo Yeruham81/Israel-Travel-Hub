@@ -56,6 +56,7 @@ export type AttractionDestinationContent = {
   visitorTitle?: string;
   visitorNavLabel?: string;
   transportContent?: ReactNode;
+  transportTitle?: string;
   itineraryContent?: ReactNode;
   itineraryFirst?: boolean;
   itineraryTitle?: string;
@@ -98,15 +99,17 @@ function AtAGlance({ placeName, facts, note }: { placeName: string; facts: Attra
 /** Standard article photo: 4:3 at every breakpoint, up to 260 × 195 px on desktop.
  * Full mobile width; independent of the compact hero, panoramas and link thumbnails.
  */
-export function AttractionContentImage({ src, alt, position }: { src: string; alt: string; position?: string }) {
-  return <img src={src} alt={alt} width={520} height={390} loading="lazy" decoding="async" className="aspect-[4/3] h-auto w-full rounded-lg object-cover" style={position ? { objectPosition: position } : undefined} />;
+export function AttractionContentImage({ src, alt, position, mobileContain }: { src: string; alt: string; position?: string; mobileContain?: boolean }) {
+  return <img src={src} alt={alt} width={520} height={390} loading="lazy" decoding="async"
+    className={"aspect-[4/3] h-auto w-full rounded-lg " + (mobileContain ? "bg-muted/20 object-contain sm:object-cover" : "object-cover")}
+    style={position ? { objectPosition: position } : undefined} />;
 }
 
 export function AttractionHighlight({
   title, image, children, note,
 }: {
   title: string;
-  image?: { src: string; alt: string; position?: string } | undefined;
+  image?: { src: string; alt: string; position?: string; mobileContain?: boolean } | undefined;
   children: ReactNode;
   note?: ReactNode;
 }) {
@@ -118,13 +121,19 @@ export function AttractionHighlight({
           <div className="mt-2 space-y-3 text-sm leading-relaxed sm:text-base">{children}</div>
           {note && <p className="mt-3 border-l-2 border-primary/40 pl-3 text-sm leading-relaxed text-muted-foreground">{note}</p>}
         </div>
-        {image && <AttractionContentImage src={image.src} alt={image.alt} {...(image.position ? { position: image.position } : {})} />}
+        {image && <AttractionContentImage src={image.src} alt={image.alt} {...(image.position ? { position: image.position } : {})} {...(image.mobileContain ? { mobileContain: true } : {})} />}
       </div>
     </article>
   );
 }
 
+/** Shared, destination-specific section headings. */
+export function destinationSectionHeadings(placeName: string) {
+  return { food: "Where to eat in " + placeName, practical: "Practical tips for visiting " + placeName };
+}
+
 export function AttractionDestinationPage({ content }: { content: AttractionDestinationContent }) {
+  const destinationHeadings = destinationSectionHeadings(content.placeName);
   const sections: [string, string][] = [
     ["highlights", "What to see"],
     ...(content.itineraryFirst && content.itineraryContent ? [["visit-plan", content.itineraryTitle ?? "Plan your visit"] as [string, string]] : []),
@@ -163,10 +172,10 @@ export function AttractionDestinationPage({ content }: { content: AttractionDest
       </Section>
       {content.itineraryFirst && content.itineraryContent && <Section id="visit-plan" title={content.itineraryTitle ?? "How to plan your visit"}>{content.itineraryContent}</Section>}
       {content.visitorContent && <Section id="visitor-info" title={content.visitorTitle ?? "Opening hours, tickets and practical information"}>{content.visitorContent}</Section>}
-      {content.transportContent && <Section id="getting-there" title={"How to get to " + content.placeName}>{content.transportContent}</Section>}
+      {content.transportContent && <Section id="getting-there" title={content.transportTitle ?? "How to get to " + content.placeName}>{content.transportContent}</Section>}
       {!content.itineraryFirst && content.itineraryContent && <Section id="visit-plan" title={content.itineraryTitle ?? "How to plan your visit"}>{content.itineraryContent}</Section>}
-      {content.foodContent && <Section id="food" title="Where to eat in Jaffa">{content.foodContent}</Section>}
-      {content.practicalContent && <Section id="practical" title="Practical tips for visiting Jaffa">{content.practicalContent}</Section>}
+      {content.foodContent && <Section id="food" title={destinationHeadings.food}>{content.foodContent}</Section>}
+      {content.practicalContent && <Section id="practical" title={destinationHeadings.practical}>{content.practicalContent}</Section>}
       {content.historyContent && <Section id="history" title={content.historyTitle ?? "History and significance"}>{content.historyContent}</Section>}
       {content.tourContent && <Section id="tours" title="Guided tours and private visits">{content.tourContent}</Section>}
       {!!content.faqs?.length && <FaqList faqs={content.faqs} />}
