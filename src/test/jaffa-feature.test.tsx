@@ -16,6 +16,7 @@ describe("Jaffa multi-stop city attractions guide", () => {
     expect(content.itineraryFirst).toBe(true);
     expect(content.itineraryTitle).toMatch(/walking routes/i);
     expect(content.navigationSections).toHaveLength(8);
+    expect(content.navigationSections?.find((entry) => entry[0] === "food")).toEqual(["food", "Food & cafés"]);
     expect(content.navigationSections?.at(-1)).toEqual(["contact", "Contact me"]);
     expect(content.foodContent).toBeTruthy();
     expect(content.practicalContent).toBeTruthy();
@@ -31,6 +32,10 @@ describe("Jaffa multi-stop city attractions guide", () => {
     expect(component).toContain("around 4–5 hours");
     expect(component).toContain("Open short walking route in Google Maps");
     expect(component).toContain("Open half-day walking route in Google Maps");
+    expect(component).toContain("Ilana Goor Museum on Google Maps");
+    expect(component).toContain("Mazal%20Dagim%20Street");
+    expect(component).toContain("HaPisga%20Garden");
+    expect(component).not.toContain("waypoints=Jaffa%20Clock%20Tower%2C%20Tel%20Aviv-Yafo%2C%20Israel%7CKedumim");
     // Two complete walking routes plus the existing Clock Tower arrival-directions link.
     expect(component.match(/https:\/\/www\.google\.com\/maps\/dir\/\?api=1/g)).toHaveLength(3);
     expect(component).toContain('data-testid="jaffa-transport"');
@@ -51,6 +56,12 @@ describe("Jaffa multi-stop city attractions guide", () => {
     expect(component).toContain("Ilana Goor Museum");
     expect(component).toContain("₪45 adult admission");
     expect(component).toContain("There is no walk-in admission");
+    expect(component).toContain("Sunday–Thursday 09:00–17:00; Friday 09:00–14:00");
+    expect(component).toContain("Naim BaSofash weekend service");
+    expect(component).toContain("Dr. Avishai Teicher / PikiWiki Israel");
+    expect(component).toContain("CC BY 2.5");
+    expect(jaffaSite.official.municipalWalkMapShort).toMatch(/\.pdf$/);
+    expect(jaffaSite.official.weekendBuses).toContain("naimbesofash");
     expect(component).toContain("2 Marzouk and Azar Street");
     expect(component).toContain("position: \"38% center\"");
     expect(jaffaSite.official.touristInformation).toBe("https://visit.tel-aviv.gov.il/info/about");
@@ -72,6 +83,9 @@ describe("Jaffa multi-stop city attractions guide", () => {
   it("does not insert invented all-city opening hours or admission fees", () => {
     const component = readFileSync("src/components/JaffaAttractionPage.tsx", "utf8");
     expect(component).toContain("Jaffa is a historic port city and part of modern Tel Aviv–Yafo");
+    expect(component).not.toContain("The photo shows the coastal vista");
+    expect(component).not.toContain("For help planning your walk, the city lists a");
+    expect(component).toContain("bronze plaques depicting the twelve zodiac signs");
     expect(component).toContain("Museums, cultural performances and optional tours set their own prices");
     expect(component).not.toContain("15–30 NIS");
     expect(component).toContain("10:00–16:00 Sunday–Thursday and Saturday");
