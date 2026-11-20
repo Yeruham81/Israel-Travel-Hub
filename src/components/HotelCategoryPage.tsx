@@ -4,7 +4,7 @@ import { ArrowLeft, ArrowRight } from "lucide-react";
 import { hotelCategoryGuides, type HotelStayDestination, type HotelCategoryGuide } from "@/data/content";
 import { categoryDecisionExamples } from "@/data/localEditorialInsights";
 import { linksForPage } from "@/data/registry";
-import { GuideHeader, OnThisPage, Section, Checklist, FaqList, ProviderSection, SourceList } from "@/components/Guide";
+import { GuideHeader, OnThisPage, Section, FaqList, ProviderSection, SourceList } from "@/components/Guide";
 import { StayTripLinks } from "@/components/StayTripLinks";
 import { HomeContactForm } from "@/components/HomeContactForm";
 import { guideContactCopy } from "@/lib/guide-contact";
