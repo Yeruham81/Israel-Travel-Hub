@@ -307,8 +307,8 @@ export function CityNeighborhoodEditorial({ guide }: { guide: CityStayGuide }) {
         <h2 id="tips-h" className="text-3xl">What to check before booking</h2>
 
         <StayBookingChecklist testId={`${cityId === "jerusalem" ? "jerusalem" : "telaviv"}-booking-checklist`} groups={[
-          { title: "Location & arrival", items: (cityId === "jerusalem" ? jerusalemBookingTips : telAvivBookingTips).slice(0, 3) },
-          { title: "Room & booking conditions", items: (cityId === "jerusalem" ? jerusalemBookingTips : telAvivBookingTips).slice(3) },
+          { title: "Location & arrival", items: (cityId === "jerusalem" ? jerusalemBookingTips : telAvivBookingTips).slice(0, 4) },
+          { title: "Room & booking conditions", items: (cityId === "jerusalem" ? jerusalemBookingTips : telAvivBookingTips).slice(4) },
         ]} />
         <aside className="mt-6 flex gap-3 rounded-xl border border-amber-200 bg-amber-50/80 p-4 text-sm leading-relaxed dark:border-amber-900/50 dark:bg-amber-950/20">
           <Lightbulb className="mt-0.5 h-5 w-5 shrink-0 text-amber-600" aria-hidden />
