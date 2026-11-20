@@ -207,20 +207,32 @@ describe("port service catalog", () => {
     expect(JSON.parse(localStorage.getItem("itt_outbound_clicks_v1")!)[0]).toMatchObject({ pageId: "shore-haifa", productId: "shore-gyg-haifa-akko", offerId: "shore-gyg-haifa-akko" });
   });
 
-  it("shows duration, port pickup, tour format and a dated published price basis", async () => {
+  it("shows the tour format and only displays reference prices while their source snapshots are fresh", async () => {
     await pageAt("/shore-excursions/ashdod/?platform=getyourguide");
-    const card = cards().find((card) => card.dataset["productId"] === "shore-gyg-ashdod-jerusalem-bethlehem")!;
-    expect(card).toHaveTextContent("9–11 hours");
-    expect(card).toHaveTextContent("Private tour");
-    expect(card).toHaveTextContent("From Ashdod Port");
-    expect(card).toHaveTextContent("US$1,009");
-    expect(card).toHaveTextContent("Reference price · per group");
-    expect(card).not.toHaveTextContent("2026-10-21");
-    expect(card).not.toHaveTextContent(/Per person|Best for:|Published car-and-driver starting rate|Check the actual ship date/);
-    const masada = cards().find((card) => card.dataset["productId"] === "shore-gyg-ashdod-masada")!;
-    expect(masada).toHaveTextContent("US$130");
-    expect(masada).toHaveTextContent("Reference price · per person");
-    expect(masada).not.toHaveTextContent("per group");
+    const checkCard = (productId: string, expectedAmount: number, expectedBasis: "per_person" | "per_group") => {
+      const card = cards().find(item => item.dataset["productId"] === productId)!;
+      const product = getShoreCatalog("ashdod").find(service => service.productId === productId);
+      expect(card).toBeDefined();
+      expect(product).toBeDefined();
+      if (product!.listedPrice) {
+        expect(card).toHaveTextContent("US$" + expectedAmount.toLocaleString("en-US"));
+        expect(card).toHaveTextContent("Reference price · " + (expectedBasis === "per_person" ? "per person" : "per group"));
+      } else {
+        // A snapshot that is over 30 days old must not masquerade as a current price.
+        expect(card).toHaveTextContent("Check current price");
+        expect(card).not.toHaveTextContent("Reference price");
+        expect(card).not.toHaveTextContent("US$" + expectedAmount.toLocaleString("en-US"));
+      }
+      return card;
+    };
+    const privateTour = checkCard("shore-gyg-ashdod-jerusalem-bethlehem", 1009, "per_group");
+    expect(privateTour).toHaveTextContent("9–11 hours");
+    expect(privateTour).toHaveTextContent("Private tour");
+    expect(privateTour).toHaveTextContent("From Ashdod Port");
+    expect(privateTour).not.toHaveTextContent("2026-10-21");
+    expect(privateTour).not.toHaveTextContent(/Per person|Best for:|Published car-and-driver starting rate|Check the actual ship date/);
+    const masada = checkCard("shore-gyg-ashdod-masada", 130, "per_person");
+    expect(masada).not.toHaveTextContent("Reference price · per group");
   });
 
   it("prioritizes tours with verified ratings and prices, and keeps filtered cards in even pairs", async () => {
