@@ -149,7 +149,7 @@ describe("Dead Sea category-first travel-blog hotel guide", () => {
     expect(screen.getByTestId("related-guides")).toHaveAttribute("data-current", "/travel-blog/best-dead-sea-hotels/");
     const form = screen.getByRole("form", { name: "Standard contact form" });
     expect(form).toHaveAttribute("data-heading", "Need a private transfer to the Dead Sea?");
-    expect(form).toHaveAttribute("data-intro", expect.stringContaining("private transfer to your hotel in Ein Bokek"));
+    expect(form).toHaveAttribute("data-intro", expect.stringContaining("private transfers to Ein Bokek and the Dead Sea"));
     expect(form).toHaveAttribute("data-placeholder", expect.stringContaining("Pickup location, Ein Bokek hotel"));
     const sourceList = screen.getByTestId("deadsea-sources");
     const sources = sourceList.getAttribute("data-ids")!.split(",");

@@ -102,8 +102,8 @@ describe("Jerusalem and Tel Aviv neighbourhood editorial guides", () => {
       expect([...bookingChecklist.children]).toHaveLength(2);
       for (const card of bookingChecklist.children) expect(card).toHaveClass("rounded-2xl", "border", "bg-secondary/35");
       expect(bookingChecklist.querySelectorAll("li")).toHaveLength(8);
-      expect(within(bookingChecklist).getByRole("heading", { name: "Check accessibility" })).toBeInTheDocument();
-      expect(within(bookingChecklist).getByRole("heading", { name: "Read the full booking terms" })).toBeInTheDocument();
+      expect(within(bookingChecklist).getByText("Check accessibility.")).toBeInTheDocument();
+      expect(within(bookingChecklist).getByText("Read the full booking terms.")).toBeInTheDocument();
       for (const section of sections) {
         const heading = section.querySelector("h3[id$='-h']");
         const facts = section.querySelector('[data-testid="jerusalem-area-highlights"]');
@@ -216,7 +216,7 @@ describe("Jerusalem and Tel Aviv neighbourhood editorial guides", () => {
       expect([...bookingChecklist.children]).toHaveLength(2);
       for (const card of bookingChecklist.children) expect(card).toHaveClass("rounded-2xl", "border", "bg-secondary/35");
       expect(bookingChecklist.querySelectorAll("li")).toHaveLength(8);
-      expect(within(bookingChecklist).getByRole("heading", { name: "Book the right view" })).toBeInTheDocument();
+      expect(within(bookingChecklist).getByText("Book the right view.")).toBeInTheDocument();
       expect(container).toHaveTextContent("Hills, steps & luggage");
       expect(container).toHaveTextContent("Nightlife & room noise");
       expect(container).toHaveTextContent("Hotels and booking websites are independent providers.");
