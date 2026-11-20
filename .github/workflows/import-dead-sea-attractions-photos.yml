@@ -1,0 +1,55 @@
+name: Import three licensed Dead Sea attraction photographs
+on:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/import-dead-sea-attractions-photos.yml"
+permissions:
+  contents: write
+concurrency:
+  group: deadsea-photo-import
+  cancel-in-progress: false
+jobs:
+  import:
+    if: contains(github.event.head_commit.message, '[import-deadsea-attraction-photos]')
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+      - name: Retrieve photo binaries and verify Wikimedia licensing
+        run: node scripts/import-dead-sea-photos.mjs
+      - name: Convert to locally hosted optimized WebP
+        run: |
+          python -m pip install --disable-pip-version-check --quiet Pillow
+          python - <<'PY'
+          import os
+          from pathlib import Path
+          from PIL import Image,ImageOps
+          source=Path(os.environ["RUNNER_TEMP"])/"dead-sea-attractions"
+          target=Path("public/images/dead-sea-attractions")
+          for name in ["nahal-bokek","einot-tsukim","novomeysky"]:
+              with Image.open(source/(name+".jpg")) as im:
+                  img=ImageOps.exif_transpose(im).convert("RGB")
+                  if min(img.size)<500: raise ValueError("Image resolution too low: "+name)
+                  out=ImageOps.fit(img,(960,540),method=Image.Resampling.LANCZOS)
+                  out.save(target/(name+".webp"),format="WEBP",quality=79,method=6)
+              path=target/(name+".webp")
+              data=path.read_bytes()
+              if not (data[:4]==b"RIFF" and data[8:12]==b"WEBP" and 10000<len(data)<200000):
+                  raise ValueError("Unexpected encoded file: "+str(path))
+              print(str(path),len(data))
+          PY
+      - name: Commit licensed files and attribution data
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add src/data/deadSeaPhotoCredits.json public/images/dead-sea-attractions/{nahal-bokek,einot-tsukim,novomeysky}.webp
+          if git diff --cached --quiet; then echo "Photos already current"; exit 0; fi
+          git commit -m "Add three location-specific licensed Dead Sea images and credits"
+          git pull --rebase origin main
+          git push origin HEAD:main
