@@ -120,7 +120,7 @@ export function TelAvivHotelBrowser() {
   );
 }
 
-export function TelAvivHotelTile({ hotel, pageId = "stay-telaviv", showArea = true, stacked = false }: { hotel: HotelRecommendation; pageId?: string; showArea?: boolean; stacked?: boolean }) {
+export function TelAvivHotelTile({ hotel, pageId = "stay-telaviv", showArea = true, showNearbyArea = false, stacked = false }: { hotel: HotelRecommendation; pageId?: string; showArea?: boolean; showNearbyArea?: boolean; stacked?: boolean }) {
   const [photoFailed, setPhotoFailed] = useState(false);
   const area = telAvivAreaGuides.find((item) => item.id === hotel.areaId);
   if (!area) return null;
@@ -145,10 +145,10 @@ export function TelAvivHotelTile({ hotel, pageId = "stay-telaviv", showArea = tr
       </div>
       <div className={verticalLayout ? "flex min-w-0 flex-1 flex-col px-4 pb-3 pt-4" : "flex min-w-0 flex-col px-4 pb-3 pt-4"}>
         <h3 className="text-lg font-semibold leading-snug">{hotel.name}</h3>
-        {showArea && <Link to={area.path as LinkProps["to"]}
+        {(showArea || showNearbyArea) && <Link to={area.path as LinkProps["to"]}
               className="mt-1 inline-flex w-fit items-center gap-1 text-xs font-medium text-primary underline underline-offset-2 hover:text-primary/80 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
               aria-label={`Explore ${area.shortName} area guide`}>
-          {area.shortName} <ArrowRight className="h-3.5 w-3.5" aria-hidden />
+          {showNearbyArea ? `Nearby · ${area.shortName}` : area.shortName} <ArrowRight className="h-3.5 w-3.5" aria-hidden />
         </Link>}
         <p className="mt-2 line-clamp-2 text-sm leading-relaxed text-muted-foreground" data-testid="hotel-short-description">{copy.description}</p>
         <p className="mt-2 text-sm leading-snug" data-testid="hotel-best-for"><span className="font-semibold">Best for:</span> {copy.bestFor}</p>
