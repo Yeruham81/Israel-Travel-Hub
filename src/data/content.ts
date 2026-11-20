@@ -28,6 +28,7 @@ import tiberiasHeritagePhoto from "@/assets/tiberias/heritage.webp";
 import tiberiasCentralPhoto from "@/assets/tiberias/central.webp";
 import galileeSunrisePhoto from "@/assets/tiberias/sunrise.webp";
 import haifaPanoramaPhoto from "@/assets/haifa/panorama.webp";
+import haifaMidrangePhoto from "@/assets/travel-blog-hub/haifa-port-4f95fa071b-420.webp";
 import haifaBotanicaPhoto from "@/assets/haifa/botanica.webp";
 import haifaColonyPhoto from "@/assets/haifa/colony.webp";
 import haifaLeonardoPhoto from "@/assets/haifa/leonardo.webp";
@@ -961,6 +962,7 @@ export const haifaPhotos = {
   colony: { src: haifaColonyPhoto, alt: "Preserved stone facade and balconies of The Colony Hotel in Haifa", sourceUrl: "", label: "The Colony Hotel — German Colony exterior" },
   leonardo: { src: haifaLeonardoPhoto, alt: "Entrance of Leonardo Plaza Haifa beside the beachfront", sourceUrl: "", label: "Leonardo Plaza Haifa — entrance" },
   danCarmel: { src: haifaDanCarmelPhoto, alt: "Dan Carmel Haifa hotel building and balconies on Mount Carmel", sourceUrl: "", label: "Dan Carmel Haifa — hotel exterior" },
+  midrange: { src: haifaMidrangePhoto, alt: "Haifa port and lower-city waterfront", sourceUrl: "", label: "Haifa lower city and waterfront" },
   budget: { src: "/images/hotel-cards/haifa-port-inn.webp", alt: "Illustrative independent accommodation in downtown Haifa", sourceUrl: "", label: "Downtown Haifa independent stay" },
 } satisfies Record<string, StayGuidePhoto>;
 
@@ -993,7 +995,7 @@ export const haifaStayGuide: HotelStayDestination = {
     { id: "luxury", title: "Luxury hotels: German Colony or Carmel", intro: "Compare Botanica's contemporary design and age-restricted setting with Dan Carmel's larger hilltop hotel and family facilities. Choose between the neighborhood, the room's outlook and the leisure experience you want.", hotelIds: ["haifa-botanica", "haifa-dan-carmel"], photo: haifaPhotos.botanica },
     { id: "boutique", title: "Boutique hotels & historic character", intro: "The Schumacher combines a preserved building and newer wing with an adults-only policy; The Colony Hotel offers a heritage address on Ben Gurion Boulevard. The detailed boutique guide also includes Botanica as a larger design-led alternative.", hotelIds: ["haifa-schumacher", "haifa-colony"], photo: haifaPhotos.colony, guidePath: "/accommodation/haifa/boutique/", guideLabel: "Compare Haifa boutique hotels" },
     { id: "family", title: "Hotels for families with children", intro: "Compare a heated indoor pool on the Carmel with a beachfront hotel and children's facilities. The dedicated family guide also covers Dan Carmel, room occupancy and the activities that are actually available on your travel dates.", hotelIds: ["haifa-crowne-plaza", "haifa-leonardo-plaza"], photo: haifaPhotos.leonardo, guidePath: "/accommodation/haifa/family/", guideLabel: "Compare Haifa family hotels" },
-    { id: "mid-range", title: "Practical city hotels & mid-range comparisons", intro: "Golden Crown is a lower-city base near the German Colony; Nof is a Carmel address with bay views. Compare the final room offer and your daily transport rather than expecting the same experience from hotels in a similar price bracket.", hotelIds: ["haifa-golden-crown", "haifa-nof"], photo: haifaPhotos.panorama },
+    { id: "mid-range", title: "Practical city hotels & mid-range comparisons", intro: "Golden Crown is a lower-city base near the German Colony; Nof is a Carmel address with bay views. Compare the final room offer and your daily transport rather than expecting the same experience from hotels in a similar price bracket.", hotelIds: ["haifa-golden-crown", "haifa-nof"], photo: haifaPhotos.midrange },
     { id: "budget", title: "Budget-minded & independent stays", intro: "Port Inn is a downtown guesthouse comparison; Loui Talpiot adds a market-neighborhood location and room kitchenettes. Check the exact room and included services, with meals, bathrooms and arrival arrangements part of the decision.", hotelIds: ["haifa-port-inn", "haifa-loui-talpiot"], photo: haifaPhotos.budget },
   ],
   checklist: ["Match the hotel to the German Colony, Carmel, Hadar or beach part of your trip", "Check hills, steps and the actual luggage route from the arrival point", "Enter every guest's age and confirm the room's maximum occupancy", "Confirm seasonal pools, club dates, spa entry and any essential facility", "Compare meals, parking, taxes and local transport in the final total", "Read cancellation terms and confirm late or Shabbat arrival arrangements"],
