@@ -118,7 +118,7 @@ export function AttractionHighlight({
           <div className="mt-2 space-y-3 text-sm leading-relaxed sm:text-base">{children}</div>
           {note && <p className="mt-3 border-l-2 border-primary/40 pl-3 text-sm leading-relaxed text-muted-foreground">{note}</p>}
         </div>
-        {image && <AttractionContentImage src={image.src} alt={image.alt} position={image.position} />}
+        {image && <AttractionContentImage src={image.src} alt={image.alt} {...(image.position ? { position: image.position } : {})} />}
       </div>
     </article>
   );
