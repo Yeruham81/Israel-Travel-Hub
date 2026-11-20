@@ -1,6 +1,7 @@
+import { StayBookingChecklist } from "@/components/StayBookingChecklist";
 import { useState } from "react";
 import { Link, type LinkProps } from "@tanstack/react-router";
-import { ArrowRight, MapPin, Check, Compass } from "lucide-react";
+import { ArrowRight, MapPin, Compass } from "lucide-react";
 import { type CityStayGuide, type NeighborhoodStayGuide, type StayPreference, preferenceLabels } from "@/data/content";
 import { areaArrivalSignals } from "@/data/localEditorialInsights";
 import { INFO_CHECK_DATE, linksForPage, publicSources } from "@/data/registry";
@@ -122,10 +123,15 @@ export function CityStayHub({ g, areas }: { g: CityStayGuide; areas: Neighborhoo
 
         <Section id="checklist" title={`Before you choose your ${g.city} hotel`} className="scroll-mt-32">
           <p>Look beyond a neighborhood label. Check the actual walking route, street noise, vehicle access and arrival-day transport before comparing room rates.</p>
-          <div className="mt-5 grid gap-4 sm:grid-cols-2">
-            <Checklist title="Location & arrival" items={g.checklist.slice(0, 4)} />
-            <div className="rounded-xl border bg-card p-5"><h3 className="text-lg">Room & booking conditions</h3><ul className="mt-2 space-y-2 text-sm">{["Compare the final total, taxes and fees for your dates", "Read the cancellation deadline and payment conditions", "Confirm the exact room, beds and occupancy", "Check current access, parking and any street works"].map((tip) => <li key={tip} className="flex gap-2"><Check className="mt-0.5 h-4 w-4 shrink-0 text-primary" aria-hidden />{tip}</li>)}</ul></div>
-          </div>
+          <StayBookingChecklist groups={[
+            { title: "Location & arrival", items: g.checklist.slice(0, 4) },
+            { title: "Room & booking conditions", items: [
+              "Compare the final total, taxes and fees for your dates",
+              "Read the cancellation deadline and payment conditions",
+              "Confirm the exact room, beds and occupancy",
+              "Check current access, parking and any street works",
+            ] },
+          ]} />
         </Section>
         {g.id === "telaviv" || g.id === "jerusalem" ? (
           <>
