@@ -429,8 +429,8 @@ export function HotelStyleEditorialGuide({ guide }: { guide: HotelStayDestinatio
       <StayTripLinks region={guide.id} currentPath={info.path} presentation="guide" />
       <HomeContactForm guide={{
         ...guideContactCopy(info.title, "accommodation", guide.name),
-        heading: "Planning a Dead Sea Vacation?",
-        introduction: "Need a private transfer to your hotel in Ein Bokek? Send me your pickup location, date, number of passengers and luggage details, and I'll help arrange the journey.",
+        heading: "Need a private transfer to the Dead Sea?",
+        introduction: "I'm Moshe Barak. I arrange private transfers to Ein Bokek and the Dead Sea, as well as private day trips. Send me your pickup location, date, destination, passenger count and luggage details, and I'll reply personally.",
         placeholder: "Pickup location, Ein Bokek hotel, travel date, passengers and luggage…",
       }} />
       <SourceList ids={sourceIds} intro={sourceIntro} compact />
