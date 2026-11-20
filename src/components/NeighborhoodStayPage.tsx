@@ -1,15 +1,16 @@
 import { Link, type LinkProps } from "@tanstack/react-router";
-import { ArrowLeft, ArrowRight, Check, Lightbulb, MapPin } from "lucide-react";
+import { ArrowLeft, ArrowRight, Lightbulb, MapPin } from "lucide-react";
 import { cityStayGuides, neighborhoodGuidesForCity, type NeighborhoodStayGuide } from "@/data/content";
 import { areaDecisionNotes } from "@/data/localEditorialInsights";
 import { hotelsForArea, INFO_CHECK_DATE, linksForPage } from "@/data/registry";
-import { cityHotelPhoto } from "@/data/cityHotelCatalog";
+import { cityHotelPhoto, hotelsInCityCatalog } from "@/data/cityHotelCatalog";
 import { JerusalemHotelTile } from "@/components/JerusalemHotelBrowser";
 import { JerusalemNeighborhoodGuideCallout } from "@/components/JerusalemNeighborhoodGuideCallout";
 import { TelAvivNeighborhoodGuideCallout } from "@/components/TelAvivNeighborhoodGuideCallout";
 import { TelAvivHotelTile } from "@/components/TelAvivHotelBrowser";
 import { AreaMap, AreaPhotoCredit } from "@/components/AreaMap";
-import { GuideHeader, OnThisPage, Section, Checklist, FaqList, SourceList } from "@/components/Guide";
+import { GuideHeader, OnThisPage, Section, FaqList, SourceList } from "@/components/Guide";
+import { StayBookingChecklist } from "@/components/StayBookingChecklist";
 import { StayTripLinks } from "@/components/StayTripLinks";
 import { HomeContactForm } from "@/components/HomeContactForm";
 import { neighborhoodTripContactCopy } from "@/lib/guide-contact";
@@ -51,6 +52,18 @@ const highlightGuides: Record<string, Record<string, { to: string; label: string
   },
 };
 
+/** One nearby fifth selection per Tel Aviv neighborhood, using existing verified hotel records and property-specific Travelpayouts links. */
+const telAvivNearbyHotelIds: Record<string, string> = {
+  "telaviv-beachfront": "tlv-melody",
+  "telaviv-dizengoff": "tlv-embassy",
+  "telaviv-old-north": "tlv-carlton",
+  "telaviv-neve-tzedek": "tlv-rothschild22",
+  "telaviv-jaffa": "tlv-florentin-house",
+  "telaviv-florentin": "tlv-elkonin",
+  "telaviv-kerem": "tlv-royal-beach",
+  "telaviv-rothschild": "tlv-vera",
+};
+
 export function NeighborhoodStayPage({ area }: { area: NeighborhoodStayGuide }) {
   const city = cityStayGuides[area.cityId];
   const isJerusalem = area.cityId === "jerusalem";
@@ -90,7 +103,11 @@ export function NeighborhoodStayPage({ area }: { area: NeighborhoodStayGuide }) 
     "telaviv-rothschild": "The boulevard is long: your nearest junction, room orientation and hotel entrance deserve a close look.",
   };
   const localInsight = areaDecisionNotes[area.id];
-  const hotels = hotelsForArea(area.id, area.cityId);
+  const areaHotels = hotelsForArea(area.id, area.cityId);
+  const nearbyHotelId = !isJerusalem ? telAvivNearbyHotelIds[area.id] : undefined;
+  const nearbyHotel = nearbyHotelId ? hotelsInCityCatalog("telaviv").find((hotel) => hotel.id === nearbyHotelId) : undefined;
+  const hotels = nearbyHotel && !areaHotels.some((hotel) => hotel.id === nearbyHotel.id)
+    ? [...areaHotels, nearbyHotel] : areaHotels;
   const otherAreas = neighborhoodGuidesForCity(area.cityId).filter((other) => other.id !== area.id);
   const pageId = `stay-area-${area.id}`;
   const airportGuide = city.related.find((item) => item.label.startsWith("Ben Gurion Airport"));
@@ -105,8 +122,8 @@ export function NeighborhoodStayPage({ area }: { area: NeighborhoodStayGuide }) 
         <ul className="grid min-w-0 auto-rows-fr items-stretch gap-4 sm:grid-cols-2 xl:grid-cols-3" data-testid="neighborhood-hotel-grid">
           {hotels.map((hotel) => isJerusalem
             ? <JerusalemHotelTile key={hotel.id} hotel={hotel} pageId={pageId} showArea={false} stacked />
-            : <TelAvivHotelTile key={hotel.id} hotel={hotel} pageId={pageId} showArea={false} stacked />)}
-          <li className={isJerusalem ? "flex min-h-0 min-w-0 flex-col" : "flex min-h-0 min-w-0 flex-col sm:col-span-2 xl:col-span-2"} data-testid={isJerusalem ? "jerusalem-hotel-map" : "tel-aviv-hotel-map"}>
+            : <TelAvivHotelTile key={hotel.id} hotel={hotel} pageId={pageId} showArea={hotel.id === nearbyHotel?.id} stacked />)}
+          <li className="flex min-h-0 min-w-0 flex-col" data-testid={isJerusalem ? "jerusalem-hotel-map" : "tel-aviv-hotel-map"}>
             <AreaMap area={area} provider="google" compact stretch />
           </li>
         </ul>
@@ -180,34 +197,22 @@ export function NeighborhoodStayPage({ area }: { area: NeighborhoodStayGuide }) 
       <p className="mt-2 max-w-3xl leading-relaxed text-muted-foreground">
         {arrivalIntroductions[area.id]}
       </p>
-      <div className="mt-4 grid gap-4 sm:grid-cols-2">
-        {([
-          { title: "Location & arrival", items: isDowntown ? [
-            area.arrivalTips[0],
-            area.arrivalTips[1],
-            "Confirm check-in arrangements for your arrival day, especially on Shabbat",
-            "Check lift and step-free access if you need them",
-          ] : area.arrivalTips },
-          { title: "Room & booking conditions", items: isDowntown ? [
-            area.arrivalTips[2],
-            ...area.bookingTips,
-            "Review the total price, taxes and cancellation terms for your room",
-          ] : [
-            ...area.bookingTips,
-            "Review the final price, payment conditions and cancellation policy for your room",
-          ] },
-        ]).map((group) => <div key={group.title} className="rounded-2xl border bg-secondary/20 p-4 sm:p-5">
-          <h3 className="text-base font-semibold">{group.title}</h3>
-          <ul className="mt-3 space-y-3">
-            {group.items.map((tip) => <li key={tip} className="flex items-start gap-3">
-              <span className="mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-full border border-primary/20 bg-primary/10 text-primary">
-                <Check className="h-4 w-4" aria-hidden />
-              </span>
-              <span className="text-sm leading-relaxed text-muted-foreground">{tip}</span>
-            </li>)}
-          </ul>
-        </div>)}
-      </div>
+      <StayBookingChecklist groups={[
+        { title: "Location & arrival", items: isDowntown ? [
+          area.arrivalTips[0],
+          area.arrivalTips[1],
+          "Confirm check-in arrangements for your arrival day, especially on Shabbat",
+          "Check lift and step-free access if you need them",
+        ] : area.arrivalTips },
+        { title: "Room & booking conditions", items: isDowntown ? [
+          area.arrivalTips[2],
+          ...area.bookingTips,
+          "Review the total price, taxes and cancellation terms for your room",
+        ] : [
+          ...area.bookingTips,
+          "Review the final price, payment conditions and cancellation policy for your room",
+        ] },
+      ]} />
     </Section>
   );
 
@@ -238,7 +243,7 @@ export function NeighborhoodStayPage({ area }: { area: NeighborhoodStayGuide }) 
         <section id="other-areas" aria-labelledby="other-areas-h" className="mt-14 scroll-mt-32">
           <h2 id="other-areas-h" className="text-3xl">Explore Other Areas to Stay</h2>
           <p className="mt-2 text-muted-foreground">Compare a different side of {city.city} before you decide.</p>
-          <ul className={`mt-5 grid gap-4 sm:grid-cols-2 ${isJerusalem ? "lg:grid-cols-3" : "lg:grid-cols-4"}`}>{otherAreas.map((other) => <li key={other.id} className="min-w-0">
+          <ul className={`mt-5 grid gap-4 sm:grid-cols-2 lg:grid-cols-3`}>{otherAreas.map((other) => <li key={other.id} className="min-w-0">
             <Link to={other.path as LinkProps["to"]} className="group flex h-full flex-col overflow-hidden rounded-xl border bg-card hover:border-primary">
               <img src={isJerusalem ? (jerusalemStayCardPhotos[other.id]?.src ?? other.photo.src) : other.photo.src} alt={isJerusalem ? (jerusalemStayCardPhotos[other.id]?.alt ?? other.photo.alt) : other.photo.alt} width={600} height={375} loading="lazy" decoding="async" className="aspect-[16/10] w-full object-cover" />
               <span className="flex flex-1 items-center justify-between gap-3 p-4">
