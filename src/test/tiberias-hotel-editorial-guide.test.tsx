@@ -31,7 +31,7 @@ describe("Tiberias hotel editorial", () => {
     expect(screen.getByRole("heading", { level: 1, name: "The best hotels in Tiberias: where to stay" })).toBeInTheDocument();
     const categories = screen.getAllByTestId("tiberias-category-card");
     expect(categories).toHaveLength(4);
-    expect(screen.getByTestId("tiberias-category-grid")).toHaveClass("min-[360px]:grid-cols-2", "lg:grid-cols-4");
+    expect(screen.getByTestId("tiberias-category-grid")).toHaveClass("min-[360px]:grid-cols-2", "lg:grid-cols-3");
     expect(categories.map(card => card.getAttribute("href"))).toEqual(["#group-luxury", "#group-family", "#group-central", "#group-budget"]);
     expect(new Set(categories.map(card => card.querySelector("img")?.getAttribute("src"))).size).toBe(4);
     const groups = screen.getAllByTestId("tiberias-hotel-group");
