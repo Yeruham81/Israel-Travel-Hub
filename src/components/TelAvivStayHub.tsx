@@ -6,7 +6,8 @@ import {
 } from "@/data/content";
 import { areaArrivalSignals } from "@/data/localEditorialInsights";
 import { INFO_CHECK_DATE, linksForPage } from "@/data/registry";
-import { GuideHeader, OnThisPage, Checklist, FaqList, SourceList } from "@/components/Guide";
+import { GuideHeader, OnThisPage, FaqList, SourceList } from "@/components/Guide";
+import { StayBookingChecklist } from "@/components/StayBookingChecklist";
 import { TelAvivHotelBrowser } from "@/components/TelAvivHotelBrowser";
 import { StayTripLinks } from "@/components/StayTripLinks";
 import { HomeContactForm } from "@/components/HomeContactForm";
@@ -19,7 +20,7 @@ import telavivHeroPhoto from "@/assets/home/hero-refresh-tel-aviv-coastline-v2-m
 import telavivAreaGuidePhoto from "@/assets/home/hero-refresh-tel-aviv-sarona-v4-medium.webp";
 
 const pageSections = [
-  ["book", "Hotels"], ["area-guide", "Where to stay"], ["areas", "Neighborhoods"], ["compare", "Compare areas"],
+  ["book", "Hotels"], ["areas", "Neighborhoods"], ["compare", "Compare areas"], ["area-guide", "Where to stay"],
   ["checklist", "Booking tips"], ["faq", "FAQ"], ["explore", "Local guides"],
   ["trip-planning", "Trip planning"], ["contact", "Contact me"],
 ] as const;
@@ -81,27 +82,6 @@ export function TelAvivStayHub({ g, areas }: { g: CityStayGuide; areas: Neighbor
           </div>
         </div>
 
-        <section id="area-guide" aria-labelledby="area-guide-h" className="mt-8 scroll-mt-28">
-          <div className="grid overflow-hidden rounded-2xl border bg-secondary/30 sm:grid-cols-[minmax(0,1fr)_230px]">
-            <div className="min-w-0 p-5 sm:p-6">
-              <p className="eyebrow inline-flex items-center gap-2"><BookOpen className="h-4 w-4" aria-hidden /> Tel Aviv hotel neighborhoods</p>
-              <h2 id="area-guide-h" className="mt-2 text-xl font-semibold sm:text-2xl">
-                Not sure where to stay in Tel Aviv?
-              </h2>
-              <p className="mt-2 max-w-xl text-sm leading-relaxed text-muted-foreground">
-                My guide compares the central beaches and Dizengoff with Jaffa, Neve Tzedek, Florentin, Rothschild and quieter northern streets. Choose a location that fits your plans before selecting a room.
-              </p>
-              <Link
-                to={"/travel-blog/where-to-stay-in-tel-aviv/" as LinkProps["to"]}
-                className="mt-4 inline-flex min-h-11 items-center gap-2 rounded-lg border border-primary/30 bg-card px-4 py-2.5 text-sm font-semibold text-primary transition-colors hover:border-primary/60 hover:bg-secondary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
-              >
-                Explore my guide to Tel Aviv neighborhoods <ArrowRight className="h-4 w-4" aria-hidden />
-              </Link>
-            </div>
-            <img src={telavivAreaGuidePhoto} alt="Tel Aviv coastline and adjacent neighborhoods" width={460} height={300} loading="lazy" decoding="async" className="hidden h-full w-full object-cover sm:block" />
-          </div>
-        </section>
-
         <section id="areas" aria-labelledby="areas-h" className="mt-12 scroll-mt-28">
           <h2 id="areas-h" className="text-2xl font-semibold sm:text-3xl">Choose your Tel Aviv neighborhood</h2>
           <p className="mt-3 max-w-3xl leading-relaxed text-muted-foreground">
@@ -121,19 +101,19 @@ export function TelAvivStayHub({ g, areas }: { g: CityStayGuide; areas: Neighbor
             {visibleAreas.length} {visibleAreas.length === 1 ? "area" : "areas"}
             {preference ? " for " + preferenceLabels[preference].toLowerCase() : " to explore"}
           </p>
-          <ul className="mt-4 grid gap-4 lg:grid-cols-2">
+          <ul className="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {visibleAreas.map((area) => <li
               key={area.id} data-testid="neighborhood-card"
-              className="grid min-w-0 grid-cols-[110px_minmax(0,1fr)] overflow-hidden rounded-2xl border bg-card transition-colors hover:border-primary/50 sm:grid-cols-[155px_minmax(0,1fr)]"
+              className="flex h-full min-w-0 flex-col overflow-hidden rounded-2xl border bg-card transition-colors hover:border-primary/50"
             >
-              <Link to={area.path as LinkProps["to"]} tabIndex={-1} aria-hidden="true" className="block overflow-hidden bg-muted">
+              <Link to={area.path as LinkProps["to"]} tabIndex={-1} aria-hidden="true" className="block w-full overflow-hidden bg-muted">
                 <img
                   src={area.photo.src} alt={area.photo.alt}
                   width={755} height={503} loading="lazy" decoding="async"
-                  className="aspect-[16/10] h-full w-full object-cover"
+                  className="aspect-[16/10] w-full object-cover"
                 />
               </Link>
-              <div className="flex min-w-0 flex-col p-3.5 sm:p-4">
+              <div className="flex min-w-0 flex-1 flex-col p-3.5 sm:p-4">
                 <p className="text-xs font-medium text-muted-foreground">{area.bestFor}</p>
                 <h3 className="mt-1 text-base font-semibold leading-snug sm:text-lg">
                   <Link to={area.path as LinkProps["to"]} className="hover:text-primary">{area.name}</Link>
@@ -141,7 +121,7 @@ export function TelAvivStayHub({ g, areas }: { g: CityStayGuide; areas: Neighbor
                 <p className="mt-1.5 line-clamp-2 text-sm leading-relaxed text-muted-foreground">{area.summary}</p>
                 <Link
                   to={area.path as LinkProps["to"]}
-                  className="mt-3 inline-flex w-fit min-h-8 items-center gap-1 text-xs font-semibold text-primary underline underline-offset-4 sm:text-sm"
+                  className="mt-auto inline-flex w-fit min-h-8 items-center gap-1 pt-3 text-xs font-semibold text-primary underline underline-offset-4 sm:text-sm"
                   aria-label={"Explore " + area.name + ": area guide and hotel recommendations"}
                 >
                   {neighborhoodCta[area.id] || "Explore hotels in this area"} <ArrowRight className="h-4 w-4" aria-hidden />
@@ -154,9 +134,8 @@ export function TelAvivStayHub({ g, areas }: { g: CityStayGuide; areas: Neighbor
         <section id="compare" aria-labelledby="compare-h" className="mt-12 scroll-mt-28">
           <h2 id="compare-h" className="text-2xl font-semibold sm:text-3xl">Compare areas in Tel Aviv</h2>
           <p className="mt-2 text-sm text-muted-foreground">A quick guide to location and access before choosing a room.</p>
-          <details className="mt-4 overflow-hidden rounded-2xl border bg-card">
-            <summary className="cursor-pointer px-5 py-4 font-semibold text-primary">View neighborhood comparison</summary>
-            <div className="overflow-x-auto border-t" role="region" aria-label="Tel Aviv neighborhood comparison" tabIndex={0}>
+          <div className="mt-4 overflow-hidden rounded-2xl border bg-card">
+            <div className="overflow-x-auto" role="region" aria-label="Tel Aviv neighborhood comparison" tabIndex={0}>
               <table className="w-full min-w-[680px] text-left text-sm">
                 <caption className="sr-only">Tel Aviv neighborhoods, ideal guests, arrival considerations and tradeoffs</caption>
                 <thead className="bg-secondary">
@@ -176,7 +155,28 @@ export function TelAvivStayHub({ g, areas }: { g: CityStayGuide; areas: Neighbor
                 </tbody>
               </table>
             </div>
-          </details>
+          </div>
+        </section>
+
+        <section id="area-guide" aria-labelledby="area-guide-h" className="mt-8 scroll-mt-28">
+          <div className="grid overflow-hidden rounded-2xl border bg-secondary/30 sm:grid-cols-[minmax(0,1fr)_230px]">
+            <div className="min-w-0 p-5 sm:p-6">
+              <p className="eyebrow inline-flex items-center gap-2"><BookOpen className="h-4 w-4" aria-hidden /> Tel Aviv hotel neighborhoods</p>
+              <h2 id="area-guide-h" className="mt-2 text-xl font-semibold sm:text-2xl">
+                Not sure where to stay in Tel Aviv?
+              </h2>
+              <p className="mt-2 max-w-xl text-sm leading-relaxed text-muted-foreground">
+                My guide compares the central beaches and Dizengoff with Jaffa, Neve Tzedek, Florentin, Rothschild and quieter northern streets. Choose a location that fits your plans before selecting a room.
+              </p>
+              <Link
+                to={"/travel-blog/where-to-stay-in-tel-aviv/" as LinkProps["to"]}
+                className="mt-4 inline-flex min-h-11 items-center gap-2 rounded-lg border border-primary/30 bg-card px-4 py-2.5 text-sm font-semibold text-primary transition-colors hover:border-primary/60 hover:bg-secondary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+              >
+                Explore my guide to Tel Aviv neighborhoods <ArrowRight className="h-4 w-4" aria-hidden />
+              </Link>
+            </div>
+            <img src={telavivAreaGuidePhoto} alt="Tel Aviv urban streets and city neighborhoods" width={460} height={300} loading="lazy" decoding="async" className="hidden h-full w-full object-cover sm:block" />
+          </div>
         </section>
 
         <section id="checklist" aria-labelledby="checklist-h" className="mt-12 scroll-mt-28">
@@ -184,16 +184,15 @@ export function TelAvivStayHub({ g, areas }: { g: CityStayGuide; areas: Neighbor
           <p className="mt-2 max-w-3xl leading-relaxed text-muted-foreground">
             Compare the exact street, distance to the beach, arrival arrangements, final price and cancellation terms for your room.
           </p>
-          <div className="mt-4 grid gap-4 sm:grid-cols-2">
-            <Checklist title="Location & arrival" items={g.checklist.slice(0, 4)} />
-            <div className="rounded-xl border bg-card p-5">
-              <h3 className="font-serif text-lg">Room & booking conditions</h3>
-              <ul className="mt-2 space-y-2 text-sm">
-                {["Confirm bed setup and guest occupancy", "Check the total price, taxes and breakfast", "Review cancellation and payment terms", "Verify parking and step-free access where needed"].map((tip) =>
-                  <li key={tip} className="flex gap-2"><span className="text-primary" aria-hidden>✓</span>{tip}</li>)}
-              </ul>
-            </div>
-          </div>
+          <StayBookingChecklist groups={[
+            { title: "Location & arrival", items: g.checklist.slice(0, 4) },
+            { title: "Room & booking conditions", items: [
+              "Confirm bed setup and guest occupancy",
+              "Check the total price, taxes and breakfast",
+              "Review cancellation and payment terms",
+              "Verify parking and step-free access where needed",
+            ] },
+          ]} />
         </section>
 
         <FaqList faqs={g.faqs} compact />
