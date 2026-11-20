@@ -46,7 +46,7 @@
             places.some(point => typeof point.id !== "string" || !/^[a-z0-9-]{2,32}$/.test(point.id) ||
               typeof point.name !== "string" || point.name.length > 90 ||
               typeof point.label !== "string" || point.label.length > 24 ||
-              typeof point.query !== "string" || point.query.length > 140 || !point.query.endsWith("Israel") ||
+              typeof point.query !== "string" || point.query.length > 140 || !(point.query.endsWith("Israel") || /^31\.\d{3,},35\.\d{3,}$/.test(point.query)) ||
               !Number.isFinite(point.lat) || point.lat < 29.4 || point.lat > 33.4 ||
               !Number.isFinite(point.lon) || point.lon < 34.4 || point.lon > 35.9) ||
             new Set(places.map(point => point.id)).size !== 8) throw new Error("Invalid Dead Sea map data");
@@ -80,7 +80,7 @@
         if (!ready) { requestedId = id; return; }
         selectedId = id;
         highlight();
-        map.flyTo({center:[place.lon,place.lat],zoom:11.7,essential:true});
+        map.flyTo({center:[place.lon,place.lat],zoom:(id==="nahal-bokek" || id==="ein-bokek-beach") ? 15.5 : 12.4,essential:true});
         if (popup) popup.remove();
         const panel = document.createElement("div");
         const title = document.createElement("strong");
@@ -133,7 +133,7 @@
           }));
           map.addSource("places",{
             type:"geojson",data:{type:"FeatureCollection",features},
-            cluster:true,clusterRadius:50,clusterMaxZoom:15
+            cluster:true,clusterRadius:45,clusterMaxZoom:15
           });
           map.addLayer({
             id:"place-clusters",type:"circle",source:"places",
@@ -166,7 +166,7 @@
             try {
               const source=map.getSource("places");
               const zoom=await source.getClusterExpansionZoom(Number(feature.properties.cluster_id));
-              map.easeTo({center:feature.geometry.coordinates,zoom:Math.min(zoom+0.4,12.5),duration:450});
+              map.easeTo({center:feature.geometry.coordinates,zoom:Math.min(zoom+0.4,16.2),duration:450});
             } catch { map.zoomIn(); }
           });
           const selectPoint=event=>{

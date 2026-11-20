@@ -1,23 +1,9 @@
 import type { Attraction } from "@/data/attractionGuideTypes";
-import deadSea from "@/assets/dead-sea/landscape.webp";
+import { deadSeaEditorialOverview } from "@/data/deadSeaAttractionsGuide";
 import { einGediCardPhoto } from "@/data/einGediCardPhoto";
 import ramonCrater from "@/assets/guides/mitzpe-ramon-crater.jpg";
 export const desertAttractions: Record<string, Attraction> = {
-"dead-sea-attractions": {
- title:"Dead Sea Attractions: Best Things to Do",description:"Discover ten Dead Sea attractions, from Ein Bokek and Masada to Ein Gedi, Qumran, desert trails and heritage sites, with maps and practical trip tips.",region:"Dead Sea & Negev",image:{src:deadSea,alt:"Dead Sea mountains and shoreline"},duration:"One day to several days",
- intro:"The Dead Sea region is more than a place to float. Desert ruins, mineral-rich shores, reserves and wide open viewpoints reward visitors who know how far apart the stops are. The resort strip of Ein Bokek is different from the northern Dead Sea and Ein Gedi.",
- takeaway:"Choose two or three compatible activities rather than every attraction. Masada and a designated swimming beach are a popular pairing; Ein Gedi requires separate trail planning and current access checks.",
- highlights:[
- {name:"Designated Dead Sea swimming beaches",description:"Ein Bokek's managed beach zone offers facilities near major hotels. Conditions and seasonal access differ around the lake.",tip:"Use only designated swimming areas; never enter muddy or unregulated shoreline with sinkhole risks."},
- {name:"Masada National Park",description:"An ancient fortress above the Dead Sea, reached by cable car or permitted hiking trails.",tip:"Check the entrance side, heat alerts and official reservations before departure."},
- {name:"Ein Gedi Nature Reserve",description:"Desert springs, vegetation and canyons contrast sharply with the lake basin.",tip:"Rockfall and flood damage have affected access; verify the specific open route rather than assuming full access."},
- {name:"Qumran and desert archaeology",description:"The area around Qumran is associated with the Dead Sea Scrolls and desert archaeological sites.",tip:"Admission and route availability vary; check the parks authority."},
- {name:"Lookouts and other stops",description:"Roadside views, visitor centres and nearby desert towns can round out a longer stay.",tip:"Do not stop on highway shoulders or enter unsigned desert tracks."}],
- arrival:["Road travel from Jerusalem or Ben Gurion Airport generally requires a car, driver or a careful bus connection.","Public buses can serve specific resort stops, but services are limited and often unavailable during Shabbat.","The north and south shores are not interchangeable: check the exact beach or hotel address."],
- planning:["Dead Sea water is extremely salty: avoid eyes and wounds; rinse at provided showers.","Drink water, use shade and avoid midday desert hikes.","Watch weather and flash-flood alerts, especially around wadis.","Check the official site for trails and admission before assuming a location is open."],
- faqs:[{q:"Is the Dead Sea safe for swimming anywhere?",a:"No. Use designated supervised facilities; unstable shorelines and sinkholes make informal access hazardous."},{q:"Can I combine Masada and Ein Gedi?",a:"Sometimes, but check actual Ein Gedi trail access and allow realistic time for both."},{q:"Does Ein Bokek require a ticket?",a:"Public beach access is generally available; paid spa, hotel and excursion facilities are separate."}],
- official:[{label:"Israel Nature and Parks Authority",url:"https://en.parks.org.il/"}],
-},
+"dead-sea-attractions": deadSeaEditorialOverview,
 "mitzpe-ramon-crater": {
  title:"Mitzpe Ramon & Ramon Crater: viewpoints and desert nature",description:"Visit the Makhtesh Ramon crater, Mitzpe Ramon viewpoints, visitor centre, desert trails and stargazing, with weather and access tips.",region:"Dead Sea & Negev",image:{src:ramonCrater,alt:"Layered desert cliffs and the landscape of Ramon Crater"},duration:"Half day to two days",
  intro:"Makhtesh Ramon is a huge erosion landform carved through the Negev Highlands, not a volcanic or meteor-impact crater. The town of Mitzpe Ramon stands on its rim and makes a comfortable starting point for scenery, geology and desert experiences.",

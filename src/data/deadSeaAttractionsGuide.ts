@@ -1,10 +1,12 @@
 import type { LinkProps } from "@tanstack/react-router";
+import type { Attraction } from "@/data/attractionGuideTypes";
+import deadSeaOverviewPhoto from "@/assets/dead-sea/landscape.webp";
+import jeep from "@/assets/negev/ramon-jeep.webp";
 import beach from "@/assets/dead-sea/beach.webp";
 import masada from "@/assets/guides/dead-sea-excursions/masada-aerial.webp";
 import einGedi from "@/assets/guides/dead-sea-excursions/ein-gedi-waterfall.webp";
 import qumran from "@/assets/guides/dead-sea-excursions/qumran-caves.webp";
 import mud from "@/assets/guides/dead-sea-excursions/dead-sea-mud-bathing.webp";
-import desert from "@/assets/guides/dead-sea-excursions/private-masada-dead-sea.webp";
 
 export type DeadSeaStop = {
   id: string; title: string; shortTitle: string; area: string; kind: string;
@@ -26,7 +28,7 @@ export const deadSeaStops: DeadSeaStop[] = [
     "kind": "Saltwater & relaxation",
     "bestFor": "First-time visitors, swimming facilities & families",
     "allow": "2–3 hours",
-    "access": "Free public beach; use supervised bathing areas",
+    "access": "Free public beach; supervised bathing areas only",
     "description": "The best place to begin a Dead Sea visit is often Ein Bokek's maintained public beachfront. Floating in its highly saline water, then relaxing along the promenade, makes an easy introduction even if you have no plans to visit a hotel spa.",
     "practical": "Public showers, shade and visitor facilities are available in the central beach area. Enter the water slowly, keep your face and eyes clear, avoid swallowing the water, and rinse thoroughly afterwards. Follow lifeguard instructions; do not enter the sea outside permitted bathing zones.",
     "gettingThere": "Navigate to Ein Bokek Central Beach, not simply 'Dead Sea'. The public beach is beside the hotel strip; check parking conditions and the last transport connection.",
@@ -93,18 +95,18 @@ export const deadSeaStops: DeadSeaStop[] = [
     "area": "Central Dead Sea",
     "kind": "Nature reserve & oasis",
     "bestFor": "Desert vegetation, wildlife & walking",
-    "allow": "1–3 hours depending on the open route",
-    "access": "Paid reserve; separate entrance arrangements for trails",
+    "allow": "Varies by currently open trail; some walks take around 3 hours",
+    "access": "Paid reserve; entry and reservations vary by trail",
     "description": "Ein Gedi is an oasis of springs, vegetation and wildlife beside the desert escarpment. Its stream valleys and resident ibex make a striking contrast with the bare slopes around the Dead Sea.",
-    "practical": "Flood and rockfall damage have restricted access to parts of Nahal David and Nahal Arugot. Available trails, last-entry times and reservation requirements can change. The antiquities site is separate; check the specific entrance you intend to visit rather than assuming the former full trail network is open.",
-    "gettingThere": "The reserve lies along Route 90, north of Masada and Ein Bokek. Navigate to the reserve entrance you have confirmed, not to Ein Gedi Kibbutz or a hotel.",
-    "tip": "I would check the official same-day opening notice first and choose the trail that suits your group's mobility and the heat.",
+    "practical": "Flood and rockfall damage have restricted or changed access to Nahal David and Nahal Arugot. Some available routes are strenuous and require early entry or advance registration, while the archaeological site has separate arrangements. Check the exact trail status, entry window, and reservations for your date on the park's official site. Do not assume the former waterfall circuit is open.",
+    "gettingThere": "Ein Gedi sits on Route 90, north of Masada and Ein Bokek. Follow directions to the specific park entrance listed on your booking, not to Ein Gedi Kibbutz or the hotel.",
+    "tip": "I would choose the route only after checking the official trail update and whether the walking time, heat exposure and difficulty match your group.",
     "image": {
       "src": einGedi,
       "alt": "Natural waterfall and greenery in the Ein Gedi oasis near the Dead Sea"
     },
     "official": {
-      "label": "Ein Gedi Nature Reserve — current trail updates",
+      "label": "Ein Gedi Nature Reserve — routes and reservation information",
       "href": "https://en.parks.org.il/reserve-park/en-gedi-nature-reserve/"
     },
     "guide": {
@@ -168,7 +170,11 @@ export const deadSeaStops: DeadSeaStop[] = [
         "label": "Nahal Bokek trailhead",
         "query": "Nahal Bokek trailhead Sonol Ein Bokek, Israel"
       }
-    ]
+    ],
+    "image": {
+      "src": "/images/dead-sea-attractions/nahal-bokek.webp",
+      "alt": "The flowing Nahal Bokek spring and stream among desert vegetation near Ein Bokek"
+    }
   },
   {
     "id": "einot-tsukim",
@@ -192,7 +198,11 @@ export const deadSeaStops: DeadSeaStop[] = [
         "label": "Einot Tsukim Nature Reserve",
         "query": "Enot Tsukim Nature Reserve Ein Feshkha, Israel"
       }
-    ]
+    ],
+    "image": {
+      "src": "/images/dead-sea-attractions/einot-tsukim.webp",
+      "alt": "Freshwater spring pool surrounded by vegetation in Einot Tsukim Nature Reserve"
+    }
   },
   {
     "id": "mount-sodom",
@@ -205,7 +215,7 @@ export const deadSeaStops: DeadSeaStop[] = [
     "access": "Public viewpoints or guided routes; site-specific rules",
     "description": "Mount Sodom is a remarkable ridge of salt rock at the southern end of the Dead Sea. The folds, cliffs and pale desert landscape make it an appealing stop for travellers interested in geology and dramatic scenery.",
     "practical": "Not every salt-cave or ridge route is open for independent visits. Caves, technical descents and challenging off-road tracks require appropriate access, equipment and qualified guiding. Do not improvise a route into unstable salt formations.",
-    "gettingThere": "The mountain is south of the Ein Bokek hotel area, near the Sodom basin. Use a verified trailhead or meeting point from your guide rather than a broad 'Mount Sodom' map pin.",
+    "gettingThere": "Mount Sodom has several distinct trailheads and viewpoints. The signed hiking approaches are not the same as the mapped lookout; consult the Israel Nature and Parks Authority route directions before choosing where to park.",
     "tip": "I would choose a short marked viewpoint or book a specialist guide if exploring the caves is your priority.",
     "image": {
       "src": "/images/dead-sea-attractions/mount-sodom.webp",
@@ -217,8 +227,12 @@ export const deadSeaStops: DeadSeaStop[] = [
     },
     "mapLinks": [
       {
-        "label": "Mount Sodom area",
-        "query": "Mount Sodom, Dead Sea, Israel"
+        "label": "Mount Sedom Lookout — geographical pin",
+        "query": "31.08550,35.38864"
+      },
+      {
+        "label": "Mount Sodom trail information",
+        "query": "Mount Sodom Fish Trail Israel"
       }
     ]
   },
@@ -261,39 +275,43 @@ export const deadSeaStops: DeadSeaStop[] = [
     "area": "Southern Dead Sea",
     "kind": "Local history & heritage",
     "bestFor": "An indoor-friendly cultural stop",
-    "allow": "About 1½–2 hours including arrival",
+    "allow": "About 1½ hours for the tour; arrive 15 minutes early",
     "access": "Guided admission by advance booking",
     "description": "The restored historic potash-workers' camp at Sdom tells the story of early Dead Sea industry and the people who worked here. It adds a human and industrial-history perspective to a region better known for beaches and desert ruins.",
-    "practical": "Visits take place as scheduled guided sessions. Check the booking calendar and chosen language rather than relying on general opening hours; the centre's published hours differ between information pages. Reserve in advance and allow time to arrive before your tour.",
+    "practical": "Admission is by a pre-booked guided tour. Choose your date and time in the official Hebrew booking calendar, and arrive about 15 minutes early. The operator's public pages show differing opening hours, so rely on the available booking times for your visit rather than a generic timetable.",
     "gettingThere": "The centre is in the southern Dead Sea near Sdom, a separate drive from Ein Bokek. Navigate to the visitor centre itself rather than to industrial facilities.",
-    "tip": "I'd book an available tour first, then build the rest of the southern Dead Sea day around its start time.",
+    "tip": "I'd choose an available guided time on the official website first, arrive 15 minutes early, and then plan the other southern Dead Sea stops around it.",
     "official": {
-      "label": "Moshe Novomeysky Visitor Center — official booking",
-      "href": "https://www.deadseanovo.co.il/"
+      "label": "Official visitor information and booking (Hebrew)",
+      "href": "https://www.deadseanovo.co.il/%D7%94%D7%97%D7%95%D7%95%D7%99%D7%94-%D7%91%D7%9E%D7%A8%D7%9B%D7%96/%D7%97%D7%A9%D7%95%D7%91-%D7%9C%D7%93%D7%A2%D7%AA/"
     },
     "mapLinks": [
       {
         "label": "Moshe Novomeysky Visitor Center",
         "query": "Moshe Novomeysky Visitor Center Sdom Israel"
       }
-    ]
+    ],
+    "image": {
+      "src": "/images/dead-sea-attractions/novomeysky.webp",
+      "alt": "Preserved buildings at the Moshe Novomeysky visitor centre in the Sdom workers camp"
+    }
   },
   {
     "id": "desert-adventures",
-    "title": "Try a guided desert experience after dark",
+    "title": "Guided Desert Adventures & Stargazing",
     "shortTitle": "Desert adventures",
     "area": "Judean Desert & southern Dead Sea",
     "kind": "Guided adventures & stargazing",
     "bestFor": "Jeep trips, desert scenery & night skies",
     "allow": "A few hours or an evening",
     "access": "Operator-dependent; guided activities require booking",
-    "description": "An organised desert jeep outing, guided canyon activity or evening stargazing session can provide a completely different perspective on the Dead Sea region. The best experience depends on the specific route, season and operator.",
-    "practical": "Rappelling, cave visits and remote canyon travel require qualified operators and suitable equipment. Verify the meeting point, activity level, insurance and weather cancellation policy. Night-sky visibility depends on clouds, moonlight and nearby lighting; stars are not guaranteed.",
+    "description": "Choose a daylight guided jeep outing or specialist canyon adventure for dramatic desert terrain, or book a separate evening stargazing experience when the sky is clear. These are different types of activity: select one that fits your interests, group and schedule.",
+    "practical": "Daytime jeep drives and canyon trips need a qualified operator and route-specific instructions. Rappelling and cave visits require suitable equipment and careful supervision. For night stargazing, ask about moonlight, cloud cover, transport and warm clothing; a star-filled sky is never guaranteed.",
     "gettingThere": "Operators may depart from Ein Bokek, Neve Zohar or other meeting points. Confirm the exact pickup and return transport before booking.",
-    "tip": "For a short trip, I prefer one well-organised experience to several loosely connected stops. Bring a warm layer for the evening.",
+    "tip": "I'd book an organised daylight jeep outing for scenery, or choose an evening stargazing tour for a quieter experience, rather than trying to combine unrelated activities.",
     "image": {
-      "src": desert,
-      "alt": "Guided road journey through the desert scenery near the Dead Sea"
+      "src": jeep,
+      "alt": "Four-wheel-drive jeep excursion on rugged desert terrain in southern Israel"
     },
     "official": {
       "label": "Regional desert tours and activities",
@@ -327,11 +345,11 @@ export const deadSeaMapPoints = [
   },
   {
     "id": "einot-tsukim",
-    "name": "Einot Tsukim Reserve",
+    "name": "Einot Tsukim Nature Reserve",
     "label": "Tsukim",
-    "lat": 31.714,
-    "lon": 35.45,
-    "query": "Enot Tsukim Nature Reserve, Israel"
+    "lat": 31.747,
+    "lon": 35.445,
+    "query": "Einot Tsukim Nature Reserve, Israel"
   },
   {
     "id": "ein-gedi",
@@ -353,8 +371,8 @@ export const deadSeaMapPoints = [
     "id": "ein-bokek-beach",
     "name": "Ein Bokek Beach",
     "label": "Beach",
-    "lat": 31.198,
-    "lon": 35.365,
+    "lat": 31.20017,
+    "lon": 35.36382,
     "query": "Ein Bokek Central Beach, Israel"
   },
   {
@@ -367,19 +385,19 @@ export const deadSeaMapPoints = [
   },
   {
     "id": "mount-sodom",
-    "name": "Mount Sodom Area",
-    "label": "Sodom",
-    "lat": 31.063,
-    "lon": 35.363,
-    "query": "Mount Sodom, Israel"
+    "name": "Mount Sedom Lookout",
+    "label": "Lookout",
+    "lat": 31.0855,
+    "lon": 35.38864,
+    "query": "31.08550,35.38864"
   },
   {
     "id": "novomeysky",
-    "name": "Sdom Heritage Center",
-    "label": "Museum",
-    "lat": 31.035,
-    "lon": 35.36,
-    "query": "Moshe Novomeysky Visitor Center, Israel"
+    "name": "Moshe Novomeysky Visitor Center",
+    "label": "Heritage",
+    "lat": 31.07037,
+    "lon": 35.39731,
+    "query": "Moshe Novomeysky Visitor Center Sdom, Israel"
   }
 ] as const;
 
@@ -392,7 +410,9 @@ export const deadSeaRouteIdeas = [
       "masada",
       "ein-bokek-beach"
     ],
-    "tip": "I would keep the programme to these two main stops and allow plenty of time for road travel, parking and showers."
+    "tip": "I would keep the programme to these two main stops and allow plenty of time for road travel, parking and showers.",
+    "timeBudget": "Allow a full day, usually around 8–10 hours including travel from Jerusalem.",
+    "travel": "Best by car, private driver or an organised tour; check the Masada east-entrance access and afternoon beach facilities."
   },
   {
     "title": "An easy day based in Ein Bokek",
@@ -403,7 +423,9 @@ export const deadSeaRouteIdeas = [
       "nahal-bokek",
       "mud-spa"
     ],
-    "tip": "Choose between the walk and a longer spa session rather than trying to squeeze everything into a hot afternoon."
+    "tip": "Choose between the walk and a longer spa session rather than trying to squeeze everything into a hot afternoon.",
+    "timeBudget": "Allow roughly 5–7 hours around Ein Bokek, depending on hiking and spa time.",
+    "travel": "Stay locally or drive between the hotel area and the designated canyon parking; avoid midday hiking in hot weather."
   },
   {
     "title": "Two days from north to south",
@@ -415,7 +437,9 @@ export const deadSeaRouteIdeas = [
       "masada",
       "ein-bokek-beach"
     ],
-    "tip": "Plan an overnight base before assigning times. Keep Ein Gedi as an alternative only after confirming the trail you want is open."
+    "tip": "Plan an overnight base before assigning times. Keep Ein Gedi as an alternative only after confirming the trail you want is open.",
+    "timeBudget": "Allow two sightseeing days and an overnight stay for a comfortable north-to-south plan.",
+    "travel": "A car, confirmed driver or pre-arranged tour is considerably more flexible than attempting multiple nature reserves by bus."
   }
 ] as const;
 
@@ -445,3 +469,24 @@ export const deadSeaFaqs = [
     "a": "Some bus services reach Ein Bokek and other stops, but timetables, Sabbath service and access to individual trailheads vary. A focused beach visit is simpler by public transport than a multi-stop day. Compare buses, a guided tour or a private driver for your actual route."
   }
 ];
+
+/** Shared editorial metadata for the regional overview and its structured data. */
+export const deadSeaAttractionsUpdatedAt = "2026-11-20";
+export const deadSeaEditorialOverview: Attraction = {
+  title: "Dead Sea Attractions: Best Things to Do",
+  description: "Discover ten Dead Sea attractions from Ein Bokek to Masada, Ein Gedi, Qumran, southern heritage sites and desert trails, with map links and realistic routes.",
+  region: "Dead Sea & Negev",
+  image: { src: deadSeaOverviewPhoto, alt: "Desert mountains and the Dead Sea shoreline" },
+  duration: "One full day to several days",
+  intro: "Explore ten different attractions in the Dead Sea region, from safe public bathing and historic Masada to freshwater oases, nature walks and heritage sites.",
+  takeaway: "For a first visit, choose two or three compatible stops rather than attempting the whole shoreline in a single day.",
+  highlights: deadSeaStops.map(stop => ({ name: stop.title, description: stop.description, tip: stop.tip })),
+  arrival: deadSeaStops.map(stop => stop.gettingThere),
+  planning: [
+    "Use designated supervised bathing facilities and avoid unstable shoreline with sinkholes.",
+    "Check heat, flash floods, opening hours and trail reservations before leaving.",
+    "Allow extra driving time between the northern and southern parts of the region.",
+  ],
+  faqs: deadSeaFaqs,
+  official: deadSeaStops.flatMap(stop => stop.official ? [{ label: stop.official.label, url: stop.official.href }] : []),
+};

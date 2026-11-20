@@ -3,7 +3,7 @@ import { useEffect, useRef, useState, type ReactNode } from "react";
 import {
   ArrowUpRight, ExternalLink, MapPin, Waves, Landmark, Leaf, ScrollText,
   Footprints, Trees, Mountain, Sparkles, Building2, Moon, Clock3,
-  Lightbulb, CalendarDays, CarFront, ShieldCheck, BedDouble, ChevronRight,
+  Lightbulb, CalendarDays, CarFront, ShieldCheck, BedDouble, ChevronRight, Star,
 } from "lucide-react";
 import { Breadcrumbs, FaqList, OnThisPage } from "@/components/Guide";
 import { AuthorCard } from "@/components/AuthorCard";
@@ -13,7 +13,7 @@ import { SourcesDisclosure } from "@/components/SourcesDisclosure";
 import { HomeContactForm } from "@/components/HomeContactForm";
 import {
   deadSeaStops as stops, deadSeaMapPoints, deadSeaRouteIdeas,
-  deadSeaFaqs, type DeadSeaStop,
+  deadSeaFaqs, deadSeaAttractionsUpdatedAt, type DeadSeaStop,
 } from "@/data/deadSeaAttractionsGuide";
 
 import heroPhoto from "@/assets/dead-sea/landscape.webp";
@@ -29,14 +29,36 @@ import sevenDays from "@/assets/home/hero-galilee-sm.webp";
 import tenDays from "@/assets/home/hero-eilat-mountains-sm.webp";
 import trainPhoto from "@/assets/airport-journeys/ben-gurion-rail-platform.webp";
 import seasonPhoto from "@/assets/guides/2026-10/best-time-to-visit-israel.webp";
+import beachMudTourPhoto from "@/assets/guides/dead-sea-excursions/dead-sea-mud-bathing.webp";
+import masadaTourPhoto from "@/assets/guides/dead-sea-excursions/masada-palace.webp";
+import sunriseTourPhoto from "@/assets/guides/dead-sea-excursions/masada-snake-path.webp";
+import { deadSeaTourCards } from "@/data/deadSeaTourOffers";
+import { affiliateConfig } from "@/data/registry";
+import { relFor, recordOutboundClick } from "@/lib/outbound";
+import deadSeaPhotoCredits from "@/data/deadSeaPhotoCredits.json";
 
-const updatedAt = "2026-11-20";
+const updatedAt = deadSeaAttractionsUpdatedAt;
+const curatedTourIds = ["jslm-deadsea-beach-viator","jslm-deadsea-masada-viator","jslm-deadsea-sunrise-gyg"] as const;
+const curatedTours = curatedTourIds.map(id=>deadSeaTourCards.find(tour=>tour.id===id)).filter((tour):tour is (typeof deadSeaTourCards)[number]=>Boolean(tour));
+const curatedTourImages: Record<string,{src:string;alt:string}> = {
+  "jslm-deadsea-beach-viator":{src:beachMudTourPhoto,alt:"Dead Sea mud bathing experience beside the mineral-rich water"},
+  "jslm-deadsea-masada-viator":{src:masadaTourPhoto,alt:"Ruins of Herod’s palace at Masada"},
+  "jslm-deadsea-sunrise-gyg":{src:sunriseTourPhoto,alt:"Snake Path winding up the slopes of Masada"},
+};
+function trackedDeadSeaTourUrl(id:string){
+  const base=affiliateConfig[id]?.trackingUrl;
+  if(!base)return null;
+  const url=new URL(base);
+  if(!["viator.tpm.li","getyourguide.tpm.li"].includes(url.hostname))return null;
+  url.searchParams.set("sub_id","deadsea_attractions_"+id.replace("jslm-deadsea-",""));
+  return url.toString();
+}
 const icons = [Waves, Landmark, Leaf, ScrollText, Footprints, Trees, Mountain, Sparkles, Building2, Moon];
 const linkClass = "inline-flex items-center gap-1.5 text-sm font-semibold text-primary underline-offset-4 hover:underline focus-visible:outline-2 focus-visible:outline-primary";
 const sections = [
   ["choose", "Choose an experience"], ["compare", "Compare all ten"],
   ["experiences", "Ten Dead Sea experiences"], ["area-map", "Area map"],
-  ["routes", "Suggested routes"], ["practical", "Practical tips"],
+  ["routes", "Suggested routes"], ["practical", "Practical tips"], ["tour-options","Tours"],
   ["faq", "FAQ"], ["explore-more", "Explore further"], ["plan-trip", "Plan your trip"],
   ["contact", "Contact me"],
 ] as const;
@@ -167,14 +189,14 @@ export function DeadSeaAttractionsGuide() {
 
       <section id="choose" aria-labelledby="choose-h" className="mt-10 scroll-mt-24">
         <Heading id="choose" title="Choose what to see and do" intro="Ten different ways to enjoy the Dead Sea region. Choose what interests you, then follow the card to the detailed visitor tips."/>
-        <div className="grid grid-cols-2 gap-3 md:grid-cols-3 lg:grid-cols-5" data-testid="deadsea-quick-picks">
+        <div className="grid grid-cols-2 gap-2.5 sm:gap-3 md:grid-cols-3 lg:grid-cols-5" data-testid="deadsea-quick-picks">
           {stops.map((stop,index)=>{
             const Icon=icons[index]!;
-            return <a key={stop.id} href={"#"+stop.id} className="group flex min-w-0 flex-col rounded-xl border bg-card p-3 transition-colors hover:border-primary/50 hover:bg-secondary/20 focus-visible:outline-2 focus-visible:outline-primary sm:p-4">
+            return <a key={stop.id} href={"#"+stop.id} className="group flex min-w-0 flex-col rounded-xl border bg-card p-2.5 transition-colors hover:border-primary/50 hover:bg-secondary/20 focus-visible:outline-2 focus-visible:outline-primary sm:p-3">
               <div className="flex items-center justify-between gap-2"><Icon aria-hidden className="h-5 w-5 shrink-0 text-primary"/><span className="text-xs font-bold tabular-nums text-muted-foreground">{String(index+1).padStart(2,"0")}</span></div>
-              <strong className="mt-3 text-sm leading-snug">{stop.shortTitle}</strong>
-              <span className="mt-2 text-xs leading-relaxed text-muted-foreground">{stop.area}</span>
-              <span className="mt-auto inline-flex items-center gap-1 pt-3 text-xs font-semibold text-primary">Read my tips <ArrowUpRight aria-hidden className="h-3.5 w-3.5"/></span>
+              <strong className="mt-2 text-sm leading-snug">{stop.shortTitle}</strong>
+              <span className="mt-1 hidden text-xs leading-relaxed text-muted-foreground sm:block">{stop.area}</span>
+              <span className="mt-auto inline-flex items-center gap-1 pt-2 text-xs font-semibold text-primary">Read tips <ArrowUpRight aria-hidden className="h-3.5 w-3.5"/></span>
             </a>;
           })}
         </div>
@@ -184,17 +206,17 @@ export function DeadSeaAttractionsGuide() {
         <Heading id="compare" title="Compare all ten Dead Sea experiences" intro="Use this overview to match your interests, access requirements and available time. The suggested durations exclude travel between stops."/>
         <div className="overflow-hidden rounded-xl border bg-card">
           <table className="hidden w-full table-fixed border-collapse text-left text-sm md:table">
-            <caption className="sr-only">Compare ten attractions by area, interest and suggested visiting duration</caption>
+            <caption className="sr-only">Compare ten attractions by area, admission or booking requirements, and suggested visiting duration</caption>
             <thead className="bg-secondary/60"><tr>
               <th scope="col" className="w-[29%] border-b px-3 py-3">Attraction</th>
               <th scope="col" className="w-[23%] border-b px-3 py-3">Area</th>
-              <th scope="col" className="w-[28%] border-b px-3 py-3">Best for</th>
+              <th scope="col" className="w-[28%] border-b px-3 py-3">Entry & booking</th>
               <th scope="col" className="w-[20%] border-b px-3 py-3">Time to allow</th>
             </tr></thead>
             <tbody>{stops.map((stop,index)=><tr key={stop.id} className="border-b last:border-0">
               <th scope="row" className="px-3 py-3 font-semibold"><a href={"#"+stop.id} className="text-primary hover:underline">{index+1}. {stop.shortTitle}</a></th>
               <td className="px-3 py-3">{stop.area}</td>
-              <td className="px-3 py-3">{stop.bestFor}</td>
+              <td className="px-3 py-3">{stop.access}</td>
               <td className="px-3 py-3 text-muted-foreground">{stop.allow}</td>
             </tr>)}</tbody>
           </table>
@@ -202,7 +224,7 @@ export function DeadSeaAttractionsGuide() {
             <summary className="cursor-pointer px-4 py-3 text-sm font-semibold text-primary hover:bg-secondary/40">Show the comparison of all ten experiences</summary>
             <ul className="divide-y border-t">{stops.map((stop,index)=><li key={stop.id} className="px-4 py-3">
               <a href={"#"+stop.id} className="font-semibold text-primary hover:underline">{index+1}. {stop.shortTitle}</a>
-              <p className="mt-1 text-sm">{stop.bestFor}</p><p className="mt-1 text-xs leading-relaxed text-muted-foreground">{stop.area} · {stop.allow}</p>
+              <p className="mt-1 text-sm">{stop.access}</p><p className="mt-1 text-xs leading-relaxed text-muted-foreground">{stop.area} · {stop.allow}</p>
             </li>)}</ul>
           </details>
         </div>
@@ -246,6 +268,8 @@ export function DeadSeaAttractionsGuide() {
             <p className="text-xs font-semibold uppercase tracking-wide text-primary">Route idea {index+1} · {route.kind}</p>
             <h3 className="mt-2 text-lg font-bold">{route.title}</h3>
             <p className="mt-2 text-sm leading-relaxed">{route.intro}</p>
+            <p className="mt-3 text-sm leading-relaxed"><strong>Time to allow: </strong>{route.timeBudget}</p>
+            <p className="mt-2 text-sm leading-relaxed text-muted-foreground"><strong className="text-foreground">Travel: </strong>{route.travel}</p>
             <div className="mt-4 flex flex-wrap gap-2">{route.stopIds.map(id=>{
               const stop=stops.find(item=>item.id===id)!;
               return <a key={id} href={"#"+id} className="rounded-full border bg-secondary/40 px-3 py-1 text-xs font-medium text-primary hover:bg-secondary">{stop.shortTitle}</a>;
@@ -258,6 +282,7 @@ export function DeadSeaAttractionsGuide() {
 
       <section id="practical" aria-labelledby="practical-h" className="mt-12 scroll-mt-24">
         <Heading id="practical" title="My practical tips for the Dead Sea region" intro="A little planning matters here, especially with desert heat, transport gaps and changing access to nature sites."/>
+        <p className="mb-5 max-w-3xl text-sm leading-relaxed">For journeys from Jerusalem, see my <Link to="/travel-blog/jerusalem-to-the-dead-sea/" className="font-semibold text-primary hover:underline">Jerusalem–Dead Sea travel guide</Link>. If you are arriving at Ben Gurion Airport, compare the <Link to="/travel-blog/how-to-get-from-ben-gurion-airport-to-ein-bokek/" className="font-semibold text-primary hover:underline">airport-to-Ein-Bokek options</Link>. From Tel Aviv, allow extra intercity travel time, and check the departure and return services for your date.</p>
         <div className="grid gap-4 md:grid-cols-2">
           <div className="rounded-xl border bg-card p-5"><ShieldCheck aria-hidden className="h-5 w-5 text-primary"/><h3 className="mt-2 font-bold">Choose safe places to bathe</h3><p className="mt-2 text-sm leading-relaxed">Use a supervised designated Dead Sea beach, not a roadside shoreline. Keep the water out of your eyes and avoid swimming where unstable ground or sinkholes are a risk.</p></div>
           <div className="rounded-xl border bg-card p-5"><Clock3 aria-hidden className="h-5 w-5 text-primary"/><h3 className="mt-2 font-bold">Build in travel time</h3><p className="mt-2 text-sm leading-relaxed">Qumran, Ein Gedi, Masada and Ein Bokek lie in different sections of the region. Verify the exact park entrance and allow time for parking, showers and transfers.</p></div>
@@ -269,10 +294,40 @@ export function DeadSeaAttractionsGuide() {
       </section>
       <div className="mt-5"><Tip>For water activities, hiking and organised desert outings, check your party's physical ability, accessibility needs and the operator's exact instructions before reserving.</Tip></div>
 
-      <section aria-label="Organised day tours" className="mt-12 rounded-xl border bg-secondary/30 p-5 sm:p-6">
-        <h2 className="text-xl font-bold">Would you rather join a guided outing?</h2>
-        <p className="mt-2 max-w-3xl text-sm leading-relaxed">A guided day trip can simplify the journey from Jerusalem or Tel Aviv, particularly if you want to visit Masada and the Dead Sea on the same day. Compare the route and included stops carefully before booking.</p>
-        <Link to="/tours/masada-dead-sea/" className="mt-4 inline-flex items-center gap-2 rounded-lg border border-primary/30 bg-background px-4 py-2 text-sm font-semibold text-primary hover:bg-secondary">Explore Masada & Dead Sea tours <ChevronRight aria-hidden className="h-4 w-4"/></Link>
+      <section id="tour-options" aria-labelledby="tour-options-h" className="mt-12 scroll-mt-24">
+        <Heading id="tour-options" title="Compare three organised Dead Sea tours" intro="These are examples from Viator and GetYourGuide, departing from Jerusalem. I suggest comparing the stops, walking conditions and what is included before choosing a date."/>
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3" data-testid="deadsea-three-tours">
+          {curatedTours.map(tour=>{
+            const href=trackedDeadSeaTourUrl(tour.id);
+            const photo=curatedTourImages[tour.id];
+            if(!href||!photo)return null;
+            return <a key={tour.id} href={href} target="_blank" rel={relFor(true)}
+              onClick={()=>recordOutboundClick({pageId:"dead_sea_attractions",productId:tour.id,offerId:tour.id})}
+              data-testid="deadsea-curated-tour" className="group flex min-w-0 flex-col overflow-hidden rounded-xl border bg-card transition-colors hover:border-primary hover:shadow-sm focus-visible:outline-2 focus-visible:outline-primary">
+              <img src={photo.src} alt={photo.alt} loading="lazy" decoding="async" width={600} height={338} className="aspect-[16/9] w-full object-cover"/>
+              <span className="flex flex-1 flex-col p-4">
+                <span className="text-xs font-semibold uppercase tracking-wide text-primary">{tour.provider}</span>
+                <strong className="mt-1 text-base leading-snug group-hover:text-primary">{tour.title}</strong>
+                <span className="mt-2 text-sm leading-relaxed text-muted-foreground">{tour.subtitle}</span>
+                <span className="mt-3 flex flex-wrap items-center gap-x-4 gap-y-1 text-xs text-muted-foreground">
+                  <span className="inline-flex items-center gap-1"><Clock3 aria-hidden className="h-3.5 w-3.5"/>{tour.duration}</span>
+                  <span className="inline-flex items-center gap-1" aria-label={tour.rating+" out of five based on a previously checked rating"}>
+                    <Star aria-hidden className="h-3.5 w-3.5 fill-current text-amber-500"/>{tour.rating.toFixed(1)} ({tour.reviewCount.toLocaleString("en-US")})
+                  </span>
+                </span>
+                <span className="mt-auto flex items-end justify-between gap-2 border-t pt-4 text-sm">
+                  <span className="text-muted-foreground">From <strong className="text-foreground">US${tour.fromUsd}</strong><span className="block text-xs">per person</span></span>
+                  <span className="inline-flex items-center gap-1 font-semibold text-primary">View & book <ExternalLink aria-hidden className="h-3.5 w-3.5"/></span>
+                </span>
+              </span>
+              <span className="sr-only"> (opens in a new tab)</span>
+            </a>;
+          })}
+        </div>
+        <p className="mt-3 text-xs leading-relaxed text-muted-foreground">Starting prices, ratings and review counts are previously checked provider snapshots, not live availability. Check the current booking terms and Ein Gedi access conditions before reserving.</p>
+        <div className="mt-5 flex justify-center">
+          <Link to="/tours/masada-dead-sea/" className="inline-flex items-center gap-2 rounded-lg border border-primary/30 bg-secondary/35 px-4 py-2.5 text-sm font-semibold text-primary hover:bg-secondary">Explore all Masada & Dead Sea tours <ChevronRight aria-hidden className="h-4 w-4"/></Link>
+        </div>
       </section>
 
       <FaqList faqs={deadSeaFaqs}/>
@@ -308,6 +363,18 @@ export function DeadSeaAttractionsGuide() {
           <li><OfficialLink href="https://ims.gov.il/en">Israel Meteorological Service — forecast and warnings</OfficialLink></li>
           <li><OfficialLink href="https://en.parks.org.il/">Israel Nature & Parks Authority — parks and access</OfficialLink></li>
         </ul>
+        <div className="mt-5 border-t pt-4">
+          <h3 className="text-sm font-semibold text-foreground">Photograph credits</h3>
+          <p className="mt-1 text-xs leading-relaxed">Three location-specific images are adapted to the card proportions from licensed Wikimedia Commons originals.</p>
+          <ul className="mt-3 space-y-2 text-xs leading-relaxed">
+            {deadSeaPhotoCredits.map(credit=><li key={credit.id}>
+              <a href={credit.sourceUrl} target="_blank" rel="noopener noreferrer" className="font-semibold text-primary hover:underline">{credit.id==="nahal-bokek"?"Nahal Bokek":credit.id==="einot-tsukim"?"Einot Tsukim":"Moshe Novomeysky Visitor Center"}</a>
+              {" — photograph by "+credit.author+", "}
+              <a href={credit.licenseUrl} target="_blank" rel="noopener noreferrer" className="font-semibold text-primary hover:underline">{credit.license}</a>
+              {". Cropped to fit the layout."}
+            </li>)}
+          </ul>
+        </div>
       </SourcesDisclosure>
     </article>
   </main>;
