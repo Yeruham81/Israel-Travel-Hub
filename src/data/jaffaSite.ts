@@ -20,7 +20,6 @@ export const jaffaSite = {
     nalagaat: "https://nalagaat.org.il/en/",
     nalagaatAccess: "https://nalagaat.org.il/en/accessibility-arrangements/",
     transit: "https://www.dankal.co.il/",
-    buses: "https://bus.gov.il/en/",
-    parks: "https://www.ilanagoormuseum.org/en/visiting/",
+    buses: "https://bus.gov.il/en/home",
   },
 } as const;
