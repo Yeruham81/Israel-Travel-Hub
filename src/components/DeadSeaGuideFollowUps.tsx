@@ -53,11 +53,11 @@ const related: {
     alt: "Pool at a Dead Sea resort",
   },
   {
-    title: "Day trips from Jerusalem",
-    description: "Compare the Dead Sea with other realistic day trips.",
-    to: "/travel-blog/day-trips-from-jerusalem/",
-    photo: jerusalemOldCity,
-    alt: "Jaffa Gate and the walls of Jerusalem’s Old City",
+    title: "Jerusalem travel guide",
+    description: "Plan a sightseeing visit to the capital before or after the Dead Sea.",
+    to: "/travel-blog/jerusalem-travel-guide/",
+    photo: "/images/attractions/jerusalem.webp",
+    alt: "Jerusalem Old City and its historic landmarks",
   },
 ];
 

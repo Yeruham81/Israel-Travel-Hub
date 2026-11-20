@@ -221,7 +221,7 @@ export const mountOlivesDestinationContent: AttractionDestinationContent = {
   planningLinks: [
     { label: "Jerusalem city guide", to: "/travel-blog/jerusalem-travel-guide/", description: "Plan your stay, neighbourhoods and transport.", icon: "region" },
     { label: "Churches in Jerusalem", to: "/travel-blog/churches-in-jerusalem/", description: "Explore other Christian pilgrimage sites.", icon: "region" },
-    { label: "Day trips from Jerusalem", to: "/travel-blog/day-trips-from-jerusalem/", description: "Ideas for another day beyond the city.", icon: "region" },
+    { label: "Jerusalem tours", to: "/tours/jerusalem/", description: "Explore guided city walks and landmark visits.", icon: "region" },
     { label: "Where to stay in Jerusalem", to: "/travel-blog/where-to-stay-in-jerusalem/", description: "Choose a hotel area and arrival plan.", icon: "region" },
     { label: "Ben Gurion Airport to Jerusalem", to: "/travel-blog/how-to-get-from-ben-gurion-airport-to-jerusalem/", description: "Compare airport rail, road and private transport.", icon: "arrival" },
     { label: "3-day Israel itinerary", to: "/travel-blog/israel-itinerary-3-days/", description: "Fit Jerusalem into a short holiday.", icon: "itinerary" },

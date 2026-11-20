@@ -14,7 +14,6 @@ const pageIds: Partial<Record<JerusalemOfferTarget, string>> = {
   jerusalem: "jerusalem-city-activities",
   jerusalemChurches: "jerusalem-church-guided-walks",
   jerusalemShopping: "jerusalem-market-experiences",
-  jerusalemDayTrips: "jerusalem-departure-tours",
   bethlehem: "jerusalem-bethlehem-tours",
   jerusalemDeadSea: "jerusalem-deadsea-excursions",
   "old-city-jerusalem": "jerusalem-old-city-walks",

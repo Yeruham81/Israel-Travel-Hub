@@ -20,11 +20,9 @@ import { Route as TipsRoute } from "@/routes/travel-blog.israel-travel-tips";
 import { Route as JerusalemRoute } from "@/routes/travel-blog.jerusalem-travel-guide";
 import { Route as DeadSeaRoute } from "@/routes/travel-blog.jerusalem-to-the-dead-sea";
 import { Route as BaptismRoute } from "@/routes/travel-blog.baptism-in-the-jordan-river";
-import { Route as JerusalemDayTripsRoute } from "@/routes/travel-blog.day-trips-from-jerusalem";
 import { Route as ChurchesRoute } from "@/routes/travel-blog.churches-in-jerusalem";
 import { Route as ShoppingRoute } from "@/routes/travel-blog.shopping-in-jerusalem";
 import { Route as TopTenRoute } from "@/routes/travel-blog.top-10-things-to-do-in-israel";
-import { Route as TelAvivDayTripsRoute } from "@/routes/travel-blog.day-trips-from-tel-aviv";
 import { filterGuides, guideDirectory, guideTopics, travelGuides } from "@/data/travelGuides";
 import { AIRALO_COMPATIBILITY_AFFILIATE_URL, AIRALO_MENA_AFFILIATE_URL, affiliateConfig, getSource, isPublisherUrl, linksForPage, mosheBarakAuthor, travelGuidePaths, TRAVEL_GUIDE_CHECK_DATE } from "@/data/registry";
 import { readOutboundClicks } from "@/lib/outbound";
@@ -32,7 +30,7 @@ import { repeatedPhotos } from "@/lib/photo-uniqueness";
 
 afterEach(() => { cleanup(); localStorage.clear(); });
 const cases = [{ id: "uber", route: UberRoute }, { id: "sherut", route: SherutRoute }, { id: "esim", route: EsimRoute }, { id: "arrival", route: ArrivalRoute }, { id: "israel", route: IsraelRoute }, { id: "telAviv", route: TelAvivRoute }, { id: "taxis", route: TaxiRoute },
-  { id: "shabbat", route: ShabbatRoute }, { id: "travelTips", route: TipsRoute }, { id: "jerusalem", route: JerusalemRoute }, { id: "jerusalemDeadSea", route: DeadSeaRoute }, { id: "baptism", route: BaptismRoute }, { id: "jerusalemDayTrips", route: JerusalemDayTripsRoute }, { id: "jerusalemChurches", route: ChurchesRoute }, { id: "jerusalemShopping", route: ShoppingRoute }, { id: "topTen", route: TopTenRoute }, { id: "telAvivDayTrips", route: TelAvivDayTripsRoute },
+  { id: "shabbat", route: ShabbatRoute }, { id: "travelTips", route: TipsRoute }, { id: "jerusalem", route: JerusalemRoute }, { id: "jerusalemDeadSea", route: DeadSeaRoute }, { id: "baptism", route: BaptismRoute }, { id: "jerusalemChurches", route: ChurchesRoute }, { id: "jerusalemShopping", route: ShoppingRoute }, { id: "topTen", route: TopTenRoute },
 ] as const;
 async function routerAt(path: string) {
   const router = createRouter({ routeTree, context: { queryClient: new QueryClient() }, history: createMemoryHistory({ initialEntries: [path] }), trailingSlash: "always" });
@@ -929,9 +927,6 @@ describe("migrated practical guides", () => {
     expect(travelGuides.jerusalemDeadSea.sections.find(section => section.id === "beach")!.paragraphs.join(" ")).toContain("free access, showers, changing rooms");
     expect(travelGuides.jerusalemShopping.sections.find((section) => section.id === "shop-bezalel")!.paragraphs.join(" ")).toContain("Friday arts fair");
     expect(JSON.stringify(travelGuides.jerusalemChurches)).not.toMatch(/10-20 ILS|50-80 ILS|open daily.*8:00/i);
-    expect(travelGuides.jerusalemDayTrips.sections.find((section) => section.id === "tel-aviv-jaffa")).toBeTruthy();
-    expect(travelGuides.telAvivDayTrips.sections.find((section) => section.id === "jerusalem-day")).toBeTruthy();
-    expect(travelGuides.jerusalemDayTrips.answer).not.toBe(travelGuides.telAvivDayTrips.answer);
   });
 
   it("makes religion and shopping filters useful and keeps migrated related reading inside the portal", () => {

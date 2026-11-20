@@ -206,7 +206,7 @@ export const qasrElYahudDestinationContent: AttractionDestinationContent = {
     { label: "Baptism in the Jordan River", to: "/travel-blog/baptism-in-the-jordan-river/", description: "Compare Qasr el-Yahud and Yardenit.", icon: "region" },
     { label: "Jerusalem to the Dead Sea", to: "/travel-blog/jerusalem-to-the-dead-sea/", description: "Plan the route and nearby stops.", icon: "itinerary" },
     { label: "The Dead Sea visitor guide", to: "/travel-blog/the-dead-sea/", description: "Beaches, facilities and distances.", icon: "region" },
-    { label: "Day trips from Jerusalem", to: "/travel-blog/day-trips-from-jerusalem/", description: "Choose a realistic regional outing.", icon: "itinerary" },
+    { label: "Masada National Park", to: "/attractions/masada/", description: "Plan another Judean Desert visit.", icon: "itinerary" },
     { label: "Getting around Israel", to: "/travel-blog/getting-around-israel/", description: "Compare road and public transport.", icon: "transport" },
     { label: "7-day Israel itinerary", to: "/travel-blog/israel-itinerary-7-days/", description: "Build a varied city and desert route.", icon: "itinerary" },
   ],

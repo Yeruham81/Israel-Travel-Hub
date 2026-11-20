@@ -11,7 +11,7 @@ const related: { title: string; description: string; to: LinkProps["to"]; image:
   { title: "Jerusalem's Old City", description: "Find Damascus Gate, the historic quarters and walking routes.", to: "/attractions/old-city-jerusalem/", image: oldCity, alt: "Historic market lanes in Jerusalem’s Old City" },
   { title: "Churches in Jerusalem", description: "Explore Christian heritage sites before or after Bethlehem.", to: "/travel-blog/churches-in-jerusalem/", image: churches, alt: "Church of the Holy Sepulchre in Jerusalem" },
   { title: "Jerusalem to the Dead Sea", description: "Compare another popular road excursion, buses and tours.", to: "/travel-blog/jerusalem-to-the-dead-sea/", image: deadSeaRoute, alt: "Road through the desert toward the Dead Sea" },
-  { title: "Day Trips from Jerusalem", description: "Compare Bethlehem with Masada, the Dead Sea and other day visits.", to: "/travel-blog/day-trips-from-jerusalem/", image: masada, alt: "Masada overlooking the Dead Sea" },
+  { title: "Masada National Park", description: "A desert fortress, cable car and archaeology above the Dead Sea.", to: "/attractions/masada/", image: masada, alt: "Masada overlooking the Dead Sea" },
   { title: "Where to Stay in Jerusalem", description: "Choose a hotel neighbourhood suited to an early departure.", to: "/travel-blog/where-to-stay-in-jerusalem/", image: "/images/city-stays/jerusalem-downtown.webp", alt: "Jerusalem downtown district" },
 ];
 const next: {title:string;description:string;to:LinkProps["to"];action:string}[] = [

@@ -245,7 +245,7 @@ export const jaffaDestinationContent: AttractionDestinationContent = {
     { label: "Things to do in Tel Aviv", to: "/travel-blog/attractions-in-tel-aviv/", note: "Explore markets, neighbourhoods, culture and coastal sights." },
     { label: "Beaches in Tel Aviv", to: "/travel-blog/beaches-in-tel-aviv/", note: "Find popular beaches and advice for a seafront day." },
     { label: "Museums in Tel Aviv", to: "/travel-blog/museums-in-tel-aviv/", note: "Art, heritage and family-friendly museum ideas." },
-    { label: "Day trips from Tel Aviv", to: "/travel-blog/day-trips-from-tel-aviv/", note: "Choose practical excursions beyond the city." },
+    { label: "Best time to visit Israel", to: "/travel-blog/best-time-to-visit-israel/", note: "Match your travel dates with the activities you want." },
     { label: "Where to stay in Tel Aviv", to: "/travel-blog/where-to-stay-in-tel-aviv/", note: "Compare neighbourhoods and hotel areas." },
     { label: "Getting around Tel Aviv", to: "/travel-blog/getting-around-tel-aviv/", note: "Learn about the light rail, buses and walking routes." },
   ],
