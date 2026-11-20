@@ -34,15 +34,34 @@ jobs:
           }
           headers = {"User-Agent": "IsraelTravelHubEditor/1.0 (travel guide attribution checks; github-actions)", "Accept": "application/json,image/jpeg,*/*"}
           for output, filename in photos.items():
-            query = urllib.parse.urlencode({"action":"query", "format":"json", "prop":"imageinfo", "iiprop":"url", "titles":"File:"+filename})
+            query = urllib.parse.urlencode({"action":"query", "format":"json", "prop":"imageinfo", "iiprop":"url", "iiurlwidth":"960", "titles":"File:"+filename})
             request = urllib.request.Request("https://commons.wikimedia.org/w/api.php?"+query, headers=headers)
             with urllib.request.urlopen(request, timeout=45) as resp:
               data = json.load(resp)
-            urls = [page["imageinfo"][0]["url"] for page in data["query"]["pages"].values() if page.get("imageinfo")]
-            assert len(urls) == 1, f"Missing verified Commons image {filename}"
-            request = urllib.request.Request(urls[0], headers=headers)
-            with urllib.request.urlopen(request, timeout=80) as resp:
-              raw = resp.read()
+            infos = [page["imageinfo"][0] for page in data["query"]["pages"].values() if page.get("imageinfo")]
+            assert len(infos) == 1, f"Missing verified Commons image {filename}"
+            original = infos[0]["url"]
+            thumb = infos[0].get("thumburl") or original
+            # Commons direct originals can 429 shared GitHub runners. Prefer the
+            # smaller thumbnail; fall back to independently cached image proxy.
+            candidates = [
+              thumb,
+              "https://wsrv.nl/?url=" + urllib.parse.quote(thumb, safe="") + "&w=900",
+              "https://images.weserv.nl/?url=" + urllib.parse.quote(original, safe="") + "&w=900",
+            ]
+            raw = None
+            for candidate in candidates:
+              try:
+                request = urllib.request.Request(candidate, headers=headers)
+                with urllib.request.urlopen(request, timeout=75) as resp:
+                  result = resp.read()
+                if len(result) > 9000:
+                  raw = result
+                  print("Downloaded",filename,"via",urllib.parse.urlsplit(candidate).netloc)
+                  break
+              except Exception as ex:
+                print("Image host unavailable, trying fallback:", type(ex).__name__, str(ex)[:125])
+            assert raw is not None, f"Failed all authorized mirrors for {filename}"
             image = ImageOps.exif_transpose(Image.open(io.BytesIO(raw))).convert("RGB")
             assert image.width >= 800 and image.height >= 600, filename
             image.thumbnail((900,700), Image.Resampling.LANCZOS)
