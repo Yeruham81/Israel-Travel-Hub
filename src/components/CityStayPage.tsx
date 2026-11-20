@@ -1,3 +1,4 @@
+import { StayBookingChecklist } from "@/components/StayBookingChecklist";
 import { useState } from "react";
 import type { CityStayGuide, StayPreference } from "@/data/content";
 import { preferenceLabels, neighborhoodGuidesForCity } from "@/data/content";
@@ -71,7 +72,7 @@ function SimpleCityStayPage({ g }: { g: CityStayGuide }) {
 
         <section id="checklist" aria-labelledby="cl-h" className="mt-14">
           <h2 id="cl-h" className="text-3xl">Practical booking checklist</h2>
-          <div className="mt-4"><Checklist title="Before you pay" items={g.checklist} /></div>
+          <StayBookingChecklist groups={[{ title: "Location & arrival", items: g.checklist.slice(0, 4) }, { title: "Room & booking conditions", items: g.checklist.slice(4) }]} />
         </section>
 
         <ProviderSection
