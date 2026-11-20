@@ -1,4 +1,5 @@
 name: One-off Tel Aviv guide browser and responsive audit
+# Repeat the local Chromium audit after explicit scrolling through lazy image regions.
 on:
   push:
     branches: [main]
