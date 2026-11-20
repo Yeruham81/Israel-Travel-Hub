@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState, type ReactNode } from "react";
 import { Link } from "@tanstack/react-router";
-import { ArrowUpRight, CalendarCheck2, CalendarDays, Clock3, ExternalLink, Landmark, Lightbulb, MapPin, Ticket } from "lucide-react";
+import { ArrowUpRight, CalendarCheck2, CalendarDays, Clock3, ExternalLink, Lightbulb, MapPin, Ticket } from "lucide-react";
 import { Breadcrumbs, FaqList, OnThisPage } from "@/components/Guide";
 import { AuthorCard } from "@/components/AuthorCard";
 import { GuideHeroLayout, GuideHeroMedia } from "@/components/GuideHeroMedia";
@@ -41,7 +41,7 @@ function PlanningTip({children}:{children:ReactNode}) {
   return <aside className="flex items-start gap-3 rounded-xl border border-amber-200 bg-amber-50/80 p-4 text-sm leading-relaxed text-amber-950"><Lightbulb className="mt-0.5 h-5 w-5 shrink-0 text-amber-600" aria-hidden="true"/><div><strong>My tip:</strong> {children}</div></aside>;
 }
 function MuseumCard({museum}:{museum:MuseumEntry}) {
-  const museumPhoto = jerusalemMuseumPhotos[museum.id];
+  const museumPhoto = jerusalemMuseumPhotos[museum.id]!;
   const family = ["science","time","music","tower"].includes(museum.id);
   const bookAhead = ["yad","science","time","friends","tolerance","begin","music"].includes(museum.id);
   const tags = [museum.theme, museum.priceNis === 0 ? "Free entry" : null, family ? "Family-friendly" : null, bookAhead ? "Book ahead" : null].filter((x):x is string=>Boolean(x));

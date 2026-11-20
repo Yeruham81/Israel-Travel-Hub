@@ -7,7 +7,7 @@ describe("Jerusalem museums editorial guide",()=>{
   it("provides distinct locally stored images for every museum",()=>{
     const sources = new Set<string>();
     for(const museum of jerusalemMuseums){
-      const photo = jerusalemMuseumPhotos[museum.id];
+      const photo = jerusalemMuseumPhotos[museum.id]!;
       expect(photo,museum.id).toBeDefined();
       expect(photo.alt,museum.id).toBeTruthy();
       expect(photo.src,museum.id).toMatch(/^\/images\/jerusalem-museums\//);
