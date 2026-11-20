@@ -237,7 +237,7 @@ export function CityNeighborhoodEditorial({ guide }: { guide: CityStayGuide }) {
         <h2 id="choose-h" className="mt-2 text-3xl">Where should you stay in {cityName}?</h2>
         <p className="mt-4 max-w-4xl leading-relaxed">{choices.introduction}</p>
 
-        {<ul className={`mt-7 grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-3`} data-testid={`${cityId === "jerusalem" ? "jerusalem" : "telaviv"}-area-image-grid`}>
+        {<ul className={`mt-7 grid grid-cols-2 gap-3 sm:gap-4 ${cityId === "jerusalem" ? "lg:grid-cols-3" : "lg:grid-cols-4"}`} data-testid={`${cityId === "jerusalem" ? "jerusalem" : "telaviv"}-area-image-grid`}>
             {areas.map((area) => {
               const photo = areaPhotos[area.id] ?? area.photo;
               return <li key={area.id} className="min-w-0">
