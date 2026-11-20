@@ -14,6 +14,7 @@ export type TopTenExperience = {
   gettingThere: string;
   tip: string;
   mapRegion: string;
+  mapLinks: { label: string; query: string }[];
   photo: { src: string; alt: string };
   guide: { label: string; to: LinkProps["to"] };
   extraGuide?: { label: string; to: LinkProps["to"] };
@@ -32,10 +33,11 @@ export const topTenExperiences: TopTenExperience[] = [
     gettingThere: "Tel Aviv's beachfront is walkable from many central hotels; buses, taxis and cycling routes connect other neighbourhoods. Old Jaffa is farther south along the promenade.",
     tip: "For a first visit, I would start around Gordon or Frishman and save Jaffa for a separate walk towards sunset.",
     mapRegion: "tel-aviv",
+    mapLinks: [{ label: "Gordon Beach", query: "Gordon Beach, Tel Aviv-Yafo, Israel" }, { label: "Frishman Beach", query: "Frishman Beach, Tel Aviv-Yafo, Israel" }],
     photo: { src: prefix + "beaches.webp", alt: "Visitors relaxing beside the Mediterranean at Gordon Beach in Tel Aviv" },
     guide: { label: "Choose a Tel Aviv beach", to: "/travel-blog/beaches-in-tel-aviv/" },
     extraGuide: { label: "Explore Old Jaffa", to: "/attractions/jaffa/" },
-    official: { label: "Municipal beach information", href: "https://www.tel-aviv.gov.il/Visitors/Beaches/Pages/Beaches.aspx" },
+    official: { label: "Municipal beach information (Hebrew)", href: "https://www.tel-aviv.gov.il/Visitors/Beaches/Pages/Beaches.aspx" },
   },
   {
     id: "jerusalem", title: "Explore Jerusalem and its Old City", shortTitle: "Jerusalem & the Old City",
@@ -46,6 +48,7 @@ export const topTenExperiences: TopTenExperience[] = [
     gettingThere: "Jerusalem is connected by rail from Ben Gurion Airport and Tel Aviv. Within the city, combine walking, the light rail, buses and taxis depending on your base.",
     tip: "I would give the Old City its own day, then use a second day for Mahane Yehuda, a museum or the Mount of Olives.",
     mapRegion: "jerusalem",
+    mapLinks: [{ label: "Jaffa Gate", query: "Jaffa Gate, Old City, Jerusalem, Israel" }],
     photo: { src: prefix + "jerusalem.webp", alt: "Jerusalem Old City skyline and golden Dome of the Rock viewed from a hillside" },
     guide: { label: "Plan your Jerusalem visit", to: "/travel-blog/jerusalem-travel-guide/" },
     extraGuide: { label: "Explore the Old City", to: "/attractions/old-city-jerusalem/" },
@@ -59,6 +62,7 @@ export const topTenExperiences: TopTenExperience[] = [
     gettingThere: "Both markets are accessible from central city neighbourhoods by walking and public transport. I recommend exploring one market and the surrounding streets in a single outing.",
     tip: "Choose three or four things you genuinely want to taste; leave room for a bakery or dessert and enjoy the neighbourhood between stops.",
     mapRegion: "tel-aviv",
+    mapLinks: [{ label: "Carmel Market", query: "Carmel Market, Tel Aviv-Yafo, Israel" }, { label: "Mahane Yehuda Market", query: "Mahane Yehuda Market, Jerusalem, Israel" }],
     photo: { src: prefix + "food.webp", alt: "Falafel, hummus, salads and sides served together on a plate in Israel" },
     guide: { label: "Ten foods to try in Israel", to: "/travel-blog/what-to-eat-in-israel/" },
     extraGuide: { label: "Shopping in Jerusalem", to: "/travel-blog/shopping-in-jerusalem/" },
@@ -72,6 +76,7 @@ export const topTenExperiences: TopTenExperience[] = [
     gettingThere: "Stay near your preferred evening neighbourhood or use a taxi for the final leg. Walkable districts can be more enjoyable than several cross-city trips.",
     tip: "Start with a sunset walk, then stay in one neighbourhood for dinner and whatever comes next.",
     mapRegion: "tel-aviv",
+    mapLinks: [{ label: "Rothschild Boulevard", query: "Rothschild Boulevard, Tel Aviv-Yafo, Israel" }],
     photo: { src: prefix + "evening.webp", alt: "Tel Aviv skyline illuminated at night with city roads and towers" },
     guide: { label: "Explore Tel Aviv attractions", to: "/travel-blog/attractions-in-tel-aviv/" },
     extraGuide: { label: "Find upcoming events", to: "/travel-blog/calendar-of-events/" },
@@ -85,6 +90,7 @@ export const topTenExperiences: TopTenExperience[] = [
     gettingThere: "Most visitors come by car, organised tour or arranged transfer from Jerusalem or the Dead Sea. The western Roman Ramp entrance is reached by a different road from the eastern cable-car entrance.",
     tip: "I would decide between the cable car and walking only after checking the actual weather and trail status for your day.",
     mapRegion: "masada",
+    mapLinks: [{ label: "Masada eastern entrance", query: "Masada National Park East Entrance Cable Car, Israel" }],
     photo: { src: prefix + "masada.webp", alt: "Excavated stone rooms on Masada plateau overlooking the Dead Sea" },
     guide: { label: "Plan a visit to Masada", to: "/attractions/masada/" },
     extraGuide: { label: "Jerusalem to the Dead Sea", to: "/travel-blog/jerusalem-to-the-dead-sea/" },
@@ -99,6 +105,7 @@ export const topTenExperiences: TopTenExperience[] = [
     gettingThere: "Ein Bokek is south of the northern Dead Sea shore and needs a specific destination in your navigation. Combine it with Masada only if your time, transport and weather permit.",
     tip: "Bring fresh drinking water, sandals, sun protection and a towel, and float gently rather than trying to swim normally.",
     mapRegion: "dead-sea",
+    mapLinks: [{ label: "Ein Bokek Central Beach", query: "Ein Bokek Central Beach, Israel" }],
     photo: { src: prefix + "dead-sea.webp", alt: "A visitor floating effortlessly while reading in the calm Dead Sea water" },
     guide: { label: "Plan your Dead Sea visit", to: "/travel-blog/the-dead-sea/" },
     extraGuide: { label: "How to get there from Jerusalem", to: "/travel-blog/jerusalem-to-the-dead-sea/" },
@@ -113,6 +120,7 @@ export const topTenExperiences: TopTenExperience[] = [
     gettingThere: "Haifa is reachable by mainline rail. The gardens are spread over a steep hillside; choose the entrance and onward transport before setting off on foot.",
     tip: "I would pair one garden viewpoint or booked tour with a walk through the German Colony rather than try to traverse the terraces independently.",
     mapRegion: "haifa",
+    mapLinks: [{ label: "Bahá'í Gardens", query: "Bahai Gardens, Haifa, Israel" }],
     photo: { src: prefix + "haifa.webp", alt: "Symmetrical Bahá'í Gardens with flowers, hedges and golden-domed shrine in Haifa" },
     guide: { label: "Discover Haifa", to: "/travel-blog/haifa/" },
     extraGuide: { label: "Museums in Haifa", to: "/travel-blog/museums-in-haifa/" },
@@ -127,6 +135,7 @@ export const topTenExperiences: TopTenExperience[] = [
     gettingThere: "A car, regional tour or arranged driver is often the simplest way to connect several lakeside sites. Tiberias is a common base.",
     tip: "I would choose three or four meaningful stops and give them time, rather than circle the entire lake in one rushed afternoon.",
     mapRegion: "galilee",
+    mapLinks: [{ label: "Capernaum", query: "Capernaum National Park, Israel" }, { label: "Tabgha", query: "Church of the Multiplication, Tabgha, Israel" }],
     photo: { src: prefix + "galilee.webp", alt: "Green hills descending towards the blue Sea of Galilee" },
     guide: { label: "Explore the Sea of Galilee", to: "/travel-blog/sea-of-galilee/" },
     extraGuide: { label: "Visit Capernaum", to: "/attractions/capernaum/" },
@@ -140,7 +149,8 @@ export const topTenExperiences: TopTenExperience[] = [
     gettingThere: "Eilat is at Israel's far southern end. Plan it as a separate overnight stay or a longer southern journey, not an add-on to a Jerusalem day trip.",
     tip: "I would make the reef the highlight of the day and choose activities that suit everyone's comfort in the water.",
     mapRegion: "eilat",
-    photo: { src: prefix + "red-sea.webp", alt: "Turquoise water and reef habitat along Eilat's Coral Beach shoreline" },
+    mapLinks: [{ label: "Coral Beach Nature Reserve", query: "Eilat Coral Beach Nature Reserve, Israel" }],
+    photo: { src: prefix + "red-sea.webp", alt: "Coral reef habitat and marine life beneath the Red Sea near Eilat" },
     guide: { label: "Plan Eilat and the Red Sea", to: "/travel-blog/eilat/" },
     official: { label: "Coral Beach Nature Reserve", href: "https://en.parks.org.il/reserve-park/eilat-coral-beach-nature-reserve-2/" },
   },
@@ -153,6 +163,7 @@ export const topTenExperiences: TopTenExperience[] = [
     gettingThere: "Mitzpe Ramon is in the Negev, well south of Beersheba. A car, regional tour or arranged driver makes it easier to visit an authorised viewpoint and return after dark.",
     tip: "I recommend staying in or near Mitzpe Ramon for the night if the stars are a priority, rather than planning a long late return drive.",
     mapRegion: "ramon",
+    mapLinks: [{ label: "Ramon Crater Visitor Center", query: "Ramon Crater Visitor Center, Mitzpe Ramon, Israel" }],
     photo: { src: prefix + "desert-night.webp", alt: "Milky Way stars over a tree and rocky desert terrain at night near Mitzpe Ramon" },
     guide: { label: "Plan the Ramon Crater visit", to: "/attractions/mitzpe-ramon-crater/" },
     official: { label: "Ramon Crater Dark Sky Park", href: "https://darksky.org/places/ramon-crater-nature-reserve-dark-sky-park/" },
@@ -160,14 +171,14 @@ export const topTenExperiences: TopTenExperience[] = [
 ];
 
 export const topTenMapRegions = [
-  { id: "tel-aviv", name: "Tel Aviv & Jaffa", lat: 32.074, lon: 34.768, count: 3, related: ["beaches","food","evening"] },
-  { id: "jerusalem", name: "Jerusalem", lat: 31.778, lon: 35.233, count: 1, related: ["jerusalem"] },
-  { id: "haifa", name: "Haifa", lat: 32.812, lon: 34.988, count: 1, related: ["haifa"] },
-  { id: "galilee", name: "Sea of Galilee", lat: 32.828, lon: 35.586, count: 1, related: ["galilee"] },
-  { id: "masada", name: "Masada", lat: 31.315, lon: 35.353, count: 1, related: ["masada"] },
-  { id: "dead-sea", name: "Dead Sea / Ein Bokek", lat: 31.199, lon: 35.364, count: 1, related: ["dead-sea"] },
-  { id: "ramon", name: "Mitzpe Ramon", lat: 30.610, lon: 34.803, count: 1, related: ["desert-night"] },
-  { id: "eilat", name: "Eilat", lat: 29.548, lon: 34.947, count: 1, related: ["red-sea"] },
+  { id: "tel-aviv", markerLabel: "Tel Aviv", name: "Tel Aviv & Jaffa", lat: 32.074, lon: 34.768, count: 3, related: ["beaches","food","evening"] },
+  { id: "jerusalem", markerLabel: "Jerusalem", name: "Jerusalem", lat: 31.778, lon: 35.233, count: 1, related: ["jerusalem"] },
+  { id: "haifa", markerLabel: "Haifa", name: "Haifa", lat: 32.812, lon: 34.988, count: 1, related: ["haifa"] },
+  { id: "galilee", markerLabel: "Galilee", name: "Sea of Galilee", lat: 32.828, lon: 35.586, count: 1, related: ["galilee"] },
+  { id: "masada", markerLabel: "Masada", name: "Masada", lat: 31.315, lon: 35.353, count: 1, related: ["masada"] },
+  { id: "dead-sea", markerLabel: "Dead Sea", name: "Dead Sea / Ein Bokek", lat: 31.199, lon: 35.364, count: 1, related: ["dead-sea"] },
+  { id: "ramon", markerLabel: "Ramon", name: "Mitzpe Ramon", lat: 30.610, lon: 34.803, count: 1, related: ["desert-night"] },
+  { id: "eilat", markerLabel: "Eilat", name: "Eilat", lat: 29.548, lon: 34.947, count: 1, related: ["red-sea"] },
 ] as const;
 
 export const topTenSuggestedRoutes = [

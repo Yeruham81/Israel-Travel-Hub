@@ -18,7 +18,7 @@ import {
 } from "@/data/topTenExperiences";
 
 import masadaCard from "@/assets/home/hero-masada-sm.webp";
-import jaffaCard from "@/assets/home/hero-jaffa-sunset-sm.webp";
+import beachGuideCard from "@/assets/guides/2026-10/beaches-in-tel-aviv.webp";
 import threeDaysCard from "@/assets/home/hero-jerusalem-sm.webp";
 import fiveDaysCard from "@/assets/home/hero-caesarea-sm.webp";
 import sevenDaysCard from "@/assets/home/hero-galilee-sm.webp";
@@ -31,7 +31,7 @@ const iconList = [Waves, Landmark, UtensilsCrossed, Moon, Mountain, Sun, Flower2
 const linkClass = "inline-flex items-center gap-1.5 text-sm font-semibold text-primary underline-offset-4 hover:underline focus-visible:outline-2 focus-visible:outline-primary";
 const sections = [
   ["choose", "Choose your experiences"], ["compare", "Compare all ten"],
-  ["experience-map", "Experience map"], ["experiences", "The ten experiences"],
+  ["experiences", "The ten experiences"], ["experience-map", "Experience map"],
   ["routes", "Combine experiences"], ["practical", "Practical tips"],
   ["faq", "FAQ"], ["explore-more", "Explore further"],
   ["plan-trip", "Plan your trip"], ["contact", "Contact me"],
@@ -43,7 +43,7 @@ const related = [
   { title: "Explore the Dead Sea", to: "/travel-blog/the-dead-sea/" as const, desc: "Beaches, floating and where to go", image: "/images/attractions/dead-sea.webp", alt: "Turquoise Dead Sea water framed by desert hills" },
   { title: "Sea of Galilee guide", to: "/travel-blog/sea-of-galilee/" as const, desc: "Lakeside heritage and scenery", image: "/images/attractions/sea-of-galilee.webp", alt: "View towards the Sea of Galilee from northern hills" },
   { title: "Eilat & the Red Sea", to: "/travel-blog/eilat/" as const, desc: "Reefs, beaches and southern attractions", image: "/images/attractions/eilat.webp", alt: "Eilat and the Red Sea coast" },
-  { title: "Tel Aviv beaches", to: "/travel-blog/beaches-in-tel-aviv/" as const, desc: "Find your ideal supervised beach", image: jaffaCard, alt: "Old Jaffa harbour in warm evening light" },
+  { title: "Tel Aviv beaches", to: "/travel-blog/beaches-in-tel-aviv/" as const, desc: "Find your ideal supervised beach", image: beachGuideCard, alt: "Tel Aviv Mediterranean swimming beaches and sandy shoreline" },
 ];
 
 const planning = [
@@ -55,7 +55,7 @@ const planning = [
   { title: "Best time to visit", to: "/travel-blog/best-time-to-visit-israel/" as const, desc: "Choose seasons by region and interests", image: seasonsCard, alt: "Seasonal scenery in Israel" },
 ];
 
-function Heading({ id, title, intro }: { id: string; title: string; intro?: string }) {
+function Heading({ id, title, intro }: { id: string; title: string; intro?: ReactNode }) {
   return <div className="mb-5">
     <h2 id={id + "-h"} className="text-2xl font-bold tracking-tight sm:text-3xl">{title}</h2>
     {intro && <p className="mt-2 max-w-3xl leading-relaxed text-muted-foreground">{intro}</p>}
@@ -84,7 +84,6 @@ function GuideCard({ item }: { item: typeof related[number] | typeof planning[nu
   </Link>;
 }
 function ExperienceCard({ experience, number }: { experience: TopTenExperience; number: number }) {
-  const regionName = topTenMapRegions.find(region => region.id === experience.mapRegion)?.name || experience.region;
   return <article id={experience.id} className="flex scroll-mt-28 flex-col overflow-hidden rounded-2xl border bg-card shadow-sm">
     <img src={experience.photo.src} alt={experience.photo.alt} loading="lazy" decoding="async" width={880} height={495} className="aspect-[16/9] w-full object-cover" />
     <div className="flex flex-1 flex-col p-4 sm:p-5">
@@ -105,15 +104,17 @@ function ExperienceCard({ experience, number }: { experience: TopTenExperience; 
       <Link to={experience.guide.to} className={linkClass}>{experience.guide.label}<ArrowUpRight aria-hidden="true" className="h-3.5 w-3.5" /></Link>
       {experience.extraGuide && <Link to={experience.extraGuide.to} className={linkClass}>{experience.extraGuide.label}<ArrowUpRight aria-hidden="true" className="h-3.5 w-3.5" /></Link>}
       {experience.official && <OfficialLink href={experience.official.href}>{experience.official.label}</OfficialLink>}
-      <a className={linkClass} href={"https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(regionName + ", Israel")} target="_blank" rel="noopener noreferrer">
-        <MapPin aria-hidden="true" className="h-3.5 w-3.5" />View area on Google Maps
+      {experience.mapLinks.map(mapLink => <a key={mapLink.query} className={linkClass}
+        href={"https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(mapLink.query)}
+        target="_blank" rel="noopener noreferrer">
+        <MapPin aria-hidden="true" className="h-3.5 w-3.5" />{mapLink.label} on Google Maps
         <span className="sr-only"> (opens in a new tab)</span>
-      </a>
+      </a>)}
     </div>
   </article>;
 }
 
-const mapUrl = "/maps/top-ten-israel.html?waypoints=" + encodeURIComponent(JSON.stringify(topTenMapRegions.map(({ id, name, lat, lon }) => ({ id, name, lat, lon }))));
+const mapUrl = "/maps/top-ten-israel.html?waypoints=" + encodeURIComponent(JSON.stringify(topTenMapRegions.map(({ id, name, markerLabel, lat, lon }) => ({ id, name, label: markerLabel, lat, lon }))));
 
 export function TopTenIsraelGuide() {
   const [selectedRegion, setSelectedRegion] = useState("all");
@@ -194,15 +195,27 @@ export function TopTenIsraelGuide() {
               <td className="px-3 py-3 text-muted-foreground">{e.visitTime}</td>
             </tr>)}</tbody>
           </table>
-          <ul className="divide-y md:hidden">
+          <details className="md:hidden">
+            <summary className="cursor-pointer px-4 py-3 text-sm font-semibold text-primary hover:bg-secondary/40">Show the mobile comparison of all ten experiences</summary>
+            <ul className="divide-y border-t">
             {experiences.map((e,i) => <li key={e.id} className="px-4 py-3">
               <a href={"#" + e.id} className="font-semibold text-primary hover:underline">{i+1}. {e.shortTitle}</a>
               <p className="mt-1 text-sm">{e.bestFor}</p>
               <p className="mt-1 text-xs leading-relaxed text-muted-foreground">{e.region} · {e.visitTime}</p>
             </li>)}
-          </ul>
+            </ul>
+          </details>
         </div>
       </section>
+
+      <section id="experiences" aria-labelledby="experiences-h" className="mt-12 scroll-mt-24">
+        <Heading id="experiences" title="My guide to ten memorable Israel experiences"
+          intro="I have included the practical details that matter most when deciding which experiences fit your trip." />
+        <div className="grid items-stretch gap-5 md:grid-cols-2">
+          {experiences.map((experience,index) => <ExperienceCard key={experience.id} experience={experience} number={index+1} />)}
+        </div>
+      </section>
+      <div className="mt-6"><Tip>For Masada and the desert, check the Israel Meteorological Service forecast and national-park access on the morning of your visit. Heat and flash-flood warnings can change what is practical, even when the forecast looks fine elsewhere in Israel.</Tip></div>
 
       <section id="experience-map" aria-labelledby="experience-map-h" className="mt-12 scroll-mt-24">
         <Heading id="experience-map" title="Where these experiences are in Israel"
@@ -232,15 +245,6 @@ export function TopTenIsraelGuide() {
           </div>
         </div>
       </section>
-
-      <section id="experiences" aria-labelledby="experiences-h" className="mt-12 scroll-mt-24">
-        <Heading id="experiences" title="My guide to ten memorable Israel experiences"
-          intro="I have included the practical details that matter most when deciding which experiences fit your trip." />
-        <div className="grid items-stretch gap-5 md:grid-cols-2">
-          {experiences.map((experience,index) => <ExperienceCard key={experience.id} experience={experience} number={index+1} />)}
-        </div>
-      </section>
-      <div className="mt-6"><Tip>For Masada and the desert, check the Israel Meteorological Service forecast and national-park access on the morning of your visit. Heat and flash-flood warnings can change what is practical, even when the forecast looks fine elsewhere in Israel.</Tip></div>
 
       <section id="routes" aria-labelledby="routes-h" className="mt-12 scroll-mt-24">
         <Heading id="routes" title="How I would combine the experiences"
@@ -287,7 +291,7 @@ export function TopTenIsraelGuide() {
 
       <section id="plan-trip" aria-labelledby="plan-trip-h" className="mt-12 scroll-mt-24">
         <Heading id="plan-trip" title="Plan the next part of your Israel trip"
-          intro="Use one of my suggested itineraries, or choose the best season and transport for the experiences you want." />
+          intro={<>Use my suggested itineraries, or choose the best season and transport for the experiences you want. For accommodation, see my <Link to="/accommodation/" className="font-semibold text-primary hover:underline">Where to Stay in Israel</Link> guide.</>} />
         <div className="grid grid-cols-2 gap-4 lg:grid-cols-3">{planning.map(item => <GuideCard key={item.to} item={item} />)}</div>
       </section>
 
@@ -296,7 +300,7 @@ export function TopTenIsraelGuide() {
       <SourcesDisclosure>
         <p className="mb-3 text-sm leading-relaxed">I use official park, venue and local-authority information for visitor access, nature areas and safety. Check current opening hours, weather and reservations for your dates.</p>
         <ul className="grid gap-x-5 gap-y-3 text-sm sm:grid-cols-2">
-          <li><OfficialLink href="https://www.tel-aviv.gov.il/Visitors/Beaches/Pages/Beaches.aspx">Tel Aviv municipality — beach information</OfficialLink></li>
+          <li><OfficialLink href="https://www.tel-aviv.gov.il/Visitors/Beaches/Pages/Beaches.aspx">Tel Aviv municipality — beach information (Hebrew)</OfficialLink></li>
           <li><OfficialLink href="https://en.parks.org.il/reserve-park/masada-national-park/">Israel Nature & Parks Authority — Masada</OfficialLink></li>
           <li><OfficialLink href="https://www.deadsea.co.il/attractions/ein-bokek-central-beach/?lang=en">Tamar Regional Council — Ein Bokek beach</OfficialLink></li>
           <li><OfficialLink href="https://ganbahai.org.il/visit-us-haifa/">Bahá'í Gardens — official visitor information</OfficialLink></li>

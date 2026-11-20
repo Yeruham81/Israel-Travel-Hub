@@ -45,6 +45,7 @@
         if (!Array.isArray(places) || places.length !== 8 ||
             places.some(point => typeof point.id !== "string" || !/^[a-z0-9-]{2,32}$/.test(point.id) ||
               typeof point.name !== "string" || point.name.length > 90 ||
+              typeof point.label !== "string" || point.label.length > 24 ||
               !Number.isFinite(point.lat) || point.lat < 29.4 || point.lat > 33.4 ||
               !Number.isFinite(point.lon) || point.lon < 34.4 || point.lon > 35.9) ||
             new Set(places.map(point => point.id)).size !== 8) throw new Error("Invalid experience map data");
@@ -78,7 +79,7 @@
         if (!ready) { requestedId = id; return; }
         selectedId = id;
         highlight();
-        map.flyTo({center:[place.lon,place.lat],zoom:16.8,essential:true});
+        map.flyTo({center:[place.lon,place.lat],zoom:(place.id === "galilee" || place.id === "dead-sea") ? 11.2 : 11.8,essential:true});
         if (popup) popup.remove();
         const panel = document.createElement("div");
         const title = document.createElement("strong");
@@ -124,9 +125,9 @@
         map.addControl(new maplibregl.AttributionControl({compact:true,customAttribution:
           '<a href="https://maputnik.github.io/osm-liberty/" target="_blank" rel="noopener noreferrer">OSM Liberty</a> (English labels)'}));
         map.once("load",()=>{
-          const features = places.map((place,index) => ({
+          const features = places.map(place => ({
             type:"Feature",
-            properties:{id:place.id,name:place.name,number:index+1},
+            properties:{id:place.id,name:place.name,label:place.label},
             geometry:{type:"Point",coordinates:[place.lon,place.lat]}
           }));
           map.addSource("places",{
@@ -142,21 +143,21 @@
           map.addLayer({
             id:"place-cluster-count",type:"symbol",source:"places",
             filter:["has","point_count"],
-            layout:{"text-field":["get","point_count_abbreviated"],"text-size":13,
+            layout:{"text-field":["concat",["to-string",["get","point_count"]]," areas"],"text-size":10,
               "text-font":["Noto Sans Bold","Open Sans Bold","Arial Unicode MS Bold"]},
             paint:{"text-color":"#ffffff"}
           });
           map.addLayer({
             id:"place-points",type:"circle",source:"places",
             filter:["!",["has","point_count"]],
-            paint:{"circle-color":"#2779bc","circle-radius":15,"circle-stroke-width":2,"circle-stroke-color":"#ffffff"}
+            paint:{"circle-color":"#2779bc","circle-radius":10,"circle-stroke-width":2,"circle-stroke-color":"#ffffff"}
           });
           map.addLayer({
-            id:"place-numbers",type:"symbol",source:"places",
+            id:"place-labels",type:"symbol",source:"places",
             filter:["!",["has","point_count"]],
-            layout:{"text-field":["to-string",["get","number"]],"text-size":11,
-              "text-font":["Noto Sans Bold","Open Sans Bold","Arial Unicode MS Bold"]},
-            paint:{"text-color":"#ffffff"}
+            layout:{"text-field":["get","label"],"text-size":12,"text-offset":[0,-1.5],
+              "text-anchor":"bottom","text-font":["Noto Sans Bold","Open Sans Bold","Arial Unicode MS Bold"]},
+            paint:{"text-color":"#173b50","text-halo-color":"#ffffff","text-halo-width":2}
           });
           map.on("click","place-clusters",async event=>{
             const feature=event.features && event.features[0];
@@ -164,7 +165,7 @@
             try {
               const source=map.getSource("places");
               const zoom=await source.getClusterExpansionZoom(Number(feature.properties.cluster_id));
-              map.easeTo({center:feature.geometry.coordinates,zoom:Math.min(zoom+0.4,17.5),duration:450});
+              map.easeTo({center:feature.geometry.coordinates,zoom:Math.min(zoom+0.4,12.3),duration:450});
             } catch { map.zoomIn(); }
           });
           const selectPoint=event=>{
@@ -175,8 +176,8 @@
             window.parent.postMessage({type:"top-ten-israel-map-selected",id},location.origin);
           };
           map.on("click","place-points",selectPoint);
-          map.on("click","place-numbers",selectPoint);
-          for (const layer of ["place-clusters","place-points","place-numbers"]) {
+          map.on("click","place-labels",selectPoint);
+          for (const layer of ["place-clusters","place-points","place-labels"]) {
             map.on("mouseenter",layer,()=>{map.getCanvas().style.cursor="pointer";});
             map.on("mouseleave",layer,()=>{map.getCanvas().style.cursor="";});
           }

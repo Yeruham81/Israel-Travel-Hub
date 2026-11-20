@@ -37,14 +37,26 @@ describe("Top 10 Israel experiences guide", () => {
     for (const exp of topTenExperiences) {
       expect(topTenMapRegions.some(region => region.id === exp.mapRegion)).toBe(true);
       expect(exp.guide.to).toMatch(/^\//);
+      expect(exp.mapLinks.length).toBeGreaterThan(0);
+      for (const location of exp.mapLinks) {
+        expect(location.label.length).toBeGreaterThan(2);
+        expect(location.query).toContain("Israel");
+        expect(location.query).not.toBe("Haifa, Israel");
+        expect(location.query).not.toBe("Eilat, Israel");
+      }
       expect(exp.official?.href ?? "https://example.org").toMatch(/^https:\/\//);
     }
+    expect(topTenExperiences.find(item => item.id === "food")?.mapLinks.map(link => link.label)).toEqual(["Carmel Market", "Mahane Yehuda Market"]);
+    expect(topTenMapRegions.every(region => region.markerLabel.length > 0)).toBe(true);
     expect(topTenSuggestedRoutes).toHaveLength(4);
     const map = readFileSync(resolve(process.cwd(), "public/maps/top-ten-israel.html"), "utf8");
     expect(map).toContain("places.length !== 8");
     expect(map).toContain("cluster:true");
     expect(map).toContain("top-ten-israel-map-focus");
     expect(map).toContain("top-ten-israel-map-selected");
+    expect(map).toContain('id:"place-labels"');
+    expect(map).not.toContain('id:"place-numbers"');
+    expect(map).not.toContain("zoom:16.8");
     expect(map).not.toContain("jerusalem-shopping-map-focus");
   });
 
@@ -52,7 +64,11 @@ describe("Top 10 Israel experiences guide", () => {
     const page = readFileSync(resolve(process.cwd(), "src/components/TopTenIsraelGuide.tsx"), "utf8");
     expect(page).toContain("grid grid-cols-2 gap-3 md:grid-cols-3 lg:grid-cols-5");
     expect(page).toContain("hidden w-full table-fixed");
-    expect(page).toContain("divide-y md:hidden");
+    expect(page).toContain("divide-y border-t");
+    expect(page).toContain("Show the mobile comparison of all ten experiences");
+    expect(page.indexOf('<section id="experiences"')).toBeLessThan(page.indexOf('<section id="experience-map"'));
+    expect(page).toContain("Where to Stay in Israel");
+    expect(page).toContain("beach information (Hebrew)");
     expect(page).toContain("topTenSuggestedRoutes.map");
     expect(page).toContain("related.map");
     expect(page).toContain("planning.map");
