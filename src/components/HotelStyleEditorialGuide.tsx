@@ -6,6 +6,7 @@ import { linksForPage } from "@/data/registry";
 import { AreaMap } from "@/components/AreaMap";
 import { GuideHeader, OnThisPage, FaqList, SourceList } from "@/components/Guide";
 import { HomeContactForm } from "@/components/HomeContactForm";
+import { StayBookingChecklist } from "@/components/StayBookingChecklist";
 import { StayTripLinks } from "@/components/StayTripLinks";
 import { guideContactCopy } from "@/lib/guide-contact";
 import { hotelBooking, resortHotel } from "@/components/StayGuideParts";
@@ -283,7 +284,7 @@ export function HotelStyleEditorialGuide({ guide }: { guide: HotelStayDestinatio
         <p className="eyebrow">Choose the holiday, then the hotel</p>
         <h2 id="choose-h" className="mt-2 text-3xl">Which Dead Sea stay suits you?</h2>
         <p className="mt-4 max-w-4xl leading-relaxed">I usually start by asking what matters most: time on an operating beach, a spa break, activities for children or a comfortable hotel at the right total price. The main resorts are in Ein Bokek and the southern hotel district; Ein Gedi is a different, nature-focused choice.</p>
-        <div className="mt-6 grid grid-cols-1 gap-3 min-[360px]:grid-cols-2 sm:gap-4 lg:grid-cols-4" data-testid="deadsea-category-grid">
+        <div className="mt-6 grid grid-cols-1 gap-3 min-[360px]:grid-cols-2 sm:gap-4 lg:grid-cols-3" data-testid="deadsea-category-grid">
           {primaryGroups.map(group => {
             const content = groupCaptions[group.id];
             const photo = group.id === "value"
@@ -413,12 +414,10 @@ export function HotelStyleEditorialGuide({ guide }: { guide: HotelStayDestinatio
 
       <section id="tips" className="mt-14 scroll-mt-32" aria-labelledby="tips-h">
         <h2 id="tips-h" className="text-3xl">What to check before booking</h2>
-        <ul className="mt-4 grid gap-x-6 rounded-2xl border bg-secondary/20 px-4 sm:grid-cols-2 sm:px-6" data-testid="deadsea-booking-checklist">
-          {bookingTips.map(tip => <li key={tip.title} className="flex items-start gap-3 border-b py-4 last:border-b-0 sm:[&:nth-last-child(-n+2)]:border-b-0">
-            <span className="mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-full border border-primary/20 bg-primary/10 text-primary"><Check className="h-4 w-4" aria-hidden /></span>
-            <div><h3 className="font-semibold">{tip.title}</h3><p className="mt-1 text-sm leading-relaxed text-muted-foreground">{tip.text}</p></div>
-          </li>)}
-        </ul>
+        <StayBookingChecklist testId="deadsea-booking-checklist" groups={[
+          { title: "Location & arrival", items: bookingTips.slice(0, Math.ceil(bookingTips.length / 2)) },
+          { title: "Room & booking conditions", items: bookingTips.slice(Math.ceil(bookingTips.length / 2)) },
+        ]} />
         <aside className="mt-6 flex gap-3 rounded-xl border border-amber-200 bg-amber-50/80 p-4 text-sm leading-relaxed dark:border-amber-900/50 dark:bg-amber-950/20">
           <Lightbulb className="mt-0.5 h-5 w-5 shrink-0 text-amber-600" aria-hidden />
           <p>Dates can change services and room packages. Check my <Link to="/travel-blog/calendar-of-events/" className="font-semibold text-primary underline underline-offset-2">Israel calendar of events</Link> for holidays, and reconfirm spa and beach facilities for the dates of your stay.</p>
