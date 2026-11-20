@@ -184,7 +184,7 @@ export const haifaDestinationContent: AttractionDestinationContent = {
       <AttractionHighlight title="Louis Promenade and Carmel Center"
         image={{ src: pictures.carmel, alt: "Panoramic view over Haifa's city slopes and Mediterranean bay from Mount Carmel" }}>
         <p>Louis Promenade follows Yefe Nof Street on the Carmel ridge, with wide views across the city, port and bay. It is a natural pairing with the Upper Balcony of the Bahá’í Gardens: the two sights are across the street from one another.</p>
-        <p>Continue towards Carmel Center for cafés, shops and the Carmelit. This is one of the easiest areas for visitors who want a big Haifa view without committing to a long downhill walk.</p>
+        <p>From Carmel Center, you can walk towards Louis Promenade and the nearby upper garden viewpoint. This is one of the easiest areas for visitors who want a big Haifa view without committing to a long downhill walk.</p>
         {directions("Louis Promenade, Yefe Nof, Haifa, Israel")}
       </AttractionHighlight>
       <AttractionHighlight title="The German Colony"
@@ -251,7 +251,7 @@ export const haifaDestinationContent: AttractionDestinationContent = {
         </article>
         <article className="rounded-xl border bg-card p-4 sm:p-5">
           <div className="flex items-center gap-2"><Clock3 className="h-5 w-5 text-primary"/><h3 className="font-serif text-xl font-semibold">A Haifa highlights day — around 5–7 hours</h3></div>
-          <p className="mt-3 text-sm leading-relaxed sm:text-base"><strong>Morning:</strong> Louis Promenade and the Upper Balcony of the Bahá’í Gardens. <strong>Midday:</strong> Use the Carmelit, bus or taxi to reach the Lower City for the German Colony, Wadi Nisnas and lunch.</p>
+          <p className="mt-3 text-sm leading-relaxed sm:text-base"><strong>Morning:</strong> Start at Carmel Center, walk along Louis Promenade and finish at the Upper Balcony of the Bahá’í Gardens. <strong>Midday:</strong> Use the Carmelit, bus or taxi to reach the Lower City for the German Colony, Wadi Nisnas and lunch.</p>
           <p className="mt-2 text-sm leading-relaxed sm:text-base"><strong>Optional afternoon:</strong> Stella Maris and the tourist cable car to Bat Galim. This last leg needs a separate bus or taxi transfer and depends on the cable car's operation. A booked garden tour or museum visit may replace other stops.</p>
           <div className="mt-3 flex flex-wrap gap-x-4 gap-y-2 text-sm font-semibold">
             <a className="inline-flex items-center gap-1 text-primary underline underline-offset-4" href={carmelWalkingRoute} target="_blank" rel="noopener noreferrer">Carmel viewpoint walk <ArrowUpRight className="h-4 w-4"/></a>
