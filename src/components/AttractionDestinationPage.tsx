@@ -100,9 +100,12 @@ function AtAGlance({ placeName, facts, note }: { placeName: string; facts: Attra
  * Full mobile width; independent of the compact hero, panoramas and link thumbnails.
  */
 export function AttractionContentImage({ src, alt, position, mobileContain }: { src: string; alt: string; position?: string; mobileContain?: boolean }) {
-  return <img src={src} alt={alt} width={520} height={390} loading="lazy" decoding="async"
-    className={"aspect-[4/3] h-auto w-full rounded-lg " + (mobileContain ? "bg-muted/20 object-contain sm:object-cover" : "object-cover")}
-    style={position ? { objectPosition: position } : undefined} />;
+  if (mobileContain) {
+    return <img src={src} alt={alt} width={520} height={390} loading="lazy" decoding="async"
+      className="aspect-[4/3] h-auto w-full rounded-lg bg-muted/20 object-contain sm:object-cover"
+      style={position ? { objectPosition: position } : undefined} />;
+  }
+  return <img src={src} alt={alt} width={520} height={390} loading="lazy" decoding="async" className="aspect-[4/3] h-auto w-full rounded-lg object-cover" style={position ? { objectPosition: position } : undefined} />;
 }
 
 export function AttractionHighlight({
