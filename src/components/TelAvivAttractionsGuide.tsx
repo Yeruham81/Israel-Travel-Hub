@@ -120,7 +120,7 @@ function Tours(){
    const tracking=affiliateConfig[tour.id]?.trackingUrl;
    if(!tracking || !/^https:\/\/(?:viator|getyourguide)\.tpm\.li\//.test(tracking)) return null;
    const url=new URL(tracking);
-   url.searchParams.set("sub_id","tel_aviv_attractions_"+tour.id.split("@")[0].replace("tour-","").replaceAll("-","_"));
+   url.searchParams.set("sub_id","tel_aviv_attractions_"+tour.id.split("@")[0]!.replace("tour-","").replaceAll("-","_"));
    return <a key={tour.id} href={url.toString()} target="_blank" rel={relFor(true)}
      onClick={()=>recordOutboundClick({pageId:"tel_aviv_attractions",productId:tour.id,offerId:tour.id})}
      data-testid="tel-aviv-curated-tour" className="group flex min-w-0 flex-col overflow-hidden rounded-xl border bg-card transition-colors hover:border-primary hover:shadow-sm focus-visible:outline-2 focus-visible:outline-primary">
