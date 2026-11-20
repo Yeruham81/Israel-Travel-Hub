@@ -1,3 +1,4 @@
+import { StayBookingChecklist } from "@/components/StayBookingChecklist";
 import { Link, type LinkProps } from "@tanstack/react-router";
 import { ArrowRight, MapPin } from "lucide-react";
 import { accommodationEditorial, type AccommodationEditorialId } from "@/data/accommodationEditorial";
@@ -33,9 +34,10 @@ export function StayEditorialGuidePage({ guide, id }: { guide: CityStayGuide | H
     </div>)}</div>
    </section>
    <Section id="tips" title="What to check before choosing" className="scroll-mt-32">
-    <p>{info.tip}</p><ul className="mt-5 grid gap-3 sm:grid-cols-2">
-     {guide.checklist.slice(0,6).map(t => <li key={t} className="rounded-xl border bg-secondary/40 p-4 text-sm leading-relaxed">{t}</li>)}
-    </ul>
+    <p>{info.tip}</p><StayBookingChecklist groups={[
+        { title: "Location & arrival", items: guide.checklist.slice(0, 3) },
+        { title: "Room & booking conditions", items: guide.checklist.slice(3, 6) },
+      ]} />
    </Section>
    <section id="hotels" aria-labelledby="hotels-h" className="mt-12 scroll-mt-32">
     <div className="rounded-2xl border bg-secondary/40 p-5 sm:p-7">
