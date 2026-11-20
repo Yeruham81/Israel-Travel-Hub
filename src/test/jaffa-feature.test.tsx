@@ -31,7 +31,8 @@ describe("Jaffa multi-stop city attractions guide", () => {
     expect(component).toContain("around 4–5 hours");
     expect(component).toContain("Open short walking route in Google Maps");
     expect(component).toContain("Open half-day walking route in Google Maps");
-    expect(component.match(/https:\/\/www\.google\.com\/maps\/dir\/\?api=1/g)).toHaveLength(2);
+    // Two complete walking routes plus the existing Clock Tower arrival-directions link.
+    expect(component.match(/https:\/\/www\.google\.com\/maps\/dir\/\?api=1/g)).toHaveLength(3);
     expect(component).toContain('data-testid="jaffa-transport"');
     expect(component).toContain("Shalma");
     expect(component).toContain("DAN KAL");
