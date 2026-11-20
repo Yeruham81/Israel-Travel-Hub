@@ -57,6 +57,10 @@ export type AttractionDestinationContent = {
   visitorNavLabel?: string;
   transportContent?: ReactNode;
   itineraryContent?: ReactNode;
+  itineraryFirst?: boolean;
+  itineraryTitle?: string;
+  foodContent?: ReactNode;
+  practicalContent?: ReactNode;
   tourContent?: ReactNode;
   faqs?: { q: string; a: string }[];
   nearby?: AttractionNearbyLink[];
@@ -121,9 +125,12 @@ export function AttractionHighlight({
 export function AttractionDestinationPage({ content }: { content: AttractionDestinationContent }) {
   const sections: [string, string][] = [
     ["highlights", "What to see"],
+    ...(content.itineraryFirst && content.itineraryContent ? [["visit-plan", content.itineraryTitle ?? "Plan your visit"] as [string, string]] : []),
     ...(content.visitorContent ? [["visitor-info", content.visitorNavLabel ?? "Opening hours & tickets"] as [string, string]] : []),
     ...(content.transportContent ? [["getting-there", "How to get there"] as [string, string]] : []),
-    ...(content.itineraryContent ? [["visit-plan", "Plan your visit"] as [string, string]] : []),
+    ...(!content.itineraryFirst && content.itineraryContent ? [["visit-plan", content.itineraryTitle ?? "Plan your visit"] as [string, string]] : []),
+    ...(content.foodContent ? [["food", "Food and cafés"] as [string, string]] : []),
+    ...(content.practicalContent ? [["practical", "Practical tips"] as [string, string]] : []),
     ...(content.historyContent ? [["history", "History and significance"] as [string, string]] : []),
     ...(content.tourContent ? [["tours", "Tours and private visits"] as [string, string]] : []),
     ...(content.faqs?.length ? [["faq", "Questions"] as [string, string]] : []),
@@ -152,9 +159,12 @@ export function AttractionDestinationPage({ content }: { content: AttractionDest
       <Section id="highlights" title={content.highlightsTitle ?? "What to see at " + content.placeName} className="mt-9">
         {content.highlightContent}
       </Section>
+      {content.itineraryFirst && content.itineraryContent && <Section id="visit-plan" title={content.itineraryTitle ?? "How to plan your visit"}>{content.itineraryContent}</Section>}
       {content.visitorContent && <Section id="visitor-info" title={content.visitorTitle ?? "Opening hours, tickets and practical information"}>{content.visitorContent}</Section>}
       {content.transportContent && <Section id="getting-there" title={"How to get to " + content.placeName}>{content.transportContent}</Section>}
-      {content.itineraryContent && <Section id="visit-plan" title="How to plan your visit">{content.itineraryContent}</Section>}
+      {!content.itineraryFirst && content.itineraryContent && <Section id="visit-plan" title={content.itineraryTitle ?? "How to plan your visit"}>{content.itineraryContent}</Section>}
+      {content.foodContent && <Section id="food" title="Where to eat in Jaffa">{content.foodContent}</Section>}
+      {content.practicalContent && <Section id="practical" title="Practical tips for visiting Jaffa">{content.practicalContent}</Section>}
       {content.historyContent && <Section id="history" title={content.historyTitle ?? "History and significance"}>{content.historyContent}</Section>}
       {content.tourContent && <Section id="tours" title="Guided tours and private visits">{content.tourContent}</Section>}
       {!!content.faqs?.length && <FaqList faqs={content.faqs} />}
