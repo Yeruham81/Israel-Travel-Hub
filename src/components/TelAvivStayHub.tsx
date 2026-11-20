@@ -76,7 +76,7 @@ export function TelAvivStayHub({ g, areas }: { g: CityStayGuide; areas: Neighbor
             {visibleAreas.length} {visibleAreas.length === 1 ? "area" : "areas"}
             {preference ? " for " + preferenceLabels[preference].toLowerCase() : " to explore"}
           </p>
-          <ul className="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          <ul className="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
             {visibleAreas.map((area) => <li key={area.id} data-testid="neighborhood-card" className="min-w-0">
               <Link
                 to={area.path as LinkProps["to"]}
