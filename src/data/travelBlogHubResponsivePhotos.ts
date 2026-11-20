@@ -102,6 +102,8 @@ import photo98 from "@/assets/home/hotel-room.webp";
 import photo99 from "@/assets/travel-blog-hub/hotel-room-54b1cef076-360.webp";
 
 export const travelBlogHubImageSets: Record<string, string> = {
+  // This 500px Drive WebP is already 67 KB; use the native width until smaller derivatives are needed.
+  ["/images/top-ten-israel/hero.webp"]: "/images/top-ten-israel/hero.webp 500w",
   ["/images/attractions/hero-jerusalem.webp"]: [photo0 + " 420w", "/images/attractions/hero-jerusalem.webp" + " 755w"].join(", "),
   ["/images/hotels/jerusalem-night.webp"]: [photo1 + " 420w", "/images/hotels/jerusalem-night.webp" + " 755w"].join(", "),
   ["/images/jerusalem/hutzot-hayotzer.webp"]: [photo2 + " 420w", "/images/jerusalem/hutzot-hayotzer.webp" + " 717w"].join(", "),
