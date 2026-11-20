@@ -7,7 +7,7 @@ import { CityStayHub } from "@/components/CityStayHub";
 import { JerusalemStayHub } from "@/components/JerusalemStayHub";
 import { TelAvivStayHub } from "@/components/TelAvivStayHub";
 import { linksForPage } from "@/data/registry";
-import { type UiCrumb, Checklist, FaqList, GuideHeader, OnThisPage, ProviderSection, Section, SourceList } from "@/components/Guide";
+import { type UiCrumb, FaqList, GuideHeader, OnThisPage, ProviderSection, Section, SourceList } from "@/components/Guide";
 import { HomeContactForm } from "@/components/HomeContactForm";
 import { guideContactCopy } from "@/lib/guide-contact";
 
