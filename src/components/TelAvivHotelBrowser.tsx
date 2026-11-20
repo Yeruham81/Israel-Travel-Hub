@@ -41,13 +41,19 @@ export const hotelTileCopy: Record<string, { description: string; bestFor: strin
 export function TelAvivHotelBrowser() {
   const [areaId, setAreaId] = useState<string>("all");
   const [sort, setSort] = useState<"area" | "name">("area");
+  const [expanded, setExpanded] = useState(false);
   const selectedArea = telAvivAreaGuides.find((area) => area.id === areaId);
-  const visible = telAvivHotelCatalog
+  const hotelList = telAvivHotelCatalog
     .filter((hotel) => areaId === "all" || hotel.areaId === areaId)
     .sort((a, b) => sort === "name"
       ? a.name.localeCompare(b.name)
       : telAvivAreaGuides.findIndex((area) => area.id === a.areaId) - telAvivAreaGuides.findIndex((area) => area.id === b.areaId) || a.name.localeCompare(b.name));
 
+  const featuredIds = new Set(telAvivAreaGuides.flatMap((area) =>
+    telAvivHotelCatalog.filter((hotel) => hotel.areaId === area.id).slice(0, 2).map((hotel) => hotel.id),
+  ));
+  const visible = areaId === "all" && !expanded ? hotelList.filter((hotel) => featuredIds.has(hotel.id)) : hotelList;
+  const chooseArea = (id: string) => { setAreaId(id); setExpanded(false); };
   return (
     <section id="book" aria-labelledby="hotel-catalog-h" className="mt-8 scroll-mt-32">
       <div className="rounded-2xl border bg-secondary/25 p-4 sm:p-6">
@@ -61,15 +67,15 @@ export function TelAvivHotelBrowser() {
           <label htmlFor="telaviv-hotel-area" className="shrink-0 text-sm font-medium">Area</label>
           <select id="telaviv-hotel-area" aria-label="Choose hotel area"
                   className="min-w-0 flex-1 rounded-lg border bg-card px-2.5 py-1.5 text-sm focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
-                  value={areaId} onChange={(event) => setAreaId(event.target.value)}>
+                  value={areaId} onChange={(event) => chooseArea(event.target.value)}>
             <option value="all">All areas</option>
             {telAvivAreaGuides.map((area) => <option key={area.id} value={area.id}>{area.shortName}</option>)}
           </select>
         </div>
         <div className="mt-3 hidden flex-wrap items-center gap-1.5 md:flex" role="group" aria-label="Filter Tel Aviv hotels by area">
-          <button type="button" className="chip px-2.5! py-1! text-xs!" aria-pressed={areaId === "all"} onClick={() => setAreaId("all")}>All areas</button>
+          <button type="button" className="chip px-2.5! py-1! text-xs!" aria-pressed={areaId === "all"} onClick={() => chooseArea("all")}>All areas</button>
           {telAvivAreaGuides.map((area) => (
-            <button key={area.id} type="button" className="chip px-2.5! py-1! text-xs!" aria-pressed={areaId === area.id} onClick={() => setAreaId(area.id)}>
+            <button key={area.id} type="button" className="chip px-2.5! py-1! text-xs!" aria-pressed={areaId === area.id} onClick={() => chooseArea(area.id)}>
               {area.shortName}
             </button>
           ))}
@@ -90,9 +96,17 @@ export function TelAvivHotelBrowser() {
         )}
       </div>
 
-      <ul className="mt-4 grid min-w-0 gap-4 lg:grid-cols-2" data-testid="tel-aviv-hotels">
+      <p className="mt-4 text-xs font-medium text-muted-foreground" role="status">{areaId !== "all" ? `${hotelList.length} hotels in ${selectedArea?.shortName}` : expanded ? `${hotelList.length} hotels across eight neighborhoods` : `Showing ${visible.length} of ${hotelList.length} hotels across eight neighborhoods`}</p>
+      <ul className="mt-4 grid min-w-0 gap-4 sm:grid-cols-2 lg:grid-cols-3" data-testid="tel-aviv-hotels">
         {visible.map((hotel) => <TelAvivHotelTile key={hotel.id} hotel={hotel} />)}
       </ul>
+      {areaId === "all" && !expanded && visible.length < hotelList.length && (
+        <div className="mt-5 flex justify-center">
+          <button type="button" onClick={() => setExpanded(true)} className="inline-flex min-h-11 items-center justify-center rounded-lg border border-primary/40 bg-card px-5 py-2.5 text-sm font-semibold text-primary transition-colors hover:bg-secondary/20">
+            Show more hotels
+          </button>
+        </div>
+      )}
       <p className="mt-4 text-xs leading-relaxed text-muted-foreground">
         Hotel stays are provided by independent properties and booked through external booking websites.
         Prices, availability, room details and booking conditions may change. Before booking, check the
@@ -117,7 +131,7 @@ export function TelAvivHotelTile({ hotel, pageId = "stay-telaviv", showArea = tr
 
 
   const copy = hotelTileCopy[hotel.id] || { description: hotel.summary, bestFor: hotel.bestFor };
-  const verticalLayout = stacked;
+  const verticalLayout = stacked || showArea;
 
   return (
     <li className={verticalLayout
