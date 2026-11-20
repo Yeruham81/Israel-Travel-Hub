@@ -572,7 +572,7 @@ describe("Jerusalem direct hotel catalog", () => {
     fireEvent.click(mamilla);
     expect(mamilla).toHaveAttribute("aria-pressed", "true");
     expect(within(catalog).getAllByTestId("jerusalem-hotel-card")).toHaveLength(5);
-    expect(within(catalog).getByRole("status")).toHaveTextContent("hotels");
+    expect(within(catalog).queryByRole("status")).not.toBeInTheDocument();
     fireEvent.click(within(filters).getByRole("button", { name: "All areas" }));
     expect(within(catalog).getAllByTestId("jerusalem-hotel-card")).toHaveLength(12);
     fireEvent.click(within(catalog).getByRole("button", { name: "Show more hotels" }));
