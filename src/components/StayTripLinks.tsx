@@ -177,11 +177,9 @@ export function StayTripLinks({
   const isEditorial = presentation === "guide";
   const normalized = (url: string) => url.replace(/\/+$/, "");
   const visited = new Set<string>();
-  const imagePaths = new Set<string>();
   const keep = (item: GuideCard) => {
-    if (normalized(item.to) === normalized(currentPath ?? "") || visited.has(normalized(item.to)) || imagePaths.has(item.photo)) return false;
+    if (normalized(item.to) === normalized(currentPath ?? "") || visited.has(normalized(item.to))) return false;
     visited.add(normalized(item.to));
-    imagePaths.add(item.photo);
     return true;
   };
   const local = set.local.filter(keep);

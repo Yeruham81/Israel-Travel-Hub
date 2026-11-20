@@ -3,7 +3,7 @@ import { cleanup, render, screen, within } from "@testing-library/react";
 import { afterEach, describe, expect, it, vi } from "vitest";
 import { StayTripLinks, stayGuideGroups } from "@/components/StayTripLinks";
 import einGediWaterfall from "@/assets/guides/dead-sea-excursions/ein-gedi-waterfall.webp";
-import deadSeaMudBathing from "@/assets/guides/dead-sea-excursions/dead-sea-mud-bathing.webp";
+import { guideHeroPhotoForPath } from "@/lib/guide-hero-photos";
 
 vi.mock("@tanstack/react-router", async () => {
   const actual = await vi.importActual<typeof import("@tanstack/react-router")>("@tanstack/react-router");
@@ -101,8 +101,8 @@ describe("hotel and neighborhood guide navigation", () => {
     const masada = local.find(link => link.getAttribute("href") === "/attractions/masada/")!;
     expect(einGedi.querySelector("img")).toHaveAttribute("src", einGediWaterfall);
     expect(einGedi.querySelector("img")).toHaveAttribute("alt", expect.stringContaining("Waterfall"));
-    expect(attractions.querySelector("img")).toHaveAttribute("src", deadSeaMudBathing);
-    expect(attractions.querySelector("img")).toHaveAttribute("alt", expect.stringContaining("mineral mud"));
+    expect(attractions.querySelector("img")).toHaveAttribute("src", guideHeroPhotoForPath("/travel-blog/dead-sea-attractions/")!.src);
+    expect(attractions.querySelector("img")).toHaveAttribute("alt", expect.stringContaining("Nahal Bokek"));
     expect(attractions.querySelector("img")!.getAttribute("src")).not.toBe(masada.querySelector("img")!.getAttribute("src"));
     expect(onward.map(link => link.getAttribute("href"))).toContain("/travel-blog/calendar-of-events/");
   });

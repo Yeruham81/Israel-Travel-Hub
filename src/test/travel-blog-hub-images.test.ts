@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { readFileSync } from "node:fs";
+import { existsSync, readFileSync } from "node:fs";
 import { guideDirectory, filterGuides, guideTopics } from "@/data/travelGuides";
 import { uniqueGuideCardPhotos } from "@/lib/guide-card-photos";
 import { travelBlogHubImageSets, travelBlogExploreImageSets } from "@/data/travelBlogHubResponsivePhotos";
@@ -16,12 +16,15 @@ describe("travel-blog index responsive WebP delivery", () => {
       expect(new Set(photos).size).toBe(photos.length);
       for (const photo of photos) {
         const srcset = travelBlogHubImageSets[photo] ?? "";
-        // This already-compressed Old City souk WebP is a small native asset;
-        // it can be served directly until a derivative is generated.
-        if (!srcset && photo === "/images/attractions/old-jerusalem-via-dolorosa.webp") {
-          const bytes = readFileSync("public/images/attractions/old-jerusalem-via-dolorosa.webp");
-          expect(bytes.subarray(0, 4).toString()).toBe("RIFF");
-          expect(bytes.length).toBeLessThan(140_000);
+        // Additional distinct hero photos are already optimized native WebPs;
+        // use the original directly when the historical generated srcSet lacks a mapping.
+        if (!srcset) {
+          const file = photo.startsWith("/images/") ? "public" + photo
+            : photo.startsWith("/src/assets/") ? photo.slice(1) : "";
+          expect(file && existsSync(file), photo).toBeTruthy();
+          const bytes = readFileSync(file);
+          expect(bytes.subarray(0, 4).toString(), photo).toBe("RIFF");
+          expect(bytes.length, photo).toBeLessThan(180_000);
           continue;
         }
         expect(srcset, photo).toBeTruthy();

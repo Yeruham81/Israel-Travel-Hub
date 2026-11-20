@@ -1453,7 +1453,7 @@ telAviv: {
       "guide-sherut-regulation", "guide-telaviv-bicycle-rules", "guide-telaviv-weekend-hours",
       "guide-weekend-network", "guide-weekend-711",
     ],
-    related: ["israel", "taxis", "sherut", "shabbat", "airportTaxis"],
+    related: ["israel", "taxis", "sherut", "shabbat", "airportTaxis", "arrival"],
     services: [
       { label: "Where to stay in Tel Aviv", to: "/travel-blog/where-to-stay-in-tel-aviv/", note: "Compare neighborhoods by the places you plan to visit and your transit options." },
       { label: "Explore Old Jaffa", to: "/attractions/jaffa/", note: "Plan the old streets, port and connections to the rest of the city." },

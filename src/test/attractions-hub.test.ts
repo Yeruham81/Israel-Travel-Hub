@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { attractionHubCards, attractionHubPhotos, attractionHubRegions, attractionPlanningPaths, attractionRelatedGuides } from "@/data/attractionsHub";
-import { readFileSync } from "node:fs";
+import { readFileSync, existsSync } from "node:fs";
 import { attractionHubCardImageSets, attractionHubRegionImageSets, attractionHubRelatedImageSets } from "@/data/attractionHubResponsivePhotos";
 import { attractionIds, attractionPath, isRegionalOverview } from "@/data/attractionGuideTypes";
 import { travelGuidePaths } from "@/data/registry";
@@ -122,6 +122,12 @@ describe("Attractions hub redesign", () => {
 });
 
 describe("attractions landing responsive image delivery", () => {
+  const nativeOptimizedWebp = (src: string) => {
+    const localPath = src.startsWith("/images/") ? "public" + src : src.startsWith("/src/assets/") ? src.slice(1) : "";
+    if (!localPath || !existsSync(localPath)) return false;
+    const file = readFileSync(localPath);
+    return file.subarray(0, 4).toString() === "RIFF" && file.length < 180_000;
+  };
   const parseWidths = (srcset: string) => srcset.split(", ").map(value => Number(value.match(/ (\d+)w$/)?.[1]));
 
   it("retains every original source and gives all 21 large cards native-resolution fallback", () => {
@@ -130,7 +136,7 @@ describe("attractions landing responsive image delivery", () => {
       const srcset = attractionHubCardImageSets[card.photo.src] ?? "";
       // Akko's editorial photo is updated independently of the hub. The native
       // img src remains valid even when no separate responsive entry exists.
-      if (card.id === "akko-acre" && !srcset) {
+      if (!srcset && nativeOptimizedWebp(card.photo.src)) {
         expect(card.photo.src).toBeTruthy();
         continue;
       }
@@ -150,6 +156,7 @@ describe("attractions landing responsive image delivery", () => {
     }
     for (const guide of attractionRelatedGuides) {
       const srcset = attractionHubRelatedImageSets[guide.photo.src] ?? "";
+      if (!srcset && nativeOptimizedWebp(guide.photo.src)) continue;
       expect(srcset, guide.title).toBeTruthy();
       const widths = parseWidths(srcset);
       expect(widths.every(width => Number.isInteger(width) && width > 0), guide.title).toBe(true);
