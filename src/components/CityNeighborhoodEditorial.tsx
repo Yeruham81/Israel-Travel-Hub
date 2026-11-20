@@ -334,11 +334,7 @@ export function CityNeighborhoodEditorial({ guide }: { guide: CityStayGuide }) {
         }]
         : [...decisionNotes.telaviv.faqs]} />
       <StayTripLinks region={cityId} currentPath={info.path} presentation="guide" />
-      <HomeContactForm guide={cityId === "jerusalem"
-        ? { ...guideContactCopy(info.title, "accommodation", cityName),
-            introduction: "Not sure which part of Jerusalem would suit your plans? Tell me your travel dates, main interests and how you expect to arrive. I'll be happy to share practical advice." }
-        : { ...guideContactCopy(info.title, "accommodation", cityName),
-            introduction: "Not sure which part of Tel Aviv would suit your plans? Tell me your dates, interests and whether the beach or city neighbourhoods matter most to you. I'll be happy to offer practical advice." }} />
+      <HomeContactForm guide={guideContactCopy(info.title, "accommodation", cityName)} />
       <SourceList
         ids={cityId === "jerusalem" ? [...guide.sourceIds, ...jerusalemStaySourceIds] : guide.sourceIds}
         intro={cityId === "jerusalem" ? "Transport and access information for planning your stay." : "Neighbourhood and accommodation information for planning your stay."}
