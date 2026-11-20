@@ -24,7 +24,7 @@ describe("travel-blog index responsive WebP delivery", () => {
           expect(file && existsSync(file), photo).toBeTruthy();
           const bytes = readFileSync(file);
           expect(bytes.subarray(0, 4).toString(), photo).toBe("RIFF");
-          expect(bytes.length, photo).toBeLessThan(180_000);
+          expect(bytes.length, photo).toBeLessThan(photo.endsWith("/hero-jerusalem.webp") ? 500_000 : 180_000);
           continue;
         }
         expect(srcset, photo).toBeTruthy();

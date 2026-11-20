@@ -1,3 +1,4 @@
+import telAvivTourHero from "@/assets/tel-aviv/rothschild.webp";
 import type { TourPlaceId, TourTagId } from "@/data/tourTypes";
 import type { GuidePhoto } from "@/data/travelGuides";
 import type { ShoreReadingGuide } from "@/data/shoreReading";
@@ -356,7 +357,7 @@ export const tourCategories: TourCategory[] = [
     id: "tel-aviv-jaffa", title: "Tel Aviv & Jaffa tours", shortTitle: "Tel Aviv & Jaffa",
     description: "Discover Tel Aviv and Old Jaffa through guided walks, street art, architecture and Carmel Market tastings. Compare duration, meeting points and inclusions.",
     intro: "Follow Jaffa's lanes down to the sea, explore Tel Aviv's creative neighborhoods or taste your way through the market. These local experiences bring the city to life without a full day on the road.",
-    photo: migration["EXISTING:coast"], match: { destinations: ["tel-aviv"] },
+    photo: { src: telAvivTourHero, alt: "Rothschild Boulevard in central Tel Aviv with historic city architecture" }, match: { destinations: ["tel-aviv"] },
     paragraphs: ["Tel Aviv and Jaffa are best explored in manageable neighborhoods: walk historic Jaffa and Neve Tzedek, discover the White City's architecture, or focus on Florentin street art and Carmel Market's food stalls. Compare the length and format of each tour: cycling, audio tours and guided walks provide different experiences.", "Most guided walks start at a meeting point rather than a hotel. Confirm where your tour ends and whether food, bicycle equipment or museum admission is included. My private-driver service offers flexible transport and stops, not a guided walking tour; professional guiding can be arranged separately when requested."],
     choices: [
       { title: "Old Jaffa & city highlights", text: "A good introduction to the coastal setting and historic neighborhoods, with a longer walk between different areas." },

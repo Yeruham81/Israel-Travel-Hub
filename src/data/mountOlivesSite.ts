@@ -8,7 +8,7 @@ export const mountOlivesSite = {
   updatedAt: "2026-11-18",
   region: "Jerusalem",
   hero: {
-    src: heroJerusalemLarge,
+    src: "/images/attractions/mount-of-olives.webp",
     alt: "Panoramic view across Jerusalem's Old City from the Mount of Olives",
   },
   intro: "The Mount of Olives rises opposite Jerusalem’s Old City, with a panoramic lookout above the historic Jewish cemetery and churches along the hillside. I recommend starting at the Seven Arches viewpoint, then walking downhill towards Dominus Flevit and Gethsemane if the slope suits you. You can continue towards Lion’s Gate or arrange a pickup at the foot of the hill.",

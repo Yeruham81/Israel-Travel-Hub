@@ -1,3 +1,4 @@
+import telAvivTourHero from "@/assets/tel-aviv/rothschild.webp";
 import { guideDirectory } from "@/data/travelGuides";
 import { attractionGuides } from "@/data/attractionGuides";
 import { attractionIds, attractionPath } from "@/data/attractionGuideTypes";
@@ -17,6 +18,7 @@ const normalized = (value: string) => value.replace(/\/+$/, "") + "/";
 export function guideHeroPhotoForPath(to: string): GuideHeroPhoto | undefined {
   const path = normalized(to);
   if (path === "/attractions/old-city-jerusalem/") return oldCityJerusalemSite.hero;
+  if (path === "/tours/tel-aviv-jaffa/") return { src: telAvivTourHero, alt: "Rothschild Boulevard in central Tel Aviv with historic city architecture" };
   if (path === "/attractions/jaffa/") return jaffaSite.hero;
   if (path === "/travel-blog/museums-in-jerusalem/") return {
     src: jerusalemMuseumsHero, alt: "Rockefeller Archaeological Museum courtyard in Jerusalem",
