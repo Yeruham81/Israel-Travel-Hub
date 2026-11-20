@@ -1,5 +1,6 @@
 const {chromium}=require("playwright");
 const fs=require("node:fs");
+async function main(){
 const url="https://saddlebrown-guanaco-454061.hostingersite.com/travel-blog/attractions-in-tel-aviv/";
 const expected="Carmel Market Food-Tasting Tour";
 const sleep=ms=>new Promise(resolve=>setTimeout(resolve,ms));
@@ -77,3 +78,5 @@ for(const a of results){
  if(a.status!==200||a.experiences!==10||a.tours!==4||a.routeLinks!==3||!a.correctFoodTour||!a.noCookingWorkshop||!a.weekendBus||!a.newEnglishBeach||!a.hebrewBeach||!a.noOldBeachLink||!a.graffitiPhoto||!a.foodPhoto||!a.sourceCredit||a.brokenImages.length||a.horizontalOverflowPixels>2)throw Error("Visual check failed for "+a.viewport);
 }
 console.log("TEL AVIV PUBLIC PAGE VISUAL AUDIT PASSED");
+}
+main().catch(error=>{console.error(error);process.exitCode=1;});
