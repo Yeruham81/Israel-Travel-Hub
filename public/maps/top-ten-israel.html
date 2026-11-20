@@ -1,0 +1,201 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="robots" content="noindex,nofollow" />
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
+  <title>Ten Israel experiences — regional map</title>
+  <link rel="stylesheet" href="https://unpkg.com/maplibre-gl@5.12.0/dist/maplibre-gl.css" integrity="sha384-mnM9NG1099tBMNxdDQNDKIxYcn/fmqQXFJvbT5l1MsrWvzfxBEffceBsw75/cW2R" crossorigin="anonymous" />
+  <style>
+    html,body,#map{height:100%;width:100%;margin:0}
+    body{font:14px/1.5 system-ui,sans-serif;background:#ecf3f8;color:#123346}
+    #map{position:absolute;inset:0}
+    #status{position:absolute;inset:0;display:grid;place-content:center;padding:20px;text-align:center;background:#ecf3f8f2;z-index:10}
+    #status[hidden]{display:none}
+    #status p{margin:0 0 10px}
+    a{color:#195c9e}
+    .maplibregl-popup-content{font:13px/1.5 system-ui,sans-serif;padding:12px}
+    .maplibregl-ctrl-attrib{font:10px/1.3 system-ui,sans-serif}
+    .maplibregl-ctrl-attrib a{color:#123346}
+  </style>
+</head>
+<body>
+  <div id="map" role="region" aria-label="Interactive map of eight representative regions for ten Israel experiences"></div>
+  <div id="status" role="status" aria-live="polite">
+    <p id="message">Loading Israel experience map…</p>
+    <a id="fallback" href="https://www.google.com/maps/search/?api=1&amp;query=Israel%20travel%20destinations" target="_blank" rel="noopener noreferrer">See Israel destinations on Google Maps</a>
+    <noscript>Enable JavaScript to use the interactive map.</noscript>
+  </div>
+  <script src="https://unpkg.com/maplibre-gl@5.12.0/dist/maplibre-gl.js" integrity="sha384-7+0QVD3+GoeOjaW35yTmpj0FR1K45ugw4ZUY0qEFomHSmAude6e9nB6/Xy5aPnzQ" crossorigin="anonymous"></script>
+  <script>
+    (() => {
+      "use strict";
+      const status = document.getElementById("status");
+      const message = document.getElementById("message");
+      const unavailable = () => {
+        message.textContent = "The interactive map is unavailable. Use the location links in the guide.";
+        status.hidden = false;
+      };
+      let places;
+      try {
+        const raw = new URLSearchParams(location.search).get("waypoints");
+        if (!raw || raw.length >= 2500) throw new Error("Missing experience map data");
+        places = JSON.parse(raw);
+        if (!Array.isArray(places) || places.length !== 8 ||
+            places.some(point => typeof point.id !== "string" || !/^[a-z0-9-]{2,32}$/.test(point.id) ||
+              typeof point.name !== "string" || point.name.length > 90 ||
+              !Number.isFinite(point.lat) || point.lat < 29.4 || point.lat > 33.4 ||
+              !Number.isFinite(point.lon) || point.lon < 34.4 || point.lon > 35.9) ||
+            new Set(places.map(point => point.id)).size !== 8) throw new Error("Invalid experience map data");
+      } catch {
+        unavailable();
+        return;
+      }
+
+      const bounds = [[34.48,29.44],[35.79,33.07]];
+      let map, popup, selectedId = null, ready = false, requestedId = null;
+      const highlight = () => {
+        if (!map || !map.getLayer("place-points")) return;
+        map.setPaintProperty("place-points","circle-color",[
+          "case",["==",["get","id"],selectedId || ""],"#075b96","#2779bc"
+        ]);
+        map.setPaintProperty("place-points","circle-stroke-width",[
+          "case",["==",["get","id"],selectedId || ""],4,2
+        ]);
+      };
+      const showAll = () => {
+        if (!ready) { requestedId = "all"; return; }
+        selectedId = null;
+        highlight();
+        if (popup) popup.remove();
+        map.fitBounds(bounds,{padding:{top:34,bottom:34,left:34,right:34},duration:450,maxZoom:13.4});
+      };
+      const focus = id => {
+        if (id === "all") { showAll(); return; }
+        const place = places.find(point => point.id === id);
+        if (!place) return;
+        if (!ready) { requestedId = id; return; }
+        selectedId = id;
+        highlight();
+        map.flyTo({center:[place.lon,place.lat],zoom:16.8,essential:true});
+        if (popup) popup.remove();
+        const panel = document.createElement("div");
+        const title = document.createElement("strong");
+        title.textContent = place.name;
+        panel.appendChild(title);
+        const link = document.createElement("a");
+        link.href = "https://www.google.com/maps/search/?api=1&query=" +
+          encodeURIComponent(place.name + ", Israel");
+        link.target = "_blank";
+        link.rel = "noopener noreferrer";
+        link.textContent = "View on Google Maps";
+        link.style.display = "block";
+        link.style.marginTop = "5px";
+        panel.appendChild(link);
+        popup = new maplibregl.Popup({offset:19,closeButton:true,maxWidth:"245px"})
+          .setLngLat([place.lon,place.lat]).setDOMContent(panel).addTo(map);
+      };
+      window.addEventListener("message",event => {
+        if (event.origin !== location.origin || event.source !== window.parent) return;
+        const data = event.data;
+        if (!data || data.type !== "top-ten-israel-map-focus" || typeof data.id !== "string") return;
+        focus(data.id);
+      });
+      if (typeof maplibregl === "undefined") { unavailable(); return; }
+      const timer = window.setTimeout(() => { if (!ready) unavailable(); }, 17000);
+      try {
+        maplibregl.setWorkerCount(1);
+        map = new maplibregl.Map({
+          container:"map",
+          style:new URL("./english-style.json",location.href).href,
+          bounds,
+          fitBoundsOptions:{padding:{top:34,bottom:34,left:34,right:34},maxZoom:13.4},
+          attributionControl:false,cooperativeGestures:true,dragRotate:false,
+          touchPitch:false,pitchWithRotate:false,renderWorldCopies:false,maxPitch:0,
+          locale:{
+            "NavigationControl.ZoomIn":"Zoom in",
+            "NavigationControl.ZoomOut":"Zoom out",
+            "AttributionControl.ToggleAttribution":"Toggle map credits"
+          }
+        });
+        map.touchZoomRotate.disableRotation();
+        map.addControl(new maplibregl.NavigationControl({showCompass:false}),"top-right");
+        map.addControl(new maplibregl.AttributionControl({compact:true,customAttribution:
+          '<a href="https://maputnik.github.io/osm-liberty/" target="_blank" rel="noopener noreferrer">OSM Liberty</a> (English labels)'}));
+        map.once("load",()=>{
+          const features = places.map((place,index) => ({
+            type:"Feature",
+            properties:{id:place.id,name:place.name,number:index+1},
+            geometry:{type:"Point",coordinates:[place.lon,place.lat]}
+          }));
+          map.addSource("places",{
+            type:"geojson",data:{type:"FeatureCollection",features},
+            cluster:true,clusterRadius:50,clusterMaxZoom:15
+          });
+          map.addLayer({
+            id:"place-clusters",type:"circle",source:"places",
+            filter:["has","point_count"],
+            paint:{"circle-color":"#206b9d","circle-radius":["step",["get","point_count"],19,4,23,7,27],
+              "circle-stroke-width":2,"circle-stroke-color":"#ffffff"}
+          });
+          map.addLayer({
+            id:"place-cluster-count",type:"symbol",source:"places",
+            filter:["has","point_count"],
+            layout:{"text-field":["get","point_count_abbreviated"],"text-size":13,
+              "text-font":["Noto Sans Bold","Open Sans Bold","Arial Unicode MS Bold"]},
+            paint:{"text-color":"#ffffff"}
+          });
+          map.addLayer({
+            id:"place-points",type:"circle",source:"places",
+            filter:["!",["has","point_count"]],
+            paint:{"circle-color":"#2779bc","circle-radius":15,"circle-stroke-width":2,"circle-stroke-color":"#ffffff"}
+          });
+          map.addLayer({
+            id:"place-numbers",type:"symbol",source:"places",
+            filter:["!",["has","point_count"]],
+            layout:{"text-field":["to-string",["get","number"]],"text-size":11,
+              "text-font":["Noto Sans Bold","Open Sans Bold","Arial Unicode MS Bold"]},
+            paint:{"text-color":"#ffffff"}
+          });
+          map.on("click","place-clusters",async event=>{
+            const feature=event.features && event.features[0];
+            if (!feature) return;
+            try {
+              const source=map.getSource("places");
+              const zoom=await source.getClusterExpansionZoom(Number(feature.properties.cluster_id));
+              map.easeTo({center:feature.geometry.coordinates,zoom:Math.min(zoom+0.4,17.5),duration:450});
+            } catch { map.zoomIn(); }
+          });
+          const selectPoint=event=>{
+            const feature=event.features && event.features[0];
+            if (!feature) return;
+            const id=feature.properties.id;
+            focus(id);
+            window.parent.postMessage({type:"top-ten-israel-map-selected",id},location.origin);
+          };
+          map.on("click","place-points",selectPoint);
+          map.on("click","place-numbers",selectPoint);
+          for (const layer of ["place-clusters","place-points","place-numbers"]) {
+            map.on("mouseenter",layer,()=>{map.getCanvas().style.cursor="pointer";});
+            map.on("mouseleave",layer,()=>{map.getCanvas().style.cursor="";});
+          }
+          ready=true;
+          window.clearTimeout(timer);
+          status.hidden=true;
+          if (requestedId && requestedId!=="all") focus(requestedId);
+          else showAll();
+        });
+        map.on("error",()=>{if (!ready) unavailable();});
+        window.addEventListener("pagehide",event=>{
+          if (!event.persisted) {window.clearTimeout(timer);map.remove();}
+        });
+      } catch {
+        window.clearTimeout(timer);
+        if (map) map.remove();
+        unavailable();
+      }
+    })();
+  </script>
+</body>
+</html>
