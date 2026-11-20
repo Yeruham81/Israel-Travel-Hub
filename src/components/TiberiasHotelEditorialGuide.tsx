@@ -6,6 +6,7 @@ import { linksForPage } from "@/data/registry";
 import { AreaMap } from "@/components/AreaMap";
 import { GuideHeader, OnThisPage, FaqList, SourceList } from "@/components/Guide";
 import { HomeContactForm } from "@/components/HomeContactForm";
+import { StayBookingChecklist } from "@/components/StayBookingChecklist";
 import { StayTripLinks } from "@/components/StayTripLinks";
 import { guideContactCopy } from "@/lib/guide-contact";
 import { hotelBooking, resortHotel } from "@/components/StayGuideParts";
@@ -256,7 +257,7 @@ export function TiberiasHotelEditorialGuide({ guide }: { guide: HotelStayDestina
         <p className="eyebrow">Choose your Tiberias stay</p>
         <h2 id="choose-h" className="mt-2 text-3xl">Which Tiberias hotel suits you?</h2>
         <p className="mt-4 max-w-4xl leading-relaxed">I recommend choosing a hotel around the kind of holiday you want: a luxurious lakeside break, family activities, a convenient central base or simple accommodation for exploring the Galilee.</p>
-        <div className="mt-6 grid grid-cols-1 gap-3 min-[360px]:grid-cols-2 sm:gap-4 lg:grid-cols-4" data-testid="tiberias-category-grid">
+        <div className="mt-6 grid grid-cols-1 gap-3 min-[360px]:grid-cols-2 sm:gap-4 lg:grid-cols-3" data-testid="tiberias-category-grid">
           {primaryGroups.map(group => {
             const content = groupCaptions[group.id];
             const photo = group.id === "luxury"
@@ -378,12 +379,10 @@ export function TiberiasHotelEditorialGuide({ guide }: { guide: HotelStayDestina
 
       <section id="tips" className="mt-14 scroll-mt-32" aria-labelledby="tips-h">
         <h2 id="tips-h" className="text-3xl">What to check before booking</h2>
-        <ul className="mt-4 grid gap-x-6 rounded-2xl border bg-secondary/20 px-4 sm:grid-cols-2 sm:px-6" data-testid="tiberias-booking-checklist">
-          {bookingTips.map(tip => <li key={tip.title} className="flex items-start gap-3 border-b py-4 last:border-b-0 sm:[&:nth-last-child(-n+2)]:border-b-0">
-            <span className="mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-full border border-primary/20 bg-primary/10 text-primary"><Check className="h-4 w-4" aria-hidden /></span>
-            <div><h3 className="font-semibold">{tip.title}</h3><p className="mt-1 text-sm leading-relaxed text-muted-foreground">{tip.text}</p></div>
-          </li>)}
-        </ul>
+        <StayBookingChecklist testId="tiberias-booking-checklist" groups={[
+          { title: "Location & arrival", items: bookingTips.slice(0, Math.ceil(bookingTips.length / 2)) },
+          { title: "Room & booking conditions", items: bookingTips.slice(Math.ceil(bookingTips.length / 2)) },
+        ]} />
         <aside className="mt-6 flex gap-3 rounded-xl border border-amber-200 bg-amber-50/80 p-4 text-sm leading-relaxed dark:border-amber-900/50 dark:bg-amber-950/20">
           <Lightbulb className="mt-0.5 h-5 w-5 shrink-0 text-amber-600" aria-hidden />
           <p>Weekends and holidays are busy around the lake. My <Link to="/travel-blog/calendar-of-events/" className="font-semibold text-primary underline underline-offset-2">Israel calendar of events</Link> can help you plan the dates, hotel meals and arrival arrangements.</p>
