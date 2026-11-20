@@ -124,7 +124,7 @@ describe("Attractions hub redesign", () => {
 describe("attractions landing responsive image delivery", () => {
   const parseWidths = (srcset: string) => srcset.split(", ").map(value => Number(value.match(/ (\d+)w$/)?.[1]));
 
-  it("retains every original source and gives all 20 large cards native-resolution fallback", () => {
+  it("retains every original source and gives all 21 large cards native-resolution fallback", () => {
     expect(attractionHubCards).toHaveLength(21);
     for (const card of attractionHubCards) {
       const srcset = attractionHubCardImageSets[card.photo.src] ?? "";

@@ -394,7 +394,7 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
     services: [
       { label: "Explore car rental options", to: "/car-rental/", note: "Check collection hours and whether driving makes sense for your trip." },
       { label: "Choose where to stay in Jerusalem", to: "/travel-blog/where-to-stay-in-jerusalem/", note: "Compare areas for a convenient first stay in the capital." },
-      { label: "Discover Haifa and northern Israel", to: "/travel-blog/haifa/", note: "Explore the city and ideas for continuing your journey north." },
+      { label: "Discover Haifa and northern Israel", to: "/attractions/haifa/", note: "Explore the city and ideas for continuing your journey north." },
       { label: "Choose an Israel eSIM", to: travelGuidePaths.esim, note: "Keep maps and booking messages working after you land." },
     ],
   },
@@ -953,7 +953,7 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
               "Haifa rises steeply from the coast to Mount Carmel. The Metronit bus rapid transit serves several urban corridors and the Krayot; the underground Carmelit climbs between the Lower City and Carmel Center. The Rakbalit transit cable car serves the university and Technion area, while the tourist cable car at Bat Galim is a different operation.",
               "In Haifa, hotels on Mount Carmel may require a bus or taxi uphill from the railway station. See my Haifa travel guide and airport-to-Haifa guide for local connections.",
             ],
-            inlineLinks: [{ text: "Haifa travel guide", to: "/travel-blog/haifa/" }, { text: "airport-to-Haifa guide", to: "/travel-blog/how-to-get-from-ben-gurion-airport-to-haifa/" }],
+            inlineLinks: [{ text: "Haifa travel guide", to: "/attractions/haifa/" }, { text: "airport-to-Haifa guide", to: "/travel-blog/how-to-get-from-ben-gurion-airport-to-haifa/" }],
             sourceIds: ["guide-haifa-carmelit", "guide-bus-planner"],
           },
           {
