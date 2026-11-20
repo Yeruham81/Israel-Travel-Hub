@@ -199,13 +199,12 @@ export function NeighborhoodStayPage({ area }: { area: NeighborhoodStayGuide }) 
       </p>
       <StayBookingChecklist groups={[
         { title: "Location & arrival", items: isDowntown ? [
-          area.arrivalTips[0],
-          area.arrivalTips[1],
+          ...area.arrivalTips.slice(0, 2),
           "Confirm check-in arrangements for your arrival day, especially on Shabbat",
           "Check lift and step-free access if you need them",
         ] : area.arrivalTips },
         { title: "Room & booking conditions", items: isDowntown ? [
-          area.arrivalTips[2],
+          ...area.arrivalTips.slice(2, 3),
           ...area.bookingTips,
           "Review the total price, taxes and cancellation terms for your room",
         ] : [
