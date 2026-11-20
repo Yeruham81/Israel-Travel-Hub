@@ -1,4 +1,4 @@
-import telAvivTourHero from "@/assets/tel-aviv/rothschild.webp";
+import telAvivTourHero from "@/assets/tel-aviv/neve-tzedek.webp";
 import { guideHeroPhotoForPath } from "@/lib/guide-hero-photos";
 import { Link, type LinkProps } from "@tanstack/react-router";
 import type { ReactNode } from "react";
@@ -95,7 +95,7 @@ export const stayGuideGroups: Record<Region, GuideGroups> = {
       card("Museums in Tel Aviv", "/travel-blog/museums-in-tel-aviv/", "Explore art, heritage and the city’s museums.", museumTelAviv, "Museum architecture in Tel Aviv"),
       card("Beaches in Tel Aviv", "/travel-blog/beaches-in-tel-aviv/", "Choose the right part of the waterfront for your visit.", beachesTelAviv, "Tel Aviv Mediterranean beach"),
       card("Exploring Jaffa", "/attractions/jaffa/", "Explore Old Jaffa’s harbour, lanes and local character.", "/images/city-stays/tel-aviv-jaffa.webp", "Old Jaffa market and streets"),
-      card("Tel Aviv & Jaffa tours", "/tours/tel-aviv-jaffa/", "Find walking tours, neighborhood routes and historic Jaffa experiences.", telAvivTourHero, "Rothschild Boulevard and city architecture in Tel Aviv"),
+      card("Tel Aviv & Jaffa tours", "/tours/tel-aviv-jaffa/", "Find walking tours, neighborhood routes and historic Jaffa experiences.", telAvivTourHero, "Neve Tzedek historic streets in Tel Aviv"),
       card("Food & market tours", "/tours/food-market-tours/", "Discover tasting routes and market walks in Tel Aviv.", telAvivFoodMarketTours, "Market food stalls and tasting experiences"),
     ],
     onward: [
