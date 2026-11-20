@@ -1,7 +1,8 @@
 const {chromium}=require("playwright");
 const fs=require("node:fs");
 async function main(){
-const url="https://saddlebrown-guanaco-454061.hostingersite.com/travel-blog/attractions-in-tel-aviv/";
+const url=process.env.TEL_AVIV_AUDIT_URL||"https://saddlebrown-guanaco-454061.hostingersite.com/travel-blog/attractions-in-tel-aviv/";
+const localMode=Boolean(process.env.TEL_AVIV_AUDIT_URL);
 const expected="Carmel Market Food-Tasting Tour";
 const sleep=ms=>new Promise(resolve=>setTimeout(resolve,ms));
 let published=false;
@@ -9,16 +10,16 @@ for(let i=0;i<28;i++){
   try {
     const res=await fetch(url,{signal:AbortSignal.timeout(18000)});
     const html=await res.text();
-    if(res.ok && html.includes(expected)){
+    if(res.ok && (localMode || html.includes(expected))){
       published=true;
-      console.log("CURRENT TEL AVIV REVISION PUBLISHED",res.status,html.length);
+      console.log(localMode?"LOCAL BUILD READY":"CURRENT TEL AVIV REVISION PUBLISHED",res.status,html.length);
       break;
     }
     console.log("Awaiting published revision",i,res.status,html.includes(expected));
   } catch(e) { console.log("Published page probe",i,String(e).slice(0,150)); }
   await sleep(15000);
 }
-if(!published)throw Error("Updated Tel Aviv page not visible publicly within audit window");
+if(!published)throw Error(localMode?"Local Tel Aviv preview not responding":"Updated Tel Aviv page not visible publicly within audit window");
 fs.mkdirSync("tel-aviv-visual-audit",{recursive:true});
 const browser=await chromium.launch({headless:true,args:["--no-sandbox"]});
 const results=[];
