@@ -1,11 +1,11 @@
 {
   "rates": {
     "sourceId": "fx-bank-of-israel",
-    "publishedAt": "2026-11-19",
-    "checkedAt": "2026-11-19T19:00:19.403Z",
+    "publishedAt": "2026-11-20",
+    "checkedAt": "2026-11-20T18:38:12.556Z",
     "ilsPerUnit": {
-      "USD": 3.282,
-      "EUR": 3.6064
+      "USD": 3.326,
+      "EUR": 3.6503
     }
   },
   "status": "fresh"
