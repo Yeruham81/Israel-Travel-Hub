@@ -1,6 +1,6 @@
 # Jerusalem museum card photography
 
-The twelve existing museum cards use the publisher’s previously archived and compressed WebP photographs from the Google Drive editorial image library (original uploaded filenames shown below). The two new museum photographs were provided with the editorial request and compressed to 1200×900 WebP. Images are stored locally and displayed with individual alt descriptions.
+The twelve existing museum cards use the publisher’s previously archived and compressed WebP photographs from the Google Drive editorial image library (original uploaded filenames shown below). The two new museum photographs were provided with the editorial request, converted to WebP and further resized to 720×540 for the responsive horizontal-card layout. The archived JPEG originals remain unchanged in Drive. Images are stored locally and displayed with individual alt descriptions. Each museum now occupies one full-width row on desktop, with the photo in the left column and visitor details in the right; smaller screens place the photograph above the details. The wide original Museum of Tolerance image is kept with contain-fit so its façade is not severely cropped.
 
 | Card ID | Source filename | Notes |
 |---|---|---|
@@ -16,7 +16,7 @@ The twelve existing museum cards use the publisher’s previously archived and c
 | tolerance | `Museum_of_Tolerance_Jerusalem.webp` | Original archived WebP used |
 | islamic | `Islamic_Art_Museum_Jerusalem.jpg.webp` | Original archived WebP used |
 | begin | `Begin_Museum_Jerusalem.jpg.webp` | Original archived WebP used |
-| seam | `Museum_on_the_Seam_IMG_1962(1).jpg` | Resized to 1200×900, converted to WebP |
+| seam | `Museum_on_the_Seam_IMG_1962(1).jpg` | Resized to 720×540 and optimized as WebP |
 | italian | `Museum_of_Italian_Jewish_Art_(Jerusalem)_(2)(1).jpg` | Resized to 1200×900, converted to WebP |
 | music | `Original vector illustration created for the guide; not a photograph of the actual museum` | Illustrative image; replace with a licensed museum photograph when the media is accessible. |
 

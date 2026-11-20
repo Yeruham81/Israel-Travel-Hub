@@ -16,6 +16,21 @@ describe("Jerusalem museums editorial guide",()=>{
       sources.add(photo.src);
     }
     expect(jerusalemMuseumPhotos["music"]!.illustrative).toBe(true);
+    expect(jerusalemMuseumPhotos["tolerance"]!.fit).toBe("contain");
+    for (const museum of jerusalemMuseums) {
+      const photo = jerusalemMuseumPhotos[museum.id]!;
+      expect(photo.width).toBeGreaterThan(0);
+      expect(photo.height).toBeGreaterThan(0);
+    }
+  });
+  it("uses single-column horizontal museum cards at desktop and stacked photographs on mobile",()=>{
+    const guide = readFileSync("src/components/JerusalemMuseumsGuide.tsx","utf8");
+    expect(guide).toContain('data-museum-card="horizontal"');
+    expect(guide).toContain("lg:grid-cols-[minmax(0,34%)_minmax(0,1fr)]");
+    expect(guide).toContain("lg:grid-cols-2 lg:gap-6");
+    expect(guide).toContain('className="mt-5 grid gap-5"');
+    expect(guide).not.toContain('className="mt-5 grid items-stretch gap-5 md:grid-cols-2"');
+    expect(guide).toContain('museumPhoto.fit === "contain"');
   });
   it("retains all twelve original subjects and adds three central museums",()=>{
     expect(jerusalemMuseums).toHaveLength(15);

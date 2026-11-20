@@ -47,28 +47,52 @@ function MuseumCard({museum}:{museum:MuseumEntry}) {
   const tags = [museum.theme, museum.priceNis === 0 ? "Free entry" : null, family ? "Family-friendly" : null, bookAhead ? "Book ahead" : null].filter((x):x is string=>Boolean(x));
   const showTicket = Boolean(museum.ticketUrl && museum.ticketUrl !== museum.url);
   const ticketLabel = museum.id === "rockefeller" ? "Check organised tours" : ["yad","begin","friends","tolerance","time"].includes(museum.id) ? "Reserve a visit" : museum.id === "israel" ? "Tickets & admission" : "Check tickets & rates";
-  return <article id={"museum-"+museum.id} className="flex scroll-mt-28 flex-col overflow-hidden rounded-2xl border bg-card shadow-sm">
-    <img src={museumPhoto.src} alt={museumPhoto.alt} width={1200} height={675} loading="lazy" decoding="async" className="aspect-[16/9] w-full object-cover" />
-    {museumPhoto.illustrative && <p className="px-4 pt-2 text-xs text-muted-foreground">Illustration of traditional instruments, not a photograph of the museum.</p>}
-    <div className="flex flex-1 flex-col p-4 sm:p-5">
-      <p className="text-xs font-semibold uppercase tracking-wide text-primary">{museum.neighbourhood}</p>
-      <h3 className="mt-1 text-xl font-bold leading-snug">{museum.name}</h3>
-      {tags.length>0 && <div className="mt-2 flex flex-wrap gap-1.5">{tags.map(tag=><span key={tag} className="rounded-full border border-primary/15 bg-secondary/50 px-2.5 py-1 text-[11px] font-medium">{tag}</span>)}</div>}
-      {museum.closureNote && <p className="mt-3 w-fit rounded-md border border-amber-300/60 bg-amber-50 px-2 py-1 text-xs font-semibold text-amber-900">{museum.closureNote}</p>}
-      <p className="mt-3 text-sm leading-relaxed">{museum.intro}</p>
-      <dl className="mt-4 grid gap-2 rounded-lg bg-secondary/40 p-3 text-sm">
-        <div className="flex items-start gap-2"><Clock3 className="mt-0.5 h-4 w-4 shrink-0 text-primary" aria-hidden="true"/><div><dt className="inline font-semibold">Allow: </dt><dd className="inline">{museum.duration}</dd></div></div>
-        <div className="flex items-start gap-2"><Ticket className="mt-0.5 h-4 w-4 shrink-0 text-primary" aria-hidden="true"/><div><dt className="inline font-semibold">Admission: </dt><dd className="inline">{museum.admission}</dd></div></div>
-        <div className="flex items-start gap-2"><CalendarDays className="mt-0.5 h-4 w-4 shrink-0 text-primary" aria-hidden="true"/><div><dt className="inline font-semibold">Usual opening: </dt><dd className="inline">{museum.openingDays}</dd></div></div>
-        <div className="flex items-start gap-2"><CalendarCheck2 className="mt-0.5 h-4 w-4 shrink-0 text-primary" aria-hidden="true"/><div><dt className="inline font-semibold">Booking: </dt><dd className="inline">{museum.booking}</dd></div></div>
-      </dl>
-      {museum.highlightsForFamilies && <p className="mt-3 text-xs leading-relaxed text-muted-foreground">{museum.highlightsForFamilies}</p>}
-      <div className="mt-3"><p className="text-sm font-semibold">Highlights</p><ul className="mt-1 list-disc space-y-0.5 pl-5 text-sm leading-relaxed text-muted-foreground">{museum.highlights.slice(0,2).map(item=><li key={item}>{item}</li>)}</ul></div>
-      <p className="mt-3 text-sm leading-relaxed"><strong className="text-primary">My tip:</strong> {museum.tip}</p>
-      <div className="mt-3 flex flex-wrap items-baseline gap-x-3 gap-y-1 text-xs text-muted-foreground"><span>{museum.address}</span><MapLink museum={museum}/></div>
-      <div className="mt-auto grid gap-2 border-t pt-4 text-sm sm:grid-cols-2">
-        {showTicket && <a href={museum.ticketUrl} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-11 items-center justify-center gap-1.5 rounded-lg bg-primary px-3 py-2.5 text-center font-semibold text-primary-foreground transition-opacity hover:opacity-90">{ticketLabel}<ExternalLink className="h-3.5 w-3.5" aria-hidden="true"/><span className="sr-only"> (opens in a new tab)</span></a>}
-        <a href={museum.url} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-11 items-center justify-center gap-1.5 rounded-lg border border-sky-200 bg-sky-100 px-3 py-2.5 text-center font-semibold text-sky-950 hover:bg-sky-200">{museum.id === "rockefeller" ? "Official tour information" : "Official museum website"}<ExternalLink className="h-3.5 w-3.5" aria-hidden="true"/><span className="sr-only"> (opens in a new tab)</span></a>
+  return <article id={"museum-"+museum.id} data-museum-card="horizontal" className="scroll-mt-28 overflow-hidden rounded-2xl border bg-card shadow-sm">
+    <div className="lg:grid lg:grid-cols-[minmax(0,34%)_minmax(0,1fr)] lg:items-stretch">
+      <figure className="min-w-0 bg-secondary/20 lg:p-5 lg:pr-0">
+        <div className="overflow-hidden bg-secondary/40 lg:rounded-xl">
+          <img
+            src={museumPhoto.src}
+            alt={museumPhoto.alt}
+            width={museumPhoto.width}
+            height={museumPhoto.height}
+            loading="lazy"
+            decoding="async"
+            className={`aspect-[16/10] w-full sm:aspect-[4/3] lg:aspect-[4/3] ${museumPhoto.fit === "contain" ? "object-contain" : "object-cover"}`}
+          />
+        </div>
+        {museumPhoto.illustrative && <figcaption className="px-4 py-2 text-xs leading-relaxed text-muted-foreground lg:px-0">Illustration of traditional instruments, not a photograph of the museum.</figcaption>}
+      </figure>
+      <div className="flex min-w-0 flex-col p-4 sm:p-5 lg:p-6">
+        <p className="text-xs font-semibold uppercase tracking-wide text-primary">{museum.neighbourhood}</p>
+        <h3 className="mt-1 text-xl font-bold leading-snug sm:text-2xl">{museum.name}</h3>
+        {tags.length>0 && <div className="mt-2 flex flex-wrap gap-1.5">{tags.map(tag=><span key={tag} className="rounded-full border border-primary/15 bg-secondary/50 px-2.5 py-1 text-[11px] font-medium">{tag}</span>)}</div>}
+        {museum.closureNote && <p className="mt-3 w-fit rounded-md border border-amber-300/60 bg-amber-50 px-2 py-1 text-xs font-semibold text-amber-900">{museum.closureNote}</p>}
+        <p className="mt-3 text-sm leading-relaxed">{museum.intro}</p>
+        <dl className="mt-4 grid gap-3 rounded-xl bg-secondary/40 p-3.5 text-sm sm:grid-cols-2">
+          <div className="flex min-w-0 items-start gap-2"><Clock3 className="mt-0.5 h-4 w-4 shrink-0 text-primary" aria-hidden="true"/><div><dt className="font-semibold">Allow</dt><dd className="mt-0.5 leading-relaxed text-muted-foreground">{museum.duration}</dd></div></div>
+          <div className="flex min-w-0 items-start gap-2"><Ticket className="mt-0.5 h-4 w-4 shrink-0 text-primary" aria-hidden="true"/><div><dt className="font-semibold">Admission</dt><dd className="mt-0.5 leading-relaxed text-muted-foreground">{museum.admission}</dd></div></div>
+          <div className="flex min-w-0 items-start gap-2"><CalendarDays className="mt-0.5 h-4 w-4 shrink-0 text-primary" aria-hidden="true"/><div><dt className="font-semibold">Usual opening</dt><dd className="mt-0.5 leading-relaxed text-muted-foreground">{museum.openingDays}</dd></div></div>
+          <div className="flex min-w-0 items-start gap-2"><CalendarCheck2 className="mt-0.5 h-4 w-4 shrink-0 text-primary" aria-hidden="true"/><div><dt className="font-semibold">Booking</dt><dd className="mt-0.5 leading-relaxed text-muted-foreground">{museum.booking}</dd></div></div>
+        </dl>
+      </div>
+    </div>
+    <div className="grid gap-4 border-t px-4 py-4 sm:px-5 lg:grid-cols-2 lg:gap-6 lg:px-6">
+      <div>
+        <h4 className="text-sm font-semibold">Highlights</h4>
+        <ul className="mt-1 list-disc space-y-0.5 pl-5 text-sm leading-relaxed text-muted-foreground">{museum.highlights.slice(0,2).map(item=><li key={item}>{item}</li>)}</ul>
+        {museum.highlightsForFamilies && <p className="mt-2 text-xs leading-relaxed text-muted-foreground">{museum.highlightsForFamilies}</p>}
+      </div>
+      <p className="text-sm leading-relaxed"><strong className="text-primary">My tip:</strong> {museum.tip}</p>
+    </div>
+    <div className="flex flex-col gap-3 border-t bg-secondary/10 p-4 sm:p-5 lg:flex-row lg:items-center lg:justify-between lg:gap-5 lg:px-6">
+      <div className="flex min-w-0 flex-col gap-1 text-xs text-muted-foreground">
+        <span>{museum.address}</span>
+        <div><MapLink museum={museum}/></div>
+      </div>
+      <div className={`grid w-full gap-2 text-sm lg:w-auto lg:min-w-[360px] ${showTicket ? "sm:grid-cols-2" : "sm:grid-cols-1"}`}>
+        {showTicket && <a href={museum.ticketUrl} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-11 items-center justify-center gap-1.5 rounded-lg bg-primary px-3 py-2.5 text-center font-semibold text-primary-foreground transition-opacity hover:opacity-90">{ticketLabel}<ExternalLink className="h-3.5 w-3.5 shrink-0" aria-hidden="true"/><span className="sr-only"> (opens in a new tab)</span></a>}
+        <a href={museum.url} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-11 items-center justify-center gap-1.5 rounded-lg border border-sky-200 bg-sky-100 px-3 py-2.5 text-center font-semibold text-sky-950 hover:bg-sky-200">{museum.id === "rockefeller" ? "Official tour information" : "Official museum website"}<ExternalLink className="h-3.5 w-3.5 shrink-0" aria-hidden="true"/><span className="sr-only"> (opens in a new tab)</span></a>
       </div>
     </div>
   </article>;
@@ -169,7 +193,7 @@ export function JerusalemMuseumsGuide(){
       {museumAreas.map((area,index)=><section key={area.id} id={"area-"+area.id} aria-label={area.name} className="mt-9 scroll-mt-24">
         <h3 className="text-2xl font-semibold">{area.name}</h3>
         <p className="mt-2 max-w-3xl leading-relaxed text-muted-foreground">{area.intro}</p>
-        <div className="mt-5 grid items-stretch gap-5 md:grid-cols-2">{museums.filter(m=>m.area===area.id).map(m=><MuseumCard key={m.id} museum={m}/>)}</div>
+        <div className="mt-5 grid gap-5">{museums.filter(m=>m.area===area.id).map(m=><MuseumCard key={m.id} museum={m}/>)}</div>
         {index===0&&<div className="mt-5"><PlanningTip>The Israel Museum and Bible Lands Museum are close, but each can fill a substantial visit. The Israel Museum offers a 10% Bible Lands discount within a week when you show its ticket. <OfficialLink href="https://www.imj.org.il/en/node/1249261">Check the ticket conditions</OfficialLink> before combining visits.</PlanningTip></div>}
         {index===1&&<div className="mt-5"><PlanningTip>Rockefeller is closed to regular walk-in visitors. Only include an interior visit after securing an organised tour; otherwise, admire its exterior near Herod's Gate.</PlanningTip></div>}
       </section>)}
