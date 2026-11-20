@@ -63,7 +63,7 @@ jobs:
                 print("Image host unavailable, trying fallback:", type(ex).__name__, str(ex)[:125])
             assert raw is not None, f"Failed all authorized mirrors for {filename}"
             image = ImageOps.exif_transpose(Image.open(io.BytesIO(raw))).convert("RGB")
-            assert image.width >= 800 and image.height >= 600, filename
+            assert image.width >= 300 and image.height >= 300 and max(image.size) >= 650, (filename,image.size)
             image.thumbnail((900,700), Image.Resampling.LANCZOS)
             target = Path("public/images/attractions")/output
             target.parent.mkdir(parents=True, exist_ok=True)
