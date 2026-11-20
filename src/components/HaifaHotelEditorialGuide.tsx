@@ -410,8 +410,8 @@ export function HaifaHotelEditorialGuide({ guide }: { guide: HotelStayDestinatio
       <StayTripLinks region={guide.id} currentPath={guide.path} presentation="guide" />
       <HomeContactForm guide={{
         ...guideContactCopy(guide.title, "accommodation", guide.name),
-        heading: "Planning a visit to Haifa?",
-        introduction: "Need an airport transfer, a private driver for a day or help planning your Haifa itinerary? Tell me your dates, pickup point and what you would like to see. I'll reply personally.",
+        heading: "Need a private transfer to Haifa?" ,
+        introduction: "I'm Moshe Barak. I can arrange an airport transfer to Haifa, a private driver for sightseeing or a day trip beyond the city. Tell me your dates, pickup point and group size, and I'll reply personally.",
         placeholder: "Your dates, pickup point, destinations, passengers and luggage…",
       }} />
       <SourceList ids={sourceIds} intro="Hotel websites and local travel resources, with check dates below." compact />
