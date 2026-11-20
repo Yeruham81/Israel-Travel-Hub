@@ -34,7 +34,22 @@ try {
        im.addEventListener("load",resolve,{once:true});im.addEventListener("error",resolve,{once:true});
      })));
    });
-   await page.waitForTimeout(2500);
+   await page.waitForTimeout(600);
+   // Actively scroll to trigger intersection-based image rendering and the lazy map iframe.
+   const totalHeight=await page.evaluate(()=>document.documentElement.scrollHeight);
+   for(let y=0;y<totalHeight;y+=Math.max(500,Math.floor(config.height*0.82))){
+     await page.evaluate(y=>window.scrollTo({top:y,behavior:"instant"}),y);
+     await page.waitForTimeout(85);
+   }
+   await page.locator('iframe[title="Interactive map of ten Tel Aviv and Jaffa attractions"]').scrollIntoViewIfNeeded();
+   await page.waitForTimeout(3500);
+   const iframeDebug=await page.evaluate(()=>{
+     const el=document.querySelector('iframe[title="Interactive map of ten Tel Aviv and Jaffa attractions"]');
+     return {src:el?.src,loaded:el?.contentDocument?.readyState,bodyText:el?.contentDocument?.body?.textContent?.slice(0,160),hasMapEl:!!el?.contentDocument?.querySelector("#map")};
+   });
+   console.log("MAP_FRAME_DEBUG",config.name,JSON.stringify(iframeDebug));
+   await page.evaluate(()=>window.scrollTo({top:0,behavior:"instant"}));
+   await page.waitForTimeout(1200);
    const stat=await page.evaluate(()=>{
      const link=label=>Array.from(document.querySelectorAll("a")).filter(a=>a.textContent?.includes(label));
      const imgs=Array.from(document.querySelectorAll("main img")).map(im=>({src:new URL(im.src).pathname,loaded:im.complete&&im.naturalWidth>0,natural:im.naturalWidth,alt:im.alt}));
@@ -59,6 +74,7 @@ try {
        graffitiPhoto:tourImgs.some(h=>h.includes("florentin-graffiti.webp")),
        foodPhoto:tourImgs.some(h=>h.includes("carmel-food-tasting.webp")),
        images:imgs.length,brokenImages:imgs.filter(x=>!x.loaded),horizontalOverflowPixels:overflow,
+       imageVisibility: Array.from(document.querySelectorAll('[data-testid="tel-aviv-experience-card"] img')).map(im=>({src:new URL(im.src).pathname,opacity:getComputedStyle(im).opacity,visibility:getComputedStyle(im).visibility,display:getComputedStyle(im).display,height:Math.round(im.getBoundingClientRect().height)})),
        sourceCredit:!!main?.textContent?.includes("Nizzan Cohen")
      };
    });
