@@ -1,12 +1,13 @@
 import { useState } from "react";
 import { Link, type LinkProps } from "@tanstack/react-router";
-import { ArrowRight, Check, Lightbulb } from "lucide-react";
+import { ArrowRight, Lightbulb } from "lucide-react";
 import {
   type CityStayGuide, type NeighborhoodStayGuide, type StayPreference, preferenceLabels,
 } from "@/data/content";
 import { areaArrivalSignals } from "@/data/localEditorialInsights";
 import { INFO_CHECK_DATE } from "@/data/registry";
 import { GuideHeader, OnThisPage, FaqList, SourceList } from "@/components/Guide";
+import { StayBookingChecklist } from "@/components/StayBookingChecklist";
 import { JerusalemHotelBrowser } from "@/components/JerusalemHotelBrowser";
 import { JerusalemNeighborhoodGuideCallout } from "@/components/JerusalemNeighborhoodGuideCallout";
 import { StayTripLinks } from "@/components/StayTripLinks";
@@ -74,26 +75,26 @@ export function JerusalemStayHub({ g, areas }: { g: CityStayGuide; areas: Neighb
             {visibleAreas.length} {visibleAreas.length === 1 ? "area" : "areas"}
             {preference ? " for " + preferenceLabels[preference].toLowerCase() : " to explore"}
           </p>
-          <ul className="mt-4 grid gap-4 lg:grid-cols-2">
+          <ul className="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {visibleAreas.map((area) => <li key={area.id} data-testid="neighborhood-card" className="min-w-0">
               <Link
                 to={area.path as LinkProps["to"]}
                 aria-label={"Explore " + area.name + ": area guide and hotel recommendations"}
-                className="group grid h-full min-w-0 grid-cols-[110px_minmax(0,1fr)] overflow-hidden rounded-2xl border bg-card transition-colors hover:border-primary/50 hover:bg-secondary/10 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary sm:grid-cols-[155px_minmax(0,1fr)]"
+                className="group flex h-full min-w-0 flex-col overflow-hidden rounded-2xl border bg-card transition-colors hover:border-primary/50 hover:bg-secondary/10 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
               >
                 <span className="block min-w-0 overflow-hidden bg-muted">
                   <img
                     src={jerusalemStayCardPhotos[area.id]?.src ?? area.photo.src}
                     alt={jerusalemStayCardPhotos[area.id]?.alt ?? area.photo.alt}
                     width={755} height={503} loading="lazy" decoding="async"
-                    className="aspect-[16/10] h-full w-full object-cover transition-transform duration-300 motion-safe:group-hover:scale-[1.03]"
+                    className="aspect-[16/10] w-full object-cover transition-transform duration-300 motion-safe:group-hover:scale-[1.03]"
                   />
                 </span>
-                <span className="flex min-w-0 flex-col p-3.5 sm:p-4">
+                <span className="flex min-w-0 flex-1 flex-col p-3.5 sm:p-4">
                   <span className="text-xs font-medium text-muted-foreground">{area.bestFor}</span>
                   <h3 className="mt-1 text-base font-semibold leading-snug sm:text-lg">{area.name}</h3>
                   <span className="mt-1.5 line-clamp-2 text-sm leading-relaxed text-muted-foreground">{area.summary}</span>
-                  <span className="mt-3 inline-flex min-h-8 items-center gap-1 text-xs font-semibold text-primary group-hover:underline sm:text-sm">
+                  <span className="mt-auto inline-flex min-h-8 items-center gap-1 pt-3 text-xs font-semibold text-primary group-hover:underline sm:text-sm">
                     {neighborhoodCta[area.id] || "Explore hotels in this area"} <ArrowRight className="h-4 w-4" aria-hidden />
                   </span>
                 </span>
@@ -146,27 +147,15 @@ export function JerusalemStayHub({ g, areas }: { g: CityStayGuide; areas: Neighb
           <p className="mt-2 max-w-3xl leading-relaxed text-muted-foreground">
             Check the exact hotel entrance and walking route, especially near the Old City, and compare the final price and cancellation terms.
           </p>
-          <div className="mt-4 grid gap-4 sm:grid-cols-2">
-            {([
-              { title: "Location & arrival", items: g.checklist.slice(0, 4) },
-              { title: "Room & booking conditions", items: [
-                "Confirm bed setup and guest occupancy",
-                "Check the total price, taxes and breakfast",
-                "Review cancellation and payment terms",
-                "Verify parking and step-free access where needed",
-              ] },
-            ]).map((group) => <div key={group.title} className="rounded-2xl border bg-secondary/20 p-4 sm:p-5">
-              <h3 className="text-base font-semibold">{group.title}</h3>
-              <ul className="mt-3 space-y-3">
-                {group.items.map((tip) => <li key={tip} className="flex items-start gap-3">
-                  <span className="mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-full border border-primary/20 bg-primary/10 text-primary">
-                    <Check className="h-4 w-4" aria-hidden />
-                  </span>
-                  <span className="text-sm leading-relaxed text-muted-foreground">{tip}</span>
-                </li>)}
-              </ul>
-            </div>)}
-          </div>
+          <StayBookingChecklist groups={[
+            { title: "Location & arrival", items: g.checklist.slice(0, 4) },
+            { title: "Room & booking conditions", items: [
+              "Confirm bed setup and guest occupancy",
+              "Check the total price, taxes and breakfast",
+              "Review cancellation and payment terms",
+              "Verify parking and step-free access where needed",
+            ] },
+          ]} />
         </section>
 
         <FaqList faqs={g.faqs} compact />
