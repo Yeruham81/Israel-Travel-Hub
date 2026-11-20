@@ -5,7 +5,7 @@ import { ArrowRight, MapPin, Compass } from "lucide-react";
 import { type CityStayGuide, type NeighborhoodStayGuide, type StayPreference, preferenceLabels } from "@/data/content";
 import { areaArrivalSignals } from "@/data/localEditorialInsights";
 import { INFO_CHECK_DATE, linksForPage, publicSources } from "@/data/registry";
-import { GuideHeader, OnThisPage, Section, Checklist, ProviderSection, FaqList, SourceList } from "@/components/Guide";
+import { GuideHeader, OnThisPage, Section, ProviderSection, FaqList, SourceList } from "@/components/Guide";
 import { AreaPhotoCredit } from "@/components/AreaMap";
 import { TelAvivHotelBrowser } from "@/components/TelAvivHotelBrowser";
 import { JerusalemHotelBrowser } from "@/components/JerusalemHotelBrowser";
