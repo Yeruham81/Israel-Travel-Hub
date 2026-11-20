@@ -34,9 +34,9 @@ export function guideContactCopy(_title: string, kind: GuideContactKind, place?:
         introduction: "Have a question about your itinerary, or need to arrange an airport transfer or private journey in Israel? Send me a message and I'll reply personally.",
         placeholder: "Dates, number of days, destinations, transport needs or your question…" };
     case "accommodation":
-      return { ...base, heading: `Questions about staying in ${destination}?`,
-        introduction: `Wondering which area of ${destination} makes sense for your visit? Tell me your dates, priorities and how you plan to arrive. I'll reply personally with relevant planning guidance; hotel availability and booking conditions must be checked with the provider.`,
-        placeholder: "Travel dates, preferred area, arrival plans or your question…" };
+      return { ...base, heading: `Need a private transfer to or from ${destination}?`,
+        introduction: `I'm Moshe Barak. I arrange private airport transfers, city-to-city rides and private day trips in Israel. Tell me your pickup point, destination, travel date and group size, and I'll reply personally about your transport options.`,
+        placeholder: "Pickup point, destination, date, passengers, luggage or your question…" };
     case "connectivity":
       return { ...base, heading: "Planning a trip to Israel?",
         introduction: "Have a question about planning your visit, getting from the airport or arranging a private journey? Send me your travel dates, destinations and what you would like help with. I'll reply personally.",
