@@ -43,7 +43,7 @@ describe("Haifa and Jaffa city guide regression", () => {
       expect(card.priceFrom).toMatch(/^From /);
       expect(card.rating).toContain("/5");
     }
-    const first = haifaTourPlacements[0];
+    const first = haifaTourPlacements[0]!;
     expect(first.title).toMatch(/private tour/i);
     expect(first.description).toContain("Tel Aviv");
     expect(first.description).not.toMatch(/walking experience|short walk from the port/i);
