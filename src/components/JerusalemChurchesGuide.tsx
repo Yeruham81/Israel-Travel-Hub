@@ -9,6 +9,8 @@ import { SourcesDisclosure } from "@/components/SourcesDisclosure";
 import { HomeContactForm } from "@/components/HomeContactForm";
 import { neighborhoodTripContactCopy } from "@/lib/guide-contact";
 import { churchAreas, churchesSourceUrl, jerusalemChurches, type JerusalemChurch } from "@/data/jerusalemChurches";
+import { affiliateConfig } from "@/data/registry";
+import { guideHeroPhotoForPath } from "@/lib/guide-hero-photos";
 import hero from "@/assets/guides/holy-sepulchre.jpg";
 import oldCityPhoto from "@/assets/attractions-hub/card-old-city-jerusalem-420.webp";
 import olivePhoto from "@/assets/attractions-hub/card-mount-of-olives-420.webp";
@@ -37,9 +39,9 @@ const related = [
   {title:"Israel's calendar of events",to:"/travel-blog/calendar-of-events/" as const,text:"Religious dates and holidays that affect visits",photo:calendarPhoto,alt:"Calendar with dates highlighted"},
 ];
 const tours = [
-  {title:"Old City of Jerusalem guided walking tour",platform:"Viator",duration:"About 4 hours",text:"Guided walk through historic religious landmarks; verify which church interiors are included.",url:"https://viator.tpm.li/NfTH03Dg",image:"/images/attractions/old-jerusalem-via-dolorosa.webp",alt:"Via Dolorosa street in Jerusalem"},
-  {title:"Private Jerusalem Old City walking tour",platform:"Viator",duration:"3–4 hours",text:"Private guiding through the Old City; confirm access to the Holy Sepulchre and other chapels.",url:"https://viator.tpm.li/WFfLsF8z",image:guideTourPhoto,alt:"Travelers on a guided Jerusalem tour"},
-  {title:"Bethlehem half-day guided tour from Jerusalem",platform:"GetYourGuide",duration:"About 4 hours",text:"A separate Bethlehem outing centred on the Nativity Church and nearby Christian sites.",url:"https://getyourguide.tpm.li/gTSCNyuN",image:bethlehemTourPhoto,alt:"Courtyard of the Church of the Nativity in Bethlehem"},
+  {title:"Old City of Jerusalem guided walking tour",platform:"Viator",duration:"About 4 hours",text:"Guided walk through historic religious landmarks; verify which church interiors are included.",affiliateKey:"tour-jerusalem-old-city-walk-viator@tours-jerusalem",image:"/images/attractions/old-jerusalem-via-dolorosa.webp",alt:"Via Dolorosa street in Jerusalem"},
+  {title:"Private Jerusalem Old City walking tour",platform:"Viator",duration:"3–4 hours",text:"Private guiding through the Old City; confirm access to the Holy Sepulchre and other chapels.",affiliateKey:"tour-jerusalem-private-oldcity-walk-viator@tours-jerusalem",image:guideTourPhoto,alt:"Travelers on a guided Jerusalem tour"},
+  {title:"Bethlehem half-day guided tour from Jerusalem",platform:"GetYourGuide",duration:"About 4 hours",text:"A separate Bethlehem outing centred on the Nativity Church and nearby Christian sites.",affiliateKey:"tour-bethlehem-halfday-jerusalem-getyourguide@tours-bethlehem-jericho",image:bethlehemTourPhoto,alt:"Courtyard of the Church of the Nativity in Bethlehem"},
 ];
 const faqs = [
   {q:"Which churches are essential on a first visit to Jerusalem?",a:"For most first visits, I would prioritise the Church of the Holy Sepulchre and selected stops along the Via Dolorosa. Add Gethsemane on the Mount of Olives or Dormition Abbey on Mount Zion if your time and interests allow."},
@@ -112,6 +114,7 @@ function ChurchMap(){
   </section>;
 }
 export function JerusalemChurchesGuide(){
+  const availableTours = tours.flatMap(t => { const url = affiliateConfig[t.affiliateKey]?.trackingUrl; return url ? [{ ...t, url }] : []; });
   return <main className="mx-auto max-w-5xl px-4 pb-10"><article>
     <header className="pt-6">
       <Breadcrumbs items={[{name:"Home",to:"/"},{name:"Travel guides",to:"/travel-blog/"},{name:"Churches in Jerusalem",to:"/travel-blog/churches-in-jerusalem/"}]}/>
@@ -160,13 +163,13 @@ export function JerusalemChurchesGuide(){
     </section>
     <section id="tours" aria-labelledby="tours-heading" className="mt-12 scroll-mt-24">
       <Heading id="tours" title="Guided church and Christian heritage tours" intro="These external tours can help with context and navigation. Read the specific church stops, languages, departure city and entry conditions before booking."/>
-      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">{tours.map(t=><article key={t.url} className="flex flex-col overflow-hidden rounded-xl border bg-card"><img src={t.image} alt={t.alt} width={640} height={360} loading="lazy" decoding="async" className="aspect-[16/9] w-full object-cover"/><div className="flex flex-1 flex-col p-4"><p className="text-xs font-semibold uppercase text-primary">{t.platform}</p><h3 className="mt-2 text-lg font-semibold">{t.title}</h3><p className="mt-2 text-xs font-semibold text-muted-foreground">{t.duration}</p><p className="mt-2 text-sm leading-relaxed text-muted-foreground">{t.text}</p><div className="mt-auto pt-4"><OutLink href={t.url}>See dates and rates</OutLink></div></div></article>)}</div>
+      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">{availableTours.map(t=><article key={t.url} className="flex flex-col overflow-hidden rounded-xl border bg-card"><img src={t.image} alt={t.alt} width={640} height={360} loading="lazy" decoding="async" className="aspect-[16/9] w-full object-cover"/><div className="flex flex-1 flex-col p-4"><p className="text-xs font-semibold uppercase text-primary">{t.platform}</p><h3 className="mt-2 text-lg font-semibold">{t.title}</h3><p className="mt-2 text-xs font-semibold text-muted-foreground">{t.duration}</p><p className="mt-2 text-sm leading-relaxed text-muted-foreground">{t.text}</p><div className="mt-auto pt-4"><OutLink href={t.url}>See dates and rates</OutLink></div></div></article>)}</div>
       <p className="mt-3 text-sm leading-relaxed text-muted-foreground">For more guided options, browse my <Link to="/tours/jerusalem/" className="font-semibold text-primary underline">Jerusalem tours</Link>. My <Link to="/private-driver/" className="font-semibold text-primary underline">private driver service</Link> is transport, not automatically a licensed guiding service.</p>
     </section>
     <FaqList faqs={faqs}/>
     <section id="explore-more" aria-labelledby="explore-more-heading" className="mt-12 scroll-mt-24">
       <Heading id="explore-more" title="Explore Jerusalem further" intro="More of my practical guides for planning your days in and around Jerusalem."/>
-      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">{related.map(item=><Link key={item.to} to={item.to} className="group flex h-full flex-col overflow-hidden rounded-xl border bg-card transition-colors hover:border-primary/40 hover:bg-secondary/20"><img src={item.photo} alt={item.alt} width={640} height={360} loading="lazy" decoding="async" className="aspect-[16/9] w-full object-cover"/><span className="flex flex-1 flex-col p-4"><strong>{item.title}</strong><span className="mt-2 text-sm text-muted-foreground">{item.text}</span><span className="mt-auto flex items-center gap-1 pt-4 text-sm font-semibold text-primary">Explore my guide <ArrowUpRight className="h-4 w-4" aria-hidden="true"/></span></span></Link>)}</div>
+      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">{related.map(item=><Link key={item.to} to={item.to} className="group flex h-full flex-col overflow-hidden rounded-xl border bg-card transition-colors hover:border-primary/40 hover:bg-secondary/20">{guideHeroPhotoForPath(item.to) && <img src={guideHeroPhotoForPath(item.to)!.src} alt={guideHeroPhotoForPath(item.to)!.alt} width={640} height={360} loading="lazy" decoding="async" className="aspect-[16/9] w-full object-cover"/>}<span className="flex flex-1 flex-col p-4"><strong>{item.title}</strong><span className="mt-2 text-sm text-muted-foreground">{item.text}</span><span className="mt-auto flex items-center gap-1 pt-4 text-sm font-semibold text-primary">Explore my guide <ArrowUpRight className="h-4 w-4" aria-hidden="true"/></span></span></Link>)}</div>
     </section>
     <HomeContactForm guide={neighborhoodTripContactCopy("Jerusalem")}/>
     <SourcesDisclosure>
