@@ -8,18 +8,20 @@ import { eilatSite } from "@/data/eilatSite";
 import { affiliateConfig, travelGuidePaths } from "@/data/registry";
 import { recordOutboundClick } from "@/lib/outbound";
 import coralUnderwater from "@/assets/eilat/coral-reef.webp";
+import waterfrontPhoto from "@/assets/eilat/waterfront.webp";
 import timnaPhoto from "@/assets/home/timna-park-feature-optimized.webp";
 import mountainsPhoto from "@/assets/home/hero-eilat-mountains-large.webp";
 
 const official = eilatSite.official;
 const inlineLink = "font-semibold text-primary underline underline-offset-4";
 const map = (place: string) => "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(place);
-const directions = (origin: string, destination: string) =>
+const directions = (origin: string, destination: string, waypoints: string[] = []) =>
   "https://www.google.com/maps/dir/?api=1&origin=" + encodeURIComponent(origin)
-  + "&destination=" + encodeURIComponent(destination) + "&travelmode=driving";
+  + "&destination=" + encodeURIComponent(destination) + "&travelmode=driving"
+  + (waypoints.length ? "&waypoints=" + waypoints.map(encodeURIComponent).join("%7C") : "");
 const maps = {
   city: "https://maps.google.com/maps?q=Eilat%2C%20Israel&hl=en&z=12&t=m&output=embed",
-  marine: directions("North Beach, Eilat, Israel", "Coral Beach Nature Reserve, Eilat, Israel"),
+  marine: directions("Coral Beach Nature Reserve, Eilat, Israel", "North Beach, Eilat, Israel", ["Underwater Observatory Marine Park, Eilat, Israel"]),
   desert: directions("Eilat, Israel", "Timna Park, Israel"),
 };
 const sourcesLink = (url: string, name: string) => (
@@ -147,11 +149,29 @@ export const eilatDestinationContent: AttractionDestinationContent = {
       <p>Dolphin sightings are <strong>not guaranteed</strong>; the animals are free to approach or stay away. Consult the {sourcesLink(official.dolphinReef, "official Dolphin Reef visit information")} and the {sourcesLink(official.dolphinSwim, "activity rules")} before booking.</p>
       {placeLink("Dolphin Reef, Eilat, Israel")}
     </AttractionHighlight>
-    <AttractionHighlight title="North Beach, the promenade and marina" image={{ src: photos.watersports, alt: "Eilat marina with moored boats, waterfront hotels and the Red Sea" }}>
+    <AttractionHighlight title="North Beach, the promenade and marina" image={{ src: waterfrontPhoto, alt: "Eilat Red Sea waterfront and marina area" }}>
       <p>The central beachfront and promenade are easy options for an unstructured morning or evening: waterfront walks, cafés, hotel-area beaches and views towards the surrounding mountains. This is the most straightforward area if you are staying in central Eilat without a car.</p>
       <p>Not every beach has a lifeguard or identical facilities. Look for signs at the specific beach before swimming, and do not assume that every water-sports kiosk is operating year-round.</p>
       {placeLink("Eilat North Beach, Israel")}
     </AttractionHighlight>
+    <h3 className="pt-3 font-serif text-xl font-semibold">Which Eilat beach should you choose?</h3>
+    <p>Compare central hotel-area beaches, relaxed south-coast beach businesses and protected reef areas. They have different facilities, access rules and swimming supervision. Browse the <a href={official.beaches} target="_blank" rel="noopener noreferrer" className={inlineLink}>Eilat beach directory</a> for more options.</p>
+    <div className="grid gap-3 sm:grid-cols-2" data-testid="eilat-beach-comparison">
+      {[
+        { name: "North Beach & promenade", best: "Central hotels and easy walks", detail: "A convenient area for visitors, cafés and evening walks. Use only designated, supervised swimming areas.", query: "North Beach, Eilat, Israel" },
+        { name: "Dekel Beach", best: "Relaxed south-coast beach time", detail: "A casual shoreline with cafés and seating. Check current access and whether a lifeguard is present.", query: "Dekel Beach, Eilat, Israel" },
+        { name: "Mosh's Beach", best: "Casual atmosphere and beach café", detail: "An informal beach setting, not a protected reef reserve. Verify business hours and swimming supervision.", query: "Mosh's Beach, Eilat, Israel" },
+        { name: "Migdalor / Lighthouse Beach", best: "Rockier southern coastline", detail: "A southern stop near reef areas. Wear suitable footwear and never assume a lifeguard is present.", query: "Migdalor Beach, Eilat, Israel" },
+        { name: "Princess Beach", best: "Southern reef and snorkeling interests", detail: "Check shore access, marked entry points, swimming conditions and coral-protection rules.", query: "Princess Beach, Eilat, Israel" },
+        { name: "Coral Beach Nature Reserve", best: "Protected reef in a managed setting", detail: "A separate paid reserve with reef access and facilities. Check admission and advance booking guidance.", query: "Coral Beach Nature Reserve, Eilat, Israel" },
+      ].map(beach => <article key={beach.name} className="rounded-xl border bg-card p-4">
+        <h4 className="font-serif text-lg font-semibold">{beach.name}</h4>
+        <p className="mt-1 text-sm font-semibold text-primary">{beach.best}</p>
+        <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{beach.detail}</p>
+        <div className="mt-3">{placeLink(beach.query)}</div>
+      </article>)}
+    </div>
+    <AttractionPracticalTip>A beach with a café or deck chairs is not necessarily a supervised bathing beach. Check for an active lifeguard and follow the flags and on-site signs before swimming.</AttractionPracticalTip>
     <AttractionHighlight title="Snorkeling, scuba diving and water sports" image={{ src: coralUnderwater, alt: "Fish and coral in the Red Sea near Eilat" }}>
       <p>Beyond the reserve, Eilat offers guided snorkeling, introductory diving, kayaking, stand-up paddling and boat trips. Choose the activity according to your swimming skills, age, comfort in the water and the operator's safety procedures.</p>
       <p>Keep distance from wildlife, never touch or stand on coral, and do not feed fish. A glass-bottom boat is a useful option for visitors who prefer to stay dry. See the <Link to="/tours/eilat-red-sea/" className={inlineLink}>Eilat activities and tours page</Link> for more options.</p>
@@ -182,9 +202,9 @@ export const eilatDestinationContent: AttractionDestinationContent = {
     <div className="grid gap-4 md:grid-cols-3">
       <article className="rounded-xl border bg-card p-4">
         <div className="flex items-center gap-2"><Clock3 className="h-5 w-5 text-primary" aria-hidden="true"/><h3 className="font-serif text-xl font-semibold">One day: the Red Sea</h3></div>
-        <p className="mt-3 text-sm leading-relaxed">Start with Coral Beach Nature Reserve <strong>or</strong> Dolphin Reef. Spend the afternoon at the Underwater Observatory if you enjoy marine exhibits, then return to the North Beach promenade for an evening walk.</p>
+        <p className="mt-3 text-sm leading-relaxed">Start with Coral Beach Nature Reserve <strong>or</strong> Dolphin Reef. If you choose Coral Beach, continue to the Underwater Observatory farther south, then return to the North Beach promenade for an evening walk. The sample map follows the Coral Beach option only.</p>
         <p className="mt-2 text-xs text-muted-foreground">Choose two main paid stops rather than rushing between all three.</p>
-        <a href={maps.marine} target="_blank" rel="noopener noreferrer" className={inlineLink}>View north-to-south coastal route</a>
+        <a href={maps.marine} target="_blank" rel="noopener noreferrer" className={inlineLink}>View sample Coral Beach–Observatory–North Beach route</a>
       </article>
       <article className="rounded-xl border bg-card p-4">
         <div className="flex items-center gap-2"><Waves className="h-5 w-5 text-primary" aria-hidden="true"/><h3 className="font-serif text-xl font-semibold">Two days: coast + desert</h3></div>
@@ -227,7 +247,7 @@ export const eilatDestinationContent: AttractionDestinationContent = {
     <div className="grid gap-3 md:grid-cols-2">
       <article className="rounded-xl border bg-card p-4">
         <h3 className="flex items-center gap-2 font-serif text-xl font-semibold"><BusFront className="size-5 text-primary"/>Local buses and airport arrival</h3>
-        <p className="mt-3 text-sm leading-relaxed">Ramon Airport is north of Eilat. Egged routes, including lines 30 and 50, serve different parts of the city and airport corridor. Check the {sourcesLink(official.airport, "Ramon Airport ground-transport page")} and {sourcesLink(official.egged, "Egged route information")} for the latest stops and departures.</p>
+        <p className="mt-3 text-sm leading-relaxed">Ramon Airport is north of Eilat. Egged routes, including lines 30 and 50, serve different parts of the city and airport corridor. Check the {sourcesLink(official.airport, "Ramon Airport ground-transport page")} and the {sourcesLink(official.transportPlanner, "official journey planner")} for the latest stops and departures.</p>
         <p className="mt-2 text-sm leading-relaxed">Bus services can be reduced around Shabbat and Jewish holidays. Use the {sourcesLink(official.transportPlanner, "national journey planner")} before relying on a late connection.</p>
       </article>
       <article className="rounded-xl border bg-card p-4">
@@ -286,8 +306,8 @@ export const eilatDestinationContent: AttractionDestinationContent = {
     { label: "Masada", to: "/attractions/masada/", note: "Desert fortress and archaeological visit" },
     { label: "The Dead Sea", to: "/attractions/dead-sea/", note: "Saltwater beaches and desert scenery" },
     { label: "Ein Gedi", to: "/attractions/ein-gedi/", note: "Oasis and nature reserve near the Dead Sea" },
-    { label: "Caesarea", to: "/attractions/caesarea/", note: "Explore another coastal archaeological site" },
-    { label: "Old Jaffa", to: "/attractions/jaffa/", note: "A contrasting historic port city on the Mediterranean" },
+    { label: "Qasr el-Yahud", to: "/attractions/qasr-el-yahud/", note: "A separate Jordan Valley stop on a longer road trip" },
+    { label: "More Dead Sea sights", to: "/travel-blog/dead-sea-attractions/", note: "Additional stops on a separate Dead Sea journey" },
   ],
   planningLinks: [
     { label: "Eilat & Red Sea tours", to: "/tours/eilat-red-sea/", description: "Snorkeling, boats and desert activities", icon: "region" },
@@ -300,6 +320,7 @@ export const eilatDestinationContent: AttractionDestinationContent = {
   photoCredits: <p>Underwater coral photograph: Yoav95179, <a href="https://commons.wikimedia.org/wiki/File:Corals_in_Eilat_coral_reef_nature_reserve_1.jpg" target="_blank" rel="noopener noreferrer" className={inlineLink}>Wikimedia Commons</a>, <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener noreferrer" className={inlineLink}>CC BY-SA 4.0</a>; resized and converted to WebP. Other location photographs are from the publisher's existing image archive.</p>,
   sources: [
     { label: "INPA — Eilat Coral Beach Nature Reserve", url: official.coralReserve },
+    { label: "Eilat beach directory", url: official.beaches },
     { label: "Underwater Observatory — visiting the park", url: official.underwaterObservatory },
     { label: "Dolphin Reef — visitor information", url: official.dolphinReef },
     { label: "Dolphin Reef — swimming and suitability rules", url: official.dolphinSwim },
@@ -310,7 +331,7 @@ export const eilatDestinationContent: AttractionDestinationContent = {
     { label: "Eilat Birdwatching Park — official visitor information", url: official.birds },
     { label: "Eilat Botanical Garden — official information", url: official.botanical },
     { label: "Israel Airports Authority — Ramon Airport transport", url: official.airport },
-    { label: "Egged — airport and Eilat bus routes", url: official.egged },
+    { label: "National public transport journey planner", url: official.transportPlanner },
   ],
 };
 export function EilatAttractionPage() {
