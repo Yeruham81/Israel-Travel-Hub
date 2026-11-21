@@ -36,7 +36,7 @@ export const suitabilityColumns = [
   {key:"city",label:"City sightseeing",short:"Cities",description:"Jerusalem, Tel Aviv, Haifa and urban walks"},
   {key:"swimming",label:"Mediterranean beaches",short:"Beaches",description:"Typical comfort for coastal beach time, subject to lifeguards and sea conditions"},
   {key:"north",label:"Galilee outdoors",short:"North",description:"Open-air visits, gentle walks and northern scenery"},
-  {key:"deadSea",label:"Dead Sea & Masada",short:"Dead Sea",description:"Comfort for exposed outdoor stops; resort pools and spa stays differ"},
+  {key:"deadSea",label:"Dead Sea / Masada walks",short:"Outdoors",description:"Outdoor sightseeing at Masada, desert viewpoints and exposed Dead Sea stops. Not a swimming suitability rating; resort stays and water conditions vary"},
   {key:"desert",label:"Negev desert walks",short:"Desert",description:"Hiking and outdoor sightseeing, not Red Sea swimming"}
 ] as const;
 
@@ -58,8 +58,8 @@ export type RegionalRecommendation = {
 export const regionalRecommendations: RegionalRecommendation[] = [
   {id:"jerusalem",name:"Jerusalem & the Judean Hills",goodMonths:"March–April · October–November",note:"I favour spring and mid-to-late autumn for long walks between historic neighbourhoods.",caution:"Winter evenings can be cold and wet; religious holidays affect access.",to:"/travel-blog/jerusalem-travel-guide/",linkLabel:"My Jerusalem guide"},
   {id:"coast",name:"Tel Aviv & the Mediterranean coast",goodMonths:"May–October for beach days",note:"Summer is useful for a swimming-focused stay; spring and autumn are often nicer for unhurried city walks.",caution:"Humidity, sea conditions and supervised swimming hours matter.",to:"/travel-blog/beaches-in-tel-aviv/",linkLabel:"Explore Tel Aviv beaches"},
-  {id:"north",name:"Galilee & the Sea of Galilee",goodMonths:"March–May · October–November",note:"After winter rain, the hills can be green and inviting; shoulder-season visits suit many outdoor stops.",caution:"Summer can be hot and winter rain can change trails and road access.",to:"/travel-blog/sea-of-galilee/",linkLabel:"My Sea of Galilee guide"},
-  {id:"dead-sea",name:"Dead Sea & Masada",goodMonths:"November–March for exposed sightseeing",note:"I prefer the cooler months for Masada, outdoor viewpoints and longer desert-side stops.",caution:"Swimming and hotel facilities are a separate decision; never hike wadis during a flood warning.",to:"/travel-blog/the-dead-sea/",linkLabel:"Plan a Dead Sea visit"},
+  {id:"north",name:"Galilee & the Sea of Galilee",goodMonths:"March–May · October–November",note:"After winter rain, the hills can be green and inviting; shoulder-season visits suit many outdoor stops.",caution:"Summer can be hot and winter rain can change trails and road access.",to:"/attractions/sea-of-galilee/",linkLabel:"My Sea of Galilee guide"},
+  {id:"dead-sea",name:"Dead Sea & Masada",goodMonths:"November–March for exposed sightseeing",note:"I prefer the cooler months for Masada, outdoor viewpoints and longer desert-side stops.",caution:"Swimming and hotel facilities are a separate decision; never hike wadis during a flood warning.",to:"/attractions/dead-sea/",linkLabel:"Plan a Dead Sea visit"},
   {id:"eilat",name:"Eilat & the Negev",goodMonths:"October–April for desert walks",note:"The cooler half of the year usually suits Negev hikes, the Ramon Crater and Eilat-area outdoor trips.",caution:"Eilat resort and Red Sea activities can suit other seasons too; summer desert hiking is a different matter.",to:"/travel-blog/eilat/",linkLabel:"My Eilat guide"}
 ];
 
@@ -67,7 +67,7 @@ export const seasonDetails = [
   {id:"spring",label:"Spring",months:"March–May",title:"Spring: heritage walks, flowers and the green north",summary:"My first choice for combining Jerusalem, northern scenery and open-air archaeology.",paragraphs:[
     "March and April are often rewarding for mixed itineraries: city walks, Galilee viewpoints and archaeological sites can fit in the same trip. The landscape may still be green after winter rain. By May, daytime heat can make exposed sites less comfortable.",
     "I would build a spring trip around two or three regions instead of racing across the whole country. Passover and Easter dates can change accommodation demand, religious-site visits and operating hours."
-  ],tip:"On a spring sightseeing day, pack a light layer and rain option as well as sun protection; check the forecast for both your morning and afternoon stops.",links:[{label:"Jerusalem walking ideas",to:"/travel-blog/jerusalem-travel-guide/"},{label:"Galilee attractions",to:"/travel-blog/sea-of-galilee/"}]},
+  ],tip:"On a spring sightseeing day, pack a light layer and rain option as well as sun protection; check the forecast for both your morning and afternoon stops.",links:[{label:"Jerusalem walking ideas",to:"/travel-blog/jerusalem-travel-guide/"},{label:"Galilee attractions",to:"/attractions/sea-of-galilee/"}]},
   {id:"summer",label:"Summer",months:"June–August",title:"Summer: the Mediterranean coast and early starts",summary:"Best suited to a beach-led stay with shaded urban stops and air-conditioned breaks.",paragraphs:[
     "For summer trips, I normally put the Mediterranean coast first. Tel Aviv's beaches and promenade are attractive options, but the coast can be humid and inland or desert sites may be much hotter.",
     "If you include historic sights or outdoor activities, start early, shorten exposed visits and plan an indoor alternative for the middle of the day. Children’s school holidays can raise local demand without guaranteeing any particular hotel price."
@@ -79,7 +79,7 @@ export const seasonDetails = [
   {id:"winter",label:"Winter",months:"December–February",title:"Winter: museums, cities and the southern landscape",summary:"A flexible winter visit can combine culture with carefully chosen southern excursions.",paragraphs:[
     "Winter brings cooler days, regular rain in the north and centre, and shorter daylight. I often suggest museums, markets and historic city neighbourhoods as options that can be rearranged when the forecast changes.",
     "The Dead Sea, Eilat and the Negev may offer comfortable daytime outings, but even a sunny desert location can be affected by rain upstream. Jerusalem snow is occasional, not a dependable winter attraction."
-  ],tip:"For Dead Sea or Negev outings, check official weather warnings and national-park notices shortly before departure. Do not enter desert streambeds if there is a flood warning.",links:[{label:"Museums in Jerusalem",to:"/travel-blog/museums-in-jerusalem/"},{label:"Explore the Dead Sea",to:"/travel-blog/the-dead-sea/"}]}
+  ],tip:"For Dead Sea or Negev outings, check official weather warnings and national-park notices shortly before departure. Do not enter desert streambeds if there is a flood warning.",links:[{label:"Museums in Jerusalem",to:"/travel-blog/museums-in-jerusalem/"},{label:"Explore the Dead Sea",to:"/attractions/dead-sea/"}]}
 ] as const;
 
 export const bestTimeGuide: TravelGuide = {
@@ -129,5 +129,5 @@ export const bestTimeGuide: TravelGuide = {
     {label:"Explore Israel's 3-day itinerary",to:"/travel-blog/israel-itinerary-3-days/"},
     {label:"Compare 7 days in Israel",to:"/travel-blog/israel-itinerary-7-days/"}
   ],
-  sourceIds:["m26-ims","m26-hebcal","guide-jerusalem-tourism"]
+  sourceIds:["m26-ims","m26-ims-warnings","m26-hebcal","m26-parks","guide-jerusalem-tourism"]
 };
