@@ -102,18 +102,22 @@ function GuideCard({item}:{item:typeof related[number] | typeof planning[number]
  <span className="mt-auto inline-flex items-center gap-1 pt-3 text-xs font-semibold text-primary">Explore guide <ArrowUpRight aria-hidden className="h-3.5 w-3.5"/></span></span></Link>;
 }
 function ExperienceCard({stop,num}:{stop:TelAvivExperience;num:number}){
- return <article id={stop.id} className="flex scroll-mt-28 flex-col overflow-hidden rounded-2xl border bg-card shadow-sm" data-testid="tel-aviv-experience-card">
- <img src={stop.image.src} alt={stop.image.alt} width={880} height={495} loading="lazy" decoding="async" className="aspect-[16/9] w-full object-cover"/>
- <div className="flex flex-1 flex-col p-4 sm:p-5">
- <p className="text-xs font-semibold uppercase tracking-wide text-primary">{stop.category}</p>
- <h3 className="mt-2 text-xl font-bold leading-snug sm:text-2xl">{num}. {stop.title}</h3>
- <dl className="mt-3 grid grid-cols-2 gap-x-3 gap-y-3 rounded-lg bg-secondary/45 p-3 text-xs leading-snug">
+ return <article id={stop.id} className="scroll-mt-28 overflow-hidden rounded-2xl border bg-card shadow-sm" data-testid="tel-aviv-experience-card" data-detailed-card="horizontal">
+  <div className="lg:grid lg:grid-cols-[minmax(0,1fr)_270px] lg:items-start lg:gap-6 lg:p-5">
+   <img src={stop.image.src} alt={stop.image.alt} width={880} height={495} loading="lazy" decoding="async" className="aspect-[16/9] w-full object-cover lg:col-start-2 lg:row-start-1 lg:aspect-[4/3] lg:rounded-xl"/>
+   <div className="min-w-0 p-4 sm:p-5 lg:col-start-1 lg:row-start-1 lg:p-0">
+    <p className="text-xs font-semibold uppercase tracking-wide text-primary">{stop.category}</p>
+    <h3 className="mt-2 text-xl font-bold leading-snug sm:text-2xl">{num}. {stop.title}</h3>
+    <p className="mt-3 text-sm leading-relaxed">{stop.description}</p>
+   </div>
+  </div>
+  <div className="border-t p-4 sm:p-5 lg:px-6">
+  <dl className="mt-3 grid grid-cols-2 gap-x-3 gap-y-3 rounded-lg bg-secondary/45 p-3 text-xs leading-snug">
   <div><dt className="font-semibold">Best for</dt><dd className="mt-1 text-muted-foreground">{stop.bestFor}</dd></div>
   <div><dt className="font-semibold">Allow</dt><dd className="mt-1 text-muted-foreground">{stop.time}</dd></div>
   <div><dt className="font-semibold">Area</dt><dd className="mt-1 text-muted-foreground">{stop.area}</dd></div>
   <div><dt className="font-semibold">Entry</dt><dd className="mt-1 text-muted-foreground">{stop.entry}</dd></div>
  </dl>
- <p className="mt-4 text-sm leading-relaxed">{stop.description}</p>
  <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{stop.practical}</p>
  <p className="mt-3 text-sm leading-relaxed"><strong>Getting there: </strong>{stop.transport}</p>
  <p className="mt-4 rounded-lg border-l-2 border-primary/40 bg-secondary/30 px-3 py-2.5 text-sm leading-relaxed"><strong>My tip: </strong>{stop.tip}</p>
@@ -232,7 +236,7 @@ export function TelAvivAttractionsGuide(){
   </section>
   <section id="explore" aria-labelledby="explore-h" className="mt-12 scroll-mt-24">
     <Heading id="explore" title="Ten attractions and experiences I recommend" intro="I've chosen a mix of neighbourhoods, landmarks, markets, beaches and culture. Explore the places that interest you; you can follow the detailed guides where available."/>
-    <div className="grid items-stretch gap-5 md:grid-cols-2">
+    <div className="grid gap-5" data-testid="tel-aviv-detailed-experience-cards">
       {stops.map((stop,i)=><ExperienceCard key={stop.id} stop={stop} num={i+1}/>)}
     </div>
   </section>
