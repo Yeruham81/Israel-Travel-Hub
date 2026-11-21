@@ -62,7 +62,7 @@ function MuseumCard({museum}:{museum:MuseumEntry}) {
             className={`h-48 w-full sm:h-56 lg:aspect-[4/3] lg:h-auto ${museumPhoto.fit === "contain" ? "object-contain" : "object-cover"}`}
           />
         </div>
-        {museumPhoto.illustrative && <figcaption className="px-3 py-2 text-xs leading-relaxed text-muted-foreground">Illustration of traditional instruments, not a photograph of the museum.</figcaption>}
+        
       </figure>
       <div className="min-w-0 p-4 sm:p-5 lg:col-start-1 lg:row-start-1 lg:p-0">
         <p className="text-xs font-semibold uppercase tracking-wide text-primary">{museum.neighbourhood}</p>

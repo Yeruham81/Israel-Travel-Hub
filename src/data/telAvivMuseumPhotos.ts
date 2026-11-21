@@ -3,8 +3,7 @@ import muzaPhoto from "@/assets/guides/2026-10/eretz-israel-museum.webp";
 /**
  * One local, accurately labelled image per museum card.
  * Original library WebP photos were retrieved from the site's connected image archive.
- * Four venues without verified local photographs use explicitly captioned original
- * architectural illustrations, never another venue's photo.
+ * Four additional photographs were supplied for this guide and optimized as local WebP.
  */
 export type TelAvivMuseumPhoto = {
   src: string;
@@ -12,16 +11,15 @@ export type TelAvivMuseumPhoto = {
   width: number;
   height: number;
   fit?: "contain";
-  illustrative?: boolean;
 };
 
 export const telAvivMuseumPhotos: Record<string, TelAvivMuseumPhoto> = {
   art: { src: "/images/tel-aviv-attractions/tel-aviv-museum-of-art.webp", alt: "Modern exterior of the Tel Aviv Museum of Art", width: 738, height: 492 },
   city: { src: "/images/tel-aviv-museums/city.webp", alt: "Tel Aviv–Yafo City Museum in the historic municipal building on Bialik Square", width: 684, height: 417 },
-  rubin: { src: "/images/tel-aviv-museums/rubin.svg", alt: "Original architectural illustration of a Tel Aviv artist house, not a photograph of Rubin Museum", width: 900, height: 600, illustrative: true },
-  liebling: { src: "/images/tel-aviv-museums/liebling.svg", alt: "Original architectural illustration of White City modernist buildings, not a photograph of Liebling Haus", width: 900, height: 600, illustrative: true },
-  bialik: { src: "/images/tel-aviv-museums/bialik.svg", alt: "Original architectural illustration of a historic Tel Aviv home, not a photograph of Bialik House", width: 900, height: 600, illustrative: true },
-  bauhaus: { src: "/images/tel-aviv-museums/bauhaus.svg", alt: "Original architectural illustration of modernist design, not a photograph of Bauhaus Center Tel Aviv", width: 900, height: 600, illustrative: true },
+  rubin: { src: "/images/tel-aviv-museums/rubin.webp", alt: "Exhibition room with artworks and historic displays inside the Rubin Museum in Tel Aviv", width: 960, height: 640 },
+  liebling: { src: "/images/tel-aviv-museums/liebling.webp", alt: "Historic Bauhaus Museum building on Bialik Street, an example of Tel Aviv White City architecture", width: 960, height: 701 },
+  bialik: { src: "/images/tel-aviv-museums/bialik.webp", alt: "Bialik House and its distinctive cream-colored facade framed by palm trees", width: 960, height: 640 },
+  bauhaus: { src: "/images/tel-aviv-museums/bauhaus.webp", alt: "Glass-fronted Bauhaus Center Tel Aviv building on Dizengoff Street", width: 960, height: 720 },
   anu: { src: "/images/tel-aviv-museums/anu.webp", alt: "ANU Museum of the Jewish People at Tel Aviv University", width: 669, height: 436 },
   steinhardt: { src: "/images/tel-aviv-museums/steinhardt.webp", alt: "Contemporary angular exterior of the Steinhardt Museum of Natural History", width: 692, height: 389 },
   muza: { src: muzaPhoto, alt: "MUZA, the Eretz Israel Museum campus in Ramat Aviv", width: 755, height: 503 },

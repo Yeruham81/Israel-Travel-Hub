@@ -74,7 +74,7 @@ function MuseumCard({ museum }: { museum: MuseumEntry }) {
             className={`h-48 w-full sm:h-56 lg:aspect-[4/3] lg:h-auto ${museumPhoto.fit === "contain" ? "object-contain" : "object-cover"}`}
           />
         </div>
-        {museumPhoto.illustrative && <figcaption className="px-3 py-2 text-xs leading-relaxed text-muted-foreground">Architectural illustration, not a photograph of this museum.</figcaption>}
+        
       </figure>
       <div className="min-w-0 p-4 sm:p-5 lg:col-start-1 lg:row-start-1 lg:p-0">
         <p className="text-xs font-semibold uppercase tracking-wide text-primary">{museum.neighbourhood}</p>
@@ -311,6 +311,7 @@ export function TelAvivMuseumsGuide() {
       <HomeContactForm guide={neighborhoodTripContactCopy("Tel Aviv")} />
       <SourcesDisclosure>
         <p className="mb-3 text-sm leading-relaxed">I use official museum and operator pages for visitor arrangements. Opening hours, temporary closures, admission and exhibitions may change. Please confirm the details with the venue for your visit date.</p>
+        <p className="mt-4 text-xs leading-relaxed text-muted-foreground">Photo credits for the four added museum photographs (resized and compressed to WebP): <a href="https://commons.wikimedia.org/wiki/File:Bauhaus_Center_Tel_Aviv.JPG" target="_blank" rel="noopener noreferrer" className="underline">Bauhaus Center — Itzuvit, CC BY-SA 3.0</a>; <a href="https://commons.wikimedia.org/wiki/File:Bialik_Bldg.jpg" target="_blank" rel="noopener noreferrer" className="underline">Bialik House — Ori Lubin</a>; <a href="https://commons.wikimedia.org/wiki/File:Bauhaus_Tel-Aviv_museum.jpg" target="_blank" rel="noopener noreferrer" className="underline">Bauhaus-era building — Talmoryair, CC BY 3.0</a>; <a href="https://commons.wikimedia.org/wiki/File:Rubin_Museum_Tel_Aviv,_Room_39.jpg" target="_blank" rel="noopener noreferrer" className="underline">Rubin Museum — Yoram Shoval, CC BY-SA 4.0</a>. The historic Bauhaus Museum photograph illustrates the White City architecture discussed in the Liebling Haus entry.</p>
         <ul className="grid gap-x-5 gap-y-2 text-sm sm:grid-cols-2">
           {museums.map(museum => <li key={museum.id}><OfficialLink href={museum.url}>{museum.name}</OfficialLink></li>)}
         </ul>

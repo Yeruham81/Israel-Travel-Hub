@@ -4,10 +4,10 @@ import { describe, expect, it } from "vitest";
 import { additionalMuseums, museumAreas, museumMapPoints, museums } from "@/data/telAvivMuseums";
 
 describe("Tel Aviv museums editorial guide", () => {
-  it("uses distinct local WebP photos or clearly identified illustrations for all fifteen museum cards", () => {
+  it("uses distinct local WebP photographs for all fifteen museum cards", () => {
     expect(Object.keys(telAvivMuseumPhotos).sort()).toEqual(museums.map(m => m.id).sort());
     const picturePaths = new Set<string>();
-    const illustrated: string[] = [];
+    const replacedIllustrations: string[] = [];
     for (const museum of museums) {
       const photo = telAvivMuseumPhotos[museum.id]!;
       expect(photo, museum.id).toBeDefined();
@@ -19,15 +19,14 @@ describe("Tel Aviv museums editorial guide", () => {
       expect(existsSync(localFile), museum.id).toBe(true);
       expect(picturePaths.has(photo.src), museum.id).toBe(false);
       picturePaths.add(photo.src);
-      if (photo.illustrative) {
-        illustrated.push(museum.id);
-        expect(photo.src).toMatch(/\.svg$/);
-        expect(photo.alt).toMatch(/not a photograph/);
-      } else {
-        expect(photo.src).toMatch(/\.webp$/);
+      expect(photo.src).toMatch(/\.webp$/);
+      if (["rubin", "liebling", "bialik", "bauhaus"].includes(museum.id)) {
+        replacedIllustrations.push(museum.id);
+        expect(photo.src).toMatch(/^\/images\/tel-aviv-museums\/[\w-]+\.webp$/);
+        expect(photo.alt.toLowerCase()).not.toContain("not a photograph");
       }
     }
-    expect(illustrated).toEqual(["rubin", "liebling", "bialik", "bauhaus"]);
+    expect(replacedIllustrations).toEqual(["rubin", "liebling", "bialik", "bauhaus"]);
   });
 
   it("matches the Jerusalem museum card design: one horizontal card per row with responsive photos and identical information bands", () => {
