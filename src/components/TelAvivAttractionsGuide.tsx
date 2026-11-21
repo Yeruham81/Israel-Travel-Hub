@@ -209,8 +209,9 @@ export function TelAvivAttractionsGuide(){
   </section>
   <section id="compare" aria-labelledby="compare-h" className="mt-12 scroll-mt-24">
     <Heading id="compare" title="Compare ten Tel Aviv attractions" intro="Use this overview to choose by area, visiting time and admission type. Allow additional time to get between neighbourhoods."/>
-    <div className="overflow-hidden rounded-xl border bg-card">
-      <table className="hidden w-full table-fixed border-collapse text-left text-sm md:table">
+    <p className="mb-3 text-xs text-muted-foreground md:hidden">Swipe the table sideways to compare all ten attractions.</p>
+        <div role="region" aria-label="Comparison table" tabIndex={0} className="max-w-full overflow-x-auto rounded-xl border bg-card focus-visible:outline-2 focus-visible:outline-primary">
+      <table className="w-full min-w-[760px] table-fixed border-collapse text-left text-sm">
         <caption className="sr-only">Compare ten attractions by neighbourhood, suggested duration and admission</caption>
         <thead className="bg-secondary/60"><tr>
          <th scope="col" className="w-[28%] border-b px-3 py-3">Experience</th>
@@ -223,12 +224,7 @@ export function TelAvivAttractionsGuide(){
           <td className="px-3 py-3">{s.area}</td><td className="px-3 py-3">{s.entry}</td><td className="px-3 py-3 text-muted-foreground">{s.time}</td>
         </tr>)}</tbody>
       </table>
-      <details className="md:hidden"><summary className="cursor-pointer px-4 py-3 text-sm font-semibold text-primary hover:bg-secondary/40">Show the comparison of all ten experiences</summary>
-        <ul className="divide-y border-t">{stops.map((s,i)=><li key={s.id} className="px-4 py-3">
-         <a href={"#"+s.id} className="font-semibold text-primary hover:underline">{i+1}. {s.shortTitle}</a>
-         <p className="mt-1 text-sm">{s.entry}</p><p className="mt-1 text-xs leading-relaxed text-muted-foreground">{s.area} · {s.time}</p>
-        </li>)}</ul>
-      </details>
+      
     </div>
   </section>
   <section id="explore" aria-labelledby="explore-h" className="mt-12 scroll-mt-24">

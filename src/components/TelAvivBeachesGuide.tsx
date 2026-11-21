@@ -192,8 +192,9 @@ export function TelAvivBeachesGuide() {
 
       <section id="compare" aria-labelledby="compare-h" className="mt-12 scroll-mt-24">
         <Heading id="compare" title="Tel Aviv beaches at a glance" intro="Compare the municipality's 13 listed beaches from north to south. The table describes their general appeal, not live bathing status." />
-        <div role="region" tabIndex={0} aria-label="Thirteen Tel Aviv beaches compared" className="overflow-hidden rounded-xl border bg-card focus-visible:outline-2 focus-visible:outline-primary">
-          <table className="hidden w-full table-fixed border-collapse text-left text-sm md:table">
+        <p className="mb-3 text-xs text-muted-foreground md:hidden">Swipe the table sideways to compare all thirteen beaches.</p>
+        <div role="region" aria-label="Comparison table" tabIndex={0} className="max-w-full overflow-x-auto rounded-xl border bg-card focus-visible:outline-2 focus-visible:outline-primary">
+          <table className="w-full min-w-[800px] table-fixed border-collapse text-left text-sm">
             <caption className="sr-only">Tel Aviv municipal beaches: location, reason to visit and facilities</caption>
             <thead className="bg-secondary/60"><tr>
               <th scope="col" className="w-[24%] border-b px-3 py-3 font-semibold">Beach</th>
@@ -208,13 +209,7 @@ export function TelAvivBeachesGuide() {
               <td className="px-3 py-3">{beach.highlights}<span className="mt-1 block text-xs text-muted-foreground">{beach.accessShort}</span></td>
             </tr>)}</tbody>
           </table>
-          <ul className="divide-y md:hidden">
-            {telAvivBeaches.map(beach => <li key={beach.id} className="px-4 py-3">
-              <a href={"#beach-" + beach.id} className="font-semibold text-primary hover:underline">{beach.name}</a>
-              <p className="mt-1 text-sm">{beach.bestFor}</p>
-              <p className="mt-1 text-xs leading-relaxed text-muted-foreground">{beach.highlights} · {beach.accessShort}</p>
-            </li>)}
-          </ul>
+          
         </div>
       </section>
 

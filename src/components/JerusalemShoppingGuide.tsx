@@ -180,8 +180,9 @@ export function JerusalemShoppingGuide() {
       <section id="compare" aria-labelledby="compare-h" className="mt-12 scroll-mt-24">
         <Heading id="compare" title="Jerusalem shopping areas at a glance"
           intro="Ten distinct choices, from traditional markets to an indoor shopping mall. Opening hours vary between individual shops and events." />
-        <div className="overflow-hidden rounded-xl border bg-card">
-          <table className="hidden w-full table-fixed border-collapse text-left text-sm md:table">
+        <p className="mb-3 text-xs text-muted-foreground md:hidden">Swipe the table sideways to compare all ten shopping areas.</p>
+        <div role="region" aria-label="Comparison table" tabIndex={0} className="max-w-full overflow-x-auto rounded-xl border bg-card focus-visible:outline-2 focus-visible:outline-primary">
+          <table className="w-full min-w-[760px] table-fixed border-collapse text-left text-sm">
             <caption className="sr-only">Comparison of ten Jerusalem shopping destinations</caption>
             <thead className="bg-secondary/60"><tr>
               <th scope="col" className="w-[26%] border-b px-3 py-3">Place</th>
@@ -196,13 +197,7 @@ export function JerusalemShoppingGuide() {
               <td className="px-3 py-3 text-muted-foreground">{place.when}</td>
             </tr>)}</tbody>
           </table>
-          <ul className="divide-y md:hidden">
-            {places.map(place => <li key={place.id} className="px-4 py-3">
-              <a href={"#shop-" + place.id} className="font-semibold text-primary hover:underline">{place.name}</a>
-              <p className="mt-1 text-sm">{place.bestFor}</p>
-              <p className="mt-1 text-xs leading-relaxed text-muted-foreground">{place.area} · {place.when}</p>
-            </li>)}
-          </ul>
+          
         </div>
       </section>
 
