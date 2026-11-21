@@ -13,6 +13,8 @@ import { SourcesDisclosure } from "@/components/SourcesDisclosure";
 import { GuidePhotoCredit } from "@/components/TravelGuide";
 import { travelGuides } from "@/data/travelGuides";
 import { migrationPhotos } from "@/data/guideMigrationPhotos";
+import fiveDayPhoto from "@/assets/home/hero-caesarea-sm.webp";
+import travelByTrainPhoto from "@/assets/airport-journeys/ben-gurion-rail-platform.webp";
 import { affiliateConfig, publicSources } from "@/data/registry";
 import { recordOutboundClick, relFor } from "@/lib/outbound";
 import {
@@ -170,20 +172,20 @@ function Practical(){
 }
 type NavCard={title:string;description:string;to:LinkProps["to"];image:string;alt:string};
 const exploreCards:NavCard[]=[
- {title:"Mahane Yehuda in Jerusalem",description:"Browse market lanes, nearby streets and the city's shopping districts",to:"/travel-blog/shopping-in-jerusalem/",image:"/images/attractions/jerusalem-shopping.webp",alt:"Jerusalem shopping streets"},
+ {title:"Markets & shopping in Jerusalem",description:"Explore Mahane Yehuda, Old City markets and shopping neighbourhoods",to:"/travel-blog/shopping-in-jerusalem/",image:"/images/jerusalem-shopping/old-city-market.webp",alt:"Market lanes in Jerusalem's Old City"},
  {title:"Explore Tel Aviv",description:"Street markets, food stops and city highlights",to:"/travel-blog/attractions-in-tel-aviv/",image:"/images/attractions/tel-aviv-jaffa.webp",alt:"Tel Aviv skyline near the Mediterranean"},
- {title:"Old Jaffa",description:"Local cafés, historic streets and the old port",to:"/attractions/jaffa/",image:"/images/attractions/jaffa-flea-market.webp",alt:"Jaffa market lanes"},
+ {title:"Old Jaffa",description:"Local cafés, historic streets and the old port",to:"/attractions/jaffa/",image:"/images/attractions/jaffa-port.webp",alt:"Old Jaffa Port and its waterfront"},
  {title:"Discover Akko",description:"Old City food lanes and northern coastal attractions",to:"/attractions/akko-acre/",image:"/images/attractions/akko-market.webp",alt:"Market stalls in Old Akko"},
- {title:"Explore Haifa",description:"The northern coast, gardens, local markets and neighbourhoods",to:"/attractions/haifa/",image:"/images/attractions/haifa-turkish-market.webp",alt:"Haifa Turkish Market district"},
+ {title:"Explore Haifa",description:"The northern coast, gardens, local markets and neighbourhoods",to:"/attractions/haifa/",image:"/images/attractions/haifa-bahai-gardens.webp",alt:"Haifa Bahai Gardens terraces and harbour"},
  {title:"Jerusalem's Old City",description:"Historic quarters and places to explore on foot",to:"/attractions/old-city-jerusalem/",image:"/images/attractions/old-jerusalem-cardo.webp",alt:"Jerusalem's historic Cardo"}
 ];
 const planningCards:NavCard[]=[
  {title:"Best time to visit Israel",description:"Weather, seasons and holiday planning",to:"/travel-blog/best-time-to-visit-israel/",image:migrationPhotos["best-time-to-visit-israel"].src,alt:migrationPhotos["best-time-to-visit-israel"].alt},
  {title:"3 days in Israel",description:"A short itinerary with time for a food stop",to:"/travel-blog/israel-itinerary-3-days/",image:"/images/attractions/jerusalem.webp",alt:"Jerusalem cityscape"},
- {title:"5 days in Israel",description:"Combine city visits and local neighbourhoods",to:"/travel-blog/israel-itinerary-5-days/",image:"/images/attractions/jaffa-port.webp",alt:"Boats and waterfront at Jaffa Port"},
+ {title:"5 days in Israel",description:"Combine city visits and local neighbourhoods",to:"/travel-blog/israel-itinerary-5-days/",image:fiveDayPhoto,alt:"Caesarea archaeological coastline"},
  {title:"7 days in Israel",description:"Take more time between the cities",to:"/travel-blog/israel-itinerary-7-days/",image:"/images/attractions/sea-of-galilee.webp",alt:"Sea of Galilee"},
  {title:"Israel holidays",description:"Plan Shabbat, public holidays and opening hours",to:"/travel-blog/israel-holidays/",image:"/images/attractions/old-jerusalem-tower-of-david.webp",alt:"Historic Jerusalem"},
- {title:"Getting around Israel",description:"Trains, buses, city travel and private transfers",to:"/travel-blog/getting-around-israel/",image:"/images/attractions/haifa-bahai-gardens.webp",alt:"Haifa's Bahai Gardens"}
+ {title:"Getting around Israel",description:"Trains, buses, city travel and private transfers",to:"/travel-blog/getting-around-israel/",image:travelByTrainPhoto,alt:"Train platforms at Ben Gurion Airport"}
 ];
 function RelatedCard({item}:{item:NavCard}){
  return <Link to={item.to} className="group flex h-full min-w-0 flex-col overflow-hidden rounded-xl border bg-card transition-colors hover:border-primary/50 hover:bg-secondary/20 focus-visible:outline-2 focus-visible:outline-primary">
