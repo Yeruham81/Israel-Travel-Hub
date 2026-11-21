@@ -51,11 +51,11 @@ const essentials = [
 ] as const;
 
 const bases = [
-  { name: "Jerusalem", image: jerusalem, alt: "Jerusalem Old City and stone buildings", description: "A strong base for the Old City, religious landmarks, museums and nearby day trips.", href: "/accommodation/jerusalem/", cta: "Explore Jerusalem hotels" },
-  { name: "Tel Aviv", image: telAviv, alt: "Tel Aviv Mediterranean coastline and city", description: "Beaches, restaurants, nightlife and rail connections to major cities and the airport.", href: "/accommodation/tel-aviv/", cta: "Explore Tel Aviv hotels" },
-  { name: "Dead Sea", image: deadSea, alt: "Desert mountains and the Dead Sea shoreline", description: "An overnight desert stay for relaxation, Ein Bokek, Masada and nearby sights.", href: "/accommodation/dead-sea/", cta: "Explore Dead Sea hotels" },
-  { name: "Tiberias", image: tiberias, alt: "The Sea of Galilee from Tiberias", description: "A practical base for the Sea of Galilee, Christian heritage sites and northern excursions.", href: "/accommodation/tiberias/", cta: "Explore Tiberias hotels" },
-  { name: "Haifa", image: haifa, alt: "Haifa city and Mediterranean views", description: "An appealing northern base for Haifa, Akko, Caesarea and the Carmel region.", href: "/accommodation/haifa/", cta: "Explore Haifa hotels" },
+  { name: "Jerusalem", image: jerusalem, alt: "Jerusalem Old City and stone buildings", description: "A strong base for the Old City, religious landmarks, museums and nearby day trips.", href: "/travel-blog/where-to-stay-in-jerusalem/", cta: "Explore Jerusalem hotels" },
+  { name: "Tel Aviv", image: telAviv, alt: "Tel Aviv Mediterranean coastline and city", description: "Beaches, restaurants, nightlife and rail connections to major cities and the airport.", href: "/travel-blog/where-to-stay-in-tel-aviv/", cta: "Explore Tel Aviv hotels" },
+  { name: "Dead Sea", image: deadSea, alt: "Desert mountains and the Dead Sea shoreline", description: "An overnight desert stay for relaxation, Ein Bokek, Masada and nearby sights.", href: "/travel-blog/best-dead-sea-hotels/", cta: "Explore Dead Sea hotels" },
+  { name: "Tiberias", image: tiberias, alt: "The Sea of Galilee from Tiberias", description: "A practical base for the Sea of Galilee, Christian heritage sites and northern excursions.", href: "/travel-blog/best-hotels-in-tiberias/", cta: "Explore Tiberias hotels" },
+  { name: "Haifa", image: haifa, alt: "Haifa city and Mediterranean views", description: "An appealing northern base for Haifa, Akko, Caesarea and the Carmel region.", href: "/travel-blog/best-hotels-in-haifa/", cta: "Explore Haifa hotels" },
 ] as const;
 
 const related = [
