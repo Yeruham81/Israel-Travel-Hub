@@ -1,11 +1,12 @@
 import { describe, expect, it } from "vitest";
-import { existsSync, readFileSync } from "node:fs";
+import { existsSync, readFileSync, readdirSync, statSync } from "node:fs";
 import { eilatDestinationContent as content } from "@/components/EilatAttractionPage";
 import { eilatSite } from "@/data/eilatSite";
 import { eilatMeta } from "@/routes/attractions.eilat";
 import { attractionHubRegions, attractionHubCards, attractionRelatedGuides } from "@/data/attractionsHub";
 import { attractionSidebarRegions } from "@/data/nav";
-import { affiliateConfig } from "@/data/registry";
+import { affiliateConfig, travelGuidePaths } from "@/data/registry";
+import { guideDirectory } from "@/data/travelGuides";
 
 const page = readFileSync("src/components/EilatAttractionPage.tsx", "utf8");
 
@@ -62,11 +63,15 @@ describe("Eilat multi-attraction city guide", () => {
       "/images/attractions/eilat-underwater-observatory.webp",
       "/images/attractions/eilat-dolphin-reef.webp",
       "/images/attractions/eilat-water-sports.webp",
+      "/images/attractions/eilat-snorkeling-coral.webp",
+      "/images/attractions/eilat-mountains-tour.webp",
     ];
     expect(new Set(list).size).toBe(list.length);
     for (const image of list) expect(existsSync("public" + image), image).toBe(true);
     expect(page).toContain("@/assets/home/timna-park-feature-optimized.webp");
-    expect(page).toContain("src: photos.watersports");
+    expect(page).toContain("eilat-water-sports.webp");
+    expect(page).toContain("eilat-beach-comparison");
+    expect(page).toContain("eilat-snorkeling-coral.webp");
     expect(page).toContain("@/assets/eilat/coral-reef.webp");
   });
 
@@ -78,7 +83,29 @@ describe("Eilat multi-attraction city guide", () => {
     expect(attractionHubCards.filter(card => card.to === "/attractions/eilat/")).toHaveLength(1);
     const nav = attractionSidebarRegions.find(item => item.label === "Negev & Eilat");
     expect(nav && "children" in nav && nav.children?.some(item => item.label === "Eilat" && item.to === "/attractions/eilat/")).toBe(true);
-    expect(attractionRelatedGuides.find(guide => guide.title === "Eilat & the Red Sea")?.to).toBe("/attractions/eilat/");
+    expect(attractionRelatedGuides.find(guide => guide.title === "Eilat: Red Sea attractions")?.to).toBe("/attractions/eilat/");
+  });
+
+  it("keeps Eilat as a single attraction, without a parallel travel guide or old direct links", () => {
+    expect("eilat" in travelGuidePaths).toBe(false);
+    expect(guideDirectory.some(g => g.id === "eilat")).toBe(false);
+    expect(existsSync("src/routes/travel-blog.eilat.tsx")).toBe(false);
+    const oldPath = "/travel-blog/" + "eilat/";
+    const rootDirs = ["src", "scripts"];
+    const files: string[] = [];
+    const visit = (folder: string) => {
+      for (const entry of readdirSync(folder)) {
+        const path = folder + "/" + entry;
+        if (statSync(path).isDirectory()) { visit(path); continue; }
+        if (/\\.(?:tsx?|jsx?|mjs|cjs|json)$/.test(entry)) files.push(path);
+      }
+    };
+    rootDirs.forEach(visit);
+    for (const file of files) {
+      expect(readFileSync(file, "utf8").includes(oldPath), file).toBe(false);
+    }
+    expect(readFileSync("public/sitemap.xml", "utf8")).not.toContain(oldPath);
+    expect(page).not.toContain("The booking links use Travelpayouts");
   });
 
   it("uses only existing product-specific Travelpayouts tour cards", () => {
