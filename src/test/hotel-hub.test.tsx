@@ -37,7 +37,8 @@ describe("Accommodation booking hub",()=>{
   expect(eilat).toHaveTextContent("Coming soon");
   expect(eilat.querySelectorAll("a")).toHaveLength(0);
   expect(screen.getByTestId("accommodation-coming-soon-card")).toBeInTheDocument();
-  expect(container.querySelector('a[href="/travel-blog/"' + "eilat/]" + '"]')).toBeNull();
+  const retiredEilatGuide = "/travel-blog/" + "eilat/";
+  expect(container.querySelector(`a[href="${retiredEilatGuide}"]`)).toBeNull();
   expect(screen.queryByRole("link", { name: /Explore hotel destinations/i })).toBeNull();
   const jerusalem = container.querySelector('[data-testid="hotel-destination-card"]')!;
   expect(jerusalem.closest("li")).toHaveClass("min-w-0");
