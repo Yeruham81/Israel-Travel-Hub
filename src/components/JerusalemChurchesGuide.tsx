@@ -64,22 +64,32 @@ function Tip({children}:{children:ReactNode}) {
 }
 function ChurchCard({church}:{church:JerusalemChurch}) {
   const locationUrl="https://www.google.com/maps/search/?api=1&query="+encodeURIComponent(church.name+", Jerusalem, Israel");
-  return <article id={"church-"+church.id} className="flex scroll-mt-28 flex-col overflow-hidden rounded-2xl border bg-card shadow-sm">
-    {church.photo?<img src={church.photo} alt={church.name+" in Jerusalem"} width={720} height={405} loading="lazy" decoding="async" className="aspect-[16/9] w-full object-cover"/>:<div data-church-photo-slot={church.id} aria-label={"Photograph of "+church.name+" to be added"} className="flex aspect-[16/9] items-center justify-center bg-secondary/50"><Church className="h-12 w-12 text-primary/25" strokeWidth={1.25} aria-hidden="true"/></div>}
-    <div className="flex flex-1 flex-col px-4 pb-4 pt-4 sm:px-5">
-      <p className="text-xs font-semibold uppercase tracking-wide text-primary">{church.tradition}</p>
-      <h3 className="mt-2 text-xl font-bold leading-snug">{church.name}</h3>
-      <p className="mt-3 text-sm leading-relaxed">{church.description}</p>
-      <p className="mt-3 text-sm leading-relaxed text-muted-foreground"><strong className="text-foreground">Don't miss:</strong> {church.highlight}</p>
-      <dl className="mt-4 space-y-3 rounded-lg bg-secondary/40 p-3.5 text-sm">
-        <div className="flex gap-2"><Clock3 className="mt-0.5 h-4 w-4 shrink-0 text-primary" aria-hidden="true"/><div><dt className="font-semibold">Published visiting hours</dt><dd className="mt-0.5 leading-relaxed text-muted-foreground">{church.hours}</dd></div></div>
-        <div className="flex gap-2"><Ticket className="mt-0.5 h-4 w-4 shrink-0 text-primary" aria-hidden="true"/><div><dt className="font-semibold">Admission</dt><dd className="mt-0.5 text-muted-foreground">{church.admission}</dd></div></div>
-      </dl>
-      <p className="mt-4 text-sm leading-relaxed"><strong className="text-primary">My tip:</strong> {church.tip}</p>
+  return <article id={"church-"+church.id} data-church-card="horizontal" className="scroll-mt-28 overflow-hidden rounded-2xl border bg-card shadow-sm">
+    <div className="lg:grid lg:grid-cols-[minmax(0,1fr)_270px] lg:items-start lg:gap-6 lg:p-5">
+      <figure className="min-w-0 bg-secondary/20 lg:col-start-2 lg:row-start-1 lg:overflow-hidden lg:rounded-xl">
+        {church.photo
+          ? <img src={church.photo} alt={church.name+" in Jerusalem"} width={960} height={640} loading="lazy" decoding="async" className="h-48 w-full object-cover sm:h-56 lg:aspect-[4/3] lg:h-auto"/>
+          : <div data-church-photo-slot={church.id} aria-label={"Photograph of "+church.name+" to be added"} className="flex h-48 w-full items-center justify-center bg-secondary/50 sm:h-56 lg:aspect-[4/3] lg:h-auto"><Church className="h-12 w-12 text-primary/25" strokeWidth={1.25} aria-hidden="true"/></div>}
+      </figure>
+      <div className="min-w-0 p-4 sm:p-5 lg:col-start-1 lg:row-start-1 lg:p-0">
+        <p className="text-xs font-semibold uppercase tracking-wide text-primary">{church.tradition}</p>
+        <h3 className="mt-1 text-xl font-bold leading-snug sm:text-2xl">{church.name}</h3>
+        <p className="mt-3 text-sm leading-relaxed">{church.description}</p>
+      </div>
     </div>
-    <div className="mt-auto flex flex-wrap items-center justify-between gap-2 border-t bg-secondary/10 px-4 py-3 sm:px-5">
-      <OutLink href={locationUrl}><MapPin className="h-3.5 w-3.5" aria-hidden="true"/> Google Maps</OutLink>
-      <OutLink href={churchesSourceUrl}>Visitor hours</OutLink>
+    <div className="border-t px-4 py-4 sm:px-5 lg:px-6">
+      <dl className="grid gap-3 rounded-xl bg-secondary/40 p-3.5 text-sm sm:grid-cols-2">
+        <div className="flex min-w-0 items-start gap-2"><Clock3 className="mt-0.5 h-4 w-4 shrink-0 text-primary" aria-hidden="true"/><div><dt className="font-semibold">Published visiting hours</dt><dd className="mt-0.5 leading-relaxed text-muted-foreground">{church.hours}</dd></div></div>
+        <div className="flex min-w-0 items-start gap-2"><Ticket className="mt-0.5 h-4 w-4 shrink-0 text-primary" aria-hidden="true"/><div><dt className="font-semibold">Admission</dt><dd className="mt-0.5 leading-relaxed text-muted-foreground">{church.admission}</dd></div></div>
+      </dl>
+    </div>
+    <div className="grid gap-4 border-t px-4 py-4 sm:px-5 lg:grid-cols-2 lg:gap-6 lg:px-6">
+      <p className="text-sm leading-relaxed"><strong className="text-foreground">Don't miss:</strong> {church.highlight}</p>
+      <p className="text-sm leading-relaxed"><strong className="text-primary">My tip:</strong> {church.tip}</p>
+    </div>
+    <div className="flex flex-wrap items-center justify-between gap-3 border-t bg-secondary/10 px-4 py-4 sm:px-5 lg:px-6">
+      <OutLink href={locationUrl}><MapPin className="h-3.5 w-3.5" aria-hidden="true"/> View on Google Maps</OutLink>
+      <OutLink href={churchesSourceUrl}>Check visiting hours</OutLink>
     </div>
   </article>;
 }
@@ -152,7 +162,7 @@ export function JerusalemChurchesGuide(){
       <Heading id={area.id} title={area.title} intro={area.intro}/>
       {index===0&&<Tip>The <strong>Via Dolorosa</strong> is a traditional route through the Old City, not a single church. The early Stations of the Cross and the Holy Sepulchre are different stops; follow my <Link to="/attractions/old-city-jerusalem/" className="font-semibold text-primary underline">Old City guide</Link> for the wider walking context.</Tip>}
       {index===1&&<Tip>I usually suggest a vehicle to an upper Mount of Olives viewpoint, then a downhill walk if suitable. Consult my <Link to="/attractions/mount-of-olives/" className="font-semibold text-primary underline">Mount of Olives visitor guide</Link> for the hill's access and pickup options.</Tip>}
-      <div className="mt-5 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">{jerusalemChurches.filter(c=>c.area===area.id).map(c=><ChurchCard key={c.id} church={c}/>)}</div>
+      <div className="mt-5 grid gap-5">{jerusalemChurches.filter(c=>c.area===area.id).map(c=><ChurchCard key={c.id} church={c}/>)}</div>
       {index===2&&<p className="mt-4 text-sm leading-relaxed text-muted-foreground">The Cenacle is included as an important Christian heritage site, although it is not a church. My <Link to="/attractions/mount-zion/" className="font-semibold text-primary underline">Mount Zion guide</Link> covers these places in more detail.</p>}
     </section>)}
     <section id="routes" aria-labelledby="routes-heading" className="mt-12 scroll-mt-24">
