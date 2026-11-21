@@ -49,14 +49,20 @@ function PhotoLink({item}:{item:SeniorRelated}){
 }
 function TripCard({item}:{item:SeniorDay}){
  const map="https://www.google.com/maps/search/?api=1&query="+encodeURIComponent(item.googlePlace);
- return <article id={item.id} data-senior-day-trip={item.id} className="scroll-mt-28 flex min-w-0 flex-col overflow-hidden rounded-2xl border bg-card">
-  <img src={item.image} alt={item.alt} width={800} height={480} loading="lazy" decoding="async" className="aspect-[16/9] w-full object-cover"/>
-  <div className="flex flex-1 flex-col p-5">
-   <p className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wide text-primary"><Clock3 className="h-4 w-4" aria-hidden="true"/>{item.duration}</p>
-   <h3 className="mt-2 font-serif text-xl font-semibold sm:text-2xl">{item.title}</h3>
-   <p className="mt-3 text-sm leading-relaxed">{item.intro}</p>
-   <p className="mt-4 text-sm leading-relaxed"><strong className="text-foreground">A gentler option:</strong> {item.easy}</p>
-   <p className="mt-3 text-sm leading-relaxed text-muted-foreground"><strong className="text-foreground">Before you go:</strong> {item.watchFor}</p>
+ return <article id={item.id} data-senior-day-trip={item.id} data-detailed-card="horizontal" className="scroll-mt-28 overflow-hidden rounded-2xl border bg-card shadow-sm">
+  <div className="lg:grid lg:grid-cols-[minmax(0,1fr)_270px] lg:items-start lg:gap-6 lg:p-5">
+   <img src={item.image} alt={item.alt} width={800} height={480} loading="lazy" decoding="async" className="aspect-[16/9] w-full object-cover lg:col-start-2 lg:row-start-1 lg:aspect-[4/3] lg:rounded-xl"/>
+   <div className="min-w-0 p-5 lg:col-start-1 lg:row-start-1 lg:p-0">
+    <p className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wide text-primary"><Clock3 className="h-4 w-4" aria-hidden="true"/>{item.duration}</p>
+    <h3 className="mt-2 font-serif text-xl font-semibold sm:text-2xl">{item.title}</h3>
+    <p className="mt-3 text-sm leading-relaxed">{item.intro}</p>
+   </div>
+  </div>
+  <div className="border-t p-4 sm:p-5 lg:px-6">
+   <div className="grid gap-3 lg:grid-cols-2 lg:gap-6">
+    <p className="text-sm leading-relaxed"><strong className="text-foreground">A gentler option:</strong> {item.easy}</p>
+    <p className="text-sm leading-relaxed text-muted-foreground"><strong className="text-foreground">Before you go:</strong> {item.watchFor}</p>
+   </div>
    <div className="mt-4 rounded-lg bg-secondary/25 p-4" data-senior-sample-route>
     <h4 className="text-sm font-semibold">A suggested, unhurried visit</h4>
     <ol className="mt-2 list-decimal space-y-1.5 pl-5 text-sm leading-relaxed">{item.sampleOrder.map((step,i)=><li key={i}>{step}</li>)}</ol>
@@ -68,12 +74,12 @@ function TripCard({item}:{item:SeniorDay}){
     <ul className="mt-1.5 space-y-1.5">{item.accessInfo.map(resource=><li key={resource.url}><External href={resource.url}>{resource.label}</External></li>)}</ul>
    </div>}
    <div className="mt-4 flex flex-wrap gap-2">{item.suggestedStops.map(stop=><Link key={stop.label} to={stop.to} className="rounded-full border px-3 py-1.5 text-xs font-semibold text-primary hover:bg-secondary">{stop.label}</Link>)}</div>
-   <div className="mt-auto space-y-3 pt-5">
-    <a href="#contact" data-senior-trip-enquiry={item.id} className="inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-lg bg-primary px-4 py-2.5 text-center text-sm font-semibold text-primary-foreground hover:opacity-90">Ask me about this private trip <ArrowRight className="h-4 w-4" aria-hidden="true"/></a>
-    <div className="flex flex-wrap items-center justify-between gap-x-4 gap-y-2">
-     <Link to={item.to} className="inline-flex items-center gap-1.5 text-sm font-semibold text-primary hover:underline">Browse other tours <ArrowUpRight className="h-4 w-4" aria-hidden="true"/></Link>
-     <a href={map} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 text-sm font-semibold text-primary hover:underline"><MapPin className="h-4 w-4" aria-hidden="true"/>Google Maps <ArrowUpRight className="h-4 w-4" aria-hidden="true"/></a>
-    </div>
+  </div>
+  <div className="space-y-3 border-t bg-secondary/10 p-4 sm:p-5 lg:px-6">
+   <a href="#contact" data-senior-trip-enquiry={item.id} className="inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-lg bg-primary px-4 py-2.5 text-center text-sm font-semibold text-primary-foreground hover:opacity-90 lg:w-auto">Ask me about this private trip <ArrowRight className="h-4 w-4" aria-hidden="true"/></a>
+   <div className="flex flex-wrap items-center justify-between gap-x-4 gap-y-2">
+    <Link to={item.to} className="inline-flex items-center gap-1.5 text-sm font-semibold text-primary hover:underline">Browse other tours <ArrowUpRight className="h-4 w-4" aria-hidden="true"/></Link>
+    <a href={map} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 text-sm font-semibold text-primary hover:underline"><MapPin className="h-4 w-4" aria-hidden="true"/>Google Maps <ArrowUpRight className="h-4 w-4" aria-hidden="true"/></a>
    </div>
   </div>
  </article>;
@@ -111,7 +117,7 @@ export function SeniorToursGuide(){
 
    <section id="day-trips" aria-labelledby="day-trips-heading" className="mt-12 scroll-mt-24">
     <Heading id="day-trips" title="Four private day-trip ideas for senior travelers" intro="These are examples you can customize. I would usually recommend fewer stops and more time at each place instead of a crowded, fixed itinerary."/>
-    <div className="grid gap-5 md:grid-cols-2">{seniorDayTrips.map(item=><TripCard key={item.id} item={item}/>)}</div>
+    <div className="grid gap-5" data-testid="senior-detailed-trip-cards">{seniorDayTrips.map(item=><TripCard key={item.id} item={item}/>)}</div>
     <div data-senior-midpage-cta className="mt-6 flex flex-col gap-3 rounded-xl border p-4 sm:flex-row sm:items-center sm:justify-between sm:gap-6 sm:p-5">
      <div><h3 className="font-semibold">Would you prefer a different pace or route?</h3><p className="mt-1 text-sm leading-relaxed text-muted-foreground">Tell me which places matter most and how much walking feels comfortable. I can discuss an individual private transport plan.</p></div>
      <a href="#contact" className="inline-flex min-h-11 shrink-0 items-center justify-center gap-2 rounded-lg border px-4 py-2.5 text-sm font-semibold text-primary hover:bg-secondary">Ask Moshe about your day <ArrowRight className="h-4 w-4" aria-hidden="true"/></a>
