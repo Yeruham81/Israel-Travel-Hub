@@ -1,4 +1,5 @@
 name: Generate local responsive Israel season images
+# Review: spring gardens replaces dry Jezreel hills to better convey the season.
 on:
   push:
     branches: [main]
