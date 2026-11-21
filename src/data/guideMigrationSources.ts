@@ -1,6 +1,8 @@
 import type { SourceReference } from "@/data/registry";
 
 export const migrationSources: SourceReference[] = [
+  { id:"guide-tlv-food-money", title:"Money and tipping in Tel Aviv", publisher:"Tel Aviv official visitor information", url:"https://visit.tel-aviv.gov.il/info/money", checkedAt:"2026-11-21", note:"Currency information and customary sit-down restaurant tipping; individual venues may differ." },
+  { id:"guide-jerusalem-food-markets", title:"Jerusalem food markets and fairs", publisher:"iTravelJerusalem", url:"https://www.itraveljerusalem.com/article/markets-and-fairs-in-jerusalem", checkedAt:"2026-11-21", note:"Mahane Yehuda visitor context, market atmosphere and local schedules; confirm individual business hours." },
   { id: "m26-ims", title: "Israel climate atlas and monthly climatology", publisher: "Israel Meteorological Service", url: "https://ims.gov.il/en/ClimateAtlas", checkedAt: "2026-11-21", note: "Official monthly climate maps support regional and seasonal patterns; suitability ratings are editorial guidance, not forecasts." },
   { id: "m26-ims-warnings", title: "Official severe weather and flash flood warnings", publisher: "Israel Meteorological Service", url: "https://ims.gov.il/en/warning", checkedAt: "2026-11-21", note: "Weather warnings may change rapidly; consult directly before desert walks or outdoor journeys." },
   { id: "m26-hebcal", title: "Jewish holidays in Israel (annual dates)", publisher: "Hebcal", url: "https://www.hebcal.com/holidays/?i=on", checkedAt: "2026-11-21", note: "Use the Israel setting and specific travel year. Dates shift relative to the Gregorian calendar." },
