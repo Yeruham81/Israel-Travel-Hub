@@ -68,24 +68,33 @@ function QuickStart({onPickFood}:{onPickFood:PickFood}){
   </section>;
 }
 function DishCard({dish,index}:{dish:FoodDish;index:number}){
-  const label=dishVisual[dish.kind],Icon=label.icon;
-  return <article id={dish.id} aria-labelledby={dish.id+"-heading"} className="scroll-mt-28 flex min-w-0 flex-col overflow-hidden rounded-2xl border bg-card">
-    <figure><img src={dish.photo.src} alt={dish.photo.alt} width={755} height={503} loading="lazy" decoding="async" className="aspect-[16/10] w-full object-cover"/></figure>
-    <div className="flex flex-1 flex-col p-4 sm:p-5">
-      <p className="mb-2 flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wide text-primary"><Icon className="h-3.5 w-3.5" aria-hidden="true"/>{label.label}</p>
-      <h3 id={dish.id+"-heading"} tabIndex={-1} className="text-xl font-bold leading-tight sm:text-2xl">{index+1}. {dish.name}</h3>
-      <p className="mt-1 text-xs text-muted-foreground">Say it: {dish.pronunciation}</p>
-      <p className="mt-3 text-sm leading-relaxed">{dish.summary}</p>
-      <div className="mt-4 rounded-lg bg-secondary/50 p-3 text-sm leading-relaxed"><strong>My ordering tip:</strong> {dish.order}</div>
-      <p className="mt-3 text-xs leading-relaxed text-muted-foreground"><strong className="text-foreground">Good to know:</strong> {dish.note}</p>
-      <details className="mt-3 rounded-lg border border-border/70 px-3 py-2 text-xs text-muted-foreground">
-        <summary className="cursor-pointer font-medium text-foreground">About this food tradition</summary>
-        <p className="mt-2 leading-relaxed">{dish.roots}</p>
-      </details>
-      {dish.photo.credit&&<div className="mt-auto pt-3"><GuidePhotoCredit photo={dish.photo}/></div>}
-    </div>
-  </article>;
+ const label=dishVisual[dish.kind],Icon=label.icon;
+ return <article id={dish.id} aria-labelledby={dish.id+"-heading"} data-detailed-card="horizontal" className="scroll-mt-28 overflow-hidden rounded-2xl border bg-card">
+   <div className="lg:grid lg:grid-cols-[minmax(0,1fr)_270px] lg:items-start lg:gap-6 lg:p-5">
+     <figure className="lg:col-start-2 lg:row-start-1 lg:overflow-hidden lg:rounded-xl">
+       <img src={dish.photo.src} alt={dish.photo.alt} width={755} height={503} loading="lazy" decoding="async" className="aspect-[16/10] w-full object-cover lg:aspect-[4/3]"/>
+     </figure>
+     <div className="min-w-0 p-4 sm:p-5 lg:col-start-1 lg:row-start-1 lg:p-0">
+       <p className="mb-2 flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wide text-primary"><Icon className="h-3.5 w-3.5" aria-hidden="true"/>{label.label}</p>
+       <h3 id={dish.id+"-heading"} tabIndex={-1} className="text-xl font-bold leading-tight sm:text-2xl">{index+1}. {dish.name}</h3>
+       <p className="mt-1 text-xs text-muted-foreground">Say it: {dish.pronunciation}</p>
+       <p className="mt-3 text-sm leading-relaxed">{dish.summary}</p>
+     </div>
+   </div>
+   <div className="border-t p-4 sm:p-5 lg:px-6">
+     <div className="grid gap-3 lg:grid-cols-2 lg:gap-6">
+       <div className="rounded-lg bg-secondary/50 p-3 text-sm leading-relaxed"><strong>My ordering tip:</strong> {dish.order}</div>
+       <p className="text-sm leading-relaxed text-muted-foreground"><strong className="text-foreground">Good to know:</strong> {dish.note}</p>
+     </div>
+     <details className="mt-3 rounded-lg border border-border/70 px-3 py-2 text-sm text-muted-foreground">
+       <summary className="cursor-pointer font-medium text-foreground">About this food tradition</summary>
+       <p className="mt-2 leading-relaxed">{dish.roots}</p>
+     </details>
+     {dish.photo.credit&&<div className="pt-3"><GuidePhotoCredit photo={dish.photo}/></div>}
+   </div>
+ </article>;
 }
+
 function TenDishes({filter,setFilter,onPickFood}:{filter:FoodKind|"all";setFilter:(value:FoodKind|"all")=>void;onPickFood:PickFood}){
  const visible=filter==="all"?foodDishes:foodDishes.filter(d=>d.kind===filter);
  return <section id="dishes" aria-labelledby="dishes-heading" className="mt-12 scroll-mt-24">
@@ -98,7 +107,7 @@ function TenDishes({filter,setFilter,onPickFood}:{filter:FoodKind|"all";setFilte
    </nav>
    <div role="group" aria-label="Filter dishes by food category" className="mb-5 flex flex-wrap gap-2">{foodKinds.map(kind=><button key={kind.id} type="button" aria-pressed={filter===kind.id} onClick={()=>setFilter(kind.id)} className={"min-h-10 rounded-full border px-3.5 py-1.5 text-sm font-semibold focus-visible:outline-2 focus-visible:outline-primary "+(filter===kind.id?"border-primary bg-primary text-primary-foreground":"bg-card hover:bg-secondary")}>{kind.label}</button>)}</div>
    <p className="mb-3 text-xs text-muted-foreground" role="status" aria-live="polite">Showing {visible.length} of {foodDishes.length} dishes</p>
-   <div className="grid gap-5 sm:grid-cols-2" data-testid="israel-food-dish-grid">{visible.map(dish=><DishCard key={dish.id} dish={dish} index={foodDishes.findIndex(d=>d.id===dish.id)}/>)}</div>
+   <div className="grid gap-5" data-testid="israel-food-dish-grid">{visible.map(dish=><DishCard key={dish.id} dish={dish} index={foodDishes.findIndex(d=>d.id===dish.id)}/>)}</div>
  </section>;
 }
 function FoodWords(){
