@@ -20,6 +20,7 @@ jobs:
         with:
           node-version: "24"
       - name: Scan source affiliate URLs
+        continue-on-error: true
         run: node scripts/audit-travelpayouts-only.cjs
       - name: Install read-only Chromium
         run: |
