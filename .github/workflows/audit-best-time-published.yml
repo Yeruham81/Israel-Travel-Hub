@@ -1,4 +1,5 @@
 name: Audit published Israel seasons guide in desktop and mobile browsers
+# Final post-deployment verification of the seven requested seasonal guide refinements.
 on:
   push:
     branches: [main]
