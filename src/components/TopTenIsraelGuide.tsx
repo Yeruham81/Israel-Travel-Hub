@@ -84,18 +84,22 @@ function GuideCard({ item }: { item: typeof related[number] | typeof planning[nu
   </Link>;
 }
 function ExperienceCard({ experience, number }: { experience: TopTenExperience; number: number }) {
-  return <article id={experience.id} className="flex scroll-mt-28 flex-col overflow-hidden rounded-2xl border bg-card shadow-sm">
-    <img src={experience.photo.src} alt={experience.photo.alt} loading="lazy" decoding="async" width={880} height={495} className="aspect-[16/9] w-full object-cover" />
-    <div className="flex flex-1 flex-col p-4 sm:p-5">
-      <p className="text-xs font-semibold uppercase tracking-wide text-primary">{experience.tagline}</p>
-      <h3 className="mt-2 text-xl font-bold sm:text-2xl">{number}. {experience.title}</h3>
-      <div className="mt-3 grid grid-cols-2 gap-2 rounded-lg bg-secondary/45 p-3 text-xs leading-snug">
+   return <article id={experience.id} className="scroll-mt-28 overflow-hidden rounded-2xl border bg-card shadow-sm" data-detailed-card="horizontal">
+     <div className="lg:grid lg:grid-cols-[minmax(0,1fr)_270px] lg:items-start lg:gap-6 lg:p-5">
+      <img src={experience.photo.src} alt={experience.photo.alt} loading="lazy" decoding="async" width={880} height={495} className="aspect-[16/9] w-full object-cover lg:col-start-2 lg:row-start-1 lg:aspect-[4/3] lg:rounded-xl" />
+      <div className="min-w-0 p-4 sm:p-5 lg:col-start-1 lg:row-start-1 lg:p-0">
+       <p className="text-xs font-semibold uppercase tracking-wide text-primary">{experience.tagline}</p>
+       <h3 className="mt-2 text-xl font-bold sm:text-2xl">{number}. {experience.title}</h3>
+       <p className="mt-3 text-sm leading-relaxed">{experience.description}</p>
+      </div>
+     </div>
+     <div className="border-t p-4 sm:p-5 lg:px-6">
+       <div className="mt-3 grid grid-cols-2 gap-2 rounded-lg bg-secondary/45 p-3 text-xs leading-snug">
         <div><strong className="block text-foreground">Best for</strong><span className="mt-1 block text-muted-foreground">{experience.bestFor}</span></div>
         <div><strong className="block text-foreground">Allow</strong><span className="mt-1 block text-muted-foreground">{experience.visitTime}</span></div>
         <div><strong className="block text-foreground">Area</strong><span className="mt-1 block text-muted-foreground">{experience.region}</span></div>
         <div><strong className="block text-foreground">Experience</strong><span className="mt-1 block text-muted-foreground">{experience.visitStyle}</span></div>
       </div>
-      <p className="mt-4 text-sm leading-relaxed">{experience.description}</p>
       <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{experience.practical}</p>
       <p className="mt-3 text-sm leading-relaxed"><strong>Getting there: </strong>{experience.gettingThere}</p>
       <p className="mt-4 rounded-lg border-l-2 border-primary/40 bg-secondary/30 px-3 py-2.5 text-sm leading-relaxed"><strong>My tip: </strong>{experience.tip}</p>
@@ -203,7 +207,7 @@ export function TopTenIsraelGuide() {
       <section id="experiences" aria-labelledby="experiences-h" className="mt-12 scroll-mt-24">
         <Heading id="experiences" title="My guide to ten memorable Israel experiences"
           intro="I have included the practical details that matter most when deciding which experiences fit your trip." />
-        <div className="grid items-stretch gap-5 md:grid-cols-2">
+        <div className="grid gap-5" data-testid="top-ten-detailed-experience-cards">
           {experiences.map((experience,index) => <ExperienceCard key={experience.id} experience={experience} number={index+1} />)}
         </div>
       </section>
