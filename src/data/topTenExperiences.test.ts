@@ -60,12 +60,13 @@ describe("Top 10 Israel experiences guide", () => {
     expect(map).not.toContain("jerusalem-shopping-map-focus");
   });
 
-  it("keeps ten cards, a mobile comparison and both six-card guide collections", () => {
+  it("keeps ten cards, the same responsive comparison table and both six-card guide collections", () => {
     const page = readFileSync(resolve(process.cwd(), "src/components/TopTenIsraelGuide.tsx"), "utf8");
     expect(page).toContain("grid grid-cols-2 gap-3 md:grid-cols-3 lg:grid-cols-5");
-    expect(page).toContain("hidden w-full table-fixed");
-    expect(page).toContain("divide-y border-t");
-    expect(page).toContain("Show the mobile comparison of all ten experiences");
+    expect(page).toContain("min-w-[760px]");
+    expect(page).not.toContain("hidden w-full table-fixed");
+    expect(page).toContain("overflow-x-auto");
+    expect(page).toContain("Swipe the table sideways to compare all ten experiences.");
     expect(page.indexOf('<section id="experiences"')).toBeLessThan(page.indexOf('<section id="experience-map"'));
     expect(page).toContain("Where to Stay in Israel");
     expect(page).toContain("beach information (Hebrew)");
