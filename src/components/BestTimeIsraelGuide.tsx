@@ -1,6 +1,6 @@
 import { useState, type ReactNode } from "react";
 import { Link, type LinkProps } from "@tanstack/react-router";
-import { ArrowUpRight, CalendarDays, Check, Compass, ExternalLink, Lightbulb, ShieldAlert, Sun, Waves, Mountain, Flower2, CloudRain } from "lucide-react";
+import { ArrowUpRight, CalendarDays, Check, Compass, ExternalLink, Lightbulb, Sun, Waves, Mountain, Flower2, CloudRain } from "lucide-react";
 import { Breadcrumbs, FaqList, OnThisPage } from "@/components/Guide";
 import { AuthorCard } from "@/components/AuthorCard";
 import { GuideHeroLayout, GuideHeroMedia } from "@/components/GuideHeroMedia";
