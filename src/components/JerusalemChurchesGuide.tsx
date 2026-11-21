@@ -134,6 +134,18 @@ export function JerusalemChurchesGuide(){
     <section id="choose" aria-labelledby="choose-heading" className="mt-10 scroll-mt-24">
       <Heading id="choose" title="Choose churches by area" intro="Jerusalem's churches are clustered across four different neighbourhoods. Select the area that best fits your interests and time."/>
       <div className="grid gap-3 sm:grid-cols-2">{churchAreas.map(a=><a key={a.id} href={"#"+a.id} className="rounded-xl border bg-card p-4 transition-colors hover:border-primary/50 hover:bg-secondary/20"><span className="mb-3 inline-block h-1.5 w-12 rounded-full" style={{backgroundColor:a.color}} aria-hidden="true"/><h3 className="text-lg font-semibold">{a.title}</h3><p className="mt-2 text-sm leading-relaxed text-muted-foreground">{a.intro}</p><span className="mt-3 inline-flex items-center gap-1 text-sm font-semibold text-primary">See churches <ArrowUpRight className="h-4 w-4" aria-hidden="true"/></span></a>)}</div>
+      <div role="region" aria-label="Compare Jerusalem church visiting areas" tabIndex={0} className="mt-5 overflow-x-auto rounded-xl border bg-card focus-visible:outline-2 focus-visible:outline-primary">
+        <table className="w-full min-w-[650px] text-left text-sm">
+          <caption className="sr-only">Four areas to visit Jerusalem churches compared by main sites, typical time and walking conditions</caption>
+          <thead className="bg-secondary/60"><tr>{["Area","Main focus","Allow","Terrain and transport"].map(h=><th key={h} scope="col" className="border-b px-3 py-3 font-semibold">{h}</th>)}</tr></thead>
+          <tbody>{[
+            ["Old City","Holy Sepulchre, Via Dolorosa, St Anne","Half day","Walkable lanes; stairs, crowds and uneven paving"],
+            ["Mount of Olives","Gethsemane, Dominus Flevit, Pater Noster","Half day","Steep hillside; consider a vehicle to the upper viewpoint"],
+            ["Mount Zion","Dormition Abbey, Cenacle, Gallicantu","2–3 hours","A compact cluster with individual stairs and entrances"],
+            ["Ein Karem","Visitation and St John the Baptist","Half day including transport","Separate drive; uphill paths between the churches"],
+          ].map(row=><tr key={row[0]} className="border-b last:border-0">{row.map((cell,i)=>i===0?<th key={cell} scope="row" className="p-3 font-semibold">{cell}</th>:<td key={i} className="p-3 leading-relaxed">{cell}</td>)}</tr>)}</tbody>
+        </table>
+      </div>
     </section>
     <ChurchMap/>
     {churchAreas.map((area,index)=><section key={area.id} id={area.id} aria-labelledby={area.id+"-heading"} className="mt-12 scroll-mt-24">
