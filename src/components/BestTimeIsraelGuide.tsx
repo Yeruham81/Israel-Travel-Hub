@@ -85,7 +85,7 @@ function MonthMatrix(){
     <div className="mb-4 flex flex-wrap gap-2" role="group" aria-label="Filter the month comparison by season">
       {(["all",...seasonNames] as const).map(value=><button type="button" key={value} aria-pressed={filter===value} onClick={()=>{setFilter(value);setSelectedMonth(null);}} className={"min-h-10 rounded-full border px-3.5 py-1.5 text-sm font-medium focus-visible:outline-2 focus-visible:outline-primary "+(filter===value?"border-primary bg-primary text-primary-foreground":"bg-card hover:bg-secondary")}>{value==="all"?"All months":seasonLabels[value]}</button>)}
     </div>
-    <div className="mb-4 flex flex-wrap gap-x-4 gap-y-2 text-xs text-muted-foreground" aria-label="Month comparison legend">
+    <div className="mb-4 flex flex-col items-start gap-2 text-xs text-muted-foreground" aria-label="Month comparison legend">
       {(["favourable","variable","challenging"] as const).map(value=><span key={value} className="inline-flex items-center gap-2"><Status value={value}/><span>{seasonalFits[value].hint}</span></span>)}
     </div>
     <div className="overflow-x-auto rounded-xl border bg-card" role="region" aria-label="Scroll horizontally to compare activities for each month" tabIndex={0}>
