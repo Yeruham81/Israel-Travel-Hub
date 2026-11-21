@@ -120,7 +120,7 @@ export const attractionHubRegions: AttractionHubRegion[] = [
   {
     id: "sea-of-galilee",
     title: "Sea of Galilee & the Jordan River",
-    summary: "Explore the lake itself, choose a supervised beach, and visit Capernaum, Tabgha, Magdala and Yardenit."
+    summary: "Explore the lake itself, choose a supervised beach, and visit Capernaum, Tabgha, Magdala and Yardenit.",
     navLabel: "Sea of Galilee & Jordan",
     image: attractionHubPhotos.galilee,
     cards: [
