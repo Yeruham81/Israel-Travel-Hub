@@ -206,7 +206,7 @@ export function BestTimeIsraelGuide(){
     <SeasonSections/>
     <HolidayAndWeather/>
     <CuratedTours/>
-    <section id="faq" aria-label="Common questions about when to visit" className="mt-12 scroll-mt-24"><FaqList faqs={guide.faqs}/></section>
+    <FaqList faqs={guide.faqs}/>
     <section id="explore-more" aria-labelledby="explore-more-heading" className="mt-12 scroll-mt-24">
       <SectionHeading id="explore-more" title="Explore Israel by season and region" intro="These guides help you connect the time of year with the places and activities you actually want to experience."/>
       <div className="grid grid-cols-2 gap-4 lg:grid-cols-3">{related.map(item=><GuideCard key={item.to} item={item}/>)}</div>
