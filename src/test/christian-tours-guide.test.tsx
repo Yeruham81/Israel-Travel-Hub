@@ -15,7 +15,7 @@ describe("Christian tours in Israel editorial guide",()=>{
     expect(guideDirectory.filter(g=>g.to===travelGuidePaths.christianTours)).toHaveLength(1);
     expect(travelGuides.christianTours.title).toMatch(/^Christian Tours in Israel/);
     expect(travelGuides.christianTours.topics).toContain("religion");
-    expect(allNavGroups.some(g=>g.items.some(item=>item.to===travelGuidePaths.christianTours))).toBe(true);
+    expect(allNavGroups.some(g=>g.items.some(item=>"to" in item && item.to===travelGuidePaths.christianTours))).toBe(true);
     expect(page).toContain("<AuthorCard/>");
     expect(page).toContain("<HomeContactForm");
     expect(page).toContain("<SourcesDisclosure>");
