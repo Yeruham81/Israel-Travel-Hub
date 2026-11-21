@@ -11,7 +11,7 @@ import { neighborhoodTripContactCopy } from "@/lib/guide-contact";
 import { guideHeroPhotoForPath } from "@/lib/guide-hero-photos";
 import { haifaMuseumAreas as museumAreas, haifaMuseums as museums, haifaAdditionalMuseums as additionalMuseums, haifaMuseumMapPoints as museumMapPoints, type HaifaMuseumEntry as MuseumEntry } from "@/data/haifaMuseums";
 import { haifaMuseumPhotos, haifaMuseumPhotoCredits } from "@/data/haifaMuseumPhotos";
-import museumHero from "@/assets/guides/2026-10/museums-in-haifa.webp";
+import { migrationPhotos } from "@/data/guideMigrationPhotos";
 
 const updatedAt = "2026-11-21";
 const related = [
@@ -144,7 +144,7 @@ export function HaifaMuseumsGuide() {
   return <main className="mx-auto max-w-5xl px-4 pb-10"><article>
     <header className="pt-6">
       <Breadcrumbs items={[{name:"Home",to:"/"},{name:"Travel guides",to:"/travel-blog/"},{name:"Museums in Haifa",to:"/travel-blog/museums-in-haifa/"}]}/>
-      <GuideHeroLayout image={<GuideHeroMedia src={museumHero} alt="Museum architecture and cultural exhibitions in Haifa"/>}>
+      <GuideHeroLayout image={<GuideHeroMedia src={migrationPhotos["museums-in-haifa"].src} alt={migrationPhotos["museums-in-haifa"].alt}/>}>
         <p className="text-xs font-semibold uppercase tracking-[0.16em] text-primary">Haifa & Coast · Art, science and history</p>
         <h1 className="guide-page-title mt-2">Best Museums in Haifa</h1>
         <p data-guide-intro className="mt-4 max-w-3xl text-lg leading-relaxed">From interactive science and ancient ships to contemporary art and Japanese prints, Haifa has museums for very different interests. In my guide, I'll help you choose the best options and plan visits around the city's hills and neighbourhoods.</p>
