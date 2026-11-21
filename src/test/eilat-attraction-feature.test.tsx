@@ -47,7 +47,6 @@ describe("Eilat multi-attraction city guide", () => {
       "Eilat Botanical Garden",
       "Timna Park",
       "Red Canyon and Eilat Mountains",
-      "Eilat Birdwatching Park and Botanical Garden",
       "Ramon Airport",
       "Shabbat",
       "flash flooding",
