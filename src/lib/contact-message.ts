@@ -17,7 +17,7 @@ export function validateContactMessage(fields: ContactMessageFields) {
 export function buildContactMessage(fields: ContactMessageFields) {
   const line = (value: string) => value.trim().replace(/[\r\n]+/g, " ");
   return {
-    subject: `Moshe Barak - Taxi & Travel in Israel / ${line(fields.name)}`,
+    subject: `Moshe Barak - Israel Taxi & Travel / ${line(fields.name)}`,
     body: [
       `Name: ${line(fields.name)}`, `Email: ${line(fields.email)}`, `Subject: ${line(fields.subject)}`,
       "", "Message:", fields.message.trim(), "", "I consent to sharing these details with Moshe Barak for this inquiry.",
