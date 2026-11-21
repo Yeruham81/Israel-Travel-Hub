@@ -35,6 +35,17 @@ for (const value of urlStrings) {
   assert(existsSync(file), `Missing prerendered HTML for ${url.pathname}`);
   assert(statSync(file).size > 300, `Suspiciously empty HTML for ${url.pathname}`);
 }
+// Eilat is one destination attraction, not an independent travel-blog article.
+const retiredEilatGuidePath = "/travel-blog/" + "eilat/";
+assert(paths.has("/attractions/eilat/"), "Eilat attraction page missing from sitemap");
+assert(!paths.has(retiredEilatGuidePath), "Retired Eilat travel guide must not appear in sitemap");
+assert(!existsSync(join(root, "travel-blog", "eilat", "index.html")), "Old Eilat travel-blog HTML must not be exported");
+const eilatHtml = readFileSync(join(root, "attractions", "eilat", "index.html"), "utf8");
+for (const required of ['data-testid="eilat-beach-comparison"', 'data-testid="eilat-affiliate-tour-cards"', "Coral Beach Nature Reserve", "Timna Park"]) {
+  assert(eilatHtml.includes(required), "Eilat attraction static HTML missing " + required);
+}
+assert(!eilatHtml.includes("The booking links use Travelpayouts"), "Affiliate disclosure belongs in the global footer");
+
 const home = readFileSync(join(root, "index.html"), "utf8");
 assert(home.includes(origin + "/"), "Homepage HTML contains the wrong canonical origin");
 if (!indexable) assert(/noindex,nofollow/.test(home), "Trial HTML must remain noindex");
