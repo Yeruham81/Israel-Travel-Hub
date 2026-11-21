@@ -35,7 +35,8 @@ const mountZionTours = [
     notice: "",
     photo: guidedTourPhoto,
     alt: "Guided sightseeing in Jerusalem",
-    href: "https://www.viator.com/tours/Jerusalem/Jerusalem-Old-City/d921-5209P123",
+    sourceUrl: "https://www.viator.com/tours/Jerusalem/Jerusalem-Old-City/d921-5209P123",
+    href: "https://viator.tpk.lv/vEqDCNy8",
   },
   {
     id: "5209TEL210",
@@ -47,7 +48,8 @@ const mountZionTours = [
     notice: "Monday and Thursday departures generally substitute Yad Vashem for the Cenacle and David’s Tomb. If seeing Mount Zion is your priority, check the dated itinerary before booking.",
     photo: mountZionHillsidePhoto,
     alt: "Mount Zion hillside and Jerusalem stone buildings near the Old City",
-    href: "https://www.viator.com/tours/Tel-Aviv/Old-Jerusalem-Day-Trip-from-Tel-Aviv/d920-5209TEL210",
+    sourceUrl: "https://www.viator.com/tours/Tel-Aviv/Old-Jerusalem-Day-Trip-from-Tel-Aviv/d920-5209TEL210",
+    href: "https://viator.tpk.lv/9aphqexG",
   },
 ] as const;
 
@@ -184,11 +186,11 @@ export const mountZionDestinationContent: AttractionDestinationContent = {
             <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{tour.summary}</p>
             <p className="mt-3 text-sm">{tour.duration} · ★ {tour.rating}</p>
             {tour.notice && <p className="mt-3 rounded-lg border border-amber-200 bg-amber-50 px-3 py-2 text-sm leading-relaxed text-foreground dark:border-amber-800 dark:bg-amber-950/20">{tour.notice}</p>}
-            <div className="mt-auto flex flex-wrap items-center justify-between gap-3 pt-4"><span className="text-sm font-semibold text-primary">Check current price</span><a href={tour.href} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 rounded-lg bg-primary px-3 py-2 text-sm font-semibold text-primary-foreground">View tour <ArrowUpRight className="h-4 w-4" aria-hidden="true"/></a></div>
+            <div className="mt-auto flex flex-wrap items-center justify-between gap-3 pt-4"><span className="text-sm font-semibold text-primary">Check current price</span><a href={tour.href} target="_blank" rel="sponsored noopener noreferrer" className="inline-flex items-center gap-1 rounded-lg bg-primary px-3 py-2 text-sm font-semibold text-primary-foreground">View tour <ArrowUpRight className="h-4 w-4" aria-hidden="true"/></a></div>
           </div>
         </article>)}
       </div>
-      <p className="text-xs text-muted-foreground">Ratings were checked in November 2026. Prices and availability depend on the selected date, currency and party size; check the operator’s booking page. These are direct Viator links, not tracked affiliate links.</p>
+      <p className="text-xs text-muted-foreground">Ratings were checked in November 2026. Prices and availability depend on the selected date, currency and party size; check the operator’s booking page. Booking links use Travelpayouts tracking and open the external provider.</p>
       <p className="text-sm leading-relaxed">You can <Link to="/tours/jerusalem/" className={inlineLink}>explore other Jerusalem tours</Link>, or <a href="#contact" className={inlineLink}>contact me about private transport</a> if you mainly need help with drop-off and pickup.</p>
     </div>
   ),
@@ -233,8 +235,8 @@ export const mountZionDestinationContent: AttractionDestinationContent = {
     { label: "Mount Zion Catholic Cemetery — Oskar Schindler's grave", url: official.catholicCemetery },
     { label: "Chamber of the Holocaust — hours and group visits", url: official.holocaustChamber },
     { label: "Israel public transport planner", url: official.busPlanner },
-    { label: "Viator — Jerusalem Old City Day Tour", url: mountZionTours[0].href },
-    { label: "Viator — Jerusalem Highlights from Tel Aviv", url: mountZionTours[1].href },
+    { label: "Viator — Jerusalem Old City Day Tour", url: mountZionTours[0].sourceUrl },
+    { label: "Viator — Jerusalem Highlights from Tel Aviv", url: mountZionTours[1].sourceUrl },
   ],
 };
 
