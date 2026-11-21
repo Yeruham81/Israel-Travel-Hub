@@ -80,7 +80,7 @@ const faqs = [
 
 const sources = [
   { label: "Population and Immigration Authority — official ETA-IL information", href: "https://israel-entry.piba.gov.il/" },
-  { label: "Ministry of Tourism — emergency information for tourists", href: "https://www.gov.il/en/pages/es-mot-030326" },
+  { label: "Ministry of Tourism — current information for tourists", href: "https://www.gov.il/en/departments/topics/tourist-and-travelers-info" },
   { label: "Home Front Command — official emergency instructions", href: "https://www.oref.org.il/eng" },
   { label: "Israel Airports Authority — Ben Gurion Airport security and arrival advice", href: "https://www.iaa.gov.il/en/airports/ben-gurion/securitybgn/" },
   { label: "Israel Railways — current journey planner", href: "https://rail.co.il/?lan=en" },
@@ -142,7 +142,7 @@ export function IsraelTravelTipsGuide() {
         </Topic>
         <Topic id="safety" title="Check safety advice and choose suitable insurance">
           <p>Conditions can change quickly and vary by region. Check your home government's current travel advisory and any official Israeli guidance before booking and again before departure. Keep your plans flexible and verify flights, road access, public transport and site opening when conditions change.</p>
-          <p>While in Israel, follow instructions from local authorities and ask your accommodation provider where the nearest protected space is. For official visitor assistance consult the <a href="https://www.gov.il/en/pages/es-mot-030326" target="_blank" rel="noopener noreferrer" className={linkClass}>Ministry of Tourism</a> and the <a href="https://www.oref.org.il/eng" target="_blank" rel="noopener noreferrer" className={linkClass}>Home Front Command</a>. Save these numbers: <strong>Police 100 · Ambulance 101 · Fire 102 · Home Front Command 104</strong>.</p>
+          <p>While in Israel, follow instructions from local authorities and ask your accommodation provider where the nearest protected space is. For official visitor assistance consult the <a href="https://www.gov.il/en/departments/topics/tourist-and-travelers-info" target="_blank" rel="noopener noreferrer" className={linkClass}>Ministry of Tourism</a> and the <a href="https://www.oref.org.il/eng" target="_blank" rel="noopener noreferrer" className={linkClass}>Home Front Command</a>. Save these numbers: <strong>Police 100 · Ambulance 101 · Fire 102 · Home Front Command 104</strong>.</p>
           <p>Before buying travel insurance, compare emergency medical care, hospitalization, medical evacuation, cancellation, delays, luggage and any hiking or adventure activities. Read exclusions carefully, particularly those related to government travel advisories or regional security events. Confirm coverage for your precise destinations, dates and any pre-existing conditions.</p>
         </Topic>
         <Topic id="when-to-go" title="Choose your dates and pack for different regions">
