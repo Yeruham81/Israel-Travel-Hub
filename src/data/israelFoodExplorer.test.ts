@@ -31,7 +31,7 @@ describe("What to Eat in Israel — beginner visitor guide",()=>{
     expect(foodDishes.map(d=>d.id)).toEqual(expected);
     expect(new Set(expected).size).toBe(10);
     for(const [index,dish] of foodDishes.entries()){
-      const id=`food-${index+1}`;
+      const id=`food-${index+1}` as keyof typeof migrationPhotos;
       expect(dish.photo.src).toBe(migrationPhotos[id].src);
       expect(dish.photo.alt).toBe(migrationPhotos[id].alt);
       expect(existsSync(`src/assets/guides/2026-10/${id}.webp`)).toBe(true);
