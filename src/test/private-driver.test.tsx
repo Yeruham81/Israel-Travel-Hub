@@ -85,8 +85,8 @@ describe("private driver page and inquiry", () => {
     ];
     expect(new Set(relevantPhotos).size).toBe(10);
     const nextSteps = screen.getByRole("region", { name: "Plan the next part of your trip" });
-    expect(nextSteps.querySelector("ul")).toHaveClass("sm:grid-cols-2");
-    expect(nextSteps.querySelector("ul")).not.toHaveClass("lg:grid-cols-3");
+    expect(nextSteps.querySelector("ul")).toHaveClass("grid-cols-2", "lg:grid-cols-3");
+    expect(nextSteps.querySelector("ul")).not.toHaveClass("sm:grid-cols-2");
     expect(within(nextSteps).getAllByRole("link")).toHaveLength(6);
     for (const link of within(nextSteps).getAllByRole("link")) {
       expect(router.matchRoutes(link.getAttribute("href")!).at(-1)?.routeId.replace(/\/$/, "")).toBe(link.getAttribute("href")!.replace(/\/$/, ""));
