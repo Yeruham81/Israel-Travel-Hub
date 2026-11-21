@@ -55,7 +55,7 @@ describe("Jerusalem Old City upgraded attractions guide", () => {
     expect(page).toContain('data-testid="jerusalem-old-city-walking-plans"');
     expect(page).toContain('data-testid="jerusalem-old-city-tour-cards"');
     expect(page).toContain('data-testid="jerusalem-old-city-published-hours"');
-    expect(page).toContain('<Link to="/travel-blog/israel-holidays/" className={inlineLink}>Special dates</Link>');
+    expect(page).toContain('<Link to="/travel-blog/calendar-of-events/" className={inlineLink}>Special dates</Link>');
     expect(page).toContain('href={official.tunnelsBooking} target="_blank" rel="noopener noreferrer" className={inlineLink}>by reservation</a>');
     expect(page).toContain("Sunday 12:00–17:00");
     expect(page).toContain("opposite Jaffa Gate Plaza");

@@ -66,14 +66,15 @@ describe("October planning, city and heritage guide migration", () => {
   it("makes every guide discoverable in the directory, with real local photographs", async () => {
     // These three destinations now have dedicated attraction pages and tests.
     expect(ids).toHaveLength(13);
-    expect(guideDirectory).toHaveLength(44);
-    expect(guideDirectory.some(guide => guide.id === "israel-holidays" && guide.to === "/travel-blog/israel-holidays/")).toBe(true);
+    expect(guideDirectory).toHaveLength(43);
+    expect(guideDirectory.some(guide => guide.id === "calendar" && guide.to === "/travel-blog/calendar-of-events/")).toBe(true);
+    expect(guideDirectory.some(guide => guide.id === "israel-holidays")).toBe(false);
     expect(new Set(guideDirectory.map(guide => guide.id)).size).toBe(guideDirectory.length);
     const router = await routerAt("/travel-blog/");
     const Hub = HubRoute.options.component!;
     const { container } = render(<RouterContextProvider router={router}><Hub /></RouterContextProvider>);
     const cards = container.querySelectorAll('[data-testid="guide-directory-card"]');
-    expect(cards).toHaveLength(44);
+    expect(cards).toHaveLength(43);
     const missing = uniqueGuideCardPhotos(guideDirectory.map(guide => ({ guide }))).filter(entry => !entry.cardPhoto).map(entry => entry.guide.id);
     expect(missing, "Every directory card must display a suitable actual image").toEqual([]);
     for (const card of cards) expect(card.querySelector('img[alt]')).not.toBeNull();
@@ -144,7 +145,7 @@ describe("October planning, city and heritage guide migration", () => {
     expect(container.querySelectorAll("#faq details")).toHaveLength(9);
     expect(container.querySelectorAll("#explore-more a")).toHaveLength(6);
     expect(container.querySelector("#contact form")).not.toBeNull();
-    expect(container.querySelector('a[href="/travel-blog/israel-holidays/"]')).not.toBeNull();
+    expect(container.querySelector('a[href="https://www.hebcal.com/holidays/?i=on"]')).not.toBeNull();
     expect(container.querySelector("#event-planner")).toBeNull();
     expect(container.querySelector("#confirmed-events")).toBeNull();
     expect(container.querySelector("#annual-festivals")).toBeNull();

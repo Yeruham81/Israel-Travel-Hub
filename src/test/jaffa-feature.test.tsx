@@ -67,7 +67,7 @@ describe("Jaffa multi-stop city attractions guide", () => {
     expect(jaffaSite.official.touristInformation).toBe("https://visit.tel-aviv.gov.il/info/about");
     expect(jaffaSite.official.municipalWalkingGuide).toContain("oldjaffatour.aspx");
     expect(component).toContain("Uri Geller Museum");
-    expect(component).toContain("/travel-blog/israel-holidays/");
+    expect(component).toContain("/travel-blog/calendar-of-events/");
     const names = [
       "jaffa-panorama.webp", "jaffa-clock-tower.webp", "jaffa-mahmoudiya-mosque.webp",
       "jaffa-kedumim-square.webp", "jaffa-st-peters-church.webp", "jaffa-zodiac-alleys.webp",

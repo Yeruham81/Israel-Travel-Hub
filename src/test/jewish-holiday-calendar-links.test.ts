@@ -1,54 +1,52 @@
 import { describe, expect, it } from "vitest";
-import { readFileSync } from "node:fs";
+import { existsSync, readFileSync } from "node:fs";
 import { travelGuidePaths } from "@/data/registry";
+import { guideDirectory } from "@/data/travelGuides";
 
 const source = (path: string) => readFileSync(path, "utf8");
+const liveGuide = "/travel-blog/calendar-of-events/";
+const retiredRoute = "/travel-blog/israel-holidays/";
 
-describe("Jewish holiday cross-links", () => {
-  it("distinguishes the holiday explainer from the dedicated date-checking tool", () => {
-    expect(travelGuidePaths.calendar).toBe("/travel-blog/calendar-of-events/");
-    expect(source("src/routes/travel-blog.israel-holidays.tsx")).toContain('const PATH = "/travel-blog/israel-holidays/";');
+describe("Holiday and special-date guide links", () => {
+  it("has one consolidated public holiday guide and no retired date-picker page", () => {
+    expect(travelGuidePaths.calendar).toBe(liveGuide);
+    expect(existsSync("src/routes/travel-blog.calendar-of-events.tsx")).toBe(true);
+    expect(existsSync("src/routes/travel-blog.israel-holidays.tsx")).toBe(false);
+    expect(guideDirectory.some(guide => guide.id === "calendar" && guide.to === liveGuide)).toBe(true);
+    expect(guideDirectory.some(guide => guide.id === "israel-holidays")).toBe(false);
   });
 
   it.each([
-    ["src/components/AkkoAttractionPage.tsx", ">Jewish holidays</Link>"],
-    ["src/components/CapernaumAttractionPage.tsx", ">Jewish holiday dates</Link>"],
-    ["src/components/MountZionAttractionPage.tsx", ">Jewish holidays</Link>"],
-  ])("%s includes exactly one contextually placed calendar link", (path, linkText) => {
-    const text = source(path);
-    expect(text).toContain(linkText);
-    expect(text.match(/to="\/travel-blog\/israel-holidays\/"/g)).toHaveLength(1);
+    "src/components/AirportJourneyPage.tsx",
+    "src/components/AkkoAttractionPage.tsx",
+    "src/components/BestTimeIsraelGuide.tsx",
+    "src/components/CapernaumAttractionPage.tsx",
+    "src/components/HaifaAttractionPage.tsx",
+    "src/components/IsraelFoodGuide.tsx",
+    "src/components/JaffaAttractionPage.tsx",
+    "src/components/JerusalemStayHub.tsx",
+    "src/components/MountZionAttractionPage.tsx",
+    "src/components/OldCityJerusalemAttractionPage.tsx",
+    "src/data/airportJourneyGuides.ts",
+    "src/data/bestTimeIsrael.ts",
+    "src/data/travelGuideExpansion.ts",
+    "src/data/jerusalemClusterEditorial.ts",
+    "src/data/taxiGuideCluster.ts",
+    "src/data/travelGuides.ts",
+    "src/data/guidePlanning2026.ts",
+    "src/routes/accommodation.index.tsx",
+  ])("points %s to the consolidated guide, with no retired URL", path => {
+    const content = source(path);
+    expect(content, path).toContain(liveGuide);
+    expect(content, path).not.toContain(retiredRoute);
   });
 
-  it("adds one in-paragraph calendar link to each newly updated travel guide", () => {
-    const docs = [
-      "src/data/travelGuideExpansion.ts",
-      "src/data/jerusalemClusterEditorial.ts",
-      "src/data/travelGuides.ts",
-    ];
-    for (const path of docs) {
-      const text = source(path);
-      expect(text).toContain('{ text: "Jewish holidays", to: "/travel-blog/israel-holidays/" }');
-      expect(text.match(/\{ text: "Jewish holidays", to: "\/travel-blog\/israel-holidays\/" \}/g)).toHaveLength(1);
-    }
-  });
-
-  it("keeps one holiday link in each taxi guide while preserving the distinct events calendar", () => {
-    const text = source("src/data/taxiGuideCluster.ts");
-    expect(text.split('{ text: "Jewish holidays", to: "/travel-blog/israel-holidays/" }').length - 1).toBe(2);
-    expect(text).not.toContain('text: "Israel\'s Calendar of Events", to: travelGuidePaths.calendar');
-  });
-
-  it("does not duplicate the calendar link already placed in the Old City guide", () => {
-    const text = source("src/components/OldCityJerusalemAttractionPage.tsx");
-    expect(text.match(/to="\/travel-blog\/israel-holidays\/"/g)).toHaveLength(1);
-    expect(text).toContain(">Special dates</Link>");
-  });
-
-  it("respects existing calendar links in the airport connection and transport guides", () => {
-    const airport = source("src/components/AirportJourneyPage.tsx");
-    const transport = source("src/data/travelGuides.ts");
-    expect(airport).toContain('link.to === "/travel-blog/israel-holidays/"');
-    expect(transport).toContain('{ text: "Israel\'s calendar of events", to: "/travel-blog/israel-holidays/" }');
+  it("replaces the date-picker CTA with an external calendar for actual dates", () => {
+    const page = source("src/components/IsraelHolidayVisitorGuide.tsx");
+    expect(page).not.toContain(retiredRoute);
+    expect(page).toContain("https://www.hebcal.com/holidays/?i=on");
+    expect(page).toContain("https://www.timeanddate.com/holidays/israel/");
+    expect(page).not.toContain("Check my holiday calendar");
+    expect(page).not.toContain("Use my separate calendar");
   });
 });

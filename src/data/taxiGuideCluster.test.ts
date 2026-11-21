@@ -29,7 +29,7 @@ describe("intent-specific taxi guide cluster", () => {
     expect(taxiFares.sections.some((section) => (section.highlightedLinks?.length ?? 0) > 0)).toBe(true);
     expect(airportTaxis.sections.some((section) => section.id === "terminal3")).toBe(true);
     expect(airportTaxis.sourceIds).toContain("guide-gett");
-    expect(taxis.sections.find((section) => section.id === "holidays")?.inlineLinks?.map((item) => item.to)).toContain("/travel-blog/israel-holidays/");
+    expect(taxis.sections.find((section) => section.id === "holidays")?.inlineLinks?.map((item) => item.to)).toContain("/travel-blog/calendar-of-events/");
   });
 
   it("uses surcharge terminology and keeps six distinct, photographed related guides", () => {
@@ -130,6 +130,6 @@ describe("intent-specific taxi guide cluster", () => {
     expect(taxiGuideCluster.taxis.sections.find((section) => section.id === "airport")?.inlineLinks?.[0]?.to).toBe(travelGuidePaths.airportTaxis);
     expect(taxiGuideCluster.taxiFares.sections.find((section) => section.id === "extras")?.inlineLinks?.[0]?.to).toBe(travelGuidePaths.airportTaxis);
     expect(taxiGuideCluster.airportTaxis.sections.find((section) => section.id === "fares")?.inlineLinks?.[0]?.to).toBe(travelGuidePaths.taxiFares);
-    expect(taxiGuideCluster.airportTaxis.sections.find((section) => section.id === "weekend")?.inlineLinks?.some((link) => link.to === "/travel-blog/israel-holidays/")).toBe(true);
+    expect(taxiGuideCluster.airportTaxis.sections.find((section) => section.id === "weekend")?.inlineLinks?.some((link) => link.to === "/travel-blog/calendar-of-events/")).toBe(true);
   });
 });

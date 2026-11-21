@@ -167,7 +167,7 @@ describe("four independent airport transportation comparisons", () => {
     expect(g.options.find(o => o.id === "rail")!.paragraphs.join(" ")).not.toContain("instructions and official railway links follow here");
     expect(g.options.find(o => o.id === "rail")!.paragraphs.join(" ")).not.toContain("near the beginning of this guide");
     expect(g.weekend.join(" ")).toMatch(/Nesher.*no longer runs/);
-    expect(g.weekendLinks).toContainEqual({ text: "Israel's calendar of events", to: "/travel-blog/israel-holidays/" });
+    expect(g.weekendLinks).toContainEqual({ text: "Israel's holiday guide", to: "/travel-blog/calendar-of-events/" });
     expect(g.photos?.station.alt).toMatch(/Yitzhak Navon/);
     expect(g.photos?.onward.alt).toMatch(/Ben Gurion Airport railway station/);
     expect(g.faqs).toHaveLength(7);
@@ -243,7 +243,7 @@ describe("four independent airport transportation comparisons", () => {
     expect(doc.querySelector("#options > h2 + figure")).toBeNull();
     expect(doc.querySelector("#station-choice")).toBeNull();
     expect(doc.querySelector("#quick-answer + aside")).toBeNull();
-    expect(doc.querySelector('#shabbat a[href="/travel-blog/israel-holidays/"]')).not.toBeNull();
+    expect(doc.querySelector('#shabbat a[href="/travel-blog/calendar-of-events/"]')).not.toBeNull();
     expect(doc.querySelector('#option-private a[href="#request-quote"]')?.textContent).toMatch(/send me a message using the form/i);
     expect(doc.querySelector('aside[aria-label="Private transfer quote for Jerusalem"]')).toBeNull();
     expect(doc.querySelector('#option-private a[href="#request-quote"]')).not.toBeNull();
@@ -420,7 +420,7 @@ describe("four independent airport transportation comparisons", () => {
       await router.load();
       const html = renderToString(<RouterContextProvider router={router}><AirportJourneyPage id={id} /></RouterContextProvider>);
       const doc = new DOMParser().parseFromString(html, "text/html");
-      expect(doc.querySelectorAll('#shabbat a[href="/travel-blog/israel-holidays/"]'), id).toHaveLength(1);
+      expect(doc.querySelectorAll('#shabbat a[href="/travel-blog/calendar-of-events/"]'), id).toHaveLength(1);
       if (id === "tel-aviv") {
         const hotelTitle = [...doc.querySelectorAll("#option-rail h4")].find(el => el.textContent?.includes("From the station to the beach"))!;
         expect(hotelTitle.nextElementSibling?.tagName).toBe("P");

@@ -47,6 +47,7 @@ describe("Israel holidays visitor guide", () => {
   it("cites official travel sources and does not contain fabricated event tickets", () => {
     expect(holidayGuideSources.length).toBeGreaterThanOrEqual(6);
     expect(holidayGuideSources.some(s=>s.url.includes("rail.co.il"))).toBe(true);
+    expect(holidayGuideSources.some(s=>s.url==="https://www.hebcal.com/holidays/?i=on")).toBe(true);
     expect(holidayGuideSources.some(s=>s.url.includes("gov.il"))).toBe(true);
     for (const s of holidayGuideSources) expect(s.url).toMatch(/^https:\/\//);
   });

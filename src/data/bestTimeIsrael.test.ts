@@ -73,7 +73,7 @@ describe("Best Time to Visit Israel — editorial and layout regressions",()=>{
     expect(component).toContain("HolidayAndWeather");
     expect(component).toContain("https://ims.gov.il/en/warning");
     expect(component).toContain("https://en.parks.org.il/");
-    expect(component).toContain('to="/travel-blog/israel-holidays/"');
+    expect(component).toContain('to="/travel-blog/calendar-of-events/"');
     for(const season of ["spring","summer","autumn","winter"]){
       for(const width of [320,720]){
         const file=`public/images/best-time-israel/${season}-${width}.webp`;
