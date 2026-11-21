@@ -106,6 +106,28 @@ for (const required of ["Israel Travel Tips for First-Time Visitors", 'data-test
 }
 assert(!israelTipsHtml.includes("/travel-blog/is-it-safe-to-travel-to-israel/"), "Unmaintained safety guide must not be linked");
 
+// Regression gate for the dedicated Jerusalem planning hub on the published static build.
+const jerusalemHubFile = join(root, "travel-blog", "jerusalem-travel-guide", "index.html");
+assert(existsSync(jerusalemHubFile), "Missing prerendered Jerusalem travel planning hub");
+const jerusalemHubHtml = readFileSync(jerusalemHubFile, "utf8");
+for (const required of [
+  "Jerusalem Travel Guide: What to See, Where to Stay",
+  'data-testid="jerusalem-hub-facts"',
+  'data-testid="jerusalem-stay-areas"',
+  "East Jerusalem",
+  "/accommodation/jerusalem/east-jerusalem/",
+  "Explore all Jerusalem tours",
+  "Explore more tours and day trips",
+  "Explore the Sea of Galilee",
+  "/travel-blog/attractions-in-tel-aviv/",
+  "https://viator.tpm.li/",
+  "https://getyourguide.tpm.li/",
+  'id="contact"',
+]) {
+  assert(jerusalemHubHtml.includes(required), "Jerusalem hub static HTML missing: " + required);
+}
+assert(!jerusalemHubHtml.includes('href="/travel-blog/day-trips-from-jerusalem/"'), "Retired Jerusalem day-trip path must not be linked");
+
 const privateApi = join(root, "api");
 // Never deploy compiled API: Hostinger's manually configured PHP endpoints
 // are excluded by rsync, and server-side Vite JS cannot run as static files.
