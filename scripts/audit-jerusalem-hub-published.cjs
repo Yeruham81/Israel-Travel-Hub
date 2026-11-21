@@ -49,6 +49,10 @@ async function snapshot(page,label,desktop){
    topicCards:all("#choose .grid > a").length,
    days:all("#how-many-days article").length,
    stayAreas:all("#where-to-stay article").length,
+   areaLinks:all('#where-to-stay article a[href^="/accommodation/jerusalem/"]').map(a=>a.getAttribute("href")),
+   cityTourDirectory:!!document.querySelector('#city-tours a[href="/tours/jerusalem/"]'),
+   dayTourDirectory:!!document.querySelector('#day-trip-tours a[href="/tours/"]'),
+   officialRailLink:!!document.querySelector('#getting-around a[href^="https://rail.co.il/"]'),
    stayLinks:all("#where-to-stay a").map(a=>a.getAttribute("href")),
    transport:all("#getting-around [data-testid='jerusalem-transport-links'] > a").map(a=>a.getAttribute("href")),
    dayTripCards:all("#day-trips .grid > a").length,
@@ -77,8 +81,9 @@ async function snapshot(page,label,desktop){
  verify(data.updated==="2026-11-21"&&data.author,label+": personal author and updated metadata");
  verify(data.hero.loaded,label+": hero image loads");
  verify(data.sections.length===13,label+": dedicated sections",String(data.sections.length));
- verify(data.topicCards===6&&data.days===3&&data.stayAreas===5,label+": first-visit cards, 3 day plans and 5 stay areas");
- verify(data.stayLinks.includes("/travel-blog/where-to-stay-in-jerusalem/")&&data.stayLinks.includes("/accommodation/jerusalem/"),label+": distinct hotel and neighbourhood destinations");
+ verify(data.topicCards===6&&data.days===3&&data.stayAreas===6,label+": first-visit cards, 3 day plans and 6 stay areas");
+ verify(data.stayLinks.includes("/travel-blog/where-to-stay-in-jerusalem/")&&data.stayLinks.includes("/accommodation/jerusalem/")&&data.areaLinks.length===6&&new Set(data.areaLinks).size===6&&data.areaLinks.includes("/accommodation/jerusalem/east-jerusalem/"),label+": six linked stay areas and both accommodation summaries");
+ verify(data.cityTourDirectory&&data.dayTourDirectory&&data.officialRailLink,label+": tour directory CTAs and official train source");
  verify(data.transport.length===4&&!data.transport.includes("/travel-blog/airport-to-jerusalem/")&&data.transport.some(x=>x.includes("how-to-get-from-ben-gurion-airport-to-jerusalem")),label+": four precise transport routes");
  verify(data.dayTripCards===6&&data.relatedCards===6,label+": six day trips and six extra planning guides");
  verify(data.allGuideLinks.length===18&&new Set(data.allGuideLinks).size===18,label+": unique direct internal guide destinations");
