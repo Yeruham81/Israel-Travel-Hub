@@ -67,7 +67,7 @@ describe("mobile and desktop comparison table parity", () => {
   it("covers exactly 12 unique published routes", () => {
     const routes = responsiveTablePages.flatMap(([,paths]) => paths);
     expect(routes).toHaveLength(12);
-    expect(new Set(routes).size).toBe(14);
+    expect(new Set(routes).size).toBe(12);
     const tree = readFileSync("src/routeTree.gen.ts", "utf8");
     for (const path of routes) expect(tree).toContain(path.replace(/\/$/, ""));
   });
