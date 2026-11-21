@@ -202,7 +202,10 @@ export function ChristianToursGuide(){
    </section>
    <SourcesDisclosure>
      <p className="text-sm leading-relaxed">This guide distinguishes Christian traditions from historical certainty. Opening hours, worship schedules, prices, access arrangements and tour availability may change. Primary heritage and visitor references:</p>
-     <ul className="mt-3 list-disc space-y-2 pl-5 text-sm">{sources.map(source=><li key={source.url}><External href={source.url}>{source.title}</External></li>)}</ul>
+     <ul className="mt-3 list-disc space-y-2 pl-5 text-sm">
+       {sources.map(source=><li key={source.url}><External href={source.url}>{source.title}</External></li>)}
+       <li>Sea of Galilee photograph: <External href="https://commons.wikimedia.org/wiki/File:Tiberias_from_the_Sea_of_Galilee_(5809646279).jpg">Ian Scott / Wikimedia Commons</External> · <External href="https://creativecommons.org/licenses/by-sa/2.0/">CC BY-SA 2.0</External>; resized to WebP.</li>
+     </ul>
    </SourcesDisclosure>
  </article></main>;
 }
