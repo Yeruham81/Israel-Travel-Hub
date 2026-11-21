@@ -25,7 +25,7 @@ const tourPhotos = {
  */
 export function DeadSeaTourOptions({ selectedIds, pageId = "jslm_dead_sea" }: { selectedIds?: readonly string[]; pageId?: string } = {}) {
   return <>
-    <div className="mt-5 grid gap-5 sm:grid-cols-2 xl:grid-cols-3" data-testid="deadsea-tour-options">
+    <div className="mt-5 grid gap-5 sm:grid-cols-2 lg:grid-cols-3" data-testid="deadsea-tour-options">
       {deadSeaTourCards.filter(tour => !selectedIds || selectedIds.includes(tour.id)).map(tour => {
         const trackingUrl = affiliateConfig[tour.id]?.trackingUrl;
         if (!trackingUrl) return null;
