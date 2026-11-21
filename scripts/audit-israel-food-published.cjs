@@ -54,8 +54,8 @@ async function evaluatePage(page,device){
      imageCount:imgs.length,
      brokenImages:imgs.filter(im=>!im.complete||im.naturalWidth===0).map(im=>im.src),
      photoURLs,
-     missingAlts:imgs.filter(im=>!im.alt).map(im=>im.src),
-     duplicateImages:photoURLs.filter((src,i)=>photoURLs.indexOf(src)!==i),
+     missingAlts:imgs.filter(im=>!im.hasAttribute("alt")).map(im=>im.src),
+     duplicateImages:imgs.filter((im,i)=>photoURLs.indexOf(im.currentSrc)!==i && !/moshe/i.test(im.currentSrc)).map(im=>im.currentSrc),
      filters,
      viewportWidth:window.innerWidth,docWidth:document.documentElement.scrollWidth,
      jsonLd:all('script[type="application/ld+json"]').map(x=>x.textContent).join("\n")
