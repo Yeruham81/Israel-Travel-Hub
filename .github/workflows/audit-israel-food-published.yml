@@ -1,0 +1,38 @@
+name: Audit published Israel food guide across desktop and mobile
+on:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/audit-israel-food-published.yml"
+permissions:
+  contents: read
+jobs:
+  audit:
+    if: contains(github.event.head_commit.message, '[audit-israel-food]')
+    runs-on: ubuntu-24.04
+    timeout-minutes: 18
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+      - name: Install a dedicated read-only Chromium browser
+        run: |
+          mkdir -p /tmp/israel-food-browser
+          npm install --prefix /tmp/israel-food-browser --no-save playwright@1.56.1
+          /tmp/israel-food-browser/node_modules/.bin/playwright install --with-deps chromium
+      - name: Inspect live food guide, images, layout, navigation and food filters
+        env:
+          NODE_PATH: /tmp/israel-food-browser/node_modules
+          FOOD_AUDIT_ORIGIN: https://saddlebrown-guanaco-454061.hostingersite.com
+        run: node scripts/audit-israel-food-published.cjs
+      - name: Keep evidence and desktop/mobile screenshots
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: israel-food-published-visual-audit
+          path: /tmp/israel-food-published/
+          if-no-files-found: warn
+          retention-days: 14
