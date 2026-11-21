@@ -40,7 +40,7 @@ export function validateDriverQuote(v: DriverQuoteFields, now = new Date()) {
 export function buildDriverQuoteDraft(v: DriverQuoteFields) {
   const line = (value: string) => value.trim().replace(/[\r\n]+/g, " ");
   const service = privateDriverServices.find((item) => item.id === v.serviceId)!.label;
-  const subject = `Moshe Barak - Taxi & Travel in Israel / ${line(v.name)}`;
+  const subject = `Moshe Barak - Israel Taxi & Travel / ${line(v.name)}`;
   const body = [
     `Name: ${line(v.name)}`, `Email: ${line(v.email)}`, `Phone / WhatsApp: ${line(v.phone) || "Not supplied"}`,
     `Service: ${service}`, `Pickup date: ${line(v.date)}`, `Preferred pickup time: ${line(v.time) || "To be agreed"} (Israel local time)`,
