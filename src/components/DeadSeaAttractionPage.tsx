@@ -10,7 +10,7 @@ import overviewPhoto from "@/assets/dead-sea/landscape.webp";
 import floatingPhoto from "@/assets/dead-sea/beach.webp";
 import beachPhoto from "@/assets/guides/dead-sea-ein-bokek-shore.webp";
 import sunbedsPhoto from "@/assets/dead-sea/sunbeds.webp";
-import saltPoolPhoto from "@/assets/dead-sea/pool.webp";
+import saltFormationPhoto from "@/assets/guides/dead-sea-salt-island.webp";
 
 const links = {
   einBokek: "https://www.deadsea.co.il/attractions/ein-bokek-central-beach/?lang=en",
@@ -87,7 +87,7 @@ export const deadSeaDestinationContent: AttractionDestinationContent = {
         <p>South of the main Ein Bokek hotel strip, Hamei Zohar is another free public bathing choice, with managed beach facilities and a more spread-out coastal setting. It can work well if your hotel or driving route brings you farther south.</p>
         <p>See the <External href={links.hameiZohar}>official Hamei Zohar beach information</External> and <External href={maps.hameiZohar}>location on Google Maps</External>.</p>
       </AttractionHighlight>
-      <AttractionHighlight title="Salt scenery, desert cliffs and the promenade" image={{ src: saltPoolPhoto, alt: "Mineral-rich waters and salt formations in the southern Dead Sea area" }}>
+      <AttractionHighlight title="Salt scenery, desert cliffs and the promenade" image={{ src: saltFormationPhoto, alt: "White salt formations rising from the turquoise Dead Sea" }}>
         <p>The contrast between pale salt, blue-green water and the dry desert hills is part of the appeal. Allow time for a short walk along an established promenade and a few photographs before or after your beach visit.</p>
         <p>Stay on marked public paths. Sections of the northern shore are unstable because of sinkholes, and a beautiful-looking roadside patch of salt is not necessarily safe to approach.</p>
       </AttractionHighlight>
@@ -238,7 +238,7 @@ export const deadSeaDestinationContent: AttractionDestinationContent = {
     { label: "Ein Gedi Nature Reserve", to: "/attractions/ein-gedi/", note: "Desert oasis and managed hiking trails" },
     { label: "Qasr el-Yahud", to: "/attractions/qasr-el-yahud/", note: "Historic baptism site along the Jordan River" },
     { label: "Dead Sea attractions", to: "/travel-blog/dead-sea-attractions/", note: "Browse more sights across the wider region" },
-    { label: "Jerusalem to the Dead Sea", to: "/travel-blog/jerusalem-to-the-dead-sea/", note: "Choose a bus, car, guided tour or private driver" },
+    { label: "Ramon Crater", to: "/attractions/mitzpe-ramon-crater/", note: "Continue into the Negev for a longer desert itinerary" },
     { label: "Jerusalem travel guide", to: "/travel-blog/jerusalem-travel-guide/", note: "Explore Jerusalem before or after the desert" },
   ],
   planningLinks: [
