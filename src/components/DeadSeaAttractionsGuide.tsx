@@ -113,23 +113,27 @@ function GuideCard({item}:{item:typeof related[number] | typeof planning[number]
   </Link>;
 }
 function StopCard({stop,number}:{stop:DeadSeaStop;number:number}) {
-  const Icon=icons[number-1]!;
-  return <article id={stop.id} className="flex scroll-mt-28 flex-col overflow-hidden rounded-2xl border bg-card shadow-sm" data-testid="deadsea-experience-card">
-    {stop.image ? <img src={stop.image.src} alt={stop.image.alt} loading="lazy" decoding="async" width={880} height={495} className="aspect-[16/9] w-full object-cover"/> :
-      <div className="flex aspect-[16/9] items-center justify-center gap-3 bg-secondary/45 px-4 text-center">
-        <Icon aria-hidden className="h-10 w-10 shrink-0 text-primary/70" />
-        <span className="max-w-44 text-base font-semibold leading-snug text-foreground">{stop.shortTitle}</span>
-      </div>}
-    <div className="flex flex-1 flex-col p-4 sm:p-5">
-      <p className="text-xs font-semibold uppercase tracking-wide text-primary">{stop.kind}</p>
-      <h3 className="mt-2 text-xl font-bold sm:text-2xl">{number}. {stop.title}</h3>
-      <dl className="mt-3 grid grid-cols-2 gap-x-3 gap-y-3 rounded-lg bg-secondary/45 p-3 text-xs leading-snug">
+   const Icon=icons[number-1]!;
+   return <article id={stop.id} className="scroll-mt-28 overflow-hidden rounded-2xl border bg-card shadow-sm" data-testid="deadsea-experience-card" data-detailed-card="horizontal">
+    <div className="lg:grid lg:grid-cols-[minmax(0,1fr)_270px] lg:items-start lg:gap-6 lg:p-5">
+     {stop.image ? <img src={stop.image.src} alt={stop.image.alt} loading="lazy" decoding="async" width={880} height={495} className="aspect-[16/9] w-full object-cover lg:col-start-2 lg:row-start-1 lg:aspect-[4/3] lg:rounded-xl"/> :
+       <div aria-hidden="true" className="flex aspect-[16/9] items-center justify-center gap-3 bg-secondary/45 px-4 text-center lg:col-start-2 lg:row-start-1 lg:aspect-[4/3] lg:rounded-xl">
+         <Icon className="h-10 w-10 shrink-0 text-primary/70"/>
+         <span className="max-w-44 text-base font-semibold leading-snug text-foreground">{stop.shortTitle}</span>
+       </div>}
+     <div className="min-w-0 p-4 sm:p-5 lg:col-start-1 lg:row-start-1 lg:p-0">
+       <p className="text-xs font-semibold uppercase tracking-wide text-primary">{stop.kind}</p>
+       <h3 className="mt-2 text-xl font-bold sm:text-2xl">{number}. {stop.title}</h3>
+       <p className="mt-3 text-sm leading-relaxed">{stop.description}</p>
+     </div>
+    </div>
+    <div className="border-t p-4 sm:p-5 lg:px-6">
+       <dl className="mt-3 grid grid-cols-2 gap-x-3 gap-y-3 rounded-lg bg-secondary/45 p-3 text-xs leading-snug">
         <div><dt className="font-semibold text-foreground">Best for</dt><dd className="mt-1 text-muted-foreground">{stop.bestFor}</dd></div>
         <div><dt className="font-semibold text-foreground">Allow</dt><dd className="mt-1 text-muted-foreground">{stop.allow}</dd></div>
         <div><dt className="font-semibold text-foreground">Area</dt><dd className="mt-1 text-muted-foreground">{stop.area}</dd></div>
         <div><dt className="font-semibold text-foreground">Access</dt><dd className="mt-1 text-muted-foreground">{stop.access}</dd></div>
       </dl>
-      <p className="mt-4 text-sm leading-relaxed">{stop.description}</p>
       <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{stop.practical}</p>
       <p className="mt-3 text-sm leading-relaxed"><strong>Getting there: </strong>{stop.gettingThere}</p>
       <p className="mt-4 rounded-lg border-l-2 border-primary/40 bg-secondary/30 px-3 py-2.5 text-sm leading-relaxed"><strong>My tip: </strong>{stop.tip}</p>
@@ -228,7 +232,7 @@ export function DeadSeaAttractionsGuide() {
 
       <section id="experiences" aria-labelledby="experiences-h" className="mt-12 scroll-mt-24">
         <Heading id="experiences" title="My guide to ten Dead Sea experiences" intro="I've included practical access, transport and planning advice with each stop. Where the site has a separate in-depth guide, you can continue there."/>
-        <div className="grid items-stretch gap-5 md:grid-cols-2">
+        <div className="grid gap-5" data-testid="deadsea-detailed-experience-cards">
           {stops.map((stop,index)=><StopCard key={stop.id} stop={stop} number={index+1}/>)}
         </div>
       </section>
