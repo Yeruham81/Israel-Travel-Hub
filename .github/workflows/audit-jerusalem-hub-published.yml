@@ -1,0 +1,39 @@
+name: Audit published Jerusalem planning hub
+on:
+  workflow_run:
+    workflows: ["Deploy static website to Hostinger Premium"]
+    types: [completed]
+permissions:
+  contents: read
+jobs:
+  audit:
+    if: >-
+      github.event.workflow_run.conclusion == 'success' &&
+      github.event.workflow_run.head_sha == github.sha
+    runs-on: ubuntu-24.04
+    timeout-minutes: 19
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+      - name: Install Chromium
+        run: |
+          mkdir -p /tmp/jerusalem-hub-browser
+          npm install --prefix /tmp/jerusalem-hub-browser --no-save playwright@1.56.1
+          /tmp/jerusalem-hub-browser/node_modules/.bin/playwright install --with-deps chromium
+      - name: Verify published Jerusalem planning hub on desktop and mobile
+        env:
+          NODE_PATH: /tmp/jerusalem-hub-browser/node_modules
+          JERUSALEM_HUB_AUDIT_ORIGIN: https://saddlebrown-guanaco-454061.hostingersite.com
+        run: node scripts/audit-jerusalem-hub-published.cjs
+      - name: Save audit screenshots and JSON results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: jerusalem-planning-hub-published-audit
+          path: /tmp/jerusalem-hub-published/
+          retention-days: 14
+          if-no-files-found: warn
