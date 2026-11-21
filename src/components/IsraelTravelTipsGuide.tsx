@@ -7,7 +7,7 @@ import { HomeContactForm } from "@/components/HomeContactForm";
 import { PageUpdated } from "@/components/PageUpdated";
 import { SourcesDisclosure } from "@/components/SourcesDisclosure";
 import { Lightbulb, ExternalLink, ArrowUpRight, CheckCircle2 } from "lucide-react";
-import roadTrip from "@/assets/home/road-trip.webp";
+
 import jerusalem from "@/assets/home/jerusalem-old-city.webp";
 import telAviv from "@/assets/home/tel-aviv-coast.webp";
 import deadSea from "@/assets/dead-sea/landscape.webp";
@@ -17,7 +17,7 @@ import airport from "@/assets/home/ben-gurion-t3.webp";
 import train from "@/assets/airport-journeys/jerusalem-navon-platform.webp";
 import masada from "@/assets/home/masada-dead-sea.webp";
 import { migrationPhotos } from "@/data/guideMigrationPhotos";
-import { TRAVEL_TIPS_TITLE, TRAVEL_TIPS_UPDATED, travelTipsFaqs, travelTipsSources } from "@/data/israelTravelTips";
+import { TRAVEL_TIPS_TITLE, TRAVEL_TIPS_UPDATED, travelTipsFaqs, travelTipsSources, travelTipsHero } from "@/data/israelTravelTips";
 
 const linkClass = "font-semibold text-primary underline underline-offset-4 hover:text-primary/80";
 const sections = [
@@ -95,7 +95,7 @@ export function IsraelTravelTipsGuide() {
     <article>
       <header className="pt-6">
         <Breadcrumbs items={[{ name: "Home", to: "/" }, { name: "Travel guides", to: "/travel-blog/" }, { name: "Israel Travel Tips", to: "/travel-blog/israel-travel-tips/" }]}/>
-        <GuideHeroLayout image={<GuideHeroMedia src={roadTrip} alt="Scenic countryside road in Israel" width={640} height={400}/>}>
+        <GuideHeroLayout image={<GuideHeroMedia src={travelTipsHero.src} alt={travelTipsHero.alt} width={640} height={400}/>}>
           <p className="text-xs font-bold uppercase tracking-wider text-primary">My practical guide for first-time visitors</p>
           <h1 className="guide-page-title mt-2">{TRAVEL_TIPS_TITLE}</h1>
           <p data-guide-intro className="mt-4 max-w-3xl text-lg leading-relaxed">Israel may be small, but transport schedules, religious holidays, regional weather and airport procedures can make a difference to your trip. Here are the practical tips I share with visitors, from planning your first day to getting around with confidence.</p>
