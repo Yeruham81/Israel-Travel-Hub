@@ -77,6 +77,7 @@ describe("What to Eat in Israel — beginner visitor guide",()=>{
       expect(affiliateConfig[tour.id]?.trackingUrl,tour.id).toMatch(/^https:\/\/viator\.tpm\.li\//);
       expect(tour.subId).toMatch(/^what_to_eat_israel_/);
       expect(tour.image).toBeTruthy();
+      expect(existsSync("public"+tour.image),tour.image).toBe(true);
       expect(tour.detail).toContain("Approximately");
     }
     const content=ui();
@@ -85,14 +86,25 @@ describe("What to Eat in Israel — beginner visitor guide",()=>{
     expect(content).toContain('pageId:"what_to_eat_in_israel"');
     expect(content).not.toContain('starting price');
     expect(content).toContain('data-testid="israel-food-tour-cards"');
+    const marketImage=foodTours.find(t=>t.key==="mahane-yehuda")?.image;
+    expect(marketImage).toBe("/images/food-guide/mahane-yehuda-food-stalls.webp");
+    expect(content).toContain("commons.wikimedia.org/wiki/File:Mahane_Yehuda_shoppers.jpg");
+    expect(content).toContain("CC BY-SA 3.0");
   });
 
   it("keeps compact filtering, six-card guide sets, contact and sources last",()=>{
     const content=ui();
     expect(content).toContain('aria-pressed={filter===kind.id}');
+    expect(content).toContain('aria-label="Jump to a food dish"');
+    expect(content).toContain('onClick={event=>onPickFood(event,dish.id)}');
+    expect(content).toContain('setFoodFilter("all")');
+    expect(content).toContain('setPendingDish(dishId)');
+    expect(content).toContain('target.scrollIntoView?.');
+    expect(content).toContain('About this food tradition');
     expect(content).toContain('data-testid="israel-food-dish-grid"');
     expect(content).toContain("visible.length");
     expect(content).toContain("grid grid-cols-2 gap-4 lg:grid-cols-3");
+    expect(content).toContain('guideHeroPhotoForPath(String(item.to))');
     expect((content.match(/<RelatedCard key=\{item\.to\}/g)||[]).length).toBe(2);
     expect(content).toContain('id="food-words"');
     expect(content).toContain('id="markets"');
