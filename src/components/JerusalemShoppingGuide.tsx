@@ -156,6 +156,7 @@ export function JerusalemShoppingGuide() {
       <section aria-label="My shopping recommendation" className="mt-8 rounded-xl border border-primary/20 bg-secondary/40 p-5 sm:p-6">
         <h2 className="text-xl font-bold">Where I'd start</h2>
         <p className="mt-2 leading-relaxed">For food and market atmosphere, I'd choose <a href="#shop-mahane" className={linkStyle}>Mahane Yehuda</a>. For traditional gifts and historic streets, try the <a href="#shop-old-city" className={linkStyle}>Old City markets</a>. If you prefer branded shopping near Jaffa Gate, walk through <a href="#shop-mamilla" className={linkStyle}>Mamilla</a>. For original crafts, look into <a href="#shop-hutzot" className={linkStyle}>Hutzot Hayotzer</a> or the <a href="#shop-bezalel" className={linkStyle}>Bezalel Arts Fair</a> on an operating Friday.</p>
+        <p className="mt-3 text-sm leading-relaxed text-muted-foreground">Planning more than a shopping outing? My <Link to="/travel-blog/jerusalem-travel-guide/" className={linkStyle}>Jerusalem travel guide</Link> connects the Old City, museums, neighbourhoods, transport and day trips.</p>
       </section>
       <OnThisPage sections={sections} />
 

@@ -236,6 +236,7 @@ export function CityNeighborhoodEditorial({ guide }: { guide: CityStayGuide }) {
         <p className="eyebrow">Choose your base</p>
         <h2 id="choose-h" className="mt-2 text-3xl">Where should you stay in {cityName}?</h2>
         <p className="mt-4 max-w-4xl leading-relaxed">{choices.introduction}</p>
+        {cityId === "jerusalem" && <p className="mt-3 max-w-4xl text-sm leading-relaxed text-muted-foreground">For planning the sights, tours and travel beyond your hotel area, use my <Link to="/travel-blog/jerusalem-travel-guide/" className="font-semibold text-primary underline underline-offset-4">Jerusalem travel guide</Link>.</p>}
 
         {<ul className={`mt-7 grid grid-cols-2 gap-3 sm:gap-4 ${cityId === "jerusalem" ? "lg:grid-cols-3" : "lg:grid-cols-4"}`} data-testid={`${cityId === "jerusalem" ? "jerusalem" : "telaviv"}-area-image-grid`}>
             {areas.map((area) => {
