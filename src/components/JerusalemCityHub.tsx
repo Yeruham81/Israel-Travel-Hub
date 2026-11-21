@@ -48,7 +48,7 @@ function CardGrid({id,title,intro,items}:{id:string;title:string;intro:string;it
           <span className="flex flex-1 flex-col p-3 sm:p-4">
             <strong className="text-sm leading-snug group-hover:text-primary sm:text-base">{item.title}</strong>
             <span className="mt-2 text-xs leading-relaxed text-muted-foreground sm:text-sm">{item.description}</span>
-            <span className="mt-auto inline-flex items-center gap-1 pt-3 text-xs font-semibold text-primary sm:text-sm">Explore my guide <ArrowUpRight aria-hidden="true" className="h-3.5 w-3.5"/></span>
+            <span className="mt-auto inline-flex items-center gap-1 pt-3 text-xs font-semibold text-primary sm:text-sm">{item.cta} <ArrowUpRight aria-hidden="true" className="h-3.5 w-3.5"/></span>
           </span>
         </Link>;
       })}
@@ -92,6 +92,9 @@ function TourCards({group}:{group:typeof jerusalemTourGroups[number]}) {
       })}
     </div>
     <p className="mt-3 text-xs leading-relaxed text-muted-foreground">External providers manage these tours. Rating and any displayed price are dated editorial snapshots, not live offers. Check the exact departure city, guide, walking demands, entry fees, operating dates and cancellation conditions with the supplier before booking. Some routes may change with access restrictions.</p>
+    <Link to={group.id==="city-tours"?"/tours/jerusalem/":"/tours/"} className="mt-4 inline-flex items-center gap-2 font-semibold text-primary underline underline-offset-4 hover:text-primary/80 focus-visible:outline-2 focus-visible:outline-primary">
+      {group.id==="city-tours"?"Explore all Jerusalem tours":"Explore more tours and day trips"} <ArrowUpRight aria-hidden="true" className="h-4 w-4"/>
+    </Link>
   </section>;
 }
 
@@ -147,11 +150,14 @@ export function JerusalemCityHubPage(){
     <section id="where-to-stay" aria-labelledby="where-to-stay-h" className="mt-12 scroll-mt-24">
       <Heading id="where-to-stay" title="Where should you stay in Jerusalem?" intro="The best neighbourhood depends on your interests, how you arrive and how much walking you want. These are area-level suggestions, not recommendations for individual hotels."/>
       <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3" data-testid="jerusalem-stay-areas">
-        {jerusalemStayAreas.map(area=><article key={area.name} className="rounded-xl border bg-card p-4">
-          <h3 className="text-base font-bold">{area.name}</h3>
-          <p className="mt-1 text-xs font-semibold uppercase tracking-wide text-primary">{area.character}</p>
-          <p className="mt-3 text-sm"><strong>Good for:</strong> {area.best}</p>
-          <p className="mt-2 text-sm text-muted-foreground"><strong>Check:</strong> {area.consider}</p>
+        {jerusalemStayAreas.map(area=><article key={area.to} className="group overflow-hidden rounded-xl border bg-card transition-colors hover:border-primary/50 hover:bg-secondary/20">
+          <Link to={area.to} className="flex h-full flex-col p-4 focus-visible:outline-2 focus-visible:outline-primary" aria-label={"Explore hotels in "+area.name}>
+            <h3 className="text-base font-bold group-hover:text-primary">{area.name}</h3>
+            <p className="mt-1 text-xs font-semibold uppercase tracking-wide text-primary">{area.character}</p>
+            <p className="mt-3 text-sm"><strong>Good for:</strong> {area.best}</p>
+            <p className="mt-2 text-sm text-muted-foreground"><strong>Check:</strong> {area.consider}</p>
+            <span className="mt-auto inline-flex items-center gap-1 pt-3 text-sm font-semibold text-primary">Explore hotels in this area <ArrowUpRight aria-hidden="true" className="h-4 w-4"/></span>
+          </Link>
         </article>)}
       </div>
       <div className="mt-5 grid gap-3 sm:grid-cols-2">
@@ -174,6 +180,7 @@ export function JerusalemCityHubPage(){
     <section id="getting-around" aria-labelledby="getting-around-h" className="mt-12 scroll-mt-24">
       <Heading id="getting-around" title="Getting to and around Jerusalem" intro="Plan the entire journey to your actual hotel or attraction, not just the train station or a point labelled “Jerusalem”."/>
       <p className="max-w-4xl leading-relaxed">The fast intercity train reaches <strong>Jerusalem–Yitzhak Navon</strong>, near the central bus station—not the Old City. From there you may need light rail, a bus, a taxi or a final walk with your bags. Most of the Old City's historic lanes are pedestrian routes; a driver can help between road-accessible stops but cannot drive through the quarters. Check <Link to="/travel-blog/calendar-of-events/" className={linkClass}>Jewish holidays and special dates</Link> before relying on a regular weekday timetable.</p>
+      <p className="mt-3 max-w-4xl text-sm leading-relaxed text-muted-foreground">For current rail changes and service notices, consult <a className={linkClass} href="https://rail.co.il/?lan=en&page=updates" target="_blank" rel="noopener noreferrer">Israel Railways</a>. For official visitor information about Jerusalem, check the <a className={linkClass} href="https://www.gov.il/en/government-service-branches/jerusalem-tourism-office" target="_blank" rel="noopener noreferrer">Jerusalem tourism office</a>.</p>
       <div className="mt-5 grid gap-3 sm:grid-cols-2" data-testid="jerusalem-transport-links">
         {[
           {to:"/travel-blog/how-to-get-from-ben-gurion-airport-to-jerusalem/",title:"How to get to Jerusalem",description:"Compare airport trains, taxis, buses and private transfers.",icon:<TrainFront className="h-5 w-5"/>},
@@ -201,6 +208,7 @@ export function JerusalemCityHubPage(){
           {title:"Check current travel advice",description:"Conditions can change. Review the relevant official travel advisories, local guidance and your insurer's terms before travelling; avoid treating old reassurance as a current safety assessment."},
         ].map(item=><article key={item.title} className="rounded-xl border bg-card p-4"><h3 className="font-bold">{item.title}</h3><p className="mt-2 text-sm leading-relaxed text-muted-foreground">{item.description}</p></article>)}
       </div>
+      <p className="mt-4 text-sm leading-relaxed text-muted-foreground">For specific church visiting arrangements, the <a className={linkClass} href="https://www.cicts.org/our-services/" target="_blank" rel="noopener noreferrer">Christian Information Center</a> is a useful starting point. Always confirm admission and worship arrangements with the relevant site before you travel.</p>
       <Tip>If your plans include a private day trip, I'd set the main destination and realistic walking time first, then add optional stops. A private driver handles transport; licensed guiding and entrance tickets are separate unless specifically arranged.</Tip>
     </section>
 
