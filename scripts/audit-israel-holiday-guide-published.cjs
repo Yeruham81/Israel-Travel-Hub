@@ -110,14 +110,7 @@ async function inspect(page,label,isDesktop) {
         await page.screenshot({path:path.join(folder,label+".png"),fullPage:true,animations:"disabled"});
       }
       assert(exceptions.length===0,"single published page: no JavaScript exceptions",JSON.stringify(exceptions));
-      const obsolete=origin+"/travel-blog/israel-holidays/";
-      try {
-        const oldResponse=await page.request.get(obsolete,{timeout:20000,maxRedirects:0});
-        const status=oldResponse.status();
-        assert(status===404||status===410,"retired holiday calculator route: HTTP 404 or 410",String(status));
-      } catch(e) {
-        assert(false,"retired holiday calculator: independent HTTP check",e.message);
-      }
+
     }catch(e){assert(false,"published holiday page browser inspection completed",e.message);}
     finally{await page.close();}
   }catch(e){assert(false,"Chromium launch",e.message);}

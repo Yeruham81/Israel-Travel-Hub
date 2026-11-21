@@ -10,6 +10,7 @@ import yardenit from "@/assets/guides/yardenit.jpg";
 import qasr from "@/assets/guides/qasr-el-yahud.jpg";
 import sepulchre from "@/assets/guides/holy-sepulchre.jpg";
 import roadTrip from "@/assets/home/road-trip.webp";
+import jerusalemShabbatNight from "@/assets/travel-blog-hub/jerusalem-night-443d64981d-420.webp";
 
 const photos = {
   hall: { src: hall, alt: "Ben Gurion Airport Terminal 3 arrivals hall", credit: "GeorgeDement · CC BY-SA 2.0 · resized WebP", sourceUrl: "https://commons.wikimedia.org/wiki/File:Ben_Gurion_Airport_terminal_3_reception_hall.jpg", licenseUrl: "https://creativecommons.org/licenses/by-sa/2.0/" },
@@ -30,7 +31,7 @@ export const expandedTravelGuides = {
     answer: "Ben Gurion Airport stays open on Shabbat, but most regular trains and buses stop for part of Friday and Saturday. Limited free weekend Line 711 serves central Tel Aviv from Terminal 1, if its timetable fits your arrival. Official airport taxis run 24 hours a day, while an advance-confirmed private transfer is an alternative for a direct journey, groups or other destinations. Check the actual first Saturday-night train before deciding to wait.",
     topics: ["transportation", "tips"],
     updatedAt: "2026-11-11",
-    photo: {src: "/images/hotels/jerusalem-night.webp", alt: "Jerusalem city lights after dark, illustrating Shabbat evening travel"},
+    photo: {src: jerusalemShabbatNight, alt: "Jerusalem city lights after dark, illustrating Shabbat evening travel"},
     facts: [
       { label: "Free option", text: "Line 711: Terminal 1 to central Tel Aviv at limited weekend times" },
       { label: "Direct ride", text: "Authorized airport taxis operate 24/7; regulated meter and official queue" },

@@ -6,6 +6,25 @@ on:
 permissions:
   contents: read
 jobs:
+  retired-route:
+    if: >-
+      github.event.workflow_run.conclusion == 'success' &&
+      github.event.workflow_run.head_sha == github.sha
+    runs-on: ubuntu-24.04
+    timeout-minutes: 4
+    steps:
+      - name: Check retired holiday calculator independently of image loading
+        shell: bash
+        run: |
+          set -euo pipefail
+          url="https://saddlebrown-guanaco-454061.hostingersite.com/travel-blog/israel-holidays/"
+          status="$(curl --http1.1 --retry 1 --max-time 25 -sSL -o /tmp/retired-calendar-response.html -w "%{http_code}" "$url")"
+          echo "Retired /travel-blog/israel-holidays/: HTTP $status"
+          case "$status" in
+            404|410) echo "PASS: removed calendar route is not served" ;;
+            429) echo "::error::Rate-limited: HTTP status could not be verified independently"; exit 1 ;;
+            *) echo "::error::Removed route unexpectedly returned HTTP $status"; exit 1 ;;
+          esac
   audit:
     if: >-
       github.event.workflow_run.conclusion == 'success' &&
