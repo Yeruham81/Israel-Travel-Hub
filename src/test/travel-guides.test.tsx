@@ -76,6 +76,38 @@ describe("migrated practical guides", () => {
       expect(article).toMatchObject({ headline: guide.title, dateModified: guide.updatedAt, inLanguage: "en" });
       return;
     }
+    if (id === "jerusalem") {
+      // The city overview is now a navigation-first planning hub, not the old
+      // generic comparison + checklist layout.
+      expect(container.querySelector("#quick-answer")).toHaveTextContent("Old City");
+      expect(container.querySelectorAll("#choose .grid > a")).toHaveLength(6);
+      expect(container.querySelectorAll("#how-many-days article")).toHaveLength(3);
+      expect(container.querySelectorAll("#where-to-stay article")).toHaveLength(5);
+      expect(container.querySelectorAll("#getting-around [data-testid='jerusalem-transport-links'] > a")).toHaveLength(4);
+      expect(container.querySelectorAll("#day-trips .grid > a")).toHaveLength(6);
+      expect(container.querySelectorAll("#explore-more .grid > a")).toHaveLength(6);
+      expect(container.querySelectorAll('[data-testid="jerusalem-hub-tour-card"]')).toHaveLength(6);
+      expect(container.querySelectorAll("#faq details")).toHaveLength(8);
+      expect(container.querySelector('a[href="/travel-blog/where-to-stay-in-jerusalem/"]')).not.toBeNull();
+      expect(container.querySelector('a[href="/accommodation/jerusalem/"]')).not.toBeNull();
+      expect(container.querySelector('a[href="/travel-blog/calendar-of-events/"]')).not.toBeNull();
+      expect(container.querySelector('#contact form')).not.toBeNull();
+      expect(container.querySelector('#contact [data-photo-role="contact-portrait"]')).not.toBeNull();
+      expect(container.querySelector("time")).toHaveAttribute("datetime",guide.updatedAt);
+      expect(screen.getByRole("complementary", { name: "About the author" })).toHaveTextContent("Written by Moshe Barak");
+      const contact=container.querySelector("#contact")!;
+      const sources=container.querySelector("#sources")!;
+      expect(contact.compareDocumentPosition(sources) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
+      expect(container.querySelector("main iframe")).toBeNull();
+      const head=await route.options.head?.({} as never);
+      expect(head).toMatchObject({meta:expect.arrayContaining([
+        {title:guide.title},{name:"description",content:guide.description},{name:"robots",content:"noindex,nofollow"},
+      ])});
+      const ld=head!.scripts!.flatMap(item=>typeof item?.children==="string"?[JSON.parse(item.children)]:[]);
+      expect(ld.find(item=>item["@type"]==="Article")).toMatchObject({headline:guide.title,dateModified:guide.updatedAt,inLanguage:"en"});
+      expect(ld.find(item=>item["@type"]==="FAQPage")?.mainEntity).toHaveLength(8);
+      return;
+    }
     if (id === "baptism") {
       // The dedicated Jordan River comparison intentionally replaces the old
       // generic checklist/sections layout with a richer site-focused guide.
