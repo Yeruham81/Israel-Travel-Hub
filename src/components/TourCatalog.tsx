@@ -54,9 +54,9 @@ export function ExternalTourCard({ tour, pageId, compact = false }: { tour: Tour
   const price = offers.map(offer => tourSnapshotPrice(offer)).find(Boolean);
   const primaryOffer = offers[0];
   if (compact) return <li id={tour.id} data-product-id={tour.id} data-testid="tour-card" className="min-w-0 scroll-mt-24">
-    <article className="flex h-full min-w-0 gap-3 rounded-xl border bg-card p-3 shadow-sm sm:gap-4">
-      <img src={tourPhotos[tour.id]!.src} alt={tourPhotos[tour.id]!.alt} width={140} height={180} loading="lazy" decoding="async" className="h-40 w-[96px] shrink-0 rounded-lg object-cover sm:h-44 sm:w-[124px]" />
-      <div className="flex min-w-0 flex-1 flex-col">
+    <article className="flex h-full min-w-0 flex-col overflow-hidden rounded-xl border bg-card shadow-sm">
+      <img src={tourPhotos[tour.id]!.src} alt={tourPhotos[tour.id]!.alt} width={720} height={405} loading="lazy" decoding="async" className="aspect-[16/9] w-full object-cover" />
+      <div className="flex min-w-0 flex-1 flex-col p-4">
         <div className="flex flex-wrap items-center justify-between gap-x-2 gap-y-1 text-xs text-muted-foreground"><span className="font-semibold">{offers[0]?.partner?.name || "Booking platform"}</span>{tour.rating && <span aria-label={`Rating ${tour.rating.value} out of 5 from ${tour.rating.count} reviews`} title={`Booking-platform reviews checked ${tour.rating.checkedAt}; ratings may change`} className="font-semibold text-foreground">★ {tour.rating.value.toFixed(1)} <span className="font-normal text-muted-foreground">({tour.rating.count})</span></span>}</div>
         <h3 className="mt-1.5 line-clamp-2 text-base font-semibold leading-snug">{tour.title}</h3>
         <p className="mt-1 line-clamp-2 text-xs leading-relaxed text-muted-foreground sm:text-sm">{tour.summary}</p>
