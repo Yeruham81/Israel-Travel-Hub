@@ -19,6 +19,9 @@ export type TelAvivExperience = {
   additionalOfficial?: {label:string;url:string;note?:string};
 };
 
+/** Canonical cover: the page header and all cards linking here must use the same photograph. */
+export const telAvivAttractionsHero = { src: hero, alt: "The Mediterranean beachfront and urban skyline of Tel Aviv" } as const;
+
 export const telAvivAttractionsUpdatedAt="2026-11-20";
 export const telAvivExperiences: TelAvivExperience[]=[
   {
@@ -170,7 +173,7 @@ export const telAvivEditorialOverview: Attraction={
   title:"Best Things to Do in Tel Aviv: Attractions & Local Experiences",
   description:"Explore ten Tel Aviv and Jaffa attractions, from Old Jaffa, beaches and markets to Bauhaus streets, museums, Sarona and the northern waterfront, with maps and local planning tips.",
   region:"Tel Aviv & Jaffa",
-  image:{src:hero,alt:"Mediterranean coastline and skyline of Tel Aviv"},
+  image:telAvivAttractionsHero,
   duration:"One to three days",
   intro:"Tel Aviv is made for exploring on foot: seaside promenades, Old Jaffa's stone lanes, local markets, museums and energetic neighbourhoods provide different experiences within one city.",
   takeaway:"I recommend choosing three or four nearby places for one day and saving the farther northern waterfront for a separate outing.",
