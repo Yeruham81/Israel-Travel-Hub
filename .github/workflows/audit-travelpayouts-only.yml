@@ -5,6 +5,11 @@ on:
     paths:
       - ".github/workflows/audit-travelpayouts-only.yml"
       - "scripts/audit-travelpayouts-only.cjs"
+      - "src/data/registry.ts"
+      - "src/components/MountOlivesAttractionPage.tsx"
+      - "src/components/MountZionAttractionPage.tsx"
+      - "src/components/HotelDestinationPage.tsx"
+      - "src/components/HotelCategoryPage.tsx"
   workflow_dispatch:
 permissions:
   contents: read
