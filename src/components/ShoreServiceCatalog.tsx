@@ -48,13 +48,13 @@ export function ShoreServiceCatalog({ portId, filters, onFilterChange, itinerary
       {partnerTours.length > 0 && <section id="external-tours" aria-labelledby="partner-tours-h" data-section="external-tours" className="mt-5 scroll-mt-24">
         <h2 id="partner-tours-h" className="text-2xl font-semibold">Explore {port.name} shore excursions</h2>
         <p className="mt-3 max-w-3xl text-sm leading-relaxed text-muted-foreground">Compare guided day trips and small-group experiences departing from {port.name} Port. Check the exact meeting point and ship-return arrangements before booking.</p>
-        <ul aria-label={"Other operators' tours from " + port.name + " Port"} className="mt-5 grid gap-3 md:grid-cols-2">
+        <ul aria-label={"Other operators' tours from " + port.name + " Port"} className="mt-5 grid gap-3 md:grid-cols-2 lg:grid-cols-3">
           {partnerTours.map(service => {
             const provider = service.provider;
             return <li key={service.id} data-testid="shore-service-card" data-service-id={service.id} data-product-id={service.productId} data-operator-id={service.operator?.id} data-booking-platform={service.partner?.id || "direct"} data-service-kind={service.kind} className="min-w-0 scroll-mt-24">
-              <article className="flex h-full min-w-0 gap-3 rounded-xl border bg-card p-3 shadow-sm sm:gap-4">
-                <img src={service.photo.src} alt={service.photo.alt} width={140} height={180} loading="lazy" decoding="async" className="h-40 w-[96px] shrink-0 rounded-lg object-cover sm:h-44 sm:w-[124px]" />
-                <div className="flex min-w-0 flex-1 flex-col">
+              <article className="flex h-full min-w-0 flex-col overflow-hidden rounded-xl border bg-card shadow-sm">
+                <img src={service.photo.src} alt={service.photo.alt} width={140} height={180} loading="lazy" decoding="async" className="aspect-[16/9] w-full object-cover" />
+                <div className="flex min-w-0 flex-1 flex-col p-4">
                   <div className="flex flex-wrap items-center justify-between gap-x-2 gap-y-1 text-xs text-muted-foreground">
                     <span className="font-semibold"><span className="sr-only">Booking platform: </span>{service.partner?.name || provider.providerName}</span>{service.rating && <span aria-label={`Rating ${service.rating.value.toFixed(1)} out of 5 from ${service.rating.count} reviews`} title={`Booking-platform reviews checked ${service.rating.checkedAt}; ratings may change`} className="font-semibold text-foreground">★ {service.rating.value.toFixed(1)} <span className="font-normal text-muted-foreground">({service.rating.count})</span></span>}
                   </div>
@@ -76,7 +76,7 @@ export function ShoreServiceCatalog({ portId, filters, onFilterChange, itinerary
               </article>
             </li>;
           })}
-          {partnerTours.length % 2 === 1 && <li data-testid="shore-companion-card" className="min-w-0 rounded-xl border bg-secondary/30 p-5">
+          {partnerTours.length % 3 === 2 && <li data-testid="shore-companion-card" className="min-w-0 rounded-xl border bg-secondary/30 p-5">
             <div className="flex h-full flex-col justify-between gap-4">
               <div><p className="text-xs font-semibold uppercase tracking-wide text-primary">Plan your day ashore</p><h3 className="mt-2 text-lg font-semibold">Explore another destination</h3><p className="mt-2 text-sm text-muted-foreground">See every available excursion from {port.name} Port, or ask for a private route that fits your ship's schedule.</p></div>
               <a href={shoreServiceHref(portId, {})} onClick={event => filter(event, {})} className="inline-flex min-h-10 items-center justify-center rounded-lg border border-primary px-4 py-2 text-sm font-semibold text-primary hover:bg-secondary">Explore all destinations</a>
