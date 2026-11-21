@@ -84,7 +84,7 @@ export const haifaTourPlacements: TourPlacement[] = [
     id: "north-coast-small-group", platform: "Viator", productCode: "58143P8",
     title: "Caesarea, Haifa & Acre small-group tour",
     description: "A guided small-group coastal day trip departing from Tel Aviv, covering Caesarea, Haifa and historic Akko. Confirm pickup and minimum-group requirements.",
-    duration: "8–10 hours", priceFrom: "From $279 per person", rating: "5.0/5 · 7 reviews",
+    duration: "8–10 hours", priceFrom: "From $289 per person", rating: "5.0/5 · 8 reviews",
     image: "/images/attractions/akko-fishing-harbour.webp",
     affiliateKey: "tour-north-coast-small-group-viator@tours-northern-coast",
     subId: "haifa_coast_viator",
