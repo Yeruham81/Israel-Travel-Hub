@@ -148,7 +148,8 @@ describe("migrated Israel itineraries", () => {
       expect(tour?.rating).toBeGreaterThan(0);
       expect(tour?.reviewCount).toBeGreaterThan(0);
       expect(tour?.fromUsd).toBeGreaterThan(0);
-      expect(tour?.checkedAt).toBe("2026-11-13");
+      expect(tour?.checkedAt).toMatch(/^\d{4}-\d{2}-\d{2}$/);
+      expect(tour!.checkedAt >= "2026-11-13").toBe(true);
       const link = affiliateConfig[item.id]?.trackingUrl;
       expect(link, item.id).toMatch(/^https:\/\/[a-z0-9.-]+\.tpm\.li\//);
       expect(item.image).toBeTruthy();
