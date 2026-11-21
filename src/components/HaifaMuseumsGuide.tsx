@@ -10,7 +10,7 @@ import { HomeContactForm } from "@/components/HomeContactForm";
 import { neighborhoodTripContactCopy } from "@/lib/guide-contact";
 import { guideHeroPhotoForPath } from "@/lib/guide-hero-photos";
 import { haifaMuseumAreas as museumAreas, haifaMuseums as museums, haifaAdditionalMuseums as additionalMuseums, type HaifaMuseumEntry as MuseumEntry } from "@/data/haifaMuseums";
-import { haifaMuseumPhotos } from "@/data/haifaMuseumPhotos";
+import { haifaMuseumPhotos, haifaMuseumPhotoCredits } from "@/data/haifaMuseumPhotos";
 import museumHero from "@/assets/guides/2026-10/museums-in-haifa.webp";
 
 const updatedAt = "2026-11-21";
@@ -243,6 +243,12 @@ export function HaifaMuseumsGuide() {
         <li><OfficialLink href="https://www.hms.org.il/eng/Activity_Time">Haifa Museums opening times</OfficialLink></li>
         <li><OfficialLink href="https://www.madatech.org.il/en/before-you-arrive/visitor-information/">MadaTech visitor information</OfficialLink></li>
       </ul>
+      <div className="mt-4 border-t pt-3 text-xs leading-relaxed text-muted-foreground">
+        <p>Photo credits (cropped, resized and converted to WebP):</p>
+        <ul className="mt-2 space-y-1">{haifaMuseumPhotoCredits.map(photo=><li key={photo.id}>
+          <a href={photo.sourceUrl} target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">{photo.label}</a> — {photo.author} · <a href={photo.licenseUrl} target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">{photo.license}</a>
+        </li>)}</ul>
+      </div>
     </SourcesDisclosure>
   </article></main>;
 }

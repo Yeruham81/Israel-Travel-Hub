@@ -1,7 +1,7 @@
 import {existsSync,readFileSync} from "node:fs";
 import {describe,expect,it} from "vitest";
 import {haifaMuseumAreas,haifaMuseums,haifaAdditionalMuseums} from "@/data/haifaMuseums";
-import {haifaMuseumPhotos} from "@/data/haifaMuseumPhotos";
+import {haifaMuseumPhotos,haifaMuseumPhotoCredits} from "@/data/haifaMuseumPhotos";
 
 describe("Haifa museums editorial guide",()=>{
   it("covers ten independently identifiable museums without mislabelling parks and gardens",()=>{
@@ -42,22 +42,27 @@ describe("Haifa museums editorial guide",()=>{
     const source=readFileSync("src/data/haifaMuseums.ts","utf8");
     expect(source).not.toContain("Entrance is free on Fridays and Saturdays");
   });
-  it("assigns seven distinct, locally stored archive photographs without substituting fake photos for three new subjects",()=>{
+  it("uses ten distinct local photos and credits the three licensed Wikimedia sources",()=>{
     const unique=new Set<string>();
-    for(const id of ["art","maritime","tikotin","madatech","city","naval","railway"]){
-      const photo=haifaMuseumPhotos[id]!;
-      expect(photo,id).toBeDefined();
-      expect(photo.src,id).toMatch(/^\/images\/haifa-museums\/[a-z-]+\.webp$/);
-      expect(existsSync("public"+photo.src),id).toBe(true);
-      expect(photo.width,id).toBeGreaterThan(0);
-      expect(photo.height,id).toBeGreaterThan(0);
-      expect(photo.alt,id).toBeTruthy();
-      expect(unique.has(photo.src),id).toBe(false);
+    for(const museum of haifaMuseums){
+      const photo=haifaMuseumPhotos[museum.id]!;
+      expect(photo,museum.id).toBeDefined();
+      expect(photo.src,museum.id).toMatch(/^\/images\/haifa-museums\/[a-z-]+\.webp$/);
+      expect(existsSync("public"+photo.src),museum.id).toBe(true);
+      expect(photo.width,museum.id).toBeGreaterThan(0);
+      expect(photo.height,museum.id).toBeGreaterThan(0);
+      expect(photo.alt,museum.id).toBeTruthy();
+      expect(unique.has(photo.src),museum.id).toBe(false);
       unique.add(photo.src);
     }
-    for(const id of ["hecht","struck","mane-katz"]){
-      expect(haifaMuseumPhotos[id],id).toBeUndefined();
+    expect(unique.size).toBe(10);
+    expect(haifaMuseumPhotoCredits.map(c=>c.id).sort()).toEqual(["hecht","mane-katz","struck"]);
+    for(const credit of haifaMuseumPhotoCredits){
+      expect(credit.author).toBeTruthy();
+      expect(credit.sourceUrl).toMatch(/^https:\/\/commons\.wikimedia\.org\/wiki\/File:/);
+      expect(credit.licenseUrl).toMatch(/^https:\/\/creativecommons\.org\/licenses\//);
     }
+    expect(readFileSync("src/components/HaifaMuseumsGuide.tsx","utf8")).toContain("haifaMuseumPhotoCredits.map");
   });
   it("uses the same wide-card visual system as Jerusalem and Tel Aviv",()=>{
     const haifa=readFileSync("src/components/HaifaMuseumsGuide.tsx","utf8");
