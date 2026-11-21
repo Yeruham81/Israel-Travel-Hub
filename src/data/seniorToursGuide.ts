@@ -5,7 +5,7 @@ import caesareaCardPhoto from "@/assets/attractions-hub/card-caesarea-420.webp";
 
 export const seniorUpdatedAt = "2026-11-21";
 export const seniorPath = "/travel-blog/israel-tours-for-seniors/" as const;
-export const seniorHero = {src:"/images/home/transfer-jerusalem-tower-of-david.webp",alt:"Tower of David in Jerusalem, a possible stop on a flexible private sightseeing journey"};
+export const seniorHero = {src:"/images/senior-tours/israel-tours-for-seniors-1200x900.webp",mobileSrc:"/images/senior-tours/israel-tours-for-seniors-1200x675.webp",alt:"Older couple enjoying a seaside holiday together"};
 
 export type SeniorDay = {
   id:string; title:string; duration:string; image:string; alt:string; intro:string;

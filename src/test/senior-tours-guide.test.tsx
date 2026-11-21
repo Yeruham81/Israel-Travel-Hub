@@ -52,6 +52,10 @@ describe("Israel tours for seniors: private transport guide",()=>{
  it("provides twelve related guides and distinct, locally stored, appropriately compressed images",()=>{
   expect(seniorSites).toHaveLength(6);
   expect(seniorPlanning).toHaveLength(6);
+  expect(seniorHero.src).toBe("/images/senior-tours/israel-tours-for-seniors-1200x900.webp");
+  expect(seniorHero.mobileSrc).toBe("/images/senior-tours/israel-tours-for-seniors-1200x675.webp");
+  expect(existsSync("public"+seniorHero.mobileSrc)).toBe(true);
+  expect(component).toContain("mobileSrc={seniorHero.mobileSrc}");
   const photos=[seniorHero.src,...seniorDayTrips.map(x=>x.image),...seniorSites.map(x=>x.image),...seniorPlanning.map(x=>x.image)];
   expect(new Set(photos).size).toBe(photos.length);
   for(const entry of [...seniorSites,...seniorPlanning])expect(entry.to).toMatch(/^\//);

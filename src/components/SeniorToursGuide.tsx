@@ -68,7 +68,7 @@ export function SeniorToursGuide(){
  return <main className="mx-auto max-w-5xl px-4 pb-12"><article>
    <header className="pt-6">
     <Breadcrumbs items={[{name:"Home",to:"/"},{name:"Travel guides",to:"/travel-blog/"},{name:"Israel tours for seniors",to:seniorPath}]}/>
-    <GuideHeroLayout image={<GuideHeroMedia src={seniorHero.src} alt={seniorHero.alt} compact/>}>
+    <GuideHeroLayout image={<GuideHeroMedia src={seniorHero.src} mobileSrc={seniorHero.mobileSrc} alt={seniorHero.alt} compact/>}>
      <p className="text-xs font-semibold uppercase tracking-[0.16em] text-primary">Private travel · Flexible day trips</p>
      <h1 className="guide-page-title mt-2">Israel Tours for Seniors: Private Day Trips at Your Own Pace</h1>
      <p data-guide-intro className="mt-4 max-w-3xl text-lg leading-relaxed">I'm Moshe Barak. I help older visitors explore Israel with private transport, comfortable day trips and a pace that suits them. Tell me what you want to see and how far you enjoy walking; I'll help you plan a journey around your needs.</p>
