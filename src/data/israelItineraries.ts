@@ -886,7 +886,7 @@ export const itineraries: Record<ItineraryId, ItineraryGuide> = {
     ],
     jerusalemTourOptionsDay: 3,
     alternatives: [
-      { title: "Prefer Eilat and Timna? Choose a southern 10-day route", text: "Do not add Eilat onto this Galilee itinerary. Instead spend Days 1–3 in Jerusalem and at the Dead Sea, Days 4–5 in Tel Aviv or on a short coastal trip, Days 6–8 based in Eilat (including a dedicated Timna Park day), and Day 9 returning to central Israel ahead of your Day 10 departure. Allow a full travel day for each long transfer and verify operating routes and hotel nights.", to: "/travel-blog/eilat/", label: "Eilat travel guide" },
+      { title: "Prefer Eilat and Timna? Choose a southern 10-day route", text: "Do not add Eilat onto this Galilee itinerary. Instead spend Days 1–3 in Jerusalem and at the Dead Sea, Days 4–5 in Tel Aviv or on a short coastal trip, Days 6–8 based in Eilat (including a dedicated Timna Park day), and Day 9 returning to central Israel ahead of your Day 10 departure. Allow a full travel day for each long transfer and verify operating routes and hotel nights.", to: "/attractions/eilat/", label: "Eilat travel guide" },
       { title: "Prefer the Negev and Ramon Crater?", text: "Replace several Galilee and coastal days with a planned overnight in Mitzpe Ramon and a separate desert sightseeing day. This is a different route with different transport and hotel needs, not a quick detour between Jerusalem and Tel Aviv.", to: "/attractions/mitzpe-ramon-crater/", label: "Ramon Crater guide" },
     ],
     logistics: [

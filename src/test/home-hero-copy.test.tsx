@@ -180,7 +180,7 @@ describe("homepage marketing copy and service sections", () => {
       "/attractions/capernaum/",
       "/attractions/mount-tabor/",
       "/attractions/mount-of-olives/",
-      "/travel-blog/eilat/",
+      "/attractions/eilat/",
     ]);
     expect(attractionTiles.map(tile => tile.textContent?.trim())).toEqual([
       "Rosh Hanikra",

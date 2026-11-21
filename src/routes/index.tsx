@@ -153,7 +153,7 @@ export const services: Service[] = [
       { label: "Capernaum", to: "/attractions/capernaum/", img: { src: capernaumPhoto, alt: "Ancient ruins at Capernaum beside the Sea of Galilee" } },
       { label: "Mount Tabor", to: "/attractions/mount-tabor/", img: { src: mountTaborPhoto, alt: "Mount Tabor rising above the Lower Galilee" } },
       { label: "Mount of Olives", to: "/attractions/mount-of-olives/", img: { src: "/images/attractions/mount-of-olives.webp", alt: "Churches and historic sites on the Mount of Olives in Jerusalem" } },
-      { label: "Eilat", to: "/travel-blog/eilat/", img: { src: "/images/attractions/eilat.webp", alt: "The Red Sea shoreline at Eilat" } },
+      { label: "Eilat", to: "/attractions/eilat/", img: { src: "/images/attractions/eilat.webp", alt: "The Red Sea shoreline at Eilat" } },
     ],
     hub: { label: "Explore all attractions & experiences", to: "/attractions/" },
   },
