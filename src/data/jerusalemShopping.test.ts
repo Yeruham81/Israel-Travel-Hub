@@ -37,7 +37,8 @@ describe("Jerusalem shopping guide editorial regression", () => {
     expect(page).toContain("jerusalem-shopping-map-focus");
     expect(page).toContain("jerusalem-shopping-map-selected");
     expect(page).toContain("flex flex-col gap-3 border-b p-4 sm:flex-row");
-    expect(page).toContain("md:hidden");
+    expect(page).toContain("min-w-[760px]");
+    expect(page).not.toContain('className="divide-y md:hidden"');
     expect(map).toContain("places.length !== 10");
     expect(map).toContain("cluster:true");
     expect(map).toContain("jerusalem-shopping-map-focus");

@@ -100,7 +100,8 @@ describe("Dead Sea attractions editorial guide", () => {
   it("keeps the content-led order, compact mobile choice grid, comparison, related guides, sources and transport links", () => {
     const page=readFileSync(resolve(process.cwd(),"src/components/DeadSeaAttractionsGuide.tsx"),"utf8");
     expect(page).toContain("grid grid-cols-2 gap-2.5 sm:gap-3 md:grid-cols-3 lg:grid-cols-5");
-    expect(page).toContain("Show the comparison of all ten experiences");
+    expect(page).toContain("Swipe the table sideways to compare all ten Dead Sea experiences.");
+    expect(page).toContain("min-w-[800px]");
     expect(page).toContain("Entry & booking");
     expect(page.indexOf('<section id="experiences"')).toBeLessThan(page.indexOf('<section id="area-map"'));
     expect(page).toContain("related.map");

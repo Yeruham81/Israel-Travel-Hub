@@ -81,7 +81,9 @@ describe("Capernaum as the first reusable individual-attraction guide", () => {
     expect(shell).not.toContain("Worth knowing:");
     const article = readFileSync("src/components/CapernaumAttractionPage.tsx", "utf8");
     expect(article).toContain('data-testid="capernaum-location-map"');
-    expect(article).toContain('data-testid="capernaum-mobile-visitor-cards"');
+    expect(article).toContain('data-testid="capernaum-visitor-table"');
+    expect(article).toContain("overflow-x-auto");
+    expect(article).not.toContain('data-testid="capernaum-mobile-visitor-cards"');
     expect(article).toContain('data-testid="capernaum-visitor-facilities"');
     expect(article).toContain("park.fridays");
     expect(article).not.toContain("publishedSummerFridays");

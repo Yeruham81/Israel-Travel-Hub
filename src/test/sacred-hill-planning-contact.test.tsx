@@ -65,7 +65,8 @@ describe("sacred hill visit planning", () => {
     expect(hours!.compareDocumentPosition(faq!) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
     expect(faq!.compareDocumentPosition(contact!) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
     expect(hours!.querySelectorAll("tbody tr")).toHaveLength(sacredHillPlanning[id].facts.length);
-    expect(hours!.querySelectorAll('[data-testid="sacred-hours-mobile"] article')).toHaveLength(sacredHillPlanning[id].facts.length);
+    expect(hours!.querySelector('[data-testid="sacred-hours-table"] table')).not.toBeNull();
+    expect(hours!.querySelector('[data-testid="sacred-hours-mobile"]')).toBeNull();
     const orderedIds = ["places-to-see", "walking-route", "visit-facts", "getting-there", "visitor-advice", "history", "faq", "visit-options"];
     const sectionNodes = orderedIds.map(sectionId => main.querySelector("#" + sectionId));
     expect(sectionNodes.every(Boolean)).toBe(true);

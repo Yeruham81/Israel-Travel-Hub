@@ -112,7 +112,8 @@ describe("migrated practical guides", () => {
       // The dedicated Jordan River comparison intentionally replaces the old
       // generic checklist/sections layout with a richer site-focused guide.
       expect(container.querySelector("#quick-answer")).toHaveTextContent("Yardenit");
-      expect(container.querySelector("[data-testid='baptism-mobile-comparison']")).not.toBeNull();
+      expect(container.querySelector("[data-testid='baptism-site-comparison'] table")).not.toBeNull();
+      expect(container.querySelector("[data-testid='baptism-mobile-comparison']")).toBeNull();
       expect(container.querySelectorAll("#compare-sites tbody tr")).toHaveLength(6);
       expect(container.querySelectorAll('[data-testid="baptism-tour-card"]')).toHaveLength(6);
       expect(container.querySelectorAll("#attractions .grid > a")).toHaveLength(6);

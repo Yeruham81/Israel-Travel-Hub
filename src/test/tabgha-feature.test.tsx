@@ -61,7 +61,8 @@ describe("Tabgha visitor guide follows the individual-attraction template", () =
     const route = readFileSync("src/routes/attractions.tabgha.tsx", "utf8");
     const shell = readFileSync("src/components/AttractionDestinationPage.tsx", "utf8");
     expect(route).toContain("component: TabghaAttractionPage");
-    expect(article).toContain('data-testid="tabgha-mobile-hours"');
+    expect(article).not.toContain('data-testid="tabgha-mobile-hours"');
+    expect(article).toContain("overflow-x-auto");
     expect(article).toContain('data-testid="tabgha-visitor-table"');
     expect(article).toContain('data-testid="tabgha-location-map"');
     expect(article).toContain('const tabghaMapEmbed = "https://maps.google.com/maps?q=Tabgha%2C%20Israel&hl=en&z=15&t=m&output=embed"');
