@@ -71,6 +71,30 @@ describe("migrated practical guides", () => {
       expect(article).toMatchObject({headline: guide.title, dateModified: guide.updatedAt, inLanguage: "en"});
       return;
     }
+    if (id === "jerusalemChurches") {
+      // The dedicated church guide uses a horizontal museum-style layout, with
+      // twenty illustrated site cards, four area groups and a selectable map.
+      expect(container.querySelectorAll('article[data-church-card="horizontal"]')).toHaveLength(20);
+      expect(container.querySelectorAll('#old article[data-church-card="horizontal"]')).toHaveLength(9);
+      expect(container.querySelectorAll('#olives article[data-church-card="horizontal"]')).toHaveLength(6);
+      expect(container.querySelectorAll('#zion article[data-church-card="horizontal"]')).toHaveLength(3);
+      expect(container.querySelectorAll('#karem article[data-church-card="horizontal"]')).toHaveLength(2);
+      expect(container.querySelector('iframe[src^="/maps/jerusalem-churches.html"]')).not.toBeNull();
+      expect(container.querySelectorAll('#explore-more a')).toHaveLength(6);
+      expect(container.querySelectorAll('#contact')).toHaveLength(1);
+      expect(container.querySelector("time")).toHaveAttribute("datetime", guide.updatedAt);
+      expect(screen.getByRole("complementary", { name: "About the author" })).toHaveTextContent("Written by Moshe Barak");
+      const head = await route.options.head?.({} as never);
+      expect(head).toMatchObject({ meta: expect.arrayContaining([
+        { title: guide.title },
+        { name: "description", content: guide.description },
+        { name: "robots", content: "noindex,nofollow" },
+      ]) });
+      const structured = head!.scripts!.flatMap(script => typeof script?.children === "string" ? [JSON.parse(script.children)] : []);
+      const article = structured.find(item => item["@type"] === "Article");
+      expect(article).toMatchObject({ headline: guide.title, dateModified: guide.updatedAt, inLanguage: "en" });
+      return;
+    }
     if (id === "jerusalemShopping") {
       // This guide now uses the shared dedicated layout, with an editorial quick
       // recommendation, ten place cards, a map, photos and a six-card follow-up grid.
