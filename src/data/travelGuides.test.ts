@@ -91,6 +91,22 @@ describe("travel guide topic filters and prerender safety", () => {
     }
   });
 
+  it("shows the most recently updated guides first, including when a topic is selected", () => {
+    const checkRecency = (entries: typeof guideDirectory) => {
+      const dates = entries.map((entry) => entry.updatedAt ?? "");
+      expect(dates).toEqual([...dates].sort((a, b) => b.localeCompare(a)));
+    };
+    checkRecency(guideDirectory);
+    expect(guideDirectory[0]?.updatedAt).toBe("2026-11-21");
+    for (const topic of guideTopics) {
+      checkRecency(filterGuides("", topic.id));
+    }
+    expect(guideDirectory.find((entry) => entry.id === "christianTours")?.updatedAt).toBe("2026-11-21");
+    expect(guideDirectory.find((entry) => entry.id === "baptism")?.updatedAt).toBe("2026-11-21");
+    expect(guideDirectory.find((entry) => entry.id === "attraction-museums-in-jerusalem")?.updatedAt).toBe("2026-11-20");
+    expect(guideDirectory.find((entry) => entry.id === "stay-tiberias")?.updatedAt).toBe("2026-11-19");
+  });
+
   it("uses the historical Nesher photo as both page hero and guide-card image", () => {
     const guide = travelGuides.sherut;
     const card = guideDirectory.find(entry => entry.id === "sherut");
