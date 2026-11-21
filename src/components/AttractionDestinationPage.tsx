@@ -76,7 +76,7 @@ export type AttractionDestinationContent = {
   photoCredits?: ReactNode;
 };
 
-function AtAGlance({ placeName, facts, note, title }: { placeName: string; facts: AttractionFact[]; note?: ReactNode; title?: string }) {
+function AtAGlance({ placeName, facts, note, title }: { placeName: string; facts: AttractionFact[]; note?: ReactNode; title?: string | undefined }) {
   return (
     <section id="at-a-glance" aria-labelledby="at-a-glance-h" className="mt-7 scroll-mt-24">
       <h2 id="at-a-glance-h" className="text-xl font-bold sm:text-2xl">{title ?? `${placeName} at a glance`}</h2>
