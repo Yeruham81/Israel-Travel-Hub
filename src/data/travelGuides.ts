@@ -1014,7 +1014,7 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
           "Check Israel's holiday and special dates guide for holiday dates, then confirm transport schedules for your journey. For flights, the airport Shabbat transport guide covers limited weekend bus 711 at Terminal 1 and official taxis.",
         ],
         inlineLinks: [
-          { text: "Israel's calendar of events", to: "/travel-blog/calendar-of-events/" },
+          { text: "Israel's holiday and special dates guide", to: "/travel-blog/calendar-of-events/" },
           { text: "airport Shabbat transport guide", to: travelGuidePaths.shabbat },
         ],
         highlightedLinks: [{ label: "Na'im Busofash — weekend routes and operating hours", href: "https://busofash.co.il/", context: "Check the actual Friday or Saturday route, stop, service direction and timetable; the network is limited to participating communities." }],

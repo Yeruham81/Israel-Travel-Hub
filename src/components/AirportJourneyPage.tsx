@@ -397,7 +397,7 @@ export function AirportJourneyPage({ id }: { id: AirportJourneyId }) {
       <Section id="shabbat" title="Getting there on Shabbat and Jewish holidays">
         {g.weekend.map(p=><p key={p}><GuideParagraph paragraph={p} inlineLinks={g.weekendLinks} /></p>)}
         {!g.weekendLinks?.length && <p>For terminal-specific weekend travel, see my <Link to="/travel-blog/from-ben-gurion-airport-on-shabbat/" className="text-primary underline">Ben Gurion Airport Shabbat guide</Link>.</p>}
-        {!g.weekendLinks?.some(link => link.to === "/travel-blog/calendar-of-events/") && <p>Before planning a trip during a Jewish holiday, check <Link to="/travel-blog/calendar-of-events/" className="font-medium text-primary underline underline-offset-4">Israel's calendar of events</Link> for guidance on holiday-related changes to transport and opening hours. Verify the timetable for your exact travel day.</p>}
+        {!g.weekendLinks?.some(link => link.to === "/travel-blog/calendar-of-events/") && <p>Before planning a trip during a Jewish holiday, check <Link to="/travel-blog/calendar-of-events/" className="font-medium text-primary underline underline-offset-4">Israel's holiday and special dates guide</Link> for guidance on holiday-related changes to transport and opening hours. Verify the timetable for your exact travel day.</p>}
       </Section>
       <Section id="tips" title="Practical tips to avoid missed connections and extra costs">
         <ul className="list-disc space-y-3 pl-5">{g.advice.map(t=><li key={t}>{t}</li>)}</ul>

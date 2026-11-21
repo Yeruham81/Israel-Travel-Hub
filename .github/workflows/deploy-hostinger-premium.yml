@@ -180,7 +180,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          # rsync deliberately runs without --delete to protect unrelated Hostinger files.
+          # The upload deliberately preserves unrelated Hostinger files.
           # This is a precisely scoped retirement of one public HTML file, with an
           # out-of-webroot backup. It does not install a permanent redirect or 410 rule:
           # /travel-blog/israel-holidays/ may be recreated in the future.

@@ -79,7 +79,7 @@ const byId: Record<AirportJourneyId, AirportJourneyGuide> = {
       onward: { src: benGurionRailPlatform, alt: "Ben Gurion Airport railway station platform used to board trains toward Jerusalem" },
     },
     stationLinks: [{ text: "Ben Gurion Airport arrival guide", to: "/travel-blog/ben-gurion-airport-arrival-tips/" }],
-    weekendLinks: [{ text: "airport Shabbat transport guide", to: "/travel-blog/from-ben-gurion-airport-on-shabbat/" }, { text: "Sherut in Israel guide", to: "/travel-blog/sherut-in-israel/" }, { text: "Israel\'s holiday guide", to: "/travel-blog/calendar-of-events/" }],
+    weekendLinks: [{ text: "airport Shabbat transport guide", to: "/travel-blog/from-ben-gurion-airport-on-shabbat/" }, { text: "Sherut in Israel guide", to: "/travel-blog/sherut-in-israel/" }, { text: "Israel\'s holiday and special dates guide", to: "/travel-blog/calendar-of-events/" }],
     sources: [
       { title: "Israel Railways — official route and current train fare", url: "https://www.rail.co.il/" },
       { title: "Israel Railways — free personal voucher for Jerusalem line (August 2026 notice)", url: "https://rail.co.il/?lan=en&page=vouchers-jerusalem" },
@@ -119,7 +119,7 @@ const byId: Record<AirportJourneyId, AirportJourneyGuide> = {
       "Israel Railways and most regular buses normally stop during the main Shabbat period and many Jewish holidays. The exact last/first departure depends on the date, so check the journey planner rather than assuming Saturday night trains start at a fixed time.",
       "For an arrival without a usable rail connection, compare the airport's authorized metered taxi with a confirmed private transfer. A rental car is another possibility only if collection is operating.",
       "The regular Nesher airport-to-Jerusalem shared-taxi route described in older guides no longer runs. Do not rely on old pickup details. My Sherut in Israel guide explains the distinction, and the airport Shabbat transport guide covers current weekend options.",
-      "For holiday dates, see Israel\'s calendar of events."
+      "For holiday-related travel planning, see Israel\'s holiday and special dates guide."
     ],
     advice: [
       "Compare the total from landing to hotel: immigration and baggage, getting to the station, the train and the final leg.",
