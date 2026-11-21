@@ -338,6 +338,6 @@ describe("accommodation destination hub", () => {
       meta: expect.arrayContaining([expect.objectContaining({ name: "description", content: expect.stringContaining("Jerusalem") })]),
       links: expect.arrayContaining([expect.objectContaining({ rel: "canonical", href: expect.stringMatching(/\/accommodation\/$/) })]),
     });
-    expect(new Set(accommodationDestinations.map((destination) => destination.photo.src)).size).toBe(6);
+    expect(new Set(accommodationDestinations.map((destination) => destination.photo.src)).size).toBe(5);
   });
 });

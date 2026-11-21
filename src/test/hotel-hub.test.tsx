@@ -16,27 +16,23 @@ afterEach(cleanup);
 const page=() => render((() => { const Page=HubRoute.options.component!; return <Page/>; })());
 
 describe("Accommodation booking hub",()=>{
- it("has one H1, six destination cards and six balanced area guides",()=>{
+ it("has one H1, five destination cards and six balanced area guides",()=>{
   const {container}=page();
   expect(screen.getAllByRole("heading",{level:1})).toHaveLength(1);
   expect(screen.getByRole("heading",{name:"Hotels in Israel"})).toBeInTheDocument();
   const cards=container.querySelectorAll('[data-testid="accommodation-destination-card"]');
   expect(cards).toHaveLength(5);
-  expect(accommodationDestinations).toHaveLength(6);
+  expect(accommodationDestinations).toHaveLength(5);
   const destinationsGrid = container.querySelector('[aria-label="Hotel destinations in Israel"]')!;
   expect(destinationsGrid).toHaveClass("grid-cols-2");
   expect(destinationsGrid).not.toHaveClass("md:grid-cols-3");
   const allCards = [...container.querySelectorAll('[data-testid="hotel-destination-card"]')];
-  expect(allCards).toHaveLength(6);
+  expect(allCards).toHaveLength(5);
   expect(allCards.map(card => card.querySelector("h3")?.textContent)).toEqual([
     "Hotels in Jerusalem", "Hotels in Tel Aviv", "Hotels in Haifa",
-    "Hotels in Tiberias", "Dead Sea hotels", "Hotels in Eilat",
+    "Hotels in Tiberias", "Dead Sea hotels",
   ]);
   expect(allCards.every(card => !card.closest("li")?.classList.contains("md:col-span-2"))).toBe(true);
-  const eilat = allCards[5]!;
-  expect(eilat).toHaveTextContent("Coming soon");
-  expect(eilat.querySelectorAll("a")).toHaveLength(0);
-  expect(screen.getByTestId("accommodation-coming-soon-card")).toBeInTheDocument();
   const retiredEilatGuide = "/travel-blog/" + "eilat/";
   expect(container.querySelector(`a[href="${retiredEilatGuide}"]`)).toBeNull();
   expect(screen.queryByRole("link", { name: /Explore hotel destinations/i })).toBeNull();
@@ -187,8 +183,7 @@ describe("Accommodation booking hub",()=>{
     return typeof children === "string" ? [JSON.parse(children)] : [];
   }) ?? [];
   const collection = jsonLd.find(entry => entry["@type"] === "CollectionPage");
-  expect(collection?.mainEntity?.itemListElement).toHaveLength(6);
-  expect(collection.mainEntity.itemListElement[5]).not.toHaveProperty("item.url");
-  expect(collection.mainEntity.itemListElement[5].name).toMatch(/Eilat/);
+  expect(collection?.mainEntity?.itemListElement).toHaveLength(5);
+  expect(collection.mainEntity.itemListElement.some((item: {name:string}) => /Eilat/i.test(item.name))).toBe(false);
  });
 });
