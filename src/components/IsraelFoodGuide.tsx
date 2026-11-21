@@ -1,4 +1,4 @@
-import { useState, type ReactNode } from "react";
+import { useEffect, useState, type MouseEvent, type ReactNode } from "react";
 import { Link, type LinkProps } from "@tanstack/react-router";
 import {
   ArrowUpRight, ChefHat, Clock3, ExternalLink,
@@ -50,7 +50,8 @@ function External({href,children}:{href:string;children:ReactNode}){
 
 const dishVisual = {street:{label:"Street food",icon:Flame},plates:{label:"Breakfast & plates",icon:UtensilsCrossed},bakery:{label:"From the bakery",icon:ChefHat},sweets:{label:"Something sweet",icon:Heart}} as const;
 
-function QuickStart(){
+type PickFood = (event:MouseEvent<HTMLAnchorElement>,dishId:string)=>void;
+function QuickStart({onPickFood}:{onPickFood:PickFood}){
   return <section id="quick-start" aria-labelledby="quick-start-heading" className="mt-12 scroll-mt-24">
     <SectionHeading id="quick-start" title="New to Israeli food? Start here" intro="You do not need a complicated tasting itinerary. These are four easy ways to choose your first bite — in a market, bakery, café or hummus shop."/>
     <div className="grid gap-4 sm:grid-cols-2">
@@ -58,7 +59,7 @@ function QuickStart(){
         <div className="flex items-start gap-3"><span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-secondary text-sm font-bold text-primary">{index+1}</span><div>
           <h3 className="font-bold leading-snug">{idea.title}</h3>
           <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{idea.description}</p>
-          <div className="mt-3 flex flex-wrap gap-x-4 gap-y-1.5">{idea.ids.map(id=><a key={id} href={"#"+id} className={shortLink}>{foodDishes.find(d=>d.id===id)?.name}<ArrowUpRight className="h-3.5 w-3.5" aria-hidden="true"/></a>)}</div>
+          <div className="mt-3 flex flex-wrap gap-x-4 gap-y-1.5">{idea.ids.map(id=><a key={id} href={"#"+id} onClick={event=>onPickFood(event,id)} className={shortLink}>{foodDishes.find(d=>d.id===id)?.name}<ArrowUpRight className="h-3.5 w-3.5" aria-hidden="true"/></a>)}</div>
         </div></div>
       </article>)}
     </div>
@@ -71,21 +72,29 @@ function DishCard({dish,index}:{dish:FoodDish;index:number}){
     <figure><img src={dish.photo.src} alt={dish.photo.alt} width={755} height={503} loading="lazy" decoding="async" className="aspect-[16/10] w-full object-cover"/></figure>
     <div className="flex flex-1 flex-col p-4 sm:p-5">
       <p className="mb-2 flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wide text-primary"><Icon className="h-3.5 w-3.5" aria-hidden="true"/>{label.label}</p>
-      <h3 id={dish.id+"-heading"} className="text-xl font-bold leading-tight sm:text-2xl">{index+1}. {dish.name}</h3>
+      <h3 id={dish.id+"-heading"} tabIndex={-1} className="text-xl font-bold leading-tight sm:text-2xl">{index+1}. {dish.name}</h3>
       <p className="mt-1 text-xs text-muted-foreground">Say it: {dish.pronunciation}</p>
       <p className="mt-3 text-sm leading-relaxed">{dish.summary}</p>
       <div className="mt-4 rounded-lg bg-secondary/50 p-3 text-sm leading-relaxed"><strong>My ordering tip:</strong> {dish.order}</div>
       <p className="mt-3 text-xs leading-relaxed text-muted-foreground"><strong className="text-foreground">Good to know:</strong> {dish.note}</p>
-      <p className="mt-2 text-xs leading-relaxed text-muted-foreground">{dish.roots}</p>
+      <details className="mt-3 rounded-lg border border-border/70 px-3 py-2 text-xs text-muted-foreground">
+        <summary className="cursor-pointer font-medium text-foreground">About this food tradition</summary>
+        <p className="mt-2 leading-relaxed">{dish.roots}</p>
+      </details>
       {dish.photo.credit&&<div className="mt-auto pt-3"><GuidePhotoCredit photo={dish.photo}/></div>}
     </div>
   </article>;
 }
-function TenDishes(){
- const [filter,setFilter]=useState<FoodKind|"all">("all");
+function TenDishes({filter,setFilter,onPickFood}:{filter:FoodKind|"all";setFilter:(value:FoodKind|"all")=>void;onPickFood:PickFood}){
  const visible=filter==="all"?foodDishes:foodDishes.filter(d=>d.kind===filter);
  return <section id="dishes" aria-labelledby="dishes-heading" className="mt-12 scroll-mt-24">
    <SectionHeading id="dishes" title="10 foods to try in Israel" intro="Each card tells you what the dish is, how to say its name, what to order and what to ask before you eat. Pick a category if you prefer a shorter list."/>
+   <nav aria-label="Jump to a food dish" className="mb-6 rounded-xl border bg-secondary/20 p-3 sm:p-4">
+     <h3 className="text-sm font-bold">Jump straight to a dish</h3>
+     <div className="mt-3 grid grid-cols-2 gap-2 sm:grid-cols-5">
+       {foodDishes.map((dish,index)=><a key={dish.id} href={"#"+dish.id} onClick={event=>onPickFood(event,dish.id)} className="inline-flex min-h-10 items-center gap-2 rounded-md border bg-card px-3 py-2 text-xs font-semibold text-primary hover:border-primary/40 hover:bg-secondary focus-visible:outline-2 focus-visible:outline-primary sm:text-sm"><span className="text-muted-foreground">{index+1}.</span>{dish.name}</a>)}
+     </div>
+   </nav>
    <div role="group" aria-label="Filter dishes by food category" className="mb-5 flex flex-wrap gap-2">{foodKinds.map(kind=><button key={kind.id} type="button" aria-pressed={filter===kind.id} onClick={()=>setFilter(kind.id)} className={"min-h-10 rounded-full border px-3.5 py-1.5 text-sm font-semibold focus-visible:outline-2 focus-visible:outline-primary "+(filter===kind.id?"border-primary bg-primary text-primary-foreground":"bg-card hover:bg-secondary")}>{kind.label}</button>)}</div>
    <p className="mb-3 text-xs text-muted-foreground" role="status" aria-live="polite">Showing {visible.length} of {foodDishes.length} dishes</p>
    <div className="grid gap-5 sm:grid-cols-2" data-testid="israel-food-dish-grid">{visible.map(dish=><DishCard key={dish.id} dish={dish} index={foodDishes.findIndex(d=>d.id===dish.id)}/>)}</div>
@@ -98,7 +107,7 @@ function FoodWords(){
    <Tip>Prefer mild food? You can say <strong>“Lo charif, bevakasha”</strong> (“Not spicy, please”). If you have an allergy, explain the exact ingredient rather than relying on one general phrase.</Tip>
  </section>;
 }
-function FoodDay(){
+function FoodDay({onPickFood}:{onPickFood:PickFood}){
  const plan=[
   {when:"Breakfast",title:"Bakery or café",text:"Pick up a warm boureka or order shakshuka with bread. Choose one, not both, if you want room for lunch.",anchor:"shakshuka"},
   {when:"Lunch",title:"A hummus shop or pita stand",text:"Try a bowl of hummus, a falafel pita or sabich. Ask how big the serving is.",anchor:"hummus"},
@@ -108,7 +117,7 @@ function FoodDay(){
  return <section id="food-day" aria-labelledby="food-day-heading" className="mt-12 scroll-mt-24">
    <SectionHeading id="food-day" title="A simple first food day" intro="This is a loose tasting plan, not a fixed itinerary. Follow it in one city rather than criss-crossing the country for a meal."/>
    <div className="grid gap-3 md:grid-cols-4">{plan.map((step,i)=><article key={step.when} className="flex min-w-0 flex-col rounded-xl border bg-card p-4">
-      <p className="text-xs font-bold uppercase tracking-wide text-primary">{String(i+1).padStart(2,"0")} · {step.when}</p><h3 className="mt-2 font-bold">{step.title}</h3><p className="mt-2 text-sm leading-relaxed text-muted-foreground">{step.text}</p><a className={"mt-auto pt-3 "+shortLink} href={"#"+step.anchor}>Read more<ArrowUpRight className="h-3.5 w-3.5" aria-hidden="true"/></a>
+      <p className="text-xs font-bold uppercase tracking-wide text-primary">{String(i+1).padStart(2,"0")} · {step.when}</p><h3 className="mt-2 font-bold">{step.title}</h3><p className="mt-2 text-sm leading-relaxed text-muted-foreground">{step.text}</p><a className={"mt-auto pt-3 "+shortLink} href={"#"+step.anchor} onClick={event=>{if(step.anchor!=="markets")onPickFood(event,step.anchor);}}>Read more<ArrowUpRight className="h-3.5 w-3.5" aria-hidden="true"/></a>
     </article>)}</div>
  </section>;
 }
@@ -196,6 +205,25 @@ function RelatedCard({item}:{item:NavCard}){
 
 export function IsraelFoodGuide(){
  const sources=publicSources(guide.sourceIds);
+ const [foodFilter,setFoodFilter]=useState<FoodKind|"all">("all");
+ const [pendingDish,setPendingDish]=useState<string|null>(null);
+ const onPickFood:PickFood=(event,dishId)=>{
+   event.preventDefault();
+   setFoodFilter("all");
+   setPendingDish(dishId);
+ };
+ // Reveal a hidden dish before navigating to it. This also works after a user
+ // selects a category and then returns to the quick-start or food-day links.
+ useEffect(()=>{
+   if(!pendingDish)return;
+   const target=document.getElementById(pendingDish);
+   if(target){
+     window.history.replaceState(window.history.state,"","#"+pendingDish);
+     target.scrollIntoView?.({behavior:"instant",block:"start"});
+     target.querySelector("h3")?.focus?.({preventScroll:true});
+   }
+   setPendingDish(null);
+ },[pendingDish,foodFilter]);
  return <main className="mx-auto max-w-5xl px-4 pb-10"><article>
    <header className="pt-6"><Breadcrumbs items={[{name:"Home",to:"/"},{name:"Travel guides",to:"/travel-blog/"},{name:"What to Eat in Israel",to:"/travel-blog/what-to-eat-in-israel/"}]}/>
      <GuideHeroLayout image={<GuideHeroMedia src={guide.photo.src} alt={guide.photo.alt}/>}>
@@ -211,10 +239,10 @@ export function IsraelFoodGuide(){
      <p className="mt-2 leading-relaxed">{guide.answer}</p>
    </section>
    <OnThisPage sections={nav}/>
-   <QuickStart/>
-   <TenDishes/>
+   <QuickStart onPickFood={onPickFood}/>
+   <TenDishes filter={foodFilter} setFilter={setFoodFilter} onPickFood={onPickFood}/>
    <FoodWords/>
-   <FoodDay/>
+   <FoodDay onPickFood={onPickFood}/>
    <Markets/>
    <Tours/>
    <Practical/>
