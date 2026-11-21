@@ -1,5 +1,5 @@
 import { Link } from "@tanstack/react-router";
-import { ArrowUpRight, BusFront, CarFront, Clock3, Footprints, MapPinned, Waves, Sun, Ticket, Mountain, Plane, Ship } from "lucide-react";
+import { ArrowUpRight, BusFront, CarFront, Clock3, Footprints, Waves, Sun, Ticket, Mountain } from "lucide-react";
 import {
   AttractionDestinationPage, AttractionHighlight, AttractionPracticalTip,
   type AttractionDestinationContent,
@@ -156,6 +156,10 @@ export const eilatDestinationContent: AttractionDestinationContent = {
     <AttractionHighlight title="Snorkeling, scuba diving and water sports" image={{ src: coralUnderwater, alt: "Fish and coral in the Red Sea near Eilat" }}>
       <p>Beyond the reserve, Eilat offers guided snorkeling, introductory diving, kayaking, stand-up paddling and boat trips. Choose the activity according to your swimming skills, age, comfort in the water and the operator's safety procedures.</p>
       <p>Keep distance from wildlife, never touch or stand on coral, and do not feed fish. A glass-bottom boat is a useful option for visitors who prefer to stay dry. See the <Link to="/tours/eilat-red-sea/" className={inlineLink}>Eilat activities and tours page</Link> for more options.</p>
+    </AttractionHighlight>
+    <AttractionHighlight title="Water sports and glass-bottom boat trips" image={{ src: photos.watersports, alt: "Water sports activity on the Red Sea near Eilat" }}>
+      <p>There are ways to enjoy the gulf without snorkeling or diving. Depending on season and conditions, private operators may offer paddleboarding, kayaking, boat cruises and other water activities. Glass-bottom boat trips are a good alternative for visitors who prefer not to swim.</p>
+      <p>Check the exact departure point, safety instructions, weather cancellation policy and whether the activity is suitable for children. <Link to="/tours/eilat-red-sea/" className={inlineLink}>Compare Eilat activities</Link> before making a reservation.</p>
     </AttractionHighlight>
     <AttractionHighlight title="Timna Park" image={{ src: timnaPhoto, alt: "Sandstone cliffs and sculpted formations in Timna Park north of Eilat" }}>
       <p>Timna is a desert landscape of sandstone formations, archaeological copper-mining sites and dramatic viewpoints, a short drive north of the city. The park is extensive; many visitors combine short walks and drives between major stops rather than hiking the entire park.</p>
