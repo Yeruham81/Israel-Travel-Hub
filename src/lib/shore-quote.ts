@@ -43,7 +43,7 @@ export function buildShoreQuoteDraft(v: ShoreQuoteFields, portId: ShorePortId) {
   const port = shorePorts[portId];
   const itinerary = shoreExcursionRates.find((rate) => rate.id === v.itineraryId && rate.portId === portId)?.destination || v.otherItinerary.trim();
   const line = (value: string) => value.trim().replace(/[\r\n]+/g, " ");
-  const subject = `Moshe Barak - Taxi & Travel in Israel / ${line(v.name)}`;
+  const subject = `Moshe Barak - Israel Taxi & Travel / ${line(v.name)}`;
   const body = [
     `Name: ${line(v.name)}`, `Email: ${line(v.email)}`, `Phone / WhatsApp: ${line(v.phone) || "Not supplied"}`, `Country: ${line(v.country) || "Not supplied"}`,
     `Departure & return port: ${port.name} Port`, `Cruise ship: ${line(v.ship)}`, `Excursion date: ${v.date}`, `Expected disembarkation: ${v.pickupTime} (Israel local time)`,
