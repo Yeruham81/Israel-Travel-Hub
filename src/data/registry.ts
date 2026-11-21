@@ -1384,6 +1384,13 @@ export const affiliateConfig: Record<string, { trackingUrl: string } | undefined
   "jslm-bethlehem-jerusalem-gyg": { trackingUrl: "https://getyourguide.tpm.li/w41ymA9k" },
   "jslm-bethlehem-private-gyg": { trackingUrl: "https://getyourguide.tpm.li/afbPwokh" },
   "jslm-bethlehem-private-viator": { trackingUrl: "https://viator.tpm.li/cDb7VoHk" },
+  // Page-specific Travelpayouts attribution for the Jerusalem city planning hub.
+  "tour-jerusalem-old-city-walk-viator@jerusalem-hub": { trackingUrl: "https://viator.tpm.li/NfTH03Dg?sub_id=jerusalem_hub_oldcity" },
+  "tour-jerusalem-beyond-walls-viator@jerusalem-hub": { trackingUrl: "https://viator.tpm.li/UWEBkSk3?sub_id=jerusalem_hub_neighborhoods" },
+  "tour-jerusalem-market-food-walk-viator@jerusalem-hub": { trackingUrl: "https://viator.tpm.li/vqiR7EWO?sub_id=jerusalem_hub_food" },
+  "tour-bethlehem-halfday-jerusalem-getyourguide@jerusalem-hub": { trackingUrl: "https://getyourguide.tpm.li/gTSCNyuN?sub_id=jerusalem_hub_bethlehem" },
+  "tour-masada-dead-sea-jerusalem-viator@jerusalem-hub": { trackingUrl: "https://viator.tpm.li/irk1NJgp?sub_id=jerusalem_hub_masada" },
+  "tour-bethlehem-jericho-jordan-viator@jerusalem-hub": { trackingUrl: "https://viator.tpm.li/PgiMvL41?sub_id=jerusalem_hub_jericho" },
   // Verified Travelpayouts project 406243 deep links generated for the Jerusalem tours page (2026-11-14).
   // Each source-page-specific link has its own SubID; do not reuse on other category pages.
   "tour-jerusalem-street-art-walk-viator@tours-jerusalem": { trackingUrl: "https://viator.tpm.li/y3qMoNFK" },
