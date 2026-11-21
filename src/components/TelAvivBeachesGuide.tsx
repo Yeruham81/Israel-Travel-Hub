@@ -86,7 +86,7 @@ function BeachPhotoSlot({ beach, kind = "detail", compact = false }: {
   beach: TelAvivBeach; kind?: "pick" | "detail"; compact?: boolean;
 }) {
   const photo = kind === "pick" ? beach.pickPhoto : beach.detailPhoto;
-  const shape = compact ? "aspect-[4/3] w-24 shrink-0 rounded-lg sm:w-28 md:aspect-[16/9] md:w-full lg:aspect-[4/3] lg:w-24 xl:w-28" : "aspect-[16/9] w-full";
+  const shape = compact ? "aspect-[4/3] w-24 shrink-0 rounded-lg sm:w-28 md:aspect-[16/9] md:w-full lg:aspect-[4/3] lg:w-24 xl:w-28" : "aspect-[16/9] w-full lg:col-start-2 lg:row-start-1 lg:aspect-[4/3] lg:rounded-xl";
   return photo ? (
     <img src={photo.src} alt={photo.alt} loading="lazy" decoding="async"
       width={compact ? 280 : 880} height={compact ? 210 : 495}
@@ -100,7 +100,7 @@ function BeachPhotoSlot({ beach, kind = "detail", compact = false }: {
 }
 
 function BeachCard({ beach, compact = false }: { beach: TelAvivBeach; compact?: boolean }) {
-  return <article id={"beach-" + beach.id} className="flex scroll-mt-28 flex-col overflow-hidden rounded-2xl border bg-card shadow-sm">
+  return <article id={"beach-" + beach.id} data-detailed-card={compact ? undefined : "horizontal"} className="scroll-mt-28 overflow-hidden rounded-2xl border bg-card shadow-sm">
     {compact ? (
       <div className="flex flex-col gap-3 p-4 sm:flex-row md:flex-col lg:flex-row">
         <BeachPhotoSlot beach={beach} compact />
@@ -114,17 +114,21 @@ function BeachCard({ beach, compact = false }: { beach: TelAvivBeach; compact?: 
       </div>
     ) : (
       <>
-        <BeachPhotoSlot beach={beach} />
-        <div className="flex flex-1 flex-col p-4 sm:p-5">
-          <p className="text-xs font-semibold uppercase tracking-wide text-primary">{beach.bestFor}</p>
-          <h4 className="mt-1 text-xl font-bold">{beach.name}</h4>
-          <p className="mt-3 leading-relaxed">{beach.summary}</p>
-          <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{beach.tip}</p>
+        <div className="lg:grid lg:grid-cols-[minmax(0,1fr)_270px] lg:items-start lg:gap-6 lg:p-5">
+          <BeachPhotoSlot beach={beach} />
+          <div className="min-w-0 p-4 sm:p-5 lg:col-start-1 lg:row-start-1 lg:p-0">
+            <p className="text-xs font-semibold uppercase tracking-wide text-primary">{beach.bestFor}</p>
+            <h4 className="mt-1 text-xl font-bold">{beach.name}</h4>
+            <p className="mt-3 leading-relaxed">{beach.summary}</p>
+          </div>
+        </div>
+        <div className="border-t p-4 sm:p-5 lg:px-6">
+          <p className="text-sm leading-relaxed text-muted-foreground">{beach.tip}</p>
           <p className="mt-3 rounded-lg bg-secondary/40 px-3 py-2 text-xs font-medium">{beach.highlights} · {beach.accessShort}</p>
         </div>
       </>
     )}
-    <div className="mt-auto flex flex-wrap items-center gap-x-4 gap-y-2 border-t px-4 py-3 text-xs sm:px-5">
+    <div className="flex flex-wrap items-center gap-x-4 gap-y-2 border-t px-4 py-3 text-xs sm:px-5 lg:px-6">
       <BeachMapLink beach={beach} />
       {beach.official && <OfficialLink href={beach.official}>City beach details</OfficialLink>}
     </div>
@@ -263,7 +267,8 @@ export function TelAvivBeachesGuide() {
             <p className="mt-2 max-w-3xl leading-relaxed text-muted-foreground">{area.intro}</p>
             {groups.filter(group => group.beaches.length > 0).map(group => (
               <div key={group.compact ? "secondary" : "featured"}
-                className={"mt-5 grid items-stretch gap-4 " + (group.beaches.length === 3 ? "md:grid-cols-3" : "md:grid-cols-2")}>
+                className={group.compact ? "mt-5 grid items-stretch gap-4 md:grid-cols-3" : "mt-5 grid gap-4"}
+                 data-testid={group.compact ? "beach-compact-cards" : "beach-detailed-cards"}>
                 {group.beaches.map(beach => <BeachCard key={beach.id} beach={beach} compact={group.compact} />)}
               </div>
             ))}
