@@ -203,7 +203,7 @@ export function applyJerusalemGuideEditorial(guides: Record<TravelGuideId, Trave
       const einKarem = guide.sections.find(section => section.id === "ein-karem");
       if (einKarem && !einKarem.photo) einKarem.photo = { src: "/images/jerusalem/church-of-visitation.webp", alt: "Church of the Visitation in the hillside Ein Karem neighbourhood" };
     }
-    guide.updatedAt = id === "jerusalemShopping" ? "2026-11-20" : "2026-10-24";
+    guide.updatedAt = id === "jerusalemShopping" ? "2026-11-20" : id === "jerusalemChurches" ? "2026-11-21" : "2026-10-24";
   }
 }
 
