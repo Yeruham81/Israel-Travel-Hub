@@ -78,7 +78,7 @@ describe("Attractions hub redesign", () => {
 
   it("keeps all individual attractions on the hub without listing regional overview guides as site cards", () => {
     const paths = attractionHubCards.map((card) => String(card.to));
-    expect(attractionHubCards).toHaveLength(21);
+    expect(attractionHubCards).toHaveLength(22);
     expect(new Set(paths).size).toBe(paths.length);
     expect(paths.every((path) => path.startsWith("/"))).toBe(true);
     for (const id of attractionIds) {
@@ -90,6 +90,7 @@ describe("Attractions hub redesign", () => {
     }
     expect(paths).toContain("/attractions/caesarea/");
     expect(paths).toContain("/attractions/masada/");
+    expect(paths).toContain("/attractions/dead-sea/");
     expect(paths.every(path => path.startsWith("/attractions/"))).toBe(true);
   });
 
@@ -130,8 +131,8 @@ describe("attractions landing responsive image delivery", () => {
   };
   const parseWidths = (srcset: string) => srcset.split(", ").map(value => Number(value.match(/ (\d+)w$/)?.[1]));
 
-  it("retains every original source and gives all 21 large cards native-resolution fallback", () => {
-    expect(attractionHubCards).toHaveLength(21);
+  it("retains every original source and gives all 22 large cards native-resolution fallback", () => {
+    expect(attractionHubCards).toHaveLength(22);
     for (const card of attractionHubCards) {
       const srcset = attractionHubCardImageSets[card.photo.src] ?? "";
       // Akko's editorial photo is updated independently of the hub. The native

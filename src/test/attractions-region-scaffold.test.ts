@@ -42,7 +42,7 @@ describe("Attractions regional scaffold and reciprocal navigation", () => {
     const byId = Object.fromEntries(attractionHubRegions.map(region => [region.id, region]));
     expect(byId["tel-aviv-jaffa"]!.relatedGuides.some(link => link.to === travelGuidePaths.telAvivBeaches)).toBe(true);
     expect(byId["nazareth-lower-galilee"]!.relatedGuides).toEqual([]);
-    expect(byId["dead-sea-masada"]!.relatedGuides.some(link => link.to === travelGuidePaths.deadSea)).toBe(true);
+    expect(byId["dead-sea-masada"]!.relatedGuides.some(link => link.to === travelGuidePaths.jerusalemDeadSea)).toBe(true);
     expect(byId["tel-aviv-jaffa"]!.relatedGuides.some(link => link.to === travelGuidePaths.telAvivMuseums)).toBe(true);
     expect(byId["sea-of-galilee"]!.relatedGuides.some(link => link.to === travelGuidePaths.baptism)).toBe(true);
   });

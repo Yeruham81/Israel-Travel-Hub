@@ -185,7 +185,7 @@ export const travelGuidePaths = {
   magdala: "/attractions/magdala/",
   yardenit: "/attractions/yardenit/",
   qasr: "/attractions/qasr-el-yahud/",
-  deadSea: "/travel-blog/the-dead-sea/",
+  deadSea: "/attractions/dead-sea/",
   bethlehem: "/travel-blog/jerusalem-to-bethlehem/",
   topTen: "/travel-blog/top-10-things-to-do-in-israel/",
 

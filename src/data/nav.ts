@@ -84,6 +84,7 @@ export const attractionSidebarGuideLabels: Record<string, string> = {
   "mount-of-beatitudes": "Mount of Beatitudes",
   magdala: "Magdala",
   yardenit: "Yardenit",
+  "dead-sea": "Dead Sea",
   masada: "Masada",
   "ein-gedi": "Ein Gedi",
   qasr: "Qasr el-Yahud",

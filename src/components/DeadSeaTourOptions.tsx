@@ -22,10 +22,10 @@ const tourPhotos = {
  * The imported images are original files from the site's photo library, not
  * borrowed supplier product imagery. Each is used once within these cards.
  */
-export function DeadSeaTourOptions() {
+export function DeadSeaTourOptions({ selectedIds, pageId = "jslm_dead_sea" }: { selectedIds?: readonly string[]; pageId?: string } = {}) {
   return <>
     <div className="mt-5 grid gap-5 sm:grid-cols-2 xl:grid-cols-3" data-testid="deadsea-tour-options">
-      {deadSeaTourCards.map(tour => {
+      {deadSeaTourCards.filter(tour => !selectedIds || selectedIds.includes(tour.id)).map(tour => {
         const trackingUrl = affiliateConfig[tour.id]?.trackingUrl;
         if (!trackingUrl) return null;
         const photo = tourPhotos[tour.photoId];
@@ -34,7 +34,7 @@ export function DeadSeaTourOptions() {
           href={trackingUrl}
           target="_blank"
           rel={relFor(true)}
-          onClick={() => recordOutboundClick({ pageId: "jslm_dead_sea", productId: tour.id, offerId: tour.id })}
+          onClick={() => recordOutboundClick({ pageId, productId: tour.id, offerId: tour.id })}
           className="group flex min-w-0 flex-col overflow-hidden rounded-xl border bg-card transition-all hover:-translate-y-0.5 hover:border-primary hover:shadow-md focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
           data-testid="deadsea-bookable-tour"
         >

@@ -9,6 +9,7 @@ import { migrationPhotos } from "@/data/guideMigrationPhotos";
 import caesareaPhoto from "@/assets/home/caesarea-dusk.webp";
 import telAvivMain from "@/assets/home/tel-aviv-coast.webp";
 import { einGediCardPhoto } from "@/data/einGediCardPhoto";
+import deadSeaBeachCard from "@/assets/dead-sea/beach-card.webp";
 
 export type AttractionHubCard = {
   id: string;
@@ -136,16 +137,17 @@ export const attractionHubRegions: AttractionHubRegion[] = [
   {
     id: "dead-sea-masada",
     title: "Dead Sea & Masada",
-    summary: "Discover Masada’s desert fortress, the springs and trails of Ein Gedi, and the Jordan River pilgrimage site of Qasr el-Yahud.",
+    summary: "Float at the Dead Sea’s free public beaches, explore Masada’s desert fortress and discover Ein Gedi’s oasis and trails.",
     image: attractionHubPhotos.deadSea,
     cards: [
+      { id: "dead-sea", title: "The Dead Sea", description: "Free public beaches, effortless floating, safety tips and practical visit planning.", to: "/attractions/dead-sea/", photo: { src: deadSeaBeachCard, alt: "Saltwater beach and desert shoreline at the Dead Sea" } },
       { id: "masada", title: "Masada National Park", description: "The mountain fortress, cable car, desert trails and visit planning.", to: "/attractions/masada/", photo: migrationPhotos["EXISTING:masada"] },
       attraction("ein-gedi", "Ein Gedi Nature Reserve", "Desert springs, wildlife and trail-access considerations.", einGediCardPhoto.src, einGediCardPhoto),
       editorialAttraction("qasr", "Qasr el-Yahud", "The Jordan River pilgrimage site near Jericho."),
     ],
     relatedGuides: [
       { label: "Things to see around the Dead Sea", to: "/travel-blog/dead-sea-attractions/" },
-      { label: "Dead Sea visitor guide", to: travelGuidePaths.deadSea },
+      { label: "Jerusalem to the Dead Sea", to: travelGuidePaths.jerusalemDeadSea },
     ],
   },
   {
