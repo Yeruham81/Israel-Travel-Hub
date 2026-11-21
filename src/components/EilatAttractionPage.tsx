@@ -7,7 +7,6 @@ import {
 import { eilatSite } from "@/data/eilatSite";
 import { affiliateConfig, travelGuidePaths } from "@/data/registry";
 import { recordOutboundClick } from "@/lib/outbound";
-import waterfrontPhoto from "@/assets/eilat/waterfront.webp";
 import timnaPhoto from "@/assets/home/timna-park-feature-optimized.webp";
 import mountainsPhoto from "@/assets/home/hero-eilat-mountains-large.webp";
 
@@ -168,7 +167,7 @@ export const eilatDestinationContent: AttractionDestinationContent = {
       <p>Dolphin sightings are <strong>not guaranteed</strong>; the animals are free to approach or stay away. Consult the {sourcesLink(official.dolphinReef, "official Dolphin Reef visit information")} and the {sourcesLink(official.dolphinSwim, "activity rules")} before booking. Guided snorkeling is intended for ages 10 and above and confident swimmers, subject to the operator’s conditions.</p>
       {placeLink("Dolphin Reef, Eilat, Israel")}
     </AttractionHighlight>
-    <AttractionHighlight title="North Beach, the promenade and marina" image={{ src: waterfrontPhoto, alt: "Eilat Red Sea waterfront and marina area" }}>
+    <AttractionHighlight title="North Beach, the promenade and marina" image={{ src: "/images/attractions/eilat-at-dusk.webp", alt: "Eilat marina and North Beach waterfront illuminated at dusk" }}>
       <p>The central beachfront and promenade are easy options for an unstructured morning or evening: waterfront walks, cafés, hotel-area beaches and views towards the surrounding mountains. This is the most straightforward area if you are staying in central Eilat without a car.</p>
       <p>Not every beach has a lifeguard or identical facilities. Look for signs at the specific beach before swimming, and do not assume that every water-sports kiosk is operating year-round.</p>
       {placeLink("Eilat North Beach, Israel")}
