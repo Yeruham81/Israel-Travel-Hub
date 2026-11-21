@@ -8,6 +8,7 @@ export type HaifaMuseumEntry = {
   theme: string; bestFor: string; duration: string; admission: string; openingDays: string; booking: string;
   intro: string; highlights: string[]; tip: string; url: string; ticketUrl?: string;
   featured?: boolean; closureNote?: string; priceNis?: number; highlightsForFamilies?: string;
+  mapLocation: {lat:number;lon:number};
 };
 export const haifaMuseumAreas: {id: HaifaMuseumArea; name: string; intro: string}[] = [
   {
@@ -29,7 +30,7 @@ export const haifaMuseumAreas: {id: HaifaMuseumArea; name: string; intro: string
 ];
 export const haifaMuseums: HaifaMuseumEntry[] = [
   {
-    id: "art", name: "Haifa Museum of Art", area: "downtown", neighbourhood: "Wadi Nisnas / Lower City",
+    id: "art", mapLocation: {lat:32.8151,lon:34.9927}, name: "Haifa Museum of Art", area: "downtown", neighbourhood: "Wadi Nisnas / Lower City",
     address: "26 Shabtai Levi Street, Haifa", theme: "Contemporary art", bestFor: "Changing art exhibitions and Israeli culture",
     duration: "1–2 hours", priceNis: 40,
     admission: "Adult ₪40 on the municipal price list; concessions and combined passes vary.",
@@ -41,7 +42,7 @@ export const haifaMuseums: HaifaMuseumEntry[] = [
     url: "https://www.hma.org.il/eng", featured: true
   },
   {
-    id: "city", name: "Haifa City Museum", area: "downtown", neighbourhood: "German Colony",
+    id: "city", mapLocation: {lat:32.82217,lon:34.99215}, name: "Haifa City Museum", area: "downtown", neighbourhood: "German Colony",
     address: "11 Ben Gurion Avenue, Haifa", theme: "City history", bestFor: "Haifa's communities, urban history and the German Colony",
     duration: "45–90 minutes", priceNis: 30,
     admission: "Adult ₪30 on the municipal price list; check exhibition and ticket availability.",
@@ -53,7 +54,7 @@ export const haifaMuseums: HaifaMuseumEntry[] = [
     url: "https://www.hcm.org.il/eng", featured: false
   },
   {
-    id: "railway", name: "Israel Railway Museum", area: "downtown", neighbourhood: "Haifa East / Wadi Salib",
+    id: "railway", mapLocation: {lat:32.81117,lon:35.00669}, name: "Israel Railway Museum", area: "downtown", neighbourhood: "Haifa East / Wadi Salib",
     address: "HaKatar Street (historic Haifa East station), Haifa", theme: "Railway heritage",
     bestFor: "Historic locomotives, rolling stock and transport history", duration: "1–1.5 hours",
     admission: "Check the current Israel Railways museum tariff and concession rates.",
@@ -66,7 +67,7 @@ export const haifaMuseums: HaifaMuseumEntry[] = [
     url: "https://rail.co.il/?lan=en&page=museum", ticketUrl: "https://rail.co.il/?lan=en&page=museum-hours", featured: true
   },
   {
-    id: "madatech", name: "MadaTech – Israel National Museum of Science", area: "hadar",
+    id: "madatech", mapLocation: {lat:32.810205,lon:34.996359}, name: "MadaTech – Israel National Museum of Science", area: "hadar",
     neighbourhood: "Hadar HaCarmel", address: "25 Shmaryahu Levin Street, Haifa",
     theme: "Hands-on science", bestFor: "Families, experiments and interactive discovery", duration: "2.5–4 hours",
     admission: "Admission varies by date and eligibility; children under 5 enter free with an advance-issued ticket.",
@@ -79,7 +80,7 @@ export const haifaMuseums: HaifaMuseumEntry[] = [
     url: "https://www.madatech.org.il/en/", ticketUrl: "https://tickets.madatech.org.il/en/", featured: true
   },
   {
-    id: "struck", name: "Hermann Struck Museum", area: "hadar", neighbourhood: "Hadar HaCarmel",
+    id: "struck", mapLocation: {lat:32.80469,lon:35.00056}, name: "Hermann Struck Museum", area: "hadar", neighbourhood: "Hadar HaCarmel",
     address: "23 Arlozorov Street, Haifa", theme: "Printmaking & artists' house",
     bestFor: "Historic interiors, prints and intimate exhibitions", duration: "45–75 minutes", priceNis: 0,
     admission: "Free general admission according to Haifa Museums; check separately for workshops or special activities.",
@@ -91,7 +92,7 @@ export const haifaMuseums: HaifaMuseumEntry[] = [
     url: "https://www.shm.org.il/eng"
   },
   {
-    id: "tikotin", name: "Tikotin Museum of Japanese Art", area: "carmel",
+    id: "tikotin", mapLocation: {lat:32.80935,lon:34.98539}, name: "Tikotin Museum of Japanese Art", area: "carmel",
     neighbourhood: "Carmel Centre", address: "89 HaNassi Avenue, Haifa",
     theme: "Japanese art", bestFor: "Japanese prints, crafts and quieter exhibitions", duration: "1–1.5 hours", priceNis: 40,
     admission: "Adult ₪40 on the municipal price list; discounts and combined tickets vary.",
@@ -103,7 +104,7 @@ export const haifaMuseums: HaifaMuseumEntry[] = [
     url: "https://www.tmja.org.il/eng", featured: true
   },
   {
-    id: "mane-katz", name: "Mané-Katz Museum", area: "carmel", neighbourhood: "Carmel Centre",
+    id: "mane-katz", mapLocation: {lat:32.80791,lon:34.98715}, name: "Mané-Katz Museum", area: "carmel", neighbourhood: "Carmel Centre",
     address: "89 Yefe Nof Street, Haifa", theme: "Artist's home & Jewish art",
     bestFor: "École de Paris painting and personal collections", duration: "45–75 minutes when open",
     admission: "Closed for renovation; admission will need reconfirmation when it reopens.",
@@ -115,7 +116,7 @@ export const haifaMuseums: HaifaMuseumEntry[] = [
     url: "https://www.mkm.org.il/eng", closureNote: "Closed for renovation — interior visits unavailable"
   },
   {
-    id: "hecht", name: "Hecht Museum", area: "carmel", neighbourhood: "University of Haifa, Mount Carmel",
+    id: "hecht", mapLocation: {lat:32.76322,lon:35.01806}, name: "Hecht Museum", area: "carmel", neighbourhood: "University of Haifa, Mount Carmel",
     address: "199 Abba Hushi Avenue, University of Haifa, Haifa",
     theme: "Archaeology & art", bestFor: "Ancient Israel, maritime archaeology and art",
     duration: "1.5–2 hours", priceNis: 0,
@@ -128,7 +129,7 @@ export const haifaMuseums: HaifaMuseumEntry[] = [
     url: "https://mushecht.haifa.ac.il/", featured: true
   },
   {
-    id: "maritime", name: "National Maritime Museum", area: "coast",
+    id: "maritime", mapLocation: {lat:32.82898,lon:34.97234}, name: "National Maritime Museum", area: "coast",
     neighbourhood: "Western Haifa / Bat Galim", address: "198 Allenby Road, Haifa",
     theme: "Maritime archaeology", bestFor: "Ships, ancient trade and Mediterranean seafaring",
     duration: "1–1.5 hours", priceNis: 40,
@@ -141,7 +142,7 @@ export const haifaMuseums: HaifaMuseumEntry[] = [
     url: "https://www.nmm.org.il/eng", featured: true
   },
   {
-    id: "naval", name: "Clandestine Immigration and Naval Museum", area: "coast",
+    id: "naval", mapLocation: {lat:32.83008,lon:34.97142}, name: "Clandestine Immigration and Naval Museum", area: "coast",
     neighbourhood: "Western Haifa / Bat Galim", address: "204 Allenby Road, Haifa",
     theme: "Immigration & naval history", bestFor: "Historic ships, migration and Israel's navy",
     duration: "1.5–2 hours", priceNis: 20,
@@ -155,9 +156,11 @@ export const haifaMuseums: HaifaMuseumEntry[] = [
     url: "https://museums.mod.gov.il/sites/Haapala/Pages/default.aspx", featured: false
   }
 ];
+/** Reviewed OpenStreetMap museum-building/entrance points; avoid city-wide search pins. */
 export const haifaMuseumMapPoints = haifaMuseums.map(museum => ({
-  id: museum.id, name: museum.name, address: museum.address,
-  closed: Boolean(museum.closureNote), area: museum.area
+  id: museum.id, name: museum.name, area: museum.area,
+  lat: museum.mapLocation.lat, lon: museum.mapLocation.lon,
+  closed: Boolean(museum.closureNote)
 }));
 export const haifaAdditionalMuseums = [
   {
