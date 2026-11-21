@@ -1,3 +1,4 @@
+import { eilatSite } from "@/data/eilatSite";
 import type { LinkProps } from "@tanstack/react-router";
 import { oldCityJerusalemSite } from "@/data/oldCityJerusalemSite";
 import { jaffaSite } from "@/data/jaffaSite";
@@ -40,7 +41,7 @@ export const attractionHubPhotos = {
   galilee: { src: "/images/attractions/sea-of-galilee.webp", alt: "Lake and green hills seen from above the Sea of Galilee", sourceFilename: "sea_of_galilee_panorama.webp" },
   deadSea: { src: "/images/attractions/dead-sea.webp", alt: "Bather in the shallow waters of the Dead Sea", sourceFilename: "dead-sea-israel.jpg.webp" },
   negev: { src: "/images/attractions/ramon-crater.webp", alt: "Clouds above the layered desert cliffs of Ramon Crater", sourceFilename: "clouds_at_ramon_crater.jpg.webp" },
-  eilat: { src: "/images/attractions/eilat.webp", alt: "Visitors relaxing beside the Red Sea in Eilat", sourceFilename: "Eilat_Village_Beach.jpg.webp" },
+  eilat: { ...eilatSite.hero, sourceFilename: "eilat_.jpg" },
   baptism: { src: "/images/attractions/jordan-river-baptism.webp", alt: "Pilgrims gathered for a baptism ceremony beside the Jordan River", sourceFilename: "pilgrims_baptism_jordan_river1.jpg.webp" },
   shopping: { src: "/images/attractions/jerusalem-shopping.webp", alt: "Shops and street life near Mahane Yehuda Market in Jerusalem", sourceFilename: "mahane_yehuda_jerusalem.webp" },
 } as const;
@@ -160,7 +161,7 @@ export const attractionHubRegions: AttractionHubRegion[] = [
     image: attractionHubPhotos.negev,
     cards: [
       attraction("mitzpe-ramon-crater", "Mitzpe Ramon & Ramon Crater", "Desert lookouts, geology, trails and stargazing.", attractionHubPhotos.negev.src),
-      { id: "eilat", title: "Eilat: Red Sea Attractions", description: "Coral beaches, marine parks, waterfront activities and nearby desert excursions.", to: "/attractions/eilat/", photo: { src: "/images/attractions/eilat-coral-beach.webp", alt: "Clear turquoise water over the protected Red Sea reef at Eilat" } },
+      { id: "eilat", title: "Eilat: Red Sea Attractions", description: "Coral beaches, marine parks, waterfront activities and nearby desert excursions.", to: "/attractions/eilat/", photo: eilatSite.hero },
     ],
     relatedGuides: [
       { label: "Ten-day Israel itinerary with an Eilat alternative", to: "/travel-blog/israel-itinerary-10-days/" },
@@ -208,7 +209,7 @@ export const attractionRelatedGuides: {
     title: "Eilat: Red Sea attractions",
     description: "Beaches, coral reefs and adventures in the desert.",
     to: "/attractions/eilat/",
-    photo: { src: "/images/attractions/eilat.webp", alt: "Red Sea shore and Eilat resort waterfront" },
+    photo: eilatSite.hero,
   },
 ];
 
