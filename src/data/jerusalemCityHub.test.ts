@@ -32,7 +32,7 @@ describe("Jerusalem travel planning hub",()=>{
     expect(new Set(allEditorialCards.map(x=>x.cta)).size).toBe(18);
     expect(allEditorialCards.some(x=>x.to==="/travel-blog/attractions-in-tel-aviv/")).toBe(true);
     expect(allEditorialCards.some(x=>x.to==="/attractions/sea-of-galilee/")).toBe(true);
-    expect(allEditorialCards.every(x=>x.to!=="/travel-blog/day-trips-from-jerusalem/")).toBe(true);
+    expect(allEditorialCards.every(x=>String(x.to)!=="/travel-blog/day-trips-from-jerusalem/")).toBe(true);
     for(const item of allEditorialCards){
       expect(item.to).toMatch(/^\/(?:attractions|travel-blog)\//);
       expect(guideHeroPhotoForPath(item.to)?.src,item.to).toBeTruthy();
