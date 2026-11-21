@@ -20,7 +20,7 @@ function allSourceFiles(directory: string): string[] {
 
 function classNameText(element: ts.JsxOpeningElement | ts.JsxSelfClosingElement, source: ts.SourceFile): string {
   const attribute = element.attributes.properties.find(
-    value => ts.isJsxAttribute(value) && value.name.text === "className"
+    value => ts.isJsxAttribute(value) && value.name.getText(source) === "className"
   );
   return attribute && ts.isJsxAttribute(attribute) ? attribute.initializer?.getText(source) ?? "" : "";
 }
