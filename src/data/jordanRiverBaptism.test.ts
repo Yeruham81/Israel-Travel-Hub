@@ -3,6 +3,10 @@ import { describe, expect, it } from "vitest";
 import { affiliateConfig, tourBookingOffers, tourProducts } from "@/data/registry";
 import { tourPhotos } from "@/data/tours";
 import { travelGuides } from "@/data/travelGuides";
+import { guideHeroPhotoForPath } from "@/lib/guide-hero-photos";
+import { yardenitSite } from "@/data/yardenitSite";
+import { qasrElYahudSite } from "@/data/qasrElYahudSite";
+import { magdalaSite } from "@/data/magdalaSite";
 import { BAPTISM_PATH, BAPTISM_TITLE, BAPTISM_DESCRIPTION, BAPTISM_UPDATED, BAPTISM_HERO, baptismFaqs, baptismSources, baptismTourGroups } from "@/data/jordanRiverBaptism";
 
 const offers=[...baptismTourGroups[0].products, ...baptismTourGroups[1].products];
@@ -27,6 +31,11 @@ describe("Jordan River baptism comparison guide",()=>{
       expect(url).toMatch(/^https:\/\/(viator|getyourguide)\.tpm\.li\/[A-Za-z0-9]+\?sub_id=baptism_/);
       expect(url).not.toBe(offer?.publicUrl);
     }
+  });
+  it("uses exact primary destination hero photos for all three special attraction pages",()=>{
+    expect(guideHeroPhotoForPath("/attractions/yardenit/")).toEqual(yardenitSite.hero);
+    expect(guideHeroPhotoForPath("/attractions/qasr-el-yahud/")).toEqual(qasrElYahudSite.hero);
+    expect(guideHeroPhotoForPath("/attractions/magdala/")).toEqual(magdalaSite.hero);
   });
   it("answers substantive baptism and access questions using authoritative sources",()=>{
     expect(baptismFaqs.length).toBeGreaterThanOrEqual(9);
