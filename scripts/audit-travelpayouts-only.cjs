@@ -6,7 +6,7 @@
  */
 const fs = require("node:fs");
 const path = require("node:path");
-const DOMAIN = "https://saddlebrown-guanaco-454061.hostingersite.com";
+const DOMAIN = process.env.SITE_AUDIT_ORIGIN || "https://saddlebrown-guanaco-454061.hostingersite.com";
 const EXPECTED_MARKER = "622032";
 const EXPECTED_PROJECT = "406243";
 const BAD_NETWORK = /(?:^|\.)(?:awin1\.com|awin\.com|anrdoezrs\.net|jdoqocy\.com|tkqlhce\.com|dpbolvw\.net|linksynergy\.com|rakutenadvertising\.com|impact\.com|impactradius\.com|partnerize\.com|admitad\.com|tradetracker\.net|shareasale\.com|skimlinks\.com|viglink\.com)$/i;
@@ -103,16 +103,17 @@ async function publishedAudit(){
   const queue=[...candidate].slice(0,MAX_PAGES);
   const visited=new Set();
   const found=[];
-  let cursor=0;
+  let cursor=0, stopped=false;
   async function worker(){
     const page=await browser.newPage({viewport:{width:1280,height:800}});
     try{
-      while(cursor<queue.length && visited.size<MAX_PAGES){
+      while(!stopped && cursor<queue.length && visited.size<MAX_PAGES){
         const url=queue[cursor++];
         if(visited.has(url))continue;
         visited.add(url);
         try{
           const res=await page.goto(url,{waitUntil:"domcontentloaded",timeout:25000});
+          if(res?.status()===429){stopped=true;stats.pageErrors++;review.push({page:url,reason:"HTTP 429 rate limit: stop to avoid excessive load"});continue;}
           if(!res || res.status()>=400){stats.pageErrors++;review.push({page:url,reason:"HTTP status",status:res?.status()});continue;}
           await page.waitForTimeout(240);
           const items=await page.locator("a[href]").evaluateAll(els=>els.map(a=>({href:a.href,rel:a.getAttribute("rel")||"",text:(a.textContent||"").trim().slice(0,90)})));
@@ -147,13 +148,14 @@ async function publishedAudit(){
   review.push(...found);
   console.log("PUBLISHED_AUDIT",JSON.stringify({sitemapCandidates:candidate.size,stats,failures:failures.slice(0,40),review:review.slice(0,70)}));
   if(stats.pages===0)failures.push({reason:"Published site could not be inspected"});
+  if(stopped || stats.pageErrors>0 || stats.pages < candidate.size)failures.push({reason:"Published page coverage incomplete",pages:stats.pages,candidates:candidate.size,pageErrors:stats.pageErrors,rateLimited:stopped});
   if(candidate.size>MAX_PAGES)failures.push({reason:"Sitemap exceeds audit page limit",total:candidate.size});
 }
 (async()=>{
   staticAudit();
   if(process.argv.includes("--published"))await publishedAudit();
   const report={checkedAt:new Date().toISOString(),stats,failures,review};
-  fs.writeFileSync("/tmp/travelpayouts-affiliate-audit.json",JSON.stringify(report,null,2));
+  fs.writeFileSync(process.env.AUDIT_REPORT_PATH || "/tmp/travelpayouts-affiliate-audit.json",JSON.stringify(report,null,2));
   if(failures.length) console.log("AUDIT_FAILURE_DETAILS",JSON.stringify(failures.slice(0,50)));
   console.log("AUDIT_TOTAL",JSON.stringify({stats,failures:failures.length,review:review.length}));
   if(failures.length)process.exitCode=1;
