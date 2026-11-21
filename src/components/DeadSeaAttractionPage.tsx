@@ -75,6 +75,10 @@ export const deadSeaDestinationContent: AttractionDestinationContent = {
         <p>Keep your face above water, avoid splashing and use a freshwater shower immediately if saltwater gets into your eyes. Choose a designated beach where lifeguards are on duty.</p>
       </AttractionHighlight>
       <AttractionPracticalTip>Bring water shoes, a towel and plenty of drinking water. A small cut or freshly shaved skin can sting surprisingly strongly in the salty water; rinse off after your float.</AttractionPracticalTip>
+      <AttractionHighlight title="Dead Sea mud and mineral treatments">
+        <p>Mineral-rich Dead Sea mud is a famous part of the spa tradition here. For a simple experience, look for packaged mud in local shops or ask a hotel spa what is included. Mud is not guaranteed to be available naturally at the managed Ein Bokek beaches.</p>
+        <p>Avoid putting mud on broken or irritated skin and keep it away from your eyes. Rinse off with fresh water afterwards, and never enter an unmarked shoreline or sinkhole zone in search of natural mud.</p>
+      </AttractionHighlight>
       <AttractionHighlight title="Ein Bokek Central Beach" image={{ src: beachPhoto, alt: "The public beach and blue waters of the Dead Sea at Ein Bokek" }}>
         <p>Ein Bokek is my usual recommendation for a straightforward first visit. Its central public beach has free entry, shaded areas, freshwater showers, changing facilities and a nearby promenade, shops and cafés.</p>
         <p>The <External href={links.einBokek}>regional tourism authority's beach page</External> explains the public facilities, including accessible beach equipment. <External href={maps.einBokek}>Find Ein Bokek Central Beach on Google Maps</External>.</p>
