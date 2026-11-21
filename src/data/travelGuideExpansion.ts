@@ -299,7 +299,7 @@ export const expandedTravelGuides = {
     services: [{ label: "Private driver for a planned pilgrimage route", to: "/private-driver/" }, { label: "Tiberias and Sea of Galilee hotel guide", to: "/travel-blog/best-hotels-in-tiberias/" }, { label: "Haifa shore excursions", to: "/shore-excursions/haifa/" }, { label: "Ashdod shore excursions", to: "/shore-excursions/ashdod/" }],
   },
   jerusalemChurches: {
-    id: "jerusalemChurches", title: "Churches in Jerusalem: Holy Sepulchre, Mount of Olives and more",
+    id: "jerusalemChurches", updatedAt: "2026-11-21", title: "Churches in Jerusalem: Holy Sepulchre, Mount of Olives and more",
     description: "Plan Jerusalem church visits by Old City, Mount of Olives, Mount Zion and Ein Karem. Check walking routes, worship and visitor access.",
     intro: "Choose a meaningful route through living places of worship. Their geography, traditions and visitor arrangements matter as much as the number of churches on your list.",
     answer: "Group Jerusalem church visits into the Old City, Mount of Olives/Kidron Valley, Mount Zion and Ein Karem. Start with the sites important to your interests or pilgrimage, then check each site's own visitor and worship windows. Do not use one church's opening hours or one universal entrance-fee rule for every location.",
