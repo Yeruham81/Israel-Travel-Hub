@@ -191,7 +191,7 @@ export const jerusalemChurches:JerusalemChurch[] = [
     "tip": "The approach is steep and the chapel is on the hillside, not at the top lookout.",
     "lat": 31.777981,
     "lon": 35.241794,
-    "photo": null,
+    "photo": "/images/jerusalem/churches/dominus-flevit.webp",
     "feature": true
   },
   {
@@ -251,7 +251,7 @@ export const jerusalemChurches:JerusalemChurch[] = [
     "tip": "The long staircase can make this visit unsuitable for some mobility needs.",
     "lat": 31.780344,
     "lon": 35.239488,
-    "photo": null,
+    "photo": "/images/jerusalem/churches/tomb-of-virgin-mary.webp",
     "feature": false
   },
   {
@@ -326,7 +326,7 @@ export const jerusalemChurches:JerusalemChurch[] = [
     "tip": "Pair with the Visitation only if the climb and midday closing work for your group.",
     "lat": 31.76806,
     "lon": 35.16306,
-    "photo": null,
+    "photo": "/images/jerusalem/churches/st-john-baptist-ein-karem.webp",
     "feature": false
   }
 ];
