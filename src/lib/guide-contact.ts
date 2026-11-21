@@ -51,13 +51,15 @@ export function guideContactCopy(_title: string, kind: GuideContactKind, place?:
 /** City-specific transport and sightseeing inquiry, for Jerusalem and Tel Aviv neighborhood pages.
  * Hotel recommendations remain in the guide; the contact form is for trip planning and private travel.
  */
-export function neighborhoodTripContactCopy(city: "Jerusalem" | "Tel Aviv"): GuideContactCopy {
+export function neighborhoodTripContactCopy(city: "Jerusalem" | "Tel Aviv" | "Haifa"): GuideContactCopy {
   return {
     subject: "",
     heading: `Planning a trip to ${city}?`,
     introduction: city === "Jerusalem"
       ? "I'm Moshe Barak. Need an airport transfer to Jerusalem, a private driver for sightseeing or a day trip beyond the city? Tell me your dates, pickup point and group size, and I'll reply personally."
-      : "I'm Moshe Barak. Need an airport transfer to Tel Aviv or Jaffa, a private ride or a day trip? Tell me your travel dates, pickup point and group size, and I'll reply personally.",
+      : city === "Tel Aviv"
+      ? "I'm Moshe Barak. Need an airport transfer to Tel Aviv or Jaffa, a private ride or a day trip? Tell me your travel dates, pickup point and group size, and I'll reply personally."
+      : "I'm Moshe Barak. Need an airport transfer to Haifa, a private driver for sightseeing or a day trip along the northern coast? Tell me your travel dates, pickup point and group size, and I'll reply personally.",
     placeholder: "Travel dates, number of travelers, pickup location, destinations or your question…",
   };
 }
