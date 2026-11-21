@@ -131,7 +131,7 @@ describe("private Ben Gurion transfers", () => {
     expect(faq).toHaveTextContent("When can I cancel for free?");
     const related = screen.getByRole("region", { name: "Related travel guides" });
     const relatedGrid = related.querySelector("ul");
-    expect(relatedGrid).toHaveClass("grid", "sm:grid-cols-2", "lg:grid-cols-3");
+    expect(relatedGrid).toHaveClass("grid", "grid-cols-2", "lg:grid-cols-3");
     expect(relatedGrid).not.toHaveClass("lg:grid-cols-2");
     expect(within(related).getAllByRole("listitem")).toHaveLength(6);
     expect(within(related).getAllByRole("link")).toHaveLength(6);

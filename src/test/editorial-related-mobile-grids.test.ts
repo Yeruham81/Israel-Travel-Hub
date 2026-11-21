@@ -54,7 +54,7 @@ describe("editorial six-card grid responsive parity", () => {
       ["src/routes/airport-transfers.index.tsx", 'id="keep-planning"'],
       ["src/routes/private-driver-in-israel.tsx", 'id="travel-guides"'],
       ["src/routes/shore-excursions.index.tsx", 'id="shore-related-guides"'],
-    ]) {
+    ] as const) {
       const source = read(file);
       const start = source.indexOf(marker);
       expect(start, file).toBeGreaterThanOrEqual(0);
