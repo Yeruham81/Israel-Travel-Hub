@@ -63,8 +63,8 @@
         if (!map || !map.getLayer("museum-points")) return;
         map.setPaintProperty("museum-points", "circle-color", [
           "case",
-          ["==", ["get", "id"], selectedId || ""], "#075b96",
           ["get", "closed"], "#866234",
+          ["==", ["get", "id"], selectedId || ""], "#075b96",
           "#2779bc"
         ]);
         map.setPaintProperty("museum-points", "circle-stroke-width", [
