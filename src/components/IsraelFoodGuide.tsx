@@ -17,6 +17,7 @@ import fiveDayPhoto from "@/assets/home/hero-caesarea-sm.webp";
 import travelByTrainPhoto from "@/assets/airport-journeys/ben-gurion-rail-platform.webp";
 import { affiliateConfig, publicSources } from "@/data/registry";
 import { recordOutboundClick, relFor } from "@/lib/outbound";
+import { guideHeroPhotoForPath } from "@/lib/guide-hero-photos";
 import {
  foodDishes, foodKinds, foodStarterIdeas, foodExtras, foodMarkets,
  foodTours, foodFAQs, type FoodKind, type FoodDish
@@ -197,8 +198,11 @@ const planningCards:NavCard[]=[
  {title:"Getting around Israel",description:"Trains, buses, city travel and private transfers",to:"/travel-blog/getting-around-israel/",image:travelByTrainPhoto,alt:"Train platforms at Ben Gurion Airport"}
 ];
 function RelatedCard({item}:{item:NavCard}){
+ // Match the linked destination's own hero photo, never an unrelated category shot.
+ const canonicalPhoto=guideHeroPhotoForPath(String(item.to));
+ const image=canonicalPhoto??{src:item.image,alt:item.alt};
  return <Link to={item.to} className="group flex h-full min-w-0 flex-col overflow-hidden rounded-xl border bg-card transition-colors hover:border-primary/50 hover:bg-secondary/20 focus-visible:outline-2 focus-visible:outline-primary">
-   <img src={item.image} alt={item.alt} width={560} height={350} loading="lazy" decoding="async" className="aspect-[16/10] w-full object-cover"/>
+   <img src={image.src} alt={image.alt} width={560} height={350} loading="lazy" decoding="async" className="aspect-[16/10] w-full object-cover"/>
    <span className="flex flex-1 flex-col p-3 sm:p-4"><strong className="text-sm leading-snug group-hover:text-primary sm:text-base">{item.title}</strong><span className="mt-2 text-xs leading-relaxed text-muted-foreground sm:text-sm">{item.description}</span><span className="mt-auto inline-flex items-center gap-1 pt-3 text-xs font-semibold text-primary">Explore guide<ArrowUpRight className="h-3.5 w-3.5" aria-hidden="true"/></span></span>
  </Link>;
 }
@@ -219,7 +223,7 @@ export function IsraelFoodGuide(){
    const target=document.getElementById(pendingDish);
    if(target){
      window.history.replaceState(window.history.state,"","#"+pendingDish);
-     target.scrollIntoView?.({behavior:"instant",block:"start"});
+     target.scrollIntoView?.({behavior:"auto",block:"start"});
      target.querySelector("h3")?.focus?.({preventScroll:true});
    }
    setPendingDish(null);
@@ -265,8 +269,7 @@ export function IsraelFoodGuide(){
      <p className="leading-relaxed">This is an introductory guide to foods found across Israel, not a list of live restaurant recommendations. Dish recipes, dietary suitability, tour availability and opening hours vary by business. These tourism resources support practical planning:</p>
      <ul className="mt-3 list-disc space-y-2 pl-5 text-sm">
        {sources.map(source=><li key={source.id}><External href={source.url}>{source.publisher}: {source.title}</External></li>)}
-       <li><External href="https://visit.tel-aviv.gov.il/info/money">Tel Aviv visitor information — local currency and tipping</External></li>
-       <li><External href="https://www.itraveljerusalem.com/article/markets-and-fairs-in-jerusalem">Jerusalem visitor information — markets and food districts</External></li>
+       <li>Mahane Yehuda market-stall photograph: <External href="https://commons.wikimedia.org/wiki/File:Mahane_Yehuda_shoppers.jpg">Yoninah / Wikimedia Commons</External> · <External href="https://creativecommons.org/licenses/by-sa/3.0/">CC BY-SA 3.0</External>; cropped and resized into WebP.</li>
      </ul>
    </SourcesDisclosure>
  </article></main>;
