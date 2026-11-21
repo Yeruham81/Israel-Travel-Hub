@@ -11,6 +11,8 @@ describe("Jerusalem churches editorial guide", () => {
     expect(new Set(jerusalemChurches.map(c => c.id)).size).toBe(20);
     expect(jerusalemChurches.filter(c => c.feature).length).toBeGreaterThanOrEqual(4);
     for (const church of jerusalemChurches) {
+      expect(church.photoAlt.length,church.id).toBeGreaterThan(16);
+      if(church.officialUrl)expect(church.officialUrl).toMatch(/^https:\/\//);
       expect(churchAreas.some(a => a.id === church.area), church.id).toBe(true);
       expect(church.description.length, church.id).toBeGreaterThan(40);
       expect(church.tradition, church.id).toBeTruthy();
@@ -42,6 +44,9 @@ describe("Jerusalem churches editorial guide", () => {
     expect(jerusalemChurches.find(c => c.id === "pater-noster")?.hours).toContain("Temporary");
     expect(jerusalemChurches.find(c => c.id === "st-james")?.tip).toContain("worship");
     expect(jerusalemChurches.find(c => c.id === "mary-tomb")?.tip).toContain("staircase");
+    expect(jerusalemChurches.find(c => c.id === "dormition")?.hours).toContain("Sun 11:30–17:00");
+    expect(jerusalemChurches.find(c => c.id === "gallicantu")?.tip).toContain("accessible itinerary");
+    expect(jerusalemChurches.filter(c => c.officialUrl).length).toBeGreaterThanOrEqual(14);
   });
   it("has map focus, accurate related-page photos and centrally registered affiliate links", () => {
     const component = readFileSync("src/components/JerusalemChurchesGuide.tsx", "utf8");
@@ -50,6 +55,12 @@ describe("Jerusalem churches editorial guide", () => {
     expect(component).toContain("jerusalem-church-map-selected");
     expect(map).toContain("churches.length !== 20");
     expect(map).toContain("areaColors");
+    expect(map).toContain("jerusalem-church-map-selected");
+    expect(map).toContain("destination=");
+    expect(component).toContain("aspect-[16/9] w-full bg-secondary/20 object-contain");
+    expect(component).toContain("h-[390px] w-full border-0");
+    expect(component).toContain("church.photoAlt");
+    expect(component).toContain("church.officialUrl");
     expect(component).toContain("guideHeroPhotoForPath(item.to)");
     expect(component).toContain('data-church-card="horizontal"');
     expect(component).toContain("lg:grid-cols-[minmax(0,1fr)_270px]");
@@ -60,10 +71,13 @@ describe("Jerusalem churches editorial guide", () => {
     expect(component).not.toContain('url:"https://viator.tpm.li');
     expect(component).not.toContain('url:"https://getyourguide.tpm.li');
     for (const key of [
-      "tour-jerusalem-old-city-walk-viator@tours-jerusalem",
-      "tour-jerusalem-private-oldcity-walk-viator@tours-jerusalem",
-      "tour-bethlehem-halfday-jerusalem-getyourguide@tours-bethlehem-jericho",
-    ]) expect(affiliateConfig[key]?.trackingUrl).toMatch(/^https:\/\//);
+      "churches-jerusalem-old-city-walk-viator",
+      "churches-jerusalem-private-oldcity-viator",
+      "churches-jerusalem-bethlehem-halfday-gyg",
+    ]) {
+      expect(affiliateConfig[key]?.trackingUrl).toMatch(/^https:\/\//);
+      expect(affiliateConfig[key]?.trackingUrl).toContain("sub_id=churches_jerusalem_");
+    }
     for (const path of [
       "/attractions/old-city-jerusalem/", "/attractions/mount-of-olives/",
       "/attractions/mount-zion/", "/travel-blog/jerusalem-to-bethlehem/",

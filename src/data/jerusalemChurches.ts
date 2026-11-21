@@ -1,6 +1,6 @@
 /** Jerusalem churches visitor data, checked against the Christian Information Center's 15 September 2026 shrine listing and named site operators. Coordinates cross-checked against named site-location records. Do not infer that published access implies access during services. */
 export type ChurchArea = "old" | "olives" | "zion" | "karem";
-export type JerusalemChurch = {id:string;area:ChurchArea;name:string;tradition:string;description:string;highlight:string;hours:string;admission:string;tip:string;lat:number;lon:number;photo:string|null;feature:boolean};
+export type JerusalemChurch = {id:string;area:ChurchArea;name:string;tradition:string;description:string;highlight:string;hours:string;admission:string;tip:string;lat:number;lon:number;photo:string|null;feature:boolean;photoAlt:string;photoCredit?:string;photoSourceUrl?:string;photoLicenseUrl?:string;officialUrl?:string;officialLabel?:string};
 export type ChurchAreaInfo = {id:ChurchArea;title:string;intro:string;color:string};
 export const churchAreas:ChurchAreaInfo[] = [
   {
@@ -42,7 +42,10 @@ export const jerusalemChurches:JerusalemChurch[] = [
     "lat": 31.77846,
     "lon": 35.22956,
     "photo": "/images/attractions/old-jerusalem-holy-sepulchre.webp",
-    "feature": true
+    "feature": true,
+    "photoAlt": "Stone facade of the Church of the Holy Sepulchre in Jerusalem's Old City",
+    "officialUrl": "https://www.custodia.org/en/sanctuaries/basilica-of-the-holy-sepulchre/",
+    "officialLabel": "Franciscan sanctuary information"
   },
   {
     "id": "st-anne",
@@ -57,7 +60,11 @@ export const jerusalemChurches:JerusalemChurch[] = [
     "lat": 31.7814,
     "lon": 35.2364,
     "photo": "/images/jerusalem/churches/st-anne.webp",
-    "feature": true
+    "feature": true,
+    "photoAlt": "Stone exterior and courtyard of St Anne's Church near the Pools of Bethesda",
+    "officialUrl": "https://ste-anne-jerusalem.org/en/",
+    "officialLabel": "St Anne official website",
+    "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Church_of_St_Anne_(Jerusalem)_(05).jpg"
   },
   {
     "id": "redeemer",
@@ -66,13 +73,19 @@ export const jerusalemChurches:JerusalemChurch[] = [
     "tradition": "Lutheran",
     "description": "A nineteenth-century Protestant church beside the Holy Sepulchre; its tower is an excellent way to orient yourself above the Old City.",
     "highlight": "Bell tower and Jerusalem rooftop views",
-    "hours": "Tue–Thu and Sat 10:00–14:00 for tower and museum",
-    "admission": "Tower and museum ₪7.50 (published rate)",
-    "tip": "Tower, archaeological exhibition and worship visits have distinct access conditions.",
+    "hours": "Verify before visiting: the church operator lists Tue–Sat 11:00–15:00 for visitor facilities but currently says the archaeological park is closed",
+    "admission": "Church entry and tower: confirm current access and charges; archaeological park reported closed",
+    "tip": "The official website lists a temporary archaeological-park closure; do not assume the tower or exhibition is open without checking.",
     "lat": 31.777846,
     "lon": 35.230419,
     "photo": "/images/jerusalem/churches/redeemer.webp",
-    "feature": false
+    "feature": false,
+    "photoAlt": "Lutheran Church of the Redeemer in Jerusalem with its prominent bell tower",
+    "officialUrl": "https://church-of-the-redeemer-jerusalem.info/contact/opening?lang=en",
+    "officialLabel": "Redeemer visitor information",
+    "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Lutheran_Church_of_the_Redeemer,_Jerusalem_299.jpg",
+    "photoCredit": "Gabrielw.tour · CC BY-SA 3.0 · edited",
+    "photoLicenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/"
   },
   {
     "id": "st-james",
@@ -87,7 +100,11 @@ export const jerusalemChurches:JerusalemChurch[] = [
     "lat": 31.774616,
     "lon": 35.229058,
     "photo": "/images/jerusalem/churches/st-james.webp",
-    "feature": false
+    "feature": false,
+    "photoAlt": "Ornate iron gate and painted religious artwork at the Armenian Cathedral of St James",
+    "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Entrance_to_the_Cathedral_of_Saint_James_in_the_Armenian_Quarter_of_Jerusalem.jpg",
+    "photoCredit": "John S Y Lee · CC BY 2.0 · edited",
+    "photoLicenseUrl": "https://creativecommons.org/licenses/by/2.0/"
   },
   {
     "id": "flagellation",
@@ -102,7 +119,11 @@ export const jerusalemChurches:JerusalemChurch[] = [
     "lat": 31.78044,
     "lon": 35.233973,
     "photo": "/images/jerusalem/churches/flagellation.webp",
-    "feature": false
+    "feature": false,
+    "photoAlt": "Carved stone facade and entrance of the Church of the Flagellation",
+    "officialUrl": "https://www.custodia.org/en/sanctuaries/flagellation/",
+    "officialLabel": "Franciscan sanctuary information",
+    "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:449.Flagellation_Church.Jerusalem.jpg"
   },
   {
     "id": "ecce-homo",
@@ -111,13 +132,16 @@ export const jerusalemChurches:JerusalemChurch[] = [
     "tradition": "Roman Catholic · Sisters of Notre Dame de Sion",
     "description": "A chapel along the Via Dolorosa associated with the Roman-period arch; the nearby Lithostrotos offers further archaeological context.",
     "highlight": "Ecce Homo arch and Lithostrotos",
-    "hours": "Generally 08:00–17:00",
+    "hours": "Generally 08:00–17:00; confirm basilica and Lithostrotos visitor access with the Sisters of Notre Dame de Sion",
     "admission": "Check the site for any ticketed sections",
     "tip": "The arch is Roman-period; its association with the trial of Jesus is traditional, not archaeologically established.",
     "lat": 31.7803,
     "lon": 35.2333,
     "photo": "/images/jerusalem/churches/ecce-homo.webp",
-    "feature": false
+    "feature": false,
+    "photoAlt": "Interior of the Ecce Homo Basilica showing its vaulted nave, altar and cross",
+    "officialUrl": "https://www.eccehomopilgrimhouse.com/",
+    "officialLabel": "Ecce Homo visitor information"
   },
   {
     "id": "christ-church",
@@ -132,7 +156,13 @@ export const jerusalemChurches:JerusalemChurch[] = [
     "lat": 31.7761,
     "lon": 35.2291,
     "photo": "/images/jerusalem/churches/christ-church.webp",
-    "feature": false
+    "feature": false,
+    "photoAlt": "Sandstone facade and Gothic windows of Christ Church near Jerusalem's Jaffa Gate",
+    "officialUrl": "https://christchurchjerusalem.org/contact/",
+    "officialLabel": "Christ Church visitor contacts",
+    "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:Christ_Church,_Jerusalem,_2019_(01).jpg",
+    "photoCredit": "Bahnfrend · CC BY-SA 4.0 · edited",
+    "photoLicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/"
   },
   {
     "id": "st-mark",
@@ -147,7 +177,11 @@ export const jerusalemChurches:JerusalemChurch[] = [
     "lat": 31.775913,
     "lon": 35.230419,
     "photo": "/images/jerusalem/churches/st-mark.webp",
-    "feature": false
+    "feature": false,
+    "photoAlt": "Stone doorway of St Mark's Syriac Orthodox Church with its Syriac inscription",
+    "officialUrl": "https://syriacorthodoxarchdiocese.wordpress.com/about/",
+    "officialLabel": "Syriac Orthodox community",
+    "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:St_Mark%27s_Chapel_in_Jerusalem.jpg"
   },
   {
     "id": "alexander-nevsky",
@@ -162,7 +196,11 @@ export const jerusalemChurches:JerusalemChurch[] = [
     "lat": 31.77815,
     "lon": 35.230559,
     "photo": "/images/jerusalem/churches/alexander-nevsky.webp",
-    "feature": false
+    "feature": false,
+    "photoAlt": "Nuns praying inside the Church of St Alexander Nevsky beside religious icons and a crucifix",
+    "officialUrl": "https://missionrocor.ru/en-contacts",
+    "officialLabel": "Russian Mission contacts",
+    "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:%D7%A0%D7%96%D7%99%D7%A8%D7%95%D7%AA_%D7%91%D7%9B%D7%A0%D7%A1%D7%99%D7%AA_%D7%90%D7%9C%D7%9B%D7%A1%D7%A0%D7%93%D7%A8.jpg"
   },
   {
     "id": "all-nations",
@@ -177,7 +215,10 @@ export const jerusalemChurches:JerusalemChurch[] = [
     "lat": 31.7792,
     "lon": 35.2396,
     "photo": "/images/jerusalem/church-of-all-nations.webp",
-    "feature": true
+    "feature": true,
+    "photoAlt": "Facade of the Church of All Nations beside Gethsemane in Jerusalem",
+    "officialUrl": "https://www.custodia.org/en/sanctuaries/gethsemane-basilica-agony/",
+    "officialLabel": "Gethsemane sanctuary information"
   },
   {
     "id": "dominus-flevit",
@@ -192,7 +233,10 @@ export const jerusalemChurches:JerusalemChurch[] = [
     "lat": 31.777981,
     "lon": 35.241794,
     "photo": "/images/jerusalem/churches/dominus-flevit.webp",
-    "feature": true
+    "feature": true,
+    "photoAlt": "Dominus Flevit chapel on the Mount of Olives",
+    "officialUrl": "https://www.custodia.org/en/sanctuaries/dominus-flevit/",
+    "officialLabel": "Franciscan sanctuary information"
   },
   {
     "id": "mary-magdalene",
@@ -207,7 +251,10 @@ export const jerusalemChurches:JerusalemChurch[] = [
     "lat": 31.778949,
     "lon": 35.240836,
     "photo": "/images/jerusalem/mount-of-olives/mary-magdalene-church.webp",
-    "feature": false
+    "feature": false,
+    "photoAlt": "Gold onion domes of the Russian Orthodox Church of Mary Magdalene on the Mount of Olives",
+    "officialUrl": "https://missionrocor.ru/en",
+    "officialLabel": "Russian Mission information"
   },
   {
     "id": "pater-noster",
@@ -222,7 +269,8 @@ export const jerusalemChurches:JerusalemChurch[] = [
     "lat": 31.778095,
     "lon": 35.245078,
     "photo": "/images/jerusalem/mount-of-olives/pater-noster.webp",
-    "feature": false
+    "feature": false,
+    "photoAlt": "The Pater Noster Church and convent on the Mount of Olives"
   },
   {
     "id": "ascension",
@@ -237,7 +285,8 @@ export const jerusalemChurches:JerusalemChurch[] = [
     "lat": 31.778907,
     "lon": 35.244986,
     "photo": "/images/jerusalem/mount-of-olives/chapel-of-ascension.webp",
-    "feature": false
+    "feature": false,
+    "photoAlt": "Small stone Chapel of the Ascension on the Mount of Olives"
   },
   {
     "id": "mary-tomb",
@@ -252,7 +301,8 @@ export const jerusalemChurches:JerusalemChurch[] = [
     "lat": 31.780344,
     "lon": 35.239488,
     "photo": "/images/jerusalem/churches/tomb-of-virgin-mary.webp",
-    "feature": false
+    "feature": false,
+    "photoAlt": "Interior of the traditional Tomb of the Virgin Mary reached by descending stone stairs"
   },
   {
     "id": "dormition",
@@ -261,13 +311,16 @@ export const jerusalemChurches:JerusalemChurch[] = [
     "tradition": "Roman Catholic · Benedictine",
     "description": "An imposing basilica connected to the tradition of Mary's Dormition, with a circular sanctuary and distinctive tower.",
     "highlight": "Basilica, crypt and tower exterior",
-    "hours": "Mon–Sat 08:00–17:00; Sun 12:30–17:00",
+    "hours": "Mon–Sat 09:00–17:00; Sun 11:30–17:00 (basilica; special liturgies may alter access)",
     "admission": "Check special areas",
     "tip": "Prayer and monastery schedules can affect access to the crypt.",
     "lat": 31.772097,
     "lon": 35.228986,
     "photo": "/images/jerusalem/mount-zion/dormition-abbey-and-bell-tower.webp",
-    "feature": true
+    "feature": true,
+    "photoAlt": "Dormition Abbey and its bell tower on Mount Zion, Jerusalem",
+    "officialUrl": "https://dormitio.net/oeffnungszeiten/",
+    "officialLabel": "Dormition Abbey opening hours"
   },
   {
     "id": "gallicantu",
@@ -278,11 +331,14 @@ export const jerusalemChurches:JerusalemChurch[] = [
     "highlight": "Mosaics, archaeological spaces and views",
     "hours": "Mon–Sat 08:30–17:00; closed Sun; closed 25 Dec and 1 Jan",
     "admission": "Check on arrival",
-    "tip": "The ancient stairway is significant, but claims that Jesus certainly used it go beyond the evidence.",
+    "tip": "An accessible itinerary using inclined paths is available for visitors with reduced mobility; ask the sanctuary about suitable access and parking. Ancient steps remain uneven, and the claim that Jesus certainly used them exceeds the evidence.",
     "lat": 31.77139,
     "lon": 35.23194,
     "photo": "/images/jerusalem/mount-zion/st-peter-in-gallicantu.webp",
-    "feature": false
+    "feature": false,
+    "photoAlt": "Church of St Peter in Gallicantu on the slope of Mount Zion",
+    "officialUrl": "https://www.stpeter-gallicantu.org/Prepare-your-visit.html?lang=en",
+    "officialLabel": "St Peter official visitor information"
   },
   {
     "id": "cenacle",
@@ -297,7 +353,8 @@ export const jerusalemChurches:JerusalemChurch[] = [
     "lat": 31.771719,
     "lon": 35.229238,
     "photo": "/images/jerusalem/mount-zion/cenacle-upper-room.webp",
-    "feature": false
+    "feature": false,
+    "photoAlt": "Stone interior of the traditional Cenacle or Upper Room on Mount Zion"
   },
   {
     "id": "visitation",
@@ -312,7 +369,10 @@ export const jerusalemChurches:JerusalemChurch[] = [
     "lat": 31.76444,
     "lon": 35.15778,
     "photo": "/images/jerusalem/church-of-visitation.webp",
-    "feature": true
+    "feature": true,
+    "photoAlt": "Church of the Visitation on the hillside in Ein Karem, Jerusalem",
+    "officialUrl": "https://www.custodia.org/en/sanctuaries/ain-karem-visitation/",
+    "officialLabel": "Franciscan sanctuary information"
   },
   {
     "id": "john-baptist",
@@ -327,7 +387,10 @@ export const jerusalemChurches:JerusalemChurch[] = [
     "lat": 31.76806,
     "lon": 35.16306,
     "photo": "/images/jerusalem/churches/st-john-baptist-ein-karem.webp",
-    "feature": false
+    "feature": false,
+    "photoAlt": "Church of St John the Baptist in Ein Karem, Jerusalem",
+    "officialUrl": "https://www.custodia.org/en/sanctuaries/ain-karem-saint-john-the-baptist/",
+    "officialLabel": "Franciscan sanctuary information"
   }
 ];
 export const churchesSourceUrl = "https://www.cicts.org/our-services/";

@@ -39,9 +39,9 @@ const related = [
   {title:"Israel's calendar of events",to:"/travel-blog/calendar-of-events/" as const,text:"Religious dates and holidays that affect visits",photo:calendarPhoto,alt:"Calendar with dates highlighted"},
 ];
 const tours = [
-  {title:"Old City of Jerusalem guided walking tour",platform:"Viator",duration:"About 4 hours",text:"Guided walk through historic religious landmarks; verify which church interiors are included.",affiliateKey:"tour-jerusalem-old-city-walk-viator@tours-jerusalem",image:"/images/attractions/old-jerusalem-via-dolorosa.webp",alt:"Via Dolorosa street in Jerusalem"},
-  {title:"Private Jerusalem Old City walking tour",platform:"Viator",duration:"3–4 hours",text:"Private guiding through the Old City; confirm access to the Holy Sepulchre and other chapels.",affiliateKey:"tour-jerusalem-private-oldcity-walk-viator@tours-jerusalem",image:guideTourPhoto,alt:"Travelers on a guided Jerusalem tour"},
-  {title:"Bethlehem half-day guided tour from Jerusalem",platform:"GetYourGuide",duration:"About 4 hours",text:"A separate Bethlehem outing centred on the Nativity Church and nearby Christian sites.",affiliateKey:"tour-bethlehem-halfday-jerusalem-getyourguide@tours-bethlehem-jericho",image:bethlehemTourPhoto,alt:"Courtyard of the Church of the Nativity in Bethlehem"},
+  {title:"Old City of Jerusalem guided walking tour",platform:"Viator",duration:"About 4 hours",text:"Guided walk through historic religious landmarks; verify which church interiors are included.",affiliateKey:"churches-jerusalem-old-city-walk-viator",image:"/images/attractions/old-jerusalem-via-dolorosa.webp",alt:"Via Dolorosa street in Jerusalem",startingPriceUsd:55,rating:4.8,reviewCount:71},
+  {title:"Private Jerusalem Old City walking tour",platform:"Viator",duration:"3–4 hours",text:"Private guiding through the Old City; confirm access to the Holy Sepulchre and other chapels.",affiliateKey:"churches-jerusalem-private-oldcity-viator",image:guideTourPhoto,alt:"Travelers on a guided Jerusalem tour"},
+  {title:"Bethlehem half-day guided tour from Jerusalem",platform:"GetYourGuide",duration:"About 4 hours",text:"A separate Bethlehem outing centred on the Nativity Church and nearby Christian sites.",affiliateKey:"churches-jerusalem-bethlehem-halfday-gyg",startingPriceUsd:75,rating:4.8,reviewCount:610,image:bethlehemTourPhoto,alt:"Courtyard of the Church of the Nativity in Bethlehem"},
 ];
 const faqs = [
   {q:"Which churches are essential on a first visit to Jerusalem?",a:"For most first visits, I would prioritise the Church of the Holy Sepulchre and selected stops along the Via Dolorosa. Add Gethsemane on the Mount of Olives or Dormition Abbey on Mount Zion if your time and interests allow."},
@@ -63,13 +63,14 @@ function Tip({children}:{children:ReactNode}) {
   return <aside className="flex items-start gap-3 rounded-xl border border-amber-200 bg-amber-50/80 p-4 text-sm leading-relaxed text-amber-950"><Lightbulb className="mt-0.5 h-5 w-5 shrink-0 text-amber-600" aria-hidden="true"/><p>{children}</p></aside>;
 }
 function ChurchCard({church}:{church:JerusalemChurch}) {
-  const locationUrl="https://www.google.com/maps/search/?api=1&query="+encodeURIComponent(church.name+", Jerusalem, Israel");
+  const locationUrl=`https://www.google.com/maps/dir/?api=1&destination=${church.lat}%2C${church.lon}`;
   return <article id={"church-"+church.id} data-church-card="horizontal" className="scroll-mt-28 overflow-hidden rounded-2xl border bg-card shadow-sm">
     <div className="lg:grid lg:grid-cols-[minmax(0,1fr)_270px] lg:items-start lg:gap-6 lg:p-5">
       <figure className="min-w-0 bg-secondary/20 lg:col-start-2 lg:row-start-1 lg:overflow-hidden lg:rounded-xl">
         {church.photo
-          ? <img src={church.photo} alt={church.name+" in Jerusalem"} width={960} height={640} loading="lazy" decoding="async" className="h-48 w-full object-cover sm:h-56 lg:aspect-[4/3] lg:h-auto"/>
-          : <div data-church-photo-slot={church.id} aria-label={"Photograph of "+church.name+" to be added"} className="flex h-48 w-full items-center justify-center bg-secondary/50 sm:h-56 lg:aspect-[4/3] lg:h-auto"><Church className="h-12 w-12 text-primary/25" strokeWidth={1.25} aria-hidden="true"/></div>}
+          ? <img src={church.photo} alt={church.photoAlt} width={960} height={540} loading="lazy" decoding="async" className="aspect-[16/9] w-full bg-secondary/20 object-contain"/>
+          : <div data-church-photo-slot={church.id} aria-label={"Photograph of "+church.name+" to be added"} className="flex aspect-[16/9] w-full items-center justify-center bg-secondary/50"><Church className="h-12 w-12 text-primary/25" strokeWidth={1.25} aria-hidden="true"/></div>}
+      {church.photoSourceUrl && <figcaption className="px-2 py-1.5 text-xs text-muted-foreground"><details><summary className="cursor-pointer font-medium">Photo credit & licence</summary><span>{church.photoCredit ? church.photoCredit+" · " : "See original photographer and licence · "}</span><a className="underline" href={church.photoSourceUrl} target="_blank" rel="noopener noreferrer">Source</a>{church.photoLicenseUrl && <> · <a href={church.photoLicenseUrl} target="_blank" rel="noopener noreferrer" className="underline">Licence</a></>}</details></figcaption>}
       </figure>
       <div className="min-w-0 p-4 sm:p-5 lg:col-start-1 lg:row-start-1 lg:p-0">
         <p className="text-xs font-semibold uppercase tracking-wide text-primary">{church.tradition}</p>
@@ -89,7 +90,7 @@ function ChurchCard({church}:{church:JerusalemChurch}) {
     </div>
     <div className="flex flex-wrap items-center justify-between gap-3 border-t bg-secondary/10 px-4 py-4 sm:px-5 lg:px-6">
       <OutLink href={locationUrl}><MapPin className="h-3.5 w-3.5" aria-hidden="true"/> View on Google Maps</OutLink>
-      <OutLink href={churchesSourceUrl}>Check visiting hours</OutLink>
+      {church.officialUrl ? <OutLink href={church.officialUrl}>{church.officialLabel || "Church website"}</OutLink> : <OutLink href={churchesSourceUrl}>Published hours (CIC)</OutLink>}
     </div>
   </article>;
 }
@@ -118,8 +119,8 @@ function ChurchMap(){
         <div aria-label="Church areas and map colours" className="space-y-2 text-sm">{churchAreas.map(a=><div key={a.id} className="flex items-center gap-2"><span className="h-3.5 w-3.5 shrink-0 rounded-sm" style={{backgroundColor:a.color}} aria-hidden="true"/>{a.title}</div>)}</div>
         <div className="space-y-2"><label htmlFor="church-map-focus" className="block text-sm font-semibold">Find a church</label><select id="church-map-focus" className="min-h-11 w-full rounded-lg border bg-background p-2 text-sm" value={selected} onChange={e=>focus(e.target.value)}><option value="all">All churches</option>{churchAreas.map(a=><optgroup key={a.id} label={a.title}>{jerusalemChurches.filter(c=>c.area===a.id).map(c=><option key={c.id} value={c.id}>{c.name}</option>)}</optgroup>)}</select></div>
       </div>
-      <iframe ref={frame} title="Interactive map of 20 churches and Christian heritage sites in Jerusalem" src={mapUrl} width={900} height={445} loading="lazy" referrerPolicy="strict-origin-when-cross-origin" className="h-[360px] w-full border-0 sm:h-[445px]" onLoad={()=>{if(selected!=="all")frame.current?.contentWindow?.postMessage({type:"jerusalem-church-map-focus",id:selected},window.location.origin);}}/>
-      <div className="flex flex-wrap items-center justify-between gap-2 px-4 py-3 text-xs text-muted-foreground"><span>Map data © OpenStreetMap contributors. Locations are for orientation.</span>{focused&&<OutLink href={"https://www.google.com/maps/search/?api=1&query="+encodeURIComponent(focused.name+", Jerusalem, Israel")}>Directions to selected church</OutLink>}</div>
+      <iframe ref={frame} title="Interactive map of 20 churches and Christian heritage sites in Jerusalem" src={mapUrl} width={900} height={445} loading="lazy" referrerPolicy="strict-origin-when-cross-origin" className="h-[390px] w-full border-0 sm:h-[445px]" onLoad={()=>{if(selected!=="all")frame.current?.contentWindow?.postMessage({type:"jerusalem-church-map-focus",id:selected},window.location.origin);}}/>
+      <div className="flex flex-wrap items-center justify-between gap-2 px-4 py-3 text-xs text-muted-foreground"><span>Map data © OpenStreetMap contributors. Locations are for orientation.</span>{focused&&<OutLink href={`https://www.google.com/maps/dir/?api=1&destination=${focused.lat}%2C${focused.lon}`}>Directions to selected church</OutLink>}</div>
     </div>
   </section>;
 }
@@ -184,8 +185,11 @@ export function JerusalemChurchesGuide(){
       <div className="mt-5"><Tip><Link to="/travel-blog/calendar-of-events/" className="font-semibold text-primary underline">Israel's calendar of events</Link> is useful for understanding holiday and special-date changes. Church-specific schedules should still be checked directly with the relevant community.</Tip></div>
     </section>
     <section id="tours" aria-labelledby="tours-heading" className="mt-12 scroll-mt-24">
-      <Heading id="tours" title="Guided church and Christian heritage tours" intro="These external tours can help with context and navigation. Read the specific church stops, languages, departure city and entry conditions before booking."/>
-      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">{availableTours.map(t=><article key={t.url} className="flex flex-col overflow-hidden rounded-xl border bg-card"><img src={t.image} alt={t.alt} width={640} height={360} loading="lazy" decoding="async" className="aspect-[16/9] w-full object-cover"/><div className="flex flex-1 flex-col p-4"><p className="text-xs font-semibold uppercase text-primary">{t.platform}</p><h3 className="mt-2 text-lg font-semibold">{t.title}</h3><p className="mt-2 text-xs font-semibold text-muted-foreground">{t.duration}</p><p className="mt-2 text-sm leading-relaxed text-muted-foreground">{t.text}</p><div className="mt-auto pt-4"><OutLink href={t.url}>See dates and rates</OutLink></div></div></article>)}</div>
+      <Heading id="tours" title="Guided church and Christian heritage tours" intro="These external tours can help with context and navigation. Read the specific church stops, languages, departure city and entry conditions before booking. Price and review figures are provider snapshots from November 2026, not live quotes."/>
+      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">{availableTours.map(t=><article key={t.url} className="flex flex-col overflow-hidden rounded-xl border bg-card"><img src={t.image} alt={t.alt} width={640} height={360} loading="lazy" decoding="async" className="aspect-[16/9] w-full object-cover"/><div className="flex flex-1 flex-col p-4"><p className="text-xs font-semibold uppercase text-primary">{t.platform}</p><h3 className="mt-2 text-lg font-semibold">{t.title}</h3><p className="mt-2 text-xs font-semibold text-muted-foreground">{t.duration}</p>
+          {"startingPriceUsd" in t && typeof t.startingPriceUsd === "number" && <p className="mt-2 text-sm"><strong>From US${t.startingPriceUsd}</strong><span className="text-muted-foreground"> · previously listed</span></p>}
+          {"rating" in t && typeof t.rating === "number" && <p className="mt-1 text-sm text-muted-foreground">★ {t.rating.toFixed(1)}/5 ({t.reviewCount} reviews)</p>}<p className="mt-2 text-sm leading-relaxed text-muted-foreground">{t.text}</p><div className="mt-auto pt-4"><OutLink href={t.url}>See dates and rates</OutLink></div></div></article>)}</div>
+      <p className="mt-3 text-sm leading-relaxed text-muted-foreground">Starting prices and review counts are historical reference figures. Check current prices, availability and recent reviews with the booking provider before paying. The Bethlehem option is a separate excursion outside Jerusalem.</p>
       <p className="mt-3 text-sm leading-relaxed text-muted-foreground">For more guided options, browse my <Link to="/tours/jerusalem/" className="font-semibold text-primary underline">Jerusalem tours</Link>. My <Link to="/private-driver/" className="font-semibold text-primary underline">private driver service</Link> is transport, not automatically a licensed guiding service.</p>
     </section>
     <FaqList faqs={faqs}/>

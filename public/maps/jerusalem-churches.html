@@ -21,7 +21,7 @@
   </style>
 </head>
 <body>
-  <div id="map" role="region" aria-label="Map displaying twenty churches and cultural experiences in Jerusalem"></div>
+  <div id="map" role="region" aria-label="Interactive map of 20 Jerusalem churches and Christian heritage sites"></div>
   <div id="status" role="status" aria-live="polite">
     <p id="message">Loading church map…</p>
     <a id="fallback" href="https://www.google.com/maps/search/?api=1&amp;query=churches%20Jerusalem" target="_blank" rel="noopener noreferrer">See churches on Google Maps</a>
@@ -54,7 +54,7 @@
       }
 
       let map, popup, selectedId = null, ready = false, requestedId = null;
-      const bounds = [[35.149,31.751],[35.252,31.794]];
+      const bounds = [[35.149,31.751],[35.252,31.794]]; // Covers all four clusters including Ein Karem
       const areaColors = ["match",["get","area"],"old","#2563eb","olives","#15803d","zion","#b45309","karem","#9333ea","#2563eb"];
       const unavailable = () => {
         message.textContent = "The interactive map is temporarily unavailable.";
@@ -93,7 +93,7 @@
         name.textContent = point.name;
         content.appendChild(name);
         const link = document.createElement("a");
-        link.href = "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(point.name + ", Jerusalem, Israel");
+        link.href = "https://www.google.com/maps/dir/?api=1&destination=" + encodeURIComponent(point.lat + "," + point.lon);
         link.textContent = "View on Google Maps";
         link.target = "_blank";
         link.rel = "noopener noreferrer";

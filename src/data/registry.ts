@@ -1352,6 +1352,10 @@ export const AIRALO_COMPATIBILITY_AFFILIATE_URL = "https://tp.media/r?marker=622
 export const AIRALO_MENA_AFFILIATE_URL = "https://tp.media/r?marker=622032&trs=406243&p=8310&u=https%3A%2F%2Fwww.airalo.com%2Fmiddle-east-and-north-africa-esim%2Fmena-30days-5gb&campaign_id=541";
 
 export const affiliateConfig: Record<string, { trackingUrl: string } | undefined> = {
+  // Page-specific Travelpayouts tracking for the Jerusalem churches guide.
+  "churches-jerusalem-old-city-walk-viator": { trackingUrl: "https://viator.tpm.li/NfTH03Dg?sub_id=churches_jerusalem_old_city" },
+  "churches-jerusalem-private-oldcity-viator": { trackingUrl: "https://viator.tpm.li/WFfLsF8z?sub_id=churches_jerusalem_private" },
+  "churches-jerusalem-bethlehem-halfday-gyg": { trackingUrl: "https://getyourguide.tpm.li/gTSCNyuN?sub_id=churches_jerusalem_bethlehem" },
   "cars-discovercars": { trackingUrl: DISCOVERCARS_ISRAEL_AFFILIATE_URL },
   // API-generated Travelpayouts links for the Jerusalem-to-Dead-Sea guide.
   // Travelpayouts supports replacing a short link's original SubID via ?sub_id=.
