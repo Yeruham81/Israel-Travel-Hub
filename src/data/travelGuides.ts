@@ -1501,7 +1501,7 @@ const regionalGuideUpdateDates: Record<string, string> = {
   "dead-sea-attractions": deadSeaAttractionsUpdatedAt,
   "museums-in-jerusalem": "2026-11-20", // JerusalemMuseumsGuide editorial update date.
 };
-export const guideDirectory: GuideDirectoryEntry[] = [
+const guideDirectoryEntries: GuideDirectoryEntry[] = [
   ...itineraryIds.map((id): GuideDirectoryEntry => {
     const g = itineraries[id];
     return { id: `israel-itinerary-${id}`, title: g.title, description: g.description,
@@ -1523,7 +1523,11 @@ export const guideDirectory: GuideDirectoryEntry[] = [
   { id: "stay-deadsea", title: "Dead Sea hotels", description: "Choose Ein Bokek, a spa stay or a family hotel on the Israeli shore.", to: "/travel-blog/best-dead-sea-hotels/", topics: ["destinations", "accommodation"], photo: deadSeaStayGuide.photo, updatedAt: "2026-11-19" },
 // ISO YYYY-MM-DD dates sort lexically. Stable sort preserves existing order for
 // same-day updates and entries without a known editorial revision date.
-].sort((a, b) => (b.updatedAt ?? "").localeCompare(a.updatedAt ?? ""));
+ ];
+
+export const guideDirectory: GuideDirectoryEntry[] = guideDirectoryEntries.sort((a, b) =>
+  (b.updatedAt ?? "").localeCompare(a.updatedAt ?? "")
+);
 
 export function isGuideTopic(value: unknown): value is GuideTopicId { return typeof value === "string" && guideTopics.some((topic) => topic.id === value); }
 
