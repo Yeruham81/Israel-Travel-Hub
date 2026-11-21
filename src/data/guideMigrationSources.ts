@@ -1,6 +1,10 @@
 import type { SourceReference } from "@/data/registry";
 
 export const migrationSources: SourceReference[] = [
+  { id: "m26-ims", title: "Israel climate atlas and monthly climatology", publisher: "Israel Meteorological Service", url: "https://ims.gov.il/en/ClimateAtlas", checkedAt: "2026-11-21", note: "Official monthly climate maps support regional and seasonal patterns; suitability ratings are editorial guidance, not forecasts." },
+  { id: "m26-ims-warnings", title: "Official severe weather and flash flood warnings", publisher: "Israel Meteorological Service", url: "https://ims.gov.il/en/warning", checkedAt: "2026-11-21", note: "Weather warnings may change rapidly; consult directly before desert walks or outdoor journeys." },
+  { id: "m26-hebcal", title: "Jewish holidays in Israel (annual dates)", publisher: "Hebcal", url: "https://www.hebcal.com/holidays/?i=on", checkedAt: "2026-11-21", note: "Use the Israel setting and specific travel year. Dates shift relative to the Gregorian calendar." },
+  { id: "m26-parks", title: "National parks visitor information and alerts", publisher: "Israel Nature and Parks Authority", url: "https://en.parks.org.il/", checkedAt: "2026-11-21", note: "Official national park guidance and visitor notices. Check each park for restrictions and closures." },
   { id: "m26-rubin", title: "Rubin Museum visitor information", publisher: "Rubin Museum", url: "https://rubinmuseum.org.il/en/company/visit/main/", checkedAt: "2026-11-19", note: "Official artist-house museum visitor page and location on Bialik Street." },
   { id: "m26-liebling", title: "Liebling Haus, the White City Center", publisher: "Liebling Haus", url: "https://www.lieblinghaus.org/whoarewe-en", checkedAt: "2026-11-19", note: "Official information on the free-entry architecture centre." },
   { id: "m26-bialik", title: "Bialik House visitor information", publisher: "Bialik House", url: "https://www.bialikmuseum.org.il/pages?pageid=14", checkedAt: "2026-11-19", note: "Official visitor information for the poet's historic house." },
