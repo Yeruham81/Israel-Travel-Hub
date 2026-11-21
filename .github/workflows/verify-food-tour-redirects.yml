@@ -1,0 +1,28 @@
+name: Check food-tour Travelpayouts clickouts
+on:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/verify-food-tour-redirects.yml"
+permissions:
+  contents: read
+jobs:
+  verify:
+    if: contains(github.event.head_commit.message, '[audit-food-tours]')
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+      - run: node scripts/verify-food-tour-clickouts.cjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: food-tour-clickout-redirects
+          path: /tmp/food-tour-clickouts.json
+          if-no-files-found: warn
+          retention-days: 7
