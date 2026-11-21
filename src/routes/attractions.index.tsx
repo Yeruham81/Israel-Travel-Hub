@@ -115,7 +115,7 @@ function Attractions() {
               <p className="mt-1.5 max-w-3xl text-sm leading-relaxed text-muted-foreground sm:text-base">{region.summary}</p>
             </div>
           </div>
-          <div className="mt-3 grid gap-3 sm:mt-4 sm:grid-cols-2 sm:gap-4 xl:grid-cols-3">
+          <div className={region.cards.length === 6 ? "mt-3 grid grid-cols-2 gap-3 sm:mt-4 sm:gap-4 lg:grid-cols-3" : "mt-3 grid gap-3 sm:mt-4 sm:grid-cols-2 sm:gap-4 xl:grid-cols-3"}>
             {region.cards.map((card) => <AttractionCard key={card.id} card={card} />)}
           </div>
           {region.relatedGuides.length > 0 && (

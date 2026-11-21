@@ -284,14 +284,14 @@ export function IsraelItineraryPage({ id }: { id: ItineraryId }) {
     <FaqList faqs={g.faqs} />
     {g.relatedGuides?.length ? <section id="related-guides" aria-labelledby="related-guides-h" className="mt-14 scroll-mt-28">
       <h2 id="related-guides-h" className="text-3xl">Related practical guides</h2>
-      <div className="mt-5 grid gap-3 sm:grid-cols-2">
+      <div className={g.relatedGuides.length === 6 ? "mt-5 grid grid-cols-2 gap-3 lg:grid-cols-3" : "mt-5 grid gap-3 sm:grid-cols-2"}>
         {g.relatedGuides.map((item) => {
           const picture = migrationPhotos[item.image];
           return <article key={item.to} className="overflow-hidden rounded-xl border bg-card">
-            <Link to={item.to} className="group grid h-full grid-cols-[108px_minmax(0,1fr)] items-start gap-3 hover:bg-secondary/30 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary sm:grid-cols-[116px_minmax(0,1fr)]">
+            <Link to={item.to} className="group grid h-full grid-cols-1 items-start gap-3 hover:bg-secondary/30 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary sm:grid-cols-[116px_minmax(0,1fr)]">
               <img src={picture.src} alt={picture.alt} width={220} height={180} loading="lazy" decoding="async"
-                className="h-full min-h-28 w-full object-cover" />
-              <span className="min-w-0 py-3 pr-3">
+                className="aspect-[3/2] h-auto w-full object-cover sm:aspect-auto sm:h-full sm:min-h-28" />
+              <span className="min-w-0 px-3 pb-3 sm:py-3 sm:pl-0 sm:pr-3">
                 <span className="block text-sm font-semibold text-primary underline-offset-2 group-hover:underline">{item.title}</span>
                 <span className="mt-1.5 block text-xs leading-relaxed text-muted-foreground">{item.description}</span>
                 <span className="mt-2 inline-flex items-center gap-1 text-xs font-semibold text-primary">Read guide <ArrowRight className="h-3 w-3" aria-hidden /></span>

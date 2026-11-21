@@ -85,7 +85,7 @@ export function TourCategoryPage({ id, filters: rawFilters, onChange }: { id: To
       <section aria-labelledby={localHeadingId} className="mt-12">
         <h2 id={localHeadingId} className="text-2xl font-semibold">Explore {cityName} further</h2>
         <p className="mt-2 text-sm text-muted-foreground">{id === "masada-dead-sea" ? "Plan your fortress visit, check nature-trail access, discover desert attractions and choose a place to stay." : id === "bethlehem-jericho" ? "Plan your Bethlehem visit, understand the Qasr al-Yahud site and check practical travel arrangements for the Jordan Valley." : id === "nazareth-galilee" ? "Explore Nazareth’s main church, lakeside Christian heritage sites and the Jordan River baptismal stop near the Kinneret." : id === "northern-coast" ? "Plan visits to Caesarea’s Roman ruins, Haifa’s gardens and museums, Akko’s Old City and the northern sea grottoes." : id === "negev-ramon" ? "Prepare for your desert visit, with related trip ideas and practical planning guides for southern Israel." : id === "golan-heights" ? "Explore nearby northern destinations and plan how to fit a Golan day into a larger Galilee journey." : id === "food-markets" ? "Explore Israeli food traditions, historic markets and nearby neighborhoods before your tasting walk." : id === "eilat-red-sea" ? "Plan your Red Sea stay and separate southern Israel excursions with practical guides." : `Find places to visit, neighborhoods to explore and more ways to enjoy ${cityName}.`}</p>
-        <div className="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        <div className={localCards.length === 6 ? "mt-4 grid grid-cols-2 gap-4 lg:grid-cols-3" : "mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-3"}>
           {localCards.map(item => <Link key={item.to} to={item.to} className="group flex h-full min-w-0 flex-col overflow-hidden rounded-xl border bg-card transition-colors hover:border-primary hover:shadow-sm focus-visible:outline-2 focus-visible:outline-primary">
             <img src={item.photo.src} alt={item.photo.alt} width={320} height={176} loading="lazy" decoding="async" className="aspect-[16/9] w-full object-cover" />
             <span className="flex flex-1 flex-col p-3.5">
@@ -99,10 +99,10 @@ export function TourCategoryPage({ id, filters: rawFilters, onChange }: { id: To
       <section aria-labelledby={planningHeadingId} className="mt-12">
         <h2 id={planningHeadingId} className="text-2xl font-semibold">Practical guides for your trip to Israel</h2>
         <p className="mt-2 text-sm text-muted-foreground">Helpful information for planning your visit beyond {cityName}.</p>
-        <div className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+        <div className={jerusalemTourPlanningCards.length === 6 ? "mt-4 grid grid-cols-2 gap-3 lg:grid-cols-3" : "mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-3"}>
           {jerusalemTourPlanningCards.map(item => {
             const Icon = jerusalemPlanningIcons[item.icon];
-            return <Link key={item.to} to={item.to} className="group flex min-w-0 items-start gap-3 rounded-xl border bg-secondary/25 p-3.5 transition-colors hover:border-primary hover:bg-secondary/50 focus-visible:outline-2 focus-visible:outline-primary">
+            return <Link key={item.to} to={item.to} className="group flex min-w-0 flex-col items-start gap-3 rounded-xl border bg-secondary/25 sm:flex-row p-3.5 transition-colors hover:border-primary hover:bg-secondary/50 focus-visible:outline-2 focus-visible:outline-primary">
               <span className="grid h-10 w-10 shrink-0 place-items-center rounded-lg bg-background text-primary"><Icon size={20} aria-hidden="true" /></span>
               <span className="min-w-0">
                 <span className="block text-sm font-semibold text-foreground group-hover:text-primary">{item.title}</span>
