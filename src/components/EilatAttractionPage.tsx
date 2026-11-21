@@ -152,7 +152,7 @@ export const eilatDestinationContent: AttractionDestinationContent = {
   highlightContent: <div className="mt-4 space-y-5" data-testid="eilat-attractions-highlights">
     <p>The city's two biggest advantages are the marine life just offshore and the contrasting desert landscapes. The following are my priorities for a first visit, beginning in the city and moving south along the coast before heading into the mountains.</p>
     <AttractionHighlight title="Coral Beach Nature Reserve" image={{ src: photos.reserve, alt: "Clear turquoise water over coral formations at Eilat Coral Beach Nature Reserve" }}>
-      <p>This protected reef is among Eilat's main snorkeling spots. Marked access points help visitors enter the water without trampling coral, and the reserve has beach facilities. Entry is paid; compare the current visitor rules and time slots on the {sourcesLink(official.coralReserve, "Israel Nature and Parks Authority website")}.</p>
+      <p>This protected reef is among Eilat's main snorkeling spots. Marked access points help visitors enter the water without trampling coral, and the reserve has beach facilities. Entry is paid; check the current visitor rules, capacity and advance reservation advice on the {sourcesLink(official.coralReserve, "Israel Nature and Parks Authority website")}.</p>
       <p><strong>Best for:</strong> confident swimmers and travelers who want to see colorful fish and coral while following marine-protection rules. Swimming ability, sea conditions and suitable footwear matter.</p>
       {placeLink("Coral Beach Nature Reserve, Eilat, Israel")}
     </AttractionHighlight>
@@ -163,7 +163,7 @@ export const eilatDestinationContent: AttractionDestinationContent = {
     </AttractionHighlight>
     <AttractionHighlight title="Dolphin Reef" image={{ src: photos.dolphin, alt: "Dolphin swimming alongside a diver at Dolphin Reef in Eilat" }}>
       <p>At this separate coastal attraction you can watch dolphins from observation platforms and enjoy the shoreline. Guided snorkeling and introductory diving are optional activities with separate requirements and reservations.</p>
-      <p>Dolphin sightings are <strong>not guaranteed</strong>; the animals are free to approach or stay away. Consult the {sourcesLink(official.dolphinReef, "official Dolphin Reef visit information")} and the {sourcesLink(official.dolphinSwim, "activity rules")} before booking.</p>
+      <p>Dolphin sightings are <strong>not guaranteed</strong>; the animals are free to approach or stay away. Consult the {sourcesLink(official.dolphinReef, "official Dolphin Reef visit information")} and the {sourcesLink(official.dolphinSwim, "activity rules")} before booking. Guided snorkeling is intended for ages 10 and above and confident swimmers, subject to the operator’s conditions.</p>
       {placeLink("Dolphin Reef, Eilat, Israel")}
     </AttractionHighlight>
     <AttractionHighlight title="North Beach, the promenade and marina" image={{ src: waterfrontPhoto, alt: "Eilat Red Sea waterfront and marina area" }}>
