@@ -46,9 +46,15 @@ describe("shared ordinary tour catalog", () => {
         const visible = filterTours(category.id, { q: query }).filter(item => !isOwnerTour(item));
         return { categoryId: category.id, query, visible };
       })
-    ).find(item => item.visible.length > 0 && item.visible.length % 3 === 2);
-    expect(candidate, "At least one tour category should have a filter leaving two cards in the final three-column row").toBeDefined();
-    const router = await renderPage(`${tourCategoryPaths[candidate!.categoryId]}?q=${encodeURIComponent(candidate!.query)}`);
+    ).find(item => item.visible.length > 0 && item.visible.length % 3 === 2)
+    // An unfiltered catalog also needs to balance a final row of two cards.
+    ?? tourCategories.map(category => ({
+      categoryId: category.id,
+      query: "",
+      visible: toursForCategory(category.id).filter(tour => !isOwnerTour(tour)),
+    })).find(item => item.visible.length % 3 === 2);
+    expect(candidate, "At least one catalog should leave two cards in the final three-column row").toBeDefined();
+    const router = await renderPage(`${tourCategoryPaths[candidate!.categoryId]}${candidate!.query ? "?q=" + encodeURIComponent(candidate!.query) : ""}`);
     const grid = screen.getByRole("list", { name: "External tours" });
     expect(within(grid).getAllByTestId("tour-card")).toHaveLength(candidate!.visible.length);
     expect(grid).toHaveClass("lg:grid-cols-3");
