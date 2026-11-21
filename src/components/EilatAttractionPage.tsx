@@ -40,14 +40,18 @@ const photos = {
   watersports: "/images/attractions/eilat-water-sports.webp",
 } as const;
 
+/** Selected product-specific partner listings; prices and ratings are non-live editorial snapshots. */
 const partnerTours = [
   {
     id: "glass-bottom",
     key: "tour-eilat-glass-bottom-boat-getyourguide@tours-eilat-red-sea",
     provider: "GetYourGuide",
     title: "Glass-bottom boat on the Red Sea",
-    text: "An easy way to see the gulf from the water, with underwater windows on the advertised boat. Check the exact route, visibility and departure point.",
-    meta: "Boat trip · No diving experience needed",
+    text: "A two-hour cruise with underwater windows. Check the advertised boat, departure point, sea visibility and weather arrangements.",
+    duration: "About 2 hours",
+    startingPrice: "From US$24 per person",
+    photo: "/images/attractions/eilat-water-sports.webp",
+    photoAlt: "Eilat marina and moored boats, illustrating local Red Sea cruises",
     subId: "attractions_eilat_glass_bottom",
   },
   {
@@ -55,17 +59,23 @@ const partnerTours = [
     key: "tour-eilat-snorkeling-viator@tours-eilat-red-sea",
     provider: "Viator",
     title: "Guided Red Sea snorkeling",
-    text: "Join a supervised snorkeling activity if you want help choosing a safe entry point and learning about local marine life. Check minimum ages and swimming ability.",
-    meta: "Water activity · Sea conditions matter",
+    text: "An instructor-led reef experience with separate briefing and swimming time. Check meeting details, age limits and equipment.",
+    duration: "Around 1½ hours total",
+    photo: "/images/attractions/eilat-snorkeling-coral.webp",
+    photoAlt: "Underwater corals in the Gulf of Eilat",
     subId: "attractions_eilat_snorkeling",
   },
   {
     id: "red-canyon",
     key: "tour-eilat-red-canyon-jeep-viator@tours-eilat-red-sea",
     provider: "Viator",
-    title: "Red Canyon desert jeep experience",
-    text: "Explore the scenery beyond the resort area. Confirm that the itinerary includes the canyon itself, the amount of walking and current trail conditions.",
-    meta: "Desert excursion · Operator-led route",
+    title: "Red Canyon jeep and hiking tour",
+    text: "A jeep outing with walking in the desert. Confirm the amount of hiking, ladders, conditions and route before booking.",
+    duration: "About 3¾–4 hours",
+    startingPrice: "From US$98 per person",
+    rating: "4.8/5 · 34 reviews",
+    photo: "/images/attractions/eilat-mountains-tour.webp",
+    photoAlt: "Landscape of the Eilat Mountains illustrating the wider desert tour region",
     subId: "attractions_eilat_red_canyon",
   },
 ] as const;
@@ -81,16 +91,23 @@ function EilatPartnerTours() {
   });
   if (!tours.length) return null;
   return <div data-testid="eilat-affiliate-tour-cards" className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-    {tours.map(tour => <article key={tour.id} className="flex min-w-0 flex-col rounded-xl border bg-card p-4 shadow-sm">
-      <p className="text-xs font-bold uppercase tracking-wide text-muted-foreground">{tour.provider}</p>
-      <h3 className="mt-2 font-serif text-lg font-semibold leading-snug">{tour.title}</h3>
-      <p className="mt-2 flex-1 text-sm leading-relaxed text-muted-foreground">{tour.text}</p>
-      <p className="mt-3 text-xs font-semibold text-foreground">{tour.meta}</p>
-      <a href={tour.href} target="_blank" rel="sponsored noopener noreferrer"
-        onClick={() => recordOutboundClick({ pageId: "attractions-eilat", productId: tour.id, offerId: tour.key })}
-        className="mt-3 inline-flex min-h-10 items-center justify-center gap-2 rounded-lg border border-primary/40 px-3 py-2 text-center text-sm font-semibold text-primary transition-colors hover:bg-secondary">
-        Check tour & availability <ArrowUpRight className="h-4 w-4" aria-hidden="true"/>
-      </a>
+    {tours.map(tour => <article key={tour.id} className="flex min-w-0 flex-col overflow-hidden rounded-xl border bg-card shadow-sm">
+      <img src={tour.photo} alt={tour.photoAlt} width={640} height={360} loading="lazy" decoding="async" className="aspect-video w-full object-cover" />
+      <div className="flex flex-1 flex-col p-4">
+        <p className="text-xs font-bold uppercase tracking-wide text-muted-foreground">{tour.provider}</p>
+        <h3 className="mt-1 font-serif text-lg font-semibold leading-snug">{tour.title}</h3>
+        <p className="mt-2 flex-1 text-sm leading-relaxed text-muted-foreground">{tour.text}</p>
+        <div className="mt-3 space-y-1 text-sm">
+          <p className="flex items-center gap-1.5 font-semibold text-foreground"><Clock3 className="size-4 text-primary" aria-hidden="true"/>{tour.duration}</p>
+          {"startingPrice" in tour && tour.startingPrice && <p className="font-semibold text-foreground">{tour.startingPrice}</p>}
+          {"rating" in tour && tour.rating && <p className="text-muted-foreground" aria-label={"Rating " + tour.rating}>★ {tour.rating}</p>}
+        </div>
+        <a href={tour.href} target="_blank" rel="sponsored noopener noreferrer"
+          onClick={() => recordOutboundClick({ pageId: "attractions-eilat", productId: tour.id, offerId: tour.key })}
+          className="mt-3 inline-flex min-h-10 items-center justify-center gap-2 rounded-lg border border-primary/40 px-3 py-2 text-center text-sm font-semibold text-primary transition-colors hover:bg-secondary">
+          Check tour & availability <ArrowUpRight className="h-4 w-4" aria-hidden="true"/>
+        </a>
+      </div>
     </article>)}
   </div>;
 }
@@ -288,7 +305,7 @@ export const eilatDestinationContent: AttractionDestinationContent = {
   tourContent: <div className="mt-4 space-y-4">
     <p>Prefer a booked activity? These are three different ways to experience Eilat, selected from existing Viator and GetYourGuide listings. They are provided by independent operators, not by me. Availability, exact meeting points and whether the activity is running must be confirmed with the provider.</p>
     <EilatPartnerTours/>
-    <p className="text-xs leading-relaxed text-muted-foreground">The booking links use Travelpayouts affiliate tracking. No live price, rating, departure availability or booking confirmation is displayed here; check the provider's details before purchasing.</p>
+    <p className="text-xs leading-relaxed text-muted-foreground">Prices and ratings, where shown, are published provider snapshots checked November 2026, not live quotes. Confirm current availability, inclusions, cancellation terms, reviews and the total before purchasing.</p>
     <p>For a wider choice, <Link to="/tours/eilat-red-sea/" className={inlineLink}>explore all Eilat & Red Sea tours</Link>. If your priority is transport to several attractions rather than an organised group activity, use the inquiry form below.</p>
   </div>,
   faqs: [
