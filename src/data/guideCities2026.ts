@@ -310,11 +310,11 @@ export const cityCultureGuides = {
   },
   "haifaMuseums": {
     "id": "haifaMuseums",
-    "updatedAt": "2026-10-20",
-    "title": "Best museums in Haifa: art, science, ships and city history",
-    "description": "Compare Haifa’s art, maritime, Japanese-art, science, city-history and railway museums. Plan by hillside location and distinguish museums from garden visits.",
-    "intro": "Haifa’s museum day changes with the subject and the hill. Contemporary art, Japanese art, maritime collections and science experiences are spread between downtown, the German Colony, the Carmel and the waterfront. Choose an area and one main institution, then use the actual terrain and transport connections to decide what else fits.",
-    "answer": "Compare Haifa Museum of Art for contemporary art, Tikotin for Japanese art, the National Maritime Museum for seafaring and MadaTech for science experiences. Haifa City Museum adds local urban history. Check the specific institution’s current programme and hours; a Haifa Museums bundle does not mean every museum or attraction in the city is included.",
+    "updatedAt": "2026-11-21",
+    "title": "Best Museums in Haifa: Visitor Guide to Art, Science and History",
+    "description": "My guide to Haifa’s best museums: opening times, admission, maps, tickets and family tips, with realistic routes from downtown to the Carmel and waterfront.",
+    "intro": "Plan your museum day in Haifa with my practical recommendations for science, contemporary art, archaeology, Japanese art and maritime heritage.",
+    "answer": "Choose MadaTech for families, Haifa Museum of Art or Tikotin for art, the Hecht Museum for archaeology, and the National Maritime Museum for seafaring. My updated guide compares ten institutions by location, admission and opening arrangements, with a note on the temporary closure of Mané-Katz Museum.",
     "topics": [
       "attractions",
       "destinations",
