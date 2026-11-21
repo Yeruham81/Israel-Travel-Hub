@@ -259,4 +259,5 @@ export const planningGuides = {
     "related": ["bestTime","shabbat","jerusalem","israel"],
     "services": [{"label":"Check exact Israel holiday dates","to":"/travel-blog/israel-holidays/"},{"label":"Plan private transport","to":"/private-driver/"}],
     "sourceIds": ["israel-rail","guide-iaa"]
-  }} satisfies Record<string, TravelGuide>;
+  }
+} satisfies Record<string, TravelGuide>;
