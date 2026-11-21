@@ -53,25 +53,6 @@ describe("migrated practical guides", () => {
       id === "jerusalemChurches" ? "Churches in Jerusalem" : guide.title
     );
     if (id === "jerusalemChurches") {
-      expect(container.querySelector("#choose")).not.toBeNull();
-      expect(container.querySelector("#church-map")).not.toBeNull();
-      expect(container.querySelector("#church-holy-sepulchre")).not.toBeNull();
-      expect(container.querySelectorAll("#explore-more a")).toHaveLength(6);
-      expect(container.querySelectorAll("#contact")).toHaveLength(1);
-      expect(container.querySelector("time")).toHaveAttribute("datetime", guide.updatedAt);
-      const head = await route.options.head?.({} as never);
-      expect(head).toMatchObject({meta: expect.arrayContaining([
-        {title: guide.title},
-        {name: "description", content: guide.description},
-        {name: "robots", content: "noindex,nofollow"},
-      ])});
-      const article = head!.scripts!.flatMap(script =>
-        typeof script?.children === "string" ? [JSON.parse(script.children)] : []
-      ).find(item => item["@type"] === "Article");
-      expect(article).toMatchObject({headline: guide.title, dateModified: guide.updatedAt, inLanguage: "en"});
-      return;
-    }
-    if (id === "jerusalemChurches") {
       // The dedicated church guide uses a horizontal museum-style layout, with
       // twenty illustrated site cards, four area groups and a selectable map.
       expect(container.querySelectorAll('article[data-church-card="horizontal"]')).toHaveLength(20);
