@@ -18,6 +18,7 @@ import { reportLovableError } from "../lib/lovable-error-reporting";
 import { SiteHeader, SiteFooter, SiteSidebar } from "@/components/Layout";
 import { HomeHero } from "@/components/HomeHero";
 import { CurrencyRatesProvider } from "@/components/CurrencyRates";
+import { FloatingContactButton } from "@/components/FloatingContactButton";
 
 function NotFoundComponent() {
   return (
@@ -141,6 +142,7 @@ function RootComponent() {
         </div>
       </Content>
       <SiteFooter />
+      <FloatingContactButton />
       </CurrencyRatesProvider>
     </QueryClientProvider>
   );
