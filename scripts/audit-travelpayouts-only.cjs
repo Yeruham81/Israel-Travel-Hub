@@ -146,6 +146,9 @@ async function publishedAudit(){
   await Promise.all(Array.from({length:4},()=>worker()));
   await browser.close();
   review.push(...found);
+  // A commercial booking CTA must use a Travelpayouts link, even if it does not
+  // yet carry rel="sponsored" (the main purpose of this regression guard).
+  if(found.length)failures.push({reason:"Untracked commercial CTAs remain",count:found.length,examples:found.slice(0,12)});
   console.log("PUBLISHED_AUDIT",JSON.stringify({sitemapCandidates:candidate.size,stats,failures:failures.slice(0,40),review:review.slice(0,70)}));
   if(stats.pages===0)failures.push({reason:"Published site could not be inspected"});
   if(stopped || stats.pageErrors>0 || stats.pages < candidate.size)failures.push({reason:"Published page coverage incomplete",pages:stats.pages,candidates:candidate.size,pageErrors:stats.pageErrors,rateLimited:stopped});
