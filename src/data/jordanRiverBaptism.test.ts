@@ -32,10 +32,24 @@ describe("Jordan River baptism comparison guide",()=>{
       expect(url).not.toBe(offer?.publicUrl);
     }
   });
+  it("only displays supplier-verified review snapshots and an explicitly checked USD price",()=>{
+    const verifiedIds=offers.map(item=>item.id);
+    for(const id of verifiedIds) {
+      const product=tourProducts.find(product=>product.id===id);
+      expect(product?.rating?.checkedAt).toBe("2026-11-21");
+      expect(product?.rating?.count).toBeGreaterThan(0);
+      const exactOffer=tourBookingOffers.find(offer=>offer.productId===id && offer.partnerId === (offers.find(x=>x.id===id)!.provider));
+      expect(product?.rating?.sourceUrl).toBe(exactOffer?.publicUrl);
+    }
+    const snapshot=tourBookingOffers.find(o=>o.productId==="bethlehem-jericho-qasr-small-group" && o.partnerId==="viator");
+    expect(snapshot?.listedPrice).toMatchObject({amount:471.43,currency:"USD",basis:"per_person",checkedAt:"2026-11-21",kind:"published_snapshot"});
+    expect(offers.filter(x=>x.id!=="bethlehem-jericho-qasr-small-group").every(entry=>!tourBookingOffers.find(o=>o.productId===entry.id&&o.partnerId===entry.provider)?.listedPrice)).toBe(true);
+  });
   it("uses exact primary destination hero photos for all three special attraction pages",()=>{
     expect(guideHeroPhotoForPath("/attractions/yardenit/")).toEqual(yardenitSite.hero);
     expect(guideHeroPhotoForPath("/attractions/qasr-el-yahud/")).toEqual(qasrElYahudSite.hero);
     expect(guideHeroPhotoForPath("/attractions/magdala/")).toEqual(magdalaSite.hero);
+    expect(guideHeroPhotoForPath("/travel-blog/christian-tours-in-israel/")?.src).toBeTruthy();
   });
   it("answers substantive baptism and access questions using authoritative sources",()=>{
     expect(baptismFaqs.length).toBeGreaterThanOrEqual(9);
@@ -44,5 +58,8 @@ describe("Jordan River baptism comparison guide",()=>{
     expect(baptismSources.some(s=>s.url.includes("parks.org.il"))).toBe(true);
     expect(baptismSources.some(s=>s.url.includes("yardenit.com"))).toBe(true);
     expect(baptismSources.some(s=>s.url.includes("whc.unesco.org"))).toBe(true);
+    expect(baptismSources.some(s=>s.url.includes("inmaa.mod.gov.il"))).toBe(true);
+    expect(baptismSources.some(s=>s.label.includes("reservation system"))).toBe(true);
+    expect(baptismSources.some(s=>s.url.includes("/ceremony/"))).toBe(false);
   });
 });

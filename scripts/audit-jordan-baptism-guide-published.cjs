@@ -56,6 +56,12 @@ async function snapshot(page,label,desktop){
    photos:photos.map(img=>({src:img.getAttribute("src"),loaded:img.complete&&img.naturalWidth>0,alt:img.getAttribute("alt")})),
    faq:all("#faq details").length,structuredFAQ:structured.includes('"FAQPage"'),structuredArticle:structured.includes('"Article"'),
    map:document.querySelector('[data-testid="baptism-comparison-map"] iframe')?.getAttribute("src"),
+   reservation:document.querySelector('[data-testid="qasr-reservation-cta"]')?.getAttribute("href"),
+   safety:document.querySelector('[data-testid="qasr-access-safety"]')?.textContent,
+   yardenitRules:document.getElementById("yardenit")?.textContent,
+   relatedChristian:!!document.querySelector('#related a[href="/travel-blog/christian-tours-in-israel/"]'),
+   ratingCount:all('[data-testid="baptism-tour-rating"]').length,
+   pricedTours:all('a[data-testid="baptism-tour-card"]').filter(el=>el.textContent?.includes("US$471.43")).length,
    contactForm:!!contact?.querySelector("form"),portrait:!!contact?.querySelector('[data-photo-role="contact-portrait"]'),
    sourcesAfterContact:!!(contact&&source&&(contact.compareDocumentPosition(source)&Node.DOCUMENT_POSITION_FOLLOWING)),
    missingAlt:all("main img:not([alt])").map(el=>el.getAttribute("src")),
@@ -77,6 +83,11 @@ async function snapshot(page,label,desktop){
  verify(data.linkedPages.includes("/attractions/yardenit/")&&data.linkedPages.includes("/attractions/qasr-el-yahud/"),label+": exact site links");
  verify(data.faq===10&&data.structuredFAQ&&data.structuredArticle,label+": FAQ and Article structured data");
  verify(data.map?.includes("maps.google.com/maps?")&&data.map.includes("Yardenit")&&data.map.includes("Qasr"),label+": two-site map and directions");
+ verify(data.reservation?.includes("en.parks.org.il")&&data.reservation?.includes("qasr-al-yahud"),label+": official free visit reservation CTA");
+ verify(data.safety?.includes("minefields")&&data.safety?.includes("authorised")&&data.safety?.includes("fences"),label+": precise monastery-area safety guidance");
+ verify(data.yardenitRules?.includes("up to 40 people")&&data.yardenitRules?.includes("larger than 40"),label+": Yardenit advance coordination split");
+ verify(data.relatedChristian,label+": Christian Tours guide card replaces Haifa");
+ verify(data.ratingCount===6&&data.pricedTours===1,label+": six sourced supplier ratings and one verified USD price",JSON.stringify({ratings:data.ratingCount,verifiedPrices:data.pricedTours}));
  verify(data.contactForm&&data.portrait&&data.sourcesAfterContact,label+": author contact form and footer sources");
  verify(data.missingAlt.length===0&&data.width<=data.viewport+8,label+": accessible photos and no horizontal overflow",JSON.stringify({missingAlt:data.missingAlt,width:data.width,viewport:data.viewport}));
  return data;
