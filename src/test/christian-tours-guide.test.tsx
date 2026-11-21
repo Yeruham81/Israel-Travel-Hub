@@ -27,23 +27,42 @@ describe("Christian tours in Israel editorial guide",()=>{
     expect(new Set(christianAreas.map(a=>a.id)).size).toBe(7);
     expect(christianAreas.flatMap(a=>a.sites).length).toBeGreaterThan(17);
     expect(christianRoutes.map(r=>r.time)).toEqual(["1 day","2 days","4 days","7 days"]);
+    expect(christianRoutes.map(r=>r.mapLegs.length)).toEqual([1,2,4,5]);
+    for(const route of christianRoutes){
+      for(const leg of route.mapLegs){
+        expect(leg.origin).toBeTruthy();
+        expect(leg.destination).toBeTruthy();
+        expect(["walking","driving"]).toContain(leg.mode);
+      }
+    }
+    expect(christianAreas.find(a=>a.id==="bethlehem")?.sites.every(s=>s.officialUrl&&s.mapPlace)).toBe(true);
+    expect(christianAreas.find(a=>a.id==="carmel")?.sites.every(s=>s.officialUrl&&s.mapPlace)).toBe(true);
     expect(christianFaqs.length).toBeGreaterThanOrEqual(8);
     expect(christianSiteCards).toHaveLength(6);
     expect(christianPlanningCards).toHaveLength(6);
     expect(page).toContain("Google Maps");
+    expect(page).toContain('query.set("waypoints",leg.waypoints.join("|"))');
+    expect(page).toContain("site.officialUrl");
     expect(page).toContain("West Bank");
     expect(data).toContain("not the same traditional location");
     expect(data).toContain("separate half- or full-day visit");
   });
   it("links exactly six product-specific tours through Travelpayouts with page-specific attribution",()=>{
     expect(christianOffers).toHaveLength(6);
-    expect(christianOffers.filter(t=>t.group==="south")).toHaveLength(3);
-    expect(christianOffers.filter(t=>t.group==="north")).toHaveLength(3);
+    const south=christianOffers.filter(t=>t.group==="south");
+    const north=christianOffers.filter(t=>t.group==="north");
+    expect(south).toHaveLength(3);
+    expect(north).toHaveLength(3);
+    expect(south.map(t=>t.id)).toContain("baptism-jericho");
+    expect(north.map(t=>t.id)).toContain("nazareth-yardenit");
+    expect(north.map(t=>t.id)).not.toContain("baptism-jericho");
+    expect(christianOffers.every(t=>!("startingPriceUsd" in t || "rating" in t || "reviews" in t))).toBe(true);
     for(const offer of christianOffers){
       expect(affiliateConfig[offer.affiliateKey]?.trackingUrl,offer.affiliateKey).toMatch(/^https:\/\/(?:viator|getyourguide)\.tpm\.li\//);
       expect(offer.subId).toMatch(/^christian_tours_/);
     }
     expect(page).toContain('searchParams.set("sub_id",tour.subId)');
+    expect(page).toContain("Live prices, reviews and available dates on the booking provider");
     expect(page).not.toContain("https://www.viator.com/tours/");
     expect(page).not.toContain("https://www.getyourguide.com/");
   });
@@ -52,5 +71,7 @@ describe("Christian tours in Israel editorial guide",()=>{
     for(const path of matches)expect(existsSync("public"+path),path).toBe(true);
     const images=christianAreas.map(a=>a.image).concat(christianOffers.map(o=>o.image),christianSiteCards.map(x=>x.image),christianPlanningCards.map(x=>x.image),[travelGuides.christianTours.photo.src]);
     expect(new Set(images).size).toBe(images.length);
+    expect(christianSiteCards.some(c=>c.title==="Visiting Bethlehem from Jerusalem")).toBe(true);
+    expect(christianPlanningCards.find(c=>c.to==="/private-driver/")?.alt).toMatch(/private transport/);
   });
 });

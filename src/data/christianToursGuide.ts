@@ -3,7 +3,6 @@ import bethlehemPhoto from "@/assets/home/bethlehem-nativity.webp";
 import bethlehemRelatedPhoto from "@/assets/home/bethlehem-nativity-tile.webp";
 import yardenitRelatedPhoto from "@/assets/guides/yardenit.jpg";
 import bethlehemTourPhoto from "@/assets/guides/bethlehem/nativity-courtyard.jpg";
-import bethlehemSquarePhoto from "@/assets/guides/bethlehem/manger-square.jpg";
 import qasrTourPhoto from "@/assets/guides/qasr-el-yahud.jpg";
 import holySepulchrePhoto from "@/assets/guides/holy-sepulchre.jpg";
 import tiberiasPhoto from "@/assets/home/tiberias-lake.webp";
@@ -11,9 +10,9 @@ import fiveDayPhoto from "@/assets/home/hero-caesarea-sm.webp";
 import sevenDayPhoto from "@/assets/home/hero-galilee-sm-optimized.webp";
 import calendarPhoto from "@/assets/guides/2026-10/calendar-of-events.webp";
 import railPhoto from "@/assets/airport-journeys/ben-gurion-rail-platform.webp";
-import guideTourPhoto from "@/assets/home/guided-tour-card.webp";
+import privateDriverPhoto from "@/assets/guides/taxi-cabs-israel.webp";
 
-export type ChristianSite = { name: string; note: string; to?: LinkProps["to"] };
+export type ChristianSite = { name: string; note: string; to?: LinkProps["to"]; officialUrl?: string; mapPlace?: string };
 export type ChristianArea = {
   id: string; name: string; title: string; image: string; alt: string;
   intro: string; planning: string; sites: ChristianSite[]; mapPlace: string;
@@ -41,9 +40,9 @@ export const christianAreas: ChristianArea[] = [
     intro:"Bethlehem is a Palestinian city in the West Bank, south of Jerusalem. The Church of the Nativity is a UNESCO-listed pilgrimage landmark built around the site traditionally associated with Jesus' birth. Nearby Manger Square and Beit Sahour add context to the Nativity story.",
     planning:"Plan Bethlehem as a separate half- or full-day visit. Entry and checkpoint arrangements may differ by nationality, vehicle and conditions on your travel date; an Israeli private driver cannot simply be assumed to enter Palestinian Authority areas.",
     sites:[
-      {name:"Church of the Nativity",note:"Traditional birthplace of Jesus"},
-      {name:"Milk Grotto",note:"A small chapel close to the Nativity Church"},
-      {name:"Shepherds' Field, Beit Sahour",note:"Chapels recalling the announcement to the shepherds"},
+      {name:"Church of the Nativity",note:"Traditional birthplace of Jesus",officialUrl:"https://www.custodia.org/en/sanctuaries/bethlehem-basilica-of-the-nativity/",mapPlace:"Church of the Nativity, Manger Square, Bethlehem, West Bank"},
+      {name:"Milk Grotto",note:"A small chapel close to the Nativity Church",officialUrl:"https://bethlehem-city.org/en/milkgrotto",mapPlace:"Milk Grotto Chapel, Bethlehem, West Bank"},
+      {name:"Shepherds' Field, Beit Sahour",note:"Chapels recalling the announcement to the shepherds",officialUrl:"https://www.custodia.org/en/sanctuaries/bethlehem-the-shepherds-field-and-grotto/",mapPlace:"Shepherds Field Chapel, Beit Sahour, West Bank"},
     ],
     mapPlace:"Church of the Nativity, Bethlehem, West Bank",
     related:{label:"How to get from Jerusalem to Bethlehem",to:"/travel-blog/jerusalem-to-bethlehem/"},
@@ -55,8 +54,8 @@ export const christianAreas: ChristianArea[] = [
     planning:"Give Nazareth at least half a day. Cana and Mount Precipice can be added when transport and opening times allow; they are not part of one continuous pedestrian route.",
     sites:[
       {name:"Basilica of the Annunciation",note:"A major Catholic pilgrimage church",to:"/attractions/basilica-of-the-annunciation/"},
-      {name:"St Joseph's Church",note:"Associated by tradition with the Holy Family"},
-      {name:"Cana (Kafr Kanna)",note:"Tradition of the wedding miracle"},
+      {name:"St Joseph's Church",note:"Associated by tradition with the Holy Family",mapPlace:"Church of Saint Joseph, Nazareth, Israel"},
+      {name:"Cana (Kafr Kanna)",note:"Tradition of the wedding miracle",mapPlace:"Wedding Church, Kafr Kanna, Israel"},
       {name:"Mount Precipice",note:"Viewpoint linked to the Gospel narrative",to:"/attractions/mount-precipice/"},
     ],
     mapPlace:"Basilica of the Annunciation, Nazareth, Israel",
@@ -103,8 +102,8 @@ export const christianAreas: ChristianArea[] = [
     intro:"On the Mediterranean coast, the Stella Maris monastery in Haifa is linked with Carmelite spirituality and the prophet Elijah. Deir al-Mukhraqa (Muhraqa), on another part of the Carmel ridge, is traditionally associated with Elijah's contest described in the Book of Kings.",
     planning:"Stella Maris and Muhraqa are not the same monastery or an easy walk between adjacent sites. Allow a separate drive and check religious-site opening arrangements.",
     sites:[
-      {name:"Stella Maris, Haifa",note:"Carmelite monastery overlooking the Mediterranean"},
-      {name:"Deir al-Mukhraqa, Mount Carmel",note:"Traditional site linked with Elijah"},
+      {name:"Stella Maris, Haifa",note:"Carmelite monastery overlooking the Mediterranean",officialUrl:"https://www.carmelholylanddco.org/contacts/",mapPlace:"Stella Maris Monastery, Haifa, Israel"},
+      {name:"Deir al-Mukhraqa, Mount Carmel",note:"Traditional site linked with Elijah",officialUrl:"https://www.carmelholylanddco.org/who-we-are/the-discalced-carmelites-in-the-holy-land/",mapPlace:"Deir al-Mukhraqa Carmelite Monastery, Daliyat al-Karmel, Israel"},
     ],
     mapPlace:"Stella Maris Monastery, Haifa, Israel",
     related:{label:"Explore Haifa and the Carmel area",to:"/attractions/haifa/"},
@@ -116,50 +115,63 @@ export const christianRoutes = [
     time:"1 day",title:"Christian Jerusalem",subtitle:"A focused Jerusalem day",
     steps:["Start near the Mount of Olives and Gethsemane","Walk part of the Via Dolorosa","Visit the Church of the Holy Sepulchre","Add Mount Zion only if time and access permit"],
     advice:"Best for a first visit based in Jerusalem or a day trip from the centre of Israel. Reserve time for walking, prayer and church queues.",
-    origin:"Mount of Olives, Jerusalem, Israel",destination:"Church of the Holy Sepulchre, Jerusalem, Israel",
+    mapLegs:[{label:"Jerusalem walking route",origin:"Gethsemane, Jerusalem, Israel",waypoints:["Via Dolorosa, Jerusalem, Israel"],destination:"Church of the Holy Sepulchre, Jerusalem, Israel",mode:"walking"}],
   },
   {
     time:"2 days",title:"Nazareth & the Sea of Galilee",subtitle:"A northern Christian heritage stay",
     steps:["Day 1: Nazareth's Annunciation churches; optional Cana and Mount Tabor","Stay near Nazareth or the lake","Day 2: Capernaum, Tabgha and the Mount of Beatitudes","Consider Magdala or Yardenit if your schedule permits"],
     advice:"An overnight stay helps you avoid spending both days driving back and forth to central Israel.",
-    origin:"Basilica of the Annunciation, Nazareth, Israel",destination:"Capernaum, Sea of Galilee, Israel",
+    mapLegs:[
+      {label:"Day 1 — Nazareth & Mount Tabor",origin:"Basilica of the Annunciation, Nazareth, Israel",waypoints:["Cana Wedding Church, Kafr Kanna, Israel"],destination:"Church of the Transfiguration, Mount Tabor, Israel",mode:"driving"},
+      {label:"Day 2 — Lakeside churches",origin:"Magdala, Israel",waypoints:["Capernaum, Israel","Tabgha, Israel"],destination:"Mount of Beatitudes, Israel",mode:"driving"},
+    ],
   },
   {
     time:"4 days",title:"Holy Land highlights",subtitle:"Jerusalem, Bethlehem and Galilee",
     steps:["Day 1: Jerusalem Old City, Via Dolorosa and Holy Sepulchre","Day 2: Mount of Olives or Bethlehem, with separate travel arrangements","Day 3: Nazareth and optional Mount Tabor","Day 4: Capernaum, Tabgha, Mount of Beatitudes and the lake"],
     advice:"Bethlehem travel requires its own eligibility and crossing plan; confirm access before treating it as a fixed stop.",
-    origin:"Jerusalem, Israel",destination:"Capernaum, Sea of Galilee, Israel",
+    mapLegs:[
+      {label:"Day 1 — Jerusalem on foot",origin:"Via Dolorosa, Jerusalem, Israel",waypoints:[],destination:"Church of the Holy Sepulchre, Jerusalem, Israel",mode:"walking"},
+      {label:"Day 2 — Bethlehem (check access)",origin:"Church of the Nativity, Bethlehem, West Bank",waypoints:["Milk Grotto, Bethlehem, West Bank"],destination:"Shepherds Field, Beit Sahour, West Bank",mode:"driving"},
+      {label:"Day 3 — Nazareth & Tabor",origin:"Basilica of the Annunciation, Nazareth, Israel",waypoints:[],destination:"Mount Tabor, Israel",mode:"driving"},
+      {label:"Day 4 — Sea of Galilee",origin:"Capernaum, Israel",waypoints:["Tabgha, Israel"],destination:"Mount of Beatitudes, Israel",mode:"driving"},
+    ],
   },
   {
     time:"7 days",title:"A more complete pilgrimage",subtitle:"Room for reflection and extra stops",
     steps:["Days 1–2: Jerusalem Old City, Mount of Olives and Mount Zion","Day 3: Bethlehem and Beit Sahour, subject to current arrangements","Day 4: lower Jordan baptismal site or optional Jericho visit","Day 5: Nazareth, Cana and Mount Tabor","Days 6–7: Sea of Galilee churches, Magdala and optional Haifa/Carmel"],
     advice:"This is a flexible regional outline. Arrival, luggage, road travel, religious services and any West Bank access require extra time.",
-    origin:"Jerusalem, Israel",destination:"Haifa, Israel",
+    mapLegs:[
+      {label:"Days 1–2 — Jerusalem churches",origin:"Gethsemane, Jerusalem, Israel",waypoints:["Via Dolorosa, Jerusalem, Israel"],destination:"Mount Zion, Jerusalem, Israel",mode:"walking"},
+      {label:"Day 3 — Bethlehem (check access)",origin:"Church of the Nativity, Bethlehem, West Bank",waypoints:["Milk Grotto, Bethlehem, West Bank"],destination:"Shepherds Field, Beit Sahour, West Bank",mode:"driving"},
+      {label:"Day 4 — Lower Jordan (check access)",origin:"Jerusalem, Israel",waypoints:[],destination:"Qasr al-Yahud Baptism Site, West Bank",mode:"driving"},
+      {label:"Day 5 — Nazareth & Tabor",origin:"Basilica of the Annunciation, Nazareth, Israel",waypoints:["Kafr Kanna, Israel"],destination:"Mount Tabor, Israel",mode:"driving"},
+      {label:"Days 6–7 — Galilee churches",origin:"Magdala, Israel",waypoints:["Capernaum, Israel","Tabgha, Israel"],destination:"Mount of Beatitudes, Israel",mode:"driving"},
+    ],
   },
 ] as const;
 
 export type ChristianOffer = {
   id:string; affiliateKey:string; platform:"Viator"|"GetYourGuide"; title:string; duration:string;
   summary:string; image:string; alt:string; subId:string; group:"south"|"north";
-  startingPriceUsd?:number; rating?:number; reviews?:number;
 };
 export const christianOffers: ChristianOffer[] = [
   {
     id:"oldcity",affiliateKey:"churches-jerusalem-old-city-walk-viator",platform:"Viator",title:"Old City of Jerusalem walking tour",
     duration:"About 4 hours",summary:"Explore the historic quarters and religious landmarks with a local guide. Check whether church interiors and Holy Sepulchre entry are included.",
     image:"/images/attractions/old-jerusalem-damascus-gate.webp",alt:"Historic gateway into Jerusalem's Old City",subId:"christian_tours_jerusalem_oldcity",
-    group:"south",startingPriceUsd:55,rating:4.8,reviews:71,
+    group:"south",
   },
   {
     id:"bethlehem",affiliateKey:"churches-jerusalem-bethlehem-halfday-gyg",platform:"GetYourGuide",title:"Bethlehem and the Church of the Nativity",
     duration:"About 4 hours",summary:"A half-day visit from Jerusalem to Bethlehem's Christian heritage sites. Confirm permitted nationalities and access to the grotto.",
     image:bethlehemTourPhoto,alt:"Courtyard of the Church of the Nativity in Bethlehem",subId:"christian_tours_bethlehem_halfday",
-    group:"south",startingPriceUsd:75,rating:4.8,reviews:610,
+    group:"south",
   },
   {
-    id:"jerusalem-bethlehem",affiliateKey:"tour-jerusalem-bethlehem-shared-getyourguide@tours-jerusalem",platform:"GetYourGuide",title:"Jerusalem and Bethlehem combined day",
-    duration:"About 10 hours",summary:"An organised day combining Jerusalem's Old City with Bethlehem. Check crossing arrangements, pickup city, local guiding and actual included stops.",
-    image:bethlehemSquarePhoto,alt:"Manger Square in Bethlehem",subId:"christian_tours_jerusalem_bethlehem",
+    id:"baptism-jericho",affiliateKey:"tour-bethlehem-jericho-qasr-small-group-viator@tours-bethlehem-jericho",platform:"Viator",title:"Bethlehem, Jericho & Qasr al-Yahud",
+    duration:"About 7–9 hours",summary:"A small-group itinerary visiting Bethlehem, Jericho and the lower-Jordan baptism site. Check West Bank crossing conditions and any separate ceremony arrangements.",
+    image:qasrTourPhoto,alt:"Jordan River baptismal site at Qasr al-Yahud",subId:"christian_tours_qasr_jericho",
     group:"south",
   },
   {
@@ -175,12 +187,11 @@ export const christianOffers: ChristianOffer[] = [
     group:"north",
   },
   {
-    id:"baptism-jericho",affiliateKey:"tour-bethlehem-jericho-qasr-small-group-viator@tours-bethlehem-jericho",platform:"Viator",title:"Bethlehem, Jericho and Qasr al-Yahud",
-    duration:"About 7–9 hours",summary:"A small-group itinerary that explicitly names the lower-Jordan baptism site. River access, crossing conditions and baptismal ceremonies must be confirmed.",
-    image:qasrTourPhoto,alt:"Jordan River baptismal site at Qasr al-Yahud",subId:"christian_tours_qasr_jericho",
+    id:"nazareth-yardenit",affiliateKey:"tour-nazareth-tiberias-tel-aviv-viator@tours-nazareth-galilee",platform:"Viator",title:"Nazareth, Tiberias, Galilee & Yardenit",
+    duration:"About 10 hours",summary:"A guided day from Tel Aviv visiting Nazareth and Galilee churches with a listed stop at the Yardenit baptism site. A religious ceremony is not included automatically.",
+    image:"/images/attractions/sea-of-galilee.webp",alt:"Shore and hills of the Sea of Galilee",subId:"christian_tours_nazareth_yardenit",
     group:"north",
-  },
-];
+  },];
 
 export const christianFaqs = [
   {q:"How many days do I need for the main Christian sites?",a:"Three or four days can introduce Jerusalem, Bethlehem and the Galilee, but you will travel frequently. Five to seven days makes it easier to keep visits at a comfortable pace and allow for services and longer stays at individual churches."},
@@ -199,7 +210,7 @@ export type ChristianRelated = { title:string;description:string;to:LinkProps["t
 export const christianSiteCards: ChristianRelated[] = [
   {title:"Churches in Jerusalem",description:"Choose the Old City, Mount of Olives, Mount Zion and Ein Karem churches",to:"/travel-blog/churches-in-jerusalem/",image:holySepulchrePhoto,alt:"Church of the Holy Sepulchre"},
   {title:"Mount of Olives",description:"Churches, slopes, viewpoints and practical access",to:"/attractions/mount-of-olives/",image:"/images/attractions/mount-of-olives.webp",alt:"Mount of Olives above Jerusalem"},
-  {title:"Church of the Nativity",description:"Plan your trip to Bethlehem and its Christian heritage",to:"/travel-blog/jerusalem-to-bethlehem/",image:bethlehemRelatedPhoto,alt:"Church of the Nativity in Bethlehem"},
+  {title:"Visiting Bethlehem from Jerusalem",description:"Plan transport and access to the Nativity Church and nearby sites",to:"/travel-blog/jerusalem-to-bethlehem/",image:bethlehemRelatedPhoto,alt:"Church of the Nativity in Bethlehem"},
   {title:"Basilica of the Annunciation",description:"Visit Nazareth's main Christian pilgrimage landmark",to:"/attractions/basilica-of-the-annunciation/",image:"/images/attractions/annunciation-dome.webp",alt:"Dome of the Basilica of the Annunciation"},
   {title:"Sea of Galilee",description:"Explore Capernaum, Tabgha, Magdala and lakeside stops",to:"/attractions/sea-of-galilee/",image:tiberiasPhoto,alt:"The Sea of Galilee seen from Tiberias"},
   {title:"Jordan River baptism sites",description:"Compare Yardenit and Qasr al-Yahud before choosing",to:"/travel-blog/baptism-in-the-jordan-river/",image:yardenitRelatedPhoto,alt:"Jordan River baptismal facilities at Yardenit"},
@@ -210,5 +221,5 @@ export const christianPlanningCards: ChristianRelated[] = [
   {title:"Israel in 7 days",description:"Slow down and allow time for northern and central Israel",to:"/travel-blog/israel-itinerary-7-days/",image:sevenDayPhoto,alt:"Green landscape around the Sea of Galilee"},
   {title:"Israel's calendar of events",description:"Understand religious dates and changes to opening hours",to:"/travel-blog/calendar-of-events/",image:calendarPhoto,alt:"Israel calendar guide"},
   {title:"Getting around Israel",description:"Train, bus, road travel and intercity transport basics",to:"/travel-blog/getting-around-israel/",image:railPhoto,alt:"Passenger train at Ben Gurion Airport station"},
-  {title:"Private driver in Israel",description:"Discuss a tailored multi-stop journey with Moshe Barak",to:"/private-driver/",image:guideTourPhoto,alt:"Travelers on a guided day trip in Israel"},
+  {title:"Private driver in Israel",description:"Discuss a tailored multi-stop journey with Moshe Barak",to:"/private-driver/",image:privateDriverPhoto,alt:"Licensed passenger taxi vehicle in Israel, illustrating private transport"},
 ];

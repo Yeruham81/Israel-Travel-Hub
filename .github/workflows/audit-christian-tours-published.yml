@@ -1,0 +1,41 @@
+name: Audit published Christian tours guide
+on:
+  workflow_run:
+    workflows: ["Deploy static website to Hostinger Premium"]
+    types: [completed]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  published-audit:
+    if: >-
+      github.event_name == 'workflow_dispatch' ||
+      (github.event.workflow_run.conclusion == 'success' &&
+       github.event.workflow_run.head_sha == github.sha)
+    runs-on: ubuntu-24.04
+    timeout-minutes: 18
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+      - name: Install Chromium
+        run: |
+          mkdir -p /tmp/christian-audit-browser
+          npm install --prefix /tmp/christian-audit-browser --no-save playwright@1.56.1
+          /tmp/christian-audit-browser/node_modules/.bin/playwright install --with-deps chromium
+      - name: Audit desktop and mobile Christian heritage guide on Hostinger
+        env:
+          NODE_PATH: /tmp/christian-audit-browser/node_modules
+          CHRISTIAN_AUDIT_ORIGIN: https://saddlebrown-guanaco-454061.hostingersite.com
+        run: node scripts/audit-christian-tours-published.cjs
+      - name: Save desktop mobile screenshots and assertions
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: christian-tours-published-audit
+          path: /tmp/christian-tours-published/
+          retention-days: 14
+          if-no-files-found: warn

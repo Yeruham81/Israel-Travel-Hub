@@ -22,6 +22,10 @@ const sources=[
  {title:"UNESCO — Church of the Nativity in Bethlehem",url:"https://whc.unesco.org/en/list/1433/"},
  {title:"Israel Nature and Parks Authority — Qasr al-Yahud",url:"https://en.parks.org.il/reserve-park/baptismal-site-on-the-jordan-river-qasr-al-yahud/"},
  {title:"Yardenit — baptism visit information",url:"https://www.yardenit.com/baptism/"},
+ {title:"Custody of the Holy Land — Church of the Nativity",url:"https://www.custodia.org/en/sanctuaries/bethlehem-basilica-of-the-nativity/"},
+ {title:"Bethlehem Municipality — Milk Grotto",url:"https://bethlehem-city.org/en/milkgrotto"},
+ {title:"Custody of the Holy Land — Shepherds' Field",url:"https://www.custodia.org/en/sanctuaries/bethlehem-the-shepherds-field-and-grotto/"},
+ {title:"Discalced Carmelites — Stella Maris and Muhraqa",url:"https://www.carmelholylanddco.org/who-we-are/the-discalced-carmelites-in-the-holy-land/"},
 ] as const;
 
 function External({href,children}:{href:string;children:ReactNode}){
@@ -42,7 +46,13 @@ function AreaCard({area}:{area:ChristianArea}){
      <div className="min-w-0">
        <h3 id={area.id+"-heading"} className="font-serif text-xl font-semibold sm:text-2xl">{area.title}</h3>
        <p className="mt-3 text-sm leading-relaxed sm:text-base">{area.intro}</p>
-       <ul className="mt-4 space-y-2.5">{area.sites.map(site=><li key={site.name} className="text-sm leading-relaxed"><strong>{site.to?<Link to={site.to} className={link}>{site.name}</Link>:site.name}</strong><span className="text-muted-foreground"> — {site.note}</span></li>)}</ul>
+       <ul className="mt-4 space-y-3">{area.sites.map(site=><li key={site.name} className="text-sm leading-relaxed">
+         <strong>{site.to?<Link to={site.to} className={link}>{site.name}</Link>:site.name}</strong><span className="text-muted-foreground"> — {site.note}</span>
+         {(site.officialUrl||site.mapPlace)&&<span className="mt-1 flex flex-wrap gap-x-4 gap-y-1 text-xs">
+           {site.officialUrl&&<External href={site.officialUrl}>Official information</External>}
+           {site.mapPlace&&<a href={"https://www.google.com/maps/search/?api=1&query="+encodeURIComponent(site.mapPlace)} className="font-semibold text-primary hover:underline" target="_blank" rel="noopener noreferrer">Google Maps <MapPin className="inline h-3 w-3" aria-hidden="true"/></a>}
+         </span>}
+       </li>)}</ul>
        <p className="mt-4 text-sm leading-relaxed"><strong>My planning tip:</strong> {area.planning}</p>
      </div>
      <figure className="overflow-hidden rounded-xl bg-secondary/20 lg:self-start"><img src={area.image} alt={area.alt} width={700} height={525} loading="lazy" decoding="async" className="aspect-[4/3] w-full object-cover"/></figure>
@@ -63,8 +73,7 @@ function TourCard({tour,url}:{tour:ChristianOffer;url:string}){
    <img src={tour.image} alt={tour.alt} width={640} height={400} loading="lazy" decoding="async" className="aspect-[16/10] w-full object-cover"/>
    <div className="flex flex-1 flex-col p-4"><p className="text-xs font-semibold uppercase tracking-wide text-primary">{tour.platform}</p><h3 className="mt-2 text-lg font-semibold leading-snug">{tour.title}</h3>
      <p className="mt-2 flex items-center gap-1.5 text-xs text-muted-foreground"><Clock3 className="h-4 w-4 shrink-0" aria-hidden="true"/>{tour.duration}</p>
-     {typeof tour.startingPriceUsd==="number"&&<p className="mt-2 text-sm font-semibold">{"Previously listed from US$"+tour.startingPriceUsd}<span className="font-normal text-muted-foreground"> per person; check today's price</span></p>}
-     {typeof tour.rating==="number"&&<p className="mt-1 text-xs text-muted-foreground">★ {tour.rating.toFixed(1)}/5 {tour.reviews?"("+tour.reviews+" earlier reviews)":""}</p>}
+     <p className="mt-2 text-xs text-muted-foreground">Live prices, reviews and available dates on the booking provider</p>
      <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{tour.summary}</p>
      <a href={url} target="_blank" rel={relFor(true)} onClick={()=>recordOutboundClick({pageId:"christian_tours_in_israel",productId:tour.id,offerId:tour.subId})} className="mt-auto inline-flex min-h-11 items-center justify-center gap-2 rounded-lg border border-primary/30 px-3 py-2.5 pt-4 text-sm font-semibold text-primary hover:bg-secondary focus-visible:outline-2 focus-visible:outline-primary">Check dates &amp; tour details<ExternalLink className="h-4 w-4" aria-hidden="true"/><span className="sr-only"> (opens in a new tab)</span></a>
    </div>
@@ -132,16 +141,21 @@ export function ChristianToursGuide(){
    <section id="itineraries" aria-labelledby="itineraries-heading" className="mt-12 scroll-mt-24">
      <Heading id="itineraries" title="Four ways to plan a Christian itinerary" intro="These are flexible ideas rather than promises of access or exact driving times. Adjust stops according to your interests, departure city and pace."/>
      <div className="grid gap-4 md:grid-cols-2">{christianRoutes.map(item=>{
-       const url="https://www.google.com/maps/dir/?api=1&origin="+encodeURIComponent(item.origin)+"&destination="+encodeURIComponent(item.destination);
        return <article key={item.time} className="flex flex-col rounded-xl border bg-card p-5">
          <p className="flex items-center gap-1.5 text-xs font-bold uppercase tracking-wide text-primary"><CalendarDays className="h-4 w-4" aria-hidden="true"/>{item.time} · {item.subtitle}</p>
          <h3 className="mt-2 text-xl font-bold">{item.title}</h3>
          <ol className="mt-4 list-decimal space-y-2 pl-5 text-sm leading-relaxed">{item.steps.map(step=><li key={step}>{step}</li>)}</ol>
          <p className="mt-4 text-sm leading-relaxed text-muted-foreground"><strong className="text-foreground">My planning note:</strong> {item.advice}</p>
-         <a href={url} target="_blank" rel="noopener noreferrer" className="mt-auto inline-flex items-center gap-1 pt-4 text-sm font-semibold text-primary hover:underline"><Route className="h-4 w-4" aria-hidden="true"/>View area connections on Google Maps<ArrowUpRight className="h-4 w-4" aria-hidden="true"/></a>
+         <div className="mt-auto space-y-2 pt-4" aria-label={"Regional maps for "+item.title}>
+           {item.mapLegs.map(leg=>{
+             const query=new URLSearchParams({api:"1",origin:leg.origin,destination:leg.destination,travelmode:leg.mode});
+             if(leg.waypoints.length)query.set("waypoints",leg.waypoints.join("|"));
+             return <a key={leg.label} href={"https://www.google.com/maps/dir/?"+query.toString()} target="_blank" rel="noopener noreferrer" className="flex items-start gap-1.5 text-sm font-semibold text-primary hover:underline"><Route className="mt-0.5 h-4 w-4 shrink-0" aria-hidden="true"/>{leg.label} <ArrowUpRight className="mt-0.5 h-3.5 w-3.5 shrink-0" aria-hidden="true"/></a>;
+           })}
+         </div>
        </article>;
      })}</div>
-     <p className="mt-3 text-sm leading-relaxed text-muted-foreground">Map links show a main geographic connection, not every church stop on a multi-day tour. Check current routes and any relevant access restrictions.</p>
+     <p className="mt-3 text-sm leading-relaxed text-muted-foreground">Maps cover the listed regional legs, not a guaranteed continuous pilgrimage or every optional stop. Jerusalem Old City routes are on foot; do not treat West Bank directions as confirmation of permitted border access. Check conditions before travelling.</p>
    </section>
 
 
@@ -151,7 +165,7 @@ export function ChristianToursGuide(){
      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3" data-christian-tour-group="south">{offers.filter(o=>o.tour.group==="south").map(o=><TourCard key={o.tour.id} tour={o.tour} url={o.url}/>)}</div>
      <h3 className="mb-3 mt-8 font-serif text-xl font-semibold">Nazareth, Galilee &amp; Jordan River</h3>
      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3" data-christian-tour-group="north">{offers.filter(o=>o.tour.group==="north").map(o=><TourCard key={o.tour.id} tour={o.tour} url={o.url}/>)}</div>
-     <p className="mt-4 text-sm leading-relaxed text-muted-foreground">Any starting prices and ratings above are earlier provider snapshots, not live rates or guaranteed availability. Confirm the final price, included stops, date and West Bank eligibility before paying.</p>
+     <p className="mt-4 text-sm leading-relaxed text-muted-foreground">Prices, ratings, reviews and availability are shown by the booking provider, not updated live on this page. Confirm the product name, tour itinerary, final price, included stops, date and West Bank eligibility before paying.</p>
      <p className="mt-3 text-sm leading-relaxed">For more options, see my <Link to="/tours/jerusalem/" className={link}>Jerusalem tours</Link>, <Link to="/tours/bethlehem-jericho-jordan-river/" className={link}>Bethlehem and Jordan River tours</Link> and <Link to="/tours/nazareth-sea-of-galilee/" className={link}>Galilee tours</Link>. My <Link to="/private-driver/" className={link}>private driver service</Link> is transport, not automatically licensed guiding.</p>
    </section>
 
