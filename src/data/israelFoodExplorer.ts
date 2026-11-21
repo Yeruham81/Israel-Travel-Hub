@@ -139,7 +139,7 @@ export const foodTours = [
   {id:"tour-levinsky-market-tasting-viator@tours-food-markets",key:"levinsky",location:"Tel Aviv",provider:"Viator",name:"Levinsky Market tasting walk",
     description:"Explore speciality food shops, ingredients and neighbourhood food traditions with a guide.",
     detail:"Approximately 2 hours · Confirm substitutions and schedule",
-    image:"/images/top-ten-israel/food.webp",alt:"Local dishes and small bites served for tasting",
+    image:"/images/food-guide/levinsky-spice-shop.webp",alt:"Spices and speciality food products inside a Levinsky Market shop in Tel Aviv",
     subId:"what_to_eat_israel_levinsky_tasting"}
 ];
 
