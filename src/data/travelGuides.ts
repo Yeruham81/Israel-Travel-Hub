@@ -27,6 +27,7 @@ import { journeyDestinationGuides } from "@/data/guideJourneys2026";
 import { taxiGuideCluster } from "@/data/taxiGuideCluster";
 import { applyJerusalemGuideEditorial } from "@/data/jerusalemClusterEditorial";
 import { sanityUberGuide } from "@/data/generated/sanityUberSnapshot";
+import { christianFaqs } from "@/data/christianToursGuide";
 
 export const guideTopics = [
   { id: "transportation", label: "Transportation" },
@@ -66,6 +67,24 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
   ...cityCultureGuides,
   ...heritageGuides,
   ...journeyDestinationGuides,
+  christianTours: {
+    id: "christianTours",
+    title: "Christian Tours in Israel: Biblical Sites & Pilgrimage Routes",
+    description: "Plan Christian tours in Israel and the Holy Land: Jerusalem, Bethlehem, Nazareth, Sea of Galilee, Jordan River baptism sites, practical itineraries and guided day trips.",
+    intro: "My practical introduction to Christian pilgrimage and biblical heritage sites in Jerusalem, Bethlehem, Nazareth and Galilee, with suggested journeys and trusted resources.",
+    answer: "Begin with Jerusalem, then choose Bethlehem and/or Galilee based on your time, interests and current transport arrangements. Group sites by area, and check church access and guided-tour details before travelling.",
+    updatedAt: "2026-11-21",
+    topics: ["religion", "itineraries", "attractions", "destinations"],
+    photo: { src: "/images/attractions/old-jerusalem-holy-sepulchre.webp", alt: "The Church of the Holy Sepulchre in Jerusalem" },
+    facts: [],
+    comparison: { caption: "Christian sites planning", headers: [], rows: [] },
+    sections: [],
+    checklist: [],
+    faqs: christianFaqs,
+    sourceIds: ["guide-holy-sepulchre", "guide-qasr", "guide-yardenit"],
+    related: ["jerusalemChurches", "bethlehem", "baptism", "jerusalem"],
+    services: [{label: "Private driver in Israel", to: "/private-driver/"}],
+  },
   uber: {
     id: "uber",
     title: "Is Uber Available in Israel? Gett & Yango Taxi Alternatives",
