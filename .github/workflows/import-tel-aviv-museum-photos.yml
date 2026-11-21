@@ -47,23 +47,26 @@ jobs:
               original = "https://upload.wikimedia.org/wikipedia/commons/{}/{}/{}".format(
                   hashstr[:1], hashstr[:2], quote(filename, safe="")
               )
-              # Wikimedia throttles requests from some GitHub runner addresses.
-              # The proxy supplies the same Commons image in resized WebP form.
-              url = "https://wsrv.nl/?url=" + quote(original, safe="") + "&w=960&output=webp&q=80"
+              # Use independent image-serving CDNs to avoid origin throttling.
+              # Validate decoded image bytes before adding anything to the repository.
+              possibilities = [
+                  "https://i0.wp.com/" + original.removeprefix("https://") + "?w=960",
+                  "https://wsrv.nl/?url=" + quote("https://commons.wikimedia.org/wiki/Special:Redirect/file/" + filename, safe="") + "&w=960&output=webp",
+                  "https://images.weserv.nl/?url=" + quote(original, safe="") + "&w=960",
+                  "https://commons.wikimedia.org/wiki/Special:Redirect/file/" + quote(filename),
+              ]
               last_error = None
-              for attempt in range(4):
+              for url in possibilities:
                   try:
-                      request = Request(url, headers={
-                          "User-Agent": "IsraelTravelHub/1.0 (site image optimization; Wikimedia Commons)"
-                      })
-                      with urlopen(request, timeout=55) as response:
+                      request = Request(url, headers={"User-Agent": "Mozilla/5.0 (compatible; museum-photo-import/1.0)"})
+                      with urlopen(request, timeout=20) as response:
                           contents = response.read()
                       photo = ImageOps.exif_transpose(Image.open(BytesIO(contents))).convert("RGB")
+                      print("Retrieved", museum, "using", url, flush=True)
                       break
                   except Exception as ex:
                       last_error = ex
-                      print("Retry", museum, attempt + 1, str(ex), flush=True)
-                      time.sleep(4 * (attempt + 1))
+                      print("Source unavailable", museum, str(ex), flush=True)
               else:
                   raise RuntimeError(f"Could not retrieve {museum}: {last_error}")
               if museum == "rubin":
