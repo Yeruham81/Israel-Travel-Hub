@@ -54,7 +54,10 @@ describe("Tel Aviv beach guide editorial regression", () => {
     expect(page).toContain("w-full min-w-0 text-sm font-semibold sm:w-auto sm:flex-1");
     expect(page).toContain("disabled:opacity-40 sm:w-auto");
     expect(page).toContain('area.name === "Southern coast and Jaffa"');
-    expect(page).toContain('group.beaches.length === 3 ? "md:grid-cols-3" : "md:grid-cols-2"');
+    expect(page).toContain('group.compact ? "mt-5 grid items-stretch gap-4 md:grid-cols-3" : "mt-5 grid gap-4"');
+    expect(page).toContain('data-testid={group.compact ? "beach-compact-cards" : "beach-detailed-cards"}');
+    expect(page).toContain('data-detailed-card={compact ? undefined : "horizontal"}');
+    expect(telAvivBeaches.filter(beach => beach.featured || beach.area === "Southern coast and Jaffa")).toHaveLength(7);
     expect(page).toContain("md:aspect-[16/9] md:w-full");
     expect(page).not.toContain("officialTelAvivBeachesEnglish");
     expect(data).not.toContain("officialTelAvivBeachesEnglish");
