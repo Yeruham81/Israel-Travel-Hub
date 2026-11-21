@@ -1,7 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { TravelGuidePage, travelGuideMeta } from "@/components/TravelGuide";
+import { travelGuideMeta } from "@/components/TravelGuide";
+import { IsraelFoodGuide } from "@/components/IsraelFoodGuide";
 
 export const Route = createFileRoute("/travel-blog/what-to-eat-in-israel")({
   head: () => travelGuideMeta("food"),
-  component: () => <TravelGuidePage id="food" />,
+  component: IsraelFoodGuide,
 });
