@@ -14,14 +14,13 @@ import { SourcesDisclosure } from "@/components/SourcesDisclosure";
 import { HomeContactForm } from "@/components/HomeContactForm";
 import {
  telAvivExperiences as stops, telAvivRoutes, telAvivRouteNavigation, telAvivFaqs,
- telAvivMapPoints, telAvivAttractionsUpdatedAt, type TelAvivExperience
+ telAvivMapPoints, telAvivAttractionsUpdatedAt, telAvivAttractionsHero, type TelAvivExperience
 } from "@/data/telAvivAttractionsGuide";
 import { affiliateConfig } from "@/data/registry";
 import { tourPhotos } from "@/data/tours";
 import { recordOutboundClick, relFor } from "@/lib/outbound";
 import florentinPhotoCredit from "@/data/telAvivGraffitiPhotoCredit.json";
 
-import hero from "@/assets/home/tel-aviv-coast.webp";
 import relatedJaffa from "@/assets/shore-hub/guide-jaffa.webp";
 import relatedBeach from "@/assets/tel-aviv/beachfront.webp";
 import relatedMuseum from "@/assets/guides/2026-10/museums-in-tel-aviv.webp";
@@ -187,7 +186,7 @@ export function TelAvivAttractionsGuide(){
  return <main className="mx-auto max-w-5xl px-4 pb-10"><article>
   <header className="pt-6">
    <Breadcrumbs items={[{name:"Home",to:"/"},{name:"Travel guides",to:"/travel-blog/"},{name:"Attractions in Tel Aviv",to:"/travel-blog/attractions-in-tel-aviv/"}]}/>
-   <GuideHeroLayout image={<GuideHeroMedia src={hero} alt="The Mediterranean beachfront and urban skyline of Tel Aviv"/>}>
+   <GuideHeroLayout image={<GuideHeroMedia src={telAvivAttractionsHero.src} alt={telAvivAttractionsHero.alt}/>}>
     <p className="text-xs font-semibold uppercase tracking-[0.16em] text-primary">Tel Aviv & Jaffa · Attractions & local experiences</p>
     <h1 className="guide-page-title mt-2">Best Things to Do in Tel Aviv: Attractions & Local Experiences</h1>
     <p data-guide-intro className="mt-4 max-w-3xl text-lg leading-relaxed">From Old Jaffa's stone lanes to sandy beaches, food markets, Bauhaus streets and lively neighbourhoods, Tel Aviv offers many different experiences. I've chosen ten highlights and practical walking routes to help you make the most of your time without crossing the city needlessly.</p>
