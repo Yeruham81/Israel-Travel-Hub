@@ -42,7 +42,8 @@ async function inspect(page,label,isDesktop) {
       cols:related[0]?getComputedStyle(document.querySelector("#explore-more .grid")).gridTemplateColumns.split(" ").filter(Boolean).length:0,
       hasEventPlanner:!!document.querySelector("#event-planner,#confirmed-events,#annual-festivals"),
       hasEventFilters:!!document.querySelector('button[aria-label="Previous month"],fieldset legend'),
-      holidayLink:!!document.querySelector('a[href="/travel-blog/israel-holidays/"]'),
+      dateSources:!!document.querySelector('a[href="https://www.hebcal.com/holidays/?i=on"]') && !!document.querySelector('a[href="https://www.timeanddate.com/holidays/israel/"]'),
+      removedHolidayLink:!!document.querySelector('a[href="/travel-blog/israel-holidays/"]'),
       railLink:!!document.querySelector('a[href*="rail.co.il"]'),
       contactForm:!!contact?.querySelector("form"),
       contactPhoto:!!contact?.querySelector('[data-photo-role="contact-portrait"]'),
@@ -64,7 +65,7 @@ async function inspect(page,label,isDesktop) {
   assert(data.faq===9,label+": practical FAQ",String(data.faq));
   assert(data.related===6 && data.cols===(isDesktop?3:2),label+": related guides grid",JSON.stringify({cards:data.related,columns:data.cols}));
   assert(!data.hasEventPlanner && !data.hasEventFilters,label+": event database and booking filters removed");
-  assert(data.holidayLink&&data.railLink,label+": separate exact-date tool and official train link");
+  assert(data.dateSources && data.railLink && !data.removedHolidayLink,label+": external holiday-date sources and no removed route links");
   assert(data.contactForm && data.contactPhoto && data.afterContact,label+": contact portrait, form and sources footer");
   assert(data.broken.length===0&&data.missingAlt.length===0,label+": no broken or inaccessible photos",JSON.stringify({broken:data.broken,missingAlt:data.missingAlt}));
   assert(data.docWidth<=data.viewport+8,label+": no unwanted horizontal overflow",JSON.stringify({doc:data.docWidth,viewport:data.viewport}));
@@ -80,6 +81,10 @@ async function inspect(page,label,isDesktop) {
       try{
         let response=await page.goto(url,{waitUntil:"domcontentloaded",timeout:70000});
         assert(response?.status()===200,label+": HTTP 200",String(response?.status()));
+        if(label==="desktop-1440"){
+          const retired=await page.request.get(origin+"/travel-blog/israel-holidays/?audit="+encodeURIComponent("after-retirement"),{maxRedirects:0});
+          assert([404,410].includes(retired.status()),"retired /travel-blog/israel-holidays/ returns 404/410",String(retired.status()));
+        }
         await sleep(700);
         snapshots[label]=await inspect(page,label,width>=1000);
         assert(exceptions.length===0,label+": no JavaScript errors",JSON.stringify(exceptions));
