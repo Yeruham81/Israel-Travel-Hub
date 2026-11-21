@@ -13,7 +13,7 @@ confers permission to reuse it.
 | Flagellation | 449.Flagellation_Church.Jerusalem.jpg | Identified on Wikimedia Commons; author and licence details remain to be checked on the file page |
 | Ecce Homo | 47801719492_0921687259_b.jpg | Identified by the user as Ecce Homo Basilica; author, licence and original page have not been independently established |
 | Christ Church | Christ_Church,_Jerusalem,_2019_(01).jpg | **Bahnfrend**, CC BY-SA 4.0, Wikimedia Commons; optimized and resized |
-| St Mark | St_Mark's_Chapel_in_Jerusalem.jpg | Wikimedia Commons lists CC BY 2.0; original photographer still requires confirmation |
+| St Mark | St_Mark's_Chapel_in_Jerusalem.jpg | **momo**, CC BY 2.0, Wikimedia Commons; optimized and resized |
 | Alexander Nevsky | נזירות_בכנסית_אלכסנדר.jpg | Identified on Wikimedia Commons; licence and author still require confirmation |
 
 Sources for verifiable images are linked directly from the individual image disclosures

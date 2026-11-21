@@ -132,7 +132,7 @@ export const jerusalemChurches:JerusalemChurch[] = [
     "tradition": "Roman Catholic · Sisters of Notre Dame de Sion",
     "description": "A chapel along the Via Dolorosa associated with the Roman-period arch; the nearby Lithostrotos offers further archaeological context.",
     "highlight": "Ecce Homo arch and Lithostrotos",
-    "hours": "Generally 08:00–17:00; confirm basilica and Lithostrotos visitor access with the Sisters of Notre Dame de Sion",
+    "hours": "Daily 08:00–17:00 for the Lithostrotos; Good Friday prayer only. Basilica is available for prayer and worship with separate arrangements.",
     "admission": "Check the site for any ticketed sections",
     "tip": "The arch is Roman-period; its association with the trial of Jesus is traditional, not archaeologically established.",
     "lat": 31.7803,
@@ -140,8 +140,8 @@ export const jerusalemChurches:JerusalemChurch[] = [
     "photo": "/images/jerusalem/churches/ecce-homo.webp",
     "feature": false,
     "photoAlt": "Interior of the Ecce Homo Basilica showing its vaulted nave, altar and cross",
-    "officialUrl": "https://www.eccehomopilgrimhouse.com/",
-    "officialLabel": "Ecce Homo visitor information"
+    "officialUrl": "https://www.eccehomopilgrimhouse.com/litho",
+    "officialLabel": "Ecce Homo basilica and visiting hours"
   },
   {
     "id": "christ-church",
@@ -181,7 +181,9 @@ export const jerusalemChurches:JerusalemChurch[] = [
     "photoAlt": "Stone doorway of St Mark's Syriac Orthodox Church with its Syriac inscription",
     "officialUrl": "https://syriacorthodoxarchdiocese.wordpress.com/about/",
     "officialLabel": "Syriac Orthodox community",
-    "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:St_Mark%27s_Chapel_in_Jerusalem.jpg"
+    "photoSourceUrl": "https://commons.wikimedia.org/wiki/File:St_Mark%27s_Chapel_in_Jerusalem.jpg",
+    "photoCredit": "momo · CC BY 2.0 · edited",
+    "photoLicenseUrl": "https://creativecommons.org/licenses/by/2.0/"
   },
   {
     "id": "alexander-nevsky",
