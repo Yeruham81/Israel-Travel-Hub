@@ -5,7 +5,7 @@ import { tourPhotos } from "@/data/tours";
 import { travelGuides } from "@/data/travelGuides";
 import { BAPTISM_PATH, BAPTISM_TITLE, BAPTISM_DESCRIPTION, BAPTISM_UPDATED, BAPTISM_HERO, baptismFaqs, baptismSources, baptismTourGroups } from "@/data/jordanRiverBaptism";
 
-const offers=baptismTourGroups.flatMap(group=>group.products);
+const offers=[...baptismTourGroups[0].products, ...baptismTourGroups[1].products];
 describe("Jordan River baptism comparison guide",()=>{
   it("preserves the old URL and synchronizes guide-directory metadata",()=>{
     expect(BAPTISM_PATH).toBe("/travel-blog/baptism-in-the-jordan-river/");
