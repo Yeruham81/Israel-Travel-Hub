@@ -1,0 +1,39 @@
+name: Audit published Jerusalem churches guide
+on:
+  workflow_run:
+    workflows: ["Deploy static website to Hostinger Premium"]
+    types: [completed]
+permissions:
+  contents: read
+jobs:
+  audit:
+    if: >-
+      github.event.workflow_run.conclusion == 'success' &&
+      github.event.workflow_run.head_sha == github.sha
+    runs-on: ubuntu-24.04
+    timeout-minutes: 17
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+      - name: Install Chromium for read-only visual verification
+        run: |
+          mkdir -p /tmp/churches-browser
+          npm install --prefix /tmp/churches-browser --no-save playwright@1.56.1
+          /tmp/churches-browser/node_modules/.bin/playwright install --with-deps chromium
+      - name: Check live churches page, images, tracking and interactive map on desktop and mobile
+        env:
+          NODE_PATH: /tmp/churches-browser/node_modules
+          CHURCHES_AUDIT_ORIGIN: https://saddlebrown-guanaco-454061.hostingersite.com
+        run: node scripts/audit-jerusalem-churches-published.cjs
+      - name: Save browser results and responsive screenshots
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: jerusalem-churches-live-browser-audit
+          path: /tmp/jerusalem-churches-published/
+          retention-days: 14
+          if-no-files-found: warn
