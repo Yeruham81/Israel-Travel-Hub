@@ -297,6 +297,7 @@ export const eilatDestinationContent: AttractionDestinationContent = {
     { label: "Israel itineraries", to: "/travel-blog/israel-itinerary-10-days/", description: "Include Eilat in a longer trip", icon: "itinerary" },
     { label: "Airport transfer services", to: "/airport-transfers/", description: "Arrange a private arrival or onward transfer", icon: "arrival" },
   ],
+  photoCredits: <p>Underwater coral photograph: Yoav95179, <a href="https://commons.wikimedia.org/wiki/File:Corals_in_Eilat_coral_reef_nature_reserve_1.jpg" target="_blank" rel="noopener noreferrer" className={inlineLink}>Wikimedia Commons</a>, <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener noreferrer" className={inlineLink}>CC BY-SA 4.0</a>; resized and converted to WebP. Other location photographs are from the publisher's existing image archive.</p>,
   sources: [
     { label: "INPA — Eilat Coral Beach Nature Reserve", url: official.coralReserve },
     { label: "Underwater Observatory — visiting the park", url: official.underwaterObservatory },
