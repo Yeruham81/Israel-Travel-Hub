@@ -8,6 +8,9 @@ import einGedi from "@/assets/guides/dead-sea-excursions/ein-gedi-waterfall.webp
 import qumran from "@/assets/guides/dead-sea-excursions/qumran-caves.webp";
 import mud from "@/assets/guides/dead-sea-excursions/dead-sea-mud-bathing.webp";
 
+/** One canonical image for the Dead Sea attractions guide and every inbound card. */
+export const deadSeaAttractionsHero = { src: deadSeaOverviewPhoto, alt: "Dead Sea shoreline with desert hills" } as const;
+
 export type DeadSeaStop = {
   id: string; title: string; shortTitle: string; area: string; kind: string;
   bestFor: string; allow: string; access: string;
@@ -476,7 +479,7 @@ export const deadSeaEditorialOverview: Attraction = {
   title: "Dead Sea Attractions: Best Things to Do",
   description: "Discover ten Dead Sea attractions from Ein Bokek to Masada, Ein Gedi, Qumran, southern heritage sites and desert trails, with map links and realistic routes.",
   region: "Dead Sea & Negev",
-  image: { src: "/images/dead-sea-attractions/nahal-bokek.webp", alt: "Nahal Bokek stream and desert gorge near the Dead Sea" },
+  image: deadSeaAttractionsHero,
   duration: "One full day to several days",
   intro: "Explore ten different attractions in the Dead Sea region, from safe public bathing and historic Masada to freshwater oases, nature walks and heritage sites.",
   takeaway: "For a first visit, choose two or three compatible stops rather than attempting the whole shoreline in a single day.",
