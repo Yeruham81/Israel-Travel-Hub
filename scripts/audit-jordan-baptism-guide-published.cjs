@@ -20,6 +20,9 @@ async function scrollAndDecode(page) {
   const img=images.nth(i),src=await img.getAttribute("src");
   try{
    await img.scrollIntoViewIfNeeded({timeout:12000});
+   // Simulate a visitor moving down the page instead of bursting twenty
+   // image requests within a single second (Hostinger can return HTTP 429).
+   await sleep(650);
    await img.evaluate(el=>el.decode(),{timeout:16000});
   }catch(e){failed.push({src,error:String(e).slice(0,200)})}
  }
@@ -84,6 +87,9 @@ async function snapshot(page,label,desktop){
   browser=await chromium.launch({headless:true,args:["--no-sandbox"]});
   const page=await browser.newPage({viewport:{width:1440,height:900},reducedMotion:"reduce"});
   const jsErrors=[];page.on("pageerror",e=>jsErrors.push(e.message));
+  const failedResponses=[];
+  page.on("response",response=>{if(response.status()>=400)failedResponses.push({status:response.status(),url:response.url().slice(0,220)});});
+  page.on("requestfailed",request=>failedResponses.push({status:"network-error",url:request.url().slice(0,220),reason:request.failure()?.errorText}));
   const response=await page.goto(url,{waitUntil:"domcontentloaded",timeout:75000});
   verify(response?.status()===200,"published route HTTP 200",String(response?.status()));
   if(response?.status()!==200)throw Error("published page not available");
@@ -95,6 +101,7 @@ async function snapshot(page,label,desktop){
    snapshots[label]=await snapshot(page,label,width>=1024);
    await page.screenshot({path:path.join(dir,label+".png"),fullPage:true,animations:"disabled"});
   }
+  if(failedResponses.length)console.log("RESOURCE DELIVERY DIAGNOSTICS:",JSON.stringify(failedResponses));
   verify(jsErrors.length===0,"no JavaScript page errors",JSON.stringify(jsErrors));
   await page.close();
  }catch(e){verify(false,"browser audit completed",String(e.message));}
