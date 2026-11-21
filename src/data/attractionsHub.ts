@@ -155,14 +155,15 @@ export const attractionHubRegions: AttractionHubRegion[] = [
   {
     id: "negev-eilat",
     title: "Negev Desert & Eilat",
-    summary: "Take in the vast landscapes and viewpoints of Ramon Crater, with desert trails and stargazing opportunities near Mitzpe Ramon.",
+    summary: "Discover the dramatic desert of Ramon Crater alongside Eilat's Red Sea coral reefs, beaches and nearby desert adventures.",
     navLabel: "Negev & Eilat",
     image: attractionHubPhotos.negev,
     cards: [
       attraction("mitzpe-ramon-crater", "Mitzpe Ramon & Ramon Crater", "Desert lookouts, geology, trails and stargazing.", attractionHubPhotos.negev.src),
+      { id: "eilat", title: "Eilat: Red Sea Attractions", description: "Coral beaches, marine parks, waterfront activities and nearby desert excursions.", to: "/attractions/eilat/", photo: { src: "/images/attractions/eilat-coral-beach.webp", alt: "Clear turquoise water over the protected Red Sea reef at Eilat" } },
     ],
     relatedGuides: [
-      { label: "Eilat & the Red Sea guide", to: travelGuidePaths.eilat },
+      { label: "Eilat tours & Red Sea activities", to: "/tours/eilat-red-sea/" },
     ],
   },
 ];
@@ -206,8 +207,8 @@ export const attractionRelatedGuides: {
   {
     title: "Eilat & the Red Sea",
     description: "Beaches, coral reefs and adventures in the desert.",
-    to: travelGuidePaths.eilat,
-    photo: travelGuides.eilat.photo,
+    to: "/attractions/eilat/",
+    photo: { src: "/images/attractions/eilat.webp", alt: "Red Sea shore and Eilat resort waterfront" },
   },
 ];
 
