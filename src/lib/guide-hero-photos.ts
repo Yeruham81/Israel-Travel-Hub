@@ -13,7 +13,7 @@ import { masadaSite } from "@/data/masadaSite";
 import { caesareaSite } from "@/data/caesareaSite";
 import { eilatSite } from "@/data/eilatSite";
 import jerusalemMuseumsHero from "@/assets/guides/museums-in-jerusalem.jpg";
-import telAvivAttractionsHero from "@/assets/home/tel-aviv-coast.webp";
+import { telAvivAttractionsHero } from "@/data/telAvivAttractionsGuide";
 
 export type GuideHeroPhoto = { src: string; alt: string };
 const normalized = (value: string) => value.replace(/\/+$/, "") + "/";
@@ -39,9 +39,7 @@ export function guideHeroPhotoForPath(to: string): GuideHeroPhoto | undefined {
   if (path === "/travel-blog/museums-in-jerusalem/") return {
     src: jerusalemMuseumsHero, alt: "Rockefeller Archaeological Museum courtyard in Jerusalem",
   };
-  if (path === "/travel-blog/attractions-in-tel-aviv/") return {
-    src: telAvivAttractionsHero, alt: "Tel Aviv skyline and Mediterranean beachfront",
-  };
+  if (path === "/travel-blog/attractions-in-tel-aviv/") return telAvivAttractionsHero;
   const guide = guideDirectory.find(entry => normalized(String(entry.to)) === path);
   if (guide?.photo) return guide.photo;
   const attractionId = attractionIds.find(id => normalized(attractionPath(id)) === path);
