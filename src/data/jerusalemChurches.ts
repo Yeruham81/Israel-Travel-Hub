@@ -56,7 +56,7 @@ export const jerusalemChurches:JerusalemChurch[] = [
     "tip": "Pair this with the eastern end of the Via Dolorosa, near Lion's Gate.",
     "lat": 31.7814,
     "lon": 35.2364,
-    "photo": null,
+    "photo": "/images/jerusalem/churches/st-anne.webp",
     "feature": true
   },
   {
@@ -71,7 +71,7 @@ export const jerusalemChurches:JerusalemChurch[] = [
     "tip": "Tower, archaeological exhibition and worship visits have distinct access conditions.",
     "lat": 31.777846,
     "lon": 35.230419,
-    "photo": null,
+    "photo": "/images/jerusalem/churches/redeemer.webp",
     "feature": false
   },
   {
@@ -86,7 +86,7 @@ export const jerusalemChurches:JerusalemChurch[] = [
     "tip": "These short windows relate to worship; visiting is not equivalent to unrestricted tourist entry.",
     "lat": 31.774616,
     "lon": 35.229058,
-    "photo": null,
+    "photo": "/images/jerusalem/churches/st-james.webp",
     "feature": false
   },
   {
@@ -101,7 +101,7 @@ export const jerusalemChurches:JerusalemChurch[] = [
     "tip": "The Terra Sancta Museum on the same grounds has separate hours and admission.",
     "lat": 31.78044,
     "lon": 35.233973,
-    "photo": null,
+    "photo": "/images/jerusalem/churches/flagellation.webp",
     "feature": false
   },
   {
@@ -116,7 +116,7 @@ export const jerusalemChurches:JerusalemChurch[] = [
     "tip": "The arch is Roman-period; its association with the trial of Jesus is traditional, not archaeologically established.",
     "lat": 31.7803,
     "lon": 35.2333,
-    "photo": null,
+    "photo": "/images/jerusalem/churches/ecce-homo.webp",
     "feature": false
   },
   {
@@ -131,7 +131,7 @@ export const jerusalemChurches:JerusalemChurch[] = [
     "tip": "Groups must arrange visits with the heritage centre in advance.",
     "lat": 31.7761,
     "lon": 35.2291,
-    "photo": null,
+    "photo": "/images/jerusalem/churches/christ-church.webp",
     "feature": false
   },
   {
@@ -146,7 +146,7 @@ export const jerusalemChurches:JerusalemChurch[] = [
     "tip": "Compare its Upper Room tradition with the Cenacle on Mount Zion.",
     "lat": 31.775913,
     "lon": 35.230419,
-    "photo": null,
+    "photo": "/images/jerusalem/churches/st-mark.webp",
     "feature": false
   },
   {
@@ -161,7 +161,7 @@ export const jerusalemChurches:JerusalemChurch[] = [
     "tip": "Unlike the gold-domed church of Mary Magdalene, this church is part of the Alexander compound in the Old City.",
     "lat": 31.77815,
     "lon": 35.230559,
-    "photo": null,
+    "photo": "/images/jerusalem/churches/alexander-nevsky.webp",
     "feature": false
   },
   {
