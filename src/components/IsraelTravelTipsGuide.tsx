@@ -1,5 +1,5 @@
 import type { ReactNode } from "react";
-import { Link } from "@/components/SiteLink";
+import { SiteLink as Link } from "@/components/SiteLink";
 import { Breadcrumbs, FaqList, OnThisPage } from "@/components/Guide";
 import { AuthorCard } from "@/components/AuthorCard";
 import { GuideHeroLayout, GuideHeroMedia } from "@/components/GuideHeroMedia";
