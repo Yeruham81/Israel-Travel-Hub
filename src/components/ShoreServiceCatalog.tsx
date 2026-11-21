@@ -53,7 +53,7 @@ export function ShoreServiceCatalog({ portId, filters, onFilterChange, itinerary
             const provider = service.provider;
             return <li key={service.id} data-testid="shore-service-card" data-service-id={service.id} data-product-id={service.productId} data-operator-id={service.operator?.id} data-booking-platform={service.partner?.id || "direct"} data-service-kind={service.kind} className="min-w-0 scroll-mt-24">
               <article className="flex h-full min-w-0 flex-col overflow-hidden rounded-xl border bg-card shadow-sm">
-                <img src={service.photo.src} alt={service.photo.alt} width={140} height={180} loading="lazy" decoding="async" className="aspect-[16/9] w-full object-cover" />
+                <img src={service.photo.src} alt={service.photo.alt} width={720} height={405} loading="lazy" decoding="async" className="aspect-[16/9] w-full object-cover" />
                 <div className="flex min-w-0 flex-1 flex-col p-4">
                   <div className="flex flex-wrap items-center justify-between gap-x-2 gap-y-1 text-xs text-muted-foreground">
                     <span className="font-semibold"><span className="sr-only">Booking platform: </span>{service.partner?.name || provider.providerName}</span>{service.rating && <span aria-label={`Rating ${service.rating.value.toFixed(1)} out of 5 from ${service.rating.count} reviews`} title={`Booking-platform reviews checked ${service.rating.checkedAt}; ratings may change`} className="font-semibold text-foreground">★ {service.rating.value.toFixed(1)} <span className="font-normal text-muted-foreground">({service.rating.count})</span></span>}
