@@ -113,7 +113,7 @@ export const akkoDestinationContent: AttractionDestinationContent = {
         image={{ src: images.ramchal, alt: "Historic Ramchal Synagogue in the heart of Old Akko" }}
       >
         <p>This intimate historic site explores the life of Rabbi Moshe Chaim Luzzatto (the Ramchal) and Jewish heritage in Crusader and Ottoman Akko. Exhibits and archaeological finds add another layer to the visit.</p>
-        <p>The synagogue and heritage center are <strong>closed on Saturdays and <Link to="/travel-blog/israel-holidays/" className={inlineLink}>Jewish holidays</Link></strong>. <a href={official.ramchal} target="_blank" rel="noopener noreferrer" className={inlineLink}>Check the official visitor information</a>.</p>
+        <p>The synagogue and heritage center are <strong>closed on Saturdays and <Link to="/travel-blog/calendar-of-events/" className={inlineLink}>Jewish holidays</Link></strong>. <a href={official.ramchal} target="_blank" rel="noopener noreferrer" className={inlineLink}>Check the official visitor information</a>.</p>
         <p className="text-xs font-semibold text-muted-foreground">Included in the combined ticket; check opening days</p>
       </AttractionHighlight>
       <AttractionPracticalTip>

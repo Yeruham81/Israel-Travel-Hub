@@ -89,7 +89,7 @@ export const mountZionDestinationContent: AttractionDestinationContent = {
   ),
   visitorContent: (
     <div className="mt-4 space-y-4">
-      <p>The central Mount Zion area is free to walk through. Each religious compound and museum manages its own opening hours and admission. These are published reference times; services, <Link to="/travel-blog/israel-holidays/" className={inlineLink}>Jewish holidays</Link> and local arrangements may change access.</p>
+      <p>The central Mount Zion area is free to walk through. Each religious compound and museum manages its own opening hours and admission. These are published reference times; services, <Link to="/travel-blog/calendar-of-events/" className={inlineLink}>Jewish holidays</Link> and local arrangements may change access.</p>
       <div className="grid gap-3 sm:grid-cols-2" data-testid="mount-zion-hours-fees">
         {mountZionSite.hours.map(fact => <article key={fact.name} className="rounded-xl border bg-card p-4">
           <div className="flex items-start gap-2"><Clock3 className="mt-0.5 h-4 w-4 shrink-0 text-primary" aria-hidden="true"/><h3 className="font-serif text-lg font-semibold leading-snug">{fact.name}</h3></div>

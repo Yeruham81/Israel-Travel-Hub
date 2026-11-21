@@ -141,7 +141,7 @@ export const oldCityJerusalemDestinationContent: AttractionDestinationContent = 
             <a href={official.ramparts} target="_blank" rel="noopener noreferrer" className={inlineLink}>Confirm Ramparts hours</a>
           </div>
         </div>
-        <p className="mt-3 text-sm leading-relaxed text-muted-foreground"><Link to="/travel-blog/israel-holidays/" className={inlineLink}>Special dates</Link> and holidays may change these hours. Western Wall Tunnels visits run <a href={official.tunnelsBooking} target="_blank" rel="noopener noreferrer" className={inlineLink}>by reservation</a>; check your chosen tour time.</p>
+        <p className="mt-3 text-sm leading-relaxed text-muted-foreground"><Link to="/travel-blog/calendar-of-events/" className={inlineLink}>Special dates</Link> and holidays may change these hours. Western Wall Tunnels visits run <a href={official.tunnelsBooking} target="_blank" rel="noopener noreferrer" className={inlineLink}>by reservation</a>; check your chosen tour time.</p>
       </section>
       <AttractionPracticalTip>If you book a Western Wall Tunnels tour, save the confirmation and follow its exact meeting-point and arrival instructions. Navigating to the Western Wall plaza alone may not take you to your tour’s meeting place.</AttractionPracticalTip>
       <div className="rounded-xl border bg-card p-4 sm:p-5" data-testid="jerusalem-old-city-entry">

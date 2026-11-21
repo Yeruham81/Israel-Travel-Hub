@@ -176,7 +176,7 @@ function Practical(){
  return <section id="practical" aria-labelledby="practical-heading" className="mt-12 scroll-mt-24">
     <SectionHeading id="practical" title="Before you order: six useful tips" intro="A few questions make your first food stops much easier, especially if you are unfamiliar with the menu or have dietary needs."/>
     <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">{items.map((item,i)=><article key={item.title} className="rounded-xl border bg-card p-4"><h3 className="flex items-start gap-2 font-bold"><span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-secondary text-xs text-primary">{i+1}</span>{item.title}</h3><p className="mt-2 text-sm leading-relaxed text-muted-foreground">{item.text}</p></article>)}</div>
-    <div className="mt-5"><Tip>Want a market visit on Friday, a Jewish holiday or a religious festival? Check the <Link className="font-semibold underline underline-offset-2" to="/travel-blog/israel-holidays/">holiday dates</Link> and the individual business's hours. If you have a severe food allergy, obtain clear confirmation from the vendor; a dish name alone cannot confirm safety.</Tip></div>
+    <div className="mt-5"><Tip>Want a market visit on Friday, a Jewish holiday or a religious festival? Check the <Link className="font-semibold underline underline-offset-2" to="/travel-blog/calendar-of-events/">holiday observances</Link> and the individual business's hours. If you have a severe food allergy, obtain clear confirmation from the vendor; a dish name alone cannot confirm safety.</Tip></div>
     <p className="mt-4 text-sm leading-relaxed text-muted-foreground">For more information about local payment and tipping customs, see <External href="https://visit.tel-aviv.gov.il/info/money">Tel Aviv's official visitor guidance</External>.</p>
  </section>;
 }
@@ -194,7 +194,7 @@ const planningCards:NavCard[]=[
  {title:"3 days in Israel",description:"A short itinerary with time for a food stop",to:"/travel-blog/israel-itinerary-3-days/",image:"/images/attractions/jerusalem.webp",alt:"Jerusalem cityscape"},
  {title:"5 days in Israel",description:"Combine city visits and local neighbourhoods",to:"/travel-blog/israel-itinerary-5-days/",image:fiveDayPhoto,alt:"Caesarea archaeological coastline"},
  {title:"7 days in Israel",description:"Take more time between the cities",to:"/travel-blog/israel-itinerary-7-days/",image:"/images/attractions/sea-of-galilee.webp",alt:"Sea of Galilee"},
- {title:"Israel holidays",description:"Plan Shabbat, public holidays and opening hours",to:"/travel-blog/israel-holidays/",image:"/images/attractions/old-jerusalem-tower-of-david.webp",alt:"Historic Jerusalem"},
+ {title:"Israel holidays",description:"Plan Shabbat, public holidays and opening hours",to:"/travel-blog/calendar-of-events/",image:"/images/attractions/old-jerusalem-tower-of-david.webp",alt:"Historic Jerusalem"},
  {title:"Getting around Israel",description:"Trains, buses, city travel and private transfers",to:"/travel-blog/getting-around-israel/",image:travelByTrainPhoto,alt:"Train platforms at Ben Gurion Airport"}
 ];
 function RelatedCard({item}:{item:NavCard}){

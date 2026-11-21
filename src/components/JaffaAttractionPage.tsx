@@ -92,7 +92,7 @@ export const jaffaDestinationContent: AttractionDestinationContent = {
       </AttractionHighlight>
       <AttractionHighlight title="Flea Market and Greek Market streets" image={{ src: photos.market, alt: "Antique shops and outdoor stalls in the Jaffa Flea Market area" }}>
         <p>Jaffa's flea-market district lies southeast of the Clock Tower. Antique stalls and vintage shops sit alongside cafés, restaurants and small design businesses; nearby Greek Market streets add another lively pocket to explore.</p>
-        <p><strong>Typical flea-market trading hours:</strong> Sunday–Thursday 09:00–17:00; Friday 09:00–14:00; closed Saturday. Check the <a href={official.fleaMarketHours} target="_blank" rel="noopener noreferrer" className={inlineLink}>market visitor information</a> for updates. Restaurants, cafés and independent shops may keep different hours, especially around <Link to="/travel-blog/israel-holidays/" className={inlineLink}>Jewish holidays</Link>.</p>
+        <p><strong>Typical flea-market trading hours:</strong> Sunday–Thursday 09:00–17:00; Friday 09:00–14:00; closed Saturday. Check the <a href={official.fleaMarketHours} target="_blank" rel="noopener noreferrer" className={inlineLink}>market visitor information</a> for updates. Restaurants, cafés and independent shops may keep different hours, especially around <Link to="/travel-blog/calendar-of-events/" className={inlineLink}>Jewish holidays</Link>.</p>
       </AttractionHighlight>
       <AttractionPracticalTip>For a first-time visit, I would prioritise the hilltop old town, Summit Garden, the port and either the flea market or a museum according to your interests. Leave time for a coffee or meal rather than rushing from sight to sight.</AttractionPracticalTip>
       <h3 className="pt-3 font-serif text-xl font-semibold">More cultural experiences in Jaffa</h3>
@@ -139,7 +139,7 @@ export const jaffaDestinationContent: AttractionDestinationContent = {
         <article className="rounded-xl border bg-card p-4">
           <div className="flex items-center gap-2"><Clock3 className="h-5 w-5 text-primary"/><h3 className="font-serif text-xl font-semibold">Opening times vary</h3></div>
           <p className="mt-3 text-sm leading-relaxed sm:text-base">The public outdoor areas are generally accessible throughout the day. Galleries, places of worship, visitor centres, shops and museums may have limited or changing hours.</p>
-          <p className="mt-2 text-sm leading-relaxed sm:text-base">On <Link to="/travel-blog/israel-holidays/" className={inlineLink}>Jewish holidays</Link> and holiday eves, venues may change their schedules; verify the activities you specifically want to attend.</p>
+          <p className="mt-2 text-sm leading-relaxed sm:text-base">On <Link to="/travel-blog/calendar-of-events/" className={inlineLink}>Jewish holidays</Link> and holiday eves, venues may change their schedules; verify the activities you specifically want to attend.</p>
         </article>
       </div>
       <article className="rounded-xl border bg-secondary/20 p-4 sm:p-5">

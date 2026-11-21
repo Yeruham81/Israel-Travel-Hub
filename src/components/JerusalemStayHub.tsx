@@ -108,7 +108,7 @@ export function JerusalemStayHub({ g, areas }: { g: CityStayGuide; areas: Neighb
             </div>
             <div className="flex gap-3 rounded-xl border border-amber-200/60 bg-amber-50/60 p-4 dark:border-amber-400/20 dark:bg-amber-500/5">
               <Lightbulb className="mt-0.5 h-5 w-5 shrink-0 text-amber-600 dark:text-amber-400" aria-hidden />
-              <p className="text-sm leading-relaxed"><strong>Check your dates.</strong> Shabbat and <Link to="/travel-blog/israel-holidays/" className="font-semibold text-primary underline underline-offset-2">Jewish holidays</Link> can affect transport and dining in West Jerusalem; other neighborhoods may follow different schedules.</p>
+              <p className="text-sm leading-relaxed"><strong>Check your dates.</strong> Shabbat and <Link to="/travel-blog/calendar-of-events/" className="font-semibold text-primary underline underline-offset-2">Jewish holidays</Link> can affect transport and dining in West Jerusalem; other neighborhoods may follow different schedules.</p>
             </div>
           </div>
         </section>

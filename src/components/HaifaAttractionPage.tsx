@@ -273,7 +273,7 @@ export const haifaDestinationContent: AttractionDestinationContent = {
         </article>
         <article className="rounded-xl border bg-card p-4">
           <div className="flex items-center gap-2"><Clock3 className="h-5 w-5 text-primary"/><h3 className="font-serif text-xl font-semibold">Opening times vary by site</h3></div>
-          <p className="mt-2 text-sm leading-relaxed">The German Colony and public promenades are not confined to museum hours. Stalls, cafés, religious sites and attractions have their own schedules; some have shorter opening days. <Link to="/travel-blog/israel-holidays/" className={inlineLink}>Jewish holidays</Link> and Bahá’í holy days can affect visits.</p>
+          <p className="mt-2 text-sm leading-relaxed">The German Colony and public promenades are not confined to museum hours. Stalls, cafés, religious sites and attractions have their own schedules; some have shorter opening days. <Link to="/travel-blog/calendar-of-events/" className={inlineLink}>Jewish holidays</Link> and Bahá’í holy days can affect visits.</p>
         </article>
       </div>
       <article className="rounded-xl border bg-secondary/20 p-4 sm:p-5">

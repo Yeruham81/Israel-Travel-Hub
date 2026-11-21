@@ -56,7 +56,7 @@ export const expandedTravelGuides = {
           "This guide also helps plan ground transport around many Jewish holidays, but service arrangements can differ by holiday and should not be assumed to match the Saturday timetable. Yom Kippur is a special exception, with major restrictions on airport flight operations; check the Israel Airports Authority and your airline before planning any Yom Kippur travel.",
           "Plan from the time you expect to clear passport control, collect your luggage and leave the terminal, not only from your scheduled landing. See my Ben Gurion Airport arrival tips for those steps. You can check local Shabbat start and end times using the link below, but those are not railway operating times.",
         ],
-        inlineLinks: [{ text: "Jewish holidays", to: "/travel-blog/israel-holidays/" }, { text: "Ben Gurion Airport arrival tips", to: travelGuidePaths.arrival }],
+        inlineLinks: [{ text: "Jewish holidays", to: "/travel-blog/calendar-of-events/" }, { text: "Ben Gurion Airport arrival tips", to: travelGuidePaths.arrival }],
         sourceIds: ["israel-rail", "guide-iaa"],
       },
       {

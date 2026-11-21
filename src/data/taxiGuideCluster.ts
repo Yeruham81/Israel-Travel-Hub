@@ -143,7 +143,7 @@ export const taxiGuideCluster: Record<"taxis" | "taxiFares" | "airportTaxis", Tr
           "Taxi tariffs change according to set hours, not the exact time of sunset. On Fridays and holiday eves, Tariff A runs until 16:00, Tariff B from 16:01 to 21:00 and Tariff C from 21:01 overnight. On Shabbat and recognized holidays, Tariff B applies from 06:00 to 19:00 and Tariff C from 19:01 overnight. See the fares guide for the remaining weekdays, full hours and rates.",
           "Travel during Yom Kippur is very different from an ordinary Shabbat. Roads are largely empty, and you should not expect normal taxi availability. For airport transport on a regular Shabbat, consult the airport weekend transport guide, and check the dates of upcoming Jewish observances before your trip.",
         ],
-        inlineLinks: [{ text: "fares guide", to: travelGuidePaths.taxiFares }, { text: "airport weekend transport guide", to: travelGuidePaths.shabbat }, { text: "Jewish holidays", to: "/travel-blog/israel-holidays/" }],
+        inlineLinks: [{ text: "fares guide", to: travelGuidePaths.taxiFares }, { text: "airport weekend transport guide", to: travelGuidePaths.shabbat }, { text: "Jewish holidays", to: "/travel-blog/calendar-of-events/" }],
         sourceIds: ["taxi-tariff-hours"],
       },
       {
@@ -482,7 +482,7 @@ export const taxiGuideCluster: Record<"taxis" | "taxiFares" | "airportTaxis", Tr
           "For arriving passengers during Shabbat, taxis are one option when much scheduled public transport is suspended. The dedicated Shabbat guide compares other possible transport arrangements and advises checking the exact travel date.",
           "Jewish holidays, national observances and special dates can affect schedules and travel planning. Check your dates before travelling; Yom Kippur deserves special advance caution.",
         ],
-        inlineLinks: [{ text: "dedicated Shabbat guide", to: travelGuidePaths.shabbat }, { text: "Jewish holidays", to: "/travel-blog/israel-holidays/" }],
+        inlineLinks: [{ text: "dedicated Shabbat guide", to: travelGuidePaths.shabbat }, { text: "Jewish holidays", to: "/travel-blog/calendar-of-events/" }],
         sourceIds: ["guide-iaa"],
       },
       {
