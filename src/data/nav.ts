@@ -79,6 +79,7 @@ export const attractionSidebarGuideLabels: Record<string, string> = {
   "mount-tabor": "Mount Tabor",
   precipice: "Mount Precipice",
   megiddo: "Tel Megiddo",
+  "sea-of-galilee": "Sea of Galilee",
   capernaum: "Capernaum",
   tabgha: "Tabgha",
   "mount-of-beatitudes": "Mount of Beatitudes",

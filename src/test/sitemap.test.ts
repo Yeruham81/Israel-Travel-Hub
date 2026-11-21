@@ -58,11 +58,12 @@ describe("generated XML sitemap and robots.txt", () => {
     expect(paths).toContain("/attractions/");
     expect(paths).toContain("/attractions/dead-sea/");
     expect(paths).not.toContain("/travel-blog/the-dead-sea/");
-    for (const slug of ["old-city-jerusalem", "mount-of-olives", "mount-zion", "jaffa", "akko-acre", "rosh-hanikra", "mount-tabor", "capernaum", "tabgha", "mount-of-beatitudes", "magdala", "yardenit", "basilica-of-the-annunciation", "mount-precipice", "tel-megiddo", "masada", "dead-sea", "ein-gedi", "qasr-el-yahud", "mitzpe-ramon-crater"]) {
+    expect(paths).not.toContain("/travel-blog/sea-of-galilee/");
+    for (const slug of ["old-city-jerusalem", "mount-of-olives", "mount-zion", "jaffa", "akko-acre", "rosh-hanikra", "mount-tabor", "capernaum", "tabgha", "mount-of-beatitudes", "magdala", "yardenit", "basilica-of-the-annunciation", "mount-precipice", "tel-megiddo", "masada", "dead-sea", "sea-of-galilee", "ein-gedi", "qasr-el-yahud", "mitzpe-ramon-crater"]) {
       expect(paths).toContain(`/attractions/${slug}/`);
       expect(paths).not.toContain(`/travel-blog/${slug}/`);
     }
-    for (const slug of ["attractions-in-tel-aviv", "dead-sea-attractions", "museums-in-jerusalem", "sea-of-galilee", "haifa"]) {
+    for (const slug of ["attractions-in-tel-aviv", "dead-sea-attractions", "museums-in-jerusalem", "haifa"]) {
       expect(paths).toContain(`/travel-blog/${slug}/`);
     }
     const router = createRouter({ routeTree, context: { queryClient: new QueryClient() }, trailingSlash: "always" });

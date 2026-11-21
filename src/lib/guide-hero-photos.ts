@@ -1,5 +1,6 @@
 import telAvivTourHero from "@/assets/home/hero-tel-aviv-large.webp";
 import deadSeaHero from "@/assets/dead-sea/landscape.webp";
+import seaOfGalileeHero from "@/assets/home/tiberias-lake.webp";
 import { guideDirectory } from "@/data/travelGuides";
 import { attractionGuides } from "@/data/attractionGuides";
 import { attractionIds, attractionPath } from "@/data/attractionGuideTypes";
@@ -22,6 +23,7 @@ export function guideHeroPhotoForPath(to: string): GuideHeroPhoto | undefined {
   if (path === "/tours/tel-aviv-jaffa/") return { src: telAvivTourHero, alt: "Panoramic view of Tel Aviv's Mediterranean coast and skyline" };
   if (path === "/attractions/jaffa/") return jaffaSite.hero;
   if (path === "/attractions/dead-sea/") return { src: deadSeaHero, alt: "Dead Sea shoreline and desert scenery" };
+  if (path === "/attractions/sea-of-galilee/") return { src: seaOfGalileeHero, alt: "Sea of Galilee and surrounding hills" };
   if (path === "/travel-blog/museums-in-jerusalem/") return {
     src: jerusalemMuseumsHero, alt: "Rockefeller Archaeological Museum courtyard in Jerusalem",
   };

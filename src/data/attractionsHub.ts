@@ -10,6 +10,7 @@ import caesareaPhoto from "@/assets/home/caesarea-dusk.webp";
 import telAvivMain from "@/assets/home/tel-aviv-coast.webp";
 import { einGediCardPhoto } from "@/data/einGediCardPhoto";
 import deadSeaBeachCard from "@/assets/dead-sea/beach-card.webp";
+import galileeLakeCard from "@/assets/home/tiberias-lake-tile.webp";
 
 export type AttractionHubCard = {
   id: string;
@@ -119,10 +120,11 @@ export const attractionHubRegions: AttractionHubRegion[] = [
   {
     id: "sea-of-galilee",
     title: "Sea of Galilee & the Jordan River",
-    summary: "Follow the lakeshore to Capernaum, Tabgha and Magdala, then visit the Mount of Beatitudes and Yardenit by the Jordan River.",
+    summary: "Explore the lake itself, choose a supervised beach, and visit Capernaum, Tabgha, Magdala and Yardenit."
     navLabel: "Sea of Galilee & Jordan",
     image: attractionHubPhotos.galilee,
     cards: [
+      { id: "sea-of-galilee", title: "The Sea of Galilee", description: "Lake Kinneret, supervised beaches, Tiberias, boats and practical day planning.", to: "/attractions/sea-of-galilee/", photo: { src: galileeLakeCard, alt: "The Sea of Galilee with the surrounding hills" } },
       attraction("capernaum", "Capernaum", "Explore the ancient synagogue, Peter’s house and lakeside ruins.", attractionHubPhotos.galilee.src),
       attraction("tabgha", "Tabgha", "Lakeside churches, mosaics and biblical traditions.", attractionHubPhotos.galilee.src),
       attraction("mount-of-beatitudes", "Mount of Beatitudes", "A peaceful hilltop church and lake panorama.", attractionHubPhotos.galilee.src),
@@ -130,7 +132,7 @@ export const attractionHubRegions: AttractionHubRegion[] = [
       editorialAttraction("yardenit", "Yardenit", "Plan a visit to this Jordan River baptism site."),
     ],
     relatedGuides: [
-      { label: "Sea of Galilee visitor guide", to: "/travel-blog/sea-of-galilee/" },
+      { label: "Hotels and visitor base in Tiberias", to: "/travel-blog/best-hotels-in-tiberias/" },
       { label: "Jordan River baptism sites", to: travelGuidePaths.baptism },
     ],
   },
@@ -192,7 +194,7 @@ export const attractionRelatedGuides: {
   {
     title: "Sea of Galilee travel guide",
     description: "Lakeside towns, heritage sites and beautiful scenery.",
-    to: "/travel-blog/sea-of-galilee/",
+    to: "/attractions/sea-of-galilee/",
     photo: attractionGuides["sea-of-galilee"].image!,
   },
   {

@@ -65,14 +65,14 @@ describe("October planning, city and heritage guide migration", () => {
   it("makes every guide discoverable in the directory, with real local photographs", async () => {
     // These three destinations now have dedicated attraction pages and tests.
     expect(ids).toHaveLength(13);
-    expect(guideDirectory).toHaveLength(45);
+    expect(guideDirectory).toHaveLength(44);
     expect(guideDirectory.some(guide => guide.id === "israel-holidays" && guide.to === "/travel-blog/israel-holidays/")).toBe(true);
     expect(new Set(guideDirectory.map(guide => guide.id)).size).toBe(guideDirectory.length);
     const router = await routerAt("/travel-blog/");
     const Hub = HubRoute.options.component!;
     const { container } = render(<RouterContextProvider router={router}><Hub /></RouterContextProvider>);
     const cards = container.querySelectorAll('[data-testid="guide-directory-card"]');
-    expect(cards).toHaveLength(45);
+    expect(cards).toHaveLength(44);
     const missing = uniqueGuideCardPhotos(guideDirectory.map(guide => ({ guide }))).filter(entry => !entry.cardPhoto).map(entry => entry.guide.id);
     expect(missing, "Every directory card must display a suitable actual image").toEqual([]);
     for (const card of cards) expect(card.querySelector('img[alt]')).not.toBeNull();
