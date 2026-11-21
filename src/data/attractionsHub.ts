@@ -163,7 +163,7 @@ export const attractionHubRegions: AttractionHubRegion[] = [
       { id: "eilat", title: "Eilat: Red Sea Attractions", description: "Coral beaches, marine parks, waterfront activities and nearby desert excursions.", to: "/attractions/eilat/", photo: { src: "/images/attractions/eilat-coral-beach.webp", alt: "Clear turquoise water over the protected Red Sea reef at Eilat" } },
     ],
     relatedGuides: [
-      { label: "Eilat tours & Red Sea activities", to: "/tours/eilat-red-sea/" },
+      { label: "Ten-day Israel itinerary with an Eilat alternative", to: "/travel-blog/israel-itinerary-10-days/" },
     ],
   },
 ];
@@ -205,7 +205,7 @@ export const attractionRelatedGuides: {
     photo: travelGuides.deadSea.photo,
   },
   {
-    title: "Eilat & the Red Sea",
+    title: "Eilat: Red Sea attractions",
     description: "Beaches, coral reefs and adventures in the desert.",
     to: "/attractions/eilat/",
     photo: { src: "/images/attractions/eilat.webp", alt: "Red Sea shore and Eilat resort waterfront" },

@@ -38,7 +38,7 @@ const related:{title:string;to:LinkProps["to"];desc:string}[]=[
   {title:"Beaches in Tel Aviv",to:"/travel-blog/beaches-in-tel-aviv/",desc:"Choose a supervised beach and check swimming conditions"},
   {title:"Sea of Galilee guide",to:"/attractions/sea-of-galilee/",desc:"Build a northern trip around the weather"},
   {title:"Explore the Dead Sea",to:"/attractions/dead-sea/",desc:"Beaches, landscapes and practical access"},
-  {title:"Eilat & the Red Sea",to:"/travel-blog/eilat/",desc:"Compare southern coast and desert activities"},
+  {title:"Eilat & the Red Sea",to:"/attractions/eilat/",desc:"Compare southern coast and desert activities"},
   {title:"Visit Masada",to:"/attractions/masada/",desc:"Plan a heat-aware visit to the national park"}
 ];
 const planning:{title:string;to:LinkProps["to"];desc:string}[]=[

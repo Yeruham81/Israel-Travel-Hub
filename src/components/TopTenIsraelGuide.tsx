@@ -42,7 +42,7 @@ const related = [
   { title: "Visit Masada", to: "/attractions/masada/" as const, desc: "The plateau, cable car and trails", image: masadaCard, alt: "Masada plateau and desert landscape" },
   { title: "Explore the Dead Sea", to: "/travel-blog/the-dead-sea/" as const, desc: "Beaches, floating and where to go", image: "/images/attractions/dead-sea.webp", alt: "Turquoise Dead Sea water framed by desert hills" },
   { title: "Sea of Galilee guide", to: "/travel-blog/sea-of-galilee/" as const, desc: "Lakeside heritage and scenery", image: "/images/attractions/sea-of-galilee.webp", alt: "View towards the Sea of Galilee from northern hills" },
-  { title: "Eilat & the Red Sea", to: "/travel-blog/eilat/" as const, desc: "Reefs, beaches and southern attractions", image: "/images/attractions/eilat.webp", alt: "Eilat and the Red Sea coast" },
+  { title: "Eilat & the Red Sea", to: "/attractions/eilat/" as const, desc: "Reefs, beaches and southern attractions", image: "/images/attractions/eilat.webp", alt: "Eilat and the Red Sea coast" },
   { title: "Tel Aviv beaches", to: "/travel-blog/beaches-in-tel-aviv/" as const, desc: "Find your ideal supervised beach", image: beachGuideCard, alt: "Tel Aviv Mediterranean swimming beaches and sandy shoreline" },
 ];
 

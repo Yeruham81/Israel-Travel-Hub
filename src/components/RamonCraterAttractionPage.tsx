@@ -228,7 +228,7 @@ export const ramonCraterDestinationContent: AttractionDestinationContent = {
     { label: "Mount Zion", to: "/attractions/mount-zion/", note: "Historic churches and religious sites in Jerusalem." },
   ],
   planningLinks: [
-    { label: "Eilat & the Red Sea", to: "/travel-blog/eilat/", description: "Plan the next part of a southern Israel trip.", icon: "region" },
+    { label: "Eilat & the Red Sea", to: "/attractions/eilat/", description: "Plan the next part of a southern Israel trip.", icon: "region" },
     { label: "10-day Israel itinerary", to: "/travel-blog/israel-itinerary-10-days/", description: "Build a longer journey with time for the desert.", icon: "itinerary" },
     { label: "Getting around Israel", to: "/travel-blog/getting-around-israel/", description: "Compare buses, drivers and car rentals.", icon: "transport" },
     { label: "Best time to visit Israel", to: "/travel-blog/best-time-to-visit-israel/", description: "Weather and season-by-season planning.", icon: "seasons" },

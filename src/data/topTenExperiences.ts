@@ -151,7 +151,7 @@ export const topTenExperiences: TopTenExperience[] = [
     mapRegion: "eilat",
     mapLinks: [{ label: "Coral Beach Nature Reserve", query: "Eilat Coral Beach Nature Reserve, Israel" }],
     photo: { src: prefix + "red-sea.webp", alt: "Coral reef habitat and marine life beneath the Red Sea near Eilat" },
-    guide: { label: "Plan Eilat and the Red Sea", to: "/travel-blog/eilat/" },
+    guide: { label: "Plan Eilat and the Red Sea", to: "/attractions/eilat/" },
     official: { label: "Coral Beach Nature Reserve", href: "https://en.parks.org.il/reserve-park/eilat-coral-beach-nature-reserve-2/" },
   },
   {
