@@ -4,7 +4,7 @@
 
 All ten contact/quote form pages use the shared same-origin `POST /api/quote-request/` and the server-only Brevo HTTPS API. The existing field validation, required consent, source capture and direct Send action remain. Filling fields does not transmit them. No Nodemailer, SMTP socket, marketing-list subscription, visitor acknowledgement email or Brevo website tracker is used.
 
-The server builds both readable plain text and escaped HTML, with the source heading above the entered fields. The email starts with `Sent from page: [page heading]`; older clients without a heading use the path. Submission time follows Israel's daylight-saving rules. The subject is `Moshe Barak - Taxi & Travel in Israel / [visitor name]`, as requested. Message presentation and the current form labels are shared with the latest form updates.
+The server builds both readable plain text and escaped HTML, with the source heading above the entered fields. The email starts with `Sent from page: [page heading]`; older clients without a heading use the path. Submission time follows Israel's daylight-saving rules. The subject is `Moshe Barak - Israel Taxi & Travel / [visitor name]`, where the name is taken from the submitted **Your name** field (not the free-text Subject field). The name is trimmed and line breaks are sanitized before being used in the email header. Message presentation and the current form labels are shared with the latest form updates.
 
 | Setting | Current value |
 | --- | --- |
