@@ -1,0 +1,39 @@
+name: Verify all affiliate links use Travelpayouts
+on:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/audit-travelpayouts-only.yml"
+      - "scripts/audit-travelpayouts-only.cjs"
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  affiliate-link-audit:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+      - name: Scan source affiliate URLs
+        run: node scripts/audit-travelpayouts-only.cjs
+      - name: Install read-only Chromium
+        run: |
+          npm install --prefix /tmp/travelpayouts-audit --no-save playwright@1.56.1
+          /tmp/travelpayouts-audit/node_modules/.bin/playwright install --with-deps chromium
+      - name: Crawl published pages and verify actual outbound links
+        env:
+          NODE_PATH: /tmp/travelpayouts-audit/node_modules
+        run: node scripts/audit-travelpayouts-only.cjs --published
+      - name: Save audit evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: travelpayouts-affiliate-link-audit
+          path: /tmp/travelpayouts-affiliate-audit.json
+          if-no-files-found: warn
+          retention-days: 14
