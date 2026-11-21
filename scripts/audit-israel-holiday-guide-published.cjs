@@ -35,6 +35,12 @@ async function inspect(page,label,isDesktop) {
       articleLd:all('script[type="application/ld+json"]').map(s=>s.textContent).join(" "),
       hero:document.querySelector('[data-testid="guide-hero-media"] img')?.currentSrc,
       cards:cards.length,
+      schoolCalendar:all("#travel-effects h3").some(el=>el.textContent?.includes("September return to school")),
+      lagBaOmer:!!document.querySelector("#holiday-lag-baomer"),
+      relatedImages:related.map(el=>{
+        const img=el.querySelector("img");
+        return {src:img?.getAttribute("src")||null,alt:img?.getAttribute("alt")||null,loaded:!!(img?.complete && img.naturalWidth>0)};
+      }),
       cardIds:cards.map(x=>x.id),
       holidaySections:["weekly","jewish-major","other-jewish","national","other-traditions"].map(x=>[x,document.querySelectorAll("#"+x+" [data-holiday-card]").length]),
       tableRows:all("#travel-effects tbody tr").length,
@@ -60,11 +66,13 @@ async function inspect(page,label,isDesktop) {
   assert(data.date==="2026-11-21",label+": correct editorial update date",data.date);
   assert(data.articleLd.includes("Holidays in Israel: A Practical Guide for Visitors")&&data.articleLd.includes("2026-11-21"),label+": Article metadata and date");
   assert(data.hero?.includes("/images/holiday-guide/jewish-holiday-celebration.webp"),label+": authentic holiday hero",data.hero);
-  assert(data.cards===18&&new Set(data.cardIds).size===18,label+": 18 holiday explanations",String(data.cards));
-  assert(JSON.stringify(data.holidaySections)===JSON.stringify([["weekly",1],["jewish-major",5],["other-jewish",3],["national",4],["other-traditions",5]]),label+": five editorial holiday groups",JSON.stringify(data.holidaySections));
+  assert(data.cards===19&&new Set(data.cardIds).size===19,label+": 19 holiday explanations",String(data.cards));
+  assert(data.lagBaOmer && data.schoolCalendar,label+": Lag BaOmer and school calendar guidance");
+  assert(JSON.stringify(data.holidaySections)===JSON.stringify([["weekly",1],["jewish-major",5],["other-jewish",4],["national",4],["other-traditions",5]]),label+": five editorial holiday groups",JSON.stringify(data.holidaySections));
   assert(data.tableRows===6,label+": transport, closure and demand comparison",String(data.tableRows));
   assert(data.faq===9,label+": practical FAQ",String(data.faq));
   assert(data.related===6 && data.cols===(isDesktop?3:2),label+": related guides grid",JSON.stringify({cards:data.related,columns:data.cols}));
+  assert(data.relatedImages.length===6 && data.relatedImages.every(x=>x.src && x.alt && x.loaded) && new Set(data.relatedImages.map(x=>x.src)).size===6,label+": six distinct, fully loaded related-guide photos",JSON.stringify(data.relatedImages));
   assert(!data.hasEventPlanner && !data.hasEventFilters,label+": event database and booking filters removed");
   assert(data.dateSources && data.railLink && !data.removedHolidayLink,label+": external holiday-date sources and no removed route links");
   assert(data.contactForm && data.contactPhoto && data.afterContact,label+": contact portrait, form and sources footer");
@@ -89,10 +97,27 @@ async function inspect(page,label,isDesktop) {
       for(const [label,width,height] of [["desktop-1440",1440,900],["mobile-390",390,844],["mobile-360",360,780]]) {
         await page.setViewportSize({width,height});
         await sleep(150);
+        // Exercise actual scrolling: full-page screenshots alone do not trigger lazy images.
+        // Decode each related-card photo after it enters the viewport.
+        const relatedPhotos=page.locator("#explore-more .grid>a img");
+        for(let i=0;i<await relatedPhotos.count();i++){
+          const photo=relatedPhotos.nth(i);
+          await photo.scrollIntoViewIfNeeded({timeout:10000});
+          try{await photo.evaluate(img=>img.decode(),{timeout:12000})}
+          catch(e){console.warn("Related image did not decode: "+(await photo.getAttribute("src"))+" | "+e.message)}
+        }
         snapshots[label]=await inspect(page,label,width>=1000);
         await page.screenshot({path:path.join(folder,label+".png"),fullPage:true,animations:"disabled"});
       }
       assert(exceptions.length===0,"single published page: no JavaScript exceptions",JSON.stringify(exceptions));
+      const obsolete=origin+"/travel-blog/israel-holidays/";
+      try {
+        const oldResponse=await page.request.get(obsolete,{timeout:20000,maxRedirects:0});
+        const status=oldResponse.status();
+        assert(status===404||status===410,"retired holiday calculator route: HTTP 404 or 410",String(status));
+      } catch(e) {
+        assert(false,"retired holiday calculator: independent HTTP check",e.message);
+      }
     }catch(e){assert(false,"published holiday page browser inspection completed",e.message);}
     finally{await page.close();}
   }catch(e){assert(false,"Chromium launch",e.message);}
@@ -100,9 +125,6 @@ async function inspect(page,label,isDesktop) {
     if(browser)await browser.close();
     fs.writeFileSync(path.join(folder,"results.json"),JSON.stringify({url,checks,failures,snapshots},null,2));
   }
-  // The deleted route is checked over SSH by the deployment's exact-path
-  // removal step. An HTTP 429 from the Hostinger rate limiter is not a valid
-  // observation about whether a deleted page still exists.
   if(failures.length){console.error(failures.length+" holiday guide checks failed");process.exitCode=1;}
   else console.log("All published holiday guide checks passed");
 })();

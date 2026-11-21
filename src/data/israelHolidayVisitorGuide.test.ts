@@ -1,6 +1,6 @@
 import { existsSync } from "node:fs";
 import { describe, expect, it } from "vitest";
-import { holidayGuideGroups, holidayGuideSources } from "@/data/israelHolidayVisitorGuide";
+import { holidayGuideGroups, holidayGuideSources, schoolCalendarPlanning } from "@/data/israelHolidayVisitorGuide";
 import {
   HOLIDAY_GUIDE_TITLE, HOLIDAY_GUIDE_PATH, HOLIDAY_GUIDE_DESCRIPTION, HOLIDAY_GUIDE_PHOTO
 } from "@/components/IsraelHolidayVisitorGuide";
@@ -18,9 +18,9 @@ describe("Israel holidays visitor guide", () => {
     expect(travelGuides.calendar.updatedAt).toBe("2026-11-21");
     expect(existsSync("public" + HOLIDAY_GUIDE_PHOTO.src)).toBe(true);
   });
-  it("explains 18 recurring dates across the weekly rhythm, Jewish, national and other traditions", () => {
+  it("explains 19 recurring dates across the weekly rhythm, Jewish, national and other traditions", () => {
     expect(holidayGuideGroups.map(g => g.id)).toEqual(["weekly","jewish-major","other-jewish","national","other-traditions"]);
-    expect(entries).toHaveLength(18);
+    expect(entries).toHaveLength(19);
     expect(new Set(entries.map(e => e.id)).size).toBe(entries.length);
     for (const g of holidayGuideGroups) {
       expect(g.intro.length, g.id).toBeGreaterThan(40);
@@ -41,6 +41,11 @@ describe("Israel holidays visitor guide", () => {
     expect(entries.find(e=>e.id==="christmas")?.impact).toBe("local");
     expect(entries.find(e=>e.id==="easter")?.impact).toBe("local");
     expect(entries.find(e=>e.id==="eid")?.impact).toBe("local");
+    expect(entries.find(e=>e.id==="lag-baomer")?.impact).toBe("local");
+    expect(entries.find(e=>e.id==="lag-baomer")?.transport).toContain("Mount Meron");
+    expect(entries.find(e=>e.id==="lag-baomer")?.tip).toContain("official");
+    expect(schoolCalendarPlanning.body).toContain("September");
+    expect(schoolCalendarPlanning.body).toContain("Ministry of Education");
     expect(entries.find(e=>e.id==="passover")?.transport).toContain("Chol HaMoed");
     expect(entries.find(e=>e.id==="rosh-hashanah")?.transport).toContain("train services");
   });

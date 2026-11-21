@@ -20,6 +20,11 @@ export const holidayImpactLevels:Record<HolidayVisitorImpact,{label:string;summa
     "summary": "Impact depends heavily on the city and community"
   }
 };
+export const schoolCalendarPlanning = {
+  title: "School holidays and the September return to school",
+  body: "July and August are usually Israel's main summer school-break months, so family attractions, beaches and popular hotels can be busy even while ordinary weekday public transport continues. Most state schools typically reopen around the beginning of September, which can ease some daytime family crowds, but calendars vary by community and school. Sukkot, Hanukkah and Passover school breaks can bring domestic visitors back to popular sites. Check the current Ministry of Education school calendar and individual opening times rather than treating a school vacation as a nationwide transport shutdown."
+} as const;
+
 export const holidayGuideGroups:HolidayGuideGroup[] = [
   {
     "id": "weekly",
@@ -119,6 +124,16 @@ export const holidayGuideGroups:HolidayGuideGroup[] = [
         "transport": "Ordinary weekday service often continues, but parades, parties and security arrangements can close streets or redirect buses locally.",
         "visitor": "Popular nightlife districts and city-centre parades may be crowded; some schools and businesses adjust schedules.",
         "tip": "Check whether your location follows Purim or Shushan Purim before scheduling a Jerusalem visit."
+      },
+      {
+        "id": "lag-baomer",
+        "name": "Lag BaOmer — bonfires and the Mount Meron pilgrimage",
+        "season": "Usually April or May · begins the previous evening",
+        "impact": "local",
+        "why": "Lag BaOmer is marked in many communities by bonfires and gatherings. A traditional pilgrimage to the tomb of Rabbi Shimon bar Yochai on Mount Meron in the Upper Galilee may attract large numbers of people when permitted.",
+        "transport": "Regular weekday trains and buses generally operate elsewhere, but events and special access controls can divert traffic. Mount Meron roads and pilgrimage transport can be heavily restricted or unavailable, depending on current safety decisions.",
+        "visitor": "Bonfire smoke, gatherings and local closures may affect neighbourhoods. Access to Meron, Safed and nearby roads depends on the specific year's police and safety arrangements, not on a fixed annual schedule.",
+        "tip": "If you plan to visit the Upper Galilee around Lag BaOmer, check official access and transport notices close to your trip; never assume the Meron pilgrimage is taking place."
       },
       {
         "id": "tisha-bav",

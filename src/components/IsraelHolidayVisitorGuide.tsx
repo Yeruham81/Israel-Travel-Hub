@@ -9,7 +9,7 @@ import { PageUpdated } from "@/components/PageUpdated";
 import { SourcesDisclosure } from "@/components/SourcesDisclosure";
 import { guideContactCopy } from "@/lib/guide-contact";
 import { guideHeroPhotoForPath } from "@/lib/guide-hero-photos";
-import { holidayGuideGroups, holidayGuideSources, holidayImpactLevels, type HolidayGuideItem } from "@/data/israelHolidayVisitorGuide";
+import { holidayGuideGroups, holidayGuideSources, holidayImpactLevels, schoolCalendarPlanning, type HolidayGuideItem } from "@/data/israelHolidayVisitorGuide";
 
 export const HOLIDAY_GUIDE_PATH = "/travel-blog/calendar-of-events/";
 export const HOLIDAY_GUIDE_TITLE = "Holidays in Israel: A Practical Guide for Visitors";
@@ -138,6 +138,10 @@ export function IsraelHolidayVisitorGuidePage(){
         <div className="rounded-xl border bg-card p-4"><Clock3 className="mb-2 h-5 w-5 text-primary" aria-hidden="true"/><h3 className="font-bold">Dates begin at sunset</h3><p className="mt-2 text-sm leading-relaxed text-muted-foreground">Jewish festivals start the evening before the main civil date. Last buses and trains may leave well before sunset.</p></div>
         <div className="rounded-xl border bg-card p-4"><Train className="mb-2 h-5 w-5 text-primary" aria-hidden="true"/><h3 className="font-bold">Main festival days vs. intermediate days</h3><p className="mt-2 text-sm leading-relaxed text-muted-foreground">On Passover and Sukkot, the first and final festival days differ from Chol HaMoed for work and transport.</p></div>
         <div className="rounded-xl border bg-card p-4"><MapPinned className="mb-2 h-5 w-5 text-primary" aria-hidden="true"/><h3 className="font-bold">Different cities, different rhythms</h3><p className="mt-2 text-sm leading-relaxed text-muted-foreground">Jerusalem, Tel Aviv, Haifa, Nazareth and other communities do not all follow the same business hours or customs.</p></div>
+      </div>
+      <div className="mt-5 rounded-xl border bg-card p-4 sm:p-5">
+        <h3 className="font-bold">{schoolCalendarPlanning.title}</h3>
+        <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{schoolCalendarPlanning.body}</p>
       </div>
       <div className="mt-5"><MyTip>A day marked as a holiday on a calendar does not automatically mean all shops close. Always check the specific place and whether it is the holiday's eve, a full festival day or an intermediate day.</MyTip></div>
     </section>
