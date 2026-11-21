@@ -83,7 +83,9 @@ describe("Upgraded Tel Aviv attractions editorial guide",()=>{
     "tour-jaffa-carmel-walk-getyourguide@tours-tel-aviv-jaffa",
     "tour-old-jaffa-walk-viator@tours-tel-aviv-jaffa",
     "tour-carmel-market-food-tour-viator@tours-tel-aviv-jaffa",
-    "tour-tel-aviv-street-art-viator@tours-tel-aviv-jaffa"
+    "tour-tel-aviv-street-art-viator@tours-tel-aviv-jaffa",
+    "tour-neve-tzedek-walk-getyourguide@tours-tel-aviv-jaffa",
+    "tour-tel-aviv-cycling-viator@tours-tel-aviv-jaffa"
    ];
    for(const id of ids)expect(affiliateConfig[id]?.trackingUrl).toMatch(/^https:\/\/(?:getyourguide|viator)\.tpm\.li\//);
    const page=readFileSync(resolve(process.cwd(),"src/components/TelAvivAttractionsGuide.tsx"),"utf8");
@@ -102,6 +104,10 @@ describe("Upgraded Tel Aviv attractions editorial guide",()=>{
    expect(page).toContain("telAvivGraffitiPhotoCredit.json");
    expect(page).toContain("relFor(true)");
    expect(page).toContain('data-testid="tel-aviv-curated-tour"');
+   expect(page).toContain('data-testid="tel-aviv-affiliate-tours"');
+   expect(page).toContain('sm:grid-cols-2 lg:grid-cols-3" data-testid="tel-aviv-affiliate-tours"');
+   expect(page).toContain('tourPhotos["neve-tzedek-walk"]');
+   expect(page).toContain('tourPhotos["tel-aviv-cycling"]');
    expect(page).toContain('to="/tours/tel-aviv-jaffa/"');
    expect(page).toContain('to="/tours/food-market-tours/"');
  });
