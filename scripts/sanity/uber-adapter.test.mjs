@@ -100,6 +100,21 @@ test('rejects changed canonical route', () => {
   doc.canonicalPath = '/travel-blog/different/';
   assert.throws(() => adaptUberGuide(doc, [source]), /wrong canonical path/);
 });
+test('normalizes retired staging links when importing an older CMS draft', () => {
+  const doc = input();
+  const cities = ['jerusalem', 'tel-aviv', 'haifa', 'ein-bokek'];
+  doc.services = [
+    {label: 'Airport transfers', path: '/transfers/'},
+    {label: 'Private driver', path: '/private-driver/'},
+    ...cities.map(city => ({label: city, path: `/travel-blog/how-to-get-from-ben-gurion-airport-to-${city}/`})),
+  ];
+  const {guide} = adaptUberGuide(doc, [source]);
+  assert.deepEqual(guide.services.map(link => link.to), [
+    '/airport-transfers/', '/private-driver-in-israel/',
+    ...cities.map(city => `/travel-blog/ben-gurion-airport-to-${city}/`),
+  ]);
+  assert.equal(doc.services[1].path, '/private-driver/');
+});
 test('rejects missing sources instead of silently hiding citations', () => {
   assert.throws(() => adaptUberGuide(input(), []), /missing published sourceReference/);
 });

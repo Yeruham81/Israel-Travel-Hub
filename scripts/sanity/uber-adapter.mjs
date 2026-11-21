@@ -18,6 +18,17 @@ const existingGuides = Object.freeze({
   '/travel-blog/getting-around-israel/': 'israel',
 });
 
+// Older CMS drafts can retain staging links after the site's routes change.
+// Normalize only these known paths in the imported snapshot, not in Sanity.
+const currentSitePaths = Object.freeze({
+  '/transfers/': '/airport-transfers/',
+  '/private-driver/': '/private-driver-in-israel/',
+  ...Object.fromEntries(['jerusalem', 'tel-aviv', 'haifa', 'ein-bokek'].map(city => [
+    `/travel-blog/how-to-get-from-ben-gurion-airport-to-${city}/`,
+    `/travel-blog/ben-gurion-airport-to-${city}/`,
+  ])),
+});
+
 const topicIds = new Set([
   'transportation','destinations','attractions','itineraries','tips',
   'accommodation','connectivity','religion','shopping',
@@ -43,7 +54,7 @@ function httpUrl(value, field) {
 }
 function internalPath(value, field) {
   assert(isString(value) && /^\/(?!\/)[a-z0-9/-]+\/$/.test(value), field + ' must be an existing site-relative path');
-  return value;
+  return currentSitePaths[value] || value;
 }
 function image(photo, field) {
   assert(photo && photo._type === 'guidePhoto', field + ' must be a guidePhoto');
