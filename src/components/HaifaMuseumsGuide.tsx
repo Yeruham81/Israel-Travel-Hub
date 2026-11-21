@@ -1,4 +1,4 @@
-import { useState, type ReactNode } from "react";
+import { useEffect, useRef, useState, type ReactNode } from "react";
 import { Link } from "@tanstack/react-router";
 import { ArrowUpRight, CalendarCheck2, CalendarDays, Clock3, ExternalLink, Lightbulb, MapPin, Ticket } from "lucide-react";
 import { Breadcrumbs, FaqList, OnThisPage } from "@/components/Guide";
@@ -9,7 +9,7 @@ import { SourcesDisclosure } from "@/components/SourcesDisclosure";
 import { HomeContactForm } from "@/components/HomeContactForm";
 import { neighborhoodTripContactCopy } from "@/lib/guide-contact";
 import { guideHeroPhotoForPath } from "@/lib/guide-hero-photos";
-import { haifaMuseumAreas as museumAreas, haifaMuseums as museums, haifaAdditionalMuseums as additionalMuseums, type HaifaMuseumEntry as MuseumEntry } from "@/data/haifaMuseums";
+import { haifaMuseumAreas as museumAreas, haifaMuseums as museums, haifaAdditionalMuseums as additionalMuseums, haifaMuseumMapPoints as museumMapPoints, type HaifaMuseumEntry as MuseumEntry } from "@/data/haifaMuseums";
 import { haifaMuseumPhotos, haifaMuseumPhotoCredits } from "@/data/haifaMuseumPhotos";
 import museumHero from "@/assets/guides/2026-10/museums-in-haifa.webp";
 
@@ -49,7 +49,7 @@ function MuseumCard({museum}:{museum:MuseumEntry}) {
     <div className={museumPhoto ? "lg:grid lg:grid-cols-[minmax(0,1fr)_270px] lg:items-start lg:gap-6 lg:p-5" : "lg:p-5"}>
       {museumPhoto && <figure className="min-w-0 bg-secondary/20 lg:col-start-2 lg:row-start-1 lg:overflow-hidden lg:rounded-xl">
         <div className="overflow-hidden bg-secondary/40">
-          <img src={museumPhoto.src} alt={museumPhoto.alt} width={museumPhoto.width} height={museumPhoto.height} loading="lazy" decoding="async" className={`h-48 w-full sm:h-56 lg:aspect-[4/3] lg:h-auto ${museumPhoto.fit==="contain"?"object-contain":"object-cover"}`}/>
+          <img src={museumPhoto.src} srcSet={`${museumPhoto.src.replace(/\.webp$/, "")}-360.webp 360w, ${museumPhoto.src.replace(/\.webp$/, "")}-560.webp 560w, ${museumPhoto.src} ${museumPhoto.width}w`} sizes="(min-width: 1024px) 270px, calc(100vw - 32px)" alt={museumPhoto.alt} width={museumPhoto.width} height={museumPhoto.height} loading="lazy" decoding="async" className={`h-48 w-full sm:h-56 lg:aspect-[4/3] lg:h-auto ${museumPhoto.fit==="contain"?"object-contain":"object-cover"}`}/>
         </div>
       </figure>}
       <div className="min-w-0 p-4 sm:p-5 lg:col-start-1 lg:row-start-1 lg:p-0">
@@ -81,32 +81,50 @@ function MuseumCard({museum}:{museum:MuseumEntry}) {
     </div>
   </article>;
 }
+
+const museumMapUrl = "/maps/haifa-museums.html?points=" + encodeURIComponent(JSON.stringify(museumMapPoints));
 function MuseumMap() {
   const [selectedId,setSelectedId] = useState("all");
+  const frame=useRef<HTMLIFrameElement>(null);
   const selected=museums.find(m=>m.id===selectedId);
-  const query=selected ? selected.name+", "+selected.address+", Haifa, Israel" : "museums in Haifa Israel";
-  const mapSrc="https://maps.google.com/maps?q="+encodeURIComponent(query)+"&output=embed";
-  const mapExternal="https://www.google.com/maps/search/?api=1&query="+encodeURIComponent(query);
-  return <section aria-label="Haifa museum map" className="mt-7 overflow-hidden rounded-xl border bg-card">
-    <div className="p-4"><h3 className="text-lg font-semibold">Museums on the map</h3>
+  const focus=(id:string)=>{
+    setSelectedId(id);
+    frame.current?.contentWindow?.postMessage({type:"haifa-museum-map-focus",id},window.location.origin);
+  };
+  useEffect(()=>{
+    const listener=(event:MessageEvent)=>{
+      if(event.origin!==window.location.origin || event.source!==frame.current?.contentWindow)return;
+      if(event.data?.type==="haifa-museum-map-selected" && museumMapPoints.some(m=>m.id===event.data.id)) {
+        setSelectedId(event.data.id);
+      }
+    };
+    window.addEventListener("message",listener);
+    return ()=>window.removeEventListener("message",listener);
+  },[]);
+  return <section aria-label="Map of ten selected Haifa museums" className="mt-7 overflow-hidden rounded-xl border bg-card">
+    <div className="p-4">
+      <h3 className="text-lg font-semibold">Museums on the map</h3>
       <div className="mt-3 flex flex-wrap items-end gap-3">
         <label htmlFor="haifa-museum-map-select" className="min-w-0 flex-1 text-sm font-semibold">Focus on a museum
-          <select id="haifa-museum-map-select" value={selectedId} onChange={e=>setSelectedId(e.target.value)} className="mt-2 min-h-11 w-full rounded-lg border bg-background px-3 py-2 text-sm font-normal focus-visible:outline-2 focus-visible:outline-primary">
-            <option value="all">All museums — Haifa overview</option>
-            {museumAreas.map(area=><optgroup key={area.id} label={area.name}>{museums.filter(m=>m.area===area.id).map(m=><option key={m.id} value={m.id}>{m.name}{m.closureNote?" (closed)":""}</option>)}</optgroup>)}
+          <select id="haifa-museum-map-select" value={selectedId} onChange={e=>focus(e.target.value)} className="mt-2 min-h-11 w-full rounded-lg border bg-background px-3 py-2 text-sm font-normal focus-visible:outline-2 focus-visible:outline-primary">
+            <option value="all">All ten museums — Haifa overview</option>
+            {museumAreas.map(area=><optgroup key={area.id} label={area.name}>{museums.filter(m=>m.area===area.id).map(m=><option key={m.id} value={m.id}>{museums.findIndex(x=>x.id===m.id)+1}. {m.name}{m.closureNote?" (closed)":""}</option>)}</optgroup>)}
           </select>
         </label>
-        <button type="button" disabled={selectedId==="all"} onClick={()=>setSelectedId("all")} className="min-h-11 rounded-lg border border-primary/30 px-4 py-2 text-sm font-semibold text-primary hover:bg-secondary disabled:cursor-default disabled:opacity-50">Show all museums</button>
+        <button type="button" disabled={selectedId==="all"} onClick={()=>focus("all")} className="min-h-11 rounded-lg border border-primary/30 px-4 py-2 text-sm font-semibold text-primary hover:bg-secondary disabled:cursor-default disabled:opacity-50">Show all museums</button>
       </div>
       {selected&&<p className="mt-2 text-xs text-muted-foreground">{selected.address}, Israel{selected.closureNote?" · "+selected.closureNote:""}</p>}
     </div>
-    <iframe key={selectedId} title={selected?"Map of "+selected.name:"Map of Haifa museums"} loading="lazy" referrerPolicy="strict-origin-when-cross-origin" src={mapSrc} width={900} height={440} className="h-[360px] w-full border-0 sm:h-[440px]"/>
+    <iframe ref={frame} title="Ten selected Haifa museums, with Mané-Katz marked closed for renovation" loading="lazy" referrerPolicy="strict-origin-when-cross-origin" src={museumMapUrl} onLoad={()=>{
+      if(selectedId!=="all")frame.current?.contentWindow?.postMessage({type:"haifa-museum-map-focus",id:selectedId},window.location.origin);
+    }} width={900} height={440} className="h-[360px] w-full border-0 sm:h-[440px]"/>
     <div className="flex flex-wrap items-center justify-between gap-3 p-3 text-xs text-muted-foreground">
-      <span>Select a museum to focus the map. Exact walking and driving directions are linked on each museum card.</span>
-      <OfficialLink href={mapExternal}>Open in Google Maps</OfficialLink>
+      <span>Map data © OpenStreetMap contributors · Blue: museums · Brown: closed for renovation.</span>
+      {selected&&<OfficialLink href={"https://www.google.com/maps/dir/?api=1&destination="+encodeURIComponent(selected.name+", "+selected.address+", Israel")}>Get directions on Google Maps</OfficialLink>}
     </div>
   </section>;
 }
+
 const faqs=[
  {q:"Which Haifa museums would you prioritise on a first visit?",a:"For families, MadaTech is often my first choice. For art, start with Haifa Museum of Art or Tikotin. For archaeology and history, consider Hecht Museum or the National Maritime Museum. You do not need to cover them all."},
  {q:"Are the two maritime museums in Haifa the same place?",a:"No. The National Maritime Museum focuses on maritime archaeology and the history of seafaring. The separate Clandestine Immigration and Naval Museum explores immigration under the British Mandate and Israel's navy. Both are on Allenby Road, but tickets and visiting arrangements differ."},
