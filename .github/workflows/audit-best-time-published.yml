@@ -1,0 +1,38 @@
+name: Audit published Israel seasons guide in desktop and mobile browsers
+on:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/audit-best-time-published.yml"
+permissions:
+  contents: read
+jobs:
+  audit:
+    if: contains(github.event.head_commit.message, '[audit-best-time-published]')
+    runs-on: ubuntu-24.04
+    timeout-minutes: 18
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+      - name: Install read-only browser audit tooling
+        run: |
+          mkdir -p /tmp/best-time-tools
+          npm install --prefix /tmp/best-time-tools --no-save playwright@1.56.1
+          /tmp/best-time-tools/node_modules/.bin/playwright install --with-deps chromium
+      - name: Audit the published page and its interaction at three viewport sizes
+        env:
+          NODE_PATH: /tmp/best-time-tools/node_modules
+          AUDIT_ORIGIN: https://saddlebrown-guanaco-454061.hostingersite.com
+        run: node scripts/audit-best-time-published.cjs
+      - name: Retain screenshots and findings
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: best-time-published-visual-audit
+          path: /tmp/best-time-published-audit/
+          if-no-files-found: warn
+          retention-days: 14
