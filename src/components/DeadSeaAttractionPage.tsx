@@ -8,7 +8,7 @@ import {
 import { DeadSeaTourOptions } from "@/components/DeadSeaTourOptions";
 import overviewPhoto from "@/assets/dead-sea/landscape.webp";
 import floatingPhoto from "@/assets/dead-sea/beach.webp";
-import beachPhoto from "@/assets/dead-sea/beach-card.webp";
+import beachPhoto from "@/assets/guides/dead-sea-ein-bokek-shore.webp";
 import sunbedsPhoto from "@/assets/dead-sea/sunbeds.webp";
 import saltPoolPhoto from "@/assets/dead-sea/pool.webp";
 
@@ -95,18 +95,18 @@ export const deadSeaDestinationContent: AttractionDestinationContent = {
   ),
   visitorContent: (
     <div className="mt-4 space-y-4">
-      <p>You don't need a hotel reservation to float in the Dead Sea. Start with one of the designated public beaches in the southern resort area and check its current lifeguard hours when planning your visit.</p>
+      <p>You don't need a hotel reservation to float in the Dead Sea. The official beach pages currently list <strong>07:00–18:00 in summer</strong> and <strong>07:00–16:00 in winter</strong> for the Ein Bokek and Hamei Zohar central beaches. Confirm lifeguard hours and local notices before entering the water.</p>
       <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3" data-testid="dead-sea-beach-comparison">
         <article className="rounded-xl border bg-card p-4">
           <h3 className="font-serif text-lg font-semibold">Ein Bokek Central Beach</h3>
           <p className="mt-2 text-sm"><strong>Admission:</strong> Free</p>
-          <p className="mt-1 text-sm leading-relaxed">A convenient first choice with showers, changing rooms, shade and access to the hotel-area promenade.</p>
+          <p className="mt-1 text-sm leading-relaxed">A convenient first choice with showers, changing rooms, council-provided free chairs and umbrellas, and access to the hotel-area promenade. Nearby parking is generally paid.</p>
           <External href={links.einBokek}>Official beach information</External>
         </article>
         <article className="rounded-xl border bg-card p-4">
           <h3 className="font-serif text-lg font-semibold">Hamei Zohar Central Beach</h3>
           <p className="mt-2 text-sm"><strong>Admission:</strong> Free</p>
-          <p className="mt-1 text-sm leading-relaxed">A public beach farther south, with facilities and lifeguard services during operating hours.</p>
+          <p className="mt-1 text-sm leading-relaxed">A public beach farther south, with showers, changing rooms, free council-provided chairs and umbrellas, and lifeguard services during operating hours.</p>
           <External href={links.hameiZohar}>Official beach information</External>
         </article>
         <article className="rounded-xl border bg-card p-4">
