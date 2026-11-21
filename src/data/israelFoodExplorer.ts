@@ -4,7 +4,6 @@
  * already committed as local, web-optimized files.
  */
 import { migrationPhotos as photos } from "@/data/guideMigrationPhotos";
-import jerusalemMarketTourPhoto from "@/assets/jerusalem/mahane-yehuda.webp";
 
 export const foodKinds = [
   { id:"all", label:"All 10 dishes" },
@@ -135,7 +134,7 @@ export const foodTours = [
   {id:"tour-mahane-yehuda-tasting-viator@tours-food-markets",key:"mahane-yehuda",location:"Jerusalem",provider:"Viator",name:"Mahane Yehuda Market tasting tour",
     description:"A guided way to discover market stories and sample foods from several vendors.",
     detail:"Approximately 3 hours · Verify the Jerusalem meeting point",
-    image:jerusalemMarketTourPhoto,alt:"Food shops and stalls at Mahane Yehuda Market",
+    image:"/images/food-guide/mahane-yehuda-food-stalls.webp",alt:"Produce stalls and shoppers inside Jerusalem’s Mahane Yehuda Market",
     subId:"what_to_eat_israel_mahane_yehuda"},
   {id:"tour-levinsky-market-tasting-viator@tours-food-markets",key:"levinsky",location:"Tel Aviv",provider:"Viator",name:"Levinsky Market tasting walk",
     description:"Explore speciality food shops, ingredients and neighbourhood food traditions with a guide.",
