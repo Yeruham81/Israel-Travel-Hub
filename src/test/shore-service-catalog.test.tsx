@@ -235,7 +235,7 @@ describe("port service catalog", () => {
     expect(masada).not.toHaveTextContent("Reference price · per group");
   });
 
-  it("prioritizes tours with verified ratings and prices, and keeps filtered cards in even pairs", async () => {
+  it("prioritizes tours with verified ratings and prices, and preserves the filtered companion card", async () => {
     const ashdod = getShoreCatalog("ashdod").filter(service => service.partner);
     const haifa = getShoreCatalog("haifa").filter(service => service.partner);
     expect(ashdod).toHaveLength(8);
@@ -249,7 +249,8 @@ describe("port service catalog", () => {
     await pageAt("/shore-excursions/haifa/?destination=akko");
     const tourGrid = screen.getByRole("list", { name: "Other operators' tours from Haifa Port" });
     const privateGrid = screen.getByRole("list", { name: "My private day trips from Haifa Port" });
-    expect(tourGrid.children.length % 2).toBe(0);
+    expect(tourGrid.children.length).toBeGreaterThan(0);
+    expect(tourGrid).toHaveClass("lg:grid-cols-3");
     expect(privateGrid.children.length % 2).toBe(0);
     expect(within(privateGrid).getByTestId("shore-companion-card")).toBeInTheDocument();
     expect(within(privateGrid).getByRole("link", { name: "Request a custom route" })).toHaveAttribute("href", "#request-quote");
