@@ -21,7 +21,7 @@ describe("Jerusalem churches editorial guide", () => {
   });
   it("uses bounded coordinates and only real locally hosted site images", () => {
     const photos = jerusalemChurches.filter(c => c.photo);
-    expect(photos.length).toBeGreaterThanOrEqual(12);
+    expect(photos).toHaveLength(20);
     const used = new Set<string>();
     for (const c of jerusalemChurches) {
       expect(c.lat, c.id).toBeGreaterThan(31.7);
@@ -51,6 +51,12 @@ describe("Jerusalem churches editorial guide", () => {
     expect(map).toContain("churches.length !== 20");
     expect(map).toContain("areaColors");
     expect(component).toContain("guideHeroPhotoForPath(item.to)");
+    expect(component).toContain('data-church-card="horizontal"');
+    expect(component).toContain("lg:grid-cols-[minmax(0,1fr)_270px]");
+    expect(component).toContain("lg:col-start-2 lg:row-start-1");
+    expect(component).toContain("lg:col-start-1 lg:row-start-1");
+    expect(component).toContain('className="mt-5 grid gap-5"');
+    expect(component).not.toContain('className="mt-5 grid gap-5 sm:grid-cols-2 lg:grid-cols-3"');
     expect(component).not.toContain('url:"https://viator.tpm.li');
     expect(component).not.toContain('url:"https://getyourguide.tpm.li');
     for (const key of [
