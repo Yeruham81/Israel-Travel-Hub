@@ -42,7 +42,9 @@ describe("Eilat multi-attraction city guide", () => {
       "Underwater Observatory Marine Park",
       "Dolphin Reef",
       "North Beach, the promenade and marina",
-      "Water sports and glass-bottom boat trips",
+      "Snorkeling, diving, water sports and boat trips",
+      "Eilat Birdwatching Park",
+      "Eilat Botanical Garden",
       "Timna Park",
       "Red Canyon and Eilat Mountains",
       "Eilat Birdwatching Park and Botanical Garden",
@@ -65,6 +67,9 @@ describe("Eilat multi-attraction city guide", () => {
       "/images/attractions/eilat-water-sports.webp",
       "/images/attractions/eilat-snorkeling-coral.webp",
       "/images/attractions/eilat-mountains-tour.webp",
+      "/images/attractions/eilat-glass-bottom-boat.webp",
+      "/images/attractions/eilat-birdwatching-park.webp",
+      "/images/attractions/eilat-botanical-garden.webp",
     ];
     expect(new Set(list).size).toBe(list.length);
     for (const image of list) expect(existsSync("public" + image), image).toBe(true);
@@ -72,7 +77,12 @@ describe("Eilat multi-attraction city guide", () => {
     expect(page).toContain("eilat-water-sports.webp");
     expect(page).toContain("eilat-beach-comparison");
     expect(page).toContain("eilat-snorkeling-coral.webp");
-    expect(page).toContain("@/assets/eilat/coral-reef.webp");
+    expect(page).toContain("photos.glassBottom");
+    expect(page).toContain("photos.birdwatching");
+    expect(page).toContain("photos.botanical");
+    expect(page).not.toContain('title="Water sports and glass-bottom boat trips"');
+    expect(page).toContain("official.egged");
+    expect(content.sources.some(source => source.url === eilatSite.official.egged)).toBe(true);
   });
 
   it("links the new page in the attractions hub and under Negev & Eilat in the sidebar", () => {

@@ -7,7 +7,6 @@ import {
 import { eilatSite } from "@/data/eilatSite";
 import { affiliateConfig, travelGuidePaths } from "@/data/registry";
 import { recordOutboundClick } from "@/lib/outbound";
-import coralUnderwater from "@/assets/eilat/coral-reef.webp";
 import waterfrontPhoto from "@/assets/eilat/waterfront.webp";
 import timnaPhoto from "@/assets/home/timna-park-feature-optimized.webp";
 import mountainsPhoto from "@/assets/home/hero-eilat-mountains-large.webp";
@@ -38,6 +37,9 @@ const photos = {
   observatory: "/images/attractions/eilat-underwater-observatory.webp",
   dolphin: "/images/attractions/eilat-dolphin-reef.webp",
   watersports: "/images/attractions/eilat-water-sports.webp",
+  glassBottom: "/images/attractions/eilat-glass-bottom-boat.webp",
+  birdwatching: "/images/attractions/eilat-birdwatching-park.webp",
+  botanical: "/images/attractions/eilat-botanical-garden.webp",
 } as const;
 
 /** Selected product-specific partner listings; prices and ratings are non-live editorial snapshots. */
@@ -189,13 +191,10 @@ export const eilatDestinationContent: AttractionDestinationContent = {
       </article>)}
     </div>
     <AttractionPracticalTip>A beach with a café or deck chairs is not necessarily a supervised bathing beach. Check for an active lifeguard and follow the flags and on-site signs before swimming.</AttractionPracticalTip>
-    <AttractionHighlight title="Snorkeling, scuba diving and water sports" image={{ src: coralUnderwater, alt: "Fish and coral in the Red Sea near Eilat" }}>
-      <p>Beyond the reserve, Eilat offers guided snorkeling, introductory diving, kayaking, stand-up paddling and boat trips. Choose the activity according to your swimming skills, age, comfort in the water and the operator's safety procedures.</p>
-      <p>Keep distance from wildlife, never touch or stand on coral, and do not feed fish. A glass-bottom boat is a useful option for visitors who prefer to stay dry. See the <Link to="/tours/eilat-red-sea/" className={inlineLink}>Eilat activities and tours page</Link> for more options.</p>
-    </AttractionHighlight>
-    <AttractionHighlight title="Water sports and glass-bottom boat trips">
-      <p>There are ways to enjoy the gulf without snorkeling or diving. Depending on season and conditions, private operators may offer paddleboarding, kayaking, boat cruises and other water activities. Glass-bottom boat trips are a good alternative for visitors who prefer not to swim.</p>
-      <p>Check the exact departure point, safety instructions, weather cancellation policy and whether the activity is suitable for children. <Link to="/tours/eilat-red-sea/" className={inlineLink}>Compare Eilat activities</Link> before making a reservation.</p>
+    <AttractionHighlight title="Snorkeling, diving, water sports and boat trips" image={{ src: photos.glassBottom, alt: "Glass-bottom sightseeing boat on the Red Sea off Eilat" }}>
+      <p>Eilat offers guided snorkeling and introductory diving around its Red Sea reefs, alongside kayaking, stand-up paddling and boat cruises. Choose an activity that suits your swimming skills, age, comfort in the water and the operator's safety procedures.</p>
+      <p>Visitors who prefer to stay dry can choose a sightseeing cruise or a glass-bottom boat, which offers views below the water without snorkeling. Availability and visibility depend on weather, sea conditions and the operator's programme.</p>
+      <p>Keep your distance from marine life, never stand on or touch coral, and do not feed fish. Confirm the departure point, age restrictions, equipment, weather-cancellation policy and total price before booking. <Link to="/tours/eilat-red-sea/" className={inlineLink}>Explore Eilat sea activities and tours</Link>.</p>
     </AttractionHighlight>
     <AttractionHighlight title="Timna Park" image={{ src: timnaPhoto, alt: "Sandstone cliffs and sculpted formations in Timna Park north of Eilat" }}>
       <p>Timna is a desert landscape of sandstone formations, archaeological copper-mining sites and dramatic viewpoints, a short drive north of the city. The park is extensive; many visitors combine short walks and drives between major stops rather than hiking the entire park.</p>
@@ -207,10 +206,13 @@ export const eilatDestinationContent: AttractionDestinationContent = {
       <p>Check the {sourcesLink(official.eilatMountains, "Eilat Mountains Nature Reserve guidance")} and the {sourcesLink(official.redCanyon, "Red Canyon route description")} for access and current closures. Never enter wadis when rain or flash flooding is possible, including storms upstream.</p>
       {placeLink("Red Canyon, Eilat Mountains, Israel")}
     </AttractionHighlight>
-    <AttractionHighlight title="Eilat Birdwatching Park and Botanical Garden">
-      <p>For a quieter side of Eilat, the {sourcesLink(official.birds, "Eilat Birdwatching Park")} near the northern entrance to the city provides habitat for migratory birds, with birdwatching particularly interesting during migration periods. Check whether guided walks are offered for your dates.</p>
-      <p>The {sourcesLink(official.botanical, "Eilat Botanical Garden")} is a separate planted, shaded attraction on the northern side of the city. It is a good change of pace from the beaches, but it has its own opening schedule and admission rules.</p>
-      <div className="flex flex-wrap gap-4">{placeLink("Eilat Birdwatching Park, Israel", "Birdwatching Park map")}{placeLink("Eilat Botanical Garden, Israel", "Botanical Garden map")}</div>
+    <AttractionHighlight title="Eilat Birdwatching Park" image={{ src: photos.birdwatching, alt: "Waterfront paths and wooden bridge at Eilat Birdwatching Park" }}>
+      <p>For a quieter side of Eilat, the {sourcesLink(official.birds, "Eilat Birdwatching Park")} near the northern entrance to the city provides habitat for migratory birds. It is particularly interesting during migration periods; check whether guided walks are offered for your dates.</p>
+      {placeLink("Eilat Birdwatching Park, Israel")}
+    </AttractionHighlight>
+    <AttractionHighlight title="Eilat Botanical Garden" image={{ src: photos.botanical, alt: "Paths, cacti and tropical greenery at Eilat Botanical Garden" }}>
+      <p>The {sourcesLink(official.botanical, "Eilat Botanical Garden")} is a separate planted and partly shaded attraction on the northern side of the city. It offers a change of pace from the beaches, with its own opening schedule and admission rules.</p>
+      {placeLink("Eilat Botanical Garden, Israel")}
     </AttractionHighlight>
     <AttractionPracticalTip>My first-visit priorities would be one reef experience, one non-water activity and an early desert outing. Do not try to fit Timna Park, Red Canyon, the observatory and a full beach afternoon into a single day.</AttractionPracticalTip>
   </div>,
@@ -264,7 +266,7 @@ export const eilatDestinationContent: AttractionDestinationContent = {
     <div className="grid gap-3 md:grid-cols-2">
       <article className="rounded-xl border bg-card p-4">
         <h3 className="flex items-center gap-2 font-serif text-xl font-semibold"><BusFront className="size-5 text-primary"/>Local buses and airport arrival</h3>
-        <p className="mt-3 text-sm leading-relaxed">Ramon Airport is north of Eilat. Egged routes, including lines 30 and 50, serve different parts of the city and airport corridor. Check the {sourcesLink(official.airport, "Ramon Airport ground-transport page")} and the {sourcesLink(official.transportPlanner, "official journey planner")} for the latest stops and departures.</p>
+        <p className="mt-3 text-sm leading-relaxed">Ramon Airport is north of Eilat. Egged routes 30 and 50 connect the airport with different parts of the city. Check {sourcesLink(official.egged, "Egged's official Eilat bus-route list")}, the {sourcesLink(official.airport, "Ramon Airport ground-transport page")} and the {sourcesLink(official.transportPlanner, "national journey planner")} for current stops and departure times.</p>
         <p className="mt-2 text-sm leading-relaxed">Bus services can be reduced around Shabbat and Jewish holidays. Use the {sourcesLink(official.transportPlanner, "national journey planner")} before relying on a late connection.</p>
       </article>
       <article className="rounded-xl border bg-card p-4">
@@ -334,7 +336,12 @@ export const eilatDestinationContent: AttractionDestinationContent = {
     { label: "Israel itineraries", to: "/travel-blog/israel-itinerary-10-days/", description: "Include Eilat in a longer trip", icon: "itinerary" },
     { label: "Airport transfer services", to: "/airport-transfers/", description: "Arrange a private arrival or onward transfer", icon: "arrival" },
   ],
-  photoCredits: <p>Underwater coral photograph: Yoav95179, <a href="https://commons.wikimedia.org/wiki/File:Corals_in_Eilat_coral_reef_nature_reserve_1.jpg" target="_blank" rel="noopener noreferrer" className={inlineLink}>Wikimedia Commons</a>, <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener noreferrer" className={inlineLink}>CC BY-SA 4.0</a>; resized and converted to WebP. Other location photographs are from the publisher's existing image archive.</p>,
+  photoCredits: <p>
+    Eilat Birdwatching Park: Israel Zeller / Zeller Zalmanson, PikiWiki Israel (<a href="https://commons.wikimedia.org/wiki/File:PikiWiki_Israel_85046_eilat_bird_park.jpg" target="_blank" rel="noopener noreferrer" className={inlineLink}>source</a>, <a href="https://creativecommons.org/licenses/by/2.5/" target="_blank" rel="noopener noreferrer" className={inlineLink}>CC BY 2.5</a>).
+    {" "}Eilat Botanical Garden: Tiia Monto (<a href="https://commons.wikimedia.org/wiki/File:Eilat_Botanical_garden_12.jpg" target="_blank" rel="noopener noreferrer" className={inlineLink}>source</a>, <a href="https://creativecommons.org/licenses/by-sa/3.0/" target="_blank" rel="noopener noreferrer" className={inlineLink}>CC BY-SA 3.0</a>).
+    {" "}Glass-bottom boat: Yonatan Dodin (<a href="https://commons.wikimedia.org/wiki/File:Glass-bottom_boat,_Israel_Yam_7,_Eilat_(2023).jpg" target="_blank" rel="noopener noreferrer" className={inlineLink}>source</a>, <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener noreferrer" className={inlineLink}>CC BY 4.0</a>).
+    {" "}These three Wikimedia Commons photos were cropped, resized and converted to WebP; their adapted image files retain their stated Creative Commons licenses. Other location photographs are from the publisher's existing image archive.
+  </p>,
   sources: [
     { label: "INPA — Eilat Coral Beach Nature Reserve", url: official.coralReserve },
     { label: "Eilat beach directory", url: official.beaches },
@@ -348,6 +355,7 @@ export const eilatDestinationContent: AttractionDestinationContent = {
     { label: "Eilat Birdwatching Park — official visitor information", url: official.birds },
     { label: "Eilat Botanical Garden — official information", url: official.botanical },
     { label: "Israel Airports Authority — Ramon Airport transport", url: official.airport },
+    { label: "Egged — Eilat and Ramon Airport bus routes", url: official.egged },
     { label: "National public transport journey planner", url: official.transportPlanner },
   ],
 };
