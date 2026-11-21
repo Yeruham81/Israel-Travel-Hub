@@ -128,6 +128,36 @@ for (const required of [
 }
 assert(!jerusalemHubHtml.includes('href="/travel-blog/day-trips-from-jerusalem/"'), "Retired Jerusalem day-trip path must not be linked");
 
+// Ensure that all fourteen formerly card-only mobile comparisons now ship
+// the same horizontally scrollable table in the published static HTML.
+const mobileTableRoutes = [
+  "/travel-blog/israel-itinerary-3-days/",
+  "/travel-blog/israel-itinerary-5-days/",
+  "/travel-blog/israel-itinerary-7-days/",
+  "/travel-blog/israel-itinerary-10-days/",
+  "/travel-blog/baptism-in-the-jordan-river/",
+  "/travel-blog/shopping-in-jerusalem/",
+  "/travel-blog/top-10-things-to-do-in-israel/",
+  "/travel-blog/beaches-in-tel-aviv/",
+  "/travel-blog/attractions-in-tel-aviv/",
+  "/travel-blog/dead-sea-attractions/",
+  "/attractions/capernaum/",
+  "/attractions/tabgha/",
+  "/attractions/mount-zion/",
+  "/attractions/mount-of-olives/"
+];
+for (const route of mobileTableRoutes) {
+  const file = join(root, route.replace(/^\/|\/$/g, ""), "index.html");
+  assert(existsSync(file), "Missing responsive table page: " + route);
+  const html = readFileSync(file, "utf8");
+  const tags = [...html.matchAll(/<table\b[^>]*>/gi)].map(match => match[0]);
+  assert(tags.some(tag => /min-w-/.test(tag) && !/\bhidden\b|\b(?:sm|md|lg):table\b/.test(tag)),
+    "No mobile-visible horizontally scrollable table on " + route);
+  for (const obsolete of ["baptism-mobile-comparison", "capernaum-mobile-visitor-cards", "tabgha-mobile-hours", "sacred-hours-mobile"]) {
+    assert(!html.includes(obsolete), "Obsolete mobile comparison cards on " + route);
+  }
+}
+
 const privateApi = join(root, "api");
 // Never deploy compiled API: Hostinger's manually configured PHP endpoints
 // are excluded by rsync, and server-side Vite JS cannot run as static files.
