@@ -86,27 +86,31 @@ function Tip({ children }: { children: React.ReactNode }) {
 }
 function PlacePhoto({ place }: { place: ShoppingPlace }) {
   return place.photo ? <img src={place.photo.src} alt={place.photo.alt} loading="lazy"
-    decoding="async" width={880} height={495} className="aspect-[16/9] w-full object-cover" />
+    decoding="async" width={880} height={495} className="aspect-[16/9] w-full object-cover lg:col-start-2 lg:row-start-1 lg:aspect-[4/3] lg:rounded-xl" />
     : <div aria-hidden="true" data-shopping-photo-slot={place.id}
-        className="flex aspect-[16/9] w-full items-center justify-center bg-secondary/50 text-primary/30">
+        className="flex aspect-[16/9] w-full items-center justify-center bg-secondary/50 text-primary/30 lg:col-start-2 lg:row-start-1 lg:aspect-[4/3] lg:rounded-xl">
         <Palette className="h-12 w-12" strokeWidth={1.25} />
       </div>;
 }
 function PlaceCard({ place, index }: { place: ShoppingPlace; index: number }) {
-  return <article id={"shop-" + place.id} className="flex scroll-mt-28 flex-col overflow-hidden rounded-2xl border bg-card shadow-sm">
-    <PlacePhoto place={place} />
-    <div className="flex flex-1 flex-col p-4 sm:p-5">
-      <p className="text-xs font-semibold uppercase tracking-wide text-primary">{place.bestFor}</p>
-      <h4 className="mt-1 text-xl font-bold">{index + 1}. {place.name}</h4>
-      <p className="mt-3 text-sm leading-relaxed">{place.description}</p>
-      <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{place.practical}</p>
-      <div className="mt-4 space-y-2 rounded-lg bg-secondary/40 px-3 py-3 text-xs leading-relaxed">
+  return <article id={"shop-" + place.id} data-detailed-card="horizontal" className="scroll-mt-28 overflow-hidden rounded-2xl border bg-card shadow-sm">
+    <div className="lg:grid lg:grid-cols-[minmax(0,1fr)_270px] lg:items-start lg:gap-6 lg:p-5">
+      <PlacePhoto place={place} />
+      <div className="min-w-0 p-4 sm:p-5 lg:col-start-1 lg:row-start-1 lg:p-0">
+        <p className="text-xs font-semibold uppercase tracking-wide text-primary">{place.bestFor}</p>
+        <h4 className="mt-1 text-xl font-bold">{index + 1}. {place.name}</h4>
+        <p className="mt-3 text-sm leading-relaxed">{place.description}</p>
+      </div>
+    </div>
+    <div className="border-t p-4 sm:p-5 lg:px-6">
+      <p className="text-sm leading-relaxed text-muted-foreground">{place.practical}</p>
+      <div className="mt-4 grid gap-3 rounded-lg bg-secondary/40 px-3 py-3 text-xs leading-relaxed sm:grid-cols-2 lg:grid-cols-3">
         <p><strong>Look for:</strong> {place.highlights}</p>
         <p><strong>When to go:</strong> {place.when}</p>
         <p><strong>Getting there:</strong> {place.gettingThere}</p>
       </div>
     </div>
-    <div className="mt-auto flex flex-wrap gap-x-5 gap-y-2 border-t px-4 py-4 sm:px-5">
+    <div className="flex flex-wrap gap-x-5 gap-y-2 border-t px-4 py-4 sm:px-5 lg:px-6">
       <LocationLink place={place} />
       {place.official && <OfficialLink href={place.official.href}>{place.official.label}</OfficialLink>}
     </div>
@@ -239,7 +243,7 @@ export function JerusalemShoppingGuide() {
         {shoppingDistricts.map((district, index) => <section key={district.id} className="mt-9" aria-label={district.title}>
           <h3 className="text-xl font-bold sm:text-2xl">{district.title}</h3>
           <p className="mt-2 max-w-3xl leading-relaxed text-muted-foreground">{district.intro}</p>
-          <div className={"mt-5 grid items-stretch gap-5 md:grid-cols-2 " + (places.filter(place => place.district === district.title).length === 3 ? "lg:grid-cols-3" : "")}>
+          <div className="mt-5 grid gap-5" data-testid="jerusalem-shopping-detailed-cards">
             {places.filter(place => place.district === district.title).map(place =>
               <PlaceCard key={place.id} place={place} index={places.indexOf(place)} />)}
           </div>
