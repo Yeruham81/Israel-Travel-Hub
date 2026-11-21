@@ -5,12 +5,12 @@ export const JERUSALEM_HUB_DESCRIPTION = "Plan your Jerusalem visit with my guid
 export const JERUSALEM_HUB_UPDATED = "2026-11-21";
 
 export const jerusalemTopicCards = [
-  {title:"Old City of Jerusalem",to:"/attractions/old-city-jerusalem/",description:"Find the four quarters, the right gates, historic landmarks and walking routes."},
-  {title:"Mount of Olives",to:"/attractions/mount-of-olives/",description:"Plan panoramic viewpoints, hillside churches and a realistic downhill walk."},
-  {title:"Mount Zion",to:"/attractions/mount-zion/",description:"Explore the Cenacle, Dormition Abbey and sacred places near Zion Gate."},
-  {title:"Museums in Jerusalem",to:"/travel-blog/museums-in-jerusalem/",description:"Choose the Israel Museum, Yad Vashem, Tower of David and more."},
-  {title:"Churches in Jerusalem",to:"/travel-blog/churches-in-jerusalem/",description:"Find meaningful pilgrimage visits by area, not just a long list."},
-  {title:"Shopping & markets",to:"/travel-blog/shopping-in-jerusalem/",description:"Discover Mahane Yehuda, Old City markets, crafts and downtown streets."},
+  {title:"Old City of Jerusalem",to:"/attractions/old-city-jerusalem/",description:"Find the four quarters, the right gates, historic landmarks and walking routes.",cta:"Explore the Old City"},
+  {title:"Mount of Olives",to:"/attractions/mount-of-olives/",description:"Plan panoramic viewpoints, hillside churches and a realistic downhill walk.",cta:"Visit the Mount of Olives"},
+  {title:"Mount Zion",to:"/attractions/mount-zion/",description:"Explore the Cenacle, Dormition Abbey and sacred places near Zion Gate.",cta:"Explore Mount Zion"},
+  {title:"Museums in Jerusalem",to:"/travel-blog/museums-in-jerusalem/",description:"Choose the Israel Museum, Yad Vashem, Tower of David and more.",cta:"Compare Jerusalem museums"},
+  {title:"Churches in Jerusalem",to:"/travel-blog/churches-in-jerusalem/",description:"Find meaningful pilgrimage visits by area, not just a long list.",cta:"Plan church visits"},
+  {title:"Shopping & markets",to:"/travel-blog/shopping-in-jerusalem/",description:"Discover Mahane Yehuda, Old City markets, crafts and downtown streets.",cta:"Discover markets and shops"},
 ] as const;
 
 export const jerusalemDayPlans = [
@@ -20,29 +20,30 @@ export const jerusalemDayPlans = [
 ] as const;
 
 export const jerusalemStayAreas = [
-  {name:"Old City",character:"Immersive historic setting",best:"Walkable sacred-site stays",consider:"Cobblestones, steps, restricted vehicle access"},
-  {name:"Mamilla / King David",character:"Central, near Jaffa Gate",best:"Old City visits with hotel convenience",consider:"Walking distance varies by address"},
-  {name:"Downtown / Jaffa Road",character:"Restaurants and light rail",best:"Public transport and central sightseeing",consider:"Allow for the last walk to historic sites"},
-  {name:"Mahane Yehuda / Nachlaot",character:"Markets and local neighbourhood life",best:"Food, markets and city-centre atmosphere",consider:"Stall hours and evening noise vary"},
-  {name:"German Colony / Baka",character:"Residential cafés and quieter streets",best:"A relaxed base away from the Old City",consider:"Plan transport to the principal sights"},
+  {name:"Old City",to:"/accommodation/jerusalem/old-city/",character:"Immersive historic setting",best:"Walkable sacred-site stays",consider:"Cobblestones, steps, restricted vehicle access"},
+  {name:"Mamilla / King David",to:"/accommodation/jerusalem/mamilla-king-david/",character:"Central, near Jaffa Gate",best:"Old City visits with hotel convenience",consider:"Walking distance varies by address"},
+  {name:"Downtown / Jaffa Road",to:"/accommodation/jerusalem/downtown/",character:"Restaurants and light rail",best:"Public transport and central sightseeing",consider:"Allow for the last walk to historic sites"},
+  {name:"Mahane Yehuda / Nachlaot",to:"/accommodation/jerusalem/mahane-yehuda-nachlaot/",character:"Markets and local neighbourhood life",best:"Food, markets and city-centre atmosphere",consider:"Stall hours and evening noise vary"},
+  {name:"German Colony / Baka",to:"/accommodation/jerusalem/german-colony-baka/",character:"Residential cafés and quieter streets",best:"A relaxed base away from the Old City",consider:"Plan transport to the principal sights"},
+  {name:"East Jerusalem",to:"/accommodation/jerusalem/east-jerusalem/",character:"Neighbourhoods and cultural connections north and east of the Old City",best:"Visitors whose plans or accommodation are based in this part of Jerusalem",consider:"Exact location, transport, access and practical walking routes"},
 ] as const;
 
 export const jerusalemDayTripCards = [
-  {title:"Dead Sea from Jerusalem",to:"/travel-blog/jerusalem-to-the-dead-sea/",description:"Choose a beach, Masada or an overnight stay before arranging transport."},
-  {title:"Bethlehem",to:"/travel-blog/jerusalem-to-bethlehem/",description:"Understand access, bus and tour options to the Church of the Nativity."},
-  {title:"Masada",to:"/attractions/masada/",description:"Visit the fortress and plan the cable car, park entry and desert conditions."},
-  {title:"Ein Gedi",to:"/attractions/ein-gedi/",description:"Check which desert-oasis trails and reserve areas are open."},
-  {title:"Qasr el-Yahud",to:"/attractions/qasr-el-yahud/",description:"The lower-Jordan baptism site requires a separate visitor reservation."},
-  {title:"Tel Aviv & Old Jaffa",to:"/attractions/jaffa/",description:"A longer city-to-coast outing, best planned around your travel time."},
+  {title:"Dead Sea from Jerusalem",to:"/travel-blog/jerusalem-to-the-dead-sea/",description:"Choose the right beach or hotel and understand your transport options.",cta:"Plan the Dead Sea trip"},
+  {title:"Bethlehem",to:"/travel-blog/jerusalem-to-bethlehem/",description:"Understand access, buses and tour options to the Church of the Nativity.",cta:"Plan a Bethlehem visit"},
+  {title:"Masada",to:"/attractions/masada/",description:"Explore the ancient fortress, cable car, park entry and desert conditions.",cta:"Plan a Masada visit"},
+  {title:"Sea of Galilee",to:"/attractions/sea-of-galilee/",description:"Explore lake-side Christian heritage sites and plan the longer return journey.",cta:"Explore the Sea of Galilee"},
+  {title:"Caesarea",to:"/attractions/caesarea/",description:"Explore the coastal archaeological park and consider other stops along the coast.",cta:"Explore Caesarea"},
+  {title:"Tel Aviv & Old Jaffa",to:"/travel-blog/attractions-in-tel-aviv/",description:"Plan a full day around historic Jaffa, city neighbourhoods and the Mediterranean.",cta:"Plan a Tel Aviv day"},
 ] as const;
 
 export const jerusalemMoreGuides = [
-  {title:"Israel in 3 days",to:"/travel-blog/israel-itinerary-3-days/",description:"Use Jerusalem as part of a focused short visit to Israel."},
-  {title:"Israel in 5 days",to:"/travel-blog/israel-itinerary-5-days/",description:"Fit Jerusalem, another city and a selected extra region together."},
-  {title:"Israel in 7 days",to:"/travel-blog/israel-itinerary-7-days/",description:"See how Jerusalem fits into a more comfortable national itinerary."},
-  {title:"Israel in 10 days",to:"/travel-blog/israel-itinerary-10-days/",description:"Allow extra time for the Galilee, Dead Sea and other destinations."},
-  {title:"Israel's calendar of events",to:"/travel-blog/calendar-of-events/",description:"Check Jewish holidays, religious festivals and important dates."},
-  {title:"Israel travel tips",to:"/travel-blog/israel-travel-tips/",description:"Entry preparation, payments, practical customs and trip planning."},
+  {title:"Israel in 3 days",to:"/travel-blog/israel-itinerary-3-days/",description:"Use Jerusalem as part of a focused short visit to Israel.",cta:"View the 3-day itinerary"},
+  {title:"Israel in 5 days",to:"/travel-blog/israel-itinerary-5-days/",description:"Fit Jerusalem, another city and a selected extra region together.",cta:"View the 5-day itinerary"},
+  {title:"Israel in 7 days",to:"/travel-blog/israel-itinerary-7-days/",description:"See how Jerusalem fits into a more comfortable national itinerary.",cta:"View the 7-day itinerary"},
+  {title:"Israel in 10 days",to:"/travel-blog/israel-itinerary-10-days/",description:"Allow extra time for the Galilee, Dead Sea and other destinations.",cta:"View the 10-day itinerary"},
+  {title:"Israel's calendar of events",to:"/travel-blog/calendar-of-events/",description:"Check Jewish holidays, religious festivals and important dates.",cta:"Check important dates"},
+  {title:"Israel travel tips",to:"/travel-blog/israel-travel-tips/",description:"Entry preparation, payments, practical customs and trip planning.",cta:"Read my travel tips"},
 ] as const;
 
 export const jerusalemTourGroups = [
