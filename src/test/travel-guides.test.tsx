@@ -76,6 +76,32 @@ describe("migrated practical guides", () => {
       expect(article).toMatchObject({ headline: guide.title, dateModified: guide.updatedAt, inLanguage: "en" });
       return;
     }
+    if (id === "baptism") {
+      // The dedicated Jordan River comparison intentionally replaces the old
+      // generic checklist/sections layout with a richer site-focused guide.
+      expect(container.querySelector("#quick-answer")).toHaveTextContent("Yardenit");
+      expect(container.querySelector("[data-testid='baptism-mobile-comparison']")).not.toBeNull();
+      expect(container.querySelectorAll("#compare-sites tbody tr")).toHaveLength(6);
+      expect(container.querySelectorAll('[data-testid="baptism-tour-card"]')).toHaveLength(6);
+      expect(container.querySelectorAll("#attractions .grid > a")).toHaveLength(6);
+      expect(container.querySelectorAll("#related .grid > a")).toHaveLength(6);
+      expect(container.querySelectorAll("#faq details")).toHaveLength(10);
+      expect(container.querySelector("#getting-there iframe")).not.toBeNull();
+      expect(container.querySelector('#contact form')).not.toBeNull();
+      expect(container.querySelector("#sources")).not.toBeNull();
+      expect(container.querySelector("time")).toHaveAttribute("datetime",guide.updatedAt);
+      expect(screen.getByRole("complementary", { name: "About the author" })).toHaveTextContent("Written by Moshe Barak");
+      const head=await route.options.head?.({} as never);
+      expect(head).toMatchObject({meta:expect.arrayContaining([
+        {title:guide.title},
+        {name:"description",content:guide.description},
+        {name:"robots",content:"noindex,nofollow"},
+      ])});
+      const structured=head!.scripts!.flatMap(script=>typeof script?.children==="string"?[JSON.parse(script.children)]:[]);
+      expect(structured.find(item=>item["@type"]==="Article")).toMatchObject({headline:guide.title,dateModified:guide.updatedAt,inLanguage:"en"});
+      expect(structured.find(item=>item["@type"]==="FAQPage")?.mainEntity).toHaveLength(10);
+      return;
+    }
     if (id === "jerusalemShopping") {
       // This guide now uses the shared dedicated layout, with an editorial quick
       // recommendation, ten place cards, a map, photos and a six-card follow-up grid.
