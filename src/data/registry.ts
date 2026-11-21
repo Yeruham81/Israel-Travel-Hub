@@ -1416,6 +1416,13 @@ export const affiliateConfig: Record<string, { trackingUrl: string } | undefined
   "tour-masada-sunrise-jerusalem-viator@tours-masada-dead-sea": { trackingUrl: "https://viator.tpm.li/aT7XOGAp" },
   "tour-dead-sea-relax-tel-aviv-viator@tours-masada-dead-sea": { trackingUrl: "https://viator.tpm.li/bSLf7tfv" },
   "tour-dead-sea-relax-jerusalem-viator@tours-masada-dead-sea": { trackingUrl: "https://viator.tpm.li/rCb6K2nL" },
+  // Existing Travelpayouts product links reused with this guide's specific SubIDs.
+  "tour-nazareth-galilee-tel-aviv-getyourguide@travel-blog-baptism": { trackingUrl: "https://getyourguide.tpm.li/k2QS6VE5?sub_id=baptism_galilee_tlv" },
+  "tour-nazareth-galilee-jerusalem-viator@travel-blog-baptism": { trackingUrl: "https://viator.tpm.li/njSCxiZa?sub_id=baptism_galilee_jerusalem" },
+  "tour-nazareth-tiberias-tel-aviv-viator@travel-blog-baptism": { trackingUrl: "https://viator.tpm.li/thrOwaSl?sub_id=baptism_galilee_tiberias" },
+  "tour-bethlehem-jericho-qasr-small-group-viator@travel-blog-baptism": { trackingUrl: "https://viator.tpm.li/SVmtGeCA?sub_id=baptism_qasr_smallgroup" },
+  "tour-bethlehem-jericho-qasr-tel-aviv-viator@travel-blog-baptism": { trackingUrl: "https://viator.tpm.li/fgm6bDD8?sub_id=baptism_qasr_telaviv" },
+  "tour-bethlehem-qasr-dead-sea-viator@travel-blog-baptism": { trackingUrl: "https://viator.tpm.li/p4ze5xww?sub_id=baptism_qasr_deadsea" },
   // API-generated deep links for the Bethlehem, Jericho & Qasr al-Yahud tour category (Travelpayouts project 406243).
   // Each offer is product-specific and uses its own source-page SubID; never reuse another page's links.
   "tour-jerusalem-bethlehem-private-getyourguide@tours-bethlehem-jericho": { trackingUrl: "https://getyourguide.tpm.li/4GXisbcl" },
