@@ -27,6 +27,12 @@ jobs:
       - uses: actions/checkout@v4
         with:
           persist-credentials: false
+      - name: Reject retired Eilat guide backlinks
+        run: |
+          if git grep -n -F '/travel-blog/eilat/' -- src public/sitemap.xml scripts; then
+            echo "::error::Retired Eilat guide URL remains in source; only /attractions/eilat/ may be used."
+            exit 1
+          fi
       - uses: actions/setup-node@v4
         with:
           node-version: "24"
