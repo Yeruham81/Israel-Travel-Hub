@@ -177,7 +177,7 @@ export const mountZionDestinationContent: AttractionDestinationContent = {
   tourContent: (
     <div className="mt-4 space-y-4">
       <p>These full-day tours include Mount Zion among other Jerusalem highlights. They are not dedicated short walks on the hill; check whether the Upper Room, David's Tomb and other stops are included for your specific departure date.</p>
-      <div className="grid gap-3 sm:grid-cols-2" data-testid="mount-zion-tour-cards">
+      <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3" data-testid="mount-zion-tour-cards">
         {mountZionTours.map(tour => <article key={tour.id} className="flex min-w-0 flex-col overflow-hidden rounded-xl border bg-card">
           <img src={tour.photo} alt={tour.alt} width={480} height={260} loading="lazy" decoding="async" className="aspect-[16/9] w-full object-cover"/>
           <div className="flex flex-1 flex-col p-4">
