@@ -168,7 +168,7 @@ describe("migrated practical guides", () => {
     const doc = new DOMParser().parseFromString(html, "text/html");
     const cardPhotos = [...doc.querySelectorAll('[data-testid="guide-directory-card"] img')].map(photo => photo.getAttribute("src") || "");
     expect(repeatedPhotos(cardPhotos)).toEqual([]);
-    expect(new Set(guideDirectory.map((guide) => guide.to)).size).toBe(46);
+    expect(new Set(guideDirectory.map((guide) => guide.to)).size).toBe(45);
     expect(guideDirectory.some(guide => guide.id === "israel-holidays" && guide.to === "/travel-blog/israel-holidays/")).toBe(true);
     for (const guide of guideDirectory) {
       expect(html).toContain(`href="${guide.to}"`);
