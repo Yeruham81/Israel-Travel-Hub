@@ -66,7 +66,7 @@ describe("Eilat multi-attraction city guide", () => {
     expect(new Set(list).size).toBe(list.length);
     for (const image of list) expect(existsSync("public" + image), image).toBe(true);
     expect(page).toContain("@/assets/home/timna-park-feature-optimized.webp");
-    expect(page).toContain("@/assets/eilat/waterfront.webp");
+    expect(page).toContain("src: photos.watersports");
     expect(page).toContain("@/assets/eilat/coral-reef.webp");
   });
 
