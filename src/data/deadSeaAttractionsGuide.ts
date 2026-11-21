@@ -1,6 +1,5 @@
 import type { LinkProps } from "@tanstack/react-router";
 import type { Attraction } from "@/data/attractionGuideTypes";
-import deadSeaOverviewPhoto from "@/assets/dead-sea/landscape.webp";
 import jeep from "@/assets/negev/ramon-jeep.webp";
 import beach from "@/assets/dead-sea/beach.webp";
 import masada from "@/assets/guides/dead-sea-excursions/masada-aerial.webp";
@@ -9,7 +8,7 @@ import qumran from "@/assets/guides/dead-sea-excursions/qumran-caves.webp";
 import mud from "@/assets/guides/dead-sea-excursions/dead-sea-mud-bathing.webp";
 
 /** One canonical image for the Dead Sea attractions guide and every inbound card. */
-export const deadSeaAttractionsHero = { src: deadSeaOverviewPhoto, alt: "Dead Sea shoreline with desert hills" } as const;
+export const deadSeaAttractionsHero = { src: "/images/dead-sea-attractions/nahal-bokek.webp", alt: "Nahal Bokek stream and desert gorge near the Dead Sea" } as const;
 
 export type DeadSeaStop = {
   id: string; title: string; shortTitle: string; area: string; kind: string;
