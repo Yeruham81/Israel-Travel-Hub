@@ -42,7 +42,7 @@ describe("Israel holidays visitor guide", () => {
     expect(entries.find(e=>e.id==="easter")?.impact).toBe("local");
     expect(entries.find(e=>e.id==="eid")?.impact).toBe("local");
     expect(entries.find(e=>e.id==="passover")?.transport).toContain("Chol HaMoed");
-    expect(entries.find(e=>e.id==="rosh-hashanah")?.transport).toContain("trains");
+    expect(entries.find(e=>e.id==="rosh-hashanah")?.transport).toContain("train services");
   });
   it("cites official travel sources and does not contain fabricated event tickets", () => {
     expect(holidayGuideSources.length).toBeGreaterThanOrEqual(6);
