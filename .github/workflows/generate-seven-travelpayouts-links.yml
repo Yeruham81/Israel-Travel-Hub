@@ -1,0 +1,36 @@
+name: Generate seven targeted Travelpayouts links
+on:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/generate-seven-travelpayouts-links.yml"
+      - "scripts/travelpayouts/generate-seven-missing-links.mjs"
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  generate:
+    if: github.event_name == 'workflow_dispatch' || contains(github.event.head_commit.message, '[generate-seven-affiliate-links]')
+    runs-on: ubuntu-24.04
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+      - name: Validate seven original destinations and page-specific subIDs
+        run: node scripts/travelpayouts/generate-seven-missing-links.mjs --validate
+      - name: Request exact merchant/product links from Travelpayouts API
+        env:
+          TRAVELPAYOUTS_API_TOKEN: ${{ secrets.TRAVELPAYOUTS_API_TOKEN }}
+        run: node scripts/travelpayouts/generate-seven-missing-links.mjs
+      - name: Retain candidate links for review
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: seven-travelpayouts-link-candidates
+          path: artifacts/seven-missing-travelpayouts-links.json
+          if-no-files-found: warn
+          retention-days: 14
