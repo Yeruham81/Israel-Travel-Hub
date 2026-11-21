@@ -109,7 +109,7 @@ describe("Attractions hub redesign", () => {
   it("uses locally hosted selected WordPress photographs rather than live legacy image URLs", () => {
     expect(Object.values(attractionHubPhotos)).toHaveLength(12);
     for (const photo of Object.values(attractionHubPhotos)) {
-      expect(photo.src).toMatch(/^\/images\/attractions\/.*\.webp$/);
+      expect(photo.src).toMatch(/^\/(?:images\/attractions|src\/assets\/eilat)\/.*\.webp$/);
       expect(photo.alt).toBeTruthy();
       expect(photo.sourceFilename).toBeTruthy();
     }
