@@ -6,11 +6,11 @@ export const planningGuides = {
   bestTime: bestTimeGuide,
   "food": {
     "id": "food",
-    "updatedAt": "2026-10-20",
-    "title": "What to eat in Israel: 10 dishes, markets and practical tips",
-    "description": "Try shawarma, falafel, hummus, shakshuka, sabich, bourekas, jachnun, malabi and kanafeh. Plan food markets, dietary questions and a varied tasting day.",
-    "intro": "Food is one of the pleasures of travelling here: bakeries opening in the morning, hummus lunches, market snacks and a dessert shared after dinner. The dishes below reflect the country’s varied communities and wider Middle Eastern and Mediterranean food traditions. Use the list to explore, rather than treating a dish as belonging to just one place or one fixed recipe.",
-    "answer": "Start with a few savoury dishes, a bakery stop and one dessert. Jerusalem’s Mahane Yehuda and Tel Aviv’s Carmel Market are useful areas to explore, but individual businesses keep their own hours. Ask about ingredients and portion prices, and arrange an alternative meal if you arrive after market stalls close.",
+    "updatedAt": "2026-11-21",
+    "title": "What to Eat in Israel: 10 Foods & a First-Timer’s Guide",
+    "description": "Discover what to eat in Israel: 10 popular dishes with photos, how to order them, where to taste food in Jerusalem and Tel Aviv, market tips and food tours.",
+    "intro": "From a fresh falafel pita to a slow-cooked breakfast and a warm dessert, eating here can be part of the journey. I’ll introduce ten popular dishes, explain what to order and share practical market tips for visitors who are new to the food.",
+    "answer": "For an easy first taste, choose falafel or sabich in pita, try hummus as a meal, and add shakshuka or bourekas for breakfast. Save space for malabi or warm kanafeh. If you enjoy food markets, try Mahane Yehuda in Jerusalem or Carmel and Levinsky in Tel Aviv.",
     "topics": [
       "tips",
       "destinations"
@@ -211,7 +211,9 @@ export const planningGuides = {
     ],
     "sourceIds": [
       "guide-mahane-yehuda",
-      "m26-tlv-city"
+      "m26-tlv-city",
+      "guide-tlv-food-money",
+      "guide-jerusalem-food-markets"
     ]
   },
   "calendar": {
