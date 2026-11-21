@@ -81,8 +81,8 @@ export const haifaMuseums: HaifaMuseumEntry[] = [
   {
     id: "struck", name: "Hermann Struck Museum", area: "hadar", neighbourhood: "Hadar HaCarmel",
     address: "23 Arlozorov Street, Haifa", theme: "Printmaking & artists' house",
-    bestFor: "Historic interiors, prints and intimate exhibitions", duration: "45–75 minutes",
-    admission: "Check the current Haifa Museums tariff and any exhibition-specific entry arrangements.",
+    bestFor: "Historic interiors, prints and intimate exhibitions", duration: "45–75 minutes", priceNis: 0,
+    admission: "Free general admission according to Haifa Museums; check separately for workshops or special activities.",
     openingDays: "Usually Sun, Tue–Wed 10:00–16:00; Thu 10:00–18:00; Fri 10:00–14:00. Mon and Sat closed.",
     booking: "Check the exhibition programme and access arrangements.",
     intro: "Housed in artist Hermann Struck's former home, this smaller museum introduces his printmaking work, personal objects and the artistic world of the early twentieth century. Exhibitions also explore the printmaking medium.",
