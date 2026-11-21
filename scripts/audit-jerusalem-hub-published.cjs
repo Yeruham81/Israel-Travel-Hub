@@ -79,7 +79,7 @@ async function snapshot(page,label,desktop){
  verify(data.sections.length===13,label+": dedicated sections",String(data.sections.length));
  verify(data.topicCards===6&&data.days===3&&data.stayAreas===5,label+": first-visit cards, 3 day plans and 5 stay areas");
  verify(data.stayLinks.includes("/travel-blog/where-to-stay-in-jerusalem/")&&data.stayLinks.includes("/accommodation/jerusalem/"),label+": distinct hotel and neighbourhood destinations");
- verify(data.transport.length===4&&data.transport.some(x=>x.includes("airport-to-jerusalem"))===false&&data.transport.some(x=>x.includes("how-to-get-from-ben-gurion-airport-to-jerusalem")),label+": four precise transport routes");
+ verify(data.transport.length===4&&!data.transport.includes("/travel-blog/airport-to-jerusalem/")&&data.transport.some(x=>x.includes("how-to-get-from-ben-gurion-airport-to-jerusalem")),label+": four precise transport routes");
  verify(data.dayTripCards===6&&data.relatedCards===6,label+": six day trips and six extra planning guides");
  verify(data.allGuideLinks.length===18&&new Set(data.allGuideLinks).size===18,label+": unique direct internal guide destinations");
  verify(data.editorialPhotos.length===18&&data.editorialPhotos.every(x=>x.loaded)&&new Set(data.editorialPhotos.map(x=>x.src)).size===18&&data.placeholderPhotos===0,label+": 18 distinct linked hero photos load");
