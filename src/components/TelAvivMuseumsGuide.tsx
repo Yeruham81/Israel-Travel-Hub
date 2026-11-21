@@ -1,7 +1,7 @@
 import { guideHeroPhotoForPath } from "@/lib/guide-hero-photos";
 import { useEffect, useRef, useState, type ReactNode } from "react";
 import { Link } from "@tanstack/react-router";
-import { ArrowUpRight, CalendarCheck2, Clock3, ExternalLink, Landmark, Lightbulb, MapPin, Ticket, CalendarDays } from "lucide-react";
+import { ArrowUpRight, CalendarCheck2, Clock3, ExternalLink, Lightbulb, MapPin, Ticket, CalendarDays } from "lucide-react";
 import { Breadcrumbs, FaqList, OnThisPage } from "@/components/Guide";
 import { AuthorCard } from "@/components/AuthorCard";
 import { GuideHeroLayout, GuideHeroMedia } from "@/components/GuideHeroMedia";
@@ -11,7 +11,7 @@ import { HomeContactForm } from "@/components/HomeContactForm";
 import { neighborhoodTripContactCopy } from "@/lib/guide-contact";
 import { additionalMuseums, museumAreas, museumMapPoints, museums, type MuseumEntry } from "@/data/telAvivMuseums";
 import museumHero from "@/assets/guides/2026-10/museums-in-tel-aviv.webp";
-import muzaPhoto from "@/assets/guides/2026-10/eretz-israel-museum.webp";
+import { telAvivMuseumPhotos } from "@/data/telAvivMuseumPhotos";
 import jaffaPhoto from "@/assets/tel-aviv/jaffa.webp";
 import nevePhoto from "@/assets/tel-aviv/neve-tzedek.webp";
 import beachPhoto from "@/assets/guides/2026-10/beaches-in-tel-aviv.webp";
@@ -19,7 +19,7 @@ import dizengoffPhoto from "@/assets/tel-aviv/dizengoff.webp";
 import rothschildPhoto from "@/assets/tel-aviv/rothschild.webp";
 import beachfrontPhoto from "@/assets/tel-aviv/beachfront.webp";
 
-const updatedAt = "2026-11-19";
+const updatedAt = "2026-11-21";
 
 
 const related = [
@@ -53,55 +53,70 @@ function SectionHeading({ id, title, intro }: { id: string; title: string; intro
 }
 
 function MuseumCard({ museum }: { museum: MuseumEntry }) {
-  // Only the already licensed museum photograph is used. Additional museum photography
-  // will be added in a separate editorial image pass.
-  const museumImage = museum.id === "muza" ? { src: muzaPhoto, alt: "MUZA, Eretz Israel Museum in Ramat Aviv" } : null;
+  const museumPhoto = telAvivMuseumPhotos[museum.id]!;
   const family = ["anu", "steinhardt", "muza", "art", "city", "gutman"].includes(museum.id);
   const advanceBooking = ["palmach", "city", "steinhardt"].includes(museum.id);
-  const tags = [
-    museumImage ? museum.theme : null,
-    museum.priceNis === 0 ? "Free entry" : null,
-    family ? "Family-friendly" : null,
-    advanceBooking ? "Book ahead" : null,
-  ].filter((item): item is string => Boolean(item)).slice(0, 3);
-  const ticketLabel = museum.id === "bauhaus" ? "Tours & audio guide" : museum.id === "liebling" ? "Tours & events" : "Check tickets & rates";
-  return <article id={"museum-" + museum.id} className="flex scroll-mt-28 flex-col overflow-hidden rounded-2xl border bg-card shadow-sm">
-    {museumImage ? <img src={museumImage.src} alt={museumImage.alt} width={840} height={473} loading="lazy" decoding="async" className="aspect-[16/9] w-full object-cover" />
-    : <div className="flex items-center justify-between gap-3 border-b bg-secondary/35 px-4 py-3">
-      <span className="text-xs font-semibold uppercase tracking-wide text-primary">{museum.theme}</span>
-      <Landmark className="h-5 w-5 text-primary/60" aria-hidden="true" />
-    </div>}
-    <div className="flex flex-1 flex-col p-4 sm:p-5">
-      <p className="text-xs font-semibold uppercase tracking-wide text-primary">{museum.neighbourhood}</p>
-      <h3 className="mt-1 text-xl font-bold leading-snug">{museum.name}</h3>
-      <div className="mt-2 flex flex-wrap gap-1.5">{tags.map((tag) => <span key={tag} className="rounded-full border border-primary/15 bg-secondary/50 px-2.5 py-1 text-[11px] font-medium">{tag}</span>)}</div>
-      {museum.closureNote && <p className="mt-3 w-fit rounded-md border border-amber-300/60 bg-amber-50 px-2 py-1 text-xs font-semibold text-amber-900">{museum.closureNote}</p>}
-      <p className="mt-3 text-sm leading-relaxed">{museum.intro}</p>
-      <dl className="mt-4 grid gap-2 rounded-lg bg-secondary/40 p-3 text-sm">
-        <div className="flex items-start gap-2"><Clock3 aria-hidden="true" className="mt-0.5 h-4 w-4 shrink-0 text-primary" /><div><dt className="inline font-semibold">Allow: </dt><dd className="inline">{museum.duration}</dd></div></div>
-        <div className="flex items-start gap-2"><Ticket aria-hidden="true" className="mt-0.5 h-4 w-4 shrink-0 text-primary" /><div><dt className="inline font-semibold">Admission: </dt><dd className="inline">{museum.admission}</dd></div></div>
-        <div className="flex items-start gap-2"><CalendarDays aria-hidden="true" className="mt-0.5 h-4 w-4 shrink-0 text-primary" /><div><dt className="inline font-semibold">Usual opening: </dt><dd className="inline">{museum.openingDays || "Confirm with the museum"}</dd></div></div>
-        <div className="flex items-start gap-2"><CalendarCheck2 aria-hidden="true" className="mt-0.5 h-4 w-4 shrink-0 text-primary" /><div><dt className="inline font-semibold">Booking: </dt><dd className="inline">{museum.booking}</dd></div></div>
-      </dl>
-      {museum.highlightsForFamilies && <p className="mt-3 text-xs leading-relaxed text-muted-foreground">{museum.highlightsForFamilies}</p>}
-      <div className="mt-3">
-        <p className="text-sm font-semibold">Highlights</p>
-        <ul className="mt-1 list-disc space-y-0.5 pl-5 text-sm leading-relaxed text-muted-foreground">{museum.highlights.slice(0, 2).map(highlight => <li key={highlight}>{highlight}</li>)}</ul>
+  const tags = [museum.theme, museum.priceNis === 0 ? "Free entry" : null, family ? "Family-friendly" : null, advanceBooking ? "Book ahead" : null].filter((x): x is string => Boolean(x));
+  const showTicket = museum.id === "palmach" || Boolean(museum.ticketUrl && museum.ticketUrl !== museum.url);
+  const ticketLabel = museum.id === "palmach" ? "Reserve by phone" : museum.id === "bauhaus" ? "Tours & audio guide" : museum.id === "liebling" ? "Tours & events" : ["city", "steinhardt", "anu"].includes(museum.id) ? "Reserve a visit" : "Check tickets & rates";
+
+  return <article id={"museum-" + museum.id} data-museum-card="horizontal" className="scroll-mt-28 overflow-hidden rounded-2xl border bg-card shadow-sm">
+    <div className="lg:grid lg:grid-cols-[minmax(0,1fr)_270px] lg:items-start lg:gap-6 lg:p-5">
+      <figure className="min-w-0 bg-secondary/20 lg:col-start-2 lg:row-start-1 lg:overflow-hidden lg:rounded-xl">
+        <div className="overflow-hidden bg-secondary/40">
+          <img
+            src={museumPhoto.src}
+            alt={museumPhoto.alt}
+            width={museumPhoto.width}
+            height={museumPhoto.height}
+            loading="lazy"
+            decoding="async"
+            className={`h-48 w-full sm:h-56 lg:aspect-[4/3] lg:h-auto ${museumPhoto.fit === "contain" ? "object-contain" : "object-cover"}`}
+          />
+        </div>
+        {museumPhoto.illustrative && <figcaption className="px-3 py-2 text-xs leading-relaxed text-muted-foreground">Architectural illustration, not a photograph of this museum.</figcaption>}
+      </figure>
+      <div className="min-w-0 p-4 sm:p-5 lg:col-start-1 lg:row-start-1 lg:p-0">
+        <p className="text-xs font-semibold uppercase tracking-wide text-primary">{museum.neighbourhood}</p>
+        <h3 className="mt-1 text-xl font-bold leading-snug sm:text-2xl">{museum.name}</h3>
+        {tags.length > 0 && <div className="mt-2 flex flex-wrap gap-1.5">{tags.map(tag => <span key={tag} className="rounded-full border border-primary/15 bg-secondary/50 px-2.5 py-1 text-[11px] font-medium">{tag}</span>)}</div>}
+        {museum.closureNote && <p className="mt-3 w-fit rounded-md border border-amber-300/60 bg-amber-50 px-2 py-1 text-xs font-semibold text-amber-900">{museum.closureNote}</p>}
+        <p className="mt-3 text-sm leading-relaxed">{museum.intro}</p>
       </div>
-      <p className="mt-3 text-sm leading-relaxed"><strong className="text-primary">My tip:</strong> {museum.tip}</p>
-      <div className="mt-3 flex flex-wrap items-baseline gap-x-3 gap-y-1 text-xs text-muted-foreground"><span>{museum.address}</span><MapLink museum={museum} /></div>
-      <div className="mt-auto grid gap-2 border-t pt-4 text-sm sm:grid-cols-2">
-        {(museum.ticketUrl && museum.id !== "independence" || museum.id === "palmach") && <a href={museum.id === "palmach" ? "tel:+97235459800" : museum.ticketUrl} target={museum.id === "palmach" ? undefined : "_blank"} rel={museum.id === "palmach" ? undefined : "noopener noreferrer"} className="inline-flex min-h-11 items-center justify-center gap-1.5 rounded-lg bg-primary px-3 py-2.5 text-center font-semibold text-primary-foreground transition-opacity hover:opacity-90">{museum.id === "palmach" ? "Reserve by phone" : ticketLabel}{museum.id !== "palmach" && <ExternalLink className="h-3.5 w-3.5" aria-hidden="true" />}</a>}
-        <a href={museum.url} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-11 items-center justify-center gap-1.5 rounded-lg border border-sky-200 bg-sky-100 px-3 py-2.5 text-center font-semibold text-sky-950 hover:bg-sky-200">Official museum website<ExternalLink className="h-3.5 w-3.5" aria-hidden="true" /><span className="sr-only">(opens in a new tab)</span></a>
+    </div>
+    <div className="border-t px-4 py-4 sm:px-5 lg:px-6">
+      <dl className="grid gap-3 rounded-xl bg-secondary/40 p-3.5 text-sm sm:grid-cols-2">
+        <div className="flex min-w-0 items-start gap-2"><Clock3 className="mt-0.5 h-4 w-4 shrink-0 text-primary" aria-hidden="true" /><div><dt className="font-semibold">Allow</dt><dd className="mt-0.5 leading-relaxed text-muted-foreground">{museum.duration}</dd></div></div>
+        <div className="flex min-w-0 items-start gap-2"><Ticket className="mt-0.5 h-4 w-4 shrink-0 text-primary" aria-hidden="true" /><div><dt className="font-semibold">Admission</dt><dd className="mt-0.5 leading-relaxed text-muted-foreground">{museum.admission}</dd></div></div>
+        <div className="flex min-w-0 items-start gap-2"><CalendarDays className="mt-0.5 h-4 w-4 shrink-0 text-primary" aria-hidden="true" /><div><dt className="font-semibold">Usual opening</dt><dd className="mt-0.5 leading-relaxed text-muted-foreground">{museum.openingDays || "Confirm with the museum"}</dd></div></div>
+        <div className="flex min-w-0 items-start gap-2"><CalendarCheck2 className="mt-0.5 h-4 w-4 shrink-0 text-primary" aria-hidden="true" /><div><dt className="font-semibold">Booking</dt><dd className="mt-0.5 leading-relaxed text-muted-foreground">{museum.booking}</dd></div></div>
+      </dl>
+    </div>
+    <div className="grid gap-4 border-t px-4 py-4 sm:px-5 lg:grid-cols-2 lg:gap-6 lg:px-6">
+      <div>
+        <h4 className="text-sm font-semibold">Highlights</h4>
+        <ul className="mt-1 list-disc space-y-0.5 pl-5 text-sm leading-relaxed text-muted-foreground">{museum.highlights.slice(0, 2).map(highlight => <li key={highlight}>{highlight}</li>)}</ul>
+        {museum.highlightsForFamilies && <p className="mt-2 text-xs leading-relaxed text-muted-foreground">{museum.highlightsForFamilies}</p>}
+      </div>
+      <p className="text-sm leading-relaxed"><strong className="text-primary">My tip:</strong> {museum.tip}</p>
+    </div>
+    <div className="flex flex-col gap-3 border-t bg-secondary/10 p-4 sm:p-5 lg:flex-row lg:items-center lg:justify-between lg:gap-5 lg:px-6">
+      <div className="flex min-w-0 flex-col gap-1 text-xs text-muted-foreground">
+        <span>{museum.address}</span>
+        <div><MapLink museum={museum} /></div>
+      </div>
+      <div className={`grid w-full gap-2 text-sm lg:w-auto lg:min-w-[360px] ${showTicket ? "sm:grid-cols-2" : "sm:grid-cols-1"}`}>
+        {showTicket && <a href={museum.id === "palmach" ? "tel:+97235459800" : museum.ticketUrl!} target={museum.id === "palmach" ? undefined : "_blank"} rel={museum.id === "palmach" ? undefined : "noopener noreferrer"} className="inline-flex min-h-11 items-center justify-center gap-1.5 rounded-lg bg-primary px-3 py-2.5 text-center font-semibold text-primary-foreground transition-opacity hover:opacity-90">{ticketLabel}{museum.id !== "palmach" && <><ExternalLink className="h-3.5 w-3.5 shrink-0" aria-hidden="true" /><span className="sr-only"> (opens in a new tab)</span></>}</a>}
+        <a href={museum.url} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-11 items-center justify-center gap-1.5 rounded-lg border border-sky-200 bg-sky-100 px-3 py-2.5 text-center font-semibold text-sky-950 hover:bg-sky-200">{museum.id === "bauhaus" || museum.id === "liebling" ? "Official centre website" : "Official museum website"}<ExternalLink className="h-3.5 w-3.5 shrink-0" aria-hidden="true" /><span className="sr-only"> (opens in a new tab)</span></a>
       </div>
     </div>
   </article>;
 }
 
 function PlanningTip({ children }: { children: ReactNode }) {
-  return <aside className="flex gap-3 rounded-xl border border-amber-300/50 bg-amber-50/80 p-4 text-sm leading-relaxed text-slate-800">
+  return <aside className="flex items-start gap-3 rounded-xl border border-amber-200 bg-amber-50/80 p-4 text-sm leading-relaxed text-amber-950">
     <Lightbulb aria-hidden="true" className="mt-0.5 h-5 w-5 shrink-0 text-amber-600" />
-    <div>{children}</div>
+    <div><strong>My tip:</strong> {children}</div>
   </aside>;
 }
 
@@ -225,7 +240,7 @@ export function TelAvivMuseumsGuide() {
         {museumAreas.map((area, index) => <section key={area.id} id={"area-" + area.id} aria-label={area.name} className="mt-9 scroll-mt-24">
           <h3 className="text-2xl font-semibold">{area.name}</h3>
           <p className="mt-2 max-w-3xl leading-relaxed text-muted-foreground">{area.intro}</p>
-          <div className="mt-5 grid items-stretch gap-5 md:grid-cols-2">{museums.filter(museum => museum.area === area.id).map(museum => <MuseumCard key={museum.id} museum={museum} />)}</div>
+          <div className="mt-5 grid gap-5">{museums.filter(museum => museum.area === area.id).map(museum => <MuseumCard key={museum.id} museum={museum} />)}</div>
           {index === 0 && <div className="mt-5"><PlanningTip>For a walkable cultural afternoon, choose two or three cultural venues around Bialik Square: the City Museum, Bialik House, Rubin Museum, Liebling Haus and Felicja Blumental Centre are nearby. <OfficialLink href="https://www.bialikmuseum.org.il/pages?pageid=14">Bialik House advertises a ₪75 combined ticket</OfficialLink>; confirm its participating venues before purchasing. Save the main Tel Aviv Museum of Art for a separate substantial visit.</PlanningTip></div>}
           {index === 1 && <div className="mt-5"><PlanningTip>The university-area museums are separate institutions. Check each ticket, English-language option and visiting time before travelling. The MUZA planetarium is closed as of November 2026, although the museum campus remains open.</PlanningTip></div>}
         </section>)}

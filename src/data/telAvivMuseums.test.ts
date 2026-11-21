@@ -1,8 +1,62 @@
-import { readFileSync } from "node:fs";
+import { existsSync, readFileSync } from "node:fs";
+import { telAvivMuseumPhotos } from "@/data/telAvivMuseumPhotos";
 import { describe, expect, it } from "vitest";
 import { additionalMuseums, museumAreas, museumMapPoints, museums } from "@/data/telAvivMuseums";
 
 describe("Tel Aviv museums editorial guide", () => {
+  it("uses distinct local WebP photos or clearly identified illustrations for all fifteen museum cards", () => {
+    expect(Object.keys(telAvivMuseumPhotos).sort()).toEqual(museums.map(m => m.id).sort());
+    const picturePaths = new Set<string>();
+    const illustrated: string[] = [];
+    for (const museum of museums) {
+      const photo = telAvivMuseumPhotos[museum.id]!;
+      expect(photo, museum.id).toBeDefined();
+      expect(photo.alt.length, museum.id).toBeGreaterThan(20);
+      expect(photo.width, museum.id).toBeGreaterThan(0);
+      expect(photo.height, museum.id).toBeGreaterThan(0);
+      expect(photo.src, museum.id).toMatch(/^\/(images|src\/assets)\//);
+      const localFile = photo.src.startsWith("/images/") ? "public" + photo.src : photo.src.slice(1);
+      expect(existsSync(localFile), museum.id).toBe(true);
+      expect(picturePaths.has(photo.src), museum.id).toBe(false);
+      picturePaths.add(photo.src);
+      if (photo.illustrative) {
+        illustrated.push(museum.id);
+        expect(photo.src).toMatch(/\.svg$/);
+        expect(photo.alt).toMatch(/not a photograph/);
+      } else {
+        expect(photo.src).toMatch(/\.webp$/);
+      }
+    }
+    expect(illustrated).toEqual(["rubin", "liebling", "bialik", "bauhaus"]);
+  });
+
+  it("matches the Jerusalem museum card design: one horizontal card per row with responsive photos and identical information bands", () => {
+    const telAviv = readFileSync("src/components/TelAvivMuseumsGuide.tsx", "utf8");
+    const jerusalem = readFileSync("src/components/JerusalemMuseumsGuide.tsx", "utf8");
+    for (const required of [
+      'data-museum-card="horizontal"',
+      "lg:grid-cols-[minmax(0,1fr)_270px]",
+      "lg:col-start-2 lg:row-start-1",
+      "lg:col-start-1 lg:row-start-1",
+      'className="border-t px-4 py-4 sm:px-5 lg:px-6"',
+      "lg:grid-cols-2 lg:gap-6",
+      'className="mt-5 grid gap-5"',
+      'lg:min-w-[360px]',
+      'loading="lazy"',
+      'decoding="async"',
+    ]) {
+      expect(jerusalem, "Reference is missing: " + required).toContain(required);
+      expect(telAviv, "Tel Aviv layout differs: " + required).toContain(required);
+    }
+    expect(telAviv).not.toContain('className="mt-5 grid items-stretch gap-5 md:grid-cols-2"');
+    expect(telAviv).toContain("telAvivMuseumPhotos[museum.id]");
+    expect(telAviv).toContain('MuseumCard key={museum.id}');
+    expect(telAviv).toContain('tel:+97235459800');
+    expect(telAviv).toContain('guideHeroPhotoForPath(item.to)');
+    expect(telAviv).toContain('neighborhoodTripContactCopy("Tel Aviv")');
+    expect(telAviv).not.toContain("day-trips-from-tel-aviv");
+  });
+
   it("keeps each museum unique, locally positioned and linked to a museum operator", () => {
     expect(museums.length).toBeGreaterThanOrEqual(14);
     expect(new Set(museums.map(item => item.id)).size).toBe(museums.length);
