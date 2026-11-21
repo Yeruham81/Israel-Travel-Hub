@@ -121,7 +121,7 @@ export const attractionHubRegions: AttractionHubRegion[] = [
     id: "sea-of-galilee",
     title: "Sea of Galilee & the Jordan River",
     summary: "Discover the lake, choose a supervised beach, and visit Capernaum, Tabgha, Magdala and Yardenit.",
-    navLabel: "Sea of Galilee & Jordan",
+    navLabel: "Sea of Galilee & Jordan River",
     image: attractionHubPhotos.galilee,
     cards: [
       { id: "sea-of-galilee", title: "The Sea of Galilee", description: "Lake Kinneret, supervised beaches, Tiberias, boats and practical day planning.", to: "/attractions/sea-of-galilee/", photo: { src: galileeLakeCard, alt: "The Sea of Galilee with the surrounding hills" } },

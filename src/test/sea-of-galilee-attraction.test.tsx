@@ -23,11 +23,12 @@ describe("Sea of Galilee attraction upgrade", () => {
     expect(seaOfGalileeDestinationContent.planningLinks).toHaveLength(6);
   });
 
-  it("adds an individual card and matching sidebar item in Sea of Galilee & Jordan", () => {
+  it("adds an individual card and matching sidebar item in Sea of Galilee & Jordan River", () => {
     const section = attractionHubRegions.find(region => region.id === "sea-of-galilee")!;
     expect(section.cards[0]).toMatchObject({ id: "sea-of-galilee", to: "/attractions/sea-of-galilee/" });
     expect(attractionSidebarGuideLabels["sea-of-galilee"]).toBe("Sea of Galilee");
-    const nav = attractionSidebarRegions.find(item => item.label === "Sea of Galilee & Jordan");
+    expect(section.navLabel).toBe("Sea of Galilee & Jordan River");
+    const nav = attractionSidebarRegions.find(item => item.label === "Sea of Galilee & Jordan River");
     if (!nav || !("children" in nav)) throw new Error("Missing Sea of Galilee sidebar section");
     expect(nav.children?.some(child => child.to === "/attractions/sea-of-galilee/")).toBe(true);
     expect(isRegionalOverview("sea-of-galilee")).toBe(false);

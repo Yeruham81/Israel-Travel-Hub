@@ -15,7 +15,8 @@ describe("Attractions hub redesign", () => {
       expect(region.title.length).toBeGreaterThan(4);
       expect(region.summary.length).toBeGreaterThan(35);
       expect(region.summary).toMatch(/^(Wander|Find|Take|Discover|Follow|Float)\b/);
-      expect((region.navLabel ?? region.title).length).toBeLessThan(27);
+      // Sea of Galilee & Jordan River is an intentional descriptive menu label.
+      expect((region.navLabel ?? region.title).length).toBeLessThan(33);
       expect(region.image.src).toMatch(/^\/images\/attractions\/.*\.webp$/);
       expect(region.cards.length).toBeGreaterThanOrEqual(1);
       expect(region.cards.every(card => String(card.to).startsWith("/attractions/"))).toBe(true);

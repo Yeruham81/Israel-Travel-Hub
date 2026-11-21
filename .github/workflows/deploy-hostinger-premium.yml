@@ -1011,3 +1011,48 @@ jobs:
           NODE
           done
           echo "Haifa guide, eight highlights, affiliate tours, canonical and eight photographs verified."
+
+      - name: Verify published Sea of Galilee guide, sidebar and migration
+        if: steps.freshness.outputs.current == 'true' && env.DRY_RUN != 'true'
+        shell: bash
+        run: |
+          set -euo pipefail
+          root="$VITE_CANONICAL_ORIGIN"
+          # Use HTTP/1.1 and retries for Hostinger's intermittent HTTP/2 resets.
+          curl --http1.1 --retry-all-errors --retry 3 --retry-delay 2 --max-time 40 -fsSL "$root/attractions/sea-of-galilee/" -o /tmp/sea-of-galilee-page.html
+          curl --http1.1 --retry-all-errors --retry 3 --retry-delay 2 --max-time 40 -fsSL "$root/attractions/" -o /tmp/galilee-attractions-hub.html
+          curl --http1.1 --retry-all-errors --retry 3 --retry-delay 2 --max-time 40 -fsSL "$root/travel-blog/sea-of-galilee/" -o /tmp/galilee-legacy-alias.html
+          curl --http1.1 --retry-all-errors --retry 3 --retry-delay 2 --max-time 40 -fsSL "$root/sitemap.xml" -o /tmp/galilee-sitemap.xml
+          curl --http1.1 --retry-all-errors --retry 3 --retry-delay 2 --max-time 40 -fsSL "$root/images/attractions/sea-of-galilee.webp" -o /tmp/galilee-hero.webp
+          node - <<'NODE'
+          const fs = require("node:fs");
+          const page = fs.readFileSync("/tmp/sea-of-galilee-page.html", "utf8");
+          const hub = fs.readFileSync("/tmp/galilee-attractions-hub.html", "utf8");
+          const legacy = fs.readFileSync("/tmp/galilee-legacy-alias.html", "utf8");
+          const sitemap = fs.readFileSync("/tmp/galilee-sitemap.xml", "utf8");
+          const picture = fs.readFileSync("/tmp/galilee-hero.webp");
+          const origin = process.env.VITE_CANONICAL_ORIGIN;
+          const target = origin + "/attractions/sea-of-galilee/";
+          const canonical = html => [...html.matchAll(/<link\b[^>]*>/gi)].some(match =>
+            /\brel=["']canonical["']/i.test(match[0]) && match[0].includes('href="' + target + '"'));
+          const errors = [];
+          const check = (condition, description) => { if (!condition) errors.push(description); };
+          check(canonical(page), "New page canonical");
+          check(/<h1\b/i.test(page) && page.includes("The Sea of Galilee"), "Lake guide heading");
+          check(page.includes('data-testid="attraction-at-a-glance"'), "At-a-glance facts");
+          check(page.includes('data-testid="galilee-beaches"'), "Three beach options");
+          check(page.includes("Tzemach Beach") && page.includes("Hukok North") && page.includes("Kursi Beach"), "Named supervised beaches");
+          check(page.includes("Plan a day at the Sea of Galilee"), "Day itineraries");
+          check(page.includes('data-testid="galilee-tour-cards"') && page.includes("viator.tpm.li/") && page.includes("getyourguide.tpm.li/"), "Affiliate tour cards");
+          check(page.includes('data-testid="stay-trip-photo-grid"'), "Illustrated related guide cards");
+          check(page.includes("Sea of Galilee &amp; Jordan River") || page.includes("Sea of Galilee & Jordan River"), "Sidebar full label");
+          check(hub.includes("Sea of Galilee") && hub.includes("/attractions/sea-of-galilee/"), "Attractions hub route");
+          check(legacy.includes('noindex,follow') && canonical(legacy), "Old route remains a non-indexable navigation alias");
+          check(sitemap.includes("/attractions/sea-of-galilee/") && !sitemap.includes("/travel-blog/sea-of-galilee/"), "Sitemap includes only the new route");
+          check(picture.length > 1000 && picture.toString("ascii", 0, 4) === "RIFF" && picture.toString("ascii", 8, 12) === "WEBP", "Published hero WebP");
+          if (errors.length) {
+            for (const error of errors) console.error("::error::Sea of Galilee published audit failed: " + error);
+            process.exit(1);
+          }
+          console.log("Sea of Galilee published route, canonical, beach content, tour cards, six-card block, sidebar, legacy alias, sitemap and hero verified.");
+          NODE

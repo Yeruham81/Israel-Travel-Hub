@@ -99,7 +99,7 @@ export const seaOfGalileeDestinationContent: AttractionDestinationContent = {
   factsTitle: "The Sea of Galilee at a glance",
   title: seaOfGalileeSite.title,
   heroTitle: "The Sea of Galilee",
-  region: "Sea of Galilee & Jordan",
+  region: "Sea of Galilee & Jordan River",
   intro: "The Sea of Galilee combines a peaceful freshwater lake with some of northern Israel's best-known historical and biblical sites. I'll help you choose a beach, explore Tiberias and the northern shore, and plan a realistic day without rushing between every stop.",
   hero: seaOfGalileeSite.hero,
   updatedAt: seaOfGalileeSite.updatedAt,
