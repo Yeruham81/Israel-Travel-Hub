@@ -129,7 +129,7 @@ export const stayGuideGroups: Record<Region, GuideGroups> = {
   tiberias: {
     name: "Tiberias",
     local: [
-      card("Sea of Galilee guide", "/travel-blog/sea-of-galilee/", "Explore the lake and surrounding attractions.", tiberiasLake, "Sea of Galilee near Tiberias"),
+      card("Sea of Galilee guide", "/attractions/sea-of-galilee/", "Explore the lake and surrounding attractions.", tiberiasLake, "Sea of Galilee near Tiberias"),
       card("Magdala", "/attractions/magdala/", "Discover an archaeological site on the lakeshore.", magdalaPhoto, "Historic archaeological site at Magdala"),
       card("Capernaum", "/attractions/capernaum/", "Plan a visit to the northern lakeside heritage site.", capernaumPhoto, "Ruins and stonework at Capernaum"),
       card("Tabgha", "/attractions/tabgha/", "Explore churches and historic sites beside the lake.", tabghaPhoto, "Historic church setting at Tabgha"),

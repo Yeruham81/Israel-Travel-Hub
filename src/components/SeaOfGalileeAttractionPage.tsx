@@ -5,7 +5,7 @@ import { AttractionDestinationPage, AttractionHighlight, AttractionPracticalTip,
 import { affiliateConfig } from "@/data/registry";
 import { recordAffiliateTourClick } from "@/lib/tour-analytics";
 import { relFor } from "@/lib/outbound";
-import lakeHero from "@/assets/home/tiberias-lake.webp";
+const lakeHero = "/images/attractions/sea-of-galilee.webp";
 import waterfront from "@/assets/tiberias/waterfront.webp";
 import sunrise from "@/assets/tiberias/sunrise.webp";
 import lakeView from "@/assets/home/hero-galilee-sm-optimized.webp";

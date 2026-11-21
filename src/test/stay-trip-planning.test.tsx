@@ -81,6 +81,7 @@ describe("hotel and neighborhood guide navigation", () => {
     const onward = within(screen.getByTestId("stay-trip-photo-grid")).getAllByRole("link");
     expect(local).toHaveLength(6);
     expect(onward).toHaveLength(6);
+    expect(local.map(item => item.getAttribute("href"))).toContain("/attractions/sea-of-galilee/");
     expect(local.map(item => item.getAttribute("href"))).toContain("/attractions/yardenit/");
     expect(local.map(item => item.getAttribute("href"))).toContain("/attractions/mount-of-beatitudes/");
     expect(onward.map(item => item.getAttribute("href"))).toContain("/attractions/mount-tabor/");
