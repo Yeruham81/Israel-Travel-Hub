@@ -56,9 +56,12 @@ const inspect=async(page,device)=>{
      tableClient:scrollRegion?.clientWidth,tableScroll:scrollRegion?.scrollWidth,
      tabs,seasons,seasonPhotos:photoBySeason,
      regionCount:qs("#regions article").length,
-     relatedCards:qs("#explore-more .grid>a").length,planningCards:qs("#next-trip .grid>a").length,
+     relatedCards:qs("#explore-more .grid>a").length,relatedCardPhotos:qs("#explore-more .grid>a img").length,planningCards:qs("#next-trip .grid>a").length,
      relatedCols:grid("#explore-more"),planningCols:grid("#next-trip"),
      tourCards:qs("#tours article").length,tourCardsWithPhotos:qs("#tours article img").length,
+     tourImagesLoaded:qs("#tours article img").filter(img=>img.naturalWidth>0).length,
+     seasonPhotoSrcSets:qs("#seasons article img").map(img=>img.getAttribute("srcset")),
+     monthInsightCount:qs("#month-insight").length,monthExtraCards:qs("#months .grid > div").length,
      tourLinks:qs('#tours a[href*="tpm.li"]').map(x=>({href:x.href,rel:x.rel})),
      faqCount:qs("#faq details").length,
      mainContact:!!document.querySelector("main #contact form"),authorPhoto:!!document.querySelector("main #contact [data-photo-role='contact-portrait']"),
@@ -66,7 +69,8 @@ const inspect=async(page,device)=>{
      navSources,pageWidth,viewportWidth:window.innerWidth,
      imageCount:imageEls.length,brokenImages:broken,
      externalSources:links.filter(x=>/ims\.gov\.il|parks\.org\.il|visit\.tel-aviv\.gov\.il/.test(x||"")),
-     internalLinks:links.filter(x=>x?.startsWith("/")&& !x.startsWith("//"))
+     internalLinks:links.filter(x=>x?.startsWith("/")&& !x.startsWith("//")),
+     jsonLd:qs('script[type="application/ld+json"]').map(x=>x.textContent).join("\n")
    };
  });
  checks[device+"_metrics"]=values;
@@ -78,7 +82,16 @@ const inspect=async(page,device)=>{
  assert(values.regionCount===5,device+": five region cards",String(values.regionCount));
  assert(values.seasons.length===4 && values.seasonPhotos.every(x=>x.naturalWidth>0&&x.alt),device+": four loaded seasonal images",JSON.stringify(values.seasonPhotos));
  assert(values.relatedCards===6 && values.planningCards===6,device+": twelve related guide cards",JSON.stringify({related:values.relatedCards,plan:values.planningCards}));
+ assert(values.relatedCardPhotos===6,device+": all six regional guides have genuine hero photos",String(values.relatedCardPhotos));
+ assert(values.internalLinks.includes("/attractions/sea-of-galilee/") && values.internalLinks.includes("/attractions/dead-sea/") && values.internalLinks.includes("/attractions/masada/"),device+": canonical attraction links");
+ assert(!values.internalLinks.includes("/travel-blog/sea-of-galilee/") && !values.internalLinks.includes("/travel-blog/the-dead-sea/"),device+": no obsolete guide destinations");
+ assert(values.monthInsightCount===1 && values.monthExtraCards===0,device+": one contextual month note, not twelve duplicate cards");
+ assert(values.seasonPhotoSrcSets.length===4&&values.seasonPhotoSrcSets.every(s=>s?.includes("320w")&&s?.includes("720w")),device+": season images use 320w/720w srcset");
+ assert(values.jsonLd.includes("hebcal.com/holidays") && values.jsonLd.includes("ims.gov.il/en/ClimateAtlas"),device+": source-backed Article JSON-LD");
+
  assert(values.tourCards===3 && values.tourLinks.length===3 && values.tourLinks.every(x=>x.href.includes("sub_id=best_time_israel")&&x.rel.includes("sponsored")),device+": three tracked third-party tours",JSON.stringify(values.tourLinks));
+ assert(values.tourImagesLoaded===3,device+": three actual tour photographs loaded",String(values.tourImagesLoaded));
+
  assert(values.faqCount===7,device+": seven FAQs",String(values.faqCount));
  assert(values.mainContact && values.authorPhoto,device+": owner contact form and portrait");
  assert(values.sourcesAfterContact && values.navSources===0,device+": sources at end, not in navigation");
@@ -98,6 +111,14 @@ const inspect=async(page,device)=>{
  assert(filtered===3,device+": seasonal filter shows three months",String(filtered));
  await page.getByRole("button",{name:"All months",exact:true}).click();
  assert((await page.locator("#months tbody tr").count())===12,device+": reset shows twelve months");
+ await page.getByRole("button",{name:/^April/}).click();
+ const selectedNote=await page.locator("#month-insight").innerText();
+ assert(selectedNote.includes("April") && selectedNote.includes("Passover"),device+": month selection displays single tailored note",selectedNote.slice(0,120));
+ await page.getByRole("button",{name:"Summer",exact:true}).click();
+ const resetNote=await page.locator("#month-insight").innerText();
+ assert(resetNote.includes("Select any month"),device+": changing season resets selected month");
+ await page.getByRole("button",{name:"All months",exact:true}).click();
+
  await page.screenshot({path:path.join(out,device+".png"),fullPage:true,animations:"disabled"});
  return values;
 };
@@ -125,7 +146,7 @@ const inspect=async(page,device)=>{
    if(name.endsWith("_metrics")){
       console.log("METRICS "+name+": "+JSON.stringify({
        hero:check.hero,monthCount:check.months.length,regions:check.regionCount,seasons:check.seasons,
-       seasonPhotos:check.seasonPhotos,tours:check.tourCards,tourPhotos:check.tourCardsWithPhotos,
+       seasonPhotos:check.seasonPhotos,tours:check.tourCards,tourPhotos:check.tourCardsWithPhotos,relatedCardPhotos:check.relatedCardPhotos,
        faq:check.faqCount,images:check.imageCount,broken:check.brokenImages,
        related:check.relatedCards,planning:check.planningCards,relatedCols:check.relatedCols,
        viewport:check.viewportWidth,pageWidth:check.pageWidth,tableScroll:check.tableScroll,
