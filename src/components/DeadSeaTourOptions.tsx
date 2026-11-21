@@ -1,7 +1,8 @@
 import { Clock3, ExternalLink, Star } from "lucide-react";
 import { affiliateConfig } from "@/data/registry";
 import { deadSeaTourCards } from "@/data/deadSeaTourOffers";
-import { recordOutboundClick, relFor } from "@/lib/outbound";
+import { relFor } from "@/lib/outbound";
+import { recordAffiliateTourClick } from "@/lib/tour-analytics";
 import beachMudPhoto from "@/assets/guides/dead-sea-excursions/dead-sea-mud-bathing.webp";
 import masadaPalacePhoto from "@/assets/guides/dead-sea-excursions/masada-palace.webp";
 import einGediPhoto from "@/assets/guides/dead-sea-excursions/ein-gedi-oasis.webp";
@@ -34,7 +35,7 @@ export function DeadSeaTourOptions({ selectedIds, pageId = "jslm_dead_sea" }: { 
           href={trackingUrl}
           target="_blank"
           rel={relFor(true)}
-          onClick={() => recordOutboundClick({ pageId, productId: tour.id, offerId: tour.id })}
+          onClick={() => recordAffiliateTourClick({ pageId, productId: tour.id, offerId: tour.id, provider: tour.provider, linkUrl: trackingUrl })}
           className="group flex min-w-0 flex-col overflow-hidden rounded-xl border bg-card transition-all hover:-translate-y-0.5 hover:border-primary hover:shadow-md focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
           data-testid="deadsea-bookable-tour"
         >

@@ -16,7 +16,6 @@ const links = {
   einBokek: "https://www.deadsea.co.il/attractions/ein-bokek-central-beach/?lang=en",
   hameiZohar: "https://www.deadsea.co.il/attractions/hamei-zohar-central-beach/?lang=en",
   hotelBeaches: "https://www.deadsea.co.il/attractions/the-hotel-beaches/?lang=en",
-  beaches: "https://www.deadsea.co.il/attractions/the-hotel-beaches/?lang=en",
   egged: "https://www.egged.co.il/",
   masada: "https://en.parks.org.il/reserve-park/masada-national-park/",
   einGedi: "https://en.parks.org.il/reserve-park/en-gedi-nature-reserve/",
@@ -25,8 +24,8 @@ const links = {
   geology: "https://www.gov.il/he/departments/topics/dead-sea3",
 };
 const maps = {
-  einBokek: "https://www.google.com/maps/search/?api=1&query=Ein%20Bokek%20Central%20Beach%20Israel",
-  hameiZohar: "https://www.google.com/maps/search/?api=1&query=Hamei%20Zohar%20Central%20Beach%20Israel",
+  einBokek: "https://www.google.com/maps/dir/?api=1&destination=Ein%20Bokek%20Central%20Beach%2C%20Israel",
+  hameiZohar: "https://www.google.com/maps/dir/?api=1&destination=Hamei%20Zohar%20Central%20Beach%2C%20Israel",
   hotelArea: "https://www.google.com/maps/search/?api=1&query=Ein%20Bokek%20hotels%20Dead%20Sea%20Israel",
 };
 const inlineLink = "font-semibold text-primary underline underline-offset-4";
@@ -45,6 +44,7 @@ export const deadSeaSite = {
 export const deadSeaDestinationContent: AttractionDestinationContent = {
   path: "/attractions/dead-sea/",
   placeName: "the Dead Sea",
+  factsTitle: "The Dead Sea at a glance",
   title: deadSeaSite.title,
   heroTitle: "The Dead Sea",
   region: "Dead Sea & Masada",
@@ -215,7 +215,8 @@ export const deadSeaDestinationContent: AttractionDestinationContent = {
   ),
   tourContent: (
     <div className="mt-4 space-y-3">
-      <p>Guided day trips are useful if you'd rather not drive. These sample tours depart from Jerusalem and range from a relaxed beach excursion to a Masada-and-Dead-Sea combination. Check your exact departure point, beach, admissions and final terms before booking.</p>
+      <p>Guided day trips are useful if you'd rather not drive. These sample tours depart from Jerusalem and range from a relaxed beach excursion to a Masada-and-Dead-Sea combination.</p>
+      <AttractionPracticalTip>Tour operators may use different Dead Sea beaches, including northern-shore beaches rather than Ein Bokek or Hamei Zohar. Check the exact beach stop, entrance fees, admissions and pickup point before booking.</AttractionPracticalTip>
       <DeadSeaTourOptions selectedIds={["jslm-deadsea-beach-viator", "jslm-deadsea-masada-viator", "jslm-deadsea-masada-gyg"]} pageId="attractions-dead-sea" />
       <p className="text-sm">For more departure options, including Tel Aviv, explore my <Link to="/tours/masada-dead-sea/" className={inlineLink}>Masada & Dead Sea tours</Link>. For a flexible route with a private driver, <a href="#contact" className={inlineLink}>send me your plans</a>.</p>
     </div>
@@ -237,13 +238,13 @@ export const deadSeaDestinationContent: AttractionDestinationContent = {
     { label: "Ein Gedi Nature Reserve", to: "/attractions/ein-gedi/", note: "Desert oasis and managed hiking trails" },
     { label: "Qasr el-Yahud", to: "/attractions/qasr-el-yahud/", note: "Historic baptism site along the Jordan River" },
     { label: "Dead Sea attractions", to: "/travel-blog/dead-sea-attractions/", note: "Browse more sights across the wider region" },
-    { label: "Masada & Dead Sea day trips", to: "/tours/masada-dead-sea/", note: "Guided excursions and tour options" },
-    { label: "Dead Sea accommodation", to: "/accommodation/dead-sea/", note: "Stay overnight or plan a spa break" },
+    { label: "Jerusalem to the Dead Sea", to: "/travel-blog/jerusalem-to-the-dead-sea/", note: "Choose a bus, car, guided tour or private driver" },
+    { label: "Jerusalem travel guide", to: "/travel-blog/jerusalem-travel-guide/", note: "Explore Jerusalem before or after the desert" },
   ],
   planningLinks: [
     { label: "Jerusalem to the Dead Sea", to: "/travel-blog/jerusalem-to-the-dead-sea/", icon: "transport", description: "Driving and public transport options" },
     { label: "Ben Gurion Airport to Ein Bokek", to: "/airport-transfers/ein-bokek/", icon: "arrival", description: "Plan a transfer from the airport" },
-    { label: "Dead Sea attractions", to: "/travel-blog/dead-sea-attractions/", icon: "region", description: "Other places to discover nearby" },
+    { label: "Best time to visit Israel", to: "/travel-blog/best-time-to-visit-israel/", icon: "seasons", description: "Choose comfortable seasons and plan for desert heat" },
     { label: "Israel travel calendar", to: "/travel-blog/calendar-of-events/", icon: "seasons", description: "Holidays and special dates" },
     { label: "Getting around Israel", to: "/travel-blog/getting-around-israel/", icon: "transport", description: "Buses, roads and longer journeys" },
     { label: "Private driver in Israel", to: "/private-driver/", icon: "itinerary", description: "A flexible day at your own pace" },

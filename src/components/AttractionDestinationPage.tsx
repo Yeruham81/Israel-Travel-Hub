@@ -47,6 +47,8 @@ export type AttractionDestinationContent = {
   hero: { src: string; alt: string };
   updatedAt: string;
   facts: AttractionFact[];
+  /** Optional grammar-safe heading for place names beginning with an article. */
+  factsTitle?: string;
   glanceNote?: ReactNode;
   highlightContent: ReactNode;
   historyContent?: ReactNode;
@@ -74,10 +76,10 @@ export type AttractionDestinationContent = {
   photoCredits?: ReactNode;
 };
 
-function AtAGlance({ placeName, facts, note }: { placeName: string; facts: AttractionFact[]; note?: ReactNode }) {
+function AtAGlance({ placeName, facts, note, title }: { placeName: string; facts: AttractionFact[]; note?: ReactNode; title?: string }) {
   return (
     <section id="at-a-glance" aria-labelledby="at-a-glance-h" className="mt-7 scroll-mt-24">
-      <h2 id="at-a-glance-h" className="text-xl font-bold sm:text-2xl">{placeName} at a glance</h2>
+      <h2 id="at-a-glance-h" className="text-xl font-bold sm:text-2xl">{title ?? `${placeName} at a glance`}</h2>
       <div className="mt-3 grid grid-cols-2 gap-2 sm:grid-cols-3 sm:gap-3" data-testid="attraction-at-a-glance">
         {facts.map((fact) => {
           const Icon = factIcons[fact.icon];
@@ -168,7 +170,7 @@ export function AttractionDestinationPage({ content }: { content: AttractionDest
         </GuideHeroLayout>
         <AuthorCard />
       </header>
-      <AtAGlance placeName={content.placeName} facts={content.facts} note={content.glanceNote} />
+      <AtAGlance placeName={content.placeName} facts={content.facts} note={content.glanceNote} title={content.factsTitle} />
       <OnThisPage sections={content.navigationSections ?? sections} />
       <Section id="highlights" title={content.highlightsTitle ?? "What to see at " + content.placeName} className="mt-9">
         {content.highlightContent}

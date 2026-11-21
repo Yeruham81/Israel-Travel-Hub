@@ -51,6 +51,9 @@ export async function collectSitemapPaths(dir = routesDir) {
     const route = match[1];
     // API handlers, path parameters and catchalls should never appear in XML.
     if (route.startsWith("/api/") || /[$*]/.test(route)) continue;
+    // Retain the old Dead Sea route as a navigable client-side alias, not as an
+    // independently indexable page. A server-side 301 is NOT enabled here.
+    if (route === "/travel-blog/the-dead-sea") continue;
     // A route that only redirects has no page document; guarded content routes
     // still belong in the sitemap when they declare a component.
     if (/\bbeforeLoad\s*:/.test(contents) && /\b(?:throw|return)\s+redirect\s*\(/.test(contents) && !/\bcomponent\s*[:,]/.test(contents)) continue;

@@ -11,6 +11,7 @@ describe("Individual Dead Sea attraction and its regional navigation", () => {
     expect(deadSeaDestinationContent.heroTitle).toBe("The Dead Sea");
     expect(deadSeaDestinationContent.updatedAt).toBe(deadSeaSite.updatedAt);
     expect(deadSeaDestinationContent.facts).toHaveLength(6);
+    expect(deadSeaDestinationContent.factsTitle).toBe("The Dead Sea at a glance");
     expect(deadSeaDestinationContent.highlightsTitle).toBe("Experience the Dead Sea");
     expect(deadSeaDestinationContent.visitorContent).toBeTruthy();
     expect(deadSeaDestinationContent.transportContent).toBeTruthy();
@@ -19,6 +20,9 @@ describe("Individual Dead Sea attraction and its regional navigation", () => {
     expect(deadSeaDestinationContent.tourContent).toBeTruthy();
     expect(deadSeaDestinationContent.faqs!.length).toBeGreaterThanOrEqual(8);
     expect(deadSeaDestinationContent.nearby).toHaveLength(6);
+    expect(new Set(deadSeaDestinationContent.nearby?.map(item => item.to)).size).toBe(6);
+    expect(deadSeaDestinationContent.nearby?.some(item => item.to === "/travel-blog/dead-sea-attractions/")).toBe(true);
+    expect(deadSeaDestinationContent.planningLinks?.some(item => item.to === "/travel-blog/dead-sea-attractions/")).toBe(false);
     expect(deadSeaDestinationContent.planningLinks).toHaveLength(6);
     expect(deadSeaDestinationContent.sources.length).toBeGreaterThanOrEqual(6);
   });
@@ -40,5 +44,9 @@ describe("Individual Dead Sea attraction and its regional navigation", () => {
       expect(deadSeaTourCards.find(t => t.id === id)?.sourceUrl).toMatch(/^https:\/\//);
       expect(affiliateConfig[id]?.trackingUrl).toMatch(/^https:\/\/(viator|getyourguide)\.tpm\.li\//);
     }
+  });
+  it("refreshes verified tour-review snapshots", () => {
+    expect(deadSeaTourCards.find(t => t.id === "jslm-deadsea-masada-viator")).toMatchObject({ reviewCount: 790, rating: 4.3, checkedAt: "2026-11-21" });
+    expect(deadSeaTourCards.find(t => t.id === "jslm-deadsea-masada-gyg")).toMatchObject({ reviewCount: 843, rating: 4.4, checkedAt: "2026-11-21" });
   });
 });
