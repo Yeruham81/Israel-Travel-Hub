@@ -211,7 +211,7 @@ const horizontalDetailPages = [
 ];
 let verifiedHorizontalCards = 0;
 for (const [route, expected] of horizontalDetailPages) {
-  const file = join(root, route.replace(/^\\/|\\/$/g, ""), "index.html");
+  const file = join(root, route.slice(1, -1), "index.html");
   assert(existsSync(file), "Missing wide editorial card page: " + route);
   const html = readFileSync(file, "utf8");
   const actual = [...html.matchAll(/data-detailed-card="horizontal"/g)].length;
