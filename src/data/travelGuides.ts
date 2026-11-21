@@ -27,7 +27,7 @@ import { journeyDestinationGuides } from "@/data/guideJourneys2026";
 import { taxiGuideCluster } from "@/data/taxiGuideCluster";
 import { applyJerusalemGuideEditorial } from "@/data/jerusalemClusterEditorial";
 import { sanityUberGuide } from "@/data/generated/sanityUberSnapshot";
-import { christianFaqs } from "@/data/christianToursGuide";
+import { christianFaqs, christianToursHero } from "@/data/christianToursGuide";
 import { seniorFaqs, seniorHero, seniorUpdatedAt } from "@/data/seniorToursGuide";
 import { deadSeaAttractionsUpdatedAt } from "@/data/deadSeaAttractionsGuide";
 import { telAvivAttractionsUpdatedAt } from "@/data/telAvivAttractionsGuide";
@@ -96,7 +96,7 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
     answer: "Begin with Jerusalem, then choose Bethlehem and/or Galilee based on your time, interests and current transport arrangements. Group sites by area, and check church access and guided-tour details before travelling.",
     updatedAt: "2026-11-21",
     topics: ["religion", "itineraries", "attractions", "destinations"],
-    photo: { src: "/images/attractions/old-jerusalem-holy-sepulchre.webp", alt: "The Church of the Holy Sepulchre in Jerusalem" },
+    photo: christianToursHero,
     facts: [],
     comparison: { caption: "Christian sites planning", headers: [], rows: [] },
     sections: [],
