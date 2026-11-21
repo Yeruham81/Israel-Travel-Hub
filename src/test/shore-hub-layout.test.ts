@@ -57,6 +57,6 @@ describe("compact shore excursions hub", () => {
     expect(page).toContain("GuidePhotoCredit");
     expect(page).toContain("jsonLd({");
     expect(page).toContain('path: "/shore-excursions/"');
-    expect(page).toContain('className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-3"');
+    expect(page).toContain('className="mt-4 grid grid-cols-2 gap-3 lg:grid-cols-3"');
   });
 });

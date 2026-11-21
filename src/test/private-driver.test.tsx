@@ -69,7 +69,7 @@ describe("private driver page and inquiry", () => {
     for (let i = 1; i < sections.length; i++) expect(container.querySelector(`#${sections[i - 1]}`)!.compareDocumentPosition(container.querySelector(`#${sections[i]}`)!)).toBe(Node.DOCUMENT_POSITION_FOLLOWING);
     for (const image of screen.getAllByRole("img")) { expect(image).toHaveAttribute("src"); expect(image.getAttribute("alt")).toBeTruthy(); }
     const guideSection = screen.getByRole("region", { name: "Related travel guides" });
-    expect(guideSection.querySelector("ul")).toHaveClass("sm:grid-cols-2", "lg:grid-cols-3");
+    expect(guideSection.querySelector("ul")).toHaveClass("grid-cols-2", "lg:grid-cols-3");
     expect(privateDriverFaqs).toHaveLength(6);
     expect(screen.getByRole("region", { name: "Frequently asked questions" })).toHaveTextContent("How do payment, cancellation and extra hours work?");
     const afterFaq = screen.getByTestId("driver-after-faq-cta");

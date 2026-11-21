@@ -50,7 +50,7 @@ describe("Israel travel tips — first-time visitor guide", () => {
   });
 
   it("uses local photos and does not add direct independent affiliate links", () => {
-    expect(source).toContain('import roadTrip from "@/assets/home/road-trip.webp"');
+    expect(source).toContain('src={travelTipsHero.src}');
     expect(source).toContain('import haifa from "@/assets/haifa/panorama.webp"');
     expect(source).toContain("flex h-full min-w-0 flex-col");
     expect(source).not.toMatch(/awin1.com|shareasale.com|partnerize.com|utm_affiliate=/i);

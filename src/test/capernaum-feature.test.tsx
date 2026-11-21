@@ -153,7 +153,7 @@ describe("Capernaum as the first reusable individual-attraction guide", () => {
     expect(templateDoc).toContain("optional sections");
     expect(templateDoc).toContain("six genuinely relevant");
     const guideComponent = readFileSync("src/components/Guide.tsx", "utf8");
-    expect(guideComponent).toContain('pictured.length === 6 ? "mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-3"');
+    expect(guideComponent).toContain('pictured.length === 6 ? "mt-4 grid grid-cols-2 gap-3 lg:grid-cols-3"');
     expect(article).not.toContain("3.5 km lakeside promenade");
     expect(article).not.toContain("Biblical tradition explains why Capernaum became a pilgrimage destination");
     expect(article).not.toContain("Map: OpenStreetMap contributors");
