@@ -82,7 +82,11 @@ describe("migrated practical guides", () => {
       expect(container.querySelector("#quick-answer")).toHaveTextContent("Old City");
       expect(container.querySelectorAll("#choose .grid > a")).toHaveLength(6);
       expect(container.querySelectorAll("#how-many-days article")).toHaveLength(3);
-      expect(container.querySelectorAll("#where-to-stay article")).toHaveLength(5);
+      expect(container.querySelectorAll("#where-to-stay article")).toHaveLength(6);
+      expect(container.querySelectorAll('#where-to-stay article a[href^="/accommodation/jerusalem/"]')).toHaveLength(6);
+      expect(container.querySelector('#where-to-stay article a[href="/accommodation/jerusalem/east-jerusalem/"]')).not.toBeNull();
+      expect(container.querySelector('#city-tours a[href="/tours/jerusalem/"]')).not.toBeNull();
+      expect(container.querySelector('#day-trip-tours a[href="/tours/"]')).not.toBeNull();
       expect(container.querySelectorAll("#getting-around [data-testid='jerusalem-transport-links'] > a")).toHaveLength(4);
       expect(container.querySelectorAll("#day-trips .grid > a")).toHaveLength(6);
       expect(container.querySelectorAll("#explore-more .grid > a")).toHaveLength(6);
