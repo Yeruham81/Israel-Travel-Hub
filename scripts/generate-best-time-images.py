@@ -8,7 +8,7 @@ from pathlib import Path
 from PIL import Image, ImageOps, ImageDraw
 
 SOURCES = {
-    "spring": Path("public/images/attractions/mount-precipice-jezreel-view.webp"),
+    "spring": Path("public/images/attractions/haifa-bahai-gardens.webp"),
     "summer": Path("src/assets/tel-aviv/beachfront.webp"),
     "autumn": Path("src/assets/guides/2026-11/jerusalem-jewish-quarter-stone-lane.webp"),
     "winter": Path("src/assets/home/hero-eilat-mountains-large.webp"),
