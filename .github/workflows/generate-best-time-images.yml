@@ -1,0 +1,43 @@
+name: Generate local responsive Israel season images
+on:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/generate-best-time-images.yml"
+permissions:
+  contents: write
+concurrency:
+  group: best-time-seasonal-images
+  cancel-in-progress: false
+jobs:
+  generate:
+    if: contains(github.event.head_commit.message, '[best-time-images]')
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Resize four local images to 320 and 720 pixels
+        run: |
+          python -m pip install --quiet --disable-pip-version-check Pillow
+          python scripts/generate-best-time-images.py
+      - name: Save contact sheet for visual review
+        uses: actions/upload-artifact@v4
+        with:
+          name: best-time-season-image-preview
+          path: /tmp/best-time-season-photo-contact-sheet.jpg
+          retention-days: 7
+      - name: Commit eight optimized assets to the website repository
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add public/images/best-time-israel/*.webp
+          if git diff --cached --quiet; then echo "Seasonal image variants already current"; exit 0; fi
+          git commit -m "Add eight local responsive photos for Israel seasons guide"
+          git pull --rebase origin main
+          git push origin HEAD:main
