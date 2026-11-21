@@ -130,7 +130,7 @@ export function JerusalemChurchesGuide(){
       <Breadcrumbs items={[{name:"Home",to:"/"},{name:"Travel guides",to:"/travel-blog/"},{name:"Churches in Jerusalem",to:"/travel-blog/churches-in-jerusalem/"}]}/>
       <GuideHeroLayout image={<GuideHeroMedia src={hero} alt="The Church of the Holy Sepulchre in Jerusalem's Old City"/>}>
         <p className="text-xs font-semibold uppercase tracking-[0.16em] text-primary">Jerusalem · Christian heritage</p>
-        <h1 className="guide-page-title mt-2">Churches in Jerusalem</h1>
+        <h1 className="guide-page-title mt-2">Churches in Jerusalem: What to See &amp; How to Visit</h1>
         <p data-guide-intro className="mt-4 max-w-3xl text-lg leading-relaxed">From the Church of the Holy Sepulchre to the hillside churches of the Mount of Olives, I have organised Jerusalem's Christian sites by area to help you choose meaningful stops, understand their traditions and plan a practical visit.</p>
         <PageUpdated date={updatedAt}/>
       </GuideHeroLayout>
