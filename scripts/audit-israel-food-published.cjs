@@ -59,6 +59,7 @@ async function evaluatePage(page,device){
      filters,
      directDishJumpLinks:all('nav[aria-label="Jump to a food dish"] a').map(x=>x.getAttribute("href")),
      mahaneTourPhoto:document.querySelector('#food-tours article:nth-child(2) img')?.getAttribute("src"),
+     levinskyTourPhoto:document.querySelector('#food-tours article:nth-child(3) img')?.getAttribute("src"),
      jaffaMarketPhoto:all("#markets article")[3]?.querySelector("img")?.getAttribute("src"),
      licenseVisible:document.querySelector("#sources")?.textContent?.includes("CC BY-SA 3.0"),
      viewportWidth:window.innerWidth,docWidth:document.documentElement.scrollWidth,
@@ -84,8 +85,10 @@ async function evaluatePage(page,device){
  check(metrics.filters.length===5,device+": five food category buttons");
  check(metrics.directDishJumpLinks.length===10&&new Set(metrics.directDishJumpLinks).size===10,device+": ten distinct direct dish links",JSON.stringify(metrics.directDishJumpLinks));
  check(metrics.mahaneTourPhoto==="/images/food-guide/mahane-yehuda-food-stalls.webp",device+": genuine Mahane Yehuda food-stall photo",String(metrics.mahaneTourPhoto));
+ check(metrics.levinskyTourPhoto==="/images/food-guide/levinsky-spice-shop.webp",device+": genuine Levinsky Market spice-shop photo",String(metrics.levinskyTourPhoto));
  check(metrics.jaffaMarketPhoto==="/images/attractions/jaffa-flea-market.webp",device+": local Jaffa market picture",String(metrics.jaffaMarketPhoto));
  check(metrics.licenseVisible===true,device+": credited CC BY-SA Mahane image in sources");
+ check(metrics.jsonLd.includes("itraveljerusalem.com"),device+": structured sources retained");
  check(metrics.jsonLd.includes("visit.tel-aviv.gov.il/info/money")&&metrics.jsonLd.includes("itraveljerusalem.com/article/markets-and-fairs"),device+": Article JSON-LD links official sources");
  const kinds=[
   ["Street food",3],["Breakfast & plates",3],["Bakery",2],["Sweet treats",2]
