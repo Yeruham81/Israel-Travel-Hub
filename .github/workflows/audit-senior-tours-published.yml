@@ -1,0 +1,41 @@
+name: Audit published senior tours guide
+on:
+  workflow_run:
+    workflows: ["Deploy static website to Hostinger Premium"]
+    types: [completed]
+permissions:
+  contents: read
+jobs:
+  audit:
+    if: >-
+      github.event.workflow_run.conclusion == 'success' &&
+      github.event.workflow_run.head_sha == github.sha
+    runs-on: ubuntu-24.04
+    timeout-minutes: 18
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+      - name: Install Chromium
+        run: |
+          mkdir -p /tmp/seniors-audit-browser
+          npm install --prefix /tmp/seniors-audit-browser --no-save playwright@1.56.1
+          /tmp/seniors-audit-browser/node_modules/.bin/playwright install --with-deps chromium
+      - name: Check published desktop and mobile senior tours guide
+        env:
+          NODE_PATH: /tmp/seniors-audit-browser/node_modules
+          SENIORS_AUDIT_ORIGIN: https://saddlebrown-guanaco-454061.hostingersite.com
+        run: |
+          sleep 35
+          node scripts/audit-senior-tours-published.cjs
+      - name: Save screenshots and structured results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: senior-tours-published-audit
+          path: /tmp/israel-senior-tours-published/
+          retention-days: 14
+          if-no-files-found: warn

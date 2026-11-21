@@ -28,6 +28,7 @@ import { taxiGuideCluster } from "@/data/taxiGuideCluster";
 import { applyJerusalemGuideEditorial } from "@/data/jerusalemClusterEditorial";
 import { sanityUberGuide } from "@/data/generated/sanityUberSnapshot";
 import { christianFaqs } from "@/data/christianToursGuide";
+import { seniorFaqs, seniorHero, seniorUpdatedAt } from "@/data/seniorToursGuide";
 import { deadSeaAttractionsUpdatedAt } from "@/data/deadSeaAttractionsGuide";
 import { telAvivAttractionsUpdatedAt } from "@/data/telAvivAttractionsGuide";
 
@@ -69,6 +70,24 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
   ...cityCultureGuides,
   ...heritageGuides,
   ...journeyDestinationGuides,
+  seniorTours: {
+    id: "seniorTours",
+    title: "Israel Tours for Seniors: Private Day Trips at Your Own Pace",
+    description: "Plan private Israel tours for seniors with Moshe Barak: flexible sightseeing, lower-walking itineraries, personalized transport, Jerusalem, Masada, Galilee and coastal day trips.",
+    intro: "My personal guide to unhurried, carefully planned day trips for older visitors who appreciate private transport, manageable walks and the freedom to choose their own pace.",
+    answer: "Private sightseeing with a driver can connect key sites with flexible pickups, shorter walking segments and rest breaks. Choose realistic stops and confirm any essential accessibility or specialist vehicle requirements before booking.",
+    updatedAt: seniorUpdatedAt,
+    topics: ["tips", "itineraries", "transportation", "destinations"],
+    photo: seniorHero,
+    facts: [],
+    comparison: {caption:"Choose a comfortable sightseeing pace",headers:[],rows:[]},
+    sections:[],
+    checklist:[],
+    faqs:seniorFaqs,
+    sourceIds:[],
+    related:["jerusalem","israel","christianTours","travelTips"],
+    services:[{label:"Ask Moshe about a private driver",to:"/private-driver/"}],
+  },
   christianTours: {
     id: "christianTours",
     title: "Christian Tours in Israel: Biblical Sites & Pilgrimage Routes",

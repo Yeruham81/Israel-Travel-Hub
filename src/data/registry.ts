@@ -203,6 +203,7 @@ export const travelGuidePaths = {
   jerusalemDeadSea: "/travel-blog/jerusalem-to-the-dead-sea/",
   baptism: "/travel-blog/baptism-in-the-jordan-river/",
   christianTours: "/travel-blog/christian-tours-in-israel/",
+  seniorTours: "/travel-blog/israel-tours-for-seniors/",
   jerusalemChurches: "/travel-blog/churches-in-jerusalem/",
   jerusalemShopping: "/travel-blog/shopping-in-jerusalem/",
 } as const;

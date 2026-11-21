@@ -167,6 +167,7 @@ export const allNavGroups: NavGroup[] = [
       { label: "Top 10 Israel experiences", to: travelGuidePaths.topTen },
       { label: "Jerusalem travel guide", to: travelGuidePaths.jerusalem },
       { label: "Christian tours in Israel", to: travelGuidePaths.christianTours },
+      { label: "Israel tours for seniors", to: travelGuidePaths.seniorTours },
       { label: "How to get from Jerusalem to Bethlehem", to: travelGuidePaths.bethlehem },
       { label: "How to get from Jerusalem to the Dead Sea", to: travelGuidePaths.jerusalemDeadSea },
       travelTips.gettingAround,
