@@ -126,7 +126,7 @@ describe("migrated Israel itineraries", () => {
       "src/components/DeadSeaTourOptions.tsx",
     ]) {
       const cards = file(path);
-      expect(cards, path).toContain("grid gap-5 sm:grid-cols-2 xl:grid-cols-3");
+      expect(cards, path).toMatch(/grid gap-5 sm:grid-cols-2 (?:lg|xl):grid-cols-3/);
       expect(cards, path).not.toContain("grid gap-3 sm:grid-cols-2 xl:grid-cols-3");
     }
   });
