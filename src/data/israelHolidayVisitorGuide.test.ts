@@ -17,6 +17,8 @@ describe("Israel holidays visitor guide", () => {
     expect(travelGuides.calendar.title).toBe(HOLIDAY_GUIDE_TITLE);
     expect(travelGuides.calendar.updatedAt).toBe("2026-11-21");
     expect(existsSync("public" + HOLIDAY_GUIDE_PHOTO.src)).toBe(true);
+    // The retired date-picker must not be shipped as a separate route.
+    expect(existsSync("src/routes/travel-blog.israel-holidays.tsx")).toBe(false);
   });
   it("explains 19 recurring dates across the weekly rhythm, Jewish, national and other traditions", () => {
     expect(holidayGuideGroups.map(g => g.id)).toEqual(["weekly","jewish-major","other-jewish","national","other-traditions"]);
@@ -44,6 +46,7 @@ describe("Israel holidays visitor guide", () => {
     expect(entries.find(e=>e.id==="lag-baomer")?.impact).toBe("local");
     expect(entries.find(e=>e.id==="lag-baomer")?.transport).toContain("Mount Meron");
     expect(entries.find(e=>e.id==="lag-baomer")?.tip).toContain("official");
+    expect(schoolCalendarPlanning.body).toContain("July and August");
     expect(schoolCalendarPlanning.body).toContain("September");
     expect(schoolCalendarPlanning.body).toContain("Ministry of Education");
     expect(entries.find(e=>e.id==="passover")?.transport).toContain("Chol HaMoed");
