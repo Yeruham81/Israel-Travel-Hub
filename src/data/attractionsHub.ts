@@ -132,7 +132,7 @@ export const attractionHubRegions: AttractionHubRegion[] = [
       editorialAttraction("yardenit", "Yardenit", "Plan a visit to this Jordan River baptism site."),
     ],
     relatedGuides: [
-      { label: "Hotels and visitor base in Tiberias", to: "/travel-blog/best-hotels-in-tiberias/" },
+      { label: "Plan the Galilee in a seven-day itinerary", to: "/travel-blog/israel-itinerary-7-days/" },
       { label: "Jordan River baptism sites", to: travelGuidePaths.baptism },
     ],
   },
