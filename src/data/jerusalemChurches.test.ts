@@ -1,0 +1,67 @@
+import { existsSync, readFileSync } from "node:fs";
+import { describe, expect, it } from "vitest";
+import { churchAreas, jerusalemChurches } from "@/data/jerusalemChurches";
+import { affiliateConfig } from "@/data/registry";
+import { guideHeroPhotoForPath } from "@/lib/guide-hero-photos";
+
+describe("Jerusalem churches editorial guide", () => {
+  it("covers twenty distinct sites grouped across four church-visiting areas", () => {
+    expect(jerusalemChurches).toHaveLength(20);
+    expect(churchAreas.map(a => a.id)).toEqual(["old", "olives", "zion", "karem"]);
+    expect(new Set(jerusalemChurches.map(c => c.id)).size).toBe(20);
+    expect(jerusalemChurches.filter(c => c.feature).length).toBeGreaterThanOrEqual(4);
+    for (const church of jerusalemChurches) {
+      expect(churchAreas.some(a => a.id === church.area), church.id).toBe(true);
+      expect(church.description.length, church.id).toBeGreaterThan(40);
+      expect(church.tradition, church.id).toBeTruthy();
+      expect(church.hours, church.id).toBeTruthy();
+      expect(church.admission, church.id).toBeTruthy();
+      expect(church.tip, church.id).toBeTruthy();
+    }
+  });
+  it("uses bounded coordinates and only real locally hosted site images", () => {
+    const photos = jerusalemChurches.filter(c => c.photo);
+    expect(photos.length).toBeGreaterThanOrEqual(12);
+    const used = new Set<string>();
+    for (const c of jerusalemChurches) {
+      expect(c.lat, c.id).toBeGreaterThan(31.7);
+      expect(c.lat, c.id).toBeLessThan(31.85);
+      expect(c.lon, c.id).toBeGreaterThan(35.14);
+      expect(c.lon, c.id).toBeLessThan(35.28);
+      if (c.photo) {
+        expect(c.photo, c.id).toMatch(/^\/images\//);
+        expect(existsSync("public" + c.photo), c.id).toBe(true);
+        expect(used.has(c.photo), c.id).toBe(false);
+        used.add(c.photo);
+      }
+    }
+  });
+  it("qualifies access arrangements and separates non-church heritage sites", () => {
+    const cenacle = jerusalemChurches.find(c => c.id === "cenacle")!;
+    expect(cenacle.tradition).toContain("not an active church");
+    expect(jerusalemChurches.find(c => c.id === "pater-noster")?.hours).toContain("Temporary");
+    expect(jerusalemChurches.find(c => c.id === "st-james")?.tip).toContain("worship");
+    expect(jerusalemChurches.find(c => c.id === "mary-tomb")?.tip).toContain("staircase");
+  });
+  it("has map focus, accurate related-page photos and centrally registered affiliate links", () => {
+    const component = readFileSync("src/components/JerusalemChurchesGuide.tsx", "utf8");
+    const map = readFileSync("public/maps/jerusalem-churches.html", "utf8");
+    expect(component).toContain("jerusalem-church-map-focus");
+    expect(component).toContain("jerusalem-church-map-selected");
+    expect(map).toContain("churches.length !== 20");
+    expect(map).toContain("areaColors");
+    expect(component).toContain("guideHeroPhotoForPath(item.to)");
+    expect(component).not.toContain('url:"https://viator.tpm.li');
+    expect(component).not.toContain('url:"https://getyourguide.tpm.li');
+    for (const key of [
+      "tour-jerusalem-old-city-walk-viator@tours-jerusalem",
+      "tour-jerusalem-private-oldcity-walk-viator@tours-jerusalem",
+      "tour-bethlehem-halfday-jerusalem-getyourguide@tours-bethlehem-jericho",
+    ]) expect(affiliateConfig[key]?.trackingUrl).toMatch(/^https:\/\//);
+    for (const path of [
+      "/attractions/old-city-jerusalem/", "/attractions/mount-of-olives/",
+      "/attractions/mount-zion/", "/travel-blog/jerusalem-to-bethlehem/",
+      "/travel-blog/jerusalem-travel-guide/", "/travel-blog/calendar-of-events/",
+    ]) expect(guideHeroPhotoForPath(path)?.src, path).toBeTruthy();
+  });
+});
