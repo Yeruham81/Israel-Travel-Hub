@@ -238,7 +238,7 @@ export const oldCityJerusalemDestinationContent: AttractionDestinationContent = 
   tourContent: (
     <div className="mt-4 space-y-4">
       <p>Guided walks connect the Old City’s major sites and religious traditions. These two existing, reviewed Jerusalem departures offer a shared walk or private guide; check the meeting point, sites included, accessibility and language before booking.</p>
-      <ul className="grid gap-3 sm:grid-cols-2" data-testid="jerusalem-old-city-featured-tours">
+      <ul className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3" data-testid="jerusalem-old-city-featured-tours">
         {featuredOldCityTours.map(tour => <ExternalTourCard key={tour.id} tour={tour} pageId="attractions-old-city-jerusalem" compact />)}
       </ul>
       <p className="mt-4 text-xs leading-relaxed text-muted-foreground">Tour details, availability, prices and booking conditions are set by the tour operators and may change. Before booking, check the current departure date and location, itinerary, guiding, admissions, meeting and return arrangements, and cancellation policy directly with the booking provider. Each tour is subject to the operator's own terms and conditions.</p>
