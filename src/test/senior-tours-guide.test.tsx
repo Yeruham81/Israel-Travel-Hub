@@ -47,6 +47,22 @@ describe("Israel tours for seniors: private transport guide",()=>{
   }
   expect(component).toContain("seniorDayTrips.map");
   expect(component).toContain("Google Maps");
+  expect(component).toContain('data-senior-trip-enquiry={item.id}');
+  expect(component).toContain("Ask me about this private trip");
+  expect(component).toContain("Browse other tours");
+  expect(component).toContain("data-senior-midpage-cta");
+  expect(component).toContain("A suggested, unhurried visit");
+  expect(component).toContain("If you prefer a shorter day:");
+  for(const trip of seniorDayTrips){
+   expect(trip.sampleOrder).toHaveLength(3);
+   expect(trip.restStop.length).toBeGreaterThan(40);
+   expect(trip.shortenDay.length).toBeGreaterThan(40);
+  }
+  for(const id of ["jerusalem","masada","coast"]){
+   expect(seniorDayTrips.find(trip=>trip.id===id)?.accessInfo?.length).toBe(2);
+  }
+  expect(component).toContain("Accessible JLM map app (Android)");
+  expect(component).toContain("Israel Nature and Parks Authority's accessibility guide and site map");
   expect(component).not.toContain("Island");
  });
  it("provides twelve related guides and distinct, locally stored, appropriately compressed images",()=>{

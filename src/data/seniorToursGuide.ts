@@ -10,11 +10,24 @@ export const seniorHero = {src:"/images/senior-tours/israel-tours-for-seniors-12
 export type SeniorDay = {
   id:string; title:string; duration:string; image:string; alt:string; intro:string;
   easy:string; watchFor:string; suggestedStops:{label:string;to:LinkProps["to"]}[];
+  sampleOrder:string[]; restStop:string; shortenDay:string;
+  accessInfo?:{label:string;url:string}[];
   to:LinkProps["to"]; googlePlace:string;
 };
 export const seniorDayTrips:SeniorDay[] = [
   {
     id:"jerusalem",title:"Jerusalem at a comfortable pace",duration:"Half-day or full-day",
+    sampleOrder:[
+      "Begin near an agreed Old City drop-off, and choose just one suitable historic route rather than trying to cover every quarter.",
+      "Spend time at one priority site, such as the Tower of David Museum or the Western Wall, after checking its actual accessible entrance.",
+      "Finish with a scenic viewpoint or a comfortable return toward your agreed pickup location.",
+    ],
+    restStop:"Plan a seated coffee or lunch break near Mamilla or the museum area; confirm convenient access and available seating.",
+    shortenDay:"Skip Mount of Olives and additional Old City lanes if the first visit takes longer than expected.",
+    accessInfo:[
+      {label:"Old City accessible-route map app — Android",url:"https://play.google.com/store/apps/details?id=pami.accessibility.sayyes"},
+      {label:"Old City accessible-route map app — iPhone",url:"https://apps.apple.com/il/app/accessible-jlm/id1434672106"},
+    ],
     image:"/images/attractions/old-jerusalem-western-wall.webp",alt:"Western Wall in Jerusalem's Old City",
     intro:"Choose one part of Jerusalem rather than trying to see the Old City, museums and hillside churches in a single day. A private driver can connect hotel pickup, an agreed drop-off point and another area later in the day.",
     easy:"Try a scenic city viewpoint plus one museum or a short selected Old City route. Leave room for a seated lunch and longer stops.",
@@ -24,6 +37,17 @@ export const seniorDayTrips:SeniorDay[] = [
   },
   {
     id:"masada",title:"Masada & the Dead Sea, without a strenuous hike",duration:"Full-day",
+    sampleOrder:[
+      "Start early at Masada's eastern visitor entrance; check cable-car operation and the accessible areas before buying tickets.",
+      "Ride the cable car and visit a limited, appropriate section of the plateau and viewpoints rather than walking every archaeological path.",
+      "Continue to Ein Bokek for a relaxed lunch or a Dead Sea viewpoint; enter the water only if conditions and personal needs allow.",
+    ],
+    restStop:"Use the visitor complex before or after the cable car, then plan a seated break at Ein Bokek.",
+    shortenDay:"Skip longer plateau walks, Ein Gedi hiking and any beach entry if the day is too hot or tiring.",
+    accessInfo:[
+      {label:"Masada official site and accessibility details",url:"https://en.parks.org.il/reserve-park/masada-national-park/"},
+      {label:"Official Masada cable-car accessibility information",url:"https://en.parks.org.il/article/the-masada-cable-car/"},
+    ],
     image:"/images/attractions/dead-sea.webp",alt:"Dead Sea and desert shoreline",
     intro:"This desert day can focus on viewpoints, Masada's eastern visitor complex and a relaxed stop at the Dead Sea. The Masada cable car offers an alternative to climbing the Snake Path.",
     easy:"Consider the cable car and a limited section of the archaeological plateau, followed by lunch or a scenic stop at Ein Bokek.",
@@ -33,6 +57,13 @@ export const seniorDayTrips:SeniorDay[] = [
   },
   {
     id:"galilee",title:"Nazareth & the Sea of Galilee",duration:"Full-day or two shorter days",
+    sampleOrder:[
+      "Visit one priority church in Nazareth, such as the Basilica of the Annunciation, after checking step-free access for your entrance.",
+      "Drive to the lakeside and choose one site such as Capernaum rather than combining every Galilee church.",
+      "Enjoy lunch or a seated lake-view break near Tiberias, then decide whether an additional short stop is worthwhile.",
+    ],
+    restStop:"Allow a leisurely lakeside lunch around Tiberias or another suitable location, with time to rest after the Nazareth visit.",
+    shortenDay:"Skip extra churches and Mount Tabor; if starting far away, consider two shorter days or an overnight base in Galilee.",
     image:"/images/attractions/sea-of-galilee.webp",alt:"Sea of Galilee surrounded by low green hills",
     intro:"A journey north can combine Nazareth's churches with peaceful lakeside sites. For travelers who tire easily, splitting the region across two days may be far more pleasant than a long round trip.",
     easy:"Choose one main Nazareth church and one or two lakeside stops; enjoy the scenery and a quiet meal rather than trying to visit every chapel.",
@@ -42,6 +73,17 @@ export const seniorDayTrips:SeniorDay[] = [
   },
   {
     id:"coast",title:"Caesarea, Haifa & Akko — choose your stops",duration:"Full-day",
+    sampleOrder:[
+      "Explore a selected visitor route at Caesarea, beginning at the entrance that best suits your walking needs.",
+      "Pause for a seated lunch around Caesarea Harbor or Haifa before continuing along the coast.",
+      "Finish at a Haifa viewpoint; add Akko's waterfront only when energy and the remaining travel time permit.",
+    ],
+    restStop:"A relaxed meal near Caesarea Harbor or Haifa's German Colony can provide a comfortable break between stops.",
+    shortenDay:"Leave Akko for a separate visit rather than rushing through three cities in one day.",
+    accessInfo:[
+      {label:"Caesarea National Park official accessibility details",url:"https://en.parks.org.il/reserve-park/caesarea-national-park/"},
+      {label:"Accessible national parks and sites map",url:"https://en.parks.org.il/accessibility/"},
+    ],
     image:"/images/attractions/haifa-bahai-gardens.webp",alt:"Baháʼí Gardens on the slopes of Mount Carmel in Haifa",
     intro:"The Mediterranean coast offers a good mix of archaeology, city panoramas and relaxed waterside stops. You can enjoy a memorable day by choosing two highlights rather than racing through all three cities.",
     easy:"A selected accessible section at Caesarea plus a Haifa viewpoint or the Akko waterfront can work better than touring every site.",

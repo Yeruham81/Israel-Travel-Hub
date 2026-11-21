@@ -45,6 +45,10 @@ async function snapshot(page,label){
    related:related.map(x=>({to:x.getAttribute("href"),image:!!x.querySelector("img")?.naturalWidth})),
    siteLinks:all("main a[href^='/attractions/']").length,
    maps:all("#day-trips a[href*='google.com/maps/search/']").length,
+   customEnquiries:dayCards.map(card=>({id:card.dataset.seniorDayTrip,href:card.querySelector("[data-senior-trip-enquiry]")?.getAttribute("href"),label:card.querySelector("[data-senior-trip-enquiry]")?.textContent.trim(),secondary:card.querySelector("a[href^='/tours/']")?.getAttribute("href")})),
+   sampleOrders:dayCards.map(card=>({id:card.dataset.seniorDayTrip,steps:card.querySelectorAll("[data-senior-sample-route] li").length,rest:card.textContent.includes("Time to rest:"),short:card.textContent.includes("If you prefer a shorter day:")})),
+   accessResources:all("#day-trips [data-senior-access-resources] a").map(a=>a.href),
+   midpageCta:all("#day-trips [data-senior-midpage-cta] a[href='#contact']").length,
    faq:all("#faq details").length,articleSchema:schema.includes('"Article"'),
    contact:form.length===1,portrait:!!document.querySelector("#contact img[data-photo-role='contact-portrait']"),
    source:!!document.querySelector("#sources"),images,
@@ -59,6 +63,10 @@ async function snapshot(page,label){
  check(data.dayTrips.join(",")==="jerusalem,masada,galilee,coast",label+" four private trip ideas",JSON.stringify(data.dayTrips));
  check(data.related.length===12&&data.related.every(x=>x.to),label+" twelve illustrated internal guides",String(data.related.length));
  check(data.maps===4,label+" four geographical links",String(data.maps));
+ check(data.customEnquiries.length===4&&data.customEnquiries.every(x=>x.href==="#contact"&&x.label.includes("Ask me about this private trip")&&x.secondary?.startsWith("/tours/")),label+" four personalized enquiry links and secondary tours",JSON.stringify(data.customEnquiries));
+ check(data.sampleOrders.length===4&&data.sampleOrders.every(x=>x.steps===3&&x.rest&&x.short),label+" four practical three-stop routes with rests and shorter alternatives",JSON.stringify(data.sampleOrders));
+ check(data.midpageCta===1,label+" additional modest enquiry link after day trips");
+ check(data.accessResources.length>=6&&data.accessResources.some(h=>h.includes("play.google.com"))&&data.accessResources.some(h=>h.includes("apps.apple.com"))&&data.accessResources.some(h=>h.includes("parks.org.il")),label+" targeted accessible route maps and official park links",JSON.stringify(data.accessResources));
  check(data.faq===10&&data.articleSchema,label+" FAQ and Article metadata",JSON.stringify({faqs:data.faq,article:data.articleSchema}));
  check(data.contact&&data.portrait&&data.source,label+" personalized enquiry form and sources");
  check(data.images.length>=18&&data.images.every(i=>i.loaded&&i.alt!==null),label+" photos load and have alt attributes",JSON.stringify(data.images.filter(i=>!i.loaded||i.alt===null)));

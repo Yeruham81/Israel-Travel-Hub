@@ -27,7 +27,9 @@ const references=[
  {title:"Israel Nature and Parks Authority — Masada visitor information",url:"https://en.parks.org.il/reserve-park/masada-national-park/"},
  {title:"Israel Nature and Parks Authority — Masada cable car access",url:"https://en.parks.org.il/article/the-masada-cable-car/"},
  {title:"Israel Nature and Parks Authority — Caesarea visitor information",url:"https://en.parks.org.il/reserve-park/caesarea-national-park/"},
- {title:"Access Israel — visiting the Old City of Jerusalem",url:"https://www.aisrael.org/en/useful-info/accessible-tourism/the-old-city-of-jerusalem/"},
+ {title:"Access Israel — visiting the Old City of Jerusalem",url:"https://aisrael.org/en/useful-info/accessible-tourism/the-old-city-of-jerusalem/"},
+ {title:"Accessible JLM map app — Android",url:"https://play.google.com/store/apps/details?id=pami.accessibility.sayyes"},
+ {title:"Accessible JLM map app — iPhone",url:"https://apps.apple.com/il/app/accessible-jlm/id1434672106"},
 ] as const;
 
 function Heading({id,title,intro}:{id:string;title:string;intro?:ReactNode}){
@@ -55,10 +57,23 @@ function TripCard({item}:{item:SeniorDay}){
    <p className="mt-3 text-sm leading-relaxed">{item.intro}</p>
    <p className="mt-4 text-sm leading-relaxed"><strong className="text-foreground">A gentler option:</strong> {item.easy}</p>
    <p className="mt-3 text-sm leading-relaxed text-muted-foreground"><strong className="text-foreground">Before you go:</strong> {item.watchFor}</p>
+   <div className="mt-4 rounded-lg bg-secondary/25 p-4" data-senior-sample-route>
+    <h4 className="text-sm font-semibold">A suggested, unhurried visit</h4>
+    <ol className="mt-2 list-decimal space-y-1.5 pl-5 text-sm leading-relaxed">{item.sampleOrder.map((step,i)=><li key={i}>{step}</li>)}</ol>
+    <p className="mt-3 text-sm leading-relaxed"><strong>Time to rest:</strong> {item.restStop}</p>
+    <p className="mt-2 text-sm leading-relaxed"><strong>If you prefer a shorter day:</strong> {item.shortenDay}</p>
+   </div>
+   {item.accessInfo&&<div className="mt-3 text-sm" data-senior-access-resources>
+    <p className="font-semibold">Check accessibility before visiting</p>
+    <ul className="mt-1.5 space-y-1.5">{item.accessInfo.map(resource=><li key={resource.url}><External href={resource.url}>{resource.label}</External></li>)}</ul>
+   </div>}
    <div className="mt-4 flex flex-wrap gap-2">{item.suggestedStops.map(stop=><Link key={stop.label} to={stop.to} className="rounded-full border px-3 py-1.5 text-xs font-semibold text-primary hover:bg-secondary">{stop.label}</Link>)}</div>
-   <div className="mt-auto flex flex-wrap items-center justify-between gap-3 pt-5">
-    <Link to={item.to} className="inline-flex items-center gap-1.5 text-sm font-semibold text-primary hover:underline">See related day trips <ArrowUpRight className="h-4 w-4" aria-hidden="true"/></Link>
-    <a href={map} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 text-sm font-semibold text-primary hover:underline"><MapPin className="h-4 w-4" aria-hidden="true"/>Google Maps <ArrowUpRight className="h-4 w-4" aria-hidden="true"/></a>
+   <div className="mt-auto space-y-3 pt-5">
+    <a href="#contact" data-senior-trip-enquiry={item.id} className="inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-lg bg-primary px-4 py-2.5 text-center text-sm font-semibold text-primary-foreground hover:opacity-90">Ask me about this private trip <ArrowRight className="h-4 w-4" aria-hidden="true"/></a>
+    <div className="flex flex-wrap items-center justify-between gap-x-4 gap-y-2">
+     <Link to={item.to} className="inline-flex items-center gap-1.5 text-sm font-semibold text-primary hover:underline">Browse other tours <ArrowUpRight className="h-4 w-4" aria-hidden="true"/></Link>
+     <a href={map} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 text-sm font-semibold text-primary hover:underline"><MapPin className="h-4 w-4" aria-hidden="true"/>Google Maps <ArrowUpRight className="h-4 w-4" aria-hidden="true"/></a>
+    </div>
    </div>
   </div>
  </article>;
@@ -97,6 +112,10 @@ export function SeniorToursGuide(){
    <section id="day-trips" aria-labelledby="day-trips-heading" className="mt-12 scroll-mt-24">
     <Heading id="day-trips" title="Four private day-trip ideas for senior travelers" intro="These are examples you can customize. I would usually recommend fewer stops and more time at each place instead of a crowded, fixed itinerary."/>
     <div className="grid gap-5 md:grid-cols-2">{seniorDayTrips.map(item=><TripCard key={item.id} item={item}/>)}</div>
+    <div data-senior-midpage-cta className="mt-6 flex flex-col gap-3 rounded-xl border p-4 sm:flex-row sm:items-center sm:justify-between sm:gap-6 sm:p-5">
+     <div><h3 className="font-semibold">Would you prefer a different pace or route?</h3><p className="mt-1 text-sm leading-relaxed text-muted-foreground">Tell me which places matter most and how much walking feels comfortable. I can discuss an individual private transport plan.</p></div>
+     <a href="#contact" className="inline-flex min-h-11 shrink-0 items-center justify-center gap-2 rounded-lg border px-4 py-2.5 text-sm font-semibold text-primary hover:bg-secondary">Ask Moshe about your day <ArrowRight className="h-4 w-4" aria-hidden="true"/></a>
+    </div>
     <div className="mt-5"><Tip>For Jewish heritage, consider the Western Wall, <External href="https://www.yadvashem.org/visiting.html">Yad Vashem</External> or <External href="https://www.anumuseum.org.il/">ANU — Museum of the Jewish People</External>. For Christian heritage, I have a separate <Link to="/travel-blog/christian-tours-in-israel/" className={lnk}>Christian tours guide</Link>. Religious services, entry arrangements and each site's accessibility must be checked for your date.</Tip></div>
    </section>
 
@@ -116,7 +135,7 @@ export function SeniorToursGuide(){
     <div className="space-y-4 leading-relaxed">
      <p>In <Link to="/attractions/old-city-jerusalem/" className={lnk}>Jerusalem's Old City</Link>, some routes have been improved for visitors with reduced mobility, but steep sections, stone surfaces and steps remain. At <Link to="/attractions/masada/" className={lnk}>Masada</Link>, the cable car offers an alternative to hiking, but the archaeological plateau is not uniformly step-free. <Link to="/attractions/caesarea/" className={lnk}>Caesarea</Link> has designated accessible visitor areas; the precise entrance and route still matter.</p>
      <p>If you use a cane, walker or wheelchair, please tell me in advance. A folding walking aid may fit in a standard vehicle, while travelling without transferring from a wheelchair can require a specially adapted vehicle. <strong>I cannot assume or guarantee an accessible vehicle or hands-on mobility assistance</strong> without confirming the necessary arrangement.</p>
-     <p>For site-specific facilities, start with the <External href="https://en.parks.org.il/accessibility/">Israel Nature and Parks Authority accessibility information</External>. Ask the venue directly about step-free entrances, toilets, parking, queues and routes available on your planned day.</p>
+     <p>For the Old City, check the <External href="https://play.google.com/store/apps/details?id=pami.accessibility.sayyes">Accessible JLM map app (Android)</External> or <External href="https://apps.apple.com/il/app/accessible-jlm/id1434672106">iPhone version</External> to plan a suitable pedestrian route, then confirm current obstructions locally. For Masada and Caesarea, the <External href="https://en.parks.org.il/accessibility/">Israel Nature and Parks Authority's accessibility guide and site map</External> explains visitor facilities; the relevant official site pages are also linked beside each day-trip idea. Ask each venue about the actual step-free entrance, toilets, parking, queues and routes available on your planned day.</p>
     </div>
     <div className="mt-5"><Tip>A short route on a map does not always mean an easy walk. Before your journey, I can help you plan appropriate car stops; parking restrictions, construction and site access may change the last section on foot.</Tip></div>
    </section>
