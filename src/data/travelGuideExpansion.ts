@@ -216,9 +216,10 @@ export const expandedTravelGuides = {
     ],
   },
   travelTips: {
-    id: "travelTips", title: "Israel travel tips for first-time visitors: practical checklist",
-    description: "Planning a first Israel trip? Check entry requirements, Shabbat transport, hotel bases, payments, mobile data and visits to religious sites.",
-    intro: "Build a trip that works on your actual dates. A few decisions made before booking can prevent awkward arrivals, unnecessary hotel changes and overfilled days.",
+    id: "travelTips", title: "Israel Travel Tips for First-Time Visitors",
+    description: "Practical Israel travel tips for first-time visitors: entry and ETA-IL, travel insurance, safety resources, Shabbat transport, where to stay, payments and local customs.",
+    updatedAt: "2026-11-21",
+    intro: "My practical guide to planning an Israel trip: start with entry and travel dates, arrange airport transport, choose a realistic route, and prepare for everyday life.",
     answer: "Check the official entry requirements for your passport, choose a manageable set of bases, and plan arrival and hotel changes around Shabbat and holidays. Then connect each day's real addresses, prepare mobile data and offline records, and confirm bookings and site access before relying on them. Use current official travel advice when deciding whether and where to travel.",
     topics: ["tips", "transportation", "destinations"], photo: {src: roadTrip, alt: "Road through the Israeli countryside for trip planning"},
     facts: [{ label: "Start with", text: "Passport requirements and actual travel dates" }, { label: "Big planning issue", text: "Shabbat, holidays and the final leg of each journey" }, { label: "Keep accessible", text: "Addresses, booking records and important contacts offline" }],
@@ -233,7 +234,7 @@ export const expandedTravelGuides = {
     ],
     checklist: ["Check passport-specific entry requirements", "Read current official advice and booking-change terms", "Choose a manageable number of hotel bases", "Check Shabbat/holiday arrivals and transfers", "Prepare data, offline maps and payment backup", "Confirm opening/reservation and access arrangements", "Keep time for meals, walking and the return journey"],
     faqs: [{ q: "Should I stay in Jerusalem or Tel Aviv?", a: "Choose around the places you most want to visit. A split stay can suit a trip focused on both cities; a single base can avoid hotel changes when you only want a brief visit to the other." }, { q: "Do I need a rental car for the entire trip?", a: "Compare actual daily routes. City stays can work with walking, transit and taxis; a rental or driver may be more useful for a particular rural or multi-stop segment." }, { q: "What should I arrange before a Shabbat arrival?", a: "Plan the complete airport-to-hotel journey, any terminal transfer and late check-in. Use the separate Shabbat guide to compare the limited weekend bus, taxis, private transfers and rental collection." }],
-    sourceIds: ["guide-entry", "guide-iaa", "guide-weekend-711", "israel-rail", "guide-jerusalem-tourism"], related: ["bestTime", "calendar", "food", "topTen", "arrival", "shabbat", "israel", "esim", "jerusalem"],
+    sourceIds: ["guide-entry", "guide-iaa", "guide-weekend-711", "israel-rail", "guide-jerusalem-tourism", "guide-public-transport-payments", "guide-telaviv-transit"], related: ["bestTime", "calendar", "food", "topTen", "arrival", "shabbat", "israel", "esim", "jerusalem"],
     services: [{ label: "Accommodation by destination", to: "/accommodation/" }, { label: "Private airport transfers", to: "/airport-transfers/" }, { label: "Private driver for your itinerary", to: "/private-driver/" }, { label: "Tours & day trips", to: "/tours/" }],
   },
   jerusalem: {
