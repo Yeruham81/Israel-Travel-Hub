@@ -71,7 +71,12 @@ describe("Eilat multi-attraction city guide", () => {
       "/images/attractions/eilat-botanical-garden.webp",
     ];
     expect(new Set(list).size).toBe(list.length);
-    for (const image of list) expect(existsSync("public" + image), image).toBe(true);
+    for (const image of list) {
+      const localPath = image.startsWith("/images/") ? "public" + image : image.startsWith("/src/assets/") ? image.slice(1) : "";
+      expect(localPath && existsSync(localPath), image).toBe(true);
+    }
+    expect(eilatSite.hero.src).toContain("/assets/eilat/waterfront.webp");
+    expect(page).not.toContain("src: waterfrontPhoto");
     expect(page).toContain("@/assets/home/timna-park-feature-optimized.webp");
     expect(page).toContain("eilat-water-sports.webp");
     expect(page).toContain("eilat-beach-comparison");
