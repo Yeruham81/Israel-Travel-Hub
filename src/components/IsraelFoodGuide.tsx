@@ -270,6 +270,7 @@ export function IsraelFoodGuide(){
      <ul className="mt-3 list-disc space-y-2 pl-5 text-sm">
        {sources.map(source=><li key={source.id}><External href={source.url}>{source.publisher}: {source.title}</External></li>)}
        <li>Mahane Yehuda market-stall photograph: <External href="https://commons.wikimedia.org/wiki/File:Mahane_Yehuda_shoppers.jpg">Yoninah / Wikimedia Commons</External> · <External href="https://creativecommons.org/licenses/by-sa/3.0/">CC BY-SA 3.0</External>; cropped and resized into WebP.</li>
+       <li>Levinsky Market spice-shop photograph: <External href="https://commons.wikimedia.org/wiki/File:PikiWiki_Israel_9177_Levinsky_market_in_Tel_Aviv.JPG">Lior Golgher / PikiWiki Israel</External> · <External href="https://creativecommons.org/licenses/by/2.5/">CC BY 2.5</External>; cropped and resized into WebP.</li>
      </ul>
    </SourcesDisclosure>
  </article></main>;
