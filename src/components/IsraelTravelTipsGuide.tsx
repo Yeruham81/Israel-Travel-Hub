@@ -17,8 +17,8 @@ import airport from "@/assets/home/ben-gurion-t3.webp";
 import train from "@/assets/airport-journeys/jerusalem-navon-platform.webp";
 import masada from "@/assets/home/masada-dead-sea.webp";
 import { migrationPhotos } from "@/data/guideMigrationPhotos";
+import { TRAVEL_TIPS_TITLE, TRAVEL_TIPS_UPDATED, travelTipsFaqs, travelTipsSources } from "@/data/israelTravelTips";
 
-const updatedAt = "2026-11-21";
 const linkClass = "font-semibold text-primary underline underline-offset-4 hover:text-primary/80";
 const sections = [
   ["essentials", "Essential tips"],
@@ -67,27 +67,9 @@ const related = [
   { title: "7-Day Israel Itinerary", description: "A realistic introduction to key destinations", image: masada, alt: "Masada overlooking the Dead Sea", href: "/travel-blog/israel-itinerary-7-days/" },
 ] as const;
 
-const faqs = [
-  { q: "Do I need an ETA-IL or visa to visit Israel?", a: "That depends on your passport and immigration status. Check the official ETA-IL and Population and Immigration Authority website before paying for nonrefundable travel. An approved ETA-IL lets eligible travelers travel to Israel, but does not guarantee admission." },
-  { q: "Should I bring cash, or can I pay by card?", a: "Cards are widely accepted in hotels, restaurants and shops, but carry some Israeli shekels for markets, smaller vendors and backup. Check exchange rates, card fees and the final charge before you pay." },
-  { q: "Do I need to rent a car to travel around Israel?", a: "Not for most city sightseeing. Jerusalem and Tel Aviv are often easier on foot and with public transport or taxis. A rental car or private driver can help for rural routes, several stops or destinations with limited transit." },
-  { q: "What happens if I arrive on Friday evening or Saturday?", a: "Most regular trains and bus services stop for Shabbat, but taxis and prearranged private transfers may operate. Some local weekend networks serve selected areas. Check your exact airport-to-hotel journey and your accommodation's check-in arrangements in advance." },
-  { q: "How do I pay for public transport?", a: "Use a Rav-Kav card or an authorized fare-payment app where supported. Some buses accept bank cards, but this is not a universal payment option. Validate your journey according to the operator's rules." },
-  { q: "How many days should I plan for a first trip?", a: "Seven to ten days works well for a first visit with several regions. Three or five days can also be rewarding if you focus on fewer destinations rather than rushing between hotels." },
-  { q: "What should I reserve before arriving?", a: "Reserve essential accommodation and airport arrangements, and check whether popular tours, national parks, religious sites or special activities require timed tickets. Reconfirm opening hours near your visit." },
-  { q: "Is tap water safe to drink?", a: "Municipal tap water is generally safe, subject to any temporary local advisories. Take your own drinking water for walking days, hot weather and desert excursions." },
-];
 
-const sources = [
-  { label: "Population and Immigration Authority — official ETA-IL information", href: "https://israel-entry.piba.gov.il/" },
-  { label: "Ministry of Tourism — current information for tourists", href: "https://www.gov.il/en/departments/topics/tourist-and-travelers-info" },
-  { label: "Home Front Command — official emergency instructions", href: "https://www.oref.org.il/eng" },
-  { label: "Israel Airports Authority — Ben Gurion Airport security and arrival advice", href: "https://www.iaa.gov.il/en/airports/ben-gurion/securitybgn/" },
-  { label: "Israel Railways — current journey planner", href: "https://rail.co.il/?lan=en" },
-  { label: "National Public Transportation Authority — routes and fares", href: "https://bus.gov.il/en/home" },
-  { label: "Tel Aviv-Yafo Municipality — weekend transportation", href: "https://www.tel-aviv.gov.il/Residents/Transportation/Pages/naimbesofash.aspx" },
-  { label: "Bank of Israel — exchange rates", href: "https://www.boi.org.il/en/" },
-] as const;
+
+
 
 function Heading({ id, children, intro }: { id: string; children: ReactNode; intro?: string }) {
   return <div className="mb-5"><h2 id={id} className="scroll-mt-24 text-2xl font-bold tracking-tight sm:text-3xl">{children}</h2>{intro && <p className="mt-2 max-w-4xl leading-relaxed text-muted-foreground">{intro}</p>}</div>;
@@ -102,9 +84,9 @@ function Tip({ children }: { children: ReactNode }) {
 }
 
 function PhotoCard({ image, alt, name, description, href, cta }: { image: string; alt: string; name: string; description: string; href: string; cta: string }) {
-  return <li className="min-w-0 overflow-hidden rounded-xl border bg-card">
+  return <li className="flex h-full min-w-0 flex-col overflow-hidden rounded-xl border bg-card">
     <img src={image} alt={alt} width={600} height={360} loading="lazy" decoding="async" className="aspect-[16/9] w-full object-cover"/>
-    <div className="flex min-h-[180px] flex-col p-4"><h4 className="text-lg font-bold">{name}</h4><p className="mt-2 flex-1 text-sm leading-relaxed text-muted-foreground">{description}</p><a href={href} className="mt-3 inline-flex items-center gap-1 text-sm font-semibold text-primary underline underline-offset-4 hover:text-primary/80">{cta}<ArrowUpRight className="h-4 w-4" aria-hidden="true"/></a></div>
+    <div className="flex flex-1 flex-col p-4"><h4 className="text-lg font-bold">{name}</h4><p className="mt-2 flex-1 text-sm leading-relaxed text-muted-foreground">{description}</p><a href={href} className="mt-auto inline-flex items-center gap-1 pt-4 text-sm font-semibold text-primary underline underline-offset-4 hover:text-primary/80">{cta}<ArrowUpRight className="h-4 w-4" aria-hidden="true"/></a></div>
   </li>;
 }
 
@@ -115,9 +97,9 @@ export function IsraelTravelTipsGuide() {
         <Breadcrumbs items={[{ name: "Home", to: "/" }, { name: "Travel guides", to: "/travel-blog/" }, { name: "Israel Travel Tips", to: "/travel-blog/israel-travel-tips/" }]}/>
         <GuideHeroLayout image={<GuideHeroMedia src={roadTrip} alt="Scenic countryside road in Israel" width={640} height={400}/>}>
           <p className="text-xs font-bold uppercase tracking-wider text-primary">My practical guide for first-time visitors</p>
-          <h1 className="guide-page-title mt-2">Israel Travel Tips for First-Time Visitors</h1>
+          <h1 className="guide-page-title mt-2">{TRAVEL_TIPS_TITLE}</h1>
           <p data-guide-intro className="mt-4 max-w-3xl text-lg leading-relaxed">Israel may be small, but transport schedules, religious holidays, regional weather and airport procedures can make a difference to your trip. Here are the practical tips I share with visitors, from planning your first day to getting around with confidence.</p>
-          <PageUpdated date={updatedAt}/>
+          <PageUpdated date={TRAVEL_TIPS_UPDATED}/>
         </GuideHeroLayout>
         <AuthorCard/>
       </header>
@@ -125,10 +107,19 @@ export function IsraelTravelTipsGuide() {
       <section id="essentials" className="mt-8 scroll-mt-24" aria-labelledby="essentials-heading">
         <Heading id="essentials-heading" intro="Start here if you have only a few minutes. Each tip links to its explanation further down the page.">10 essential Israel travel tips</Heading>
         <div className="grid gap-3 sm:grid-cols-2" data-testid="essential-tips">
-          {essentials.map((tip, index) => <a key={tip.title} href={tip.href} className="flex gap-3 rounded-xl border bg-card p-4 transition-colors hover:bg-secondary focus-visible:outline-2 focus-visible:outline-primary">
+          {essentials.map((tip, index) => <a key={tip.title} href={tip.href} className={`${index >= 5 ? "hidden sm:flex" : "flex"} gap-3 rounded-xl border bg-card p-4 transition-colors hover:bg-secondary focus-visible:outline-2 focus-visible:outline-primary`}>
             <span className="text-sm font-bold tabular-nums text-primary">{String(index + 1).padStart(2, "0")}</span><div className="min-w-0"><h3 className="font-bold">{tip.title}</h3><p className="mt-1 text-sm leading-relaxed text-muted-foreground">{tip.detail}</p></div><ArrowUpRight aria-hidden="true" className="ml-auto h-4 w-4 shrink-0 text-primary"/>
           </a>)}
         </div>
+        <details className="mt-3 rounded-xl border bg-card p-3 sm:hidden" data-testid="mobile-extra-quick-tips">
+          <summary className="cursor-pointer px-2 py-1 text-sm font-semibold text-primary">Show 5 more quick tips</summary>
+          <div className="mt-2 space-y-2">
+            {essentials.slice(5).map(tip => <a key={tip.title} href={tip.href} className="block rounded-lg border bg-background p-3 hover:bg-secondary">
+              <span className="font-semibold">{tip.title}</span>
+              <span className="mt-1 block text-sm leading-relaxed text-muted-foreground">{tip.detail}</span>
+            </a>)}
+          </div>
+        </details>
       </section>
 
       <OnThisPage sections={sections}/>
@@ -142,7 +133,7 @@ export function IsraelTravelTipsGuide() {
         </Topic>
         <Topic id="safety" title="Check safety advice and choose suitable insurance">
           <p>Conditions can change quickly and vary by region. Check your home government's current travel advisory and any official Israeli guidance before booking and again before departure. Keep your plans flexible and verify flights, road access, public transport and site opening when conditions change.</p>
-          <p>While in Israel, follow instructions from local authorities and ask your accommodation provider where the nearest protected space is. For official visitor assistance consult the <a href="https://www.gov.il/en/departments/topics/tourist-and-travelers-info" target="_blank" rel="noopener noreferrer" className={linkClass}>Ministry of Tourism</a> and the <a href="https://www.oref.org.il/eng" target="_blank" rel="noopener noreferrer" className={linkClass}>Home Front Command</a>. Save these numbers: <strong>Police 100 · Ambulance 101 · Fire 102 · Home Front Command 104</strong>.</p>
+          <p>While in Israel, follow instructions from local authorities and ask your accommodation provider where the nearest protected space is. For official visitor assistance consult the <a href="https://www.gov.il/BlobFolder/generalpage/emergency-information-for-tourists-in-israel/en/emergency-information-for-tourists-in-israel-new.pdf" target="_blank" rel="noopener noreferrer" className={linkClass}>Ministry of Tourism's emergency information for tourists (PDF)</a> and the <a href="https://www.oref.org.il/eng" target="_blank" rel="noopener noreferrer" className={linkClass}>Home Front Command</a>. Save these numbers: <strong>Police 100 · Ambulance 101 · Fire 102 · Home Front Command 104</strong>.</p>
           <p>Before buying travel insurance, compare emergency medical care, hospitalization, medical evacuation, cancellation, delays, luggage and any hiking or adventure activities. Read exclusions carefully, particularly those related to government travel advisories or regional security events. Confirm coverage for your precise destinations, dates and any pre-existing conditions.</p>
         </Topic>
         <Topic id="when-to-go" title="Choose your dates and pack for different regions">
@@ -202,12 +193,12 @@ export function IsraelTravelTipsGuide() {
         <div className="mt-6 flex items-start gap-3 rounded-xl border bg-secondary/40 p-4"><CheckCircle2 aria-hidden="true" className="mt-0.5 h-5 w-5 shrink-0 text-primary"/><p className="text-sm leading-relaxed">Before setting out each day, check the venue's latest opening hours, weather, any required reservation and the return journey. For travel decisions affected by security or official restrictions, follow the relevant authorities' current advice.</p></div>
       </section>
 
-      <FaqList faqs={faqs}/>
+      <FaqList faqs={[...travelTipsFaqs]}/>
 
       <section id="related" className="mt-12 scroll-mt-24" aria-labelledby="related-title">
         <Heading id="related-title" intro="Dive deeper only where you need more detail. These six guides help with the next stage of planning.">Related practical Israel travel guides</Heading>
         <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3" data-testid="travel-tips-related-guides">
-          {related.map(card => <li key={card.href} className="min-w-0 overflow-hidden rounded-xl border bg-card"><a href={card.href} className="group block h-full"><img src={card.image} alt={card.alt} width={600} height={360} loading="lazy" decoding="async" className="aspect-[16/9] w-full object-cover"/><div className="p-4"><h3 className="font-bold group-hover:text-primary">{card.title}</h3><p className="mt-2 text-sm leading-relaxed text-muted-foreground">{card.description}</p><span className="mt-3 inline-flex items-center gap-1 text-sm font-semibold text-primary">Read my guide <ArrowUpRight aria-hidden="true" className="h-4 w-4"/></span></div></a></li>)}
+          {related.map(card => <li key={card.href} className="min-w-0 overflow-hidden rounded-xl border bg-card"><a href={card.href} className="group flex h-full flex-col"><img src={card.image} alt={card.alt} width={600} height={360} loading="lazy" decoding="async" className="aspect-[16/9] w-full object-cover"/><div className="flex flex-1 flex-col p-4"><h3 className="font-bold group-hover:text-primary">{card.title}</h3><p className="mt-2 text-sm leading-relaxed text-muted-foreground">{card.description}</p><span className="mt-auto inline-flex items-center gap-1 pt-3 text-sm font-semibold text-primary">Read my guide <ArrowUpRight aria-hidden="true" className="h-4 w-4"/></span></div></a></li>)}
         </ul>
       </section>
 
@@ -221,7 +212,7 @@ export function IsraelTravelTipsGuide() {
       <SourcesDisclosure>
         <p className="mb-3 leading-relaxed">Official information and planning resources. Entry conditions, security guidance, transport services and opening hours can change; check again for your travel dates.</p>
         <ul className="grid gap-2 sm:grid-cols-2">
-          {sources.map(source => <li key={source.href}><a href={source.href} target="_blank" rel="noopener noreferrer" className="inline-flex items-start gap-1 font-medium text-primary underline underline-offset-4 hover:text-primary/80">{source.label}<ExternalLink aria-hidden="true" className="mt-0.5 h-3.5 w-3.5 shrink-0"/></a></li>)}
+          {travelTipsSources.map(source => <li key={source.href}><a href={source.href} target="_blank" rel="noopener noreferrer" className="inline-flex items-start gap-1 font-medium text-primary underline underline-offset-4 hover:text-primary/80">{source.label}<ExternalLink aria-hidden="true" className="mt-0.5 h-3.5 w-3.5 shrink-0"/></a></li>)}
         </ul>
       </SourcesDisclosure>
     </article>

@@ -97,6 +97,15 @@ for (const [city, headings] of [
   }
 }
 
+// Guard the published Israel travel tips page and prevent silent editorial regressions.
+const israelTipsFile = join(root, "travel-blog", "israel-travel-tips", "index.html");
+assert(existsSync(israelTipsFile), "Missing prerendered Israel travel tips guide");
+const israelTipsHtml = readFileSync(israelTipsFile, "utf8");
+for (const required of ["Israel Travel Tips for First-Time Visitors", 'data-testid="essential-tips"', 'data-testid="israel-stay-cards"', 'data-testid="travel-tips-related-guides"', "Emergency Information for Tourists", 'id="contact"']) {
+  assert(israelTipsHtml.includes(required), "Israel travel tips static HTML missing: " + required);
+}
+assert(!israelTipsHtml.includes("/travel-blog/is-it-safe-to-travel-to-israel/"), "Unmaintained safety guide must not be linked");
+
 const privateApi = join(root, "api");
 // Never deploy compiled API: Hostinger's manually configured PHP endpoints
 // are excluded by rsync, and server-side Vite JS cannot run as static files.
