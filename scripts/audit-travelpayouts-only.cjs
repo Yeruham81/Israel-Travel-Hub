@@ -28,6 +28,8 @@ const inspectUrl = (href, location, explicitAffiliate) => {
   let u;
   try { u = new URL(href); } catch { return; }
   if (!/^https?:$/.test(u.protocol)) return;
+  // This literal appears only in a startsWith() check, not as a published link.
+  if (!explicitAffiliate && href === "https://tp.media/r?") return;
   const host = u.hostname.toLowerCase();
   if (allowed(href)) {
     if (host === "tp.media" && u.pathname === "/r" &&
