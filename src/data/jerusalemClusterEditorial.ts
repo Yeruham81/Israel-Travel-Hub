@@ -76,8 +76,8 @@ const articles: Partial<Record<TravelGuideId, Upgrade>> = {
     ],
   },
   jerusalemChurches: {
-    title: "Churches in Jerusalem: A Practical Guide by Area",
-    description: "Choose Jerusalem churches by the Old City, Mount of Olives, Mount Zion or Ein Karem. Plan Christian sites, walking routes, access and guided visits.",
+    title: "Churches in Jerusalem: What to See & How to Visit",
+    description: "Explore 20 Jerusalem churches and Christian heritage sites, with opening hours, maps, photos and practical routes in the Old City, Mount of Olives, Mount Zion and Ein Karem.",
     sections: [
       {
         id: "more-old-city-churches",
