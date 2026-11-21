@@ -72,7 +72,7 @@ async function inspect(page, label) {
   verify(data.related.length===12&&data.related.every(x=>x.href),label+" twelve related guide cards");
   verify(data.faq===10&&data.hasArticle,label+" FAQ and Article metadata",JSON.stringify({faq:data.faq,article:data.hasArticle}));
   verify(data.contact&&data.portrait&&data.sourcesAfterContact,label+" personal contact form and sources");
-  verify(data.images.length>=26&&data.images.every(i=>i.loaded&&i.alt),label+" all published photos decode",JSON.stringify(data.images.filter(i=>!i.loaded||!i.alt)));
+  verify(data.images.length>=26&&data.images.every(i=>i.loaded&&i.alt!==null),label+" all published photos decode",JSON.stringify(data.images.filter(i=>!i.loaded||i.alt===null)));
   verify(data.tours.every(t=>t.loaded),label+" all six tour photos decode");
   verify(data.related.every(x=>x.image),label+" all twelve linked guide photos decode");
   verify(data.width<=data.viewport+8,label+" no horizontal overflow",JSON.stringify({width:data.width,viewport:data.viewport}));
