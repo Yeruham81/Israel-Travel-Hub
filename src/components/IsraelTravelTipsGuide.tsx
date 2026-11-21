@@ -64,7 +64,7 @@ const related = [
   { title: "Ben Gurion Airport Arrival Tips", description: "A smoother arrival and airport transfer", image: airport, alt: "Ben Gurion Airport Terminal 3", href: "/travel-blog/ben-gurion-airport-arrival-tips/" },
   { title: "Getting Around Israel", description: "Trains, buses, taxis and private journeys", image: train, alt: "Jerusalem Yitzhak Navon railway station platform", href: "/travel-blog/getting-around-israel/" },
   { title: "What to Eat in Israel", description: "Popular dishes and practical food-market tips", image: migrationPhotos["what-to-eat-in-israel"].src, alt: "Israeli foods served together", href: "/travel-blog/what-to-eat-in-israel/" },
-  { title: "7-Day Israel Itinerary", description: "A realistic introduction to key destinations", image: masada, alt: "Masada overlooking the Dead Sea", href: "/travel-blog/7-day-israel-itinerary/" },
+  { title: "7-Day Israel Itinerary", description: "A realistic introduction to key destinations", image: masada, alt: "Masada overlooking the Dead Sea", href: "/travel-blog/israel-itinerary-7-days/" },
 ] as const;
 
 const faqs = [
@@ -104,7 +104,7 @@ function Tip({ children }: { children: ReactNode }) {
 function PhotoCard({ image, alt, name, description, href, cta }: { image: string; alt: string; name: string; description: string; href: string; cta: string }) {
   return <li className="min-w-0 overflow-hidden rounded-xl border bg-card">
     <img src={image} alt={alt} width={600} height={360} loading="lazy" decoding="async" className="aspect-[16/9] w-full object-cover"/>
-    <div className="flex h-[calc(100%-0px)] flex-col p-4"><h4 className="text-lg font-bold">{name}</h4><p className="mt-2 flex-1 text-sm leading-relaxed text-muted-foreground">{description}</p><a href={href} className="mt-3 inline-flex items-center gap-1 text-sm font-semibold text-primary underline underline-offset-4 hover:text-primary/80">{cta}<ArrowUpRight className="h-4 w-4" aria-hidden="true"/></a></div>
+    <div className="flex min-h-[180px] flex-col p-4"><h4 className="text-lg font-bold">{name}</h4><p className="mt-2 flex-1 text-sm leading-relaxed text-muted-foreground">{description}</p><a href={href} className="mt-3 inline-flex items-center gap-1 text-sm font-semibold text-primary underline underline-offset-4 hover:text-primary/80">{cta}<ArrowUpRight className="h-4 w-4" aria-hidden="true"/></a></div>
   </li>;
 }
 
@@ -172,7 +172,7 @@ export function IsraelTravelTipsGuide() {
         <Heading id="plan-title" intro="A shorter, well-paced route is often more enjoyable than spending half your trip changing hotels.">Plan your stay</Heading>
         <Topic title="Decide how long to stay and what to prioritize">
           <p>For a first visit, seven to ten days can cover Jerusalem and Tel Aviv plus some time in the Dead Sea or northern Israel without rushing. Three days is better spent in one area; five days can combine the two main cities and perhaps a day trip. Leave time for traffic, meals, queues, check-in and journeys between stops.</p>
-          <p>Compare my <Link to="/travel-blog/3-day-israel-itinerary/" className={linkClass}>3-day</Link>, <Link to="/travel-blog/5-day-israel-itinerary/" className={linkClass}>5-day</Link>, <Link to="/travel-blog/7-day-israel-itinerary/" className={linkClass}>7-day</Link> and <Link to="/travel-blog/10-day-israel-itinerary/" className={linkClass}>10-day</Link> travel plans. Reserve timed admission or special tours where needed, and recheck religious-site access before traveling.</p>
+          <p>Compare my <Link to="/travel-blog/israel-itinerary-3-days/" className={linkClass}>3-day</Link>, <Link to="/travel-blog/israel-itinerary-5-days/" className={linkClass}>5-day</Link>, <Link to="/travel-blog/israel-itinerary-7-days/" className={linkClass}>7-day</Link> and <Link to="/travel-blog/israel-itinerary-10-days/" className={linkClass}>10-day</Link> travel plans. Reserve timed admission or special tours where needed, and recheck religious-site access before traveling.</p>
         </Topic>
         <div id="where-to-stay" className="mt-9 scroll-mt-24" aria-labelledby="stays-title">
           <h3 id="stays-title" className="text-xl font-bold">Where to stay in Israel</h3>
