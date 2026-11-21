@@ -14,10 +14,9 @@ import { SourcesDisclosure } from "@/components/SourcesDisclosure";
 import { HomeContactForm } from "@/components/HomeContactForm";
 import {
   deadSeaStops as stops, deadSeaMapPoints, deadSeaRouteIdeas,
-  deadSeaFaqs, deadSeaAttractionsUpdatedAt, type DeadSeaStop,
+  deadSeaFaqs, deadSeaAttractionsUpdatedAt, deadSeaAttractionsHero, type DeadSeaStop,
 } from "@/data/deadSeaAttractionsGuide";
 
-import heroPhoto from "@/assets/dead-sea/landscape.webp";
 import masadaRelated from "@/assets/guides/dead-sea-excursions/masada-palace.webp";
 import einGediRelated from "@/assets/guides/dead-sea-excursions/ein-gedi-rock-gorge.jpg";
 import shoreRelated from "@/assets/dead-sea/sunbeds.webp";
@@ -175,7 +174,7 @@ export function DeadSeaAttractionsGuide() {
           {name:"Travel guides",to:"/travel-blog/"},
           {name:"Dead Sea attractions",to:"/travel-blog/dead-sea-attractions/"},
         ]}/>
-        <GuideHeroLayout image={<GuideHeroMedia src={heroPhoto} alt="Desert hills and the deep blue water of the Dead Sea" />}>
+        <GuideHeroLayout image={<GuideHeroMedia src={deadSeaAttractionsHero.src} alt={deadSeaAttractionsHero.alt} />}>
           <p className="text-xs font-semibold uppercase tracking-[0.16em] text-primary">Dead Sea · Nature, heritage & experiences</p>
           <h1 className="guide-page-title mt-2">Dead Sea Attractions: Best Things to Do in Israel's Dead Sea Region</h1>
           <p data-guide-intro className="mt-4 max-w-3xl text-lg leading-relaxed">
