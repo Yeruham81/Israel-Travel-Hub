@@ -21,11 +21,18 @@ describe("Jerusalem travel planning hub",()=>{
     expect(travelGuides.jerusalem.updatedAt).toBe(JERUSALEM_HUB_UPDATED);
     expect(travelGuides.jerusalem.photo.src).toBeTruthy();
     expect(jerusalemDayPlans).toHaveLength(3);
-    expect(jerusalemStayAreas).toHaveLength(5);
+    expect(jerusalemStayAreas).toHaveLength(6);
+    expect(new Set(jerusalemStayAreas.map(x=>x.to)).size).toBe(6);
+    expect(jerusalemStayAreas.some(x=>x.name==="East Jerusalem")).toBe(true);
+    expect(jerusalemStayAreas.every(x=>x.to.startsWith("/accommodation/jerusalem/"))).toBe(true);
   });
   it("has 18 distinct image-backed canonical internal guide cards in three grids",()=>{
     expect([jerusalemTopicCards.length,jerusalemDayTripCards.length,jerusalemMoreGuides.length]).toEqual([6,6,6]);
     expect(new Set(allEditorialCards.map(x=>x.to)).size).toBe(18);
+    expect(new Set(allEditorialCards.map(x=>x.cta)).size).toBe(18);
+    expect(allEditorialCards.some(x=>x.to==="/travel-blog/attractions-in-tel-aviv/")).toBe(true);
+    expect(allEditorialCards.some(x=>x.to==="/attractions/sea-of-galilee/")).toBe(true);
+    expect(allEditorialCards.every(x=>x.to!=="/travel-blog/day-trips-from-jerusalem/")).toBe(true);
     for(const item of allEditorialCards){
       expect(item.to).toMatch(/^\/(?:attractions|travel-blog)\//);
       expect(guideHeroPhotoForPath(item.to)?.src,item.to).toBeTruthy();
