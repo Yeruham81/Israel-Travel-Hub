@@ -8,7 +8,7 @@ import { travelGuides, type GuidePhoto } from "@/data/travelGuides";
 import { travelGuidePaths, type TravelGuideId } from "@/data/registry";
 import { migrationPhotos } from "@/data/guideMigrationPhotos";
 import caesareaPhoto from "@/assets/home/caesarea-dusk.webp";
-import telAvivMain from "@/assets/home/tel-aviv-coast.webp";
+import { telAvivAttractionsHero } from "@/data/telAvivAttractionsGuide";
 import { einGediCardPhoto } from "@/data/einGediCardPhoto";
 import deadSeaBeachCard from "@/assets/dead-sea/beach-card.webp";
 import galileeLakeCard from "@/assets/home/tiberias-lake-tile.webp";
@@ -185,7 +185,7 @@ export const attractionRelatedGuides: {
     title: "Discover Tel Aviv & Jaffa",
     description: "A lively coast, historic lanes, markets and city culture.",
     to: "/travel-blog/attractions-in-tel-aviv/",
-    photo: {src: telAvivMain, alt: "Tel Aviv skyline and Mediterranean beachfront"},
+    photo: telAvivAttractionsHero,
   },
   {
     title: "Haifa visitor guide",
