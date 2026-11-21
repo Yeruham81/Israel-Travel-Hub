@@ -3,7 +3,9 @@ import { existsSync, readFileSync } from "node:fs";
 import { bestTimeGuide, monthFits, seasonalFits, suitabilityColumns, regionalRecommendations, seasonDetails } from "./bestTimeIsrael";
 import { migrationPhotos } from "./guideMigrationPhotos";
 import { travelGuides } from "./travelGuides";
-import { affiliateConfig } from "./registry";
+import { affiliateConfig, publicSources } from "./registry";
+import { guideHeroPhotoForPath } from "@/lib/guide-hero-photos";
+import { masadaSite } from "@/data/masadaSite";
 
 describe("Best Time to Visit Israel — editorial and layout regressions",()=>{
   it("keeps the current hero photograph unchanged and preserves guide metadata",()=>{
@@ -35,6 +37,8 @@ describe("Best Time to Visit Israel — editorial and layout regressions",()=>{
     expect(monthFits.find(x=>x.month==="August")?.desert).toBe("challenging");
     expect(monthFits.find(x=>x.month==="January")?.swimming).toBe("challenging");
     expect(monthFits.find(x=>x.month==="September")?.city).toBe("variable");
+    expect(suitabilityColumns.find(col=>col.key==="deadSea")?.label).toMatch(/walks/i);
+    expect(suitabilityColumns.find(col=>col.key==="deadSea")?.description).toMatch(/Not a swimming suitability rating/);
   });
 
   it("presents region-specific advice and independent seasonal narratives",()=>{
@@ -44,6 +48,7 @@ describe("Best Time to Visit Israel — editorial and layout regressions",()=>{
       expect(region.to).toMatch(/^\/(travel-blog|attractions)\//);
       expect(region.caution).toBeTruthy();
       expect(region.goodMonths).toBeTruthy();
+      expect(region.to).not.toMatch(/\/travel-blog\/(?:sea-of-galilee|the-dead-sea)\//);
     }
     expect(seasonDetails.map(x=>x.id)).toEqual(["spring","summer","autumn","winter"]);
     for(const section of seasonDetails){
@@ -69,12 +74,21 @@ describe("Best Time to Visit Israel — editorial and layout regressions",()=>{
     expect(component).toContain("https://ims.gov.il/en/warning");
     expect(component).toContain("https://en.parks.org.il/");
     expect(component).toContain('to="/travel-blog/israel-holidays/"');
-    for(const file of [
-      "src/assets/home/hero-galilee-medium.webp",
-      "src/assets/tel-aviv/beachfront.webp",
-      "src/assets/home/hero-haifa-medium.webp",
-      "src/assets/home/hero-eilat-mountains-sm.webp"
-    ])expect(existsSync(file),file).toBe(true);
+    for(const season of ["spring","summer","autumn","winter"]){
+      for(const width of [320,720]){
+        const file=`public/images/best-time-israel/${season}-${width}.webp`;
+        expect(existsSync(file),file).toBe(true);
+        const bytes=readFileSync(file);
+        expect(bytes.toString("ascii",0,4),file).toBe("RIFF");
+        expect(bytes.toString("ascii",8,12),file).toBe("WEBP");
+        expect(bytes.byteLength,file).toBeLessThan(170_000);
+      }
+    }
+    expect(component).toContain("srcSet={photo.srcSet}");
+    expect(component).toContain("sizes={seasonPhotoSize}");
+    expect(component).toContain("src={photo.src}");
+    expect(component).toContain("haifa");
+    expect(component).not.toContain("hero-haifa-medium.webp");
     expect(component).toContain("loading=\"lazy\"");
     expect(component).toContain('guideHeroPhotoForPath(String(item.to))');
     expect(component.indexOf("<SourcesDisclosure>")).toBeGreaterThan(component.indexOf("<HomeContactForm"));
@@ -82,6 +96,13 @@ describe("Best Time to Visit Israel — editorial and layout regressions",()=>{
     expect(component).not.toContain('["sources"');
     expect(component).toContain('["contact","Contact me"]');
     expect(component).toContain('className="grid grid-cols-2 gap-4 lg:grid-cols-3"');
+    expect(component).toContain('role="status" aria-live="polite"');
+    expect(component).toContain('aria-controls="month-insight"');
+    expect(component).toContain('const activeMonth=visible.find');
+    expect(component).toContain('onClick={()=>setSelectedMonth(month.month)}');
+    expect(component).not.toContain('visible.map(month=><div key={month.month}');
+    expect(component).toContain('to:"/attractions/sea-of-galilee/"');
+    expect(component).toContain('to:"/attractions/dead-sea/"');
   });
 
   it("only offers existing provider-linked products with distinct page-level click attribution",()=>{
@@ -97,5 +118,37 @@ describe("Best Time to Visit Israel — editorial and layout regressions",()=>{
     expect(page).toContain("recordOutboundClick");
     expect(page).not.toContain("starting price");
     expect(page).toContain('data-testid="best-time-seasonal-tours"');
+    expect(page).toContain('src={item.image} alt={item.alt}');
+    expect(page).toContain("masadaTourPhoto");
+    expect(page).toContain("/images/attractions/old-jerusalem-cardo.webp");
+    expect(page).toContain("/images/attractions/jaffa-flea-market.webp");
   });
+  it("resolves the three formerly blank cards to the exact target guide hero",()=>{
+    const paths=[
+      "/attractions/sea-of-galilee/",
+      "/attractions/dead-sea/",
+      "/attractions/masada/"
+    ];
+    for(const to of paths){
+      const photo=guideHeroPhotoForPath(to);
+      expect(photo,to).toBeDefined();
+      expect(photo?.src,to).toBeTruthy();
+      expect(photo?.alt,to).toBeTruthy();
+    }
+    expect(guideHeroPhotoForPath("/attractions/masada/")).toEqual(masadaSite.hero);
+    const component=readFileSync("src/components/BestTimeIsraelGuide.tsx","utf8");
+    for(const to of paths)expect(component).toContain(`to:"${to}"`);
+    expect(component).not.toContain('to:"/travel-blog/sea-of-galilee/"');
+    expect(component).not.toContain('to:"/travel-blog/the-dead-sea/"');
+  });
+
+  it("resolves every declared citation ID to an independent external source",()=>{
+    const sources=publicSources(bestTimeGuide.sourceIds);
+    expect(sources).toHaveLength(bestTimeGuide.sourceIds.length);
+    expect(sources.map(source=>source.id)).toEqual(bestTimeGuide.sourceIds);
+    expect(sources.find(s=>s.id==="m26-ims")?.url).toBe("https://ims.gov.il/en/ClimateAtlas");
+    expect(sources.find(s=>s.id==="m26-hebcal")?.url).toContain("hebcal.com/holidays");
+    expect(sources.find(s=>s.id==="m26-parks")?.url).toContain("en.parks.org.il");
+  });
+
 });
