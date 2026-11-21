@@ -152,6 +152,7 @@ async function publishedAudit(){
   if(process.argv.includes("--published"))await publishedAudit();
   const report={checkedAt:new Date().toISOString(),stats,failures,review};
   fs.writeFileSync("/tmp/travelpayouts-affiliate-audit.json",JSON.stringify(report,null,2));
+  if(failures.length) console.log("AUDIT_FAILURE_DETAILS",JSON.stringify(failures.slice(0,50)));
   console.log("AUDIT_TOTAL",JSON.stringify({stats,failures:failures.length,review:review.length}));
   if(failures.length)process.exitCode=1;
 })().catch(e=>{console.error(e);process.exitCode=1});
