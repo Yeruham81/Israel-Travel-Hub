@@ -1,4 +1,5 @@
 name: Audit published Israel food guide across desktop and mobile
+# Accessibility QA recognises decorative icons with alt="" and the permitted repeated Moshe portrait.
 on:
   push:
     branches: [main]
