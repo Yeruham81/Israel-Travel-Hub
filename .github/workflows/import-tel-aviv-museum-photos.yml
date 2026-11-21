@@ -44,9 +44,12 @@ jobs:
 
           for museum, filename in sources.items():
               hashstr = md5(filename.encode("utf-8")).hexdigest()
-              url = "https://upload.wikimedia.org/wikipedia/commons/{}/{}/{}".format(
+              original = "https://upload.wikimedia.org/wikipedia/commons/{}/{}/{}".format(
                   hashstr[:1], hashstr[:2], quote(filename, safe="")
               )
+              # Wikimedia throttles requests from some GitHub runner addresses.
+              # The proxy supplies the same Commons image in resized WebP form.
+              url = "https://wsrv.nl/?url=" + quote(original, safe="") + "&w=960&output=webp&q=80"
               last_error = None
               for attempt in range(4):
                   try:
