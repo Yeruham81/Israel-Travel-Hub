@@ -18,7 +18,7 @@ export const haifaMuseumPhotos: Record<string, HaifaMuseumPhoto | undefined> = {
 
 /** Visible credit and license details for the three Commons photographs. */
 export const haifaMuseumPhotoCredits = [
-  {id:"hecht",label:"Hecht Museum",author:"Israel Zeller / PikiWiki Israel",license:"CC BY 2.5",sourceUrl:"https://commons.wikimedia.org/wiki/File:PikiWiki_Israel_70469_hecht_museum.jpg",licenseUrl:"https://creativecommons.org/licenses/by/2.5/"},
+  {id:"hecht",label:"Hecht Museum",author:"Israel Zeller · Attribution: yigal zalmanson Pikiwiki Israel",license:"CC BY 2.5",sourceUrl:"https://commons.wikimedia.org/wiki/File:PikiWiki_Israel_70469_hecht_museum.jpg",licenseUrl:"https://creativecommons.org/licenses/by/2.5/"},
   {id:"struck",label:"Hermann Struck Museum",author:"Haifa Museums",license:"CC BY-SA 4.0",sourceUrl:"https://commons.wikimedia.org/wiki/File:%D7%9E%D7%95%D7%96%D7%99%D7%90%D7%95%D7%9F_%D7%94%D7%A8%D7%9E%D7%9F_%D7%A9%D7%98%D7%A8%D7%95%D7%A7.jpg",licenseUrl:"https://creativecommons.org/licenses/by-sa/4.0/"},
   {id:"mane-katz",label:"Mané-Katz Museum",author:"Hanay",license:"CC BY-SA 3.0",sourceUrl:"https://commons.wikimedia.org/wiki/File:Mane_Catz_Museum_(2).JPG",licenseUrl:"https://creativecommons.org/licenses/by-sa/3.0/"},
 ];
