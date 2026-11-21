@@ -234,7 +234,7 @@ describe("shore excursions", () => {
     expect(validateShoreQuote({ ...valid, consent: false }, "haifa", now).join(" ")).toMatch(/agree to share/);
     const draft = buildShoreQuoteDraft({ ...valid, itineraryId: "other", otherItinerary: "Caesarea\n& Haifa", notes: "Please add a licensed guide & child seat." }, "haifa");
     const url = new URL(draft.url);
-    expect(url.searchParams.get("subject")).toBe("Moshe Barak - Taxi & Travel in Israel / Jamie");
+    expect(url.searchParams.get("subject")).toBe("Moshe Barak - Israel Taxi & Travel / Jamie");
     expect(url.searchParams.get("body")).toContain("Please add a licensed guide & child seat.");
     expect(draft.body).not.toMatch(/ILS|1,900|1900/);
   });

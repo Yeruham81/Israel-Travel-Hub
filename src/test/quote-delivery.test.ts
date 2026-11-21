@@ -60,7 +60,7 @@ describe("server-side quote delivery", () => {
     expect(message.text.split(consent)).toHaveLength(2);
     expect(message.text).not.toMatch(/Hello Moshe|Please send me a quote|Please confirm|I understand that|Please quote a suitable vehicle/);
     expect(message.html).toContain(consent);
-    expect(message.subject).toBe("Moshe Barak - Taxi & Travel in Israel / Jamie & Alex");
+    expect(message.subject).toBe("Moshe Barak - Israel Taxi & Travel / Jamie & Alex");
     expect(message.text.startsWith(`Sent from page: ${data.sourceTitle}\n\n`)).toBe(true);
     expect(message.text).toContain("21 October 2026, 15:00 (Israel time)");
     expect(message.replyTo).toBe(contact.email);

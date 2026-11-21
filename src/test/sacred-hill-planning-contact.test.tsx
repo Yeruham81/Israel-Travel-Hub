@@ -110,7 +110,7 @@ describe("sacred hill visit planning", () => {
       subject: id === "mount-zion" ? "Mount Zion visit" : "Mount of Olives visit",
     });
     expect(send).toHaveBeenCalledOnce();
-    expect(send.mock.calls[0]![0].subject).toBe("Moshe Barak - Taxi & Travel in Israel / A traveller");
+    expect(send.mock.calls[0]![0].subject).toBe("Moshe Barak - Israel Taxi & Travel / A traveller");
     expect(send.mock.calls[0]![0].text).toContain(payload.request.fields.subject);
     expect(send.mock.calls[0]![0].text).toContain("Sent from page: " + title);
     fireEvent.submit(form);
