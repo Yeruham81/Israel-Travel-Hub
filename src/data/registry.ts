@@ -175,7 +175,6 @@ export const travelGuidePaths = {
   bestTime: "/travel-blog/best-time-to-visit-israel/",
   food: "/travel-blog/what-to-eat-in-israel/",
   calendar: "/travel-blog/calendar-of-events/",
-  eilat: "/travel-blog/eilat/",
   telAvivBeaches: "/travel-blog/beaches-in-tel-aviv/",
   telAvivMuseums: "/travel-blog/museums-in-tel-aviv/",
   haifaMuseums: "/travel-blog/museums-in-haifa/",

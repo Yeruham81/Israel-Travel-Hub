@@ -33,7 +33,6 @@ import haifaBotanicaPhoto from "@/assets/haifa/botanica.webp";
 import haifaColonyPhoto from "@/assets/haifa/colony.webp";
 import haifaLeonardoPhoto from "@/assets/haifa/leonardo.webp";
 import haifaDanCarmelPhoto from "@/assets/haifa/dan-carmel.webp";
-import eilatWaterfrontPhoto from "@/assets/eilat/waterfront.webp";
 
 export type StayPreference = "first-visit" | "car-free" | "quiet" | "nightlife" | "family" | "views" | "luxury" | "heritage" | "food" | "long-stay" | "beach" | "history";
 
@@ -1145,13 +1144,6 @@ export const accommodationDestinations: AccommodationDestinationCard[] = [
     text: "Compare spa hotels and family resorts around Ein Bokek and the southern hotel district, with advice on beach access and meals.",
     mobileText: "Spa and family resorts near Ein Bokek.",
     cta: "Compare Dead Sea hotels", to: deadSeaStayGuide.path as NonNullable<LinkProps["to"]>, photo: deadSeaPhotos.beach,
-  },
-  {
-    id: "eilat", title: "Hotels in Eilat",
-    text: "Red Sea beaches, resort escapes and desert scenery. My Eilat guide's arrival and stay section explains the main hotel areas — it is area guidance, not an Eilat hotel comparison.",
-    mobileText: "Red Sea resorts and beachfront stays.",
-    cta: "Explore Eilat Hotels", to: "/travel-blog/eilat/", hash: "arrival-stay",
-    photo: { src: eilatWaterfrontPhoto, alt: "Hotels, palm trees and the waterfront beside the Red Sea in Eilat", sourceUrl: "", label: "Eilat — Red Sea waterfront" },
   },
 ];
 

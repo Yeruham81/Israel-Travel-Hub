@@ -969,10 +969,10 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
             id: "israel-eilat", title: "Eilat, the Negev and the Dead Sea",
             paragraphs: [
               "There is no operating Israel Railways passenger train to Eilat. Long-distance buses can get you there, but selected departures require seat reservation. Ramon Airport also has its own local bus links. For desert attractions, check the last bus and the distance to the entrance. A rental car or organised tour may be easier.",
-              "The Eilat visitor guide and Jerusalem-to-the-Dead-Sea guide provide destination-specific advice; if arriving from Ben Gurion Airport, the airport-to-Ein-Bokek guide explains the train-and-bus connection and the hotel stops.",
+              "The Eilat attractions page and Jerusalem-to-the-Dead-Sea guide provide destination-specific advice; if arriving from Ben Gurion Airport, the airport-to-Ein-Bokek guide explains the train-and-bus connection and the hotel stops.",
             ],
             inlineLinks: [
-              { text: "Eilat visitor guide", to: travelGuidePaths.eilat },
+              { text: "Eilat attractions page", to: "/attractions/eilat/" },
               { text: "Jerusalem-to-the-Dead-Sea guide", to: travelGuidePaths.jerusalemDeadSea },
               { text: "airport-to-Ein-Bokek guide", to: "/travel-blog/how-to-get-from-ben-gurion-airport-to-ein-bokek/" },
             ],
@@ -1123,7 +1123,7 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
     related: ["telAviv", "taxis", "sherut", "shabbat", "airportTaxis", "arrival"],
     services: [
       { label: "Plan a trip to Tiberias and the Sea of Galilee", to: "/travel-blog/best-hotels-in-tiberias/", note: "Consider where to stay and how to reach regional attractions." },
-      { label: "Eilat travel guide", to: travelGuidePaths.eilat, note: "Plan intercity travel and local transport in Israel's southern resort city." },
+      { label: "Eilat attractions", to: "/attractions/eilat/", note: "Plan intercity travel and local transport in Israel's southern resort city." },
       { label: "Jerusalem to the Dead Sea", to: travelGuidePaths.jerusalemDeadSea, note: "Check bus connections and hotel stops before setting off." },
       { label: "Five-day Israel itinerary", to: "/travel-blog/israel-itinerary-5-days/", note: "Group destinations and decide when public transport is practical." },
     ],
