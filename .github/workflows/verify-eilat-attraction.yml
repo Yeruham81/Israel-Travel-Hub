@@ -19,6 +19,7 @@ on:
       - "src/data/tours.ts"
       - "src/data/content.ts"
       - "src/test/travel-blog-hub-images.test.ts"
+      - "src/test/guide-migration-2026.test.tsx"
       - "scripts/verify-hostinger-static-export.mjs"
       - "public/sitemap.xml"
 
