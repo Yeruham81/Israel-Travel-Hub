@@ -242,7 +242,7 @@ export const holidayGuideSources = [
 {label:"Israel Railways — trains on holidays",url:"https://rail.co.il/?lan=en&page=holidays-information"},
 {label:"Israeli government — weekly rest and statutory holiday guidance",url:"https://www.gov.il/BlobFolder/generalpage/employment_guides/en/employment_en.pdf"},
 {label:"Israel Airports Authority — Ben Gurion Airport",url:"https://www.iaa.gov.il/en/airports/ben-gurion/"},
-{label:"Hebcal — Israel Jewish holiday dates",url:"https://www.hebcal.com/holidays/2027?i=on"},
+{label:"Hebcal — Israel Jewish holiday dates",url:"https://www.hebcal.com/holidays/?i=on"},
 {label:"Time and Date — holidays and observances",url:"https://www.timeanddate.com/holidays/israel/"},
 {label:"Israel Nature and Parks Authority",url:"https://www.parks.org.il/en/"},
 ] as const;

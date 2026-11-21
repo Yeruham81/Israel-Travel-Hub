@@ -79,7 +79,7 @@ const byId: Record<AirportJourneyId, AirportJourneyGuide> = {
       onward: { src: benGurionRailPlatform, alt: "Ben Gurion Airport railway station platform used to board trains toward Jerusalem" },
     },
     stationLinks: [{ text: "Ben Gurion Airport arrival guide", to: "/travel-blog/ben-gurion-airport-arrival-tips/" }],
-    weekendLinks: [{ text: "airport Shabbat transport guide", to: "/travel-blog/from-ben-gurion-airport-on-shabbat/" }, { text: "Sherut in Israel guide", to: "/travel-blog/sherut-in-israel/" }, { text: "Israel\'s calendar of events", to: "/travel-blog/israel-holidays/" }],
+    weekendLinks: [{ text: "airport Shabbat transport guide", to: "/travel-blog/from-ben-gurion-airport-on-shabbat/" }, { text: "Sherut in Israel guide", to: "/travel-blog/sherut-in-israel/" }, { text: "Israel\'s holiday guide", to: "/travel-blog/calendar-of-events/" }],
     sources: [
       { title: "Israel Railways — official route and current train fare", url: "https://www.rail.co.il/" },
       { title: "Israel Railways — free personal voucher for Jerusalem line (August 2026 notice)", url: "https://rail.co.il/?lan=en&page=vouchers-jerusalem" },

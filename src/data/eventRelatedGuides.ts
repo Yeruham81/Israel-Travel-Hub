@@ -2,7 +2,7 @@ import { guideDirectory } from "./travelGuides";
 
 /** Explicitly chosen contextual readings for visitors browsing Israel events. */
 const related = [
-  {id:"israel-holidays",note:"Check dates that may affect public transport, opening hours and travel plans."},
+  {id:"calendar",note:"Understand how Israeli holidays affect transport, opening hours and travel plans."},
   {id:"bestTime",note:"Compare seasons, weather and visitor crowds before choosing travel dates."},
   {id:"telAvivMuseums",note:"Find major museums and exhibition spaces around Tel Aviv."},
   {id:"haifaMuseums",note:"Explore Haifa's museums and plan a cultural stop in the north."},

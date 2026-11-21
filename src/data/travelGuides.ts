@@ -197,7 +197,7 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
           "Taxis may be available during Shabbat and Jewish holidays, even when most public transport stops. Check Gett or Yango for your location, but arrange important airport or long-distance rides in advance.",
           "Night, weekend and holiday taxi fares may be higher. For airport transport during Shabbat, see my airport Shabbat travel guide.",
         ],
-        inlineLinks: [{ text: "Jewish holidays", to: "/travel-blog/israel-holidays/" }, { text: "airport Shabbat travel guide", to: travelGuidePaths.shabbat }],
+        inlineLinks: [{ text: "Jewish holidays", to: "/travel-blog/calendar-of-events/" }, { text: "airport Shabbat travel guide", to: travelGuidePaths.shabbat }],
         sourceIds: ["guide-iaa", "taxi-fares-2026", "guide-weekend-711"],
       },
     ],
@@ -1011,10 +1011,10 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
         paragraphs: [
           "Most trains and regular buses stop before Shabbat on Friday and resume after Saturday evening. Similar restrictions apply during some Jewish holidays. Check the last Friday departure and first Saturday-evening service for your route.",
           "Tel Aviv has a separate free weekend bus network, Na'im Busofash, serving selected routes on Fridays and Saturdays. Some local sheruts and licensed taxis may also operate, but check availability in advance.",
-          "Check Israel's calendar of events for holiday dates, then confirm transport schedules for your journey. For flights, the airport Shabbat transport guide covers limited weekend bus 711 at Terminal 1 and official taxis.",
+          "Check Israel's holiday and special dates guide for holiday dates, then confirm transport schedules for your journey. For flights, the airport Shabbat transport guide covers limited weekend bus 711 at Terminal 1 and official taxis.",
         ],
         inlineLinks: [
-          { text: "Israel's calendar of events", to: "/travel-blog/israel-holidays/" },
+          { text: "Israel's calendar of events", to: "/travel-blog/calendar-of-events/" },
           { text: "airport Shabbat transport guide", to: travelGuidePaths.shabbat },
         ],
         highlightedLinks: [{ label: "Na'im Busofash — weekend routes and operating hours", href: "https://busofash.co.il/", context: "Check the actual Friday or Saturday route, stop, service direction and timetable; the network is limited to participating communities." }],
@@ -1486,8 +1486,6 @@ export const guideDirectory: GuideDirectoryEntry[] = [
   { id: "airport-journey-tel-aviv", title: "How to get from Ben Gurion Airport to Tel Aviv", description: "Compare train, bus, taxi and private-transfer options, travel times, estimated fares and weekend alternatives.", to: "/travel-blog/how-to-get-from-ben-gurion-airport-to-tel-aviv/", topics: ["transportation", "tips"], photo: airportJourneyGuides["tel-aviv"].photo },
   { id: "airport-journey-haifa", title: "How to get from Ben Gurion Airport to Haifa", description: "Compare train, bus, taxi and private-transfer options, travel times, estimated fares and weekend alternatives.", to: "/travel-blog/how-to-get-from-ben-gurion-airport-to-haifa/", topics: ["transportation", "tips"], photo: airportJourneyGuides.haifa.photo },
   { id: "airport-journey-ein-bokek", title: "How to get from Ben Gurion Airport to Ein Bokek", description: "Compare train, bus, taxi and private-transfer options, travel times, estimated fares and weekend alternatives.", to: "/travel-blog/how-to-get-from-ben-gurion-airport-to-ein-bokek/", topics: ["transportation", "tips"], photo: airportJourneyGuides["ein-bokek"].photo },
-
-  { id: "israel-holidays", title: "Israel Holidays Calendar: Dates & Travel Planning", description: "Select your trip dates on an interactive calendar to see which holidays could affect transport, opening hours, crowds and prices.", to: "/travel-blog/israel-holidays/" as LinkProps["to"], topics: ["tips","religion","itineraries"], photo: {src:"/images/attractions/old-jerusalem-western-wall.webp",alt:"Visitors at the Western Wall in Jerusalem"} },
   ...Object.values(travelGuides).filter((guide) => !travelGuidePaths[guide.id].startsWith("/attractions/")).map((guide) => ({ id: guide.id, title: guide.title, description: guide.description, to: travelGuidePaths[guide.id], topics: guide.topics, photo: guide.photo })),
   ...(["haifa", "ashdod"] as const).map((id): GuideDirectoryEntry => { const port = getShorePort(id); return { id: `shore-${id}`, title: port.title, description: port.description, to: port.path, topics: ["destinations", "itineraries", "transportation"], photo: port.photo }; }),
   { id: "stay-jerusalem", title: "Where to stay in Jerusalem", description: "Choose the neighbourhood and hotel style that fit your visit.", to: "/travel-blog/where-to-stay-in-jerusalem/", topics: ["destinations", "accommodation"], photo: neighborhoodGuidesForCity("jerusalem")[0]!.photo },

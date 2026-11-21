@@ -257,7 +257,7 @@ export const planningGuides = {
       {"q":"What is Chol HaMoed?","a":"The intermediate days of Sukkot and Passover, when many services run but visitor attractions and hotels can be crowded."}
     ],
     "related": ["bestTime","shabbat","jerusalem","israel"],
-    "services": [{"label":"Check exact Israel holiday dates","to":"/travel-blog/israel-holidays/"},{"label":"Plan private transport","to":"/private-driver/"}],
+    "services": [{"label":"Plan private transport","to":"/private-driver/"}],
     "sourceIds": ["israel-rail","guide-iaa"]
   }
 } satisfies Record<string, TravelGuide>;

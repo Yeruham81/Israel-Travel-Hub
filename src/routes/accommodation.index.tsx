@@ -58,7 +58,7 @@ const planningGuides = [
   { title: "Airport transfers", detail: "Private rides to your hotel.", to: "/airport-transfers/" as const, icon: CarFront },
   { title: "Getting around Israel", detail: "Trains, buses and intercity journeys.", to: "/travel-blog/getting-around-israel/" as const, icon: TrainFront },
   { title: "Israel in seven days", detail: "Plan your overnight bases and day trips.", to: "/travel-blog/israel-itinerary-7-days/" as const, icon: MapPin },
-  { title: "Holidays and events", detail: "Check dates that affect transport and stays.", to: "/travel-blog/israel-holidays/" as const, icon: CalendarDays },
+  { title: "Holidays and special dates", detail: "Plan around closures, transport changes and busy travel periods.", to: "/travel-blog/calendar-of-events/" as const, icon: CalendarDays },
   { title: "Israel travel tips", detail: "Practical advice before your trip.", to: "/travel-blog/israel-travel-tips/" as const, icon: BookOpen },
 ] as const;
 

@@ -46,7 +46,7 @@ const planning:{title:string;to:LinkProps["to"];desc:string}[]=[
   {title:"5 days in Israel",to:"/travel-blog/israel-itinerary-5-days/",desc:"Cities, coast and one extra region"},
   {title:"7 days in Israel",to:"/travel-blog/israel-itinerary-7-days/",desc:"Combine highlights at a more comfortable pace"},
   {title:"10 days in Israel",to:"/travel-blog/israel-itinerary-10-days/",desc:"Explore more regions without rushing"},
-  {title:"Israel holidays calendar",to:"/travel-blog/israel-holidays/",desc:"Check the dates that affect transport and openings"},
+  {title:"Israeli holidays guide",to:"/travel-blog/calendar-of-events/",desc:"Check the dates that affect transport and openings"},
   {title:"Getting around Israel",to:"/travel-blog/getting-around-israel/",desc:"Compare trains, buses, taxis and private transfers"}
 ];
 const partnerOptions=[
@@ -149,7 +149,7 @@ function HolidayAndWeather(){
         <h3 className="text-lg font-bold">Holidays can change the entire day</h3>
         <p className="mt-2 text-sm leading-relaxed">Passover and the autumn Jewish holidays change dates on the Gregorian calendar every year. Shabbat begins on Friday evening. During some holidays and on Shabbat, public transport is limited or unavailable, and individual attractions and shops may close or change hours. Easter and major religious celebrations also affect visits to churches and heritage sites.</p>
         <p className="mt-3 text-sm leading-relaxed">I recommend checking the specific dates before booking a hotel, a tour or an airport arrival. A busy holiday can be rewarding, but it needs a different travel plan.</p>
-        <div className="mt-4 flex flex-wrap gap-4 text-sm"><Link className="font-semibold text-primary hover:underline" to="/travel-blog/israel-holidays/">Israel's holidays calendar</Link><Link className="font-semibold text-primary hover:underline" to="/travel-blog/calendar-of-events/">Israel events calendar</Link></div>
+        <div className="mt-4 flex flex-wrap gap-4 text-sm"><Link className="font-semibold text-primary hover:underline" to="/travel-blog/calendar-of-events/">Israel's holidays calendar</Link><Link className="font-semibold text-primary hover:underline" to="/travel-blog/calendar-of-events/">Israel events calendar</Link></div>
       </article>
       <article className="rounded-xl border bg-card p-4 sm:p-5">
         <h3 className="text-lg font-bold">Check your whole journey, not just the air temperature</h3>
