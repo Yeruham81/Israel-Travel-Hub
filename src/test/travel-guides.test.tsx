@@ -156,6 +156,34 @@ describe("migrated practical guides", () => {
       expect(article).toMatchObject({ headline: guide.title, dateModified: guide.updatedAt, inLanguage: "en" });
       return;
     }
+    if (id === "travelTips") {
+      // The dedicated first-visitor guide replaces the generic comparison
+      // table / quick-answer template with actionable planning sections.
+      expect(container.querySelectorAll('[data-testid="essential-tips"] > a')).toHaveLength(10);
+      expect(container.querySelectorAll('[data-testid="israel-stay-cards"] > li')).toHaveLength(5);
+      expect(container.querySelectorAll('[data-testid="travel-tips-related-guides"] > li')).toHaveLength(6);
+      expect(container.querySelectorAll("#faq details")).toHaveLength(8);
+      for (const section of ["before-you-travel", "arriving", "plan-your-stay", "everyday"]) {
+        expect(container.querySelector(`#${section}`)).not.toBeNull();
+      }
+      expect(container.querySelector("#contact form")).not.toBeNull();
+      expect(container.querySelector("#sources")).not.toBeNull();
+      expect(container.querySelector('a[href*="is-it-safe-to-travel-to-israel"]')).toBeNull();
+      expect(container.querySelector('a[href*="israel-taxi.com"]')).toBeNull();
+      expect(screen.getByRole("complementary", { name: "About the author" })).toHaveTextContent("Written by Moshe Barak");
+      expect(container.querySelector("time")).toHaveAttribute("datetime", guide.updatedAt);
+      const head = await route.options.head?.({} as never);
+      expect(head).toMatchObject({ meta: expect.arrayContaining([
+        { title: guide.title },
+        { name: "description", content: guide.description },
+        { name: "robots", content: "noindex,nofollow" },
+      ]) });
+      const structured = head!.scripts!.flatMap(script => typeof script?.children === "string" ? [JSON.parse(script.children)] : []);
+      expect(structured.find(item => item["@type"] === "Article")).toMatchObject({
+        headline: guide.title, dateModified: guide.updatedAt, inLanguage: "en",
+      });
+      return;
+    }
     expect(screen.getByRole("region", { name: "Quick answer" })).toHaveTextContent(guide.answer);
     if (id === "esim") {
       expect(screen.getByRole("region", { name: "Compare 30-day unlimited eSIM plans" })).toBeInTheDocument();
