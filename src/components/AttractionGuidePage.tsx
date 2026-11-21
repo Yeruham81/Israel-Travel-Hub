@@ -93,7 +93,7 @@ export function AttractionGuidePage({ id }: {id:AttractionId}) {
     </Section>
     <Section id="getting-there" title="How to get there">
       <ul className="mt-3 list-disc space-y-3 pl-5">{a.arrival.map(t=><li key={t}>{t}</li>)}</ul>
-      <p className="mt-5">For comfortable transport between sites, you can also <Link to="/private-driver/" className="font-semibold text-primary underline underline-offset-4">explore a private driver</Link>. Confirm the route, availability and total quote directly before booking.</p>
+      <p className="mt-5">For comfortable transport between sites, you can also <Link to="/private-driver-in-israel/" className="font-semibold text-primary underline underline-offset-4">explore a private driver</Link>. Confirm the route, availability and total quote directly before booking.</p>
     </Section>
     <Section id="tips" title="Practical advice before you go">
       <ul className="mt-3 list-disc space-y-3 pl-5">{a.planning.map(t=><li key={t}>{t}</li>)}</ul>

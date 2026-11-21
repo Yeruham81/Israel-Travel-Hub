@@ -183,7 +183,7 @@ export function JerusalemCityHubPage(){
       <p className="mt-3 max-w-4xl text-sm leading-relaxed text-muted-foreground">For current rail changes and service notices, consult <a className={linkClass} href="https://rail.co.il/?lan=en&page=updates" target="_blank" rel="noopener noreferrer">Israel Railways</a>. For official visitor information about Jerusalem, check the <a className={linkClass} href="https://www.gov.il/en/government-service-branches/jerusalem-tourism-office" target="_blank" rel="noopener noreferrer">Jerusalem tourism office</a>.</p>
       <div className="mt-5 grid gap-3 sm:grid-cols-2" data-testid="jerusalem-transport-links">
         {[
-          {to:"/travel-blog/how-to-get-from-ben-gurion-airport-to-jerusalem/",title:"How to get to Jerusalem",description:"Compare airport trains, taxis, buses and private transfers.",icon:<TrainFront className="h-5 w-5"/>},
+          {to:"/travel-blog/ben-gurion-airport-to-jerusalem/",title:"How to get to Jerusalem",description:"Compare airport trains, taxis, buses and private transfers.",icon:<TrainFront className="h-5 w-5"/>},
           {to:"/travel-blog/getting-around-israel/",title:"Public transport and travel in Israel",description:"Rav-Kav or approved apps, buses, trains and local connections.",icon:<Footprints className="h-5 w-5"/>},
           {to:"/travel-blog/from-ben-gurion-airport-on-shabbat/",title:"Shabbat and holiday transport",description:"Understand when regular services stop and how to plan alternatives.",icon:<CalendarDays className="h-5 w-5"/>},
           {to:"/airport-transfers/jerusalem/",title:"Direct airport transfer to Jerusalem",description:"Arrange a confirmed pickup to your specified destination.",icon:<CarFront className="h-5 w-5"/>},

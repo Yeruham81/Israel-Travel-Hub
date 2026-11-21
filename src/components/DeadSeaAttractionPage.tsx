@@ -140,7 +140,7 @@ export const deadSeaDestinationContent: AttractionDestinationContent = {
         <article className="rounded-xl border bg-card p-4">
           <h3 className="flex items-center gap-2 font-serif text-lg font-semibold"><CarFront className="size-5 text-primary" aria-hidden="true" />By car or private driver</h3>
           <p className="mt-2 text-sm leading-relaxed">Jerusalem is generally about 1½–2 hours from Ein Bokek, while Tel Aviv is commonly 2½–3 hours away, depending on traffic, weather and your starting point. The usual approach is via Route 1 and Route 90; follow current navigation and road notices.</p>
-          <p className="mt-2 text-sm leading-relaxed">For more than one stop, such as Masada and the beach, a car or <Link to="/private-driver/" className={inlineLink}>private driver</Link> gives the most flexibility.</p>
+          <p className="mt-2 text-sm leading-relaxed">For more than one stop, such as Masada and the beach, a car or <Link to="/private-driver-in-israel/" className={inlineLink}>private driver</Link> gives the most flexibility.</p>
           <div className="mt-2"><External href={maps.einBokek}>Directions to Ein Bokek beach</External></div>
         </article>
         <article className="rounded-xl border bg-card p-4">
@@ -247,7 +247,7 @@ export const deadSeaDestinationContent: AttractionDestinationContent = {
     { label: "Best time to visit Israel", to: "/travel-blog/best-time-to-visit-israel/", icon: "seasons", description: "Choose comfortable seasons and plan for desert heat" },
     { label: "Israel travel calendar", to: "/travel-blog/calendar-of-events/", icon: "seasons", description: "Holidays and special dates" },
     { label: "Getting around Israel", to: "/travel-blog/getting-around-israel/", icon: "transport", description: "Buses, roads and longer journeys" },
-    { label: "Private driver in Israel", to: "/private-driver/", icon: "itinerary", description: "A flexible day at your own pace" },
+    { label: "Private driver in Israel", to: "/private-driver-in-israel/", icon: "itinerary", description: "A flexible day at your own pace" },
   ],
   sources: [
     { label: "Tamar Regional Council — Ein Bokek Central Beach", url: links.einBokek },

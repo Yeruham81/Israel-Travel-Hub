@@ -20,7 +20,7 @@ const related = [
   { title: "Where to stay in Haifa", to: "/travel-blog/best-hotels-in-haifa/" as const, note: "Compare practical hotel areas and neighbourhoods" },
   { title: "Haifa shore excursions", to: "/shore-excursions/haifa/" as const, note: "Plan a city visit around your cruise schedule" },
   { title: "Old Acre attractions", to: "/attractions/akko-acre/" as const, note: "Explore the historic coastal city just north of Haifa" },
-  { title: "Getting to Haifa from the airport", to: "/travel-blog/how-to-get-from-ben-gurion-airport-to-haifa/" as const, note: "Train, taxi and private transfer options" },
+  { title: "Getting to Haifa from the airport", to: "/travel-blog/ben-gurion-airport-to-haifa/" as const, note: "Train, taxi and private transfer options" },
 ];
 
 function OfficialLink({href,children}:{href:string;children:ReactNode}) {

@@ -61,7 +61,7 @@ describe("Jerusalem content and reciprocal guide cluster", () => {
       jerusalemConnections[source].some(link => String(link.to) === target);
     expect(has("jerusalem", "/tours/jerusalem/")).toBe(true);
     expect(has("tour-jerusalem", travelGuidePaths.jerusalem)).toBe(true);
-    expect(has("jerusalem", "/travel-blog/how-to-get-from-ben-gurion-airport-to-jerusalem/")).toBe(true);
+    expect(has("jerusalem", "/travel-blog/ben-gurion-airport-to-jerusalem/")).toBe(true);
     expect(has("airport-jerusalem", travelGuidePaths.jerusalem)).toBe(true);
     expect(has("jerusalem", "/travel-blog/where-to-stay-in-jerusalem/")).toBe(true);
     expect(has("stay-jerusalem", travelGuidePaths.jerusalem)).toBe(true);

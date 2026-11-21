@@ -344,7 +344,7 @@ describe("four independent airport transportation comparisons", () => {
     expect(doc.querySelector('#option-rail a[href="https://www.egged.co.il/en/information-for-passengers/tickets-information"]')).not.toBeNull();
     expect(doc.querySelector('#option-rental a[href="https://ims.gov.il/en/warning"]')).not.toBeNull();
     expect(doc.querySelector('#option-rail a[href="/travel-blog/best-dead-sea-hotels/"]')).not.toBeNull();
-    expect(doc.querySelector('#option-rail a[href="/travel-blog/how-to-get-from-ben-gurion-airport-to-tel-aviv/"]')).not.toBeNull();
+    expect(doc.querySelector('#option-rail a[href="/travel-blog/ben-gurion-airport-to-tel-aviv/"]')).not.toBeNull();
     expect(doc.querySelector('section[aria-label="Related practical guides"]')?.querySelectorAll("li")).toHaveLength(6);
     expect(doc.querySelector('section[aria-label="Plan the next part of your trip"]')?.querySelectorAll("li")).toHaveLength(4);
     expect(doc.querySelector("main")?.lastElementChild?.id).toBe("sources");

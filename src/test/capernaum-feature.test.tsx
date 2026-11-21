@@ -162,7 +162,7 @@ describe("Capernaum as the first reusable individual-attraction guide", () => {
     expect(article).toContain('href="#contact"');
     expect(article).toContain("or a shore excursion from Haifa Port");
     expect(article).toContain("Request a quote");
-    expect(article).not.toContain('to="/private-driver/"');
+    expect(article).not.toContain('to="/private-driver-in-israel/"');
     expect(article.match(/attraction-tour-card/g)).toHaveLength(2);
     expect(content.planningLinks?.every(link => Boolean(link.description && link.icon))).toBe(true);
     const styles = readFileSync("src/styles.css", "utf8");

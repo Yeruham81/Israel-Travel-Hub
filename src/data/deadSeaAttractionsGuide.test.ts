@@ -109,7 +109,7 @@ describe("Dead Sea attractions editorial guide", () => {
     expect(page).toContain("HomeContactForm");
     expect(page.indexOf("<HomeContactForm")).toBeLessThan(page.indexOf("<SourcesDisclosure>"));
     expect(page).toContain("Where to Stay in Israel");
-    expect(page).toContain("how-to-get-from-ben-gurion-airport-to-ein-bokek");
+    expect(page).toContain("ben-gurion-airport-to-ein-bokek");
     expect(page).toContain("Photograph credits");
     expect(page).not.toContain("israel-taxi.com");
     const route=readFileSync(resolve(process.cwd(),"src/routes/travel-blog.dead-sea-attractions.tsx"),"utf8");

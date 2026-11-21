@@ -221,5 +221,5 @@ export const christianPlanningCards: ChristianRelated[] = [
   {title:"Israel in 7 days",description:"Slow down and allow time for northern and central Israel",to:"/travel-blog/israel-itinerary-7-days/",image:sevenDayPhoto,alt:"Green landscape around the Sea of Galilee"},
   {title:"Israel's calendar of events",description:"Understand religious dates and changes to opening hours",to:"/travel-blog/calendar-of-events/",image:calendarPhoto,alt:"Israel calendar guide"},
   {title:"Getting around Israel",description:"Train, bus, road travel and intercity transport basics",to:"/travel-blog/getting-around-israel/",image:railPhoto,alt:"Passenger train at Ben Gurion Airport station"},
-  {title:"Private driver in Israel",description:"Discuss a tailored multi-stop journey with Moshe Barak",to:"/private-driver/",image:privateDriverPhoto,alt:"Licensed passenger taxi vehicle in Israel, illustrating private transport"},
+  {title:"Private driver in Israel",description:"Discuss a tailored multi-stop journey with Moshe Barak",to:"/private-driver-in-israel/",image:privateDriverPhoto,alt:"Licensed passenger taxi vehicle in Israel, illustrating private transport"},
 ];

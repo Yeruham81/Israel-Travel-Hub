@@ -150,10 +150,10 @@ export const expandedTravelGuides = {
           "There is no regular walk-up airport sherut service to Tel Aviv, Jerusalem or Haifa. The former Nesher and Amal airport services are no longer offered as regular walk-up connections, although outdated references remain online. My sherut guide covers other shared-taxi routes in Israel.",
         ],
         inlineLinks: [
-          { text: "Ben Gurion Airport to Tel Aviv guide", to: "/travel-blog/how-to-get-from-ben-gurion-airport-to-tel-aviv/" },
-          { text: "Ben Gurion Airport to Jerusalem guide", to: "/travel-blog/how-to-get-from-ben-gurion-airport-to-jerusalem/" },
-          { text: "Ben Gurion Airport to Haifa guide", to: "/travel-blog/how-to-get-from-ben-gurion-airport-to-haifa/" },
-          { text: "Ben Gurion Airport to Ein Bokek guide", to: "/travel-blog/how-to-get-from-ben-gurion-airport-to-ein-bokek/" },
+          { text: "Ben Gurion Airport to Tel Aviv guide", to: "/travel-blog/ben-gurion-airport-to-tel-aviv/" },
+          { text: "Ben Gurion Airport to Jerusalem guide", to: "/travel-blog/ben-gurion-airport-to-jerusalem/" },
+          { text: "Ben Gurion Airport to Haifa guide", to: "/travel-blog/ben-gurion-airport-to-haifa/" },
+          { text: "Ben Gurion Airport to Ein Bokek guide", to: "/travel-blog/ben-gurion-airport-to-ein-bokek/" },
           { text: "sherut guide", to: travelGuidePaths.sherut },
         ],
         tables: [{
@@ -229,7 +229,7 @@ export const expandedTravelGuides = {
     checklist: [],
     faqs: [...travelTipsFaqs],
     sourceIds: ["guide-entry", "guide-tourist-emergency", "guide-homefront-emergency", "guide-iaa", "guide-weekend-711", "israel-rail", "guide-public-transport-payments", "guide-telaviv-transit", "fx-bank-of-israel"], related: ["bestTime", "calendar", "arrival", "israel", "food", "topTen"],
-    services: [{ label: "Accommodation by destination", to: "/accommodation/" }, { label: "Private airport transfers", to: "/airport-transfers/" }, { label: "Private driver for your itinerary", to: "/private-driver/" }, { label: "Tours & day trips", to: "/tours/" }],
+    services: [{ label: "Accommodation by destination", to: "/accommodation/" }, { label: "Private airport transfers", to: "/airport-transfers/" }, { label: "Private driver for your itinerary", to: "/private-driver-in-israel/" }, { label: "Tours & day trips", to: "/tours/" }],
   },
   jerusalem: {
     id: "jerusalem", title: "Jerusalem travel guide: Old City sights and itinerary ideas",
@@ -250,7 +250,7 @@ export const expandedTravelGuides = {
     checklist: ["Choose your top interests before choosing a hotel", "Group Old City, hillside and neighbourhood visits sensibly", "Check site reservations, worship and visitor windows", "Prepare for hills, steps and exact vehicle access", "Plan Shabbat meals and transport together", "Keep a day trip distinct from your city sightseeing"],
     faqs: [{ q: "Can I see Jerusalem on a day trip?", a: "You can make a focused visit, especially to the Old City and one nearby area. Overnight stays allow more time for museums, markets, evening atmosphere and different neighbourhoods." }, { q: "Is Jerusalem walkable?", a: "Many central sights can be combined on foot, but hills, steps and stone surfaces matter. Check the whole route and individual access arrangements for mobility needs." }, { q: "Where should a first-time visitor stay?", a: "Compare Mamilla/city centre, Old City surroundings, Mahane Yehuda/Nachlaot and the German Colony against your priorities. Use the area guide for the trade-offs and exact hotel-access questions." }],
     sourceIds: ["guide-jerusalem-tourism", "guide-holy-sepulchre", "guide-mahane-yehuda", "israel-rail"], related: ["jerusalemChurches", "jerusalemShopping", "jerusalemDeadSea", "travelTips", "shabbat"],
-    services: [{ label: "Compare Jerusalem hotel areas", to: "/travel-blog/where-to-stay-in-jerusalem/" }, { label: "Private airport transfer to Jerusalem", to: "/airport-transfers/jerusalem/" }, { label: "Private driver for a planned day", to: "/private-driver/" }, { label: "Compare Bethlehem & Jericho tours", to: "/tours/bethlehem-jericho-jordan-river/" }],
+    services: [{ label: "Compare Jerusalem hotel areas", to: "/travel-blog/where-to-stay-in-jerusalem/" }, { label: "Private airport transfer to Jerusalem", to: "/airport-transfers/jerusalem/" }, { label: "Private driver for a planned day", to: "/private-driver-in-israel/" }, { label: "Compare Bethlehem & Jericho tours", to: "/tours/bethlehem-jericho-jordan-river/" }],
   },
   jerusalemDeadSea: {
     id: "jerusalemDeadSea", title: "Jerusalem to the Dead Sea: bus, car, tour or private driver?",
@@ -270,7 +270,7 @@ export const expandedTravelGuides = {
     checklist: ["Name the exact beach, hotel or attraction", "Separate entry/facility costs from transport", "Check current access, weather and site notices", "Leave time between the chosen stops", "Confirm the final bus or prearranged return", "Pack for the beach and keep pickup details offline"],
     faqs: [{ q: "How long is the trip from Jerusalem to the Dead Sea?", a: "It depends on the exact destination and traffic. Northern-shore beaches, Ein Gedi, Masada and Ein Bokek are different journeys. Compare the actual address and full round trip rather than one generic regional estimate." }, { q: "Is Ein Gedi a Dead Sea bathing beach?", a: "The nature reserve is a separate hiking visit. Do not treat its name, a nearby bus stop or older spa advice as confirmation of a currently accessible bathing beach." }, { q: "Can I do Masada, Ein Gedi and the beach in one day?", a: "Ask for a realistic itinerary with current access, entry windows and travel time between stops. Choose a main focus and drop an extra stop if the resulting time on site would be too short." }],
     sourceIds: ["guide-jerusalem-deadsea", "guide-ein-gedi", "guide-qasr"], related: ["jerusalem", "baptism", "israel", "shabbat"],
-    services: [{ label: "Request a private-driver itinerary", to: "/private-driver/" }, { label: "Masada visitor guide", to: "/attractions/masada/" }, { label: "Dead Sea hotels and areas", to: "/travel-blog/best-dead-sea-hotels/" }, { label: "Car rental", to: "/car-rental/" }, { label: "Tours & day trips", to: "/tours/" }],
+    services: [{ label: "Request a private-driver itinerary", to: "/private-driver-in-israel/" }, { label: "Masada visitor guide", to: "/attractions/masada/" }, { label: "Dead Sea hotels and areas", to: "/travel-blog/best-dead-sea-hotels/" }, { label: "Car rental", to: "/car-rental/" }, { label: "Tours & day trips", to: "/tours/" }],
   },
   baptism: {
     id: "baptism", updatedAt: "2026-11-21", title: "Baptism in the Jordan River: Yardenit vs. Qasr el-Yahud",
@@ -291,7 +291,7 @@ export const expandedTravelGuides = {
     checklist: ["Agree Yardenit or Qasr el-Yahud by name", "Coordinate with your clergy and the actual site", "Confirm access, visiting and last-baptism times", "Check robe, changing, fee and documentation arrangements", "Pack towel, dry clothes and suitable footwear", "Confirm mobility needs and designated river access", "Give your driver the appointment and return plan"],
     faqs: [{ q: "Are Yardenit and Qasr el-Yahud the same site?", a: "No. Yardenit is in the Galilee near the Sea of Galilee; Qasr el-Yahud is on the lower Jordan near Jericho. Choose the exact location before booking transport." }, { q: "Does a transport booking include baptism or clergy?", a: "No assumption should be made. Arrange the service with your clergy and the site, then confirm separately what any transport, guide or ceremony package includes." }, { q: "Where can I confirm baptism-site robe prices and opening times?", a: "Confirm directly with the site. Yardenit's published pages have differed on visiting hours; check current robe, ceremony and access arrangements before travelling." }],
     sourceIds: ["guide-yardenit", "guide-yardenit-about", "guide-qasr"], related: ["yardenit", "qasr", "jerusalemChurches", "jerusalemDeadSea", "travelTips"],
-    services: [{ label: "Private driver for a planned pilgrimage route", to: "/private-driver/" }, { label: "Tiberias and Sea of Galilee hotel guide", to: "/travel-blog/best-hotels-in-tiberias/" }, { label: "Haifa shore excursions", to: "/shore-excursions/haifa/" }, { label: "Ashdod shore excursions", to: "/shore-excursions/ashdod/" }],
+    services: [{ label: "Private driver for a planned pilgrimage route", to: "/private-driver-in-israel/" }, { label: "Tiberias and Sea of Galilee hotel guide", to: "/travel-blog/best-hotels-in-tiberias/" }, { label: "Haifa shore excursions", to: "/shore-excursions/haifa/" }, { label: "Ashdod shore excursions", to: "/shore-excursions/ashdod/" }],
   },
   jerusalemChurches: {
     id: "jerusalemChurches", updatedAt: "2026-11-21", title: "Churches in Jerusalem: Holy Sepulchre, Mount of Olives and more",
@@ -311,7 +311,7 @@ export const expandedTravelGuides = {
     checklist: ["Choose your priorities and geographic cluster", "Check each site's own visitor and worship arrangements", "Prepare appropriate dress and follow photography instructions", "Include queues, steps and steep walking in the route", "Confirm guiding and ceremony permissions separately", "Save the exact pickup/meeting point and a shorter alternative"],
     faqs: [{ q: "Can I visit every major church in one day?", a: "A full checklist can leave little time on site and may conflict with different visit windows. Choose one or two geographic clusters and the sites most important to you." }, { q: "Are all churches free and open all day?", a: "No universal rule applies. Churches, archaeological areas, towers and special visits can have different terms, breaks and charges. Check the actual place rather than relying on a general list." }, { q: "Can I join services or arrange group prayer?", a: "Ask the responsible church or organiser about permission, timing, language and group arrangements. Ordinary visitor access does not settle those questions." }],
     sourceIds: ["guide-holy-sepulchre", "guide-jerusalem-tourism"], related: ["jerusalem", "baptism", "jerusalemShopping", "travelTips"],
-    services: [{ label: "Choose a Jerusalem hotel area", to: "/travel-blog/where-to-stay-in-jerusalem/" }, { label: "Plan transport with a private driver", to: "/private-driver/" }, { label: "Compare Bethlehem & Jericho tours", to: "/tours/bethlehem-jericho-jordan-river/" }, { label: "Airport transfer to Jerusalem", to: "/airport-transfers/jerusalem/" }],
+    services: [{ label: "Choose a Jerusalem hotel area", to: "/travel-blog/where-to-stay-in-jerusalem/" }, { label: "Plan transport with a private driver", to: "/private-driver-in-israel/" }, { label: "Compare Bethlehem & Jericho tours", to: "/tours/bethlehem-jericho-jordan-river/" }, { label: "Airport transfer to Jerusalem", to: "/airport-transfers/jerusalem/" }],
   },
   jerusalemShopping: {
     id: "jerusalemShopping",

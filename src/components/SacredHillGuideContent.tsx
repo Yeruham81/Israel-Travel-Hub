@@ -129,7 +129,7 @@ export function SacredHillGuideContent({ id }: { id: SacredHillId }) {
         {" "}Tell me what you would like to see and when you are visiting, and I'll respond personally.
       </p>
       <div className="mt-4 flex flex-wrap gap-3">
-        <Link to="/private-driver/" className="btn btn-outline">Private transport options</Link>
+        <Link to="/private-driver-in-israel/" className="btn btn-outline">Private transport options</Link>
         <Link to="/tours/jerusalem/" className="btn btn-outline">Jerusalem tours</Link>
       </div>
       <SacredHillContactForm id={id} />

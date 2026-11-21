@@ -332,7 +332,7 @@ describe("tours hub and SEO category pages", () => {
           if (category.id === "jerusalem" || category.id === "tel-aviv-jaffa" || category.id === "masada-dead-sea" || category.id === "bethlehem-jericho" || category.id === "nazareth-galilee" || category.id === "northern-coast" || category.id === "negev-ramon" || category.id === "golan-heights" || category.id === "food-markets" || category.id === "eilat-red-sea") {
             expect(card.querySelector('a[href="#contact"]')).not.toBeNull();
           } else {
-            const link = card.querySelector('a[href^="/private-driver/?tour="]')!;
+            const link = card.querySelector('a[href^="/private-driver-in-israel/?tour="]')!;
             expect(new URL(link.getAttribute("href")!, CANONICAL_ORIGIN).searchParams.get("tour")).toBe(card.getAttribute("data-product-id"));
           }
           if (category.id !== "jerusalem" && category.id !== "tel-aviv-jaffa" && category.id !== "masada-dead-sea" && category.id !== "bethlehem-jericho" && category.id !== "nazareth-galilee" && category.id !== "northern-coast" && category.id !== "negev-ramon" && category.id !== "golan-heights" && category.id !== "food-markets" && category.id !== "eilat-red-sea") expect(card.querySelector("dl")?.textContent).toContain("Includes:");
@@ -718,7 +718,7 @@ describe("tours hub and SEO category pages", () => {
   });
 
   it("carries a unique owner itinerary into the existing private-driver request without accepting external tours", async () => {
-    await renderPage("/private-driver/?tour=my-masada-day#request-quote");
+    await renderPage("/private-driver-in-israel/?tour=my-masada-day#request-quote");
     const form = screen.getByRole("form", { name: "Private driver quote request" });
     expect(form.querySelector('select[name="service"]')).toHaveValue("day-hire");
     expect(form.querySelector('textarea[name="itinerary"]')).toHaveValue("");

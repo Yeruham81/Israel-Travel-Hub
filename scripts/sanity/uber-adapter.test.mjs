@@ -69,7 +69,7 @@ function input() {
     faqs: [{question: 'Is this a test?', answer: 'Yes.'}],
     sources: [{_ref: source._id}],
     related: [{label: 'Licensed taxis', path: '/travel-blog/taxis-in-israel/'}],
-    services: [{label: 'Private driver', path: '/private-driver/'}],
+    services: [{label: 'Private driver', path: '/private-driver-in-israel/'}],
     nextSteps: [{label: 'Fare guide', path: '/travel-blog/taxi-fares-in-israel/'}],
     reviewedAt: '2026-11-11',
   };
@@ -88,7 +88,7 @@ test('converts all important Uber guide fields without dropping inline links', (
   assert.equal(guide.sections[0].highlightedLinks[0].context, 'Read before booking');
   assert.equal(guide.comparison.rows[0][0], 'Gett');
   assert.equal(guide.related[0], 'taxis');
-  assert.equal(guide.services[0].to, '/private-driver/');
+  assert.equal(guide.services[0].to, '/private-driver-in-israel/');
   assert.equal(guide.faqs[0].q, 'Is this a test?');
   assert.deepEqual(guide.sourceIds, ['source-test']);
   assert.equal(sources[0].publisher, 'Test publisher');

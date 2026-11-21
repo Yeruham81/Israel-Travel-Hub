@@ -80,7 +80,7 @@ export const stayGuideGroups: Record<Region, GuideGroups> = {
       card("Churches in Jerusalem", "/travel-blog/churches-in-jerusalem/", "Plan visits to important churches across Jerusalem.", "/images/jerusalem/church-of-all-nations.webp", "Church of All Nations near the Mount of Olives"),
     ],
     onward: [
-      card("Ben Gurion Airport to Jerusalem", "/travel-blog/how-to-get-from-ben-gurion-airport-to-jerusalem/", "Compare train, bus, taxi and transfer arrangements.", airportHall, "Ben Gurion Airport terminal"),
+      card("Ben Gurion Airport to Jerusalem", "/travel-blog/ben-gurion-airport-to-jerusalem/", "Compare train, bus, taxi and transfer arrangements.", airportHall, "Ben Gurion Airport terminal"),
       card("Jerusalem to Bethlehem", "/travel-blog/jerusalem-to-bethlehem/", "Plan a practical journey to Bethlehem from the city.", bethlehemTravel, "Road and buildings on the way to Bethlehem"),
       card("Jerusalem to the Dead Sea", "/travel-blog/jerusalem-to-the-dead-sea/", "Compare routes for a desert and Dead Sea excursion.", deadSeaTravel, "Road through the Judean Desert"),
       card("Getting around Israel", "/travel-blog/getting-around-israel/", "Compare trains, buses, light rail and taxis for journeys beyond Jerusalem.", jerusalemLightRail, "Jerusalem light-rail train"),
@@ -99,7 +99,7 @@ export const stayGuideGroups: Record<Region, GuideGroups> = {
       card("Food & market tours", "/tours/food-market-tours/", "Discover tasting routes and market walks in Tel Aviv.", telAvivFoodMarketTours, "Market food stalls and tasting experiences"),
     ],
     onward: [
-      card("Ben Gurion Airport to Tel Aviv", "/travel-blog/how-to-get-from-ben-gurion-airport-to-tel-aviv/", "Select the right arrival connection for your hotel.", airportTransfers, "Airport arrival and transfer facilities"),
+      card("Ben Gurion Airport to Tel Aviv", "/travel-blog/ben-gurion-airport-to-tel-aviv/", "Select the right arrival connection for your hotel.", airportTransfers, "Airport arrival and transfer facilities"),
       card("Getting around Tel Aviv", "/travel-blog/getting-around-tel-aviv/", "Plan walking, local trains, buses and taxis.", telAvivPromenade, "Tel Aviv promenade and city streets"),
       card("Best time to visit Israel", "/travel-blog/best-time-to-visit-israel/", "Understand seasons, weather and regional travel conditions.", seasonPhoto, "Seasonal Mediterranean landscape"),
       card("Airport arrivals on Shabbat", "/travel-blog/from-ben-gurion-airport-on-shabbat/", "Check weekend arrivals and transport changes.", airportHall, "Ben Gurion Airport arrival terminal"),
@@ -118,7 +118,7 @@ export const stayGuideGroups: Record<Region, GuideGroups> = {
       card("Caesarea, Haifa & Acre tours", "/tours/caesarea-haifa-acre/", "Explore guided tours of the northern Mediterranean coast.", caesareaAqueductPhoto, "Ancient Roman aqueduct by the beach at Caesarea"),
     ],
     onward: [
-      card("Ben Gurion Airport to Haifa", "/travel-blog/how-to-get-from-ben-gurion-airport-to-haifa/", "Compare the train, taxi and transfer options.", airportHall, "Ben Gurion Airport arrivals hall"),
+      card("Ben Gurion Airport to Haifa", "/travel-blog/ben-gurion-airport-to-haifa/", "Compare the train, taxi and transfer options.", airportHall, "Ben Gurion Airport arrivals hall"),
       card("Visiting Tel Megiddo", "/attractions/tel-megiddo/", "Plan an archaeological stop in northern Israel.", megiddoPhoto, "Ancient ruins at Tel Megiddo"),
       card("Caesarea", "/attractions/caesarea/", "Visit the Roman harbour on the coast south of Haifa.", caesareaPhoto, "Ancient Caesarea amphitheatre and coast"),
       card("Getting around Israel", "/travel-blog/getting-around-israel/", "Connect Haifa with other cities and regional destinations.", roadTrip, "A road through Israeli countryside"),
@@ -156,7 +156,7 @@ export const stayGuideGroups: Record<Region, GuideGroups> = {
       card("Masada & Dead Sea tours", "/tours/masada-dead-sea/", "Explore tour options combining the fortress and the shore.", masadaTourPhoto, "Desert excursion to Masada and the Dead Sea"),
     ],
     onward: [
-      card("Ben Gurion Airport to Ein Bokek", "/travel-blog/how-to-get-from-ben-gurion-airport-to-ein-bokek/", "Compare routes to the Dead Sea hotel strip.", airportHall, "Ben Gurion Airport arrival terminal"),
+      card("Ben Gurion Airport to Ein Bokek", "/travel-blog/ben-gurion-airport-to-ein-bokek/", "Compare routes to the Dead Sea hotel strip.", airportHall, "Ben Gurion Airport arrival terminal"),
       card("Jerusalem to the Dead Sea", "/travel-blog/jerusalem-to-the-dead-sea/", "Plan a day trip or transfer from Jerusalem.", deadSeaTravel, "Road from Jerusalem to the Dead Sea"),
       card("Israel itinerary: three days", "/travel-blog/israel-itinerary-3-days/", "Consider the Dead Sea on a short holiday.", roadTrip, "Scenic road in Israel"),
       card("Israel itinerary: five days", "/travel-blog/israel-itinerary-5-days/", "Combine a Dead Sea stay with other regions.", seasonPhoto, "Israeli desert and seasonal landscape"),

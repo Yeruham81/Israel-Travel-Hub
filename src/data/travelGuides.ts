@@ -86,7 +86,7 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
     faqs:seniorFaqs,
     sourceIds:[],
     related:["jerusalem","israel","christianTours","travelTips"],
-    services:[{label:"Ask Moshe about a private driver",to:"/private-driver/"}],
+    services:[{label:"Ask Moshe about a private driver",to:"/private-driver-in-israel/"}],
   },
   christianTours: {
     id: "christianTours",
@@ -104,7 +104,7 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
     faqs: christianFaqs,
     sourceIds: ["guide-holy-sepulchre", "guide-qasr", "guide-yardenit"],
     related: ["jerusalemChurches", "bethlehem", "baptism", "jerusalem"],
-    services: [{label: "Private driver in Israel", to: "/private-driver/"}],
+    services: [{label: "Private driver in Israel", to: "/private-driver-in-israel/"}],
   },
   uber: {
     id: "uber",
@@ -226,7 +226,7 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
         ],
         inlineLinks: [
           { text: "Israel eSIM guide", to: travelGuidePaths.esim },
-          { text: "private driver", to: "/private-driver/" },
+          { text: "private driver", to: "/private-driver-in-israel/" },
         ],
         sourceIds: ["guide-gett-app", "guide-yango-israel"],
       },
@@ -337,8 +337,8 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
           "Choose your transport based on your destination, arrival time and luggage. Remember to include the journey from the railway station to your hotel. My airport-to-Jerusalem guide and airport-to-Haifa guide explain those routes; the Shabbat guide covers weekend options.",
         ],
         inlineLinks: [
-          { text: "airport-to-Jerusalem guide", to: "/travel-blog/how-to-get-from-ben-gurion-airport-to-jerusalem/" },
-          { text: "airport-to-Haifa guide", to: "/travel-blog/how-to-get-from-ben-gurion-airport-to-haifa/" },
+          { text: "airport-to-Jerusalem guide", to: "/travel-blog/ben-gurion-airport-to-jerusalem/" },
+          { text: "airport-to-Haifa guide", to: "/travel-blog/ben-gurion-airport-to-haifa/" },
           { text: "Shabbat guide", to: travelGuidePaths.shabbat },
         ],
         tables: [{
@@ -986,7 +986,7 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
             paragraphs: [
               "Use light rail and city buses where they serve your destination, then walk or take a taxi near the Old City. Jerusalem's hills, steps and restricted streets can make short distances difficult with luggage. See my Jerusalem travel guide for sightseeing and the airport-to-Jerusalem guide for arrival connections.",
             ],
-            inlineLinks: [{ text: "Jerusalem travel guide", to: travelGuidePaths.jerusalem }, { text: "airport-to-Jerusalem guide", to: "/travel-blog/how-to-get-from-ben-gurion-airport-to-jerusalem/" }],
+            inlineLinks: [{ text: "Jerusalem travel guide", to: travelGuidePaths.jerusalem }, { text: "airport-to-Jerusalem guide", to: "/travel-blog/ben-gurion-airport-to-jerusalem/" }],
           },
           {
             id: "israel-haifa", title: "Haifa: Metronit, Carmelit and cable cars",
@@ -994,7 +994,7 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
               "Haifa rises steeply from the coast to Mount Carmel. The Metronit bus rapid transit serves several urban corridors and the Krayot; the underground Carmelit climbs between the Lower City and Carmel Center. The Rakbalit transit cable car serves the university and Technion area, while the tourist cable car at Bat Galim is a different operation.",
               "In Haifa, hotels on Mount Carmel may require a bus or taxi uphill from the railway station. See my Haifa travel guide and airport-to-Haifa guide for local connections.",
             ],
-            inlineLinks: [{ text: "Haifa travel guide", to: "/attractions/haifa/" }, { text: "airport-to-Haifa guide", to: "/travel-blog/how-to-get-from-ben-gurion-airport-to-haifa/" }],
+            inlineLinks: [{ text: "Haifa travel guide", to: "/attractions/haifa/" }, { text: "airport-to-Haifa guide", to: "/travel-blog/ben-gurion-airport-to-haifa/" }],
             sourceIds: ["guide-haifa-carmelit", "guide-bus-planner"],
           },
           {
@@ -1014,7 +1014,7 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
             inlineLinks: [
               { text: "Eilat attractions page", to: "/attractions/eilat/" },
               { text: "Jerusalem-to-the-Dead-Sea guide", to: travelGuidePaths.jerusalemDeadSea },
-              { text: "airport-to-Ein-Bokek guide", to: "/travel-blog/how-to-get-from-ben-gurion-airport-to-ein-bokek/" },
+              { text: "airport-to-Ein-Bokek guide", to: "/travel-blog/ben-gurion-airport-to-ein-bokek/" },
             ],
             sourceIds: ["guide-egged-seat-reservations", "guide-bus-planner"],
           },
@@ -1042,7 +1042,7 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
               "A private driver transports your group according to an agreed itinerary, but does not automatically provide a licensed guide, entrance tickets or unlimited stops. A guided tour may include guiding and specific scheduled visits, yet can be less flexible. Compare the total hours, pickup, admissions, luggage and the return journey.",
               "See my private driver page for a customised journey, or browse the tours and day trips directory for organised visits. Confirm the itinerary and total price before booking.",
             ],
-            inlineLinks: [{ text: "private driver page", to: "/private-driver/" }, { text: "tours and day trips directory", to: "/tours/" }],
+            inlineLinks: [{ text: "private driver page", to: "/private-driver-in-israel/" }, { text: "tours and day trips directory", to: "/tours/" }],
           },
         ],
       },
@@ -1073,10 +1073,10 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
               "For airport journeys, see my detailed Ben Gurion Airport to Tel Aviv guide, Ben Gurion Airport to Jerusalem guide, Ben Gurion Airport to Haifa guide and Ben Gurion Airport to Ein Bokek guide, including connections to your hotel.",
             ],
             inlineLinks: [
-              { text: "Ben Gurion Airport to Tel Aviv guide", to: "/travel-blog/how-to-get-from-ben-gurion-airport-to-tel-aviv/" },
-              { text: "Ben Gurion Airport to Jerusalem guide", to: "/travel-blog/how-to-get-from-ben-gurion-airport-to-jerusalem/" },
-              { text: "Ben Gurion Airport to Haifa guide", to: "/travel-blog/how-to-get-from-ben-gurion-airport-to-haifa/" },
-              { text: "Ben Gurion Airport to Ein Bokek guide", to: "/travel-blog/how-to-get-from-ben-gurion-airport-to-ein-bokek/" },
+              { text: "Ben Gurion Airport to Tel Aviv guide", to: "/travel-blog/ben-gurion-airport-to-tel-aviv/" },
+              { text: "Ben Gurion Airport to Jerusalem guide", to: "/travel-blog/ben-gurion-airport-to-jerusalem/" },
+              { text: "Ben Gurion Airport to Haifa guide", to: "/travel-blog/ben-gurion-airport-to-haifa/" },
+              { text: "Ben Gurion Airport to Ein Bokek guide", to: "/travel-blog/ben-gurion-airport-to-ein-bokek/" },
             ],
             tables: [{
               caption: "Common trips: the first option to compare",
@@ -1089,7 +1089,7 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
               ],
               rowLinks: [
                 { href: "https://bus.gov.il/en/home", label: "Plan Tel Aviv–Jerusalem on the national public transport planner" },
-                { to: "/travel-blog/how-to-get-from-ben-gurion-airport-to-haifa/", label: "Ben Gurion Airport to Haifa" },
+                { to: "/travel-blog/ben-gurion-airport-to-haifa/", label: "Ben Gurion Airport to Haifa" },
                 { to: "/travel-blog/jerusalem-to-the-dead-sea/", label: "Jerusalem to the Dead Sea" },
                 { href: "https://bus.gov.il/en/home", label: "Plan Tel Aviv–Tiberias on the national public transport planner" },
               ],
@@ -1351,7 +1351,7 @@ telAviv: {
           ],
         }],
         inlineLinks: [
-          { text: "Ben Gurion Airport to Tel Aviv guide", to: "/travel-blog/how-to-get-from-ben-gurion-airport-to-tel-aviv/" },
+          { text: "Ben Gurion Airport to Tel Aviv guide", to: "/travel-blog/ben-gurion-airport-to-tel-aviv/" },
         ],
         externalLinks: [{ label: "Israel Railways — schedules and station search", href: "https://www.rail.co.il/" }],
         sourceIds: ["israel-rail", "guide-train-nov-2026"],
@@ -1451,7 +1451,7 @@ telAviv: {
       },
     ],
     nextSteps: [
-      { label: "From Ben Gurion Airport to Tel Aviv", to: "/travel-blog/how-to-get-from-ben-gurion-airport-to-tel-aviv/" },
+      { label: "From Ben Gurion Airport to Tel Aviv", to: "/travel-blog/ben-gurion-airport-to-tel-aviv/" },
       { label: "Official airport taxi pickup", to: travelGuidePaths.airportTaxis },
     ],
     checklist: [
@@ -1529,10 +1529,10 @@ const guideDirectoryEntries: GuideDirectoryEntry[] = [
       photo: migrationPhotos[g.hero] };
   }),
   ...attractionIds.filter(isRegionalOverview).map((id): GuideDirectoryEntry => { const g = attractionGuides[id]; return { id: `attraction-${id}`, title: g.title, description: g.description, to: attractionPath(id), updatedAt: regionalGuideUpdateDates[id] ?? "", topics: ["attractions","destinations",...(id.includes("mount-") || ["capernaum","tabgha"].includes(id) ? ["religion" as const] : [])], ...(g.image ? {photo:g.image}: {}) }; }),
-  { id: "airport-journey-jerusalem", title: "How to get from Ben Gurion Airport to Jerusalem", description: "Compare train, bus, taxi and private-transfer options, travel times, estimated fares and weekend alternatives.", to: "/travel-blog/how-to-get-from-ben-gurion-airport-to-jerusalem/", topics: ["transportation", "tips"], photo: airportJourneyGuides.jerusalem.photo, updatedAt: airportJourneyGuides.jerusalem.updatedAt ?? "" },
-  { id: "airport-journey-tel-aviv", title: "How to get from Ben Gurion Airport to Tel Aviv", description: "Compare train, bus, taxi and private-transfer options, travel times, estimated fares and weekend alternatives.", to: "/travel-blog/how-to-get-from-ben-gurion-airport-to-tel-aviv/", topics: ["transportation", "tips"], photo: airportJourneyGuides["tel-aviv"].photo, updatedAt: airportJourneyGuides["tel-aviv"].updatedAt ?? "" },
-  { id: "airport-journey-haifa", title: "How to get from Ben Gurion Airport to Haifa", description: "Compare train, bus, taxi and private-transfer options, travel times, estimated fares and weekend alternatives.", to: "/travel-blog/how-to-get-from-ben-gurion-airport-to-haifa/", topics: ["transportation", "tips"], photo: airportJourneyGuides.haifa.photo, updatedAt: airportJourneyGuides.haifa.updatedAt ?? "" },
-  { id: "airport-journey-ein-bokek", title: "How to get from Ben Gurion Airport to Ein Bokek", description: "Compare train, bus, taxi and private-transfer options, travel times, estimated fares and weekend alternatives.", to: "/travel-blog/how-to-get-from-ben-gurion-airport-to-ein-bokek/", topics: ["transportation", "tips"], photo: airportJourneyGuides["ein-bokek"].photo, updatedAt: airportJourneyGuides["ein-bokek"].updatedAt ?? "" },
+  { id: "airport-journey-jerusalem", title: "How to get from Ben Gurion Airport to Jerusalem", description: "Compare train, bus, taxi and private-transfer options, travel times, estimated fares and weekend alternatives.", to: "/travel-blog/ben-gurion-airport-to-jerusalem/", topics: ["transportation", "tips"], photo: airportJourneyGuides.jerusalem.photo, updatedAt: airportJourneyGuides.jerusalem.updatedAt ?? "" },
+  { id: "airport-journey-tel-aviv", title: "How to get from Ben Gurion Airport to Tel Aviv", description: "Compare train, bus, taxi and private-transfer options, travel times, estimated fares and weekend alternatives.", to: "/travel-blog/ben-gurion-airport-to-tel-aviv/", topics: ["transportation", "tips"], photo: airportJourneyGuides["tel-aviv"].photo, updatedAt: airportJourneyGuides["tel-aviv"].updatedAt ?? "" },
+  { id: "airport-journey-haifa", title: "How to get from Ben Gurion Airport to Haifa", description: "Compare train, bus, taxi and private-transfer options, travel times, estimated fares and weekend alternatives.", to: "/travel-blog/ben-gurion-airport-to-haifa/", topics: ["transportation", "tips"], photo: airportJourneyGuides.haifa.photo, updatedAt: airportJourneyGuides.haifa.updatedAt ?? "" },
+  { id: "airport-journey-ein-bokek", title: "How to get from Ben Gurion Airport to Ein Bokek", description: "Compare train, bus, taxi and private-transfer options, travel times, estimated fares and weekend alternatives.", to: "/travel-blog/ben-gurion-airport-to-ein-bokek/", topics: ["transportation", "tips"], photo: airportJourneyGuides["ein-bokek"].photo, updatedAt: airportJourneyGuides["ein-bokek"].updatedAt ?? "" },
   ...Object.values(travelGuides).filter((guide) => !travelGuidePaths[guide.id].startsWith("/attractions/")).map((guide) => ({ id: guide.id, title: guide.title, description: guide.description, to: travelGuidePaths[guide.id], topics: guide.topics, photo: guide.photo, updatedAt: guide.updatedAt ?? "" })),
   ...(["haifa", "ashdod"] as const).map((id): GuideDirectoryEntry => { const port = getShorePort(id); return { id: `shore-${id}`, title: port.title, description: port.description, to: port.path, topics: ["destinations", "itineraries", "transportation"], photo: port.photo }; }),
   { id: "stay-jerusalem", title: "Where to stay in Jerusalem", description: "Choose the neighbourhood and hotel style that fit your visit.", to: "/travel-blog/where-to-stay-in-jerusalem/", topics: ["destinations", "accommodation"], photo: neighborhoodGuidesForCity("jerusalem")[0]!.photo, updatedAt: cityStayGuides.jerusalem.reviewedAt ?? "" },

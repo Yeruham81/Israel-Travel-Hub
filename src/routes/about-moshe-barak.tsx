@@ -23,7 +23,7 @@ export const Route = createFileRoute("/about-moshe-barak")({
 const services = [
   { title: "Airport transfers", detail: "I arrange pickups and drop-offs at Ben Gurion Airport, with your flight arrival time, luggage and destination in mind.", to: "/airport-transfers/" as const, action: "Explore airport transfers" },
   { title: "Private day trips", detail: "I help you plan a flexible day around the places that interest you, with time to enjoy the journey at your own pace.", to: "/tours/" as const, action: "Explore day-trip options" },
-  { title: "Private driver service", detail: "I help individuals, couples, families and small groups with door-to-door journeys, agreeing on the route, vehicle and arrangements before travel.", to: "/private-driver/" as const, action: "Learn about my driving service" },
+  { title: "Private driver service", detail: "I help individuals, couples, families and small groups with door-to-door journeys, agreeing on the route, vehicle and arrangements before travel.", to: "/private-driver-in-israel/" as const, action: "Learn about my driving service" },
 ];
 
 function MosheAbout() {

@@ -135,7 +135,7 @@ export const seniorSites:SeniorRelated[]=[
  {title:"Old Jaffa",description:"A flexible coastal stop with ancient streets and scenic views",to:"/attractions/jaffa/",image:"/images/attractions/jaffa-port.webp",alt:"Old Jaffa harbour and waterfront"},
 ];
 export const seniorPlanning:SeniorRelated[]=[
- {title:"Private driver in Israel",description:"Discuss personalized pickups, private day trips and vehicle needs",to:"/private-driver/",image:"/images/travel-blog/airport-taxi-sign.webp",alt:"Official airport taxi sign for private transport"},
+ {title:"Private driver in Israel",description:"Discuss personalized pickups, private day trips and vehicle needs",to:"/private-driver-in-israel/",image:"/images/travel-blog/airport-taxi-sign.webp",alt:"Official airport taxi sign for private transport"},
  {title:"Getting around Israel",description:"Compare train, taxi, private transfer and other connections",to:"/travel-blog/getting-around-israel/",image:railPhoto,alt:"Platform at Ben Gurion Airport train station"},
  {title:"Israel in 5 days",description:"Adapt a multi-day itinerary to your own pace and preferred stops",to:"/travel-blog/israel-itinerary-5-days/",image:"/images/attractions/nazareth-galilee.webp",alt:"Nazareth and Galilee countryside"},
  {title:"Israel's calendar of events",description:"Check dates that affect opening hours, traffic and travel plans",to:"/travel-blog/calendar-of-events/",image:calendarPhoto,alt:"Calendar dates and event planning"},

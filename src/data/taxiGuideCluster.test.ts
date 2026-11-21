@@ -58,7 +58,7 @@ describe("intent-specific taxi guide cluster", () => {
   it("keeps onward planning focused and the rental referral routed through the affiliate-aware link", () => {
     const services = taxiGuideCluster.taxiFares.services;
     expect(services.map((item) => item.to)).toEqual([
-      "/airport-transfers/", "/private-driver/", "/car-rental/", travelGuidePaths.israel,
+      "/airport-transfers/", "/private-driver-in-israel/", "/car-rental/", travelGuidePaths.israel,
     ]);
     expect(new Set(services.map((item) => item.to)).size).toBe(4);
     expect(services.every((item) => Boolean(item.note?.trim()))).toBe(true);
@@ -106,10 +106,10 @@ describe("intent-specific taxi guide cluster", () => {
     const paragraph = airport.paragraphs.at(-1)!;
     const contextualLinks = airport.inlineLinks!.slice(-5);
     expect(contextualLinks.map((link) => link.to)).toEqual([
-      "/travel-blog/how-to-get-from-ben-gurion-airport-to-tel-aviv/",
-      "/travel-blog/how-to-get-from-ben-gurion-airport-to-jerusalem/",
-      "/travel-blog/how-to-get-from-ben-gurion-airport-to-haifa/",
-      "/travel-blog/how-to-get-from-ben-gurion-airport-to-ein-bokek/",
+      "/travel-blog/ben-gurion-airport-to-tel-aviv/",
+      "/travel-blog/ben-gurion-airport-to-jerusalem/",
+      "/travel-blog/ben-gurion-airport-to-haifa/",
+      "/travel-blog/ben-gurion-airport-to-ein-bokek/",
       "/airport-transfers/",
     ]);
     for (const link of contextualLinks) expect(paragraph.split(link.text)).toHaveLength(2);

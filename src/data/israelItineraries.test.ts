@@ -465,7 +465,7 @@ describe("migrated Israel itineraries", () => {
     expect(itinerarySourcesByGuide["7"].some(source => source.url.includes("magdala.org"))).toBe(true);
     expect(itinerarySourcesByGuide["7"].some(source => source.url.includes("caesarea-national-park"))).toBe(true);
     expect(itinerarySourcesByGuide["7"].some(source => source.url.includes("eta-il"))).toBe(true);
-    expect(g.logistics.every(tip => tip.to !== "/travel-blog/how-to-get-from-ben-gurion-airport-to-tel-aviv/")).toBe(true);
+    expect(g.logistics.every(tip => tip.to !== "/travel-blog/ben-gurion-airport-to-tel-aviv/")).toBe(true);
     expect(g.logistics.some(tip => tip.to === "/airport-transfers/")).toBe(true);
     expect(itineraries["10"].daySequences?.map(item => item.day)).toEqual([1,2,3,4,5,6,7,8,9,10]);
     expect(itineraries["10"].dayChoices?.map(item => item.day)).toEqual([2,6,7,8,10]);
@@ -646,7 +646,7 @@ describe("migrated Israel itineraries", () => {
     expect(guide.daySequences?.[1]?.steps.some(step => /Ein Bokek/.test(step.stop))).toBe(true);
     expect(guide.daySequences?.[1]?.steps.some(step => /Ein Gedi/.test(step.stop) && step.optional)).toBe(true);
     expect(guide.dayInlineLinks?.find(link => link.phrase === "Ben Gurion Airport connections")?.to).toBe("/airport-transfers/");
-    expect(guide.dayInlineLinks?.some(link => link.to === "/travel-blog/how-to-get-from-ben-gurion-airport-to-tel-aviv/")).toBe(false);
+    expect(guide.dayInlineLinks?.some(link => link.to === "/travel-blog/ben-gurion-airport-to-tel-aviv/")).toBe(false);
     expect(guide.description).toContain("day-by-day highlights");
     expect(guide.beforeYouGo?.some(tip => tip.heading === "Count your usable days")).toBe(false);
     expect(guide.beforeYouGoOfficialLinks?.[0]?.index).toBe(0);

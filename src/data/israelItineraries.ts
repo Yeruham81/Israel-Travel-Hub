@@ -85,7 +85,7 @@ const days3: ItineraryDay[] = [
     evening: "Enjoy dinner in Tel Aviv if staying overnight. If departing today, keep the evening free for your airport journey rather than scheduling another attraction.",
     practical: "Before leaving Jerusalem, confirm where you can store and collect your luggage in Tel Aviv, including opening hours and transport from the storage location to the airport. Do not assume every rail station has lockers. Consult Ben Gurion Airport connections before deciding how late to sightsee.",
     overnight: "If extending your trip, compare where to stay in Tel Aviv; otherwise, no additional hotel is needed.",
-    links: [telaviv, telavivHotels, L("Tel Aviv and Ben Gurion Airport connection", "/travel-blog/how-to-get-from-ben-gurion-airport-to-tel-aviv/")],
+    links: [telaviv, telavivHotels, L("Tel Aviv and Ben Gurion Airport connection", "/travel-blog/ben-gurion-airport-to-tel-aviv/")],
   },
 ];
 

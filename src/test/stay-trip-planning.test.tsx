@@ -68,7 +68,7 @@ describe("hotel and neighborhood guide navigation", () => {
       "/travel-blog/churches-in-jerusalem/",
     ]);
     const travelLinks = within(screen.getByTestId("stay-trip-photo-grid")).getAllByRole("link");
-    expect(travelLinks[0]).toHaveAttribute("href", "/travel-blog/how-to-get-from-ben-gurion-airport-to-jerusalem/");
+    expect(travelLinks[0]).toHaveAttribute("href", "/travel-blog/ben-gurion-airport-to-jerusalem/");
     expect(travelLinks[1]).toHaveAttribute("href", "/travel-blog/jerusalem-to-bethlehem/");
     expect(travelLinks[2]).toHaveAttribute("href", "/travel-blog/jerusalem-to-the-dead-sea/");
     expect(travelLinks[3]).toHaveAttribute("href", "/travel-blog/getting-around-israel/");

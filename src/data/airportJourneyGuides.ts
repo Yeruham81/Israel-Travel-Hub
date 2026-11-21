@@ -55,7 +55,7 @@ const commonRental = [
 const byId: Record<AirportJourneyId, AirportJourneyGuide> = {
   jerusalem: {
     id: "jerusalem", city: "Jerusalem",
-    path: "/travel-blog/how-to-get-from-ben-gurion-airport-to-jerusalem/",
+    path: "/travel-blog/ben-gurion-airport-to-jerusalem/",
     title: "Ben Gurion Airport to Jerusalem: Train, Taxi, Bus & Transfers",
     description: "Compare train, metered taxi, private transfer, limited bus 485 and rental car from Ben Gurion Airport to Jerusalem, with current rail voucher rules and hotel connections.",
     distance: "Approximately 45–55 km by road, depending on your address",
@@ -155,7 +155,7 @@ const byId: Record<AirportJourneyId, AirportJourneyGuide> = {
   },
   "tel-aviv": {
     id: "tel-aviv", city: "Tel Aviv & Jaffa",
-    path: "/travel-blog/how-to-get-from-ben-gurion-airport-to-tel-aviv/",
+    path: "/travel-blog/ben-gurion-airport-to-tel-aviv/",
     title: "Ben Gurion Airport to Tel Aviv: Train, Taxi, Bus & Transfers",
     description: "Compare trains, bus 445, official airport taxis, private transfers and free weekend Line 711 from Ben Gurion Airport to Tel Aviv, with station choice, hotel connections and updated travel tips.",
     distance: "Approximately 20–25 km to central Tel Aviv, depending on the address",
@@ -266,7 +266,7 @@ const byId: Record<AirportJourneyId, AirportJourneyGuide> = {
   },
   haifa: {
     id: "haifa", city: "Haifa",
-    path: "/travel-blog/how-to-get-from-ben-gurion-airport-to-haifa/",
+    path: "/travel-blog/ben-gurion-airport-to-haifa/",
     title: "Ben Gurion Airport to Haifa: Train, Taxi, Bus & Transfers",
     description: "Compare the train, official airport taxis, private transfers and limited Egged bus 905 from Ben Gurion Airport to Haifa. Find the right railway station for your hotel, Mount Carmel or Haifa Port and check Shabbat options.",
     distance: "Approximately 100–110 km to central Haifa",
@@ -376,7 +376,7 @@ const byId: Record<AirportJourneyId, AirportJourneyGuide> = {
   },
   "ein-bokek": {
     id: "ein-bokek", city: "Ein Bokek (Dead Sea)",
-    path: "/travel-blog/how-to-get-from-ben-gurion-airport-to-ein-bokek/",
+    path: "/travel-blog/ben-gurion-airport-to-ein-bokek/",
     title: "Ben Gurion Airport to Ein Bokek: Train, Bus, Taxi & Transfers",
     description: "Compare train and bus via Jerusalem, official airport taxis, private transfers and rental cars to Ein Bokek, with bus 486/444 times, Jerusalem rail vouchers, hotel stops and Shabbat travel.",
     distance: "Approximately 155–165 km to the Ein Bokek hotel strip by road",

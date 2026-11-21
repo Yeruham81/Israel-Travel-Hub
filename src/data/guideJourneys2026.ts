@@ -145,7 +145,7 @@ export const journeyDestinationGuides = {
           },
           {
             "label": "Plan a private journey",
-            "to": "/private-driver/"
+            "to": "/private-driver-in-israel/"
           }
         ]
       }
@@ -726,7 +726,7 @@ export const journeyDestinationGuides = {
             },
             {
               "text": "private driver service",
-              "to": "/private-driver/"
+              "to": "/private-driver-in-israel/"
             }
           ],
         },
@@ -831,7 +831,7 @@ export const journeyDestinationGuides = {
         },
         {
           "label": "Private driver service",
-          "to": "/private-driver/"
+          "to": "/private-driver-in-israel/"
         },
         {
           "label": "Dead Sea hotels",

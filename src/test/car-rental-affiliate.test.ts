@@ -12,7 +12,7 @@ describe("DiscoverCars Israel affiliate tracking", () => {
     ["/travel-blog/israel-travel-tips/", "itt_car_israel_travel_tips"],
     ["/travel-blog/where-to-stay-in-jerusalem/", "itt_car_where_to_stay_in_jerusalem"],
     ["/attractions/caesarea/", "itt_car_attractions_caesarea"],
-    ["/private-driver/", "itt_car_private_driver"],
+    ["/private-driver-in-israel/", "itt_car_private_driver_in_israel"],
   ])("tracks source page %s with SubID %s", (path, subId) => {
     expect(carRentalSubId(path)).toBe(subId);
     const url = new URL(carRentalAffiliateUrl(path));

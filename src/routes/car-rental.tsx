@@ -61,7 +61,7 @@ function CarRental() {
       <FaqList faqs={faqs} />
       <SourceList ids={["discovercars-israel"]} />
       <RelatedLinks items={[
-        { label: "Private driver instead", to: "/private-driver/" },
+        { label: "Private driver instead", to: "/private-driver-in-israel/" },
         { label: "Hotels in Tiberias", to: "/travel-blog/best-hotels-in-tiberias/" },
         { label: "Caesarea", to: "/attractions/caesarea/" },
         { label: "Masada", to: "/attractions/masada/" },

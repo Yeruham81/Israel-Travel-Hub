@@ -38,7 +38,10 @@
   <url><loc>https://id-preview--7cd7aae9-57c0-4ced-b1fa-2f0691483fee.lovable.app/attractions/basilica-of-the-annunciation/</loc></url>
   <url><loc>https://id-preview--7cd7aae9-57c0-4ced-b1fa-2f0691483fee.lovable.app/attractions/caesarea/</loc></url>
   <url><loc>https://id-preview--7cd7aae9-57c0-4ced-b1fa-2f0691483fee.lovable.app/attractions/capernaum/</loc></url>
+  <url><loc>https://id-preview--7cd7aae9-57c0-4ced-b1fa-2f0691483fee.lovable.app/attractions/dead-sea/</loc></url>
+  <url><loc>https://id-preview--7cd7aae9-57c0-4ced-b1fa-2f0691483fee.lovable.app/attractions/eilat/</loc></url>
   <url><loc>https://id-preview--7cd7aae9-57c0-4ced-b1fa-2f0691483fee.lovable.app/attractions/ein-gedi/</loc></url>
+  <url><loc>https://id-preview--7cd7aae9-57c0-4ced-b1fa-2f0691483fee.lovable.app/attractions/haifa/</loc></url>
   <url><loc>https://id-preview--7cd7aae9-57c0-4ced-b1fa-2f0691483fee.lovable.app/attractions/jaffa/</loc></url>
   <url><loc>https://id-preview--7cd7aae9-57c0-4ced-b1fa-2f0691483fee.lovable.app/attractions/magdala/</loc></url>
   <url><loc>https://id-preview--7cd7aae9-57c0-4ced-b1fa-2f0691483fee.lovable.app/attractions/masada/</loc></url>
@@ -51,45 +54,28 @@
   <url><loc>https://id-preview--7cd7aae9-57c0-4ced-b1fa-2f0691483fee.lovable.app/attractions/old-city-jerusalem/</loc></url>
   <url><loc>https://id-preview--7cd7aae9-57c0-4ced-b1fa-2f0691483fee.lovable.app/attractions/qasr-el-yahud/</loc></url>
   <url><loc>https://id-preview--7cd7aae9-57c0-4ced-b1fa-2f0691483fee.lovable.app/attractions/rosh-hanikra/</loc></url>
+  <url><loc>https://id-preview--7cd7aae9-57c0-4ced-b1fa-2f0691483fee.lovable.app/attractions/sea-of-galilee/</loc></url>
   <url><loc>https://id-preview--7cd7aae9-57c0-4ced-b1fa-2f0691483fee.lovable.app/attractions/tabgha/</loc></url>
   <url><loc>https://id-preview--7cd7aae9-57c0-4ced-b1fa-2f0691483fee.lovable.app/attractions/tel-megiddo/</loc></url>
   <url><loc>https://id-preview--7cd7aae9-57c0-4ced-b1fa-2f0691483fee.lovable.app/attractions/yardenit/</loc></url>
   <url><loc>https://id-preview--7cd7aae9-57c0-4ced-b1fa-2f0691483fee.lovable.app/car-rental/</loc></url>
-  <url><loc>https://id-preview--7cd7aae9-57c0-4ced-b1fa-2f0691483fee.lovable.app/dead-sea/family-hotels/</loc></url>
-  <url><loc>https://id-preview--7cd7aae9-57c0-4ced-b1fa-2f0691483fee.lovable.app/dead-sea/spa-hotels/</loc></url>
-  <url><loc>https://id-preview--7cd7aae9-57c0-4ced-b1fa-2f0691483fee.lovable.app/haifa/boutique-hotels/</loc></url>
-  <url><loc>https://id-preview--7cd7aae9-57c0-4ced-b1fa-2f0691483fee.lovable.app/haifa/family-hotels/</loc></url>
-  <url><loc>https://id-preview--7cd7aae9-57c0-4ced-b1fa-2f0691483fee.lovable.app/jerusalem/downtown-hotels/</loc></url>
-  <url><loc>https://id-preview--7cd7aae9-57c0-4ced-b1fa-2f0691483fee.lovable.app/jerusalem/east-jerusalem-hotels/</loc></url>
-  <url><loc>https://id-preview--7cd7aae9-57c0-4ced-b1fa-2f0691483fee.lovable.app/jerusalem/german-colony-baka-hotels/</loc></url>
-  <url><loc>https://id-preview--7cd7aae9-57c0-4ced-b1fa-2f0691483fee.lovable.app/jerusalem/mahane-yehuda-nachlaot-hotels/</loc></url>
-  <url><loc>https://id-preview--7cd7aae9-57c0-4ced-b1fa-2f0691483fee.lovable.app/jerusalem/mamilla-king-david-hotels/</loc></url>
-  <url><loc>https://id-preview--7cd7aae9-57c0-4ced-b1fa-2f0691483fee.lovable.app/jerusalem/old-city-hotels/</loc></url>
   <url><loc>https://id-preview--7cd7aae9-57c0-4ced-b1fa-2f0691483fee.lovable.app/privacy-policy/</loc></url>
-  <url><loc>https://id-preview--7cd7aae9-57c0-4ced-b1fa-2f0691483fee.lovable.app/private-driver/</loc></url>
+  <url><loc>https://id-preview--7cd7aae9-57c0-4ced-b1fa-2f0691483fee.lovable.app/private-driver-in-israel/</loc></url>
   <url><loc>https://id-preview--7cd7aae9-57c0-4ced-b1fa-2f0691483fee.lovable.app/shore-excursions/</loc></url>
   <url><loc>https://id-preview--7cd7aae9-57c0-4ced-b1fa-2f0691483fee.lovable.app/shore-excursions/ashdod/</loc></url>
   <url><loc>https://id-preview--7cd7aae9-57c0-4ced-b1fa-2f0691483fee.lovable.app/shore-excursions/haifa/</loc></url>
-  <url><loc>https://id-preview--7cd7aae9-57c0-4ced-b1fa-2f0691483fee.lovable.app/tel-aviv/beachfront-hotels/</loc></url>
-  <url><loc>https://id-preview--7cd7aae9-57c0-4ced-b1fa-2f0691483fee.lovable.app/tel-aviv/dizengoff-city-center-hotels/</loc></url>
-  <url><loc>https://id-preview--7cd7aae9-57c0-4ced-b1fa-2f0691483fee.lovable.app/tel-aviv/florentin-hotels/</loc></url>
-  <url><loc>https://id-preview--7cd7aae9-57c0-4ced-b1fa-2f0691483fee.lovable.app/tel-aviv/jaffa-hotels/</loc></url>
-  <url><loc>https://id-preview--7cd7aae9-57c0-4ced-b1fa-2f0691483fee.lovable.app/tel-aviv/kerem-hateimanim-hotels/</loc></url>
-  <url><loc>https://id-preview--7cd7aae9-57c0-4ced-b1fa-2f0691483fee.lovable.app/tel-aviv/neve-tzedek-hotels/</loc></url>
-  <url><loc>https://id-preview--7cd7aae9-57c0-4ced-b1fa-2f0691483fee.lovable.app/tel-aviv/old-north-port-hotels/</loc></url>
-  <url><loc>https://id-preview--7cd7aae9-57c0-4ced-b1fa-2f0691483fee.lovable.app/tel-aviv/rothschild-boulevard-hotels/</loc></url>
   <url><loc>https://id-preview--7cd7aae9-57c0-4ced-b1fa-2f0691483fee.lovable.app/terms-of-use/</loc></url>
-  <url><loc>https://id-preview--7cd7aae9-57c0-4ced-b1fa-2f0691483fee.lovable.app/tiberias/family-hotels/</loc></url>
-  <url><loc>https://id-preview--7cd7aae9-57c0-4ced-b1fa-2f0691483fee.lovable.app/tiberias/luxury-hotels/</loc></url>
   <url><loc>https://id-preview--7cd7aae9-57c0-4ced-b1fa-2f0691483fee.lovable.app/tickets/</loc></url>
   <url><loc>https://id-preview--7cd7aae9-57c0-4ced-b1fa-2f0691483fee.lovable.app/tours/</loc></url>
   <url><loc>https://id-preview--7cd7aae9-57c0-4ced-b1fa-2f0691483fee.lovable.app/tours/bethlehem-jericho-jordan-river/</loc></url>
   <url><loc>https://id-preview--7cd7aae9-57c0-4ced-b1fa-2f0691483fee.lovable.app/tours/caesarea-haifa-acre/</loc></url>
   <url><loc>https://id-preview--7cd7aae9-57c0-4ced-b1fa-2f0691483fee.lovable.app/tours/eilat-red-sea/</loc></url>
   <url><loc>https://id-preview--7cd7aae9-57c0-4ced-b1fa-2f0691483fee.lovable.app/tours/food-market-tours/</loc></url>
+  <url><loc>https://id-preview--7cd7aae9-57c0-4ced-b1fa-2f0691483fee.lovable.app/tours/golan-heights/</loc></url>
   <url><loc>https://id-preview--7cd7aae9-57c0-4ced-b1fa-2f0691483fee.lovable.app/tours/jerusalem/</loc></url>
   <url><loc>https://id-preview--7cd7aae9-57c0-4ced-b1fa-2f0691483fee.lovable.app/tours/masada-dead-sea/</loc></url>
   <url><loc>https://id-preview--7cd7aae9-57c0-4ced-b1fa-2f0691483fee.lovable.app/tours/nazareth-sea-of-galilee/</loc></url>
+  <url><loc>https://id-preview--7cd7aae9-57c0-4ced-b1fa-2f0691483fee.lovable.app/tours/negev-desert-ramon-crater/</loc></url>
   <url><loc>https://id-preview--7cd7aae9-57c0-4ced-b1fa-2f0691483fee.lovable.app/tours/tel-aviv-jaffa/</loc></url>
   <url><loc>https://id-preview--7cd7aae9-57c0-4ced-b1fa-2f0691483fee.lovable.app/travel-blog/</loc></url>
   <url><loc>https://id-preview--7cd7aae9-57c0-4ced-b1fa-2f0691483fee.lovable.app/travel-blog/attractions-in-tel-aviv/</loc></url>
@@ -97,30 +83,28 @@
   <url><loc>https://id-preview--7cd7aae9-57c0-4ced-b1fa-2f0691483fee.lovable.app/travel-blog/beaches-in-tel-aviv/</loc></url>
   <url><loc>https://id-preview--7cd7aae9-57c0-4ced-b1fa-2f0691483fee.lovable.app/travel-blog/ben-gurion-airport-arrival-tips/</loc></url>
   <url><loc>https://id-preview--7cd7aae9-57c0-4ced-b1fa-2f0691483fee.lovable.app/travel-blog/ben-gurion-airport-taxis/</loc></url>
+  <url><loc>https://id-preview--7cd7aae9-57c0-4ced-b1fa-2f0691483fee.lovable.app/travel-blog/ben-gurion-airport-to-ein-bokek/</loc></url>
+  <url><loc>https://id-preview--7cd7aae9-57c0-4ced-b1fa-2f0691483fee.lovable.app/travel-blog/ben-gurion-airport-to-haifa/</loc></url>
+  <url><loc>https://id-preview--7cd7aae9-57c0-4ced-b1fa-2f0691483fee.lovable.app/travel-blog/ben-gurion-airport-to-jerusalem/</loc></url>
+  <url><loc>https://id-preview--7cd7aae9-57c0-4ced-b1fa-2f0691483fee.lovable.app/travel-blog/ben-gurion-airport-to-tel-aviv/</loc></url>
   <url><loc>https://id-preview--7cd7aae9-57c0-4ced-b1fa-2f0691483fee.lovable.app/travel-blog/best-dead-sea-hotels/</loc></url>
   <url><loc>https://id-preview--7cd7aae9-57c0-4ced-b1fa-2f0691483fee.lovable.app/travel-blog/best-esim-for-israel/</loc></url>
   <url><loc>https://id-preview--7cd7aae9-57c0-4ced-b1fa-2f0691483fee.lovable.app/travel-blog/best-hotels-in-haifa/</loc></url>
   <url><loc>https://id-preview--7cd7aae9-57c0-4ced-b1fa-2f0691483fee.lovable.app/travel-blog/best-hotels-in-tiberias/</loc></url>
   <url><loc>https://id-preview--7cd7aae9-57c0-4ced-b1fa-2f0691483fee.lovable.app/travel-blog/best-time-to-visit-israel/</loc></url>
   <url><loc>https://id-preview--7cd7aae9-57c0-4ced-b1fa-2f0691483fee.lovable.app/travel-blog/calendar-of-events/</loc></url>
+  <url><loc>https://id-preview--7cd7aae9-57c0-4ced-b1fa-2f0691483fee.lovable.app/travel-blog/christian-tours-in-israel/</loc></url>
   <url><loc>https://id-preview--7cd7aae9-57c0-4ced-b1fa-2f0691483fee.lovable.app/travel-blog/churches-in-jerusalem/</loc></url>
-  <url><loc>https://id-preview--7cd7aae9-57c0-4ced-b1fa-2f0691483fee.lovable.app/travel-blog/day-trips-from-jerusalem/</loc></url>
-  <url><loc>https://id-preview--7cd7aae9-57c0-4ced-b1fa-2f0691483fee.lovable.app/travel-blog/day-trips-from-tel-aviv/</loc></url>
   <url><loc>https://id-preview--7cd7aae9-57c0-4ced-b1fa-2f0691483fee.lovable.app/travel-blog/dead-sea-attractions/</loc></url>
-  <url><loc>https://id-preview--7cd7aae9-57c0-4ced-b1fa-2f0691483fee.lovable.app/attractions/eilat/</loc></url>
   <url><loc>https://id-preview--7cd7aae9-57c0-4ced-b1fa-2f0691483fee.lovable.app/travel-blog/from-ben-gurion-airport-on-shabbat/</loc></url>
   <url><loc>https://id-preview--7cd7aae9-57c0-4ced-b1fa-2f0691483fee.lovable.app/travel-blog/getting-around-israel/</loc></url>
   <url><loc>https://id-preview--7cd7aae9-57c0-4ced-b1fa-2f0691483fee.lovable.app/travel-blog/getting-around-tel-aviv/</loc></url>
   <url><loc>https://id-preview--7cd7aae9-57c0-4ced-b1fa-2f0691483fee.lovable.app/travel-blog/haifa/</loc></url>
-  <url><loc>https://id-preview--7cd7aae9-57c0-4ced-b1fa-2f0691483fee.lovable.app/travel-blog/how-to-get-from-ben-gurion-airport-to-ein-bokek/</loc></url>
-  <url><loc>https://id-preview--7cd7aae9-57c0-4ced-b1fa-2f0691483fee.lovable.app/travel-blog/how-to-get-from-ben-gurion-airport-to-haifa/</loc></url>
-  <url><loc>https://id-preview--7cd7aae9-57c0-4ced-b1fa-2f0691483fee.lovable.app/travel-blog/how-to-get-from-ben-gurion-airport-to-jerusalem/</loc></url>
-  <url><loc>https://id-preview--7cd7aae9-57c0-4ced-b1fa-2f0691483fee.lovable.app/travel-blog/how-to-get-from-ben-gurion-airport-to-tel-aviv/</loc></url>
-  <url><loc>https://id-preview--7cd7aae9-57c0-4ced-b1fa-2f0691483fee.lovable.app/travel-blog/calendar-of-events/</loc></url>
   <url><loc>https://id-preview--7cd7aae9-57c0-4ced-b1fa-2f0691483fee.lovable.app/travel-blog/israel-itinerary-10-days/</loc></url>
   <url><loc>https://id-preview--7cd7aae9-57c0-4ced-b1fa-2f0691483fee.lovable.app/travel-blog/israel-itinerary-3-days/</loc></url>
   <url><loc>https://id-preview--7cd7aae9-57c0-4ced-b1fa-2f0691483fee.lovable.app/travel-blog/israel-itinerary-5-days/</loc></url>
   <url><loc>https://id-preview--7cd7aae9-57c0-4ced-b1fa-2f0691483fee.lovable.app/travel-blog/israel-itinerary-7-days/</loc></url>
+  <url><loc>https://id-preview--7cd7aae9-57c0-4ced-b1fa-2f0691483fee.lovable.app/travel-blog/israel-tours-for-seniors/</loc></url>
   <url><loc>https://id-preview--7cd7aae9-57c0-4ced-b1fa-2f0691483fee.lovable.app/travel-blog/israel-travel-tips/</loc></url>
   <url><loc>https://id-preview--7cd7aae9-57c0-4ced-b1fa-2f0691483fee.lovable.app/travel-blog/jerusalem-to-bethlehem/</loc></url>
   <url><loc>https://id-preview--7cd7aae9-57c0-4ced-b1fa-2f0691483fee.lovable.app/travel-blog/jerusalem-to-the-dead-sea/</loc></url>
@@ -128,12 +112,10 @@
   <url><loc>https://id-preview--7cd7aae9-57c0-4ced-b1fa-2f0691483fee.lovable.app/travel-blog/museums-in-haifa/</loc></url>
   <url><loc>https://id-preview--7cd7aae9-57c0-4ced-b1fa-2f0691483fee.lovable.app/travel-blog/museums-in-jerusalem/</loc></url>
   <url><loc>https://id-preview--7cd7aae9-57c0-4ced-b1fa-2f0691483fee.lovable.app/travel-blog/museums-in-tel-aviv/</loc></url>
-  <url><loc>https://id-preview--7cd7aae9-57c0-4ced-b1fa-2f0691483fee.lovable.app/travel-blog/sea-of-galilee/</loc></url>
   <url><loc>https://id-preview--7cd7aae9-57c0-4ced-b1fa-2f0691483fee.lovable.app/travel-blog/sherut-in-israel/</loc></url>
   <url><loc>https://id-preview--7cd7aae9-57c0-4ced-b1fa-2f0691483fee.lovable.app/travel-blog/shopping-in-jerusalem/</loc></url>
   <url><loc>https://id-preview--7cd7aae9-57c0-4ced-b1fa-2f0691483fee.lovable.app/travel-blog/taxi-fares-in-israel/</loc></url>
   <url><loc>https://id-preview--7cd7aae9-57c0-4ced-b1fa-2f0691483fee.lovable.app/travel-blog/taxis-in-israel/</loc></url>
-  <url><loc>https://id-preview--7cd7aae9-57c0-4ced-b1fa-2f0691483fee.lovable.app/travel-blog/the-dead-sea/</loc></url>
   <url><loc>https://id-preview--7cd7aae9-57c0-4ced-b1fa-2f0691483fee.lovable.app/travel-blog/top-10-things-to-do-in-israel/</loc></url>
   <url><loc>https://id-preview--7cd7aae9-57c0-4ced-b1fa-2f0691483fee.lovable.app/travel-blog/uber-in-israel/</loc></url>
   <url><loc>https://id-preview--7cd7aae9-57c0-4ced-b1fa-2f0691483fee.lovable.app/travel-blog/what-to-eat-in-israel/</loc></url>

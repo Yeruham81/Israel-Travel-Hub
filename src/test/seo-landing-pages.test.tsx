@@ -68,7 +68,7 @@ describe("ten search-intent landing pages", () => {
 
   it("keeps Shabbat terminal and restart coverage on the dedicated guide", () => {
     expect(travelGuides.shabbat.sections.map((section) => section.id)).toEqual(expect.arrayContaining(["weekend-711", "terminal-transfer", "destinations", "restart"]));
-    expect(travelGuides.shabbat.sections.find((section) => section.id === "destinations")?.inlineLinks?.map((link) => link.to)).toContain("/travel-blog/how-to-get-from-ben-gurion-airport-to-jerusalem/");
+    expect(travelGuides.shabbat.sections.find((section) => section.id === "destinations")?.inlineLinks?.map((link) => link.to)).toContain("/travel-blog/ben-gurion-airport-to-jerusalem/");
     expect(travelGuides.israel.related).toContain("shabbat");
     expect(travelGuides.taxis.nextSteps?.map((link) => link.to)).toContain(landingPaths[4]);
   });

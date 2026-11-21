@@ -11,7 +11,7 @@ type PlanningItem = { title: string; description: string; to: NonNullable<LinkPr
 
 const choices: Record<"jerusalem" | "telaviv", PlanningItem[]> = {
   jerusalem: [
-    { title: "Getting here from Ben Gurion Airport", description: "Compare rail, buses, taxis and private transfers before planning the final walk to your hotel.", to: "/travel-blog/how-to-get-from-ben-gurion-airport-to-jerusalem/" },
+    { title: "Getting here from Ben Gurion Airport", description: "Compare rail, buses, taxis and private transfers before planning the final walk to your hotel.", to: "/travel-blog/ben-gurion-airport-to-jerusalem/" },
     { title: "Arriving on Shabbat", description: "Check weekend travel options and organise your Friday-evening or Saturday hotel arrival.", to: "/travel-blog/from-ben-gurion-airport-on-shabbat/" },
     { title: "Plan a visit to Masada", description: "Pair your Jerusalem hotel base with an early desert outing and the right transport.", to: "/attractions/masada/" },
     { title: "Jerusalem to the Dead Sea", description: "Plan a realistic Masada and Dead Sea excursion from Jerusalem.", to: "/travel-blog/jerusalem-to-the-dead-sea/" },
@@ -19,7 +19,7 @@ const choices: Record<"jerusalem" | "telaviv", PlanningItem[]> = {
     { title: "Explore all accommodation", description: "Compare other city, lakeside, beach and Dead Sea hotel destinations.", to: "/accommodation/", image: { src: hotelRoom, alt: "Illustration of a guest room, representing accommodation choices" } },
   ],
   telaviv: [
-    { title: "From Ben Gurion Airport to Tel Aviv", description: "Pick the most practical arrival route and final connection to your chosen hotel area.", to: "/travel-blog/how-to-get-from-ben-gurion-airport-to-tel-aviv/" },
+    { title: "From Ben Gurion Airport to Tel Aviv", description: "Pick the most practical arrival route and final connection to your chosen hotel area.", to: "/travel-blog/ben-gurion-airport-to-tel-aviv/" },
     { title: "Getting around Tel Aviv", description: "Make use of walking routes, city buses, the Red Line and taxis.", to: "/travel-blog/getting-around-tel-aviv/" },
     { title: "Find the right Tel Aviv beach", description: "Compare central beachfront access and quieter stretches along the coast.", to: "/travel-blog/beaches-in-tel-aviv/" },
     { title: "Explore Tel Aviv attractions", description: "Explore sights, museums and neighbourhoods while staying in Tel Aviv.", to: "/travel-blog/attractions-in-tel-aviv/" },

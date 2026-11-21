@@ -34,7 +34,7 @@ The gateway has one illustrated cruise-port callout titled “Arriving in Israel
 
 Cruise-port products continue to use the existing shore catalog. Ordinary hotel/city departures are not presented as port pickup or ship-return products. No existing shore prices, forms or return arrangements were changed.
 
-Owner quote buttons also have unique product URLs (`/private-driver/?tour=<owner-product-id>#request-quote`). The existing form receives the chosen itinerary and day-hire service type; visitors supply actual pickup/return addresses. Only published owner records are accepted. Existing cruise-port one-way transfer prefills retain precedence and the gated form-delivery service is unchanged.
+Owner quote buttons also have unique product URLs (`/private-driver-in-israel/?tour=<owner-product-id>#request-quote`). The existing form receives the chosen itinerary and day-hire service type; visitors supply actual pickup/return addresses. Only published owner records are accepted. Existing cruise-port one-way transfer prefills retain precedence and the gated form-delivery service is unchanged.
 
 ## Product-specific affiliate configuration
 

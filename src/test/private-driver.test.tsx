@@ -2,7 +2,7 @@ import { QueryClient } from "@tanstack/react-query";
 import { createMemoryHistory, createRouter, RouterContextProvider } from "@tanstack/react-router";
 import { cleanup, fireEvent, render, screen, within } from "@testing-library/react";
 import { afterEach, describe, expect, it, vi } from "vitest";
-import { Route as DriverRoute } from "@/routes/private-driver";
+import { Route as DriverRoute } from "@/routes/private-driver-in-israel";
 import { routeTree } from "@/routeTree.gen";
 import { buildDriverQuoteDraft, emptyDriverQuote, validateDriverQuote } from "@/lib/private-driver-quote";
 import { StayPhotoCredits } from "@/components/StayGuideParts";
@@ -12,7 +12,7 @@ import { airportTransferPhotos } from "@/data/airportTransfers";
 
 afterEach(() => { cleanup(); localStorage.clear(); vi.restoreAllMocks(); });
 async function renderDriver() {
-  const router = createRouter({ routeTree, context: { queryClient: new QueryClient() }, history: createMemoryHistory({ initialEntries: ["/private-driver/"] }), trailingSlash: "always" });
+  const router = createRouter({ routeTree, context: { queryClient: new QueryClient() }, history: createMemoryHistory({ initialEntries: ["/private-driver-in-israel/"] }), trailingSlash: "always" });
   await router.load();
   const Page = DriverRoute.options.component!;
   return { ...render(<RouterContextProvider router={router}><Page /></RouterContextProvider>), router };
@@ -96,7 +96,7 @@ describe("private driver page and inquiry", () => {
     expect(screen.queryByText(/Prefer an online form|existing .*contact form/)).not.toBeInTheDocument();
     expect(container.textContent).not.toMatch(/ILS\s*\d|guaranteed pickup|live availability/i);
     const head = await DriverRoute.options.head?.({} as never);
-    expect(head).toMatchObject({ meta: expect.arrayContaining([{ name: "robots", content: "noindex,nofollow" }]), links: [{ rel: "canonical", href: expect.stringMatching(/\/private-driver\/$/) }] });
+    expect(head).toMatchObject({ meta: expect.arrayContaining([{ name: "robots", content: "noindex,nofollow" }]), links: [{ rel: "canonical", href: expect.stringMatching(/\/private-driver-in-israel\/$/) }] });
     const crumbs = JSON.parse(head!.scripts![0]!.children as string);
     expect(crumbs.itemListElement.map((item: { name: string }) => item.name)).toEqual(["Home", "Private driver"]);
   });

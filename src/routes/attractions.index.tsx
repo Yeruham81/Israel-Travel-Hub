@@ -155,7 +155,7 @@ function Attractions() {
             </li>)}
           </ul>
           <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
-            Wondering how to explore these places? Find a <Link to="/tours/" className="font-medium text-primary underline-offset-4 hover:underline">guided tour you can book online</Link>, plan an <Link to="/shore-excursions/" className="font-medium text-primary underline-offset-4 hover:underline">unforgettable shore excursion</Link>, or enjoy a <Link to="/private-driver/" className="font-medium text-primary underline-offset-4 hover:underline">private day trip with your own driver</Link>.
+            Wondering how to explore these places? Find a <Link to="/tours/" className="font-medium text-primary underline-offset-4 hover:underline">guided tour you can book online</Link>, plan an <Link to="/shore-excursions/" className="font-medium text-primary underline-offset-4 hover:underline">unforgettable shore excursion</Link>, or enjoy a <Link to="/private-driver-in-israel/" className="font-medium text-primary underline-offset-4 hover:underline">private day trip with your own driver</Link>.
           </p>
         </section>
 
