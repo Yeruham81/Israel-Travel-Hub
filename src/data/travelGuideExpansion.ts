@@ -1,5 +1,5 @@
 import type { GuidePhoto, TravelGuide } from "@/data/travelGuides";
-import { TRAVEL_TIPS_TITLE, TRAVEL_TIPS_DESCRIPTION, TRAVEL_TIPS_UPDATED, travelTipsFaqs } from "@/data/israelTravelTips";
+import { TRAVEL_TIPS_TITLE, TRAVEL_TIPS_DESCRIPTION, TRAVEL_TIPS_UPDATED, travelTipsFaqs, travelTipsHero } from "@/data/israelTravelTips";
 import { jerusalemShoppingPlaces as shoppingPlaces } from "@/data/jerusalemShopping";
 import { airportTransferPhotos } from "@/data/airportTransfers";
 import { travelGuidePaths } from "@/data/registry";
@@ -10,7 +10,6 @@ import masada from "@/assets/home/masada-dead-sea.webp";
 import yardenit from "@/assets/guides/yardenit.jpg";
 import qasr from "@/assets/guides/qasr-el-yahud.jpg";
 import sepulchre from "@/assets/guides/holy-sepulchre.jpg";
-import roadTrip from "@/assets/home/road-trip.webp";
 import jerusalemShabbatNight from "@/assets/travel-blog-hub/jerusalem-night-443d64981d-420.webp";
 
 const photos = {
@@ -222,7 +221,7 @@ export const expandedTravelGuides = {
     updatedAt: TRAVEL_TIPS_UPDATED,
     intro: "My practical guide to planning an Israel trip: start with entry and travel dates, arrange airport transport, choose a realistic route, and prepare for everyday life.",
     answer: "Check the official entry requirements for your passport, choose a manageable set of bases, and plan arrival and hotel changes around Shabbat and holidays. Then connect each day's real addresses, prepare mobile data and offline records, and confirm bookings and site access before relying on them. Use current official travel advice when deciding whether and where to travel.",
-    topics: ["tips", "transportation", "destinations"], photo: {src: roadTrip, alt: "Road through the Israeli countryside for trip planning"},
+    topics: ["tips", "transportation", "destinations"], photo: travelTipsHero,
     facts: [],
     comparison: { caption: "Israel first-time travel tips", headers: [], rows: [] },
     sections: [],
