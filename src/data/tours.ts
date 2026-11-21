@@ -317,7 +317,7 @@ const reading: Record<ReadingId, ShoreReadingGuide> = {
   haifa: { title: "Haifa: gardens & viewpoints", description: "Get to know the Carmel slopes, German Colony and coastal setting. Distinguish a garden viewpoint from a visit inside the terraces.", to: "/attractions/haifa/", photo: airport["haifa"]! },
   caesarea: { title: "Caesarea by the sea", description: "Explore the Roman harbour, theatre and coastal remains. Understand the site layout before choosing how long to spend there.", to: "/attractions/caesarea/", photo: airport["caesarea"]! },
   food: { title: "What to eat in Israel", description: "Discover dishes, snacks and market favourites. Arrive at your tasting walk with a few flavours you would love to try.", to: travelGuidePaths.food, photo: migration["what-to-eat-in-israel"] },
-  eilat: { title: "Eilat & the Red Sea", description: "Plan your stay around the waterfront, beaches and nearby desert. Leave time between activities to enjoy the southern coast.", to: travelGuidePaths.eilat, photo: airport["eilat"]! },
+  eilat: { title: "Eilat & the Red Sea", description: "Plan your stay around the waterfront, beaches and nearby desert. Leave time between activities to enjoy the southern coast.", to: "/attractions/eilat/", photo: airport["eilat"]! },
   tips: { title: "Israel travel tips", description: "Prepare the everyday essentials for a smoother visit. Find practical advice for planning your days and moving between destinations.", to: travelGuidePaths.travelTips, photo: { src: "/images/attractions/ramon-crater.webp", alt: "Desert mountains and crater in southern Israel" } },
 };
 
