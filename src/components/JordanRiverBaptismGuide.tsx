@@ -35,12 +35,12 @@ const attractions = [
  {to:"/attractions/mount-of-beatitudes/",title:"Mount of Beatitudes",note:"A quiet hillside and lake views"},
 ] as const;
 const related = [
- {to:"/travel-blog/sea-of-galilee/",title:"Sea of Galilee",note:"My practical guide to the lake and surrounding sites"},
+ {to:"/attractions/sea-of-galilee/",title:"Sea of Galilee",note:"My practical guide to the lake and surrounding sites"},
  {to:"/travel-blog/churches-in-jerusalem/",title:"Churches in Jerusalem",note:"Plan historic churches and pilgrimage visits"},
  {to:"/travel-blog/jerusalem-to-the-dead-sea/",title:"Jerusalem to the Dead Sea",note:"Routes and stops through the Jordan Valley"},
  {to:"/travel-blog/jerusalem-to-bethlehem/",title:"Jerusalem to Bethlehem",note:"A practical visit to the Nativity city"},
  {to:"/travel-blog/getting-around-israel/",title:"Getting around Israel",note:"Public transport, taxis and private travel"},
- {to:"/travel-blog/haifa/",title:"Haifa travel guide",note:"Coastal sights and northern Israel journeys"},
+ {to:"/attractions/haifa/",title:"Haifa travel guide",note:"Coastal sights and northern Israel journeys"},
 ] as const;
 function Heading({id,children,intro}:{id:string;children:string;intro?:string}) {
  return <div className="mb-5"><h2 id={id+"-heading"} className="text-2xl font-bold tracking-tight sm:text-3xl">{children}</h2>{intro && <p className="mt-2 max-w-3xl leading-relaxed text-muted-foreground">{intro}</p>}</div>;
