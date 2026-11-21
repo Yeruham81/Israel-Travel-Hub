@@ -128,7 +128,7 @@ for (const required of [
 }
 assert(!jerusalemHubHtml.includes('href="/travel-blog/day-trips-from-jerusalem/"'), "Retired Jerusalem day-trip path must not be linked");
 
-// Ensure that all fourteen formerly card-only mobile comparisons now ship
+// Ensure that all twelve formerly card-only mobile comparisons now ship
 // the same horizontally scrollable table in the published static HTML.
 const mobileTableRoutes = [
   "/travel-blog/israel-itinerary-3-days/",
@@ -143,8 +143,6 @@ const mobileTableRoutes = [
   "/travel-blog/dead-sea-attractions/",
   "/attractions/capernaum/",
   "/attractions/tabgha/",
-  "/attractions/mount-zion/",
-  "/attractions/mount-of-olives/"
 ];
 for (const route of mobileTableRoutes) {
   const file = join(root, route.replace(/^\/|\/$/g, ""), "index.html");
