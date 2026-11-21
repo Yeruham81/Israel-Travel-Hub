@@ -12,6 +12,13 @@ import calendarPhoto from "@/assets/guides/2026-10/calendar-of-events.webp";
 import railPhoto from "@/assets/airport-journeys/ben-gurion-rail-platform.webp";
 import privateDriverPhoto from "@/assets/guides/taxi-cabs-israel.webp";
 
+/** The Christian Tours page and every inbound guide card share this single image.
+ * Change only this source when the approved new photograph is accessible. */
+export const christianToursHero = {
+  src: "/images/attractions/old-jerusalem-holy-sepulchre.webp",
+  alt: "Church of the Holy Sepulchre in Jerusalem",
+} as const;
+
 export type ChristianSite = { name: string; note: string; to?: LinkProps["to"]; officialUrl?: string; mapPlace?: string };
 export type ChristianArea = {
   id: string; name: string; title: string; image: string; alt: string;
