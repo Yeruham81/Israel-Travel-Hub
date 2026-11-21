@@ -8,7 +8,6 @@ import { eilatSite } from "@/data/eilatSite";
 import { affiliateConfig, travelGuidePaths } from "@/data/registry";
 import { recordOutboundClick } from "@/lib/outbound";
 import coralUnderwater from "@/assets/eilat/coral-reef.webp";
-import cityWaterfront from "@/assets/eilat/waterfront.webp";
 import timnaPhoto from "@/assets/home/timna-park-feature-optimized.webp";
 import mountainsPhoto from "@/assets/home/hero-eilat-mountains-large.webp";
 
@@ -148,7 +147,7 @@ export const eilatDestinationContent: AttractionDestinationContent = {
       <p>Dolphin sightings are <strong>not guaranteed</strong>; the animals are free to approach or stay away. Consult the {sourcesLink(official.dolphinReef, "official Dolphin Reef visit information")} and the {sourcesLink(official.dolphinSwim, "activity rules")} before booking.</p>
       {placeLink("Dolphin Reef, Eilat, Israel")}
     </AttractionHighlight>
-    <AttractionHighlight title="North Beach, the promenade and marina" image={{ src: cityWaterfront, alt: "Eilat's city waterfront and marina on the Gulf of Aqaba" }}>
+    <AttractionHighlight title="North Beach, the promenade and marina" image={{ src: photos.watersports, alt: "Eilat marina with moored boats, waterfront hotels and the Red Sea" }}>
       <p>The central beachfront and promenade are easy options for an unstructured morning or evening: waterfront walks, cafés, hotel-area beaches and views towards the surrounding mountains. This is the most straightforward area if you are staying in central Eilat without a car.</p>
       <p>Not every beach has a lifeguard or identical facilities. Look for signs at the specific beach before swimming, and do not assume that every water-sports kiosk is operating year-round.</p>
       {placeLink("Eilat North Beach, Israel")}
@@ -157,7 +156,7 @@ export const eilatDestinationContent: AttractionDestinationContent = {
       <p>Beyond the reserve, Eilat offers guided snorkeling, introductory diving, kayaking, stand-up paddling and boat trips. Choose the activity according to your swimming skills, age, comfort in the water and the operator's safety procedures.</p>
       <p>Keep distance from wildlife, never touch or stand on coral, and do not feed fish. A glass-bottom boat is a useful option for visitors who prefer to stay dry. See the <Link to="/tours/eilat-red-sea/" className={inlineLink}>Eilat activities and tours page</Link> for more options.</p>
     </AttractionHighlight>
-    <AttractionHighlight title="Water sports and glass-bottom boat trips" image={{ src: photos.watersports, alt: "Water sports activity on the Red Sea near Eilat" }}>
+    <AttractionHighlight title="Water sports and glass-bottom boat trips">
       <p>There are ways to enjoy the gulf without snorkeling or diving. Depending on season and conditions, private operators may offer paddleboarding, kayaking, boat cruises and other water activities. Glass-bottom boat trips are a good alternative for visitors who prefer not to swim.</p>
       <p>Check the exact departure point, safety instructions, weather cancellation policy and whether the activity is suitable for children. <Link to="/tours/eilat-red-sea/" className={inlineLink}>Compare Eilat activities</Link> before making a reservation.</p>
     </AttractionHighlight>
