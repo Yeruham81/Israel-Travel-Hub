@@ -1,0 +1,56 @@
+name: Verify Eilat attraction guide and static route
+on:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/verify-eilat-attraction.yml"
+      - "src/components/EilatAttractionPage.tsx"
+      - "src/data/eilatSite.ts"
+      - "src/routes/attractions.eilat.tsx"
+      - "src/data/attractionsHub.ts"
+      - "src/data/nav.ts"
+      - "src/test/eilat-attraction-feature.test.tsx"
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  eilat-check:
+    name: Check new Eilat attractions guide
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    env:
+      CI: "true"
+      HOSTINGER_STATIC_BUILD: "true"
+      VITE_INDEXABLE: "false"
+      VITE_CANONICAL_ORIGIN: https://saddlebrown-guanaco-454061.hostingersite.com
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: "1.4.4"
+      - name: Install locked dependencies
+        run: bash scripts/install-ci-dependencies.sh
+      - name: Build Eilat route and generate route types
+        run: bun run build
+      - name: Type-check whole project
+        run: npx tsc --noEmit
+      - name: Run Eilat-focused regression tests
+        run: bunx vitest run src/test/eilat-attraction-feature.test.tsx
+      - name: Build and verify static Hostinger export
+        run: |
+          bash scripts/build-validated-static.sh
+          node scripts/verify-hostinger-static-export.mjs
+      - name: Assert Eilat page and commercial tracking are in published HTML
+        run: |
+          test -s .output/public/attractions/eilat/index.html
+          grep -Fq 'Eilat: Red Sea Attractions' .output/public/attractions/eilat/index.html
+          grep -Fq 'eilat-coral-beach.webp' .output/public/attractions/eilat/index.html
+          grep -Fq 'sponsored noopener noreferrer' .output/public/attractions/eilat/index.html
+          grep -Fq '/attractions/eilat/' .output/public/sitemap.xml
+          grep -Fq '/attractions/eilat/' .output/public/attractions/index.html
+          echo "Eilat page, sitemap, media and affiliate tracking verified in static build"
