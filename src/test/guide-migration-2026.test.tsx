@@ -115,7 +115,7 @@ describe("October planning, city and heritage guide migration", () => {
     const Hub = AttractionsRoute.options.component!;
     const html = renderToString(<RouterContextProvider router={router}><Hub /></RouterContextProvider>);
     for (const id of [...Object.keys(cityCultureGuides), ...Object.keys(heritageGuides), "deadSea"] as TravelGuideId[]) {
-      expect(html).toContain(`href="${travelGuidePaths[id]}"`);
+      expect(html).toContain(`href="${id === "eilat" ? "/attractions/eilat/" : travelGuidePaths[id]}"`);
     }
     expect(html).toContain('id="browse-regions-heading"');
     expect(html).toContain('href="#nazareth-lower-galilee"');

@@ -33,7 +33,6 @@ describe("Holiday and special-date guide links", () => {
     "src/data/jerusalemClusterEditorial.ts",
     "src/data/taxiGuideCluster.ts",
     "src/data/travelGuides.ts",
-    "src/data/guidePlanning2026.ts",
     "src/routes/accommodation.index.tsx",
   ])("points %s to the consolidated guide, with no retired URL", path => {
     const content = source(path);

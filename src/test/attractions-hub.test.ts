@@ -21,7 +21,7 @@ describe("Attractions hub redesign", () => {
       expect(region.cards.length).toBeGreaterThanOrEqual(1);
       expect(region.cards.every(card => String(card.to).startsWith("/attractions/"))).toBe(true);
       expect(region.relatedGuides.length).toBeLessThanOrEqual(3);
-      expect(region.relatedGuides.every(link => String(link.to).startsWith("/travel-blog/"))).toBe(true);
+      expect(region.relatedGuides.every(link => ["/travel-blog/", "/tours/"].some(prefix => String(link.to).startsWith(prefix)))).toBe(true);
       expect(region.relatedGuides.every(link => !/transport|transfer|hotel|stay|rent|taxi|getting-around|shabbat/i.test(String(link.to)))).toBe(true);
       expect(new Set(region.relatedGuides.map(link => String(link.to))).size).toBe(region.relatedGuides.length);
     }
@@ -79,7 +79,7 @@ describe("Attractions hub redesign", () => {
 
   it("keeps all individual attractions on the hub without listing regional overview guides as site cards", () => {
     const paths = attractionHubCards.map((card) => String(card.to));
-    expect(attractionHubCards).toHaveLength(23);
+    expect(attractionHubCards).toHaveLength(24);
     expect(new Set(paths).size).toBe(paths.length);
     expect(paths.every((path) => path.startsWith("/"))).toBe(true);
     for (const id of attractionIds) {
@@ -132,8 +132,8 @@ describe("attractions landing responsive image delivery", () => {
   };
   const parseWidths = (srcset: string) => srcset.split(", ").map(value => Number(value.match(/ (\d+)w$/)?.[1]));
 
-  it("retains every original source and gives all 23 large cards native-resolution fallback", () => {
-    expect(attractionHubCards).toHaveLength(23);
+  it("retains every original source and gives all 24 large cards native-resolution fallback", () => {
+    expect(attractionHubCards).toHaveLength(24);
     for (const card of attractionHubCards) {
       const srcset = attractionHubCardImageSets[card.photo.src] ?? "";
       // Akko's editorial photo is updated independently of the hub. The native

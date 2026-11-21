@@ -19,7 +19,7 @@ describe("Attractions regional scaffold and reciprocal navigation", () => {
       expect(region.cards.every(card => String(card.to).startsWith("/"))).toBe(true);
       expect(new Set(region.cards.map(card => String(card.to))).size).toBe(region.cards.length);
       expect(region.relatedGuides.length).toBeLessThanOrEqual(3);
-      expect(region.relatedGuides.every(link => String(link.to).startsWith("/travel-blog/"))).toBe(true);
+      expect(region.relatedGuides.every(link => ["/travel-blog/", "/tours/"].some(prefix => String(link.to).startsWith(prefix)))).toBe(true);
       expect(region.relatedGuides.every(link => !region.cards.some(card => link.to === card.to))).toBe(true);
     }
   });

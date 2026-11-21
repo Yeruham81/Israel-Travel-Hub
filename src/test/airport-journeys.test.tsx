@@ -167,7 +167,7 @@ describe("four independent airport transportation comparisons", () => {
     expect(g.options.find(o => o.id === "rail")!.paragraphs.join(" ")).not.toContain("instructions and official railway links follow here");
     expect(g.options.find(o => o.id === "rail")!.paragraphs.join(" ")).not.toContain("near the beginning of this guide");
     expect(g.weekend.join(" ")).toMatch(/Nesher.*no longer runs/);
-    expect(g.weekendLinks).toContainEqual({ text: "Israel's holiday guide", to: "/travel-blog/calendar-of-events/" });
+    expect(g.weekendLinks).toContainEqual({ text: "Israel's holiday and special dates guide", to: "/travel-blog/calendar-of-events/" });
     expect(g.photos?.station.alt).toMatch(/Yitzhak Navon/);
     expect(g.photos?.onward.alt).toMatch(/Ben Gurion Airport railway station/);
     expect(g.faqs).toHaveLength(7);
