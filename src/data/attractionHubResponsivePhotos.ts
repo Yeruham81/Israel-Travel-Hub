@@ -81,6 +81,7 @@ export const attractionHubCardImageSets: Record<string, string> = {
   [photo35]: [photo36 + " 420w", photo35 + " 755w"].join(", "),
   [photo37]: [photo38 + " 420w", photo37 + " 755w"].join(", "),
   [photo39]: [photo40 + " 420w", photo39 + " 738w"].join(", "),
+  [photo55]: [photo56 + " 360w", photo55 + " 755w"].join(", "),
 };
 
 export const attractionHubRegionImageSets: Record<string, string> = {
