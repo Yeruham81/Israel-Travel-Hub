@@ -1,0 +1,107 @@
+/* Read-only published-page verification for the Jordan River baptism guide. */
+const {chromium}=require("playwright");
+const fs=require("node:fs");
+const path=require("node:path");
+const origin=(process.env.BAPTISM_AUDIT_ORIGIN||"https://saddlebrown-guanaco-454061.hostingersite.com").replace(/\/+$/,"");
+const url=origin+"/travel-blog/baptism-in-the-jordan-river/";
+const dir="/tmp/jordan-baptism-published";
+fs.mkdirSync(dir,{recursive:true});
+const checks=[],errors=[];
+function verify(condition,label,details=""){
+ checks.push({passed:Boolean(condition),label,details});
+ console.log((condition?"PASS ":"FAIL ")+label+(details?" | "+details:""));
+ if(!condition)errors.push(label);
+}
+const sleep=ms=>new Promise(r=>setTimeout(r,ms));
+async function scrollAndDecode(page) {
+ const images=page.locator("main img");
+ const failed=[];
+ for(let i=0;i<await images.count();i++){
+  const img=images.nth(i),src=await img.getAttribute("src");
+  try{
+   await img.scrollIntoViewIfNeeded({timeout:12000});
+   await img.evaluate(el=>el.decode(),{timeout:16000});
+  }catch(e){failed.push({src,error:String(e).slice(0,200)})}
+ }
+ return failed;
+}
+async function snapshot(page,label,desktop){
+ const data=await page.evaluate(()=>{
+  const all=selector=>[...document.querySelectorAll(selector)];
+  const cardImages=[...all("#attractions [data-testid],#related [data-testid]")];
+  const photos=all("#attractions .grid>a img, #related .grid>a img");
+  const related=all("#related .grid>a");
+  const attractions=all("#attractions .grid>a");
+  const tours=all('a[data-testid="baptism-tour-card"]');
+  const hero=document.querySelector('[data-testid="guide-hero-media"] img');
+  const structured=all('script[type="application/ld+json"]').map(el=>el.textContent||"").join(" ");
+  const contact=document.querySelector("#contact");
+  const source=document.querySelector("#sources");
+  const compareDesktop=document.querySelector('[data-testid="baptism-desktop-comparison"]');
+  const compareMobile=document.querySelector('[data-testid="baptism-mobile-comparison"]');
+  return {
+   h1:all("h1").map(x=>x.textContent.trim()),
+   canonical:document.querySelector('link[rel="canonical"]')?.href,
+   hero:{src:hero?.currentSrc,loaded:!!(hero?.complete&&hero.naturalWidth>0)},
+   date:document.querySelector("main time")?.getAttribute("datetime"),
+   robots:document.querySelector('meta[name="robots"]')?.content,
+   sections:["compare-sites","yardenit","qasr","ceremony","getting-there","galilee-tours","jordan-valley-tours","practical-tips","faq","attractions","related","contact","sources"].filter(x=>document.getElementById(x)),
+   comparison:{desktopVisible:compareDesktop?getComputedStyle(compareDesktop).display!=="none":false,mobileVisible:compareMobile?getComputedStyle(compareMobile).display!=="none":false,rows:all("#compare-sites tbody tr").length},
+   tours:tours.map(el=>({href:el.href,site:el.getAttribute("data-site"),img:el.querySelector("img")?.currentSrc,loaded:!!(el.querySelector("img")?.naturalWidth>0)})),
+   attractions:attractions.length,related:related.length,
+   linkedPages:[...attractions,...related].map(a=>a.getAttribute("href")),
+   photos:photos.map(img=>({src:img.getAttribute("src"),loaded:img.complete&&img.naturalWidth>0,alt:img.getAttribute("alt")})),
+   faq:all("#faq details").length,structuredFAQ:structured.includes('"FAQPage"'),structuredArticle:structured.includes('"Article"'),
+   map:document.querySelector('[data-testid="baptism-comparison-map"] iframe')?.getAttribute("src"),
+   contactForm:!!contact?.querySelector("form"),portrait:!!contact?.querySelector('[data-photo-role="contact-portrait"]'),
+   sourcesAfterContact:!!(contact&&source&&(contact.compareDocumentPosition(source)&Node.DOCUMENT_POSITION_FOLLOWING)),
+   missingAlt:all("main img:not([alt])").map(el=>el.getAttribute("src")),
+   width:document.documentElement.scrollWidth,viewport:innerWidth,
+  };
+ });
+ verify(data.h1.length===1&&data.h1[0]==="Baptism in the Jordan River: Yardenit vs. Qasr el-Yahud",label+": correct H1");
+ verify(data.canonical===url,label+": preserved URL and canonical",data.canonical);
+ verify(data.date==="2026-11-21",label+": updated editorial date",String(data.date));
+ verify(data.robots?.includes("noindex"),label+": staging remains noindex");
+ verify(data.hero.loaded&&data.hero.src?.includes("jordan-river-baptism"),label+": primary hero loads");
+ verify(data.sections.length===13,label+": all guide sections",String(data.sections.length));
+ verify(data.comparison.rows===6&&data.comparison.desktopVisible===desktop&&data.comparison.mobileVisible!==desktop,label+": responsive comparison table and cards");
+ verify(data.tours.length===6&&data.tours.filter(t=>t.site==="galilee-tours").length===3&&data.tours.filter(t=>t.site==="jordan-valley-tours").length===3,label+": six grouped tours");
+ verify(data.tours.every(t=>/^https:\/\/(viator|getyourguide)\.tpm\.li\/[A-Za-z0-9]+\?sub_id=baptism_/.test(t.href)),label+": all booking links are page-scoped Travelpayouts");
+ verify(data.tours.every(t=>t.loaded),label+": all six bookable tour photos load");
+ verify(data.attractions===6&&data.related===6,label+": twelve illustrated internal cards");
+ verify(data.photos.length===12&&data.photos.every(x=>x.loaded&&x.alt)&&new Set(data.photos.map(x=>x.src)).size===12,label+": twelve distinct, loaded editorial hero photos",JSON.stringify(data.photos.filter(x=>!x.loaded||!x.alt)));
+ verify(data.linkedPages.includes("/attractions/yardenit/")&&data.linkedPages.includes("/attractions/qasr-el-yahud/"),label+": exact site links");
+ verify(data.faq===10&&data.structuredFAQ&&data.structuredArticle,label+": FAQ and Article structured data");
+ verify(data.map?.includes("maps.google.com/maps?")&&data.map.includes("Yardenit")&&data.map.includes("Qasr"),label+": two-site map and directions");
+ verify(data.contactForm&&data.portrait&&data.sourcesAfterContact,label+": author contact form and footer sources");
+ verify(data.missingAlt.length===0&&data.width<=data.viewport+8,label+": accessible photos and no horizontal overflow",JSON.stringify({missingAlt:data.missingAlt,width:data.width,viewport:data.viewport}));
+ return data;
+}
+(async()=>{
+ let browser;const snapshots={};
+ try{
+  browser=await chromium.launch({headless:true,args:["--no-sandbox"]});
+  const page=await browser.newPage({viewport:{width:1440,height:900},reducedMotion:"reduce"});
+  const jsErrors=[];page.on("pageerror",e=>jsErrors.push(e.message));
+  const response=await page.goto(url,{waitUntil:"domcontentloaded",timeout:75000});
+  verify(response?.status()===200,"published route HTTP 200",String(response?.status()));
+  if(response?.status()!==200)throw Error("published page not available");
+  for(const [label,width,height] of [["desktop-1440",1440,900],["mobile-390",390,844],["mobile-360",360,780]]){
+   await page.setViewportSize({width,height});
+   await sleep(300);
+   const failed=await scrollAndDecode(page);
+   verify(failed.length===0,label+": every visible and lazy page image decodes",JSON.stringify(failed));
+   snapshots[label]=await snapshot(page,label,width>=1024);
+   await page.screenshot({path:path.join(dir,label+".png"),fullPage:true,animations:"disabled"});
+  }
+  verify(jsErrors.length===0,"no JavaScript page errors",JSON.stringify(jsErrors));
+  await page.close();
+ }catch(e){verify(false,"browser audit completed",String(e.message));}
+ finally{
+  if(browser)await browser.close();
+  fs.writeFileSync(path.join(dir,"results.json"),JSON.stringify({url,checks,errors,snapshots},null,2));
+ }
+ console.log("Total: "+checks.length+" checks, failures: "+errors.length);
+ if(errors.length)process.exitCode=1;
+})();

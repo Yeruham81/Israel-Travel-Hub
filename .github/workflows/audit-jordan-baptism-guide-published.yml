@@ -1,0 +1,39 @@
+name: Audit published Jordan River baptism guide
+on:
+  workflow_run:
+    workflows: ["Deploy static website to Hostinger Premium"]
+    types: [completed]
+permissions:
+  contents: read
+jobs:
+  audit:
+    if: >-
+      github.event.workflow_run.conclusion == 'success' &&
+      github.event.workflow_run.head_sha == github.sha
+    runs-on: ubuntu-24.04
+    timeout-minutes: 17
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+      - name: Install Chromium
+        run: |
+          mkdir -p /tmp/jordan-baptism-browser
+          npm install --prefix /tmp/jordan-baptism-browser --no-save playwright@1.56.1
+          /tmp/jordan-baptism-browser/node_modules/.bin/playwright install --with-deps chromium
+      - name: Verify published desktop and mobile Jordan baptism guide
+        env:
+          NODE_PATH: /tmp/jordan-baptism-browser/node_modules
+          BAPTISM_AUDIT_ORIGIN: https://saddlebrown-guanaco-454061.hostingersite.com
+        run: node scripts/audit-jordan-baptism-guide-published.cjs
+      - name: Preserve screenshots and structured results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: jordan-river-baptism-published-audit
+          path: /tmp/jordan-baptism-published/
+          retention-days: 14
+          if-no-files-found: warn
