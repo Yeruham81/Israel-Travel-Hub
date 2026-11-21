@@ -5,7 +5,6 @@
  */
 import { migrationPhotos as photos } from "@/data/guideMigrationPhotos";
 import jerusalemMarketTourPhoto from "@/assets/jerusalem/mahane-yehuda.webp";
-import foodMarketWalkPhoto from "@/assets/tours-hub/food-markets.webp";
 
 export const foodKinds = [
   { id:"all", label:"All 10 dishes" },
@@ -122,7 +121,7 @@ export const foodMarkets = [
   {id:"jaffa",title:"Old Jaffa & the flea-market streets",place:"Tel Aviv–Jaffa",mood:"Arab bakeries, small cafés and wider Levantine food traditions",
     why:"Pair a meal or pastry with a relaxed walk through Jaffa's old streets, craft shops and waterfront.",
     tip:"Choose a specific café or bakery for your dates; availability can vary substantially between streets and weekends.",
-    image:"/images/attractions/jaffa-food.webp",alt:"Local food served in Jaffa",
+    image:"/images/attractions/jaffa-flea-market.webp",alt:"Historic Jaffa flea-market lanes and local food shops",
     guide:"/attractions/jaffa/",
     map:"https://www.google.com/maps/search/?api=1&query=Jaffa+Flea+Market+Tel+Aviv+Israel"}
 ];
@@ -141,7 +140,7 @@ export const foodTours = [
   {id:"tour-levinsky-market-tasting-viator@tours-food-markets",key:"levinsky",location:"Tel Aviv",provider:"Viator",name:"Levinsky Market tasting walk",
     description:"Explore speciality food shops, ingredients and neighbourhood food traditions with a guide.",
     detail:"Approximately 2 hours · Confirm substitutions and schedule",
-    image:foodMarketWalkPhoto,alt:"Shops around Tel Aviv's Levinsky Market",
+    image:"/images/top-ten-israel/food.webp",alt:"Local dishes and small bites served for tasting",
     subId:"what_to_eat_israel_levinsky_tasting"}
 ];
 
