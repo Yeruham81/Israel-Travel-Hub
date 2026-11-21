@@ -90,6 +90,7 @@ export const attractionSidebarGuideLabels: Record<string, string> = {
   "ein-gedi": "Ein Gedi",
   qasr: "Qasr el-Yahud",
   "mitzpe-ramon-crater": "Ramon Crater",
+  eilat: "Eilat",
 };
 
 export const attractionSidebarRegions: SidebarNavItem[] = attractionHubRegions.map((region) => ({
