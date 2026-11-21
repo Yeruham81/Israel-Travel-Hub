@@ -57,6 +57,10 @@ async function evaluatePage(page,device){
      missingAlts:imgs.filter(im=>!im.hasAttribute("alt")).map(im=>im.src),
      duplicateImages:imgs.filter((im,i)=>photoURLs.indexOf(im.currentSrc)!==i && !/moshe/i.test(im.currentSrc)).map(im=>im.currentSrc),
      filters,
+     directDishJumpLinks:all('nav[aria-label="Jump to a food dish"] a').map(x=>x.getAttribute("href")),
+     mahaneTourPhoto:document.querySelector('#food-tours article:nth-child(2) img')?.getAttribute("src"),
+     jaffaMarketPhoto:all("#markets article")[3]?.querySelector("img")?.getAttribute("src"),
+     licenseVisible:document.querySelector("#sources")?.textContent?.includes("CC BY-SA 3.0"),
      viewportWidth:window.innerWidth,docWidth:document.documentElement.scrollWidth,
      jsonLd:all('script[type="application/ld+json"]').map(x=>x.textContent).join("\n")
    };
@@ -78,6 +82,10 @@ async function evaluatePage(page,device){
  check(metrics.duplicateImages.length===0,device+": no repeated photographs",JSON.stringify(metrics.duplicateImages));
  check(metrics.docWidth<=metrics.viewportWidth+8,device+": no unwanted horizontal page scroll",JSON.stringify({doc:metrics.docWidth,viewport:metrics.viewportWidth}));
  check(metrics.filters.length===5,device+": five food category buttons");
+ check(metrics.directDishJumpLinks.length===10&&new Set(metrics.directDishJumpLinks).size===10,device+": ten distinct direct dish links",JSON.stringify(metrics.directDishJumpLinks));
+ check(metrics.mahaneTourPhoto==="/images/food-guide/mahane-yehuda-food-stalls.webp",device+": genuine Mahane Yehuda food-stall photo",String(metrics.mahaneTourPhoto));
+ check(metrics.jaffaMarketPhoto==="/images/attractions/jaffa-flea-market.webp",device+": local Jaffa market picture",String(metrics.jaffaMarketPhoto));
+ check(metrics.licenseVisible===true,device+": credited CC BY-SA Mahane image in sources");
  check(metrics.jsonLd.includes("visit.tel-aviv.gov.il/info/money")&&metrics.jsonLd.includes("itraveljerusalem.com/article/markets-and-fairs"),device+": Article JSON-LD links official sources");
  const kinds=[
   ["Street food",3],["Breakfast & plates",3],["Bakery",2],["Sweet treats",2]
@@ -86,6 +94,11 @@ async function evaluatePage(page,device){
    await page.getByRole("button",{name,exact:true}).click();
    check((await page.locator("#dishes article").count())===expected,device+": filter "+name,JSON.stringify({expected}));
  }
+ await page.getByRole("button",{name:"Sweet treats",exact:true}).click();
+ await page.locator('#quick-start a[href="#falafel"]').first().click();
+ await page.waitForTimeout(90);
+ const afterJump=await page.evaluate(()=>({hash:location.hash,dishes:document.querySelectorAll("#dishes article").length,target:!!document.getElementById("falafel")}));
+ check(afterJump.dishes===10&&afterJump.target&&afterJump.hash==="#falafel",device+": jumping to hidden falafel resets food filter",JSON.stringify(afterJump));
  await page.getByRole("button",{name:"All 10 dishes",exact:true}).click();
  check((await page.locator("#dishes article").count())===10,device+": reset filter shows ten dishes");
  await page.screenshot({path:path.join(folder,device+".png"),fullPage:true,animations:"disabled"});
