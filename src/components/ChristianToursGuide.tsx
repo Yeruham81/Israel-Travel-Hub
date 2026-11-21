@@ -9,7 +9,7 @@ import { SourcesDisclosure } from "@/components/SourcesDisclosure";
 import { HomeContactForm } from "@/components/HomeContactForm";
 import { affiliateConfig } from "@/data/registry";
 import { recordOutboundClick, relFor } from "@/lib/outbound";
-import { christianAreas, christianRoutes, christianOffers, christianFaqs, christianSiteCards, christianPlanningCards, type ChristianArea, type ChristianRelated, type ChristianOffer } from "@/data/christianToursGuide";
+import { christianToursHero, christianAreas, christianRoutes, christianOffers, christianFaqs, christianSiteCards, christianPlanningCards, type ChristianArea, type ChristianRelated, type ChristianOffer } from "@/data/christianToursGuide";
 
 const updatedAt="2026-11-21";
 const slug="/travel-blog/christian-tours-in-israel/";
@@ -107,7 +107,7 @@ export function ChristianToursGuide(){
  return <main className="mx-auto max-w-5xl px-4 pb-10"><article>
    <header className="pt-6">
      <Breadcrumbs items={[{name:"Home",to:"/"},{name:"Travel guides",to:"/travel-blog/"},{name:"Christian tours in Israel",to:slug}]}/>
-     <GuideHeroLayout image={<GuideHeroMedia src="/images/attractions/old-jerusalem-holy-sepulchre.webp" alt="Church of the Holy Sepulchre in Jerusalem"/>}>
+     <GuideHeroLayout image={<GuideHeroMedia src={christianToursHero.src} alt={christianToursHero.alt}/>}>
        <p className="text-xs font-semibold uppercase tracking-[0.16em] text-primary">Christian heritage · Holy Land visitor guide</p>
        <h1 className="guide-page-title mt-2">Christian Tours in Israel: Biblical Sites &amp; Pilgrimage Routes</h1>
        <p className="mt-4 max-w-3xl text-lg leading-relaxed" data-guide-intro>Planning a Christian pilgrimage, or hoping to visit the biblical places you have read about? I'm Moshe Barak. In this guide, I'll help you choose meaningful sites, understand the distances, and plan a practical route through Jerusalem, Bethlehem, Nazareth and the Galilee.</p>
