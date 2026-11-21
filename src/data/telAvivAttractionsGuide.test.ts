@@ -3,9 +3,12 @@ import { existsSync, readFileSync } from "node:fs";
 import { resolve } from "node:path";
 import {
  telAvivExperiences, telAvivMapPoints, telAvivRoutes, telAvivFaqs,
- telAvivEditorialOverview
+ telAvivEditorialOverview, telAvivAttractionsHero
 } from "@/data/telAvivAttractionsGuide";
 import { attractionGuides } from "@/data/attractionGuides";
+import { guideHeroPhotoForPath } from "@/lib/guide-hero-photos";
+import { guideDirectory } from "@/data/travelGuides";
+import { attractionRelatedGuides } from "@/data/attractionsHub";
 import { affiliateConfig } from "@/data/registry";
 import { telAvivRouteNavigation } from "@/data/telAvivAttractionsGuide";
 import florentinCredit from "@/data/telAvivGraffitiPhotoCredit.json";
@@ -42,6 +45,19 @@ describe("Upgraded Tel Aviv attractions editorial guide",()=>{
    expect(telAvivEditorialOverview.official.length).toBeGreaterThan(2);
    const route=readFileSync(resolve(process.cwd(),"src/routes/travel-blog.attractions-in-tel-aviv.tsx"),"utf8");
    expect(route).toContain("component: TelAvivAttractionsGuide");
+ });
+
+ it("shares one canonical cover among the page header, directory and related-guide cards",()=>{
+   const page=readFileSync(resolve(process.cwd(),"src/components/TelAvivAttractionsGuide.tsx"),"utf8");
+   const destination="/travel-blog/attractions-in-tel-aviv/";
+   const directory=guideDirectory.find(entry=>String(entry.to)===destination);
+   const related=attractionRelatedGuides.find(entry=>String(entry.to)===destination);
+   expect(page).toContain("src={telAvivAttractionsHero.src}");
+   expect(page).toContain("alt={telAvivAttractionsHero.alt}");
+   expect(telAvivEditorialOverview.image).toEqual(telAvivAttractionsHero);
+   expect(guideHeroPhotoForPath(destination)).toEqual(telAvivAttractionsHero);
+   expect(directory?.photo?.src).toBe(telAvivAttractionsHero.src);
+   expect(related?.photo).toEqual(telAvivAttractionsHero);
  });
 
  it("uses ten different local photos, including four verified Google Drive images",()=>{
