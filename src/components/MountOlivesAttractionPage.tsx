@@ -35,7 +35,8 @@ const mountOlivesTours = [
     price: "From approx. US$60 / person",
     photo: guidedTourPhoto,
     alt: "Jerusalem guided sightseeing scene",
-    href: "https://www.viator.com/en-GB/tours/Jerusalem/Jerusalem-Mount-of-Olives-Tour/d921-6540P87",
+    sourceUrl: "https://www.viator.com/en-GB/tours/Jerusalem/Jerusalem-Mount-of-Olives-Tour/d921-6540P87",
+    href: "https://viator.tpk.lv/frgpZFls",
   },
   {
     id: "117240P3",
@@ -47,7 +48,8 @@ const mountOlivesTours = [
     price: "From approx. US$225 / group",
     photo: oldCityTourPhoto,
     alt: "Old City of Jerusalem near the walking-tour departure point",
-    href: "https://www.viator.com/en-GB/tours/Jerusalem/Mt-of-Olives-from-the-Church-of-the-Ascension-to-Gethsemane/d921-117240P3",
+    sourceUrl: "https://www.viator.com/en-GB/tours/Jerusalem/Mt-of-Olives-from-the-Church-of-the-Ascension-to-Gethsemane/d921-117240P3",
+    href: "https://viator.tpk.lv/v3Tk4hG1",
   },
 ] as const;
 
@@ -192,12 +194,12 @@ export const mountOlivesDestinationContent: AttractionDestinationContent = {
             <p className="mt-3 text-sm">{tour.duration} · ★ {tour.rating}</p>
             <div className="mt-auto flex flex-wrap items-end justify-between gap-3 pt-4">
               <div><p className="text-xs text-muted-foreground">Listed starting price, Nov 2026</p><p className="text-sm font-semibold">{tour.price}</p></div>
-              <a href={tour.href} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 rounded-lg bg-primary px-3 py-2 text-sm font-semibold text-primary-foreground">View tour <ArrowUpRight className="h-4 w-4" aria-hidden="true"/></a>
+              <a href={tour.href} target="_blank" rel="sponsored noopener noreferrer" className="inline-flex items-center gap-1 rounded-lg bg-primary px-3 py-2 text-sm font-semibold text-primary-foreground">View tour <ArrowUpRight className="h-4 w-4" aria-hidden="true"/></a>
             </div>
           </div>
         </article>)}
       </div>
-      <p className="text-xs text-muted-foreground">Prices and ratings are dated booking-platform snapshots, not live quotes; totals, availability and currency may differ for your date. These are direct provider links, without affiliate attribution.</p>
+      <p className="text-xs text-muted-foreground">Prices and ratings are dated booking-platform snapshots, not live quotes; totals, availability and currency may differ for your date. Booking links open the external provider; verify the experience and terms before purchasing.</p>
       <p className="text-sm leading-relaxed">For more options, <Link to="/tours/jerusalem/" className={inlineLink}>browse Jerusalem guided tours</Link>. If you only need transport between the upper viewpoint and Gethsemane, <a href="#contact" className={inlineLink}>contact me about a private driver</a>.</p>
     </div>
   ),
@@ -234,8 +236,8 @@ export const mountOlivesDestinationContent: AttractionDestinationContent = {
     { label: "Israel public transportation planner", url: official.transit },
     { label: "City of David — Jerusalem Trail route", url: official.jerusalemWalk },
     { label: "Enjoy Jerusalem — Mount of Olives walking route", url: official.trailGuide },
-    { label: "Viator — Jerusalem Mount of Olives Tour", url: mountOlivesTours[0].href },
-    { label: "Viator — Ascension Chapel to Gethsemane guided walk", url: mountOlivesTours[1].href },
+    { label: "Viator — Jerusalem Mount of Olives Tour", url: mountOlivesTours[0].sourceUrl },
+    { label: "Viator — Ascension Chapel to Gethsemane guided walk", url: mountOlivesTours[1].sourceUrl },
   ],
 };
 
