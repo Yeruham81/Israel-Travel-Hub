@@ -237,7 +237,6 @@ export function HaifaMuseumsGuide() {
     <HomeContactForm guide={neighborhoodTripContactCopy("Haifa")}/>
     <SourcesDisclosure>
       <p className="mb-3 text-sm leading-relaxed">Museum admission, opening days, current closures and booking advice were checked against official operator information in November 2026. Exhibitions and visitor arrangements may change. Always check the individual museum for your travel dates.</p>
-      <p className="mb-3 text-sm leading-relaxed">Photographs are drawn from my original Haifa museums editorial image library. I will add photos for the Hecht, Hermann Struck and Mané-Katz museums once suitable files are available; no other museum is pictured in their place.</p>
       <ul className="grid gap-x-5 gap-y-2 text-sm sm:grid-cols-2">
         {museums.map(m=><li key={m.id}><OfficialLink href={m.url}>{m.name}</OfficialLink></li>)}
         <li><OfficialLink href="https://www.hms.org.il/eng/Price_List">Haifa Museums entry prices</OfficialLink></li>
