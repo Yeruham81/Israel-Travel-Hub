@@ -5,7 +5,7 @@ import caesareaCardPhoto from "@/assets/attractions-hub/card-caesarea-420.webp";
 
 export const seniorUpdatedAt = "2026-11-21";
 export const seniorPath = "/travel-blog/israel-tours-for-seniors/" as const;
-export const seniorHero = {src:"/images/travel-blog/taxi-in-tel-aviv.webp",alt:"Private passenger taxi on a city street in Israel, illustrating flexible door-to-door transport"};
+export const seniorHero = {src:"/images/home/transfer-jerusalem-tower-of-david.webp",alt:"Tower of David in Jerusalem, a possible stop on a flexible private sightseeing journey"};
 
 export type SeniorDay = {
   id:string; title:string; duration:string; image:string; alt:string; intro:string;
