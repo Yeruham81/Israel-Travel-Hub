@@ -92,7 +92,7 @@ describe("shore excursions", () => {
     expect(ownerSection?.querySelectorAll('[data-testid="shore-service-card"]')).toHaveLength(4);
     expect(externalSection).not.toBeNull();
     expect(externalSection!.compareDocumentPosition(ownerSection!)).toBe(Node.DOCUMENT_POSITION_FOLLOWING);
-    expect(externalSection?.querySelector("ul")).toHaveClass("md:grid-cols-2");
+    expect(externalSection?.querySelector("ul")).toHaveClass("md:grid-cols-2", "lg:grid-cols-3");
     expect(ownerSection?.querySelector("ul")).not.toHaveClass("md:grid-cols-2");
     expect(ownerSection?.querySelector('[data-testid="owner-price-terms"]')).toBeNull();
     expect(ownerSection).not.toHaveTextContent("Published weekday private transport rates");
