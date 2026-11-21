@@ -66,7 +66,7 @@ jobs:
               if not (12000 < len(data) < 8500000): raise ValueError("Unreasonable source file size")
               with Image.open(BytesIO(data)) as im:
                   im=ImageOps.exif_transpose(im).convert("RGB")
-                  if min(im.size)<720: raise ValueError("Insufficient source resolution")
+                  if min(im.size)<540: raise ValueError("Insufficient source resolution")
                   im=ImageOps.fit(im,(720,540),method=Image.Resampling.LANCZOS,centering=(focus_x,.5))
                   dest=target_dir/output
                   im.save(dest, "WEBP", quality=77, method=6)
