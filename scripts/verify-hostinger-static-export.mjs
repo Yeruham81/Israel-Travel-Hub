@@ -172,6 +172,31 @@ for (const route of mobileTableRoutes) {
   }
 }
 
+// Sitewide invariant: no published comparison table may disappear at a
+// responsive breakpoint or require users to switch to a separate card view.
+// Audit every sitemap page, not only the twelve historical regression routes.
+let pagesWithTables = 0;
+let auditedTables = 0;
+for (const route of paths) {
+  const file = join(root, route === "/" ? "index.html" : route.replace(/^\/|\/$/g, "") + "/index.html");
+  const html = readFileSync(file, "utf8");
+  const tables = [...html.matchAll(/<table\b[^>]*>/gi)];
+  if (tables.length > 0) pagesWithTables++;
+  for (const match of tables) {
+    const tag = match[0];
+    const classes = tag.match(/\bclass="([^"]*)"/i)?.[1] ?? "";
+    const tokens = classes.split(/\s+/);
+    assert(!tokens.some(token => token === "hidden" || /^(?:sm|md|lg|xl|2xl):(?:hidden|table)$/.test(token)),
+      "A published table has breakpoint-dependent visibility: " + route);
+    const preceding = html.slice(Math.max(0, (match.index ?? 0) - 850), match.index);
+    assert(/\boverflow-(?:x-)?(?:auto|scroll)\b/.test(preceding),
+      "A published table has no horizontal scrolling region: " + route);
+    auditedTables++;
+  }
+}
+assert(pagesWithTables >= 12, "Unexpectedly few pages with real comparison tables");
+console.log("Responsive table parity verified across " + pagesWithTables + " sitemap pages and " + auditedTables + " rendered tables.");
+
 const privateApi = join(root, "api");
 // Never deploy compiled API: Hostinger's manually configured PHP endpoints
 // are excluded by rsync, and server-side Vite JS cannot run as static files.
