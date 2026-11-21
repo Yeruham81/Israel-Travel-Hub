@@ -88,6 +88,9 @@ describe("What to Eat in Israel — beginner visitor guide",()=>{
     expect(content).toContain('data-testid="israel-food-tour-cards"');
     const marketImage=foodTours.find(t=>t.key==="mahane-yehuda")?.image;
     expect(marketImage).toBe("/images/food-guide/mahane-yehuda-food-stalls.webp");
+    expect(foodTours.find(t=>t.key==="levinsky")?.image).toBe("/images/food-guide/levinsky-spice-shop.webp");
+    expect(content).toContain("commons.wikimedia.org/wiki/File:PikiWiki_Israel_9177_Levinsky_market_in_Tel_Aviv.JPG");
+    expect(content).toContain("CC BY 2.5");
     expect(content).toContain("commons.wikimedia.org/wiki/File:Mahane_Yehuda_shoppers.jpg");
     expect(content).toContain("CC BY-SA 3.0");
   });
