@@ -206,6 +206,37 @@ jobs:
           test ! -e "$relative"
           REMOTE
 
+      - name: Retire obsolete Eilat travel-blog HTML without affecting new attraction page
+        if: steps.freshness.outputs.current == 'true' && env.DRY_RUN != 'true'
+        shell: bash
+        run: |
+          set -euo pipefail
+          # A non-deleting rsync keeps old HTML unless retired explicitly.
+          # Back up only this exact obsolete HTML file outside public_html.
+          test ! -e .output/public/travel-blog/eilat/index.html
+          test -s .output/public/attractions/eilat/index.html
+          BACKUP_DIR="$(dirname "$HOSTINGER_REMOTE_PATH")/cms-static-backups/$GITHUB_RUN_ID/retired-eilat-guide"
+          ssh -p "$HOSTINGER_SSH_PORT" -i "$HOME/.ssh/hostinger_deploy" -o BatchMode=yes -o StrictHostKeyChecking=yes -o UserKnownHostsFile="$HOME/.ssh/known_hosts" \
+            "$HOSTINGER_SSH_USER@$HOSTINGER_SSH_HOST" \
+            "HOSTINGER_REMOTE_PATH='$HOSTINGER_REMOTE_PATH' BACKUP_DIR='$BACKUP_DIR' sh -s" <<'REMOTE'
+          set -eu
+          cd "$HOSTINGER_REMOTE_PATH"
+          test -f .ith-static-deploy-ok
+          test -d travel-blog
+          test ! -L travel-blog
+          test ! -L travel-blog/eilat
+          relative=travel-blog/eilat/index.html
+          if [ -f "$relative" ]; then
+            test ! -L "$relative"
+            umask 077
+            mkdir -p "$BACKUP_DIR"
+            mv "$relative" "$BACKUP_DIR/index.html"
+          fi
+          rmdir travel-blog/eilat 2>/dev/null || true
+          test ! -e "$relative"
+          test -s attractions/eilat/index.html
+          REMOTE
+
       - name: Retire exact old accommodation HTML pages without redirects
         if: steps.freshness.outputs.current == 'true' && env.DRY_RUN != 'true'
         shell: bash
