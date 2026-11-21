@@ -8,7 +8,7 @@ describe("Seven exact supplier links upgraded to Travelpayouts", () => {
   const booking = [
     { pageId: "stay-haifa-family-browse", id: "hotels-haifa-booking", url: "https://booking.tpk.lv/IMJh6Qxg" },
     { pageId: "stay-haifa-boutique-browse", id: "hotels-haifa-booking", url: "https://booking.tpk.lv/9d6zS3gn" },
-    { pageId: "stay-tiberias", id: "hotels-tiberias-booking", url: "https://booking.tpk.lv/tsl5okP9" },
+    { pageId: "stay-tiberias-browse", id: "hotels-tiberias-booking", url: "https://booking.tpk.lv/tsl5okP9" },
   ] as const;
 
   it("routes all three Booking.com CTAs via page-specific Travelpayouts offers", () => {
@@ -28,7 +28,7 @@ describe("Seven exact supplier links upgraded to Travelpayouts", () => {
     const general = linksForPage("stay-haifa").find(x => x.id === "hotels-haifa-booking");
     expect(general?.url).toBe("https://www.booking.com/city/il/haifa.html");
     expect(general?.isAffiliate).toBe(false);
-    const genericTiberias = linksForPage("stay-tiberias-browse").find(x => x.id === "hotels-tiberias-booking");
+    const genericTiberias = linksForPage("stay-tiberias").find(x => x.id === "hotels-tiberias-booking");
     expect(genericTiberias?.isAffiliate).toBe(false);
   });
 
