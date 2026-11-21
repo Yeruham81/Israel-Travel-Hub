@@ -172,7 +172,7 @@ describe("migrated practical guides", () => {
       expect(container.querySelectorAll("#plan-trip a")).toHaveLength(7);
       expect(container.querySelectorAll("#faq details")).toHaveLength(6);
       expect(container.querySelectorAll("#contact")).toHaveLength(1);
-      const photoPaths = [...container.querySelectorAll('#experiences article > img')].map(el => el.getAttribute("src"));
+      const photoPaths = [...container.querySelectorAll('#experiences article[data-detailed-card="horizontal"] img')].map(el => el.getAttribute("src"));
       expect(photoPaths).toHaveLength(10);
       expect(new Set(photoPaths).size).toBe(10);
       expect(container.querySelector('img[src="/images/top-ten-israel/hero.webp"]')).not.toBeNull();
