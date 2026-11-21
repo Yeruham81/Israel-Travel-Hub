@@ -47,7 +47,30 @@ describe("migrated practical guides", () => {
     const { container } = render(<RouterContextProvider router={router}><Page /></RouterContextProvider>);
     expect(router.matchRoutes(path).at(-1)?.routeId).toBe(path.replace(/\/$/, ""));
     expect(screen.getAllByRole("heading", { level: 1 })).toHaveLength(1);
-    expect(screen.getByRole("heading", { level: 1 })).toHaveTextContent(guide.title);
+    // Dedicated Jerusalem churches guide deliberately uses a concise public H1,
+    // while the longer descriptive title remains in metadata and Article schema.
+    expect(screen.getByRole("heading", { level: 1 })).toHaveTextContent(
+      id === "jerusalemChurches" ? "Churches in Jerusalem" : guide.title
+    );
+    if (id === "jerusalemChurches") {
+      expect(container.querySelector("#choose")).not.toBeNull();
+      expect(container.querySelector("#church-map")).not.toBeNull();
+      expect(container.querySelector("#church-holy-sepulchre")).not.toBeNull();
+      expect(container.querySelectorAll("#explore-more a")).toHaveLength(6);
+      expect(container.querySelectorAll("#contact")).toHaveLength(1);
+      expect(container.querySelector("time")).toHaveAttribute("datetime", guide.updatedAt);
+      const head = await route.options.head?.({} as never);
+      expect(head).toMatchObject({meta: expect.arrayContaining([
+        {title: guide.title},
+        {name: "description", content: guide.description},
+        {name: "robots", content: "noindex,nofollow"},
+      ])});
+      const article = head!.scripts!.flatMap(script =>
+        typeof script?.children === "string" ? [JSON.parse(script.children)] : []
+      ).find(item => item["@type"] === "Article");
+      expect(article).toMatchObject({headline: guide.title, dateModified: guide.updatedAt, inLanguage: "en"});
+      return;
+    }
     if (id === "jerusalemShopping") {
       // This guide now uses the shared dedicated layout, with an editorial quick
       // recommendation, ten place cards, a map, photos and a six-card follow-up grid.
