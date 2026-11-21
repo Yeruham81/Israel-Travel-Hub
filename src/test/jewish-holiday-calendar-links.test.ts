@@ -5,7 +5,7 @@ import { travelGuidePaths } from "@/data/registry";
 const source = (path: string) => readFileSync(path, "utf8");
 
 describe("Jewish holiday cross-links", () => {
-  it("distinguishes the events calendar from the dedicated holiday-planning guide", () => {
+  it("distinguishes the holiday explainer from the dedicated date-checking tool", () => {
     expect(travelGuidePaths.calendar).toBe("/travel-blog/calendar-of-events/");
     expect(source("src/routes/travel-blog.israel-holidays.tsx")).toContain('const PATH = "/travel-blog/israel-holidays/";');
   });

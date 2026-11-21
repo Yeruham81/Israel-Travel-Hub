@@ -218,35 +218,45 @@ export const planningGuides = {
   },
   "calendar": {
     "id": "calendar",
-    "updatedAt": "2026-10-23",
-    "title": "Israel Events Calendar: Festivals & Things to Do",
-    "description": "Find Israel's festivals, concerts, films and cultural events. Browse confirmed dates, filter by city and discover annual festivals.",
-    "intro": "Find upcoming events in Israel and explore recurring festivals with official organiser links.",
-    "answer": "Use the interactive event calendar to narrow confirmed listings by date, region and type. Annual festivals are shown separately until their next dates are announced.",
-    "topics": ["tips", "attractions", "itineraries"],
-    "photo": P["calendar-of-events"],
+    "updatedAt": "2026-11-21",
+    "title": "Holidays in Israel: A Practical Guide for Visitors",
+    "description": "Understand Israeli Jewish, Christian, Muslim, Druze and national holidays, Shabbat, holiday eves and how special dates affect public transport, opening hours, crowds and hotel prices.",
+    "intro": "From Shabbat and Yom Kippur to Passover, Ramadan, Christmas and national memorial days, special dates shape daily life in Israel.",
+    "answer": "Check whether your dates include Shabbat, major Jewish festival days, holiday eves or school breaks. Yom Kippur requires particular attention: regular transport and airport operations stop. Other religious and national dates can affect particular cities and venues without closing the whole country.",
+    "topics": ["tips", "religion", "itineraries"],
+    "photo": {"src":"/images/holiday-guide/jewish-holiday-celebration.webp","alt":"Jewish holiday celebration with a shofar and Torah scroll in Israel"},
     "facts": [
-      {"label": "Dates", "text": "Specific dates appear only when checked against a named source"},
-      {"label": "Festival editions", "text": "Recurring events do not imply confirmed future dates"},
-      {"label": "Tickets", "text": "Follow the organiser for current ticket and entry information"}
+      {"label":"Start at sunset","text":"Major Jewish festivals begin on the previous civil evening"},
+      {"label":"Transport","text":"Shabbat and major festival days often interrupt rail and bus services"},
+      {"label":"Crowds","text":"Passover, Sukkot and school holidays can increase visitor demand"}
     ],
-    "comparison": {"caption": "Use the events calendar", "headers": ["Section", "Best use"], "rows": [
-      ["Confirmed events", "Find activities with published dates"],
-      ["Annual festivals", "Discover recurring cultural events and check upcoming editions"]
+    "comparison": {"caption":"How special dates affect your plans","headers":["Date or observance","Typical visitor impact"],"rows":[
+      ["Yom Kippur","Major interruption to transport, airport operations and business activity"],
+      ["Shabbat and major Jewish holidays","Rail and most scheduled bus services pause; local exceptions"],
+      ["Chol HaMoed","Travel usually continues but parks and hotels may be busy"],
+      ["National and other religious dates","Check ceremonies and local opening arrangements"]
     ]},
     "sections": [
-      {"id": "event-discovery", "title": "Find events during your visit", "paragraphs": [
-        "Select your travel dates and filter by region and type. These listings are checked examples, not a complete national events database.",
-        "For each event, check the exact performance time, venue, language and booking conditions with the organiser."
-      ]}
+      {"id":"weekly","title":"Shabbat and holiday eves","paragraphs":["Shabbat begins at sunset on Friday and ends on Saturday evening. Regular rail and most scheduled bus services stop, although some local weekend alternatives and taxis operate.","Major Jewish holiday eves can also mean early service finishes and shorter business hours. Check the exact last departure and your arrival time."]},
+      {"id":"major","title":"Major Jewish holidays","paragraphs":["Rosh Hashanah, Yom Kippur, Sukkot, Passover and Shavuot have different holiday patterns. In Israel Passover lasts seven days and Shavuot has one main festival day.","Yom Kippur has a particularly strong effect: shops largely close and normal airport and transport services stop for the observance."]},
+      {"id":"other","title":"Other traditions and national days","paragraphs":["Remembrance days bring sirens, ceremonies and adjusted entertainment hours; Independence Day brings public gatherings and changing transport schedules.","Muslim, Christian and Druze holidays affect different communities and pilgrimage sites. Christmas and Easter can change access around churches without causing a nationwide closure."]},
+      {"id":"planning","title":"Planning around special dates","paragraphs":["Holiday prices and crowds differ by city, school calendars, hotel and visitor attraction. Book refundable accommodation early where demand is high.","Use the companion Israel holiday calendar for exact dates, then confirm train schedules, airport operations and religious site access from the relevant operator."]}
     ],
-    "checklist": ["Check the exact performance date and venue", "Check the language and registration requirements", "Plan transport after the event"],
+    "checklist": [
+      "Check exact festival dates and the previous evening",
+      "Confirm train and bus last departures before holiday eves",
+      "Check your hotel's meal arrangements and any minimum stay",
+      "Reserve popular attractions when school holidays or pilgrimages coincide",
+      "Verify airport hours around Yom Kippur",
+      "Leave a flexible alternative for major road closures and ceremonies"
+    ],
     "faqs": [
-      {"q": "Are these all events taking place in Israel?", "a": "No. The calendar lists checked events and links to municipal event programmes for additional listings."},
-      {"q": "Can I book every event here?", "a": "Only events with verified ticket links will show ticket options. The official organiser's page remains available."}
+      {"q":"Does Israel shut down on every holiday?","a":"No. Major Jewish festival days and Shabbat differ from Hanukkah, Purim, intermediate days and local religious celebrations."},
+      {"q":"Can I fly on Yom Kippur?","a":"Normal Ben Gurion Airport flight operations pause. Confirm exact dates and schedules with the airport and airline."},
+      {"q":"When do Jewish holidays begin?","a":"Usually at sunset on the preceding civil evening; the dates move each year on the Gregorian calendar."},
+      {"q":"What is Chol HaMoed?","a":"The intermediate days of Sukkot and Passover, when many services run but visitor attractions and hotels can be crowded."}
     ],
-    "related": ["bestTime", "travelTips"],
-    "services": [{"label": "Israel Holidays Calendar", "to": "/travel-blog/israel-holidays/"}],
-    "sourceIds": ["m26-tlv-events", "guide-jerusalem-tourism", "m26-haifa-museums"]
-  }
-} satisfies Record<string, TravelGuide>;
+    "related": ["bestTime","shabbat","jerusalem","israel"],
+    "services": [{"label":"Check exact Israel holiday dates","to":"/travel-blog/israel-holidays/"},{"label":"Plan private transport","to":"/private-driver/"}],
+    "sourceIds": ["israel-rail","guide-iaa"]
+  }} satisfies Record<string, TravelGuide>;

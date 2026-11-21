@@ -13,7 +13,7 @@ const guideTemplates = [
   ["src/components/IsraelItineraryPage.tsx", 1],
   ["src/components/PortPage.tsx", 1],
   ["src/components/TourCategoryPage.tsx", 1],
-  ["src/routes/travel-blog.calendar-of-events.tsx", 1],
+  ["src/components/IsraelHolidayVisitorGuide.tsx", 1],
   ["src/routes/travel-blog.israel-holidays.tsx", 1],
 ] as const;
 

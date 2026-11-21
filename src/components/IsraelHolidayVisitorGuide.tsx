@@ -1,4 +1,5 @@
 import { Link } from "@tanstack/react-router";
+import type { ReactNode } from "react";
 import { ArrowUpRight, CalendarDays, CheckCircle2, Clock3, ExternalLink, Lightbulb, Train, Wallet, MapPinned } from "lucide-react";
 import { Breadcrumbs, FaqList, OnThisPage } from "@/components/Guide";
 import { AuthorCard } from "@/components/AuthorCard";
@@ -17,8 +18,8 @@ export const HOLIDAY_GUIDE_UPDATED = "2026-11-21";
 export const HOLIDAY_GUIDE_PHOTO = {src:"/images/holiday-guide/jewish-holiday-celebration.webp",alt:"Jewish holiday celebration with a shofar and Torah scroll in Israel"};
 
 const TOC = [
-  ["overview","What visitors need to know"],["weekly","Shabbat & holiday eves"],
-  ["travel-effects","Closures, crowds & prices"],["jewish-major","Major Jewish holidays"],
+  ["overview","What visitors need to know"],["travel-effects","Closures, crowds & prices"],
+  ["weekly","Shabbat & holiday eves"],["jewish-major","Major Jewish holidays"],
   ["other-jewish","Other Jewish dates"],["national","National days"],
   ["other-traditions","Muslim, Christian & Druze"],["practical","Planning checklist"],
   ["dates","Check the exact dates"],["faq","Common questions"],
@@ -69,7 +70,7 @@ const linkStyle="font-semibold text-primary underline-offset-4 hover:underline";
 function Heading({id,children,intro}:{id:string;children:string;intro?:string}){
   return <div className="mb-5"><h2 id={id+"-heading"} className="text-2xl font-bold tracking-tight sm:text-3xl">{children}</h2>{intro&&<p className="mt-2 max-w-3xl leading-relaxed text-muted-foreground">{intro}</p>}</div>;
 }
-function MyTip({children}:{children:React.ReactNode}){
+function MyTip({children}:{children:ReactNode}){
   return <aside className="flex items-start gap-3 rounded-xl border border-amber-200 bg-amber-50/80 px-4 py-3.5 text-sm leading-relaxed text-amber-950"><Lightbulb className="mt-0.5 h-5 w-5 shrink-0 text-amber-600" aria-hidden="true"/><p><strong>My tip:</strong> {children}</p></aside>;
 }
 function HolidayRow({item}:{item:HolidayGuideItem}) {

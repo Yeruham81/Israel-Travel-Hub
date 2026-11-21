@@ -1,17 +1,9 @@
 name: Refresh Israel event listings
 
+# The event-feed experiment is archived. No automatic scheduled changes to the published site.
+# Retain manual dispatch only, in case the event-feed code is reused later.
 on:
   workflow_dispatch:
-  schedule:
-    # Daily, using UTC; dates in the importer are interpreted in Israel.
-    - cron: "41 4 * * *"
-  push:
-    branches: [main]
-    paths:
-      - ".github/workflows/refresh-israel-events.yml"
-      - "scripts/sync-israel-events.mjs"
-      - "scripts/israel-events-source.mjs"
-      - "scripts/israel-events-source.test.mjs"
 
 permissions:
   contents: write

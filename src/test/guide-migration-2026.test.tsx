@@ -9,7 +9,8 @@ import { routeTree } from "@/routeTree.gen";
 import { Route as HubRoute } from "@/routes/travel-blog.index";
 import { Route as AttractionsRoute } from "@/routes/attractions.index";
 import { TravelGuidePage, travelGuideMeta } from "@/components/TravelGuide";
-import { IsraelEventsPage } from "@/routes/travel-blog.calendar-of-events";
+import { IsraelHolidayVisitorGuidePage } from "@/components/IsraelHolidayVisitorGuide";
+import { holidayGuideGroups } from "@/data/israelHolidayVisitorGuide";
 import { planningGuides } from "@/data/guidePlanning2026";
 import { cityCultureGuides } from "@/data/guideCities2026";
 import { heritageGuides } from "@/data/guideHeritage2026";
@@ -128,18 +129,26 @@ describe("October planning, city and heritage guide migration", () => {
     expect(travelGuides.qasr.comparison.rows).toHaveLength(3);
     expect(travelGuides.topTen.sections).toHaveLength(10);
     expect(travelGuides.food.sections.filter(section => section.photo)).toHaveLength(10);
-    expect(travelGuides.calendar.comparison.rows[0]).toEqual(["Confirmed events", "Find activities with published dates"]);
+    expect(travelGuides.calendar.comparison.rows[0]).toEqual(["Yom Kippur", "Major interruption to transport, airport operations and business activity"]);
   });
-  it("keeps the events guide on its original route with a dedicated interactive calendar", async () => {
-    const path = "/travel-blog/calendar-of-events/";
-    const router = await routerAt(path);
-    expect(router.matchRoutes(path).at(-1)?.routeId).not.toBe(rootRouteId);
-    const { container } = render(<RouterContextProvider router={router}><IsraelEventsPage /></RouterContextProvider>);
-    expect(within(container).getByRole("heading", {level:1,name:"Israel Events Calendar: Festivals & Things to Do"})).toBeInTheDocument();
-    expect(within(container).getByRole("heading", {name:"Find events during your visit"})).toBeInTheDocument();
-    expect(within(container).getByRole("heading", {name:"Upcoming confirmed events"})).toBeInTheDocument();
-    expect(within(container).getByRole("heading", {name:"Annual festivals worth knowing about"})).toBeInTheDocument();
-    expect(within(container).queryByRole("heading", {name:"Selected Jewish holidays in Israel · 2027"})).toBeNull();
+  it("restores the original holiday guide purpose without an event database", async () => {
+    const url = "/travel-blog/calendar-of-events/";
+    const router = await routerAt(url);
+    expect(router.matchRoutes(url).at(-1)?.routeId).not.toBe(rootRouteId);
+    const { container } = render(<RouterContextProvider router={router}><IsraelHolidayVisitorGuidePage /></RouterContextProvider>);
+    expect(within(container).getByRole("heading", {level:1,name:"Holidays in Israel: A Practical Guide for Visitors"})).toBeInTheDocument();
+    expect(within(container).getByRole("heading", {name:"Which dates affect travel most?"})).toBeInTheDocument();
+    expect(within(container).getByRole("heading", {name:"Major Jewish holidays that can change your itinerary"})).toBeInTheDocument();
+    expect(within(container).getByRole("heading", {name:"Muslim, Christian & Druze holidays"})).toBeInTheDocument();
+    expect(container.querySelectorAll("[data-holiday-card]")).toHaveLength(holidayGuideGroups.flatMap(g => g.items).length);
+    expect(container.querySelectorAll("#faq details")).toHaveLength(9);
+    expect(container.querySelectorAll("#explore-more a")).toHaveLength(6);
+    expect(container.querySelector("#contact form")).not.toBeNull();
+    expect(container.querySelector('a[href="/travel-blog/israel-holidays/"]')).not.toBeNull();
+    expect(container.querySelector("#event-planner")).toBeNull();
+    expect(container.querySelector("#confirmed-events")).toBeNull();
+    expect(container.querySelector("#annual-festivals")).toBeNull();
+    expect(within(container).queryByRole("heading", {name:"Upcoming confirmed events"})).toBeNull();
   });
 
 });
