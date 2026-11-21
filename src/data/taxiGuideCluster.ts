@@ -70,7 +70,7 @@ export const taxiGuideCluster: Record<"taxis" | "taxiFares" | "airportTaxis", Tr
           "A private transfer is booked in advance, usually with an agreed vehicle, pickup point and price. Check what is included and when the arrangement becomes a confirmed reservation.",
         ],
         inlineLinks: [{ text: "Uber, Gett and Yango guide", to: travelGuidePaths.uber }],
-        links: [{ label: "Private driver for a planned trip", to: "/private-driver/" }],
+        links: [{ label: "Private driver for a planned trip", to: "/private-driver-in-israel/" }],
         sourceIds: ["guide-gett", "taxi-passenger-rights"],
       },
       {
@@ -118,10 +118,10 @@ export const taxiGuideCluster: Record<"taxis" | "taxiFares" | "airportTaxis", Tr
         inlineLinks: [
           { text: "airport taxi guide", to: travelGuidePaths.airportTaxis },
           { text: "Ben Gurion Airport arrival guide", to: travelGuidePaths.arrival },
-          { text: "Tel Aviv", to: "/travel-blog/how-to-get-from-ben-gurion-airport-to-tel-aviv/" },
-          { text: "Jerusalem", to: "/travel-blog/how-to-get-from-ben-gurion-airport-to-jerusalem/" },
-          { text: "Haifa", to: "/travel-blog/how-to-get-from-ben-gurion-airport-to-haifa/" },
-          { text: "Ein Bokek", to: "/travel-blog/how-to-get-from-ben-gurion-airport-to-ein-bokek/" },
+          { text: "Tel Aviv", to: "/travel-blog/ben-gurion-airport-to-tel-aviv/" },
+          { text: "Jerusalem", to: "/travel-blog/ben-gurion-airport-to-jerusalem/" },
+          { text: "Haifa", to: "/travel-blog/ben-gurion-airport-to-haifa/" },
+          { text: "Ein Bokek", to: "/travel-blog/ben-gurion-airport-to-ein-bokek/" },
           { text: "request a private airport transfer quote", to: "/airport-transfers/" },
         ],
         sourceIds: ["guide-gett", "guide-iaa", "taxi-fares-2026"],
@@ -162,7 +162,7 @@ export const taxiGuideCluster: Record<"taxis" | "taxiFares" | "airportTaxis", Tr
           "Not every taxi has a child seat. Arrange the right seat before travelling. Ask the operator about the exact seat required and confirm provision ahead of the journey. If you need a wheelchair-accessible taxi, confirm the vehicle and boarding arrangements in advance.",
           "For larger groups, special equipment or remote destinations, booking ahead is usually easier.",
         ],
-        links: [{ label: "Arrange a vehicle for a planned private journey", to: "/private-driver/" }],
+        links: [{ label: "Arrange a vehicle for a planned private journey", to: "/private-driver-in-israel/" }],
       },
       {
         id: "intercity", title: "Long-Distance Taxis and Remote Destinations",
@@ -178,7 +178,7 @@ export const taxiGuideCluster: Record<"taxis" | "taxiFares" | "airportTaxis", Tr
           { text: "Jerusalem to Bethlehem guide", to: travelGuidePaths.bethlehem },
           { text: "Jerusalem to the Dead Sea guide", to: travelGuidePaths.jerusalemDeadSea },
         ],
-        links: [{ label: "Arrange a private driver for a longer trip", to: "/private-driver/" }],
+        links: [{ label: "Arrange a private driver for a longer trip", to: "/private-driver-in-israel/" }],
       },
       {
         id: "safety", title: "Taxi Safety and Common Mistakes to Avoid",
@@ -220,7 +220,7 @@ export const taxiGuideCluster: Record<"taxis" | "taxiFares" | "airportTaxis", Tr
     ],
     sourceIds: ["guide-gett", "guide-iaa", "taxi-fares-2026", "taxi-tariff-hours", "taxi-passenger-rights", "taxi-complaints"],
     related: ["taxiFares", "airportTaxis", "uber", "sherut", "shabbat", "israel"],
-    services: [{ label: "Request a quote for a pre-booked airport transfer", to: "/airport-transfers/" }, { label: "Arrange a private driver for a day trip", to: "/private-driver/" }],
+    services: [{ label: "Request a quote for a pre-booked airport transfer", to: "/airport-transfers/" }, { label: "Arrange a private driver for a day trip", to: "/private-driver-in-israel/" }],
   },
 
   taxiFares: {
@@ -331,10 +331,10 @@ export const taxiGuideCluster: Record<"taxis" | "taxiFares" | "airportTaxis", Tr
         inlineLinks: [
           { text: "taxis in Israel guide", to: travelGuidePaths.taxis },
           { text: "guide to Uber alternatives in Israel", to: travelGuidePaths.uber },
-          { text: "Ben Gurion Airport to Tel Aviv", to: "/travel-blog/how-to-get-from-ben-gurion-airport-to-tel-aviv/" },
-          { text: "Jerusalem", to: "/travel-blog/how-to-get-from-ben-gurion-airport-to-jerusalem/" },
-          { text: "Haifa", to: "/travel-blog/how-to-get-from-ben-gurion-airport-to-haifa/" },
-          { text: "Ein Bokek", to: "/travel-blog/how-to-get-from-ben-gurion-airport-to-ein-bokek/" },
+          { text: "Ben Gurion Airport to Tel Aviv", to: "/travel-blog/ben-gurion-airport-to-tel-aviv/" },
+          { text: "Jerusalem", to: "/travel-blog/ben-gurion-airport-to-jerusalem/" },
+          { text: "Haifa", to: "/travel-blog/ben-gurion-airport-to-haifa/" },
+          { text: "Ein Bokek", to: "/travel-blog/ben-gurion-airport-to-ein-bokek/" },
         ],
         highlightedLinks: [{
           label: "Compare airport transfer options",
@@ -378,7 +378,7 @@ export const taxiGuideCluster: Record<"taxis" | "taxiFares" | "airportTaxis", Tr
     related: ["taxis", "airportTaxis", "uber", "sherut", "shabbat", "arrival"],
     services: [
       { label: "Compare pre-booked airport transfers", to: "/airport-transfers/", note: "Choose a planned airport pickup with a confirmed provider price and meeting point instead of an on-arrival metered taxi." },
-      { label: "Request a private driver quote", to: "/private-driver/", note: "Arrange a longer intercity journey, multi-stop route or group vehicle to suit your itinerary." },
+      { label: "Request a private driver quote", to: "/private-driver-in-israel/", note: "Arrange a longer intercity journey, multi-stop route or group vehicle to suit your itinerary." },
       { label: "Compare car rentals in Israel", to: "/car-rental/", note: "For a multi-day itinerary with stops beyond the main cities, compare rental options and choose a pickup location that suits your route." },
       { label: "Compare trains, buses and taxis around Israel", to: travelGuidePaths.israel, note: "Find less expensive public-transport options and decide when a taxi is worth the extra cost." },
     ],
@@ -513,10 +513,10 @@ export const taxiGuideCluster: Record<"taxis" | "taxiFares" | "airportTaxis", Tr
           "The following destination-specific guides compare the actual transport choices and their limitations. This airport-taxi guide does not reproduce their route comparisons or quote fixed meter prices.",
         ],
         links: [
-          { label: "From Ben Gurion Airport to Tel Aviv", to: "/travel-blog/how-to-get-from-ben-gurion-airport-to-tel-aviv/" },
-          { label: "From Ben Gurion Airport to Jerusalem", to: "/travel-blog/how-to-get-from-ben-gurion-airport-to-jerusalem/" },
-          { label: "From Ben Gurion Airport to Haifa", to: "/travel-blog/how-to-get-from-ben-gurion-airport-to-haifa/" },
-          { label: "From Ben Gurion Airport to Ein Bokek", to: "/travel-blog/how-to-get-from-ben-gurion-airport-to-ein-bokek/" },
+          { label: "From Ben Gurion Airport to Tel Aviv", to: "/travel-blog/ben-gurion-airport-to-tel-aviv/" },
+          { label: "From Ben Gurion Airport to Jerusalem", to: "/travel-blog/ben-gurion-airport-to-jerusalem/" },
+          { label: "From Ben Gurion Airport to Haifa", to: "/travel-blog/ben-gurion-airport-to-haifa/" },
+          { label: "From Ben Gurion Airport to Ein Bokek", to: "/travel-blog/ben-gurion-airport-to-ein-bokek/" },
         ],
       },
       {

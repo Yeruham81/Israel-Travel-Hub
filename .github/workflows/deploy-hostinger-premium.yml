@@ -237,6 +237,53 @@ jobs:
           test -s attractions/eilat/index.html
           REMOTE
 
+      - name: Preserve original airport guide and private driver URLs
+        if: steps.freshness.outputs.current == 'true' && env.DRY_RUN != 'true'
+        shell: bash
+        run: |
+          set -euo pipefail
+          # Move only the five superseded staging documents outside the webroot.
+          # Require their restored replacements first; do not install redirects.
+          for city in jerusalem tel-aviv haifa ein-bokek; do
+            test -s ".output/public/travel-blog/ben-gurion-airport-to-$city/index.html"
+            test ! -e ".output/public/travel-blog/how-to-get-from-ben-gurion-airport-to-$city/index.html"
+          done
+          test -s .output/public/private-driver-in-israel/index.html
+          test ! -e .output/public/private-driver/index.html
+          BACKUP_DIR="$(dirname "$HOSTINGER_REMOTE_PATH")/cms-static-backups/$GITHUB_RUN_ID/restored-original-urls"
+          ssh -p "$HOSTINGER_SSH_PORT" -i "$HOME/.ssh/hostinger_deploy" -o BatchMode=yes -o StrictHostKeyChecking=yes -o UserKnownHostsFile="$HOME/.ssh/known_hosts" \
+            "$HOSTINGER_SSH_USER@$HOSTINGER_SSH_HOST" \
+            "HOSTINGER_REMOTE_PATH='$HOSTINGER_REMOTE_PATH' BACKUP_DIR='$BACKUP_DIR' sh -s" <<'REMOTE'
+          set -eu
+          cd "$HOSTINGER_REMOTE_PATH"
+          test -f .ith-static-deploy-ok
+          test -d travel-blog
+          test ! -L travel-blog
+          for retired in \
+            travel-blog/how-to-get-from-ben-gurion-airport-to-jerusalem \
+            travel-blog/how-to-get-from-ben-gurion-airport-to-tel-aviv \
+            travel-blog/how-to-get-from-ben-gurion-airport-to-haifa \
+            travel-blog/how-to-get-from-ben-gurion-airport-to-ein-bokek \
+            private-driver; do
+            case "$retired" in
+              private-driver) retained=private-driver-in-israel ;;
+              *) retained="travel-blog/${retired#travel-blog/how-to-get-from-}" ;;
+            esac
+            test ! -L "$retained"
+            test ! -L "$retained/index.html"
+            test -s "$retained/index.html"
+            test ! -L "$retired"
+            test ! -L "$retired/index.html"
+            if [ -f "$retired/index.html" ]; then
+              umask 077
+              mkdir -p "$BACKUP_DIR/$retired"
+              mv "$retired/index.html" "$BACKUP_DIR/$retired/index.html"
+            fi
+            rmdir "$retired" 2>/dev/null || true
+            test ! -e "$retired/index.html"
+          done
+          REMOTE
+
       - name: Retire exact old accommodation HTML pages without redirects
         if: steps.freshness.outputs.current == 'true' && env.DRY_RUN != 'true'
         shell: bash

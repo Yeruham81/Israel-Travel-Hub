@@ -40,7 +40,7 @@ export function OwnerTourSection({ tours, compact = false }: { tours: TourProduc
           </dl>
           <p className="mt-3 text-xs text-primary">{tour.destinationIds.map(placeLabel).join(" · ")}</p>
           <div className="mt-auto pt-4"><div className="border-t pt-4">{tour.price ? <><PriceDisplay amount={tour.price.amount} /><p className="mt-2 text-xs text-muted-foreground">Per vehicle · up to {tour.price.maxPartySize} · transport only</p></> : <><p className="text-lg font-semibold">Personal quote for your itinerary</p><p className="mt-1 text-xs text-muted-foreground">Route, vehicle and full price agreed before booking</p></>}</div>
-            <Link to="/private-driver/" search={{ tour: tour.id }} hash="request-quote" className="btn btn-primary mt-4 w-full" aria-label={`Request a quote for ${tour.title}`}>Request this day trip</Link>
+            <Link to="/private-driver-in-israel/" search={{ tour: tour.id }} hash="request-quote" className="btn btn-primary mt-4 w-full" aria-label={`Request a quote for ${tour.title}`}>Request this day trip</Link>
           </div>
         </article>
       </li>)}

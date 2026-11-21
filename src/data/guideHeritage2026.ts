@@ -221,7 +221,7 @@ export const heritageGuides = {
       },
       {
         "label": "Plan a private lakeside journey",
-        "to": "/private-driver/"
+        "to": "/private-driver-in-israel/"
       }
     ],
     "sourceIds": [
@@ -377,7 +377,7 @@ export const heritageGuides = {
       },
       {
         "label": "Arrange transport for a pilgrimage route",
-        "to": "/private-driver/"
+        "to": "/private-driver-in-israel/"
       }
     ],
     "sourceIds": [
@@ -525,7 +525,7 @@ export const heritageGuides = {
     "services": [
       {
         "label": "Discuss a regional private journey",
-        "to": "/private-driver/"
+        "to": "/private-driver-in-israel/"
       },
       {
         "label": "Masada and Dead Sea tours",

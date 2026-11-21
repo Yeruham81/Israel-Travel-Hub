@@ -18,7 +18,7 @@ const enquiry: QuoteRequest = { kind: "contact", fields: { name: contact.name, e
 const payload = (request: QuoteRequest = transfer): QuoteRequestPayload => ({
   requestId: randomUUID(), website: "", request,
   ...(request.kind === "transfer" ? { sourcePath: "/airport-transfers/", sourceTitle: "Airport transfers" }
-    : request.kind === "driver" ? { sourcePath: "/private-driver/", sourceTitle: "Private driver in Israel" }
+    : request.kind === "driver" ? { sourcePath: "/private-driver-in-israel/", sourceTitle: "Private driver in Israel" }
       : request.kind === "contact" ? { sourcePath: "/about-moshe-barak/", sourceTitle: "About Moshe Barak" }
       : { sourcePath: `/${request.portId}-shore-excursions/`, sourceTitle: `${request.portId === "haifa" ? "Haifa" : "Ashdod"} shore excursions: private day trips & prices` }),
 });
@@ -153,7 +153,7 @@ describe("server-side quote delivery", () => {
     expect((await second).status).toBe(200);
     expect((await handle(post(data))).status).toBe(200);
     expect(send).toHaveBeenCalledTimes(1);
-    expect((await handle(post({ ...data, sourcePath: "/private-driver/" }))).status).toBe(409);
+    expect((await handle(post({ ...data, sourcePath: "/private-driver-in-israel/" }))).status).toBe(409);
   });
 
   it("does not claim success, leak provider errors, or retry an ambiguous failed attempt", async () => {

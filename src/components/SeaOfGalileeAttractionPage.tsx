@@ -174,7 +174,7 @@ export const seaOfGalileeDestinationContent: AttractionDestinationContent = {
       <article className="rounded-xl border bg-card p-4">
         <h3 className="flex items-center gap-2 font-serif text-lg font-semibold"><CarFront className="size-5 text-primary" aria-hidden="true" />By car or private driver</h3>
         <p className="mt-2 text-sm leading-relaxed">A car gives the most flexibility for the northern heritage sites, beaches and eastern shore. Approaches from the centre of Israel generally use Route 6 or other northbound highways, with Routes 77, 90 and 92 around the lake depending on the destination.</p>
-        <p className="mt-2 text-sm leading-relaxed">Leave time for traffic and site opening hours. A <Link to="/private-driver/" className={inlineLink}>private driver</Link> can be practical for a full-day route with several stops.</p>
+        <p className="mt-2 text-sm leading-relaxed">Leave time for traffic and site opening hours. A <Link to="/private-driver-in-israel/" className={inlineLink}>private driver</Link> can be practical for a full-day route with several stops.</p>
         <div className="mt-2"><External href={maps.tiberias}>Directions to Tiberias</External></div>
       </article>
       <article className="rounded-xl border bg-card p-4">
@@ -273,7 +273,7 @@ export const seaOfGalileeDestinationContent: AttractionDestinationContent = {
     { label: "Jordan River baptism sites", to: "/travel-blog/baptism-in-the-jordan-river/", icon: "region", description: "Compare Yardenit with other baptism sites" },
     { label: "Getting around Israel", to: "/travel-blog/getting-around-israel/", icon: "transport", description: "Plan connections and bus journeys" },
     { label: "Best time to visit Israel", to: "/travel-blog/best-time-to-visit-israel/", icon: "seasons", description: "Weather, heat and seasonal planning" },
-    { label: "Private driver in Israel", to: "/private-driver/", icon: "itinerary", description: "Arrange flexible road transport" },
+    { label: "Private driver in Israel", to: "/private-driver-in-israel/", icon: "itinerary", description: "Arrange flexible road transport" },
   ],
   sources: [
     { label: "Kinneret Cities Association — official beach directory", url: sources.beaches },

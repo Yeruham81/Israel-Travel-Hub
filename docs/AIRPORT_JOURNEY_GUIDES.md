@@ -3,12 +3,14 @@
 Initial implementation: 18 October 2026; editorial/SEO and link review: **22 October 2026**. Scope: four informational routes with shared rendering, separate from the existing private airport transfer landings. On 22 October, `AirportRoutePage.tsx` was updated to link back to each informational comparison without changing private offer data, quote forms or page slugs.
 
 ## Canonical / intent split
-| Informational journey comparison (new, broad query) | Private-transfer landing (unchanged, commercial query) |
+
+Updated 22 November 2026: retain the original informational guide URLs. Titles may use “How to get” without renaming existing paths. Private-transfer pages remain separate under `/airport-transfers/`.
+| Informational journey comparison (original URL) | Private-transfer landing (commercial query) |
 |---|---|
-| /travel-blog/how-to-get-from-ben-gurion-airport-to-jerusalem/ | /travel-blog/ben-gurion-airport-to-jerusalem/ |
-| /travel-blog/how-to-get-from-ben-gurion-airport-to-tel-aviv/ | /travel-blog/ben-gurion-airport-to-tel-aviv/ |
-| /travel-blog/how-to-get-from-ben-gurion-airport-to-haifa/ | /travel-blog/ben-gurion-airport-to-haifa/ |
-| /travel-blog/how-to-get-from-ben-gurion-airport-to-ein-bokek/ | /travel-blog/ben-gurion-airport-to-ein-bokek/ |
+| /travel-blog/ben-gurion-airport-to-jerusalem/ | /airport-transfers/jerusalem/ |
+| /travel-blog/ben-gurion-airport-to-tel-aviv/ | /airport-transfers/tel-aviv/ |
+| /travel-blog/ben-gurion-airport-to-haifa/ | /airport-transfers/haifa/ |
+| /travel-blog/ben-gurion-airport-to-ein-bokek/ | /airport-transfers/ein-bokek/ |
 
 New H1/title: **How to get from...** with train/bus/taxi alternatives. Old H1/title: **Private transfer...** with personal quote. Each has its own self-canonical through `pageMeta()`. Neither type is canonicalized to the other. Broad guides link to the appropriate private landing at #request-quote in two differentiated CTA boxes and the private option section, while honestly describing price basis and unsent draft. Nav and guide directory feature the new routes, without rewriting the private-landing copy.
 

@@ -4,7 +4,7 @@ import { act, cleanup, fireEvent, render, screen, waitFor, within } from "@testi
 import { afterEach, describe, expect, it } from "vitest";
 import type { ComponentType } from "react";
 import { Route as TransfersRoute } from "@/routes/airport-transfers.index";
-import { Route as DriverRoute } from "@/routes/private-driver";
+import { Route as DriverRoute } from "@/routes/private-driver-in-israel";
 import { Route as JerusalemRoute } from "@/routes/airport-transfers.jerusalem";
 import { Route as TelAvivRoute } from "@/routes/airport-transfers.tel-aviv";
 import { airportTransferRates, airportTransferRoutes, linksForPage } from "@/data/registry";
@@ -61,8 +61,8 @@ describe("airport transfers and private driver separation", () => {
   });
 
   it("places intercity/day hire and its inline inquiry on the independent private-driver route", async () => {
-    const { container, router } = await renderPage("/private-driver/", DriverRoute.options.component!);
-    expect(router.matchRoutes("/private-driver/").at(-1)?.routeId).toBe("/private-driver");
+    const { container, router } = await renderPage("/private-driver-in-israel/", DriverRoute.options.component!);
+    expect(router.matchRoutes("/private-driver-in-israel/").at(-1)?.routeId).toBe("/private-driver-in-israel");
     expect(screen.getByRole("heading", { level: 1 })).toHaveTextContent("Private driver in Israel");
     expect(screen.getByRole("heading", { name: "Choose the journey that suits you" })).toBeInTheDocument();
     const benefits = screen.getByRole("region", { name: "A journey planned around you" });
@@ -76,7 +76,7 @@ describe("airport transfers and private driver separation", () => {
     expect(linksForPage("private-driver").map((link) => link.id)).toEqual(["private-driver-moshe"]);
     expect(linksForPage("transfers-hub")).toEqual([]);
     const head = await DriverRoute.options.head?.({} as never);
-    expect(head).toMatchObject({ meta: expect.arrayContaining([{ name: "robots", content: "noindex,nofollow" }]), links: [{ rel: "canonical", href: expect.stringMatching(/\/private-driver\/$/) }] });
+    expect(head).toMatchObject({ meta: expect.arrayContaining([{ name: "robots", content: "noindex,nofollow" }]), links: [{ rel: "canonical", href: expect.stringMatching(/\/private-driver-in-israel\/$/) }] });
   });
 
   it("uses Airport transfers in the airport and city-guide breadcrumb metadata", async () => {

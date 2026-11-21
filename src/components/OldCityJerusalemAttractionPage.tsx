@@ -274,7 +274,7 @@ export const oldCityJerusalemDestinationContent: AttractionDestinationContent = 
     { label: "Churches in Jerusalem", to: "/travel-blog/churches-in-jerusalem/", description: "A more detailed Christian pilgrimage route.", icon: "region" },
     { label: "Shopping in Jerusalem", to: "/travel-blog/shopping-in-jerusalem/", description: "Historic souks and city markets.", icon: "region" },
     { label: "Where to stay in Jerusalem", to: "/travel-blog/where-to-stay-in-jerusalem/", description: "Choose a hotel area and an arrival route.", icon: "region" },
-    { label: "Ben Gurion Airport to Jerusalem", to: "/travel-blog/how-to-get-from-ben-gurion-airport-to-jerusalem/", description: "Compare rail, road and transfer options.", icon: "arrival" },
+    { label: "Ben Gurion Airport to Jerusalem", to: "/travel-blog/ben-gurion-airport-to-jerusalem/", description: "Compare rail, road and transfer options.", icon: "arrival" },
     { label: "3-day Israel itinerary", to: "/travel-blog/israel-itinerary-3-days/", description: "Fit Jerusalem into a short visit.", icon: "itinerary" },
   ],
   sources: [

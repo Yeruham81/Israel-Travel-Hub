@@ -111,7 +111,7 @@ export const allNavGroups: NavGroup[] = [
     title: "Transportation",
     items: [
       airportTransferNav,
-      { label: "Private driver service", to: "/private-driver/" },
+      { label: "Private driver service", to: "/private-driver-in-israel/" },
       { label: "Rent a car in Israel", to: "/car-rental/" },
     ],
   },
@@ -147,10 +147,10 @@ export const allNavGroups: NavGroup[] = [
         { label: "Israel in 10 days", to: "/travel-blog/israel-itinerary-10-days/" },
       ] },
       { label: "From Ben Gurion Airport", headingOnly: true, childrenLabel: "Ben Gurion Airport arrival guides", children: [
-        { label: "How to get to Jerusalem", to: "/travel-blog/how-to-get-from-ben-gurion-airport-to-jerusalem/" },
-        { label: "How to get to Tel Aviv", to: "/travel-blog/how-to-get-from-ben-gurion-airport-to-tel-aviv/" },
-        { label: "How to get to Haifa", to: "/travel-blog/how-to-get-from-ben-gurion-airport-to-haifa/" },
-        { label: "How to get to Ein Bokek", to: "/travel-blog/how-to-get-from-ben-gurion-airport-to-ein-bokek/" },
+        { label: "How to get to Jerusalem", to: "/travel-blog/ben-gurion-airport-to-jerusalem/" },
+        { label: "How to get to Tel Aviv", to: "/travel-blog/ben-gurion-airport-to-tel-aviv/" },
+        { label: "How to get to Haifa", to: "/travel-blog/ben-gurion-airport-to-haifa/" },
+        { label: "How to get to Ein Bokek", to: "/travel-blog/ben-gurion-airport-to-ein-bokek/" },
       ] },
 
       { label: "Where to stay guides", headingOnly: true, childrenLabel: "Accommodation planning guides", children: [

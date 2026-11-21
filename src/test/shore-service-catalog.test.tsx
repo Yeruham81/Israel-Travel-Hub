@@ -97,7 +97,7 @@ describe("port service catalog", () => {
   });
 
   it.each(["haifa", "ashdod"] as ShorePortId[])("preserves existing $port transfer inquiry links outside the excursion catalog", async (port) => {
-    await pageAt(`/private-driver/?port=${port}&transfer=airport#request-quote`);
+    await pageAt(`/private-driver-in-israel/?port=${port}&transfer=airport#request-quote`);
     expect(screen.getByLabelText("Type of journey *")).toHaveValue("intercity");
     expect(screen.getByLabelText("Pickup city, hotel or address *")).toHaveValue("");
     expect(screen.getByLabelText("Final drop-off *")).toHaveValue("");
@@ -109,7 +109,7 @@ describe("port service catalog", () => {
   it("requires both valid transfer parameters and leaves an unknown hotel address for the traveler", async () => {
     expect(parsePortTransferSearch({ port: "haifa", transfer: "unknown" })).toEqual({});
     expect(parsePortTransferSearch({ port: "unknown", transfer: "airport" })).toEqual({});
-    await pageAt("/private-driver/?port=ashdod&transfer=city");
+    await pageAt("/private-driver-in-israel/?port=ashdod&transfer=city");
     expect(screen.getByLabelText("Pickup city, hotel or address *")).toHaveValue("");
     expect(screen.getByLabelText("Final drop-off *")).toHaveValue("");
   });

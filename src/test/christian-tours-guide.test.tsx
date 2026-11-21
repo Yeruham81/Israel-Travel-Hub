@@ -72,6 +72,6 @@ describe("Christian tours in Israel editorial guide",()=>{
     const images=christianAreas.map(a=>a.image).concat(christianOffers.map(o=>o.image),christianSiteCards.map(x=>x.image),christianPlanningCards.map(x=>x.image),[travelGuides.christianTours.photo.src]);
     expect(new Set(images).size).toBe(images.length);
     expect(christianSiteCards.some(c=>c.title==="Visiting Bethlehem from Jerusalem")).toBe(true);
-    expect(christianPlanningCards.find(c=>c.to==="/private-driver/")?.alt).toMatch(/private transport/);
+    expect(christianPlanningCards.find(c=>c.to==="/private-driver-in-israel/")?.alt).toMatch(/private transport/);
   });
 });

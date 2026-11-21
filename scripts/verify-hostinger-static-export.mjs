@@ -35,6 +35,22 @@ for (const value of urlStrings) {
   assert(existsSync(file), `Missing prerendered HTML for ${url.pathname}`);
   assert(statSync(file).size > 300, `Suspiciously empty HTML for ${url.pathname}`);
 }
+// Preserve established public URLs; titles do not require new slugs.
+const preservedRoutes = [
+  ...["jerusalem", "tel-aviv", "haifa", "ein-bokek"].map(city => [
+    `/travel-blog/ben-gurion-airport-to-${city}/`,
+    `/travel-blog/how-to-get-from-ben-gurion-airport-to-${city}/`,
+  ]),
+  ["/private-driver-in-israel/", "/private-driver/"],
+];
+for (const [retained, retired] of preservedRoutes) {
+  assert(paths.has(retained), `Established URL missing from sitemap: ${retained}`);
+  assert(!paths.has(retired), `Unnecessary renamed URL in sitemap: ${retired}`);
+  assert(!existsSync(join(root, retired, "index.html")), `Retired staging HTML exported: ${retired}`);
+  const html = readFileSync(join(root, retained, "index.html"), "utf8");
+  assert(html.includes(`rel="canonical" href="${origin}${retained}"`), `Missing self-canonical: ${retained}`);
+}
+
 // Eilat is one destination attraction, not an independent travel-blog article.
 const retiredEilatGuidePath = "/travel-blog/" + "eilat/";
 assert(paths.has("/attractions/eilat/"), "Eilat attraction page missing from sitemap");

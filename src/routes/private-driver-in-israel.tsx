@@ -11,15 +11,15 @@ import { pageMeta } from "@/lib/site";
 import { portTransferPrefill } from "@/lib/shore-services";
 import { parsePrivateDriverSearch, privateTourPrefill } from "@/lib/private-driver-search";
 
-export const Route = createFileRoute("/private-driver")({
+export const Route = createFileRoute("/private-driver-in-israel")({
   validateSearch: parsePrivateDriverSearch,
   head: () => pageMeta({
     title: "Private driver in Israel: intercity transfers and day hire",
     description: "Hire a private driver in Israel for hotel-to-hotel journeys, full-day itineraries and multiple stops. Share your route and request a written quote.",
-    path: "/private-driver/",
+    path: "/private-driver-in-israel/",
     image: privateDriverHero.src,
     imageAlt: privateDriverHero.alt,
-    crumbs: [{ name: "Home", path: "/" }, { name: "Private driver", path: "/private-driver/" }],
+    crumbs: [{ name: "Home", path: "/" }, { name: "Private driver", path: "/private-driver-in-israel/" }],
   }),
   component: PrivateDriver,
 });
@@ -48,7 +48,7 @@ function PrivateDriverContent({ transfer }: { transfer: ReturnType<typeof parseP
 
   return <main className="pb-12" data-testid="private-driver-page">
     <HubHeader
-      crumbs={[{ name: "Home", to: "/" }, { name: "Private driver", to: "/private-driver/" }]}
+      crumbs={[{ name: "Home", to: "/" }, { name: "Private driver", to: "/private-driver-in-israel/" }]}
       eyebrow="Travel at your own pace"
       title="Private driver in Israel"
       intro="From hotel-to-hotel transfers to a full day exploring Israel, I'll help arrange a private driver around your route and group. Tell me what you have in mind, and I'll prepare a personal quote."

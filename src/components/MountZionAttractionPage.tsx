@@ -216,7 +216,7 @@ export const mountZionDestinationContent: AttractionDestinationContent = {
     { label: "Churches in Jerusalem", to: "/travel-blog/churches-in-jerusalem/", description: "Explore nearby pilgrimage sites.", icon: "region" },
     { label: "Jerusalem tours", to: "/tours/jerusalem/", description: "Browse guided experiences around the city.", icon: "region" },
     { label: "Where to stay in Jerusalem", to: "/travel-blog/where-to-stay-in-jerusalem/", description: "Choose a base for sightseeing.", icon: "region" },
-    { label: "Ben Gurion Airport to Jerusalem", to: "/travel-blog/how-to-get-from-ben-gurion-airport-to-jerusalem/", description: "Compare train, taxi and transfer options.", icon: "arrival" },
+    { label: "Ben Gurion Airport to Jerusalem", to: "/travel-blog/ben-gurion-airport-to-jerusalem/", description: "Compare train, taxi and transfer options.", icon: "arrival" },
     { label: "3-day Israel itinerary", to: "/travel-blog/israel-itinerary-3-days/", description: "See how Jerusalem fits into a shorter trip.", icon: "itinerary" },
   ],
   photoCredits: <p>

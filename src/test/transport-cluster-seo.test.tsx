@@ -127,7 +127,7 @@ describe("transport cluster: twelve editorial guides and four private landings",
     expect(guide.sections.filter(section => (section.inlineLinks?.length || 0) > 0).length).toBeGreaterThanOrEqual(5);
     expect(guide.faqs).toHaveLength(15);
     expect(guide.sections.find(section => section.id === "national-rail")?.inlineLinks).toEqual(expect.arrayContaining([
-      { text: "Ben Gurion Airport to Tel Aviv guide", to: "/travel-blog/how-to-get-from-ben-gurion-airport-to-tel-aviv/" },
+      { text: "Ben Gurion Airport to Tel Aviv guide", to: "/travel-blog/ben-gurion-airport-to-tel-aviv/" },
     ]));
   });
 });

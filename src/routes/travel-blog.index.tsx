@@ -22,7 +22,7 @@ const exploreLinks = [
   { title: "Shore excursions", description: "Discover Israel's highlights from Ashdod or Haifa cruise ports.", to: "/shore-excursions/", action: "View excursions", photo: { src: shorePhoto, alt: "Cruise ship at an Israeli Mediterranean port" } },
   { title: "Airport transfers", description: "Arrange a comfortable private pickup from Ben Gurion Airport.", to: "/airport-transfers/", action: "Explore transfers", photo: { src: airportPhoto, alt: "Aircraft at Ben Gurion Airport terminal" } },
   { title: "Where to stay", description: "Choose a hotel area that fits your itinerary and travel style.", to: "/accommodation/", action: "Find accommodation", photo: { src: accommodationPhoto, alt: "Comfortable hotel room ready for guests" } },
-  { title: "Private driver", description: "Enjoy a flexible day of sightseeing with your own driver.", to: "/private-driver/", action: "Plan a private day", photo: { src: driverPhoto, alt: "Scenic drive through the Israeli countryside" } },
+  { title: "Private driver", description: "Enjoy a flexible day of sightseeing with your own driver.", to: "/private-driver-in-israel/", action: "Plan a private day", photo: { src: driverPhoto, alt: "Scenic drive through the Israeli countryside" } },
 ] as const;
 
 const tripPlanningLinks = [

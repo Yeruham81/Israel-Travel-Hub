@@ -59,7 +59,7 @@ const planning=[
  {title:"5 days in Israel",to:"/travel-blog/israel-itinerary-5-days/" as const,description:"Add a city visit or a day excursion",image:fiveDays,alt:"Coastal ruins of Caesarea"},
  {title:"7 days in Israel",to:"/travel-blog/israel-itinerary-7-days/" as const,description:"Explore a broader range of regions",image:sevenDays,alt:"Sea of Galilee landscape"},
  {title:"10 days in Israel",to:"/travel-blog/israel-itinerary-10-days/" as const,description:"Plan a more extensive Israel route",image:tenDays,alt:"Mountains near Eilat"},
- {title:"Ben Gurion Airport to Tel Aviv",to:"/travel-blog/how-to-get-from-ben-gurion-airport-to-tel-aviv/" as const,description:"Train, bus and private transfer options",image:railPhoto,alt:"Rail platform at Ben Gurion Airport"},
+ {title:"Ben Gurion Airport to Tel Aviv",to:"/travel-blog/ben-gurion-airport-to-tel-aviv/" as const,description:"Train, bus and private transfer options",image:railPhoto,alt:"Rail platform at Ben Gurion Airport"},
  {title:"Best time to visit Israel",to:"/travel-blog/best-time-to-visit-israel/" as const,description:"Compare seasons and weather",image:seasonPhoto,alt:"Landscape showing a season in Israel"}
 ];
 const affiliateTours=[
@@ -288,7 +288,7 @@ export function TelAvivAttractionsGuide(){
       <div className="rounded-xl border bg-card p-5"><BedDouble aria-hidden className="h-5 w-5 text-primary"/><h3 className="mt-2 font-bold">Stay in a convenient area</h3><p className="mt-2 text-sm leading-relaxed">A hotel near the central beach or one of the walkable districts can simplify sightseeing. Compare neighbourhoods with my <Link to="/travel-blog/where-to-stay-in-tel-aviv/" className="font-semibold text-primary hover:underline">Tel Aviv accommodation guide</Link>.</p></div>
     </div>
   </section>
-  <div className="mt-5"><Tip>For arrivals from Ben Gurion Airport, check the correct railway station, luggage access and final connection. My <Link to="/travel-blog/how-to-get-from-ben-gurion-airport-to-tel-aviv/" className="font-semibold text-primary hover:underline">airport-to-Tel Aviv guide</Link> compares the main options.</Tip></div>
+  <div className="mt-5"><Tip>For arrivals from Ben Gurion Airport, check the correct railway station, luggage access and final connection. My <Link to="/travel-blog/ben-gurion-airport-to-tel-aviv/" className="font-semibold text-primary hover:underline">airport-to-Tel Aviv guide</Link> compares the main options.</Tip></div>
   <Tours/>
   <FaqList faqs={telAvivFaqs}/>
   <section id="explore-more" aria-labelledby="explore-more-h" className="mt-12 scroll-mt-24">

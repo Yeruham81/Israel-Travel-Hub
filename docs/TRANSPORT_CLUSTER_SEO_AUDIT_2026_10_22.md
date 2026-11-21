@@ -16,10 +16,10 @@ This cluster contains **12 informational guides** (eight general/taxi guides and
 | `/travel-blog/from-ben-gurion-airport-on-shabbat/` | What changes for an airport arrival during Shabbat/holidays | Preserve the distinction between limited Terminal 1 line 711 and other modes |
 | `/travel-blog/getting-around-israel/` | National multi-mode transportation overview, tickets and journey planning | Link to local/tariff/airport specialist pages for detail |
 | `/travel-blog/getting-around-tel-aviv/` | City walking, buses, Red Line, mainline rail, local weekend network | Do not compete with dedicated airport-to-Tel Aviv route comparison |
-| `/travel-blog/how-to-get-from-ben-gurion-airport-to-jerusalem/` | Compare all airport-to-Jerusalem modes and the final hotel leg | Not a booking landing |
-| `/travel-blog/how-to-get-from-ben-gurion-airport-to-tel-aviv/` | Compare all airport-to-Tel Aviv/Jaffa modes and the final hotel leg | Not a booking landing |
-| `/travel-blog/how-to-get-from-ben-gurion-airport-to-haifa/` | Compare all airport-to-Haifa modes, stations and cruise/hill connections | Not a booking landing |
-| `/travel-blog/how-to-get-from-ben-gurion-airport-to-ein-bokek/` | Compare TLV-to-Dead-Sea modes; emphasize Jerusalem rail+bus and hotel stop | Not a booking landing; limited 421 via Tel Aviv is only a short note |
+| `/travel-blog/ben-gurion-airport-to-jerusalem/` | Compare all airport-to-Jerusalem modes and the final hotel leg | Not a booking landing |
+| `/travel-blog/ben-gurion-airport-to-tel-aviv/` | Compare all airport-to-Tel Aviv/Jaffa modes and the final hotel leg | Not a booking landing |
+| `/travel-blog/ben-gurion-airport-to-haifa/` | Compare all airport-to-Haifa modes, stations and cruise/hill connections | Not a booking landing |
+| `/travel-blog/ben-gurion-airport-to-ein-bokek/` | Compare TLV-to-Dead-Sea modes; emphasize Jerusalem rail+bus and hotel stop | Not a booking landing; limited 421 via Tel Aviv is only a short note |
 | `/travel-blog/ben-gurion-airport-to-jerusalem/` | Request a private vehicle, meet-and-greet logistics, price basis and Old City drop-off | Do not reproduce broad rail/bus comparisons |
 | `/travel-blog/ben-gurion-airport-to-tel-aviv/` | Private vehicle to a specific Tel Aviv/Jaffa address | Do not reproduce broad rail/bus comparisons |
 | `/travel-blog/ben-gurion-airport-to-haifa/` | Private vehicle to Haifa hotel/cruise destination | Do not reproduce broad rail/bus comparisons |

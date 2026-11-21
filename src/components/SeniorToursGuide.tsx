@@ -98,7 +98,7 @@ export function SeniorToursGuide(){
     <div className="mt-5"><Tip>Age alone doesn't determine your route. Tell me what you enjoy doing and what makes a day comfortable for you; we can keep sightseeing ambitious where appropriate or plan shorter, gentler visits.</Tip></div>
     <div className="mt-5 flex flex-wrap gap-3">
      <a href="#contact" className="inline-flex min-h-11 items-center gap-2 rounded-lg bg-primary px-5 py-3 text-sm font-semibold text-primary-foreground hover:opacity-90">Ask about my private driver service <ArrowRight className="h-4 w-4" aria-hidden="true"/></a>
-     <Link to="/private-driver/" className="inline-flex min-h-11 items-center gap-2 rounded-lg border px-5 py-3 text-sm font-semibold text-primary hover:bg-secondary">How private day trips work <ArrowUpRight className="h-4 w-4" aria-hidden="true"/></Link>
+     <Link to="/private-driver-in-israel/" className="inline-flex min-h-11 items-center gap-2 rounded-lg border px-5 py-3 text-sm font-semibold text-primary hover:bg-secondary">How private day trips work <ArrowUpRight className="h-4 w-4" aria-hidden="true"/></Link>
     </div>
    </section>
    <OnThisPage sections={sections}/>

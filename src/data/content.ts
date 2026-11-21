@@ -807,7 +807,7 @@ export const deadSeaStayGuide: HotelStayDestination = {
   related: [
     { label: "Masada: plan your visit", to: "/attractions/masada/", note: "Tickets, cable car and practical visit information" },
     { label: "Airport transfer to Ein Bokek", to: "/airport-transfers/ein-bokek/", note: "Arrange your arrival from Ben Gurion Airport" },
-    { label: "Private driver", to: "/private-driver/", note: "Plan hotel transfers and multi-stop days" },
+    { label: "Private driver", to: "/private-driver-in-israel/", note: "Plan hotel transfers and multi-stop days" },
     { label: "Car rental in Israel", to: "/car-rental/" },
     { label: "All accommodation", to: "/accommodation/" },
   ],
@@ -864,7 +864,7 @@ export const tiberiasStayGuide: HotelStayDestination = {
   related: [
     { label: "Tours & day trips", to: "/tours/", note: "Plan outings around the Galilee" },
     { label: "Airport transfers", to: "/airport-transfers/", note: "Arrange your arrival from Ben Gurion Airport" },
-    { label: "Private driver", to: "/private-driver/", note: "Plan hotel transfers and journeys around the Galilee" },
+    { label: "Private driver", to: "/private-driver-in-israel/", note: "Plan hotel transfers and journeys around the Galilee" },
     { label: "Car rental in Israel", to: "/car-rental/" },
     { label: "All accommodation", to: "/accommodation/" },
   ],
@@ -1010,7 +1010,7 @@ export const haifaStayGuide: HotelStayDestination = {
   related: [
     { label: "Shore excursions from Haifa Port", to: "/shore-excursions/haifa/", note: "Plan the day around your ship's schedule" },
     { label: "Airport transfer to Haifa", to: "/airport-transfers/haifa/", note: "Arrange your arrival from Ben Gurion Airport" },
-    { label: "Private driver", to: "/private-driver/", note: "Plan hotel transfers and intercity journeys" },
+    { label: "Private driver", to: "/private-driver-in-israel/", note: "Plan hotel transfers and intercity journeys" },
     { label: "Tours & day trips", to: "/tours/" },
     { label: "Car rental in Israel", to: "/car-rental/" },
     { label: "All accommodation", to: "/accommodation/" },

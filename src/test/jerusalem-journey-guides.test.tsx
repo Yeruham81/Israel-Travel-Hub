@@ -62,7 +62,7 @@ describe("Jerusalem independent day-trip planning guides", () => {
     expect(localTaxi.querySelector("p")?.textContent?.startsWith("An appropriately authorised and insured Palestinian taxi")).toBe(true);
     expect(localTaxi.querySelector("p")).toHaveTextContent("Confirm that both the driver and vehicle are permitted");
     expect(within(localTaxi).queryByRole("link", { name: /Enquire about a legally permitted private journey/ })).not.toBeInTheDocument();
-    expect(localTaxi.querySelector('a[href="/private-driver/"]')).toBeNull();
+    expect(localTaxi.querySelector('a[href="/private-driver-in-israel/"]')).toBeNull();
     expect((container.querySelector("#visit-return") as HTMLElement).querySelectorAll("p")[0]).not.toHaveTextContent("Manger Square");
     expect((container.querySelector("#bethlehem-sites") as HTMLElement)).toHaveTextContent("Manger Square");
     expect(screen.getByTestId("bethlehem-tour-options")).toHaveTextContent("Prices and availability can change");

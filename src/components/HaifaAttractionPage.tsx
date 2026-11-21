@@ -293,7 +293,7 @@ export const haifaDestinationContent: AttractionDestinationContent = {
         <div className="space-y-3">
           <article className="rounded-xl border bg-card p-4">
             <div className="flex items-center gap-2"><TrainFront className="h-5 w-5 text-primary"/><h3 className="font-semibold">Israel Railways and arrival stations</h3></div>
-            <p className="mt-2 text-sm leading-relaxed"><strong>Haifa Center HaShmona</strong> is practical for the Lower City and German Colony; <strong>Hof HaCarmel</strong> is convenient for the southern beaches and onward buses. Bat Galim station serves the western waterfront. Use <a href={official.rail} className={inlineLink} target="_blank" rel="noopener noreferrer">Israel Railways</a> for current service and connections, or read my <Link to="/travel-blog/how-to-get-from-ben-gurion-airport-to-haifa/" className={inlineLink}>airport-to-Haifa guide</Link>.</p>
+            <p className="mt-2 text-sm leading-relaxed"><strong>Haifa Center HaShmona</strong> is practical for the Lower City and German Colony; <strong>Hof HaCarmel</strong> is convenient for the southern beaches and onward buses. Bat Galim station serves the western waterfront. Use <a href={official.rail} className={inlineLink} target="_blank" rel="noopener noreferrer">Israel Railways</a> for current service and connections, or read my <Link to="/travel-blog/ben-gurion-airport-to-haifa/" className={inlineLink}>airport-to-Haifa guide</Link>.</p>
           </article>
           <article className="rounded-xl border bg-card p-4">
             <div className="flex items-center gap-2"><TrainFront className="h-5 w-5 text-primary"/><h3 className="font-semibold">The Carmelit funicular</h3></div>
@@ -395,7 +395,7 @@ export const haifaDestinationContent: AttractionDestinationContent = {
   ],
   planningLinks: [
     { label: "Haifa museums guide", to: "/travel-blog/museums-in-haifa/", description: "Choose a museum by interest and location.", icon: "region" },
-    { label: "How to get to Haifa", to: "/travel-blog/how-to-get-from-ben-gurion-airport-to-haifa/", description: "Airport connections by train, bus and taxi.", icon: "arrival" },
+    { label: "How to get to Haifa", to: "/travel-blog/ben-gurion-airport-to-haifa/", description: "Airport connections by train, bus and taxi.", icon: "arrival" },
     { label: "Hotels in Haifa", to: "/travel-blog/best-hotels-in-haifa/", description: "Compare useful neighbourhoods and properties.", icon: "region" },
     { label: "Haifa & northern coast tours", to: "/tours/caesarea-haifa-acre/", description: "Explore guided visits and regional excursions.", icon: "region" },
     { label: "Getting around Israel", to: "/travel-blog/getting-around-israel/", description: "Understand rail, buses and driving.", icon: "transport" },

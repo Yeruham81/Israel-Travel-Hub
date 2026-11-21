@@ -7,7 +7,7 @@ Updated the existing `/hotels/` accommodation hub. The final page implementation
 - Accommodation: Jerusalem, Tel Aviv, Haifa, Tiberias and the Dead Sea destination guides, plus Eilat's already-existing city guide section `/travel-blog/eilat/#arrival-stay`.
 - Hotel styles: existing Haifa boutique, Jerusalem Downtown, Tel Aviv beachfront, Dead Sea spa, Tiberias family and Tel Aviv Florentin neighborhood guides.
 - Seasons and events: `/travel-blog/best-time-to-visit-israel/` and `/travel-blog/calendar-of-events/`.
-- Arrival: `/travel-blog/ben-gurion-airport-arrival-tips/`, `/travel-blog/from-ben-gurion-airport-on-shabbat/`, the four ALL-MODE `/travel-blog/how-to-get-from-ben-gurion-airport-to-...` destination pages, `/travel-blog/getting-around-israel/`, and `/transfers/`.
+- Arrival: `/travel-blog/ben-gurion-airport-arrival-tips/`, `/travel-blog/from-ben-gurion-airport-on-shabbat/`, the four ALL-MODE `/travel-blog/ben-gurion-airport-to-...` destination pages, `/travel-blog/getting-around-israel/`, and `/transfers/`.
 
 ### Eilat future migration
 The card CTA is **Explore Eilat Hotels**, but there is no dedicated hotel comparison for Eilat yet. It currently opens only the relevant hotel-area planning section in the existing Eilat city guide. When a verified Eilat hotel guide is actually built, update the `accommodationDestinations` Eilat link to its real, tested page and keep its existing destination page intact.

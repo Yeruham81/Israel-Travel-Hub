@@ -317,7 +317,7 @@ describe("migrated practical guides", () => {
     expect(planning.querySelectorAll("img")).toHaveLength(0);
     expect(planning.querySelectorAll("svg")).toHaveLength(6);
     expect(exploreLinks.map(link => link.getAttribute("href"))).toEqual([
-      "/attractions/", "/tours/", "/shore-excursions/", "/airport-transfers/", "/accommodation/", "/private-driver/",
+      "/attractions/", "/tours/", "/shore-excursions/", "/airport-transfers/", "/accommodation/", "/private-driver-in-israel/",
     ]);
     expect(planningLinks.map(link => link.getAttribute("href"))).toEqual([
       travelGuidePaths.travelTips, travelGuidePaths.bestTime, travelGuidePaths.israel,
@@ -652,11 +652,11 @@ describe("migrated practical guides", () => {
       travelGuidePaths.telAviv, travelGuidePaths.taxis, travelGuidePaths.uber,
       travelGuidePaths.taxiFares, travelGuidePaths.sherut, travelGuidePaths.airportTaxis,
       travelGuidePaths.arrival, travelGuidePaths.shabbat, travelGuidePaths.esim,
-      "/car-rental/", "/private-driver/", "/tours/",
-      "/travel-blog/how-to-get-from-ben-gurion-airport-to-tel-aviv/",
-      "/travel-blog/how-to-get-from-ben-gurion-airport-to-jerusalem/",
-      "/travel-blog/how-to-get-from-ben-gurion-airport-to-haifa/",
-      "/travel-blog/how-to-get-from-ben-gurion-airport-to-ein-bokek/",
+      "/car-rental/", "/private-driver-in-israel/", "/tours/",
+      "/travel-blog/ben-gurion-airport-to-tel-aviv/",
+      "/travel-blog/ben-gurion-airport-to-jerusalem/",
+      "/travel-blog/ben-gurion-airport-to-haifa/",
+      "/travel-blog/ben-gurion-airport-to-ein-bokek/",
     ]));
   });
 
@@ -799,8 +799,8 @@ describe("migrated practical guides", () => {
     expect(sherut.sections.find(section => section.id === "official-taxi")?.paragraphs.join(" ")).not.toContain("without repeating those details here");
     const destinations = sherut.sections.find(section => section.id === "where-to-go")!;
     expect(destinations.inlineLinks?.map(link => link.to)).toEqual([
-      "/travel-blog/how-to-get-from-ben-gurion-airport-to-jerusalem/",
-      "/travel-blog/how-to-get-from-ben-gurion-airport-to-haifa/",
+      "/travel-blog/ben-gurion-airport-to-jerusalem/",
+      "/travel-blog/ben-gurion-airport-to-haifa/",
       travelGuidePaths.shabbat,
     ]);
     expect(destinations.tables?.[0]?.rows.find(row => row[0] === "Dead Sea / Ein Bokek")?.[1]).toContain("Train and bus via Jerusalem");
@@ -858,7 +858,7 @@ describe("migrated practical guides", () => {
       travelGuidePaths.israel, travelGuidePaths.telAviv,
     ]);
     expect(guide.sections.find((s) => s.id === "where-to-go")!.inlineLinks?.map((link) => link.to)).toEqual([
-      "/travel-blog/how-to-get-from-ben-gurion-airport-to-jerusalem/", "/travel-blog/how-to-get-from-ben-gurion-airport-to-haifa/", travelGuidePaths.shabbat,
+      "/travel-blog/ben-gurion-airport-to-jerusalem/", "/travel-blog/ben-gurion-airport-to-haifa/", travelGuidePaths.shabbat,
     ]);
     expect(guide.sections.find((s) => s.id === "local-sherut")!.paragraphs.join(" ")).toMatch(/pay separately.*Shabbat/s);
     expect(guide.services.map((item) => item.to)).toEqual([

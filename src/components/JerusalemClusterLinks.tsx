@@ -18,7 +18,7 @@ export const jerusalemConnections: Record<JerusalemClusterKey, Destination[]> = 
     L("Shopping and markets", "/travel-blog/shopping-in-jerusalem/", "Mahane Yehuda, Old City crafts and the centre"),
     L("Where to stay in Jerusalem", "/travel-blog/where-to-stay-in-jerusalem/", "Match your hotel to the sights you want"),
     L("Jerusalem tours", "/tours/jerusalem/", "Compare guided walks and day itineraries"),
-    L("Getting here from Ben Gurion Airport", "/travel-blog/how-to-get-from-ben-gurion-airport-to-jerusalem/", "Train, bus and road choices"),
+    L("Getting here from Ben Gurion Airport", "/travel-blog/ben-gurion-airport-to-jerusalem/", "Train, bus and road choices"),
   ],
   "old-city-jerusalem": [
     L("Churches of Jerusalem", "/travel-blog/churches-in-jerusalem/", "Plan the Holy Sepulchre and pilgrimage stops"),
@@ -32,7 +32,7 @@ export const jerusalemConnections: Record<JerusalemClusterKey, Destination[]> = 
     L("Churches of Jerusalem", "/travel-blog/churches-in-jerusalem/", "Connect the viewpoint to Gethsemane and sacred sites"),
     L("Old City walking guide", "/attractions/old-city-jerusalem/", "Choose the correct gate and onward walking route"),
     L("Jerusalem tours", "/tours/jerusalem/", "Find guided itineraries including the hill"),
-    L("Private driver service", "/private-driver/", "Ask about an upper lookout and a lower pickup"),
+    L("Private driver service", "/private-driver-in-israel/", "Ask about an upper lookout and a lower pickup"),
     L("Jerusalem city guide", "/travel-blog/jerusalem-travel-guide/", "Fit the hill into a city stay"),
   ],
   "mount-zion": [
@@ -113,7 +113,7 @@ export const jerusalemConnections: Record<JerusalemClusterKey, Destination[]> = 
     L("Jerusalem city guide", "/travel-blog/jerusalem-travel-guide/", "Choose a neighbourhood near your planned sites"),
     L("Old City walking guide", "/attractions/old-city-jerusalem/", "Check gate access and luggage walks"),
     L("Jerusalem shopping and markets", "/travel-blog/shopping-in-jerusalem/", "Choose between Mamilla and Mahane Yehuda"),
-    L("Airport to Jerusalem", "/travel-blog/how-to-get-from-ben-gurion-airport-to-jerusalem/", "Compare the final journey to your hotel"),
+    L("Airport to Jerusalem", "/travel-blog/ben-gurion-airport-to-jerusalem/", "Compare the final journey to your hotel"),
     L("Jerusalem tours", "/tours/jerusalem/", "Find guided visits departing from your area"),
   ],
 };

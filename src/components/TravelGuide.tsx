@@ -381,10 +381,10 @@ export function TravelGuidePage({ id }: { id: TravelGuideId }) {
       {!isJerusalemCluster && id !== "shabbat" && <RelatedLinks title="Related practical guides" currentPath={travelGuidePaths[id]} illustrated={id === "esim"} maxPhotoCards={id === "esim" ? 6 : 4} items={guide.related.map((guideId) => ({ label: travelGuides[guideId].title, to: travelGuidePaths[guideId] }))} />}
       {!isJerusalemCluster && id !== "shabbat" && id !== "jerusalemDeadSea" && <RelatedLinks title="Plan the next part of your trip" items={guide.services} />}
       {id === "shabbat" && <RelatedLinks title="Related practical guides" currentPath={travelGuidePaths.shabbat} items={[
-        { label: "Ben Gurion Airport to Tel Aviv", to: "/travel-blog/how-to-get-from-ben-gurion-airport-to-tel-aviv/" },
-        { label: "Ben Gurion Airport to Jerusalem", to: "/travel-blog/how-to-get-from-ben-gurion-airport-to-jerusalem/" },
-        { label: "Ben Gurion Airport to Haifa", to: "/travel-blog/how-to-get-from-ben-gurion-airport-to-haifa/" },
-        { label: "Ben Gurion Airport to Ein Bokek", to: "/travel-blog/how-to-get-from-ben-gurion-airport-to-ein-bokek/" },
+        { label: "Ben Gurion Airport to Tel Aviv", to: "/travel-blog/ben-gurion-airport-to-tel-aviv/" },
+        { label: "Ben Gurion Airport to Jerusalem", to: "/travel-blog/ben-gurion-airport-to-jerusalem/" },
+        { label: "Ben Gurion Airport to Haifa", to: "/travel-blog/ben-gurion-airport-to-haifa/" },
+        { label: "Ben Gurion Airport to Ein Bokek", to: "/travel-blog/ben-gurion-airport-to-ein-bokek/" },
         { label: "Official airport taxi pickup", to: travelGuidePaths.airportTaxis },
         { label: "Ben Gurion Airport arrival tips", to: travelGuidePaths.arrival },
       ]} />}

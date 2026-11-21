@@ -74,7 +74,7 @@ describe("Attractions hub redesign", () => {
     expect(page).not.toContain('data-testid="attractions-planning-card"');
     expect(page).toContain('to="/tours/"');
     expect(page).toContain('to="/shore-excursions/"');
-    expect(page).toContain('to="/private-driver/"');
+    expect(page).toContain('to="/private-driver-in-israel/"');
   });
 
   it("keeps all individual attractions on the hub without listing regional overview guides as site cards", () => {

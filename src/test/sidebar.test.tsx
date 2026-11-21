@@ -143,7 +143,7 @@ describe("shared sidebar navigation", () => {
       ["To Haifa", "/airport-transfers/haifa/"],
       ["To Ein Bokek at the Dead Sea", "/airport-transfers/ein-bokek/"],
       ["To other destinations", "/airport-transfers/"],
-      ["Private driver service", "/private-driver/"],
+      ["Private driver service", "/private-driver-in-israel/"],
       ["Rent a car in Israel", "https://discovercars.tpm.li/w2RwEsmb?sub_id=itt_car_accommodation_jerusalem"],
     ]);
   });
@@ -192,10 +192,10 @@ describe("shared sidebar navigation", () => {
     const airportGuides = within(guides).getByRole("list", { name: "Ben Gurion Airport arrival guides" });
     expect(airportGuides).toBeVisible();
     const expected = [
-      ["How to get to Jerusalem", "/travel-blog/how-to-get-from-ben-gurion-airport-to-jerusalem/"],
-      ["How to get to Tel Aviv", "/travel-blog/how-to-get-from-ben-gurion-airport-to-tel-aviv/"],
-      ["How to get to Haifa", "/travel-blog/how-to-get-from-ben-gurion-airport-to-haifa/"],
-      ["How to get to Ein Bokek", "/travel-blog/how-to-get-from-ben-gurion-airport-to-ein-bokek/"],
+      ["How to get to Jerusalem", "/travel-blog/ben-gurion-airport-to-jerusalem/"],
+      ["How to get to Tel Aviv", "/travel-blog/ben-gurion-airport-to-tel-aviv/"],
+      ["How to get to Haifa", "/travel-blog/ben-gurion-airport-to-haifa/"],
+      ["How to get to Ein Bokek", "/travel-blog/ben-gurion-airport-to-ein-bokek/"],
     ];
     expect(within(airportGuides).getAllByRole("link").map(link => [link.textContent, link.getAttribute("href")])).toEqual(expected);
     expect(within(guides).getByRole("list", { name: "Trip lengths" })).toBeVisible();
@@ -278,7 +278,7 @@ describe("shared sidebar navigation", () => {
     expect(within(nav).queryByText("Popular Links")).not.toBeInTheDocument();
     fireEvent.click(within(nav).getByRole("link", { name: "Private driver service" }));
     await waitFor(() => expect(screen.queryByRole("dialog")).not.toBeInTheDocument());
-    await waitFor(() => expect(router.state.location.pathname).toBe("/private-driver/"));
+    await waitFor(() => expect(router.state.location.pathname).toBe("/private-driver-in-israel/"));
 
     fireEvent.click(trigger);
     dialog = await screen.findByRole("dialog");
@@ -307,7 +307,7 @@ describe("shared sidebar navigation", () => {
     const airportGuides = within(nav).getByRole("list", { name: "Ben Gurion Airport arrival guides" });
     fireEvent.click(within(airportGuides).getByRole("link", { name: "How to get to Ein Bokek" }));
     await waitFor(() => expect(screen.queryByRole("dialog")).not.toBeInTheDocument());
-    await waitFor(() => expect(router.state.location.pathname).toBe("/travel-blog/how-to-get-from-ben-gurion-airport-to-ein-bokek/"));
+    await waitFor(() => expect(router.state.location.pathname).toBe("/travel-blog/ben-gurion-airport-to-ein-bokek/"));
   });
 });
 

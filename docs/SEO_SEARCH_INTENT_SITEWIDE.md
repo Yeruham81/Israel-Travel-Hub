@@ -63,7 +63,7 @@ Date: 2026-10-18. GitHub-only changes; no Lovable agent or credits.
 | /shore-excursions/ | Haifa/Ashdod port shore excursions and ships' time |
 | /tickets/ | Ticket-only entry to Masada and Caesarea versus tours |
 | /attractions/ | Attraction discovery by Israeli region |
-| /private-driver/ | Intercity and full-day private driver quote |
+| /private-driver-in-israel/ | Intercity and full-day private driver quote |
 | /guides/ | Guide-library navigation (not a substitute for individual long-tail pages) |
 | /attractions/caesarea/ | Planning Caesarea National Park visit and admissions |
 

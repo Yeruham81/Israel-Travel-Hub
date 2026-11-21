@@ -19,7 +19,8 @@ describe("generated XML sitemap and robots.txt", () => {
     expect(paths).toContain("/privacy-policy/");
     expect(paths).toContain("/terms-of-use/");
     for (const city of ["jerusalem", "tel-aviv", "haifa", "ein-bokek"]) {
-      expect(paths).toContain("/travel-blog/how-to-get-from-ben-gurion-airport-to-" + city + "/");
+      expect(paths).toContain("/travel-blog/ben-gurion-airport-to-" + city + "/");
+      expect(paths).not.toContain("/travel-blog/how-to-get-from-ben-gurion-airport-to-" + city + "/");
       expect(paths).toContain("/airport-transfers/" + city + "/");
       expect(paths).not.toContain("/airport-transfers/ben-gurion-airport-to-" + city + "/");
     }
@@ -27,7 +28,8 @@ describe("generated XML sitemap and robots.txt", () => {
     expect(paths).toContain("/airport-transfers/");
     expect(paths).not.toContain("/transfers/");
     expect(paths).not.toContain("/guides/");
-    expect(paths).not.toContain("/travel-blog/ben-gurion-airport-to-jerusalem/");
+    expect(paths).toContain("/private-driver-in-israel/");
+    expect(paths).not.toContain("/private-driver/");
     expect(paths).toContain("/tours/");
     expect(paths).toContain("/shore-excursions/");
     expect(paths).toContain("/shore-excursions/ashdod/");

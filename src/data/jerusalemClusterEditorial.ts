@@ -61,7 +61,7 @@ const articles: Partial<Record<TravelGuideId, Upgrade>> = {
           "The Old City is predominantly explored on foot. For a Mount of Olives visit, a vehicle to an upper lookout followed by a downhill walk can save a strenuous climb. A day based around museums may involve different transit connections. Regular public transport changes significantly for Shabbat and Jewish holidays, so check the actual service day.",
         ],
         inlineLinks: [
-          { text: "Ben Gurion Airport to Jerusalem guide", to: "/travel-blog/how-to-get-from-ben-gurion-airport-to-jerusalem/" },
+          { text: "Ben Gurion Airport to Jerusalem guide", to: "/travel-blog/ben-gurion-airport-to-jerusalem/" },
           { text: "airport transfer service", to: "/airport-transfers/jerusalem/" },
           { text: "Jewish holidays", to: "/travel-blog/calendar-of-events/" },
         ],
@@ -71,7 +71,7 @@ const articles: Partial<Record<TravelGuideId, Upgrade>> = {
     services: [
       { label: "Jerusalem walking and guided tours", to: "/tours/jerusalem/", note: "Check the advertised starting city and guiding inclusions" },
       { label: "Where to stay in Jerusalem", to: "/travel-blog/where-to-stay-in-jerusalem/", note: "Neighbourhood and hotel advice" },
-      { label: "Airport to Jerusalem: all transport options", to: "/travel-blog/how-to-get-from-ben-gurion-airport-to-jerusalem/" },
+      { label: "Airport to Jerusalem: all transport options", to: "/travel-blog/ben-gurion-airport-to-jerusalem/" },
       { label: "Airport to Jerusalem: request a private transfer", to: "/airport-transfers/jerusalem/" },
     ],
   },
@@ -110,7 +110,7 @@ const articles: Partial<Record<TravelGuideId, Upgrade>> = {
         ],
         inlineLinks: [
           { text: "Jerusalem tours", to: "/tours/jerusalem/" },
-          { text: "private-driver service", to: "/private-driver/" },
+          { text: "private-driver service", to: "/private-driver-in-israel/" },
           { text: "Jerusalem outing from Ashdod", to: "/shore-excursions/ashdod/" },
         ],
       },
