@@ -87,7 +87,7 @@ describe("Best Time to Visit Israel — editorial and layout regressions",()=>{
     expect(component).toContain("srcSet={photo.srcSet}");
     expect(component).toContain("sizes={seasonPhotoSize}");
     expect(component).toContain("src={photo.src}");
-    expect(component).toContain("haifa");
+    expect(component).toContain("Bahai Gardens");
     expect(component).not.toContain("hero-haifa-medium.webp");
     expect(component).toContain("loading=\"lazy\"");
     expect(component).toContain('guideHeroPhotoForPath(String(item.to))');
