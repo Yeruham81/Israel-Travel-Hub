@@ -43,6 +43,27 @@ assert(existsSync(join(root, "assets")), "Missing built assets");
 assert(existsSync(join(root, "sitemap.xml")), "Missing sitemap");
 assert(existsSync(join(root, "robots.txt")), "Missing robots.txt");
 
+// Haifa museums: the exported page, dedicated ten-pin map and all local
+// responsive image variants must ship together, or the preview is misleading.
+const haifaMuseumsHtmlPath = join(root, "travel-blog", "museums-in-haifa", "index.html");
+assert(existsSync(haifaMuseumsHtmlPath), "Missing prerendered Haifa museum guide");
+const haifaMuseumsHtml = readFileSync(haifaMuseumsHtmlPath, "utf8");
+assert(haifaMuseumsHtml.includes("haifa-museums.html?points="), "Haifa museum map is not linked from the published guide");
+assert(/srcset\s*=/i.test(haifaMuseumsHtml), "Responsive museum image srcset missing in rendered HTML");
+const haifaMuseumMapPath = join(root, "maps", "haifa-museums.html");
+assert(existsSync(haifaMuseumMapPath), "Missing dedicated Haifa museums map");
+const haifaMuseumMap = readFileSync(haifaMuseumMapPath, "utf8");
+assert(haifaMuseumMap.includes("museums.length !== 10"), "Haifa map is not configured for ten curated pins");
+assert(haifaMuseumMap.includes("haifa-museum-map-selected"), "Haifa map-to-guide selection handler missing");
+for(const id of ["art","city","railway","madatech","struck","tikotin","mane-katz","hecht","maritime","naval"]){
+  for(const width of ["", "-360", "-560"]){
+    const asset=join(root,"images","haifa-museums",id+width+".webp");
+    assert(existsSync(asset), "Missing local Haifa museum image in published export: "+asset);
+    assert(statSync(asset).size > 1000, "Empty Haifa museum image: "+asset);
+  }
+}
+
+
 // Prevent city-template leakage and tour-product mismatches before ANY upload.
 for (const [city, headings] of [
   ["haifa", ["Where to eat in Haifa", "Practical tips for visiting Haifa", "Getting to and around Haifa"]],
