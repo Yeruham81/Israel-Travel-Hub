@@ -85,7 +85,7 @@ describe("Haifa accommodation: location and travel intent before booking", () =>
     expect(container.querySelector('a[href^="/tiberias/"], a[href^="/dead-sea/"]')).toBeNull();
   });
 
-  it("preserves exact property tracking and labels the ordinary city browse link correctly", () => {
+  it("preserves exact property tracking and uses page-specific Booking.com Travelpayouts city links", () => {
     const pages = [{ element: <HotelDestinationPage guide={destination} />, ids: hotels.map((hotel) => hotel.id), pageId: "stay-haifa" }, ...categories.map((guide) => ({ element: <HotelCategoryPage guide={guide} destination={destination} />, ids: guide.picks.map((pick) => pick.hotelId), pageId: `stay-haifa-${guide.id}` }))];
     for (const page of pages) {
       const { container, unmount } = render(page.element);
@@ -103,8 +103,12 @@ describe("Haifa accommodation: location and travel intent before booking", () =>
         expect(readOutboundClicks().at(-1)).toMatchObject({ event: "outbound_click", pageId: page.pageId, productId: id, offerId: booking.id });
       }
       const browse = within(container.querySelector("#more-stays") as HTMLElement).getByRole("link", { name: /Check prices on Booking.com/ });
-      expect(browse).toHaveAttribute("href", "https://www.booking.com/city/il/haifa.html");
-      expect(browse).toHaveAttribute("rel", "noopener noreferrer");
+      const bookingAffiliates: Record<string, string> = {
+        "stay-haifa-family": "https://booking.tpk.lv/IMJh6Qxg",
+        "stay-haifa-boutique": "https://booking.tpk.lv/9d6zS3gn",
+      };
+      expect(browse).toHaveAttribute("href", bookingAffiliates[page.pageId] ?? "https://www.booking.com/city/il/haifa.html");
+      expect(browse).toHaveAttribute("rel", bookingAffiliates[page.pageId] ? "sponsored noopener noreferrer" : "noopener noreferrer");
       unmount();
     }
   });
