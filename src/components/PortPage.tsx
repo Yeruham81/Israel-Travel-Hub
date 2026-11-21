@@ -73,7 +73,7 @@ export function PortPage({ id, filters: routeSearch, onFilterChange }: { id: Sho
     <section aria-labelledby="shore-local-h" className="mt-12">
       <h2 id="shore-local-h" className="text-2xl font-semibold">Explore destinations from {port.name} further</h2>
       <p className="mt-2 text-sm text-muted-foreground">Discover the places you can include in your day ashore.</p>
-      <div className="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-3" role="list" aria-label="Useful guides for your day ashore">
+      <div className="mt-4 grid grid-cols-2 gap-4 lg:grid-cols-3" role="list" aria-label="Useful guides for your day ashore">
         {port.related.map(guide => <article key={guide.to} role="listitem" className="min-w-0">
           <Link to={guide.to} className="group flex h-full min-w-0 flex-col overflow-hidden rounded-xl border bg-card transition-colors hover:border-primary hover:shadow-sm focus-visible:outline-2 focus-visible:outline-primary">
             <img src={guide.photo.src} alt={guide.photo.alt} width={320} height={176} loading="lazy" decoding="async" className="aspect-[16/9] w-full object-cover" />
@@ -89,10 +89,10 @@ export function PortPage({ id, filters: routeSearch, onFilterChange }: { id: Sho
     <section aria-labelledby="shore-practical-h" className="mt-12">
       <h2 id="shore-practical-h" className="text-2xl font-semibold">Practical guides for your trip to Israel</h2>
       <p className="mt-2 text-sm text-muted-foreground">Helpful information for your cruise stop and journeys beyond the excursion.</p>
-      <div className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+      <div className="mt-4 grid grid-cols-2 gap-3 lg:grid-cols-3">
         {practicalGuides.map(guide => {
           const Icon = guide.icon;
-          return <Link key={guide.to} to={guide.to} className="group flex min-w-0 items-start gap-3 rounded-xl border bg-secondary/25 p-3.5 transition-colors hover:border-primary hover:bg-secondary/50 focus-visible:outline-2 focus-visible:outline-primary">
+          return <Link key={guide.to} to={guide.to} className="group flex min-w-0 flex-col items-start gap-3 sm:flex-row rounded-xl border bg-secondary/25 p-3.5 transition-colors hover:border-primary hover:bg-secondary/50 focus-visible:outline-2 focus-visible:outline-primary">
             <span className="grid size-10 shrink-0 place-items-center rounded-lg bg-background text-primary"><Icon size={20} aria-hidden="true" /></span>
             <span className="min-w-0">
               <span className="block text-sm font-semibold text-foreground group-hover:text-primary">{guide.title}</span>

@@ -244,7 +244,7 @@ export function HaifaMuseumsGuide() {
     <FaqList faqs={faqs}/>
     <section id="explore-more" aria-labelledby="explore-more-heading" className="mt-12 scroll-mt-24">
       <SectionHeading id="explore-more" title="Explore more of Haifa" intro="Continue planning with my Haifa attraction, transport and accommodation guides."/>
-      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">{related.map(item=>{
+      <div className="grid grid-cols-2 gap-4 lg:grid-cols-3">{related.map(item=>{
         const photo=guideHeroPhotoForPath(item.to);
         return <Link key={item.to} to={item.to} className="group flex h-full flex-col overflow-hidden rounded-xl border bg-card transition-colors hover:border-primary/40 hover:bg-secondary/20">
           {photo&&<img src={photo.src} alt={photo.alt} width={640} height={360} loading="lazy" decoding="async" className="aspect-[16/9] w-full object-cover"/>}

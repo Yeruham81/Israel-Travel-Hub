@@ -190,11 +190,11 @@ export function AttractionDestinationPage({ content }: { content: AttractionDest
       {!!content.planningLinks?.length && <nav id="trip-planning" aria-label="Plan your trip to Israel" className="mt-10 scroll-mt-24 rounded-xl border border-border/70 bg-secondary/15 p-4 sm:p-5" data-testid="attraction-trip-planning">
         <h2 className="text-lg font-semibold sm:text-xl">Plan your trip to Israel</h2>
         <p className="mt-1 text-sm text-muted-foreground">Practical guides to help you plan the rest of your journey.</p>
-        <ul className="mt-4 grid gap-2 sm:grid-cols-2 lg:grid-cols-3">
+        <ul className="mt-4 grid grid-cols-2 gap-2 lg:grid-cols-3">
           {content.planningLinks.map(item => {
             const Icon = planningIcons[item.icon ?? "region"];
             return <li key={String(item.to)} className="min-w-0">
-              <Link to={item.to} className="group flex h-full min-w-0 items-start gap-2.5 rounded-lg border border-border/75 bg-card px-3 py-3 text-foreground no-underline shadow-sm transition-all hover:border-primary/50 hover:shadow-md focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
+              <Link to={item.to} className="group flex h-full min-w-0 flex-col items-start gap-2.5 rounded-lg border sm:flex-row border-border/75 bg-card px-3 py-3 text-foreground no-underline shadow-sm transition-all hover:border-primary/50 hover:shadow-md focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
                 <span className="flex size-8 shrink-0 items-center justify-center rounded-lg bg-primary/10 text-primary"><Icon className="size-4" aria-hidden="true" /></span>
                 <span className="min-w-0 flex-1">
                   <span className="block text-sm font-semibold leading-snug group-hover:text-primary">{item.label}</span>

@@ -85,10 +85,10 @@ function Guides() {
     <div className="mx-auto max-w-5xl">
       <section id="explore-israel" aria-labelledby="explore-israel-h" className="mt-12 border-t pt-9">
         <h2 id="explore-israel-h" className="text-2xl font-semibold">Explore Israel further</h2>
-        <ul className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+        <ul className="mt-4 grid grid-cols-2 gap-3 lg:grid-cols-3">
           {exploreLinks.map(item => <li key={item.to} className="min-w-0">
-            <Link to={item.to} className="group flex h-full min-w-0 items-center gap-3 rounded-xl border bg-card p-3 transition-colors hover:border-primary/50 hover:bg-secondary/20 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
-              <img src={item.photo.src} srcSet={travelBlogExploreImageSets[item.photo.src]} sizes={travelBlogExploreImageSets[item.photo.src] ? "(min-width: 640px) 112px, 96px" : undefined} alt={item.photo.alt} width={112} height={75} loading="lazy" decoding="async" className="aspect-[3/2] w-24 shrink-0 rounded-lg object-cover sm:w-28" />
+            <Link to={item.to} className="group flex h-full min-w-0 flex-col gap-3 sm:flex-row sm:items-center rounded-xl border bg-card p-3 transition-colors hover:border-primary/50 hover:bg-secondary/20 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
+              <img src={item.photo.src} srcSet={travelBlogExploreImageSets[item.photo.src]} sizes={travelBlogExploreImageSets[item.photo.src] ? "(min-width: 640px) 112px, 96px" : undefined} alt={item.photo.alt} width={112} height={75} loading="lazy" decoding="async" className="aspect-[3/2] w-full sm:shrink-0 rounded-lg object-cover sm:w-28" />
               <span className="min-w-0 flex-1">
                 <span className="block text-sm font-semibold leading-snug text-foreground group-hover:text-primary">{item.title}</span>
                 <span className="mt-1 line-clamp-2 block text-xs leading-relaxed text-muted-foreground">{item.description}</span>
@@ -101,7 +101,7 @@ function Guides() {
 
       <section id="plan-israel-trip" aria-labelledby="plan-israel-trip-h" className="mt-9">
         <h2 id="plan-israel-trip-h" className="text-2xl font-semibold">Plan your trip to Israel</h2>
-        <ul className="mt-4 grid gap-3 sm:grid-cols-2">
+        <ul className="mt-4 grid grid-cols-2 gap-3 lg:grid-cols-3">
           {tripPlanningLinks.map(item => {
             const Icon = item.icon;
             return <li key={item.to} className="min-w-0">

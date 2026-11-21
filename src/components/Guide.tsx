@@ -360,7 +360,7 @@ export function RelatedLinks({ title = "Plan the rest of your trip", items, curr
     if (!pictured.length && !remaining.length) return null;
     return <section aria-label={title} className="mt-12" data-testid="stay-trip-planning">
       <h2 className="text-2xl font-bold leading-tight sm:text-3xl">{title}</h2>
-      {pictured.length > 0 && <ul className={pictured.length === 6 ? "mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-3" : "mt-4 grid gap-4 sm:grid-cols-2"} data-testid="stay-trip-photo-grid">
+      {pictured.length > 0 && <ul className={pictured.length === 6 ? "mt-4 grid grid-cols-2 gap-3 lg:grid-cols-3" : "mt-4 grid gap-4 sm:grid-cols-2"} data-testid="stay-trip-photo-grid">
         {pictured.map(({ item, guide, cardPhoto }) => <li key={String(item.to)} className="min-w-0">
           <Link to={item.to} className="group flex h-full min-w-0 flex-col overflow-hidden rounded-xl border bg-card transition-colors hover:border-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
             <GuideCardPhoto photo={cardPhoto ?? null} />
@@ -374,7 +374,7 @@ export function RelatedLinks({ title = "Plan the rest of your trip", items, curr
       </ul>}
       {remaining.length > 0 && <nav aria-label="More trip planning options" className="mt-5">
         <p className="text-sm font-semibold text-muted-foreground">More ways to plan your stay</p>
-        <ul className="mt-3 grid gap-2 sm:grid-cols-2">
+        <ul className={remaining.length === 6 ? "mt-3 grid grid-cols-2 gap-2 lg:grid-cols-3" : "mt-3 grid gap-2 sm:grid-cols-2"}>
           {remaining.map((item) => <li key={String(item.to)}>
             <Link to={item.to} className="group flex h-full flex-col justify-center rounded-xl border bg-card px-4 py-3 text-sm transition-colors hover:border-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
               <span className="font-semibold text-foreground group-hover:text-primary">{item.label}</span>
@@ -445,7 +445,7 @@ export function RelatedLinks({ title = "Plan the rest of your trip", items, curr
   return <section aria-label={title} className="mt-12">
     <h2 className="text-2xl font-bold leading-tight sm:text-3xl">{title}</h2>
     {guideSection ? (
-      <ul className={pairedGuides.length === 6 ? "mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-3" : "mt-4 grid gap-4 sm:grid-cols-2"}>
+      <ul className={pairedGuides.length === 6 ? "mt-4 grid grid-cols-2 gap-4 lg:grid-cols-3" : "mt-4 grid gap-4 sm:grid-cols-2"}>
         {pairedGuides.map(({ item, guide, cardPhoto }) => <li key={String(guide.to)} className="min-w-0">
           <Link to={guide.to} className="group flex h-full min-w-0 flex-col overflow-hidden rounded-xl border bg-card transition-colors hover:border-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
             <GuideCardPhoto photo={cardPhoto ?? null} />
@@ -458,7 +458,7 @@ export function RelatedLinks({ title = "Plan the rest of your trip", items, curr
         </li>)}
       </ul>
     ) : (
-      <ul className="mt-4 grid gap-3 sm:grid-cols-2">
+      <ul className={items.length === 6 ? "mt-4 grid grid-cols-2 gap-3 lg:grid-cols-3" : "mt-4 grid gap-3 sm:grid-cols-2"}>
         {items.map((item) => <li key={String(item.to)}>
           <Link to={item.to} className="block h-full rounded-xl border bg-card p-4 hover:border-primary focus-visible:outline-2 focus-visible:outline-primary">
             <span className="font-medium">{item.label}</span>

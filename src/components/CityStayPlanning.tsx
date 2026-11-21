@@ -42,7 +42,7 @@ export function CityStayPlanning({ city }: { city: CityStayGuide["id"] }) {
       <p className="mt-3 max-w-3xl leading-relaxed text-muted-foreground">
         The right hotel is only one part of an easy visit. Explore transport, day trips and practical guides that help you spend more time seeing the city and less time organising logistics.
       </p>
-      <ul className="mt-6 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+      <ul className="mt-6 grid grid-cols-2 gap-5 lg:grid-cols-3">
         {selected.map((item) => (
           <li key={item.to} className="min-w-0">
             <Link to={item.to} className="group flex h-full flex-col overflow-hidden rounded-2xl border bg-card transition-colors hover:border-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">

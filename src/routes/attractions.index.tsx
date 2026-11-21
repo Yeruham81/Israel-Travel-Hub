@@ -142,10 +142,10 @@ function Attractions() {
       <div className="mx-auto max-w-5xl">
         <section id="attractions-related" aria-labelledby="attractions-related-h" className="mt-12 border-t pt-9">
           <h2 id="attractions-related-h" className="text-2xl font-semibold">Related travel guides</h2>
-          <ul className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+          <ul className="mt-4 grid grid-cols-2 gap-3 lg:grid-cols-3">
             {attractionRelatedGuides.map(guide => <li key={String(guide.to)} className="min-w-0">
-              <Link to={guide.to} className="group flex h-full min-w-0 items-center gap-3 rounded-xl border bg-card p-3 transition-colors hover:border-primary/50 hover:bg-secondary/20 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
-                <img src={guide.photo.src} srcSet={attractionHubRelatedImageSets[guide.photo.src]} sizes="(min-width: 640px) 112px, 96px" alt={guide.photo.alt} width={112} height={75} loading="lazy" decoding="async" className="aspect-[3/2] w-24 shrink-0 rounded-lg object-cover sm:w-28" />
+              <Link to={guide.to} className="group flex h-full min-w-0 flex-col gap-3 sm:flex-row sm:items-center rounded-xl border bg-card p-3 transition-colors hover:border-primary/50 hover:bg-secondary/20 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
+                <img src={guide.photo.src} srcSet={attractionHubRelatedImageSets[guide.photo.src]} sizes="(min-width: 640px) 112px, 96px" alt={guide.photo.alt} width={112} height={75} loading="lazy" decoding="async" className="aspect-[3/2] w-full sm:shrink-0 rounded-lg object-cover sm:w-28" />
                 <span className="min-w-0 flex-1">
                   <span className="block text-sm font-semibold leading-snug text-foreground group-hover:text-primary">{guide.title}</span>
                   <span className="mt-1 line-clamp-2 block text-xs leading-relaxed text-muted-foreground">{guide.description}</span>
@@ -161,7 +161,7 @@ function Attractions() {
 
         <section id="attractions-trip-planning" aria-labelledby="attractions-trip-planning-h" className="mt-9">
           <h2 id="attractions-trip-planning-h" className="text-2xl font-semibold">Plan your trip to Israel</h2>
-          <ul className="mt-4 grid gap-3 sm:grid-cols-2">
+          <ul className="mt-4 grid grid-cols-2 gap-3 lg:grid-cols-3">
             {attractionPlanningPaths.map(item => {
               const Icon = planningIcons[item.id];
               return <li key={item.id} className="min-w-0">
