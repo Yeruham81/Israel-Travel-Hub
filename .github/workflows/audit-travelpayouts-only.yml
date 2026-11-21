@@ -22,13 +22,27 @@ jobs:
       - name: Scan source affiliate URLs
         continue-on-error: true
         run: node scripts/audit-travelpayouts-only.cjs
+      - uses: oven-sh/setup-bun@v2
+      - name: Install site dependencies
+        run: bun install --frozen-lockfile
+      - name: Start isolated full-site preview
+        run: |
+          node scripts/generate-sitemap.mjs --mode development
+          nohup ./node_modules/.bin/vite dev --host 127.0.0.1 --port 4173 > /tmp/travelpayouts-vite.log 2>&1 &
+          for i in $(seq 1 75); do
+            if curl -fsS --max-time 3 http://127.0.0.1:4173/ > /dev/null; then exit 0; fi
+            sleep 2
+          done
+          tail -80 /tmp/travelpayouts-vite.log
+          exit 1
       - name: Install read-only Chromium
         run: |
           npm install --prefix /tmp/travelpayouts-audit --no-save playwright@1.56.1
           /tmp/travelpayouts-audit/node_modules/.bin/playwright install --with-deps chromium
-      - name: Crawl published pages and verify actual outbound links
+      - name: Crawl all rendered pages in isolated preview and verify outbound links
         env:
           NODE_PATH: /tmp/travelpayouts-audit/node_modules
+          SITE_AUDIT_ORIGIN: http://127.0.0.1:4173
         run: node scripts/audit-travelpayouts-only.cjs --published
       - name: Save audit evidence
         if: always()
