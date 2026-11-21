@@ -11,6 +11,7 @@ import { qasrElYahudSite } from "@/data/qasrElYahudSite";
 import { magdalaSite } from "@/data/magdalaSite";
 import { masadaSite } from "@/data/masadaSite";
 import { caesareaSite } from "@/data/caesareaSite";
+import { eilatSite } from "@/data/eilatSite";
 import jerusalemMuseumsHero from "@/assets/guides/museums-in-jerusalem.jpg";
 import telAvivAttractionsHero from "@/assets/home/tel-aviv-coast.webp";
 
@@ -32,6 +33,7 @@ export function guideHeroPhotoForPath(to: string): GuideHeroPhoto | undefined {
   if (path === "/attractions/magdala/") return magdalaSite.hero;
   if (path === "/attractions/masada/") return masadaSite.hero;
   if (path === "/attractions/caesarea/") return caesareaSite.hero;
+  if (path === "/attractions/eilat/") return eilatSite.hero;
   if (path === "/attractions/dead-sea/") return { src: deadSeaHero, alt: "Dead Sea shoreline and desert scenery" };
   if (path === "/attractions/sea-of-galilee/") return { src: "/images/attractions/sea-of-galilee.webp", alt: "Sea of Galilee and surrounding hills" };
   if (path === "/travel-blog/museums-in-jerusalem/") return {
