@@ -1,6 +1,6 @@
 import {existsSync,readFileSync} from "node:fs";
 import {describe,expect,it} from "vitest";
-import {haifaMuseumAreas,haifaMuseums,haifaAdditionalMuseums} from "@/data/haifaMuseums";
+import {haifaMuseumAreas,haifaMuseums,haifaAdditionalMuseums,haifaMuseumMapPoints} from "@/data/haifaMuseums";
 import {haifaMuseumPhotos,haifaMuseumPhotoCredits} from "@/data/haifaMuseumPhotos";
 
 describe("Haifa museums editorial guide",()=>{
@@ -49,6 +49,10 @@ describe("Haifa museums editorial guide",()=>{
       expect(photo,museum.id).toBeDefined();
       expect(photo.src,museum.id).toMatch(/^\/images\/haifa-museums\/[a-z-]+\.webp$/);
       expect(existsSync("public"+photo.src),museum.id).toBe(true);
+      for(const width of [360,560]){
+        const variant=photo.src.replace(/\.webp$/, "-"+width+".webp");
+        expect(existsSync("public"+variant),museum.id+" "+width+"w").toBe(true);
+      }
       expect(photo.width,museum.id).toBeGreaterThan(0);
       expect(photo.height,museum.id).toBeGreaterThan(0);
       expect(photo.alt,museum.id).toBeTruthy();
@@ -88,8 +92,37 @@ describe("Haifa museums editorial guide",()=>{
     expect(haifa).toContain('neighborhoodTripContactCopy("Haifa")');
     expect(haifa).toContain('guideHeroPhotoForPath(item.to)');
     expect(haifa).toContain("MuseumMap");
+    expect(haifa).toContain("srcSet=");
+    expect(haifa).toContain('sizes="(min-width: 1024px) 270px, calc(100vw - 32px)"');
+    expect(haifa).toContain('src={museumMapUrl}');
+    expect(haifa).toContain('haifa-museum-map-focus');
+    expect(haifa).not.toContain("maps.google.com/maps?q=");
     expect(haifa).toContain("https://www.google.com/maps/dir/?api=1&destination=");
     expect(haifa).not.toContain("Architectural illustration, not a photograph");
+  });
+  it("plots the ten distinct Haifa museum coordinates, including the renovation closure",()=>{
+    expect(haifaMuseumMapPoints).toHaveLength(10);
+    const ids=new Set<string>();
+    const coordinates=new Set<string>();
+    for(const point of haifaMuseumMapPoints){
+      expect(point.lat,point.id).toBeGreaterThan(32.75);
+      expect(point.lat,point.id).toBeLessThan(32.85);
+      expect(point.lon,point.id).toBeGreaterThan(34.95);
+      expect(point.lon,point.id).toBeLessThan(35.04);
+      expect(ids.has(point.id),point.id).toBe(false);
+      ids.add(point.id);
+      const key=point.lat+","+point.lon;
+      expect(coordinates.has(key),point.id).toBe(false);
+      coordinates.add(key);
+    }
+    expect(haifaMuseumMapPoints.filter(point=>point.closed).map(point=>point.id)).toEqual(["mane-katz"]);
+    const html=readFileSync("public/maps/haifa-museums.html","utf8");
+    expect(html).toContain("museums.length !== 10");
+    expect(html).toContain("cluster:true");
+    expect(html).toContain("getClusterExpansionZoom");
+    expect(html).toContain("haifa-museum-map-focus");
+    expect(html).toContain("haifa-museum-map-selected");
+    expect(html).toContain("Closed for renovation");
   });
   it("routes Haifa museums to its upgraded editorial page rather than the retired generic renderer",()=>{
     const route=readFileSync("src/routes/travel-blog.museums-in-haifa.tsx","utf8");
