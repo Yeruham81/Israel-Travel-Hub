@@ -10,6 +10,18 @@ on:
       - "src/data/attractionsHub.ts"
       - "src/data/nav.ts"
       - "src/test/eilat-attraction-feature.test.tsx"
+      - "src/data/guideCities2026.ts"
+      - "src/data/registry.ts"
+      - "src/data/travelGuides.ts"
+      - "src/routes/index.tsx"
+      - "src/data/bestTimeIsrael.ts"
+      - "src/data/israelItineraries.ts"
+      - "src/data/tours.ts"
+      - "src/data/content.ts"
+      - "src/test/travel-blog-hub-images.test.ts"
+      - "scripts/verify-hostinger-static-export.mjs"
+      - "public/sitemap.xml"
+
   workflow_dispatch:
 permissions:
   contents: read
@@ -54,6 +66,10 @@ jobs:
       - name: Assert Eilat page and commercial tracking are in published HTML
         run: |
           test -s .output/public/attractions/eilat/index.html
+          test ! -e .output/public/travel-blog/eilat/index.html
+          ! grep -Fq '/travel-blog/eilat/' .output/public/sitemap.xml
+          grep -Fq 'eilat-beach-comparison' .output/public/attractions/eilat/index.html
+
           grep -Fq 'Eilat: Red Sea Attractions' .output/public/attractions/eilat/index.html
           grep -Fq 'eilat-coral-beach.webp' .output/public/attractions/eilat/index.html
           grep -Fq 'sponsored noopener noreferrer' .output/public/attractions/eilat/index.html
