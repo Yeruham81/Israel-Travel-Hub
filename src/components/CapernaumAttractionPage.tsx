@@ -112,15 +112,9 @@ const page: AttractionDestinationContent = {
   visitorContent: (
     <div className="mt-4 space-y-4">
       <p>Compare opening hours, admission and booking requirements for the three visitor areas below.</p>
-      <div className="grid gap-3 md:hidden" data-testid="capernaum-mobile-visitor-cards">
-        {visitorAreas.map(site => <article key={site.name} className="rounded-xl border bg-card p-4">
-          <h3 className="text-base font-semibold">{site.name}</h3>
-          <div className="mt-2 text-sm leading-relaxed">{site.details}</div>
-          <a href={site.url} target="_blank" rel="noopener noreferrer" className="mt-3 inline-flex items-center gap-1 text-sm font-semibold text-primary underline-offset-4 hover:underline">{site.source}<ArrowUpRight className="h-3.5 w-3.5" aria-hidden="true" /></a>
-        </article>)}
-      </div>
-      <div className="hidden overflow-x-auto rounded-xl border md:block">
-        <table className="w-full border-collapse text-left text-sm" data-testid="capernaum-visitor-table">
+      <p className="text-xs text-muted-foreground md:hidden">Swipe the table sideways to compare all three visitor areas.</p>
+      <div role="region" aria-label="Visitor information comparison" tabIndex={0} className="max-w-full overflow-x-auto rounded-xl border focus-visible:outline-2 focus-visible:outline-primary">
+        <table className="w-full min-w-[700px] border-collapse text-left text-sm" data-testid="capernaum-visitor-table">
           <thead className="bg-secondary/70"><tr>
             <th scope="col" className="w-[26%] px-4 py-3 font-bold">Visitor area</th>
             <th scope="col" className="px-4 py-3 font-bold">Admission and visiting rules</th>

@@ -146,19 +146,12 @@ export function IsraelItineraryPage({ id }: { id: ItineraryId }) {
       </dl>}
       <h3 className="mt-7 text-xl font-semibold">{compactOverview ? "Daily route, transport and overnight stays" : "Daily route and hotel bases"}</h3>
       <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{id === "3" ? "One continuous trip: two Jerusalem hotel nights, followed by a coastal day and either departure or an optional Tel Aviv stay." : id === "5" ? "Five sightseeing days with three Jerusalem hotel nights, a move to Tel Aviv after Day 3, and a flexible departure plan after the final coastal day." : id === "7" ? "Seven sightseeing days across three hotel bases, with planned nights after Days 1–6 and an optional arrival or departure night according to your flights." : "Ten sightseeing days with Jerusalem and Galilee hotel bases, a choice of Haifa or Tel Aviv after Akko, and a coastal finish. Your final day depends on the flight date."}</p>
-      <ol className="mt-4 space-y-2 sm:hidden" aria-label="Day-by-day route and overnight stays">
-        {g.daysPlan.map((day, index) => <li key={index} className="rounded-xl border bg-card p-4">
-          <p className="text-xs font-bold uppercase tracking-wide text-primary">Day {index + 1}</p>
-          <p className="mt-1 font-semibold">{g.overviewRows?.[index]?.focus ?? day.name}</p>
-          {showTravel && <p className="mt-2 text-sm text-muted-foreground">Getting around: {g.overviewRows?.[index]?.travel}</p>}
-          <p className="mt-1 text-sm text-muted-foreground"><BedDouble className="mr-1.5 inline h-4 w-4" aria-hidden />{g.overviewRows?.[index]?.night ?? day.overnight}</p>
-        </li>)}
-      </ol>
-      <div className="mt-4 hidden overflow-hidden rounded-2xl border sm:block">
-        <table className="w-full text-left text-sm">
+      <p className="mt-3 text-xs text-muted-foreground sm:hidden">Swipe the table sideways to compare days, journeys and overnight stays.</p>
+      <div role="region" aria-label="Day-by-day itinerary overview" tabIndex={0} className="mt-4 max-w-full overflow-x-auto rounded-2xl border focus-visible:outline-2 focus-visible:outline-primary">
+        <table className="w-full min-w-[650px] text-left text-sm">
           <thead className="bg-secondary/60">
             <tr>
-              <th scope="col" className="w-20 px-4 py-3 font-semibold">Day</th>
+              <th scope="col" className="sticky left-0 z-10 w-20 bg-secondary px-4 py-3 font-semibold">Day</th>
               <th scope="col" className="px-4 py-3 font-semibold">Main focus</th>
               {showTravel && <th scope="col" className="px-4 py-3 font-semibold">Getting around</th>}
               <th scope="col" className="px-4 py-3 font-semibold">Overnight plan</th>
@@ -166,7 +159,7 @@ export function IsraelItineraryPage({ id }: { id: ItineraryId }) {
           </thead>
           <tbody className="divide-y">
             {g.daysPlan.map((day, index) => <tr key={index}>
-              <th scope="row" className="px-4 py-3 align-top font-semibold">{index + 1}</th>
+              <th scope="row" className="sticky left-0 z-10 bg-card px-4 py-3 align-top font-semibold">{index + 1}</th>
               <td className="px-4 py-3 align-top">{g.overviewRows?.[index]?.focus ?? day.name}</td>
               {showTravel && <td className="px-4 py-3 align-top text-muted-foreground">{g.overviewRows?.[index]?.travel}</td>}
               <td className="px-4 py-3 align-top text-muted-foreground">{g.overviewRows?.[index]?.night ?? day.overnight}</td>

@@ -114,12 +114,9 @@ export function JordanRiverBaptismGuidePage() {
   <OnThisPage sections={toc}/>
   <section id="compare-sites" className="mt-11 scroll-mt-24" aria-labelledby="compare-sites-heading">
    <Heading id="compare-sites" intro="The two sites are on different stretches of the river, far apart. I recommend choosing by religious meaning, travel region and the facilities you need.">Yardenit or Qasr el-Yahud: which site should you visit?</Heading>
-   <div className="grid gap-4 sm:grid-cols-2 lg:hidden" data-testid="baptism-mobile-comparison">
-    <article className="rounded-xl border bg-card p-4"><h3 className="text-lg font-bold">Yardenit</h3><p className="mt-2 text-sm leading-relaxed">Near Kibbutz Kinneret, south of the Sea of Galilee. Modern facilities, a designated baptism area and white robes required for immersion.</p><p className="mt-3 text-sm"><strong>Entry:</strong> Free; robes and some facilities extra.</p><p className="mt-2 text-sm"><strong>Arrange:</strong> Clergy, timing and your ceremony.</p></article>
-    <article className="rounded-xl border bg-card p-4"><h3 className="text-lg font-bold">Qasr el-Yahud</h3><p className="mt-2 text-sm leading-relaxed">On the lower Jordan near Jericho, on the western bank. Traditionally connected with Jesus' baptism.</p><p className="mt-3 text-sm"><strong>Entry:</strong> Free; advance visitor reservation required.</p><p className="mt-2 text-sm"><strong>Arrange:</strong> Access, officiant and ceremony separately.</p></article>
-   </div>
-   <div role="region" tabIndex={0} aria-label="Jordan River baptism site comparison" className="hidden overflow-x-auto rounded-xl border bg-card lg:block focus-visible:outline-2 focus-visible:outline-primary" data-testid="baptism-desktop-comparison">
-    <table className="w-full text-left text-sm leading-relaxed"><caption className="sr-only">Comparison of Yardenit and Qasr el-Yahud</caption><thead className="bg-secondary/60"><tr><th scope="col" className="p-3">Compare</th><th scope="col" className="p-3">Yardenit</th><th scope="col" className="p-3">Qasr el-Yahud</th></tr></thead><tbody>
+   <p className="mb-3 text-xs text-muted-foreground lg:hidden">Swipe the comparison table sideways to see both baptism sites.</p>
+   <div role="region" tabIndex={0} aria-label="Jordan River baptism site comparison" className="max-w-full overflow-x-auto rounded-xl border bg-card focus-visible:outline-2 focus-visible:outline-primary" data-testid="baptism-site-comparison">
+    <table className="w-full min-w-[640px] text-left text-sm leading-relaxed"><caption className="sr-only">Comparison of Yardenit and Qasr el-Yahud</caption><thead className="bg-secondary/60"><tr><th scope="col" className="p-3">Compare</th><th scope="col" className="p-3">Yardenit</th><th scope="col" className="p-3">Qasr el-Yahud</th></tr></thead><tbody>
     {[
      ["Location","Near the southern Sea of Galilee","Lower Jordan near Jericho"],
      ["Setting","Purpose-built modern baptism facility","Traditional lower-Jordan baptism landscape"],

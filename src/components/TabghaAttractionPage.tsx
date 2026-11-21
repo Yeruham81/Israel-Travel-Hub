@@ -93,19 +93,9 @@ export const tabghaDestinationContent: AttractionDestinationContent = {
   visitorContent: (
     <div className="mt-4 space-y-4">
       <p>The two churches have their own entrances and visiting hours. These are the details I would use to plan a visit to both.</p>
-      <div className="grid gap-3 md:hidden" data-testid="tabgha-mobile-hours">
-        {visitorAreas.map(site => <article key={site.name} className="rounded-xl border bg-card p-4">
-          <h3 className="text-base font-semibold">{site.name}</h3>
-          <div className="mt-2 text-sm leading-relaxed">{site.details}</div>
-          <div className="mt-3 text-sm">
-            <span className="font-semibold">Phone: </span>
-            <a href={"tel:" + site.phoneHref} dir="ltr" className={phoneLinkClass}>{site.phone}</a>
-          </div>
-          <a href={site.sourceUrl} target="_blank" rel="noopener noreferrer" className="mt-2 inline-flex items-center gap-1 text-sm font-semibold text-primary hover:underline">{site.source}<ArrowUpRight className="h-3.5 w-3.5" aria-hidden="true" /></a>
-        </article>)}
-      </div>
-      <div className="hidden overflow-x-auto rounded-xl border md:block">
-        <table className="w-full border-collapse text-left text-sm" data-testid="tabgha-visitor-table">
+      <p className="text-xs text-muted-foreground md:hidden">Swipe the table sideways to compare both churches.</p>
+      <div role="region" aria-label="Visitor information comparison" tabIndex={0} className="max-w-full overflow-x-auto rounded-xl border focus-visible:outline-2 focus-visible:outline-primary">
+        <table className="w-full min-w-[700px] border-collapse text-left text-sm" data-testid="tabgha-visitor-table">
           <thead className="bg-secondary/70"><tr>
             <th scope="col" className="w-[27%] px-4 py-3 font-bold">Church</th>
             <th scope="col" className="px-4 py-3 font-bold">Opening hours and visitor details</th>
