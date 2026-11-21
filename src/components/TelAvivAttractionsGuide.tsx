@@ -17,6 +17,7 @@ import {
  telAvivMapPoints, telAvivAttractionsUpdatedAt, type TelAvivExperience
 } from "@/data/telAvivAttractionsGuide";
 import { affiliateConfig } from "@/data/registry";
+import { tourPhotos } from "@/data/tours";
 import { recordOutboundClick, relFor } from "@/lib/outbound";
 import florentinPhotoCredit from "@/data/telAvivGraffitiPhotoCredit.json";
 
@@ -66,6 +67,8 @@ const affiliateTours=[
  {id:"tour-old-jaffa-walk-viator@tours-tel-aviv-jaffa",provider:"Viator",title:"Old Jaffa & Flea Market Walking Tour",description:"A compact walking tour of Jaffa's stone streets, harbour and flea market",image:tourJaffa,alt:"Historic stone buildings in Jaffa",duration:"1 hr 30 min",meeting:"Yefet St 7, Jaffa",fromUsd:59,ratingLabel:"4.5 · 13 reviews"},
  {id:"tour-carmel-market-food-tour-viator@tours-tel-aviv-jaffa",provider:"Viator",title:"Carmel Market Food-Tasting Tour",description:"Local flavours and food tastings at Carmel Market and Kerem HaTeimanim. This is a tasting walk, not a cooking workshop.",image:"/images/tel-aviv-attractions/carmel-food-tasting.webp",alt:"A colourful stall of olives, pickles and spices at Carmel Market",duration:"3 hours",meeting:"HaCarmel St 43",fromUsd:145,ratingLabel:"5.0 · 143 reviews"},
  {id:"tour-tel-aviv-street-art-viator@tours-tel-aviv-jaffa",provider:"Viator",title:"Tel Aviv Street Art & Graffiti Tour",description:"Discover the changing graffiti and urban-art scene with a local guide",image:"/images/tel-aviv-attractions/florentin-graffiti.webp",alt:"A real graffiti mural on Florentin Street in Tel Aviv",duration:"2 hours",meeting:"Meeting point varies",fromUsd:65,ratingLabel:"4.9 · 77 reviews"},
+ {id:"tour-neve-tzedek-walk-getyourguide@tours-tel-aviv-jaffa",provider:"GetYourGuide",title:"Neve Tzedek Cultural Walking Tour",description:"Explore restored historic streets, galleries and the Suzanne Dellal Center with a local guide",image:tourPhotos["neve-tzedek-walk"]!.src,alt:tourPhotos["neve-tzedek-walk"]!.alt,duration:"1½ hours",meeting:"Shabazi Street; confirm your selected starting point",fromUsd:null,ratingLabel:null},
+ {id:"tour-tel-aviv-cycling-viator@tours-tel-aviv-jaffa",provider:"Viator",title:"Tel Aviv Guided Cycling Tour",description:"Explore waterfront paths and neighbourhood landmarks by bike; check the route, cycling requirements and inclusions",image:tourPhotos["tel-aviv-cycling"]!.src,alt:tourPhotos["tel-aviv-cycling"]!.alt,duration:"About 3 hours",meeting:"Confirm the departure location with the operator",fromUsd:null,ratingLabel:null},
 ] as const;
 /** Google Maps opens an ordinary walking itinerary; visitors can adjust transit on the map. */
 function walkingDirectionsUrl(index:number){
@@ -126,7 +129,7 @@ function ExperienceCard({stop,num}:{stop:TelAvivExperience;num:number}){
 function Tours(){
  return <section id="activities" aria-labelledby="activities-h" className="mt-12 scroll-mt-24">
   <Heading id="activities" title="City tours and local activities" intro="A walk through Jaffa, a market-food experience or a guided street-art tour can add local context. These are selected third-party experiences, with booking completed directly by the provider."/>
-  <div className="grid gap-4 sm:grid-cols-2" data-testid="tel-aviv-affiliate-tours">
+  <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3" data-testid="tel-aviv-affiliate-tours">
   {affiliateTours.map(tour=>{
    const tracking=affiliateConfig[tour.id]?.trackingUrl;
    if(!tracking || !/^https:\/\/(?:viator|getyourguide)\.tpm\.li\//.test(tracking)) return null;
