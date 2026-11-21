@@ -14,16 +14,16 @@ import {
   bestTimeGuide as guide, monthFits, suitabilityColumns, seasonalFits,
   regionalRecommendations as regions, seasonDetails, type SeasonKey, type SeasonalFit
 } from "@/data/bestTimeIsrael";
-import springPhoto from "@/assets/home/hero-galilee-medium.webp";
-import summerPhoto from "@/assets/tel-aviv/beachfront.webp";
-import autumnPhoto from "@/assets/home/hero-haifa-medium.webp";
-import winterPhoto from "@/assets/home/hero-eilat-mountains-sm.webp";
+import masadaTourPhoto from "@/assets/guides/dead-sea-excursions/masada-ruins.webp";
 
+// The primary guide image is supplied separately by guide.photo and never changed.
+// Local secondary photos have two loss-aware WebP sizes, optimized for mobile.
+const seasonPhotoSize = "(min-width: 1024px) 736px, (min-width: 640px) calc(100vw - 96px), calc(100vw - 64px)";
 const photoBySeason = {
-  spring:{src:springPhoto,alt:"Spring scenery in the Galilee with green hills and the lake"},
-  summer:{src:summerPhoto,alt:"Sunny Mediterranean beachfront in Tel Aviv"},
-  autumn:{src:autumnPhoto,alt:"Haifa coastline and hills during clear-weather sightseeing"},
-  winter:{src:winterPhoto,alt:"Eilat Mountains and the southern desert landscape"}
+  spring:{src:"/images/best-time-israel/spring-720.webp",srcSet:"/images/best-time-israel/spring-320.webp 320w, /images/best-time-israel/spring-720.webp 720w",alt:"Green Bahai Gardens terraces on Mount Carmel in Haifa"},
+  summer:{src:"/images/best-time-israel/summer-720.webp",srcSet:"/images/best-time-israel/summer-320.webp 320w, /images/best-time-israel/summer-720.webp 720w",alt:"Sunny Tel Aviv promenade and Mediterranean beach"},
+  autumn:{src:"/images/best-time-israel/autumn-720.webp",srcSet:"/images/best-time-israel/autumn-320.webp 320w, /images/best-time-israel/autumn-720.webp 720w",alt:"Historic stone lane in Jerusalem's Jewish Quarter"},
+  winter:{src:"/images/best-time-israel/winter-720.webp",srcSet:"/images/best-time-israel/winter-320.webp 320w, /images/best-time-israel/winter-720.webp 720w",alt:"Eilat mountain range and the southern desert"}
 } as const;
 
 const seasonNames = ["spring","summer","autumn","winter"] as const;
@@ -36,8 +36,8 @@ const fits:Record<SeasonalFit,{short:string;style:string;dot:string}>={
 const related:{title:string;to:LinkProps["to"];desc:string}[]=[
   {title:"My Jerusalem travel guide",to:"/travel-blog/jerusalem-travel-guide/",desc:"Plan Old City walks and outdoor heritage stops"},
   {title:"Beaches in Tel Aviv",to:"/travel-blog/beaches-in-tel-aviv/",desc:"Choose a supervised beach and check swimming conditions"},
-  {title:"Sea of Galilee guide",to:"/travel-blog/sea-of-galilee/",desc:"Build a northern trip around the weather"},
-  {title:"Explore the Dead Sea",to:"/travel-blog/the-dead-sea/",desc:"Beaches, landscapes and practical access"},
+  {title:"Sea of Galilee guide",to:"/attractions/sea-of-galilee/",desc:"Build a northern trip around the weather"},
+  {title:"Explore the Dead Sea",to:"/attractions/dead-sea/",desc:"Beaches, landscapes and practical access"},
   {title:"Eilat & the Red Sea",to:"/travel-blog/eilat/",desc:"Compare southern coast and desert activities"},
   {title:"Visit Masada",to:"/attractions/masada/",desc:"Plan a heat-aware visit to the national park"}
 ];
@@ -50,9 +50,9 @@ const planning:{title:string;to:LinkProps["to"];desc:string}[]=[
   {title:"Getting around Israel",to:"/travel-blog/getting-around-israel/",desc:"Compare trains, buses, taxis and private transfers"}
 ];
 const partnerOptions=[
-  {id:"tour-jerusalem-old-city-walk-viator@tours-jerusalem",platform:"Viator",title:"Jerusalem Old City walking tour",desc:"A guided heritage walk for a comfortable city-sightseeing day.",sub:"best_time_israel_jerusalem_old_city"},
-  {id:"tour-jaffa-carmel-walk-getyourguide@tours-tel-aviv-jaffa",platform:"GetYourGuide",title:"Jaffa & Carmel Market walking tour",desc:"A city-and-market option when the coast is more comfortable for walking.",sub:"best_time_israel_jaffa_carmel"},
-  {id:"jslm-deadsea-masada-viator",platform:"Viator",title:"Masada & the Dead Sea from Jerusalem",desc:"An outdoor day that benefits from careful heat and weather planning.",sub:"best_time_israel_masada_dead_sea"}
+  {id:"tour-jerusalem-old-city-walk-viator@tours-jerusalem",platform:"Viator",title:"Jerusalem Old City walking tour",desc:"A guided heritage walk for a comfortable city-sightseeing day.",sub:"best_time_israel_jerusalem_old_city",image:"/images/attractions/old-jerusalem-cardo.webp",alt:"Ancient stone Cardo shopping street in Jerusalem Old City"},
+  {id:"tour-jaffa-carmel-walk-getyourguide@tours-tel-aviv-jaffa",platform:"GetYourGuide",title:"Jaffa & Carmel Market walking tour",desc:"A city-and-market option when the coast is more comfortable for walking.",sub:"best_time_israel_jaffa_carmel",image:"/images/attractions/jaffa-flea-market.webp",alt:"Historic Jaffa flea market streets and shops"},
+  {id:"jslm-deadsea-masada-viator",platform:"Viator",title:"Masada & the Dead Sea from Jerusalem",desc:"An outdoor day that benefits from careful heat and weather planning.",sub:"best_time_israel_masada_dead_sea",image:masadaTourPhoto,alt:"Ancient stone remains at Masada above the Dead Sea"}
 ] as const;
 
 function SectionHeading({id,title,intro}:{id:string;title:string;intro?:ReactNode}) {
@@ -77,11 +77,13 @@ function GuideCard({item}:{item:{title:string;to:LinkProps["to"];desc:string}}){
 }
 function MonthMatrix(){
   const [filter,setFilter]=useState<SeasonKey|"all">("all");
+  const [selectedMonth,setSelectedMonth]=useState<string|null>(null);
   const visible=filter==="all"?monthFits:monthFits.filter(month=>month.season===filter);
+  const activeMonth=visible.find(month=>month.month===selectedMonth);
   return <section id="months" aria-labelledby="months-heading" className="mt-12 scroll-mt-24">
     <SectionHeading id="months" title="Choose your month at a glance" intro="These are broad seasonal tendencies for typical outdoor comfort, not weather forecasts, price predictions or safety advice. Compare the activities you care about, then look at the region and specific travel dates."/>
     <div className="mb-4 flex flex-wrap gap-2" role="group" aria-label="Filter the month comparison by season">
-      {(["all",...seasonNames] as const).map(value=><button type="button" key={value} aria-pressed={filter===value} onClick={()=>setFilter(value)} className={"min-h-10 rounded-full border px-3.5 py-1.5 text-sm font-medium focus-visible:outline-2 focus-visible:outline-primary "+(filter===value?"border-primary bg-primary text-primary-foreground":"bg-card hover:bg-secondary")}>{value==="all"?"All months":seasonLabels[value]}</button>)}
+      {(["all",...seasonNames] as const).map(value=><button type="button" key={value} aria-pressed={filter===value} onClick={()=>{setFilter(value);setSelectedMonth(null);}} className={"min-h-10 rounded-full border px-3.5 py-1.5 text-sm font-medium focus-visible:outline-2 focus-visible:outline-primary "+(filter===value?"border-primary bg-primary text-primary-foreground":"bg-card hover:bg-secondary")}>{value==="all"?"All months":seasonLabels[value]}</button>)}
     </div>
     <div className="mb-4 flex flex-wrap gap-x-4 gap-y-2 text-xs text-muted-foreground" aria-label="Month comparison legend">
       {(["favourable","variable","challenging"] as const).map(value=><span key={value} className="inline-flex items-center gap-2"><Status value={value}/><span>{seasonalFits[value].hint}</span></span>)}
@@ -91,14 +93,17 @@ function MonthMatrix(){
         <caption className="sr-only">Twelve-month indicative suitability for sightseeing, Mediterranean beach time, northern scenery, the Dead Sea and desert walks</caption>
         <thead className="bg-secondary/70 text-xs"><tr><th scope="col" className="sticky left-0 z-10 min-w-[108px] border-b bg-secondary px-3 py-3 font-semibold">Month</th>{suitabilityColumns.map(column=><th scope="col" title={column.description} className="min-w-[135px] border-b px-2 py-3 text-center font-semibold" key={column.key}>{column.label}</th>)}</tr></thead>
         <tbody>{visible.map((month,index)=><tr key={month.month} className={index%2===0?"bg-card":"bg-secondary/20"}>
-          <th scope="row" className="sticky left-0 z-10 border-b bg-card px-3 py-3 align-middle font-semibold">{month.month}<span className="mt-0.5 block text-[11px] font-normal text-muted-foreground">{seasonLabels[month.season]}</span></th>
+          <th scope="row" className="sticky left-0 z-10 border-b bg-card px-3 py-3 align-middle font-semibold"><button type="button" aria-pressed={selectedMonth===month.month} aria-controls="month-insight" onClick={()=>setSelectedMonth(month.month)} className={"rounded-md px-2 py-1.5 text-left underline-offset-4 hover:text-primary hover:underline focus-visible:outline-2 focus-visible:outline-primary "+(selectedMonth===month.month?"bg-primary text-primary-foreground":"")}>{month.month}<span className="mt-0.5 block text-[11px] font-normal opacity-75">{seasonLabels[month.season]}</span></button></th>
           {suitabilityColumns.map(column=><td className="border-b px-2 py-2 text-center" key={column.key}><Status value={month[column.key]}/></td>)}
         </tr>)}</tbody>
       </table>
     </div>
-    <p className="mt-2 text-xs leading-relaxed text-muted-foreground">On a phone, swipe the table sideways to see all five activities. “Desert walks” means hiking and exposed sightseeing, not resort swimming or indoor activities in Eilat.</p>
-    <div className="mt-5 grid gap-2 sm:grid-cols-2 lg:grid-cols-3">
-      {visible.map(month=><div key={month.month} className="rounded-lg border bg-secondary/20 p-3"><p className="font-semibold text-sm">{month.month}</p><p className="mt-1 text-xs leading-relaxed text-muted-foreground">{month.insight}</p></div>)}
+    <p className="mt-2 text-xs leading-relaxed text-muted-foreground">On a phone, swipe the table sideways to see all five activities. “Dead Sea / Masada walks” and “Desert walks” both rate exposed outdoor sightseeing, not swimming at the Dead Sea or resort activities in Eilat.</p>
+    <div id="month-insight" role="status" aria-live="polite" className="mt-5 rounded-xl border bg-secondary/20 p-4 sm:p-5">
+      {activeMonth ? <>
+        <h3 className="text-base font-bold">My planning note for {activeMonth.month}</h3>
+        <p className="mt-2 max-w-3xl text-sm leading-relaxed text-muted-foreground">{activeMonth.insight}</p>
+      </> : <p className="text-sm leading-relaxed text-muted-foreground"><strong className="text-foreground">Want month-specific advice?</strong> Select any month in the left column to see one practical planning note without scrolling through twelve separate cards.</p>}
     </div>
   </section>;
 }
@@ -127,7 +132,7 @@ function SeasonSections(){
           <div className="flex items-start gap-3"><span className="rounded-lg bg-secondary p-2 text-primary"><Icon className="h-5 w-5" aria-hidden="true"/></span><div><p className="text-xs font-semibold uppercase tracking-wide text-primary">{season.months}</p><h3 id={season.id+"-heading"} className="mt-1 text-xl font-bold sm:text-2xl">{season.title}</h3></div></div>
           <p className="mt-3 max-w-3xl text-sm font-semibold leading-relaxed">{season.summary}</p>
           <p className="mt-3 max-w-3xl leading-relaxed">{season.paragraphs[0]}</p>
-          <figure className="mt-4 max-w-3xl overflow-hidden rounded-xl"><img src={photo.src} alt={photo.alt} width={760} height={450} loading="lazy" decoding="async" className="aspect-[16/9] max-h-[320px] w-full object-cover"/></figure>
+          <figure className="mt-4 max-w-3xl overflow-hidden rounded-xl"><img src={photo.src} srcSet={photo.srcSet} sizes={seasonPhotoSize} alt={photo.alt} width={720} height={405} loading="lazy" decoding="async" className="aspect-[16/9] max-h-[320px] w-full object-cover"/></figure>
           <p className="mt-4 max-w-3xl leading-relaxed">{season.paragraphs[1]}</p>
           <div className="mt-5 max-w-3xl"><Tip>{season.tip}</Tip></div>
           <div className="mt-4 flex flex-wrap gap-x-5 gap-y-2 text-sm">{season.links.map(link=><Link key={link.to} to={link.to as LinkProps["to"]} className="inline-flex items-center gap-1 font-semibold text-primary hover:underline">{link.label}<ArrowUpRight className="h-3.5 w-3.5" aria-hidden="true"/></Link>)}</div>
@@ -174,11 +179,14 @@ function CuratedTours(){
   if(!offers.length)return null;
   return <section id="tours" aria-labelledby="tours-heading" className="mt-12 scroll-mt-24">
     <SectionHeading id="tours" title="Guided experiences to consider" intro="For a trip with fixed dates, these third-party activities can help you choose what fits the season. Check each provider's availability, actual itinerary, weather arrangements and cancellation terms before booking."/>
-    <div className="grid gap-4 md:grid-cols-3" data-testid="best-time-seasonal-tours">{offers.map(item=><article className="flex flex-col rounded-xl border bg-card p-4" key={item.id}>
-      <p className="text-xs font-semibold uppercase tracking-wide text-primary">{item.platform}</p>
-      <h3 className="mt-2 text-lg font-bold leading-snug">{item.title}</h3>
-      <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{item.desc}</p>
-      <a href={item.url} rel={relFor(true)} target="_blank" onClick={()=>recordOutboundClick({pageId:"best_time_to_visit_israel",productId:item.id,offerId:item.sub})} className="mt-auto inline-flex min-h-11 items-center justify-center gap-2 rounded-lg border border-primary/30 px-3 py-2.5 pt-3 text-center text-sm font-semibold text-primary hover:bg-secondary focus-visible:outline-2 focus-visible:outline-primary">Check tour details<ExternalLink className="h-3.5 w-3.5" aria-hidden="true"/><span className="sr-only"> (opens in a new tab)</span></a>
+    <div className="grid gap-4 md:grid-cols-3" data-testid="best-time-seasonal-tours">{offers.map(item=><article className="flex min-w-0 flex-col overflow-hidden rounded-xl border bg-card" key={item.id}>
+      <img src={item.image} alt={item.alt} width={560} height={350} loading="lazy" decoding="async" className="aspect-[16/10] w-full object-cover"/>
+      <div className="flex flex-1 flex-col p-4">
+        <p className="text-xs font-semibold uppercase tracking-wide text-primary">{item.platform}</p>
+        <h3 className="mt-2 text-lg font-bold leading-snug">{item.title}</h3>
+        <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{item.desc}</p>
+        <a href={item.url} rel={relFor(true)} target="_blank" onClick={()=>recordOutboundClick({pageId:"best_time_to_visit_israel",productId:item.id,offerId:item.sub})} className="mt-auto inline-flex min-h-11 items-center justify-center gap-2 rounded-lg border border-primary/30 px-3 py-2.5 pt-3 text-center text-sm font-semibold text-primary hover:bg-secondary focus-visible:outline-2 focus-visible:outline-primary">Check tour details<ExternalLink className="h-3.5 w-3.5" aria-hidden="true"/><span className="sr-only"> (opens in a new tab)</span></a>
+      </div>
     </article>)}</div>
   </section>;
 }
