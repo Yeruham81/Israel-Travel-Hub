@@ -34,19 +34,9 @@ export function SacredHillSiteHours({ id }: { id: SacredHillId }) {
   const facts = sacredHillPlanning[id].facts;
   return <Section id="visit-facts" title="Opening Hours & Entrance Fees">
     <p className="mt-3 max-w-3xl leading-relaxed text-muted-foreground">These are reference opening hours and fees. Churches may change their schedules for worship, holidays or local circumstances, so check the linked source before travelling specifically to a site.</p>
-    {/* Small screens get readable, full-width facts rather than a narrow, sideways-scrolling table. */}
-    <div className="mt-5 grid gap-3 md:hidden" data-testid="sacred-hours-mobile">
-      {facts.map(fact => <article key={fact.site} className="rounded-xl border bg-card p-4">
-        <h3 className="font-semibold leading-snug">{fact.site}</h3>
-        <dl className="mt-3 space-y-2 text-sm">
-          <div><dt className="font-semibold text-muted-foreground">Opening hours</dt><dd className="mt-0.5 leading-relaxed">{fact.hours}</dd></div>
-          <div><dt className="font-semibold text-muted-foreground">Admission</dt><dd className="mt-0.5 leading-relaxed">{fact.admission}</dd></div>
-        </dl>
-        <div className="mt-3 border-t pt-3 text-sm"><OfficialAndMap source={fact.source} sourceUrl={fact.sourceUrl} mapQuery={fact.mapQuery} /></div>
-      </article>)}
-    </div>
-    <div className="mt-5 hidden overflow-x-auto rounded-xl border bg-card md:block" data-testid="sacred-hours-desktop">
-      <table className="w-full border-collapse text-left text-sm">
+    <p className="mt-3 text-xs text-muted-foreground md:hidden">Swipe the table sideways to compare opening hours, admission and official information.</p>
+    <div className="mt-3 max-w-full overflow-x-auto rounded-xl border bg-card focus-visible:outline-2 focus-visible:outline-primary" role="region" aria-label="Opening hours and entrance fees comparison" tabIndex={0} data-testid="sacred-hours-table">
+      <table className="w-full min-w-[740px] border-collapse text-left text-sm">
         <thead className="bg-secondary/60">
           <tr className="border-b">
             <th scope="col" className="w-[27%] p-3 font-semibold">Site</th>

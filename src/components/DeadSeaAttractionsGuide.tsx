@@ -205,8 +205,9 @@ export function DeadSeaAttractionsGuide() {
 
       <section id="compare" aria-labelledby="compare-h" className="mt-12 scroll-mt-24">
         <Heading id="compare" title="Compare all ten Dead Sea experiences" intro="Use this overview to match your interests, access requirements and available time. The suggested durations exclude travel between stops."/>
-        <div className="overflow-hidden rounded-xl border bg-card">
-          <table className="hidden w-full table-fixed border-collapse text-left text-sm md:table">
+        <p className="mb-3 text-xs text-muted-foreground md:hidden">Swipe the table sideways to compare all ten Dead Sea experiences.</p>
+        <div role="region" aria-label="Dead Sea attractions comparison" tabIndex={0} className="max-w-full overflow-x-auto rounded-xl border bg-card focus-visible:outline-2 focus-visible:outline-primary">
+          <table className="w-full min-w-[800px] table-fixed border-collapse text-left text-sm">
             <caption className="sr-only">Compare ten attractions by area, admission or booking requirements, and suggested visiting duration</caption>
             <thead className="bg-secondary/60"><tr>
               <th scope="col" className="w-[29%] border-b px-3 py-3">Attraction</th>
@@ -221,13 +222,7 @@ export function DeadSeaAttractionsGuide() {
               <td className="px-3 py-3 text-muted-foreground">{stop.allow}</td>
             </tr>)}</tbody>
           </table>
-          <details className="md:hidden">
-            <summary className="cursor-pointer px-4 py-3 text-sm font-semibold text-primary hover:bg-secondary/40">Show the comparison of all ten experiences</summary>
-            <ul className="divide-y border-t">{stops.map((stop,index)=><li key={stop.id} className="px-4 py-3">
-              <a href={"#"+stop.id} className="font-semibold text-primary hover:underline">{index+1}. {stop.shortTitle}</a>
-              <p className="mt-1 text-sm">{stop.access}</p><p className="mt-1 text-xs leading-relaxed text-muted-foreground">{stop.area} · {stop.allow}</p>
-            </li>)}</ul>
-          </details>
+          
         </div>
       </section>
 
