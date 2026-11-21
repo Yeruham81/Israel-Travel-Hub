@@ -197,6 +197,32 @@ for (const route of paths) {
 assert(pagesWithTables >= 12, "Unexpectedly few pages with real comparison tables");
 console.log("Responsive table parity verified across " + pagesWithTables + " sitemap pages and " + auditedTables + " rendered tables.");
 
+// Long-form editorial content uses the museum-style full-width card layout.
+// Compact related guides, bookable tours and short beach cards are intentionally
+// excluded from this assertion.
+const horizontalDetailPages = [
+  ["/travel-blog/israel-tours-for-seniors/", 4],
+  ["/travel-blog/attractions-in-tel-aviv/", 10],
+  ["/travel-blog/dead-sea-attractions/", 10],
+  ["/travel-blog/top-10-things-to-do-in-israel/", 10],
+  ["/travel-blog/shopping-in-jerusalem/", 10],
+  ["/travel-blog/what-to-eat-in-israel/", 10],
+  ["/travel-blog/beaches-in-tel-aviv/", 7],
+];
+let verifiedHorizontalCards = 0;
+for (const [route, expected] of horizontalDetailPages) {
+  const file = join(root, route.replace(/^\\/|\\/$/g, ""), "index.html");
+  assert(existsSync(file), "Missing wide editorial card page: " + route);
+  const html = readFileSync(file, "utf8");
+  const actual = [...html.matchAll(/data-detailed-card="horizontal"/g)].length;
+  assert(actual === expected, "Expected " + expected + " horizontal editorial cards on " + route + "; found " + actual);
+  assert(html.includes("lg:col-start-2") && html.includes("lg:col-start-1"),
+    "Horizontal editorial cards missing desktop right-side photo layout on " + route);
+  verifiedHorizontalCards += actual;
+}
+assert(verifiedHorizontalCards === 61, "Long-form editorial card count must total 61");
+console.log("Wide editorial card layout verified in static export: " + verifiedHorizontalCards + " cards across seven guides.");
+
 const privateApi = join(root, "api");
 // Never deploy compiled API: Hostinger's manually configured PHP endpoints
 // are excluded by rsync, and server-side Vite JS cannot run as static files.
