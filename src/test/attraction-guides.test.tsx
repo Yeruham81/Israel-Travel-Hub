@@ -35,7 +35,7 @@ describe("17 original attraction destination guides", () => {
     }
   });
   it("keeps regional overviews in Travel Guides and individual sites in Attractions", () => {
-    expect(guideDirectory).toHaveLength(46);
+    expect(guideDirectory).toHaveLength(45);
     const attractionItems = filterGuides("", "attractions");
     for (const id of attractionIds) {
       const url = attractionPath(id);

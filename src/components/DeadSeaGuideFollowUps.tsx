@@ -21,7 +21,7 @@ const related: {
   {
     title: "Dead Sea visitor guide",
     description: "Explore beaches, facilities, floating tips and useful visitor information.",
-    to: "/travel-blog/the-dead-sea/",
+    to: "/attractions/dead-sea/",
     photo: deadSeaBeach,
     alt: "Dead Sea beach and water",
   },
