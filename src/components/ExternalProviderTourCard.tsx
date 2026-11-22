@@ -51,7 +51,7 @@ export function ExternalProviderTourCard({
   return <article data-testid={testId} className={`group flex h-full min-w-0 flex-col overflow-hidden rounded-xl border bg-card shadow-sm transition-all hover:-translate-y-0.5 hover:border-primary/70 hover:shadow-md ${className}`}>
     <img src={image} alt={alt} width={720} height={405} loading="lazy" decoding="async" className="aspect-[16/9] w-full object-cover" />
     <div className="flex min-w-0 flex-1 flex-col p-4">
-      <p className="text-xs font-semibold uppercase tracking-wide text-primary">{platform}</p>
+      <p className="text-xs font-semibold uppercase tracking-wide text-primary"><span className="sr-only">Booking platform: </span>{platform}</p>
       <h3 className="mt-1.5 text-base font-semibold leading-snug text-foreground">{title}</h3>
       <p className="mt-2 line-clamp-3 text-sm leading-relaxed text-muted-foreground">{description}</p>
       <div className="mt-3 flex flex-wrap items-center gap-x-3 gap-y-1.5 text-xs text-muted-foreground">
