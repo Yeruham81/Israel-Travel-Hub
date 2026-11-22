@@ -208,16 +208,61 @@ export const oldCityJerusalemDestinationContent: AttractionDestinationContent = 
   ),
   itineraryContent: (
     <div className="mt-4 space-y-4">
-      <div className="rounded-xl border bg-card p-4 sm:p-5" data-testid="jerusalem-old-city-walking-plans">
-        <div className="flex items-center gap-2"><Clock3 className="h-5 w-5 text-primary"/><h3 className="font-serif text-xl font-semibold">Choose your Old City walk</h3></div>
-        <div className="mt-3 space-y-3 text-sm leading-relaxed sm:text-base">
-          <p><strong>A shorter visit (2–3 hours):</strong> Enter at Jaffa Gate, visit the Church of the Holy Sepulchre and enjoy the nearby Christian Quarter lanes and market streets. Add the Tower of David only if you have enough time.</p>
-          <p><strong>A half day (4–5 hours):</strong> Start at Jaffa Gate, visit the Holy Sepulchre, cross the Cardo in the Jewish Quarter and continue to the Western Wall. Leave time for lunch and pauses along the way.</p>
-          <p><strong>A full day:</strong> Choose one additional timed or ticketed experience — the Western Wall Tunnels, Tower of David or Ramparts Walk — rather than expecting all three to fit easily. If a Temple Mount visit matters most to you, first confirm whether non-Muslim access is permitted on your date and plan your morning around that limited visiting window. Choose one other timed experience later in the day if there is time.</p>
-        </div>
-        <p className="mt-3 text-sm leading-relaxed sm:text-base">With children, allow extra time for steps and breaks. If Christian pilgrimage is your priority, follow the <Link to="/travel-blog/churches-in-jerusalem/" className={inlineLink}>Jerusalem churches guide</Link> to plan a route through the relevant stations and chapels.</p>
+      <p>Choose a route based on the time you have and the landmarks that interest you most. Walking times below allow for sightseeing stops and can vary with queues and services.</p>
+      <div className="grid gap-3 md:grid-cols-3" data-testid="jerusalem-old-city-visit-choices">
+        <article className="rounded-xl border bg-card p-4">
+          <p className="text-xs font-bold uppercase tracking-wide text-primary">2–3 hours</p>
+          <h3 className="mt-2 text-lg font-semibold">An introduction to the Old City</h3>
+          <p className="mt-2 text-sm leading-relaxed text-muted-foreground">Start at Jaffa Gate, visit the Church of the Holy Sepulchre and explore the nearby Christian Quarter and market streets. Finish at New Gate or return to Jaffa Gate.</p>
+        </article>
+        <article className="rounded-xl border bg-card p-4">
+          <p className="text-xs font-bold uppercase tracking-wide text-primary">4–5 hours</p>
+          <h3 className="mt-2 text-lg font-semibold">The classic cross-quarter walk</h3>
+          <p className="mt-2 text-sm leading-relaxed text-muted-foreground">Start at Jaffa Gate, continue to the Holy Sepulchre, cross the Cardo and Jewish Quarter, and finish at the Western Wall. Arrange pickup near Dung Gate.</p>
+        </article>
+        <article className="rounded-xl border bg-card p-4">
+          <p className="text-xs font-bold uppercase tracking-wide text-primary">A full day</p>
+          <h3 className="mt-2 text-lg font-semibold">A deeper heritage visit</h3>
+          <p className="mt-2 text-sm leading-relaxed text-muted-foreground">Follow the classic route and add the Tower of David, a booked Western Wall Tunnels tour or the Ramparts Walk. For a Temple Mount visit, plan your morning around the permitted visiting window.</p>
+        </article>
       </div>
-      <AttractionPracticalTip>A guided walk is particularly useful if you want to understand the relationship between the four quarters. For a more flexible day, choose your first and last gate before arranging transport.</AttractionPracticalTip>
+      <OldCityJerusalemRouteMap />
+      <h3 className="pt-2 font-serif text-xl font-semibold">Two suggested walking routes</h3>
+      <div className="grid gap-3 md:grid-cols-2" data-testid="jerusalem-old-city-walking-plans">
+        <article className="rounded-xl border bg-card p-4 sm:p-5">
+          <p className="text-xs font-semibold uppercase tracking-wide text-primary">About 4–5 hours</p>
+          <h4 className="mt-2 font-serif text-xl font-semibold">The Old City's major landmarks</h4>
+          <p className="mt-2 text-sm text-muted-foreground">A balanced first visit across the Christian and Jewish Quarters.</p>
+          <ol className="mt-3 list-decimal space-y-2 pl-5 text-sm leading-relaxed">
+            <li>Enter through Jaffa Gate, with an optional visit to the Tower of David.</li>
+            <li>Walk through the Christian Quarter to the Church of the Holy Sepulchre.</li>
+            <li>Continue through the markets toward the Jewish Quarter and the Cardo.</li>
+            <li>Visit the Western Wall and finish near Dung Gate.</li>
+          </ol>
+          <a href="https://www.google.com/maps/dir/?api=1&origin=Jaffa%20Gate%20Jerusalem%20Israel&destination=Western%20Wall%20Jerusalem%20Israel&waypoints=Church%20of%20the%20Holy%20Sepulchre%20Jerusalem%7CCardo%20Jewish%20Quarter%20Jerusalem&travelmode=walking" target="_blank" rel="noopener noreferrer" className={inlineLink}>Open the walking route in Google Maps <ArrowUpRight className="inline size-4" aria-hidden="true"/></a>
+        </article>
+        <article className="rounded-xl border bg-card p-4 sm:p-5">
+          <p className="text-xs font-semibold uppercase tracking-wide text-primary">About 2–3 hours</p>
+          <h4 className="mt-2 font-serif text-xl font-semibold">Via Dolorosa and the Christian Quarter</h4>
+          <p className="mt-2 text-sm text-muted-foreground">A pilgrimage-focused walk following the traditional Stations of the Cross.</p>
+          <ol className="mt-3 list-decimal space-y-2 pl-5 text-sm leading-relaxed">
+            <li>Enter through Damascus Gate for the Muslim Quarter markets, or Lion's Gate for an approach nearer the early stations.</li>
+            <li>Follow the early stations of the Via Dolorosa along the marked streets and chapels.</li>
+            <li>Continue to the Church of the Holy Sepulchre for the final stations.</li>
+            <li>Explore the surrounding Christian Quarter and finish at New Gate or Jaffa Gate.</li>
+          </ol>
+          <a href="https://www.google.com/maps/dir/?api=1&origin=Damascus%20Gate%20Jerusalem%20Israel&destination=Church%20of%20the%20Holy%20Sepulchre%20Jerusalem%20Israel&waypoints=Via%20Dolorosa%20Jerusalem%20Israel&travelmode=walking" target="_blank" rel="noopener noreferrer" className={inlineLink}>Open the walking route in Google Maps <ArrowUpRight className="inline size-4" aria-hidden="true"/></a>
+        </article>
+      </div>
+      <div className="rounded-xl border bg-card p-4 sm:p-5" data-testid="jerusalem-old-city-walking-connections">
+        <h3 className="font-serif text-xl font-semibold">Continue exploring on foot</h3>
+        <div className="mt-3 grid gap-3 sm:grid-cols-3">
+          <a href="https://www.google.com/maps/dir/?api=1&origin=Jaffa%20Gate%20Jerusalem&destination=Zion%20Gate%20Jerusalem&travelmode=walking" target="_blank" rel="noopener noreferrer" className="rounded-lg border bg-secondary/20 p-3 text-sm font-semibold text-primary hover:border-primary/50">Jaffa Gate to Zion Gate <ArrowUpRight className="inline size-4" aria-hidden="true"/></a>
+          <a href="https://www.google.com/maps/dir/?api=1&origin=Western%20Wall%20Jerusalem&destination=Dung%20Gate%20Jerusalem&travelmode=walking" target="_blank" rel="noopener noreferrer" className="rounded-lg border bg-secondary/20 p-3 text-sm font-semibold text-primary hover:border-primary/50">Western Wall to Dung Gate <ArrowUpRight className="inline size-4" aria-hidden="true"/></a>
+          <a href="https://www.google.com/maps/dir/?api=1&origin=Lions%20Gate%20Jerusalem&destination=Church%20of%20All%20Nations%20Gethsemane%20Jerusalem&travelmode=walking" target="_blank" rel="noopener noreferrer" className="rounded-lg border bg-secondary/20 p-3 text-sm font-semibold text-primary hover:border-primary/50">Lion's Gate to Gethsemane <ArrowUpRight className="inline size-4" aria-hidden="true"/></a>
+        </div>
+      </div>
+      <AttractionPracticalTip>For the most enjoyable walking day, plan your fixed-time booking first and build the remaining stops around it. Allow extra time for prayer services, holiday crowds and security queues.</AttractionPracticalTip>
     </div>
   ),
   historyContent: (
