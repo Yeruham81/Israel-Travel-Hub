@@ -1,6 +1,6 @@
 import { Link } from "@tanstack/react-router";
 import type { ReactNode } from "react";
-import { ArrowRight, ArrowUpRight, CarFront, Clock3, ExternalLink, HeartHandshake, Lightbulb, MapPin, PersonStanding, ShieldCheck } from "lucide-react";
+import { ArrowRight, ArrowUpRight, CarFront, Clock3, HeartHandshake, Lightbulb, MapPin, PersonStanding, ShieldCheck } from "lucide-react";
 import { Breadcrumbs, FaqList, OnThisPage } from "@/components/Guide";
 import { AuthorCard } from "@/components/AuthorCard";
 import { GuideHeroLayout, GuideHeroMedia } from "@/components/GuideHeroMedia";
@@ -10,6 +10,12 @@ import { HomeContactForm } from "@/components/HomeContactForm";
 import { seniorUpdatedAt, seniorPath, seniorHero, seniorDayTrips, seniorTransportPreferences, seniorAccessQuestions, seniorFaqs, seniorSites, seniorPlanning, type SeniorDay, type SeniorRelated } from "@/data/seniorToursGuide";
 
 const lnk="font-semibold text-primary underline underline-offset-4 hover:text-primary/80";
+const tripEnquiryLabels: Record<string, string> = {
+ jerusalem: "Plan your Jerusalem day with me",
+ masada: "Discuss a Masada & Dead Sea trip",
+ galilee: "Share your Galilee plans",
+ coast: "Plan a coastal day trip",
+};
 const sections=[
  ["overview","A trip that fits you"],
  ["private-driver","Why private transport"],
@@ -39,7 +45,7 @@ function Tip({children}:{children:ReactNode}){
  return <aside className="flex gap-3 rounded-xl border border-amber-200 bg-amber-50/80 p-4 text-sm leading-relaxed text-amber-950 dark:border-amber-700/50 dark:bg-amber-950/20 dark:text-amber-100"><Lightbulb className="mt-0.5 h-5 w-5 shrink-0 text-amber-600" aria-hidden="true"/><div>{children}</div></aside>;
 }
 function External({href,children}:{href:string;children:ReactNode}){
- return <a href={href} target="_blank" rel="noopener noreferrer" className={lnk}>{children}<ExternalLink className="ml-1 inline h-3.5 w-3.5" aria-hidden="true"/><span className="sr-only"> (opens in a new tab)</span></a>;
+ return <a href={href} target="_blank" rel="noopener noreferrer" className={lnk}>{children}<span className="sr-only"> (opens in a new tab)</span></a>;
 }
 function PhotoLink({item}:{item:SeniorRelated}){
  return <Link to={item.to} className="editorial-card-link group flex min-w-0 flex-col overflow-hidden rounded-xl border bg-card transition-colors hover:border-primary/50 hover:bg-secondary/20 focus-visible:outline-2 focus-visible:outline-primary">
@@ -76,7 +82,7 @@ function TripCard({item}:{item:SeniorDay}){
    <div className="mt-4 flex flex-wrap gap-2">{item.suggestedStops.map(stop=><Link key={stop.label} to={stop.to} className="rounded-full border px-3 py-1.5 text-xs font-semibold text-primary hover:bg-secondary">{stop.label}</Link>)}</div>
   </div>
   <div className="space-y-3 border-t bg-secondary/10 p-4 sm:p-5 lg:px-6">
-   <a href="#contact" data-senior-trip-enquiry={item.id} className="inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-lg bg-primary px-4 py-2.5 text-center text-sm font-semibold text-primary-foreground hover:opacity-90 lg:w-auto">Ask me about this private trip <ArrowRight className="h-4 w-4" aria-hidden="true"/></a>
+   <a href="#contact" data-senior-trip-enquiry={item.id} className="inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-lg bg-primary px-4 py-2.5 text-center text-sm font-semibold text-primary-foreground hover:opacity-90 lg:w-auto">{tripEnquiryLabels[item.id]} <ArrowRight className="h-4 w-4" aria-hidden="true"/></a>
    <div className="flex flex-wrap items-center justify-between gap-x-4 gap-y-2">
     <Link to={item.to} className="inline-flex items-center gap-1.5 text-sm font-semibold text-primary hover:underline">Browse other tours <ArrowUpRight className="h-4 w-4" aria-hidden="true"/></Link>
     <a href={map} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 text-sm font-semibold text-primary hover:underline"><MapPin className="h-4 w-4" aria-hidden="true"/>Google Maps <ArrowUpRight className="h-4 w-4" aria-hidden="true"/></a>
@@ -99,20 +105,15 @@ export function SeniorToursGuide(){
    </header>
 
    <section id="overview" aria-labelledby="overview-heading" className="mt-10 scroll-mt-24">
-    <Heading id="overview" title="See Israel your way, without a rushed group schedule" intro="There is no single way to travel comfortably at an older age. Some guests enjoy long walks; others prefer short sightseeing stops and frequent places to sit. I plan around what works for you."/>
-    <p className="leading-relaxed">A private vehicle gives you more control over your day: convenient pickup, time for coffee or lunch, shorter walks where possible and the option to skip a stop when you are tired. Rather than promising that every landmark is easily accessible, I believe in checking your priorities, the terrain and the site's actual visitor facilities first.</p>
-    <div className="mt-5"><Tip>Age alone doesn't determine your route. Tell me what you enjoy doing and what makes a day comfortable for you; we can keep sightseeing ambitious where appropriate or plan shorter, gentler visits.</Tip></div>
-    <div className="mt-5 flex flex-wrap gap-3">
-     <a href="#contact" className="inline-flex min-h-11 items-center gap-2 rounded-lg bg-primary px-5 py-3 text-sm font-semibold text-primary-foreground hover:opacity-90">Ask about my private driver service <ArrowRight className="h-4 w-4" aria-hidden="true"/></a>
-     <Link to="/private-driver-in-israel/" className="inline-flex min-h-11 items-center gap-2 rounded-lg border px-5 py-3 text-sm font-semibold text-primary hover:bg-secondary">How private day trips work <ArrowUpRight className="h-4 w-4" aria-hidden="true"/></Link>
-    </div>
+    <Heading id="overview" title="See Israel at your own pace" intro="Every traveler has their own pace. Some guests enjoy long walks; others prefer shorter sightseeing stops and frequent places to sit. I plan around what works for you."/>
+    <p className="leading-relaxed">A private vehicle gives you more control over your day: convenient pickup, time for coffee or lunch, shorter walks where possible and the option to skip a stop when you are tired. I'll help you check walking routes, terrain and visitor facilities before choosing the places that best suit you.</p>
+    <div className="mt-5"><Tip>Tell me what you enjoy doing and what makes a day comfortable for you. We can plan active sightseeing, shorter visits or a relaxed mix of both.</Tip></div>
    </section>
    <OnThisPage sections={sections}/>
 
    <section id="private-driver" aria-labelledby="private-driver-heading" className="mt-12 scroll-mt-24">
     <Heading id="private-driver" title="What makes a private driver useful for senior visitors?" intro="Personalized transport can help you shape the day around your energy, preferred departure time and the destinations you care most about."/>
     <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">{seniorTransportPreferences.map((item,i)=><div key={item.title} className="rounded-xl border bg-card p-5"><div className="flex items-center gap-2 text-primary">{i===0?<CarFront className="h-5 w-5" aria-hidden="true"/>:i===1?<Clock3 className="h-5 w-5" aria-hidden="true"/>:i===2?<PersonStanding className="h-5 w-5" aria-hidden="true"/>:i===3?<MapPin className="h-5 w-5" aria-hidden="true"/>:i===4?<ShieldCheck className="h-5 w-5" aria-hidden="true"/>:<HeartHandshake className="h-5 w-5" aria-hidden="true"/>}<h3 className="font-semibold text-foreground">{item.title}</h3></div><p className="mt-3 text-sm leading-relaxed text-muted-foreground">{item.text}</p></div>)}</div>
-    <p className="mt-4 text-sm leading-relaxed text-muted-foreground">The private driver provides transportation and agreed stops; the service does not automatically include a licensed sightseeing guide, personal-care attendant or medical service. If you want professional guiding or specialist accessible transport, please request it before booking so availability can be checked separately.</p>
    </section>
 
    <section id="day-trips" aria-labelledby="day-trips-heading" className="mt-12 scroll-mt-24">
@@ -120,7 +121,7 @@ export function SeniorToursGuide(){
     <div className="grid gap-5" data-testid="senior-detailed-trip-cards">{seniorDayTrips.map(item=><TripCard key={item.id} item={item}/>)}</div>
     <div data-senior-midpage-cta className="mt-6 flex flex-col gap-3 rounded-xl border p-4 sm:flex-row sm:items-center sm:justify-between sm:gap-6 sm:p-5">
      <div><h3 className="font-semibold">Would you prefer a different pace or route?</h3><p className="mt-1 text-sm leading-relaxed text-muted-foreground">Tell me which places matter most and how much walking feels comfortable. I can discuss an individual private transport plan.</p></div>
-     <a href="#contact" className="inline-flex min-h-11 shrink-0 items-center justify-center gap-2 rounded-lg border px-4 py-2.5 text-sm font-semibold text-primary hover:bg-secondary">Ask Moshe about your day <ArrowRight className="h-4 w-4" aria-hidden="true"/></a>
+     <a href="#contact" className="inline-flex min-h-11 shrink-0 items-center justify-center gap-2 rounded-lg border px-4 py-2.5 text-sm font-semibold text-primary hover:bg-secondary">Plan your day with me <ArrowRight className="h-4 w-4" aria-hidden="true"/></a>
     </div>
     <div className="mt-5"><Tip>For Jewish heritage, consider the Western Wall, <External href="https://www.yadvashem.org/visiting.html">Yad Vashem</External> or <External href="https://www.anumuseum.org.il/">ANU — Museum of the Jewish People</External>. For Christian heritage, I have a separate <Link to="/travel-blog/christian-tours-in-israel/" className={lnk}>Christian tours guide</Link>. Religious services, entry arrangements and each site's accessibility must be checked for your date.</Tip></div>
    </section>
@@ -140,16 +141,16 @@ export function SeniorToursGuide(){
     <Heading id="accessibility" title="Mobility and accessibility: what to check" intro="Israel's historic cities and archaeological areas vary significantly. An accessible vehicle, a convenient drop-off point and an accessible entrance are three separate things."/>
     <div className="space-y-4 leading-relaxed">
      <p>In <Link to="/attractions/old-city-jerusalem/" className={lnk}>Jerusalem's Old City</Link>, some routes have been improved for visitors with reduced mobility, but steep sections, stone surfaces and steps remain. At <Link to="/attractions/masada/" className={lnk}>Masada</Link>, the cable car offers an alternative to hiking, but the archaeological plateau is not uniformly step-free. <Link to="/attractions/caesarea/" className={lnk}>Caesarea</Link> has designated accessible visitor areas; the precise entrance and route still matter.</p>
-     <p>If you use a cane, walker or wheelchair, please tell me in advance. A folding walking aid may fit in a standard vehicle, while travelling without transferring from a wheelchair can require a specially adapted vehicle. <strong>I cannot assume or guarantee an accessible vehicle or hands-on mobility assistance</strong> without confirming the necessary arrangement.</p>
+     <p>If you use a cane, walker or wheelchair, please tell me in advance. A folding walking aid may fit in a standard vehicle, while travelling in a wheelchair without transferring to a seat requires a specially adapted vehicle. <strong>Tell me what you need so I can check suitable vehicle availability and any specialist assistance separately before confirming arrangements.</strong></p>
      <p>For the Old City, check the <External href="https://play.google.com/store/apps/details?id=pami.accessibility.sayyes">Accessible JLM map app (Android)</External> or <External href="https://apps.apple.com/il/app/accessible-jlm/id1434672106">iPhone version</External> to plan a suitable pedestrian route, then confirm current obstructions locally. For Masada and Caesarea, the <External href="https://en.parks.org.il/accessibility/">Israel Nature and Parks Authority's accessibility guide and site map</External> explains visitor facilities; the relevant official site pages are also linked beside each day-trip idea. Ask each venue about the actual step-free entrance, toilets, parking, queues and routes available on your planned day.</p>
     </div>
-    <div className="mt-5"><Tip>A short route on a map does not always mean an easy walk. Before your journey, I can help you plan appropriate car stops; parking restrictions, construction and site access may change the last section on foot.</Tip></div>
+    <div className="mt-5"><Tip>Even a short route can include slopes or uneven paving. I'll help you plan suitable car stops and check the final walking approach, including parking and site access.</Tip></div>
    </section>
 
    <section id="before-booking" aria-labelledby="before-booking-heading" className="mt-12 scroll-mt-24">
-    <Heading id="before-booking" title="Seven details that help me tailor your day" intro="You don't need to share a diagnosis. Practical information about walking, seating, equipment and preferred stops is usually much more useful for planning transportation."/>
+    <Heading id="before-booking" title="Seven details that help me tailor your day" intro="Walking distances, seating preferences, mobility equipment and preferred stops are the most useful details for planning your transport."/>
     <ol className="grid gap-3 sm:grid-cols-2">{seniorAccessQuestions.map((q,i)=><li key={q} className="flex gap-3 rounded-xl border bg-card p-4"><span aria-hidden="true" className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-secondary text-xs font-bold text-primary">{i+1}</span><span className="text-sm leading-relaxed">{q}</span></li>)}</ol>
-    <p className="mt-4 text-sm text-muted-foreground">If your circumstances include mobility equipment or personal support, please mention the practical transport needs only. Specialized vehicles, mobility support, attraction admissions and guiding are not included unless explicitly agreed.</p>
+    <p className="mt-4 text-sm text-muted-foreground">If you use mobility equipment or have specific support needs, please share the practical transport details. I'll check any adapted vehicle or specialist services separately and confirm exactly what is included before booking.</p>
    </section>
 
    <FaqList faqs={seniorFaqs}/>
@@ -164,13 +165,13 @@ export function SeniorToursGuide(){
    </section>
 
    <HomeContactForm guide={{
-     heading:"Ask me about a private day trip that suits you",
-     introduction:"I'm Moshe Barak. Tell me when you'll be in Israel, where you would like to go, how many people are traveling and any practical walking, seating or vehicle requirements. I'll reply personally about a suitable private transport arrangement and what needs separate confirmation. All bookings require confirmation.",
+     heading:"Send me your trip details",
+     introduction:"Planning a comfortable private day trip in Israel? Send me your dates, destinations and any walking or vehicle needs. I'll reply personally.",
      subject:"",
      placeholder:"Your dates, hotel or pickup, passengers, places you hope to visit, walking preferences, mobility equipment and preferred duration…",
    }}/>
    <SourcesDisclosure>
-     <p className="text-sm leading-relaxed">Accessibility depends on the specific route, date and facilities in use. Published information should be checked directly with each attraction; my suggestions do not certify a route or vehicle as fully accessible.</p>
+     <p className="text-sm leading-relaxed">Accessibility depends on the route, date and facilities available. Please confirm the details directly with each attraction; I'll check vehicle requirements separately when planning your journey.</p>
      <ul className="mt-3 list-disc space-y-2 pl-5 text-sm">{references.map(item=><li key={item.url}><External href={item.url}>{item.title}</External></li>)}</ul>
    </SourcesDisclosure>
  </article></main>;

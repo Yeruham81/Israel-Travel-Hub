@@ -122,6 +122,26 @@ for (const required of ["Israel Travel Tips for First-Time Visitors", 'data-test
 }
 assert(!israelTipsHtml.includes("/travel-blog/is-it-safe-to-travel-to-israel/"), "Unmaintained safety guide must not be linked");
 
+// Ensure the senior-travel page keeps visitors on the guide until they choose
+// a day trip or the existing contact form. Whole-card links need no extra CTA.
+const seniorGuideFile = join(root, "travel-blog", "israel-tours-for-seniors", "index.html");
+assert(existsSync(seniorGuideFile), "Missing prerendered senior tours guide");
+const seniorGuideHtml = readFileSync(seniorGuideFile, "utf8");
+for (const required of [
+  "Israel Tours for Seniors",
+  "Plan your day with me",
+  "Send me your trip details",
+  "data-senior-midpage-cta",
+  "data-senior-trip-enquiry",
+  'id="contact"',
+]) assert(seniorGuideHtml.includes(required), "Senior tours static HTML missing: " + required);
+for (const removed of [
+  "How private day trips work",
+  "Ask about my private driver service",
+  "Ask Moshe about your day",
+  "The private driver provides transportation and agreed stops",
+]) assert(!seniorGuideHtml.includes(removed), "Redundant senior tours prompt remains: " + removed);
+
 // Regression gate for the dedicated Jerusalem planning hub on the published static build.
 const jerusalemHubFile = join(root, "travel-blog", "jerusalem-travel-guide", "index.html");
 assert(existsSync(jerusalemHubFile), "Missing prerendered Jerusalem travel planning hub");

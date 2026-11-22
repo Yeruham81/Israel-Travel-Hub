@@ -118,6 +118,19 @@
   .prose-guide ul { margin-top: 0.75rem; padding-left: 1.25rem; list-style: disc; line-height: 1.7; }
   .prose-guide li { margin-top: 0.35rem; }
   .prose-guide a { color: var(--color-primary); text-decoration: underline; text-underline-offset: 3px; }
+  /* Blue links within prose already read as links. Suppress the redundant
+     external/diagonal arrow icon throughout editorial paragraphs, quotes, table
+     text and underlined reference-list links. Standalone buttons, navigation
+     cards and booking CTAs keep their own icons. The accessible "opens in a
+     new tab" text remains available to screen readers. */
+  :is(p, blockquote, figcaption, td, th, .prose-guide)
+    a:is(.text-primary, .underline)
+    svg:is(.lucide-external-link, .lucide-arrow-up-right, .lucide-square-arrow-out-up-right),
+  li > a:is(.text-primary, .underline)
+    > svg:is(.lucide-external-link, .lucide-arrow-up-right, .lucide-square-arrow-out-up-right) {
+    display: none !important;
+  }
+
   /* Whole-card tour links must not inherit the underline and link-blue styling
      reserved for inline prose links. Keep this scoped to attraction tour cards. */
   .prose-guide a.attraction-tour-card { color: var(--color-foreground); text-decoration: none; }

@@ -28,14 +28,17 @@ describe("Israel tours for seniors: private transport guide",()=>{
   expect(seniorFaqs).toHaveLength(10);
   expect(component).toContain("<HomeContactForm");
   expect(component).toContain("<AuthorCard/>");
-  expect(component).toContain("All bookings require confirmation.");
+  expect(readFileSync("src/components/HomeContactForm.tsx", "utf8")).toContain("All bookings require confirmation.");
+  expect(component).not.toContain("All bookings require confirmation.");
   expect(component).toContain("A private vehicle");
-  expect(component).toContain("personal-care attendant or medical service");
+  expect(component).not.toContain("personal-care attendant or medical service");
   expect(component).toContain("step-free");
   expect(component).toContain("wheelchair");
-  expect(dataSource).toContain("wheelchair-accessible vehicle or lift is essential");
-  expect(dataSource).toContain("not automatically include nursing");
-  expect(component).toContain("does not automatically");
+  expect(dataSource).toContain("wheelchair-accessible vehicle");
+  expect(dataSource).toContain("For nursing, personal care, lifting or wheelchair transfers");
+  expect(component).not.toContain("does not automatically include");
+  expect(component).not.toContain("I cannot assume or guarantee");
+  expect(component).toContain("check suitable vehicle availability");
  });
  it("uses four meaningful day trips and honest mobility trade-offs",()=>{
   expect(seniorDayTrips.map(d=>d.id)).toEqual(["jerusalem","masada","galilee","coast"]);
@@ -48,9 +51,20 @@ describe("Israel tours for seniors: private transport guide",()=>{
   expect(component).toContain("seniorDayTrips.map");
   expect(component).toContain("Google Maps");
   expect(component).toContain('data-senior-trip-enquiry={item.id}');
-  expect(component).toContain("Ask me about this private trip");
+  expect(component).toContain("{tripEnquiryLabels[item.id]}");
+  expect(component).toContain("Plan your Jerusalem day with me");
+  expect(component).toContain("Discuss a Masada & Dead Sea trip");
+  expect(component).toContain("Share your Galilee plans");
+  expect(component).toContain("Plan a coastal day trip");
   expect(component).toContain("Browse other tours");
   expect(component).toContain("data-senior-midpage-cta");
+  expect(component).toContain("Plan your day with me");
+  expect(component).not.toContain("Ask Moshe about your day");
+  expect(component).not.toContain("How private day trips work");
+  expect(component).not.toContain("Ask about my private driver service");
+  expect(component).not.toContain("The private driver provides transportation and agreed stops");
+  expect(component).toContain('heading:"Send me your trip details"');
+  expect(component).toContain("Send me your dates, destinations and any walking or vehicle needs");
   expect(component).toContain("A suggested, unhurried visit");
   expect(component).toContain("If you prefer a shorter day:");
   for(const trip of seniorDayTrips){
