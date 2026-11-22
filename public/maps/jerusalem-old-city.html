@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/>
+<meta name="robots" content="noindex,nofollow"/><meta name="referrer" content="strict-origin-when-cross-origin"/>
+<title>Jerusalem Old City landmarks and gates</title>
+<link rel="stylesheet" href="https://unpkg.com/maplibre-gl@5.12.0/dist/maplibre-gl.css" integrity="sha384-mnM9NG1099tBMNxdDQNDKIxYcn/fmqQXFJvbT5l1MsrWvzfxBEffceBsw75/cW2R" crossorigin="anonymous"/>
+<style>
+html,body,#map{margin:0;width:100%;height:100%}
+body{font:13px/1.4 system-ui,sans-serif;background:#ecf3f8;color:#123346}
+#map{position:absolute;inset:0}
+#status{position:absolute;inset:0;z-index:2;display:grid;place-content:center;padding:22px;text-align:center;background:#ecf3f8f2}
+#status[hidden]{display:none}
+#status p{margin:0 0 12px}
+a{color:#195c9e}
+.maplibregl-popup-content{font:13px/1.5 system-ui,sans-serif;max-width:240px;padding:10px 12px}
+.maplibregl-ctrl-attrib{font:10px/1.3 system-ui,sans-serif}
+.city-pin{display:grid;place-items:center;width:27px;height:27px;border:2px solid #fff;border-radius:50%;font:bold 12px/1 system-ui,sans-serif;color:white;box-shadow:0 2px 7px #102d4080;cursor:pointer}
+.city-pin[data-type="site"]{background:#1d4ed8}
+.city-pin[data-type="gate"]{background:#b45309}
+.city-pin[aria-pressed="true"]{outline:3px solid #082f49;outline-offset:2px;z-index:10}
+.city-pin:focus-visible{outline:3px solid #082f49;outline-offset:3px}
+</style>
+</head>
+<body>
+<div id="map" role="region" aria-label="Map displaying eight Old City landmarks and six entrance gates simultaneously"></div>
+<div id="status" role="status" aria-live="polite">
+ <p id="message">Loading Jerusalem Old City visitor map…</p>
+ <a href="https://www.google.com/maps/search/?api=1&amp;query=Old%20City%20Jerusalem" target="_blank" rel="noopener noreferrer">Open the Old City in Google Maps</a>
+ <noscript>Enable JavaScript for the interactive map.</noscript>
+</div>
+<script src="https://unpkg.com/maplibre-gl@5.12.0/dist/maplibre-gl.js" integrity="sha384-7+0QVD3+GoeOjaW35yTmpj0FR1K45ugw4ZUY0qEFomHSmAude6e9nB6/Xy5aPnzQ" crossorigin="anonymous"></script>
+<script>
+(()=>{
+"use strict";
+const status=document.getElementById("status"), message=document.getElementById("message");
+const bounds=[[35.2266,31.7720],[35.2380,31.7830]];
+const ids=["western-wall","holy-sepulchre","via-dolorosa","temple-mount","cardo","tower","tunnels","markets","jaffa-gate","dung-gate","damascus-gate","zion-gate","lions-gate","new-gate"];
+let points;
+try{
+ const raw=new URLSearchParams(location.search).get("points");
+ if(!raw||raw.length>6000)throw Error("Missing points");
+ points=JSON.parse(raw);
+ if(!Array.isArray(points)||points.length!==14||points.some((p,i)=>
+   p.id!==ids[i]||!["site","gate"].includes(p.type)||
+   typeof p.name!=="string"||p.name.length>85||
+   typeof p.query!=="string"||p.query.length>160||
+   !Number.isFinite(p.lat)||p.lat<31.770||p.lat>31.785||
+   !Number.isFinite(p.lon)||p.lon<35.225||p.lon>35.24))throw Error("Invalid points");
+}catch{message.textContent="Use the location list and Google Maps links in the guide.";return}
+if(typeof maplibregl==="undefined"){message.textContent="Use the location list and Google Maps links in the guide.";return}
+let map,popup,ready=false,requested=null;
+const markers=new Map();
+const overview=()=>map.fitBounds(bounds,{padding:{top:34,bottom:34,left:30,right:30},maxZoom:16.2,duration:300});
+const select=id=>{
+ if(id==="all"){
+   if(popup)popup.remove();
+   markers.forEach(marker=>marker.setAttribute("aria-pressed","false"));
+   overview();return;
+ }
+ const point=points.find(p=>p.id===id);
+ if(!point)return;
+ markers.forEach((marker,key)=>marker.setAttribute("aria-pressed",key===id?"true":"false"));
+ if(popup)popup.remove();
+ overview();
+ const body=document.createElement("div"),title=document.createElement("strong"),link=document.createElement("a");
+ title.textContent=point.name;
+ link.href="https://www.google.com/maps/search/?api=1&query="+encodeURIComponent(point.query);
+ link.target="_blank";link.rel="noopener noreferrer";link.textContent="Open in Google Maps";
+ link.style.display="block";link.style.marginTop="7px";
+ body.append(title,link);
+ popup=new maplibregl.Popup({offset:18,closeButton:true,maxWidth:"230px"}).setLngLat([point.lon,point.lat]).setDOMContent(body).addTo(map);
+};
+const focus=id=>{if(!ready){requested=id;return}select(id)};
+window.addEventListener("message",event=>{
+ if(event.origin!==location.origin||event.source!==window.parent)return;
+ const command=event.data;
+ if(!command||command.type!=="jerusalem-old-city-map-focus"||typeof command.id!=="string")return;
+ if(command.id==="all"||ids.includes(command.id))focus(command.id);
+});
+const timeout=setTimeout(()=>{if(!ready)message.textContent="Open the locations in Google Maps.";},16000);
+try{
+ maplibregl.setWorkerCount(1);
+ map=new maplibregl.Map({container:"map",style:new URL("./english-style.json",location.href).href,
+   bounds,fitBoundsOptions:{padding:{top:34,bottom:34,left:30,right:30},maxZoom:16.2},
+   cooperativeGestures:true,dragRotate:false,touchPitch:false,pitchWithRotate:false,
+   attributionControl:false,renderWorldCopies:false,maxPitch:0});
+ map.touchZoomRotate.disableRotation();
+ map.addControl(new maplibregl.NavigationControl({showCompass:false}),"top-right");
+ map.addControl(new maplibregl.AttributionControl({compact:true,customAttribution:'<a href="https://maputnik.github.io/osm-liberty/" target="_blank" rel="noopener noreferrer">OSM Liberty</a>'}));
+ map.once("load",()=>{
+   points.forEach((point,i)=>{
+     const marker=document.createElement("button");
+     marker.type="button";marker.className="city-pin";marker.dataset.type=point.type;
+     marker.setAttribute("aria-label","Locate "+point.name);marker.setAttribute("aria-pressed","false");
+     marker.textContent=point.type==="site"?String(i+1):String.fromCharCode(65+i-8);
+     marker.title=point.name;
+     marker.addEventListener("click",()=>{
+       focus(point.id);
+       window.parent.postMessage({type:"jerusalem-old-city-map-selected",id:point.id},location.origin);
+     });
+     const offsets={tower:[14,1],"jaffa-gate":[-13,-2],"western-wall":[-8,6],tunnels:[10,-6],"markets":[9,0],"damascus-gate":[-8,-2]};
+     new maplibregl.Marker({element:marker,offset:offsets[point.id]||[0,0]}).setLngLat([point.lon,point.lat]).addTo(map);
+     markers.set(point.id,marker);
+   });
+   ready=true;clearTimeout(timeout);status.hidden=true;
+   focus(requested||"all");
+ });
+ map.on("error",()=>{if(!ready)message.textContent="Open the locations in Google Maps.";});
+ window.addEventListener("pagehide",e=>{if(!e.persisted){clearTimeout(timeout);map.remove();}});
+}catch{clearTimeout(timeout);if(map)map.remove();message.textContent="Open the locations in Google Maps."}
+})();
+</script>
+</body>
+</html>
