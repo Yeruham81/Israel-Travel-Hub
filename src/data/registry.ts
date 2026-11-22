@@ -3,6 +3,7 @@
  * so it can be swapped for DB-backed queries without changing page components.
  */
 import type { TourProduct, TourBookingOffer } from "@/data/tourTypes";
+import { carRentalSources } from "@/data/carRentalGuide";
 import { migrationSources } from "@/data/guideMigrationSources";
 import { sanityUberSources } from "@/data/generated/sanityUberSnapshot";
 import { neighborhoodHotelAdditions, neighborhoodHotelSources } from "@/data/neighborhoodHotels";
@@ -1054,6 +1055,7 @@ const sourceCatalog: SourceReference[] = [
   referenceFxSource,
   ...travelGuideSources,
   ...migrationSources,
+  ...carRentalSources,
   ...airportTransferRoutes.filter((route) => route.id !== "jerusalem").map((route): SourceReference => ({
     id: route.sourceId, title: `Ben Gurion Airport to ${route.id === "dead-sea" ? "Ein Bokek" : route.id === "tel-aviv" ? "Tel Aviv" : "Haifa"} — original guide`,
     publisher: "Moshe Barak", url: "", checkedAt: AIRPORT_TRANSFER_CHECK_DATE,
@@ -2551,9 +2553,9 @@ export const providerLinks: ProviderLink[] = [
   // Car rental
   {
     id: "cars-discovercars", pageIds: ["car-rental"], providerName: "DiscoverCars", relationship: "booking_platform", partnerId: "discovercars", mode: "provider_redirect",
-    title: "Compare rental cars in Israel", summary: "Rental search where you set pickup and return location and dates on their site.",
+    title: "Compare rental cars in Israel", summary: "Compare vehicles, rental suppliers and booking conditions for your pickup location and dates.",
     ctaLabel: "Check prices on DiscoverCars", url: affiliateConfig["cars-discovercars"]?.trackingUrl || "https://www.discovercars.com/israel", isAffiliate: Boolean(affiliateConfig["cars-discovercars"]?.trackingUrl),
-    reentryNote: "Pickup location and dates chosen here are not passed on. Enter them on DiscoverCars.",
+    reentryNote: "Review the supplier’s Rental Conditions with your selected offer on DiscoverCars.",
     confirm: ["Insurance and excess for your specific offer", "Deposit and credit-card requirements", "Driver age and licence rules", "Areas the rental terms allow you to drive", "Cancellation terms"], sourceId: "discovercars-israel",
   },
 ];

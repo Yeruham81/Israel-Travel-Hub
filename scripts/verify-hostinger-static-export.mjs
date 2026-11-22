@@ -53,6 +53,19 @@ for (const value of urlStrings) {
 }
 assert(!paths.has("/tickets/"), "Removed tickets page must not appear in sitemap");
 assert(!existsSync(join(root, "tickets", "index.html")), "Removed tickets HTML must not be exported");
+const rentalHtml = readFileSync(join(root, "car-rental", "index.html"), "utf8");
+assert(rentalHtml.includes("My Practical Guide for Visitors"), "Car rental guide was not prerendered");
+assert(rentalHtml.includes('src="/widgets/discovercars.html"'), "Missing DiscoverCars search frame");
+assert((rentalHtml.match(/<table\b/g) || []).length === 2, "Car rental planning tables are missing");
+const rentalWidget = readFileSync(join(root, "widgets", "discovercars.html"), "utf8");
+const rentalWidgetSrc = rentalWidget.match(/<script\b[^>]*src="([^"]+)"/)?.[1];
+assert(rentalWidgetSrc, "Missing official Travelpayouts DiscoverCars script");
+const widgetUrl = new URL(rentalWidgetSrc.replaceAll("&amp;", "&"));
+assert(widgetUrl.origin === "https://tpwgt.com", "DiscoverCars widget must use Travelpayouts");
+for (const [key, value] of Object.entries({ campaign_id: "117", promo_id: "3873", trs: "406243", shmarker: "622032.car_rental_widget", location: "israel/tel-aviv/tlv" })) {
+  assert(widgetUrl.searchParams.get(key) === value, `Unexpected DiscoverCars widget ${key}`);
+}
+assert(!existsSync(join(root, "qa-car-rental-mobile.html")), "Local-only mobile harness must never be deployed");
 for (const alias of ["/travel-blog/haifa/", "/travel-blog/the-dead-sea/", "/travel-blog/sea-of-galilee/"]) {
   assert(!paths.has(alias), `Regional alias must not appear in sitemap: ${alias}`);
 }

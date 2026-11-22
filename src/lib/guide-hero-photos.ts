@@ -1,3 +1,4 @@
+import { carRentalHero } from "@/data/carRentalGuide";
 import telAvivTourHero from "@/assets/home/hero-tel-aviv-large.webp";
 import deadSeaHero from "@/assets/dead-sea/landscape.webp";
 
@@ -26,6 +27,7 @@ const normalized = (value: string) => value.replace(/\/+$/, "") + "/";
  */
 export function guideHeroPhotoForPath(to: string): GuideHeroPhoto | undefined {
   const path = normalized(to);
+  if (path === "/car-rental/") return carRentalHero;
   if (attractionHeroRegistry[path]) return attractionHeroRegistry[path];
   if (path === "/attractions/old-city-jerusalem/") return oldCityJerusalemSite.hero;
   if (path === "/tours/tel-aviv-jaffa/") return { src: telAvivTourHero, alt: "Panoramic view of Tel Aviv's Mediterranean coast and skyline" };

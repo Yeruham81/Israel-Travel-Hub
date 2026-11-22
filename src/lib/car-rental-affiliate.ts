@@ -26,3 +26,6 @@ export function carRentalAffiliateUrl(sourcePath: string): string {
 export function isCarRentalRoute(to: unknown): boolean {
   return to === "/car-rental/" || to === "/car-rental";
 }
+
+/** Official Travelpayouts campaign 117 / promo 3873, isolated in a local frame. */
+export const DISCOVERCARS_WIDGET_FRAME_SRC = "/widgets/discovercars.html";

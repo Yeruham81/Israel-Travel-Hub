@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex,nofollow">
+  <title>DiscoverCars rental search</title>
+  <style>html,body{margin:0;padding:0;background:transparent}body{width:100%;overflow-x:hidden}iframe{max-width:100%;border:0}</style>
+</head>
+<body>
+  <script>
+    // The approved provider widget runs in its own document so route changes
+    // dispose its listeners and nested iframe together.
+    (() => {
+      const send = () => {
+        const height = Math.ceil(document.body.getBoundingClientRect().height);
+        if (height > 0) parent.postMessage({ type: "itt-discovercars-height", height }, location.origin);
+      };
+      new ResizeObserver(send).observe(document.body);
+      window.addEventListener("load", send);
+      window.addEventListener("error", event => {
+        if (event.target instanceof HTMLScriptElement) {
+          parent.postMessage({ type: "itt-discovercars-error" }, location.origin);
+        }
+      }, true);
+    })();
+  </script>
+  <script async charset="utf-8" src="https://tpwgt.com/content?trs=406243&amp;shmarker=622032.car_rental_widget&amp;locale=en&amp;location=israel%2Ftel-aviv%2Ftlv&amp;currency=USD&amp;powered_by=false&amp;bg_color=f2f6f9&amp;font_color=16283e&amp;button_color=0077a8&amp;button_font_color=ffffff&amp;button_text=Search%20cars&amp;rounded_corners=true&amp;benefits=false&amp;dc_powered_by=false&amp;supplier_logos=false&amp;campaign_id=117&amp;promo_id=3873"></script>
+</body>
+</html>
