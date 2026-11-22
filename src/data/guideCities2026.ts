@@ -249,7 +249,7 @@ export const cityCultureGuides = {
         "links": [
           {
             "label": "Plan Haifa’s gardens, viewpoints and coast",
-            "to": "/travel-blog/haifa/"
+            "to": "/attractions/haifa/"
           }
         ]
       },
@@ -307,7 +307,7 @@ export const cityCultureGuides = {
     "services": [
       {
         "label": "Explore Haifa city sights",
-        "to": "/travel-blog/haifa/"
+        "to": "/attractions/haifa/"
       },
       {
         "label": "Browse museums and other attractions",
