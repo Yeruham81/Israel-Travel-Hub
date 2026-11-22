@@ -245,7 +245,7 @@ describe("migrated practical guides", () => {
         expect(body?.children[1]?.tagName).toBe("FIGURE");
         expect(body?.children[1]).toContainElement(photo);
       }
-      if (section.photo.sourceUrl && !isPublisherUrl(section.photo.sourceUrl)) expect(container.querySelector(`#${section.id} a[href="${section.photo.sourceUrl}"]`)).not.toBeNull();
+      if (section.photo.sourceUrl && !isPublisherUrl(section.photo.sourceUrl)) expect(container.querySelector(`[aria-label="Photo credits and licences"] a[href="${section.photo.sourceUrl}"]`)).not.toBeNull();
     }
     for (const sourceId of guide.sourceIds) expect(getSource(sourceId)?.url).toMatch(/^https:\/\//);
     expect(container.querySelector("time")).toHaveAttribute("datetime", guide.updatedAt || TRAVEL_GUIDE_CHECK_DATE);
