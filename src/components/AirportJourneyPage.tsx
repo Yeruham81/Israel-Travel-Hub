@@ -417,13 +417,9 @@ export function AirportJourneyPage({ id }: { id: AirportJourneyId }) {
       </>}
       <TransferQuoteForm key={transferIdFor(id)} destinationId={transferIdFor(id)} fixedDestination fixedDestinationLabel={g.city} />
       {focusedLayout && sourceBlock}
-      <PhotoCreditsDisclosure entries={[
-        {label:"Main image",photo:g.photo},
-        ...(!focusedLayout && g.photos?.station ? [{label:"Rail station",photo:g.photos.station}] : []),
-        ...(!focusedLayout && g.photos?.onward ? [{label:"Onward journey",photo:g.photos.onward}] : [])
-      ].filter(entry=>hasPublicPhotoCredit(entry.photo)).map(({label,photo})=>({
-        label,credit:photo.credit,sourceUrl:photo.sourceUrl,licenseUrl:photo.licenseUrl
-      }))}/>
+      <PhotoCreditsDisclosure entries={hasPublicPhotoCredit(g.photo) ? [{
+        label:"Main image",credit:g.photo.credit,sourceUrl:g.photo.sourceUrl,licenseUrl:g.photo.licenseUrl
+      }] : []}/>
     </main>
   );
 }
