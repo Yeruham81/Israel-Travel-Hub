@@ -1,6 +1,7 @@
 import { eilatSite } from "@/data/eilatSite";
 import type { LinkProps } from "@tanstack/react-router";
 import { oldCityJerusalemSite } from "@/data/oldCityJerusalemSite";
+import { viaDolorosaSite } from "@/data/viaDolorosaSite";
 import { jaffaSite } from "@/data/jaffaSite";
 import { attractionGuides } from "@/data/attractionGuides";
 import { attractionPath, type AttractionId } from "@/data/attractionGuideTypes";
@@ -50,7 +51,7 @@ const attraction = (id: AttractionId, title: string, description: string, fallba
   const item = attractionGuides[id];
   return {
     id, title, description, to: attractionPath(id),
-    photo: id === "old-city-jerusalem" ? oldCityJerusalemSite.hero : id === "jaffa" ? jaffaSite.hero : item.image ?? photoOverride ?? { src: fallback, alt: title },
+    photo: id === "old-city-jerusalem" ? oldCityJerusalemSite.hero : id === "via-dolorosa" ? viaDolorosaSite.hero : id === "jaffa" ? jaffaSite.hero : item.image ?? photoOverride ?? { src: fallback, alt: title },
   };
 };
 const editorialAttraction = (id: TravelGuideId, title: string, description: string, photoOverride?: { src: string; alt: string }): AttractionHubCard => ({
@@ -62,10 +63,11 @@ export const attractionHubRegions: AttractionHubRegion[] = [
   {
     id: "jerusalem",
     title: "Jerusalem",
-    summary: "Wander Jerusalem’s Old City, take in the views from the Mount of Olives, and discover the historic landmarks of Mount Zion.",
+    summary: "Discover Jerusalem’s Old City, follow the Via Dolorosa pilgrimage route, and visit the Mount of Olives and Mount Zion.",
     image: attractionHubPhotos.jerusalem,
     cards: [
       attraction("old-city-jerusalem", "Jerusalem's Old City", "Quarters, historic gates, holy sites and practical walking advice.", attractionHubPhotos.jerusalem.src),
+      attraction("via-dolorosa", "Via Dolorosa", "Follow all 14 Stations of the Cross, with a map and practical walking advice.", viaDolorosaSite.hero.src),
       attraction("mount-of-olives", "Mount of Olives", "Panoramic views, churches and historic pilgrimage sites.", attractionHubPhotos.jerusalem.src, attractionHubPhotos.olives),
       attraction("mount-zion", "Mount Zion", "Churches, the Last Supper tradition and places just outside the walls.", attractionHubPhotos.jerusalem.src),
     ],
