@@ -1,0 +1,39 @@
+name: Temporary editorial disclaimer audit
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - ".github/workflows/temporary-editorial-audit.yml"
+permissions:
+  contents: read
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Enumerate redundant editorial qualifier candidates
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          import pathlib,re,json,collections
+          pat=re.compile(r"\b(?:not\s+(?:an?|the|intended|meant|necessarily|automatically|always|just|only|for|a\s+guaranteed)|rather\s+than|instead\s+of|does\s+not|do\s+not|no\s+guarantee|cannot|can't|aren't|isn't)\b",re.I)
+          more=re.compile(r"(?:map|photo|image|figure|card|route|trip|itinerary|time|destination|location|journey|guide|illustrat|estimate|chart|comparison|indicative|precise|accurate|sketch|schematic)",re.I)
+          rows=[]
+          for root in ("src/components","src/data","src/routes","src/lib"):
+            for p in sorted(pathlib.Path(root).rglob("*")):
+              if p.suffix not in (".ts",".tsx",".md") or ".test." in p.name:continue
+              try: lines=p.read_text().splitlines()
+              except: continue
+              for n,line in enumerate(lines,1):
+                if not pat.search(line): continue
+                if not more.search(line): continue
+                for m in list(pat.finditer(line))[:8]:
+                  s=max(0,m.start()-115);e=min(len(line),m.end()+200)
+                  rows.append((str(p),n,line[s:e].replace("\t"," ")))
+          print("TOTAL_EDITORIAL_NEGATION_CANDIDATES",len(rows))
+          print("FILES_WITH_CANDIDATES",len(set(x[0] for x in rows)))
+          groups=collections.Counter(x[0] for x in rows)
+          for filename,count in groups.most_common(40): print("CANDIDATE_FILE",filename,count)
+          for p,n,context in rows[:750]:
+            print("CANDIDATE",json.dumps({"file":p,"line":n,"snippet":context},ensure_ascii=False))
+          PY
