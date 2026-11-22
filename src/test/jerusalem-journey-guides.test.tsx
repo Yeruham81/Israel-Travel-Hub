@@ -94,9 +94,9 @@ describe("Jerusalem independent day-trip planning guides", () => {
     const bodyPhotos = [...container.querySelectorAll("#private-taxi img, #visit-return img")].map(img => img.getAttribute("src"));
     expect(cards.some(card => bodyPhotos.includes(within(card).getByRole("img").getAttribute("src")))).toBe(false);
     for (const card of cards) {
-      expect(card.tagName).toBe("A");
-      expect(card.getAttribute("href")).toMatch(/^https:\/\/(viator|getyourguide)\.tpm\.li\//);
-      expect(card.getAttribute("rel")).toContain("sponsored");
+      expect(card.tagName).toBe("ARTICLE");
+      expect(within(card).getByRole("link", {name:/^View tour:/}).getAttribute("href")).toMatch(/^https:\/\/(viator|getyourguide)\.tpm\.li\//);
+      expect(within(card).getByRole("link", {name:/^View tour:/}).getAttribute("rel")).toContain("sponsored");
       expect(within(card).getByText(/US\$\d+/)).toBeInTheDocument();
       expect(within(card).getByLabelText(/out of 5 from \d+ reviews/)).toBeInTheDocument();
     }
@@ -186,8 +186,8 @@ describe("Jerusalem independent day-trip planning guides", () => {
     expect(deadSeaTourCards.map(tour => affiliateConfig[tour.id]?.trackingUrl)).toEqual(expectedLinks);
     for (const [index, card] of cards.entries()) {
       const tour = deadSeaTourCards[index]!;
-      expect(card.tagName).toBe("A");
-      expect(card).toHaveAttribute("href", expectedLinks[index]);
+      expect(card.tagName).toBe("ARTICLE");
+      expect(within(card).getByRole("link", {name:/^View tour:/})).toHaveAttribute("href", expectedLinks[index]);
       expect(card.getAttribute("rel")).toContain("sponsored");
       expect(within(card).getByRole("img")).toBeInTheDocument();
       expect(card).toHaveTextContent("From US$" + tour.fromUsd);
