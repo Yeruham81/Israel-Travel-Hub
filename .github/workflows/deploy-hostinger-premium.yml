@@ -896,9 +896,9 @@ jobs:
           const html = fs.readFileSync(process.argv[2], "utf8");
           const url = process.argv[3];
           for (const required of [
-            "Mount Zion: What to See", "Dormition Abbey", "David", "Gallicantu",
+            "Mount Zion, Jerusalem: What to See", "Dormition Abbey", "David", "Gallicantu",
             "Cenacle", "Zion Gate", "Oskar Schindler", "Chamber of the Holocaust",
-            "detailed illustrated Mount Zion map", "Monday and Thursday departures generally substitute Yad Vashem",
+            "Mount Zion sites on the map", "Monday and Thursday departures generally visit Yad Vashem",
             'data-testid="mount-zion-hours-fees"',
             'data-testid="mount-zion-accessibility"',
             'data-testid="mount-zion-access-points"',
