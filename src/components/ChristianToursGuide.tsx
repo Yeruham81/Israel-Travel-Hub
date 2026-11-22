@@ -8,7 +8,10 @@ import { PageUpdated } from "@/components/PageUpdated";
 import { SourcesDisclosure } from "@/components/SourcesDisclosure";
 import { HomeContactForm } from "@/components/HomeContactForm";
 import { affiliateConfig } from "@/data/registry";
-import { recordOutboundClick, relFor } from "@/lib/outbound";
+import { recordOutboundClick } from "@/lib/outbound";
+import { ExternalProviderTourCard } from "@/components/ExternalProviderTourCard";
+import { tourBookingOffers, tourProducts } from "@/data/registry";
+import { tourSnapshotPrice } from "@/lib/tours";
 import { guideHeroPhotoForPath } from "@/lib/guide-hero-photos";
 import { christianToursHero, christianAreas, christianRoutes, christianOffers, christianFaqs, christianSiteCards, christianPlanningCards, type ChristianArea, type ChristianRelated, type ChristianOffer } from "@/data/christianToursGuide";
 
@@ -70,15 +73,19 @@ function Related({item}:{item:ChristianRelated}){
  </Link>;
 }
 function TourCard({tour,url}:{tour:ChristianOffer;url:string}){
- return <article className="flex min-w-0 flex-col overflow-hidden rounded-xl border bg-card" data-christian-tour={tour.id}>
-   <img src={tour.image} alt={tour.alt} width={640} height={400} loading="lazy" decoding="async" className="aspect-[16/10] w-full object-cover"/>
-   <div className="flex flex-1 flex-col p-4"><p className="text-xs font-semibold uppercase tracking-wide text-primary">{tour.platform}</p><h3 className="mt-2 text-lg font-semibold leading-snug">{tour.title}</h3>
-     <p className="mt-2 flex items-center gap-1.5 text-xs text-muted-foreground"><Clock3 className="h-4 w-4 shrink-0" aria-hidden="true"/>{tour.duration}</p>
-     <p className="mt-2 text-xs text-muted-foreground">Live prices, reviews and available dates on the booking provider</p>
-     <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{tour.summary}</p>
-     <a href={url} target="_blank" rel={relFor(true)} onClick={()=>recordOutboundClick({pageId:"christian_tours_in_israel",productId:tour.id,offerId:tour.subId})} className="mt-auto inline-flex min-h-11 items-center justify-center gap-2 rounded-lg border border-primary/30 px-3 py-2.5 pt-4 text-sm font-semibold text-primary hover:bg-secondary focus-visible:outline-2 focus-visible:outline-primary">Check dates &amp; tour details<ExternalLink className="h-4 w-4" aria-hidden="true"/><span className="sr-only"> (opens in a new tab)</span></a>
-   </div>
- </article>;
+ const offer = tourBookingOffers.find(item => item.id === tour.affiliateKey.split("@")[0]);
+ const product = tourProducts.find(item => item.id === offer?.productId);
+ const snapshot = offer ? tourSnapshotPrice(offer) : undefined;
+ return <div className="min-w-0" data-christian-tour={tour.id}>
+   <ExternalProviderTourCard
+     image={tour.image} alt={tour.alt} platform={tour.platform}
+     title={tour.title} description={tour.summary} duration={tour.duration}
+     rating={product?.rating && {value:product.rating.value,count:product.rating.count}}
+     price={snapshot && {amount:snapshot.amount,currency:snapshot.currency,basis:snapshot.basis,maxPartySize:snapshot.maxPartySize}}
+     href={url}
+     onClick={()=>recordOutboundClick({pageId:"christian_tours_in_israel",productId:tour.id,offerId:tour.subId})}
+   />
+ </div>;
 }
 
 const practical=[
