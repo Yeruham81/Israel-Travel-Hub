@@ -48,6 +48,22 @@ function Tip({children}:{children:ReactNode}){
 function External({href,children}:{href:string;children:ReactNode}){
  return <a href={href} target="_blank" rel="noopener noreferrer" className={lnk}>{children}<span className="sr-only"> (opens in a new tab)</span></a>;
 }
+function CompactResourceLinks({items,className}:{items:readonly {label:string;url:string}[];className?:string}){
+ return <ul className={className}>
+  {items.map(item=>{
+    const match=item.label.match(/^(.*) — (Android|iPhone)$/);
+    if(match){
+      const base=match[1],android=items.find(other=>other.label===base+" — Android");
+      const iphone=items.find(other=>other.label===base+" — iPhone");
+      if(android&&iphone){
+        if(match[2]==="iPhone")return null;
+        return <li key={base}>{base} (<External href={android.url}>Android</External>) (<External href={iphone.url}>iPhone</External>)</li>;
+      }
+    }
+    return <li key={item.url}><External href={item.url}>{item.label}</External></li>;
+  })}
+ </ul>;
+}
 function PhotoLink({item}:{item:SeniorRelated}){
  return <Link to={item.to} className="editorial-card-link group flex min-w-0 flex-col overflow-hidden rounded-xl border bg-card transition-colors hover:border-primary/50 hover:bg-secondary/20 focus-visible:outline-2 focus-visible:outline-primary">
   <img src={guideHeroPhotoForPath(String(item.to))?.src ?? item.image} alt={guideHeroPhotoForPath(String(item.to))?.alt ?? item.alt} width={640} height={400} loading="lazy" decoding="async" className="aspect-[16/10] w-full object-cover"/>
@@ -78,7 +94,7 @@ function TripCard({item}:{item:SeniorDay}){
    </div>
    {item.accessInfo&&<div className="mt-3 text-sm" data-senior-access-resources>
     <p className="font-semibold">Check accessibility before visiting</p>
-    <ul className="mt-1.5 space-y-1.5">{item.accessInfo.map(resource=><li key={resource.url}><External href={resource.url}>{resource.label}</External></li>)}</ul>
+    <CompactResourceLinks items={item.accessInfo} className="mt-1.5 space-y-1.5"/>
    </div>}
    <div className="mt-4 flex flex-wrap gap-2">{item.suggestedStops.map(stop=><Link key={stop.label} to={stop.to} className="rounded-full border px-3 py-1.5 text-xs font-semibold text-primary hover:bg-secondary">{stop.label}</Link>)}</div>
   </div>
@@ -143,7 +159,7 @@ export function SeniorToursGuide(){
     <div className="space-y-4 leading-relaxed">
      <p>In <Link to="/attractions/old-city-jerusalem/" className={lnk}>Jerusalem's Old City</Link>, some routes have been improved for visitors with reduced mobility, but steep sections, stone surfaces and steps remain. At <Link to="/attractions/masada/" className={lnk}>Masada</Link>, the cable car offers an alternative to hiking, but the archaeological plateau is not uniformly step-free. <Link to="/attractions/caesarea/" className={lnk}>Caesarea</Link> has designated accessible visitor areas; the precise entrance and route still matter.</p>
      <p>If you use a cane, walker or wheelchair, please tell me in advance. A folding walking aid may fit in a standard vehicle, while travelling in a wheelchair without transferring to a seat requires a specially adapted vehicle. <strong>Tell me what you need so I can check suitable vehicle availability and any specialist assistance separately before confirming arrangements.</strong></p>
-     <p>For the Old City, check the <External href="https://play.google.com/store/apps/details?id=pami.accessibility.sayyes">Accessible JLM map app (Android)</External> or <External href="https://apps.apple.com/il/app/accessible-jlm/id1434672106">iPhone version</External> to plan a suitable pedestrian route, then confirm current obstructions locally. For Masada and Caesarea, the <External href="https://en.parks.org.il/accessibility/">Israel Nature and Parks Authority's accessibility guide and site map</External> explains visitor facilities; the relevant official site pages are also linked beside each day-trip idea. Ask each venue about the actual step-free entrance, toilets, parking, queues and routes available on your planned day.</p>
+     <p>For the Old City, check the Accessible JLM map app (<External href="https://play.google.com/store/apps/details?id=pami.accessibility.sayyes">Android</External>) (<External href="https://apps.apple.com/il/app/accessible-jlm/id1434672106">iPhone</External>) to plan a suitable pedestrian route, then confirm current obstructions locally. For Masada and Caesarea, the <External href="https://en.parks.org.il/accessibility/">Israel Nature and Parks Authority's accessibility guide and site map</External> explains visitor facilities; the relevant official site pages are also linked beside each day-trip idea. Ask each venue about the actual step-free entrance, toilets, parking, queues and routes available on your planned day.</p>
     </div>
     <div className="mt-5"><Tip>Even a short route can include slopes or uneven paving. I'll help you plan suitable car stops and check the final walking approach, including parking and site access.</Tip></div>
    </section>
@@ -173,7 +189,7 @@ export function SeniorToursGuide(){
    }}/>
    <SourcesDisclosure>
      <p className="text-sm leading-relaxed">Accessibility depends on the route, date and facilities available. Please confirm the details directly with each attraction; I'll check vehicle requirements separately when planning your journey.</p>
-     <ul className="mt-3 list-disc space-y-2 pl-5 text-sm">{references.map(item=><li key={item.url}><External href={item.url}>{item.title}</External></li>)}</ul>
+     <CompactResourceLinks items={references.map(item=>({label:item.title,url:item.url}))} className="mt-3 list-disc space-y-2 pl-5 text-sm"/>
    </SourcesDisclosure>
  </article></main>;
 }
