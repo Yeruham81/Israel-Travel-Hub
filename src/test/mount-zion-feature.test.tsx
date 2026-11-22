@@ -29,6 +29,7 @@ describe("Mount Zion full attraction guide", () => {
 
   it("preserves seven verified landmarks and locally stored site-specific photos", () => {
     const page = readFileSync("src/components/MountZionAttractionPage.tsx", "utf8");
+    const map = readFileSync("src/components/MountZionMap.tsx", "utf8");
     expect(mountZionEditorialUpdate.stops).toHaveLength(7);
     const photos = mountZionEditorialUpdate.stops.flatMap(stop => stop.image ? [stop.image] : []);
     expect(photos).toHaveLength(7);
@@ -36,22 +37,30 @@ describe("Mount Zion full attraction guide", () => {
     for (const photo of photos) {
       if (photo.src.startsWith("/images/")) expect(existsSync("public" + photo.src), photo.src).toBe(true);
     }
-    expect(page).toContain("mountZionEditorialUpdate.stops.map");
+    expect(page).toContain("orderedStops.map");
+    expect(page).toContain("mobileImageFirst");
     expect(page).toContain("AttractionHighlight");
     expect(page).toContain('data-testid="mount-zion-hours-fees"');
     expect(page).toContain('data-testid="mount-zion-accessibility"');
     expect(page).toContain('data-testid="mount-zion-access-points"');
-    expect(page).toContain('data-testid="mount-zion-map"');
+    expect(page).toContain("<MountZionMap />");
+    expect(map).toContain('data-testid="mount-zion-map"');
+    expect(map).toContain("google.com/maps");
+    expect(map).toContain("Oskar Schindler");
+    expect(map).toContain("St Peter in Gallicantu");
     expect(page).toContain('data-testid="mount-zion-walking-routes"');
     expect(page).toContain('data-testid="mount-zion-walking-connections"');
     expect(page).toContain('data-testid="mount-zion-tour-cards"');
     expect(page).toContain("Jaffa Gate to Zion Gate");
     expect(page).toContain("Zion Gate to Gallicantu");
     expect(page).toContain("Zion Gate to Western Wall");
-    expect(page).toContain("detailed illustrated Mount Zion map");
-    expect(page).toContain("Driving to Zion Gate area");
-    expect(page).toContain("Monday and Thursday departures generally substitute Yad Vashem");
-    expect(page).toContain("Check current price");
+    expect(page).toContain('data-testid="mount-zion-visit-choices"');
+    expect(page).toContain("Two suggested walking routes");
+    expect(page).toContain("min-w-[790px]");
+    expect(page).toContain("Driving to the gate area");
+    expect(page).toContain("Monday and Thursday departures generally visit Yad Vashem");
+    expect(page).toContain("ExternalProviderTourCard");
+    expect(page).toContain("lg:grid-cols-3");
     expect(page).toContain("mount-zion-hillside.webp");
     expect(page).toContain("CC BY-SA 3.0");
     expect(page).toContain("CC BY-SA 2.0");
