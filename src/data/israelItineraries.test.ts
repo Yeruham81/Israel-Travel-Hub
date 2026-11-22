@@ -396,7 +396,7 @@ describe("migrated Israel itineraries", () => {
     expect(g.relatedGuides).toHaveLength(6);
     expect(g.activityWidgets).toEqual([{ day: 1, city: "jerusalem" }, { day: 7, city: "telAviv" }]);
     expect(g.jerusalemTourOptionsDay).toBe(3);
-    expect(g.hero).toBe("EXISTING:galilee");
+    expect(g.hero).toBe("featured-original-7day");
     expect(g.daysPlan[4]?.image).toBe("itinerary-7day-capernaum");
     expect(g.hero).not.toBe(g.daysPlan[4]!.image);
     const photoKeys = [g.hero, ...g.daysPlan.map(day => day.image), ...(g.relatedGuides ?? []).map(item => item.image)];
@@ -531,7 +531,7 @@ describe("migrated Israel itineraries", () => {
     const tours = file("src/components/JerusalemItineraryTourOptions.tsx");
     expect(g.daysPlan).toHaveLength(10);
     expect(g.reviewedAt).toBe("2026-11-14");
-    expect(g.hero).toBe("itinerary-10day-haifa-port-cover");
+    expect(g.hero).toBe("featured-original-10day");
     expect(g.daysPlan[6]?.image).toBe("itinerary-10day-akko-port");
     expect(new Set([g.hero, ...g.daysPlan.map(day => day.image)]).size).toBe(11);
     expect(g.overviewRows).toHaveLength(10);
@@ -714,7 +714,7 @@ describe("migrated Israel itineraries", () => {
 
   it("integrates pre-booking checks with transport tips after the itinerary and keeps distinct Old City photos", () => {
     const guide = itineraries["3"];
-    expect(guide.hero).toBe("itinerary-3day-jerusalem-cover");
+    expect(guide.hero).toBe("featured-original-3day");
     expect(guide.daysPlan[0]?.image).toBe("itinerary-3day-holy-sepulchre");
     expect(guide.relatedGuides?.find(item => item.to === "/attractions/old-city-jerusalem/")?.image)
       .toBe("itinerary-jerusalem-old-city");

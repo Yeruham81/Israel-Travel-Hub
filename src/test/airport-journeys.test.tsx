@@ -155,8 +155,8 @@ describe("four independent airport transportation comparisons", () => {
     expect(g.answer).toMatch(/direct train.*Jerusalem.*Bus 485.*infrequently/s);
     expect(g.intro).toContain("The best option depends on your arrival time");
     expect(g.intro).not.toMatch(/26–30|bus 485|fare/i);
-    expect(g.photo.alt).toMatch(/Panoramic view.*Jerusalem.*Dome of the Rock/i);
-    expect(g.photo.credit).toMatch(/Public domain/);
+    expect(g.photo.alt).toMatch(/Tower of David.*Jerusalem/i);
+    expect(g.photo.src).toBe("/images/travel-blog/featured-airport-jerusalem.webp");
     expect(g.options.every(o => Boolean(o.comparison?.advantages && o.comparison?.drawbacks))).toBe(true);
     expect(g.stations[0]?.name).toBe("Jerusalem–Yitzhak Navon");
     expect(g.options.find(o => o.id === "rail")!.cost).toContain("₪21");
@@ -201,7 +201,7 @@ describe("four independent airport transportation comparisons", () => {
     expect(intro).toContain("The best option depends on your arrival time");
     expect(doc.querySelector('header time[datetime="2026-11-11"]')?.textContent).toBe("November 2026");
     expect(doc.querySelector("header")?.textContent).not.toMatch(/Approximate distance|Editorial review|45–55 km/);
-    expect(doc.querySelector("header figure img")?.getAttribute("alt")).toMatch(/Panoramic view.*Jerusalem/i);
+    expect(doc.querySelector("header figure img")?.getAttribute("alt")).toMatch(/Tower of David.*Jerusalem/i);
     expect(doc.querySelector("#sources a[href*=\"wikimedia.org/wiki/File:Jerusalem_Dome_of_the_rock\"]")).not.toBeNull();
     expect(doc.querySelector("main")?.lastElementChild?.id).toBe("sources");
     expect(doc.querySelector("#quick-answer")?.textContent).not.toContain("This is an independent transport comparison");

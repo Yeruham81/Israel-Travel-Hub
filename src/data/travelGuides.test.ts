@@ -53,17 +53,17 @@ describe("travel guide topic filters and prerender safety", () => {
     expect(guide.services.every((service) => Boolean(service.note))).toBe(true);
   });
 
-  it("uses different locations in the 3-, 5- and 10-day itinerary directory photos", () => {
+  it("uses the distinct original featured images in the 3-, 5- and 10-day itinerary directory cards", () => {
     const byId = (id: string) => guideDirectory.find((guide) => guide.id === `israel-itinerary-${id}`)!.photo!;
     const photos = ["3", "5", "10"].map(byId);
     expect(new Set(photos.map((photo) => photo.src)).size).toBe(3);
-    expect(byId("3").alt).toMatch(/Jerusalem/);
-    expect(byId("5").alt).toMatch(/Caesarea/);
-    expect(byId("10").alt).toMatch(/Haifa/);
-    expect(itineraries["3"].hero).toBe("itinerary-3day-jerusalem-cover");
-    expect(itineraries["5"].hero).toBe("itinerary-5day-caesarea-cover");
-    expect(itineraries["7"].hero).toBe("EXISTING:galilee");
-    expect(itineraries["10"].hero).toBe("itinerary-10day-haifa-port-cover");
+    expect(byId("3").alt).toMatch(/Camel.*Ein Gedi/);
+    expect(byId("5").alt).toMatch(/Five-day Israel itinerary/);
+    expect(byId("10").alt).toMatch(/Ibex.*Ramon Crater/);
+    expect(itineraries["3"].hero).toBe("featured-original-3day");
+    expect(itineraries["5"].hero).toBe("featured-original-5day");
+    expect(itineraries["7"].hero).toBe("featured-original-7day");
+    expect(itineraries["10"].hero).toBe("featured-original-10day");
 
     for (const id of itineraryIds) {
       expect(byId(id).src).toBe(migrationPhotos[itineraries[id].hero].src);
