@@ -1008,14 +1008,15 @@ jobs:
           const html = fs.readFileSync(process.argv[2], "utf8");
           const expected = process.argv[3];
           for (const snippet of [
-            "Jerusalem&#x27;s Old City", "What to see in Jerusalem", "Western Wall Tunnels",
+            "Jerusalem’s Old City", "What to see in Jerusalem", "Western Wall Tunnels",
             "Temple Mount", "Church of the Holy Sepulchre", "Cathedral of St. James",
             "Via Dolorosa", "Damascus Gate", "Tower of David",
             'data-testid="jerusalem-old-city-hours-fees"',
             'data-testid="jerusalem-old-city-access"',
             'data-testid="jerusalem-old-city-walking-plans"',
             'data-testid="jerusalem-old-city-map"',
-            'data-testid="jerusalem-old-city-tour-cards"',
+            'data-testid="jerusalem-old-city-featured-tours"',
+            'data-testid="jerusalem-old-city-visit-choices"',
           ]) {
             if (!html.includes(snippet.replace("&#x27;", "'")) && !html.includes(snippet)) {
               console.error("::error::Jerusalem Old City public page missing " + snippet);
@@ -1038,6 +1039,27 @@ jobs:
           }
           console.log("Old City Jerusalem published content, eight highlights, six related cards, and canonical checked.");
           NODE
+          oldcity_map="$(mktemp)"
+          curl --retry 2 --max-time 20 -fsSL -o "$oldcity_map" "$VITE_CANONICAL_ORIGIN/maps/jerusalem-old-city.html"
+          node - "$oldcity_map" <<'NODE'
+          const fs = require("node:fs");
+          const page = fs.readFileSync(process.argv[2], "utf8");
+          for (const snippet of ["points.length!==14", "new maplibregl.Marker", "jerusalem-old-city-map-selected", "all"]) {
+            if (!page.includes(snippet)) { console.error("::error::Old City multi-site map missing " + snippet); process.exit(1); }
+          }
+          console.log("Old City multi-point map loaded with eight landmark and six gate markers.");
+          NODE
+          rm -f "$oldcity_map"
+          oldcity_hero="$(mktemp)"
+          curl --retry 2 --max-time 20 -fsSL -o "$oldcity_hero" "$VITE_CANONICAL_ORIGIN/images/attractions/hero-jerusalem.webp"
+          node - "$oldcity_hero" <<'NODE'
+          const b=require("node:fs").readFileSync(process.argv[2]);
+          if(b.subarray(0,4).toString()!=="RIFF"||b.subarray(8,12).toString()!=="WEBP"){
+            console.error("::error::New Old City panoramic hero is missing or invalid");process.exit(1);
+          }
+          console.log("Old City panoramic hero verified as WebP.");
+          NODE
+          rm -f "$oldcity_hero"
           rm -f "$jerusalem_html"
           for picture in old-jerusalem-western-wall.webp old-jerusalem-holy-sepulchre.webp old-jerusalem-via-dolorosa.webp old-jerusalem-temple-mount.webp old-jerusalem-cardo.webp old-jerusalem-tower-of-david.webp old-jerusalem-western-wall-tunnels.webp old-jerusalem-damascus-gate.webp; do
             data="$(mktemp)"
