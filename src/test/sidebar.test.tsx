@@ -83,8 +83,8 @@ describe("shared sidebar navigation", () => {
       expect(paths.every(path => path.startsWith("/attractions/"))).toBe(true);
       allPaths.push(...paths);
     }
-    expect(allPaths).toHaveLength(24);
-    expect(new Set(allPaths).size).toBe(24);
+    expect(allPaths).toHaveLength(25);
+    expect(new Set(allPaths).size).toBe(25);
     expect(Object.keys(attractionSidebarGuideLabels).sort()).toEqual(
       attractionHubRegions.flatMap(region => region.cards.map(card => card.id)).sort(),
     );
