@@ -300,7 +300,7 @@ export const migrationPhotos = {
   "itinerary-jaffa-streets": {
     "src": itineraryJaffaStreets,
     "alt": "Historic streets and buildings in Old Jaffa"
-  }
+  },
   "itinerary-7day-dead-sea-original": {
     src: "/images/travel-blog/seven-day-dead-sea-original.webp",
     alt: "Palm-lined Ein Bokek resort beach and turquoise water of the Dead Sea",
