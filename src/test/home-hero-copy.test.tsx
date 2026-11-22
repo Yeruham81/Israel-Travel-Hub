@@ -4,6 +4,7 @@ import { cleanup, render, screen, within } from "@testing-library/react";
 import { afterEach, describe, expect, it } from "vitest";
 import { HomeHero } from "@/components/HomeHero";
 import { Route as HomeRoute, services, homeGuideCards } from "@/routes/index";
+import { guideHeroPhotoForPath } from "@/lib/guide-hero-photos";
 import { routeTree } from "@/routeTree.gen";
 
 afterEach(cleanup);
@@ -282,8 +283,8 @@ describe("homepage marketing copy and service sections", () => {
     expect(screen.queryByRole("heading", { name: "Popular Destinations" })).not.toBeInTheDocument();
 
     const guidesSection = document.getElementById("guides")!;
-    expect(homeGuideCards.first.find(guide => guide.id === "uber")?.photo?.src).toBe("/images/home/uber-in-israel-phone-question.webp");
-    expect(within(guidesSection).getByRole("img", { name: /Phone displaying UBER IN ISRAEL/ })).toHaveAttribute("src", "/images/home/uber-in-israel-phone-question.webp");
+    expect(homeGuideCards.first.find(guide => guide.id === "uber")?.photo?.src).toBe(guideHeroPhotoForPath("/travel-blog/uber-in-israel/")?.src);
+    expect(within(guidesSection).querySelector('a[href="/travel-blog/uber-in-israel/"] img')).toHaveAttribute("src", guideHeroPhotoForPath("/travel-blog/uber-in-israel/")?.src);
     const guideButton = within(guidesSection).getByRole("link", { name: /Browse all guides/i });
     expect(guideButton).toHaveAttribute("href", "/travel-blog/");
     expect(guidesSection.lastElementChild).toContainElement(guideButton);

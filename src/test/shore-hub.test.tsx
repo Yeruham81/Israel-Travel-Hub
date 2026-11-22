@@ -7,6 +7,7 @@ import { services } from "@/routes/index";
 import { routeTree } from "@/routeTree.gen";
 import { shoreHubExperiences } from "@/data/shoreHub";
 import { shoreHubGuides } from "@/data/shoreReading";
+import { guideHeroPhotoForPath } from "@/lib/guide-hero-photos";
 import { servicesForPort, filterShoreServices } from "@/lib/shore-services";
 import { CANONICAL_ORIGIN } from "@/lib/site";
 
@@ -98,7 +99,7 @@ describe("Israel shore excursion hub", () => {
     expect(related).toHaveLength(6);
     expect(within(guides).getAllByRole("img")).toHaveLength(6);
     expect([...guides.querySelectorAll("img")].map(image => image.getAttribute("src")))
-      .toEqual(shoreHubGuides.map(() => expect.stringMatching(/guide-(jerusalem|galilee|masada|akko|jaffa|dead-sea)/)));
+      .toEqual(shoreHubGuides.map(guide => guideHeroPhotoForPath(String(guide.to))?.src ?? guide.photo.src));
     expect(screen.getByText("Choose a destination to explore shore excursions from Ashdod or Haifa.")).toBeInTheDocument();
     expect(within(guides).getAllByRole("link").every(link => {
       const preview = link.querySelector("span.text-muted-foreground");

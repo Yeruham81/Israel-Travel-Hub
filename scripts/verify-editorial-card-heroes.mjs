@@ -80,11 +80,11 @@ export function verifyEditorialCardHeroes({ root, paths }) {
     " illustrated guide/attraction links; " + unique.length + " mismatches; " + noHero +
     " links with no detectable target hero.");
   if (unique.length) {
-    for (const item of unique.slice(0, 90)) console.error(
+    for (const item of unique.slice(0, 220)) console.error(
       "[hero-card-parity] " + item.page + " => " + item.target +
       "\n  card: " + item.card + "\n  hero: " + item.hero
     );
-    if (unique.length > 90) console.error("[hero-card-parity] ...plus " + (unique.length - 90) + " more.");
+    if (unique.length > 220) console.error("[hero-card-parity] ...plus " + (unique.length - 220) + " more.");
     throw new Error(unique.length + " guide/attraction cards do not match destination heroes.");
   }
   return { scannedPages, scannedCards, noHero, mismatches: 0 };

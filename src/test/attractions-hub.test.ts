@@ -165,14 +165,14 @@ describe("attractions landing responsive image delivery", () => {
       expect(new Set(widths).size, guide.title).toBe(widths.length);
     }
     const page = readFileSync("src/routes/attractions.index.tsx", "utf8");
-    expect(page).toContain("srcSet={attractionHubCardImageSets[card.photo.src]}");
+    expect(page).toContain("srcSet={attractionHubCardImageSets[photo.src]}");
     expect(page).toContain('sizes="(min-width: 1280px) 365px');
     expect(page).toContain("srcSet={attractionHubRegionImageSets[region.image.src]}");
     expect(page).toContain('sizes="(min-width: 640px) 144px, 80px"');
-    expect(page).toContain("srcSet={attractionHubRelatedImageSets[guide.photo.src]}");
+    expect(page).toContain("srcSet={attractionHubRelatedImageSets[guideHeroPhotoForPath(String(guide.to))?.src ?? guide.photo.src]}");
     expect(page).toContain('sizes="(min-width: 640px) 112px, 96px"');
-    expect(page).toContain('<img src={card.photo.src}');
+    expect(page).toContain('<img src={photo.src}');
     expect(page).toContain('<img src={region.image.src}');
-    expect(page).toContain('<img src={guide.photo.src}');
+    expect(page).toContain('<img src={guideHeroPhotoForPath(String(guide.to))?.src ?? guide.photo.src}');
   });
 });
