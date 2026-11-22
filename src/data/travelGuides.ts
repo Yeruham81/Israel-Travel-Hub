@@ -37,7 +37,7 @@ export const guideTopics = [
   { id: "destinations", label: "Destinations" },
   { id: "attractions", label: "Attractions" },
   { id: "itineraries", label: "Itineraries & day trips" },
-  { id: "tips", label: "Tips & recommendations" },
+  { id: "tips", label: "Travel tips" },
   { id: "accommodation", label: "Accommodation" },
   { id: "connectivity", label: "Mobile & connectivity" },
   { id: "religion", label: "Religion & heritage" },
