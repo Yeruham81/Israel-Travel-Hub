@@ -2,7 +2,8 @@ import type { MouseEvent } from "react";
 import { getShoreCatalog } from "@/data/shoreExcursions";
 import { shoreDestinations, shorePorts, type ShorePortId } from "@/data/registry";
 import { parseShoreServiceSearch, shoreServiceHref, type ShoreServiceSearch } from "@/lib/shore-services";
-import { recordOutboundClick, relFor } from "@/lib/outbound";
+import { recordOutboundClick } from "@/lib/outbound";
+import { ExternalProviderTourCard } from "@/components/ExternalProviderTourCard";
 
 type Props = {
   portId: ShorePortId;
@@ -52,28 +53,16 @@ export function ShoreServiceCatalog({ portId, filters, onFilterChange, itinerary
           {partnerTours.map(service => {
             const provider = service.provider;
             return <li key={service.id} data-testid="shore-service-card" data-service-id={service.id} data-product-id={service.productId} data-operator-id={service.operator?.id} data-booking-platform={service.partner?.id || "direct"} data-service-kind={service.kind} className="min-w-0 scroll-mt-24">
-              <article className="flex h-full min-w-0 flex-col overflow-hidden rounded-xl border bg-card shadow-sm">
-                <img src={service.photo.src} alt={service.photo.alt} width={720} height={405} loading="lazy" decoding="async" className="aspect-[16/9] w-full object-cover" />
-                <div className="flex min-w-0 flex-1 flex-col p-4">
-                  <div className="flex flex-wrap items-center justify-between gap-x-2 gap-y-1 text-xs text-muted-foreground">
-                    <span className="font-semibold"><span className="sr-only">Booking platform: </span>{service.partner?.name || provider.providerName}</span>{service.rating && <span aria-label={`Rating ${service.rating.value.toFixed(1)} out of 5 from ${service.rating.count} reviews`} title={`Booking-platform reviews checked ${service.rating.checkedAt}; ratings may change`} className="font-semibold text-foreground">★ {service.rating.value.toFixed(1)} <span className="font-normal text-muted-foreground">({service.rating.count})</span></span>}
-                  </div>
-                  <h3 className="mt-1.5 line-clamp-2 text-base font-semibold leading-snug">{service.title}</h3>
-                  <p className="mt-1 line-clamp-2 text-xs leading-relaxed text-muted-foreground sm:text-sm">{service.description}</p>
-                  <div className="mt-2 flex flex-wrap gap-x-3 gap-y-1 text-xs text-muted-foreground">
-                    <span>◷ {service.duration}</span>
-                    <span>From {port.name} Port</span>
-                    <span>{service.groupLabel}</span>
-                  </div>
-                  <div className="mt-auto flex flex-wrap items-end justify-between gap-2 pt-3">
-                    <div>{service.listedPrice ? <>
-                      <span className="block text-[11px] text-muted-foreground">Reference price · {service.listedPrice.basis === "per_person" ? "per person" : "per group"}</span>
-                      <span className="font-bold text-primary">{"US$" + service.listedPrice.amount.toLocaleString("en-US")}</span>
-                    </> : <span className="text-xs font-medium text-muted-foreground">Check current price</span>}</div>
-                    <a href={provider.url} target="_blank" rel={relFor(provider.isAffiliate)} onClick={() => recordOutboundClick({ pageId: port.pageId, productId: service.productId, offerId: provider.id })} className="inline-flex min-h-9 items-center justify-center rounded-lg bg-primary px-3 py-2 text-xs font-semibold text-primary-foreground hover:bg-primary/90" aria-label={provider.ctaLabel + ": " + service.title + " (opens in a new tab)"}>View tour ↗</a>
-                  </div>
-                </div>
-              </article>
+              <ExternalProviderTourCard
+                image={service.photo.src} alt={service.photo.alt}
+                platform={service.partner?.name || provider.providerName}
+                title={service.title} description={service.description}
+                duration={service.duration} location={`From ${port.name} Port · ${service.groupLabel}`}
+                rating={service.rating && { value: service.rating.value, count: service.rating.count }}
+                price={service.listedPrice && { amount: service.listedPrice.amount, currency: "USD", basis: service.listedPrice.basis }}
+                href={provider.url} affiliate={provider.isAffiliate}
+                onClick={() => recordOutboundClick({ pageId: port.pageId, productId: service.productId, offerId: provider.id })}
+              />
             </li>;
           })}
           {partnerTours.length % 3 === 2 && <li data-testid="shore-companion-card" className="min-w-0 rounded-xl border bg-secondary/30 p-5">
