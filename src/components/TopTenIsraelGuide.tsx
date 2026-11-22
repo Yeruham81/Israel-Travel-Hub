@@ -14,7 +14,7 @@ import { HomeContactForm } from "@/components/HomeContactForm";
 import { guideContactCopy } from "@/lib/guide-contact";
 import {
   topTenExperiences as experiences, topTenMapRegions, topTenSuggestedRoutes,
-  topTenFaqs, type TopTenExperience,
+  topTenFaqs, topTenIsraelHero, type TopTenExperience,
 } from "@/data/topTenExperiences";
 
 import masadaCard from "@/assets/home/hero-masada-sm.webp";
@@ -145,7 +145,7 @@ export function TopTenIsraelGuide() {
           { name: "Travel guides", to: "/travel-blog/" },
           { name: "Top 10 Things to Do in Israel", to: "/travel-blog/top-10-things-to-do-in-israel/" },
         ]} />
-        <GuideHeroLayout image={<GuideHeroMedia src="/images/top-ten-israel/hero.webp" alt="Old Jaffa and the Mediterranean waterfront in Tel Aviv" />}>
+        <GuideHeroLayout image={<GuideHeroMedia src={topTenIsraelHero.src} alt={topTenIsraelHero.alt} />}>
           <p className="text-xs font-semibold uppercase tracking-[0.16em] text-primary">Israel · Experiences worth planning around</p>
           <h1 className="guide-page-title mt-2">Top 10 Things to Do in Israel</h1>
           <p data-guide-intro className="mt-4 max-w-3xl text-lg leading-relaxed">

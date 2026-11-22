@@ -7,6 +7,7 @@
 import { readFileSync, statSync, existsSync } from "node:fs";
 import { join } from "node:path";
 import assert from "node:assert/strict";
+import { verifyEditorialCardHeroes } from "./verify-editorial-card-heroes.mjs";
 
 const root = ".output/public";
 const origin = process.env["VITE_CANONICAL_ORIGIN"];
@@ -247,6 +248,7 @@ console.log("Wide editorial card layout verified in static export: " + verifiedH
 const privateApi = join(root, "api");
 // Never deploy compiled API: Hostinger's manually configured PHP endpoints
 // are excluded by rsync, and server-side Vite JS cannot run as static files.
+verifyEditorialCardHeroes({ root, paths });
 console.log(`Hostinger prerender verified: ${paths.size}/${paths.size} sitemap pages.`);
 console.log(`Target canonical origin: ${origin}; indexable: ${indexable}`);
 console.log(`PHP API source/credentials are not part of this static deployment.`);

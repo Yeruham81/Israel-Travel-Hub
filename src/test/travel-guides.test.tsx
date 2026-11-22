@@ -3,6 +3,7 @@ import { QueryClient } from "@tanstack/react-query";
 import { createMemoryHistory, createRouter, RouterContextProvider } from "@tanstack/react-router";
 import { act, cleanup, fireEvent, render, screen, waitFor, within } from "@testing-library/react";
 import { renderToString } from "react-dom/server";
+import { topTenIsraelHero } from "@/data/topTenExperiences";
 import { afterEach, describe, expect, it } from "vitest";
 import { routeTree } from "@/routeTree.gen";
 import { Route as HubRoute } from "@/routes/travel-blog.index";
@@ -175,7 +176,7 @@ describe("migrated practical guides", () => {
       const photoPaths = [...container.querySelectorAll('#experiences article[data-detailed-card="horizontal"] img')].map(el => el.getAttribute("src"));
       expect(photoPaths).toHaveLength(10);
       expect(new Set(photoPaths).size).toBe(10);
-      expect(container.querySelector('img[src="/images/top-ten-israel/hero.webp"]')).not.toBeNull();
+      expect(container.querySelector('figure[data-testid="guide-hero-media"] img')?.getAttribute("src")).toBe(topTenIsraelHero.src);
       const contact = container.querySelector("#contact")!;
       const sources = container.querySelector("#sources")!;
       expect(contact.compareDocumentPosition(sources) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();

@@ -11,8 +11,7 @@ import { neighborhoodGuidesForCity, type CityStayGuide } from "@/data/content";
 import { areaDecisionNotes } from "@/data/localEditorialInsights";
 import { INFO_CHECK_DATE } from "@/data/registry";
 import { guideContactCopy } from "@/lib/guide-contact";
-import jerusalemHero from "@/assets/guides/2026-11/where-to-stay-jerusalem-drive.webp";
-import telAvivHero from "@/assets/guides/2026-11/where-to-stay-tel-aviv-drive.webp";
+import { stayEditorialHeroPhotos } from "@/data/stayEditorialHeroPhotos";
 import oldCityStoneLane from "@/assets/guides/2026-11/jerusalem-jewish-quarter-stone-lane.webp";
 import downtownCard from "@/assets/travel-blog-hub/downtown-944eb9d46b-420.webp";
 import mamillaStreet from "@/assets/jerusalem/mamilla.webp";
@@ -217,9 +216,7 @@ export function CityNeighborhoodEditorial({ guide }: { guide: CityStayGuide }) {
   const areas = neighborhoodGuidesForCity(cityId);
   // One source of truth for both the navigation cards and the full area sections.
   const areaPhotos = cityId === "jerusalem" ? jerusalemAreaCardPhotos : telAvivAreaCardPhotos;
-  const hero = cityId === "jerusalem"
-    ? { src: jerusalemHero, alt: "Aerial view of Jaffa Road and the buildings of central Jerusalem" }
-    : { src: telAvivHero, alt: "Beachfront hotels, promenade and Mediterranean shoreline in Tel Aviv" };
+  const hero = stayEditorialHeroPhotos[cityId];
 
   return <main className="pb-10" data-testid="city-neighborhood-editorial">
     <GuideHeader

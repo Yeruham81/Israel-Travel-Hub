@@ -1,4 +1,5 @@
 import type { LinkProps } from "@tanstack/react-router";
+import topTenCover from "@/assets/guides/top-ten-israel-hero.webp";
 
 export type TopTenExperience = {
   id: string;
@@ -20,6 +21,12 @@ export type TopTenExperience = {
   extraGuide?: { label: string; to: LinkProps["to"] };
   official?: { label: string; href: string };
 };
+
+/** The authoritative cover used by this page and all incoming guide cards. */
+export const topTenIsraelHero = {
+  src: topTenCover,
+  alt: "Visitor silhouetted on a rocky overlook above the Sea of Galilee at sunset",
+} as const;
 
 const prefix = "/images/top-ten-israel/";
 

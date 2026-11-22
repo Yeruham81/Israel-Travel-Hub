@@ -1,5 +1,5 @@
 import type { TravelGuide } from "@/data/travelGuides";
-import { topTenExperiences, topTenFaqs } from "@/data/topTenExperiences";
+import { topTenExperiences, topTenFaqs, topTenIsraelHero } from "@/data/topTenExperiences";
 import { carRentalAffiliateUrl } from "@/lib/car-rental-affiliate";
 import { migrationPhotos as P } from "@/data/guideMigrationPhotos";
 import palestinianTaxiPhoto from "@/assets/guides/bethlehem/palestinian-taxi.jpg";
@@ -581,7 +581,7 @@ export const journeyDestinationGuides = {
     intro: "From Jerusalem's Old City to Tel Aviv's coast, the Dead Sea and desert stars, these ten experiences are a starting point for planning your own Israel trip.",
     answer: "I recommend combining Jerusalem, time on the Mediterranean coast and one regional excursion for a first visit. With more time, add the Galilee or a southern journey to the Negev and Eilat.",
     topics: ["attractions", "destinations", "itineraries", "tips"],
-    photo: { src: "/images/top-ten-israel/hero.webp", alt: "Old Jaffa and the Mediterranean waterfront in Tel Aviv" },
+    photo: topTenIsraelHero,
     facts: [
       { label: "Ten experiences", text: "Coast, heritage, food, nature and night sky" },
       { label: "Eight regions", text: "Geographical map to choose a realistic route" },
