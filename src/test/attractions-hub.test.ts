@@ -68,7 +68,7 @@ describe("Attractions hub redesign", () => {
     expect(page).toContain("Plan your trip to Israel");
     expect(page).toContain("attractionRelatedGuides.map");
     expect(page).toContain("attractionPlanningPaths.map");
-    expect(page).toContain("<img src={guide.photo.src}");
+    expect(page).toContain("<img src={guideHeroPhotoForPath(String(guide.to))?.src ?? guide.photo.src}");
     expect(page).toContain("<Icon aria-hidden");
     expect(page).not.toContain("More ways to plan your trip");
     expect(page).not.toContain('data-testid="attractions-planning-card"');

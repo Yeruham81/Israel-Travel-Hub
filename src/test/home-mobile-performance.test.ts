@@ -151,7 +151,7 @@ describe("home mobile performance optimizations", () => {
     expect(bytes("src/assets/airport-transfers/airport.webp")).toBeGreaterThan(10000);
     expect(bytes("public/images/home/uber-in-israel-phone-question.webp")).toBeGreaterThan(10000);
     expect(bytes("public/images/home/uber-in-israel-phone-question.webp")).toBeLessThan(30000);
-    expect(home).toContain('src: "/images/home/uber-in-israel-phone-question.webp"');
+    expect(home).toContain('first: guideDirectory.filter((guide) => ["uber", "esim", "arrival"].includes(guide.id))');
     expect(home).not.toContain("hotel-room-feature.webp");
     expect(home).not.toContain("/images/guides/taxi-in-tel-aviv.webp");
     expect(home).not.toContain("airport-pickup");
