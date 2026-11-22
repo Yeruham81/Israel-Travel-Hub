@@ -12,7 +12,7 @@ describe("Mount Zion visitor guide revision", () => {
     expect(data.routes[0]?.steps.join(" ")).toMatch(/Armenian Quarter/);
     expect(data.routes[1]?.steps.join(" ")).toMatch(/Zion Gate/);
     expect(data.routes[1]?.steps.join(" ")).toMatch(/Old City/);
-    expect(data.stopIntro).toMatch(/planning a visit/i);
+    expect(data.stopIntro).toMatch(/begin near Zion Gate/i);
   });
 
   it("names real bus stops, lines, and live planning resources", () => {
