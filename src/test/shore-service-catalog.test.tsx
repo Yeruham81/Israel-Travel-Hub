@@ -200,7 +200,7 @@ describe("port service catalog", () => {
     expect(card).not.toHaveTextContent("Operated by");
     expect(card).toHaveTextContent("GetYourGuide");
     expect(card).not.toHaveTextContent(/From ILS|Sponsored link/);
-    const link = within(card).getByRole("link", { name: /View on GetYourGuide/ });
+    const link = within(card).getByRole("link", { name: /^View tour:/ });
     expect(link).toHaveAttribute("href", affiliateConfig["shore-gyg-haifa-akko"]?.trackingUrl);
     expect(link).toHaveAttribute("rel", "sponsored noopener noreferrer");
     fireEvent.click(link);
@@ -216,7 +216,8 @@ describe("port service catalog", () => {
       expect(product).toBeDefined();
       if (product!.listedPrice) {
         expect(card).toHaveTextContent("US$" + expectedAmount.toLocaleString("en-US"));
-        expect(card).toHaveTextContent("Reference price · " + (expectedBasis === "per_person" ? "per person" : "per group"));
+        expect(card).toHaveTextContent("From US$");
+        expect(card).toHaveTextContent(expectedBasis === "per_person" ? "per person" : "per group");
       } else {
         // A snapshot that is over 30 days old must not masquerade as a current price.
         expect(card).toHaveTextContent("Check current price");
