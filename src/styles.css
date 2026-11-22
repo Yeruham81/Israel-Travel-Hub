@@ -249,6 +249,9 @@
     color: var(--color-foreground);
     font-size: .875rem;
     font-weight: 600;
+    min-width: 0;
+    justify-content: center;
+    text-align: center;
     box-shadow: 0 1px 2px color-mix(in oklch, var(--color-foreground) 7%, transparent);
     transition: border-color .15s ease, background-color .15s ease, color .15s ease, box-shadow .15s ease;
   }
@@ -262,6 +265,23 @@
     border-color: var(--color-primary);
     outline: 2px solid var(--color-primary);
     outline-offset: 2px;
+  }
+  /* Allow any jump-link label to use as many lines as it needs. A shrinkable
+     inner span plus overflow-wrap protects even long unbroken words. */
+  .on-this-page .chip > span {
+    min-width: 0;
+    max-width: 100%;
+    white-space: normal;
+    overflow-wrap: anywhere;
+  }
+  /* Keep the more prominent desktop label size. On narrow phones the font
+     and horizontal padding shrink slightly, but button height stays fluid. */
+  @media (max-width: 639px) {
+    .on-this-page .chip {
+      font-size: .8125rem;
+      line-height: 1.35;
+      padding: .4rem .45rem;
+    }
   }
   /* Long guide TOCs share the shape and colours without increasing their height. */
   .chip-dense { min-height: 1.875rem; padding: .3rem .625rem; font-size: .75rem; }

@@ -182,7 +182,9 @@ export function OnThisPage({ sections, sticky = false, compactLabels, fullLabels
         {visibleSections.map(([id, label], index) => {
           const visibility = index >= 15 ? "hidden" : index >= 12 ? "hidden xl:block" : index >= 10 ? "hidden lg:block" : "";
           return <li key={id} className={`min-w-0 ${visibility}`}>
-            <a href={`#${id}`} title={label} aria-label={label} className="chip chip-dense w-full truncate">{fullLabels ? label : (compactLabels?.[id] ?? compactOnThisPageLabel(id, label))}</a>
+            <a href={`#${id}`} title={label} aria-label={label} className="chip chip-dense w-full min-w-0">
+              <span className="block min-w-0">{fullLabels ? label : (compactLabels?.[id] ?? compactOnThisPageLabel(id, label))}</span>
+            </a>
           </li>;
         })}
       </ul>

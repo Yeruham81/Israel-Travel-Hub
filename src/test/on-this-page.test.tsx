@@ -31,6 +31,30 @@ describe("compact On this page navigation", () => {
     expect(css).toContain(".on-this-page .chip:focus-visible");
   });
 
+  it("shows complete chip text on mobile, wraps long words and keeps the desktop size", () => {
+    const fullLabel = "Extremely long visitor-accessibility-and-transportation information";
+    render(<OnThisPage sections={[["accessibility", fullLabel]]} fullLabels />);
+    const nav = screen.getByRole("navigation", { name: "On this page" });
+    const link = within(nav).getByRole("link", { name: fullLabel });
+    expect(link).toHaveTextContent(fullLabel);
+    expect(link).not.toHaveClass("truncate", "whitespace-nowrap", "overflow-hidden", "text-ellipsis");
+    expect(link.querySelector("span")).toHaveClass("min-w-0");
+
+    const css = readFileSync("src/styles.css", "utf8");
+    const mainStyles = css.match(/\\.on-this-page \\.chip \\{([^}]*)\\}/)?.[1] ?? "";
+    expect(mainStyles).toContain("font-size: .875rem");
+    expect(mainStyles).toContain("min-width: 0");
+    expect(mainStyles).toContain("text-align: center");
+    const wrappingStyles = css.match(/\\.on-this-page \\.chip > span \\{([^}]*)\\}/)?.[1] ?? "";
+    expect(wrappingStyles).toContain("white-space: normal");
+    expect(wrappingStyles).toContain("overflow-wrap: anywhere");
+    expect(wrappingStyles).toContain("max-width: 100%");
+    const mobileStyles = css.match(/@media \\(max-width: 639px\\) \\{\\s*\\.on-this-page \\.chip \\{([^}]*)\\}/)?.[1] ?? "";
+    expect(mobileStyles).toContain("font-size: .8125rem");
+    expect(mobileStyles).toContain("padding: .4rem .45rem");
+    expect(mobileStyles).not.toContain("max-height");
+  });
+
   it("shows ten links in five mobile rows and more at wider breakpoints", () => {
     const { container } = render(<OnThisPage sections={sections} />);
     const nav = screen.getByRole("navigation", { name: "On this page" });
