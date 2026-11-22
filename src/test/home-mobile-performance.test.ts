@@ -160,7 +160,7 @@ describe("home mobile performance optimizations", () => {
       expect(bytes(`${base}-tile.webp`)).toBeLessThan(bytes(`${base}.webp`));
       expect(home).toContain(`${name}-tile.webp`);
     }
-    expect(home).toContain('<img src={c.img.src} alt={c.img.alt}');
+    expect(home).toContain("guideHeroPhotoForPath(String(c.to))?.src ?? c.img.src");
     expect(home).not.toContain("c.img.tile ?? c.img.src");
     expect(home).toContain("xl:aspect-[6/5]");
     expect(home).toContain("min-[480px]:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5");

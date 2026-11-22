@@ -36,6 +36,7 @@ export function verifyEditorialCardHeroes({ root, paths }) {
   let scannedCards = 0;
   let scannedPages = 0;
   let noHero = 0;
+  const missingHeroTargets = new Map();
 
   const expectedFor = (target) => {
     if (heroCache.has(target)) return heroCache.get(target);
@@ -58,6 +59,7 @@ export function verifyEditorialCardHeroes({ root, paths }) {
         (!html.includes("/travel-blog/") && !html.includes("/attractions/"))) continue;
     const dom = new JSDOM(html);
     scannedPages++;
+    const unmatchedCards = new WeakSet();
     for (const link of dom.window.document.querySelectorAll("a[href]")) {
       const target = toPath(link.getAttribute("href"));
       if (!target || !known.has(target) || target === page) continue;
@@ -66,7 +68,29 @@ export function verifyEditorialCardHeroes({ root, paths }) {
       const actual = img.getAttribute("src");
       const expected = expectedFor(target);
       scannedCards++;
-      if (!expected) { noHero++; continue; }
+      if (!expected) { noHero++; missingHeroTargets.set(target, (missingHeroTargets.get(target) ?? 0) + 1); continue; }
+      if (srcKey(actual) !== srcKey(expected)) {
+        mismatches.push({ page, target, card: srcKey(actual), hero: srcKey(expected) });
+      }
+    }
+    // Some editorial layouts place the image beside a textual link rather than
+    // wrapping both inside the link. Audit those cards too.
+    for (const container of dom.window.document.querySelectorAll("article, li")) {
+      if (!/border|card/.test(container.getAttribute("class") ?? "")) continue;
+      const images = container.querySelectorAll("img[src]");
+      if (images.length !== 1) continue;
+      const img = images[0];
+      if (img.closest("a") || unmatchedCards.has(img)) continue;
+      const destinations = [...container.querySelectorAll("a[href]")]
+        .map(link => toPath(link.getAttribute("href")))
+        .filter(target => target && known.has(target) && target !== page);
+      if (destinations.length !== 1) continue;
+      const target = destinations[0];
+      unmatchedCards.add(img);
+      scannedCards++;
+      const actual = img.getAttribute("src");
+      const expected = expectedFor(target);
+      if (!expected) { noHero++; missingHeroTargets.set(target, (missingHeroTargets.get(target) ?? 0) + 1); continue; }
       if (srcKey(actual) !== srcKey(expected)) {
         mismatches.push({ page, target, card: srcKey(actual), hero: srcKey(expected) });
       }
@@ -79,6 +103,9 @@ export function verifyEditorialCardHeroes({ root, paths }) {
   console.log("[hero-card-parity] Scanned " + scannedPages + " pages and " + scannedCards +
     " illustrated guide/attraction links; " + unique.length + " mismatches; " + noHero +
     " links with no detectable target hero.");
+  if (missingHeroTargets.size) {
+    console.warn("[hero-card-parity] Targets lacking a recognizable page hero:", JSON.stringify([...missingHeroTargets]));
+  }
   if (unique.length) {
     for (const item of unique.slice(0, 220)) console.error(
       "[hero-card-parity] " + item.page + " => " + item.target +
