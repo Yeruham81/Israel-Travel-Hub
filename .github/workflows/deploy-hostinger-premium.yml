@@ -1050,8 +1050,19 @@ jobs:
           console.log("Old City multi-point map loaded with eight landmark and six gate markers.");
           NODE
           rm -f "$oldcity_map"
+          oldcity_hero_url="$(node - "$jerusalem_html" "$VITE_CANONICAL_ORIGIN" <<'NODE'
+          const fs=require("node:fs");
+          const html=fs.readFileSync(process.argv[2],"utf8");
+          const tag=html.match(/<img\\b[^>]*alt="Panoramic view of Jerusalem[^"]*"[^>]*>/i)?.[0];
+          const src=tag?.match(/\\bsrc="([^"]+)"/i)?.[1];
+          if(!src||!src.includes("jerusalem-old-city")) {
+            console.error("::error::Old City page is missing the new panoramic hero");process.exit(1);
+          }
+          process.stdout.write(new URL(src.replace(/&amp;/g,"&"),process.argv[3]).href);
+          NODE
+          )"
           oldcity_hero="$(mktemp)"
-          curl --retry 2 --max-time 20 -fsSL -o "$oldcity_hero" "$VITE_CANONICAL_ORIGIN/images/attractions/hero-jerusalem.webp"
+          curl --retry 2 --max-time 20 -fsSL -o "$oldcity_hero" "$oldcity_hero_url"
           node - "$oldcity_hero" <<'NODE'
           const b=require("node:fs").readFileSync(process.argv[2]);
           if(b.subarray(0,4).toString()!=="RIFF"||b.subarray(8,12).toString()!=="WEBP"){
