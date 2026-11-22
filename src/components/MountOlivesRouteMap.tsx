@@ -41,7 +41,7 @@ export function MountOlivesRouteMap() {
   return <section aria-label="Mount of Olives sites on an interactive map" data-testid="mount-olives-map" className="overflow-hidden rounded-2xl border bg-card">
     <div className="border-b bg-secondary/20 px-4 py-4 sm:px-5">
       <h3 className="flex items-center gap-2 text-lg font-semibold"><MapPin className="size-5 text-primary" aria-hidden="true"/> The Mount of Olives on the map</h3>
-      <p className="mt-1.5 text-sm leading-relaxed text-muted-foreground">Select any numbered stop to locate it. Blue pins mark the upper ridge, green the hillside and lower sites, and gold Lion's Gate. Pins are for orientation, not a step-by-step walking route.</p>
+      <p className="mt-1.5 text-sm leading-relaxed text-muted-foreground">Map key: Blue pins mark sites along the upper ridge, green pins indicate the hillside and lower sites, and the gold pin marks Lion’s Gate.</p>
     </div>
     <div className="grid lg:grid-cols-[minmax(0,1.45fr)_minmax(0,1fr)]">
       <iframe ref={frame} title="Interactive map with eight Mount of Olives and Old City stops" src={mapUrl} width={900} height={445} loading="lazy" referrerPolicy="strict-origin-when-cross-origin" className="h-[345px] w-full border-0 sm:h-[405px] lg:h-full lg:min-h-[455px]"/>
