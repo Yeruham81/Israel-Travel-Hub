@@ -1,3 +1,5 @@
+import oldCityPanorama from "@/assets/home/jerusalem-old-city.webp";
+
 
 /** Old City visitor facts checked against responsible operators, November 2026. */
 export const oldCityJerusalemSite = {
@@ -6,7 +8,7 @@ export const oldCityJerusalemSite = {
   updatedAt: "2026-11-23",
   region: "Jerusalem",
   hero: {
-    src: "/images/attractions/hero-jerusalem.webp",
+    src: oldCityPanorama,
     alt: "Panoramic view of Jerusalem’s Old City walls, stone buildings, domes and skyline",
   },
   intro: "Jerusalem’s Old City brings Jewish, Christian, Muslim and Armenian heritage together behind historic walls. Walk through lively markets, centuries-old churches and prayer sites, or add a museum or guided underground tour. Start with the map and three suggested routes below to choose the right gate, landmarks and visiting time.",
