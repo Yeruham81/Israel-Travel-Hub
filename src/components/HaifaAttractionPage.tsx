@@ -1,3 +1,4 @@
+import { ExternalProviderTourCard } from "@/components/ExternalProviderTourCard";
 import { Link } from "@tanstack/react-router";
 import { ArrowUpRight, BusFront, CarFront, Clock3, Footprints, MapPinned, TrainFront, Ticket, TramFront } from "lucide-react";
 import {
@@ -103,25 +104,25 @@ function HaifaPartnerTours() {
   return (
     <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3" data-testid="haifa-affiliate-tour-cards">
       {placements.map((tour) => (
-        <article key={tour.id} data-provider-product-code={tour.productCode} className="flex min-w-0 flex-col overflow-hidden rounded-xl border bg-card">
-          <img src={tour.image} alt="" loading="lazy" width={520} height={300} decoding="async"
-            className="aspect-[16/9] w-full object-cover" />
-          <div className="flex flex-1 flex-col p-4">
-            <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">{tour.platform}</p>
-            <h3 className="mt-1 font-serif text-lg font-semibold">{tour.title}</h3>
-            <p className="mt-2 flex-1 text-sm leading-relaxed text-muted-foreground">{tour.description}</p>
-            <div className="mt-3 space-y-1 text-xs text-muted-foreground">
-              <p className="font-semibold text-foreground"><Clock3 className="mr-1 inline size-3.5" aria-hidden="true" />{tour.duration}</p>
-              <p>{tour.priceFrom}</p>
-              <p aria-label={"Rating " + tour.rating}>★ {tour.rating}</p>
-            </div>
-            <a href={tour.url} target="_blank" rel="sponsored noopener noreferrer"
-              onClick={() => recordOutboundClick({ pageId: "attractions-haifa", productId: tour.id, offerId: tour.affiliateKey })}
-              className="mt-3 inline-flex items-center gap-1 text-sm font-semibold text-primary underline underline-offset-4">
-              Check tour & availability <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
-            </a>
-          </div>
-        </article>
+        <div key={tour.id} data-provider-product-code={tour.productCode} className="min-w-0">
+          <ExternalProviderTourCard
+            image={tour.image} alt={tour.title} platform={tour.platform}
+            title={tour.title} description={tour.description} duration={tour.duration}
+            rating={(() => {
+              const value = Number(tour.rating.split("/5")[0]);
+              const count = Number(tour.rating.split("·")[1]?.trim().split(" ")[0]);
+              return Number.isFinite(value) && Number.isFinite(count) ? {value,count} : undefined;
+            })()}
+            price={(() => {
+              const amount = Number(tour.priceFrom.replace(/[^0-9.]/g, ""));
+              return Number.isFinite(amount) && amount > 0
+                ? {amount,currency:"USD" as const,basis:tour.priceFrom.includes("per group") ? "per_group" as const : "per_person" as const}
+                : undefined;
+            })()}
+            href={tour.url}
+            onClick={() => recordOutboundClick({ pageId: "attractions-haifa", productId: tour.id, offerId: tour.affiliateKey })}
+          />
+        </div>
       ))}
       <p className="col-span-full text-xs leading-relaxed text-muted-foreground">Prices and ratings are published provider snapshots checked November 2026, not live quotes. Verify availability, inclusions, reviews and final costs on the booking platform.</p>
     </div>
