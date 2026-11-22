@@ -73,14 +73,15 @@ export function verifyEditorialCardHeroes({ root, paths }) {
         mismatches.push({ page, target, card: srcKey(actual), hero: srcKey(expected) });
       }
     }
-    // Some editorial layouts place the image beside a textual link rather than
-    // wrapping both inside the link. Audit those cards too.
-    for (const container of dom.window.document.querySelectorAll("article, li")) {
+    // A few image-backed LINK CARDS have their photo as a direct child of
+    // the list item, beside the destination anchor (rather than inside it).
+    // Do not classify general article/detail cards with secondary inline
+    // links as navigation cards: their independent editorial photos belong
+    // to the article, not the linked guide.
+    for (const container of dom.window.document.querySelectorAll("li")) {
       if (!/border|card/.test(container.getAttribute("class") ?? "")) continue;
-      const images = container.querySelectorAll("img[src]");
-      if (images.length !== 1) continue;
-      const img = images[0];
-      if (img.closest("a") || unmatchedCards.has(img)) continue;
+      const img = container.querySelector(":scope > img[src]");
+      if (!img || unmatchedCards.has(img)) continue;
       const destinations = [...container.querySelectorAll("a[href]")]
         .map(link => toPath(link.getAttribute("href")))
         .filter(target => target && known.has(target) && target !== page);
