@@ -1,6 +1,6 @@
 import type { LinkProps } from "@tanstack/react-router";
 import type { Attraction } from "@/data/attractionGuideTypes";
-import hero from "@/assets/home/tel-aviv-coast.webp";
+import hero from "@/assets/guides/tel-aviv-attractions-hero.webp";
 import jaffa from "@/assets/tel-aviv/jaffa.webp";
 import beaches from "@/assets/guides/2026-10/beaches-in-tel-aviv.webp";
 import neve from "@/assets/tel-aviv/neve-tzedek.webp";
@@ -20,7 +20,7 @@ export type TelAvivExperience = {
 };
 
 /** Canonical cover: the page header and all cards linking here must use the same photograph. */
-export const telAvivAttractionsHero = { src: hero, alt: "The Mediterranean beachfront and urban skyline of Tel Aviv" } as const;
+export const telAvivAttractionsHero = { src: hero, alt: "I Love Tel Aviv sign on the Tel Aviv Port promenade overlooking the Mediterranean Sea" } as const;
 
 export const telAvivAttractionsUpdatedAt="2026-11-20";
 export const telAvivExperiences: TelAvivExperience[]=[

@@ -60,6 +60,18 @@ describe("Upgraded Tel Aviv attractions editorial guide",()=>{
    expect(related?.photo).toEqual(telAvivAttractionsHero);
  });
 
+ it("uses the approved I Love Tel Aviv Port photograph as the unique optimized page cover",()=>{
+   const source=readFileSync(resolve(process.cwd(),"src/data/telAvivAttractionsGuide.ts"),"utf8");
+   expect(source).toContain('import hero from "@/assets/guides/tel-aviv-attractions-hero.webp"');
+   expect(telAvivAttractionsHero.alt).toContain("Tel Aviv Port");
+   const file=resolve(process.cwd(),"src/assets/guides/tel-aviv-attractions-hero.webp");
+   expect(existsSync(file)).toBe(true);
+   const binary=readFileSync(file);
+   expect(binary.subarray(0,4).toString()).toBe("RIFF");
+   expect(binary.subarray(8,12).toString()).toBe("WEBP");
+   expect(binary.length).toBeLessThan(120000);
+ });
+
  it("uses ten different local photos, including four verified Google Drive images",()=>{
    expect(new Set(telAvivExperiences.map(x=>x.image.src)).size).toBe(10);
    const slugs=["carmel-market","tel-aviv-museum-of-art","sarona-market","tel-aviv-port"];
