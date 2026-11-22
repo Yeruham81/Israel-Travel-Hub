@@ -301,7 +301,7 @@ export const migrationPhotos = {
   "itinerary-jaffa-streets": {
     "src": itineraryJaffaStreets,
     "alt": "Historic streets and buildings in Old Jaffa"
-  }
+  },
   "featured-original-3day": {
     src: "/images/travel-blog/featured-itinerary-3-days.webp",
     alt: "Camel resting near Ein Gedi in Israel's Judean Desert",
