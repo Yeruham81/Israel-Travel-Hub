@@ -43,10 +43,10 @@ jobs:
           python3 - <<'PY'
           import pathlib,re,json
           pats=[
-            re.compile(r'\\b(?:this|the) (?:map|image|photo|figure|table|chart|card|widget|guide|page|section) (?:shows|illustrates|displays|provides|covers|is|does|uses|helps|serves|means|points)\\b',re.I),
-            re.compile(r'\\b(?:not an? (?:itinerary|route|guarantee|quote|map|booking|guide|live|current)|no (?:need|guarantee)|do not (?:assume|treat|mistake)|for orientation)\\b',re.I),
-            re.compile(r'\\b(?:swipe|scroll|tap|click|hover) (?:the|on|to|through|sideways|down|up|left|right)\\b',re.I),
-            re.compile(r'\\b(?:illustrative|indicative|approximate|estimated|snapshot|example)\\b.{0,90}\\b(?:not|only|for|rather|than)\\b',re.I),
+            re.compile(r'\b(?:this|the) (?:map|image|photo|figure|table|chart|card|widget|guide|page|section) (?:shows|illustrates|displays|provides|covers|is|does|uses|helps|serves|means|points)\b',re.I),
+            re.compile(r'\b(?:not an? (?:itinerary|route|guarantee|quote|map|booking|guide|live|current)|no (?:need|guarantee)|do not (?:assume|treat|mistake)|for orientation)\b',re.I),
+            re.compile(r'\b(?:swipe|scroll|tap|click|hover) (?:the|on|to|through|sideways|down|up|left|right)\b',re.I),
+            re.compile(r'\b(?:illustrative|indicative|approximate|estimated|snapshot|example)\b.{0,90}\b(?:not|only|for|rather|than)\b',re.I),
           ]
           rows=[]
           for root in ('src/components','src/data','src/routes'):
