@@ -114,8 +114,8 @@ describe("Best Time to Visit Israel — editorial and layout regressions",()=>{
     for(const id of configIds)expect(affiliateConfig[id]?.trackingUrl).toMatch(/^https:\/\/(?:viator|getyourguide)\.tpm\.li\//);
     const page=readFileSync("src/components/BestTimeIsraelGuide.tsx","utf8");
     expect(page).toContain('url.searchParams.set("sub_id",item.sub)');
-    expect(page).toContain("rel={relFor(true)}");
-    expect(page).toContain("recordOutboundClick");
+    expect(readFileSync("src/components/CuratedPartnerTourCard.tsx","utf8")).toContain("rel={relFor(true)}");
+    expect(readFileSync("src/components/CuratedPartnerTourCard.tsx","utf8")).toContain("recordOutboundClick");
     expect(page).not.toContain("starting price");
     expect(page).toContain('data-testid="best-time-seasonal-tours"');
     expect(page).toContain('image={item.image} alt={item.alt}');
