@@ -91,7 +91,7 @@ function TourCards({group}:{group:typeof jerusalemTourGroups[number]}) {
         </a>;
       })}
     </div>
-    <p className="mt-3 text-xs leading-relaxed text-muted-foreground">External providers manage these tours. Rating and any displayed price are dated editorial snapshots, not live offers. Check the exact departure city, guide, walking demands, entry fees, operating dates and cancellation conditions with the supplier before booking. Some routes may change with access restrictions.</p>
+    <p className="mt-3 text-xs leading-relaxed text-muted-foreground">These tours are operated by independent providers and booked through their own platforms. Tour details, availability, prices and booking conditions are set by the operators and may change. Before booking, check the departure date and location, itinerary, guiding, walking requirements, admissions, meeting and return arrangements, and cancellation policy directly with the booking provider.</p>
     <Link to={group.id==="city-tours"?"/tours/jerusalem/":"/tours/"} className="mt-4 inline-flex items-center gap-2 font-semibold text-primary underline underline-offset-4 hover:text-primary/80 focus-visible:outline-2 focus-visible:outline-primary">
       {group.id==="city-tours"?"Explore all Jerusalem tours":"Explore more tours and day trips"} <ArrowUpRight aria-hidden="true" className="h-4 w-4"/>
     </Link>
