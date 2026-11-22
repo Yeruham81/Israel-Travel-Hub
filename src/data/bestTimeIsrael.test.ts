@@ -118,7 +118,8 @@ describe("Best Time to Visit Israel — editorial and layout regressions",()=>{
     expect(page).toContain("recordOutboundClick");
     expect(page).not.toContain("starting price");
     expect(page).toContain('data-testid="best-time-seasonal-tours"');
-    expect(page).toContain('src={item.image} alt={item.alt}');
+    expect(page).toContain('image={item.image} alt={item.alt}');
+    expect(page).toContain("<CuratedPartnerTourCard");
     expect(page).toContain("masadaTourPhoto");
     expect(page).toContain("/images/attractions/old-jerusalem-cardo.webp");
     expect(page).toContain("/images/attractions/jaffa-flea-market.webp");
