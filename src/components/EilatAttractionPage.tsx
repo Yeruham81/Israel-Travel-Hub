@@ -51,7 +51,7 @@ const partnerTours = [
     title: "Glass-bottom boat on the Red Sea",
     text: "A two-hour cruise with underwater windows. Check the advertised boat, departure point, sea visibility and weather arrangements.",
     duration: "About 2 hours",
-    startingPrice: "From US$24 per person",
+    startingPriceUsd: 24,
     photo: "/images/attractions/eilat-water-sports.webp",
     photoAlt: "Eilat marina and moored boats, illustrating local Red Sea cruises",
     subId: "attractions_eilat_glass_bottom",
@@ -74,8 +74,8 @@ const partnerTours = [
     title: "Red Canyon jeep and hiking tour",
     text: "A jeep outing with walking in the desert. Confirm the amount of hiking, ladders, conditions and route before booking.",
     duration: "About 3¾–4 hours",
-    startingPrice: "From US$98 per person",
-    rating: "4.8/5 · 34 reviews",
+    startingPriceUsd: 98,
+    rating: { value: 4.8, count: 34 },
     photo: "/images/attractions/eilat-mountains-tour.webp",
     photoAlt: "Landscape of the Eilat Mountains illustrating the wider desert tour region",
     subId: "attractions_eilat_red_canyon",
@@ -97,12 +97,8 @@ function EilatPartnerTours() {
       key={tour.id} testId="eilat-partner-tour-card"
       image={tour.photo} alt={tour.photoAlt} platform={tour.provider}
       title={tour.title} description={tour.text} duration={tour.duration}
-      rating={"rating" in tour && tour.rating
-        ? (() => {const match = /([0-5](?:\\.\\d+)?)\\/5\\s*·\\s*(\\d+)/.exec(tour.rating); return match ? {value:Number(match[1]),count:Number(match[2])} : undefined;})()
-        : undefined}
-      price={"startingPrice" in tour && tour.startingPrice
-        ? (() => {const match = /US\\$(\\d+(?:\\.\\d+)?)/.exec(tour.startingPrice);return match ? {amount:Number(match[1]),currency:"USD" as const,basis:"per_person" as const} : undefined;})()
-        : undefined}
+      rating={"rating" in tour ? tour.rating : undefined}
+      price={"startingPriceUsd" in tour ? { amount: tour.startingPriceUsd, currency: "USD", basis: "per_person" } : undefined}
       href={tour.href}
       onClick={() => recordOutboundClick({pageId:"attractions-eilat",productId:tour.id,offerId:tour.key})}
     />)}
