@@ -4,110 +4,123 @@ import { oldCityJerusalemDestinationContent as content } from "@/components/OldC
 import { oldCityJerusalemSite as site } from "@/data/oldCityJerusalemSite";
 import { oldCityJerusalemMeta } from "@/routes/attractions.old-city-jerusalem";
 import { attractionHubCards } from "@/data/attractionsHub";
-import { affiliateConfig } from "@/data/registry";
+import { affiliateConfig, tourProducts } from "@/data/registry";
 import { offersForTour } from "@/lib/tours";
 
-describe("Jerusalem Old City upgraded attractions guide", () => {
-  it("uses the shared destination design, current meta and all eight illustrated landmarks", () => {
-    const page = readFileSync("src/components/OldCityJerusalemAttractionPage.tsx", "utf8");
+const page = readFileSync("src/components/OldCityJerusalemAttractionPage.tsx", "utf8");
+const mapComponent = readFileSync("src/components/OldCityJerusalemRouteMap.tsx", "utf8");
+const mapHtml = readFileSync("public/maps/jerusalem-old-city.html", "utf8");
+
+describe("Jerusalem Old City — upgraded visitor guide", () => {
+  it("uses the new panoramic hero consistently on the page and linked attraction cards", () => {
     const route = readFileSync("src/routes/attractions.old-city-jerusalem.tsx", "utf8");
     expect(route).toContain("component: OldCityJerusalemAttractionPage");
-    expect(page).toContain("AttractionDestinationPage");
     expect(content.path).toBe("/attractions/old-city-jerusalem/");
     expect(content.title).toBe(site.title);
-    expect(content.heroTitle).toBe("Jerusalem's Old City: Sights & Visitor Tips");
-    expect(content.highlightsTitle).toBe("What to see in Jerusalem's Old City");
+    expect(content.heroTitle).toBe("Jerusalem’s Old City: What to See & How to Visit");
+    expect(site.hero.src).toBe("/images/attractions/hero-jerusalem.webp");
+    expect(site.hero.src).not.toContain("via-dolorosa");
+    expect(existsSync("public" + site.hero.src)).toBe(true);
+    expect(content.hero.src).toBe(site.hero.src);
+    expect(attractionHubCards.find(card => card.to === content.path)?.photo.src).toBe(site.hero.src);
+    expect((page.match(/<AttractionHighlight mobileImageFirst/g) ?? [])).toHaveLength(8);
+    expect(content.itineraryFirst).toBe(true);
+    expect(content.itineraryTitle).toBe("Plan your Old City visit");
     expect(content.facts).toHaveLength(6);
-    expect(content.nearby).toHaveLength(6);
-    expect(content.planningLinks).toHaveLength(6);
-    expect(content.faqs).toHaveLength(5);
-    expect(content.sources).toHaveLength(7);
-    expect(new Set(content.nearby?.map(x => x.to)).size).toBe(6);
-    expect(attractionHubCards.filter(card => card.to === content.path)).toHaveLength(1);
-    expect((page.match(/<AttractionHighlight\s+title=/g) || [])).toHaveLength(8);
+    expect(content.faqs).toHaveLength(7);
+    expect(content.sources).toHaveLength(8);
     const meta = oldCityJerusalemMeta();
-    expect(meta.links.find(x => x.rel === "canonical")?.href).toContain(content.path);
-    const schema = meta.scripts.map(x => JSON.parse(x.children as string)).find(x => x["@type"] === "Article");
-    expect(schema.dateModified).toBe("2026-11-18");
-    expect(schema.citation).toEqual(content.sources.map(source => source.url));
-    expect(schema.citation).not.toContain(site.official.accessibleJlmIos);
-    expect(schema.citation).not.toContain(site.official.jerusalemTransit);
+    expect(meta.links.some(link => link.rel === "canonical" && link.href?.includes(content.path))).toBe(true);
+    const article = meta.scripts.map(script => JSON.parse(script.children as string)).find(schema => schema["@type"] === "Article");
+    expect(article.dateModified).toBe("2026-11-23");
+    expect(article.citation).toEqual(content.sources.map(source => source.url));
   });
 
-  it("correctly distinguishes free sacred places, paid tours and limited worship-site access", () => {
-    const page = readFileSync("src/components/OldCityJerusalemAttractionPage.tsx", "utf8");
-    expect(page).toContain('title="Temple Mount"');
-    expect(page).not.toMatch(/Haram al-Sharif|Noble Sanctuary/i);
-    expect(page).toContain("Non-Muslim visits");
-    expect(page).toContain("interiors of Al-Aqsa Mosque and the Dome of the Rock");
-    expect(page).toContain("Entry is free");
-    expect(page).toContain("advance booking recommended");
-    expect(page).toContain("Western Wall Tunnels");
-    expect(page).toContain("Tower of David");
-    expect(page).toContain("Via Dolorosa");
-    expect(page).toContain("Armenian Quarter");
-    expect(page).toContain("Damascus Gate");
-    expect(page).toContain('data-testid="jerusalem-old-city-hours-fees"');
-    expect(page).toContain('data-testid="jerusalem-old-city-entry"');
-    expect(page).toContain('data-testid="jerusalem-old-city-access"');
-    expect(page).toContain('data-testid="jerusalem-old-city-gates"');
-    expect(page).toContain('data-testid="jerusalem-old-city-map"');
-    expect(page).toContain('data-testid="jerusalem-old-city-walking-plans"');
-    expect(page).toContain('data-testid="jerusalem-old-city-tour-cards"');
-    expect(page).toContain('data-testid="jerusalem-old-city-published-hours"');
-    expect(page).toContain('<Link to="/travel-blog/calendar-of-events/" className={inlineLink}>Special dates</Link>');
-    expect(page).toContain('href={official.tunnelsBooking} target="_blank" rel="noopener noreferrer" className={inlineLink}>by reservation</a>');
-    expect(page).toContain("Sunday 12:00–17:00");
-    expect(page).toContain("opposite Jaffa Gate Plaza");
-    expect(page).toContain("Friday and Shabbat:");
-    expect(page).toContain("most city buses stop operating");
-    expect(page).toContain('title="Damascus Gate and the Muslim Quarter Markets"');
-    expect(page).toContain("Ramparts Walk</a> starts at Jaffa Gate");
-    expect(page).toContain("<strong>Armenian Quarter:</strong>");
-    expect(page).toContain("plan your morning around that limited visiting window");
-    expect(page).toContain("Saturday–Thursday 09:00–16:00 in winter");
-    expect(page).toContain("Jaffa Gate–New Gate section of the northern route");
-    expect(page).toContain("starts at Jaffa Gate, not Damascus Gate");
-    expect(page).toContain("not wheelchair accessible or suitable for baby strollers");
-    expect(page).toContain("official tour-by-tour accessibility guidance");
-    expect(page).toContain("Accessible JLM for iPhone");
-    expect(page).toContain("normally limited to Sunday–Thursday");
-    expect(page).toContain("Cathedral of St. James");
-    expect(page).toContain("Christian Quarter Road");
-    expect(page).not.toContain("follows accessible sections of the city walls");
-    expect(site.official.tunnels).toBe("https://thekotel.org/en/book-a-tour/");
-    expect(content.relatedTitle).toBe("Explore Jerusalem and day trips across Israel");
-    expect(page).toContain('data-testid="jerusalem-old-city-featured-tours"');
-    expect((page.match(/<AttractionPracticalTip>/g) || [])).toHaveLength(4);
-    expect(page).toContain("Following the Via Dolorosa?");
-    expect(page).toContain("If you book a Western Wall Tunnels tour");
-    expect(page).toContain("Meeting a driver after your walk?");
-    expect(page).toContain("Tour details, availability, prices and booking conditions are set by the tour operators");
-    expect(page).toContain("cancellation policy directly with the booking provider");
-    expect(page).not.toContain("Ratings are previously checked booking-platform snapshots.");
-    expect(page).toContain("ExternalTourCard");
-    expect(page).not.toContain('JerusalemPartnerOffers id="old-city-jerusalem"');
-    expect(affiliateConfig["tour-jerusalem-old-city-walk-viator@attractions-old-city-jerusalem"]?.trackingUrl).toBe("https://viator.tpm.li/NfTH03Dg");
-    expect(offersForTour("jerusalem-private-oldcity-walk", "attractions-old-city-jerusalem")[0]?.provider.isAffiliate).toBe(true);
-    expect(page).toContain("contactIntroduction:");
-    expect(page).not.toContain("Planning a visit to Jerusalem's Old City? Tell me");
-    expect(site.visitor.towerAdult).toBe("₪55");
-    expect(site.visitor.rampartsAdult).toBe("₪25");
-  });
-
-  it("keeps the eight landmark photos optimized, distinct and hosted locally", () => {
-    const photoNames = [
+  it("illustrates the eight local landmarks and provides a multi-pin map of six entrances", () => {
+    const images = [
       "old-jerusalem-western-wall.webp", "old-jerusalem-holy-sepulchre.webp",
       "old-jerusalem-via-dolorosa.webp", "old-jerusalem-temple-mount.webp",
       "old-jerusalem-cardo.webp", "old-jerusalem-tower-of-david.webp",
       "old-jerusalem-western-wall-tunnels.webp", "old-jerusalem-damascus-gate.webp",
     ];
-    const page = readFileSync("src/components/OldCityJerusalemAttractionPage.tsx", "utf8");
-    for (const name of photoNames) {
+    for (const name of images) {
       expect(existsSync("public/images/attractions/" + name), name).toBe(true);
-      expect(page.includes(name), name).toBe(true);
+      expect(page).toContain(name);
     }
-    expect(new Set(photoNames).size).toBe(8);
-    expect(page).not.toContain("upload.wikimedia.org");
+    expect(page).toContain("<OldCityJerusalemRouteMap />");
+    expect(mapComponent).toContain('data-testid="jerusalem-old-city-map"');
+    expect(mapComponent).toContain('const overviewUrl = "/maps/jerusalem-old-city.html?points="');
+    expect(mapComponent).toContain('type: "jerusalem-old-city-map-focus"');
+    expect(mapComponent).toContain("jerusalem-old-city-map-selected");
+    expect(mapComponent).toContain('focus("all")');
+    expect(mapHtml).toContain("points.length!==14");
+    expect(mapHtml).toContain("new maplibregl.Marker");
+    expect(mapHtml).toContain("points.forEach");
+    expect(mapHtml).toContain('point.type==="site"');
+    expect(mapHtml).toContain("www.google.com/maps/search");
+    expect(mapHtml).not.toContain("travelmode=driving");
+    const sitePins = [...mapComponent.matchAll(/type: "site" \}/g)];
+    const gatePins = [...mapComponent.matchAll(/type: "gate" \}/g)];
+    expect(sitePins).toHaveLength(8);
+    expect(gatePins).toHaveLength(6);
+    for (const gate of ["Jaffa Gate", "Dung Gate", "Damascus Gate", "Zion Gate", "Lion's Gate", "New Gate"])
+      expect(mapComponent).toContain(gate);
+  });
+
+  it("compares hours and admission as a real mobile-scrollable table and offers useful routes", () => {
+    for (const required of [
+      'data-testid="jerusalem-old-city-hours-fees"',
+      'min-w-[830px]', 'overflow-x-auto', 'sticky left-0',
+      'data-testid="jerusalem-old-city-visit-choices"',
+      'data-testid="jerusalem-old-city-walking-plans"',
+      'data-testid="jerusalem-old-city-walking-connections"',
+      'data-testid="jerusalem-old-city-access"',
+      'data-testid="jerusalem-old-city-entry"',
+      'data-testid="jerusalem-old-city-gates"',
+      'data-testid="jerusalem-old-city-published-hours"',
+      "Two suggested walking routes", "via-dolorosa", "Western Wall Tunnels",
+      "Ramparts Walk", "Cathedral of St. James",
+    ]) {
+      expect(page).toContain(required);
+    }
+    expect(page).toContain("The Old City's major landmarks");
+    expect(page).toContain("Via Dolorosa and the Christian Quarter");
+    expect(page).toContain("The <strong>southern route</strong>");
+    expect(page).toContain("The <strong>northern route</strong>");
+    expect(page).toContain("Sunday–Thursday");
+    expect(page).toContain("Accessible JLM");
+    expect(page).toContain("Friday and Shabbat:");
+    expect((page.match(/<AttractionPracticalTip>/g) ?? [])).toHaveLength(4);
+    expect(site.visitor.towerAdult).toBe("₪55");
+    expect(site.visitor.rampartsAdult).toBe("₪25");
+    expect(page).not.toContain('id="via-dolorosa-guide"');
+  });
+
+  it("keeps three Travelpayouts tour cards focused on visitors who are in Jerusalem", () => {
+    expect(page).toContain('data-testid="jerusalem-old-city-featured-tours"');
+    expect(page).toContain("lg:grid-cols-3");
+    expect(page).toContain("<ExternalTourCard");
+    expect(page).toContain("<CuratedPartnerTourCard");
+    expect(page).toContain("https://viator.tpk.lv/YV4HrN5E");
+    expect(page).toContain('pageId="attractions-old-city-jerusalem"');
+    expect(page).not.toContain('tour.id === "jerusalem-day-tel-aviv"');
+    for (const id of ["jerusalem-old-city-walk", "jerusalem-private-oldcity-walk"]) {
+      expect(tourProducts.find(tour => tour.id === id)?.originIds).toContain("jerusalem");
+      expect(offersForTour(id, "attractions-old-city-jerusalem").some(offer => offer.provider.isAffiliate)).toBe(true);
+    }
+    expect(affiliateConfig["tour-jerusalem-old-city-walk-viator@attractions-old-city-jerusalem"]?.trackingUrl).toBe("https://viator.tpm.li/NfTH03Dg");
+  });
+
+  it("shows six relevant Jerusalem guides, and reserves the Via Dolorosa link for its future page", () => {
+    expect(content.relatedTitle).toBe("Continue exploring Jerusalem");
+    const expected = [
+      "/attractions/mount-of-olives/", "/attractions/mount-zion/",
+      "/travel-blog/jerusalem-travel-guide/", "/travel-blog/churches-in-jerusalem/",
+      "/travel-blog/museums-in-jerusalem/", "/travel-blog/shopping-in-jerusalem/",
+    ];
+    expect(content.nearby?.map(item => item.to)).toEqual(expected);
+    expect(content.planningLinks).toHaveLength(6);
+    expect(page).toContain("contactIntroduction:");
+    expect(page).not.toContain('<Link to="/attractions/via-dolorosa/"');
   });
 });
