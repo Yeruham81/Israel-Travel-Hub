@@ -37,3 +37,27 @@ jobs:
           for p,n,context in rows[:750]:
             print("CANDIDATE",json.dumps({"file":p,"line":n,"snippet":context},ensure_ascii=False))
           PY
+      - name: Identify meta instructions, repetitive map captions and technical labels
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          import pathlib,re,json
+          pats=[
+            re.compile(r'\\b(?:this|the) (?:map|image|photo|figure|table|chart|card|widget|guide|page|section) (?:shows|illustrates|displays|provides|covers|is|does|uses|helps|serves|means|points)\\b',re.I),
+            re.compile(r'\\b(?:not an? (?:itinerary|route|guarantee|quote|map|booking|guide|live|current)|no (?:need|guarantee)|do not (?:assume|treat|mistake)|for orientation)\\b',re.I),
+            re.compile(r'\\b(?:swipe|scroll|tap|click|hover) (?:the|on|to|through|sideways|down|up|left|right)\\b',re.I),
+            re.compile(r'\\b(?:illustrative|indicative|approximate|estimated|snapshot|example)\\b.{0,90}\\b(?:not|only|for|rather|than)\\b',re.I),
+          ]
+          rows=[]
+          for root in ('src/components','src/data','src/routes'):
+            for p in pathlib.Path(root).rglob('*'):
+              if p.suffix not in ('.ts','.tsx') or '.test.' in p.name: continue
+              for n,line in enumerate(p.read_text().splitlines(),1):
+                if any(pat.search(line) for pat in pats):
+                  line=line.strip()
+                  if not line.startswith('//') and not line.startswith('/*') and not line.startswith('*'):
+                    rows.append((str(p),n,line))
+          print('META_COPY_CANDIDATE_LINES',len(rows))
+          for p,n,s in rows[:500]:
+            print('META_COPY',json.dumps({'path':p,'line':n,'text':s[:420]},ensure_ascii=False))
+          PY
