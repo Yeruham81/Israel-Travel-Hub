@@ -68,6 +68,7 @@ export const legalNav: NavItem[] = [
 /** Compact labels for individual attractions only. General guides do not belong in this sidebar. */
 export const attractionSidebarGuideLabels: Record<string, string> = {
   "old-city-jerusalem": "Old City",
+  "via-dolorosa": "Via Dolorosa",
   "mount-of-olives": "Mount of Olives",
   "mount-zion": "Mount Zion",
   jaffa: "Old Jaffa",
