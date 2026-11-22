@@ -727,7 +727,7 @@ export const itineraries: Record<ItineraryId, ItineraryGuide> = {
       { title: "Getting around Israel", description: "Rail, buses and connections between major regions.", to: "/travel-blog/getting-around-israel/", image: "itinerary-train" },
       { title: "Ben Gurion Airport connections", description: "Plan the final journey to your flight.", to: "/airport-transfers/", image: "itinerary-airport" },
     ],
-    hero: "EXISTING:galilee",
+    hero: "itinerary-7day-dead-sea-original",
   },
   "10": {
     id: "10", days: 10, path: "/travel-blog/israel-itinerary-10-days/",
@@ -933,7 +933,7 @@ export const itineraries: Record<ItineraryId, ItineraryGuide> = {
       { title: "Haifa", description: "Bahá’í Gardens viewpoints and coastal sights.", to: "/attractions/haifa/", image: "EXISTING:haifa" },
       { title: "Getting around Israel", description: "Trains, buses and practical regional transport.", to: "/travel-blog/getting-around-israel/", image: "itinerary-train" },
     ],
-    hero: "itinerary-10day-haifa-port-cover",
+    hero: "itinerary-10day-beatitudes-original",
   },
 };
 

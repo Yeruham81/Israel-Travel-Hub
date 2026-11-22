@@ -55,6 +55,21 @@ describe("guide cards always use the destination hero image", () => {
     expect(collisions).toEqual([]);
   });
 
+  it("retains verified original-site lead photographs in guide and itinerary heroes", () => {
+    const originalCovers: Record<string, string> = {
+      "/travel-blog/jerusalem-travel-guide/": "/images/travel-blog/jerusalem-panorama-original.webp",
+      "/travel-blog/shopping-in-jerusalem/": "/images/travel-blog/shopping-in-jerusalem-original.webp",
+      "/travel-blog/getting-around-israel/": "/images/travel-blog/tel-aviv-skyline-original.webp",
+      "/travel-blog/ben-gurion-airport-arrival-tips/": "/images/travel-blog/welcome-to-israel-original.webp",
+      "/travel-blog/israel-itinerary-7-days/": "/images/travel-blog/seven-day-dead-sea-original.webp",
+      "/travel-blog/israel-itinerary-10-days/": "/images/travel-blog/ten-day-beatitudes-original.webp",
+    };
+    for (const [path, photo] of Object.entries(originalCovers)) {
+      expect(guideHeroPhotoForPath(path)?.src, path).toBe(photo);
+      expect(existsSync("public" + photo), photo).toBe(true);
+    }
+  });
+
   it("guards the source mapping and deleted day-trip links", () => {
     const cardSource = readFileSync("src/lib/guide-card-photos.ts", "utf8");
     expect(cardSource).toContain("entry.guide.photo");

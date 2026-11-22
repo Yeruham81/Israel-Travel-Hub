@@ -235,7 +235,7 @@ export const expandedTravelGuides = {
     description: "Plan a Jerusalem visit with Old City highlights, Mount of Olives, museums, markets and practical itinerary routes, hotels and day trips.",
     intro: "Plan Jerusalem by area and interest. A rewarding visit leaves time for its streets and neighbourhoods as well as the landmarks on your list.",
     answer: "For a first visit, consider two or three days as a planning starting point: an Old City day, a museum/market day and time for a hillside or neighbourhood that interests you. With one day, choose a focused route. Base yourself around the places you will visit and check Shabbat, religious-site access and reservations for your exact dates.",
-    topics: ["destinations", "attractions", "tips", "religion"], photo: photos.jerusalem,
+    topics: ["destinations", "attractions", "tips", "religion"], photo: { src: "/images/travel-blog/jerusalem-panorama-original.webp", alt: "Jerusalem Old City panorama with the Dome of the Rock", credit: "Photo from the publisher's travel archive." },
     facts: [{ label: "Planning starting point", text: "Two or three days; more for specialist interests or excursions" }, { label: "On foot", text: "Stone surfaces, hills and steps affect the route" }, { label: "Hotel choice", text: "Match neighbourhood, vehicle access and walking distance" }],
     comparison: { caption: "Choose an area for each part of your Jerusalem visit", headers: ["Area", "Why include it", "Plan around"], rows: [["Old City", "Sacred sites, historic streets and markets", "Access, worship, queues and uneven walking"], ["Mount of Olives / Kidron", "Views and Christian pilgrimage sites", "Slopes, site windows and a workable route"], ["City centre / Mahane Yehuda", "Market food and everyday city life", "Separate stall and restaurant hours"], ["Museum areas", "Art, archaeology and city history", "Reservations, interests and time inside"], ["German Colony / Ein Karem", "Neighbourhood atmosphere or a separate church visit", "Travel time beyond the Old City"]] },
     sections: [
@@ -320,7 +320,7 @@ export const expandedTravelGuides = {
     intro: "From Mahane Yehuda and the Old City souks to modern stores and local arts fairs, my guide will help you choose where to shop and what to combine.",
     answer: "I suggest Mahane Yehuda for food, the Old City for traditional souvenirs, Mamilla for brands, Malha for indoor shopping and Hutzot Hayotzer for artisan gifts. Check current dates for the Friday Bezalel Arts Fair.",
     topics: ["shopping", "destinations", "tips"],
-    photo: { src: "/images/jerusalem-shopping/hero.webp", alt: "Evening shopping promenade lined with fashion boutiques in Jerusalem" },
+    photo: { src: "/images/travel-blog/shopping-in-jerusalem-original.webp", alt: "Colorful craft and souvenir shops along a stone passage in Jerusalem's Old City", credit: "Photo from the publisher's travel archive." },
     cardPhoto: { src: "/images/attractions/old-jerusalem-via-dolorosa.webp", alt: "Old City Jerusalem market passage and stone-paved souk" },
     facts: [
       { label: "10 places", text: "Markets, shopping streets, workshops and a mall" },

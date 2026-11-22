@@ -578,7 +578,7 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
     answer: "After landing at Terminal 3, follow the signs to passport control, collect your luggage, pass through customs and continue to the arrivals hall. Before travelling, check whether you need an ETA-IL or visa for your passport. From the arrivals hall, follow the signs to your train, bus, official taxi or pre-booked pickup. Allow extra time for passport control and baggage collection before arranging your pickup.",
     topics: ["tips", "transportation"],
     updatedAt: "2026-10-22",
-    photo: hallPhoto,
+    photo: { src: "/images/travel-blog/welcome-to-israel-original.webp", alt: "Welcome to Israel sign inside Ben Gurion Airport" },
     facts: [
       { label: "International arrivals", text: "Terminal 3; check current airport notices" },
       { label: "Entry documents", text: "Valid passport and visa or ETA-IL where required" },
@@ -786,8 +786,8 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
     topics: ["transportation", "destinations", "itineraries", "tips"],
     updatedAt: "2026-11-12",
     photo: {
-      src: archivedBuses,
-      alt: "Buses waiting at a transport terminal in the Tel Aviv metropolitan area",
+      src: "/images/travel-blog/tel-aviv-skyline-original.webp",
+      alt: "Tel Aviv Mediterranean shoreline and skyline seen from the beach",
     },
     facts: [
       { label: "Between cities", text: "Compare train and bus routes to your destination" },
