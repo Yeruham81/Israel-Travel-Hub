@@ -119,7 +119,7 @@
   .prose-guide li { margin-top: 0.35rem; }
   .prose-guide a { color: var(--color-primary); text-decoration: underline; text-underline-offset: 3px; }
   /* Blue links within prose already read as links. Suppress the redundant
-     external/diagonal arrow icon throughout editorial paragraphs, quotes, table
+     external/diagonal arrow icon throughout editorial paragraphs, quotes, tabular
      text and underlined reference-list links. Standalone buttons, navigation
      cards and booking CTAs keep their own icons. The accessible "opens in a
      new tab" text remains available to screen readers. */
