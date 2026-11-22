@@ -59,6 +59,16 @@ function PrivateDriverContent({ transfer }: { transfer: ReturnType<typeof parseP
     />
 
     <div className="mx-auto max-w-5xl px-4">
+      <section id="service-overview" aria-labelledby="service-overview-h" className="mt-9 scroll-mt-24" data-testid="driver-service-overview">
+        <h2 id="service-overview-h" className="text-2xl font-semibold sm:text-3xl">Private driver service in Israel: travel on your own terms</h2>
+        <div className="mt-3 max-w-4xl space-y-4 text-[15px] leading-7 sm:text-base">
+          <p>Hiring a private car and driver in Israel gives you a direct journey planned around your own schedule. Instead of driving yourself, navigating unfamiliar roads or arranging several separate taxis, you can agree on one pickup, your preferred route and a final drop-off. I help arrange private transport between hotels and cities, a day of sightseeing with selected stops, or a longer journey that combines travel and visits along the way. You choose the places that matter to you, and I'll help work out realistic timing.</p>
+          <h3 className="pt-1 text-lg font-semibold">Who is a private driver suitable for?</h3>
+          <p>This service can work well for couples, families with children, friends travelling together, business visitors with several appointments, and travellers carrying luggage between accommodations. It is also worth considering if you have limited time in Israel, prefer door-to-door transport, or want a more relaxed pace with planned breaks. For older travellers or anyone with particular mobility needs, please tell me what support is required so I can check the vehicle and arrangements in advance.</p>
+          <p><strong>What is included?</strong> Your quote will describe the agreed transport, route, vehicle, pickup arrangements and any included waiting time. A private driver provides transportation rather than licensed tour guiding; entrance tickets, guiding and other extras should be arranged separately unless specifically confirmed. Share your dates, destinations, number of passengers and any special requests, and I'll reply with the options and relevant booking terms.</p>
+        </div>
+      </section>
+
       <section id="journeys" aria-labelledby="journeys-h" className="mt-8 scroll-mt-24">
         <h2 id="journeys-h" className="text-2xl font-semibold">Choose the journey that suits you</h2>
         <p className="mt-2 max-w-3xl text-sm leading-relaxed text-muted-foreground">A direct transfer, a day out or several stops along the way — choose a starting point and I'll help with the details.</p>
