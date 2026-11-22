@@ -8,10 +8,10 @@ import { relFor } from "@/lib/outbound";
  */
 export type ExternalTourPrice = {
   amount: number;
-  currency?: "USD" | "EUR" | "ILS";
+  currency?: "USD" | "EUR" | "ILS" | undefined;
   basis: "per_person" | "per_group" | "per_vehicle";
-  maxPartySize?: number;
-  approximate?: boolean;
+  maxPartySize?: number | undefined;
+  approximate?: boolean | undefined;
 };
 export type ExternalTourRating = { value: number; count: number };
 export type ExternalProviderTourCardProps = {
@@ -20,16 +20,16 @@ export type ExternalProviderTourCardProps = {
   platform: string;
   title: string;
   description: string;
-  duration?: string;
-  location?: string;
-  rating?: ExternalTourRating;
-  price?: ExternalTourPrice;
+  duration?: string | undefined;
+  location?: string | undefined;
+  rating?: ExternalTourRating | undefined;
+  price?: ExternalTourPrice | undefined;
   href: string;
-  onClick?: () => void;
-  affiliate?: boolean;
-  note?: string;
-  testId?: string;
-  className?: string;
+  onClick?: (() => void) | undefined;
+  affiliate?: boolean | undefined;
+  note?: string | undefined;
+  testId?: string | undefined;
+  className?: string | undefined;
 };
 
 export function ExternalProviderTourCard({
