@@ -369,7 +369,7 @@ describe("tours hub and SEO category pages", () => {
     const nav = screen.getByRole("navigation", { name: "Filter Tel Aviv & Jaffa tours" });
     const externalCards = screen.getAllByTestId("tour-card");
     expect(externalCards).toHaveLength(8);
-    const trackingLinks = externalCards.map(card => within(card).getByRole("link", { name: "View tour ↗" }));
+    const trackingLinks = externalCards.map(card => within(card).getByRole("link", { name: /^View tour:/ }));
     expect(new Set(trackingLinks.map(link => link.getAttribute("href"))).size).toBe(8);
     for (const link of trackingLinks) {
       expect(new URL(link.getAttribute("href")!).hostname).toMatch(/^(viator|getyourguide)\.tpm\.li$/);
@@ -410,7 +410,7 @@ describe("tours hub and SEO category pages", () => {
     expect(new Set(ids).size).toBe(8);
     for (const card of external) {
       const tourId = card.getAttribute("data-product-id")!;
-      const link = within(card).getByRole("link", { name: "View tour ↗" });
+      const link = within(card).getByRole("link", { name: /^View tour:/ });
       const offer = offersForTour(tourId, "tours-masada-dead-sea")[0]!;
       expect(link).toHaveAttribute("href", offer.provider.url);
       expect(new URL(offer.provider.url).hostname).toMatch(/^(viator|getyourguide)\.tpm\.li$/);
@@ -470,7 +470,7 @@ describe("tours hub and SEO category pages", () => {
     for (const card of external) {
       const id = card.getAttribute("data-product-id")!;
       const offer = offersForTour(id, "tours-nazareth-galilee")[0]!;
-      const link = within(card).getByRole("link", { name: "View tour ↗" });
+      const link = within(card).getByRole("link", { name: /^View tour:/ });
       expect(link).toHaveAttribute("href", offer.provider.url);
       expect(new URL(offer.provider.url).hostname).toMatch(/^(getyourguide|viator)\.tpm\.li$/);
       expect(link.getAttribute("rel")).toContain("sponsored");
@@ -530,7 +530,7 @@ describe("tours hub and SEO category pages", () => {
     for (const card of external) {
       const id = card.getAttribute("data-product-id")!;
       const offer = offersForTour(id, "tours-northern-coast")[0]!;
-      const link = within(card).getByRole("link", { name: "View tour ↗" });
+      const link = within(card).getByRole("link", { name: /^View tour:/ });
       expect(link).toHaveAttribute("href", offer.provider.url);
       expect(new URL(offer.provider.url).hostname).toMatch(/^(getyourguide|viator)\.tpm\.li$/);
       expect(link.getAttribute("rel")).toContain("sponsored");
@@ -598,7 +598,7 @@ describe("tours hub and SEO category pages", () => {
       const offer = offersForTour(productId, "tours-" + id)[0]!;
       expect(offer.provider.url).toMatch(/^https:\/\/viator\.tpm\.li\//);
       urls.push(offer.provider.url);
-      expect(within(card).getByRole("link", { name: "View tour ↗" })).toHaveAttribute("href", offer.provider.url);
+      expect(within(card).getByRole("link", { name: /^View tour:/ })).toHaveAttribute("href", offer.provider.url);
     }
     expect(new Set(urls).size).toBe(8);
     expect(document.querySelector('section[aria-labelledby="' + local + '"]')!.querySelectorAll("a.group img")).toHaveLength(6);
@@ -645,7 +645,7 @@ describe("tours hub and SEO category pages", () => {
     for (const card of cards) {
       const id = card.getAttribute("data-product-id")!;
       const offer = offersForTour(id, "tours-bethlehem-jericho")[0]!;
-      const link = within(card).getByRole("link", { name: "View tour ↗" });
+      const link = within(card).getByRole("link", { name: /^View tour:/ });
       expect(link).toHaveAttribute("href", offer.provider.url);
       expect(new URL(offer.provider.url).hostname).toMatch(/^(getyourguide|viator)\.tpm\.li$/);
       expect(link.getAttribute("rel")).toContain("sponsored");
@@ -733,7 +733,7 @@ describe("tours hub and SEO category pages", () => {
   it("tracks the product and offer separately on external booking clicks", async () => {
     await renderPage("/tours/eilat-red-sea/");
     const card = screen.getAllByTestId("tour-card").find(card => card.getAttribute("data-product-id") === "eilat-glass-bottom-boat")!;
-    fireEvent.click(within(card).getByRole("link", { name: "View tour ↗" }));
+    fireEvent.click(within(card).getByRole("link", { name: /^View tour:/ }));
     expect(readOutboundClicks()[0]).toMatchObject({ pageId: "tours-eilat-red-sea", productId: "eilat-glass-bottom-boat", offerId: "tour-eilat-glass-bottom-boat-getyourguide" });
   });
 
