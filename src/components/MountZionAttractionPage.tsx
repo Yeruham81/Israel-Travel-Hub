@@ -39,6 +39,7 @@ const mountZionTours = [
     alt: "Guided sightseeing in Jerusalem",
     sourceUrl: "https://www.viator.com/tours/Jerusalem/Jerusalem-Old-City/d921-5209P123",
     href: "https://viator.tpk.lv/vEqDCNy8",
+    editorialPrice: undefined,
   },
   {
     id: "5209TEL210",
@@ -52,6 +53,21 @@ const mountZionTours = [
     alt: "Mount Zion hillside and Jerusalem stone buildings near the Old City",
     sourceUrl: "https://www.viator.com/tours/Tel-Aviv/Old-Jerusalem-Day-Trip-from-Tel-Aviv/d920-5209TEL210",
     href: "https://viator.tpk.lv/9aphqexG",
+    editorialPrice: undefined,
+  },
+  {
+    id: "208675P3",
+    platform: "Viator",
+    title: "Jerusalem Classic Tour: Mount of Olives & Old City",
+    summary: "A guided Jerusalem day with the Mount of Olives, Old City highlights and a listed Mount Zion stop. Confirm the exact itinerary for your date.",
+    duration: "About 7 hours",
+    rating: "5.0 · 3 reviews",
+    notice: "",
+    photo: "/images/attractions/old-jerusalem-damascus-gate.webp",
+    alt: "Damascus Gate in the Old City of Jerusalem",
+    sourceUrl: "https://www.viator.com/tours/Jerusalem/jerusalem-daily-tour/d921-208675P3",
+    href: "https://viator.tpk.lv/YV4HrN5E",
+    editorialPrice: { amount: 122.62, currency: "EUR" as const, basis: "per_person" as const },
   },
 ] as const;
 
@@ -187,7 +203,7 @@ export const mountZionDestinationContent: AttractionDestinationContent = {
             value: Number(tour.rating.split(" · ")[0]),
             count: Number(tour.rating.split(" · ")[1]?.split(" ")[0]),
           }}
-          href={tour.href} note={tour.notice}
+          href={tour.href} note={tour.notice} price={tour.editorialPrice}
           onClick={() => recordOutboundClick({ pageId: "attractions-mount-zion", productId: tour.id, offerId: tour.id })}
         />)}
       </div>
@@ -238,6 +254,7 @@ export const mountZionDestinationContent: AttractionDestinationContent = {
     { label: "Israel public transport planner", url: official.busPlanner },
     { label: "Viator — Jerusalem Old City Day Tour", url: mountZionTours[0].sourceUrl },
     { label: "Viator — Jerusalem Highlights from Tel Aviv", url: mountZionTours[1].sourceUrl },
+    { label: "Viator — Jerusalem Classic Tour", url: mountZionTours[2].sourceUrl },
   ],
 };
 
