@@ -1,5 +1,5 @@
 import { Link } from "@tanstack/react-router";
-import { ArrowUpRight, BusFront, CarFront, Clock3, Footprints } from "lucide-react";
+import { ArrowUpRight, BusFront, CarFront, Footprints } from "lucide-react";
 import {
   AttractionDestinationPage, AttractionHighlight, AttractionPracticalTip,
   type AttractionDestinationContent,
@@ -133,6 +133,7 @@ export const oldCityJerusalemDestinationContent: AttractionDestinationContent = 
           <div><h4 className="font-semibold">Western Wall Tunnels</h4><p className="mt-1 text-sm leading-relaxed">Book the route that interests you: archaeological passages reveal sections of the Western Wall and historic structures beneath today's streets. Check <a href={official.tunnelsAccessibility} target="_blank" rel="noopener noreferrer" className={inlineLink}>accessibility for the individual tour</a> and the <a href={official.tunnelsBooking} target="_blank" rel="noopener noreferrer" className={inlineLink}>available guided sessions</a>.</p></div>
         </div>
       </section>
+      <AttractionPracticalTip>If you book a Western Wall Tunnels tour, save its confirmation and follow the operator’s exact meeting-point instructions.</AttractionPracticalTip>
       <div className="rounded-xl border bg-card p-4 sm:p-5" data-testid="jerusalem-old-city-entry">
         <h3 className="font-serif text-xl font-semibold">Choose the right entrance gate</h3>
         <p className="mt-2 text-sm leading-relaxed sm:text-base">Begin at <strong>Jaffa Gate</strong> for the Tower of David and the Christian and Armenian Quarters; use <strong>Dung Gate</strong> for the Western Wall; choose <strong>Damascus Gate</strong> for the Muslim Quarter markets; or enter through <strong>Zion Gate</strong> when arriving from Mount Zion. <strong>New Gate</strong> serves the Christian Quarter, while <strong>Lion's Gate</strong> connects the eastern Old City with the Mount of Olives.</p>
