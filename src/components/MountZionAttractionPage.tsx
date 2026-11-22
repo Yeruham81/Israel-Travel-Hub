@@ -111,21 +111,26 @@ export const mountZionDestinationContent: AttractionDestinationContent = {
   visitorContent: (
     <div className="mt-4 space-y-4">
       <p>The central Mount Zion area is free to walk through. Each religious compound and museum manages its own opening hours and admission. These are published reference times; services, <Link to="/travel-blog/calendar-of-events/" className={inlineLink}>Jewish holidays</Link> and local arrangements may change access.</p>
-      <div className="grid gap-3 sm:grid-cols-2" data-testid="mount-zion-hours-fees">
-        {mountZionSite.hours.map(fact => <article key={fact.name} className="rounded-xl border bg-card p-4">
-          <div className="flex items-start gap-2"><Clock3 className="mt-0.5 h-4 w-4 shrink-0 text-primary" aria-hidden="true"/><h3 className="font-serif text-lg font-semibold leading-snug">{fact.name}</h3></div>
-          <p className="mt-2 text-sm leading-relaxed sm:text-base">{fact.time}</p>
-          <div className="mt-3 flex flex-wrap items-baseline justify-between gap-2 border-t pt-3 text-sm">
-            <span className="inline-flex items-center gap-1 font-semibold text-primary"><Ticket className="h-4 w-4" aria-hidden="true"/>{fact.admission}</span>
-            <span className="text-xs text-muted-foreground">{fact.note}</span>
-          </div>
-        </article>)}
+      <div role="region" aria-label="Mount Zion opening hours and admission comparison" tabIndex={0} className="max-w-full overflow-x-auto rounded-xl border bg-card focus-visible:outline-2 focus-visible:outline-primary" data-testid="mount-zion-hours-fees">
+        <table className="w-full min-w-[790px] border-collapse text-left text-sm">
+          <caption className="sr-only">Opening hours, admission and visitor notes for seven Mount Zion sites</caption>
+          <thead className="bg-secondary/60">
+            <tr>{["Site", "Visiting hours", "Admission", "Important notes"].map((heading, index) => <th key={heading} scope="col" className={index === 0 ? "sticky left-0 z-10 border-b bg-secondary px-3 py-3 font-semibold" : "border-b px-3 py-3 font-semibold"}>{heading}</th>)}</tr>
+          </thead>
+          <tbody>{mountZionSite.hours.map(fact => <tr key={fact.name} className="border-b last:border-0">
+            <th scope="row" className="sticky left-0 z-10 w-[150px] min-w-[136px] bg-card px-3 py-3 align-top font-semibold">{fact.name}</th>
+            <td className="px-3 py-3 align-top">{fact.time}</td>
+            <td className="px-3 py-3 align-top font-medium">{fact.admission}</td>
+            <td className="px-3 py-3 align-top text-muted-foreground">{fact.note}</td>
+          </tr>)}</tbody>
+        </table>
       </div>
+      <p className="text-sm leading-relaxed"><strong>Dormition Abbey:</strong> Sunday visiting begins at 11:30 according to the <a href={official.dormition} target="_blank" rel="noopener noreferrer" className={inlineLink}>abbey’s published timetable</a>. For feast days and special services, check the abbey’s announcements.</p>
       <div className="rounded-xl border bg-secondary/20 p-4 sm:p-5" data-testid="mount-zion-accessibility">
         <h3 className="font-serif text-xl font-semibold">Accessibility and practical considerations</h3>
         <ul className="mt-3 list-disc space-y-2 pl-5 text-sm leading-relaxed sm:text-base">
           <li><strong>Upper Room:</strong> The traditional entrance involves a staircase. Contact the responsible site before relying on step-free entry.</li>
-          <li><strong>St Peter in Gallicantu:</strong> The <a href={official.gallicantu} target="_blank" rel="noopener noreferrer" className={inlineLink}>sanctuary reports accessibility for visitors with reduced mobility</a>, but the walk down from Zion Gate is on a slope. A vehicle can approach from Hebron Road; do not assume every nearby road turn is permitted.</li>
+          <li><strong>St Peter in Gallicantu:</strong> The <a href={official.gallicantu} target="_blank" rel="noopener noreferrer" className={inlineLink}>sanctuary reports accessibility for visitors with reduced mobility</a>, but the walk down from Zion Gate is on a slope. Arrive via Hebron Road, following the sanctuary’s car-access directions.</li>
           <li><strong>David's Tomb:</strong> Respect the separate prayer areas, modest dress and photography rules; men should carry a head covering.</li>
           <li><strong>Schindler's grave:</strong> The Catholic cemetery has a <a href={official.catholicCemetery} target="_blank" rel="noopener noreferrer" className={inlineLink}>separate entrance on the southern hillside</a> and stair-linked terraces. It is not beside the Upper Room.</li>
           <li><strong>Chamber of the Holocaust:</strong> <a href={official.holocaustChamber} target="_blank" rel="noopener noreferrer" className={inlineLink}>Arrange group visits</a> in advance, especially when adding the memorial to a busy itinerary.</li>
