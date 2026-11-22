@@ -18,6 +18,7 @@ import { mountPrecipiceSite } from "@/data/mountPrecipiceSite";
 import { mountTaborSite } from "@/data/mountTaborSite";
 import { mountZionSite } from "@/data/mountZionSite";
 import { oldCityJerusalemSite } from "@/data/oldCityJerusalemSite";
+import { viaDolorosaSite } from "@/data/viaDolorosaSite";
 import { qasrElYahudSite } from "@/data/qasrElYahudSite";
 import { roshHanikraSite } from "@/data/roshHanikraSite";
 import { tabghaSite } from "@/data/tabghaSite";
@@ -43,6 +44,7 @@ export const attractionHeroRegistry: Record<string, { src: string; alt: string }
   "/attractions/mount-tabor/": mountTaborSite.hero,
   "/attractions/mount-zion/": mountZionSite.hero,
   "/attractions/old-city-jerusalem/": oldCityJerusalemSite.hero,
+  "/attractions/via-dolorosa/": viaDolorosaSite.hero,
   "/attractions/qasr-el-yahud/": qasrElYahudSite.hero,
   "/attractions/rosh-hanikra/": roshHanikraSite.hero,
   "/attractions/tabgha/": tabghaSite.hero,
