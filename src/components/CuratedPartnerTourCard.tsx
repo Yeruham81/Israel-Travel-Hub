@@ -28,7 +28,7 @@ export function CuratedPartnerTourCard({
     image={image} alt={alt} platform={platform} title={title} description={description}
     duration={duration ?? product?.duration} location={location}
     rating={rating ? { value: rating.value, count: rating.count } : undefined}
-    price={price ? { amount: price.amount, currency: price.currency, basis: price.basis, approximate: editorialPrice?.approximate, maxPartySize: "maxPartySize" in price ? price.maxPartySize : undefined } : undefined}
+    price={price ? { amount: price.amount, currency: price.currency, basis: price.basis, approximate: editorialPrice?.approximate, maxPartySize: "maxPartySize" in price && typeof price.maxPartySize === "number" ? price.maxPartySize : undefined } : undefined}
     href={href}
     onClick={() => recordOutboundClick({ pageId, productId, offerId })}
   />;
