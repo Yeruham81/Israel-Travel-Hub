@@ -27,7 +27,7 @@ describe("What to Eat in Israel — beginner visitor guide",()=>{
   });
 
   it("offers all ten specific dishes with their previously owned photos",()=>{
-    const expected=["shawarma","falafel","meorav-yerushalmi","hummus","shakshuka","sabich","bourekas","jachnun","malabi","kanafeh"];
+    const expected=["shawarma","falafel","meorav-yerushalmi","hummus","shakshuka","sabich","bourekas","jachnun","malabi","knafeh"];
     expect(foodDishes.map(d=>d.id)).toEqual(expected);
     expect(new Set(expected).size).toBe(10);
     for(const [index,dish] of foodDishes.entries()){
@@ -82,12 +82,13 @@ describe("What to Eat in Israel — beginner visitor guide",()=>{
     }
     const content=ui();
     expect(content).toContain('url.searchParams.set("sub_id",tour.subId)');
-    expect(content).toContain("rel={relFor(true)}");
-    expect(content).toContain('pageId:"what_to_eat_in_israel"');
+    expect(content).toContain("<CuratedPartnerTourCard");
+    expect(content).toContain('pageId="what_to_eat_in_israel"');
     expect(content).not.toContain('starting price');
     expect(content).toContain('data-testid="israel-food-tour-cards"');
     const marketImage=foodTours.find(t=>t.key==="mahane-yehuda")?.image;
-    expect(marketImage).toBe("/images/food-guide/mahane-yehuda-food-stalls.webp");
+    expect(marketImage).toBe("/images/jerusalem-shopping/mahane-yehuda.webp");
+    expect(foodMarkets.find(m=>m.id==="jerusalem")?.image).toBe("/images/food-guide/mahane-yehuda-food-stalls.webp");
     expect(foodTours.find(t=>t.key==="levinsky")?.image).toBe("/images/food-guide/levinsky-spice-shop.webp");
     expect(content).toContain("commons.wikimedia.org/wiki/File:PikiWiki_Israel_9177_Levinsky_market_in_Tel_Aviv.JPG");
     expect(content).toContain("CC BY 2.5");
@@ -95,7 +96,7 @@ describe("What to Eat in Israel — beginner visitor guide",()=>{
     expect(content).toContain("CC BY-SA 3.0");
   });
 
-  it("keeps compact filtering, six-card guide sets, contact and sources last",()=>{
+  it("keeps compact filtering, guide sets, contact and consolidated footer photo credits",()=>{
     const content=ui();
     expect(content).toContain('aria-pressed={filter===kind.id}');
     expect(content).toContain('aria-label="Jump to a food dish"');
@@ -103,7 +104,8 @@ describe("What to Eat in Israel — beginner visitor guide",()=>{
     expect(content).toContain('setFoodFilter("all")');
     expect(content).toContain('setPendingDish(dishId)');
     expect(content).toContain('target.scrollIntoView?.');
-    expect(content).toContain('About this food tradition');
+    expect(content).not.toContain('About this food tradition');
+    expect(content).toContain('{dish.summary} {dish.roots}');
     expect(content).toContain('data-testid="israel-food-dish-grid"');
     expect(content).toContain("visible.length");
     expect(content).toContain("grid grid-cols-2 gap-4 lg:grid-cols-3");
@@ -115,6 +117,7 @@ describe("What to Eat in Israel — beginner visitor guide",()=>{
     expect(content).toContain("<FaqList faqs={foodFAQs}/>");
     expect(content).toContain("<HomeContactForm");
     expect(content.indexOf("<SourcesDisclosure>")).toBeGreaterThan(content.indexOf("<HomeContactForm"));
+    expect(content).toContain("<PhotoCreditsDisclosure entries={[");
     expect(content).not.toContain('["sources"');
     expect(content).toContain('["contact","Contact me"]');
   });
