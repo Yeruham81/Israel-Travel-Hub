@@ -60,7 +60,7 @@ export function JerusalemItineraryTourOptions({ days = 3 }: { days?: 3 | 5 | 7 |
           ? "These day tours are alternatives to the independent itinerary, not additional sightseeing stops. Choose a Bethlehem or Jericho excursion in place of Jerusalem sightseeing on Day 2, or a Masada and Dead Sea tour instead of the self-planned desert day on Day 3."
           : "Explore optional day trips from Jerusalem to Masada, the Dead Sea, Bethlehem, Jericho and the Jordan River, with choices for different interests, budgets and amounts of time."}
       </p>
-      <div className="mt-4 grid gap-5 sm:grid-cols-2 xl:grid-cols-3">
+      <div className="mt-4 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
         {threeDayJerusalemTourSelections.map(item => {
           const tour = tourCatalog.get(item.id);
           const approvedLink = tour ? affiliateConfig[tour.id]?.trackingUrl : undefined;
