@@ -188,7 +188,7 @@ describe("Jerusalem independent day-trip planning guides", () => {
       const tour = deadSeaTourCards[index]!;
       expect(card.tagName).toBe("ARTICLE");
       expect(within(card).getByRole("link", {name:/^View tour:/})).toHaveAttribute("href", expectedLinks[index]);
-      expect(card.getAttribute("rel")).toContain("sponsored");
+      expect(within(card).getByRole("link", {name:/^View tour:/}).getAttribute("rel")).toContain("sponsored");
       expect(within(card).getByRole("img")).toBeInTheDocument();
       expect(card).toHaveTextContent("From US$" + tour.fromUsd);
       expect(card).toHaveTextContent(tour.duration);
