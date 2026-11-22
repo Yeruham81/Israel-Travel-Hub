@@ -160,12 +160,12 @@ export function HaifaMuseumsGuide() {
     <section id="top-picks" aria-labelledby="top-picks-heading" className="mt-10 scroll-mt-24">
       <SectionHeading id="top-picks" title="My top museum picks" intro="Six different experiences worth considering first. Pick the subject that interests you most."/>
       <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-        {featured.map(m=><a href={"#museum-"+m.id} key={m.id} className="group flex flex-col rounded-xl border bg-card p-4 transition-colors hover:border-primary/40 hover:bg-secondary/30 focus-visible:outline-2 focus-visible:outline-primary">
+        {featured.map(m=><a href={"#museum-"+m.id} key={m.id} className="editorial-card-link group flex flex-col rounded-xl border bg-card p-4 transition-colors hover:border-primary/40 hover:bg-secondary/30 focus-visible:outline-2 focus-visible:outline-primary">
           <span className="text-[11px] font-bold uppercase tracking-wide text-primary">{m.theme}</span>
           <strong className="mt-2 text-base leading-snug">{m.name}</strong>
           <span className="mt-2 text-sm leading-relaxed text-muted-foreground">{m.bestFor}</span>
           <span className="mt-2 text-xs text-muted-foreground">{m.priceNis===0?"Free general entry":typeof m.priceNis==="number"?"Adult ₪"+m.priceNis:"Confirm admission"}</span>
-          <span className="mt-auto inline-flex items-center gap-1 pt-4 text-xs font-semibold text-primary">Explore visitor details <ArrowUpRight className="h-3.5 w-3.5" aria-hidden="true"/></span>
+          
         </a>)}
       </div>
     </section>
@@ -246,9 +246,9 @@ export function HaifaMuseumsGuide() {
       <SectionHeading id="explore-more" title="Explore more of Haifa" intro="Continue planning with my Haifa attraction, transport and accommodation guides."/>
       <div className="grid grid-cols-2 gap-4 lg:grid-cols-3">{related.map(item=>{
         const photo=guideHeroPhotoForPath(item.to);
-        return <Link key={item.to} to={item.to} className="group flex h-full flex-col overflow-hidden rounded-xl border bg-card transition-colors hover:border-primary/40 hover:bg-secondary/20">
+        return <Link key={item.to} to={item.to} className="editorial-card-link group flex h-full flex-col overflow-hidden rounded-xl border bg-card transition-colors hover:border-primary/40 hover:bg-secondary/20">
           {photo&&<img src={photo.src} alt={photo.alt} width={640} height={360} loading="lazy" decoding="async" className="aspect-[16/9] w-full object-cover"/>}
-          <span className="flex flex-1 flex-col p-4"><strong className="text-base">{item.title}</strong><span className="mt-2 text-sm leading-relaxed text-muted-foreground">{item.note}</span><span className="mt-auto inline-flex items-center gap-1 pt-4 text-sm font-semibold text-primary">Explore my guide <ArrowUpRight className="h-4 w-4" aria-hidden="true"/></span></span>
+          <span className="flex flex-1 flex-col p-4"><strong className="text-base">{item.title}</strong><span className="mt-2 text-sm leading-relaxed text-muted-foreground">{item.note}</span></span>
         </Link>;
       })}</div>
     </section>

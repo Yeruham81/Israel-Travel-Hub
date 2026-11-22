@@ -54,9 +54,9 @@ function PhotoCards({id,title,intro,items}:{id:string;title:string;intro:string;
   <div className="grid grid-cols-2 gap-4 lg:grid-cols-3" data-testid={id+"-cards"}>
    {items.map(item=>{
     const photo=guideHeroPhotoForPath(item.to);
-    return <Link key={item.to} to={item.to} className="group flex min-w-0 flex-col overflow-hidden rounded-xl border bg-card transition-colors hover:border-primary/40 hover:bg-secondary/20">
+    return <Link key={item.to} to={item.to} className="editorial-card-link group flex min-w-0 flex-col overflow-hidden rounded-xl border bg-card transition-colors hover:border-primary/40 hover:bg-secondary/20">
      {photo && <img src={photo.src} alt={photo.alt} width={480} height={270} loading="lazy" decoding="async" className="aspect-[16/9] w-full object-cover"/>}
-     <span className="flex flex-1 flex-col p-3 sm:p-4"><strong className="text-sm leading-snug sm:text-base">{item.title}</strong><span className="mt-2 text-xs leading-relaxed text-muted-foreground sm:text-sm">{item.note}</span><span className="mt-auto inline-flex items-center gap-1 pt-3 text-xs font-semibold text-primary sm:text-sm">Explore my guide <ArrowUpRight className="h-3.5 w-3.5" aria-hidden="true"/></span></span>
+     <span className="flex flex-1 flex-col p-3 sm:p-4"><strong className="text-sm leading-snug sm:text-base">{item.title}</strong><span className="mt-2 text-xs leading-relaxed text-muted-foreground sm:text-sm">{item.note}</span></span>
     </Link>;
    })}
   </div>

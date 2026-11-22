@@ -122,6 +122,49 @@
      reserved for inline prose links. Keep this scoped to attraction tour cards. */
   .prose-guide a.attraction-tour-card { color: var(--color-foreground); text-decoration: none; }
 
+  /* A whole editorial guide/attraction card is the link: the title and image
+     provide its affordance; no repetitive "Explore my guide" footer is needed.
+     The hover feedback is purposely subtle and keyboard focus remains visible. */
+  .editorial-card-link {
+    overflow: hidden;
+    transition: background-color 180ms ease, border-color 180ms ease, box-shadow 180ms ease;
+  }
+  .editorial-card-link img {
+    transition: transform 260ms ease;
+  }
+  .editorial-card-link :is(h2, h3, strong, [data-editorial-card-title]) {
+    transition: color 180ms ease;
+  }
+  @media (hover: hover) and (pointer: fine) {
+    .editorial-card-link:hover {
+      border-color: color-mix(in oklch, var(--color-primary) 52%, var(--color-border));
+      background-color: color-mix(in oklch, var(--color-secondary) 38%, var(--color-card));
+      box-shadow: 0 5px 16px color-mix(in oklch, var(--color-foreground) 10%, transparent);
+    }
+    .editorial-card-link:hover :is(h2, h3, strong, [data-editorial-card-title]) {
+      color: var(--color-primary);
+    }
+  }
+  .editorial-card-link:focus-visible,
+  .editorial-card-link:focus-within {
+    border-color: var(--color-primary);
+    background-color: color-mix(in oklch, var(--color-secondary) 38%, var(--color-card));
+  }
+  .editorial-card-link:focus-visible :is(h2, h3, strong, [data-editorial-card-title]),
+  .editorial-card-link:focus-within :is(h2, h3, strong, [data-editorial-card-title]) {
+    color: var(--color-primary);
+  }
+  @media (prefers-reduced-motion: no-preference) and (hover: hover) and (pointer: fine) {
+    .editorial-card-link:hover img { transform: scale(1.035); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .editorial-card-link, .editorial-card-link img,
+    .editorial-card-link :is(h2, h3, strong, [data-editorial-card-title]) {
+      transition: none;
+    }
+    .editorial-card-link img { transform: none; }
+  }
+
   /* Guide and itinerary H1s: slightly more compact than promotional headings.
      Balanced wrapping keeps long destination names readable on narrow screens. */
   .guide-page-title {

@@ -198,7 +198,7 @@ export function IsraelTravelTipsGuide() {
       <section id="related" className="mt-12 scroll-mt-24" aria-labelledby="related-title">
         <Heading id="related-title" intro="Dive deeper only where you need more detail. These six guides help with the next stage of planning.">Related practical Israel travel guides</Heading>
         <ul className="grid grid-cols-2 gap-4 lg:grid-cols-3" data-testid="travel-tips-related-guides">
-          {related.map(card => <li key={card.href} className="min-w-0 overflow-hidden rounded-xl border bg-card"><a href={card.href} className="group flex h-full flex-col"><img src={card.image} alt={card.alt} width={600} height={360} loading="lazy" decoding="async" className="aspect-[16/9] w-full object-cover"/><div className="flex flex-1 flex-col p-4"><h3 className="font-bold group-hover:text-primary">{card.title}</h3><p className="mt-2 text-sm leading-relaxed text-muted-foreground">{card.description}</p><span className="mt-auto inline-flex items-center gap-1 pt-3 text-sm font-semibold text-primary">Read my guide <ArrowUpRight aria-hidden="true" className="h-4 w-4"/></span></div></a></li>)}
+          {related.map(card => <li key={card.href} className="editorial-card-link min-w-0 overflow-hidden rounded-xl border bg-card"><a href={card.href} className="group flex h-full flex-col"><img src={card.image} alt={card.alt} width={600} height={360} loading="lazy" decoding="async" className="aspect-[16/9] w-full object-cover"/><div className="flex flex-1 flex-col p-4"><h3 className="font-bold group-hover:text-primary">{card.title}</h3><p className="mt-2 text-sm leading-relaxed text-muted-foreground">{card.description}</p></div></a></li>)}
         </ul>
       </section>
 

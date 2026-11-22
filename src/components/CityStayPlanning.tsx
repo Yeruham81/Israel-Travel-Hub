@@ -1,6 +1,5 @@
 import { type LinkProps } from "@tanstack/react-router";
 import { SiteLink as Link } from "@/components/SiteLink";
-import { ArrowRight } from "lucide-react";
 import { guideDirectory } from "@/data/travelGuides";
 import { isPublisherUrl } from "@/data/registry";
 import type { CityStayGuide } from "@/data/content";
@@ -45,12 +44,12 @@ export function CityStayPlanning({ city }: { city: CityStayGuide["id"] }) {
       <ul className="mt-6 grid grid-cols-2 gap-5 lg:grid-cols-3">
         {selected.map((item) => (
           <li key={item.to} className="min-w-0">
-            <Link to={item.to} className="group flex h-full flex-col overflow-hidden rounded-2xl border bg-card transition-colors hover:border-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
+            <Link to={item.to} className="editorial-card-link group flex h-full flex-col overflow-hidden rounded-2xl border bg-card transition-colors hover:border-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
               {item.photo && <img src={item.photo.src} alt={item.photo.alt} loading="lazy" decoding="async" width={600} height={375} className="aspect-[16/10] w-full object-cover" />}
               <span className="flex flex-1 flex-col p-5">
                 <span className="text-lg font-semibold leading-snug text-foreground group-hover:text-primary">{item.title}</span>
                 <span className="mt-2 flex-1 text-sm leading-relaxed text-muted-foreground">{item.description}</span>
-                <span className="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-primary">Read more <ArrowRight className="h-4 w-4 shrink-0" aria-hidden /></span>
+                
               </span>
             </Link>
           </li>

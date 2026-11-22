@@ -122,14 +122,12 @@ function AccommodationHub() {
         <h2 id="hotel-styles-h" className="text-2xl font-semibold">Explore by hotel style</h2>
         <ul className="mt-4 grid gap-3 md:grid-cols-2" aria-label="Hotel styles">
           {hotelStyles.filter(style => style.link).map(style => <li key={style.id} className="min-w-0">
-            <Link to={style.link!.to} className="group flex h-full min-w-0 items-start gap-3 rounded-2xl border bg-card p-3 transition-colors hover:border-primary/50 hover:bg-secondary/20 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary" data-testid="hotel-style-card">
+            <Link to={style.link!.to} className="editorial-card-link group flex h-full min-w-0 items-start gap-3 rounded-2xl border bg-card p-3 transition-colors hover:border-primary/50 hover:bg-secondary/20 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary" data-testid="hotel-style-card">
               <img src={style.photo.src} alt={style.photo.alt} width={144} height={144} loading="lazy" decoding="async" className="h-24 w-24 shrink-0 rounded-xl object-cover sm:h-28 sm:w-28" />
               <div className="flex min-w-0 flex-1 flex-col">
                 <h3 className="text-base font-semibold leading-snug sm:text-lg">{style.title}</h3>
                 <span className="mt-1.5 text-sm leading-relaxed text-muted-foreground">{style.advantage}</span>
-                <span className="mt-2 inline-flex items-center gap-1 text-sm font-semibold text-primary group-hover:underline">
-                  {style.link!.label}<ArrowRight className="h-4 w-4 shrink-0" aria-hidden />
-                </span>
+                
               </div>
             </Link>
           </li>)}
@@ -152,19 +150,14 @@ function AccommodationHub() {
               </span>
               <h3 className="mt-3 text-lg font-semibold leading-snug">{guide.title}</h3>
               <p className="mt-2 flex-1 text-sm leading-relaxed text-muted-foreground">{guide.description}</p>
-              <span className={available
-                ? "mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-primary group-hover:underline"
-                : "mt-4 inline-flex items-center text-sm font-semibold text-muted-foreground"
-              }>
-                {guide.cta}{available && <ArrowRight className="h-4 w-4 shrink-0" aria-hidden />}
-              </span>
+              {!available && <span className="mt-4 text-sm font-semibold text-muted-foreground">{guide.cta}</span>}
             </>;
             const baseClass = "flex h-full min-w-0 flex-col rounded-2xl border bg-card p-4";
             return <li key={guide.id} className="min-w-0">
               {available
                 ? <Link
                     to={guide.to}
-                    className={`group ${baseClass} transition-colors hover:border-primary/50 hover:bg-secondary/20 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary`}
+                    className={`editorial-card-link group ${baseClass} transition-colors hover:border-primary/50 hover:bg-secondary/20 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary`}
                     data-testid="accommodation-area-guide-card"
                   >{content}</Link>
                 : <article

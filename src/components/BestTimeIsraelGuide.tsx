@@ -70,9 +70,9 @@ function Status({value}:{value:SeasonalFit}){
 }
 function GuideCard({item}:{item:{title:string;to:LinkProps["to"];desc:string}}){
   const photo=guideHeroPhotoForPath(String(item.to));
-  return <Link to={item.to} className="group flex h-full min-w-0 flex-col overflow-hidden rounded-xl border bg-card transition-colors hover:border-primary/50 hover:bg-secondary/20 focus-visible:outline-2 focus-visible:outline-primary">
+  return <Link to={item.to} className="editorial-card-link group flex h-full min-w-0 flex-col overflow-hidden rounded-xl border bg-card transition-colors hover:border-primary/50 hover:bg-secondary/20 focus-visible:outline-2 focus-visible:outline-primary">
     {photo&&<img src={photo.src} alt={photo.alt} width={560} height={350} loading="lazy" decoding="async" className="aspect-[16/10] w-full object-cover"/>}
-    <span className="flex flex-1 flex-col p-3 sm:p-4"><strong className="text-sm leading-snug group-hover:text-primary sm:text-base">{item.title}</strong><span className="mt-2 text-xs leading-relaxed text-muted-foreground sm:text-sm">{item.desc}</span><span className="mt-auto inline-flex items-center gap-1 pt-3 text-xs font-semibold text-primary">Explore guide<ArrowUpRight className="h-3.5 w-3.5" aria-hidden="true"/></span></span>
+    <span className="flex flex-1 flex-col p-3 sm:p-4"><strong className="text-sm leading-snug group-hover:text-primary sm:text-base">{item.title}</strong><span className="mt-2 text-xs leading-relaxed text-muted-foreground sm:text-sm">{item.desc}</span></span>
   </Link>;
 }
 function MonthMatrix(){

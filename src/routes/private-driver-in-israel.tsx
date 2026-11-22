@@ -104,12 +104,12 @@ function PrivateDriverContent({ transfer }: { transfer: ReturnType<typeof parseP
         <h2 id="guides-h" className="text-2xl font-semibold">Related travel guides</h2>
         <ul className="mt-4 grid grid-cols-2 gap-3 lg:grid-cols-3">
           {privateDriverGuides.map(guide => <li key={guide.to} className="min-w-0">
-            <Link to={guide.to} className="group flex h-full min-w-0 flex-col gap-3 sm:flex-row sm:items-center rounded-xl border bg-card p-3 transition-colors hover:border-primary/50 hover:bg-secondary/20 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary" data-testid="driver-guide-card">
+            <Link to={guide.to} className="editorial-card-link group flex h-full min-w-0 flex-col gap-3 sm:flex-row sm:items-center rounded-xl border bg-card p-3 transition-colors hover:border-primary/50 hover:bg-secondary/20 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary" data-testid="driver-guide-card">
               <img src={guide.photo.src} alt={guide.photo.alt} width={112} height={75} loading="lazy" decoding="async" className="aspect-[3/2] w-full sm:shrink-0 rounded-lg object-cover sm:w-24 lg:w-20 xl:w-24" />
               <span className="min-w-0 flex-1">
                 <span className="block text-sm font-semibold leading-snug text-foreground group-hover:text-primary">{guide.title}</span>
                 <span className="mt-1 line-clamp-2 block text-xs leading-relaxed text-muted-foreground">{guide.text}</span>
-                <span className="mt-1.5 inline-block text-xs font-semibold text-primary group-hover:underline">Read guide</span>
+                
               </span>
             </Link>
           </li>)}

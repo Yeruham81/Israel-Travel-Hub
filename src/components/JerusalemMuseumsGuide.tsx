@@ -148,7 +148,6 @@ const faqs=[
 ];
 export function JerusalemMuseumsGuide(){
   const featured=museums.filter(m=>["israel","yad","tower","science","tolerance","begin"].includes(m.id));
-  const featuredCta:Record<string,string>={israel:"Explore the collections",yad:"Plan a respectful visit",tower:"Discover the citadel",science:"See hands-on experiences",tolerance:"Explore exhibition tours",begin:"Book a heritage tour"};
   const jump=[["top-picks","My top picks"],["compare","Compare museums"],["by-area","Museums by area"],["choose","Which museum?"],["museum-routes","Suggested visits"],["practical","Visitor tips"],["faq","FAQ"],["explore-more","Explore more"],["contact","Contact me"]] as const;
   return <main className="mx-auto max-w-5xl px-4 pb-10"><article>
     <header className="pt-6">
@@ -168,12 +167,12 @@ export function JerusalemMuseumsGuide(){
     <OnThisPage sections={jump}/>
     <section id="top-picks" aria-labelledby="top-picks-heading" className="mt-10 scroll-mt-24">
       <SectionHeading id="top-picks" title="My top museum picks" intro="Six places worth considering for different interests. Choose what matters most to you."/>
-      <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">{featured.map(m=><a key={m.id} href={"#museum-"+m.id} className="group flex flex-col rounded-xl border bg-card p-4 transition-colors hover:border-primary/40 hover:bg-secondary/30 focus-visible:outline-2 focus-visible:outline-primary">
+      <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">{featured.map(m=><a key={m.id} href={"#museum-"+m.id} className="editorial-card-link group flex flex-col rounded-xl border bg-card p-4 transition-colors hover:border-primary/40 hover:bg-secondary/30 focus-visible:outline-2 focus-visible:outline-primary">
         <span className="text-[11px] font-bold uppercase tracking-wide text-primary">{m.theme}</span>
         <strong className="mt-2 text-base leading-snug">{m.name}</strong>
         <span className="mt-2 text-sm leading-relaxed text-muted-foreground">{m.bestFor}</span>
         <span className="mt-2 text-xs text-muted-foreground">{m.priceNis===0?"Free general entry":typeof m.priceNis==="number"?"Adult ₪"+m.priceNis:"Check admission"}</span>
-        <span className="mt-auto inline-flex items-center gap-1 pt-4 text-xs font-semibold text-primary">{featuredCta[m.id]??"See visitor information"} <ArrowUpRight className="h-3.5 w-3.5" aria-hidden="true"/></span>
+        
       </a>)}</div>
     </section>
     <section id="compare" aria-labelledby="compare-heading" className="mt-11 scroll-mt-24">
@@ -239,7 +238,7 @@ export function JerusalemMuseumsGuide(){
     <FaqList faqs={faqs}/>
     <section id="explore-more" aria-labelledby="explore-more-heading" className="mt-12 scroll-mt-24">
       <SectionHeading id="explore-more" title="Explore more of Jerusalem" intro="Continue planning with my Jerusalem city guides, neighbourhoods and day trips."/>
-      <div className="grid grid-cols-2 gap-4 lg:grid-cols-3">{related.map(item=><Link key={item.to} to={item.to} className="group flex h-full flex-col overflow-hidden rounded-xl border bg-card transition-colors hover:border-primary/40 hover:bg-secondary/20"><img src={guideHeroPhotoForPath(item.to)!.src} alt={guideHeroPhotoForPath(item.to)!.alt} width={640} height={360} loading="lazy" decoding="async" className="aspect-[16/9] w-full object-cover"/><span className="flex flex-1 flex-col p-4"><strong className="text-base">{item.title}</strong><span className="mt-2 text-sm leading-relaxed text-muted-foreground">{item.note}</span><span className="mt-auto inline-flex items-center gap-1 pt-4 text-sm font-semibold text-primary">Explore my guide <ArrowUpRight className="h-4 w-4" aria-hidden="true"/></span></span></Link>)}</div>
+      <div className="grid grid-cols-2 gap-4 lg:grid-cols-3">{related.map(item=><Link key={item.to} to={item.to} className="editorial-card-link group flex h-full flex-col overflow-hidden rounded-xl border bg-card transition-colors hover:border-primary/40 hover:bg-secondary/20"><img src={guideHeroPhotoForPath(item.to)!.src} alt={guideHeroPhotoForPath(item.to)!.alt} width={640} height={360} loading="lazy" decoding="async" className="aspect-[16/9] w-full object-cover"/><span className="flex flex-1 flex-col p-4"><strong className="text-base">{item.title}</strong><span className="mt-2 text-sm leading-relaxed text-muted-foreground">{item.note}</span></span></Link>)}</div>
     </section>
     <HomeContactForm guide={neighborhoodTripContactCopy("Jerusalem")}/>
     <SourcesDisclosure>

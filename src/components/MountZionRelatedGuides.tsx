@@ -53,12 +53,12 @@ export function MountZionRelatedGuides() {
     <p className="mt-2 max-w-3xl text-sm leading-relaxed text-muted-foreground">Keep exploring after Mount Zion, or plan the rest of your time in Jerusalem.</p>
     <ul className="mt-5 grid grid-cols-2 gap-4 lg:grid-cols-3">
       {related.map(item => <li key={String(item.to)}>
-        <Link to={item.to} className="group flex h-full min-w-0 flex-col overflow-hidden rounded-xl border bg-card transition-colors hover:border-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
+        <Link to={item.to} className="editorial-card-link group flex h-full min-w-0 flex-col overflow-hidden rounded-xl border bg-card transition-colors hover:border-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
           <img loading="lazy" decoding="async" width={112} height={104} src={item.photo} alt={item.alt} className="aspect-[16/9] h-auto w-full object-cover" />
           <span className="flex min-w-0 flex-1 flex-col self-stretch p-3 sm:p-4">
             <span className="font-semibold leading-snug group-hover:text-primary">{item.title}</span>
             <span className="mt-1 line-clamp-3 text-xs leading-relaxed text-muted-foreground">{item.summary}</span>
-            <span className="mt-auto pt-2 text-xs font-semibold text-primary">Read more <span aria-hidden="true">→</span></span>
+            
           </span>
         </Link>
       </li>)}

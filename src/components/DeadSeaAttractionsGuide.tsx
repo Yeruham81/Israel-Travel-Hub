@@ -102,12 +102,12 @@ function Tip({children}:{children:ReactNode}) {
   </aside>;
 }
 function GuideCard({item}:{item:typeof related[number] | typeof planning[number]}) {
-  return <Link to={item.to} className="group flex min-w-0 flex-col overflow-hidden rounded-xl border bg-card transition-colors hover:border-primary/50 focus-visible:outline-2 focus-visible:outline-primary">
+  return <Link to={item.to} className="editorial-card-link group flex min-w-0 flex-col overflow-hidden rounded-xl border bg-card transition-colors hover:border-primary/50 focus-visible:outline-2 focus-visible:outline-primary">
     <img src={guideHeroPhotoForPath(String(item.to))?.src ?? item.image} alt={guideHeroPhotoForPath(String(item.to))?.alt ?? item.alt} width={560} height={350} loading="lazy" decoding="async" className="aspect-[16/10] w-full object-cover" />
     <span className="flex flex-1 flex-col p-3 sm:p-4">
       <strong className="text-sm leading-snug group-hover:text-primary sm:text-base">{item.title}</strong>
       <span className="mt-2 text-xs leading-relaxed text-muted-foreground sm:text-sm">{item.desc}</span>
-      <span className="mt-auto inline-flex items-center gap-1 pt-3 text-xs font-semibold text-primary">Explore guide <ArrowUpRight aria-hidden className="h-3.5 w-3.5" /></span>
+      
     </span>
   </Link>;
 }
@@ -196,11 +196,11 @@ export function DeadSeaAttractionsGuide() {
         <div className="grid grid-cols-2 gap-2.5 sm:gap-3 md:grid-cols-3 lg:grid-cols-5" data-testid="deadsea-quick-picks">
           {stops.map((stop,index)=>{
             const Icon=icons[index]!;
-            return <a key={stop.id} href={"#"+stop.id} className="group flex min-w-0 flex-col rounded-xl border bg-card p-2.5 transition-colors hover:border-primary/50 hover:bg-secondary/20 focus-visible:outline-2 focus-visible:outline-primary sm:p-3">
+            return <a key={stop.id} href={"#"+stop.id} className="editorial-card-link group flex min-w-0 flex-col rounded-xl border bg-card p-2.5 transition-colors hover:border-primary/50 hover:bg-secondary/20 focus-visible:outline-2 focus-visible:outline-primary sm:p-3">
               <div className="flex items-center justify-between gap-2"><Icon aria-hidden className="h-5 w-5 shrink-0 text-primary"/><span className="text-xs font-bold tabular-nums text-muted-foreground">{String(index+1).padStart(2,"0")}</span></div>
               <strong className="mt-2 text-sm leading-snug">{stop.shortTitle}</strong>
               <span className="mt-1 hidden text-xs leading-relaxed text-muted-foreground sm:block">{stop.area}</span>
-              <span className="mt-auto inline-flex items-center gap-1 pt-2 text-xs font-semibold text-primary">Read tips <ArrowUpRight aria-hidden className="h-3.5 w-3.5"/></span>
+              
             </a>;
           })}
         </div>

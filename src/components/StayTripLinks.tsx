@@ -188,12 +188,12 @@ export function StayTripLinks({
   const renderCards = (items: GuideCard[], grid: string, testId: string): ReactNode => (
     <ul className={`mt-5 grid gap-4 ${grid}`} data-testid={testId}>
       {items.map((item) => <li key={item.to} className="min-w-0">
-        <Link to={item.to as LinkProps["to"]} className={`group flex h-full min-w-0 flex-col overflow-hidden ${isEditorial ? "rounded-xl" : "rounded-2xl"} border bg-card transition-colors hover:border-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary`}>
+        <Link to={item.to as LinkProps["to"]} className={`editorial-card-link group flex h-full min-w-0 flex-col overflow-hidden ${isEditorial ? "rounded-xl" : "rounded-2xl"} border bg-card transition-colors hover:border-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary`}>
           <img src={item.photo} alt={item.alt} loading="lazy" decoding="async" width={600} height={375} className="aspect-[16/10] w-full object-cover" />
           <span className={`flex flex-1 flex-col ${isEditorial ? "p-4" : "p-3 sm:p-4"}`}>
             <span className={isEditorial ? "text-base font-bold leading-snug text-foreground group-hover:text-primary" : "text-sm font-semibold leading-snug text-foreground group-hover:text-primary sm:text-lg"}>{item.title}</span>
             <span className={isEditorial ? "mt-2 line-clamp-3 flex-1 text-sm leading-relaxed text-muted-foreground" : "mt-2 flex-1 text-xs leading-relaxed text-muted-foreground sm:text-sm"}>{item.note}</span>
-            <span className={isEditorial ? "mt-3 text-sm font-semibold text-primary" : "mt-3 text-xs font-semibold text-primary sm:mt-4 sm:text-sm"}>{isEditorial ? "Read more" : "Read the guide →"}</span>
+            
           </span>
         </Link>
       </li>)}

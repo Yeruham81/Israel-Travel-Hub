@@ -174,11 +174,6 @@ const faqs = [
 
 export function TelAvivMuseumsGuide() {
   const featured = museums.filter(museum => ["art", "city", "steinhardt", "anu", "muza", "liebling"].includes(museum.id));
-  const featuredCta: Record<string, string> = {
-    art: "See art highlights", city: "Explore visitor details",
-    steinhardt: "Discover natural history", anu: "Plan your museum visit",
-    muza: "Explore MUZA exhibitions", liebling: "Discover the White City",
-  };
   const jump = [
     ["top-picks", "My top picks"], ["compare", "Compare museums"], ["by-area", "Museums by area"],
     ["choose", "Which museum?"], ["museum-routes", "Suggested visits"], ["practical", "Visitor tips"],
@@ -208,12 +203,12 @@ export function TelAvivMuseumsGuide() {
       <section id="top-picks" aria-labelledby="top-picks-heading" className="mt-10 scroll-mt-24">
         <SectionHeading id="top-picks" title="My top museum picks" intro="A few very different places worth considering first. Choose according to your interests instead of trying to visit all of them." />
         <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-          {featured.map(museum => <a key={museum.id} href={"#museum-" + museum.id} className="group flex flex-col rounded-xl border bg-card p-4 transition-colors hover:border-primary/40 hover:bg-secondary/30 focus-visible:outline-2 focus-visible:outline-primary">
+          {featured.map(museum => <a key={museum.id} href={"#museum-" + museum.id} className="editorial-card-link group flex flex-col rounded-xl border bg-card p-4 transition-colors hover:border-primary/40 hover:bg-secondary/30 focus-visible:outline-2 focus-visible:outline-primary">
             <span className="text-[11px] font-bold uppercase tracking-wide text-primary">{museum.theme}</span>
             <strong className="mt-2 text-base leading-snug">{museum.name}</strong>
             <span className="mt-2 text-sm leading-relaxed text-muted-foreground">{museum.bestFor}</span>
             <span className="mt-2 text-xs text-muted-foreground">{museum.priceNis === 0 ? "Free general entry" : typeof museum.priceNis === "number" ? "Adult ₪" + museum.priceNis : "Check admission"}</span>
-            <span className="mt-auto inline-flex items-center gap-1 pt-4 text-xs font-semibold text-primary">{featuredCta[museum.id] ?? "See museum details"} <ArrowUpRight aria-hidden="true" className="h-3.5 w-3.5" /></span>
+            
           </a>)}
         </div>
       </section>
@@ -302,9 +297,9 @@ export function TelAvivMuseumsGuide() {
       <section id="explore-more" aria-labelledby="explore-more-heading" className="mt-12 scroll-mt-24">
         <SectionHeading id="explore-more" title="Explore more of Tel Aviv" intro="Continue planning your stay with my related city, transport and sightseeing guides." />
         <div className="grid grid-cols-2 gap-4 lg:grid-cols-3">
-          {related.map(item => <Link key={item.to} to={item.to} className="group flex h-full flex-col overflow-hidden rounded-xl border bg-card transition-colors hover:border-primary/40 hover:bg-secondary/20">
+          {related.map(item => <Link key={item.to} to={item.to} className="editorial-card-link group flex h-full flex-col overflow-hidden rounded-xl border bg-card transition-colors hover:border-primary/40 hover:bg-secondary/20">
             <img src={guideHeroPhotoForPath(item.to)!.src} alt={guideHeroPhotoForPath(item.to)!.alt} width={640} height={360} loading="lazy" decoding="async" className="aspect-[16/9] w-full object-cover" />
-            <span className="flex flex-1 flex-col p-4"><strong className="text-base">{item.title}</strong><span className="mt-2 text-sm leading-relaxed text-muted-foreground">{item.note}</span><span className="mt-auto inline-flex items-center gap-1 pt-4 text-sm font-semibold text-primary">Explore my guide <ArrowUpRight aria-hidden="true" className="h-4 w-4" /></span></span>
+            <span className="flex flex-1 flex-col p-4"><strong className="text-base">{item.title}</strong><span className="mt-2 text-sm leading-relaxed text-muted-foreground">{item.note}</span></span>
           </Link>)}
         </div>
       </section>

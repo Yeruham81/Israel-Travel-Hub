@@ -28,12 +28,12 @@ export function BethlehemGuideFollowUps() {
       <h2 id="bethlehem-related-h" className="text-2xl font-bold leading-tight sm:text-3xl">Related practical guides</h2>
       <ul className="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {related.map(item => <li key={String(item.to)} className="min-w-0">
-          <Link to={item.to} className="group flex h-full min-w-0 flex-col overflow-hidden rounded-xl border bg-card transition-colors hover:border-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
+          <Link to={item.to} className="editorial-card-link group flex h-full min-w-0 flex-col overflow-hidden rounded-xl border bg-card transition-colors hover:border-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
             <img src={guideHeroPhotoForPath(String(item.to))?.src ?? item.image} alt={guideHeroPhotoForPath(String(item.to))?.alt ?? item.alt} width={600} height={400} loading="lazy" decoding="async" className="aspect-[3/2] w-full object-cover" />
             <span className="flex flex-1 flex-col p-4">
               <span className="text-base font-bold leading-snug text-foreground group-hover:text-primary">{item.title}</span>
               <span className="mt-2 flex-1 text-sm leading-relaxed text-muted-foreground">{item.description}</span>
-              <span className="mt-3 text-sm font-semibold text-primary">Read guide</span>
+              
             </span>
           </Link>
         </li>)}

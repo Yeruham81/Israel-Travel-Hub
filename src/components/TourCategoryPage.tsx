@@ -86,12 +86,12 @@ export function TourCategoryPage({ id, filters: rawFilters, onChange }: { id: To
         <h2 id={localHeadingId} className="text-2xl font-semibold">Explore {cityName} further</h2>
         <p className="mt-2 text-sm text-muted-foreground">{id === "masada-dead-sea" ? "Plan your fortress visit, check nature-trail access, discover desert attractions and choose a place to stay." : id === "bethlehem-jericho" ? "Plan your Bethlehem visit, understand the Qasr al-Yahud site and check practical travel arrangements for the Jordan Valley." : id === "nazareth-galilee" ? "Explore Nazareth’s main church, lakeside Christian heritage sites and the Jordan River baptismal stop near the Kinneret." : id === "northern-coast" ? "Plan visits to Caesarea’s Roman ruins, Haifa’s gardens and museums, Akko’s Old City and the northern sea grottoes." : id === "negev-ramon" ? "Prepare for your desert visit, with related trip ideas and practical planning guides for southern Israel." : id === "golan-heights" ? "Explore nearby northern destinations and plan how to fit a Golan day into a larger Galilee journey." : id === "food-markets" ? "Explore Israeli food traditions, historic markets and nearby neighborhoods before your tasting walk." : id === "eilat-red-sea" ? "Plan your Red Sea stay and separate southern Israel excursions with practical guides." : `Find places to visit, neighborhoods to explore and more ways to enjoy ${cityName}.`}</p>
         <div className={localCards.length === 6 ? "mt-4 grid grid-cols-2 gap-4 lg:grid-cols-3" : "mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-3"}>
-          {localCards.map(item => <Link key={item.to} to={item.to} className="group flex h-full min-w-0 flex-col overflow-hidden rounded-xl border bg-card transition-colors hover:border-primary hover:shadow-sm focus-visible:outline-2 focus-visible:outline-primary">
+          {localCards.map(item => <Link key={item.to} to={item.to} className="editorial-card-link group flex h-full min-w-0 flex-col overflow-hidden rounded-xl border bg-card transition-colors hover:border-primary hover:shadow-sm focus-visible:outline-2 focus-visible:outline-primary">
             <img src={item.photo.src} alt={item.photo.alt} width={320} height={176} loading="lazy" decoding="async" className="aspect-[16/9] w-full object-cover" />
             <span className="flex flex-1 flex-col p-3.5">
               <span className="text-base font-semibold leading-snug text-foreground group-hover:text-primary">{item.title}</span>
               <span className="mt-1.5 line-clamp-2 text-xs leading-relaxed text-muted-foreground">{item.description}</span>
-              <span className="mt-auto pt-2 text-xs font-semibold text-primary">{item.cta}</span>
+              
             </span>
           </Link>)}
         </div>

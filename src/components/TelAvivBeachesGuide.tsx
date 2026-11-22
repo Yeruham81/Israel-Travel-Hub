@@ -181,13 +181,13 @@ export function TelAvivBeachesGuide() {
             const Icon = pickIcons[index]!;
             const beach = telAvivBeaches.find(item => item.id === pick.id)!;
             return <a key={pick.id} href={"#beach-" + pick.id}
-              className="group flex min-w-0 flex-col overflow-hidden rounded-xl border bg-card transition-colors hover:border-primary/40 hover:bg-secondary/20 focus-visible:outline-2 focus-visible:outline-primary">
+              className="editorial-card-link group flex min-w-0 flex-col overflow-hidden rounded-xl border bg-card transition-colors hover:border-primary/40 hover:bg-secondary/20 focus-visible:outline-2 focus-visible:outline-primary">
               <BeachPhotoSlot beach={beach} kind="pick" />
               <span className="flex flex-1 flex-col p-3 sm:p-4">
                 <span className="flex items-center gap-2 text-xs font-semibold text-primary"><Icon aria-hidden="true" className="h-4 w-4 shrink-0" />{pick.label}</span>
                 <strong className="mt-2 text-base leading-snug">{beach.name}</strong>
                 <span className="mt-1 text-sm leading-relaxed text-muted-foreground">{pick.note}</span>
-                <span className="mt-auto inline-flex items-center gap-1 pt-3 text-xs font-semibold text-primary">Read about this beach <ArrowUpRight aria-hidden="true" className="h-3.5 w-3.5" /></span>
+                
               </span>
             </a>;
           })}
@@ -331,9 +331,9 @@ export function TelAvivBeachesGuide() {
       <section id="explore-more" aria-labelledby="explore-more-h" className="mt-12 scroll-mt-24">
         <Heading id="explore-more" title="Explore more of Tel Aviv" intro="Continue planning with my city, transport and sightseeing guides." />
         <div className="grid grid-cols-2 gap-4 lg:grid-cols-3">
-          {related.map(item => <Link key={item.to} to={item.to} className="group flex h-full flex-col overflow-hidden rounded-xl border bg-card transition-colors hover:border-primary/40 hover:bg-secondary/20">
+          {related.map(item => <Link key={item.to} to={item.to} className="editorial-card-link group flex h-full flex-col overflow-hidden rounded-xl border bg-card transition-colors hover:border-primary/40 hover:bg-secondary/20">
             <img src={guideHeroPhotoForPath(item.to)!.src} alt={guideHeroPhotoForPath(item.to)!.alt} width={640} height={360} loading="lazy" decoding="async" className="aspect-[16/9] w-full object-cover" />
-            <span className="flex flex-1 flex-col p-4"><strong>{item.title}</strong><span className="mt-2 text-sm leading-relaxed text-muted-foreground">{item.note}</span><span className="mt-auto inline-flex items-center gap-1 pt-4 text-sm font-semibold text-primary">Explore my guide <ArrowUpRight aria-hidden="true" className="h-4 w-4" /></span></span>
+            <span className="flex flex-1 flex-col p-4"><strong>{item.title}</strong><span className="mt-2 text-sm leading-relaxed text-muted-foreground">{item.note}</span></span>
           </Link>)}
         </div>
       </section>

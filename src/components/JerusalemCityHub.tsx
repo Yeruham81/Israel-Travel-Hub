@@ -43,12 +43,12 @@ function CardGrid({id,title,intro,items}:{id:string;title:string;intro:string;it
     <div className="grid grid-cols-2 gap-4 lg:grid-cols-3" data-testid={id+"-cards"}>
       {items.map(item=>{
         const photo=guideHeroPhotoForPath(item.to);
-        return <Link key={item.to} to={item.to} className="group flex min-w-0 flex-col overflow-hidden rounded-xl border bg-card transition-colors hover:border-primary/50 hover:bg-secondary/20 focus-visible:outline-2 focus-visible:outline-primary">
+        return <Link key={item.to} to={item.to} className="editorial-card-link group flex min-w-0 flex-col overflow-hidden rounded-xl border bg-card transition-colors hover:border-primary/50 hover:bg-secondary/20 focus-visible:outline-2 focus-visible:outline-primary">
           {photo ? <img src={photo.src} alt={photo.alt} width={540} height={320} loading="lazy" decoding="async" className="aspect-[16/9] w-full object-cover"/> : <span aria-label={"Photo of "+item.title+" to be added"} className="flex aspect-[16/9] items-center justify-center bg-secondary/30 text-xs text-muted-foreground">Photo to be added</span>}
           <span className="flex flex-1 flex-col p-3 sm:p-4">
             <strong className="text-sm leading-snug group-hover:text-primary sm:text-base">{item.title}</strong>
             <span className="mt-2 text-xs leading-relaxed text-muted-foreground sm:text-sm">{item.description}</span>
-            <span className="mt-auto inline-flex items-center gap-1 pt-3 text-xs font-semibold text-primary sm:text-sm">{item.cta} <ArrowUpRight aria-hidden="true" className="h-3.5 w-3.5"/></span>
+            
           </span>
         </Link>;
       })}
@@ -150,28 +150,28 @@ export function JerusalemCityHubPage(){
     <section id="where-to-stay" aria-labelledby="where-to-stay-h" className="mt-12 scroll-mt-24">
       <Heading id="where-to-stay" title="Where should you stay in Jerusalem?" intro="The best neighbourhood depends on your interests, how you arrive and how much walking you want. These are area-level suggestions, not recommendations for individual hotels."/>
       <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3" data-testid="jerusalem-stay-areas">
-        {jerusalemStayAreas.map(area=><article key={area.to} className="group overflow-hidden rounded-xl border bg-card transition-colors hover:border-primary/50 hover:bg-secondary/20">
+        {jerusalemStayAreas.map(area=><article key={area.to} className="editorial-card-link group overflow-hidden rounded-xl border bg-card transition-colors hover:border-primary/50 hover:bg-secondary/20">
           <Link to={area.to} className="flex h-full flex-col p-4 focus-visible:outline-2 focus-visible:outline-primary" aria-label={"Explore hotels in "+area.name}>
             <h3 className="text-base font-bold group-hover:text-primary">{area.name}</h3>
             <p className="mt-1 text-xs font-semibold uppercase tracking-wide text-primary">{area.character}</p>
             <p className="mt-3 text-sm"><strong>Good for:</strong> {area.best}</p>
             <p className="mt-2 text-sm text-muted-foreground"><strong>Check:</strong> {area.consider}</p>
-            <span className="mt-auto inline-flex items-center gap-1 pt-3 text-sm font-semibold text-primary">Explore hotels in this area <ArrowUpRight aria-hidden="true" className="h-4 w-4"/></span>
+            
           </Link>
         </article>)}
       </div>
       <div className="mt-5 grid gap-3 sm:grid-cols-2">
-        <Link to="/travel-blog/where-to-stay-in-jerusalem/" className="group flex flex-col rounded-xl border border-primary/20 bg-secondary/40 p-4 hover:border-primary/60">
+        <Link to="/travel-blog/where-to-stay-in-jerusalem/" className="editorial-card-link group flex flex-col rounded-xl border border-primary/20 bg-secondary/40 p-4 hover:border-primary/60">
           <span className="text-xs font-semibold uppercase tracking-wide text-primary">Choose your area</span>
           <strong className="mt-1 text-base">Where to Stay in Jerusalem</strong>
           <span className="mt-2 text-sm leading-relaxed text-muted-foreground">My detailed comparison of the city's six most useful neighbourhoods for visitors.</span>
-          <span className="mt-3 inline-flex items-center gap-1 text-sm font-semibold text-primary">Compare neighbourhoods <ArrowUpRight className="h-4 w-4" aria-hidden="true"/></span>
+          
         </Link>
-        <Link to="/accommodation/jerusalem/" className="group flex flex-col rounded-xl border border-primary/20 bg-secondary/40 p-4 hover:border-primary/60">
+        <Link to="/accommodation/jerusalem/" className="editorial-card-link group flex flex-col rounded-xl border border-primary/20 bg-secondary/40 p-4 hover:border-primary/60">
           <span className="text-xs font-semibold uppercase tracking-wide text-primary">Compare places to stay</span>
           <strong className="mt-1 text-base">Hotels in Jerusalem</strong>
           <span className="mt-2 text-sm leading-relaxed text-muted-foreground">Browse accommodation areas and selected hotels, then check rooms and terms with the booking provider.</span>
-          <span className="mt-3 inline-flex items-center gap-1 text-sm font-semibold text-primary">Browse Jerusalem hotels <ArrowUpRight className="h-4 w-4" aria-hidden="true"/></span>
+          
         </Link>
       </div>
       <Tip>A hotel close to the Old City on a map may still involve steps or a long walk with luggage. I would check the exact entrance, permitted drop-off and final approach before choosing a room.</Tip>
@@ -187,8 +187,8 @@ export function JerusalemCityHubPage(){
           {to:"/travel-blog/getting-around-israel/",title:"Public transport and travel in Israel",description:"Rav-Kav or approved apps, buses, trains and local connections.",icon:<Footprints className="h-5 w-5"/>},
           {to:"/travel-blog/from-ben-gurion-airport-on-shabbat/",title:"Shabbat and holiday transport",description:"Understand when regular services stop and how to plan alternatives.",icon:<CalendarDays className="h-5 w-5"/>},
           {to:"/airport-transfers/jerusalem/",title:"Direct airport transfer to Jerusalem",description:"Arrange a confirmed pickup to your specified destination.",icon:<CarFront className="h-5 w-5"/>},
-        ].map(item=><Link key={item.to} to={item.to} className="group flex items-start gap-3 rounded-xl border bg-card p-4 hover:border-primary/50">
-          <span className="mt-0.5 shrink-0 text-primary" aria-hidden="true">{item.icon}</span><span className="flex-1"><strong className="text-sm group-hover:text-primary">{item.title}</strong><span className="mt-1 block text-xs leading-relaxed text-muted-foreground sm:text-sm">{item.description}</span><span className="mt-2 inline-flex items-center gap-1 text-xs font-semibold text-primary">Read the guide <ArrowUpRight aria-hidden="true" className="h-3.5 w-3.5"/></span></span>
+        ].map(item=><Link key={item.to} to={item.to} className="editorial-card-link group flex items-start gap-3 rounded-xl border bg-card p-4 hover:border-primary/50">
+          <span className="mt-0.5 shrink-0 text-primary" aria-hidden="true">{item.icon}</span><span className="flex-1"><strong className="text-sm group-hover:text-primary">{item.title}</strong><span className="mt-1 block text-xs leading-relaxed text-muted-foreground sm:text-sm">{item.description}</span></span>
         </Link>)}
       </div>
     </section>

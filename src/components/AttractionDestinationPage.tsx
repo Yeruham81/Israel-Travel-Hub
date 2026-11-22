@@ -194,13 +194,13 @@ export function AttractionDestinationPage({ content }: { content: AttractionDest
           {content.planningLinks.map(item => {
             const Icon = planningIcons[item.icon ?? "region"];
             return <li key={String(item.to)} className="min-w-0">
-              <Link to={item.to} className="group flex h-full min-w-0 flex-col items-start gap-2.5 rounded-lg border sm:flex-row border-border/75 bg-card px-3 py-3 text-foreground no-underline shadow-sm transition-all hover:border-primary/50 hover:shadow-md focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
+              <Link to={item.to} className="editorial-card-link group flex h-full min-w-0 flex-col items-start gap-2.5 rounded-lg border sm:flex-row border-border/75 bg-card px-3 py-3 text-foreground no-underline shadow-sm transition-all hover:border-primary/50 hover:shadow-md focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
                 <span className="flex size-8 shrink-0 items-center justify-center rounded-lg bg-primary/10 text-primary"><Icon className="size-4" aria-hidden="true" /></span>
                 <span className="min-w-0 flex-1">
                   <span className="block text-sm font-semibold leading-snug group-hover:text-primary">{item.label}</span>
                   {item.description && <span className="mt-1 block text-xs leading-relaxed text-muted-foreground">{item.description}</span>}
                 </span>
-                <ArrowUpRight className="mt-1 size-3.5 shrink-0 text-primary/75" aria-hidden="true" />
+                
               </Link>
             </li>;
           })}

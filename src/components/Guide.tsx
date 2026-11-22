@@ -362,12 +362,12 @@ export function RelatedLinks({ title = "Plan the rest of your trip", items, curr
       <h2 className="text-2xl font-bold leading-tight sm:text-3xl">{title}</h2>
       {pictured.length > 0 && <ul className={pictured.length === 6 ? "mt-4 grid grid-cols-2 gap-3 lg:grid-cols-3" : "mt-4 grid gap-4 sm:grid-cols-2"} data-testid="stay-trip-photo-grid">
         {pictured.map(({ item, guide, cardPhoto }) => <li key={String(item.to)} className="min-w-0">
-          <Link to={item.to} className="group flex h-full min-w-0 flex-col overflow-hidden rounded-xl border bg-card transition-colors hover:border-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
+          <Link to={item.to} className="editorial-card-link group flex h-full min-w-0 flex-col overflow-hidden rounded-xl border bg-card transition-colors hover:border-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
             <GuideCardPhoto photo={cardPhoto ?? null} />
             <span className="flex flex-1 flex-col p-4">
               <span className="text-base font-bold leading-snug text-foreground group-hover:text-primary">{item.label}</span>
               <span className="mt-2 line-clamp-3 flex-1 text-sm leading-relaxed text-muted-foreground">{item.note || guide.description}</span>
-              <span className="mt-3 text-sm font-semibold text-primary">Read more</span>
+              
             </span>
           </Link>
         </li>)}
@@ -447,12 +447,12 @@ export function RelatedLinks({ title = "Plan the rest of your trip", items, curr
     {guideSection ? (
       <ul className={pairedGuides.length === 6 ? "mt-4 grid grid-cols-2 gap-4 lg:grid-cols-3" : "mt-4 grid gap-4 sm:grid-cols-2"}>
         {pairedGuides.map(({ item, guide, cardPhoto }) => <li key={String(guide.to)} className="min-w-0">
-          <Link to={guide.to} className="group flex h-full min-w-0 flex-col overflow-hidden rounded-xl border bg-card transition-colors hover:border-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
+          <Link to={guide.to} className="editorial-card-link group flex h-full min-w-0 flex-col overflow-hidden rounded-xl border bg-card transition-colors hover:border-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
             <GuideCardPhoto photo={cardPhoto ?? null} />
             <span className="flex flex-1 flex-col p-4">
               <span className="text-base font-bold leading-snug text-foreground group-hover:text-primary">{item.label}</span>
               <span className="mt-2 line-clamp-3 flex-1 text-sm leading-relaxed text-muted-foreground">{item.note || guide.description}</span>
-              <span className="mt-3 text-sm font-semibold text-primary">Read more</span>
+              
             </span>
           </Link>
         </li>)}

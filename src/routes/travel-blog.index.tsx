@@ -87,12 +87,12 @@ function Guides() {
         <h2 id="explore-israel-h" className="text-2xl font-semibold">Explore Israel further</h2>
         <ul className="mt-4 grid grid-cols-2 gap-3 lg:grid-cols-3">
           {exploreLinks.map(item => <li key={item.to} className="min-w-0">
-            <Link to={item.to} className="group flex h-full min-w-0 flex-col gap-3 sm:flex-row sm:items-center rounded-xl border bg-card p-3 transition-colors hover:border-primary/50 hover:bg-secondary/20 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
+            <Link to={item.to} className="editorial-card-link group flex h-full min-w-0 flex-col gap-3 sm:flex-row sm:items-center rounded-xl border bg-card p-3 transition-colors hover:border-primary/50 hover:bg-secondary/20 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
               <img src={item.photo.src} srcSet={travelBlogExploreImageSets[item.photo.src]} sizes={travelBlogExploreImageSets[item.photo.src] ? "(min-width: 640px) 112px, 96px" : undefined} alt={item.photo.alt} width={112} height={75} loading="lazy" decoding="async" className="aspect-[3/2] w-full sm:shrink-0 rounded-lg object-cover sm:w-28" />
               <span className="min-w-0 flex-1">
                 <span className="block text-sm font-semibold leading-snug text-foreground group-hover:text-primary">{item.title}</span>
                 <span className="mt-1 line-clamp-2 block text-xs leading-relaxed text-muted-foreground">{item.description}</span>
-                <span className="mt-1.5 inline-block text-xs font-semibold text-primary group-hover:underline">{item.action}</span>
+                
               </span>
             </Link>
           </li>)}

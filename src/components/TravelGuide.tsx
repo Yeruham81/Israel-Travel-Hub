@@ -126,14 +126,14 @@ function SectionReferences({ ids }: { ids: string[] }) {
   return <p className="mt-4 text-xs text-muted-foreground">References: {sources.map((source, index) => <span key={source.id}>{index > 0 && " · "}<a href={source.url} target="_blank" rel="noopener noreferrer" className="underline">{source.publisher}<span className="sr-only"> (opens in a new tab)</span></a></span>)}</p>;
 }
 
-export function GuideCard({ guide, headingLevel = 2, cardPhoto, showReadMoreArrow = true, compactHomeLayout = false, responsiveSrcSet }: { guide: GuideDirectoryEntry; headingLevel?: 2 | 3; cardPhoto?: { src: string; alt: string } | null; showReadMoreArrow?: boolean; compactHomeLayout?: boolean; responsiveSrcSet?: string | undefined }) {
+export function GuideCard({ guide, headingLevel = 2, cardPhoto, compactHomeLayout = false, responsiveSrcSet }: { guide: GuideDirectoryEntry; headingLevel?: 2 | 3; cardPhoto?: { src: string; alt: string } | null; showReadMoreArrow?: boolean; compactHomeLayout?: boolean; responsiveSrcSet?: string | undefined }) {
   const Heading = headingLevel === 3 ? "h3" : "h2";
   // Always show the main photo of the destination page, not a caller override.
   const displayedPhoto = guide.photo;
-  return <article className="flex h-full min-w-0 flex-col overflow-hidden rounded-2xl border bg-card" data-testid="guide-directory-card">
+  return <article className="editorial-card-link flex h-full min-w-0 flex-col overflow-hidden rounded-2xl border bg-card" data-testid="guide-directory-card">
     <Link to={guide.to} className="group flex flex-1 flex-col focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-primary">
       {displayedPhoto ? <img src={displayedPhoto.src} srcSet={responsiveSrcSet} sizes={responsiveSrcSet ? "(min-width: 1280px) 360px, (min-width: 640px) calc(50vw - 26px), calc(100vw - 32px)" : undefined} alt={displayedPhoto.alt} width={600} height={400} loading="lazy" decoding="async" className="aspect-[3/2] w-full object-cover" /> : <span aria-hidden="true" data-testid="guide-card-placeholder" className="flex aspect-[3/2] w-full items-center justify-center bg-secondary/50 text-muted-foreground"><BookOpen className="h-10 w-10 opacity-50" /></span>}
-      <div className="flex flex-1 flex-col p-5"><Heading className="text-2xl font-semibold leading-tight group-hover:text-primary">{guide.title}</Heading><p className={compactHomeLayout ? "mt-3 text-sm leading-relaxed text-muted-foreground" : "mt-3 flex-1 text-sm leading-relaxed text-muted-foreground"}>{guide.description}</p><span className={compactHomeLayout ? "mt-2 text-sm font-semibold text-primary" : "mt-4 text-sm font-semibold text-primary"}>Read more{showReadMoreArrow ? " →" : ""}</span></div>
+      <div className="flex flex-1 flex-col p-5"><Heading className="text-2xl font-semibold leading-tight group-hover:text-primary">{guide.title}</Heading><p className={compactHomeLayout ? "mt-3 text-sm leading-relaxed text-muted-foreground" : "mt-3 flex-1 text-sm leading-relaxed text-muted-foreground"}>{guide.description}</p></div>
     </Link>
     <div className={compactHomeLayout ? "px-5 pb-4 pt-1" : "px-5 pb-5"}><GuideTags topics={guide.topics} compact={compactHomeLayout} /></div>
   </article>;

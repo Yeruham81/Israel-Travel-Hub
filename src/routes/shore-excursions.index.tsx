@@ -209,12 +209,12 @@ function Shore() {
         <h2 id="shore-related-h" className="text-2xl font-semibold">Discover Israel's main attractions</h2>
         <ul className="mt-4 grid grid-cols-2 gap-3 lg:grid-cols-3">
           {shoreHubGuides.map(guide => <li key={String(guide.to)} className="min-w-0">
-            <Link to={guide.to} className="group flex h-full min-w-0 flex-col gap-3 sm:flex-row sm:items-center rounded-xl border bg-card p-3 transition-colors hover:border-primary/50 hover:bg-secondary/20 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
+            <Link to={guide.to} className="editorial-card-link group flex h-full min-w-0 flex-col gap-3 sm:flex-row sm:items-center rounded-xl border bg-card p-3 transition-colors hover:border-primary/50 hover:bg-secondary/20 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
               <img src={shoreHubGuideThumbnailSources[String(guide.to)] ?? guide.photo.src} alt={guide.photo.alt} width={112} height={90} loading="lazy" decoding="async" className="aspect-[3/2] w-full rounded-lg object-cover sm:w-28 sm:shrink-0" />
               <span className="min-w-0 flex-1">
                 <span className="block text-sm font-semibold leading-snug text-foreground group-hover:text-primary">{guide.title}</span>
                 <span className="mt-1 line-clamp-2 block text-xs leading-relaxed text-muted-foreground">{guide.description}</span>
-                <span className="mt-1.5 inline-block text-xs font-semibold text-primary group-hover:underline">Read more</span>
+                
               </span>
             </Link>
           </li>)}
@@ -227,12 +227,12 @@ function Shore() {
           {practicalGuides.map(guide => {
             const Icon = guide.icon;
             return <li key={guide.to} className="min-w-0">
-              <Link to={guide.to} className="group flex h-full items-start gap-3 rounded-xl border bg-card p-3 transition-colors hover:border-primary/50 hover:bg-secondary/20 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
+              <Link to={guide.to} className="editorial-card-link group flex h-full items-start gap-3 rounded-xl border bg-card p-3 transition-colors hover:border-primary/50 hover:bg-secondary/20 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
                 <Icon aria-hidden className="mt-0.5 size-5 shrink-0 text-primary" />
                 <span className="min-w-0">
                   <span className="block text-sm font-semibold leading-snug text-foreground group-hover:text-primary">{guide.title}</span>
                   <span className="mt-1 block text-xs leading-relaxed text-muted-foreground">{guide.description}</span>
-                  <span className="mt-1.5 inline-block text-xs font-semibold text-primary group-hover:underline">Read guide</span>
+                  
                 </span>
               </Link>
             </li>;

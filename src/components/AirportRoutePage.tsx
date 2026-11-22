@@ -151,12 +151,12 @@ export function AirportRoutePage({ id }: { id: AirportTransferRouteId }) {
         <h2 id="related-guides-h" className="text-2xl font-semibold">Related travel guides</h2>
         <ul className="mt-4 grid gap-3 sm:grid-cols-2">
           {relatedCards.map((card) => <li key={card.title}>
-            <Link to={card.to} className="group flex h-full min-w-0 items-center gap-3 rounded-xl border bg-card p-3 transition-colors hover:border-primary/50 hover:bg-secondary/20 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
+            <Link to={card.to} className="editorial-card-link group flex h-full min-w-0 items-center gap-3 rounded-xl border bg-card p-3 transition-colors hover:border-primary/50 hover:bg-secondary/20 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
               <img src={card.photo.src} alt={card.photo.alt} width={112} height={75} loading="lazy" decoding="async" className="aspect-[3/2] w-24 shrink-0 rounded-lg object-cover sm:w-28" />
               <span className="min-w-0 flex-1">
                 <span className="block text-sm font-semibold leading-snug group-hover:text-primary">{card.title}</span>
                 <span className="mt-1 block text-xs leading-relaxed text-muted-foreground">{card.description}</span>
-                <span className="mt-1.5 inline-block text-xs font-semibold text-primary group-hover:underline">Read guide</span>
+                
               </span>
             </Link>
           </li>)}

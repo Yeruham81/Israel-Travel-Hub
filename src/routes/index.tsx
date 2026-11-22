@@ -230,14 +230,14 @@ function DestinationImageCard({ c }: { c: Card }) {
 function ShoreExcursionCard({ c }: { c: Card }) {
   return (
     <li className="min-h-0">
-      <Link to={c.to} className="photo-card group grid h-full min-w-0 grid-cols-1 overflow-hidden rounded-xl border bg-background transition-colors min-[480px]:grid-cols-[43%_minmax(0,1fr)] hover:border-primary focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-ring">
+      <Link to={c.to} className="editorial-card-link photo-card group grid h-full min-w-0 grid-cols-1 overflow-hidden rounded-xl border bg-background transition-colors min-[480px]:grid-cols-[43%_minmax(0,1fr)] hover:border-primary focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-ring">
         <span className="relative block aspect-[16/9] overflow-hidden min-[480px]:aspect-auto">
           <img src={c.img.src} alt={c.img.alt} loading="lazy" decoding="async" width={600} height={420} className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" />
         </span>
         <span className="flex min-w-0 flex-col gap-1 p-3">
           <span className="font-serif text-base font-semibold leading-tight text-foreground sm:text-lg">{c.label}</span>
           <span className="line-clamp-2 text-sm leading-snug text-muted-foreground">{c.text}</span>
-          <span className="mt-auto pt-0.5 text-xs font-semibold text-primary underline-offset-4 group-hover:underline group-focus-visible:underline sm:text-sm">{c.cta}</span>
+          
         </span>
       </Link>
     </li>

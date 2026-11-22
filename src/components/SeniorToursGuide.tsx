@@ -42,9 +42,9 @@ function External({href,children}:{href:string;children:ReactNode}){
  return <a href={href} target="_blank" rel="noopener noreferrer" className={lnk}>{children}<ExternalLink className="ml-1 inline h-3.5 w-3.5" aria-hidden="true"/><span className="sr-only"> (opens in a new tab)</span></a>;
 }
 function PhotoLink({item}:{item:SeniorRelated}){
- return <Link to={item.to} className="group flex min-w-0 flex-col overflow-hidden rounded-xl border bg-card transition-colors hover:border-primary/50 hover:bg-secondary/20 focus-visible:outline-2 focus-visible:outline-primary">
+ return <Link to={item.to} className="editorial-card-link group flex min-w-0 flex-col overflow-hidden rounded-xl border bg-card transition-colors hover:border-primary/50 hover:bg-secondary/20 focus-visible:outline-2 focus-visible:outline-primary">
   <img src={item.image} alt={item.alt} width={640} height={400} loading="lazy" decoding="async" className="aspect-[16/10] w-full object-cover"/>
-  <span className="flex flex-1 flex-col p-3 sm:p-4"><strong className="text-base leading-snug group-hover:text-primary">{item.title}</strong><span className="mt-2 text-sm leading-relaxed text-muted-foreground">{item.description}</span><span className="mt-auto inline-flex items-center gap-1 pt-3 text-sm font-semibold text-primary">Explore my guide <ArrowUpRight className="h-4 w-4" aria-hidden="true"/></span></span>
+  <span className="flex flex-1 flex-col p-3 sm:p-4"><strong className="text-base leading-snug group-hover:text-primary">{item.title}</strong><span className="mt-2 text-sm leading-relaxed text-muted-foreground">{item.description}</span></span>
  </Link>;
 }
 function TripCard({item}:{item:SeniorDay}){
