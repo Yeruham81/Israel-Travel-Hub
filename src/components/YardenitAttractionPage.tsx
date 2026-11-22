@@ -5,7 +5,6 @@ import {
   type AttractionDestinationContent,
 } from "@/components/AttractionDestinationPage";
 import { yardenitSite } from "@/data/yardenitSite";
-import { carRentalAffiliateUrl } from "@/lib/car-rental-affiliate";
 import galileePhoto from "@/assets/home/hero-galilee-sm.webp";
 
 const inlineLink = "font-semibold text-primary underline underline-offset-4";
@@ -97,7 +96,7 @@ export const yardenitDestinationContent: AttractionDestinationContent = {
           </article>
           <article className="rounded-xl border bg-card p-4">
             <div className="flex items-center gap-2"><BusFront className="h-5 w-5 text-primary" aria-hidden="true" /><h3 className="font-semibold">By public transport</h3></div>
-            <p className="mt-2 text-sm leading-relaxed">From Tiberias, look for buses serving <strong>Beit Yerach Regional School (בית ספר אזורי בית ירח, stop 57066)</strong>, a short walk from Yardenit. Check your route, the walk from the stop and the return departure using the <a href="https://bus.gov.il/en/home" target="_blank" rel="noopener noreferrer" className={inlineLink}>official public transport planner</a>. For several Galilee stops in one day, consider <a href={carRentalAffiliateUrl("/attractions/yardenit/")} target="_blank" rel="sponsored noopener noreferrer" className={inlineLink}>renting a car</a>, comparing <Link to="/tours/nazareth-sea-of-galilee/" className={inlineLink}>Galilee tours</Link>, or <a href="#contact" className={inlineLink}>arranging a private driver</a>.</p>
+            <p className="mt-2 text-sm leading-relaxed">From Tiberias, look for buses serving <strong>Beit Yerach Regional School (בית ספר אזורי בית ירח, stop 57066)</strong>, a short walk from Yardenit. Check your route, the walk from the stop and the return departure using the <a href="https://bus.gov.il/en/home" target="_blank" rel="noopener noreferrer" className={inlineLink}>official public transport planner</a>. For several Galilee stops in one day, consider <Link to="/car-rental/" className={inlineLink}>renting a car</Link>, comparing <Link to="/tours/nazareth-sea-of-galilee/" className={inlineLink}>Galilee tours</Link>, or <a href="#contact" className={inlineLink}>arranging a private driver</a>.</p>
           </article>
         </div>
         <div className="rounded-xl border bg-card p-3" data-testid="yardenit-location-map">
@@ -118,7 +117,7 @@ export const yardenitDestinationContent: AttractionDestinationContent = {
         <h3 className="font-serif text-xl font-semibold">Combine Yardenit with the Sea of Galilee</h3>
         <p className="mt-3 text-sm leading-relaxed sm:text-base">For a full-day trip, I recommend choosing three to five sites in the Galilee, depending on your starting point and the time spent at each. If you have a scheduled baptism, keep the rest of your day lighter.</p>
         <ul className="mt-3 list-disc space-y-2 pl-5 text-sm leading-relaxed sm:text-base">
-          <li><strong>Along the lake:</strong> Spend time in <Link to="/travel-blog/sea-of-galilee/" className={inlineLink}>Tiberias and the southern lakeshore</Link>.</li>
+          <li><strong>Along the lake:</strong> Spend time in <Link to="/attractions/sea-of-galilee/" className={inlineLink}>Tiberias and the southern lakeshore</Link>.</li>
           <li><strong>Northern shore:</strong> Continue to <Link to="/attractions/magdala/" className={inlineLink}>Magdala</Link>, <Link to="/attractions/tabgha/" className={inlineLink}>Tabgha</Link>, <Link to="/attractions/capernaum/" className={inlineLink}>Capernaum</Link> or the <Link to="/attractions/mount-of-beatitudes/" className={inlineLink}>Mount of Beatitudes</Link>.</li>
           <li><strong>Wider Galilee:</strong> Add <Link to="/attractions/basilica-of-the-annunciation/" className={inlineLink}>Nazareth</Link> if it suits your route and visiting hours.</li>
         </ul>
@@ -174,7 +173,7 @@ export const yardenitDestinationContent: AttractionDestinationContent = {
   ],
   planningLinks: [
     { label: "Baptism in the Jordan River", to: "/travel-blog/baptism-in-the-jordan-river/", description: "Understand Yardenit and Qasr el-Yahud.", icon: "region" },
-    { label: "Sea of Galilee guide", to: "/travel-blog/sea-of-galilee/", description: "Discover Tiberias and lakeside sights.", icon: "region" },
+    { label: "Sea of Galilee guide", to: "/attractions/sea-of-galilee/", description: "Discover Tiberias and lakeside sights.", icon: "region" },
     { label: "7-day Israel itinerary", to: "/travel-blog/israel-itinerary-7-days/", description: "Include a northern Israel visit.", icon: "itinerary" },
     { label: "10-day Israel itinerary", to: "/travel-blog/israel-itinerary-10-days/", description: "Take more time around the Galilee.", icon: "itinerary" },
     { label: "Getting around Israel", to: "/travel-blog/getting-around-israel/", description: "Compare driving, buses and tours.", icon: "transport" },

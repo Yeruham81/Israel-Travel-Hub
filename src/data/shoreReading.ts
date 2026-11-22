@@ -72,7 +72,7 @@ const guides = {
   galilee: {
     title: "Sea of Galilee highlights",
     description: "Explore the lakeside setting of Tiberias, Capernaum and Tabgha. Choose the heritage stops and landscapes that matter most to your party.",
-    to: "/travel-blog/sea-of-galilee/",
+    to: "/attractions/sea-of-galilee/",
     photo: migrationPhotos["EXISTING:galilee"],
   },
   roshHanikra: {

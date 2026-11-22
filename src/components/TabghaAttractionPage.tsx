@@ -6,7 +6,6 @@ import {
 } from "@/components/AttractionDestinationPage";
 import { tabghaSite } from "@/data/tabghaSite";
 import galileePhoto from "@/assets/home/hero-galilee-sm.webp";
-import { carRentalAffiliateUrl } from "@/lib/car-rental-affiliate";
 
 // One location pin gives visitors the general position of Tabgha without displaying a route.
 const tabghaMapEmbed = "https://maps.google.com/maps?q=Tabgha%2C%20Israel&hl=en&z=15&t=m&output=embed";
@@ -145,7 +144,7 @@ export const tabghaDestinationContent: AttractionDestinationContent = {
           </article>
           <article className="rounded-xl border bg-card p-4">
             <div className="flex items-center gap-2"><BusFront className="h-5 w-5 text-primary" aria-hidden="true" /><h3 className="font-semibold">By public transport</h3></div>
-            <p className="mt-2 text-sm leading-relaxed">You can reach Tabgha by bus from Tiberias, but it is not the most convenient option for visitors, especially if you want to explore several sites around the Sea of Galilee in one day. Check bus times and the walk from your stop with the <a href="https://bus.gov.il/en/home" target="_blank" rel="noopener noreferrer" className="font-semibold text-primary underline underline-offset-4">official public transport planner</a>. For a more flexible day, I recommend <a href={carRentalAffiliateUrl("/attractions/tabgha/")} target="_blank" rel="sponsored noopener noreferrer" className="font-semibold text-primary underline underline-offset-4">renting a car</a>, joining an <Link to="/tours/nazareth-sea-of-galilee/" className="font-semibold text-primary underline underline-offset-4">organised Galilee tour</Link>, or <a href="#contact" className="font-semibold text-primary underline underline-offset-4">arranging a private day trip with a driver</a>.</p>
+            <p className="mt-2 text-sm leading-relaxed">You can reach Tabgha by bus from Tiberias, but it is not the most convenient option for visitors, especially if you want to explore several sites around the Sea of Galilee in one day. Check bus times and the walk from your stop with the <a href="https://bus.gov.il/en/home" target="_blank" rel="noopener noreferrer" className="font-semibold text-primary underline underline-offset-4">official public transport planner</a>. For a more flexible day, I recommend <Link to="/car-rental/" className="font-semibold text-primary underline underline-offset-4">renting a car</Link>, joining an <Link to="/tours/nazareth-sea-of-galilee/" className="font-semibold text-primary underline underline-offset-4">organised Galilee tour</Link>, or <a href="#contact" className="font-semibold text-primary underline underline-offset-4">arranging a private day trip with a driver</a>.</p>
           </article>
         </div>
         <div className="rounded-xl border bg-card p-3" data-testid="tabgha-location-map">
@@ -171,7 +170,7 @@ export const tabghaDestinationContent: AttractionDestinationContent = {
         <p className="mt-3 text-sm leading-relaxed sm:text-base">You can plan a day trip from <strong>Tel Aviv</strong> or <strong>Jerusalem</strong>, or a shore excursion from <strong>Haifa Port</strong>. I recommend choosing three to five stops, including Tabgha, to match your available time.</p>
         <ul className="mt-3 list-disc space-y-2 pl-5 text-sm leading-relaxed sm:text-base">
           <li><strong>Near Tabgha:</strong> <Link to="/attractions/capernaum/" className="font-semibold text-primary underline underline-offset-4">Capernaum</Link> and the <Link to="/attractions/mount-of-beatitudes/" className="font-semibold text-primary underline underline-offset-4">Mount of Beatitudes</Link>.</li>
-          <li><strong>Along the lake:</strong> <Link to="/attractions/magdala/" className="font-semibold text-primary underline underline-offset-4">Magdala</Link>, <Link to="/travel-blog/sea-of-galilee/" className="font-semibold text-primary underline underline-offset-4">Tiberias and the Sea of Galilee</Link>, or <Link to="/attractions/yardenit/" className="font-semibold text-primary underline underline-offset-4">Yardenit</Link>.</li>
+          <li><strong>Along the lake:</strong> <Link to="/attractions/magdala/" className="font-semibold text-primary underline underline-offset-4">Magdala</Link>, <Link to="/attractions/sea-of-galilee/" className="font-semibold text-primary underline underline-offset-4">Tiberias and the Sea of Galilee</Link>, or <Link to="/attractions/yardenit/" className="font-semibold text-primary underline underline-offset-4">Yardenit</Link>.</li>
           <li><strong>Wider Galilee:</strong> <Link to="/attractions/basilica-of-the-annunciation/" className="font-semibold text-primary underline underline-offset-4">Nazareth's Basilica of the Annunciation</Link> or <Link to="/attractions/mount-tabor/" className="font-semibold text-primary underline underline-offset-4">Mount Tabor</Link>.</li>
         </ul>
         <p className="mt-3 text-sm text-muted-foreground">Allow enough time for travel, church opening hours and your return journey, especially when coming from Haifa Port.</p>
@@ -235,7 +234,7 @@ export const tabghaDestinationContent: AttractionDestinationContent = {
     { label: "Mount Tabor", to: "/attractions/mount-tabor/", note: "The Church of the Transfiguration and Lower Galilee viewpoints." },
   ],
   planningLinks: [
-    { label: "Sea of Galilee travel guide", to: "/travel-blog/sea-of-galilee/", description: "Explore the lakeshore and nearby towns.", icon: "region" },
+    { label: "Sea of Galilee travel guide", to: "/attractions/sea-of-galilee/", description: "Explore the lakeshore and nearby towns.", icon: "region" },
     { label: "7-day Israel itinerary", to: "/travel-blog/israel-itinerary-7-days/", description: "Plan a balanced week.", icon: "itinerary" },
     { label: "10-day Israel itinerary", to: "/travel-blog/israel-itinerary-10-days/", description: "Allow more time for northern Israel.", icon: "itinerary" },
     { label: "Best time to visit Israel", to: "/travel-blog/best-time-to-visit-israel/", description: "Weather, seasons and holidays.", icon: "seasons" },

@@ -5,7 +5,6 @@ import {
   type AttractionDestinationContent,
 } from "@/components/AttractionDestinationPage";
 import { roshHanikraSite } from "@/data/roshHanikraSite";
-import { carRentalAffiliateUrl } from "@/lib/car-rental-affiliate";
 import haifaPhoto from "@/assets/haifa/panorama.webp";
 import akkoPhoto from "@/assets/shore-excursions/akko-port.jpg";
 
@@ -108,7 +107,7 @@ export const roshHanikraDestinationContent: AttractionDestinationContent = {
         <div className="space-y-3">
           <article className="rounded-xl border bg-card p-4">
             <div className="flex items-center gap-2"><CarFront className="h-5 w-5 text-primary" aria-hidden="true" /><h3 className="font-semibold">By car or private driver</h3></div>
-            <p className="mt-2 text-sm leading-relaxed">Follow Route 4 north of Nahariya to the signed Rosh Hanikra grottoes entrance. Parking is provided at the site; on busy days, leave time to find a space and join the cable-car queue. For a longer coastal route, <a href={carRentalAffiliateUrl("/attractions/rosh-hanikra/")} target="_blank" rel="sponsored noopener noreferrer" className={inlineLink}>renting a car</a> or <a href="#contact" className={inlineLink}>arranging a private driver</a> makes multiple stops easier.</p>
+            <p className="mt-2 text-sm leading-relaxed">Follow Route 4 north of Nahariya to the signed Rosh Hanikra grottoes entrance. Parking is provided at the site; on busy days, leave time to find a space and join the cable-car queue. For a longer coastal route, <Link to="/car-rental/" className={inlineLink}>renting a car</Link> or <a href="#contact" className={inlineLink}>arranging a private driver</a> makes multiple stops easier.</p>
             <a href={drivingDirections} target="_blank" rel="noopener noreferrer" className="mt-3 inline-flex items-center gap-1 text-sm font-semibold text-primary hover:underline">Driving directions to the entrance <ArrowUpRight className="h-3.5 w-3.5" aria-hidden="true" /></a>
           </article>
           <article className="rounded-xl border bg-card p-4">
@@ -144,7 +143,7 @@ export const roshHanikraDestinationContent: AttractionDestinationContent = {
         <p className="mt-3 text-sm leading-relaxed sm:text-base">For a full day, I recommend choosing a manageable two or three stops along the coast rather than spending most of your time in transit.</p>
         <ul className="mt-3 list-disc space-y-2 pl-5 text-sm leading-relaxed sm:text-base">
           <li><strong>Classic Western Galilee day:</strong> Combine Rosh Hanikra and Achziv Beach with <Link to="/attractions/akko-acre/" className={inlineLink}>Old Akko</Link>, its markets, harbour and Crusader history.</li>
-          <li><strong>Nearby coastal stop:</strong> Enjoy Nahariya and its seafront for a shorter, relaxed route.</li><li><strong>Continue towards Haifa:</strong> Explore the <Link to="/travel-blog/haifa/" className={inlineLink}>Bahá’í Gardens viewpoints and German Colony</Link> if you are heading south.</li>
+          <li><strong>Nearby coastal stop:</strong> Enjoy Nahariya and its seafront for a shorter, relaxed route.</li><li><strong>Continue towards Haifa:</strong> Explore the <Link to="/attractions/haifa/" className={inlineLink}>Bahá’í Gardens viewpoints and German Colony</Link> if you are heading south.</li>
         </ul>
       </div>
     </div>
@@ -191,14 +190,14 @@ export const roshHanikraDestinationContent: AttractionDestinationContent = {
   ],
   nearby: [
     { label: "Old Akko", to: "/attractions/akko-acre/", note: "Harbour, markets and Crusader-era heritage south along the coast." },
-    { label: "Haifa", to: "/travel-blog/haifa/", note: "Bahá'í Gardens viewpoints, the German Colony and the port." },
+    { label: "Haifa", to: "/attractions/haifa/", note: "Bahá'í Gardens viewpoints, the German Colony and the port." },
     { label: "Caesarea National Park", to: "/attractions/caesarea/", note: "A longer coastal drive to Roman ruins and the ancient harbour." },
     { label: "Basilica of the Annunciation", to: "/attractions/basilica-of-the-annunciation/", note: "Nazareth's landmark church on a wider northern Israel route." },
     { label: "Mount Precipice", to: "/attractions/mount-precipice/", note: "A Jezreel Valley panorama near Nazareth, farther inland." },
     { label: "Tel Megiddo", to: "/attractions/tel-megiddo/", note: "Ancient city remains and water system on a longer inland journey." },
   ],
   planningLinks: [
-    { label: "Haifa visitor guide", to: "/travel-blog/haifa/", description: "See the Carmel, the gardens and the coast.", icon: "region" },
+    { label: "Haifa visitor guide", to: "/attractions/haifa/", description: "See the Carmel, the gardens and the coast.", icon: "region" },
     { label: "7-day Israel itinerary", to: "/travel-blog/israel-itinerary-7-days/", description: "Build a balanced route through northern Israel.", icon: "itinerary" },
     { label: "10-day Israel itinerary", to: "/travel-blog/israel-itinerary-10-days/", description: "Allow more time for the Western Galilee.", icon: "itinerary" },
     { label: "Best time to visit Israel", to: "/travel-blog/best-time-to-visit-israel/", description: "Plan for weather and seasonal visiting hours.", icon: "seasons" },

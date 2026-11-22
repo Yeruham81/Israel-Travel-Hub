@@ -668,7 +668,7 @@ describe("migrated Israel itineraries", () => {
       "/attractions/masada/",
       "/travel-blog/jerusalem-to-the-dead-sea/",
       "/airport-transfers/",
-      "/travel-blog/the-dead-sea/",
+      "/attractions/dead-sea/",
       "/travel-blog/dead-sea-attractions/",
       "/attractions/ein-gedi/",
       "/attractions/jaffa/",

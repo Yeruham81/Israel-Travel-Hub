@@ -59,8 +59,8 @@ describe("Magdala individual attraction guide upgrade", () => {
     expect(article).not.toContain("saddr=");
     expect(article).not.toContain("daddr=");
     expect(article).toContain("https://bus.gov.il/en/home");
-    expect(article).toContain("carRentalAffiliateUrl(\"/attractions/magdala/\")");
-    expect(article).toContain('rel="sponsored noopener noreferrer"');
+    expect(article).toContain('to="/car-rental/"');
+    expect(article).not.toContain("carRentalAffiliateUrl");
     expect(article).toContain('href="#contact"');
     expect(article).toContain('to="/tours/nazareth-sea-of-galilee/"');
     expect(article).not.toContain("No current official price list online");

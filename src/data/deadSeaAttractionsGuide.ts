@@ -46,7 +46,7 @@ export const deadSeaStops: DeadSeaStop[] = [
     },
     "guide": {
       "label": "My Dead Sea visitor guide",
-      "to": "/travel-blog/the-dead-sea/"
+      "to": "/attractions/dead-sea/"
     },
     "mapLinks": [
       {

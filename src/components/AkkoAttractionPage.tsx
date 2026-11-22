@@ -199,7 +199,7 @@ export const akkoDestinationContent: AttractionDestinationContent = {
         </div>
         <p className="mt-3 text-sm leading-relaxed sm:text-base">These are flexible walking suggestions. I would choose three or four main stops, leave some time for a meal and use the <a href={official.oldCityRoute} target="_blank" rel="noopener noreferrer" className={inlineLink}>official classic route</a> to find your way between the historic entrances.</p>
       </div>
-      <AttractionPracticalTip>For a full day in the north, Akko can be paired with <Link to="/attractions/rosh-hanikra/" className={inlineLink}>Rosh Hanikra</Link> or a separate stop in <Link to="/travel-blog/haifa/" className={inlineLink}>Haifa</Link>. Allow enough time for travelling between them rather than squeezing too many attractions into a short outing.</AttractionPracticalTip>
+      <AttractionPracticalTip>For a full day in the north, Akko can be paired with <Link to="/attractions/rosh-hanikra/" className={inlineLink}>Rosh Hanikra</Link> or a separate stop in <Link to="/attractions/haifa/" className={inlineLink}>Haifa</Link>. Allow enough time for travelling between them rather than squeezing too many attractions into a short outing.</AttractionPracticalTip>
     </div>
   ),
   historyContent: (
@@ -247,8 +247,8 @@ export const akkoDestinationContent: AttractionDestinationContent = {
     { label: "Magdala", to: "/attractions/magdala/", note: "Archaeology and lakeside heritage on the Sea of Galilee." },
   ],
   planningLinks: [
-    { label: "Haifa travel guide", to: "/travel-blog/haifa/", description: "Explore the gardens, coastline and viewpoints.", icon: "region" },
-    { label: "Sea of Galilee travel guide", to: "/travel-blog/sea-of-galilee/", description: "Lakeside towns and historic sites.", icon: "region" },
+    { label: "Haifa travel guide", to: "/attractions/haifa/", description: "Explore the gardens, coastline and viewpoints.", icon: "region" },
+    { label: "Sea of Galilee travel guide", to: "/attractions/sea-of-galilee/", description: "Lakeside towns and historic sites.", icon: "region" },
     { label: "Getting around Israel", to: "/travel-blog/getting-around-israel/", description: "Rail, buses and road-trip planning.", icon: "transport" },
     { label: "Best time to visit Israel", to: "/travel-blog/best-time-to-visit-israel/", description: "Plan sightseeing around the seasons.", icon: "seasons" },
     { label: "5-day Israel itinerary", to: "/travel-blog/israel-itinerary-5-days/", description: "A practical route with coastal highlights.", icon: "itinerary" },

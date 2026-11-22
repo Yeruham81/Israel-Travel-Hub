@@ -8,7 +8,6 @@ import { Route as DeadSeaRoute } from "@/routes/travel-blog.jerusalem-to-the-dea
 import { affiliateConfig, tourBookingOffers, travelGuidePaths, getSource } from "@/data/registry";
 import { travelGuides } from "@/data/travelGuides";
 import { deadSeaTourCards } from "@/data/deadSeaTourOffers";
-import { carRentalAffiliateUrl } from "@/lib/car-rental-affiliate";
 
 afterEach(cleanup);
 
@@ -55,8 +54,9 @@ describe("Jerusalem independent day-trip planning guides", () => {
     expect(entryNavLink.compareDocumentPosition(comparisonNavLink) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
     expect(screen.getByRole("heading", { name: "Can you drive a rental car to Bethlehem?" })).toBeInTheDocument();
     const rentalLink = within(rental).getByRole("link", { name: /^rental car/i });
-    expect(rentalLink).toHaveAttribute("href", carRentalAffiliateUrl(travelGuidePaths.bethlehem));
-    expect(rentalLink.getAttribute("rel")).toContain("sponsored");
+    expect(rentalLink).toHaveAttribute("href", "/car-rental/");
+    expect(rentalLink).not.toHaveAttribute("target");
+    expect(rentalLink).not.toHaveAttribute("rel");
     expect(screen.getByRole("heading", { name: /visit Bethlehem on Saturday or Sunday/ })).toBeInTheDocument();
     const localTaxi = container.querySelector("#private-taxi") as HTMLElement;
     expect(localTaxi.querySelector("p")?.textContent?.startsWith("An appropriately authorised and insured Palestinian taxi")).toBe(true);
@@ -202,8 +202,8 @@ describe("Jerusalem independent day-trip planning guides", () => {
     expect(allTourPhotos.every(photo => !stopCards.some(stop => within(stop).getByRole("img").getAttribute("src") === photo))).toBe(true);
     expect(container.querySelector("#journey-booking")).toBeNull();
     expect(screen.getAllByRole("note")).toHaveLength(2);
-    expect(container.querySelector('#beach p a[href="/travel-blog/the-dead-sea/"]')).toBeInTheDocument();
-    expect(container.querySelector('#driving p a[href="' + carRentalAffiliateUrl(travelGuidePaths.jerusalemDeadSea) + '"]')).toBeInTheDocument();
+    expect(container.querySelector('#beach p a[href="/attractions/dead-sea/"]')).toBeInTheDocument();
+    expect(container.querySelector('#driving p a[href="/car-rental/"]')).toBeInTheDocument();
     expect(container.querySelector("#driving")).not.toHaveTextContent("(affiliate link)");
     const relatedGuides = screen.getByTestId("deadsea-related-guides");
     expect(relatedGuides.children).toHaveLength(6);

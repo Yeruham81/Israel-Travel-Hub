@@ -1,6 +1,5 @@
 import type { TravelGuide } from "@/data/travelGuides";
 import { topTenExperiences, topTenFaqs, topTenIsraelHero } from "@/data/topTenExperiences";
-import { carRentalAffiliateUrl } from "@/lib/car-rental-affiliate";
 import { migrationPhotos as P } from "@/data/guideMigrationPhotos";
 import palestinianTaxiPhoto from "@/assets/guides/bethlehem/palestinian-taxi.jpg";
 import mangerSquarePhoto from "@/assets/guides/bethlehem/manger-square.jpg";
@@ -406,7 +405,7 @@ export const journeyDestinationGuides = {
           },
           {
             "text": "rental car",
-            "href": carRentalAffiliateUrl("/travel-blog/jerusalem-to-bethlehem/")
+            "to": "/car-rental/"
           },
           {
             "text": " for other parts of your trip, check the company's restrictions carefully. Do not drive into Bethlehem without written permission and confirmed insurance coverage."
@@ -772,7 +771,7 @@ export const journeyDestinationGuides = {
           "inlineLinks": [
             {
               "text": "Dead Sea visitor guide",
-              "to": "/travel-blog/the-dead-sea/"
+              "to": "/attractions/dead-sea/"
             }
           ],
           "sourceIds": [

@@ -485,7 +485,7 @@ export const heritageGuides = {
           },
           {
             "label": "Plan a Dead Sea visit",
-            "to": "/travel-blog/the-dead-sea/"
+            "to": "/attractions/dead-sea/"
           },
           {
             "label": "Compare journeys from Jerusalem",

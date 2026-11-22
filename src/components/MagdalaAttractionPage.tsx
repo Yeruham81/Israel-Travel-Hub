@@ -5,7 +5,6 @@ import {
   type AttractionDestinationContent,
 } from "@/components/AttractionDestinationPage";
 import { magdalaSite } from "@/data/magdalaSite";
-import { carRentalAffiliateUrl } from "@/lib/car-rental-affiliate";
 import galileePhoto from "@/assets/home/hero-galilee-sm.webp";
 
 const visit = magdalaSite.visit;
@@ -121,7 +120,7 @@ export const magdalaDestinationContent: AttractionDestinationContent = {
           </article>
           <article className="rounded-xl border bg-card p-4">
             <div className="flex items-center gap-2"><BusFront className="h-5 w-5 text-primary" aria-hidden="true" /><h3 className="font-semibold">By public transport</h3></div>
-            <p className="mt-2 text-sm leading-relaxed">Local buses run through the Migdal area from Tiberias, making Magdala more accessible by bus than some hilltop Galilee sites. Check the correct stop, the final walk and return times in the <a href="https://bus.gov.il/en/home" target="_blank" rel="noopener noreferrer" className={inlineLink}>official public transport planner</a>. If you're combining several attractions, consider <a href={carRentalAffiliateUrl("/attractions/magdala/")} target="_blank" rel="sponsored noopener noreferrer" className={inlineLink}>renting a car</a>, joining an <Link to="/tours/nazareth-sea-of-galilee/" className={inlineLink}>organised Galilee tour</Link>, or <a href="#contact" className={inlineLink}>arranging a private driver</a>.</p>
+            <p className="mt-2 text-sm leading-relaxed">Local buses run through the Migdal area from Tiberias, making Magdala more accessible by bus than some hilltop Galilee sites. Check the correct stop, the final walk and return times in the <a href="https://bus.gov.il/en/home" target="_blank" rel="noopener noreferrer" className={inlineLink}>official public transport planner</a>. If you're combining several attractions, consider <Link to="/car-rental/" className={inlineLink}>renting a car</Link>, joining an <Link to="/tours/nazareth-sea-of-galilee/" className={inlineLink}>organised Galilee tour</Link>, or <a href="#contact" className={inlineLink}>arranging a private driver</a>.</p>
           </article>
         </div>
         <div className="rounded-xl border bg-card p-3" data-testid="magdala-location-map">
@@ -147,7 +146,7 @@ export const magdalaDestinationContent: AttractionDestinationContent = {
         <p className="mt-3 text-sm leading-relaxed sm:text-base">I recommend choosing three to five sites for your day, depending on where you're starting and how much time you want to spend at Magdala.</p>
         <ul className="mt-3 list-disc space-y-2 pl-5 text-sm leading-relaxed sm:text-base">
           <li><strong>Near the north shore:</strong> <Link to="/attractions/tabgha/" className={inlineLink}>Tabgha</Link>, <Link to="/attractions/capernaum/" className={inlineLink}>Capernaum</Link> and the <Link to="/attractions/mount-of-beatitudes/" className={inlineLink}>Mount of Beatitudes</Link> are natural companions.</li>
-          <li><strong>Along the lake:</strong> Include time in <Link to="/travel-blog/sea-of-galilee/" className={inlineLink}>Tiberias or the surrounding lakeside area</Link>.</li>
+          <li><strong>Along the lake:</strong> Include time in <Link to="/attractions/sea-of-galilee/" className={inlineLink}>Tiberias or the surrounding lakeside area</Link>.</li>
           <li><strong>A longer route:</strong> Add <Link to="/attractions/basilica-of-the-annunciation/" className={inlineLink}>Nazareth</Link> or <Link to="/attractions/yardenit/" className={inlineLink}>Yardenit</Link> if travel time and your schedule allow.</li>
         </ul>
       </div>
@@ -202,7 +201,7 @@ export const magdalaDestinationContent: AttractionDestinationContent = {
     { label: "Mount Tabor", to: "/attractions/mount-tabor/", note: "Transfiguration pilgrimage site on a longer Galilee day." },
   ],
   planningLinks: [
-    { label: "Sea of Galilee travel guide", to: "/travel-blog/sea-of-galilee/", description: "Explore Tiberias and the lakeshore.", icon: "region" },
+    { label: "Sea of Galilee travel guide", to: "/attractions/sea-of-galilee/", description: "Explore Tiberias and the lakeshore.", icon: "region" },
     { label: "7-day Israel itinerary", to: "/travel-blog/israel-itinerary-7-days/", description: "Make room for northern Israel.", icon: "itinerary" },
     { label: "10-day Israel itinerary", to: "/travel-blog/israel-itinerary-10-days/", description: "A slower journey through the Galilee.", icon: "itinerary" },
     { label: "Best time to visit Israel", to: "/travel-blog/best-time-to-visit-israel/", description: "Seasons, weather and holidays.", icon: "seasons" },

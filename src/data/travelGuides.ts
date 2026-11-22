@@ -1030,9 +1030,9 @@ export const travelGuides: Record<TravelGuideId, TravelGuide> = {
             id: "israel-rentals", title: "When is a rental car worth it?",
             paragraphs: [
               "For a wider Galilee, Dead Sea or Negev trip, a rental car may save time. Compare insurance, deposits, fuel, tolls, parking, mileage limits and rental desk hours. Rental desks may be closed on Shabbat, even when driving is permitted.",
-              "Check your signed rental contract before entering restricted areas, including any journey toward Bethlehem or Palestinian Authority territory. Hertz Israel's terms explicitly prohibit entering Area A, and other companies can impose different restrictions. Coverage may not apply to prohibited roads or territory. Compare vehicle choices and booking conditions on DiscoverCars.",
+              "Check your signed rental contract before entering restricted areas, including any journey toward Bethlehem or Palestinian Authority territory. Hertz Israel's terms explicitly prohibit entering Area A, and other companies can impose different restrictions. Coverage may not apply to prohibited roads or territory. Read my car rental guide for vehicle choices and booking conditions.",
             ],
-            inlineLinks: [{ text: "DiscoverCars", to: "/car-rental/" }],
+            inlineLinks: [{ text: "my car rental guide", to: "/car-rental/" }],
             highlightedLinks: [{ label: "Read the rental company's restricted-area terms", href: "https://www.hertz.co.il/en/GoodToKnow/IsraelContract/", context: "Hertz's Israeli contract is an example that prohibits driving the rental into Area A. Check your own contract and insurance before travel." }],
             sourceIds: ["guide-rental-territory"],
           },

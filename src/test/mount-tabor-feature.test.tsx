@@ -61,8 +61,8 @@ describe("Mount Tabor individual attraction guide", () => {
     expect(article).toContain("Antonio Barluzzi");
     expect(article).toContain("1924");
     expect(article).toContain("https://bus.gov.il/en/home");
-    expect(article).toContain('carRentalAffiliateUrl("/attractions/mount-tabor/")');
-    expect(article).toContain('rel="sponsored noopener noreferrer"');
+    expect(article).toContain('to="/car-rental/"');
+    expect(article).not.toContain("carRentalAffiliateUrl");
     expect(article).toContain('data-testid="mount-tabor-location-map"');
     expect(article).toContain('data-testid="mount-tabor-visitor-hours"');
     expect(article).toContain('data-testid="mount-tabor-visitor-essentials"');

@@ -75,8 +75,8 @@ describe("Basilica of the Annunciation attraction guide", () => {
     expect(article).toContain("Holy Thursday");
     expect(article).toContain("Good Friday");
     expect(article).toContain("https://bus.gov.il/en/home");
-    expect(article).toContain('carRentalAffiliateUrl("/attractions/basilica-of-the-annunciation/")');
-    expect(article).toContain('rel="sponsored noopener noreferrer"');
+    expect(article).toContain('to="/car-rental/"');
+    expect(article).not.toContain("carRentalAffiliateUrl");
     expect(article).toContain('data-testid="annunciation-location-map"');
     expect(article).toContain('data-testid="annunciation-visitor-hours"');
     expect(article).toContain('data-testid="annunciation-visitor-essentials"');

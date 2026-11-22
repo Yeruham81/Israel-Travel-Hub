@@ -108,7 +108,7 @@ describe("Capernaum as the first reusable individual-attraction guide", () => {
     expect(article).toContain('to="/attractions/basilica-of-the-annunciation/"');
     expect(article).toContain('to="/attractions/yardenit/"');
     expect(article).toContain('to="/attractions/mount-tabor/"');
-    expect(article).toContain('to="/travel-blog/sea-of-galilee/"');
+    expect(article).toContain('to="/attractions/sea-of-galilee/"');
     expect(article).not.toContain("The Franciscan ruins, Orthodox monastery and national park are close");
     expect(article).not.toContain("There are three different places to enter");
     expect(content.contactIntroduction).toMatch(/^Tell me when you’re planning to visit/);

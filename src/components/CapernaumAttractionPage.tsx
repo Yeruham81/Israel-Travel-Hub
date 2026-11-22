@@ -193,7 +193,7 @@ const page: AttractionDestinationContent = {
         <p className="mt-3 text-sm leading-relaxed sm:text-base">A day trip can start in <strong>Tel Aviv</strong> or <strong>Jerusalem</strong>, or be arranged as a <strong>shore excursion from Haifa Port</strong>. Include Capernaum and choose other stops to suit your interests, available time and departure point:</p>
         <ul className="mt-3 list-disc space-y-2 pl-5 text-sm leading-relaxed sm:text-base">
           <li><strong>Northern lakeshore:</strong> <Link to="/attractions/tabgha/" className="font-semibold text-primary underline underline-offset-4">Tabgha</Link>, the <Link to="/attractions/mount-of-beatitudes/" className="font-semibold text-primary underline underline-offset-4">Mount of Beatitudes</Link> and <Link to="/attractions/magdala/" className="font-semibold text-primary underline underline-offset-4">Magdala</Link>.</li>
-          <li><strong>Galilee towns and the Jordan River:</strong> <Link to="/attractions/basilica-of-the-annunciation/" className="font-semibold text-primary underline underline-offset-4">Nazareth’s Basilica of the Annunciation</Link>, <Link to="/travel-blog/sea-of-galilee/" className="font-semibold text-primary underline underline-offset-4">Tiberias and the Sea of Galilee</Link>, and <Link to="/attractions/yardenit/" className="font-semibold text-primary underline underline-offset-4">Yardenit</Link>.</li>
+          <li><strong>Galilee towns and the Jordan River:</strong> <Link to="/attractions/basilica-of-the-annunciation/" className="font-semibold text-primary underline underline-offset-4">Nazareth’s Basilica of the Annunciation</Link>, <Link to="/attractions/sea-of-galilee/" className="font-semibold text-primary underline underline-offset-4">Tiberias and the Sea of Galilee</Link>, and <Link to="/attractions/yardenit/" className="font-semibold text-primary underline underline-offset-4">Yardenit</Link>.</li>
           <li><strong>Lower Galilee:</strong> <Link to="/attractions/mount-tabor/" className="font-semibold text-primary underline underline-offset-4">Mount Tabor</Link>.</li>
         </ul>
         <p className="mt-3 text-sm text-muted-foreground">I recommend choosing three to five sites, including Capernaum, and building a realistic day trip around your starting point, opening hours and travel times. If you're joining a shore excursion, allow enough time to return to Haifa Port.</p>
@@ -247,7 +247,7 @@ const page: AttractionDestinationContent = {
     { label: "Mount Tabor", to: "/attractions/mount-tabor/", note: "The Transfiguration church and scenic Lower Galilee viewpoints." },
   ],
   planningLinks: [
-    { label: "Sea of Galilee travel guide", to: "/travel-blog/sea-of-galilee/", description: "Places to see around the lake.", icon: "region" },
+    { label: "Sea of Galilee travel guide", to: "/attractions/sea-of-galilee/", description: "Places to see around the lake.", icon: "region" },
     { label: "7-day Israel itinerary", to: "/travel-blog/israel-itinerary-7-days/", description: "Plan a balanced week.", icon: "itinerary" },
     { label: "10-day Israel itinerary", to: "/travel-blog/israel-itinerary-10-days/", description: "Explore more without rushing.", icon: "itinerary" },
     { label: "Best time to visit Israel", to: "/travel-blog/best-time-to-visit-israel/", description: "Weather, seasons and holidays.", icon: "seasons" },

@@ -5,7 +5,6 @@ import {
   type AttractionDestinationContent,
 } from "@/components/AttractionDestinationPage";
 import { mountPrecipiceSite } from "@/data/mountPrecipiceSite";
-import { carRentalAffiliateUrl } from "@/lib/car-rental-affiliate";
 import galileePhoto from "@/assets/home/hero-galilee-sm.webp";
 
 const inlineLink = "font-semibold text-primary underline underline-offset-4";
@@ -107,7 +106,7 @@ export const mountPrecipiceDestinationContent: AttractionDestinationContent = {
           </article>
           <article className="rounded-xl border bg-card p-4">
             <div className="flex items-center gap-2"><BusFront className="h-5 w-5 text-primary" aria-hidden="true" /><h3 className="font-semibold">By public transport</h3></div>
-            <p className="mt-2 text-sm leading-relaxed">A useful nearby bus stop to look up is <strong>Beit Al-Hikma School / Al-Qafza (בי״ס בית אל-חכמה/אל-קפזה)</strong>, on the southern side of Nazareth. The walk from this stop to Mount Precipice is not the same as the short paved path from the hilltop car park: check the uphill route, pavements and return journey before setting out. Use the <a href="https://bus.gov.il/en/home" target="_blank" rel="noopener noreferrer" className={inlineLink}>official public transport planner</a> to confirm a suitable service for your date. For several regional stops, consider <a href={carRentalAffiliateUrl("/attractions/mount-precipice/")} target="_blank" rel="sponsored noopener noreferrer" className={inlineLink}>renting a car</a>, <Link to="/tours/nazareth-sea-of-galilee/" className={inlineLink}>comparing guided tours</Link> or <a href="#contact" className={inlineLink}>arranging a private driver</a>.</p>
+            <p className="mt-2 text-sm leading-relaxed">A useful nearby bus stop to look up is <strong>Beit Al-Hikma School / Al-Qafza (בי״ס בית אל-חכמה/אל-קפזה)</strong>, on the southern side of Nazareth. The walk from this stop to Mount Precipice is not the same as the short paved path from the hilltop car park: check the uphill route, pavements and return journey before setting out. Use the <a href="https://bus.gov.il/en/home" target="_blank" rel="noopener noreferrer" className={inlineLink}>official public transport planner</a> to confirm a suitable service for your date. For several regional stops, consider <Link to="/car-rental/" className={inlineLink}>renting a car</Link>, <Link to="/tours/nazareth-sea-of-galilee/" className={inlineLink}>comparing guided tours</Link> or <a href="#contact" className={inlineLink}>arranging a private driver</a>.</p>
           </article>
           <article className="rounded-xl border bg-card p-4">
             <div className="flex items-center gap-2"><Footprints className="h-5 w-5 text-primary" aria-hidden="true" /><h3 className="font-semibold">On foot</h3></div>
@@ -138,7 +137,7 @@ export const mountPrecipiceDestinationContent: AttractionDestinationContent = {
         <ul className="mt-3 list-disc space-y-2 pl-5 text-sm leading-relaxed sm:text-base">
           <li><strong>Nazareth:</strong> Visit the <Link to="/attractions/basilica-of-the-annunciation/" className={inlineLink}>Basilica of the Annunciation</Link>, then explore the old city at your own pace.</li>
           <li><strong>Lower Galilee:</strong> Add <Link to="/attractions/mount-tabor/" className={inlineLink}>Mount Tabor</Link> for its Church of the Transfiguration or <Link to="/attractions/tel-megiddo/" className={inlineLink}>Tel Megiddo</Link> for archaeology.</li>
-          <li><strong>A wider northern day:</strong> Continue towards the <Link to="/travel-blog/sea-of-galilee/" className={inlineLink}>Sea of Galilee</Link>, perhaps visiting <Link to="/attractions/magdala/" className={inlineLink}>Magdala</Link> or <Link to="/attractions/yardenit/" className={inlineLink}>Yardenit</Link>.</li>
+          <li><strong>A wider northern day:</strong> Continue towards the <Link to="/attractions/sea-of-galilee/" className={inlineLink}>Sea of Galilee</Link>, perhaps visiting <Link to="/attractions/magdala/" className={inlineLink}>Magdala</Link> or <Link to="/attractions/yardenit/" className={inlineLink}>Yardenit</Link>.</li>
         </ul>
       </div>
     </div>
@@ -192,7 +191,7 @@ export const mountPrecipiceDestinationContent: AttractionDestinationContent = {
     { label: "Mount of Beatitudes", to: "/attractions/mount-of-beatitudes/", note: "Gardens and a hilltop church above the lake." },
   ],
   planningLinks: [
-    { label: "Sea of Galilee guide", to: "/travel-blog/sea-of-galilee/", description: "Discover Tiberias and the northern holy sites.", icon: "region" },
+    { label: "Sea of Galilee guide", to: "/attractions/sea-of-galilee/", description: "Discover Tiberias and the northern holy sites.", icon: "region" },
     { label: "7-day Israel itinerary", to: "/travel-blog/israel-itinerary-7-days/", description: "Include Nazareth and Lower Galilee.", icon: "itinerary" },
     { label: "10-day Israel itinerary", to: "/travel-blog/israel-itinerary-10-days/", description: "Travel through Galilee with time to explore.", icon: "itinerary" },
     { label: "Best time to visit Israel", to: "/travel-blog/best-time-to-visit-israel/", description: "Prepare for weather and seasonal conditions.", icon: "seasons" },

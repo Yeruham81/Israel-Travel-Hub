@@ -110,7 +110,7 @@ export const stayGuideGroups: Record<Region, GuideGroups> = {
   haifa: {
     name: "Haifa",
     local: [
-      card("Haifa travel guide", "/travel-blog/haifa/", "Explore the city's landmarks and neighbourhoods.", haifaOverview, "Haifa city and hillside"),
+      card("Haifa travel guide", "/attractions/haifa/", "Explore the city's landmarks and neighbourhoods.", haifaOverview, "Haifa city and hillside"),
       card("Museums in Haifa", "/travel-blog/museums-in-haifa/", "Find museums and cultural stops on Mount Carmel.", haifaMuseums, "Haifa museum and exhibits"),
       card("Acre (Akko)", "/attractions/akko-acre/", "Discover the historic walled port city close to Haifa.", akkoPort, "Historic coastal stone buildings in Acre"),
       card("Haifa shore excursions", "/shore-excursions/haifa/", "Explore the port region and excursions from Haifa.", haifaPort, "Port and coastline at Haifa"),
@@ -148,7 +148,7 @@ export const stayGuideGroups: Record<Region, GuideGroups> = {
   deadsea: {
     name: "the Dead Sea",
     local: [
-      card("The Dead Sea visitor guide", "/travel-blog/the-dead-sea/", "Learn about swimming, salt and practical conditions.", deadSeaPhoto, "Dead Sea beachfront and salt water"),
+      card("The Dead Sea visitor guide", "/attractions/dead-sea/", "Learn about swimming, salt and practical conditions.", deadSeaPhoto, "Dead Sea beachfront and salt water"),
       card("Dead Sea attractions", "/travel-blog/dead-sea-attractions/", "Compare natural sites and stops around the region.", deadSeaMudBathing, "Visitor enjoying a Dead Sea mineral mud treatment by the shoreline"),
       card("Ein Gedi", "/attractions/ein-gedi/", "Plan a visit to the springs and nature reserve.", einGediPhoto, "Waterfall and green cliffs in Ein Gedi Nature Reserve"),
       card("Masada", "/attractions/masada/", "Visit the historic desert fortress near the shore.", masadaPhoto, "Masada and Dead Sea landscape"),

@@ -81,8 +81,8 @@ describe("Rosh Hanikra attraction guide", () => {
     expect(article).not.toContain("Screenings are subject to");
     expect(article).toContain("not a swimming beach");
     expect(article).toContain("https://bus.gov.il/en/home");
-    expect(article).toContain('carRentalAffiliateUrl("/attractions/rosh-hanikra/")');
-    expect(article).toContain('rel="sponsored noopener noreferrer"');
+    expect(article).toContain('to="/car-rental/"');
+    expect(article).not.toContain("carRentalAffiliateUrl");
     expect(article).toContain('data-testid="rosh-hanikra-location-map"');
     expect(article).toContain('data-testid="rosh-hanikra-visitor-hours"');
     expect(article).toContain('data-testid="rosh-hanikra-visitor-essentials"');

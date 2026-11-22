@@ -5,7 +5,6 @@ import {
   type AttractionDestinationContent,
 } from "@/components/AttractionDestinationPage";
 import { qasrElYahudSite } from "@/data/qasrElYahudSite";
-import { carRentalAffiliateUrl } from "@/lib/car-rental-affiliate";
 import riverbankPhoto from "@/assets/guides/dead-sea-excursions/jordan-river-qasr-al-yahud.webp";
 import ceremonyPhoto from "@/assets/guides/qasr-el-yahud.jpg";
 const jordanRiverTourPhoto = "/images/attractions/jordan-river-baptism.webp";
@@ -111,7 +110,7 @@ export const qasrElYahudDestinationContent: AttractionDestinationContent = {
         <div className="space-y-3">
           <article className="rounded-xl border bg-card p-4">
             <div className="flex items-center gap-2"><CarFront className="h-5 w-5 text-primary" aria-hidden="true"/><h3 className="font-semibold">By car or private driver</h3></div>
-            <p className="mt-2 text-sm leading-relaxed">From Jerusalem, take Route 1 east toward the Dead Sea, then Route 90 north and follow the signs to Qasr el-Yahud. In Waze, search <strong>Kasr el Yahud – The Baptismal Site – The Jordan Pass</strong>. A <a href={carRentalAffiliateUrl("/attractions/qasr-el-yahud/")} target="_blank" rel="sponsored noopener noreferrer" className={inlineLink}>rental car</a> or <a href="#contact" className={inlineLink}>prearranged driver</a> makes this an easy regional stop. With a rental car, confirm that your agreement and insurance permit the exact route before setting out.</p>
+            <p className="mt-2 text-sm leading-relaxed">From Jerusalem, take Route 1 east toward the Dead Sea, then Route 90 north and follow the signs to Qasr el-Yahud. In Waze, search <strong>Kasr el Yahud – The Baptismal Site – The Jordan Pass</strong>. A <Link to="/car-rental/" className={inlineLink}>rental car</Link> or <a href="#contact" className={inlineLink}>prearranged driver</a> makes this an easy regional stop. With a rental car, confirm that your agreement and insurance permit the exact route before setting out.</p>
             <a href={routeDirections} target="_blank" rel="noopener noreferrer" className="mt-3 inline-flex items-center gap-1 text-sm font-semibold text-primary hover:underline">Driving directions <ArrowUpRight className="h-3.5 w-3.5" aria-hidden="true"/></a>
           </article>
           <article className="rounded-xl border bg-card p-4">
@@ -205,7 +204,7 @@ export const qasrElYahudDestinationContent: AttractionDestinationContent = {
   planningLinks: [
     { label: "Baptism in the Jordan River", to: "/travel-blog/baptism-in-the-jordan-river/", description: "Compare Qasr el-Yahud and Yardenit.", icon: "region" },
     { label: "Jerusalem to the Dead Sea", to: "/travel-blog/jerusalem-to-the-dead-sea/", description: "Plan the route and nearby stops.", icon: "itinerary" },
-    { label: "The Dead Sea visitor guide", to: "/travel-blog/the-dead-sea/", description: "Beaches, facilities and distances.", icon: "region" },
+    { label: "The Dead Sea visitor guide", to: "/attractions/dead-sea/", description: "Beaches, facilities and distances.", icon: "region" },
     { label: "Masada National Park", to: "/attractions/masada/", description: "Plan another Judean Desert visit.", icon: "itinerary" },
     { label: "Getting around Israel", to: "/travel-blog/getting-around-israel/", description: "Compare road and public transport.", icon: "transport" },
     { label: "7-day Israel itinerary", to: "/travel-blog/israel-itinerary-7-days/", description: "Build a varied city and desert route.", icon: "itinerary" },

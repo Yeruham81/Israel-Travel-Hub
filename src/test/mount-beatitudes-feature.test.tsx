@@ -51,9 +51,9 @@ describe("Mount of Beatitudes individual attraction upgrade", () => {
     expect(content.planningLinks).toHaveLength(6);
     expect(content.faqs?.length).toBeGreaterThanOrEqual(6);
     expect(article).toContain('to="/tours/nazareth-sea-of-galilee/"');
-    expect(article).toContain('carRentalAffiliateUrl("/attractions/mount-of-beatitudes/")');
+    expect(article).toContain('to="/car-rental/"');
     expect(article).toContain('href="#contact"');
-    expect(article).toContain('rel="sponsored noopener noreferrer"');
+    expect(article).not.toContain("carRentalAffiliateUrl");
     expect(article).toContain("three to five stops");
     expect(content.sources).toHaveLength(4);
     expect(content.sources.every(s => s.url.startsWith("https://"))).toBe(true);

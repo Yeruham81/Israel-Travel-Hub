@@ -64,8 +64,8 @@ describe("Ein Gedi upgraded attraction guide", () => {
     expect(article).toContain('data-testid="ein-gedi-three-entrances"');
     expect(article).toContain('data-testid="ein-gedi-map"');
     expect(article).toContain('href="#contact"');
-    expect(article).toContain('rel="sponsored noopener noreferrer"');
-    expect(article).toContain("carRentalAffiliateUrl");
+    expect(article).not.toContain("carRentalAffiliateUrl");
+    expect(article).toContain('to="/car-rental/"');
     expect(article).toContain('to="/tours/masada-dead-sea/"');
   });
 

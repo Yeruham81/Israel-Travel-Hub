@@ -5,7 +5,6 @@ import {
   type AttractionDestinationContent,
 } from "@/components/AttractionDestinationPage";
 import { annunciationSite } from "@/data/annunciationSite";
-import { carRentalAffiliateUrl } from "@/lib/car-rental-affiliate";
 import nazarethPhoto from "@/assets/guides/2026-10/basilica-of-the-annunciation.webp";
 
 const inlineLink = "font-semibold text-primary underline underline-offset-4";
@@ -116,7 +115,7 @@ export const annunciationDestinationContent: AttractionDestinationContent = {
           </article>
           <article className="rounded-xl border bg-card p-4">
             <div className="flex items-center gap-2"><BusFront className="h-5 w-5 text-primary" aria-hidden="true" /><h3 className="font-semibold">By public transport</h3></div>
-            <p className="mt-2 text-sm leading-relaxed">Many buses serve the <strong>Nazareth Central Station / Paul VI Street</strong> area, within walking distance of the church. Check where your particular service stops, the walking approach and the return journey through the <a href="https://bus.gov.il/en/home" target="_blank" rel="noopener noreferrer" className={inlineLink}>official public transport planner</a>. For a wider Galilee day, you can also <a href={carRentalAffiliateUrl("/attractions/basilica-of-the-annunciation/")} target="_blank" rel="sponsored noopener noreferrer" className={inlineLink}>rent a car</a>, <Link to="/tours/nazareth-sea-of-galilee/" className={inlineLink}>compare Nazareth tours</Link> or <a href="#contact" className={inlineLink}>arrange a private driver</a>.</p>
+            <p className="mt-2 text-sm leading-relaxed">Many buses serve the <strong>Nazareth Central Station / Paul VI Street</strong> area, within walking distance of the church. Check where your particular service stops, the walking approach and the return journey through the <a href="https://bus.gov.il/en/home" target="_blank" rel="noopener noreferrer" className={inlineLink}>official public transport planner</a>. For a wider Galilee day, you can also <Link to="/car-rental/" className={inlineLink}>rent a car</Link>, <Link to="/tours/nazareth-sea-of-galilee/" className={inlineLink}>compare Nazareth tours</Link> or <a href="#contact" className={inlineLink}>arrange a private driver</a>.</p>
           </article>
           <article className="rounded-xl border bg-card p-4">
             <div className="flex items-center gap-2"><Footprints className="h-5 w-5 text-primary" aria-hidden="true" /><h3 className="font-semibold">On foot in Nazareth</h3></div>
@@ -148,7 +147,7 @@ export const annunciationDestinationContent: AttractionDestinationContent = {
         <ul className="mt-3 list-disc space-y-2 pl-5 text-sm leading-relaxed sm:text-base">
           <li><strong>In Nazareth:</strong> Explore the old city, then visit <Link to="/attractions/mount-precipice/" className={inlineLink}>Mount Precipice</Link> for views over the Jezreel Valley.</li>
           <li><strong>Lower Galilee:</strong> Combine Nazareth with <Link to="/attractions/mount-tabor/" className={inlineLink}>Mount Tabor</Link> or the archaeology of <Link to="/attractions/tel-megiddo/" className={inlineLink}>Tel Megiddo</Link>.</li>
-          <li><strong>On a longer northern route:</strong> Continue towards <Link to="/attractions/magdala/" className={inlineLink}>Magdala</Link>, <Link to="/attractions/yardenit/" className={inlineLink}>Yardenit</Link> or the <Link to="/travel-blog/sea-of-galilee/" className={inlineLink}>Sea of Galilee</Link>.</li>
+          <li><strong>On a longer northern route:</strong> Continue towards <Link to="/attractions/magdala/" className={inlineLink}>Magdala</Link>, <Link to="/attractions/yardenit/" className={inlineLink}>Yardenit</Link> or the <Link to="/attractions/sea-of-galilee/" className={inlineLink}>Sea of Galilee</Link>.</li>
         </ul>
       </div>
     </div>
@@ -203,7 +202,7 @@ export const annunciationDestinationContent: AttractionDestinationContent = {
     { label: "Mount of Beatitudes", to: "/attractions/mount-of-beatitudes/", note: "Gardens and a church overlooking the lake." },
   ],
   planningLinks: [
-    { label: "Sea of Galilee travel guide", to: "/travel-blog/sea-of-galilee/", description: "Discover Tiberias and other holy sites.", icon: "region" },
+    { label: "Sea of Galilee travel guide", to: "/attractions/sea-of-galilee/", description: "Discover Tiberias and other holy sites.", icon: "region" },
     { label: "7-day Israel itinerary", to: "/travel-blog/israel-itinerary-7-days/", description: "Include Nazareth and northern Israel.", icon: "itinerary" },
     { label: "10-day Israel itinerary", to: "/travel-blog/israel-itinerary-10-days/", description: "Travel through Galilee at a gentler pace.", icon: "itinerary" },
     { label: "Best time to visit Israel", to: "/travel-blog/best-time-to-visit-israel/", description: "Plan for seasons and feast days.", icon: "seasons" },

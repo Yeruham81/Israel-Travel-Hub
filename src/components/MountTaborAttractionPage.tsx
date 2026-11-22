@@ -5,7 +5,6 @@ import {
   type AttractionDestinationContent,
 } from "@/components/AttractionDestinationPage";
 import { mountTaborSite } from "@/data/mountTaborSite";
-import { carRentalAffiliateUrl } from "@/lib/car-rental-affiliate";
 import galileePhoto from "@/assets/home/hero-galilee-sm.webp";
 
 const inlineLink = "font-semibold text-primary underline underline-offset-4";
@@ -108,7 +107,7 @@ export const mountTaborDestinationContent: AttractionDestinationContent = {
           </article>
           <article className="rounded-xl border bg-card p-4">
             <div className="flex items-center gap-2"><BusFront className="h-5 w-5 text-primary" aria-hidden="true" /><h3 className="font-semibold">By public transport</h3></div>
-            <p className="mt-2 text-sm leading-relaxed">Bus routes <strong>350 and 352</strong> serve <strong>Har Tabor Terminal (מסוף הר תבור)</strong> in the Shibli area, below the summit. From there, arrange a local taxi for the steep winding road to the basilica. Check the bus route, service frequency and return times in the <a href="https://bus.gov.il/en/home" target="_blank" rel="noopener noreferrer" className={inlineLink}>official public transport planner</a>. For several stops in one day, consider <a href={carRentalAffiliateUrl("/attractions/mount-tabor/")} target="_blank" rel="sponsored noopener noreferrer" className={inlineLink}>renting a car</a>, joining a <Link to="/tours/nazareth-sea-of-galilee/" className={inlineLink}>Galilee tour</Link> or <a href="#contact" className={inlineLink}>arranging a private driver</a>.</p>
+            <p className="mt-2 text-sm leading-relaxed">Bus routes <strong>350 and 352</strong> serve <strong>Har Tabor Terminal (מסוף הר תבור)</strong> in the Shibli area, below the summit. From there, arrange a local taxi for the steep winding road to the basilica. Check the bus route, service frequency and return times in the <a href="https://bus.gov.il/en/home" target="_blank" rel="noopener noreferrer" className={inlineLink}>official public transport planner</a>. For several stops in one day, consider <Link to="/car-rental/" className={inlineLink}>renting a car</Link>, joining a <Link to="/tours/nazareth-sea-of-galilee/" className={inlineLink}>Galilee tour</Link> or <a href="#contact" className={inlineLink}>arranging a private driver</a>.</p>
           </article>
           <article className="rounded-xl border bg-card p-4">
             <div className="flex items-center gap-2"><Footprints className="h-5 w-5 text-primary" aria-hidden="true" /><h3 className="font-semibold">On foot around the summit</h3></div>
@@ -140,7 +139,7 @@ export const mountTaborDestinationContent: AttractionDestinationContent = {
         <ul className="mt-3 list-disc space-y-2 pl-5 text-sm leading-relaxed sm:text-base">
           <li><strong>Nazareth:</strong> Combine Mount Tabor with the <Link to="/attractions/basilica-of-the-annunciation/" className={inlineLink}>Basilica of the Annunciation</Link> and <Link to="/attractions/mount-precipice/" className={inlineLink}>Mount Precipice</Link>.</li>
           <li><strong>Jezreel Valley:</strong> Add <Link to="/attractions/tel-megiddo/" className={inlineLink}>Tel Megiddo</Link> if archaeology interests you.</li>
-          <li><strong>A longer northern day:</strong> Visit <Link to="/attractions/magdala/" className={inlineLink}>Magdala</Link>, the <Link to="/travel-blog/sea-of-galilee/" className={inlineLink}>Sea of Galilee</Link> or <Link to="/attractions/yardenit/" className={inlineLink}>Yardenit</Link> if your schedule allows.</li>
+          <li><strong>A longer northern day:</strong> Visit <Link to="/attractions/magdala/" className={inlineLink}>Magdala</Link>, the <Link to="/attractions/sea-of-galilee/" className={inlineLink}>Sea of Galilee</Link> or <Link to="/attractions/yardenit/" className={inlineLink}>Yardenit</Link> if your schedule allows.</li>
         </ul>
       </div>
     </div>
@@ -194,7 +193,7 @@ export const mountTaborDestinationContent: AttractionDestinationContent = {
     { label: "Mount of Beatitudes", to: "/attractions/mount-of-beatitudes/", note: "Hilltop church, gardens and lake views." },
   ],
   planningLinks: [
-    { label: "Sea of Galilee travel guide", to: "/travel-blog/sea-of-galilee/", description: "Explore Tiberias and lakeside sites.", icon: "region" },
+    { label: "Sea of Galilee travel guide", to: "/attractions/sea-of-galilee/", description: "Explore Tiberias and lakeside sites.", icon: "region" },
     { label: "7-day Israel itinerary", to: "/travel-blog/israel-itinerary-7-days/", description: "Make time for Nazareth and the Galilee.", icon: "itinerary" },
     { label: "10-day Israel itinerary", to: "/travel-blog/israel-itinerary-10-days/", description: "Explore northern Israel at a gentler pace.", icon: "itinerary" },
     { label: "Best time to visit Israel", to: "/travel-blog/best-time-to-visit-israel/", description: "Consider seasons and religious holidays.", icon: "seasons" },

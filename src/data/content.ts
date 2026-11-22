@@ -675,7 +675,7 @@ export const cityStayGuides: Record<CityStayGuide["id"], CityStayGuide> = {
     related: [
       { label: "Tours & day trips", to: "/tours/", note: "Private drivers and guided days" },
       { label: "Car rental in Israel", to: "/car-rental/" },
-      { label: "Sea of Galilee visitor guide", to: "/travel-blog/sea-of-galilee/" },
+      { label: "Sea of Galilee visitor guide", to: "/attractions/sea-of-galilee/" },
       { label: "All accommodation", to: "/accommodation/" },
     ],
   },

@@ -368,7 +368,7 @@ const byId: Record<AirportJourneyId, AirportJourneyGuide> = {
       { label: "Sherut in Israel: current shared-taxi options", to: "/travel-blog/sherut-in-israel/" },
     ],
     planNext: [
-      { label: "Haifa travel guide", to: "/travel-blog/haifa/", note: "Plan the German Colony, Mount Carmel and the waterfront." },
+      { label: "Haifa travel guide", to: "/attractions/haifa/", note: "Plan the German Colony, Mount Carmel and the waterfront." },
       { label: "Museums in Haifa", to: "/travel-blog/museums-in-haifa/", note: "Discover museums and cultural sights on Mount Carmel and downtown." },
       { label: "Akko (Acre) travel guide", to: "/attractions/akko-acre/", note: "Explore the historic walled coastal city near Haifa." },
       { label: "Nazareth and the Basilica of the Annunciation", to: "/attractions/basilica-of-the-annunciation/", note: "Plan an excursion into the Galilee." },
@@ -504,7 +504,7 @@ const byId: Record<AirportJourneyId, AirportJourneyGuide> = {
       { label: "Getting around Israel: tickets and buses", to: "/travel-blog/getting-around-israel/" },
     ],
     planNext: [
-      { label: "The Dead Sea visitor guide", to: "/travel-blog/the-dead-sea/", note: "Learn about swimming, the resort areas and practical conditions." },
+      { label: "The Dead Sea visitor guide", to: "/attractions/dead-sea/", note: "Learn about swimming, the resort areas and practical conditions." },
       { label: "Dead Sea attractions", to: "/travel-blog/dead-sea-attractions/", note: "Choose viewpoints, reserves and scenic stops near the shore." },
       { label: "Ein Gedi visitor guide", to: "/attractions/ein-gedi/", note: "Plan the nature reserve and its separate location from Ein Bokek." },
       { label: "Israel itinerary: five days", to: "/travel-blog/israel-itinerary-5-days/", note: "Combine a Dead Sea stay with nearby destinations." },

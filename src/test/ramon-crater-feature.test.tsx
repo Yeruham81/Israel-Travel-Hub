@@ -51,7 +51,7 @@ describe("Ramon Crater upgraded attraction guide", () => {
     expect(article).toContain('data-testid="ramon-three-stops"');
     expect(article).toContain('data-testid="ramon-panorama"');
     expect(article).toContain('href="#contact"');
-    expect(article).toContain('rel="sponsored noopener noreferrer"');
+    expect(article).not.toContain("carRentalAffiliateUrl");
     expect(article).toContain('to="/tours/negev-desert-ramon-crater/"');
   });
 

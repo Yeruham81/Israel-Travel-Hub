@@ -5,7 +5,6 @@ import {
   type AttractionDestinationContent,
 } from "@/components/AttractionDestinationPage";
 import { masadaSite } from "@/data/masadaSite";
-import { carRentalAffiliateUrl } from "@/lib/car-rental-affiliate";
 import palacePhoto from "@/assets/guides/dead-sea-excursions/masada-palace.webp";
 import ruinsPhoto from "@/assets/guides/dead-sea-excursions/masada-ruins.webp";
 import snakePathPhoto from "@/assets/guides/dead-sea-excursions/masada-snake-path.webp";
@@ -183,7 +182,7 @@ export const masadaDestinationContent: AttractionDestinationContent = {
         <div className="space-y-3">
           <article className="rounded-xl border bg-card p-4">
             <div className="flex items-center gap-2"><CarFront className="h-5 w-5 text-primary"/><h3 className="font-semibold">By car or private driver</h3></div>
-            <p className="mt-2 text-sm leading-relaxed">The east-side cable-car complex is around 18 km south of Ein Gedi and 12 km north of Ein Bokek. <a href={carRentalAffiliateUrl("/attractions/masada/")} rel="sponsored noopener noreferrer" target="_blank" className={inlineLink}>Renting a car</a> is practical for combining stops, and a <a href="#contact" className={inlineLink}>private driver</a> can arrange a customized Dead Sea itinerary.</p>
+            <p className="mt-2 text-sm leading-relaxed">The east-side cable-car complex is around 18 km south of Ein Gedi and 12 km north of Ein Bokek. <Link to="/car-rental/" className={inlineLink}>Renting a car</Link> is practical for combining stops, and a <a href="#contact" className={inlineLink}>private driver</a> can arrange a customized Dead Sea itinerary.</p>
           </article>
           <article className="rounded-xl border bg-card p-4">
             <div className="flex items-center gap-2"><BusFront className="h-5 w-5 text-primary"/><h3 className="font-semibold">By public transport</h3></div>
@@ -277,7 +276,7 @@ export const masadaDestinationContent: AttractionDestinationContent = {
   ],
   planningLinks: [
     { label: "Jerusalem to the Dead Sea", to: "/travel-blog/jerusalem-to-the-dead-sea/", description: "Build a realistic route from Jerusalem.", icon: "itinerary" },
-    { label: "The Dead Sea visitor guide", to: "/travel-blog/the-dead-sea/", description: "Beaches, distances and day-trip tips.", icon: "region" },
+    { label: "The Dead Sea visitor guide", to: "/attractions/dead-sea/", description: "Beaches, distances and day-trip tips.", icon: "region" },
     { label: "Getting around Israel", to: "/travel-blog/getting-around-israel/", description: "Transport choices for longer journeys.", icon: "transport" },
     { label: "7-day Israel itinerary", to: "/travel-blog/israel-itinerary-7-days/", description: "Plan a week around the country's highlights.", icon: "itinerary" },
     { label: "10-day Israel itinerary", to: "/travel-blog/israel-itinerary-10-days/", description: "Allow more time for the desert and coast.", icon: "itinerary" },

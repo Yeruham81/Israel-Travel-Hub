@@ -5,7 +5,6 @@ import {
   type AttractionDestinationContent,
 } from "@/components/AttractionDestinationPage";
 import { caesareaSite } from "@/data/caesareaSite";
-import { carRentalAffiliateUrl } from "@/lib/car-rental-affiliate";
 import theaterPhoto from "@/assets/home/caesarea-theatre.webp";
 import coastPanorama from "@/assets/home/hero-refresh-caesarea-coast-v4-large.webp";
 import akkoPhoto from "@/assets/shore-excursions/akko-port.jpg";
@@ -136,7 +135,7 @@ export const caesareaDestinationContent: AttractionDestinationContent = {
         <div className="space-y-3">
           <article className="rounded-xl border bg-card p-4">
             <div className="flex items-center gap-2"><CarFront className="h-5 w-5 text-primary" aria-hidden="true" /><h3 className="font-semibold">By car or private driver</h3></div>
-            <p className="mt-2 text-sm leading-relaxed">Follow signs for Caesarea National Park from the coastal road. For the theater start at the southern entrance; for the harbor visitors' center, use the northern entrance. <a href={carRentalAffiliateUrl("/attractions/caesarea/")} target="_blank" rel="sponsored noopener noreferrer" className={inlineLink}>A rental car</a> or <a href="#contact" className={inlineLink}>private driver</a> also makes it easier to include the separate aqueduct stop.</p>
+            <p className="mt-2 text-sm leading-relaxed">Follow signs for Caesarea National Park from the coastal road. For the theater start at the southern entrance; for the harbor visitors' center, use the northern entrance. <Link to="/car-rental/" className={inlineLink}>A rental car</Link> or <a href="#contact" className={inlineLink}>private driver</a> also makes it easier to include the separate aqueduct stop.</p>
             <a href={drivingDirections} target="_blank" rel="noopener noreferrer" className="mt-3 inline-flex items-center gap-1 text-sm font-semibold text-primary hover:underline">Driving directions <ArrowUpRight className="h-3.5 w-3.5" aria-hidden="true" /></a>
           </article>
           <article className="rounded-xl border bg-card p-4">
@@ -171,7 +170,7 @@ export const caesareaDestinationContent: AttractionDestinationContent = {
         <h3 className="font-serif text-xl font-semibold">Combine Caesarea with a coastal day trip</h3>
         <p className="mt-3 text-sm leading-relaxed sm:text-base">I recommend choosing two or three main stops for a full day, depending on your departure city and travel time.</p>
         <ul className="mt-3 list-disc space-y-2 pl-5 text-sm leading-relaxed sm:text-base">
-          <li><strong>Heading north:</strong> Continue to <Link to="/travel-blog/haifa/" className={inlineLink}>Haifa</Link> for the Bahá'í Gardens viewpoints and German Colony.</li>
+          <li><strong>Heading north:</strong> Continue to <Link to="/attractions/haifa/" className={inlineLink}>Haifa</Link> for the Bahá'í Gardens viewpoints and German Colony.</li>
           <li><strong>History-focused coast:</strong> Pair Caesarea with <Link to="/attractions/akko-acre/" className={inlineLink}>Old Akko</Link> if you have a full day and an early start.</li>
           <li><strong>Heading south:</strong> Combine the ruins with <Link to="/attractions/jaffa/" className={inlineLink}>Old Jaffa</Link> for another historic harbor setting.</li>
         </ul>
@@ -224,7 +223,7 @@ export const caesareaDestinationContent: AttractionDestinationContent = {
   ],
   nearby: [
     { label: "Old Akko", to: "/attractions/akko-acre/", note: "Crusader halls, lively markets and a historic working harbor farther north." },
-    { label: "Haifa", to: "/travel-blog/haifa/", note: "The Bahá'í Gardens viewpoints and German Colony on the northern coast." },
+    { label: "Haifa", to: "/attractions/haifa/", note: "The Bahá'í Gardens viewpoints and German Colony on the northern coast." },
     { label: "Old Jaffa", to: "/attractions/jaffa/", note: "A second historic harbor, stone lanes and markets to the south." },
     { label: "Rosh Hanikra", to: "/attractions/rosh-hanikra/", note: "Sea grottoes and dramatic cliffs on a longer northern coastal route." },
     { label: "Tel Megiddo", to: "/attractions/tel-megiddo/", note: "Archaeology and views over the Jezreel Valley on an inland detour." },
@@ -235,7 +234,7 @@ export const caesareaDestinationContent: AttractionDestinationContent = {
     { label: "Best time to visit Israel", to: "/travel-blog/best-time-to-visit-israel/", description: "Weather and season-by-season travel advice.", icon: "seasons" },
     { label: "7-day Israel itinerary", to: "/travel-blog/israel-itinerary-7-days/", description: "Build a balanced coast and Galilee route.", icon: "itinerary" },
     { label: "10-day Israel itinerary", to: "/travel-blog/israel-itinerary-10-days/", description: "Plan more time for the northern coast.", icon: "itinerary" },
-    { label: "Haifa visitor guide", to: "/travel-blog/haifa/", description: "Explore the Carmel and northern shore.", icon: "region" },
+    { label: "Haifa visitor guide", to: "/attractions/haifa/", description: "Explore the Carmel and northern shore.", icon: "region" },
     { label: "Ben Gurion Airport arrival tips", to: "/travel-blog/ben-gurion-airport-arrival-tips/", description: "Plan your onward journey after landing.", icon: "arrival" },
   ],
   sources: [

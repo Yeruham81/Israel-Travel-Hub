@@ -15,7 +15,6 @@ import { Route as CarRentalRouteImport } from './routes/car-rental'
 import { Route as PrivacyPolicyRouteImport } from './routes/privacy-policy'
 import { Route as PrivateDriverInIsraelRouteImport } from './routes/private-driver-in-israel'
 import { Route as TermsOfUseRouteImport } from './routes/terms-of-use'
-import { Route as TicketsRouteImport } from './routes/tickets'
 import { Route as AccommodationIndexRouteImport } from './routes/accommodation.index'
 import { Route as AirportTransfersIndexRouteImport } from './routes/airport-transfers.index'
 import { Route as AirportTransfersEinBokekRouteImport } from './routes/airport-transfers.ein-bokek'
@@ -164,11 +163,6 @@ const PrivateDriverInIsraelRoute = PrivateDriverInIsraelRouteImport.update({
 const TermsOfUseRoute = TermsOfUseRouteImport.update({
   id: '/terms-of-use',
   path: '/terms-of-use',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const TicketsRoute = TicketsRouteImport.update({
-  id: '/tickets',
-  path: '/tickets',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AccommodationIndexRoute = AccommodationIndexRouteImport.update({
@@ -849,7 +843,6 @@ export interface FileRoutesByFullPath {
   '/privacy-policy': typeof PrivacyPolicyRoute
   '/private-driver-in-israel': typeof PrivateDriverInIsraelRoute
   '/terms-of-use': typeof TermsOfUseRoute
-  '/tickets': typeof TicketsRoute
   '/airport-transfers/ein-bokek': typeof AirportTransfersEinBokekRoute
   '/airport-transfers/haifa': typeof AirportTransfersHaifaRoute
   '/airport-transfers/jerusalem': typeof AirportTransfersJerusalemRoute
@@ -977,7 +970,6 @@ export interface FileRoutesByTo {
   '/privacy-policy': typeof PrivacyPolicyRoute
   '/private-driver-in-israel': typeof PrivateDriverInIsraelRoute
   '/terms-of-use': typeof TermsOfUseRoute
-  '/tickets': typeof TicketsRoute
   '/airport-transfers/ein-bokek': typeof AirportTransfersEinBokekRoute
   '/airport-transfers/haifa': typeof AirportTransfersHaifaRoute
   '/airport-transfers/jerusalem': typeof AirportTransfersJerusalemRoute
@@ -1106,7 +1098,6 @@ export interface FileRoutesById {
   '/privacy-policy': typeof PrivacyPolicyRoute
   '/private-driver-in-israel': typeof PrivateDriverInIsraelRoute
   '/terms-of-use': typeof TermsOfUseRoute
-  '/tickets': typeof TicketsRoute
   '/airport-transfers/ein-bokek': typeof AirportTransfersEinBokekRoute
   '/airport-transfers/haifa': typeof AirportTransfersHaifaRoute
   '/airport-transfers/jerusalem': typeof AirportTransfersJerusalemRoute
@@ -1236,7 +1227,6 @@ export interface FileRouteTypes {
     | '/privacy-policy'
     | '/private-driver-in-israel'
     | '/terms-of-use'
-    | '/tickets'
     | '/airport-transfers/ein-bokek'
     | '/airport-transfers/haifa'
     | '/airport-transfers/jerusalem'
@@ -1364,7 +1354,6 @@ export interface FileRouteTypes {
     | '/privacy-policy'
     | '/private-driver-in-israel'
     | '/terms-of-use'
-    | '/tickets'
     | '/airport-transfers/ein-bokek'
     | '/airport-transfers/haifa'
     | '/airport-transfers/jerusalem'
@@ -1492,7 +1481,6 @@ export interface FileRouteTypes {
     | '/privacy-policy'
     | '/private-driver-in-israel'
     | '/terms-of-use'
-    | '/tickets'
     | '/airport-transfers/ein-bokek'
     | '/airport-transfers/haifa'
     | '/airport-transfers/jerusalem'
@@ -1621,7 +1609,6 @@ export interface RootRouteChildren {
   PrivacyPolicyRoute: typeof PrivacyPolicyRoute
   PrivateDriverInIsraelRoute: typeof PrivateDriverInIsraelRoute
   TermsOfUseRoute: typeof TermsOfUseRoute
-  TicketsRoute: typeof TicketsRoute
   AirportTransfersEinBokekRoute: typeof AirportTransfersEinBokekRoute
   AirportTransfersHaifaRoute: typeof AirportTransfersHaifaRoute
   AirportTransfersJerusalemRoute: typeof AirportTransfersJerusalemRoute
@@ -1785,13 +1772,6 @@ declare module '@tanstack/react-router' {
       path: '/terms-of-use'
       fullPath: '/terms-of-use'
       preLoaderRoute: typeof TermsOfUseRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/tickets': {
-      id: '/tickets'
-      path: '/tickets'
-      fullPath: '/tickets'
-      preLoaderRoute: typeof TicketsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/accommodation/': {
@@ -2637,7 +2617,6 @@ const rootRouteChildren: RootRouteChildren = {
   PrivacyPolicyRoute: PrivacyPolicyRoute,
   PrivateDriverInIsraelRoute: PrivateDriverInIsraelRoute,
   TermsOfUseRoute: TermsOfUseRoute,
-  TicketsRoute: TicketsRoute,
   AirportTransfersEinBokekRoute: AirportTransfersEinBokekRoute,
   AirportTransfersHaifaRoute: AirportTransfersHaifaRoute,
   AirportTransfersJerusalemRoute: AirportTransfersJerusalemRoute,

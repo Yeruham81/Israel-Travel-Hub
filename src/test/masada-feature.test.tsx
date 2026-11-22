@@ -89,8 +89,8 @@ describe("Masada upgraded attraction guide", () => {
     expect(page).toContain('data-testid="masada-visitor-essentials"');
     expect(page).toContain('data-testid="masada-two-entrances"');
     expect(page).toContain('data-testid="masada-location-map"');
-    expect(page).toContain("carRentalAffiliateUrl");
-    expect(page).toContain('rel="sponsored noopener noreferrer"');
+    expect(page).toContain('to="/car-rental/"');
+    expect(page).not.toContain("carRentalAffiliateUrl");
     expect(page).toContain('to="/tours/masada-dead-sea/"');
   });
 

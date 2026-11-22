@@ -54,7 +54,7 @@ const caesarea = L("Caesarea, Haifa and Akko tour options", "/tours/caesarea-hai
 const haifa = L("Haifa city guide", "/attractions/haifa/");
 const haifaHotels = L("Where to stay in Haifa", "/travel-blog/best-hotels-in-haifa/");
 const nazareth = L("Basilica of the Annunciation", "/attractions/basilica-of-the-annunciation/");
-const lake = L("Sea of Galilee guide", "/travel-blog/sea-of-galilee/");
+const lake = L("Sea of Galilee guide", "/attractions/sea-of-galilee/");
 const tiberiasHotels = L("Hotels in Tiberias", "/travel-blog/best-hotels-in-tiberias/");
 const akko = L("Akko Old City", "/attractions/akko-acre/");
 const baptism = L("Qasr el-Yahud visit guide", "/attractions/qasr-el-yahud/");
@@ -347,7 +347,7 @@ export const itineraries: Record<ItineraryId, ItineraryGuide> = {
       { day: 1, field: "overnight", phrase: "where to stay in Jerusalem", to: "/travel-blog/where-to-stay-in-jerusalem/" },
       { day: 2, field: "morning", phrase: "Masada National Park", to: "/attractions/masada/" },
       { day: 2, field: "morning", phrase: "how to get from Jerusalem to the Dead Sea", to: "/travel-blog/jerusalem-to-the-dead-sea/" },
-      { day: 2, field: "afternoon", phrase: "Dead Sea visitor guide", to: "/travel-blog/the-dead-sea/" },
+      { day: 2, field: "afternoon", phrase: "Dead Sea visitor guide", to: "/attractions/dead-sea/" },
       { day: 2, field: "afternoon", phrase: "Dead Sea attractions", to: "/travel-blog/dead-sea-attractions/" },
       { day: 2, field: "practical", phrase: "Masada and Dead Sea day tours", to: "/tours/masada-dead-sea/" },
       { day: 2, field: "practical", phrase: "Ein Gedi", to: "/attractions/ein-gedi/" },
@@ -496,7 +496,7 @@ export const itineraries: Record<ItineraryId, ItineraryGuide> = {
       { day: 1, field: "evening", phrase: "shopping in Jerusalem", to: "/travel-blog/shopping-in-jerusalem/" },
       { day: 1, field: "overnight", phrase: "where to stay in Jerusalem", to: "/travel-blog/where-to-stay-in-jerusalem/" },
       { day: 2, field: "morning", phrase: "Masada National Park", to: "/attractions/masada/" },
-      { day: 2, field: "afternoon", phrase: "Dead Sea visitor guide", to: "/travel-blog/the-dead-sea/" },
+      { day: 2, field: "afternoon", phrase: "Dead Sea visitor guide", to: "/attractions/dead-sea/" },
       { day: 2, field: "afternoon", phrase: "Dead Sea attractions guide", to: "/travel-blog/dead-sea-attractions/" },
       { day: 2, field: "afternoon", phrase: "Ein Gedi Nature Reserve", to: "/attractions/ein-gedi/" },
       { day: 2, field: "practical", phrase: "Masada and Dead Sea day tours", to: "/tours/masada-dead-sea/" },
@@ -655,7 +655,7 @@ export const itineraries: Record<ItineraryId, ItineraryGuide> = {
       { day: 2, field: "morning", phrase: "Mount of Olives", to: "/attractions/mount-of-olives/" },
       { day: 2, field: "practical", phrase: "Bethlehem", to: "/travel-blog/jerusalem-to-bethlehem/" },
       { day: 3, field: "morning", phrase: "Masada National Park", to: "/attractions/masada/" },
-      { day: 3, field: "afternoon", phrase: "Dead Sea visitor guide", to: "/travel-blog/the-dead-sea/" },
+      { day: 3, field: "afternoon", phrase: "Dead Sea visitor guide", to: "/attractions/dead-sea/" },
       { day: 3, field: "afternoon", phrase: "Ein Gedi", to: "/attractions/ein-gedi/" },
       { day: 3, field: "practical", phrase: "Masada and Dead Sea tours", to: "/tours/masada-dead-sea/" },
       { day: 3, field: "practical", phrase: "Jerusalem to Dead Sea guide", to: "/travel-blog/jerusalem-to-the-dead-sea/" },
@@ -666,7 +666,7 @@ export const itineraries: Record<ItineraryId, ItineraryGuide> = {
       { day: 5, field: "morning", phrase: "Mount of Beatitudes", to: "/attractions/mount-of-beatitudes/" },
       { day: 5, field: "afternoon", phrase: "Tabgha", to: "/attractions/tabgha/" },
       { day: 5, field: "afternoon", phrase: "Magdala", to: "/attractions/magdala/" },
-      { day: 5, field: "afternoon", phrase: "Sea of Galilee", to: "/travel-blog/sea-of-galilee/" },
+      { day: 5, field: "afternoon", phrase: "Sea of Galilee", to: "/attractions/sea-of-galilee/" },
       { day: 6, field: "morning", phrase: "Haifa", to: "/attractions/haifa/" },
       { day: 6, field: "practical", phrase: "guided coastal excursion", to: "/tours/caesarea-haifa-acre/" },
       { day: 6, field: "overnight", phrase: "Tel Aviv", to: "/travel-blog/where-to-stay-in-tel-aviv/" },
@@ -847,7 +847,7 @@ export const itineraries: Record<ItineraryId, ItineraryGuide> = {
       { day: 2, field: "morning", phrase: "Mount of Olives", to: "/attractions/mount-of-olives/" },
       { day: 2, field: "practical", phrase: "Bethlehem", to: "/travel-blog/jerusalem-to-bethlehem/" },
       { day: 3, field: "morning", phrase: "Masada National Park", to: "/attractions/masada/" },
-      { day: 3, field: "afternoon", phrase: "Dead Sea visitor guide", to: "/travel-blog/the-dead-sea/" },
+      { day: 3, field: "afternoon", phrase: "Dead Sea visitor guide", to: "/attractions/dead-sea/" },
       { day: 3, field: "afternoon", phrase: "Ein Gedi Nature Reserve", to: "/attractions/ein-gedi/" },
       { day: 3, field: "practical", phrase: "Masada and Dead Sea day tours", to: "/tours/masada-dead-sea/" },
       { day: 3, field: "practical", phrase: "Jerusalem to Dead Sea guide", to: "/travel-blog/jerusalem-to-the-dead-sea/" },
@@ -928,7 +928,7 @@ export const itineraries: Record<ItineraryId, ItineraryGuide> = {
     relatedGuides: [
       { title: "Jerusalem Old City", description: "Gates, historic quarters and walking routes.", to: "/attractions/old-city-jerusalem/", image: "itinerary-jerusalem-old-city" },
       { title: "Masada and the Dead Sea", description: "Desert sites, bathing precautions and access.", to: "/attractions/masada/", image: "itinerary-dead-sea-shore" },
-      { title: "Sea of Galilee", description: "Lakeside stops and heritage-site connections.", to: "/travel-blog/sea-of-galilee/", image: "magdala-archaeology" },
+      { title: "Sea of Galilee", description: "Lakeside stops and heritage-site connections.", to: "/attractions/sea-of-galilee/", image: "magdala-archaeology" },
       { title: "Akko Old City", description: "Crusader halls, markets and harbour heritage.", to: "/attractions/akko-acre/", image: "itinerary-10day-akko-aerial" },
       { title: "Haifa", description: "Bahá’í Gardens viewpoints and coastal sights.", to: "/attractions/haifa/", image: "EXISTING:haifa" },
       { title: "Getting around Israel", description: "Trains, buses and practical regional transport.", to: "/travel-blog/getting-around-israel/", image: "itinerary-train" },

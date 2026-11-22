@@ -17,7 +17,7 @@ import { migrationPhotos } from "@/data/guideMigrationPhotos";
 const updatedAt = "2026-11-21";
 const related = [
   { title: "Explore Haifa's attractions", to: "/attractions/haifa/" as const, note: "Gardens, viewpoints, neighbourhoods and the coast" },
-  { title: "Haifa travel guide", to: "/travel-blog/haifa/" as const, note: "Plan your time in the city, from the Carmel to the port" },
+  { title: "Haifa travel guide", to: "/attractions/haifa/" as const, note: "Plan your time in the city, from the Carmel to the port" },
   { title: "Where to stay in Haifa", to: "/travel-blog/best-hotels-in-haifa/" as const, note: "Compare practical hotel areas and neighbourhoods" },
   { title: "Haifa shore excursions", to: "/shore-excursions/haifa/" as const, note: "Plan a city visit around your cruise schedule" },
   { title: "Old Acre attractions", to: "/attractions/akko-acre/" as const, note: "Explore the historic coastal city just north of Haifa" },
@@ -248,7 +248,7 @@ export function HaifaMuseumsGuide() {
       <div className="grid grid-cols-2 gap-4 lg:grid-cols-3">{related.map(item=>{
         const photo=guideHeroPhotoForPath(item.to)
           ?? (item.to==="/shore-excursions/haifa/" ? getShorePort("haifa").photo
-          : item.to==="/travel-blog/haifa/" ? {src:"/images/attractions/haifa-german-colony.webp",alt:"Haifa German Colony and Mount Carmel streets"} : undefined);
+          : item.to==="/attractions/haifa/" ? {src:"/images/attractions/haifa-german-colony.webp",alt:"Haifa German Colony and Mount Carmel streets"} : undefined);
         return <Link key={item.to} to={item.to} className="editorial-card-link group flex h-full flex-col overflow-hidden rounded-xl border bg-card transition-colors hover:border-primary/50 hover:bg-secondary/30 hover:shadow-sm focus-visible:outline-2 focus-visible:outline-primary">
           {photo&&<img src={photo.src} alt={photo.alt} width={640} height={360} loading="lazy" decoding="async" className="aspect-[16/9] w-full object-cover"/>}
           <span className="flex flex-1 flex-col p-4"><strong className="text-base">{item.title}</strong><span className="mt-2 text-sm leading-relaxed text-muted-foreground">{item.note}</span></span>

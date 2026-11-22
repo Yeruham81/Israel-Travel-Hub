@@ -65,8 +65,8 @@ describe("Caesarea upgraded attraction guide", () => {
     expect(article).toContain('data-testid="caesarea-location-map"');
     expect(article).toContain("maps.google.com/maps?q=Caesarea%20National%20Park");
     expect(article).toContain("https://bus.gov.il/en/home");
-    expect(article).toContain('carRentalAffiliateUrl("/attractions/caesarea/")');
-    expect(article).toContain('rel="sponsored noopener noreferrer"');
+    expect(article).toContain('to="/car-rental/"');
+    expect(article).not.toContain("carRentalAffiliateUrl");
     expect(article).toContain('href="#contact"');
     expect(article).toContain('to="/tours/caesarea-haifa-acre/"');
     expect(article).not.toContain("SourceList");

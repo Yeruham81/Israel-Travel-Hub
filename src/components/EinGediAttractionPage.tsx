@@ -5,7 +5,6 @@ import {
   type AttractionDestinationContent,
 } from "@/components/AttractionDestinationPage";
 import { einGediSite } from "@/data/einGediSite";
-import { carRentalAffiliateUrl } from "@/lib/car-rental-affiliate";
 import rockGorgePhoto from "@/assets/guides/dead-sea-excursions/ein-gedi-rock-gorge.jpg";
 import ibexPhoto from "@/assets/guides/ein-gedi-ibex.webp";
 import oasisPhoto from "@/assets/guides/dead-sea-excursions/ein-gedi-oasis.webp";
@@ -163,7 +162,7 @@ export const einGediDestinationContent: AttractionDestinationContent = {
         <div className="space-y-3">
           <article className="rounded-xl border bg-card p-4">
             <div className="flex items-center gap-2"><CarFront className="h-5 w-5 text-primary" aria-hidden="true"/><h3 className="font-semibold">By car or private driver</h3></div>
-            <p className="mt-2 text-sm leading-relaxed">From Jerusalem, follow Route 1 east to the Dead Sea and Route 90 south. A <a href={carRentalAffiliateUrl("/attractions/ein-gedi/")} target="_blank" rel="sponsored noopener noreferrer" className={inlineLink}>rental car</a> or <a href="#contact" className={inlineLink}>private driver</a> makes it easy to include Masada or a Dead Sea beach on the same day. Always check flood-related road closures.</p>
+            <p className="mt-2 text-sm leading-relaxed">From Jerusalem, follow Route 1 east to the Dead Sea and Route 90 south. A <Link to="/car-rental/" className={inlineLink}>rental car</Link> or <a href="#contact" className={inlineLink}>private driver</a> makes it easy to include Masada or a Dead Sea beach on the same day. Always check flood-related road closures.</p>
           </article>
           <article className="rounded-xl border bg-card p-4">
             <div className="flex items-center gap-2"><BusFront className="h-5 w-5 text-primary" aria-hidden="true"/><h3 className="font-semibold">By bus</h3></div>
@@ -247,7 +246,7 @@ export const einGediDestinationContent: AttractionDestinationContent = {
     { label: "Mitzpe Ramon", to: "/attractions/mitzpe-ramon-crater/", note: "Ramon Crater landscapes on a longer Negev desert trip." },
   ],
   planningLinks: [
-    { label: "The Dead Sea visitor guide", to: "/travel-blog/the-dead-sea/", description: "Beaches, distances and useful local advice.", icon: "region" },
+    { label: "The Dead Sea visitor guide", to: "/attractions/dead-sea/", description: "Beaches, distances and useful local advice.", icon: "region" },
     { label: "Jerusalem to the Dead Sea", to: "/travel-blog/jerusalem-to-the-dead-sea/", description: "Build a realistic route from Jerusalem.", icon: "itinerary" },
     { label: "Dead Sea attractions", to: "/travel-blog/dead-sea-attractions/", description: "Choose your stops around the sea.", icon: "region" },
     { label: "Getting around Israel", to: "/travel-blog/getting-around-israel/", description: "Compare buses, drivers and rental cars.", icon: "transport" },

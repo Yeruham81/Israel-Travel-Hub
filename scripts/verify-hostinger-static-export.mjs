@@ -35,6 +35,26 @@ for (const value of urlStrings) {
   const file = join(root, rel);
   assert(existsSync(file), `Missing prerendered HTML for ${url.pathname}`);
   assert(statSync(file).size > 300, `Suspiciously empty HTML for ${url.pathname}`);
+  const html = readFileSync(file, "utf8");
+  const retiredDestinations = new Set([
+    "/travel-blog/haifa/", "/travel-blog/the-dead-sea/", "/travel-blog/sea-of-galilee/", "/tickets/",
+  ]);
+  for (const [, href] of html.matchAll(/<a\b[^>]*\bhref="([^"]+)"/gi)) {
+    const target = new URL(href.replaceAll("&amp;", "&"), url);
+    if (target.origin === origin) {
+      const normalized = target.pathname.replace(/\/+$/, "") + "/";
+      assert(!retiredDestinations.has(normalized), `Obsolete internal link ${href} on ${url.pathname}`);
+    }
+    if (url.pathname !== "/car-rental/") {
+      assert(!/(^|\.)discovercars\.(?:tpm\.li|com)$/.test(target.hostname),
+        `Car rental referral must lead through the internal guide: ${url.pathname}`);
+    }
+  }
+}
+assert(!paths.has("/tickets/"), "Removed tickets page must not appear in sitemap");
+assert(!existsSync(join(root, "tickets", "index.html")), "Removed tickets HTML must not be exported");
+for (const alias of ["/travel-blog/haifa/", "/travel-blog/the-dead-sea/", "/travel-blog/sea-of-galilee/"]) {
+  assert(!paths.has(alias), `Regional alias must not appear in sitemap: ${alias}`);
 }
 // Preserve established public URLs; titles do not require new slugs.
 const preservedRoutes = [

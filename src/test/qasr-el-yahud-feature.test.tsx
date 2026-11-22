@@ -72,8 +72,8 @@ describe("Qasr el-Yahud upgraded attraction guide", () => {
     expect(page).toContain('data-testid="qasr-baptism-guidance"');
     expect(page).toContain('data-testid="qasr-location-map"');
     expect(page).toContain('href={"tel:" + visit.sitePhoneInternational}');
-    expect(page).toContain("carRentalAffiliateUrl");
-    expect(page).toContain('rel="sponsored noopener noreferrer"');
+    expect(page).toContain('to="/car-rental/"');
+    expect(page).not.toContain("carRentalAffiliateUrl");
     expect(page).toContain('to="/tours/bethlehem-jericho-jordan-river/"');
     expect(page).toContain('to="/attractions/yardenit/"');
     expect(page).toContain('to="/travel-blog/baptism-in-the-jordan-river/"');

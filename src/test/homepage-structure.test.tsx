@@ -21,10 +21,11 @@ describe("homepage navigation and review sources", () => {
   });
   it("keeps six ordered primary entries and rental only in the sidebar", () => {
     expect(serviceDomains.map(x => x.label)).toEqual(["Airport transfers", "Tours & Day Trips", "Shore excursions", "Accommodation", "Attractions", "Travel guides"]);
-    expect(serviceDomains.some(x => x.to === "/car-rental/" || x.to === "/tickets/")).toBe(false);
+    expect(serviceDomains.map(x => x.to)).not.toContain("/car-rental/");
+    expect(serviceDomains.map(x => x.to)).not.toContain("/tickets/");
     const sidebar = allNavGroups.flatMap(group => group.items.filter(item => "to" in item));
     expect(sidebar.some(x => "to" in x && x.to === "/car-rental/")).toBe(true);
-    expect(sidebar.some(x => "to" in x && x.to === "/tickets/")).toBe(false);
+    expect(sidebar.flatMap(x => "to" in x ? [x.to] : [])).not.toContain("/tickets/");
   });
   it("keeps credited review excerpts concise, balanced and linked to Tripadvisor", () => {
     expect(tripadvisorReviews).toHaveLength(6);

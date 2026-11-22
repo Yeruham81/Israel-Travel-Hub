@@ -5,7 +5,6 @@ import {
   type AttractionDestinationContent,
 } from "@/components/AttractionDestinationPage";
 import { telMegiddoSite } from "@/data/telMegiddoSite";
-import { carRentalAffiliateUrl } from "@/lib/car-rental-affiliate";
 import galileePhoto from "@/assets/home/hero-galilee-sm.webp";
 
 const inlineLink = "font-semibold text-primary underline underline-offset-4";
@@ -112,7 +111,7 @@ export const telMegiddoDestinationContent: AttractionDestinationContent = {
           </article>
           <article className="rounded-xl border bg-card p-4">
             <div className="flex items-center gap-2"><BusFront className="h-5 w-5 text-primary" aria-hidden="true" /><h3 className="font-semibold">By public transport</h3></div>
-            <p className="mt-2 text-sm leading-relaxed">Look for services to <strong>Megiddo Antiquities Junction (מסעף מגידו עתיקות, stop 55407)</strong> on Route 66. Route 56 is among the services listed for the area. Check which stop serves your direction, the safe walk to the entrance and the return timetable using the <a href="https://bus.gov.il/en/home" target="_blank" rel="noopener noreferrer" className={inlineLink}>official public transport planner</a>. For several sites in one day, consider <a href={carRentalAffiliateUrl("/attractions/tel-megiddo/")} target="_blank" rel="sponsored noopener noreferrer" className={inlineLink}>renting a car</a>, <Link to="/tours/nazareth-sea-of-galilee/" className={inlineLink}>comparing northern Israel tours</Link> or <a href="#contact" className={inlineLink}>arranging a private driver</a>.</p>
+            <p className="mt-2 text-sm leading-relaxed">Look for services to <strong>Megiddo Antiquities Junction (מסעף מגידו עתיקות, stop 55407)</strong> on Route 66. Route 56 is among the services listed for the area. Check which stop serves your direction, the safe walk to the entrance and the return timetable using the <a href="https://bus.gov.il/en/home" target="_blank" rel="noopener noreferrer" className={inlineLink}>official public transport planner</a>. For several sites in one day, consider <Link to="/car-rental/" className={inlineLink}>renting a car</Link>, <Link to="/tours/nazareth-sea-of-galilee/" className={inlineLink}>comparing northern Israel tours</Link> or <a href="#contact" className={inlineLink}>arranging a private driver</a>.</p>
           </article>
           <article className="rounded-xl border bg-card p-4">
             <div className="flex items-center gap-2"><Footprints className="h-5 w-5 text-primary" aria-hidden="true" /><h3 className="font-semibold">Walking inside the park</h3></div>
@@ -200,7 +199,7 @@ export const telMegiddoDestinationContent: AttractionDestinationContent = {
     { label: "Yardenit", to: "/attractions/yardenit/", note: "A Jordan River baptism stop south of the lake." },
   ],
   planningLinks: [
-    { label: "Sea of Galilee guide", to: "/travel-blog/sea-of-galilee/", description: "Explore Tiberias and the lakeside sites.", icon: "region" },
+    { label: "Sea of Galilee guide", to: "/attractions/sea-of-galilee/", description: "Explore Tiberias and the lakeside sites.", icon: "region" },
     { label: "7-day Israel itinerary", to: "/travel-blog/israel-itinerary-7-days/", description: "Build a balanced northern Israel day.", icon: "itinerary" },
     { label: "10-day Israel itinerary", to: "/travel-blog/israel-itinerary-10-days/", description: "Make more time for archaeology and Galilee.", icon: "itinerary" },
     { label: "Best time to visit Israel", to: "/travel-blog/best-time-to-visit-israel/", description: "Consider seasonal weather and daylight.", icon: "seasons" },

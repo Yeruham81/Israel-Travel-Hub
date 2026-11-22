@@ -66,7 +66,7 @@ const sections = [
 const related = [
   {title:"Visit Masada",to:"/attractions/masada/" as const,desc:"The plateau, entrance choices and cable car",image:masadaRelated,alt:"Stone structures of Masada's ancient palaces"},
   {title:"Explore Ein Gedi",to:"/attractions/ein-gedi/" as const,desc:"Check trails, reserve access and wildlife",image:einGediRelated,alt:"Rocky canyon scenery in the Ein Gedi region"},
-  {title:"The Dead Sea visitor guide",to:"/travel-blog/the-dead-sea/" as const,desc:"Beaches, floating tips and local facilities",image:shoreRelated,alt:"Sunbeds at a managed Dead Sea beach"},
+  {title:"The Dead Sea visitor guide",to:"/attractions/dead-sea/" as const,desc:"Beaches, floating tips and local facilities",image:shoreRelated,alt:"Sunbeds at a managed Dead Sea beach"},
   {title:"Jerusalem to the Dead Sea",to:"/travel-blog/jerusalem-to-the-dead-sea/" as const,desc:"Routes, buses and realistic travel planning",image:roadRelated,alt:"Road through the desert landscape towards the Dead Sea"},
   {title:"Where to stay at the Dead Sea",to:"/travel-blog/best-dead-sea-hotels/" as const,desc:"Compare Ein Bokek and other hotel options",image:hotelsRelated,alt:"Swimming pool at a Dead Sea resort"},
   {title:"Masada & Dead Sea tours",to:"/tours/masada-dead-sea/" as const,desc:"Explore guided day trips and available experiences",image:toursRelated,alt:"The Snake Path ascending towards Masada"},

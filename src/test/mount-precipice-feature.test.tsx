@@ -71,8 +71,8 @@ describe("Mount Precipice attraction guide", () => {
     expect(article).toContain("wheelchair accessible");
     expect(article).toContain("Route 75");
     expect(article).toContain("https://bus.gov.il/en/home");
-    expect(article).toContain('carRentalAffiliateUrl("/attractions/mount-precipice/")');
-    expect(article).toContain('rel="sponsored noopener noreferrer"');
+    expect(article).toContain('to="/car-rental/"');
+    expect(article).not.toContain("carRentalAffiliateUrl");
     expect(article).toContain('data-testid="mount-precipice-location-map"');
     expect(article).toContain('data-testid="mount-precipice-visitor-cards"');
     expect(article).toContain('data-testid="mount-precipice-visitor-essentials"');

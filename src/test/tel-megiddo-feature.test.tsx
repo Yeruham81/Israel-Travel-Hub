@@ -77,8 +77,8 @@ describe("Tel Megiddo attraction guide", () => {
     expect(article).toContain("מסעף מגידו עתיקות");
     expect(article).toContain("Road 66");
     expect(article).toContain("https://bus.gov.il/en/home");
-    expect(article).toContain('carRentalAffiliateUrl("/attractions/tel-megiddo/")');
-    expect(article).toContain('rel="sponsored noopener noreferrer"');
+    expect(article).toContain('to="/car-rental/"');
+    expect(article).not.toContain("carRentalAffiliateUrl");
     expect(article).toContain('data-testid="tel-megiddo-location-map"');
     expect(article).toContain('data-testid="tel-megiddo-visitor-hours"');
     expect(article).toContain('data-testid="tel-megiddo-visitor-essentials"');

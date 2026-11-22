@@ -36,8 +36,8 @@ describe("Yardenit individual attraction upgrade", () => {
     expect(article).toContain("established in <strong>1981 by Kibbutz Kinneret");
     expect(article).toContain("more than 80 languages and dialects");
     expect(article).toContain("Pilgrims in white robes taking part in a group baptism");
-    expect(article).toContain('carRentalAffiliateUrl("/attractions/yardenit/")');
-    expect(article).toContain('rel="sponsored noopener noreferrer"');
+    expect(article).toContain('to="/car-rental/"');
+    expect(article).not.toContain("carRentalAffiliateUrl");
     expect(article).toContain('href="#contact"');
     expect(article).toContain('to="/tours/nazareth-sea-of-galilee/"');
     expect(shell).toContain('["contact", "Contact me"]');

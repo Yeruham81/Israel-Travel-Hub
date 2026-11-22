@@ -131,6 +131,9 @@ describe("shared sidebar navigation", () => {
     expect(within(nav).getByRole("link", { name: "Hotels in Jerusalem" })).toHaveAttribute("aria-current", "page");
     expect(within(nav).getByRole("link", { name: "All accommodation" })).not.toHaveAttribute("aria-current");
     expect(within(nav).getByRole("link", { name: "Home" })).toHaveAttribute("href", "/");
+    const rental = within(nav).getByRole("link", { name: "Rent a car in Israel" });
+    expect(rental).not.toHaveAttribute("target");
+    expect(rental).not.toHaveAttribute("rel");
     const links = within(nav).getAllByRole("link");
     expect(links[0]).toHaveTextContent("Home");
     expect(links.at(-1)).toHaveTextContent("About");
@@ -144,7 +147,7 @@ describe("shared sidebar navigation", () => {
       ["To Ein Bokek at the Dead Sea", "/airport-transfers/ein-bokek/"],
       ["To other destinations", "/airport-transfers/"],
       ["Private driver service", "/private-driver-in-israel/"],
-      ["Rent a car in Israel", "https://discovercars.tpm.li/w2RwEsmb?sub_id=itt_car_accommodation_jerusalem"],
+      ["Rent a car in Israel", "/car-rental/"],
     ]);
   });
 

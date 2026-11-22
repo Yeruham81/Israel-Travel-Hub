@@ -96,7 +96,7 @@ describe("Tiberias hotel editorial", () => {
       ["Capernaum", "/attractions/capernaum/"],
       ["Tabgha", "/attractions/tabgha/"],
       ["Mount of Beatitudes", "/attractions/mount-of-beatitudes/"],
-      ["Sea of Galilee guide", "/travel-blog/sea-of-galilee/"],
+      ["Sea of Galilee guide", "/attractions/sea-of-galilee/"],
     ] as const) expect(within(container.querySelector("#location") as HTMLElement).getByRole("link", { name })).toHaveAttribute("href", href);
     expect(screen.getByRole("link", { name: "Israel calendar of events" })).toHaveAttribute("href", "/travel-blog/calendar-of-events/");
     expect(screen.getByTestId("related-guides")).toHaveAttribute("data-region", "tiberias");
