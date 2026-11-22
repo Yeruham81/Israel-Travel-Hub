@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="robots" content="noindex,nofollow" />
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
+  <title>Mount Zion visitor map</title>
+  <link rel="stylesheet" href="https://unpkg.com/maplibre-gl@5.12.0/dist/maplibre-gl.css" integrity="sha384-mnM9NG1099tBMNxdDQNDKIxYcn/fmqQXFJvbT5l1MsrWvzfxBEffceBsw75/cW2R" crossorigin="anonymous" />
+  <style>
+    html,body,#map{margin:0;width:100%;height:100%}
+    body{font:13px/1.4 system-ui,sans-serif;background:#ecf3f8;color:#123346}
+    #map{position:absolute;inset:0}
+    #status{position:absolute;inset:0;z-index:2;display:grid;place-content:center;padding:22px;text-align:center;background:#ecf3f8f2}
+    #status[hidden]{display:none}
+    #status p{margin:0 0 12px}
+    a{color:#195c9e}
+    .maplibregl-popup-content{font:13px/1.5 system-ui,sans-serif;max-width:225px;padding:10px 12px}
+    .maplibregl-ctrl-attrib{font:10px/1.3 system-ui,sans-serif}
+    .zion-pin{width:30px;height:30px;display:grid;place-items:center;border:2px solid #fff;border-radius:50%;color:#fff;font:bold 13px/1 system-ui,sans-serif;box-shadow:0 2px 7px #102d4080;cursor:pointer}
+    .zion-pin[data-area="gate"]{background:#b45309}
+    .zion-pin[data-area="central"]{background:#1d4ed8}
+    .zion-pin[data-area="lower"]{background:#15803d}
+    .zion-pin[aria-pressed="true"]{outline:3px solid #082f49;outline-offset:2px;z-index:10}
+    .zion-pin:focus-visible{outline:3px solid #082f49;outline-offset:3px}
+  </style>
+</head>
+<body>
+  <div id="map" role="region" aria-label="Interactive map showing seven Mount Zion sites together"></div>
+  <div id="status" role="status" aria-live="polite">
+    <p id="message">Loading Mount Zion visitor map…</p>
+    <a href="https://www.google.com/maps/search/?api=1&amp;query=Mount%20Zion%20Jerusalem" target="_blank" rel="noopener noreferrer">See Mount Zion on Google Maps</a>
+    <noscript>Enable JavaScript for the interactive map.</noscript>
+  </div>
+  <script src="https://unpkg.com/maplibre-gl@5.12.0/dist/maplibre-gl.js" integrity="sha384-7+0QVD3+GoeOjaW35yTmpj0FR1K45ugw4ZUY0qEFomHSmAude6e9nB6/Xy5aPnzQ" crossorigin="anonymous"></script>
+  <script>
+    (() => {
+      "use strict";
+      const status=document.getElementById("status");
+      const message=document.getElementById("message");
+      const bounds=[[35.2278,31.77065],[35.233,31.7735]];
+      const validIds=["zion-gate","dormition","cenacle","david-tomb","holocaust","gallicantu","schindler"];
+      let points;
+      try{
+        const raw=new URLSearchParams(location.search).get("points");
+        if(!raw||raw.length>3500)throw Error("Invalid map points");
+        points=JSON.parse(raw);
+        if(!Array.isArray(points)||points.length!==7||points.some((p,i)=>p.id!==validIds[i]||
+          typeof p.name!=="string"||p.name.length>90||
+          typeof p.query!=="string"||p.query.length>160||
+          !["gate","central","lower"].includes(p.area)||
+          !Number.isFinite(p.lat)||p.lat<31.770||p.lat>31.775||
+          !Number.isFinite(p.lon)||p.lon<35.227||p.lon>35.234))throw Error("Invalid map points");
+      }catch{message.textContent="The map is unavailable. Use the Google Maps links in the guide.";return}
+      if(typeof maplibregl==="undefined"){message.textContent="The map is unavailable. Use the Google Maps links in the guide.";return}
+      let map,popup,selected=null,ready=false,requested=null;
+      const markers=new Map();
+      const allVisible=()=>map.fitBounds(bounds,{padding:{top:52,bottom:52,left:52,right:52},maxZoom:16.8,duration:350});
+      const select=id=>{
+        if(id==="all"){
+          selected=null;
+          if(popup)popup.remove();
+          markers.forEach(el=>el.setAttribute("aria-pressed","false"));
+          allVisible();
+          return;
+        }
+        const point=points.find(p=>p.id===id);
+        if(!point)return;
+        selected=id;
+        markers.forEach((el,key)=>el.setAttribute("aria-pressed",key===id?"true":"false"));
+        allVisible();
+        if(popup)popup.remove();
+        const node=document.createElement("div");
+        const title=document.createElement("strong");title.textContent=point.name;node.appendChild(title);
+        const link=document.createElement("a");
+        link.href="https://www.google.com/maps/search/?api=1&query="+encodeURIComponent(point.query);
+        link.target="_blank";link.rel="noopener noreferrer";link.textContent="Open in Google Maps";
+        link.style.display="block";link.style.marginTop="7px";node.appendChild(link);
+        popup=new maplibregl.Popup({offset:20,closeButton:true,maxWidth:"240px"})
+          .setLngLat([point.lon,point.lat]).setDOMContent(node).addTo(map);
+      };
+      const focus=id=>{
+        if(!ready){requested=id;return}
+        select(id);
+      };
+      window.addEventListener("message",event=>{
+        if(event.origin!==location.origin||event.source!==window.parent)return;
+        const command=event.data;
+        if(!command||command.type!=="mount-zion-map-focus"||typeof command.id!=="string")return;
+        if(command.id==="all"||validIds.includes(command.id))focus(command.id);
+      });
+      const timeout=setTimeout(()=>{if(!ready)message.textContent="The interactive map is temporarily unavailable. Open the locations in Google Maps.";},16000);
+      try{
+        maplibregl.setWorkerCount(1);
+        map=new maplibregl.Map({
+          container:"map",style:new URL("./english-style.json",location.href).href,
+          bounds,fitBoundsOptions:{padding:{top:52,bottom:52,left:52,right:52},maxZoom:16.8},
+          cooperativeGestures:true,dragRotate:false,touchPitch:false,pitchWithRotate:false,
+          attributionControl:false,renderWorldCopies:false,maxPitch:0
+        });
+        map.touchZoomRotate.disableRotation();
+        map.addControl(new maplibregl.NavigationControl({showCompass:false}),"top-right");
+        map.addControl(new maplibregl.AttributionControl({compact:true,customAttribution:'<a href="https://maputnik.github.io/osm-liberty/" target="_blank" rel="noopener noreferrer">OSM Liberty</a>'}));
+        map.once("load",()=>{
+          points.forEach((point,index)=>{
+            const element=document.createElement("button");
+            element.type="button";
+            element.textContent=String(index+1);
+            element.className="zion-pin";
+            element.dataset.area=point.area;
+            element.setAttribute("aria-label","Locate "+point.name);
+            element.setAttribute("aria-pressed","false");
+            element.title=point.name;
+            element.addEventListener("click",()=>{
+              focus(point.id);
+              window.parent.postMessage({type:"mount-zion-map-selected",id:point.id},location.origin);
+            });
+            const offset=point.id==="cenacle"?[-18,-12]:point.id==="david-tomb"?[18,12]:point.id==="holocaust"?[0,10]:[0,0];
+            new maplibregl.Marker({element,offset}).setLngLat([point.lon,point.lat]).addTo(map);
+            markers.set(point.id,element);
+          });
+          ready=true;clearTimeout(timeout);status.hidden=true;
+          if(requested&&requested!=="all")focus(requested);else select("all");
+        });
+        map.on("error",()=>{if(!ready)message.textContent="The interactive map is temporarily unavailable. Open the locations in Google Maps.";});
+        window.addEventListener("pagehide",event=>{if(!event.persisted){clearTimeout(timeout);map.remove();}});
+      }catch{
+        clearTimeout(timeout);if(map)map.remove();
+        message.textContent="The interactive map is temporarily unavailable. Open the locations in Google Maps.";
+      }
+    })();
+  </script>
+</body>
+</html>
