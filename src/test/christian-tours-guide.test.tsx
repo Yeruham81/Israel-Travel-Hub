@@ -62,7 +62,8 @@ describe("Christian tours in Israel editorial guide",()=>{
       expect(offer.subId).toMatch(/^christian_tours_/);
     }
     expect(page).toContain('searchParams.set("sub_id",tour.subId)');
-    expect(page).toContain("Live prices, reviews and available dates on the booking provider");
+    expect(page).toContain("<ExternalProviderTourCard");
+    expect(page).toContain("lg:grid-cols-3");
     expect(page).not.toContain("https://www.viator.com/tours/");
     expect(page).not.toContain("https://www.getyourguide.com/");
   });
