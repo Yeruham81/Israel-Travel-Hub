@@ -239,6 +239,30 @@
     color: var(--color-primary-foreground);
   }
   .chip:focus-visible { outline: 2px solid var(--color-primary); outline-offset: 2px; }
+  /* Make the shared "On this page" quick links distinct from the surrounding
+     article. This is scoped to the contents panel: filter chips stay compact. */
+  .on-this-page .chip {
+    min-height: 2.375rem;
+    border: 1px solid color-mix(in oklch, var(--color-primary) 27%, var(--color-border));
+    padding: .45rem .65rem;
+    background: var(--color-card);
+    color: var(--color-foreground);
+    font-size: .875rem;
+    font-weight: 600;
+    box-shadow: 0 1px 2px color-mix(in oklch, var(--color-foreground) 7%, transparent);
+    transition: border-color .15s ease, background-color .15s ease, color .15s ease, box-shadow .15s ease;
+  }
+  .on-this-page .chip:hover {
+    border-color: color-mix(in oklch, var(--color-primary) 65%, var(--color-border));
+    background: color-mix(in oklch, var(--color-secondary) 70%, var(--color-card));
+    color: var(--color-primary);
+    box-shadow: 0 2px 6px color-mix(in oklch, var(--color-foreground) 10%, transparent);
+  }
+  .on-this-page .chip:focus-visible {
+    border-color: var(--color-primary);
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
+  }
   /* Long guide TOCs share the shape and colours without increasing their height. */
   .chip-dense { min-height: 1.875rem; padding: .3rem .625rem; font-size: .75rem; }
   @media (prefers-reduced-motion: reduce) { .chip { transition: none; } }

@@ -1,5 +1,6 @@
 import { cleanup, fireEvent, render, screen, within } from "@testing-library/react";
 import { afterEach, describe, expect, it } from "vitest";
+import { readFileSync } from "node:fs";
 import { OnThisPage, compactOnThisPageLabel } from "@/components/Guide";
 import { SourcesDisclosure } from "@/components/SourcesDisclosure";
 import { travelGuides } from "@/data/travelGuides";
@@ -12,6 +13,24 @@ const sections = Array.from({ length: 17 }, (_, index) => [
 ] as const);
 
 describe("compact On this page navigation", () => {
+  it("makes the jump-link panel visible without changing filters elsewhere", () => {
+    render(<OnThisPage sections={sections.slice(0, 6)} />);
+    const nav = screen.getByRole("navigation", { name: "On this page" });
+    expect(nav).toHaveClass("on-this-page", "rounded-xl", "border", "border-primary/25", "bg-secondary/40", "shadow-sm");
+    expect(nav.querySelector("ul.grid")).toHaveClass("grid-cols-2", "sm:grid-cols-3", "lg:grid-cols-4");
+    const links = within(nav).getAllByRole("link");
+    expect(links).toHaveLength(6);
+    expect(links.every(link => link.classList.contains("chip") && link.classList.contains("chip-dense"))).toBe(true);
+    const css = readFileSync("src/styles.css", "utf8");
+    const buttonStyles = css.match(/\.on-this-page \.chip \{([^}]*)\}/)?.[1] ?? "";
+    expect(buttonStyles).toContain("min-height: 2.375rem");
+    expect(buttonStyles).toContain("border: 1px solid");
+    expect(buttonStyles).toContain("background: var(--color-card)");
+    expect(buttonStyles).toContain("font-size: .875rem");
+    expect(css).toContain(".on-this-page .chip:hover");
+    expect(css).toContain(".on-this-page .chip:focus-visible");
+  });
+
   it("shows ten links in five mobile rows and more at wider breakpoints", () => {
     const { container } = render(<OnThisPage sections={sections} />);
     const nav = screen.getByRole("navigation", { name: "On this page" });

@@ -166,11 +166,11 @@ export function OnThisPage({ sections, sticky = false, compactLabels, fullLabels
   const visibleSections = sections.filter(([id, label]) => id.toLowerCase() !== "sources" && label.trim().toLowerCase() !== "sources");
   const overflowVisibility = visibleSections.length <= 10 ? "hidden" : visibleSections.length <= 12 ? "lg:hidden" : visibleSections.length <= 15 ? "xl:hidden" : "";
   return (
-    <nav aria-label="On this page" className={`${sticky ? "sticky top-[57px] z-30" : ""} relative mt-4 min-w-0 border-y bg-background/95 backdrop-blur`}>
-      <div className="flex flex-wrap items-center justify-between gap-x-3 gap-y-1 px-1 pb-1 pt-2">
-        <span className="shrink-0 text-[11px] font-bold uppercase tracking-wide text-muted-foreground">On this page</span>
+    <nav aria-label="On this page" className={`${sticky ? "sticky top-[57px] z-30" : ""} on-this-page relative mt-5 min-w-0 rounded-xl border border-primary/25 bg-secondary/40 p-3 shadow-sm backdrop-blur sm:p-4`}>
+      <div className="flex flex-wrap items-center justify-between gap-x-3 gap-y-1 pb-3">
+        <span className="shrink-0 text-xs font-bold uppercase tracking-wider text-foreground">On this page</span>
         {visibleSections.length > 10 && <details className={`group relative ${overflowVisibility}`}>
-          <summary className="cursor-pointer list-none rounded-md px-2 py-1 text-xs font-semibold text-primary underline-offset-4 hover:underline focus-visible:outline-2 focus-visible:outline-primary">
+          <summary className="cursor-pointer list-none rounded-md px-2 py-1 text-sm font-semibold text-primary underline-offset-4 hover:underline focus-visible:outline-2 focus-visible:outline-primary">
             All sections <span aria-hidden="true" className="inline-block transition-transform group-open:rotate-180">⌄</span>
           </summary>
           <ul className="absolute right-0 top-full z-40 mt-1 max-h-[min(60vh,420px)] w-[min(88vw,340px)] space-y-0.5 overflow-y-auto rounded-xl border bg-card p-2 shadow-lg">
@@ -178,7 +178,7 @@ export function OnThisPage({ sections, sticky = false, compactLabels, fullLabels
           </ul>
         </details>}
       </div>
-      <ul className="grid min-w-0 grid-cols-2 gap-x-2 gap-y-1.5 px-1 pb-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
+      <ul className="grid min-w-0 grid-cols-2 gap-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
         {visibleSections.map(([id, label], index) => {
           const visibility = index >= 15 ? "hidden" : index >= 12 ? "hidden xl:block" : index >= 10 ? "hidden lg:block" : "";
           return <li key={id} className={`min-w-0 ${visibility}`}>
