@@ -10,7 +10,7 @@ import { oldCityJerusalemSite } from "@/data/oldCityJerusalemSite";
 import oldCityTourPhoto from "@/assets/home/jerusalem-old-city-card.webp";
 import gateTourPhoto from "@/assets/home/hero-refresh-jerusalem-jaffa-gate-v4-medium.webp";
 
-const featuredOldCityTours = tourProducts.filter(tour => tour.status === "published" && (tour.id === "jerusalem-old-city-walk" || tour.id === "jerusalem-private-oldcity-walk"));
+const featuredOldCityTours = tourProducts.filter(tour => tour.status === "published" && (tour.id === "jerusalem-old-city-walk" || tour.id === "jerusalem-private-oldcity-walk" || tour.id === "jerusalem-day-tel-aviv"));
 
 const official = oldCityJerusalemSite.official;
 const info = oldCityJerusalemSite.visitor;
@@ -237,7 +237,7 @@ export const oldCityJerusalemDestinationContent: AttractionDestinationContent = 
   ),
   tourContent: (
     <div className="mt-4 space-y-4">
-      <p>Guided walks connect the Old City’s major sites and religious traditions. These two existing, reviewed Jerusalem departures offer a shared walk or private guide; check the meeting point, sites included, accessibility and language before booking.</p>
+      <p>Guided walks connect the Old City’s major sites and religious traditions. These three reviewed tours include guided walks and longer Jerusalem visits from Jerusalem or Tel Aviv. Compare departure points, sites included, accessibility and language before booking.</p>
       <ul className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3" data-testid="jerusalem-old-city-featured-tours">
         {featuredOldCityTours.map(tour => <ExternalTourCard key={tour.id} tour={tour} pageId="attractions-old-city-jerusalem" compact />)}
       </ul>
