@@ -8,9 +8,9 @@ import { attractionMeta } from "@/components/AttractionGuidePage";
 import { filterGuides, guideDirectory } from "@/data/travelGuides";
 import { routeTree } from "@/routeTree.gen";
 
-describe("17 original attraction destination guides", () => {
+describe("18 attraction destination guides", () => {
   it("defines a complete guide at each unique route without legacy-site links", () => {
-    expect(attractionIds).toHaveLength(17);
+    expect(attractionIds).toHaveLength(18);
     expect(new Set(attractionIds).size).toBe(17);
     const router = createRouter({routeTree,context:{queryClient:new QueryClient()},trailingSlash:"always"});
     for (const id of attractionIds) {
