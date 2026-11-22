@@ -120,7 +120,7 @@ jobs:
                   with Image.open(io.BytesIO(resp.content)) as im:
                       oldhash=imagehash.phash(ImageOps.exif_transpose(im).convert("RGB"))
                   best=sorted(((oldhash-hash,path) for path,hash in local),key=lambda x:x[0])[:3]
-                  return {"slug":slug,"filename":url.split("/")[-1],"matches":[{"distance":n,"local":p} for n,p in best]}
+                  return {"slug":slug,"filename":url.split("/")[-1],"matches":[{"distance":int(n),"local":p} for n,p in best]}
               except Exception as e:return {"slug":slug,"filename":url.split("/")[-1],"error":str(e)[:120]}
           with concurrent.futures.ThreadPoolExecutor(max_workers=12) as pool:
               results=list(pool.map(inspect,entries))
