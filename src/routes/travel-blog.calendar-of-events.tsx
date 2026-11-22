@@ -9,7 +9,7 @@ import {
 
 export const Route = createFileRoute("/travel-blog/calendar-of-events")({
   head: () => {
-    const crumbs = [{name:"Home",path:"/"},{name:"Travel guides",path:"/travel-blog/"},{name:"Holidays in Israel",path:HOLIDAY_GUIDE_PATH}];
+    const crumbs = [{name:"Home",path:"/"},{name:"Travel guides",path:"/travel-blog/"},{name:"Calendar of events",path:HOLIDAY_GUIDE_PATH}];
     const meta = pageMeta({
       title:HOLIDAY_GUIDE_TITLE,description:HOLIDAY_GUIDE_DESCRIPTION,path:HOLIDAY_GUIDE_PATH,
       type:"article",crumbs,image:HOLIDAY_GUIDE_PHOTO.src,imageAlt:HOLIDAY_GUIDE_PHOTO.alt,

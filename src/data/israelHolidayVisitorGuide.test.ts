@@ -1,4 +1,4 @@
-import { existsSync } from "node:fs";
+import { existsSync, readFileSync } from "node:fs";
 import { describe, expect, it } from "vitest";
 import { holidayGuideGroups, holidayGuideSources, schoolCalendarPlanning } from "@/data/israelHolidayVisitorGuide";
 import {
@@ -11,11 +11,19 @@ const entries = holidayGuideGroups.flatMap(group => group.items);
 describe("Israel holidays visitor guide", () => {
   it("has accurate editorial identity and remains discoverable at the original address", () => {
     expect(HOLIDAY_GUIDE_PATH).toBe("/travel-blog/calendar-of-events/");
-    expect(HOLIDAY_GUIDE_TITLE).toBe("Holidays in Israel: A Practical Guide for Visitors");
-    expect(HOLIDAY_GUIDE_DESCRIPTION).toContain("public transport");
+    expect(HOLIDAY_GUIDE_TITLE).toBe("Israel's Calendar of events: A practical guide for visitors");
+    expect(HOLIDAY_GUIDE_DESCRIPTION).toContain("transport");
+    expect(HOLIDAY_GUIDE_DESCRIPTION).toContain("national remembrance days");
+    expect(HOLIDAY_GUIDE_DESCRIPTION).toContain("school breaks");
     expect(guideDirectory.some(g => g.id === "calendar" && g.to === HOLIDAY_GUIDE_PATH && g.title === HOLIDAY_GUIDE_TITLE)).toBe(true);
     expect(travelGuides.calendar.title).toBe(HOLIDAY_GUIDE_TITLE);
-    expect(travelGuides.calendar.updatedAt).toBe("2026-11-21");
+    expect(travelGuides.calendar.updatedAt).toBe("2026-11-22");
+    const page = readFileSync("src/components/IsraelHolidayVisitorGuide.tsx", "utf8");
+    const route = readFileSync("src/routes/travel-blog.calendar-of-events.tsx", "utf8");
+    expect(page).toContain('{name:"Calendar of events",to:HOLIDAY_GUIDE_PATH}');
+    expect(route).toContain('{name:"Calendar of events",path:HOLIDAY_GUIDE_PATH}');
+    expect(page).not.toContain("Holidays in Israel: A Practical Guide for Visitors");
+    expect(route).toContain("headline:HOLIDAY_GUIDE_TITLE");
     expect(existsSync("public" + HOLIDAY_GUIDE_PHOTO.src)).toBe(true);
     // The retired date-picker must not be shipped as a separate route.
     expect(existsSync("src/routes/travel-blog.israel-holidays.tsx")).toBe(false);

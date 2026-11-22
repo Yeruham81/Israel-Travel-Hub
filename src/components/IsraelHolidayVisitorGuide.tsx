@@ -12,9 +12,9 @@ import { guideHeroPhotoForPath } from "@/lib/guide-hero-photos";
 import { holidayGuideGroups, holidayGuideSources, holidayImpactLevels, schoolCalendarPlanning, type HolidayGuideItem } from "@/data/israelHolidayVisitorGuide";
 
 export const HOLIDAY_GUIDE_PATH = "/travel-blog/calendar-of-events/";
-export const HOLIDAY_GUIDE_TITLE = "Holidays in Israel: A Practical Guide for Visitors";
-export const HOLIDAY_GUIDE_DESCRIPTION = "Understand Israeli Jewish, Christian, Muslim, Druze and national holidays, Shabbat, holiday eves and how special dates affect public transport, opening hours, crowds and hotel prices.";
-export const HOLIDAY_GUIDE_UPDATED = "2026-11-21";
+export const HOLIDAY_GUIDE_TITLE = "Israel's Calendar of events: A practical guide for visitors";
+export const HOLIDAY_GUIDE_DESCRIPTION = "Plan your visit around Israel's calendar of events: Shabbat, religious holidays, national remembrance days, school breaks and local celebrations that can affect transport, opening hours and crowds.";
+export const HOLIDAY_GUIDE_UPDATED = "2026-11-22";
 export const HOLIDAY_GUIDE_PHOTO = {src:"/images/holiday-guide/jewish-holiday-celebration.webp",alt:"Jewish holiday celebration with a shofar and Torah scroll in Israel"};
 
 const TOC = [
@@ -110,7 +110,7 @@ function RelatedGuides(){
 export function IsraelHolidayVisitorGuidePage(){
   return <main className="mx-auto max-w-5xl px-4 pb-12"><article>
     <header className="pt-6">
-      <Breadcrumbs items={[{name:"Home",to:"/"},{name:"Travel guides",to:"/travel-blog/"},{name:"Holidays in Israel",to:HOLIDAY_GUIDE_PATH}]}/>
+      <Breadcrumbs items={[{name:"Home",to:"/"},{name:"Travel guides",to:"/travel-blog/"},{name:"Calendar of events",to:HOLIDAY_GUIDE_PATH}]}/>
       <GuideHeroLayout image={<GuideHeroMedia src={HOLIDAY_GUIDE_PHOTO.src} alt={HOLIDAY_GUIDE_PHOTO.alt} width={640} height={480} caption="A celebration in Israel; specific festival customs vary by community."/>}>
         <p className="text-xs font-semibold uppercase tracking-[0.16em] text-primary">Practical Israel travel guide</p>
         <h1 className="guide-page-title mt-2">{HOLIDAY_GUIDE_TITLE}</h1>
@@ -152,7 +152,7 @@ export function IsraelHolidayVisitorGuidePage(){
       {group.id==="other-traditions"&&<p className="mt-4 text-sm leading-relaxed">If Jerusalem churches are on your itinerary, check visiting times and liturgical access in my <Link to="/travel-blog/churches-in-jerusalem/" className={linkStyle}>Jerusalem churches guide</Link>. These are living places of worship, not simply sightseeing venues.</p>}
     </section>)}
     <section id="practical" className="mt-12 scroll-mt-24" aria-labelledby="practical-heading">
-      <Heading id="practical" intro="A few checks before you pay for your flights, hotel and sightseeing can prevent the most common holiday-related surprises.">My practical holiday planning checklist</Heading>
+      <Heading id="practical" intro="A few checks before you pay for your flights, hotel and sightseeing can prevent the most common holiday-related surprises.">My practical event-date planning checklist</Heading>
       <div className="grid gap-3 sm:grid-cols-2">{planning.map(p=><article key={p.title} className="rounded-xl border bg-card p-4 sm:p-5"><h3 className="flex items-start gap-2 font-bold"><CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-primary" aria-hidden="true"/>{p.title}</h3><p className="mt-2 pl-7 text-sm leading-relaxed text-muted-foreground">{p.text}</p></article>)}</div>
       <div className="mt-5"><MyTip>I would build some flexibility into a trip during Passover, Sukkot or a major pilgrimage period. A nearby alternative attraction and a confirmed return journey are often more useful than an overpacked itinerary.</MyTip></div>
     </section>

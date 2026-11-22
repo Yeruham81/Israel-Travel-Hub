@@ -218,9 +218,9 @@ export const planningGuides = {
   },
   "calendar": {
     "id": "calendar",
-    "updatedAt": "2026-11-21",
-    "title": "Holidays in Israel: A Practical Guide for Visitors",
-    "description": "Understand Israeli Jewish, Christian, Muslim, Druze and national holidays, Shabbat, holiday eves and how special dates affect public transport, opening hours, crowds and hotel prices.",
+    "updatedAt": "2026-11-22",
+    "title": "Israel's Calendar of events: A practical guide for visitors",
+    "description": "Plan your visit around Israel's calendar of events: Shabbat, religious holidays, national remembrance days, school breaks and local celebrations that can affect transport, opening hours and crowds.",
     "intro": "From Shabbat and Yom Kippur to Passover, Ramadan, Christmas and national memorial days, special dates shape daily life in Israel.",
     "answer": "Check whether your dates include Shabbat, major Jewish festival days, holiday eves or school breaks. Yom Kippur requires particular attention: regular transport and airport operations stop. Other religious and national dates can affect particular cities and venues without closing the whole country.",
     "topics": ["tips", "religion", "itineraries"],
