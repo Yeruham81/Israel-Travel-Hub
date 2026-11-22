@@ -1134,6 +1134,9 @@ jobs:
           # Use HTTP/1.1 and retries for Hostinger's intermittent HTTP/2 resets.
           curl --http1.1 --retry-all-errors --retry 3 --retry-delay 2 --max-time 40 -fsSL "$root/attractions/sea-of-galilee/" -o /tmp/sea-of-galilee-page.html
           curl --http1.1 --retry-all-errors --retry 3 --retry-delay 2 --max-time 40 -fsSL "$root/attractions/" -o /tmp/galilee-attractions-hub.html
+          # Check the initial response separately: a permanent 301/308 is preferred
+          # once the Hostinger .htaccess migration redirects have been installed.
+          curl --http1.1 --retry-all-errors --retry 3 --retry-delay 2 --max-time 40 -fsS -D /tmp/galilee-legacy-headers.txt -o /tmp/galilee-legacy-initial.html "$root/travel-blog/sea-of-galilee/"
           curl --http1.1 --retry-all-errors --retry 3 --retry-delay 2 --max-time 40 -fsSL "$root/travel-blog/sea-of-galilee/" -o /tmp/galilee-legacy-alias.html
           curl --http1.1 --retry-all-errors --retry 3 --retry-delay 2 --max-time 40 -fsSL "$root/sitemap.xml" -o /tmp/galilee-sitemap.xml
           curl --http1.1 --retry-all-errors --retry 3 --retry-delay 2 --max-time 40 -fsSL "$root/images/attractions/sea-of-galilee.webp" -o /tmp/galilee-hero.webp
@@ -1142,6 +1145,11 @@ jobs:
           const page = fs.readFileSync("/tmp/sea-of-galilee-page.html", "utf8");
           const hub = fs.readFileSync("/tmp/galilee-attractions-hub.html", "utf8");
           const legacy = fs.readFileSync("/tmp/galilee-legacy-alias.html", "utf8");
+          const legacyHeaders = fs.readFileSync("/tmp/galilee-legacy-headers.txt", "utf8");
+          const initial = legacyHeaders.split(/\r?\n\r?\n/).findLast(block => /^HTTP\/\S+\s+\d+/m.test(block)) ?? "";
+          const initialStatus = Number(initial.match(/^HTTP\/\S+\s+(\d+)/m)?.[1] ?? 0);
+          const redirectLocation = initial.match(/^location:\s*(\S+)/im)?.[1] ?? "";
+
           const sitemap = fs.readFileSync("/tmp/galilee-sitemap.xml", "utf8");
           const picture = fs.readFileSync("/tmp/galilee-hero.webp");
           const origin = process.env.VITE_CANONICAL_ORIGIN;
@@ -1160,7 +1168,12 @@ jobs:
           check(page.includes('data-testid="stay-trip-photo-grid"'), "Illustrated related guide cards");
           check(page.includes("Sea of Galilee &amp; Jordan River") || page.includes("Sea of Galilee & Jordan River"), "Sidebar full label");
           check(hub.includes("Sea of Galilee") && hub.includes("/attractions/sea-of-galilee/"), "Attractions hub route");
-          check(legacy.includes('noindex,follow') && canonical(legacy), "Old route remains a non-indexable navigation alias");
+          const permanentRedirect = [301, 308].includes(initialStatus) && !!redirectLocation &&
+            new URL(redirectLocation, origin + "/travel-blog/sea-of-galilee/").href === target;
+          const noindexAlias = initialStatus === 200 && legacy.includes('noindex,follow') && canonical(legacy);
+          check(permanentRedirect || noindexAlias,
+            "Old Galilee route must permanently redirect to the new page or remain a canonical noindex alias (status: " + initialStatus + ")");
+
           check(sitemap.includes("/attractions/sea-of-galilee/") && !sitemap.includes("/travel-blog/sea-of-galilee/"), "Sitemap includes only the new route");
           check(picture.length > 1000 && picture.toString("ascii", 0, 4) === "RIFF" && picture.toString("ascii", 8, 12) === "WEBP", "Published hero WebP");
           if (errors.length) {
