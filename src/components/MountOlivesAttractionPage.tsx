@@ -254,7 +254,7 @@ export const mountOlivesDestinationContent: AttractionDestinationContent = {
     { label: "Mount Zion", to: "/attractions/mount-zion/", note: "Visit Dormition Abbey and other hilltop heritage landmarks." },
     { label: "Jerusalem travel guide", to: "/travel-blog/jerusalem-travel-guide/", note: "Plan more time in the city after your Mount of Olives visit." },
     { label: "Museums in Jerusalem", to: "/travel-blog/museums-in-jerusalem/", note: "Discover museums, collections and historic exhibits around the city." },
-    { label: "Shopping in Jerusalem", to: "/travel-blog/shopping-in-jerusalem/", note: "Explore traditional markets, shopping streets and local crafts." },
+    { label: "Via Dolorosa", to: "/attractions/via-dolorosa/", note: "Follow the fourteen Stations of the Cross after visiting Gethsemane." },
   ],
   planningLinks: [
     { label: "Where to stay in Jerusalem", to: "/travel-blog/where-to-stay-in-jerusalem/", description: "Choose a base for Old City visits.", icon: "region" },
