@@ -70,7 +70,7 @@ export const oldCityJerusalemDestinationContent: AttractionDestinationContent = 
       </AttractionHighlight>
       <AttractionHighlight mobileImageFirst title="Via Dolorosa and the Christian Quarter" image={{ src: photos.via, alt: "Narrow stone street and shops along the Via Dolorosa in Jerusalem's Old City" }}>
         <p>The Via Dolorosa is the traditional route associated with Jesus carrying the cross. Its Stations of the Cross pass through busy streets, chapels and parts of the Muslim and Christian Quarters, ending at the Holy Sepulchre.</p>
-        <p>Walking along the public streets is free. You can follow the marked stations independently or join a pilgrimage-focused guided walk; individual chapels may have restricted hours. <Link to="/travel-blog/churches-in-jerusalem/" className={inlineLink}>Explore more Jerusalem churches</Link>.</p>
+        <p>Walking along the public streets is free. You can follow the marked stations independently or join a pilgrimage-focused guided walk; individual chapels may have restricted hours. <Link to="/attractions/via-dolorosa/" className={inlineLink}>Follow my complete Via Dolorosa route and all 14 stations</Link>, or <Link to="/travel-blog/churches-in-jerusalem/" className={inlineLink}>explore more Jerusalem churches</Link>.</p>
         <p className="text-xs font-semibold text-muted-foreground">Free public walking route</p>
       </AttractionHighlight>
       <AttractionHighlight mobileImageFirst title="Temple Mount" image={{ src: photos.temple, alt: "Golden Dome of the Rock on the Temple Mount in Jerusalem" }}>
@@ -320,7 +320,7 @@ export const oldCityJerusalemDestinationContent: AttractionDestinationContent = 
     { label: "Jerusalem travel guide", to: "/travel-blog/jerusalem-travel-guide/", note: "Plan the rest of your sightseeing in the city." },
     { label: "Churches in Jerusalem", to: "/travel-blog/churches-in-jerusalem/", note: "Pilgrimage traditions, visitor hours and historic churches." },
     { label: "Museums in Jerusalem", to: "/travel-blog/museums-in-jerusalem/", note: "Explore archaeology, art and Jerusalem's layered history." },
-    { label: "Shopping in Jerusalem", to: "/travel-blog/shopping-in-jerusalem/", note: "Markets, crafts and shopping streets around the city." },
+    { label: "Via Dolorosa", to: "/attractions/via-dolorosa/", note: "Follow all fourteen Stations of the Cross through the Old City." },
   ],
   planningLinks: [
     { label: "Jerusalem city guide", to: "/travel-blog/jerusalem-travel-guide/", description: "Plan the rest of your stay beyond the walls.", icon: "region" },
