@@ -146,8 +146,8 @@ export function JerusalemShoppingGuide() {
           { name: "Travel guides", to: "/travel-blog/" },
           { name: "Shopping in Jerusalem", to: "/travel-blog/shopping-in-jerusalem/" },
         ]} />
-        <GuideHeroLayout image={<GuideHeroMedia src="/images/jerusalem-shopping/hero.webp"
-          alt="Evening shopping promenade lined with fashion boutiques in Jerusalem" />}>
+        <GuideHeroLayout image={<GuideHeroMedia src="/images/travel-blog/shopping-in-jerusalem-original.webp"
+          alt="Colorful craft and souvenir shops along a stone passage in Jerusalem\'s Old City" />}>
           <p className="text-xs font-semibold uppercase tracking-[0.16em] text-primary">Jerusalem · Markets, shops & local design</p>
           <h1 className="guide-page-title mt-2">Shopping in Jerusalem: Markets, Crafts, Malls & Local Streets</h1>
           <p data-guide-intro className="mt-4 max-w-3xl text-lg leading-relaxed">
