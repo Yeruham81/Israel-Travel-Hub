@@ -20,21 +20,30 @@ function renderAbout(router: Awaited<ReturnType<typeof aboutRouter>>) {
 }
 
 describe("one personal About Moshe Barak page", () => {
-  it("combines the biography, selection disclosures and a personal contact form", async () => {
+  it("focuses on personal experience, traveler photographs, reviews and a direct contact form", async () => {
     const { container } = renderAbout(await aboutRouter());
     expect(screen.getByRole("heading", { level: 1 })).toHaveTextContent(/^About Moshe Barak$/);
     expect(screen.getAllByRole("img", { name: "Moshe Barak" })).toHaveLength(1);
-    expect(screen.getByRole("link", { name: /Contact me/ })).toHaveAttribute("href", "#contact");
+    expect(screen.getByRole("link", { name: "Read Reviews on TripAdvisor" })).toHaveAttribute("href", tripadvisorProfileUrl);
     expect(screen.getByRole("heading", { name: "Send me a message" })).toBeInTheDocument();
     expect(screen.getByRole("form", { name: "Contact me" })).toBeInTheDocument();
     expect(screen.getByPlaceholderText("Tell me how I can help…")).toBeInTheDocument();
 
-    const methodology = screen.getByRole("region", { name: "How I put this website together" });
-    expect(methodology).toHaveTextContent("Understanding the different providers");
-    expect(methodology).not.toHaveTextContent("Sponsored link");
-    expect(methodology).toHaveTextContent("I currently don't display live prices or availability");
-    expect(methodology).toHaveTextContent("I haven't personally stayed at every property");
-    expect(methodology).toHaveTextContent("I don't attach your personal details or flight information");
+    expect(screen.getByRole("heading", { name: "Personal attention" })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "Professional service" })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "Local knowledge" })).toBeInTheDocument();
+    const collage = screen.getByRole("img", { name: "Moshe Barak with clients during journeys around Israel" });
+    expect(collage).toHaveAttribute("width", "681");
+    expect(collage).toHaveAttribute("height", "341");
+    expect(collage.className).not.toContain("object-cover");
+    const reviews = screen.getByRole("region", { name: "Tripadvisor traveler reviews" });
+    expect(collage.compareDocumentPosition(reviews) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
+    const methodology = screen.getByRole("region", { name: "Experience behind my travel guides" });
+    expect(methodology.querySelectorAll("p")).toHaveLength(1);
+    expect(methodology).toHaveTextContent("first-hand feedback from thousands of clients");
+    expect(screen.queryByText("How I put this website together")).not.toBeInTheDocument();
+    expect(container.textContent).not.toMatch(/Coming soon|How I choose information|How I explain prices/);
+    expect(container.querySelector('#privacy a[href="/privacy-policy/"]')).toBeInTheDocument();
     expect(container.querySelector('a[href^="/about/"]')).toBeNull();
     // Guest quotations and visitor form fields retain their own voice.
     const narrative = container.cloneNode(true) as HTMLElement;

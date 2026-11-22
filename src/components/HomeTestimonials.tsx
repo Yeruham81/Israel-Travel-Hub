@@ -16,7 +16,7 @@ export function TripadvisorReviewsSection({ personal = false }: { personal?: boo
           target="_blank"
           rel="noopener noreferrer"
           aria-label={personal ? "Tripadvisor reviews of my transport service, rated five out of five" : "Tripadvisor reviews for Moshe Barak, rated five out of five"}
-          className="inline-flex flex-wrap items-center gap-x-2 gap-y-1 rounded-lg border bg-background px-3 py-2 text-sm transition-colors hover:border-primary focus-visible:ring-2 focus-visible:ring-ring"
+          className="inline-flex flex-wrap items-center gap-x-2 gap-y-1 rounded-lg border bg-background px-3 py-2 pr-9 text-sm transition-colors hover:border-primary focus-visible:ring-2 focus-visible:ring-ring"
         >
           <img src="/images/tripadvisor.svg" alt="" width={20} height={20} loading="lazy" className="size-5" />
           <span className="font-semibold">Tripadvisor</span>
