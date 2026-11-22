@@ -74,7 +74,7 @@ export const foodDishes:FoodDish[] = [
     note:"May contain dairy and often has nut toppings. Versions differ from stall to stall.",
     roots:"A dessert enjoyed across the eastern Mediterranean and Middle East.",
     photo:photos["food-9"]},
-  {id:"kanafeh",name:"Kanafeh / knafeh",pronunciation:"kah-NAH-feh",kind:"sweets",
+  {id:"knafeh",name:"Knafeh",pronunciation:"kah-NAH-feh",kind:"sweets",
     summary:"Warm crisp pastry with sweet syrup and usually a soft cheese filling, often sprinkled with pistachios.",
     order:"A freshly made portion is worth sharing; ask what kind of filling is used.",
     note:"Often contains dairy, wheat and pistachios or other nuts.",
@@ -86,7 +86,7 @@ export const foodStarterIdeas = [
   {title:"For your first street-food lunch",description:"Start with falafel or sabich in pita and add tahini only after asking about the sauces.",ids:["falafel","sabich"]},
   {title:"For a sit-down breakfast",description:"Order shakshuka with bread or pick up a warm boureka at a bakery.",ids:["shakshuka","bourekas"]},
   {title:"For a classic local lunch",description:"Try a bowl of hummus with pita; choose toppings and portion size before ordering.",ids:["hummus"]},
-  {title:"For something sweet",description:"Share warm kanafeh or try chilled malabi, depending on your taste and dietary needs.",ids:["kanafeh","malabi"]}
+  {title:"For something sweet",description:"Share warm Knafeh or try chilled malabi, depending on your taste and dietary needs.",ids:["knafeh","malabi"]}
 ];
 
 export const foodExtras = [
@@ -102,7 +102,7 @@ export const foodMarkets = [
   {id:"jerusalem",title:"Mahane Yehuda Market",place:"Jerusalem",mood:"Market stalls, bakeries and hearty home-style dishes",
     why:"A useful place to taste pastries, spices, filled sandwiches and cooked meals in one walk. The nearby streets also have evening venues.",
     tip:"Friday shopping can be busy and many stalls close for Shabbat; verify the particular vendor's hours.",
-    image:"/images/jerusalem-shopping/mahane-yehuda.webp",alt:"Produce stalls in Jerusalem's Mahane Yehuda Market",
+    image:"/images/food-guide/mahane-yehuda-food-stalls.webp",alt:"Crowds and food stalls inside Jerusalem’s Mahane Yehuda Market",
     guide:"/travel-blog/shopping-in-jerusalem/",
     map:"https://www.google.com/maps/search/?api=1&query=Mahane+Yehuda+Market+Jerusalem+Israel"},
   {id:"carmel",title:"Carmel Market & Kerem HaTeimanim",place:"Tel Aviv",mood:"Street-food stands, fruit, juices and nearby small eateries",
@@ -126,17 +126,17 @@ export const foodMarkets = [
 ];
 
 export const foodTours = [
-  {id:"tour-carmel-market-food-tour-viator@tours-food-markets",key:"carmel",location:"Tel Aviv",provider:"Viator",name:"Carmel Market food-tasting walk",
+  {id:"tour-carmel-market-food-tour-viator@tours-food-markets",key:"carmel",productId:"carmel-market-food-tour",location:"Tel Aviv",provider:"Viator",name:"Carmel Market food-tasting walk",
     description:"An organised introduction to market stalls, local bites and the adjacent Yemenite Quarter.",
     detail:"Approximately 3 hours · Check tastings and meeting place",
     image:"/images/tel-aviv-attractions/carmel-food-tasting.webp",alt:"Food-tasting atmosphere in Carmel Market",
     subId:"what_to_eat_israel_carmel_tasting"},
-  {id:"tour-mahane-yehuda-tasting-viator@tours-food-markets",key:"mahane-yehuda",location:"Jerusalem",provider:"Viator",name:"Mahane Yehuda Market tasting tour",
+  {id:"tour-mahane-yehuda-tasting-viator@tours-food-markets",key:"mahane-yehuda",productId:"mahane-yehuda-tasting",location:"Jerusalem",provider:"Viator",name:"Mahane Yehuda Market tasting tour",
     description:"A guided way to discover market stories and sample foods from several vendors.",
     detail:"Approximately 3 hours · Verify the Jerusalem meeting point",
-    image:"/images/food-guide/mahane-yehuda-food-stalls.webp",alt:"Produce stalls and shoppers inside Jerusalem’s Mahane Yehuda Market",
+    image:"/images/jerusalem-shopping/mahane-yehuda.webp",alt:"Market produce and olive displays at Jerusalem’s Mahane Yehuda Market",
     subId:"what_to_eat_israel_mahane_yehuda"},
-  {id:"tour-levinsky-market-tasting-viator@tours-food-markets",key:"levinsky",location:"Tel Aviv",provider:"Viator",name:"Levinsky Market tasting walk",
+  {id:"tour-levinsky-market-tasting-viator@tours-food-markets",key:"levinsky",productId:"levinsky-market-tasting",location:"Tel Aviv",provider:"Viator",name:"Levinsky Market tasting walk",
     description:"Explore speciality food shops, ingredients and neighbourhood food traditions with a guide.",
     detail:"Approximately 2 hours · Confirm substitutions and schedule",
     image:"/images/food-guide/levinsky-spice-shop.webp",alt:"Spices and speciality food products inside a Levinsky Market shop in Tel Aviv",
