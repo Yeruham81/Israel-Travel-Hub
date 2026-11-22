@@ -4,7 +4,7 @@ import { recordOutboundClick, relFor } from "@/lib/outbound";
 
 /** Consistent editorial layout; only published and attributable figures may be shown. */
 export function CuratedPartnerTourCard({
-  title, description, platform, location, duration, image, alt, href, productId, offerId, pageId,
+  title, description, platform, location, duration, image, alt, href, productId, offerId, pageId, editorialRating, editorialPrice,
 }: {
   title: string;
   description: string;
@@ -17,11 +17,15 @@ export function CuratedPartnerTourCard({
   productId: string;
   offerId: string;
   pageId: string;
+  /** Manually checked product-page figures when a tour has not entered the central registry. */
+  editorialRating?: { value: number; count: number };
+  editorialPrice?: { amount: number; currency: "USD" | "EUR"; basis: "per_person" | "per_group"; approximate?: boolean };
 }) {
   const product = tourProducts.find((tour) => tour.id === productId);
   const offer = tourBookingOffers.find((entry) => entry.productId === productId && entry.partnerId === (platform === "Viator" ? "viator" : "getyourguide"));
-  const price = offer?.listedPrice;
-  const rating = product?.rating;
+  const price = editorialPrice ?? offer?.listedPrice;
+  const rating = editorialRating ?? product?.rating;
+  const pricePrefix = price?.currency === "EUR" ? "€" : "US$";
   return <article className="flex h-full min-w-0 flex-col overflow-hidden rounded-xl border bg-card shadow-sm">
     <img src={image} alt={alt} width={560} height={350} loading="lazy" decoding="async" className="aspect-[16/9] w-full object-cover" />
     <div className="flex flex-1 flex-col p-4">
@@ -37,7 +41,7 @@ export function CuratedPartnerTourCard({
       </p>
       <div className="mt-auto flex flex-wrap items-end justify-between gap-3 border-t pt-4 text-sm">
         <span>{price
-          ? <><span className="block text-xs text-muted-foreground">From</span><strong>{"US$" + price.amount.toFixed(price.amount % 1 ? 2 : 0)}</strong><span className="block text-[11px] text-muted-foreground">{price.basis === "per_person" ? "Per person" : "Per group"}</span></>
+          ? <><span className="block text-xs text-muted-foreground">{editorialPrice?.approximate ? "From approx." : "From"}</span><strong>{pricePrefix + price.amount.toFixed(price.amount % 1 ? 2 : 0)}</strong><span className="block text-[11px] text-muted-foreground">{price.basis === "per_person" ? "Per person" : "Per group"}</span></>
           : <span className="text-xs text-muted-foreground">Check current price</span>}</span>
         <a href={href} target="_blank" rel={relFor(true)} onClick={() => recordOutboundClick({ pageId, productId, offerId })} className="inline-flex min-h-10 items-center justify-center gap-1.5 rounded-lg border border-primary/30 px-3 py-2 text-sm font-semibold text-primary hover:bg-secondary focus-visible:outline-2 focus-visible:outline-primary">
           View tour <ExternalLink className="h-3.5 w-3.5" aria-hidden="true" /><span className="sr-only"> (opens in a new tab)</span>
