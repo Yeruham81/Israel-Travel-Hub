@@ -3,9 +3,9 @@ import { ChevronDown } from "lucide-react";
 /** Keep image attribution available in one collapsed block at the foot of a page. */
 export type PagePhotoCredit = {
   label: string;
-  credit?: string;
-  sourceUrl?: string;
-  licenseUrl?: string;
+  credit?: string | undefined;
+  sourceUrl?: string | undefined;
+  licenseUrl?: string | undefined;
 };
 
 export function PhotoCreditsDisclosure({ entries }: { entries: PagePhotoCredit[] }) {
