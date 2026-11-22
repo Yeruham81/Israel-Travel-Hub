@@ -123,7 +123,7 @@ export const mountOlivesDestinationContent: AttractionDestinationContent = {
           </tr>)}</tbody>
         </table>
       </div>
-      <p className="text-sm leading-relaxed"><strong>Pater Noster:      <p className="text-sm leading-relaxed"><strong>Pater Noster:</strong> The table lists the published temporary visiting schedule. The standard timetable also mentions Saturday; confirm its actual opening day with the <a href={official.churchHours} target="_blank" rel="noopener noreferrer" className={inlineLink}>Christian Information Center</a> for changes.</p>
+      <p className="text-sm leading-relaxed"><strong>Pater Noster:</strong> The table lists the published temporary visiting schedule. The standard timetable also mentions Saturday; confirm its actual opening day with the <a href={official.churchHours} target="_blank" rel="noopener noreferrer" className={inlineLink}>Christian Information Center</a> for changes.</p>
       <p className="text-sm leading-relaxed"><strong>Grotto of the Apostles:</strong> Unlike the adjoining Church of All Nations, the grotto has a midday break. It generally opens 07:30–12:00 and 14:30–18:00 (until 17:00 October–March), with last entry ten minutes before the scheduled closure.</p>
       <div className="rounded-xl border bg-secondary/20 p-4 sm:p-5" data-testid="mount-olives-access">
         <h3 className="font-serif text-xl font-semibold">Accessibility, visiting etiquette and practical details</h3>
@@ -161,8 +161,6 @@ export const mountOlivesDestinationContent: AttractionDestinationContent = {
           </article>
         </div>
     </div>
-  ),
-  itineraryContent:    </div>
   ),
   itineraryContent: (
     <div className="mt-4 space-y-4">
