@@ -5,16 +5,15 @@ const styles = readFileSync("src/styles.css", "utf8");
 const seniors = readFileSync("src/components/SeniorToursGuide.tsx", "utf8");
 
 describe("editorial prose links", () => {
-  it("hides repeated external/diagonal arrow icons on blue inline links sitewide", () => {
-    expect(styles).toContain(":is(p, blockquote, figcaption, td, th, .prose-guide)");
-    expect(styles).toContain("a:is(.text-primary, .underline)");
-    expect(styles).toContain("li > a:is(.text-primary, .underline)");
-    expect(styles).toContain(".lucide-external-link");
-    expect(styles).toContain(".lucide-arrow-up-right");
-    expect(styles).toContain(".lucide-square-arrow-out-up-right");
+  it("uses the same outbound-square icon for external links and hides diagonal arrows inside links", () => {
+    expect(styles).toContain("a[href^=\"http\"]");
+    expect(styles).toContain("--outgoing-link-icon");
+    expect(styles).toContain("a svg:is(.lucide-external-link, .lucide-arrow-up-right");
     expect(styles).toContain("display: none !important");
-    // Do not hide every icon universally: independent buttons and cards retain them.
-    expect(styles).not.toMatch(/(?:^|\n)\s*svg\.lucide-external-link\s*\{/);
+    expect(styles).toContain('a[href^="http"]:not([data-external-icon="none"]):not(:has(img, picture, figure))::after');
+    expect(styles).toContain('a[href^="http"]:not([data-external-icon="none"]):has(img, picture, figure)::after');
+    expect(styles).toContain("table :is(th, td).sticky.left-0:first-child");
+    expect(styles).toContain("max-inline-size: 7.75rem");
   });
 
   it("keeps plain link text and an accessible new-tab description in the senior guide", () => {
