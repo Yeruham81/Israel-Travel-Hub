@@ -1,22 +1,23 @@
 import { Link } from "@tanstack/react-router";
-import { ArrowUpRight, BusFront, CarFront, Clock3, Footprints, MapPinned, Ticket } from "lucide-react";
+import { ArrowUpRight, BusFront, CarFront, Clock3, Footprints } from "lucide-react";
 import {
   AttractionDestinationPage, AttractionHighlight, AttractionPracticalTip,
   type AttractionDestinationContent,
 } from "@/components/AttractionDestinationPage";
 import { ExternalTourCard } from "@/components/TourCatalog";
+import { CuratedPartnerTourCard } from "@/components/CuratedPartnerTourCard";
+import { OldCityJerusalemRouteMap } from "@/components/OldCityJerusalemRouteMap";
 import { tourProducts } from "@/data/registry";
 import { oldCityJerusalemSite } from "@/data/oldCityJerusalemSite";
 import oldCityTourPhoto from "@/assets/home/jerusalem-old-city-card.webp";
+import guidedTourPhoto from "@/assets/home/guided-tour-card.webp";
 import gateTourPhoto from "@/assets/home/hero-refresh-jerusalem-jaffa-gate-v4-medium.webp";
 
-const featuredOldCityTours = tourProducts.filter(tour => tour.status === "published" && (tour.id === "jerusalem-old-city-walk" || tour.id === "jerusalem-private-oldcity-walk" || tour.id === "jerusalem-day-tel-aviv"));
+const featuredOldCityTours = tourProducts.filter(tour => tour.status === "published" && (tour.id === "jerusalem-old-city-walk" || tour.id === "jerusalem-private-oldcity-walk"));
 
 const official = oldCityJerusalemSite.official;
 const info = oldCityJerusalemSite.visitor;
 const inlineLink = "font-semibold text-primary underline underline-offset-4";
-const mapEmbed = "https://maps.google.com/maps?q=Old%20City%20Jerusalem%2C%20Israel&hl=en&z=14&t=m&output=embed";
-const mapLarger = "https://www.google.com/maps/search/?api=1&query=Old%20City%20Jerusalem%2C%20Israel";
 const jaffaGateDirections = "https://www.google.com/maps/dir/?api=1&destination=Jaffa%20Gate%2C%20Jerusalem%2C%20Israel&travelmode=driving";
 const dungGateDirections = "https://www.google.com/maps/dir/?api=1&destination=Dung%20Gate%2C%20Jerusalem%2C%20Israel&travelmode=driving";
 const damascusGateDirections = "https://www.google.com/maps/dir/?api=1&destination=Damascus%20Gate%2C%20Jerusalem%2C%20Israel&travelmode=walking";
@@ -35,7 +36,7 @@ export const oldCityJerusalemDestinationContent: AttractionDestinationContent = 
   path: "/attractions/old-city-jerusalem/",
   placeName: "Jerusalem's Old City",
   title: oldCityJerusalemSite.title,
-  heroTitle: "Jerusalem's Old City: Sights & Visitor Tips",
+  heroTitle: "Jerusalem’s Old City: What to See & How to Visit",
   highlightsTitle: "What to see in Jerusalem's Old City",
   region: oldCityJerusalemSite.region,
   updatedAt: oldCityJerusalemSite.updatedAt,
@@ -44,8 +45,10 @@ export const oldCityJerusalemDestinationContent: AttractionDestinationContent = 
   visitorTitle: "Opening hours, tickets and accessibility",
   visitorNavLabel: "Hours & tickets",
   historyTitle: "A city of four historic quarters",
-  relatedTitle: "Explore Jerusalem and day trips across Israel",
-  contactIntroduction: "Tell me when you're visiting, where you're staying and which landmarks matter most to you. I'll be happy to help plan a private Jerusalem visit or a longer day in the area.",
+  relatedTitle: "Continue exploring Jerusalem",
+  itineraryFirst: true,
+  itineraryTitle: "Plan your Old City visit",
+  contactIntroduction: "Tell me your hotel or pickup point, visiting date and the Old City landmarks you would like to see. I can arrange convenient private transport to a suitable entrance gate, coordinate a pickup after your walk or plan a longer Jerusalem day.",
   facts: [
     { icon: "location", label: "Location", value: "Inside the city walls", note: "Jaffa, Damascus, Dung and Zion Gates" },
     { icon: "duration", label: "Time needed", value: "2–3 hours to a full day", note: "Allow 4–5 hours for the main sights and a relaxed walk" },
@@ -57,44 +60,44 @@ export const oldCityJerusalemDestinationContent: AttractionDestinationContent = 
   glanceNote: <>The <strong>Old City streets, Western Wall prayer plaza and Church of the Holy Sepulchre</strong> are generally free to enter. Paid experiences such as the <a href={official.tower} target="_blank" rel="noopener noreferrer" className={inlineLink}>Tower of David</a>, the <a href={official.tunnels} target="_blank" rel="noopener noreferrer" className={inlineLink}>Western Wall Tunnels</a> and the <a href={official.ramparts} target="_blank" rel="noopener noreferrer" className={inlineLink}>Ramparts Walk</a> have their own arrangements. Plan your route around the sites you most want to see.</>,
   highlightContent: (
     <div className="mt-4 space-y-3">
-      <AttractionHighlight title="The Western Wall (Kotel)" image={{ src: photos.wall, alt: "Western Wall prayer plaza beneath Jerusalem's ancient stone walls, with the Dome of the Rock visible behind" }}>
+      <AttractionHighlight mobileImageFirst title="The Western Wall (Kotel)" image={{ src: photos.wall, alt: "Western Wall prayer plaza beneath Jerusalem's ancient stone walls, with the Dome of the Rock visible behind" }}>
         <p>One of the most visited places in Jerusalem, the Western Wall is a Jewish prayer site beside the western retaining wall of the ancient Temple Mount. The open plaza is worth visiting even on a short walk through the Old City.</p>
         <p>The plaza is generally open around the clock and entry is free. Be respectful of worshippers, follow the posted prayer-area arrangements and allow extra time for security screening during holidays. <a href={official.westernWall} target="_blank" rel="noopener noreferrer" className={inlineLink}>Western Wall visitor information</a>.</p>
         <p className="text-xs font-semibold text-muted-foreground">Free entry to the prayer plaza</p>
       </AttractionHighlight>
-      <AttractionHighlight title="Church of the Holy Sepulchre" image={{ src: photos.sepulchre, alt: "Ornate chapel with lamps and religious paintings inside the Church of the Holy Sepulchre" }}>
+      <AttractionHighlight mobileImageFirst title="Church of the Holy Sepulchre" image={{ src: photos.sepulchre, alt: "Ornate chapel with lamps and religious paintings inside the Church of the Holy Sepulchre" }}>
         <p>In the Christian Quarter, this major pilgrimage church is traditionally associated with the crucifixion, burial and resurrection of Jesus. Its chapels, tomb shrine and prayer spaces are shared by several Christian communities.</p>
         <p>Entry is free, but services and visitor queues can affect access. I recommend allowing at least an hour if you would like to explore more than the entrance area. Check the <a href={official.christianHours} target="_blank" rel="noopener noreferrer" className={inlineLink}>Christian Information Center's current church hours</a>.</p>
         <p className="text-xs font-semibold text-muted-foreground">Free entry; opening hours vary seasonally</p>
       </AttractionHighlight>
-      <AttractionHighlight title="Via Dolorosa and the Christian Quarter" image={{ src: photos.via, alt: "Narrow stone street and shops along the Via Dolorosa in Jerusalem's Old City" }}>
+      <AttractionHighlight mobileImageFirst title="Via Dolorosa and the Christian Quarter" image={{ src: photos.via, alt: "Narrow stone street and shops along the Via Dolorosa in Jerusalem's Old City" }}>
         <p>The Via Dolorosa is the traditional route associated with Jesus carrying the cross. Its Stations of the Cross pass through busy streets, chapels and parts of the Muslim and Christian Quarters, ending at the Holy Sepulchre.</p>
         <p>Walking along the public streets is free. You can follow the marked stations independently or join a pilgrimage-focused guided walk; individual chapels may have restricted hours. <Link to="/travel-blog/churches-in-jerusalem/" className={inlineLink}>Explore more Jerusalem churches</Link>.</p>
         <p className="text-xs font-semibold text-muted-foreground">Free public walking route</p>
       </AttractionHighlight>
-      <AttractionHighlight title="Temple Mount" image={{ src: photos.temple, alt: "Golden Dome of the Rock on the Temple Mount in Jerusalem" }}>
+      <AttractionHighlight mobileImageFirst title="Temple Mount" image={{ src: photos.temple, alt: "Golden Dome of the Rock on the Temple Mount in Jerusalem" }}>
         <p>The Temple Mount is sacred to Judaism and Islam. The compound includes the Dome of the Rock and Al-Aqsa Mosque and is one of the most significant religious sites in Jerusalem.</p>
         <p><strong>Visitor access is tightly controlled.</strong> Non-Muslim visits, when permitted, normally use the Mughrabi Gate approach beside the Western Wall, on Sunday–Thursday during limited visiting windows. Access for non-Muslim visitors is generally closed on Fridays and Saturdays, and may also be restricted on religious holidays or for security reasons. The interiors of Al-Aqsa Mosque and the Dome of the Rock are generally not open to non-Muslim visitors. Check the latest access arrangements shortly before your visit.</p>
         <p className="text-xs font-semibold text-muted-foreground">Limited visiting windows; no general admission to the shrine interiors</p>
       </AttractionHighlight>
-      <AttractionHighlight title="Jewish Quarter, Cardo and Hurva Synagogue" image={{ src: photos.cardo, alt: "Historic vaulted Cardo shopping passage with stone paving in Jerusalem's Jewish Quarter" }}>
+      <AttractionHighlight mobileImageFirst title="Jewish Quarter, Cardo and Hurva Synagogue" image={{ src: photos.cardo, alt: "Historic vaulted Cardo shopping passage with stone paving in Jerusalem's Jewish Quarter" }}>
         <p>The Jewish Quarter offers restored lanes, archaeological remains, the Cardo's colonnaded Roman-era street and the distinctive Hurva Synagogue. It is an enjoyable area for an unhurried walk between the market streets and the Western Wall.</p>
         <p>The public streets and open sections of the Cardo can be explored freely. Entry to certain archaeological exhibits, synagogue interiors and guided attractions may require a separate ticket or have limited visiting hours.</p>
         <p className="text-xs font-semibold text-muted-foreground">Public lanes free; indoor attractions may be ticketed</p>
       </AttractionHighlight>
-      <AttractionHighlight title="Tower of David Jerusalem Museum and Jaffa Gate" image={{ src: photos.tower, alt: "Ancient stone fortress, towers and courtyards at the Tower of David near Jaffa Gate" }}>
+      <AttractionHighlight mobileImageFirst title="Tower of David Jerusalem Museum and Jaffa Gate" image={{ src: photos.tower, alt: "Ancient stone fortress, towers and courtyards at the Tower of David near Jaffa Gate" }}>
         <p>Just inside Jaffa Gate, the Tower of David's citadel offers an excellent introduction to the city's long history through archaeology, exhibitions and views from the fortress. The nearby gate is also a practical starting point for exploring the Christian and Armenian Quarters.</p>
         <p>Allow around 60–90 minutes for the museum. The main visitor entrance is opposite Jaffa Gate Plaza, near the exit from Mamilla Avenue, rather than through the historic Jaffa Gate passage. Museum tickets are separate from other Old City attractions. <a href={official.towerEntrance} target="_blank" rel="noopener noreferrer" className={inlineLink}>Find the museum entrance</a> and <a href={official.tower} target="_blank" rel="noopener noreferrer" className={inlineLink}>check tickets and hours</a>.</p>
         <p>From Jaffa Gate, you can also explore the quieter Armenian Quarter and the Cathedral of St. James. The cathedral normally admits visitors only during short prayer-service periods, and the surrounding monastery is not open for casual visits. <a href={official.stJames} target="_blank" rel="noopener noreferrer" className={inlineLink}>Check the visitor arrangements</a> before going.</p>
         <p className="text-xs font-semibold text-muted-foreground">Museum admission: {info.towerAdult} adult; Jaffa Gate itself is free</p>
       </AttractionHighlight>
-      <AttractionHighlight title="Western Wall Tunnels" image={{ src: photos.tunnels, alt: "Illuminated ancient stone vaults along the underground Western Wall Tunnels tour" }}>
+      <AttractionHighlight mobileImageFirst title="Western Wall Tunnels" image={{ src: photos.tunnels, alt: "Illuminated ancient stone vaults along the underground Western Wall Tunnels tour" }}>
         <p>A guided walk beneath the Old City streets reveals historic sections of the Western Wall, archaeological layers and stone passages that are not visible from the plaza above. Several routes are offered, each with a different emphasis.</p>
         <p>Unlike the outdoor plaza, tunnel visits are paid and should be booked for a specific tour time. <a href={official.tunnelsBooking} target="_blank" rel="noopener noreferrer" className={inlineLink}>View tours and book directly with the Western Wall Heritage Foundation</a>.</p>
         <p>Accessibility varies considerably by route: the Great Stone Tour is partly accessible with advance arrangements for wheelchair users, while the Great Bridge route is not wheelchair accessible. Check the <a href={official.tunnelsAccessibility} target="_blank" rel="noopener noreferrer" className={inlineLink}>official tour-by-tour accessibility guidance</a> before booking.</p>
         <p className="text-xs font-semibold text-muted-foreground">Ticketed guided tour; advance booking recommended</p>
       </AttractionHighlight>
-      <AttractionHighlight title="Damascus Gate and the Muslim Quarter Markets" image={{ src: photos.damascus, alt: "Historic stone Damascus Gate at the entrance to Jerusalem's Old City" }}>
+      <AttractionHighlight mobileImageFirst title="Damascus Gate and the Muslim Quarter Markets" image={{ src: photos.damascus, alt: "Historic stone Damascus Gate at the entrance to Jerusalem's Old City" }}>
         <p>Damascus Gate leads into the lively markets of the Muslim Quarter, where you can browse traditional food shops, souks and narrow streets. The gate is also a useful approach to the early stations of the Via Dolorosa.</p>
         <p>For panoramic views, the separate <a href={official.ramparts} target="_blank" rel="noopener noreferrer" className={inlineLink}>Ramparts Walk</a> starts at Jaffa Gate, not Damascus Gate. Its visitor routes have stairs, uneven paving and narrow elevated paths; they are not wheelchair accessible or suitable for baby strollers.</p>
         <p className="text-xs font-semibold text-muted-foreground">Markets and gate free; separate Ramparts Walk: {info.rampartsAdult} per adult</p>
