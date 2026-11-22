@@ -116,7 +116,7 @@ describe("Jerusalem Old City — upgraded visitor guide", () => {
     const expected = [
       "/attractions/mount-of-olives/", "/attractions/mount-zion/",
       "/travel-blog/jerusalem-travel-guide/", "/travel-blog/churches-in-jerusalem/",
-      "/travel-blog/museums-in-jerusalem/", "/travel-blog/shopping-in-jerusalem/",
+      "/travel-blog/museums-in-jerusalem/", "/attractions/via-dolorosa/",
     ];
     expect(content.nearby?.map(item => item.to)).toEqual(expected);
     expect(content.planningLinks).toHaveLength(6);
