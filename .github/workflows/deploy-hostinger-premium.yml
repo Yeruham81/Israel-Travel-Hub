@@ -237,12 +237,12 @@ jobs:
           test -s attractions/eilat/index.html
           REMOTE
 
-      - name: Preserve original airport guide and private driver URLs
+      - name: Preserve established public URLs
         if: steps.freshness.outputs.current == 'true' && env.DRY_RUN != 'true'
         shell: bash
         run: |
           set -euo pipefail
-          # Move only the five superseded staging documents outside the webroot.
+          # Move only the six superseded staging documents outside the webroot.
           # Require their restored replacements first; do not install redirects.
           for city in jerusalem tel-aviv haifa ein-bokek; do
             test -s ".output/public/travel-blog/ben-gurion-airport-to-$city/index.html"
@@ -250,6 +250,8 @@ jobs:
           done
           test -s .output/public/private-driver-in-israel/index.html
           test ! -e .output/public/private-driver/index.html
+          test -s .output/public/about-me/index.html
+          test ! -e .output/public/about-moshe-barak/index.html
           BACKUP_DIR="$(dirname "$HOSTINGER_REMOTE_PATH")/cms-static-backups/$GITHUB_RUN_ID/restored-original-urls"
           ssh -p "$HOSTINGER_SSH_PORT" -i "$HOME/.ssh/hostinger_deploy" -o BatchMode=yes -o StrictHostKeyChecking=yes -o UserKnownHostsFile="$HOME/.ssh/known_hosts" \
             "$HOSTINGER_SSH_USER@$HOSTINGER_SSH_HOST" \
@@ -264,9 +266,11 @@ jobs:
             travel-blog/how-to-get-from-ben-gurion-airport-to-tel-aviv \
             travel-blog/how-to-get-from-ben-gurion-airport-to-haifa \
             travel-blog/how-to-get-from-ben-gurion-airport-to-ein-bokek \
-            private-driver; do
+            private-driver \
+            about-moshe-barak; do
             case "$retired" in
               private-driver) retained=private-driver-in-israel ;;
+              about-moshe-barak) retained=about-me ;;
               *) retained="travel-blog/${retired#travel-blog/how-to-get-from-}" ;;
             esac
             test ! -L "$retained"

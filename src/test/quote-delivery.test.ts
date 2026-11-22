@@ -19,7 +19,7 @@ const payload = (request: QuoteRequest = transfer): QuoteRequestPayload => ({
   requestId: randomUUID(), website: "", request,
   ...(request.kind === "transfer" ? { sourcePath: "/airport-transfers/", sourceTitle: "Airport transfers" }
     : request.kind === "driver" ? { sourcePath: "/private-driver-in-israel/", sourceTitle: "Private driver in Israel" }
-      : request.kind === "contact" ? { sourcePath: "/about-moshe-barak/", sourceTitle: "About Moshe Barak" }
+      : request.kind === "contact" ? { sourcePath: "/about-me/", sourceTitle: "About Moshe Barak" }
       : { sourcePath: `/${request.portId}-shore-excursions/`, sourceTitle: `${request.portId === "haifa" ? "Haifa" : "Ashdod"} shore excursions: private day trips & prices` }),
 });
 function post(data: unknown, headers: Record<string, string> = {}) {

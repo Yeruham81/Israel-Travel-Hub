@@ -3,12 +3,12 @@ import { createMemoryHistory, createRouter, RouterContextProvider } from "@tanst
 import { act, cleanup, fireEvent, render, screen, within } from "@testing-library/react";
 import { afterEach, describe, expect, it, vi } from "vitest";
 import { routeTree } from "@/routeTree.gen";
-import { Route as AboutRoute } from "@/routes/about-moshe-barak";
+import { Route as AboutRoute } from "@/routes/about-me";
 import { tripadvisorProfileUrl, tripadvisorReviews } from "@/data/homeReviews";
 
 afterEach(() => { cleanup(); vi.useRealTimers(); });
 
-async function aboutRouter(path = "/about-moshe-barak/") {
+async function aboutRouter(path = "/about-me/") {
   const router = createRouter({ routeTree, context: { queryClient: new QueryClient() }, history: createMemoryHistory({ initialEntries: [path] }), trailingSlash: "always" });
   await router.load();
   return router;
@@ -41,7 +41,7 @@ describe("one personal About Moshe Barak page", () => {
     narrative.querySelectorAll("blockquote, form").forEach(element => element.remove());
     expect(narrative.textContent).not.toMatch(/\bwe\b|\bour\b|Moshe's|with Moshe|Send Moshe|Ask Moshe/i);
     const head = await AboutRoute.options.head?.({} as never);
-    expect(head!.links).toContainEqual({ rel: "canonical", href: expect.stringMatching(/\/about-moshe-barak\/$/) });
+    expect(head!.links).toContainEqual({ rel: "canonical", href: expect.stringMatching(/\/about-me\/$/) });
   });
 
   it("uses the shared six-second Tripadvisor carousel with dot-only navigation", async () => {

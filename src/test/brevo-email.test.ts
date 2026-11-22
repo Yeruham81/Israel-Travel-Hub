@@ -126,7 +126,7 @@ describe("Brevo REST transport", () => {
     const requestId = crypto.randomUUID();
     const request = () => new Request("https://example.com/api/quote-request/", {
       method: "POST", headers: { Origin: "https://example.com", "Content-Type": "application/json" },
-      body: JSON.stringify({ requestId, sourcePath: "/about-moshe-barak/", sourceTitle: "About Moshe Barak", website: "", request: { kind: "contact", fields: { name: "Test visitor", email: "guest@example.com", subject: "Test enquiry", message: "Test message", consent: true } } }),
+      body: JSON.stringify({ requestId, sourcePath: "/about-me/", sourceTitle: "About Moshe Barak", website: "", request: { kind: "contact", fields: { name: "Test visitor", email: "guest@example.com", subject: "Test enquiry", message: "Test message", consent: true } } }),
     });
     expect(await (await first(request())).json()).toEqual({ accepted: true, requestId });
     const duplicate = await anotherInstance(request());

@@ -42,6 +42,7 @@ const preservedRoutes = [
     `/travel-blog/how-to-get-from-ben-gurion-airport-to-${city}/`,
   ]),
   ["/private-driver-in-israel/", "/private-driver/"],
+  ["/about-me/", "/about-moshe-barak/"],
 ];
 for (const [retained, retired] of preservedRoutes) {
   assert(paths.has(retained), `Established URL missing from sitemap: ${retained}`);

@@ -10,7 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
-import { Route as AboutMosheBarakRouteImport } from './routes/about-moshe-barak'
+import { Route as AboutMeRouteImport } from './routes/about-me'
 import { Route as CarRentalRouteImport } from './routes/car-rental'
 import { Route as PrivacyPolicyRouteImport } from './routes/privacy-policy'
 import { Route as PrivateDriverInIsraelRouteImport } from './routes/private-driver-in-israel'
@@ -141,9 +141,9 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
-const AboutMosheBarakRoute = AboutMosheBarakRouteImport.update({
-  id: '/about-moshe-barak',
-  path: '/about-moshe-barak',
+const AboutMeRoute = AboutMeRouteImport.update({
+  id: '/about-me',
+  path: '/about-me',
   getParentRoute: () => rootRouteImport,
 } as any)
 const CarRentalRoute = CarRentalRouteImport.update({
@@ -844,7 +844,7 @@ const AccommodationTiberiasLuxuryRoute =
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/about-moshe-barak': typeof AboutMosheBarakRoute
+  '/about-me': typeof AboutMeRoute
   '/car-rental': typeof CarRentalRoute
   '/privacy-policy': typeof PrivacyPolicyRoute
   '/private-driver-in-israel': typeof PrivateDriverInIsraelRoute
@@ -972,7 +972,7 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/about-moshe-barak': typeof AboutMosheBarakRoute
+  '/about-me': typeof AboutMeRoute
   '/car-rental': typeof CarRentalRoute
   '/privacy-policy': typeof PrivacyPolicyRoute
   '/private-driver-in-israel': typeof PrivateDriverInIsraelRoute
@@ -1101,7 +1101,7 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
-  '/about-moshe-barak': typeof AboutMosheBarakRoute
+  '/about-me': typeof AboutMeRoute
   '/car-rental': typeof CarRentalRoute
   '/privacy-policy': typeof PrivacyPolicyRoute
   '/private-driver-in-israel': typeof PrivateDriverInIsraelRoute
@@ -1231,7 +1231,7 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
-    | '/about-moshe-barak'
+    | '/about-me'
     | '/car-rental'
     | '/privacy-policy'
     | '/private-driver-in-israel'
@@ -1359,7 +1359,7 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
-    | '/about-moshe-barak'
+    | '/about-me'
     | '/car-rental'
     | '/privacy-policy'
     | '/private-driver-in-israel'
@@ -1487,7 +1487,7 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
-    | '/about-moshe-barak'
+    | '/about-me'
     | '/car-rental'
     | '/privacy-policy'
     | '/private-driver-in-israel'
@@ -1616,7 +1616,7 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  AboutMosheBarakRoute: typeof AboutMosheBarakRoute
+  AboutMeRoute: typeof AboutMeRoute
   CarRentalRoute: typeof CarRentalRoute
   PrivacyPolicyRoute: typeof PrivacyPolicyRoute
   PrivateDriverInIsraelRoute: typeof PrivateDriverInIsraelRoute
@@ -1752,11 +1752,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/about-moshe-barak': {
-      id: '/about-moshe-barak'
-      path: '/about-moshe-barak'
-      fullPath: '/about-moshe-barak'
-      preLoaderRoute: typeof AboutMosheBarakRouteImport
+    '/about-me': {
+      id: '/about-me'
+      path: '/about-me'
+      fullPath: '/about-me'
+      preLoaderRoute: typeof AboutMeRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/car-rental': {
@@ -2632,7 +2632,7 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  AboutMosheBarakRoute: AboutMosheBarakRoute,
+  AboutMeRoute: AboutMeRoute,
   CarRentalRoute: CarRentalRoute,
   PrivacyPolicyRoute: PrivacyPolicyRoute,
   PrivateDriverInIsraelRoute: PrivateDriverInIsraelRoute,

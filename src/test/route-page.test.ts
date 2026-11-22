@@ -8,7 +8,7 @@ import { relFor } from "@/lib/outbound";
 describe("registry & routes", () => {
   it("matches the route page and about", () => {
     const r = createRouter({ routeTree, context: { queryClient: new QueryClient() }, trailingSlash: "always" });
-    for (const p of ["/airport-transfers/jerusalem/", "/about-moshe-barak/"]) {
+    for (const p of ["/airport-transfers/jerusalem/", "/about-me/"]) {
       expect(r.matchRoutes(p).at(-1)?.routeId).not.toBe(rootRouteId);
     }
   });

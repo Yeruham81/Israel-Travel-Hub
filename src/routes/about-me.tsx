@@ -8,12 +8,12 @@ import { customerTestimonials } from "@/data/homeReviews";
 import { HomeContactForm } from "@/components/HomeContactForm";
 import { TripadvisorReviewsSection } from "@/components/HomeTestimonials";
 
-export const Route = createFileRoute("/about-moshe-barak")({
+export const Route = createFileRoute("/about-me")({
   head: () => {
     const meta = pageMeta({
       title: "About Moshe Barak | Private Driver & Airport Transfers in Israel",
       description: "I'm Moshe Barak. I've spent more than 20 years helping visitors travel around Israel. Get to know me, read my travelers' reviews and plan your journey with me.",
-      path: "/about-moshe-barak/",
+      path: "/about-me/",
     });
     return { ...meta, scripts: [...meta.scripts, { type: "application/ld+json", children: JSON.stringify({ "@context": "https://schema.org", ...authorLd() }).replaceAll("<", "\\u003c") }] };
   },

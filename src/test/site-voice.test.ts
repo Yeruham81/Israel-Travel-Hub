@@ -68,7 +68,7 @@ describe("owner voice throughout the public site", () => {
       "src/components/JerusalemPartnerOffers.tsx",
       "src/components/JerusalemHotelBrowser.tsx",
       "src/components/TelAvivHotelBrowser.tsx",
-      "src/routes/about-moshe-barak.tsx",
+      "src/routes/about-me.tsx",
     ]) {
       expect(source(file), file).not.toMatch(/Sponsored link|Affiliate link|earn me a commission|sponsored booking link/i);
     }

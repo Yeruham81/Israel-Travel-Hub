@@ -13,7 +13,7 @@ const now = () => Date.parse("2026-10-21T12:00:00Z");
 afterEach(() => { cleanup(); vi.unstubAllGlobals(); vi.restoreAllMocks(); window.history.replaceState(null, "", "/"); document.title = ""; localStorage.clear(); });
 
 async function contactForm(context: "homepage" | "about" = "homepage") {
-  const path = context === "about" ? "/about-moshe-barak/" : "/";
+  const path = context === "about" ? "/about-me/" : "/";
   const title = context === "about" ? "About Moshe Barak" : "Israel Travel Hub";
   window.history.replaceState(null, "", `${path}?campaign=private#contact`);
   document.title = "SEO title | Israel Travel Hub";

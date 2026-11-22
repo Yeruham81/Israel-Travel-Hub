@@ -12,7 +12,7 @@ const email = <a href={`mailto:${airportTransferContact.email}`}>{airportTransfe
 const sections: LegalSection[] = [
   { id: "scope", title: "The website and its operator", content: <>
     <p>I am Moshe Barak, the operator of Israel Taxi &amp; Travel. The website combines travel information with information about my own private transport service and links to independent providers. These roles are identified separately.</p>
-    <p>These terms govern use of this website and explain how direct-service enquiries are handled. A confirmed booking also has its accepted written quote and booking conditions. Mandatory legal rights take priority over a conflicting term. My <Link to="/privacy-policy/">Privacy Policy</Link> explains the handling of information, and <Link to="/about-moshe-barak/" hash="methodology">About Moshe Barak</Link> explains my editorial and commercial approach.</p>
+    <p>These terms govern use of this website and explain how direct-service enquiries are handled. A confirmed booking also has its accepted written quote and booking conditions. Mandatory legal rights take priority over a conflicting term. My <Link to="/privacy-policy/">Privacy Policy</Link> explains the handling of information, and <Link to="/about-me/" hash="methodology">About Moshe Barak</Link> explains my editorial and commercial approach.</p>
   </> },
   { id: "enquiries-confirmation", title: "Enquiries and booking confirmation", content: <>
     <p>An adult with authority to make the arrangements should submit an enquiry or book for a group. Please supply accurate contact, pickup, destination, date, passenger and luggage details, and tell me about material changes.</p>

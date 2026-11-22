@@ -35,7 +35,7 @@ export function airportRouteMeta(id: AirportTransferRouteId) {
     name: guide.title, description: guide.description, inLanguage: "en", author: authorLd(),
     primaryImageOfPage: { "@type": "ImageObject", url: new URL((airportHomepageRoutePhotos[id] ?? guide.photo).src, CANONICAL_ORIGIN).href },
     mainEntity: { "@type": "Service", name: guide.title, serviceType: "Private airport transfer",
-      provider: { "@type": "Person", name: "Moshe Barak", url: `${CANONICAL_ORIGIN}/about-moshe-barak/#moshe-barak` },
+      provider: { "@type": "Person", name: "Moshe Barak", url: `${CANONICAL_ORIGIN}/about-me/#moshe-barak` },
       areaServed: [{ "@type": "Place", name: "Ben Gurion Airport" }, { "@type": "Place", name: guide.city }],
     },
   })] };

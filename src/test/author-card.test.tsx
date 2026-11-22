@@ -3,7 +3,7 @@ import { createMemoryHistory, createRouter, RouterContextProvider } from "@tanst
 import { cleanup, fireEvent, render, screen, within } from "@testing-library/react";
 import { afterEach, describe, expect, it } from "vitest";
 import { routeTree } from "@/routeTree.gen";
-import { Route as AboutRoute } from "@/routes/about-moshe-barak";
+import { Route as AboutRoute } from "@/routes/about-me";
 import { GuidePhotoCredit } from "@/components/TravelGuide";
 import { SourceList } from "@/components/Guide";
 import { formatCheckDate, getSource, isPublisherUrl, mosheBarakAuthor } from "@/data/registry";
@@ -44,7 +44,7 @@ describe("independent author identity and page credits", () => {
       expect(labelLines[1]).toHaveClass("text-sm", "font-bold");
       expect(reviews.querySelector('span[aria-hidden="true"]')).toHaveClass("bg-[#34E0A1]");
       expect(reviews.querySelector('img[src="/images/tripadvisor-owl-black.svg"]')).toHaveAttribute("width", "28");
-      expect(within(card).getByRole("link", { name: "Moshe Barak" })).toHaveAttribute("href", "/about-moshe-barak/#moshe-barak");
+      expect(within(card).getByRole("link", { name: "Moshe Barak" })).toHaveAttribute("href", "/about-me/#moshe-barak");
       expect(card).not.toHaveTextContent(/5\.0|five stars|\d+ reviews|licensed guide/i);
       expect(container.querySelector('a[href*="israel-taxi.com/wp-content/"]'), path).toBeNull();
       expect(container.querySelector('#sources a[href*="israel-taxi.com"]'), path).toBeNull();
@@ -89,12 +89,12 @@ describe("independent author identity and page credits", () => {
   });
 
   it("connects the visible local author biography to Person metadata without inventing review ratings", async () => {
-    const { container } = await pageAt("/about-moshe-barak/");
+    const { container } = await pageAt("/about-me/");
     expect(container.querySelector("#moshe-barak")).toHaveTextContent("Moshe Barak");
     expect(screen.getByRole("heading", { level: 1, name: "About Moshe Barak" })).toBeInTheDocument();
     const head = await AboutRoute.options.head?.({} as never);
     const schema = head!.scripts!.flatMap((script) => typeof script?.children === "string" ? [JSON.parse(script.children)] : []).find((item) => item["@type"] === "Person");
-    expect(schema).toMatchObject({ name: "Moshe Barak", url: expect.stringMatching(/\/about-moshe-barak\/#moshe-barak$/), sameAs: [mosheBarakAuthor.reviewsUrl] });
+    expect(schema).toMatchObject({ name: "Moshe Barak", url: expect.stringMatching(/\/about-me\/#moshe-barak$/), sameAs: [mosheBarakAuthor.reviewsUrl] });
     expect(schema.aggregateRating).toBeUndefined();
     expect(schema.review).toBeUndefined();
     expect(head!.meta).toContainEqual({ name: "robots", content: "noindex,nofollow" });

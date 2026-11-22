@@ -200,7 +200,7 @@ export function SiteFooter() {
             <li><Link to="/airport-transfers/jerusalem/">Airport to Jerusalem</Link></li>
             <li><Link to="/travel-blog/">Travel guides</Link></li>
             <li><Link to="/travel-blog/getting-around-israel/">Getting around Israel</Link></li>
-            <li><Link to="/about-moshe-barak/">About Moshe Barak</Link></li>
+            <li><Link to="/about-me/">About Moshe Barak</Link></li>
           </ul>
         </div>
         <div className="text-sm opacity-90">

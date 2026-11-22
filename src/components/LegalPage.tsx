@@ -37,7 +37,7 @@ export function LegalPage({ title, path, intro, sections, otherDocument }: {
     <aside className="mt-12 rounded-2xl border bg-secondary/50 p-6" aria-label="Legal documents and contact">
       <h2 className="text-xl font-semibold">Questions about this document?</h2>
       <p className="mt-3 leading-relaxed">Contact Moshe Barak at <a href={`mailto:${airportTransferContact.email}`} className="font-semibold text-primary underline">{airportTransferContact.email}</a>.</p>
-      <p className="mt-3"><Link to={otherDocument.to} className="font-semibold text-primary underline">{otherDocument.title}</Link> · <Link to="/about-moshe-barak/" className="text-primary underline">About Moshe Barak</Link></p>
+      <p className="mt-3"><Link to={otherDocument.to} className="font-semibold text-primary underline">{otherDocument.title}</Link> · <Link to="/about-me/" className="text-primary underline">About Moshe Barak</Link></p>
     </aside>
   </main>;
 }

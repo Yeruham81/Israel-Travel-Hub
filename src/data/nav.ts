@@ -57,7 +57,7 @@ export const utilityNav: NavItem[] = [
 ];
 
 export const footerNav: NavItem[] = [
-  { label: "About Moshe Barak", to: "/about-moshe-barak/" },
+  { label: "About Moshe Barak", to: "/about-me/" },
 ];
 
 export const legalNav: NavItem[] = [

@@ -15,7 +15,8 @@ describe("generated XML sitemap and robots.txt", () => {
     expect(paths).not.toContain("/api/exchange-rates/");
     expect(paths).not.toContain("/about/");
     expect(paths).not.toContain("/airport-transfers/ben-gurion-airport/");
-    expect(paths).toContain("/about-moshe-barak/");
+    expect(paths).toContain("/about-me/");
+    expect(paths).not.toContain("/about-moshe-barak/");
     expect(paths).toContain("/privacy-policy/");
     expect(paths).toContain("/terms-of-use/");
     for (const city of ["jerusalem", "tel-aviv", "haifa", "ein-bokek"]) {

@@ -25,7 +25,7 @@ export function tourCategoryMeta(id: TourCategoryId) {
   const meta = pageMeta({ title: `${title} | Israel Taxi & Travel`, description, path, image: category.photo.src, imageAlt: category.photo.alt,
     crumbs: [{ name: "Home", path: "/" }, { name: "Tours & day trips", path: "/tours/" }, { name: title, path }] });
   return { ...meta, scripts: [...meta.scripts, jsonLd({ "@context": "https://schema.org", "@type": "CollectionPage", name: title, description, url: CANONICAL_ORIGIN + path,
-    author: { "@type": "Person", name: "Moshe Barak", url: CANONICAL_ORIGIN + "/about-moshe-barak/" },
+    author: { "@type": "Person", name: "Moshe Barak", url: CANONICAL_ORIGIN + "/about-me/" },
     mainEntity: { "@type": "ItemList", itemListElement: toursForCategory(id).map((tour, index) => ({ "@type": "ListItem", position: index + 1, name: tour.title, url: CANONICAL_ORIGIN + path + "#" + tour.id })) } })] };
 }
 
