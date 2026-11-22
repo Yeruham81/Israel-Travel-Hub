@@ -62,8 +62,8 @@ describe("private driver page and inquiry", () => {
     expect(screen.getByRole("region", { name: "A journey planned around you" }).querySelectorAll("h3")).toHaveLength(3);
     for (const card of screen.getAllByTestId("driver-journey-card")) {
       expect(within(card).getByRole("link", { name: "Request this journey" })).toHaveAttribute("href", "#request-quote");
-      expect(card).toHaveClass("grid-cols-[5.75rem_minmax(0,1fr)]", "sm:grid-cols-[7.5rem_minmax(0,1fr)]", "md:flex", "md:flex-col");
-      expect(within(card).getByRole("img")).toHaveClass("md:aspect-[16/9]", "md:h-auto");
+      expect(card).toHaveClass("flex", "flex-col");
+      expect(within(card).getByRole("img")).toHaveClass("aspect-[16/9]", "h-auto", "w-full");
     }
     const sections = ["journeys", "benefits", "request-quote", "faq", "travel-guides", "next-steps"];
     for (let i = 1; i < sections.length; i++) expect(container.querySelector(`#${sections[i - 1]}`)!.compareDocumentPosition(container.querySelector(`#${sections[i]}`)!)).toBe(Node.DOCUMENT_POSITION_FOLLOWING);
