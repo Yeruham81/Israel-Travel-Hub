@@ -48,7 +48,7 @@ export function StayHotelCard({ hotel, booking, pageId, editorial, compact = fal
              onError={() => { if (!imageFailed) setImageFailed(true); }}
              data-testid="hotel-illustration"
              className={`w-full bg-secondary object-cover ${compact ? "aspect-[16/9]" : "aspect-[16/8]"}`} />
-        <figcaption className="border-b px-4 py-1.5 text-[11px] text-muted-foreground">Illustrative photo · check the property's own listing for current rooms and facilities</figcaption>
+
       </figure>}
       <div className="p-5 sm:p-7">
         <div className="flex items-start gap-4">
