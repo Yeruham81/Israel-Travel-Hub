@@ -923,7 +923,7 @@ jobs:
           const html = fs.readFileSync(process.argv[2], "utf8");
           const expectedUrl = process.argv[3];
           for (const required of [
-            "Mount of Olives: Viewpoint", "Seven Arches", "Pater Noster",
+            "Mount of Olives, Jerusalem: What to See", "Seven Arches", "Pater Noster",
             "Chapel of the Ascension", "Dominus Flevit", "St Mary Magdalene",
             "Gethsemane", "Tomb of the Virgin Mary", "Jewish cemetery",
             'data-testid="mount-olives-hours-fees"',
@@ -931,6 +931,8 @@ jobs:
             'data-testid="mount-olives-walking-routes"',
             'data-testid="mount-olives-access-points"',
             'data-testid="mount-olives-map"',
+            'data-testid="mount-olives-visit-choices"',
+            'data-testid="mount-olives-tour-cards"',
           ]) {
             if (!html.includes(required)) {
               console.error("::error::Mount of Olives public page missing " + required);
@@ -947,14 +949,18 @@ jobs:
             process.exit(1);
           }
           const related = html.match(/<ul[^>]*data-testid=["']stay-trip-photo-grid["'][^>]*>([\s\S]*?)<\/ul>/i);
-          if ((related?.[1].match(/<li\b/g)||[]).length !== 6) {
-            console.error("::error::Mount of Olives requires six related attraction cards");
+          if ((related?.[1].match(/<li\b/g)||[]).length !== 4) {
+            console.error("::error::Mount of Olives requires four relevant Jerusalem related cards");
             process.exit(1);
           }
-          console.log("Mount of Olives public guide, eight highlights, six related cards and canonical verified.");
+          if ((html.match(/data-tour-id=/g)||[]).length !== 3) {
+            console.error("::error::Mount of Olives requires exactly three guided tour cards");
+            process.exit(1);
+          }
+          console.log("Mount of Olives public guide, eight highlights, four related cards, three tours and canonical verified.");
           NODE
           rm -f "$olives_html"
-          for picture in pater-noster.webp chapel-of-ascension.webp dominus-flevit.webp mary-magdalene-church.webp tomb-of-virgin-mary.webp; do
+          for picture in pater-noster.webp chapel-of-ascension.webp dominus-flevit.webp mary-magdalene-church.webp tomb-of-virgin-mary.webp jewish-cemetery.webp; do
             data="$(mktemp)"
             curl --retry 2 --max-time 20 -fsSL -o "$data" "$VITE_CANONICAL_ORIGIN/images/jerusalem/mount-of-olives/$picture"
             node - "$data" "$picture" <<'NODE'
