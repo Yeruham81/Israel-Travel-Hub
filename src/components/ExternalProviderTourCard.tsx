@@ -64,7 +64,7 @@ export function ExternalProviderTourCard({
       {note && <p className="mt-3 text-xs leading-relaxed text-muted-foreground">{note}</p>}
       <div className="mt-auto flex flex-wrap items-end justify-between gap-3 border-t pt-4 text-sm">
         <div>{amount !== undefined ? <>
-          <span className="block text-xs text-muted-foreground">{price?.approximate ? "From approx." : "From"}</span>
+          <span className="block text-xs text-muted-foreground">{price?.approximate ? "From approx. " : "From "}</span>
           <strong className="text-base text-foreground">{currency}{amount}</strong>
           <span className="block text-xs text-muted-foreground">{priceBasis}</span>
         </> : <span className="text-xs font-medium text-muted-foreground">Check current price</span>}</div>
