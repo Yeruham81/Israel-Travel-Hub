@@ -233,7 +233,7 @@ export const bethlehemTourLocalCards = [
 /** Six Galilee-specific illustrated guides. Each image differs from the hero and tour thumbnails. */
 export const galileeTourLocalCards = [
   { to: travelGuidePaths.annunciation, cta: "Explore Nazareth’s basilica", title: "Basilica of the Annunciation", description: "Plan a visit to Nazareth’s landmark church and understand its visiting arrangements.", photo: migration["annunciation-interior"] },
-  { to: "/travel-blog/sea-of-galilee/", cta: "Explore the lake", title: "Sea of Galilee travel guide", description: "Discover Tiberias, lakeside viewpoints and the main visitor stops around the shore.", photo: { src: tiberiasWaterfront, alt: "Waterfront and boats at Tiberias on the Sea of Galilee" } },
+  { to: "/attractions/sea-of-galilee/", cta: "Explore the lake", title: "Sea of Galilee travel guide", description: "Discover Tiberias, lakeside viewpoints and the main visitor stops around the shore.", photo: { src: tiberiasWaterfront, alt: "Waterfront and boats at Tiberias on the Sea of Galilee" } },
   { to: travelGuidePaths.magdala, cta: "Discover Magdala", title: "Magdala archaeological site", description: "Explore ancient remains and the modern Duc in Altum prayer center.", photo: migration["magdala"] },
   { to: "/attractions/mount-of-beatitudes/", cta: "Visit the hillside", title: "Mount of Beatitudes", description: "Plan a visit to the hilltop church and its views over the Sea of Galilee.", photo: { src: mountBeatitudes, alt: "Church of the Beatitudes on the hillside above the Sea of Galilee" } },
   { to: "/attractions/tabgha/", cta: "Explore Tabgha", title: "Tabgha churches", description: "Visit the Church of the Multiplication and nearby lakeside pilgrimage sites.", photo: { src: tabgha, alt: "Church surroundings in Tabgha beside the Sea of Galilee" } },
@@ -262,7 +262,7 @@ export const negevTourLocalCards = [
 
 /** Golan-specific tours with six separate nearby destination-planning guides. */
 export const golanTourLocalCards = [
-  { to: "/travel-blog/sea-of-galilee/", cta: "Explore the lake", title: "Sea of Galilee travel guide", description: "Plan the region below the Golan plateau and its waterfront towns.", photo: { src: tiberiasWaterfront, alt: "Tiberias waterfront on the Sea of Galilee" } },
+  { to: "/attractions/sea-of-galilee/", cta: "Explore the lake", title: "Sea of Galilee travel guide", description: "Plan the region below the Golan plateau and its waterfront towns.", photo: { src: tiberiasWaterfront, alt: "Tiberias waterfront on the Sea of Galilee" } },
   { to: "/attractions/capernaum/", cta: "Explore Capernaum", title: "Capernaum archaeological site", description: "Discover a major lakeside heritage stop near the Golan approach roads.", photo: { src: capernaum, alt: "Ancient synagogue ruins at Capernaum" } },
   { to: "/attractions/mount-of-beatitudes/", cta: "Explore a viewpoint", title: "Mount of Beatitudes", description: "A nearby Galilee hillside destination for a separate day in the north.", photo: { src: mountBeatitudes, alt: "Church on the Mount of Beatitudes near the Sea of Galilee" } },
   { to: "/attractions/tabgha/", cta: "Explore Tabgha", title: "Tabgha churches", description: "A complementary lakeside historic site, not an automatic Golan-tour stop.", photo: { src: tabgha, alt: "Church and grounds at Tabgha beside the lake" } },
