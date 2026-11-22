@@ -84,10 +84,15 @@ function Tip({ children }: { children: ReactNode }) {
   return <aside role="note" className="mt-6 flex gap-3 rounded-xl border border-amber-200 bg-amber-50 p-4 text-sm leading-relaxed text-amber-950 dark:border-amber-700/70 dark:bg-amber-950/25 dark:text-amber-100"><Lightbulb aria-hidden="true" className="mt-0.5 h-5 w-5 shrink-0 text-amber-500"/><p><strong>My tip:</strong> {children}</p></aside>;
 }
 
-function PhotoCard({ image, alt, name, description, href, cta }: { image: string; alt: string; name: string; description: string; href: string; cta: string }) {
-  return <li className="flex h-full min-w-0 flex-col overflow-hidden rounded-xl border bg-card">
-    <img src={guideHeroPhotoForPath(href)?.src ?? image} alt={guideHeroPhotoForPath(href)?.alt ?? alt} width={600} height={360} loading="lazy" decoding="async" className="aspect-[16/9] w-full object-cover"/>
-    <div className="flex flex-1 flex-col p-4"><h4 className="text-lg font-bold">{name}</h4><p className="mt-2 flex-1 text-sm leading-relaxed text-muted-foreground">{description}</p><a href={href} className="mt-auto inline-flex items-center gap-1 pt-4 text-sm font-semibold text-primary underline underline-offset-4 hover:text-primary/80">{cta}<ArrowUpRight className="h-4 w-4" aria-hidden="true"/></a></div>
+function PhotoCard({ image, alt, name, description, href }: { image: string; alt: string; name: string; description: string; href: string; cta: string }) {
+  const photo = guideHeroPhotoForPath(href);
+  return <li className="min-w-0">
+    <a href={href} className="editorial-card-link group flex h-full min-w-0 flex-col overflow-hidden rounded-xl border bg-card transition-all duration-200 hover:border-primary/60 hover:bg-secondary/40 hover:shadow-md focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
+      <span className="block overflow-hidden">
+        <img src={photo?.src ?? image} alt={photo?.alt ?? alt} width={600} height={360} loading="lazy" decoding="async" className="aspect-[16/9] w-full object-cover transition-transform duration-300 group-hover:scale-[1.04]"/>
+      </span>
+      <span className="flex flex-1 flex-col p-4"><strong className="text-lg group-hover:text-primary">{name}</strong><span className="mt-2 text-sm leading-relaxed text-muted-foreground">{description}</span></span>
+    </a>
   </li>;
 }
 
