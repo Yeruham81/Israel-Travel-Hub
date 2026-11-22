@@ -202,7 +202,7 @@ export const mountZionDestinationContent: AttractionDestinationContent = {
           </li>)}
         </ul>
       </div>
-      <AttractionPracticalTip>On Sundays, visit the Upper Room and David’s Tomb first, then Dormition Abbey after 11:30. For St Peter in Gallicantu, choose Monday–Saturday. My <Link to="/attractions/old-city-jerusalem/" className={inlineLink}>Jerusalem Old City guide</Link> helps plan the next part of your walk.</AttractionPracticalTip>
+      <AttractionPracticalTip>On Sundays, visit the Upper Room and David’s Tomb first, then Dormition Abbey after 11:30. For St Peter in Gallicantu, choose Monday–Saturday. My <Link to="/attractions/old-city-jerusalem/" className={inlineLink}>Jerusalem Old City guide</Link> covers the gates and quarters, while the <Link to="/attractions/via-dolorosa/" className={inlineLink}>Via Dolorosa guide</Link> maps the Stations of the Cross.</AttractionPracticalTip>
     </div>
   ),
   historyContent: (
