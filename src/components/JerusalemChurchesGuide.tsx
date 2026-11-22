@@ -1,3 +1,5 @@
+import { ExternalProviderTourCard } from "@/components/ExternalProviderTourCard";
+import { recordOutboundClick } from "@/lib/outbound";
 import { Link } from "@tanstack/react-router";
 import { useEffect, useRef, useState, type ReactNode } from "react";
 import { ArrowUpRight, Church, Clock3, ExternalLink, Lightbulb, MapPin, Ticket } from "lucide-react";
@@ -186,9 +188,16 @@ export function JerusalemChurchesGuide(){
     </section>
     <section id="tours" aria-labelledby="tours-heading" className="mt-12 scroll-mt-24">
       <Heading id="tours" title="Guided church and Christian heritage tours" intro="These tours are operated by independent providers and booked through their own platforms. Before booking, check the current departure date and location, itinerary, guide language, church access, admission fees and cancellation policy directly with the provider."/>
-      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">{availableTours.map(t=><article key={t.url} className="flex flex-col overflow-hidden rounded-xl border bg-card"><img src={t.image} alt={t.alt} width={640} height={360} loading="lazy" decoding="async" className="aspect-[16/9] w-full object-cover"/><div className="flex flex-1 flex-col p-4"><p className="text-xs font-semibold uppercase text-primary">{t.platform}</p><h3 className="mt-2 text-lg font-semibold">{t.title}</h3><p className="mt-2 text-xs font-semibold text-muted-foreground">{t.duration}</p>
-          {"startingPriceUsd" in t && typeof t.startingPriceUsd === "number" && <p className="mt-2 text-sm"><strong>From US${t.startingPriceUsd}</strong><span className="text-muted-foreground"> · previously listed</span></p>}
-          {"rating" in t && typeof t.rating === "number" && <p className="mt-1 text-sm text-muted-foreground">★ {t.rating.toFixed(1)}/5 ({t.reviewCount} reviews)</p>}<p className="mt-2 text-sm leading-relaxed text-muted-foreground">{t.text}</p><div className="mt-auto pt-4"><OutLink href={t.url}>See dates and rates</OutLink></div></div></article>)}</div>
+      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        {availableTours.map(t => <ExternalProviderTourCard key={t.url}
+          image={t.image} alt={t.alt} platform={t.platform}
+          title={t.title} description={t.text} duration={t.duration}
+          rating={"rating" in t && typeof t.rating === "number" && "reviewCount" in t && typeof t.reviewCount === "number" ? {value:t.rating,count:t.reviewCount} : undefined}
+          price={"startingPriceUsd" in t && typeof t.startingPriceUsd === "number" ? {amount:t.startingPriceUsd,currency:"USD",basis:"per_person"} : undefined}
+          href={t.url}
+          onClick={() => recordOutboundClick({pageId:"churches-in-jerusalem",productId:t.affiliateKey,offerId:t.affiliateKey})}
+        />)}
+      </div>
       <p className="mt-3 text-sm leading-relaxed text-muted-foreground">Check current prices, availability, recent reviews, meeting points and inclusions with the booking provider before paying. The Bethlehem option is a separate excursion outside Jerusalem.</p>
       <p className="mt-3 text-sm leading-relaxed text-muted-foreground">For more guided options, browse my <Link to="/tours/jerusalem/" className="font-semibold text-primary underline">Jerusalem tours</Link>. My <Link to="/private-driver-in-israel/" className="font-semibold text-primary underline">private driver service</Link> is transport, not automatically a licensed guiding service.</p>
     </section>
