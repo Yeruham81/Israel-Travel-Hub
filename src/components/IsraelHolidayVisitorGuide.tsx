@@ -15,7 +15,7 @@ export const HOLIDAY_GUIDE_PATH = "/travel-blog/calendar-of-events/";
 export const HOLIDAY_GUIDE_TITLE = "Israel's Calendar of events: A practical guide for visitors";
 export const HOLIDAY_GUIDE_DESCRIPTION = "Plan your visit around Israel's calendar of events: Shabbat, religious holidays, national remembrance days, school breaks and local celebrations that can affect transport, opening hours and crowds.";
 export const HOLIDAY_GUIDE_UPDATED = "2026-11-22";
-export const HOLIDAY_GUIDE_PHOTO = {src:"/images/holiday-guide/jewish-holiday-celebration.webp",alt:"Jewish holiday celebration with a shofar and Torah scroll in Israel"};
+export const HOLIDAY_GUIDE_PHOTO = {src:"/images/holiday-guide/israel-calendar-of-events.webp",alt:"Close-up of a wall calendar with highlighted dates"};
 
 const TOC = [
   ["overview","What visitors need to know"],["travel-effects","Closures, crowds & prices"],
@@ -111,7 +111,7 @@ export function IsraelHolidayVisitorGuidePage(){
   return <main className="mx-auto max-w-5xl px-4 pb-12"><article>
     <header className="pt-6">
       <Breadcrumbs items={[{name:"Home",to:"/"},{name:"Travel guides",to:"/travel-blog/"},{name:"Calendar of events",to:HOLIDAY_GUIDE_PATH}]}/>
-      <GuideHeroLayout image={<GuideHeroMedia src={HOLIDAY_GUIDE_PHOTO.src} alt={HOLIDAY_GUIDE_PHOTO.alt} width={640} height={480} caption="A celebration in Israel; specific festival customs vary by community."/>}>
+      <GuideHeroLayout image={<GuideHeroMedia src={HOLIDAY_GUIDE_PHOTO.src} alt={HOLIDAY_GUIDE_PHOTO.alt} width={640} height={480}/>}>
         <p className="text-xs font-semibold uppercase tracking-[0.16em] text-primary">Practical Israel travel guide</p>
         <h1 className="guide-page-title mt-2">{HOLIDAY_GUIDE_TITLE}</h1>
         <p data-guide-intro className="mt-4 max-w-3xl text-lg leading-relaxed">From Shabbat and Yom Kippur to Passover, Ramadan, Christmas and national memorial days, special dates shape daily life in Israel. I'll explain what visitors should expect before choosing travel days, hotels and sightseeing plans.</p>

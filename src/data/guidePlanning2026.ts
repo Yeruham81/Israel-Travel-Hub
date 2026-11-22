@@ -224,7 +224,7 @@ export const planningGuides = {
     "intro": "From Shabbat and Yom Kippur to Passover, Ramadan, Christmas and national memorial days, special dates shape daily life in Israel.",
     "answer": "Check whether your dates include Shabbat, major Jewish festival days, holiday eves or school breaks. Yom Kippur requires particular attention: regular transport and airport operations stop. Other religious and national dates can affect particular cities and venues without closing the whole country.",
     "topics": ["tips", "religion", "itineraries"],
-    "photo": {"src":"/images/holiday-guide/jewish-holiday-celebration.webp","alt":"Jewish holiday celebration with a shofar and Torah scroll in Israel"},
+    "photo": {"src":"/images/holiday-guide/israel-calendar-of-events.webp","alt":"Close-up of a wall calendar with highlighted dates"},
     "facts": [
       {"label":"Start at sunset","text":"Major Jewish festivals begin on the previous civil evening"},
       {"label":"Transport","text":"Shabbat and major festival days often interrupt rail and bus services"},

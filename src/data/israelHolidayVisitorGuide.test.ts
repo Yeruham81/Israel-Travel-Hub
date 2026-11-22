@@ -25,6 +25,9 @@ describe("Israel holidays visitor guide", () => {
     expect(page).not.toContain("Holidays in Israel: A Practical Guide for Visitors");
     expect(route).toContain("headline:HOLIDAY_GUIDE_TITLE");
     expect(existsSync("public" + HOLIDAY_GUIDE_PHOTO.src)).toBe(true);
+    expect(HOLIDAY_GUIDE_PHOTO.src).toBe("/images/holiday-guide/israel-calendar-of-events.webp");
+    expect(travelGuides.calendar.photo.src).toBe(HOLIDAY_GUIDE_PHOTO.src);
+    expect(guideDirectory.find(g => g.id === "calendar")?.photo?.src).toBe(HOLIDAY_GUIDE_PHOTO.src);
     // The retired date-picker must not be shipped as a separate route.
     expect(existsSync("src/routes/travel-blog.israel-holidays.tsx")).toBe(false);
   });
