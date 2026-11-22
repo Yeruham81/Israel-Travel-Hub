@@ -101,6 +101,16 @@ function HaifaPartnerTours() {
       : [];
   });
   if (!placements.length) return null;
+  // Prioritize established products with documented starting prices and substantial verified review history.
+  placements.sort((a, b) => {
+    const score = (tour: TourPlacement) => {
+      const rating = Number(tour.rating.split("/5")[0]) || 0;
+      const reviews = Number(tour.rating.split("·")[1]?.trim().split(" ")[0]) || 0;
+      const priced = Number(tour.priceFrom.replace(/[^0-9.]/g, "")) > 0;
+      return (priced ? 100 : 0) + rating * 10 + Math.log1p(reviews) * 5;
+    };
+    return score(b) - score(a);
+  });
   return (
     <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3" data-testid="haifa-affiliate-tour-cards">
       {placements.map((tour) => (
