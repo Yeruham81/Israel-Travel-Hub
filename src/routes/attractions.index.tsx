@@ -4,6 +4,7 @@ import { ArrowUpRight, BedDouble, BookOpen, CalendarDays, Smartphone, Sun, Train
 import { HubHeader } from "@/components/Guide";
 import { GuidePhotoCredit } from "@/components/TravelGuide";
 import { hasPublicPhotoCredit } from "@/lib/photo-credits";
+import { guideHeroPhotoForPath } from "@/lib/guide-hero-photos";
 import { attractionHubCards, attractionHubPhotos, attractionHubRegions, attractionPlanningPaths, attractionRelatedGuides, type AttractionHubCard } from "@/data/attractionsHub";
 import { CANONICAL_ORIGIN, jsonLd, pageMeta } from "@/lib/site";
 import { attractionHubCardImageSets, attractionHubRegionImageSets, attractionHubRelatedImageSets } from "@/data/attractionHubResponsivePhotos";
@@ -58,6 +59,7 @@ const planningIcons: Record<(typeof attractionPlanningPaths)[number]["id"], Luci
 };
 
 function AttractionCard({ card }: { card: AttractionHubCard }) {
+  const photo = guideHeroPhotoForPath(String(card.to)) ?? card.photo;
   return (
     <article className="min-w-0 overflow-hidden rounded-2xl border bg-card shadow-sm transition-all hover:border-primary/60 hover:shadow-md motion-safe:hover:-translate-y-0.5" data-testid="attraction-card">
       <Link
@@ -65,7 +67,7 @@ function AttractionCard({ card }: { card: AttractionHubCard }) {
         className="group flex h-full flex-col focus-visible:outline-2 focus-visible:outline-offset-[-3px] focus-visible:outline-primary"
       >
         <div className="aspect-[3/2] overflow-hidden bg-secondary">
-          <img src={card.photo.src} srcSet={attractionHubCardImageSets[card.photo.src]} sizes="(min-width: 1280px) 365px, (min-width: 640px) calc(50vw - 24px), calc(100vw - 32px)" alt={card.photo.alt} width={755} height={503} loading="lazy" decoding="async" className="h-full w-full object-cover transition-transform duration-300 motion-safe:group-hover:scale-[1.03]" />
+          <img src={photo.src} srcSet={attractionHubCardImageSets[photo.src]} sizes="(min-width: 1280px) 365px, (min-width: 640px) calc(50vw - 24px), calc(100vw - 32px)" alt={photo.alt} width={755} height={503} loading="lazy" decoding="async" className="h-full w-full object-cover transition-transform duration-300 motion-safe:group-hover:scale-[1.03]" />
         </div>
         <div className="flex flex-1 flex-col p-4 sm:p-5">
           <div className="flex items-start justify-between gap-2">
@@ -145,7 +147,7 @@ function Attractions() {
           <ul className="mt-4 grid grid-cols-2 gap-3 lg:grid-cols-3">
             {attractionRelatedGuides.map(guide => <li key={String(guide.to)} className="min-w-0">
               <Link to={guide.to} className="editorial-card-link group flex h-full min-w-0 flex-col gap-3 sm:flex-row sm:items-center rounded-xl border bg-card p-3 transition-colors hover:border-primary/50 hover:bg-secondary/20 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
-                <img src={guide.photo.src} srcSet={attractionHubRelatedImageSets[guide.photo.src]} sizes="(min-width: 640px) 112px, 96px" alt={guide.photo.alt} width={112} height={75} loading="lazy" decoding="async" className="aspect-[3/2] w-full sm:shrink-0 rounded-lg object-cover sm:w-28" />
+                <img src={guideHeroPhotoForPath(String(guide.to))?.src ?? guide.photo.src} srcSet={attractionHubRelatedImageSets[guideHeroPhotoForPath(String(guide.to))?.src ?? guide.photo.src]} sizes="(min-width: 640px) 112px, 96px" alt={guideHeroPhotoForPath(String(guide.to))?.alt ?? guide.photo.alt} width={112} height={75} loading="lazy" decoding="async" className="aspect-[3/2] w-full sm:shrink-0 rounded-lg object-cover sm:w-28" />
                 <span className="min-w-0 flex-1">
                   <span className="block text-sm font-semibold leading-snug text-foreground group-hover:text-primary">{guide.title}</span>
                   <span className="mt-1 line-clamp-2 block text-xs leading-relaxed text-muted-foreground">{guide.description}</span>

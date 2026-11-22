@@ -20,6 +20,7 @@ import { travelGuidePaths } from "@/data/registry";
 import { pageMeta } from "@/lib/site";
 import { parseAirportTransferSearch } from "@/lib/transfer-quote";
 import { hasPublicPhotoCredit } from "@/lib/photo-credits";
+import { guideHeroPhotoForPath } from "@/lib/guide-hero-photos";
 
 const benefitIcons = [BadgeCheck, PlaneLanding, CalendarCheck] as const;
 const planningLinks = [
@@ -125,7 +126,7 @@ function Airport() {
         <ul className="mt-4 grid grid-cols-2 gap-3 lg:grid-cols-3">
           {planningLinks.map((guide) => <li key={guide.to} className="min-w-0">
             <Link to={guide.to} className="editorial-card-link group flex h-full min-w-0 flex-col gap-3 sm:flex-row sm:items-center rounded-xl border bg-card p-3 transition-colors hover:border-primary/50 hover:bg-secondary/20 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
-              <img src={guide.thumb} alt={guide.photo.alt} width={112} height={75} loading="lazy" decoding="async" className="aspect-[3/2] w-full sm:shrink-0 rounded-lg object-cover sm:w-28" />
+              <img src={guideHeroPhotoForPath(String(guide.to))?.src ?? guide.photo.src} alt={guideHeroPhotoForPath(String(guide.to))?.alt ?? guide.photo.alt} width={112} height={75} loading="lazy" decoding="async" className="aspect-[3/2] w-full sm:shrink-0 rounded-lg object-cover sm:w-28" />
               <span className="min-w-0 flex-1">
                 <span className="block text-sm font-semibold leading-snug group-hover:text-primary">{guide.title}</span>
                 <span className="mt-1 block text-xs leading-relaxed text-muted-foreground">{guide.description}</span>

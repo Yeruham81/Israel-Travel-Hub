@@ -1,5 +1,6 @@
 import { Link } from "@tanstack/react-router";
 import type { ShoreReadingGuide } from "@/data/shoreReading";
+import { guideHeroPhotoForPath } from "@/lib/guide-hero-photos";
 
 export function RelatedGuideCards({ guides, title = "Useful guides for your day ashore", id, intro, eyebrow }: { guides: ShoreReadingGuide[]; title?: string; id?: string; intro?: string; eyebrow?: string }) {
   return <section id={id} aria-label={title} className="mt-14">
@@ -14,7 +15,7 @@ export function RelatedGuideCards({ guides, title = "Useful guides for your day 
             <p className="mt-2 line-clamp-3 text-sm leading-relaxed text-muted-foreground">{guide.description}</p>
             <Link to={guide.to} className="mt-auto pt-3 text-sm font-semibold text-primary underline-offset-4 hover:underline focus-visible:rounded focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary" aria-label={`Read More about ${guide.title}`}>Read More</Link>
           </div>
-          <img src={guide.photo.src} alt={guide.photo.alt} width={160} height={200} loading="lazy" decoding="async" className="order-first aspect-[3/2] h-auto w-full rounded-xl object-cover sm:order-last sm:aspect-auto sm:h-32 sm:w-24 sm:shrink-0" />
+          <img src={guideHeroPhotoForPath(String(guide.to))?.src ?? guide.photo.src} alt={guideHeroPhotoForPath(String(guide.to))?.alt ?? guide.photo.alt} width={160} height={200} loading="lazy" decoding="async" className="order-first aspect-[3/2] h-auto w-full rounded-xl object-cover sm:order-last sm:aspect-auto sm:h-32 sm:w-24 sm:shrink-0" />
         </article>
       </li>)}
     </ul>

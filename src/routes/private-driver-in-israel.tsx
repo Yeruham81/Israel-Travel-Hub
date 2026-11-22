@@ -8,6 +8,7 @@ import { GuideHeroMedia } from "@/components/GuideHeroMedia";
 import { privateDriverBenefits, privateDriverFaqs, privateDriverGuides, privateDriverHero, privateDriverJourneys } from "@/data/privateDriver";
 import { PRIVATE_DRIVER_CHECK_DATE } from "@/data/registry";
 import { pageMeta } from "@/lib/site";
+import { guideHeroPhotoForPath } from "@/lib/guide-hero-photos";
 import { portTransferPrefill } from "@/lib/shore-services";
 import { parsePrivateDriverSearch, privateTourPrefill } from "@/lib/private-driver-search";
 
@@ -105,7 +106,7 @@ function PrivateDriverContent({ transfer }: { transfer: ReturnType<typeof parseP
         <ul className="mt-4 grid grid-cols-2 gap-3 lg:grid-cols-3">
           {privateDriverGuides.map(guide => <li key={guide.to} className="min-w-0">
             <Link to={guide.to} className="editorial-card-link group flex h-full min-w-0 flex-col gap-3 sm:flex-row sm:items-center rounded-xl border bg-card p-3 transition-colors hover:border-primary/50 hover:bg-secondary/20 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary" data-testid="driver-guide-card">
-              <img src={guide.photo.src} alt={guide.photo.alt} width={112} height={75} loading="lazy" decoding="async" className="aspect-[3/2] w-full sm:shrink-0 rounded-lg object-cover sm:w-24 lg:w-20 xl:w-24" />
+              <img src={guideHeroPhotoForPath(String(guide.to))?.src ?? guide.photo.src} alt={guideHeroPhotoForPath(String(guide.to))?.alt ?? guide.photo.alt} width={112} height={75} loading="lazy" decoding="async" className="aspect-[3/2] w-full sm:shrink-0 rounded-lg object-cover sm:w-24 lg:w-20 xl:w-24" />
               <span className="min-w-0 flex-1">
                 <span className="block text-sm font-semibold leading-snug text-foreground group-hover:text-primary">{guide.title}</span>
                 <span className="mt-1 line-clamp-2 block text-xs leading-relaxed text-muted-foreground">{guide.text}</span>

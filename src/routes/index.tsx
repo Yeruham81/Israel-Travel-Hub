@@ -49,6 +49,7 @@ import capernaumPhoto from "@/assets/guides/capernaum.jpg";
 import mountTaborPhoto from "@/assets/guides/mount-tabor.jpg";
 import { photoCredits } from "@/data/photoCredits";
 import { GuideCard } from "@/components/TravelGuide";
+import { guideHeroPhotoForPath } from "@/lib/guide-hero-photos";
 import { guideDirectory } from "@/data/travelGuides";
 import { isPublisherUrl } from "@/data/registry";
 import { AuthorCard } from "@/components/AuthorCard";
@@ -164,10 +165,8 @@ export const services: Service[] = [
 
 
 export const homeGuideCards = {
-  first: guideDirectory.filter((guide) => ["uber", "esim", "arrival"].includes(guide.id)).map((guide) =>
-    guide.id === "uber" ? { ...guide, photo: { src: "/images/home/uber-in-israel-phone-question.webp", alt: "Phone displaying UBER IN ISRAEL? with a question mark" } } : guide),
-  second: guideDirectory.filter((guide) => ["israel", "travelTips", "airport-journey-jerusalem"].includes(guide.id)).map((guide) =>
-    guide.id === "travelTips" ? { ...guide, photo: { src: "/images/attractions/ramon-crater.webp", alt: "Landscape of Ramon Crater in Israel" } } : guide),
+  first: guideDirectory.filter((guide) => ["uber", "esim", "arrival"].includes(guide.id)),
+  second: guideDirectory.filter((guide) => ["israel", "travelTips", "airport-journey-jerusalem"].includes(guide.id)),
 };
 
 const photoTitleShadow = "0 1px 3px rgba(0, 0, 0, 0.95), 0 2px 8px rgba(0, 0, 0, 0.75)";
@@ -176,7 +175,7 @@ function PhotoCard({ c }: { c: Card }) {
   return (
     <Link to={c.to} className="photo-card group relative block overflow-hidden rounded-xl bg-primary shadow-md focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-ring">
       {/* Use the original 3:2 landscape artwork instead of portrait-cropped desktop tiles. */}
-      <img src={c.img.src} alt={c.img.alt} loading="lazy" decoding="async" width={720} height={480} className="aspect-[3/2] w-full object-cover transition-transform duration-500 group-hover:scale-105 xl:aspect-[6/5]" />
+      <img src={guideHeroPhotoForPath(String(c.to))?.src ?? c.img.src} alt={guideHeroPhotoForPath(String(c.to))?.alt ?? c.img.alt} loading="lazy" decoding="async" width={720} height={480} className="aspect-[3/2] w-full object-cover transition-transform duration-500 group-hover:scale-105 xl:aspect-[6/5]" />
       <span className="absolute bottom-2 left-2 max-w-[calc(100%-1rem)] font-serif text-base font-semibold leading-tight text-white sm:bottom-3 sm:left-3 sm:text-lg" style={{ textShadow: photoTitleShadow }}>{c.label}</span>
     </Link>
   );
@@ -187,7 +186,7 @@ function CompactCard({ c }: { c: Card }) {
     <li className="min-w-0">
       <Link to={c.to} className="photo-card group grid w-full min-w-0 grid-cols-[96px_minmax(0,1fr)] items-center gap-4 rounded-xl border bg-background p-2.5 pr-4 transition-colors hover:border-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring sm:grid-cols-[112px_minmax(0,1fr)]">
         <span className="block overflow-hidden rounded-lg">
-          <img src={c.img.thumb ?? c.img.src} alt={c.img.alt} loading="lazy" decoding="async" width={224} height={160} className="aspect-[7/5] w-full object-cover transition-transform duration-500 group-hover:scale-105" />
+          <img src={guideHeroPhotoForPath(String(c.to))?.src ?? c.img.thumb ?? c.img.src} alt={guideHeroPhotoForPath(String(c.to))?.alt ?? c.img.alt} loading="lazy" decoding="async" width={224} height={160} className="aspect-[7/5] w-full object-cover transition-transform duration-500 group-hover:scale-105" />
         </span>
         <div className="min-w-0">
           <h3 className="font-serif text-lg leading-tight group-hover:text-primary">{c.label}</h3>
@@ -204,8 +203,8 @@ function AirportTransferCard({ c }: { c: Card }) {
     <li className="min-h-0">
       <Link to={c.to} aria-label={c.label} className="group relative block aspect-[16/9] min-w-0 overflow-hidden rounded-lg bg-primary shadow-sm focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-ring lg:aspect-auto lg:h-full">
         <picture className="absolute inset-0 block">
-          {c.img.mobile && <source media="(max-width: 767px)" srcSet={c.img.mobile} type="image/webp" />}
-          <img src={c.img.src} alt={c.img.alt} loading="lazy" decoding="async" width={720} height={480} className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" />
+          {!guideHeroPhotoForPath(String(c.to)) && c.img.mobile && <source media="(max-width: 767px)" srcSet={c.img.mobile} type="image/webp" />}
+          <img src={guideHeroPhotoForPath(String(c.to))?.src ?? c.img.src} alt={guideHeroPhotoForPath(String(c.to))?.alt ?? c.img.alt} loading="lazy" decoding="async" width={720} height={480} className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" />
         </picture>
         <span className="absolute bottom-2 left-2 max-w-[calc(100%-1rem)] font-serif text-sm font-semibold leading-tight text-white sm:bottom-3 sm:left-3 sm:text-base" style={{ textShadow: photoTitleShadow }}>{c.label}</span>
       </Link>
@@ -218,8 +217,8 @@ function DestinationImageCard({ c }: { c: Card }) {
   return (
     <Link to={c.to} aria-label={c.label} className="group relative block min-w-0 overflow-hidden rounded-lg bg-primary shadow-sm focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-ring">
       <picture className="block">
-        {c.img.mobile && <source media="(max-width: 767px)" srcSet={c.img.mobile} type="image/webp" />}
-        <img src={c.img.thumb ?? c.img.src} alt={c.img.alt} loading="lazy" decoding="async" width={400} height={300} className="aspect-[4/3] w-full object-cover transition-transform duration-500 group-hover:scale-105" />
+        {!guideHeroPhotoForPath(String(c.to)) && c.img.mobile && <source media="(max-width: 767px)" srcSet={c.img.mobile} type="image/webp" />}
+        <img src={guideHeroPhotoForPath(String(c.to))?.src ?? c.img.thumb ?? c.img.src} alt={guideHeroPhotoForPath(String(c.to))?.alt ?? c.img.alt} loading="lazy" decoding="async" width={400} height={300} className="aspect-[4/3] w-full object-cover transition-transform duration-500 group-hover:scale-105" />
       </picture>
       <span className="absolute bottom-2 left-2 max-w-[calc(100%-1rem)] font-serif text-sm font-semibold leading-tight text-white sm:bottom-3 sm:left-3 sm:text-base" style={{ textShadow: photoTitleShadow }}>{c.label}</span>
     </Link>

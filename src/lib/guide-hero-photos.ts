@@ -14,6 +14,7 @@ import { caesareaSite } from "@/data/caesareaSite";
 import { eilatSite } from "@/data/eilatSite";
 import jerusalemMuseumsHero from "@/assets/guides/museums-in-jerusalem.jpg";
 import { telAvivAttractionsHero } from "@/data/telAvivAttractionsGuide";
+import { attractionHeroRegistry } from "@/data/attractionHeroRegistry";
 
 export type GuideHeroPhoto = { src: string; alt: string };
 const normalized = (value: string) => value.replace(/\/+$/, "") + "/";
@@ -25,6 +26,7 @@ const normalized = (value: string) => value.replace(/\/+$/, "") + "/";
  */
 export function guideHeroPhotoForPath(to: string): GuideHeroPhoto | undefined {
   const path = normalized(to);
+  if (attractionHeroRegistry[path]) return attractionHeroRegistry[path];
   if (path === "/attractions/old-city-jerusalem/") return oldCityJerusalemSite.hero;
   if (path === "/tours/tel-aviv-jaffa/") return { src: telAvivTourHero, alt: "Panoramic view of Tel Aviv's Mediterranean coast and skyline" };
   if (path === "/attractions/jaffa/") return jaffaSite.hero;

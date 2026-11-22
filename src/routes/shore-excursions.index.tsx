@@ -12,12 +12,6 @@ import masadaFeature from "@/assets/home/masada-cable-car-card.webp";
 import ashdodHubThumb from "@/assets/home/ashdod-port-card.webp";
 import haifaHubThumb from "@/assets/home/haifa-port-card.webp";
 import coastHubThumb from "@/assets/shore-hub/jaffa-route.webp";
-import guideJerusalemThumb from "@/assets/shore-hub/guide-jerusalem.webp";
-import guideGalileeThumb from "@/assets/shore-hub/guide-galilee.webp";
-import guideMasadaThumb from "@/assets/shore-hub/guide-masada.webp";
-import guideAkkoThumb from "@/assets/shore-hub/guide-akko.webp";
-import guideJaffaThumb from "@/assets/shore-hub/guide-jaffa.webp";
-import guideDeadSeaThumb from "@/assets/shore-hub/guide-dead-sea.webp";
 import {
   shoreHubDescription, shoreHubExperiences, shoreHubFaqs, shoreHubPorts,
   shoreHubSourceIds, shoreHubTitle, SHORE_EXCURSION_UPDATED_DATE,
@@ -26,6 +20,7 @@ import {
 import { publicSources, shorePorts, travelGuidePaths } from "@/data/registry";
 import { authorLd } from "@/lib/author";
 import { hasPublicPhotoCredit } from "@/lib/photo-credits";
+import { guideHeroPhotoForPath } from "@/lib/guide-hero-photos";
 import { CANONICAL_ORIGIN, jsonLd, pageMeta, SITE_NAME } from "@/lib/site";
 
 const portIds = ["ashdod", "haifa"] as const;
@@ -36,14 +31,6 @@ const crumbs = [{ name: "Home", path: "/" }, { name: "Shore excursions", path: "
  * photos and credits are never overwritten by small card variants.
  */
 const shoreHubPortThumbnailSources = { ashdod: ashdodHubThumb, haifa: haifaHubThumb } as const;
-const shoreHubGuideThumbnailSources: Record<string, string> = {
-  "/attractions/old-city-jerusalem/": guideJerusalemThumb,
-  "/travel-blog/sea-of-galilee/": guideGalileeThumb,
-  "/attractions/masada/": guideMasadaThumb,
-  "/attractions/akko-acre/": guideAkkoThumb,
-  "/attractions/jaffa/": guideJaffaThumb,
-  [travelGuidePaths.deadSea]: guideDeadSeaThumb,
-};
 const experiencePhotos = {
   history: { src: jerusalemFeature, alt: "Historic buildings in Jerusalem's Old City" },
   galilee: { src: galileeFeature, alt: "Sea of Galilee and its surrounding hills" },
@@ -210,7 +197,7 @@ function Shore() {
         <ul className="mt-4 grid grid-cols-2 gap-3 lg:grid-cols-3">
           {shoreHubGuides.map(guide => <li key={String(guide.to)} className="min-w-0">
             <Link to={guide.to} className="editorial-card-link group flex h-full min-w-0 flex-col gap-3 sm:flex-row sm:items-center rounded-xl border bg-card p-3 transition-colors hover:border-primary/50 hover:bg-secondary/20 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
-              <img src={shoreHubGuideThumbnailSources[String(guide.to)] ?? guide.photo.src} alt={guide.photo.alt} width={112} height={90} loading="lazy" decoding="async" className="aspect-[3/2] w-full rounded-lg object-cover sm:w-28 sm:shrink-0" />
+              <img src={guideHeroPhotoForPath(String(guide.to))?.src ?? guide.photo.src} alt={guideHeroPhotoForPath(String(guide.to))?.alt ?? guide.photo.alt} width={112} height={90} loading="lazy" decoding="async" className="aspect-[3/2] w-full rounded-lg object-cover sm:w-28 sm:shrink-0" />
               <span className="min-w-0 flex-1">
                 <span className="block text-sm font-semibold leading-snug text-foreground group-hover:text-primary">{guide.title}</span>
                 <span className="mt-1 line-clamp-2 block text-xs leading-relaxed text-muted-foreground">{guide.description}</span>
