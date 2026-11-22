@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+<head><meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/>
+<meta name="robots" content="noindex,nofollow"/><meta name="referrer" content="strict-origin-when-cross-origin"/>
+<title>Via Dolorosa stations visitor map</title>
+<link rel="stylesheet" href="https://unpkg.com/maplibre-gl@5.12.0/dist/maplibre-gl.css" integrity="sha384-mnM9NG1099tBMNxdDQNDKIxYcn/fmqQXFJvbT5l1MsrWvzfxBEffceBsw75/cW2R" crossorigin="anonymous"/>
+<style>
+html,body,#map{margin:0;width:100%;height:100%}
+body{font:13px/1.4 system-ui,sans-serif;background:#ecf3f8;color:#123346}
+#map{position:absolute;inset:0}
+#status{position:absolute;inset:0;z-index:2;display:grid;place-content:center;padding:20px;text-align:center;background:#ecf3f8f2}
+#status[hidden]{display:none}
+#status p{margin:0 0 12px}
+a{color:#195c9e}
+.maplibregl-popup-content{font:13px/1.5 system-ui,sans-serif;max-width:230px;padding:10px 12px}
+.station-pin{display:grid;place-items:center;min-width:27px;height:27px;padding:0 3px;border:2px solid #fff;border-radius:50%;background:#1d4ed8;color:#fff;font:bold 12px/1 system-ui,sans-serif;box-shadow:0 2px 7px #102d4080;cursor:pointer}
+.station-pin[data-area="church"]{background:#b45309;min-width:41px}
+.station-pin[aria-pressed="true"]{outline:3px solid #082f49;outline-offset:2px;z-index:10}
+.station-pin:focus-visible{outline:3px solid #082f49;outline-offset:3px}
+</style></head>
+<body>
+<div id="map" role="region" aria-label="Map with nine outdoor Via Dolorosa stations and the Holy Sepulchre"></div>
+<div id="status" role="status" aria-live="polite">
+<p id="message">Loading Via Dolorosa map…</p>
+<a href="https://www.google.com/maps/search/?api=1&amp;query=Via%20Dolorosa%20Jerusalem" target="_blank" rel="noopener noreferrer">Open Via Dolorosa in Google Maps</a>
+<noscript>Enable JavaScript for the interactive map.</noscript>
+</div>
+<script src="https://unpkg.com/maplibre-gl@5.12.0/dist/maplibre-gl.js" integrity="sha384-7+0QVD3+GoeOjaW35yTmpj0FR1K45ugw4ZUY0qEFomHSmAude6e9nB6/Xy5aPnzQ" crossorigin="anonymous"></script>
+<script>
+(()=>{
+"use strict";
+const status=document.getElementById("status"),message=document.getElementById("message");
+const bounds=[[35.2289,31.7778],[35.2359,31.7811]];
+const ids=["1","2","3","4","5","6","7","8","9","10-14"];
+let points;
+try{
+ const raw=new URLSearchParams(location.search).get("points");
+ if(!raw||raw.length>5000)throw Error("Missing points");
+ points=JSON.parse(raw);
+ if(!Array.isArray(points)||points.length!==10||points.some((p,i)=>
+   p.id!==ids[i]||!["street","church"].includes(p.area)||
+   typeof p.name!=="string"||p.name.length>85||
+   typeof p.query!=="string"||p.query.length>160||
+   !Number.isFinite(p.lat)||p.lat<31.775||p.lat>31.785||
+   !Number.isFinite(p.lon)||p.lon<35.225||p.lon>35.24))throw Error("Invalid points");
+}catch{message.textContent="Use the station list and Google Maps links in the guide.";return}
+if(typeof maplibregl==="undefined"){message.textContent="Use the station list and Google Maps links in the guide.";return}
+let map,popup,ready=false,requested=null;
+const markers=new Map();
+const overview=()=>map.fitBounds(bounds,{padding:{top:40,bottom:40,left:35,right:35},maxZoom:16.7,duration:300});
+const select=id=>{
+ if(id==="all"){
+   if(popup)popup.remove();
+   markers.forEach(el=>el.setAttribute("aria-pressed","false"));
+   overview();return;
+ }
+ const point=points.find(p=>p.id===id);
+ if(!point)return;
+ markers.forEach((el,key)=>el.setAttribute("aria-pressed",key===id?"true":"false"));
+ if(popup)popup.remove();
+ overview();
+ const body=document.createElement("div"),title=document.createElement("strong"),link=document.createElement("a");
+ title.textContent=point.name;
+ link.href="https://www.google.com/maps/search/?api=1&query="+encodeURIComponent(point.query);
+ link.target="_blank";link.rel="noopener noreferrer";link.textContent="Open in Google Maps";
+ link.style.display="block";link.style.marginTop="7px";
+ body.append(title,link);
+ popup=new maplibregl.Popup({offset:20,closeButton:true,maxWidth:"240px"}).setLngLat([point.lon,point.lat]).setDOMContent(body).addTo(map);
+};
+const focus=id=>{if(!ready){requested=id;return}select(id)};
+window.addEventListener("message",event=>{
+ if(event.origin!==location.origin||event.source!==window.parent)return;
+ const command=event.data;
+ if(!command||command.type!=="via-dolorosa-map-focus"||typeof command.id!=="string")return;
+ if(command.id==="all"||ids.includes(command.id))focus(command.id);
+});
+const timeout=setTimeout(()=>{if(!ready)message.textContent="Open the stations in Google Maps.";},16000);
+try{
+ maplibregl.setWorkerCount(1);
+ map=new maplibregl.Map({container:"map",style:new URL("./english-style.json",location.href).href,
+   bounds,fitBoundsOptions:{padding:{top:40,bottom:40,left:35,right:35},maxZoom:16.7},
+   cooperativeGestures:true,dragRotate:false,touchPitch:false,pitchWithRotate:false,
+   attributionControl:false,renderWorldCopies:false,maxPitch:0});
+ map.touchZoomRotate.disableRotation();
+ map.addControl(new maplibregl.NavigationControl({showCompass:false}),"top-right");
+ map.addControl(new maplibregl.AttributionControl({compact:true,customAttribution:'<a href="https://maputnik.github.io/osm-liberty/" target="_blank" rel="noopener noreferrer">OSM Liberty</a>'}));
+ map.once("load",()=>{
+   points.forEach((p,i)=>{
+     const el=document.createElement("button");
+     el.type="button";el.className="station-pin";el.dataset.area=p.area;
+     el.textContent=i===9?"X–XIV":String(i+1);
+     el.title=p.name;el.setAttribute("aria-label","Find "+p.name);el.setAttribute("aria-pressed","false");
+     el.addEventListener("click",()=>{focus(p.id);window.parent.postMessage({type:"via-dolorosa-map-selected",id:p.id},location.origin)});
+     const offsets={"1":[-11,0],"2":[14,0],"3":[-11,-10],"4":[13,0],"5":[-13,13],"6":[0,0],"7":[0,0],"8":[0,0],"9":[0,0],"10-14":[0,0]};
+     new maplibregl.Marker({element:el,offset:offsets[p.id]||[0,0]}).setLngLat([p.lon,p.lat]).addTo(map);
+     markers.set(p.id,el);
+   });
+   ready=true;clearTimeout(timeout);status.hidden=true;
+   focus(requested||"all");
+ });
+ map.on("error",()=>{if(!ready)message.textContent="Open the stations in Google Maps.";});
+ window.addEventListener("pagehide",e=>{if(!e.persisted){clearTimeout(timeout);map.remove();}});
+}catch{clearTimeout(timeout);if(map)map.remove();message.textContent="Open the stations in Google Maps."}
+})();
+</script></body></html>
