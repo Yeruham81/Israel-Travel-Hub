@@ -160,7 +160,7 @@ describe("shore excursions", () => {
     expect(alternative).toHaveAttribute("data-operator-id", "bein-harim");
     expect(alternative).toHaveTextContent("Viator");
     expect(alternative).not.toHaveTextContent(/From ILS/);
-    expect(within(alternative).getByRole("link", { name: /View on Viator/ })).toHaveAttribute("rel", "sponsored noopener noreferrer");
+    expect(within(alternative).getByRole("link", { name: /^View tour: .* on Viator/ })).toHaveAttribute("rel", "sponsored noopener noreferrer");
     const related = screen.getByRole("list", { name: "Useful guides for your day ashore" });
     expect(within(related).getAllByRole("listitem")).toHaveLength(6);
     expect(within(related).getAllByRole("img")).toHaveLength(6);
