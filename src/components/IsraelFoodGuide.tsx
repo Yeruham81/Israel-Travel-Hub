@@ -10,13 +10,14 @@ import { GuideHeroLayout, GuideHeroMedia } from "@/components/GuideHeroMedia";
 import { PageUpdated } from "@/components/PageUpdated";
 import { HomeContactForm } from "@/components/HomeContactForm";
 import { SourcesDisclosure } from "@/components/SourcesDisclosure";
-import { GuidePhotoCredit } from "@/components/TravelGuide";
+import { PhotoCreditsDisclosure } from "@/components/PhotoCreditsDisclosure";
+import { CuratedPartnerTourCard } from "@/components/CuratedPartnerTourCard";
 import { travelGuides } from "@/data/travelGuides";
 import { migrationPhotos } from "@/data/guideMigrationPhotos";
 import fiveDayPhoto from "@/assets/home/hero-caesarea-sm.webp";
 import travelByTrainPhoto from "@/assets/airport-journeys/ben-gurion-rail-platform.webp";
 import { affiliateConfig, publicSources } from "@/data/registry";
-import { recordOutboundClick, relFor } from "@/lib/outbound";
+
 import { guideHeroPhotoForPath } from "@/lib/guide-hero-photos";
 import {
  foodDishes, foodKinds, foodStarterIdeas, foodExtras, foodMarkets,
@@ -78,7 +79,7 @@ function DishCard({dish,index}:{dish:FoodDish;index:number}){
        <p className="mb-2 flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wide text-primary"><Icon className="h-3.5 w-3.5" aria-hidden="true"/>{label.label}</p>
        <h3 id={dish.id+"-heading"} tabIndex={-1} className="text-xl font-bold leading-tight sm:text-2xl">{index+1}. {dish.name}</h3>
        <p className="mt-1 text-xs text-muted-foreground">Say it: {dish.pronunciation}</p>
-       <p className="mt-3 text-sm leading-relaxed">{dish.summary}</p>
+       <p className="mt-3 text-sm leading-relaxed">{dish.summary} {dish.roots}</p>
      </div>
    </div>
    <div className="border-t p-4 sm:p-5 lg:px-6">
@@ -86,11 +87,7 @@ function DishCard({dish,index}:{dish:FoodDish;index:number}){
        <div className="rounded-lg bg-secondary/50 p-3 text-sm leading-relaxed"><strong>My ordering tip:</strong> {dish.order}</div>
        <p className="text-sm leading-relaxed text-muted-foreground"><strong className="text-foreground">Good to know:</strong> {dish.note}</p>
      </div>
-     <details className="mt-3 rounded-lg border border-border/70 px-3 py-2 text-sm text-muted-foreground">
-       <summary className="cursor-pointer font-medium text-foreground">About this food tradition</summary>
-       <p className="mt-2 leading-relaxed">{dish.roots}</p>
-     </details>
-     {dish.photo.credit&&<div className="pt-3"><GuidePhotoCredit photo={dish.photo}/></div>}
+
    </div>
  </article>;
 }
@@ -122,7 +119,7 @@ function FoodDay({onPickFood}:{onPickFood:PickFood}){
   {when:"Breakfast",title:"Bakery or café",text:"Pick up a warm boureka or order shakshuka with bread. Choose one, not both, if you want room for lunch.",anchor:"shakshuka"},
   {when:"Lunch",title:"A hummus shop or pita stand",text:"Try a bowl of hummus, a falafel pita or sabich. Ask how big the serving is.",anchor:"hummus"},
   {when:"Afternoon",title:"Wander one food district",text:"Browse a market, look at spices and pickles, and choose a small drink or tasting stop.",anchor:"markets"},
-  {when:"After dinner",title:"Share something sweet",text:"Finish with malabi or warm kanafeh. Ask about dairy and nuts before ordering.",anchor:"kanafeh"}
+  {when:"After dinner",title:"Share something sweet",text:"Finish with malabi or warm Knafeh. Ask about dairy and nuts before ordering.",anchor:"kanafeh"}
  ] as const;
  return <section id="food-day" aria-labelledby="food-day-heading" className="mt-12 scroll-mt-24">
    <SectionHeading id="food-day" title="A simple first food day" intro="Try these four food stops in one city for a relaxed introduction to local flavours."/>
@@ -161,16 +158,9 @@ function Tours(){
  if(offers.length===0)return null;
  return <section id="food-tours" aria-labelledby="food-tours-heading" className="mt-12 scroll-mt-24">
    <SectionHeading id="food-tours" title="Food walks and market tastings" intro="You can explore independently, but a guided tasting can help explain the ingredients, neighbourhoods and stories behind the food. These experiences are offered by external providers; check availability, exact tastings, meeting points and dietary arrangements for your dates."/>
-   <div data-testid="israel-food-tour-cards" className="grid gap-4 md:grid-cols-3">{offers.map(tour=><article key={tour.id} className="flex min-w-0 flex-col overflow-hidden rounded-xl border bg-card">
-      <img src={tour.image} alt={tour.alt} width={560} height={350} loading="lazy" decoding="async" className="aspect-[16/10] w-full object-cover"/>
-      <div className="flex flex-1 flex-col p-4">
-       <p className="text-xs font-semibold uppercase tracking-wide text-primary">{tour.provider} · {tour.location}</p>
-       <h3 className="mt-2 text-lg font-bold leading-snug">{tour.name}</h3>
-       <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{tour.description}</p>
-       <p className="mt-3 flex items-start gap-1.5 text-xs text-muted-foreground"><Clock3 className="mt-0.5 h-3.5 w-3.5 shrink-0" aria-hidden="true"/>{tour.detail}</p>
-       <a href={tour.href} rel={relFor(true)} target="_blank" onClick={()=>recordOutboundClick({pageId:"what_to_eat_in_israel",productId:tour.id,offerId:tour.subId})} className="mt-auto inline-flex min-h-11 items-center justify-center gap-2 rounded-lg border border-primary/30 px-3 py-2.5 pt-4 text-sm font-semibold text-primary hover:bg-secondary focus-visible:outline-2 focus-visible:outline-primary">Check tour details<ExternalLink className="h-3.5 w-3.5" aria-hidden="true"/><span className="sr-only"> (opens in a new tab)</span></a>
-      </div>
-    </article>)}</div>
+   <div data-testid="israel-food-tour-cards" className="grid gap-4 md:grid-cols-3">{offers.map(tour=>
+     <CuratedPartnerTourCard key={tour.id} title={tour.name} description={tour.description} platform={tour.provider as "Viator" | "GetYourGuide"} location={tour.location} duration={tour.detail} image={tour.image} alt={tour.alt} href={tour.href} productId={tour.productId} offerId={tour.subId} pageId="what_to_eat_in_israel"/>
+   )}</div>
  </section>;
 }
 function Practical(){
@@ -278,9 +268,13 @@ export function IsraelFoodGuide(){
      <p className="leading-relaxed">For specific ingredients, dietary requirements and opening hours, check with the venue. Further planning resources:</p>
      <ul className="mt-3 list-disc space-y-2 pl-5 text-sm">
        {sources.map(source=><li key={source.id}><External href={source.url}>{source.publisher}: {source.title}</External></li>)}
-       <li>Mahane Yehuda market-stall photograph: <External href="https://commons.wikimedia.org/wiki/File:Mahane_Yehuda_shoppers.jpg">Yoninah / Wikimedia Commons</External> · <External href="https://creativecommons.org/licenses/by-sa/3.0/">CC BY-SA 3.0</External>; cropped and resized into WebP.</li>
-       <li>Levinsky Market spice-shop photograph: <External href="https://commons.wikimedia.org/wiki/File:PikiWiki_Israel_9177_Levinsky_market_in_Tel_Aviv.JPG">Lior Golgher / PikiWiki Israel</External> · <External href="https://creativecommons.org/licenses/by/2.5/">CC BY 2.5</External>; cropped and resized into WebP.</li>
+
      </ul>
    </SourcesDisclosure>
+   <PhotoCreditsDisclosure entries={[
+     ...foodDishes.map(dish => ({label:dish.name, credit:dish.photo.credit, sourceUrl:dish.photo.sourceUrl, licenseUrl:dish.photo.licenseUrl})),
+     {label:"Mahane Yehuda Market photo",credit:"Yoninah / Wikimedia Commons · CC BY-SA 3.0; cropped and resized into WebP",sourceUrl:"https://commons.wikimedia.org/wiki/File:Mahane_Yehuda_shoppers.jpg",licenseUrl:"https://creativecommons.org/licenses/by-sa/3.0/"},
+     {label:"Levinsky Market spice shop",credit:"Lior Golgher / PikiWiki Israel · CC BY 2.5; cropped and resized into WebP",sourceUrl:"https://commons.wikimedia.org/wiki/File:PikiWiki_Israel_9177_Levinsky_market_in_Tel_Aviv.JPG",licenseUrl:"https://creativecommons.org/licenses/by/2.5/"}
+   ]}/>
  </article></main>;
 }
