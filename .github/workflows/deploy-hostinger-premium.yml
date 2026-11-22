@@ -1000,6 +1000,74 @@ jobs:
           NODE
             rm -f "$data"
           done
+          # Confirm the new Via Dolorosa guide, its map, and inclusion in the Jerusalem attractions hub.
+          via_page="$(mktemp)"
+          curl --http1.1 --retry 2 --max-time 30 -fsSL -o "$via_page" "$VITE_CANONICAL_ORIGIN/attractions/via-dolorosa/"
+          node - "$via_page" "$VITE_CANONICAL_ORIGIN/attractions/via-dolorosa/" <<'NODE'
+          const fs = require("node:fs");
+          const html = fs.readFileSync(process.argv[2], "utf8");
+          const expected = process.argv[3];
+          for (const snippet of [
+            "Via Dolorosa", "14 Stations", "What to see along the Via Dolorosa",
+            'data-testid="via-dolorosa-map"', 'data-testid="via-dolorosa-hours"',
+            'data-testid="via-dolorosa-station-table"',
+            'data-testid="via-dolorosa-friday"',
+            'data-testid="via-dolorosa-tour-cards"',
+            "Church of the Flagellation", "Holy Sepulchre",
+          ]) {
+            if (!html.includes(snippet)) {
+              console.error("::error::Via Dolorosa published page missing " + snippet);
+              process.exit(1);
+            }
+          }
+          const canonical = [...html.matchAll(/<link\b[^>]*>/gi)].map(m => m[0]).filter(tag => /\brel=["']canonical["']/i.test(tag));
+          if(!canonical.some(tag=>tag.includes('href="' + expected + '"'))) {
+            console.error("::error::Via Dolorosa canonical URL mismatch");
+            process.exit(1);
+          }
+          if((html.match(/data-testid="attraction-highlight"/g)||[]).length!==5){
+            console.error("::error::Via Dolorosa should present five landmark explanations");
+            process.exit(1);
+          }
+          const related=html.match(/<ul[^>]*data-testid=["']stay-trip-photo-grid["'][^>]*>([\s\S]*?)<\/ul>/i);
+          if((related?.[1].match(/<li\b/g)||[]).length!==6){
+            console.error("::error::Via Dolorosa requires six related Jerusalem cards");
+            process.exit(1);
+          }
+          console.log("Via Dolorosa published content, station table, five highlights, six related cards and canonical verified.");
+          NODE
+          rm -f "$via_page"
+          via_map="$(mktemp)"
+          curl --http1.1 --retry 2 --max-time 30 -fsSL -o "$via_map" "$VITE_CANONICAL_ORIGIN/maps/via-dolorosa.html"
+          node - "$via_map" <<'NODE'
+          const fs = require("node:fs");
+          const html = fs.readFileSync(process.argv[2], "utf8");
+          for (const fragment of ["points.length!==10","new maplibregl.Marker","via-dolorosa-map-selected"]) {
+            if(!html.includes(fragment)) { console.error("::error::Via Dolorosa map missing "+fragment);process.exit(1); }
+          }
+          console.log("Via Dolorosa ten-marker map verified.");
+          NODE
+          rm -f "$via_map"
+          via_photo="$(mktemp)"
+          curl --http1.1 --retry 2 --max-time 30 -fsSL -o "$via_photo" "$VITE_CANONICAL_ORIGIN/images/attractions/old-jerusalem-via-dolorosa.webp"
+          node - "$via_photo" <<'NODE'
+          const b=require("node:fs").readFileSync(process.argv[2]);
+          if(b.subarray(0,4).toString()!=="RIFF"||b.subarray(8,12).toString()!=="WEBP"){
+            console.error("::error::Via Dolorosa featured photo is missing or invalid");process.exit(1);
+          }
+          console.log("Via Dolorosa featured WebP verified.");
+          NODE
+          rm -f "$via_photo"
+          via_hub="$(mktemp)"
+          curl --http1.1 --retry 2 --max-time 30 -fsSL -o "$via_hub" "$VITE_CANONICAL_ORIGIN/attractions/"
+          node - "$via_hub" <<'NODE'
+          const html=require("node:fs").readFileSync(process.argv[2],"utf8");
+          if(!html.includes("/attractions/via-dolorosa/")||!html.includes("Via Dolorosa")){
+            console.error("::error::Via Dolorosa card missing from attractions hub");process.exit(1);
+          }
+          console.log("Via Dolorosa attraction hub card found.");
+          NODE
+          rm -f "$via_hub"
           # Verify the revised Jerusalem Old City guide and all landmark photos on the public site.
           jerusalem_html="$(mktemp)"
           curl --retry 2 --max-time 20 -fsSL -o "$jerusalem_html" "$VITE_CANONICAL_ORIGIN/attractions/old-city-jerusalem/"
