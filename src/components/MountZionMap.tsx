@@ -16,7 +16,8 @@ const googleEmbed = (place: string) => "https://maps.google.com/maps?q=" + encod
 
 export function MountZionMap() {
   const [selected, setSelected] = useState<number | null>(null);
-  const location = selected === null ? "Mount Zion Jerusalem Israel" : locations[selected][1];
+  const active = selected === null ? undefined : locations[selected];
+  const location = active?.[1] ?? "Mount Zion Jerusalem Israel";
   return <section aria-label="Mount Zion sites on Google Maps" data-testid="mount-zion-map" className="overflow-hidden rounded-2xl border bg-card">
     <div className="border-b bg-secondary/20 px-4 py-4 sm:px-5">
       <h3 className="flex items-center gap-2 text-lg font-semibold"><MapPin className="size-5 text-primary" aria-hidden="true" /> Mount Zion sites on the map</h3>
@@ -24,7 +25,7 @@ export function MountZionMap() {
       <p className="mt-2 text-xs text-muted-foreground"><span className="font-semibold text-amber-700">Zion Gate</span> · <span className="font-semibold text-blue-700">Central sites</span> · <span className="font-semibold text-emerald-700">Lower hillside</span></p>
     </div>
     <div className="grid lg:grid-cols-[minmax(0,1.4fr)_minmax(0,1fr)]">
-      <iframe key={selected ?? "all"} title={selected === null ? "Mount Zion overview on Google Maps" : "Google Maps: " + locations[selected][0]} src={googleEmbed(location)} loading="lazy" referrerPolicy="strict-origin-when-cross-origin" className="h-[345px] w-full border-0 sm:h-[410px] lg:h-full lg:min-h-[470px]" />
+      <iframe key={selected ?? "all"} title={active ? "Google Maps: " + active[0] : "Mount Zion overview on Google Maps"} src={googleEmbed(location)} loading="lazy" referrerPolicy="strict-origin-when-cross-origin" className="h-[345px] w-full border-0 sm:h-[410px] lg:h-full lg:min-h-[470px]" />
       <div className="border-t p-3 lg:border-l lg:border-t-0">
         <div className="mb-2 flex items-center justify-between gap-2 px-1">
           <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">Choose a place</p>
@@ -41,7 +42,7 @@ export function MountZionMap() {
       </div>
     </div>
     <div className="flex flex-wrap items-center justify-between gap-3 border-t px-4 py-3 text-sm sm:px-5">
-      <span className="font-medium">{selected === null ? "Mount Zion, Jerusalem" : locations[selected][0]}</span>
+      <span className="font-medium">{active?.[0] ?? "Mount Zion, Jerusalem"}</span>
       <a href={googleSearch(location)} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 font-semibold text-primary hover:underline">Open in Google Maps <ExternalLink className="size-4" aria-hidden="true" /></a>
     </div>
   </section>;
