@@ -119,7 +119,8 @@ describe("Capernaum as the first reusable individual-attraction guide", () => {
     expect(shell).toContain('className="aspect-[4/3] h-auto w-full rounded-lg object-cover"');
     expect(shell).toContain("width={520} height={390}");
     expect(shell).toContain("lg:grid-cols-[minmax(0,1fr)_260px]");
-    expect(shell).toContain("{image && <AttractionContentImage");
+    expect(shell).toContain("mobileImageFirst");
+    expect(shell).toContain("<AttractionContentImage src={image.src}");
     expect(shell).not.toContain("aspect-[16/10] max-h-44");
     const pageLayout = readFileSync("src/components/AttractionDestinationPage.tsx", "utf8");
     expect(pageLayout).toContain("Practical guides to help you plan the rest of your journey.");
