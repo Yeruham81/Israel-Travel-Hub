@@ -18,7 +18,7 @@ describe("Mount Zion full attraction guide", () => {
     expect(content.nearby).toHaveLength(6);
     expect(content.planningLinks).toHaveLength(6);
     expect(content.faqs).toHaveLength(7);
-    expect(content.sources).toHaveLength(10);
+    expect(content.sources).toHaveLength(11);
     expect(attractionHubCards.filter(card => card.to === content.path)).toHaveLength(1);
     const meta = mountZionMeta();
     expect(meta.links.some(link => link.rel === "canonical" && link.href?.includes(content.path))).toBe(true);
