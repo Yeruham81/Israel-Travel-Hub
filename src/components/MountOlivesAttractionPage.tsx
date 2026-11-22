@@ -196,9 +196,8 @@ export const mountOlivesDestinationContent: AttractionDestinationContent = {
       </div>
       <div className="rounded-xl border bg-card p-4 sm:p-5" data-testid="mount-olives-walking-connections">
         <h3 className="font-serif text-xl font-semibold">Walking connections</h3>
-        <p className="mt-2 text-sm leading-relaxed text-muted-foreground">Choose the leg that suits your route. These are navigation links, not estimates of walking time.</p>
-        <ul className="mt-3 grid gap-3 sm:grid-cols-3">
-          {walkingLinks.map(leg => <li key={leg.url} className="rounded-lg border bg-secondary/20 p-3">
+        <ul className="mt-3 grid list-none gap-3 p-0 sm:grid-cols-3">
+          {walkingLinks.map(leg => <li key={leg.url} className="list-none rounded-lg border bg-secondary/20 p-3">
             <a href={leg.url} target="_blank" rel="noopener noreferrer" className={inlineLink}>{leg.title} <ArrowUpRight className="inline h-4 w-4" aria-hidden="true"/></a>
             <p className="mt-1 text-xs leading-relaxed text-muted-foreground">{leg.description}</p>
           </li>)}
@@ -237,7 +236,7 @@ export const mountOlivesDestinationContent: AttractionDestinationContent = {
         </div>)}
       </div>
       <p className="text-sm leading-relaxed text-muted-foreground">Shown prices and review counts were published by the tour providers and can change. Confirm current dates, total price, inclusions, recent reviews and cancellation conditions before booking.</p>
-      <p className="text-sm leading-relaxed">For more options, <Link to="/tours/jerusalem/" className={inlineLink}>browse Jerusalem guided tours</Link>. If you need transport between the upper viewpoint and Gethsemane instead of guided sightseeing, <a href="#contact" className={inlineLink}>ask me about a private driver</a>.</p>
+      <p className="text-sm leading-relaxed">For more options, <Link to="/tours/jerusalem/" className={inlineLink}>browse Jerusalem guided tours</Link>.</p>
     </div>
   ),
   faqs: [
@@ -254,6 +253,8 @@ export const mountOlivesDestinationContent: AttractionDestinationContent = {
     { label: "Churches in Jerusalem", to: "/travel-blog/churches-in-jerusalem/", note: "See how the Mount of Olives churches relate to sites across the city." },
     { label: "Mount Zion", to: "/attractions/mount-zion/", note: "Visit Dormition Abbey and other hilltop heritage landmarks." },
     { label: "Jerusalem travel guide", to: "/travel-blog/jerusalem-travel-guide/", note: "Plan more time in the city after your Mount of Olives visit." },
+    { label: "Museums in Jerusalem", to: "/travel-blog/museums-in-jerusalem/", note: "Discover museums, collections and historic exhibits around the city." },
+    { label: "Shopping in Jerusalem", to: "/travel-blog/shopping-in-jerusalem/", note: "Explore traditional markets, shopping streets and local crafts." },
   ],
   planningLinks: [
     { label: "Where to stay in Jerusalem", to: "/travel-blog/where-to-stay-in-jerusalem/", description: "Choose a base for Old City visits.", icon: "region" },
