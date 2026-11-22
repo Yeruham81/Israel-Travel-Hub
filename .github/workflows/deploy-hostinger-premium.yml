@@ -976,15 +976,15 @@ jobs:
             process.exit(1);
           }
           const related = html.match(/<ul[^>]*data-testid=["']stay-trip-photo-grid["'][^>]*>([\s\S]*?)<\/ul>/i);
-          if ((related?.[1].match(/<li\b/g)||[]).length !== 4) {
-            console.error("::error::Mount of Olives requires four relevant Jerusalem related cards");
+          if ((related?.[1].match(/<li\b/g)||[]).length !== 6) {
+            console.error("::error::Mount of Olives requires six illustrated Jerusalem related cards");
             process.exit(1);
           }
           if ((html.match(/data-tour-id=/g)||[]).length !== 3) {
             console.error("::error::Mount of Olives requires exactly three guided tour cards");
             process.exit(1);
           }
-          console.log("Mount of Olives public guide, eight highlights, four related cards, three tours and canonical verified.");
+          console.log("Mount of Olives public guide, eight highlights, six related cards, three tours and canonical verified.");
           NODE
           rm -f "$olives_html"
           for picture in pater-noster.webp chapel-of-ascension.webp dominus-flevit.webp mary-magdalene-church.webp tomb-of-virgin-mary.webp jewish-cemetery.webp; do
