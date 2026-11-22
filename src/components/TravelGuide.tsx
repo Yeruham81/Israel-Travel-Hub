@@ -143,8 +143,7 @@ function GuideDataTable({ table, nested = false, mobileGuidance = false }: { tab
   const Heading = nested ? "h4" : "h3";
   return <div className="mt-6">
     <Heading className="text-xl font-semibold">{table.caption}</Heading>
-    {mobileGuidance && <p className="mt-2 text-xs text-muted-foreground sm:hidden">Swipe the table sideways to see every column. The first column stays visible.</p>}
-    <div role="region" aria-label={table.caption} tabIndex={0} className="mt-3 max-w-full overflow-x-auto rounded-xl border focus-visible:outline-2 focus-visible:outline-primary">
+        <div role="region" aria-label={table.caption} tabIndex={0} className="mt-3 max-w-full overflow-x-auto rounded-xl border focus-visible:outline-2 focus-visible:outline-primary">
       <table className={"w-full text-left text-sm " + (mobileGuidance ? "min-w-[720px]" : "min-w-[560px]")}>
         <caption className="sr-only">{table.caption}</caption>
         <thead className="bg-secondary"><tr>{table.headers.map((h, i) => <th key={h} scope="col" className={"p-3 font-semibold " + (mobileGuidance && i === 0 ? "sticky left-0 z-10 bg-secondary shadow-[1px_0_0_0_var(--border)]" : "")}>{h}</th>)}</tr></thead>

@@ -93,7 +93,7 @@ export const tabghaDestinationContent: AttractionDestinationContent = {
   visitorContent: (
     <div className="mt-4 space-y-4">
       <p>The two churches have their own entrances and visiting hours. These are the details I would use to plan a visit to both.</p>
-      <p className="text-xs text-muted-foreground md:hidden">Swipe the table sideways to compare both churches.</p>
+      
       <div role="region" aria-label="Visitor information comparison" tabIndex={0} className="max-w-full overflow-x-auto rounded-xl border focus-visible:outline-2 focus-visible:outline-primary">
         <table className="w-full min-w-[700px] border-collapse text-left text-sm" data-testid="tabgha-visitor-table">
           <thead className="bg-secondary/70"><tr>

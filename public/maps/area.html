@@ -68,6 +68,7 @@
           return;
         }
         const name = (params.get("name") || "Area").slice(0, 160);
+        const locationPinMode = params.get("pinMode") === "locations";
         document.title = `English map of ${name}`;
         document.getElementById("map").setAttribute("aria-label", `Interactive English map of ${name}`);
         fallback.href = `https://www.google.com/maps/search/?${new URLSearchParams({ api: "1", query: point.join(","), hl: "en" })}`;
@@ -110,7 +111,7 @@
               el.className = "route-pin";
               el.textContent = String(index + 1);
               el.title = place.name;
-              el.setAttribute("aria-label", `Stop ${index + 1}: ${place.name}`);
+              el.setAttribute("aria-label", `${locationPinMode ? "Location" : "Stop"} ${index + 1}: ${place.name}`);
               el.setAttribute("role", "img");
               new maplibregl.Marker({ element: el, anchor: "bottom" })
                 .setLngLat([place.lon, place.lat]).addTo(map);

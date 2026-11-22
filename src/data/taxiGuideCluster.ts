@@ -510,7 +510,7 @@ export const taxiGuideCluster: Record<"taxis" | "taxiFares" | "airportTaxis", Tr
         id: "destinations", title: "Taxis to Tel Aviv, Jerusalem, Haifa and the Dead Sea",
         paragraphs: [
           "A taxi provides a direct trip to an accessible address, but whether it beats a train, bus or pre-booked vehicle depends on destination, luggage, travel date and final-mile transport. For example, the fastest rail ride to a station is not necessarily the shortest journey to your hotel.",
-          "The following destination-specific guides compare the actual transport choices and their limitations. This airport-taxi guide does not reproduce their route comparisons or quote fixed meter prices.",
+          "Explore the destination guides below for a detailed comparison of trains, buses, taxis and private transfers.",
         ],
         links: [
           { label: "From Ben Gurion Airport to Tel Aviv", to: "/travel-blog/ben-gurion-airport-to-tel-aviv/" },

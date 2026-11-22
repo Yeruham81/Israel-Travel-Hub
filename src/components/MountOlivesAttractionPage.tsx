@@ -92,7 +92,7 @@ export const mountOlivesDestinationContent: AttractionDestinationContent = {
   ),
   visitorContent: (
     <div className="mt-4 space-y-4">
-      <p>The open-air panoramic viewpoint is free. The churches, monasteries and pilgrimage sites below follow separate schedules, and Pater Noster and the Chapel of the Ascension charge their own entrance fees. The following published hours are a planning guide, not a guarantee of entry on holidays or during services.</p>
+      <p>The open-air panoramic viewpoint is free. The churches, monasteries and pilgrimage sites below follow separate schedules, and Pater Noster and the Chapel of the Ascension charge their own entrance fees. Opening hours can change during religious services and holidays; check before visiting.</p>
       <div className="grid gap-3 sm:grid-cols-2" data-testid="mount-olives-hours-fees">
         {mountOlivesSite.hours.map(fact => <article key={fact.name} className="rounded-xl border bg-card p-4">
           <div className="flex items-start gap-2"><Clock3 className="mt-0.5 h-4 w-4 shrink-0 text-primary" aria-hidden="true"/><h3 className="font-serif text-lg font-semibold leading-snug">{fact.name}</h3></div>

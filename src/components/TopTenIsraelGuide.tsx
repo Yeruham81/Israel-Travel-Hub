@@ -184,7 +184,7 @@ export function TopTenIsraelGuide() {
       <section id="compare" aria-labelledby="compare-h" className="mt-12 scroll-mt-24">
         <Heading id="compare" title="Compare all ten experiences"
           intro="Use this overview to choose activities that fit your interests, base and available time. Visit lengths are suggestions, excluding journeys between destinations." />
-        <p className="mb-3 text-xs text-muted-foreground md:hidden">Swipe the table sideways to compare all ten experiences.</p>
+        
         <div role="region" aria-label="Comparison table" tabIndex={0} className="max-w-full overflow-x-auto rounded-xl border bg-card focus-visible:outline-2 focus-visible:outline-primary">
           <table className="w-full min-w-[760px] table-fixed border-collapse text-left text-sm">
             <caption className="sr-only">Compare ten experiences in Israel by location, interest and visit duration</caption>

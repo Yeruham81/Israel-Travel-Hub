@@ -147,7 +147,7 @@ export function IsraelItineraryPage({ id }: { id: ItineraryId }) {
       </dl>}
       <h3 className="mt-7 text-xl font-semibold">{compactOverview ? "Daily route, transport and overnight stays" : "Daily route and hotel bases"}</h3>
       <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{id === "3" ? "One continuous trip: two Jerusalem hotel nights, followed by a coastal day and either departure or an optional Tel Aviv stay." : id === "5" ? "Five sightseeing days with three Jerusalem hotel nights, a move to Tel Aviv after Day 3, and a flexible departure plan after the final coastal day." : id === "7" ? "Seven sightseeing days across three hotel bases, with planned nights after Days 1–6 and an optional arrival or departure night according to your flights." : "Ten sightseeing days with Jerusalem and Galilee hotel bases, a choice of Haifa or Tel Aviv after Akko, and a coastal finish. Your final day depends on the flight date."}</p>
-      <p className="mt-3 text-xs text-muted-foreground sm:hidden">Swipe the table sideways to compare days, journeys and overnight stays.</p>
+      
       <div role="region" aria-label="Day-by-day itinerary overview" tabIndex={0} className="mt-4 max-w-full overflow-x-auto rounded-2xl border focus-visible:outline-2 focus-visible:outline-primary">
         <table className="w-full min-w-[650px] text-left text-sm">
           <thead className="bg-secondary/60">

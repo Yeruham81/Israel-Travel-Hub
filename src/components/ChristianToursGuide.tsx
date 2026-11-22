@@ -140,7 +140,7 @@ export function ChristianToursGuide(){
    </section>
 
    <section id="itineraries" aria-labelledby="itineraries-heading" className="mt-12 scroll-mt-24">
-     <Heading id="itineraries" title="Four ways to plan a Christian itinerary" intro="These are flexible ideas rather than promises of access or exact driving times. Adjust stops according to your interests, departure city and pace."/>
+     <Heading id="itineraries" title="Four ways to plan a Christian itinerary" intro="Four flexible itineraries to adapt to your interests, departure city and pace."/>
      <div className="grid gap-4 md:grid-cols-2">{christianRoutes.map(item=>{
        return <article key={item.time} className="flex flex-col rounded-xl border bg-card p-5">
          <p className="flex items-center gap-1.5 text-xs font-bold uppercase tracking-wide text-primary"><CalendarDays className="h-4 w-4" aria-hidden="true"/>{item.time} · {item.subtitle}</p>
@@ -156,7 +156,7 @@ export function ChristianToursGuide(){
          </div>
        </article>;
      })}</div>
-     <p className="mt-3 text-sm leading-relaxed text-muted-foreground">Maps cover the listed regional legs, not a guaranteed continuous pilgrimage or every optional stop. Jerusalem Old City routes are on foot; do not treat West Bank directions as confirmation of permitted border access. Check conditions before travelling.</p>
+     <p className="mt-3 text-sm leading-relaxed text-muted-foreground">The map links cover the main regional journeys. Explore Jerusalem's Old City on foot, and check current West Bank access conditions before travelling.</p>
    </section>
 
 

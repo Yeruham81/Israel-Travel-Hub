@@ -31,7 +31,6 @@ export function ShabbatTerminalSteps() {
         <p className="mt-1 text-sm">Find airport stop 34609 and check the Tel Aviv-bound departure.</p>
       </li>
     </ol>
-    <p className="mt-3 text-xs leading-relaxed text-muted-foreground">This is a sequence of steps, not a map or a guarantee of a timed connection.</p>
   </div>;
 }
 

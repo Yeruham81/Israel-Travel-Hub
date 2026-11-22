@@ -98,7 +98,7 @@ function MonthMatrix(){
         </tr>)}</tbody>
       </table>
     </div>
-    <p className="mt-2 text-xs leading-relaxed text-muted-foreground">On a phone, swipe the table sideways to see all five activities. “Dead Sea / Masada walks” and “Desert walks” both rate exposed outdoor sightseeing, not swimming at the Dead Sea or resort activities in Eilat.</p>
+    <p className="mt-2 text-xs leading-relaxed text-muted-foreground">“Dead Sea / Masada walks” and “Desert walks” both rate exposed outdoor sightseeing, not swimming at the Dead Sea or resort activities in Eilat.</p>
     <div id="month-insight" role="status" aria-live="polite" className="mt-5 rounded-xl border bg-secondary/20 p-4 sm:p-5">
       {activeMonth ? <>
         <h3 className="text-base font-bold">My planning note for {activeMonth.month}</h3>

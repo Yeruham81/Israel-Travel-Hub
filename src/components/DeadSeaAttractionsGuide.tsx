@@ -208,7 +208,7 @@ export function DeadSeaAttractionsGuide() {
 
       <section id="compare" aria-labelledby="compare-h" className="mt-12 scroll-mt-24">
         <Heading id="compare" title="Compare all ten Dead Sea experiences" intro="Use this overview to match your interests, access requirements and available time. The suggested durations exclude travel between stops."/>
-        <p className="mb-3 text-xs text-muted-foreground md:hidden">Swipe the table sideways to compare all ten Dead Sea experiences.</p>
+        
         <div role="region" aria-label="Dead Sea attractions comparison" tabIndex={0} className="max-w-full overflow-x-auto rounded-xl border bg-card focus-visible:outline-2 focus-visible:outline-primary">
           <table className="w-full min-w-[800px] table-fixed border-collapse text-left text-sm">
             <caption className="sr-only">Compare ten attractions by area, admission or booking requirements, and suggested visiting duration</caption>

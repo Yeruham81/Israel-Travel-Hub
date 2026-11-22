@@ -312,7 +312,6 @@ export function AirportJourneyPage({ id }: { id: AirportJourneyId }) {
         <ul className="mt-3 list-disc space-y-2 pl-5">{g.connections.map(p=><li key={p}>{p}</li>)}</ul>
         <aside className="mt-7 rounded-2xl border bg-secondary/40 p-5 sm:p-6" aria-label={g.exampleJourney.title}>
           <h3 className="text-xl font-semibold">{g.exampleJourney.title}</h3>
-          <p className="mt-2 text-sm text-muted-foreground">Illustrative planning example, not a live timetable or reserved connection.</p>
           <ol className="mt-4 space-y-3">{g.exampleJourney.steps.map((step, index) => <li key={step.label} className="flex gap-3"><span className="font-semibold text-primary">{index + 1}.</span><div><strong>{step.label}</strong><p className="mt-1 text-sm leading-relaxed text-muted-foreground">{step.detail}</p></div></li>)}</ol>
           <p className="mt-4 border-t pt-4 text-sm leading-relaxed"><strong>Practical choice:</strong> {g.exampleJourney.takeaway}</p>
         </aside>
@@ -347,11 +346,11 @@ export function AirportJourneyPage({ id }: { id: AirportJourneyId }) {
       <section id="quick-answer" aria-labelledby="quick-answer-h" className="mt-8 rounded-2xl border border-primary/20 bg-secondary/60 p-6">
         <h2 id="quick-answer-h" className="text-2xl">Quick answer: what is the best way to get there?</h2>
         <p className="mt-3 leading-relaxed">{g.answer}</p>
-        {!focusedLayout && <p className="mt-3 text-sm text-muted-foreground">This is an independent transport comparison, not a confirmed booking or fixed-price offer. Compare total costs to your actual address.</p>}
+        {!focusedLayout && <p className="mt-3 text-sm text-muted-foreground">Compare the total door-to-door cost to your address. Each provider confirms prices and availability.</p>}
       </section>
       <OnThisPage sections={links} />
       <Section id="comparison" title={"Compare all ways from TLV Airport to " + g.city}>
-        {!focusedLayout && <p>Choose by the full journey to your address, not only the lowest fare or the fastest station-to-station time. The figures below are planning estimates, not real-time quotes.</p>}
+        {!focusedLayout && <p>Compare the complete door-to-door journey, including transfers, total travel time and cost. Check current fares with each provider.</p>}
         <div role="region" aria-label={"Travel options to " + g.city} tabIndex={0} className="mt-5 max-w-full overflow-x-auto rounded-xl border bg-card">
           {focusedLayout ? (
             <table className="min-w-[660px] w-full text-left text-sm">

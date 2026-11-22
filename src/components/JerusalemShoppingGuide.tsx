@@ -186,7 +186,7 @@ export function JerusalemShoppingGuide() {
       <section id="compare" aria-labelledby="compare-h" className="mt-12 scroll-mt-24">
         <Heading id="compare" title="Jerusalem shopping areas at a glance"
           intro="Ten distinct choices, from traditional markets to an indoor shopping mall. Opening hours vary between individual shops and events." />
-        <p className="mb-3 text-xs text-muted-foreground md:hidden">Swipe the table sideways to compare all ten shopping areas.</p>
+        
         <div role="region" aria-label="Comparison table" tabIndex={0} className="max-w-full overflow-x-auto rounded-xl border bg-card focus-visible:outline-2 focus-visible:outline-primary">
           <table className="w-full min-w-[760px] table-fixed border-collapse text-left text-sm">
             <caption className="sr-only">Comparison of ten Jerusalem shopping destinations</caption>

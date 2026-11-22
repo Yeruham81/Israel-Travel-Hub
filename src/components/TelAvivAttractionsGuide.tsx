@@ -215,7 +215,7 @@ export function TelAvivAttractionsGuide(){
   </section>
   <section id="compare" aria-labelledby="compare-h" className="mt-12 scroll-mt-24">
     <Heading id="compare" title="Compare ten Tel Aviv attractions" intro="Use this overview to choose by area, visiting time and admission type. Allow additional time to get between neighbourhoods."/>
-    <p className="mb-3 text-xs text-muted-foreground md:hidden">Swipe the table sideways to compare all ten attractions.</p>
+    
         <div role="region" aria-label="Comparison table" tabIndex={0} className="max-w-full overflow-x-auto rounded-xl border bg-card focus-visible:outline-2 focus-visible:outline-primary">
       <table className="w-full min-w-[760px] table-fixed border-collapse text-left text-sm">
         <caption className="sr-only">Compare ten attractions by neighbourhood, suggested duration and admission</caption>

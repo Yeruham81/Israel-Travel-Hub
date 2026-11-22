@@ -1,4 +1,4 @@
-import { existsSync } from "node:fs";
+import { existsSync, readFileSync } from "node:fs";
 import { describe, expect, it } from "vitest";
 import { affiliateConfig, tourBookingOffers, tourProducts } from "@/data/registry";
 import { tourPhotos } from "@/data/tours";
@@ -17,6 +17,21 @@ describe("Jordan River baptism comparison guide",()=>{
     expect(travelGuides.baptism.description).toBe(BAPTISM_DESCRIPTION);
     expect(travelGuides.baptism.updatedAt).toBe(BAPTISM_UPDATED);
     expect(existsSync("public"+BAPTISM_HERO.src)).toBe(true);
+  });
+  it("pairs a Yardenit photo with visitor facts and shows only two location pins on the comparison map",()=>{
+    const page = readFileSync("src/components/JordanRiverBaptismGuide.tsx","utf8");
+    const map = readFileSync("public/maps/area.html","utf8");
+    expect(page).toContain('data-testid="baptism-yardenit-photo-facts"');
+    expect(page).toContain('src={yardenitSite.hero.src}');
+    expect(page).toContain('alt={yardenitSite.hero.alt}');
+    expect(page).toContain('pinMode: "locations"');
+    expect(page).toContain('waypoints: JSON.stringify(baptismMapLocations)');
+    expect(page).toContain('src={baptismComparisonMapUrl}');
+    expect(page).not.toContain('maps?saddr=');
+    expect(page).not.toContain('origin=Yardenit%20Baptismal%20Site%2C%20Israel&destination=Qasr');
+    expect(page).not.toContain("The map illustrates their separation, not a guaranteed travel time");
+    expect(map).toContain('const locationPinMode = params.get("pinMode") === "locations"');
+    expect(map).toContain('locationPinMode ? "Location" : "Stop"');
   });
   it("has three Galilee and three Qasr tours with approved Travelpayouts links",()=>{
     expect(baptismTourGroups.map(group=>group.products.length)).toEqual([3,3]);

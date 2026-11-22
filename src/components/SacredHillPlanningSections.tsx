@@ -34,7 +34,7 @@ export function SacredHillSiteHours({ id }: { id: SacredHillId }) {
   const facts = sacredHillPlanning[id].facts;
   return <Section id="visit-facts" title="Opening Hours & Entrance Fees">
     <p className="mt-3 max-w-3xl leading-relaxed text-muted-foreground">These are reference opening hours and fees. Churches may change their schedules for worship, holidays or local circumstances, so check the linked source before travelling specifically to a site.</p>
-    <p className="mt-3 text-xs text-muted-foreground md:hidden">Swipe the table sideways to compare opening hours, admission and official information.</p>
+    
     <div className="mt-3 max-w-full overflow-x-auto rounded-xl border bg-card focus-visible:outline-2 focus-visible:outline-primary" role="region" aria-label="Opening hours and entrance fees comparison" tabIndex={0} data-testid="sacred-hours-table">
       <table className="w-full min-w-[740px] border-collapse text-left text-sm">
         <thead className="bg-secondary/60">

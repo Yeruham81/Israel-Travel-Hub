@@ -112,7 +112,7 @@ const page: AttractionDestinationContent = {
   visitorContent: (
     <div className="mt-4 space-y-4">
       <p>Compare opening hours, admission and booking requirements for the three visitor areas below.</p>
-      <p className="text-xs text-muted-foreground md:hidden">Swipe the table sideways to compare all three visitor areas.</p>
+      
       <div role="region" aria-label="Visitor information comparison" tabIndex={0} className="max-w-full overflow-x-auto rounded-xl border focus-visible:outline-2 focus-visible:outline-primary">
         <table className="w-full min-w-[700px] border-collapse text-left text-sm" data-testid="capernaum-visitor-table">
           <thead className="bg-secondary/70"><tr>

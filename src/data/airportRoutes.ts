@@ -35,7 +35,7 @@ const guides: Record<AirportTransferRouteId, RouteGuide> = {
     planningTitle: "Late arrival and Old City access",
     planningText: "For late flights, check your hotel's reception or key collection arrangements. Include the exact entrance or nearest vehicle-accessible Old City drop-off in your request.",
     faqs: [
-      { q: "How long is the private transfer to Jerusalem?", a: "Allow approximately 45–60 minutes or more after pickup, as a planning estimate. Your hotel location and traffic can make it longer. This is a road-time estimate, not a promise of reaching your hotel within an hour of landing." },
+      { q: "How long is the private transfer to Jerusalem?", a: "The drive to Jerusalem is usually around 45–60 minutes after pickup, with extra time depending on traffic and your hotel's location. Allow separately for arrival formalities and baggage collection." },
       { q: "Can the driver take me to a hotel inside the Old City?", a: "Provide the exact hotel and ask for the nearest permitted drop-off. Confirm any remaining walk, steps and luggage arrangements with the hotel and me before booking." },
       { q: "Can I request a Friday-night or holiday arrival?", a: "Yes. Include your actual flight date and time in the request. I must confirm availability, pickup arrangements and any extra charges; submitting a request does not reserve a driver." },
     ],

@@ -277,7 +277,6 @@ export const eilatDestinationContent: AttractionDestinationContent = {
     <div className="overflow-hidden rounded-xl border bg-secondary/10" data-testid="eilat-city-map">
       <iframe title="Map of Eilat, southern beaches and nearby roads" src={maps.city} width="100%" height="320" loading="lazy" referrerPolicy="no-referrer-when-downgrade" className="block w-full border-0" />
     </div>
-    <p className="text-sm leading-relaxed">Use the individual Google Maps links in the attraction descriptions for precise locations. The city overview map is for orientation, not a complete route between these widely separated sites.</p>
   </div>,
   foodContent: <div className="mt-4 space-y-3">
     <p>Restaurants and cafés are concentrated around the North Beach hotel district, marina and shopping areas, while some quieter beach cafés sit farther south. Prices, kosher supervision and Friday-evening opening vary by business, so check the specific venue rather than assuming one rule applies citywide.</p>

@@ -112,7 +112,7 @@ function ChurchMap(){
     return ()=>window.removeEventListener("message",receive);
   },[]);
   return <section id="church-map" aria-labelledby="church-map-heading" className="mt-11 scroll-mt-24">
-    <Heading id="church-map" title="Jerusalem churches on the map" intro="Browse all 20 locations. The colours separate the four areas; they are not a continuous walking route."/>
+    <Heading id="church-map" title="Jerusalem churches on the map" intro="Browse 20 locations grouped into four colour-coded areas."/>
     <div className="overflow-hidden rounded-xl border bg-card">
       <div className="grid gap-4 p-4 lg:grid-cols-[1fr_1fr]">
         <div aria-label="Church areas and map colours" className="space-y-2 text-sm">{churchAreas.map(a=><div key={a.id} className="flex items-center gap-2"><span className="h-3.5 w-3.5 shrink-0 rounded-sm" style={{backgroundColor:a.color}} aria-hidden="true"/>{a.title}</div>)}</div>

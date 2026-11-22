@@ -17,6 +17,20 @@ import { relFor } from "@/lib/outbound";
 import { BAPTISM_PATH, BAPTISM_TITLE, BAPTISM_UPDATED, BAPTISM_HERO, baptismFaqs, baptismSources, baptismTourGroups } from "@/data/jordanRiverBaptism";
 import qasrPhoto from "@/assets/guides/dead-sea-excursions/qasr-al-yahud.webp";
 
+// Use the existing English location map with two place markers and no route overlay.
+const baptismMapLocations = [
+  { name: "Yardenit — Sea of Galilee", lat: 32.71094, lon: 35.57086 },
+  { name: "Qasr el-Yahud — Jordan Valley", lat: 31.83709, lon: 35.5465 },
+] as const;
+const baptismComparisonMapUrl = "/maps/area.html?" + new URLSearchParams({
+  marker: "32.28,35.56",
+  bbox: "35.42,31.73,35.69,32.81",
+  name: "Yardenit and Qasr el-Yahud",
+  lang: "en",
+  pinMode: "locations",
+  waypoints: JSON.stringify(baptismMapLocations),
+}).toString();
+
 const linkClass = "font-semibold text-primary underline underline-offset-4 hover:text-primary/80";
 const toc = [
  ["compare-sites","Compare the sites"],["yardenit","Yardenit"],["qasr","Qasr el-Yahud"],
@@ -114,7 +128,7 @@ export function JordanRiverBaptismGuidePage() {
   <OnThisPage sections={toc}/>
   <section id="compare-sites" className="mt-11 scroll-mt-24" aria-labelledby="compare-sites-heading">
    <Heading id="compare-sites" intro="The two sites are on different stretches of the river, far apart. I recommend choosing by religious meaning, travel region and the facilities you need.">Yardenit or Qasr el-Yahud: which site should you visit?</Heading>
-   <p className="mb-3 text-xs text-muted-foreground lg:hidden">Swipe the comparison table sideways to see both baptism sites.</p>
+   
    <div role="region" tabIndex={0} aria-label="Jordan River baptism site comparison" className="max-w-full overflow-x-auto rounded-xl border bg-card focus-visible:outline-2 focus-visible:outline-primary" data-testid="baptism-site-comparison">
     <table className="w-full min-w-[640px] text-left text-sm leading-relaxed"><caption className="sr-only">Comparison of Yardenit and Qasr el-Yahud</caption><thead className="bg-secondary/60"><tr><th scope="col" className="p-3">Compare</th><th scope="col" className="p-3">Yardenit</th><th scope="col" className="p-3">Qasr el-Yahud</th></tr></thead><tbody>
     {[
@@ -131,9 +145,23 @@ export function JordanRiverBaptismGuidePage() {
   </section>
   <section id="yardenit" className="mt-12 scroll-mt-24" aria-labelledby="yardenit-heading">
    <Heading id="yardenit" intro="An established, peaceful baptism setting near Kibbutz Kinneret.">Yardenit: baptism near the Sea of Galilee</Heading>
-   <p className="leading-relaxed">At Yardenit, designated steps lead to the Jordan River and visitors can use changing facilities and riverside spaces. According to the operator, general entry and conducting a baptism are free. A special white robe is required, available to rent or buy, and certain facilities cost extra. There is no resident priest, but the operator can provide clergy contacts. For an ordinary visit, parties of up to 40 people can arrive without advance coordination; groups larger than 40 should notify Yardenit before coming. This does not replace planning a religious ceremony with your priest or pastor. <a href={yardenitSite.sources.faq} target="_blank" rel="noopener noreferrer" className={linkClass}>See the official questions and answers</a>.</p>
-   <div className="mt-5 grid items-start gap-5 sm:grid-cols-2"><div className="rounded-xl border bg-card p-4"><h3 className="font-bold">What makes this setting special</h3><p className="mt-3 text-sm leading-relaxed text-muted-foreground">Yardenit offers a landscaped riverbank with organised immersion areas and places for prayer. It can be a meaningful stop even if you are not participating in a baptism. I suggest keeping some unhurried time for the river and the people travelling with you.</p></div><div className="rounded-xl border bg-card p-4"><h3 className="font-bold">Before you go</h3><ul className="mt-3 space-y-2 text-sm leading-relaxed"><li>• Confirm actual visiting and last-baptism times</li><li>• Ordinary groups of up to 40 need no advance visit coordination; larger groups should notify the site</li><li>• Arrange a priest or pastor and any ceremony requirements separately</li><li>• Ask about white robes, changing rooms and charges</li><li>• Allow time to change and reflect</li></ul><Link to="/attractions/yardenit/" className="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-primary underline underline-offset-4">Read my full Yardenit visitor guide <ArrowUpRight className="h-4 w-4" aria-hidden="true"/></Link></div></div>
-   <MyTip>Different opening-hour sets have appeared on Yardenit's own pages. I would confirm the <a href={yardenitSite.sources.contact} target="_blank" rel="noopener noreferrer" className="font-semibold underline">current visitor and baptism windows</a> before finalising your day.</MyTip>
+   <p className="leading-relaxed">At Yardenit, designated steps lead to the Jordan River and visitors can use changing facilities and riverside spaces. According to the operator, general entry and conducting a baptism are free. A special white robe is required, available to rent or buy, and certain facilities cost extra. There is no resident priest, but the operator can provide clergy contacts. For an ordinary visit, parties of up to 40 people can arrive without advance coordination; groups larger than 40 should notify Yardenit before coming. <a href={yardenitSite.sources.faq} target="_blank" rel="noopener noreferrer" className={linkClass}>See the official questions and answers</a>.</p>
+   <div className="mt-5 grid items-start gap-5 sm:grid-cols-2" data-testid="baptism-yardenit-photo-facts">
+    <img src={yardenitSite.hero.src} alt={yardenitSite.hero.alt} width={620} height={400} loading="lazy" decoding="async" className="aspect-[16/10] w-full rounded-xl object-cover"/>
+    <div className="rounded-xl border bg-card p-4">
+     <h3 className="font-bold">Before you go</h3>
+     <p className="mt-3 text-sm leading-relaxed text-muted-foreground">The landscaped riverbank has designated baptism areas, changing facilities and space for quiet reflection.</p>
+     <ul className="mt-3 space-y-2 text-sm leading-relaxed">
+      <li>• Confirm current visitor hours and last baptism time</li>
+      <li>• Notify the site if your group has more than 40 visitors</li>
+      <li>• Arrange your priest or pastor and ceremony time</li>
+      <li>• Ask about white robes, changing rooms and charges</li>
+      <li>• Leave time to change and reflect</li>
+     </ul>
+     <Link to="/attractions/yardenit/" className="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-primary underline underline-offset-4">Read my full Yardenit visitor guide <ArrowUpRight className="h-4 w-4" aria-hidden="true"/></Link>
+    </div>
+   </div>
+   <MyTip>I recommend checking the <a href={yardenitSite.sources.contact} target="_blank" rel="noopener noreferrer" className="font-semibold underline">current visitor and baptism windows</a> before finalising your day.</MyTip>
   </section>
   <section id="qasr" className="mt-12 scroll-mt-24" aria-labelledby="qasr-heading">
    <Heading id="qasr" intro="A revered traditional baptism landscape on the lower Jordan near Jericho.">Qasr el-Yahud: the lower Jordan baptism site</Heading>
@@ -162,7 +190,14 @@ export function JordanRiverBaptismGuidePage() {
     <article className="rounded-xl border bg-card p-4"><MapPinned className="mb-2 h-5 w-5 text-primary" aria-hidden="true"/><h3 className="text-lg font-bold">Yardenit — Galilee</h3><p className="mt-2 text-sm leading-relaxed">Near Kibbutz Kinneret, south of Tiberias. I would usually combine it with selected Sea of Galilee or Nazareth stops. A suitable tour, rental car or prearranged driver makes the last leg easier. If using public transport, check the exact stop and final walk, not just Tiberias.</p><a href="https://www.google.com/maps/dir/?api=1&destination=Yardenit%20Baptismal%20Site%2C%20Kibbutz%20Kinneret%2C%20Israel&travelmode=driving" target="_blank" rel="noopener noreferrer" className="mt-3 inline-flex items-center gap-1 text-sm font-semibold text-primary underline underline-offset-4">Directions to Yardenit <ExternalLink className="h-4 w-4" aria-hidden="true"/></a></article>
     <article className="rounded-xl border bg-card p-4"><MapPinned className="mb-2 h-5 w-5 text-primary" aria-hidden="true"/><h3 className="text-lg font-bold">Qasr el-Yahud — lower Jordan</h3><p className="mt-2 text-sm leading-relaxed">Near Jericho, north of the Dead Sea. Follow the signed access road. I would favour a confirmed driver or guided tour over an unverified bus connection to the entrance. Check the actual reservation and access instructions before travelling.</p><a href="https://www.google.com/maps/dir/?api=1&destination=Qasr%20el%20Yahud%20Baptismal%20Site%2C%20Israel&travelmode=driving" target="_blank" rel="noopener noreferrer" className="mt-3 inline-flex items-center gap-1 text-sm font-semibold text-primary underline underline-offset-4">Directions to Qasr el-Yahud <ExternalLink className="h-4 w-4" aria-hidden="true"/></a></article>
    </div>
-   <div data-testid="baptism-comparison-map" className="mt-5 overflow-hidden rounded-xl border bg-card"><div className="px-4 pt-4"><h3 className="font-bold">Compare both sites on one map</h3><p className="mt-2 text-sm text-muted-foreground">The map illustrates their separation, not a guaranteed travel time or current road access.</p></div><iframe title="Map comparing Yardenit and Qasr el-Yahud in Israel" src="https://maps.google.com/maps?saddr=Yardenit%20Baptismal%20Site%2C%20Israel&daddr=Qasr%20el%20Yahud%20Baptismal%20Site%2C%20Israel&output=embed" loading="lazy" referrerPolicy="no-referrer-when-downgrade" className="mt-3 h-[290px] w-full border-0 sm:h-[350px]"/><a href="https://www.google.com/maps/dir/?api=1&origin=Yardenit%20Baptismal%20Site%2C%20Israel&destination=Qasr%20el%20Yahud%20Baptismal%20Site%2C%20Israel&travelmode=driving" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 px-4 py-3 text-sm font-semibold text-primary underline underline-offset-4">Open both sites in Google Maps <ExternalLink className="h-4 w-4" aria-hidden="true"/></a></div>
+   <div data-testid="baptism-comparison-map" className="mt-5 overflow-hidden rounded-xl border bg-card">
+    <div className="px-4 pt-4"><h3 className="font-bold">Compare both sites on one map</h3></div>
+    <iframe title="Map showing Yardenit and Qasr el-Yahud as two locations" src={baptismComparisonMapUrl} loading="lazy" referrerPolicy="strict-origin-when-cross-origin" className="mt-3 h-[290px] w-full border-0 sm:h-[350px]"/>
+    <div className="flex flex-wrap items-center gap-x-5 gap-y-2 px-4 py-3 text-sm">
+     <a href="https://www.google.com/maps/search/?api=1&query=Yardenit%20Baptismal%20Site%2C%20Kibbutz%20Kinneret%2C%20Israel" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 font-semibold text-primary underline underline-offset-4"><span className="inline-grid h-6 w-6 place-items-center rounded-full bg-primary text-xs text-primary-foreground">1</span> Yardenit <ExternalLink className="h-3.5 w-3.5" aria-hidden="true"/></a>
+     <a href="https://www.google.com/maps/search/?api=1&query=Qasr%20el%20Yahud%20Baptismal%20Site%2C%20Israel" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 font-semibold text-primary underline underline-offset-4"><span className="inline-grid h-6 w-6 place-items-center rounded-full bg-primary text-xs text-primary-foreground">2</span> Qasr el-Yahud <ExternalLink className="h-3.5 w-3.5" aria-hidden="true"/></a>
+    </div>
+   </div>
    <p className="mt-4 text-sm leading-relaxed">For private transport, <a href="#contact" className={linkClass}>tell me your chosen site, date, departure point and ceremony time</a>. I can discuss a driver, waiting time and practical stops. Guiding and religious services are arranged separately.</p>
   </section>
   {baptismTourGroups.map(group=><TourSection key={group.id} group={group}/>)}

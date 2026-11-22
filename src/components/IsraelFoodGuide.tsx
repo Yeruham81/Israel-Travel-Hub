@@ -125,7 +125,7 @@ function FoodDay({onPickFood}:{onPickFood:PickFood}){
   {when:"After dinner",title:"Share something sweet",text:"Finish with malabi or warm kanafeh. Ask about dairy and nuts before ordering.",anchor:"kanafeh"}
  ] as const;
  return <section id="food-day" aria-labelledby="food-day-heading" className="mt-12 scroll-mt-24">
-   <SectionHeading id="food-day" title="A simple first food day" intro="This is a loose tasting plan, not a fixed itinerary. Follow it in one city rather than criss-crossing the country for a meal."/>
+   <SectionHeading id="food-day" title="A simple first food day" intro="Try these four food stops in one city for a relaxed introduction to local flavours."/>
    <div className="grid gap-3 md:grid-cols-4">{plan.map((step,i)=><article key={step.when} className="flex min-w-0 flex-col rounded-xl border bg-card p-4">
       <p className="text-xs font-bold uppercase tracking-wide text-primary">{String(i+1).padStart(2,"0")} · {step.when}</p><h3 className="mt-2 font-bold">{step.title}</h3><p className="mt-2 text-sm leading-relaxed text-muted-foreground">{step.text}</p><a className={"mt-auto pt-3 "+shortLink} href={"#"+step.anchor} onClick={event=>{if(step.anchor!=="markets")onPickFood(event,step.anchor);}}>Read more<ArrowUpRight className="h-3.5 w-3.5" aria-hidden="true"/></a>
     </article>)}</div>
@@ -275,7 +275,7 @@ export function IsraelFoodGuide(){
      placeholder:"Travel dates, destinations, number of passengers, pickup location or your question…"
    }}/>
    <SourcesDisclosure>
-     <p className="leading-relaxed">This is an introductory guide to foods found across Israel, not a list of live restaurant recommendations. Dish recipes, dietary suitability, tour availability and opening hours vary by business. These tourism resources support practical planning:</p>
+     <p className="leading-relaxed">For specific ingredients, dietary requirements and opening hours, check with the venue. Further planning resources:</p>
      <ul className="mt-3 list-disc space-y-2 pl-5 text-sm">
        {sources.map(source=><li key={source.id}><External href={source.url}>{source.publisher}: {source.title}</External></li>)}
        <li>Mahane Yehuda market-stall photograph: <External href="https://commons.wikimedia.org/wiki/File:Mahane_Yehuda_shoppers.jpg">Yoninah / Wikimedia Commons</External> · <External href="https://creativecommons.org/licenses/by-sa/3.0/">CC BY-SA 3.0</External>; cropped and resized into WebP.</li>
