@@ -6,6 +6,7 @@ import { AuthorCard } from "@/components/AuthorCard";
 import { GuideHeroLayout, GuideHeroMedia } from "@/components/GuideHeroMedia";
 import { PageUpdated } from "@/components/PageUpdated";
 import { SourcesDisclosure } from "@/components/SourcesDisclosure";
+import { PhotoCreditsDisclosure } from "@/components/PhotoCreditsDisclosure";
 import { HomeContactForm } from "@/components/HomeContactForm";
 import { neighborhoodTripContactCopy } from "@/lib/guide-contact";
 import { churchAreas, churchesSourceUrl, jerusalemChurches, type JerusalemChurch } from "@/data/jerusalemChurches";
@@ -69,7 +70,7 @@ function ChurchCard({church}:{church:JerusalemChurch}) {
         {church.photo
           ? <img src={church.photo} alt={church.photoAlt} width={960} height={540} loading="lazy" decoding="async" className="aspect-[16/9] w-full bg-secondary/20 object-contain"/>
           : <div data-church-photo-slot={church.id} aria-label={"Photograph of "+church.name+" to be added"} className="flex aspect-[16/9] w-full items-center justify-center bg-secondary/50"><Church className="h-12 w-12 text-primary/25" strokeWidth={1.25} aria-hidden="true"/></div>}
-      {church.photoSourceUrl && <figcaption className="px-2 py-1.5 text-xs text-muted-foreground"><details><summary className="cursor-pointer font-medium">Photo credit & licence</summary><span>{church.photoCredit ? church.photoCredit+" · " : "See original photographer and licence · "}</span><a className="underline" href={church.photoSourceUrl} target="_blank" rel="noopener noreferrer">Source</a>{church.photoLicenseUrl && <> · <a href={church.photoLicenseUrl} target="_blank" rel="noopener noreferrer" className="underline">Licence</a></>}</details></figcaption>}
+
       </figure>
       <div className="min-w-0 p-4 sm:p-5 lg:col-start-1 lg:row-start-1 lg:p-0">
         <p className="text-xs font-semibold uppercase tracking-wide text-primary">{church.tradition}</p>
@@ -184,11 +185,11 @@ export function JerusalemChurchesGuide(){
       <div className="mt-5"><Tip><Link to="/travel-blog/calendar-of-events/" className="font-semibold text-primary underline">Israel's calendar of events</Link> is useful for understanding holiday and special-date changes. Church-specific schedules should still be checked directly with the relevant community.</Tip></div>
     </section>
     <section id="tours" aria-labelledby="tours-heading" className="mt-12 scroll-mt-24">
-      <Heading id="tours" title="Guided church and Christian heritage tours" intro="These external tours can help with context and navigation. Read the specific church stops, languages, departure city and entry conditions before booking. Price and review figures are provider snapshots from November 2026, not live quotes."/>
+      <Heading id="tours" title="Guided church and Christian heritage tours" intro="These tours are operated by independent providers and booked through their own platforms. Before booking, check the current departure date and location, itinerary, guide language, church access, admission fees and cancellation policy directly with the provider."/>
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">{availableTours.map(t=><article key={t.url} className="flex flex-col overflow-hidden rounded-xl border bg-card"><img src={t.image} alt={t.alt} width={640} height={360} loading="lazy" decoding="async" className="aspect-[16/9] w-full object-cover"/><div className="flex flex-1 flex-col p-4"><p className="text-xs font-semibold uppercase text-primary">{t.platform}</p><h3 className="mt-2 text-lg font-semibold">{t.title}</h3><p className="mt-2 text-xs font-semibold text-muted-foreground">{t.duration}</p>
           {"startingPriceUsd" in t && typeof t.startingPriceUsd === "number" && <p className="mt-2 text-sm"><strong>From US${t.startingPriceUsd}</strong><span className="text-muted-foreground"> · previously listed</span></p>}
           {"rating" in t && typeof t.rating === "number" && <p className="mt-1 text-sm text-muted-foreground">★ {t.rating.toFixed(1)}/5 ({t.reviewCount} reviews)</p>}<p className="mt-2 text-sm leading-relaxed text-muted-foreground">{t.text}</p><div className="mt-auto pt-4"><OutLink href={t.url}>See dates and rates</OutLink></div></div></article>)}</div>
-      <p className="mt-3 text-sm leading-relaxed text-muted-foreground">Starting prices and review counts are historical reference figures. Check current prices, availability and recent reviews with the booking provider before paying. The Bethlehem option is a separate excursion outside Jerusalem.</p>
+      <p className="mt-3 text-sm leading-relaxed text-muted-foreground">Check current prices, availability, recent reviews, meeting points and inclusions with the booking provider before paying. The Bethlehem option is a separate excursion outside Jerusalem.</p>
       <p className="mt-3 text-sm leading-relaxed text-muted-foreground">For more guided options, browse my <Link to="/tours/jerusalem/" className="font-semibold text-primary underline">Jerusalem tours</Link>. My <Link to="/private-driver-in-israel/" className="font-semibold text-primary underline">private driver service</Link> is transport, not automatically a licensed guiding service.</p>
     </section>
     <FaqList faqs={faqs}/>
@@ -207,5 +208,8 @@ export function JerusalemChurchesGuide(){
         <li><OutLink href="https://www.seetheholyland.net/">See the Holy Land — historical context</OutLink></li>
       </ul>
     </SourcesDisclosure>
+    <PhotoCreditsDisclosure entries={jerusalemChurches.filter(church=>church.photo && (church.photoCredit || church.photoSourceUrl || church.photoLicenseUrl)).map(church=>({
+      label:church.name, credit:church.photoCredit, sourceUrl:church.photoSourceUrl, licenseUrl:church.photoLicenseUrl
+    }))}/>
   </article></main>;
 }
