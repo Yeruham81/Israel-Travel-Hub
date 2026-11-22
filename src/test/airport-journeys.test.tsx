@@ -202,7 +202,7 @@ describe("four independent airport transportation comparisons", () => {
     expect(doc.querySelector('header time[datetime="2026-11-11"]')?.textContent).toBe("November 2026");
     expect(doc.querySelector("header")?.textContent).not.toMatch(/Approximate distance|Editorial review|45–55 km/);
     expect(doc.querySelector("header figure img")?.getAttribute("alt")).toMatch(/Tower of David.*Jerusalem/i);
-    expect(doc.querySelector("#sources a[href*=\"wikimedia.org/wiki/File:Jerusalem_Dome_of_the_rock\"]")).not.toBeNull();
+    expect(doc.querySelector("header figure img")?.getAttribute("src")).toBe("/images/travel-blog/featured-airport-jerusalem.webp");
     expect(doc.querySelector("main")?.lastElementChild?.id).toBe("sources");
     expect(doc.querySelector("#quick-answer")?.textContent).not.toContain("This is an independent transport comparison");
     const comparison = doc.querySelector("#comparison table")!;
