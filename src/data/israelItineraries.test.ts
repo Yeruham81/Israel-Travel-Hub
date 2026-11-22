@@ -396,7 +396,7 @@ describe("migrated Israel itineraries", () => {
     expect(g.relatedGuides).toHaveLength(6);
     expect(g.activityWidgets).toEqual([{ day: 1, city: "jerusalem" }, { day: 7, city: "telAviv" }]);
     expect(g.jerusalemTourOptionsDay).toBe(3);
-    expect(g.hero).toBe("itinerary-7day-dead-sea-original");
+    expect(g.hero).toBe("EXISTING:galilee");
     expect(g.daysPlan[4]?.image).toBe("itinerary-7day-capernaum");
     expect(g.hero).not.toBe(g.daysPlan[4]!.image);
     const photoKeys = [g.hero, ...g.daysPlan.map(day => day.image), ...(g.relatedGuides ?? []).map(item => item.image)];
@@ -531,7 +531,7 @@ describe("migrated Israel itineraries", () => {
     const tours = file("src/components/JerusalemItineraryTourOptions.tsx");
     expect(g.daysPlan).toHaveLength(10);
     expect(g.reviewedAt).toBe("2026-11-14");
-    expect(g.hero).toBe("itinerary-10day-beatitudes-original");
+    expect(g.hero).toBe("itinerary-10day-haifa-port-cover");
     expect(g.daysPlan[6]?.image).toBe("itinerary-10day-akko-port");
     expect(new Set([g.hero, ...g.daysPlan.map(day => day.image)]).size).toBe(11);
     expect(g.overviewRows).toHaveLength(10);

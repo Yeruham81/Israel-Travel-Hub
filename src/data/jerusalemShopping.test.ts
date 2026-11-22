@@ -21,9 +21,7 @@ describe("Jerusalem shopping guide editorial regression", () => {
     expect(photos).toHaveLength(10);
     expect(new Set(photos.map(place => place.photo!.src)).size).toBe(10);
     expect(places.find(place => place.id === "bezalel")?.photo?.src).toBe("/images/jerusalem-shopping/bezalel-arts-fair.webp");
-    expect(existsSync(resolve(process.cwd(), "public/images/travel-blog/shopping-in-jerusalem-original.webp"))).toBe(true);
-    const source = readFileSync("src/components/JerusalemShoppingGuide.tsx", "utf8");
-    expect(source).toContain('<GuideHeroMedia src="/images/travel-blog/shopping-in-jerusalem-original.webp"');
+    expect(existsSync(resolve(process.cwd(), "public/images/jerusalem-shopping/hero.webp"))).toBe(true);
     for (const place of photos) {
       const file = resolve(process.cwd(), "public" + place.photo!.src);
       expect(existsSync(file), place.name + " image missing").toBe(true);

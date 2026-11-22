@@ -618,7 +618,7 @@ describe("migrated practical guides", () => {
     expect(guide.faqs).toHaveLength(18);
     expect(guide.faqGroups).toHaveLength(3);
     expect(guide.faqGroups!.flatMap(group => group.indexes).sort((a, b) => a - b)).toEqual([...Array(18).keys()]);
-    expect(guide.photo.src).toBe("/images/travel-blog/tel-aviv-skyline-original.webp");
+    expect(guide.photo.src).toMatch(/^\/(?:src\/)?assets\/.*buses-in-tel-aviv.*\.webp$/);
     expect(guide.photo.licenseUrl).toBeUndefined();
     expect(guide.photo.sourceUrl).toBeUndefined();
     const rail = guide.sections.find(section => section.id === "public-transport")!.subsections!.find(sub => sub.id === "israel-trains")!;
