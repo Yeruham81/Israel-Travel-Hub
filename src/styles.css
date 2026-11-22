@@ -118,17 +118,56 @@
   .prose-guide ul { margin-top: 0.75rem; padding-left: 1.25rem; list-style: disc; line-height: 1.7; }
   .prose-guide li { margin-top: 0.35rem; }
   .prose-guide a { color: var(--color-primary); text-decoration: underline; text-underline-offset: 3px; }
-  /* Blue links within prose already read as links. Suppress the redundant
-     external/diagonal arrow icon throughout editorial paragraphs, quotes, tabular
-     text and underlined reference-list links. Standalone buttons, navigation
-     cards and booking CTAs keep their own icons. The accessible "opens in a
-     new tab" text remains available to screen readers. */
-  :is(p, blockquote, figcaption, td, th, .prose-guide)
-    a:is(.text-primary, .underline)
-    svg:is(.lucide-external-link, .lucide-arrow-up-right, .lucide-square-arrow-out-up-right),
-  li > a:is(.text-primary, .underline)
-    > svg:is(.lucide-external-link, .lucide-arrow-up-right, .lucide-square-arrow-out-up-right) {
+  /* External links use one consistent square-with-outgoing-arrow glyph, whether
+     an icon was provided by a component or the link is plain text. Internal
+     editorial links are blue without diagonal arrows. Horizontal CTA arrows
+     remain unchanged. External image cards get the symbol at their top edge. */
+  a svg:is(.lucide-external-link, .lucide-arrow-up-right, .lucide-square-arrow-out-up-right) {
     display: none !important;
+  }
+  a[href^="http"]:not([data-external-icon="none"]) {
+    --outgoing-link-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M15 3h6v6'/%3E%3Cpath d='m10 14 11-11'/%3E%3Cpath d='M21 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h6'/%3E%3C/svg%3E");
+  }
+  a[href^="http"]:not([data-external-icon="none"]):not(:has(img, picture, figure))::after {
+    content: "";
+    display: inline-block;
+    inline-size: .9em;
+    block-size: .9em;
+    margin-inline-start: .28em;
+    background: currentColor;
+    -webkit-mask: var(--outgoing-link-icon) center / contain no-repeat;
+    mask: var(--outgoing-link-icon) center / contain no-repeat;
+    vertical-align: -.08em;
+    flex-shrink: 0;
+  }
+  a[href^="http"]:not([data-external-icon="none"]):has(img, picture, figure) {
+    position: relative;
+  }
+  a[href^="http"]:not([data-external-icon="none"]):has(img, picture, figure)::after {
+    content: "";
+    position: absolute;
+    inset-inline-end: .7rem;
+    top: .7rem;
+    inline-size: 1rem;
+    block-size: 1rem;
+    background: var(--color-primary);
+    -webkit-mask: var(--outgoing-link-icon) center / contain no-repeat;
+    mask: var(--outgoing-link-icon) center / contain no-repeat;
+    pointer-events: none;
+  }
+
+  /* Prefer the smallest readable frozen left column on touch devices, leaving
+     horizontal space for the scrolling data cells. Keep original type sizes
+     and full text; only padding and intrinsic column width change. */
+  @media (max-width: 767px) {
+    table :is(th, td).sticky.left-0:first-child {
+      inline-size: 1% !important;
+      min-inline-size: 0 !important;
+      max-inline-size: 7.75rem;
+      padding-inline: .5rem !important;
+      white-space: normal;
+      overflow-wrap: normal;
+    }
   }
 
   /* Whole-card tour links must not inherit the underline and link-blue styling
