@@ -227,34 +227,44 @@ export const oldCityJerusalemDestinationContent: AttractionDestinationContent = 
     </div>
   ),
   historyContent: (
-    <div className="mt-4 space-y-3">
-      <p>The four historic quarters are living neighbourhoods as well as places of worship. Each has its own atmosphere and street pattern:</p>
-      <ul className="grid gap-2 text-sm leading-relaxed sm:grid-cols-2 sm:text-base">
-        <li className="rounded-lg border bg-card p-3"><strong>Christian Quarter:</strong> Pilgrim routes, churches and guesthouses converge near the Holy Sepulchre.</li>
-        <li className="rounded-lg border bg-card p-3"><strong>Muslim Quarter:</strong> The northern lanes connect everyday shops, markets and religious institutions.</li>
-        <li className="rounded-lg border bg-card p-3"><strong>Jewish Quarter:</strong> Restored streets, archaeological remains and synagogues reflect successive periods.</li>
-        <li className="rounded-lg border bg-card p-3"><strong>Armenian Quarter:</strong> Churches, community buildings and quieter streets reflect a longstanding Armenian presence.</li>
-      </ul>
-      <p>The present city walls largely date to the Ottoman period, though the city's history reaches much further back. The Old City of Jerusalem and its Walls is a <a href={official.unesco} target="_blank" rel="noopener noreferrer" className={inlineLink}>UNESCO World Heritage Site</a>.</p>
+    <div className="mt-4 space-y-4">
+      <p>Jerusalem’s Old City is a small area with an exceptionally layered history. Its streets and sacred buildings reflect Jewish, Christian, Muslim and Armenian traditions, while its everyday markets and neighbourhoods remain active parts of the city.</p>
+      <div className="grid gap-3 sm:grid-cols-2">
+        <article className="rounded-xl border bg-card p-4"><h3 className="font-semibold">Christian Quarter</h3><p className="mt-2 text-sm leading-relaxed">The Church of the Holy Sepulchre, pilgrim routes, chapels and guesthouses are connected by market lanes near Jaffa Gate and New Gate.</p></article>
+        <article className="rounded-xl border bg-card p-4"><h3 className="font-semibold">Muslim Quarter</h3><p className="mt-2 text-sm leading-relaxed">A lively network of souks, historic homes, religious institutions and early Stations of the Cross extends south from Damascus Gate.</p></article>
+        <article className="rounded-xl border bg-card p-4"><h3 className="font-semibold">Jewish Quarter</h3><p className="mt-2 text-sm leading-relaxed">Rebuilt streets, synagogues, archaeological remains and the Cardo lead toward the Western Wall prayer plaza.</p></article>
+        <article className="rounded-xl border bg-card p-4"><h3 className="font-semibold">Armenian Quarter</h3><p className="mt-2 text-sm leading-relaxed">The Armenian community preserves a distinctive religious, cultural and artistic heritage around the Patriarchate, St James Cathedral and nearby workshops. The cathedral has limited visiting windows associated with services.</p></article>
+      </div>
+      <h3 className="font-serif text-xl font-semibold">How the Old City took shape</h3>
+      <p>Ancient Jerusalem developed over many centuries, with especially significant periods under the kingdoms of Judah, the Hasmoneans and Herod. Roman and Byzantine rule shaped successive phases of the city, and Christian pilgrimage became central to its religious life.</p>
+      <p>From the seventh century, Islamic rulers established major shrines on the Temple Mount, known in Muslim tradition as Al-Haram al-Sharif. Crusader and later Ayyubid and Mamluk periods left additional religious buildings, markets and architectural layers.</p>
+      <p>The walls that visitors see today were rebuilt under the Ottoman sultan Suleiman the Magnificent in the sixteenth century. The city’s modern history includes the changes of 1948 and 1967; its quarters and sacred sites continue to hold profound meaning for different communities.</p>
+      <p>The <a href={official.unesco} target="_blank" rel="noopener noreferrer" className={inlineLink}>Old City of Jerusalem and its Walls</a> is listed as a UNESCO World Heritage Site.</p>
     </div>
   ),
   tourContent: (
     <div className="mt-4 space-y-4">
-      <p>Guided walks connect the Old City’s major sites and religious traditions. These three reviewed tours include guided walks and longer Jerusalem visits from Jerusalem or Tel Aviv. Compare departure points, sites included, accessibility and language before booking.</p>
+      <p>Compare two walking tours focused on the Old City with a longer Jerusalem experience that also visits the Mount of Olives. Each has a different starting point and pace.</p>
       <ul className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3" data-testid="jerusalem-old-city-featured-tours">
         {featuredOldCityTours.map(tour => <ExternalTourCard key={tour.id} tour={tour} pageId="attractions-old-city-jerusalem" compact />)}
+        <li className="h-full min-w-0" data-tour-id="viator-208675P3">
+          <CuratedPartnerTourCard
+            title="Jerusalem Classic Tour: Mount of Olives & Old City"
+            description="A longer guided Jerusalem day including the Mount of Olives viewpoint and the Old City's historic and religious landmarks."
+            platform="Viator"
+            duration="About 7 hours"
+            image={guidedTourPhoto}
+            alt="Visitors exploring Jerusalem with a guide"
+            href="https://viator.tpk.lv/YV4HrN5E"
+            pageId="attractions-old-city-jerusalem"
+            productId="viator-208675P3"
+            offerId="viator-208675P3-old-city-jerusalem"
+            editorialRating={{ value: 5, count: 3 }}
+            editorialPrice={{ amount: 122.62, currency: "EUR", basis: "per_person" }}
+          />
+        </li>
       </ul>
-      <p className="mt-4 text-xs leading-relaxed text-muted-foreground">Tour details, availability, prices and booking conditions are set by the tour operators and may change. Before booking, check the current departure date and location, itinerary, guiding, admissions, meeting and return arrangements, and cancellation policy directly with the booking provider. Each tour is subject to the operator's own terms and conditions.</p>
-      <div className="grid gap-3 sm:grid-cols-2" data-testid="jerusalem-old-city-tour-cards">
-        <Link to="/tours/jerusalem/" className="attraction-tour-card group flex h-full min-w-0 items-start gap-3 rounded-xl border bg-card p-3 transition-all hover:border-primary/60 hover:shadow-sm focus-visible:outline-2 focus-visible:outline-primary sm:p-4">
-          <img src={oldCityTourPhoto} alt="Jerusalem Old City roofs and historic landmarks" width={128} height={100} loading="lazy" decoding="async" className="h-24 w-24 shrink-0 rounded-lg object-cover sm:w-28"/>
-          <div className="min-w-0 flex-1"><h3 className="font-serif text-lg font-semibold leading-snug group-hover:text-primary">Jerusalem walking and guided tours</h3><p className="mt-1 text-sm text-muted-foreground">Browse guided routes, visiting times and heritage experiences.</p><span className="mt-2 inline-flex items-center gap-1 text-sm font-semibold text-primary">Explore tours <ArrowUpRight className="h-4 w-4"/></span></div>
-        </Link>
-        <a href="#contact" className="attraction-tour-card group flex h-full min-w-0 items-start gap-3 rounded-xl border bg-card p-3 transition-all hover:border-primary/60 hover:shadow-sm focus-visible:outline-2 focus-visible:outline-primary sm:p-4">
-          <img src={gateTourPhoto} alt="Jerusalem Jaffa Gate and surrounding Old City stone buildings" width={128} height={100} loading="lazy" decoding="async" className="h-24 w-24 shrink-0 rounded-lg object-cover sm:w-28"/>
-          <div className="min-w-0 flex-1"><h3 className="font-serif text-lg font-semibold leading-snug group-hover:text-primary">Plan a private Jerusalem visit</h3><p className="mt-1 text-sm text-muted-foreground">Choose the sites that matter to you and plan your pickup.</p><span className="mt-2 inline-flex items-center gap-1 text-sm font-semibold text-primary">Send an inquiry <ArrowUpRight className="h-4 w-4"/></span></div>
-        </a>
-      </div>
+      <p className="text-sm leading-relaxed"><Link to="/tours/jerusalem/" className={inlineLink}>Browse more Jerusalem guided tours</Link>, or <a href="#contact" className={inlineLink}>contact me about private transport</a> to your chosen entrance gate.</p>
     </div>
   ),
   faqs: [
@@ -266,11 +276,11 @@ export const oldCityJerusalemDestinationContent: AttractionDestinationContent = 
   ],
   nearby: [
     { label: "Mount of Olives", to: "/attractions/mount-of-olives/", note: "Jerusalem skyline views, Gethsemane and hillside churches." },
-    { label: "Mount Zion", to: "/attractions/mount-zion/", note: "Cenacle, Dormition Abbey and historic sites near Zion Gate." },
-    { label: "Qasr el-Yahud", to: "/attractions/qasr-el-yahud/", note: "Jordan River pilgrimage site on a separate regional excursion." },
-    { label: "Masada National Park", to: "/attractions/masada/", note: "Desert fortress and Dead Sea viewpoints on a full-day trip." },
-    { label: "Ein Gedi Nature Reserve", to: "/attractions/ein-gedi/", note: "Oasis waterfalls and desert trails beside the Dead Sea." },
-    { label: "Caesarea National Park", to: "/attractions/caesarea/", note: "Roman ruins and the Mediterranean coast, for another travel day." },
+    { label: "Mount Zion", to: "/attractions/mount-zion/", note: "Dormition Abbey, the Upper Room and sites near Zion Gate." },
+    { label: "Jerusalem travel guide", to: "/travel-blog/jerusalem-travel-guide/", note: "Plan the rest of your sightseeing in the city." },
+    { label: "Churches in Jerusalem", to: "/travel-blog/churches-in-jerusalem/", note: "Pilgrimage traditions, visitor hours and historic churches." },
+    { label: "Museums in Jerusalem", to: "/travel-blog/museums-in-jerusalem/", note: "Explore archaeology, art and Jerusalem's layered history." },
+    { label: "Shopping in Jerusalem", to: "/travel-blog/shopping-in-jerusalem/", note: "Markets, crafts and shopping streets around the city." },
   ],
   planningLinks: [
     { label: "Jerusalem city guide", to: "/travel-blog/jerusalem-travel-guide/", description: "Plan the rest of your stay beyond the walls.", icon: "region" },
