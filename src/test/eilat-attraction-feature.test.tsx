@@ -129,7 +129,8 @@ describe("Eilat multi-attraction city guide", () => {
       "tour-eilat-red-canyon-jeep-viator@tours-eilat-red-sea",
     ];
     for (const id of ids) expect(affiliateConfig[id]?.trackingUrl).toMatch(/^https:\/\/(viator|getyourguide)\.tpm\.li\//);
-    expect(page).toContain('rel="sponsored noopener noreferrer"');
+    expect(page).toContain("<ExternalProviderTourCard");
+    expect(readFileSync("src/components/ExternalProviderTourCard.tsx", "utf8")).toContain("rel={relFor(affiliate)}");
     expect(page).toContain('searchParams.set("sub_id", tour.subId)');
     expect(page).not.toContain("https://www.viator.com/tours/");
   });
