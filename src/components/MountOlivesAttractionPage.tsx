@@ -59,8 +59,8 @@ const mountOlivesTours = [
     duration: "About 7 hours",
     editorialRating: { value: 5.0, count: 3 },
     editorialPrice: { amount: 122.62, currency: "EUR" as const, basis: "per_person" as const },
-    photo: "/images/attractions/jerusalem.webp",
-    alt: "Jerusalem Old City seen from the Mount of Olives",
+    photo: "/images/attractions/old-jerusalem-damascus-gate.webp",
+    alt: "Damascus Gate in the historic Old City of Jerusalem",
     sourceUrl: "https://www.viator.com/tours/Jerusalem/jerusalem-daily-tour/d921-208675P3",
     href: "https://viator.tpk.lv/YV4HrN5E",
   },
@@ -104,6 +104,7 @@ export const mountOlivesDestinationContent: AttractionDestinationContent = {
         <p>{stop.description}</p>
         <p>{stop.visit}</p>
       </AttractionHighlight>)}
+      <AttractionPracticalTip>Planning a longer pilgrimage? You could also consider the Augusta Victoria church complex or the traditional Palm Sunday site at Bethphage. These are optional stops away from the main downhill route; confirm public visiting arrangements directly before adding them.</AttractionPracticalTip>
     </div>
   ),
   visitorContent: (
@@ -143,7 +144,7 @@ export const mountOlivesDestinationContent: AttractionDestinationContent = {
       <div className="grid gap-3 sm:grid-cols-3" data-testid="mount-olives-access-points">
         <article className="rounded-xl border bg-card p-3"><h3 className="font-serif text-lg font-semibold">Seven Arches viewpoint</h3><p className="mt-2 text-sm">Best starting point for the panorama and a downhill walk.</p><a href={viewpointDirections} target="_blank" rel="noopener noreferrer" className={inlineLink}>Driving directions <ArrowUpRight className="inline h-4 w-4"/></a></article>
         <article className="rounded-xl border bg-card p-3"><h3 className="font-serif text-lg font-semibold">Gethsemane</h3><p className="mt-2 text-sm">Lower pickup point near the Church of All Nations and Tomb of Mary.</p><a href={gethsemaneDirections} target="_blank" rel="noopener noreferrer" className={inlineLink}>Driving directions <ArrowUpRight className="inline h-4 w-4"/></a></article>
-        <article className="rounded-xl border bg-card p-3"><h3 className="font-serif text-lg font-semibold">Lion's Gate</h3><p className="mt-2 text-sm">Continue into Jerusalem's Old City from the foot of the hill.</p><a href="#visit-plan" className={inlineLink}>See walking connections <ArrowUpRight className="inline h-4 w-4"/></a></article>
+        <article className="rounded-xl border bg-card p-3"><h3 className="font-serif text-lg font-semibold">Lion's Gate</h3><p className="mt-2 text-sm">Continue into Jerusalem's Old City from the foot of the hill.</p><a href="#visit-plan" className={inlineLink}>See walking connections</a></article>
       </div>
       <div className="space-y-3">
           <article className="rounded-xl border bg-card p-4">
@@ -153,7 +154,7 @@ export const mountOlivesDestinationContent: AttractionDestinationContent = {
           </article>
           <article className="rounded-xl border bg-card p-4">
             <div className="flex items-center gap-2"><CarFront className="h-5 w-5 text-primary" aria-hidden="true"/><h3 className="font-semibold">By taxi or private driver</h3></div>
-            <p className="mt-2 text-sm leading-relaxed">A taxi to Seven Arches avoids climbing up from the Kidron Valley. If you plan to walk down, arrange pickup near Gethsemane rather than at the summit. <a href="#contact" className={inlineLink}>Contact me</a> if you would like help arranging the route.</p>
+            <p className="mt-2 text-sm leading-relaxed">A taxi to Seven Arches avoids climbing up from the Kidron Valley. If you plan to walk down, arrange pickup near Gethsemane rather than at the summit. For a visit without the steep downhill walk, I can help arrange separate drop-offs at the viewpoint and near Gethsemane; <a href="#contact" className={inlineLink}>send me your preferred date and pickup location</a>.</p>
           </article>
           <article className="rounded-xl border bg-card p-4">
             <div className="flex items-center gap-2"><Footprints className="h-5 w-5 text-primary" aria-hidden="true"/><h3 className="font-semibold">On foot from the Old City</h3></div>
