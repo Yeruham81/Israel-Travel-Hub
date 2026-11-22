@@ -44,6 +44,14 @@ describe("private driver page and inquiry", () => {
     expect(screen.getAllByRole("heading", { level: 1 })).toHaveLength(1);
     expect(screen.getByRole("heading", { level: 1 })).toHaveTextContent("Private driver in Israel");
     expect(screen.getByRole("navigation", { name: "Breadcrumb" })).toHaveTextContent("Home /Private driver");
+    const serviceOverview = screen.getByTestId("driver-service-overview");
+    expect(within(serviceOverview).getByRole("heading", { name: "Private driver service in Israel: travel on your own terms" })).toBeInTheDocument();
+    expect(within(serviceOverview).getByRole("heading", { name: "Who is a private driver suitable for?" })).toBeInTheDocument();
+    expect(serviceOverview).toHaveTextContent("couples, families with children");
+    expect(serviceOverview).toHaveTextContent("business visitors");
+    expect(serviceOverview).toHaveTextContent("licensed tour guiding");
+    expect(serviceOverview).toHaveTextContent("entrance tickets");
+    expect(serviceOverview.compareDocumentPosition(container.querySelector("#journeys")!)).toBe(Node.DOCUMENT_POSITION_FOLLOWING);
     expect(screen.getAllByTestId("driver-journey-card")).toHaveLength(3);
     const dayHire = privateDriverJourneys.find(journey => journey.id === "day-hire");
     expect(dayHire?.photo.src).toBe(scenicDrivePhoto);
