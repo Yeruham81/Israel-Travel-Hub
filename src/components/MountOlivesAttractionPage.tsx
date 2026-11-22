@@ -204,7 +204,7 @@ export const mountOlivesDestinationContent: AttractionDestinationContent = {
         </ul>
         <p className="mt-3 text-sm leading-relaxed">Google Maps may suggest a different path from the traditional <strong>Palm Sunday Road</strong>. Check pedestrian signs and each church's actual entrance, or see the <a href={official.trailGuide} target="_blank" rel="noopener noreferrer" className={inlineLink}>Mount of Olives walking route from Enjoy Jerusalem</a>.</p>
       </div>
-      <AttractionPracticalTip>For a fuller church visit, Tuesday or Thursday currently offers the best chance of combining Pater Noster with St Mary Magdalene's short morning hours. Confirm both. My <Link to="/attractions/old-city-jerusalem/" className={inlineLink}>Jerusalem Old City guide</Link> covers the next part of your walk.</AttractionPracticalTip>
+      <AttractionPracticalTip>For a fuller church visit, Tuesday or Thursday currently offers the best chance of combining Pater Noster with St Mary Magdalene's short morning hours. Confirm both. My <Link to="/attractions/old-city-jerusalem/" className={inlineLink}>Jerusalem Old City guide</Link> covers the quarters and gates, and the <Link to="/attractions/via-dolorosa/" className={inlineLink}>Via Dolorosa walking guide</Link> follows the Stations of the Cross inside the walls.</AttractionPracticalTip>
     </div>
   ),
   historyContent: (
