@@ -12,12 +12,13 @@ describe("External tour and activity cards use a third-width desktop layout", ()
     const tours = source("TourCatalog");
     expect(tours).toContain('className={compact ? "mt-5 grid gap-3 md:grid-cols-2 lg:grid-cols-3" : "mt-6 grid gap-5 sm:grid-cols-2 lg:grid-cols-3"}');
     expect(tours).toContain("external.length % 3 === 2");
-    expect(tours).toContain('className="aspect-[16/9] w-full object-cover"');
+    expect(tours).toContain("<ExternalProviderTourCard");
 
     const shore = source("ShoreServiceCatalog");
     expect(shore).toContain('className="mt-5 grid gap-3 md:grid-cols-2 lg:grid-cols-3"');
     expect(shore).toContain("partnerTours.length % 3 === 2");
-    expect(shore).toContain('className="aspect-[16/9] w-full object-cover"');
+    expect(shore).toContain("<ExternalProviderTourCard");
+    expect(source("ExternalProviderTourCard")).toContain('className="aspect-[16/9] w-full object-cover"');
   });
 
   it("uses three desktop columns for independently booked tours in guides and attractions", () => {
