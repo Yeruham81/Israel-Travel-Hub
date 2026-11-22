@@ -54,7 +54,7 @@ const guides = {
   haifa: {
     title: "Haifa: gardens, views & coast",
     description: "Discover the Bahá'í Gardens, German Colony and Carmel viewpoints. Build a local outing with less driving and more time near your ship.",
-    to: "/travel-blog/haifa/",
+    to: "/attractions/haifa/",
     photo: airportTransferPhotos["haifa"]!,
   },
   akko: {
