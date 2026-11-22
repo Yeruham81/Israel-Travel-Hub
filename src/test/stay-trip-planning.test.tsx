@@ -103,7 +103,7 @@ describe("hotel and neighborhood guide navigation", () => {
     expect(einGedi.querySelector("img")).toHaveAttribute("src", einGediWaterfall);
     expect(einGedi.querySelector("img")).toHaveAttribute("alt", expect.stringContaining("Waterfall"));
     expect(attractions.querySelector("img")).toHaveAttribute("src", guideHeroPhotoForPath("/travel-blog/dead-sea-attractions/")!.src);
-    expect(attractions.querySelector("img")).toHaveAttribute("alt", expect.stringContaining("Nahal Bokek"));
+    expect(attractions.querySelector("img")).toHaveAttribute("alt", guideHeroPhotoForPath("/travel-blog/dead-sea-attractions/")!.alt);
     expect(attractions.querySelector("img")!.getAttribute("src")).not.toBe(masada.querySelector("img")!.getAttribute("src"));
     expect(onward.map(link => link.getAttribute("href"))).toContain("/travel-blog/calendar-of-events/");
   });
