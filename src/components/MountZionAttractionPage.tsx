@@ -165,6 +165,25 @@ export const mountZionDestinationContent: AttractionDestinationContent = {
   itineraryContent: (
     <div className="mt-4 space-y-4">
       <p>{mountZionEditorialUpdate.routeIntro}</p>
+      <div className="grid gap-3 md:grid-cols-3" data-testid="mount-zion-visit-choices">
+        <article className="rounded-xl border bg-card p-4">
+          <p className="text-xs font-bold uppercase tracking-wide text-primary">45–60 minutes</p>
+          <h3 className="mt-2 text-lg font-semibold">The main landmarks</h3>
+          <p className="mt-2 text-sm leading-relaxed text-muted-foreground">Start at Zion Gate, visit the Upper Room and continue downstairs to David’s Tomb. A good choice for a short visit.</p>
+        </article>
+        <article className="rounded-xl border bg-card p-4">
+          <p className="text-xs font-bold uppercase tracking-wide text-primary">1.5–2 hours</p>
+          <h3 className="mt-2 text-lg font-semibold">The central Mount Zion circuit</h3>
+          <p className="mt-2 text-sm leading-relaxed text-muted-foreground">Add Dormition Abbey, its mosaics and crypt, and the Chamber of the Holocaust when open.</p>
+        </article>
+        <article className="rounded-xl border bg-card p-4">
+          <p className="text-xs font-bold uppercase tracking-wide text-primary">2.5–3 hours or longer</p>
+          <h3 className="mt-2 text-lg font-semibold">A longer history or pilgrimage visit</h3>
+          <p className="mt-2 text-sm leading-relaxed text-muted-foreground">Explore the central sites, then continue to St Peter in Gallicantu or Oskar Schindler’s grave on the lower hillside.</p>
+        </article>
+      </div>
+      <MountZionMap />
+      <h3 className="pt-3 text-xl font-semibold">Two suggested walking routes</h3>
       <div className="grid gap-3 md:grid-cols-2" data-testid="mount-zion-walking-routes">
         {mountZionEditorialUpdate.routes.map(route => <article key={route.name} className="rounded-xl border bg-card p-4 sm:p-5">
           <p className="text-xs font-semibold uppercase text-primary">{route.time}</p>
@@ -176,15 +195,14 @@ export const mountZionDestinationContent: AttractionDestinationContent = {
       </div>
       <div className="rounded-xl border bg-card p-4 sm:p-5" data-testid="mount-zion-walking-connections">
         <h3 className="font-serif text-xl font-semibold">Walking connections</h3>
-        <p className="mt-2 text-sm leading-relaxed text-muted-foreground">Choose the walking link that fits your day. For the location of all seven stops, use the <a href={official.mountZionMap} target="_blank" rel="noopener noreferrer" className={inlineLink}>detailed illustrated Mount Zion map (PDF)</a>, which marks individual sites and paths.</p>
-        <ul className="mt-3 grid gap-3 sm:grid-cols-3">
-          {walkingLegs.map(leg => <li key={leg.href} className="rounded-lg border bg-secondary/20 p-3">
+        <ul className="mt-3 grid list-none gap-3 p-0 sm:grid-cols-3">
+          {walkingLegs.map(leg => <li key={leg.href} className="list-none rounded-lg border bg-secondary/20 p-3">
             <a href={leg.href} target="_blank" rel="noopener noreferrer" className={inlineLink}>{leg.title} <ArrowUpRight className="inline h-4 w-4" aria-hidden="true"/></a>
             <p className="mt-1 text-xs leading-relaxed text-muted-foreground">{leg.description}</p>
           </li>)}
         </ul>
       </div>
-      <AttractionPracticalTip>For a Sunday visit, explore the Upper Room and David's Tomb before visiting Dormition Abbey after 11:30. Save St Peter in Gallicantu for Monday–Saturday. For the rest of your walking day, see my <Link to="/attractions/old-city-jerusalem/" className={inlineLink}>Jerusalem Old City guide</Link>.</AttractionPracticalTip>
+      <AttractionPracticalTip>On Sundays, visit the Upper Room and David’s Tomb first, then Dormition Abbey after 11:30. For St Peter in Gallicantu, choose Monday–Saturday. My <Link to="/attractions/old-city-jerusalem/" className={inlineLink}>Jerusalem Old City guide</Link> helps plan the next part of your walk.</AttractionPracticalTip>
     </div>
   ),
   historyContent: (
