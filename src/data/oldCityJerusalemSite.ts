@@ -1,15 +1,15 @@
 
 /** Old City visitor facts checked against responsible operators, November 2026. */
 export const oldCityJerusalemSite = {
-  title: "Jerusalem Old City: Attractions, Quarters & Visitor Guide",
-  description: "Plan a walk through Jerusalem's Old City: Western Wall, Holy Sepulchre, Via Dolorosa, Jewish Quarter, Temple Mount, Tower of David, tunnels, gates and visitor tips.",
-  updatedAt: "2026-11-18",
+  title: "Jerusalem’s Old City: What to See & How to Visit",
+  description: "Explore Jerusalem’s Old City with an interactive map of landmarks and gates, three walking itineraries, opening hours, admission, tours and helpful arrival tips.",
+  updatedAt: "2026-11-23",
   region: "Jerusalem",
   hero: {
-    src: "/images/attractions/old-jerusalem-via-dolorosa.webp",
-    alt: "Stone-paved historic lanes of Jerusalem's Old City near the Via Dolorosa",
+    src: "/images/attractions/hero-jerusalem.webp",
+    alt: "Panoramic view of Jerusalem’s Old City walls, stone buildings, domes and skyline",
   },
-  intro: "Jerusalem’s Old City brings Jewish, Christian, Muslim and Armenian heritage together within a remarkably small area. I suggest choosing a few meaningful stops rather than trying to see every landmark in one day: the churches, prayer sites, lively markets and historic streets each deserve time of their own.",
+  intro: "Jerusalem’s Old City brings Jewish, Christian, Muslim and Armenian heritage together behind historic walls. Walk through lively markets, centuries-old churches and prayer sites, or add a museum or guided underground tour. Start with the map and three suggested routes below to choose the right gate, landmarks and visiting time.",
   visitor: {
     towerAdult: "₪55",
     rampartsAdult: "₪25",
