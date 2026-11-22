@@ -218,8 +218,11 @@ export function AttractionDestinationPage({ content }: { content: AttractionDest
             {source.note && <p className="mt-0.5 text-xs">{source.note}</p>}
           </li>)}
         </ul>
-        {content.photoCredits && <div className="mt-4 border-t border-border/70 pt-3 text-xs leading-relaxed text-muted-foreground" data-testid="attraction-photo-credits">{content.photoCredits}</div>}
       </SourcesDisclosure>
+      {content.photoCredits && <details className="group/attraction-credits mt-6 rounded-xl border bg-card text-sm text-muted-foreground" data-testid="attraction-photo-credits">
+        <summary className="cursor-pointer rounded-xl px-4 py-3 font-semibold text-foreground focus-visible:outline-2 focus-visible:outline-primary">Photo credits &amp; licences</summary>
+        <div className="border-t px-4 py-4 text-xs leading-relaxed">{content.photoCredits}</div>
+      </details>}
     </main>
   );
 }
