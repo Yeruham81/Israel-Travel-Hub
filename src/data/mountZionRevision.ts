@@ -62,7 +62,7 @@ export const mountZionEditorialUpdate: SacredHillEditorial = {
         "Return to Zion Gate if you have visited the lower sites, or arrange a pickup at a suitable road-accessible point.",
         "Enter the Old City through Zion Gate and explore the Armenian and Jewish Quarters; you can continue toward the Western Wall or the Christian Quarter.",
       ],
-      note: "The church and cemetery are separate additions in different parts of the slope. Treat them as optional branches, not as one continuous shortcut.",
+      note: "The church and cemetery are on different parts of the hillside. Choose the branch that suits your interests and allow time for the return to Zion Gate.",
     },
   ],
   stopIntro: "Begin near Zion Gate for the main landmarks. The last two stops lead downhill to separate entrances; allow more time for either one.",
