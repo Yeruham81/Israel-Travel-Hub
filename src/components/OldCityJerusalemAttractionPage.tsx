@@ -338,6 +338,7 @@ export const oldCityJerusalemDestinationContent: AttractionDestinationContent = 
     { label: "Tower of David Jerusalem Museum — tickets and visiting", url: official.tower },
     { label: "Tower of David Jerusalem Museum — entrance and directions", url: official.towerEntrance },
     { label: "East Jerusalem Development — Ramparts Walk", url: official.ramparts },
+    { label: "Viator — Jerusalem Classic Tour: Mount of Olives & Old City", url: "https://www.viator.com/tours/Jerusalem/jerusalem-daily-tour/d921-208675P3" },
   ],
 };
 
