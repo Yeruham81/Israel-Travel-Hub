@@ -75,7 +75,10 @@ describe("Israel tours for seniors: private transport guide",()=>{
   for(const id of ["jerusalem","masada","coast"]){
    expect(seniorDayTrips.find(trip=>trip.id===id)?.accessInfo?.length).toBe(2);
   }
-  expect(component).toContain("Accessible JLM map app (Android)");
+  expect(component).toContain("Accessible JLM map app (<External");
+  expect(component).toContain(">Android</External>) (<External");
+  expect(component).toContain(">iPhone</External>)");
+  expect(component).toContain("<CompactResourceLinks items={item.accessInfo}");
   expect(component).toContain("Israel Nature and Parks Authority's accessibility guide and site map");
   expect(component).not.toContain("Island");
  });
