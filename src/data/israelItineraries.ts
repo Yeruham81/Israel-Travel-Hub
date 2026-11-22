@@ -51,7 +51,7 @@ const deadSeaHotels = L("Dead Sea hotel areas", "/travel-blog/best-dead-sea-hote
 const telaviv = L("Explore Old Jaffa", "/attractions/jaffa/");
 const telavivHotels = L("Where to stay in Tel Aviv", "/travel-blog/where-to-stay-in-tel-aviv/");
 const caesarea = L("Caesarea, Haifa and Akko tour options", "/tours/caesarea-haifa-acre/");
-const haifa = L("Haifa city guide", "/travel-blog/haifa/");
+const haifa = L("Haifa city guide", "/attractions/haifa/");
 const haifaHotels = L("Where to stay in Haifa", "/travel-blog/best-hotels-in-haifa/");
 const nazareth = L("Basilica of the Annunciation", "/attractions/basilica-of-the-annunciation/");
 const lake = L("Sea of Galilee guide", "/travel-blog/sea-of-galilee/");
@@ -509,7 +509,7 @@ export const itineraries: Record<ItineraryId, ItineraryGuide> = {
       { day: 4, field: "afternoon", phrase: "Tel Aviv museums", to: "/travel-blog/museums-in-tel-aviv/" },
       { day: 4, field: "practical", phrase: "how to get around Tel Aviv", to: "/travel-blog/getting-around-tel-aviv/" },
       { day: 4, field: "overnight", phrase: "where to stay in Tel Aviv", to: "/travel-blog/where-to-stay-in-tel-aviv/" },
-      { day: 5, field: "afternoon", phrase: "Haifa", to: "/travel-blog/haifa/" },
+      { day: 5, field: "afternoon", phrase: "Haifa", to: "/attractions/haifa/" },
       { day: 5, field: "practical", phrase: "Caesarea and Haifa day tour options", to: "/tours/caesarea-haifa-acre/" },
     ],
     dayOfficialLinks: [
@@ -667,7 +667,7 @@ export const itineraries: Record<ItineraryId, ItineraryGuide> = {
       { day: 5, field: "afternoon", phrase: "Tabgha", to: "/attractions/tabgha/" },
       { day: 5, field: "afternoon", phrase: "Magdala", to: "/attractions/magdala/" },
       { day: 5, field: "afternoon", phrase: "Sea of Galilee", to: "/travel-blog/sea-of-galilee/" },
-      { day: 6, field: "morning", phrase: "Haifa", to: "/travel-blog/haifa/" },
+      { day: 6, field: "morning", phrase: "Haifa", to: "/attractions/haifa/" },
       { day: 6, field: "practical", phrase: "guided coastal excursion", to: "/tours/caesarea-haifa-acre/" },
       { day: 6, field: "overnight", phrase: "Tel Aviv", to: "/travel-blog/where-to-stay-in-tel-aviv/" },
       { day: 7, field: "morning", phrase: "Old Jaffa guide", to: "/attractions/jaffa/" },
@@ -723,7 +723,7 @@ export const itineraries: Record<ItineraryId, ItineraryGuide> = {
       { title: "Jerusalem Old City", description: "Historic quarters, gates and practical walking routes.", to: "/attractions/old-city-jerusalem/", image: "itinerary-jerusalem-old-city" },
       { title: "Masada and the Dead Sea", description: "Desert sites, bathing advice and travel choices.", to: "/attractions/masada/", image: "itinerary-dead-sea-shore" },
       { title: "Magdala and its archaeological remains", description: "A rewarding historical stop on the Galilee shore.", to: "/attractions/magdala/", image: "magdala-archaeology" },
-      { title: "Haifa city highlights", description: "Viewpoints, the Bahá’í Gardens and museums.", to: "/travel-blog/haifa/", image: "museums-in-haifa" },
+      { title: "Haifa city highlights", description: "Viewpoints, the Bahá’í Gardens and museums.", to: "/attractions/haifa/", image: "museums-in-haifa" },
       { title: "Getting around Israel", description: "Rail, buses and connections between major regions.", to: "/travel-blog/getting-around-israel/", image: "itinerary-train" },
       { title: "Ben Gurion Airport connections", description: "Plan the final journey to your flight.", to: "/airport-transfers/", image: "itinerary-airport" },
     ],
@@ -861,7 +861,7 @@ export const itineraries: Record<ItineraryId, ItineraryGuide> = {
       { day: 7, field: "morning", phrase: "Old Akko", to: "/attractions/akko-acre/" },
       { day: 7, field: "afternoon", phrase: "Rosh Hanikra", to: "/attractions/rosh-hanikra/" },
       { day: 7, field: "overnight", phrase: "Haifa", to: "/travel-blog/best-hotels-in-haifa/" },
-      { day: 8, field: "morning", phrase: "Bahá’í Gardens", to: "/travel-blog/haifa/" },
+      { day: 8, field: "morning", phrase: "Bahá’í Gardens", to: "/attractions/haifa/" },
       { day: 8, field: "afternoon", phrase: "Caesarea National Park", to: "/attractions/caesarea/" },
       { day: 8, field: "overnight", phrase: "Tel Aviv", to: "/travel-blog/where-to-stay-in-tel-aviv/" },
       { day: 9, field: "morning", phrase: "Old Jaffa", to: "/attractions/jaffa/" },
@@ -930,7 +930,7 @@ export const itineraries: Record<ItineraryId, ItineraryGuide> = {
       { title: "Masada and the Dead Sea", description: "Desert sites, bathing precautions and access.", to: "/attractions/masada/", image: "itinerary-dead-sea-shore" },
       { title: "Sea of Galilee", description: "Lakeside stops and heritage-site connections.", to: "/travel-blog/sea-of-galilee/", image: "magdala-archaeology" },
       { title: "Akko Old City", description: "Crusader halls, markets and harbour heritage.", to: "/attractions/akko-acre/", image: "itinerary-10day-akko-aerial" },
-      { title: "Haifa", description: "Bahá’í Gardens viewpoints and coastal sights.", to: "/travel-blog/haifa/", image: "EXISTING:haifa" },
+      { title: "Haifa", description: "Bahá’í Gardens viewpoints and coastal sights.", to: "/attractions/haifa/", image: "EXISTING:haifa" },
       { title: "Getting around Israel", description: "Trains, buses and practical regional transport.", to: "/travel-blog/getting-around-israel/", image: "itinerary-train" },
     ],
     hero: "itinerary-10day-haifa-port-cover",
