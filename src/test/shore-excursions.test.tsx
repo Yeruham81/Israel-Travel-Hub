@@ -168,7 +168,8 @@ describe("shore excursions", () => {
     expect(within(related).getAllByRole("link")).toHaveLength(6);
     expect(related).not.toHaveTextContent("→");
     for (const link of within(related).getAllByRole("link")) {
-      expect(link).toHaveTextContent("Read More");
+      expect(link).toHaveClass("editorial-card-link");
+      expect(link).not.toHaveTextContent("Read More");
       const href = link.getAttribute("href")!;
       expect(router.matchRoutes(href).at(-1)?.routeId).toBe(href.replace(/\/$/, ""));
     }

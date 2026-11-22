@@ -134,11 +134,12 @@ describe("homepage marketing copy and service sections", () => {
       expect(button.textContent).not.toContain("→");
     }
     const homepageGuides = document.getElementById("guides")!;
-    const readMoreLabels = within(homepageGuides).getAllByText("Read more");
-    expect(readMoreLabels).toHaveLength(6);
-    for (const label of readMoreLabels) {
-      expect(label.textContent?.trim()).toBe("Read more");
-      expect(label.textContent).not.toContain("→");
+    const guideCards = within(homepageGuides).getAllByTestId("guide-directory-card");
+    expect(guideCards).toHaveLength(6);
+    for (const card of guideCards) {
+      expect(card).toHaveClass("editorial-card-link");
+      expect(within(card).getByRole("link")).toHaveAttribute("href");
+      expect(card).not.toHaveTextContent("Read more");
     }
 
     // Six distinct destinations link directly to the matching tour-category pages.

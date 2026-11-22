@@ -108,7 +108,7 @@ describe("Israel shore excursion hub", () => {
     expect(within(practical).getAllByRole("link")).toHaveLength(6);
     expect(within(practical).queryAllByRole("img")).toHaveLength(0);
     expect(within(practical).getAllByRole("link").every(link => link.querySelector("svg") !== null)).toBe(true);
-    expect(related.every(link => link.textContent?.includes("Read more"))).toBe(true);
+    expect(related.every(link => link.classList.contains("editorial-card-link") && !link.textContent?.includes("Read more"))).toBe(true);
     const photos = Array.from(document.querySelectorAll("main img")).map(image => image.getAttribute("src"));
     expect(new Set(photos).size).toBe(photos.length);
     expect(guides).not.toHaveTextContent("→");
