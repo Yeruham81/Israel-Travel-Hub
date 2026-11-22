@@ -7,6 +7,8 @@ import {
 import { mountZionEditorialUpdate } from "@/data/mountZionRevision";
 import { mountZionSite } from "@/data/mountZionSite";
 import guidedTourPhoto from "@/assets/home/guided-tour-card.webp";
+import { ExternalProviderTourCard } from "@/components/ExternalProviderTourCard";
+import { recordOutboundClick } from "@/lib/outbound";
 const mountZionHillsidePhoto = "/images/jerusalem/mount-zion/mount-zion-hillside.webp";
 
 const official = mountZionSite.official;
@@ -178,17 +180,16 @@ export const mountZionDestinationContent: AttractionDestinationContent = {
     <div className="mt-4 space-y-4">
       <p>These full-day tours include Mount Zion among other Jerusalem highlights. They are not dedicated short walks on the hill; check whether the Upper Room, David's Tomb and other stops are included for your specific departure date.</p>
       <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3" data-testid="mount-zion-tour-cards">
-        {mountZionTours.map(tour => <article key={tour.id} className="flex min-w-0 flex-col overflow-hidden rounded-xl border bg-card">
-          <img src={tour.photo} alt={tour.alt} width={480} height={260} loading="lazy" decoding="async" className="aspect-[16/9] w-full object-cover"/>
-          <div className="flex flex-1 flex-col p-4">
-            <p className="text-xs font-semibold text-muted-foreground">{tour.platform}</p>
-            <h3 className="mt-1 font-serif text-lg font-semibold leading-snug">{tour.title}</h3>
-            <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{tour.summary}</p>
-            <p className="mt-3 text-sm">{tour.duration} · ★ {tour.rating}</p>
-            {tour.notice && <p className="mt-3 rounded-lg border border-amber-200 bg-amber-50 px-3 py-2 text-sm leading-relaxed text-foreground dark:border-amber-800 dark:bg-amber-950/20">{tour.notice}</p>}
-            <div className="mt-auto flex flex-wrap items-center justify-between gap-3 pt-4"><span className="text-sm font-semibold text-primary">Check current price</span><a href={tour.href} target="_blank" rel="sponsored noopener noreferrer" className="inline-flex items-center gap-1 rounded-lg bg-primary px-3 py-2 text-sm font-semibold text-primary-foreground">View tour <ArrowUpRight className="h-4 w-4" aria-hidden="true"/></a></div>
-          </div>
-        </article>)}
+        {mountZionTours.map(tour => <ExternalProviderTourCard
+          key={tour.id} image={tour.photo} alt={tour.alt}
+          platform={tour.platform} title={tour.title} description={tour.summary}
+          duration={tour.duration} rating={{
+            value: Number(tour.rating.split(" · ")[0]),
+            count: Number(tour.rating.split(" · ")[1]?.split(" ")[0]),
+          }}
+          href={tour.href} note={tour.notice}
+          onClick={() => recordOutboundClick({ pageId: "attractions-mount-zion", productId: tour.id, offerId: tour.id })}
+        />)}
       </div>
       <p className="text-xs text-muted-foreground">Ratings were checked in November 2026. Prices and availability depend on the selected date, currency and party size; check the operator’s booking page. Booking links use Travelpayouts tracking and open the external provider.</p>
       <p className="text-sm leading-relaxed">You can <Link to="/tours/jerusalem/" className={inlineLink}>explore other Jerusalem tours</Link>, or <a href="#contact" className={inlineLink}>contact me about private transport</a> if you mainly need help with drop-off and pickup.</p>
