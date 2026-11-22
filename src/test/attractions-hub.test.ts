@@ -27,6 +27,34 @@ describe("Attractions hub redesign", () => {
     }
   });
 
+  it("uses the shared guide-card treatment for every regional attraction without CTA captions or arrows", () => {
+    const page = readFileSync("src/routes/attractions.index.tsx", "utf8");
+    const cardStart = page.indexOf("function AttractionCard(");
+    const cardEnd = page.indexOf("function Attractions()", cardStart);
+    const card = page.slice(cardStart, cardEnd);
+    const css = readFileSync("src/styles.css", "utf8");
+
+    expect(attractionHubCards).toHaveLength(24);
+    expect(page).toContain("region.cards.map((card) => <AttractionCard");
+    expect(card).toContain('className="editorial-card-link group flex h-full');
+    expect(card).toContain("overflow-hidden rounded-2xl border bg-card");
+    expect(card).toContain('className="aspect-[3/2] overflow-hidden bg-secondary"');
+    expect(card).toContain("guideHeroPhotoForPath(String(card.to)) ?? card.photo");
+    expect(card).toContain("srcSet={attractionHubCardImageSets[photo.src]}");
+    expect(card).toContain("<h3");
+    expect(card).toContain("{card.title}");
+    expect(card).toContain("{card.description}");
+    expect(card).not.toContain("<ArrowUpRight");
+    expect(card).not.toMatch(/Explore this page|Read more|Show more/i);
+    expect(card).not.toContain("group-hover:underline");
+    expect(css).toContain(".editorial-card-link:hover img { transform: scale(1.035); }");
+    expect(css).toContain(".editorial-card-link:hover {");
+    expect(css).toContain("background-color: color-mix");
+    expect(css).toContain("border-color: color-mix");
+    expect(css).toContain(".editorial-card-link:focus-visible");
+    expect(css).toContain("@media (prefers-reduced-motion: reduce)");
+  });
+
   it("keeps internal image provenance out of the public Attractions page", () => {
     const page = readFileSync("src/routes/attractions.index.tsx", "utf8");
     expect(page).not.toContain("WordPress");

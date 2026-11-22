@@ -59,21 +59,19 @@ const planningIcons: Record<(typeof attractionPlanningPaths)[number]["id"], Luci
 };
 
 function AttractionCard({ card }: { card: AttractionHubCard }) {
+  // Reuse the same whole-card hover, focus, image zoom and border treatment as guide cards.
   const photo = guideHeroPhotoForPath(String(card.to)) ?? card.photo;
   return (
-    <article className="min-w-0 overflow-hidden rounded-2xl border bg-card shadow-sm transition-all hover:border-primary/60 hover:shadow-md motion-safe:hover:-translate-y-0.5" data-testid="attraction-card">
+    <article className="min-w-0" data-testid="attraction-card">
       <Link
         to={card.to}
-        className="group flex h-full flex-col focus-visible:outline-2 focus-visible:outline-offset-[-3px] focus-visible:outline-primary"
+        className="editorial-card-link group flex h-full min-w-0 flex-col overflow-hidden rounded-2xl border bg-card focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-primary"
       >
         <div className="aspect-[3/2] overflow-hidden bg-secondary">
-          <img src={photo.src} srcSet={attractionHubCardImageSets[photo.src]} sizes="(min-width: 1280px) 365px, (min-width: 640px) calc(50vw - 24px), calc(100vw - 32px)" alt={photo.alt} width={755} height={503} loading="lazy" decoding="async" className="h-full w-full object-cover transition-transform duration-300 motion-safe:group-hover:scale-[1.03]" />
+          <img src={photo.src} srcSet={attractionHubCardImageSets[photo.src]} sizes="(min-width: 1280px) 365px, (min-width: 640px) calc(50vw - 24px), calc(100vw - 32px)" alt={photo.alt} width={755} height={503} loading="lazy" decoding="async" className="h-full w-full object-cover" />
         </div>
         <div className="flex flex-1 flex-col p-4 sm:p-5">
-          <div className="flex items-start justify-between gap-2">
-            <h3 className="font-serif text-lg font-semibold leading-snug group-hover:text-primary group-hover:underline group-hover:underline-offset-4 sm:text-xl">{card.title}</h3>
-            <ArrowUpRight className="mt-1 size-4 shrink-0 text-primary/65 transition-transform motion-safe:group-hover:-translate-y-0.5 motion-safe:group-hover:translate-x-0.5" aria-hidden="true" />
-          </div>
+          <h3 className="text-lg font-semibold leading-tight text-foreground sm:text-2xl">{card.title}</h3>
           <p className="mt-2 flex-1 text-sm leading-relaxed text-muted-foreground">{card.description}</p>
         </div>
       </Link>
