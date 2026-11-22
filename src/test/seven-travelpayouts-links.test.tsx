@@ -48,7 +48,10 @@ describe("Seven exact supplier links upgraded to Travelpayouts", () => {
       if (item.path.includes("MountOlives")) {
         expect(file).toContain("<CuratedPartnerTourCard");
         const sharedCard = readFileSync("src/components/CuratedPartnerTourCard.tsx", "utf8");
-        expect(sharedCard).toContain("rel={relFor(true)}");
+        expect(sharedCard).toContain("<ExternalProviderTourCard");
+        const unifiedCard = readFileSync("src/components/ExternalProviderTourCard.tsx", "utf8");
+        expect(unifiedCard).toContain("rel={relFor(affiliate)}");
+        expect(unifiedCard).toContain("affiliate = true");
       } else {
         expect(file).toContain('rel="sponsored noopener noreferrer"');
       }
