@@ -43,7 +43,8 @@ describe("Haifa city-attractions guide", () => {
     expect(page).toContain("Free to explore");
     expect(page).not.toContain("Most attractions are free");
     expect(page).not.toContain("walk down through the terraces");
-    expect(page).toContain('rel="sponsored noopener noreferrer"');
+    expect(page).toContain("<ExternalProviderTourCard");
+    expect(readFileSync("src/components/ExternalProviderTourCard.tsx", "utf8")).toContain("rel={relFor(affiliate)}");
     expect(page).toContain("tour-coast-private-rosh-hanikra-viator@tours-northern-coast");
     expect(page).toContain("tour-caesarea-haifa-akko-getyourguide@tours-northern-coast");
   });
