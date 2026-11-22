@@ -111,12 +111,14 @@ export function AttractionContentImage({ src, alt, position, mobileContain }: { 
 }
 
 export function AttractionHighlight({
-  title, image, children, note,
+  title, image, children, note, mobileImageFirst = false,
 }: {
   title: string;
   image?: { src: string; alt: string; position?: string; mobileContain?: boolean } | undefined;
   children: ReactNode;
   note?: ReactNode;
+  /** Destination-specific choice: put the photograph above its description only on mobile. */
+  mobileImageFirst?: boolean;
 }) {
   return (
     <article className="rounded-xl border border-border/80 bg-card p-4 sm:p-5" data-testid="attraction-highlight">
@@ -126,7 +128,9 @@ export function AttractionHighlight({
           <div className="mt-2 space-y-3 text-sm leading-relaxed sm:text-base">{children}</div>
           {note && <p className="mt-3 border-l-2 border-primary/40 pl-3 text-sm leading-relaxed text-muted-foreground">{note}</p>}
         </div>
-        {image && <AttractionContentImage src={image.src} alt={image.alt} {...(image.position ? { position: image.position } : {})} {...(image.mobileContain ? { mobileContain: true } : {})} />}
+        {image && (mobileImageFirst
+          ? <div className="order-first min-w-0 sm:order-last"><AttractionContentImage src={image.src} alt={image.alt} {...(image.position ? { position: image.position } : {})} {...(image.mobileContain ? { mobileContain: true } : {})} /></div>
+          : <AttractionContentImage src={image.src} alt={image.alt} {...(image.position ? { position: image.position } : {})} {...(image.mobileContain ? { mobileContain: true } : {})} />)}
       </div>
     </article>
   );
