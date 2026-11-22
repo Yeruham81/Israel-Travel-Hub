@@ -1,6 +1,7 @@
 import { Link, type LinkProps } from "@tanstack/react-router";
 import { FaqList, OnThisPage, Section } from "@/components/Guide";
 import { AuthorCard } from "@/components/AuthorCard";
+import { PhotoCreditsDisclosure } from "@/components/PhotoCreditsDisclosure";
 import { JerusalemPartnerOffers } from "@/components/JerusalemPartnerOffers";
 import { MountOlivesRelatedGuides } from "@/components/MountOlivesRelatedGuides";
 import { MountZionRelatedGuides } from "@/components/MountZionRelatedGuides";
@@ -48,10 +49,7 @@ export function SacredHillGuideContent({ id }: { id: SacredHillId }) {
           <header className="flex min-w-0 items-center gap-3">
             {stop.image && <figure className="w-20 shrink-0 sm:w-24">
               <img src={stop.image.src} alt={stop.image.alt} loading="lazy" decoding="async" width={96} height={84} className="h-20 w-full rounded-lg bg-secondary object-contain sm:h-[84px]" />
-              {stop.image.credit && <figcaption className="mt-1 text-[10px] leading-tight text-muted-foreground">
-                <a href={stop.image.credit.url} target="_blank" rel="noopener noreferrer" className="underline underline-offset-2">Photo: {stop.image.credit.label}</a>
-                {" · "}<a href={stop.image.credit.licenseUrl} target="_blank" rel="noopener noreferrer" className="underline underline-offset-2">License</a>
-              </figcaption>}
+
             </figure>}
             <div className="min-w-0 flex-1">
               <span aria-hidden="true" className="text-xs font-semibold tabular-nums text-muted-foreground">{String(index + 1).padStart(2, "0")}</span>
@@ -137,5 +135,8 @@ export function SacredHillGuideContent({ id }: { id: SacredHillId }) {
     </section>
 
     {id === "mount-of-olives" ? <MountOlivesRelatedGuides /> : <MountZionRelatedGuides />}
+    <PhotoCreditsDisclosure entries={guide.stops.filter(stop=>stop.image?.credit).map(stop=>({
+      label:stop.name,credit:stop.image!.credit!.label,sourceUrl:stop.image!.credit!.url,licenseUrl:stop.image!.credit!.licenseUrl
+    }))}/>
   </>;
 }
