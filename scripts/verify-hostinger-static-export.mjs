@@ -134,7 +134,7 @@ for (const required of [
   "/accommodation/jerusalem/east-jerusalem/",
   "Explore all Jerusalem tours",
   "Explore more tours and day trips",
-  "Explore the Sea of Galilee",
+  "/attractions/sea-of-galilee/",
   "/travel-blog/attractions-in-tel-aviv/",
   "https://viator.tpm.li/",
   "https://getyourguide.tpm.li/",
