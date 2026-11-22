@@ -216,13 +216,13 @@ describe("homepage marketing copy and service sections", () => {
       "/shore-excursions/ashdod/", "/shore-excursions/haifa/",
     ]);
     expect(portLinks.map(link => link.textContent)).toEqual([
-      expect.stringContaining("Explore Ashdod excursions"),
-      expect.stringContaining("Explore Haifa excursions"),
+      expect.stringContaining("From Ashdod Port"),
+      expect.stringContaining("From Haifa Port"),
     ]);
     expect(portLinks[0]).toHaveTextContent("Tel Aviv–Jaffa, Masada or the Dead Sea");
     expect(portLinks[1]).toHaveTextContent("Akko, Nazareth and the Galilee");
     for (const portLink of portLinks) {
-      expect(portLink).toHaveClass("h-full");
+      expect(portLink).toHaveClass("h-full", "editorial-card-link");
       const photo = within(portLink).getByRole("img");
       expect(photo).toHaveClass("h-full", "object-cover");
       expect(photo.parentElement).toHaveClass("aspect-[16/9]", "min-[480px]:aspect-auto");
