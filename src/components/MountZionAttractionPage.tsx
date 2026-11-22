@@ -48,9 +48,9 @@ const mountZionTours = [
     platform: "Viator",
     title: "Jerusalem Highlights from Tel Aviv",
     summary: "A full-day Jerusalem visit with Old City highlights and, on the standard itinerary, the Upper Room and David’s Tomb.",
-    duration: "Full day",
-    rating: "4.5 · 87 reviews",
-    notice: "Monday and Thursday departures generally substitute Yad Vashem for the Cenacle and David’s Tomb. If seeing Mount Zion is your priority, check the dated itinerary before booking.",
+    duration: "About 10 hours",
+    rating: "4.5 · 88 reviews",
+    notice: "Monday and Thursday departures generally visit Yad Vashem in place of the Cenacle and David’s Tomb. Choose a departure that includes Mount Zion.",
     photo: mountZionHillsidePhoto,
     alt: "Mount Zion hillside and Jerusalem stone buildings near the Old City",
     sourceUrl: "https://www.viator.com/tours/Tel-Aviv/Old-Jerusalem-Day-Trip-from-Tel-Aviv/d920-5209TEL210",
@@ -213,7 +213,7 @@ export const mountZionDestinationContent: AttractionDestinationContent = {
   ),
   tourContent: (
     <div className="mt-4 space-y-4">
-      <p>These full-day tours include Mount Zion among other Jerusalem highlights. They are not dedicated short walks on the hill; check whether the Upper Room, David's Tomb and other stops are included for your specific departure date.</p>
+      <p>These guided full-day tours combine Mount Zion with Jerusalem’s Old City and other landmarks. Compare the departure point and individual stops before choosing your tour.</p>
       <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3" data-testid="mount-zion-tour-cards">
         {mountZionTours.map(tour => <ExternalProviderTourCard
           key={tour.id} image={tour.photo} alt={tour.alt}
@@ -226,8 +226,7 @@ export const mountZionDestinationContent: AttractionDestinationContent = {
           onClick={() => recordOutboundClick({ pageId: "attractions-mount-zion", productId: tour.id, offerId: tour.id })}
         />)}
       </div>
-      <p className="text-xs text-muted-foreground">Ratings were checked in November 2026. Prices and availability depend on the selected date, currency and party size; check the operator’s booking page. Booking links use Travelpayouts tracking and open the external provider.</p>
-      <p className="text-sm leading-relaxed">You can <Link to="/tours/jerusalem/" className={inlineLink}>explore other Jerusalem tours</Link>, or <a href="#contact" className={inlineLink}>contact me about private transport</a> if you mainly need help with drop-off and pickup.</p>
+      <p className="text-sm leading-relaxed"><Link to="/tours/jerusalem/" className={inlineLink}>Browse more Jerusalem tours</Link>, or <a href="#contact" className={inlineLink}>contact me about private transport</a> for your visit.</p>
     </div>
   ),
   faqs: [
@@ -240,20 +239,20 @@ export const mountZionDestinationContent: AttractionDestinationContent = {
     { q: "Is Mount Zion suitable for wheelchair users?", a: "The compact area near Zion Gate is easier than the lower extensions, but the Upper Room is reached by stairs. St Peter in Gallicantu reports an accessible site with separate vehicle access, while the walk between stops may still be steep or uneven." },
   ],
   nearby: [
-    { label: "Jerusalem's Old City", to: "/attractions/old-city-jerusalem/", note: "Continue through Zion Gate to the Armenian and Jewish Quarters." },
-    { label: "Mount of Olives", to: "/attractions/mount-of-olives/", note: "Panorama, Gethsemane and hillside pilgrimage sites." },
-    { label: "Caesarea National Park", to: "/attractions/caesarea/", note: "Mediterranean Roman ruins on a separate day trip." },
-    { label: "Qasr el-Yahud", to: "/attractions/qasr-el-yahud/", note: "Jordan River pilgrimage site on a separate day." },
-    { label: "Masada National Park", to: "/attractions/masada/", note: "Ancient desert fortress for a longer excursion." },
-    { label: "Ein Gedi Nature Reserve", to: "/attractions/ein-gedi/", note: "Oasis walks and natural scenery by the Dead Sea." },
+    { label: "Jerusalem’s Old City", to: "/attractions/old-city-jerusalem/", note: "Walk through Zion Gate into the historic quarters." },
+    { label: "Mount of Olives", to: "/attractions/mount-of-olives/", note: "Panoramic viewpoints, Gethsemane and pilgrimage sites." },
+    { label: "Churches in Jerusalem", to: "/travel-blog/churches-in-jerusalem/", note: "Explore churches and Christian sites across the city." },
+    { label: "Jerusalem travel guide", to: "/travel-blog/jerusalem-travel-guide/", note: "Plan sightseeing, transport and your time in the city." },
+    { label: "Museums in Jerusalem", to: "/travel-blog/museums-in-jerusalem/", note: "Discover the city’s collections and cultural history." },
+    { label: "Jerusalem guided tours", to: "/tours/jerusalem/", note: "Compare guided walks and full-day experiences." },
   ],
   planningLinks: [
-    { label: "Jerusalem travel guide", to: "/travel-blog/jerusalem-travel-guide/", description: "Plan your stay, neighbourhoods and transport.", icon: "region" },
-    { label: "Churches in Jerusalem", to: "/travel-blog/churches-in-jerusalem/", description: "Explore nearby pilgrimage sites.", icon: "region" },
-    { label: "Jerusalem tours", to: "/tours/jerusalem/", description: "Browse guided experiences around the city.", icon: "region" },
-    { label: "Where to stay in Jerusalem", to: "/travel-blog/where-to-stay-in-jerusalem/", description: "Choose a base for sightseeing.", icon: "region" },
-    { label: "Ben Gurion Airport to Jerusalem", to: "/travel-blog/ben-gurion-airport-to-jerusalem/", description: "Compare train, taxi and transfer options.", icon: "arrival" },
-    { label: "3-day Israel itinerary", to: "/travel-blog/israel-itinerary-3-days/", description: "See how Jerusalem fits into a shorter trip.", icon: "itinerary" },
+    { label: "Where to stay in Jerusalem", to: "/travel-blog/where-to-stay-in-jerusalem/", description: "Choose a base for Old City visits.", icon: "region" },
+    { label: "Getting around Israel", to: "/travel-blog/getting-around-israel/", description: "Plan public transport and other connections.", icon: "region" },
+    { label: "Israel’s calendar of events", to: "/travel-blog/calendar-of-events/", description: "Choose dates around religious and local events.", icon: "region" },
+    { label: "Ben Gurion Airport to Jerusalem", to: "/travel-blog/ben-gurion-airport-to-jerusalem/", description: "Compare arrival and transfer options.", icon: "arrival" },
+    { label: "3-day Israel itinerary", to: "/travel-blog/israel-itinerary-3-days/", description: "Fit Jerusalem into a short visit.", icon: "itinerary" },
+    { label: "Private driver in Israel", to: "/private-driver-in-israel/", description: "Arrange flexible transport for your visit.", icon: "region" },
   ],
   photoCredits: <p>
     Photographs (resized and cropped to WebP):{" "}
