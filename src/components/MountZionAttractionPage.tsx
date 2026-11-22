@@ -140,32 +140,25 @@ export const mountZionDestinationContent: AttractionDestinationContent = {
   ),
   transportContent: (
     <div className="mt-4 space-y-4">
-      <p>Use Zion Gate as your pedestrian starting point. Vehicles can approach the surrounding roads but cannot drive through the historic gate. For Gallicantu and the Catholic cemetery, choose a separate approach or allow for an additional hillside walk.</p>
+      <p>For the central landmarks, start at Zion Gate. St Peter in Gallicantu and the Catholic cemetery have their own hillside approaches; choose a suitable pickup point when visiting either one.</p>
       <div className="grid gap-3 sm:grid-cols-3" data-testid="mount-zion-access-points">
-        <article className="rounded-xl border bg-card p-3"><h3 className="font-serif text-lg font-semibold">Zion Gate</h3><p className="mt-2 text-sm">Start for Dormition Abbey, the Cenacle and David's Tomb.</p><a href={zionGateDirections} target="_blank" rel="noopener noreferrer" className={inlineLink}>Driving to Zion Gate area <ArrowUpRight className="inline h-4 w-4" aria-hidden="true"/></a></article>
-        <article className="rounded-xl border bg-card p-3"><h3 className="font-serif text-lg font-semibold">St Peter in Gallicantu</h3><p className="mt-2 text-sm">A lower hillside stop with its own road access from Hebron Road.</p><a href={gallicantuDirections} target="_blank" rel="noopener noreferrer" className={inlineLink}>Driving directions <ArrowUpRight className="inline h-4 w-4" aria-hidden="true"/></a></article>
-        <article className="rounded-xl border bg-card p-3"><h3 className="font-serif text-lg font-semibold">Old City connection</h3><p className="mt-2 text-sm">Return through Zion Gate to the Armenian and Jewish Quarters.</p><a href={oldCityWalk} target="_blank" rel="noopener noreferrer" className={inlineLink}>Walking map <ArrowUpRight className="inline h-4 w-4" aria-hidden="true"/></a></article>
+        <article className="rounded-xl border bg-card p-3"><h3 className="font-serif text-lg font-semibold">Zion Gate</h3><p className="mt-2 text-sm">Starting point for the Cenacle, David’s Tomb and Dormition Abbey.</p><a href={zionGateDirections} target="_blank" rel="noopener noreferrer" className={inlineLink}>Driving to the gate area <ArrowUpRight className="inline h-4 w-4" aria-hidden="true"/></a></article>
+        <article className="rounded-xl border bg-card p-3"><h3 className="font-serif text-lg font-semibold">St Peter in Gallicantu</h3><p className="mt-2 text-sm">Reach the sanctuary from Hebron Road for a convenient lower-hillside arrival.</p><a href={gallicantuDirections} target="_blank" rel="noopener noreferrer" className={inlineLink}>Driving directions <ArrowUpRight className="inline h-4 w-4" aria-hidden="true"/></a></article>
+        <article className="rounded-xl border bg-card p-3"><h3 className="font-serif text-lg font-semibold">Continue into the Old City</h3><p className="mt-2 text-sm">Walk through Zion Gate to the Armenian and Jewish Quarters.</p><a href={oldCityWalk} target="_blank" rel="noopener noreferrer" className={inlineLink}>Walking directions <ArrowUpRight className="inline h-4 w-4" aria-hidden="true"/></a></article>
       </div>
-      <div className="grid gap-4 lg:grid-cols-[minmax(0,1.4fr)_minmax(0,1fr)]">
-        <div className="space-y-3">
-          <article className="rounded-xl border bg-card p-4">
-            <div className="flex items-center gap-2"><Footprints className="h-5 w-5 text-primary" aria-hidden="true"/><h3 className="font-semibold">Walk from the Old City</h3></div>
-            <p className="mt-2 text-sm leading-relaxed">From Jaffa Gate, walk through the Armenian Quarter towards Zion Gate. From the Jewish Quarter, follow signs to Zion Gate and exit the city wall. The short central Mount Zion circuit is easily combined with these neighbourhoods, but the streets may have uneven paving.</p>
-          </article>
-          <article className="rounded-xl border bg-card p-4">
-            <div className="flex items-center gap-2"><BusFront className="h-5 w-5 text-primary" aria-hidden="true"/><h3 className="font-semibold">Buses 38 and 2</h3></div>
-            <p className="mt-2 text-sm leading-relaxed">Circular bus route 38 serves stops including <strong>Mount Zion/Ma'ale HaShalom</strong> and <strong>Zion Gate/Habad</strong>; route 2 also serves Zion Gate. Confirm the correct direction and current timetable on the <a href={official.busPlanner} target="_blank" rel="noopener noreferrer" className={inlineLink}>public transport planner</a>. Most Israeli city buses do not operate from Friday afternoon until Saturday evening.</p>
-          </article>
-          <article className="rounded-xl border bg-card p-4">
-            <div className="flex items-center gap-2"><CarFront className="h-5 w-5 text-primary" aria-hidden="true"/><h3 className="font-semibold">Taxi and private transport</h3></div>
-            <p className="mt-2 text-sm leading-relaxed">Arrange a drop-off on a vehicle-accessible road <strong>near</strong> Zion Gate, then continue on foot; the gate itself is not a drive-through entrance. Gallicantu has <a href={official.gallicantu} target="_blank" rel="noopener noreferrer" className={inlineLink}>its own approach</a> via Hebron Road. Confirm the pickup point if you descend the hillside.</p>
-          </article>
-        </div>
-        <div className="rounded-xl border bg-card p-3" data-testid="mount-zion-map">
-          <div className="flex items-center gap-2"><MapPinned className="h-4 w-4 text-primary" aria-hidden="true"/><h3 className="text-sm font-semibold">Where is Mount Zion?</h3></div>
-          <iframe title="Map of Mount Zion and Zion Gate, Jerusalem" src={mapEmbed} loading="lazy" referrerPolicy="strict-origin-when-cross-origin" className="mt-2 h-52 w-full rounded-lg border-0 sm:h-60 lg:h-56"/>
-          <a href={mapLarger} target="_blank" rel="noopener noreferrer" className="mt-2 inline-flex items-center gap-1 text-xs font-semibold text-primary">View larger map <ArrowUpRight className="h-3.5 w-3.5"/></a>
-        </div>
+      <div className="grid gap-3 md:grid-cols-3">
+        <article className="rounded-xl border bg-card p-4">
+          <div className="flex items-center gap-2"><Footprints className="h-5 w-5 text-primary" aria-hidden="true"/><h3 className="font-semibold">Walk from the Old City</h3></div>
+          <p className="mt-2 text-sm leading-relaxed">From Jaffa Gate, follow the Armenian Quarter towards Zion Gate. From the Jewish Quarter, head south towards the same gate. The central landmarks are close together, with historic stone paving along the way.</p>
+        </article>
+        <article className="rounded-xl border bg-card p-4">
+          <div className="flex items-center gap-2"><BusFront className="h-5 w-5 text-primary" aria-hidden="true"/><h3 className="font-semibold">Public buses</h3></div>
+          <p className="mt-2 text-sm leading-relaxed">Bus 38 serves Mount Zion/Ma’ale HaShalom and Zion Gate/Habad; bus 2 also serves the Zion Gate area. Check the direction of the circular 38 route and departures on the <a href={official.busPlanner} target="_blank" rel="noopener noreferrer" className={inlineLink}>public transport planner</a>. Most Israeli city buses pause for Shabbat from Friday afternoon to Saturday evening.</p>
+        </article>
+        <article className="rounded-xl border bg-card p-4">
+          <div className="flex items-center gap-2"><CarFront className="h-5 w-5 text-primary" aria-hidden="true"/><h3 className="font-semibold">Taxi or private driver</h3></div>
+          <p className="mt-2 text-sm leading-relaxed">Arrange a drop-off on a road near Zion Gate for the central circuit. For St Peter in Gallicantu, follow the <a href={official.gallicantu} target="_blank" rel="noopener noreferrer" className={inlineLink}>sanctuary’s approach via Hebron Road</a>. A separate pickup can make a longer visit easier; <a href="#contact" className={inlineLink}>tell me your plans</a>.</p>
+        </article>
       </div>
     </div>
   ),
