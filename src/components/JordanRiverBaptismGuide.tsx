@@ -1,3 +1,4 @@
+import { ExternalProviderTourCard } from "@/components/ExternalProviderTourCard";
 import { Link } from "@tanstack/react-router";
 import type { ReactNode } from "react";
 import { ArrowUpRight, CheckCircle2, Clock3, ExternalLink, Lightbulb, MapPinned, Shirt, Star, Users } from "lucide-react";
@@ -87,23 +88,17 @@ function TourSection({group}:{group:typeof baptismTourGroups[number]}) {
     const trackingUrl=affiliateConfig[offerId+"@travel-blog-baptism"]?.trackingUrl;
     const photo=tourPhotos[entry.id];
     if(!product || !offer || !trackingUrl || !photo) return null;
-    return <a key={entry.id} href={trackingUrl} target="_blank" rel={relFor(true)}
-     onClick={()=>recordAffiliateTourClick({pageId:"travel_blog_baptism",productId:entry.id,offerId,provider:entry.provider,linkUrl:trackingUrl})}
-     data-testid="baptism-tour-card" data-site={group.id}
-     className="group flex min-w-0 flex-col overflow-hidden rounded-xl border bg-card transition-all hover:border-primary/50 hover:shadow-md focus-visible:outline-2 focus-visible:outline-primary">
-      <img src={photo.src} alt={photo.alt} width={480} height={280} loading="lazy" decoding="async" className="aspect-[16/9] w-full object-cover"/>
-      <span className="flex flex-1 flex-col p-4">
-       <span className="text-[11px] font-bold uppercase tracking-wider text-primary">{entry.provider==="getyourguide"?"GetYourGuide":"Viator"}</span>
-       <strong className="mt-1 text-base leading-snug group-hover:text-primary">{product.title}</strong>
-       <span className="mt-2 line-clamp-2 text-sm leading-relaxed text-muted-foreground">{product.summary}</span>
-       <span className="mt-3 flex flex-wrap items-center gap-x-3 gap-y-2 text-xs text-muted-foreground"><span className="inline-flex items-center gap-1"><Clock3 className="h-3.5 w-3.5" aria-hidden="true"/>{product.duration}</span><span className="inline-flex items-center gap-1"><MapPinned className="h-3.5 w-3.5" aria-hidden="true"/>{entry.departure}</span></span>
-       {product.rating && <span data-testid="baptism-tour-rating" className="mt-2 inline-flex items-center gap-1.5 text-xs font-medium text-muted-foreground" aria-label={product.rating.value.toFixed(1)+" out of 5 stars from "+product.rating.count+" reviews, checked November 2026"}><Star className="h-3.5 w-3.5 fill-amber-400 text-amber-500" aria-hidden="true"/>{product.rating.value.toFixed(1)} <span>({product.rating.count.toLocaleString("en-US")} reviews)</span></span>}
-       <span className="mt-auto flex items-end justify-between gap-2 border-t pt-3 text-sm">
-        <span>{offer.listedPrice ? <><span className="text-xs text-muted-foreground">From </span><strong>{"US$"+offer.listedPrice.amount.toFixed(offer.listedPrice.amount % 1 ? 2 : 0)}</strong><span className="block text-[11px] text-muted-foreground">{offer.listedPrice.basis==="per_person"?"Per person":"Per group"} · checked Nov 2026</span></> : <span className="text-xs text-muted-foreground">Check current price</span>}</span>
-        <span className="inline-flex items-center gap-1 font-semibold text-primary">View tour <ExternalLink className="h-3.5 w-3.5" aria-hidden="true"/></span>
-       </span>
-      </span><span className="sr-only"> (opens in a new tab)</span>
-    </a>;
+    return <div key={entry.id} data-testid="baptism-tour-card" data-site={group.id} className="min-w-0">
+      <ExternalProviderTourCard
+        image={photo.src} alt={photo.alt}
+        platform={entry.provider === "getyourguide" ? "GetYourGuide" : "Viator"}
+        title={product.title} description={product.summary} duration={product.duration} location={entry.departure}
+        rating={product.rating && {value:product.rating.value,count:product.rating.count}}
+        price={offer.listedPrice && {amount:offer.listedPrice.amount,currency:offer.listedPrice.currency,basis:offer.listedPrice.basis,maxPartySize:offer.listedPrice.maxPartySize}}
+        href={trackingUrl}
+        onClick={()=>recordAffiliateTourClick({pageId:"travel_blog_baptism",productId:entry.id,offerId,provider:entry.provider,linkUrl:trackingUrl})}
+      />
+    </div>;
    })}
   </div>
   <p className="mt-3 text-xs leading-relaxed text-muted-foreground">Check current prices, availability, the exact river stop, pickup and cancellation terms with the tour provider. Arrange any baptism ceremony, clergy or Qasr el-Yahud visitor reservation separately.</p>
