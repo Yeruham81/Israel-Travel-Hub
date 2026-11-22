@@ -1,5 +1,5 @@
 export const attractionIds = [
-"old-city-jerusalem","attractions-in-tel-aviv","dead-sea-attractions","jaffa",
+"old-city-jerusalem","via-dolorosa","attractions-in-tel-aviv","dead-sea-attractions","jaffa",
 "museums-in-jerusalem","sea-of-galilee","mitzpe-ramon-crater","akko-acre",
 "ein-gedi","rosh-hanikra","mount-of-olives","haifa","mount-zion",
 "mount-tabor","capernaum","tabgha","mount-of-beatitudes"
