@@ -138,7 +138,7 @@ describe("homepage marketing copy and service sections", () => {
     expect(guideCards).toHaveLength(6);
     for (const card of guideCards) {
       expect(card).toHaveClass("editorial-card-link");
-      expect(within(card).getByRole("link")).toHaveAttribute("href");
+      expect(within(card).getAllByRole("link")[0]).toHaveAttribute("href");
       expect(card).not.toHaveTextContent("Read more");
     }
 
