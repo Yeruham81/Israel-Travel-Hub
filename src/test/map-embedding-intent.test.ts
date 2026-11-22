@@ -22,7 +22,8 @@ describe("map embedding intent across attraction and travel guides", () => {
 
   it("keeps each overview map point-only without drawn route lines", () => {
     const mapFiles = readdirSync("public/maps").filter((name) => name.endsWith(".html"));
-    expect(mapFiles).toHaveLength(10);
+    expect(mapFiles.length).toBeGreaterThanOrEqual(11);
+    expect(mapFiles).toContain("mount-of-olives.html");
     for (const name of mapFiles) {
       const html = readFileSync(join("public/maps", name), "utf8");
       expect(html, name).not.toMatch(/\bLineString\b|\btype\s*:\s*["']line["']|["']line-color["']|DirectionsRenderer|Routing\.control\(/i);
