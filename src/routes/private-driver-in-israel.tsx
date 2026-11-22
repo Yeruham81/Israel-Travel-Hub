@@ -63,8 +63,8 @@ function PrivateDriverContent({ transfer }: { transfer: ReturnType<typeof parseP
         <h2 id="journeys-h" className="text-2xl font-semibold">Choose the journey that suits you</h2>
         <p className="mt-2 max-w-3xl text-sm leading-relaxed text-muted-foreground">A direct transfer, a day out or several stops along the way — choose a starting point and I'll help with the details.</p>
         <div className="mt-4 grid gap-3 md:grid-cols-3">
-          {privateDriverJourneys.map(journey => <article key={journey.id} className="grid h-full min-w-0 grid-cols-[5.75rem_minmax(0,1fr)] overflow-hidden rounded-2xl border bg-card transition-colors hover:border-primary/40 sm:grid-cols-[7.5rem_minmax(0,1fr)] md:flex md:flex-col" data-testid="driver-journey-card">
-            <img src={journey.photo.src} alt={journey.photo.alt} width={360} height={240} loading="lazy" decoding="async" className="h-full min-h-0 w-full object-cover md:aspect-[16/9] md:h-auto" />
+          {privateDriverJourneys.map(journey => <article key={journey.id} className="flex h-full min-w-0 flex-col overflow-hidden rounded-2xl border bg-card transition-colors hover:border-primary/40" data-testid="driver-journey-card">
+            <img src={journey.photo.src} alt={journey.photo.alt} width={360} height={240} loading="lazy" decoding="async" className="aspect-[16/9] h-auto w-full object-cover" />
             <div className="flex min-w-0 flex-1 flex-col p-3 sm:p-4">
               <h3 className="text-base font-semibold leading-snug sm:text-lg">{journey.title}</h3>
               <p className="mt-1.5 flex-1 text-[13px] leading-relaxed text-muted-foreground sm:mt-2 sm:text-sm">{journey.text}</p>
