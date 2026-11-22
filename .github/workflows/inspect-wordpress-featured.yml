@@ -1,0 +1,82 @@
+name: Inspect legacy WordPress featured images
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - ".github/workflows/inspect-wordpress-featured.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - name: Read featured images from original site (read-only)
+        shell: bash
+        run: |
+          python3 -m pip install -q requests beautifulsoup4
+          python3 - <<'PY'
+          import json, re, requests
+          from bs4 import BeautifulSoup
+          base="https://www.israel-taxi.com"
+          session=requests.Session()
+          session.headers.update({"User-Agent":"Mozilla/5.0 (compatible; IsraelTravelHubImageAudit/1.0; +https://www.israel-taxi.com)"})
+          def imgurl(img):
+              if img is None: return None
+              for key in ("data-src","data-lazy-src","data-original","src"):
+                  v=img.get(key)
+                  if v and not (v.startswith("data:") or "placeholder" in v or "blank.gif" in v):
+                      return v
+              return None
+          try:
+              url=base+"/travel-blog/"
+              response=session.get(url,timeout=55)
+              print("ARCHIVE_STATUS",response.status_code,"BYTES",len(response.content),"FINAL_URL",response.url)
+              response.raise_for_status()
+              soup=BeautifulSoup(response.text,"html.parser")
+              print("ARCHIVE_TITLE",soup.title.get_text(strip=True) if soup.title else "?")
+              print("ALL_IMG_COUNT",len(soup.select("img")))
+              candidates=soup.select("article, .elementor-post, .premium-blog-post-container, .e-loop-item, .jet-listing-grid__item")
+              seen=set()
+              for item in candidates:
+                  head=item.select_one(".elementor-post__title, .entry-title, .post-title, h2, h3")
+                  if not head: continue
+                  anchor=head.find("a",href=True) or item.find("a",href=re.compile("/travel-blog/"))
+                  if not anchor: continue
+                  href=anchor.get("href","")
+                  if href.rstrip("/") in (base+"/travel-blog", "/travel-blog"): continue
+                  if not "/travel-blog/" in href: continue
+                  if href in seen:continue
+                  seen.add(href)
+                  image=item.find("img")
+                  result={"title":head.get_text(" ",strip=True),"href":href,"featured_src":imgurl(image),"alt":image.get("alt","") if image else "",
+                           "article_class":" ".join(item.get("class",[]))}
+                  print("ARCHIVE_CARD",json.dumps(result,ensure_ascii=False))
+              print("ARCHIVE_CARDS_TOTAL",len(seen))
+              if not seen:
+                  for node in soup.find_all("img")[:8]:
+                      print("IMAGE_SAMPLE",str(node)[:350])
+                  for node in soup.find_all("article")[:2]:
+                      print("ARTICLE_SAMPLE",str(node)[:850])
+          except Exception as e:
+              print("ARCHIVE_ERROR",repr(e))
+          try:
+              api=base+"/wp-json/wp/v2/posts"
+              res=session.get(api,params={"per_page":100,"_embed":1},timeout=55)
+              print("WP_API_STATUS",res.status_code,"BYTES",len(res.content),"CONTENT_TYPE",res.headers.get("content-type"))
+              if res.ok and "json" in res.headers.get("content-type",""):
+                  data=res.json()
+                  if isinstance(data,list):
+                      for post in data:
+                          media=(post.get("_embedded") or {}).get("wp:featuredmedia") or []
+                          feature=media[0].get("source_url") if media else None
+                          print("WP_FEATURED",json.dumps({"slug":post.get("slug"),"link":post.get("link"),
+                              "title":BeautifulSoup(post.get("title",{}).get("rendered",""),"html.parser").get_text(strip=True),
+                              "image":feature,"featured_media":post.get("featured_media")},ensure_ascii=False))
+                      print("WP_POSTS_TOTAL",len(data))
+          except Exception as e:
+              print("WP_API_ERROR",repr(e))
+          PY
