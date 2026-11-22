@@ -1,7 +1,8 @@
 import { Link } from "@tanstack/react-router";
 import { Lightbulb } from "lucide-react";
 import { Breadcrumbs, FaqList, OnThisPage, RelatedLinks, Section } from "@/components/Guide";
-import { GuidePhotoCredit, GuideParagraph } from "@/components/TravelGuide";
+import { GuideParagraph } from "@/components/TravelGuide";
+import { PhotoCreditsDisclosure } from "@/components/PhotoCreditsDisclosure";
 import { GuideHeroLayout, GuideHeroMedia } from "@/components/GuideHeroMedia";
 import { hasPublicPhotoCredit } from "@/lib/photo-credits";
 import { AuthorCard } from "@/components/AuthorCard";
@@ -300,7 +301,7 @@ export function AirportJourneyPage({ id }: { id: AirportJourneyId }) {
   const stationSection = (
 <Section id="station-choice" title={"Train stations, changes and the final journey in " + g.city}>
         <p><GuideParagraph paragraph={g.trainIntro} inlineLinks={g.stationLinks} /></p>
-        {g.photos?.station && <figure className="mt-5 mb-6 max-w-3xl"><img src={g.photos.station.src} alt={g.photos.station.alt} width={755} height={503} loading="lazy" decoding="async" className="aspect-[3/2] max-h-96 w-full rounded-xl object-cover" /><GuidePhotoCredit photo={g.photos.station} /></figure>}
+        {g.photos?.station && <figure className="mt-5 mb-6 max-w-3xl"><img src={g.photos.station.src} alt={g.photos.station.alt} width={755} height={503} loading="lazy" decoding="async" className="aspect-[3/2] max-h-96 w-full rounded-xl object-cover" /></figure>}
         <div className="mt-4 max-w-full overflow-x-auto rounded-xl border">
           <table className="w-full min-w-[540px] text-left text-sm">
             <caption className="sr-only">Useful stations and connections</caption>
@@ -324,7 +325,7 @@ export function AirportJourneyPage({ id }: { id: AirportJourneyId }) {
           <ul className="mt-4 grid gap-3 sm:grid-cols-2">{(g.sources || sources).map(s=><li key={s.url}><a className="block rounded-lg border bg-card p-4 font-medium text-primary underline" href={s.url} target="_blank" rel="noopener noreferrer">{s.title} <span className="sr-only">(opens a new tab)</span></a></li>)}
   
           </ul>
-          {focusedLayout && hasPublicPhotoCredit(g.photo) && <div className="mt-3"><GuidePhotoCredit photo={g.photo} insideDisclosure /></div>}
+
         </SourcesDisclosure>
   );
 
@@ -333,9 +334,7 @@ export function AirportJourneyPage({ id }: { id: AirportJourneyId }) {
       <header className="pt-6">
         <Breadcrumbs items={[{ name: "Home", to: "/" }, { name: "Travel guides", to: "/travel-blog/" }, { name: "How to get to " + g.city, to: g.path }]} />
         <GuideHeroLayout image={
-          <GuideHeroMedia src={g.photo.src} alt={g.photo.alt}>
-            {!focusedLayout && <GuidePhotoCredit photo={g.photo} />}
-          </GuideHeroMedia>
+          <GuideHeroMedia src={g.photo.src} alt={g.photo.alt}/>
         }>
           <h1 className="guide-page-title mt-3">{g.title}</h1>
           <p data-guide-intro className="mt-4 max-w-3xl text-lg leading-relaxed text-foreground">{g.intro}</p>
@@ -390,7 +389,7 @@ export function AirportJourneyPage({ id }: { id: AirportJourneyId }) {
       <section id="options" aria-labelledby="options-h" className="mt-14 scroll-mt-28">
         <h2 id="options-h" className="text-3xl">How each transport option works</h2>
         {!focusedLayout && <p className="mt-3 leading-relaxed">Compare each option's actual pickup, onward connection and limitations before choosing what works for your destination.</p>}
-        {!focusedLayout && g.photos?.onward && <figure className="mt-6 max-w-3xl"><img src={g.photos.onward.src} alt={g.photos.onward.alt} width={755} height={503} loading="lazy" decoding="async" className="aspect-[3/2] max-h-96 w-full rounded-xl object-cover" /><GuidePhotoCredit photo={g.photos.onward} /></figure>}
+        {!focusedLayout && g.photos?.onward && <figure className="mt-6 max-w-3xl"><img src={g.photos.onward.src} alt={g.photos.onward.alt} width={755} height={503} loading="lazy" decoding="async" className="aspect-[3/2] max-h-96 w-full rounded-xl object-cover" /></figure>}
         {displayOptions.map(o=><OptionSection key={o.id} option={o} guideId={id} />)}
       </section>
       <Section id="shabbat" title="Getting there on Shabbat and Jewish holidays">
@@ -418,6 +417,13 @@ export function AirportJourneyPage({ id }: { id: AirportJourneyId }) {
       </>}
       <TransferQuoteForm key={transferIdFor(id)} destinationId={transferIdFor(id)} fixedDestination fixedDestinationLabel={g.city} />
       {focusedLayout && sourceBlock}
+      <PhotoCreditsDisclosure entries={[
+        {label:"Main image",photo:g.photo},
+        ...(!focusedLayout && g.photos?.station ? [{label:"Rail station",photo:g.photos.station}] : []),
+        ...(!focusedLayout && g.photos?.onward ? [{label:"Onward journey",photo:g.photos.onward}] : [])
+      ].filter(entry=>hasPublicPhotoCredit(entry.photo)).map(({label,photo})=>({
+        label,credit:photo.credit,sourceUrl:photo.sourceUrl,licenseUrl:photo.licenseUrl
+      }))}/>
     </main>
   );
 }
