@@ -112,7 +112,7 @@ export function JerusalemCityHubPage(){
       </div>
       <div className="mt-5 rounded-xl border border-primary/20 bg-secondary/40 p-4 sm:p-5" id="quick-answer" aria-label="Quick answer">
         <h2 className="text-lg font-bold">Where I'd start</h2>
-        <p className="mt-2 leading-relaxed">For a first visit, I'd spend one day getting to know the <Link className={linkClass} to="/attractions/old-city-jerusalem/">Old City</Link>, use a second day for the <Link className={linkClass} to="/attractions/mount-of-olives/">Mount of Olives</Link> or a <Link className={linkClass} to="/travel-blog/museums-in-jerusalem/">museum</Link>, then leave time for <Link className={linkClass} to="/travel-blog/shopping-in-jerusalem/">Mahane Yehuda</Link> and the neighbourhoods. Keep a day trip outside Jerusalem separate from a full city day.</p>
+        <p className="mt-2 leading-relaxed">For a first visit, I'd spend one day getting to know the <Link className={linkClass} to="/attractions/old-city-jerusalem/">Old City</Link>, including the <Link className={linkClass} to="/attractions/via-dolorosa/">Via Dolorosa</Link> if Christian pilgrimage interests you; use a second day for the <Link className={linkClass} to="/attractions/mount-of-olives/">Mount of Olives</Link> or a <Link className={linkClass} to="/travel-blog/museums-in-jerusalem/">museum</Link>, then leave time for <Link className={linkClass} to="/travel-blog/shopping-in-jerusalem/">Mahane Yehuda</Link> and the neighbourhoods. Keep a day trip outside Jerusalem separate from a full city day.</p>
       </div>
     </section>
     <OnThisPage sections={sections}/>
