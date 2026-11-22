@@ -1053,10 +1053,11 @@ jobs:
           oldcity_hero_url="$(node - "$jerusalem_html" "$VITE_CANONICAL_ORIGIN" <<'NODE'
           const fs=require("node:fs");
           const html=fs.readFileSync(process.argv[2],"utf8");
-          const tag=html.match(/<img\\b[^>]*alt="Panoramic view of Jerusalem[^"]*"[^>]*>/i)?.[0];
-          const src=tag?.match(/\\bsrc="([^"]+)"/i)?.[1];
-          if(!src||!src.includes("jerusalem-old-city")) {
-            console.error("::error::Old City page is missing the new panoramic hero");process.exit(1);
+          const figure=html.match(/<figure\b[^>]*data-testid="guide-hero-media"[^>]*>[\s\S]*?<\/figure>/i)?.[0];
+          const tag=figure?.match(/<img\b[^>]*>/i)?.[0];
+          const src=tag?.match(/\bsrc="([^"]+)"/i)?.[1];
+          if(!src||src.includes("via-dolorosa")||!tag?.includes("Panoramic view")) {
+            console.error("::error::Old City page is missing its new panoramic cover photo");process.exit(1);
           }
           process.stdout.write(new URL(src.replace(/&amp;/g,"&"),process.argv[3]).href);
           NODE
