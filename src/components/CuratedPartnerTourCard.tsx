@@ -37,7 +37,7 @@ export function CuratedPartnerTourCard({
       </p>
       <div className="mt-auto flex flex-wrap items-end justify-between gap-3 border-t pt-4 text-sm">
         <span>{price
-          ? <><span className="block text-xs text-muted-foreground">From</span><strong>US${price.amount.toFixed(price.amount % 1 ? 2 : 0)}</strong><span className="block text-[11px] text-muted-foreground">{price.basis === "per_person" ? "Per person" : "Per group"}</span></>
+          ? <><span className="block text-xs text-muted-foreground">From</span><strong>{"US$" + price.amount.toFixed(price.amount % 1 ? 2 : 0)}</strong><span className="block text-[11px] text-muted-foreground">{price.basis === "per_person" ? "Per person" : "Per group"}</span></>
           : <span className="text-xs text-muted-foreground">Check current price</span>}</span>
         <a href={href} target="_blank" rel={relFor(true)} onClick={() => recordOutboundClick({ pageId, productId, offerId })} className="inline-flex min-h-10 items-center justify-center gap-1.5 rounded-lg border border-primary/30 px-3 py-2 text-sm font-semibold text-primary hover:bg-secondary focus-visible:outline-2 focus-visible:outline-primary">
           View tour <ExternalLink className="h-3.5 w-3.5" aria-hidden="true" /><span className="sr-only"> (opens in a new tab)</span>
