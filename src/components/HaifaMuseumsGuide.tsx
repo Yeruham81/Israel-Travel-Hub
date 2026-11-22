@@ -9,6 +9,7 @@ import { SourcesDisclosure } from "@/components/SourcesDisclosure";
 import { HomeContactForm } from "@/components/HomeContactForm";
 import { neighborhoodTripContactCopy } from "@/lib/guide-contact";
 import { guideHeroPhotoForPath } from "@/lib/guide-hero-photos";
+import { getShorePort } from "@/data/shoreExcursions";
 import { haifaMuseumAreas as museumAreas, haifaMuseums as museums, haifaAdditionalMuseums as additionalMuseums, haifaMuseumMapPoints as museumMapPoints, type HaifaMuseumEntry as MuseumEntry } from "@/data/haifaMuseums";
 import { haifaMuseumPhotos, haifaMuseumPhotoCredits } from "@/data/haifaMuseumPhotos";
 import { migrationPhotos } from "@/data/guideMigrationPhotos";
@@ -245,8 +246,10 @@ export function HaifaMuseumsGuide() {
     <section id="explore-more" aria-labelledby="explore-more-heading" className="mt-12 scroll-mt-24">
       <SectionHeading id="explore-more" title="Explore more of Haifa" intro="Continue planning with my Haifa attraction, transport and accommodation guides."/>
       <div className="grid grid-cols-2 gap-4 lg:grid-cols-3">{related.map(item=>{
-        const photo=guideHeroPhotoForPath(item.to);
-        return <Link key={item.to} to={item.to} className="editorial-card-link group flex h-full flex-col overflow-hidden rounded-xl border bg-card transition-colors hover:border-primary/40 hover:bg-secondary/20">
+        const photo=guideHeroPhotoForPath(item.to)
+          ?? (item.to==="/shore-excursions/haifa/" ? getShorePort("haifa").photo
+          : item.to==="/travel-blog/haifa/" ? {src:"/images/attractions/haifa-german-colony.webp",alt:"Haifa German Colony and Mount Carmel streets"} : undefined);
+        return <Link key={item.to} to={item.to} className="editorial-card-link group flex h-full flex-col overflow-hidden rounded-xl border bg-card transition-colors hover:border-primary/50 hover:bg-secondary/30 hover:shadow-sm focus-visible:outline-2 focus-visible:outline-primary">
           {photo&&<img src={photo.src} alt={photo.alt} width={640} height={360} loading="lazy" decoding="async" className="aspect-[16/9] w-full object-cover"/>}
           <span className="flex flex-1 flex-col p-4"><strong className="text-base">{item.title}</strong><span className="mt-2 text-sm leading-relaxed text-muted-foreground">{item.note}</span></span>
         </Link>;
