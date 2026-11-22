@@ -97,6 +97,12 @@ in first-person singular when describing his services, and preserve
 affiliate tracking on linked external tour catalogues. Booking inquiries
 require confirmation.
 
+## Clear, positive visitor-facing language
+
+Use concise, informative copy across this guide and future attraction, travel-guide and map pages. State what a visitor needs to know rather than explaining obvious interactions, repeating navigation instructions, or adding negative disclaimers without a concrete visitor benefit. Prefer direct, affirmative descriptions; retain essential safety, accessibility, operating-hours and booking constraints when they materially affect decisions.
+
+In map legends, explain colors or symbols only. For example: "Map key: Blue pins mark sites along the upper ridge, green pins indicate the hillside and lower sites, and the gold pin marks Lion’s Gate." Avoid unnecessary instructions about selecting markers or statements that merely say the map is not a route.
+
 ## Reference implementation and data ownership
 
 Capernaum's high-value facts, contacts, title, URL metadata, operator hours,
