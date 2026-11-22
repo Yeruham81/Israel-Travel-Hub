@@ -9,7 +9,7 @@ import { SourcesDisclosure } from "@/components/SourcesDisclosure";
 import { HomeContactForm } from "@/components/HomeContactForm";
 import { guideHeroPhotoForPath } from "@/lib/guide-hero-photos";
 import { affiliateConfig } from "@/data/registry";
-import { recordOutboundClick, relFor } from "@/lib/outbound";
+import { CuratedPartnerTourCard } from "@/components/CuratedPartnerTourCard";
 import {
   bestTimeGuide as guide, monthFits, suitabilityColumns, seasonalFits,
   regionalRecommendations as regions, seasonDetails, type SeasonKey, type SeasonalFit
@@ -18,7 +18,7 @@ import masadaTourPhoto from "@/assets/guides/dead-sea-excursions/masada-ruins.we
 
 // The primary guide image is supplied separately by guide.photo and never changed.
 // Local secondary photos have two loss-aware WebP sizes, optimized for mobile.
-const seasonPhotoSize = "(min-width: 1024px) 736px, (min-width: 640px) calc(100vw - 96px), calc(100vw - 64px)";
+const seasonPhotoSize = "(min-width: 1024px) 240px, (min-width: 640px) 192px, 128px";
 const photoBySeason = {
   spring:{src:"/images/best-time-israel/spring-720.webp",srcSet:"/images/best-time-israel/spring-320.webp 320w, /images/best-time-israel/spring-720.webp 720w",alt:"Green Bahai Gardens terraces on Mount Carmel in Haifa"},
   summer:{src:"/images/best-time-israel/summer-720.webp",srcSet:"/images/best-time-israel/summer-320.webp 320w, /images/best-time-israel/summer-720.webp 720w",alt:"Sunny Tel Aviv promenade and Mediterranean beach"},
@@ -50,9 +50,9 @@ const planning:{title:string;to:LinkProps["to"];desc:string}[]=[
   {title:"Getting around Israel",to:"/travel-blog/getting-around-israel/",desc:"Compare trains, buses, taxis and private transfers"}
 ];
 const partnerOptions=[
-  {id:"tour-jerusalem-old-city-walk-viator@tours-jerusalem",platform:"Viator",title:"Jerusalem Old City walking tour",desc:"A guided heritage walk for a comfortable city-sightseeing day.",sub:"best_time_israel_jerusalem_old_city",image:"/images/attractions/old-jerusalem-cardo.webp",alt:"Ancient stone Cardo shopping street in Jerusalem Old City"},
-  {id:"tour-jaffa-carmel-walk-getyourguide@tours-tel-aviv-jaffa",platform:"GetYourGuide",title:"Jaffa & Carmel Market walking tour",desc:"A city-and-market option when the coast is more comfortable for walking.",sub:"best_time_israel_jaffa_carmel",image:"/images/attractions/jaffa-flea-market.webp",alt:"Historic Jaffa flea market streets and shops"},
-  {id:"jslm-deadsea-masada-viator",platform:"Viator",title:"Masada & the Dead Sea from Jerusalem",desc:"An outdoor day that benefits from careful heat and weather planning.",sub:"best_time_israel_masada_dead_sea",image:masadaTourPhoto,alt:"Ancient stone remains at Masada above the Dead Sea"}
+  {id:"tour-jerusalem-old-city-walk-viator@tours-jerusalem",productId:"jerusalem-old-city-walk",duration:"About 4 hours",platform:"Viator",title:"Jerusalem Old City walking tour",desc:"A guided heritage walk for a comfortable city-sightseeing day.",sub:"best_time_israel_jerusalem_old_city",image:"/images/attractions/old-jerusalem-cardo.webp",alt:"Ancient stone Cardo shopping street in Jerusalem Old City"},
+  {id:"tour-jaffa-carmel-walk-getyourguide@tours-tel-aviv-jaffa",productId:"jaffa-carmel-walk",duration:"About 6 hours",platform:"GetYourGuide",title:"Jaffa & Carmel Market walking tour",desc:"A city-and-market option when the coast is more comfortable for walking.",sub:"best_time_israel_jaffa_carmel",image:"/images/attractions/jaffa-flea-market.webp",alt:"Historic Jaffa flea market streets and shops"},
+  {id:"jslm-deadsea-masada-viator",productId:"masada-dead-sea-jerusalem",duration:"About 9 hours",platform:"Viator",title:"Masada & the Dead Sea from Jerusalem",desc:"An outdoor day that benefits from careful heat and weather planning.",sub:"best_time_israel_masada_dead_sea",image:masadaTourPhoto,alt:"Ancient stone remains at Masada above the Dead Sea"}
 ] as const;
 
 function SectionHeading({id,title,intro}:{id:string;title:string;intro?:ReactNode}) {
@@ -128,13 +128,13 @@ function SeasonSections(){
       {seasonDetails.map((season,i)=>{
         const photo=photoBySeason[season.id];
         const Icon=[Flower2,Sun,CalendarDays,CloudRain][i]!;
-        return <article id={season.id} aria-labelledby={season.id+"-heading"} key={season.id} className="scroll-mt-28 rounded-2xl border bg-card p-4 sm:p-6">
+        return <article id={season.id} aria-labelledby={season.id+"-heading"} key={season.id} className="flow-root scroll-mt-28 rounded-2xl border bg-card p-4 sm:p-6">
           <div className="flex items-start gap-3"><span className="rounded-lg bg-secondary p-2 text-primary"><Icon className="h-5 w-5" aria-hidden="true"/></span><div><p className="text-xs font-semibold uppercase tracking-wide text-primary">{season.months}</p><h3 id={season.id+"-heading"} className="mt-1 text-xl font-bold sm:text-2xl">{season.title}</h3></div></div>
-          <p className="mt-3 max-w-3xl text-sm font-semibold leading-relaxed">{season.summary}</p>
-          <p className="mt-3 max-w-3xl leading-relaxed">{season.paragraphs[0]}</p>
-          <figure className="mt-4 max-w-3xl overflow-hidden rounded-xl"><img src={photo.src} srcSet={photo.srcSet} sizes={seasonPhotoSize} alt={photo.alt} width={720} height={405} loading="lazy" decoding="async" className="aspect-[16/9] max-h-[320px] w-full object-cover"/></figure>
-          <p className="mt-4 max-w-3xl leading-relaxed">{season.paragraphs[1]}</p>
-          <div className="mt-5 max-w-3xl"><Tip>{season.tip}</Tip></div>
+          <figure className="float-right mb-3 ml-4 mt-3 w-32 overflow-hidden rounded-xl sm:mb-4 sm:ml-6 sm:w-48 lg:w-60"><img src={photo.src} srcSet={photo.srcSet} sizes={seasonPhotoSize} alt={photo.alt} width={480} height={300} loading="lazy" decoding="async" className="aspect-[4/3] w-full object-cover"/></figure>
+          <p className="mt-3 text-sm font-semibold leading-relaxed">{season.summary}</p>
+          <p className="mt-3 leading-relaxed">{season.paragraphs[0]}</p>
+          <p className="mt-4 leading-relaxed">{season.paragraphs[1]}</p>
+          <div className="clear-both mt-5 max-w-3xl"><Tip>{season.tip}</Tip></div>
           <div className="mt-4 flex flex-wrap gap-x-5 gap-y-2 text-sm">{season.links.map(link=><Link key={link.to} to={link.to as LinkProps["to"]} className="inline-flex items-center gap-1 font-semibold text-primary hover:underline">{link.label}<ArrowUpRight className="h-3.5 w-3.5" aria-hidden="true"/></Link>)}</div>
         </article>;
       })}
@@ -179,15 +179,9 @@ function CuratedTours(){
   if(!offers.length)return null;
   return <section id="tours" aria-labelledby="tours-heading" className="mt-12 scroll-mt-24">
     <SectionHeading id="tours" title="Guided experiences to consider" intro="For a trip with fixed dates, these third-party activities can help you choose what fits the season. Check each provider's availability, actual itinerary, weather arrangements and cancellation terms before booking."/>
-    <div className="grid gap-4 md:grid-cols-3" data-testid="best-time-seasonal-tours">{offers.map(item=><article className="flex min-w-0 flex-col overflow-hidden rounded-xl border bg-card" key={item.id}>
-      <img src={item.image} alt={item.alt} width={560} height={350} loading="lazy" decoding="async" className="aspect-[16/10] w-full object-cover"/>
-      <div className="flex flex-1 flex-col p-4">
-        <p className="text-xs font-semibold uppercase tracking-wide text-primary">{item.platform}</p>
-        <h3 className="mt-2 text-lg font-bold leading-snug">{item.title}</h3>
-        <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{item.desc}</p>
-        <a href={item.url} rel={relFor(true)} target="_blank" onClick={()=>recordOutboundClick({pageId:"best_time_to_visit_israel",productId:item.id,offerId:item.sub})} className="mt-auto inline-flex min-h-11 items-center justify-center gap-2 rounded-lg border border-primary/30 px-3 py-2.5 pt-3 text-center text-sm font-semibold text-primary hover:bg-secondary focus-visible:outline-2 focus-visible:outline-primary">Check tour details<ExternalLink className="h-3.5 w-3.5" aria-hidden="true"/><span className="sr-only"> (opens in a new tab)</span></a>
-      </div>
-    </article>)}</div>
+    <div className="grid gap-4 md:grid-cols-3" data-testid="best-time-seasonal-tours">
+      {offers.map(item=><CuratedPartnerTourCard key={item.id} title={item.title} description={item.desc} platform={item.platform} image={item.image} alt={item.alt} href={item.url} productId={item.productId} duration={item.duration} offerId={item.sub} pageId="best_time_to_visit_israel"/>)}
+    </div>
   </section>;
 }
 export function BestTimeIsraelGuide(){
