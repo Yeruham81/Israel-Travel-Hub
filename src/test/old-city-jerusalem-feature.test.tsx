@@ -111,7 +111,7 @@ describe("Jerusalem Old City — upgraded visitor guide", () => {
     expect(affiliateConfig["tour-jerusalem-old-city-walk-viator@attractions-old-city-jerusalem"]?.trackingUrl).toBe("https://viator.tpm.li/NfTH03Dg");
   });
 
-  it("shows six relevant Jerusalem guides, and reserves the Via Dolorosa link for its future page", () => {
+  it("shows six relevant Jerusalem guides and links to the published Via Dolorosa page", () => {
     expect(content.relatedTitle).toBe("Continue exploring Jerusalem");
     const expected = [
       "/attractions/mount-of-olives/", "/attractions/mount-zion/",
@@ -121,6 +121,6 @@ describe("Jerusalem Old City — upgraded visitor guide", () => {
     expect(content.nearby?.map(item => item.to)).toEqual(expected);
     expect(content.planningLinks).toHaveLength(6);
     expect(page).toContain("contactIntroduction:");
-    expect(page).not.toContain('<Link to="/attractions/via-dolorosa/"');
+    expect(page).toContain('<Link to="/attractions/via-dolorosa/"');
   });
 });
