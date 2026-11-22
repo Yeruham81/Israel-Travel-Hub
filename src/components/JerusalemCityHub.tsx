@@ -1,3 +1,4 @@
+import { ExternalProviderTourCard } from "@/components/ExternalProviderTourCard";
 import { Link } from "@tanstack/react-router";
 import type { ReactNode } from "react";
 import { ArrowUpRight, CalendarDays, CarFront, Clock3, ExternalLink, Footprints, Hotel, Lightbulb, MapPinned, Star, TrainFront } from "lucide-react";
@@ -12,7 +13,6 @@ import { tourPhotos } from "@/data/tours";
 import { travelGuides } from "@/data/travelGuides";
 import { guideHeroPhotoForPath } from "@/lib/guide-hero-photos";
 import { recordAffiliateTourClick } from "@/lib/tour-analytics";
-import { relFor } from "@/lib/outbound";
 import {
   JERUSALEM_HUB_PATH, JERUSALEM_HUB_TITLE, JERUSALEM_HUB_UPDATED,
   jerusalemTopicCards, jerusalemDayPlans, jerusalemStayAreas,
@@ -66,29 +66,17 @@ function TourCards({group}:{group:typeof jerusalemTourGroups[number]}) {
         const url=affiliateConfig[offerId+"@jerusalem-hub"]?.trackingUrl;
         const photo=tourPhotos[entry.id];
         if(!product||!offer||!url||!photo) return null;
-        return <a key={entry.id} href={url} target="_blank" rel={relFor(true)}
-          onClick={()=>recordAffiliateTourClick({pageId:"travel_blog_jerusalem_hub",productId:entry.id,offerId,provider:entry.partner,linkUrl:url})}
-          data-testid="jerusalem-hub-tour-card" data-group={group.id}
-          className="group flex min-w-0 flex-col overflow-hidden rounded-xl border bg-card transition-all hover:border-primary/50 hover:shadow-md focus-visible:outline-2 focus-visible:outline-primary">
-          <img src={photo.src} alt={photo.alt} width={540} height={300} loading="lazy" decoding="async" className="aspect-[16/9] w-full object-cover"/>
-          <span className="flex flex-1 flex-col p-4">
-            <span className="text-[11px] font-bold uppercase tracking-wide text-primary">{entry.partner==="getyourguide"?"GetYourGuide":"Viator"}</span>
-            <strong className="mt-1 text-base leading-snug group-hover:text-primary">{product.title}</strong>
-            <span className="mt-2 line-clamp-2 text-sm leading-relaxed text-muted-foreground">{product.summary}</span>
-            <span className="mt-3 flex flex-wrap items-center gap-x-3 gap-y-2 text-xs text-muted-foreground">
-              <span className="inline-flex items-center gap-1"><Clock3 aria-hidden="true" className="h-3.5 w-3.5"/>{product.duration}</span>
-              <span className="inline-flex items-center gap-1"><MapPinned aria-hidden="true" className="h-3.5 w-3.5"/>{entry.label}</span>
-            </span>
-            {product.rating && <span className="mt-3 inline-flex items-center gap-1 text-xs text-muted-foreground" data-testid="jerusalem-hub-tour-rating" aria-label={product.rating.value.toFixed(1)+" out of 5 from "+product.rating.count+" supplier reviews"}>
-              <Star aria-hidden="true" className="h-3.5 w-3.5 fill-amber-400 text-amber-500"/>{product.rating.value.toFixed(1)} · {product.rating.count.toLocaleString("en-US")} reviews
-            </span>}
-            <span className="mt-auto flex items-end justify-between gap-2 border-t pt-3 text-sm">
-              <span>{offer.listedPrice ? <><span className="text-xs text-muted-foreground">From </span><strong>{"US$"+offer.listedPrice.amount.toFixed(offer.listedPrice.amount%1?2:0)}</strong><span className="block text-[11px] text-muted-foreground">{offer.listedPrice.basis==="per_person"?"Per person":"Per group"} · checked {new Date(offer.listedPrice.checkedAt+"T12:00:00Z").toLocaleDateString("en-US",{month:"short",year:"numeric",timeZone:"UTC"})}</span></> : <span className="text-xs text-muted-foreground">Check current price</span>}</span>
-              <span className="inline-flex items-center gap-1 shrink-0 font-semibold text-primary">View tour <ExternalLink aria-hidden="true" className="h-3.5 w-3.5"/></span>
-            </span>
-          </span>
-          <span className="sr-only"> (opens in a new tab)</span>
-        </a>;
+        return <div key={entry.id} data-testid="jerusalem-hub-tour-card" data-group={group.id} className="min-w-0">
+          <ExternalProviderTourCard
+            image={photo.src} alt={photo.alt}
+            platform={entry.partner === "getyourguide" ? "GetYourGuide" : "Viator"}
+            title={product.title} description={product.summary} duration={product.duration} location={entry.label}
+            rating={product.rating && {value:product.rating.value,count:product.rating.count}}
+            price={offer.listedPrice && {amount:offer.listedPrice.amount,currency:offer.listedPrice.currency,basis:offer.listedPrice.basis,maxPartySize:offer.listedPrice.maxPartySize}}
+            href={url}
+            onClick={()=>recordAffiliateTourClick({pageId:"travel_blog_jerusalem_hub",productId:entry.id,offerId,provider:entry.partner,linkUrl:url})}
+          />
+        </div>;
       })}
     </div>
     <p className="mt-3 text-xs leading-relaxed text-muted-foreground">These tours are operated by independent providers and booked through their own platforms. Tour details, availability, prices and booking conditions are set by the operators and may change. Before booking, check the departure date and location, itinerary, guiding, walking requirements, admissions, meeting and return arrangements, and cancellation policy directly with the booking provider.</p>
