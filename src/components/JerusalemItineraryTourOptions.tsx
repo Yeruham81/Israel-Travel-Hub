@@ -1,8 +1,8 @@
-import { Clock3, ExternalLink, Star } from "lucide-react";
+import { ExternalProviderTourCard } from "@/components/ExternalProviderTourCard";
 import { affiliateConfig } from "@/data/registry";
 import { deadSeaTourCards, type DeadSeaTourCard } from "@/data/deadSeaTourOffers";
 import { bethlehemTourCards, type BethlehemTourCard } from "@/data/bethlehemTourOffers";
-import { recordOutboundClick, relFor } from "@/lib/outbound";
+import { recordOutboundClick } from "@/lib/outbound";
 
 import deadSeaMud from "@/assets/guides/dead-sea-excursions/dead-sea-mud-bathing.webp";
 import masadaPalace from "@/assets/guides/dead-sea-excursions/masada-palace.webp";
@@ -66,39 +66,15 @@ export function JerusalemItineraryTourOptions({ days = 3 }: { days?: 3 | 5 | 7 |
           const approvedLink = tour ? affiliateConfig[tour.id]?.trackingUrl : undefined;
           if (!tour || !approvedLink) return null;
           const groupRate = "priceUnit" in tour && tour.priceUnit === "group-up-to-four";
-          return <a
-            key={tour.id}
-            data-testid="itinerary-jerusalem-tour-card"
+          return <ExternalProviderTourCard
+            key={tour.id} testId="itinerary-jerusalem-tour-card"
+            image={item.image} alt={item.alt} platform={tour.provider}
+            title={tour.title} description={tour.subtitle} duration={tour.duration}
+            rating={{ value: tour.rating, count: tour.reviewCount }}
+            price={{ amount: tour.fromUsd, currency: "USD", basis: groupRate ? "per_group" : "per_person", maxPartySize: groupRate ? 4 : undefined }}
             href={trackedItineraryTourUrl(approvedLink, tour.id, days)}
-            target="_blank"
-            rel={relFor(true)}
             onClick={() => recordOutboundClick({ pageId: `israel-itinerary-${days}-days`, productId: tour.id, offerId: tour.id })}
-            className="group/card flex min-w-0 flex-col overflow-hidden rounded-xl border bg-card transition-all hover:-translate-y-0.5 hover:border-primary hover:shadow-md focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
-          >
-            <img src={item.image} alt={item.alt} width={480} height={280} loading="lazy" decoding="async" className="h-40 w-full object-cover" />
-            <span className="flex flex-1 flex-col p-3.5">
-              <span className="text-[11px] font-semibold uppercase tracking-wide text-primary">{tour.provider}</span>
-              <span className="mt-1 text-base font-semibold leading-snug text-foreground group-hover/card:text-primary">{tour.title}</span>
-              <span className="mt-1.5 line-clamp-2 text-sm text-muted-foreground">{tour.subtitle}</span>
-              <span className="mt-3 flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-muted-foreground">
-                <span className="inline-flex items-center gap-1"><Clock3 size={13} aria-hidden="true" />{tour.duration}</span>
-                <span className="inline-flex items-center gap-1" aria-label={tour.rating + " out of 5 from " + tour.reviewCount + " reviews"}>
-                  <Star size={13} className="fill-current text-amber-500" aria-hidden="true" />
-                  <strong className="font-semibold text-foreground">{tour.rating.toFixed(1)}</strong>
-                  <span>({tour.reviewCount.toLocaleString("en-US")})</span>
-                </span>
-              </span>
-              <span className="mt-auto flex items-end justify-between gap-2 border-t pt-3 text-sm">
-                <span>
-                  <span className="text-xs text-muted-foreground">From</span>{" "}
-                  <strong>US${tour.fromUsd}</strong>
-                  <span className="block text-[11px] text-muted-foreground">{groupRate ? "per group (up to 4)" : "per person"}</span>
-                </span>
-                <span className="inline-flex items-center gap-1 font-semibold text-primary">View &amp; book <ExternalLink size={13} aria-hidden="true" /></span>
-              </span>
-            </span>
-            <span className="sr-only"> (affiliate booking link; opens in a new tab)</span>
-          </a>;
+          />;
         })}
       </div>
     </div>
