@@ -5,7 +5,8 @@ import { tourPlaces, tourTags } from "@/data/tourTypes";
 import { operators } from "@/data/registry";
 import { getTourCategory, tourPhotos, type TourCategoryId } from "@/data/tours";
 import { filterTours, isOwnerTour, offersForTour, placeLabel, toursForCategory, tourSnapshotPrice, type TourSearch } from "@/lib/tours";
-import { recordOutboundClick, relFor } from "@/lib/outbound";
+import { recordOutboundClick } from "@/lib/outbound";
+import { ExternalProviderTourCard } from "@/components/ExternalProviderTourCard";
 import { PriceDisplay } from "@/components/CurrencyRates";
 
 export function OwnerTourSection({ tours, compact = false }: { tours: TourProduct[]; compact?: boolean }) {
@@ -49,45 +50,23 @@ export function OwnerTourSection({ tours, compact = false }: { tours: TourProduc
   </section>;
 }
 
-export function ExternalTourCard({ tour, pageId, compact = false }: { tour: TourProduct; pageId: string; compact?: boolean }) {
+export function ExternalTourCard({ tour, pageId }: { tour: TourProduct; pageId: string; compact?: boolean }) {
   const offers = offersForTour(tour.id, pageId);
-  const price = offers.map(offer => tourSnapshotPrice(offer)).find(Boolean);
-  const primaryOffer = offers[0];
-  if (compact) return <li id={tour.id} data-product-id={tour.id} data-testid="tour-card" className="min-w-0 scroll-mt-24">
-    <article className="flex h-full min-w-0 flex-col overflow-hidden rounded-xl border bg-card shadow-sm">
-      <img src={tourPhotos[tour.id]!.src} alt={tourPhotos[tour.id]!.alt} width={720} height={405} loading="lazy" decoding="async" className="aspect-[16/9] w-full object-cover" />
-      <div className="flex min-w-0 flex-1 flex-col p-4">
-        <div className="flex flex-wrap items-center justify-between gap-x-2 gap-y-1 text-xs text-muted-foreground"><span className="font-semibold">{offers[0]?.partner?.name || "Booking platform"}</span>{tour.rating && <span aria-label={`Rating ${tour.rating.value} out of 5 from ${tour.rating.count} reviews`} title={`Booking-platform reviews checked ${tour.rating.checkedAt}; ratings may change`} className="font-semibold text-foreground">★ {tour.rating.value.toFixed(1)} <span className="font-normal text-muted-foreground">({tour.rating.count})</span></span>}</div>
-        <h3 className="mt-1.5 line-clamp-2 text-base font-semibold leading-snug">{tour.title}</h3>
-        <p className="mt-1 line-clamp-2 text-xs leading-relaxed text-muted-foreground sm:text-sm">{tour.summary}</p>
-        <div className="mt-2 flex flex-wrap gap-x-3 gap-y-1 text-xs text-muted-foreground"><span>◷ {tour.duration}</span><span>From {tour.originIds.map(placeLabel).join(" / ")}</span></div>
-        <div className="mt-auto flex flex-wrap items-end justify-between gap-2 pt-3"><div>{price ? <><span className="block text-[11px] text-muted-foreground">Reference price · per {price.basis === "per_person" ? "person" : "group"}</span><span className="font-bold text-primary">US${price.amount.toLocaleString("en-US")}</span></> : <span className="text-xs font-medium text-muted-foreground">Check current price</span>}</div>
-          {primaryOffer && <a href={primaryOffer.provider.url} target="_blank" rel={relFor(primaryOffer.provider.isAffiliate)} onClick={() => recordOutboundClick({ pageId, productId: tour.id, offerId: primaryOffer.id })} className="inline-flex min-h-9 items-center justify-center rounded-lg bg-primary px-3 py-2 text-xs font-semibold text-primary-foreground hover:bg-primary/90">View tour ↗</a>}
-        </div>
-      </div>
-    </article>
-  </li>;
-  return <li id={tour.id} data-product-id={tour.id} data-testid="tour-card" className="flex min-w-0 scroll-mt-24 flex-col overflow-hidden rounded-2xl border bg-card shadow-sm">
-    <img src={tourPhotos[tour.id]!.src} alt={tourPhotos[tour.id]!.alt} width={720} height={480} loading="lazy" decoding="async" className="aspect-[16/9] w-full object-cover" />
-    <article className="flex flex-1 flex-col p-5">
-      <h3 className="text-xl font-semibold leading-snug text-foreground">{tour.title}</h3>
-      <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{tour.summary}</p>
-      <dl className="mt-4 space-y-2 text-sm">
-        <div><dt className="sr-only">Duration</dt><dd className="flex items-start gap-2"><Clock3 aria-hidden className="mt-0.5 size-4 shrink-0 text-primary" />{tour.duration}</dd></div>
-        <div><dt className="sr-only">Format</dt><dd className="flex items-start gap-2"><Users aria-hidden className="mt-0.5 size-4 shrink-0 text-primary" />{tour.formatLabel}</dd></div>
-        <div><dt className="sr-only">Departure</dt><dd className="flex items-start gap-2"><MapPin aria-hidden className="mt-0.5 size-4 shrink-0 text-primary" /><span><strong className="font-medium">From {tour.originIds.map(placeLabel).join(" or ")}</strong><br /><span className="text-xs text-muted-foreground">{tour.pickup}</span></span></dd></div>
-        <div><dt className="inline font-medium">Includes: </dt><dd className="inline text-muted-foreground">{tour.inclusions}</dd></div>
-      </dl>
-      <ul aria-label="Destinations" className="mt-4 flex flex-wrap gap-2">{tour.destinationIds.map(id => <li key={id} className="rounded-full bg-secondary px-2.5 py-1 text-xs text-primary">{placeLabel(id)}</li>)}</ul>
-      {tour.note && <p className="mt-3 text-xs leading-relaxed text-muted-foreground">{tour.note}</p>}
-      <p className="mt-3 text-xs text-muted-foreground">Operated by {operators.find(operator => operator.id === tour.operatorId)!.name}</p>
-      <div className="mt-auto pt-5">
-        <div className="border-t pt-4">
-          {price ? <><p className="text-xs text-muted-foreground">Reference starting price</p><p className="mt-1 text-2xl font-bold text-primary">US${price.amount.toLocaleString("en-US")}<span className="ml-2 text-xs font-normal text-muted-foreground">{price.basis === "per_person" ? "per person" : `per group · up to ${price.maxPartySize}`}</span></p><p className="mt-1 text-xs text-muted-foreground">Confirm the current total for your date.</p></> : <><p className="font-semibold">Check dates & prices</p><p className="mt-1 text-xs text-muted-foreground">Current price on the booking site</p></>}
-          {offers.map(offer => <a key={offer.id} href={offer.provider.url} target="_blank" rel={relFor(offer.provider.isAffiliate)} onClick={() => recordOutboundClick({ pageId, productId: tour.id, offerId: offer.id })} className="btn btn-primary mt-3 w-full" aria-label={`${offer.provider.ctaLabel}: ${tour.title} (opens in a new tab)`}>{offer.provider.ctaLabel}<span aria-hidden className="ml-2">↗</span></a>)}
-        </div>
-      </div>
-    </article>
+  // Use a partner offer with a documented price first, then the first approved link.
+  const primaryOffer = offers.find(offer => tourSnapshotPrice(offer)) ?? offers[0];
+  if (!primaryOffer) return null;
+  const price = tourSnapshotPrice(primaryOffer);
+  const image = tourPhotos[tour.id];
+  return <li id={tour.id} data-product-id={tour.id} data-testid="tour-card" className="h-full min-w-0 scroll-mt-24">
+    <ExternalProviderTourCard
+      image={image.src} alt={image.alt}
+      platform={primaryOffer.partner.name} title={tour.title} description={tour.summary}
+      duration={tour.duration} location={`From ${tour.originIds.map(placeLabel).join(" / ")}`}
+      rating={tour.rating && { value: tour.rating.value, count: tour.rating.count }}
+      price={price && { amount: price.amount, currency: price.currency, basis: price.basis, maxPartySize: price.maxPartySize }}
+      href={primaryOffer.provider.url} affiliate={primaryOffer.provider.isAffiliate}
+      onClick={() => recordOutboundClick({ pageId, productId: tour.id, offerId: primaryOffer.id })}
+    />
   </li>;
 }
 
