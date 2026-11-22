@@ -121,10 +121,10 @@ describe("shore excursions", () => {
       expect(externalCard).not.toHaveTextContent("Operated by");
       expect(externalCard).toHaveTextContent("Booking platform:");
       expect(externalCard).toMatchObject({ dataset: expect.objectContaining({ serviceKind: "guided-tour" }) });
-      const booking = within(externalCard).getByRole("link", { name: /View on (Viator|GetYourGuide)/ });
+      const booking = within(externalCard).getByRole("link", { name: /^View tour:/ });
       expect(booking).toHaveAttribute("target", "_blank");
       expect(booking).toHaveAttribute("rel", expect.stringContaining("noopener noreferrer"));
-      expect(externalCard).toHaveTextContent(/Reference price|Check current price/);
+      expect(externalCard).toHaveTextContent(/From US\\$|Check current price/);
       expect(within(externalCard).queryByRole("link", { name: /Request .* from (Ashdod|Haifa)/ })).not.toBeInTheDocument();
     }
     // Photo credits stay available in one footer disclosure, not repeated below the hero photo.
